@@ -35,7 +35,7 @@
 <B_liste_orga>
 #ANCRE_PAGINATION
 <div class="liste-objets organisations[(#GET{has_filiales}|non) sans-filiales]">
-	[(#GRAND_TOTAL|>{20}|oui)
+	[(#GRAND_TOTAL|>{20}|et{#ENV{id_annuaire}|ou{#ENV{id_contact}}|ou{#ENV{id_auteur}}|ou{#ENV{id_parent}}|non}|oui)
 	<INCLURE{fond=inclure/pagination_alpha_organisations, env} />
 	]
 <table class='spip liste'>
@@ -79,6 +79,7 @@
 		</tr>
 	</BOUCLE_liste_orga>
 	</tbody>
+	[(#ENV{id_contact}|ou{#ENV{id_auteur}}|ou{#ENV{id_parent}}|non)
 	[(#AUTORISER{exporter,organisations,'','',#ARRAY{id_annuaire,#ENV{id_annuaire}}}|oui)
 	<tfoot>
 		<tr>
@@ -87,6 +88,7 @@
 			</th>
 		</tr>
 	</tfoot>
+	]
 	]
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]

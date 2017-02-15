@@ -34,7 +34,7 @@
 <B_liste_contacts>
 #ANCRE_PAGINATION
 <div class="liste-objets contacts">
-	[(#GRAND_TOTAL|>{20}|oui)
+	[(#GRAND_TOTAL|>{20}|et{#ENV{id_annuaire}|ou{#ENV{id_organisation}}|non}|oui)
 	<INCLURE{fond=inclure/pagination_alpha_contacts, env} />
 	]
 <table class='spip liste'>
@@ -78,6 +78,7 @@
 		</tr>
 	</BOUCLE_liste_contacts>
 	</tbody>
+	[(#ENV{id_organisation}|non)
 	[(#AUTORISER{exporter,contacts,'','',#ARRAY{id_annuaire,#ENV{id_annuaire}}}|oui)
 	<tfoot>
 		<tr>
@@ -86,6 +87,7 @@
 			</th>
 		</tr>
 	</tfoot>
+	]
 	]
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]

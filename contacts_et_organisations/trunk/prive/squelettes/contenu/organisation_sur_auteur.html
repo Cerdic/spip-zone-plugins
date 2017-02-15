@@ -25,9 +25,8 @@
 <div class="nettoyeur"></div>
 
 <INCLURE{fond=prive/objets/liste/organisations,
-	id_parent=#ID_ORGANISATION,
-	titre=<:contacts:info_organisations_filles:>,
-	ajax}>
+	id_parent=#ID_ORGANISATION,id_auteur='',
+	titre=<:contacts:info_organisations_filles:>}>
 
 [(#CONFIG{contacts_et_organisations/utiliser_organisations_arborescentes}|et{#AUTORISER{creer,organisation}})
 	[(#URL_ECRIRE{organisation_edit,id_parent=#ID_ORGANISATION}
@@ -42,7 +41,7 @@
 </div>
 #SET{ids,#IDS_ORGANISATION_BRANCHE|array_diff{#LISTE{#ID_ORGANISATION}}}
 [(#GET{ids}|count|oui)
-<INCLURE{fond=prive/objets/liste/contacts,id_organisation=#GET{ids},env,ajax,titre=<:contacts:contacts_filiales:>} />
+<INCLURE{fond=prive/objets/liste/contacts,id_organisation=#GET{ids},id_auteur='',env,titre=<:contacts:contacts_filiales:>} />
 ]
 
 [(#VAL{spip_rubriques}|in_any{#CONFIG{contacts_et_organisations/lier_organisations_objets}}|oui)

@@ -86,13 +86,13 @@ function contacts_afficher_contenu_objet($flux) {
 			// informations sur le contact et ses liens
 			if ($id_contact = sql_getfetsel('id_contact', 'spip_contacts', 'id_auteur ='.$id))
 			{
-				$infos = recuperer_fond('prive/squelettes/contenu/contact_sur_auteur', array('id_contact' => $id_contact));
+				$infos = recuperer_fond('prive/squelettes/contenu/contact_sur_auteur', array('id_contact' => $id_contact),array('ajax'=>true));
 				$flux['data'] .= $infos;
 			}
 			// informations sur l'organisation et ses liens
 			elseif ($id_organisation = sql_getfetsel('id_organisation', 'spip_organisations', 'id_auteur ='.$id))
 			{
-				$infos = recuperer_fond('prive/squelettes/contenu/organisation_sur_auteur', array('id_organisation' => $id_organisation));
+				$infos = recuperer_fond('prive/squelettes/contenu/organisation_sur_auteur', array('id_organisation' => $id_organisation),array('ajax'=>true));
 				$flux['data'] .= $infos;
 			}
 		}

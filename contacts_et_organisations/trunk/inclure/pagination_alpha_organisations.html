@@ -8,7 +8,9 @@
 ]
 <B_lettres>
 <div class="pagination alpha">
-	<BOUCLE_lettres(ORGANISATIONS){fusion LOWER(SUBSTR(nom,1,1))}{'<span class="sep"> | </span>'}>
+	<BOUCLE_lettres(ORGANISATIONS)
+	{fusion LOWER(SUBSTR(nom,1,1))}
+			{'<span class="sep"> | </span>'}>
 	#SET{lettre,#NOM|mb_substr{0,1}|strtolower}
 	<BOUCLE_premier_element(ORGANISATIONS){par nom}{nom like #GET{lettre}%}{0,1}>
 	[(#SELF|parametre_url{lettre,#GET{lettre}}|parametre_url{debut_#ENV{id_boucle,liste_organisations},@#ID_ORGANISATION}|ancre_url{organisation#ID_ORGANISATION}
