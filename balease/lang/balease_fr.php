@@ -1073,5 +1073,5 @@ array(
     'visites_visites_issue' => ' ',
     'visites_visites_url' => ' ',
 
-    'titre_menus_balease_bdd' => 'Liste des balises',
+    'titre_menus_balease_bdd' => 'Balises',
 );
