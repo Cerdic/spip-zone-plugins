@@ -240,14 +240,15 @@ function noizetier_obtenir_dossier_pages() {
 
 
 /**
- * Lister les pages pouvant recevoir des noisettes
- * Par defaut, cette liste est basee sur le contenu du repertoire contenu/
+ * Lister les pages et les compositions spécifiques au noizetier pouvant recevoir des noisettes.
  * Le tableau de resultats peut-etre modifie via le pipeline noizetier_lister_pages.
  *
- * @param string $page_specifique (renvoyer les données d'une page spécifique)
- * @staticvar array $liste_pages
+ * @param string $page_specifique
+ * 		Id d'une page précise ou chaine vide.
  *
  * @return array
+ * 		Si un id de page valide est fourni, on renvoie le tableau des éléments de cette page.
+ * 		Sinon, on renvoie le tableau de toutes les pages, chaque index étant l'id de la page.
  */
 function noizetier_lister_pages($page_specifique = '') {
 	static $liste_pages = null;
@@ -265,27 +266,29 @@ function noizetier_lister_pages($page_specifique = '') {
 				foreach ($liste as $squelette => $chemin) {
 					$page = basename($squelette, '.html');
 					$dossier = str_replace($squelette, '', $chemin);
-					// Les elements situes dans prive/contenu sont ecartes
-					if (substr($dossier, -14) != 'prive/contenu/') {
+					// Exclure certaines pages :
+					// -- celles du privé situes dans prive/contenu
+					// -- page liée au plugin Zpip en v1
+					// -- z_apl liée aux plugins Zpip v1 et Zcore
+					if ((substr($dossier, -14) != 'prive/contenu/')
+					and (($page != 'page') or !defined('_DIR_PLUGIN_Z'))
+					and (($page != 'z_apl') or (!defined('_DIR_PLUGIN_Z') and !defined('_DIR_PLUGIN_ZCORE')))) {
 						if (count($infos_page = noizetier_charger_infos_page($dossier, $page)) > 0) {
-							$liste_pages[$page] = $infos_page;
-						}
-					}
-				}
-			}
-
-			// Dans le cas de Zpip, il faut supprimer la page 'page.html' et la page 'z_apl.html'
-			if (defined('_DIR_PLUGIN_Z') or defined('_DIR_PLUGIN_ZCORE')) {
-				unset($liste_pages['page']);
-				unset($liste_pages['z_apl']);
-			}
-
-			// supprimer de la liste les pages necissant un plugin qui n'est pas actif
-			foreach ($liste_pages as $page => $infos_page) {
-				if (isset($infos_page['necessite'])) {
-					foreach ($infos_page['necessite'] as $plugin) {
-						if (!defined('_DIR_PLUGIN_'.strtoupper($plugin))) {
-							unset($liste_pages[$page]);
+							// On n'inclue la page que si les plugins qu'elle nécessite explicitement dans son
+							// fichier de configuration sont bien tous activés.
+							// Rappel : si une page est incluse dans un plugin non actif elle ne sera pas détectée
+							//          lors du find_all_in_path() puisque le plugin n'est pas dans le path SPIP.
+							$page_a_garder = true;
+							if (isset($infos_page['necessite'])) {
+								foreach ($infos_page['necessite'] as $plugin) {
+									if (!defined('_DIR_PLUGIN_'.strtoupper($plugin))) {
+										$page_a_garder = false;
+									}
+								}
+							}
+							if ($page_a_garder) {
+								$liste_pages[$page] = $infos_page;
+							}
 						}
 					}
 				}
