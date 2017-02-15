@@ -36,12 +36,12 @@ function partenaires_declarer_tables_objets_sql($tables) {
 			"nom"                => "varchar(255) NOT NULL DEFAULT ''",
 			"descriptif"         => "text NOT NULL",
 			"url_site"           => "varchar(255) NOT NULL DEFAULT ''",
-			"statut"             => "varchar(20)  DEFAULT '0' NOT NULL", 
+			"statut"             => "varchar(20)  DEFAULT '0' NOT NULL",
 			"maj"                => "TIMESTAMP"
 		),
 		'key' => array(
 			"PRIMARY KEY"        => "id_partenaire",
-			"KEY statut"         => "statut", 
+			"KEY statut"         => "statut",
 		),
 		'titre' => "nom AS titre, '' AS lang",
 		 #'date' => "",
@@ -59,19 +59,19 @@ function partenaires_declarer_tables_objets_sql($tables) {
 				'champ'     => 'statut',
 				'publie'    => 'publie',
 				'previsu'   => 'publie,prop',
-				'post_date' => 'date', 
+				'post_date' => 'date',
 				'exception' => array('statut','tout')
 			)
 		),
-		'texte_changer_statut' => 'partenaire:texte_changer_statut_partenaire', 
-		
+		'texte_changer_statut' => 'partenaire:texte_changer_statut_partenaire',
+
 
 	);
 
 	$tables['spip_partenaires_types'] = array(
 		'type' => 'partenaires_type',
-		'principale' => "oui", 
-		'table_objet_surnoms' => array('partenairestype'), // table_objet('partenaires_type') => 'partenaires_types' 
+		'principale' => "oui",
+		'table_objet_surnoms' => array('partenairestype'), // table_objet('partenaires_type') => 'partenaires_types'
 		'field'=> array(
 			"id_type" => "bigint(21) NOT NULL",
 			"titre"              => "varchar(255) NOT NULL DEFAULT ''",
@@ -87,7 +87,8 @@ function partenaires_declarer_tables_objets_sql($tables) {
 		'champs_versionnes' => array('descriptif'),
 		'rechercher_champs' => array(),
 		'tables_jointures'  => array('spip_partenaires_types_liens'),
-		
+		'join' => array('id_type' => 'id_type'),
+
 
 	);
 
@@ -99,7 +100,7 @@ function partenaires_declarer_tables_objets_sql($tables) {
  * Déclaration des tables secondaires (liaisons)
  */
 function partenaires_declarer_tables_auxiliaires($tables) {
-	
+
 	$tables['spip_partenaires_liens'] = array(
 		'field' => array(
 			"id_partenaire"      => "bigint(21) DEFAULT '0' NOT NULL",
