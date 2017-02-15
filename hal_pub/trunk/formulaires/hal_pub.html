@@ -7,11 +7,12 @@
 [(#SET{url_depot,#CONFIG{hal_pub/url_depot}|sinon{https://api.archives-ouvertes.fr/search/}})]
 
 <!-- annee -->
-[(#SET{hal_annee,#GET{url_depot}?rows=0&facet=true&facet.field=producedDateY_i})]
-[(#ENV{q}|oui)  	 	#SET{hal_annee,#GET{hal_annee}|concat{&q=#ENV*{q}|urlencode} ]
-[(#ENV{q}|non)  	 	#SET{hal_annee,#GET{hal_annee}|concat{&q=*%3A*} ]
+[(#ENV{q}|oui)  	 	#SET{hal_annee,#GET{url_depot}|concat{?q=#ENV*{q}|urlencode} ]
+[(#ENV{q}|non)  	 	#SET{hal_annee,#GET{url_depot}|concat{?q=*} ]
+[(#CONFIG{hal_pub/types_document}|oui) #SET{hal_annee,#GET{hal_annee}|concat{&fq=docType_s%3A%28}|concat {#CONFIG{hal_pub/types_document}|replace{',',' OR '}|urlencode}|concat{%29}}]
 [(#ENV{equipe}|oui) 	#SET{hal_annee,#GET{hal_annee}|concat{&fq=rteamStructId_i:#ENV{equipe}|urlencode} ]
-[(#ENV{pub}|oui)  		#SET{hal_annee,#GET{hal_annee}|concat{&fq=docType_s:#ENV{pub}|urlencode} ]
+[(#SET{hal_annee,#GET{hal_annee}|concat{&rows=0&facet=true&facet.field=producedDateY_i}})]
+
 #SET{annee,#ARRAY}
 
 <BOUCLE_json_annee(DATA){source json,#GET{hal_annee}}{cle=facet_counts}>
@@ -29,12 +30,15 @@
 
 
 <!-- type de publication -->
-[(#SET{hal_pub,#GET{url_depot}?rows=0&facet=true&facet.field=docType_s})]
-[(#ENV{q}|oui)  	 	#SET{hal_pub,#GET{hal_pub}|concat{&q=#ENV*{q}|urlencode} ]
-[(#ENV{q}|non)  	 	#SET{hal_pub,#GET{hal_pub}|concat{&q=*%3A*} ]
+[(#ENV{q}|oui)  	 	#SET{hal_pub,#GET{url_depot}|concat{?q=#ENV*{q}|urlencode} ]
+[(#ENV{q}|non)  	 	#SET{hal_pub,#GET{url_depot}|concat{?q=*} ]
+[(#CONFIG{hal_pub/types_document}|oui) #SET{hal_pub,#GET{hal_pub}|concat{&fq=docType_s%3A%28}|concat {#CONFIG{hal_pub/types_document}|replace{',',' OR '}|urlencode}|concat{%29}}]
 [(#ENV{equipe}|oui) 	#SET{hal_pub,#GET{hal_pub}|concat{&fq=rteamStructId_i:#ENV{equipe}|urlencode} ]
 [(#ENV{annee}|oui)  	#SET{hal_pub,#GET{hal_pub}|concat{&fq=producedDateY_i:#ENV{annee}|urlencode} ]
+[(#SET{hal_pub,#GET{hal_pub}|concat{&rows=0&facet=true&facet.field=docType_s}})]
+
 #SET{pub,#ARRAY}
+
 <BOUCLE_json_pub(DATA){source json,#GET{hal_pub}}{cle=facet_counts}>
 		#SET{pub_json,#VALEUR{facet_fields/docType_s}}
 

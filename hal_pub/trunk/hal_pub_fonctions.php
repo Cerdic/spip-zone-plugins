@@ -89,17 +89,6 @@ function hal_nettoie_annee_invalide($array) {
    return $array_output;
 }
 
-
-// ajout les champs HAL
-// https://api.archives-ouvertes.fr/docs/search/schema/fields/#fields
-//
-// à maintenir le plus léger possible :
-// ne lister que les champs dont on a besoin pour la perf.
-// attention: on utilise label_xml qui est très lourd mais qui le seul à fournir la ref. bibliographique simplement et à part
-function hal_fields($str) {
-	return $str."&fl=title_s,authFullName_s,docid,label_xml,arxivId_s,halId_s,doiId_s,uri_s,docType_s,submittedDateY_i";
-}
-
 // extrait d'un champs XML label_xml la valeur de publication brute
 function hal_extraire_pub($xml) {
 	$pattern = '/<idno type="halRef">(.*?)<\/idno>/';

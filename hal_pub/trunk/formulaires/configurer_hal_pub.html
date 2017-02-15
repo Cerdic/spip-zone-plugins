@@ -18,12 +18,28 @@
 				<input type="text" name="url_depot" class="text"  value="[(#ENV{url_depot}|sinon{https://api.archives-ouvertes.fr/search/}|trim)]" />
 			</li>
 
-            #SET{erreurs,#ENV**{erreurs}|table_valeur{pagination}}
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{pagination}}
 			<li class="editer editer_pagination[ (#GET{erreurs}|oui)erreur]">
 				<label><:hal_pub:label_pagination:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<p class='explication'><:hal_pub:explication_pagination:></p>
 				<input type="text" name="pagination" class="text"  value="[(#ENV{pagination}|sinon{10}|intval)]" />
+			</li>
+
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{champs}}
+			<li class="editer editer_champs[ (#GET{erreurs}|oui)erreur]">
+				<label><:hal_pub:label_champs:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<p class='explication'><:hal_pub:explication_champs:></p>
+				<input type="text" name="champs" class="text"  value="#ENV{champs}" />
+			</li>
+
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{types_document}}
+			<li class="editer editer_types_document[ (#GET{erreurs}|oui)erreur]">
+				<label><:hal_pub:label_types_document:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<p class='explication'><:hal_pub:explication_types_document:></p>
+				<input type="text" name="types_document" class="text"  value="#ENV{types_document}" />
 			</li>
 		</ul>
 

@@ -13,8 +13,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_parametrages' => 'Configuration HAL',
 
 	// E
+	'explication_champs' => '(Facultatif)<br />Liste des champs (séparés par une virgule) à retourner par la requête HAL<br />
+	<br />Si ce champ n\'est pas renseigné, on utilise la liste: title_s,authFullName_s,docid,label_xml,arxivId_s,halId_s,doiId_s,uri_s,docType_s,submittedDateY_i',
+	'explication_types_document' => '(Facultatif)<br />Restreindre les types de document (liste de types séparés par une virgule)<br />Exemple: ART,OUV,DOUV,COUV<br />
+	<br />Si ce champ n\'est pas renseigné, tous les types de document sont retournés',
 	'explication_url_depot' => '(Facultatif)<br />Exemple:<br /><a href="https://api.archives-ouvertes.fr/search/CPT/">https://api.archives-ouvertes.fr/search/CPT/</a><br />
-	<br />Si ce champs n\'est pas renseigné, on utilise l\'URL générale	de HAL <a href="https://api.archives-ouvertes.fr/search/">https://api.archives-ouvertes.fr/search/</a>',
+	<br />Si ce champ n\'est pas renseigné, on utilise l\'URL générale	de HAL <a href="https://api.archives-ouvertes.fr/search/">https://api.archives-ouvertes.fr/search/</a>',
 	'explication_pagination' => 'Nombre de publications affichées par page.',
 
 	// F
@@ -29,8 +33,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'hal_pub_titre' => 'Publications HAL',
 
 	// L
-	'label_url_depot' => 'URL de votre dépot&nbsp;HAL',
+	'label_champs' => 'Champs à retourner',
 	'label_pagination' => 'Pagination',
+	'label_types_document' => 'Types de document',
+	'label_url_depot' => 'URL de votre dépot&nbsp;HAL',
 
 	// R
 	'recherche_0' => 'Aucun résultat',
