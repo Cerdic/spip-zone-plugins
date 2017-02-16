@@ -3,6 +3,12 @@
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
+	<langue code="de" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=de" total="80" traduits="49" relire="0" modifs="0" nouveaux="31" pourcent="61.25">
+		<traducteur nom="Julia14" lien="https://trad.spip.net/auteur/julia14" />
+		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
+		<traducteur nom="Nils T." lien="https://trad.spip.net/auteur/nils-t" />
+		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
+	</langue>
 	<langue code="en" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=en" total="80" traduits="80" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
