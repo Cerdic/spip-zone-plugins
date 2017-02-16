@@ -16,7 +16,7 @@ class DecryptFilter extends \php_user_filter
 	const LEN = 8256;
 
 	function onCreate() {
-		$this->buffer = "";
+		$this->buffer = '';
 		$this->bufferlen = 0;
 	}
 
@@ -33,7 +33,6 @@ class DecryptFilter extends \php_user_filter
 		// On essaie de récupérer une longueur suffisante de message
 		// pour avoir au moins la taille d'un block chiffré complet
 		while ($bucket = stream_bucket_make_writeable($in)) {
-
 			$this->buffer .= $bucket->data;
 			$this->bufferlen += $bucket->datalen;
 			$consumed += $bucket->datalen;

@@ -256,8 +256,7 @@ class Client {
 			return false;
 		}
 
-
-		if (!@stream_filter_append($fp, 'crypteur.decrypt', STREAM_FILTER_WRITE, array('crypteur' => $this->crypteur))) {
+		if (!@stream_filter_append($fp, 'crypteur.decrypt', STREAM_FILTER_READ, array('crypteur' => $this->crypteur))) {
 			$this->error('Décrypteur inutilisable : ' . error_get_last()['message']);
 			fclose($fp);
 			return false;
