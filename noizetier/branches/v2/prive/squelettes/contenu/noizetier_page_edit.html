@@ -1,0 +1,39 @@
+[(#AUTORISER{configurer,noizetier}|sinon_interdire_acces)]
+[(#REM) On défini l'action en fonction des paramètres 'new' et 'page' ]
+#SET{action,#ENV{page}|?{#ENV{new}|?{'dupliquer','modifier'},#ENV{new}|?{'creer',''}}}
+#SET{titre_page,#ENV{page}|?{#NOIZETIER_LISTE_PAGES{#ENV{page}}|table_valeur{nom}}}
+[(#GET{action}|=={modifier}|oui)
+	#SET{redirect,#URL_ECRIRE{noizetier_page,page=#ENV{page}}}
+	#SET{icone_retour,#NOIZETIER_LISTE_PAGES{#ENV{page}}|table_valeur{icon}}
+]
+[(#GET{action}|in_array{#LISTE{creer,dupliquer}}|oui)
+	#SET{redirect,#URL_ECRIRE{noizetier_pages}}
+	#SET{icone_retour,noizetier-24.png}
+]
+#SET{redirect,#ENV{redirect}|sinon{#GET{redirect}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#GET{redirect}|icone_verticale{<:noizetier:retour:>,#GET{icone_retour},'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	[(#GET{action}|=={modifier}|oui)<:noizetier:formulaire_modifier_page:>]
+	[(#GET{action}|=={dupliquer}|oui)<:noizetier:formulaire_dupliquer_page_entete:>]
+	<h1>
+		[(#GET{action}|=={creer}|oui)<:noizetier:editer_nouvelle_page:>]
+		[(#GET{action}|=={modifier}|oui)[(#GET{titre_page})]]
+		[(#GET{action}|=={dupliquer}|oui)<:noizetier:formulaire_dupliquer_page_titre{page=#GET{titre_page}}:>]
+	</h1>
+</div>
+
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+]
+<div class="ajax">
+	[(#FORMULAIRE_EDITER_PAGE{#ENV{page},#ENV{new},#GET{redirect}})]
+</div>
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\[CDATA\[*/
+		jQuery('#chemin').find('>div').ajaxReload({'args':{'exec':'noizetier_page_edit','page':'#ENV{page}','new':'#ENV{new}'}});
+		jQuery('#navigation').find('>div').ajaxReload({'args':{'exec':'noizetier_page_edit','page':'#ENV{page}','new':'#ENV{new}'}});
+	/*\]\]>*/</script>
+]
+</div>

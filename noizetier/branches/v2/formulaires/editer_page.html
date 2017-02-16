@@ -1,0 +1,189 @@
+
+<div class="formulaire_spip formulaire_editer formulaire_editer_page formulaire_editer_page-#ENV{page,'new'}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}'><div>
+	<BOUCLE_editable(condition){si #ENV{editable}}>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='page' value='#ENV{page}' />
+		<input type='hidden' name='new' value='#ENV{new}' />
+		<input type='hidden' name='dupliquer' value='#ENV{dupliquer}' />
+		<ul class="editer-groupe">
+
+			[(#REM) Type éditable ]
+			<BOUCLE_type_editable(CONDITION){si #ENV{acte}|=={creer}}>
+			#SET{name,type_page}
+			#SET{obli,'obligatoire'}
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:noizetier:formulaire_type:></label>
+				<div class="explication"><:noizetier:formulaire_type_explication:></div>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<select class="select" name="#GET{name}" id="#GET{name}">
+				<BOUCLE_types(POUR){tableau #ENV{_objets_avec_compos}}>
+					[<option value="#VALEUR">(#VALEUR|=={page}|?{<:noizetier:page_autonome:>, [(#NOIZETIER_LISTE_PAGES|table_valeur{#VALEUR}|table_valeur{nom}|sinon{#VALEUR})]})</option>]
+				</BOUCLE_types>
+				</select>
+			</li>
+			</BOUCLE_type_editable>
+
+			[(#REM) Type pas éditable ]
+			[(#ENV{acte}|in_array{#LISTE{modifier,dupliquer}}|oui)
+			#SET{name,type_page}
+			#SET{obli,'obligatoire'}
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:noizetier:formulaire_type:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<div class="explication">[(#NOIZETIER_LISTE_PAGES|table_valeur{#ENV{type_page}}|table_valeur{nom}|sinon{#ENV{type_page}})]</div>
+				<input type="hidden" name="#GET{name}" id="#GET{name}" value="#ENV{#GET{name}}" />
+			</li>
+			]
+
+			[(#REM) Composition éditable ]
+			[(#ENV{acte}|in_array{#LISTE{creer,dupliquer}}|oui)
+			#SET{name,composition}
+			#SET{obli,'obligatoire'}
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:noizetier:formulaire_composition:></label>
+				<div class="explication">
+					<:noizetier:formulaire_composition_explication:>[
+					(#ENV{acte}|=={dupliquer}|et{#ENV{page}|noizetier_page_composition}|oui)<br><:noizetier:explication_dupliquer_composition_reference{composition=#ENV{#GET{name}_ref}}:>
+				]</div>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type="text" class="text" name="#GET{name}" id="#GET{name}" value="#ENV{#GET{name}}"[ (#ENV{acte}|=={dupliquer}|oui)placeholder="#ENV{#GET{name}_ref}"]/>
+			</li>
+			]
+
+			[(#REM) Composition pas éditable ]
+			[(#ENV{acte}|=={modifier}|oui)
+			#SET{name,composition}
+			#SET{obli,'obligatoire'}
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:noizetier:formulaire_composition:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<div class="explication">#ENV{#GET{name}}</div>
+				<input type="hidden" name="#GET{name}" id="#GET{name}" value="#ENV{#GET{name}}" />
+			</li>
+			]
+
+			#SET{name,nom}
+			#SET{obli,'obligatoire'}
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:noizetier:formulaire_nom:></label>
+				<div class="explication"><:noizetier:formulaire_nom_explication:></div>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type="text" class="text" name="#GET{name}" id="#GET{name}" size="40" value="#ENV{#GET{name}}" />
+			</li>
+
+			#SET{name,description}
+			#SET{obli,''}
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:noizetier:formulaire_description:></label>
+				<div class="explication"><:noizetier:formulaire_description_explication:></div>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<textarea class="textarea" name="#GET{name}" id="#GET{name}">#ENV{#GET{name}}</textarea>
+			</li>
+
+			#SET{name,icon}
+			#SET{obli,''}
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:noizetier:formulaire_icon:></label>
+				<div class="explication"><:noizetier:formulaire_icon_explication:></div>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type="text" class="text" name="#GET{name}" id="#GET{name}" size="40" value="#ENV{#GET{name}}" />
+				<div id="aide_choix_icone"  style="display:none;">
+					<div style="float:right" id="afficher_suggestions">
+						[<a href="#" onclick="jQuery('#suggestions_icones').show(500);jQuery('#afficher_suggestions').hide(500);return false;" ><:noizetier:suggestions:></a>]
+					</div>
+					<strong><:noizetier:apercu:></strong><br />
+					<span id="apercu_icone">[(#ENV{icon}|noizetier_chemin_icone|balise_img)]</span>
+					<B_suggestions_icones>
+					<div id="suggestions_icones" style="display:none;">
+						<div style="float:right">
+							[<a href="#" onclick="jQuery('#suggestions_icones').hide(500);jQuery('#afficher_suggestions').show(500);return false;"><:noizetier:masquer:></a>]
+						</div>
+						<p><strong><:noizetier:suggestions:></strong></p>
+						<BOUCLE_suggestions_icones(DATA){source table, #REM|noizetier_lister_icones}{par cle}>
+							<div class="suggestion_icone"
+								style="float:left; width:75px; text-align:center; height:75px; font-size:10px; line-height:12px; cursor:pointer;"
+								onclick="jQuery('input#icon').val('#CLE');maj_apercu_icone();jQuery('#suggestions_icones').hide(500);jQuery('#afficher_suggestions').show(500);return false;"
+								 >
+								[(#CLE|noizetier_chemin_icone|balise_img)<br />]
+								#CLE
+							</div>
+						</BOUCLE_suggestions_icones>
+					</div>
+					</B_suggestions_icones>
+				</div>
+			<script type="text/javascript">/*<!\[CDATA\[*/
+				jQuery('#aide_choix_icone').show();
+				maj_apercu_icone = function(){
+					i = jQuery('input#icon').val();
+					jQuery.get('#URL_PAGE{apercu-icone}&icone='+i, function(data) {
+						jQuery('span#apercu_icone').html(data);
+					});
+				};
+				jQuery('input#icon').change(function(){
+					maj_apercu_icone();
+				});
+			/*\]\]>*/</script>
+			</li>
+
+			[(#ENV{acte}|=={creer}|oui)
+			#SET{name,peupler}
+			#SET{obli,''}
+			#SET{defaut,'on'}
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label>Noisettes</label>
+				<div class="explication">Vous pouvez peupler d'avance la nouvelle composition avec les noisettes de la composition mère (sauf s'il s'agit d'une page autonome).</div>
+				<div class="choix">
+					<input name="#GET{name}\[\]" id="#GET{name}_oui" value="on" type="checkbox"[ checked="(#ENV{#GET{name},#GET{defaut}}|=={'on'}|?{'checked',''})"]><label for="#GET{name}_oui">copier les noisettes de la composition mère</label>
+				</div>
+			</li>
+			]
+		</ul>
+
+		<B_heritage>
+		<fieldset>
+			<legend><:noizetier:formulaire_modifier_composition_heritages:></legend>
+			<p class="explication"><:noizetier:explication_heritages_composition:></p>
+			<ul class="editer-groupe">
+			<BOUCLE_heritage(DATA){source table,#ENV{_heritiers}}{par cle}>
+				<B_type>
+				#SET{name,heritage-#CLE}
+				#SET{obli,''}
+				#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#NOIZETIER_LISTE_PAGES|table_valeur{#CLE}|table_valeur{nom}|sinon{#CLE})]</label>
+					[<span class='erreur_message'>(#GET{erreurs})</span>]
+					<select class="select" name="#GET{name}" id="#GET{name}">
+						<option value=""><:noizetier:ne_pas_definir_d_heritage:></option>
+						<option value="-"[(#ENV{#GET{name}}|=={'-'}|oui)selected="selected"]><:compositions:composition_defaut:></option>
+						<BOUCLE_type(POUR){tableau #VALEUR}{par cle}>
+						<option value="#CLE"[(#ENV{heritage-#_heritage:CLE}|=={#CLE}|oui)selected="selected"]>[(#VALEUR|table_valeur{nom}|sinon{#CLE})]</option>
+						</BOUCLE_type>
+					</select>
+				</li>
+				</B_type>
+			</BOUCLE_heritage>
+			</ul>
+		</fieldset>
+		</B_heritage>
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'>
+			<input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' />
+		</p>
+	</BOUCLE_editable>
+	</div></form>
+</div>

@@ -1,0 +1,30 @@
+nom: '<:noizetier:nom_bloctexte:>'
+description: '<:noizetier:description_bloctexte:>'
+icon: 'texte-24.png'
+contexte: 'aucun'
+parametres:
+  -
+    saisie: 'input'
+    options:
+      nom: 'titre'
+      label: '<:noizetier:label_titre:>'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'niveau_titre'
+      label: '<:noizetier:label_niveau_titre:>'
+      defaut: 'h2'
+      cacher_option_intro: 'oui'
+      datas:
+        h1: 'h1'
+        h2: 'h2'
+        h3: 'h3'
+  -
+    saisie: 'textarea'
+    options:
+      nom: 'texte'
+      label: '<:noizetier:label_texte:>'
+      obligatoire: 'oui'
+      inserer_barre: 'edition'
+      previsualisation: 'oui'
+contexte: 'aucun'

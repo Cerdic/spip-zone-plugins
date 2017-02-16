@@ -1,0 +1,46 @@
+#SET{type,#ENV{page,#OBJET}|noizetier_page_type}
+#SET{composition,#ENV{page,#OBJET}|noizetier_page_composition}
+
+<B_composition_noisettes>
+[(#SET{nom_type,[(#NOIZETIER_LISTE_PAGES|table_valeur{#ENV{page,#OBJET}}|table_valeur{nom})]})]
+<h4><:noizetier:noisettes_composition{composition=#GET{nom_type}}:></h4>
+<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
+<BOUCLE_composition_noisettes(DATA){source tableau, #NOIZETIER_LISTE_NOISETTES{#ENV{page,#OBJET}}}{par cle}{si #GET{composition}}>
+	<li class="editer item noisette" [ style="background-image: url((#VALEUR|table_valeur{icon}|sinon{noisette-24.png}|noizetier_chemin_icone));"]>
+		[(#SET{id,#VAL{noizetier_}|uniqid})]
+		[(#ENV{form}|oui)<input type='radio' name='noisette' value='#CLE' id="#GET{id}" />]
+		<label for="#GET{id}">[(#VALEUR|table_valeur{nom})]</label>
+		[(#ENV{ordre}|oui)<input type='hidden' name='ordre\[\]' value='ajouter-#CLE' />]
+	</li>
+</BOUCLE_composition_noisettes>
+</ul>
+</B_composition_noisettes>
+
+<B_type_noisettes>
+[(#SET{nom_type,[(#NOIZETIER_LISTE_PAGES|table_valeur{#GET{type}}|table_valeur{nom})]})]
+<h4><:noizetier:noisettes_page{type=#GET{nom_type}}:></h4>
+<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
+<BOUCLE_type_noisettes(DATA){source tableau, #NOIZETIER_LISTE_NOISETTES{#GET{type}}}{par cle}>
+	<li class="editer item noisette" [ style="background-image: url((#VALEUR|table_valeur{icon}|sinon{noisette-24.png}|noizetier_chemin_icone));"]>
+		[(#SET{id,#VAL{noizetier_}|uniqid})]
+		[(#ENV{form}|oui)<input type='radio' name='noisette' value='#CLE' id="#GET{id}" />]
+		<label for="#GET{id}">[(#VALEUR|table_valeur{nom})]</label>
+		[(#ENV{ordre}|oui)<input type='hidden' name='ordre\[\]' value='ajouter-#CLE' />]
+	</li>
+</BOUCLE_type_noisettes>
+</ul>
+</B_type_noisettes>
+
+<B_noisettes_communes>
+<h4><:noizetier:noisettes_toutes_pages:></h4>
+<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
+<BOUCLE_noisettes_communes(DATA){source tableau, #NOIZETIER_LISTE_NOISETTES{''}}{par cle}>
+	<li class="editer item noisette" [ style="background-image: url((#VALEUR|table_valeur{icon}|sinon{noisette-24.png}|noizetier_chemin_icone));"]>
+		[(#SET{id,#VAL{noizetier_}|uniqid})]
+		[(#ENV{form}|oui)<input type='radio' name='noisette' value='#CLE' id="#GET{id}" />]
+		<label for="#GET{id}">[(#VALEUR|table_valeur{nom})]</label>
+		[(#ENV{ordre}|oui)<input type='hidden' name='ordre\[\]' value='ajouter-#CLE' />]
+	</li>
+</BOUCLE_noisettes_communes>
+</ul>
+</B_noisettes_communes>
