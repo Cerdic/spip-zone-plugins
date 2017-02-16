@@ -1,3 +1,21 @@
+[(#REM)
+
+	Metadonnées d'un article.
+
+	https://www.openarchives.org/OAI/openarchivesprotocol.html#GetRecord
+	https://www.openarchives.org/OAI/openarchivesprotocol.html#dublincore
+	This verb is used to retrieve an individual metadata record from a repository.
+	Required arguments specify the identifier of the item from which the record is requested and the format of the metadata that should be included in the record.
+	
+	Ce dépôt gère les identifiants de rubriques sous la forme "rubrique123"
+
+	Paramètres :
+	** obligatoire
+	* recommandé
+	
+	- **identifier : identifiant unique de l'entrée, ex. oai:site.ltd.fr:article/1
+
+]
 [(#REM) On cherche d'abord l'identifiant ]
 #SET{id_article, #ENV{identifier}|rawurldecode|explode{":"}|end|explode{"/"}|end}
 

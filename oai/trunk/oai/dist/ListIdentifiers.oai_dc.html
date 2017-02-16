@@ -1,4 +1,22 @@
-[(#REM) Ce dépôt gère les identifiants de rubriques sous la forme "rubrique123" ]
+[(#REM)
+
+	Listes des articles, version abrégée.
+
+	https://www.openarchives.org/OAI/openarchivesprotocol.html#ListIdentifiers
+	This verb is an abbreviated form of ListRecords, retrieving only headers rather than records.
+	Optional arguments permit selective harvesting of headers based on set membership and/or datestamp.
+	
+	Ce dépôt gère les identifiants de rubriques sous la forme "rubrique123"
+
+	Paramètres :
+	** obligatoire
+	* recommandé
+	
+	- from    : date minimale au format UTC
+	- until   : date maximale au format UTC
+	- set     : hiérarchie de rubriques sous la forme rubrique1:rubrique2:rubriqueN
+
+]
 #SET{set,#ENV{set}|?{#ENV{set}|replace{rubrique,''}}}
 
 <BOUCLE_articles(ARTICLES){statut IN publie,poubelle}{oaifromuntil date,maj,#ENV{from,0},#ENV{until,0}}{pagination 200}>

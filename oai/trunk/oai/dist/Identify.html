@@ -1,4 +1,15 @@
-<repositoryName>#NOM_SITE_SPIP, <:oai:depot_oai:></repositoryName>
+[(#REM)
+
+	Informations sur le dépôt.
+
+	Point d'entrée principal : http://site.ltd/oai.api
+
+	https://www.openarchives.org/OAI/openarchivesprotocol.html#Identify
+	This verb is used to retrieve information about a repository.
+	Some of the information returned is required as part of the OAI-PMH.
+	Repositories may also employ the Identify verb to return additional descriptive information.
+	
+]<repositoryName>#NOM_SITE_SPIP, <:oai:depot_oai:></repositoryName>
 <baseURL>[(#VAL{oai.api}|url_absolue)][/(#ENV{arg})]</baseURL>
 <protocolVersion>2.0</protocolVersion>
 [(#REM) La liste des administrateurs du dépôt, par défaut le webmaster ]
