@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucune_zone' => 'Kein Bereich',
 	'auteur' => '@nb@ Autor',
 	'auteurs' => '@nb@  Autoren',
+	'auteurs_tous' => 'Alle verbundenen Personen',
 
 	// B
 	'bouton_configurer_acces' => 'Einrichtung der .htaccess Zugangsbeschränkung',
@@ -59,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_creer_htaccess' => 'Zugriff auf die angehängten Dokumente über ihren URL',
 	'label_creer_htaccess_non' => 'Zugriff erlauben',
 	'label_creer_htaccess_oui' => 'Zugriff verhindern',
+	'label_droits_acces' => 'Zugriffsrechte',
 	'label_titre_zone' => 'Titel',
 
 	// M
@@ -97,6 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Z
 	'zone_numero' => 'BEREICH NUMMER:',
+	'zone_restreinte_autoriser_si_connexion_label' => 'Allen verbundenen Personen Zugriffsrechte für diesen Bereich geben',
 	'zone_restreinte_espace_prive' => 'Zugang im Redaktionsbereich kontrollieren',
 	'zone_restreinte_publique' => 'Zugang zu diesem Bereich in der öffentlichen Webseite kontrollieren'
 );
