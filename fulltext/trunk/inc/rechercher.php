@@ -220,6 +220,7 @@ function recherche_en_base($recherche = '', $tables = null, $options = array(), 
 			and $tables != '') {
 			$toutes = array();
 			foreach (explode(',', $tables) as $t) {
+				$t = trim($t);
 				if (isset($liste[$t])) {
 					$toutes[$t] = $liste[$t];
 				}
