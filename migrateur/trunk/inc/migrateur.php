@@ -124,7 +124,7 @@ function migrateur_stream_log($msg) {
 	 * Si stream, forcer gros message, pour passer outre différents buffers…
 	 * Tristement…
 	 */
-	static $buffer_size = 8 * 1024;
+	static $buffer_size = 8192;
 
 	/**
 	 * Si stream, il faut un délai minimal entre 2 envois :/
