@@ -1,11 +1,11 @@
 <paquet
 	prefix="oai"
 	categorie="divers"
-	version="1.1.1"
+	version="1.1.2"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="oai_logo.png"
->      
+>
 	<nom>Entrepôt OAI</nom>
 	<!-- Fournir un entrepôt OAI pouvant répondre à un moissonneur -->
 

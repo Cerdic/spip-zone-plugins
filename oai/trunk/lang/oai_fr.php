@@ -4,6 +4,12 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	
+	// C
+	'champ_admins_label' => 'Emails des administrateurs des entrepôts',
+	'champ_admins_explication' => 'Un ou plusieurs emails séparés par des virgules. À défaut, c\'est celui du webmaster du site qui est utilisé. Cette information est utilisée dans l\'identification des entrepôts.',
+	'cfg_titre_parametrages' => 'Configuration',
+	
 	//D
 	'depot_oai' => 'Dépôt OAI',
 	
@@ -18,4 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_nometadataformats' => 'Aucun format de méta-données n’a été trouvé pour ce dépot.',
 	'erreur_norecordsmatch' => 'Aucun enregistrement ne correspond à ces critères.',
 	'erreur_nosethierarchy' => 'Ce dépôt n’a aucune catégorie.',
+	
+	// T
+	'titre_page_configurer_oai' => 'Configurer OAI',
 );
