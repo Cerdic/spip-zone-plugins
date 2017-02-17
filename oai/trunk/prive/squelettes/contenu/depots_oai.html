@@ -2,8 +2,9 @@
 
 	Liste des dépôts OAI détectés
 
-	On repère ceux qui se trouvent dans un dossier oai/nom_du_depot
-	Les tableaux affichent le contenu du fichier Identify.html
+	On repère les dépôts en cherchant oai/nom_du_depot/Identify.html
+	Les tableaux affichent le contenu de ces squelettes.
+	Pas glop : on doit faire une copie locale du xml dans /tmp pour éviter un 404 dans la boucle data :/
 
 ]
 <h1 class="grostitre"><:oai:titre_page_depots:></h1>
@@ -21,20 +22,32 @@
 
 <BOUCLE_afficher_depots(DATA){source table, #GET{chemins_depots}}>
 #SET{depot,#VALEUR|explode{/}|table_valeur{#VALEUR|explode{/}|count|moins{2}}}
-#SET{url_depot,#URL_SITE_SPIP|concat{/oai.api/,#GET{depot}}}
+#SET{url_depot,#URL_SITE_SPIP|rtrim{/}|concat{/oai.api/,#GET{depot}}}
+#SET{xml_identify,#VAL{_DIR_RACINE}|constant|concat{#GET{url_depot}|parametre_url{verb,Identify}|copie_locale{auto,#VAL{tmp/oai_}|concat{#GET{depot},_identify.xml}}}}
+
 <div class="liste-objets">
 	<table class="spip liste">
-		<BOUCLE_identify(DATA){source xml, #GET{url_depot}|parametre_url{verb,Identify}}{datapath Identify}>
-		<BOUCLE_valeurs(DATA){source table, #VALEUR}>
-		[(#CLE|=={repositoryName}|oui)
-		[<caption><strong class="caption">(#VALEUR{0}|propre|ptobr)</strong></caption>]
-		]
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td><strong>#CLE</strong></td>
-			<td>[(#VALEUR{0}|propre|ptobr)]</td>
-		</tr>
-		</BOUCLE_valeurs>
-		</BOUCLE_identify>
+		<tbody>
+			<BOUCLE_identify(DATA){source xml, #GET{xml_identify}}{datapath Identify}>
+			<BOUCLE_valeurs(DATA){source table, #VALEUR}>
+			[(#CLE|=={repositoryName}|oui)
+			[<caption><strong class="caption">(#VALEUR{0}|propre|ptobr)</strong></caption>]
+			]
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td><strong>#CLE</strong></td>
+				<td>[(#VALEUR{0}|propre|ptobr)]</td>
+			</tr>
+			</BOUCLE_valeurs>
+			</BOUCLE_identify>
+			<tr>
+				<td><strong>Verbes</strong></td>
+				<td>
+					<BOUCLE_verbes(DATA){source table, #LISTE{Identify,ListRecords,ListSets,ListMetadataFormats,ListIdentifiers}}{'<span class="sep">|</span>'}>
+					[(#GET{url_depot}|parametre_url{verb,#VALEUR}|lien_ou_expose{#VALEUR})]
+					</BOUCLE_verbes>
+				</td>
+			</tr>
+		</tbody>
 	</table>
 </div>
 </BOUCLE_afficher_depots>
