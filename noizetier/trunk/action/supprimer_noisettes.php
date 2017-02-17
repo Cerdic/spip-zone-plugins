@@ -3,7 +3,7 @@
  * Ce fichier contient l'action `supprimer_noisettes` lancée par un utilisateur pour
  * supprimer de façon sécurisée une noisette ou plusieur noisettes.
  *
- * @package SPIP\NOIZETIER\Action
+ * @package SPIP\NOIZETIER\ACTION
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -86,10 +86,14 @@ function action_supprimer_noisettes_dist() {
  * @param string	$contexte
  * 		Contexte de la suppression:
  * 		- 'noisette' : suppression d'une noisette identifiée par son id
- * 		- 'bloc' : suppression de toutes les noisettes d'un bloc d'une page ou d'un objet associé à une page
- * 		- 'page' : suppression de toutes les noisettes d'une page ou d'un objet associé à une page
+ * 		- 'bloc'     : suppression de toutes les noisettes d'un bloc d'une page ou d'un objet associé à une page
+ * 		- 'page'     : suppression de toutes les noisettes d'une page ou d'un objet associé à une page
  * @param array		$objet
+ * 		Tableau contenant les identifiants de l'objet concerné par la suppression:
+ * 		- 'id'   : identifiant de la noisette (id_noisette), de la page (type) ou de l'objet (id_objet)
+ * 		- 'type' : type d'objet si l'index existe
  * @param string	$bloc
+ * 		Identifiant du bloc ou chaine vide sinon.
  *
  * return void
  */
