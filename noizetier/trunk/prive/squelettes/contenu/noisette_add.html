@@ -1,12 +1,19 @@
 [(#AUTORISER{configurer,noizetier}|sinon_interdire_acces)]
 
-[(#ENV{page}|?{
-	#SET{retour,#URL_ECRIRE{noizetier_page,page=#ENV{page}#bloc-#ENV{bloc}}},
-	#SET{retour,#URL_ECRIRE{noizetier_page}|parametre_url{objet,#OBJET}|parametre_url{id_objet,#ID_OBJET}|ancre_url{bloc-#ENV{bloc}}},
-})]
-#SET{retour,#ENV{retour}|sinon{#GET{retour}}}
-#SET{redirect,#URL_ECRIRE{noisette_edit,id_noisette=@id_noisette@}}
-#SET{redirect,#ENV{redirect}|sinon{#GET{redirect}}}
+[(#OBJET|et{#ID_OBJET}|?{
+	[(#SET{retour, [(#URL_ECRIRE{noizetier_page}
+						|parametre_url{objet, #OBJET}
+						|parametre_url{id_objet, #ID_OBJET}
+						|parametre_url{bloc, #ENV{bloc}}
+						|ancre_url{bloc-#ENV{bloc}})]})],
+	[(#SET{retour, [(#URL_ECRIRE{noizetier_page}
+						|parametre_url{page, #ENV{page}}
+						|parametre_url{bloc, #ENV{bloc}}
+						|ancre_url{bloc-#ENV{bloc}})]})]}
+)]
+#SET{retour, #ENV{retour}|sinon{#GET{retour}}}
+#SET{redirect, #URL_ECRIRE{noisette_edit,id_noisette=@id_noisette@}}
+#SET{redirect, #ENV{redirect}|sinon{#GET{redirect}}}
 
 <div class='cadre-formulaire-editer'>
 <div class="entete-formulaire">

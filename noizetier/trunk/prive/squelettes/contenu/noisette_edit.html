@@ -18,7 +18,7 @@
 	[(#GET{redirect}|icone_verticale{<:noizetier:retour:>,page-noisettes-24,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
 	<:noizetier:formulaire_modifier_noisette:>
 	<h1>
-		[(#NOIZETIER_INFO_NOISETTE{#NOISETTE}|table_valeur{nom})]
+		[(#NOISETTE|noizetier_info_noisette|table_valeur{nom})]
 	</h1>
 </div>
 
