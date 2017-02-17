@@ -764,28 +764,31 @@ function noizetier_supprimer_composition($page) {
 }
 
 /**
- * Renvoie le type d'une page.
+ * Renvoie le type d'une page à partir de son identifiant.
  *
  * @param string $page
- * 		L'id de la page (cad le nom du fichier sans extension).
+ * 		L'identifiant de la page.
  *
  * @return string
- * 	Le type de la page choisie, c'est-à-dire
+ * 		Le type de la page choisie, c'est-à-dire:
+ * 		- soit l'identifiant complet de la page,
+ * 		- soit le mot précédent le tiret dans le cas d'une composition.
  */
 function noizetier_page_type($page) {
-	$type_compo = explode('-', $page, 2);
+	$type = explode('-', $page, 2);
 
-	return $type_compo[0];
+	return $type[0];
 }
 
 /**
- * Renvoie la composition d'une page si elle existe.
+ * Détermine, à partir de son identifiant, la composition d'une page si elle existe.
  *
  * @param string $page
- * 		L'id de la page (cad le nom du fichier sans extension).
+ * 		L'identifiant de la page.
  *
  * @return string
- * 		La composition de la page choisie ou la chaine vide sinon.
+ *      La composition de la page choisie, à savoir, le mot suivant le tiret,
+ * 		ou la chaine vide sinon.
  */
 function noizetier_page_composition($page) {
 	$composition = explode('-', $page, 2);
@@ -876,16 +879,16 @@ function noizetier_lister_icones() {
 }
 
 /**
- * Teste si une page fait partie des compositions du noizetier.
+ * Teste si une page repérée par son identifiant fait partie des compositions du noizetier.
  * Les compositions du noizetier sont enregistrées dans une meta.
  *
  * @param string $page
- * 		L'id de la page (cad le nom du fichier sans extension).
+ * 		L'identifiant de la page.
  *
  * @return boolean
  * 		Vrai si la page fait bien partie des compositions du noizetier, false sinon.
  */
-function noizetier_test_compo_noizetier($page) {
+function noizetier_est_composition_noizetier($page) {
 	$page_est_composition = false;
 
 	$compositions_enregistrees =
@@ -894,12 +897,13 @@ function noizetier_test_compo_noizetier($page) {
 		: array();
 
 	if ($compositions_enregistrees) {
-		$type = noizetier_page_type($page);
-		$composition = noizetier_page_composition($page);
-		$page_est_composition =
-			(isset($compositions_enregistrees[$type][$composition]) and is_array($compositions_enregistrees[$type][$composition]))
-			? true
-			: false;
+		if (strpos($page, '-') !== false) {
+			list($type, $composition) = explode('-', $page, 2);
+			$page_est_composition =
+				(isset($compositions_enregistrees[$type][$composition]) and is_array($compositions_enregistrees[$type][$composition]))
+				? true
+				: false;
+		}
 	}
 
 	return $page_est_composition;
