@@ -50,7 +50,7 @@
 			[<div class="noisette noisette_#NOISETTE[ (#CHAMP_SQL{css})]">(#NOIZETIER_AFFICHER_NOISETTE)</div>]
 			<div class="noizetier-action" style="text-align:#LANG_RIGHT;">
 				\[<strong><a href="[(#SELF|parametre_url{editer_noisette,#ID_NOISETTE})#noizetier-noisette-#ID_NOISETTE]"><:noizetier:formulaire_modifier_noisette:></a></strong>\]
-				[(#BOUTON_ACTION{[(#VAL{noizetier:formulaire_supprimer_noisette}|_T)],#URL_ACTION_AUTEUR{supprimer_noisette,#ID_NOISETTE,#SELF#noizetier-noisette-#ID_NOISETTE}})]
+				[(#BOUTON_ACTION{[(#VAL{noizetier:formulaire_supprimer_noisette}|_T)],#URL_ACTION_AUTEUR{supprimer_noisettes,noisette:#ID_NOISETTE,#SELF#noizetier-noisette-#ID_NOISETTE}})]
 			</div>
 		]
 		<input type='hidden' name='ordre[]' value='noisette-#ID_NOISETTE' class="noizetier-tri" />

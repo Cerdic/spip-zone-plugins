@@ -456,60 +456,6 @@ function noizetier_blocs_defaut() {
 	return $blocs_defaut;
 }
 
-/**
- * Supprime de spip_noisettes les noisettes liees a une page.
- *
- * @param string|array $page
- */
-function noizetier_supprimer_noisettes_page($page) {
-	$objet = '';
-	$id_objet = 0;
-	$type = '';
-	$composition = '';
-	
-	if (is_array($page)) {
-		$objet = $page['objet'];
-		$id_objet = $page['id_objet'];
-	}
-	else {
-		$type_compo = explode('-', $page, 2);
-		$type = $type_compo[0];
-		
-		if (isset($type_compo[1])) {
-			$composition = $type_compo[1];
-		}
-	}
-	
-	if (autoriser('configurer', 'noizetier')) {
-		sql_delete(
-			'spip_noisettes',
-			'type = '.sql_quote($type)
-			.' AND composition = '.sql_quote($composition)
-			.' AND objet = '.sql_quote($objet)
-			.' AND id_objet = '.intval($id_objet)
-		);
-		
-		// On invalide le cache
-		include_spip('inc/invalideur');
-		suivre_invalideur("id='page/$page'");
-	}
-}
-
-/**
- * Supprime de spip_noisettes une noisette particuliere.
- *
- * @param text $id_noisette
- */
-function noizetier_supprimer_noisette($id_noisette) {
-	if (autoriser('configurer', 'noizetier') and intval($id_noisette)) {
-		sql_delete('spip_noisettes', 'id_noisette='.intval($id_noisette));
-		// On invalide le cache
-		include_spip('inc/invalideur');
-		suivre_invalideur("id='noisette/$id_noisette'");
-	}
-}
-
-
 
 /**
  * Ajoute une noisette à un bloc d'une page
