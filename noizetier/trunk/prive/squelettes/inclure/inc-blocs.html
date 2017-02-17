@@ -1,6 +1,11 @@
 [(#REM) <!-- Navigation dans les blocs configurables de la page --> ]
-[(#SET{blocs,[(#NOIZETIER_LISTE_PAGES{#ENV{page,#OBJET}}|table_valeur{blocs})]})]
+
+#SET{blocs, #ENV{page, #ENV{objet}}|noizetier_lister_pages|table_valeur{blocs}}
 #SET{bloc_affiche, #ENV{bloc}|sinon{#GET{blocs}|array_keys|reset}}
+[(#ENV{page}|?{
+	#SET{url_base, #URL_ECRIRE{#ENV{exec}}|parametre_url{page, #ENV{page}}},
+	#SET{url_base, #URL_ECRIRE{#ENV{exec}}|parametre_url{objet, #ENV{objet}}|parametre_url{id_objet, #ENV{id_objet}}}
+})]
 
 <B_blocs>
 <br class="clear" />
@@ -8,8 +13,7 @@
 <ul class="liste-items sous_navigation">
 <BOUCLE_blocs(DATA){source table, #GET{blocs}}>
 	[<li class="item">
-		(#URL_ECRIRE{#ENV{exec}}
-			|parametre_url{page, #ENV{page}}
+		(#GET{url_base}
 			|parametre_url{bloc, #CLE}
 			|lien_ou_expose{
 				#VALEUR|table_valeur{nom},

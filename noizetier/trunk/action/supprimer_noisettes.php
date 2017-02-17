@@ -42,12 +42,12 @@ function action_supprimer_noisettes_dist() {
 	if ($arguments) {
 		$bloc = '';
 		$contexte = 'page';
-		if (strpos($arguments, '|') !== false) {
+		if (strpos($arguments, '/') !== false) {
 			// L'action consiste à supprimer les noisettes d'un bloc donné.
 			// On extrait le bloc et on renvoie dans $arguments uniquement l'élément
 			// concerné par la suppression.
-			list($arguments, $bloc) = explode('|', $arguments);
-			list($bloc, ) = explode(':', $bloc);
+			list($arguments, $bloc) = explode('/', $arguments);
+			list(, $bloc) = explode(':', $bloc);
 			$contexte = 'bloc';
 		}
 
@@ -104,7 +104,7 @@ function supprimer_noisettes($contexte, $objet, $bloc) {
 		if (isset($objet['type'])) {
 			// Suppression des noisettes d'un objet d'un type donnée
 			$where[] = 'objet=' . sql_quote($objet['type']);
-			$where[] = 'id_objet=' . intval($objet['type']);
+			$where[] = 'id_objet=' . intval($objet['id']);
 			$invalideur = "id='{$objet['type']}/{$objet['id']}'";
 		} else {
 			// Suppression des noisettes d'une page.
