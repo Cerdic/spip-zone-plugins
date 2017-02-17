@@ -19,21 +19,13 @@
 [(#SET{url,#URL_ARTICLE})]
 [(#SET{logo,''})]
 [(#LOGO_ARTICLE|oui)
-	[(#SET{logo,[(#LOGO_ARTICLE
-		|image_reduire{2400,1260}
-		|image_recadre{1.91:1,'-','center'}
-		|extraire_attribut{src})]
-	})]
+	[(#SET{logo, #LOGO_ARTICLE})]
 ]
 <BOUCLE_illus(DOCUMENTS){id_article}{extension IN jpg,gif,png}
 						{largeur>=200}{hauteur>=200}{!par date}{0,1}
 						{si #LOGO_ARTICLE|non}>
-[(#SET{logo,[(#FICHIER
-	|image_reduire{2400,1260}
-	|image_recadre{1.91:1,'-','center'}
-	|extraire_attribut{src}
-	)]
-})]</BOUCLE_illus>
+	[(#SET{logo,[(#FICHIER)]})]
+</BOUCLE_illus>
 
 
 [(#REM)
