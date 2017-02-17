@@ -1,11 +1,18 @@
 [(#AUTORISER{configurer,noizetier}|sinon_interdire_acces)]
 <BOUCLE_noisette(NOISETTES){id_noisette}>
 [(#OBJET|et{#ID_OBJET}|?{
-	[(#SET{redirect,#URL_ECRIRE{noizetier_page}|parametre_url{objet,#OBJET}|parametre_url{id_objet,#ID_OBJET}|ancre_url{noisette-#ID_NOISETTE}})],
-	[(#SET{redirect,[(#URL_ECRIRE{noizetier_page,page=#TYPE[-(#COMPOSITION)]#noisette-#ID_NOISETTE})]})]
-})]
+	[(#SET{redirect, [(#URL_ECRIRE{noizetier_page}
+						|parametre_url{objet,#OBJET}
+						|parametre_url{id_objet,#ID_OBJET}
+						|parametre_url{bloc,#BLOC}
+						|ancre_url{noisette-#ID_NOISETTE})]})],
+	[(#SET{redirect, [(#URL_ECRIRE{noizetier_page}
+						|parametre_url{page, #TYPE[-(#COMPOSITION)]}
+						|parametre_url{bloc,#BLOC}
+						|ancre_url{noisette-#ID_NOISETTE})]})]}
+)]
 
-#SET{redirect,#ENV{redirect}|sinon{#GET{redirect}}}
+#SET{redirect, #ENV{redirect}|sinon{#GET{redirect}}}
 <div class='cadre-formulaire-editer'>
 <div class="entete-formulaire">
 	[(#GET{redirect}|icone_verticale{<:noizetier:retour:>,page-noisettes-24,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
