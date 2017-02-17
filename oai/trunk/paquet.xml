@@ -1,7 +1,7 @@
 <paquet
 	prefix="oai"
 	categorie="divers"
-	version="1.1.3"
+	version="1.1.4"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="oai_logo.png"
@@ -14,4 +14,6 @@
 	<credit lien="http://wiki.eprints.org/w/OAI_XSLT">Christopher Gutteridge, University of Southampton</credit>
 	
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+	
+	<menu nom="depots_oai" titre="oai:icone_voir_depots" parent="menu_publication" icone="images/oai-16.png" action="depots_oai" />
 </paquet>

@@ -25,6 +25,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_norecordsmatch' => 'Aucun enregistrement ne correspond à ces critères.',
 	'erreur_nosethierarchy' => 'Ce dépôt n’a aucune catégorie.',
 	
+	// I
+	'icone_voir_depots' => 'Entrepôts OAI',
+	
 	// T
 	'titre_page_configurer_oai' => 'Configurer OAI',
+	'titre_page_depots' => 'Entrepôts OAI',
 );
