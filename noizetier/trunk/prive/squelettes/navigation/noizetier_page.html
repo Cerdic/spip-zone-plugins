@@ -1,8 +1,12 @@
 [(#ENV{exec}|=={noizetier_page}|et{#AUTORISER{configurer,noizetier}}|oui)
+	[(#REM) Liste des blocs configurables pour la page en cours ]
+	<INCLURE{fond=prive/squelettes/inclure/inc-blocs, env} />
+
+	[(#REM) Liste des noisettes disponibles ]
 	#SET{titre,#VAL{noizetier:noisettes_disponibles}|_T}
 	#BOITE_OUVRIR{#GET{titre},'info noisettes_disponibles none'}
 	<p><:noizetier:explication_glisser_deposer:></p>
-	<INCLURE{fond=formulaires/inc-liste_noisettes_disponibles,page,objet,id_objet,ordre=oui}>
+	<INCLURE{fond=formulaires/inc-liste_noisettes_disponibles,page,objet,id_objet,ordre=oui} />
 	#BOITE_FERMER
 	<script type="text/javascript">/*<!\[CDATA\[*/
 		jQuery('.noisettes_disponibles').show();

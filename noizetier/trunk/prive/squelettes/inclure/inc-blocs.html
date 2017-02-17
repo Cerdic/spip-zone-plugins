@@ -1,0 +1,20 @@
+[(#REM) <!-- Navigation dans les blocs configurables de la page --> ]
+[(#SET{blocs,[(#NOIZETIER_LISTE_PAGES{#ENV{page,#OBJET}}|table_valeur{blocs})]})]
+#SET{bloc_affiche, #ENV{bloc}|sinon{#GET{blocs}|array_keys|reset}}
+
+<B_blocs>
+<br class="clear" />
+[<h3>(#VAL{noizetier:menu_blocs}|_T)</h3>]
+<ul class="liste-items sous_navigation">
+<BOUCLE_blocs(DATA){source table, #GET{blocs}}>
+	[<li class="item">
+		(#URL_ECRIRE{#ENV{exec}}
+			|parametre_url{page, #ENV{page}}
+			|parametre_url{bloc, #CLE}
+			|lien_ou_expose{
+				#VALEUR|table_valeur{nom},
+				#CLE|=={#GET{bloc_affiche}}})
+	</li>]
+</BOUCLE_blocs>
+</ul>
+</B_blocs>

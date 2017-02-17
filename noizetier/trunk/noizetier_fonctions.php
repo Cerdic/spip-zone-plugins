@@ -509,6 +509,8 @@ function noizetier_supprimer_noisette($id_noisette) {
 	}
 }
 
+
+
 /**
  * Ajoute une noisette à un bloc d'une page
  *
@@ -818,9 +820,11 @@ function noizetier_supprimer_composition($page) {
 /**
  * Renvoie le type d'une page.
  *
- * @param text $page
+ * @param string $page
+ * 		L'id de la page (cad le nom du fichier sans extension).
  *
- * @return text
+ * @return string
+ * 	Le type de la page choisie, c'est-à-dire
  */
 function noizetier_page_type($page) {
 	$type_compo = explode('-', $page, 2);
@@ -829,17 +833,19 @@ function noizetier_page_type($page) {
 }
 
 /**
- * Renvoie la composition d'une page.
+ * Renvoie la composition d'une page si elle existe.
  *
- * @param text $page
+ * @param string $page
+ * 		L'id de la page (cad le nom du fichier sans extension).
  *
- * @return text
+ * @return string
+ * 		La composition de la page choisie ou la chaine vide sinon.
  */
 function noizetier_page_composition($page) {
-	$type_compo = explode('-', $page, 2);
-	$type_compo = isset($type_compo[1]) ? $type_compo[1] : '';
+	$composition = explode('-', $page, 2);
+	$composition = isset($composition[1]) ? $composition[1] : '';
 
-	return $type_compo;
+	return $composition;
 }
 
 /**
@@ -925,17 +931,32 @@ function noizetier_lister_icones() {
 
 /**
  * Teste si une page fait partie des compositions du noizetier.
+ * Les compositions du noizetier sont enregistrées dans une meta.
  *
- * @param text $page
+ * @param string $page
+ * 		L'id de la page (cad le nom du fichier sans extension).
  *
- * @return text
+ * @return boolean
+ * 		Vrai si la page fait bien partie des compositions du noizetier, false sinon.
  */
 function noizetier_test_compo_noizetier($page) {
-	$compos = isset($GLOBALS['meta']['noizetier_compositions']) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
-	$type = noizetier_page_type($page);
-	$composition = noizetier_page_composition($page);
+	$page_est_composition = false;
 
-	return (isset($compos[$type][$composition]) and is_array($compos[$type][$composition])) ? 'on' : '';
+	$compositions_enregistrees =
+		isset($GLOBALS['meta']['noizetier_compositions'])
+		? unserialize($GLOBALS['meta']['noizetier_compositions'])
+		: array();
+
+	if ($compositions_enregistrees) {
+		$type = noizetier_page_type($page);
+		$composition = noizetier_page_composition($page);
+		$page_est_composition =
+			(isset($compositions_enregistrees[$type][$composition]) and is_array($compositions_enregistrees[$type][$composition]))
+			? true
+			: false;
+	}
+
+	return $page_est_composition;
 }
 
 /**

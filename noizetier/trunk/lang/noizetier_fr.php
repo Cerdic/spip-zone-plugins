@@ -82,7 +82,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_nouvelle_composition' => 'Nouvelle composition',
 	'formulaire_obligatoire' => 'Champs obligatoire',
 	'formulaire_supprimer_noisette' => 'Supprimer cette noisette',
-	'formulaire_supprimer_noisettes_page' => 'Supprimer les noisettes de cette page',
+	'formulaire_supprimer_noisettes_bloc' => 'Supprimer les noisettes du bloc',
+	'formulaire_supprimer_noisettes_page' => 'Supprimer les noisettes de la page',
 	'formulaire_supprimer_page' => 'Supprimer cette page',
 	'formulaire_type' => 'Type de page',
 	'formulaire_type_explication' => 'Indiquez sur quel objet porte cette composition ou si vous souhaitez créer une page autonome.',
@@ -120,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mode_noisettes' => 'Éditer les noisettes',
 	'modif_en_cours' => 'Modifications en cours',
 	'modifier_dans_prive' => 'Modifier dans l’espace privé',
+	'menu_blocs' => 'Blocs configurables',
 
 	// N
 	'ne_pas_definir_d_heritage' => 'Ne pas définir d’héritage',
