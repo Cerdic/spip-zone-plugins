@@ -233,7 +233,7 @@ function action_api_oai_dist(){
 	$retour .= '</OAI-PMH>';
 	
 	header('Status: 200 OK');
-	header("Content-type: text/xml; charset=utf-8");
+	header("Content-type: text/xml");
 	echo $retour;
 	exit;
 }
