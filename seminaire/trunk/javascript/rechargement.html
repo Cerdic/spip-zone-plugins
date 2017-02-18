@@ -1,5 +1,6 @@
+#SET{debut,#DATE_DEBUT|affdate{"n"}}
 <script type="text/javascript">
 $(document).ready(function(){
-	$('#calendrier').fullCalendar('gotoDate',[(#DATE_DEBUT|affdate{"Y"})][,(#DATE_DEBUT|affdate{"n"})-1]);
+	$('#calendrier').fullCalendar('gotoDate',[(#DATE_DEBUT|affdate{"Y"})],#EVAL{#GET{debut}-1});
 });
 </script>

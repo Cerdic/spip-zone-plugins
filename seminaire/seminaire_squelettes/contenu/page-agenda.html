@@ -15,9 +15,13 @@
 
   <div class='plier_deplier'><a href='#' onclick='jQuery(".renseignements").show();return false;' class='noajax'><:seminaire:lien_tout_deplier:></a> | <a href='#' onclick='jQuery(".renseignements").hide();return false;' class='noajax'><:seminaire:lien_tout_replier:></a></div>
 
-  <BOUCLE_mot_evenement(MOTS){type=Type}>
-    <BOUCLE_mot_articles(MOTS){type=Catégorie}>
-      <BOUCLE_article_evenement(ARTICLES){titre_mot=#TITRE}{par num titre}{inverse}>
+
+
+
+
+  <BOUCLE_mot_evenement(MOTS){type=Type de séminaire}>[(#REM) on récupère d'abord la liste des types d'événements]
+    <BOUCLE_mot_articles(MOTS){type=Catégorie de séminaire}>
+      <BOUCLE_article_evenement(ARTICLES){titre_mot=#TITRE}{par num titre}{inverse}>[(#REM) on récupère densuite les articles de la catégorie qui présentent des événements de ce type]
         <B_ev>
           <div class="type[ mot(#_mot_evenement:ID_MOT)]">
             [<h3 class="agenda">(#_mot_evenement:TITRE|entites_html|unique)</h3>]
