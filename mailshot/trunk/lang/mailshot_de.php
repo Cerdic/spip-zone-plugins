@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_exemple' => 'Beispiel',
-	'cfg_exemple_explication' => 'Erläuterung des Beispiels',
+	'cfg_exemple_explication' => 'Erläuterung dieses Beispiels',
 	'cfg_titre_parametrages' => 'Mailings konfigurieren',
 
 	// E
