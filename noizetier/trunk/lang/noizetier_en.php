@@ -82,7 +82,7 @@ nuts on the following pages:',
 	'formulaire_nouvelle_composition' => 'New composition',
 	'formulaire_obligatoire' => 'Required field',
 	'formulaire_supprimer_noisette' => 'Delete this nuts',
-	'formulaire_supprimer_noisettes_page' => 'Delete the nuts of this page',
+	'formulaire_supprimer_noisettes_page' => 'Delete the nuts of this page', # MODIF
 	'formulaire_supprimer_page' => 'Delete this page',
 	'formulaire_type' => 'Page type',
 	'formulaire_type_explication' => 'Indicate on which object does this composition apply or if you wish to create a specific page.',

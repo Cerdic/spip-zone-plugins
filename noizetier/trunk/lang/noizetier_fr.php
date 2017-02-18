@@ -118,10 +118,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'masquer' => 'Masquer',
+	'menu_blocs' => 'Blocs configurables',
 	'mode_noisettes' => 'Éditer les noisettes',
 	'modif_en_cours' => 'Modifications en cours',
 	'modifier_dans_prive' => 'Modifier dans l’espace privé',
-	'menu_blocs' => 'Blocs configurables',
 
 	// N
 	'ne_pas_definir_d_heritage' => 'Ne pas définir d’héritage',
