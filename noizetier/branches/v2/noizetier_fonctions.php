@@ -335,6 +335,39 @@ function noizetier_lister_pages($page_specifique = '') {
 	}
 }
 
+
+/**
+ * Lister les tables d'objets SPIP qui ne peuvent pas être configurées avec des noisettes
+ * car elles ne possèdent pas de page compatible.
+ *
+ * @return array|null
+ * 		Tableau des tables d'objets à exclure sous la forme spip_xxxx.
+ */
+function noizetier_lister_objets_exclus() {
+
+	static $exclusions = null;
+
+	if (is_null($exclusions)) {
+		$exclusions = array();
+		include_spip('base/objets');
+
+		// On récupère les tables d'objets sous la forme spip_xxxx.
+		$tables = lister_tables_objets_sql();
+		$tables = array_keys($tables);
+
+		// On récupère la liste des pages disponibles et on transforme le type d'objet en table SQL.
+		$pages = noizetier_lister_pages();
+		$pages = array_keys($pages);
+		$pages = array_map('table_objet_sql', $pages);
+
+		// On exclut donc les tables qui ne sont pas dans la liste issues des pages.
+		$exclusions = array_diff($tables, $pages);
+	}
+
+	return $exclusions;
+}
+
+
 /**
  * Charger les informations d'une page, contenues dans un xml de config s'il existe.
  *
