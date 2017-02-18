@@ -233,6 +233,8 @@ function noizetier_obtenir_dossier_pages() {
 	elseif (isset($GLOBALS['z_blocs'])) {
 		$premier_bloc = reset($GLOBALS['z_blocs']);
 		$repertoire_pages = "$premier_bloc/";
+	} else {
+		$repertoire_pages = 'contenu/';
 	}
 
 	return $repertoire_pages;
