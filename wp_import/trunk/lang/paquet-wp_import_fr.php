@@ -8,5 +8,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'wp_import_description' => "Importer la sauvegarde XML d'un site Wordpress dans votre site SPIP."
 	
 );
-
-?>
