@@ -23,50 +23,9 @@ include_spip('inc/foundation');
  * @return string
  */
 function filtre_responsive_embed_dist($texte) {
-
-	if (!empty($texte)) {
-		$dom = new DomDocument;
-
-		// Charger le texte de l'article dans DOMDocument
-		$dom->LoadHTML($texte, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD | LIBXML_NOENT);
-
-		// Récupérer les iframes du document
-		$iframes = $dom->getElementsByTagName('iframe');
-
-		// Créer la div qui contiendra l'iframe et lui ajouter les class
-		// foundation
-		$div = $dom->createElement('div');
-		$div->setAttribute('class', 'responsive-embed flex-video');
-
-		// On boucle sur toutes les iframes
-		foreach ($iframes as $iframe) {
-			// Faire une copie de la div responsive
-			$div_clone = $div->cloneNode();
-
-			// Récupérer la largeur et la hauteur définie dans l'iFrame
-			$height = $iframe->getAttribute('height');
-			$width = $iframe->getAttribute('width');
-
-			// Définir s'il faut ajouter la class widescreen ou non
-			if ($height and $width) {
-				$ratio = intval($width)/intval($height);
-				$ratio_4_3 = 4/3;
-
-				if ($ratio > $ratio_4_3) {
-					$div_clone->setAttribute('class', 'responsive-embed flex-video widescreen');
-				}
-			}
-
-			// Injecter la div à la place de l'iframe
-			$iframe->parentNode->replaceChild($div_clone, $iframe);
-			// Injecter l'iframe dans le div
-			$div_clone->appendChild($iframe);
-		}
-
-		return $dom->saveHTML();
-	}
-
-	return $texte;
+	include_spip('inc/foundation');
+	// On détecte toute les iFrames et on les rends responsives.
+	return preg_replace_callback('%<iframe(.+)></iframe>%s', 'responsive', $texte);
 }
 
 
