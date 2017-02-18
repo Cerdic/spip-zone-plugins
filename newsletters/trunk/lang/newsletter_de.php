@@ -14,12 +14,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'explication_baked' => 'Erweiterte Bearbeitung: Sie können den HTML-Code des Newsletters direkt bearbeiten. Danach wird er nicht mehr automatisch erzeugt. Wenn Sie in den Standardmodus zurückschalten, gehen Ihre Änderungen verloren.',
-	'explication_baked_publie' => 'Dieser Newsletter ist erstellt: Sie können den HTM-Code oder den Text korrigieren, ihn aber nicht mehr über die Oberfläche bearbeiten.',
+	'explication_baked_publie' => 'Dieser Newsletter ist erstellt: Sie können seinen HTML-Code oder Text korrigieren, jedoch nicht seine Einleitung ändern oder ihn erneut aus seiner Vorlage generieren.',
 	'explication_html_page_vide' => 'Ermöglicht im WWW eine andere Fassung des Newsletters als die per Mail verschickte anzuzeigen. Lassen sie das Feld leer, wenn beide Fassungen identisch seien sollen.',
 
 	// I
 	'icone_creer_newsletter' => 'Newsletter anlegen',
-	'icone_dupliquer_newsletter' => 'Deisen Newsletter duplizieren',
+	'icone_dupliquer_newsletter' => 'Diesen Newsletter duplizieren',
 	'icone_modifier_newsletter' => 'Diesen Newsletter bearbeiten',
 	'info_1_mailsubscriber' => '1 Abonnent',
 	'info_1_newsletter' => '1 Newsletter',
@@ -59,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_texte' => 'Text',
 	'label_texte_email' => 'Textversion',
 	'label_titre' => 'Titel',
-	'legend_configuration_adresse_envoi' => 'Absendeadresse für den Versand dieses Newsletters',
+	'legend_configuration_adresse_envoi' => 'Absenderadresse dieses Newsletters',
 	'lien_lire_en_ligne' => 'Im WWW lesen',
 
 	// R
