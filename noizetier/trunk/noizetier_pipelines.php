@@ -318,3 +318,52 @@ function noizetier_affiche_milieu($flux) {
 
 	return $flux;
 }
+
+
+
+/**
+ * Ajout de bulles de compagnon sur les pages de listing des pages et objets supportant des noisettes.
+ *
+ * @param array $flux
+ * 		Données du pipeline
+ *
+ * @return array
+ * 		Données du pipeline mises à jour
+**/
+function noizetier_compagnon_messages($flux) {
+
+	$exec = $flux['args']['exec'];
+	$pipeline = $flux['args']['pipeline'];
+	$aides = &$flux['data'];
+
+	switch ($pipeline) {
+		case 'affiche_milieu':
+			switch ($exec) {
+				case 'noizetier_pages':
+				case 'noizetier_objets':
+					// Rappeler l'utilité du plugin Compositions si celui-ci n'est pas actif
+					if (!defined('_DIR_PLUGIN_COMPOSITIONS')) {
+						$aides[] = array(
+							'id'      => 'composition',
+							'titre'   => _T('noizetier:noizetier'),
+							'texte'   => _T('noizetier:compositions_non_installe'),
+							'statuts' => array('1comite', '0minirezo', 'webmestre')
+						);
+					}
+
+					// Rappeler l'utilité du plugin IEconfig si celui-ci n'est pas actif
+					if (!defined('_DIR_PLUGIN_IECONFIG')) {
+						$aides[] = array(
+							'id'      => 'ieconfig',
+							'titre'   => _T('noizetier:noizetier'),
+							'texte'   => _T('noizetier:ieconfig_non_installe'),
+							'statuts' => array('1comite', '0minirezo', 'webmestre')
+						);
+					}
+					break;
+			}
+			break;
+	}
+
+	return $flux;
+}

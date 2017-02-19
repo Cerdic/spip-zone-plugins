@@ -36,6 +36,7 @@
 	<pipeline nom="affiche_milieu" inclure="noizetier_pipelines.php" />
 	<pipeline nom="boite_infos" inclure="noizetier_pipelines.php" />
 	<pipeline nom="formulaire_fond" inclure="noizetier_pipelines.php" />
+	<pipeline nom="compagnon_messages" inclure="noizetier_pipelines.php" />
 
 	<necessite nom="yaml" compatibilite="[1.5.2;[" />
 	<necessite nom="saisies" compatibilite="[2.2.3;[" />
