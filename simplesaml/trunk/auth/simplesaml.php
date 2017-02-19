@@ -27,7 +27,7 @@ function simplesaml_auth_loger() {
 	}
 
 	$nameid     = $simplesaml->getAuthData('saml:sp:NameID');
-	$nameid     = $nameid['Value'];
+	$nameid     = is_array($nameid) ? $nameid['Value'] : $nameid->value;
 
 	$attributes = $simplesaml->getAttributes();
 	$login      = $attributes['uid'][0];

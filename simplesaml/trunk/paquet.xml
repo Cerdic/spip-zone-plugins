@@ -1,7 +1,7 @@
 <paquet
 	prefix="simplesaml"
 	categorie="auteur"
-	version="1.0.2"
+	version="1.0.3"
 	etat="test"
 	compatibilite="[3.1.0-rc;3.1.*]"
 	logo="prive/themes/spip/images/simplesaml-64.png"
