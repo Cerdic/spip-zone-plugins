@@ -1,0 +1,15 @@
+[(#REM) <!-- Navigation dans les pages ou les objets --> ]
+
+<B_menu_pages>
+<ul class="liste-items sous_navigation">
+<BOUCLE_menu_pages(DATA){source table, #LISTE{pages, objets}}>
+	#SET{page_exec, #VAL{noizetier_}|concat{#VALEUR}}
+	[<li class="item">
+		(#URL_ECRIRE{#GET{page_exec}}
+			|lien_ou_expose{
+				[(#VAL{noizetier:liste_}|concat{#VALEUR}|_T)],
+				#GET{page_exec}|=={#ENV{exec}}})
+	</li>]
+</BOUCLE_menu_pages>
+</ul>
+</B_menu_pages>

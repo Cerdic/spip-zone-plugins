@@ -1,3 +1,8 @@
+[(#REM) Menu permettant d'accéder :
+	- à la liste des pages (défaut)
+	- ou à la liste des objets possédant des noisettes spécifiques ]
+<INCLURE{fond=prive/squelettes/inclure/inc-nav_pages, env} />
+
 [(#PLUGIN{ieconfig}|oui)
 #BOITE_OUVRIR{'','simple'}
 	[(#URL_ECRIRE{ieconfig_export}|icone_horizontale{<:noizetier:editer_exporter_configuration:>,config-export})]

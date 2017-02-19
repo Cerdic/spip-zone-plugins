@@ -225,7 +225,6 @@ function noizetier_charger_contexte_noisette($noisette) {
  * 		Le répertoire des pages sous la forme dossier/.
  */
 function noizetier_obtenir_dossier_pages() {
-	$repertoire_pages = '';
 
 	if (defined('_NOIZETIER_REPERTOIRE_PAGES')) {
 		$repertoire_pages = _NOIZETIER_REPERTOIRE_PAGES;
@@ -333,6 +332,84 @@ function noizetier_lister_pages($page_specifique = '') {
 	} else {
 		return $liste_pages;
 	}
+}
+
+
+/**
+ * Lister les pages et les compositions spécifiques au noizetier pouvant recevoir des noisettes.
+ * Le tableau de resultats peut-etre modifie via le pipeline noizetier_lister_pages.
+ *
+ * @param string $page_specifique
+ * 		Id d'une page précise ou chaine vide.
+ *
+ * @return array
+ * 		Si un id de page valide est fourni, on renvoie le tableau des éléments de cette page.
+ * 		Sinon, on renvoie le tableau de toutes les pages, chaque index étant l'id de la page.
+ */
+function noizetier_lister_objets($objet = '', $id_objet = 0) {
+	static $liste_objets = null;
+
+	if (is_null($liste_objets)) {
+		$liste_objets = array();
+
+		// On récupère chaque objet ayant des noisettes dans la table spip_noisettes.
+		$from = array('spip_noisettes');
+		$select = array('objet', 'id_objet', "count(noisette) as 'noisettes'");
+		$where = array('id_objet>0');
+		$group = array('objet', 'id_objet');
+		$objets = sql_allfetsel($select, $from, $where, $group);
+		if ($objets and is_array($objets)) {
+			include_spip('inc/quete');
+			include_spip('base/objets');
+			foreach ($objets as $_objet) {
+				// On calcule le titre de l'objet à partir de la fonction idoine
+				$titre = generer_info_entite($_objet['id_objet'], $_objet['objet'], 'titre');
+				// On recherche le logo de l'objet si il existe sinon on stocke le logo du type d'objet
+				// (le chemin complet)
+				$logo = '';
+				if ($_objet['objet'] != 'document') {
+					$logo_infos = quete_logo(id_table_objet($_objet['objet']), 'on', $_objet['id_objet'], 0, false);
+					$logo = isset($logo_infos['src']) ? $logo_infos['src'] : '';
+				}
+				if (!$logo) {
+					$logo = noizetier_chemin_icone($_objet['objet'] . '.png');
+				}
+
+				$liste_objets[$_objet['objet']][$_objet['id_objet']] =
+					array('noisettes' => $_objet['noisettes'], 'titre' => $titre, 'logo' => $logo);
+			}
+		}
+	}
+
+	if ($objet and $id_objet and isset($liste_objets[$objet][$id_objet])) {
+		return $liste_objets[$objet][$id_objet];
+	} else {
+		return $liste_objets;
+	}
+}
+
+function noizetier_lister_objets_exclus() {
+
+	static $exclusions = null;
+
+	if (is_null($exclusions)) {
+		$exclusions = array();
+		include_spip('base/objets');
+
+		// On récupère les tables d'objets sous la forme spip_xxxx.
+		$tables = lister_tables_objets_sql();
+		$tables = array_keys($tables);
+
+		// On récupère la liste des pages disponibles et on transforme le type d'objet en table SQL.
+		$pages = noizetier_lister_pages();
+		$pages = array_keys($pages);
+		$pages = array_map('table_objet_sql', $pages);
+
+		// On exclut donc les tables qui ne sont pas dans la liste issues des pages.
+		$exclusions = array_diff($tables, $pages);
+	}
+
+	return $exclusions;
 }
 
 /**

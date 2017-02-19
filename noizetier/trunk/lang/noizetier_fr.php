@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_exporter_configuration' => 'Exporter la configuration',
 	'editer_importer_configuration' => 'Importer une config.',
 	'editer_noizetier_explication' => 'Sélectionnez la page dont vous souhaitez configurer les noisettes.',
+	'editer_noizetier_explication_objets' => 'Sélectionnez l\'objet dont vous souhaitez configurer les noisettes.',
 	'editer_noizetier_titre' => 'Gérer les noisettes',
 	'editer_nouvelle_page' => 'Créer une nouvelle page / composition',
 	'erreur_aucune_noisette_selectionnee' => 'Vous devez sélectionner une noisette !',
@@ -114,6 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_titre_noisette' => 'Titre de la noisette :',
 	'label_titre_noisette_perso' => 'Titre personnalisé :',
 	'liste_icones' => 'Liste d’icônes',
+	'liste_objets' => 'Liste des objets',
 	'liste_pages' => 'Liste des pages',
 
 	// M
