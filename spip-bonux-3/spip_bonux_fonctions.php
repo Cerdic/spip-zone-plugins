@@ -63,7 +63,7 @@ if (!function_exists('push_table_valeur')) {
  *
  * Attention, cette fonction est bien un "push", c'est-à-dire qu'elle ajoute un élément à la fin d'une liste.
  *
- * #TABLEAU|push_table_valeur{a/b/c, valeur, #CONDITION}
+ * `#TABLEAU|push_table_valeur{a/b/c, valeur, #CONDITION}`
  * - si la clé "c" est une liste : on ajoute "valeur" à la fin
  * - si la clé "c" n'existe pas : on crée une liste et on met la première valeur dedans
  * - si la clé "c" est un scalaire : on ne fait rien
