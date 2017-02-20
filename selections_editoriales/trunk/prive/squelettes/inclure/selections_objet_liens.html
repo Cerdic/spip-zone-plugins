@@ -1,10 +1,9 @@
-#BOITE_OUVRIR
+[(#BOITE_OUVRIR{<:selection:titre_selections:>, simple})]
 <div id='selections' class='selections-lies'>
 <div class="ajax">
 	#FORMULAIRE_EDITER_LIENS{selections,#ENV{objet},#ENV{id_objet},oui}
 </div>
 <B_selections>
-<h2 class="titrem"><:selection:titre_selections:></h2>
 <BOUCLE_selections(SELECTIONS){objet}{id_objet}{par num titre,titre}>
 <INCLURE{fond=prive/squelettes/inclure/editer_selections_contenus, id_selection, editer_selection=oui, env, ajax=selection#ID_SELECTION}>
 </BOUCLE_selections>
