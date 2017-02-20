@@ -47,7 +47,7 @@
 		</BOUCLE_contenus>
 		<div class="item"><:selections_contenu:info_aucun_selections_contenu:></div>
 		<//B_contenus>
-		[(#ENV{editer_contenu}|=={new}|et{#ENV{id_section_contenu}|=={#ID_SELECTION}}||et{#AUTORISER{creerselectionscontenudans,selection,#ENV{id_selection}}})
+		[(#ENV{editer_contenu}|=={new}|et{#ENV{id_selection_contenu}|=={#ID_SELECTION}}||et{#AUTORISER{creerselectionscontenudans,selection,#ENV{id_selection}}})
 		<div class="ajax">
 			#FORMULAIRE_EDITER_SELECTIONS_CONTENU{new,#ID_SELECTION}
 		</div>]
