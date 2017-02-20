@@ -177,7 +177,7 @@ function selections_editoriales_afficher_complement_objet($flux) {
 				'editer_contenu' => _request('editer_contenu'),
 				'editer_contenu_logo' => _request('editer_contenu_logo'),
 			),
-			array('ajax'=>'selections')
+			array('ajax'=>true)
 		);
 	}
 	return $flux;

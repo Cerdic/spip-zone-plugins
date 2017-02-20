@@ -47,20 +47,18 @@
 		</BOUCLE_contenus>
 		<div class="item"><:selections_contenu:info_aucun_selections_contenu:></div>
 		<//B_contenus>
-		[(#ENV{editer_contenu}|=={new}|et{#AUTORISER{creerselectionscontenudans,selection,#ENV{id_selection}}})
+		[(#ENV{editer_contenu}|=={new}|et{#ENV{id_section_contenu}|=={#ID_SELECTION}}||et{#AUTORISER{creerselectionscontenudans,selection,#ENV{id_selection}}})
 		<div class="ajax">
 			#FORMULAIRE_EDITER_SELECTIONS_CONTENU{new,#ID_SELECTION}
-		</div>
-		]
+		</div>]
 	</div>
 
-	[(#ENV{editer_contenu,non}|=={non}|et{#AUTORISER{creerselectionscontenudans,selection,#ENV{id_selection}}})
+	[(#ENV{editer_contenu,non}|=={non}|ou{#ENV{editer_contenu,non}|=={new}|et{#ENV{id_section_contenu}|!={#ID_SELECTION}}}|et{#AUTORISER{creerselectionscontenudans,selection,#ENV{id_selection}}})
 	#BOITE_PIED{act}
-	[(#AUTORISER{supprimer,selection,#ID_SELECTION}|oui)[(#BOUTON_ACTION{<:selection:bouton_supprimer_selection:>,#URL_ACTION_AUTEUR{supprimer_selection,#ID_SELECTION,#SELF},ajax,'','',[(#ID_SELECTION|oui)(function(){$('#editer_selections_contenus-[(#ID_SELECTION)]').ajaxReload();return true;})()]})]]
-	[(#AUTORISER{dissocierselections,#OBJET,#ID_OBJET}|et{#ENV{vu}|=={non}}|oui)[(#BOUTON_ACTION{<:selection:bouton_enlever_selection:>,#URL_ACTION_AUTEUR{dissocier_selection,#ID_OBJET-#OBJET-#ID_SELECTION--safe,#SELF},ajax,'','',[(#ID_SELECTION|oui)(function(){$('#editer_selections_contenus-[(#ID_SELECTION)]').ajaxReload();return true;})()]})]]
-	<a class="ajax" href="[(#SELF|parametre_url{editer_contenu,new})]"><:selections_contenu:texte_ajouter_selections_contenu:></a>
+	[(#AUTORISER{supprimer,selection,#ID_SELECTION}|oui)[(#BOUTON_ACTION{<:selection:bouton_supprimer_selection:>,#URL_ACTION_AUTEUR{supprimer_selection,#ID_SELECTION,#SELF},ajax})]]
+	[(#AUTORISER{dissocierselections,#OBJET,#ID_OBJET}|et{#ENV{vu}|=={non}}|oui)[(#BOUTON_ACTION{<:selection:bouton_enlever_selection:>,#URL_ACTION_AUTEUR{dissocier_selection,#ID_OBJET-#OBJET-#ID_SELECTION--safe,#SELF},ajax})]]
+	<a class="ajax" href="[(#SELF|parametre_url{id_section_contenu,#ID_SELECTION}|parametre_url{editer_contenu,new}|ancre_url{editer_selections_contenus-[(#ID_SELECTION)]})]"><:selections_contenu:texte_ajouter_selections_contenu:></a>
 	]
-
 #BOITE_FERMER
 
 <script type="text/javascript">
