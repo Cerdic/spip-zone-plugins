@@ -3,7 +3,7 @@
 	categorie="edition"
 	version="1.2.0"
 	etat="test"
-	compatibilite="[3.0.0;3.*.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/curator-64.png"
 	documentation="http://ydikoi.net/706"
 >
