@@ -1,4 +1,8 @@
-[(#SET{defaut_tri,#ARRAY{
+[(#REM)
+
+	Liste des sélections orphelines (liées à aucun objet)
+
+][(#SET{defaut_tri,#ARRAY{
 	titre,1,
 	identifiant,1,
 	id_selection,1,
@@ -17,7 +21,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_selections(SELECTIONS){auteurs_liens.id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_selections(SELECTIONS){orphelins}{auteurs_liens.id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='titre principale'>[(#LOGO_SELECTION|image_reduire{20,26})]<a href="[(#ID_SELECTION|generer_url_entite{selection})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SELECTION">[(#RANG). ]#TITRE</a></td>
 			<td class='identifiant principale'>#IDENTIFIANT</td>
