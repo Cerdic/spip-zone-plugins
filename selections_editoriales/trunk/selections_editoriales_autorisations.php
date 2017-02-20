@@ -178,6 +178,30 @@ function autoriser_associerselections_dist($faire, $type, $id, $qui, $opt) {
 	return $ok;
 }
 
+/**
+ * Autoriser a dissocier des sélections a un objet :
+ * il faut avoir le droit de modifier cet objet
+ *
+ * @param $faire
+ * @param $type
+ * @param $id
+ * @param $qui
+ * @param $opt
+ * @return bool
+ */
+function autoriser_dissocierselections_dist($faire, $type, $id, $qui, $opt) {
+	include_spip('inc/config');
+	include_spip('base/objets');
+
+	$ok = (
+		$objets = lire_config('selections_editoriales/objets')
+		and is_array($objets)
+		and in_array(table_objet_sql($type), $objets)
+		and autoriser('modifier', $type, $id, $qui, $opt)
+	);
+
+	return autoriser('modifier', $type, $id, $qui, $opt);
+}
 
 // -----------------
 // Objet selections_contenus
