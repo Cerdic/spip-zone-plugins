@@ -27,7 +27,7 @@
 	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
 	<div class="ajax">
 ]
-		[(#FORMULAIRE_EDITER_SELECTION{#ENV{id_selection,oui},#GET{redirect},#ENV{associer_objet}})]
+	[(#FORMULAIRE_EDITER_SELECTION{#ENV{id_selection,oui},#GET{redirect},#ENV{associer_objet}})]
 [(#ENV{retourajax,''}|oui)
 	</div>
 	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
