@@ -32,6 +32,32 @@ function selections_editoriales_formulaire_charger($flux) {
 	return $flux;
 }
 
+
+/**
+ * Insertion dans le pipeline formulaire_traiter (SPIP)
+ *
+ * Dans le formulaire editer_liens, recharger le bloc selections au complet
+ * à l'ajout et suppression de sélections éditoriales
+ *
+ * On est obligé de désactiver le filtre js temporairement pour afficher le message js de
+ * rechargement
+ *
+ * @pipeline formulaire_charger
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function selections_editoriales_formulaire_traiter($flux) {
+	if (
+		$flux['args']['form'] == 'editer_liens'
+		and $flux['args']['args'][0] == 'selections'
+		and (_request('ajouter_lien') || _request('supprimer_lien'))
+	) {
+		$GLOBALS['filtrer_javascript'] = 1;
+		$flux['message_ok'] .= '<script type="text/javascript">if (window.jQuery) ajaxReload("selections");</script>';
+	}
+
+	return $flux;
+}
 /**
  * Insérer du JS à la fin du traiter
  *
