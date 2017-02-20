@@ -51,15 +51,20 @@
 
 		<div class="editer">
 			[(#ENV{logo}|oui)
-			<label for="text_area"><:curator:logo:></label>
-			<input type="checkbox" name="ajouter_logo" value="on" checked="checked"><:curator:ajouter_logo:>
+			<label for="logo"><:curator:logo:></label>
+			<input type="checkbox" name="ajouter_logo" id="logo" value="on" checked="checked"><:curator:ajouter_logo:>
 			<div class="logo"><img src="#ENV{logo}"></div>
 			<input type="hidden" name="logo" value="#ENV{logo}">
+			]
+			[(#ENV{logo}|non)
+			<input type="checkbox" name="ajouter_logo" value="on" checked="checked"><:curator:ajouter_logo:>
+			<label for="logo"><:curator:coller_adresse:></label>
+			<input type="text" name="logo" id="logo">
 			]
 		</div>
 
 		<div class="editer">
-			<label for="text_area"><:info_post_scriptum:></label>
+			<label for="ps"><:info_post_scriptum:></label>
 			<textarea name='ps' id='ps'[ lang='(#LANGUE)'] rows='5' cols='40'>[(#ENV**{ps})]</textarea>
 		</div>
 
