@@ -9,6 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_lien_selection' => 'Ajouter cette sélection éditoriale',
+	'bouton_enlever_selection' => 'Détacher',
+	'bouton_supprimer_selection' => 'Supprimer cette sélection',
 
 	// C
 	'champ_css_explication' => 'Classes css ajoutées a cette sélection.',
@@ -43,6 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_creer_associer_selection' => 'Créer et associer une sélection éditoriale',
 	'titre_langue_selection' => 'Langue de cette sélection éditoriale',
 	'titre_logo_selection' => 'Logo de cette sélection éditoriale',
+	'titre_nouvelle_selection' => 'Nouvelle sélection éditoriale',
 	'titre_selection' => 'Sélection éditoriale',
 	'titre_selection_nouvelle' => 'Sélection',
 	'titre_selections' => 'Sélections éditoriales',
