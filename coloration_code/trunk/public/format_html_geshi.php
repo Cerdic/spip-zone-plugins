@@ -4,7 +4,9 @@
  *  Decompilateur créant une syntaxe avec des <| class='' > pour GESHI 1.0.8 *
 \*****************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -444,4 +446,3 @@ function format_texte_html_geshi ($texte)
 	}
 }
 
-?>

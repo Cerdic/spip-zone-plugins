@@ -6,7 +6,9 @@
  * @package SPIP\Coloration_code\Pipelines
  */
  
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Insertion dans le pipeline header_prive (SPIP)
@@ -18,8 +20,21 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 		Le contenu de la partie css du head modifiée
  */
 function coloration_code_header_prive_css($flux){
-	$css2=find_in_path('prive/themes/spip/coloration_code.css');
-	$flux .= "\n<link rel='stylesheet' type='text/css' href='$css2' id='csscoloration_code'> \n";
+	$css2 = find_in_path('prive/themes/spip/coloration_code.css');
+	$flux .= "\n<link rel='stylesheet' type='text/css' href='$css2' id='csscoloration_code'>\n";
 	return $flux;
 }
-?>
+
+/**
+ *
+ * Inserer des styles
+ *
+ * @param string $flux
+ * @return string
+ */
+function coloration_code_insert_head_css($flux){
+	if ($f = find_in_path('css/coloration_code.css')) {
+		$flux .= '<link rel="stylesheet" href="'.direction_css($f).'" type="text/css" media="all" />';
+	}
+	return $flux;
+}

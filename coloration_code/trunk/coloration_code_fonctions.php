@@ -6,7 +6,9 @@
  * @package SPIP\Coloration_code\Fonctions
  */
  
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // pour interdire globalement et optionnellement le téléchargement associé
 if (!defined('PLUGIN_COLORATION_CODE_TELECHARGE')) {

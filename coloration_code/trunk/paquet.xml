@@ -1,11 +1,11 @@
 <paquet
 	prefix="coloration_code"
 	categorie="edition"
-	version="0.9.5"
+	version="0.9.6"
 	etat="stable"
 	compatibilite="[2.0.0;3.1.*]"
 	logo="coloration-32.png"
-	documentation="http://contrib.spip.net/Coloration-Code"
+	documentation="https://contrib.spip.net/Coloration-Code"
 >
 
 	<nom>Coloration Code</nom>
@@ -14,4 +14,5 @@
 	<auteur>Pierre Andrews (Mortimer)</auteur>
 	<auteur>ARNO*</auteur>
 	<pipeline nom="header_prive_css" inclure="coloration_code_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="coloration_code_pipelines.php" />
 </paquet>
