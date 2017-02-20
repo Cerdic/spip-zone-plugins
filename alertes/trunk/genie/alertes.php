@@ -46,7 +46,7 @@ function genie_alertes_dist($time) {
 			$id_article = $res['id_objet']; //Pour l'instant ça ne gère que les articles
 			$id_auteur = $res['id_auteur'];
 			$article_accessible = true;
-			spip_log('Pour l\'article #' . $id_article . ', on a l\'auteur #' . $id_auteur . ' qui est abo', 'alertes');
+			spip_log('Pour article #' . $id_article . ', on a auteur #' . $id_auteur . ' qui est abo', 'alertes');
 			//On récupere l'email de l'auteur concerné
 			if ($auteur = sql_select('id_auteur,email', 'spip_auteurs', 'id_auteur = ' . intval($id_auteur))) {
 				spip_log('Il y a des abonnes : #' . $id_auteur, 'alertes');
@@ -56,18 +56,18 @@ function genie_alertes_dist($time) {
 					//On va quand même vérifier que l'article existe encore/est en etat publié
 					include_spip('base/objets');
 					$statut = objet_test_si_publie('article', $id_article);
-					//Si accès restreint : vérifions que l'article n'est pas dans une zone limitée pour l'auteur;
+					//Si accès restreint : vérifions que l'article n'est pas dans une zone limité pour l'auteur;
 					if ($acces_restreint == true) {
 						$article_accessible = false; //On repasse à false par défaut
 						spip_log('Il y a acces restreint', 'alertes');
-						//Pour les zones de l'auteur, on regarde si l'article n'est pas dans une des rubriques restreintes
-						if (accesrestreint_article_restreint($id_article, $id_auteur)) {
+						//Pour chacunes des zones de l'auteur, on regarde si l'article n'est pas dans une des rubriques restreinte
+						if ($restreint = accesrestreint_article_restreint($id_article, $id_auteur) and $restreint == false or empty($restreint)) {
 							$article_accessible = true; //Dès qu'on a une zone accessible, on passe à true
 							spip_log('Mais on est dans une zone accessible pour l\'article #' . $id_article,
 								'alertes');
 						}
 					}
-					if (($email) && ($statut == true) && ($article_accessible == true)) {
+					if (!empty(trim($email)) && ($statut == true) && ($article_accessible == true)) {
 						spip_log('On build le mail pour l\'article #' . $id_article, 'alertes');
 						//On build le mail à partir de templates
 						$header_email = recuperer_fond("alertes/header-email-alerte",
@@ -104,7 +104,7 @@ function genie_alertes_dist($time) {
 							spip_log('On n\'a pas de contenu pour l\'article #' . $id_article, 'alertes');
 						}
 					} else {
-						spip_log('Pas d\'email pour |\'auteur #'. $id_auteur . ' ou article #' . $id_article . ' non publie ou inaccessible',
+						spip_log('Pas d\'email pour l\'auteur #' . $id_auteur . ' ou article #' . $id_article . ' non publie ou inaccessible',
 							'alertes');
 						//Auteur sans email ou article non-publié/inexistant/restreint
 						if ($statut != true) {
