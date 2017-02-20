@@ -53,11 +53,11 @@
 		</div>]
 	</div>
 
-	[(#ENV{editer_contenu,non}|=={non}|ou{#ENV{editer_contenu,non}|=={new}|et{#ENV{id_section_contenu}|!={#ID_SELECTION}}}|et{#AUTORISER{creerselectionscontenudans,selection,#ENV{id_selection}}})
+	[(#ENV{editer_contenu,non}|=={non}|ou{#ENV{editer_contenu,non}|=={new}|et{#ENV{id_selection_contenu}|!={#ID_SELECTION}}}|et{#AUTORISER{creerselectionscontenudans,selection,#ENV{id_selection}}})
 	#BOITE_PIED{act}
 	[(#AUTORISER{supprimer,selection,#ID_SELECTION}|oui)[(#BOUTON_ACTION{<:selection:bouton_supprimer_selection:>,#URL_ACTION_AUTEUR{supprimer_selection,#ID_SELECTION,#SELF},ajax})]]
 	[(#AUTORISER{dissocierselections,#OBJET,#ID_OBJET}|et{#ENV{vu}|=={non}}|oui)[(#BOUTON_ACTION{<:selection:bouton_enlever_selection:>,#URL_ACTION_AUTEUR{dissocier_selection,#ID_OBJET-#OBJET-#ID_SELECTION--safe,#SELF},ajax})]]
-	<a class="ajax" href="[(#SELF|parametre_url{id_section_contenu,#ID_SELECTION}|parametre_url{editer_contenu,new}|ancre_url{editer_selections_contenus-[(#ID_SELECTION)]})]"><:selections_contenu:texte_ajouter_selections_contenu:></a>
+	<a class="ajax" href="[(#SELF|parametre_url{id_selection_contenu,#ID_SELECTION}|parametre_url{editer_contenu,new}|ancre_url{editer_selections_contenus-[(#ID_SELECTION)]})]"><:selections_contenu:texte_ajouter_selections_contenu:></a>
 	]
 #BOITE_FERMER
 
