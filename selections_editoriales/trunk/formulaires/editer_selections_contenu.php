@@ -201,7 +201,7 @@ function formulaires_editer_selections_contenu_traiter_dist($id_selections_conte
 		// Animation de ce qu'on vient de modifier
 		$callback = "jQuery('#selection$id_selection-contenu$id_contenu').animateAppend();";
 		// Rechargement du conteneur de la sélection
-		$js = "if (window.jQuery) jQuery(function(){ajaxReload('selection$id_selection', {args:{editer_contenu:'non'}, callback:function(){ $callback }});});";
+		$js = "if (window.jQuery) jQuery(function(){ajaxReload('selections', {args:{editer_contenu:'non'}, callback:function(){ $callback }});});";
 		$js = "<script type='text/javascript'>$js</script>";
 		if (isset($retours['message_erreur'])) {
 			$retours['message_erreur'].= $js;
