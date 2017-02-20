@@ -23,8 +23,9 @@ include_spip('inc/editer');
  *     Identifiant du selection. 'new' pour un nouveau selection.
  * @param string $retour
  *     URL de redirection après le traitement
- * @param int $lier_trad
- *     Identifiant éventuel d'un selection source d'une traduction
+ * @param string $associer_objet
+ *     Éventuel 'objet|x' indiquant de lier le mot créé à cet objet,
+ *     tel que 'article|3'
  * @param string $config_fonc
  *     Nom de la fonction ajoutant des configurations particulières au formulaire
  * @param array $row
@@ -34,7 +35,7 @@ include_spip('inc/editer');
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_selection_identifier_dist($id_selection = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+function formulaires_editer_selection_identifier_dist($id_selection = 'new', $retour = '', $associer_objet = '', $config_fonc = '', $row = array(), $hidden = '') {
 	return serialize(array(intval($id_selection)));
 }
 
@@ -49,8 +50,9 @@ function formulaires_editer_selection_identifier_dist($id_selection = 'new', $re
  *     Identifiant du selection. 'new' pour un nouveau selection.
  * @param string $retour
  *     URL de redirection après le traitement
- * @param int $lier_trad
- *     Identifiant éventuel d'un selection source d'une traduction
+ * @param string $associer_objet
+ *     Éventuel 'objet|x' indiquant de lier le mot créé à cet objet,
+ *     tel que 'article|3'
  * @param string $config_fonc
  *     Nom de la fonction ajoutant des configurations particulières au formulaire
  * @param array $row
@@ -60,8 +62,8 @@ function formulaires_editer_selection_identifier_dist($id_selection = 'new', $re
  * @return array
  *     Environnement du formulaire
  */
-function formulaires_editer_selection_charger_dist($id_selection = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
-	$valeurs = formulaires_editer_objet_charger('selection', $id_selection, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+function formulaires_editer_selection_charger_dist($id_selection = 'new', $retour = '', $associer_objet = '', $config_fonc = '', $row = array(), $hidden = '') {
+	$valeurs = formulaires_editer_objet_charger('selection', $id_selection, '', '', $retour, $config_fonc, $row, $hidden);
 	return $valeurs;
 }
 
@@ -76,8 +78,9 @@ function formulaires_editer_selection_charger_dist($id_selection = 'new', $retou
  *     Identifiant du selection. 'new' pour un nouveau selection.
  * @param string $retour
  *     URL de redirection après le traitement
- * @param int $lier_trad
- *     Identifiant éventuel d'un selection source d'une traduction
+ * @param string $associer_objet
+ *     Éventuel 'objet|x' indiquant de lier le mot créé à cet objet,
+ *     tel que 'article|3'
  * @param string $config_fonc
  *     Nom de la fonction ajoutant des configurations particulières au formulaire
  * @param array $row
@@ -87,7 +90,7 @@ function formulaires_editer_selection_charger_dist($id_selection = 'new', $retou
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_editer_selection_verifier_dist($id_selection = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+function formulaires_editer_selection_verifier_dist($id_selection = 'new', $retour = '', $associer_objet = '', $config_fonc = '', $row = array(), $hidden = '') {
 	$erreurs = formulaires_editer_objet_verifier('selection', $id_selection, array('titre'));
 
 	// L'identifiant doit être unique s'il existe
@@ -128,8 +131,9 @@ function formulaires_editer_selection_verifier_dist($id_selection = 'new', $reto
  *     Identifiant du selection. 'new' pour un nouveau selection.
  * @param string $retour
  *     URL de redirection après le traitement
- * @param int $lier_trad
- *     Identifiant éventuel d'un selection source d'une traduction
+ * @param string $associer_objet
+ *     Éventuel 'objet|x' indiquant de lier le mot créé à cet objet,
+ *     tel que 'article|3'
  * @param string $config_fonc
  *     Nom de la fonction ajoutant des configurations particulières au formulaire
  * @param array $row
@@ -139,6 +143,24 @@ function formulaires_editer_selection_verifier_dist($id_selection = 'new', $reto
  * @return array
  *     Retours des traitements
  */
-function formulaires_editer_selection_traiter_dist($id_selection = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
-	return formulaires_editer_objet_traiter('selection', $id_selection, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+function formulaires_editer_selection_traiter_dist($id_selection = 'new', $retour = '', $associer_objet = '', $config_fonc = '', $row = array(), $hidden = '') {
+	$res = formulaires_editer_objet_traiter('selection', $id_selection, '', '', $retour, $config_fonc, $row, $hidden);
+	if ($associer_objet) {
+		if (intval($associer_objet)) {
+			// compat avec l'appel de la forme ajouter_id_article
+			$objet = 'article';
+			$id_objet = intval($associer_objet);
+		} else {
+			list($objet, $id_objet) = explode('|', $associer_objet);
+		}
+		if ($objet and $id_objet and autoriser('modifier', $objet, $id_objet)) {
+			include_spip('action/editer_selection');
+			selection_associer($res['id_selection'], array($objet => $id_objet));
+			if (isset($res['redirect'])) {
+				$res['redirect'] = parametre_url($res['redirect'], 'id_lien_ajoute', $res['id_selection'], '&');
+			}
+		}
+	}
+	return $res;
 }
+
