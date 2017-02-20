@@ -1,12 +1,12 @@
 <?php
 /**
- * Déplace le rang d'une étape
+ * Déplace le rang d'un contenu de sélection
  *
- * @plugin     Itinéraires
+ * @plugin     Sélections éditoriales
  * @copyright  2016
  * @author     Les Développements Durables
  * @licence    GNU/GPL v3
- * @package    SPIP\Itineraires\Etapes
+ * @package    SPIP\Selections_editoriales\Action
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -28,7 +28,7 @@ function action_deplacer_selections_contenu_dist($arg = null) {
 	// Argument de la forme "123-haut" ou "123-bas" ou "123-3" (rang précis)
 	list($id_selections_contenu, $deplacement) = explode('-', $arg);
 
-	// Il faut pouvoir modifier l'étape et que le déplacement soit un truc valide
+	// Il faut pouvoir modifier le contenu et que le déplacement soit un truc valide
 	if (
 		$id_selections_contenu = intval($id_selections_contenu)
 		and autoriser('modifier', 'selections_contenu', $id_selections_contenu)
@@ -40,7 +40,7 @@ function action_deplacer_selections_contenu_dist($arg = null) {
 		// On cherche le parent
 		$id_parent = sql_getfetsel('id_selection', 'spip_selections_contenus', 'id_selections_contenu = '.$id_selections_contenu);
 
-		// On cherche le rang de l'étape en question
+		// On cherche le rang de lu contenu en question
 		$rang = sql_getfetsel('rang', 'spip_selections_contenus', 'id_selections_contenu = '.$id_selections_contenu);
 
 		// On cherche le rang le plus grand du même parent
@@ -59,7 +59,7 @@ function action_deplacer_selections_contenu_dist($arg = null) {
 				);
 			} else {
 				$nouveau_rang = $rang + 1;
-				// On échange avec l'étape qui avait ce rang là
+				// On échange avec le contenu qui avait ce rang là
 				sql_updateq(
 					'spip_selections_contenus',
 					array('rang' => $rang),
@@ -81,7 +81,7 @@ function action_deplacer_selections_contenu_dist($arg = null) {
 				);
 			} else {
 				$nouveau_rang = $rang - 1;
-				// On échange avec l'étape qui avait ce rang là
+				// On échange avec le contenu qui avait ce rang là
 				sql_updateq(
 					'spip_selections_contenus',
 					array('rang' => $rang),
