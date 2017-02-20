@@ -163,4 +163,3 @@ function formulaires_editer_selection_traiter_dist($id_selection = 'new', $retou
 	}
 	return $res;
 }
-
