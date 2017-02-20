@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'curator_titre' => 'curator',
 	'configurer_rubrique' => 'Ajouter les articles dans la rubrique',
-	'curator:configurer_rubrique_explication' => 'Si vous ne choisissez aucune rubrique (ou secteur), elles seront toutes accessibles par défaut',
+	'configurer_rubrique_explication' => 'Si vous ne choisissez aucune rubrique (ou secteur), elles seront toutes accessibles par défaut',
 	'configurer_groupe_mots' => 'Groupe de mots clés',
 	'configurer_groupe_mots_explication' => 'Par défaut, un groupe de mots clés "Tags" sera créé',
 	'coller_adresse' => 'Coller l\'adresse de l\'image à utiliser comme logo',
