@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function xiti_autoriser(){
+function xiti_autoriser() {
 }
 
 /**
