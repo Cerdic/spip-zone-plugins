@@ -21,7 +21,7 @@
 				log: '(#ENV{xtsd})']
 			});
 			conf_page = {
-				name:'[(#ENV{page})_marmiton]'<B_chapitres>,<BOUCLE_chapitres(DATA){source table, #ENV{chapitres,#ARRAY}}{','}>
+				name:'[(#ENV{page})]'<B_chapitres>,<BOUCLE_chapitres(DATA){source table, #ENV{chapitres,#ARRAY}}{','}>
 				chapter[(#COMPTEUR_BOUCLE)]:'#VALEUR'</BOUCLE_chapitres>[,
 				level2:(#ENV{niveau2})
 			]}
@@ -32,5 +32,7 @@
 	</script>
 </div>
 <noscript>
-	
+	<div id='xiti-tag-noscript'>[(#SET{page,[(#ENV{chapitres,#ARRAY}|push{#ENV{page}}|implode{'::'})]})]
+		<img width='1' height='1' src='http://[(#ENV{xtsd})].xiti.com/hit.xiti?s=[(#ENV{xtsite})]&amp;s2=[(#ENV{xtn2})]&amp;p=[(#GET{page})]&amp;di=&amp;' alt='XiTi' />
+	</div>
 </noscript>
