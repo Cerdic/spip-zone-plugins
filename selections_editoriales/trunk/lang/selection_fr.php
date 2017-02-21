@@ -9,6 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_lien_selection' => 'Ajouter cette sélection éditoriale',
+
+	// B
 	'bouton_enlever_selection' => 'Détacher',
 	'bouton_supprimer_selection' => 'Supprimer cette sélection',
 
