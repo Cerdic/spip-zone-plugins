@@ -1,6 +1,13 @@
 CHANGELOG
 =========
 
+
+Version 3.0.11
+--------------
+
+Être tolérant lorsqu'on migre depuis un site https, en ignorant le certificat.
+
+
 Version 3.0.10
 --------------
 

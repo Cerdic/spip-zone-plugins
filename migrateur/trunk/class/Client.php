@@ -180,6 +180,8 @@ class Client {
 		curl_setopt($curl, CURLOPT_POST, 1);
 		curl_setopt($curl, CURLOPT_POSTFIELDS, $json);
 		curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
 
 		$response = curl_exec($curl);
 
@@ -234,8 +236,12 @@ class Client {
 				"header" => array(
 					"Content-Type: application/json"
 				),
-				"content" => $json
-			)
+				"content" => $json,
+			),
+			"ssl" => array(
+				"verify_peer" => false,
+				"verify_peer_name" => false,
+			),
 		);
 
 		$this->log("Téléchargement de <code>$file</code>");
