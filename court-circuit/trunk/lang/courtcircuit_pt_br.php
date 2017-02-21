@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'courtcircuit' => 'Curto-circuito',
 
 	// E
+	'explication_compositions_exclure' => 'Lista de composições a ignorar durante o tratamento dos redirecionamentos (separados por vírgula).',
 	'explication_liens_rubriques' => 'Alterar o URL das seções redirigidas diretamente nos templates?',
 	'explication_regles' => 'A diferentes regras abaixo serão testadas nessa ordem. Se alguma regra não define um redirecionamento, a seção será exibida normalmente.',
 	'explication_restreindre_langue' => 'Se esta opção for ativada, apenas as matérias do idioma ativo serão levadas em conta para o cálculo do redirecionamento. Esta opção só é útil se as suas seções contiverem matérias de diferentes idiomas. Não use se o seu site está organizado em setores de idioma ou se você usa campos multi.',
@@ -32,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_article_accueil' => 'Matéria de boas-vindas da seção',
 	'label_composition_rubrique' => 'Seção com composição',
+	'label_compositions_exclure' => 'Composições a serem excluídas',
 	'label_exceptions' => 'Exceções',
 	'label_liens' => 'URL das seções',
 	'label_liens_rubriques' => 'Agir sobre a tag #URL_RUBRIQUE?',
