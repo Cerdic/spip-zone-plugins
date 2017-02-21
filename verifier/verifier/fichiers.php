@@ -118,16 +118,26 @@ function verifier_fichier_mime($valeur,$cle,$options){
 	if ($options['mime'] == 'pas_de_verification') {
 		return '';
 	}
-	
+
+	// Récuperer les infos mime + extension
+	$mime_type = $valeur['type'][$cle];
 	$extension = pathinfo($valeur['name'][$cle],PATHINFO_EXTENSION);
 	
+	// Appliquer les alias de type_mime
+	include_spip('base/typedoc');
+	while (isset($GLOBALS['mime_alias'][$mime_type])) {
+		$mime_type = $GLOBALS['mime_alias'][$mime_type];
+	}
+
+	// Voir si les mime_type fournit par le serveur sont significatifs ou non
 	$mime_insignifiant = False;
 	if (in_array($valeur['type'][$cle], array('text/plain', '', 'application/octet-stream'))) { // si mime-type insignifiant, on se base uniquement sur l'extension (comme par exemple dans recuperer_infos_distantes())
 		$mime_insignifiant = True;
 	}
+
 	if ($options['mime'] == 'specifique'){
 		if (!$mime_insignifiant) {
-			if (!in_array($valeur['type'][$cle],$options['mime_specifique'])){
+			if (!in_array($mime_type,$options['mime_specifique'])){
 				return _T('verifier:erreur_type_non_autorise',array('name'=>$valeur['name'][$cle]));
 			}
 		}
@@ -137,7 +147,7 @@ function verifier_fichier_mime($valeur,$cle,$options){
 		}
 	} elseif ($options['mime'] == 'tout_mime') {
 		if (!$mime_insignifiant) {
-			$res = sql_select('mime_type','spip_types_documents','mime_type='.sql_quote($valeur['type'][$cle]).' and extension='.sql_quote($extension));
+			$res = sql_select('mime_type','spip_types_documents','mime_type='.sql_quote($mime_type).' and extension='.sql_quote($extension));
 		} else {
 			$res = sql_select('mime_type','spip_types_documents','extension='.sql_quote($extension));
 		}
@@ -145,7 +155,7 @@ function verifier_fichier_mime($valeur,$cle,$options){
 			return _T('verifier:erreur_type_non_autorise',array('name'=>$valeur['name'][$cle]));
 		}
 	} elseif ($options['mime'] == 'image_web') {
-		if (!in_array($valeur['type'][$cle],array('image/gif','image/jpeg','image/png'))) {
+		if (!in_array($mime_type,array('image/gif','image/jpeg','image/png'))) {
 			return _T('verifier:erreur_type_image',array('name'=>$valeur['name'][$cle]));
 		}
 	}
