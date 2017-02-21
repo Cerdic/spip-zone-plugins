@@ -1,12 +1,11 @@
 <?php
-
 /**
  * Fonctions pour Xiti
  *
- * @plugin Xiti
- * @copyright  2014
- * @author France diplomatie - Vincent
- * @license	GNU/GPL
+ * @plugin     Xiti
+ * @copyright  2014-2017
+ * @author     France diplomatie - Vincent
+ * @licence    GNU/GPL
  * @package	SPIP\Xiti\fonctions
  */
 

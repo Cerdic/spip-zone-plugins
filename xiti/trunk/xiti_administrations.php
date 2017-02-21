@@ -4,7 +4,7 @@
  * Pipeline pour Xiti
  *
  * @plugin     Xiti
- * @copyright  2014-2016
+ * @copyright  2014-2017
  * @author     France diplomatie - Vincent
  * @licence    GNU/GPL
  * @package    SPIP\Xiti\administrations
