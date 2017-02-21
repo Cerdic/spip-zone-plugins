@@ -24,7 +24,7 @@ function xiti_upgrade($nom_meta_base_version, $version_cible) {
 
 	$maj = array();
 	$maj['1.5.0'] = array(
-		// On ajoute les nouvelles table
+		// On ajoute les nouvelles tables
 		// spip_xiti_niveaux
 		// spip_xiti_niveaux_liens
 		array('maj_tables', array('spip_xiti_niveaux', 'spip_xiti_niveaux_liens'))
