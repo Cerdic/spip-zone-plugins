@@ -108,15 +108,15 @@
 ]
 
 [(#GET{niveau2}|non)
-	[(#SET{niveau2,[(#CONFIG{xiti/xtn2_xiti})]})]
+	[(#SET{niveau2,[(#ENV{niveau2,[(#CONFIG{xiti/xtn2_xiti})]})]})]
 ]
 
-[(#INCLURE{fond=inclure/marqueur_js,
+<INCLURE{fond=inclure/marqueur_js,
 	xtnv=[(#GET{xtnv}|trim)],
 	xtsd=[(#GET{xtsd,[(#CONFIG{xiti/xtsd_xiti})]}|trim)],
 	xtsite=[(#GET{xtsite,[(#CONFIG{xiti/xtsite_xiti})]}|trim)],
 	niveau2=[(#GET{niveau2}|trim)],
 	page=[(#GET{page}|trim)],
-	chapitres=#GET{chapitres}})]
+	chapitres=#GET{chapitres}} />
 </BOUCLE_si_activer>
 #FILTRE{trim}

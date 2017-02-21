@@ -1,7 +1,10 @@
 <?php
 /**
  * Utilisations de pipelines
- *
+ * @plugin     Xiti
+ * @copyright  2014-2017
+ * @author     France diplomatie - Vincent
+ * @licence    GNU/GPL
  * @package SPIP\Xiti\Pipelines
  **/
 
