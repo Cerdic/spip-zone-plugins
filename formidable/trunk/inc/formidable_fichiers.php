@@ -129,6 +129,12 @@ function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $mime
 	// déterminer le basename
 	$basename = pathinfo($nom, PATHINFO_BASENAME);
 
+	// Appliquer les alias de type_mime
+	include_spip('base/typedoc');
+	while (isset($GLOBALS['mime_alias'][$mime])) {
+		$mime = $GLOBALS['mime_alias'][$mime];
+	}
+
 	// sécurité : si la combinaison extension/mime_type est inconnu de SPIP (spip_documents_type), on zip.
 	// On n'utilise volontairement pas verifier/fichiers.php, dès fois que celui-ci évolue dans le future
 	$res = sql_select(
