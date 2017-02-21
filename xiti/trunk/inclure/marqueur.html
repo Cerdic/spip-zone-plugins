@@ -125,6 +125,7 @@
 [(#GET{niveau2}|non)
 	[(#SET{niveau2,[(#ENV{niveau2,[(#CONFIG{xiti/xtn2_xiti})]})]})]
 ]
+#SET{https,#EVAL{$_SERVER\['HTTPS'\]}}
 
 <INCLURE{fond=inclure/marqueur_js,
 	xtnv=#GET{xtnv},
@@ -133,6 +134,7 @@
 	xtsite=#GET{xtsite,#CONFIG{xiti/xtsite_xiti}},
 	niveau2=#GET{niveau2},
 	page=#GET{page},
-	chapitres=#GET{chapitres}} />
+	chapitres=#GET{chapitres},
+	https=#GET{https}} />
 </BOUCLE_si_activer>
 #FILTRE{trim}
