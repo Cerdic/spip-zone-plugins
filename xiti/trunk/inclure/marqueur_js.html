@@ -20,11 +20,12 @@
 				site: (#ENV{xtsite}),][
 				log: '(#ENV{xtsd})']
 			});
-			ATTag.page.set({
-				name:'[(#ENV{page})]'<B_chapitres>,<BOUCLE_chapitres(DATA){source table, #ENV{chapitres,#ARRAY}}{','}>
-				chapitre[(#COMPTEUR_BOUCLE)]:'#VALEUR'</BOUCLE_chapitres>[,
+			conf_page = {
+				name:'[(#ENV{page})_marmiton]'<B_chapitres>,<BOUCLE_chapitres(DATA){source table, #ENV{chapitres,#ARRAY}}{','}>
+				chapter[(#COMPTEUR_BOUCLE)]:'#VALEUR'</BOUCLE_chapitres>[,
 				level2:(#ENV{niveau2})
-			]});
+			]}
+			ATTag.page.set(conf_page);
 
 			ATTag.dispatch();
 		}
