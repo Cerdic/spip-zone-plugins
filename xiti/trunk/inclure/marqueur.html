@@ -27,10 +27,16 @@
 		[(#CONFIG{xiti/xtsd_xiti_#ID_SECTEUR}|trim|strlen|>{2}|oui)
 			#SET{xtsd,#CONFIG{xiti/xtsd_xiti_#ID_SECTEUR}}
 		]
+		[(#CONFIG{xiti/logssl_xiti_#ID_SECTEUR}|trim|strlen|>{2}|oui)
+			#SET{logssl,#CONFIG{xiti/logssl_xiti_#ID_SECTEUR}}
+		]
 	]
 	[(#CONFIG{xiti/langue_xiti}|=={oui}|oui) 
 		[(#GET{xtsd}|non|et{#CONFIG{xiti/xtsd_xiti_#LANG}|trim|strlen|>{2}|oui}|oui)
 			#SET{xtsd,#CONFIG{xiti/xtsd_xiti_#LANG}}
+		]
+		[(#GET{logssl}|non|et{#CONFIG{xiti/logssl_#LANG}|trim|strlen|>{2}|oui}|oui)
+			#SET{logssl,#CONFIG{xiti/logssl_#LANG}}
 		]
 		[(#GET{xtsite}|non|et{#CONFIG{xiti/xtsite_xiti_#LANG}|trim|strlen|>{2}|oui}|oui)
 			[(#SET{xtsite,[(#CONFIG{xiti/xtsite_xiti_[(#LANG)]})]})]
@@ -62,8 +68,14 @@
 			[(#CONFIG{xiti/xtsd_xiti_#ID_SECTEUR}|trim|strlen|>{2}|oui)
 				#SET{xtsd,#CONFIG{xiti/xtsd_xiti_#ID_SECTEUR}}
 			]
+			[(#CONFIG{xiti/logssl_xiti_#ID_SECTEUR}|trim|strlen|>{2}|oui)
+				#SET{logssl,#CONFIG{xiti/logssl_xiti_#ID_SECTEUR}}
+			]
 		]
 		[(#CONFIG{xiti/langue_xiti}|=={oui}|oui) 
+			[(#GET{logssl}|non|et{#CONFIG{xiti/logssl_#LANG}|trim|strlen|>{2}|oui}|oui)
+				#SET{logssl,#CONFIG{xiti/logssl_#LANG}}
+			]
 			[(#GET{xtsd}|non|et{#CONFIG{xiti/xtsd_xiti_#LANG}|trim|strlen|>{2}|oui}|oui)
 				#SET{xtsd,#CONFIG{xiti/xtsd_xiti_#LANG}}
 			]
@@ -102,6 +114,9 @@
 	[(#GET{xtsd}|non|et{#CONFIG{xiti/xtsd_xiti_#LANG}|trim|strlen|>{2}|oui}|oui)
 		#SET{xtsd,#CONFIG{xiti/xtsd_xiti_#LANG}}
 	]
+	[(#GET{logssl}|non|et{#CONFIG{xiti/logssl_#LANG}|trim|strlen|>{2}|oui}|oui)
+		#SET{logssl,#CONFIG{xiti/logssl_#LANG}}
+	]
 	[(#GET{xtsite}|non|et{#CONFIG{xiti/xtsite_xiti_#LANG}|trim|strlen|>{2}|oui}|oui)
 		[(#SET{xtsite,[(#CONFIG{xiti/xtsite_xiti_[(#LANG)]})]})]
 	]
@@ -112,11 +127,12 @@
 ]
 
 <INCLURE{fond=inclure/marqueur_js,
-	xtnv=[(#GET{xtnv}|trim)],
-	xtsd=[(#GET{xtsd,[(#CONFIG{xiti/xtsd_xiti})]}|trim)],
-	xtsite=[(#GET{xtsite,[(#CONFIG{xiti/xtsite_xiti})]}|trim)],
-	niveau2=[(#GET{niveau2}|trim)],
-	page=[(#GET{page}|trim)],
+	xtnv=#GET{xtnv},
+	xtsd=#GET{xtsd,#CONFIG{xiti/xtsd_xiti}},
+	logssl=#GET{logssl,#CONFIG{xiti/logssl}},
+	xtsite=#GET{xtsite,#CONFIG{xiti/xtsite_xiti}},
+	niveau2=#GET{niveau2},
+	page=#GET{page},
 	chapitres=#GET{chapitres}} />
 </BOUCLE_si_activer>
 #FILTRE{trim}
