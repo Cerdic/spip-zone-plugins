@@ -15,6 +15,6 @@
 	<licence>GNU/GPL</licence>
 	<credit lien="https://www.iconfinder.com/icons/35171/rocket_icon">Web Design Creatives (Logo)</credit>
 
-	<necessite nom="saisies" compatibilite="[2.18;[" /><!-- Juste pour la config. Si qqn·e a le temps de la passer en pur html, le faire ! -->
-	<necessite nom="php" compatibilite="[5.4;[" />
+	<necessite nom="saisies" compatibilite="[2.18.0;[" /><!-- Juste pour la config. Si qqn·e a le temps de la passer en pur html, le faire ! -->
+	<necessite nom="php" compatibilite="[5.4.0;[" />
 </paquet>
