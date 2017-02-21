@@ -12,9 +12,9 @@
 
 	<auteur>Collectif SPIP</auteur>
 
-    <menu nom="menu_dev" titre="fonction:icone_dev" icone="images/developpement-48.png" action="navigation" parametres="menu=menu_dev" />
-    <menu nom="charte" titre="charter:titre_charte" parent="menu_dev" action="charte" />
-    <menu nom="source_fonctions_utilisateur" titre="fonction:titre_onglet_fonctions" parent="menu_dev" action="source_fonctions_utilisateur" icone="images/fonctions-16.png"/>
+	<menu nom="menu_dev" titre="fonction:icone_dev" icone="images/developpement-48.png" action="navigation" parametres="menu=menu_dev" />
+	<menu nom="charte" titre="charter:titre_charte" parent="menu_dev" action="charte" />
+	<menu nom="source_fonctions_utilisateur" titre="fonction:titre_onglet_fonctions" parent="menu_dev" action="source_fonctions_utilisateur" icone="images/fonctions-16.png"/>
 
 	<onglet nom="charte" titre="charter:titre_charte" parent="charte" action="charte" />
 	<onglet nom="charte_icones" titre="charter:titre_icones" parent="charte" action="charte_icones" />
