@@ -127,6 +127,15 @@ function urls_generer_url_article_dist($id, $args, $ancre) {
  * @return null|string
  */
 function urls_generer_url_rubrique_dist($id, $args, $ancre) {
+	// les rubriques racines n'ont pas d'URL spécifiques (= url du domaine).
+	$r = sql_fetsel(['profondeur','lang'], 'spip_rubriques', 'id_rubrique=' . intval($id));
+	if ($r['profondeur'] == 0) {
+		if ($r['lang'] !== $GLOBALS['spip_lang']) {
+			return domlang_url_langue($r['lang']);
+		}
+		// hum… pas d'autre moyen pour retourner l'url. Retourner '' ne fonctionne pas.
+		return url_de_base();
+	}
 	return domlang_generer_url_objet_lang($id, $args, $ancre, 'rubrique');
 }
 
