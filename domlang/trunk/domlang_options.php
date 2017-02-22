@@ -13,6 +13,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+if (!defined('_URLS_ARBO_MIN')) {
+	/** autoriser fr/ en/ en urls arborescentes */
+	define('_URLS_ARBO_MIN', 2);
+}
+
 /*
  * Plusieurs domaines à gérer. À chaque domaine sa langue.
  * - http://domaine.fr/   => langue FR
@@ -94,4 +99,64 @@ function domlang_domaines_langues() {
 		$langues = lire_config('domlang/domaines/', []);
 	}
 	return $langues;
+}
+
+/**
+ * Surcharge de la génération des URLs d'articles
+ *
+ * @uses domlang_generer_url_objet_lang()
+ *
+ * @param int $id
+ * @param string $args
+ * @param string $ancre
+ * @return null|string
+ */
+function urls_generer_url_article_dist($id, $args, $ancre) {
+	return domlang_generer_url_objet_lang($id, $args, $ancre, 'article');
+}
+
+
+/**
+ * Surcharge de la génération des URLs de rubriques
+ *
+ * @uses domlang_generer_url_objet_lang()
+ *
+ * @param int $id
+ * @param string $args
+ * @param string $ancre
+ * @return null|string
+ */
+function urls_generer_url_rubrique_dist($id, $args, $ancre) {
+	return domlang_generer_url_objet_lang($id, $args, $ancre, 'rubrique');
+}
+
+
+/**
+ * Crée une url absolue si la langue de l'objet ne correspond
+ * pas à la langue en cours.
+ *
+ * Utilise l'URL du domaine correspondant à la langue de l'objet
+ * (si différente de la langue en cours) pour créer l'URL absolue.
+ *
+ * @param int $id
+ * @param string $args
+ * @param string $ancre
+ * @param string $type Type d'objet
+ * @return null|string
+ */
+function domlang_generer_url_objet_lang($id, $args, $ancre, $type) {
+	static $marqueur_passage = '@@@domlang@@@';
+	// petit hack pour éviter d'entrer en boucle dans cette fonction.
+	if (!$ancre or false === strpos($ancre, $marqueur_passage)) {
+		$id = intval($id);
+		$lang = sql_getfetsel('lang', table_objet_sql($type), id_table_objet($type) . '=' . $id);
+		if ($lang !== $GLOBALS['spip_lang']) {
+			$url = generer_url_entite($id, $type, $args, $ancre . $marqueur_passage, true);
+			$url = str_replace($marqueur_passage, '', $url);
+			$url = url_absolue($url, domlang_url_langue($lang));
+			return $url;
+		}
+	}
+	// null utilisera la fonction habituelle
+	return null;
 }
