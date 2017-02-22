@@ -12,7 +12,7 @@ $GLOBALS['spip_pipeline']['messagerie_signer_message'] = '';
 
 // évite le spam
 $GLOBALS['formulaires_no_spam'][] = 'ecrire_message';
-if(!define('_NB_MESSAGES_MAX_JOUR')) define('_NB_MESSAGES_MAX_JOUR', 25); // nombre maximum de destinataire par message
+if( ! defined('_NB_MESSAGES_MAX_JOUR') ) define('_NB_MESSAGES_MAX_JOUR', 25); // nombre maximum de destinataire par message
 
 /**
  * Verifier l'autorisation de choisir le destinataire d'un message
