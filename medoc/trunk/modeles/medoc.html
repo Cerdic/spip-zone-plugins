@@ -22,9 +22,9 @@
 	
 ]
 [(#EXTENSION|match{jpg|gif|png}|oui)
-	[(#SET{fichier,[(#FICHIER|image_reduire{150})]})]
+	[(#SET{fichier,[(#FICHIER|image_reduire{#CONFIG{taille_preview,150}})]})]
 	[(#SET{titre,''})]
-	[(#LARGEUR|>{150}|?{
+	[(#LARGEUR|>{#CONFIG{taille_preview,150}}|?{
 		[(#SET{url,#URL_DOCUMENT})]
 		[(#SET{title,[(#TITRE|sinon{[(#FICHIER|basename)]}|couper{80})]})]
 		[(#SET{alt,[(#GET{title})]})]
