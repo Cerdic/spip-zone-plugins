@@ -6,13 +6,13 @@
 	[(#REM) Si le plugin prix objets est activé on regarde si il y a un prix attaché à l'évenement]
 	#SET{prix2, #INCLURE{
 		fond=formulaires/inc-reservation_evenements_prix,
-		id_evenement,
+		id_evenement=#VALEUR{id_evenement},
 		id_evenement_source,
 		id_article,
 		prix=#GET{prix}
 	}|sinon{
 			#INCLURE{fond=formulaires/inc-reservation_evenements_prix,
-				id_evenement=#ID_EVENEMENT_SOURCE,
+				id_evenement=#VALEUR{id_evenement_source},
 				id_article,
 				prix=#GET{prix}
 			}
@@ -25,8 +25,9 @@
 		<li class='editer editer_id_evenement[ (#ENV**{erreurs}|table_valeur{id_evenement}|oui)erreur]'>
 	]
 	<a href="#URL_EVENEMENT{#ID_EVENEMENT}">#TITRE</a>
+	[(#ID_EVENEMENT)]
 	#SET{date_fin,#DATE_FIN}
-	<BOUCLE_evenements_lies(EVENEMENTS) {id_evenement_source=#ID_EVENEMENT}{!par date_fin} {0,1}>
+	<BOUCLE_evenements_lies(EVENEMENTS) {id_evenement_source=#VALEUR{id_evenement}}{!par date_fin} {0,1}>
 		#SET{date_fin,#DATE_FIN}
 	</BOUCLE_evenements_lies>
 	<strong>([(#DATE_DEBUT|affdate_debut_fin{#GET{date_fin},#HORAIRE})])</strong>

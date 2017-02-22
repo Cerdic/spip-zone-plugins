@@ -115,7 +115,6 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
 
 		// Pour chaque événement on crée un détail de la réservation
 		foreach ($evenements AS $id_evenement) {
-
 			// Si aucun détail n'est attaché à l'événement, on le crée
 			if (!$reservations_detail = sql_fetsel('*', 'spip_reservations_details',
 						'id_reservation=' . $id_reservation . ' AND id_evenement=' . $id_evenement)) {

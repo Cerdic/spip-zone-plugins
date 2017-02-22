@@ -134,10 +134,10 @@ function prix_attache($id_evenement, $id_article, $id_evenement_source) {
 			'prix_ht,id_prix_objet,code_devise',
 			'spip_prix_objets',
 			'objet="evenement" AND id_objet=' . $id_evenement)) {
-			if ($id_evenement_source != 0 and !$p = sql_fetsel(
-			'prix_ht,id_prix_objet,code_devise',
-			'spip_prix_objets',
-			'objet="evenement" AND id_objet=' . $id_evenement_source)) {
+			if (!$p = sql_fetsel(
+					'prix_ht,id_prix_objet,code_devise',
+					'spip_prix_objets',
+					'objet="evenement" AND id_objet=' . $id_evenement_source)) {
 				$p = sql_fetsel(
 						'prix_ht,id_prix_objet,code_devise',
 						'spip_prix_objets',

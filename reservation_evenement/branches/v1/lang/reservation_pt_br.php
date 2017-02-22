@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_email_utilise' => 'Esse email já está cadastrado. Favor conectar-se, ou inserir outro endereço de email',
 	'erreur_pas_evenement' => 'Não há nenhum evento com inscrição aberta, no momento.',
 	'evenement_cloture' => 'Evento encerrado',
+	'evenement_ferme_inscription' => 'Este evento está com as inscrições encerradas, atualmente. Clique no botâo Inscrição para visualizar a disponibilidade atual.',
 	'explication_client' => 'Escolha um cliente entre os autores ou informe os dados do cliente, abaixo',
 	'explication_email_reutilisable' => 'Permitir reutilizar um e-mail de um autor Spip no momento de uma reserva sem registro',
 	'explication_enregistrement_inscrit' => 'Registrar como autor Spip',
