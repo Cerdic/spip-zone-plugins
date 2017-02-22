@@ -17,16 +17,16 @@ function formulaires_editer_url_page_charger($page = '', $redirect = '') {
 
 	// Valeurs de base
 	// Si ZPIP est activé, on retire le préfixe «page-» du nom de la page
-	$valeurs    = array();
-	$page       = trim($page);
+	$valeurs = array();
+	$page    = trim($page);
 	if ($page
 		and defined('_DIR_PLUGIN_Z')
 		and substr($page, 0, strlen('page-')) == 'page-'
 	) {
 		$page = substr($page, strlen('page-'));
 	}
-	$mode       = ($page ? 'modifier' : 'creer');
-	$page_loked = false;
+	$mode = ($page ? 'modifier' : 'creer');
+	$page_locked = false;
 
 	// Valeurs selon qu'on modifie ou crée une URL
 	switch ($mode){
@@ -118,8 +118,13 @@ function formulaires_editer_url_page_verifier($page = '', $redirect = '') {
 		$erreurs['url'] = _T('info_obligatoire');
 	}
 	// Format URL incorrect
-	elseif ($url != ($url_clean = url_nettoyer($url, 255))) {
-		set_request('url', $url_clean);
+	// On propose une URL « nettoyée » : pas d'accent ni d'espace etc.
+	// On accepte certaines extensions HTML : .html .xhtml
+	elseif (!preg_match('/^[a-z0-9\-_]+\.(html|xhtml)$/i', $url)
+		and $url_propre = preg_replace('/^([a-z0-9\-_]+)(\-)(html|xhtml)$/i', "$1.$3", url_nettoyer($url, 255))
+		and $url != $url_propre
+	) {
+		set_request('url', $url_propre);
 		$erreurs['url'] = _T('urls:verifier_url_nettoyee');
 	}
 	// URL en doublon (peut importe l'objet)

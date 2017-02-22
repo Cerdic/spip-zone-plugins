@@ -58,8 +58,8 @@ function verifier_fond_page_dist($chemin, $options = array()) {
 		'technique',
 		'pseudo_fichier',
 		'prive',
-		(isset($options['doublon']) and $options['doublon'] === true) ? 'doublon' : '',
-		(isset($options['fichier']) and $options['fichier'] === true) ? 'fichier' : '',
+		(isset($options['doublon']) and $options['doublon']) ? 'doublon' : '',
+		(isset($options['fichier']) and $options['fichier']) ? 'fichier' : '',
 	);
 	$verifier = array_filter($verifier);
 	if (isset($options['type'])
@@ -87,10 +87,10 @@ function verifier_fond_page_dist($chemin, $options = array()) {
 	// - objet=N.html : pour une rubrique N
 	// - objet-N.html : pour une branche N
 	// - objet_N.html : pour un numéro N précis (plugin variantes articles)
-	// - objet_composition.html : pour une composition précise (plugin compositions)
+	// - objet-composition.html : pour une composition précise (plugin compositions)
 	$objets = lister_objets_types();
 	$objets_split = join('|', $objets);
-	$exclure_regex_objets = "/^($objets_split)([\-=_][a-zA-Z0-9]+)?(\.[a-z]{2})?\.html$/";
+	$exclure_regex_objets = "/^($objets_split)([\-=_][a-zA-Z0-9-]+)?(\.[a-z]{2})?\.html$/";
 
 	// 1.2) Liste : squelettes techniques, d'après leurs noms exacts
 	$exclure_predefinis = array(
@@ -111,6 +111,7 @@ function verifier_fond_page_dist($chemin, $options = array()) {
 		'inc-',
 		'backend-',
 		'rss_forum_',
+		'sitemap-'
 	);
 	$exclure_misc_split = join('|', $exclure_misc);
 	$exclure_regex_misc = "/^($exclure_misc_split)/";
