@@ -11,11 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'domaine_pour_langue' => 'URL pour la langue : @nom@ [@lang@]',
 	'domlang_titre' => 'Domaines par secteur de langue',
 
-	// C
-	'cfg_exemple' => 'Exemple',
-	'cfg_exemple_explication' => 'Explication de cet exemple',
-	'cfg_titre_parametrages' => 'Paramétrages',
-
 	// T
+	'titre_ndd_par_secteur_langue' => 'Noms de domaines par secteurs de langue',
 	'titre_page_configurer_domlang' => 'Définir les URLs pour chaque secteur de langue',
 );

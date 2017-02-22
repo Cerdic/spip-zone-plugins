@@ -39,3 +39,22 @@ function balise_URL_SITE_SPIP($p) {
 	$p->interdire_scripts = false;
 	return $p;
 }
+
+
+
+/**
+ * Ajoute le formulaire de configuration des des domaines sur la page identité du site
+ *
+ * @pipeline affiche_milieu
+ *
+ * @param array $flux
+ *     Données du pipeline
+ * @return array
+ *     Données du pipeline
+ */
+function domlang_affiche_milieu($flux) {
+	if ($flux["args"]["exec"] == "configurer_identite") {
+		$flux["data"] .= recuperer_fond('prive/squelettes/inclure/configurer', array('configurer' => 'configurer_domlang'));
+	}
+	return $flux;
+}

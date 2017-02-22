@@ -1,8 +1,8 @@
 <paquet
 	prefix="domlang"
 	categorie="navigation"
-	version="1.0.0-dev"
-	etat="dev"
+	version="1.0.0"
+	etat="test"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="prive/themes/spip/images/domlang-64.png"
 	documentation=""
@@ -14,6 +14,8 @@
 
 	<licence>GNU/GPL</licence>
 	<credit lien="https://www.iconfinder.com/icons/35171/rocket_icon">Web Design Creatives (Logo)</credit>
+
+	<pipeline nom="affiche_milieu" inclure="domlang_fonctions.php" />
 
 	<necessite nom="saisies" compatibilite="[2.18.0;[" /><!-- Juste pour la config. Si qqn·e a le temps de la passer en pur html, le faire ! -->
 	<necessite nom="php" compatibilite="[5.4.0;[" />
