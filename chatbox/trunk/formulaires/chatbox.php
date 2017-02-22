@@ -45,7 +45,7 @@ function formulaires_chatbox_traiter_dist(){
 	$id_message = sql_insertq(
 	    'spip_chatbox_messages',
 	    array(
-		'message' => safehtml($message),
+		'message' => safehtml(propre($message)),
 		'id_auteur' => $GLOBALS['visiteur_session']['id_auteur'],
 		'lang' => $GLOBALS['spip_lang'],
 		'date' => 'NOW()',
