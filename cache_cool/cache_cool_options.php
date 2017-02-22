@@ -145,7 +145,7 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 function cache_cool_flush($content){
 	// on coupe la connection si il y a des caches a calculer
 	// (mais dommage car on perd le benefice de KeepAlive=on)
-	if (is_array($GLOBALS['cache_cool_queue']) AND $n=count($GLOBALS['cache_cool_queue'])){
+	if (isset($GLOBALS['cache_cool_queue']) OR (is_array($GLOBALS['cache_cool_queue']) AND $n=count($GLOBALS['cache_cool_queue']))) {
 		$close = true;
 		if (defined('_DIR_PLUGIN_MEMOIZATION')){
 			#spip_log('meta cache_cool_action_refresh : '.$GLOBALS['meta']['cache_cool_action_refresh'],'cachecool'._LOG_DEBUG);
