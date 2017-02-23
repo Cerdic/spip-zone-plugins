@@ -36,12 +36,13 @@
 	style='float:(#ENV{align}|match{left|right});']>
 	[<a href="(#GET{url})"[
 		class="(#ENV{lien_class})"] title='[(#GET{title}|attribut_html)]'[
-		(#ENV{lien}|?{'',type="#MIME_TYPE"})]>]<img src='#GET{fichier}' alt='' width='#GET{width}' height='#GET{height}'>[(#GET{url}|?{</a>})]
+		(#ENV{lien}|?{'',type="#MIME_TYPE"})]>]<img src='#GET{fichier}' alt='' width='#GET{width}' height='#GET{height}'>[(#GET{url}|?{</a>})][]
+	(#TITRE|ou{#DESCRIPTIF}|ou{#CREDITS}|oui)
 	<figcaption class='#EDIT{descriptif} spip_doc_descriptif'[ style='width:(#GET{width}|min{350}|max{120})px;']>[
 		<strong class='#EDIT{titre} spip_doc_titre'>(#TITRE)</strong>]
 		[(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]
 		][<small>(#CREDITS)</small>
-	]</figcaption>
+	]</figcaption>]
 </figure>
 
 </BOUCLE_doc>
