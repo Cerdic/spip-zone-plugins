@@ -18,7 +18,7 @@
 		if(cookie) {
 			window.ATTag = new ATInternet.Tracker.Tag({[
 				site: (#ENV{xtsite}|trim),][
-				log: '(#ENV{xtsd}|trim)'][
+				log: '(#ENV{xtsd}|trim)'][,
 				logSSL: '(#ENV{logssl}|trim)']
 			});
 			conf_page = {
