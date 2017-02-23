@@ -32,7 +32,7 @@
 ]
 [(#SET{title,[(#TYPE_DOCUMENT) - [(#TAILLE|taille_en_octets)]]})]
 [(#MEDIA|=={image}|oui) #SET{title,#TITRE|sinon{#GET{title}}]
-<figure class='spip_document_#ID_DOCUMENT spip_documents[ (#ENV{align})][ (#ENV{class})] spip_lien_ok'[
+<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[
 	style='float:(#ENV{align}|match{left|right});']>
 	[<a href="(#GET{url})"[
 		class="(#ENV{lien_class})"] title='[(#GET{title}|attribut_html)]'[

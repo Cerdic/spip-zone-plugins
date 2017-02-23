@@ -7,7 +7,7 @@
 ]
 #SET{largeur,#ENV{largeur, #LARGEUR|?{#LARGEUR,480}}|max{120}}
 #SET{hauteur,#ENV{hauteur, #HAUTEUR|?{#HAUTEUR,300}}|max{75}}
-<figure class='spip_document_#ID_DOCUMENT spip_document_video spip_documents[ (#ENV{align})]'
+<figure class='spip_document_#ID_DOCUMENT spip_document_video spip_documents[ spip_documents_(#ENV{align})]'
 	style='[(#ENV{align}|match{^(left|right)$}|oui)float:#ENV{align};][width:(#GET{largeur})px]'>
 	<div class="video-intrinsic-wrapper" style='height:0;width:100%;padding-bottom:[(#GET{hauteur}|div{#GET{largeur}}|mult{100}|round{2})]%;position:relative;'>
 		<div class="video-wrapper" style="position: absolute;top:0;left:0;width:100%;height:100%;">
