@@ -3,7 +3,7 @@
 
 Merci de t’intéresser à ce plugin ! Il n’est pas encore fini et un coup de main serait bienvenu pour :
 
-- conditionner la présence de la balise figcaption à la présence de #TITRE ou #DESCRIPTIF ou #CREDITS
+- [X] conditionner la présence de la balise figcaption à la présence de #TITRE ou #DESCRIPTIF ou #CREDITS
 - faut-il l’élément figure pour le modele img.html ? non
 - faut-il l’élément figure pour le modele text_csv ?
 - appliquer l’élément figure au plugin Mediabox
