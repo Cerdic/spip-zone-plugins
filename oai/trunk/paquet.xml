@@ -2,7 +2,7 @@
 	prefix="oai"
 	categorie="divers"
 	version="1.1.6"
-	etat="dev"
+	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="oai_logo.png"
 >
