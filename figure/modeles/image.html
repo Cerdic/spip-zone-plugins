@@ -21,7 +21,7 @@ equivalent a un <docXX> pour une image en mode image
 #SET{width,#LARGEUR}
 #SET{height,#HAUTEUR}
 #SET{url,#ENV{lien}}
-<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[
+<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{align})][ (#ENV{class})] spip_lien_ok'[
 	style='float:(#ENV{align}|match{left|right});[width:(#GET{width}|max{120})]px;']>
 	[<a href="(#GET{url})"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|attribut_html)]'[ type="(#ENV{lien}|?{#ENV{lien_mime},#MIME_TYPE})"]>]<img src='#GET{fichier}' alt='' width='#GET{width}' height='#GET{height}'>[(#GET{url}|?{</a>})][
 	(#TITRE|ou{#DESCRIPTIF}|ou{#CREDITS}|oui)
@@ -36,7 +36,7 @@ equivalent a un <docXX> pour une image en mode image
 (#REM) Cas des images qu'il faut embed (svg)
 ][
 (#INCLUS|=={embed}|oui)
-<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})]'[
+<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{align})]'[
 style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})']>
 	<object data='#URL_DOCUMENT' 
 		type='#MIME_TYPE'[

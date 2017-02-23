@@ -36,7 +36,7 @@
 	(#REM) image complete ?
 
 ][(#GET{image})
-<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[
+<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{align})][ (#ENV{class})] spip_lien_ok'[
  style='float:(#ENV{align}|match{left|right});']>
 [<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"]>]<img src='#URL_DOCUMENT' alt="[(#TITRE|attribut_html)]"[ title="(#TITRE|attribut_html)"][ width="(#LARGEUR)"][ height="(#HAUTEUR)"]>[(#ENV{lien}|?{</a>})]</span>
 ][
