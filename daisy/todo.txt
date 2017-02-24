@@ -1,0 +1,12 @@
+= TODO
+= pour Daisy CSS
+
+nothing to do ;)
+
+----
+Rappel : le but de ce plugin est d’appliquer une nomenclature et un ordre d’appel des fichiers CSS. Il ne distribue pas de CSS. Mais standardise la distribution de CSS.
+
+Il doit permettre des usages simples (clic & play) jusqu’à la complexe construction de framework personnalisé. Ce n’est pas pour autant un outil de construction. Mais un standard organisant l’appel des CSS dans la page HTML.
+
+Ce plugin garantit donc l’application de la nomenclature Daisy :
+http://daisy.tetue.net

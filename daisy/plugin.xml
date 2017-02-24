@@ -1,0 +1,22 @@
+<plugin>
+	<nom>Daisy CSS</nom>
+	<prefix>daisy</prefix>
+	<icon>icon/daisy.png</icon>
+	
+	<version>1.0.0</version>
+	<etat>experimental</etat>
+	<categorie>outil</categorie>
+	
+	<slogan>Daisy CSS pour SPIP</slogan>
+	<description>Organisation du code, nomenclature des fichiers et ordre d'appel, pour des CSS modulaires et maintenables. Pour savoir comment s'en servir, lire le fichier readme. ATTENTION : ce plugin experimental fonctionne mal… voir la todo pour aider à l'améliorer.</description>
+	<lien>http://daisy.tetue.net</lien>
+	<auteur>[Tetue->http://spip.tetue.net] - 2010</auteur>
+	
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="spip_bonux" version="[2.0;]" />
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>daisy_pipelines.php</inclure>
+	</pipeline>
+	<utilise id="tinytypo" />
+</plugin>
