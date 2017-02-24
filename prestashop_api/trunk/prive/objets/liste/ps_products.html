@@ -1,0 +1,32 @@
+
+<B_produits>
+	#ANCRE_PAGINATION
+	<div class="liste-objets ps-products">
+		<table class='spip liste'>
+			[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{prestashop_api:info_1_produit,prestashop_api:info_nb_produits}})</strong></caption>]
+			<thead>
+			<tr class='first_row'>
+				<th class='logo' scope='col'><:prestashop_api:logo:></th>
+				<th class='titre principale' scope='col'><:info_titre:></th>
+				<th class='date secondaire' scope='col'><:date:></th>
+				<th class='prix' scope='col'><:prestashop_api:prix:></th>
+				<th class='id' scope='col'><:info_numero_abbreviation:></th>
+			</tr>
+			</thead>
+			<tbody>
+			<BOUCLE_produits(PRESTASHOP:PRODUCTS){active=1}{pagination #ENV{nb,5}}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td class="logo"><a href="#URL_IMAGE_PRESTASHOP{product,#ID}" class="mediabox">[(#URL_IMAGE_PRESTASHOP{product,#ID}|image_reduire{80,80})]</a></td>
+			<td class='titre principale'><a href="#URL_PRESTASHOP{product,#ID}"><strong>[(#NAME|typo)]</strong></a></td>
+				<td class='date secondaire'>[<span title="[(#DATE_ADD|heures_minutes)]">(#DATE_ADD|affdate_jourcourt)</span>]</td>
+				<td class='prix'>[(#PRICE|number_format{2})]</td>
+				<td class='id'>#ID</td>
+			</tr>
+			</BOUCLE_produits>
+			</tbody>
+		</table>
+		[<p class='pagination'>(#PAGINATION{#ENV{pagination,prive}})</p>]
+	</div>
+</B_produits>
+	[<div class="liste-objets ps_products caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>]
+<//B_produits>

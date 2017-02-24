@@ -1,0 +1,39 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:prestashop_api:cfg_titre_parametrages:></h3>
+
+	<p class="explication"><:prestashop_api:cfg_parametrages_explications:></p>
+
+	[(#BOITE_OUVRIR{Notes de développement, info})]
+	[(#VAL{
+-* Ce plugin sait gérer du multi-boutiques par langue.
+-* Dans ce cas l'URL indiquée ici correspond donc à l'un des chemins possibles pour accéder à l'API de Prestashop.
+-* Une fois connecté une première fois le plugin va interroger le webservice pour avoir
+l'URL des différentes boutiques et les langues qui leur correspondent.
+-* Par défaut les boucles PRESTASHOP tel que <code>(PRESTASHOP:PRODUCTS)</code> appeleront
+le Webservice en utilisant l'URL d'API correspondant à la boutique dans la langue en cours.
+	}|propre)]
+	[(#BOITE_FERMER)]
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+
+			<div class="editer-groupe">
+				[(#SAISIE{input, url,
+				label=<:prestashop_api:label_url_prestashop:>,
+				placeholder=https://domaine.tld/boutique})]
+
+				[(#SAISIE{input, cle,
+				label=<:prestashop_api:label_cle_webservice:>,
+					placeholder=IZEF5CNVCBHKND15CVGM61LPN2Y4D2HF})]
+			</div>
+
+			<input type="hidden" name="_meta_casier" value="prestashop_api" />
+			<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+		</div>
+	</form>
+</div>
