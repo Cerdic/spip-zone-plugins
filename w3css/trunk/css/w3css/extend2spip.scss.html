@@ -6,17 +6,30 @@
 	padding-left: 0;
 }
 %fieldset--alt {
-	padding-top: 2em !important;
+	/* padding-top: 2em !important; */
 	legend {	
 		display: inline-block;
-		width: auto;position: absolute;
-		top: -16px;left: 0;right: 0;
+		width: 100%;
+		position: relative;
+		top: 0;
+		left: -10px;
+		right: 0;
 		margin: 0;
-		padding-top: 10px;
-		padding-bottom: 10px;
 		text-transform: uppercase;
 		font-variant: small-caps;
 		font-size: 13px;
+		z-index: 10;
+		&:before {
+				content: '';
+				display: inline-block;
+				width: calc(100% + 50px);
+				position: absolute;
+				height: 40px;
+				background: #CONFIG{w3css/theme};
+				left: -15px;
+				top:0;
+				z-index: -5;
+			}		
 		}
 }
 
@@ -30,6 +43,10 @@ fieldset {
 	@extend .w3-section;
 	position: relative;
 	@extend %fieldset--alt;
+}
+form.nolegend legend
+fieldset.nolegend legend {
+	display: none;
 }
 fieldset > ul {
 	@extend %unstyled;	
@@ -50,7 +67,8 @@ label {
 .choix > label,
 input[type=checkbox] + label,
 input[type=radio] + label, {
-	background-color: transparent !important;	
+	background-color: transparent !important;
+	display: inline-block;
 }
 label .obligatoire {
 	@extend .w3-small;
@@ -85,7 +103,7 @@ select {
 	border-bottom: 1px solid #CONFIG{w3css/theme};
 }
 p.boutons {
-	@extend .w3-theme-l4;
+	@extend .w3-theme-l3;
 	@extend .w3-padding-xlarge;
 	@extend .w3-right-align;
 	@extend .w3-border-bottom;
@@ -105,12 +123,17 @@ p.boutons {
 	@extend .w3-border-red;
 	@extend .w3-padding-8;
 	@extend .w3-display-container;
+	margin-left: -24px;
+	margin-right: -24px; /* +10px pour compenser le border left */
 	padding-top: 2.5em !important;
+	padding-right: 24px;
 }
 .erreur_message {
 	@extend .w3-text-red;
 	@extend .w3-padding;
 	@extend .w3-display-topright;
+	margin-right: 10px;
+	@extend .w3-small;
 }
 .explication {
 	@extend .w3-panel;
