@@ -7,13 +7,12 @@
 ]<BOUCLE_article(ARTICLES){id_article}>
 [(#REM)
 
-	1. D'abord rassembler les informations
-	et les formater
+	1. D'abord rassembler les informations et les formater
 
 ]
 [(#SET{titre, #TITRE|supprimer_tags|textebrut})]
 [(#SET{lang, #LANG})]
-[(#SET{desc,[(#CHAPO|sinon{#INTRODUCTION}|supprimer_tags|textebrut)]})]
+[(#SET{desc,[(#CHAPO|sinon{#INTRODUCTION}|sinon{#TITRE}|supprimer_tags|textebrut)]})]
 [(#SET{author,#LESAUTEURS|supprimer_tags|textebrut})]
 [(#SET{date,#DATE})]
 [(#SET{url,#URL_ARTICLE})]
