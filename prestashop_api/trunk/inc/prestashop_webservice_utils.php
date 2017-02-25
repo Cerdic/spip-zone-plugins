@@ -23,6 +23,14 @@ function prestashop_ws_list_shops() {
 
 	$shops = [];
 
+	// Est-on en SSL ?
+	$xml = $wsps->get([
+		'resource' => 'configurations',
+		'display' => 'full',
+		'filter[name]' => 'PS_SSL_ENABLED'
+	]);
+	$ssl = (bool)$xml->configurations->configuration->value;
+
 	// Description des magasins
 	$xml = $wsps->get([
 		'resource' => 'shops',
@@ -55,7 +63,7 @@ function prestashop_ws_list_shops() {
 				$domain = (string)$u->domain;
 				$domain_ssl = (string)$u->domain_ssl;
 				$physical_uri = (string)$u->physical_uri;
-				if ($domain_ssl) {
+				if ($ssl and $domain_ssl) {
 					$shops[$id_shop]['url'] = 'https://' . $domain_ssl . $physical_uri;
 				} else {
 					$shops[$id_shop]['url'] = 'http://' . $domain . $physical_uri;
