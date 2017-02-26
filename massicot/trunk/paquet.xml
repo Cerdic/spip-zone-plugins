@@ -28,6 +28,7 @@
 	<pipeline nom="document_desc_actions" inclure="massicot_pipelines.php" />
 	<pipeline nom="post_edition" inclure="massicot_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="massicot_pipelines.php" />
+  <pipeline nom="editer_contenu_objet" inclure="massicot_pipelines.php" />
 
 	<!-- <lib nom="jquery.imgareaselect.js" lien="https://github.com/odyniec/imgareaselect/archive/master.zip" /> -->
 

@@ -155,3 +155,38 @@ function massicot_formulaire_traiter($flux) {
 
 	return $flux;
 }
+
+/**
+ * Ajouter un lien pour recadrer les vignettes des documents
+ *
+ * @pipeline editer_contenu_objet
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function massicot_editer_contenu_objet($flux) {
+
+	$html = $flux['data'];
+	$args = $flux['args'];
+
+	if ($args['type'] === 'illustrer_document') {
+
+		include_spip('base/abstract_sql');
+
+		$id_vignette = sql_getfetsel(
+			'id_vignette',
+			'spip_documents',
+			'id_document='.intval($args['id'])
+		);
+
+		$href = generer_url_ecrire(
+			'massicoter_image',
+			'objet=document&id_objet=' . $id_vignette . '&redirect=' . urlencode(self())
+		);
+		$lien = '<a href="' . $href . '"><strong>' . _T('massicot:massicoter') . '</strong></a>';
+
+		$repere = '<span class=\'image_loading\'>';
+		$flux['data'] = str_replace($repere, $lien . $repere, $html);
+	}
+
+	return $flux;
+}
