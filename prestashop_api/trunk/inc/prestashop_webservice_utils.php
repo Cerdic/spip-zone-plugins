@@ -29,7 +29,7 @@ function prestashop_ws_list_shops() {
 		'display' => 'full',
 		'filter[name]' => 'PS_SSL_ENABLED'
 	]);
-	$ssl = (bool)$xml->configurations->configuration->value;
+	$ssl = (bool)((string)$xml->configurations->configuration->value);
 
 	// Description des magasins
 	$xml = $wsps->get([
