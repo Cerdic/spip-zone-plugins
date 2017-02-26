@@ -190,3 +190,27 @@ function massicot_editer_contenu_objet($flux) {
 
 	return $flux;
 }
+
+/**
+ * Appliquer le recadrage sur l'image afficher dans le formulaire illustrer_document
+ *
+ * @pipeline editer_contenu_objet
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function massicot_formulaire_charger($flux) {
+
+	if ($flux['args']['form'] === 'illustrer_document') {
+		$parametres = massicot_get_parametres(
+			'document',
+			$flux['data']['id_vignette']
+		);
+
+		$flux['data']['vignette'] = massicoter_fichier(
+			$flux['data']['vignette'],
+			$parametres
+		);
+	}
+
+	return $flux;
+}

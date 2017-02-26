@@ -330,11 +330,23 @@ function massicoter_logo_document($logo, $doc = array()) {
 
 	include_spip('inc/filtres');
 	include_spip('inc/filtres_images_mini');
+	include_spip('base/abstract_sql');
+
+	$id_vignette = sql_getfetsel(
+		'id_vignette',
+		'spip_documents',
+		'id_document='.intval($doc['id_document'])
+	);
+
+	/* S'il y a un id_vignette, on l'utilise */
+	if ($id_vignette) {
+		$doc['id_document'] = $id_vignette;
+		unset($doc['fichier']);
+	}
 
 	/* S'il n'y a pas de fichier dans la pile, on va le chercher dans
 	   la table documents */
 	if (! isset($doc['fichier'])) {
-		include_spip('base/abstract_sql');
 		$rows = sql_allfetsel(
 			'fichier, extension',
 			'spip_documents',
