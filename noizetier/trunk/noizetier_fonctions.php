@@ -1150,8 +1150,13 @@ function noizetier_page_informer($page, $information = '', $options =array()) {
 		// Initialiser les composants de l'identifiant de la page:
 		// - type-composition si la page est une composition
 		// - type sinon
+		// On gère aussi le cas de Zpip v1 où page-xxxx désigne une page et non une composition.
+		// Dans ce cas, on doit donc obtenir type = xxxx et composition vide.
 		$identifiants = explode('-', $page);
 		if (!isset($identifiants[1])) {
+			$identifiants[1] = '';
+		} elseif ($identifiants[0] == 'page') {
+			$identifiants[0] = $identifiants[1];
 			$identifiants[1] = '';
 		}
 		$composition_virtuelle = false;
