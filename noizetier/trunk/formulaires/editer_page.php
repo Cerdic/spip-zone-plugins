@@ -202,7 +202,7 @@ function formulaires_editer_page_traiter_dist($page, $new, $retour = '')
 		$noizetier_compositions = array();
 	}
 
-	$noizetier_compositions[$type_page][$composition] = array(
+	$noizetier_compositions["${type_page}-${composition}"] = array(
 		'nom' => _request('nom'),
 		'description' => _request('description'),
 		'icon' => _request('icon'),
@@ -215,7 +215,7 @@ function formulaires_editer_page_traiter_dist($page, $new, $retour = '')
 		}
 	}
 	if (count($branche) > 0) {
-		$noizetier_compositions[$type_page][$composition]['branche'] = $branche;
+		$noizetier_compositions["${type_page}-${composition}"]['branche'] = $branche;
 	}
 
 	ecrire_meta('noizetier_compositions', serialize($noizetier_compositions));

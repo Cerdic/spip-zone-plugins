@@ -15,8 +15,8 @@ define('_CACHE_INCLUSIONS_NOISETTES', 'noisettes_inclusions.php');
  *
  * @staticvar array $liste_noisettes
  *
- * @param text $type     renvoyer seulement un type de noisettes
- * @param text $noisette renvoyer spécifiquement une noisette données
+ * @param string $type     renvoyer seulement un type de noisettes
+ * @param string $noisette renvoyer spécifiquement une noisette données
  *
  * @return array
  */
@@ -202,7 +202,6 @@ function noizetier_charger_infos_noisette_yaml($noisette, $info = '') {
  * Charger les informations des contexte pour une noisette.
  *
  * @param string $noisette
- * @staticvar array $params_noisettes
  *
  * @return array
  */
@@ -241,153 +240,8 @@ function noizetier_obtenir_dossier_pages() {
 
 
 /**
- * Lister les pages et les compositions spécifiques au noizetier pouvant recevoir des noisettes.
- * Le tableau de resultats peut-etre modifie via le pipeline noizetier_lister_pages.
- *
- * @param string $page_specifique
- * 		Id d'une page précise ou chaine vide.
- *
- * @return array
- * 		Si un id de page valide est fourni, on renvoie le tableau des éléments de cette page.
- * 		Sinon, on renvoie le tableau de toutes les pages, chaque index étant l'id de la page.
+ * @return array|null
  */
-function noizetier_lister_pages($page_specifique = '') {
-	static $liste_pages = null;
-
-	if (is_null($liste_pages)) {
-		$liste_pages = array();
-
-		// Choisir le bon répertoire des pages
-		$repertoire_pages = noizetier_obtenir_dossier_pages();
-
-		if ($repertoire_pages) {
-			// Lister les fonds disponibles dans le repertoire des pages et ce pour tous les plugins activés
-			$liste = find_all_in_path($repertoire_pages, '.+[.]html$');
-			if (count($liste)) {
-				foreach ($liste as $squelette => $chemin) {
-					$page = basename($squelette, '.html');
-					$dossier = str_replace($squelette, '', $chemin);
-					// Exclure certaines pages :
-					// -- celles du privé situes dans prive/contenu
-					// -- page liée au plugin Zpip en v1
-					// -- z_apl liée aux plugins Zpip v1 et Zcore
-					if ((substr($dossier, -14) != 'prive/contenu/')
-					and (($page != 'page') or !defined('_DIR_PLUGIN_Z'))
-					and (($page != 'z_apl') or (!defined('_DIR_PLUGIN_Z') and !defined('_DIR_PLUGIN_ZCORE')))) {
-						if (count($infos_page = noizetier_charger_infos_page($dossier, $page)) > 0) {
-							// On n'inclue la page que si les plugins qu'elle nécessite explicitement dans son
-							// fichier de configuration sont bien tous activés.
-							// Rappel : si une page est incluse dans un plugin non actif elle ne sera pas détectée
-							//          lors du find_all_in_path() puisque le plugin n'est pas dans le path SPIP.
-							$page_a_garder = true;
-							if (isset($infos_page['necessite'])) {
-								foreach ($infos_page['necessite'] as $plugin) {
-									if (!defined('_DIR_PLUGIN_'.strtoupper($plugin))) {
-										$page_a_garder = false;
-									}
-								}
-							}
-							if ($page_a_garder) {
-								$liste_pages[$page] = $infos_page;
-							}
-						}
-					}
-				}
-			}
-
-			$liste_pages = pipeline('noizetier_lister_pages', $liste_pages);
-
-			// On ajoute les compositions du noizetier qui ne sont définies que dans une meta propre au NoiZetier.
-			if (defined('_DIR_PLUGIN_COMPOSITIONS')) {
-
-				$noizetier_compositions = isset($GLOBALS['meta']['noizetier_compositions'])
-					? unserialize($GLOBALS['meta']['noizetier_compositions'])
-					: array();
-				// On doit transformer le tableau de [type][compo] en [type-compo]
-				$liste_compos = array();
-				if (is_array($noizetier_compositions) and $noizetier_compositions) {
-					foreach ($noizetier_compositions as $type => $compos_type) {
-						foreach ($compos_type as $compo => $infos_compo) {
-							$infos_compo['nom'] = typo($infos_compo['nom']);
-							$infos_compo['description'] = propre($infos_compo['description']);
-							if ($infos_compo['icon'] == '') {
-								$infos_compo['icon'] = (isset($liste_pages[$type]) && isset($liste_pages[$type]['icon']) && $liste_pages[$type]['icon'] != '') ? $liste_pages[$type]['icon'] : 'composition-24.png';
-							}
-							if (isset($liste_pages[$type])) {
-								$infos_compo['blocs'] = $liste_pages[$type]['blocs'];
-							} else {
-								$infos_compo['blocs'] = noizetier_blocs_defaut();
-							}
-							$liste_compos[$type.'-'.$compo] = $infos_compo;
-						}
-					}
-				}
-				$liste_pages = $liste_pages + $liste_compos;
-			}
-		}
-	}
-
-	if ($page_specifique and isset($liste_pages[$page_specifique])) {
-		return $liste_pages[$page_specifique];
-	} else {
-		return $liste_pages;
-	}
-}
-
-
-/**
- * Lister les pages et les compositions spécifiques au noizetier pouvant recevoir des noisettes.
- * Le tableau de resultats peut-etre modifie via le pipeline noizetier_lister_pages.
- *
- * @param string $page_specifique
- * 		Id d'une page précise ou chaine vide.
- *
- * @return array
- * 		Si un id de page valide est fourni, on renvoie le tableau des éléments de cette page.
- * 		Sinon, on renvoie le tableau de toutes les pages, chaque index étant l'id de la page.
- */
-function noizetier_lister_objets($objet = '', $id_objet = 0) {
-	static $liste_objets = null;
-
-	if (is_null($liste_objets)) {
-		$liste_objets = array();
-
-		// On récupère chaque objet ayant des noisettes dans la table spip_noisettes.
-		$from = array('spip_noisettes');
-		$select = array('objet', 'id_objet', "count(noisette) as 'noisettes'");
-		$where = array('id_objet>0');
-		$group = array('objet', 'id_objet');
-		$objets = sql_allfetsel($select, $from, $where, $group);
-		if ($objets and is_array($objets)) {
-			include_spip('inc/quete');
-			include_spip('base/objets');
-			foreach ($objets as $_objet) {
-				// On calcule le titre de l'objet à partir de la fonction idoine
-				$titre = generer_info_entite($_objet['id_objet'], $_objet['objet'], 'titre');
-				// On recherche le logo de l'objet si il existe sinon on stocke le logo du type d'objet
-				// (le chemin complet)
-				$logo = '';
-				if ($_objet['objet'] != 'document') {
-					$logo_infos = quete_logo(id_table_objet($_objet['objet']), 'on', $_objet['id_objet'], 0, false);
-					$logo = isset($logo_infos['src']) ? $logo_infos['src'] : '';
-				}
-				if (!$logo) {
-					$logo = noizetier_chemin_icone($_objet['objet'] . '.png');
-				}
-
-				$liste_objets[$_objet['objet']][$_objet['id_objet']] =
-					array('noisettes' => $_objet['noisettes'], 'titre' => $titre, 'logo' => $logo);
-			}
-		}
-	}
-
-	if ($objet and $id_objet and isset($liste_objets[$objet][$id_objet])) {
-		return $liste_objets[$objet][$id_objet];
-	} else {
-		return $liste_objets;
-	}
-}
-
 function noizetier_lister_objets_exclus() {
 
 	static $exclusions = null;
@@ -410,129 +264,6 @@ function noizetier_lister_objets_exclus() {
 	}
 
 	return $exclusions;
-}
-
-/**
- * Charger les informations d'une page, contenues dans un xml de config s'il existe.
- *
- * @param string $dossier
- * @param string $page
- * @param string $info
- *
- * @return array
- */
-function noizetier_charger_infos_page($dossier, $page, $info = '') {
-	// on peut appeler avec le nom du squelette
-	$page = preg_replace(',[.]html$,i', '', $page);
-	
-	// Choisir le bon répertoire des pages
-	$repertoire_pages = noizetier_obtenir_dossier_pages();
-
-	// On autorise le fait que le fichier xml ne soit pas dans le meme plugin que le fichier .html
-	// Au cas ou le fichier .html soit surcharge sans que le fichier .xml ne le soit
-	$fichier = find_in_path("$repertoire_pages$page.xml");
-
-	include_spip('inc/xml');
-	include_spip('inc/texte');
-	$infos_page = array();
-	
-	// S'il existe un fichier xml de configuration (s'il s'agit d'une composition on utilise l'info de la composition)
-	if (file_exists($fichier) and $xml = spip_xml_load($fichier, false) and count($xml['page'])) {
-		$xml = reset($xml['page']);
-	} elseif (file_exists($fichier) and $xml = spip_xml_load($fichier, false) and count($xml['composition'])) {
-		$xml = reset($xml['composition']);
-	} else {
-		$xml = '';
-	}
-	
-	if ($xml != '') {
-		$infos_page['nom'] = _T_ou_typo(spip_xml_aplatit($xml['nom']));
-		$infos_page['description'] = isset($xml['description']) ? _T_ou_typo(spip_xml_aplatit($xml['description'])) : '';
-		$infos_page['icon'] = isset($xml['icon']) ? reset($xml['icon']) : 'page-24.png';
-
-		// Decomposition des blocs
-		if (spip_xml_match_nodes(',^bloc,', $xml, $blocs)) {
-			$infos_page['blocs'] = array();
-			foreach (array_keys($blocs) as $bloc) {
-				list($balise, $attributs) = spip_xml_decompose_tag($bloc);
-				$infos_page['blocs'][$attributs['id']] = array(
-					'nom' => $attributs['nom'] ? _T($attributs['nom']) : $attributs['id'],
-					'icon' => isset($attributs['icon']) ? $attributs['icon'] : '',
-					'description' => _T($attributs['description']),
-				);
-			}
-		}
-
-		if (spip_xml_match_nodes(',^necessite,', $xml, $necessites)) {
-			$infos_page['necessite'] = array();
-			foreach (array_keys($necessites) as $necessite) {
-				list($balise, $attributs) = spip_xml_decompose_tag($necessite);
-				$infos_page['necessite'][] = $attributs['id'];
-			}
-		}
-	} elseif (defined('_NOIZETIER_LISTER_PAGES_SANS_XML') ? _NOIZETIER_LISTER_PAGES_SANS_XML : true) {
-		// S'il n'y a pas de fichier XML de configuration
-		$infos_page['nom'] = $page;
-		$infos_page['icon'] = 'img/ic_page.png';
-	}
-
-	// Si les blocs n'ont pas ete definis, on applique les blocs par defaut
-	if (count($infos_page) > 0 and !isset($infos_page['blocs'])) {
-		$infos_page['blocs'] = noizetier_blocs_defaut();
-	}
-
-	// On renvoie les infos
-	if (!$info) {
-		return $infos_page;
-	} else {
-		return isset($infos_page[$info]) ? $infos_page[$info] : '';
-	}
-}
-
-/**
- * La liste des blocs par defaut d'une page peut etre modifiee via le pipeline noizetier_blocs_defaut.
- *
- * @staticvar array $blocs_defaut
- *
- * @return array
- */
-function noizetier_blocs_defaut() {
-	static $blocs_defaut = null;
-
-	if (is_null($blocs_defaut)) {
-		if (defined('_DIR_PLUGIN_ZCORE') and isset($GLOBALS['z_blocs']) and is_array($GLOBALS['z_blocs'])) {
-			$blocs_defaut = array();
-			
-			foreach ($GLOBALS['z_blocs'] as $z_bloc) {
-				$blocs_defaut[$z_bloc] = array(
-					'nom' => ucfirst($z_bloc),
-				);
-			}
-		}
-		else {
-			$blocs_defaut = array(
-				'contenu' => array(
-					'nom' => _T('noizetier:nom_bloc_contenu'),
-					'description' => _T('noizetier:description_bloc_contenu'),
-					'icon' => 'bloc-contenu-24.png',
-					),
-				'navigation' => array(
-					'nom' => _T('noizetier:nom_bloc_navigation'),
-					'description' => _T('noizetier:description_bloc_navigation'),
-					'icon' => 'bloc-navigation-24.png',
-					),
-				'extra' => array(
-					'nom' => _T('noizetier:nom_bloc_extra'),
-					'description' => _T('noizetier:description_bloc_extra'),
-					'icon' => 'bloc-extra-24.png',
-					),
-			);
-		}
-		
-		$blocs_defaut = pipeline('noizetier_blocs_defaut', $blocs_defaut);
-	}
-
-	return $blocs_defaut;
 }
 
 
@@ -615,7 +346,7 @@ function noizetier_ajouter_noisette($noisette, $page, $bloc) {
  * Tri les noisettes d'une page
  * Attention : parfois la page est transmise dans $ordre (et peu éventuellement changer en cours, cas de la page-dist de Zpip-vide).
  *
- * @param text  $page
+ * @param string  $page
  * @param array $ordre
  *
  * @return bool
@@ -697,8 +428,8 @@ function noizetier_trier_noisette($page, $ordre) {
 /**
  * Déplace une noisette au sein d'un bloc.
  *
- * @param text $id_noisette
- * @param text $sens
+ * @param int $id_noisette
+ * @param string $sens
  */
 function noizetier_deplacer_noisette($id_noisette, $sens) {
 	$id_noisette = intval($id_noisette);
@@ -827,9 +558,9 @@ function noizetier_deplacer_noisette($id_noisette, $sens) {
 /**
  * Supprime une composition du noizetier.
  *
- * @param text $page
+ * @param string $page
  *
- * @return text
+ * @return void
  */
 function noizetier_supprimer_composition($page) {
 	$type_page = noizetier_page_type($page);
@@ -842,39 +573,6 @@ function noizetier_supprimer_composition($page) {
 	ecrire_meta('noizetier_compositions', serialize($noizetier_compositions));
 }
 
-/**
- * Renvoie le type d'une page à partir de son identifiant.
- *
- * @param string $page
- * 		L'identifiant de la page.
- *
- * @return string
- * 		Le type de la page choisie, c'est-à-dire:
- * 		- soit l'identifiant complet de la page,
- * 		- soit le mot précédent le tiret dans le cas d'une composition.
- */
-function noizetier_page_type($page) {
-	$type = explode('-', $page, 2);
-
-	return $type[0];
-}
-
-/**
- * Détermine, à partir de son identifiant, la composition d'une page si elle existe.
- *
- * @param string $page
- * 		L'identifiant de la page.
- *
- * @return string
- *      La composition de la page choisie, à savoir, le mot suivant le tiret,
- * 		ou la chaine vide sinon.
- */
-function noizetier_page_composition($page) {
-	$composition = explode('-', $page, 2);
-	$composition = isset($composition[1]) ? $composition[1] : '';
-
-	return $composition;
-}
 
 /**
  * Liste les blocs pour lesquels il y a des noisettes a inserer.
@@ -957,36 +655,6 @@ function noizetier_lister_icones() {
 	return $liste_icones;
 }
 
-/**
- * Teste si une page repérée par son identifiant fait partie des compositions du noizetier.
- * Les compositions du noizetier sont enregistrées dans une meta.
- *
- * @param string $page
- * 		L'identifiant de la page.
- *
- * @return boolean
- * 		Vrai si la page fait bien partie des compositions du noizetier, false sinon.
- */
-function noizetier_est_composition_noizetier($page) {
-	$page_est_composition = false;
-
-	$compositions_enregistrees =
-		isset($GLOBALS['meta']['noizetier_compositions'])
-		? unserialize($GLOBALS['meta']['noizetier_compositions'])
-		: array();
-
-	if ($compositions_enregistrees) {
-		if (strpos($page, '-') !== false) {
-			list($type, $composition) = explode('-', $page, 2);
-			$page_est_composition =
-				(isset($compositions_enregistrees[$type][$composition]) and is_array($compositions_enregistrees[$type][$composition]))
-				? true
-				: false;
-		}
-	}
-
-	return $page_est_composition;
-}
 
 /**
  * Retourne les elements du contexte uniquement
@@ -1161,8 +829,8 @@ function noizetier_tableau_export() {
 /**
  * Importe une configuration de noisettes et de compositions.
  *
- * @param text  $type_import
- * @param text  $import_compos
+ * @param string  $type_import
+ * @param string  $import_compos
  * @param array $config
  *
  * @return bool
@@ -1245,9 +913,9 @@ function noizetier_importer_configuration($type_import, $import_compos, $config)
 /**
  * Retourne le chemin complet d'une icone, vérifie d'abord chemin_image, sinon passe par find_in_path.
  *
- * @param text $icone
+ * @param string $icone
  *
- * @return text
+ * @return string
  */
 function noizetier_chemin_icone($icone){
 	if ($i = chemin_image($icone)) {
@@ -1256,3 +924,459 @@ function noizetier_chemin_icone($icone){
 		return find_in_path($icone);
 	}
 }
+
+
+// -------------------------------------------------------------------
+// ---------------------------- API BLOCS ----------------------------
+// -------------------------------------------------------------------
+
+/**
+ * La liste des blocs par defaut d'une page peut etre modifiee via le pipeline noizetier_blocs_defaut.
+ *
+ *
+ * @return array
+ */
+function noizetier_bloc_defaut() {
+	static $blocs_defaut = null;
+
+	if (is_null($blocs_defaut)) {
+		if (defined('_DIR_PLUGIN_ZCORE') and !empty($GLOBALS['z_blocs'])) {
+			$blocs_defaut = $GLOBALS['z_blocs'];
+		}
+		else {
+			$blocs_defaut = array('contenu', 'navigation', 'extra');
+		}
+
+		// Changer la liste au travers du pipeline. A priori le but est de supprimer
+		// certains blocs comme head ou head_js si on ne veut pas les configurer.
+		$blocs_defaut = pipeline('noizetier_blocs_defaut', $blocs_defaut);
+	}
+
+	return $blocs_defaut;
+}
+
+
+/**
+ * Retourne la liste des descriptions des blocs par defaut du squelette.
+ *
+ *
+ *
+ * @return array
+ */
+function noizetier_bloc_repertorier() {
+	static $blocs = null;
+
+	if (is_null($blocs)) {
+		$options['blocs_defaut'] = noizetier_bloc_defaut();
+		foreach ($options['blocs_defaut'] as $_bloc) {
+			if ($configuration = noizetier_bloc_informer($_bloc, '', $options)) {
+				$blocs[$_bloc] = $configuration;
+			}
+		}
+	}
+
+	return $blocs;
+}
+
+
+/**
+ * Retourne la description complète d'un bloc.
+ * La description est disponible dans un fichier YAML.
+ *
+ *
+ * @return array|string
+ */
+function noizetier_bloc_informer($bloc, $information = '', $options = array()) {
+	static $description_bloc = array();
+
+	if (!isset($description_bloc[$bloc])) {
+		if ($fichier = find_in_path("${bloc}/bloc.yaml")) {
+			// Il y a un fichier YAML de configuration dans le répertoire du bloc
+			include_spip('inc/yaml');
+			if ($description = yaml_charger_inclusions(yaml_decode_file($fichier))) {
+				$description['nom'] = isset($description['nom']) ? _T_ou_typo($description['nom']) : ucfirst($bloc);
+				if (isset($description['description'])) {
+					$description['description'] = _T_ou_typo($description['description']);
+				}
+				if (!isset($description['icon'])) {
+					$description['icon'] = 'bloc-24.png';
+				}
+			}
+		} elseif (!defined('_DIR_PLUGIN_ZCORE') and in_array($bloc, array('contenu', 'navigation', 'extra'))) {
+			// Avec Zpip v1, les blocs sont toujours les mêmes : on en donne une description standard.
+			$description = array(
+				'nom' => _T("noizetier:nom_bloc_${bloc}"),
+				'description' => _T("noizetier:description_bloc_${bloc}"),
+				'icon' => "bloc-${bloc}-24.png",
+			);
+		} else {
+			// Aucune description, on renvoie juste le nom qui coincide avec l'identifiant du bloc
+			$description = array('nom' => ucfirst($bloc));
+		}
+		// Sauvegarde de la description du bloc pour une consultation ultérieure dans le même hit.
+		$description_bloc[$bloc] = $description;
+	}
+
+	if (!$information) {
+		return $description_bloc[$bloc];
+	} elseif (isset($description_bloc[$bloc][$information])) {
+		return $description_bloc[$bloc][$information];
+	} else {
+		return '';
+	}
+}
+
+
+// -------------------------------------------------------------------
+// ---------------------------- API PAGES ----------------------------
+// -------------------------------------------------------------------
+
+/**
+ * Retourne la liste des pages, des compositions explicites et des compositions virtuelles.
+ * Chaque page est fournie avec l'ensemble de sa configuration.
+ *
+ * @uses noizetier_informer_page()
+ * @api
+ * @filtre
+ *
+ * @return array|null
+ * 		Tableau des pages, l'index est l'identifiant de la page.
+ */
+function noizetier_page_repertorier() {
+	static $pages = null;
+
+	if (is_null($pages)) {
+		// Choisir le bon répertoire des pages
+		$options['repertoire_pages'] = noizetier_obtenir_dossier_pages();
+
+		if ($options['repertoire_pages']) {
+			// Initialiser les blocs par défaut
+			$options['blocs_defaut'] = noizetier_bloc_defaut();
+
+			// On recherche en premier lieu les pages et les compositions explicites
+			if ($fichiers = find_all_in_path($options['repertoire_pages'], '.+[.]html$')) {
+				foreach ($fichiers as $squelette => $chemin) {
+					$page = basename($squelette, '.html');
+					$dossier = str_replace($squelette, '', $chemin);
+					// essayer dirname
+					// Exclure certaines pages :
+					// -- celles du privé situes dans prive/contenu
+					// -- page liée au plugin Zpip en v1
+					// -- z_apl liée aux plugins Zpip v1 et Zcore
+					if ((substr($dossier, -14) != 'prive/contenu/')
+					and (($page != 'page') or !defined('_DIR_PLUGIN_Z'))
+					and (($page != 'z_apl') or (!defined('_DIR_PLUGIN_Z') and !defined('_DIR_PLUGIN_ZCORE')))) {
+						if ($configuration = noizetier_page_informer($page, '', $options)) {
+							// On n'inclue la page que si les plugins qu'elle nécessite explicitement dans son
+							// fichier de configuration sont bien tous activés.
+							// Rappel : si une page est incluse dans un plugin non actif elle ne sera pas détectée
+							//          lors du find_all_in_path() puisque le plugin n'est pas dans le path SPIP.
+							$page_a_garder = true;
+							if (isset($configuration['necessite'])) {
+								foreach ($configuration['necessite'] as $plugin) {
+									if (!defined('_DIR_PLUGIN_'.strtoupper($plugin))) {
+										$page_a_garder = false;
+									}
+								}
+							}
+							if ($page_a_garder) {
+								$pages[$page] = $configuration;
+							}
+						}
+					}
+				}
+			}
+
+			// On ajoute les compositions virtuelles qui ne sont définies que dans une meta propre au noiZetier.
+			if (defined('_DIR_PLUGIN_COMPOSITIONS')) {
+				include_spip('inc/config');
+				$options['compositions'] = lire_config('noizetier_compositions', array());
+				if ($options['compositions']) {
+					foreach ($options['compositions'] as $_composition => $_configuration) {
+						if ($configuration = noizetier_page_informer($_composition, '', $options)) {
+							$pages[$_composition] = $configuration;
+						}
+					}
+				}
+			}
+
+			// Appel du pipeline noizetier_lister_pages pour éventuellement compléter ou modifier la liste
+			$pages = pipeline('noizetier_lister_pages', $pages);
+		}
+	}
+
+	return $pages;
+}
+
+
+/**
+ * Retourne la configuration de la page, de la composition explicite ou de la composition vrtuelle demandée.
+ *
+ * @uses noizetier_obtenir_dossier_pages()
+ * @uses noizetier_bloc_defaut()
+ * @api
+ * @filtre
+ *
+ * @param string	$page
+ * 		Identififant de la page ou de la composition.
+ * @param string	$information
+ * 		Information spécifique à retourner. Si vide, on retourne toute la configuration de la page
+ * @param array		$options
+ *      Options d'optimisation passées par l'appelant. Les options sont :
+ * 		- `repertoire_pages` : répertoire où chercher les pages et les compositions explicites.
+ * 		- `blocs_defaut` : liste des identifiants de blocs configurables par défaut pour toutes les pages.
+ * 		- `compositions`: meta des compositions virtuelles créées par le noizetier.
+ *
+ * @return array|string
+ */
+function noizetier_page_informer($page, $information = '', $options =array()) {
+
+	static $description_page = array();
+
+	if (!isset($description_page[$page])) {
+		// Initialisation de la description
+		$description = array();
+
+		// Choisir le bon répertoire des pages
+		if (empty($options['repertoire_pages'])) {
+			$options['repertoire_pages'] = noizetier_obtenir_dossier_pages();
+		}
+
+		// Initialiser les blocs par défaut
+		if (empty($options['blocs_defaut'])) {
+			$options['blocs_defaut'] = noizetier_bloc_defaut();
+		}
+
+		// Initialiser les composants de l'identifiant de la page:
+		// - type-composition si la page est une composition
+		// - type sinon
+		$identifiants = explode('-', $page);
+		if (!isset($identifiants[1])) {
+			$identifiants[1] = '';
+		}
+		$composition_virtuelle = false;
+
+		// La recherche de la page est basée sur l'heuristique suivante:
+		//  1- Les pages ou compositions explicites sont les plus fréquentes et on les recherche
+		//     en premier.
+		//     a- Le fichier YAML est recherché en premier,
+		//     b- ensuite le fichier XML pour compatibilité ascendante.
+		//     c- enfin, si il n'y a ni YAML, ni XML et que le mode le permet, on renvoie une description standard minimale
+		//  2- Si cette recherche n'aboutit pas et que le plugin Compositions est actif,
+		//     on scrute les compositions du noiZetier stockées en meta.
+		if ($fichier = find_in_path("{$options['repertoire_pages']}${page}.yaml")) {
+			// 1a- il y a un fichier YAML de configuration
+			include_spip('inc/yaml');
+			if ($description = yaml_charger_inclusions(yaml_decode_file($fichier))) {
+				$description['nom'] = isset($description['nom']) ? _T_ou_typo($description['nom']) : $page;
+				if (isset($description['description'])) {
+					$description['description'] = _T_ou_typo($description['description']);
+				}
+				if (!isset($description['icon'])) {
+					$description['icon'] = 'page-24.png';
+				}
+				if (!isset($description['blocs_exclus'])) {
+					$description['blocs'] = $options['blocs_defaut'];
+				} else {
+					$description['blocs'] = array_diff($options['blocs_defaut'], $description['blocs_exclus']);
+				}
+			}
+		} elseif ($fichier = find_in_path("{$options['repertoire_pages']}${page}.xml")) {
+			// 1b- il y a un fichier XML de configuration.
+			//     on extrait et on parse le XML de configuration en tenant compte que ce peut être
+			//     celui d'une page ou d'une composition, ce qui change la balise englobante.
+			include_spip('inc/xml');
+			if ($xml = spip_xml_load($fichier, false)
+			and (isset($xml['page']) or isset($xml['composition']))) {
+				$xml = isset($xml['page']) ? reset($xml['page']) : reset($xml['composition']);
+				// Titre (nom), description et icone
+				$description['nom'] = isset($xml['nom']) ? _T_ou_typo(spip_xml_aplatit($xml['nom'])) : $page;
+				if (isset($xml['description'])) {
+					$description['description'] = _T_ou_typo(spip_xml_aplatit($xml['description']));
+				}
+				$description['icon'] = isset($xml['icon']) ? reset($xml['icon']) : 'page-24.png';
+
+				// Liste des blocs autorisés pour la page. On vérifie que les blocs configurés sont bien dans
+				// la liste des blocs par défaut.
+				$description['blocs'] = array();
+				if (spip_xml_match_nodes(',^bloc,', $xml, $blocs)) {
+					foreach (array_keys($blocs) as $_bloc) {
+						list(, $attributs) = spip_xml_decompose_tag($_bloc);
+						$description['blocs'][] = $attributs['id'];
+					}
+				}
+				$description['blocs'] = $description['blocs'] ? array_intersect($options['blocs_defaut'], $blocs) : $options['blocs_defaut'];
+
+				// Liste des plugins nécessaires pour utiliser la page
+				if (spip_xml_match_nodes(',^necessite,', $xml, $necessites)) {
+					$description['necessite'] = array();
+					foreach (array_keys($necessites) as $_necessite) {
+						list(, $attributs) = spip_xml_decompose_tag($_necessite);
+						$description['necessite'][] = $attributs['id'];
+					}
+				}
+			}
+		} elseif (defined('_NOIZETIER_LISTER_PAGES_SANS_XML') ? _NOIZETIER_LISTER_PAGES_SANS_XML : false) {
+			// 1c- il est autorisé de ne pas avoir de fichier XML de configuration
+			$description['nom'] = $page;
+			$description['icon'] = 'img/ic_page.png';
+			$description['blocs'] = $options['blocs_defaut'];
+		} elseif (defined('_DIR_PLUGIN_COMPOSITIONS')) {
+			// 2- la page est une composition du noizetier
+			if (empty($options['compositions'])) {
+				include_spip('inc/config');
+				$options['compositions'] = lire_config('noizetier_compositions', array());
+			}
+			if (isset($options['compositions'][$page])) {
+				$description = $options['compositions'][$page];
+				$description['nom'] = !empty($description['nom'])
+					? typo($description['nom'])
+					: $page;
+				if (isset($description['description'])) {
+					$description['description'] = typo($description['description']);
+				}
+				if (empty($description['icon'])) {
+					$description['icon'] = 'composition-24.png';
+				}
+				if (!isset($description['blocs_exclus'])) {
+					$description['blocs'] = $options['blocs_defaut'];
+				} else {
+					$description['blocs'] = array_diff($options['blocs_defaut'], $description['blocs_exclus']);
+				}
+				$composition_virtuelle = true;
+			}
+		}
+
+		// Sauvegarde de la description de la page pour une consultation ultérieure dans le même hit.
+		if ($description) {
+			$description['type'] = $identifiants[0];
+			$description['composition'] = $identifiants[1];
+			$description['composition_virtuelle'] = $composition_virtuelle;
+			$description_page[$page] = $description;
+		} else {
+			$description_page[$page] = array();
+		}
+	}
+
+	if (!$information) {
+		return $description_page[$page];
+	} elseif (isset($description_page[$page][$information])) {
+		return $description_page[$page][$information];
+	} else {
+		return '';
+	}
+}
+
+/**
+ * Renvoie le type d'une page à partir de son identifiant.
+ *
+ * @param string $page
+ * 		L'identifiant de la page.
+ *
+ * @return string
+ * 		Le type de la page choisie, c'est-à-dire:
+ * 		- soit l'identifiant complet de la page,
+ * 		- soit le mot précédent le tiret dans le cas d'une composition.
+ */
+function noizetier_page_type($page) {
+	$type = explode('-', $page, 2);
+
+	return $type[0];
+}
+
+/**
+ * Détermine, à partir de son identifiant, la composition d'une page si elle existe.
+ *
+ * @param string $page
+ * 		L'identifiant de la page.
+ *
+ * @return string
+ *      La composition de la page choisie, à savoir, le mot suivant le tiret,
+ * 		ou la chaine vide sinon.
+ */
+function noizetier_page_composition($page) {
+	$composition = explode('-', $page, 2);
+	$composition = isset($composition[1]) ? $composition[1] : '';
+
+	return $composition;
+}
+
+// --------------------------------------------------------------------
+// ---------------------------- API OBJETS ----------------------------
+// --------------------------------------------------------------------
+
+/**
+ * Lister les objets ayant des noisettes spéciquement configurées pour leur page.
+ *
+ * @param string $objet
+ * 		Type d'objet ou chaine vide.
+ * @param string $id_objet
+ * 		Id de l'objet ou 0.
+ *
+ * @return array|string
+ * 		Si le type et l'id de l'objet sont fournis, on renvoie la description de la page de cet objet.
+ * 		Sinon, on renvoie le tableau de toutes les objets sous la forme [type_objet][id_objet].
+ */
+function noizetier_objet_informer($objet = '', $id_objet = 0, $information = '') {
+	static $objets = null;
+	static $description_objet = array();
+
+	if ((!$objet and !$id_objet and is_null($objets))
+	or ($objet and $id_objet and !isset($description_objet[$objet][$id_objet]))) {
+		// On récupère le ou les objets ayant des noisettes dans la table spip_noisettes.
+		$from = array('spip_noisettes');
+		$select = array('objet', 'id_objet', "count(noisette) as 'noisettes'");
+		$where = array('id_objet>0');
+		if ($objet and $id_objet) {
+			$where = array('objet=' . sql_quote($objet), 'id_objet=' . intval($id_objet));
+		}
+		$group = array('objet', 'id_objet');
+		$objets_configures = sql_allfetsel($select, $from, $where, $group);
+		if ($objets_configures) {
+			include_spip('inc/quete');
+			include_spip('base/objets');
+			foreach ($objets_configures as $_objet) {
+				$description = array();
+				// On calcule le titre de l'objet à partir de la fonction idoine
+				$description['titre'] = generer_info_entite($_objet['id_objet'], $_objet['objet'], 'titre');
+				// On recherche le logo de l'objet si il existe sinon on stocke le logo du type d'objet
+				// (le chemin complet)
+				$description['logo'] = '';
+				if ($_objet['objet'] != 'document') {
+					$logo_infos = quete_logo(id_table_objet($_objet['objet']), 'on', $_objet['id_objet'], 0, false);
+					$description['logo'] = isset($logo_infos['src']) ? $logo_infos['src'] : '';
+				}
+				if (!$description['logo']) {
+					$description['logo'] = noizetier_chemin_icone("{$_objet['objet']}.png");
+				}
+				$description['noisettes'] = $_objet['noisettes'];
+
+				// On rajoute les blocs du type de page dont l'objet est une instance et on sauvegarde
+				// la description complète.
+				if ($objet and $id_objet) {
+					$description['blocs'] = noizetier_page_informer($objet, 'blocs');
+					$description_objet[$objet][$id_objet] = $description;
+				} else {
+					$description['blocs'] = noizetier_page_informer($_objet['objet'], 'blocs');
+					$objets[$_objet['objet']][$_objet['id_objet']] = $description;
+				}
+			}
+		}
+	}
+
+	if ($objet and $id_objet) {
+		if (!$information) {
+			return isset($description_objet[$objet][$id_objet])
+				? $description_objet[$objet][$id_objet]
+				: array();
+		} else {
+			return isset($description_objet[$objet][$id_objet][$information])
+				? $description_objet[$objet][$id_objet][$information]
+				: '';
+		}
+	} else {
+		return $objets;
+	}
+}
+
+include_spip('public/noizetier_balises');

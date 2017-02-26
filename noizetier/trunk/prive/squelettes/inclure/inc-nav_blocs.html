@@ -1,7 +1,13 @@
 [(#REM) <!-- Navigation dans les blocs configurables de la page --> ]
 
-#SET{blocs, #ENV{page, #ENV{objet}}|noizetier_lister_pages|table_valeur{blocs}}
-#SET{bloc_affiche, #ENV{bloc}|sinon{#GET{blocs}|array_keys|reset}}
+[(#ENV{page}|?{
+	#SET{blocs, #NOIZETIER_PAGE_INFOS{#ENV{page}, blocs}},
+	#SET{blocs, #NOIZETIER_OBJET_INFOS{#ENV{objet}, #ENV{id_objet}, blocs}}
+})]
+[(#ENV{bloc}|et{#ENV{bloc}|in_array{#GET{blocs}}}|?{
+	#SET{bloc_affiche, #ENV{bloc}},
+	#SET{bloc_affiche, #GET{blocs}|reset}
+})]
 [(#ENV{page}|?{
 	#SET{url_base, #URL_ECRIRE{#ENV{exec}}|parametre_url{page, #ENV{page}}},
 	#SET{url_base, #URL_ECRIRE{#ENV{exec}}|parametre_url{objet, #ENV{objet}}|parametre_url{id_objet, #ENV{id_objet}}}
@@ -14,10 +20,10 @@
 <BOUCLE_blocs(DATA){source table, #GET{blocs}}>
 	[<li class="item">
 		(#GET{url_base}
-			|parametre_url{bloc, #CLE}
+			|parametre_url{bloc, #VALEUR}
 			|lien_ou_expose{
-				#VALEUR|table_valeur{nom},
-				#CLE|=={#GET{bloc_affiche}}})
+				#NOIZETIER_BLOC_INFOS{#VALEUR, nom},
+				#VALEUR|=={#GET{bloc_affiche}}})
 	</li>]
 </BOUCLE_blocs>
 </ul>

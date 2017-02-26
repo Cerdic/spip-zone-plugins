@@ -18,20 +18,20 @@ Saisies qui liste les pages du site SPIP (appelables par spip.php?page=xxx)
 		<option value="0">[(#ENV{option_intro})]</option>]
 	<B_pages>
 	<optgroup label="#TITRE">
-		<BOUCLE_pages(POUR){tableau #NOIZETIER_LISTE_PAGES}{par cle}>
-		[(#CLE|noizetier_page_composition|non)
-			[(#ENV{multiple}|oui)
-			<option value="#CLE"[(#CLE|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>[(#VALEUR|table_valeur{nom})] ([(#CLE)])</option>]
-			[(#ENV{multiple}|non)
-			<option value="#CLE"[(#CLE|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>[(#VALEUR|table_valeur{nom})] ([(#CLE)])</option>]
-		][(#CLE|noizetier_page_type|=={page}|oui)
-			#SET{page,#CLE|noizetier_page_composition}
-			[(#ENV{multiple}|oui)
-			<option value="#GET{page}"[(#GET{page}|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>[(#VALEUR|table_valeur{nom})] ([(#GET{page})])</option>]
-			[(#ENV{multiple}|non)
-			<option value="#GET{page}"[(#GET{page}|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>[(#VALEUR|table_valeur{nom})] ([(#GET{page})])</option>]
-		]
-		</BOUCLE_pages>
+	<BOUCLE_pages(DATA){source table, #NOIZETIER_PAGE_INFOS}{par cle}>
+	[(#VALEUR{composition}|non)
+		[(#ENV{multiple}|oui)
+		<option value="#CLE"[(#CLE|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>[(#VALEUR{nom})] ([(#CLE)])</option>]
+		[(#ENV{multiple}|non)
+		<option value="#CLE"[(#CLE|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>[(#VALEUR{nom})] ([(#CLE)])</option>]
+	][(#VALEUR{type}|=={page}|oui)
+		#SET{page, #VALEUR{composition}}
+		[(#ENV{multiple}|oui)
+		<option value="#GET{page}"[(#GET{page}|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>[(#VALEUR{nom})] ([(#GET{page})])</option>]
+		[(#ENV{multiple}|non)
+		<option value="#GET{page}"[(#GET{page}|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>[(#VALEUR{nom})] ([(#GET{page})])</option>]
+	]
+	</BOUCLE_pages>
 	</optgroup>
 	</B_pages>
 </select>

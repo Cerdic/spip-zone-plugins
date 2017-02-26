@@ -37,6 +37,10 @@ function noizetier_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter', 'TABLE spip_noisettes ADD INDEX (id_objet)'),
 	);
 
+	$maj['0.6.0'] = array(
+		array('maj_060'),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -56,4 +60,27 @@ function noizetier_vider_tables($nom_meta_version_base) {
 	supprimer_fichier(_DIR_CACHE._CACHE_CONTEXTE_NOISETTES);
 	supprimer_fichier(_DIR_CACHE._CACHE_INCLUSIONS_NOISETTES);
 	supprimer_fichier(_DIR_CACHE._CACHE_DESCRIPTIONS_NOISETTES);
+}
+
+/**
+ * Transformer le tableau des compositions virtuelles stocké en meta.
+ * Jusqu'au schéma 0.5.0 le tableau était de la forme [$type][$composition].
+ * A partir du schéma 0.6.0 le tableau prend la forme [$type-$composition].
+ *
+ */
+function maj_060() {
+
+	include_spip('inc/config');
+	$compositions = lire_config('noizetier_compositions', array());
+
+	if ($compositions) {
+		// On transforme le tableau de [type][composition] en [type-composition]
+		$compositions_060 = array();
+		foreach ($compositions as $_type => $_compositions) {
+			foreach ($_compositions as $_composition => $_description) {
+				$compositions_060["${_type}-${_composition}"] = $_description;
+			}
+		}
+		ecrire_config('noizetier_compositions', $compositions_060);
+	}
 }

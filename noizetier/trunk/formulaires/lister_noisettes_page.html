@@ -14,13 +14,13 @@
 	[#BOITE_OUVRIR{'','error'}(#ENV*{message_erreur})#BOITE_FERMER]
 	[#BOITE_OUVRIR{'','success'}(#ENV*{message_ok})#BOITE_FERMER]
 
-	#SET{blocs, #ENV{page, #ENV{objet}}|noizetier_lister_pages|table_valeur{blocs}}
-	#SET{bloc_affiche, #ENV{bloc}|sinon{#GET{blocs}|array_keys|reset}}
+	#SET{blocs, #NOIZETIER_PAGE_INFOS{#ENV{page, #ENV{objet}}, blocs}}
+	#SET{bloc_affiche, #ENV{bloc}|sinon{#GET{blocs}|reset}}
 	<BOUCLE_bloc_affiche(CONDITION){si #GET{bloc_affiche}}>
-	#SET{infos_bloc_affiche, #GET{blocs}|table_valeur{#GET{bloc_affiche}}}
+	#SET{infos_bloc_affiche, #NOIZETIER_BLOC_INFOS{#GET{bloc_affiche}}}
 	<a name="bloc-#GET{bloc_affiche}"></a>
-	[(#BOITE_OUVRIR{#GET{infos_bloc_affiche}|table_valeur{nom}, simple, titrem})]
-		[<p>(#GET{infos_bloc_affiche}|table_valeur{description})</p>]
+	[(#BOITE_OUVRIR{#GET{infos_bloc_affiche/nom}, simple, titrem})]
+		[<p>(#GET{infos_bloc_affiche/description})</p>]
 		<input type="hidden" name="ordre[]" value="bloc-#GET{bloc_affiche}" />
 		<ul class="editer-groupe liste-items liste-noisettes bloc">
 		<BOUCLE_noisettes(NOISETTES){objet?}{id_objet?}{type=#ENV{page}|noizetier_page_type}{composition=#ENV{page}|noizetier_page_composition}{bloc=#GET{bloc_affiche}}{par rang}>

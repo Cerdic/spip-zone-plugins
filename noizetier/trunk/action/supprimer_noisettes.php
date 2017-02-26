@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Cette action permet à l'utilisateur de supprimer de sa base de données, de façon sécurisée,
  * une noisette donnée ou toutes les noisettes d'une page ou d'un bloc d'une page.
- * Le compositions de page du noizetier sont aussi prises en compte.
+ * Le compositions de page explicites ou virtuelles (créée par le noizetier) sont aussi prises en compte.
  *
  * Cette action est réservée aux webmestres. Elle nécessite des arguments dont la liste dépend
  * du contexte.
@@ -112,7 +112,7 @@ function supprimer_noisettes($contexte, $objet, $bloc) {
 			$invalideur = "id='{$objet['type']}/{$objet['id']}'";
 		} else {
 			// Suppression des noisettes d'une page.
-			// Il faut tenir du cas où la page est une composition auquel cas le type et la
+			// Il faut tenir compte du cas où la page est une composition auquel cas le type et la
 			// composition sont insérées séparément dans la table spip_noisettes.
 			$page = explode('-', $objet['id'], 2);
 			$where[] = 'type=' . sql_quote($page[0]);
