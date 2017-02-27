@@ -192,7 +192,7 @@ function massicot_editer_contenu_objet($flux) {
 }
 
 /**
- * Appliquer le recadrage sur l'image afficher dans le formulaire illustrer_document
+ * Appliquer le recadrage sur l'image affichée dans le formulaire illustrer_document
  *
  * @pipeline editer_contenu_objet
  * @param  array $flux Données du pipeline
