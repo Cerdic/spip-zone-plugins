@@ -33,10 +33,11 @@
 [(#SET{title,[(#TYPE_DOCUMENT) - [(#TAILLE|taille_en_octets)]]})]
 [(#MEDIA|=={image}|oui) #SET{title,#TITRE|sinon{#GET{title}}]
 <figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{align})][ (#ENV{class})] spip_lien_ok'[
-	style='float:(#ENV{align}|match{left|right});']>
+	style='float:(#ENV{align}|match{left|right});'][
+	(#TITRE|ou{#DESCRIPTIF}|ou{#CREDITS}|oui)role="group"]>
 	[<a href="(#GET{url})"[
 		class="(#ENV{lien_class})"] title='[(#GET{title}|attribut_html)]'[
-		(#ENV{lien}|?{'',type="#MIME_TYPE"})]>]<img src='#GET{fichier}' alt='' width='#GET{width}' height='#GET{height}'>[(#GET{url}|?{</a>})][]
+		(#ENV{lien}|?{'',type="#MIME_TYPE"})]>]<img src='#GET{fichier}' alt='' width='#GET{width}' height='#GET{height}'>[(#GET{url}|?{</a>})][
 	(#TITRE|ou{#DESCRIPTIF}|ou{#CREDITS}|oui)
 	<figcaption class='#EDIT{descriptif} spip_doc_descriptif'[ style='width:(#GET{width}|min{350}|max{120})px;']>[
 		<strong class='#EDIT{titre} spip_doc_titre'>(#TITRE)</strong>]

@@ -22,7 +22,8 @@ equivalent a un <docXX> pour une image en mode image
 #SET{height,#HAUTEUR}
 #SET{url,#ENV{lien}}
 <figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{align})][ (#ENV{class})] spip_lien_ok'[
-	style='float:(#ENV{align}|match{left|right});[width:(#GET{width}|max{120})]px;']>
+	style='float:(#ENV{align}|match{left|right});[width:(#GET{width}|max{120})]px;'][
+	(#TITRE|ou{#DESCRIPTIF}|ou{#CREDITS}|oui)role="group"]>
 	[<a href="(#GET{url})"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|attribut_html)]'[ type="(#ENV{lien}|?{#ENV{lien_mime},#MIME_TYPE})"]>]<img src='#GET{fichier}' alt='' width='#GET{width}' height='#GET{height}'>[(#GET{url}|?{</a>})][
 	(#TITRE|ou{#DESCRIPTIF}|ou{#CREDITS}|oui)
 	<figcaption class='#EDIT{descriptif} spip_doc_descriptif'[ style='width:(#GET{width}|min{350}|max{120})px;']>[
@@ -37,7 +38,8 @@ equivalent a un <docXX> pour une image en mode image
 ][
 (#INCLUS|=={embed}|oui)
 <figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{align})]'[
-style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})']>
+style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})'][
+(#TITRE|ou{#DESCRIPTIF}|ou{#CREDITS}|oui)role="group"]>
 	<object data='#URL_DOCUMENT' 
 		type='#MIME_TYPE'[
 		width='(#ENV{largeur}?{'', #LARGEUR})'][

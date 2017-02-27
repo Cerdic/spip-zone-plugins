@@ -1,7 +1,7 @@
 <BOUCLE_tous (DOCUMENTS types_documents) {id_document=#ID} {tout}>
 #SET{largeur,#ENV{largeur, #LARGEUR|?{#LARGEUR,400}}|max{120}}
 <figure class='spip_document_#ID_DOCUMENT spip_document_audio spip_documents[ (#ENV{align})]'
-	style='[(#ENV{align}|match{^(left|right)$}|oui)float:#ENV{align};][width:(#GET{largeur})px]'>
+	style='[(#ENV{align}|match{^(left|right)$}|oui)float:#ENV{align};][width:(#GET{largeur})px]' role="group">
 	[(#LOGO_DOCUMENT{vignette}|image_reduire{#GET{largeur},0}|vider_attribut{class})]
 	<div class="audio-wrapper"[ style='width:(#GET{largeur})px;max-width:100%;']>
 		<audio class="mejs mejs-#ID_DOCUMENT [ mejs-(#ENV{skin})]"

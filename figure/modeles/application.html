@@ -12,7 +12,8 @@
  (#ENV{controls}=={PositionSlider}|?{#SET{largeur,#GET{largeur}|moins{40}},''})
 ][(#INCLUS|=={embed}|?{[(#ENV{controls,''}|non)
 <figure class='spip_document_#ID_DOCUMENT spip_document_application spip_documents[ spip_documents_(#ENV{align})][ (#ENV{align})]'[
-style='[(#ENV{align}|match{^(left|right)$}|oui)float:#ENV{align};] (#ENV{align,center}|=={center}|non)[width:(#GET{largeur}|max{120})px]']>
+style='[(#ENV{align}|match{^(left|right)$}|oui)float:#ENV{align};] (#ENV{align,center}|=={center}|non)[width:(#GET{largeur}|max{120})px]'][
+(#INCLUS|=={embed}|et{#ENV{controls,''}|non}|oui)role="group"]>
 ]})
 ][(#EXTENSION|=={swf}|oui)
 	<object classid='clsid:d27cdb6e-ae6d-11cf-96b8-444553540000' 
