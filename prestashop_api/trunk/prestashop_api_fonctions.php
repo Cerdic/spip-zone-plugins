@@ -62,6 +62,8 @@ function balise_URL_PRESTASHOP_dist($p) {
  * @param string $lang
  */
 function calculer_url_prestashop($type = '', $id = '', $lang = '') {
+	static $urls = [];
+
 	$url_prestashop = rtrim(prestashop_ws_list_shops_by_lang($lang), '/');
 	if (!$type) {
 		return $url_prestashop;
@@ -72,9 +74,14 @@ function calculer_url_prestashop($type = '', $id = '', $lang = '') {
 		$url = parametre_url($url, 'id_' . $type, $id, '&');
 	}
 
+	if (isset($urls[$url])) {
+		return $urls[$url];
+	}
+
 	// Pour éviter des cURL à tout bout de champ… on cache
-	if ($W = cache_get($key = 'url_presta_' . $url)) {
-		return $W;
+	if (cache_exists($key = 'url_presta_' . $url) and !prestashop_ws_cache_update()) {
+		$_url = cache_get($key);
+		return $urls[$url] = $_url;
 	}
 
 	// Calculer l'URL de redirection qu'utilise prestashop pour obtenir une belle URL.

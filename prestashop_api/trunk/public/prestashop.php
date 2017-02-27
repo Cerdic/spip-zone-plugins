@@ -184,8 +184,11 @@ class IterateurPRESTASHOP extends IterateurData {
 			$ttl = intval($this->command['datacache']);
 		}
 
-		if ($cache AND ($cache['time'] + (isset($ttl) ? $ttl : $cache['ttl']) > time())
-			AND !(_request('var_mode') === 'recalcul' AND include_spip('inc/autoriser') AND autoriser('recalcul'))) {
+		if (
+			$cache
+			AND ($cache['time'] + (isset($ttl) ? $ttl : $cache['ttl']) > time())
+			AND !prestashop_ws_cache_update()
+		) {
 			return $cache['data'];
 		}
 

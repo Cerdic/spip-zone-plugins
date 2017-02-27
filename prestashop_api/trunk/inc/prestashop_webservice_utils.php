@@ -2,6 +2,16 @@
 
 include_spip('inc/memoization');
 
+
+/**
+ * Doit-on mettre à jour le cache (de mémoization) ?
+ *
+ * Mode recalcul et autorisation de recalculer.
+ */
+function prestashop_ws_cache_update() {
+	return (_request('var_mode') === 'recalcul' AND include_spip('inc/autoriser') AND autoriser('recalcul'));
+}
+
 /**
  * Retourne la liste des différentes boutiques
  * connues dans ce Prestashop.
@@ -9,8 +19,14 @@ include_spip('inc/memoization');
  * @return array Liste des boutiques et leurs URLs
  */
 function prestashop_ws_list_shops() {
-	if (!is_null($W = cache_me())) {
-		return $W;
+	static $shops = null;
+	if (!is_null($shops)) {
+		return $shops;
+	}
+
+	if (!prestashop_ws_cache_update() and cache_exists(__FUNCTION__)) {
+		$shops = cache_get(__FUNCTION__);
+		return $shops;
 	}
 
 	try {
@@ -72,6 +88,8 @@ function prestashop_ws_list_shops() {
 		}
 	}
 
+	cache_set(__FUNCTION__, $shops, 24 * 3600);
+
 	return $shops;
 }
 
@@ -96,9 +114,16 @@ function prestashop_ws_list_shops() {
  * @return array Liste des langues (codes & urls)
  */
 function prestashop_ws_list_languages() {
-	if (!is_null($W = cache_me())) {
-		return $W;
+	static $langues = null;
+	if (!is_null($langues)) {
+		return $langues;
 	}
+
+	if (!prestashop_ws_cache_update() and cache_exists(__FUNCTION__)) {
+		$langues = cache_get(__FUNCTION__);
+		return $langues;
+	}
+
 	$shops = prestashop_ws_list_shops();
 	$langues = [];
 
@@ -130,6 +155,8 @@ function prestashop_ws_list_languages() {
 			}
 		}
 	}
+
+	cache_set(__FUNCTION__, $langues, 24 * 3600);
 
 	return $langues;
 }
