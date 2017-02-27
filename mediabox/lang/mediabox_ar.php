@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	'boxstr_slideshowStart' => '&#1593;&#1585;&#1590; &#1605;&#1578;&#1608;&#1575;&#1589;&#1604;',
 	'boxstr_slideshowStop' => '&#1573;&#1610;&#1602;&#1575;&#1601;',
-	'boxstr_current' => '{current}/{total}',
+	'boxstr_current' => '{current} / {total}',
 	'boxstr_previous' => '&#1575;&#1604;&#1587;&#1575;&#1576;&#1602;',
 	'boxstr_next' => '&#1575;&#1604;&#1578;&#1575;&#1604;&#1610;',
 	'boxstr_close' => '&#1573;&#1594;&#1604;&#1575;&#1602;',
