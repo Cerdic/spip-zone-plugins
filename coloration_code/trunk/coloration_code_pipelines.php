@@ -34,6 +34,7 @@ function coloration_code_header_prive_css($flux){
  */
 function coloration_code_insert_head_css($flux){
 	if ($f = find_in_path('css/coloration_code.css')) {
+	if ($f = find_in_path('css/coloration_code.css') and !PLUGIN_COLORATION_CODE_SANS_STYLES) {
 		$flux .= '<link rel="stylesheet" href="'.direction_css($f).'" type="text/css" media="all" />';
 	}
 	return $flux;
