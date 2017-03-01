@@ -178,41 +178,53 @@ function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$args,$sql_titre,$sql_type
 
 	$src_imgsize = str_replace('https://', 'http://', $src); // No https for getimagesize
 	list($width, $height) = @getimagesize($src_imgsize);
-	// hauteur du redimensionnement
-	// (on peut avoir passé une hauteur en %)
-	if (substr(trim($hauteur),-1)=='%')
-		$hauteur = trim($hauteur);
-	elseif (is_numeric($hauteur) && intval($hauteur)>0)
-		$hauteur = intval($hauteur);
-	elseif (in_array($taille,array('icone','petit','moyen','grand')))
-		$hauteur = $GLOBALS['meta']['media_taille_'.$taille.'_hauteur'];
-	elseif (is_numeric($taille) && intval($taille)>0)
-		$hauteur = intval($taille);
-	elseif ($GLOBALS['meta']['media_taille_defaut_hauteur'] && is_null($args['largeur']))
-		$hauteur = $GLOBALS['meta']['media_taille_defaut_hauteur'];
-	else
-		$hauteur = 100000;
-	// largeur du redimensionnement
-	// (on peut avoir passé une hauteur en %)
-	if (substr(trim($largeur),-1)=='%')
-		$hauteur = trim($largeur);
-	elseif (is_numeric($largeur) && intval($largeur)>0)
-		$largeur = intval($largeur);
-	elseif (in_array($taille,array('icone','petit','moyen','grand')))
-		$largeur = $GLOBALS['meta']['media_taille_'.$taille.'_largeur'];
-	elseif (is_numeric($taille) && intval($taille)>0)
-		$largeur = intval($taille); 
-	elseif ($GLOBALS['meta']['media_taille_defaut_largeur'] && is_null($args['hauteur']))
-		$largeur = $GLOBALS['meta']['media_taille_defaut_largeur'];
-	else
-		$largeur = 100000;
-	// Doit-on redimensionner ?
-	if (($height > $hauteur || $width > $largeur) && substr($largeur,-1)!='%' && substr($hauteur,-1)!='%') {
-		include_spip('inc/filtres_images_mini');
-		$img = image_reduire($src,$largeur,$hauteur);
-		}
-	else
-		$img = "<img src=\"$src_relative\" height=\"$height\" width=\"$width\" />";
+	
+	// hauteur ou largeur en relatif
+	if (substr(trim($hauteur),-1)=='%' || if (substr(trim($largeur),-1)=='%')) {
+		if (substr(trim($hauteur),-1)=='%')
+			$hauteur = trim($hauteur);
+		else
+			$hauteur = "auto";
+		
+		if (substr(trim($largeur),-1)=='%')
+			$largeur = trim($largeur);
+		else
+			$largeur = "auto";
+		
+		$img = "<img src=\"$src_relative\" style=\"height: $height; width:$width;\" />";
+	} else {
+	
+		// hauteur du redimensionnement
+		if (is_numeric($hauteur) && intval($hauteur)>0)
+			$hauteur = intval($hauteur);
+		elseif (in_array($taille,array('icone','petit','moyen','grand')))
+			$hauteur = $GLOBALS['meta']['media_taille_'.$taille.'_hauteur'];
+		elseif (is_numeric($taille) && intval($taille)>0)
+			$hauteur = intval($taille);
+		elseif ($GLOBALS['meta']['media_taille_defaut_hauteur'] && is_null($args['largeur']))
+			$hauteur = $GLOBALS['meta']['media_taille_defaut_hauteur'];
+		else
+			$hauteur = 100000;
+		// largeur du redimensionnement
+		if (is_numeric($largeur) && intval($largeur)>0)
+			$largeur = intval($largeur);
+		elseif (in_array($taille,array('icone','petit','moyen','grand')))
+			$largeur = $GLOBALS['meta']['media_taille_'.$taille.'_largeur'];
+		elseif (is_numeric($taille) && intval($taille)>0)
+			$largeur = intval($taille); 
+		elseif ($GLOBALS['meta']['media_taille_defaut_largeur'] && is_null($args['hauteur']))
+			$largeur = $GLOBALS['meta']['media_taille_defaut_largeur'];
+		else
+			$largeur = 100000;
+		// Doit-on redimensionner ?
+		if ($height > $hauteur || $width > $largeur) {
+			include_spip('inc/filtres_images_mini');
+			$img = image_reduire($src,$largeur,$hauteur);
+			}
+		else
+			$img = "<img src=\"$src_relative\" height=\"$height\" width=\"$width\" />";
+			
+	}
 	// Ajouter une alternative
 	// Variable alt si transmise, sinon le titre du document, sinon type et poids
 	if ($alt)
