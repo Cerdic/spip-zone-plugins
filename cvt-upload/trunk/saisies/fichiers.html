@@ -6,8 +6,8 @@
 ]
 <BOUCLE_input(DATA) {enum 1,#ENV{nb_fichiers,1}}>
 <div class="choix">
-	[(#ENV{label_fichiers_individuels}|!={non}|oui)
-	<label for="#ENV{nom}_[(#VALEUR|moins{1})]">[(#ENV{nb_fichiers,1}|>{1}|oui)<:cvtupload:saisie_fichiers_plusieur_label{nb=#VALEUR}:>]</label>
+	[(#ENV{label_fichiers_individuels}|!={non}|oui|et{#ENV{nb_fichiers,1}|>{1}|oui})
+	<label for="#ENV{nom}_[(#VALEUR|moins{1})]"><:cvtupload:saisie_fichiers_plusieur_label{nb=#VALEUR}:></label>
 	]
 	<input type="file" class="file[ (#ENV{class})]" name="#ENV{nom}\[[(#VALEUR|moins{1})]\]" id="#ENV{nom}_[(#VALEUR|moins{1})]" size="40"[(#HTML5|oui)[ accept="(#GET{mime})"]]/>
 </div>
