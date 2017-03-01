@@ -74,6 +74,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forums_public_thread' => '<strong>Fil de discussion</strong> : les participants au même fil de discussion reçoivent les notifications des forums (publics). Sont exclus les messages supprimés ou marqués comme SPAM.',
 
 	// I
+	'info_diffusion_nouveautes' => 'Contenu des mails annonçants les nouveautés du site',
+	'info_diffusion_nouveaute_partielle_non' => 'Diffuser le contenu complet',
+	'info_diffusion_nouveaute_partielle_oui' => 'Ne diffuser qu’un extrait',
 	'info_lien_publier_commentaire' => 'Publier ce commentaire',
 	'info_lien_signaler_spam_commentaire' => 'Signaler comme SPAM',
 	'info_lien_supprimer_commentaire' => 'Supprimer ce commentaire',

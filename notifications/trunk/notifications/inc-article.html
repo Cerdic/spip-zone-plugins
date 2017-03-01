@@ -12,7 +12,10 @@
 	[<p class="soustitre">(#SOUSTITRE)</p>]
 	<p class="info-publi"><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>[<span class="sep">, </span><span class="auteurs"><:par_auteur:> (#LESAUTEURS)</span>]</p>
 </div>
-
+[(#ENV{diffusion_nouveaute_partielle}|=={oui}|oui)
+[(#INTRODUCTION|textebrut)]
+]
+[(#ENV{diffusion_nouveaute_partielle}|=={oui}|non)
 [<div class="chapo" style="font-weight: bold;">(#CHAPO|image_reduire{500,*})</div>]
 [<div class="texte">(#TEXTE|image_reduire{500,*})</div>]
 
@@ -21,6 +24,7 @@
 
 [(#REM) Gestion du portfolio et des documents ]
 [(#INCLURE{fond=inclure/documents,id_article, env})]
+]
 
 [<div class="notes" style="border-top:1px solid #eee;font-size: 0.9em">(#NOTES)</div>]
 </BOUCLE_art>

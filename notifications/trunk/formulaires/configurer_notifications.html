@@ -39,6 +39,21 @@
 							<p class="explication"><:notifications:limiter_rubriques_explication:></p>
 							<input type="text" name="limiter_rubriques" value="[(#ENV{limiter_rubriques}|entites_html)]" id="limiter_rubriques" class="text" />
 						</li>
+						<li class='editer'>
+							<label><:info_annonce_nouveautes:></label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<p class="explication"><:notifications:info_diffusion_nouveautes:></p>
+							<div class="choix">
+								<input type="radio" name="diffusion_nouveaute_partielle" id="diffusion_nouveaute_partielle_non" value="non"
+									[(#ENV{diffusion_nouveaute_partielle}|=={oui}|non)checked="checked"]
+								/><label for="diffusion_nouveaute_partielle_non"><:notifications:info_diffusion_nouveaute_partielle_non:></label>
+							</div>
+							<div class="choix">
+								<input type="radio" name="diffusion_nouveaute_partielle" id="diffusion_nouveaute_partielle_oui" value="oui"
+									[(#ENV{diffusion_nouveaute_partielle}|=={oui}|oui)checked="checked"]
+								/><label for="diffusion_nouveaute_partielle_oui"><:notifications:info_diffusion_nouveaute_partielle_oui:></label>
+							</div>
+						</li>
 					</ul>
 				</fieldset>
 			</li>

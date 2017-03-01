@@ -12,9 +12,9 @@
 
 <h1><:nouveaux_articles:></h1>
 <hr />
-<BOUCLE_nv1(ARTICLES){age_relatif<=0}{par date}{inverse}{0,30}>
+<BOUCLE_nv1(ARTICLES){age_relatif<=0}{par date}{inverse}{0,3}>
 <div style="padding-bottom:2em">
-<INCLURE{fond=notifications/inc-article,id_article} />
+<INCLURE{fond=notifications/inc-article,id_article,diffusion_nouveaute_partielle=#CONFIG{notifications/diffusion_nouveaute_partielle,non}} />
 <p><a href="[(#URL_ARTICLE|url_absolue)]">[(#URL_ARTICLE|url_absolue)]</a></p>
 </div>
 </BOUCLE_nv1><B_nv2>
@@ -23,7 +23,7 @@
 <hr />
 <BOUCLE_nv2(BREVES){age_relatif<=0}{par date}{inverse}{0,30}>
 <div style="padding-bottom:2em">
-<INCLURE{fond=notifications/inc-breve,id_breve} />
+<INCLURE{fond=notifications/inc-breve,id_breve,diffusion_nouveaute_partielle=#CONFIG{notifications/diffusion_nouveaute_partielle,non}} />
 <p><a href="[(#URL_BREVE|url_absolue)]">[(#URL_BREVE|url_absolue)]</a></p>
 </div>
 </BOUCLE_nv2></BOUCLE_test_contenu>
