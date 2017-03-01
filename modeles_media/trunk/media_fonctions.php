@@ -179,7 +179,10 @@ function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$args,$sql_titre,$sql_type
 	$src_imgsize = str_replace('https://', 'http://', $src); // No https for getimagesize
 	list($width, $height) = @getimagesize($src_imgsize);
 	// hauteur du redimensionnement
-	if (is_numeric($hauteur) && intval($hauteur)>0)
+	// (on peut avoir passé une hauteur en %)
+	if (substr(trim($hauteur),-1)=='%')
+		$hauteur = trim($hauteur);
+	elseif (is_numeric($hauteur) && intval($hauteur)>0)
 		$hauteur = intval($hauteur);
 	elseif (in_array($taille,array('icone','petit','moyen','grand')))
 		$hauteur = $GLOBALS['meta']['media_taille_'.$taille.'_hauteur'];
@@ -190,7 +193,10 @@ function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$args,$sql_titre,$sql_type
 	else
 		$hauteur = 100000;
 	// largeur du redimensionnement
-	if (is_numeric($largeur) && intval($largeur)>0)
+	// (on peut avoir passé une hauteur en %)
+	if (substr(trim($largeur),-1)=='%')
+		$hauteur = trim($largeur);
+	elseif (is_numeric($largeur) && intval($largeur)>0)
 		$largeur = intval($largeur);
 	elseif (in_array($taille,array('icone','petit','moyen','grand')))
 		$largeur = $GLOBALS['meta']['media_taille_'.$taille.'_largeur'];
@@ -201,7 +207,7 @@ function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$args,$sql_titre,$sql_type
 	else
 		$largeur = 100000;
 	// Doit-on redimensionner ?
-	if ($height > $hauteur || $width > $largeur) {
+	if (($height > $hauteur || $width > $largeur) && substr($largeur,-1)!='%' && substr($hauteur,-1)!='%') {
 		include_spip('inc/filtres_images_mini');
 		$img = image_reduire($src,$largeur,$hauteur);
 		}
