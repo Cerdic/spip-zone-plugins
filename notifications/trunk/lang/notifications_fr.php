@@ -7,9 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0' => '--------------',
-
 	// A
 	'alt_logo_conf' => 'Logo du plugin Notifications',
 	'article_prive' => 'Publication d’articles',
@@ -74,9 +71,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forums_public_thread' => '<strong>Fil de discussion</strong> : les participants au même fil de discussion reçoivent les notifications des forums (publics). Sont exclus les messages supprimés ou marqués comme SPAM.',
 
 	// I
-	'info_diffusion_nouveautes' => 'Contenu des mails annonçants les nouveautés du site',
 	'info_diffusion_nouveaute_partielle_non' => 'Diffuser le contenu complet',
 	'info_diffusion_nouveaute_partielle_oui' => 'Ne diffuser qu’un extrait',
+	'info_diffusion_nouveautes' => 'Contenu des mails annonçants les nouveautés du site',
 	'info_lien_publier_commentaire' => 'Publier ce commentaire',
 	'info_lien_signaler_spam_commentaire' => 'Signaler comme SPAM',
 	'info_lien_supprimer_commentaire' => 'Supprimer ce commentaire',
@@ -126,6 +123,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'suivis_perso_url_suivis' => '<strong>Ajouter une URL de suivi personnalisé</strong> dans chacun des emails de notification. À partir de cette URL, l’utilisateur pourra configurer ses préférences individuelles de notification.',
 	'suivis_public_article_thread' => 'TODO : case à cocher sur chaque article/thread',
 	'suivis_public_changer_email' => 'TODO : changer d’email',
+
+	// 0
+	'0' => '--------------',
+
+	// S
 	'suivis_public_description' => 'Vous pourrez (quand ce sera fonctionnel...) y retrouver tous vos messages de forum, obtenir un fil RSS des réponses qui y seront apportées, choisir votre mode de notification, etc.',
 	'suivis_public_notif_desactiver' => 'TODO : case à cocher pour ne plus recevoir de notifications',
 	'suivis_public_vos_forums' => 'Vos forums',
