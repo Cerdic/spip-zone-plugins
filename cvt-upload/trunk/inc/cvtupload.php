@@ -50,7 +50,10 @@ function cvtupload_generer_html($infos_fichiers = null) {
 			if (isset($fichier['name'])) {
 				$html_fichiers[$champ] = recuperer_fond(
 					'formulaires/inc-cvtupload-fichier',
-					array_merge($fichier, array('crochets'=>"[$champ]"))
+					array_merge($fichier, array(
+						'crochets' => "[$champ]",
+						'champ'    => "$champ",
+					))
 				);
 			}
 			// Sinon c'est un champ multiple
@@ -58,7 +61,10 @@ function cvtupload_generer_html($infos_fichiers = null) {
 				foreach ($fichier as $cle=>$infos) {
 					$html_fichiers[$champ][$cle] = recuperer_fond(
 						'formulaires/inc-cvtupload-fichier',
-						array_merge($infos, array('crochets'=>"[$champ][$cle]"))
+						array_merge($infos, array(
+							'crochets' => "[$champ][$cle]",
+							'champ'    => $champ . "[$cle]",
+						))
 					);
 				}
 			}

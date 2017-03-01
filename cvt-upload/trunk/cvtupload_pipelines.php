@@ -55,16 +55,20 @@ function cvtupload_formulaire_verifier($flux) {
 							$infos_fichiers[$champ][$cle] = $infos_decodees;
 							$infos_fichiers[$champ][$cle]['infos_encodees'] = encoder_contexte_ajax($infos_decodees, $flux['args']['form']);
 
-							// Si suppression
-							if (isset($supprimer_fichier[$champ][$cle])) {								
+							// Si suppression ou un autre fichier uploadé en remplacement
+							if (isset($supprimer_fichier[$champ][$cle]) || 
+								(isset($_FILES[$champ]['name'][$cle]) && $_FILES[$champ]['error'][$cle] === UPLOAD_ERR_OK)
+							) {		
 								supprimer_fichier($infos_fichiers[$champ][$cle]['tmp_name']);
 								$name = $infos_fichiers[$champ][$cle]['name'];
 								unset($infos_fichiers[$champ][$cle]);
 								if (!count($infos_fichiers[$champ])) {
 									unset($infos_fichiers[$champ]);
 								}
-								// On génère une erreur pour réafficher le form de toute façon
-								$erreurs["$champ"] = _T('cvtupload:erreur_fichier_supprime',array("nom"=>$name));
+								if (isset($supprimer_fichier[$champ][$cle])) {
+									// On génère une erreur pour réafficher le form de toute façon
+									$erreurs["$champ"] = _T('cvtupload:erreur_fichier_supprime', array("nom" => $name));
+								}
 							}
 						}
 					}
@@ -73,17 +77,21 @@ function cvtupload_formulaire_verifier($flux) {
 					$infos_fichiers[$champ] = $infos_decodees;
 					$infos_fichiers[$champ]['infos_encodees'] = encoder_contexte_ajax($infos_decodees, $flux['args']['form']);
 
-					// Si suppression
-					if (isset($supprimer_fichier[$champ])) {
+					// Si suppression ou un autre fichier uploadé en remplacement
+					if (isset($supprimer_fichier[$champ]) ||
+						(isset($_FILES[$champ]['name']) && $_FILES[$champ]['error'] === UPLOAD_ERR_OK)
+					) {
 						supprimer_fichier($infos_fichiers[$champ]['tmp_name']);
 						$name = $infos_fichiers[$champ]['name'];
 						unset($infos_fichiers[$champ]);
-						// On génère une erreur pour réafficher le form de toute façon
-						$erreurs["$champ"] = _T('cvtupload:erreur_fichier_supprime',array("nom"=>$name));
+						if(isset($supprimer_fichier[$champ])) {
+							// On génère une erreur pour réafficher le form de toute façon
+							$erreurs["$champ"] = _T('cvtupload:erreur_fichier_supprime', array("nom" => $name));
+						}
 					}
 				}
 			}
-			
+
 			// On déplace le(s) fichier(s) dans notre dossier tmp de SPIP
 			// Et on met à jour les infos par rapport aux anciennes versions
 			if (
