@@ -1,22 +1,29 @@
 .formulaire_spip .choix > .fichier_precedent {
-	display:block; 
-	clear:right; 
-	overflow:auto;
+	display:       table;
+	width:         100%;
 	margin-bottom: 1em;
-	padding:.5em;
-	border:1px solid #ddd; 
-	border-radius:5px;
-	word-wrap: break-all;
+	border:        1px solid #DDD;
+	border-radius: 5px;
 }
 
-.formulaire_spip .choix .fichier_precedent .description {
-	float:left; 
-	width:10%;
-}
+.formulaire_spip .choix .fichier_precedent .description,
 .formulaire_spip .choix .fichier_precedent .choix {
-	float:right;
-	width:90%;
+	display:        table-cell;
+	padding:        .5em;
+	vertical-align: top;
 }
-.formulaire_spip .choix .fichier_precedent .choix label{
-	display:inline;
+
+.formulaire_spip .choix .fichier_precedent .description img {
+	display:       block;
+	margin-bottom: .5em;
 }
+
+.formulaire_spip .choix .fichier_precedent .choix label {
+	display: inline;
+}
+
+.formulaire_spip .choix .fichier_precedent .choix input[type=file] {
+	display:    block;
+	margin-top: 1em;
+}
+
