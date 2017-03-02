@@ -24,6 +24,18 @@ include_spip('public/prestashop');
  * L'URL de base du prestashop peut dépendre de la langue.
  * On peut forcer une langue en utilisant le 3è argument.
  *
+ * Par défaut, on souhaite URL "propre" (réécrite), et cela
+ * nécessite un appel du serveur vers le Prestashop pour déduire
+ * cette jolie URL. Cette correspondance URL => URL propre est mise
+ * en cache, ce qui peut poser problème avec certains éléments.
+ *
+ * Particulièrement pour le controlleur 'my-account', qui
+ * renvoie sur l'URL de la page de connexion (même si le visiteur est
+ * identifié sur Prestashop, vu que c'est le serveur qui demande l'URL).
+ * Pour ces cas particuliers, on peut demander à ne pas utiliser/calculer
+ * l'URL propre, et laisser l'URL d'appel du controlleur donc, en utilisant
+ * l'étoile.
+ *
  * @example
  *     ```
  *     #URL_PRESTASHOP
@@ -31,7 +43,13 @@ include_spip('public/prestashop');
  *     #URL_PRESTASHOP{category,3}
  *     #URL_PRESTASHOP{product,51,en}
  *     #URL_PRESTASHOP{'','',en}
+ *
+ *     #URL_PRESTASHOP{cart} <-- URL réécrite
+ *     #URL_PRESTASHOP*{my-account} <-- URL non réécrite
  *     ```
+ *
+ * @uses prestashop_calculer_url_propre()
+ * @uses prestashop_calculer_url_controlleur()
  *
  * @param $p
  * @return mixed
@@ -46,33 +64,74 @@ function balise_URL_PRESTASHOP_dist($p) {
 	if (!$lang = interprete_argument_balise(3, $p)) {
 		$lang = "''";
 	}
-	$p->code="calculer_url_prestashop($type, $id, $lang)";
+	if (!$p->etoile) {
+		$p->code = "prestashop_calculer_url_propre($type, $id, $lang)";
+	} else {
+		$p->code = "prestashop_calculer_url_controlleur($type, $id, $lang)";
+	}
 	return $p;
 }
 
 /**
- * Retourne une URL pour Prestashop.
+ * Retourne une URL appelant un controlleur de Prestashop.
+ *
+ * @uses prestashop_ws_list_shops_by_lang()
  *
  * @param string $type
- *     Type d'objet de prestashop
+ *     Type d'objet ou page de prestashop
  * @param int $id
  *     Identifiant d'objet de prestashop
  * @param string $lang
  *     Langue désirée.
- * @param string $lang
+ * @return string
+ *     URL vers le controlleur, tel que `https://domaine.tld/boutique/index.php?controller=truc&param=n`
  */
-function calculer_url_prestashop($type = '', $id = '', $lang = '') {
-	static $urls = [];
+function prestashop_calculer_url_controlleur($type = '', $id = '', $lang = '') {
 
 	$url_prestashop = rtrim(prestashop_ws_list_shops_by_lang($lang), '/');
 	if (!$type) {
 		return $url_prestashop;
 	}
+
 	$url = $url_prestashop . '/index.php';
 	$url = parametre_url($url, 'controller', $type, '&');
 	if ($id) {
 		$url = parametre_url($url, 'id_' . $type, $id, '&');
 	}
+
+	return $url;
+}
+
+/**
+ * Retourne une URL «propre» pour Prestashop
+ *
+ * Tente de calculer l'URL réécrite d'un élément de prestashop,
+ * en attrapant l'URL de redirection que renvoie le controlleur.
+ *
+ * On met en cache pour éviter de trop nombreux appels.
+ *
+ * @note
+ *     Il faut faire attention aux redirections d'URL qui seraient différentes
+ *     entre un visiteur connecté et non connecté. Le serveur appel toujours
+ *     en tant que non connecté donc, et met en cache cette URL.
+ *     Typiquement appeler ici la page 'my-account' pose problème par exemple.
+ *
+ * @uses prestashop_calculer_url_controlleur()
+ * @uses prestashop_ws_cache_update()
+ *
+ * @param string $type
+ *     Type d'objet ou page de prestashop
+ * @param int $id
+ *     Identifiant d'objet de prestashop
+ * @param string $lang
+ *     Langue désirée.
+ * @return string
+ *     l'URL réécrite par Prestashop, du genre `https://domaine.tld/boutique/truc-n`
+ */
+function prestashop_calculer_url_propre($type = '', $id = '', $lang = '') {
+	static $urls = [];
+
+	$url = prestashop_calculer_url_controlleur($type, $id, $lang);
 
 	if (isset($urls[$url])) {
 		return $urls[$url];
@@ -96,6 +155,7 @@ function calculer_url_prestashop($type = '', $id = '', $lang = '') {
 	cache_set($key, $url);
 	return $url;
 }
+
 
 
 
@@ -141,7 +201,7 @@ function balise_URL_IMAGE_PRESTASHOP_dist($p) {
  * @return mixed
  */
 function prestashop_image($objet, $id, $lang = '') {
-	$url = calculer_url_prestashop() . '/img/';
+	$url = prestashop_calculer_url_controlleur() . '/img/';
 	$id = trim($id);
 	$objet = trim($objet);
 	switch ($objet) {
