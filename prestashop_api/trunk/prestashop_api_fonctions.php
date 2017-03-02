@@ -132,6 +132,9 @@ function prestashop_calculer_url_propre($type = '', $id = '', $lang = '') {
 	static $urls = [];
 
 	$url = prestashop_calculer_url_controlleur($type, $id, $lang);
+	if (!$type) {
+		return $url;
+	}
 
 	if (isset($urls[$url])) {
 		return $urls[$url];
