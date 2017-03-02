@@ -56,8 +56,12 @@ function cvtupload_formulaire_verifier($flux) {
 							$infos_fichiers[$champ][$cle]['infos_encodees'] = encoder_contexte_ajax($infos_decodees, $flux['args']['form']);
 
 							// Si suppression ou un autre fichier uploadé en remplacement
-							if (isset($supprimer_fichier[$champ][$cle]) || 
-								(isset($_FILES[$champ]['name'][$cle]) && $_FILES[$champ]['error'][$cle] === UPLOAD_ERR_OK)
+							if (
+								isset($supprimer_fichier[$champ][$cle])
+								or (
+									isset($_FILES[$champ]['name'][$cle])
+									and $_FILES[$champ]['error'][$cle] === UPLOAD_ERR_OK
+								)
 							) {		
 								supprimer_fichier($infos_fichiers[$champ][$cle]['tmp_name']);
 								$name = $infos_fichiers[$champ][$cle]['name'];
@@ -78,8 +82,12 @@ function cvtupload_formulaire_verifier($flux) {
 					$infos_fichiers[$champ]['infos_encodees'] = encoder_contexte_ajax($infos_decodees, $flux['args']['form']);
 
 					// Si suppression ou un autre fichier uploadé en remplacement
-					if (isset($supprimer_fichier[$champ]) ||
-						(isset($_FILES[$champ]['name']) && $_FILES[$champ]['error'] === UPLOAD_ERR_OK)
+					if (
+						isset($supprimer_fichier[$champ])
+						or (
+							isset($_FILES[$champ]['name'])
+							and $_FILES[$champ]['error'] === UPLOAD_ERR_OK
+						)
 					) {
 						supprimer_fichier($infos_fichiers[$champ]['tmp_name']);
 						$name = $infos_fichiers[$champ]['name'];
