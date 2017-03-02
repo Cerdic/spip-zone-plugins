@@ -1,16 +1,31 @@
+.formulaire_spip .saisie_fichiers input[type=file] {
+	display:       block;
+	margin-bottom: 1em;
+}
+
 .formulaire_spip .choix > .fichier_precedent {
-	display:       table;
+	display:       block;
 	width:         100%;
+	overflow: auto;
 	margin-bottom: 1em;
 	border:        1px solid #DDD;
 	border-radius: 5px;
 }
 
 .formulaire_spip .choix .fichier_precedent .description,
-.formulaire_spip .choix .fichier_precedent .choix {
-	display:        table-cell;
-	padding:        .5em;
+.formulaire_spip .choix .fichier_precedent .action {
+	display: block;
+	float: left;
+	overflow: visible;
+	padding: .5em;
 	vertical-align: top;
+}
+.formulaire_spip .choix .fichier_precedent .description {
+	width: 10%;
+	overflow: visible;
+}
+.formulaire_spip .choix .fichier_precedent .action {
+	padding-left: 1em;
 }
 
 .formulaire_spip .choix .fichier_precedent .description img {
@@ -18,12 +33,6 @@
 	margin-bottom: .5em;
 }
 
-.formulaire_spip .choix .fichier_precedent .choix label {
+.formulaire_spip .choix .fichier_precedent .action label {
 	display: inline;
 }
-
-.formulaire_spip .choix .fichier_precedent .choix input[type=file] {
-	display:    block;
-	margin-top: 1em;
-}
-

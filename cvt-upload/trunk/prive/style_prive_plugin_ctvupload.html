@@ -2,26 +2,42 @@
 #SET{foncee,#ENV{couleur_foncee,3874b0}}
 [(#REM)<style>]
 
-.formulaire_spip .choix > .fichier_precedent {
-	display:block; 
-	clear:right; 
-	overflow:auto;
+.formulaire_spip .saisie_fichiers input[type=file] {
+	display:       block;
 	margin-bottom: 1em;
-	padding:.5em;
-	border:1px solid #ddd; 
-	border-radius:5px;
-	word-wrap: break-all;
 }
 
+.formulaire_spip .choix > .fichier_precedent {
+	display:       block;
+	width:         100%;
+	overflow: auto;
+	margin-bottom: 1em;
+	border:        1px solid #DDD;
+	border-radius: 5px;
+}
+
+.formulaire_spip .choix .fichier_precedent .description,
+.formulaire_spip .choix .fichier_precedent .action {
+	display: block;
+	float: left;
+	overflow: visible;
+	padding: .5em;
+	vertical-align: top;
+}
 .formulaire_spip .choix .fichier_precedent .description {
-	float:left; 
-	width:10%;
+	width: 10%;
+	overflow: visible;
 }
-.formulaire_spip .choix .fichier_precedent .choix {
-	float:right;
-	width:75%;
-	border:none;
+.formulaire_spip .choix .fichier_precedent .action {
+	padding-left: 1em;
 }
-.formulaire_spip .choix .fichier_precedent .choix label{
-	display:inline;
+
+.formulaire_spip .choix .fichier_precedent .description img {
+	display:       block;
+	margin-bottom: .5em;
 }
+
+.formulaire_spip .choix .fichier_precedent .action label {
+	display: inline;
+}
+
