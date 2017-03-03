@@ -64,5 +64,8 @@ function action_supprimer_favoris_collection_dist($id_favoris_collection=null) {
 		
 		// Puis on supprime la collection elle-même
 		sql_delete('spip_favoris_collections', 'id_favoris_collection = '.$id_favoris_collection);
+		
+		include_spip('inc/invalideur');
+		suivre_invalideur(true);
 	}
 }

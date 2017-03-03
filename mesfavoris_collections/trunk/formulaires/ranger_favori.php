@@ -122,6 +122,9 @@ function formulaires_ranger_favori_traiter_dist($objet, $id_objet, $redirect='')
 					)
 				);
 			}
+			
+			include_spip('inc/invalideur');
+			suivre_invalideur(true);
 		}
 	}
 	
