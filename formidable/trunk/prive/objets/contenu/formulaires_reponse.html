@@ -24,4 +24,10 @@
 		[(#DATE|affdate_jourcourt|concat{#DATE|affdate{", H:i"}})]
 	</div>
 </div>
+<div class="champ contenu_maj[ (#MAJ*|strlen|?{'',vide})]">
+	<div class='label'><:formidable:reponse_maj:></div>
+	<div dir='#LANG_DIR'>
+		[(#MAJ|affdate_jourcourt|concat{#MAJ|affdate{", H:i"}})]
+	</div>
+</div>
 </BOUCLE_formulaires_reponse>

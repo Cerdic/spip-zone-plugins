@@ -166,6 +166,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'reponse_aucune' => 'Aucune réponse',
 	'reponse_intro' => '@auteur@ a répondu au formulaire @formulaire@',
+	'reponse_maj' => 'Dernière modification',
 	'reponse_numero' => 'Réponse numéro :',
 	'reponse_statut' => 'Cette réponse est :',
 	'reponse_supprimer' => 'Supprimer cette réponse',
