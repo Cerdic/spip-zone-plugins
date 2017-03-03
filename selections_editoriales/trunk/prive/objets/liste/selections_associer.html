@@ -10,7 +10,9 @@
 	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
 	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" />
 	<input type="submit" class="tout_voir" name="tout_voir" value="<:info_tout_afficher:>" />
-</span>
+</span>[(#ENV{recherche}|trim|intval|oui)
+[(#ENV{recherche}|trim|setenv{id_selection})]
+[(#REM|setenv{recherche})]]
 <B_liste_selections>
 #ANCRE_PAGINATION
 <table class='spip liste'>
@@ -24,7 +26,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_selections(SELECTIONS){id_selection !IN #GET{selection}}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_selections(SELECTIONS){id_selection !IN #GET{selection}}{id_selection ?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='titre principale'><a href="[(#ID_SELECTION|generer_url_entite{selection})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SELECTION">[(#RANG). ]#TITRE</a></td>
 			<td class='nb_contenus id'><BOUCLE_contenus(SELECTIONS_CONTENUS){id_selection}> </BOUCLE_contenus>#TOTAL_BOUCLE</B_contenus>0<//B_contenus></td>
