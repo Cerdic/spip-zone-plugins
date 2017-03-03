@@ -8,7 +8,7 @@ include_spip('inc/formidable');
 include_spip('base/abstract_sql');
 
 /**
- * Supprime les fichiers + les champs d'une réponse qu'on vient de supprimer avec la corbeille
+ * Supprime les fichiers + les réponses d'un formulaire qu'on vient de supprimer avec la corbeille
  * @param array $ids
  *
 **/
