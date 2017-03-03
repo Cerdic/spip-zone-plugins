@@ -67,3 +67,16 @@ options:
       label: '<:formidable:analyse_exclure_champs_label:>'
       explication: '<:formidable:analyse_exclure_champs_explication:>'
       rows: 4
+  - 
+    saisie: 'case'
+    options:
+      nom: 'effacement'
+      label_case: '<:formidable:traiter_enregistrement_option_effacement_label:>'
+      li_class: 'pleine_largeur'
+  - 
+    saisie: 'input'
+    options:
+      nom: 'effacement_delai'
+      label: '<:formidable:traiter_enregistrement_option_effacement_delai_label:>'
+      afficher_si: '@traitements[enregistrement][effacement]@=="on"'
+
