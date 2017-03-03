@@ -5,7 +5,7 @@
 
 <div class="disponibles[ (#GET{disponibles}|=={1}|oui)imminent][ (#GET{disponibles}|<={0}|oui)complet]">
 	[(#GET{disponibles}|>{0}|?{
-		<:reservation:places_disponibles:>[(#GET{disponibles})] ,
+		<:reservation:places_disponibles:>[ (#GET{disponibles})] ,
 		<:reservation:complet:>[: (#GET{disponibles}|<{0}|?{
 			[(#GET{disponibles}|replace{-,''})]<:reservation:texte_statut_attente:>,
 			<:reservation:inscrire_liste_attente:>
