@@ -68,6 +68,13 @@ function oembed_lister_providers() {
 		'http://*.kickstarter.com/projects/*'     => 'https://www.kickstarter.com/services/oembed',
 		'http://speakerdeck.com/*'                => 'https://speakerdeck.com/oembed.json',
 		'http://issuu.com/*'                      => 'http://issuu.com/oembed',
+		'http://www.facebook.com/*/posts/*'       => 'https://www.facebook.com/plugins/post/oembed.json/',
+		'http://www.facebook.com/*/activity/*'    => 'https://www.facebook.com/plugins/post/oembed.json/',
+		'http://www.facebook.com/*/photos/*'      => 'https://www.facebook.com/plugins/post/oembed.json/',
+		'http://www.facebook.com/media/*'         => 'https://www.facebook.com/plugins/post/oembed.json/',
+		'http://www.facebook.com/questions/*'     => 'https://www.facebook.com/plugins/post/oembed.json/',
+		'http://www.facebook.com/notes/*'         => 'https://www.facebook.com/plugins/post/oembed.json/',
+		'http://www.facebook.com/*/videos/*'      => 'https://www.facebook.com/plugins/video/oembed.json/',
 
 		'http://egliseinfo.catholique.fr/*'       => 'http://egliseinfo.catholique.fr/api/oembed',
 
