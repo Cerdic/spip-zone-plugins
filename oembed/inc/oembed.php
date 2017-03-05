@@ -24,9 +24,9 @@ function oembed_lister_providers() {
 	// https://github.com/panzi/oembedendpoints/blob/master/endpoints-simple.json
 	// voir aussi http://embed.ly/providers qui donne les scheme mais pas les endpoint
 	$providers = array(
-		'http://*.youtube.com/watch*'             => 'http://www.youtube.com/oembed',
-		'http://*.youtube.com/playlist*'          => 'http://www.youtube.com/oembed',
-		'http://youtu.be/*'                       => 'http://www.youtube.com/oembed',
+		'http://*.youtube.com/watch*'             => 'https://www.youtube.com/oembed',
+		'http://*.youtube.com/playlist*'          => 'https://www.youtube.com/oembed',
+		'http://youtu.be/*'                       => 'https://www.youtube.com/oembed',
 		'http://*.vimeo.com/*'                    => 'https://vimeo.com/api/oembed.json',
 		'http://vimeo.com/*'                      => 'https://vimeo.com/api/oembed.json',
 		'http://*.dailymotion.com/*'              => 'https://www.dailymotion.com/services/oembed',
