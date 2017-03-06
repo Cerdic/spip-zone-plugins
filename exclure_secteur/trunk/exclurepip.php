@@ -4,7 +4,7 @@ include_spip('inc/exclure_utils');
 /** 
  * Filtrer les boucles pour ne pas afficher le ou les secteurs configurés
  */
-function exclure_sect_pre_boucle(&$boucle){
+function exclure_sect_pre_boucle($boucle){
 
 	if (
 		!empty($boucle->modificateur['tout_voir']) 
