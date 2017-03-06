@@ -426,7 +426,7 @@ function massicoter_logo($logo, $objet_type = null, $id_objet = null, $role = nu
 
 	/* S'il n'y a pas d'id_objet, on essaie de le deviner avec le nom du
 	   fichier, c'est toujours mieux que rien. Sinon on abandonne… */
-	if (is_null($id_objet)) {
+	if (is_null($id_objet) or is_null($objet)) {
 		$objet = massicot_trouver_objet_logo($src);
 
 		/* Si le plugin roles_documents est activé, l'objet n'est pas forcément
