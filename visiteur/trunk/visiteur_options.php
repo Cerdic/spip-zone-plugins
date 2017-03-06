@@ -20,6 +20,8 @@ include_spip('inc/session');
 // la fonction _visiteur_session_get définie par ailleurs (autre plugin...)
 // doit gérer cette éventualité et renvoyer null ou une valeur par défaut
 //
+// todo ? via pipeline
+//
 function extended_session_get ($champ) {
 	if ((!defined('_VISITEUR_SESSION_GLOBALE_NON_PRIORITAIRE') // todo revoir sémantique et nomenklatura de ces constantes
 			or !_VISITEUR_SESSION_GLOBALE_NON_PRIORITAIRE)
