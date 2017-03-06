@@ -67,7 +67,7 @@ jQuery.fn.centre_images_rafraichir = function() {
 }
 
 function centre_image_afficher() {
-	$(".portfolios, .formulaire_editer_logo .spip_logo, #documents_joints").centre_images();
+	$(".portfolios, .formulaire_editer_logo .spip_logo, #documents_joints, .documents-album").centre_images();
 	$(".portfolios .liste_items.documents").on("affichage.documents.change", function(){
 		$(this).centre_images_rafraichir();
 	});
