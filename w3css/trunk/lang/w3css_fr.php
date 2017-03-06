@@ -9,8 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activer_extend_titre' => 'Étendre aux éléments SPIP',
 
 // C
-	'choisir_namespace_texte' => 'Le framework utilise par défaut le suffixe "w3-" pour les class de ses éléments. Vous pouvez le redéfinir, voire lui attribuer une valeur vide. (5 caractères max.)',
-	'choisir_namespace_titre' => 'Préfixe des class',
+	'choisir_namespace_texte' => 'Le framework utilise par défaut le préfixe "w3-" pour les classes de ses éléments. Vous pouvez le redéfinir, voire lui attribuer une valeur vide. (5 caractères max.)',
+	'choisir_namespace_titre' => 'Préfixe des classes',
 	'choisir_theme_texte' => 'Quelques couleurs prédéfinies :',
 	'choisir_theme_titre' => 'Choisir la couleur du thème',
 	'configurer_w3css' => 'Configurer W3.CSS',

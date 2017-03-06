@@ -64,10 +64,12 @@ label {
 	@extend .w3-theme-l4;
 	display: block;
 }
-.choix > label,
-input[type=checkbox] + label,
-input[type=radio] + label, {
-	background-color: transparent !important;
+/*
+input[type=checkbox] ~ label,
+input[type=radio] ~ label,  
+*/
+.choix > label {
+	background-color: unset !important;
 	display: inline-block;
 }
 label .obligatoire {
@@ -164,11 +166,7 @@ p.boutons {
 	max-width: 13em;
 	display: inline-block;
 }
-.formulaire_recherche input[type=submit] {
-	@extend .w3-large;
-	position: relative;
-	top: -2px;
-}
+
 .menu {
 	ul {
 		@extend %unstyled;

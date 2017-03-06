@@ -4,4 +4,7 @@
   On peut aussi surcharger ce fichier avec une version précise ou partiellement réduite si besoin 
 
 */][
-(#VAL{//www.w3schools.com/lib/w3.css}|recuperer_url{#ARRAY{transcoder,true}}|table_valeur{page}|texte_script)]
+(#VAL{//www.w3schools.com/lib/w3.css}
+|recuperer_url_cache{#ARRAY{transcoder,true,delai_cache,3600*24*30}}
+|table_valeur{page}
+|texte_script)]

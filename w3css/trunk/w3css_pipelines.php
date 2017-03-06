@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function w3css_insert_head_css($flux){
 
