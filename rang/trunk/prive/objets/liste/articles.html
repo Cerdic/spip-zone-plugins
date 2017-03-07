@@ -12,9 +12,9 @@
 [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_article,info_nb_articles}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			[(#ENV{id_rubrique}|oui)<th class="picto" scope="col"></th>]
+			[(#ENV{id_rubrique}|et{#VAL{article}|rang_objet_dans_config}|oui)<th class="picto" scope="col"></th>]
 			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
-			[(#ENV{id_rubrique}|oui)<th class="rang" scope="col">[(#TRI{rang,<span title="<:rang:lien_trier_rang|attribut_html:>"><:rang:info_rang_abbr:></span>,ajax})]</th>]
+			[(#ENV{id_rubrique}|et{#VAL{article}|rang_objet_dans_config}|oui)<th class="rang" scope="col">[(#TRI{rang,<span title="<:rang:lien_trier_rang|attribut_html:>"><:rang:info_rang_abbr:></span>,ajax})]</th>]
 			<th class='titre principale' scope='col' colspan='2'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
 			<th class='auteur' scope='col'><:auteur:></th>
 			<th class='date secondaire' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
@@ -25,9 +25,9 @@
 	<BOUCLE_liste_art(ARTICLES){id_article?}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri rang,#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}{!lang_select}>
 		[(#LANG|changer_typo)]
 		<tr id="id_#ID_ARTICLE" class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			[(#ENV{id_rubrique}|oui)<td class="picto">[(#CHEMIN_IMAGE{draggable-16.png}|balise_img)]</td>]
+			[(#ENV{id_rubrique}|et{#VAL{article}|rang_objet_dans_config}|oui)<td class="picto">[(#CHEMIN_IMAGE{draggable-16.png}|balise_img)]</td>]
 			<td class='statut'>[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})]</td>
-			[(#ENV{id_rubrique}|oui)<td class="rang" scope="col">[(#RANG).]</td>]
+			[(#ENV{id_rubrique}|et{#VAL{article}|rang_objet_dans_config}|oui)<td class="rang" scope="col">[(#RANG).]</td>]
 			<td class='titre principale'[(#LOGO_ARTICLE_NORMAL|non)colspan='2']><a href="[(#ID_ARTICLE|generer_url_entite{article})]"
 						[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
 						title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[<span
