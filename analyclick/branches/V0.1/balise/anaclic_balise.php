@@ -62,6 +62,8 @@ function balise_COMPTEUR_TELECHARGEMENT_dist($p)
  *     Pile complétée par le code à générer
  */
 function balise_URL_DOCUMENT_dist($p) {
+	include_spip('balise/url_');
+	
 	// Si on est dans le site est que l'option est activée
 	// on redirige vers la balise de comptage
 	if (!test_espace_prive() and defined('_ANALYCLICK_TOUJOURS_COMPTER') and _ANALYCLICK_TOUJOURS_COMPTER) {
