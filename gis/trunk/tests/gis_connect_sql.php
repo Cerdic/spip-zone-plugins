@@ -16,20 +16,20 @@
 
 	// Les tests
 	$essais['table_objet'] = array(
-	array('gis','gis'),
+		array('gis','gis'),
 	);
 
 	$essais['table_objet_sql'] = array(
-	array('spip_gis','gis'),
+		array('spip_gis','gis'),
 	);
 
 	$essais['id_table_objet'] = array(
-	array('id_gis','gis'),
+		array('id_gis','gis'),
 	);
 
 
 	$essais['objet_type'] = array(
-	array('gis','gis'),
+		array('gis','gis'),
 	);
 
 	// hop ! on y va
