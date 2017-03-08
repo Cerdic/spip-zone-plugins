@@ -38,7 +38,7 @@ function formulaires_chatbox_verifier_dist(){
 
 function formulaires_chatbox_traiter_dist(){
 	include_spip('inc/filtres');
-	include_spip('inc/texte_mini');
+	include_spip('inc/texte');
 	include_spip('base/abstract_sql');
 
 	$message = _request('message');
