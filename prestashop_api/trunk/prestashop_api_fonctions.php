@@ -88,7 +88,7 @@ function balise_URL_PRESTASHOP_dist($p) {
  */
 function prestashop_calculer_url_controlleur($type = '', $id = '', $lang = '') {
 
-	$url_prestashop = rtrim(prestashop_ws_list_shops_by_lang($lang), '/');
+	$url_prestashop = rtrim(prestashop_ws_list_shops_by_lang($lang ? $lang : null), '/');
 	if (!$type) {
 		return $url_prestashop;
 	}
