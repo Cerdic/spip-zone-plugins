@@ -42,10 +42,12 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='picto'>[(#VAL|puce_statut{mot,#ID_MOT,#ID_GROUPE})]</td>
 			<td class='titre principale'[(#LOGO_MOT|non) colspan='2']>
+				<div class="motsar">
 				[[(#PROFONDEUR|mostar_tabulation)](#GET{url_voir}|oui)]
 				[<a href="(#GET{url_voir})">]
 					[(#RANG). ]#TITRE
 				[</a>(#GET{url_voir}|oui)]
+				</div>
 			</td>
 			[<td class='logo'>(#LOGO_MOT|image_reduire{40,40})</td>]
 			<td class='utilisations secondaire'>#SET{utilise,#ID_MOT|objets_associes_mot{#ID_GROUPE}|implode{', '}}#GET{utilise}</td>
