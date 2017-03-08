@@ -150,6 +150,7 @@ function prestashop_calculer_url_propre($type = '', $id = '', $lang = '') {
 	// http://stackoverflow.com/questions/22633395/get-product-url-using-prestashop-api
 	// C'est franchement pas ce qu'on fait de mieux…
 	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_exec($ch);
 	if ($_url = curl_getinfo($ch, CURLINFO_REDIRECT_URL)) {
 		$url = $_url;
