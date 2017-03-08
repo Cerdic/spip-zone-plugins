@@ -11,7 +11,9 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-
+if (!defined('MOTSAR_SEPARATEUR')) {
+	define('MOTSAR_SEPARATEUR', '◆');
+}
 
 /**
  * Ajoute un espace (ou de quoi faire un espace en css) en fonction d'une profondeur donnée
@@ -21,7 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 **/
 function mostar_tabulation($profondeur) {
 	if ($profondeur) {
-		return "<span class='profondeur_mot'>" . str_repeat('◆&nbsp;', $profondeur) . "</span>";
+		return "<span class='profondeur_mot'>" . str_repeat(MOTSAR_SEPARATEUR.'&nbsp;', $profondeur) . "</span>";
 	}
 	return '';
 }
