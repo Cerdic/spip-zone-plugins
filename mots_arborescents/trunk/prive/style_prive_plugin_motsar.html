@@ -16,3 +16,13 @@ span.profondeur_mot { opacity:.3; }
 
 .liste-objets.mots .motsar span.profondeur_mot { display: table-cell; padding-right: 0.5em; }
 .liste-objets.mots .motsar a { display: table-cell; }
+
+.choix.motsar-racine,
+.choix.motsar-enfant { display: table; width: 100%; }
+.choix.motsar-racine { padding-bottom: 0.5em; }
+.choix.motsar-enfant + .choix.motsar-racine { padding-top: 1em; }
+.choix.motsar-enfant span.profondeur_mot { display: table-cell; opacity: 0; }
+.choix.motsar-racine .checkbox,
+.choix.motsar-enfant .checkbox { display: table-cell; }
+.choix.motsar-racine label,
+.choix.motsar-enfant label { display: table-cell; padding-left: 0.5em; width: 100%; }
