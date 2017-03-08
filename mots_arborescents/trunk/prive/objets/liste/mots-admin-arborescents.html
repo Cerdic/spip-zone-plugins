@@ -42,8 +42,8 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='picto'>[(#VAL|puce_statut{mot,#ID_MOT,#ID_GROUPE})]</td>
 			<td class='titre principale'[(#LOGO_MOT|non) colspan='2']>
+				[[(#PROFONDEUR|mostar_tabulation)](#GET{url_voir}|oui)]
 				[<a href="(#GET{url_voir})">]
-					[(#PROFONDEUR|mostar_tabulation)]
 					[(#RANG). ]#TITRE
 				[</a>(#GET{url_voir}|oui)]
 			</td>

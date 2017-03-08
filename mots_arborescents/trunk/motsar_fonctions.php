@@ -21,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 **/
 function mostar_tabulation($profondeur) {
 	if ($profondeur) {
-		return "<span class='profondeur_mot'>" . str_repeat(' ◆ &nbsp; ', $profondeur) . "</span>";
+		return "<span class='profondeur_mot'>" . str_repeat('◆&nbsp;', $profondeur) . "</span>";
 	}
 	return '';
 }
