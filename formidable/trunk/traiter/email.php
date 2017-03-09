@@ -415,7 +415,7 @@ function ajouter_action_recuperer_fichier_par_email($saisie_a_modifier, $nom_sai
 			$saisie_a_modifier[$i]['nom'] = $valeur['nom'];
 		}
 		if (isset($valeur['extension'])) {
-			$saisie_a_modifier[$i]['vignette'] = $vignette_par_defaut($valeur['extension'],false);
+			$saisie_a_modifier[$i]['vignette'] = $vignette_par_defaut($valeur['extension'], false);
 		}
 	}
 	return $saisie_a_modifier;

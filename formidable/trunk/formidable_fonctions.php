@@ -188,7 +188,7 @@ function formidable_ajouter_action_recuperer_fichier($saisie_a_modifier, $nom_sa
 					$valeur['nom']
 				);
 				$saisie_a_modifier[$i]['url'] = $url;
-				$saisie_a_modifier[$i]['vignette'] = $vignette_par_defaut($valeur['extension'],false);
+				$saisie_a_modifier[$i]['vignette'] = $vignette_par_defaut($valeur['extension'], false);
 			}
 		}
 	}
