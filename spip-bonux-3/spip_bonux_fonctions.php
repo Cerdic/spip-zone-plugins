@@ -139,29 +139,75 @@ if (!function_exists('push_table_valeur')) {
 	}
 }
 
-if (!function_exists('slug')) {
-	/**
-	 * Cette fonction permet de transformer en nom machine, soit en enlevant tous les accents, toutes les ponctuations. Les espaces sont remplacés par le séparateur `_`.
-	 *
-	 * @param string $subject    Texte à transformer en nom machine
-	 * @param string $separateur Par défaut, un underscore `_`.
-	 *
-	 * @return string
-	 */
-	function slug($texte, $type = '', $separateur = '_') {
+/**
+ * Cette fonction permet de transformer un texte clair en nom court pouvant servir d'identifiant, class, id, url...
+ * en ne conservant que des caracteres alphanumeriques et un separateur
+ *
+ * @param string $texte
+ *   Texte à transformer en nom machine
+ * @param string $type
+ *
+ * @param array $options
+ *   string separateur : par défaut, un underscore `_`.
+ *   int longueur_maxi : par defaut 60
+ *
+ * @return string
+ */
+function filtre_slugify_dist($texte, $type = '', $options = array()) {
+
+	$separateur = (isset($options['separateur'])?$options['separateur']:'_');
+	$longueur_maxi = (isset($options['longueur_maxi'])?$options['longueur_maxi']:60);
+
+	if (!function_exists('translitteration')) {
 		include_spip('inc/charsets');
-		$nom_tmp = trim($texte); // On enlève les espaces indésirables
-		$nom_tmp = translitteration($nom_tmp); // On enlève les accents et cie
-		$nom_tmp = preg_replace(",\W,", $separateur, $nom_tmp); // On enlève les espaces et les slashs
-		$nom_tmp = preg_replace("/(" . $separateur . "+)/", $separateur, $nom_tmp); // pas de double underscores
-		$nom_tmp = rtrim($nom_tmp, $separateur); // On ne doit pas terminer par le séparateur
-		$nom_tmp = preg_replace("/'/", $separateur, $nom_tmp); // pas d'apostrophes
-		$nom_tmp = strtolower($nom_tmp); // On met en minuscules
+	}
 
-		if ($type === 'css' and preg_match(',^\d,', $nom_tmp)) {
-			$nom_tmp = "a$nom_tmp";
-		}
+	// pas de balise html
+	if (strpos($texte, '<') !== false) {
+		$texte = strip_tags($texte);
+	}
+	if (strpos($texte, '&') !== false) {
+		$texte = unicode2charset($texte);
+	}
+	// On enlève les espaces indésirables
+	$texte = trim($texte);
 
-		return $nom_tmp;
+	// On enlève les accents et cie
+	$texte = translitteration($texte);
+
+	// On remplace tout ce qui n'est pas un mot par un separateur
+	$texte = preg_replace(",\W+,ms", $separateur, $texte);
+
+	// nettoyer les doubles occurences du separateur si besoin
+	while (strpos($texte, "$separateur$separateur") !== false) {
+		$texte = str_replace("$separateur$separateur", $separateur, $texte);
+	}
+
+	// pas de separateur au debut ni a la fin
+	$texte = trim($texte, $separateur);
+
+	// en minuscules
+	$texte = strtolower($texte);
+
+	switch($type) {
+		case 'class':
+		case 'id':
+		case 'anchor':
+			if (preg_match(',^\d,', $texte)) {
+				$texte = substr($type,0,1).$texte;
+			}
+	}
+
+	if (strlen($texte)>$longueur_maxi) {
+		$texte = substr($texte, 0, $longueur_maxi);
+	}
+
+	return $texte;
+}
+
+if (!function_exists('slugify')) {
+	function slugify($texte, $type, $options) {
+		$slugify = chercher_filtre('slugify');
+		return $slugify($texte, $type, $options);
 	}
 }
