@@ -21,8 +21,9 @@ function genie_notifications_dist($time) {
 	if (!is_array($GLOBALS['notifications'] = @unserialize($GLOBALS['meta']['notifications'])))
 		$GLOBALS['notifications'] = array();
 
-	if (!$GLOBALS['notifications']['messagerie'])
+	if (empty($GLOBALS['notifications']['messagerie'])) {
 		return;
+	}
 	include_spip('base/abstract_sql');
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 
