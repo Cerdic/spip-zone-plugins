@@ -32,7 +32,7 @@ function getid3_post_edition($flux) {
 			$son_modif_id3 = array('mp3','ogg','oga','flac');
 			$conf_id3 = lire_config('getid3/reecriture_tags', array());
 			$files = array();
-			$document = sql_fetsel('mode,fichier', 'spip_documents', 'id_document='.sql_quote($id_document));
+			$document = sql_fetsel('mode,fichier', 'spip_documents', 'id_document='.intval($id_document));
 			if ($flux['args']['operation'] == 'ajouter_document') {
 				$getid3_done = true;
 				/**
