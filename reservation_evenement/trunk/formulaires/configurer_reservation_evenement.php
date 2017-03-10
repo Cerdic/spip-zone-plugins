@@ -95,6 +95,15 @@ function formulaires_configurer_reservation_evenement_saisies_dist() {
 						'multiple' => 'oui'
 					)
 				),
+				array(
+					'saisie' => 'oui_non',
+					'options' => array(
+						'nom' => 'afficher_inscription_agenda',
+						'label' => _T('reservation:label_afficher_inscription_agenda'),
+						'explication' => _T('reservation:afficher_inscription_agenda_explication'),
+						'defaut' => $config['afficher_inscription_agenda']
+					)
+				),
 			)
 		),
 		array(

@@ -145,6 +145,16 @@ function reservation_evenement_formulaire_traiter($flux) {
 	}
 	return $flux;
 }
+
+/**
+ * permet de compléter ou modifier le résultat de la compilation d’un squelette donné.
+ *
+ * @pipeline recuperer_fond
+ *
+ * @param array $flux
+ *        	Données du pipeline
+ * @return array Données du pipeline
+ */
 function reservation_evenement_recuperer_fond($flux) {
 	$fond = $flux['args']['fond'];
 
@@ -171,6 +181,19 @@ function reservation_evenement_recuperer_fond($flux) {
 		if ($cron and $zone) {
 			$action_cloture = '<ul>' . recuperer_fond('formulaires/inc-action_cloture', $contexte) . '</ul>';
 			$flux['data']['texte'] = str_replace('<!--extra-->', $action_cloture . '<!--extra-->', $flux['data']['texte']);
+		}
+	}
+
+	// Enlever le lien vers résultats de agenda.
+	if ($fond == 'prive/objets/contenu/evenement') {
+		include_spip('inc/config');
+		$afficher_inscription_agenda = lire_config('reservation_evenement/afficher_inscription_agenda', '');
+
+		if (!$afficher_inscription_agenda) {
+			$flux['data']['texte'] = preg_replace(
+					'/(<div\sclass="champ contenu_places)([^<]|<.+>.*<\/.+>)+(<\/div>)/i',
+					'',
+					$flux['data']['texte']);
 		}
 	}
 	return $flux;
