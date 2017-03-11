@@ -17,6 +17,10 @@ function glossaire_core($chemin, $ligne=0) {
 			'plugins-dist' => '',
 			'squelettes-dist' => 'dist',
 		),
+		'3.1' => array(
+			'plugins-dist' => '',
+			'squelettes-dist' => 'dist',
+		),
 		'3.0' => array(
 			'plugins-dist' => '',
 			'squelettes-dist' => 'dist',
