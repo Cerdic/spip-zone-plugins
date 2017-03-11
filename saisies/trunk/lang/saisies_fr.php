@@ -132,6 +132,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_rows_label' => 'Nombre de lignes',
 	'option_size_explication' => 'Largeur du champ en nombre de caractères. Cette option n’est pas toujours appliquée car les styles CSS de votre site peuvent l’annuler.',
 	'option_size_label' => 'Taille du champ',
+	'option_statut_label' => 'Statut(s) particulier(s)',
 	'option_type_choix_plusieurs' => 'Permettre à l’utilisateur de choisir <strong>plusieurs</strong> destinataires.',
 	'option_type_choix_tous' => 'Mettre <strong>tous</strong> ces auteurs en destinataires. L’utilisateur n’aura aucun choix.',
 	'option_type_choix_un' => 'Permettre à l’utilisateur de choisir <strong>un seul</strong> destinataire (sous forme de liste déroulante).',

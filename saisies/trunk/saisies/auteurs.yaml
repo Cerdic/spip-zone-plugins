@@ -59,6 +59,17 @@ options:
       label: '<:saisies:option_groupe_affichage:>'
     saisies:
       -
+        saisie: 'selection_multiple'
+        options:
+          nom: 'statut'
+          label: '<:saisies:option_statut_label:>'
+          cacher_option_intro: 'oui'
+          size: 3
+          datas:
+            0minirezo: '<:ecrire:info_administrateurs:>'
+            1comite: '<:ecrire:info_redacteurs:>'
+            6forum: '<:ecrire:info_visiteurs:>'
+      -
         saisie: 'textarea'
         options:
           nom: 'afficher_si'
