@@ -1,0 +1,38 @@
+[(#SET{type_export, #ARRAY{csv,<:formidable:reponses_exporter_format_csv:>}})]
+[(#SET{statut, #ARRAY{publie,<:formidable:reponses_exporter_statut_publie:>,prop,<:formidable:info_reponse_proposee:>}})]
+
+<div class="formulaire_spip formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id})]">
+	<h3 class="titrem">
+	[(#CHEMIN{images/formulaire-reponses-exporter-24.png}|balise_img{horizontale})]
+	<:formidable_importerreponse:reponses_importer:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	[(#ENV{editable}|oui)
+	<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_formulaire" value="#ID_FORMULAIRE" />
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+			[(#SAISIE{selection, type_import,
+				label=<:formidable:exporter_formulaire_format_label:>,
+				datas=#GET{type_export},
+				defaut=csv,
+				cacher_option_intro=oui})]
+			[(#SAISIE{selection, statut_reponses,
+				label=<:formidable_importerreponse:importer_formulaire_statut_label:>,
+				datas=#GET{statut},
+				defaut=publie,
+				cacher_option_intro=oui})]
+			[(#SAISIE{input, fichier,
+				label=<:formidable:importer_formulaire_fichier_label:>,
+				type=file,
+				size=6})]
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		
+		<p class="boutons"><span class="image_loading"></span><input type="submit" class="submit" value="<:bouton_telecharger:>" /></p>
+	</div></form>
+	]
+</div>
