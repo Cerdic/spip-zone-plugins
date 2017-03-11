@@ -9,11 +9,11 @@
 	documentation=""
 >
 
-	<nom>Spip Ref Panel</nom>
+	<nom>Gestion du référencement</nom>
 	<auteur lien="http://loiseau.2nu.it/">Loiseau2nuit</auteur>
-	<lib nom="tabFilter" lien="https://github.com/hail2u/jquery.table-filter/archive/master.zip" />
+	<lib nom="jquery.table-filter-master" lien="https://github.com/hail2u/jquery.table-filter/archive/master.zip" />
 
-	<onglet nom="srp" titre="srp:configuration_srp" parent="menu_configuration" icone="images/srp-24.png" action="srp"/>
-	<menu nom="srp" titre="srp:configuration_srp" parent="menu_configuration" icone="images/srp-16.png" action="srp"/>
+	<onglet nom="srp" titre="srp:referencement" parent="menu_publication" icone="images/srp-24.png" action="srp"/>
+	<menu nom="srp" titre="srp:referencement" parent="menu_publication" icone="images/srp-16.png" action="srp"/>
 
 </paquet>

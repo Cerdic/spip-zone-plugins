@@ -1,5 +1,5 @@
 <plugin>
-	<nom>Spip Ref Panel</nom>
+	<nom>Gestion du référencement</nom>
 	<slogan><multi>[fr]Boîte à outils du Référenceur pour SPIP[en]SEO toolkit for SPIP</multi></slogan>
 	<auteur>Loiseau2nuit</auteur>
 	<icon>img/srp-128.png</icon>
@@ -16,7 +16,11 @@
 	<!-- options>srp_options.php</options -->
 	<categorie>outil</categorie>
 	<necessite id="SPIP" version="[3.0.0;3.1.99]" />
-	<necessite id="metas" version="[1.4.0;]" />
+	<necessite id="cextras" version="[2.0.0;]" />
+	<necessite id="crayons" version="[1.0.0;]" />
+	<utilise id="metas" version="[1.4.0;]" />
 	<lib nom="tabFilter" lien="https://github.com/hail2u/jquery.table-filter/archive/master.zip" />
 	<!-- todo: utilise PIWIK ou GAnalytics -->
+
+	<pipeline nom="declarer_champs_extras" inclure="base/srp_cextras.php" />
 </plugin>
