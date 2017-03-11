@@ -16,12 +16,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bonjour' => 'Hallo',
 
+	// C
+	'complet' => 'Komplett',
+
 	// D
 	'designation' => 'Beschreibung',
 	'details_reservation' => 'Anmeldungs Item:',
 
 	// E
 	'erreur_email_utilise' => 'Diese Email Adresse wird bereits benützt, melden Sie sich an oder benutzen Sie eine andere Adresse',
+	'erreur_pas_evenement' => 'Momentan keine Veranstaltungen zur Anmeldung verfügbar.',
+	'evenement_ferme_inscription' => 'Keine Anmeldung für diese Veranstaltung möglich. <br/> Klicken sie auf Anmeldung, um das aktuelle Angebot zu sehen.',
 	'explication_envoi_separe' => 'Eine Status Veränderung eines Ameldungs Items zu
     <div><strong>"@statuts@"</strong></div> lösst das Senden eines Benachrichtigungsmail aus!', # MODIF
 	'explication_envoi_separe_detail' => 'Die Statusveränderung zu <div><strong>"@statuts@"</strong></div> lösst das Senden einer Benachrichtigungsmail aus!',
@@ -94,6 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'par_articles' => 'Artikel',
 	'par_evenements' => 'Events',
 	'par_reservations' => 'Anmeldungen',
+	'places_disponibles' => 'Plätze:',
 
 	// R
 	'recapitulatif' => 'Zusammenfassung der Anmeldung:',
@@ -107,6 +113,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'sujet_une_reservation_accepte' => 'Bestätigung einer Anmeldung auf @nom@',
+	'sujet_une_reservation_accepte_part' => 'Buchung auf @nom@ teilweise bestätigt',
 	'sujet_votre_reservation_accepte' => '@nom@ : Bestätigung Ihrer Anmeldung',
 
 	// T
@@ -114,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_changer_statut_reservation' => 'Diese Anmeldung ist:',
 	'texte_exporter' => 'exportieren',
 	'texte_statut_accepte' => 'akzeptiert',
+	'texte_statut_accepte_part' => 'teilweise akzeptiert',
 	'texte_statut_attente' => 'in Warteliste',
 	'texte_statut_attente_paiement' => 'in Erwartung der Zahlung',
 	'texte_statut_encours' => 'laufend',
