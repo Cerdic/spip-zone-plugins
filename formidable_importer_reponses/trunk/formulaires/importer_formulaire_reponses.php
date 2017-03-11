@@ -129,11 +129,11 @@ function importer_formulaires_reponses($id_formulaire, $fichier, $delim = ',', $
 						$insertions
 					);
 				}
-				$retours = array(
-					'message_ok' => _T('formidable_importerreponse:message_insertions_nb', array('nb' => count($insertions))),
-					'editable' => ' '
-				);
 			}
+			$retours = array(
+				'message_ok' => _T('formidable_importerreponse:message_insertions_nb', array('nb' => count($reponses))),
+				'editable' => ' '
+			);
 			return $retours;
 		} else {
 			$retours = array(
