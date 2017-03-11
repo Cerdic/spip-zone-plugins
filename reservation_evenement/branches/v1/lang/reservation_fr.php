@@ -68,7 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_action_cloture' => 'Clôture automatique :',
-	'label_afficher_inscription_agenda' => 'Afficher les résultats d\'inscription d\'agenda',
+	'label_afficher_inscription_agenda' => 'Afficher les résultats d’inscription d’agenda',
 	'label_client' => 'Client :',
 	'label_date' => 'Date :',
 	'label_date_paiement' => 'Date de paiement :',
