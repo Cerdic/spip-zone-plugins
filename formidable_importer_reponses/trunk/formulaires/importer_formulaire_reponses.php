@@ -69,7 +69,6 @@ function importer_formulaires_reponses($id_formulaire, $fichier, $delim = ',', $
 					}
 				}
 			}
-			spip_log($saisies_nom, 'test.'._LOG_ERREUR);
 			foreach ($saisies_obligatoires as $champ) {
 				if (!isset($reponses[0][$champ])) {
 					$retours = array(
@@ -83,7 +82,6 @@ function importer_formulaires_reponses($id_formulaire, $fichier, $delim = ',', $
 			include_spip('inc/acces');
 			// On parcourt chaque réponse
 			foreach ($reponses as $reponse) {
-				spip_log($reponse, 'test.'._LOG_ERREUR);
 				$info_reponse = array(
 					'id_formulaire' => $id_formulaire,
 					'cookie' => creer_uniqid()
@@ -113,14 +111,12 @@ function importer_formulaires_reponses($id_formulaire, $fichier, $delim = ',', $
 
 				$insertions = array();
 				foreach ($saisies_nom as $saisie) {
-					spip_log($saisie.' => '.$reponse[$saisie], 'test.'._LOG_ERREUR);
 					if (isset($reponse[$saisie])) {
 						$insertions[] = array(
 							'id_formulaires_reponse' => $id_formulaires_reponse,
 							'nom' => $saisie,
 							'valeur' => is_array($reponse[$saisie]) ? serialize($reponse[$saisie]) : $reponse[$saisie]
 						);
-
 					}
 				}
 				if (count($insertions) > 0) {
