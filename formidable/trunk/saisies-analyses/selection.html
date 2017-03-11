@@ -12,7 +12,7 @@
 <BOUCLE_datas(POUR){tableau #GET{datas}}>
 <tr class="tr_liste">
 	<td class="choix">#VALEUR</td>
-	<td class="stat">[(#GET{stats}|table_valeur{choix-#CLE}|sinon{0})]</td>
+	<td class="stat"[ title="(#GET{stats}|table_valeur{choix-#CLE}|sinon{0}|titre_nb_reponses|attribut_html)"]>[(#GET{stats}|table_valeur{choix-#CLE}|sinon{0})]</td>
 </tr>
 </BOUCLE_datas>
 
@@ -20,6 +20,6 @@
 [(#GET{diff}|>{0}|oui)
 <tr class="tr_liste">
 	<td class="choix"><:saisies:vue_sans_reponse:></td>
-	<td class="stat">#GET{diff}</td>
+	<td class="stat"[ title="(#GET{stats}|table_valeur{choix-#CLE}|sinon{0}|titre_nb_reponses|attribut_html)"]>#GET{diff}</td>
 </tr>
 ]
