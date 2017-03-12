@@ -1,10 +1,13 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de https://trad.spip.net/tradlang_module/reservation_bank?lang_cible=en
+// ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 	// L
 	'label_cacher_paiement_public' => 'do not display the paiment form on the public site',
@@ -18,7 +21,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_erreur_montant_reservations_detail' => 'The amount should not be higher than @montant_ouvert@ (open amount)',
 	'montant_paye' => 'Paid :',
 
-
 	// P
 	'paiement_reservation' => 'Paiment of the booking #@id_reservation@',
 
@@ -30,5 +32,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_attente_paye' => ' paid - in waiting list',
 	'titre_page_configurer_reservation_bank' => 'Settings Booking Bank',
 	'titre_paiement_reservation' => 'Paiment of the Booking',
-	'titre_payer_reservation' => 'Pay the booking',
+	'titre_payer_reservation' => 'Pay the booking'
 );
