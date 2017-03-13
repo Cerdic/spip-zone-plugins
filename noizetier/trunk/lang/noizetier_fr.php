@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_objets_noisettes_explication' => 'Sur ces types de contenus, il sera permis de personnaliser les noisettes <strong>contenu par contenu</strong>.',
 	'configurer_objets_noisettes_label' => 'Autoriser la personnalisation par contenu sur :',
 	'configurer_titre' => 'Configurer le noiZetier',
+	'copie_de' => 'Copie de @source@',
 
 	// D
 	'description_bloc_contenu' => 'Contenu principal de chaque page.',

@@ -1,3 +1,4 @@
+[(#AUTORISER{configurer, noizetier}|sinon_interdire_acces)]
 <h1 class="grostitre">
 	<:noizetier:noizetier:>&nbsp;-&nbsp;<:noizetier:liste_pages:>
 </h1>
@@ -12,10 +13,10 @@
 	</li>
 </BOUCLE_pages>
 </ul>
-[(#AUTORISER{creer,noizetier})
-	[(#PLUGIN{compositions}|oui)
-		[(#URL_ECRIRE{noizetier_page_edit}|parametre_url{new,oui}|icone_verticale{<:noizetier:editer_nouvelle_page:>,page-24,'new',right})]
-	]
+[(#AUTORISER{creercomposition, noizetier})
+	[(#URL_ECRIRE{noizetier_page_edit}
+		|parametre_url{edition, creer}
+		|icone_verticale{<:noizetier:editer_nouvelle_page:>, page-24, 'new', right})]
 ]
 #BOITE_FERMER
 </B_pages>

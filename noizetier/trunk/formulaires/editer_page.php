@@ -9,20 +9,6 @@ if (!function_exists('autoriser')) {
 	include_spip('inc/autoriser');
 }     // si on utilise le formulaire dans le public
 
-
-// Détermine les compositions héritables par ce type de page
-function heritiers($type)
-{
-	$heritiers = array();
-	foreach (compositions_recuperer_heritage() as $enfant => $parent) {
-		if ($parent == $type) {
-			$heritiers = array_merge($heritiers, compositions_lister_disponibles($enfant));
-		}
-	}
-
-	return $heritiers;
-}
-
 /**
  * Formulaire d'édition d'une page de composition de noisettes.
  *
@@ -41,96 +27,78 @@ function heritiers($type)
  * @param string $retour
  *                       URL de redirection
  */
-function formulaires_editer_page_charger_dist($page, $new, $retour = '')
-{
-	$valeurs = array();
-	$valeurs['editable'] = autoriser('configurer', 'noizetier') ? 'on' : '';
-	$noizetier_compositions = isset($GLOBALS['meta']['noizetier_compositions']) && unserialize($GLOBALS['meta']['noizetier_compositions']) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
+function formulaires_editer_page_charger_dist($page, $edition, $description_page, $retour = '') {
 
-	// On définit l'action à effectuer en fonction des paramètres
-	// $new :         création d'une nouvelle page
-	// $page :        modification d'une page existante
-	// $page + $new : création d'une nouvelle page prépeuplée avec le contenu d'une page existante = duplication
-	$acte = ($page and $new) ? 'dupliquer' : ($page ? 'modifier' : ($new ? 'creer' : ''));
-	// on ne duplique pas les compositions mères
-	//if ($acte == 'dupliquer' AND is_null(noizetier_page_composition($page))) $acte = 'creer';
+	// Initialisation des données communes à charger dans le formulaire
+	$valeurs = array(
+		'editable' => true,
+		'edition' => $edition,
+		'page' => $page,
+		'type_page' => '',
+		'composition' => '',
+		'nom' => '',
+		'description' => '',
+		'icon' => '',
+	);
 
-	// modification ou duplication
-	if (in_array($acte, array('modifier', 'dupliquer'))) {
-		$type_page = noizetier_page_type($page);          // objet ou page
-		$composition = noizetier_page_composition($page); // identifiant de la composition
-		// On vérifie que cette composition existe
-		// et si elle n'existe pas
-		if (!is_array($noizetier_compositions[$type_page][$composition])) {
-			$contexte['editable'] = false;
-			$contexte['message_erreur'] = _T('spip:erreur');
-		}
+	if ($edition == 'modifier') {
+		// La page désignée par $page est déjà une composition virtuelle dont on souhaite modifier une
+		// partie de la configuration (hors noisettes).
+		// L'argument $description_page contient donc la configuration complète de cette page.
+		$valeurs['type_page'] = $description_page['type'];
+		$valeurs['composition'] = $description_page['composition'];
+		$valeurs['nom'] = $description_page['nom'];
+		$valeurs['description'] = $description_page['description'];
+		$valeurs['icon'] = $description_page['icon'];
 
-		// si on duplique, on récupére également les infos des compos xml
-		// (le meta ne liste que les compositions de noisettes)
-		if ($acte == 'dupliquer') {
-			$infos_xml_page = noizetier_lister_pages($page);
-			$infos_compo_xml = array($composition => array(
-					'nom' => $infos_xml_page['nom'],
-					'description' => $infos_xml_page['description'],
-					'icon' => $infos_xml_page['icon'],
-			));
-			$infos_compo_meta = $noizetier_compositions[$type_page];
-			if (is_null($infos_compo_meta)) {
-				$infos_compo_meta = array();
-			}
-			$infos_compo = array_merge($infos_compo_meta, $infos_compo_xml);
-			$noizetier_compositions = array_merge($noizetier_compositions, array($type_page => $infos_compo));
-		}
-
-		$valeurs['page'] = $page;
-		$valeurs['type_page'] = $type_page;
-		$valeurs['composition'] = ($acte == 'modifier') ? $composition : ''; // si on duplique, nouvelle valeur
-		if ($acte == 'dupliquer') {
-			$valeurs['composition_ref'] = $composition;
-		}
-		$valeurs['nom'] = $noizetier_compositions[$type_page][$composition]['nom'];
-		$valeurs['description'] = $noizetier_compositions[$type_page][$composition]['description'];
-		$valeurs['icon'] = $noizetier_compositions[$type_page][$composition]['icon'];
-		$valeurs['_heritiers'] = heritiers($type_page);
-		foreach ($valeurs['_heritiers'] as $t => $i) {
-			if (isset($noizetier_compositions[$type_page][$composition]['branche'][$t])) {
-				$valeurs['heritage-'.$t] = $noizetier_compositions[$type_page][$composition]['branche'][$t];
+		$valeurs['_heritiers'] = lister_heritiers($valeurs['type_page']);
+		$compositions_virtuelles = lire_config('noizetier_compositions', array());
+		foreach ($valeurs['_heritiers'] as $_objet => $_infos) {
+			if (isset($compositions_virtuelles[$valeurs['page']]['branche'][$_objet])) {
+				$valeurs["heritage-.${_objet}"] = $compositions_virtuelles[$page]['branche'][$_objet];
 			}
 		}
-	}
 
-	// création
-	if ($acte == 'creer') {
-		$valeurs['type_page'] = '';
-		$valeurs['composition'] = '';
-		$valeurs['nom'] = '';
-		$valeurs['description'] = '';
-		$valeurs['icon'] = '';
-		// Définir la liste des objets avec compositions
-		$valeurs['_objets_avec_compos'] = array();
+	} elseif ($edition == 'dupliquer') {
+		// La page désignée est la page source que l'on souhaite dupliquer pour créer une nouvelle
+		// composition virtuelle. La nouvelle composition virtuelle aura donc le même type de page et
+		// un nom de composition différent.
+		// On propose le nom de la nouvelle composition en 'copie de nom_page_source'.
+		$valeurs['type_page'] = $description_page['type'];
+		$valeurs['composition_source'] = $description_page;
+		$valeurs['nom'] = _T('noizetier:copie_de', array('source' => $description_page['nom']));
+
+	} elseif ($edition == 'creer') {
+		// On crée une nouvelle page from scratch.
+		// Toute la configuration de la page est donc vide
+		// Il faut constituer la liste des pages dont la composition va s'inspirer afin de proposer ce choix à
+		// l'utilisateur.
+		$valeurs['_pages_composables'] = array();
 		if (defined('_NOIZETIER_COMPOSITIONS_TYPE_PAGE') and _NOIZETIER_COMPOSITIONS_TYPE_PAGE) {
-			$valeurs['_objets_avec_compos'][] = 'page';
+			$valeurs['_pages_composables']['page'] = _T('noizetier:page_autonome');
 		}
 		// Si on voulait se baser sur la config de compositions, on utiliserait compositions_objets_actives().
-		// En fait, à la création d'une compo du noizetier, on modifiera la config de compositions.
-		// On se base donc sur la liste des objets sur lesquels compositions est activable et qui dispose déjà d'une page dans le noizetier.
-		$liste_pages = noizetier_lister_pages();
+		// En fait, à la création d'une composition du noizetier, on modifie la config de compositions.
+		// On se base donc sur la liste des objets sur lesquels compositions est activable
+		// et qui dispose déjà d'une page dans le noizetier.
 		include_spip('base/objets');
-		foreach (lister_tables_objets_sql() as $objet) {
-			if (isset($objet['page']) && ($obj = $objet['page']) && isset($liste_pages[$obj])) {
-				$valeurs['_objets_avec_compos'][] = $obj;
+		$tables_objet = lister_tables_objets_sql();
+		if ($tables_objet) {
+			foreach ($tables_objet as $_table) {
+				// On ne sélectionne que les tables ayant une page publique configurée et qui appartient
+				// à la liste des pages accessibles par le noiZetier.
+				if (!empty($_table['page']) and ($configuration = noizetier_page_informer($_table['page']))) {
+					$valeurs['_pages_composables'][$_table['page']] = $configuration['nom'];
+				}
 			}
 		}
 		// Hack pour les groupes de mots-clés (car ils n'ont pas d'entrée page dans lister_tables_objets_sql()).
-		if (isset($liste_pages['groupe_mots'])) {
-			$valeurs['_objets_avec_compos'][] = 'groupe_mots';
+		if (isset($tables_objet['groupe_mots'])) {
+			$valeurs['_pages_composables']['groupe_mots'] = 'groupe_mots';
 		}
+	} else {
+		$valeurs['editable'] = false;
 	}
-
-	$valeurs['page'] = $page;
-	$valeurs['new'] = $new;
-	$valeurs['acte'] = $acte;
 
 	return $valeurs;
 }
@@ -142,12 +110,12 @@ function formulaires_editer_page_charger_dist($page, $new, $retour = '')
  *
  * @param string $page
  *                       identifiant d'une composition
- * @param string $new
+ * @param string $edition
  *                       pour créer une nouvelle composition
  * @param string $retour
  *                       URL de redirection
  */
-function formulaires_editer_page_verifier_dist($page, $new, $retour = '')
+function formulaires_editer_page_verifier_dist($page, $edition, $description_page, $retour = '')
 {
 	$erreurs = array();
 	foreach (array('type_page', 'composition', 'nom') as $champ) {
@@ -179,12 +147,12 @@ function formulaires_editer_page_verifier_dist($page, $new, $retour = '')
  *
  * @param string $page
  *                       identifiant d'une composition
- * @param string $new
+ * @param string $edition
  *                       pour créer une nouvelle composition
  * @param string $retour
  *                       URL de redirection
  */
-function formulaires_editer_page_traiter_dist($page, $new, $retour = '')
+function formulaires_editer_page_traiter_dist($page, $edition, $description_page, $retour = '')
 {
 	if (!autoriser('configurer', 'noizetier')) {
 		return array('message_erreur' => _T('noizetier:probleme_droits'));
@@ -194,7 +162,6 @@ function formulaires_editer_page_traiter_dist($page, $new, $retour = '')
 	$noizetier_compositions = isset($GLOBALS['meta']['noizetier_compositions']) && unserialize($GLOBALS['meta']['noizetier_compositions']) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
 	$type_page = _request('type_page');
 	$composition = _request('composition');
-	$acte = ($page and $new) ? 'dupliquer' : ($page ? 'modifier' : ($new ? 'creer' : ''));
 	$peupler = ($acte == 'dupliquer') ? true : (($acte == 'creer' and _request('peupler')) ? true : false);
 
 	// Au cas où on n'a pas encore configuré de compositions
@@ -269,4 +236,17 @@ function formulaires_editer_page_traiter_dist($page, $new, $retour = '')
 	}
 
 	return $res;
+}
+
+
+// Détermine les compositions héritables par ce type de page
+function lister_heritiers($type) {
+	$heritiers = array();
+	foreach (compositions_recuperer_heritage() as $_objet => $_parent) {
+		if ($_parent == $type) {
+			$heritiers = array_merge($heritiers, compositions_lister_disponibles($_objet));
+		}
+	}
+
+	return $heritiers;
 }

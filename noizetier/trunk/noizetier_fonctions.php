@@ -1230,6 +1230,7 @@ function noizetier_page_informer($page, $information = '', $options =array()) {
 			// 2- la page est une composition du noizetier
 			if (empty($options['compositions'])) {
 				include_spip('inc/config');
+				// todo : ne peut-on pas limiter à la page ?
 				$options['compositions'] = lire_config('noizetier_compositions', array());
 			}
 			if (isset($options['compositions'][$page])) {

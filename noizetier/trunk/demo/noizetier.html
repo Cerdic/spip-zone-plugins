@@ -4,20 +4,28 @@
 
 <body dir="#LANG_DIR">
 <div id="container">
-	<?php
-		include_spip('noizetier_fonctions');
-		echo 'Toutes les pages';
-		$pages = noizetier_lister_pages();
-		var_dump($pages);
+<?php
+	include_spip('noizetier_fonctions');
+//	$timestamp_debut = microtime(true);
+//	$infos = noizetier_charger_infos_page('', 'article');
+//	$infos = noizetier_informer_page('article');
+//	$infos = noizetier_charger_infos_page('', 'rubrique');
+//	$infos = noizetier_informer_page('article-evenement');
 
-		echo 'Page 401';
-		$pages = noizetier_lister_pages('401');
-		var_dump($pages);
+//	include_spip('inc/config');
+//	$compos = lire_config('noizetier_compositions', array());
 
-		echo 'Page inconnue';
-		$pages = noizetier_lister_pages('inconnue');
-		var_dump($pages);
-	?>
+//	$infos = noizetier_repertorier_pages();
+
+//	$timestamp_fin = microtime(true);
+//	$duree = $timestamp_fin - $timestamp_debut;
+//	var_dump($duree*1000, $infos);
+//	var_dump($duree*1000, $compos);
+?>
+
+	#SET{liste, #NOIZETIER_PAGE_INFOS{article-evenement}}
+	[(#GET{liste}|bel_env{#EVAL{true}})]
+
 </div>
 </body>
 </html>
