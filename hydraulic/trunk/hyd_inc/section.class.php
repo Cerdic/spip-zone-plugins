@@ -44,7 +44,7 @@ class cParam {
 	function __construct($rKs, $rQ, $rIf, $rPrec, $rYB, $rYCL = 0, $rDx = 0, $rLong = 0, $sResolution = '') {
 		$this->sResolution = $sResolution;
 		$this->rYCL=(real) $rYCL;
-		this->rKs=(real) $rKs;
+		$this->rKs=(real) $rKs;
 		$this->rQ=(real) $rQ;
 		$this->rLong=(real) $rLong;
 		$this->rIf=(real) $rIf;
@@ -147,12 +147,12 @@ abstract class acSection {
 	 */
 	public function Calc($sDonnee, $rY = false) {
 		if($rY!==false && $rY!=$this->rY) {
-			//~ spip_log('Calc('.$sDonnee.') rY='.$rY.' => $this->rY','hydraulic.'._LOG_DEBUG);
+			spip_log('Calc('.$sDonnee.') rY='.$rY.' => $this->rY','hydraulic.'._LOG_DEBUG);
 			$this->rY = $rY;
 			// On efface toutes les données dépendantes de Y pour forcer le calcul
 			$this->Reset(false);
 		}
-		//~ spip_log($this->arCalc,'hydraulic.'._LOG_DEBUG);
+		spip_log($this->arCalc,'hydraulic.'._LOG_DEBUG);
 		if(!isset($this->arCalc[$sDonnee]) | (isset($this->arCalc[$sDonnee]) && !$this->arCalc[$sDonnee])) {
 			// La donnée a besoin d'être calculée
 			switch($sDonnee) {
@@ -164,7 +164,7 @@ abstract class acSection {
 				$this->arCalc[$sDonnee] = $this->$Methode();
 			}
 		}
-		//~ spip_log('Calc('.$sDonnee.')='.$this->arCalc[$sDonnee],'hydraulic.'._LOG_DEBUG);
+		spip_log('Calc('.$sDonnee.')='.$this->arCalc[$sDonnee],'hydraulic.'._LOG_DEBUG);
 		return $this->arCalc[$sDonnee];
 	}
 

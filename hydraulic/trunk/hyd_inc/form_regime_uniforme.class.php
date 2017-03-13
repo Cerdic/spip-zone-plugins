@@ -100,6 +100,7 @@ class form_regime_uniforme extends form_section {
 			$tAbs[] = $i;
 			switch($ValCal) {
 				case 'rY':
+                $this->oSn->Reset();
 				$tRes[] = $this->oSn->Calc('Yn');
 				break;
 				case 'rQ':

@@ -188,7 +188,7 @@ abstract class formulaire {
 		$tChOblig = $this->champs_obligatoires();
 		$tChCalc = $this->champs_obligatoires(true);
 		spip_log($tChCalc,'hydraulic',_LOG_DEBUG);
-		choix_radio = array();
+		$choix_radio = array();
 		$tLib = array();
 		$data=array();
 		$data['iPrec']=(int)-log10(_request('rPrec'));

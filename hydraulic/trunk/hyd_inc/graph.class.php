@@ -225,8 +225,8 @@ class cGraph {
 				}
 			);
 		</script>',
-					$this->tLabels['X'],$Xmin,$Xmax,$XTick,
-					$this->tLabels['Y'],$Ymin,$Ymax,$YTick);
+					addslashes($this->tLabels['X']),$Xmin,$Xmax,$XTick,
+					addslashes($this->tLabels['Y']),$Ymin,$Ymax,$YTick);
 
 		return $this->echo;
 	}
