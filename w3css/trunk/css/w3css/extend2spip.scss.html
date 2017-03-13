@@ -19,33 +19,34 @@
 		font-variant: small-caps;
 		font-size: 13px;
 		z-index: 10;
+		font-weight: bold;
 		&:before {
 				content: '';
 				display: inline-block;
-				width: calc(100% + 50px);
+				width: calc(100% + 34px);
 				position: absolute;
-				height: 40px;
+				height: 30px;
 				background: #CONFIG{w3css/theme};
-				left: -15px;
-				top:0;
+				left: -7px;
+				top:-5px;
 				z-index: -5;
 			}		
 		}
 }
 
 .formulaire_spip {
-	@extend .w3-padding-large; 
+	@extend .w3-padding-medium; 
 	/* @extend .w3-white; */
 	position: relative;		
 }
 fieldset {
-	@extend .w3-padding-large;
+	@extend .w3-padding-medium;
 	@extend .w3-section;
 	position: relative;
 	@extend %fieldset--alt;
 }
-form.nolegend legend
-fieldset.nolegend legend {
+.nolegend legend
+legend.nolegend {
 	display: none;
 }
 fieldset > ul {
@@ -98,20 +99,28 @@ input[type=submit],
 button {
 	@extend .w3-btn;
 	@extend .w3-large;
-	@extend .w3-theme;
+	@extend .w3-theme-d2;
 }
 select {
 	@extend .w3-select;
-	border-bottom: 1px solid #CONFIG{w3css/theme};
+	border-bottom: 1px solid #CONFIG{w3css/theme, #EEE};
 }
 p.boutons {
-	@extend .w3-theme-l3;
-	@extend .w3-padding-xlarge;
+	@extend .w3-theme-l4;
 	@extend .w3-right-align;
-	@extend .w3-border-bottom;
+	@extend .w3-padding-large;
 	@extend .w3-border-grey;
+	@extend .w3-border-bottom;
+}
+/* Cas normal : p.boutons à la suite  du fieldset */
+fieldset ~ p.boutons {
 	margin: 0 0 16px 0;	
 }
+/* Cas anormal p.boutons à l'intéreur du fieldset */
+fieldset > p.boutons {
+ 	margin: 24px -25px -14px;
+}
+
 .editer-groupe {
 	@extend .w3-section;
 }
@@ -123,19 +132,19 @@ p.boutons {
 	@extend .w3-pale-red;
 	@extend .w3-leftbar;
 	@extend .w3-border-red;
-	@extend .w3-padding-8;
 	@extend .w3-display-container;
-	margin-left: -24px;
-	margin-right: -24px; /* +10px pour compenser le border left */
-	padding-top: 2.5em !important;
-	padding-right: 24px;
+	margin-left: -16px;
+	margin-right: -16px; /* +10px pour compenser le border left */
+	padding: 2.5em 16px 8px 11px !important
 }
 .erreur_message {
-	@extend .w3-text-red;
+}
+.editer .erreur_message {
 	@extend .w3-padding;
+	@extend .w3-text-red;
 	@extend .w3-display-topright;
-	margin-right: 10px;
 	@extend .w3-small;
+	margin-right: 10px;
 }
 .explication {
 	@extend .w3-panel;
@@ -145,65 +154,53 @@ p.boutons {
 	@extend .w3-leftbar;
 	@extend .w3-border-yellow;
 }
+.reponse_formulaire {
+	@extend .w3-panel;
+	@extend .w3-medium;
+	@extend .w3-padding-large;
+	h2 {
+		padding-bottom: 8px;
+	}
+}
 .notice, .warning {
-	@extend .w3-panel;
-	@extend .w3-orange;
+	@extend .w3-amber;
 }
-.reponse_formulaire{
-	@extend .w3-panel;
-}
-.error,.reponse_formulaire_erreur {
+.reponse_formulaire_erreur, .error {
 	@extend .w3-red;
-	@extend .w3-large;
-	@extend .w3-padding-xlarge;
 }
 .reponse_formulaire_ok, .succes {
-	@extend .w3-panel;
-	@extend .w3-green;	
+	@extend .w3-green;
 }
-.formulaire_recherche .search,
-.formulaire_recherche label {
-	max-width: 13em;
-	display: inline-block;
+/* cas particulier */
+p.error,p.ajax-error {
+	@extend .w3-padding-large;
 }
 
-.menu {
-	ul {
-		@extend %unstyled;
-	}
-	h2 {
-		margin-bottom: 0;
-	}
+[/* (#REM)
+
+=== Autres suggestions ===
+
+table {
+  @extend .w3-table;
+  @extend .w3-border;
+  @extend .w3-bordered;
+  @extend .w3-striped
 }
-.aside .menu {
-	h2 {
-		@extend .w3-border-bottom;
-		@extend .w3-border-grey;
-	}
-	ul {
-		@extend ul.w3-ul;
-	}
-	 li:hover {
-		@extend .w3-hover-theme;
-	}
+table caption {
+  @extend .w3-theme-l1;
+  @extend .w3-padding;
 }
-.nav {
-	ul {
-		@extend .w3-navbar;
-		@extend .w3-border;
-		@extend .w3-light-grey;
-	}
-	.on {
-		@extend .w3-theme-d2;
-	}
-	a {
-		@extend .w3-navitem;
-		&:hover {
-			@extend .w3-theme-d3;
-		}
-	}
+
+.spip_cadre {
+	@extend .w3-code;
 }
-/* 
+.spip_code {
+	@extend .w3-codespan;
+}
+
+.spip_note_ref {
+	@extend sup;
+}
 ul.spip {
 	@extend ul.w3-ul;
 }
@@ -267,9 +264,46 @@ html,body {
 	height: auto;
 }
 .arbo {
-
 }
 .footer .colophon {
 	text-align: center;
 }
-*/
+
+.menu {
+	ul {
+		@extend %unstyled;
+	}
+	h2 {
+		margin-bottom: 0;
+	}
+}
+.aside .menu {
+	h2 {
+		@extend .w3-border-bottom;
+		@extend .w3-border-grey;
+	}
+	ul {
+		@extend ul.w3-ul;
+	}
+	 li:hover {
+		@extend .w3-hover-theme;
+	}
+}
+.nav {
+	ul {
+		@extend .w3-navbar;
+		@extend .w3-border;
+		@extend .w3-light-grey;
+	}
+	.on {
+		@extend .w3-theme-d2;
+	}
+	a {
+		@extend .w3-navitem;
+		&:hover {
+			@extend .w3-theme-d3;
+		}
+	}
+}
+
+*/]
