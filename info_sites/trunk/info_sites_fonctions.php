@@ -187,7 +187,8 @@ function sites_projets_maj_plugins() {
 	$liste_plugins = array();
 
 	if (is_array($sites_projets)) {
-		$liste_sites_projets_plugins = sql_allfetsel('id_projets_site, logiciel_nom, logiciel_version, logiciel_plugins', 'spip_projets_sites', 'id_projets_site IN (' . implode(',', $sites_projets) . ") AND logiciel_plugins!=''");
+		$liste_sites_projets_plugins = sql_allfetsel('id_projets_site, logiciel_nom, logiciel_version, logiciel_plugins',
+			'spip_projets_sites', 'id_projets_site IN (' . implode(',', $sites_projets) . ") AND logiciel_plugins!=''");
 		if (is_array($liste_sites_projets_plugins) and count($liste_sites_projets_plugins) > 0) {
 			foreach ($liste_sites_projets_plugins as $key => $site_projet) {
 				$liste_plugins[$site_projet['id_projets_site']] = array();
@@ -260,7 +261,8 @@ function info_sites_lister_logiciels_sites() {
 function info_sites_lister_logiciels_projet($id_projet, $class = '') {
 	include_spip('base/abstract_sql');
 	$logiciels_nom = array();
-	$logiciels_base = sql_allfetsel('logiciel_nom', 'spip_projets_sites', "id_projets_site IN (SELECT id_projets_site FROM spip_projets_sites_liens WHERE id_objet=$id_projet AND objet='projet')");
+	$logiciels_base = sql_allfetsel('logiciel_nom', 'spip_projets_sites',
+		"id_projets_site IN (SELECT id_projets_site FROM spip_projets_sites_liens WHERE id_objet=$id_projet AND objet='projet')");
 	if (is_array($logiciels_base) and count($logiciels_base) > 0) {
 		foreach ($logiciels_base as $site) {
 			if (is_null($class) or empty($class)) {
@@ -406,7 +408,8 @@ function info_sites_lister_projets_sites_auteurs($id_auteur = '') {
 	$liste_projets = info_sites_lister_projets_auteurs($id_auteur);
 	$projets_sites_id = array();
 	if (is_array($liste_projets) and count($liste_projets)) {
-		$projets_sites_base = sql_allfetsel('id_projets_site', 'spip_projets_sites_liens', "objet='projet' AND id_objet IN (" . implode(',', $liste_projets) . ")");
+		$projets_sites_base = sql_allfetsel('id_projets_site', 'spip_projets_sites_liens',
+			"objet='projet' AND id_objet IN (" . implode(',', $liste_projets) . ")");
 		if (is_array($projets_sites_base) and count($projets_sites_base) > 0) {
 			foreach ($projets_sites_base as $projets_site) {
 				$projets_sites_id[] = $projets_site['id_projets_site'];
@@ -533,14 +536,16 @@ function in_ismenu($needle) {
 
 function info_sites_lister_doublons_versioning_rss() {
 	include_spip('base/abstract_sql');
-	$doublons = sql_allfetsel("COUNT(versioning_rss) as nbr_doublon, versioning_rss", 'spip_projets', "versioning_rss!=''", 'versioning_rss', '', '', "nbr_doublon > 1");
+	$doublons = sql_allfetsel("COUNT(versioning_rss) as nbr_doublon, versioning_rss", 'spip_projets',
+		"versioning_rss!=''", 'versioning_rss', '', '', "nbr_doublon > 1");
 
 	// var_dump($doublons);
 }
 
 function info_sites_lister_doublons_commits() {
 	include_spip('base/abstract_sql');
-	$doublons = sql_allfetsel("COUNT(guid) as nbr_doublon, guid", 'spip_commits', "guid!=''", 'guid', '', '', "nbr_doublon > 1");
+	$doublons = sql_allfetsel("COUNT(guid) as nbr_doublon, guid", 'spip_commits', "guid!=''", 'guid', '', '',
+		"nbr_doublon > 1");
 
 	// var_dump($doublons);
 }
@@ -551,4 +556,98 @@ function filtre_compiler_branches_logiciel_dist($logiciel_nom = null) {
 	$f = compiler_branches_logiciel($logiciel_nom);
 
 	return $f;
+}
+
+/**
+ * Lister les releases d'un logiciel
+ *
+ * @param string $logiciel Nom du logiciel
+ *
+ * @return bool|mixed
+ *          false : il n'y a pas de fichier listant les releases du logiciel
+ *          array : tableau contenant toutes les releases du logiciel
+ */
+function releases($logiciel = 'spip') {
+	/* par sécurité, on passe en minuscules */
+	$logiciel = strtolower($logiciel);
+	if (lire_fichier(_DIR_TMP . 'releases_' . $logiciel . '.txt', $contenu)) {
+		$releases = unserialize($contenu);
+
+		return $releases;
+	}
+
+	return false;
+}
+
+/**
+ * Récupérer le numéro de la dernière release du logiciel
+ *
+ * @param string $logiciel Nom du logiciel
+ *
+ * @return bool|mixed
+ */
+function last_release($logiciel = 'spip') {
+	if ($releases = releases($logiciel) and $releases != false and is_array($releases)) {
+
+		return end($releases);
+	}
+
+	return false;
+}
+
+/**
+ * Récupérer la dernière branche d'un logiciel
+ *
+ * @param string $logiciel Nom du logiciel
+ * @param string $version
+ *
+ * @return bool|mixed
+ */
+function last_branch_release($logiciel = 'spip', $version = '') {
+
+	$calcul_branches = charger_fonction('branches', 'calcul');
+	$branches = $calcul_branches($logiciel);
+
+	if ($branches != false and is_array($branches)) {
+		if (empty($version) or is_null($version)) {
+			return end($branches);
+		} else {
+			if ($releases = releases($logiciel) and $releases != false and is_array($releases)) {
+				$branches = preg_grep(",^" . version2branche($version) . ",", $releases);
+				$branches = array_values($branches);
+				return end($branches);
+			}
+			return false;
+		}
+	}
+
+	return false;
+}
+
+/**
+ * Calculer les branches d'un logiciel
+ *
+ * @param string $logiciel Nom du logiciel
+ *
+ * @return array|bool|mixed
+ */
+function calcul_branches_dist($logiciel) {
+
+	$logiciel = trim($logiciel);
+	if (empty($logiciel) or is_null($logiciel)) {
+		return false;
+	}
+	$releases = releases($logiciel);
+	if (is_array($releases) and count($releases)) {
+		foreach ($releases as $index => $release) {
+			$releases[$index] = version2branche($release);
+		}
+		$releases = array_unique($releases);
+		$releases = array_values($releases);
+
+		return $releases;
+	} else {
+		return false;
+	}
+
 }
