@@ -1,5 +1,4 @@
 #SET{langues,#ARRAY}
-
 <BOUCLE_langues(DATA){source tableau,#CONFIG{langues_utilisees}|explode{','}}>
 		#SET{langues,#GET{langues}|array_merge{#ARRAY{#VALEUR,#VALEUR|traduire_nom_langue}}}
 </BOUCLE_langues>

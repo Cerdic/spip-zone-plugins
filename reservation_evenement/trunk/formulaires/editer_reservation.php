@@ -111,7 +111,7 @@ function formulaires_editer_reservation_charger_dist($id_reservation = 'new', $r
  * @return array Tableau des erreurs
  */
 function formulaires_editer_reservation_verifier_dist($id_reservation = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
-	$email = _request('email');
+	$email = trim(_request('email'));
 	$obligatoire = array(
 		'reference'
 	);
@@ -123,13 +123,17 @@ function formulaires_editer_reservation_verifier_dist($id_reservation = 'new', $
 		));
 		$enregistrer_compte = FALSE;
 	}
-	else
+	else {
 		$obligatoire = array_merge($obligatoire, array(
 			'id_auteur'
 		));
+		set_request('email', '');
+		set_request('nom', '');
+	}
+
 
 	$erreurs = formulaires_editer_objet_verifier('reservation', $id_reservation, $obligatoire);
-	if ($email) {
+	if (in_array('email', $obligatoire) and $email) {
 		$email_reutilisable = lire_config('reservation_evenement/email_reutilisable', '');
 		include_spip('inc/filtres');
 		// un redacteur qui modifie son email n'a pas le droit de le vider si il y en avait un
