@@ -36,7 +36,7 @@
 [<meta name="dc.Title" lang="#LANG" content="(#ENV{titre}|attribut_html)">]
 [<meta name="dc.Language" scheme="rfc1766" content="(#LANG)">]
 [<meta name="dc.Description" lang="#LANG" content="(#ENV{desc}|couper{200,'…'}|attribut_html)">
-][<meta name="dc.Creator" content="(#ENV{author}|attribut_html)">
+][<meta name="dc.Creator" content="(#ENV{author, #ENV{auteur}}|attribut_html)">
 ][<meta name="dc.Date" scheme="DCTERMS.W3CDTF" content="(#ENV{date}|affdate{Y-m-d})">]
 [<meta name="DC.Identifier" scheme="URI" content="(#ENV{url}|url_absolue)">]
 [<meta name="dc.Publisher" content="(#NOM_SITE_SPIP|attribut_html)">]
@@ -58,7 +58,7 @@
 [<meta property="og:url" content="(#ENV{url}|url_absolue)">]
 [<meta property="og:description" content="(#ENV{desc}|couper{200,'…'}|attribut_html)">
 ][<meta property="article:published_time" content="(#ENV{date}|affdate{Y-m-d})">]
-[<meta property="article:author" content="(#ENV{author}|attribut_html)">
+[<meta property="article:author" content="(#ENV{author, #ENV{auteur}}|attribut_html)">
 ][<meta property="og:image" content="(#GET{logo}|url_absolue)">
 ][<meta property="og:site_name" content="(#NOM_SITE_SPIP|attribut_html)">]
 [(#REM) Prise en charge du plugin facebook : s'il est présent, on envoie la méta fb:app_id
