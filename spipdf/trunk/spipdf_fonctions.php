@@ -362,9 +362,13 @@ function spipdf_html2pdf($html){
 		// appel de la classe HTML2pdf
 		require_once $dir_librairie_pdf . 'html2pdf.class.php';
 		try {
+			if ($flux['args']['contexte']['lang'] == '')
+				$lang = 'fr';
+			else
+				$lang = $flux['args']['contexte']['lang'];
 			// les paramétres d'orientation et de format son écrasé par ceux défini dans la balise <page> du squelette
-			$html2pdf = new HTML2PDF('P', $format_page, $flux['args']['contexte']['lang'], SPIPDF_UNICODE, SPIPDF_CHARSET);
-
+			$html2pdf = new HTML2PDF('P', $format_page, $lang, SPIPDF_UNICODE, SPIPDF_CHARSET);
+      
 			// mode debug de HTML2PDF
 			if (defined('SPIPDF_DEBUG_HTML2PDF')){
 				$html2pdf->setModeDebug();
