@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'affichage_par' => 'Exibir por:',
+	'afficher_inscription_agenda_explication' => 'Inscrições via formulário do plugin Agenda',
 	'ajouter_lien_reservation' => 'Incluir esta reserva',
 
 	// B
@@ -70,6 +71,7 @@ gerará o envio de uma notificação!',
 
 	// L
 	'label_action_cloture' => 'Encerramento automático:',
+	'label_afficher_inscription_agenda' => 'Exibir os resultados de inscrição da Agenda',
 	'label_client' => 'Cliente:',
 	'label_date' => 'Data:',
 	'label_date_paiement' => 'Data do pagamento:',
