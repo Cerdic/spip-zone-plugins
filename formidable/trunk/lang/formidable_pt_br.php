@@ -166,6 +166,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'reponse_aucune' => 'Nenhuma resposta',
 	'reponse_intro' => '@auteur@ respondeu ao formulário @formulaire@',
+	'reponse_maj' => 'Última alteração',
 	'reponse_numero' => 'Resposta número:',
 	'reponse_statut' => 'Esta resposta está:',
 	'reponse_supprimer' => 'Excluir esta resposta',
@@ -254,6 +255,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_option_auteur' => 'Utilizar autores para os formulários',
 	'traiter_enregistrement_option_auteur_explication' => 'Atribuir um ou vários autores a um formulário. Se esta opção estiver ativada, somente os autores do formulário podem acessar esses dados.',
 	'traiter_enregistrement_option_choix_select_label' => 'Escolher uma variável entre as opções oferecidas',
+	'traiter_enregistrement_option_effacement_delai_label' => 'Número de dias antes de apagar',
+	'traiter_enregistrement_option_effacement_label' => 'Excluir regularmente os resultados mais antigos',
 	'traiter_enregistrement_option_identification_explication' => 'Se as respostas são alteráveis, que procedimento usar preferencialmente para identificar a resposta a ser alterada?',
 	'traiter_enregistrement_option_identification_label' => 'Identificação',
 	'traiter_enregistrement_option_ip_label' => 'Gravar os IPs (mascarados após um intervalo de segurança)',
