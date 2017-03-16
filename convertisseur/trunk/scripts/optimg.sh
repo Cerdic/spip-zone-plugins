@@ -34,7 +34,7 @@ if [[ "$dest" != "0" ]] ; then
 	d=" dans $dest"
 	dest="$dest/$nom"
 	ext="${1##*.}"
-		
+	
 	filename="${dest%.*}" 
 	#echo "\nOptimisation ($ext) de $1${l}${d}"
 	echo "convert ${r}-strip -interlace Plane ${opt}$1 $filename.jpg"
@@ -43,7 +43,7 @@ if [[ "$dest" != "0" ]] ; then
 	# pas de dest, on ecrase le fichier input avec sa version optimisée
 	else
 		filename="${1%.*}"
-		echo "$suffixe"
+		# echo "$suffixe"
 		
 		ext="${1##*.}"
 		dest="${filename}${suffixe}.$ext"
