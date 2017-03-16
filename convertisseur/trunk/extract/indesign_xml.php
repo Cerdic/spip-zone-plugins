@@ -49,6 +49,12 @@ function convertir_indesign_xml($u) {
 	//Inter
 	$article = preg_replace("#<(Inter|PetitTitre)>#","{{{", $article);
 	$article = preg_replace("#</(Inter|PetitTitre)>#","}}}", $article);
+
+	//var_dump("<textarea>$article</textarea>");
+
+	//Gras
+	$article = preg_replace("#<Gras>#","{{", $article);
+	$article = preg_replace("#</Gras>#","}}", $article);
 	
 	// Légendes
 	$legendes = extraire_balises($article, 'Legende');

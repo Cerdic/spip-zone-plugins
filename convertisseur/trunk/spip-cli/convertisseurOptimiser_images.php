@@ -79,10 +79,10 @@ class optimg extends Command {
 			else{				
 				if(strlen($dest) > 1){
 					 $label_d=" dans $dest" ;
-					 $param_d=" $dest" ;
 					 if(!is_dir($dest))
 					 	mkdir($dest);
-				}	 
+				}
+				$param_d=" $dest" ;
 				if($resize > 0){
 					$label_r=" en redimensionnant la largeur à $resize px " ;
 				}
@@ -90,9 +90,8 @@ class optimg extends Command {
 				
 				if($compression > 0){
 					$label_c=" en compressant à $compression % " ;
-					$param_c=" $compression" ;
 				}
-				
+				$param_c=" $compression" ;
 				
 				// optimisation imagemagick
 				if($image){
@@ -123,7 +122,7 @@ class optimg extends Command {
 						$param_d=" $dpt";
 
 						// Conversion imagemagick
-						passthru('plugins/convertisseur/scripts/optimg.sh ' . $image . $param_r . $param_d . $param_c);
+						passthru('plugins/convertisseur/scripts/optimg.sh ' . escapeshellarg($image) . $param_r . $param_d . $param_c);
 					}
 				}	
 			}

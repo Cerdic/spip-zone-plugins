@@ -5,6 +5,9 @@
 
 # Optimisation d'images trop lourdes ou trop grandes avec imagemagick
 
+#echo ${@}
+#exit
+
 nom="${1##*/}" # basename
 resize=${2-0} # 0 par défaut
 compress=${4-0} # 0 par défaut
@@ -12,14 +15,16 @@ dest="${3-0}"
 
 # resize ?
 if (( $resize > 0 )) ; then 
-	l=" avec une largeur de $2 pixels"
+	l=" avec une largeur de ${resize} pixels"
 	r="-resize ${resize}x "
+	suffixe="-${resize}x"
 fi
 
 opt=""
 # compression de x % ?
 if (( $compress > 0 )) ; then 
-	opt="-gaussian-blur 0.05 -quality ${compress}% "
+	opt=" -gaussian-blur 0.05 -quality ${compress}% "
+	suffixe="$suffixe-c${compress}"
 fi
 # compression ?
 
@@ -37,8 +42,12 @@ if [[ "$dest" != "0" ]] ; then
 	
 	# pas de dest, on ecrase le fichier input avec sa version optimisée
 	else
-	echo "\nOptimisation de $1${l}"
-	mogrify ${r}-strip -interlace Plane ${opt}"$1"
-	
+		filename="${1%.*}"
+		echo "$suffixe"
+		
+		ext="${1##*.}"
+		dest="${filename}${suffixe}.$ext"
+		echo "\nOptimisation de $1 vers $dest"
+		echo "convert ${r}-strip -interlace Plane ${opt}${1} ${dest}"
+		convert ${r}-strip -interlace Plane"${opt}" "${1}" "${dest}"
 fi
-
