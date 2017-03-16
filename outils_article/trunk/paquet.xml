@@ -1,7 +1,7 @@
 <paquet
 	prefix="outils_article"
 	categorie="navigation"
-	version="1.2.0"
+	version="1.2.1"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/outils_article-64.png"
@@ -21,7 +21,6 @@
 	<menu nom="configurer_outils_article" titre="outils_article:titre" parent="menu_configuration" icone="images/outils_article-16.png" />
 
 	<utilise nom="article_pdf" compatibilite="[0.3.0;]" />
-	<utilise nom="enviar_email" compatibilite="[0.2.0;]" />
 	<utilise nom="imprimir_documento" compatibilite="[0.2.0;]" />
 	<utilise nom="boutonstexte" compatibilite="[2.0.0;]" />
 	<utilise nom="notation" compatibilite="[2.0.0;]" />
