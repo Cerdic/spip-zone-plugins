@@ -1,0 +1,31 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]Ne me quitte pas !
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+		[fr]Pour ne plus perdre votre contenu en cours d'édition !
+		</multi>
+	</slogan>
+	<auteur>Mehdi Cherigui - Jacques Pyrat</auteur>
+	<licence>GPLv3</licence>
+	<version>1.0.1</version>
+	<icon>images/nemequitepas-48.png</icon>
+	<lien>http://contrib.spip.net/???</lien>
+
+	<description>
+		<multi>
+			[fr]Ne me quitte pas protège votre saisie en demandant confirmation avant de quitter une page avec du contenu modifié.
+		</multi>
+	</description>
+	<etat>stable</etat>
+	<prefix>nemequittepas</prefix>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head_prive</action>
+		<inclure>nemequittepas_pipelines.php</inclure>
+	</pipeline>
+	<categorie>edition</categorie>
+</plugin>
