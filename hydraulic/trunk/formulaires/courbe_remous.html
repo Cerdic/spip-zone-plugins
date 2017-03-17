@@ -90,6 +90,9 @@
 					<td>
 						[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{choix_resolution})</div>]
 						<select name="choix_resolution" id="choix_resolution">
+							<option value="Trapez" [(#ENV{choix_resolution}|=={Trapez}|?{'selected',''})]>
+								<:hydraulic:integration_trapez:>
+							</option>
 							<option value="RK4" [(#ENV{choix_resolution}|=={RK4}|?{'selected',''})]>
 								<:hydraulic:runge_kutta:>
 							</option>

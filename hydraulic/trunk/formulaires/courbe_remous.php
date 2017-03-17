@@ -155,7 +155,7 @@ function formulaires_courbe_remous_traiter_dist() {
 	//spip_log(array($Cond_lim_rYaval,$c_bief_rKs,$Cond_lim_rQ,$c_bief_rLong,$c_bief_rIf,$Param_calc_rDx,$Param_calc_rPrec),'hydraulic');
 
 	// Enregistrement des paramètres dans les classes qui vont bien
-	$oParam= new cParam($c_bief_rKs,$Cond_lim_rQ,$c_bief_rIf,$Param_calc_rPrec,$c_bief_rYB,$Cond_lim_rYaval,$Param_calc_rDx,$c_bief_rLong,_request('choix_resolution'));
+	$oParam= new cParam($c_bief_rKs,$Cond_lim_rQ,$c_bief_rIf,$Param_calc_rPrec,$c_bief_rYB);
 
 	// Création d'un objet de type Section selon la section choisie.
 	switch($crTypeSection) {
@@ -201,7 +201,8 @@ function formulaires_courbe_remous_traiter_dist() {
 		// Calcul depuis l'aval
 		if($oSection->rHautCritique <= $Cond_lim_rYaval) {
 			$oLog->Add(_T('hydraulic:calcul_fluvial'));
-			list($tr['X1'],$tr['Y1']) = calcul_courbe_remous($oParam,$oSection,$oLog,$oParam->iPrec);
+			$oCRF = new cCourbeRemous($oLog, $oParam, $oSection, $Param_calc_rDx);
+			list($tr['X1'],$tr['Y1']) = $oCRF->calcul($Cond_lim_rYaval, $c_bief_rLong, _request('choix_resolution'));
 		}
 		else {
 			$oLog->Add(_T('hydraulic:pas_calcul_depuis_aval'));
@@ -210,13 +211,29 @@ function formulaires_courbe_remous_traiter_dist() {
 		// Calcul depuis l'amont
 		if($oSection->rHautCritique >= $Cond_lim_rYamont) {
 			$oLog->Add(_T('hydraulic:calcul_torrentiel'));
-			$oParam->rYCL = $Cond_lim_rYamont; // Condition limite amont
-			$oParam->rDx = -$oParam->rDx; // un pas négatif force le calcul à partir de l'amont
-			list($tr['X2'],$tr['Y2']) = calcul_courbe_remous($oParam,$oSection,$oLog,$oParam->iPrec);
+			$oCRT = new cCourbeRemous($oLog, $oParam, $oSection, -$Param_calc_rDx);
+			list($tr['X2'],$tr['Y2']) = $oCRT->calcul($Cond_lim_rYamont, $c_bief_rLong, _request('choix_resolution'));
 		}
 		else {
 			$oLog->Add(_T('hydraulic:pas_calcul_depuis_amont'));
 		}
+
+		// Détection du ressaut hydraulique
+		$aC = array();
+		$aC['Flu'] = array_combine($tr['X1'],$tr['Y1']);
+		$aC['Tor'] = array_combine($tr['X2'],$tr['Y2']);
+		if(count($aC['Flu']) > count($aC['Tor'])) {
+			// La courbe fluviale va jusqu'au bout
+			$sCC = 'Flu';
+			$sCN = 'Tor';
+			$iSens = -1;
+		} else {
+			// La courbe torrentielle va jusqu'au bout
+			$sCC = 'Tor';
+			$sCN = 'Flu';
+			$iSens = 1;
+		}
+		spip_log($aC,'hydraulic',_LOG_DEBUG);
 
 		//Production du journal de calcul
 		$sLog = $oLog->Result();

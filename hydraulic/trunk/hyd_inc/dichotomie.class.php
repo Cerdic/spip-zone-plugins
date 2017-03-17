@@ -29,11 +29,16 @@
 class cDichotomie {
 	private $oLog; ///< Journal de calcul
 
-	const IDEFINT = 100; ///< Pas de parcours de l'intervalle pour initialisation dichotomie
-	const IDICMAX = 100; ///< Itérations maximum de la dichotomie
+	//~ const IDEFINT = 100; /// Pas de parcours de l'intervalle pour initialisation dichotomie
+	//~ const IDICMAX = 100; /// Itérations maximum de la dichotomie
+	// ***** DEBUG *****
+	const IDEFINT = 10; /// Pas de parcours de l'intervalle pour initialisation dichotomie
+	const IDICMAX = 20; /// Itérations maximum de la dichotomie
+	// ***** FIN DEBUG *****
 
 	private $objet; ///< Objet contenant la méthode de calcul du débit
-	private $sFnCalculQ; ///< Nom de la méthode de calcul du débit
+	private $sFnCalculQ; /// Nom de la méthode de calcul du débit
+	private $bLogError; /// true pour afficher les messages d'erreur en cas de non convergence
 
 	/**
 	* Construction de la classe.
@@ -42,17 +47,18 @@ class cDichotomie {
 	*      propriété VarCal pointeur vers la variable à calculer
 	* @param $sFnCalculQ Nom de la méthode de calcul du débit
 	*/
-	public function __construct(&$oLog,&$objet,$sFnCalculQ) {
+	public function __construct(&$oLog,&$objet,$sFnCalculQ, $bLogError=true) {
 		$this->oLog = &$oLog;
 		$this->objet = &$objet;
 		$this->sFnCalculQ = $sFnCalculQ;
+		$this->bLogError = $bLogError;
 	}
 
 	private function CalculQ() {
 		$sFnCalculQ = $this->sFnCalculQ;
 		$res = $this->objet->$sFnCalculQ();
 		if(!is_array($res)) {
-			$res = array($res,-1);
+			$res = array($res,0);
 		}
 		spip_log('CalculQ('.$this->objet->VarCal.')='.$res[0],'hydraulic',_LOG_DEBUG);
 		return $res;
@@ -67,12 +73,16 @@ class cDichotomie {
 	*/
 	public function calculer($QT,$rTol,$rInit=0.) {
 		spip_log("Dichotomie->calculer($QT,$rTol,$rInit)",'hydraulic.'._LOG_DEBUG);
+		$this->objet->VarCal = $rInit;
+		list($Q,$nFlag) = $this->CalculQ();
 		$XminInit = 1E-8;
 		$this->objet->VarCal = $XminInit;
 		list($Q1,$nFlag) = $this->CalculQ();
+		if($Q1 < $Q xor $Q > $QT) $Q1 = $Q;
 		$XmaxInit = max(1,$rInit)*100;
 		$this->objet->VarCal = $XmaxInit;
 		list($Q2,$nFlag) = $this->CalculQ();
+		if($QT < $Q xor $Q > $Q2) $Q1 = $Q;
 		$DX = ($XmaxInit - $XminInit) / floatval(self::IDEFINT);
 		$nIterMax = floor(max($XmaxInit - $rInit,$rInit - $XminInit) / $DX + 1);
 		spip_log("QT=$QT nIterMax=$nIterMax XminInit=$XminInit XmaxInit=$XmaxInit DX=$DX",'hydraulic',_LOG_DEBUG);
@@ -134,17 +144,20 @@ class cDichotomie {
 			}
 			list($Q,$nFlag) = $this->CalculQ();
 			$nFlag = -1;
-			$sLog = ($Q1<$Q2)?"Q($X1)=$Q1 &lt; Q($X2)=$Q2":"Q($X2)=$Q2 &lt; Q($X1)=$Q1";
-			$sLog = ($QT<$Q1)?"$QT &lt; $sLog":"$sLog &lt; $QT";
-			$this->oLog->Add(_T('hydraulic:dichotomie_intervalle').' : '.
-			$sLog,true);
+			if($this->bLogError) {
+				$sLog = ($Q1<$Q2)?"Q($X1)=$Q1 &lt; Q($X2)=$Q2":"Q($X2)=$Q2 &lt; Q($X1)=$Q1";
+				$sLog = ($QT<$Q1)?"$QT &lt; $sLog":"$sLog &lt; $QT";
+				$this->oLog->Add(_T('hydraulic:dichotomie_intervalle').' : '.
+				$sLog,true);
+			}
 		}
 		else {
 			// Dichotomie
 			$X = $rInit;
+			$nFlag = 0;
 			for($nIter = 1; $nIter<=self::IDICMAX;$nIter++) {
 				$this->objet->VarCal=$X;
-				spip_log('rVarC='.$this->objet->VarCal,'hydraulic',_LOG_DEBUG);
+				spip_log("nIter=$nIter nFlag=$nFlag".' rVarC='.$this->objet->VarCal,'hydraulic',_LOG_DEBUG);
 				list($Q,$nFlag) = $this->CalculQ();
 				//~ if($QT!=0 && abs($Q/$QT-1.) <= $rTol) {break;}
 				if($QT!=0 && abs($X1-$X2) <= $rTol) {break;}

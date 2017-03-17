@@ -29,26 +29,18 @@ include_spip('hyd_inc/newton.class');
  * Gestion des Paramètres du canal (hors section)
  */
 class cParam {
-	public $rYCL;   /// Condition limite en cote à l'amont ou à l'aval
 	public $rKs;    /// Strickler
 	public $rQ;     /// Débit
-	public $rLong;  /// Longueur du bief
 	public $rIf;    /// Pente du fond
-	public $rDx;    /// Pas d'espace (positif en partant de l'aval, négatif en partant de l'amont)
 	public $rPrec;  /// Précision de calcul et d'affichage
 	public $rG=9.81;/// Constante de gravité
 	public $iPrec;  /// Précision en nombre de décimales
 	public $rYB;    /// Hauteur de berge
-	public $sResolution; /// Méthode de résolution "Euler" ou "RK4"
 
-	function __construct($rKs, $rQ, $rIf, $rPrec, $rYB, $rYCL = 0, $rDx = 0, $rLong = 0, $sResolution = '') {
-		$this->sResolution = $sResolution;
-		$this->rYCL=(real) $rYCL;
+	function __construct($rKs, $rQ, $rIf, $rPrec, $rYB) {
 		$this->rKs=(real) $rKs;
 		$this->rQ=(real) $rQ;
-		$this->rLong=(real) $rLong;
 		$this->rIf=(real) $rIf;
-		$this->rDx=(real) $rDx;
 		$this->rPrec=(real) $rPrec;
 		$this->rYB=(real) $rYB;
 		$this->iPrec=(int)-log10($rPrec);
@@ -60,12 +52,8 @@ class cParam {
  * Comprend les formules pour la section rectangulaire pour gérer les débordements
  */
 abstract class acSection {
-	//~ public $rS;             /// Surface hydraulique
-	//~ public $rP;             /// Périmètre hydraulique
-	//~ public $rR;             /// Rayon hydraulique
-	//~ public $rB;             /// Largeur au miroir
-	//~ public $rJ;             /// Perte de charge
-	//~ public $rFr;                /// Froude
+	const DBG = false; /// Pour loguer les messages de debug de cette classe
+
 	public $rY=0;          /// Tirant d'eau
 	public $rHautCritique;  /// Tirant d'eau critique
 	public $rHautNormale;   /// Tirant d'eau normal
@@ -106,7 +94,7 @@ abstract class acSection {
 		$this->oP = &$oP;
 		$this->oLog = &$oLog;
 		$this->CalcGeo('B');
-		//~ spip_log($this,'hydraulic.'._LOG_DEBUG);
+		//~ if(self::DBG) spip_log($this,'hydraulic.'._LOG_DEBUG);
 	}
 
 
@@ -147,12 +135,11 @@ abstract class acSection {
 	 */
 	public function Calc($sDonnee, $rY = false) {
 		if($rY!==false && $rY!=$this->rY) {
-			spip_log('Calc('.$sDonnee.') rY='.$rY.' => $this->rY','hydraulic.'._LOG_DEBUG);
+			if(self::DBG) spip_log('Calc('.$sDonnee.') rY='.$rY.' => $this->rY','hydraulic.'._LOG_DEBUG);
 			$this->rY = $rY;
 			// On efface toutes les données dépendantes de Y pour forcer le calcul
 			$this->Reset(false);
 		}
-		spip_log($this->arCalc,'hydraulic.'._LOG_DEBUG);
 		if(!isset($this->arCalc[$sDonnee]) | (isset($this->arCalc[$sDonnee]) && !$this->arCalc[$sDonnee])) {
 			// La donnée a besoin d'être calculée
 			switch($sDonnee) {
@@ -163,8 +150,9 @@ abstract class acSection {
 				$Methode = 'Calc_'.$sDonnee;
 				$this->arCalc[$sDonnee] = $this->$Methode();
 			}
+			//if(self::DBG) spip_log($this->arCalc,'hydraulic.'._LOG_DEBUG);
 		}
-		spip_log('Calc('.$sDonnee.')='.$this->arCalc[$sDonnee],'hydraulic.'._LOG_DEBUG);
+		if(self::DBG) spip_log('Calc('.$sDonnee.')='.$this->arCalc[$sDonnee],'hydraulic.'._LOG_DEBUG);
 		return $this->arCalc[$sDonnee];
 	}
 
@@ -182,7 +170,7 @@ abstract class acSection {
 		}
 		if(!isset($this->arCalcGeo[$sDonnee])) {
 			// La donnée a besoin d'être calculée
-			//spip_log('CalcGeo('.$sDonnee.') rY='.$this->oP->rYB,'hydraulic.'._LOG_DEBUG);
+			//if(self::DBG) spip_log('CalcGeo('.$sDonnee.') rY='.$this->oP->rYB,'hydraulic.'._LOG_DEBUG);
 			$this->Swap(true); // On mémorise les données hydrauliques en cours
 			$this->Reset(false);
 			$this->rY = $this->oP->rYB;
@@ -202,7 +190,7 @@ abstract class acSection {
 				$Methode = 'Calc_'.$sDonnee;
 				$this->arCalcGeo[$sDonnee] = $this->$Methode();
 			}
-			//~ spip_log('CalcGeo('.$sDonnee.',rY='.$this->oP->rYB.')='.$this->arCalcGeo[$sDonnee],'hydraulic.'._LOG_DEBUG);
+			//~ if(self::DBG) spip_log('CalcGeo('.$sDonnee.',rY='.$this->oP->rYB.')='.$this->arCalcGeo[$sDonnee],'hydraulic.'._LOG_DEBUG);
 			$this->Swap(false); // On restitue les données hydrauliques en cours
 		}
 		return $this->arCalcGeo[$sDonnee];
@@ -214,7 +202,7 @@ abstract class acSection {
 	 * @return La surface hydraulique
 	 */
 	protected function Calc_S($rY) {
-		//~ spip_log('section->CalcS(rY='.$rY.')='.($rY*$this->rLargeurBerge),'hydraulic.'._LOG_DEBUG);
+		//~ if(self::DBG) spip_log('section->CalcS(rY='.$rY.')='.($rY*$this->rLargeurBerge),'hydraulic.'._LOG_DEBUG);
 		return $rY*$this->rLargeurBerge;
 	}
 
@@ -233,7 +221,7 @@ abstract class acSection {
 	 * @return Le périmètre hydraulique
 	 */
 	protected function Calc_P($rY=0) {
-		//~ spip_log('section->CalcP(rY='.$rY.')='.(2*$rY),'hydraulic.'._LOG_DEBUG);
+		//~ if(self::DBG) spip_log('section->CalcP(rY='.$rY.')='.(2*$rY),'hydraulic.'._LOG_DEBUG);
 		return 2*$rY;
 	}
 
@@ -319,64 +307,6 @@ abstract class acSection {
 			return INF;
 		}
 	}
-
-	/**
-	 * Calcul de dy/dx
-	 */
-	private function Calc_dYdX($Y) {
-		// L'appel à Calc('J') avec Y en paramètre réinitialise toutes les données dépendantes de la ligne d'eau
-		return - ($this->oP->rIf - $this->Calc('J',$Y)) / (1 - pow($this->Calc('Fr',$Y),2));
-	}
-
-
-	/**
-	 * Calcul du point suivant de la courbe de remous par la méthode Euler explicite.
-	 * @return Tirant d'eau
-	 */
-	public function Calc_Y_Euler($Y) {
-		// L'appel à Calc('J') avec Y en paramètre réinitialise toutes les données dépendantes de la ligne d'eau
-		$Y2 = $Y+ $this->oP->rDx * $this->Calc_dYdX($Y);
-		if($this->oP->rDx > 0 xor !($Y2 < $this->rHautCritique)) {
-			return false;
-		} else {
-			return $Y2;
-		}
-	}
-
-
-	/**
-	 * Calcul du point suivant de la courbe de remous par la méthode RK4.
-	 * @return Tirant d'eau
-	 */
-	public function Calc_Y_RK4($Y) {
-		// L'appel à Calc('J') avec Y en paramètre réinitialise toutes les données dépendantes de la ligne d'eau
-		$rDx = $this->oP->rDx;
-		$rk1 = $this->Calc_dYdX($Y);
-		if($this->oP->rDx > 0 xor !($Y + $rDx / 2 * $rk1 < $this->rHautCritique)) {return false;}
-		$rk2 = $this->Calc_dYdX($Y + $rDx / 2 * $rk1);
-		if($this->oP->rDx > 0 xor !($Y + $rDx / 2 * $rk2 < $this->rHautCritique)) {return false;}
-		$rk3 = $this->Calc_dYdX($Y + $rDx / 2 * $rk2);
-		if($this->oP->rDx > 0 xor !($Y + $rDx / 2 * $rk3 < $this->rHautCritique)) {return false;}
-		$rk4 = $this->Calc_dYdX($Y + $rDx * $rk3);
-		if($this->oP->rDx > 0 xor !($Y + $rDx / 6 * ($rk1 + 2 * ($rk2 + $rk3) + $rk4) < $this->rHautCritique)) {return false;}
-		return $Y + $rDx / 6 * ($rk1 + 2 * ($rk2 + $rk3) + $rk4);
-	}
-
-
-	/**
-	 * Calcul du point suivant d'une courbe de remous
-	 * @return Tirant d'eau
-	 */
-	public function Calc_Y($rY) {
-		$funcCalcY = 'Calc_Y_'.$this->oP->sResolution;
-		if(method_exists($this,$funcCalcY)) {
-			return $this->$funcCalcY($rY);
-		} else {
-			return false;
-		}
-	}
-
-
 	/**
 	 * Calcul de la vitesse moyenne.
 	 * @return Vitesse moyenne
@@ -560,7 +490,7 @@ abstract class acSection {
 		$tPoints = array();
 		$this->Swap(true); // On mémorise les données hydrauliques en cours
 		for($rY=0;$rY<$this->oP->rYB+$rPas/2;$rY+=$rPas) {
-			//~ spip_log('DessinCoordonnees rY='.$rY,'hydraulic.'._LOG_DEBUG);
+			//~ if(self::DBG) spip_log('DessinCoordonnees rY='.$rY,'hydraulic.'._LOG_DEBUG);
 			$tPoints['x'][] = $this->Calc('B',$rY)/2;
 			$tPoints['y'][] = $rY;
 		}
@@ -601,7 +531,7 @@ class cHautCritique extends acNewton {
 		else {
 			$rFn = INF;
 		}
-		//~ spip_log('cHautCritique:CalcFn('.$rX.')='.$rFn,'hydraulic.'._LOG_DEBUG);
+		//~ if(self::DBG) spip_log('cHautCritique:CalcFn('.$rX.')='.$rFn,'hydraulic.'._LOG_DEBUG);
 		return $rFn;
 	}
 
@@ -619,10 +549,12 @@ class cHautCritique extends acNewton {
 			$rDer = INF;
 		}
 
-		//spip_log('cHautCritique:CalcDer('.$rX.')='.$rDer,'hydraulic.'._LOG_DEBUG);
+		//if(self::DBG) spip_log('cHautCritique:CalcDer('.$rX.')='.$rDer,'hydraulic.'._LOG_DEBUG);
 		return $rDer;
 	}
 }
+
+
 
 /**
  * Calcul de la hauteur normale
@@ -654,7 +586,7 @@ class cHautNormale extends acNewton {
 	protected function CalcFn($rX) {
 		// Calcul de la fonction
 		$rFn = ($this->rQ-$this->rKs*pow($this->oSn->Calc('R',$rX),2/3)*$this->oSn->Calc('S',$rX)*sqrt($this->rIf));
-		//spip_log('cHautNormale:CalcFn('.$rX.')='.$rFn,'hydraulic.'._LOG_DEBUG);
+		//if(self::DBG) spip_log('cHautNormale:CalcFn('.$rX.')='.$rFn,'hydraulic.'._LOG_DEBUG);
 		return $rFn;
 	}
 
@@ -667,7 +599,7 @@ class cHautNormale extends acNewton {
 		$rDer = 2/3*$this->oSn->Calc('dR')*pow($this->oSn->Calc('R'),-1/3)*$this->oSn->Calc('S');
 		$rDer += pow($this->oSn->Calc('R'),2/3)*$this->oSn->Calc('B');
 		$rDer *= -$this->rKs * sqrt($this->rIf);
-		//spip_log('cHautNormale:CalcDer('.$rX.')='.$rDer,'hydraulic.'._LOG_DEBUG);
+		//if(self::DBG) spip_log('cHautNormale:CalcDer('.$rX.')='.$rDer,'hydraulic.'._LOG_DEBUG);
 		return $rDer;
 	}
 }
@@ -703,7 +635,7 @@ class cHautCorrespondante extends acNewton {
 
 		// Calcul de la fonction
 		$rFn = $this->rY - $rX + ($this->rS2-pow($this->oSn->Calc('S',$rX),-2))*$this->rQ2G;
-		//~ spip_log('cHautCorrespondante:CalcFn('.$rX.')='.$rFn,'hydraulic.'._LOG_DEBUG);
+		//~ if(self::DBG) spip_log('cHautCorrespondante:CalcFn('.$rX.')='.$rFn,'hydraulic.'._LOG_DEBUG);
 		return $rFn;
 	}
 
@@ -719,7 +651,7 @@ class cHautCorrespondante extends acNewton {
 		else {
 			$rDer = INF;
 		}
-		//~ spip_log('cHautCorrespondante:CalcDer('.$rX.')='.$rDer,'hydraulic.'._LOG_DEBUG);
+		//~ if(self::DBG) spip_log('cHautCorrespondante:CalcDer('.$rX.')='.$rDer,'hydraulic.'._LOG_DEBUG);
 		return $rDer;
 	}
 
@@ -773,7 +705,7 @@ class cHautConjuguee extends acNewton {
 		else {
 			$rFn = -INF;
 		}
-		//~ spip_log('cHautConjuguee:CalcFn('.$rX.')='.$rFn,'hydraulic.'._LOG_DEBUG);
+		//~ if(self::DBG) spip_log('cHautConjuguee:CalcFn('.$rX.')='.$rFn,'hydraulic.'._LOG_DEBUG);
 		return $rFn;
 	}
 
@@ -790,7 +722,7 @@ class cHautConjuguee extends acNewton {
 		else {
 			$rDer = -INF;
 		}
-		//~ spip_log('cHautConjuguee:CalcDer('.$rX.')='.$rDer,'hydraulic.'._LOG_DEBUG);
+		//~ if(self::DBG) spip_log('cHautConjuguee:CalcDer('.$rX.')='.$rDer,'hydraulic.'._LOG_DEBUG);
 		return $rDer;
 	}
 

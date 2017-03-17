@@ -81,6 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'h_pelle'           => "Hauteur de pelle (m)",
 	// I
 	'impulsion'         => "Impulsion (N)",
+	'integration_trapez' => "Intégration par trapèzes",
 	// L
 	'largeur_fond'      => "Largeur au fond (m)",
 	'largeur_berge'     => "Largeur au niveau des berges",
