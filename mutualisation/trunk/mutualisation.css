@@ -6,6 +6,7 @@ table {
 	border-collapse: collapse;
 	border: 1px solid #999;
 	width: 100%;
+	clear: both;
 }
 
 tr {
@@ -13,8 +14,8 @@ tr {
 	border: 1px solid #999;
 }
 
-.tr0 {
-	background-color: #ddded5
+.tr0, tr:nth-child(even) {
+	background-color: #ddded5;
 }
 
 thead tr {
@@ -38,13 +39,30 @@ td {
 	border-left: 1px solid #ccc;
 	padding: 0.5em 1em;
 }
+tr td:nth-child(1), tr td:nth-child(7), tr td:nth-child(10), .text-right {
+	text-align: right;
+}
 
 td em {
 	color: #aaa;
 }
 
+body.minipres {
+	padding: 1% 1% 5%;
+}
+
 #minipres {
-	width: auto;
+	width: 98%;
+	padding: 20px 1%;
+	overflow-x: scroll;
+}
+img.favicon {
+	float: left;
+	width: 16px;
+	height: 16px;
+}
+.logo_mutualisation {
+	text-align: center;
 }
 
 .upgrade {

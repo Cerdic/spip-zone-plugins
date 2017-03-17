@@ -39,7 +39,7 @@ function exec_mutualisation_dist() {
 	$titre = _L(count($sites) . ' ' . 'sites mutualis&#233;s <em>(' . _T('version') . ' ' . $GLOBALS['spip_version_base'] . ')</em>');
 
 	//$page .= "<div id='trace'></div>" ;
-	$page = "<table style='clear:both;'>
+	$page = "<table class='sites'>
     <thead>
         <tr>
             <td>Site</td>
@@ -151,7 +151,7 @@ function exec_mutualisation_dist() {
         ';
 
 		$page .= "<tr class='tr" . $nsite%2 . "'" . " style='background-image: url(${url}ecrire/index.php?exec=mutualisation&amp;renouvelle_alea=yo)' id='$alias[$v]'>\n
-            <td style='text-align:right;'><img src='${url}favicon.ico' style='float:left;width:16px;height:16px;' />$v$erreur$version_installee</td>\n
+            <td class='text-right'><img src='${url}favicon.ico' class='favicon' />$v$erreur$version_installee</td>\n
             <td><a href='${url}'>" . typo($nom_site) . "</a></td>\n
             <td><a href='${url}ecrire/'>ecrire</a><br />
                 <a href='${url}$url_admin_plugin'>plugins</a><br />
@@ -159,10 +159,10 @@ function exec_mutualisation_dist() {
             <td><div id='IMG$nsite' class='taille loading'></div></td>\n
             <td><div id='local$nsite' class='taille loading'></div></td>\n
             <td><div id='cache$nsite' class='taille loading'></div></td>\n
-            <td style='text-align:right;'><a href='${url}$url_stats'>${stats}</a></td>\n
+            <td class='text-right'><a href='${url}$url_stats'>${stats}</a></td>\n
             <td>$adminplugin<div class='liste-plugins'><a href='${url}$url_admin_plugin'>${cntplugins}</a> <small>${plugins}</small></div></td>\n
             <td><a href='${url}$url_compresseur'>$compression</a></td>\n
-            <td style='text-align:right;'>" . date_creation_repertoire_site($v) . "</td>\n
+            <td class='text-right'>" . date_creation_repertoire_site($v) . "</td>\n
             </tr>\n";
 		++$nsite;
 	}
@@ -182,7 +182,7 @@ function exec_mutualisation_dist() {
 
 	if ($lsplugs) {
 		$nombre_plugins = count($lsplugs);
-		$page .= "<br /><br /><table style='clear:both;'>
+		$page .= "<br /><br /><table class='plugins'>
     <thead>\n
         <tr>
             <td>#</td>
@@ -305,7 +305,7 @@ function exec_mutualisation_dist() {
 		}
 	}
 
-	$page .= '<div style="text-align:center;"><img src="' . find_in_path('mutualisation/mutualiser.png') . '" alt="" /></div>';
+	$page .= '<div class="logo_mutualisation"><img src="' . find_in_path('mutualisation/mutualiser.png') . '" alt="" /></div>';
 
 	$page = minipres($titre, $page);
 
