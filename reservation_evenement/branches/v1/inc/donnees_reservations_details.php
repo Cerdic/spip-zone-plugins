@@ -70,6 +70,7 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 					if ($prix_ht)
 						$taxe = round(($prix - $prix_ht) / $prix_ht, 3);
 					$set['prix_ht'] = $prix_ht;
+					$set['prix'] = $prix;
 					$set['taxe'] = $taxe;
 					$set['id_prix_objet'] = $p['id_prix_objet'];
 					// Si pas de devise fournit par le contexte, on prend celle de prix_objets
@@ -109,6 +110,7 @@ function etablir_prix($id, $objet, $datas, $set, $quantite) {
 			$taxe = round(($prix - $prix_ht) / $prix_ht, 3);
 		}
 		$set['prix_ht'] = $prix_ht;
+		$set['prix'] = $prix;
 		$set['taxe'] = $taxe;
 	}
 	else
