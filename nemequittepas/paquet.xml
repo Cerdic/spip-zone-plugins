@@ -1,0 +1,22 @@
+<paquet
+	prefix="nemequittepas"
+	categorie="edition"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[2.0.10;3.1.*]"
+	logo="images/nemequitepas-48.png"
+	documentation="http://contrib.spip.net/Plugin-Porte-plume-partout"
+>	
+
+	<nom>Ne me quitte pas</nom>
+	<!-- Empêche de quitter une page si on a modifié le contenu -->
+
+	<auteur>Mehdi Cherigui</auteur>
+	<auteur>Jacques Pyrat</auteur>
+
+
+	<licence>GPL</licence>
+
+	<pipeline nom="header_prive" action="insert_head_prive" inclure="nemequittepas_pipelines.php" />
+
+</paquet>
