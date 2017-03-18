@@ -15,16 +15,16 @@
 
 	<necessite
 		nom="saisies"
-		compatibilite="[1.24.0;]" />
+		compatibilite="[2.18.5;]" />
 	<necessite
 		nom="verifier"
-		compatibilite="[1.0.0;]" />
+		compatibilite="[1.6.2;]" />
 	<necessite
 		nom="reservation_evenement"
-		compatibilite="[1.21.16;]" />
+		compatibilite="[1.23.15;]" />
 	<necessite
 		nom="reservation_bank"
-		compatibilite="[1.0.1;]" />
+		compatibilite="[1.1.10;]" />
 
 	<pipeline
 		nom="affiche_gauche"
