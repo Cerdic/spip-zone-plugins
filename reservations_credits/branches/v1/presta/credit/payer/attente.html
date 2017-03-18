@@ -1,0 +1,42 @@
+[(#REM)
+/*
+ * Paiement Bancaire
+ * module de paiement bancaire multi prestataires
+ * stockage des transactions
+ *
+ * Auteurs :
+ * Cedric Morin, Nursit.com
+ * (c) 2012-2015 - Distribue sous licence GNU/GPL
+ *
+ */
+]#CACHE{0}
+#SET{devise,EUR}
+<BOUCLE_trans(TRANSACTIONS){id_transaction}{transaction_hash}>	
+	<BOUCLE_credit(RESERVATION_CREDITS){email == #AUTEUR}>
+		<BOUCLE_reservations_detail(RESERVATIONS_DETAILS){id_reservation}{tout}{0,1}>
+		#SET{devise,#DEVISE}
+		</BOUCLE_reservations_detail>
+			#SET{credit,#CREDIT|credit_client{'',#GET{devise}}}
+	</BOUCLE_credit>
+<div class="payer_mode payer_credit payer_acte payer_attente">
+	#SET{ordre,#ENV{config/ordre,#NOM_SITE_SPIP}|wrap{'<strong>'}}
+	#SET{montant,#MONTANT|prix_formater_devise{#GET{devise}}|wrap{'<strong>'}}
+	#SET{transaction,#ID_TRANSACTION|wrap{'<strong>'}}
+	#SET{credit,#GET{credit}|prix_formater_devise{#GET{devise}}|wrap{'<strong>'}}
+	<p class="titre h4"><:reservation_credit:acompte_paye_par_credit:></p>
+	
+	[(#ID_RESERVATION|?{
+		#SET{objet,reservation}
+		,
+		[(#ID_COMMANDE|oui)#SET{objet,commande}]
+	})]
+	[(#GET{objet}|oui)
+		<p>
+			<INCLURE{fond=inclure/paiement_#GET{objet},
+				id_reservation=#ID_RESERVATION,
+				id_commande=#ID_COMMANDE,
+				cacher_paiement_public=''}/>
+		</p>
+	]
+</div>
+</BOUCLE_trans>

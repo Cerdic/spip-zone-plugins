@@ -1,0 +1,4 @@
+<li>
+	[(#ENV{exec}|in_array{#LISTE{reservation_credits,reservation_credit,}}|non)#SET{a, </a>}
+	<a href="#URL_ECRIRE{reservation_credits}" class="cellule-h">][(#CHEMIN_IMAGE{reservation_credit-16.png}|balise_img)] <:reservation_credit:titre_reservation_credits:>#GET{a}
+</li>

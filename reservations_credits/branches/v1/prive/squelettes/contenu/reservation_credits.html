@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/reservation_credits, par=id_reservation_credit, env, ajax, sinon=<:reservation_credit:info_aucun_reservation_credit:>}>
+
+[(#AUTORISER{creer,reservation_credit})
+	[(#URL_ECRIRE{reservation_credit_edit,new=oui}|icone_verticale{<:reservation_credit:icone_creer_reservation_credit:>,reservation_credit,new,right})]
+]

@@ -1,0 +1,41 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_reservation_credit_mouvement,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_reservation_credit_mouvement' value='#ENV{id_reservation_credit_mouvement}' />
+		<ul>
+
+			[(#SAISIE{credits, id_reservation_credit,
+				label=<:reservation_credit_mouvement:champ_credit_de:>})]
+
+			[(#SAISIE{textarea, descriptif,obligatoire=oui,
+				label=<:reservation_credit_mouvement:champ_descriptif_label:>})]
+
+			[(#SAISIE{radio, type, obligatoire=oui,
+				label=<:reservation_credit_mouvement:champ_type_label:>,
+				datas=[(#ARRAY{
+					credit,<:reservation_credit_mouvement:type_credit:>,
+					debit,<:reservation_credit_mouvement:type_debit:>,
+					})]})]
+
+			[(#SAISIE{input, montant, obligatoire=oui,
+				label=<:reservation:montant:>})]
+
+			[(#SAISIE{selection, devise, obligatoire=oui,
+				datas=#ENV*{devises},
+				cacher_option_intro = oui,
+				label=<:reservation_credit_mouvement:champ_devise_label:>})]
+
+			[(#SAISIE{date, date_creation, obligatoire=oui,
+				label=<:reservation_credit_mouvement:champ_date_creation_label:>})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

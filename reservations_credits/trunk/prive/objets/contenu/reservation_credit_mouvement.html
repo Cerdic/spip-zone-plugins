@@ -1,0 +1,42 @@
+<BOUCLE_reservation_credit_mouvement(RESERVATION_CREDIT_MOUVEMENTS){id_reservation_credit_mouvement}>
+
+[(#ID_RESERVATIONS_DETAIL|oui)
+<div class="champ contenu_id_reservations_detail[ (#ID_RESERVATIONS_DETAIL*|strlen|?{'',vide})]">
+	<span dir='#LANG_DIR' class='id_reservations_detail'>
+		<a href="#URL_ECRIRE{reservations_detail,id_reservations_detail=#ID_RESERVATIONS_DETAIL}">
+			<:reservations_detail:titre_reservations_detail:>
+		</a>
+	</span>
+</div>]
+[(#ID_OBJET|et{#OBJET}|oui)
+<div class="champ contenu_objet">
+	<span dir='#LANG_DIR' class='objet'>
+		<a href="#URL_ECRIRE{#OBJET,id_#OBJET=#ID_OBJET}">
+			#INFO_TITRE{#OBJET,#ID_OBJET}
+		</a>
+	</span>
+</div>
+]
+
+<div class="champ contenu_id_reservation_credit[ (#ID_RESERVATION_CREDIT*|strlen|?{'',vide})]">
+	<label><:reservation_credit:titre_reservation_credit:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{type} type'><a href="#URL_ECRIRE{reservation_credit,id_reservation_credit=#ID_RESERVATION_CREDIT}"> #SET{email,#INFO_EMAIL{reservation_credit,#ID_RESERVATION_CREDIT}}
+	#GET{email} [ - (#GET{email}|infos_client{nom})]</a></span>
+</div>
+
+[<div class="champ contenu_type[ (#TYPE*|strlen|?{'',vide})]">
+	<label><:reservation_credit_mouvement:champ_type_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{type} type'>(#VAL{reservation_credit_mouvement:type_#TYPE}|_T)</span>
+</div>]
+
+[<div class="champ contenu_montant[ (#MONTANT*|strlen|?{'',vide})]">
+	<label><:reservation:montant:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{montant} montant'>(#MONTANT|prix_formater_devise{#DEVISE})</span>
+</div>]
+
+[<div class="champ contenu_date_creation[ (#DATE_CREATION*|strlen|?{'',vide})]">
+	<label><:reservation_credit_mouvement:champ_date_creation_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{date_creation} date_creation'>(#DATE_CREATION)</span>
+</div>]
+
+</BOUCLE_reservation_credit_mouvement>
