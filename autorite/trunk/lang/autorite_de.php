@@ -64,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redac_tous' => 'Alle Redakteure',
 	'redacs' => 'für Redakteure der Seite',
 	'redacteur' => 'Redakteur',
-	'redacteur_lire_stats' => '<strong>Tatistikanzeige für Redakteure</strong>: Redakteure können die Statistiken ansehen.',
+	'redacteur_lire_stats' => '<strong>Statistik für Redakteure</strong>: Redakteure können die Zugriffsstatistiken einsehen.',
 	'refus_1' => '<p>Nur die Webmaster der Seite',
 
 	// T
