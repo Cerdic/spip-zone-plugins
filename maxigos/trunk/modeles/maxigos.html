@@ -1,0 +1,116 @@
+<!--
+	Plugin: maxigos integration for Spip. Uses embedded maxiGos v6.64 Copyright (C) 1998-2017 - François Mizessyn
+	Stand-alone players only + editor. http://jeudego.org/maxiGos/
+    Copyright (C) 2017  Robert Sebille - http://sebille.name
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+#SET{style,#ENV{style}}
+#SET{type,#ENV{type}}
+#SET{langue,#ENV{langue}}
+#SET{id_doc,#ENV{id_doc}}
+#SET{contenu,#ENV{contenu}}
+
+<?php
+$maxigos_style = trim(strtolower('#GET{style}'));
+$maxigos_type = trim(strtolower('#GET{type}'));
+$maxigos_langue = trim(strtolower('#GET{langue}'));
+$maxigos_id_doc = trim('#GET{id_doc}');
+$maxigos_contenu = trim('#GET{contenu}');
+
+// classic (=défaut), neo (=neo-classic), tatami, minimal (=minimalist), cameleon, [multitypes] ou fm, kifu, tiger [monotypes]
+switch ($maxigos_style) {
+	case 'neo':      $maxigos_style = 'maxigos-neo-classic'; break;
+	case 'tatami':   $maxigos_style = 'maxigos-tatami'; break;
+	case 'minimal':  $maxigos_style = 'maxigos-minimalist'; break;
+	case 'cameleon': $maxigos_style = 'maxigos-chameleon'; break;
+	case 'fm':       $maxigos_style = 'fm'; break; // monotype
+	case 'kifu':     $maxigos_style = 'kifu'; break; // monotype
+	case 'tiger':    $maxigos_style = 'tiger'; break; // monotype
+	default:         $maxigos_style = 'maxigos-classic';
+}
+
+// basic (=défaut), comment, diagram, game, problem [multistyles], tree, edit, lesson [monostyles]
+switch ($maxigos_type) {
+	case 'comment': $maxigos_type = '-comment'; break;
+	case 'diagram': $maxigos_type = '-diagram'; break;
+	case 'game':    $maxigos_type = '-game'; break;
+	case 'problem': $maxigos_type = '-problem'; break;
+	case 'tree':    $maxigos_type = '-tree'; break;
+	case 'edit':    $maxigos_type = '-edit'; $maxigos_style = 'maxigos'; break;
+	case 'lesson':  $maxigos_type = '-lesson'; $maxigos_style = 'maxigos-classic'; break;
+	default:        $maxigos_type = '-basic';
+}
+
+// pas de type pour les monotypes
+if ($maxigos_style == 'fm' || $maxigos_style == 'kifu' || $maxigos_style == 'tiger') {$maxigos_type = '';}
+
+// fr (français, défaut), en (anglais), ja (japonais), zh (chinois), zh-tw (chinois taiwan)
+switch ($maxigos_langue) {
+	case 'en':    $maxigos_langue = 'en'; break;
+	case 'ja':    $maxigos_langue = 'ja'; break;
+	case 'zh':    $maxigos_langue = 'zh'; break;
+	case 'zh-tw': $maxigos_langue = 'zh-tw'; break;
+	default:      $maxigos_langue = 'fr';
+}
+
+$maxigos_scriptpath = find_in_path(maxigos);
+$maxigos_script = $maxigos_scriptpath.'/'.$maxigos_style.$maxigos_type.'.js';
+$maxigos_languescript = $maxigos_scriptpath.'/_i18n/mgos-i18n-'.$maxigos_langue.'.js';
+unset($maxigos_scriptpath);
+
+if ($maxigos_id_doc == '') {$maxigos_id_doc = 'null';}
+if ($maxigos_contenu == '') {$maxigos_contenu = 'null';}
+
+// Priorité: 1 id_doc, contenu
+if ($maxigos_id_doc != 'null') {
+?>
+
+	<B_maxigos_fic_doc>
+		<BOUCLE_maxigos_fic_doc(DOCUMENTS) {extension=sgf} {id_document=#GET{id_doc}}>
+			<?php $maxigos_contenu='#FICHIER'; ?>
+		</BOUCLE_maxigos_fic_doc>
+	</B_maxigos_fic_doc>
+		<?php die('Erreur dans le modèle maxigos : pas trouvé de document .sgf avec un "id='.'#GET{id_doc}'.'".'); ?>
+	<//B_maxigos_fic_doc>
+	
+<?php
+}
+
+// On assure l'internationalisation
+echo "\n".'<script src="'.$maxigos_languescript.'"></script>'."\n";
+// On appelle le lecteur maxiGos
+echo "\n".'<script  data-maxigos-l="'.$maxigos_langue.'" src="'.$maxigos_script.'" charset="UTF-8">'.$maxigos_contenu.'</script>'."\n";
+
+/*
+// Debug
+echo "Style: ".$maxigos_style."<hr />";
+echo "Type: ".$maxigos_type."<hr />";
+echo "fichier_verif: ".$maxigos_fichier_verif."<hr />";
+echo "fichier_chemin: ".$maxigos_fichier_chemin."<hr />";
+echo "id_doc: ".$maxigos_id_doc."<hr />";
+echo "Contenu: ".$maxigos_contenu."<hr />";
+echo "mgoscript: ".$maxigos_script."<hr />";
+echo "langue: ".$maxigos_langue."<hr />";
+echo "mgolanguescript: ".$maxigos_languescript."<hr />";
+//*/
+
+// Database spip_types_documents
+// titre SGF
+// extension sgf
+// inclus non
+// upload oui
+// autres champs vides
+
+?>

@@ -1,0 +1,21 @@
+<paquet
+
+	prefix="maxigos"
+	categorie="divers"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.1.0;3.1.*]"
+	logo="prive/themes/spip/images/compagnon-32.png"
+	schema="201703191147"
+	documentation="https://contrib.spip.net/"
+	>
+	
+	<nom>Intégration maxiGos</nom>
+ 
+	<auteur lien="https://contrib.spip.net/Robert-Sebille">Robert Sebille</auteur>
+	<auteur lien="https://contrib.spip.net/Maieul">Maïeul</auteur>
+ 
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+	<credit lien="http://jeudego.org/maxiGos/_maxigos/_doc/license.txt">maxiGos</credit>
+ 
+</paquet>
