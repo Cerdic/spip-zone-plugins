@@ -27,6 +27,9 @@
  * Dichotomie
  */
 class cDichotomie {
+
+	const DBG = false; /// Pour loguer les messages de debug de cette classe
+
 	private $oLog; ///< Journal de calcul
 
 	//~ const IDEFINT = 100; /// Pas de parcours de l'intervalle pour initialisation dichotomie
@@ -60,7 +63,7 @@ class cDichotomie {
 		if(!is_array($res)) {
 			$res = array($res,0);
 		}
-		spip_log('CalculQ('.$this->objet->VarCal.')='.$res[0],'hydraulic',_LOG_DEBUG);
+		if(self::DBG) spip_log('CalculQ('.$this->objet->VarCal.')='.$res[0],'hydraulic',_LOG_DEBUG);
 		return $res;
 	}
 
@@ -72,7 +75,7 @@ class cDichotomie {
 	* @param $rInit Valeur initiale
 	*/
 	public function calculer($QT,$rTol,$rInit=0.) {
-		spip_log("Dichotomie->calculer($QT,$rTol,$rInit)",'hydraulic.'._LOG_DEBUG);
+		if(self::DBG) spip_log("Dichotomie->calculer($QT,$rTol,$rInit)",'hydraulic.'._LOG_DEBUG);
 		$this->objet->VarCal = $rInit;
 		list($Q,$nFlag) = $this->CalculQ();
 		$XminInit = 1E-8;
@@ -85,7 +88,7 @@ class cDichotomie {
 		if($QT < $Q xor $Q > $Q2) $Q1 = $Q;
 		$DX = ($XmaxInit - $XminInit) / floatval(self::IDEFINT);
 		$nIterMax = floor(max($XmaxInit - $rInit,$rInit - $XminInit) / $DX + 1);
-		spip_log("QT=$QT nIterMax=$nIterMax XminInit=$XminInit XmaxInit=$XmaxInit DX=$DX",'hydraulic',_LOG_DEBUG);
+		if(self::DBG) spip_log("QT=$QT nIterMax=$nIterMax XminInit=$XminInit XmaxInit=$XmaxInit DX=$DX",'hydraulic',_LOG_DEBUG);
 		$Xmin = $rInit;
 		$Xmax = $rInit;
 		$X1 = $rInit;
@@ -125,9 +128,9 @@ class cDichotomie {
 				$X1 = $Xmin;
 			}
 
-			spip_log("nIter=$nIter Xmin=$Xmin Xmax=$Xmax",'hydraulic',_LOG_DEBUG);
-			spip_log("X1=$X1 Q1=$Q1 X2=$X2 Q2=$Q2",'hydraulic',_LOG_DEBUG);
-			spip_log('$QT > $Q1 xor $QT >= $Q2 = '.($QT > $Q1 xor $QT >= $Q2),'hydraulic',_LOG_DEBUG);
+			if(self::DBG) spip_log("nIter=$nIter Xmin=$Xmin Xmax=$Xmax",'hydraulic',_LOG_DEBUG);
+			if(self::DBG) spip_log("X1=$X1 Q1=$Q1 X2=$X2 Q2=$Q2",'hydraulic',_LOG_DEBUG);
+			if(self::DBG) spip_log('$QT > $Q1 xor $QT >= $Q2 = '.($QT > $Q1 xor $QT >= $Q2),'hydraulic',_LOG_DEBUG);
 
 			if($QT > $Q1 xor $QT >= $Q2) {break;}
 		}
@@ -157,7 +160,7 @@ class cDichotomie {
 			$nFlag = 0;
 			for($nIter = 1; $nIter<=self::IDICMAX;$nIter++) {
 				$this->objet->VarCal=$X;
-				spip_log("nIter=$nIter nFlag=$nFlag".' rVarC='.$this->objet->VarCal,'hydraulic',_LOG_DEBUG);
+				if(self::DBG) spip_log("nIter=$nIter nFlag=$nFlag".' rVarC='.$this->objet->VarCal,'hydraulic',_LOG_DEBUG);
 				list($Q,$nFlag) = $this->CalculQ();
 				//~ if($QT!=0 && abs($Q/$QT-1.) <= $rTol) {break;}
 				if($QT!=0 && abs($X1-$X2) <= $rTol) {break;}
@@ -178,7 +181,7 @@ class cDichotomie {
 				$nFlag = -1;
 			}
 		}
-		spip_log('rVarC='.$this->objet->VarCal." nFlag=$nFlag",'hydraulic.'._LOG_DEBUG);
+		if(self::DBG) spip_log('rVarC='.$this->objet->VarCal." nFlag=$nFlag",'hydraulic.'._LOG_DEBUG);
 		return array($this->objet->VarCal,$nFlag);
 	}
 

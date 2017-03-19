@@ -7,8 +7,8 @@
 	</nom>
 	<auteur>David Dorchies, Médéric Dulondel</auteur>
 	<licence>GNU/GLP</licence>
-	<version>0.9.5</version>
-	<necessite id="lib:dist" src="https://bitbucket.org/cleonello/jqplot/downloads/jquery.jqplot.1.0.8r1250.zip" />
+	<version>0.9.6</version>
+	<necessite id="lib:dist" src="http://www.jqplot.com/download/jquery.jqplot.1.0.8r1250.zip" />
 	<slogan>
 		<multi>
 			[fr]Des calculs d'hydraulique sous SPIP !
