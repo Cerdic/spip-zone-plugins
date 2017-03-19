@@ -219,7 +219,7 @@ function noizetier_compositions_lister_disponibles($flux) {
 		
 		$flux['data'] = array_merge_recursive($flux['data'], $noizetier_compositions);
 	} elseif (isset($noizetier_compositions[$type]) and count($noizetier_compositions[$type]) > 0) {
-		if (!is_array($flux['data'][$type])) {
+		if (!isset($flux['data'][$type]) or !is_array($flux['data'][$type])) {
 			$flux['data'][$type] = array();
 		}
 		if (!is_array($noizetier_compositions[$type])) {

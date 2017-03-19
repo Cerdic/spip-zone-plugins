@@ -161,7 +161,7 @@ function formulaires_editer_page_verifier_dist($page, $new, $retour = '')
 		$type_page = _request('type_page');
 		$composition = _request('composition');
 		$liste_pages = noizetier_lister_pages();
-		if (is_array($liste_pages[$type_page.'-'.$composition])) {
+		if (isset($liste_pages[$type_page.'-'.$composition]) and is_array($liste_pages[$type_page.'-'.$composition])) {
 			$erreurs['composition'] = _T('noizetier:formulaire_identifiant_deja_pris');
 		}
 		if (preg_match('#^[a-z0-9_]+$#', $composition) == 0) {
