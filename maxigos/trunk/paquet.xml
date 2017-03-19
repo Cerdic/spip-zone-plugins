@@ -6,7 +6,7 @@
 	etat="dev"
 	compatibilite="[3.1.0;3.1.*]"
 	logo="prive/themes/spip/images/compagnon-32.png"
-	schema="201703191147"
+	schema="0.1.0"
 	documentation="https://contrib.spip.net/"
 	>
 	
