@@ -109,6 +109,9 @@ function chercher_logo_document($id, $_id_objet, $mode) {
 			$extension,
 			@filemtime($fichier),
 		);
+	} else if ($mode !== 'on') {
+		// S'il n'y a pas de logo avec le bon rôle, on se rabat sur le logo de base
+		return inc_chercher_logo_dist($id, $_id_objet, 'on');
 	}
 }
 

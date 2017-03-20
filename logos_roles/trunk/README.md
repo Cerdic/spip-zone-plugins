@@ -53,8 +53,6 @@ Même si les balises `LOGO_*` existantes fonctionnent toujours, il reste à trou
 En modifiant la balise `#LOGO_*` ?
 En ajoutant un traitement auto ?
 
-TODO le logo principal devrait être utilisé comme valeur par défaut pour les autres.
-
 ### Migration des logos existants ###
 
 Comme les logos enregistrés avec l'ancienne API fonctionnent toujours avec la nouvelle, il n'y pas d'urgence à migrer, la cohabitation se fait bien.
