@@ -38,7 +38,7 @@ function logos_roles_pre_boucle($boucle) {
 			$table_liens = table_objet_sql('documents') . '_liens';
 			$abbrev_table_lien = array_search($table_liens, $boucle->from);
 
-			if (! $boucle->modificateur['tout']) {
+			if ($abbrev_table_lien) {
 				$boucle->where[] = array(
 					"'NOT REGEXP'",
 					"'$abbrev_table_lien.role'",
