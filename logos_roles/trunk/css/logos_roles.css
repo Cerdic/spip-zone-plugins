@@ -1,0 +1,22 @@
+.formulaire_editer_logo h3 {
+  margin-bottom: 2px; }
+.formulaire_editer_logo h4 {
+  margin-bottom: 10px;
+  border: solid 1px #e1e1e1;
+  border-radius: 3px;
+  padding: 1px 5px;
+  background-color: white; }
+.formulaire_editer_logo .editer-groupe .editer {
+  padding-top: 8px;
+  padding-bottom: 8px; }
+.formulaire_editer_logo .apercu label {
+  margin-top: 1px;
+  margin-bottom: 3px; }
+.formulaire_editer_logo .apercu .boutons {
+  border-radius: 0; }
+.formulaire_editer_logo .apercu input.file {
+  margin-top: 5px; }
+.formulaire_editer_logo .apercu input.submit {
+  margin-top: 5px; }
+
+/*# sourceMappingURL=logos_roles.css.map */

@@ -64,5 +64,9 @@ function logos_roles_header_prive($flux) {
 		. find_in_path('javascript/logos_roles.js')
 		. '"></script>';
 
+	$flux .= '<link rel="stylesheet" href="'
+		. find_in_path('css/logos_roles.css')
+		. '" type="text/css" media="all" />';
+
 	return $flux;
 }
