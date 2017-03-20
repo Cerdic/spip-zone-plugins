@@ -19,4 +19,8 @@
 .formulaire_editer_logo .apercu input.submit {
   margin-top: 5px; }
 
+.formulaire_editer_logo_site .apercu label {
+  float: none;
+  margin-left: 0; }
+
 /*# sourceMappingURL=logos_roles.css.map */

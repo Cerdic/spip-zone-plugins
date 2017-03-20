@@ -54,11 +54,21 @@ function logo_supprimer($objet, $id_objet, $role) {
 		spip_unlink($logo[0]);
 	} else {
 		// Si le logo est géré par un document on ne supprime que le lien
-		objet_dissocier(
-			array('document' => '*'),
-			array($objet => $id_objet),
-			array('role' => $role)
-		);
+		if ($objet === 'site') {
+			include_spip('base/abstract_sql');
+
+			sql_delete(
+				'spip_documents_liens',
+				array('objet="site"', 'id_objet=0', 'role='.sql_quote($role))
+			);
+		} else {
+
+			objet_dissocier(
+				array('document' => '*'),
+				array($objet => $id_objet),
+				array('role' => $role)
+			);
+		}
 	}
 }
 
@@ -99,12 +109,36 @@ function logo_modifier($objet, $id_objet, $role, $source) {
 		return $erreur = $id_document;
 	}
 
-	include_spip('action/editer_liens');
-	objet_associer(
-		array('document' => $id_document),
-		array($objet => $id_objet),
-		array('role' => $role)
-	);
+	// Cas du LOGO_SITE_SPIP..
+	if (($objet === 'site') and ($id_objet == 0)) {
+		include_spip('base/abstract_sql');
+
+		// On supprime d'éventuels liens existants
+		sql_delete(
+			'spip_documents_liens',
+			array('objet="site"', 'id_objet=0', 'role='.sql_quote($role))
+		);
+
+		// Puis on insère le nouveau
+		sql_insertq(
+			'spip_documents_liens',
+			array(
+				'id_document' => intval($id_document),
+				'objet' => 'site',
+				'id_objet' => 0,
+				'role' => $role,
+			)
+		);
+
+	// Cas des autres logos
+	} else {
+		include_spip('action/editer_liens');
+		objet_associer(
+			array('document' => $id_document),
+			array($objet => $id_objet),
+			array('role' => $role)
+		);
+	}
 
 	return $erreur = '';
 }

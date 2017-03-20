@@ -57,13 +57,10 @@ function inc_chercher_logo_dist($id, $_id_objet, $mode = 'on') {
 	}
 
 	/* Si on n'a rien trouvé, on cherche un document lié avec le bon rôle */
-	if ($type !== 'site') {
+	$logo = chercher_logo_document($id, $_id_objet, $mode);
 
-		$logo = chercher_logo_document($id, $_id_objet, $mode);
-
-		if ($logo) {
-			return $logo;
-		}
+	if ($logo) {
+		return $logo;
 	}
 
 	# coherence de type pour servir comme filtre (formulaire_login)
