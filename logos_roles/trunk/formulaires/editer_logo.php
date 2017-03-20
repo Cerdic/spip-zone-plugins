@@ -214,6 +214,12 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
 				$res['message_ok'] = '';
 			} // pas besoin de message : la validation est visuelle
 			set_request('logo_up', ' ');
+		} elseif ($file and in_array($file['error'], array(UPLOAD_ERR_INI_SIZE, UPLOAD_ERR_FORM_SIZE))) {
+			$res['message_erreur'] = 'fichier trop volumineux';
+		} elseif ($file and in_array($file['error'], array(UPLOAD_ERR_PARTIAL,UPLOAD_ERR_NO_FILE))) {
+			$res['message_erreur'] = 'upload incomplet';
+		} elseif ($file and ($file['error'] > 5)) {
+			$res['message_erreur'] = 'erreur serveur';
 		}
 	}
 
@@ -252,7 +258,7 @@ function formulaire_editer_logo_get_sources($objet = null) {
 
 	$sources = array();
 	foreach (lister_roles_logos($objet) as $role => $options) {
-		if (isset($_FILES[$role]) and $_FILES[$role]['error'] === 0) {
+		if (isset($_FILES[$role])) {
 			$sources[$role] = $_FILES[$role];
 		}
 	}
