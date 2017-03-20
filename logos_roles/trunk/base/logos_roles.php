@@ -80,3 +80,53 @@ function logos_roles_declarer_tables_interfaces($interfaces) {
 
 	return $interfaces;
 }
+
+/**
+ * Ajouter les rôles qui vont bien pour les logos de documents
+ *
+ * On se base sur le code fourni dans le README du plugin « Rôles de documents »
+ */
+function logos_roles_declarer_tables_objets_sql($tables) {
+
+	global $roles_logos;
+
+	include_spip('base/objets');
+
+	// On se base sur la globale roles_logos pour déclarer les rôles de document
+	// qui vont bien.
+	if (is_array($roles_logos)) {
+		$nouveaux_roles_titres = array();
+		$nouveaux_roles_objets = array();
+
+		foreach ($roles_logos as $role => $options) {
+			$nouveaux_roles_titres[$role] = $options['label'];
+			foreach ($options['objets'] as $objet) {
+				$nouveaux_roles_objets[table_objet($objet)][] = $role;
+			}
+		}
+
+		foreach ($nouveaux_roles_objets as $objet => $choix) {
+			$nouveaux_roles_objets[$objet] = array(
+				'choix' => $choix,
+				'defaut' => ''
+			);
+		}
+
+		// anciens rôles (par défaut 'logo' et 'logo_survol' pour tous les objets)
+		$anciens_roles_titres = is_array($tables['spip_documents']['roles_titres']) ?
+			$tables['spip_documents']['roles_titres'] : array();
+		$anciens_roles_objets = is_array($tables['spip_documents']['roles_objets']) ?
+			$tables['spip_documents']['roles_objets'] : array();
+
+		// on mélange le tout
+		$roles_titres = array_merge($anciens_roles_titres, $nouveaux_roles_titres);
+		$roles_objets = array_merge($anciens_roles_objets, $nouveaux_roles_objets);
+
+		array_set_merge($tables, 'spip_documents', array(
+			'roles_titres' => $roles_titres,
+			'roles_objets' => $roles_objets
+		));
+	}
+
+	return $tables;
+}

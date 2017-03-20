@@ -20,6 +20,7 @@
   <utilise nom="massicot" compatibilite="[0.7.2;[" />
 
   <pipeline nom="declarer_tables_interfaces" inclure="base/logos_roles.php" />
+  <pipeline nom="declarer_tables_objets_sql" inclure="base/logos_roles.php" />
 
   <pipeline nom="pre_boucle" inclure="logos_roles_pipelines.php" />
   <pipeline nom="header_prive" inclure="logos_roles_pipelines.php" />
