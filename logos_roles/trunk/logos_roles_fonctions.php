@@ -69,3 +69,21 @@ function trouver_logo_par_role($logo, $objet, $id_objet, $role) {
 
 	return $logo;
 }
+
+/**
+ * Forcer les dimensions d'un logo suivant les dimensions définies par son rôle
+ */
+function forcer_dimensions_role($logo, $objet, $id_objet, $role) {
+
+	include_spip('inc/filtres');
+
+	if (isset($GLOBALS['roles_logos'][$role]['dimensions'])
+			and is_array($GLOBALS['roles_logos'][$role]['dimensions'])) {
+
+		$image_recadre = charger_filtre('image_recadre');
+		$dimensions = $GLOBALS['roles_logos'][$role]['dimensions'];
+		$logo = $image_recadre($logo, $dimensions['largeur'], $dimensions['hauteur']);
+	}
+
+	return $logo;
+}

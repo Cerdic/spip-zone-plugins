@@ -86,6 +86,12 @@ function logos_roles_declarer_tables_interfaces($interfaces) {
 							strtoupper('LOGO_'.objet_type($table)) . $suffixe_balise
 						);
 					}
+
+					$interfaces = logos_roles_ajouter_traitement_automatique(
+						$interfaces,
+						'forcer_dimensions_role(%s, '.objet_type($table).', $Pile[1][\''.id_table_objet($table).'\'], '.$role.')',
+						strtoupper('LOGO_'.objet_type($table) . $suffixe_balise)
+					);
 				}
 			}
 		}
