@@ -1,11 +1,29 @@
+[(#SET{role, #ENV{quoi}})]
+
+[(#GET{role}|=={logo_off}|oui)
+  [(#SET{role, logo_survol})]
+]
+
 <div class="apercu">
-	[<div class="spip_logo"><a href="#ENV{logo}" class='mediabox'>(#ENV{logo}|image_reduire{[(#ENV{_options}|table_valeur{image_reduire}|sinon{170})]}|inserer_attribut{alt,#ENV{quoi,logo_on}})</a></div>]
-	#SET{largeur,#ENV{logo}|largeur}
-	#SET{hauteur,#ENV{logo}|hauteur}
+  [<div class="spip_logo">
+    <a href="[(#ENV{logo}|massicoter_objet{#ENV{objet},#ENV{id_objet},#GET{role}})]" class='mediabox'>
+      (#ENV{logo}|massicoter_objet{#ENV{objet},#ENV{id_objet},#GET{role}}|image_reduire{[(#ENV{_options}|table_valeur{image_reduire}|sinon{100})]}|inserer_attribut{alt,#ENV{quoi,logo_on}})
+    </a>
+  </div>]
+  #SET{largeur,#ENV{logo}|massicoter_objet{#ENV{objet},#ENV{id_objet},#GET{role}}|largeur}
+  #SET{hauteur,#ENV{logo}|massicoter_objet{#ENV{objet},#ENV{id_objet},#GET{role}}|hauteur}
 	[<div class="titre">(#ENV{titre,''})</div>]
 	<div class="taille"><:info_largeur_vignette{largeur_vignette=#GET{largeur},hauteur_vignette=#GET{hauteur}}:></div>
 	[(#ENV{editable}|oui)
     [(#PIPELINE{logo_desc_actions, #ARRAY{args,#ARRAY{logo, #ENV{logo}, objet, #ENV{objet}, id_objet, #ENV{id_objet}}, data, ''}})]
+
+    [(#PLUGIN{massicot}|oui)
+      <a href="[(#URL_ECRIRE{massicoter_image, objet=#ENV{objet}&id_objet=#ENV{id_objet}}|parametre_url{redirect,#SELF}|parametre_url{role, #GET{role}})]"
+         class="bouton">
+        <strong><:massicot:massicoter:></strong>
+      </a>
+      <br>
+    ]
 
     [(#ENV{logo}|trouver_document_fichier|intval|oui)
       <a href="[(#URL_ECRIRE{document_edit, id_document=#ENV{logo}|trouver_document_fichier}|parametre_url{redirect, #SELF})]"
