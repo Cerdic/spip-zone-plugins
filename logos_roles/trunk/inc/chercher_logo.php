@@ -59,43 +59,57 @@ function inc_chercher_logo_dist($id, $_id_objet, $mode = 'on') {
 	/* Si on n'a rien trouvé, on cherche un document lié avec le bon rôle */
 	if ($type !== 'site') {
 
-		if ($mode === 'on') {
-			$role = 'logo';
-		} elseif ($mode === 'off') {
-			$role = 'logo_survol';
-		} else {
-			$role = $mode;
-		}
+		$logo = chercher_logo_document($id, $_id_objet, $mode);
 
-		include_spip('base/abstract_sql');
-		$ligne = sql_fetsel(
-			'fichier, extension',
-			'spip_documents as D '
-			. 'INNER JOIN spip_documents_liens as L ON D.id_document=L.id_document',
-			array(
-				'L.objet='.sql_quote(objet_type($_id_objet)),
-				'L.id_objet='.intval($id),
-				'L.role='.sql_quote($role),
-			)
-		);
-
-		if ($ligne['fichier']) {
-
-			$fichier = _DIR_IMG . $ligne['fichier'];
-			$extension = $ligne['extension'];
-
-			return array(
-				$fichier,
-				dirname($fichier) . '/',
-				basename($fichier, '.' . $extension),
-				$extension,
-				@filemtime($fichier),
-			);
+		if ($logo) {
+			return $logo;
 		}
 	}
 
 	# coherence de type pour servir comme filtre (formulaire_login)
 	return array();
+}
+
+/**
+ * Trouver un logo enregistré en tant que document
+ *
+ * Fonction à usage interne, utiliser chercher_logo pour trouver des logos
+ */
+function chercher_logo_document($id, $_id_objet, $mode) {
+
+	if ($mode === 'on') {
+		$role = 'logo';
+	} elseif ($mode === 'off') {
+		$role = 'logo_survol';
+	} else {
+		$role = $mode;
+	}
+
+	include_spip('base/abstract_sql');
+	$ligne = sql_fetsel(
+		'fichier, extension',
+		'spip_documents as D '
+		. 'INNER JOIN spip_documents_liens as L ON D.id_document=L.id_document',
+		array(
+			'L.objet='.sql_quote(objet_type($_id_objet)),
+			'L.id_objet='.intval($id),
+			'L.role='.sql_quote($role),
+		)
+	);
+
+	if ($ligne['fichier']) {
+
+		$fichier = _DIR_IMG . $ligne['fichier'];
+		$extension = $ligne['extension'];
+
+		return array(
+			$fichier,
+			dirname($fichier) . '/',
+			basename($fichier, '.' . $extension),
+			$extension,
+			@filemtime($fichier),
+		);
+	}
 }
 
 /**
