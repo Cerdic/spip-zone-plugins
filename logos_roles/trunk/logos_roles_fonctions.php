@@ -31,7 +31,6 @@ function lister_roles_logos($objet = null) {
 	);
 
 	if ($objet = table_objet($objet)) {
-
 		$roles_logos_objet = array();
 		foreach ($roles_logos as $role => $options) {
 			if ((! is_array($options['objets']))
@@ -62,7 +61,6 @@ function get_dimensions_role($role) {
 			and is_array($roles_logos[$role])
 			and isset($roles_logos[$role]['dimensions'])
 			and is_array($roles_logos[$role]['dimensions'])) {
-
 		return $roles_logos[$role]['dimensions'];
 	}
 }
@@ -109,7 +107,6 @@ function forcer_dimensions_role($logo, $objet, $id_objet, $role) {
 	include_spip('inc/filtres');
 
 	if ($dimensions = get_dimensions_role($role)) {
-
 		$image_recadre = charger_filtre('image_recadre');
 		$image_passe_partout = charger_filtre('image_passe_partout');
 		$logo = $image_recadre(

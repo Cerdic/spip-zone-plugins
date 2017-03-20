@@ -68,7 +68,6 @@ function logos_roles_declarer_tables_interfaces($interfaces) {
 		foreach (lister_tables_objets_sql() as $table => $valeurs) {
 			if ($table !== 'spip_documents') {
 				foreach ($suffixes as $role => $suffixe_balise) {
-
 					$interfaces = logos_roles_ajouter_traitement_automatique(
 						$interfaces,
 						'trouver_logo_par_role(%s, '.objet_type($table).', $Pile[1][\''.id_table_objet($table).'\'], \''.$role.'\')',
@@ -79,7 +78,6 @@ function logos_roles_declarer_tables_interfaces($interfaces) {
 					// logo_survol. On s'en occupe ici.
 					if (plugin_est_installe('massicot')
 						and (! in_array($role, array('logo', 'logo_survol')))) {
-
 						$interfaces = ajouter_traitement_automatique(
 							$interfaces,
 							'massicoter_logo(%s, '.objet_type($table).', $Pile[1][\''.id_table_objet($table).'\'], \''.$role.'\')',
@@ -98,7 +96,6 @@ function logos_roles_declarer_tables_interfaces($interfaces) {
 
 		// Sans oublier les balises #LOGO_SITE_SPIP…
 		foreach ($suffixes as $role => $suffixe_balise) {
-
 			$interfaces = logos_roles_ajouter_traitement_automatique(
 				$interfaces,
 				'trouver_logo_par_role(%s, \'site\', 0, \''.$role.'\')',
@@ -109,7 +106,6 @@ function logos_roles_declarer_tables_interfaces($interfaces) {
 			// logo_survol. On s'en occupe ici.
 			if (plugin_est_installe('massicot')
 				and (! in_array($role, array('logo', 'logo_survol')))) {
-
 				$interfaces = ajouter_traitement_automatique(
 					$interfaces,
 					'massicoter_logo(%s, \'site\', 0, \''.$role.'\')',

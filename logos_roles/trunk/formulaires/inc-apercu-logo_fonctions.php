@@ -21,7 +21,7 @@ function est_logo_par_defaut($logo, $id_objet, $objet) {
 include_spip('inc/plugin');
 if (! plugin_est_installe('massicot')) {
 
-	function massicoter_objet($fichier, $objet, $id_objet, $role=null) {
+	function massicoter_objet($fichier, $objet, $id_objet, $role = null) {
 
 		return $fichier;
 	}

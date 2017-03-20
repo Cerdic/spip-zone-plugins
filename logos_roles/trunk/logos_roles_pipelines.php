@@ -21,13 +21,11 @@
 function logos_roles_pre_boucle($boucle) {
 
 	if ($boucle->type_requete === 'documents') {
-
 		$utilise_critere_logo = false;
 		foreach ($boucle->criteres as $critere) {
 			if ($critere->type === 'critere') {
 				if (($critere->param[0][0]->texte === 'role') or
 					($critere->op === 'role')) {
-
 					$utilise_critere_logo = true;
 				}
 			}
@@ -85,7 +83,6 @@ function logos_roles_formulaire_charger($flux) {
 
 	if (($form === 'massicoter_image')
 			and ($dimensions = get_dimensions_role($data['role']))) {
-
 		$flux['data']['format'] = $dimensions['largeur'] . ':' . $dimensions['hauteur'];
 
 	  // TODO Ne donne pas les résultats espérés… Bug du Massicot ?

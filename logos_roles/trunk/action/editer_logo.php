@@ -16,11 +16,6 @@
  * @package SPIP\Core\Logo\Edition
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
-}
-
-
 /**
  * Supprimer le logo d'un objet
  *
@@ -59,13 +54,11 @@ function logo_supprimer($objet, $id_objet, $role) {
 	} else {
 		// Si le logo est géré par un document on ne supprime que le lien
 		if ($objet === 'site') {
-
 			sql_delete(
 				'spip_documents_liens',
 				array('objet="site"', 'id_objet=0', 'role='.sql_quote($role))
 			);
 		} else {
-
 			objet_dissocier(
 				array('document' => '*'),
 				array($objet => $id_objet),
