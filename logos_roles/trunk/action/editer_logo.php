@@ -28,6 +28,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param int $id_objet
  * @param string $role
  *     `on` ou `off` pour rétro-compatibilité, sinon un role de logo
+ *
+ * @return string|null
+ *     Erreur, sinon rien
  */
 function logo_supprimer($objet, $id_objet, $role) {
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
@@ -70,25 +73,12 @@ function logo_supprimer($objet, $id_objet, $role) {
 			);
 		}
 
+		// Si le plugin massicot est installé, on doit aussi supprimer le
+		// massicotage correspondant.
 		include_spip('inc/plugin');
 		if (plugin_est_installe('massicot')) {
-			$massicotages = objet_trouver_liens(
-				array('massicotage' => '*'),
-				array($objet => $id_objet)
-			);
-
-			foreach ($massicotages as $massicotage) {
-				if ($massicotage['role'] === $role) {
-					$id_massicotage = $massicotage['id_massicotage'];
-					sql_delete(
-						'spip_massicotages',
-						'id_massicotage=' . intval($id_massicotage)
-					);
-					sql_delete(
-						'spip_massicotages_liens',
-						'id_massicotage=' . intval($id_massicotage)
-					);
-				}
+			if ($err = massicot_supprimer($objet, $id_objet, $role)) {
+				return $err;
 			}
 		}
 	}
