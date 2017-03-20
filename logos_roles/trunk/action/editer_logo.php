@@ -26,18 +26,24 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @param string $objet
  * @param int $id_objet
- * @param string $etat
- *     `on` ou `off`
+ * @param string $role
+ *     `on` ou `off` pour rétro-compatibilité, sinon un role de logo
  */
 function logo_supprimer($objet, $id_objet, $role) {
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	$objet = objet_type($objet);
 	$primary = id_table_objet($objet);
 
+	if ($role === 'on') {
+		$role = 'logo';
+	} elseif ($role === 'off') {
+		$role = 'logo_survol';
+	}
+
 	$logo = $chercher_logo($id_objet, $primary, $role);
 	// si pas de logo ou qu'on est dans le cas d'un logo par défaut, on ne fait rien
 	$logo_defaut = $chercher_logo($id_objet, $primary, 'on');
-	if ((! $logo) or (($role !== 'on') and ($logo[0] === $logo_defaut[0]))) {
+	if ((! $logo) or (($role !== 'logo') and ($logo[0] === $logo_defaut[0]))) {
 		return;
 	}
 
