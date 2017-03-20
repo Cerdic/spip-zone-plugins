@@ -133,6 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//R
 	'rayon_hyd'         => "Le rayon hydraulique (m)",
 	'reduire_pas'       => "Il faudrait réduire le pas de discrétisation",
+	'ressaut_hydrau'	=> "Ressaut hydraulique détecté à l'abscisse",
 	'rugosite_nc'       => "Rugosité (Strickler en m<sup>1/3</sup>s<sup>-1</sup>)",
 	'runge_kutta'       => "Runge Kutta d'ordre 4",
 	//S

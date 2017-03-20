@@ -88,23 +88,24 @@
 		var tabAfficher = [];
 
 		<BOUCLE_tabS(POUR){tableau #ENV{mes_saisies}}>
-			if(globSelectOuv == '#CLE'){
-				<BOUCLE_tabS2(POUR){tableau #VALEUR|table_valeur{2}}>
-					tabAfficher.push([(#VALEUR|table_valeur{0})]);
-				</BOUCLE_tabS2>
-			}
+		if(globSelectOuv == '#CLE'){
+			<BOUCLE_tabS2(POUR){tableau #VALEUR|table_valeur{2}}>
+			tabAfficher.push([(#VALEUR|table_valeur{0})]);
+			</BOUCLE_tabS2>
+		}
 		</BOUCLE_tabS>
 
 		var bSel = false;
-		for(var i = 0; i < document.getElementById("choix_equation_debit").length; i++){
-			document.getElementById("choix_equation_debit").options[i].style.display="none";
-			document.getElementById("choix_equation_debit").options[i].selected=false;
-			for(var j in tabAfficher){
-				if(j == document.getElementById("choix_equation_debit").options[i].value) {
-					document.getElementById("choix_equation_debit").options[i].style.display="list-item";
+		var ch_equaQ = document.getElementById("choix_equation_debit");
+		for(var i = 0; i < ch_equaQ.length; i++){
+			ch_equaQ.options[i].style.display="none";
+			ch_equaQ.options[i].selected=false;
+			for(var j = 0; j < tabAfficher.length; j++){
+				if(tabAfficher[j] == ch_equaQ.options[i].value) {
+					ch_equaQ.options[i].style.display="list-item";
 					if(!bSel) {
 						bSel = true;
-						document.getElementById("choix_equation_debit").options[i].selected=true;
+						ch_equaQ.options[i].selected=true;
 					}
 				}
 			}
@@ -653,5 +654,7 @@
 		</tbody>
 	</table>
 </form>
+
+<script>afficher_cacher_champs_select();</script>
 
 [<div id="hyd_resultat">(#ENV*{message_ok})</div>]

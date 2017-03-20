@@ -81,6 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'h_pelle'           => "Sill elevation (m)",
 	// I
 	'impulsion'         => "Impulse (N)",
+	'integration_trapez' => "Integration by trapezoid",
 	// L
 	'largeur_fond'      => "Width at bottom (m)",
 	'largeur_berge'     => "Width at embankment level",
@@ -132,6 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//R
 	'rayon_hyd'         => "Hydraulic radius",
 	'reduire_pas'       => "The discretisation step should be reduced",
+	'ressaut_hydrau'	=> "Hydraulic jump detected at the abscissa",
 	'rugosite_nc'       => "Roughness (Strickler m<sup>1/3</sup>s<sup>-1</sup>)",
 	'runge_kutta'       => "Runge–Kutta fourth-order",
 	//S
