@@ -62,8 +62,11 @@ function notifications_notifications_destinataires($flux){
 	$options = $flux['args']['options'];
 
 	// proposition d'article prevenir les admins restreints pour le passage de proposé à publié
-	if ($quoi=='instituerarticle' AND $GLOBALS['notifications']['prevenir_admins_restreints']
-		AND $options['statut']=='prop' AND $options['statut_ancien']!='publie' // ligne a commenter si vous voulez prevenir de la publication
+	if (
+		$quoi=='instituerarticle'
+		AND !empty($GLOBALS['notifications']['prevenir_admins_restreints'])
+		AND $options['statut']=='prop'
+		AND $options['statut_ancien']!='publie' // ligne a commenter si vous voulez prevenir de la publication
 	){
 
 		$id_article = $flux['args']['id'];
@@ -106,8 +109,11 @@ function notifications_notifications_destinataires($flux){
 	}
 
 	// notification d'article pour le passage de proposé à refusé
-	if ($quoi=='instituerarticle' AND $GLOBALS['notifications']['prevenir_auteurs_articles_refus'] 
-		AND $options['statut']=='refuse' AND in_array($options['statut_ancien'], array('prop','publie')) // ligne a commenter si vous voulez prevenir de la publication
+	if (
+		$quoi=='instituerarticle'
+		AND !empty($GLOBALS['notifications']['prevenir_auteurs_articles_refus'])
+		AND $options['statut']=='refuse'
+		AND in_array($options['statut_ancien'], array('prop','publie')) // ligne a commenter si vous voulez prevenir de la publication
 	){
 
 		$id_article = $flux['args']['id'];
@@ -150,8 +156,9 @@ function notifications_notifications_destinataires($flux){
 	}
 
 	// publication d'article : prevenir les auteurs
-	if ($quoi=='instituerarticle'
-		AND $GLOBALS['notifications']['prevenir_auteurs_articles']
+	if (
+		$quoi=='instituerarticle'
+		AND !empty($GLOBALS['notifications']['prevenir_auteurs_articles'])
 	){
 		$id_article = $flux['args']['id'];
 		include_spip('base/abstract_sql');
@@ -183,11 +190,14 @@ function notifications_notifications_destinataires($flux){
 
 	}
 	//publication d'article : ne pas prévenir l'auteur s'il est le validateur
-	if ($quoi == "instituerarticle" and $GLOBALS['notifications']['pas_prevenir_publieur']){
+	if (
+		$quoi == "instituerarticle"
+		and !empty($GLOBALS['notifications']['pas_prevenir_publieur'])
+	){
 		$publieur_email=$GLOBALS["visiteur_session"]["email"];
-		if(($key = array_search($publieur_email,$flux['data'])) !== false){
+		if (($key = array_search($publieur_email,$flux['data'])) !== false){
 			unset($flux['data'][$key]);
-		}	
+		}
 	}
 	// forum valide ou prive : prevenir les autres contributeurs du thread ou ceux qui ont déjà répondu à l'article
 	if (($quoi=='forumprive' AND $GLOBALS['notifications']['thread_forum_prive'])
