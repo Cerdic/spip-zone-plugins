@@ -39,20 +39,3 @@ nb_pages=$(pdfinfo "$pdf" | grep Pages | awk '{print $2}')
 
 # une seule page
 convert -verbose -colorspace RGB -resize 1500 -interlace none -density 300 -background white -alpha remove -quality 80 -shave "$shave" "$pdf" "$fichier_dest"
-
-if [ -d "$repdest" ] ; then
-	# si on a affaire a un fichier multi pages on renumérote +1 pour ne pas démarrer à 0
-	echo "renommage..."
-	find "$repdest" -iname "*0.jpg" | head -1 | while read f ; do
-		# lister les fichiers à l'envers et les décaler de 1
-		find "$repdest" -iname "*.jpg" | sort -r | while read i ; do
-			page=$(echo "$i" | grep -Eo "\d+\.jpg" | grep -Eo "\d+")
-			pagep=$(echo $page | sed 's/^0//')
-			pagep=$((pagep+1))
-			((pagep<10)) && pagep="0$pagep"
-			image=$(echo $i | sed "s/${page}.jpg/${pagep}.jpg/")
-			#echo "mv $i $image"
-			mv "$i" "$image"
-		done
-	done
-fi
