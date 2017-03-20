@@ -28,11 +28,15 @@
 			<label for="#ENV{quoi}_#ENV{objet}_#ENV{id_objet}">
         [(#ENV{_options}|table_valeur{label}|sinon{<:info_telecharger_nouveau_logo:>})]
       </label>
-      [<span class='erreur_message'>
-        (#ENV**{erreurs}|table_valeur{#ENV{quoi}})
-      </span>]
-      <input type='file' class='file' name='#ENV{quoi}' size="[(#ENV{_options}|table_valeur{size_input}|sinon{12})]" id='#ENV{quoi}_#ENV{objet}_#ENV{id_objet}' value="" />
-		  <p class=""[(#GET{hide})style='display:none;']><input type='submit' class='submit' value='<:bouton_upload:>' /></p>
+      <div>
+        [<span class='erreur_message'>
+          (#ENV**{erreurs}|table_valeur{#ENV{quoi}})
+        </span>]
+        <input type='file' class='file' name='#ENV{quoi}' size="[(#ENV{_options}|table_valeur{size_input}|sinon{12})]" id='#ENV{quoi}_#ENV{objet}_#ENV{id_objet}' value="" />
+        <p class=""[(#GET{hide})style='display:none;']>
+          <input type='submit' class='submit' value='<:bouton_upload:>' />
+        </p>
+      </div>
     ]
 	]
 </div>

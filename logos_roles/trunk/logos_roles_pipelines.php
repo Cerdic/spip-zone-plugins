@@ -50,3 +50,19 @@ function logos_roles_pre_boucle($boucle) {
 
 	return $boucle;
 }
+
+/**
+ * Insérer du js et du css dans le head de l'espace privé
+ *
+ * @pipeline header_prive
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function logos_roles_header_prive($flux) {
+
+	$flux .= '<script type="text/javascript" src="'
+		. find_in_path('javascript/logos_roles.js')
+		. '"></script>';
+
+	return $flux;
+}

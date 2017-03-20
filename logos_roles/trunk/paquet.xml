@@ -20,5 +20,6 @@
   <utilise nom="massicot" compatibilite="[0.7.0;[" />
 
   <pipeline nom="pre_boucle" inclure="logos_roles_pipelines.php" />
+  <pipeline nom="header_prive" inclure="logos_roles_pipelines.php" />
 
 </paquet>
