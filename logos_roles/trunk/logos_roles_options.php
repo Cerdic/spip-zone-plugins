@@ -9,12 +9,12 @@ if (plugin_est_installe('massicot')) {
 	}
 
 	include_spip('logos_roles_fonctions');
-	foreach (lister_logos_roles() as $role => $label) {
+	foreach (lister_roles_logos() as $role => $options) {
 
 		if ($dimensions = get_dimensions_role($role)) {
 
 			$GLOBALS['presets_format_massicot'][] = array(
-				'nom' => $label,
+				'nom' => $options['label'],
 				'largeur' => $dimensions['largeur'],
 				'hauteur' => $dimensions['hauteur'],
 			);

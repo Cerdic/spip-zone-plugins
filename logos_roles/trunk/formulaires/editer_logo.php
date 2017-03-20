@@ -108,7 +108,7 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 	// le nom de la cle primaire (et non le nom de la table)
 	// ou directement le nom du raccourcis a chercher
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
-	$roles_logos = array_keys(lister_logos_roles($objet));
+	$roles_logos = array_keys(lister_roles_logos($objet));
 
 	foreach ($roles_logos as $role) {
 		$logo = $chercher_logo($id_objet, $_id_objet, $role);
@@ -197,7 +197,7 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
 	include_spip('action/editer_logo');
 
 	// effectuer la suppression si demandee d'un logo
-	foreach (lister_logos_roles($objet) as $role => $titre_role) {
+	foreach (lister_roles_logos($objet) as $role => $options) {
 		if (_request('supprimer_' . $role)) {
 			logo_supprimer($objet, $id_objet, $role);
 			$res['message_ok'] = ''; // pas besoin de message : la validation est visuelle
@@ -219,7 +219,7 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
 
 	// on vide les valeurs postées dans les rôles pour qu'elles soit recalculées
 	// pendant le prochain appel à la fonction charger
-	foreach (lister_logos_roles($objet) as $role => $nom_role) {
+	foreach (lister_roles_logos($objet) as $role => $options) {
 		set_request($role, null);
 	}
 
@@ -251,7 +251,7 @@ function formulaire_editer_logo_get_sources($objet = null) {
 	}
 
 	$sources = array();
-	foreach (lister_logos_roles($objet) as $role => $titre_role) {
+	foreach (lister_roles_logos($objet) as $role => $options) {
 		if (isset($_FILES[$role]) and $_FILES[$role]['error'] === 0) {
 			$sources[$role] = $_FILES[$role];
 		}

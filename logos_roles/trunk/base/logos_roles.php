@@ -58,7 +58,7 @@ function logos_roles_declarer_tables_interfaces($interfaces) {
 	include_spip('logos_roles_fonctions');
 
 	$suffixes = array();
-	foreach (lister_logos_roles() as $role => $nom_role) {
+	foreach (lister_roles_logos() as $role => $options) {
 		$suffixes[$role] = strtoupper(substr($role, 4));
 	}
 

@@ -46,18 +46,6 @@ function lister_roles_logos($objet = null) {
 	return $roles_logos;
 }
 
-// TODO renommer
-function lister_logos_roles($objet = null) {
-
-	$roles_logos = lister_roles_logos($objet);
-
-	foreach ($roles_logos as $role => $options) {
-		$roles_logos[$role] = $options['label'];
-	}
-
-	return $roles_logos;
-}
-
 /**
  * Trouver les dimensions d'un rôle
  *

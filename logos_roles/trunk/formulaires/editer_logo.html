@@ -14,11 +14,11 @@
 		<div style="display:none;"><input type='submit' class='submit' value='<:bouton_upload:>' /></div>
 	]
 		<div class="editer-groupe">
-      <BOUCLE_roles_logos(DATA){source array, #ENV{objet}|table_objet|lister_logos_roles}>
+      <BOUCLE_roles_logos(DATA){source array, #ENV{objet}|table_objet|lister_roles_logos}>
 
         [(#CONFIG{activer_logos_survol}|=={oui}|ou{#CLE|!={logo_survol}})
           <div class="editer editer_#CLE[ (#ENV{#CLE}|non)logo_upload][ (#ENV**{erreurs}|table_valeur{#CLE}|oui)erreur]">
-            <h4>[(#VALEUR|_T)]</h4>
+            <h4>[(#VALEUR|table_valeur{label}|_T)]</h4>
             [(#ENV{#CLE}|oui)
               [(#INCLURE{fond=formulaires/inc-apercu-logo,env,logo=#ENV{#CLE},quoi=#CLE})]
               <input type="hidden" name="#CLE" value="#ENV{#CLE}" />
