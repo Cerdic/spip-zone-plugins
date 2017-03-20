@@ -8,7 +8,7 @@
     [(#PIPELINE{logo_desc_actions, #ARRAY{args,#ARRAY{logo, #ENV{logo}, objet, #ENV{objet}, id_objet, #ENV{id_objet}}, data, ''}})]
 
     [(#ENV{logo}|trouver_document_fichier|intval|oui)
-      <a href="[(#URL_ECRIRE{document_edit, id_document=#ENV{logo}|trouver_document_fichier})]"
+      <a href="[(#URL_ECRIRE{document_edit, id_document=#ENV{logo}|trouver_document_fichier}|parametre_url{redirect, #SELF})]"
          class="popin">
         <:logos_roles:titre_modifier_logo:>
       </a>
