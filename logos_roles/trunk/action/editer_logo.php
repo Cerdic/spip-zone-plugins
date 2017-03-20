@@ -35,8 +35,9 @@ function logo_supprimer($objet, $id_objet, $role) {
 	$primary = id_table_objet($objet);
 
 	$logo = $chercher_logo($id_objet, $primary, $role);
-	// si pas de logo on ne fait rien
-	if (! $logo) {
+	// si pas de logo ou qu'on est dans le cas d'un logo par défaut, on ne fait rien
+	$logo_defaut = $chercher_logo($id_objet, $primary, 'on');
+	if ((! $logo) or (($role !== 'on') and ($logo[0] === $logo_defaut[0]))) {
 		return;
 	}
 
