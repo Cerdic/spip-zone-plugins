@@ -196,12 +196,16 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
 
 	include_spip('action/editer_logo');
 
-	// effectuer la suppression si demandee d'un logo
 	foreach (lister_roles_logos($objet) as $role => $options) {
+		// effectuer la suppression si demandee d'un logo
 		if (_request('supprimer_' . $role)) {
 			logo_supprimer($objet, $id_objet, $role);
 			$res['message_ok'] = ''; // pas besoin de message : la validation est visuelle
 			set_request('logo_up', ' ');
+		// remplacer par un autre document si demandé
+		} elseif ($id_document = _request('document_mediatheque_' . $role)) {
+			logo_modifier_document($objet, $id_objet, $role, intval($id_document));
+			$res['message_ok'] = ''; // pas besoin de message : la validation est visuelle
 		}
 	}
 
