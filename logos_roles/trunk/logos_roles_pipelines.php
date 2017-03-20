@@ -35,15 +35,16 @@ function logos_roles_pre_boucle($boucle) {
 
 		if (! $utilise_critere_logo) {
 			include_spip('inc/objets');
-			// TODO tester ce code avec des tables qui ont un autre préfixe que spip_.
 			$table_liens = table_objet_sql('documents') . '_liens';
 			$abbrev_table_lien = array_search($table_liens, $boucle->from);
 
-			$boucle->where[] = array(
-				"'NOT REGEXP'",
-				"'$abbrev_table_lien.role'",
-				"'\'^logo\''"
-			);
+			if (! $boucle->modificateur['tout']) {
+				$boucle->where[] = array(
+					"'NOT REGEXP'",
+					"'$abbrev_table_lien.role'",
+					"'\'^logo\''"
+				);
+			}
 		}
 	}
 
