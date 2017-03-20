@@ -46,14 +46,6 @@ Les logos enregistrés avec l'ancienne API sont convertis à la nouvelle automat
 Reste à faire
 -------------
 
-### Utiliser logo\_quete plutot que de surcharger chercher\_logo
-
-C'est la nouvelle API de SPIP 3.1, il faut utiliser ça.
-
-### Adapter l'intégration des modifs en 3.1
-
-cf plus haut, mais il faut aussi checker le formulaire et l'api editer\_logo.
-
 ### appel dans les squelettes ###
 
 Même si les balises `LOGO_*` existantes fonctionnent toujours, il reste à trouver un moyen d'appeler les nouveaux type de logos dans les squelettes.
