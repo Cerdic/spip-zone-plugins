@@ -47,6 +47,7 @@ function logo_supprimer($objet, $id_objet, $role) {
 		return;
 	}
 
+	include_spip('base/abstract_sql');
 	include_spip('action/editer_liens');
 	// S'il n'y pas de document qui gère le logo, on le supprime avec la méthode
 	// historique
@@ -55,7 +56,6 @@ function logo_supprimer($objet, $id_objet, $role) {
 	} else {
 		// Si le logo est géré par un document on ne supprime que le lien
 		if ($objet === 'site') {
-			include_spip('base/abstract_sql');
 
 			sql_delete(
 				'spip_documents_liens',
@@ -68,6 +68,28 @@ function logo_supprimer($objet, $id_objet, $role) {
 				array($objet => $id_objet),
 				array('role' => $role)
 			);
+		}
+
+		include_spip('inc/plugin');
+		if (plugin_est_installe('massicot')) {
+			$massicotages = objet_trouver_liens(
+				array('massicotage' => '*'),
+				array($objet => $id_objet)
+			);
+
+			foreach ($massicotages as $massicotage) {
+				if ($massicotage['role'] === $role) {
+					$id_massicotage = $massicotage['id_massicotage'];
+					sql_delete(
+						'spip_massicotages',
+						'id_massicotage=' . intval($id_massicotage)
+					);
+					sql_delete(
+						'spip_massicotages_liens',
+						'id_massicotage=' . intval($id_massicotage)
+					);
+				}
+			}
 		}
 	}
 }
