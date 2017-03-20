@@ -5,8 +5,25 @@ function image_responsive_insert_head_css($flux) {
 	return $flux;
 }
 
-/** Indique si le fichier htaccess est actif */
+/**
+ * Indique si le fichier htaccess est actif
+ *
+ * Le fichier htaccess est considéré actif si un jeu d'URL de SPIP
+ * qui nécessite la présente du fichier htaccess est utilisé
+ * (arbo, libre, propre, etc). Dans ce cas le fichier
+ * htaccess fourni par SPIP doit être complété par les instructions
+ * présentes dans `ajouter_a_htaccess.txt` de ce plugin.
+ *
+ * Il est possible de forcer l'état (par exemple si on utilise
+ * un jeu d'URL spécifique (et que l'on a bien modifié le htaccess),
+ * en déclarant la constante `_IMAGE_RESPONSIVE_HTACCESS` à 1.
+ *
+ * @return int. 1 si le htaccess est utilisable. 0 sinon.
+ */
 function image_responsive_htaccess_actif() {
+	if (defined('_IMAGE_RESPONSIVE_HTACCESS')) {
+		return _IMAGE_RESPONSIVE_HTACCESS;
+	}
 	$type_urls = lire_meta("type_urls");
 	$htactif = 0;
 	if (preg_match(",^(arbo|libres|html|propres|propres2)$,", $type_urls)) {
