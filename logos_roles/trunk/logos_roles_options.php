@@ -9,7 +9,8 @@ if (plugin_est_installe('massicot')) {
 	}
 
 	include_spip('logos_roles_fonctions');
-	foreach (lister_roles_logos() as $role => $options) {
+	// On se limite à l'objet dans l'environnement s'il y en a un
+	foreach (lister_roles_logos(_request('objet')) as $role => $options) {
 
 		if ($dimensions = get_dimensions_role($role)) {
 
