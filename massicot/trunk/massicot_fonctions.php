@@ -36,8 +36,10 @@ function massicot_chemin_image($objet, $id_objet, $role = null) {
 	} else {
 		if ($role === 'logo_survol') {
 			$type_logo = 'off';
-		} else {
+		} elseif (is_null($role) or ($role === 'logo')) {
 			$type_logo = 'on';
+		} else {
+			$type_logo = $role;
 		}
 
 		$chercher_logo = charger_fonction('chercher_logo', 'inc');
