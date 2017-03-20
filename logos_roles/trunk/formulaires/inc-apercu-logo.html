@@ -6,7 +6,12 @@
 
 <div class="apercu">
   [<div class="spip_logo">
-    <a href="[(#ENV{logo}|massicoter_objet{#ENV{objet},#ENV{id_objet},#GET{role}})]" class='mediabox'>
+    <a href="[(#ENV{logo}
+               |massicoter_objet{#ENV{objet},#ENV{id_objet},#GET{role}}
+               |forcer_dimensions_role{#ENV{objet},#ENV{id_objet},#GET{role}}
+               |extraire_attribut{src}|url_absolue
+             )]"
+       class='mediabox'>
       (#ENV{logo}
        |massicoter_objet{#ENV{objet},#ENV{id_objet},#GET{role}}
        |forcer_dimensions_role{#ENV{objet},#ENV{id_objet},#GET{role}}
