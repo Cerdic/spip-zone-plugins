@@ -17,7 +17,7 @@ function w3css_upgrade($nom_meta_base_version, $version_cible) {
 
 	// Tableau de la configuration par défaut
 	$maj['create'] = array(
-		array('ecrire_meta', 'w3css', serialize($config_default))
+		array('ecrire_config', 'w3css', $config_default)
 	);
 
 	// Maj du plugin.
