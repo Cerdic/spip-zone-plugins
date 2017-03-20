@@ -85,12 +85,12 @@ function logo_supprimer($objet, $id_objet, $role) {
 }
 
 /**
- * Modifier le logo d'un objet
+ * Modifier le logo d'un objet à partir d'un fichier uploadé
  *
  * @param string $objet
  * @param int $id_objet
- * @param string $etat
- *     `on` ou `off`
+ * @param string $role
+ *     le role, ou `on` ou `off` pour la rétro-compatibilité
  * @param string|array $source
  *     - array : sous tableau de `$_FILE` issu de l'upload
  *     - string : fichier source (chemin complet ou chemin relatif a `tmp/upload`)
@@ -120,6 +120,22 @@ function logo_modifier($objet, $id_objet, $role, $source) {
 	if (is_string($id_document)) {
 		return $erreur = $id_document;
 	}
+
+	return logo_modifier_document($objet, $id_objet, $role, $id_document);
+}
+
+/**
+ * Modifier le logo d'un objet à partir d'un document
+ *
+ * @param string $objet
+ * @param int $id_objet
+ * @param string $role
+ *     le role, ou `on` ou `off` pour la rétro-compatibilité
+ * @param integer $id_document : l'identifiant du document
+ * @return string
+ *     Erreur, sinon ''
+ */
+function logo_modifier_document($objet, $id_objet, $role, $id_document) {
 
 	// Cas du LOGO_SITE_SPIP..
 	if (($objet === 'site') and ($id_objet == 0)) {
