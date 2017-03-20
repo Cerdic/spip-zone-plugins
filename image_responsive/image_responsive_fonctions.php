@@ -64,7 +64,8 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 	
 //	$img = $img[0];
 	$type_urls = lire_meta("type_urls");
-	if (preg_match(",^(arbo|libres|html|propres|propres2)$,", $type_urls)) {	
+	$htactif = false;
+	if (preg_match(",^(arbo|libres|html|propres|propres2)$,", $type_urls)) {
 		$htactif = true;
 	}
 	$source = extraire_attribut($img, "src");
@@ -83,6 +84,7 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 
 		// Récupérer les proportions et éventuellement recadrer
 		$proportions = explode("/", $proportions);
+		$p = array();
 		if (count($proportions) > 0) {
 			$i = 0;
 			foreach($proportions as $prop) {
@@ -123,8 +125,10 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 			$source = image_proportions($source, $p[1]["l"], $p[1]["h"], $p[1]["f"], $p[1]["z"]);
 			$source = extraire_attribut($source,"src");
 		}
-		
+
 		$medias = explode("/", $medias);
+		$pad_bot_styles = array();
+
 		if (count($p) > 1) {
 			$i = 0;
 			foreach($tailles as $t) {
@@ -167,7 +171,9 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 		if ($lazy == 1) $classe .= " lazy";
 		$img = inserer_attribut($img, "data-l", $l);
 		$img = inserer_attribut($img, "data-h", $h);
-		
+		$sources = '';
+		$autorisees = array();
+
 		// Gérer les tailles autorisées
 		if (count($tailles) > 0) {
 			include_spip("inc/json");
@@ -287,10 +293,11 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 		}
 		
 
+		$styles = $nom_class = '';
 		if ($pad_bot_styles) {
-			
+
 			ksort($pad_bot_styles);
-			
+
 			foreach($pad_bot_styles as $m=>$pad) {
 				$style = "##classe##{".$pad."}";
 				if ($m) $style = "\n@media $m {".$style."}";
@@ -302,7 +309,7 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 			// pour affichage dans la classe de picture
 			$nom_class = " ".$nom_class; 
 		}
-		
+
 		if ($vertical == 0) {
 			if (count($p) == 1) $r = ($p[1]["h"]/$p[1]["l"]) * 100;
 			else if (count($p) == 0) $r = (($h/$l)*100);
