@@ -8,6 +8,8 @@ Cela permet d'assurer une bonne rétro-compatibilité tout en permettant d'éten
 L'idée est de se baser sur les rôles de documents dont le nom commence par `logo` pour définir les types de logos disponibles.
 Les rôles définis par le plugin « Rôles de documents » nous donnent les rôles habituels de spip : « logo » et « logo_survol », mais on peut aussi ajouter d'autres rôles de logos via la méthode décrite dans [La documentation du plugin Rôles](http://contrib.spip.net/Des-roles-sur-des-liens).
 
+Le plugin se charge de créer automagiquement les balises correspondant aux rôles défini pour les logos.
+
 ### Modification des boucles `DOCUMENTS` ###
 
 Pour des raisons de rétro-compatibilité, les boucles `DOCUMENTS` ne montrent pas les logos.
@@ -45,13 +47,6 @@ Les logos enregistrés avec l'ancienne API sont convertis à la nouvelle automat
 
 Reste à faire
 -------------
-
-### appel dans les squelettes ###
-
-Même si les balises `LOGO_*` existantes fonctionnent toujours, il reste à trouver un moyen d'appeler les nouveaux type de logos dans les squelettes.
-
-En modifiant la balise `#LOGO_*` ?
-En ajoutant un traitement auto ?
 
 ### Migration des logos existants ###
 
