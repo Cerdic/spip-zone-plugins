@@ -2,7 +2,7 @@
 
 function image_responsive_insert_head_css($flux) {
 
-	$flux .= "\n<link rel='stylesheet' type='text/css' media='all' href='".find_in_path("image_responsive.css")."'>\n";
+	$flux .= "\n<link rel='stylesheet' type='text/css' media='all' href='" . find_in_path("image_responsive.css") . "'>\n";
 
 	return $flux;
 }
@@ -10,42 +10,42 @@ function image_responsive_insert_head_css($flux) {
 function image_responsive_insert_head($flux) {
 	$type_urls = lire_meta("type_urls");
 	$htactif = 0;
-	if (preg_match(",^(arbo|libres|html|propres|propres2)$,", $type_urls)) {	
+	if (preg_match(",^(arbo|libres|html|propres|propres2)$,", $type_urls)) {
 		$htactif = 1;
 	}
-	
+
 	$flux .= "<script>htactif=$htactif;document.createElement('picture');</script>";
 	$flux .= "
-<script type='text/javascript' src='".find_in_path("javascript/rAF.js")."'></script>
-<script type='text/javascript' src='".find_in_path("javascript/jquery.smartresize.js")."'></script>
-<script type='text/javascript' src='".find_in_path("javascript/image_responsive.js")."'></script>
-<script type='text/javascript' src='".find_in_path("javascript/picturefill.js")."'></script>
+<script type='text/javascript' src='" . find_in_path("javascript/rAF.js") . "'></script>
+<script type='text/javascript' src='" . find_in_path("javascript/jquery.smartresize.js") . "'></script>
+<script type='text/javascript' src='" . find_in_path("javascript/image_responsive.js") . "'></script>
+<script type='text/javascript' src='" . find_in_path("javascript/picturefill.js") . "'></script>
 		";
-	
+
 	return $flux;
 }
 
 function image_responsive_header_prive($flux) {
-	$flux .= "\n<link rel='stylesheet' type='text/css' media='all' href='".find_in_path("image_responsive.css")."'>\n";
+	$flux .= "\n<link rel='stylesheet' type='text/css' media='all' href='" . find_in_path("image_responsive.css") . "'>\n";
 	$flux .= "<script>htactif=false;document.createElement('picture');</script>";
 
 	$flux .= "
-<script type='text/javascript' src='".find_in_path("javascript/rAF.js")."'></script>
-<script type='text/javascript' src='".find_in_path("javascript/jquery.smartresize.js")."'></script>
-<script type='text/javascript' src='".find_in_path("javascript/image_responsive.js")."'></script>
-<script type='text/javascript' src='".find_in_path("javascript/picturefill.js")."'></script>
+<script type='text/javascript' src='" . find_in_path("javascript/rAF.js") . "'></script>
+<script type='text/javascript' src='" . find_in_path("javascript/jquery.smartresize.js") . "'></script>
+<script type='text/javascript' src='" . find_in_path("javascript/image_responsive.js") . "'></script>
+<script type='text/javascript' src='" . find_in_path("javascript/picturefill.js") . "'></script>
 		";
 
 	return $flux;
 }
 
 
-function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="", $proportions="") {
+function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias = "", $proportions = "") {
 	$taille_defaut = -1;
-	
+
 	if ($taille == -1) {
 		$taille_defaut = 120;
-		$taille = "";	
+		$taille = "";
 	}
 
 
@@ -56,12 +56,12 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 
 
 	$tailles = explode("/", $taille);
-	
+
 	if ($taille_defaut < 0) {
 		if (count($tailles) > 0) $taille_defaut = $tailles[0];
 		else $taille_defaut = $taille;
 	}
-	
+
 //	$img = $img[0];
 	$type_urls = lire_meta("type_urls");
 	$htactif = false;
@@ -77,7 +77,7 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 		$img = vider_attribut($img, "width");
 		$img = vider_attribut($img, "height");
 		$img = vider_attribut($img, "style");
-		
+
 		$alt = extraire_attribut($img, "alt");
 		if (strlen($alt) == 0) $img = inserer_attribut($img, "alt", "");
 
@@ -87,35 +87,35 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 		$p = array();
 		if (count($proportions) > 0) {
 			$i = 0;
-			foreach($proportions as $prop) {
+			foreach ($proportions as $prop) {
 				$i++;
-				$prop = trim ($prop);
+				$prop = trim($prop);
 				$regs_l = false;
 				$regs_h = false;
 				if (preg_match(",^([0-9\.]+\%?)(x([0-9\.]+\%?))?(x([a-z]*))?(x([0-9\.]*))?$,", $prop, $regs)) {
-				
+
 					if ($regs[1] == "0") $p[$i]["l"] = $l;
 					else $p[$i]["l"] = $regs[1];
 
 					if ($regs[3] == "0") $p[$i]["h"] = $h;
 					else $p[$i]["h"] = $regs[3];
-				
-					
+
+
 					$p[$i]["f"] = $regs[5];
 					$p[$i]["z"] = $regs[7];
 
 					// Gérer les dimensions en pourcentages
-					preg_match(",([0-9\.]+)\%$,", $regs[1],$regs_l);
-					preg_match(",([0-9\.]+)\%$,", $regs[3],$regs_h);
-					
-					if ($regs_l[1]>0 OR $regs_h[1]>0) {
+					preg_match(",([0-9\.]+)\%$,", $regs[1], $regs_l);
+					preg_match(",([0-9\.]+)\%$,", $regs[3], $regs_h);
+
+					if ($regs_l[1] > 0 OR $regs_h[1] > 0) {
 						if ($regs_l[1] > 0) $p[$i]["l"] = $l * $regs_l[1] / 100;
 						else $p[$i]["l"] = $l;
 						if ($regs_h[1] > 0) $p[$i]["h"] = $h * $regs_h[1] / 100;
 						else $p[$i]["h"] = $h;
 					}
 
-					
+
 					if (!$regs[5]) $p[$i]["f"] = "center";
 					if (!$regs[7]) $p[$i]["z"] = 1;
 				}
@@ -123,7 +123,7 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 		}
 		if (count($p) == 1) {
 			$source = image_proportions($source, $p[1]["l"], $p[1]["h"], $p[1]["f"], $p[1]["z"]);
-			$source = extraire_attribut($source,"src");
+			$source = extraire_attribut($source, "src");
 		}
 
 		$medias = explode("/", $medias);
@@ -131,22 +131,22 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 
 		if (count($p) > 1) {
 			$i = 0;
-			foreach($tailles as $t) {
+			foreach ($tailles as $t) {
 				$m = trim($medias[$i]);
 				$i++;
 				if (count($p[$i]) > 1) {
-					$pad_bot_styles[$m] = "padding-bottom:" .(($p[$i]["h"]/$p[$i]["l"])*100)."%!important";
+					$pad_bot_styles[$m] = "padding-bottom:" . (($p[$i]["h"] / $p[$i]["l"]) * 100) . "%!important";
 				}
 			}
 		}
-	
+
 		//$img = inserer_attribut($img, "src", $src);
 		$img = inserer_attribut($img, "data-src", $source);
 		$classe = "image_responsive";
-		
+
 		if ($vertical == 1) {
 			$classe .= " image_responsive_v";
-			$v = "v";	
+			$v = "v";
 			if ($h < $taille_defaut) $taille_defaut = $h;
 		} else {
 			$v = "";
@@ -156,13 +156,12 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 		if ($taille_defaut == 0) {
 			$src = find_in_path("rien.gif");
 		} else {
-			if(_IMAGE_RESPONSIVE_CALCULER) {
+			if (_IMAGE_RESPONSIVE_CALCULER) {
 				$src = retour_image_responsive($source, $taille_defaut, 1, 0, "file");
 			} else {
 				if ($htactif) {
 					$src = preg_replace(",\.(jpg|png|gif)$,", "-resp$taille_defaut$v.$1", $source);
-				}
-				else {
+				} else {
 					$src = "index.php?action=image_responsive&amp;img=$source&amp;taille=$taille_defaut$v";
 				}
 			}
@@ -177,13 +176,13 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 		// Gérer les tailles autorisées
 		if (count($tailles) > 0) {
 			include_spip("inc/json");
-			
+
 			$img = inserer_attribut($img, "data-tailles", addslashes(json_encode($tailles)));
 
-			
+
 			$i = 0;
 
-			foreach($tailles as $t) {
+			foreach ($tailles as $t) {
 				$m = trim($medias[$i]);
 				$i++;
 				$source_tmp = $source;
@@ -191,72 +190,71 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 				if (count($p) > 1 && count($p[$i]) > 1) {
 					if ($p[$i]["l"] != $l || $p[$i]["h"] != $h) { // Pas de redimension si on est au format source (0x0)
 						$source_tmp = image_proportions($source_tmp, $p[$i]["l"], $p[$i]["h"], $p[$i]["f"], $p[$i]["z"]);
-						$source_tmp = extraire_attribut($source_tmp,"src");
+						$source_tmp = extraire_attribut($source_tmp, "src");
 					}
-				}			
+				}
 				if ($vertical && $t > $h) $t = $h;
 				else if (!$vertical && $t > $l) $t = $l;
 
 
-				if(_IMAGE_RESPONSIVE_CALCULER) {
+				if (_IMAGE_RESPONSIVE_CALCULER) {
 					$fichiers[$i][1] = retour_image_responsive($source_tmp, "$t$v", 1, 0, "file");
 					$fichiers[$i][2] = retour_image_responsive($source_tmp, "$t$v", 2, 0, "file");
 				} else {
 					if ($htactif) {
 						$fichiers[$i][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v.$1", $source_tmp);
 						$fichiers[$i][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v-2.$1", $source_tmp);
-					}
-					else {
+					} else {
 						$fichiers[$i][1] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v";
 						$fichiers[$i][2] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v&amp;dpr=2";
 					}
 				}
-						
-			}
-		
-			// Fabriquer automatiquement un srcset s'il n'y a qu'une seule taille d'image (pour 1x et 2x)
-			if (count($tailles) == 1 && $lazy != 1) { // Pas de srcset sur les images lazy
-					$t = $tailles[0];
-					if ($t != 0 && $t <= $l) {
-						$srcset[] = $fichiers[1][1]." 1x";
-						$srcset[] = $fichiers[1][2]." 2x";
-					}
+
 			}
 
-			
+			// Fabriquer automatiquement un srcset s'il n'y a qu'une seule taille d'image (pour 1x et 2x)
+			if (count($tailles) == 1 && $lazy != 1) { // Pas de srcset sur les images lazy
+				$t = $tailles[0];
+				if ($t != 0 && $t <= $l) {
+					$srcset[] = $fichiers[1][1] . " 1x";
+					$srcset[] = $fichiers[1][2] . " 2x";
+				}
+			}
+
+
 			// Fabriquer des <source> s'il y a plus d'une taille associée à des sizes
 			if (count($tailles) > 1) {
 				if (count($tailles) == count($medias) && $lazy != 1) {
 					$i = 0;
-					foreach($tailles as $t) {
+					foreach ($tailles as $t) {
 						$m = trim($medias[$i]);
 						$i++;
-												
-						if ($vertical) $t = min($t, $h);					
-						else $t = min ($t, $l);
-												
-												
+
+						if ($vertical) $t = min($t, $h);
+						else $t = min($t, $l);
+
+
 						$source_tmp = $source;
-						$set =  $fichiers[$i][1]." 1x";
-						$set .=  ",".$fichiers[$i][2]. " 2x";
+						$set = $fichiers[$i][1] . " 1x";
+						$set .= "," . $fichiers[$i][2] . " 2x";
 
 						if (strlen($m) > 0) {
 							$insm = " media='$m'";
 							$sources .= "<source$insm srcset='$set'>";
 						} else {
-						
+
 							//$sources .= "<source srcset='$set'>";
 							//$set = find_in_path("rien.gif");
 							$srcset[] = $set;
 						}
-						
+
 
 					}
 				} else {
 					// Tailles déterminées, pas de @media
 					// dans le cas où l'on force précalcule
 					$i = 0;
-					foreach($tailles as $t) {
+					foreach ($tailles as $t) {
 						$i++;
 						if ($vertical && $t > $h) $t = $h;
 						else if (!$vertical && $t > $l) $t = $l;
@@ -272,86 +270,84 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 
 		// Gérer le srcset
 		if ($sources || $srcset) $classe .= " avec_picturefill";
-		
+
 		if ($autorisees) {
 			$autorisees = json_encode($autorisees);
 			$img = inserer_attribut($img, "data-autorisees", $autorisees);
 		}
-		
+
 
 		$img = inserer_attribut($img, "src", $src);
 		if ($lazy) $img = inserer_attribut($img, "data-src-lazy", $src);
-		
+
 		$img = inserer_attribut($img, "class", $classe);
 		if ($srcset) {
-			$srcset = join($srcset, ",");				
+			$srcset = join($srcset, ",");
 			$img = inserer_attribut($img, "srcset", $srcset);
 		}
-		
+
 		if ($sources) {
 			$sources = "<!--[if IE 9]><video style='display: none;'><![endif]-->$sources<!--[if IE 9]></video><![endif]-->";
 		}
-		
+
 
 		$styles = $nom_class = '';
 		if ($pad_bot_styles) {
 
 			ksort($pad_bot_styles);
 
-			foreach($pad_bot_styles as $m=>$pad) {
-				$style = "##classe##{".$pad."}";
-				if ($m) $style = "\n@media $m {".$style."}";
+			foreach ($pad_bot_styles as $m => $pad) {
+				$style = "##classe##{" . $pad . "}";
+				if ($m) $style = "\n@media $m {" . $style . "}";
 				$styles .= $style;
 			}
 			$styles = "<style>$styles</style>";
-			$nom_class = "class".md5($styles);
-			$styles = str_replace("##classe##", "picture.".$nom_class, $styles);
+			$nom_class = "class" . md5($styles);
+			$styles = str_replace("##classe##", "picture." . $nom_class, $styles);
 			// pour affichage dans la classe de picture
-			$nom_class = " ".$nom_class; 
+			$nom_class = " " . $nom_class;
 		}
 
 		if ($vertical == 0) {
-			if (count($p) == 1) $r = ($p[1]["h"]/$p[1]["l"]) * 100;
-			else if (count($p) == 0) $r = (($h/$l)*100);
-			
+			if (count($p) == 1) $r = ($p[1]["h"] / $p[1]["l"]) * 100;
+			else if (count($p) == 0) $r = (($h / $l) * 100);
+
 			if ($r) $aff_r = "padding-bottom:$r%";
 			$img = "<picture style='padding:0;$aff_r' class='conteneur_image_responsive_h$nom_class'>$sources$img</picture>";
 		} else {
-			$r = (($h/$l)*100);
+			$r = (($h / $l) * 100);
 			$img = "<picture class='conteneur_image_responsive_v$nom_class'>$sources$img</picture>";
 		}
-		$img = $img.$styles;
+		$img = $img . $styles;
 	}
 
 	if (_SPIP_LIER_RESSOURCES && $fichiers) {
-		foreach($fichiers as $f) {
-			$img .= "\n<link href='".$f[1]."' rel='attachment' property='url'>"
-				."\n<link href='".$f[2]."' rel='attachment' property='url'>";
+		foreach ($fichiers as $f) {
+			$img .= "\n<link href='" . $f[1] . "' rel='attachment' property='url'>"
+				. "\n<link href='" . $f[2] . "' rel='attachment' property='url'>";
 		}
 	}
 
-	
+
 	return $img;
 }
 
 
-
-
-function image_responsive($texte, $taille=-1, $lazy=0, $vertical=0, $medias='', $proportions='') {
+function image_responsive($texte, $taille = -1, $lazy = 0, $vertical = 0, $medias = '', $proportions = '') {
 	if (!preg_match("/^<img /i", $texte)) {
 		if (strlen($texte) < 256 && file_exists($texte)) $texte = "<img src='$texte'>";
 		else return $texte;
 	}
-	return preg_replace_callback(",(<img\ [^>]*>),", create_function('$matches', 'return _image_responsive($matches[0],"'.$taille.'",'.$lazy.','.$vertical.',"'.$medias.'","'.$proportions.'");'), $texte);
+	return preg_replace_callback(",(<img\ [^>]*>),", create_function('$matches', 'return _image_responsive($matches[0],"' . $taille . '",' . $lazy . ',' . $vertical . ',"' . $medias . '","' . $proportions . '");'), $texte);
 }
 
 
-function image_responsive_svg($img, $taille=-1, $lazy=0, $vertical=0) {
+function image_responsive_svg($img, $taille = -1, $lazy = 0, $vertical = 0) {
 	$taille_defaut = -1;
-	
+
 	if ($taille == -1) {
 		$taille_defaut = 120;
-		$taille = "";	
+		$taille = "";
 	}
 	if (preg_match(",^0$|^0\/,", $taille)) {
 		$taille_defaut = 0;
@@ -360,14 +356,14 @@ function image_responsive_svg($img, $taille=-1, $lazy=0, $vertical=0) {
 
 
 	$tailles = explode("/", $taille);
-	
+
 	if ($taille_defaut < 0) {
 		if (count($tailles) > 0) $taille_defaut = $tailles[0];
 		else $taille_defaut = $taille;
 	}
 
 	$type_urls = lire_meta("type_urls");
-	if (preg_match(",^(arbo|libres|html|propres|propres2)$,", $type_urls)) {	
+	if (preg_match(",^(arbo|libres|html|propres|propres2)$,", $type_urls)) {
 		$htactif = true;
 	}
 
@@ -378,7 +374,7 @@ function image_responsive_svg($img, $taille=-1, $lazy=0, $vertical=0) {
 	$img = preg_replace(",\?[0-9]*$,", "", $img);
 
 	$source = $img;
-	
+
 	$classe = "image_responsive_svg";
 
 
@@ -387,7 +383,7 @@ function image_responsive_svg($img, $taille=-1, $lazy=0, $vertical=0) {
 		$h = hauteur($source);
 		if ($vertical == 1) {
 			$classe .= " image_responsive_svg_v";
-			$v = "v";	
+			$v = "v";
 			if ($h < $taille_defaut) $taille_defaut = $h;
 		} else {
 			$v = "";
@@ -396,13 +392,12 @@ function image_responsive_svg($img, $taille=-1, $lazy=0, $vertical=0) {
 		if ($taille_defaut == 0) {
 			$src = find_in_path("rien.gif");
 		} else {
-			if(_IMAGE_RESPONSIVE_CALCULER) {
+			if (_IMAGE_RESPONSIVE_CALCULER) {
 				$src = retour_image_responsive($source, $taille_defaut, 1, 0, "file");
 			} else {
 				if ($htactif) {
 					$src = preg_replace(",\.(jpg|png|gif)$,", "-resp$taille_defaut$v.$1", $source);
-				}
-				else {
+				} else {
 					$src = "index.php?action=image_responsive&amp;img=$source&amp;taille=$taille_defaut$v";
 				}
 			}
@@ -413,42 +408,41 @@ function image_responsive_svg($img, $taille=-1, $lazy=0, $vertical=0) {
 		if (count($tailles) > 0) {
 			sort($tailles);
 			include_spip("inc/json");
-			
-			$data_tailles =  " data-tailles='".addslashes(json_encode($tailles))."'";
+
+			$data_tailles = " data-tailles='" . addslashes(json_encode($tailles)) . "'";
 
 
 			$i = 0;
 
-			foreach($tailles as $t) {
+			foreach ($tailles as $t) {
 				$m = trim($medias[$i]);
 				$i++;
 				$source_tmp = $source;
 
 				if (count($p) > 1 && count($p[$i]) > 1) {
 					$source_tmp = image_proportions($source_tmp, $p[$i]["l"], $p[$i]["h"], $p[$i]["f"], $p[$i]["z"]);
-					$source_tmp = extraire_attribut($source_tmp,"src");
-				}			
+					$source_tmp = extraire_attribut($source_tmp, "src");
+				}
 
 				if ($vertical && $t > $h) $t = $h;
 				else if (!$vertical && $t > $l) $t = $l;
 
 
-				if(_IMAGE_RESPONSIVE_CALCULER) {
+				if (_IMAGE_RESPONSIVE_CALCULER) {
 					$fichiers[$t][1] = retour_image_responsive($source_tmp, "$t$v", 1, 0, "file");
 					$fichiers[$t][2] = retour_image_responsive($source_tmp, "$t$v", 2, 0, "file");
 				} else {
 					if ($htactif) {
 						$fichiers[$t][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v.$1", $source_tmp);
 						$fichiers[$t][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v-2.$1", $source_tmp);
-					}
-					else {
+					} else {
 						$fichiers[$t][1] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v";
 						$fichiers[$t][2] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v&amp;dpr=2";
 					}
 				}
-						
+
 			}
-			foreach($tailles as $t) {
+			foreach ($tailles as $t) {
 				if ($vertical && $t > $h) $t = $h;
 				else if (!$vertical && $t > $l) $t = $l;
 
@@ -456,9 +450,9 @@ function image_responsive_svg($img, $taille=-1, $lazy=0, $vertical=0) {
 				$autorisees[$t][1] = $fichiers[$t][1];
 				$autorisees[$t][2] = $fichiers[$t][2];
 			}
-			
+
 			if ($autorisees) {
-				$data_autorisees = " data-autorisees='".json_encode($autorisees)."'";
+				$data_autorisees = " data-autorisees='" . json_encode($autorisees) . "'";
 			}
 
 		}
@@ -468,62 +462,60 @@ function image_responsive_svg($img, $taille=-1, $lazy=0, $vertical=0) {
 	}
 
 
-
 	return $ret;
 }
 
 
-function background_responsive($src, $taille=120, $lazy=0, $align="") {
+function background_responsive($src, $taille = 120, $lazy = 0, $align = "") {
 
 	if (preg_match("/^<img /i", $src)) {
 		$src = extraire_attribut($src, "src");
 	}
 
-	
-		
+
 	$tailles = explode("/", $taille);
 	if (count($tailles) > 1) $taille_defaut = $tailles[0];
 	else $taille_defaut = $taille;
-	
+
 //	$img = $img[0];
 	$type_urls = lire_meta("type_urls");
-	if (preg_match(",^(arbo|libres|html|propres|propres2)$,", $type_urls)) {	
+	if (preg_match(",^(arbo|libres|html|propres|propres2)$,", $type_urls)) {
 		$htactif = true;
 	}
 	$src = preg_replace(",\?[0-9]*$,", "", $src);
-		
+
 	if (file_exists($src)) {
 		include_spip("filtres/images_transforme");
 
 		$l = largeur($src);
 		$h = hauteur($src);
-	
+
 		$mtime = filemtime($src);
 		$ins .= " data-mtime='$mtime'";
-		
-		
+
+
 		$img = $src;
-		
+
 		if ($l > $h) {
 			$ins .= " data-italien-src='$src'";
 			$ins .= " data-italien-l='$l'";
 			$ins .= " data-italien-h='$h'";
-			
+
 			$srcp = image_proportions($srcp, 3, 4, $align);
 			$srcp = image_reduire($src, 0, 2400);
 			$srcp = extraire_attribut($srcp, "src");
 			$lp = largeur($srcp);
 			$hp = hauteur($srcp);
-			
+
 			$ins .= " data-portrait-src='$srcp'";
 			$ins .= " data-portrait-l='$lp'";
 			$ins .= " data-portrait-h='$hp'";
-			
+
 			$l_italien = $l;
 			$s_italien = $src;
 			$l_portrait = $lp;
 			$s_portrait = $srcp;
-		
+
 		} else {
 			$ins .= " data-portrait-src='$src'";
 			$ins .= " data-portrait-l='$l'";
@@ -535,7 +527,7 @@ function background_responsive($src, $taille=120, $lazy=0, $align="") {
 			$srcp = extraire_attribut($srcp, "src");
 			$lp = largeur($srcp);
 			$hp = hauteur($srcp);
-			
+
 			$ins .= " data-italien-src='$srcp'";
 			$ins .= " data-italien-l='$lp'";
 			$ins .= " data-italien-h='$hp'";
@@ -548,103 +540,99 @@ function background_responsive($src, $taille=120, $lazy=0, $align="") {
 		}
 
 		$ins .= " data-responsive='background'";
-		
+
 
 		if ($l < $taille_defaut) $taille_defaut = $l;
 		$v = "";
-		
-		
+
+
 		if ($htactif) {
 			$src = preg_replace(",\.(jpg|png|gif)$,", "-resp$taille_defaut$v.$1", $src);
-		}
-		else {
+		} else {
 			$src = "index.php?action=image_responsive&amp;img=$src&amp;taille=$taille_defaut$v";
 		}
-		
-		
+
+
 		if ($taille_defaut == 0) $src = find_in_path("rien.gif");
 		if ($lazy == 1) $ins .= " data-lazy='lazy'";
 
 		if ($class) $ins .= " class='$class'";
-		
+
 		if (count($tailles) > 1) {
 			sort($tailles);
 			include_spip("inc/json");
 
 
-			foreach($tailles as $t) {
+			foreach ($tailles as $t) {
 
 				$t_italien = min($t, $l_italien);
-				if(_IMAGE_RESPONSIVE_CALCULER) {
+				if (_IMAGE_RESPONSIVE_CALCULER) {
 					$fichiers[$t_italien]["i"][1] = retour_image_responsive($s_italien, "$t_italien", 1, 0, "file");
 					$fichiers[$t_italien]["i"][2] = retour_image_responsive($s_italien, "$t_italien", 2, 0, "file");
 				} else {
 					if ($htactif) {
-						$fichiers[$t_italien]["i"][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_italien.$1", $s_italien)."?$mtime";
-						$fichiers[$t_italien]["i"][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_italien-2.$1", $s_italien)."?$mtime";
-					}
-					else {
+						$fichiers[$t_italien]["i"][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_italien.$1", $s_italien) . "?$mtime";
+						$fichiers[$t_italien]["i"][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_italien-2.$1", $s_italien) . "?$mtime";
+					} else {
 						$fichiers[$t_italien]["i"][1] = "index.php?action=image_responsive&amp;img=$s_italien&amp;taille=$t_italien&mtime=$mtime";
 						$fichiers[$t_italien]["i"][2] = "index.php?action=image_responsive&amp;img=$s_italien&amp;taille=$t_italien&amp;dpr=2&mtime=$mtime";
 					}
 				}
 
 				$t_portrait = min($t, $l_portrait);
-				if(_IMAGE_RESPONSIVE_CALCULER) {
+				if (_IMAGE_RESPONSIVE_CALCULER) {
 					$fichiers[$t_portrait]["p"][1] = retour_image_responsive($s_portrait, "$t_portrait", 1, 0, "file");
 					$fichiers[$t_portrait]["p"][2] = retour_image_responsive($s_portrait, "$t_portrait", 2, 0, "file");
 				} else {
 					if ($htactif) {
-						$fichiers[$t_portrait]["p"][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_portrait.$1", $s_portrait)."?$mtime";
-						$fichiers[$t_portrait]["p"][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_portrait-2.$1", $s_portrait)."?$mtime";
-					}
-					else {
+						$fichiers[$t_portrait]["p"][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_portrait.$1", $s_portrait) . "?$mtime";
+						$fichiers[$t_portrait]["p"][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_portrait-2.$1", $s_portrait) . "?$mtime";
+					} else {
 						$fichiers[$t_portrait]["p"][1] = "index.php?action=image_responsive&amp;img=$s_portrait&amp;taille=$t_portrait&mtime=$mtime";
 						$fichiers[$t_portrait]["p"][2] = "index.php?action=image_responsive&amp;img=$s_portrait&amp;taille=$t_portrait&amp;dpr=2&mtime=$mtime";
 					}
 				}
 
 			}
-			
-			$ins .= " data-tailles='".addslashes(json_encode($tailles)) ."'";
-			$ins .= " data-autorisees='".addslashes(json_encode($fichiers)) ."'";
-			
+
+			$ins .= " data-tailles='" . addslashes(json_encode($tailles)) . "'";
+			$ins .= " data-autorisees='" . addslashes(json_encode($fichiers)) . "'";
+
 			if (_SPIP_LIER_RESSOURCES && $fichiers) {
-				foreach($fichiers as $f) {
-					$links .= "background-image:url(".$f["i"][1].");"
-						."background-image:url(".$f["i"][2].");"
-						."background-image:url(".$f["p"][1].");"
-						."background-image:url(".$f["p"][2].");";
+				foreach ($fichiers as $f) {
+					$links .= "background-image:url(" . $f["i"][1] . ");"
+						. "background-image:url(" . $f["i"][2] . ");"
+						. "background-image:url(" . $f["p"][1] . ");"
+						. "background-image:url(" . $f["p"][2] . ");";
 				}
 			}
-			
+
 			if ($align) {
 				if ($align == "focus") {
-					$style_align = "background-position: ".(centre_image_x($img)*100)."% ".(centre_image_y($img)*100)."%;";
+					$style_align = "background-position: " . (centre_image_x($img) * 100) . "% " . (centre_image_y($img) * 100) . "%;";
 				} else {
 					$style_align = "background-position: $align;";
 				}
 			}
 
 		}
-		
-		$ins .= " style='".$style_align.$links."background-image:url($src)'";
-		
+
+		$ins .= " style='" . $style_align . $links . "background-image:url($src)'";
+
 		return $ins;
 	}
-	
+
 
 }
 
 
-function image_proportions($img, $largeur=16, $hauteur=9, $align="center", $zoom=1) {
+function image_proportions($img, $largeur = 16, $hauteur = 9, $align = "center", $zoom = 1) {
 	$mode = $align;
-	
+
 	if (!$img) return;
-	
-	
-	
-	$l_img = largeur ($img);
+
+
+	$l_img = largeur($img);
 	$h_img = hauteur($img);
 
 	if ($largeur == 0 OR $hauteur == 0) {
@@ -654,22 +642,22 @@ function image_proportions($img, $largeur=16, $hauteur=9, $align="center", $zoom
 
 
 	if ($l_img == 0 OR $h_img == 0) return $img;
-	
+
 	$r_img = $h_img / $l_img;
 	$r = $hauteur / $largeur;
-	
+
 	if ($r_img < $r) {
-		$l_dest = $h_img/$r;
+		$l_dest = $h_img / $r;
 		$h_dest = $h_img;
 	} else if ($r_img > $r) {
 		$l_dest = $l_img;
-		$h_dest = $l_img*$r;
+		$h_dest = $l_img * $r;
 	}
 
 
 	// Si align est "focus" ou "focus-center", on va aller chercher le «point d'intérêt» de l'image 
 	// avec la fonction centre_image du plugin «centre_image»
-	
+
 	// Avec "focus", point d'intérêt reste décentré
 	// Avec "focus-center", point d'intérêt aussi centré que possible
 	if (($align == "focus" || $align == "focus-center") && function_exists('centre_image')) {
@@ -677,54 +665,54 @@ function image_proportions($img, $largeur=16, $hauteur=9, $align="center", $zoom
 		$dy = centre_image_y($img);
 
 		if ($r_img > $r) {
-			$h_dest = round(($l_img * $r)/$zoom);
-			$l_dest = round($l_img/$zoom);
+			$h_dest = round(($l_img * $r) / $zoom);
+			$l_dest = round($l_img / $zoom);
 		} else {
-			$h_dest = round($h_img/$zoom);
-			$l_dest = round(($h_img / $r)/$zoom);
+			$h_dest = round($h_img / $zoom);
+			$l_dest = round(($h_img / $r) / $zoom);
 		}
-			$h_centre = $h_img * $dy;
-			$l_centre = $l_img * $dx;
-			if ($align == "focus-center") $top = round($h_centre - ($h_dest*0.5));
-			// ici on n'applique pas *$dy directement, car effet exagéré,
-			// alors on pondère 
-			else  $top = round($h_centre - ($h_dest*((2*$dy+0.5)/3)));
-			
-			$l_centre = $l_img * $dx;
-			if ($align == "focus-center") $left = round($l_centre - ($l_dest*0.5));
-			else  $left = round($l_centre - ($l_dest*((2*$dx+0.5)/3)));
+		$h_centre = $h_img * $dy;
+		$l_centre = $l_img * $dx;
+		if ($align == "focus-center") $top = round($h_centre - ($h_dest * 0.5));
+		// ici on n'applique pas *$dy directement, car effet exagéré,
+		// alors on pondère
+		else  $top = round($h_centre - ($h_dest * ((2 * $dy + 0.5) / 3)));
 
-			
-			if ($top < 0) $top = 0;
-			if ($top + $h_dest > $h_img ) $top = $h_img - $h_dest;
-			if ($left < 0) $left = 0;
-			if ($left + $l_dest > $l_img ) $left = $l_img - $l_dest;
-			
-			//echo "<li>$dx x $dy - $l_img x $h_img - $l_dest x $h_dest - $l_centre x $h_centre - $left x $top</li>"; 
-			$align = "top=$top, left=$left";
+		$l_centre = $l_img * $dx;
+		if ($align == "focus-center") $left = round($l_centre - ($l_dest * 0.5));
+		else  $left = round($l_centre - ($l_dest * ((2 * $dx + 0.5) / 3)));
+
+
+		if ($top < 0) $top = 0;
+		if ($top + $h_dest > $h_img) $top = $h_img - $h_dest;
+		if ($left < 0) $left = 0;
+		if ($left + $l_dest > $l_img) $left = $l_img - $l_dest;
+
+		//echo "<li>$dx x $dy - $l_img x $h_img - $l_dest x $h_dest - $l_centre x $h_centre - $left x $top</li>";
+		$align = "top=$top, left=$left";
 	}
 
 	include_spip("filtres/images_transforme");
 	$img = image_recadre($img, $l_dest, $h_dest, $align);
-	
+
 	// Second passage si $zoom (on verra plus tard si c'est intéressant de le traiter en amont)
 	if ($zoom > 1 && $mode != "focus" && $mode != "focus-center") {
-		$l_img = largeur ($img)/2;
-		$h_img = hauteur($img)/2;
-		
+		$l_img = largeur($img) / 2;
+		$h_img = hauteur($img) / 2;
+
 		$img = image_recadre($img, $l_img, $h_img);
-		
+
 	}
-	
+
 	return $img;
 }
 
 
-function image_responsive_affiche_milieu($flux, $effacer=false) {
+function image_responsive_affiche_milieu($flux, $effacer = false) {
 
 	$exec = $flux["args"]["exec"];
-	
-	
+
+
 	if ($exec == "admin_vider") {
 		$retour = recuperer_fond("squelettes/admin_vider_responsive");
 
