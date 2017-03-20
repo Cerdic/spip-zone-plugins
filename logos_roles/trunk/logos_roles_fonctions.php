@@ -11,29 +11,72 @@
 /**
  * Lister les rôles de logos
  *
- * @return array : Un tableau décrivant les rôles de logos
+ * @return array : Retourne le tableau décrivant les rôles de logos
  */
-function lister_logos_roles($objet = null) {
+function lister_roles_logos($objet = null) {
 
-	global $roles_logos;
+	// Logos par défaut
+	$roles_logos = pipeline(
+		'roles_logos',
+		array(
+			'logo' => array(
+				'label' => 'Logo',
+				'objets' => array_map('table_objet', array_keys(lister_tables_objets_sql())),
+			),
+			'logo_survol' => array(
+				'label' => 'Logo survol',
+				'objets' => array_map('table_objet', array_keys(lister_tables_objets_sql())),
+			),
+		)
+	);
 
-	include_spip('base/objets');
+	if ($objet = table_objet($objet)) {
 
-	$table_documents = lister_tables_objets_sql('spip_documents');
-
-	$liste_roles = array();
-	foreach ($table_documents['roles_titres'] as $role => $titre_role) {
-		if (strpos($role, 'logo') === 0) {
-			if ((! $objet)
-					or (is_array($roles_logos[$role]['objets'])
-							and in_array(table_objet($objet), $roles_logos[$role]['objets']))) {
-
-				$liste_roles[$role] = $titre_role;
+		$roles_logos_objet = array();
+		foreach ($roles_logos as $role => $options) {
+			if ((! is_array($options['objets']))
+					or in_array($objet, array_map('table_objet', $options['objets']))) {
+				$roles_logos_objet[$role] = $options;
 			}
 		}
+
+		$roles_logos = $roles_logos_objet;
 	}
 
-	return $liste_roles;
+	return $roles_logos;
+}
+
+// TODO renommer
+function lister_logos_roles($objet = null) {
+
+	$roles_logos = lister_roles_logos($objet);
+
+	foreach ($roles_logos as $role => $options) {
+		$roles_logos[$role] = $options['label'];
+	}
+
+	return $roles_logos;
+}
+
+/**
+ * Trouver les dimensions d'un rôle
+ *
+ * @param String $role : Le rôle dont on veut connaître les dimensions
+ *
+ * @return array|null  : Un tableau avec des clés 'hauteur' et 'largeur', rien si
+ *                       pas de dimensions définies
+ */
+function get_dimensions_role($role) {
+
+	$roles_logos = lister_roles_logos();
+
+	if (isset($roles_logos[$role])
+			and is_array($roles_logos[$role])
+			and isset($roles_logos[$role]['dimensions'])
+			and is_array($roles_logos[$role]['dimensions'])) {
+
+		return $roles_logos[$role]['dimensions'];
+	}
 }
 
 /**
@@ -77,11 +120,9 @@ function forcer_dimensions_role($logo, $objet, $id_objet, $role) {
 
 	include_spip('inc/filtres');
 
-	if (isset($GLOBALS['roles_logos'][$role]['dimensions'])
-			and is_array($GLOBALS['roles_logos'][$role]['dimensions'])) {
+	if ($dimensions = get_dimensions_role($role)) {
 
 		$image_recadre = charger_filtre('image_recadre');
-		$dimensions = $GLOBALS['roles_logos'][$role]['dimensions'];
 		$logo = $image_recadre($logo, $dimensions['largeur'], $dimensions['hauteur']);
 	}
 

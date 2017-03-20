@@ -107,12 +107,10 @@ function logos_roles_declarer_tables_interfaces($interfaces) {
  */
 function logos_roles_declarer_tables_objets_sql($tables) {
 
-	global $roles_logos;
+	$roles_logos = lister_roles_logos();
 
 	include_spip('base/objets');
 
-	// On se base sur la globale roles_logos pour déclarer les rôles de document
-	// qui vont bien.
 	if (is_array($roles_logos)) {
 		$nouveaux_roles_titres = array();
 		$nouveaux_roles_objets = array();

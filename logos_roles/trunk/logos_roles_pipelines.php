@@ -83,8 +83,9 @@ function logos_roles_formulaire_charger($flux) {
 	$form = $flux['args']['form'];
 	$data = $flux['data'];
 
-	if ($form === 'massicoter_image') {
-		$dimensions = $GLOBALS['roles_logos'][$data['role']]['dimensions'];
+	if (($form === 'massicoter_image')
+			and ($dimensions = get_dimensions_role($data['role']))) {
+
 		$flux['data']['format'] = $dimensions['largeur'] . ':' . $dimensions['hauteur'];
 
 	  // TODO Ne donne pas les résultats espérés… Bug du Massicot ?

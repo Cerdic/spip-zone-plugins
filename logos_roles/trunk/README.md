@@ -8,23 +8,37 @@ Cela permet d'assurer une bonne rétro-compatibilité tout en permettant d'éten
 L'idée est de se baser sur les rôles de documents dont le nom commence par `logo` pour définir les types de logos disponibles.
 Les rôles définis par le plugin « Rôles de documents » nous donnent les rôles habituels de spip : « logo » et « logo_survol », mais on peut aussi ajouter d'autres rôles de logos via la méthode décrite dans [La documentation du plugin Rôles](http://contrib.spip.net/Des-roles-sur-des-liens).
 
-Pour simplifier les choses, une globale permet de configurer les rôles qui vont bien facilement :
+Pour simplifier les choses, on peut ajouter des nouveaux types de logos avec le pipeline roles_logos :
 
-    /* Rôles de documents pour les logos */
-    $GLOBALS['roles_logos'] = array(
-    	'logo_bandeau'  => array(
-    		'label' => 'jp:role_logo_bandeau',
-    		'objets' => array('articles', 'rubriques'),
-    	),
-    	'logo_extrait' => array(
-    		'label' => 'jp:role_logo_extrait',
-    		'objets' => array('articles', 'rubriques')
-    	),
-    	'logo_slideshow' => array(
-    		'label' => 'jp:role_logo_slideshow',
-    		'objets' => array('articles', 'rubriques'),
-    	),
-    );
+
+	function jp_roles_logos($logos) {
+
+		$logos['logo_bandeau'] = array(
+			'label' => 'jp:role_logo_bandeau',
+			'objets' => array('articles', 'rubriques'),
+			'dimensions' => array(
+				'largeur' => 50,
+				'hauteur' => 300,
+			),
+		);
+
+		$logos['logo_extrait'] = array(
+			'label' => 'jp:role_logo_extrait',
+			'objets' => array('articles', 'rubriques'),
+			'dimensions' => array(
+				'largeur' => 800,
+				'hauteur' => 500,
+			),
+		);
+
+		$logos['logo_slideshow'] = array(
+			'label' => 'jp:role_logo_slideshow',
+			'objets' => array('articles', 'rubriques'),
+		);
+
+		return $logos;
+	}
+
 
 Le plugin se charge de créer automagiquement les balises correspondant aux rôles défini pour les logos.
 
