@@ -202,9 +202,6 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
 			logo_supprimer($objet, $id_objet, $role);
 			$res['message_ok'] = ''; // pas besoin de message : la validation est visuelle
 			set_request('logo_up', ' ');
-			// on vide la valeur postée pour qu'elle soit recalculée pendant le
-			// prochain appel à la fonction charger
-			set_request($role, null);
 		}
 	}
 
@@ -217,10 +214,13 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
 				$res['message_ok'] = '';
 			} // pas besoin de message : la validation est visuelle
 			set_request('logo_up', ' ');
-			// on vide la valeur postée pour qu'elle soit recalculée pendant le
-			// prochain appel à la fonction charger
-			set_request($role, null);
 		}
+	}
+
+	// on vide les valeurs postées dans les rôles pour qu'elles soit recalculées
+	// pendant le prochain appel à la fonction charger
+	foreach (lister_logos_roles() as $role => $nom_role) {
+		set_request($role, null);
 	}
 
 	// Invalider les caches de l'objet
