@@ -21,6 +21,7 @@
             <h4>[(#VALEUR|_T)]</h4>
             [(#ENV{#CLE}|oui)
               [(#INCLURE{fond=formulaires/inc-apercu-logo,env,logo=#ENV{#CLE},quoi=#CLE})]
+              <input type="hidden" name="#CLE" value="#ENV{#CLE}" />
             ]
             [(#ENV{editable}|et{#ENV{#CLE}|non}|oui)
 					    <label for="#CLE_#ENV{objet}_#ENV{id_objet}">
