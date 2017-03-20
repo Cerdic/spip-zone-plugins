@@ -139,9 +139,10 @@ function logos_roles_declarer_tables_interfaces($interfaces) {
  */
 function logos_roles_declarer_tables_objets_sql($tables) {
 
-	$roles_logos = lister_roles_logos();
-
+	include_spip('logos_roles_fonctions');
 	include_spip('base/objets');
+
+	$roles_logos = lister_roles_logos();
 
 	if (is_array($roles_logos)) {
 		$nouveaux_roles_titres = array();
