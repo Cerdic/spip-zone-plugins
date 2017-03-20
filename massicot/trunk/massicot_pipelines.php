@@ -169,23 +169,22 @@ function massicot_editer_contenu_objet($flux) {
 	$args = $flux['args'];
 
 	if ($args['type'] === 'illustrer_document') {
-
 		include_spip('base/abstract_sql');
 
-		$id_vignette = sql_getfetsel(
+		if ($id_vignette = sql_getfetsel(
 			'id_vignette',
 			'spip_documents',
 			'id_document='.intval($args['id'])
-		);
+		)) {
+			$href = generer_url_ecrire(
+				'massicoter_image',
+				'objet=document&id_objet=' . $id_vignette . '&redirect=' . urlencode(self())
+			);
+			$lien = '<a href="' . $href . '"><strong>' . _T('massicot:massicoter') . '</strong></a>';
 
-		$href = generer_url_ecrire(
-			'massicoter_image',
-			'objet=document&id_objet=' . $id_vignette . '&redirect=' . urlencode(self())
-		);
-		$lien = '<a href="' . $href . '"><strong>' . _T('massicot:massicoter') . '</strong></a>';
-
-		$repere = '<span class=\'image_loading\'>';
-		$flux['data'] = str_replace($repere, $lien . $repere, $html);
+			$repere = '<span class=\'image_loading\'>';
+			$flux['data'] = str_replace($repere, $lien . $repere, $html);
+		}
 	}
 
 	return $flux;
@@ -200,7 +199,8 @@ function massicot_editer_contenu_objet($flux) {
  */
 function massicot_formulaire_charger($flux) {
 
-	if ($flux['args']['form'] === 'illustrer_document') {
+	if (($flux['args']['form'] === 'illustrer_document')
+			and $id_vignette) {
 		$parametres = massicot_get_parametres(
 			'document',
 			$flux['data']['id_vignette']
