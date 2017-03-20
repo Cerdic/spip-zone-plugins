@@ -111,7 +111,12 @@ function forcer_dimensions_role($logo, $objet, $id_objet, $role) {
 	if ($dimensions = get_dimensions_role($role)) {
 
 		$image_recadre = charger_filtre('image_recadre');
-		$logo = $image_recadre($logo, $dimensions['largeur'], $dimensions['hauteur']);
+		$image_passe_partout = charger_filtre('image_passe_partout');
+		$logo = $image_recadre(
+			$image_passe_partout($logo, $dimensions['largeur'], $dimensions['hauteur']),
+			$dimensions['largeur'],
+			$dimensions['hauteur']
+		);
 	}
 
 	return $logo;
