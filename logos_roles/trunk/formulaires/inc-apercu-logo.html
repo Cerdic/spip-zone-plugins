@@ -16,7 +16,8 @@
 
     [(#REM) On ne permet pas de supprimer les logos qui reprennent le logo par
             défaut, parce que ça revient à supprimer le logo original ! ]
-    [(#SET{suppression_possible, #ENV{quoi}|in_array{#LISTE{logo, logo_survol}}|ou{#ENV{#ENV{quoi}}|!={#ENV{logo}}}})]
+    [(#SET{suppression_possible, #ENV{quoi}|in_array{#LISTE{logo, logo_survol}}
+                                  |ou{#ENV{logo}|est_logo_par_defaut{#ENV{id_objet}, #ENV{objet}}|non}})]
 
     [(#GET{suppression_possible}|oui)
 		  <input type='submit' class='submit supprimer' id="supprimer_#ENV{quoi,logo_on}_#ENV{objet}_#ENV{id_objet}" name="supprimer_#ENV{quoi,logo_on}" value='<:lien_supprimer|ucfirst|attribut_html:>' />
