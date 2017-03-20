@@ -134,6 +134,64 @@ function massicot_enregistrer($objet, $id_objet, $parametres) {
 }
 
 /**
+ * Supprimer le massicotage
+ *
+ * @param string $objet : le type d'objet
+ * @param integer $id_objet : l'identifiant de l'objet
+ * @param string $role : le rôle
+ *
+ * @return null|string : Rien, ou un message d'erreur
+ */
+function massicot_supprimer($objet, $id_objet, $role='') {
+
+	include_spip('base/abstract_sql');
+
+	$id_massicotage = massicot_get_id($objet, $id_objet, $role);
+
+	if (sql_delete(
+		'spip_massicotages',
+		'id_massicotage=' . intval($id_massicotage)
+	) === false) {
+		return "massicot_supprimer : erreur lors de la suppression";
+	}
+
+	if (sql_delete(
+		'spip_massicotages_liens',
+		'id_massicotage=' . intval($id_massicotage)
+	) === false) {
+		return "massicot_supprimer : erreur lors de la suppression";
+	}
+
+}
+
+/**
+ * Retourne l'identifiant du massicotage d'une image
+ *
+ * S'il n'y a pas de massicotage défini pour cet objet, on ne retourne rien.
+ *
+ * @param string $objet : le type d'objet
+ * @param integer $id_objet : l'identifiant de l'objet
+ * @param string $role : le rôle
+ *
+ * @return integer|null : L'identifiant du massicotage, rien sinon
+ */
+function massicot_get_id($objet, $id_objet, $role) {
+
+	include_spip('action/editer_liens');
+
+	$massicotages = objet_trouver_liens(
+		array('massicotage' => '*'),
+		array($objet => $id_objet)
+	);
+
+	foreach ($massicotages as $massicotage) {
+		if ($massicotage['role'] === $role) {
+			return intval($massicotage['id_massicotage']);
+		}
+	}
+}
+
+/**
  * Retourne les paramètres de massicotage d'une image
  *
  * S'il n'y a pas de massicotage défini pour cet objet, on retourne
@@ -141,6 +199,7 @@ function massicot_enregistrer($objet, $id_objet, $parametres) {
  *
  * @param string $objet : le type d'objet
  * @param integer $id_objet : l'identifiant de l'objet
+ * @param string $role : le rôle
  *
  * @return array : Un tableau avec les paramètres de massicotage
  */
