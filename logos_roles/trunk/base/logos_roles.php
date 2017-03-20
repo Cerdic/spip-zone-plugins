@@ -54,6 +54,7 @@ function logos_roles_ajouter_traitement_automatique($interfaces, $traitement, $b
  */
 function logos_roles_declarer_tables_interfaces($interfaces) {
 
+	include_spip('inc/plugin');
 	include_spip('logos_roles_fonctions');
 
 	$suffixes = array();
@@ -73,6 +74,18 @@ function logos_roles_declarer_tables_interfaces($interfaces) {
 						'trouver_logo_par_role(%s, '.objet_type($table).', $Pile[1][\''.id_table_objet($table).'\'], '.$role.')',
 						strtoupper('LOGO_'.objet_type($table) . $suffixe_balise)
 					);
+
+					// Le massicot ne déclare lui-même que les rôles logo et
+					// logo_survol. On s'en occupe ici.
+					if (plugin_est_installe('massicot')
+						and (! in_array($role, array('logo', 'logo_survol')))) {
+
+						$interfaces = ajouter_traitement_automatique(
+							$interfaces,
+							'massicoter_logo(%s, '.objet_type($table).', $Pile[1][\''.id_table_objet($table).'\'], \''.$role.'\')',
+							strtoupper('LOGO_'.objet_type($table)) . $suffixe_balise
+						);
+					}
 				}
 			}
 		}
