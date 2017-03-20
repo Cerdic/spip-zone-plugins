@@ -2,28 +2,47 @@
 Logos par rôles
 ===============
 
-Ce plugin augmente le plugin « Rôles de documents » en ré-implémentant l'API des logos en se servant des rôles.
+Ce plugin modifie le système de logos de SPIP pour le rendre plus flexible et permettre de donner plus de contrôle aux rédacteurs.
+
+Un problème récurent avec les logos de SPIP, c'est qu'on veut les afficher à des endroits différents du site, en général dans plusieurs format différents.
+On peut par exemple afficher le logo d'un article sous la forme d'un petit carré dans les listes d'articles, mais aussi en grand format sur la page d'accueil.
+Les rédacteurs doivent alors trouver des images qui fonctionnent dans les deux formats, ce qui s'avère souvent impossible.
+
+On peut alors détourner les logos de survol, mais c'est vite limité.
+Parce que ça n'offre qu'un seul logo alternatif par objet éditorial, mais aussi parce que les rédacteurs ne voient pas le logo dans le bon format dans l'espace privé, ce qui oblige à des allers-retours.
+
+En utilisant ce plugin, on peut définir autant de types de logos qu'on le souhaite, qui peuvent alors être gérés indépendamment par les rédacteurs.
+On pourra alors utiliser une image différente pour la page d'accueil et pour les listes.
+
+Le plugin [Massicot](https://contrib.spip.net/Massicot) complète très bien ce plugin, et permet alors de définir des recadrages différents pour les différents types de logos.
+On peut aussi utiliser les formats prédéfinis pour le recadrage.
+
+
+Fonctionnement
+--------------
+
+Ce plugin s'appuie sur le plugin « Rôles de documents », et ré-implémente l'API des logos en se servant des rôles.
 Cela permet d'assurer une bonne rétro-compatibilité tout en permettant d'étendre le mécanisme des logos beaucoup plus facilement.
 
 L'idée est de se baser sur les rôles de documents dont le nom commence par `logo` pour définir les types de logos disponibles.
-Les rôles définis par le plugin « Rôles de documents » nous donnent les rôles habituels de spip : « logo » et « logo_survol », mais on peut aussi ajouter d'autres rôles de logos via la méthode décrite dans [La documentation du plugin Rôles](http://contrib.spip.net/Des-roles-sur-des-liens).
+Les rôles définis par le plugin « Rôles de documents » nous donnent les rôles habituels de spip : `logo` et `logo_survol`, mais on peut aussi ajouter d'autres rôles de logos via la méthode décrite dans [la documentation du plugin Rôles](http://contrib.spip.net/Des-roles-sur-des-liens).
 
-Pour simplifier les choses, on peut ajouter des nouveaux types de logos avec le pipeline roles_logos :
+Pour simplifier les choses, on propose d'ajouter les nouveaux types de logos avec le pipeline `roles_logos` :
 
 
-	function jp_roles_logos($logos) {
+	function prefix_plugin_roles_logos($logos) {
 
 		$logos['logo_bandeau'] = array(
-			'label' => 'jp:role_logo_bandeau',
-			'objets' => array('articles', 'rubriques'),
+			'label' => 'Bandeau du site',
+			'objets' => array('site'),
 			'dimensions' => array(
-				'largeur' => 50,
+				'largeur' => 1200,
 				'hauteur' => 300,
 			),
 		);
 
 		$logos['logo_extrait'] = array(
-			'label' => 'jp:role_logo_extrait',
+			'label' => 'Extraits pour les listes',
 			'objets' => array('articles', 'rubriques'),
 			'dimensions' => array(
 				'largeur' => 800,
@@ -32,7 +51,7 @@ Pour simplifier les choses, on peut ajouter des nouveaux types de logos avec le 
 		);
 
 		$logos['logo_slideshow'] = array(
-			'label' => 'jp:role_logo_slideshow',
+			'label' => 'Slideshow page d'accueil',
 			'objets' => array('articles', 'rubriques'),
 		);
 
@@ -40,7 +59,23 @@ Pour simplifier les choses, on peut ajouter des nouveaux types de logos avec le 
 	}
 
 
-Le plugin se charge de créer automagiquement les balises correspondant aux rôles défini pour les logos.
+En se basant sur cette liste de rôles, le plugin se charge automatiquement de :
+
+- Déclarer les rôles de documents qui correspondent, en les liant aux bons objets.
+- Surcharger le formulaire d'édition des logos, pour permettre de gérer les différents types de logos.
+- Créer les balises pour afficher ces logos dans les squelettes. Avec l'exemple ci-dessus, on pourra alors appeler la balise `#LOGO_ARTICLE_EXTRAIT`, qui reverra le bon logo.
+
+### Paramètres des rôles de logo ###
+
+Les logos que l'on définit dans le pipeline `logos_roles` nécessitent au moins deux paramètres :
+
+- __label :__ Le nom du type de logo tel qu'il doit s'afficher dans l'espace privé. Peut être une chaîne de langue.
+- __objets :__ Une liste des types d'objets pour lesquels ce type de logo doit être actif.
+
+On peut aussi utiliser un paramètre __dimensions__ qui doit être un tableau avec les clés `largeur` et `hauteur`.
+Ce paramètre permet de forcer les dimensions d'un logo, la balise `#LOGO_` correspondante recadre alors automatiquement le logo.
+Cette fonction est particulièrement utile quand on utilise le plugin massicot, qui propose alors directement le bon format pour chaque type de logo.
+
 
 ### Modification des boucles `DOCUMENTS` ###
 
@@ -61,7 +96,6 @@ Ce formulaire se comporte plus ou moins comme l'ancien, avec quelques améliorat
 - On ajoute automatiquement des champs d'upload fonctionnels pour tous les rôles de logos définis.
 - Permet d'éditer le document correspondant.
 - Ajoute un pipeline qui permet d'ajouter des liens d'actions en-dessous des aperçus de logo : `logo_desc_actions`.
-- TODO utiliser le plugin saisies pour construire le formulaire, avec à terme possibilité de compatibilité avec la saisie upload_html5
 
 ### Modification de `inc/chercher_logo.php` ###
 
@@ -80,11 +114,17 @@ Les logos enregistrés avec l'ancienne API sont convertis à la nouvelle automat
 Reste à faire
 -------------
 
+### Compatibilité avec la médiathèque ###
+
+Comme les boucles `DOCUMENTS` existantes ne retournent pas les documents qui n'ont qu'un rôle de logo, ils n'apparaissent pas dans la médiathèque.
+Ça serait bien de trouver une solution pour ça, genre un onglet « logos » ?
+
+
 ### Migration des logos existants ###
 
 Comme les logos enregistrés avec l'ancienne API fonctionnent toujours avec la nouvelle, il n'y pas d'urgence à migrer, la cohabitation se fait bien.
 En l'état actuel, on peut passer un logo enregistré avec l'ancienne API à la nouvelle API en le ré-uploadant dans le formulaire d'édition des logos.
-Mais à terme il serait bien de migrer les logos historiques vers le système de rôles.
+Mais à terme il serait bien de migrer les logos historiques vers le système de rôles (?).
 
 Comme ça représente potentiellement beaucoup de logos, il faut être prudent.
 On pourrait se servir d'un cron qui le ferait petit à petit, et/ou une commande spip-cli ?

@@ -249,6 +249,10 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
  * Extraction des sources des fichiers uploadés correspondant aux logos
  * si leur upload s'est bien passé.
  *
+ * @param string $objet : le nom d'un objet, permet de ne sortir que les
+ *                        fichiers correspondant aux rôles possibles pour un
+ *                        type d'objet donné.
+ *
  * @return array Sources des fichiers dans les clés données par des noms de
  *     rôles, comme « logo » ou « logo_survol »
  */

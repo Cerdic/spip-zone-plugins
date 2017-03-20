@@ -1,6 +1,6 @@
 <?php
 
-// On crée des presets pour le massicot aux dimensions des logos
+// On ajoute des presets pour le massicot aux dimensions des logos
 include_spip('inc/plugin');
 if (plugin_est_installe('massicot')) {
 	if (! (isset($GLOBALS['presets_format_massicot']) and is_array($GLOBALS['presets_format_massicot']))) {

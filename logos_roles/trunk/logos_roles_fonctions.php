@@ -11,6 +11,24 @@
 /**
  * Lister les rôles de logos
  *
+ * Le tableau retourné utilise les noms des rôles comme clés, et des tableaux
+ * d'options comme valeur, p.ex :
+ *
+ *	array(
+ *		'logo' => array(
+ *			'label' => 'Logo',
+ *			'objets' => array('articles', 'rubriques', 'syndic'),
+ *		),
+ *		'logo_survol' => array(
+ *			'label' => 'Logo survol',
+ *			'objets' => array('articles', 'rubriques'),
+ *		),
+ *	)
+ *
+ * @param string|null $objet : Un nom d'objet auquel se restreindre. La fonction
+ *        ne retourne alors que les rôles de logos que l'on peut attribuer à cet
+ *        objet.
+ *
  * @return array : Retourne le tableau décrivant les rôles de logos
  */
 function lister_roles_logos($objet = null) {
@@ -30,6 +48,8 @@ function lister_roles_logos($objet = null) {
 		)
 	);
 
+	include_spip('base/objets');
+
 	if ($objet = table_objet($objet)) {
 		$roles_logos_objet = array();
 		foreach ($roles_logos as $role => $options) {
@@ -48,7 +68,7 @@ function lister_roles_logos($objet = null) {
 /**
  * Trouver les dimensions d'un rôle
  *
- * @param String $role : Le rôle dont on veut connaître les dimensions
+ * @param string $role : Le rôle dont on veut connaître les dimensions
  *
  * @return array|null  : Un tableau avec des clés 'hauteur' et 'largeur', rien si
  *                       pas de dimensions définies
@@ -85,6 +105,14 @@ function trouver_document_fichier($fichier) {
 /**
  * Traitement automatique sur les logos. Permet de compléter le résultat des
  * balises #LOGO_* pour trouver les logos définis par rôles de documents.
+ *
+ * @param string $logo : le code html du logo
+ * @param string $objet : le type d'objet
+ * @param int $id_objet : l'identifiant de l'objet
+ * @param string $role
+ *     le role, ou `on` ou `off` pour la rétro-compatibilité
+ *
+ * @return string : le code html du logo qui va bien
  */
 function trouver_logo_par_role($logo, $objet, $id_objet, $role) {
 
@@ -100,7 +128,16 @@ function trouver_logo_par_role($logo, $objet, $id_objet, $role) {
 }
 
 /**
- * Forcer les dimensions d'un logo suivant les dimensions définies par son rôle
+ * Traitement automatique sur les logos. Forcer les dimensions d'un logo suivant
+ * les dimensions définies par son rôle.
+ *
+ * @param string $logo : le code html du logo
+ * @param string $objet : le type d'objet
+ * @param int $id_objet : l'identifiant de l'objet
+ * @param string $role
+ *     le role, ou `on` ou `off` pour la rétro-compatibilité
+ *
+ * @return string : le code html du logo aux bonnes dimensions
  */
 function forcer_dimensions_role($logo, $objet, $id_objet, $role) {
 

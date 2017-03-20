@@ -1,7 +1,13 @@
 <?php
 
 /**
- * Déterminer si un logo est le logo par défaut
+ * Déterminer si un logo est le logo par défaut d'un objet donné
+ *
+ * @param string $logo : le logo en question
+ * @param integer $id_objet : l'identifiant de l'objet
+ * @param string $objet : le type de l'objet
+ *
+ * @return boolean : true si oui, false sinon…
  */
 function est_logo_par_defaut($logo, $id_objet, $objet) {
 

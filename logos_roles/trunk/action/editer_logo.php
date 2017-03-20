@@ -22,7 +22,7 @@
  * @param string $objet
  * @param int $id_objet
  * @param string $role
- *     `on` ou `off` pour rétro-compatibilité, sinon un role de logo
+ *     Un rôle de logo. `on` ou `off` sont aussi admis pour rétro-compatibilité
  *
  * @return string|null
  *     Erreur, sinon rien

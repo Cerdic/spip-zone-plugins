@@ -67,7 +67,17 @@ function inc_chercher_logo_dist($id, $_id_objet, $mode = 'on') {
 /**
  * Trouver un logo enregistré en tant que document
  *
- * Fonction à usage interne, utiliser chercher_logo pour trouver des logos
+ * Fonction à usage interne, il faut préférer l'API chercher_logo
+ *
+ * @param integer $id : l'identifiant de l'objet
+ * @param string $_id_objet : le nom de la clé primaire pour l'objet en
+ *                            question. p.ex id_article pour les articles
+ * @param string $mode Mode de survol du logo désiré (on ou off), ou alors un
+ *     rôle dont l'identifiant commence par « logo ».
+ *
+ * @return array
+ *     - Liste (chemin complet du fichier, répertoire de logos, nom du logo, extension du logo, date de modification)
+ *     - array vide aucun logo trouvé.
  */
 function chercher_logo_document($id, $_id_objet, $mode) {
 
