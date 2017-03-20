@@ -202,6 +202,9 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
 			logo_supprimer($objet, $id_objet, $role);
 			$res['message_ok'] = ''; // pas besoin de message : la validation est visuelle
 			set_request('logo_up', ' ');
+			// on vide la valeur postée pour qu'elle soit recalculée pendant le
+			// prochain appel à la fonction charger
+			set_request($role, null);
 		}
 	}
 
