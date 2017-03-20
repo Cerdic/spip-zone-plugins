@@ -56,7 +56,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		x1: selection_initiale.x1 / zoom,
 		x2: selection_initiale.x2 / zoom,
 		y1: selection_initiale.y1 / zoom,
-		y2: selection_initiale.y2 / zoom,
+		y2: selection_initiale.y2 / zoom
 	};
 
 	/* On crée ensuite le slider de zoom */
@@ -120,7 +120,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 				x1: selection.x1 / zoom,
 				x2: selection.x2 / zoom,
 				y1: selection.y1 / zoom,
-				y2: selection.y2 / zoom,
+				y2: selection.y2 / zoom
 			};
 			maj_formulaire(selection, zoom);
 		}
