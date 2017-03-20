@@ -108,7 +108,7 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 	// le nom de la cle primaire (et non le nom de la table)
 	// ou directement le nom du raccourcis a chercher
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
-	$roles_logos = array_keys(lister_logos_roles());
+	$roles_logos = array_keys(lister_logos_roles($objet));
 
 	foreach ($roles_logos as $role) {
 		$logo = $chercher_logo($id_objet, $_id_objet, $role);
@@ -157,7 +157,7 @@ function formulaires_editer_logo_identifier_dist($objet, $id_objet, $retour = ''
 function formulaires_editer_logo_verifier_dist($objet, $id_objet, $retour = '', $options = array()) {
 	$erreurs = array();
 	// verifier les extensions
-	$sources = formulaire_editer_logo_get_sources();
+	$sources = formulaire_editer_logo_get_sources($objet);
 	foreach ($sources as $role => $file) {
 		// seulement si une reception correcte a eu lieu
 		if ($file and $file['error'] == 0) {
@@ -197,7 +197,7 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
 	include_spip('action/editer_logo');
 
 	// effectuer la suppression si demandee d'un logo
-	foreach (lister_logos_roles() as $role => $titre_role) {
+	foreach (lister_logos_roles($objet) as $role => $titre_role) {
 		if (_request('supprimer_' . $role)) {
 			logo_supprimer($objet, $id_objet, $role);
 			$res['message_ok'] = ''; // pas besoin de message : la validation est visuelle
@@ -206,7 +206,7 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
 	}
 
 	// Sinon remplacer les logos par le ou les éventuels logos uploadés
-	foreach (formulaire_editer_logo_get_sources() as $role => $file) {
+	foreach (formulaire_editer_logo_get_sources($objet) as $role => $file) {
 		if ($file and $file['error'] == 0) {
 			if ($err = logo_modifier($objet, $id_objet, $role, $file)) {
 				$res['message_erreur'] = $err;
@@ -219,7 +219,7 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
 
 	// on vide les valeurs postées dans les rôles pour qu'elles soit recalculées
 	// pendant le prochain appel à la fonction charger
-	foreach (lister_logos_roles() as $role => $nom_role) {
+	foreach (lister_logos_roles($objet) as $role => $nom_role) {
 		set_request($role, null);
 	}
 
@@ -242,7 +242,7 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
  * @return array Sources des fichiers dans les clés données par des noms de
  *     rôles, comme « logo » ou « logo_survol »
  */
-function formulaire_editer_logo_get_sources() {
+function formulaire_editer_logo_get_sources($objet = null) {
 	if (!$_FILES) {
 		$_FILES = isset($GLOBALS['HTTP_POST_FILES']) ? $GLOBALS['HTTP_POST_FILES'] : array();
 	}
@@ -251,7 +251,7 @@ function formulaire_editer_logo_get_sources() {
 	}
 
 	$sources = array();
-	foreach (lister_logos_roles() as $role => $titre_role) {
+	foreach (lister_logos_roles($objet) as $role => $titre_role) {
 		if (isset($_FILES[$role]) and $_FILES[$role]['error'] === 0) {
 			$sources[$role] = $_FILES[$role];
 		}

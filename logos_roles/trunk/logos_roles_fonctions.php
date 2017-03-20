@@ -13,18 +13,27 @@
  *
  * @return array : Un tableau décrivant les rôles de logos
  */
-function lister_logos_roles() {
+function lister_logos_roles($objet = null) {
+
+	global $roles_logos;
+
+	include_spip('base/objets');
 
 	$table_documents = lister_tables_objets_sql('spip_documents');
 
-	$roles_logos = array();
+	$liste_roles = array();
 	foreach ($table_documents['roles_titres'] as $role => $titre_role) {
 		if (strpos($role, 'logo') === 0) {
-			$roles_logos[$role] = $titre_role;
+			if ((! $objet)
+					or (is_array($roles_logos[$role]['objets'])
+							and in_array(table_objet($objet), $roles_logos[$role]['objets']))) {
+
+				$liste_roles[$role] = $titre_role;
+			}
 		}
 	}
 
-	return $roles_logos;
+	return $liste_roles;
 }
 
 /**

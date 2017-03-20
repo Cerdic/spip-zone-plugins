@@ -14,7 +14,7 @@
 		<div style="display:none;"><input type='submit' class='submit' value='<:bouton_upload:>' /></div>
 	]
 		<div class="editer-groupe">
-      <BOUCLE_roles_logos(DATA){source array, #REM|lister_logos_roles}>
+      <BOUCLE_roles_logos(DATA){source array, #ENV{objet}|table_objet|lister_logos_roles}>
 
         [(#CONFIG{activer_logos_survol}|=={oui}|ou{#CLE|!={logo_survol}})
           <div class="editer editer_#CLE[ (#ENV{#CLE}|non)logo_upload][ (#ENV**{erreurs}|table_valeur{#CLE}|oui)erreur]">
