@@ -70,3 +70,26 @@ function logos_roles_header_prive($flux) {
 
 	return $flux;
 }
+
+/**
+ * Préconfigurer le formulaire de massicotage pour utiliser le bon format
+ *
+ * @pipeline formulaire_charger
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function logos_roles_formulaire_charger($flux) {
+
+	$form = $flux['args']['form'];
+	$data = $flux['data'];
+
+	if ($form === 'massicoter_image') {
+		$dimensions = $GLOBALS['roles_logos'][$data['role']]['dimensions'];
+		$flux['data']['format'] = $dimensions['largeur'] . ':' . $dimensions['hauteur'];
+
+	  // TODO Ne donne pas les résultats espérés… Bug du Massicot ?
+		// $flux['data']['forcer_dimensions'] = $dimensions;
+	}
+
+	return $flux;
+}

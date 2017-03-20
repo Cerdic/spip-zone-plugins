@@ -24,5 +24,6 @@
 
   <pipeline nom="pre_boucle" inclure="logos_roles_pipelines.php" />
   <pipeline nom="header_prive" inclure="logos_roles_pipelines.php" />
+  <pipeline nom="formulaire_charger" inclure="logos_roles_pipelines.php" />
 
 </paquet>
