@@ -1,19 +1,22 @@
 <?php
 
 function image_responsive_insert_head_css($flux) {
-
 	$flux .= "\n<link rel='stylesheet' type='text/css' media='all' href='" . find_in_path("image_responsive.css") . "'>\n";
-
 	return $flux;
 }
 
-function image_responsive_insert_head($flux) {
+/** Indique si le fichier htaccess est actif */
+function image_responsive_htaccess_actif() {
 	$type_urls = lire_meta("type_urls");
 	$htactif = 0;
 	if (preg_match(",^(arbo|libres|html|propres|propres2)$,", $type_urls)) {
 		$htactif = 1;
 	}
+	return $htactif;
+}
 
+function image_responsive_insert_head($flux) {
+	$htactif = image_responsive_htaccess_actif();
 	$flux .= "<script>htactif=$htactif;document.createElement('picture');</script>";
 	$flux .= "
 <script type='text/javascript' src='" . find_in_path("javascript/rAF.js") . "'></script>
@@ -63,11 +66,7 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 	}
 
 //	$img = $img[0];
-	$type_urls = lire_meta("type_urls");
-	$htactif = false;
-	if (preg_match(",^(arbo|libres|html|propres|propres2)$,", $type_urls)) {
-		$htactif = true;
-	}
+	$htactif = (bool)image_responsive_htaccess_actif();
 	$source = extraire_attribut($img, "src");
 	$source = preg_replace(",\?[0-9]*$,", "", $source);
 	if (file_exists($source)) {
@@ -362,11 +361,7 @@ function image_responsive_svg($img, $taille = -1, $lazy = 0, $vertical = 0) {
 		else $taille_defaut = $taille;
 	}
 
-	$type_urls = lire_meta("type_urls");
-	if (preg_match(",^(arbo|libres|html|propres|propres2)$,", $type_urls)) {
-		$htactif = true;
-	}
-
+	$htactif = (bool)image_responsive_htaccess_actif();
 
 	if (preg_match("/^<img /i", $img)) {
 		$img = extraire_attribut($img, "src");
@@ -478,10 +473,7 @@ function background_responsive($src, $taille = 120, $lazy = 0, $align = "") {
 	else $taille_defaut = $taille;
 
 //	$img = $img[0];
-	$type_urls = lire_meta("type_urls");
-	if (preg_match(",^(arbo|libres|html|propres|propres2)$,", $type_urls)) {
-		$htactif = true;
-	}
+	$htactif = (bool)image_responsive_htaccess_actif();
 	$src = preg_replace(",\?[0-9]*$,", "", $src);
 
 	if (file_exists($src)) {
