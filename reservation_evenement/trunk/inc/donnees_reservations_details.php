@@ -134,7 +134,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	function prix_attache($id_evenement, $id_article, $id_evenement_source) {
 		// Etablir le prix de l'événement sinon de l'article.
 		if (!$p = sql_fetsel(
-				'prix_ht,prix,,id_prix_objet,code_devise',
+				'prix_ht,prix,id_prix_objet,code_devise',
 				'spip_prix_objets',
 				'objet="evenement" AND id_objet=' . $id_evenement)) {
 				if (!$p = sql_fetsel(
