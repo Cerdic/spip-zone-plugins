@@ -25,6 +25,7 @@
 #SET{demo,#ENV{demo}}
 #SET{indices,#ENV{indices}}
 #SET{numeros,#ENV{numeros}}
+#SET{ombre,#ENV{ombre}}
 
 <?php
 $maxigos_style = trim(strtolower('#GET{style}'));
@@ -36,6 +37,7 @@ $maxigos_init = trim(strtolower('#GET{init}'));
 $maxigos_demo = trim('#GET{demo}');
 $maxigos_indices = trim(strtolower('#GET{indices}'));
 $maxigos_numeros = trim(strtolower('#GET{numeros}'));
+$maxigos_ombre = trim('#GET{ombre}');
 
 // classic (=défaut), neo (=neo-classic), tatami, minimal (=minimalist), cameleon, [multitypes] ou fm, kifu, tiger [monotypes]
 switch ($maxigos_style) {
@@ -84,6 +86,8 @@ if ($maxigos_init == '') {$maxigos_init = 'null';}
 if ($maxigos_demo == '') {$maxigos_demo = 'null';}
 if ($maxigos_indices == '') {$maxigos_indices = 'null';}
 if ($maxigos_numeros == '') {$maxigos_numeros = 'null';}
+if ($maxigos_ombre == '') {$maxigos_ombre = 'null';}
+
 
 // Priorité: 1 id_doc, contenu
 if ($maxigos_id != 'null') {
@@ -121,6 +125,9 @@ if ($maxigos_numeros != 'null') {if ($maxigos_numeros == '0') {$maxigos_divers_p
 	elseif ($maxigos_numeros == '1') {$maxigos_divers_parametres .= 'data-maxigos-numbering-on="1" ';}
 	else {$maxigos_divers_parametres .= 'data-maxigos-numbering-on="undefined" ';}}
 
+// ombre = ($maxigos_ombre): correspond au paramètre stoneShadowOn de maxiGos. 1 ou 0 (défaut)
+if ($maxigos_ombre != 'null') {if ($maxigos_ombre == '0') {$maxigos_divers_parametres .= 'data-maxigos-stone-shadow-on="0" ';}
+	else {$maxigos_divers_parametres .= 'data-maxigos-stone-shadow-on="1" ';}}
 
 // On assure l'internationalisation
 echo "\n".'<script src="'.$maxigos_languescript.'"></script>'."\n";
