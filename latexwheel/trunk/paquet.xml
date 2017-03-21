@@ -1,8 +1,8 @@
 <paquet
     prefix="latexwheel"
     categorie="edition"
-    version="1.0.3"
-    compatibilite="[3.0.0;3.0.*]"
+    version="1.0.4"
+    compatibilite="[3.0.0;3.*.*]"
     logo="spiplatex.png"
     documentation="http://contrib.spip.net/Livre-avec-SPIP"
     etat="test">
