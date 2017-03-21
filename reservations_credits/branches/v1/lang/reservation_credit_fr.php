@@ -1,15 +1,17 @@
 <?php
-// This is a SPIP language file -- Ceci est un fichier langue de SPIP
-if (! defined ( '_ECRIRE_INC_VERSION' ))
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/reservations_credits/trunk/lang/
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
+}
 
-$GLOBALS [$GLOBALS ['idx_lang']] = array(
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'acompte_paye_par_credit' => 'Acompte payé avec vos crédits',
 	'ajouter_lien_reservation_credit' => 'Ajouter ce crédit',
 
-	//
+	// B
 	'bouton_enregistrer_reglement_credit' => 'Régler avec mes crédits',
 
 	// C
@@ -21,18 +23,12 @@ $GLOBALS [$GLOBALS ['idx_lang']] = array(
 	'icone_modifier_reservation_credit' => 'Modifier ce crédit',
 	'info_1_reservation_credit' => 'Un crédit',
 	'info_aucun_reservation_credit' => 'Aucun crédit',
-	'info_credit_imprimer' => 'Vous pouvez payez en utilisant vos Crédits qui s\'élèvent actuellement à @credit@ en cliquant us ’Régler avec mes credits’.
+	'info_credit_imprimer' => 'Vous pouvez payez en utilisant vos Crédits qui s’élèvent actuellement à @credit@ en cliquant us ’Régler avec mes credits’.
 
 Transaction : #@transaction@
 _ Montant : @montant@',
 	'info_nb_reservation_credits' => '@nb@ crédits',
 	'info_reservation_credits_auteur' => 'Les crédits de cet auteur',
-	'info_virement' => 'Vous pouvez payer par virement bancaire.
-Les instructions concernant l’établissement du virement seront fournies après avoir cliqué sur ’Régler par virement bancaire’.
-
-Transaction : #@transaction@
-_ Montant : @montant@
-',
 
 	// P
 	'payer_par_credit' => 'Payer avec mes crédits',
@@ -53,5 +49,3 @@ _ Montant : @montant@
 	'titre_reservation_credits' => 'Crédits',
 	'titre_reservation_credits_rubrique' => 'Crédits de la rubrique'
 );
-
-?>

@@ -1,8 +1,9 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/reservations_credits/trunk/lang/
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -10,10 +11,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_reservation_credit_mouvement' => 'Ajouter ce mouvement crédit',
 
 	// C
-	'champ_date_creation_label' => 'Date création :',
-	'champ_descriptif_label' => 'Déscriptif :',
-	'champ_devise_label' => 'Devise :',
-	'champ_credit_de' => 'Crédit de :',
+	'champ_credit_de' => 'Crédit de :',
+	'champ_date_creation_label' => 'Date création :',
+	'champ_descriptif_label' => 'Déscriptif :',
+	'champ_devise_label' => 'Devise :',
 	'champ_type_label' => 'Type',
 
 	// I
@@ -24,9 +25,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_reservation_credit_mouvements' => '@nb@ mouvements crédit',
 	'info_reservation_credit_mouvements_auteur' => 'Les mouvements crédit de cet auteur',
 
-  // M
-  'mouvement_evenement_annule' => 'Anulation événement "@titre@"',
-  'mouvement_evenement_publie' => 'Reprogrammation événement "@titre@"',
+	// M
+	'mouvement_evenement_annule' => 'Anulation événement "@titre@"',
+	'mouvement_evenement_publie' => 'Reprogrammation événement "@titre@"',
 
 	// R
 	'retirer_lien_reservation_credit_mouvement' => 'Retirer ce mouvement crédit',
@@ -42,9 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_reservation_credit_mouvement' => 'Mouvement crédit',
 	'titre_reservation_credit_mouvements' => 'Mouvements crédit',
 	'titre_reservation_credit_mouvements_rubrique' => 'Mouvements crédit de la rubrique',
-	'type_debit' => 'Débit (réduit le montant du crédit)',
-  'type_credit' => 'Crédit (augmente le montant du crédit)',
-
+	'type_credit' => 'Crédit (augmente le montant du crédit)',
+	'type_debit' => 'Débit (réduit le montant du crédit)'
 );
-
-?>
