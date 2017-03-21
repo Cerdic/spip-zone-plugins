@@ -114,12 +114,6 @@ Les logos enregistrés avec l'ancienne API sont convertis à la nouvelle automat
 Reste à faire
 -------------
 
-### Compatibilité avec la médiathèque ###
-
-Comme les boucles `DOCUMENTS` existantes ne retournent pas les documents qui n'ont qu'un rôle de logo, ils n'apparaissent pas dans la médiathèque.
-Ça serait bien de trouver une solution pour ça, genre un onglet « logos » ?
-
-
 ### Migration des logos existants ###
 
 Comme les logos enregistrés avec l'ancienne API fonctionnent toujours avec la nouvelle, il n'y pas d'urgence à migrer, la cohabitation se fait bien.

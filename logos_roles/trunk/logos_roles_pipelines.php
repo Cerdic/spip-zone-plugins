@@ -20,6 +20,13 @@
  */
 function logos_roles_pre_boucle($boucle) {
 
+	// Gros hack, on vient ajouter un critère {tout} à la boucle qui va bien
+	// pour afficher les logos dans la médiathèque.
+	if (($boucle->id_boucle === '_galerie')
+		and (substr($boucle->descr['sourcefile'], -49) === 'prive/squelettes/inclure/mediatheque-galerie.html')) {
+		$boucle->modificateur['tout'] = true;
+	}
+
 	if ($boucle->type_requete === 'documents') {
 		$utilise_critere_logo = false;
 		foreach ($boucle->criteres as $critere) {
