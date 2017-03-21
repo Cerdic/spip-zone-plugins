@@ -3,7 +3,7 @@
 namespace SPIP\Prestashop;
 
 include_spip('lib/PSWebServiceLibrary');
-include_spip('inc/prestashop_ws_utils');
+include_spip('inc/prestashop_webservice_utils');
 
 class Webservice extends \PrestaShopWebservice {
 

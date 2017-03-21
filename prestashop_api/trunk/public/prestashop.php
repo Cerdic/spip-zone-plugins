@@ -285,14 +285,21 @@ function inc_prestashop_ws_select_dist(&$command, $iterateur) {
 		$lang = !empty($iterateur->info[4]) ? $iterateur->info[4] : null;
 		$wsps = \SPIP\Prestashop\Webservice::getInstanceByLang($lang);
 	} catch (PrestaShopWebserviceException $ex) {
-		spip_log('Erreur Webservice Prestashop : ' . $ex->getMessage());
+		spip_log('Erreur Webservice Prestashop : ' . $ex->getMessage(), 'prestashop.' . _LOG_ERREUR);
 		return [];
 	}
 
 	// Demander les données au Prestashop.
-	if ($xml = $wsps->get($query)) {
-		$arbre = prestashop_ws_nettoyer_reception($xml, $resource, $iterateur->get_langues());
-		return $arbre;
+	try {
+		if ($xml = $wsps->get($query)) {
+			$arbre = prestashop_ws_nettoyer_reception($xml, $resource, $iterateur->get_langues());
+			return $arbre;
+		}
+	} catch (PrestaShopWebserviceException $ex) {
+		spip_log('Erreur Webservice Prestashop : ' . $ex->getMessage(), 'prestashop.' . _LOG_ERREUR);
+		spip_log('Query : ', 'prestashop.' . _LOG_ERREUR);
+		spip_log($query, 'prestashop.' . _LOG_ERREUR);
+		return [];
 	}
 
 	return [];
@@ -355,10 +362,22 @@ function prestashop_ws_nettoyer_value($value, $langues) {
 			}
 		} else {
 			$res = [];
-			foreach ($value as $k => $v) {
-				$res[$k] = prestashop_ws_nettoyer_value($v, $langues);
-				if ($attr = $v->attributes('xlink', true) and !empty($attr['href'])) {
-					$res[$k . '_url'] = (string)$attr['href'];
+			if (isset($value['nodeType'])) {
+				$type = (string)$value['nodeType'];
+				$data = [];
+				foreach ($value->$type as $k => $v) {
+					$data = prestashop_ws_nettoyer_value($v, $langues);
+					if ($attr = $v->attributes('xlink', true) and !empty($attr['href'])) {
+						$data[$k . '_url'] = (string)$attr['href'];
+					}
+					$res[] = $data;
+				}
+			} else {
+				foreach ($value as $k => $v) {
+					$res[$k] = prestashop_ws_nettoyer_value($v, $langues);
+					if ($attr = $v->attributes('xlink', true) and !empty($attr['href'])) {
+						$res[$k . '_url'] = (string)$attr['href'];
+					}
 				}
 			}
 			return $res;
