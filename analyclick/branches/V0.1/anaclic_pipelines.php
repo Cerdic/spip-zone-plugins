@@ -17,15 +17,17 @@
  */
 function anaclic_document_desc_actions($flux) {
 
-	$url_stats = generer_url_ecrire(
-		'statistiques_anaclic_v3',
-		'id_document=' . intval($flux['args']['id_document'])
-	);
+	if (autoriser('voirstats')) {
+		$url_stats = generer_url_ecrire(
+			'statistiques_anaclic_v3',
+			'id_document=' . intval($flux['args']['id_document'])
+		);
 
-	$flux['data'] .= recuperer_fond(
-		'prive/squelettes/inclure/lien_stats',
-		$flux['args']
-	);
+		$flux['data'] .= recuperer_fond(
+			'prive/squelettes/inclure/lien_stats',
+			$flux['args']
+		);
+	}
 
 	return $flux;
 }
