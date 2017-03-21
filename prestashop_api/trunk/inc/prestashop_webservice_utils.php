@@ -185,3 +185,58 @@ function prestashop_ws_list_shops_by_lang($lang = null) {
 	}
 	return lire_config('prestashop_api/url');
 }
+
+
+/**
+ * Retourne la liste des champs simples d'une ressource
+ *
+ * Uniquement les champs qui ont un texte directement
+ * (pas les associations ou les champs ayant des traductions)
+ *
+ * @fixme : que faire pour les autres champs du coup ?
+ *
+ * @param string $resource
+ *     Nom de la ressource désirée (ex: 'products')
+ * @return array couples (nom du champ => type de champ)
+ */
+function prestashop_ws_show_resource($resource) {
+	if (!$resource) {
+		return [];
+	}
+
+	static $shows = [];
+	if (isset($shows[$resource])) {
+		return $shows[$resource];
+	}
+
+	if (!prestashop_ws_cache_update() and cache_exists(__FUNCTION__ . '-' . $resource)) {
+		$shows[$resource] = cache_get(__FUNCTION__ . '-' . $resource);
+		return $shows[$resource];
+	}
+
+	try {
+		// on suppose les champs identiques quelque soit la boutique
+		$wsps = \SPIP\Prestashop\Webservice::getInstanceByLang();
+	} catch (PrestaShopWebserviceException $ex) {
+		spip_log('Erreur Webservice Prestashop : ' . $ex->getMessage());
+		return [];
+	}
+
+	$show = [];
+	// Demander les données au Prestashop.
+	if ($xml = $wsps->show($resource)) {
+		foreach ($xml->children() as $champs) {
+			foreach ($champs as $nom => $desc) {
+				// champs simples
+				if (!count($desc)) {
+					$show[$nom] = (string)$desc['format'];
+				}
+			}
+		}
+	}
+
+	$shows[$resource] = $show;
+	cache_set(__FUNCTION__ . '-' . $resource, $show, 24 * 3600);
+
+	return $show;
+}

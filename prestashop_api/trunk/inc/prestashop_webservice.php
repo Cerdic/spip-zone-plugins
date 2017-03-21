@@ -76,5 +76,16 @@ class Webservice extends \PrestaShopWebservice {
 		];
 		return parent::executeRequest($url, $curl_params);
 	}
+
+	/**
+	 * Retourne la description d'une resource (ses champs)
+	 * @param string $resource
+	 * @return simpleXML
+	 */
+	public function show($resource) {
+		$url = $this->url . '/api/' . $resource;
+		$url = parametre_url($url, 'schema', 'synopsis', '&');
+		return $this->get(['url' => $url]);
+	}
 }
 

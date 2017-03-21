@@ -238,6 +238,7 @@ function inc_prestashop_ws_select_dist(&$command, $iterateur) {
 		$ids = $command['liste'];
 	}
 
+
 	// depuis un critere id=x ou {id?}
 	if ($id = prestashop_ws_critere_valeur($criteres, 'id')) {
 		$ids = prestashop_ws_intersect_ids($ids, $id);
@@ -246,12 +247,26 @@ function inc_prestashop_ws_select_dist(&$command, $iterateur) {
 		$query['filter[id]'] = '[' . implode('|', $ids) . ']';
 	}
 
+	// liste des champs possibles pour cette ressource
+	// cela permet de renseigner les filtres automatiquement
+	// et réduire ainsi la taille de la requête retournée,
+	// évitant que ce soit l'itérateur data qui filtre après coup.
+	$champs = prestashop_ws_show_resource($resource);
+	foreach ($champs as $champ => $desc) {
+		if ($val = prestashop_ws_critere_valeur($criteres, $champ)) {
+			// pas la peine de filtrer dessus...
+			$iterateur->exception_des_criteres($champ);
+			$query['filter[' . $champ . ']'] = '[' . implode('|', $val) . ']';
+		}
+	}
+
 	// display (full par défaut)
 	if (!$display = prestashop_ws_critere_valeur($criteres, 'display')) {
 		$display = 'full';
 	}
 	$iterateur->exception_des_criteres('display');
 	$query['display'] = $display;
+
 
 	/*
 		Si on met une limite… on ne sait plus paginer
@@ -350,7 +365,6 @@ function prestashop_ws_nettoyer_value($value, $langues) {
 		}
 	}
 }
-
 
 /**
  * Recuperer un critere dans le tableau where selon une contrainte.
