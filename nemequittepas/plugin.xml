@@ -11,7 +11,7 @@
 	</slogan>
 	<auteur>Mehdi Cherigui - Jacques Pyrat</auteur>
 	<licence>GPLv3</licence>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<icon>images/nemequitepas-48.png</icon>
 	<lien>http://contrib.spip.net/???</lien>
 
@@ -20,7 +20,7 @@
 			[fr]Ne me quitte pas protège votre saisie en demandant confirmation avant de quitter une page avec du contenu modifié.
 		</multi>
 	</description>
-	<etat>stable</etat>
+	<etat>test</etat>
 	<prefix>nemequittepas</prefix>
 	<pipeline>
 		<nom>header_prive</nom>
