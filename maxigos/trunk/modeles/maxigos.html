@@ -19,17 +19,23 @@
 #SET{style,#ENV{style}}
 #SET{type,#ENV{type}}
 #SET{langue,#ENV{langue}}
-#SET{id_doc,#ENV{id_doc}}
+#SET{id,#ENV{id}}
 #SET{contenu,#ENV{contenu}}
 #SET{init,#ENV{init}}
+#SET{demo,#ENV{demo}}
+#SET{indices,#ENV{indices}}
+#SET{numeros,#ENV{numeros}}
 
 <?php
 $maxigos_style = trim(strtolower('#GET{style}'));
 $maxigos_type = trim(strtolower('#GET{type}'));
 $maxigos_langue = trim(strtolower('#GET{langue}'));
-$maxigos_id_doc = trim('#GET{id_doc}');
+$maxigos_id = trim('#GET{id}');
 $maxigos_contenu = trim('#GET{contenu}');
 $maxigos_init = trim(strtolower('#GET{init}'));
+$maxigos_demo = trim('#GET{demo}');
+$maxigos_indices = trim(strtolower('#GET{indices}'));
+$maxigos_numeros = trim(strtolower('#GET{numeros}'));
 
 // classic (=défaut), neo (=neo-classic), tatami, minimal (=minimalist), cameleon, [multitypes] ou fm, kifu, tiger [monotypes]
 switch ($maxigos_style) {
@@ -72,16 +78,19 @@ $maxigos_script = $maxigos_scriptpath.'/'.$maxigos_style.$maxigos_type.'.js';
 $maxigos_languescript = $maxigos_scriptpath.'/_i18n/mgos-i18n-'.$maxigos_langue.'.js';
 unset($maxigos_scriptpath);
 
-if ($maxigos_id_doc == '') {$maxigos_id_doc = 'null';}
+if ($maxigos_id == '') {$maxigos_id = 'null';}
 if ($maxigos_contenu == '') {$maxigos_contenu = 'null';}
 if ($maxigos_init == '') {$maxigos_init = 'null';}
+if ($maxigos_demo == '') {$maxigos_demo = 'null';}
+if ($maxigos_indices == '') {$maxigos_indices = 'null';}
+if ($maxigos_numeros == '') {$maxigos_numeros = 'null';}
 
 // Priorité: 1 id_doc, contenu
-if ($maxigos_id_doc != 'null') {
+if ($maxigos_id != 'null') {
 ?>
 
 	<B_maxigos_fic_doc>
-		<BOUCLE_maxigos_fic_doc(DOCUMENTS) {extension=sgf} {id_document=#GET{id_doc}}>
+		<BOUCLE_maxigos_fic_doc(DOCUMENTS) {extension=sgf} {id_document=#GET{id}}>
 			<?php $maxigos_contenu='#FICHIER'; ?>
 		</BOUCLE_maxigos_fic_doc>
 	</B_maxigos_fic_doc>
@@ -93,8 +102,25 @@ if ($maxigos_id_doc != 'null') {
 
 // On traite les divers paramètres maxigos supplémentaires implémenté dans ce modèle
 $maxigos_divers_parametres = '';
+
 // init= ($maxigos_init): correspond au paramètre initMethod de maxiGos. first (défaut) ou last
-if ($maxigos_init != 'null') {if ($maxigos_init == 'last') {$maxigos_divers_parametres .= 'data-maxigos-init-method="last" ';} else{$maxigos_divers_parametres .= 'data-maxigos-init-method="first" ';}} 
+if ($maxigos_init != 'null') {if ($maxigos_init == 'last') {$maxigos_divers_parametres .= 'data-maxigos-init-method="last" ';}
+	else {$maxigos_divers_parametres .= 'data-maxigos-init-method="first" ';}}
+
+// demo = ($maxigos_demo): correspond au (contraire du) paramètre canPlaceVariation de maxiGos. 1 ou 0 (défaut)
+if ($maxigos_demo != 'null') {if ($maxigos_demo == '0') {$maxigos_divers_parametres .= 'data-maxigos-can-place-variation="1" ';}
+	else {$maxigos_divers_parametres .= 'data-maxigos-can-place-variation="0" ';}}
+
+// indices = ($maxigos_indices): correspond au paramètre indicesOn de maxiGos. 0, 1 ou undefined (défaut)
+if ($maxigos_indices != 'null') {if ($maxigos_indices == '0') {$maxigos_divers_parametres .= 'data-maxigos-indices-on="0" ';}
+	elseif ($maxigos_indices == '1') {$maxigos_divers_parametres .= 'data-maxigos-indices-on="1" ';}
+	else {$maxigos_divers_parametres .= 'data-maxigos-indices-on="undefined" ';}}
+
+// numeros = ($maxigos_numeros): correspond au paramètre numberingOn de maxiGos. 0, 1 ou undefined (défaut)
+if ($maxigos_numeros != 'null') {if ($maxigos_numeros == '0') {$maxigos_divers_parametres .= 'data-maxigos-numbering-on="0" ';}
+	elseif ($maxigos_numeros == '1') {$maxigos_divers_parametres .= 'data-maxigos-numbering-on="1" ';}
+	else {$maxigos_divers_parametres .= 'data-maxigos-numbering-on="undefined" ';}}
+
 
 // On assure l'internationalisation
 echo "\n".'<script src="'.$maxigos_languescript.'"></script>'."\n";
@@ -107,8 +133,10 @@ echo "Style: ".$maxigos_style."<hr />";
 echo "Type: ".$maxigos_type."<hr />";
 echo "fichier_verif: ".$maxigos_fichier_verif."<hr />";
 echo "fichier_chemin: ".$maxigos_fichier_chemin."<hr />";
-echo "id_doc: ".$maxigos_id_doc."<hr />";
+echo "maxigos_id: ".$maxigos_id."<hr />";
 echo "Contenu: ".$maxigos_contenu."<hr />";
+echo "maxigos_indices: ".$maxigos_indices."<hr />";
+echo "maxigos_numeros: ".$maxigos_numeros."<hr />";
 echo "mgoscript: ".$maxigos_script."<hr />";
 echo "langue: ".$maxigos_langue."<hr />";
 echo "mgolanguescript: ".$maxigos_languescript."<hr />";
