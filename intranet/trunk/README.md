@@ -14,8 +14,8 @@ Ajouter une page listant l'ensemble des objets éditoriaux de sortis de l'intran
 
 #### Version 0.6.1
 
-* Problème lors de l'accès en local, tout était débrayé (cf ce [forum](http://contrib.spip.net/Intranet-Extranet-4388?var_mode=calcul#forum487356) et [celui-ci](http://contrib.spip.net/Intranet-Extranet-4388?var_mode=calcul#forum487794))
-* Accepter `::1`, `localhost` et `127.0.0.1` dans les ips comme hôte local (cf [ce forum]()).
+* Problème lors de l'accès en local, tout était débrayé (cf ce [forum](http://contrib.spip.net/Intranet-Extranet-4388#forum487356) et [celui-ci](http://contrib.spip.net/Intranet-Extranet-4388#forum487794))
+* Accepter `::1`, `localhost` et `127.0.0.1` dans les ips comme hôte local (cf [ce forum](https://contrib.spip.net/Intranet-Extranet-4388#forum477511)).
 
 #### Version 0.6.0
 
