@@ -343,9 +343,13 @@ function encodage($source, $options) {
 			$height = $source['hauteur'];
 		}
 		
-		$entree_video = '--entree_video "'.$document['videocodec'].'"';
-		$entree_audio = '--entree_audio "'.$document['audiocodec'].'"';
-		
+		if (strlen($document['videocodec']) > 0) {
+			$entree_video = '--entree_video "'.$document['videocodec'].'"';
+		}
+		if (strlen($document['audiocodec']) > 0) {
+			$entree_audio = '--entree_audio "'.$document['audiocodec'].'"';
+		}
+
 		$width_finale = lire_config("spipmotion/width_$extension_attente", 480);
 
 		/**
