@@ -42,4 +42,8 @@ Ajouter une page listant l'ensemble des objets éditoriaux de sortis de l'intran
 
 #### Version 0.4.1
 
+* Autoriser une IP ou une plage d'IP
+
+#### Version 0.4.0
+
 Version d'origine
