@@ -92,9 +92,9 @@ while test -n "${1}"; do
 		--bitrate) 
 			bitrate_ffmpeg="-vb ${2}.k"
 		shift;;
-		--entree_video) entree_video=="-vcodec ${2}"
+		--entree_video) entree_video="-vcodec ${2}"
 		shift;;
-		--entree_audio) entree_audio=="-acodec ${2}"
+		--entree_audio) entree_audio="-acodec ${2}"
 		shift;;
 		--acodec) acodec="-acodec ${2}"
 		shift;;
