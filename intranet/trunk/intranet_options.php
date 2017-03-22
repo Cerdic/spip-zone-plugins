@@ -31,7 +31,7 @@ function autoriser_intranet_dist() {
 			$ip = $_SERVER['REMOTE_ADDR'];
 
 			$long_ip = ip2long($ip);
-			$ranges = explode(',', lire_config('intranet/plageip', ' '));
+			$ranges = explode(',', lire_config('intranet/plageip'));
 			if (count($ranges) > 0) {
 				foreach ($ranges as $range) {
 					//Range d'ip contenant - comme séparateur
@@ -52,6 +52,18 @@ function autoriser_intranet_dist() {
 						// Ips locales
 						$autoriser = true;
 						break;
+					}
+				}
+			}
+			if (!$autoriser and $config_hosts = lire_config('intranet/hosts') and strlen(trim($config_hosts)) > 0) {
+				$hosts = explode(',', $config_hosts);
+				if (count($hosts) > 0) {
+					$hote = gethostbyaddr($ip);
+					foreach ($hosts as $host) {
+						if ($host != '' && preg_match('/'.preg_quote($host, '/Uims').'/', $hote)) {
+							$autoriser = true;
+							break;
+						}
 					}
 				}
 			}

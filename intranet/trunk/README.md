@@ -10,6 +10,12 @@ Ajouter une page listant l'ensemble des objets éditoriaux de sortis de l'intran
 
 ## Changelog
 
+### Versions 0.7.x
+
+#### Version 0.7.0
+
+* Ajouter un filtre d'autorisation par noms d'hôtes, pour autoriser des outils de monitoring par exemple
+
 ### Versions 0.6.x
 
 #### Version 0.6.1
