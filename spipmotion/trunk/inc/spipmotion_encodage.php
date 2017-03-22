@@ -346,11 +346,11 @@ function encodage($source, $options) {
 		/**
 		 * Todo : stocker les décodeurs ffmpeg en base et les tester ici
 		 */
-		if (strlen(trim($source['videocodec'])) > 0 and in_array(trim($source['videocodec']), array('h263', 'h264', 'mjpeg'))) {
-			$entree_video = '--entree_video "'.trim($source['videocodec']).'"';
+		if (strlen(trim($source['videocodec'])) > 0 and in_array(trim(strtolower($source['videocodec'])), array('h263', 'h264', 'mjpeg'))) {
+			$entree_video = '--entree_video "'.trim(strtolower($source['videocodec'])).'"';
 		}
-		if (strlen(trim($source['audiocodec'])) > 0 and in_array($source['audiocodec'], array('mp1', 'mp2', 'mp3', 'opus'))) {
-			$entree_audio = '--entree_audio "'.trim($source['audiocodec']).'"';
+		if (strlen(trim($source['audiocodec'])) > 0 and in_array(trim(strtolower($source['audiocodec'])), array('mp1', 'mp2', 'mp3', 'opus'))) {
+			$entree_audio = '--entree_audio "'.trim(strtolower($source['audiocodec'])).'"';
 		}
 		
 		$width_finale = lire_config("spipmotion/width_$extension_attente", 480);
