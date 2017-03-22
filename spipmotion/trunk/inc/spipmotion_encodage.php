@@ -343,8 +343,8 @@ function encodage($source, $options) {
 			$height = $source['hauteur'];
 		}
 		
-		$entree_video = '--entree_video '.$document['videocodec'];
-		$entree_video = '--entree_video '.$document['audiocodec'];
+		$entree_video = '--entree_video "'.$document['videocodec'].'"';
+		$entree_audio = '--entree_audio "'.$document['audiocodec'].'"';
 		
 		$width_finale = lire_config("spipmotion/width_$extension_attente", 480);
 
@@ -500,7 +500,7 @@ function encodage($source, $options) {
 			$lancement_encodage_1 = exec($encodage_1, $retour_1, $retour_int_1);
 			if ($retour_int != 0) {
 				spip_log('Plantage, on essaie avec audio et video en entree', 'spipmotion.'._LOG_ERREUR);
-				$encodage_1 .= "$entree_video $entree_audio";
+				$encodage_1 .= " $entree_video $entree_audio";
 				spip_log($encodage_1, 'spipmotion.'._LOG_ERREUR);
 				$lancement_encodage_1 = exec($encodage_1, $retour_1, $retour_int_1);
 			}
@@ -518,7 +518,7 @@ function encodage($source, $options) {
 				$lancement_encodage = exec($encodage, $retour, $retour_int);
 				if ($retour_int != 0) {
 					spip_log('Plantage, on essaie avec audio et video en entree', 'spipmotion.'._LOG_ERREUR);
-					$encodage .= "$entree_video $entree_audio";
+					$encodage .= " $entree_video $entree_audio";
 					spip_log($encodage, 'spipmotion.'._LOG_ERREUR);
 					$lancement_encodage = exec($encodage, $retour, $retour_int);
 				}
@@ -547,7 +547,7 @@ function encodage($source, $options) {
 			$lancement_encodage = exec($encodage, $retour, $retour_int);
 			if ($retour_int >= 126) {
 				spip_log('Plantage, on essaie avec audio et video en entree', 'spipmotion.'._LOG_ERREUR);
-				$encodage .= "$entree_video $entree_audio";
+				$encodage .= " $entree_video $entree_audio";
 				spip_log($encodage, 'spipmotion.'._LOG_ERREUR);
 				$lancement_encodage = exec($encodage, $retour, $retour_int);
 			}
