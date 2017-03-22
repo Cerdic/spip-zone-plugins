@@ -92,6 +92,10 @@ while test -n "${1}"; do
 		--bitrate) 
 			bitrate_ffmpeg="-vb ${2}.k"
 		shift;;
+		--entree_video) entree_video=="-vcodec ${2}"
+		shift;;
+		--entree_audio) entree_audio=="-acodec ${2}"
+		shift;;
 		--acodec) acodec="-acodec ${2}"
 		shift;;
 		--vcodec) vcodec="-vcodec ${2}"
@@ -205,15 +209,15 @@ spipmotion_encodage_ffmpeg (){
 	
 	On encode un son
 	"
-		echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality_ffmpeg $audiofreq_ffmpeg $ac_ffmpeg -y $sortie 2>> $log >> $log" >> $log
-		nice -19 "$chemin" -i $entree $acodec $audiobitrate_quality_ffmpeg $audiofreq_ffmpeg $ac_ffmpeg -y $sortie 2>> $log >> $log ;;
+		echo "nice -19 $chemin $entree_audio -i $entree $acodec $audiobitrate_quality_ffmpeg $audiofreq_ffmpeg $ac_ffmpeg -y $sortie 2>> $log >> $log" >> $log
+		nice -19 "$chemin" $entree_audio  -i $entree $acodec $audiobitrate_quality_ffmpeg $audiofreq_ffmpeg $ac_ffmpeg -y $sortie 2>> $log >> $log ;;
 		*".flv"|*".mp4"|*".ogv"|*".mov"|*".m4v"|*".webm" )
 		echo "SPIPmotion v$VERSION
 	
 	On encode une video
 	"
-		echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality_ffmpeg $ac_ffmpeg $audiofreq_ffmpeg $pass $fps_ffmpeg -s $size $vcodec $bitrate_ffmpeg $params_sup $fpre -y $sortie 2>> $log >> $log" >> $log
-		nice -19 $chemin -i $entree $acodec $audiobitrate_quality_ffmpeg $ac_ffmpeg $audiofreq_ffmpeg $pass $fps_ffmpeg -s $size $vcodec $bitrate_ffmpeg $params_sup $fpre -y $sortie  2>> $log >> $log
+		echo "nice -19 $chemin $entree_video $entree_audio -i $entree $acodec $audiobitrate_quality_ffmpeg $ac_ffmpeg $audiofreq_ffmpeg $pass $fps_ffmpeg -s $size $vcodec $bitrate_ffmpeg $params_sup $fpre -y $sortie 2>> $log >> $log" >> $log
+		nice -19 $chemin $entree_video $entree_audio -i $entree $acodec $audiobitrate_quality_ffmpeg $ac_ffmpeg $audiofreq_ffmpeg $pass $fps_ffmpeg -s $size $vcodec $bitrate_ffmpeg $params_sup $fpre -y $sortie  2>> $log >> $log
 	esac
 	exit $?
 }

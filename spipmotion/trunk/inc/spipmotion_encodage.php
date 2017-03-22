@@ -342,6 +342,10 @@ function encodage($source, $options) {
 			$width = $source['largeur'];
 			$height = $source['hauteur'];
 		}
+		
+		$entree_video = '--entree_video '.$document['videocodec'];
+		$entree_video = '--entree_video '.$document['audiocodec'];
+		
 		$width_finale = lire_config("spipmotion/width_$extension_attente", 480);
 
 		/**
@@ -494,6 +498,12 @@ function encodage($source, $options) {
 			$encodage_1 = $spipmotion_sh." --force true --pass 1 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $vcodec $fps $bitrate $infos_sup_normal_1 --s $fichier_temp --log $fichier_log";
 			spip_log($encodage_1, 'spipmotion');
 			$lancement_encodage_1 = exec($encodage_1, $retour_1, $retour_int_1);
+			if ($retour_int != 0) {
+				spip_log('Plantage, on essaie avec audio et video en entree', 'spipmotion.'._LOG_ERREUR);
+				$encodage_1 .= "$entree_video $entree_audio";
+				spip_log($encodage_1, 'spipmotion.'._LOG_ERREUR);
+				$lancement_encodage_1 = exec($encodage_1, $retour_1, $retour_int_1);
+			}
 			/**
 			 * La première passe est ok
 			 * On lance la seconde
@@ -504,8 +514,14 @@ function encodage($source, $options) {
 
 				$infos_sup_normal_2 = "--params_supp \"-passlogfile $pass_log_file $ss_audio $preset_2 $infos_sup_normal $metadatas\"";
 				$encodage = $spipmotion_sh." --force true --pass 2 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $acodec $vcodec $fps $bitrate $infos_sup_normal_2  --fpre $fichier_texte --s $fichier_temp --log $fichier_log";
-				spip_log($encodage, 'spipmotion');
+				spip_log($encodage, 'spipmotion.'._LOG_ERREUR);
 				$lancement_encodage = exec($encodage, $retour, $retour_int);
+				if ($retour_int != 0) {
+					spip_log('Plantage, on essaie avec audio et video en entree', 'spipmotion.'._LOG_ERREUR);
+					$encodage .= "$entree_video $entree_audio";
+					spip_log($encodage, 'spipmotion.'._LOG_ERREUR);
+					$lancement_encodage = exec($encodage, $retour, $retour_int);
+				}
 			} else {
 				spip_log('SPIPMOTION Erreur : Le retour de l encodage est revenu en erreur', 'spipmotion'._LOG_CRITICAL);
 				$retour_int = 1;
@@ -527,8 +543,14 @@ function encodage($source, $options) {
 				$infos_sup_normal = "--params_supp \"$infos_sup_normal\"";
 			}
 			$encodage = $spipmotion_sh." --force true $audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate_ffmpeg $audiochannels_ffmpeg $bitrate $infos_sup_normal --s $fichier_temp --fpre $fichier_texte --log $fichier_log";
-			spip_log($encodage, 'spipmotion');
+			spip_log($encodage, 'spipmotion.'._LOG_ERREUR);
 			$lancement_encodage = exec($encodage, $retour, $retour_int);
+			if ($retour_int >= 126) {
+				spip_log('Plantage, on essaie avec audio et video en entree', 'spipmotion.'._LOG_ERREUR);
+				$encodage .= "$entree_video $entree_audio";
+				spip_log($encodage, 'spipmotion.'._LOG_ERREUR);
+				$lancement_encodage = exec($encodage, $retour, $retour_int);
+			}
 		}
 
 		if ($retour_int == 0) {
