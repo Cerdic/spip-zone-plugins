@@ -552,7 +552,7 @@ function encodage($source, $options) {
 			$encodage = $spipmotion_sh." --force true $audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate_ffmpeg $audiochannels_ffmpeg $bitrate $infos_sup_normal --s $fichier_temp --fpre $fichier_texte --log $fichier_log";
 			spip_log($encodage, 'spipmotion.'._LOG_ERREUR);
 			$lancement_encodage = exec($encodage, $retour, $retour_int);
-			if ($retour_int >= 126) {
+			if ($retour_int != 0) {
 				spip_log('Plantage, on essaie avec audio et video en entree', 'spipmotion.'._LOG_ERREUR);
 				$encodage .= " $entree_video $entree_audio";
 				spip_log($encodage, 'spipmotion.'._LOG_ERREUR);
