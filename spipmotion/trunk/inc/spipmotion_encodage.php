@@ -343,13 +343,16 @@ function encodage($source, $options) {
 			$height = $source['hauteur'];
 		}
 		
-		if (strlen($document['videocodec']) > 0) {
-			$entree_video = '--entree_video "'.$document['videocodec'].'"';
+		/**
+		 * Todo : stocker les décodeurs ffmpeg en base et les tester ici
+		 */
+		if (strlen(trim($source['videocodec'])) > 0 and in_array(trim($source['videocodec']), array('h263', 'h264', 'mjpeg'))) {
+			$entree_video = '--entree_video "'.trim($source['videocodec']).'"';
 		}
-		if (strlen($document['audiocodec']) > 0) {
-			$entree_audio = '--entree_audio "'.$document['audiocodec'].'"';
+		if (strlen(trim($source['audiocodec'])) > 0 and in_array($source['audiocodec'], array('mp1', 'mp2', 'mp3', 'opus'))) {
+			$entree_audio = '--entree_audio "'.trim($source['audiocodec']).'"';
 		}
-
+		
 		$width_finale = lire_config("spipmotion/width_$extension_attente", 480);
 
 		/**
@@ -502,8 +505,8 @@ function encodage($source, $options) {
 			$encodage_1 = $spipmotion_sh." --force true --pass 1 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $vcodec $fps $bitrate $infos_sup_normal_1 --s $fichier_temp --log $fichier_log";
 			spip_log($encodage_1, 'spipmotion');
 			$lancement_encodage_1 = exec($encodage_1, $retour_1, $retour_int_1);
-			if ($retour_int != 0) {
-				spip_log('Plantage, on essaie avec audio et video en entree', 'spipmotion.'._LOG_ERREUR);
+			if ($retour_int_1 != 0) {
+				spip_log('Plantage, on essaie avec audio et video en entree (1ere passe)', 'spipmotion.'._LOG_ERREUR);
 				$encodage_1 .= " $entree_video $entree_audio";
 				spip_log($encodage_1, 'spipmotion.'._LOG_ERREUR);
 				$lancement_encodage_1 = exec($encodage_1, $retour_1, $retour_int_1);
