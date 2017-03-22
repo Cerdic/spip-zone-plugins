@@ -44,14 +44,14 @@ function autoriser_intranet_dist() {
 							break; // on a trouvé une ip bonne on ne continue pas plus loin
 						}
 					} else if ($long_ip != '' && $long_ip == ip2long($range)) {
-							// Ip individuelle, mais il faut que l'on en ai une
-							$autoriser = true;
-							break;
+						// Ip individuelle, mais il faut que l'on en ai une
+						$autoriser = true;
+						break;
 					} else if (in_array($range, array('::1', 'localhost', '127.0.0.1'))
 						and (in_array($ip, array('::1', 'localhost', '127.0.0.1')))) {
-							// Ips locales
-							$autoriser = true;
-							break;
+						// Ips locales
+						$autoriser = true;
+						break;
 					}
 				}
 			}
