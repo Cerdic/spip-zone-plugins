@@ -3,8 +3,10 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'abscisse'          => "Abscissa",
-	'arret_calcul'      => "Calculation stopped: Critical elevation reached at abscissa",
 	'acier_lamine'      => "Rolled steel - Smooth concrete",
+	'amont'				=> "upstream",
+	'arret_calcul'      => "Calculation stopped: Critical elevation reached at abscissa",
+	'aval'				=> "downstream",
 	// B
 	'berge'             => "Embankment",
 	// C
@@ -133,7 +135,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//R
 	'rayon_hyd'         => "Hydraulic radius",
 	'reduire_pas'       => "The discretisation step should be reduced",
-	'ressaut_hydrau'	=> "Hydraulic jump detected at the abscissa",
+	'ressaut_dehors'	=> "Hydraulic jump detected @Sens@ abscissa @X@ m",
+	'ressaut_hydrau'	=> "Hydraulic jump detected between abscissa @Xmin@ and @Xmax@ m",
 	'rugosite_nc'       => "Roughness (Strickler m<sup>1/3</sup>s<sup>-1</sup>)",
 	'runge_kutta'       => "Runge–Kutta fourth-order",
 	//S

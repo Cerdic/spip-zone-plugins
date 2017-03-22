@@ -23,6 +23,8 @@
  */
 class cCourbeRemous {
 
+	const DBG = false; /// Pour loguer les messages de debug de cette classe
+
 	public $oP; /// Paramètres de la section
 	public $oSect; /// Section du bief
 	private $oLog; /// Journal de calcul
@@ -87,8 +89,9 @@ class cCourbeRemous {
 		$rk3 = $this->Calc_dYdX($Y + $rDx / 2 * $rk2);
 		if($this->rDx > 0 xor !($Y + $rDx / 2 * $rk3 < $this->oSect->rHautCritique)) {return false;}
 		$rk4 = $this->Calc_dYdX($Y + $rDx * $rk3);
-		if($this->rDx > 0 xor !($Y + $rDx / 6 * ($rk1 + 2 * ($rk2 + $rk3) + $rk4) < $this->oSect->rHautCritique)) {return false;}
-		return $Y + $rDx / 6 * ($rk1 + 2 * ($rk2 + $rk3) + $rk4);
+		$Yout = $Y + $rDx / 6 * ($rk1 + 2 * ($rk2 + $rk3) + $rk4);
+		if($this->rDx > 0 xor !($Yout < $this->oSect->rHautCritique)) {return false;}
+		return $Yout;
 	}
 
 
@@ -114,7 +117,11 @@ class cCourbeRemous {
 		// H est la charge totale. On se place dans le référentiel ou Zf de la section à calculer = 0
 		$Trapez_Fn = $Trapez_Fn - $this->rDx * $this->oP->rIf;
 		list($Y2, $flag) = $oDicho->calculer($Trapez_Fn, $this->oP->rPrec, $this->oSect->rHautCritique);
-		if($flag < 0) $Y2 = false;
+		if($flag < 0) {
+			return false;
+		} elseif($this->rDx > 0 xor !($Y2 < $this->oSect->rHautCritique)) {
+			return false;
+		}
 		return $Y2;
 	}
 
@@ -140,7 +147,6 @@ class cCourbeRemous {
 	 * @param $sResolution Méthode numérique Euler, RK4 ou Trapez
 	 */
 	function calcul($rYCL, $rLong, $sResolution) {
-		$trX = array();
 		$trY = array();
 
 		if($this->rDx > 0) {
@@ -154,9 +160,9 @@ class cCourbeRemous {
 			$xFin = $rLong;
 		}
 		$dx = - $this->rDx;
+		spip_log($this,'hydraulic',_LOG_DEBUG);
 
-		$trX[] = (real)round($xDeb,$this->oP->iPrec);
-		$trY[] = (real)$rYCL;
+		$trY[sprintf('%1.'.round($this->oP->iPrec).'f',$xDeb)] = (real)$rYCL;
 
 		// Boucle de calcul de la courbe de remous
 		for($x = $xDeb + $dx; ($dx > 0 && $x <= $xFin) || ($dx < 0 && $x >= $xFin); $x += $dx) {
@@ -165,14 +171,13 @@ class cCourbeRemous {
 				if(end($trY) > $this->oSect->rHautNormale xor $rY > $this->oSect->rHautNormale) {
 					$this->oLog->Add(_T('hydraulic:pente_forte').' '.$x. ' m ('._T('hydraulic:reduire_pas').')',true);
 				}
-				$trX[] = round($x,$this->oP->iPrec);
-				$trY[] = $rY;
+				$trY[sprintf('%1.'.round($this->oP->iPrec).'f',$x)] = $rY;
 			} else {
 				$this->oLog->Add(_T('hydraulic:arret_calcul').' '.$x. ' m');
 				break;
 			}
 		}
-		return array($trX,$trY);
+		return $trY;
 	}
 }
 ?>

@@ -187,10 +187,10 @@ function formulaires_courbe_remous_traiter_dist() {
 	/***************************************************************************
 	*                        Calcul de la ligne d'eau
 	****************************************************************************/
-	$bNoCache = true; // true pour débugage
+	$bNoCache = true; // false pour activer le cache !!!! BUG : Il manque la méthode résolution comme clé de différenciation de $CacheFileName !!!!
 	if(!$bNoCache && is_file(HYD_CACHE_DIRECTORY.$CacheFileName)) {
 		// On récupère toutes les données dans un cache déjà créé
-		list($tr,$sLog,$oSection->rHautCritique,$oSection->rHautNormale) = ReadCacheFile($CacheFileName);
+		list($aC,$sLog,$oSection->rHautCritique,$oSection->rHautNormale) = ReadCacheFile($CacheFileName);
 	}
 	else {
 		// On calcule les données pour créer un cache et afficher le résultat
@@ -198,11 +198,14 @@ function formulaires_courbe_remous_traiter_dist() {
 		$oLog->Add(_T('hydraulic:h_critique').' = '.format_nombre($oSection->CalcGeo('Yc'),$oParam->iPrec).' m');
 		$oLog->Add(_T('hydraulic:h_normale').' = '.format_nombre($oSection->CalcGeo('Yn'),$oParam->iPrec).' m');
 
+		// Calcul des courbes de remous
+		$aC = array(); // deux items (Flu et Tor) composé d'un vecteur avec key=X et value=Y
+
 		// Calcul depuis l'aval
 		if($oSection->rHautCritique <= $Cond_lim_rYaval) {
 			$oLog->Add(_T('hydraulic:calcul_fluvial'));
 			$oCRF = new cCourbeRemous($oLog, $oParam, $oSection, $Param_calc_rDx);
-			list($tr['X1'],$tr['Y1']) = $oCRF->calcul($Cond_lim_rYaval, $c_bief_rLong, _request('choix_resolution'));
+			$aC['Flu'] = $oCRF->calcul($Cond_lim_rYaval, $c_bief_rLong, _request('choix_resolution'));
 		}
 		else {
 			$oLog->Add(_T('hydraulic:pas_calcul_depuis_aval'));
@@ -212,38 +215,85 @@ function formulaires_courbe_remous_traiter_dist() {
 		if($oSection->rHautCritique >= $Cond_lim_rYamont) {
 			$oLog->Add(_T('hydraulic:calcul_torrentiel'));
 			$oCRT = new cCourbeRemous($oLog, $oParam, $oSection, -$Param_calc_rDx);
-			list($tr['X2'],$tr['Y2']) = $oCRT->calcul($Cond_lim_rYamont, $c_bief_rLong, _request('choix_resolution'));
+			$aC['Tor'] = $oCRT->calcul($Cond_lim_rYamont, $c_bief_rLong, _request('choix_resolution'));
 		}
 		else {
 			$oLog->Add(_T('hydraulic:pas_calcul_depuis_amont'));
 		}
+		spip_log($oParam,'hydraulic',_LOG_DEBUG);
+		spip_log($aC,'hydraulic',_LOG_DEBUG);
 
 		// Détection du ressaut hydraulique
-		$aC = array();
-		$aC['Flu'] = array_combine($tr['X1'],$tr['Y1']);
-		$aC['Tor'] = array_combine($tr['X2'],$tr['Y2']);
-		if(count($aC['Flu']) > count($aC['Tor'])) {
-			// La courbe fluviale va jusqu'au bout
-			$sCC = 'Flu';
-			$sCN = 'Tor';
-			$iSens = -1;
-		} else {
-			// La courbe torrentielle va jusqu'au bout
-			$sCC = 'Tor';
-			$sCN = 'Flu';
-			$iSens = 1;
+		$bDetectRessaut = true;
+		if($bDetectRessaut && isset($aC['Flu']) && isset($aC['Tor'])) {
+			if(count($aC['Flu']) > count($aC['Tor']) || (count($aC['Flu']) == count($aC['Tor']) && $oSection->Calc('Imp', end($aC['Flu'])) > $oSection->Calc('Imp', end($aC['Tor'])))) {
+				// La courbe fluviale va jusqu'au bout
+				$sCC = 'Flu';
+				$sCN = 'Tor';
+				$iSens = 1; // On cherche l'aval du ressaut
+				$sSens = _T('hydraulic:amont');
+			} else {
+				// La courbe torrentielle va jusqu'au bout
+				$sCC = 'Tor';
+				$sCN = 'Flu';
+				$iSens = -1; // On cherche l'amont du ressaut
+				$sSens = _T('hydraulic:aval');
+			}
+			$trX = array_reverse(array_keys($aC[$sCN])); // Parcours des sections de la ligne d'eau la plus courte
+			$bRessaut = false;
+			foreach($trX as $rX) {
+				// Calcul de l'abscisse de la section dans l'autre régime
+				$Yco = $oSection->Calc('Yco', $aC[$sCN][$rX]); // Y conjugué
+				$rLongRst = 5 * abs($aC[$sCN][$rX] - $Yco); // Longueur du ressaut
+				$xRst = $rX + round($iSens * $rLongRst / $Param_calc_rDx) * $Param_calc_rDx; // Abscisse où comparer Yconj et Y
+				$xRst = sprintf('%1.'.round($oParam->iPrec).'f',$xRst);
+				//spip_log("\nrX=$rX xRst=$xRst Yco=$Yco",'hydraulic',_LOG_DEBUG);
+				if(isset($aC[$sCC][$xRst])) {
+					// Hauteur décalée de la longueur du ressaut (il faut gérer la pente du fond)
+					$Ydec = $aC[$sCC][$xRst] + $rLongRst * $oParam->rIf * $iSens;
+					spip_log("\nrX=$rX xRst=$xRst Yco=$Yco Ydec=$Ydec",'hydraulic',_LOG_DEBUG);
+					if($iSens * ($Yco - $Ydec) > 0) {
+						$oLog->Add(_T('hydraulic:ressaut_hydrau', array('Xmin'=>min($rX,$xRst), 'Xmax'=>max($rX,$xRst))));
+						spip_log("rX=$rX xRst=$xRst",'hydraulic',_LOG_DEBUG);
+						// Modification de la ligne d'eau CC
+						foreach(array_keys($aC[$sCN]) as $rXCC) {
+							if($iSens * ($rXCC - $rX) < 0) {
+								unset($aC[$sCC][$rXCC]);
+							} elseif($rXCC == $rX) {
+								$aC[$sCC][$rXCC] = $aC[$sCN][$rXCC];
+								break;
+							}
+						}
+						// Modification de la ligne d'eau CN
+						foreach($trX as $rXCN) {
+							if($iSens * ($rXCN - $xRst) > 0) {
+								unset($aC[$sCN][$rXCN]);
+							} elseif($rXCN == $xRst) {
+								$aC[$sCN][$rXCN] = $aC[$sCC][$rXCN];
+								break;
+							}
+						}
+						$bRessaut = true;
+						break;
+					}
+				}
+			}
+			if(!$bRessaut) {
+				// Le ressaut est en dehors du canal
+				$oLog->Add(_T('hydraulic:ressaut_dehors', array('Sens' => $sSens, 'X' => end($trX))));
+				$aC[$sCN] = array();
+			}
 		}
-		spip_log($aC,'hydraulic',_LOG_DEBUG);
 
 		//Production du journal de calcul
 		$sLog = $oLog->Result();
 		//Enregistrement des données dans fichier cache
-		WriteCacheFile($CacheFileName,array($tr,$sLog,$oSection->rHautCritique,$oSection->rHautNormale));
+		WriteCacheFile($CacheFileName,array($aC,$sLog,$oSection->rHautCritique,$oSection->rHautNormale));
 	}
 	//Construction d'un tableau des indices x combinant les abscisses des 2 lignes d'eau
 	$trX = array();
-	if(isset($tr['X1'])) $trX = array_merge($trX, $tr['X1']);
-	if(isset($tr['X2'])) $trX = array_merge($trX, $tr['X2']);
+	if(isset($aC['Flu'])) $trX = array_merge($trX, array_keys($aC['Flu']));
+	if(isset($aC['Tor'])) $trX = array_merge($trX, array_keys($aC['Tor']));
 	$trX = array_unique($trX, SORT_NUMERIC);
 	sort($trX, SORT_NUMERIC);
 	//~ spip_log($tr,'hydraulic'); // Debug
@@ -270,21 +320,21 @@ function formulaires_courbe_remous_traiter_dist() {
 		'lineWidth:1, fill:true'
 	);
 	// Ligne d'eau fluviale
-	if(isset($tr['Y1'])) {
+	if(isset($aC['Flu'])) {
 		$oGraph->AddSerie(
 			'ligne_eau_fluviale',
-			$tr['X1'],
-			$tr['Y1'],
+			array_keys($aC['Flu']),
+			array_values($aC['Flu']),
 			'#0093bd',
 			'lineWidth:3, showMarker:true, markerOptions:{style:\'filledCircle\', size:8}'
 		);
 	}
 	// Ligne d'eau torrentielle
-	if(isset($tr['Y2'])) {
+	if(isset($aC['Tor'])) {
 		$oGraph->AddSerie(
 			'ligne_eau_torrentielle',
-			$tr['X2'],
-			$tr['Y2'],
+			array_keys($aC['Tor']),
+			array_values($aC['Tor']),
 			'#77a3cd',
 			'lineWidth:3, showMarker:true, markerOptions:{style:\'filledCircle\', size:8}'
 		);
@@ -343,17 +393,17 @@ function formulaires_courbe_remous_traiter_dist() {
 				$echo.='<tr class="align_right ';
 					$echo.=($i%2==0)?'row_even':'row_odd';
 					$echo.='"><td>'.format_nombre($rX,$oParam->iPrec).'</td>';
-					if(isset($tr['X1']) && !(($cle = array_search($rX,$tr['X1'])) === false)) {
+					if(isset($aC['Flu'][$rX])) {
 						// On formalise les résultats, avec le nombre de chiffres aprés la virgule adéquat
-						$echo .= '<td>'.format_nombre($tr['Y1'][$cle],$oParam->iPrec).'</td>';
-						$echo .= '<td>'.format_nombre($oSection->Calc('Fr', $tr['Y1'][$cle]),$oParam->iPrec).'</td>';
+						$echo .= '<td>'.format_nombre($aC['Flu'][$rX],$oParam->iPrec).'</td>';
+						$echo .= '<td>'.format_nombre($oSection->Calc('Fr', $aC['Flu'][$rX]),$oParam->iPrec).'</td>';
 					}
 					else {
 						$echo .= '<td></td><td></td>';
 					}
-					if(isset($tr['X2']) && !(($cle = array_search($rX,$tr['X2'])) === false)) {
-						$echo .= '<td>'.format_nombre($tr['Y2'][$cle],$oParam->iPrec).'</td>';
-						$echo .= '<td>'.format_nombre($oSection->Calc('Fr', $tr['Y2'][$cle]),$oParam->iPrec).'</td>';
+					if(isset($aC['Tor'][$rX])) {
+						$echo .= '<td>'.format_nombre($aC['Tor'][$rX],$oParam->iPrec).'</td>';
+						$echo .= '<td>'.format_nombre($oSection->Calc('Fr', $aC['Tor'][$rX]),$oParam->iPrec).'</td>';
 					}
 					else {
 						$echo .= '<td></td><td></td>';

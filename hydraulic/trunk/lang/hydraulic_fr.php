@@ -3,8 +3,10 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'abscisse'          => "Abscisse",
-	'arret_calcul'      => "Arrêt du calcul : Hauteur critique atteinte à l'abscisse",
 	'acier_lamine'      => "Acier laminé - Béton lisse",
+	'amont'				=> "amont",
+	'arret_calcul'      => "Arrêt du calcul : Hauteur critique atteinte à l'abscisse",
+	'aval'				=> "aval",
 	// B
 	'berge'             => "Berge",
 	// C
@@ -133,7 +135,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//R
 	'rayon_hyd'         => "Le rayon hydraulique (m)",
 	'reduire_pas'       => "Il faudrait réduire le pas de discrétisation",
-	'ressaut_hydrau'	=> "Ressaut hydraulique détecté à l'abscisse",
+	'ressaut_dehors'	=> "Ressaut hydraulique détecté à l'@Sens@ de l'abscisse @X@ m",
+	'ressaut_hydrau'	=> "Ressaut hydraulique détecté entre les abscisses @Xmin@ et @Xmax@ m",
 	'rugosite_nc'       => "Rugosité (Strickler en m<sup>1/3</sup>s<sup>-1</sup>)",
 	'runge_kutta'       => "Runge Kutta d'ordre 4",
 	//S
