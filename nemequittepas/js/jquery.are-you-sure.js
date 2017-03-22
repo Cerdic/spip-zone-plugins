@@ -10,25 +10,7 @@
  * Version: 1.9.0
  * Date:    13th August 2014
  */
-
-
 (function($) {
-    
-    
-        $(function() {
-
-    // Enable on all forms
-    $('div.formulaire_spip').areYouSure();
-
-    // Enable on selected forms
-    $('form.dirty-check').areYouSure();
-
-    // With a custom message
-    $('div.formulaire_spip').areYouSure( {'message':'Your profile details are not saved!'} );
-
-});
-    
-    
   
   $.fn.areYouSure = function(options) {
       

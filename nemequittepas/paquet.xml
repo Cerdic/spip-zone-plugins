@@ -1,7 +1,7 @@
 <paquet
 	prefix="nemequittepas"
 	categorie="edition"
-	version="1.0.3"
+	version="1.0.4"
 	etat="test"
 	compatibilite="[2.1.0;3.1.*]"
 	logo="images/nemequitepas-48.png"
