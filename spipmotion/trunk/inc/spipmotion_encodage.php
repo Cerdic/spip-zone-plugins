@@ -594,7 +594,7 @@ function encodage($source, $options) {
 			set_request($champs, $val);
 		}
 
-		$x = $ajouter_documents('new',$doc, 'document', $source['id_document'], $mode);
+		$x = $ajouter_documents('new', $doc, 'document', $source['id_document'], $mode);
 		$x = reset($x);
 		if (intval($x) > 1) {
 			supprimer_fichier($fichier_temp);
