@@ -130,7 +130,7 @@ function inc_spipmotion_mediainfo_dist($chemin) {
 
 							list($extension,$arg) = fixer_extension_document($dest);
 							$cover_ajout = array(array('tmp_name'=>$dest,'name'=> basename($dest)));
-							$ajoute = $ajouter_documents('new',$cover_ajout,'',0,'vignette');
+							$ajoute = $ajouter_documents('new', $cover_ajout, '', 0, 'vignette');
 
 							if (is_numeric($id_vignette = reset($ajoute))) {
 								$infos['id_vignette'] = $id_vignette;
