@@ -27,7 +27,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function genie_spipmotion_taches_generales($time) {
 	$verifier_binaires = charger_fonction('spipmotion_verifier_binaires', 'inc');
-	$verifier_binaires('',true);
+	$verifier_binaires('', true);
 
 	$verifier_erreurs_encodages = charger_fonction('spipmotion_erreurs_encodages', 'inc');
 	$verifier_erreurs_encodages();
