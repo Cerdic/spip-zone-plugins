@@ -148,7 +148,7 @@ function spipmotion_install_recuperer_infos() {
 	$ffmpeg_infos(true);
 
 	$ffmpeg_binaires = charger_fonction('spipmotion_verifier_binaires', 'inc');
-	$ffmpeg_binaires('',true);
+	$ffmpeg_binaires('', true);
 
 	/**
 	 * On invalide le cache
@@ -265,6 +265,6 @@ function spipmotion_conf_base() {
 			'passes_webm' => '2'
 		);
 
-		ecrire_meta('spipmotion', serialize($config));
+		ecrire_config('spipmotion', $config);
 	}
 }
