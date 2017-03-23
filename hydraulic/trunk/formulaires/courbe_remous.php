@@ -252,7 +252,7 @@ function formulaires_courbe_remous_traiter_dist() {
 					// Hauteur décalée de la longueur du ressaut (il faut gérer la pente du fond)
 					$Ydec = $aC[$sCC][$xRst] + $rLongRst * $oParam->rIf * $iSens;
 					spip_log("\nrX=$rX xRst=$xRst Yco=$Yco Ydec=$Ydec",'hydraulic',_LOG_DEBUG);
-					if($iSens * ($Yco - $Ydec) > 0) {
+					if(($Yco - $Ydec) > 0) {
 						$oLog->Add(_T('hydraulic:ressaut_hydrau', array('Xmin'=>min($rX,$xRst), 'Xmax'=>max($rX,$xRst))));
 						spip_log("rX=$rX xRst=$xRst",'hydraulic',_LOG_DEBUG);
 						// Modification de la ligne d'eau CC
