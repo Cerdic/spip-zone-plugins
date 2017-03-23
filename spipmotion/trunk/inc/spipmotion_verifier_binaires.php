@@ -45,12 +45,12 @@ function inc_spipmotion_verifier_binaires_dist($valeurs = '', $notif = false) {
 	 */
 	$safe_mode = @ini_get('safe_mode');
 	if ($safe_mode == 1) {
-		ecrire_meta('spipmotion_safe_mode', 'oui', '', 'spipmotion_metas');
+		ecrire_config('/spipmotion_metas/spipmotion_safe_mode', 'oui');
 		$safe_mode_path = @ini_get('safe_mode_exec_dir');
-		ecrire_meta('spipmotion_safe_mode_exec_dir', $safe_mode_path, '', 'spipmotion_metas');
+		ecrire_config('/spipmotion_metas/spipmotion_safe_mode_exec_dir', $safe_mode_path);
 	} else {
-		effacer_meta('spipmotion_safe_mode', 'spipmotion_metas');
-		effacer_meta('spipmotion_safe_mode_exec_dir', 'spipmotion_metas');
+		effacer_config('/spipmotion_metas/spipmotion_safe_mode');
+		effacer_config('/spipmotion_metas/spipmotion_safe_mode_exec_dir');
 	}
 
 	if (!$valeurs) {
