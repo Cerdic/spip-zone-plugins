@@ -280,7 +280,9 @@ function retour_image_responsive($img, $taille, $dpr, $xsendfile, $retour="http"
 		
 				header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($dest)).' GMT', true, 200);
 				readfile($dest);
-				ob_end_flush();
+				if (ob_get_level()) {
+					ob_end_flush();
+				}
 			}
 		} else {
 			return $dest;
