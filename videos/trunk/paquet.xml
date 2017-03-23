@@ -1,7 +1,7 @@
 <paquet
 	prefix="videos"
 	categorie="multimedia"
-	version="0.12.6"
+	version="0.12.7"
 	etat="dev"
 	compatibilite="[3.1.0;3.1.*]"
 	logo="theme/img/videos-32.png"
@@ -27,6 +27,7 @@
 	<pipeline nom="ieconfig_metas" inclure="videos_pipelines.php" />
 
 	<necessite nom="medias" compatibilite="[2.10.27;[" />
+	<utilise nom="figure" compatibilite="[0.2.8;[" />
 
 	<menu nom="videos" titre="videos:titre_admin" parent="menu_squelette" icone="images/videos-16.png" action="configurer_videos" />
 </paquet>
