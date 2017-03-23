@@ -112,7 +112,7 @@ function spipmotion_post_edition($flux) {
 			$renomme = rename(get_spip_doc($infos_doc['fichier']), $rep_ogv. $new_file);
 			if ($renomme) {
 				$recuperer_logo = charger_fonction('spipmotion_recuperer_logo', 'inc');
-				$id_vignette = $recuperer_logo($id_document,1, $file, $metas, true);
+				$id_vignette = $recuperer_logo($id_document, 1, $file, $metas, true);
 				sql_updateq(
 					'spip_documents',
 					array(
@@ -227,7 +227,7 @@ function spipmotion_post_spipmotion_encodage($flux) {
 				}
 				$infos_encode = array_intersect_key($infos_origine, $infos_write);
 				$ecrire_infos = charger_fonction('getid3_ecrire_infos', 'inc');
-				$ecrire_infos($flux['args']['id_document'],$infos_encode,$images);
+				$ecrire_infos($flux['args']['id_document'], $infos_encode, $images);
 			}
 		}
 	}
