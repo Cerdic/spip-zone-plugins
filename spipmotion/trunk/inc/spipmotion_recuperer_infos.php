@@ -156,7 +156,7 @@ function inc_spipmotion_recuperer_infos($id_document = false, $fichier = null, $
 
 	if ($logo) {
 		$recuperer_logo = charger_fonction('spipmotion_recuperer_logo', 'inc');
-		$id_vignette = $recuperer_logo($id_document,1,$fichier,$infos,true);
+		$id_vignette = $recuperer_logo($id_document, 1, $fichier, $infos, true);
 		if (intval($id_vignette)) {
 			$infos['id_vignette'] = $id_vignette;
 		}
