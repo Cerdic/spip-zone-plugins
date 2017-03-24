@@ -1,63 +1,63 @@
 <plugin>
-    <!-- Nom du plugin -->
-    <nom>
-	<multi>
-	[fr]SEL (Système d'échange local)
-	[en]Lets (Local Exchange Trading Systems)
-	[de]Tauschkreis
-	[es]Sistema de cambio local
-	[eo]Loka intersanga sistemo
-	[fi]Vaihtoty (talous)
-	[il]????? ??????
-	[hu]Kalákakör
-	[nl]Lokale ruileconomie
-	[no]Byttering
-	[po]Sistema de intercambio local
-	[pl]Lokalny System Wymiany i Handlu
-	[ru]???????? ??????? ???????? ??????
-	[se]Lets
-	</multi>
+	<!-- Nom du plugin -->
+	<nom>
+		<multi>
+			[fr]SEL (Système d'échange local)
+			[en]Lets (Local Exchange Trading Systems)
+			[de]Tauschkreis
+			[es]Sistema de cambio local
+			[eo]Loka intersanga sistemo
+			[fi]Vaihtoty (talous)
+			[il]????? ??????
+			[hu]Kalákakör
+			[nl]Lokale ruileconomie
+			[no]Byttering
+			[po]Sistema de intercambio local
+			[pl]Lokalny System Wymiany i Handlu
+			[ru]???????? ??????? ???????? ??????
+			[se]Lets
+		</multi>
 	</nom>
 	<categorie>edition</categorie>
-    <!-- Auteur du plugin -->
-    <auteur> [Val&eacute;rie Journet-Texier->http://valerie.journet.free.fr], [Perline->http://perline.org/] </auteur>
-    <version>0.2.0</version>
-    <version_base>0.1</version_base>
+	<!-- Auteur du plugin -->
+	<auteur> [Val&eacute;rie Journet-Texier->http://valerie.journet.free.fr], [Perline->http://perline.org/] </auteur>
+	<version>0.2.1</version>
+	<version_base>0.1</version_base>
 	<licence>GNU/GPL</licence> <!-- dans paquet.xml, reporté ici par cohérence, mais pas forcément lu -->
-    <etat>test</etat>
-    <icon>prive/themes/spip/images/sel-128.png</icon>
-    <description>
-	<multi>
-	[fr] 
-	Ce plugin est destiné à la gestion intégrale d'un ou plusieurs système d'échange local (SEL).
-	Que ce soit un SEl qui travaille sur des échanges simples, des échanges d'objets, des échanges de savoir, un SEL de stages, un SEL d 'hébergement ou tout autre systéme.
-	Que ce soit un SEL qui fonctionne avec un carnet d'échange, un système de JEU.
-	Il est destiné à tout type de SEL, de séliste et de joueur.
-	La publication en ligne des annonces, avec création, changement ou suppression est prévue.
-	La publication autonome du catalogue, à partir des annonces en ligne, est prévue.
-	La gestion en ligne des échanges avec gestion autonome par les deux échangeurs, est prévue.
-	La gestion en ligne des adhésions, leur renouvellement, leur caducité, est prévue.
-	</multi>
+	<etat>test</etat>
+	<icon>prive/themes/spip/images/sel-128.png</icon>
+	<description>
+		<multi>
+			[fr] 
+			Ce plugin est destiné à la gestion intégrale d'un ou plusieurs système d'échange local (SEL).
+			Que ce soit un SEl qui travaille sur des échanges simples, des échanges d'objets, des échanges de savoir, un SEL de stages, un SEL d 'hébergement ou tout autre systéme.
+			Que ce soit un SEL qui fonctionne avec un carnet d'échange, un système de JEU.
+			Il est destiné à tout type de SEL, de séliste et de joueur.
+			La publication en ligne des annonces, avec création, changement ou suppression est prévue.
+			La publication autonome du catalogue, à partir des annonces en ligne, est prévue.
+			La gestion en ligne des échanges avec gestion autonome par les deux échangeurs, est prévue.
+			La gestion en ligne des adhésions, leur renouvellement, leur caducité, est prévue.
+		</multi>
 	</description>
-    <!-- URL de documentation http://contrib.spip.net/ -->
-    <lien>http://contrib.spip.net/SEL-systeme-d-echange-local</lien>
+	<!-- URL de documentation http://contrib.spip.net/ -->
+	<lien>http://contrib.spip.net/SEL-systeme-d-echange-local</lien>
 
-    <!-- precise le prefixe utilisé pour toutes les fonctions du plugin, en général le nom du plugin -->
-    <prefix>sel</prefix>
+	<!-- precise le prefixe utilisé pour toutes les fonctions du plugin, en général le nom du plugin -->
+	<prefix>sel</prefix>
 
-    <fonctions>sel_fonctions.php</fonctions>
-    <options>sel_options.php</options>
+	<fonctions>sel_fonctions.php</fonctions>
+	<options>sel_options.php</options>
 
-    <!-- Chemin du fichier d'installation et de mise ?our -->
-    <install>sel_administrations.php</install>
+	<!-- Chemin du fichier d'installation et de mise ?our -->
+	<install>sel_administrations.php</install>
 
-    <!-- ensemble des pipelines :
-      http://code.spip.net/autodoc/@Les-points-d-entree-pipelines
-      https://core.spip.net/projects/spip/repository/changes/spip/ecrire/inc_version.php
-	  On peut rajouter dans la section pipeline <action>fonction</action>...
+	<!-- ensemble des pipelines :
+		http://code.spip.net/autodoc/@Les-points-d-entree-pipelines
+		https://core.spip.net/projects/spip/repository/changes/spip/ecrire/inc_version.php
+		On peut rajouter dans la section pipeline <action>fonction</action>...
 	-->	
-	
-    <pipeline>
+
+	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/tables.php</inclure>
 	</pipeline>
@@ -81,7 +81,7 @@
 		<nom>header_prive</nom>
 		<inclure>pipelines/header_prive.php</inclure>
 	</pipeline>
-	
+
 	<pipeline>
 		<nom>editer_contenu_objet</nom>
 		<inclure>pipelines/complement_editer_auteur.php"</inclure>
@@ -103,27 +103,27 @@
 		<nom>taches_generales_cron</nom>
 		<inclure>pipelines/crons.php"</inclure>
 	</pipeline>
-	
-   <!-- precise les dependances vis-vis de d'autres plugins (ou de spip), voir plus bas <necessite id="nomplugin" version="[versionminimale;versionmax]" />-->  
+
+	<!-- precise les dependances vis-vis de d'autres plugins (ou de spip), voir plus bas <necessite id="nomplugin" version="[versionminimale;versionmax]" />-->  
 	<necessite id="SPIP" version='[2.0.0;3.0.99]' />
 	<!--utilise id="cfg" version='[1.15.2;]' /-->
 
-	
-	<!-- ERGONOMIE DANS ESPACE PRIVE A REVOIR ET UNIFORMISER AVEC PAQUET.XML -->
-   <bouton id='xxxxx' parent=''>
-       <icone>images/xxxxx-24.png</icone>
-       <titre>xxxxx</titre>
-       <url>xxxxx</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
-       <args>type=resume&id=1</args>
-   </bouton>
 
-   <onglet id='mon_onglet_1' parent='configuration'>
-       <icone>images/xxxxx-24.png</icone>
-       <titre>Onglet dans configuration</titre>
-       <url>mon_onglet</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
-       <args></args>
-   </onglet>
-   <utilise id="gravatar" />
-   <utilise id="spipdf" />
+	<!-- ERGONOMIE DANS ESPACE PRIVE A REVOIR ET UNIFORMISER AVEC PAQUET.XML -->
+	<bouton id='xxxxx' parent=''>
+		<icone>images/xxxxx-24.png</icone>
+		<titre>xxxxx</titre>
+		<url>xxxxx</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
+		<args>type=resume&id=1</args>
+	</bouton>
+
+	<onglet id='mon_onglet_1' parent='configuration'>
+		<icone>images/xxxxx-24.png</icone>
+		<titre>Onglet dans configuration</titre>
+		<url>mon_onglet</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
+		<args></args>
+	</onglet>
+	<utilise id="gravatar" version='[1.0.0;]' />
+	<utilise id="spipdf" version='[0.2.14;]' />
 
 </plugin>
