@@ -1,9 +1,9 @@
 <paquet
 	prefix="ressource"
 	categorie="edition"
-	version="0.4.1"
+	version="0.4.2"
 	etat="dev"
-	compatibilite="[2.1.14;3.*.*]"
+	compatibilite="[2.1.14;3.2.*]"
 	logo=""
 	documentation="http://contrib.spip.net/Ressource"
 >
@@ -18,6 +18,6 @@
 	<pipeline nom="post_typo" action="post_typo" inclure="inc/ressource.php" />
 	<pipeline nom="pre_liens" action="pre_liens" inclure="inc/ressource.php" />
 	<utilise nom="tw" compatibilite="[0.8.11;[" />
-	<utilise nom="oembed" compatibilite="[;]" />
+	<utilise nom="oembed" compatibilite="[0.2.0;]" />
 	<necessite nom="queue" compatibilite="[0.6.6;]" />
 </paquet>

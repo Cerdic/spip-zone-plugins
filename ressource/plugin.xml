@@ -7,7 +7,7 @@
 		&#169; 2012 - GNU/GPL
 	</licence>
 	<version>
-	0.4.1
+	0.4.2
 	</version>
 	<etat>
 	dev
@@ -25,9 +25,9 @@
 	<chemin dir='' />
 	<categorie>edition</categorie>
 	<pipeline><nom>ressource_meta</nom><action></action></pipeline> 
-	<necessite id="SPIP" version="[2.1.14;3.99.99]" />
+	<necessite id="SPIP" version="[2.1.14;3.2.99]" />
 	<necessite id="tw" version="[0.8.3;[" />
-	<utilise nom="oembed" compatibilite="[;]" />
+	<utilise nom="oembed" compatibilite="[0.2.0;]" />
 	<necessite id="queue" compatibilite="[0.6.6;]" />
 	<!-- traduire gestionnaire="salvatore" module="crayons" reference="fr" / -->
 </plugin>
