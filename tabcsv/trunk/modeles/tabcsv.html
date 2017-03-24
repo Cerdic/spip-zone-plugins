@@ -1,0 +1,133 @@
+<!--
+	tabcsv V 0.1.0
+    Converts a csv format content in an array for spip
+    Copyright (C) 2017  Robert Sebille - http://sebille.name
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+#SET{titre,#ENV{titre}}
+#SET{id,#ENV{id}}
+#SET{contenu,#ENV{contenu}}
+#SET{classe,#ENV{classe}}
+#SET{delimiteur,#ENV{delimiteur}}
+#SET{separateur,#ENV{separateur}}
+<?php
+// php 5.0.2 >= needed.
+/*****************************/
+/* Traitement des paramètres */
+/*****************************/
+/* Récup dans une variable php */
+// $tabcsv_titre=oui/non (case insensitive, oui = défaut). $tabcsv_id=id du fichier.csv (téléchargé dans IMG/csv/). $tabcsv_contenu=copier/coller csv
+$tabcsv_titre = trim(strtolower('#GET{titre}'));
+$tabcsv_id = trim('#GET{id}');
+$tabcsv_classe = trim('#GET{classe}');
+// Le contenu du csv ne doit pas contenir de " (doubles quotes) si delimiteur = oui et separateur = ;
+// Si delimiteur absent ou différent de oui (insnsitive case), delimiteur = ''
+// delimiteur = oui si le contenu csv contient des ' (simples quotes) et que separateur = ; (par défaut)
+$tabcsv_delimiteur = trim(strtolower('#GET{delimiteur}'));
+$tabcsv_separateur = trim('#GET{separateur}');
+$tabcsv_contenu_tmp = trim('#GET{contenu}');
+$tabcsv_contenu_tmp = str_replace('&quot;', '"', $tabcsv_contenu_tmp);
+
+/* Valeur par defaut ou activation / désactivation des paramètres */
+if ($tabcsv_titre == '') {$tabcsv_titre = 'oui';}
+if ($tabcsv_id == '') {$tabcsv_id = 'null';}
+if ($tabcsv_classe != '') {$tabcsv_classe = ' '.$tabcsv_classe;}
+if ($tabcsv_delimiteur == 'oui') {$tabcsv_delimiteur = '"';} else {$tabcsv_delimiteur = '';}
+if ($tabcsv_separateur == '') {$tabcsv_separateur = ';';}
+if ($tabcsv_contenu_tmp == '') {$tabcsv_contenu_tmp = 'null';}
+
+
+/************************************/
+/* Vérification de quelques erreurs */
+/************************************/
+if ($tabcsv_id == 'null' && $tabcsv_contenu_tmp == 'null') {die('Erreur dans le modèle tabcsv : l\'appel au modèle doit obligatoirement contenir un paramètre "contenu", "id=XX" ou être libellé comme "tabcsvXX" où XX = l\'id d\'un document csv.');}
+if ($tabcsv_titre != 'oui' && $tabcsv_titre != 'non') {die('Erreur dans le modèle tabcsv : le paramètre "titre" doit être "oui" ou "non" (insensible à la casse).');}
+
+
+/*********************************/
+/* si contenu ecrit manuellement */
+/*********************************/
+// Priorité au paramètre id. 1 id, 2 contenu
+$tabcsv_contenu = array();
+if ($tabcsv_contenu_tmp != 'null') {$tabcsv_contenu = explode(PHP_EOL, $tabcsv_contenu_tmp);}
+unset($tabcsv_contenu_tmp);
+
+
+/******************************************************/
+/* si fichier CSV, on le récupère via une boucle spip */
+/******************************************************/
+// Priorité: 1 id, 2 contenu
+if ($tabcsv_id != 'null') {
+?>
+
+	<B_tabcsv_fic_doc>
+		<BOUCLE_tabcsv_fic_doc(DOCUMENTS) {extension=csv} {id_document=#GET{id}}>
+			<?php
+				$tabcsv_fichier='#FICHIER';
+			    // Lorsque cette option est activée, PHP va examiner les données lues par fgets() et file()
+			    // pour voir si le fichier utilise les conventions de ligne de Unix, MS-Dos ou Macintosh.
+			    // http://php.net/manual/fr/filesystem.configuration.php#ini.auto-detect-line-endings
+			    $tabcsv_original_line_endings = ini_get("auto_detect_line_endings");
+			    ini_set("auto_detect_line_endings", true);
+			    $tabcsv_contenu = file($tabcsv_fichier, FILE_IGNORE_NEW_LINES);
+			    ini_set("auto_detect_line_endings", $tabcsv_original_line_endings);	
+			?>
+		</BOUCLE_tabcsv_fic_doc>
+	</B_tabcsv_fic_doc>
+		<?php die('Erreur dans le modèle tabcsv : pas trouvé de document .csv avec un "id='.'#GET{id}'.'".'); ?>
+	<//B_tabcsv_fic_doc>
+	
+<?php
+}
+
+/**********************************************/
+/* On convertit en tableau spip et on affiche */
+/**********************************************/
+echo "\n".'<table class="spip tabcsv'.$tabcsv_classe.'">'."\n";
+$tabcsv_i = 0;
+foreach($tabcsv_contenu as $tabcsv_val) {
+    $tabcsv_valprint = $tabcsv_val;
+//    if (substr($tabcsv_valprint, -1) == $tabcsv_separateur) {$tabcsv_valprint = substr($tabcsv_valprint, 0, -1);}
+    if (substr($tabcsv_valprint, -1) == $tabcsv_delimiteur) {$tabcsv_valprint = substr($tabcsv_valprint, 0, -1);}
+    if (substr($tabcsv_valprint, 0, 1) == $tabcsv_delimiteur) {$tabcsv_valprint = substr($tabcsv_valprint, 1);}
+    //echo $tabcsv_val.' - '.$tabcsv_valprint.'<br>';
+
+    if ($tabcsv_titre == 'non') {$tabcsv_i++;}
+    if ($tabcsv_i == 0) {
+        $tabcsv_valprint = str_replace($tabcsv_delimiteur.$tabcsv_separateur.$tabcsv_delimiteur, '</th><th>', $tabcsv_valprint);
+        echo '<thead><tr class=\'row_first\'><th>'.$tabcsv_valprint.'</th></tr></thead>'."\n";
+        } else {
+        if ($tabcsv_i == 1) {echo '<tbody>'."\n";}
+        $tabcsv_divisible_par_deux = 'odd';
+        if (($tabcsv_i % 2) == 0) {$tabcsv_divisible_par_deux = 'even';}
+        $tabcsv_valprint = str_replace($tabcsv_delimiteur.$tabcsv_separateur.$tabcsv_delimiteur, '</td><td>', $tabcsv_valprint);
+        echo '<tr class=\'row_'.$tabcsv_divisible_par_deux.' '.$tabcsv_divisible_par_deux.'\'><td>'.$tabcsv_valprint.'</td></tr>'."\n";    
+        }
+    $tabcsv_i++;
+    }
+echo '</tbody>'."\n".'</table>'."\n";
+
+/*
+// Debug
+echo "Délimiteur: ".$tabcsv_delimiteur."<hr />";
+echo "Séparateur: ".$tabcsv_separateur."<hr />";
+echo "Titre: ".$tabcsv_titre."<hr />";
+echo "tabcsv_id: ".$tabcsv_id."<hr />";
+echo "Contenu tmp: ".$tabcsv_contenu_tmp."<hr />";
+print_r($tabcsv_contenu);
+if (file_exists($tabcsv_fichier)) {echo "existe";} else {echo "existe pas";}
+//*/
+
+?>
