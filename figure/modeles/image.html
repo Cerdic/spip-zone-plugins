@@ -26,7 +26,7 @@ equivalent a un <docXX> pour une image en mode image
 	(#TITRE|ou{#DESCRIPTIF}|ou{#CREDITS}|oui)role="group"]>
 	[<a href="(#GET{url})"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|attribut_html)]'[ type="(#ENV{lien}|?{#ENV{lien_mime},#MIME_TYPE})"]>]<img src='#GET{fichier}' alt='' width='#GET{width}' height='#GET{height}'>[(#GET{url}|?{</a>})][
 	(#TITRE|ou{#DESCRIPTIF}|ou{#CREDITS}|oui)
-	<INCLURE{fond=modeles/inc_figcaption,titre=#TITRE,descriptif=#DESCRIPTIF,credits=#CREDITS}>]
+	<INCLURE{fond=modeles/inc_figcaption,titre=#TITRE,descriptif=#DESCRIPTIF,credits=#CREDITS,width=#GET{width}}>]
 </figure>
 ][
 
