@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="6.3.6"
 	etat="stable"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/foundation_6-64.png"
 	schema="1.0"
 	documentation="http://contrib.spip.net/Foundation-4-Spip"
