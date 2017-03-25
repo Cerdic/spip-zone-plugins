@@ -39,11 +39,7 @@
 			</video>
 		</div>
 	</div>[(#TITRE|ou{#DESCRIPTIF}|ou{#CREDITS}|oui)
-	<figcaption class='#EDIT{descriptif} spip_doc_descriptif'>[
-		<strong class='#EDIT{titre} spip_doc_titre'>(#TITRE)</strong>]
-		[(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]
-		][<small>(#CREDITS)</small>
-	]</figcaption>]
+	<INCLURE{fond=modeles/inc_figcaption,titre=#TITRE,descriptif=#DESCRIPTIF,credits=#CREDITS}>]
 	[<script>/*<!\[CDATA\[*/var mejspath='[(#CHEMIN{lib/mejs/mediaelement-and-player.min.js}|timestamp)]',mejscss='[(#CHEMIN{lib/mejs/mediaelementplayer.min.css}|timestamp)]';
 	(#INCLURE{javascript/mejs-init.min.js})/*\]\]>*/</script>]
 	[(#ENV{skin}|oui)[<style>(#INCLURE{#CHEMIN{css/mejs-skin-#ENV{skin}.css}|sinon{#CHEMIN{lib/mejs/mejs-skins.css}}|url_absolue_css})</style>]]

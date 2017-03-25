@@ -26,11 +26,7 @@ equivalent a un <docXX> pour une image en mode image
 	(#TITRE|ou{#DESCRIPTIF}|ou{#CREDITS}|oui)role="group"]>
 	[<a href="(#GET{url})"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|attribut_html)]'[ type="(#ENV{lien}|?{#ENV{lien_mime},#MIME_TYPE})"]>]<img src='#GET{fichier}' alt='' width='#GET{width}' height='#GET{height}'>[(#GET{url}|?{</a>})][
 	(#TITRE|ou{#DESCRIPTIF}|ou{#CREDITS}|oui)
-	<figcaption class='#EDIT{descriptif} spip_doc_descriptif'[ style='width:(#GET{width}|min{350}|max{120})px;']>[
-		<strong class='#EDIT{titre} spip_doc_titre'>(#TITRE)</strong>]
-		[(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]
-		][<small>(#CREDITS)</small>
-	]</figcaption>]
+	<INCLURE{fond=modeles/inc_figcaption,titre=#TITRE,descriptif=#DESCRIPTIF,credits=#CREDITS}>]
 </figure>
 ][
 
@@ -48,10 +44,6 @@ style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{alig
 		<param name='src' value='#URL_DOCUMENT'>
 		[(#ID_DOCUMENT|appliquer_filtre{#MIME_TYPE})]
 	</object>[(#TITRE|ou{#DESCRIPTIF}|ou{#CREDITS}|oui)
-	<figcaption class='#EDIT{descriptif} spip_doc_descriptif'>[
-		<strong class='#EDIT{titre} spip_doc_titre'>(#TITRE)</strong>]
-		[(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]
-		][<small>(#CREDITS)</small>
-	]</figcaption>]
+	<INCLURE{fond=modeles/inc_figcaption,titre=#TITRE,descriptif=#DESCRIPTIF,credits=#CREDITS}>]
 </figure>]
 </BOUCLE_tous>
