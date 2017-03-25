@@ -1,12 +1,12 @@
 <paquet
 	prefix="simplog"
 	categorie="maintenance"
-	version="1.4.3"
+	version="1.4.4"
 	etat="stable"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/simplog-32.png"
 	documentation="http://contrib.spip.net/Simples-Logs"
->	
+>
 
 	<nom>Simples Logs</nom>
 	<!-- Visualisation des logs SPIP par les administrateurs -->
