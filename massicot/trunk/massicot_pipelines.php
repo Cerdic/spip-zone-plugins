@@ -34,7 +34,7 @@ function massicot_jquery_plugins($scripts) {
  */
 function massicot_jqueryui_plugins($scripts) {
 
-	if (test_espace_prive()) {
+	if (version_compare($GLOBALS['spip_version_branche'], '3.2', '<') and test_espace_prive()) {
 		$scripts[] = 'jquery.ui.slider';
 	}
 	return $scripts;
