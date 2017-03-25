@@ -39,7 +39,7 @@
 			</video>
 		</div>
 	</div>[(#TITRE|ou{#DESCRIPTIF}|ou{#CREDITS}|oui)
-	<INCLURE{fond=modeles/inc_figcaption,titre=#TITRE,descriptif=#DESCRIPTIF,credits=#CREDITS}>]
+	<INCLURE{fond=modeles/inc_figcaption,titre=#TITRE,descriptif=#DESCRIPTIF,credits=#CREDITS,width=#GET{largeur}}>]
 	[<script>/*<!\[CDATA\[*/var mejspath='[(#CHEMIN{lib/mejs/mediaelement-and-player.min.js}|timestamp)]',mejscss='[(#CHEMIN{lib/mejs/mediaelementplayer.min.css}|timestamp)]';
 	(#INCLURE{javascript/mejs-init.min.js})/*\]\]>*/</script>]
 	[(#ENV{skin}|oui)[<style>(#INCLURE{#CHEMIN{css/mejs-skin-#ENV{skin}.css}|sinon{#CHEMIN{lib/mejs/mejs-skins.css}}|url_absolue_css})</style>]]

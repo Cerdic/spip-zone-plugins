@@ -44,6 +44,6 @@ style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{alig
 		<param name='src' value='#URL_DOCUMENT'>
 		[(#ID_DOCUMENT|appliquer_filtre{#MIME_TYPE})]
 	</object>[(#TITRE|ou{#DESCRIPTIF}|ou{#CREDITS}|oui)
-	<INCLURE{fond=modeles/inc_figcaption,titre=#TITRE,descriptif=#DESCRIPTIF,credits=#CREDITS}>]
+	<INCLURE{fond=modeles/inc_figcaption,titre=#TITRE,descriptif=#DESCRIPTIF,credits=#CREDITS,width=#GET{width}}>]
 </figure>]
 </BOUCLE_tous>

@@ -43,7 +43,7 @@ style='[(#ENV{align}|match{^(left|right)$}|oui)float:#ENV{align};] (#ENV{align,c
 	[(#INCLURE{fond=modeles/img}{id_document}{align=#ENV{align}}{embed=oui}{lien=#ENV{lien}}{lien_class=#ENV{lien_class}})]
 	]
 	][(#INCLUS|=={embed}|oui)[(#ENV{controls,''}|non)
-	<INCLURE{fond=modeles/inc_figcaption,titre=#TITRE,descriptif=#DESCRIPTIF,credits=#CREDITS}>
+	<INCLURE{fond=modeles/inc_figcaption,titre=#TITRE,descriptif=#DESCRIPTIF,credits=#CREDITS,width=#GET{largeur}}>
 </figure>
 ]]
 </BOUCLE_tous>

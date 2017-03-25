@@ -1,5 +1,5 @@
 	[(#ENV{titre}|ou{#ENV{descriptif}}|ou{#ENV{credits}}|oui)
-	<figcaption class='spip_doc_caption'[ style='width:(#GET{width}|min{350}|max{120})px;margin-right:auto;margin-left:auto;text-align:center;']>[
+	<figcaption class='spip_doc_caption'style='[width:(#ENV{width}|min{350}|max{120})px;]margin-right:auto;margin-left:auto;text-align:center;'>[
 		<div class='#EDIT{titre} spip_doc_titre'><strong>(#ENV*{titre})</strong></div>]
 		[<div class='#EDIT{descriptif} spip_doc_descriptif'>(#ENV*{descriptif}|PtoBR)[(#NOTES|PtoBR)</div>]
 		][<div class='#EDIT{credit} spip_doc_credit'><small>(#ENV*{credits})</small><div>
