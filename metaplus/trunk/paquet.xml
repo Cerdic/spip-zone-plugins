@@ -3,7 +3,7 @@
 	categorie="divers"
 	version="1.1.8"
 	etat="stable"
-	compatibilite="[2.1.0;3.1.*]"
+	compatibilite="[2.1.0;3.2.*]"
 	logo="opengraph.png"
 	documentation="https://contrib.spip.net/4845"
 >

@@ -12,6 +12,6 @@
 	<auteur>[tetue->http://spip.tetue.net]</auteur>
 	<auteur>[erational->https://www.erational.org]</auteur>
 
-	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.2.99]" />
 	<lien>https://contrib.spip.net/4845</lien>
 </plugin>
