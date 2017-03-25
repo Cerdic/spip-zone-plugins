@@ -3,7 +3,7 @@
 	<prefix>figure</prefix>
 	<icon>figure.png</icon>
 
-	<version>0.2.8</version>
+	<version>0.2.9</version>
 	<etat>dev</etat>
 	<categorie>multimedia</categorie>
 
@@ -14,4 +14,5 @@
 	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
 	<utilise id="medias" version="[1.6.8;]" />
 	<utilise id="medoc" version="[1.0.0;]" />
+	<utilise id="accessibilite" />
 </plugin>
