@@ -24,10 +24,13 @@
 
 
 abstract class acNewton {
+
+	const DBG = false; /// Debuggage
+
 	protected $rTol;
 	protected $rDx;
-	private $iCpt=0;
-	private $iCptMax=50;
+	private $iCpt; /// n° itération Newton
+	private $iCptMax=50; /// nb max itérations
 	private $rRelax=1; /// Coefficient de relaxation
 	private $rFnPrec=0; /// Mémorisation du Fn précédent pour détecter le changement de signe
 	private $iOscil=0; /// Nombre de changement de signe de Delta
@@ -40,8 +43,9 @@ abstract class acNewton {
 	 * @param $oP Paramètres supplémentaires (Débit, précision...)
 	 */
 	function __construct(cParam $oP) {
-		$this->rTol=$oP->rPrec;
-		$this->rDx=$oP->rPrec/10;
+		$this->rTol = $oP->rPrec;
+		$this->rDx = $oP->rPrec / 10;
+		$this->iCpt = 0;
 	}
 
 
@@ -79,7 +83,7 @@ abstract class acNewton {
 	public function Newton($rX) {
 		$this->iCpt++;
 		$rFn=$this->CalcFn($rX);
-		//~ echo('</br>Newton '.$this->iCpt.' Relax='.$this->rRelax.'- f('.$rX.') = '.$rFn);
+		if(self::DBG) spip_log('Newton '.$this->iCpt.' Relax='.$this->rRelax.'- f('.$rX.') = '.$rFn,'hydraulic.'._LOG_DEBUG);
 		if($this->FuzzyEqual($rFn) || $this->iCpt >= $this->iCptMax) {
 			return $rX;
 		}
@@ -87,12 +91,6 @@ abstract class acNewton {
 			$rDer=$this->CalcDer($rX);
 			//~ echo(' - f\' = '.$rDer);
 			if($rDer!=0) {
-				/*
-				if($this->rRelax > 1) {
-					// On réduit progressivement le coef de relaxation
-					$this->rRelax *= 1;
-				}
-				*/
 				if($rFn < 0 xor $this->rFnPrec < 0) {
 					$this->nOscil++;
 					if($this->rRelax > 1) {

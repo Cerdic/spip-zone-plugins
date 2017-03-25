@@ -52,7 +52,7 @@ class cParam {
  * Comprend les formules pour la section rectangulaire pour gérer les débordements
  */
 abstract class acSection {
-	const DBG = false; /// Pour loguer les messages de debug de cette classe
+	const DBG = false; /// Pour loguer les messages de debug de cette classe et ses filles
 
 	public $rY=0;          /// Tirant d'eau
 	public $rHautCritique;  /// Tirant d'eau critique
@@ -409,6 +409,9 @@ abstract class acSection {
 	 * @return tirant d'eau conjugué
 	 */
 	protected function Calc_Yco() {
+		// Mémorisation de Y avant l'appel au Newton
+		$this->Swap(true);
+		// Intanciation du Newton
 		$oHautConj= new cHautConjuguee($this, $this->oP);
 		// Choisir une valeur initiale du bon côté de la courbe
 		if($this->Calc('Fr') < 1) {
@@ -422,6 +425,7 @@ abstract class acSection {
 		if(!$Yco = $oHautConj->Newton($rY0) or !$oHautConj->HasConverged()) {
 			$this->oLog->Add(_T('hydraulic:h_conjuguee').' : '._T('hydraulic:newton_non_convergence'),true);
 		}
+		$this->Swap(false);
 		return $Yco;
 	}
 
@@ -705,7 +709,7 @@ class cHautConjuguee extends acNewton {
 		else {
 			$rFn = -INF;
 		}
-		//~ if(self::DBG) spip_log('cHautConjuguee:CalcFn('.$rX.')='.$rFn,'hydraulic.'._LOG_DEBUG);
+		if(self::DBG) spip_log('cHautConjuguee:CalcFn('.$rX.')='.$rFn,'hydraulic.'._LOG_DEBUG);
 		return $rFn;
 	}
 
@@ -722,7 +726,7 @@ class cHautConjuguee extends acNewton {
 		else {
 			$rDer = -INF;
 		}
-		//~ if(self::DBG) spip_log('cHautConjuguee:CalcDer('.$rX.')='.$rDer,'hydraulic.'._LOG_DEBUG);
+		if(self::DBG) spip_log('cHautConjuguee:CalcDer('.$rX.')='.$rDer,'hydraulic.'._LOG_DEBUG);
 		return $rDer;
 	}
 

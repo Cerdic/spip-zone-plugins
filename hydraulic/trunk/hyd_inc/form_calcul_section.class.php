@@ -88,23 +88,28 @@ class form_calcul_section extends form_section {
 			$this->data['ValCal'] = $val_a_cal;
 		}
 		else {
-			switch($choix_section) {
-				case 'FR':
+			//~ switch($choix_section) {
+				//~ case 'FR':
 				$tVarCal = array('Hs', 'Hsc', 'B', 'P', 'S', 'R', 'V', 'Fr', 'Yc', 'Yn', 'Yf', 'Yt', 'Yco', 'J', 'I-J', 'Imp', 'Tau0');
-				break;
-				default:
-				// Le calcul de la hauteur conjuguée n'est pas OK pour les sections autres que rectangulaire
-				$tVarCal = array('Hs', 'Hsc', 'B', 'P', 'S', 'R', 'V', 'Fr', 'Yc', 'Yn', 'Yf', 'Yt', 'J', 'I-J', 'Imp', 'Tau0');
-			}
+				//~ break;
+				//~ default:
+				//~ // Le calcul de la hauteur conjuguée n'est pas OK pour les sections autres que rectangulaire
+				//~ $tVarCal = array('Hs', 'Hsc', 'B', 'P', 'S', 'R', 'V', 'Fr', 'Yc', 'Yn', 'Yf', 'Yt', 'J', 'I-J', 'Imp', 'Tau0');
+			//~ }
 		}
 
 		$tRes = array(); // Tableau des résultats (ordonnées)
 		$tAbs = array(); // Tableau des abscisses
+		if(self::DBG) spip_log($this->oSn,'hydraulic',_LOG_DEBUG);
+		if(self::DBG) spip_log($tVarCal,'hydraulic',_LOG_DEBUG);
+		if(self::DBG) spip_log("min=$min max=$max pas=$pas",'hydraulic',_LOG_DEBUG);
+		$bF = true;
 		for($i = $min; $i <= $max; $i+= $pas){
 			$this->oSn->Reset(true);
 			$tAbs[] = $i;
 			foreach($tVarCal as $sCalc){
 				$rY = $this->oSn->rY;
+				if(self::DBG) spip_log("i=$i Y=$rY Calc=$sCalc",'hydraulic',_LOG_DEBUG);
 				if(!in_array($sCalc,array('Yn', 'Yc', 'Hsc'))){
 					$tRes[] = $this->oSn->Calc($sCalc);
 				}
@@ -113,6 +118,8 @@ class form_calcul_section extends form_section {
 				}
 				$this->oSn->rY = $rY;
 			}
+			if(self::DBG & $bF) spip_log("i=$i Y=$rY",'hydraulic',_LOG_DEBUG);
+			$bF = false;
 		}
 		return array('abs'=>$tAbs,'res'=>$tRes,'tVarCal'=>$tVarCal);
 	}

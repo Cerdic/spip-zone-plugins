@@ -7,6 +7,8 @@
  *******************************************************************************/
 abstract class formulaire {
 
+	const DBG = true; /// Debuggage de la classe et des classes filles
+
 	/***************************************************************************
 	 * Structure du formulaire qui contient un tableau avec les regroupements de champs (fieldset).
 	 * Dans un fieldset, on a :
@@ -55,8 +57,8 @@ abstract class formulaire {
 	public function __construct() {
 		$this->champs_fvc = $this->get_champs_fvc();
 		$this->champs = $this->get_champs();
-		spip_log($this->saisies,'hydraulic',_LOG_DEBUG);
-		spip_log($this->champs_fvc,'hydraulic',_LOG_DEBUG);
+		if(self::DBG) spip_log($this->saisies,'hydraulic',_LOG_DEBUG);
+		if(self::DBG) spip_log($this->champs_fvc,'hydraulic',_LOG_DEBUG);
 		include_spip('hyd_inc/log.class');
 		$this->oLog = new cLog();
 	}
@@ -187,7 +189,7 @@ abstract class formulaire {
 
 		$tChOblig = $this->champs_obligatoires();
 		$tChCalc = $this->champs_obligatoires(true);
-		spip_log($tChCalc,'hydraulic',_LOG_DEBUG);
+		if(self::DBG) spip_log($tChCalc,'hydraulic',_LOG_DEBUG);
 		$choix_radio = array();
 		$tLib = array();
 		$data=array();
@@ -235,7 +237,7 @@ abstract class formulaire {
 		$data['max'] += $data['pas']/2;
 
 		$this->data = $data;
-		spip_log($data,'hydraulic',_LOG_DEBUG);
+		if(self::DBG) spip_log($data,'hydraulic',_LOG_DEBUG);
 	}
 
 
@@ -302,7 +304,7 @@ abstract class formulaire {
 			// On effectue les calculs
 			$this->result = $this->calculer();
 		}
-		spip_log($this->result,'hydraulic',_LOG_DEBUG);
+		if(self::DBG) spip_log($this->result,'hydraulic',_LOG_DEBUG);
 
 		// Affichage des résultats
 		return array('message_ok'=>$this->afficher_result());
@@ -357,7 +359,7 @@ abstract class formulaire {
 		if(!$data['ValVar']) {
 			$tCnt[]=array('<b>'.$tLib[$data['ValCal']].'</b>','<b>'.format_nombre($tRes[0], $data['iPrec']).'</b>');
 			if($tFlag) {
-				spip_log($tFlag,'hydraulic.'._LOG_DEBUG);
+				if(self::DBG) spip_log($tFlag,'hydraulic.'._LOG_DEBUG);
 				$tCnt[]= array(_T('hydraulic:type_ecoulement'),_T('hydraulic:flag_'.$tFlag[0]));
 			}
 		}
