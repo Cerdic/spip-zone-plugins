@@ -15,8 +15,8 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 
 	var zoom = options.zoom,
 		img = $('.image-massicot img'),
-		largeur_image = img.attr('width'),
-		hauteur_image = img.attr('height'),
+		largeur_image = parseInt(img.attr('width'), 10),
+		hauteur_image = parseInt(img.attr('height'), 10),
 		premier_chargement = isNaN(parseInt($('input[name=x1]').val(), 10)),
 		selection_initiale,
 		selection_nozoom,
@@ -75,9 +75,9 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 				maj_image(zoom);
 				selection_initiale = forcer_dimensions_selection({
 					x1: 0,
-					x2: img.width(),
+					x2: Math.round(img.width()),
 					y1: 0,
-					y2: img.height()
+					y2: Math.round(img.height())
 				}, zoom);
 			} else {
 				maj_image(zoom);
@@ -201,9 +201,9 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 
 		var selection = {
 			x1: 0,
-			x2: img.width(),
+			x2: Math.round(img.width()),
 			y1: 0,
-			y2: img.height()
+			y2: Math.round(img.height())
 		};
 		selection_nozoom = selection;
 		maj_selection(selection);
@@ -290,8 +290,14 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 
 		nouvelle_selection.x1 = Math.max(0, nouvelle_selection.x1);
 		nouvelle_selection.y1 = Math.max(0, nouvelle_selection.y1);
-		nouvelle_selection.x2 = Math.min(nouvelle_selection.x2, img.width());
-		nouvelle_selection.y2 = Math.min(nouvelle_selection.y2, img.height());
+		nouvelle_selection.x2 = Math.min(
+        nouvelle_selection.x2,
+        Math.round(img.width())
+    );
+		nouvelle_selection.y2 = Math.min(
+        nouvelle_selection.y2,
+        Math.round(img.height())
+    );
 
 		return nouvelle_selection;
 	}
