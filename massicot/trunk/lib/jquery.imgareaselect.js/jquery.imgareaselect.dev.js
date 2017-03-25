@@ -260,7 +260,7 @@ $.imgAreaSelect = function (img, options) {
          * positive number. The latter might happen when imgAreaSelect is put
          * on a parent element which is then hidden.
          */
-        if (!imgLoaded || !$img.width())
+        if (!imgLoaded || !round($img.width()))
             return;
         
         /*
@@ -270,11 +270,11 @@ $.imgAreaSelect = function (img, options) {
         imgOfs = { left: round($img.offset().left), top: round($img.offset().top) };
         
         /* Get image dimensions */
-        imgWidth = $img.innerWidth();
-        imgHeight = $img.innerHeight();
-        
-        imgOfs.top += ($img.outerHeight() - imgHeight) >> 1;
-        imgOfs.left += ($img.outerWidth() - imgWidth) >> 1;
+        imgWidth = round($img.innerWidth());
+        imgHeight = round($img.innerHeight());
+
+        imgOfs.top += round($img.outerHeight() - imgHeight) >> 1;
+        imgOfs.left += round($img.outerWidth() - imgWidth) >> 1;
 
         /* Set minimum and maximum selection area dimensions */
         minWidth = round(options.minWidth / scaleX) || 0;
@@ -338,8 +338,8 @@ $.imgAreaSelect = function (img, options) {
 
         /* Set border dimensions */
         $border
-            .width(max(w - $border.outerWidth() + $border.innerWidth(), 0))
-            .height(max(h - $border.outerHeight() + $border.innerHeight(), 0));
+            .width(round(max(w - $border.outerWidth() + $border.innerWidth(), 0)))
+            .height(round(max(h - $border.outerHeight() + $border.innerHeight(), 0)));
 
         /* Arrange the outer area elements */
         $($outer[0]).css({ left: left, top: top,
@@ -372,7 +372,7 @@ $.imgAreaSelect = function (img, options) {
              * current handler
              */
             if ($.imgAreaSelect.onKeyPress != docKeyPress)
-                $(document).unbind($.imgAreaSelect.keyPress,
+                $(document).off($.imgAreaSelect.keyPress,
                     $.imgAreaSelect.onKeyPress);
 
             if (options.keys)
@@ -486,7 +486,7 @@ $.imgAreaSelect = function (img, options) {
         if (options.autoHide || selection.width * selection.height == 0)
             hide($box.add($outer), function () { $(this).hide(); });
 
-        $(document).unbind('mousemove', selectingMouseMove);
+        $(document).off('mousemove', selectingMouseMove);
         $box.mousemove(areaMouseMove);
         
         options.onSelectEnd(img, getSelection());
@@ -513,19 +513,19 @@ $.imgAreaSelect = function (img, options) {
             
             $(document).mousemove(selectingMouseMove)
                 .one('mouseup', docMouseUp);
-            $box.unbind('mousemove', areaMouseMove);
+            $box.off('mousemove', areaMouseMove);
         }
         else if (options.movable) {
             startX = left + selection.x1 - evX(event);
             startY = top + selection.y1 - evY(event);
 
-            $box.unbind('mousemove', areaMouseMove);
+            $box.off('mousemove', areaMouseMove);
 
             $(document).mousemove(movingMouseMove)
                 .one('mouseup', function () {
                     options.onSelectEnd(img, getSelection());
 
-                    $(document).unbind('mousemove', movingMouseMove);
+                    $(document).off('mousemove', movingMouseMove);
                     $box.mousemove(areaMouseMove);
                 });
         }
@@ -676,7 +676,7 @@ $.imgAreaSelect = function (img, options) {
      * Start selection
      */
     function startSelection() {
-        $(document).unbind('mousemove', startSelection);
+        $(document).off('mousemove', startSelection);
         adjust();
 
         x2 = x1;
@@ -691,9 +691,9 @@ $.imgAreaSelect = function (img, options) {
 
         shown = true;
 
-        $(document).unbind('mouseup', cancelSelection)
+        $(document).off('mouseup', cancelSelection)
             .mousemove(selectingMouseMove).one('mouseup', docMouseUp);
-        $box.unbind('mousemove', areaMouseMove);
+        $box.off('mousemove', areaMouseMove);
 
         options.onSelectStart(img, getSelection());
     }
@@ -702,8 +702,8 @@ $.imgAreaSelect = function (img, options) {
      * Cancel selection
      */
     function cancelSelection() {
-        $(document).unbind('mousemove', startSelection)
-            .unbind('mouseup', cancelSelection);
+        $(document).off('mousemove', startSelection)
+            .off('mouseup', cancelSelection);
         hide($box.add($outer));
         
         setSelection(selX(x1), selY(y1), selX(x1), selY(y1));
@@ -985,12 +985,12 @@ $.imgAreaSelect = function (img, options) {
         /* Calculate the aspect ratio factor */
         aspectRatio = (d = (options.aspectRatio || '').split(/:/))[0] / d[1];
 
-        $img.add($outer).unbind('mousedown', imgMouseDown);
-        
+        $img.add($outer).off('mousedown', imgMouseDown);
+
         if (options.disable || options.enable === false) {
             /* Disable the plugin */
-            $box.unbind('mousemove', areaMouseMove).unbind('mousedown', areaMouseDown);
-            $(window).unbind('resize', windowResize);
+            $box.off('mousemove', areaMouseMove).off('mousedown', areaMouseDown);
+            $(window).off('resize', windowResize);
         }
         else {
             if (options.enable || options.disable === false) {
