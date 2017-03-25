@@ -49,7 +49,9 @@ function formulaires_massicoter_image_saisies_dist($objet, $id_objet, $redirect,
 		),
 	);
 
-	if (isset($GLOBALS['presets_format_massicot'])) {
+	if (isset($GLOBALS['presets_format_massicot'])
+			and is_array($GLOBALS['presets_format_massicot'])
+			and count($GLOBALS['presets_format_massicot'])) {
 		$datas = array();
 		foreach ($GLOBALS['presets_format_massicot'] as $preset) {
 			$cle = $preset['largeur'] . ':' . $preset['hauteur'];
