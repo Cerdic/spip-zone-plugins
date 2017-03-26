@@ -15,8 +15,6 @@
 	<auteur lien="https://contrib.spip.net/Luis-Speciale">Speciale</auteur>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 	
-	<traduire module="tablos" reference="fr" gestionnaire="salvatore" />
-
 	<pipeline nom="insert_head_css" action="insert_head_css" inclure="tablos_pipelines.php" />
 	<pipeline nom="insert_head" action="insert_head_" inclure="tablos_fonctions.php" />
 	
