@@ -6,6 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'acier_lamine'      => "Acier laminé - Béton lisse",
 	'amont'				=> "amont",
 	'arret_calcul'      => "Arrêt du calcul : Hauteur critique atteinte à l'abscisse",
+	'aucune'			=> "Aucune",
 	'aval'				=> "aval",
 	// B
 	'berge'             => "Berge",

@@ -1,6 +1,3 @@
-[<div class='hyd_formulaire_erreur '><span>(#ENV*{message_erreur})</span></div>]
-<script language="javascript" type="text/javascript" src="#CHEMIN{js/hyd_fonctions.js}"></script>
-
 <script>
 	function gestion_radios_extra(nom,valeur) {
 		// Gestion de l'affichage du choix du calcul à effectuer (affichage seulement si une valeur varie)
@@ -18,26 +15,9 @@
 	}
 </script>
 
-<form method="post" action="#ENV{action}#VAL{#hyd_resultat}" id="form_calcul_section">
-	#ACTION_FORMULAIRE{#ENV{action}}
-	<table class="hyd_formulaire">
-		<tbody>
+<INCLURE{fond=formulaires/hydraulic,env}>
 
-			<!-- On génère les champs du formulaire en suivant le tableau saisies -->
-			<INCLURE{fond=hyd_inc/formulaire_champs,env}>
-
-			<tr>
-				<td colspan="4" class="hyd_bouton_submit">
-					<input type="submit" value="<:hydraulic:calculer:>">
-				</td>
-			</tr>
-
-		</tbody>
-	</table>
-</form>
-
-<script language="javascript">
+<script>
 	// Affichage des champs du type de section sélectionné uniquement
 	sectionDisplayFieldset();
 </script>
-[<div id="hyd_resultat">(#ENV*{message_ok})</div>]

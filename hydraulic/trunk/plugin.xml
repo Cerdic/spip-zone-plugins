@@ -7,7 +7,7 @@
 	</nom>
 	<auteur>David Dorchies, Médéric Dulondel</auteur>
 	<licence>GNU/GLP</licence>
-	<version>0.10.2</version>
+	<version>0.11.0</version>
 	<necessite id="lib:dist" src="http://www.jqplot.com/download/jquery.jqplot.1.0.8r1250.zip" />
 	<slogan>
 		<multi>
@@ -41,7 +41,7 @@
 	</description>
 	<icon>logo32.png</icon>
 	<categorie>divers</categorie>
-	<lien>http://sic.g-eau.net/spip.php?rubrique80</lien>
+	<lien>http://hydraulique.g-eau.net/Le-plugin-SPIP-Calculette-hydraulique</lien>
 	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
 	<necessite id="spip_bonux" version="[2.2.22;]" />
 	<etat>dev</etat>

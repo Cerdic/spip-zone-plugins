@@ -6,6 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'acier_lamine'      => "Rolled steel - Smooth concrete",
 	'amont'				=> "upstream",
 	'arret_calcul'      => "Calculation stopped: Critical elevation reached at abscissa",
+	'aucune'			=> "None",
 	'aval'				=> "downstream",
 	// B
 	'berge'             => "Embankment",

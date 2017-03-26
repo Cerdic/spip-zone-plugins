@@ -7,7 +7,8 @@
  *******************************************************************************/
 abstract class formulaire {
 
-	const DBG = true; /// Debuggage de la classe et des classes filles
+	const DBG = false; /// Debuggage de la classe et des classes filles
+	const DBG_CHARGER = false; /// Debuggage de la methode charger
 
 	/***************************************************************************
 	 * Structure du formulaire qui contient un tableau avec les regroupements de champs (fieldset).
@@ -44,6 +45,7 @@ abstract class formulaire {
 
 	/// Nombre de pas de variation par défaut
 	protected $nbPas = 15;
+	protected $bFVC = true; ///< Formulaire FVC (boutons fixe, varie, calcul)
 
 	/***************************************************************************
 	 * Calcul des résultats
@@ -137,6 +139,7 @@ abstract class formulaire {
 	 * @note Etendre la méthode en faisant un $valeurs = parent::charger()
 	 * pour ajouter des variables supplémentaires dans l'environnement du
 	 * formulaire.
+	 * @param bFix true = Formulaire sans choix fvc
 	 ***************************************************************************/
 	public function charger() {
 		$valeurs['saisies'] = $this->saisies;
@@ -147,22 +150,32 @@ abstract class formulaire {
 		// Initialisation de la valeur des champs pour le formulaire
 		foreach($this->saisies as $fs) {
 			foreach($fs[1] as $cle=>$val) {
-				$valeurs[$cle] = $val[1];
+				$request = _request($cle);
+				if(self::DBG_CHARGER) spip_log("cle=$cle request=$request",'hydraulic',_LOG_DEBUG);
+				if($request != '') {
+					// La valeur du champ est dans l'adresse de la page
+					$valeurs[$cle] = $request;
+				} else {
+					// Valeur par défaut
+					$valeurs[$cle] = $val[1];
+				}
 			}
 		}
 
 		// On parcourt tous le tableau des indices, et on initialise les valeurs des boutons radios, et des champs de variation
-		$sVarCal = $this->sVarCal;
-		foreach($this->champs_fvc as $cle){
-			$valeurs['choix_champs_'.$cle] = 'fix';
-			$valeurs['val_min_'.$cle] = $valeurs[$cle]/2;
-			$valeurs['val_max_'.$cle] = $valeurs[$cle]*2;
-			$valeurs['pas_var_'.$cle] = 1.5*$valeurs[$cle]/$this->nbPas;
-			if(_request('choix_champs_'.$cle)=='cal') {
-				$sVarCal = $cle;
+		if($this->bFVC) {
+			$sVarCal = $this->sVarCal;
+			foreach($this->champs_fvc as $cle){
+				$valeurs['choix_champs_'.$cle] = 'fix';
+				$valeurs['val_min_'.$cle] = $valeurs[$cle]/2;
+				$valeurs['val_max_'.$cle] = $valeurs[$cle]*2;
+				$valeurs['pas_var_'.$cle] = 1.5*$valeurs[$cle]/$this->nbPas;
+				if(_request('choix_champs_'.$cle)=='cal') {
+					$sVarCal = $cle;
+				}
 			}
+			$valeurs['choix_champs_'.$sVarCal] = 'cal';
 		}
-		$valeurs['choix_champs_'.$sVarCal] = 'cal';
 
 		return $valeurs;
 	}
@@ -284,7 +297,7 @@ abstract class formulaire {
 		if (count($erreurs)) {
 			$erreurs['message_erreur'] = _T('hydraulic:saisie_erreur');
 		}
-
+		if(self::DBG) spip_log($erreurs,'hydraulic',_LOG_DEBUG);
 		return $erreurs;
 	}
 
@@ -293,8 +306,9 @@ abstract class formulaire {
 	 * Méthode à appeler par la procédure traiter du formulaire CVT
 	 ***************************************************************************/
 	public function traiter() {
+		spip_log('toto','hydraulic',_LOG_DEBUG);
 		include_spip('hyd_inc/cache');
-
+		if(self::DBG) spip_log('toto','hydraulic',_LOG_DEBUG);
 		// Calcul des résultats
 		$CacheFileName = md5(serialize($this->data)); // Nom du fichier en cache pour calcul déjà fait
 		if(!$this->bNoCache && is_file(HYD_CACHE_DIRECTORY.$CacheFileName)) {
@@ -387,25 +401,37 @@ abstract class formulaire {
 			}
 
 			// Affichage du graphique
-			include_spip('hyd_inc/graph.class');
-			$oGraph = new cGraph('',$tLib[$data['ValVar']],'');
-			if(isset($tRes)) {
-				$oGraph->AddSerie(
-					_T('hydraulic:param_'.$data['ValCal']),
-					$tAbs,
-					$tRes,
-					'#00a3cd',
-					'lineWidth:3, showMarker:true, markerOptions:{style:\'filledCircle\', size:8}');
-			}
-			// Récupération du graphique
-			$graph = $oGraph->GetGraph('graphique',400,600);
-			$echo .= $graph."\n";
+
+			$echo .= $this->getGraph($tLib[$data['ValVar']], $tLib[$data['ValCal']], $tAbs, $tRes);
 		}
 		$echo .= '<div class="hyd_table">'.$tableau_fixe.'</div>';
 		if(isset($tableau_variable)) {
 			$echo .= '<div class="hyd_table">'.$tableau_variable.'</div>';
 		}
 		return $echo;
+	}
+
+
+	/**
+	 * Affichage du graphique de la variable calculée
+	 * @param $sLibVar Libellé de la variable variée
+	 * @param $sLibCal Libellé de la variable calculée
+	 * @param $tAbs Vecteur des abscisses
+	 * @param $tRes Vecteur des valeurs calculées
+	 */
+	protected function getGraph($sLibVar, $LibCal, $tAbs, $tRes) {
+		include_spip('hyd_inc/graph.class');
+		$oGraph = new cGraph('',$sLibVar,'');
+		if(isset($tRes)) {
+			$oGraph->AddSerie(
+				$LibCal,
+				$tAbs,
+				$tRes,
+				'#00a3cd',
+				'lineWidth:3, showMarker:true, markerOptions:{style:\'filledCircle\', size:8}');
+		}
+		// Récupération du graphique
+		return $oGraph->GetGraph('graphique',400,600)."\n";
 	}
 
 

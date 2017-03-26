@@ -3,32 +3,8 @@ include_spip('hyd_inc/form_section.abstract.class');
 
 class form_calcul_section extends form_section {
 
-	// Définition de la variable à calculer par défaut
-	protected $sVarCal = '';
-
 	// Définition du nombre de colonnes du formulaire
 	protected $nb_col = 4;
-
-	// Définition des variables calculables et de leur code de langue
-	public $champs_select_calc = array(
-		'Hs'   => 'charge_spe',
-		'Hsc'  => 'charge_critique',
-		'B'    => 'larg_miroir',
-		'P'    => 'perim_mouille',
-		'S'    => 'surf_mouille',
-		'R'    => 'rayon_hyd',
-		'V'    => 'vit_moy',
-		'Fr'   => 'froud',
-		'Yc'   => 'tirant_eau_crit',
-		'Yn'   => 'tirant_eau_norm',
-		'Yf'   => 'tirant_eau_fluv',
-		'Yt'   => 'tirant_eau_torr',
-		'Yco'  => 'tirant_eau_conj',
-		'J'    => 'perte_charge',
-		'I-J'  => 'var_lin',
-		'Imp'  => 'impulsion',
-		'Tau0' => 'force_tract'
-	);
 
 	function __construct() {
 		$this->saisies['c_hyd'] = array(
@@ -56,9 +32,12 @@ class form_calcul_section extends form_section {
 		parent::__construct();
 	}
 
-
-	public function charger() {
-		$valeurs = parent::charger();
+	/***************************************************************************
+	 * Méthode à appeler par la procédure charger du formulaire CVT
+	 * @param bFix true = Formulaire sans choix fvc
+	 ***************************************************************************/
+	public function charger($bFix = false) {
+		$valeurs = parent::charger($bFix);
 		$valeurs = array_merge($valeurs,
 			array(
 				'choix_section' => 'FT',
@@ -88,19 +67,11 @@ class form_calcul_section extends form_section {
 			$this->data['ValCal'] = $val_a_cal;
 		}
 		else {
-			//~ switch($choix_section) {
-				//~ case 'FR':
-				$tVarCal = array('Hs', 'Hsc', 'B', 'P', 'S', 'R', 'V', 'Fr', 'Yc', 'Yn', 'Yf', 'Yt', 'Yco', 'J', 'I-J', 'Imp', 'Tau0');
-				//~ break;
-				//~ default:
-				//~ // Le calcul de la hauteur conjuguée n'est pas OK pour les sections autres que rectangulaire
-				//~ $tVarCal = array('Hs', 'Hsc', 'B', 'P', 'S', 'R', 'V', 'Fr', 'Yc', 'Yn', 'Yf', 'Yt', 'J', 'I-J', 'Imp', 'Tau0');
-			//~ }
+			$tVarCal = array('Hs', 'Hsc', 'B', 'P', 'S', 'R', 'V', 'Fr', 'Yc', 'Yn', 'Yf', 'Yt', 'Yco', 'J', 'I-J', 'Imp', 'Tau0');
 		}
 
 		$tRes = array(); // Tableau des résultats (ordonnées)
 		$tAbs = array(); // Tableau des abscisses
-		if(self::DBG) spip_log($this->oSn,'hydraulic',_LOG_DEBUG);
 		if(self::DBG) spip_log($tVarCal,'hydraulic',_LOG_DEBUG);
 		if(self::DBG) spip_log("min=$min max=$max pas=$pas",'hydraulic',_LOG_DEBUG);
 		$bF = true;

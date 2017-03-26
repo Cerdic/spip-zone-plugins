@@ -28,6 +28,30 @@ abstract class form_section extends formulaire {
 	protected $oSn; ///< Objet section
 	protected $oP; ///< Objet paramètres de section
 
+	/**
+	 * Définition des variables calculables et de leur code de langue
+	 */
+	public $champs_select_calc = array(
+		'Hs'   => 'charge_spe',
+		'Hsc'  => 'charge_critique',
+		'B'    => 'larg_miroir',
+		'P'    => 'perim_mouille',
+		'S'    => 'surf_mouille',
+		'R'    => 'rayon_hyd',
+		'V'    => 'vit_moy',
+		'Fr'   => 'froud',
+		'Yc'   => 'tirant_eau_crit',
+		'Yn'   => 'tirant_eau_norm',
+		'Yf'   => 'tirant_eau_fluv',
+		'Yt'   => 'tirant_eau_torr',
+		'Yco'  => 'tirant_eau_conj',
+		'J'    => 'perte_charge',
+		'I-J'  => 'var_lin',
+		'Imp'  => 'impulsion',
+		'Tau0' => 'force_tract'
+	);
+
+
 	/*
 	* Caractéristiques communes aux calculs sur les sections :
 	* - Caractéristiques des différents types de section
@@ -183,7 +207,11 @@ abstract class form_section extends formulaire {
 			include_spip('hyd_inc/sectionTrapez.class');
 			$this->oSn=new cSnTrapez($this->oLog,$this->oP,$rLargeurFond,$rFruit);
 		}
-		$this->oSn->rY = $rY;
+		if(isset($rY)) {
+			$this->oSn->rY = $rY;
+		}
+		spip_log($this->oSn,'hydraulic',_LOG_DEBUG);
+		if(self::DBG) spip_log($this->oP,'hydraulic',_LOG_DEBUG);
 	}
 }
 ?>

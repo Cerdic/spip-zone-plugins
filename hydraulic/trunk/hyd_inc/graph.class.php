@@ -147,11 +147,9 @@ class cGraph {
 	 * @param $sId Attribut id de la balise DIV où sera créé le graphique
 	 * @param $iHeight Hauteur du graphique en pixels
 	 * @param $iWidth Largeur du graphique en pixels
-	 * @param $rDecal Offset pour décaler l'affichage des ordonnées
-	 * @param $rPente Pente pour décaler l'affichage des ordonnées
-	 * @param $rXFin Si différent de zéro, abscisse à partir de laquelle calculer la pente
 	 */
 	function GetGraph($sId, $iHeight, $iWidth) {
+		spip_log($this->tSeries,'hydraulic',_LOG_DEBUG);
 		$sId = 'jqplot_'.$sId;
 		$this->echo = sprintf('
 			<div id="%s" style="height:%spx;width:%spx; "></div>',
