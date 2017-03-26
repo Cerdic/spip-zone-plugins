@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Shoutbox</nom>
 	<slogan>Un mini tchat avec messages persistants</slogan>
-	<version>0.2.1</version>
+	<version>0.2.2</version>
 	<auteur>Fil</auteur>
 	<etat>test</etat>
 	<lien>http://contrib.spip.net/Shoutbox-pour-SPIP</lien>
@@ -16,6 +16,6 @@ Utlisation : balise <code>#SHOUTBOX</code>, ou <code>#SHOUTBOX{article,#ID_ARTIC
 	<icon>shoutbox.png</icon>
 	<version_base>0.1</version_base>
 	<install>base/shoutbox_upgrade.php</install>
-	<necessite id='SPIP' version='[2.0.0;3.1.99]' />
+	<necessite id='SPIP' version='[2.0.0;3.2.99]' />
 	<categorie>communication</categorie>
 </plugin>
