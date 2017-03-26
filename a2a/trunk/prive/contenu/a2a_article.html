@@ -2,11 +2,11 @@
 
 [(#REM) afficher les articles liés à cet article]
 
-[(#SPIP_VERSION|match{^3.1}|non)
+[(#SPIP_VERSION|version_compare{3.1,>=}|non)
 	#BOITE_OUVRIR
 	<div id="pave_a2a">
 ]
-[(#SPIP_VERSION|match{^3.1}|oui)
+[(#SPIP_VERSION|version_compare{3.1,>=}|oui)
 	<div id="pave_a2a_31" class="formulaire_spip formulaire_editer formulaire_editer_liens">
 ]
 		<INCLURE{fond=prive/objets/liste/articles_lies_a2a,nb=10,sinon=<:a2a:pas_articles_lies:>,id_article = #ID_ARTICLE_ORIG,env}{ajax=bloca2a}>
@@ -42,6 +42,6 @@
 	})(jQuery);
 	</script>
 
-[(#SPIP_VERSION|match{^3.1}|non)
+[(#SPIP_VERSION|version_compare{3.1,>=}|non)
 	#BOITE_FERMER
 ]
