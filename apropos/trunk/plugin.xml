@@ -1,7 +1,7 @@
 <plugin>
     <nom>&#192; propos des Plugins actifs</nom>
     <auteur>[Jean-Philippe Guihard|Se rendre sur le site de Jean-Philippe Guihard->http://www.jp.guihard.net/]</auteur>
-    <version>0.3.8</version>
+    <version>0.3.9</version>
     <etat>Test</etat>
 	<slogan>Liste les plugins actifs et affiche une description sommaire</slogan>
     <description>
@@ -51,6 +51,6 @@
 		<action>insert_head</action>
 		<inclure>apropos_pipeline.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[3.0.0;3.1.99]" />
+	<necessite id="SPIP" version="[3.0.0;3.2.99]" />
 	<categorie>divers</categorie> 
 </plugin>

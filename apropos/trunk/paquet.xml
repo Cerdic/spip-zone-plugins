@@ -1,9 +1,9 @@
 <paquet
 	prefix="apropos"
 	categorie="divers"
-	version="0.3.8"
+	version="0.3.9"
 	etat="test"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="apropos.png"
 	documentation="http://contrib.spip.net/A-propos-des-plugins-actifs"
 	demonstration="http://www.jp.guihard.net/spip.php?article92"
