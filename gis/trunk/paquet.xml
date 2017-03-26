@@ -1,10 +1,10 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="4.43.1"
+	version="4.43.2"
 	schema="2.1.0"
 	etat="stable"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="images/gis.png"
 	documentation="http://contrib.spip.net/4189"
 >
