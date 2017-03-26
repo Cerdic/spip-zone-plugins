@@ -1,0 +1,23 @@
+<paquet
+	prefix="tablos"
+	categorie="edition"
+	version="1.1.1"
+	etat="dev"
+	compatibilite="[2.0.0;3.2.*]"
+	logo="prive/themes/spip/images/tablos.png"
+	documentation="https://contrib.spip.net/Tablos"
+>
+
+	<nom>Tablos</nom>
+	
+	<!-- Ce plugin permet d'importer un fichier csv (provenant d'un logiciel tableur) dans un article et de l'afficher en ins&#233;rant la balise <code><embxx></code>. -->
+	
+	<auteur lien="https://contrib.spip.net/Luis-Speciale">Speciale</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+	
+	<traduire module="tablos" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="insert_head_css" action="insert_head_css" inclure="tablos_pipelines.php" />
+	<pipeline nom="insert_head" action="insert_head_" inclure="tablos_fonctions.php" />
+	
+</paquet>
