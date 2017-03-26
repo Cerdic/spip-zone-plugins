@@ -1,9 +1,9 @@
 <paquet
 	prefix="todo"
 	categorie="edition"
-	version="2.2.0"
+	version="2.2.1"
 	etat="stable"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="images/todo-48.png"
 	documentation="http://contrib.spip.net/4252"
 >
