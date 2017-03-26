@@ -29,5 +29,3 @@ function date_inscription_afficher_contenu_objet($flux){
 	}
 	return $flux;
 }
-
-?>

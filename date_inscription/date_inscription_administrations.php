@@ -9,7 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return array
  */
 function date_inscription_declarer_tables_principales($tables_principales){
-	
 	$tables_principales['spip_auteurs']['field']['date_inscription'] = "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL";
 	return $tables_principales;
 }
@@ -45,4 +44,3 @@ function date_inscription_vider_tables($nom_meta_base_version) {
 	sql_alter("TABLE spip_auteurs DROP date_inscription");
 	effacer_meta($nom_meta_base_version);
 }
-?>

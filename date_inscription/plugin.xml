@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[fr]Date d'inscription [en]Registration date [es]Fecha de inscripci&#243;n</multi></nom>
 	<auteur>b_b</auteur>
-	<version>0.2.0</version>
+	<version>0.2.1</version>
 	<version_base>0.1.0</version_base>
 	<etat>stable</etat>
 	<icon>date_inscription-32.png</icon>
@@ -19,7 +19,7 @@
 	<lien>http://contrib.spip.net/Date-d-inscription</lien>
 	<licence>GPL</licence>
 	<icon></icon>
-	<install>base/date_inscription.php</install>
+	<install>date_inscription_administrations.php</install>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>date_inscription_administrations.php</inclure>
@@ -32,6 +32,6 @@
 		<nom>afficher_contenu_objet</nom>
 		<inclure>date_inscription_pipelines.php</inclure>
 	</pipeline>
- 	<necessite id='SPIP' version='[2.0.10;3.1.99]' />
+ 	<necessite id='SPIP' version='[2.0.10;3.2.99]' />
  	<categorie>auteur</categorie>
 </plugin>
