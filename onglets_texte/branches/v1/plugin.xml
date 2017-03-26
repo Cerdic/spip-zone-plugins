@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Onglets dans le texte</nom>
-	<version>1.1.4</version>
+	<version>1.1.5</version>
 	<etat>stable</etat>
 	<icon>icon.png</icon>
 	<description>Afficher du texte en blocs &agrave; onglets.</description>
@@ -12,5 +12,5 @@
 		<inclure>head.php</inclure>
 	</pipeline>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[1.9.2;3.2.99]" />
+	<necessite id="SPIP" version="[1.9.2;3.1.99]" />
 </plugin>
