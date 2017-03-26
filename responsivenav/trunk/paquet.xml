@@ -1,9 +1,9 @@
 <paquet
 	prefix="responsivenav"
 	categorie="navigation"
-	version="0.1.5"
+	version="0.1.6"
 	etat="test"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/responsivenav-32.png"
 	documentation="https://contrib.spip.net/4782"
 >
