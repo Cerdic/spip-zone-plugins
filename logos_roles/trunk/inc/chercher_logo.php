@@ -60,6 +60,11 @@ function inc_chercher_logo_dist($id, $_id_objet, $mode = 'on') {
 		return $logo;
 	}
 
+	// S'il n'y a pas de logo avec le bon rôle, on se rabat sur le logo de base
+	if ($mode !== 'on') {
+		return inc_chercher_logo_dist($id, $_id_objet, 'on');
+	}
+
 	# coherence de type pour servir comme filtre (formulaire_login)
 	return array();
 }
@@ -112,9 +117,6 @@ function chercher_logo_document($id, $_id_objet, $mode) {
 			$extension,
 			@filemtime($fichier),
 		);
-	} elseif ($mode !== 'on') {
-		// S'il n'y a pas de logo avec le bon rôle, on se rabat sur le logo de base
-		return inc_chercher_logo_dist($id, $_id_objet, 'on');
 	}
 }
 
