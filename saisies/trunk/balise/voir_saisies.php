@@ -21,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * - `#VOIR_SAISIES{#TABLEAU_DE_SAISIES}` est équivalent à
  * - `#INCLURE{fond=inclure/voir_saisies,env,saisies=#TABLEAU_DE_SAISIES}`
  *
- * @syntaxe `#VOIR_SAISIE{#TABLEAU_DE_SAISIES}`
+ * @syntaxe `#VOIR_SAISIES{#TABLEAU_DE_SAISIES}`
  * @uses Pile::recuperer_et_supprimer_argument_balise()
  * @uses Pile::creer_et_ajouter_argument_balise()
  * @see balise_INCLURE_dist()
