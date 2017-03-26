@@ -60,6 +60,24 @@ function inc_chercher_logo_dist($id, $_id_objet, $mode = 'on') {
 		return $logo;
 	}
 
+	/* On se rabat sur le logo par défaut */
+	$def_logo = lister_roles_logos(table_objet($_id_objet), $mode);
+	if (isset($def_logo['defaut'])
+		and $logo = find_in_path($def_logo['defaut'])) {
+
+		$extension = strtolower(
+			preg_replace('/^.*\.([a-z]+)$/', '$1', $logo)
+		);
+
+		return array(
+			$logo,
+			dirname($logo) . '/',
+			basename($logo, '.' . $extension),
+			$extension,
+			@filemtime($fichier),
+		);
+	}
+
 	// S'il n'y a pas de logo avec le bon rôle, on se rabat sur le logo de base
 	if ($mode !== 'on') {
 		return inc_chercher_logo_dist($id, $_id_objet, 'on');

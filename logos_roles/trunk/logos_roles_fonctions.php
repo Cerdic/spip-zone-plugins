@@ -28,10 +28,20 @@
  * @param string|null $objet : Un nom d'objet auquel se restreindre. La fonction
  *        ne retourne alors que les rôles de logos que l'on peut attribuer à cet
  *        objet.
+ * @param string|null $role : Un rôle auquel se restreindre. On accepte `on` ou
+ * `off` pour la rétro-compatibilité
  *
- * @return array : Retourne le tableau décrivant les rôles de logos
+ * @return array : Retourne le tableau décrivant les rôles de logos. Si on a
+ * passé un paramètre rôle, on retourne directement la définition plutôt qu'une
+ * liste avec un seul rôle.
  */
-function lister_roles_logos($objet = null) {
+function lister_roles_logos($objet = null, $role = null) {
+
+	if ($role === 'on') {
+		$role = 'logo';
+	} elseif ($role === 'off') {
+		$role = 'logo_survol';
+	}
 
 	// Logos par défaut
 	$roles_logos = pipeline(
@@ -50,16 +60,22 @@ function lister_roles_logos($objet = null) {
 
 	include_spip('base/objets');
 
+	/* Filtrer par objet */
 	if ($objet = table_objet($objet)) {
 		$roles_logos_objet = array();
-		foreach ($roles_logos as $role => $options) {
+		foreach ($roles_logos as $cle_role => $options) {
 			if ((! is_array($options['objets']))
 					or in_array($objet, array_map('table_objet', $options['objets']))) {
-				$roles_logos_objet[$role] = $options;
+				$roles_logos_objet[$cle_role] = $options;
 			}
 		}
 
 		$roles_logos = $roles_logos_objet;
+	}
+
+	/* Filtrer par rôle */
+	if (! is_null($role)) {
+		return $roles_logos[$role];
 	}
 
 	return $roles_logos;

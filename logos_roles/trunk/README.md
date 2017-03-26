@@ -44,6 +44,7 @@ Pour simplifier les choses, on propose d'ajouter les nouveaux types de logos ave
 		$logos['logo_extrait'] = array(
 			'label' => 'Extraits pour les listes',
 			'objets' => array('articles', 'rubriques'),
+			'defaut' => 'img/logo-extrait.png',
 			'dimensions' => array(
 				'largeur' => 800,
 				'hauteur' => 500,
@@ -72,10 +73,9 @@ Les logos que l'on définit dans le pipeline `logos_roles` nécessitent au moins
 - __label :__ Le nom du type de logo tel qu'il doit s'afficher dans l'espace privé. Peut être une chaîne de langue.
 - __objets :__ Une liste des types d'objets pour lesquels ce type de logo doit être actif.
 
-On peut aussi utiliser un paramètre __dimensions__ qui doit être un tableau avec les clés `largeur` et `hauteur`.
-Ce paramètre permet de forcer les dimensions d'un logo, la balise `#LOGO_` correspondante recadre alors automatiquement le logo.
-Cette fonction est particulièrement utile quand on utilise le plugin massicot, qui propose alors directement le bon format pour chaque type de logo.
-
+D'autres paramètres sont optionnels :
+- __dimensions :__ Ce paramètre permet de forcer les dimensions d'un logo, la balise `#LOGO_` correspondante recadre alors automatiquement le logo. Doit être un tableau avec les clés `largeur` et `hauteur`. Cette fonction est particulièrement utile quand on utilise le plugin massicot, qui propose alors directement le bon format pour chaque type de logo.
+- __defaut :__ Permet de spécifier un logo qui sera affiché par défaut, qu'on ira alors chercher dans le chemin de SPIP.
 
 ### Modification des boucles `DOCUMENTS` ###
 
