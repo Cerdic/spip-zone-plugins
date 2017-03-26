@@ -1,11 +1,11 @@
 <paquet
 	prefix="uploadhtml5"
 	categorie="multimedia"
-	version="1.6.2"
+	version="1.6.3"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/uploadhtml5-64.png"
-	documentation="http://contrib.spip.net/Formulaire-d-upload-en-html5"
+	documentation="https://contrib.spip.net/Formulaire-d-upload-en-html5"
 	schema="1.0.0"
 >
 
