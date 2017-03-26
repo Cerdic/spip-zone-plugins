@@ -10,5 +10,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_lien' => 'Soutenir par un don'
 	
 );
-
-?>

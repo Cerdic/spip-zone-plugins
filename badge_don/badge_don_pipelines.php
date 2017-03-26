@@ -18,5 +18,3 @@ function badge_don_affichage_final($page) {
 
 	return $page;
 }
-
-?>
