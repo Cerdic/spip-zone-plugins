@@ -74,7 +74,15 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 		} else {
 			$libelle = _L('Logo');
 		}
-		$aider = charger_fonction('aider', 'inc', true);
+
+		// Depuis SPIP 3.2, 'aider' est directement une fonction. Avant il fallait
+		// utiliser 'charger_fonction'.
+		if (function_exists('aider')) {
+			$aider = 'aider';
+		} else {
+			$aider = charger_fonction('aider', 'inc', true);
+		}
+
 		switch ($objet) {
 			case 'article':
 				$libelle .= ' ' . $aider('logoart');
