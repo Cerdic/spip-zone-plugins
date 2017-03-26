@@ -8,5 +8,3 @@ function opensearch_insert_head($flux){
 	$flux .= '<link rel="search" type="application/opensearchdescription+xml" title="'.$nom_site.'" href="'.$url_opensearch.'" />';
 	return $flux;
 }
-
-?>
