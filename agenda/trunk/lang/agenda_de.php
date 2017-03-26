@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirm_suppression_inscription' => 'Wollen sie diese Anmeldung wirklich löschen?',
 	'confirm_suppression_inscription_toutes' => 'Wollen Sie wirklich alle Anmeldungen löschen?',
 	'connexion_necessaire_pour_inscription' => 'Um sich für den Event anmelden zu können müssen Sie sich anmelden.',
-	'creer_evenement' => 'Event neu anlegen',
+	'creer_evenement' => 'Neues Event anlegen',
 
 	// D
 	'date_fmt_agenda_label' => '<b class="day">@jour@</b> <b class="month">@mois@</b> <b class="year">@annee@</b>',
