@@ -122,7 +122,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mois_suivant' => 'الشهر التالي',
 
 	// N
-	'nb_repetitions' => '@nb@ répétitions',
+	'nb_repetitions' => '@nb@ تكرار',
 
 	// P
 	'participation_incertaine_prise_en_compte' => 'تم تسجيل مشاركتك المحتملة',
@@ -130,16 +130,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'probleme_technique' => 'لقد حدثت مشكلة فنية. يرجى إعادة المحاولة لاحقا.',
 
 	// R
-	'repetition' => 'Répétition',
-	'repetition_de' => 'Répétition de',
+	'repetition' => 'تكرار',
+	'repetition_de' => 'تكرار',
 	'retour_evenement' => 'عودة إلى الحدث',
 	'rubrique_activer_agenda' => 'Activer le mode agenda',
-	'rubrique_dans_une_rubrique_mode_agenda' => 'Cette rubrique permet d’utiliser les événements car elle est dans une rubrique dont le mode agenda a été activé',
 	'rubrique_desactiver_agenda' => 'Désactiver le mode agenda',
-	'rubrique_liste_evenements_de' => 'Événements de la rubrique',
+	'rubrique_liste_evenements_de' => 'أحداث القسم',
 	'rubrique_mode_agenda' => 'Le mode agenda est activé pour cette rubrique et sa branche',
 	'rubrique_sans_gestion_evenement' => 'Le mode agenda n’est pas activé pour cette rubrique',
-	'rubriques' => 'Rubriques Agenda',
+	'rubriques' => 'أقسام المفكرة',
 
 	// S
 	'sans_titre' => '(بدون عنوان)',
@@ -156,11 +155,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_cadre_modifier_evenement' => 'تعديل حدث',
 	'titre_sur_l_agenda' => 'على الأجندا',
 	'titre_sur_l_agenda_aussi' => 'و أيضا...',
-	'toutes_rubriques' => 'Toutes',
+	'toutes_rubriques' => 'الكل',
 
 	// U
 	'une_repetition' => 'تكرار واحد',
 
 	// V
-	'voir_evenements_rubrique' => 'Voir les événements de la rubrique'
+	'voir_evenements_rubrique' => 'عرض أحداث القسم'
 );
