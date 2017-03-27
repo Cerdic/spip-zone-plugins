@@ -1,11 +1,11 @@
 <paquet
 	prefix="verifie31"
 	categorie="maintenance"
-	version="1.1.0"
+	version="1.1.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/verifie31-64.png"
-	documentation="http://contrib.spip.net/4601"
+	documentation="https://contrib.spip.net/4601"
 >
 
 	<nom>Vérifie les plugins pour passage à SPIP 3.1</nom>
