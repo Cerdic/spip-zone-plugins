@@ -11,9 +11,9 @@
 	</slogan>
 	<auteur>Mehdi Cherigui - Jacques Pyrat</auteur>
 	<licence>GPLv3</licence>
-	<version>1.0.4</version>
+	<version>1.0.5</version>
 	<icon>images/nemequitepas-48.png</icon>
-	<lien>http://contrib.spip.net/???</lien>
+	<lien>http://contrib.spip.net/4876</lien>
 
 	<description>
 		<multi>
@@ -28,4 +28,5 @@
 		<inclure>nemequittepas_pipelines.php</inclure>
 	</pipeline>
 	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[2.1.0;3.2.99]" />
 </plugin>

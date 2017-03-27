@@ -1,11 +1,11 @@
 <paquet
 	prefix="nemequittepas"
 	categorie="edition"
-	version="1.0.4"
+	version="1.0.5"
 	etat="test"
-	compatibilite="[2.1.0;3.1.*]"
+	compatibilite="[2.1.0;3.2.*]"
 	logo="images/nemequitepas-48.png"
-	documentation="http://contrib.spip.net/???"
+	documentation="http://contrib.spip.net/4876"
 >	
 
 	<nom>Ne me quitte pas !</nom>
