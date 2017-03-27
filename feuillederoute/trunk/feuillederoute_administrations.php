@@ -8,13 +8,20 @@ function feuillederoute_upgrade($nom_meta_version_base, $version_cible) {
 
 	$maj = array();
 
-	include_spip('inc/config');
-	$maj = array();
+	$config_autorisations = array(
+		'modifier_type' => 'par_statut',
+		'lire_type' => 'par_statut',
+		'modifier_statuts' => array('0minirezo'),
+		'lire_statuts' => array('0minirezo')
+	);
 	$maj['create'] = array(
 		array('ecrire_config','feuillederoute', array(
-			'titre' => 'Feuille de Route'
+			'titre' => 'Feuille de Route',
+			'autorisations', serialize($config_autorisations)
 		))
 	);
+	
+	// Maj du plugin.
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_version_base, $version_cible, $maj);
 }
