@@ -87,7 +87,7 @@ class form_courbe_remous extends form_section {
 			$aC['Flu'] = $oCRF->calcul($rYaval, $rLong, $Methode);
 		}
 		else {
-			$this->oLog->Add(_T('hydraulic:pas_calcul_depuis_aval'));
+			$this->oLog->Add(_T('hydraulic:pas_calcul_depuis_aval'), true);
 		}
 
 		// Calcul depuis l'amont
@@ -97,7 +97,7 @@ class form_courbe_remous extends form_section {
 			$aC['Tor'] = $oCRT->calcul($rYamont, $rLong, $Methode);
 		}
 		else {
-			$this->oLog->Add(_T('hydraulic:pas_calcul_depuis_amont'));
+			$this->oLog->Add(_T('hydraulic:pas_calcul_depuis_amont'), true);
 		}
 		spip_log($aC,'hydraulic',_LOG_DEBUG);
 
@@ -238,147 +238,152 @@ class form_courbe_remous extends form_section {
 		//Construction d'un tableau des indices x combinant les abscisses des 2 lignes d'eau
 		$trX = $this->result['trX'];
 
-		/***************************************************************************
-		*                        Affichage du graphique
-		****************************************************************************/
-		include_spip('hyd_inc/graph.class');
-		$oGraph = new cGraph();
-		// Cote des berges
-		$oGraph->AddSerie(
-			'berge',
-			$trX,
-			$this->oP->rYB,  // La cote des berges sera calculée à partir de la pente fournie dans GetGraph
-			'#C58f50',
-			'lineWidth:1'
-		);
-		// Cote du fond
-		$oGraph->AddSerie(
-			'fond',
-			$trX,
-			0,  // La cote du fond sera calculée à partir de la pente fournie dans GetGraph
-			'#753f00',
-			'lineWidth:1, fill:true'
-		);
-		// Ligne d'eau fluviale
-		if(isset($this->result['Flu'])) {
+		$echo = '';
+
+		if(!empty($trX)) {
+			/***************************************************************************
+			*                        Affichage du graphique
+			****************************************************************************/
+			include_spip('hyd_inc/graph.class');
+			$oGraph = new cGraph();
+			// Cote des berges
 			$oGraph->AddSerie(
-				'ligne_eau_fluviale',
-				array_keys($this->result['Flu']),
-				array_values($this->result['Flu']),
-				'#0093bd',
-				'lineWidth:3, showMarker:true, markerOptions:{style:\'filledCircle\', size:8}'
-			);
-		}
-		// Ligne d'eau torrentielle
-		if(isset($this->result['Tor'])) {
-			$oGraph->AddSerie(
-				'ligne_eau_torrentielle',
-				array_keys($this->result['Tor']),
-				array_values($this->result['Tor']),
-				'#77a3cd',
-				'lineWidth:3, showMarker:true, markerOptions:{style:\'filledCircle\', size:8}'
-			);
-		}
-		// Hauteur critique
-		if(is_numeric($this->oSn->rHautCritique)) {
-			$oGraph->AddSerie(
-				'h_critique',
+				'berge',
 				$trX,
-				$this->oSn->rHautCritique,  // La cote du fond sera calculée à partir de la pente fournie dans GetGraph
-				'#ff0000',
-				'lineWidth:2'
+				$this->oP->rYB,  // La cote des berges sera calculée à partir de la pente fournie dans GetGraph
+				'#C58f50',
+				'lineWidth:1'
 			);
-		}
-		// Hauteur normale
-		if(is_numeric($this->oSn->rHautNormale)) {
+			// Cote du fond
 			$oGraph->AddSerie(
-				'h_normale',
+				'fond',
 				$trX,
-				$this->oSn->rHautNormale,  // La cote du fond sera calculée à partir de la pente fournie dans GetGraph
-				'#a4c537',
-				'lineWidth:2'
+				0,  // La cote du fond sera calculée à partir de la pente fournie dans GetGraph
+				'#753f00',
+				'lineWidth:1, fill:true'
 			);
-		}
+			// Ligne d'eau fluviale
+			if(isset($this->result['Flu'])) {
+				$oGraph->AddSerie(
+					'ligne_eau_fluviale',
+					array_keys($this->result['Flu']),
+					array_values($this->result['Flu']),
+					'#0093bd',
+					'lineWidth:3, showMarker:true, markerOptions:{style:\'filledCircle\', size:8}'
+				);
+			}
+			// Ligne d'eau torrentielle
+			if(isset($this->result['Tor'])) {
+				$oGraph->AddSerie(
+					'ligne_eau_torrentielle',
+					array_keys($this->result['Tor']),
+					array_values($this->result['Tor']),
+					'#77a3cd',
+					'lineWidth:3, showMarker:true, markerOptions:{style:\'filledCircle\', size:8}'
+				);
+			}
+			// Hauteur critique
+			if(is_numeric($this->oSn->rHautCritique)) {
+				$oGraph->AddSerie(
+					'h_critique',
+					$trX,
+					$this->oSn->rHautCritique,  // La cote du fond sera calculée à partir de la pente fournie dans GetGraph
+					'#ff0000',
+					'lineWidth:2'
+				);
+			}
+			// Hauteur normale
+			if(is_numeric($this->oSn->rHautNormale)) {
+				$oGraph->AddSerie(
+					'h_normale',
+					$trX,
+					$this->oSn->rHautNormale,  // La cote du fond sera calculée à partir de la pente fournie dans GetGraph
+					'#a4c537',
+					'lineWidth:2'
+				);
+			}
 
-		// Valeur calculée
-		if($choix_graph == 'courbe') {
-			$oGraph->AddSerie(
-				$sCodeLangValCal,
-				array_keys($this->result['tRes']),
-				array_values($this->result['tRes']),
-				'#C17AF0',
-				'lineWidth:3, showMarker:true, markerOptions:{style:\'filledCircle\', size:8}'
-			);
-		}
+			// Valeur calculée
+			if($choix_graph == 'courbe') {
+				$oGraph->AddSerie(
+					$sCodeLangValCal,
+					array_keys($this->result['tRes']),
+					array_values($this->result['tRes']),
+					'#C17AF0',
+					'lineWidth:3, showMarker:true, markerOptions:{style:\'filledCircle\', size:8}'
+				);
+			}
 
-		// Décalage des données par rapport au fond
-		$oGraph->Decal(max(0,-$this->data['rIf']*$this->data['rLong']), $this->data['rIf'], $this->data['rLong']);
+			// Décalage des données par rapport au fond
+			$oGraph->Decal(max(0,-$this->data['rIf']*$this->data['rLong']), $this->data['rIf'], $this->data['rLong']);
 
-		// Récupération du graphique
-		$echo = $oGraph->GetGraph('courbe_remous',400,600);
+			// Récupération du graphique
+			$echo .= $oGraph->GetGraph('courbe_remous',400,600);
 
-		// Affichage du graphique
-		if($choix_graph == 'graph') {
-			$echo .= $this->getGraph(
-				_T('hydraulic:abscisse'),
-				$sLibValCal,
-				array_keys($this->result['tRes']),
-				array_values($this->result['tRes'])
-			);
+			// Affichage du graphique
+			if($choix_graph == 'graph') {
+				$echo .= $this->getGraph(
+					_T('hydraulic:abscisse'),
+					$sLibValCal,
+					array_keys($this->result['tRes']),
+					array_values($this->result['tRes'])
+				);
+			}
 		}
 
 		// Journal de calcul
 		$echo .= $this->oLog->Result();
 
-		/***************************************************************************
-		*                   Affichage du tableau de données
-		****************************************************************************/
-		$echo.='<table class="spip">
-			<thead>
-				<tr class="row_first">
-					<th scope="col" colspan="1" rowspan="2">'._T('hydraulic:abscisse').' (m)</th>
-					<th scope="col" colspan="2" rowspan="1">'._T('hydraulic:ligne_eau_fluviale').'</th>
-					<th scope="col" colspan="2" rowspan="1">'._T('hydraulic:ligne_eau_torrentielle').'</th>
-				</tr>
-				<tr class="row_first">
-					<th scope="col">'._T('hydraulic:tirant_eau').'</th>
-					<th scope="col">'.$sLibValCal.'</th>
-					<th scope="col">'._T('hydraulic:tirant_eau').'</th>
-					<th scope="col">'.$sLibValCal.'</th>
-				</tr>
-			</thead>
-			<tbody>';
-				$i=0;
-				foreach($trX as $rX) {
-					$i+=1;
-					$echo.='<tr class="align_right ';
-						$echo.=($i%2==0)?'row_even':'row_odd';
-						$echo.='"><td>'.format_nombre($rX,$this->oP->iPrec).'</td>';
-						if(isset($this->result['tRes'][$rX])) {
-							$sValCal = format_nombre($this->result['tRes'][$rX],$this->oP->iPrec);
-						} else {
-							$sValCal = '-';
-						}
-						if(isset($this->result['Flu'][$rX])) {
-							// On formalise les résultats, avec le nombre de chiffres aprés la virgule adéquat
-							$echo .= '<td>'.format_nombre($this->result['Flu'][$rX],$this->oP->iPrec).'</td>';
-							$echo .= "<td>$sValCal</td>";
-						}
-						else {
-							$echo .= '<td></td><td></td>';
-						}
-						if(isset($this->result['Tor'][$rX])) {
-							$echo .= '<td>'.format_nombre($this->result['Tor'][$rX],$this->oP->iPrec).'</td>';
-							$echo .= "<td>$sValCal</td>";
-						}
-						else {
-							$echo .= '<td></td><td></td>';
-						}
-					$echo .= '</tr>';
-				}
-			$echo.='</tbody>
-		</table>';
-
+		if(!empty($trX)) {
+			/***************************************************************************
+			*                   Affichage du tableau de données
+			****************************************************************************/
+			$echo.='<table class="spip">
+				<thead>
+					<tr class="row_first">
+						<th scope="col" colspan="1" rowspan="2">'._T('hydraulic:abscisse').' (m)</th>
+						<th scope="col" colspan="2" rowspan="1">'._T('hydraulic:ligne_eau_fluviale').'</th>
+						<th scope="col" colspan="2" rowspan="1">'._T('hydraulic:ligne_eau_torrentielle').'</th>
+					</tr>
+					<tr class="row_first">
+						<th scope="col">'._T('hydraulic:tirant_eau').'</th>
+						<th scope="col">'.$sLibValCal.'</th>
+						<th scope="col">'._T('hydraulic:tirant_eau').'</th>
+						<th scope="col">'.$sLibValCal.'</th>
+					</tr>
+				</thead>
+				<tbody>';
+					$i=0;
+					foreach($trX as $rX) {
+						$i+=1;
+						$echo.='<tr class="align_right ';
+							$echo.=($i%2==0)?'row_even':'row_odd';
+							$echo.='"><td>'.format_nombre($rX,$this->oP->iPrec).'</td>';
+							if(isset($this->result['tRes'][$rX])) {
+								$sValCal = format_nombre($this->result['tRes'][$rX],$this->oP->iPrec);
+							} else {
+								$sValCal = '-';
+							}
+							if(isset($this->result['Flu'][$rX])) {
+								// On formalise les résultats, avec le nombre de chiffres aprés la virgule adéquat
+								$echo .= '<td>'.format_nombre($this->result['Flu'][$rX],$this->oP->iPrec).'</td>';
+								$echo .= "<td>$sValCal</td>";
+							}
+							else {
+								$echo .= '<td></td><td></td>';
+							}
+							if(isset($this->result['Tor'][$rX])) {
+								$echo .= '<td>'.format_nombre($this->result['Tor'][$rX],$this->oP->iPrec).'</td>';
+								$echo .= "<td>$sValCal</td>";
+							}
+							else {
+								$echo .= '<td></td><td></td>';
+							}
+						$echo .= '</tr>';
+					}
+				$echo.='</tbody>
+			</table>';
+		}
 		return $echo;
 	}
 

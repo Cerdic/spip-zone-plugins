@@ -74,8 +74,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'froud'             => "Le Froude",
 	'force_tract'       => "La force tractrice (Pa)",
 	// H
-	'h_amont_imposee'   => "Tirant d'eau imposée à l'amont (m)",
-	'h_aval_imposee'    => "Tirant d'eau imposée à l'aval (m)",
+	'h_amont_imposee'   => "Tirant d'eau imposé à l'amont (m)",
+	'h_aval_imposee'    => "Tirant d'eau imposé à l'aval (m)",
 	'h_berge'           => "Hauteur de berge (m)",
 	'h_conjuguee'       => "Hauteur conjuguée",
 	'h_critique'        => "Tirant d'eau critique",
