@@ -52,7 +52,7 @@ function albums_afficher_complement_objet($flux) {
 		$id_table_objet  = id_table_objet($type);
 		$champs          = sql_fetsel('*', $table_objet_sql, addslashes($id_table_objet).'='.intval($id));
 		$marquer_doublons_album = charger_fonction('marquer_doublons_album', 'inc');
-		$marquer_doublons_album($champs,$id,$type,$id_table_objet,$table_objet,$table_objet_sql);
+		$marquer_doublons_album($champs, $id, $type, $id_table_objet, $table_objet, $table_objet_sql);
 		// puis on récupère le squelette
 		$texte .= recuperer_fond('prive/squelettes/contenu/portfolio_albums', array(
 				'objet' => $type,
