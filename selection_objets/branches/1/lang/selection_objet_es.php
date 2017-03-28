@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.net/tradlang_module/selection_objet?lang_cible=es
+// extrait automatiquement de https://trad.spip.net/tradlang_module/selection_objet?lang_cible=es
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -75,5 +75,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_liens_defaut' => 'tipos de enlace por defecto, pueden ser sobrescritos más abajo',
 	'type_liens_surcharge' => 'sobrescribir los tipos de enlace por defecto'
 );
-
-?>

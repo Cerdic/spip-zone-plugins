@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.net/tradlang_module/selection_objet?lang_cible=de
+// extrait automatiquement de https://trad.spip.net/tradlang_module/selection_objet?lang_cible=de
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -77,5 +77,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_liens_defaut' => 'Standard Verknüpfunsart, kann weiter unten überschrieben werden',
 	'type_liens_surcharge' => 'die standard Verknüpfunsarten überschreiben'
 );
-
-?>

@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'selection_objet_nom' => 'Sélection d’objets',
 	'selection_objet_slogan' => 'Listez vos objets spip'
 );
-
-?>
