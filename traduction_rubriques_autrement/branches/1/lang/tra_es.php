@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.net/tradlang_module/tra?lang_cible=es
+// extrait automatiquement de https://trad.spip.net/tradlang_module/tra?lang_cible=es
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -19,5 +19,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'trad_delier_rubrique' => 'Desvincular esta sección de sus traducciones'
 );
-
-?>
