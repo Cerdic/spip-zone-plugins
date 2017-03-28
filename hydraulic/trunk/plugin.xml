@@ -7,7 +7,7 @@
 	</nom>
 	<auteur>David Dorchies, Médéric Dulondel</auteur>
 	<licence>GNU/GLP</licence>
-	<version>0.11.0</version>
+	<version>0.11.1</version>
 	<necessite id="lib:dist" src="http://www.jqplot.com/download/jquery.jqplot.1.0.8r1250.zip" />
 	<slogan>
 		<multi>

@@ -115,7 +115,7 @@ abstract class form_section extends formulaire {
 			// Pour la courbe de remous, on a besoin de la longueur du bief en plus
 			$saisies_bief['c_bief'][1]['rLong'] = array('longueur_bief',100,'op');
 		}
-		$saisies_bief['c_bief'][1]['rIf'] = array('pente_fond',0.001,'opn');
+		$saisies_bief['c_bief'][1]['rIf'] = array('pente_fond',0.001,'o');
 		$saisies_bief['c_bief'][1]['rYB'] = array('h_berge',1,'opn');
 		$this->saisies = array_merge($saisies_section, $saisies_bief, $this->saisies);
 		parent::__construct();

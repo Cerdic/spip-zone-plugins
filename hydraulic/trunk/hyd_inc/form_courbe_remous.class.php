@@ -312,7 +312,7 @@ class form_courbe_remous extends form_section {
 		}
 
 		// Décalage des données par rapport au fond
-		$oGraph->Decal(0, $this->data['rIf'], $this->data['rLong']);
+		$oGraph->Decal(max(0,-$this->data['rIf']*$this->data['rLong']), $this->data['rIf'], $this->data['rLong']);
 
 		// Récupération du graphique
 		$echo = $oGraph->GetGraph('courbe_remous',400,600);
@@ -326,7 +326,6 @@ class form_courbe_remous extends form_section {
 				array_values($this->result['tRes'])
 			);
 		}
-
 
 		// Journal de calcul
 		$echo .= $this->oLog->Result();

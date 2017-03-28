@@ -46,6 +46,9 @@
  *
  */
 class cGraph {
+
+	const DBG = false; /// Activation des messages de débuggage de la classe
+
 	private $tSeries;   //!< Tableau des séries
 	private $echo;  //!< Chaine contenant le script jqPlot
 	private $tLabels; /// Respectivement les titres du graphique, des abscisses, des ordonnées
@@ -149,7 +152,7 @@ class cGraph {
 	 * @param $iWidth Largeur du graphique en pixels
 	 */
 	function GetGraph($sId, $iHeight, $iWidth) {
-		spip_log($this->tSeries,'hydraulic',_LOG_DEBUG);
+		if(self::DBG) spip_log($this->tSeries,'hydraulic',_LOG_DEBUG);
 		$sId = 'jqplot_'.$sId;
 		$this->echo = sprintf('
 			<div id="%s" style="height:%spx;width:%spx; "></div>',
