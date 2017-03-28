@@ -1,9 +1,9 @@
 <paquet
 	prefix="auteur_evenement"
 	categorie="date"
-	version="1.0.2"
+	version="1.1.0"
 	etat="stable"
-	compatibilite="[3.0.8;3.1.*]"
+	compatibilite="[3.0.8;3.2.*]"
 	logo="prive/themes/spip/images/auteur_evenement-64.png"
 >
 
@@ -13,10 +13,10 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="agenda" compatibilite="[3.14.5;]" /> 
-	
-	<pipeline nom="affiche_milieu" inclure="auteur_evenement_pipelines.php" /> 
-	<pipeline nom="affiche_auteurs_interventions" inclure="auteur_evenement_pipelines.php" /> 
+	<necessite nom="agenda" compatibilite="[3.18.4;]" />
+
+	<pipeline nom="affiche_milieu" inclure="auteur_evenement_pipelines.php" />
+	<pipeline nom="affiche_auteurs_interventions" inclure="auteur_evenement_pipelines.php" />
 
 
 </paquet>
