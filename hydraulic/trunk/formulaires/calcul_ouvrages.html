@@ -83,7 +83,7 @@
 		afficher_cacher_surverse();
 	}
 
-	function afficher_cacher_champs_select() {
+	function afficher_cacher_champs_select(iSelectLoi = 0) {
 		setVarGlob();
 		var tabAfficher = [];
 
@@ -103,12 +103,13 @@
 			for(var j = 0; j < tabAfficher.length; j++){
 				if(tabAfficher[j] == ch_equaQ.options[i].value) {
 					ch_equaQ.options[i].style.display="list-item";
-					if(!bSel) {
+					if(!iSelectLoi & !bSel) {
 						bSel = true;
 						ch_equaQ.options[i].selected=true;
 					}
 				}
 			}
+			if(iSelectLoi == ch_equaQ.options[i].value) ch_equaQ.options[i].selected=true;
 		}
 	}
 
@@ -655,6 +656,6 @@
 	</table>
 </form>
 
-<script>afficher_cacher_champs_select();</script>
+<script>afficher_cacher_champs_select(#ENV{OuvrageLoi});</script>
 
 [<div id="hyd_resultat">(#ENV*{message_ok})</div>]
