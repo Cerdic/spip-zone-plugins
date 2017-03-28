@@ -55,9 +55,9 @@ function formulaires_configurer_rang_traiter_dist() {
 			// si le champ 'rang' n'existe pas, le créer et le remplir
 			$champs_table = sql_showtable($table);
 			if (!isset($champs_table['field']['rang'])) {
-				
-				// créer le champ 'rang' 
-				sql_alter('TABLE '.$table.' ADD rang SMALLINT NOT NULL after statut');
+
+				// créer le champ 'rang'
+				sql_alter('TABLE '.$table.' ADD rang SMALLINT NOT NULL');
 
 				// remplir #1 : si aucun numero_titre n'est trouvé, on met la valeur de l'id_prefixe dans rang
 				if (!rang_tester_presence_numero($table)) {
@@ -65,11 +65,11 @@ function formulaires_configurer_rang_traiter_dist() {
 					$desc = lister_tables_objets_sql($table);
 					if (isset($desc['field']['id_rubrique'])) {
 						$quelles_rubriques = sql_allfetsel('id_rubrique', $table, '', 'id_rubrique');
-					
+
 						foreach ($quelles_rubriques as $key => $value) {
 							$id_rub =  $value['id_rubrique'];
 							$quelles_items = sql_allfetsel($id, $table, 'id_rubrique='.$id_rub);
-						
+
 							$i = 1;
 							foreach ($quelles_items as $key => $value) {
 								$id_prefixe = $value[$id];
