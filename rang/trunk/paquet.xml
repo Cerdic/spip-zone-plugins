@@ -1,12 +1,12 @@
 <paquet
 	prefix="rang"
 	categorie="navigation"
-	version="0.5.4"
+	version="0.5.5"
 	etat="experimental"
 	compatibilite="[3.1.0;3.1.*]"
 	logo="prive/themes/spip/images/rang-64.png"
 	documentation="https://contrib.spip.net/Plugin-Rang-ordonner-par-Drag-Drop"
-	schema="1.0.0" 
+	schema="1.0.0"
 >
 	<nom>Rang</nom>
 	<!-- Permet de réordonner les tables de SPIP par drag'n'drop -->
