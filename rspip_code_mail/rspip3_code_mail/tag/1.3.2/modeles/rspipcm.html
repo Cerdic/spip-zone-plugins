@@ -1,0 +1,71 @@
+#SET{email,#ENV{email}}
+#SET{title,#ENV{title}}
+#SET{param,#ENV{param}}
+
+<?php
+
+// encode les adresses pour le modele spip
+function rspipcm_encode_modele($adr) {
+   $email_encode = ""; $ch = "";
+
+   $curenc = mb_internal_encoding();
+   if (mb_detect_encoding($adr) == "UTF-8") {mb_internal_encoding("UTF-8");}
+
+   for ($i = (mb_strlen($adr) - 1); $i > -1; $i--) {
+      $ch = mb_substr($adr, $i, 1);
+      if ($ch=="@") {$ch=":";} //:
+      if ($ch=="?") {$ch="!";} //!
+      $email_encode .= $ch;
+      }
+   
+   $email_encode = str_replace("'", " ", $email_encode);
+   $email_encode = str_replace('"', '', $email_encode);
+  
+   mb_internal_encoding($curenc);   
+   
+ //     $email_encode = "javascript:mdecode('".$email_encode."');";
+   
+   return $email_encode;
+   }
+
+$rspipcm_modele_email = "#GET{email}";
+$rspipcm_modele_title = "#GET{title}";
+$rspipcm_modele_param = "#GET{param}";
+
+if ($rspipcm_modele_email == "" || $rspipcm_modele_title == ""){
+    echo "<div style='background:red; color:yellow; padding: 5px;'>Error rspipcm model: email address and/or title missing ;(. </div>";
+    }
+    else{
+    //echo $rspipcm_modele_email.')'.$rspipcm_modele_title;
+    
+    // Si javascript est désactivé
+	// on recupere le domaine pour javascript desactive
+	$rspipcm_modele_val_domaine = strstr($rspipcm_modele_email, '@');
+	// on backes le @
+    $rspipcm_modele_val_domaine = substr($rspipcm_modele_val_domaine, 1, strlen($rspipcm_modele_val_domaine));
+
+    // On récupère le user
+    $rspipcm_modele_email_nom = substr($rspipcm_modele_email, 0, strpos($rspipcm_modele_email, "@"));
+    // Si il y a des . dans user on l'eclate: par exple: nom.prenom > Nom Prenom
+	if (preg_match("/\./", $rspipcm_modele_email_nom)) {
+		$rspipcm_modele_email_nom_array = explode(".", $rspipcm_modele_email_nom); $rspipcm_modele_nom_prov = "";
+		foreach ($rspipcm_modele_email_nom_array as $val_n) {$rspipcm_modele_nom_prov .= ucfirst($val_n)." ";}
+		$rspipcm_modele_email_nom = trim($rspipcm_modele_nom_prov);
+		}
+    $rspipcm_modele_email_nom = _T('rspipcm:ecrire_a_pre')." ".$rspipcm_modele_email_nom." "._T('rspipcm:ecrire_a_post');
+
+    // On ajoute d'évenuels param
+    if ($rspipcm_modele_param != "") {
+        $rspipcm_modele_param = "?".$rspipcm_modele_param;
+        $rspipcm_modele_param = str_replace(":", "=", $rspipcm_modele_param);
+        $rspipcm_modele_param = str_replace(";", "&", $rspipcm_modele_param);
+        $rspipcm_modele_email .= $rspipcm_modele_param;
+        }
+    //echo $rspipcm_modele_email.')'.$rspipcm_modele_title;
+    $rspipcm_modele_email = rspipcm_encode_modele($rspipcm_modele_email);
+    
+    echo "<a href=\"javascript:mdecode('".$rspipcm_modele_email."')\">".$rspipcm_modele_title."</a><noscript><div class='rspipcm_noscript'>".$rspipcm_modele_email_nom."<br />"._T('rspipcm:dans_le_domaine')." : ".$rspipcm_modele_val_domaine."</div></noscript>";
+    
+    }
+
+?>
