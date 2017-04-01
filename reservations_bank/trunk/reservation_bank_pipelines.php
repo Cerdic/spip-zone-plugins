@@ -217,12 +217,26 @@ function reservation_bank_formulaire_traiter($flux) {
 	// Affiche le formulaire de paiment au retour du formulaire réservation
 	if ($form == 'reservation') {
 		include_spip('inc/config');
+		$config = lire_config('reservation_bank', array());
+		$cacher_paiement_public = isset($config['cacher_paiement_public']) ? $config['cacher_paiement_public'] : '';
+		$preceder_formulaire = isset($config['preceder_formulaire']) ? $config['preceder_formulaire'] : '';
 		$id_transaction = rb_inserer_transaction(session_get('id_reservation'));
-		if (!$cacher_paiement_public = lire_config('reservation_bank/cacher_paiement_public')) {
-			$flux['data']['message_ok'] .= recuperer_fond('inclure/paiement_reservation', array (
+		if (!$cacher_paiement_public) {
+			$message_ok = preg_replace('/<p[^>]*>.*?<\/p>/i', '',$flux['data']['message_ok']);
+			$tag_regex = '/<div[^>]*'.$attr.'="'.$value.'">(.*?)<\\/div>/si';
+			if ($preceder_formulaire) {
+				$flux['data']['message_ok'] = recuperer_fond('inclure/paiement_reservation', array (
 					'id_reservation' => session_get('id_reservation'),
 					'cacher_paiement_public' => FALSE
-			));
+				)) . '<br />'. $message_ok;
+			}
+			else {
+				$flux['data']['message_ok'] = $message_ok . recuperer_fond('inclure/paiement_reservation', array (
+					'id_reservation' => session_get('id_reservation'),
+					'cacher_paiement_public' => FALSE
+				));
+			}
+
 		}
 	}
 

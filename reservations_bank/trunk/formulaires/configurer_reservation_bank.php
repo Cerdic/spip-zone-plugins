@@ -25,7 +25,18 @@ function formulaires_configurer_reservation_bank_saisies_dist() {
 						'defaut' => $config['cacher_paiement_public']
 					)
 				),
+				array(
+					'saisie' => 'oui_non',
+					'options' => array(
+						'nom' => 'preceder_formulaire',
+						'label' => _T('reservation_bank:label_preceder_formulaire'),
+						'defaut' => $config['preceder_formulaire'],
+						'afficher_si' => '@cacher_paiement_public@ == ""',
+					)
+				),
 			),
+
+
 		)
 	);
 }
