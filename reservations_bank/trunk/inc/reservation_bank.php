@@ -17,10 +17,11 @@ function montant_reservations_detail_total($id_reservation) {
 	while ($data = sql_fetch($sql)) {
 		$id_reservations_detail = $data['id_reservations_detail'];
 		$montant_paye[$id_reservations_detail] = $data['montant_paye'];
-
-		if ($montant = $data['prix'] <= 0) {
-			$montant = $data['prix_ht'] + $data['taxe'];
+		$montant = $data['prix'];
+		if ($montant <= 0) {
+			$montant = $data['prix_ht'] + ($data['prix_ht'] * $data['taxe']);
 		}
+
 		$montant_reservations_detail_total[$id_reservations_detail] = $montant;
 		set_request('montant_reservations_detail_' . $id_reservations_detail, $montant);
 		$montant_reservations_detail = _request('montant_reservations_detail_' . $id_reservations_detail);
