@@ -27,12 +27,12 @@ function prix_reservations_detail_ht($id_objet, $les_prix) {
 function prix_reservations_detail_dist($id_reservations_detail) {
 	$les_prix = sql_fetsel('prix,prix_ht,taxe', 'spip_reservations_details', 'id_reservations_detail=' . $id_reservations_detail);
 
-	if ($les_prix['prix'] != '0')
+	if ($les_prix['prix'] != '0.00')
 		$prix = $les_prix['prix'];
 	else {
 		$taxe = isset($les_prix['taxe']) ? $les_prix['taxe'] : 0;
 
-		if ($taxe > 0) {
+		if ($taxe > 0.00) {
 			$prix = $les_prix['prix_ht'] + ($les_prix['prix_ht'] * $taxe);
 		}
 		else {
