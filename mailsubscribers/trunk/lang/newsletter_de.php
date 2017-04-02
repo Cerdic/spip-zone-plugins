@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_link_unsubscribe' => 'Diesen Newsletter abbestellen',
 
 	// S
-	'subscribe_message_ok' => 'Ihre ANmeldung unter der Adresse @email@ wird bearbeitet.',
+	'subscribe_message_ok' => 'Ihre Anmeldung unter der Adresse @email@ wird bearbeitet.',
 	'unsubscribe_message_ok' => 'Die Adresse @email@ wurde aus der Empfängerliste gestrichen.',
 
 
