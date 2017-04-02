@@ -99,8 +99,6 @@
 		<icone>images/spipmotion-24.png</icone>
 		<url>ffmpeg_infos</url>
 	</bouton>
-	<categorie>multimedia</categorie>
-</plugin>
 	<bouton id='bando_ffmpeg_infos' parent="bando_configuration">
 		<titre>spipmotion:titre_page_ffmpeg_infos</titre>
 		<icone>images/spipmotion-16.png</icone>
@@ -120,4 +118,5 @@
 	
 	<utilise id='podcast' />
 	<utilise id='fonctions_images' version='[0.5.1]' />
-	
+	<categorie>multimedia</categorie>
+</plugin>
