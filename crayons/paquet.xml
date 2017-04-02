@@ -1,11 +1,11 @@
 <paquet
 	prefix="crayons"
 	categorie="edition"
-	version="1.26.7"
+	version="1.26.9"
 	etat="stable"
-	compatibilite="[1.9.0;3.2.*]"
+	compatibilite="[1.9.0;3.1.*]"
 	logo="images/crayon-32.png"
-	documentation="http://contrib.spip.net/Les-Crayons"
+	documentation="https://contrib.spip.net/Les-Crayons"
 >
 	<nom>Crayons</nom>
 

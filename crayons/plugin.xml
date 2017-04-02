@@ -16,7 +16,7 @@
 		&#169; 2006-2013 - GNU/GPL
 	</licence>
 	<version>
-		1.26.8
+		1.26.9
 	</version>
 	<etat>
 		stable
@@ -34,7 +34,7 @@
 			[ru]Позволяет редактировать информацию прямо на сайте, не заходя в административную часть.
 		</multi>
 	</description>
-	<lien>http://contrib.spip.net/Les-Crayons</lien>
+	<lien>https://contrib.spip.net/Les-Crayons</lien>
 	<prefix>
 		crayons
 	</prefix>
@@ -61,7 +61,7 @@
 	</pipeline>
 	<chemin dir='' />
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[1.9.0;3.2.99]" />
+	<necessite id="SPIP" version="[1.9.0;3.1.99]" />
 	<!-- utilise id="cfg" version="[1.14.1;]" / -->
 	<traduire gestionnaire="salvatore" module="crayons" reference="fr" />
 </plugin>
