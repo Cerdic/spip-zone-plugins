@@ -11,13 +11,12 @@
 	<auteur>Matthieu Marcillaud</auteur>
 	<licence>GNU/GPL</licence>
 
-
 	<traduire gestionnaire="salvatore" module="pp_codes" reference="fr" />
-	
+
 	<pipeline nom="porte_plume_barre_pre_charger" inclure="pp_codes_pipelines.php" />
 	<pipeline nom="porte_plume_barre_charger" inclure="pp_codes_pipelines.php" />
 	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="pp_codes_pipelines.php" />
 
-	<necessite nom="porte_plume" compatibilite="[1.10.1;]" />
-	<necessite nom="saisies" compatibilite="[1.2;]" />
+	<necessite nom="porte_plume" compatibilite="[1.11.5;]" />
+	<necessite nom="saisies" compatibilite="[1.20.1;]" />
 </paquet>
