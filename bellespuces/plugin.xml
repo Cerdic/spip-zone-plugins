@@ -2,7 +2,7 @@
 	<nom>Belles puces</nom>
 	<prefix>bellespuces</prefix>
 	<icon>bellespuces.png</icon>	
-	<version>0.1.6</version>
+	<version>0.1.7</version>
 	<etat>stable</etat> 	
 	<auteur>[J&#233;r&#244;me Combaz->http://conseil-recherche-innovation.net/le-cri/jerome-combaz]</auteur>
 	<licence>GNU/GPL</licence>
@@ -20,5 +20,5 @@
 	</pipeline>
 	
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[1.9.0;3.1.99]" />
+	<necessite id="SPIP" version="[1.9.0;3.2.99]" />
 </plugin>
