@@ -11,14 +11,14 @@
 	<version>1.0.1</version>
 	<etat>stable</etat>
 	<install>palette_install.php</install>
-	
+
 	<description>
 		<multi>
 		[fr]Donnez la classe palette &#224; un input pour lui ajouter un s&#233;lecteur de couleurs : <code><input class="palette" name="couleur" value="#dfdfdf" /></code>
 		[en]Set class palette to an input to add a color picker: <code><input class="palette" name="couleur" value="#dfdfdf" /></code>
 		</multi>
 	</description>
-   <lien>https://contrib.spip.net/Palette</lien>
+	<lien>https://contrib.spip.net/Palette</lien>
 	<prefix>palette</prefix>
 	<icon>images/palette.png</icon>
 	<options>palette_options.php</options>
@@ -27,7 +27,7 @@
 		<action>insert_head</action>
 		<inclure>palette_pipeline.php</inclure>
 	</pipeline>
-	
+
 	<pipeline>
 		<nom>header_prive</nom>
 		<action>header_prive</action>

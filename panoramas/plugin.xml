@@ -16,20 +16,20 @@
 		panoramas_mes_fonctions.php
 	</fonctions>
 	<pipeline>
-  		<nom>insert_head</nom>
-  		<action>insertion_in_head</action>
-  		<inclure>panoramas_pipelines.php</inclure>
- 	</pipeline>
+		<nom>insert_head</nom>
+		<action>insertion_in_head</action>
+		<inclure>panoramas_pipelines.php</inclure>
+	</pipeline>
 	<pipeline>
-  		<nom>insert_head_css</nom>
-  		<action>insertion_in_head_css</action>
-  		<inclure>panoramas_pipelines.php</inclure>
- 	</pipeline>
+		<nom>insert_head_css</nom>
+		<action>insertion_in_head_css</action>
+		<inclure>panoramas_pipelines.php</inclure>
+	</pipeline>
 	<pipeline>
-  		<nom>header_prive</nom>
-  		<action>insertion_in_header_prive</action>
-  		<inclure>panoramas_pipelines.php</inclure>
- 	</pipeline>
+		<nom>header_prive</nom>
+		<action>insertion_in_header_prive</action>
+		<inclure>panoramas_pipelines.php</inclure>
+	</pipeline>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouter_boutons</action>

@@ -1,15 +1,15 @@
 <plugin>
-    <nom>G&#233;olocalisation visiteurs</nom>
+	<nom>G&#233;olocalisation visiteurs</nom>
 	<slogan>G&#233;olocaliser les visiteurs en fonction de leur ip</slogan>
-    <categorie>divers</categorie>
-    <auteur>Bernt</auteur>
-    <version>0.1.0</version>
-    <version_base>0.1</version_base>
-  
-    <etat>test</etat>
+	<categorie>divers</categorie>
+	<auteur>Bernt</auteur>
+	<version>0.1.0</version>
+	<version_base>0.1</version_base>
+
+	<etat>test</etat>
 	<lien>https://contrib.spip.net/Geolocaliser-les-articles-en-fonction-de-l-ip-de-l</lien>
-    <description>G&#233;olocaliser les visiteurs afin d'afficher les articles correspondant.</description>
-    <prefix>geo_visiteurs</prefix>
+	<description>G&#233;olocaliser les visiteurs afin d'afficher les articles correspondant.</description>
+	<prefix>geo_visiteurs</prefix>
 	<fonctions>geo_visiteurs_fonctions.php</fonctions>
 
 	<necessite id="spip" version="[1.9.2;2.1.99]" />

@@ -18,16 +18,16 @@ Reste &#224; faire :
 
 Ic&#244;ne issue de la collection [Farm-Fresh Web Icons->http://www.fatcow.com/free-icons] de FatCow.
 	</description>
-   <lien>https://contrib.spip.net/Liens-entre-contenus</lien>
+	<lien>https://contrib.spip.net/Liens-entre-contenus</lien>
 	<icon>images/liens_contenus.png</icon>
-   <chemin dir='' />
+	<chemin dir='' />
 	<prefix>lienscontenus</prefix>
 	<options>lienscontenus_options.php</options>
 	<fonctions>lienscontenus_fonctions.php</fonctions>
-   <pipeline>
+	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/lienscontenus.php</inclure>
-   </pipeline>
+	</pipeline>
 	<pipeline>
 		<nom>pre_edition</nom>
 		<inclure>lienscontenus_pipelines.php</inclure>
@@ -42,11 +42,11 @@ Ic&#244;ne issue de la collection [Farm-Fresh Web Icons->http://www.fatcow.com/f
 		<action>header_prive</action>
 		<inclure>lienscontenus_pipelines.php</inclure>
 	</pipeline>
-   <pipeline>
-       <nom>taches_generales_cron</nom>
-       <inclure>lienscontenus_pipelines.php</inclure>
-   </pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>lienscontenus_pipelines.php</inclure>
+	</pipeline>
 	<categorie>navigation</categorie>
-   <necessite id='SPIP' version='[2.1.0;2.1.99]' />
+	<necessite id='SPIP' version='[2.1.0;2.1.99]' />
 	<traduire gestionnaire='salvatore' module='lienscontenus' reference='fr' />
 </plugin>

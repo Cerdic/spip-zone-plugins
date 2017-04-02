@@ -1,19 +1,21 @@
 <plugin>
-    <nom>Horloge</nom>
-    <version>0.2</version>
-    <etat>test</etat>
+	<nom>Horloge</nom>
+	<version>0.2</version>
+	<etat>test</etat>
 	<auteur>Paolo - licence GNU/GPL</auteur>
-    <description>
-    <multi>Insert the current time in your texts (updated by AJAX) with the tag "horloge"
-    [fr]Horloge en AJAX, &agrave; ins&eacute;rer dans les textes avec la balise «~horloge~»</multi>
+	<description>
+		<multi>
+			Insert the current time in your texts (updated by AJAX) with the tag "horloge"
+			[fr]Horloge en AJAX, &agrave; ins&eacute;rer dans les textes avec la balise «~horloge~»
+		</multi>
 	<br />&lt;horloge|fmt=h24&gt; : 19:13
 	<br />&lt;horloge|fmt=h12&gt; : 7:13 pm
 	<br />&lt;horloge|fmt=enlong&gt; : 19:13 (7:13pm) Monday, 23 February
-    </description>
+	</description>
 	<lien>https://contrib.spip.net/2995</lien>
-    <prefix>horloge</prefix>
-    <pipeline>
-        <nom>insert_head</nom>
-        <inclure>horloge_pipelines.php</inclure>
-    </pipeline>
+	<prefix>horloge</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>horloge_pipelines.php</inclure>
+	</pipeline>
 </plugin>

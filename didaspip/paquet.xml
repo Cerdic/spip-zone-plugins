@@ -1,17 +1,17 @@
 <paquet
-  prefix="dida"
-  categorie="divers"
-  version="3.4.0"
-  etat="test"
-  compatibilite="[2.0.9;3.0.*]"
-  logo="img_pack/dida_ico.png"
-  documentation="https://contrib.spip.net/Didaspip"
+	prefix="dida"
+	categorie="divers"
+	version="3.4.0"
+	etat="test"
+	compatibilite="[2.0.9;3.0.*]"
+	logo="img_pack/dida_ico.png"
+	documentation="https://contrib.spip.net/Didaspip"
 >
-  <nom>Didaspip</nom>
-  <auteur>Initialement d&eacute;velopp&eacute; par Mo&#239;se Maindron. Mis &#224; jour pour SPIP 2.1 et SPIP 3 par Olivier Gautier.</auteur>
-  <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
-  <menu nom="dida_configurer" titre="dida:icone" parent="menu_edition" icone="images/dida_ico_16.png" />
-  <menu nom="configurer_dida" titre="dida:configurer" parent="menu_configuration" icone="images/dida_ico_16.png" />
-  <pipeline nom="post_typo" inclure="didafonctions.php" />
-  <pipeline nom="autoriser" inclure="dida_autoriser.php" />
+	<nom>Didaspip</nom>
+	<auteur>Initialement d&eacute;velopp&eacute; par Mo&#239;se Maindron. Mis &#224; jour pour SPIP 2.1 et SPIP 3 par Olivier Gautier.</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+	<menu nom="dida_configurer" titre="dida:icone" parent="menu_edition" icone="images/dida_ico_16.png" />
+	<menu nom="configurer_dida" titre="dida:configurer" parent="menu_configuration" icone="images/dida_ico_16.png" />
+	<pipeline nom="post_typo" inclure="didafonctions.php" />
+	<pipeline nom="autoriser" inclure="dida_autoriser.php" />
 </paquet>

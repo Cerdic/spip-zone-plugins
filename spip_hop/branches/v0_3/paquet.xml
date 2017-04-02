@@ -1,17 +1,17 @@
 <paquet
-    prefix="spip_hop"
-    categorie="theme"
-    version="0.3.0"
-    etat="test"
-    compatibilite="[2.1.0;3.1.*]"
-    logo="prive/themes/spip/images/spip_hop-64.png"
-    documentation="https://contrib.spip.net/4704"
+	prefix="spip_hop"
+	categorie="theme"
+	version="0.3.0"
+	etat="test"
+	compatibilite="[2.1.0;3.1.*]"
+	logo="prive/themes/spip/images/spip_hop-64.png"
+	documentation="https://contrib.spip.net/4704"
 >
-    <nom>Agrandir la largeur de page</nom>
-    <!-- Ce plugin va agrandir la largeur de la page dans l'espace privé de SPIP. -->
+	<nom>Agrandir la largeur de page</nom>
+	<!-- Ce plugin va agrandir la largeur de la page dans l'espace privé de SPIP. -->
 
-    <auteur>Teddy Payet</auteur>
+	<auteur>Teddy Payet</auteur>
 
-    <licence>GNU/GPL</licence>
+	<licence>GNU/GPL</licence>
 
 </paquet>
