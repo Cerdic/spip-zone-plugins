@@ -15,7 +15,11 @@ function correction_liens_internes_pre_edition($flux){
 }
 function correction_liens_internes_correction_url_prive($mauvaise_url,$composants_url){
 	// Pour le cas où on a copié-collé une URL depuis espace public.
-	$ancre = $composants_url["fragment"];
+	if (array_key_exists('fragment',$composants_url)){
+		$ancre = $composants_url["fragment"];
+	} else {
+		$ancre = '';
+	}
 	$args =array();
 	parse_str($composants_url["query"],$args);
 	$exec = str_replace("_edit","",$args["exec"]); #prendre en compte les _edit
@@ -87,7 +91,7 @@ function correction_liens_internes_correction($texte){
 		$bon_raccourci = str_replace($mauvaise_url, $bonne_url, $mauvais_raccourci);
 		$texte = str_replace($mauvais_raccourci, $bon_raccourci, $texte);
 		spip_log(self() . (_request('self')?' / '._request('self'):'')  //pour crayons notamment...
-			. " : $mauvais_raccourci => $bon_raccourci", 'liens_internes.' . _log_avertissement);
+			. " : $mauvais_raccourci => $bon_raccourci", 'liens_internes.' . _LOG_AVERTISSEMENT);
 	}
     }
     return $texte;
