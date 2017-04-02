@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/auteurspartout-64.png"
-	documentation="http://contrib.spip.net/Auteurs-partout-4414"
+	documentation="https://contrib.spip.net/Auteurs-partout-4414"
 >
 	<nom>Auteurs partout</nom>
 	<auteur>cy_altern</auteur>

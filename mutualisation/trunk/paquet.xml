@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="mutualiser.png"
-	documentation="http://contrib.spip.net/La-mutualisation-facile-modifications-manuelles"
+	documentation="https://contrib.spip.net/La-mutualisation-facile-modifications-manuelles"
 >
 
 	<nom>Mutualisation facile</nom>

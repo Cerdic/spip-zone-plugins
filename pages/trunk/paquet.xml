@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/page-32.png"
-	documentation="http://contrib.spip.net/Pages-uniques"
+	documentation="https://contrib.spip.net/Pages-uniques"
 	schema="1.0.1"
 >
 

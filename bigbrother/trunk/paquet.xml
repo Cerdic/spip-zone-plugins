@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/bigbrother.png"
 	schema="0.2"
-	documentation="http://contrib.spip.net/Plugin-Big-Brother"
+	documentation="https://contrib.spip.net/Plugin-Big-Brother"
 >
 	<nom>Big Brother</nom>
 	<!-- Ce plugin permet de stocker en base de donnée la réalisation d'actions prédéfinies -->

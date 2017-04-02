@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.17;3.2.*]"
 	logo="prive/themes/spip/images/chartjs-64.png"
-	documentation="http://contrib.spip.net/4562"
+	documentation="https://contrib.spip.net/4562"
 >
 	<nom>Chart.js</nom>
 	<auteur lien='http://www.chartjs.org/'>Nivk Downie</auteur>

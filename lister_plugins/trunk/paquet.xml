@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/lister_plugins-32.png"
-	documentation="http://contrib.spip.net/4710"
+	documentation="https://contrib.spip.net/4710"
 >
 
 	<nom>Les plugins nécessaires au site</nom>

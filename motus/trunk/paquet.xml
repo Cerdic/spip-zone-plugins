@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/motus.png"
 	schema="1.0.0"
-	documentation="http://contrib.spip.net/Motus"
+	documentation="https://contrib.spip.net/Motus"
 >
 
 	<nom>Motus</nom>

@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="pgn4spip.png"
-	documentation="http://contrib.spip.net/pgn4spip"
+	documentation="https://contrib.spip.net/pgn4spip"
 >	
 	<nom>pgn4spip</nom>
 	<auteur>Matt Chesstale</auteur>

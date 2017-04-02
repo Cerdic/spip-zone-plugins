@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="spiplatex.png"
-	documentation="http://contrib.spip.net/Livre-avec-SPIP"
+	documentation="https://contrib.spip.net/Livre-avec-SPIP"
 >	
 
 	<nom>ZipTeX</nom>

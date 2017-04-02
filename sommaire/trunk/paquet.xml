@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/sommaire-64.png"
-	documentation="http://contrib.spip.net/Sommaire-automatique"
+	documentation="https://contrib.spip.net/Sommaire-automatique"
 >
 
 	<nom>Sommaire automatique</nom>

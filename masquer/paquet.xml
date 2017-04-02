@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.0.0;3.1.*]"
 	logo="masquer.png"
-	documentation="http://contrib.spip.net/Plugin-masquer"
+	documentation="https://contrib.spip.net/Plugin-masquer"
 >
 
 	<nom>Masquer</nom>

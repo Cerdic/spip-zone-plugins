@@ -9,7 +9,7 @@
 Il faut renseigner une clé dans la page de configuration pour que la page de config puisse être active.
 On affiche les informations équivalentes au plugin "Sites pour projets" avec qui il va de pair. Ce plugin est toutefois autonome.
 	</multi></description>
-	<lien>http://contrib.spip.net/Plugin-Info-SPIP</lien> <!-- URI de documentation -->
+	<lien>https://contrib.spip.net/Plugin-Info-SPIP</lien> <!-- URI de documentation -->
 	<fonctions>info_spip_fonctions.php</fonctions>
 	<prefix>info_spip</prefix>
 

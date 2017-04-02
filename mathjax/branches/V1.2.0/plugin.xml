@@ -13,7 +13,7 @@
 	
 	<icon>images/mathjax-32.png</icon>
 	
-	<lien>http://contrib.spip.net/MathJax-pour-SPIP</lien>
+	<lien>https://contrib.spip.net/MathJax-pour-SPIP</lien>
     
     <prefix>mathjax_spip</prefix>
         

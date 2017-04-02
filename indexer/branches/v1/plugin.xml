@@ -20,7 +20,7 @@
 	<necessite id="queue" version="[0.5.0;1.0.0]" />
 	<categorie>navigation</categorie>
 
-	<lien>http://contrib.spip.net/Sphinx-Indexer</lien>
+	<lien>https://contrib.spip.net/Sphinx-Indexer</lien>
 
 	<pipeline>
         <nom>post_edition</nom>

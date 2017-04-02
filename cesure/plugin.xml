@@ -13,7 +13,7 @@
 		
 		Il est actif pour l'allemand, l'anglais et le fran&#231;ais.
 	</description>
-	<lien>http://www.paris-beyrouth.org/tutoriaux-spip/article/le-plugin-de-cesure-html</lien>
+	<lien>http://www.paris-beyrouth.org/Le-plugin-de-cesure-HTML</lien>
 	<options>pb_cesure_options.php</options>
 	<fonctions>pb_cesure_fonctions.php</fonctions>
 	<prefix>pb_cesure</prefix>

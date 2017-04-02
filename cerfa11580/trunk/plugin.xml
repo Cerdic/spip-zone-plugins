@@ -10,7 +10,7 @@
 	<slogan>Reçu dons aux œuvres</slogan>
 	<description>Génération de reçus selon le modèle <abbr title="numéro">n°</abbr>&nbsp;11580 du <abbr title="Centre d'Enregistrement et de R&eacute;vision des Formulaires Administratifs">cerfa</abbr> </description>
 	<prefix>cerfa11580</prefix>
-	<lien>http://contrib.spip.net/Associaspip-2-2</lien>
+	<lien>https://contrib.spip.net/Associaspip-2-2</lien>
 	<icon>cerfa11580.gif</icon>
 	<pipeline>
 		<nom>associaspip</nom>

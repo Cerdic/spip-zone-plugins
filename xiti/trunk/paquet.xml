@@ -6,7 +6,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/xiti-32.png"
-	documentation="http://contrib.spip.net/XiTi-pour-SPIP-2"
+	documentation="https://contrib.spip.net/XiTi-pour-SPIP-2"
 >
 
 	<nom>Xiti</nom>

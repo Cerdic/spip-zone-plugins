@@ -6,7 +6,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="odt2spip-64.png"
-	documentation="http://contrib.spip.net/3001"
+	documentation="https://contrib.spip.net/3001"
 >	
 	<nom>odt2spip</nom> 	<!-- générateur d'articles spip à partir de fichiers odt -->
 	<auteur>cy_altern</auteur>

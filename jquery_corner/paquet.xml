@@ -6,7 +6,7 @@
 	compatibilite="[2.1.0;3.0.*]"
 	logo="prive/themes/spip/images/jquerycorner-32.png"
 	schema="0.1"
-	documentation="http://contrib.spip.net/JQuery-Corner"
+	documentation="https://contrib.spip.net/JQuery-Corner"
 >	
 
 	<nom>jQuery Corner</nom>

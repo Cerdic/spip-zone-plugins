@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/gestionml-32.png"
 	schema="0.2"
-	documentation="http://contrib.spip.net/Gestion-ML-avec-Soap"
+	documentation="https://contrib.spip.net/Gestion-ML-avec-Soap"
 >	
 
 	<nom>Gestion ML avec SOAP</nom>

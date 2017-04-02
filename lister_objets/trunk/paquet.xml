@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/lister_objets-32.png"
-	documentation="http://contrib.spip.net/4709"
+	documentation="https://contrib.spip.net/4709"
 	>
 
 	<nom>Lister les objets principaux de SPIP</nom>

@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="http.png"
-	documentation="http://contrib.spip.net/Serveur-HTTP-abstrait"
+	documentation="https://contrib.spip.net/Serveur-HTTP-abstrait"
 >
 	<nom>Serveur HTTP abstrait</nom>
 

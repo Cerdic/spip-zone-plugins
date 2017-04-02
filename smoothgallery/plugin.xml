@@ -7,7 +7,7 @@
 	<etat>test</etat>
 	<description>Affiche un lecteur d'images en javascript</description>
 	<icon>sg-22.png</icon>
-	<lien>http://contrib.spip.net/Plugin-Douce-Galerie</lien>
+	<lien>https://contrib.spip.net/Plugin-Douce-Galerie</lien>
 	<prefix>Smoothgallery</prefix>
 	<pipeline>
 		<nom>insert_head</nom>

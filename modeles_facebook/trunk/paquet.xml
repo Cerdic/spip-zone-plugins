@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/facebook-icon.png"
-	documentation="http://contrib.spip.net/?article3872"
+	documentation="https://contrib.spip.net/?article3872"
 >	
 
 	<nom>Facebook Models</nom>

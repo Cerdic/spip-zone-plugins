@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/csv2spip-128.png"
 	schema="1.0.0"
-	documentation="http://contrib.spip.net/article4446"
+	documentation="https://contrib.spip.net/article4446"
 >
 
 	<nom>csv2spip</nom>

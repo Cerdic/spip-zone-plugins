@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[2.0.10;3.1.*]"
 	logo="images/tb-32.png"
-	documentation="http://contrib.spip.net/TestBuilder"
+	documentation="https://contrib.spip.net/TestBuilder"
 >	
 
 	<nom>Test Builder</nom>

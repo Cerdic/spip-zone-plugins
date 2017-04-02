@@ -8,7 +8,7 @@
 	<description>
 	Proposez &agrave; vos internautes de {{s'abonner par mail et/ou flux RSS}}, &agrave; leur choix, simplement, pour recevoir les derniers articles du site, proprement, grace &agrave; [FeedBurner->http://www.feedburner.com].
 	</description>
-	<lien>http://contrib.spip.net/Plugin-FeedBurner</lien>
+	<lien>https://contrib.spip.net/Plugin-FeedBurner</lien>
 	<prefix>feedburner</prefix>
 	<options>feedburner_options.php</options>
 	<necessite id='SPIP' version='[2.0.0;3.1.99]' />

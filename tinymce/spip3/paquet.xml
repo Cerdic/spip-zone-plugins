@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/spip-tinymce-60.png"
-	documentation="http://contrib.spip.net/?article4276"
+	documentation="https://contrib.spip.net/?article4276"
 >	
 
 	<nom>TinyMCE pour SPIP</nom>

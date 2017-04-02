@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/sjcycle-32.png"
 	schema="1.0.0"
-	documentation="http://contrib.spip.net/Cycle2"
+	documentation="https://contrib.spip.net/Cycle2"
 >
 
 	<nom>Cycle2</nom>

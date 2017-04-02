@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.0.0;3.1.*]"
 	logo="prive/themes/spip/images/logo-64.png"
-	documentation="http://contrib.spip.net/4185"
+	documentation="https://contrib.spip.net/4185"
 >	
 
 	<nom>FPDF</nom>

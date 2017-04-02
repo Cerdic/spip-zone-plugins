@@ -16,7 +16,7 @@
 		[en] Add {{&lt;fluxsliderXX&gt;}}, {{&lt;fluxslider_doc&gt;}} and {{&lt;fluxslider_rub&gt;}} tags to create a <a href="http://www.joelambert.co.uk/flux/" title="FluxSlider">"Flux Slider" </a> using <a href="http://contrib.spip.net/Config-cfg" title="CFG">CFG</a>.
 		</multi>
 	</description>
-	<lien>http://contrib.spip.net/FluxSlider</lien>
+	<lien>https://contrib.spip.net/FluxSlider</lien>
 	<icon>prive/themes/spip/images/fluxslider-32.png</icon>
 	<prefix>fluxslider</prefix>
 	<pipeline>

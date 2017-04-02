@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.17;3.0.*]"
 	logo="img/selecteur-rubrique-trialpha.png"
-	documentation="http://contrib.spip.net/4654"
+	documentation="https://contrib.spip.net/4654"
 >
 
 	<nom>Sélecteur de rubriques avec tri alphabétique</nom>

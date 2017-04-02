@@ -7,7 +7,7 @@
 	<slogan>Servir les pages au plus vite !</slogan>
 	<description>Servir le cache froid pour aller plus vite, et calculer en diff&#233;r&#233; en t&#226;che de fond</description>
 	<options>cache_cool_options.php</options>
-	<lien>http://contrib.spip.net/Cache-Cool</lien>
+	<lien>https://contrib.spip.net/Cache-Cool</lien>
 	<prefix>cache_cool</prefix>
 	<categorie>performance</categorie>
 	<necessite id="SPIP" version="[2.1.0;3.1.99]" />

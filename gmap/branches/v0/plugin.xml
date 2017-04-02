@@ -12,7 +12,7 @@
 _ Dans l&apos;espace public, vous pouvez ins&#233;rer des cartes dans les squelettes ou dans les textes en ma&#238;trisant finement la repr&#233;sentation des points et les informations qui leur sont associ&#233;es.
 	</multi>
 	</description>
-	<lien>http://contrib.spip.net/Plugin-GMap-geolocalisation-et-cartographie</lien>
+	<lien>https://contrib.spip.net/Plugin-GMap-geolocalisation-et-cartographie</lien>
 	<categorie>divers</categorie>
 	 
 	<install>base/gmap_install.php</install>

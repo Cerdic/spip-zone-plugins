@@ -6,15 +6,15 @@
 	<licence>GPL v3</licence>
 	<version>0.3.1</version>
 	<version_base>0.1</version_base>
-  <lien>http://contrib.spip.net/4519</lien>
+	<lien>https://contrib.spip.net/4519</lien>
 	<icon>images/paypal-32.png</icon>
 	<options>paypal_options.php</options>
-   <slogan>
+	<slogan>
 		<multi>
-		[fr] Utiliser Paypal sur SPIP
-		[en] Use Paypal on SPIP
+			[fr] Utiliser Paypal sur SPIP
+			[en] Use Paypal on SPIP
 		</multi>
-   </slogan>
+	</slogan>
 	<description>Pouvoir utiliser Paypal sur SPIP. Peut/pourra aussi fonctionner avec le plugin "abonnement".</description>
 	<etat>dev</etat>
 	<prefix>paypal</prefix>

@@ -9,7 +9,7 @@
 	
 	{{Attention : ce plugin nécessite PHP5 !}}
 	</description>
-	<lien>http://contrib.spip.net/HTML-Purifier,3671</lien>
+	<lien>https://contrib.spip.net/HTML-Purifier,3671</lien>
 	<prefix>htmlpurifier</prefix>
 	<icon>htmlpurifier.png</icon>
 	<necessite id="SPIP" version="[1.9.0;3.2.99]" />

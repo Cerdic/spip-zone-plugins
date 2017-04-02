@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="imgs_photo/logo-pb_plugin.png"
-	documentation="http://contrib.spip.net/Metadonnees-Photo"
+	documentation="https://contrib.spip.net/Metadonnees-Photo"
 >	
 
 	<nom>Metadonn&#233;es photo</nom>

@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="img_pack/stock_filter-data-by-criteria-24.png"
-	documentation="http://contrib.spip.net/Critere-mots"
+	documentation="https://contrib.spip.net/Critere-mots"
 >	
 
 	<nom>Crit&#232;re mots</nom>

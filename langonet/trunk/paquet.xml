@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="langonet_logo-64.png"
-	documentation="http://contrib.spip.net/langOnet-Presentation-generale"
+	documentation="https://contrib.spip.net/langOnet-Presentation-generale"
 >	
 
 	<nom>LangOnet</nom>

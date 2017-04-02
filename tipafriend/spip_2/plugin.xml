@@ -16,7 +16,7 @@ _ Il s'utilise en pla&#231;ant la balise {{&#035;TIPAFRIEND}} dans vos squelette
 
 Logo et certaines images du plugin : [->http://pixel-mixer.com/]
 	</description>
-	<lien>http://contrib.spip.net/?article3638</lien>
+	<lien>https://contrib.spip.net/?article3638</lien>
 	<icon>img/letter_32.png</icon>
 	<options>tipafriend_options.php</options>
 	<prefix>tipafriend</prefix>

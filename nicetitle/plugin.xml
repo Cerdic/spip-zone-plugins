@@ -1,26 +1,28 @@
 <plugin>
-<nom>Nice titles</nom>
-<prefix>nicetitle</prefix>
-<icon>icon/nicetitle.png</icon>
+	<nom>Nice titles</nom>
+	<prefix>nicetitle</prefix>
+	<icon>icon/nicetitle.png</icon>
 
-<version>0.1.0</version>
-<etat>stable</etat>
-<categorie>navigation</categorie>
+	<version>0.1.0</version>
+	<etat>stable</etat>
+	<categorie>navigation</categorie>
 
-<slogan>Jolies infobulles</slogan>
-<description>Jolies infobulles, comme dans Safari, pour expliciter au survol le titre du lien et son URL cible. Accessible au clavier.
-_ D'apr&egrave;s le script non obstrusif &laquo;&nbsp;Nice&nbsp;titles&nbsp;&raquo;.</description>
-<lien>http://www.kryogenix.org/code/browser/nicetitle/</lien>
-<auteur>[kryogenix->http://www.kryogenix.org] - 2006</auteur>
-<licence>[MIT->http://www.kryogenix.org/code/browser/licence.html]</licence>
+	<slogan>Jolies infobulles</slogan>
+	<description>
+		Jolies infobulles, comme dans Safari, pour expliciter au survol le titre du lien et son URL cible. Accessible au clavier.
+		_ D'apr&egrave;s le script non obstrusif &laquo;&nbsp;Nice&nbsp;titles&nbsp;&raquo;.
+	</description>
+	<lien>http://www.kryogenix.org/code/browser/nicetitle/</lien>
+	<auteur>[kryogenix->http://www.kryogenix.org] - 2006</auteur>
+	<licence>[MIT->http://www.kryogenix.org/code/browser/licence.html]</licence>
 
-<pipeline>
-	<nom>insert_head_css</nom>
-	<inclure>nicetitle_pipelines.php</inclure>
-</pipeline>
-<pipeline>
-	<nom>insert_head</nom>
-	<inclure>nicetitle_pipelines.php</inclure>
-</pipeline>
-<necessite id="SPIP" version="[1.9.1;2.1.99]" />
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>nicetitle_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>nicetitle_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[1.9.1;2.1.99]" />
 </plugin>

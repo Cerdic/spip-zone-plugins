@@ -21,7 +21,7 @@
 	[de]Dokumente und Logos die auf die event der Agenda 2
 	</multi>
 	</description>
-	<lien>http://contrib.spip.net/Documents-et-logo-sur-les-evenements</lien>
+	<lien>https://contrib.spip.net/Documents-et-logo-sur-les-evenements</lien>
 	<fonctions>agenda_fonctions.php</fonctions>
 	<pipeline>
 		<nom>affiche_gauche</nom>

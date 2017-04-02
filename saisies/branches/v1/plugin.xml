@@ -1,11 +1,16 @@
 <plugin>
-    <nom><multi>[fr]Saisies pour formulaires[en]Entries for forms</multi></nom>
+	<nom>
+		<multi>
+			[fr]Saisies pour formulaires
+			[en]Entries for forms
+		</multi>
+	</nom>
 	<slogan>Ecrire facilement des champs de formulaires</slogan>
-    <auteur>Matthieu Marcillaud - RastaPopoulos - Joseph</auteur>
-    <licence>&#169; 2009-2013 GNU/GPL</licence>
-    <version>1.42.10</version>
-    <etat>stable</etat>
-    <categorie>outil</categorie>
+	<auteur>Matthieu Marcillaud - RastaPopoulos - Joseph</auteur>
+	<licence>&#169; 2009-2013 GNU/GPL</licence>
+	<version>1.42.10</version>
+	<etat>stable</etat>
+	<categorie>outil</categorie>
 
 	<description>
 		<multi>
@@ -20,23 +25,23 @@
 		</multi>
 	</description>
 
-    <lien>http://contrib.spip.net/Saisies</lien>
-    <prefix>saisies</prefix>
-    <icon>images/logo_saisie_48.png</icon>
+	<lien>https://contrib.spip.net/Saisies</lien>
+	<prefix>saisies</prefix>
+	<icon>images/logo_saisie_48.png</icon>
 
-    <fonctions>balise/saisie.php</fonctions>
-    <fonctions>inc/saisies.php</fonctions>
-    <fonctions>saisies_fonctions.php</fonctions>
-    <options>saisies_options.php</options>
+	<fonctions>balise/saisie.php</fonctions>
+	<fonctions>inc/saisies.php</fonctions>
+	<fonctions>saisies_fonctions.php</fonctions>
+	<options>saisies_options.php</options>
 
-    <pipeline>
-    	<nom>header_prive</nom>
-    	<inclure>saisies_pipelines.php</inclure>
-    </pipeline>
-    <pipeline>
-    	<nom>affichage_final</nom>
-    	<inclure>saisies_pipelines.php</inclure>
-    </pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>saisies_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>saisies_pipelines.php</inclure>
+	</pipeline>
 	<pipeline>
 		<nom>saisies_autonomes</nom>
 		<inclure>saisies_pipelines.php</inclure>

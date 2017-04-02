@@ -17,7 +17,7 @@ Utilise la librairie [twitteroauth->http://github.com/abraham/twitteroauth] d'Ab
 Uses the library [twitteroauth->http://github.com/abraham/twitteroauth] of Abraham Williams for the Twitter oAuth API.
 		</multi>
 	</description>
-	<lien>http://contrib.spip.net/Microblog</lien>
+	<lien>https://contrib.spip.net/Microblog</lien>
 	<prefix>microblog</prefix>
 
 	<fonctions>microblog_fonctions.php</fonctions>

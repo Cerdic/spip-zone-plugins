@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/grappe-32.png"
 	schema="0.2.5"
-	documentation="http://contrib.spip.net/4282"
+	documentation="https://contrib.spip.net/4282"
 >
 
 	<nom>Grappes</nom>

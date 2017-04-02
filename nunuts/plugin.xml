@@ -1,23 +1,23 @@
 <plugin>
-  <nom>NUNUTS</nom>
-  <auteur>Samuel Bocharel "PoongalOO"</auteur>
-  <lien>http://www.poongaloo.org</lien>
-  <licence>
-  <div style="text-align:center;"><a rel="licence" class="spip_out" href="http://www.april.org/gnu/gpl_french.html">GNU/GPL<br />
-  <img alt="Licence GNU GPL" style="border-width:0" width="80" height="100" src="http://www.fsf.org/graphics/philosophical-gnu-sm.jpg"/></a></div>
-  </licence>
-  <version>0.1</version>
-  <etat>dev</etat>
-  <description>
-  L'interface de navigation est compos&eacute; de widgets.
-  
-	Chaque widget peut &ecirc;tre personnalis&eacute;, r&eacute;duit ou m&ecirc;me supprim&eacute;.<br/>
-	La personnalisation permet d'&eacute;diter la couleurs et le titre de chaque widget.<br/>
-	Enfin, r&eacute;partis en 3 colonnes, chaque widget peut &ecirc;tre d&eacute;plac&eacute; d'une colonne &agrave; une autre par simple DRAG AND DROP.<br/>
+	<nom>NUNUTS</nom>
+	<auteur>Samuel Bocharel "PoongalOO"</auteur>
+	<lien>http://www.poongaloo.org</lien>
+	<licence>
+		<div style="text-align:center;"><a rel="licence" class="spip_out" href="http://www.april.org/gnu/gpl_french.html">GNU/GPL<br />
+		<img alt="Licence GNU GPL" style="border-width:0" width="80" height="100" src="http://www.fsf.org/graphics/philosophical-gnu-sm.jpg"/></a></div>
+	</licence>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>
+		L'interface de navigation est compos&eacute; de widgets.
 
-  Bas&eacute; sur ce tutorial : [->http://nettuts.com/tutorials/javascript-ajax/inettuts/]
-  </description>
-  <icon>images/logo_eva3_fb.png</icon>
-  <prefix>nunuts</prefix>
+		Chaque widget peut &ecirc;tre personnalis&eacute;, r&eacute;duit ou m&ecirc;me supprim&eacute;.<br/>
+		La personnalisation permet d'&eacute;diter la couleurs et le titre de chaque widget.<br/>
+		Enfin, r&eacute;partis en 3 colonnes, chaque widget peut &ecirc;tre d&eacute;plac&eacute; d'une colonne &agrave; une autre par simple DRAG AND DROP.<br/>
+
+		Bas&eacute; sur ce tutorial : [->http://nettuts.com/tutorials/javascript-ajax/inettuts/]
+	</description>
+	<icon>images/logo_eva3_fb.png</icon>
+	<prefix>nunuts</prefix>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

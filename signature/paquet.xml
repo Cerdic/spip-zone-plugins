@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.14;3.1.*]"
 	logo="prive/themes/spip/images/signature-32.png"
-	documentation="http://contrib.spip.net/4501"
+	documentation="https://contrib.spip.net/4501"
 > 
 	<nom>Signature</nom>
 	<auteur lien='http://www.erational.org'>erational</auteur>

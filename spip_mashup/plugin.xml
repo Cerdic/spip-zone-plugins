@@ -11,7 +11,7 @@ R&#233;alisez simplement un mashup de vos rubriques sur une carte Geoportail, Go
 
 Les articles, rubriques et documents sont localis&#233;s g&#233;ographiquement et leur affichage se fait en AJAX sur la carte sans quitter la page.
 	</description>
-	<lien>http://contrib.spip.net/Plugin-SPIP-Mashup</lien>
+	<lien>https://contrib.spip.net/Plugin-SPIP-Mashup</lien>
 	<prefix>spip_mashup</prefix>
 	<pipeline>
 		<!-- Affichage des rubriques -->

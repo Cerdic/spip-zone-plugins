@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.0.0;3.2.*]"
 	logo="images/opensearch-64.png"
-	documentation="http://contrib.spip.net/Plugin-OpenSearch"
+	documentation="https://contrib.spip.net/Plugin-OpenSearch"
 >	
 
 	<nom>OpenSearch</nom>

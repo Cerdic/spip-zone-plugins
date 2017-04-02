@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="spipdf.png"
-	documentation="http://contrib.spip.net/3719"
+	documentation="https://contrib.spip.net/3719"
 >
 	<nom>SpiPDF</nom>
 

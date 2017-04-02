@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/contact_libre-48.png"
-	documentation="http://contrib.spip.net/Formulaire-de-contact-libre"
+	documentation="https://contrib.spip.net/Formulaire-de-contact-libre"
 >
 	<nom>Contact libre</nom>
 

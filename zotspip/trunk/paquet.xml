@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/zotspip-48.png"
 	schema="0.4"
-	documentation="http://contrib.spip.net/spip.php?article4161"
+	documentation="https://contrib.spip.net/spip.php?article4161"
 >	
 
 	<nom>ZotSpip</nom>

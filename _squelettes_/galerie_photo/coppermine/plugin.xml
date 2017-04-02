@@ -1,32 +1,32 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Coppermine
+		Coppermine
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	[Philippe DROUOT->mailto:phil@africacomputing.org]
-_ Utilisation de la galerie photo [Coppermine->http://coppermine.sourceforge.net]
-_ &#169; 2006 - Distribue sous licence GNU/GPL
+		[Philippe DROUOT->mailto:phil@africacomputing.org]
+		_ Utilisation de la galerie photo [Coppermine->http://coppermine-gallery.net/]
+		_ &#169; 2006 - Distribue sous licence GNU/GPL
 	</auteur>
 	<version>
-	0.1
+		0.1
 	</version>
 	<etat>
 	experimental
 	</etat>
 	<description>
-	Int&#233;gration de Coppermine avec Spip r&#233;alis&#233;e par :
--* un "bridge" Coppermine pour partager la base des utilisateurs spip (un r&#233;dacteur peut publier des photos avec son login spip en ne s'identifiant qu'une fois, un administrateur spip est &#233;galement administrateur de la galerie).
--* une nouvelle balise spip <code>#COPPERMINE</code> pour sp&#233;cifier dans un squelette l'emplacement de la galerie, ce qui permet d'int&#233;grer visuellement la galerie avec le reste de votre site; ainsi que d'une balise <code>#COPPERMINE_RANDOM_IMG</code> pour afficher des vignettes al&#233;atoires.
+		Int&#233;gration de Coppermine avec Spip r&#233;alis&#233;e par :
+		-* un "bridge" Coppermine pour partager la base des utilisateurs spip (un r&#233;dacteur peut publier des photos avec son login spip en ne s'identifiant qu'une fois, un administrateur spip est &#233;galement administrateur de la galerie).
+		-* une nouvelle balise spip <code>#COPPERMINE</code> pour sp&#233;cifier dans un squelette l'emplacement de la galerie, ce qui permet d'int&#233;grer visuellement la galerie avec le reste de votre site; ainsi que d'une balise <code>#COPPERMINE_RANDOM_IMG</code> pour afficher des vignettes al&#233;atoires.
 
-	Installation : consultez le fichier {{documentation.txt}}
-_ [D&#233;mo->http://spiptest.africa-web.org/]
+		Installation : consultez le fichier {{documentation.txt}}
+		_ [D&#233;mo->http://spiptest.africa-web.org/]
 	</description>
-	<lien>http://zone.spip.org/trac/spip-zone/wiki/CopperMine</lien> <!-- URI de documentation -->
+	<lien>https://zone.spip.org/trac/spip-zone/wiki/CopperMine</lien> <!-- URI de documentation -->
 	<prefix> 
-	coppermine
+		coppermine
 	</prefix>
 	<options>
-	coppermine.php
+		coppermine.php
 	</options>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

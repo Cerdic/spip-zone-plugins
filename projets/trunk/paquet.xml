@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.5;3.1.*]"
 	logo="prive/themes/spip/images/projets-64.png"
-	documentation="http://contrib.spip.net/Plugin-Projets"
+	documentation="https://contrib.spip.net/Plugin-Projets"
 	schema="1.1.3"
 >
 	<nom>projets</nom>

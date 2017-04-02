@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/spipcatchat-64.png"
-	documentation="http://contrib.spip.net/SpipCatChat-2"
+	documentation="https://contrib.spip.net/SpipCatChat-2"
 	demonstration="http://belgologie.be/spip.php?page=spipcatchat"
 	developpement="http://zone.spip.org/trac/spip-zone/browser/_plugins_/spipcatchat"
 >

@@ -6,7 +6,7 @@
 	<etat>dev</etat>
 	<description>Ajout des fonctionnalit&eacute;s de Geolocalisation aux tables de Forms&amp;tables
 	</description>
-	<lien>http://zone.spip.org/trac/spip-zone/wiki/SpipForms</lien>
+	<lien>https://zone.spip.org/trac/spip-zone/wiki/SpipForms</lien>
 	<prefix>geoforms</prefix>
 	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<necessite id='forms' version='[0.301;]' />

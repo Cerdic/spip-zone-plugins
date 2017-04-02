@@ -1,15 +1,15 @@
 <plugin>
-<nom>Numérologie</nom>
-<prefix>numerology</prefix>
-<icon>numerology.png</icon>
+	<nom>Numérologie</nom>
+	<prefix>numerology</prefix>
+	<icon>numerology.png</icon>
 
-<version>0.0.1</version>
-<etat>experimental</etat>
-<categorie>outil</categorie>
+	<version>0.0.1</version>
+	<etat>experimental</etat>
+	<categorie>outil</categorie>
 
-<slogan>Transformer du texte en nombres</slogan>
-<lien>http://zone.spip.org/trac/spip-zone/browser/_plugins_/numerology/todo.txt</lien>
-<auteur>[tetue->http://spip.tetue.net] - 2015</auteur>
+	<slogan>Transformer du texte en nombres</slogan>
+	<lien>https://zone.spip.org/trac/spip-zone/browser/_plugins_/numerology/todo.txt</lien>
+	<auteur>[tetue->http://spip.tetue.net] - 2015</auteur>
 
-<necessite id="SPIP" version="[2.1.0;3.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
 </plugin>

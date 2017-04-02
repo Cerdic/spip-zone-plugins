@@ -7,7 +7,7 @@
 	<description>
 	Mod&#232;le pour utiliser le [lecteur de documents en ligne de Google->http://docs.google.com/viewer]. Ce plugin &#233;tend le mod&#232;ve <code><mediaXX|embed></code> pour les documents de type doc, docx, xls, xlsx, ppt, pptx, pdf, ai, psd, eps, ps, et ttf. En l'absence des mod&#232;les media, il est possible d'utiliser <code><embXX|google></code>.
 	</description>
-	<lien>http://contrib.spip.net/Plugin-Google-Viewer</lien>
+	<lien>https://contrib.spip.net/Plugin-Google-Viewer</lien>
 	<icon>images/gviewer.png</icon>
 	<prefix>gviewer</prefix>
 	<categorie>edition</categorie>

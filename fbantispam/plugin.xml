@@ -12,7 +12,7 @@
 	Le plugin modifie le formulaire du forum, en ajoutant un champ pour saisir un captcha.
 	La saisie n'est pas prise en compte si le captcha n'est pas correct.
 	</description>
-	<lien>http://contrib.spip.net/CAPTCHA-pour-forums</lien>
+	<lien>https://contrib.spip.net/CAPTCHA-pour-forums</lien>
 	<prefix>fbantispam</prefix>
 	<pipeline>
 		<nom>pre_edition</nom>

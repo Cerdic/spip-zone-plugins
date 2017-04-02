@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/refbase-48.png"
-	documentation="http://contrib.spip.net/plugin-refbase"
+	documentation="https://contrib.spip.net/plugin-refbase"
 	schema="0.1.0"
 >
 

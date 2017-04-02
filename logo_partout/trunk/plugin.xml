@@ -1,22 +1,22 @@
 <plugin>
-<nom>Logos partout</nom>
-<prefix>logo_partout</prefix>
-<icon>logo_partout.png</icon>
+	<nom>Logos partout</nom>
+	<prefix>logo_partout</prefix>
+	<icon>logo_partout.png</icon>
 
-<version>0.8.0</version>
-<etat>experimental</etat>
-<categorie>multimedia</categorie>
+	<version>0.8.0</version>
+	<etat>experimental</etat>
+	<categorie>multimedia</categorie>
 
-<slogan>Des logos partout, systématiquement</slogan>
-<description>ATTENTION : ce plugin est une {{contribution expérimentale}} qui ne débouchera pas nécessairement sur un plugin utilisable ! Selon le moment, il peut être bien sympa ou totalement inutilisable.
+	<slogan>Des logos partout, systématiquement</slogan>
+	<description>
+		ATTENTION : ce plugin est une {{contribution expérimentale}} qui ne débouchera pas nécessairement sur un plugin utilisable ! Selon le moment, il peut être bien sympa ou totalement inutilisable.
 
-	Le but de ce plugin est d’afficher des logos à tout coup, pour chaque objet SPIP. Chaque logo est généré de façon automatique, en faisant feu de tout bois : à partir des images associées à l’objet, ou de son parent, ou d’un visuel par défaut. Ces logos sont dimensionnés de façon homogène pour être prêts à l’emploi. Enfin, ce mécanisme sera paramétrable et surchargeable.
+		Le but de ce plugin est d’afficher des logos à tout coup, pour chaque objet SPIP. Chaque logo est généré de façon automatique, en faisant feu de tout bois : à partir des images associées à l’objet, ou de son parent, ou d’un visuel par défaut. Ces logos sont dimensionnés de façon homogène pour être prêts à l’emploi. Enfin, ce mécanisme sera paramétrable et surchargeable.
+	</description>
+	<lien>https://contrib.spip.net/4662?var_mode=preview</lien>
+	<auteur>[tetue->http://spip.tetue.net], 2015</auteur>
+	<licence>GPL</licence>
 
-</description>
-<lien>http://contrib.spip.net/4662?var_mode=preview</lien>
-<auteur>[tetue->http://spip.tetue.net], 2015</auteur>
-<licence>GPL</licence>
-
-<necessite id="SPIP" version="[2.1.0;3.1.99]" />
-<necessite id="logo_auto" version="[0.7.2;]" />
+	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
+	<necessite id="logo_auto" version="[0.7.2;]" />
 </plugin>

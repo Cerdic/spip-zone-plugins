@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.19;3.1.*]"
 	logo="prive/themes/spip/images/facteurmonitoring-64.png"
-	documentation="http://contrib.spip.net/4695"
+	documentation="https://contrib.spip.net/4695"
 >
 	<nom>Monitoring du Facteur</nom>
 	<auteur lien='http://www.erational.org'>erational</auteur>

@@ -25,7 +25,7 @@
 -* <code>[(#INCLURE{fond=inc-boite-outils}{id_article})]</code> para la versi&oacute;n cojea
 		</multi>
 	</description>
-	<lien>http://contrib.spip.net/Boite-a-outils-pour-articles-version-plugin</lien>
+	<lien>https://contrib.spip.net/Boite-a-outils-pour-articles-version-plugin</lien>
 	<icon>outilsarticle.png</icon>
 	<fonctions>boiteoutils_fonctions.php</fonctions>
 	<prefix>outils_article</prefix>

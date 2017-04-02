@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.1.0;3.1.*]"
 	logo="images/gviewer.png"
-	documentation="http://contrib.spip.net/Plugin-Google-Viewer"
+	documentation="https://contrib.spip.net/Plugin-Google-Viewer"
 >
 
 	<nom>Google Viewer</nom>

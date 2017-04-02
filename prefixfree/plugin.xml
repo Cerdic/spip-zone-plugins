@@ -1,20 +1,20 @@
 <plugin>
-<nom>Prefix free</nom>
-<prefix>prefixfree</prefix>
-<icon>icon/prefixfree.png</icon>
+	<nom>Prefix free</nom>
+	<prefix>prefixfree</prefix>
+	<icon>icon/prefixfree.png</icon>
 
-<version>0.1.0</version>
-<etat>stable</etat>
-<categorie>outil</categorie>
+	<version>0.1.0</version>
+	<etat>stable</etat>
+	<categorie>outil</categorie>
 
-<slogan>Passez-vous de prefixes CSS&nbsp;!</slogan>
-<description>Utilisez seulement des propri&eacute;t&eacute;s CSS standard, sans prefixes propi&eacute;taires. Codez de fa&ccedil;on propre et perenne, en laissant ce plugin ajouter automatiquement les pr&eacute;fixes du navigateur utilis&eacute;, uniquement lorsque n&eacute;cessaire.</description>
-<lien>http://www.alsacreations.com/article/lire/1306-prefix-free-prefixes-CSS3.html</lien>
-<auteur>[Lea Verou->http://lea.verou.me/] - 2011</auteur>
+	<slogan>Passez-vous de prefixes CSS&nbsp;!</slogan>
+	<description>Utilisez seulement des propri&eacute;t&eacute;s CSS standard, sans prefixes propi&eacute;taires. Codez de fa&ccedil;on propre et perenne, en laissant ce plugin ajouter automatiquement les pr&eacute;fixes du navigateur utilis&eacute;, uniquement lorsque n&eacute;cessaire.</description>
+	<lien>https://www.alsacreations.com/article/lire/1306-prefix-free-prefixes-CSS3.html</lien>
+	<auteur>[Lea Verou->http://lea.verou.me/] - 2011</auteur>
 
-<pipeline>
-	<nom>insert_head</nom>
-	<inclure>prefixfree_pipelines.php</inclure>
-</pipeline>
-<necessite id="SPIP" version="[1.9.1;2.1.99]" />
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>prefixfree_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[1.9.1;2.1.99]" />
 </plugin>

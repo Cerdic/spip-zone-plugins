@@ -8,7 +8,7 @@
 	<description>
 		Permet à une application tierce de modifier/consulter le contenu du site via le protocole HTTP REST
 	</description>
-	<lien>http://contrib.spip.net/SpipService</lien>
+	<lien>https://contrib.spip.net/SpipService</lien>
 	<icon>img_pack/spipservice.png</icon>
 	
 	<prefix>spipservice</prefix>

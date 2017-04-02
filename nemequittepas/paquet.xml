@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[2.1.0;3.2.*]"
 	logo="images/nemequitepas-48.png"
-	documentation="http://contrib.spip.net/4876"
+	documentation="https://contrib.spip.net/4876"
 >	
 
 	<nom>Ne me quitte pas !</nom>

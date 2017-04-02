@@ -20,7 +20,7 @@
 		</multi>
 	</description>
 	<icon>imgs/emblem-favorite-32.png</icon>
-	<lien>http://www.paris-beyrouth.org/tutoriaux-spip/article/le-plugin-selection-d-articles</lien>
+	<lien>http://www.paris-beyrouth.org/Le-plugin-Selection-d-articles</lien>
 	<licence>GPL 3</licence>
 	<prefix>pb_selection</prefix>
 	<install>base/pb_selection_upgrade.php</install>
@@ -37,4 +37,3 @@
 	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<categorie>navigation</categorie>
 </plugin>
-

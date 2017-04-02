@@ -9,6 +9,6 @@
 	<necessite id="SPIP" version="[2.1.0;2.1.*]" />
 	<necessite id="Iterateurs" version="[0.6.1;[" />
 	<categorie>maintenance</categorie>
-	<lien>http://contrib.spip.net/Sqlite-export-pour-SPIP</lien>
+	<lien>https://contrib.spip.net/Sqlite-export-pour-SPIP</lien>
 </plugin>
 

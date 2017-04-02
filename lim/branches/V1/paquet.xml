@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/lim-64.png"
-	documentation="http://contrib.spip.net/LIM"
+	documentation="https://contrib.spip.net/LIM"
 	schema="1.1.0" 
 >
 	<!--

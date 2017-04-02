@@ -1,26 +1,26 @@
 <plugin>
-<nom>Herbier</nom>
-<prefix>herbier</prefix>
-<icon>icon/herbier.png</icon>
+	<nom>Herbier</nom>
+	<prefix>herbier</prefix>
+	<icon>icon/herbier.png</icon>
 
-<version>1.6.1</version>
-<etat>stable</etat>
-<categorie>divers</categorie>
+	<version>1.6.1</version>
+	<etat>stable</etat>
+	<categorie>divers</categorie>
 
-<slogan>Affichez l'Herbier sur votre site&nbsp;!</slogan>
-<description>Il suffit d'installer ce plugin pour syndiquer automatiquement [l'Herbier de SPIP->http://herbier.spip.net] et ses sites remarquables. Ajoutez ensuite <code><INCLURE{fond=inclure/herbier}></code> dans vos squelettes pour afficher une capture d'ecran d'un site pris au hasard dans l'Herbier.</description>
-<lien>http://herbier.spip.net/2</lien>
-<auteur>James et Tetue, pour [l'Herbier de SPIP->http://herbier.spip.net]</auteur>
-<licence>GPL</licence>
+	<slogan>Affichez l'Herbier sur votre site&nbsp;!</slogan>
+	<description>Il suffit d'installer ce plugin pour syndiquer automatiquement [l'Herbier de SPIP->http://herbier.spip.net] et ses sites remarquables. Ajoutez ensuite <code><INCLURE{fond=inclure/herbier}></code> dans vos squelettes pour afficher une capture d'ecran d'un site pris au hasard dans l'Herbier.</description>
+	<lien>http://herbier.spip.net/2</lien>
+	<auteur>James et Tetue, pour [l'Herbier de SPIP->http://herbier.spip.net]</auteur>
+	<licence>GPL</licence>
 
-<install>herbier_install.php</install>
-<pipeline>
-	<nom>insert_head_css</nom> 
-	<inclure>herbier_pipelines.php</inclure>
-</pipeline>
-<pipeline>
-	<nom>boussole</nom> 
-	<inclure>herbier_pipelines.php</inclure>
-</pipeline>
-<necessite id="SPIP" version="[1.9.2;2.1.99]" />
+	<install>herbier_install.php</install>
+	<pipeline>
+		<nom>insert_head_css</nom> 
+		<inclure>herbier_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>boussole</nom> 
+		<inclure>herbier_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
 </plugin>

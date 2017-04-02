@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.1.10;3.0.*]"
 	logo="images/openinviter.gif"
-	documentation="http://contrib.spip.net/?article3979"
+	documentation="https://contrib.spip.net/?article3979"
 >	
 
 	<nom>OpenInviter</nom>

@@ -1,33 +1,33 @@
 <plugin>
-    <nom>EVA_NEWS</nom>
-    <slogan>Bloc de news avec d&#233;filement</slogan>
-    <auteur>[Samuel "PoongalOO"->sam@poongaloo.org]</auteur>
-    <version>0.1.0</version>
-    <etat>test</etat>
-    <description>
-{{Articles sous forme de news avec d&#233;filement automatique}}
-- Publier une s&#233;rie d'articles dans un bloc avec des effets
-- Liste des effets possibles : sans effet, fade out/in, slide up/down, left/right
-- Temporisation r&#233;glable
-	 
-{{Utilisation :}}
-- {Avec des squelettes autres que eva-web 4 :} Vous devez ins&#233;rer la ligne <code><INCLURE {fond=articles_news}{ajax}></code> dans votre squelette &#224; l'endroit o&#249; doit appara&#238;tre le bloc de news
-- {Avec eva-web 4 :} Rendez-vous dans l'onglet "structure" du plugin eva-habillage. Dans le deuxi&#232;me bloc intitul&#233; "Choisir la position des blocs dans les pages", allez &#224; la ligne "Ins&#233;rer un squelette personnel de type bloc dans une des pages...". A l'&#233;tape 2, dans la zone de texte "Nom du squelette", tapez "articles_news", puis validez.
+	<nom>EVA_NEWS</nom>
+	<slogan>Bloc de news avec d&#233;filement</slogan>
+	<auteur>[Samuel "PoongalOO"->sam@poongaloo.org]</auteur>
+	<version>0.1.0</version>
+	<etat>test</etat>
+	<description>
+		{{Articles sous forme de news avec d&#233;filement automatique}}
+		- Publier une s&#233;rie d'articles dans un bloc avec des effets
+		- Liste des effets possibles : sans effet, fade out/in, slide up/down, left/right
+		- Temporisation r&#233;glable
 
-    Bas&#233; sur [EASYNEWS->http://www.ezjquery.com/cgi-bin/webapp.rb?r=access#] 
-    </description>
-    <lien>http://eva-web.edres74.net</lien>
-    
-    <prefix>evanews</prefix>
-	
+		{{Utilisation :}}
+		- {Avec des squelettes autres que eva-web 4 :} Vous devez ins&#233;rer la ligne <code><INCLURE {fond=articles_news}{ajax}></code> dans votre squelette &#224; l'endroit o&#249; doit appara&#238;tre le bloc de news
+		- {Avec eva-web 4 :} Rendez-vous dans l'onglet "structure" du plugin eva-habillage. Dans le deuxi&#232;me bloc intitul&#233; "Choisir la position des blocs dans les pages", allez &#224; la ligne "Ins&#233;rer un squelette personnel de type bloc dans une des pages...". A l'&#233;tape 2, dans la zone de texte "Nom du squelette", tapez "articles_news", puis validez.
+
+		Bas&#233; sur [EASYNEWS->http://www.ezjquery.com/cgi-bin/webapp.rb?r=access#] 
+	</description>
+	<lien>http://eva-web.edres74.net</lien>
+
+	<prefix>evanews</prefix>
+
 	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<necessite id="cfg" version="[1.10.3;]" />
-	
+
 	<bouton id='eva_news' parent='configuration'>
 		<icone>img_pack/evanews.png</icone>
 		<titre>eva news</titre>
 	</bouton>
-    
+
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>evanews_head.php</inclure>

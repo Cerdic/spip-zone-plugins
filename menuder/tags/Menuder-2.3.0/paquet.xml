@@ -6,7 +6,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/icon.png"
-	documentation="http://contrib.spip.net/?article3804" 
+	documentation="https://contrib.spip.net/?article3804" 
 >
 
 	<nom>Menu déroulant</nom>

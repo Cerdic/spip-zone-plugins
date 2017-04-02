@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/contacts-128.png"
 	schema="1.13.0"
-	documentation="http://contrib.spip.net/Plugin-Contacts-Organisations"
+	documentation="https://contrib.spip.net/Plugin-Contacts-Organisations"
 >
 	<nom>Contacts &#38; Organisations</nom>
 	<!-- Ajouter un gestionnaire de contacts à SPIP -->

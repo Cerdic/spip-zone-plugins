@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/spipicious-128.png"
 	schema="0.6.3"
-	documentation="http://contrib.spip.net/Plugin-Spipicious"
+	documentation="https://contrib.spip.net/Plugin-Spipicious"
 >	
 
 	<nom>SPIP.icio.us</nom>

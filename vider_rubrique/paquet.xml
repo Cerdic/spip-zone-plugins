@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="theme/img/poubelle.png"
-	documentation="http://contrib.spip.net/?article4297"
+	documentation="https://contrib.spip.net/?article4297"
 >	
 
 	<nom>Vider rubrique</nom>

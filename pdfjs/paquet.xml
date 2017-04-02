@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.0.0;3.2.*]"
 	logo="prive/themes/spip/images/pdfjs-32.png"
-	documentation="http://contrib.spip.net/?article4078"
+	documentation="https://contrib.spip.net/?article4078"
 >	
 	<nom>pdf.js</nom>
 	<auteur lien="http://mozilla.github.com/pdf.js/">andreas gal</auteur>

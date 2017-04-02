@@ -44,7 +44,7 @@
 			vengono automaticamente cancellati.
 		</multi>
 	</description>
-	<lien>http://contrib.spip.net/Le-plugin-saveauto-sauvegarde</lien>
+	<lien>https://contrib.spip.net/Le-plugin-saveauto-sauvegarde</lien>
 	<icon>img_pack/saveauto-24.png</icon>
 	
 	<pipeline>

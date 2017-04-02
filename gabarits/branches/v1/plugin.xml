@@ -8,7 +8,7 @@
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<description>Gestion de gabarits (mod&#232;les de contenu) pour les &#233;l&#233;ments de SPIP.</description>
-	<lien>http://contrib.spip.net/Gabarits</lien>
+	<lien>https://contrib.spip.net/Gabarits</lien>
 	<categorie>edition</categorie>
 	<options>gabarits_options.php</options>
 	<fonctions>gabarits_fonctions.php</fonctions>

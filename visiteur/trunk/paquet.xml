@@ -4,7 +4,7 @@
 	version="0.4.1"
 	etat="dev"
 	compatibilite="[2.1.0;3.1.*]"
-	documentation="http://contrib.spip.net/4823"
+	documentation="https://contrib.spip.net/4823"
 >
 	<nom>Outils pour squelettes personnalisés selon le visiteur</nom>
 	<!-- 

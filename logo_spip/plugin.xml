@@ -1,19 +1,19 @@
 <plugin>
-<nom>Logo SPIP</nom>
-<prefix>logo_spip</prefix>
-<icon>spip.png</icon>
+	<nom>Logo SPIP</nom>
+	<prefix>logo_spip</prefix>
+	<icon>spip.png</icon>
 
-<version>1.2.1</version>
-<etat>stable</etat>
-<categorie>multimedia</categorie>
+	<version>1.2.1</version>
+	<etat>stable</etat>
+	<categorie>multimedia</categorie>
 
-<slogan>Affichez facilement le logo de SPIP</slogan>
-<description>Affichez facilement le logo de SPIP dans vos articles avec le raccourci &lt;spip|&gt; et dans vos squelettes avec <code>#MODELE{spip}</code> ou <code>#LOGO_SPIP</code>.</description>
-<lien>http://contrib.spip.net/4677</lien>
-<auteur>[tetue->http://spip.tetue.net] - 2015</auteur>
-<licence>GPL</licence>
+	<slogan>Affichez facilement le logo de SPIP</slogan>
+	<description>Affichez facilement le logo de SPIP dans vos articles avec le raccourci &lt;spip|&gt; et dans vos squelettes avec <code>#MODELE{spip}</code> ou <code>#LOGO_SPIP</code>.</description>
+	<lien>https://contrib.spip.net/4677</lien>
+	<auteur>[tetue->http://spip.tetue.net] - 2015</auteur>
+	<licence>GPL</licence>
 
-<fonctions>logo_spip_fonctions.php</fonctions>
+	<fonctions>logo_spip_fonctions.php</fonctions>
 
-<necessite id="SPIP" version="[2.0.0;3.1.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.1.99]" />
 </plugin>

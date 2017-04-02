@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.5;3.1.*]"
 	logo="prive/themes/spip/images/flickrand-64.png"
-	documentation="http://contrib.spip.net/Flickr-hasard"
+	documentation="https://contrib.spip.net/Flickr-hasard"
 >
 	<nom>Flickr hasard</nom>
 	<!-- Affiche une image aleatoire Flickr -->

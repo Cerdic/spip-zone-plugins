@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/polyhier-32.png"
 	schema="0.2.0"
-	documentation="http://contrib.spip.net/Polyhierarchie"
+	documentation="https://contrib.spip.net/Polyhierarchie"
 >
 	<nom>PolyHierarchy</nom>
 	<auteur lien="http://www.yterium.com">C&#233;dric Morin</auteur>

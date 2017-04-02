@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="planning_simple.png"
-	documentation="http://contrib.spip.net/4721"
+	documentation="https://contrib.spip.net/4721"
 >
 	<nom>Planning Simple</nom>
 	<auteur lien="http://elastick.net">Anne-lise Martenot, elastick.net</auteur>

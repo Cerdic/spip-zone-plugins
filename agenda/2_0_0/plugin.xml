@@ -10,7 +10,7 @@
 	<etat>stable</etat>
 	<slogan>Agenda &#233;v&#233;nementiel</slogan>
 	<description>Agenda Ev&#233;nementiel</description>
-	<lien>http://contrib.spip.net/Agenda-2-0</lien>
+	<lien>https://contrib.spip.net/Agenda-2-0</lien>
 	<options>agenda_options.php</options>
 	<fonctions>public/agenda.php</fonctions>
 	<fonctions>agenda_fonctions.php</fonctions>

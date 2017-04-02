@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/idisk-dir-36.png"
-	documentation="http://contrib.spip.net/?article3516"
+	documentation="https://contrib.spip.net/?article3516"
 >
 
 	<nom>SPIP Mentions L&#233;gales</nom>

@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.1.0;3.1.*]"
 	logo="prive/themes/spip/images/roles-64.png"
-	documentation="http://contrib.spip.net/?article4199"
+	documentation="https://contrib.spip.net/?article4199"
 >
 
 	<nom>Rôles</nom>

@@ -14,7 +14,7 @@ Ce plugin a &#233;t&#233; d&#233;velopp&#233; dans le cadre du projet {{Casa d'A
 
 	<licence>GNU/GPL</licence>
 
-	<lien>http://contrib.spip.net/Afficher-les-definitions-de-mots</lien>
+	<lien>https://contrib.spip.net/Afficher-les-definitions-de-mots</lien>
 	<prefix>definitions</prefix>
 	<fonctions>definitions_mes_fonctions.php</fonctions>
 	<pipeline>

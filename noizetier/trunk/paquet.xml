@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/noizetier-32.png"
 	schema="0.6.0"
-	documentation="http://contrib.spip.net/?article4246"
+	documentation="https://contrib.spip.net/?article4246"
 >
 	<nom>noiZetier</nom>
 	<!-- Gestionnaire de noisettes, nativement fonctionnel avec les squelettes Z -->

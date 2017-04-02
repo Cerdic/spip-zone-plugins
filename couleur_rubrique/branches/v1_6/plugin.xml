@@ -17,7 +17,7 @@
 	</description>
 	<options>pb_couleur_rubrique_options.php</options>
 	<prefix>pb_couleur_rubrique</prefix>
-	<lien>http://www.paris-beyrouth.org/tutoriaux-spip/article/le-plugin-pb-couleur-rubrique</lien>
+	<lien>http://www.paris-beyrouth.org/Le-plugin-PB-Couleur-Rubrique</lien>
 	<pipeline>
 		<nom>header_prive</nom>
 		<action>header</action>

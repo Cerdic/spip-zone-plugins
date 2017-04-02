@@ -18,7 +18,7 @@ Reste &#224; faire :
 
 Ic&#244;ne issue de la collection [Farm-Fresh Web Icons->http://www.fatcow.com/free-icons] de FatCow.
 	</description>
-   <lien>http://contrib.spip.net/Liens-entre-contenus</lien>
+   <lien>https://contrib.spip.net/Liens-entre-contenus</lien>
 	<icon>images/liens_contenus.png</icon>
    <chemin dir='' />
 	<prefix>lienscontenus</prefix>

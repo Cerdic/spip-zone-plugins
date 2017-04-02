@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="img/letter_32.png"
-	documentation="http://contrib.spip.net/?article3638"
+	documentation="https://contrib.spip.net/?article3638"
 >	
 
 	<nom>Tip A Friend</nom>

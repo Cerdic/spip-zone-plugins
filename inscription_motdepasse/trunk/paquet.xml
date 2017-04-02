@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="inscriptionmotdepasse.png"
-	documentation="http://contrib.spip.net/4802"
+	documentation="https://contrib.spip.net/4802"
 >
 	<nom>Mot de passe dès l'inscription</nom>
 	<!-- Ajoute un champ pour définir le mot de passe dès l'inscription -->

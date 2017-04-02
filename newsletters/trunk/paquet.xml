@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.5;3.1.*]"
 	logo="prive/themes/spip/images/newsletters-64.png"
-	documentation="http://contrib.spip.net/newsletters"
+	documentation="https://contrib.spip.net/newsletters"
 	schema="0.3.0"
 >
 	<nom>Newsletters</nom>

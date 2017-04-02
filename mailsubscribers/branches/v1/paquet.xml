@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/mailsubscriber-32.png"
-	documentation="http://contrib.spip.net/mailsubscribers"
+	documentation="https://contrib.spip.net/mailsubscribers"
 	schema="0.3.0"
 >
 	<nom>MailSubscribers</nom>

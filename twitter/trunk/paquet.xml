@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	schema="0.1.1"
 	logo="prive/themes/spip/images/twitter-32.png"
-	documentation="http://contrib.spip.net/4393"
+	documentation="https://contrib.spip.net/4393"
 >
 
 	<nom>Twitter</nom>

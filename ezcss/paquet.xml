@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/ezcss-64.jpg"
-	documentation="http://contrib.spip.net/?article3538"
+	documentation="https://contrib.spip.net/?article3538"
 >
 	<nom>EZ-CSS</nom>
 	<auteur lien="http://www.ez-css.org/">Thierry Koblenz</auteur>

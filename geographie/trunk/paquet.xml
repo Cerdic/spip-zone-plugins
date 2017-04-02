@@ -6,7 +6,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/geographie-32.png"
-	documentation="http://contrib.spip.net/Geographie"
+	documentation="https://contrib.spip.net/Geographie"
 >
 	<nom>Geographie</nom>
 

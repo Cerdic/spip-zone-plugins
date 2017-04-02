@@ -15,7 +15,7 @@
 {{Modali&#224; di utilizzo:}} dichiarare l'URL della SiteMap in Google: <code>http://www.example.com/spip.php?page=sitemap</code> (inserendo direttamente <code>http://www.example.com/?page=sitemap</code> la SiteMap non funzioner&#224;).
 		</multi>
 	</description>
-	<lien>http://zone.spip.org/trac/spip-zone/wiki/SiteMap</lien>
+	<lien>https://zone.spip.org/trac/spip-zone/wiki/SiteMap</lien>
 	<prefix>siteMap</prefix>
 	<chemin dir='' type='public' />	
 	<necessite id="SPIP" version="[1.9.0;2.1.99]" />

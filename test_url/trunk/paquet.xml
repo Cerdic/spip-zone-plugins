@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/test-ok_24.png"
-	documentation="http://contrib.spip.net/Test-URL"
+	documentation="https://contrib.spip.net/Test-URL"
 >
 	<nom>Test urls</nom>
 	<auteur lien="http://www.pierre-kuhn.org">Pierre KUHN</auteur>

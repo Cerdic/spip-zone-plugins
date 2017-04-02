@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.0.0;3.1.*]"
 	logo="prive/themes/spip/images/adxmenu_36.png"
-	documentation="http://contrib.spip.net/ADX-Menu-un-joli-menu-deroulant"
+	documentation="https://contrib.spip.net/ADX-Menu-un-joli-menu-deroulant"
 >	
 
 	<nom>ADX menu</nom>

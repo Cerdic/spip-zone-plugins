@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[2.1.0;3.1.*]"
 	logo="prive/themes/spip/images/migrateur-64.png"
-	documentation="http://contrib.spip.net/4477"
+	documentation="https://contrib.spip.net/4477"
 >
 
 	<nom>Migrateur</nom>

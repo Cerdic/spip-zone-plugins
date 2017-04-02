@@ -11,7 +11,7 @@
 	<etat>stable</etat>
 	<prefix>fpdf</prefix>
 	<icon>prive/themes/spip/images/logo-64.png</icon>
-	<lien>http://contrib.spip.net/4185</lien>
+	<lien>https://contrib.spip.net/4185</lien>
 	<categorie>outil</categorie>
 	<necessite id="SPIP" version="[2.0.0;3.1.99]" />
 </plugin>

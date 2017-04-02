@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[2.0.10;3.0.*]"
 	logo="images/tradauto-64.png"
-	documentation="http://contrib.spip.net/?article4198"
+	documentation="https://contrib.spip.net/?article4198"
 >
 
 	<nom>Tradauto</nom>

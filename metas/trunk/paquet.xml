@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/metas-24.png"
 	schema="1.2.0"
-	documentation="http://contrib.spip.net/Metas"
+	documentation="https://contrib.spip.net/Metas"
 >
 
 	<nom>Metas</nom>

@@ -6,7 +6,7 @@
 	compatibilite="[2.1.0;3.0.*]"
 	logo="images/multilang-32.png"
 	schema="0.1"
-	documentation="http://contrib.spip.net/?article3498"
+	documentation="https://contrib.spip.net/?article3498"
 >	
 
 	<nom>Multilang</nom>

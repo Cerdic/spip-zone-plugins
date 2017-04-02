@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="ctan.png"
-	documentation="http://contrib.spip.net/4487"
+	documentation="https://contrib.spip.net/4487"
 >
 
 	<nom>Données CTAN</nom>

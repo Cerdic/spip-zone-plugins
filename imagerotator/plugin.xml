@@ -12,7 +12,7 @@
 	[fr]Ajoute un diaporama [JW Image Rotator->http://www.longtailvideo.com/players/jw-image-rotator/] param&#233;trable via [CFG->http://contrib.spip.net/Config-cfg]
 	[en]Add a [JW Image Rotator->http://www.longtailvideo.com/players/jw-image-rotator/] slideshow using [CFG->http://contrib.spip.net/Config-cfg]
 	</multi></description>
-	<lien>http://contrib.spip.net/JW-Image-Rotator</lien>
+	<lien>https://contrib.spip.net/JW-Image-Rotator</lien>
 	<icon>img_pack/imagerotator-32.png</icon>
 	<prefix>imagerotator</prefix>
 	<pipeline>

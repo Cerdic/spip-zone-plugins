@@ -5,7 +5,7 @@
     etat="test"
     compatibilite="[2.1.0;3.1.*]"
     logo="prive/themes/spip/images/spip_hop-64.png"
-    documentation="http://contrib.spip.net/4704"
+    documentation="https://contrib.spip.net/4704"
 >
     <nom>Agrandir la largeur de page</nom>
     <!-- Ce plugin va agrandir la largeur de la page dans l'espace privé de SPIP. -->

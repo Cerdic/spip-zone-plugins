@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.1.0;3.2.*]"
 	logo="images/mailcrypt-256.png"
-	documentation="http://contrib.spip.net/?article3828"
+	documentation="https://contrib.spip.net/?article3828"
 >	
 
 	<nom>MailCrypt 2</nom>

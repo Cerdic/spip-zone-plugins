@@ -51,7 +51,7 @@ TODO
 -* moderer les salles demo
 
 	</description>
-	<lien>http://contrib.spip.net/bigbluebutton</lien>
+	<lien>https://contrib.spip.net/bigbluebutton</lien>
         <prefix>bigbluebutton</prefix>
 	<icon>img_pack/bigbluebutton-64.png</icon>
 	<install>base/bigbluebutton.php</install>

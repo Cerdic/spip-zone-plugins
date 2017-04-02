@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.1.0;3.1.*]"
 	logo="icon/courtcircuit-128.png"
-	documentation="http://contrib.spip.net/3831"
+	documentation="https://contrib.spip.net/3831"
 >
 
 	<nom>Court-circuit</nom>

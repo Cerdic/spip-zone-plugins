@@ -1,14 +1,14 @@
 <plugin>
-    <nom>QrCode</nom>
+	<nom>QrCode</nom>
 	<slogan>Générateur de code pour une lecture avec téléphone portable</slogan>
-    <auteur>Frédéric Bonnaud</auteur>
-    <licence>GPL 2 - (c) 2010-2011</licence>
-    <version>0.2.1</version>
-    <version_base>0.2</version_base>
-  
-    <etat>experimental</etat>
-    <icon>qrcode.png</icon>
-    <description>
+	<auteur>Frédéric Bonnaud</auteur>
+	<licence>GPL 2 - (c) 2010-2011</licence>
+	<version>0.2.1</version>
+	<version_base>0.2</version_base>
+
+	<etat>experimental</etat>
+	<icon>qrcode.png</icon>
+	<description>
 	Ce plugin ajoute à SPIP la possibilité d'utiliser les QRcodes. Il peut ajouter un QrCode (utilisable par exemple avec votre portable) aux liens des documents joints.
 
 	Il ajoute : 
@@ -17,7 +17,7 @@
 
 	qui permettent de générer des QRcodes aux contenus variés.
 	</description>
-    <lien>http://contrib.spip.net/Qrcode</lien>
+	<lien>https://contrib.spip.net/Qrcode</lien>
 	<prefix>qrcode</prefix>
 
 	<pipeline>

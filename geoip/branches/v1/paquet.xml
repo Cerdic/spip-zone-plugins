@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/geoip-32.png"
-	documentation="http://contrib.spip.net/Geoip"
+	documentation="https://contrib.spip.net/Geoip"
 >
 
 	<nom>geoIP</nom>

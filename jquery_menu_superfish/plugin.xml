@@ -13,7 +13,7 @@
 		</multi>
 	</description>
 	<prefix>jquerysuperfish</prefix>
-	<lien>http://contrib.spip.net/Menu-jQuery-Superfish</lien>
+	<lien>https://contrib.spip.net/Menu-jQuery-Superfish</lien>
 	<install>base/jquerysuperfish_install.php</install>
 	<pipeline>
 		<nom>insert_head_css</nom>

@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.17;3.2.*]"
 	logo="img/logo_aed_edit_128.png"
-	documentation="http://contrib.spip.net/Edition-directe-3"
+	documentation="https://contrib.spip.net/Edition-directe-3"
 >
 
 	<nom>Edition directe</nom>

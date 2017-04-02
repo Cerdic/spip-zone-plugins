@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/banniere-32.png"
 	schema="1.0.0"
-	documentation="http://contrib.spip.net/Bannieres-2"
+	documentation="https://contrib.spip.net/Bannieres-2"
 >	
 
 	<nom>Banni&#232;res</nom>

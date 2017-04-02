@@ -9,7 +9,7 @@
 	<auteur>Olivier Sallou, [C&#233;dric Morin->http://www.yterium.net], [Gilles Vincent->http://www.tech-nova.fr]</auteur>
 	<description>(D&#233;)S&#233;lectionne un objet pour g&#233;rer des objets (articles, rubriques ...) favoris pour un visiteur authentifi&#233;</description>
 	<install>mesfavoris_administrations.php</install>
-	<lien>http://contrib.spip.net/Mes-Favoris-2-0</lien>
+	<lien>https://contrib.spip.net/Mes-Favoris-2-0</lien>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>mesfavoris_pipelines.php</inclure>

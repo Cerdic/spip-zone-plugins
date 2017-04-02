@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.1.0;3.1.*]"
 	logo="images/accordion.png"
-	documentation="http://contrib.spip.net/4761"
+	documentation="https://contrib.spip.net/4761"
 >
 	<nom>Raccourci~‹accordeon›</nom>
 

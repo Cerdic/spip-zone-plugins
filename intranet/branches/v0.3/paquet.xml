@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/intranet-64.png"
-	documentation="http://contrib.spip.net/?article4388"
+	documentation="https://contrib.spip.net/?article4388"
 >	
 
 	<nom>Intranet</nom>

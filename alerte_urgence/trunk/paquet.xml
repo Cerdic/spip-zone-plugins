@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="alerte_urgence.png"
-	documentation="http://contrib.spip.net/4606"
+	documentation="https://contrib.spip.net/4606"
 	schema="1.0.0" 
 >
 	<nom>Alerte d'urgence</nom>

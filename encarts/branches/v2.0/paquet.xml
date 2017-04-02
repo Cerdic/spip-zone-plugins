@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.12;3.0.*]"
 	logo="prive/themes/spip/images/encarts-64.png"
-	documentation="http://contrib.spip.net/Plugin-Encarts"
+	documentation="https://contrib.spip.net/Plugin-Encarts"
 	schema="1.0.0"
 >
 	<!--

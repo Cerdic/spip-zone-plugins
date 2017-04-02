@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="stop_32.png"
-	documentation="http://contrib.spip.net/?article3884"
+	documentation="https://contrib.spip.net/?article3884"
 >	
 
 	<nom>SPIP 400</nom>

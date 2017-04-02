@@ -8,7 +8,7 @@
 	<version>2.0.1 beta</version>
 	<etat>test</etat>
 	<description>Agenda Ev&#233;nementiel</description>
-	<lien>http://contrib.spip.net/article2858</lien> <!-- URI de documentation -->
+	<lien>https://contrib.spip.net/article2858</lien> <!-- URI de documentation -->
 	<options>agenda_options.php</options>
 	<fonctions>agenda_fonctions.php</fonctions>
 	<prefix>agenda</prefix>

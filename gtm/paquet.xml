@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/gtm-32.png"
-	documentation="http://contrib.spip.net/4757"
+	documentation="https://contrib.spip.net/4757"
 >
 
 	<nom>Google Tag Manager</nom>

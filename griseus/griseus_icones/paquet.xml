@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/griseus/images/griseusico-256.png"
-	documentation="http://contrib.spip.net/Icones-Griseus-pour-l-espace-prive"
+	documentation="https://contrib.spip.net/Icones-Griseus-pour-l-espace-prive"
 >
 
 	<nom>Griseus : icônes espace privé</nom>

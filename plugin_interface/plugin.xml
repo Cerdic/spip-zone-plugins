@@ -14,7 +14,7 @@
 	<description>
 	exploitation du plugin interface
 	</description>
-	<lien>http://www.spip-contrib.net</lien> <!-- URI de documentation -->
+	<lien>https://contrib.spip.net/</lien> <!-- URI de documentation -->
 	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->
 	
 	</options>

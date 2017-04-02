@@ -29,5 +29,5 @@
 
 	<version_base>0.1</version_base>
 	<install>base/versioning_install.php</install>
-	<lien>http://contrib.spip.net/Nouvelle-version-Moderation-de-modifications</lien>
+	<lien>https://contrib.spip.net/Nouvelle-version-Moderation-de-modifications</lien>
 </plugin>

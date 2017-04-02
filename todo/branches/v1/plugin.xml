@@ -8,7 +8,7 @@
 	<description>Ajoute de nouveaux raccourcis typographiques permettant de décrire de manière simple des listes de choses à faire dans un contenu SPIP.</description>
 	<categorie>edition</categorie>
 	<icon>images/todo-48.png</icon>
-	<lien>http://contrib.spip.net/Todo</lien>
+	<lien>https://contrib.spip.net/Todo</lien>
 
 	<prefix>todo</prefix>
 	

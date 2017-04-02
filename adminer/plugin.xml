@@ -8,7 +8,7 @@
 	<description>
 		Utiliser Adminer sur la base SPIP
 	</description>
-	<lien>http://contrib.spip.net/Adminer</lien>
+	<lien>https://contrib.spip.net/Adminer</lien>
 	<licence>GNU/GPL</licence>
 	<icon>adminer-64.png</icon>
 	<options>adminer_options.php</options>

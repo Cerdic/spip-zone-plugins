@@ -6,7 +6,7 @@
 	compatibilite="[2.0.10;3.2.*]"
 	schema="0.1.0"
 	logo="date_inscription-32.png"
-	documentation="http://contrib.spip.net/Date-d-inscription"
+	documentation="https://contrib.spip.net/Date-d-inscription"
 >	
 
 	<nom>Date d'inscription</nom>

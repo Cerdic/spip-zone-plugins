@@ -7,7 +7,7 @@
  	<prefix>spip_400</prefix>
 	<chemin dir='public' type='public' />
 	<chemin dir='' />
-	<lien>http://contrib.spip.net/SPIP-400-Gestion-des-erreurs-HTTP</lien>
+	<lien>https://contrib.spip.net/SPIP-400-Gestion-des-erreurs-HTTP</lien>
 
 	<description>
 {{Gestion pouss&#233;e des erreurs HTTP (401, 404) pour SPIP}}

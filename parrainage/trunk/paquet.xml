@@ -6,7 +6,7 @@
 	compatibilite="[2.1.0;3.0.*]"
 	logo="images/parrainage-48.png"
 	schema="0.1.0"
-	documentation="http://contrib.spip.net/?article3978"
+	documentation="https://contrib.spip.net/?article3978"
 >	
 
 	<nom>Parrainage</nom>

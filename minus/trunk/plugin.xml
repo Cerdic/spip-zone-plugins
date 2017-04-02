@@ -4,7 +4,7 @@
 	<categorie>edition</categorie>
 	<version>2.0.2</version>
 	<etat>test</etat>
-	<lien>http://contrib.spip.net/Minus-Eviter-les-titres-en-majuscules</lien>
+	<lien>https://contrib.spip.net/Minus-Eviter-les-titres-en-majuscules</lien>
 	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
 	<licence>[GNU/GPL 3->https://www.gnu.org/licenses/gpl-3.0.html] ; Logo CC Paternité-Partage à L'Identique [Willi Heidelbach->https://commons.wikimedia.org/wiki/File:Metal_movable_type.jpg]</licence>
 	<icon>minus.jpg</icon>

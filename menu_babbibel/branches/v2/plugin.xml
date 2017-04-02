@@ -23,7 +23,7 @@
 		[en]This plugin provides a horizontal dropdown menu based on jQuery library, without depth limitation and configurable with CFG. The code is very simple, the menu is easy to customize. It requires the jQuery plugin for versions of SPIP < 1.9.2.
 		</multi>
 	</description>
-	<lien>http://contrib.spip.net/?article3055</lien>
+	<lien>https://contrib.spip.net/?article3055</lien>
 
 	<fonctions>fonctions_menu.php</fonctions>
 

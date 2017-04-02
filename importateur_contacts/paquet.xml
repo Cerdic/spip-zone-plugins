@@ -6,7 +6,7 @@
 	compatibilite="[2.1.10;3.0.*]"
 	logo="images/importateur_contacts-32.png"
 	schema="1.0.0"
-	documentation="http://contrib.spip.net/?article3902"
+	documentation="https://contrib.spip.net/?article3902"
 >	
 
 	<nom>Importateur de contacts</nom>

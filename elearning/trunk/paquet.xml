@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	schema="1.0.0"
-	documentation="http://contrib.spip.net/Plugin-E-learning"
+	documentation="https://contrib.spip.net/Plugin-E-learning"
 >	
 	<nom>E-Learning</nom>
 	<!-- Plate-forme simple de E-Learning -->

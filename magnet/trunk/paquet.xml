@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="magnet-32.png"
-	documentation="http://contrib.spip.net/magnet"
+	documentation="https://contrib.spip.net/magnet"
 >
 
 	<nom>Magnet</nom>

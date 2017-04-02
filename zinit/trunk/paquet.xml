@@ -5,7 +5,7 @@
 	etat="experimental"
 	compatibilite="[3.0.9;3.1.*]"
 	logo="prive/themes/spip/images/zinit-64.png"
-	documentation="http://contrib.spip.net/4699"
+	documentation="https://contrib.spip.net/4699"
 >
 	<nom>Initialiser Zcore</nom>
 

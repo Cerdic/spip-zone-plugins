@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/modele-32.png"
-	documentation="http://contrib.spip.net/?article3631"
+	documentation="https://contrib.spip.net/?article3631"
 >
 
 	<nom>Ins&#233;rer Mod&#232;les</nom>

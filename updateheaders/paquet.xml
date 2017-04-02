@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/layout_header.png"
-	documentation="http://contrib.spip.net/update-headers"
+	documentation="https://contrib.spip.net/update-headers"
 >
 	<nom>Update Headers</nom>
 	

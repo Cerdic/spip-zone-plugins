@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/rssconfig-32.png"
-	documentation="http://contrib.spip.net/?article3793"
+	documentation="https://contrib.spip.net/?article3793"
 	schema="0.1.0"
 >
 

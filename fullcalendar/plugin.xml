@@ -17,7 +17,7 @@
 		</multi>
 	</description>
 	<icon>prive/themes/spip/images/fullcalendar-32.png</icon>
-	<lien>http://contrib.spip.net/Fullcalendar</lien>
+	<lien>https://contrib.spip.net/Fullcalendar</lien>
 	<prefix>fullcalendar</prefix>
 	<install>base/fullcalendar_init.php</install>
 	<noisette>modeles/fullcalendar.html</noisette>

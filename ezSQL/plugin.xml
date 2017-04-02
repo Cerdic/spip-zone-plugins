@@ -1,19 +1,19 @@
 <plugin>
-   <nom>ezSQL</nom>
-   <slogan>Requ&#232;tes SQL et export CSV</slogan>
-   <auteur>G. VLAVONOU, Y. EDAHE, C. PROTIERE, [->www.officedubacbenin.bj]</auteur>
-   <version>1.0.0</version>
-   <version_base>0.1</version_base>
-   <etat>stable</etat>
-   <description>Permet d'ex&#233;cuter des requ&#232;tes SQL, d'afficher la structure de la base et d'exporter le resultat d'un SELECT sous forme de fichier CSV</description>
-   <lien>http://contrib.spip.net/ezSQL-requetes-SQL-et-export-CSV</lien>
-   <icon>img_pack/logo_odb_150.png</icon>
-   <prefix>ezsql</prefix>
-   <pipeline>
-      <nom>ajouter_boutons</nom>
-      <action>ajouterBoutons</action>
-      <inclure>inc-ezsql.php</inclure>
-   </pipeline>
+	<nom>ezSQL</nom>
+	<slogan>Requ&#232;tes SQL et export CSV</slogan>
+	<auteur>G. VLAVONOU, Y. EDAHE, C. PROTIERE, [->www.officedubacbenin.bj]</auteur>
+	<version>1.0.0</version>
+	<version_base>0.1</version_base>
+	<etat>stable</etat>
+	<description>Permet d'ex&#233;cuter des requ&#232;tes SQL, d'afficher la structure de la base et d'exporter le resultat d'un SELECT sous forme de fichier CSV</description>
+	<lien>https://contrib.spip.net/ezSQL-requetes-SQL-et-export-CSV</lien>
+	<icon>img_pack/logo_odb_150.png</icon>
+	<prefix>ezsql</prefix>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>inc-ezsql.php</inclure>
+	</pipeline>
 
 	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 	<categorie>outil</categorie>

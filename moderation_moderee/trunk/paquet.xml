@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/moderation.png"
-	documentation="http://contrib.spip.net/Moderation-Moderee"
+	documentation="https://contrib.spip.net/Moderation-Moderee"
 	schema="1.0.0"
 >	
 

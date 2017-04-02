@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.17;3.2.*]"
 	logo="prive/themes/spip/images/massicot-48.png"
-	documentation="http://contrib.spip.net/Massicot"
+	documentation="https://contrib.spip.net/Massicot"
 	schema="1.1.0" 
 >
 	<!-- crédit icône : http://ic8.link/1047 -->

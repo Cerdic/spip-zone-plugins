@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/griseusicobarre-256.png"
-	documentation="http://contrib.spip.net/Icones-Griseus-pour-la-barre-d-edition"
+	documentation="https://contrib.spip.net/Icones-Griseus-pour-la-barre-d-edition"
 >
 
 	<nom>Griseus : icônes barre d'édition</nom>

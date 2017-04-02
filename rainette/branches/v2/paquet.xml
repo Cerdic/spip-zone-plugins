@@ -6,7 +6,7 @@
 	compatibilite="[3.0.11;3.1.*]"
 	logo="rainette-64.png"
 	demonstration="demo/rainette"
-	documentation="http://contrib.spip.net/article4217"
+	documentation="https://contrib.spip.net/article4217"
 >
 
 	<nom>Rainette</nom>

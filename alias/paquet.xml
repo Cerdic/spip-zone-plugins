@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[1.9.0;3.1.*]"
 	logo="img_pack/article-alias-32.png"
-	documentation="http://contrib.spip.net/Alias-d-Article,2854"
+	documentation="https://contrib.spip.net/Alias-d-Article,2854"
 >
 
 	<nom>Alias Articles</nom>

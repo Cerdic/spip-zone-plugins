@@ -21,7 +21,7 @@
 
 Ce plugin n’est plus en d&#233;veloppement actif, les efforts se tournant vers le plugin [Fulltext->http://contrib.spip.net/Fulltext] qui reprend le concept, mais de façon beaucoup plus performante.
 	</description>
-	<lien>http://contrib.spip.net/Le-plugin-Indexation</lien>
+	<lien>https://contrib.spip.net/Le-plugin-Indexation</lien>
 	<options>indexation_options.php</options>
 	<fonctions>indexation_fonctions.php</fonctions>
 	<prefix>Indexation</prefix>

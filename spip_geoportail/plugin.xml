@@ -16,7 +16,7 @@ Ce plugin permet, en utilisant l'API G&#233;oportail (Openlayers), le g&#233;or&
 
 Pour visualiser des exemples d'affichage de carte Geoportail, OSM, Google Maps, Yahoo! ou Bing veuillez vous rendre &#224; l'adresse suivante : [->http://grafreex.free.fr/?-Geoportail-].
 	</description>
-	<lien>http://contrib.spip.net/Plugin-SPIP-Geoportail</lien>
+	<lien>https://contrib.spip.net/Plugin-SPIP-Geoportail</lien>
 	<prefix>geoportail</prefix>
 	<pipeline> <!-- definition des autorisations -->
 		<nom>autoriser</nom>

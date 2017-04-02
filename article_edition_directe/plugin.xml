@@ -23,7 +23,7 @@
 		[fr]Ce plugin rend l'article directement &#233;ditable depuis la page article dans l'espace priv&#233;, plus besoin donc d'appuyer sur le bouton modifier cet article. Toutes les manipulations de l'article (modifications, ajouter des mots cl&#233;s, auteurs,...) peuvent se faire depuis une seule page.
 		</multi>	
 	</description>
-	<lien>http://contrib.spip.net/Articles-en-edition-directe</lien>
+	<lien>https://contrib.spip.net/Articles-en-edition-directe</lien>
 	<licence>GPL 3</licence>
 	<prefix>aed</prefix>
 	<icon>img/logo_aed_edit_32.png</icon>

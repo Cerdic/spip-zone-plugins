@@ -9,7 +9,7 @@
 	<description>
 	Formulaire de contact libre auquel on peut passer directement une adresse mail et une url de r&#233;f&#233;rence (ic&#244;ne de http://www.androidicons.com/).
 	</description>
-	<lien>http://contrib.spip.net/Formulaire-de-contact-libre</lien>
+	<lien>https://contrib.spip.net/Formulaire-de-contact-libre</lien>
 	<licence>GPL</licence>
 	<categorie>communication</categorie>
 	<options>contact_libre_options.php</options>

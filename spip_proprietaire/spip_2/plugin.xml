@@ -20,7 +20,7 @@ Les ic&#244;nes de l'espace priv&#233; proviennent du projet {{[GNOME->http://ww
 	</description>
 
  	<icon>images/idisk-dir-36.png</icon>
-	<lien>http://contrib.spip.net/?article3516</lien>
+	<lien>https://contrib.spip.net/?article3516</lien>
 	<categorie>communication</categorie>
 	
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />

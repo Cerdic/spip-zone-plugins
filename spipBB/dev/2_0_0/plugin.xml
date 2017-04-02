@@ -90,7 +90,7 @@ _ {{M&#243;dulo spipbb en curso de desenvolvemento. &#218;seo ao seu risco e ven
 _ {{Plugin spipbb en cours de developpement. Vous l\'utilisez &#224; vos risques et p&#233;rils}}
 	</multi>
 	</description>
-	<lien>http://contrib.spip.net/SpipBB-le-forum</lien>
+	<lien>https://contrib.spip.net/SpipBB-le-forum</lien>
 
 	<icon>img_pack/spipbb-48.png</icon>
 	<fonctions>spipbb_fonctions.php</fonctions>

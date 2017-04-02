@@ -25,7 +25,7 @@
 			et voilà votre site est multilingue
 		</multi>	
 	</description>
-	<lien>http://contrib.spip.net/Site-multilingue-facile</lien>
+	<lien>https://contrib.spip.net/Site-multilingue-facile</lien>
 	<licence>GNU/GPL</licence>
 	<prefix>multilingue</prefix>
 	<icon>prive/themes/spip/images/multilingue-64.png</icon>

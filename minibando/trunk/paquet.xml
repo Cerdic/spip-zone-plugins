@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/minibando-64.png"
-	documentation="http://contrib.spip.net/minibando"
+	documentation="https://contrib.spip.net/minibando"
 >
 
 	<nom>minibando</nom>

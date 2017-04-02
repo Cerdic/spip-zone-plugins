@@ -6,7 +6,7 @@
 	compatibilite="[2.0.0;3.0.*]"
 	logo="prive/themes/spip/images/sel-128.png"
 	schema="0.1"
-	documentation="http://contrib.spip.net/SEL-systeme-d-echange-local"
+	documentation="https://contrib.spip.net/SEL-systeme-d-echange-local"
 >
 	<nom>SEL (Système d'échange local)</nom>
 	<!-- Gestion des chats dans SPIP -->

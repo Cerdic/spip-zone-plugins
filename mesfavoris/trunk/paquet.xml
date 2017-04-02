@@ -6,7 +6,7 @@
 	compatibilite="[2.0.0;3.1.*]"
 	logo="images/mesfavoris-128.png"
 	schema="1.2.0"
-	documentation="http://contrib.spip.net/Mes-Favoris-2-0"
+	documentation="https://contrib.spip.net/Mes-Favoris-2-0"
 >	
 
 	<nom>Mes Favoris</nom>

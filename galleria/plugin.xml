@@ -69,7 +69,7 @@ ex : <code><galleria22></code> a gallery in the article 22 ; <code><galleria22|l
 	</description>
 	<necessite id="SPIP" version="[1.9.2;3.1.99]" />
 	<categorie>multimedia</categorie>
-	<lien>http://contrib.spip.net/Galleria</lien>
+	<lien>https://contrib.spip.net/Galleria</lien>
 	<prefix>galleria</prefix>
 	<pipeline>
 	 <nom>insert_head</nom>

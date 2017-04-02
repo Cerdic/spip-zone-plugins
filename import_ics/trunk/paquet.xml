@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.7;3.1.*]"
 	logo="prive/themes/spip/images/import_ics-64.png"
-	documentation="http://contrib.spip.net/4816"
+	documentation="https://contrib.spip.net/4816"
 	schema="1.0.9"
 >
 	<nom>Import_ics</nom>

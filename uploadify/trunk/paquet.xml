@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="theme/img/uploadify.png"
-	documentation="http://contrib.spip.net/?article3045"
+	documentation="https://contrib.spip.net/?article3045"
 >	
 	<nom>Uploadify</nom>
 	<auteur lien="http://demo.apsulis.com">Hady, XDjuj</auteur>

@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="theme/img/dossier.png"
-	documentation="http://contrib.spip.net/"
+	documentation="https://contrib.spip.net/"
 >	
 
 	<nom>Déplacer rubriques</nom>

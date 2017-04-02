@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/activ_jour.gif"
-	documentation="http://contrib.spip.net/Activite-du-jour"
+	documentation="https://contrib.spip.net/Activite-du-jour"
 >	
 
 	<nom>ACTIvité du JOUR</nom>

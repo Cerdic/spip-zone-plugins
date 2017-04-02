@@ -11,7 +11,7 @@
 		</multi>
 	</description>
 	<icon>images/sjcycle-32.png</icon>
-	<lien>http://contrib.spip.net/Plugin-Spip-jQuery-Cycle-pour-Spip-2-1-et-3</lien>
+	<lien>https://contrib.spip.net/Plugin-Spip-jQuery-Cycle-pour-Spip-2-1-et-3</lien>
 	<prefix>sjcycle</prefix>
 	<install>base/sjcycle_install.php</install>
 	<fonctions>sjcycle_fonctions.php</fonctions>

@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	logo="activite_editoriale.png"
 	schema="0.1"
-	documentation="http://contrib.spip.net/Activite-editoriale"
+	documentation="https://contrib.spip.net/Activite-editoriale"
 >	
 
 	<nom>Activit&#233; &#233;ditoriale</nom>

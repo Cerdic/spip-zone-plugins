@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/foundation_6-64.png"
 	schema="1.0"
-	documentation="http://contrib.spip.net/Foundation-4-Spip"
+	documentation="https://contrib.spip.net/Foundation-4-Spip"
 >
 	<nom>Foundation 6</nom>
 	<!-- Plugin qui intégre le framework Foundation à l'interface public de SPIP. -->

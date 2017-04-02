@@ -1,14 +1,14 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	D&#233;coration
+		D&#233;coration
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
- 	izo@aucuneid.net  www.aucuneid.com &#169; 2006 - Distribu&#233; sous licence GNU/GPL
+		izo@aucuneid.net  www.aucuneid.com &#169; 2006 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
-		<lien>http://www.aucuneid.com/bones</lien>
+	<lien>http://www.aucuneid.com/bones</lien>
 
 	<version>
-	0.1
+		0.1
 	</version>
 	<etat>
 	test
@@ -26,11 +26,11 @@ Le filtre "decoration" permet aux redacteurs d'un site spip de d'appliquer les s
 	ce parametre est obligatoire et doit etre non vide
 	-->
 	<prefix> 
-	decoration
+		decoration
 	</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
-			<nom>pre_typo</nom>
+		<nom>pre_typo</nom>
 		<action>pre_typo</action>
 		<inclure>decoration.php</inclure>
 	</pipeline>

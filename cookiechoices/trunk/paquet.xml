@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.17;3.1.*]"
 	logo="prive/themes/spip/images/cookiechoices-64.png"
-	documentation="http://contrib.spip.net/4559"
+	documentation="https://contrib.spip.net/4559"
 >
   <nom>cookiechoices</nom>
   <auteur lien='http://www.cookiechoices.org'>Google</auteur>

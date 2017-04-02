@@ -8,7 +8,7 @@
 	<description>
 		Ce plugin permet de grouper des articles, afin de proposer ponctuellement des articles en "lire aussi..." sans avoir &#224; cr&#233;er des mots-cl&#233;s &#224; chaque occasion.
 	</description>
-	<lien>http://www.paris-beyrouth.org/tutoriaux-spip/article/le-plugin-lire-aussi</lien>
+	<lien>http://www.paris-beyrouth.org/Le-plugin-Lire-aussi</lien>
 	<prefix>lire_aussi</prefix>
 	<install>base/lire_aussi_install.php</install>
 	<pipeline>
@@ -20,7 +20,7 @@
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/lire_aussi_install.php</inclure>
 	</pipeline>
-	
+
 	<categorie>navigation</categorie>
 	<necessite id="SPIP" version="[1.9.0;3.1.99]" />
 </plugin>

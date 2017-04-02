@@ -1,39 +1,39 @@
 <plugin>
-    <!-- Nom du plugin -->
-    <nom> Torrent </nom>
+	<!-- Nom du plugin -->
+	<nom> Torrent </nom>
 
-    <!-- Auteur du plugin -->
-    <auteur>Camille Lafitte</auteur>
+	<!-- Auteur du plugin -->
+	<auteur>Camille Lafitte</auteur>
 	<version>0.1</version>
 	<version_base>0.1</version_base>
-    <etat>dev</etat>
-    <icon></icon>
-    <description> Gestionnaire de Torrent</description>
-    <!-- URL de documentation -->
-    <lien>http://contrib.spip.net/spiptorrent</lien>
+	<etat>dev</etat>
+	<icon></icon>
+	<description> Gestionnaire de Torrent</description>
+	<!-- URL de documentation -->
+	<lien>https://contrib.spip.net/spiptorrent</lien>
 
-    <!-- précise le prefixe utilisé pour toutes les fonctions du plugin, en général le nom du plugin -->
-    <prefix>torrent</prefix>
-    <!-- précise le fichier qui gére l'installation du plugin -->
+	<!-- précise le prefixe utilisé pour toutes les fonctions du plugin, en général le nom du plugin -->
+	<prefix>torrent</prefix>
+	<!-- précise le fichier qui gére l'installation du plugin -->
 	<install>base/torrent_install.php</install>
 
-    <!-- précise le fichier à charger à chaque recalcul, partie publique -->
-    <fonctions>torrent_mes_fonctions.php</fonctions>
+	<!-- précise le fichier à charger à chaque recalcul, partie publique -->
+	<fonctions>torrent_mes_fonctions.php</fonctions>
 
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
-    <pipeline>
-        <nom>declarer_tables_interfaces</nom>
-        <inclure>base/torrent.php</inclure>
-    </pipeline>
-    <pipeline>
-	    <nom>declarer_tables_principales</nom>
-	    <inclure>base/torrent.php</inclure>
-    </pipeline>
-    <pipeline>
-	    <nom>declarer_tables_auxiliaires</nom>
-	    <inclure>base/torrent.php</inclure>
-    </pipeline>
-    
-    <!-- prérequis -->
-    <necessite id="SPIP" version='[2.0.0;]' />
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/torrent.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/torrent.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/torrent.php</inclure>
+	</pipeline>
+
+	<!-- prérequis -->
+	<necessite id="SPIP" version='[2.0.0;]' />
 </plugin>

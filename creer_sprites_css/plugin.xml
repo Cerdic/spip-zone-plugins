@@ -16,7 +16,7 @@
 		{{N&#233;cessite GD2.}}
 	</description>
 	<prefix>creer_sprites</prefix>
-	<lien>http://www.paris-beyrouth.org/tutoriaux-spip/article/plugin-creer-sprites-css</lien>
+	<lien>http://www.paris-beyrouth.org/Plugin-Creer-Sprites-CSS</lien>
 	<fonctions>creer_sprites_fonctions.php</fonctions>
 	<pipeline>
 		<nom>recuperer_fond</nom>

@@ -6,7 +6,7 @@
 	compatibilite="[2.0.0;3.0.*]"
 	logo="img/ico-pubban.png"
 	schema="0.8"
-	documentation="http://contrib.spip.net/?article3637"
+	documentation="https://contrib.spip.net/?article3637"
 >	
 
 	<nom>Pub Banner</nom>

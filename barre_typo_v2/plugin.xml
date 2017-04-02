@@ -51,7 +51,7 @@
 -* Textstatistik berechnen (Worte, Zeichen, Buchstaben)
 </multi>
 	</description>
-	<lien>http://contrib.spip.net/Plugin-Barre-Typographique-V2</lien>
+	<lien>https://contrib.spip.net/Plugin-Barre-Typographique-V2</lien>
 	<prefix>BarreTypoEnrichie</prefix>
 	<options>typo_options.php</options>
 	<icon>img_pack/moinecopiste.gif</icon>

@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/feuillederoute-32.png"
 	schema="0.0.2"
-	documentation="http://contrib.spip.net/?article4328"
+	documentation="https://contrib.spip.net/?article4328"
 >
 
 	<nom>Feuille de Route</nom>

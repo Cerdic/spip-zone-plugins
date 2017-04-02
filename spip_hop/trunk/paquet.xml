@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/spip_hop-64.png"
-	documentation="http://contrib.spip.net/4704"
+	documentation="https://contrib.spip.net/4704"
 	schema="1.0.0"
 >
 	<nom>Agrandir la largeur de page</nom>

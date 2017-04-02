@@ -16,7 +16,7 @@ _ &#169; 2006 - Distribu&eacute; sous licence GPL
 		Spip-digg est un moteur de digg pour Spip 1.9.1++
 		Ce plugin permet de g&#233;rer des digg &#224; la facon de [Scoopeo->http://www.scoopeo.com/].
 	</description>
-	<lien>http://www.spip-contrib.net</lien> <!-- URI de documentation -->
+	<lien>https://contrib.spip.net/</lien> <!-- URI de documentation -->
 	<prefix> 
 	spipdigg
 	</prefix>

@@ -36,7 +36,7 @@ Crédits:
 -* Big UP à cy_altern pour son plugin ImageMap  
 -* Source de la carte [JQVMap / Gaël Jaffredo->http://www.jaffredo.com]
 	</description>
-	<lien>http://contrib.spip.net/SVG-map-des-cartes-reactives-en-SVG</lien>
+	<lien>https://contrib.spip.net/SVG-map-des-cartes-reactives-en-SVG</lien>
 	<icon>svgmap-64.png</icon>
 
 	<categorie>divers</categorie>

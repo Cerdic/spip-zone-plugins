@@ -6,7 +6,7 @@
 	compatibilite="[2.1.0;3.1.*]"
 	logo="prive/themes/spip/images/jquerymasonry-32.png"
 	schema="0.1"
-	documentation="http://contrib.spip.net/JQuery-Masonry"
+	documentation="https://contrib.spip.net/JQuery-Masonry"
 >	
 
 	<nom>jQuery Masonry</nom>

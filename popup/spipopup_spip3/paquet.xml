@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/popup-128.png"
-	documentation="http://contrib.spip.net/?article3573"
+	documentation="https://contrib.spip.net/?article3573"
 >      
 	<nom>Balise &#035;POPUP</nom>
 	<!-- Gestion d'une fenêtre popup unique -->

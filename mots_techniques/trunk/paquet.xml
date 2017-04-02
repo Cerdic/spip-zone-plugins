@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/mots-techniques-48.png"
 	schema="0.3"
-	documentation="http://contrib.spip.net/?article3726"
+	documentation="https://contrib.spip.net/?article3726"
 >
 
 	<nom>Mots techniques</nom>

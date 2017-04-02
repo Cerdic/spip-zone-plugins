@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="prive/themes/spip/images/mots_obligatoires-32.png"
-	documentation="http://contrib.spip.net/4837"
+	documentation="https://contrib.spip.net/4837"
 >
 	<nom>Mots obligatoires</nom>
 

@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="img/balado.jpg"
-	documentation="http://contrib.spip.net/SpipBalado"
+	documentation="https://contrib.spip.net/SpipBalado"
 >	
 
 	<nom>SpipBalado</nom>

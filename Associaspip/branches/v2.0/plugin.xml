@@ -9,7 +9,7 @@
 	<description>Plugin de gestion de petites associations avec : gestion des adh&#233;rents et des cotisations et dons ; gestion des ventes associatives et des activit&#233;s.</description>
 	<prefix>association</prefix>
 	<install>base/association_gestion.php</install>
-	<lien>http://contrib.spip.net/1611</lien>
+	<lien>https://contrib.spip.net/1611</lien>
     <icon>img_pack/annonce.gif</icon>
 	<options>association_options.php</options>
 	<pipeline><nom>header_prive</nom></pipeline>

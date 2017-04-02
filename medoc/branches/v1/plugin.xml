@@ -1,22 +1,23 @@
 <plugin>
-<nom>Mod&#232;le &lt;doc&gt; unifi&eacute;</nom>
-<prefix>medoc</prefix>
-<icon>medoc.png</icon>
+	<nom>Mod&#232;le &lt;doc&gt; unifi&eacute;</nom>
+	<prefix>medoc</prefix>
+	<icon>medoc.png</icon>
 
-<version>1.2.0</version>
-<etat>stable</etat>
-<categorie>edition</categorie>
+	<version>1.2.0</version>
+	<etat>stable</etat>
+	<categorie>edition</categorie>
 
-<slogan>L'insertion de documents simplifi&eacute;e&nbsp;!</slogan>
-<description>Patch unifiant le comportement et la syntaxe d'insertion des documents, pour soigner l'inconstance d'affichage dont souffrent les documents de&nbsp;SPIP. D&eacute;sormais, c'est vous qui d&eacute;cidez !
+	<slogan>L'insertion de documents simplifi&eacute;e&nbsp;!</slogan>
+	<description>
+		Patch unifiant le comportement et la syntaxe d'insertion des documents, pour soigner l'inconstance d'affichage dont souffrent les documents de&nbsp;SPIP. D&eacute;sormais, c'est vous qui d&eacute;cidez !
 
-- Le raccourci &lt;doc&gt; affiche toujours une vignette cliquable
-- Syntaxe d'insertion unifi&eacute;e&nbsp;: &lt;docXXX|left&gt;, &lt;docXXX|img|right&gt;, &lt;docXXX|emb|center&gt;
-- R&eacute;trocompatibilit&eacute; pr&eacute;serv&eacute;e
-</description>
-<lien>http://contrib.spip.net/4026</lien>
-<auteur>[tetue->http://spip.tetue.net] - 2011</auteur>
+		- Le raccourci &lt;doc&gt; affiche toujours une vignette cliquable
+		- Syntaxe d'insertion unifi&eacute;e&nbsp;: &lt;docXXX|left&gt;, &lt;docXXX|img|right&gt;, &lt;docXXX|emb|center&gt;
+		- R&eacute;trocompatibilit&eacute; pr&eacute;serv&eacute;e
+	</description>
+	<lien>https://contrib.spip.net/4026</lien>
+	<auteur>[tetue->http://spip.tetue.net] - 2011</auteur>
 
-<necessite id="SPIP" version="[2.1.0;2.1.99]" />
-<utilise id="medias" version="[;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<utilise id="medias" version="[;]" />
 </plugin>

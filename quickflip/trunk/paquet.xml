@@ -5,7 +5,7 @@
     etat="stable"
     compatibilite="[3.0.0;3.1.*]"
     logo="images/quickflip.png"
-    documentation="http://contrib.spip.net/Quickflip"
+    documentation="https://contrib.spip.net/Quickflip"
 >
 
   <nom>QuickFlip</nom>

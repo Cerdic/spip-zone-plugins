@@ -40,7 +40,7 @@
 		</multi>
 	</description>
 	<!-- URL de documentation http://contrib.spip.net/ -->
-	<lien>http://contrib.spip.net/SEL-systeme-d-echange-local</lien>
+	<lien>https://contrib.spip.net/SEL-systeme-d-echange-local</lien>
 
 	<!-- precise le prefixe utilisé pour toutes les fonctions du plugin, en général le nom du plugin -->
 	<prefix>sel</prefix>

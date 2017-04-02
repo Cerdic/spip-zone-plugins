@@ -1,17 +1,17 @@
 <plugin>
-<nom>jMyCarousel</nom>
-<auteur>Collectif SPIP</auteur>
-<version>0.1</version>
-<etat>dev</etat>
-<icon>css/_img/jmycarousel.jpg</icon>
-<description>Ce plugin fournit un modele pour inserer des images en jMycarousel</description>
-<lien>http://alexmacapple.dyndns.org/gisiesvn/spip.php?rubrique3</lien>
-<fonctions>jmycarousel.php</fonctions>
-<prefix>jmycarousel</prefix>
-<pipeline>
-	<nom>insert_head</nom>
-	<action>insert_head</action>
-	<inclure>jmycarousel.php</inclure>
-</pipeline>
+	<nom>jMyCarousel</nom>
+	<auteur>Collectif SPIP</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<icon>css/_img/jmycarousel.jpg</icon>
+	<description>Ce plugin fournit un modele pour inserer des images en jMycarousel</description>
+	<lien>http://alexmacapple.dyndns.org/gisiesvn/spip.php?rubrique3</lien>
+	<fonctions>jmycarousel.php</fonctions>
+	<prefix>jmycarousel</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>insert_head</action>
+		<inclure>jmycarousel.php</inclure>
+	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

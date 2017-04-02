@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/multidomaines-72.png"
-	documentation="http://contrib.spip.net/?article4182"
+	documentation="https://contrib.spip.net/?article4182"
 	schema="0.0.2" 
 >
 	<nom>Multidomaines</nom>

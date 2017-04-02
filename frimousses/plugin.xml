@@ -8,7 +8,7 @@
 	<description>
 	Remplace les codes ASCII pour les frimousses par des petites images.
 	</description>
-	<lien>http://contrib.spip.net/Smileys-III-Un-point-d-entree-pour</lien>
+	<lien>https://contrib.spip.net/Smileys-III-Un-point-d-entree-pour</lien>
 	<prefix>frimousses</prefix>
 	<fonctions>frimousses_fonctions.php</fonctions>
 	<pipeline><nom>pre_typo</nom></pipeline>

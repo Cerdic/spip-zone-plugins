@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.17;3.1.*]"
 	logo="img/urls_par_numero.png"
-	documentation="http://contrib.spip.net/4625"
+	documentation="https://contrib.spip.net/4625"
 >
 
 	<nom>Urls par numéro d'article</nom>

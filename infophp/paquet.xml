@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.1.0;3.1.*]"
 	logo="prive/themes/spip/images/infophp.png"
-	documentation="http://contrib.spip.net/4759"
+	documentation="https://contrib.spip.net/4759"
 >	
 	<nom>Info PHP</nom>
 	<auteur lien="http://contrib.spip.net/_RealET_">RealET</auteur>

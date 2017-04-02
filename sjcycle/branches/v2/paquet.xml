@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/sjcycle-32.png"
 	schema="0.5"
-	documentation="http://contrib.spip.net/Plugin-Spip-jQuery-Cycle-pour-Spip-2-1-et-3"
+	documentation="https://contrib.spip.net/Plugin-Spip-jQuery-Cycle-pour-Spip-2-1-et-3"
 >	
 
 	<nom>jQuery Cycle</nom>

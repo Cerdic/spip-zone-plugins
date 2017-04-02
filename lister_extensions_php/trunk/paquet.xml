@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/lister_extensions_php-32.png"
-	documentation="http://contrib.spip.net/4708"
+	documentation="https://contrib.spip.net/4708"
 	>
 
 	<nom>Lister les extensions PHP chargées</nom>

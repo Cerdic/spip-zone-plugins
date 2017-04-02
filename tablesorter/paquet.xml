@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[1.9.0;3.1.*]"
 	logo="images/tablesorter-32.png"
-	documentation="http://contrib.spip.net/Tablesorter-pour-SPIP">
+	documentation="https://contrib.spip.net/Tablesorter-pour-SPIP">
 
 	<nom>Tablesorter</nom>
 	<!-- Avec tableSorter, le tri sera top ! -->

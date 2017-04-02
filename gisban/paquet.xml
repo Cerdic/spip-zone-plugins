@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/gis.png"
-	documentation="http://contrib.spip.net/4668"
+	documentation="https://contrib.spip.net/4668"
 >
 
 	<nom>GIS BAN</nom>

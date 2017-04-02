@@ -18,7 +18,7 @@
 	<prefix>amap</prefix>
 
 	<icon>prive/themes/spip/images/amapconfig-64.png</icon>
-	<lien>http://contrib.spip.net/Plugin-AMAP-Version-2</lien>
+	<lien>https://contrib.spip.net/Plugin-AMAP-Version-2</lien>
 
 	<install>base/amap_installation.php</install>
 	<options>amap_options.php</options>

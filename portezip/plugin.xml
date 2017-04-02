@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
-    <!-- Nom du plugin -->
-    <nom>portezip</nom>
+	<!-- Nom du plugin -->
+	<nom>portezip</nom>
 
-    <!-- Auteur du plugin -->
-    <auteur>Camille Lafitte</auteur>
-    <version>0.1</version>
-    <etat>dev</etat>
-    <icon></icon>
-    <description> Ce plugin permet d'exporter l'ensemble des documents d'un repertoire ou article.</description>
-    <!-- URI de documentation -->
-    <lien>http://contrib.spip.net/portezip</lien>
+	<!-- Auteur du plugin -->
+	<auteur>Camille Lafitte</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<icon></icon>
+	<description> Ce plugin permet d'exporter l'ensemble des documents d'un repertoire ou article.</description>
+	<!-- URI de documentation -->
+	<lien>https://contrib.spip.net/portezip</lien>
 
-    <!-- precise le prefixe utilis+ pour toutes les fonctions du plugin, en general le nom du plugin -->
-    <prefix>portezip</prefix>
+	<!-- precise le prefixe utilis+ pour toutes les fonctions du plugin, en general le nom du plugin -->
+	<prefix>portezip</prefix>
 
+	<!-- mes fonctions -->
+	<fonctions>portezip_fonctions.php</fonctions>
 
-    <!-- mes fonctions -->
-    <fonctions>portezip_fonctions.php</fonctions>
-   
-   <chemin dir='' />
+	<chemin dir='' />
 
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

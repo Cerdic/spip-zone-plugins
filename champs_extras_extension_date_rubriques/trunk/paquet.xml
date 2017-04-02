@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/drextras-64.png"
 	schema="1.0"
-	documentation="http://contrib.spip.net/Date-pour-Rubriques"
+	documentation="https://contrib.spip.net/Date-pour-Rubriques"
 >	
 
 	<nom>Date pour Rubriques</nom>

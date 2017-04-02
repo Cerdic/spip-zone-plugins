@@ -27,7 +27,7 @@
 	Este plugin tambi&#233;n permite la publicaci&oacute;n de sondeos y encuestas, la colecta de las respuestas en la base de datos y su descarga en formato CSV (Comma Sepparated Variables).
 	</multi>
 	</description>
-	<lien>http://zone.spip.org/trac/spip-zone/wiki/SpipForms</lien> <!-- URI de documentation -->
+	<lien>https://zone.spip.org/trac/spip-zone/wiki/SpipForms</lien> <!-- URI de documentation -->
 	<options>forms_options.php</options> <!-- fichier charge a chaque hit -->
 	<fonctions>forms_fonctions.php</fonctions>  <!-- fichier charge a chaque recalul de page -->
 	<fonctions>core/public/forms_boucles.php</fonctions>

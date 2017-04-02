@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/picto-comarquage-service-public-50.png"
-	documentation="http://contrib.spip.net/?article3659"
+	documentation="https://contrib.spip.net/?article3659"
 >
 	<nom>Comarquage Flux v2.3</nom>
 	<auteur>IPEOS I-Solutions</auteur>

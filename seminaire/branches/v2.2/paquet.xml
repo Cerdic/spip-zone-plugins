@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/seminaire-64.png"
-	documentation="http://contrib.spip.net/?article4288"
+	documentation="https://contrib.spip.net/?article4288"
 	schema="1.1.0" 
 >
 	<nom>Séminaire</nom>

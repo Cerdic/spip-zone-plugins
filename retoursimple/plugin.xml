@@ -18,7 +18,7 @@ P.S.&#160;1&#160;: S&#8217;agissant des plus r&#233;centes versions de SPIP, le 
 
 P.S.&#160;2&#160;: {Le pr&#233;sent plugin ne fonctionne pas si le &#171;&#160;Couteau suisse&#160;&#187; est install&#233;&#160;; dans ce cas, utiliser la &#8220;lame&#8221; &#171;&#160;Retours de ligne automatiques&#160;&#187; du Couteau suisse.}
 	</description>
-	<lien>http://contrib.spip.net/Alineas-Retour-simple</lien>
+	<lien>https://contrib.spip.net/Alineas-Retour-simple</lien>
 	<prefix>retoursimple</prefix>
 	<icon>retoursimple.png</icon>
 	<options>retoursimple.php</options>

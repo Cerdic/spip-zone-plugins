@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.0.0;3.1.*]"
 	logo="icon/skiplink-64.png"
-	documentation="http://contrib.spip.net/skiplink"
+	documentation="https://contrib.spip.net/skiplink"
 >	
 
 	<nom>SkipLink</nom>

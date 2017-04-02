@@ -1,36 +1,36 @@
 <plugin>
-    <nom>SimpleCart (js)</nom>
-    <auteur> 
-    Martín Gaitán based on [SimpleCart(js)->http://simplecartjs.com/]
-    [Feedback->http://nqnwebs.com/blog/article/simplecart-js-para-spip] will be appreciated.
-    </auteur>
-    <version> 0.1 </version>
-    <icon>images/simplecart-48.png</icon>
-    <etat>dev</etat>
-    <description>
-        <multi>
-        [en]
-            A simple e-commerce plugin with no headaches. Just javascript (and spip). 
-            [Configuration->.?exec=cfg&amp;cfg=simplecart]
-        [es]
-            Un plugin para e-commerce simple, sin dolores de cabeza. Sólo javascript (y spip). 
-            [Configuración->.?exec=cfg&amp;cfg=simplecart]
-		[fr]  
-		   Un plugin  e-commerce simple, sans douleur de t&ecirc;te. Juste javascript et SPIP.
-		    [Configuration ->.?exec=cfg&amp;cgf=simplecart]	
-        </multi>
-    </description>
-    <lien>http://nqnwebs.com/blog/article/simplecart-js-para-spip</lien>
-    <prefix>simplecart</prefix>
-    
-    <fonctions>simplecart_fonctions.php</fonctions>
+	<nom>SimpleCart (js)</nom>
+	<auteur> 
+		Martín Gaitán based on [SimpleCart(js)->http://simplecartjs.com/]
+		[Feedback->http://nqnwebs.com/blog/article/simplecart-js-para-spip] will be appreciated.
+	</auteur>
+	<version> 0.1 </version>
+	<icon>images/simplecart-48.png</icon>
+	<etat>dev</etat>
+	<description>
+		<multi>
+			[en]
+			A simple e-commerce plugin with no headaches. Just javascript (and spip). 
+			[Configuration->.?exec=cfg&amp;cfg=simplecart]
+			[es]
+			Un plugin para e-commerce simple, sin dolores de cabeza. Sólo javascript (y spip). 
+			[Configuración->.?exec=cfg&amp;cfg=simplecart]
+			[fr]  
+			Un plugin  e-commerce simple, sans douleur de t&ecirc;te. Juste javascript et SPIP.
+			[Configuration ->.?exec=cfg&amp;cgf=simplecart]	
+		</multi>
+	</description>
+	<lien>http://mgaitan.github.io/posts/simplecart-js-para-spip.html</lien>
+	<prefix>simplecart</prefix>
 
-    <pipeline>
-        <nom>insert_head</nom>
-        <inclure>simplecart_head.php</inclure>
-    </pipeline>
+	<fonctions>simplecart_fonctions.php</fonctions>
 
-    <necessite id="SPIP" version="[2.0.0;]" />
-    <necessite id="cfg" version="[1.14.1;]" />
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>simplecart_head.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="cfg" version="[1.14.1;]" />
 	<traduire gestionnaire="salvatore" module="simplecart" reference="es" />
 </plugin>

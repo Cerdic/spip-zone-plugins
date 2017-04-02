@@ -18,7 +18,7 @@
 -- <code>{ajaxload=url}</code> retourne l'URL de la noisette dynamique;
 -- <code>{ajaxload=url_html}</code> retourne l'URL du fichier HTML statique.
 	</description>
-	<lien>http://www.paris-beyrouth.org/tutoriaux-spip/article/plugin-inclure-ajaxload</lien>
+	<lien>http://www.paris-beyrouth.org/Plugin-Inclure-Ajaxload</lien>
 	<prefix>INCLUREAJAXLOAD</prefix>
 	<options>inclure-ajaxload.php</options>
 	<pipeline>

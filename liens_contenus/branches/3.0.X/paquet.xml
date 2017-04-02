@@ -6,7 +6,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/liens_contenus.png"
-	documentation="http://contrib.spip.net/Liens-entre-contenus" >
+	documentation="https://contrib.spip.net/Liens-entre-contenus" >
 
 	<nom>Liens entre contenus</nom>
 	<!-- Empecher la suppression d'un objet si d'autres pointent vers lui -->

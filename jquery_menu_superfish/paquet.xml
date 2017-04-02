@@ -6,7 +6,7 @@
 	compatibilite="[2.1.0;3.1.*]"
 	logo="prive/themes/spip/images/jquerysuperfish-32.png"
 	schema="0.2"
-	documentation="http://contrib.spip.net/Menu-jQuery-Superfish"
+	documentation="https://contrib.spip.net/Menu-jQuery-Superfish"
 >	
 
 	<nom>Menu jQuery Superfish</nom>

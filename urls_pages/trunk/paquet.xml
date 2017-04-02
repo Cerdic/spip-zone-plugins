@@ -6,7 +6,7 @@
 	etat="test"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="prive/themes/spip/images/urls_pages.png"
-	documentation="http://contrib.spip.net/4345"
+	documentation="https://contrib.spip.net/4345"
 >
 
 	<nom>URLs Pages Personnalisées</nom>

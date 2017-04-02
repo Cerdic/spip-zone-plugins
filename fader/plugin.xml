@@ -12,7 +12,7 @@
 	- [(#MODELE{fadbreve})]	qui affiche les breves en fonction d'un mot clef
 	
 	</description>
-	<lien>http://contrib.spip.net/Plugin-fader</lien>
+	<lien>https://contrib.spip.net/Plugin-fader</lien>
 	<icon></icon>
 	<prefix>fader</prefix>
 	<pipeline>

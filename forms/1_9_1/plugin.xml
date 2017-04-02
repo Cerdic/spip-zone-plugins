@@ -29,7 +29,7 @@
 	This plugin provides the ability to publish surveys, collect replies in the database and export them to CSV format.
 	</multi>
 	</description>
-	<lien>http://zone.spip.org/trac/spip-zone/wiki/SpipForms</lien> <!-- URI de documentation -->
+	<lien>https://zone.spip.org/trac/spip-zone/wiki/SpipForms</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
 	forms_options.php
 	</options>

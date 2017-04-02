@@ -1,32 +1,32 @@
 <plugin>
-    <nom>jFlipBook</nom>
-    <slogan>Livre d'images avec effet de pages tournantes</slogan>
-    <auteur>[Samuel "PoongalOO"->sam@poongaloo.org]</auteur>
-    <version>0.2.0</version>
-    <etat>test</etat>
-    <description>
-    Ce plugin transforme les images d'un article en un petit livre cliquable dans les coins o&#249; une transition donne l'effet de tourner une page.
-	 
-    {{Utilisation :}} en premier lieu, vous devez ins&#233;rer la ligne suivante dans votre squelette article (donc dans une boucle ARTICLES) &#224; l'endroit o&#249; vous voulez faire appara&#238;tre le livre :
-    <code>[(#CONFIG{plugin}|match{JFLIPBOOK}|?{' ',''})<INCLURE{fond=jflipbook}{id_article}>]</code>
-    
-    Les images doivent &#234;tre ins&#233;r&#233;es dans un article en documents joints en cliquant sur "joindre un document" en bas d'un article dans l'interface priv&#233;e.
+	<nom>jFlipBook</nom>
+	<slogan>Livre d'images avec effet de pages tournantes</slogan>
+	<auteur>[Samuel "PoongalOO"->sam@poongaloo.org]</auteur>
+	<version>0.2.0</version>
+	<etat>test</etat>
+	<description>
+	Ce plugin transforme les images d'un article en un petit livre cliquable dans les coins o&#249; une transition donne l'effet de tourner une page.
 
-    Le module jFlip jQuery a &#233;t&#233; cr&#233; par Renato Formato. [A voir sur jQuery.info->http://www.jquery.info/spip.php?article78]
-    </description>
-    <lien>http://contrib.spip.net/jFlipBook</lien>
-    
-    <icon>img_pack/jflip.png</icon>
-    <prefix>jflipbook</prefix>
-	
+	{{Utilisation :}} en premier lieu, vous devez ins&#233;rer la ligne suivante dans votre squelette article (donc dans une boucle ARTICLES) &#224; l'endroit o&#249; vous voulez faire appara&#238;tre le livre :
+	<code>[(#CONFIG{plugin}|match{JFLIPBOOK}|?{' ',''})<INCLURE{fond=jflipbook}{id_article}>]</code>
+
+	Les images doivent &#234;tre ins&#233;r&#233;es dans un article en documents joints en cliquant sur "joindre un document" en bas d'un article dans l'interface priv&#233;e.
+
+	Le module jFlip jQuery a &#233;t&#233; cr&#233; par Renato Formato. [A voir sur jQuery.info->http://www.jquery.info/spip.php?article78]
+	</description>
+	<lien>https://contrib.spip.net/jFlipBook</lien>
+
+	<icon>img_pack/jflip.png</icon>
+	<prefix>jflipbook</prefix>
+
 	<necessite id="SPIP" version="[1.9.3;2.1.99]" />
 	<necessite id="cfg" version="[1.10.3;]" />
-	
+
 	<bouton id='jflipbook' parent='configuration'>
-      <icone>img_pack/jflip.png</icone>
-      <titre>jFlipBook</titre>
-   </bouton>
-    
+		<icone>img_pack/jflip.png</icone>
+		<titre>jFlipBook</titre>
+	</bouton>
+
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>jflipbook_head.php</inclure>

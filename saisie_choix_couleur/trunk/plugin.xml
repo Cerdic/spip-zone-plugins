@@ -9,7 +9,7 @@
 	<description>
 		Une saisie de formulaire pour proposer plusieurs choix de couleurs.
 	</description>
-	<lien>http://contrib.spip.net/4428</lien>
+	<lien>https://contrib.spip.net/4428</lien>
 	<prefix>saisie_choix_couleur</prefix>
 	<pipeline>
 		<nom>insert_head</nom>
