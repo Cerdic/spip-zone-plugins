@@ -2,7 +2,7 @@
 	prefix="css_imbriques"
 	categorie="outil"
 	version="3.3.2"
-	documentation="http://www.paris-beyrouth.org/tutoriaux-spip/article/plugin-spip-pre-processeur-de-css"
+	documentation="http://www.paris-beyrouth.org/Plugin-SPIP-CSS-imbriques"
 	etat="stable"
 	compatibilite="[1.9.0;3.2.*]"
 >

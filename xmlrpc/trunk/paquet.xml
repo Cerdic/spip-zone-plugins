@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[2.0.10;3.0.*]"
 	logo="images/xmlrpc.png"
-	documentation="http://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/xmlrpc-une-api-xml-rpc-pour-spip/"
+	documentation="https://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/xmlrpc-une-api-xml-rpc-pour-spip/"
 >
 
 	<nom>

@@ -5,11 +5,11 @@
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="imgs/tyto_alba.png"
-	documentation="http://seenthis.net/sites/499366"
-	>
+	documentation="https://seenthis.net/sites/499366"
+>
 	<nom>Dame blanche</nom>
 	<!-- Gérer des dames blanches dans textwheel <dame></dame> -->
- 
+
 	<auteur>ARNO*</auteur>     
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 	<copyright>2014</copyright>

@@ -22,7 +22,7 @@
 	<description>
 		API xml-rpc cliente et serveur
 	</description>
-	<lien>http://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/xmlrpc-une-api-xml-rpc-pour-spip/</lien>
+	<lien>https://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/xmlrpc-une-api-xml-rpc-pour-spip/</lien>
 	<prefix>xmlrpc</prefix>
 	<options>xmlrpc_options.php</options>
 	<pipeline>

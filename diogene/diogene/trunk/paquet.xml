@@ -6,8 +6,8 @@
 	compatibilite="[3.1.0;3.1.*]"
 	logo="images/diogene-128.png"
 	schema="0.3.7"
-	documentation="http://www.mediaspip.net/spip.php?article50"
->	
+	documentation="https://www.mediaspip.net/spip.php?article50"
+>
 
 	<nom>Diogene</nom>
 	<!-- Cr&#233;ation de templates de formulaires pour les objets -->
@@ -17,7 +17,7 @@
 
 	<copyright>2010-2016</copyright>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
-	
+
 	<pipeline nom="diogene_charger" action="" />
 	<pipeline nom="diogene_champs_pre_edition" action="" />
 	<pipeline nom="diogene_champs_texte" action="" />
@@ -26,7 +26,7 @@
 	<pipeline nom="diogene_ajouter_saisies" inclure="diogene_pipelines.php" />
 	<pipeline nom="diogene_verifier" inclure="diogene_pipelines.php" />
 	<pipeline nom="diogene_traiter" inclure="diogene_pipelines.php" />
-	
+
 	<pipeline nom="insert_head_css" inclure="diogene_pipelines.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/diogene.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/diogene.php" />

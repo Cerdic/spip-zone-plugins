@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.19;3.2.*]"
 	logo="prive/themes/spip/images/centre_image-64.png"
-	documentation="http://seenthis.net/messages/362099"
+	documentation="https://seenthis.net/messages/362099"
 >
 
 	<nom>Centre image</nom>

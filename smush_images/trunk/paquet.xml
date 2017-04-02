@@ -6,8 +6,8 @@
 	compatibilite="[3.0.3;3.1.*]"
 	schema="0.2.0"
 	logo="prive/themes/spip/images/smush-64.png"
-	documentation="http://www.mediaspip.net/?article349"
-	developpement="http://www.mediaspip.net/spip.php?page=tickets&amp;composant=plugins%20-%20smush"
+	documentation="https://www.mediaspip.net/?article349"
+	developpement="https://www.mediaspip.net/spip.php?page=tickets&amp;composant=plugins%20-%20smush"
 >
 
 	<nom>Smush</nom>

@@ -15,7 +15,7 @@
 			[en] Create a Youtube or Dailymotion like website...
 		</multi>
 	</description>
-	<lien>http://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/spipmotion/</lien>
+	<lien>https://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/spipmotion/</lien>
 	
 	<version>0.9.14</version>
 	<version_base>0.8.2</version_base>
@@ -99,6 +99,8 @@
 		<icone>images/spipmotion-24.png</icone>
 		<url>ffmpeg_infos</url>
 	</bouton>
+	<categorie>multimedia</categorie>
+</plugin>
 	<bouton id='bando_ffmpeg_infos' parent="bando_configuration">
 		<titre>spipmotion:titre_page_ffmpeg_infos</titre>
 		<icone>images/spipmotion-16.png</icone>
@@ -119,5 +121,3 @@
 	<utilise id='podcast' />
 	<utilise id='fonctions_images' version='[0.5.1]' />
 	
-	<categorie>multimedia</categorie>
-</plugin>

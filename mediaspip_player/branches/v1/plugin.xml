@@ -25,7 +25,7 @@
 			[en]HTML5 Media player based on the audio and video tag with a flash fallback for old browsers (via [Flowplayer->http://flowplayer.org])
 		</multi>
 	</description>
-	<lien>http://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/html5-player-video-sound-media/</lien>
+	<lien>https://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/html5-player-video-sound-media/</lien>
 	<icon>images/html5_player_logo.png</icon>
 	<prefix>mediaspip_player</prefix>
 	<pipeline>

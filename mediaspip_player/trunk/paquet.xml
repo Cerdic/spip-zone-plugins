@@ -8,8 +8,8 @@
 	schema="0.1"
 	documentation="http://player.mediaspip.net/documentation/"
 	demonstration="http://player.mediaspip.net/demos/"
-	developpement="http://www.mediaspip.net/spip.php?page=tickets&amp;composant=plugins%20-%20mediaspip_player"
->	
+	developpement="https://www.mediaspip.net/spip.php?page=tickets&amp;composant=plugins%20-%20mediaspip_player"
+>
 
 	<nom>Lecteur de m&#233;dias de MediaSPIP</nom>
 
@@ -35,7 +35,7 @@
 	<utilise nom="jqueryui" />
 	<utilise nom="getid3" />
 	<utilise nom="spipmotion" />
-	
+
 	<lib nom="jquery-mousewheel-3.1.4" lien="https://github.com/brandonaaron/jquery-mousewheel/archive/3.1.4.zip" />
 	<menu nom="mediaspip_player" titre="mediaspip_player:cfg_titre_html5_player" parent="menu_squelette" icone="images/mediaspip_player-16.png" action="configurer_mediaspip_player" />
 </paquet>

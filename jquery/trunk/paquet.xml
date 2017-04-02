@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="img/jquery-32.png"
-	documentation="http://jquery.com/"
+	documentation="https://jquery.com/"
 >
 
 	<nom>jQuery</nom>

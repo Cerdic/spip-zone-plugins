@@ -1,23 +1,23 @@
 <paquet
-        prefix="rubriqueur"
-        categorie="edition"
-        version="1.0.4"
-        etat="stable"
-        compatibilite="[3.0.0;3.1.*]"
-        logo="prive/themes/spip/images/rubriqueur-64.png"
-        documentation="http://contrib.spip.net/4561"
-        >
+	prefix="rubriqueur"
+	categorie="edition"
+	version="1.0.4"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/rubriqueur-64.png"
+	documentation="http://contrib.spip.net/4561"
+>
 
-    <nom>Rubriqueur</nom>
+	<nom>Rubriqueur</nom>
 
-    <auteur>nicod_</auteur>
-    
-    <licence>GNU/GPL</licence>
-    
-    <menu nom="rubriqueur" titre="rubriqueur:rubriqueur_titre" parent="menu_edition" icone="images/rubriqueur-16.png" action="rubriqueur" />
+	<auteur>nicod_</auteur>
 
-    <pipeline nom="autoriser" inclure="rubriqueur_autorisations.php"/>
+	<licence>GNU/GPL</licence>
 
-    <necessite nom="saisies" compatibilite="[2.0.3;[" />
-    
+	<menu nom="rubriqueur" titre="rubriqueur:rubriqueur_titre" parent="menu_edition" icone="images/rubriqueur-16.png" action="rubriqueur" />
+
+	<pipeline nom="autoriser" inclure="rubriqueur_autorisations.php"/>
+
+	<necessite nom="saisies" compatibilite="[2.0.3;[" />
+
 </paquet>

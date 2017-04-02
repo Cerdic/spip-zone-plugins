@@ -29,7 +29,7 @@ when registering and changing their profile.
 		</multi>
 	</description>
 	<icon>images/inscription3-64.png</icon>
-	<lien>http://www.mediaspip.net/spip.php?rubrique87</lien>
+	<lien>https://www.mediaspip.net/spip.php?rubrique87</lien>
 	<prefix>inscription3</prefix>
 	<install>base/inscription3_installer.php</install>
 	<options>

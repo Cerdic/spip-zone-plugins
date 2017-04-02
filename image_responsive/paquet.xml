@@ -4,7 +4,7 @@
 	version="7.3.3"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
-	documentation="http://www.paris-beyrouth.org/tutoriaux-spip/article/plugin-spip-image-responsive"	
+	documentation="http://www.paris-beyrouth.org/Plugin-SPIP-Image-responsive"	
 >
 
 	<nom>Filtre image_responsive</nom>
@@ -12,7 +12,6 @@
 	<auteur>ARNO*</auteur>
 	<licence lien="http://www.gnu.org/licenses/gpl-2.0.html">GPL</licence>
 	<licence lien="http://scottjehl.github.io/picturefill">Inclus PictureFill</licence>
-
 
 	<pipeline nom="insert_head_css" action="insert_head_css" />
 	<pipeline nom="insert_head" action="insert_head" />

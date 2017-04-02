@@ -22,7 +22,7 @@
 		Per farsi un'idea, vedere [d&#233;mo->http://spiptest.africa-web.org/].
 		</multi>
 	</description>
-	<lien>http://zine.spip.org/spip.php?article8</lien>
+	<lien>http://zine.spip.net/spip.php?article8</lien>
 	<prefix>switcher</prefix>	
 	<options>switcher_options.php</options>
 	<pipeline>

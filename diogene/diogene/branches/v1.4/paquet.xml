@@ -6,8 +6,8 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/diogene-128.png"
 	schema="0.3.6"
-	documentation="http://www.mediaspip.net/spip.php?article50"
->	
+	documentation="https://www.mediaspip.net/spip.php?article50"
+>
 
 	<nom>Diogene</nom>
 	<!-- Cr&#233;ation de templates de formulaires pour les objets -->
@@ -18,7 +18,7 @@
 	<copyright>2010-2012</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
-	
+
 	<pipeline nom="diogene_champs_texte" />
 	<pipeline nom="diogene_charger" />
 	<pipeline nom="diogene_champs_pre_edition" />
