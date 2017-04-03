@@ -61,9 +61,13 @@ function balise_SHOUTBOX_stat($args, $filtres) {
 function balise_SHOUTBOX_dyn($a, $taille) {
 
 	// Le nickname c'est celui qu'on a donne, meme si on est loge
-	$nick = isset($GLOBALS['visiteur_session']['session_nom'])
-		? $GLOBALS['visiteur_session']['session_nom']
-		: $GLOBALS['visiteur_session']['nom'];
+	if (isset($GLOBALS['visiteur_session']['session_nom']){
+		$nick = $GLOBALS['visiteur_session']['session_nom'];
+	} elseif (isset($GLOBALS['visiteur_session']['nom'])) {
+		$nick = $GLOBALS['visiteur_session']['nom']; 
+	} else {
+		$nick = '';
+	}
 
 	// si $_POST correspondant a notre formulaire : stocker un truc
 	// dans la base de donnees
