@@ -132,4 +132,19 @@ function lim_formulaire_verifier($flux){
 	return $flux;
 }
 
+/**
+ * Inserer le JS qui gére l'affichage ou non des champs dans certains formulaires historiques
+ * juste le formulaire Auteur (pour l'instant ?)
+ *
+ * @param array $flux
+ * @return array
+ */
+function lim_recuperer_fond($flux){
+	if ($flux['args']['fond'] == "formulaires/editer_auteur") {
+		$ajout_script = recuperer_fond('prive/squelettes/inclure/lim');
+		$flux['data']['texte'] = str_replace('</form>', '</form>'. $ajout_script, $flux['data']['texte']);
+	}
+	return $flux;
+}
+
 ?>
