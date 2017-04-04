@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Shoutbox</nom>
 	<slogan>Un mini tchat avec messages persistants</slogan>
-	<version>0.2.3</version>
+	<version>0.2.4</version>
 	<auteur>Fil</auteur>
 	<etat>test</etat>
 	<lien>https://contrib.spip.net/Shoutbox-pour-SPIP</lien>
