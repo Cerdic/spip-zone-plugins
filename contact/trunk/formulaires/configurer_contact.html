@@ -12,14 +12,21 @@
 			<ul class="decaler">
 				<li class="editer editer_choix_destinataires haut pleine_largeur">
 					<label for="choix_destinataires"><:contact:configuration_destinataires_explication:></label>
-						<B_auteurs>
-						<select name="choix_destinataires[]" id="choix_destinataires" multiple="multiple" size="[(#GRAND_TOTAL|<{26}|?{#GRAND_TOTAL,25})]">
-                                                <BOUCLE_auteurs(AUTEURS){tous}{email!=''}{statut IN '0minirezo','1comite'}{par nom}>
+					<B_auteurs>
+						<B_selection>
+							<p class="explication">
+								<BOUCLE_selection(AUTEURS){si #_auteurs:TOTAL_BOUCLE|>{25}}{tous}{email!=''}{statut IN '0minirezo','1comite'}{par nom}{id_auteur IN #ENV{choix_destinataires,#ARRAY}}{', '}>
+								[(#NOM)] (##ID_AUTEUR - [(#ARRAY{0minirezo,info_administrateurs,1comite,info_redacteurs,6forum,info_visiteurs,5poubelle,texte_statut_poubelle,contact,contact:titre}|table_valeur{#STATUT}|_T)[ (#NOM|non)#EMAIL]])
+								</BOUCLE_selection>
+							</p>
+						</B_selection>
+						<select name="choix_destinataires[]" id="choix_destinataires" multiple="multiple" size="[(#TOTAL_BOUCLE|min{25})]">
+              <BOUCLE_auteurs(AUTEURS){tous}{email!=''}{statut IN '0minirezo','1comite'}{par nom}>
 							<option value="#ID_AUTEUR" [(#ID_AUTEUR|in_array{#ENV{choix_destinataires,#ARRAY}}|oui)selected="selected"]>
 								[(#NOM)] (##ID_AUTEUR - [(#ARRAY{0minirezo,info_administrateurs,1comite,info_redacteurs,6forum,info_visiteurs,5poubelle,texte_statut_poubelle,contact,contact:titre}|table_valeur{#STATUT}|_T)[ (#NOM|non)#EMAIL]])
 							</option>
-						</BOUCLE_auteurs>
-					</select>
+							</BOUCLE_auteurs>
+						</select>
 					</B_auteurs>
 				</li>
 				<li class="editer editer_type_choix haut pleine_largeur">
