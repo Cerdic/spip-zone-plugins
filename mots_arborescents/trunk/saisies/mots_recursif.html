@@ -1,8 +1,9 @@
 [(#REM) 
 
   Parametres :
+  - id_groupe : le groupe de mot clés à utiliser
   - class : classe(s) css ajoutes au select
-  - multiple : si quelquechose est passe, le select est multiple, sinon, c'est un select simple
+  - multiple : si quelquechose est passe, le select est multiple (checkbox), sinon, c'est un select simple
       Dans le cas multiple, defaut et valeur doivent être un array, sinon un int
   - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
       (seulement si non multiple)
@@ -11,6 +12,8 @@
   - defaut : valeur par defaut si pas présente dans l'environnement
   - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
   - exclus : Liste de mots qu'on ne peux pas sélectionner
+  - interdire_racine : si une valeur est passée, les mots clés parents ne sont pas sélectionnables 
+      en mode multiple (checkbox)
   
   Exemple d'appel :
 	[(#SAISIE{mots_recursif,mots,
@@ -35,8 +38,11 @@
 	<BOUCLE_checkmots(MOTS){racine}{par num titre, titre}{id_groupe}>
 	<div class="choix choix_#ID_MOT[ (#ENV{class})] motsar-racine">[(#SET{id,champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_[(#ID_MOT|concat{'-',#ENV{nom}}|md5)]})]
 		[(#SET{checked,[(#ID_MOT|in_array{#GET{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)]})]
-		<input type="checkbox" name="#ENV{nom}[]" class="checkbox" id="#GET{id}"[ (#GET{checked})checked="checked"] value="#ID_MOT"[ (#ENV*{attributs})] />
+		[(#ENV{interdire_racine}|oui)<label>#TITRE</label>]
+		[(#ENV{interdire_racine}|non)
+		<input type="checkbox" name="#ENV{nom}\[\]" class="checkbox" id="#GET{id}"[ (#GET{checked})checked="checked"] value="#ID_MOT"[ (#ENV*{attributs})] />
 		<label for="#GET{id}"[(#GET{checked})class="on"]>#TITRE</label>
+		]
 	</div>
 	<BOUCLE_check_enfants(MOTS){id_parent}{id_groupe?}{par num titre, titre}>
 	<div class="choix choix_#ID_MOT[ (#ENV{class})] motsar-enfant">[(#SET{id,champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_[(#ID_MOT|concat{'-',#ENV{nom}}|md5)]})]
