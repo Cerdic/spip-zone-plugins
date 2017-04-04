@@ -245,7 +245,26 @@ class form_courbe_remous extends form_section {
 			*                        Affichage du graphique
 			****************************************************************************/
 			include_spip('hyd_inc/graph.class');
-			$oGraph = new cGraph();
+			$oGraph = new cGraph('', _T('hydraulic:abscisse'));
+			// Ligne d'eau globale
+			$LgnEau = array();
+			if(isset($this->result['Flu'])) {
+				$LgnEau = $this->result['Flu'];
+			}
+			spip_log($LgnEau,'hydraulic',_LOG_DEBUG);
+			if(isset($this->result['Tor'])) {
+				$LgnEau = array_merge($this->result['Tor'], $LgnEau);
+			}
+			spip_log($LgnEau,'hydraulic',_LOG_DEBUG);
+			if(!empty($LgnEau)) {
+				$oGraph->AddSerie(
+					'',
+					array_keys($LgnEau),
+					array_values($LgnEau),
+					'#F0F0FF70',
+					'lineWidth:0, fill:true, showLabel:false'
+				);
+			}
 			// Cote des berges
 			$oGraph->AddSerie(
 				'berge',
