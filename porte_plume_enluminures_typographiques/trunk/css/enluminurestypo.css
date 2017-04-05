@@ -57,6 +57,6 @@ sub {
  bottom: -0.25em;
 }
 
-.caps {
+.smallcaps {
 	font-variant: small-caps;
 }

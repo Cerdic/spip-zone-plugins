@@ -280,7 +280,7 @@ function typoenluminee_post_typo($texte) {
 	$texte = str_replace('&', '&amp;', $texte);
 	$texte = preg_replace('/@@@amp:([A-Za-z#0-9]*):amp@@@/', '&\1;', $texte);
 	// Raccourci typographique <sc></sc>
-	$texte = str_replace('<sc>', '<span class="caps">', $texte);
+	$texte = str_replace('<sc>', '<span class="smallcaps">', $texte);
 	$texte = str_replace('</sc>', '</span>', $texte);
 	$texte = acronymes_traiter_raccourcis($texte);
 	return $texte;
