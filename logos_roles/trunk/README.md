@@ -52,7 +52,7 @@ Pour simplifier les choses, on propose d'ajouter les nouveaux types de logos ave
 		);
 
 		$logos['logo_slideshow'] = array(
-			'label' => 'Slideshow page d'accueil',
+			'label' => 'Slideshow page d\'accueil',
 			'objets' => array('articles', 'rubriques'),
 		);
 
