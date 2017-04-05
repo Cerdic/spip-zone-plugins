@@ -4,7 +4,6 @@
 		[<li>(#SELF|parametre_url{distant,oui}|parametre_url{debut_ListeLink,''}|lien_ou_expose{<:linkcheck:distant_oui:>,#ENV{distant}|=={oui},ajax})</li>]
 		[<li>(#SELF|parametre_url{distant,non}|parametre_url{debut_ListeLink,''}|lien_ou_expose{<:linkcheck:distant_non:>,#ENV{distant}|=={non},ajax})</li>]
 	</ul>
-	<div class="nettoyeur"></div>
 </div>
 [(#SET{distant,#LISTE{'1','0'}})]
 [(#ENV{distant}|=={oui}|oui)[(#SET{distant,#LISTE{1}})]]
@@ -19,7 +18,6 @@
 		<//B_comptem>
 	</BOUCLE_etats>
 	</ul>
-	<div class="nettoyeur"></div>
 </div>
 
 #BOITE_OUVRIR
@@ -44,4 +42,6 @@
 	#SET{nb_orphelins,#GRAND_TOTAL}
 </B_ListeLink>
 </div>
+#BOITE_PIED
+	<a download="[(#NOM_SITE_SPIP|attribut_html)-linkchecks[_(#ENV{etat})][_(#ENV{distant})].csv]" href="[(#URL_PAGE{prive/linkcheck.csv}|parametre_url{etat,#ENV{etat}}|parametre_url{distant,[(#GET{distant}|count|=={1}|?{#GET{distant},''})]})]" class="btn"><:linkcheck:bouton_exporter_selection:></a>
 #BOITE_FERMER

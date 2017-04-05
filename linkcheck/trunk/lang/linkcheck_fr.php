@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'analyser_site_linkchecks' => 'Analyser les liens de mon site',
 
 	// B
+	'bouton_exporter_selection' => 'Exporter la sélection en CSV',
 	'bouton_tester_lien' => 'Tester ce lien',
 
 	// C
