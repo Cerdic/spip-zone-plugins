@@ -1,8 +1,20 @@
-<div class='onglets_simple'>
-	<ul class='medias'>
+<div class='onglets_simple clearfix'>
+	<ul>
+		[<li>(#SELF|parametre_url{distant,''}|parametre_url{debut_ListeLink,''}|lien_ou_expose{<:linkcheck:tous_les_liens:>,#ENV{distant,''}|=={''},ajax})</li>]
+		[<li>(#SELF|parametre_url{distant,oui}|parametre_url{debut_ListeLink,''}|lien_ou_expose{<:linkcheck:distant_oui:>,#ENV{distant}|=={oui},ajax})</li>]
+		[<li>(#SELF|parametre_url{distant,non}|parametre_url{debut_ListeLink,''}|lien_ou_expose{<:linkcheck:distant_non:>,#ENV{distant}|=={non},ajax})</li>]
+	</ul>
+	<div class="nettoyeur"></div>
+</div>
+[(#SET{distant,#LISTE{'1','0'}})]
+[(#ENV{distant}|=={oui}|oui)[(#SET{distant,#LISTE{1}})]]
+[(#ENV{distant}|=={non}|oui)[(#SET{distant,#LISTE{'0'}})]]
+
+<div class='onglets_simple clearfix'>
+	<ul>
 	[<li>(#SELF|parametre_url{etat,''}|parametre_url{debut_ListeLink,''}|lien_ou_expose{<:linkcheck:tous_les_liens:>,#ENV{etat,''}|=={''},ajax})</li>]
 	<BOUCLE_etats(DATA){liste mort,malade,deplace,ok}>
-		<BOUCLE_comptem(LINKCHECKS){etat=#VALEUR} />
+		<BOUCLE_comptem(LINKCHECKS){etat=#VALEUR}{distant IN #GET{distant}} />
 		[<li class='#VALEUR'>(#SELF|parametre_url{etat,#VALEUR}|parametre_url{debut_ListeLink,''}|lien_ou_expose{#VAL{linkcheck:etat_}|concat{#VALEUR}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{etat}|=={#VALEUR},ajax})</li>]
 		<//B_comptem>
 	</BOUCLE_etats>
@@ -24,7 +36,7 @@
 		<th class='date' scope='col'><:linkcheck:maj:></th>
 		</tr>
 	</thead>
-<BOUCLE_ListeLink(LINKCHECKS){!par maj}{etat?}{url?}{distant?}{pagination #ENV{pagination,10}}>
+<BOUCLE_ListeLink(LINKCHECKS){!par maj}{code?}{etat?}{url?}{distant IN #GET{distant}}{pagination #ENV{pagination,10}}>
 	<INCLURE{fond=prive/objets/liste/linkcheck_detail,id_linkcheck,env}>
 </BOUCLE_ListeLink>
 	</table>

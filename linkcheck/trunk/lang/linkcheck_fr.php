@@ -24,6 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'descriptif' => 'Ce plugin vérifie, en tâche de fond, si les liens présents dans les objets SPIP de votre site, pointent toujours vers des ressources en ligne.',
+	'distant_oui' => 'Liens distants',
+	'distant_non' => 'Liens internes',
 
 	// E
 	'etat' => 'État',
