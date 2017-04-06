@@ -170,6 +170,7 @@ function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires
 				));
 			} else {
 				$contexte['message_erreur'] = _T('formidable:traiter_enregistrement_erreur_deja_repondu');
+				$contexte['message_erreur_class'] = 'deja_repondu';
 			}
 		}
 	} else {
