@@ -91,7 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tester_liens_linkchecks' => 'Tester les liens de mon site',
 	'titre_linkcheck' => 'Vérificateur de liens',
 	'titre_page_configurer' => 'Configurer le plugin Linkcheck',
-	'tous_les_liens' => 'Tous les liens',
+	'tous_les_liens' => 'Tous',
 
 	// U
 	'url' => 'URL',
