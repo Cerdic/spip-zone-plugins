@@ -29,7 +29,7 @@
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 
-		<INCLURE{fond=formulaires/inc-formidable-boutons} />
+		<INCLURE{fond=formulaires/inc-formidable-boutons, id_formulaire} />
 	</div></form>
 	]
 		[(#ENV{_saisies}|et{#ENV{_saisies}|count}|non)
