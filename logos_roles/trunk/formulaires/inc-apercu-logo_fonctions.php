@@ -6,16 +6,26 @@
  * @param string $logo : le logo en question
  * @param integer $id_objet : l'identifiant de l'objet
  * @param string $objet : le type de l'objet
+ * @param string $role : le rôle du logo
  *
  * @return boolean : true si oui, false sinon…
  */
-function est_logo_par_defaut($logo, $id_objet, $objet) {
+function est_logo_par_defaut($logo, $id_objet, $objet, $role) {
 
 	$chercher_logo = charger_fonction('chercher_logo', 'inc/');
 
-	$logo_defaut = $chercher_logo($id_objet, id_table_objet($objet), 'on');
+	$def_logo = lister_roles_logos($objet, $role);
 
-	return ($logo === $logo_defaut[0]);
+	if (isset($def_logo['defaut'])) {
+		$logo_defaut = find_in_path($def_logo['defaut']);
+	}
+
+	if (! isset($logo_defaut)) {
+		$logo_defaut = $chercher_logo($id_objet, id_table_objet($objet), 'on');
+		$logo_defaut = $logo_defaut[0];
+	}
+
+	return ($logo === $logo_defaut);
 }
 
 
