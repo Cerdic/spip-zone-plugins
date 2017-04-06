@@ -24,8 +24,7 @@ function est_logo_par_defaut($logo, $id_objet, $objet) {
  * s'embêter à traiter les deux cas dans les squelettes, on définit ici la
  * fonction dont on a besoin, dans le cas où le plugin n'est pas installé.
  */
-include_spip('inc/plugin');
-if (! plugin_est_installe('massicot')) {
+if (! function_exists('massicoter_objet')) {
 
 	function massicoter_objet($fichier, $objet, $id_objet, $role = null) {
 
