@@ -11,7 +11,7 @@
 	<nom>Foundation 6</nom>
 	<!-- Plugin qui intégre le framework Foundation à l'interface public de SPIP. -->
 
-	<auteur lien='http://p.henix.be'>Phenix</auteur>
+	<auteur lien="http://p.henix.be">Phenix</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 
