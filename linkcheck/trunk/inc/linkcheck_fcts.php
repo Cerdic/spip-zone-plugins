@@ -64,7 +64,7 @@ function linkcheck_lister_liens($champs) {
 	 */
 	$classe_alpha = 'a-zA-Z0-9âäéèëêïîôöùüû²';
 	$tab_expreg = array(
-	"('|\"| |\.|\->|\]|,|;|\s)(((((http|https|ftp|ftps)://)?www\.)|((http|https|ftp|ftps)://([".$classe_alpha.'\-]*\.)?))(['.$classe_alpha.'0-9\-\+]*\.)+[a-zA-Z0-9]{2,9}(/['.$classe_alpha."=.?&_\-\+\@\:\,/%#]*)?)('|\"| |\.|\->|\]|,|;|\s)?",
+	"('|\"| |\.|\->|\]|,|;|\s)(((((http|https|ftp|ftps)://)?www\.)|((http|https|ftp|ftps)://([".$classe_alpha."'\-]*\.)?))(['".$classe_alpha."'0-9\-\+]*\.)+[a-zA-Z0-9]{2,9}(/['".$classe_alpha."=.?&_\->\-\+\@\:\,/%#]*)?)('|\"| |\.|\->|\]|,|;|\s)?",
 	'(\->)([a-zA-Z]{3,10}[0-9]{1,})\]');
 
 	foreach ($champs as $champ_value) {
@@ -76,11 +76,12 @@ function linkcheck_lister_liens($champs) {
 				if (preg_match_all('`'.$expreg.'`u', ' '.$champ_value.' ', $matches) > 0) {
 					foreach ($matches[2] as $m) {
 						if (!empty($m)) {
-							$tab_temp[]= $m;
+							$tab_temp[]= rtrim(rtrim(rtrim($m, '.'), ','), '->');
 						}
 					}
 				}
 			}
+
 			// Ajout du prefix http:// si necessaire
 			foreach ($tab_temp as &$url_site) {
 				$temp=$url_site;
@@ -170,10 +171,12 @@ function linkcheck_tester_lien_externe($url) {
 			'http' => array(
 				'timeout' => 30,
 				'header' => "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.16 (KHTML, like Gecko) Chrome/24.0.1304.0 Safari/537.16\r\n".
-						    'Accept-Encoding: gzip, deflate'
+							'Accept-Encoding: gzip, deflate'
 			)
 		);
-	if (!defined('_INC_DISTANT_USER_AGENT')) define('_INC_DISTANT_USER_AGENT', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.16 (KHTML, like Gecko) Chrome/24.0.1304.0 Safari/537.16');
+	if (!defined('_INC_DISTANT_USER_AGENT')) {
+		define('_INC_DISTANT_USER_AGENT', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.16 (KHTML, like Gecko) Chrome/24.0.1304.0 Safari/537.16');
+	}
 
 	stream_context_set_default(
 		$contexte
