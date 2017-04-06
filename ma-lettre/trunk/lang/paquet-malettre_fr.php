@@ -11,4 +11,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'malettre_slogan' => 'Compose une lettre d\'information  sur mesure'
 );
 
-?>

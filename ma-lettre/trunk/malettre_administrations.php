@@ -1,9 +1,11 @@
 <?php
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
- * Installation/maj des tables gis
+ * Installation/maj des tables ma-lettre
  *
  * @param string $nom_meta_base_version
  * @param string $version_cible

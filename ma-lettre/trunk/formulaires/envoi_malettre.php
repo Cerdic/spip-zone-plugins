@@ -2,7 +2,9 @@
 /**
  * Formulaire pour envoi la lettre (avec ou sa facteur)
  */
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 include_spip('inc/actions');
 include_spip('inc/editer');
 include_spip('inc/distant');
@@ -289,4 +291,3 @@ function formulaires_envoi_malettre_traiter_dist(){
 	);
 }
 
-?>
