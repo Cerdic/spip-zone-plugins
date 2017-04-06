@@ -68,8 +68,7 @@ function logo_supprimer($objet, $id_objet, $role) {
 
 		// Si le plugin massicot est installé, on doit aussi supprimer le
 		// massicotage correspondant.
-		include_spip('inc/plugin');
-		if (plugin_est_installe('massicot')) {
+		if (test_plugin_actif('massicot')) {
 			if ($err = massicot_supprimer($objet, $id_objet, $role)) {
 				return $err;
 			}
