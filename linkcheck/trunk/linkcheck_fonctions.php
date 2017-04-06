@@ -28,7 +28,6 @@ function linkcheck_en_url($url, $distant) {
 	return $retour;
 }
 
-
 function balise_LINKCHECK_CHIFFRE($p) {
 	$p->code = "linkcheck_chiffre()";
 	return $p;
