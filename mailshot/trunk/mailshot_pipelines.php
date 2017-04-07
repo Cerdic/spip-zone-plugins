@@ -39,6 +39,9 @@ function mailshot_taches_generales_cron($taches_generales){
 		$taches_generales['imap_feedback'] = 3400;
 	}
 
+	// depouiller les feedbacks en async, toutes les 5mn
+	$taches_generales['feedbacks'] = 300;
+
 	return $taches_generales;
 }
 

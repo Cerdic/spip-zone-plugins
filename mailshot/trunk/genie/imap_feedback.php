@@ -60,7 +60,7 @@ function genie_imap_feedback_dist($t){
                                                             $event = 'hard_bounce';
                                                     }
                                                     if ($event) {
-                                                            $feedback($event,$original_recipient,$tracking_id);
+                                                            $feedback($event,$original_recipient,$tracking_id,true);
                                                     }
                                             }
                                     }

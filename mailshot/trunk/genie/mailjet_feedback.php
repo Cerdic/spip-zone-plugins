@@ -59,7 +59,7 @@ function genie_mailjet_feedback_dist($t){
 						}
 						if ($event) {
 							#var_dump("$event : ".$email->to_email);
-							$feedback($event,$email->to_email,$tracking_id);
+							$feedback($event,$email->to_email,$tracking_id,true);
 						}
 					}
 				}
