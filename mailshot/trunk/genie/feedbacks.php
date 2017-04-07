@@ -8,10 +8,10 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 if (!defined('_CRON_LOT_FICHIERS_FEEDBACK')) {
-	define('_CRON_LOT_FICHIERS_FEEDBACK', 100);
+	define('_CRON_LOT_FICHIERS_FEEDBACK', 1000);
 }
 if (!defined('_CRON_LOT_NB_FEEDBACKS')) {
-	define('_CRON_LOT_NB_FEEDBACKS', 20);
+	define('_CRON_LOT_NB_FEEDBACKS', 100);
 }
 
 /**
@@ -53,6 +53,7 @@ function genie_feedbacks_dist($t) {
 
 			if (count($feedbacks)>_CRON_LOT_NB_FEEDBACKS) {
 				newsletter_feedback_lot($feedbacks);
+				$feedbacks = array();
 			}
 
 			spip_unlink($fichier);
