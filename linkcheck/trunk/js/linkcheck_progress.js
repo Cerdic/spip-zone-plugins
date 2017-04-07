@@ -1,23 +1,24 @@
 function linkcheck_verifier_liens(adresse){
 	$.ajax({
-			dataType: "json",
-			url: adresse,
-			success: function(msg){
-				$('#nb_lien_mort').text(msg["nb_lien_mort"])
-				$('#nb_lien_malade').text(msg["nb_lien_malade"])
-				$('#nb_lien_deplace').text(msg["nb_lien_deplace"])
-				$('#nb_lien_ok').text(msg["nb_lien_ok"])
-				$('#nb_lien_inconnu').text(msg["nb_lien_inconnu"])
-				$('#bar_lien_mort').css("width",msg["pct_lien_mort"]+"%")
-				$('#bar_lien_malade').css("width",msg["pct_lien_malade"]+"%")
-				$('#bar_lien_deplace').css("width",msg["pct_lien_deplace"]+"%")
-				$('#bar_lien_ok').css("width",msg["pct_lien_ok"]+"%")
-				if(msg["nb_lien_inconnu"]==0)
-					window.location.href = adresse;
-				else
-					linkcheck_verifier_liens(adresse)
-				}
-			});
+		dataType: 'json',
+		url: adresse,
+		success: function(msg){
+			$('#nb_lien_mort').text(msg["nb_lien_mort"]);
+			$('#nb_lien_malade').text(msg["nb_lien_malade"]);
+			$('#nb_lien_deplace').text(msg["nb_lien_deplace"]);
+			$('#nb_lien_ok').text(msg["nb_lien_ok"]);
+			$('#nb_lien_inconnu').text(msg["nb_lien_inconnu"]);
+			$('#bar_lien_mort').css("width",msg["pct_lien_mort"]+"%");
+			$('#bar_lien_malade').css("width",msg["pct_lien_malade"]+"%");
+			$('#bar_lien_deplace').css("width",msg["pct_lien_deplace"]+"%");
+			$('#bar_lien_ok').css("width",msg["pct_lien_ok"]+"%");
+			if (msg["nb_lien_inconnu"] == 0) {
+				window.location.href = adresse;
+			} else {
+				linkcheck_verifier_liens(adresse)
+			}
+		}
+	});
 }
 
 $(document).ready(function(){
