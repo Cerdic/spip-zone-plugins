@@ -5,7 +5,7 @@
 		<label for="#GET{name}">[(#ENV{_label_date_modif_manuelle})]</label>[
 		<span class='erreur_message'>(#GET{erreurs})</span>
 		]
-		<span class="affiche"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>
+		<span class="affiche"[(#ENV{_saisie_en_cours}|et{#ENV{_editer_date}}|oui)style="display:none;"]>
 		[(#ENV{aucune_date_modif_manuelle}|?{<:date_modif_manuelle:aucune_date_definie:>,[(#ENV*{afficher_#GET{name}}|affdate)]})]
 		</span>
 		[(#ENV{editable})
