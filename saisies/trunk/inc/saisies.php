@@ -473,7 +473,11 @@ function saisies_trouver_choix_alternatif($data, $valeur) {
 	}
 	$choix_theorique = array_keys($data);
 	$choix_alternatif = array_values(array_diff($valeur, $choix_theorique));
-	return $choix_alternatif[0];//on suppose que personne ne s'est amusé à proposer deux choix alternatifs
+	if (isset($choix_alternatif[0])) {
+		return $choix_alternatif[0]; //on suppose que personne ne s'est amusé à proposer deux choix alternatifs
+	} else {
+		return '';
+	}
 }
 
 /**
