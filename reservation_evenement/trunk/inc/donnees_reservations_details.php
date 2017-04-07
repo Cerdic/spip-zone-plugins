@@ -55,7 +55,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 								// est active il peut y avoir plusieurs prix par évenement
 								if (test_plugin_actif('declinaisons')) {
 									$id_prix = isset($set['id_prix_objet']) ? $set['id_prix_objet'] : $reservations_details['id_prix_objet'];
-									$p = sql_fetsel('prix_ht,id_prix_objet,id_declinaison,code_devise', 'spip_prix_objets', 'id_prix_objet=' . $id_prix);
+									$p = sql_fetsel('prix_ht,id_prix_objet,id_declinaison,code_devise,taxe', 'spip_prix_objets', 'id_prix_objet=' . $id_prix);
 									if ($p['id_declinaison'] > 0)
 										$set['descriptif'] .= ' - ' . supprimer_numero(sql_getfetsel('titre', 'spip_declinaisons', 'id_declinaison=' . $p['id_declinaison']));
 								}
@@ -68,7 +68,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 									$prix_ht = $quantite * $fonction_prix_ht('prix_objet', $p['id_prix_objet']);
 									$prix = $quantite * $fonction_prix('prix_objet', $p['id_prix_objet']);
 									if ($prix_ht)
-										$taxe = round(($prix - $prix_ht) / $prix_ht, 3);
+										$taxe = $p['taxe'];
 										$set['prix_ht'] = $prix_ht;
 										$set['prix'] = $prix;
 										$set['taxe'] = $taxe;
@@ -134,15 +134,15 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	function prix_attache($id_evenement, $id_article, $id_evenement_source) {
 		// Etablir le prix de l'événement sinon de l'article.
 		if (!$p = sql_fetsel(
-				'prix_ht,prix,id_prix_objet,code_devise',
+				'prix_ht,prix,id_prix_objet,code_devise,taxe',
 				'spip_prix_objets',
 				'objet="evenement" AND id_objet=' . $id_evenement)) {
 				if (!$p = sql_fetsel(
-						'prix_ht,prix,id_prix_objet,code_devise',
+						'prix_ht,prix,id_prix_objet,code_devise,taxe',
 						'spip_prix_objets',
 						'objet="evenement" AND id_objet=' . $id_evenement_source)) {
 						$p = sql_fetsel(
-								'prix_ht,prix,id_prix_objet,code_devise',
+								'prix_ht,prix,id_prix_objet,code_devise,taxe',
 								'spip_prix_objets',
 								'objet="article" AND id_objet=' . $id_article);
 				}
