@@ -69,7 +69,7 @@ function genie_feedbacks_dist($t) {
 
 	// Si ce n'est pas fini on redemande la main
 	// pour etre prioritaire lors du cron suivant
-	if ($compteur==0) {
+	if ($compteur<=0) {
 		return (0 - $t);
 	}
 
