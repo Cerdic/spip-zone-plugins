@@ -1,10 +1,10 @@
 <traduction module="linkcheck" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/linkcheck/trunk/lang/" reference="fr">
-	<langue code="en" url="https://trad.spip.net/tradlang_module/linkcheck?lang_cible=en" total="60" traduits="54" relire="0" modifs="1" nouveaux="5" pourcent="90.00">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/linkcheck?lang_cible=en" total="60" traduits="53" relire="0" modifs="2" nouveaux="5" pourcent="88.33">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/linkcheck?lang_cible=fr" total="60" traduits="60" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="nl" url="https://trad.spip.net/tradlang_module/linkcheck?lang_cible=nl" total="60" traduits="57" relire="0" modifs="0" nouveaux="3" pourcent="95.00">
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/linkcheck?lang_cible=nl" total="60" traduits="56" relire="0" modifs="1" nouveaux="3" pourcent="93.33">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
 </traduction>

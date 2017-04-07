@@ -90,7 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tester_liens_linkchecks' => 'Test de links van mijn site',
 	'titre_linkcheck' => 'Verificatie van links',
 	'titre_page_configurer' => 'Configureer plugin Linkcheck',
-	'tous_les_liens' => 'Alle links',
+	'tous_les_liens' => 'Alle links', # MODIF
 
 	// U
 	'url' => 'URL',
