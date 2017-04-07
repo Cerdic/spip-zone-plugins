@@ -16,6 +16,7 @@ include_spip('inc/session');
 function chercher_saisie_upload($saisies) {
 	include_spip('inc/saisies');
 
+	$saisie_upload = array();
 	foreach ($saisies as $key => $saisie) {
 		if ($saisie['saisie'] == 'upload') {
 			$saisie_upload = $saisies[$key];
