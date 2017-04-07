@@ -46,7 +46,7 @@ function genie_feedbacks_dist($t) {
 			$feedbacks_content = file_get_contents($fichier);
 			$feedbacks_content = explode("\n", $feedbacks_content);
 			foreach ($feedbacks_content as $line) {
-				if ($f = json_decode($line,true)) {
+				if ($line and $f = json_decode($line,true)) {
 					$feedbacks[] = $f;
 				}
 			}
