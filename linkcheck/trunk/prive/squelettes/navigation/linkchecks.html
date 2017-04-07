@@ -4,15 +4,15 @@
 	<:linkcheck:descriptif:>
 [(#BOITE_FERMER)]
 
+[(#AUTORISER{configurer,linkcheck}|oui)
 [(#BOITE_OUVRIR{'',raccourcis})]
-
 	[(#URL_ECRIRE{configurer_linkcheck,'',#URL_ECRIRE{linkchecks}}
 		|icone_horizontale{<:linkcheck:configurer_linkcheck:>, #CHEMIN_IMAGE{cfg-16.png},'', center})]
+[(#BOITE_FERMER)]]
 
-[(#BOITE_FERMER)]
-
+[(#AUTORISER{reinitialiser,linkcheck}|oui)
 #BOITE_OUVRIR
 <:linkcheck:reinitialiser_la_base:>
 #BOITE_PIED
 [(#BOUTON_ACTION{<:linkcheck:reinitialiser:>,#URL_ACTION_AUTEUR{linkcheck_reinit,'',#URL_ECRIRE{linkchecks}},'',<:linkcheck:message_confirmation_reinitialiser:>})]
-#BOITE_FERMER
+#BOITE_FERMER]
