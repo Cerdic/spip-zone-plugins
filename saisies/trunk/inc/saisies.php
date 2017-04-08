@@ -206,7 +206,7 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 		if ($saisie['saisie'] == 'fichiers') {
 			$infos_fichiers_precedents = _request('cvtupload_fichiers_precedents');
 			if (isset($infos_fichiers_precedents[$champ])) { // si on a déjà envoyé des infos avants
-				$valeur = true;
+				$valeur = $_FILES[$champ]; // on ne met pas true, car il faudra aussi vérifier les nouveaux fichiers du même champ qui viennent d'être envoyés.
 			} elseif (isset($_FILES[$champ]['error'])) {//si jamais on a déja envoyé quelque chose dans le précédent envoi = ok
 				$valeur = null; //On considère que par défaut on a envoyé aucun fichiers
 				foreach ($_FILES[$champ]['error'] as $err) {
