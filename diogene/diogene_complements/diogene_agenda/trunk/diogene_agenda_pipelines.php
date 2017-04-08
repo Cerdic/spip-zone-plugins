@@ -113,15 +113,13 @@ function diogene_agenda_diogene_ajouter_saisies($flux) {
  * @return array $flux le contexte modifié passé aux suivants
  */
 function diogene_agenda_diogene_verifier($flux) {
-	$id_diogene = _request('id_diogene');
-	if (intval($id_diogene) && !_request('supprimer_evenement')) {
-		$champs_ajoutes = unserialize(sql_getfetsel('champs_ajoutes', 'spip_diogenes', 'id_diogene='.intval($id_diogene)));
+	if (intval($flux['args']['id_diogene']) && !_request('supprimer_evenement')) {
+		$champs_ajoutes = unserialize(sql_getfetsel('champs_ajoutes', 'spip_diogenes', 'id_diogene='.intval($flux['args']['id_diogene'])));
 		$erreurs = $flux['args']['erreurs'];
 		if (is_array($champs_ajoutes) && in_array('agenda', $champs_ajoutes)) {
 			include_spip('formulaires/editer_evenement');
 			$erreurs = formulaires_editer_evenement_verifier_dist(_request('id_evenement'), $id_article, false, false, 'evenements_edit_config');
 			unset($erreurs['id_parent']);
-
 			if (!isset($flux['args']['options_complements']['agenda_obligatoire']) or $flux['args']['options_complements']['agenda_obligatoire'] != 'on') {
 				$champs_post = false;
 				$champs = objet_info('evenement', 'champs_editables');
