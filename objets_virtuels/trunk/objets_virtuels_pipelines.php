@@ -27,7 +27,10 @@ function objets_virtuels_declarer_tables_objets_sql($tables) {
 	foreach ($tables_actives as $table) {
 		if (isset($tables[$table])) {
 			if (empty($tables[$table]['field']['virtuel'])) {
-				$tables[$table]['field']['virtuel'] = 'VARCHAR(255) DEFAULT \'\' NOT NULL';
+				$tables[$table]['field']['virtuel'] = 'text DEFAULT \'\' NOT NULL';
+				$tables[$table]['champs_editables'][] = 'virtuel';
+				$tables[$table]['champs_versionnes'][] = 'virtuel';
+				$tables[$table]['rechercher_champs']['virtuel'] = 3;
 			}
 		}
 	}

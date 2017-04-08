@@ -43,7 +43,7 @@ function formulaires_configurer_objets_virtuels_traiter_dist() {
 	foreach ($tables as $key => $table) {
 		$desc = sql_showtable($table);
 		if (empty($desc['field']['virtuel'])) {
-			sql_alter('TABLE '. $table . ' ADD virtuel VARCHAR(255) DEFAULT \'\' NOT NULL');
+			sql_alter('TABLE '. $table . ' ADD virtuel text DEFAULT \'\' NOT NULL');
 			// vérification de la présence du champ.
 			$desc = sql_showtable($table);
 			if (empty($desc['field']['virtuel'])) {
