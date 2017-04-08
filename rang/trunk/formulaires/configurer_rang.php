@@ -10,12 +10,6 @@
  * @package    SPIP\Rang\Installation
  */
 
-/**
- * Gestion du formulaire de configuration des rangs
- *
- * @package SPIP\Medias\Formulaires
- **/
-
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
