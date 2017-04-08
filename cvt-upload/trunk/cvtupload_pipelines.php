@@ -11,18 +11,18 @@ function cvtupload_formulaire_charger($flux) {
 		$contexte =& $flux['data'];
 		// On déclare le champ qui contiendra les infos en hidden
 		$contexte['cvtupload_fichiers_precedents'] = array();
-		
+
 		// On met dans le contexte le HTML pour les fichiers précédemment postés
 		$_fichiers = _request("_fichiers");
 		$forcer = _request("_cvtupload_precharger_fichiers_forcer");
 		if ($html_fichiers = cvtupload_generer_html() and $_fichiers) {
-			$contexte['_fichiers_precedents_html'] = $html_fichiers;		
+			$contexte['_fichiers_precedents_html'] = $html_fichiers;
 		} elseif (isset($flux['data']['cvtupload_precharger_fichiers']) and ($flux['args']['je_suis_poste']==false or $forcer == true)){
 			$precharger_fichiers = charger_fonction('cvtupload_precharger_fichiers','inc');
 			$contexte['_fichiers_precedents_html'] = cvtupload_generer_html($precharger_fichiers($flux['data']['cvtupload_precharger_fichiers'],$flux['args']['form']));
 		}
 	}
-	
+
 	return $flux;
 }
 
@@ -34,14 +34,14 @@ function cvtupload_formulaire_verifier($flux) {
 		include_spip('inc/documents');
 		include_spip('inc/getdocument');
 		include_spip('inc/flock');
-		
+
 		//Si le répertoire temporaire n'existe pas encore, il faut le créer.
 		$repertoire_tmp = sous_repertoire(_DIR_TMP.'cvtupload/');
-		
+
 		// On récupère les anciens fichiers déjà postés
 		$infos_fichiers_precedents = _request('cvtupload_fichiers_precedents');
 		$infos_fichiers = array();
-		
+
 		// Les demandes de suppression
 		$supprimer_fichier = _request('cvtupload_supprimer_fichier');
 		// On parcourt les champs déclarés comme étant des fichiers
@@ -62,7 +62,7 @@ function cvtupload_formulaire_verifier($flux) {
 									isset($_FILES[$champ]['name'][$cle])
 									and $_FILES[$champ]['error'][$cle] === UPLOAD_ERR_OK
 								)
-							) {		
+							) {
 								supprimer_fichier($infos_fichiers[$champ][$cle]['tmp_name']);
 								$name = $infos_fichiers[$champ][$cle]['name'];
 								unset($infos_fichiers[$champ][$cle]);
@@ -120,7 +120,7 @@ function cvtupload_formulaire_verifier($flux) {
 		cvtupload_generer_html($infos_fichiers);
 		cvtupload_modifier_files($infos_fichiers);//On modifier $_FILES pour que cela soit transparent pour les traitements futurs
 	}
-	
+
 	return $flux;
 }
 
@@ -149,7 +149,7 @@ function cvtupload_formulaire_fond($flux) {
 						foreach ($fichiers[$champ] as $cle=>$html) {
 							$regexp_par_cle = "#<input[^>]*name=['\"]${champ}(?:\&\#91;|\[)${cle}(?:\&\#93;|\])[^>]*>#i";// cherche les <input name="champ[cle]"> ou <input name="champ#91;cle#93;">
 							$regexp_alternative = "#<input[^>]*name=['\"]${champ}[^>]*>#i";
-							
+
 							// On commence par chercher si on a un name avec clé numérique explicite
 							$flux['data'] = preg_replace(
 								$regexp_par_cle,

@@ -12,37 +12,37 @@ include_spip('base/abstract_sql');
  *     le nom du formulaire
  * @param array $args
  *     - l'id de l'objet
- * 
+ *
  * @return array
  *     valeur(s) de l'attribut 'name' du ou des input de type file dans formulaires/xxx.html
  */
 function cvtupload_chercher_fichiers($form, $args) {
 	$fichiers = array();
-	
+
 	// S'il existe une fonction de fichiers dédiée à ce formulaire
 	if ($fonction_fichiers = charger_fonction('fichiers', 'formulaires/'.$form, true)) {
 		$fichiers = call_user_func_array($fonction_fichiers, $args);
 	}
-	
+
 	// Dans tous les cas on applique le pipeline, si un plugin veut ajouter des choses
 	$fichiers = pipeline(
 		'formulaire_fichiers',
 		array('args'=>array('form'=>$form, 'args'=>$args), 'data'=>$fichiers)
 	);
-	
+
 	return $fichiers;
 }
 
 /**
  * Génére le HTML de chaque fichier déjà uploadé
- * 
+ *
  * @param array $infos_fichiers
  * 		Tableau contenant les informations pour chaque champ de fichier
  * @return array
  * 		Retourne un tableau avec pour chaque champ une clé contenant le HTML
  **/
 function cvtupload_generer_html($infos_fichiers = null) {
-	static $html_fichiers = array();	
+	static $html_fichiers = array();
 	// Si on a des infos de fichiers, on va re-générer du HTML
 	if ($infos_fichiers and is_array($infos_fichiers)) {
 		foreach ($infos_fichiers as $champ=>$fichier) {
@@ -70,7 +70,7 @@ function cvtupload_generer_html($infos_fichiers = null) {
 			}
 		}
 	}
-	
+
 	return $html_fichiers;
 }
 
@@ -90,7 +90,7 @@ function cvtupload_generer_html($infos_fichiers = null) {
 function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer=true) {
 	$vignette_par_defaut = charger_fonction('vignette', 'inc/');
 	$infos = array();
-	
+
 	// On commence par nettoyer le dossier
 	cvtupload_nettoyer_repertoire($repertoire);
 	if (is_array($fichier['name'])) {
@@ -150,17 +150,17 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer=true
 			}
 		}
 	}
-	
+
 	return $infos;
 }
 
 /**
- * Modifier $_FILES pour que le nom et le chemin du fichier temporaire 
+ * Modifier $_FILES pour que le nom et le chemin du fichier temporaire
  * correspondent à ceux qu'on a défini dans cvtupload_deplacer_fichier().
- * Cela permet aux traitements ultérieurs 
+ * Cela permet aux traitements ultérieurs
  * de ne pas avoir à se préoccuper de l'emploi ou non de cvtupload.
  *
- * @param $infos_fichiers 
+ * @param $infos_fichiers
  *  Information sur les fichiers tels que déplacés par cvtupload_deplacer_fichier()
  * @return void
 **/
@@ -172,7 +172,7 @@ function cvtupload_modifier_files($infos_fichiers) {
 			 $_FILES[$champ]['tmp_name'] = $description['tmp_name'];
 			 $_FILES[$champ]['type'] = $description['mime'];
 			 $_FILES[$champ]['error'] = 0; //on fait comme s'il n'y avait pas d'erreur, ce qui n'est pas forcément vrai…
-			 $_FILES[$champ]['size'] = $description['taille']; 
+			 $_FILES[$champ]['size'] = $description['taille'];
 		}
 		else {//Upload multiple
 			//On surcharge tout la description $_FILES pour ce champ. Dans tous les cas les infos ont été stockées dans $description
@@ -192,7 +192,7 @@ function cvtupload_modifier_files($infos_fichiers) {
 				$_FILES[$champ]['tmp_name'][$fichier_individuel] = $description_fichier_individuel['tmp_name'];
 				$_FILES[$champ]['type'][$fichier_individuel] = $description_fichier_individuel['mime'];
 				$_FILES[$champ]['error'][$fichier_individuel] = 0; //on fait comme s'il n'y avait pas d'erreur, ce qui n'est pas forcément vrai…
-				$_FILES[$champ]['size'][$fichier_individuel] = $description_fichier_individuel['taille']; 		
+				$_FILES[$champ]['size'][$fichier_individuel] = $description_fichier_individuel['taille'];
 			}
 			// Si on vient d'envoyer un ou plusieur $champ[] vide, on les rajoute dans notre nouveau $FILES
 			if (isset($old_FILES_champ['error'])) {
@@ -229,7 +229,7 @@ function cvtupload_nettoyer_files_selon_erreurs($champ,$erreurs){
 	if (is_array($erreurs)) { // cas d'upload multiple
 		foreach ($erreurs as $cle=>$erreur) {
 			foreach ($_FILES[$champ] as $propriete=>$valeur) {
-				unset($_FILES[$champ][$propriete][$cle]);	
+				unset($_FILES[$champ][$propriete][$cle]);
 			 }
 		}
 	}
@@ -238,7 +238,7 @@ function cvtupload_nettoyer_files_selon_erreurs($champ,$erreurs){
 	}
 }
 
-/** 
+/**
  * Détermine un MIME lorsque les informations de PHP sont imprécises.
  * Par exemple PHP considère qu'un fichier .tex est de MIME application/octet-stream
  * Ce qui n'est absolument pas utilse
@@ -259,7 +259,7 @@ function cvt_upload_determiner_mime($mime_suppose, $extension) {
 }
 /**
  * Nettoyer un répertoire suivant l'age et le nombre de ses fichiers
- * 
+ *
  * @param string $repertoire
  * 		Répertoire à nettoyer
  * @param int $age_max
@@ -270,16 +270,16 @@ function cvt_upload_determiner_mime($mime_suppose, $extension) {
  **/
 function cvtupload_nettoyer_repertoire($repertoire, $age_max = _CVTUPLOAD_AGE_MAX, $max_files = _CVTUPLOAD_MAX_FILES) {
 	include_spip('inc/flock');
-	
+
 	// Si on entre bien dans le répertoire
 	if ($ressource_repertoire = opendir($repertoire)) {
 		$fichiers = array();
-		
+
 		// On commence par supprimer les plus vieux
 		while ($fichier = readdir($ressource_repertoire)) {
 			if (!in_array($fichier, array('.', '..', '.ok'))) {
 				$chemin_fichier = $repertoire.$fichier;
-				
+
 				if (is_file($chemin_fichier) and !jeune_fichier($chemin_fichier, $age_max)) {
 					supprimer_fichier($chemin_fichier);
 				}
@@ -288,15 +288,15 @@ function cvtupload_nettoyer_repertoire($repertoire, $age_max = _CVTUPLOAD_AGE_MA
 				}
 			}
 		}
-		
+
 		// On trie les fichiers par ordre de leur date
 		ksort($fichiers);
-		
+
 		// Puis s'il reste trop de fichiers, on supprime le surplus
 		$nb_fichiers = count($fichiers);
 		if ($nb_fichiers > $max_files) {
 			$nb_a_supprimer = $nb_fichiers - $max_files - 1;
-			
+
 			while ($nb_a_supprimer) {
 				$fichier = array_shift($fichiers);
 				supprimer_fichier($fichier);
