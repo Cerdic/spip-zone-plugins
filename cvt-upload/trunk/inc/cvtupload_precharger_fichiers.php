@@ -4,27 +4,28 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/cvtupload');
 /**
- * Une fonction qui permet de précharger des fichiers si dans la fonction formulaires_formidable_charger
- * a un champ cvtupload_precharger_fichiers dans son tableau de retour
- * ce champ est une simple liste de fichiers à précharger
+ * Une fonction qui permet de précharger des fichiers.
+ * Si la fonction formulaires_formidable_charger
+ * a un champ cvtupload_precharger_fichiers dans son tableau de retour, les fichiers sont préchargés.
+ * Ce champ est une simple liste de fichiers à précharger
  * @param array $fichiers
  *    la liste des fichiers à précharger, structure sous forme de tableau champ/clé
  *		par exemple array(
  * 				'champ'=>array(
- *						0 => array('chemin'=>chemin_du_fichier,'url'=>url_pour_lire_le_fichier), 
+ *						0 => array('chemin'=>chemin_du_fichier,'url'=>url_pour_lire_le_fichier),
  *  					1 => array('chemin'=>chemin_du_fichier,'url'=>url_pour_lire_le_fichier))
  * @param string $form
  *		le formulaire d'où cela vient
  * @return array $infos_fichiers
  *  	un tableau de description de fichiers à la mode cvtupload
- *     
+ *
  */
 function inc_cvtupload_precharger_fichiers_dist($fichiers, $form) {
 	// on commence par parcourir les entrées pour structurer selon du pseudo FILES
 	$pseudo_files = array();
 	foreach ($fichiers as $champ => $valeur) {
 		$pseudo_files[$champ] = array(
-				'name'=>array(), 
+				'name'=>array(),
 				'tmp_name'=>array(),
 				'error'=>array(),
 				'type'=>array(),
@@ -54,7 +55,7 @@ function inc_cvtupload_precharger_fichiers_dist($fichiers, $form) {
 	$infos_fichiers = array();
 	foreach ($pseudo_files as $champ => $pseudo) {
 		$infos_fichiers[$champ] = cvtupload_deplacer_fichier($pseudo, $repertoire_tmp, $form, False);
-		
+
 		// ajouter l'url
 		if (isset($infos_fichiers[$champ]['tmp_name'])) { // si input simple
 			$infos_fichiers[$champ]['url'] = $fichiers[$champ]['url'];
@@ -64,7 +65,6 @@ function inc_cvtupload_precharger_fichiers_dist($fichiers, $form) {
 			}
 		}
 	}
-	
+
 	return $infos_fichiers;
 }
-
