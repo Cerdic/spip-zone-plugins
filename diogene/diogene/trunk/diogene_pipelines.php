@@ -430,20 +430,25 @@ function diogene_formulaire_charger($flux) {
 function diogene_formulaire_verifier($flux) {
 	$pipeline = pipeline('diogene_objets', array());
 	if ($objet = substr($flux['args']['form'], 7) and in_array($objet, array_keys($pipeline))) {
-		// On ne fait rien si l'id_parent principal est incoherent (exemple : compat pages uniques)
-		//if (_request('id_parent') < 0) return $flux;
-
 		if ($objet == 'rubrique' and
 			!strcmp($flux['args']['form'], 'editer_rubrique') and
 			($flux['args']['args'][0] == $flux['args']['args'][1])) {
 				$flux['data']['id_parent'] = _T('diogene:erreur_id_parent_id_rubrique');
 		}
-
+		$id_diogene = _request('id_diogene');
+		$options_complements = sql_getfetsel('options_complements', 'spip_diogenes', 'id_diogene='.intval($id_diogene));
+		if (is_array(@unserialize($options_complements))) {
+			$options_complements = unserialize($options_complements);
+		} else {
+			$options_complements = array();
+		}
 		$flux['data'] = pipeline(
 			'diogene_verifier',
 			array(
 				'args' => array(
-					'erreurs' => $flux['data']
+					'id_diogene' => $id_diogene,
+					'erreurs' => $flux['data'],
+					'options_complements' => $options_complements
 				),
 				'data' => $flux['data']
 			)
