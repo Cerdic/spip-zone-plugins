@@ -107,7 +107,8 @@ function cvtupload_formulaire_verifier($flux) {
 				and $infos = cvtupload_deplacer_fichier($_FILES[$champ], $repertoire_tmp, $flux['args']['form'],$champ)
 			){
 				if (isset($infos_fichiers[$champ])) {
-					$infos_fichiers[$champ] = array_merge($infos_fichiers[$champ], $infos);
+					$infos_fichiers[$champ] = $infos_fichiers[$champ] + $infos;//ne pas utiliser array_merge, car sinon cela réindexe le tableau, et cela nous perturbe pour le déplacement de $_FILES
+					ksort($infos_fichiers[$champ]);
 				}
 				else {
 					$infos_fichiers[$champ] = $infos;

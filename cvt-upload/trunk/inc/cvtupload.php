@@ -197,7 +197,7 @@ function cvtupload_modifier_files($infos_fichiers) {
 			// Si on vient d'envoyer un ou plusieur $champ[] vide, on les rajoute dans notre nouveau $FILES
 			if (isset($old_FILES_champ['error'])) {
 				foreach ($old_FILES_champ['error'] as $id_fichier_individuel => $error_fichier_individuel){
-					if ($error_fichier_individuel!=0){//Uniquement les erreurs
+					if ($error_fichier_individuel!=0 and !isset($infos_fichiers[$champ][$id_fichier_individuel])){//Uniquement les erreurs
 						$_FILES[$champ]['name'][$id_fichier_individuel] = $old_FILES_champ['name'][$id_fichier_individuel];
 						$_FILES[$champ]['tmp_name'][$id_fichier_individuel] = $old_FILES_champ['tmp_name'][$id_fichier_individuel];
 						$_FILES[$champ]['type'][$id_fichier_individuel] = $old_FILES_champ['type'][$id_fichier_individuel];
