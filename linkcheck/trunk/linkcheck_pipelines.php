@@ -68,10 +68,10 @@ function linkcheck_post_edition($flux) {
 			} else {
 				$not_statuts = array('refuse', 'poubelle');
 			}
-			$statut = sql_getfetsel('statut', $table_sql, $id_table_objet.'='.intval($id_objet));;
+			$statut = sql_getfetsel('statut', $table_sql, $id_table_objet.'='.intval($id_objet));
 			if (count($statuts) > 0 && in_array($statut, $statuts)) {
 				$objet_ok = true;
-			} else if (count($statuts) == 0 && !in_array($statut, $not_statuts)) {
+			} elseif (count($statuts) == 0 && !in_array($statut, $not_statuts)) {
 				$objet_ok = true;
 			} else {
 				$objet_ok = false;
@@ -84,9 +84,18 @@ function linkcheck_post_edition($flux) {
 		 * On les supprime et si le lien n'est plus utilisé sur d'autres objets, il est également supprimé
 		 */
 		if (!$objet_ok) {
-			$liens_lies = sql_allfetsel('id_linkcheck', 'spip_linkchecks_liens', 'id_objet='.intval($id_objet).' AND objet='.sql_quote($objet));
+			$liens_lies = sql_allfetsel(
+				'id_linkcheck',
+				'spip_linkchecks_liens',
+				'id_objet='.intval($id_objet).' AND objet='.sql_quote($objet)
+			);
 			foreach ($liens_lies as $lien) {
-				sql_delete('spip_linkchecks_liens', 'id_linkcheck='.intval($lien['id_linkcheck']).' AND id_objet='.intval($id_objet).' AND objet='.sql_quote($objet));
+				sql_delete(
+					'spip_linkchecks_liens',
+					'id_linkcheck='.intval($lien['id_linkcheck']).'
+						AND id_objet='.intval($id_objet).'
+						AND objet='.sql_quote($objet)
+				);
 				if (!sql_countsel('spip_linkchecks_liens', 'id_linkcheck='.intval($lien['id_linkcheck']))) {
 					sql_delete('spip_linkchecks', 'id_linkcheck='.intval($lien['id_linkcheck']));
 				}
