@@ -1,10 +1,8 @@
 <?php
 
-
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-
 
 /**
  * Champs des objets susceptibles de contenir des liens,
@@ -27,7 +25,7 @@ function linkcheck_champs_a_traiter($table) {
 }
 
 /**
- * Tables de la base de données qui peuvent contenir des liens, et leur singulier#
+ * Tables de la base de données qui peuvent contenir des liens, et leur singulier
  */
 function linkcheck_tables_a_traiter() {
 	$tables_spip = lister_tables_objets_sql();
@@ -48,16 +46,19 @@ function linkcheck_tables_a_traiter() {
  */
 function linkcheck_etats_liens() {
 	return array(
-			0 => array('1' => 'malade',
-					   '2' => 'ok',
-					   '3' => 'deplace',
-					   '4' => 'mort',
-					   '5' => 'malade'),
-
-			1 => array('publie' => 'ok',
-					   'prepa' => 'malade',
-					   'prop' => 'malade',
-					   'refuse' => 'malade',
-					   'poubelle' => 'mort')
+			0 => array(
+				'1' => 'malade',
+				'2' => 'ok',
+				'3' => 'deplace',
+				'4' => 'mort',
+				'5' => 'malade'
+			),
+			1 => array(
+				'publie' => 'ok',
+				'prepa' => 'malade',
+				'prop' => 'malade',
+				'refuse' => 'malade',
+				'poubelle' => 'mort'
+			)
 		);
 }
