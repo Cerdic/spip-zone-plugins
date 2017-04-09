@@ -14,7 +14,7 @@ function genie_linkcheck_test_postedition($id, $objet) {
 		'sll.id_objet='.intval($id).' AND sll.objet='.sql_quote($objet).' AND sll.id_linkcheck=sl.id_linkcheck'
 	);
 
-	foreach($sel as $res)
+	foreach($sel as $res) {
 		linkcheck_maj_etat($res);
 	}
 
