@@ -6,7 +6,6 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 
 ## Todo
 
-* [ ] bloc des liens trop visible sur les pages d'objets (articles, rubriques, il devrait être dans la marge car il ne s’agit pas d’un contenu éditable)
 * [ ] ajout d’un lien vers archive.org sur les articles morts
 * [ ] export CSV (à finaliser avec generer_url_objet)
 * [ ] gestion des autoriser() pas très claire (permettre d'ouvrir le plugin aux rédacteurices)
@@ -18,6 +17,28 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 
 * [x] améliorer la détection des liens (ex de bugs : "gazogène.com", ou "lacite.website" sont coupés bizarrement, les urls terminant par une virgule sont aussi coupés)
 * [x] présence du lien sur toutes les pages : ce message pourrait être plus informatif en précisant le nombre de liens
+* [x] bloc des liens trop visible sur les pages d'objets (articles, rubriques, il devrait être dans la marge car il ne s’agit pas d’un contenu éditable)
+
+## Versions 1.4.x
+
+### Version 1.4.0
+
+* Permettre de filtrer les liens distants et internes
+* Permettre de filtrer par type d'objet (articles, rubriques...)
+* Ajouter un formulaire de recherche qui s'applique sur les urls (en faisant un `LIKE` mysql)
+* Permettre d'exporter en CSV uniquement la liste filtrée
+* Amélioration de la détection de liens
+* Déplacement du bloc sur les objets dans la colonne de gauche
+* Limiter l'affichage du blocs de liens sur les objets aux auteurs pouvant modifier l'objet
+* Déclaration plus moderne de la table linkcheck (dans `declarer_tables_objets_sql()`)
+* Utiliser les mêmes limitations de statuts entre la détection de liens générale et celle par le pipeline `post_edition`. Seuls sont conservés les liens sur des objets pouvant être prévisualisés.
+* Réparation de la détection des liens sur les rubriques
+* Ajout d'un champ `publie` à la fois sur la table `spip_linkchecks` et `spip_linkchecks_liens` testant si l'objet parent est publié.
+* Permettre de filtrer sur les liens "Visibles en ligne" (`publie == oui`) et "Non visibles en ligne" (`publie == non`)
+* Changement du coté des autorisations, dorénavant : 
+  * les administrateurs et les rédacteurs peuvent voir la page linkchecks
+  * seuls les webmestres peuvent réinitialiser la base
+  * les personnes autorisées à modifier un objet voient les liens contenus dans l'objet éditorial
 
 ## Versions 1.3.x
 
@@ -138,7 +159,7 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 * Pour les statuts inconnus des liens internes => malade au pire
 
 ## Versions 1.0.x
-	
+
 ### Version 1.0.2
 
 * Indentation et sécurité

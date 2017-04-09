@@ -58,6 +58,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liens_malades' => 'liens malades',
 	'liens_morts' => 'liens morts',
 	'liens_oks' => 'liens validés',
+	'liens_publies' => 'Visibles en ligne',
+	'liens_publies_non' => 'Non visibles en ligne',
 	'linkcheck' => 'LinkCheck',
 	'liste_des_liens' => 'Listes des liens',
 

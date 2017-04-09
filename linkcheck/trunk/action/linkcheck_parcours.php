@@ -61,9 +61,14 @@ function action_linkcheck_parcours_dist() {
 						// Ne sélectionner que les objets dans la base qui contiennent des URLs
 						// @todo Tester pour oracle et sqlite
 						if ($db_ok['type'] === 'mysql') {
-							$tab_expreg_mysql = array(
+							/*$tab_expreg_mysql = array(
 								'(((https?|ftps?)://)|(((https?|ftps?)://)?[A-Za-z0-9\-]*\.))[A-Za-z0-9\-]+\.[a-zA-Z]{2,9}/?',
-								'->[^\]]\]');
+								'->[^\]]\]');*/
+							$classe_alpha = 'a-zA-Z0-9âäéèëêïîôöùüû²';
+							$tab_expreg_mysql = array(
+								"(((http|https|ftp|ftps)://)?www\.)|((http|https|ftp|ftps)://([".$classe_alpha."\-]*\.)?))([".$classe_alpha."+\-]*\.)+[a-zA-Z0-9]{2,9}(/[".$classe_alpha."=.?&+\_\\@\:\,/%#\-]*)?)(\'|\"| |\.|\->|\]|,|;|\s)/?",
+								'(\->)([a-zA-Z]{3,10}[0-9]{1,})\]'
+							);
 
 							$where_reg = array();
 							foreach ($tab_champs_a_traiter as $nom_champs => $type_champs) {
@@ -84,7 +89,14 @@ function action_linkcheck_parcours_dist() {
 
 						if (isset($info_table['statut'][0]['previsu'])) {
 							$statuts = explode(',', str_replace('/auteur', '', $info_table['statut'][0]['previsu']));
-							$where .= ' AND '.sql_in('statut', $statuts);
+							foreach ($statuts as $key => $val) {
+								if ($val == '!') {
+									unset($statuts[$key]);
+								}
+							}
+							if (count($statuts) > 0) {
+								$where .= ' AND '.sql_in('statut', $statuts);
+							}
 						} else if (isset($info_table['field']['statut'])) {
 							// On exclus de la selection, les objet dont le status est refuse ou poubelle
 							$where .= ' AND '.sql_in('statut', array('refuse', 'poubelle'), true);
@@ -99,7 +111,7 @@ function action_linkcheck_parcours_dist() {
 						);
 
 						//pour chaque objet
-						$table_objet = objet_type($table_sql);
+						$objet = objet_type($table_sql);
 						foreach ($sql as $res) {
 							//on créé les variables à envoyer
 							$id_objet = $res[$nom_champ_id];
@@ -108,8 +120,17 @@ function action_linkcheck_parcours_dist() {
 							//on liste les liens
 							$tab_liens = linkcheck_lister_liens($res);
 
+							// On regarde si l'objet parent est publie
+							$objet_publie = objet_test_si_publie($objet, $id_objet);
+
+							if ($objet_publie) {
+								$publie = 'oui';
+							} else {
+								$publie = 'non';
+							}
+
 							//on les insere dans la base
-							linkcheck_ajouter_liens($tab_liens, $table_objet, $id_objet);
+							linkcheck_ajouter_liens($tab_liens, $objet, $id_objet, $publie);
 
 							//on renseigne les ids de reprise
 							ecrire_config('linkcheck_dernier_id_objet', $id_objet);

@@ -9,7 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-
 /**
  * Fonction d'installation du plugin et de mise à jour.
  * Vous pouvez :
@@ -35,6 +34,13 @@ function linkcheck_upgrade($nom_meta_base_version, $version_cible) {
 	 * Ajout du champ redirection sur spip_linkchecks
 	 */
 	$maj['1.0.1'] = array(
+		array('maj_tables', array('spip_linkchecks', 'spip_linkchecks_liens'))
+	);
+
+	/**
+	 * Ajout du champ publie sur spip_linkchecks_liens
+	 */
+	$maj['1.4.0'] = array(
 		array('maj_tables', array('spip_linkchecks', 'spip_linkchecks_liens'))
 	);
 

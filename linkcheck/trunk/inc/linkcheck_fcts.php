@@ -5,7 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
- * Fonction qui recherche la presence d'un lien et de sa liaison ds la table spip_linkchecks
+ * Fonction qui recherche la presence d'un lien et de sa liaison dans la table spip_linkchecks
  *
  * @param string $url
  * 	URL que l'on recherche
@@ -18,24 +18,47 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *   - 0 : le lien n'a pas été trouvé
  *   - 1 : le lien a été trouvé mais il n'est pas rattaché à l'objet
  * 	 - 2 : le lien a été trouvé et il est bien rattaché à l'objet
- * 	 Si la clé "etat" est égaleà 1, le tableau indique par la clé "id" l'identifiant du lien
+ * 	 Si la clé "etat" est égale à 1, le tableau indique par la clé "id" l'identifiant du lien
  */
-function linkcheck_tester_presence_lien($url, $id_obj, $type) {
+function linkcheck_tester_presence_lien($url, $id_obj, $type, $publie) {
 	$retour = array('etat'=>0);
 	// on recherche le lien par l'URL
 	$id_linkcheck = sql_getfetsel('id_linkcheck', 'spip_linkchecks', 'url = '.sql_quote($url));
 	if ($id_linkcheck) {
 		// si on l'a trouvé on verifie si est attaché à l'objet passé en paramatre
-		$sel = sql_getfetsel(
-			'count(id_linkcheck)',
+		$sel = sql_fetsel(
+			'id_linkcheck, publie',
 			'spip_linkchecks_liens',
 			'id_linkcheck='.$id_linkcheck.' AND id_objet='.intval($id_obj).' AND objet='.sql_quote($type)
 		);
-		if ($sel == 0) {
-			$retour['etat']=1;
-			$retour['id']=$id_linkcheck;
+		if (!$sel) {
+			$retour['etat'] = 1;
+			$retour['id'] = $id_linkcheck;
 		} else {
 			$retour['etat']= 2;
+			if ($publie != $sel['publie']) {
+				sql_updateq(
+					'spip_linkchecks_liens',
+					array('publie' => $publie),
+					'id_linkcheck='.$id_linkcheck.' AND id_objet='.intval($id_obj).' AND objet='.sql_quote($type)
+				);
+				$statut_linkckeck = sql_getfetsel('publie', 'spip_linkchecks', 'id_linkcheck = '.intval($id_linkcheck));
+				if (!$statut_linkckeck or $publie != $statut_linkckeck) {
+					if (!$statut_linkckeck or $statut_linkckeck == '' or $publie== 'oui') {
+						sql_updateq(
+							'spip_linkchecks',
+							array('publie' => $publie),
+							'id_linkcheck='.intval($id_linkcheck)
+						);
+					} else if (!sql_getfetsel('publie', 'spip_linkchecks_liens', 'id_linkcheck='.$id_linkcheck.'  AND publie="oui"')) {
+						sql_updateq(
+							'spip_linkchecks',
+							array('publie' => $publie),
+							'id_linkcheck='.intval($id_linkcheck)
+						);
+					}
+				}
+			}
 		}
 	}
 	return $retour;
@@ -64,8 +87,9 @@ function linkcheck_lister_liens($champs) {
 	 */
 	$classe_alpha = 'a-zA-Z0-9âäéèëêïîôöùüû²';
 	$tab_expreg = array(
-	"('|\"| |\.|\->|\]|,|;|\s)(((((http|https|ftp|ftps)://)?www\.)|((http|https|ftp|ftps)://([".$classe_alpha."'\-]*\.)?))(['".$classe_alpha."'0-9\-\+]*\.)+[a-zA-Z0-9]{2,9}(/['".$classe_alpha."=.?&_\->\-\+\@\:\,/%#]*)?)('|\"| |\.|\->|\]|,|;|\s)?",
-	'(\->)([a-zA-Z]{3,10}[0-9]{1,})\]');
+		"('|\"| |\.|\->|\]|,|;|\s)(((((http|https|ftp|ftps)://)?www\.)|((http|https|ftp|ftps)://([".$classe_alpha."'\-]*\.)?))(['".$classe_alpha."'0-9\-\+]*\.)+[a-zA-Z0-9]{2,9}(/['".$classe_alpha."=.?&_\->\-\+\@\:\,/%#]*)?)('|\"| |\.|\->|\]|,|;|\s)?",
+		'(\->)([a-zA-Z]{3,10}[0-9]{1,})\]'
+	);
 
 	foreach ($champs as $champ_value) {
 		$champ_value=trim($champ_value);
@@ -112,33 +136,53 @@ function linkcheck_lister_liens($champs) {
  *
  * @return array $ret
  */
-function linkcheck_ajouter_liens($tab_liens, $type_objet, $id_objet) {
+function linkcheck_ajouter_liens($tab_liens, $objet, $id_objet, $publie = 'non') {
 	foreach ($tab_liens as $lien) {
-		//on test si c'est un lien interne ou externe
+		// on teste si c'est un lien interne ou externe
 		$distant = (strpos($lien, '.')) ? true : false;
-		//on test son existence dans la base
-		$exi = linkcheck_tester_presence_lien($lien, $id_objet, $type_objet);
+		// on test son existence dans la base
+		$exi = linkcheck_tester_presence_lien($lien, $id_objet, $objet, $publie);
 		//s'il existe
 		if ($exi['etat'] > 0) {
 			if ($exi['etat'] == 1) {
 				//on l'ajoute ds la table de liaison
 				$ins = sql_insertq(
 					'spip_linkchecks_liens',
-					array('id_linkcheck' => $exi['id'],
-					'id_objet'=>$id_objet, 'objet'=>$type_objet)
+					array (
+						'id_linkcheck' => $exi['id'],
+						'id_objet'=>$id_objet,
+						'objet'=>$objet,
+						'publie' => $publie
+					)
 				);
+				$publie_linkcheck = sql_getfetsel('publie', 'spip_linkchecks', 'id_linkcheck = '.intval($exi['id']));
+				if ($publie_linkcheck != $statut) {
+					if ($publie_linkcheck == 'non') {
+						sql_updateq('spip_linkchecks', array('publie' => 'oui'), 'id_linkcheck = '.intval($exi['id']));
+					} else {
+						$ok = sql_countsel('spip_linkchecks_liens', 'publie = "oui" AND id_linkcheck = '.intval($exi['id']));
+						if (!$ok or $ok == 0) {
+							sql_updateq('spip_linkchecks', array('publie' => 'non'), 'id_linkcheck = '.intval($exi['id']));
+						}
+					}
+				}
 			}
 		//s'il existe pas
 		} else {
 			//on l'insere dans la base des url
 			$ins = sql_insertq(
 				'spip_linkchecks',
-				array('url'=>$lien, 'distant'=>$distant, 'date'=> date('Y-m-d H:i:s'))
+				array('url'=>$lien, 'distant'=>$distant, 'date'=> date('Y-m-d H:i:s'), 'publie' => $publie)
 			);
 			//et ds la base qui lie un url a un objet
 			sql_insertq(
 				'spip_linkchecks_liens',
-				array('id_linkcheck'=>$ins, 'id_objet'=>$id_objet, 'objet'=>$type_objet)
+				$donnees = array(
+					'id_linkcheck' => $ins,
+					'id_objet' => $id_objet,
+					'objet' => $objet,
+					'publie' => $publie
+				)
 			);
 		}
 	}
@@ -213,8 +257,11 @@ function linkcheck_tester_lien_externe($url) {
 						$url_finale = parse_url($redirection);
 						if (strlen($end_redirection) > 0) {
 							$redirection = str_replace($url_finale['query'], '', str_replace($url_finale['path'], '', $redirection));
+							$ret['redirection'] = rtrim($redirection, '/').'/'.$end_redirection;
+						} else {
+							$ret['redirection'] = $redirection;
 						}
-						$ret['redirection'] = rtrim($redirection, '/').'/'.$end_redirection;
+
 						$domaine = rtrim(str_replace($url_finale['query'], '', str_replace($url_finale['path'], '', $ret['redirection'])), '?');
 						/**
 						 * Cas où c'est une redirection chez nous depuis un site externe (bit.ly...)
@@ -317,8 +364,8 @@ function linkcheck_tester_lien_interne($url) {
 		$statut_objet = sql_getfetsel('statut', $table_sql, $nom_champ_id.'='.$id_objet);
 
 		if (!empty($statut_objet)) {
-			if ($type_objet!='auteur') {
-				$ret['etat'] = isset($tabStatus[1][$statut_objet]) ? $tabStatus[1][$statut_objet]:'malade';
+			if ($type_objet != 'auteur') {
+				$ret['etat'] = isset($tabStatus[1][$statut_objet]) ? $tabStatus[1][$statut_objet] : 'malade';
 				$ret['code'] = $statut_objet;
 			} else {
 				$ret['etat'] = $tabStatus[1]['publie'];
@@ -339,7 +386,7 @@ function linkcheck_tester_lien_interne($url) {
 /**
  * Fonction de verifications des liens rescencés
  *
- * Les liens stockés dans la table spip_linkchecks sont verifié
+ * Les liens stockés dans la table spip_linkchecks sont verifiés
  * suivant leurs statuts, ou pas, par lots, ou pas.
  *
  * @param string $etatLien
@@ -359,8 +406,8 @@ function linkcheck_tests($cron = false, $etat = null, $id = 0) {
 	$where .= (is_null($etat)) ? ' AND etat='.sql_quote($etat) : '';
 	$limit = $cron ? lire_config('linkcheck/nb_verifs_cron', 30) : 5;
 	/**
-	 * On estime qu'au maximum, on accorde 1 minute max pour tester chaque lien
-	 * On essaie de forcer l'execution max de script en multipliant donc $limit par 60
+	 * On estime qu'au maximum, on accorde 1 minute 30 max pour tester chaque lien
+	 * On essaie de forcer l'execution max de script en multipliant donc $limit par 90
 	 */
 	set_time_limit($limit*90);
 	$sql = sql_allfetsel('*', 'spip_linkchecks', $where, '', 'etat, id_linkcheck ASC', '0,'.$limit);
@@ -398,8 +445,6 @@ function linkcheck_maj_etat($res) {
 		$test['code'] = '119';
 		sql_updateq('spip_linkchecks', array('essais' => 0), 'id_linkcheck='.intval($res['id_linkcheck']));
 	}
-	//on met le champ à 0
-
 
 	//sinon on le signale comme malade
 	sql_updateq(

@@ -5,7 +5,7 @@
 	<ul>
 	[<li>(#SELF|parametre_url{etat,''}|parametre_url{debut_ListeLink,''}|lien_ou_expose{<:linkcheck:tous_les_liens:>,#ENV{etat,''}|=={''},ajax})</li>]
 	<BOUCLE_etats(DATA){liste mort,malade,deplace,ok}>
-		<BOUCLE_comptem(LINKCHECKS){etat=#VALEUR}{url LIKE %#ENV{recherche}%}{distant IN #GET{distant}}{objet ?} />
+		<BOUCLE_comptem(LINKCHECKS){etat=#VALEUR}{url LIKE %#ENV{recherche}%}{distant IN #GET{distant}}{objet ?}{publie?} />
 		[<li class='#VALEUR'>(#SELF|parametre_url{etat,#VALEUR}|parametre_url{debut_ListeLink,''}|lien_ou_expose{#VAL{linkcheck:etat_}|concat{#VALEUR}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{etat}|=={#VALEUR},ajax})</li>]
 		<//B_comptem>
 	</BOUCLE_etats>
@@ -15,6 +15,14 @@
 #BOITE_OUVRIR
 
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF}
+
+<div class='onglets_simple second clearfix'>
+	<ul>
+		[<li>(#SELF|parametre_url{publie,''}|parametre_url{debut_ListeLink,''}|lien_ou_expose{<:linkcheck:tous_les_liens:>,#ENV{publie,''}|=={''},ajax})</li>]
+		[<li>(#SELF|parametre_url{publie,oui}|parametre_url{debut_ListeLink,''}|lien_ou_expose{<:linkcheck:liens_publies:>,#ENV{publie}|=={oui},ajax})</li>]
+		[<li>(#SELF|parametre_url{publie,non}|parametre_url{debut_ListeLink,''}|lien_ou_expose{<:linkcheck:liens_publies_non:>,#ENV{publie}|=={non},ajax})</li>]
+	</ul>
+</div>
 
 <div class='onglets_simple second clearfix'>
 	<ul>
@@ -44,7 +52,7 @@
 		<th class='date' scope='col'><:linkcheck:maj:></th>
 		</tr>
 	</thead>
-<BOUCLE_ListeLink(LINKCHECKS){objet?}{!par maj}{code?}{etat?}{url?}{url LIKE %#ENV{recherche}%}{distant IN #GET{distant}}{pagination #ENV{pagination,10}}>
+<BOUCLE_ListeLink(LINKCHECKS){objet?}{!par maj}{code?}{etat?}{url?}{publie?}{url LIKE %#ENV{recherche}%}{distant IN #GET{distant}}{pagination #ENV{pagination,10}}>
 	<INCLURE{fond=prive/objets/liste/linkcheck_detail,id_linkcheck,env}>
 </BOUCLE_ListeLink>
 	</table>
