@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'remplacer_fichier' => 'Remplacer ce fichier',
+
 	// S
 	'saisie_fichiers_explication' => 'Envoyer un ou plusieurs fichiers en s’assurant de ne pas avoir à les renvoyer en cas de non validation des autres champs du formulaire.',
 	'saisie_fichiers_label_fichiers_individuels_label' => 'Utiliser un label pour le champ de chaque fichier individuel ?',
