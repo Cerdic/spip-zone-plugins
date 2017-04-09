@@ -8,7 +8,6 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 
 * [ ] ajout d’un lien vers archive.org sur les articles morts
 * [ ] export CSV (à finaliser avec generer_url_objet)
-* [ ] gestion des autoriser() pas très claire (permettre d'ouvrir le plugin aux rédacteurices)
 * [ ] ajout d’un picto lien mort optionnel dans propre() [+ éventuellement lien sur archive.org le cas échéant]
 * [ ] vérifier/traiter automagiquement les migrations http⟹https
 * [ ] trouver une meilleure regexp pour la détection de lien, ça doit bien exister sous forme de lib
@@ -18,6 +17,7 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 * [x] améliorer la détection des liens (ex de bugs : "gazogène.com", ou "lacite.website" sont coupés bizarrement, les urls terminant par une virgule sont aussi coupés)
 * [x] présence du lien sur toutes les pages : ce message pourrait être plus informatif en précisant le nombre de liens
 * [x] bloc des liens trop visible sur les pages d'objets (articles, rubriques, il devrait être dans la marge car il ne s’agit pas d’un contenu éditable)
+* [x] gestion des autoriser() pas très claire (permettre d'ouvrir le plugin aux rédacteurices)
 
 ## Versions 1.4.x
 
