@@ -431,6 +431,7 @@ function commandes_bank_abos_preparer_echeance($flux){
 
 /**
  * Mettre en erreur une commande dont le prélèvement automatique aurait échoué
+ * on repere ce cas via le flag erreur=true envoyer lors de la resiliation
  * 
  * @pipeline bank_abos_resilier
  **/
@@ -438,8 +439,8 @@ function commandes_bank_abos_resilier($flux){
 	// On commence par chercher la commande dont il s'agit
 	// et vérifier qu'elle a des échéances
 	if (
-		isset($flux['args']['id'])
-		and $id = $flux['args']['id']
+		isset($flux['args']['erreur']) and $flux['args']['erreur']
+		and isset($flux['args']['id']) and $id = $flux['args']['id']
 		and strncmp($id,"uid:",4) == 0
 		and $bank_uid = substr($id, 4)
 		and $commande = sql_fetsel('*', 'spip_commandes', 'bank_uid = '.sql_quote($bank_uid))
