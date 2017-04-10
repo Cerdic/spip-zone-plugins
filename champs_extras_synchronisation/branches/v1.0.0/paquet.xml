@@ -15,7 +15,7 @@
 	<nom>Champs Extras (Synchronisation)</nom>
 
 	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs -->
-	<auteur lien='http://contrib.spip.net/bruno31'>Bruno Caillard</auteur>
+	<auteur lien='https://contrib.spip.net/bruno31'>Bruno Caillard</auteur>
 
 	<licence>GNU/GPL</licence>
 

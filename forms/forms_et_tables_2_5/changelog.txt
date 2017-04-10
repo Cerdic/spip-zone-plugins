@@ -30,7 +30,7 @@
 - corrections des fonctions SQL /exec/donnees_tous.php
 - corrections des fonctions SQL /exec/donnees_edit.php
 - corrections de fonctions SQL /inc/forms_tables_affichage.php
-- corrections du bug d'affichage des données /fonds/donnees_tous.html (erreur : http://contrib.spip.net/Form-Table-2-5#forum464059)
+- corrections du bug d'affichage des données /fonds/donnees_tous.html (erreur : https://contrib.spip.net/Form-Table-2-5#forum464059)
 
 
 2012-12-18

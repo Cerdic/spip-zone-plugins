@@ -30,7 +30,7 @@ function exec_fulltext()
 	echo debut_boite_info(true);
 	echo "<img src='".find_in_path('fulltext.png')."' />\n";
 
-	echo propre(_T('fulltext:liste_tables_connues')." [->http://www.spip-contrib.net/Fulltext].");
+	echo propre(_T('fulltext:liste_tables_connues')." [->https://contrib.spip.net/Fulltext].");
 	
 	$url = generer_url_ecrire(_request('exec'), 'regenerer=tous');
 	echo "<p><a href='$url'>"._T('fulltext:regenerer_tous')."</a></p>\n";

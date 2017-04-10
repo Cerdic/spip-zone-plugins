@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                                 #
 #  File    : inc/spipbb_affecter_affiche                            #
 #  Authors : scoty 2007                                             #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs          #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs          #
 #  Contact : Hugues AROUX scoty!@!koakidi!.!com                     #
 # [fr] Page deplacer un thread resultat | (anc. gaf_val_affect.php) #
 #-------------------------------------------------------------------#

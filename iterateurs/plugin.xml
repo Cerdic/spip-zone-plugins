@@ -7,7 +7,7 @@
 	<etat>stable</etat>
 	<description>Les it&#233;rateurs sont une fonctionnalit&#233; de SPIP 3. Ils permettent de faire des boucles non plus seulement sur des articles et autres objets de la base de donn&#233;es SQL de SPIP, mais sur n'importe quoi : fichiers, tableaux de donn&#233;es, webservices, etc.
 
-Ce plugin met cette fonctionnalit&#233; &#224; disposition dans SPIP 2.1. Prenez le temps de lire la documentation et de regarder les nombreuses d&#233;mos disponibles. Depuis de la version 1.0.0, ces d&#233;mos sont disponibles via un plugin "[D&#233;mos des It&#233;rateurs->http://contrib.spip.net/Les-demos-des-iterateurs]".
+Ce plugin met cette fonctionnalit&#233; &#224; disposition dans SPIP 2.1. Prenez le temps de lire la documentation et de regarder les nombreuses d&#233;mos disponibles. Depuis de la version 1.0.0, ces d&#233;mos sont disponibles via un plugin "[D&#233;mos des It&#233;rateurs->https://contrib.spip.net/Les-demos-des-iterateurs]".
 	</description>
 	<prefix>Iterateurs</prefix>
 

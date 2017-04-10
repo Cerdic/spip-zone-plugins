@@ -103,8 +103,8 @@ function action_forms_exporte_reponse_article(){
 			}
 			
 			// (Renommage de la variable de titre de l'article en "$titre_article" (anciennement "$titre" qui correspondait aussi à la variable du titre des champs) )
-			// + (La fonction "_q" est remplacée par la fonction "sql_quote" équivalente --> cf. http://www.spip-contrib.net/PortageV2-Migrer-un-plugin-vers-SPIP2 )
-			// + (INFO : l'API "sql_*" gère toute seule les préfixe des tables --> cf. "http://www.spip-contrib.net/PortageV2-Migrer-un-plugin-vers-SPIP2" )
+			// + (La fonction "_q" est remplacée par la fonction "sql_quote" équivalente --> cf. https://contrib.spip.net/PortageV2-Migrer-un-plugin-vers-SPIP2 )
+			// + (INFO : l'API "sql_*" gère toute seule les préfixe des tables --> cf. "https://contrib.spip.net/PortageV2-Migrer-un-plugin-vers-SPIP2" )
 			$id_article = sql_insert(
 				"spip_articles" ,
 				"(titre,soustitre,texte,date,statut,id_rubrique,id_secteur)" ,

@@ -59,7 +59,7 @@ $texte=preg_replace(
 	);
 
 // La fin du code est inspiree de
-// <http://www.spip-contrib.net/Sommaire-de-l-article>
+// <https://contrib.spip.net/Sommaire-de-l-article>
 
 	$array = explode("@num_ordre@" , $texte);
 	$res =count($array);

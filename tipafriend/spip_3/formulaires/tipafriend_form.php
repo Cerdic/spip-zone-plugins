@@ -5,7 +5,7 @@
  * Utilisation du plugin facteur, si présent, pour envoyer un mail HTML (avec version texte initiale
  * jointe).
  * @name 		FormulaireEnvoi
- * @author 		Piero Wbmstr <http://www.spip-contrib.net/PieroWbmstr>
+ * @author 		Piero Wbmstr <https://contrib.spip.net/PieroWbmstr>
  * @license		http://opensource.org/licenses/gpl-license.php GNU Public License
  * @package		Tip-a-friend
  */

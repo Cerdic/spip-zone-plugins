@@ -2,7 +2,7 @@
 
    spip.css.html
    Styles associes au code genere par SPIP
-   Cf.: http://www.spip-contrib.net/3821
+   Cf.: https://contrib.spip.net/3821
 
 -------------------------------------------------------------- */
 
@@ -33,7 +33,7 @@ blockquote.spip {}
 .spip_cadre {font-family: /*@font-family-mono*/'andale mono','lucida console',monospace/*/@*/; font-size: 1em;}
 .spip_cadre {padding:/*@demi-margin-bottom*/0.75em/*/@*/;width: 100%;-webkit-box-sizing: border-box;-ms-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
 
-/* Enluminures typo V3 / Cf.: http://www.spip-contrib.net/3118 */
+/* Enluminures typo V3 / Cf.: https://contrib.spip.net/3118 */
 sc { font-variant: small-caps; }
 .caractencadre-spip { background-color: #FFFFCC; color: purple; }
 .caractencadre2-spip { background-color: #FFFFCC; color: orange; }

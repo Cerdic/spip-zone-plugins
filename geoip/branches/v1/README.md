@@ -11,7 +11,7 @@ Database version 1 : http://geolite.maxmind.com/download/geoip/database/GeoLiteC
 
 Pour plus d'information, nous vous invitons à consulter la documentation sur SPIP Contrib
 
-http://contrib.spip.net/Geoip
+https://contrib.spip.net/Geoip
 
 ## Changelog
 

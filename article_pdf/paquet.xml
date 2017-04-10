@@ -11,9 +11,9 @@
 	<nom>Article PDF</nom>
 	<!-- Convertir l'article affiché au format pdf -->
 
-	<auteur lien="http://contrib.spip.net/_chag_">chag</auteur>
-	<auteur lien="http://contrib.spip.net/_Paul-Sanches_">Paul Sanches</auteur>
-	<auteur lien="http://contrib.spip.net/_Aquinatus_">Aquinatus</auteur>
+	<auteur lien="https://contrib.spip.net/_chag_">chag</auteur>
+	<auteur lien="https://contrib.spip.net/_Paul-Sanches_">Paul Sanches</auteur>
+	<auteur lien="https://contrib.spip.net/_Aquinatus_">Aquinatus</auteur>
 	<auteur lien="http://www.notre-ville.net">Cédric Morin</auteur>
 
 	<lib nom="h5c1accba-fpdf17" lien="http://www.fpdf.org/fr/download/fpdf17.zip" />

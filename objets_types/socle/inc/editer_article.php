@@ -79,7 +79,7 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 function editer_article_texte($texte, $config, $aider, $lang='')
 {
 	// cette meta n'est pas activable par l'interface, mais elle peut venir
-	// d'ailleurs : http://www.spip-contrib.net/Personnaliser-les-champs-de-l
+	// d'ailleurs : https://contrib.spip.net/Personnaliser-les-champs-de-l
 	if (($config['articles_texte'] == 'non') AND !strlen($texte))
 		return '';
 

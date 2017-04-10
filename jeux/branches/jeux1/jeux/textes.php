@@ -11,7 +11,7 @@
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
 #  Licence : GPL                                    #
 #--------------------------------------------------------------------------#
-#  Documentation : http://www.spip-contrib.net/Des-jeux-dans-vos-articles  #
+#  Documentation : https://contrib.spip.net/Des-jeux-dans-vos-articles  #
 #--------------------------------------------------------------------------#
 /*
 

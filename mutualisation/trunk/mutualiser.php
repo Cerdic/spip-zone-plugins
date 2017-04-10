@@ -84,7 +84,7 @@ function demarrer_site($site = '', $options = array()) {
 		 *
 		 * > Cas de la gestion d'un pannel
 		 * Recuperer les mots de passes du futur compte dans une table speciale
-		 * Voir http://www.spip-contrib.net/Service-d-hebergement-mutualise
+		 * Voir https://contrib.spip.net/Service-d-hebergement-mutualise
 		 */
 		if ($options['utiliser_panel']) {
 			if (defined(_INSTALL_PANEL_HOST_DB)) {

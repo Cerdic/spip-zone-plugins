@@ -10,8 +10,8 @@
  * on utilise en partie le travail de 
 	*    Date : mercredi 27 juillet 2005
 	*    Auteurs :
-	*		Stéphane Deschamps http://www.spip-contrib.net/auteur.php3?id_auteur=327
-	*		Yann Ducrocq http://www.spip-contrib.net/auteur.php3?id_auteur=1833
+	*		Stéphane Deschamps https://contrib.spip.net/auteur.php3?id_auteur=327
+	*		Yann Ducrocq https://contrib.spip.net/auteur.php3?id_auteur=1833
 	*   +-------------------------------------+
 	*    donner un identifiant unique à chaque intertitre de la page
 	*   +-------------------------------------+

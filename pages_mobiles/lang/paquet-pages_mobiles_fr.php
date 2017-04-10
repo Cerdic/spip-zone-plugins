@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
-	'pages_mobiles_description' => 'Ce plugin est dérivé du plugin [{cimobile}->http://contrib.spip.net/cimobile-plugin-detection-et-aiguillage-des-telephones] de détection et aiguillage des téléphones mobiles.
+	'pages_mobiles_description' => 'Ce plugin est dérivé du plugin [{cimobile}->https://contrib.spip.net/cimobile-plugin-detection-et-aiguillage-des-telephones] de détection et aiguillage des téléphones mobiles.
 
 Il en reprend le but: {{orienter les visiteurs vers les bonnes pages selon leur périphérique de navigation}}.
 

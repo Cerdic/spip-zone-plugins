@@ -3,7 +3,7 @@
 #  Plugin  : Couteau Suisse - Licence : GPL           #
 #  Auteur  : Patrice Vanneufville, 2006               #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
-#  Infos : http://www.spip-contrib.net/?article2166   #
+#  Infos : https://contrib.spip.net/?article2166   #
 #-----------------------------------------------------#
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -515,7 +515,7 @@ if (!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p
 	list($outils_affiches_actifs, $liste_outils) = liste_outils();
 	// cadre de gauche
 	cs_compat_boite('debut_gauche');
-	// pour la liste des docs sur spip-contrib
+	// pour la liste des docs sur contrib.spip
 	$contribs = isset($GLOBALS['meta']['tweaks_contribs'])?unserialize($GLOBALS['meta']['tweaks_contribs']):array();
 	foreach($contribs as $i=>$v) $contribs[$i] = preg_replace_callback('/@@(.*?)@@/', 'cs_couper_25', $v);
 	sort($contribs);

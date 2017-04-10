@@ -4,7 +4,7 @@
 #  File    : action/spipbb_fromphpbb - import de phpbb     #
 #  Authors : chryjs, 2007                                  #
 #            2004+ Jean-Luc Bechennec certaines fonctions  #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs #
 #  Contact : chryjs!@!free!.!fr                            #
 #----------------------------------------------------------#
 

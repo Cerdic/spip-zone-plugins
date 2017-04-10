@@ -229,7 +229,7 @@ function remettre_les_mots_clefs($mots = array(),$id,$type){
 	return true;
 }
 
-/* FONCTION HONTEUSEMENT ADAPTEE DE DOCUCOPIEUR ==> http://www.spip-contrib.net/DocuCopieur */
+/* FONCTION HONTEUSEMENT ADAPTEE DE DOCUCOPIEUR ==> https://contrib.spip.net/DocuCopieur */
 /* cette fonction realise la copie d'un logo d'article/rubrique et de son logo de survol */
 /* vers le nouvel article/rubrique. */
 function dupliquer_logo($id_source, $id_destination, $type='article', $bsurvol = false ){

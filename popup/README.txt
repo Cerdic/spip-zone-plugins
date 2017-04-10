@@ -20,9 +20,9 @@ A voir avec les traducteurs ...
 
 ------------------------------------------
 
-Plugin Popup : http://www.spip-contrib.net/?article3573 (versions SPIP2 et SPIP3)
+Plugin Popup : https://contrib.spip.net/?article3573 (versions SPIP2 et SPIP3)
 
-Plugin Couteau Suisse : http://www.spip-contrib.net/Le-Couteau-Suisse
+Plugin Couteau Suisse : https://contrib.spip.net/Le-Couteau-Suisse
 
 ------------------------------------------
 

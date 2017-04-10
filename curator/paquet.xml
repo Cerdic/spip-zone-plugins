@@ -15,7 +15,7 @@
 	
 	<auteur lien='http://ydikoi.net'>ydikoi</auteur>
 	<credit lien='http://seenthis.net/'>Fil et Archiloque pour le bookmarklet de Seenthis</credit>
-	<credit lien='http://contrib.spip.net/nicod_/'>nicod_ pour la réécriture de la v1</credit>
+	<credit lien='https://contrib.spip.net/nicod_/'>nicod_ pour la réécriture de la v1</credit>
 	<licence>GNU/GPL</licence>
 
 	<pipeline nom="autoriser" inclure="curator_autorisations.php" />

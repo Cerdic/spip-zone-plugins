@@ -56,7 +56,7 @@ function nettoyer_format($t) {
 	$conv_formats = $conv_functions_pre = array();
 
 	// syntaxe SPIP
-	// http://www.spip-contrib.net/IMG/html/antiseche_spip-3.html
+	// https://contrib.spip.net/IMG/html/antiseche_spip-3.html
 	
 	
 	//
@@ -192,7 +192,7 @@ function nettoyer_format($t) {
   
   // Conversion BBcode -> SPIP
   // ref. syntaxe: http://en.wikipedia.org/wiki/BBCode
-  // voir aussi la version filtre: http://www.spip-contrib.net/Du-BBcode-dans-SPIP  
+  // voir aussi la version filtre: https://contrib.spip.net/Du-BBcode-dans-SPIP  
   // question: detecter si barre enrichie pour adopter la syntaxte etendue ?
   $conv_formats['BBcode_SPIP'] = array(
       "pattern" => array(

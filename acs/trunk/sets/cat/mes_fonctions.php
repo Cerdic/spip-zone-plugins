@@ -92,7 +92,7 @@ function cm($texte) {
  * necessite [(#CONFIG{langues_utilisees}|detecte_langue{#SELF})]
  * en DEBUT de squelette, AVANT toute sortie html (cookie)
  * 
- * cf. http://www.spip-contrib.net/Multilinguisme-Non-structure
+ * cf. https://contrib.spip.net/Multilinguisme-Non-structure
  */
 function detecte_langue($langues, $url_encours) {
 	if (!$_COOKIE['spip_lang']) {

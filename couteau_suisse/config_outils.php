@@ -3,7 +3,7 @@
 #  Plugin  : Couteau Suisse - Licence : GPL           #
 #  Auteur  : Patrice Vanneufville, 2006               #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
-#  Infos : http://contrib.spip.net/?article2166       #
+#  Infos : https://contrib.spip.net/?article2166       #
 #-----------------------------------------------------#
 if(!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -1728,11 +1728,11 @@ if(isset($GLOBALS['mes_outils'])) {
 
 // Idees d'ajouts :
 // http://archives.rezo.net/spip-core.mbox/
-// http://contrib.spip.net/Citations
-// http://contrib.spip.net/la-balise-LESMOTS et d'autres balises #MAINTENANT #LESADMINISTRATEURS #LESREDACTEURS #LESVISITEURS
-// http://contrib.spip.net/Ajouter-une-lettrine-aux-articles
-// http://contrib.spip.net/Generation-automatique-de
-// http://contrib.spip.net/Balise-LOGO-ARTICLE-ORITRAD
+// https://contrib.spip.net/Citations
+// https://contrib.spip.net/la-balise-LESMOTS et d'autres balises #MAINTENANT #LESADMINISTRATEURS #LESREDACTEURS #LESVISITEURS
+// https://contrib.spip.net/Ajouter-une-lettrine-aux-articles
+// https://contrib.spip.net/Generation-automatique-de
+// https://contrib.spip.net/Balise-LOGO-ARTICLE-ORITRAD
 // boutonstexte
 
 //global $cs_variables; cs_log($cs_variables, 'cs_variables :');

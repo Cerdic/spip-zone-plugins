@@ -71,7 +71,7 @@ function formulaires_agessa_traiter_dist() {
 		$$coord = lire_config("agessa/$coord");
 
 	// etape 2: creation PDF
-	// doc: http://contrib.spip.net/Realiser-un-PDF-personnalise-avec-FPDF
+	// doc: https://contrib.spip.net/Realiser-un-PDF-personnalise-avec-FPDF
 	define('FPDF_FONTPATH', 'font/');
 	include_spip('fpdf'); 
 	include_spip('fpdi');

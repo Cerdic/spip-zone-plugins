@@ -30,7 +30,7 @@ function spip2spip_syndiquer($id_site, $mode = 'cron')
     //-------------------------------
     // Recupere la config
     //-------------------------------
-    // groupe mot cle "licence" installe ? (contrib: http://www.spip-contrib.net/Filtre-Licence )
+    // groupe mot cle "licence" installe ? (contrib: https://contrib.spip.net/Filtre-Licence )
     if (spip2spip_get_id_groupemot("licence")) {
         $isLicenceInstalled = true;
     } else {

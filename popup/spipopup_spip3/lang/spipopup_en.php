@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'btn_imprimer_ttl' => 'Print this page',
 
 	// D
-	'descr_cfg' => 'Plugin documentation, for information : [spip-contrib.net/?article3573->http://contrib.spip.net/?article3573]',
+	'descr_cfg' => 'Plugin documentation, for information : [contrib.spip.net/?article3573->https://contrib.spip.net/?article3573]',
 
 	// E
 	'editor' => 'Popup link editor',

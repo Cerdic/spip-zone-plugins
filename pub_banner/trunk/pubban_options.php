@@ -103,7 +103,7 @@ $GLOBALS['pubban_pub_icons'] = array(
 /**
  * URL de documentation/information
  */
-define('_PUBBAN_URL', 'http://contrib.spip.net/?article3637');
+define('_PUBBAN_URL', 'https://contrib.spip.net/?article3637');
 /**
  * URL de telechargement des mises a jour
  */

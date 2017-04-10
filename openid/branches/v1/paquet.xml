@@ -29,7 +29,7 @@
 	<pipeline nom="pre_edition" inclure="openid_pipelines.php" />
 	<pipeline nom="recuperer_fond" />
 
-	<lib nom="openid-php-openid-ee669c6" lien="http://contrib.spip.net/IMG/zip/openid-php-openid-master-ee669c6.zip" />
+	<lib nom="openid-php-openid-ee669c6" lien="https://contrib.spip.net/IMG/zip/openid-php-openid-master-ee669c6.zip" />
 
 <spip compatibilite="[2.1.0;3.0.99]">	
 

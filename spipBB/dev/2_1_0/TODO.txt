@@ -5,7 +5,7 @@ Interface Privée - Administration générale :
 -* 0.5 Contrôle du spam : les mots pics ou conn* par exemple ont un spectre trop large : soit modifier la regexp (et ne prendre que des mots) soit utiliser un calcul sur la répétition (minimum de tant de mots marqués pour assimiler à du spam)
 
 Interface Privée - Membres:
--* 0.5 Meilleure gestion des champs extras cf http://www.spip-contrib.net/Plugin-SpipBB#forum400496
+-* 0.5 Meilleure gestion des champs extras cf https://contrib.spip.net/Plugin-SpipBB#forum400496
 
 Interface Privée - Import PhpBB :
 -* 0.5 Import phpBB : test mot de passe / authentification d'un auteur importe non. phpbb2 : php.md5($pass) spip: php.md5($alea.$pass) donc ?creer? un inc/auth_phpbb.php avec un login qui fait update au premier login (pour la conversion) + mettre ident avec 'source'=phpbb avant
@@ -30,17 +30,17 @@ Bugs et autres elements non finis :
 -* 0.5 Gestion + règles d'affichage public (à vérifier) des annonces / postits / Fermes a tester /controler
 
 Voir l'intéret de :
--* http://www.spip-contrib.net/Les-fenetres-flottantes
--* http://www.spip-contrib.net/Notation-d-articles-SPIP
--* http://www.spip-contrib.net/reCAPTCHA
--* http://www.spip-contrib.net/Plugin-Champs-homonymes
--* http://www.spip-contrib.net/Plugin-Captcha2
--* http://www.spip-contrib.net/Exemple-d-utilisation-de-la-boucle
--* http://www.spip-contrib.net/Plugin-Suivi-des-forums
--* http://www.spip-contrib.net/Squelettes-par-profil
--* http://www.spip-contrib.net/Personnalisation-par-profils-avec
--* http://www.spip-contrib.net/Les-crayons
--* http://www.spip-contrib.net/Une-arborescence-a-la-phorum-en
+-* https://contrib.spip.net/Les-fenetres-flottantes
+-* https://contrib.spip.net/Notation-d-articles-SPIP
+-* https://contrib.spip.net/reCAPTCHA
+-* https://contrib.spip.net/Plugin-Champs-homonymes
+-* https://contrib.spip.net/Plugin-Captcha2
+-* https://contrib.spip.net/Exemple-d-utilisation-de-la-boucle
+-* https://contrib.spip.net/Plugin-Suivi-des-forums
+-* https://contrib.spip.net/Squelettes-par-profil
+-* https://contrib.spip.net/Personnalisation-par-profils-avec
+-* https://contrib.spip.net/Les-crayons
+-* https://contrib.spip.net/Une-arborescence-a-la-phorum-en
 
 Documentation
 ==============

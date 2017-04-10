@@ -6,7 +6,7 @@
  * @package      spiPDF
  * @author       Yves Tannier [grafactory.net]
  * @copyright    2010 Yves Tannier
- * @link         http://www.spip-contrib.net/spiPDF-generer-des-contenus-sur-mesure-en-PDF
+ * @link         https://contrib.spip.net/spiPDF-generer-des-contenus-sur-mesure-en-PDF
  * @link         http://zone.spip.org/trac/spip-zone/browser/_plugins_/spipdf
  * @link         http://www.grafactory.net/
  * @license      GPL Gnu Public Licence

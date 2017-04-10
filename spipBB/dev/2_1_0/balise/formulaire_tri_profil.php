@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                                       #
 #  File    : balise/formulaire_tri_profil - balise #FORMULAIRE_TRI_PROFIL #
 #  Authors : Scoty, 2007 +                                                #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs                #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs                #
 #  Contact : chryjs!@!free!.!fr                                           #
 #------------------------------------------------------------------------#
 

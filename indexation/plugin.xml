@@ -19,7 +19,7 @@
 -* exploite le mode FULLTEXT SEARCH IN BOOLEAN MODE de MySQL, Cf. [->http://dev.mysql.com/doc/refman/5.0/fr/fulltext-boolean.html]
 -* Avec ses {extracteurs}, ce plugin permet d'indexer les fichiers PDF etc.
 
-Ce plugin n’est plus en d&#233;veloppement actif, les efforts se tournant vers le plugin [Fulltext->http://contrib.spip.net/Fulltext] qui reprend le concept, mais de façon beaucoup plus performante.
+Ce plugin n’est plus en d&#233;veloppement actif, les efforts se tournant vers le plugin [Fulltext->https://contrib.spip.net/Fulltext] qui reprend le concept, mais de façon beaucoup plus performante.
 	</description>
 	<lien>https://contrib.spip.net/Le-plugin-Indexation</lien>
 	<options>indexation_options.php</options>

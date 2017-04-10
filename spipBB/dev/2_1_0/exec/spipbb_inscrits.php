@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                             #
 #  File    : exec/spipbb_inscrits - members management          #
 #  Authors : Hugues AROUX scoty 2007                            #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs      #
 #  Contact : scoty!@!koakidi!.!com                              #
 # [fr] Page des inscrits                                        #
 # [en] Members' management                                      #

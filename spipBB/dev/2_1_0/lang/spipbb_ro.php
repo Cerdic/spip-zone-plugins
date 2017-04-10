@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'Apăsaţi pe Da pentru a activa SpipBB',
 	'admin_config_tables' => 'Configurarea tabelelor lui SpipBB',
 	'admin_config_tables_erreur' => 'Problemă cu tabelele lui SpipBB : @tables_erreur@ sunt incorecte (tabelele @tables_ok@ par a fi corecte).
- Consultaţi [documentaţia de la Spip-Contrib->http://contrib.spip.net/SpipBB-le-forum] sau [suportul pentru spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]', # MODIF
+ Consultaţi [documentaţia de la Spip-Contrib->https://contrib.spip.net/SpipBB-le-forum] sau [suportul pentru spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]', # MODIF
 	'admin_config_tables_ok' => 'Tabelele lui SpipBB sunt corect instalate (@tables_ok@)',
 	'admin_date_ouverture' => 'Data deschiderii',
 	'admin_debug_log' => 'Fişier de log @log_name@',
@@ -78,11 +78,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_interface' => 'Opţiuni de interfaţă',
 	'admin_nombre_lignes_messages' => 'Numărul de linii de mesaj',
 	'admin_plugin_requis_erreur' => 'Plug-in necesar care lipseşte. Activaţi-l !',
-	'admin_plugin_requis_erreur_balisesession' => 'Instalaţi plug-in-ul Balise SESSION şi activaţi-l ! [Documentaie aici->http://contrib.spip.net/?article1224], [Arhivă ZIP aici->http://files.spip.org/spip-zone/balise_session.zip].',
-	'admin_plugin_requis_erreur_cfg' => 'Instalaţi plug-in-ul CFG şi activaţi-l ! [Documentaţie aici->http://contrib.spip.net/?article1605], [Arhivă ZIP aici->http://files.spip.org/spip-zone/cfg.zip].',
+	'admin_plugin_requis_erreur_balisesession' => 'Instalaţi plug-in-ul Balise SESSION şi activaţi-l ! [Documentaie aici->https://contrib.spip.net/?article1224], [Arhivă ZIP aici->http://files.spip.org/spip-zone/balise_session.zip].',
+	'admin_plugin_requis_erreur_cfg' => 'Instalaţi plug-in-ul CFG şi activaţi-l ! [Documentaţie aici->https://contrib.spip.net/?article1605], [Arhivă ZIP aici->http://files.spip.org/spip-zone/cfg.zip].',
 	'admin_plugin_requis_erreur_s' => 'Plug-in-uri necesare lipsesc. Activaţi-le !',
 	'admin_plugin_requis_ok' => 'Plug-in(-uri) instalat(e) şi activ(e)',
-	'admin_plugin_requis_ok_cfg' => '[Plug-in CFG->http://contrib.spip.net/?article1605] : furnizează funcţii şi balize.',
+	'admin_plugin_requis_ok_cfg' => '[Plug-in CFG->https://contrib.spip.net/?article1605] : furnizează funcţii şi balize.',
 	'admin_sous_titre' => 'Accesaţi panoul de administrare forum-uri cu SpipBB',
 	'admin_spip_config_forums' => 'Configuraţie SPIP :',
 	'admin_spip_forums_ok' => 'Forum-urile publice sunt activate cu bine.',

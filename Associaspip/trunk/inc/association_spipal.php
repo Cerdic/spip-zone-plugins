@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
  * Fonction prenant en charge la validation d'une notification de paiement Paypal
  *
  * @note
- *   Voir les specifications dans http://www.spip-contrib.net/Plugin-SPIPAL
+ *   Voir les specifications dans https://contrib.spip.net/Plugin-SPIPAL
  *   Actuellement on considère que tout paiement est un don.
  */
 function inc_association_spipal($env) {

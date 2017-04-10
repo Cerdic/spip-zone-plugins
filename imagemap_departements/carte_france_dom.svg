@@ -37,7 +37,7 @@
         </dc:rights>
         <dc:source>http://www.lion1906.com</dc:source>
         <dc:description>Adapation pour le plugin &quot;Image map des départements&quot;
-http://www.spip-contrib.net/Plugin-image-map-des-departements</dc:description>
+https://contrib.spip.net/Plugin-image-map-des-departements</dc:description>
         <cc:license
            rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
       </cc:Work>

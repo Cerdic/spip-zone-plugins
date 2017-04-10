@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                        #
 #  File    : inc/spipbb_init                               #
 #  Authors : Scoty, 2007 et als                            #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs #
 #  Contact : chryjs!@!free!.!fr                            #
 #                                                          #
 # diverses fonction communes : sur exec_ et/ou action_     #

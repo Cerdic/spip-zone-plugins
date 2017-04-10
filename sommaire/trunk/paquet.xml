@@ -11,10 +11,10 @@
 	<nom>Sommaire automatique</nom>
 
 	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs -->
-	<auteur lien="http://contrib.spip.net/auteur5384">Cédric</auteur>
-	<credit lien="http://contrib.spip.net/auteur6809">James</credit>
-	<credit lien="http://contrib.spip.net/auteur5714">Patrice Vanneufville</credit>
-	<credit lien="http://contrib.spip.net/auteur83">NoPlay</credit>
+	<auteur lien="https://contrib.spip.net/auteur5384">Cédric</auteur>
+	<credit lien="https://contrib.spip.net/auteur6809">James</credit>
+	<credit lien="https://contrib.spip.net/auteur5714">Patrice Vanneufville</credit>
+	<credit lien="https://contrib.spip.net/auteur83">NoPlay</credit>
 
 	<licence>GNU/GPL</licence>
 

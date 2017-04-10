@@ -9,7 +9,7 @@
 		</multi>
 	</description>
 	<auteur><!-- Auteur du plugin -->
-		- [Jean-S&eacute;bastien Barboteu->http://contrib.spip.net/jsb]
+		- [Jean-S&eacute;bastien Barboteu->https://contrib.spip.net/jsb]
 	</auteur>
 	<lien>https://contrib.spip.net/ebiblio</lien> <!-- URI de documentation -->
 	<fonctions>ebiblio_fonctions.php</fonctions>

@@ -5,8 +5,8 @@
 	<version_base>1.0</version_base>
 	<etat>stable</etat>
 	<icon>images/metas-24.png</icon>
-	<auteur>[Quentin de Serres-Justiniac->http://contrib.spip.net/?auteur10451]
-, (d'apr&egrave;s une id&#233;e originale d'[Olivier Gendrin->http://contrib.spip.net/?auteur1343])</auteur>
+	<auteur>[Quentin de Serres-Justiniac->https://contrib.spip.net/?auteur10451]
+, (d'apr&egrave;s une id&#233;e originale d'[Olivier Gendrin->https://contrib.spip.net/?auteur1343])</auteur>
 	<description><multi>
 	[fr]Gestion des m&#233;tas <code>title</code>, <code>description</code> et <code>keywords</code> des articles et rubriques de SPIP, et mise en exergue de mots importants.
     [en]This plugin makes possible to create and edit the META data for articles and rubriques of SPIP site.

@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                                      #
 #  File    : balise/tableau_smileys - balise #TABLEAU_SMILEYS            #
 #  Authors : Scoty, 2007 +                                               #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs               #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs               #
 #  Contact : chryjs!@!free!.!fr                                          #
 #  ex gaf_balises Scoty                                                  #
 #------------------------------------------------------------------------#

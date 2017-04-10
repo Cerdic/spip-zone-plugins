@@ -3,7 +3,7 @@
 /*
  * Plugin CFG pour SPIP
  * (c) toggg, marcimat, dF 2008, distribue sous licence GNU/GPL
- * Documentation et contact: http://www.spip-contrib.net/
+ * Documentation et contact: https://contrib.spip.net/
  * 
  * Patch de compatibilité avec classe cfg_couleur, OBSOLETE (utilisez la classe palette) 
  */

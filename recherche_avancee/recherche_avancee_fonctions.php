@@ -12,7 +12,7 @@
  *    Filtres :    google_like
  *   +----------------------------------+
  *    Créé le 28 septembre 2004 : Nicolas Steinmetz,  pdepaepe
- *	  http://www.spip-contrib.net/Google-Like
+ *	  https://contrib.spip.net/Google-Like
  *   +-------------------------------------+
  *   Mis a jour le 04 octobre 2010 : Jean-Philippe Guihard
  *

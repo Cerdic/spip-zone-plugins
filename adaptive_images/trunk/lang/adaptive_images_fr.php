@@ -16,7 +16,7 @@ L\'image doit faire au moins @width_hr@px de large.</small>',
 	'bouton_recadrer' => 'Recadrer',
 
 	'titre_configurer' => 'Configurer les Images Adaptatives',
-	'explication_configuration_doc' => 'Voir la <a href="http://contrib.spip.net/4458">documentation</a> pour le détail de la configuration.',
+	'explication_configuration_doc' => 'Voir la <a href="https://contrib.spip.net/4458">documentation</a> pour le détail de la configuration.',
 	'label_lowsrc_jpg_bg_color' => 'Couleur de fond pour le JPG <i>lowsrc</i>',
 	'label_max_width_1x' => 'Largeur max. des images adaptées (px)',
 	'label_max_width_mobile_version' => 'Largeur max. de la version mobile (px)',

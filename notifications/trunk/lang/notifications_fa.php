@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'inscription_statut_webmestres' => 'وب‌مسترها',
 
 	// L
-	'lien_documentation' => '<a href="http://contrib.spip.net/Notifications" class="spip_out">به اسناد بنگريد</a>',
+	'lien_documentation' => '<a href="https://contrib.spip.net/Notifications" class="spip_out">به اسناد بنگريد</a>',
 
 	// M
 	'message_voir_configuration' => 'به پيكربندي اطلاعيه‌ها بنگريد',

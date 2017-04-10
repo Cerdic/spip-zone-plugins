@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admins' => 'Lu aministratour',
 	'admins_redacs' => 'Aministratour e Redactour',
 	'admins_rubriques' => 'lu aministratour assouciat a dei rùbrica an :',
-	'attention_crayons' => '<small><strong>Mèfi.</strong> Lu reglage aquì souta pouòdon founciounà que s’utilisès un plugin que proupause una interfaça d’edicioun (couma <a href="http://contrib.spip.net/Les-Crayons">lu Creioun</a> per isemple).</small>',
+	'attention_crayons' => '<small><strong>Mèfi.</strong> Lu reglage aquì souta pouòdon founciounà que s’utilisès un plugin que proupause una interfaça d’edicioun (couma <a href="https://contrib.spip.net/Les-Crayons">lu Creioun</a> per isemple).</small>',
 	'attention_version' => 'Mèfi, si pòu que la vouòstra versioun de SPIP noun founcioune emb’ai chausida seguenti :',
 	'auteur_message_advitam' => 'L’autour dóu message, ad vitam',
 	'auteur_message_heure' => 'L’autour dóu message, d’una oura',
@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p>A partì de SPIP 2.1, es finda poussible de douna lu drech de webmèstre a un aministratour vìa la pàgina d’édicioun de l’autour.</p>
 <p>A noutà : lu webmèstre definit d’aquela manièra noun an da besoun de prouchedre a l’autentificacioun per FTP dai ouperacioun delicadi (messa a jou de la basa de dounada, per isemple).</p>
 
-<a href=\'http://contrib.spip.net/Autorite\' class=\'spip_out\'>Cf. doucumentacioun</a>
+<a href=\'https://contrib.spip.net/Autorite\' class=\'spip_out\'>Cf. doucumentacioun</a>
 ',
 	'details_option_auteur' => '<small><br />Per lou moumen, l’oupcioun « autour » founciouna que per lu autour registrat (fòrou soubre abounamen, per isemple). E, se es ativada, lu aministratour dóu sit an finda la capacità d’édità lu fòrou.
 	</small>',
@@ -113,7 +113,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redacteur_modifie_article' => '<strong>Redatour moudifica proupausat</strong> : cada redatour pòu moudificà un article proupausat a la publicacioun, meme se noun n’en sigue l’autour.',
 	'refus_1' => '<p>Basta lu webmestre dóu sit',
 	'refus_2' => 'soun autourisat da moudificà aquelu parametre.</p>
-<p>Per n’en saupre de mai, veire <a href="http://contrib.spip.net/Autorite">la doucumentacioun</a>.</p>',
+<p>Per n’en saupre de mai, veire <a href="https://contrib.spip.net/Autorite">la doucumentacioun</a>.</p>',
 	'reglage_autorisations' => 'Reglage dei autourisacioun',
 
 	// S

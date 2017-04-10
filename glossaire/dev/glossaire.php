@@ -16,7 +16,7 @@
  *  
  * Pour toute suggestion, remarque, proposition d'ajout
  * reportez-vous au forum de l'article :
- * http://www.spip-contrib.net/article241.html
+ * https://contrib.spip.net/article241.html
 */
 
 # Remplace seulement la première occurence. Mêmes arguments que str_replace

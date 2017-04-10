@@ -3,7 +3,7 @@
 	<slogan>G&#233;n&#233;ration automatique de Mentions L&#233;gales</slogan>
 	<version>1.61.0</version>
 	<etat>stable</etat>
-	<auteur>[Piero Wbmstr->http://contrib.spip.net/PieroWbmstr]</auteur>
+	<auteur>[Piero Wbmstr->https://contrib.spip.net/PieroWbmstr]</auteur>
 	<licence>GPLv3</licence>
 	<description>
 Ce plugin vous propose la g&#233;n&#233;ration automatique de {{Mentions L&#233;gales}}, {{Conditions d'Utilisation}} et informations de {{Copyright}} propres &#224; votre site SPIP.

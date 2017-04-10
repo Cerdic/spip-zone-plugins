@@ -6,7 +6,7 @@ Interface Privée - Administration générale :
 -* 0.5 Activation des mots clés. Il y a plein de choses à dire et à faire dans ce domaine prévus pour la 0.4 . En attendant, même si les mots clés nécessaires n'ont pas été créés lors de l'installation on peut le faire faire automatiquement à spipBB en effet le formulaire (Configuration) permet de saisir le nom du groupe (spipbb par défaut) de mots clés. Si vous validez (bouton juste en dessous), il créé le groupe de mots clés tout seul :-)
 
 Interface Privée - Membres:
--* 0.5 Meilleure gestion des champs extras cf http://www.spip-contrib.net/Plugin-SpipBB#forum400496
+-* 0.5 Meilleure gestion des champs extras cf https://contrib.spip.net/Plugin-SpipBB#forum400496
 -* 0.5 Passage de l'ensemble de la configuration sur le modèle SPIP (en utilisant Ajax)
 
 Interface Privée - Import PhpBB :
@@ -34,17 +34,17 @@ Bugs et autres elements non finis :
 -* 0.5 Gestion + règles d'affichage public (à vérifier) des annonces / postits / Fermes a tester /controler
 
 Voir l'intéret de :
--* http://www.spip-contrib.net/Les-fenetres-flottantes
--* http://www.spip-contrib.net/Notation-d-articles-SPIP
--* http://www.spip-contrib.net/reCAPTCHA
--* http://www.spip-contrib.net/Plugin-Champs-homonymes
--* http://www.spip-contrib.net/Plugin-Captcha2
--* http://www.spip-contrib.net/Exemple-d-utilisation-de-la-boucle
--* http://www.spip-contrib.net/Plugin-Suivi-des-forums
--* http://www.spip-contrib.net/Squelettes-par-profil
--* http://www.spip-contrib.net/Personnalisation-par-profils-avec
--* http://www.spip-contrib.net/Les-crayons
--* http://www.spip-contrib.net/Une-arborescence-a-la-phorum-en
+-* https://contrib.spip.net/Les-fenetres-flottantes
+-* https://contrib.spip.net/Notation-d-articles-SPIP
+-* https://contrib.spip.net/reCAPTCHA
+-* https://contrib.spip.net/Plugin-Champs-homonymes
+-* https://contrib.spip.net/Plugin-Captcha2
+-* https://contrib.spip.net/Exemple-d-utilisation-de-la-boucle
+-* https://contrib.spip.net/Plugin-Suivi-des-forums
+-* https://contrib.spip.net/Squelettes-par-profil
+-* https://contrib.spip.net/Personnalisation-par-profils-avec
+-* https://contrib.spip.net/Les-crayons
+-* https://contrib.spip.net/Une-arborescence-a-la-phorum-en
 
 Documentation
 ==============

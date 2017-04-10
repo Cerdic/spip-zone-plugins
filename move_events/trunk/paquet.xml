@@ -13,7 +13,7 @@
 
 	<nom>Migration d&#039;événements</nom>
 
-	<auteur lien='http://contrib.spip.net/Amaury-Adon'>amaury</auteur>
+	<auteur lien='https://contrib.spip.net/Amaury-Adon'>amaury</auteur>
 
 	<licence>GNU/GPL</licence>
 	<necessite nom="agenda"  compatibilite="[1.24.0;]" /> 

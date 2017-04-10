@@ -8,7 +8,7 @@
  * @subpackage cfg
  * @category   outils
  * @copyright  (c) toggg 2007
- * @link       http://www.spip-contrib.net/
+ * @link       https://contrib.spip.net/
  * @version    $Id$
  */
 

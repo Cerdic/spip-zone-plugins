@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                             #
 #  File    : inc/spipbb_rubriquage                              #
 #  Authors : scoty 2007                                         #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs      #
 #  Contact : scoty!@!koakidi!.!com                              #
 # [fr]   generer arbo rubriques comme spip                      #
 # [en]                                                          #

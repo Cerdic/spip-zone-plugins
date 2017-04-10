@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                             #
 #  File    : exec/spipbb_admin_fromphorim - first step form     #
 #  Authors : Chryjs, 2008                                       #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs      #
 #  Contact : chryjs!@!free!.!fr                                 #
 # [fr] Menu d'accueil pour la migration d'un forum Phorum       #
 # [en] Home page base of Phorum forum migration                 #

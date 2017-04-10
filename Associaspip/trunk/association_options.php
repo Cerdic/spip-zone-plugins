@@ -2603,7 +2603,7 @@ function association_trouver_iextras($ObjetEtendu, $id=0) {
 		$ChampsExtrasGeres = @unserialize(str_replace('O:10:"ChampExtra"', 'a', $GLOBALS['meta']['iextras'])); // "iextras (interface)" stocke la liste des champs geres dans un meta. Ce meta est un tableau d'objets "ChampExtra" (un par champ extra) manipules par "cextras (core)". On converti chaque objet en tableau
 		if ( !is_array($ChampsExtrasGeres) )
 			return array(); // fin : ChampsExtras2 non installe ou pas d'objet etendu.
-		$TT = function_exists('_T_ou_typo') ? '_T_ou_typo' : '_T' ; // Noter que les <multi>...</multi> et <:xx:> sont aussi traites par propre() et typo() :  http://contrib.spip.net/PointsEntreeIncTexte
+		$TT = function_exists('_T_ou_typo') ? '_T_ou_typo' : '_T' ; // Noter que les <multi>...</multi> et <:xx:> sont aussi traites par propre() et typo() :  https://contrib.spip.net/PointsEntreeIncTexte
 		foreach ($ChampsExtrasGeres as $ChampExtra) { // Chaque champ extra defini est un tableau avec les cle=>type suivants (les cles commencant par "_" initialisent des methodes de meme nom sans le prefixe) : "table"=>string, "champ"=>string, "label"=>string, "precisions"=>string, "obligatoire"=>string, "verifier"=>bool, "verifier_options"=>array, "rechercher"=>string, "enum"=>string, "type"=>string, "sql"=>string, "traitements"=>string, "_id"=>string, "_type"=>string, "_objet"=>string, "_table_sql"=>string, "saisie_externe"=>bool, "saisie_parametres"]=>array("explication"=>string, "attention"=>string, "class"=> string, "li_class"]=>string,)
 			if ($ChampExtra['table']==$ObjetEtendu) {// c'est un champ extra de la 'table' ou du '_type' d'objet qui nous interesse
 				$label = $TT($ChampExtra['label']);

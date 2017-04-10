@@ -3,7 +3,7 @@
 Nouvelle version / Fork du plug-in Vidéo pour SPIP, compatible avec la nouvelle version de l'API V3 de YouTube.
 
 Documentation du plug-in : 
-<http://contrib.spip.net/Plugin-Video-s>
+<https://contrib.spip.net/Plugin-Video-s>
 
 
 

@@ -8,7 +8,7 @@
 +--------------------------------------------+
 | functions volume disque et BDD
 | d'apres originales : Bernard Martin-Rabaud
-| http://www.spip-contrib.net/Tableau-de-bord-SPIP
+| https://contrib.spip.net/Tableau-de-bord-SPIP
 +--------------------------------------------+
 */
 

@@ -17,7 +17,7 @@
  * plugins\pgn4spip\formulaires\configurer_pgn4spip.php Implement "Reinit" and "Save" buttons
  * plugins\pgn4spip\prive\squelettes\contenu\configurer_pgn4spip.html cfg-16.png icon in "Manage plugins"
  * http://www.spip.net/fr_article5414.html
- * http://contrib.spip.net/CFG-comment-s-en-passer
+ * https://contrib.spip.net/CFG-comment-s-en-passer
  * Does not need the CFG 3 plugin for SPIP 3. Does not use pgn4spip_options.php
  *
  * SPIP 2:

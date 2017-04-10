@@ -7,7 +7,7 @@
  * @author       Yves Tannier [grafactory.net]
  * @copyright    2010-2015 Yves Tannier
  *
- * @link         http://contrib.spip.net/3719
+ * @link         https://contrib.spip.net/3719
  * @link         http://zone.spip.org/trac/spip-zone/browser/_plugins_/spipdf
  * @link         http://www.grafactory.net/
  *

@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                                      #
 #  File    : total_auteurs_en_ligne - balise #TOTAL_AUTEURS_EN_LIGNE     #
 #  Authors : Chryjs, 2007 +                                              #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs               #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs               #
 #  Contact : chryjs!@!free!.!fr                                          #
 #------------------------------------------------------------------------#
 

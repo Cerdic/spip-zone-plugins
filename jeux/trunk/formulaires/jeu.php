@@ -7,7 +7,7 @@
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
 #  Licence : GNU/GPL (c) 2012                       #
 #--------------------------------------------------------------------------#
-#  Documentation : http://www.spip-contrib.net/Des-jeux-dans-vos-articles  #
+#  Documentation : https://contrib.spip.net/Des-jeux-dans-vos-articles  #
 #--------------------------------------------------------------------------#
 
 if (!defined('_ECRIRE_INC_VERSION')) return;

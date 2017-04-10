@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Pub Banner</nom>
 	<slogan>Gestionnaire de banni&#232;res publicitaires</slogan>
-	<auteur>[Piero Wbmstr->http://contrib.spip.net/PieroWbmstr]</auteur>
+	<auteur>[Piero Wbmstr->https://contrib.spip.net/PieroWbmstr]</auteur>
 	<licence>Creative Commons BY-SA</licence>
 	<description>
 Gestion et statistiques de banni&#232;res publicitaires pour int&#233;gr&#233;es aux squelettes SPIP ...

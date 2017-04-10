@@ -12,7 +12,7 @@ function chmlatex_propre_latex($t)
 	//$t = latex_traiter_modeles($t);
 	$t = traiter_modeles($t);
 
-	// Application du filtre Belles Puces http://contrib.spip.net/Belles-puces
+	// Application du filtre Belles Puces https://contrib.spip.net/Belles-puces
 	$t = preg_replace('/^-\s+/m','-* ',$t);
 
 	$t = appliquer_regles_wheel($t,array('latex/latex.yaml'));

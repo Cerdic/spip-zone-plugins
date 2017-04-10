@@ -1,7 +1,7 @@
 <plugin>
 	<nom>ZotSpip</nom>
 	<slogan>La puissance de Zotero dans votre Spip</slogan>
-	<auteur>[Joseph Larmarange->http://contrib.spip.net/Joseph]</auteur>
+	<auteur>[Joseph Larmarange->https://contrib.spip.net/Joseph]</auteur>
 	<licence>GPL v3</licence>
 	<version>1.4.1</version>
 	<version_base>0.2</version_base>

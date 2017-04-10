@@ -3,7 +3,7 @@
 #  Plugin  : TOP site - Licence : GPL                                    #
 #  File    : topsite_fonctions - #CLIC_COMPTEUR                          #
 #  Authors : JN, 2008 +                                                  #
-#  based on: http://www.spip-contrib.net/Compter-les-clics-sur-les-liens #
+#  based on: https://contrib.spip.net/Compter-les-clics-sur-les-liens #
 #  Contact : JN.jamesnicolas@gmail.com                                   #
 #------------------------------------------------------------------------#
 

@@ -14,7 +14,7 @@ include_spip('contact_fonctions');
  * @param $id_auteur string|array
  * 		Le ou les id_auteur transmis au formulaire (Voir la configuration du plugin)
  * @param $tracer string
- * 		cf : http://contrib.spip.net/Le-formulaire-de-contact-evolue#tracabilite
+ * 		cf : https://contrib.spip.net/Le-formulaire-de-contact-evolue#tracabilite
  * @param $options array
  * 		Un tableau d'options permettant de surcharger certaines options de configuration?
  * 		Pour l'instant ne concerne que le type de choix de destinataires dont la valeur peut être :
@@ -135,7 +135,7 @@ function formulaires_contact_charger_dist($id_auteur = '', $tracer = '', $option
  * @param $id_auteur string|array
  * 		Le ou les id_auteur transmis au formulaire (Voir la configuration du plugin)
  * @param $tracer string
- * 		cf : http://contrib.spip.net/Le-formulaire-de-contact-evolue#tracabilite
+ * 		cf : https://contrib.spip.net/Le-formulaire-de-contact-evolue#tracabilite
  * @param $options array
  * 		Un tableau d'options permettant de surcharger certaines options de configuration?
  * 		Pour l'instant ne concerne que le type de choix de destinataires dont la valeur peut être :

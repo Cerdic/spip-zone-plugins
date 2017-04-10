@@ -13,7 +13,7 @@
  *  Emoticons : CC0 Public Domain 															*
  *  http://creativecommons.org/publicdomain/zero/1.0/deed.fr                                *
  *	Documentation : Spip-Contrib															*
- *	http://contrib.spip.net/SpipCatChat-2													*
+ *	https://contrib.spip.net/SpipCatChat-2													*
  *																							*
  ********************************************************************************************
  ____________________________________________________________________________________________

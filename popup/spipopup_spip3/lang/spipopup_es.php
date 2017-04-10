@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'btn_imprimer_ttl' => 'Imprimir esta página',
 
 	// D
-	'descr_cfg' => 'Documentación para más información del Plugin: [spip-contrib.net/ ?article3573->http://contrib.spip.net/?article3573]',
+	'descr_cfg' => 'Documentación para más información del Plugin: [contrib.spip.net/ ?article3573->https://contrib.spip.net/?article3573]',
 
 	// E
 	'editor' => 'Enlace editorial popup', # RELIRE

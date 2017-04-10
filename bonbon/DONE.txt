@@ -51,5 +51,5 @@ Ce qui a été fait avec «Bonbon !»
 
 1.0 Première sortie de Bonbon
 -----------------------------
-Ça marche et c'est publié là: http://www.spip-contrib.net/spip.php?id_article=2301
+Ça marche et c'est publié là: https://contrib.spip.net/spip.php?id_article=2301
  

@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                             #
 #  File    : exec/spipbb_admin - general admin page             #
 #  Authors : scoty 2007                                         #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs      #
 #  Contact : scoty!@!koakidi!.!com                              #
 # [fr]  page de gestion des salons                              #
 # [en]                                                          #

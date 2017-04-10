@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                        #
 #  File    : base/spipbb - tables necessaires au plugin    #
 #  Authors : Chryjs, 2007 et als                           #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs #
 #  Contact : chryjs!@!free!.!fr                            #
 #----------------------------------------------------------#
 

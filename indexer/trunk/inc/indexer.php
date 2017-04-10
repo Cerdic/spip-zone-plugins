@@ -369,7 +369,7 @@ function indexer_dumpsql($index = null, $format = 'sphinx', $dest = null, $bloc 
 
 	$comm = '# SPIP indexer / SphinxQL Dump
 # version '. $version .'
-# http://contrib.spip.net/Indexer
+# https://contrib.spip.net/Indexer
 #
 # Host: '.SPHINX_SERVER_HOST.':'.SPHINX_SERVER_PORT.'
 # Generation Time: '.date(DATE_ISO8601).'

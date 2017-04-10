@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'Op Jawoord klikken om SpipBB te activeren',
 	'admin_config_tables' => 'Configuratie van de tafels van SpipBB',
 	'admin_config_tables_erreur' => 'Het probleem met de tabels van SpipBB: @tables_erreur@ zijn incorrect (de tabels @tables_ok@ lijken juist). 
-Raadpleegt [documentatie over Spip-Contrib->http://contrib.spip.net/SpipBB-le-forum] of het [steun op spipbb.spip-zone -> http://spipbb.free.fr/spip.php?article11]',
+Raadpleegt [documentatie over Spip-Contrib->https://contrib.spip.net/SpipBB-le-forum] of het [steun op spipbb.spip-zone -> http://spipbb.free.fr/spip.php?article11]',
 	'admin_config_tables_ok' => 'De tafels van SpipBB worden juist geplaatst (@tables_ok@)',
 	'admin_date_ouverture' => 'Openingsdatum',
 	'admin_debug_log' => 'Bestand van log @log_name@',
@@ -79,12 +79,12 @@ Raadpleegt [documentatie over Spip-Contrib->http://contrib.spip.net/SpipBB-le-fo
 	'admin_interface' => 'Opties van de interface',
 	'admin_nombre_lignes_messages' => 'Aantal lijnen van berichten',
 	'admin_plugin_requis_erreur' => 'Vereiste plugin volgend gebrek. Activeert !',
-	'admin_plugin_requis_erreur_balisesession' => 'Plaatst plugin Baken ZITTING en activeert! [Documentatie ici-> http://contrib.spip.net/?article1224], [Archief ZIP daar -> http://files.spip.org/spip-zone/balise_session.zip].',
-	'admin_plugin_requis_erreur_cfg' => 'Plaatst plugin CFG en activeert! [Documentatie ici-> http://contrib.spip.net/?article1605], [Archief ZIP daar - > http://files.spip.org/spip-zone/cfg.zip].',
+	'admin_plugin_requis_erreur_balisesession' => 'Plaatst plugin Baken ZITTING en activeert! [Documentatie ici-> https://contrib.spip.net/?article1224], [Archief ZIP daar -> http://files.spip.org/spip-zone/balise_session.zip].',
+	'admin_plugin_requis_erreur_cfg' => 'Plaatst plugin CFG en activeert! [Documentatie ici-> https://contrib.spip.net/?article1605], [Archief ZIP daar - > http://files.spip.org/spip-zone/cfg.zip].',
 	'admin_plugin_requis_erreur_s' => 'Volgende vereiste plugins hebben aan gebrek. Activeert ze !',
 	'admin_plugin_requis_ok' => 'Geplaatste(s) en actieve(n) Plugin(s) :',
-	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION-> http://contrib.spip.net/?article1224]: geleverd de informatie over de echt verklaard bezoekers.',
-	'admin_plugin_requis_ok_cfg' => '[Plugin CFG-> http://contrib.spip.net/?article1605]: geleverd van de functies en de bakens.',
+	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION-> https://contrib.spip.net/?article1224]: geleverd de informatie over de echt verklaard bezoekers.',
+	'admin_plugin_requis_ok_cfg' => '[Plugin CFG-> https://contrib.spip.net/?article1605]: geleverd van de functies en de bakens.',
 	'admin_sous_titre' => 'Het paneel van bestuur van de forums met SpipBB bereiken',
 	'admin_spip_config_forums' => 'Configuratie van SPIP :',
 	'admin_spip_forums_ok' => 'De openbare forums worden goed geactiveerd.',
@@ -353,7 +353,7 @@ _ Een positie bevindt zich onder de mededelingen voor de gewone berichten. Het l
 	'pagine_sujet_' => ' onderwerp',
 	'pagine_sujet_s' => 'onderwerpen',
 	'par_' => 'door',
-	'plugin_auteur' => 'SpipBB Team: [zie de lijst van contributoren op Spip-contrib->http://contrib.spip.net/Plugin-Forum-SpipBB#contributeurs]',
+	'plugin_auteur' => 'SpipBB Team: [zie de lijst van contributoren op Spip-contrib->https://contrib.spip.net/Plugin-Forum-SpipBB#contributeurs]',
 	'plugin_description' => 'Plugin SpipBB laat toe:
 -* Om op gecentraliseerde wijze de forums van SPIP (particuliere interface),
  te beheren
@@ -361,13 +361,13 @@ _ Een positie bevindt zich onder de mededelingen voor de gewone berichten. Het l
 
 {{Raadplegen:}} 
 -* •[de hulp en steun op spipbb.spip-zone.info - > http://spipbb.free.fr/spip.php?article11], 
- -* •[De documentatie over Spip-contrib-> http://contrib.spip.net/SpipBB-le-forum]. 
+ -* •[De documentatie over Spip-contrib-> https://contrib.spip.net/SpipBB-le-forum]. 
 
 _ {{Plugin spipbb in ontwikkeling. U gebruikt het met uw risico’s en gevaren}} 
 
 _ [Toegang tot het administratie paneel ->.?exec=spipbb_configuration]',
 	'plugin_licence' => 'Verdeeld onder GPL vergunning',
-	'plugin_lien' => '[De documentatie van plugin raadplegen op Spip-contrib->http://contrib.spip.net/SpipBB-le-forum]',
+	'plugin_lien' => '[De documentatie van plugin raadplegen op Spip-contrib->https://contrib.spip.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => 'Deze plugin versie is niet verenigbaar met uw SPIP versie !',
 	'plugin_nom' => 'SpipBB: Beleid van de SPIP forums ',
 	'post_aucun_pt' => 'geen enkel !',
@@ -434,14 +434,14 @@ nbr_post@ bericht(en). Uitgewist met hem !n',
 	'secteur_forum' => 'HOOFD SECTORE',
 	'selection_efface' => 'De selectie uitwissen ...',
 	'selection_tri_dpt' => 'Sorteren methode selecteren :',
-	'sign_admin' => '{{Deze bladzijde is alleen toegankelijk voor de verantwoordelijken voor de site.}}<p>Zij geeft toegang tot de plugin configuratie «{{<a href="http://contrib.spip.net/Plugin-Forum-SpipBB#contributeurs" class="copyright">SpipBB</a>}}» alsmede aan het beleid van de site forums.</p><p>Version : @version@ @distant@</p><p>Raadpleegt :
-_ • [De documentatie om Spip-Contrib->http://contrib.spip.net/?article2460]
+	'sign_admin' => '{{Deze bladzijde is alleen toegankelijk voor de verantwoordelijken voor de site.}}<p>Zij geeft toegang tot de plugin configuratie «{{<a href="https://contrib.spip.net/Plugin-Forum-SpipBB#contributeurs" class="copyright">SpipBB</a>}}» alsmede aan het beleid van de site forums.</p><p>Version : @version@ @distant@</p><p>Raadpleegt :
+_ • [De documentatie om Spip-Contrib->https://contrib.spip.net/?article2460]
 _ • [De hulp en zurige steun spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Beschikbare recentere versie : @version@',
 	'sign_ok' => 'aan dag.',
 	'sign_reinit' => '<p>Weder-inwijding :
 _ • [van hele plugin->@plugin@]</p>',
-	'sign_tempo' => 'Verwezenlijkt met <a href="http://contrib.spip.net/Plugin-Forum-SpipBB#contributeurs" class="copyright">SpipBB</a>',
+	'sign_tempo' => 'Verwezenlijkt met <a href="https://contrib.spip.net/Plugin-Forum-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'signature' => 'Handtekening',
 	'sinscrire' => 'Zich inschrijven',
 	'site_propose' => 'Site voorgesteld door @auteur_post@',

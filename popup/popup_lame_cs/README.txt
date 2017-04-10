@@ -13,6 +13,6 @@ A vous ensuite de la configurer et de l'utiliser !
 
 ------------------------------------------
 
-Plugin Couteau Suisse : http://www.spip-contrib.net/Le-Couteau-Suisse
+Plugin Couteau Suisse : https://contrib.spip.net/Le-Couteau-Suisse
 
-Plugin Popup : http://www.spip-contrib.net/?article3573
+Plugin Popup : https://contrib.spip.net/?article3573

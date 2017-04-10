@@ -13,7 +13,7 @@
 	</slogan>
 	<version>2.2.1</version>
 	<prefix>babbi</prefix>
-	<auteur>[babbibel->http://www.spip-contrib.net/babbibel]</auteur>
+	<auteur>[babbibel->https://contrib.spip.net/babbibel]</auteur>
 	<licence>(c) 2009 GNU/GPL</licence>
 	<icon>img/logo_menu.png</icon>
 	<etat>stable</etat>

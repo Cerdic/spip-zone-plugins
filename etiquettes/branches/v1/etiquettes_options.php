@@ -4,7 +4,7 @@
 #  Auteur  : RastaPopoulos                          #
 #  Licence : GPL                                    #
 #--------------------------------------------------------------- -#
-#  Documentation : http://www.spip-contrib.net/Plugin-Etiquettes  #
+#  Documentation : https://contrib.spip.net/Plugin-Etiquettes  #
 #-----------------------------------------------------------------#
 
 function etiquettes_produire_id($groupe, $type_objet='', $id_objet=''){

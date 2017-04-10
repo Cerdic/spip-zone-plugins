@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // D
-    'description_page' => "Voici les 3 derniers tickets en provenance du site @site@. Pour toute question voir http://contrib.spip.net/Plugin tickets",
+    'description_page' => "Voici les 3 derniers tickets en provenance du site @site@. Pour toute question voir https://contrib.spip.net/Plugin tickets",
     // R
     'resumes' => "Résumés",
 	// S

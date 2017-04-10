@@ -80,12 +80,12 @@ Cet article teste la conversion d'URL par l'expression rationelle (regex en angl
 normalement elle ne rentre pas en conflit avec les tags HTML ni les raccourcis habituels de SPIP
 
 {{exemple:}} un lien html <a href="http://www.google">google</a> et lien  email en fin de ligne: <a href="mailto:bill@msn.org">bill</a>
-et enfin un lien spip [regex->http://en.wikipedia.org/wiki/Regular_expression] et toujours en fin de ligne [spip-contrib->http://www.spip-contrib.org]
+et enfin un lien spip [regex->http://en.wikipedia.org/wiki/Regular_expression] et toujours en fin de ligne [contrib.spip->http://www.contrib.spip.org]
 
 puis une liste ordonnée avec la syntaxe spip:
 - http://www.spip.net
 - http://www.spip-herbier.net
-- http://www.spip-contrib.org
+- http://www.contrib.spip.org
 
 dernier test vers nos amis de spip-party: http://www.spip-party.net 
 _ ouf ! 

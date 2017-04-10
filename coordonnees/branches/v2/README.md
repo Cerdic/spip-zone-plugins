@@ -1,6 +1,6 @@
 
 # Coordonnées pour SPIP 3
-Ce fichier documente certains aspects et fonctions du plugin qui ne sont pas encore abordés dans [la documentation officielle](http://contrib.spip.net/Plugin-Coordonnees).
+Ce fichier documente certains aspects et fonctions du plugin qui ne sont pas encore abordés dans [la documentation officielle](https://contrib.spip.net/Plugin-Coordonnees).
 Ces informations sont valables à partir de la version 2.2.2.
 
 
@@ -9,7 +9,7 @@ Ces informations sont valables à partir de la version 2.2.2.
 Les tables de liens des objets gérés par le plugin (`adresse`, `email` et `numero`) possèdent une colonne supplémentaire : `type`.
 Ce champ sert à qualifier le lien entre une coordonnée et un objet éditorial : par exemple, une adresse liée à auteur avec un lien typé `home` signifie qu'il s'agit de son adresse personnelle.
 Il s'agit d'une clé primaire, il est donc possible de lier plusieurs fois une coordonnée au même un objet éditorial en utilisant des types différents.
-**A noter** : ce principe est repris par [le plugin `Rôle` de matthieu Marcillaud](http://contrib.spip.net/Des-roles-sur-des-liens) qui explique en détail la problématique.
+**A noter** : ce principe est repris par [le plugin `Rôle` de matthieu Marcillaud](https://contrib.spip.net/Des-roles-sur-des-liens) qui explique en détail la problématique.
 
 
 ### Liste des types de liaisons

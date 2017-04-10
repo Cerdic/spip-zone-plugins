@@ -11,7 +11,7 @@
 	<nom>Alertes</nom>
 	<licence>GNU</licence>
 
-	<auteur lien="http://contrib.spip.net/Gael-Chareyre">Gael Chareyre</auteur>
+	<auteur lien="https://contrib.spip.net/Gael-Chareyre">Gael Chareyre</auteur>
 
 	<menu nom="configurer_alertes" titre="alertes:title_menu_configuration" parent="menu_configuration" icone="images/alertes-16.png" />
 

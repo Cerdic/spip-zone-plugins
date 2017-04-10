@@ -40,7 +40,7 @@ function exec_ezsql() {
 	$aideEnregistrer=html_entity_decode_utf8("Nom de la requête");
 	
 	//FIXME normalement ca devrait etre dans le script d'installation automatique du plugin. Mais je comprends pas comment ca marche :(
-	//cf http://www.spip-contrib.net/Plugin-xml 
+	//cf https://contrib.spip.net/Plugin-xml 
 	$sql="CREATE TABLE IF NOT EXISTS `ez_sql` (\n"
 		."`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,\n"
 		."`nomRequete` VARCHAR( 64 ) NOT NULL ,\n"

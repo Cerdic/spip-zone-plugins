@@ -25,7 +25,7 @@ Ce plugin s'appuie sur le plugin « Rôles de documents », et ré-implémente l
 Cela permet d'assurer une bonne rétro-compatibilité tout en permettant d'étendre le mécanisme des logos beaucoup plus facilement.
 
 L'idée est de se baser sur les rôles de documents dont le nom commence par `logo` pour définir les types de logos disponibles.
-Les rôles définis par le plugin « Rôles de documents » nous donnent les rôles habituels de spip : `logo` et `logo_survol`, mais on peut aussi ajouter d'autres rôles de logos via la méthode décrite dans [la documentation du plugin Rôles](http://contrib.spip.net/Des-roles-sur-des-liens).
+Les rôles définis par le plugin « Rôles de documents » nous donnent les rôles habituels de spip : `logo` et `logo_survol`, mais on peut aussi ajouter d'autres rôles de logos via la méthode décrite dans [la documentation du plugin Rôles](https://contrib.spip.net/Des-roles-sur-des-liens).
 
 Pour simplifier les choses, on propose d'ajouter les nouveaux types de logos avec le pipeline `roles_logos` :
 

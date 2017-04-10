@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                                 #
 #  File    : exec/spipbb_forum                                      #
 #  Authors : scoty 2007                                             #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs          #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs          #
 #  Contact : Hugues AROUX scoty!@!koakidi!.!com                     #
 # [fr]                                                              #
 #-------------------------------------------------------------------#

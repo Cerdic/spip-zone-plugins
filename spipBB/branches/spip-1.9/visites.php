@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                        #
 #  File    : visites.php - sauve les stats dans un fichier #
 #  Authors : Chryjs, 2007 et als                           #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs #
 #  Contact : chryjs!@!free!.!fr                            #
 # [fr] Ce fichier inclu en pied de page voirsujet permet   #
 # [fr] de stocker provisoirement les visites avant cron    #

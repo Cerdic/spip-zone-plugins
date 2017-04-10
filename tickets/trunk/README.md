@@ -4,7 +4,7 @@ Système de suivi de bugs
 
 Références :
 
- * http://contrib.spip.net/Tickets-suivi-de-bugs
+ * https://contrib.spip.net/Tickets-suivi-de-bugs
  * http://plugins.spip.net/tickets.html
 
 ## TODO

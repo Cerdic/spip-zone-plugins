@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                                 #
 #  File    : exec/spipbb_formpost                                   #
 #  Authors : scoty 2007                                             #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs          #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs          #
 #  Source  : GAFoSPIP v. 0.5 - 21/08/07 - spip 1.9.2                #
 #  Contact : Hugues AROUX scoty!@!koakidi!.!com                     #
 # [fr] popup de rédaction de message                                #

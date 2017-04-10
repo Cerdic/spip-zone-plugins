@@ -9,7 +9,7 @@
 	<description>
 Gestion des salles avec BigBlueButton et son API (http://www.bigbluebutton.org/).
         
-Ce plugin est en developpement, c'est plein de bug, de truc a améliorer, la doc à faire sur spip-contrib.
+Ce plugin est en developpement, c'est plein de bug, de truc a améliorer, la doc à faire sur contrib.spip.
 
 {{{Installation}}}
 

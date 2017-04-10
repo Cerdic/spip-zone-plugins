@@ -13,7 +13,7 @@
 
 	<auteur lien="https://www.mathjax.org/">MathJax</auteur>
 	<auteur lien="http://www.erational.org">erational</auteur>
-	<auteur lien="http://contrib.spip.net/yohannp">Yohann</auteur>
+	<auteur lien="https://contrib.spip.net/yohannp">Yohann</auteur>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 
 	<pipeline nom="insert_head" inclure="mathjax_latex_pipelines.php" />

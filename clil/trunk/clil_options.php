@@ -12,7 +12,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // augmenter la profondeur d’exécution pour le plugin Extras chez hébergeurs ayant activés xdebug
-// voir http://contrib.spip.net/Champs-Extras-3
+// voir https://contrib.spip.net/Champs-Extras-3
 ini_set('xdebug.max_nesting_level', 200);
 
 ?>

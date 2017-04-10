@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_desc' => '<strong>Paleta</strong> automaticky pridá koliesko s výberom farieb k vstupnému poľu,
   ak ho označíte CSS triedou palette',
 	'config_exemple' => 'Príklad:',
-	'config_lien_doc' => '<a href="http://contrib.spip.net/Palette" class="spip_out">Dokumentácia</a>',
+	'config_lien_doc' => '<a href="https://contrib.spip.net/Palette" class="spip_out">Dokumentácia</a>',
 
 	// F
 	'fermer' => 'Zatvoriť paletu',

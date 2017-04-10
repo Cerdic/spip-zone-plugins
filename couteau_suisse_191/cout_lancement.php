@@ -3,7 +3,7 @@
 #  Plugin  : Couteau Suisse - Licence : GPL           #
 #  Auteur  : Patrice Vanneufville, 2006               #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
-#  Infos : http://www.spip-contrib.net/?article2166   #
+#  Infos : https://contrib.spip.net/?article2166   #
 #-----------------------------------------------------#
 #  Fichier contenant les fonctions utilisees pendant  #
 #  l'execution du plugin.                             #
@@ -91,7 +91,7 @@ cs_log("$rand -- foreach(\$outils) : cs_initialisation_d_un_outil()");
 	foreach($outils as $outil) {
 		cs_initialisation_d_un_outil($id = $outil['id'], $description_outil, false);
 		if(isset($outil['contrib']) && isset($metas_outils[$id]['actif']))
-			$contribs[] = '<br/> &bull; [@@couteauprive:'.$outil['id'].':nom@@->http://www.spip-contrib.net/?article'.$outil['contrib'].']';
+			$contribs[] = '<br/> &bull; [@@couteauprive:'.$outil['id'].':nom@@->https://contrib.spip.net/?article'.$outil['contrib'].']';
 	}
 	// installer $cs_metas_pipelines
 	$cs_metas_pipelines = array();
@@ -110,7 +110,7 @@ cs_log("$rand -- ecriture metas");
 	ecrire_meta('tweaks_variables', serialize($metas_vars));
 	// en metas : code inline pour les pipelines, mes_options et mes_fonctions;
 	ecrire_meta('tweaks_pipelines', serialize($cs_metas_pipelines));
-	// en metas : les liens sur spip-contrib
+	// en metas : les liens sur contrib.spip
 	ecrire_meta('tweaks_contribs', serialize($contribs));
 	ecrire_metas();
 	$GLOBALS['cs_init'] = 0;

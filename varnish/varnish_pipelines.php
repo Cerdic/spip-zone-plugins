@@ -49,7 +49,7 @@ function varnish_alertes_auteur($flux) {
 
 		if (!isset($plugins['STATSJS'])) {
 			$flux['data'][] = _T('avis_attention'). ' '
-				. _L("Pour utiliser les statistiques de SPIP avec Varnish, il est recommandé d'installer le plugin <a href='http://www.spip-contrib.net/3753'>StatsJS</a>.");
+				. _L("Pour utiliser les statistiques de SPIP avec Varnish, il est recommandé d'installer le plugin <a href='https://contrib.spip.net/3753'>StatsJS</a>.");
 		}
 	}
 #var_dump($flux);

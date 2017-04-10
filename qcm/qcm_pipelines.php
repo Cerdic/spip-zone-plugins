@@ -8,7 +8,7 @@
   Fonction du plugin : 	Parse le code du QCM tape dans SPIP et stocke
                        	les questions, reponses et commentaires
                        	dans un tableau et retourne le code HTML du QCM
-  Mode d'emploi		 :	http://www.spip-contrib.net/Un-QCM-dans-vos-articles
+  Mode d'emploi		 :	https://contrib.spip.net/Un-QCM-dans-vos-articles
   
   Titre du QCM : 
 	- soit sur une ligne de la forme 'T Voici mon titre' placee entre les

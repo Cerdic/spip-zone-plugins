@@ -3,7 +3,7 @@
 #  Plugin  : compte_clics - Licence : GPL                                #
 #  File    : total_clics - balise #TOTAL_CLICS                           #
 #  Authors : Chryjs, 2007 +                                              #
-#  based on: http://www.spip-contrib.net/Compter-les-clics-sur-les-liens #
+#  based on: https://contrib.spip.net/Compter-les-clics-sur-les-liens #
 #  and     : http://www.plugandspip.com/spip.php?article37               #
 #  Contact : chryjs¡@!free¡.!fr                                          #
 #------------------------------------------------------------------------#

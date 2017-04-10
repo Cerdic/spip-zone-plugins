@@ -3,7 +3,7 @@
 	<slogan>Un ensemble de mod&#232;les pour inclure les modules sociaux Facebook</slogan>
 	<version>0.17.0</version>
 	<etat>stable</etat>
-	<auteur>[Piero Wbmstr->http://contrib.spip.net/PieroWbmstr]</auteur>
+	<auteur>[Piero Wbmstr->https://contrib.spip.net/PieroWbmstr]</auteur>
 	<licence>GNU/GPL 3</licence>
  	<prefix>fb_modeles</prefix>
 	<chemin dir='' />

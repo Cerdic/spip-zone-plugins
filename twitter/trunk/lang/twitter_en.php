@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'elements_signaler' => 'Elements to report to the public flow',
 	'erreur_verifier_configuration' => 'An error occures, please check the configuration.',
 	'explication_twitter_api_oauth' => 'Create a Twitter Application <a href="http://dev.twitter.com/apps/new">in developper area (http://dev.twitter.com/apps/new)</a>.
-Enter the provided data and save the configuration (<a href="http://contrib.spip.net/4394">Plus d\'aide</a>).',
+Enter the provided data and save the configuration (<a href="https://contrib.spip.net/4394">Plus d\'aide</a>).',
 	'erreur_connexion_compte' => 'Unable to connect with @account@ account.',
 	'erreur_envoi_desactive' => 'Tweet sending is de-activated due to <tt>_TEST_MICROBLOG_SERVICE</tt> constant',
 	'erreur_config_pour_widget' => 'Configure Twitter Application and add an account to use Widgets.',

@@ -30,7 +30,7 @@ function manuelsite_creer_config(){
 		$config = array();
 	}
 
-	$url_contrib = "http://www.spip-contrib.net/?article4076";
+	$url_contrib = "https://contrib.spip.net/?article4076";
 	$config_defaut = array_merge(array(
 			'id_article' => '0',
 			'cacher_public' => '',

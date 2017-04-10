@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_lien' => 'Eliminar este enlace',
 
 	// C
-	'cfg_descr_gis' => 'Sistema de Información Geográfica.<br /><a href="http://contrib.spip.net/4189" class="spip_out">Ir a la documentación</a>.',
+	'cfg_descr_gis' => 'Sistema de Información Geográfica.<br /><a href="https://contrib.spip.net/4189" class="spip_out">Ir a la documentación</a>.',
 	'cfg_inf_adresse' => 'Mostrar campos adicionales de dirección (país, ciudad, región, dirección...)',
 	'cfg_inf_bing' => 'La capa Bing Aerial necesita crear una clave <a href=\'@url@\' class="spip_out">el sitio de Bing</a>.',
 	'cfg_inf_geocoder' => 'Activar las funciones del geocoder (búsqueda desde una dirección, recuperación de una dirección partiendo de coordenadas).',

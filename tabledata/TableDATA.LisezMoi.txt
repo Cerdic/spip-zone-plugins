@@ -95,7 +95,7 @@ Il suffit tout simplement de décompresser le ZIP dans le répertoire
 Pour la petite histoire
 =======================
 En fait, une contrib de Déesse A., ’La gestion de tables SQL
-supplémentaires’ (http://www.spip-contrib.net/La-gestion-de-tables-SQL),
+supplémentaires’ (https://contrib.spip.net/La-gestion-de-tables-SQL),
 m’a beaucoup plu tout en me laissant sur ma fin... On ne pouvait
 que AJOUTER...
 Alors je me suis lancé pour ajouter les fonction de visualisation

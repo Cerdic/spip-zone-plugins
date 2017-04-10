@@ -69,7 +69,7 @@ Rôzne bloky, ktoré sa nachádzajú nižšie, slúžia ako príklad každej ša
 	// I
 	'info_doc' => 'Ak sa vám táto stránka nezobrazuje správne, [kliknite sem.->@link@]',
 	'info_doc_titre' => 'Poznámka o zobrazení tejto stránky',
-	'info_skel_contrib' => 'Stránka s kompletnou dokumentáciou spip-contribu online: [->http://www.spip-contrib.fr/?article3567].', # MODIF
+	'info_skel_contrib' => 'Stránka s kompletnou dokumentáciou spip-contribu online: [->http://www.contrib.spip.fr/?article3567].', # MODIF
 	'info_skel_doc' => 'Táto stránka dokumentácie je vytvorená ako šablóna SPIPu, ktorá funguje spolu so štandardne distribuovanou verziou ({súbory adresára "squelettes-dist/"}). Ak túto stránku neviete zobraziť alebo ak vaša stránka používa vlastné šablóny, s úpravou zobrazenia tejto stránky dokumentácie vám pomôžu tieto odkazy:
 
 -* [formát "neformátovaný text"->@mode_brut@] ({jednoduché HTML + tag INSERT_HEAD})
@@ -80,7 +80,7 @@ Rôzne bloky, ktoré sa nachádzajú nižšie, slúžia ako príklad každej ša
 	'javascript_inactif' => 'Javascript je vo vašom prehliadači vypnutý. Niektoré funkcie nebudú fungovať.',
 
 	// L
-	'licence' => 'Zásuvný modul pre SPIP >2.0: {{"Šablóny pre Facebook" – copyright © 2009 [Piero Wbmstr->http://contrib.spip.net/PieroWbmstr] s licenciou [GPL->http://www.opensource.org/licenses/gpl-3.0.html].}}',
+	'licence' => 'Zásuvný modul pre SPIP >2.0: {{"Šablóny pre Facebook" – copyright © 2009 [Piero Wbmstr->https://contrib.spip.net/PieroWbmstr] s licenciou [GPL->http://www.opensource.org/licenses/gpl-3.0.html].}}',
 
 	// N
 	'new_window' => 'Nové okno',

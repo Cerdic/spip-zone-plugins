@@ -9,7 +9,7 @@
 	>
 	<nom>Menu de langues avec liens</nom>
 	<!-- Afficher les langues sous forme de liens cliquables -->
-	<auteur lien="http://contrib.spip.net/RealET">Jacques</auteur>
+	<auteur lien="https://contrib.spip.net/RealET">Jacques</auteur>
 	<auteur>Jean-Baptiste Pressac</auteur>
 	<auteur lien="http://www.kent1.info">kent1</auteur>
 	<auteur>Cédric Morin</auteur>

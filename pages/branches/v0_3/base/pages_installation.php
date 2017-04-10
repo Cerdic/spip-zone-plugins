@@ -4,7 +4,7 @@
 #  Auteur  : RastaPopoulos                          #
 #  Licence : GPL                                    #
 #--------------------------------------------------------------- -#
-#  Documentation : http://www.spip-contrib.net/Plugin-Pages       #
+#  Documentation : https://contrib.spip.net/Plugin-Pages       #
 #-----------------------------------------------------------------#
 
 if (!defined("_ECRIRE_INC_VERSION")) return;

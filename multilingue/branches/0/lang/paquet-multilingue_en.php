@@ -15,11 +15,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 The plugin automatically installs the folowing plugins
 
 - [Translation between sections->http://plugins.spip.net/tradrub.html]
-- [Language preferred by the user->http://contrib.spip.net/Plugin-Langue-preferee-par-l-internaute]
-- [Easy Sections Translations->http://contrib.spip.net/Traductions-de-rubriques-autrement-3]
-- [Easy Article Translations-> http://contrib.spip.net/Traductions-d-articles-autrement-3]
+- [Language preferred by the user->https://contrib.spip.net/Plugin-Langue-preferee-par-l-internaute]
+- [Easy Sections Translations->https://contrib.spip.net/Traductions-de-rubriques-autrement-3]
+- [Easy Article Translations-> https://contrib.spip.net/Traductions-d-articles-autrement-3]
 
-Under Spip 2 or 2.1 it is recommended to install the Plugin  [Step->http://contrib.spip.net/STEP-Systeme-de-Telechargements-de-Plugins] first, before installing "Easy Multilingual Web-site" in order to allow the automatic activation of all the necessary Plugins.
+Under Spip 2 or 2.1 it is recommended to install the Plugin  [Step->https://contrib.spip.net/STEP-Systeme-de-Telechargements-de-Plugins] first, before installing "Easy Multilingual Web-site" in order to allow the automatic activation of all the necessary Plugins.
 
 The plugin also modifies some skeletons (sommaire.html, rubrique.html and article.html) and some other “includes”.
 

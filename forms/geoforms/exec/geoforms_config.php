@@ -20,7 +20,7 @@ function exec_geoforms_config(){
 	
 	
 	/**** Modification pour être compatible avec SPIP 2 ****/
-	/** (cf. --> http://www.spip-contrib.net/PortageV2-Migrer-un-plugin-vers-SPIP2 ) **/
+	/** (cf. --> https://contrib.spip.net/PortageV2-Migrer-un-plugin-vers-SPIP2 ) **/
 	
 	// Test de la version de SPIP 
 	if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) // SPIP <= 1.9.2x

@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                             #
 #  File    : configuration/spipbb_ban_user                      #
 #  Authors : chryjs 2007 et als                                 #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs      #
 #  Contact : chryjs!@!free!.!fr                                 #
 # [fr] Gestion du banissement                                   #
 # [en] Manage ban lists                                         #

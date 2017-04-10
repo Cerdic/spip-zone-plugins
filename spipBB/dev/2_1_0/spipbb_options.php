@@ -4,7 +4,7 @@
 #  File    : spipbb_options                                     #
 #  Contact : chryjs!@!free!.!fr                                 #
 #  Authors : Chryjs, 2007 et als                                #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs      #
 # [en] admin menus                                              #
 # [fr] menus d'administration                                   #
 #---------------------------------------------------------------#

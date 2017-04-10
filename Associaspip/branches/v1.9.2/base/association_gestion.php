@@ -78,7 +78,7 @@ function association_verifier_base() {
 		if ($current_version<0.60) {
 			//@r12530
 			$infos_profil = spip_query("SELECT nom, numero, rue, cp, ville, telephone, siret, declaration, prefet, president, mail, dons, ventes, comptes, indexation FROM spip_asso_profil"); // on a exclu : id_profil, maj, indexation
-			$metas_list = spip_fetch_array($infos_profil); //cf. http://contrib.spip.net/PortageV2-Migrer-un-plugin-vers-SPIP2
+			$metas_list = spip_fetch_array($infos_profil); //cf. https://contrib.spip.net/PortageV2-Migrer-un-plugin-vers-SPIP2
 			spip_query("INSERT INTO spip_meta (nom, valeur) VALUES ('valeur', ". _q(serialize($metas_list)) .")");
 			//@r13839
 			spip_query("DROP TABLE spip_asso_profil");

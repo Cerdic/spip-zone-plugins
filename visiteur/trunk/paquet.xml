@@ -12,7 +12,7 @@
 	pour accéder aux données de la session du visiteur courant et les tester efficacement dans un squelette
 	ou à des données de sessions étendues, provenant d'ailleurs que la session spip
 	-->
-	<auteur lien="http://contrib.spip.net/JLuc">JLuc</auteur>
-	<auteur lien="http://contrib.spip.net/Matthieu-Marcillaud">marcimat</auteur>
+	<auteur lien="https://contrib.spip.net/JLuc">JLuc</auteur>
+	<auteur lien="https://contrib.spip.net/Matthieu-Marcillaud">marcimat</auteur>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 </paquet>

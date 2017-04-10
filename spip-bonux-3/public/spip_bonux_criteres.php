@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Permet de faire un comptage par table liee
  *
  * @syntaxe `{compteur table[, champ]}`
- * @link http://www.spip-contrib.net/Classer-les-articles-par-nombre-de#forum409210
+ * @link https://contrib.spip.net/Classer-les-articles-par-nombre-de#forum409210
  *
  * @example
  *     Pour avoir les auteurs classes par articles et

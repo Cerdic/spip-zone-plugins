@@ -421,7 +421,7 @@ function exec_spiplistes_liste_gerer () {
 		//}
 		
 		
-		// @see http://www.spip-contrib.net/SPIP-Listes#comment444314
+		// @see https://contrib.spip.net/SPIP-Listes#comment444314
 		
 		
 		

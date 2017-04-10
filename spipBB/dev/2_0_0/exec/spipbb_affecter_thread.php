@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                                 #
 #  File    : exec/spipbb_affecter_thread                            #
 #  Authors : scoty 2007                                             #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs          #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs          #
 #  Source  : gaf_affect.php                                         #
 #  Contact : Hugues AROUX scoty!@!koakidi!.!com                     #
 # [fr] page deplacer thread | ( anc. gaf_affect.php)                #

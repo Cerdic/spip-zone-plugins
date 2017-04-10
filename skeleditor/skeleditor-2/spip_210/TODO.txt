@@ -9,7 +9,7 @@ ajout de fonctionnalites:
 - preview "live" ?
 
 des commentaires ?
-http://www.spip-contrib.net/Plugin-editeur-de-squelettes-Skel
+https://contrib.spip.net/Plugin-editeur-de-squelettes-Skel
 
 
 ---------------------------------------------

@@ -116,7 +116,7 @@ function exec_spiplistes_courrier_gerer () {
 					
 					$texte = typo($row['texte']);
 					//
-					// @see: http://www.spip-contrib.net/SPIP-Listes#comment441566
+					// @see: https://contrib.spip.net/SPIP-Listes#comment441566
 					//$texte = typo($row['message_texte']);
 					
 					$str_log = "id_courrier #$id_courrier";

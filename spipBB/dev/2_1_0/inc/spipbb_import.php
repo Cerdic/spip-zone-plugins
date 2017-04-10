@@ -4,7 +4,7 @@
 #  File    : inc/spipbb_import                                 #
 #  Authors : Chryjs, 2008 et als                               #
 #            2004+ Jean-Luc Bechennec certaines fonctions      #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs     #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs     #
 #  Contact : chryjs!@!free!.!fr                                #
 # [fr] Librairie de fonctions communes pour l'import de forums #
 # [en] Functions and data required for importing forums        #

@@ -2,7 +2,7 @@
 
 Ajoute un statut "*Archive*" aux objets SPIP.
 
-Cette version est un portage du plugin éponyme dont la documentation est sur [SPIP-contrib](http://contrib.spip.net/Plugin-Archive).
+Cette version est un portage du plugin éponyme dont la documentation est sur [SPIP-contrib](https://contrib.spip.net/Plugin-Archive).
 
 Le code est réécrit dans presque sa totalité suite aux améliorations que permettent les nouvelles APIs de SPIP > 3.0.
 

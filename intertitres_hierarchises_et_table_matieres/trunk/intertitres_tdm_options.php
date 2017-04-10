@@ -16,7 +16,7 @@
  *
  * Pour toute suggestion, remarque, proposition d'ajout
  * reportez-vous au forum de l'article :
- * http://contrib.spip.net/Generation-automatique-de
+ * https://contrib.spip.net/Generation-automatique-de
  *
  * Petites modifications de Bertrand Marne (mise en plugin)
  * - prise en compte des dièses:
@@ -84,7 +84,7 @@ function IntertitresTdm_table_des_matieres($texte, $tableseule = false, $url_art
 	}
 
 	// on cherche les noms de section commençant par des * et #
-	$my_debut_intertitre=trim($GLOBALS['debut_intertitre']); //astuce des trim trouvée là : http://contrib.spip.net/Generation-automatique-de#forum383092
+	$my_debut_intertitre=trim($GLOBALS['debut_intertitre']); //astuce des trim trouvée là : https://contrib.spip.net/Generation-automatique-de#forum383092
 	$my_fin_intertitre=trim($GLOBALS['fin_intertitre']);
 
 	// pour que les différents niveaux d'intertitres soient gérés quand on repasse sur le texte dans le cadre d'un filtre avec tableseule

@@ -7,7 +7,7 @@
 Origine
 -------
 
-Ce plugin a ete realisee a partir des contributions : http://www.spip-contrib.net/Compter-les-clics-sur-les-liens et http://www.plugandspip.com/spip.php?article37 .
+Ce plugin a ete realisee a partir des contributions : https://contrib.spip.net/Compter-les-clics-sur-les-liens et http://www.plugandspip.com/spip.php?article37 .
 
 
 Fonctionnalites

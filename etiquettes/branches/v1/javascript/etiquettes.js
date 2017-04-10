@@ -3,7 +3,7 @@
 //#  Auteur  : RastaPopoulos                          #
 //#  Licence : GPL                                    #
 //#------------------------------------------------------------------------------------------------------#
-//#  Documentation : http://www.spip-contrib.net/Plugin-Etiquettes                                       #
+//#  Documentation : https://contrib.spip.net/Plugin-Etiquettes                                       #
 //#                                                                                                      #
 //#  Javascript commun du plugin                                                                         #
 //#------------------------------------------------------------------------------------------------------#

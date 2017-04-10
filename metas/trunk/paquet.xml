@@ -11,8 +11,8 @@
 
 	<nom>Metas</nom>
 
-	<auteur lien="http://contrib.spip.net/?auteur10451">Quentin de Serres-Justiniac</auteur>
-	<auteur lien="http://contrib.spip.net/?auteur1343">Olivier Gendrin</auteur>
+	<auteur lien="https://contrib.spip.net/?auteur10451">Quentin de Serres-Justiniac</auteur>
+	<auteur lien="https://contrib.spip.net/?auteur1343">Olivier Gendrin</auteur>
 	<!--
 		<pipeline nom="ieconfig_metas" inclure="metas_ieconfig_metas.php" />
 		<pipeline nom="pre_propre" inclure="metas_fonctions.php" />

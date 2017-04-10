@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                             #
 #  File    : exec/spipbb_admin_fromphpbb - first step form      #
 #  Authors : 2004+ Jean-Luc Bechennec - Chryjs, 2007            #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs      #
 #  Contact : chryjs!@!free!.!fr                                 #
 # [fr] Menu d'accueil pour la migration d'un forum phpBB        #
 # [en] Home page base of phpBB forum migration                  #

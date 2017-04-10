@@ -49,7 +49,7 @@ migre_static (0.6)
 
 
 migre_static (0.5)
- * Few improvements from http://www.spip-contrib.net/Le-bouton-memo
+ * Few improvements from https://contrib.spip.net/Le-bouton-memo
  * More copyright checks : you _must_ own the site to import the pages !
  * Corrected few bugs
  * simplified the code

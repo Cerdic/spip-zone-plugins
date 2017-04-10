@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => 'Esta página permite configurar o estilo da lupa. Um estilo personalizado pode ser declarado; ver <a href="http://contrib.spip.net/Une-Loupe-pour-les-Vignettes">a documentação online</a>.',
+	'descriptif' => 'Esta página permite configurar o estilo da lupa. Um estilo personalizado pode ser declarado; ver <a href="https://contrib.spip.net/Une-Loupe-pour-les-Vignettes">a documentação online</a>.',
 
 	// E
 	'example' => 'Resultado gráfico',

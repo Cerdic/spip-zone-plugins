@@ -92,7 +92,7 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 	$remplace = array('<', '>', '<', '>', "'");
 	
     // si plugin TYPOENLUMINE est en version 3 (ou plus) utiliser la syntaxe {{{**titre 2}}} a la place de {2{titre 2}2}
-    // (cf http://www.spip-contrib.net/odt2spip-creation-d-articles-a-partir-de-fichiers#forum435614)
+    // (cf https://contrib.spip.net/odt2spip-creation-d-articles-a-partir-de-fichiers#forum435614)
     if (array_key_exists('TYPOENLUMINEE', $Tplugins) AND intval(substr($Tplugins['TYPOENLUMINEE']['version'], 0, 1)) >= 3) {
 		array_push($a_remplacer, '{2{', '}2}', '{3{', '}3}', '{4{', '}4}', '{5{', '}5}');
 		array_push($remplace, '{{{**', '}}}', '{{{***', '}}}', '{{{****', '}}}', '{{{*****', '}}}');
@@ -171,7 +171,7 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 	}
 
 	// encodage des caracteres pour gerer aussi les SPIP 3 en ISO-8859-1
-	// cf http://contrib.spip.net/odt2spip-creation-d-articles-a-partir-de-fichiers#forum466929
+	// cf https://contrib.spip.net/odt2spip-creation-d-articles-a-partir-de-fichiers#forum466929
 	if ($GLOBALS['meta']['charset'] != 'utf-8'){
 		include_spip('inc/charsets');
 		$Tarticle['texte'] = importer_charset($Tarticle['texte'], 'utf-8');

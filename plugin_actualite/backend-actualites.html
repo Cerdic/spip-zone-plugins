@@ -22,7 +22,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 ]
 
 	[(#REM) Mélange savant de boucles différentes, pour un affichage antéchoronologique imbriqué 
-		Voir ici pour le principe : http://www.spip-contrib.net/Melanger-et-trier-des-elements ]
+		Voir ici pour le principe : https://contrib.spip.net/Melanger-et-trier-des-elements ]
 	<BOUCLE_annonces(ACTUALITES) {branche ?}{id_mot ?} {age<60} {age>=0} {!par date} {unique}>
 		<INCLURE{fond=inc-rss-item-vu-actualite}{id_actualite}> 
 	</BOUCLE_annonces>

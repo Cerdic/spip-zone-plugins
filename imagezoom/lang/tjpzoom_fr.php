@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => 'Cette page permet de configurer le style de la loupe. Un style personnalisé peut être déclaré ; voir <a href="http://contrib.spip.net/Une-Loupe-pour-les-Vignettes">la documentation en ligne</a>.',
+	'descriptif' => 'Cette page permet de configurer le style de la loupe. Un style personnalisé peut être déclaré ; voir <a href="https://contrib.spip.net/Une-Loupe-pour-les-Vignettes">la documentation en ligne</a>.',
 
 	// E
 	'example' => 'Résultat graphique',

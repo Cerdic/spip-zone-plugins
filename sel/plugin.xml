@@ -39,7 +39,7 @@
 			La gestion en ligne des adhésions, leur renouvellement, leur caducité, est prévue.
 		</multi>
 	</description>
-	<!-- URL de documentation http://contrib.spip.net/ -->
+	<!-- URL de documentation https://contrib.spip.net/ -->
 	<lien>https://contrib.spip.net/SEL-systeme-d-echange-local</lien>
 
 	<!-- precise le prefixe utilisé pour toutes les fonctions du plugin, en général le nom du plugin -->

@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Smoothgallery</nom>
 	<slogan>Douce Galerie</slogan>
-	<auteur>[Phil 2007->yaquoi.com], [Vincent Ramos->http://contrib.spip.net/Vincent-Ramos]</auteur>
+	<auteur>[Phil 2007->yaquoi.com], [Vincent Ramos->https://contrib.spip.net/Vincent-Ramos]</auteur>
 	<licence>GNU/GPL</licence>
 	<version>0.0.3</version>
 	<etat>test</etat>

@@ -6,8 +6,8 @@
  *
  * Ce plugin gère un formulaire d'envoi d'une page par mail (ou de son adresse). Il fonctionne de façon
  * autonome (<i>pas besoin d'autres plugins</i>) mais certains paramètres sont configurables depuis
- * le plugin "CFG" ({@link http://www.spip-contrib.net/Config-CFG}) et certaines options, notamment l'envoi
- * d'un mail en version HTML, fonctionne grâce au plugin "Facteur" ({@link http://www.spip-contrib.net/Facteur}). 
+ * le plugin "CFG" ({@link https://contrib.spip.net/Config-CFG}) et certaines options, notamment l'envoi
+ * d'un mail en version HTML, fonctionne grâce au plugin "Facteur" ({@link https://contrib.spip.net/Facteur}). 
  *
  * Il est réglé pour permettre l'envoi d'un mail d'information pour toute page d'un site SPIP : 
  * il va charger s'il peut les objets et ID-objets de SPIP (<i>articles, brèves ...</i>),
@@ -60,7 +60,7 @@
  * <br /><b>!! - À n'utiliser que pour vérifications !!</b>
  *
  * @name 		OptionsConfiguration
- * @author 		Piero Wbmstr <http://www.spip-contrib.net/PieroWbmstr>
+ * @author 		Piero Wbmstr <https://contrib.spip.net/PieroWbmstr>
  * @license		http://opensource.org/licenses/gpl-license.php GNU Public License
  * @package		Tip-a-friend
  */
@@ -124,8 +124,8 @@ define('TIPAFRIEND_CFGMETA', 'tipafriend');
 define('TIPAFRIEND_DOC', 'tipafriend_documentation');
 
 /**
- * URL de la page de documentation sur spip-contrib (documentation officielle)
+ * URL de la page de documentation sur contrib.spip (documentation officielle)
  */
-define('TIPAFRIEND_DOC_CONTRIB', 'http://www.spip-contrib.net/?article3638');
+define('TIPAFRIEND_DOC_CONTRIB', 'https://contrib.spip.net/?article3638');
 
 ?>

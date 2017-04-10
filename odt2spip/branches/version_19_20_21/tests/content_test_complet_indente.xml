@@ -612,7 +612,7 @@
       <text:h text:style-name="Heading_20_2" text:outline-level="2">Divers trucs (Titre 2)</text:h>
       <text:p text:style-name="Standard">
         un lien sur 
-        <text:a xlink:type="simple" xlink:href="http://spip-contrib.net/">http://spip-contrib.net</text:a> 
+        <text:a xlink:type="simple" xlink:href="https://contrib.spip.net/">https://contrib.spip.net</text:a> 
       </text:p>
       <text:p text:style-name="Standard">
         et ici un 

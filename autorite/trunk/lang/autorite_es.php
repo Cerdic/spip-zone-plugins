@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admins' => 'Los administradores',
 	'admins_redacs' => 'Administradores y Redactores',
 	'admins_rubriques' => 'los administradores asociados a secciones tienen:',
-	'attention_crayons' => '<small><strong>OjO</strong> Los parámetros a continuación sólo pueden funcionar si utilizas un plugin que propone una interfaz de edición (como por ejemplo <a href="http://contrib.spip.net/Les-Crayons">los Lápices</a>).</small>',
+	'attention_crayons' => '<small><strong>OjO</strong> Los parámetros a continuación sólo pueden funcionar si utilizas un plugin que propone una interfaz de edición (como por ejemplo <a href="https://contrib.spip.net/Les-Crayons">los Lápices</a>).</small>',
 	'attention_version' => 'Cuidado, los siguientes parámetrospueden no funcionar con tu versión de SPIP:',
 	'auteur_message_advitam' => 'El autor del mensaje, ad vitam',
 	'auteur_message_heure' => 'El autor del mensaje, durante una hora',
@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p>A partir de SPIP 2.1, también es  posible dar derechos de webmaster a un administrador en la página de edición del autor.</p>
 <p>Nota: los webmasters definidos de esta manera ya no necesitan proceder a la autentificación por FTP para operaciones delicadas (mejorar la base de datos, por ejemplo).</p>
 
-<a href=\'http://contrib.spip.net/Autorite\' class=\'spip_out\'>Cf. documentation</a>
+<a href=\'https://contrib.spip.net/Autorite\' class=\'spip_out\'>Cf. documentation</a>
 ',
 	'details_option_auteur' => '<small><br />Por el momento, la opctión « autor » sólo funciona para los autores registrados (foros con suscripción, por ejemplo). Y, si está  activada, los administradores del sitio también tienen la capacidad de editar los foros.
 	</small>',
@@ -113,7 +113,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redacteur_modifie_article' => '<strong>Redactor modifica propuestos</strong> : cada redactor/a puede modificar un artículo propuesto a la publicación, incluso cuando no es autor/a de éste.',
 	'refus_1' => '<p>Sólo l*s webmestres del sitio',
 	'refus_2' => 'están autorizados a modificarestos parámetros.</p>
-<p>Para mayor información, ver <a href="http://contrib.spip.net/Autorite">la documentación</a> (por ahora en francés).</p>',
+<p>Para mayor información, ver <a href="https://contrib.spip.net/Autorite">la documentación</a> (por ahora en francés).</p>',
 	'reglage_autorisations' => 'Regular las autorizaciones',
 
 	// S

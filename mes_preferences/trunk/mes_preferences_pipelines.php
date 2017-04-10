@@ -4,7 +4,7 @@
  * Arnaud Bérard - Mist. GraphX
  * Licence GNU/GPL
  * Sources :
- * http://www.spip-contrib.net/Themes-pour-l-interface-privee
+ * https://contrib.spip.net/Themes-pour-l-interface-privee
  * 
  *
  */
@@ -26,7 +26,7 @@ function mes_preferences_header_prive($flux) {
         // ajout des css du plugin :
         $flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('css/mes_preferences.css').'" media="screen" />';
         
-        // Source : http://www.spip-contrib.net/Themes-pour-l-interface-privee
+        // Source : https://contrib.spip.net/Themes-pour-l-interface-privee
 	//generer_url_public('style_prive', parametres_css_prive())
         if ($interface == "spip_dist") $flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('spip_dist', parametres_css_prive()).'" id="css_spip_dist" />';
 	else if ($interface == "spip2") $flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('spip_2', parametres_css_prive()).'" id="css_spip2" />';

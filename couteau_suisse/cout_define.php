@@ -3,7 +3,7 @@
 #  Plugin  : Couteau Suisse - Licence : GPL           #
 #  Auteur  : Patrice Vanneufville, 2006               #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
-#  Infos : http://contrib.spip.net/?article2166       #
+#  Infos : https://contrib.spip.net/?article2166       #
 #-----------------------------------------------------#
 if(!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -12,7 +12,7 @@ if(!defined("_ECRIRE_INC_VERSION")) return;
 // RSS de trac
 @define('_CS_RSS_SOURCE', 'http://zone.spip.org/trac/spip-zone/log/_plugins_/couteau_suisse?format=rss&mode=stop_on_copy&limit=20');
 // Doc de contrib.spip.net
-@define('_URL_CONTRIB', 'http://contrib.spip.net/?article');
+@define('_URL_CONTRIB', 'https://contrib.spip.net/?article');
 // Revisions du CS
 @define('_URL_CS_PLUGIN_XML', 'http://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau_suisse/plugin.xml?format=txt');
 // On met a jour le flux rss toutes les 2 heures

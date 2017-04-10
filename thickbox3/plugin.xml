@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Thickbox v3</nom>
-	<auteur>[Cody Lindley->http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all], Mis en plugin par Fil, Izo, BoOz, am&#233;lior&#233; par [Piero Wbmstr->http://contrib.spip.net/PieroWbmstr]</auteur>
+	<auteur>[Cody Lindley->http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all], Mis en plugin par Fil, Izo, BoOz, am&#233;lior&#233; par [Piero Wbmstr->https://contrib.spip.net/PieroWbmstr]</auteur>
 	<slogan>Afficher une image avec un effet de présentation &#224; la mode</slogan>
 	<version>3.1.0</version>
 	<licence>GNU GPL v3</licence>

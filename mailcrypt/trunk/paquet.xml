@@ -11,10 +11,10 @@
 	<nom>MailCrypt 2</nom>
 	<!-- Protéger les liens de courriels -->
 
-	<auteur lien="http://contrib.spip.net/Alexis-Roussel">Alexis Roussel</auteur>
-	<auteur lien="http://contrib.spip.net/paolo">Paolo</auteur>
-	<auteur lien="http://contrib.spip.net/Patrice-Vanneufville">Patrice Vanneufville</auteur>
-	<auteur lien="http://contrib.spip.net/Joseph">Joseph</auteur>
+	<auteur lien="https://contrib.spip.net/Alexis-Roussel">Alexis Roussel</auteur>
+	<auteur lien="https://contrib.spip.net/paolo">Paolo</auteur>
+	<auteur lien="https://contrib.spip.net/Patrice-Vanneufville">Patrice Vanneufville</auteur>
+	<auteur lien="https://contrib.spip.net/Joseph">Joseph</auteur>
 
 	<pipeline nom="post_propre" inclure="mailcrypt_fonctions.php" />
 	<pipeline nom="affichage_final" inclure="mailcrypt_fonctions.php" />

@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                                 #
 #  File    : exec/spipbb_sujet                                      #
 #  Authors : scoty 2007                                             #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs          #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs          #
 #  Source  : GAFoSPIP v. 0.6 - 25/09/07 - spip 1.9.2                #
 #  Contact : Hugues AROUX scoty!@!koakidi!.!com                     #
 # [fr] page sujet/thread                                            #

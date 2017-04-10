@@ -15,7 +15,7 @@
     Date : Vendredi 11 aout 2003
     Idee originale :  Aurelien PIERARD : aurelien.pierard(a)dsaf.pm.gouv.fr
     Serieuse refonte et integration au Couteau Suisse : Patrice Vanneufville, mars 2007
-	Doc : http://contrib.spip.net/?article2427
+	Doc : https://contrib.spip.net/?article2427
    +-------------------------------------+
   
 */

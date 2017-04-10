@@ -5,7 +5,7 @@
 *	Idee originale : FredoMkb
 *	Serieuse refonte et integration au Couteau Suisse : Patrice Vanneufville
 *	+-------------------------------------+
-*	Toutes les infos sur : http://www.spip-contrib.net/?article1564
+*	Toutes les infos sur : https://contrib.spip.net/?article1564
 */
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse

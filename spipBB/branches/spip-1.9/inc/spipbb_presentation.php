@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                        #
 #  File    : inc/spipbb_init                               #
 #  Authors : Hugues AROUX - SCOTY @ koakidi.com et als     #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs #
 #  Contact : chryjs!@!free!.!fr                            #
 #                                                          #
 # qq fonctions de mise en forme, boutons ...               #

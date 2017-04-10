@@ -94,7 +94,7 @@ Sie hat folgende Adresse :',
 	'inscription_statut_webmestres' => 'Webmaster',
 
 	// L
-	'lien_documentation' => '<a href="http://contrib.spip.net/Notifications" class="spip_out">siehe Dokumentation</a>',
+	'lien_documentation' => '<a href="https://contrib.spip.net/Notifications" class="spip_out">siehe Dokumentation</a>',
 	'limiter_rubriques_explication' => 'Geben Sie hier die IDs der Rubriken an, für die Benachrichtigungen aktiviert werden. Trennen Sie mehrer Angaben mit Komma : "11,26"',
 	'limiter_rubriques_label' => 'Auf diese Rubriken beschränken :',
 

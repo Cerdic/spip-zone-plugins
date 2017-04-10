@@ -21,7 +21,7 @@ plug_exif.php file declaring the new tag, to import in your own mes_fonctions.ph
 
 
 Page de la contrib:
-[fr] http://spip-contrib.net/ecrire/articles.php3?id_article=788
-[en] http://spip-contrib.net/ecrire/articles.php3?id_article=796
+[fr] https://contrib.spip.net/ecrire/articles.php3?id_article=788
+[en] https://contrib.spip.net/ecrire/articles.php3?id_article=796
 
 

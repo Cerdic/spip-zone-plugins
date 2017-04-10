@@ -28,7 +28,7 @@
  * => tot-3: type objet
  *
  * @name 		BaliseDynamique
- * @author 		Piero Wbmstr <http://www.spip-contrib.net/PieroWbmstr>
+ * @author 		Piero Wbmstr <https://contrib.spip.net/PieroWbmstr>
  * @license		http://opensource.org/licenses/gpl-license.php GNU Public License
  * @package		Tip-a-friend
  */

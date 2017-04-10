@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration' => 'Configuración',
 	'crystal' => 'Crystal',
 
-	'descriptif' => '<p>Puede configurar los datos para mostrar en la caja de herramientas.<br />La documentación completa sobre <a href="http://contrib.spip.net/Boite-a-outils-pour-articles-version-plugin">contrib</a><br />Plugins compl&eacute;mentaires</p><ul class="spip"><li><a href="http://contrib.spip.net/Plugin-Article-PDF">Artículo PDF</a></li><li><a href="http://contrib.spip.net/Plugin-envoyer-a-un-ami">Enviar a un amigo</a></li><li><a href="http://contrib.spip.net/?art3727">Recomendar a un amigo</a></li><li><a href="http://contrib.spip.net/Texte-agrandi-ou-pleine-page">Botón en el texto</a></li><li><a href="http://contrib.spip.net/Notation-d-articles-SPIP">Notación</a></li></ul>',
+	'descriptif' => '<p>Puede configurar los datos para mostrar en la caja de herramientas.<br />La documentación completa sobre <a href="https://contrib.spip.net/Boite-a-outils-pour-articles-version-plugin">contrib</a><br />Plugins compl&eacute;mentaires</p><ul class="spip"><li><a href="https://contrib.spip.net/Plugin-Article-PDF">Artículo PDF</a></li><li><a href="https://contrib.spip.net/Plugin-envoyer-a-un-ami">Enviar a un amigo</a></li><li><a href="https://contrib.spip.net/?art3727">Recomendar a un amigo</a></li><li><a href="https://contrib.spip.net/Texte-agrandi-ou-pleine-page">Botón en el texto</a></li><li><a href="https://contrib.spip.net/Notation-d-articles-SPIP">Notación</a></li></ul>',
 
 	'elements' => 'Elementos que deben indicarse ',
 

@@ -4,7 +4,7 @@
 #  Plugin  : Couteau Suisse - Licence : GPL           #
 #  Auteur  : Patrice Vanneufville, 2006               #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
-#  Infos : http://www.spip-contrib.net/?article2166   #
+#  Infos : https://contrib.spip.net/?article2166   #
 #-----------------------------------------------------#
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -766,7 +766,7 @@ add_outil( array(
 
 add_outil( array(
 	'id' => 'visiteurs_connectes',
-	'auteur' => "Phil d'apr&egrave;s spip-contrib",
+	'auteur' => "Phil d'apr&egrave;s contrib.spip",
 	'categorie' => 'public',
 	'code:options' => "define('_VISITEURS_CONNECTES',1);
 function cs_compter_visiteurs(){ return count(preg_files(_DIR_TMP.'visites/','.')); }
@@ -1249,11 +1249,11 @@ if(isset($GLOBALS['mes_outils'])) {
 
 // Idees d'ajouts :
 // http://archives.rezo.net/spip-core.mbox/
-// http://www.spip-contrib.net/Citations
-// http://www.spip-contrib.net/la-balise-LESMOTS et d'autres balises #MAINTENANT #LESADMINISTRATEURS #LESREDACTEURS #LESVISITEURS
-// http://www.spip-contrib.net/Ajouter-une-lettrine-aux-articles
-// http://www.spip-contrib.net/Generation-automatique-de
-// http://www.spip-contrib.net/Balise-LOGO-ARTICLE-ORITRAD
+// https://contrib.spip.net/Citations
+// https://contrib.spip.net/la-balise-LESMOTS et d'autres balises #MAINTENANT #LESADMINISTRATEURS #LESREDACTEURS #LESVISITEURS
+// https://contrib.spip.net/Ajouter-une-lettrine-aux-articles
+// https://contrib.spip.net/Generation-automatique-de
+// https://contrib.spip.net/Balise-LOGO-ARTICLE-ORITRAD
 // boutonstexte
 
 //global $cs_variables; cs_log($cs_variables, 'cs_variables :');

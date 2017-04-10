@@ -6,7 +6,7 @@
 	<refsynopsisdiv>
 		<author>
 			il, Izo, BoOz, PieroWbmstr
-			<authorblurb>{@link http://www.spip-contrib.net/Thickbox}</authorblurb>
+			<authorblurb>{@link https://contrib.spip.net/Thickbox}</authorblurb>
 		</author>
 		<license>
 			{@link http://www.opensource.org/licenses/gpl-3.0.html GNU GPL v3}
@@ -305,7 +305,7 @@
 	</refsect1>
 	<refsect1 id="{@id config}">
 		<title>Configuration</title>
-		<p>Ce plugin est configurable dans la partie priv&eacute;e de SPIP gr&acirc;ce au plugin 'CFG' (<i><a href="http://www.spip-contrib.net/Config-cfg" target="_blank" title="Voir la page du plugin sur spip-contrib.net">plugin 'config' sur spip-contrib</a></i>) &agrave; l'adresse : '<b><a href="[(#URL_ECRIRE{cfg}|parametre_url{cfg,thickbox})]" title="Panneau de configuration du plugin Thickbox">/?exec=cfg&amp;cfg=thickbox</a></b>'.
+		<p>Ce plugin est configurable dans la partie priv&eacute;e de SPIP gr&acirc;ce au plugin 'CFG' (<i><a href="https://contrib.spip.net/Config-cfg" target="_blank" title="Voir la page du plugin sur contrib.spip.net">plugin 'config' sur contrib.spip</a></i>) &agrave; l'adresse : '<b><a href="[(#URL_ECRIRE{cfg}|parametre_url{cfg,thickbox})]" title="Panneau de configuration du plugin Thickbox">/?exec=cfg&amp;cfg=thickbox</a></b>'.
 			<center>#THICKBOX{image,#CHEMIN{images/screenshot_cfg.png},Panneau de configuration de la partie priv&#233;e}</center>
 		</p>
 	</refsect1>

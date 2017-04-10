@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                             #
 #  File    : configuration/spipbb_mots                          #
 #  Authors : chryjs 2008 et als                                 #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs      #
 #  Contact : chryjs!@!free!.!fr                                 #
 # [fr] Gestion de mots cles necessaires pour SpipBB             #
 # [en] Manage SpipBB required keywords                          #

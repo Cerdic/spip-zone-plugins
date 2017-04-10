@@ -31,7 +31,7 @@ function critere_CONDITION_si_dist($idb, &$boucles, $crit) {
 }
 
 /**
- * http://www.spip-contrib.net/Classer-les-articles-par-nombre-de#forum409210
+ * https://contrib.spip.net/Classer-les-articles-par-nombre-de#forum409210
  * Permet de faire un comptage par table liee
  * exemple
  * <BOUCLE1(AUTEURS){compteur articles}{par compteur_articles}>

@@ -6,7 +6,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Pipeline ieconfig pour l'import/export de configuration
  * 
  *
- * @see http://contrib.spip.net/Importeur-Exporteur-de-configurations-documentation
+ * @see https://contrib.spip.net/Importeur-Exporteur-de-configurations-documentation
  * @param array $flux
  * @return array
  */

@@ -21,7 +21,7 @@
 	<options>openid_options.php</options>
 	<lien>https://contrib.spip.net/OpenID-pour-SPIP</lien><!-- URI de documentation -->
 	<necessite id='SPIP' version="[2.0.0;2.0.99]" />
-	<necessite id="lib:openid-php-openid-ee669c6" src="http://contrib.spip.net/IMG/zip/openid-php-openid-master-ee669c6.zip" />
+	<necessite id="lib:openid-php-openid-ee669c6" src="https://contrib.spip.net/IMG/zip/openid-php-openid-master-ee669c6.zip" />
 	<chemin dir="./" />
 	<chemin dir="spip_2_0" />
 	<prefix>openid</prefix>
@@ -83,7 +83,7 @@
 	</description>
 	<options>openid_options.php</options>
 	<lien>https://contrib.spip.net/OpenID-pour-SPIP</lien>
-	<necessite id="lib:openid-php-openid-ee669c6" src="http://contrib.spip.net/IMG/zip/openid-php-openid-master-ee669c6.zip" />
+	<necessite id="lib:openid-php-openid-ee669c6" src="https://contrib.spip.net/IMG/zip/openid-php-openid-master-ee669c6.zip" />
 	<chemin dir="./" />
 	<chemin dir="spip_2_1" />
 	<prefix>openid</prefix>

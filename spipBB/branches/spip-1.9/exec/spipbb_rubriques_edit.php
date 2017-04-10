@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                                 #
 #  File    : exec/spipbb_rubriques_edit                             #
 #  Authors : scoty 2007                                             #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs          #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs          #
 #  Source  : base sur le script spip : rubrique_edit                #
 #  Contact : Hugues AROUX scoty!@!koakidi!.!com                     #
 # [fr] page sujet/thread                                            #

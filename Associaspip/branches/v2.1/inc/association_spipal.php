@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // Fonction prenant en charge la validation d'une notification de paiement Paypal
 // Voir les specifications dans 
-// http://www.spip-contrib.net/Plugin-SPIPAL
+// https://contrib.spip.net/Plugin-SPIPAL
 
 // Actuellement on considère que tout paiement est un don.
 

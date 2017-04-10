@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * La fonction renvoie web s'il faut afficher le site classique,
  * sinon elle renvoie le type de mobile.
  * La détection passe par plusieurs phases décrites
- * ici: http://contrib.spip.net/IMG/pdf/description_du_plugin_cimobile_110726.pdf
+ * ici: https://contrib.spip.net/IMG/pdf/description_du_plugin_cimobile_110726.pdf
  * 
  * À noter que le cookie est renommé "pages_mobiles"
  *  comme le paramètre d'URL à passer "&pages_mobiles=le_nom_du_type_de_mobile"

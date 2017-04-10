@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_insertion' => 'Insertion dans les pages :',
 	'cfg_liste_site' => 'Liste des sites sociaux',
 	'cfg_plusone' => 'Google plus one',
-	'cfg_plusone_existe' => 'Pour activer Google+1, installer le plugin (<a href="http://contrib.spip.net/Google-1" class="spip_out">aide sur spip-contrib</a>).',
+	'cfg_plusone_existe' => 'Pour activer Google+1, installer le plugin (<a href="https://contrib.spip.net/Google-1" class="spip_out">aide sur contrib.spip</a>).',
 	'cfg_referer' => 'N’afficher le badge et les boutons que pour les visiteurs originaires des sites concernés.',
 	'cfg_selector' => 'Sélecteur :',
 	'cfg_sous_bloc' => 'Sous le bloc de titre des pages article',

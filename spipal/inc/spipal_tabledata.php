@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // le code ci-dessous est une modification par Thierry Schmit
 // du code du plugin Table Data de Christophe BOUTIN
 // qui lui meme etait une modification d'une de mes extensions de SPIP:
-// http://www.spip-contrib.net/La-gestion-de-tables-SQL
+// https://contrib.spip.net/La-gestion-de-tables-SQL
 
 //gestion de la présentation des clé primaires sous une forme
 //compréhensible par un humain

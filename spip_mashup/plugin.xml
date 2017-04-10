@@ -1,7 +1,7 @@
 <plugin>
 	<nom>SPIP Mashup</nom>
 	<slogan>Afficher le contenu d'une rubrique sur une carte</slogan>
-	<auteur>[Jean-Marc Viglino->http://contrib.spip.net/_Viglino-Jean-Marc_]</auteur>
+	<auteur>[Jean-Marc Viglino->https://contrib.spip.net/_Viglino-Jean-Marc_]</auteur>
 	<version>0.1.0</version>
 	<icon>img/mashup.png</icon>
 	<etat>test</etat>

@@ -127,7 +127,7 @@ function action_odt2spip_importe() {
     $remplace = array('<','>','<','>', "'");
 
     // si plugin TYPOENLUMINE est en version 3 (ou plus) utiliser la syntaxe {{{**titre 2}}} a la place de {2{titre 2}2}
-    // (cf http://www.spip-contrib.net/odt2spip-creation-d-articles-a-partir-de-fichiers#forum435614)
+    // (cf https://contrib.spip.net/odt2spip-creation-d-articles-a-partir-de-fichiers#forum435614)
     if (array_key_exists('TYPOENLUMINEE', $Tplugins) AND intval(substr($Tplugins['TYPOENLUMINEE']['version'], 0, 1)) >= 3) {
 		array_push($a_remplacer, '{2{', '}2}', '{3{', '}3}', '{4{', '}4}', '{5{', '}5}');
 		array_push($remplace, '{{{**', '}}}', '{{{***', '}}}', '{{{****', '}}}', '{{{*****', '}}}');

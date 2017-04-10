@@ -12,7 +12,7 @@
 	<!-- Définition de balises #SWITCH, #CASE et et #CASE_DEFAULT pour les créateurs de squelette, pour comparer une valeur à plusieurs autres.
  -->
 
-	<auteur lien="http://contrib.spip.net/JLuc">JLuc</auteur>
+	<auteur lien="https://contrib.spip.net/JLuc">JLuc</auteur>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 
 	<credit lien="https://thenounproject.com/term/flow-chart/49063/">Inspiration pour l'icone : flowchart by Piotr Kołodziejski, Licence Creative Commons</credit>

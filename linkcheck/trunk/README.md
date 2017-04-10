@@ -2,7 +2,7 @@
 
 Ce plugin permet de chercher et tester l’ensemble des liens présents dans les objets. 
 
-[Documentation](http://contrib.spip.net/LinkCheck-verificateur-de-liens)
+[Documentation](https://contrib.spip.net/LinkCheck-verificateur-de-liens)
 
 ## Todo
 
@@ -53,22 +53,22 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 
 ### Version 1.3.6
 
-* `.brussels` c'est 8 caractères, on en autorise 9 maintenant (cf [post sur spip-contrib](cf [post sur spip-contrib](http://contrib.spip.net/LinkCheck-verificateur-de-liens#forum489219)
+* `.brussels` c'est 8 caractères, on en autorise 9 maintenant (cf [post sur contrib.spip](cf [post sur contrib.spip](https://contrib.spip.net/LinkCheck-verificateur-de-liens#forum489219)
 
 ### Version 1.3.5
 
-* Accepter le caractère `@` dans une Url (cf [post sur spip-contrib](http://contrib.spip.net/LinkCheck-verificateur-de-liens#forum489219)
-* Limiter l'affichage de l'alerte au webmestre que s'il y a un lien mort ou malade, pas d'affichage s'il n'y a que des liens déplacés par exemple (cf [post sur spip-contrib](http://contrib.spip.net/LinkCheck-verificateur-de-liens#forum489219))
+* Accepter le caractère `@` dans une Url (cf [post sur contrib.spip](https://contrib.spip.net/LinkCheck-verificateur-de-liens#forum489219)
+* Limiter l'affichage de l'alerte au webmestre que s'il y a un lien mort ou malade, pas d'affichage s'il n'y a que des liens déplacés par exemple (cf [post sur contrib.spip](https://contrib.spip.net/LinkCheck-verificateur-de-liens#forum489219))
 * présence du lien sur toutes les pages : ce message devient plus informatif en précisant le nombre de liens morts, malades et déplacés
 
 ### Version 1.3.4
 
-* Accepter le caractère `+` dans une Url (cf [post sur spip-contrib](http://contrib.spip.net/LinkCheck-verificateur-de-liens#forum489212)
+* Accepter le caractère `+` dans une Url (cf [post sur contrib.spip](https://contrib.spip.net/LinkCheck-verificateur-de-liens#forum489212)
 * Détecter les liens sur les statuts d'objets que l'on peut prévisualiser et qui sont publiés et non pas seulement sur une sélection arbitraitre de statuts
 
 ### Version 1.3.3
 
-* Accepter les caractères `:` et `,` dans une Url (cf [post sur spip-contrib](http://contrib.spip.net/LinkCheck-verificateur-de-liens#forum489081)
+* Accepter les caractères `:` et `,` dans une Url (cf [post sur contrib.spip](https://contrib.spip.net/LinkCheck-verificateur-de-liens#forum489081)
 * Accepter les accents dans le nom de domaine
 * Accepter des extensions de noms de domaine jusqu'à 7 caractères (du type `.website` par exemple)
 

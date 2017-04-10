@@ -3,7 +3,7 @@
 /**
  * Plugin FB Antispam
  * (c) 2013 Fabio Bertagnin - FBServices - www.fbservices.fr
- * Inspiré de "nospam" de Cedric Morin pour www.yterium.net (http://www.spip-contrib.net/?rubrique1165)
+ * Inspiré de "nospam" de Cedric Morin pour www.yterium.net (https://contrib.spip.net/?rubrique1165)
  * Licence GPL
  *
  */

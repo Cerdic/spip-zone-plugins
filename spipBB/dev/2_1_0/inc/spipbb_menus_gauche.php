@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                             #
 #  File    : inc/spipbb_menus_gauche                            #
 #  Authors : scoty 2007                                         #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs      #
 #  Contact : Hugues AROUX scoty!@!koakidi!.!com                 #
 # [fr] compil menu_arbo.php(gaf) + interface_admin.php(spipbb)  #
 #---------------------------------------------------------------#

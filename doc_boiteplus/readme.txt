@@ -9,7 +9,7 @@ Le plugin Doc boite plus permet d'ajouter une boite de mots clefs aux documents 
 sur la page /ecrire/?exec=articles&id_article=x
 
 Vous devez avoir activé le plugin "des mots clefs partout" qui creera les tables necessaires pour gérer les mots clefs sur les documents
-voir http://www.spip-contrib.net/Des-mots-clefs-partout
+voir https://contrib.spip.net/Des-mots-clefs-partout
 
 Ensuite, vous devez veiller à ne pas mettre trop de groupes de mots clefs sur les documents
 Pour ma part je l'utilise pour 2 groupes de mots departement et ville qui contiennent respectivement 5 et 1200 mots

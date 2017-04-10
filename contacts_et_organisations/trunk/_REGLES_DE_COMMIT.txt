@@ -32,7 +32,7 @@ Il est recommande notament de ne pas supprimer le champ id_auteur des tables spi
 
 
 Merci pour la lecture de ces lignes,
-RDV sur la zone et/ou sur spip-contrib pour partager d'autres idees et commentaires ;-)
+RDV sur la zone et/ou sur contrib.spip pour partager d'autres idees et commentaires ;-)
 
 C.MARION
 

@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Balise &#035;POPUP</nom>
 	<slogan>Gestion d'une fen&#234;tre popup unique</slogan>
-	<auteur>[Piero Wbmstr->http://contrib.spip.net/PieroWbmstr]</auteur>
+	<auteur>[Piero Wbmstr->https://contrib.spip.net/PieroWbmstr]</auteur>
 	<version>1.31.1</version>
 	<licence>&#169; 2010-2011 GPL</licence>
 	<icon>images/popup-128.png</icon>

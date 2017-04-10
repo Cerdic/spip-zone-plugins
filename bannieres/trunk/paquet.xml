@@ -34,7 +34,7 @@
 	
 	<pipeline nom="jqueryui_plugins" inclure="bannieres_pipelines.php" />
 	
-	<!-- Champ extra : http://contrib.spip.net/Champs-Extras-2 -->
+	<!-- Champ extra : https://contrib.spip.net/Champs-Extras-2 -->
 	<pipeline nom="objets_extensibles" inclure="bannieres_pipelines.php" />
 
 	<necessite nom="saisies" compatibilite="[2.0.0;[" />

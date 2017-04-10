@@ -238,14 +238,14 @@
 
 2007-12-29  chryjs  <chryjs!@!free!.!fr>
 
- * Ajout du fond backend-forum manquant pour les boutons RSS http://www.spip-contrib.net/Plugin-SpipBB#forum401676
- * Correction affichage #ID_AUTEUR dans page profil http://www.spip-contrib.net/Plugin-SpipBB#forum401676
+ * Ajout du fond backend-forum manquant pour les boutons RSS https://contrib.spip.net/Plugin-SpipBB#forum401676
+ * Correction affichage #ID_AUTEUR dans page profil https://contrib.spip.net/Plugin-SpipBB#forum401676
  * Page profil correction pour les boutons radio "Apparaitre dans la liste des Inscrits" corrigé
 
 
 2007-12-28  chryjs  <chryjs!@!free!.!fr>
 
- * Ajout d'un controle de revision pour les fonctions trace_query http://www.spip-contrib.net/Plugin-SpipBB#forum400542
+ * Ajout d'un controle de revision pour les fonctions trace_query https://contrib.spip.net/Plugin-SpipBB#forum400542
  * Presentation du profil auteur dans modeles
  * Probleme de crochets dans entete
 
@@ -515,7 +515,7 @@
 
 2007-11-11  chryjs  <chryjs!@!free!.!fr>
 
- * inc/spipbb_192 oubli de parenthèses, bug : http://www.spip-contrib.net/Plugin-SpipBB#forum400092
+ * inc/spipbb_192 oubli de parenthèses, bug : https://contrib.spip.net/Plugin-SpipBB#forum400092
  * correction erreur ORDER BY doit etre un array (surtout en 192)
  * meilleure presentation de menu admin
  * Retour en arriere sur le fichier plugin.xml et spipbb_pipelines pour remettres les boutons qui n'etaient plus visibles en 192
@@ -527,7 +527,7 @@
  * Admin info : Presentation et traduction [fr] [en]
  * Admin config : Presentation et traduction [fr] [en] correction des actions
  * Admin Correction de la presentation + bug select id_rubrique + actions / exec
- * inc/forum_insert doit inclure inc/spipbb pour la compatibilite 192 voir : http://www.spip-contrib.net/Plugin-SpipBB#forum400088
+ * inc/forum_insert doit inclure inc/spipbb pour la compatibilite 192 voir : https://contrib.spip.net/Plugin-SpipBB#forum400088
 
 2007-11-09  chryjs  <chryjs!@!free!.!fr>
 
@@ -536,7 +536,7 @@
 2007-11-08  chryjs  <chryjs!@!free!.!fr>
 
  * Correction de la librairie de compatibilite, mauvaise adaptation du code de sql_fetch et de spip_mysql_explain donc bug !
- * Correction des credits (remarques sur la liste), renvoi vers la documentation http://www.spip-contrib.net/Plugin-SpipBB#contributeurs
+ * Correction des credits (remarques sur la liste), renvoi vers la documentation https://contrib.spip.net/Plugin-SpipBB#contributeurs
  * Correction mots cles annonce postit et ferme dans modeles/spipbb_liste_sujets et filforum, il reste un "soucis" postit et annonce ne peuvent s'appliquer qu'au message principal du thread et on ne peut pas appliquer fermé n'importe comment
  * Ajout d'un filtrage du spam : formulaire de configuration, filtre au post, tables. Ne manque que la saisie de la liste.
 

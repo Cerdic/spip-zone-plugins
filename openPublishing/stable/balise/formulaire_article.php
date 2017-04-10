@@ -78,7 +78,7 @@ if (isset($_GET['id_article'])) return _T('opconfig:erreur_protection');
  *  récapitulatif des pipelines :
  * ==============================
  *
- * (cf spip-contrib pour exemples d'utilisations et doc plus complete)
+ * (cf contrib.spip pour exemples d'utilisations et doc plus complete)
  *
  * OP_environnement : permet aux plugins d'ajouter des variables d'environnement
  * OP_pre_validation : permet aux plugins d'effectuer des traitements avant la validation

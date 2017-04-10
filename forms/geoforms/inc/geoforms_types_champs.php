@@ -10,7 +10,7 @@
  */
 
 //// Informations sur les pipelines (points d’entrées) de 'Forms & Tables' disponibles à l'adresse :
-//// --> http://www.spip-contrib.net/Les-points-d-entrees-de-Forms
+//// --> https://contrib.spip.net/Les-points-d-entrees-de-Forms
  
  /*
 	Pipeline "forms_types_champs" :

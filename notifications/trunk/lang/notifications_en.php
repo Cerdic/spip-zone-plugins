@@ -96,7 +96,7 @@ Restricted administrators get notified when new posts are published in the secto
 	'inscription_statut_webmestres' => 'Webmaster',
 
 	// L
-	'lien_documentation' => '<a href="http://contrib.spip.net/Notifications" class="spip_out">View documentation</a>',
+	'lien_documentation' => '<a href="https://contrib.spip.net/Notifications" class="spip_out">View documentation</a>',
 	'limiter_rubriques_explication' => 'Specify the identifiers of each section where you want to activate the notifications, separated with a comma. example: "11,26"',
 	'limiter_rubriques_label' => 'Limit to these sections:',
 

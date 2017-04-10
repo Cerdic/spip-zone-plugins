@@ -611,7 +611,7 @@ function XMLObjectToArray($object){
  * xml -> tableau
  * @param  string $u
  * @return array
- * from cerdic et marcimat sur http://contrib.spip.net/Les-Iterateurs-pour-SPIP-2-1#forum457898
+ * from cerdic et marcimat sur https://contrib.spip.net/Les-Iterateurs-pour-SPIP-2-1#forum457898
  */
 
 function inc_simplexml_to_array_dist($u){

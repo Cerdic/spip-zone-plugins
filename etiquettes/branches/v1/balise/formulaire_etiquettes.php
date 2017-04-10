@@ -4,7 +4,7 @@
 #  Auteur  : RastaPopoulos                          #
 #  Licence : GPL                                    #
 #------------------------------------------------------------------------------------------------------#
-#  Documentation : http://www.spip-contrib.net/Plugin-Etiquettes                                       #
+#  Documentation : https://contrib.spip.net/Plugin-Etiquettes                                       #
 #                                                                                                      #
 #  Définition de la balise #FORMULAIRE_ETIQUETTES                                                      #
 #------------------------------------------------------------------------------------------------------#

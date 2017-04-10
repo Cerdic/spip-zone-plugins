@@ -3,7 +3,7 @@
 /*
  * Plugin CFG pour SPIP
  * (c) toggg 2007, distribue sous licence GNU/GPL
- * Documentation et contact: http://www.spip-contrib.net/
+ * Documentation et contact: https://contrib.spip.net/
  *
  * classe cfg_extrapack: storage serialise dans extra de spip_auteurs ou autre
  */

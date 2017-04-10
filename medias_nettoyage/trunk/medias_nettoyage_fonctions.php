@@ -511,7 +511,7 @@ function medias_lister_logos_fichiers($mode = null, $repertoire_img = _DIR_IMG)
     $logos_site = glob($repertoire_img.'{site}{on,off}0.*', GLOB_BRACE);
     // On évite d'utiliser la fonction `glob()` directement dans le `if` car ça peut créer un bug pour PHP <5.4
     // S'il n'y a pas de siteon0.ext, `glob()` va retourner un `false`. Donc, on regarde si c'est bien un tableau.
-    // cf. http://contrib.spip.net/Nettoyer-la-mediatheque#forum475712
+    // cf. https://contrib.spip.net/Nettoyer-la-mediatheque#forum475712
     if (is_array($logos_site) and count($logos_site) > 0) {
         foreach ($logos_site as $logo_site) {
             if (preg_match(
@@ -534,7 +534,7 @@ function medias_lister_logos_fichiers($mode = null, $repertoire_img = _DIR_IMG)
     }
 
     // On va lister le logo standard des rubriques : rubon0.ext et ruboff0.ext
-    // cf. http://contrib.spip.net/Nettoyer-la-mediatheque#forum475870
+    // cf. https://contrib.spip.net/Nettoyer-la-mediatheque#forum475870
     $logos_rub_racine = glob($repertoire_img.'{rub}{on,off}0.*', GLOB_BRACE);
     if (is_array($logos_rub_racine) and count($logos_rub_racine) > 0) {
         foreach ($logos_rub_racine as $logo_rub_racine) {

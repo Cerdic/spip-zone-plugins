@@ -101,7 +101,7 @@ function update_spip_asso_membre($id_auteur) {
  *
  * Attention : durees en secondes ; ne pas descendre en dessous de 30 secondes !
  * http://programmer.spip.net/Declarer-une-tache
- * http://contrib.spip.net/Ajouter-une-tache-CRON-dans-un-plugin-SPIP
+ * https://contrib.spip.net/Ajouter-une-tache-CRON-dans-un-plugin-SPIP
  */
 function association_taches_generales_cron($crontab) {
 	$crontab['asso_membres_echus'] = 60*60*24; // Tous les jours (i.ee 24h de 60' de 60")

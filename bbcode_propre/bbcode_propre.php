@@ -14,7 +14,7 @@
  *  
  * Pour toute suggestion, remarque, proposition d'ajout
  * reportez-vous au forum de l'article :
- * http://www.spip-contrib.net/Du-BBcode-dans-SPIP
+ * https://contrib.spip.net/Du-BBcode-dans-SPIP
 */
 
 function bbcode($chaine) {

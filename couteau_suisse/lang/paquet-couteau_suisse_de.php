@@ -16,7 +16,7 @@ Die verfügbaren Kategorien sind: Verwaltung, Sicherheit, privates Interface, ty
 
 Wählen Sie in diesem Plug-in Ihre bevorzugten Funktionen: {Ziffern entfernen}, {Format der URL}, {typografische Exponenten}, { typografische Anführungszeichen}, {Schöne Aufzählungszeichen}, {SPAM Bekämpfung}, {Mailcrypt}, {ästhetische URL}, {SPIP und externe Links}, {Smileys}, {Inhaltsverzeichnis für Artikel}, {Aufteilung in Seiten und Reiter}, usw.
 
-Lesen Sie auch die Dokumentation des Plug-ins im folgenden Artikel: [contrib.spip.net->http://contrib.spip.net/Le-Couteau-Suisse].
+Lesen Sie auch die Dokumentation des Plug-ins im folgenden Artikel: [contrib.spip.net->https://contrib.spip.net/Le-Couteau-Suisse].
 
 Kompatibilität: SPIP v1.92x, v2.x.x et v3.0',
 	'couteau_suisse_slogan' => 'Viele kleine, neue und nützliche Funktionalitäten für Ihre Webseite!'

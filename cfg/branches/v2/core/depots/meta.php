@@ -3,7 +3,7 @@
 /*
  * Plugin CFG pour SPIP
  * (c) toggg, marcimat 2009, distribue sous licence GNU/GPL
- * Documentation et contact: http://www.spip-contrib.net/
+ * Documentation et contact: https://contrib.spip.net/
  *
  * classe cfg_classic: storage a plat (classique) dans spip_meta
  */

@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                          #
 #  File    : genie/statvisites - stats de visites des forums #
 #  Authors : Chryjs, 2007 et als                             #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs   #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs   #
 #  Contact : chryjs!@!free!.!fr                              #
 #------------------------------------------------------------#
 

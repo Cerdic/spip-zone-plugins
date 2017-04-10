@@ -84,7 +84,7 @@ Le critère {id_mot} a sinon été ajouté pour les trois nouvelles boucles, il 
 
 Pour pouvoir utiliser les nouveaux objets de ce plugin, en dépit de l'absence d'une interface de saisie dans l'espace privée de votre site, deux solutions sont possibles : 
 -* Soit, vous utilisez l'interface de gestion de votre base de donnée - par exemple phpMyAdmin. Vraiment peu ergonomique, mais ne nécessite aucune installation supplémentaire.
--* Utilisez ce superbe plugin [TableData->http://www.spip-contrib.net/TableData-pour-Spip-2] qui permet d'éditer toutes les tables de la base de donnée SPIP, directement depuis l'espace privé. Facile à installer, rien à configurer, et beaucoup plus ergonomique. 
+-* Utilisez ce superbe plugin [TableData->https://contrib.spip.net/TableData-pour-Spip-2] qui permet d'éditer toutes les tables de la base de donnée SPIP, directement depuis l'espace privé. Facile à installer, rien à configurer, et beaucoup plus ergonomique. 
 
 Considérant l'utilisation conjointe de ce plugin avec le plugin TableData, voici quelques éléments qu'il sera bon de prendre en compte :
 -* Les tables {vu_*} sont les tables principales. 

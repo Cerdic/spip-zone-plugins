@@ -12,7 +12,7 @@ Le plugin supporte des paramètres à l’adresse email. Ces paramètres doivent
 
 Langues actuelles disponibles (en, nl à compléter): fr, en, nl
 
-La documentation [est ici->http://contrib.spip.net/Codeur-d-adresse-email-2-plugin].'
+La documentation [est ici->https://contrib.spip.net/Codeur-d-adresse-email-2-plugin].'
 
    );
      

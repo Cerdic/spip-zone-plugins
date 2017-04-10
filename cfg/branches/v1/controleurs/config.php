@@ -8,7 +8,7 @@
  * @subpackage cfg
  * @category   outils
  * @copyright  (c) toggg, marcimat 2007-2008
- * @link       http://www.spip-contrib.net/
+ * @link       https://contrib.spip.net/
  * @version    $Id$
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;

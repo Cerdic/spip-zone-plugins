@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Flux RSS configurable</nom>
 	<slogan>Personnaliser le flux RSS des articles du site</slogan>
-	<auteur>[Joseph->http://contrib.spip.net/Joseph]</auteur>
+	<auteur>[Joseph->https://contrib.spip.net/Joseph]</auteur>
 	<icon>prive/themes/spip/images/rssconfig-32.png</icon>
 	<licence>GNU/GPL</licence>
 	<version>1.4.1</version>

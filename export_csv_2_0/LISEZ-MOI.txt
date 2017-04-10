@@ -20,7 +20,7 @@
           o aux articles
     * les pétitions
     
-    voir http://www.spip-contrib.net/Export-CSV-des-articles-pour
+    voir https://contrib.spip.net/Export-CSV-des-articles-pour
 
 -----------------------------------------
 	INSTALLATION :

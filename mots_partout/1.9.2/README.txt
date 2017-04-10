@@ -5,7 +5,7 @@ Description:
 
 [fr] Page de l'interface privée pour pouvoir mettre des mots clefs sur
 n'importe quelle "objet" spip. Pour plus d'info, voir la contrib sur
-spip-contrib.net. L'interface etait destiné à l'origine à l'ajout de
+contrib.spip.net. L'interface etait destiné à l'origine à l'ajout de
 mots clefs sur les documents et s'inspirait d'iPhoto. 
 
 Utilisation 
@@ -70,6 +70,6 @@ TODO.txt what remains to do,
 BUG.txt the known bugs.
 
 Page de la contrib:
-http://spip-contrib.net/ecrire/articles.php3?id_article=905
+https://contrib.spip.net/ecrire/articles.php3?id_article=905
 
 

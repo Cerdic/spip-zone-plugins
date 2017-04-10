@@ -155,7 +155,7 @@ aucune information n'a ete trouvee. Par defaut, les guillements sont alors
 de la forme &ldquo;mot&rdquo;, sauf si la barre d'insertion de SPIP proposait
 deja une autre forme.
 
-Version optimisee par Patrice Vanneufville (2007) cf http://www.spip-contrib.net/?article1592
+Version optimisee par Patrice Vanneufville (2007) cf https://contrib.spip.net/?article1592
 */
 
 // voir aussi : http://trac.rezo.net/trac/spip/changeset/9429
@@ -287,7 +287,7 @@ function orthotypo_espaces_fines_post_typo($t='') {
 
 // Filtre typographique exposants pour langue francaise
 // serieuse refonte 2006 : Patrice Vanneufville
-// Toutes les infos sur : http://www.spip-contrib.net/?article1564
+// Toutes les infos sur : https://contrib.spip.net/?article1564
 
 // TODO : raccourci pour les exposants et indices (Pouce^2 ou Pouce^2^, H_2O ou H_2_O ou H,,2,,O
 // exemple : http://zone.spip.org/trac/spip-zone/wiki/WikiFormatting

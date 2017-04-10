@@ -7,7 +7,7 @@
  * @author     RastaPopoulos
  * @licence    GNU/GPL
  * @package    SPIP\Pages\Installation
- * @link       http://contrib.spip.net/Pages-uniques
+ * @link       https://contrib.spip.net/Pages-uniques
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {

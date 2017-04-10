@@ -330,7 +330,7 @@ function ckeditor_html2spip($texte) {
   $ckeditor_html2spip_pre = charger_fonction('ckeditor_html2spip_pre','');
   $texte = $ckeditor_html2spip_pre($texte);
 
-  $search[] = "~<br/?>(\s|\r|\n)*</li>(\s|\r|\n)*~" ; // fix: http://contrib.spip.net/CKeditor-3-0#forum468504
+  $search[] = "~<br/?>(\s|\r|\n)*</li>(\s|\r|\n)*~" ; // fix: https://contrib.spip.net/CKeditor-3-0#forum468504
   $replace[] = function($m) {return "</li>";};
 
   if (PROTECTED_SPIP_TAGS) {
@@ -485,7 +485,7 @@ function ckeditor_spip2html($texte) {
 	}
 
 	foreach($search as $k => $v)
-		$texte = propre(preg_replace_callback($v, $replace[$k], $texte)) ; // utilisation du filtre 'propre' : conseil de http://www.spip-contrib.net/RealET,411
+		$texte = propre(preg_replace_callback($v, $replace[$k], $texte)) ; // utilisation du filtre 'propre' : conseil de https://contrib.spip.net/RealET,411
 
 	$texte = preg_replace("~\[\*\[\*~", "[[", $texte) ; // on déprotège ...
 	if (PROTECTED_SPIP_TAGS) {

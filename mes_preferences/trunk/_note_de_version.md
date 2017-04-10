@@ -10,12 +10,12 @@ Date : Thu Jul 19 11:27:58 2012
 SOURCES :
 ========
 
-- basicone : <http://www.spip-contrib.net/basicone-icones-du-theme-prive>
+- basicone : <https://contrib.spip.net/basicone-icones-du-theme-prive>
 
-- Thèmes pour l’interface privée : <http://www.spip-contrib.net/Themes-pour-l-interface-privee>
+- Thèmes pour l’interface privée : <https://contrib.spip.net/Themes-pour-l-interface-privee>
 
 UTILISE :
-- jappixmini : http://contrib.spip.net/Jappix-Mini
+- jappixmini : https://contrib.spip.net/Jappix-Mini
 
 DOC :
 =====

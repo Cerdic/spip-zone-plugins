@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_classement' => 'Classification of items displayed',
 'label_explication' => 'Documentation and test pages links',
 'label_type' => 'Type of menu',
-'lien_doc' => 'See documentation on spip-contrib.net',
+'lien_doc' => 'See documentation on contrib.spip.net',
 
 // M
 

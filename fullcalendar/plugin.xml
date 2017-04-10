@@ -6,14 +6,14 @@
 		[en]JQuery FullCalendar for SPIP!
 		</multi>
 	</slogan>
-	<auteur>[Gr&#233;gory Pascal->http://contrib.spip.net/ngombe]</auteur>
+	<auteur>[Gr&#233;gory Pascal->https://contrib.spip.net/ngombe]</auteur>
 	<version>0.1.4</version>
 	<licence>GNU/GPL</licence>
 	<etat>test</etat>
 	<description>
 		<multi>
-			[fr]Gestion de calendriers pour l'espace public bas&#233;e sur [FullCalendar v1.5.2->http://arshaw.com/fullcalendar/] de [Adam Shaw->http://arshaw.com/], <a href="http://contrib.spip.net/Config-cfg" title="CFG">CFG</a> et le plugin [jQuery UI->http://contrib.spip.net/jQuery-UI-pour-SPIP].
-			[en]Calendar suite for SPIP, based on [Adam Shaw->http://arshaw.com/]'s [FullCalendar v1.5.2->http://arshaw.com/fullcalendar/], <a href="http://contrib.spip.net/Config-cfg" title="CFG">CFG</a> and [jQuery UI->http://contrib.spip.net/jQuery-UI-pour-SPIP].
+			[fr]Gestion de calendriers pour l'espace public bas&#233;e sur [FullCalendar v1.5.2->http://arshaw.com/fullcalendar/] de [Adam Shaw->http://arshaw.com/], <a href="https://contrib.spip.net/Config-cfg" title="CFG">CFG</a> et le plugin [jQuery UI->https://contrib.spip.net/jQuery-UI-pour-SPIP].
+			[en]Calendar suite for SPIP, based on [Adam Shaw->http://arshaw.com/]'s [FullCalendar v1.5.2->http://arshaw.com/fullcalendar/], <a href="https://contrib.spip.net/Config-cfg" title="CFG">CFG</a> and [jQuery UI->https://contrib.spip.net/jQuery-UI-pour-SPIP].
 		</multi>
 	</description>
 	<icon>prive/themes/spip/images/fullcalendar-32.png</icon>

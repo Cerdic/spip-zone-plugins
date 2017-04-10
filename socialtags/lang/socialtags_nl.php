@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_insertion' => 'Invoegen in bladzijdes:',
 	'cfg_liste_site' => 'Liijst van sociale sites',
 	'cfg_plusone' => 'Google+1',
-	'cfg_plusone_existe' => 'Om Google+1 te gebruiken, moet je een plugin activeren: (<a href="http://contrib.spip.net/Google-1" class="spip_out">hulp op spip-contrib</a>).',
+	'cfg_plusone_existe' => 'Om Google+1 te gebruiken, moet je een plugin activeren: (<a href="https://contrib.spip.net/Google-1" class="spip_out">hulp op contrib.spip</a>).',
 	'cfg_referer' => 'Toon de badge en knopppen uitsluitend voor bezoekers afkomstig van die sites.',
 	'cfg_selector' => 'Keuze:',
 	'cfg_sous_bloc' => 'Onder het titelblok van artikelbladzijdes',

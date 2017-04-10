@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                                      #
 #  File    : balise/spipbb_avatar                                        #
 #  Authors : Chryjs, 2008 +                                              #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs               #
+#  https://contrib.spip.net/Plugin-SpipBB#contributeurs               #
 #  Contact : chryjs!@!free!.!fr                                          #
 #  balise #SPIPBB_AVATAR                                                 #
 #------------------------------------------------------------------------#

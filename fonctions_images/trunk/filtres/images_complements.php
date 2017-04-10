@@ -1107,7 +1107,7 @@ function image_monochrome($img,$largeur=20,$seuil=13){
 /* une fonction importee du plugin fotoremix par Yohann Prigent 
 *
 * remplace aussi cette mise contribution :
-* http://www.spip-contrib.net/Filtre-image_superpose
+* https://contrib.spip.net/Filtre-image_superpose
 * 
 * 
 * @param unknown_type $img

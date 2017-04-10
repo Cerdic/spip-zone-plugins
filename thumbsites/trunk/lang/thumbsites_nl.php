@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_rafraichir' => 'Ververs de afbeelding',
 
 	// C
-	'cfg_descriptif' => 'Op deze bladzijde kun je de plugin Thumbsites configureren, en in het bijzonder de afbeeldingsserver kiezen. Kijk voor meer informatie op <a href="http://contrib.spip.net/?article2584">de documentatie op contrib</a>',
+	'cfg_descriptif' => 'Op deze bladzijde kun je de plugin Thumbsites configureren, en in het bijzonder de afbeeldingsserver kiezen. Kijk voor meer informatie op <a href="https://contrib.spip.net/?article2584">de documentatie op contrib</a>',
 	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</a> biedt een gratis service die geen identificatie vereist.',
 	'cfg_inf_choix_serveur' => 'Kies de server die de afbeeldingen van de gerefereerde sites gaat leveren en vul eventuele parameters aan.',
 	'cfg_inf_miwim_presentation' => 'Om deze service te gebruiken moet je een link maken naar de site <a href="http://thumbs.miwim.fr">Miwim</a>. De aanwezigheid van de link wordt regelmatig door een script gecontroleerd.',

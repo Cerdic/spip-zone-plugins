@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_descriptif' => 'Auf dieser Seite können sie das Plugin Thumbsites konfigurieren und den Thumbnailserver einstellen. Weitere Informationen: <a href="http://contrib.spip.net/?article2584">Dokumentation auf Spip-Contrib</a>',
+	'cfg_descriptif' => 'Auf dieser Seite können sie das Plugin Thumbsites konfigurieren und den Thumbnailserver einstellen. Weitere Informationen: <a href="https://contrib.spip.net/?article2584">Dokumentation auf Spip-Contrib</a>',
 	'cfg_inf_rotothumb_presentation' => 'Um diesen Dienst zu nutzen, brauchen sie sich nicht anzumelden, abe sie müssen einen Link zur Site <a href="http://www.robothumb.com">Robothumb</a> setzen. Die Existenz dieses Links wird vom Betreiber überprüft.',
 	'cfg_inf_websnapr_presentation' => 'Um diesen Dienst zu nutzen, müssen sie sich bei <a href="http://www.websnapr.com">Websnapr</a> anmelden. Die kostenlose Version erlaubt 250.000 Screenshots pro Monat und schafft bis zu 80 neue Screenshots pro Stunde.',
 	'cfg_itm_serveur_robothumb' => 'Robothumb',

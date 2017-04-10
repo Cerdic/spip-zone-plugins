@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Image Rotator</nom>
-	<auteur>[Grégory Pascal->http://contrib.spip.net/ngombe]</auteur>
+	<auteur>[Grégory Pascal->https://contrib.spip.net/ngombe]</auteur>
 	<slogan><multi>
 	[fr]Afficher un diaporama JW Image Rotator
 	[en]Display a JW Image Rotator slideshow
@@ -9,8 +9,8 @@
 	<licence>GNU/GPL</licence>
 	<etat>test</etat>
 	<description><multi>
-	[fr]Ajoute un diaporama [JW Image Rotator->http://www.longtailvideo.com/players/jw-image-rotator/] param&#233;trable via [CFG->http://contrib.spip.net/Config-cfg]
-	[en]Add a [JW Image Rotator->http://www.longtailvideo.com/players/jw-image-rotator/] slideshow using [CFG->http://contrib.spip.net/Config-cfg]
+	[fr]Ajoute un diaporama [JW Image Rotator->http://www.longtailvideo.com/players/jw-image-rotator/] param&#233;trable via [CFG->https://contrib.spip.net/Config-cfg]
+	[en]Add a [JW Image Rotator->http://www.longtailvideo.com/players/jw-image-rotator/] slideshow using [CFG->https://contrib.spip.net/Config-cfg]
 	</multi></description>
 	<lien>https://contrib.spip.net/JW-Image-Rotator</lien>
 	<icon>img_pack/imagerotator-32.png</icon>
