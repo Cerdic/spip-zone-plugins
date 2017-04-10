@@ -21,6 +21,11 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 
 ## Versions 1.4.x
 
+### Version 1.4.1
+
+* Ne passer dans le pipeline post_edition avec action instituer que si le statut change
+* Interdire la duplication d'une tâche `genie_linkcheck_test_postedition`
+
 ### Version 1.4.0
 
 * Permettre de filtrer les liens distants et internes

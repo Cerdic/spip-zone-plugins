@@ -24,7 +24,9 @@ function linkcheck_post_edition($flux) {
 	 */
 	if (isset($flux['args']['type'])) {
 		$objet = $flux['args']['type'];
-	} elseif (isset($flux['args']['table'])) {
+	} elseif ($flux['args']['action'] == 'instituer'
+		and isset($flux['data']['statut'])
+		and isset($flux['args']['table'])) {
 		$objet = objet_type($flux['args']['table']);
 	}
 
@@ -157,11 +159,15 @@ function linkcheck_post_edition($flux) {
 				}
 			}
 			include_spip('inc/queue');
+			spip_log('Add post edition '.$objet.' '.$id_objet, 'test.'._LOG_ERREUR);
 			queue_add_job(
 				'genie_linkcheck_test_postedition',
 				'Tests post_edition des liens d\'un objet',
 				array($id_objet, $objet),
-				'genie/linkcheck_test_postedition'
+				'genie/linkcheck_test_postedition',
+				true,
+				0,
+				-5
 			);
 		}
 	}
