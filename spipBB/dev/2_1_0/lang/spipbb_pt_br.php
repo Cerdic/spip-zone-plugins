@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'Escolha Sim para habilitar o SpipBB',
 	'admin_config_tables' => 'Configuração das tabelas do SpipBB',
 	'admin_config_tables_erreur' => 'Problema com as tabelas do SpipBB: @tables_erreur@ estão incorretas (as tabelas @tables_ok@ parecem estar corretas).
- Consulte a [documentação em Spip-Contrib->https://contrib.spip.net/SpipBB-le-forum] ou o [suporte em spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]', # MODIF
+ Consulte a [documentação em contrib.spip->https://contrib.spip.net/SpipBB-le-forum] ou o [suporte em spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]', # MODIF
 	'admin_config_tables_ok' => 'As tabelas do SpipBB estão corretamente instaladas (@tables_ok@)',
 	'admin_date_ouverture' => 'Data de abertura',
 	'admin_debug_log' => 'Arquivo de log @log_name@',

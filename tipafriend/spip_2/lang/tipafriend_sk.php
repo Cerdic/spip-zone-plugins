@@ -56,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'doc_chapo' => 'Zásuvný modul "Odporučiť priateľom" ponúka kompletný formulár na odoslanie ({hocijakej}) stránky v SPIPe na viacero e-mailových adries.',
-	'doc_en_ligne' => 'Dokumentácia zásuvného modulu na stránke Spip-Contrib',
+	'doc_en_ligne' => 'Dokumentácia zásuvného modulu na stránke contrib.spip',
 	'doc_titre_court' => 'Dokumentácia zásuvného modulu Odporučiť priateľom',
 	'doc_titre_page' => 'Dokumentácia zásuvného modulu "Odporučiť priateľom"',
 	'docskel_sep' => '----',

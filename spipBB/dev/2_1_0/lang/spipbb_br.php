@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'Klikit war Ya evitobergant SpipBB',
 	'admin_config_tables' => 'Ober war-dro diazoù SpipBB',
 	'admin_config_tables_erreur' => 'Kudenn gant diazoù SpipBB : direizh eo @tables_erreur@ (reizh e seblant bezañ @tables_ok@)
-Gwelit an [dielloù diwar-benn Spip-Contrib->https://contrib.spip.net/SpipBB-le-forum] pe [skoazell spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]',
+Gwelit an [dielloù diwar-benn contrib.spip->https://contrib.spip.net/SpipBB-le-forum] pe [skoazell spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]',
 	'admin_config_tables_ok' => 'Staliet mat eo diazoù SpipBB (@tables_ok@)',
 	'admin_date_ouverture' => 'Deiziad digeriñ',
 	'admin_debug_log' => 'Restr log @log_name@',

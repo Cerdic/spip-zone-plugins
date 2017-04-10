@@ -85,7 +85,7 @@ $GLOBALS['i18n_pubban_fr'] = array(
 	
 	// Documentation
 	'doc_chapo' => 'Le plugin "Pub Banner" propose une gestion de banni&egrave;res publicitaires pour des squelettes SPIP.',
-	'doc_en_ligne' => 'Documentation du plugin sur Spip-Contrib',
+	'doc_en_ligne' => 'Documentation du plugin sur contrib.spip',
 	'doc_titre_court' => 'Documentation Pub Banner',
 	'doc_titre_page' => 'Documentation du plugin "Pub Banner"',
 	'docskel_sep' => '----',
@@ -113,7 +113,7 @@ Ces banni&egrave;res s\'int&egrave;grent dans vos squelettes en indiquant simple
 Suivie du nom de la banni&egrave;re que vous souhaitez afficher. La balise est remplac&eacute;e par une frame de la taille de la banni&egrave;re.',
 	'documentation_2' => 'Pour une raison pratique [[Spip Bonux est utilis&eacute; par Pub Banner pour sa fonctionnalit&eacute; \'POUR\', qui permet de cr&eacute;er des boucles depuis des array PHP (ndlr) ...]], le plugin PUB BANNER n&eacute;cessite d\'avoir install&eacute; au pr&eacute;alable le plugin {{Spip Bonux}} en version 1.3 au minimum.
 
--* Vous pouvez lire une description de ce plugin sur le site Spip-Contrib &agrave; l\'adresse : [->https://contrib.spip.net/SPIP-Bonux].
+-* Vous pouvez lire une description de ce plugin sur le site contrib.spip &agrave; l\'adresse : [->https://contrib.spip.net/SPIP-Bonux].
 -* Vous pouvez le t&eacute;l&eacute;charger &agrave; l\'adresse : [->http://zone.spip.org/trac/spip-zone/browser/_plugins_/spip-bonux-2?rev=31575] ({ici en version 2}).
 ',
 	'documentation_3' => 'Le plugin propose de suivre l\'efficacit&eacute; des campagnes de plusieurs fa&ccedil;ons :

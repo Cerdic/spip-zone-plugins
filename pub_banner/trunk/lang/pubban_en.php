@@ -104,7 +104,7 @@ These banners fit in your skeletons simply stating the tag:
 Followed by the name of the banner you want to display. The tag is replaced by a frame with the size of the banner.',
 	'documentation_2' => 'For a practical reason [[Spip Bonux is used by Banner Pub for its functionality ’POUR’, that creates loops from the PHP array (Editor’s note) ...]], the plugin "Ad Banner" requires you have previously installed the plugin {{Spip Bonux}} in version 1.3 minimum.
 
--* You can read a description of this plugin on the site Spip-Contrib : [->https://contrib.spip.net/SPIP-Bonux].
+-* You can read a description of this plugin on the site contrib.spip : [->https://contrib.spip.net/SPIP-Bonux].
 -* You can download it here : [->http://zone.spip.org/trac/spip-zone/browser/_plugins_/spip-bonux-2?rev=31575] ({here in version 2}).
 ',
 	'documentation_3' => 'The plugin offers following campaign effectiveness in several ways :

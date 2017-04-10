@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'براي فعال‌سازي اسپيپ بي‌بي بله را كليك كنيد',
 	'admin_config_tables' => 'پيكربندي جدول‌هاي اسپيپ بي‌بي ',
 	'admin_config_tables_erreur' => 'مشكل در جدول‌هاي اسپيپ بي‌بي:@tables_erreur@ نادرست هستند (جدول‌هاي @tables_ok@ درست به نظر مي‌رسند).
- به [documentation on Spip-Contrib->https://contrib.spip.net/SpipBB-le-forum] or  مراجعه كنيد.[support on spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
+ به [documentation on contrib.spip->https://contrib.spip.net/SpipBB-le-forum] or  مراجعه كنيد.[support on spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
 	'admin_config_tables_ok' => 'جدول‌هاي پايگاه‌داده‌هاي اسپيپ بي‌بي درست نصب شده (@tables_ok@)',
 	'admin_date_ouverture' => 'تاريخ گشايش',
 	'admin_debug_log' => 'فايل لاگ @log_name@ ',

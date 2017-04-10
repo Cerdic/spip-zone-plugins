@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'Premer sobre Si para activar SpipBB',
 	'admin_config_tables' => 'Configuración das táboas de SpipBB',
 	'admin_config_tables_erreur' => 'Problema coas táboas de SpipBB : @tables_erreur@ están incorrectas (as táboas @tables_ok@ parecen correctas).
-Consulte a [documentación en Spip-Contrib->https://contrib.spip.net/SpipBB-le-forum] ou a [axuda en spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]',
+Consulte a [documentación en contrib.spip->https://contrib.spip.net/SpipBB-le-forum] ou a [axuda en spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]',
 	'admin_config_tables_ok' => 'As táboas de SpipBB foron correctamente instaladas (@tables_ok@)',
 	'admin_date_ouverture' => 'Data de apertura',
 	'admin_debug_log' => 'Ficheiro de rexistro @log_name@',
@@ -352,20 +352,20 @@ _ Un destacado sitúase por baixo dos anuncios, antes das mensaxes ordinarias. A
 	'pagine_sujet_' => 'asunto',
 	'pagine_sujet_s' => ' asuntos',
 	'par_' => 'por',
-	'plugin_auteur' => 'O equipo SpipBB : [ver a lista de contribuidores en Spip-contrib->https://contrib.spip.net/Plugin-Forum-SpipBB#contributeurs]',
+	'plugin_auteur' => 'O equipo SpipBB : [ver a lista de contribuidores en contrib.spip->https://contrib.spip.net/Plugin-Forum-SpipBB#contributeurs]',
 	'plugin_description' => 'O módulo de SpipBB permite :
 -* Xestionar de forma centralizada os foros d SPIP (interface privada),
 -* Usar un sector como base dun grupo de de foros de tipo «Bulletin Board» como phpBB. Neste sector, as subseccións son grupos de foros, os artigos son os foros, cada mensaxe dentro do foro dun artigo comeza un fío.
 
 {{Consulte :}}
 -* •[a axuda en spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
--* •[a documentación en Spip-contrib->https://contrib.spip.net/SpipBB-le-forum].
+-* •[a documentación en contrib.spip->https://contrib.spip.net/SpipBB-le-forum].
 
 _ {{Módulo spipbb en curso de desenvolvemento. Úseo a seu risco e ventura}}
 
 _ [Acceso ao panel de administración-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distribuído baixo licenza GPL',
-	'plugin_lien' => '[Consulte a documentación do módulo en Spip-contrib->https://contrib.spip.net/SpipBB-le-forum]',
+	'plugin_lien' => '[Consulte a documentación do módulo en contrib.spip->https://contrib.spip.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => 'Esta versión do módulo non é compatible coa súa versión de SPIP !',
 	'plugin_nom' => 'SpipBB : xestión de foros de SPIP',
 	'post_aucun_pt' => 'ningún !',
@@ -427,7 +427,7 @@ _ [Acceso ao panel de administración-> .?exec=spipbb_configuration]',
 	'selection_efface' => 'Borrar a selección ...',
 	'selection_tri_dpt' => 'Seleccionar o método de saída :',
 	'sign_admin' => '{{Esta páxina é unicamente accesible para os responsables do web.}}<p>Proporciona acceso á configuración do módulo «{{<a href="https://contrib.spip.net/Plugin-Forum-SpipBB#contributeurs" class="copyright">SpipBB</a>}}» así como á xestión dos foros do web.</p><p>Versión : @version@ @distant@</p><p>Consulte :
-_ • [A documentación en Spip-Contrib->https://contrib.spip.net/?article2460]
+_ • [A documentación en contrib.spip->https://contrib.spip.net/?article2460]
 _ • [A axuda en spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Versión máis recente dispoñíbel : @version@',
 	'sign_ok' => 'actualizar.',

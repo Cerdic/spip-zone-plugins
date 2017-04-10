@@ -56,7 +56,7 @@ Pour inclure les balises "Open Graph" en en-t&ecirc;te de vos pages publiques, v
 	// Documentation
 	'doc_titre_page' => 'Page de documentation du plugin Mod&egrave;les Facebook',	
 	'doc_titre_court' => 'Documentation Mod&egrave;les Facebook',	
-	'doc_en_ligne' => 'Documentation du plugin sur Spip-Contrib',
+	'doc_en_ligne' => 'Documentation du plugin sur contrib.spip',
 	'doc_chapo' => 'Le plugin Mod&egrave;les Facebook pour SPIP 2.0 ({et plus}) propose un ensemble de mod&egrave;les, ou noisettes, permettant d\'utiliser simplement et rapidement les plugins sociaux propos&eacute;s par Facebook.',
 	'documentation' => '{{{Utilisation du plugin}}}
 

@@ -387,7 +387,7 @@ _ • {Yaygın} : şu tipteki bağlar da değiştirilir {<html>moi@spip.net</htm
 	'outil_desactiver_le' => 'Aleti deaktive et',
 	'outil_inactif' => 'İnaktif aktif',
 	'outil_intro' => 'Bu sayfa size sunulan eklenti işlevlerini listeler. <br /><br />Aşağıdaki gereç isimlerine tıklayarak merkezî düğme ile durumlarını değiştirebileceğiniz gereçleri seçebilirsiniz : etkinleştirilen gereçler pasifleştirilecektir veya <i>tam tersi</i>. Her tıklamada tanımlama listenin altında görülür. Kategoriler katlanabilir ve gereçler saklanabilir. Çift tıklama bir gerecin durumunu hızlıca değiştirmeye olanak tanır. <br /><br />İlk kullanım için, SPIP iskeletinizle veya diğer eklentilerle çakışma olabileceği sebebiyle gereçleri birer birer etkinleştirmeniz önerilir.<br /><br />Not : bu sayfanın tekrar yüklenmesi İsviçre Çakısı\'nı tekrardan derler.',
-	'outil_intro_old' => 'Bu arayüz eski.<br /><br />Eğer <a href=\'./?exec=admin_couteau_suisse\'>yeni arayüz</a>\'ün kullanımında sorunla karşılaşırsanız, bizle <a href=\'https://contrib.spip.net/?article2166\'>Spip-Contrib</a> forumunda paylaşmaktan çekinmeyin.', # MODIF
+	'outil_intro_old' => 'Bu arayüz eski.<br /><br />Eğer <a href=\'./?exec=admin_couteau_suisse\'>yeni arayüz</a>\'ün kullanımında sorunla karşılaşırsanız, bizle <a href=\'https://contrib.spip.net/?article2166\'>contrib.spip</a> forumunda paylaşmaktan çekinmeyin.', # MODIF
 	'outil_nb' => '@pipe@ : @nb@ alet', # MODIF
 	'outil_nbs' => '@pipe@ : @nb@ alet', # MODIF
 	'outil_permuter' => '« @text@ » gereci değiştirilsin mi ?',

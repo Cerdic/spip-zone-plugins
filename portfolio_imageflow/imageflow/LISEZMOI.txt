@@ -12,7 +12,7 @@ Les divers scripts ont une licence d'utilisation spécifique.
 
 A consulter :
 - Documentation complémentaire sur http://www.quesaco.org/Portfolio-ImageFlow-pour-SPIP
-- Spip-contrib : https://contrib.spip.net/ImageFlow-pour-SPIP
+- contrib.spip : https://contrib.spip.net/ImageFlow-pour-SPIP
 - ImageFlow 0.9 : http://194.95.111.244/~countzero/scripts/_myImageFlow/
 - DragonFly : http://194.95.111.244/~countzero/myCMS/index.php?tag=ImageFlow
 - Easy Reflections : http://reflection.corephp.co.uk/v3.php

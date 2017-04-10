@@ -353,20 +353,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pagine_sujet_' => 'téma',
 	'pagine_sujet_s' => ' témy',
 	'par_' => 'autor(ka) ',
-	'plugin_auteur' => 'Tím SpipBB: [Pozrite si zoznam prispievateľov modulu Spip-contrib->https://contrib.spip.net/Plugin-Forum-SpipBB#contributeurs]',
+	'plugin_auteur' => 'Tím SpipBB: [Pozrite si zoznam prispievateľov modulu contrib.spip->https://contrib.spip.net/Plugin-Forum-SpipBB#contributeurs]',
 	'plugin_description' => 'Zásuvný modul SpipBB ponúka tieto funkcie:
 -* Sústreďuje riadenie diskusných fór v SPIPe (v súkromnej zóne),
 -* Mení hlavnú rubriku stránky na skupinu diskusných fór v štýle "nástenky" podobne ako v phpBB. V tejto rubrike sa podrubriky používajú ako skupiny diskusných fór, články sú diskusné fóra, kde sa témy vytvárajú z príspevkov poslaných k článkom.
 
 {{Prosím, prečítajte si:}}
 -* [pomocníka a podporu k spipbb.spip-zone.info,->http://spipbb.spip-zone.info/spip.php?article11]
--* [dokumentáciu k Spip-contrib.->https://contrib.spip.net/SpipBB-le-forum]
+-* [dokumentáciu k contrib.spip.->https://contrib.spip.net/SpipBB-le-forum]
 
 _ {{Zásuvný modul SpipBB sa stále vyvíja. Používate ho na svoje vlastné riziko.}}
 
 _ [Prístup na riadiaci panel-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distribuované s licenciou GPL licence',
-	'plugin_lien' => '[Pozrite si dokumentáciu zásuvného modulu zo Spip-contrib->https://contrib.spip.net/SpipBB-le-forum]',
+	'plugin_lien' => '[Pozrite si dokumentáciu zásuvného modulu zo contrib.spip->https://contrib.spip.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => 'Túto verziu zásuvného modulu memôžete použiť s vašou verziou SPIPU!',
 	'plugin_nom' => 'SpipBB: Riadenie diskusných fór SPIPU',
 	'post_aucun_pt' => 'žiadne!',

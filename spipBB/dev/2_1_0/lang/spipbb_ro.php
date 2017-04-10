@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'Apăsaţi pe Da pentru a activa SpipBB',
 	'admin_config_tables' => 'Configurarea tabelelor lui SpipBB',
 	'admin_config_tables_erreur' => 'Problemă cu tabelele lui SpipBB : @tables_erreur@ sunt incorecte (tabelele @tables_ok@ par a fi corecte).
- Consultaţi [documentaţia de la Spip-Contrib->https://contrib.spip.net/SpipBB-le-forum] sau [suportul pentru spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]', # MODIF
+ Consultaţi [documentaţia de la contrib.spip->https://contrib.spip.net/SpipBB-le-forum] sau [suportul pentru spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]', # MODIF
 	'admin_config_tables_ok' => 'Tabelele lui SpipBB sunt corect instalate (@tables_ok@)',
 	'admin_date_ouverture' => 'Data deschiderii',
 	'admin_debug_log' => 'Fişier de log @log_name@',

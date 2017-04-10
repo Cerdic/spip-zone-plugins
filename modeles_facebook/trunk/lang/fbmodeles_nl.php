@@ -41,7 +41,7 @@ Voor "Open Graph" moet je "insert_head_og" in de heading opnemen: {{#MODELE{inse
 	// D
 	'defaut' => 'Standaard',
 	'doc_chapo' => 'Plugin Facebook Modellen voor SPIP 2.0 ({en hoger}) biedt een set modellen om op eenvoudig wijze functionaliteit van Facebook te integreren.',
-	'doc_en_ligne' => 'Documentatie op Spip-Contrib',
+	'doc_en_ligne' => 'Documentatie op contrib.spip',
 	'doc_titre_court' => 'Documentatie Facebook Modellen',
 	'doc_titre_page' => 'Documentatiebladzijde van Facebook Modellen',
 	'documentation' => '{{{Gebruik van de plugin}}}

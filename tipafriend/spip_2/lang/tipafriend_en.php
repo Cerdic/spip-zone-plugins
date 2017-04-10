@@ -56,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'doc_chapo' => 'Le plugin "Tip A Friend" propose un formulaire complet pour envoyer une page d\'un site SPIP ({n\'importe laquelle}) à une liste d\'adresses e-mail.', # NEW
-	'doc_en_ligne' => 'Documentation du plugin sur Spip-Contrib', # NEW
+	'doc_en_ligne' => 'Documentation du plugin sur contrib.spip', # NEW
 	'doc_titre_court' => 'Documentation TipAFriend', # NEW
 	'doc_titre_page' => 'Documentation du plugin "Tip A Friend"', # NEW
 	'docskel_sep' => '----', # NEW

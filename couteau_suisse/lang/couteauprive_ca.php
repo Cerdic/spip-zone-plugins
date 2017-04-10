@@ -577,7 +577,7 @@ Per forçar la publicació de continguts amagats, n\'hi ha prou afegint el crite
 	'outil_desactiver_le' => 'Desactivar l\'eina',
 	'outil_inactif' => 'Eina inactiva',
 	'outil_intro' => 'Aquesta pàgina llista les funcionalitats del plugin que teniu disponibles.<br /><br />Fent un clic damunt del nom de les eines que hi ha més avall, seleccioneu aquells als que podreu canviar l\'estat amb l\'ajuda del botó central: les eines activades es desactivaran i <i>viceversa</i>. A cada clic, la descripció apareix a sota de les llistes. Les categories són plegables i les eines es poden amagar.  El doble-clic permet de canviar l\'ordre ràpidament d\'una eina.<br /><br />Quan s\'usa per primer cop, és recomanable activar les eines una a una, per si apareixen algunes incompatibilitats amb el vostre esquelet, amb SPIP o amb altres plugins.<br /><br />Nota: la simple càrrega d\'aquesta pàgina torna a compilar el conjunt d\'eines del Ganivet Suís.',
-	'outil_intro_old' => 'Aquesta interfície és antiga.<br /><br />Si trobeu problemes en l\'ús de la <a href=\'./?exec=admin_couteau_suisse\'>nova interfície</a>, no dubteu de dir-nos-ho al fòrum de <a href=\'https://contrib.spip.net/?article2166\'>Spip-Contrib</a>.', # MODIF
+	'outil_intro_old' => 'Aquesta interfície és antiga.<br /><br />Si trobeu problemes en l\'ús de la <a href=\'./?exec=admin_couteau_suisse\'>nova interfície</a>, no dubteu de dir-nos-ho al fòrum de <a href=\'https://contrib.spip.net/?article2166\'>contrib.spip</a>.', # MODIF
 	'outil_nb' => '@pipe@: @nb@eina',
 	'outil_nbs' => '@pipe@: @nb@ eines',
 	'outil_permuter' => 'Intercanviar l\'eina: «@text@»?',

@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'SpipBB’yi aktive etmek için Evet’e tıklayın',
 	'admin_config_tables' => 'SpipBB tabloları konfigürasyonu',
 	'admin_config_tables_erreur' => 'SpipBB tablolarında sorun var : @tables_erreur@ hatalı (@tables_ok@ tabloları doğru görünüyor).
-Bkz [Spip-Contrib ile ilgili belgeler->https://contrib.spip.net/SpipBB-le-forum] veya [spipbb.spip-zone ile ilgili belgeler->http://spipbb.spip-zone.info/spip.php?article11]',
+Bkz [contrib.spip ile ilgili belgeler->https://contrib.spip.net/SpipBB-le-forum] veya [spipbb.spip-zone ile ilgili belgeler->http://spipbb.spip-zone.info/spip.php?article11]',
 	'admin_config_tables_ok' => 'SpipBB tabloları düzgün biçimde kuruldu (@tables_ok@)',
 	'admin_date_ouverture' => 'Açılış tarihi',
 	'admin_debug_log' => '@log_name@ rapor dosyası',
@@ -352,14 +352,14 @@ _ Duyuruların altında, basit mesajlardan önce bir postit vardır. Listede yal
 	'pagine_sujet_' => ' konu',
 	'pagine_sujet_s' => ' konu',
 	'par_' => '—> ',
-	'plugin_auteur' => 'SpipBB Takımı : [katılımcıların listesini görmek için Spip-contrib->https://contrib.spip.net/Plugin-Forum-SpipBB#contributeurs]',
+	'plugin_auteur' => 'SpipBB Takımı : [katılımcıların listesini görmek için contrib.spip->https://contrib.spip.net/Plugin-Forum-SpipBB#contributeurs]',
 	'plugin_description' => 'SpipBB eklentisi şunları sağlar :
 -* SPIP forumlarını tek merkezden yönetmek (özel arayüz),
 -* Bir sektörü forumlar grubu veritabanı olarak phpBB benzeri «Bulletin Board» gibi kullanmak. Bu sektörde; alt başlıklar forum grupları ve forum makaleleridir. Bir makalenin forumuna yazılan her yeni mesaj orada bir "thread" başlatır.
 
 {{İnceleyiniz :}}
 -* •[spipbb’de yardım ve destek.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
--* •[Belgeler Spip-contrib->https://contrib.spip.net/SpipBB-le-forum].
+-* •[Belgeler contrib.spip->https://contrib.spip.net/SpipBB-le-forum].
 
 _ {{spipbb eklentisi geliştirilme aşamasındadır. Kullanım esnasında oluşabilecek sorunlar tamamen size aittir.}}
 
