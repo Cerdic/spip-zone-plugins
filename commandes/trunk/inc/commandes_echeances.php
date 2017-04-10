@@ -50,10 +50,9 @@ function commandes_lister_montants_echeances($echeances) {
 function commandes_nb_echeances_payees($id_commande) {
 	$nb_paiements = 0;
 	
-	if (_DIR_PLUGIN_BANK and $transactions_commande = intval(sql_countsel(
-		'spip_transactions',
-		array('id_commande = '.$id_commande, 'statut = "ok"')
-	))) {
+	if (defined('_DIR_PLUGIN_BANK')
+		and $transactions_commande = intval(sql_countsel('spip_transactions',array('id_commande = '.$id_commande, 'statut = "ok"')))
+	  ) {
 		$nb_paiements += $transactions_commande;
 	}
 	
