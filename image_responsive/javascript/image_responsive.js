@@ -308,7 +308,7 @@ function charger_url_image_responsive_svg(this_img) {
 
 function calculer_top_image_responsive() {
 	// Calculer le "top" des images lazy
-	$(".lazy, [data-lazy]").each(function() {
+	$(".lazy, [data-lazy]").each(function() {
 		_calculer_top_image_responsive($(this));
 	});
 	
@@ -385,7 +385,7 @@ $(window).on("scroll", charger_image_responsive);
 	
 var didScroll_image_responsive = false
 
-function charger_image_responsive() {
+function charger_image_responsive() {
 	didScroll_image_responsive = true;
 }
 
