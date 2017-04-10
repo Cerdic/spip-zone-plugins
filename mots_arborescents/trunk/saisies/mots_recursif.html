@@ -61,7 +61,7 @@
 #SET{profondeur,1}	
 <select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"]>
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
-		<option value="0">[(#ENV{option_intro})]</option>]
+		<option value="">[(#ENV{option_intro})]</option>]
 	<BOUCLE_mots(MOTS){racine}{id_groupe?}{par num titre, titre}{tout}>
 		[(#ENV{multiple}|oui)
 		<option value="#ID_MOT"[(#ID_MOT|in_array{#GET{valeur}}|oui) selected="selected"][ (#ID_MOT|in_array{#GET{exclus}}|oui) disabled="disabled"]>#TITRE</option>]
