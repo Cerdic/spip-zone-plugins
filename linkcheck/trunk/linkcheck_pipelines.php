@@ -159,7 +159,6 @@ function linkcheck_post_edition($flux) {
 				}
 			}
 			include_spip('inc/queue');
-			spip_log('Add post edition '.$objet.' '.$id_objet, 'test.'._LOG_ERREUR);
 			queue_add_job(
 				'genie_linkcheck_test_postedition',
 				'Tests post_edition des liens d\'un objet',
