@@ -57,6 +57,7 @@ function linkcheck_post_edition($flux) {
 		 * Ici on vérifie si le statut de l'objet est prévisualisable
 		 */
 		$fields = objet_info($objet, 'field');
+		$not_statuts = array();
 		if (isset($fields['statut'])) {
 			$info_statuts = objet_info($objet, 'statut');
 			$statuts = array();

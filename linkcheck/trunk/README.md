@@ -21,6 +21,10 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 
 ## Versions 1.4.x
 
+### Version 1.4.2
+
+* Dans le pipeline `post_edition` s'assurer que le second argument passé à `in_array` est bien un tableau
+
 ### Version 1.4.1
 
 * Ne passer dans le pipeline post_edition avec action instituer que si le statut change
