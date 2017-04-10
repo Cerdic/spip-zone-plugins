@@ -27,11 +27,14 @@ function spip_foundation() {
 	});
 
 
-	// Restaurer le deeplinking des tab Foundation
+	// Restaurer le deeplinking des tab Foundation (pour les version < 6.3.1)
 	// En attendant que la fonction soit de retour officiellement
-	var link_tab = window.location.hash.substr(1);
-	if (link_tab) {
-		$('[data-tabs]').eq(0).foundation('selectTab', $('#'+link_tab));
+	var version = Foundation.version.split('.');
+	if (!(version[0] >= 6 && version[1] >= 3 && version[2] >= 1)) {
+		var link_tab = window.location.hash.substr(1);
+		if (link_tab) {
+			$('[data-tabs]').eq(0).foundation('selectTab', $('#'+link_tab));
+		}
 	}
 }
 
