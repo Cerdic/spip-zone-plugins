@@ -132,7 +132,13 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 		return false;
 	}
 
-	$data_url = parametre_url(url_absolue($provider['endpoint'], url_de_base()), 'url', $url, '&');
+	$data_url = url_absolue($provider['endpoint'], url_de_base());
+
+	// certains oembed fournissent un endpoint qui contient deja l'URL, parfois differente de celle de la page
+	if (!parametre_url($data_url, 'url')) {
+		$data_url = parametre_url($data_url, 'url', $url, '&');
+	}
+
 	include_spip('inc/config');
 	if (!$maxwidth) {
 		$maxwidth = lire_config('oembed/maxwidth', '600');
@@ -145,12 +151,18 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 	$data_url = parametre_url($data_url, 'maxheight', $maxheight, '&');
 	$data_url = parametre_url($data_url, 'format', $format, '&');
 
-	// pre-traitement du provider si besoin
-	$endpoint = explode('//', $provider['endpoint']);
-	$endpoint = explode('/', $endpoint[1]);
-	$endpoint = reset($endpoint);
-	$endpoint = preg_replace(',\W+,', '_', $endpoint);
-	if ($oembed_endpoint_pretraite = charger_fonction("pretraite_$endpoint", 'oembed/input', true)) {
+	if (isset($provider['provider_name']) and $provider['provider_name']) {
+		$provider_name = $provider['provider_name'];
+	}
+	else {
+		// pre-traitement du provider si besoin
+		$provider_name = explode('//', $provider['endpoint']);
+		$provider_name = explode('/', $provider_name[1]);
+		$provider_name = reset($provider_name);
+	}
+	$provider_name = preg_replace(',\W+,', '_', strtolower($provider_name));
+
+	if ($oembed_endpoint_pretraite = charger_fonction("pretraite_$provider_name", 'oembed/input', true)) {
 		$a = func_get_args();
 		$args = array('url'=>array_shift($a));
 		if (count($a)) {
@@ -162,6 +174,7 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 		if (count($a)) {
 			$args['format'] = array_shift($a);
 		}
+		$args['endpoint'] = $provider['endpoint'];
 		$data_url = $oembed_endpoint_pretraite($data_url, $args);
 	}
 
@@ -182,13 +195,18 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 
 	// si une fonction de post-traitement est fourni pour ce provider+type, l'utiliser
 	if ($cache[$data_url]) {
-		$provider_name= str_replace(' ', '_', strtolower($cache[$data_url]['provider_name']));
+		$provider_name2= str_replace(' ', '_', strtolower($cache[$data_url]['provider_name']));
 		$type = strtolower($cache[$data_url]['type']);
 		// securisons le nom de la fonction (provider peut contenir n'importe quoi)
-		$f1 = preg_replace(',\W,', '', "posttraite_{$provider_name}_$type");
-		$f2 = preg_replace(',\W,', '', "posttraite_{$provider_name}");
-		if ($oembed_provider_posttraite = charger_fonction($f1, 'oembed/input', true)
-			or $oembed_provider_posttraite = charger_fonction($f2, 'oembed/input', true)) {
+		$f1 = preg_replace(',\W,', '', "posttraite_{$provider_name2}_$type");
+		$f2 = preg_replace(',\W,', '', "posttraite_{$provider_name2}");
+		$f3 = preg_replace(',\W,', '', "posttraite_{$provider_name}_$type");
+		$f4 = preg_replace(',\W,', '', "posttraite_{$provider_name}");
+		if (
+		     $oembed_provider_posttraite = charger_fonction($f1, 'oembed/input', true)
+		  or $oembed_provider_posttraite = charger_fonction($f2, 'oembed/input', true)
+		  or $oembed_provider_posttraite = charger_fonction($f3, 'oembed/input', true)
+		  or $oembed_provider_posttraite = charger_fonction($f4, 'oembed/input', true) ) {
 			$cache[$data_url] = $oembed_provider_posttraite($cache[$data_url], $url);
 		}
 
@@ -230,8 +248,10 @@ function oembed_verifier_provider($url) {
 function oembed_detecter_lien($url) {
 	$providers = array();
 
+	$oembed_recuperer_url = charger_fonction('oembed_recuperer_url', 'inc');
 	// on recupere le contenu de la page
 	include_spip('inc/distant');
+
 	if ($html = recuperer_page($url)) {
 		// types de liens oembed à détecter
 		$linktypes = array(
@@ -268,14 +288,23 @@ function oembed_detecter_lien($url) {
 		}
 	}
 
+	$res = array();
+
 	// on préfère le json au xml
 	if (!empty($providers['json'])) {
-		return array('endpoint'=>$providers['json']);
+		$res['endpoint'] = $providers['json'];
 	} elseif (!empty($providers['xml'])) {
-		return array('endpoint' => $providers['xml']);
+		$res['endpoint'] = $providers['xml'];
 	} else {
 		return false;
 	}
+
+	// detecter certains providers specifiques : ex mastodon, chaque instance a son nom et on peut pas l'identifier par son URL
+	if (strpos($html, '//github.com/tootsuite/mastodon') !== false) {
+		$res['provider_name'] = 'Mastodon';
+	}
+
+	return $res;
 }
 
 

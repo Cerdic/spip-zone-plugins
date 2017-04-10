@@ -29,6 +29,8 @@ function inc_oembed_recuperer_url($oembed_url, $url, $format) {
 		curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($c, CURLOPT_URL, $oembed_url);
 		curl_setopt($c, CURLOPT_FOLLOWLOCATION, true);
+		curl_setopt($c, CURLOPT_SSL_VERIFYHOST, false);
+		curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
 
 		if (isset($GLOBALS['meta']['http_proxy']) and $GLOBALS['meta']['http_proxy']) {
 		  curl_setopt($c, CURLOPT_PROXY, $GLOBALS['meta']['http_proxy']);

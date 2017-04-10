@@ -84,3 +84,8 @@ figure.oe-image-block figcaption {background:#eee;padding: 10px;text-align: left
 .oembed_audio .oe-play-button button:before {border-color:#eee;}
 .oembed_audio .oe-play-button:hover button{background-color: #DD2826;}
 .oembed_audio .oe-play-button:hover button:before{border-color:#fff;}
+
+/* Mastodon */
+.oembed_mastodon .oembed-source {display: none;}
+.oembed_mastodon .spip_doc_titre {display: none;}
+.oembed_mastodon .oe-rich {max-width:none !important;}
