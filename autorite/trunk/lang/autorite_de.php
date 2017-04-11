@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admins' => 'Administratoren',
 	'admins_redacs' => 'Administratoren und Redakteure',
 	'admins_rubriques' => 'Rubrikadministratoren haben:',
-	'attention_crayons' => '<small><strong>Achtung!</strong> Die folgenden Einstellungen funktionieren nur, wenn Sie ein Interface zur textbearbeitung wie <a href="https://contrib.spip.net/Les-Crayons">den Stift</a>) nutzen.</small>',
+	'attention_crayons' => '<small><strong>Achtung!</strong> Die folgenden Einstellungen funktionieren nur, wenn Sie ein Interface zur textbearbeitung wie <a href="http://contrib.spip.net/Les-Crayons">den Stift</a>) nutzen.</small>', # MODIF
 	'attention_version' => 'Achtung, die folgenden Einstellungen funktionieren nicht mit Ihrer SPIP-Version:',
 	'auteur_message_advitam' => 'Der Autor eines Beitrags, für immer',
 	'auteur_message_heure' => 'Der Autor eines Beitrags, eine Stunde lang',

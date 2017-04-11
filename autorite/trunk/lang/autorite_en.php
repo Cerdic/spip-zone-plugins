@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admins' => 'Administrators',
 	'admins_redacs' => 'Administrators and Editors',
 	'admins_rubriques' => 'The administrators associated to sections have:',
-	'attention_crayons' => '<small><strong>Alert.</strong> The settings below can only work if you use a plugin providing an editing interface (like done by <a href="https://contrib.spip.net/Crayons,2698">Crayons</a>).</small>',
+	'attention_crayons' => '<small><strong>Alert.</strong> The settings below can only work if you use a plugin providing an editing interface (like done by <a href="http://contrib.spip.net/Crayons,2698">Crayons</a>).</small>', # MODIF
 	'attention_version' => 'Note the following choices can not work with your version of SPIP:',
 	'auteur_message_advitam' => 'The author of the message ad vitam',
 	'auteur_message_heure' => 'The author of the message, during one hour',
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p><small>As of SPIP 2.1 it is also possible to grant webmaster rights to an administrator using the the author modification screen.</small></p>
 <p><small>Note: Webmasters defined in this way do not need to make the FTP authentication for sensitive operations (upgrading the database, for example).</small></p>
 
-<a href=\'https://contrib.spip.net/Autorite\' class=\'spip_out\'>See documentation</a>',
+<a href=\'http://contrib.spip.net/Autorite\' class=\'spip_out\'>See documentation</a>', # MODIF
 	'details_option_auteur' => '<small><br />For now, the option "author" works only for registered authors (forums by subscription, for example). And if it is enabled, the site administrators also have the ability to edit the forums.
 	</small>',
 	'droits_des_auteurs' => 'Authors rights',
@@ -113,7 +113,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redacteur_modifie_article' => '<strong>Editor changes proposed</strong> : 	Each editor can edit an article proposed for publication, even if he is not the author.',
 	'refus_1' => '<p>Only webmasters of the site',
 	'refus_2' => 'are allowed to change these settings.</p>
-<p>For more information, see <a href="https://contrib.spip.net/Autorite">the documentation</a>.</p>',
+<p>For more information, see <a href="http://contrib.spip.net/Autorite">the documentation</a>.</p>', # MODIF
 	'reglage_autorisations' => 'Setting Permissions',
 
 	// S

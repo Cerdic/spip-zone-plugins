@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admins' => 'De beheerders',
 	'admins_redacs' => 'Beheerders en Redacteurs',
 	'admins_rubriques' => 'de aan rubrieken gekoppelde beheerders hebben:',
-	'attention_crayons' => '<small><strong>Let op.</strong> Onderstaande instellingen werken slechts wanneer je een plugin gebruikt die aanpassing vanaf de publieke site mogelijk maakt (zoals bijvoorbeeld <a href="https://contrib.spip.net/Les-Crayons">Crayons</a>).</small>',
+	'attention_crayons' => '<small><strong>Let op.</strong> Onderstaande instellingen werken slechts wanneer je een plugin gebruikt die aanpassing vanaf de publieke site mogelijk maakt (zoals bijvoorbeeld <a href="http://contrib.spip.net/Les-Crayons">Crayons</a>).</small>', # MODIF
 	'attention_version' => 'Let op. De volgende keuze werken mogelijk niet met jouw versie van SPIP:',
 	'auteur_message_advitam' => 'De auteur van het bericht, ad vitam',
 	'auteur_message_heure' => 'De auteur van het bericht, gedurende een uur',
@@ -52,8 +52,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p>Vanaf SPIP 2.1 kunnen de rechten van webmaster aan een beheerder worden gegeven via de auteurpagina.</p>
 <p>Let op: de op deze manier gedefinieerde webmasters hoeven geen authenticatie via FTP te doen (zoals het aanpassen van de database).</p>
 
-<a href=\'https://contrib.spip.net/Autorite\' class=\'spip_out\'>Zie documentatie</a>
-',
+<a href=\'http://contrib.spip.net/Autorite\' class=\'spip_out\'>Zie documentatie</a>
+', # MODIF
 	'details_option_auteur' => '<small><br />Momenteel werkt de optie «auteur» slechts voor geregistreerde auteurs (zoals bij forum op abonnement). En, indien actief, mogen de beheerders ook forums aanpassen.
 	</small>',
 	'droits_des_auteurs' => 'Rechten van auteurs',
@@ -113,7 +113,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redacteur_modifie_article' => '<strong>Redacteur past voorgesteld aan</strong>: elke redacteur kan een ter publicaite voorgesteld artikel aanpassen, zelfs wanneer hij niet de auteur is.',
 	'refus_1' => '<p>Alleen de webmasters van de site',
 	'refus_2' => 'mogen deze parameters aanpassen.</p>
-<p>Lees voor meer informatie <a href="https://contrib.spip.net/Autorite">de documentatie</a>.</p>',
+<p>Lees voor meer informatie <a href="http://contrib.spip.net/Autorite">de documentatie</a>.</p>', # MODIF
 	'reglage_autorisations' => 'Instelling van autorisaties',
 
 	// S
