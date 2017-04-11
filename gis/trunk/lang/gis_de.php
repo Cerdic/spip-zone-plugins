@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_lien' => 'Diese Verknüpfung löschen',
 
 	// C
-	'cfg_descr_gis' => 'Geoinformationssystem<br /><a href="https://contrib.spip.net/4189" class="spip_out">zur Dokumentation</a>.',
+	'cfg_descr_gis' => 'Geoinformationssystem<br /><a href="http://contrib.spip.net/4189" class="spip_out">zur Dokumentation</a>.', # MODIF
 	'cfg_inf_adresse' => 'Adressfelder anzeigen (Land, Stadt, Region, Adresse ...)',
 	'cfg_inf_bing' => 'Der Layer Bing Aerial benötigt einen Schlüssel zu erzeugen auf der  <a href=\'@url@\' class="spip_out">Bing Website</a>.',
 	'cfg_inf_geocoder' => 'Geocoding aktivieren (Suche nach einer Adresse, Anzeige von Adressen zu den Koordinaten).',
