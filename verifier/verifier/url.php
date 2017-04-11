@@ -139,10 +139,11 @@ function verifier_url_complet($url, $type_protocole, $protocole) {
 	// PATH (optional)
 	$urlregex .= '(\/([a-z0-9+\$_%,-]\.?)+)*\/?';
 	// GET Query (optional)
-	$urlregex .= '(\?[a-z+&\$_.-][a-z0-9;:@/&%=+\$_.-]*)?';
+	$urlregex .= '(\?[a-z+&\$_.-][a-z0-9;:@\&%=+\$_.-]*)?';
 	// ANCHOR (optional)
 	$urlregex .= '(\#[a-z_.-][a-z0-9+\$_.-]*)?\$# i';
 
+	var_dump($urlregex);
 	if (!preg_match($urlregex, $url)) {
 		return _T('verifier:erreur_url', array('url' => echapper_tags($url)));
 	}
