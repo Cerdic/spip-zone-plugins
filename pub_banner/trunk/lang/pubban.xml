@@ -1,5 +1,5 @@
 <traduction module="pubban" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/pub_banner/trunk/lang/" reference="fr">
-	<langue code="en" url="https://trad.spip.net/tradlang_module/pubban?lang_cible=en" total="302" traduits="302" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/pubban?lang_cible=en" total="302" traduits="299" relire="0" modifs="3" nouveaux="0" pourcent="99.01">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="EScott" lien="https://trad.spip.net/auteur/escott" />
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />

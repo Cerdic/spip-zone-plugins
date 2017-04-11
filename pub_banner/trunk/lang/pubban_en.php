@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'details_empl' => 'Details of a banner',
 	'dimensions' => 'Size',
 	'doc_chapo' => 'The plugin "Ads Banner" provides a banners management for SPIP skeletons.',
-	'doc_en_ligne' => 'Plugin documentation on SPIP-contrib',
+	'doc_en_ligne' => 'Plugin documentation on SPIP-contrib', # MODIF
 	'doc_info' => 'Please refer to the documentation for the plugin information :',
 	'doc_titre_court' => 'Ad Banner Documentation',
 	'doc_titre_page' => 'Documentation of plugin "Ad Banner"',
@@ -104,9 +104,9 @@ These banners fit in your skeletons simply stating the tag:
 Followed by the name of the banner you want to display. The tag is replaced by a frame with the size of the banner.',
 	'documentation_2' => 'For a practical reason [[Spip Bonux is used by Banner Pub for its functionality ’POUR’, that creates loops from the PHP array (Editor’s note) ...]], the plugin "Ad Banner" requires you have previously installed the plugin {{Spip Bonux}} in version 1.3 minimum.
 
--* You can read a description of this plugin on the site contrib.spip : [->https://contrib.spip.net/SPIP-Bonux].
+-* You can read a description of this plugin on the site Spip-Contrib : [->http://contrib.spip.net/SPIP-Bonux].
 -* You can download it here : [->http://zone.spip.org/trac/spip-zone/browser/_plugins_/spip-bonux-2?rev=31575] ({here in version 2}).
-',
+', # MODIF
 	'documentation_3' => 'The plugin offers following campaign effectiveness in several ways :
 -* Via the page "statistics" in the private area, which presents different graphs tracking views and clicks, according to several periods to choose for each banner,
 -* Via a public page that summarizes the values ​​of each advertisement ({all, one or severam}) and allow export to CSV format ({[see for example pubs 1 and 2->@url_exemple@]}).',
@@ -269,7 +269,7 @@ Numerous statistical studies show that the banners at the top of a web page, top
 
 	// L
 	'leaderboard_banner' => 'Banner "Leaderboard"',
-	'licence' => 'Copyright © 2009 [Piero Wbmstr->https://contrib.spip.net/PieroWbmstr] licensed under [Creative Commons BY-SA|Creative Commons - Paternite - Identical distribution ->http://creativecommons.org/licenses/by-sa/3.0/].',
+	'licence' => 'Copyright © 2009 [Piero Wbmstr->http://contrib.spip.net/PieroWbmstr] licensed under [Creative Commons BY-SA|Creative Commons - Paternite - Identical distribution ->http://creativecommons.org/licenses/by-sa/3.0/].', # MODIF
 	'licence_stats' => '{{LICENSES :}}<br />{{’wz_jsgraphics.js’}} :: v. 2.33 - (c) 2002-2004 Walter Zorn ([www.walterzorn.com->http://www.walterzorn.com])<br />{{’graph.js’, ’line.js’ & ’pie.js’}} :: (c) Balamurugan S. 2005 ([www.jexp.com->http://www.jexp.com])',
 	'lien_page' => 'View the page',
 	'list_empl' => 'List of banners',
