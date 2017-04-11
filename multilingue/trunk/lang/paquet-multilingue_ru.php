@@ -15,15 +15,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Плагин автоматически устанавливает следующие плагины
 
 - [Перевод между секторами-> http://plugins.spip.net/tradrub.html]
-- [Предпочитаемый язык пользователя-> https://contrib.spip.net/Plugin-Langue-preferee-par-l-internaute]
-- [Легкий перевод разделов-> https://contrib.spip.net/Traductions-de-rubriques-autrement-3]
-- [Легкий перевод статей-> https://contrib.spip.net/Traductions-d-articles-autrement-3]
+- [Предпочитаемый язык пользователя-> http://contrib.spip.net/Plugin-Langue-preferee-par-l-internaute]
+- [Легкий перевод разделов-> http://contrib.spip.net/Traductions-de-rubriques-autrement-3]
+- [Легкий перевод статей-> http://contrib.spip.net/Traductions-d-articles-autrement-3]
 
-Под Spip 2 или 2.1 рекомендуется установить плагин [ступенчатый> https://contrib.spip.net/STEP-Systeme-de-Telechargements-de-Plugins] первым, перед установкой «Easy Multilingual Web-site», чтобы позволить автоматическую активацию всех необходимых плагинов.
+Под Spip 2 или 2.1 рекомендуется установить плагин [ступенчатый> http://contrib.spip.net/STEP-Systeme-de-Telechargements-de-Plugins] первым, перед установкой «Easy Multilingual Web-site», чтобы позволить автоматическую активацию всех необходимых плагинов.
 
 Плагин также изменяет некоторые скелеты (sommaire.html, rubrique.html и article.html), а некоторые другие «включает в себя».
 
-После того, как необходимые плагины активированы, просто определить язык сайта в разделе «Настройки» -> «Многоязычность» -> «Языковые настройки», и ваш сайт станет многоязычным, вы сможете начать его наполнять.',
+После того, как необходимые плагины активированы, просто определить язык сайта в разделе «Настройки» -> «Многоязычность» -> «Языковые настройки», и ваш сайт станет многоязычным, вы сможете начать его наполнять.', # MODIF
 	'multilingue_nom' => 'Easy Multilingual web-site',
 	'multilingue_slogan' => 'Легко создать многоязычный сайт'
 );
