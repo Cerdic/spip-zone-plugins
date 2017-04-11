@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_descriptif' => 'Esta páxina permite configurar el complementu Thumbsites, y, n’especial, escoyer el sirvidor de viñetes. Pa saber más, consulte la <a href="https://contrib.spip.net/?article2584">documentación en contrib</a>',
+	'cfg_descriptif' => 'Esta páxina permite configurar el complementu Thumbsites, y, n’especial, escoyer el sirvidor de viñetes. Pa saber más, consulte la <a href="http://contrib.spip.net/?article2584">documentación en contrib</a>', # MODIF
 	'cfg_inf_rotothumb_presentation' => 'Pa utilizar esti serviciu nun necesites rexistrate, pero tienes de poner un enllaz al sitiu <a href="http://www.robothumb.com">Robothumb</a>. La presencia d’esti enllaz se comprueba de vezu polos sos medios.',
 	'cfg_inf_websnapr_presentation' => 'Pa utilizar esti serviciu tienes de tar rexistráu nel sitiu <a href="http://www.websnapr.com">Websnapr</a>. La versión de baldre permite tratar 250.000 imaxes del sitiu al mes, a un ritmu de 80 imaxes por hora.',
 	'cfg_itm_serveur_robothumb' => 'Robothumb',

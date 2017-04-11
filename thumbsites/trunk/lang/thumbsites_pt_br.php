@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_rafraichir' => 'Atualizar a vinheta',
 
 	// C
-	'cfg_descriptif' => 'Esta página permite configurar o plugin Thumbsites e, em particular, escolher o servidor de ícones. Para saber mais, consulte a <a href="https://contrib.spip.net/?article2584">documentação sobre contrib</a>',
+	'cfg_descriptif' => 'Esta página permite configurar o plugin Thumbsites e, em particular, escolher o servidor de ícones. Para saber mais, consulte a <a href="http://contrib.spip.net/?article2584">documentação sobre contrib</a>', # MODIF
 	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</a> oferece um serviço gratuito que não precisa de identificação.',
 	'cfg_inf_choix_serveur' => 'Escolha o servidor que fornecerá as vinhetas e, eventualmente, completar os parâmetros dos seus sites referenciados.',
 	'cfg_inf_miwim_presentation' => 'Para usar este serviço, você deve incluir um link para o site <a href="http://thumbs.miwim.fr">Miwim</a>. A presença deste link é verificada periodicamente por um script.',

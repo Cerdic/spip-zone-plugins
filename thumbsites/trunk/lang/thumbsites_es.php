@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_rafraichir' => 'Refrescar la miniatura',
 
 	// C
-	'cfg_descriptif' => 'Esta página le permite configurar el plugin Thumbsites, y, en particular, elegir el servidor de miniaturas. Para saber más, consulte la <a href="https://contrib.spip.net/?article2584">documentación sobre contrib</a>',
+	'cfg_descriptif' => 'Esta página le permite configurar el plugin Thumbsites, y, en particular, elegir el servidor de miniaturas. Para saber más, consulte la <a href="http://contrib.spip.net/?article2584">documentación sobre contrib</a>', # MODIF
 	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</a> propone un servicio gratuito que no precisa identificación.',
 	'cfg_inf_choix_serveur' => 'Elija el servidor que proporcionará las miniaturas de sus sitios referenciados y complete eventualmente su configuración.',
 	'cfg_inf_miwim_presentation' => 'Para utilizar este servicio debe meter un enlace al sitio <a href="http://thumbs.miwim.fr">Miwim</a>. La presencia de este enlace se verifica periódicamente por un script.',
