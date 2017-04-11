@@ -41,7 +41,43 @@ function urls_arbodom_dist($i, $entite, $args = '', $ancre = '') {
 	if (is_numeric($i)) {
 		return _generer_url_arbodom($entite, $i, $args, $ancre);
 	}
-	return urls_arbo_dist($i, $entite, $args = '', $ancre = '');
+
+	// HACK pour distinguer 2 urls qui collisionnent.
+	// Normalement en url arborescentes, on aurait 'fr/contact' et 'en/contact'.
+	// Avec ces urls arbodom on a 'domaine.fr/contact' et 'domaine.en/contact',
+	// et ici le nom 'contact' n'a du coup pas de parent associé pour retrouver à quelle URL
+	// il appartient. En 3.2 on pourra peut être tenter d'utiliser le champ 'langue' de spip_urls
+	// pour retrouver le parent…
+
+	// Ici, on considère que si l'URL demandé n'a pas de / , c'est que c'est un article ou une rubrique
+	// à la racine d'une rubrique de langue. On prefixe de la langue pour calculer l'URL normalement
+	// par les urls arborescentes. Sauf que comme on envoie avec une url 'différente' de celle en cours,
+	// les urls arbos considère que l'url envoyée n'est pas la plus à jour et demandent une redirection.
+	// Il faut annuler la redirection dans ce cas.
+
+	// Y a encore quelques points à améliorer donc… car si on objet éditorial autre que rubrique / article
+	// utilise des urls arborescentes sans le type en préfixe (ie: 'toto' à la place de 'mot/toto' par exemple)
+	// alors ce hack plantera.
+	$contexte = $args;
+	$change = false;
+	$i2 = $i;
+	if (is_string($contexte)) {
+		parse_str($contexte, $contexte);
+	}
+	if (!empty($args['lang']) and strpos($i, '/') === false) {
+		$i2 = $args['lang'] . '/' . $i;
+		$change = true;
+	}
+	$res = urls_arbo_dist($i2, $entite, $args, $ancre);
+	// s'il y a une redirection vers nous-même (l'url en cours)
+	// c'est que… bah c'était en fait la bonne url (sans le fr/ qu'on a ajouté)
+	if ($change and !empty($res[2])) {
+		$url_propre = preg_replace(',[?].*,', '', $i);
+		if (url_de_base() . $url_propre == $res[2]) {
+			$res[2] = null;
+		}
+	}
+	return $res;
 }
 
 
@@ -214,7 +250,7 @@ function declarer_url_arbodom($type, $id_objet) {
 		'type' => $type,
 		'id_objet' => $id_objet,
 		'id_parent' => $urls[$type][$id_objet]['parent'],
-		'perma' => intval($urls[$type][$id_objet]['perma'])
+		'perma' => intval($urls[$type][$id_objet]['perma']),
 	);
 	include_spip('action/editer_url');
 	if (url_insert($set, $confirmer, _url_arbo_sep_id)) {

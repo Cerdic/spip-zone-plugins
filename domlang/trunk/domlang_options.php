@@ -161,7 +161,11 @@ function domlang_generer_url_objet_lang($id, $args, $ancre, $type) {
 		$lang = sql_getfetsel('lang', table_objet_sql($type), id_table_objet($type) . '=' . $id);
 		if ($lang !== $GLOBALS['spip_lang']) {
 			$url = generer_url_entite($id, $type, $args, $ancre . $marqueur_passage, true);
-			$url = str_replace($marqueur_passage, '', $url);
+			if ($ancre) {
+				$url = str_replace($marqueur_passage, '', $url);
+			} else {
+				$url = str_replace('#' . $marqueur_passage, '', $url);
+			}
 			$url = url_absolue($url, domlang_url_langue($lang));
 			return $url;
 		}
