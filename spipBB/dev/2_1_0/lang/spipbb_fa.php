@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'براي فعال‌سازي اسپيپ بي‌بي بله را كليك كنيد',
 	'admin_config_tables' => 'پيكربندي جدول‌هاي اسپيپ بي‌بي ',
 	'admin_config_tables_erreur' => 'مشكل در جدول‌هاي اسپيپ بي‌بي:@tables_erreur@ نادرست هستند (جدول‌هاي @tables_ok@ درست به نظر مي‌رسند).
- به [documentation on contrib.spip->https://contrib.spip.net/SpipBB-le-forum] or  مراجعه كنيد.[support on spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
+ به [documentation on Spip-Contrib->http://contrib.spip.net/SpipBB-le-forum] or  مراجعه كنيد.[support on spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]', # MODIF
 	'admin_config_tables_ok' => 'جدول‌هاي پايگاه‌داده‌هاي اسپيپ بي‌بي درست نصب شده (@tables_ok@)',
 	'admin_date_ouverture' => 'تاريخ گشايش',
 	'admin_debug_log' => 'فايل لاگ @log_name@ ',
@@ -79,12 +79,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_interface' => 'گزينه‌هاي ميانجي همگاني',
 	'admin_nombre_lignes_messages' => 'تعداد سطر‌هاي پيام',
 	'admin_plugin_requis_erreur' => 'پلاگين مورد نياز زير موجود نيست. فعالش كنيد!',
-	'admin_plugin_requis_erreur_balisesession' => 'پلاگين  Balise SESSION فعال كنيد! [مستندات آن اينجاست->https://contrib.spip.net/?article1224], [Archive ZIP là->http://files.spip.org/spip-zone/balise_session.zip].',
-	'admin_plugin_requis_erreur_cfg' => 'پلاگين CFG را نصب و فعال كنيد!  [مستنداتش اينجاست->https://contrib.spip.net/?article1605], [Archive ZIP là->http://files.spip.org/spip-zone/cfg.zip].',
+	'admin_plugin_requis_erreur_balisesession' => 'پلاگين  Balise SESSION فعال كنيد! [مستندات آن اينجاست->http://contrib.spip.net/?article1224], [Archive ZIP là->http://files.spip.org/spip-zone/balise_session.zip].', # MODIF
+	'admin_plugin_requis_erreur_cfg' => 'پلاگين CFG را نصب و فعال كنيد!  [مستنداتش اينجاست->http://contrib.spip.net/?article1605], [Archive ZIP là->http://files.spip.org/spip-zone/cfg.zip].', # MODIF
 	'admin_plugin_requis_erreur_s' => 'پلاگين‌هاي مورد نياز زير موجود نيستند. فعالشان كنيد!',
 	'admin_plugin_requis_ok' => 'پلاگين‌هاي نصب و فعال شده: ',
-	'admin_plugin_requis_ok_balisesession' => '[پلاگين BALISE_SESSION->https://contrib.spip.net/?article1224] : اطلاعاتي در مورد بازديد‌كنندگاني كه وارد شده‌اند ارايه مي‌دهد.',
-	'admin_plugin_requis_ok_cfg' => '[پلاگين CFG->https://contrib.spip.net/?article1605] : كاركردها و برچسب‌ها را تأمين مي‌كند.',
+	'admin_plugin_requis_ok_balisesession' => '[پلاگين BALISE_SESSION->http://contrib.spip.net/?article1224] : اطلاعاتي در مورد بازديد‌كنندگاني كه وارد شده‌اند ارايه مي‌دهد.', # MODIF
+	'admin_plugin_requis_ok_cfg' => '[پلاگين CFG->http://contrib.spip.net/?article1605] : كاركردها و برچسب‌ها را تأمين مي‌كند.', # MODIF
 	'admin_sous_titre' => 'برو به پنل سخنگاه‌هاي ادمين اسپيپ‌ بي‌بي',
 	'admin_spip_config_forums' => 'پيكربندي اسپيپ :',
 	'admin_spip_forums_ok' => 'سخنگاه‌هاي همگاني فعال هستند.',

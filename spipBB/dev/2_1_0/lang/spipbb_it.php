@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'Clicca su Sì per attivare SpipBB',
 	'admin_config_tables' => 'Configurazione delle tabelle per SpipBB',
 	'admin_config_tables_erreur' => 'Problema con le tabelle di SpipBB: @tables_erreur@ non sono corrette (le tabelle @tables_ok@ sembrano corrette).
-Consulta la [documentazione su contrib.spip->https://contrib.spip.net/SpipBB-le-forum] o l’ [assistenza su spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]', # MODIF
+Consulta la [documentazione su Spip-Contrib->http://contrib.spip.net/SpipBB-le-forum] o l’ [assistenza su spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]', # MODIF
 	'admin_config_tables_ok' => 'Le tabelle di SpipBB sono installate correttamente (@tables_ok@)',
 	'admin_date_ouverture' => 'Data di apertura',
 	'admin_debug_log' => 'File log @log_name@',
