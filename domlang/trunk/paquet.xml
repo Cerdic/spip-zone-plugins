@@ -1,7 +1,7 @@
 <paquet
 	prefix="domlang"
 	categorie="navigation"
-	version="1.0.1"
+	version="1.0.2"
 	etat="test"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="prive/themes/spip/images/domlang-64.png"

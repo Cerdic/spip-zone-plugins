@@ -64,7 +64,12 @@ function urls_arbodom_dist($i, $entite, $args = '', $ancre = '') {
 	if (is_string($contexte)) {
 		parse_str($contexte, $contexte);
 	}
-	if (!empty($args['lang']) and strpos($i, '/') === false) {
+	if (
+		!empty($args['lang'])
+		and $url_propre = preg_replace(',[?].*,', '', $i)
+		and strpos($url_propre, '/') === false
+		and !preg_match(',^.*[.]php,', $url_propre)
+	) {
 		$i2 = $args['lang'] . '/' . $i;
 		$change = true;
 	}
