@@ -144,7 +144,7 @@ function verifier_url_complet($url, $type_protocole, $protocole) {
 	$urlregex .= '(\#[a-z_.-][a-z0-9+\$_.-]*)?\$# i';
 
 	if (!preg_match($urlregex, $url)) {
-		return _T('verifier:erreur_url', array('url' => echapper_tags($valeur)));
+		return _T('verifier:erreur_url', array('url' => echapper_tags($url)));
 	}
 	return '';
 }
