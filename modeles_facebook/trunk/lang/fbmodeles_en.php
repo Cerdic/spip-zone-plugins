@@ -68,7 +68,7 @@ Different blocks below show you an example of each model with dummy values​​
 	// I
 	'info_doc' => 'If you are having problems viewing this page [click here->@link@].',
 	'info_doc_titre' => 'Note on the display of this page',
-	'info_skel_contrib' => 'Complete documentation online on contrib.spip: [->http://www.contrib.spip.fr/?article3567].', # MODIF
+	'info_skel_contrib' => 'Complete documentation online on spip-contrib: [->http://www.spip-contrib.fr/?article3567].', # MODIF
 	'info_skel_doc' => 'This manual page is designed as a skeleton SPIP operating with the standard distribution ({files from the "squelettes-dist/"}). If you are unable to view the page, or if your site uses its own skeletons, the links below can manage its display:
 
 -* [Mode "plain text"->@mode_brut@] ({simple html + tag INSERT_HEAD})
@@ -79,7 +79,7 @@ Different blocks below show you an example of each model with dummy values​​
 	'javascript_inactif' => 'Javascript is disabled in your browser. Some features of this tool will be inactive ...',
 
 	// L
-	'licence' => 'Plugin for SPIP 2.0+ : {{"Facebook Models" - copyright © 2009 [Piero Wbmstr->https://contrib.spip.net/PieroWbmstr] under licence [GPL->http://www.opensource.org/licenses/gpl-3.0.html] }}.',
+	'licence' => 'Plugin for SPIP 2.0+ : {{"Facebook Models" - copyright © 2009 [Piero Wbmstr->http://contrib.spip.net/PieroWbmstr] under licence [GPL->http://www.opensource.org/licenses/gpl-3.0.html] }}.', # MODIF
 
 	// N
 	'new_window' => 'New window',

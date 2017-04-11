@@ -41,7 +41,7 @@ Voor "Open Graph" moet je "insert_head_og" in de heading opnemen: {{#MODELE{inse
 	// D
 	'defaut' => 'Standaard',
 	'doc_chapo' => 'Plugin Facebook Modellen voor SPIP 2.0 ({en hoger}) biedt een set modellen om op eenvoudig wijze functionaliteit van Facebook te integreren.',
-	'doc_en_ligne' => 'Documentatie op contrib.spip',
+	'doc_en_ligne' => 'Documentatie op Spip-Contrib',
 	'doc_titre_court' => 'Documentatie Facebook Modellen',
 	'doc_titre_page' => 'Documentatiebladzijde van Facebook Modellen',
 	'documentation' => '{{{Gebruik van de plugin}}}
@@ -69,7 +69,7 @@ De verschillende blokken hieronder geven een voorbeeld van ieder model. Gegevens
 	// I
 	'info_doc' => 'Heb je problemen met het weergeven van deze bladzijde, [klik dan hier->@link@].',
 	'info_doc_titre' => 'Opmerking over het weergeven van deze bladzijde',
-	'info_skel_contrib' => 'Volledige documentatie online op [contrib.spip->http://www.contrib.spip.fr/?article3567].',
+	'info_skel_contrib' => 'Volledige documentatie online op [spip-contrib->http://www.spip-contrib.fr/?article3567].', # MODIF
 	'info_skel_doc' => 'Deze documentatie-bladzijde is uitgevoerd als standaard SPIP-model ({bestanden in map "squelettes-dist/"}). Lukt het je niet deze bladzijde te tonen, of gebruikt jouw site afwijkende modellen, dan lukt het waarschijnlijk met een van onderstaande links:
 
 -* [Modus "tekst"->@mode_brut@] ({eenvoudige HTML + INSERT_HEAD})
@@ -80,7 +80,7 @@ De verschillende blokken hieronder geven een voorbeeld van ieder model. Gegevens
 	'javascript_inactif' => 'Javascript is niet geactiveerd in de browser. Bepaalde functionaliteit zal niet werken...',
 
 	// L
-	'licence' => 'Plugin voor SPIP 2.0+ : {{"Facebook Models" - copyright © 2009 [Piero Wbmstr->https://contrib.spip.net/PieroWbmstr] onder ([GPL->http://www.opensource.org/licenses/gpl-3.0.html]}) licentie}}.',
+	'licence' => 'Plugin voor SPIP 2.0+ : {{"Facebook Models" - copyright © 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] onder ([GPL->http://www.opensource.org/licenses/gpl-3.0.html]}) licentie}}.', # MODIF
 
 	// N
 	'new_window' => 'Nieuw venster',
