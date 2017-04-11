@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_ajout_provider' => 'Fehler beim Hinzufügen des Providers.',
 	'erreur_scheme_doublon' => 'Dieses Schema ist bereits Teil der Liste.',
 	'explication_scheme' => 'verwenden sie * als Wildcard',
-	'explication_upload_url' => 'Geben sie einfach den URL der Seite an, welche das Dokument mit den <a href="https://contrib.spip.net/4595"> meistverwendeten Webseiten</a> enthält.',
+	'explication_upload_url' => 'Geben sie einfach den URL der Seite an, welche das Dokument mit den <a href="http://contrib.spip.net/4595"> meistverwendeten Webseiten</a> enthält.', # MODIF
 
 	// I
 	'info_1_provider' => '1 Provider',
