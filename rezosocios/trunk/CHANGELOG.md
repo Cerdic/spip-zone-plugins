@@ -4,6 +4,10 @@ Ce fichier sert de changelog, il liste les modifications lors du changement de v
 
 ## Version 0.4.x
 
+### Version 0.4.9 (2017-04-11)
+
+* Réparation du formulaire d'association qui plantait
+
 ### Version 0.4.8 (2016-10-20)
 
 * Séparation de Youtube en deux :

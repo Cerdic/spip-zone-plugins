@@ -1,5 +1,5 @@
 [(#SET{defaut_tri,#ARRAY{
-	multi titre,1,
+	titre,1,
 	type_rezo,1,
 }})
 ]
@@ -14,13 +14,12 @@ a mis a jour la valeur avec la page reelle]
 [<h3><:info_resultat_recherche:> &laquo;(#ENV{recherche})&raquo;</h3>]
 <div class="liste-objets liste-objets-associer rezosocios">
 <table class='spip liste'>
-[<caption><span class="caption"><strong>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{rezosocios:rezosocio_un,rezosocios:rezosocios_nb}})</strong>
-<span class="recherche">
+[<caption><span class="caption"><strong>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{rezosocios:rezosocio_un,rezosocios:rezosocios_nb}})</strong></span>
+<div class="recherche">
 	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
 	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" />
 	<input type="submit" class="tout_voir" name="tout_voir" value="<:info_tout_afficher:>" />
-</span>
-</span>
+</div>
 </caption>]
 	<thead>
 		[<tr><td colspan="5"><p class='pagination'>(#GET{p})</p></td></tr>]
@@ -31,7 +30,7 @@ a mis a jour la valeur avec la page reelle]
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_rezosocios(REZOSOCIOS){!id_rezosocio IN #GET{exclus}}{tout}{where?}{recherche?}{statut?}{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} rezosocioa}>
+	<BOUCLE_liste_rezosocios(REZOSOCIOS){id_rezosocio !IN #GET{exclus}}{tout}{where?}{recherche?}{tri #ENV{par,titre},#GET{defaut_tri}}{pagination #ENV{nb,10} rezosocioa}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|initiale|=={#ENV{i}}|?{on}|unique)]">
 			<td class='titre[ (#TITRE|non)vide]'>[(#LOGO_REZOSOCIO|image_reduire{20,20})]<a href="[(#ID_REZOSOCIO|generer_url_entite{rezosocio})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#TITRE|sinon{<:texte_vide:>})]</a></td>
 			<td class='email'>[<a href='mailto:(#EMAIL)'>[(#TYPE_REZO)]</a>]</td>
