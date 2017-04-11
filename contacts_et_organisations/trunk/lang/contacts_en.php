@@ -113,10 +113,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_supprimer_organisation' => 'Deleting this organization will remove all the additional informations which have been filled on the author page.', # MODIF
 	'explications_page_contacts' => 'Page under development. <br /><br /> Actions considered :
 <ul>
-  <li>see all contacts</ li>   <li>transform the authors in contacts</ li><li>import contacts </ li><li>...</ li> </ ul><br / > Thanks for your suggestions on <a href="https://contrib.spip.net/Plugin-Contacts-Organisations#pagination_comments-list">the forum</a> ;-)', # MODIF
+  <li>see all contacts</ li>   <li>transform the authors in contacts</ li><li>import contacts </ li><li>...</ li> </ ul><br / > Thanks for your suggestions on <a href="http://contrib.spip.net/Plugin-Contacts-Organisations#pagination_comments-list">the forum</a> ;-)', # MODIF
 	'explications_page_organisations' => 'Page under development. <br /><br /> Actions considered :
 <ul>
-<li>see all organizations</ li> <li>transform the authors in organizations</ li><li>import organizations </ li><li>...</ li> </ ul><br / > Thanks for your suggestions on <a href="https://contrib.spip.net/Plugin-Contacts-Organisations#pagination_comments-list">the forum</a> ;-)', # MODIF
+<li>see all organizations</ li> <li>transform the authors in organizations</ li><li>import organizations </ li><li>...</ li> </ ul><br / > Thanks for your suggestions on <a href="http://contrib.spip.net/Plugin-Contacts-Organisations#pagination_comments-list">the forum</a> ;-)', # MODIF
 	'exporter_contacts' => 'Download those contacts as spreadsheet',
 	'exporter_organisations' => 'Download those organisations as spreadsheet ',
 
