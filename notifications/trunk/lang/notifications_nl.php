@@ -93,7 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'inscription_statut_webmestres' => 'Webmasters',
 
 	// L
-	'lien_documentation' => '<a href="https://contrib.spip.net/Notifications" class="spip_out">Zie documentatie</a>',
+	'lien_documentation' => '<a href="http://contrib.spip.net/Notifications" class="spip_out">Zie documentatie</a>', # MODIF
 	'limiter_rubriques_explication' => 'Vermeld hier de identificatie van iedere rubriek waarvoor de notificaties moeten worden geactiveerd, gescheiden door een komma. bv: "11,26"',
 	'limiter_rubriques_label' => 'Uitsluitend deze rubrieken:',
 

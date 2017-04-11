@@ -83,7 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'inscription_statut_webmestres' => 'Webmasteri',
 
 	// L
-	'lien_documentation' => '<a href="https://contrib.spip.net/Notifications" class="spip_out">Porov. s dokumentáciou</a>',
+	'lien_documentation' => '<a href="http://contrib.spip.net/Notifications" class="spip_out">Porov. s dokumentáciou</a>', # MODIF
 	'limiter_rubriques_explication' => 'Sem zadajte identifikačné číslo každej rubriky, pre ktorú chcete spúšťať oznamy, oddeľte ich čiarkami. Napr. "11,26"',
 	'limiter_rubriques_label' => 'Obmedziť na tieto rubriky:',
 
