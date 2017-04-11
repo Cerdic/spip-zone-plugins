@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   un sélecteur de couleurs à un champ input,
   simplement en lui donnant la classe CSS « palette »',
 	'config_exemple' => 'Exemple :',
-	'config_lien_doc' => '<a href="https://contrib.spip.net/Palette" class="spip_out">Cf. documentation</a>',
+	'config_lien_doc' => '<a href="http://contrib.spip.net/Palette" class="spip_out">Cf. documentation</a>', # MODIF
 
 	// F
 	'fermer' => 'Fermer la palette',

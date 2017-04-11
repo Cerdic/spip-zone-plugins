@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   un selector de color a un campu d’entrada,
   solo con da-y la clase CSS «palette»',
 	'config_exemple' => 'Exemplu:',
-	'config_lien_doc' => '<a href="https://contrib.spip.net/Palette" class="spip_out">Cf. la documentación</a>',
+	'config_lien_doc' => '<a href="http://contrib.spip.net/Palette" class="spip_out">Cf. la documentación</a>', # MODIF
 
 	// F
 	'fermer' => 'Zarrar la paleta',

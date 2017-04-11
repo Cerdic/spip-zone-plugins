@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		een kleurselectie toe aan een invoerveld
 		door hem eenvoudig de CSS class « palette » te geven',
 	'config_exemple' => 'Voorbeeld:',
-	'config_lien_doc' => '<a href="https://contrib.spip.net/Palette" class="spip_out">Zie documentatie</a>',
+	'config_lien_doc' => '<a href="http://contrib.spip.net/Palette" class="spip_out">Zie documentatie</a>', # MODIF
 
 	// F
 	'fermer' => 'Sluit het palet',
