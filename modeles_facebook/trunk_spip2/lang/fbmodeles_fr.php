@@ -56,7 +56,7 @@ Pour inclure les balises "Open Graph" en en-t&ecirc;te de vos pages publiques, v
 	// Documentation
 	'doc_titre_page' => 'Page de documentation du plugin Mod&egrave;les Facebook',	
 	'doc_titre_court' => 'Documentation Mod&egrave;les Facebook',	
-	'doc_en_ligne' => 'Documentation du plugin sur contrib.spip',
+	'doc_en_ligne' => 'Documentation du plugin sur Spip-Contrib',
 	'doc_chapo' => 'Le plugin Mod&egrave;les Facebook pour SPIP 2.0 ({et plus}) propose un ensemble de mod&egrave;les, ou noisettes, permettant d\'utiliser simplement et rapidement les plugins sociaux propos&eacute;s par Facebook.',
 	'documentation' => '{{{Utilisation du plugin}}}
 
@@ -122,7 +122,7 @@ Par exemple pour le module Facebook "Send" :
 -* [Mode &#034;texte simple&#034;->@mode_brut@] ({html simple + balise INSERT_HEAD})
 -* [Mode &#034;squelette Zpip&#034;->@mode_zpip@] ({squelette Z compatible})
 -* [Mode &#034;squelette SPIP&#034;->@mode_spip@] ({compatible distribution})',
-	'info_skel_contrib' => 'Page de documentation compl&egrave;te en ligne sur contrib.spip : [->https://contrib.spip.net/?article3567].',
+	'info_skel_contrib' => 'Page de documentation compl&egrave;te en ligne sur spip-contrib : [->https://contrib.spip.net/?article3567].',
 
 );
 ?>

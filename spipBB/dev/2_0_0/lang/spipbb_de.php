@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'Klicken sie auf Ja um SpipBB zu aktivieren',
 	'admin_config_tables' => 'Konfiguration der Datenbanktabellen von SpipBB',
 	'admin_config_tables_erreur' => 'Es ist ein Problem mit den Datenbanktabellen von SpipBB aufgetreten: @tables_erreur@ sind fehlerhaft (die Tabellen @tables_ok@ scheinen OK zu sein).
-Bitte ziehen sie die [Dokumentation auf contrib.spip->https://contrib.spip.net/SpipBB-le-forum] zu Rate oder  [fragen auf spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
+Bitte ziehen sie die [Dokumentation auf Spip-Contrib->https://contrib.spip.net/SpipBB-le-forum] zu Rate oder  [fragen auf spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
 	'admin_config_tables_ok' => 'Die Datenbanktabellen von SpipBB wurde fehlerfrei eingerichtet:(@tables_ok@)',
 	'admin_date_ouverture' => 'Er&ouml;ffnungsdatum',
 	'admin_debug_log' => 'Logdatei @log_name@',
@@ -350,20 +350,20 @@ _ Ein Post-It erscheint unter den Ank&uuml;ndigungen und vor den Posts. Es ersch
 	'pagine_sujet_' => ' Thema',
 	'pagine_sujet_s' => ' Themen',
 	'par_' => 'nach',
-	'plugin_auteur' => 'Das SpipBB Team : [siehe Liste der Unterst&uuml;tzer auf contrib.spip->https://contrib.spip.net/Plugin-SpipBB#contributeurs]',
+	'plugin_auteur' => 'Das SpipBB Team : [siehe Liste der Unterst&uuml;tzer auf Spip-Contrib->https://contrib.spip.net/Plugin-SpipBB#contributeurs]',
 	'plugin_description' => 'Mit SpipBB kann man:
 -* SPIP-Foren zentral verwalten (im Redaktionssystem),
 -* Eine Rubrik (Top Level / Sektor) als Container f&uuml;r eine Gruppe Foren wie in &laquo;bulletin boards&raquo; &agrave; la phpBB nutzen. In diesem Sektor sind Unterrubriken Forengruppen und Artikel Foren. Jeder Eintrag im Forum eines Artikels startet einen Diskussionsstrang (thread).
 
 {{Siehe auch:}}
 -* •[Hilfe ud Support auf spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
--* •[Die Dokumentation auf contrib.spip->https://contrib.spip.net/SpipBB-le-forum].
+-* •[Die Dokumentation auf Spip-Contrib->https://contrib.spip.net/SpipBB-le-forum].
 
 _ {{Das Plugin SpipBB befindet sich in Entwicklung. Sie verwenden es auf eigene Gefahr}}
 
 _ [Zur SpipBB-Administration-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Bereitgestellt unter der GPL',
-	'plugin_lien' => '[Lesen sie die Dokumentation des Plugins auf contrib.spip->https://contrib.spip.net/SpipBB-le-forum]',
+	'plugin_lien' => '[Lesen sie die Dokumentation des Plugins auf Spip-Contrib->https://contrib.spip.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => 'Diese Version des Plugins ist nicht kompatibel mit Ihrer Version von SPIP !',
 	'plugin_nom' => 'SpipBB : Verwaltung der SPIP-Foren',
 	'post_aucun_pt' => 'keins!',
@@ -409,7 +409,7 @@ nbr_post@ Post(s). Sie werden mit ihm gel&ouml;scht!n',
 	'selection_efface' => 'Auswahl l&ouml;schen ...',
 	'selection_tri_dpt' => 'Sortierung w&auml;hlen:',
 	'sign_admin' => '{{Diese Seite ist nur f&uuml;r den/Webmaster zug&auml;nglich.}}<p>Sie erm&ouml;glicht die Steuerung des Plugins &laquo;{{<a href="https://contrib.spip.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; und die Verwaltung der SPIP-Foren.</p><p>Version : @version@ @distant@</p><p>Consultez&nbsp;:
-_ • [Dokumentation auf contrib.spip->https://contrib.spip.net/?article2460]
+_ • [Dokumentation auf Spip-Contrib->https://contrib.spip.net/?article2460]
 _ • [Hilfe und Support auf spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Neuests verf&uuml;gbare Version: @version@',
 	'sign_ok' => 'aktuell.',

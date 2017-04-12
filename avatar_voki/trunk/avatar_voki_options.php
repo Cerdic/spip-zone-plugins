@@ -21,7 +21,7 @@ define('AVATAR_VOKI_DOC', 'adxmenu_documentation');
 define('AVATAR_VOKI_DOC_SPIP2', 'adxmenu_documentation_spip2'); // compat
 
 /**
- * URL de la page de documentation sur contrib.spip (documentation officielle)
+ * URL de la page de documentation sur spip-contrib (documentation officielle)
  */
 define('AVATAR_VOKI_DOC_CONTRIB', 'https://contrib.spip.net/L-Avatar-VOKI-dans-vos-articles-et-squelettes-3-0');
 

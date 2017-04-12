@@ -405,7 +405,7 @@ _ • {Extendido}: se reemplazan además los enlaces del tipo {<html>yo@spip.net
 	'outil_desactiver_le' => 'Desactivar la herramienta',
 	'outil_inactif' => 'Herramienta inactiva',
 	'outil_intro' => 'Esta página lista las funciones que el plugin pone a tu disposición.<br /><br />Pulsando sobre el nombre de los útiles de más abajo, los seleccionas y podrás cambiar su estado con ayuda del botón central: los útiles activados se desactivarán y <i>viceversa</i>. Con cada pulsación, aparece la descripción bajo las listas. Las categorías son desplegables y los útiles se pueden ocultar. El doble-clic permite cambiar rápidamente de herramienta.<br /><br />En la primera utilización, se recomienda activar las herramientas una a una, por si acaso apareciese alguna incompatibilidad con tu esqueleto, con SPIP o con otros plugins.<br /><br />Nota: la simple carga de esta página recompila el conjunto de herramientas de la Navaja Suiza.',
-	'outil_intro_old' => 'Esta interfaz está anticuada.<br /><br />Si encuentras problemas para utilizar la <a href=\'./?exec=admin_couteau_suisse\'>nueva interfaz</a>, no dudes en avisarnos en el foro de <a href=\'https://contrib.spip.net/?article2166\'>contrib.spip</a>.', # MODIF
+	'outil_intro_old' => 'Esta interfaz está anticuada.<br /><br />Si encuentras problemas para utilizar la <a href=\'./?exec=admin_couteau_suisse\'>nueva interfaz</a>, no dudes en avisarnos en el foro de <a href=\'https://contrib.spip.net/?article2166\'>Spip-Contrib</a>.', # MODIF
 	'outil_nb' => '@pipe@: @nb@ útil', # MODIF
 	'outil_nbs' => '@pipe@ : @nb@ útiles', # MODIF
 	'outil_permuter' => '¿Cambiar la herramienta: « @text@ »?',

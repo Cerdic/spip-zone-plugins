@@ -452,7 +452,7 @@ Nota : os paquetes <code>.zip</code> non son reconstruídos instantaneamente, po
 	'outil_desactiver_le' => 'Desactivar a ferramenta',
 	'outil_inactif' => 'Utilidade inactiva',
 	'outil_intro' => 'Esta páxina lista as características do módulo postas á súa disposición. <br /> <br /> Ao premer sobre o nome das ferramentas que aparecen a seguir, seleccione, as que pode cambiar o estado usando o botón central: as ferramentas activadas serán desactivadas e <i> viceversa </ i>. Con cada clic, a descrición aparece a seguir das listas. As categorías son pregables e as ferramentas pódense ocultar. O dobre clic permite trocar rapidamente unha ferramenta. <br /> <br /> Nun primeiro uso, recoméndase activar as ferramentas unha por unha, no caso de apareceren certas incompatibilidades co seu esqueleto, con SPIP ou con outros módulos. <br /> <br /> Nota: a simple carga desta páxina compila o conxunto das ferramentas da Navalla Suíza .',
-	'outil_intro_old' => 'Esta interface é antiga.<br /><br />Se vostede encontra problema coa utilización da <a href=\'./?exec=admin_couteau_suisse\'>nova     interface</a>, non dubide en facérnolo saber no foro <a href=\'https://contrib.spip.net/?article2166\'>contrib.spip</a>.', # MODIF
+	'outil_intro_old' => 'Esta interface é antiga.<br /><br />Se vostede encontra problema coa utilización da <a href=\'./?exec=admin_couteau_suisse\'>nova     interface</a>, non dubide en facérnolo saber no foro <a href=\'https://contrib.spip.net/?article2166\'>Spip-Contrib</a>.', # MODIF
 	'outil_nb' => '@pipe@ : @nb@ ferramenta', # MODIF
 	'outil_nbs' => '@pipe@ : @nb@ ferramentas', # MODIF
 	'outil_permuter' => 'Cambiar a ferramenta : « @text@ » ?',

@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'Choose Yes to enable SpipBB',
 	'admin_config_tables' => 'Configuration of SpipBB tables',
 	'admin_config_tables_erreur' => 'Problem with SpipBB tables: @tables_erreur@ are incorrect (the tables @tables_ok@ seem to be all right).
- Refer to the [documentation on contrib.spip->https://contrib.spip.net/SpipBB-le-forum] or [support on spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
+ Refer to the [documentation on Spip-Contrib->https://contrib.spip.net/SpipBB-le-forum] or [support on spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
 	'admin_config_tables_ok' => 'The SpipBB database tables are installed correctly (@tables_ok@)',
 	'admin_date_ouverture' => 'Openning date',
 	'admin_debug_log' => 'Log file @log_name@',
@@ -350,20 +350,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pagine_sujet_' => 'topic',
 	'pagine_sujet_s' => ' topics',
 	'par_' => 'by ',
-	'plugin_auteur' => 'The SpipBB Team: [See the list of contributors on contrib.spip->https://contrib.spip.net/Plugin-SpipBB#contributeurs]',
+	'plugin_auteur' => 'The SpipBB Team: [See the list of contributors on Spip-Contrib->https://contrib.spip.net/Plugin-SpipBB#contributeurs]',
 	'plugin_description' => 'The SpipBB plugin provides the following features:
 -* centralizes the forum management in SPIP (in the private area),
 -* turns a main section (sector) of the site into a group of forum, "Bulletin Board" style, similar to phpBB. In this sector, sub-sections are used as forum groups, articles are dedicated forums where threads are made of messages posted to an article.
 
 {{Please check:}}
 -* [help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
--* [the documentation on contrib.spip->https://contrib.spip.net/SpipBB-le-forum].
+-* [the documentation on Spip-Contrib->https://contrib.spip.net/SpipBB-le-forum].
 
 _ {{The SpipBB plugin is still being developed. You use it at your own risk.}}
 
 _ [Access to the management panel-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distributed under the GPL licence',
-	'plugin_lien' => '[See the documentation of the plugin from contrib.spip->https://contrib.spip.net/SpipBB-le-forum]',
+	'plugin_lien' => '[See the documentation of the plugin from Spip-Contrib->https://contrib.spip.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => 'This version of the plugin cannot be used with your version of SPIP!',
 	'plugin_nom' => 'SpipBB: Management of SPIP forums',
 	'post_aucun_pt' => 'aucun&nbsp;!',
@@ -429,7 +429,7 @@ nbr_post@ message(s). Deleted along with it!\\n',
 	'selection_efface' => 'Deleted the selection... ',
 	'selection_tri_dpt' => 'Choose the sorting method:',
 	'sign_admin' => '{{This page can only be seen by the site owner.}}<p>It provides access to the plugin configuration of &laquo;{{<a href="https://contrib.spip.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; as well as to the forum management of your site.</p><p>Version : @version@ @distant@</p><p>See&nbsp;:
-_ • [The documentation of contrib.spip->https://contrib.spip.net/?article2460]
+_ • [The documentation of Spip-Contrib->https://contrib.spip.net/?article2460]
 _ • [Help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />update available: @version@',
 	'sign_ok' => 'up to date',

@@ -44,7 +44,7 @@ define('ADXMENU_DOC', 'adxmenu_documentation');
 define('ADXMENU_DOC_SPIP2', 'adxmenu_documentation_spip2'); // compat
 
 /**
- * URL de la page de documentation sur contrib.spip (documentation officielle)
+ * URL de la page de documentation sur spip-contrib (documentation officielle)
  */
 define('ADXMENU_DOC_CONTRIB', 'https://contrib.spip.net/?article3566');
 

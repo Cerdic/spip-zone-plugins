@@ -82,6 +82,6 @@ Une documentation compl&egrave;te et un forum sont disponibles en ligne : [->htt
 -* [Mode &#034;texte simple&#034;->@mode_brut@] ({html simple + balise INSERT_HEAD})
 -* [Mode &#034;squelette Zpip&#034;->@mode_zpip@] ({squelette Z compatible})
 -* [Mode &#034;squelette SPIP&#034;->@mode_spip@] ({compatible distribution})',
-	'info_skel_contrib' => 'Page de documentation compl&egrave;te en ligne sur contrib.spip : [->https://contrib.spip.net/?article3570].',
+	'info_skel_contrib' => 'Page de documentation compl&egrave;te en ligne sur spip-contrib : [->https://contrib.spip.net/?article3570].',
 );
 ?>

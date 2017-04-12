@@ -15,7 +15,7 @@ switch($contexte) {
 	case 'distant':
 		// RSS de trac
 		@define('_CS_RSS_SOURCE', $rss_source);
-		// Doc de contrib.spip.net
+		// Doc de spip-contrib.net
 		@define('_URL_CONTRIB', 'https://contrib.spip.net/?article');
 		// Revisions du CS
 		@define('_URL_CS_PLUGIN_XML', 'http://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau_suisse/plugin.xml?format=txt');

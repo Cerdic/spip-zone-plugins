@@ -31,7 +31,7 @@ Ce plugin etant en production sur plusieurs gros sites importants, il faut veill
 
 
 Merci pour la lecture de ces lignes,
-RDV sur la zone et/ou sur contrib.spip pour partager d'autres idees et commentaires ;-)
+RDV sur la zone et/ou sur spip-contrib pour partager d'autres idees et commentaires ;-)
 
 C.MARION
 

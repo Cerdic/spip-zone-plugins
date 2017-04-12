@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'SpipBB\'yi aktive etmek i&ccedil;in Evet\'e t&#305;klay&#305;n',
 	'admin_config_tables' => 'SpipBB tablolar&#305; konfig&uuml;rasyonu',
 	'admin_config_tables_erreur' => 'SpipBB tablolar&#305;nda sorun var : @tables_erreur@ hatal&#305; (@tables_ok@ tablolar&#305; do&#287;ru g&ouml;r&uuml;n&uuml;yor).
-Bkz [contrib.spip ile ilgili belgeler->https://contrib.spip.net/SpipBB-le-forum] veya [spipbb.spip-zone ile ilgili belgeler->http://spipbb.spip-zone.info/spip.php?article11]',
+Bkz [Spip-Contrib ile ilgili belgeler->https://contrib.spip.net/SpipBB-le-forum] veya [spipbb.spip-zone ile ilgili belgeler->http://spipbb.spip-zone.info/spip.php?article11]',
 	'admin_config_tables_ok' => 'SpipBB tablolar&#305; d&uuml;zg&uuml;n bi&ccedil;imde kuruldu (@tables_ok@)',
 	'admin_date_ouverture' => 'A&ccedil;&#305;l&#305;&#351; tarihi',
 	'admin_debug_log' => '@log_name@ rapor dosyas&#305;',
@@ -350,20 +350,20 @@ _ Duyurular&#305;n alt&#305;nda, basit mesajlardan &ouml;nce bir postit vard&#30
 	'pagine_sujet_' => ' konu',
 	'pagine_sujet_s' => ' konu',
 	'par_' => '--> ',
-	'plugin_auteur' => 'SpipBB Tak&#305;m&#305; : [kat&#305;l&#305;mc&#305;lar&#305;n listesini g&ouml;rmek i&ccedil;in contrib.spip->https://contrib.spip.net/Plugin-SpipBB#contributeurs]',
+	'plugin_auteur' => 'SpipBB Tak&#305;m&#305; : [kat&#305;l&#305;mc&#305;lar&#305;n listesini g&ouml;rmek i&ccedil;in Spip-Contrib->https://contrib.spip.net/Plugin-SpipBB#contributeurs]',
 	'plugin_description' => 'SpipBB eklentisi &#351;unlar&#305; sa&#287;lar :
 -* SPIP forumlar&#305;n&#305; tek merkezden y&ouml;netmek (&ouml;zel aray&uuml;z),
 -* Bir sekt&ouml;r&uuml; forumlar grubu veritaban&#305; olarak phpBB benzeri &laquo;Bulletin Board&raquo; gibi kullanmak. Bu sekt&ouml;rde; alt ba&#351;l&#305;klar forum gruplar&#305; ve forum makaleleridir. Bir makalenin forumuna yaz&#305;lan her yeni mesaj orada bir "thread" ba&#351;lat&#305;r.
 
 {{&#304;nceleyiniz :}}
 -* •[spipbb\'de yard&#305;m ve destek.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
--* •[Belgeler contrib.spip->https://contrib.spip.net/SpipBB-le-forum].
+-* •[Belgeler Spip-Contrib->https://contrib.spip.net/SpipBB-le-forum].
 
 _ {{spipbb eklentisi geli&#351;tirilme a&#351;amas&#305;ndad&#305;r. Kullan&#305;m esnas&#305;nda olu&#351;abilecek sorunlar tamamen size aittir.}}
 
 _ [Y&ouml;netim panosuna eri&#351;im-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'GPL lisans&#305; ile da&#287;&#305;t&#305;lan',
-	'plugin_lien' => 'contrib.spip\'de eklenti hakk&#305;ndaki belgelere bkz->https://contrib.spip.net/SpipBB-le-forum]',
+	'plugin_lien' => 'Spip-Contrib\'de eklenti hakk&#305;ndaki belgelere bkz->https://contrib.spip.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => 'Eklentinin bu s&uuml;r&uuml;m&uuml; sizin SPIP s&uuml;r&uuml;m&uuml;n&uuml;zle uyumlu de&#287;il !',
 	'plugin_nom' => 'SpipBB : SPIP forumlar&#305;n&#305;n y&ouml;netimi',
 	'post_aucun_pt' => 'hi&ccedil;biri&nbsp;!',
@@ -402,7 +402,7 @@ nbr_post@ mesaj i&ccedil;erir. Bu mesajlar da konuyla birlikte silinecektir&nbsp
 	'selection_efface' => 'Se&ccedil;imi sil ...',
 	'selection_tri_dpt' => 'S&#305;ralama y&ouml;ntemini se&ccedil;&nbsp;:',
 	'sign_admin' => '{{Bu sayfa sadece site sorumlular&#305;n&#305;n eri&#351;imine a&ccedil;&#305;kt&#305;r.}}<p>Eklentinin konfig&uuml;rasyonuna eri&#351;im hakk&#305; verir &laquo;{{<a href="https://contrib.spip.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; ayr&#305;ca sitenin forumlar&#305;n&#305;n y&ouml;netimine olanak tan&#305;r. </p><p>S&uuml;r&uuml;m : @version@ @distant@</p><p>Bkz&nbsp;:
-_ • [contrib.spip\'deki belgeler->https://contrib.spip.net/?article2460]
+_ • [Spip-Contrib\'deki belgeler->https://contrib.spip.net/?article2460]
 _ • [spipbb.spip-zone.info yard&#305;m dosyalar&#305;->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Daha yeni bir s&uuml;r&uuml;m mevcut&nbsp;: @version@',
 	'sign_ok' => 'g&uuml;ncel.',

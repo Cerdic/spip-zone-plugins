@@ -56,7 +56,7 @@ Certains attributs sont un peu spéciaux :
 <poesie>Le geai gélatineux gégnait dans le jasmin
 Voici mes infins le plus beau vers de la langue française.</poesie>
 
--* Cadre <code><cadre></code>Texte qui apparaitra dans une zone de formulaire facilitant le copier/coller[[Essentiellement utilisé sur contrib.spip pour donner des exemples de code]]<code></cadre></code>
+-* Cadre <code><cadre></code>Texte qui apparaitra dans une zone de formulaire facilitant le copier/coller[[Essentiellement utilisé sur spip-contrib pour donner des exemples de code]]<code></cadre></code>
 
 <cadre>
 Ceci est du texte dans un cadre.

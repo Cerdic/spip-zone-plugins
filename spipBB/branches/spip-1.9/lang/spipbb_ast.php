@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'Calcar enriba de S&iacute; pa aniciar SpipBB',
 	'admin_config_tables' => 'Configuraci&oacute;n de les tables de SpipBB',
 	'admin_config_tables_erreur' => 'Problema coles tables de SpipBB: @tables_erreur@ son incorreutes (les tables @tables_ok@ paecen correutes).
-Consulta la [documentaci&oacute;n de contrib.spip->https://contrib.spip.net/SpipBB-le-forum] o el [sofitu de spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]',
+Consulta la [documentaci&oacute;n de Spip-Contrib->https://contrib.spip.net/SpipBB-le-forum] o el [sofitu de spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]',
 	'admin_config_tables_ok' => 'Les tables de SpipBB instal&aacute;ronse correutamente (@tables_ok@)',
 	'admin_date_ouverture' => 'Fecha d\'apertura',
 	'admin_debug_log' => 'Archivu de rexistru @log_name@',
@@ -350,20 +350,20 @@ _ Un mensaxe apegadizu ta embaxo de los anuncios, enantes de los mensaxes ordina
 	'pagine_sujet_' => ' asuntu',
 	'pagine_sujet_s' => ' asuntos',
 	'par_' => 'por ',
-	'plugin_auteur' => 'L\'Equipu SpipBB: [ver la llista de collaboradores en contrib.spip->https://contrib.spip.net/Plugin-SpipBB#contributeurs]',
+	'plugin_auteur' => 'L\'Equipu SpipBB: [ver la llista de collaboradores en Spip-Contrib->https://contrib.spip.net/Plugin-SpipBB#contributeurs]',
 	'plugin_description' => 'El plugin SpipBB permite:
 -* Xestionar de mou centraliz&aacute;u los foros de SPIP (interfaz privada),
 -*Utilizar una estaya como base d\'un grupu de foros como los &laquo;Bulletin Board&raquo; asemey&aacute;os a phpBB. Nesa estaya, les so-estayes son grupos de foros, los art&iacute;culos son foros, y cada mensaxe nel foru d\'un art&iacute;culu entama un filu de discutiniu.
 
 {{Consulta:}}
 -* •[l\'aida y sofitu en spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
--* •[La documentaci&oacute;n en contrib.spip->https://contrib.spip.net/SpipBB-le-forum].
+-* •[La documentaci&oacute;n en Spip-Contrib->https://contrib.spip.net/SpipBB-le-forum].
 
 _ {{El plugin spipbb ta en procesu de desendolcu. Util&iacute;ceslu pola to cuenta y riesgu}}
 
 _ [Accesu al tableru d\'alministraci&oacute;n-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distribuy&iacute;u embaxo la llicencia GPL',
-	'plugin_lien' => '[Consultar la documentaci&oacute;n del plugin en contrib.spip->https://contrib.spip.net/SpipBB-le-forum]',
+	'plugin_lien' => '[Consultar la documentaci&oacute;n del plugin en Spip-Contrib->https://contrib.spip.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => '&iexcl;Esta versi&oacute;n del plugin nun ye compatible cola to versi&oacute;n de SPIP!',
 	'plugin_nom' => 'SpipBB: Xesti&oacute;n de los foros de SPIP',
 	'post_aucun_pt' => '&iexcl;deng&uacute;n!',
@@ -431,7 +431,7 @@ nbr_post@ mensaxe(s). &iexcl;Desaniciar&aacute;nse con &eacute;l!\\n',
 	'selection_efface' => 'Desaniciar la seleici&oacute;n... ',
 	'selection_tri_dpt' => 'Seleicionar la m&eacute;todu d\'ordenaci&oacute;n:',
 	'sign_admin' => '{{Esta p&aacute;xina &uacute;nicamente ye accesible pa los responsables del sitiu.}}<p>Da accesu a la configuraci&oacute;n del plugin &laquo;{{<a href="https://contrib.spip.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; igual que a la xesti&oacute;n de los foros del sitiu.</p><p>Versi&oacute;n: @version@ @distant@</p><p>Consulta:
-_ • [La documentaci&oacute;n en contrib.spip->https://contrib.spip.net/?article2460]
+_ • [La documentaci&oacute;n en Spip-Contrib->https://contrib.spip.net/?article2460]
 _ • [L\'aida y sofitu en spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Versi&oacute;n m&aacute;s reciente disponible: @version@',
 	'sign_ok' => 'actualizao.',

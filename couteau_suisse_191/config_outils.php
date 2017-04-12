@@ -766,7 +766,7 @@ add_outil( array(
 
 add_outil( array(
 	'id' => 'visiteurs_connectes',
-	'auteur' => "Phil d'apr&egrave;s contrib.spip",
+	'auteur' => "Phil d'apr&egrave;s spip-contrib",
 	'categorie' => 'public',
 	'code:options' => "define('_VISITEURS_CONNECTES',1);
 function cs_compter_visiteurs(){ return count(preg_files(_DIR_TMP.'visites/','.')); }

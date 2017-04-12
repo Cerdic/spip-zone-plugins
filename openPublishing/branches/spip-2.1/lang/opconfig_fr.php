@@ -87,7 +87,7 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 'post_majuscule' => 'Autoriser les majuscules dans les titres',
 'post_antispam' => 'Protection anti-spam sur les adresses mails',
 'post_taille_min' => 'Taille minimal du titre :',
-'post_pipeline' => 'Activer l\'interactivit&eacute; avec les autres plugins (cf. documentation sur contrib.spip)',
+'post_pipeline' => 'Activer l\'interactivit&eacute; avec les autres plugins (cf. documentation sur spip-contrib)',
 'post_char' => 'caract&egrave;res',
 
 // R

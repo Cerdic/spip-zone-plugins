@@ -111,7 +111,7 @@ Pour plus d\'informations, reportez-vous &agrave; la page d&eacute;di&eacute;e p
 -* [Mode &#034;texte simple&#034;->@mode_brut@] ({html simple + balise INSERT_HEAD})
 -* [Mode &#034;squelette Zpip&#034;->@mode_zpip@] ({squelette Z compatible})
 -* [Mode &#034;squelette SPIP&#034;->@mode_spip@] ({compatible distribution})',
-	'info_skel_contrib' => 'Page de documentation compl&egrave;te en ligne sur contrib.spip : [->https://contrib.spip.net/3566].',
+	'info_skel_contrib' => 'Page de documentation compl&egrave;te en ligne sur spip-contrib : [->https://contrib.spip.net/3566].',
 	'new_window' => 'Nouvelle fenêtre',
 );
 ?>

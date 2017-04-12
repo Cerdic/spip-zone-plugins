@@ -110,7 +110,7 @@ cs_log("$rand -- ecriture metas");
 	ecrire_meta('tweaks_variables', serialize($metas_vars));
 	// en metas : code inline pour les pipelines, mes_options et mes_fonctions;
 	ecrire_meta('tweaks_pipelines', serialize($cs_metas_pipelines));
-	// en metas : les liens sur contrib.spip
+	// en metas : les liens sur spip-contrib
 	ecrire_meta('tweaks_contribs', serialize($contribs));
 	ecrire_metas();
 	$GLOBALS['cs_init'] = 0;

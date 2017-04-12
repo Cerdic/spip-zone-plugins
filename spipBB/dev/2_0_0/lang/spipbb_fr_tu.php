@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'Cliquer sur Oui pour activer SpipBB',
 	'admin_config_tables' => 'Configuration des tables de SpipBB',
 	'admin_config_tables_erreur' => 'Probl&egrave;me avec les tables de SpipBB : @tables_erreur@ sont incorrectes (les tables @tables_ok@ semblent correctes).
-Consulte la [documentation sur contrib.spip->https://contrib.spip.net/SpipBB-le-forum] ou le [support sur spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]',
+Consulte la [documentation sur Spip-Contrib->https://contrib.spip.net/SpipBB-le-forum] ou le [support sur spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]',
 	'admin_config_tables_ok' => 'Table de SpipBB correctement install&eacute;e',
 	'admin_date_ouverture' => 'Date d\'ouverture',
 	'admin_debug_log' => 'Fichier de log @log_name@',
@@ -350,20 +350,20 @@ _ Une annonce est situ&eacute;e en t&ecirc;te de forum sur toutes les pages.',
 	'pagine_sujet_' => ' sujet',
 	'pagine_sujet_s' => ' sujets',
 	'par_' => 'par ',
-	'plugin_auteur' => 'La SpipBB Team : [voir la liste des contributeurs sur contrib.spip->https://contrib.spip.net/Plugin-SpipBB#contributeurs]',
+	'plugin_auteur' => 'La SpipBB Team : [voir la liste des contributeurs sur Spip-Contrib->https://contrib.spip.net/Plugin-SpipBB#contributeurs]',
 	'plugin_description' => 'Le plugin SpipBB permet :
 -* De g&eacute;rer de fa&ccedil;on centralis&eacute;e les forums de SPIP (interface priv&eacute;e),
 -* D\'utiliser un secteur comme base d\'un groupe de forums comme les &laquo;Bulletin Board&raquo; tels que phpBB. Dans ce secteur, les sous-rubriques sont des groupes de forums, les articles des forums, chaque message dans le forum d\'un article y d&eacute;marre un thread.
 
 {{Consulte :}}
 -* •[l\'aide et support sur spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
--* •[La documentation sur contrib.spip->https://contrib.spip.net/SpipBB-le-forum].
+-* •[La documentation sur Spip-Contrib->https://contrib.spip.net/SpipBB-le-forum].
 
 _ {{Plugin spipbb en cours de d&eacute;veloppement. Tu l\'utilises &agrave; tes risques et p&eacute;rils}}
 
 _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distribu&eacute; sous licence GPL',
-	'plugin_lien' => '[Consulter la documentation du plugin sur contrib.spip->https://contrib.spip.net/SpipBB-le-forum]',
+	'plugin_lien' => '[Consulter la documentation du plugin sur Spip-Contrib->https://contrib.spip.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => 'Cette version du plugin n\'est pas compatible avec ta version de SPIP !',
 	'plugin_nom' => 'SpipBB : Gestion des forums de SPIP',
 	'post_aucun_pt' => 'aucun&nbsp;!',
@@ -428,7 +428,7 @@ _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]',
 	'selection_efface' => 'Effacer la s&eacute;lection ..',
 	'selection_tri_dpt' => 'S&eacute;lectionner la m&eacute;thode de tri&nbsp;:',
 	'sign_admin' => '{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne acc&egrave;s &agrave; la configuration du plugin &laquo;{{<a href="https://contrib.spip.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; ainsi qu\'&agrave; la gestion des forums du site.</p><p>Version : @version@ @distant@</p><p>Consulte&nbsp;:
-_ • [La documentation sur contrib.spip->https://contrib.spip.net/?article2460]
+_ • [La documentation sur Spip-Contrib->https://contrib.spip.net/?article2460]
 _ • [L\'aide et support sur spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Version plus r&eacute;cente disponible&nbsp;: @version@',
 	'sign_ok' => '&agrave; jour.',
