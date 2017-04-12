@@ -74,7 +74,12 @@ function commande_inserer($id_parent=null, $champs=array()) {
 	$id_commande = false;
 
 	// On insère seulement s'il y a un auteur correct
-	if (isset($champs['id_auteur']) and $champs['id_auteur'] = intval($champs['id_auteur'])){
+	$id_auteur = 0;
+	if (isset($champs['id_auteur'])) {
+		$id_auteur = intval($champs['id_auteur']);
+	}
+	include_spip('inc/autoriser');
+	if (autoriser('commander','',0,$id_auteur)){
 		// La date de tout de suite
 		$champs['date'] = date('Y-m-d H:i:s');
 		

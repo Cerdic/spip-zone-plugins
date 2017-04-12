@@ -22,9 +22,8 @@ function commandes_autoriser(){}
 /**
  * Autorisation à passer une commande
  *
- * - un client (auteur+contact)
- * Nécessite le plugin Contacts et organisations
- * Todo : autoriser en absence du plugin
+ * Par defaut il faut que le client soit identifie, cad id_auteur>0
+ * Pour le reste (existence d'un contact lie ou autre moyen de renseigner le profil), c'est a la discretion des applications
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -34,13 +33,11 @@ function commandes_autoriser(){}
  * @return bool          true s'il a le droit, false sinon
 **/ 
 function autoriser_commander_dist($faire, $type, $id, $qui, $opts){
-	if (
-		$id_auteur = $qui['id_auteur'] > 0
-		and $contact = sql_getfetsel('id_contact', 'spip_contacts_liens', 'objet = '.sql_quote('auteur').' and id_objet = '.sql_quote($id_auteur))
-	)
+	if ($qui['id_auteur'] > 0) {
 		return true;
-	else
-		return false;
+	}
+
+	return false;
 }
 
 
