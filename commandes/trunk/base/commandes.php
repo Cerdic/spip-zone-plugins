@@ -62,6 +62,7 @@ function commandes_declarer_tables_objets_sql($tables) {
 			'mode' => 'varchar(25) not null default ""', // mode de paiement
 			'bank_uid' => 'varchar(55) not null default ""', // mémorisation éventuelle d'un identifiant chez un service bancaire
 			'echeances_type' => 'varchar(25) not null default ""', // périodicité (ex : mois, annee) ou nombre précis d'échances (ex : 3)
+			'echeances_date_debut' => 'datetime not null default "0000-00-00 00:00:00"', // date de debut des echeances, eventuellement si dans le futur (facultatif)
 			'echeances' => 'text not null default ""', // tableau sérialisé décrivant les échéances
 		),
 		'key' => array(

@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commande_creer' => 'Créer une commande',
 	'commande_date' => 'Date',
 	'commande_date_paiement' => 'Date de paiement',
+	'commande_echeances_date_debut' => 'Date de début des paiements périodiques :',
 	'commande_echeances_paiements_infini' => 'Paiements suivants',
 	'commande_echeances_paiements_previsions' => 'Paiements prévisionnels',
 	'commande_echeances_paiements_tous' => 'Tous les paiements',

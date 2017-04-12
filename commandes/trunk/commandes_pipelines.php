@@ -311,7 +311,7 @@ function commandes_bank_abos_decrire_echeance($flux) {
 		// et que cette transaction a un id_commande
 		and $id_commande = intval(sql_getfetsel('id_commande', 'spip_transactions', 'id_transaction = '.$id_transaction))
 		// et que la commande a des informations d'échéances
-		and $commande = sql_fetsel('echeances_type, echeances', 'spip_commandes', 'id_commande = '.$id_commande)
+		and $commande = sql_fetsel('echeances_type, echeances_date_debut, echeances', 'spip_commandes', 'id_commande = '.$id_commande)
 		and $echeances = unserialize($commande['echeances'])
 		and $echeances_type = $commande['echeances_type']
 		and in_array($echeances_type, array('mois', 'annee'))
@@ -324,6 +324,11 @@ function commandes_bank_abos_decrire_echeance($flux) {
 			case 'annee':
 				$flux['data']['freq'] = 'yearly';
 				break;
+		}
+
+		if ($commande['echeances_date_debut']
+			and strtotime($commande['echeances_date_debut'])>$_SERVER['REQUEST_TIME']) {
+			$flux['data']['date_start'] = $commande['echeances_date_debut'];
 		}
 		
 		// Si c'est une seule valeur toute simple

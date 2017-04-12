@@ -131,6 +131,10 @@ function commandes_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.7.4'] = array(
 		array('commandes_maj_0_7_4'),
 	);
+	// ajout du champ echeances_date_debut
+	$maj['0.7.5'] = array(
+	    array('maj_tables', array('spip_commandes')),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
