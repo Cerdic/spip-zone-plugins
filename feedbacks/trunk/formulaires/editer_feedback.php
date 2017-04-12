@@ -54,7 +54,7 @@ function formulaires_editer_feedback_verifier_dist($id_feedback='new', $id_rubri
 	return $erreurs;
 }
 
-// http://doc.spip.org/@inc_editer_article_dist
+// http://code.spip.net/@inc_editer_article_dist
 function formulaires_editer_feedback_traiter_dist($id_feedback='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='feedbacks_edit_config', $row=array(), $hidden=''){
 	return formulaires_editer_objet_traiter('feedback',$id_feedback,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
 }

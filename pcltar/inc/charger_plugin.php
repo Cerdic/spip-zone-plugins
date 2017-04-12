@@ -24,7 +24,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/plugin');
 include_spip('inc/actions');
 
-// http://doc.spip.org/@formulaire_charger_plugin
+// http://code.spip.net/@formulaire_charger_plugin
 function formulaire_charger_plugin($retour='') {
 	global $spip_lang_left, $spip_lang_right;
 
@@ -64,7 +64,7 @@ function formulaire_charger_plugin($retour='') {
 }
 
 
-// http://doc.spip.org/@interface_plugins_auto
+// http://code.spip.net/@interface_plugins_auto
 function interface_plugins_auto($retour) {
 
 	$res = "<div class='verdana2'>";
@@ -172,7 +172,7 @@ function afficher_liste_plugins_distants($liste){
 	return $res;
 }
 
-// http://doc.spip.org/@chargeur_charger_zip
+// http://code.spip.net/@chargeur_charger_zip
 function chargeur_charger_zip($quoi = array())
 {
 	if (!$quoi) {
@@ -339,7 +339,7 @@ function chargeur_charger_zip($quoi = array())
 }
 
 // pas de fichiers caches et preg_files() les ignore (*sigh*)
-// http://doc.spip.org/@chargeur_montre_tout
+// http://code.spip.net/@chargeur_montre_tout
 function chargeur_montre_tout($quoi)
 {
 	# echo($quoi['dest']);
@@ -355,7 +355,7 @@ function chargeur_montre_tout($quoi)
 }
 
 // renommer des morceaux
-// http://doc.spip.org/@chargeur_edit
+// http://code.spip.net/@chargeur_edit
 function chargeur_edit($dir, $edit)
 {
 	if (!($d = @opendir($dir))) {
@@ -380,7 +380,7 @@ function chargeur_edit($dir, $edit)
 }
 
 // renommer des morceaux
-// http://doc.spip.org/@chargeur_rename
+// http://code.spip.net/@chargeur_rename
 function chargeur_rename($quoi)
 {
 /*
@@ -394,7 +394,7 @@ function chargeur_rename($quoi)
 }
 
 // juste activer le plugin du repertoire $plugin
-// http://doc.spip.org/@chargeur_activer_plugin
+// http://code.spip.net/@chargeur_activer_plugin
 function chargeur_activer_plugin($plugin)
 {
 	spip_log('charger_decompresser activer plugin: ' . $plugin);
@@ -403,7 +403,7 @@ function chargeur_activer_plugin($plugin)
 }
 
 
-// http://doc.spip.org/@liste_fichiers_pclzip
+// http://code.spip.net/@liste_fichiers_pclzip
 function liste_fichiers_pclzip($status) {
 	$list = $status['files'];
 
@@ -432,7 +432,7 @@ function liste_fichiers_pclzip($status) {
 }
 
 // Attention on ne sait pas ce que vaut cette URL
-// http://doc.spip.org/@essaie_ajouter_liste_plugins
+// http://code.spip.net/@essaie_ajouter_liste_plugins
 function essaie_ajouter_liste_plugins($url) {
 	if (!preg_match(',^https?://[^.]+\.[^.]+.*/.*[^/]$,', $url))
 		return;
@@ -457,7 +457,7 @@ function essaie_ajouter_liste_plugins($url) {
 // Recherche les enclosures de type zip dans un flux rss ou atom
 // les renvoie sous forme de tableau url => titre
 // si $desc on ramene aussi le descriptif du paquet desc
-// http://doc.spip.org/@chercher_enclosures_zip
+// http://code.spip.net/@chercher_enclosures_zip
 function chercher_enclosures_zip($rss, $desc = '') {
 	$liste = array();
 	include_spip('inc/syndic');
@@ -486,7 +486,7 @@ function chercher_enclosures_zip($rss, $desc = '') {
 // Renvoie la liste des plugins distants (accessibles a travers
 // l'une des listes de plugins)
 // Si on passe desc = un url, ramener le descriptif de ce paquet
-// http://doc.spip.org/@liste_plugins_distants
+// http://code.spip.net/@liste_plugins_distants
 function liste_plugins_distants($desc = false) {
 	// TODO une liste multilingue a telecharger
 	$liste = array();
@@ -503,7 +503,7 @@ function liste_plugins_distants($desc = false) {
 	return $liste;
 }
 
-// http://doc.spip.org/@afficher_liste_listes_plugins
+// http://code.spip.net/@afficher_liste_listes_plugins
 function afficher_liste_listes_plugins() {
 	if (!is_array($flux = @unserialize($GLOBALS['meta']['syndic_plug'])))
 		return '';
@@ -530,7 +530,7 @@ function afficher_liste_listes_plugins() {
 
 // Si le chargement auto est autorise, un bouton
 // sinon on donne l'url du zip
-// http://doc.spip.org/@bouton_telechargement_plugin
+// http://code.spip.net/@bouton_telechargement_plugin
 function bouton_telechargement_plugin($url, $rep) {
 	// essayer de creer le repertoire lib/ si on en a le droit
 	if (($rep == 'lib') AND !is_dir(_DIR_RACINE . 'lib'))

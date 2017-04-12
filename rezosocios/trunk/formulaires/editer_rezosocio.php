@@ -7,7 +7,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('inc/actions');
 include_spip('inc/editer');
 
-// http://doc.spip.org/@inc_editer_rezosocio_dist
+// http://code.spip.net/@inc_editer_rezosocio_dist
 function formulaires_editer_rezosocio_charger_dist($id_rezosocio = 'new', $id_parent = null, $retour = '', $associer_objet = '', $config_fonc = 'rezosocios_edit_config', $row = array(), $hidden = '') {
 	$valeurs = formulaires_editer_objet_charger('rezosocio', $id_rezosocio, $id_parent, '', $retour, $config_fonc, $row, $hidden);
 
@@ -44,7 +44,7 @@ function formulaires_editer_rezosocio_identifier_dist($id_rezosocio = 'new', $id
 }
 
 // Choix par defaut des options de presentation
-// http://doc.spip.org/@articles_edit_config
+// http://code.spip.net/@articles_edit_config
 function rezosocios_edit_config($row) {
 	global $spip_ecran, $spip_lang;
 
@@ -77,7 +77,7 @@ function formulaires_editer_rezosocio_verifier_dist($id_rezosocio = 'new', $id_p
 	return $erreurs;
 }
 
-// http://doc.spip.org/@inc_editer_rezosocio_dist
+// http://code.spip.net/@inc_editer_rezosocio_dist
 function formulaires_editer_rezosocio_traiter_dist($id_rezosocio = 'new', $id_parent = null, $retour = '', $associer_objet = '', $config_fonc = 'rezosocios_edit_config', $row = array(), $hidden = '') {
 	$res = array();
 	set_request('redirect', '');

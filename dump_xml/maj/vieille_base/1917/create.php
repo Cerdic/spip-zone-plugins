@@ -47,7 +47,7 @@ function maj_vieille_base_1917_create() {
 		SET mime_type='$type_mime' WHERE extension='$extension'");
 }
 /*
-// http://doc.spip.org/@stripslashes_base
+// http://code.spip.net/@stripslashes_base
 function stripslashes_base($table, $champs) {
 	$modifs = '';
 	reset($champs);

@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('action/editer_objet');
 
 
-// http://doc.spip.org/@action_editer_selection_objet_dist
+// http://code.spip.net/@action_editer_selection_objet_dist
 function action_editer_selection_objet_dist($arg=null) {
 
     if (is_null($arg)){
@@ -96,7 +96,7 @@ function selection_objet_inserer($id_objet,$objet) {
  * Modifier une selection_objet en base
  * $c est un contenu (par defaut on prend le contenu via _request())
  *
- * http://doc.spip.org/@revisions_selection_objets
+ * http://code.spip.net/@revisions_selection_objets
  *
  * @param int $id_selection_objet
  * @param array $set

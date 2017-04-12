@@ -110,7 +110,7 @@ function exec_admin_backup_dist()
 	}
 }
 
-// http://doc.spip.org/@nom_fichier_dump
+// http://code.spip.net/@nom_fichier_dump
 function nom_fichier_dump()
 {
 	global $connect_toutes_rubriques;

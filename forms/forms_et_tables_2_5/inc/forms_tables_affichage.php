@@ -526,7 +526,7 @@ function affichage_donnee_edit($type_form) {
 	echo fin_page();
 }
 
-// http://doc.spip.org/@bouton_radio
+// http://code.spip.net/@bouton_radio
 if(!function_exists('bouton_radio')){
 	function bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="") {
 		static $id_label = 0;

@@ -26,7 +26,7 @@ function balise_MENU_LANGUES_dyn($opt) {
 // - 'var_lang' = langue de l'article, espace public
 // - 'changer_lang' = langue de l'article, espace prive
 // 
-// http://doc.spip.org/@menu_langues
+// http://code.spip.net/@menu_langues
 function menu_langues_formulaire($nom_select = 'var_lang', $default = '', $texte = '', $herit = '', $lien='') {
 	global $couleur_foncee, $connect_id_auteur;
 

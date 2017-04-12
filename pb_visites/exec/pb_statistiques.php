@@ -781,7 +781,7 @@ function pb_corriger_code_fips($code) {
 // Doit etre un entier "rond", pas trop eloigne du max, et dont
 // les graduations (divisions par huit) soient jolies :
 // on prend donc le plus proche au-dessus de x de la forme 12,16,20,40,60,80,100
-// http://doc.spip.org/@maxgraph
+// http://code.spip.net/@maxgraph
 function maxgraph($max) {
 	switch (strlen($max)) {
 	case 0:
@@ -802,7 +802,7 @@ function maxgraph($max) {
 	return $maxgraph;
 }
 
-// http://doc.spip.org/@http_img_rien
+// http://code.spip.net/@http_img_rien
 function http_img_rien($width, $height, $class='', $title='') {
 	return http_img_pack('rien.gif', $title, 
 		"width='$width' height='$height'" 
@@ -811,7 +811,7 @@ function http_img_rien($width, $height, $class='', $title='') {
 }
 
 // pondre les stats sous forme d'un fichier csv tres basique
-// http://doc.spip.org/@statistiques_csv
+// http://code.spip.net/@statistiques_csv
 function statistiques_csv($id) {
 
 	$filename = 'stats_'.($id ? 'article'.$id : 'total').'.csv';
@@ -827,7 +827,7 @@ function statistiques_csv($id) {
 	}
 }
 
-// http://doc.spip.org/@exec_statistiques_visites_dist
+// http://code.spip.net/@exec_statistiques_visites_dist
 function exec_pb_statistiques()
 {
 	global $connect_statut, $spip_lang_left, $couleur_claire;

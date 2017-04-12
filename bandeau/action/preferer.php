@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-// http://doc.spip.org/@action_preferer_dist
+// http://code.spip.net/@action_preferer_dist
 function action_preferer_dist() {
 	//
 	// Preferences de presentation de l'espace prive

@@ -19,7 +19,7 @@ define('CHAMP_SQL_PLUS_FONC', '`?([A-Z_\/][A-Z_\/0-9.]*)' . SQL_ARGS . '?`?');
 
 // analyse des criteres de boucle, 
 
-// http://doc.spip.org/@phraser_criteres
+// http://code.spip.net/@phraser_criteres
 function phraser_criteres_iterateurs($params, &$result) {
 
 	$err_ci = ''; // indiquera s'il y a eu une erreur

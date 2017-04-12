@@ -88,7 +88,7 @@ if ($statut_adherent =="M") $statut="1comite"; else $statut="6forum";
 	return $res;
 }
 
-// http://doc.spip.org/@test_login
+// http://code.spip.net/@test_login
 function test_login($nom, $mail) {
 	include_spip('inc/charsets');
 	$nom = strtolower(translitteration($nom));
@@ -118,7 +118,7 @@ function test_login($nom, $mail) {
 	}
 }
 
-// http://doc.spip.org/@creer_pass_pour_auteur
+// http://code.spip.net/@creer_pass_pour_auteur
 function creer_pass_pour_auteur($id_auteur) {
 	include_spip('inc/acces');
 	include_spip('auth/sha256.inc');

@@ -16,9 +16,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define ('_DEBUG_AUTORISER', false);
 
 // surcharge possible de autoriser(), sinon autoriser_dist()
-// http://doc.spip.org/@autoriser
+// http://code.spip.net/@autoriser
 if (!function_exists('autoriser')) {
-// http://doc.spip.org/@autoriser
+// http://code.spip.net/@autoriser
 	function autoriser() {
 		$args = func_get_args(); 
 		return call_user_func_array('autoriser_dist', $args);
@@ -61,7 +61,7 @@ function auth_rubrique_compat($id_auteur, $statut)
 //
 // Seul le premier argument est obligatoire
 //
-// http://doc.spip.org/@autoriser_dist
+// http://code.spip.net/@autoriser_dist
 function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	static $restreint = array();
 
@@ -128,7 +128,7 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 }
 
 // Autorisation par defaut : les admins complets OK, les autres non
-// http://doc.spip.org/@autoriser_defaut_dist
+// http://code.spip.net/@autoriser_defaut_dist
 function autoriser_defaut_dist($faire, $type, $id, $qui, $opt) {
 	return
 		$qui['statut'] == '0minirezo'
@@ -136,7 +136,7 @@ function autoriser_defaut_dist($faire, $type, $id, $qui, $opt) {
 }
 
 // Autoriser a publier dans la rubrique $id
-// http://doc.spip.org/@autoriser_rubrique_publierdans_dist
+// http://code.spip.net/@autoriser_rubrique_publierdans_dist
 function autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt) {
 	return
 		($qui['statut'] == '0minirezo')
@@ -148,7 +148,7 @@ function autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt) {
 
 // Autoriser a modifier la rubrique $id
 // = publierdans rubrique $id
-// http://doc.spip.org/@autoriser_rubrique_modifier_dist
+// http://code.spip.net/@autoriser_rubrique_modifier_dist
 function autoriser_rubrique_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return
 		autoriser('publierdans', 'rubrique', $id, $qui, $opt);
@@ -157,7 +157,7 @@ function autoriser_rubrique_modifier_dist($faire, $type, $id, $qui, $opt) {
 // Autoriser a modifier la breve $id
 // = admins & redac si la breve n'est pas publiee
 // = admins de rubrique parente si publiee
-// http://doc.spip.org/@autoriser_breve_modifier_dist
+// http://code.spip.net/@autoriser_breve_modifier_dist
 function autoriser_breve_modifier_dist($faire, $type, $id, $qui, $opt) {
 	$s = spip_query(
 	"SELECT id_rubrique,statut FROM spip_breves WHERE id_breve="._q($id));
@@ -171,7 +171,7 @@ function autoriser_breve_modifier_dist($faire, $type, $id, $qui, $opt) {
 // Autoriser a modifier l'article $id
 // = publierdans rubrique parente
 // = ou statut 'prop,prepa' et $qui est auteur
-// http://doc.spip.org/@autoriser_article_modifier_dist
+// http://code.spip.net/@autoriser_article_modifier_dist
 function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
 	$s = spip_query(
 	"SELECT id_rubrique,statut FROM spip_articles WHERE id_article="._q($id));
@@ -187,7 +187,7 @@ function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
 
 // Lire les stats ?
 // = tous les admins
-// http://doc.spip.org/@autoriser_voirstats_dist
+// http://code.spip.net/@autoriser_voirstats_dist
 function autoriser_voirstats_dist($faire, $type, $id, $qui, $opt) {
 	return
 		$qui['statut'] == '0minirezo';
@@ -195,7 +195,7 @@ function autoriser_voirstats_dist($faire, $type, $id, $qui, $opt) {
 
 
 // Voir un objet
-// http://doc.spip.org/@autoriser_voir_dist
+// http://code.spip.net/@autoriser_voir_dist
 function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 	if (
 		($qui['statut'] == '0minirezo')
@@ -214,7 +214,7 @@ function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 
 // Voir les revisions ?
 // = voir l'objet
-// http://doc.spip.org/@autoriser_voirrevisions_dist
+// http://code.spip.net/@autoriser_voirrevisions_dist
 function autoriser_voirrevisions_dist($faire, $type, $id, $qui, $opt) {
 	return
 		autoriser('voir', $type, $id, $qui, $opt);
@@ -223,7 +223,7 @@ function autoriser_voirrevisions_dist($faire, $type, $id, $qui, $opt) {
 // Moderer le forum ?
 // = modifier l'objet correspondant (si forum attache a un objet)
 // = droits par defaut sinon (admin complet pour moderation complete)
-// http://doc.spip.org/@autoriser_modererforum_dist
+// http://code.spip.net/@autoriser_modererforum_dist
 function autoriser_modererforum_dist($faire, $type, $id, $qui, $opt) {
 	return
 		autoriser('modifier', $type, $id, $qui, $opt);
@@ -231,7 +231,7 @@ function autoriser_modererforum_dist($faire, $type, $id, $qui, $opt) {
 
 // Modifier un forum ?
 // = jamais !
-// http://doc.spip.org/@autoriser_modifier_forum_dist
+// http://code.spip.net/@autoriser_modifier_forum_dist
 function autoriser_modifier_forum_dist($faire, $type, $id, $qui, $opt) {
 	return
 		false;
@@ -241,7 +241,7 @@ function autoriser_modifier_forum_dist($faire, $type, $id, $qui, $opt) {
 // Moderer la petition ?
 // = modifier l'article correspondant
 // = droits par defaut sinon (admin complet pour moderation de tout)
-// http://doc.spip.org/@autoriser_moderer_petition_dist
+// http://code.spip.net/@autoriser_moderer_petition_dist
 function autoriser_moderer_petition_dist($faire, $type, $id, $qui, $opt) {
 	return
 		autoriser('modifier', $type, $id, $qui, $opt);

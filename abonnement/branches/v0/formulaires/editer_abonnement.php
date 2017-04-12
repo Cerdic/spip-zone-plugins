@@ -20,7 +20,7 @@ function formulaires_editer_abonnement_charger_dist($id_abonnement='new',$retour
 }
 
 // Choix par defaut des options de presentation
-// http://doc.spip.org/@articles_edit_config
+// http://code.spip.net/@articles_edit_config
 function abonnements_edit_config($row)
 {
 	$config = $GLOBALS['meta'];
@@ -36,7 +36,7 @@ function formulaires_editer_abonnement_verifier_dist($id_abonnement='new',$retou
 	return $erreurs;
 }
 
-// http://doc.spip.org/@inc_editer_groupe_mot_dist
+// http://code.spip.net/@inc_editer_groupe_mot_dist
 function formulaires_editer_abonnement_traiter_dist($id_abonnement='new',$retour='', $config_fonc='abonnements_edit_config', $row=array(), $hidden=''){
 	$res = array();
 	$res['editable'] = true;

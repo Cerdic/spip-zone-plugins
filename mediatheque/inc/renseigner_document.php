@@ -97,7 +97,7 @@ if (!function_exists('traite_svg')){
  * @param string $file
  * @return array
  */
-// http://doc.spip.org/@traite_svg
+// http://code.spip.net/@traite_svg
 function traite_svg($file)
 {
 	$texte = spip_file_get_contents($file);
@@ -147,7 +147,7 @@ if (!function_exists('decoder_type_image')){
  * @param bool $strict
  * @return string
  */
-// http://doc.spip.org/@decoder_type_image
+// http://code.spip.net/@decoder_type_image
 function decoder_type_image($type, $strict = false) {
 	switch ($type) {
 		case 1:

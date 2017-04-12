@@ -85,7 +85,7 @@ class JavaScriptPacker {
 		'High ASCII' => 95
 	);
 	
-// http://doc.spip.org/@JavaScriptPacker
+// http://code.spip.net/@JavaScriptPacker
 	function JavaScriptPacker($_script, $_encoding = 62, $_fastDecode = true, $_specialChars = false)
 	{
 		$this->_script = $_script . "\n";
@@ -96,7 +96,7 @@ class JavaScriptPacker {
 		$this->_specialChars = $_specialChars;
 	}
 	
-// http://doc.spip.org/@pack
+// http://code.spip.net/@pack
 	function pack() {
 		$this->_addParser('_basicCompression');
 		if ($this->_specialChars)
@@ -109,7 +109,7 @@ class JavaScriptPacker {
 	}
 	
 	// apply all parsing routines
-// http://doc.spip.org/@_pack
+// http://code.spip.net/@_pack
 	function _pack($script) {
 		for ($i = 0; isset($this->_parsers[$i]); $i++) {
 			$script = call_user_func(array(&$this,$this->_parsers[$i]), $script);
@@ -119,13 +119,13 @@ class JavaScriptPacker {
 	
 	// keep a list of parsing functions, they'll be executed all at once
 	var $_parsers = array();
-// http://doc.spip.org/@_addParser
+// http://code.spip.net/@_addParser
 	function _addParser($parser) {
 		$this->_parsers[] = $parser;
 	}
 	
 	// zero encoding - just removal of white space and comments
-// http://doc.spip.org/@_basicCompression
+// http://code.spip.net/@_basicCompression
 	function _basicCompression($script) {
 		$parser = new ParseMaster();
 		// make safe
@@ -160,7 +160,7 @@ class JavaScriptPacker {
 		return $parser->exec($script);
 	}
 	
-// http://doc.spip.org/@_encodeSpecialChars
+// http://code.spip.net/@_encodeSpecialChars
 	function _encodeSpecialChars($script) {
 		$parser = new ParseMaster();
 		// replace: $name -> n, $$name -> na
@@ -183,7 +183,7 @@ class JavaScriptPacker {
 		return $parser->exec($script);
 	}
 	
-// http://doc.spip.org/@_encodeKeywords
+// http://code.spip.net/@_encodeKeywords
 	function _encodeKeywords($script) {
 		// escape high-ascii values already in the script (i.e. in strings)
 		if ($this->_encoding > 62)
@@ -213,7 +213,7 @@ class JavaScriptPacker {
 		}
 	}
 	
-// http://doc.spip.org/@_analyze
+// http://code.spip.net/@_analyze
 	function _analyze($script, $regexp, $encode) {
 		// analyse
 		// retreive all words in the script
@@ -288,13 +288,13 @@ class JavaScriptPacker {
 	}
 	
 	var $_count = array();
-// http://doc.spip.org/@_sortWords
+// http://code.spip.net/@_sortWords
 	function _sortWords($match1, $match2) {
 		return $this->_count[$match2] - $this->_count[$match1];
 	}
 	
 	// build the boot function used for loading and decoding
-// http://doc.spip.org/@_bootStrap
+// http://code.spip.net/@_bootStrap
 	function _bootStrap($packed, $keywords) {
 		$ENCODE = $this->_safeRegExp('$encode\\($count\\)');
 
@@ -374,17 +374,17 @@ class JavaScriptPacker {
 	}
 	
 	var $buffer;
-// http://doc.spip.org/@_insertFastDecode
+// http://code.spip.net/@_insertFastDecode
 	function _insertFastDecode($match) {
 		return '{' . $this->buffer . ';';
 	}
-// http://doc.spip.org/@_insertFastEncode
+// http://code.spip.net/@_insertFastEncode
 	function _insertFastEncode($match) {
 		return '{$encode=' . $this->buffer . ';';
 	}
 	
 	// mmm.. ..which one do i need ??
-// http://doc.spip.org/@_getEncoder
+// http://code.spip.net/@_getEncoder
 	function _getEncoder($ascii) {
 		return $ascii > 10 ? $ascii > 36 ? $ascii > 62 ?
 		       '_encode95' : '_encode62' : '_encode36' : '_encode10';
@@ -392,21 +392,21 @@ class JavaScriptPacker {
 	
 	// zero encoding
 	// characters: 0123456789
-// http://doc.spip.org/@_encode10
+// http://code.spip.net/@_encode10
 	function _encode10($charCode) {
 		return $charCode;
 	}
 	
 	// inherent base36 support
 	// characters: 0123456789abcdefghijklmnopqrstuvwxyz
-// http://doc.spip.org/@_encode36
+// http://code.spip.net/@_encode36
 	function _encode36($charCode) {
 		return base_convert($charCode, 10, 36);
 	}
 	
 	// hitch a ride on base36 and add the upper case alpha characters
 	// characters: 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
-// http://doc.spip.org/@_encode62
+// http://code.spip.net/@_encode62
 	function _encode62($charCode) {
 		$res = '';
 		if ($charCode >= $this->_encoding) {
@@ -422,7 +422,7 @@ class JavaScriptPacker {
 	
 	// use high-ascii values
 	// characters: ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿À�?ÂÃÄÅÆÇÈÉÊËÌ�?Î�?�?ÑÒÓÔÕÖ×ØÙÚÛÜ�?Þßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþ
-// http://doc.spip.org/@_encode95
+// http://code.spip.net/@_encode95
 	function _encode95($charCode) {
 		$res = '';
 		if ($charCode >= $this->_encoding)
@@ -431,24 +431,24 @@ class JavaScriptPacker {
 		return $res . chr(($charCode % $this->_encoding) + 161);
 	}
 	
-// http://doc.spip.org/@_safeRegExp
+// http://code.spip.net/@_safeRegExp
 	function _safeRegExp($string) {
 		return '/'.preg_replace('/\$/', '\\\$', $string).'/';
 	}
 	
-// http://doc.spip.org/@_encodePrivate
+// http://code.spip.net/@_encodePrivate
 	function _encodePrivate($charCode) {
 		return "_" . $charCode;
 	}
 	
 	// protect characters used by the parser
-// http://doc.spip.org/@_escape
+// http://code.spip.net/@_escape
 	function _escape($script) {
 		return preg_replace('/([\\\\\'])/', '\\\$1', $script);
 	}
 	
 	// protect high-ascii characters already in the script
-// http://doc.spip.org/@_escape95
+// http://code.spip.net/@_escape95
 	function _escape95($script) {
 		return preg_replace_callback(
 			'/[\\xa1-\\xff]/',
@@ -456,13 +456,13 @@ class JavaScriptPacker {
 			$script
 		);
 	}
-// http://doc.spip.org/@_escape95Bis
+// http://code.spip.net/@_escape95Bis
 	function _escape95Bis($match) {
 		return '\x'.((string)dechex(ord($match)));
 	}
 	
 	
-// http://doc.spip.org/@_getJSFunction
+// http://code.spip.net/@_getJSFunction
 	function _getJSFunction($aName) {
 		$func = 'JSFUNCTION'.$aName;
 		if (isset($this->$func)){
@@ -576,7 +576,7 @@ class ParseMaster {
 	var $QUOTE = '/\'/';
 	var $DELETED = '/\\x01[^\\x01]*\\x01/';//g
 	
-// http://doc.spip.org/@add
+// http://code.spip.net/@add
 	function add($expression, $replacement = '') {
 		// count the number of sub-expressions
 		//  - add one because each pattern is itself a sub-expression
@@ -610,7 +610,7 @@ class ParseMaster {
 		else $this->_add('/^$/', $replacement, $length);
 	}
 	
-// http://doc.spip.org/@exec
+// http://code.spip.net/@exec
 	function exec($string) {
 		// execute the global replacement
 		$this->_escaped = array();
@@ -637,7 +637,7 @@ class ParseMaster {
 		return preg_replace($this->DELETED, '', $string);
 	}
 		
-// http://doc.spip.org/@reset
+// http://code.spip.net/@reset
 	function reset() {
 		// clear the patterns collection so that this object may be re-used
 		$this->_patterns = array();
@@ -648,14 +648,14 @@ class ParseMaster {
 	var $_patterns = array(); // patterns stored by index
 	
 	// create and add a new pattern to the patterns collection
-// http://doc.spip.org/@_add
+// http://code.spip.net/@_add
 	function _add() {
 		$arguments = func_get_args();
 		$this->_patterns[] = $arguments;
 	}
 	
 	// this is the global replace function (it's quite complicated)
-// http://doc.spip.org/@_replacement
+// http://code.spip.net/@_replacement
 	function _replacement($arguments) {
 		if (empty($arguments)) return '';
 		
@@ -688,7 +688,7 @@ class ParseMaster {
 		}
 	}
 	
-// http://doc.spip.org/@_backReferences
+// http://code.spip.net/@_backReferences
 	function _backReferences($match, $offset) {
 		$replacement = $this->buffer['replacement'];
 		$quote = $this->buffer['quote'];
@@ -699,14 +699,14 @@ class ParseMaster {
 		return $replacement;
 	}
 	
-// http://doc.spip.org/@_replace_name
+// http://code.spip.net/@_replace_name
 	function _replace_name($match, $offset){
 		$length = strlen($match[$offset + 2]);
 		$start = $length - max($length - strlen($match[$offset + 3]), 0);
 		return substr($match[$offset + 1], $start, $length) . $match[$offset + 4];
 	}
 	
-// http://doc.spip.org/@_replace_encoded
+// http://code.spip.net/@_replace_encoded
 	function _replace_encoded($match, $offset) {
 		return $this->buffer[$match[$offset]];
 	}
@@ -717,7 +717,7 @@ class ParseMaster {
 	var $buffer;
 	
 	// encode escaped characters
-// http://doc.spip.org/@_escape
+// http://code.spip.net/@_escape
 	function _escape($string, $escapeChar) {
 		if ($escapeChar) {
 			$this->buffer = $escapeChar;
@@ -731,14 +731,14 @@ class ParseMaster {
 			return $string;
 		}
 	}
-// http://doc.spip.org/@_escapeBis
+// http://code.spip.net/@_escapeBis
 	function _escapeBis($match) {
 		$this->_escaped[] = $match[1];
 		return $this->buffer;
 	}
 	
 	// decode escaped characters
-// http://doc.spip.org/@_unescape
+// http://code.spip.net/@_unescape
 	function _unescape($string, $escapeChar) {
 		if ($escapeChar) {
 			$regexp = '/'.'\\'.$escapeChar.'/';
@@ -754,7 +754,7 @@ class ParseMaster {
 			return $string;
 		}
 	}
-// http://doc.spip.org/@_unescapeBis
+// http://code.spip.net/@_unescapeBis
 	function _unescapeBis() {
 		if (!empty($this->_escaped[$this->buffer['i']])) {
 			 $temp = $this->_escaped[$this->buffer['i']];
@@ -765,7 +765,7 @@ class ParseMaster {
 		return $this->buffer['escapeChar'] . $temp;
 	}
 	
-// http://doc.spip.org/@_internalEscape
+// http://code.spip.net/@_internalEscape
 	function _internalEscape($string) {
 		return preg_replace($this->ESCAPE, '', $string);
 	}

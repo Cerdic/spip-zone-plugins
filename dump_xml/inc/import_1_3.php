@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@inc_import_1_3_dist
+// http://code.spip.net/@inc_import_1_3_dist
 function inc_import_1_3_dist($lecteur, $request, $gz='fread', $atts=array()) {
   global $import_ok, $tables_trans,  $trans;
 	static $tables = '';
@@ -81,7 +81,7 @@ function inc_import_1_3_dist($lecteur, $request, $gz='fread', $atts=array()) {
 // pour pouvoir identifier avec l'existant.
 // (Faudrait convenir d'une structure de donnees, c'est lourd & inextensible)
 
-// http://doc.spip.org/@import_collecte
+// http://code.spip.net/@import_collecte
 function import_collecte($desc)
 {
 	$fields = $desc['field'];
@@ -108,7 +108,7 @@ function import_collecte($desc)
 
 // Les 2 derniers args ne servent que pour l'insertion
 
-// http://doc.spip.org/@import_replace
+// http://code.spip.net/@import_replace
 function import_replace($values, $table, $desc, $request, $atts='') {
 	if (!isset($desc['field']['impt'])) {// pas de champ de gestion d'import
 		if (!sql_replace($table, $values, $desc))
@@ -148,7 +148,7 @@ function import_replace($values, $table, $desc, $request, $atts='') {
 	}
 }
 
-// http://doc.spip.org/@import_lire_champs
+// http://code.spip.net/@import_lire_champs
 function import_lire_champs($f, $fields, $gz, $phpmyadmin, $table, $atts)
 {
 	$values = array();

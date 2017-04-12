@@ -6,7 +6,7 @@
 	Cedric MORIN [notre-ville.net->http://www.notre-ville.net]
 _ ce plugin est fourni tel quel sous licence GPL
 	</auteur>
-	<version>0.10</version>
+	<version>0.10.1</version>
 	<etat>stable</etat>
 	<description>
 Interfacage du moteur mnoGoSearch avec l'API SPIP

@@ -15,7 +15,7 @@ include_spip('inc/presentation');
 include_spip('inc/acces');
 include_spip('inc/action');
 
-// http://doc.spip.org/@exec_legender_auteur_dist
+// http://code.spip.net/@exec_legender_auteur_dist
 function exec_legender_auteur_supp_dist()
 {
 	global $connect_id_auteur, $spip_display;

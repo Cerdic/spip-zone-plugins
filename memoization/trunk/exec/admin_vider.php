@@ -23,7 +23,7 @@ function redirige_action_post($action, $arg, $ret, $gra, $corps, $att='') {
 }
 }
 
-// http://doc.spip.org/@calculer_taille_dossier
+// http://code.spip.net/@calculer_taille_dossier
 function calculer_taille_dossier ($dir) {
 	$handle = @opendir($dir);
 	if (!$handle) return;
@@ -43,7 +43,7 @@ function calculer_taille_dossier ($dir) {
 
 
 
-// http://doc.spip.org/@afficher_taille_cache_vignettes
+// http://code.spip.net/@afficher_taille_cache_vignettes
 function afficher_taille_cache_vignettes() {
 	$taille = calculer_taille_dossier(_DIR_VAR);
 	return _T('ecrire:taille_cache_image',
@@ -54,7 +54,7 @@ function afficher_taille_cache_vignettes() {
 		);
 }
 
-// http://doc.spip.org/@exec_admin_vider_dist
+// http://code.spip.net/@exec_admin_vider_dist
 function exec_admin_vider_dist()
 {
 	global $spip_lang;

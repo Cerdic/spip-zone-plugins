@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@action_editer_feedback_dist
+// http://code.spip.net/@action_editer_feedback_dist
 function action_editer_feedback_dist($arg=null) {
 
 	if (is_null($arg)){
@@ -35,7 +35,7 @@ function action_editer_feedback_dist($arg=null) {
 
 /**
  * Inserer une feedback en base
- * http://doc.spip.org/@insert_feedback
+ * http://code.spip.net/@insert_feedback
  *
  * @param int $id_rubrique
  * @return int
@@ -89,7 +89,7 @@ function feedback_inserer($id_rubrique) {
  * Modifier une feedback en base
  * $c est un contenu (par defaut on prend le contenu via _request())
  *
- * http://doc.spip.org/@revisions_feedback
+ * http://code.spip.net/@revisions_feedback
  *
  * @param int $id_feedback
  * @param array $set

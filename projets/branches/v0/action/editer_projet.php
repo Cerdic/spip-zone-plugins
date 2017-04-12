@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@action_editer_article_dist
+// http://code.spip.net/@action_editer_article_dist
 function action_editer_projets_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -49,7 +49,7 @@ function action_editer_projets_dist() {
 
 // Appelle toutes les fonctions de modification d'un projet
 // $err est de la forme '&trad_err=1'
-// http://doc.spip.org/@articles_set
+// http://code.spip.net/@articles_set
 function projet_set($id_projet) {
 	$err = '';
 
@@ -76,7 +76,7 @@ function projet_set($id_projet) {
 	return $err;
 }
 
-// http://doc.spip.org/@insert_article
+// http://code.spip.net/@insert_article
 function insert_projet($id_parent) {
 
 	// La langue a la creation : si les liens de traduction sont autorises
@@ -101,7 +101,7 @@ function insert_projet($id_parent) {
 //
 // statut et rubrique sont lies, car un admin restreint peut deplacer
 // un article publie vers une rubrique qu'il n'administre pas
-// http://doc.spip.org/@instituer_article
+// http://code.spip.net/@instituer_article
 function instituer_projet($id_projet, $c, $calcul_rub=true) {
 
 	include_spip('inc/autoriser');
@@ -201,7 +201,7 @@ function instituer_projet($id_projet, $c, $calcul_rub=true) {
 // Reunit les textes decoupes parce que trop longs
 //
 
-// http://doc.spip.org/@trop_longs_articles
+// http://code.spip.net/@trop_longs_articles
 function trop_longs_articles() {
 	if (is_array($plus = _request('texte_plus'))) {
 		foreach ($plus as $n=>$t) {

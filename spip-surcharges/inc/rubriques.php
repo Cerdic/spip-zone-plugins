@@ -24,7 +24,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // S'il est deplace' alors qu'il etait publieé, double consequence.
 // Tout cela devrait passer en SQL, sous forme de Cascade SQL.
 
-// http://doc.spip.org/@calculer_rubriques_if
+// http://code.spip.net/@calculer_rubriques_if
 function calculer_rubriques_if ($id_rubrique, $modifs, $statut_ancien='')
 {
 	$neuf = false;
@@ -48,7 +48,7 @@ function calculer_rubriques_if ($id_rubrique, $modifs, $statut_ancien='')
 // avec consequence sur ses parentes.
 // Retourne Vrai si le statut a change
 
-// http://doc.spip.org/@publier_branche_rubrique
+// http://code.spip.net/@publier_branche_rubrique
 function publier_branche_rubrique($id_rubrique)
 {
 	$id_pred = $id_rubrique;
@@ -66,7 +66,7 @@ function publier_branche_rubrique($id_rubrique)
 // Fonction a appeler lorsqu'on depublie ou supprime qqch dans une rubrique
 // retourne Vrai si le statut change effectivement
 
-// http://doc.spip.org/@depublier_branche_rubrique_if
+// http://code.spip.net/@depublier_branche_rubrique_if
 function depublier_branche_rubrique_if($id_rubrique)
 {
 	$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
@@ -107,7 +107,7 @@ function depublier_branche_rubrique_if($id_rubrique)
 // calculer les meta-donnes resultantes,
 // remettre de la cohérence au cas où la base importee en manquait
 // Cette fonction doit etre invoque sans processus concurrent potentiel.
-// http://doc.spip.org/@calculer_rubriques
+// http://code.spip.net/@calculer_rubriques
 function calculer_rubriques() {
 
 	calculer_rubriques_publiees();
@@ -129,7 +129,7 @@ function calculer_rubriques() {
 // des champs temporaires afin de ne pas casser la base
 // pendant la demi seconde de recalculs
 
-// http://doc.spip.org/@calculer_rubriques_publiees
+// http://code.spip.net/@calculer_rubriques_publiees
 function calculer_rubriques_publiees() {
 
 	// Mettre les compteurs a zero
@@ -183,7 +183,7 @@ function calculer_rubriques_publiees() {
 	sql_update('spip_rubriques', array('date'=>'date_tmp', 'statut'=>'statut_tmp'));
 }
 
-// http://doc.spip.org/@propager_les_secteurs
+// http://code.spip.net/@propager_les_secteurs
 function propager_les_secteurs()
 {
 	// fixer les id_secteur des rubriques racines
@@ -217,7 +217,7 @@ function propager_les_secteurs()
 //
 // Calculer la langue des sous-rubriques et des articles
 //
-// http://doc.spip.org/@calculer_langues_rubriques_etape
+// http://code.spip.net/@calculer_langues_rubriques_etape
 function calculer_langues_rubriques_etape() {
 	$s = sql_select("fille.id_rubrique AS id_rubrique, mere.lang AS lang", "spip_rubriques AS fille, spip_rubriques AS mere", "fille.id_parent = mere.id_rubrique AND fille.langue_choisie != 'oui' AND mere.lang<>'' AND mere.lang<>fille.lang");
 
@@ -229,7 +229,7 @@ function calculer_langues_rubriques_etape() {
 	return $t;
 }
 
-// http://doc.spip.org/@calculer_langues_rubriques
+// http://code.spip.net/@calculer_langues_rubriques
 function calculer_langues_rubriques() {
 
 	// rubriques (recursivite)
@@ -262,7 +262,7 @@ function calculer_langues_rubriques() {
 
 // Cette fonction calcule la liste des langues reellement utilisees dans le
 // site public
-// http://doc.spip.org/@calculer_langues_utilisees
+// http://code.spip.net/@calculer_langues_utilisees
 function calculer_langues_utilisees () {
 	$langues = array();
 
@@ -290,7 +290,7 @@ function calculer_langues_utilisees () {
 	return $langues;
 }
 
-// http://doc.spip.org/@calcul_generation
+// http://code.spip.net/@calcul_generation
 function calcul_generation ($generation) {
 	$lesfils = array();
 	$result = sql_select('id_rubrique',
@@ -301,7 +301,7 @@ function calcul_generation ($generation) {
 	return join(",", $lesfils);
 }
 
-// http://doc.spip.org/@calcul_branche
+// http://code.spip.net/@calcul_branche
 function calcul_branche ($generation) {
 	if (!$generation) 
 		return '0';
@@ -316,7 +316,7 @@ function calcul_branche ($generation) {
 // Calcul d'une branche
 // (liste des id_rubrique contenues dans une rubrique donnee)
 // pour le critere {branche}
-// http://doc.spip.org/@calcul_branche_in
+// http://code.spip.net/@calcul_branche_in
 function calcul_branche_in($id) {
 
 	// normaliser $id qui a pu arriver comme un array, comme un entier, ou comme une chaine NN,NN,NN
@@ -341,7 +341,7 @@ function calcul_branche_in($id) {
 // ou est redate'
 // Si $check, affecte le statut des rubriques concernees.
 
-// http://doc.spip.org/@calculer_prochain_postdate
+// http://code.spip.net/@calculer_prochain_postdate
 function calculer_prochain_postdate($check= false) {
 	include_spip('base/abstract_sql');
 	if ($check) {
@@ -370,7 +370,7 @@ function calculer_prochain_postdate($check= false) {
 // a partir de id_rubrique (par defaut, a partir de la racine)
 // NB: cette fonction est tres pratique, mais pas utilisee dans le core
 // pour rester legere elle n'appelle pas calculer_rubriques()
-// http://doc.spip.org/@creer_rubrique_nommee
+// http://code.spip.net/@creer_rubrique_nommee
 function creer_rubrique_nommee($titre, $id_parent=0) {
 
 	// eclater l'arborescence demandee

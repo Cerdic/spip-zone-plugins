@@ -214,7 +214,7 @@ function balise_FORMULAIRE_SPIPBB_PROFIL_dyn($id_auteur) {
 # base  script :inc/extra.php : function extra_recup_saisie()
 # qq modifs, retourne un array()
 // recupere les valeurs postees pour reconstituer l'extra
-// http://doc.spip.org/@extra_recup_saisie
+// http://code.spip.net/@extra_recup_saisie
 function spipbb_extra_recup_saisie($type, $c=false) {
 	$champs = $GLOBALS['champs_extra'][$type];
 	$extra = Array();

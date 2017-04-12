@@ -17,7 +17,7 @@ include_spip('inc/texte');
 charger_generer_url();
 include_spip('inc/rubriques');
 
-// http://doc.spip.org/@encours_accueil
+// http://code.spip.net/@encours_accueil
 function encours_accueil($vos_articles)
 {
   global $connect_statut, $connect_toutes_rubriques, $connect_id_auteur, $flag_ob;
@@ -112,7 +112,7 @@ if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
  }
 }
 
-// http://doc.spip.org/@colonne_gauche_accueil
+// http://code.spip.net/@colonne_gauche_accueil
 function colonne_gauche_accueil($id_rubrique, $activer_breves,
 				$activer_sites, $articles_mots)
 {
@@ -247,7 +247,7 @@ if (strlen($gadget) > 0) {
 echo "<div>&nbsp;</div>";
 }
 
-// http://doc.spip.org/@personnel_accueil
+// http://code.spip.net/@personnel_accueil
 function personnel_accueil()
 {
   global $spip_display, $spip_lang_left, $connect_id_auteur, $connect_id_rubrique, $connect_statut,  $partie_cal, $echelle;
@@ -297,7 +297,7 @@ if ($spip_display != 4) {
 }
 
 
-// http://doc.spip.org/@etat_base_accueil
+// http://code.spip.net/@etat_base_accueil
 function etat_base_accueil()
 {
   global $spip_display, $spip_lang_left, $connect_id_auteur, $connect_statut, $partie_cal, $echelle;
@@ -430,7 +430,7 @@ if ($spip_display != 4) {
 
 
 
-// http://doc.spip.org/@exec_accueil_dist
+// http://code.spip.net/@exec_accueil_dist
 function exec_accueil_dist()
 {
 

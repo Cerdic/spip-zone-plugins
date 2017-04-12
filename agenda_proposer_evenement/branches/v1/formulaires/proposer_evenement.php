@@ -318,7 +318,7 @@ function agenda_verifier_corriger_date_saisie($suffixe,$horaire,&$erreurs){
 
 
 //+SPIP3 Cette fonction disparait avec SPIP3 on la recolle ici
-// http://doc.spip.org/@ajouter_auteur_et_rediriger
+// http://code.spip.net/@ajouter_auteur_et_rediriger
 function ajouter_auteur_et_rediriger($type, $id, $id_auteur, $redirect)
 {
 	$jointure = table_jointure('auteur', $type);

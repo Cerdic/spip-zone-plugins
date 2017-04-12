@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-// http://doc.spip.org/@exec_controle_petition_dist
+// http://code.spip.net/@exec_controle_petition_dist
 function exec_controle_petition_dist()
 {
 	exec_controle_petition_args(intval(_request('id_article')),
@@ -25,7 +25,7 @@ function exec_controle_petition_dist()
 		intval(_request('pas'))); // a proposer grapiquement
 }
 
-// http://doc.spip.org/@exec_controle_petition_args
+// http://code.spip.net/@exec_controle_petition_args
 function exec_controle_petition_args($id_article, $type, $date, $debut, $id_signature, $pas=NULL)
 {
 	if ($id_signature) {
@@ -77,7 +77,7 @@ function controle_petition_args($id_article, $type, $date, $debut, $titre, $wher
 	}
 }
 
-// http://doc.spip.org/@controle_petition_page
+// http://code.spip.net/@controle_petition_page
 function controle_petition_page($id_article, $titre,  $ong, $corps)
 {
 	if ($id_article) {
@@ -122,7 +122,7 @@ function controle_petition_page($id_article, $titre,  $ong, $corps)
 	echo fin_gauche(), fin_page();
 }
 
-// http://doc.spip.org/@controle_petition_onglet
+// http://code.spip.net/@controle_petition_onglet
 function controle_petition_onglet($id_article, $debut, $type, $arg='')
 {
 	$arg .= ($id_article ? "id_article=$id_article&" :'');

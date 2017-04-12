@@ -16,7 +16,7 @@ include_spip('inc/presentation');
 include_spip('base/agenda_evenements'); // si le plugin existe
 include_spip('base/pim_agenda'); // si le plugin existe
 
-// http://doc.spip.org/@exec_mots_type_dist
+// http://code.spip.net/@exec_mots_type_dist
 function exec_mots_type_dist()
 {
   global $connect_statut, $descriptif, $id_groupe, $new, $options, $texte, $titre;

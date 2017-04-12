@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Options :
 // creer_site => on va creer les repertoires qui vont bien (defaut: false)
 // cookie_prefix, table_prefix => regler les prefixes (defaut: true)
-// http://doc.spip.org/@demarrer_site
+// http://code.spip.net/@demarrer_site
 function demarrer_site($site = '', $options = array()) {
 
 	if (!$site) return;
@@ -278,7 +278,7 @@ function mutualisation_url_img_courtes($flux) {
 // de la base de donnees ou comme prefixe des cookies... unicite quasi garantie
 // Max 12 caracteres a-z0-9, qui ressemblent au domaine et ne commencent
 // pas par un chiffre
-// http://doc.spip.org/@prefixe_mutualisation
+// http://code.spip.net/@prefixe_mutualisation
 function prefixe_mutualisation($site) {
 	static $prefix = array();
 

@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@action_editer_article_dist
+// http://code.spip.net/@action_editer_article_dist
 function action_editer_article_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -52,7 +52,7 @@ function action_editer_article_dist() {
 
 // Appelle toutes les fonctions de modification d'un article
 // $err est de la forme '&trad_err=1'
-// http://doc.spip.org/@articles_set
+// http://code.spip.net/@articles_set
 function articles_set($id_article) {
 	$err = '';
 
@@ -88,7 +88,7 @@ function articles_set($id_article) {
 	return $err;
 }
 
-// http://doc.spip.org/@insert_article
+// http://code.spip.net/@insert_article
 function insert_article($id_rubrique) {
 
 
@@ -142,7 +142,7 @@ function insert_article($id_rubrique) {
 //
 // statut et rubrique sont lies, car un admin restreint peut deplacer
 // un article publie vers une rubrique qu'il n'administre pas
-// http://doc.spip.org/@instituer_article
+// http://code.spip.net/@instituer_article
 function instituer_article($id_article, $c, $calcul_rub=true) {
 
 	include_spip('inc/autoriser');
@@ -255,7 +255,7 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 
 // fabrique la requete de modification de l'article, avec champs herites
 
-// http://doc.spip.org/@editer_article_heritage
+// http://code.spip.net/@editer_article_heritage
 function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $cond=true) {
 
 	// Si on deplace l'article
@@ -288,7 +288,7 @@ function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $c
 // Reunit les textes decoupes parce que trop longs
 //
 
-// http://doc.spip.org/@trop_longs_articles
+// http://code.spip.net/@trop_longs_articles
 function trop_longs_articles() {
 	if (is_array($plus = _request('texte_plus'))) {
 		foreach ($plus as $n=>$t) {
@@ -299,7 +299,7 @@ function trop_longs_articles() {
 }
 
 // Poser un lien de traduction vers un article de reference
-// http://doc.spip.org/@article_referent
+// http://code.spip.net/@article_referent
 function article_referent ($id_article, $c) {
 
 	if (!$c = intval($c['lier_trad'])) return;
@@ -332,7 +332,7 @@ function article_referent ($id_article, $c) {
 
 
 // obsolete, utiliser revision_article dans inc/modifier
-// http://doc.spip.org/@revisions_articles
+// http://code.spip.net/@revisions_articles
 function revisions_articles ($id_article, $c=false) {
 	include_spip('inc/modifier');
 	return revision_article($id_article,$c);

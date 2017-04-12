@@ -3,17 +3,17 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;    #securite
 
 
-// http://doc.spip.org/@balise_URL_LOGOUT
+// http://code.spip.net/@balise_URL_LOGOUT
 function balise_TOTAL_ITEM_PANIER ($p) {return calculer_balise_dynamique($p,'TOTAL_ITEM_PANIER', array());
 }
 
 // $args[0] = url destination apres logout [(#URL_LOGOUT{url})]
-// http://doc.spip.org/@balise_URL_LOGOUT_stat
+// http://code.spip.net/@balise_URL_LOGOUT_stat
 function balise_TOTAL_ITEM_PANIER_stat ($args, $filtres) {
     return array($args[0]);
 }
 
-// http://doc.spip.org/@balise_URL_LOGOUT_dyn
+// http://code.spip.net/@balise_URL_LOGOUT_dyn
 function balise_TOTAL_ITEM_PANIER_dyn($cible) {
 	include_spip('inc/echoppe');
 	$select_produit = sql_select('quantite','spip_echoppe_paniers',"token_panier = '".session_get('echoppe_token_panier')."'");

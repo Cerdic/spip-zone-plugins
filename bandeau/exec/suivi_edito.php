@@ -69,7 +69,7 @@ function encours_suivi()
 	. $res;
 }
 
-// http://doc.spip.org/@etat_base_accueil
+// http://code.spip.net/@etat_base_accueil
 function etat_base_suivi()
 {
 	global $spip_display, $spip_lang_left, $connect_id_rubrique;
@@ -140,7 +140,7 @@ function etat_base_suivi()
 }
 
 
-// http://doc.spip.org/@accueil_liste_participants
+// http://code.spip.net/@accueil_liste_participants
 function accueil_liste_participants()
 {
 	global $spip_lang_left;
@@ -165,7 +165,7 @@ function accueil_liste_participants()
 	return $res; 
 }
 
-// http://doc.spip.org/@exec_accueil_dist
+// http://code.spip.net/@exec_accueil_dist
 function exec_suivi_edito_dist()
 {
   global $id_rubrique, $connect_statut, $connect_id_auteur, $spip_display, $connect_id_rubrique;

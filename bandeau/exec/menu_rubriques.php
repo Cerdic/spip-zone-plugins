@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/texte');
 
-// http://doc.spip.org/@exec_menu_rubriques_dist
+// http://code.spip.net/@exec_menu_rubriques_dist
 function exec_menu_rubriques_dist() {
        
 	header("Cache-Control: no-cache, must-revalidate");
@@ -70,7 +70,7 @@ function menu_rubriques($complet = true){
 	return $ret;
 }
 
-// http://doc.spip.org/@bandeau_rubrique
+// http://code.spip.net/@bandeau_rubrique
 function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $largeur, $image='') {
 	global $spip_lang_left;
 
@@ -114,12 +114,12 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $largeur, $ima
 }
 
 
-// http://doc.spip.org/@extraire_article
+// http://code.spip.net/@extraire_article
 function extraire_article($id_p, $t) {
 	return array_key_exists($id_p, $t) ?  $t[$id_p]: array();
 }
 
-// http://doc.spip.org/@gen_liste_rubriques
+// http://code.spip.net/@gen_liste_rubriques
 function gen_liste_rubriques() {
 
 	// ici, un petit fichier cache ne fait pas de mal

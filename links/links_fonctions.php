@@ -3,7 +3,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Gerer les articles virtuels rediriges
 // on ne traite que les #URL_ARTICLE, pas les #URL_ARTICLE{13}
-// http://doc.spip.org/@balise_URL_ARTICLE_dist
+// http://code.spip.net/@balise_URL_ARTICLE_dist
 function balise_URL_ARTICLE($p) {
 	include_spip('balise/url_');
 	balise_URL_ARTICLE_dist($p); // traitement de base de SPIP

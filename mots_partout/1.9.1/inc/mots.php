@@ -15,7 +15,7 @@ $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirn
 define('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS.end($p)));
 
 // ne pas faire d'erreur si les chaines sont > 254 caracteres
-// http://doc.spip.org/@levenshtein255
+// http://code.spip.net/@levenshtein255
 function levenshtein255 ($a, $b) {
 	$a = substr($a, 0, 254);
 	$b = substr($b, 0, 254);
@@ -23,7 +23,7 @@ function levenshtein255 ($a, $b) {
 }
 
 // reduit un mot a sa valeur translitteree et en minuscules
-// http://doc.spip.org/@reduire_mot
+// http://code.spip.net/@reduire_mot
 function reduire_mot($mot) {
 	return strtr(
 		translitteration(trim($mot)),
@@ -32,7 +32,7 @@ function reduire_mot($mot) {
 		);
 }
 
-// http://doc.spip.org/@mots_ressemblants
+// http://code.spip.net/@mots_ressemblants
 function mots_ressemblants($mot, $table_mots, $table_ids='') {
 	$lim = 2;
 	$nb = 0;
@@ -104,7 +104,7 @@ function mots_ressemblants($mot, $table_mots, $table_ids='') {
  * plus le formulaire d'ajout de mot-cle
  */
 
-// http://doc.spip.org/@formulaire_mots
+// http://code.spip.net/@formulaire_mots
 function formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag_editable) {
 	global $connect_statut, $spip_lang_rtl, $spip_lang_right, $spip_lang;
 
@@ -215,7 +215,7 @@ function formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag_
 	  : "\n<div id='editer_mot-$id_objet'>$res</div>";
 }
 
-// http://doc.spip.org/@inserer_mot
+// http://code.spip.net/@inserer_mot
 function inserer_mot($table, $table_id, $id_objet, $id_mot)
 {
 	$result = spip_num_rows(spip_query("SELECT id_mot FROM $table WHERE id_mot=$id_mot AND $table_id=$id_objet"));
@@ -227,7 +227,7 @@ function inserer_mot($table, $table_id, $id_objet, $id_mot)
 }
 
 
-// http://doc.spip.org/@affiche_mots_ressemblant
+// http://code.spip.net/@affiche_mots_ressemblant
 function affiche_mots_ressemblant($cherche_mot, $objet, $id_objet, $resultat, $table, $table_id, $url_base)
 {
 	$les_mots = join(',', $resultat);
@@ -257,7 +257,7 @@ function affiche_mots_ressemblant($cherche_mot, $objet, $id_objet, $resultat, $t
 	return $res2 . $res;
 }
 
-// http://doc.spip.org/@recherche_mot_cle
+// http://code.spip.net/@recherche_mot_cle
 function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table, $table_id, $url_base)
 {
 /////////////////////
@@ -310,7 +310,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 	return array($res, $nouveaux_mots);
 }
 
-// http://doc.spip.org/@afficher_mots_cles
+// http://code.spip.net/@afficher_mots_cles
 function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id, $url_base, $visible)
 {
 	global $spip_lang_rtl, $spip_lang, $spip_lang_right, $connect_statut, $connect_toutes_rubriques, $options;
@@ -382,7 +382,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 	return $res;
 }
 
-// http://doc.spip.org/@formulaire_mot_remplace
+// http://code.spip.net/@formulaire_mot_remplace
 function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet)
 {
 	$result = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe = $id_groupe ORDER by titre");
@@ -418,7 +418,7 @@ function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_
 }
 
 
-// http://doc.spip.org/@formulaire_mots_cles
+// http://code.spip.net/@formulaire_mots_cles
 function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet) {
 	global $connect_statut, $spip_lang, $spip_lang_right, $spip_lang_rtl;
 
@@ -491,7 +491,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 	return $res . fin_block();
 }
 
-// http://doc.spip.org/@menu_mots
+// http://code.spip.net/@menu_mots
 function menu_mots($row, $id_groupes_vus, $les_mots,$id_objet)
 {
 	$id_groupe = $row['id_groupe'];

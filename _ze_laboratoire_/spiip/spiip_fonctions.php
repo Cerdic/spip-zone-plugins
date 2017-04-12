@@ -70,7 +70,7 @@ function balise_GET_ACCESSKEY($p) {
 // dans l'entete sans modification du squelette prive
 // #INSERT_HEAD_PRIVE
 //
-// http://doc.spip.org/@balise_INSERT_HEAD_dist
+// http://code.spip.net/@balise_INSERT_HEAD_dist
 function balise_INSERT_HEAD_PRIVE($p) {
 	$p->code = "pipeline('header_prive',recuperer_fond('modeles/init_entete',array()))";
 	$p->interdire_scripts = false;

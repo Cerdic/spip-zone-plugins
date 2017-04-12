@@ -101,7 +101,7 @@ function skeleditor_get_file_content_type_ctrl($fichier){
 
 
 // variante repliee de la fonction de l'affichage de l'arbre des repertoires
-// http://doc.spip.org/@tree_open_close_dir
+// http://code.spip.net/@tree_open_close_dir
 function skeleditor_tree_open_close_dir(&$current,$target,$current_file){
 	if ($current == $target) return "";
 	$tcur = explode("/",$current);

@@ -24,7 +24,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // {racine}
 // http://www.spip.net/@racine
-// http://doc.spip.org/@critere_racine_dist
+// http://code.spip.net/@critere_racine_dist
 function critere_racine_dist($idb, &$boucles, $crit) {
 	global $exceptions_des_tables;
 	$not = $crit->not;
@@ -41,7 +41,7 @@ function critere_racine_dist($idb, &$boucles, $crit) {
 
 // {exclus}
 // http://www.spip.net/@exclus
-// http://doc.spip.org/@critere_exclus_dist
+// http://code.spip.net/@critere_exclus_dist
 function critere_exclus_dist($idb, &$boucles, $crit) {
 	$not = $crit->not;
 	$boucle = &$boucles[$idb];
@@ -56,7 +56,7 @@ function critere_exclus_dist($idb, &$boucles, $crit) {
 // {doublons} ou {unique}
 // http://www.spip.net/@doublons
 // attention: boucle->doublons designe une variable qu'on affecte
-// http://doc.spip.org/@critere_doublons_dist
+// http://code.spip.net/@critere_doublons_dist
 function critere_doublons_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$primary = $boucle->primary;
@@ -111,7 +111,7 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 
 // {lang_select}
 // http://www.spip.net/@lang_select
-// http://doc.spip.org/@critere_lang_select_dist
+// http://code.spip.net/@critere_lang_select_dist
 function critere_lang_select_dist($idb, &$boucles, $crit) {
 	if (!($param = $crit->param[1][0]->texte)) $param = 'oui';
 	if ($crit->not)	$param = ($param=='oui') ? 'non' : 'oui';
@@ -121,7 +121,7 @@ function critere_lang_select_dist($idb, &$boucles, $crit) {
 
 // {debut_xxx}
 // http://www.spip.net/@debut_
-// http://doc.spip.org/@critere_debut_dist
+// http://code.spip.net/@critere_debut_dist
 function critere_debut_dist($idb, &$boucles, $crit) {
 	list($un, $deux) = $crit->param;
 	$un = $un[0]->texte;
@@ -140,7 +140,7 @@ function critere_debut_dist($idb, &$boucles, $crit) {
 // {pagination #ENV{pages,5}} etc
 // {pagination 20 #ENV{truc,chose}} pour utiliser la variable debut_#ENV{truc,chose}
 // http://www.spip.net/@pagination
-// http://doc.spip.org/@critere_pagination_dist
+// http://code.spip.net/@critere_pagination_dist
 function critere_pagination_dist($idb, &$boucles, $crit) {
 
 	$boucle = &$boucles[$idb];
@@ -186,7 +186,7 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 
 // {recherche} ou {recherche susan}
 // http://www.spip.net/@recherche
-// http://doc.spip.org/@critere_recherche_dist
+// http://code.spip.net/@critere_recherche_dist
 function critere_recherche_dist($idb, &$boucles, $crit) {
 
 	$boucle = &$boucles[$idb];
@@ -224,7 +224,7 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 // http://www.spip.net/@traduction
 //   (id_trad>0 AND id_trad=id_trad(precedent))
 //    OR id_article=id_article(precedent)
-// http://doc.spip.org/@critere_traduction_dist
+// http://code.spip.net/@critere_traduction_dist
 function critere_traduction_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$prim = $boucle->primary;
@@ -247,7 +247,7 @@ function critere_traduction_dist($idb, &$boucles, $crit) {
 // {origine_traduction}
 //   (id_trad>0 AND id_article=id_trad) OR (id_trad=0)
 // http://www.spip.net/@origine_traduction
-// http://doc.spip.org/@critere_origine_traduction_dist
+// http://code.spip.net/@critere_origine_traduction_dist
 function critere_origine_traduction_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$prim = $boucle->primary;
@@ -263,7 +263,7 @@ function critere_origine_traduction_dist($idb, &$boucles, $crit) {
 
 // {meme_parent}
 // http://www.spip.net/@meme_parent
-// http://doc.spip.org/@critere_meme_parent_dist
+// http://code.spip.net/@critere_meme_parent_dist
 function critere_meme_parent_dist($idb, &$boucles, $crit) {
 	global $exceptions_des_tables;
 	$boucle = &$boucles[$idb];
@@ -285,7 +285,7 @@ function critere_meme_parent_dist($idb, &$boucles, $crit) {
 
 // {branche ?}
 // http://www.spip.net/@branche
-// http://doc.spip.org/@critere_branche_dist
+// http://code.spip.net/@critere_branche_dist
 function critere_branche_dist($idb, &$boucles, $crit) {
 
 	$not = $crit->not;
@@ -306,7 +306,7 @@ function critere_branche_dist($idb, &$boucles, $crit) {
 }
 
 // {logo} liste les objets qui ont un logo
-// http://doc.spip.org/@critere_logo_dist
+// http://code.spip.net/@critere_logo_dist
 function critere_logo_dist($idb, &$boucles, $crit) {
 
 	$not = $crit->not;
@@ -325,7 +325,7 @@ function critere_logo_dist($idb, &$boucles, $crit) {
 
 // c'est la commande SQL "GROUP BY"
 // par exemple <boucle(articles){fusion lang}>
-// http://doc.spip.org/@critere_fusion_dist
+// http://code.spip.net/@critere_fusion_dist
 function critere_fusion_dist($idb,&$boucles, $crit) {
 	if ($t = isset($crit->param[0])) {
 		$t = $crit->param[0];
@@ -351,7 +351,7 @@ function critere_fusion_dist($idb,&$boucles, $crit) {
 
 // c'est la commande SQL "COLLATE"
 // qui peut etre appliquee sur les order by, group by, where like ...
-// http://doc.spip.org/@critere_collecte_dist
+// http://code.spip.net/@critere_collecte_dist
 function critere_collecte_dist($idb,&$boucles, $crit) {
 	if (isset($crit->param[0])) {
 		$_coll = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
@@ -364,7 +364,7 @@ function critere_collecte_dist($idb,&$boucles, $crit) {
 		return (array('zbug_critere_inconnu', array('critere' => $crit->op . " $n")));
 }
 
-// http://doc.spip.org/@calculer_critere_arg_dynamique
+// http://code.spip.net/@calculer_critere_arg_dynamique
 function calculer_critere_arg_dynamique($idb, &$boucles, $crit, $suffix='')
 {
 	$boucle = $boucles[$idb];
@@ -382,12 +382,12 @@ function calculer_critere_arg_dynamique($idb, &$boucles, $crit, $suffix='')
 }
 // Tri : {par xxxx}
 // http://www.spip.net/@par
-// http://doc.spip.org/@critere_par_dist
+// http://code.spip.net/@critere_par_dist
 function critere_par_dist($idb, &$boucles, $crit) {
 	return critere_parinverse($idb, $boucles, $crit) ;
 }
 
-// http://doc.spip.org/@critere_parinverse
+// http://code.spip.net/@critere_parinverse
 function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 	global $exceptions_des_jointures;
 	$boucle = &$boucles[$idb];
@@ -487,7 +487,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 	}
 }
 
-// http://doc.spip.org/@critere_par_joint
+// http://code.spip.net/@critere_par_joint
 function critere_par_joint($table, $champ, &$boucle, $idb)
 {
 	$t = array_search($table, $boucle->from);
@@ -498,7 +498,7 @@ function critere_par_joint($table, $champ, &$boucle, $idb)
 // {inverse}
 // http://www.spip.net/@inverse
 
-// http://doc.spip.org/@critere_inverse_dist
+// http://code.spip.net/@critere_inverse_dist
 function critere_inverse_dist($idb, &$boucles, $crit) {
 
 	$boucle = &$boucles[$idb];
@@ -530,7 +530,7 @@ function critere_inverse_dist($idb, &$boucles, $crit) {
 	  }
 }
 
-// http://doc.spip.org/@critere_agenda_dist
+// http://code.spip.net/@critere_agenda_dist
 function critere_agenda_dist($idb, &$boucles, $crit)
 {
 	$params = $crit->param;
@@ -605,7 +605,7 @@ function critere_agenda_dist($idb, &$boucles, $crit)
 	// sinon on prend tout
 }
 
-// http://doc.spip.org/@calculer_critere_parties
+// http://code.spip.net/@calculer_critere_parties
 function calculer_critere_parties($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$a1 = $crit->param[0];
@@ -685,7 +685,7 @@ function calculer_parties(&$boucles, $id_boucle, $debut, $mode) {
 		if (\$Numrows['$id_boucle']['compteur_boucle']-1 > \$fin_boucle) break;";
 }
 
-// http://doc.spip.org/@calculer_critere_parties_aux
+// http://code.spip.net/@calculer_critere_parties_aux
 function calculer_critere_parties_aux($idb, &$boucles, $param) {
 	if ($param[0]->type != 'texte')
 	  {
@@ -710,7 +710,7 @@ function calculer_critere_parties_aux($idb, &$boucles, $param) {
 // (i.e. un tableau), on propage l'information
 // Sinon, ne retourne rien (affectation directe dans l'arbre)
 
-// http://doc.spip.org/@calculer_criteres
+// http://code.spip.net/@calculer_criteres
 function calculer_criteres ($idb, &$boucles)
 {
 	$msg = '';
@@ -743,7 +743,7 @@ function calculer_criteres ($idb, &$boucles)
 
 // Madeleine de Proust, revision MIT-1958 sqq, revision CERN-1989
 // hum, c'est kwoi cette fonxion ?
-// http://doc.spip.org/@kwote
+// http://code.spip.net/@kwote
 function kwote($lisp)
 {
 	if (preg_match(_CODE_QUOTE, $lisp, $r))
@@ -754,7 +754,7 @@ function kwote($lisp)
 
 // Si on a une liste de valeurs dans #ENV{x}, utiliser la double etoile
 // pour faire par exemple {id_article IN #ENV**{liste_articles}}
-// http://doc.spip.org/@critere_IN_dist
+// http://code.spip.net/@critere_IN_dist
 function critere_IN_dist ($idb, &$boucles, $crit)
 {
 	$r = calculer_critere_infixe($idb, $boucles, $crit);
@@ -784,7 +784,7 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 		$boucles[$idb]->where[]= $where_complement;
 }
 
-// http://doc.spip.org/@critere_IN_cas
+// http://code.spip.net/@critere_IN_cas
 function critere_IN_cas ($idb, &$boucles, $crit2, $arg, $op, $val, $col)
 {
 	static $num = array();
@@ -824,7 +824,7 @@ function critere_IN_cas ($idb, &$boucles, $crit2, $arg, $op, $val, $col)
 
 # Criteres de comparaison
 
-// http://doc.spip.org/@calculer_critere_DEFAUT
+// http://code.spip.net/@calculer_critere_DEFAUT
 function calculer_critere_DEFAUT_dist($idb, &$boucles, $crit)
 {
 	// double cas particulier {0,1} et {1/2} repere a l'analyse lexicale
@@ -878,7 +878,7 @@ function calculer_critere_DEFAUT_args($idb, &$boucles, $crit, $args)
 		$boucles[$idb]->where[]= $where_complement;
 }
 
-// http://doc.spip.org/@calculer_critere_infixe
+// http://code.spip.net/@calculer_critere_infixe
 function calculer_critere_infixe($idb, &$boucles, $crit) {
 
 	global $table_criteres_infixes;
@@ -1032,7 +1032,7 @@ function calculer_critere_infixe_externe(&$boucle, $crit, $op, $desc, $col, $col
 // Ne pas appliquer sql_quote lors de la compilation,
 // car on ne connait pas le serveur SQL, donc s'il faut \' ou ''
 
-// http://doc.spip.org/@primary_doublee
+// http://code.spip.net/@primary_doublee
 function primary_doublee($decompose, $table)
 {
 	$e1 = reset($decompose);
@@ -1048,7 +1048,7 @@ function primary_doublee($decompose, $table)
 // les 3 autres cas ne marcheront donc pas: ca ferait 4 jointures
 // qu'il faut traiter optimalement ou alors pas du tout.
 
-// http://doc.spip.org/@critere_secteur_forum
+// http://code.spip.net/@critere_secteur_forum
 function critere_secteur_forum($idb, &$boucles, $val, $crit)
 {
 	static $trouver_table;
@@ -1067,7 +1067,7 @@ function critere_secteur_forum($idb, &$boucles, $val, $crit)
 // (Exemple: criteres {type_mot=...}{type_mot=...} donne 2 jointures
 // pour selectioner ce qui a exactement ces 2 mots-cles.
 
-// http://doc.spip.org/@calculer_critere_externe_init
+// http://code.spip.net/@calculer_critere_externe_init
 function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $eg, $checkarrivee = false)
 {
 	$cle = trouver_champ_exterieur($col, $joints, $boucle, $checkarrivee);
@@ -1092,7 +1092,7 @@ function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $eg, $che
 
 }
 
-// http://doc.spip.org/@trouver_champ
+// http://code.spip.net/@trouver_champ
 function trouver_champ($champ, $where)
 {
   if (!is_array($where))
@@ -1108,7 +1108,7 @@ function trouver_champ($champ, $where)
 
 // determine l'operateur et les operandes
 
-// http://doc.spip.org/@calculer_critere_infixe_ops
+// http://code.spip.net/@calculer_critere_infixe_ops
 function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 {
 	// cas d'une valeur comparee a elle-meme ou son referent
@@ -1189,7 +1189,7 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 
 // compatibilite ancienne version
 
-// http://doc.spip.org/@calculer_vieux_in
+// http://code.spip.net/@calculer_vieux_in
 function calculer_vieux_in($params)
 {
 	      $deb = $params[0][0];
@@ -1221,7 +1221,7 @@ function calculer_vieux_in($params)
 	      return  $newp;
 }
 
-// http://doc.spip.org/@calculer_critere_infixe_date
+// http://code.spip.net/@calculer_critere_infixe_date
 function calculer_critere_infixe_date($idb, &$boucles, $regs)
 {
 	global $table_date; 
@@ -1289,7 +1289,7 @@ function calculer_critere_infixe_date($idb, &$boucles, $regs)
 	return $col;
 }
 
-// http://doc.spip.org/@calculer_param_date
+// http://code.spip.net/@calculer_param_date
 function calculer_param_date($date_compare, $date_orig) {
 	if (preg_match(",'\" *\.(.*)\. *\"',", $date_compare, $r)) {
 	  $init = "'\" . (\$x = $r[1]) . \"'";
@@ -1322,7 +1322,7 @@ function calculer_param_date($date_compare, $date_orig) {
 	")))";
 }
 
-// http://doc.spip.org/@tester_param_date
+// http://code.spip.net/@tester_param_date
 function tester_param_date($type, $col)
 {
 	global $table_date;

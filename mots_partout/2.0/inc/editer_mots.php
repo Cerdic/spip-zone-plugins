@@ -15,7 +15,7 @@ include_spip('inc/actions');
 include_spip('inc/mots');
 //include_spip('public/assembler'); //pour recuperer_fond
 
-// http://doc.spip.org/@inc_editer_mots_dist
+// http://code.spip.net/@inc_editer_mots_dist
 function inc_editer_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag, $visible = false) {
 
 	if ($GLOBALS['meta']["articles_mots"] == 'non')	return '';
@@ -128,7 +128,7 @@ function chercher_inserer_mot($cherche_mot, $select_groupe, $objet, $id_objet, $
 }
 
 
-// http://doc.spip.org/@inserer_mot
+// http://code.spip.net/@inserer_mot
 function inserer_mot($table, $table_id, $id_objet, $id_mot)
 {
 	$r = sql_countsel($table, "id_mot=$id_mot AND $table_id=$id_objet");
@@ -138,7 +138,7 @@ function inserer_mot($table, $table_id, $id_objet, $id_mot)
 	return $r;
 }
 
-// http://doc.spip.org/@recherche_mot_cle
+// http://code.spip.net/@recherche_mot_cle
 function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table, $table_id, $url_base)
 {
 	/////////////////////
@@ -193,7 +193,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 	return array($res, $nouveaux_mots);
 }
 
-// http://doc.spip.org/@afficher_mots_cles
+// http://code.spip.net/@afficher_mots_cles
 function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id, $url_base, $visible)
 {
 
@@ -217,7 +217,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 	return $res;
 }
 
-// http://doc.spip.org/@formulaire_mot_remplace
+// http://code.spip.net/@formulaire_mot_remplace
 function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet)
 {
 	$result = sql_select("id_mot, titre", "spip_mots", "id_groupe = $id_groupe", "", "titre");
@@ -245,7 +245,7 @@ function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_
 	return ajax_action_post('editer_mots', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet",$corps, $t, " class='fondo spip_xx-small visible_au_chargement' id='choisir-$ancre'", "", "&id_objet=$id_objet&objet=$objet");
 }
 
-// http://doc.spip.org/@formulaire_mots_cles
+// http://code.spip.net/@formulaire_mots_cles
 function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet) {
 	global  $spip_lang, $spip_lang_right;
 
@@ -347,7 +347,7 @@ function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base
 }
 
 
-// http://doc.spip.org/@menu_mots
+// http://code.spip.net/@menu_mots
 function menu_mots($row, $id_groupes_vus, $les_mots,$ancre="")
 {
 
@@ -425,7 +425,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots,$ancre="")
 
 }
 
-// http://doc.spip.org/@select_sous_menu_groupe_mots
+// http://code.spip.net/@select_sous_menu_groupe_mots
 function select_sous_menu_groupe_mots($id_groupe,$table='articles',$niveau=1){
 //fonction recursive qui permet de recuperer larborescence des groupes de mots et les mots
 
@@ -484,7 +484,7 @@ function select_sous_menu_groupe_mots($id_groupe,$table='articles',$niveau=1){
 // Il vaudrait mieux rajouter une table des statuts (ou un groupe de mots)
 // et un table de jointure entre ca et la table des groupes de mots.
 
-// http://doc.spip.org/@editer_mots_droits
+// http://code.spip.net/@editer_mots_droits
 function editer_mots_droits($select, $cond)
 {
 	$droit = substr($GLOBALS['visiteur_session']['statut'],1);
@@ -520,7 +520,7 @@ function creer_mot($table, $id_objet, $table_id, $url_base, $mot='', $id_groupe=
 }
 
 
-// http://doc.spip.org/@editer_mots_un
+// http://code.spip.net/@editer_mots_un
 function editer_mots_un($row, $own)
 {
 	$puce_statut = charger_fonction('puce_statut', 'inc');

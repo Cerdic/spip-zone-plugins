@@ -16,7 +16,7 @@ include_spip('exec/grouper_mots');
 include_spip('inc/agenda_gestion');
 include_spip('inc/pim_agenda_gestion');
 
-// http://doc.spip.org/@exec_mots_tous_dist
+// http://code.spip.net/@exec_mots_tous_dist
 function exec_mots_tous_dist()
 {
   global $acces_comite, $acces_forum, $acces_minirezo, $new, $articles, $breves, $change_type, $conf_mot, $connect_statut, $connect_toutes_rubriques, $descriptif, $id_groupe, $modifier_groupe, $obligatoire, $rubriques, $spip_lang, $spip_lang_right, $supp_group, $son_groupe, $syndic, $texte, $unseul;

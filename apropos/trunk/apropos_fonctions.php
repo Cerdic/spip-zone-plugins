@@ -125,7 +125,7 @@ function apropos_affiche_les_pluginsActifs($liste_prefix_plugin_actifs, $affiche
 }
 
 
-// Extrait de  http://doc.spip.org/@affiche_liste_plugins
+// Extrait de  http://code.spip.net/@affiche_liste_plugins
 /* Creation de la liste des plugins actifs, trie de la liste par ordre alphabetique*/
 function apropos_afficher_list($url_page,$liste_plugins, $liste_plugins_actifs, $dir_plugins,$afficheQuoi){
 	$get_infos = charger_fonction('get_infos','plugins');
@@ -152,7 +152,7 @@ function apropos_afficher_list($url_page,$liste_plugins, $liste_plugins_actifs, 
 	return "<ul>".$block_UL."</ul>";
 }
 
-// Extrait de  http://doc.spip.org/@ligne_plug
+// Extrait de  http://code.spip.net/@ligne_plug
 /* Extrait les infos de chaque plugin */
 function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item", $dir_plugins=_DIR_PLUGINS,$afficheQuoi,$params) {
 

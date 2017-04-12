@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 // Authentifie via LDAP et retourne la ligne SQL decrivant l'utilisateur si ok
 
-// http://doc.spip.org/@inc_auth_ldap_dist
+// http://code.spip.net/@inc_auth_ldap_dist
 function auth_ldap ($login, $pass) {
 	include_spip('base/abstract_sql');
 	if (!spip_connect_ldap())
@@ -65,7 +65,7 @@ function auth_ldap ($login, $pass) {
 	return array();
 }
 
-// http://doc.spip.org/@auth_ldap_search
+// http://code.spip.net/@auth_ldap_search
 function auth_ldap_search($login, $pass)
 {
 	$ldap = spip_connect_ldap();
@@ -110,7 +110,7 @@ function auth_ldap_retrouver($dn, $desc='')
 }
 
 
-// http://doc.spip.org/@auth_ldap_inserer
+// http://code.spip.net/@auth_ldap_inserer
 // Ajout du paramètre $login
 function auth_ldap_inserer($dn, $statut, $login='', $desc='')
 {

@@ -18,7 +18,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 // Options :
 // creer_site => on va creer les repertoires qui vont bien (defaut: false)
 // cookie_prefix, table_prefix => regler les prefixes (defaut: true)
-// http://doc.spip.org/@demarrer_site
+// http://code.spip.net/@demarrer_site
 function demarrer_site($site = '', $options = array()) {
 	if (!$site) {
 		return;

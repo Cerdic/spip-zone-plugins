@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
-// http://doc.spip.org/@action_purger_dist
+// http://code.spip.net/@action_purger_dist
 function action_purger_dist($arg=null)
 {
 	if (is_null($arg)) {

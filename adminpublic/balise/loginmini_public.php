@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 
-// http://doc.spip.org/@balise_LOGIN_PUBLIC
+// http://code.spip.net/@balise_LOGIN_PUBLIC
 function balise_LOGINMINI_PUBLIC ($p, $nom='LOGINMINI_PUBLIC') {
 	return calculer_balise_dynamique($p, $nom, array('url'));
 }
@@ -24,12 +24,12 @@ function balise_LOGINMINI_PUBLIC ($p, $nom='LOGINMINI_PUBLIC') {
 # 2. un eventuel parametre (args2) indiquant le login et permettant une ecriture
 #    <boucle(AUTEURS)>[(#LOGIN_PUBLIC{#SELF, #LOGIN})]
 
-// http://doc.spip.org/@balise_LOGIN_PUBLIC_stat
+// http://code.spip.net/@balise_LOGIN_PUBLIC_stat
 function balise_LOGINMINI_PUBLIC_stat ($args, $filtres) {
 	return array(isset($args[1]) ? $args[1] : $args[0], (isset($args[2]) ? $args[2] : ''));
 }
 
-// http://doc.spip.org/@balise_LOGIN_PUBLIC_dyn
+// http://code.spip.net/@balise_LOGIN_PUBLIC_dyn
 function balise_LOGINMINI_PUBLIC_dyn($url, $login) {
 	include_spip('balise/formulaire_');
 	if (!$url 		# pas d'url passee en filtre ou dans le contexte

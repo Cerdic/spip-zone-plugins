@@ -6,7 +6,7 @@
 
 // celui du core ne fonctionne pas comme la RFC 5545
 
-// http://doc.spip.org/@filtrer_ical
+// http://code.spip.net/@filtrer_ical
 function filtrer_ical2($texte) {
     include_spip('inc/charsets');
     $texte = html2unicode($texte);

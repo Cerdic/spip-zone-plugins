@@ -5,13 +5,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/presentation');
 
-// http://doc.spip.org/@exec_puce_statut_dist
+// http://code.spip.net/@exec_puce_statut_dist
 function exec_puce_statut_produits_dist()
 {
 	exec_puce_statut_produits_args(_request('id'),  _request('type'));
 }
 
-// http://doc.spip.org/@exec_puce_statut_args
+// http://code.spip.net/@exec_puce_statut_args
 function exec_puce_statut_produits_args($id, $type)
 {
 	if (in_array($type,array('produit'))) {

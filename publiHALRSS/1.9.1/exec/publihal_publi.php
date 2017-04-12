@@ -29,7 +29,7 @@ include_spip('base/abstract_sql');
 include_spip('mes_fonctions_publiHALRSS');
 
 
-// http://doc.spip.org/@exec_articles_dist
+// http://code.spip.net/@exec_articles_dist
 function exec_publihal_publi()
 {
 	global $cherche_auteur, $ids, $cherche_mot,  $select_groupe, $debut, $id_syndic_article, $trad_err; 
@@ -237,7 +237,7 @@ echo "\n</table>";
 /**
  * PAS UTILISÉ !
  */
-// http://doc.spip.org/@bouton_modifier_articles
+// http://code.spip.net/@bouton_modifier_articles
 function publiHAL_bouton_modifier_publi($id_article, $id_rubrique, $flag_modif, $mode, $ip, $im)
 {
 	if ($flag_modif) {
@@ -253,7 +253,7 @@ function publiHAL_bouton_modifier_publi($id_article, $id_rubrique, $flag_modif, 
 /**
  * AFFICHAGE DU CORPS DE LA PUBLI
  */
-// http://doc.spip.org/@afficher_corps_articles
+// http://code.spip.net/@afficher_corps_articles
 function publiHAL_afficher_corps_publi($id_syndic_article,$titre,$url,$date,$lesauteurs,$maj,$statut,$descriptif,$lang,$url_source,$source,$tags)
 {
 	global $revision_nbsp, $activer_revision_nbsp, $champs_extra, $les_notes, $dir_lang;
@@ -324,7 +324,7 @@ function publiHAL_afficher_corps_publi($id_syndic_article,$titre,$url,$date,$les
 	echo "</div>";
 }
 
-// http://doc.spip.org/@formulaire_mots
+// http://code.spip.net/@formulaire_mots
 function publiHAL_formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag_editable) {
 	global $connect_statut, $spip_lang_rtl, $spip_lang_right, $spip_lang;
 

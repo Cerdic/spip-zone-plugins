@@ -15,7 +15,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Fonction appelee par propre() s'il repere un mode <math>
-// http://doc.spip.org/@traiter_math
+// http://code.spip.net/@traiter_math
 function traiter_math($letexte, $source='') {
 
 	$texte_a_voir = $letexte;

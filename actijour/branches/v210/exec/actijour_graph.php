@@ -24,7 +24,7 @@
 // Doit etre un entier "rond", pas trop eloigne du max, et dont
 // les graduations (divisions par huit) soient jolies :
 // on prend donc le plus proche au-dessus de x de la forme 12,16,20,40,60,80,100
-// http://doc.spip.org/@maxgraph
+// http://code.spip.net/@maxgraph
 function maxgraph($max) {
 	$max = max(10,$max);
 	$p = pow(10, strlen($max)-2);
@@ -36,7 +36,7 @@ function maxgraph($max) {
 
 
 
-// http://doc.spip.org/@http_img_rien
+// http://code.spip.net/@http_img_rien
 function http_img_rien($width, $height, $style='', $title='') {
 
 	return http_img_pack('rien.gif', $title, 
@@ -52,7 +52,7 @@ function http_img_rien($width, $height, $style='', $title='') {
 // FONCTIONS QUI ONT DISPARU DANS SPIP 2.0 Fichier ecrire/inc/minipres.php
 ////////////////////////////////////////////////////////////////////////////
 
-// http://doc.spip.org/@http_href_img
+// http://code.spip.net/@http_href_img
 function http_href_img($href, $img, $att, $alt, $title='', $style='', $class='', $evt='') {
 	if (!$title) $title = $alt;
 	return  http_href($href, http_img_pack($img, $alt, $att), $title, $style, $class, $evt);

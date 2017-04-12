@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@inc_legender_auteur_dist
+// http://code.spip.net/@inc_legender_auteur_dist
 function inc_legender_auteur_supp_dist($auteur)
 {
 	if (!$auteur['id_auteur']) {

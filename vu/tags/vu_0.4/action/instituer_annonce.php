@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@action_instituer_breve_dist
+// http://code.spip.net/@action_instituer_breve_dist
 function action_instituer_annonce_dist() {
 	
 	$securiser_action = charger_fonction('securiser_action', 'inc');

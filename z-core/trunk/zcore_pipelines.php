@@ -209,7 +209,7 @@ function zcore_insert_head_css($flux) {
 // fonction standard de calcul de la balise #INTRODUCTION
 // mais retourne toujours dans un <p> comme propre
 //
-// http://doc.spip.org/@filtre_introduction_dist
+// http://code.spip.net/@filtre_introduction_dist
 if (!function_exists('filtre_introduction')) {
 	function filtre_introduction($descriptif, $texte, $longueur, $connect) {
 		include_spip('public/composer');

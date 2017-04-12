@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/filtres');
 
-// http://doc.spip.org/@action_editer_message_dist
+// http://code.spip.net/@action_editer_message_dist
 function action_editer_message_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -43,25 +43,25 @@ function action_editer_message_dist() {
 	else 	spip_log("action_editer_message_dist $arg pas compris");
 }
 
-// http://doc.spip.org/@action_editer_message_post_supprimer
+// http://code.spip.net/@action_editer_message_post_supprimer
 function action_editer_message_post_supprimer($id_message) {
 	sql_delete("spip_messages", "id_message=".sql_quote($id_message));
 	sql_delete("spip_auteurs_messages", "id_message=".sql_quote($id_message));
 	sql_delete("spip_forum", "id_message=".sql_quote($id_message));
 }
 
-// http://doc.spip.org/@action_editer_message_post_vu
+// http://code.spip.net/@action_editer_message_post_vu
 function action_editer_message_post_vu($id_message, $id_auteur) {
 	sql_updateq("spip_auteurs_messages", array("vu" => 'oui'), "id_message=$id_message AND id_auteur=$id_auteur");
 
 }
 
-// http://doc.spip.org/@action_editer_message_post_retirer
+// http://code.spip.net/@action_editer_message_post_retirer
 function action_editer_message_post_retirer($id_message, $id_auteur) {
 	sql_delete("spip_auteurs_messages", "id_message=$id_message AND id_auteur=$id_auteur");
 }
 
-// http://doc.spip.org/@action_editer_message_post_ajouter
+// http://code.spip.net/@action_editer_message_post_ajouter
 function action_editer_message_post_ajouter($id_message, $id_auteur) {
 	sql_delete("spip_auteurs_messages", "id_auteur=$id_auteur AND id_message=$id_message");
 	sql_insertq('spip_auteurs_messages',
@@ -73,7 +73,7 @@ function action_editer_message_post_ajouter($id_message, $id_auteur) {
 	// de supprimer celui qu'on vient d'ajouter... c'est fait en cron
 }
 
-// http://doc.spip.org/@action_editer_message_post_choisir
+// http://code.spip.net/@action_editer_message_post_choisir
 function action_editer_message_post_choisir($id_message) {
 
 	if ($id_auteur = _request('nouv_auteur'))
@@ -104,14 +104,14 @@ function action_editer_message_post_choisir($id_message) {
 }
 
 
-// http://doc.spip.org/@action_editer_message_post_envoyer
+// http://code.spip.net/@action_editer_message_post_envoyer
 function action_editer_message_post_envoyer($id_message, $statut) {
 
 	sql_updateq("spip_messages", array("statut" => $statut), "id_message=$id_message");
 	sql_update("spip_messages", array("date_heure" => "NOW()"), "id_message=$id_message AND rv<>'oui'");
 }
 
-// http://doc.spip.org/@action_editer_message_post_nouveau
+// http://code.spip.net/@action_editer_message_post_nouveau
 function action_editer_message_post_nouveau($type, $dest='', $rv='')
 {
 
@@ -190,7 +190,7 @@ function action_editer_message_post_nouveau($type, $dest='', $rv='')
 	redirige_url_ecrire('message_edit', "id_message=$id_message&new=oui&dest=$dest");
 }
 
-// http://doc.spip.org/@action_editer_message_post_vieux
+// http://code.spip.net/@action_editer_message_post_vieux
 function action_editer_message_post_vieux($id_message)
 {
 	sql_updateq('spip_messages', array('titre'=>_request('titre'), 'texte' => _request('texte')), "id_message=$id_message");
@@ -205,7 +205,7 @@ function action_editer_message_post_vieux($id_message)
 // Convertir dates a calendrier correct
 // (exemple: 31 fevrier devient debut mars, 24h12 devient 00h12 du lendemain)
 
-// http://doc.spip.org/@change_date_message
+// http://code.spip.net/@change_date_message
 function change_date_message($id_message, $heures,$minutes,$mois, $jour, $annee, $heures_fin,$minutes_fin,$mois_fin, $jour_fin, $annee_fin)
 {
 	$date = date("Y-m-d H:i:s", mktime($heures,$minutes,0,$mois, $jour, $annee));

@@ -272,7 +272,7 @@ fin_page();
 // Calculer les nombres d'elements (articles, etc.) lies a chaque mot
 //
 
-// http://doc.spip.org/@calculer_liens_mots
+// http://code.spip.net/@calculer_liens_mots
 function calculer_liens_mots()
 {
 //////////////////////////
@@ -343,7 +343,7 @@ function calculer_liens_mots()
 ////////////////////
 }
 
-// http://doc.spip.org/@afficher_groupe_mots
+// http://code.spip.net/@afficher_groupe_mots
 function afficher_groupe_mots($id_groupe) {
 	global $connect_id_auteur, $connect_statut;
 	global $spip_lang_right, $couleur_claire, $spip_lang;
@@ -412,7 +412,7 @@ function afficher_groupe_mots($id_groupe) {
 	return "<div id='$tmp_var' style='position: relative;'>$res</div>";
 }
 
-// http://doc.spip.org/@afficher_groupe_mots_boucle
+// http://code.spip.net/@afficher_groupe_mots_boucle
 function afficher_groupe_mots_boucle($row, $occurrences)
 {
 	global $connect_statut, $connect_toutes_rubriques;

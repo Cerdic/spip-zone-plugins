@@ -22,7 +22,7 @@ include_spip('inc/presentation');
 // pour que l'affichage par defaut soit les visiteurs
 #@define('AUTEURS_DEFAUT', '!');
 
-// http://doc.spip.org/@exec_auteurs_dist
+// http://code.spip.net/@exec_auteurs_dist
 function exec_auteurs_dist(){
 
 	global $connect_id_auteur;

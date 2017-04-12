@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-// http://doc.spip.org/@exec_articles_page_dist
+// http://code.spip.net/@exec_articles_page_dist
 function exec_articles_page_dist()
 {
 	global $connect_statut, $connect_id_auteur;

@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // Envoyer une requete a un serveur d'orthographe
 //
-// http://doc.spip.org/@post_ortho
+// http://code.spip.net/@post_ortho
 function post_ortho($texte, $lang) {
 	//$url="http://tech-nova.fr/GSpellerServer/spell.php?lang=$lang";
 	//$url="https://www.google.com/tbproxy/spell?lang=$lang";
@@ -36,7 +36,7 @@ function post_ortho($texte, $lang) {
 //
 // Gestion du dictionnaire local
 //
-// http://doc.spip.org/@suggerer_dico_ortho
+// http://code.spip.net/@suggerer_dico_ortho
 function suggerer_dico_ortho(&$mots, $lang) {
 	$result = spip_query("SELECT mot FROM spip_ortho_dico WHERE lang=" . spip_abstract_quote($lang) . " AND mot IN (".join(", ", array_map('spip_abstract_quote', $mots)).")");
 
@@ -56,7 +56,7 @@ function suggerer_dico_ortho(&$mots, $lang) {
 	return $bons;
 }
 
-// http://doc.spip.org/@ajouter_dico_ortho
+// http://code.spip.net/@ajouter_dico_ortho
 function ajouter_dico_ortho($mot, $lang) {
 	global $connect_id_auteur;
 
@@ -64,13 +64,13 @@ function ajouter_dico_ortho($mot, $lang) {
 
 }
 
-// http://doc.spip.org/@supprimer_dico_ortho
+// http://code.spip.net/@supprimer_dico_ortho
 function supprimer_dico_ortho($mot, $lang) {
 	spip_query("DELETE FROM spip_ortho_dico WHERE lang=" . spip_abstract_quote($lang) . " AND mot=" . spip_abstract_quote($mot));
 
 }
 
-// http://doc.spip.org/@gerer_dico_ortho
+// http://code.spip.net/@gerer_dico_ortho
 function gerer_dico_ortho($lang) {
 	global $ajout_ortho, $supp_ortho;
 	if ($mot = strval($ajout_ortho)) {
@@ -85,7 +85,7 @@ function gerer_dico_ortho($lang) {
 //
 // Gestion du cache de corrections
 //
-// http://doc.spip.org/@suggerer_cache_ortho
+// http://code.spip.net/@suggerer_cache_ortho
 function suggerer_cache_ortho(&$mots, $lang) {
 	global $duree_cache_ortho;
 
@@ -112,7 +112,7 @@ function suggerer_cache_ortho(&$mots, $lang) {
 	return $suggest;
 }
 
-// http://doc.spip.org/@ajouter_cache_ortho
+// http://code.spip.net/@ajouter_cache_ortho
 function ajouter_cache_ortho($tous, $mauvais, $lang) {
 	global $duree_cache_ortho;
 
@@ -141,7 +141,7 @@ function ajouter_cache_ortho($tous, $mauvais, $lang) {
 //
 // Cette fonction doit etre appelee pour reecrire le texte en utf-8 "propre"
 //
-// http://doc.spip.org/@preparer_ortho
+// http://code.spip.net/@preparer_ortho
 function preparer_ortho($texte, $lang) {
 	include_spip('inc/charsets');
 
@@ -153,7 +153,7 @@ function preparer_ortho($texte, $lang) {
 		return unicode_to_utf_8(html2unicode(charset2unicode($texte, $charset, true)));
 }
 
-// http://doc.spip.org/@afficher_ortho
+// http://code.spip.net/@afficher_ortho
 function afficher_ortho($texte) {
 	$charset = $GLOBALS['meta']['charset'];
 	if ($charset == 'utf-8') return $texte;
@@ -169,7 +169,7 @@ function afficher_ortho($texte) {
 // Cette fonction envoie le texte prepare a un serveur d'orthographe
 // et retourne un tableau de mots mal orthographies associes chacun a un tableau de mots suggeres
 //
-// http://doc.spip.org/@corriger_ortho
+// http://code.spip.net/@corriger_ortho
 function corriger_ortho($texte, $lang, $charset = 'AUTO') {
 	include_spip('inc/charsets');
 	include_spip("inc/indexation");
@@ -278,7 +278,7 @@ function mon_substr($s, $o, $l) {
 // Fonctions d'affichage HTML
 //
 
-// http://doc.spip.org/@panneau_ortho
+// http://code.spip.net/@panneau_ortho
 function panneau_ortho($ortho_result) {
 	global $id_suggest;
 
@@ -292,7 +292,7 @@ function panneau_ortho($ortho_result) {
 
 	echo "<script type='text/javascript'><!--
 	var curr_suggest = null;
-	// http://doc.spip.org/@suggest
+	// http://code.spip.net/@suggest
 	function suggest(id) {
 		var menu_box;
 		if (curr_suggest)
@@ -371,7 +371,7 @@ function panneau_ortho($ortho_result) {
 }
 
 
-// http://doc.spip.org/@souligner_match_ortho
+// http://code.spip.net/@souligner_match_ortho
 function souligner_match_ortho(&$texte, $cherche, $remplace) {
 	// Eviter les &mdash;, etc.
 	if ($cherche{0} == '&' AND $cherche{strlen($cherche) - 1} == ';') return;
@@ -403,7 +403,7 @@ function souligner_match_ortho(&$texte, $cherche, $remplace) {
 	}
 }
 
-// http://doc.spip.org/@souligner_ortho
+// http://code.spip.net/@souligner_ortho
 function souligner_ortho($texte, $lang, $ortho_result) {
 	global $id_suggest;
 	$vu = array();
@@ -450,7 +450,7 @@ function souligner_ortho($texte, $lang, $ortho_result) {
 	return $texte;
 }
 
-// http://doc.spip.org/@init_ortho
+// http://code.spip.net/@init_ortho
 function init_ortho() {
 	global $duree_cache_ortho, $duree_cache_miroirs_ortho;
  

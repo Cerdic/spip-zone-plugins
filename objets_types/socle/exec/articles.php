@@ -15,13 +15,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/actions');
 
-// http://doc.spip.org/@exec_articles_dist
+// http://code.spip.net/@exec_articles_dist
 function exec_articles_dist()
 {
 	exec_articles_args(intval(_request('id_article')));
 }
 
-// http://doc.spip.org/@exec_articles_args
+// http://code.spip.net/@exec_articles_args
 function exec_articles_args($id_article)
 {
 	pipeline('exec_init',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
@@ -52,7 +52,7 @@ function exec_articles_args($id_article)
 	}
 }
 
-// http://doc.spip.org/@articles_affiche
+// http://code.spip.net/@articles_affiche
 function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot,  $select_groupe, $trad_err, $debut_forum=0, $statut_forum='prive')
 {
 	global $spip_display, $spip_lang_left, $spip_lang_right, $connect_id_auteur,$dir_lang;
@@ -186,7 +186,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	  . (_INTERFACE_ONGLETS?"":$onglet_discuter);
 }
 
-// http://doc.spip.org/@articles_documents
+// http://code.spip.net/@articles_documents
 function articles_documents($type, $id)
 {
 	global $spip_lang_left, $spip_lang_right;
@@ -237,7 +237,7 @@ function articles_documents($type, $id)
 // Boites de configuration avancee
 //
 
-// http://doc.spip.org/@boites_de_config_articles
+// http://code.spip.net/@boites_de_config_articles
 function boites_de_config_articles($id_article)
 {
 	if (autoriser('modererforum', 'article', $id_article)) {
@@ -268,7 +268,7 @@ function boites_de_config_articles($id_article)
 		  'forumpetition');
 }
 
-// http://doc.spip.org/@boite_article_virtuel
+// http://code.spip.net/@boite_article_virtuel
 function boite_article_virtuel($id_article, $virtuel)
 {
 	if (!$virtuel
@@ -289,7 +289,7 @@ function boite_article_virtuel($id_article, $virtuel)
 		'redirection');
 }
 
-// http://doc.spip.org/@bouton_modifier_articles
+// http://code.spip.net/@bouton_modifier_articles
 function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode, $ip, $im, $align='')
 {
 	if ($flag_modif) {
@@ -300,7 +300,7 @@ function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode,
 	else return icone_inline(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.gif", "edit.gif", $align);
 }
 
-// http://doc.spip.org/@afficher_corps_articles
+// http://code.spip.net/@afficher_corps_articles
 function afficher_corps_articles($id_article, $virtuel, $row)
 {
   global $champs_extra, $les_notes, $lang_objet;
@@ -327,7 +327,7 @@ function afficher_corps_articles($id_article, $virtuel, $row)
 	return $res;
 }
 
-// http://doc.spip.org/@afficher_article_rubrique
+// http://code.spip.net/@afficher_article_rubrique
 function afficher_article_rubrique($id_article, $id_rubrique, $id_secteur, $statut)
 {
 	global $spip_lang_right;

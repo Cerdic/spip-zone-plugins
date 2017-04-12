@@ -13,7 +13,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Notifier lors du changement de statut d'un auteur
  * 
  * Basée sur : 
- * http://doc.spip.org/@notifications_instituerarticle_dist
+ * http://code.spip.net/@notifications_instituerarticle_dist
  * 
  * @param string $quoi
  * @param int $id_auteur

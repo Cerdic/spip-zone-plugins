@@ -2,17 +2,17 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;    #securite
 
-// http://doc.spip.org/@balise_URL_LOGOUT
+// http://code.spip.net/@balise_URL_LOGOUT
 function balise_TOTAL_PANIER_TVAC ($p) {return calculer_balise_dynamique($p,'TOTAL_PANIER_TVAC', array());
 }
 
 // $args[0] = url destination apres logout [(#URL_LOGOUT{url})]
-// http://doc.spip.org/@balise_URL_LOGOUT_stat
+// http://code.spip.net/@balise_URL_LOGOUT_stat
 function balise_TOTAL_PANIER_TVAC_stat ($args, $filtres) {
     return array($args[0]);
 }
 
-// http://doc.spip.org/@balise_URL_LOGOUT_dyn
+// http://code.spip.net/@balise_URL_LOGOUT_dyn
 function balise_TOTAL_PANIER_TVAC_dyn($cible) {
 	include_spip('inc/echoppe');
 	include_spip('base/abstract_sql');

@@ -203,7 +203,7 @@ function projection_dereferencer($texte, $data) {
 	return $texte;
 }
 
-// cf. http://doc.spip.org/@traiter_modeles
+// cf. http://code.spip.net/@traiter_modeles
 function projection_dereferencer_modeles($texte, &$data, $liens=null) {
 
 	// detecter les modeles (rapide)
@@ -298,7 +298,7 @@ function projection_dereferencer_modele($appel, $type, $id, $params, $lien, $con
 	return $appel;
 }
 
-// cf. http://doc.spip.org/@expanser_liens
+// cf. http://code.spip.net/@expanser_liens
 define('_RACCOURCI_LIEN', "/\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]]*)\]/msS");
 function projection_dereferencer_liens($texte, &$data) {
 	$sources = $inserts = $regs = array();

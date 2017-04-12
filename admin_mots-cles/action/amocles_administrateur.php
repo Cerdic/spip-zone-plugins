@@ -172,7 +172,7 @@ function amocles_ajouter_admin_et_redirige($type, $id, $id_auteur, $redirect)
 	redirige_par_entete ($redirect);
 }
 
-// http://doc.spip.org/@rechercher_auteurs
+// http://code.spip.net/@rechercher_auteurs
 function rechercher_auteurs($cherche_auteur)
 {
 	include_spip('inc/mots');

@@ -22,7 +22,7 @@ define('_DIR_PLUGINS_AUTO', _DIR_PLUGINS.'auto/');
 include_spip('inc/texte');
 
 // lecture des sous repertoire plugin existants
-// http://doc.spip.org/@liste_plugin_files
+// http://code.spip.net/@liste_plugin_files
 function liste_plugin_files($dir_plugins = null){
 	static $plugin_files=array();
 	$liste_plugs=array();
@@ -49,7 +49,7 @@ function liste_plugin_files($dir_plugins = null){
 	return $liste_plugs;
 }
 
-// http://doc.spip.org/@plugin_version_compatible
+// http://code.spip.net/@plugin_version_compatible
 function plugin_version_compatible($intervalle,$version){
 	if (!strlen($intervalle)) return true;
 	if (!preg_match(',^[\[\(]([0-9.a-zRC\s]*)[;]([0-9.a-zRC\s]*)[\]\)]$,',$intervalle,$regs)) return false;
@@ -73,7 +73,7 @@ function plugin_version_compatible($intervalle,$version){
 // Faire la liste des librairies disponibles
 // retourne un array ( nom de la lib => repertoire , ... )
 
-// http://doc.spip.org/@liste_librairies
+// http://code.spip.net/@liste_librairies
 function liste_librairies() {
 	$libs = array();
 	foreach (array_reverse(creer_chemin()) as $d) {
@@ -91,7 +91,7 @@ function liste_librairies() {
 
 // Prend comme argument le tableau des <necessite> et retourne false si
 // tout est bon, et un message d'erreur sinon
-// http://doc.spip.org/@erreur_necessite
+// http://code.spip.net/@erreur_necessite
 function erreur_necessite($n, $liste) {
 	if (!is_array($n) OR !count($n))
 		return false;
@@ -146,7 +146,7 @@ function erreur_necessite($n, $liste) {
 }
 
 
-// http://doc.spip.org/@liste_plugin_valides
+// http://code.spip.net/@liste_plugin_valides
 function liste_plugin_valides($liste_plug, $force = false){
 	$liste = array();
 	$ordre = array();
@@ -229,7 +229,7 @@ function liste_plugin_valides($liste_plug, $force = false){
 }
 
 //  A utiliser pour initialiser ma variable globale $plugin
-// http://doc.spip.org/@liste_plugin_actifs
+// http://code.spip.net/@liste_plugin_actifs
 function liste_plugin_actifs(){
   $meta_plugin = isset($GLOBALS['meta']['plugin'])?$GLOBALS['meta']['plugin']:'';
   if (strlen($meta_plugin)>0){
@@ -245,7 +245,7 @@ function liste_plugin_actifs(){
 	else
 		return array();
 }
-// http://doc.spip.org/@liste_chemin_plugin_actifs
+// http://code.spip.net/@liste_chemin_plugin_actifs
 function liste_chemin_plugin_actifs(){
 	$liste = liste_plugin_actifs();
 	foreach ($liste as $prefix=>$infos) {
@@ -254,7 +254,7 @@ function liste_chemin_plugin_actifs(){
 	return $liste;
 }
 
-// http://doc.spip.org/@ecrire_plugin_actifs
+// http://code.spip.net/@ecrire_plugin_actifs
 function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	static $liste_pipe_manquants=array();
 
@@ -401,7 +401,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 }
 
 // precompilation des pipelines
-// http://doc.spip.org/@pipeline_precompile
+// http://code.spip.net/@pipeline_precompile
 function pipeline_precompile(){
 	global $spip_pipeline, $spip_matrice;
 	$liste_fichier_verif = array();
@@ -450,7 +450,7 @@ function pipeline_precompile(){
 }
 
 // pas sur que ca serve...
-// http://doc.spip.org/@liste_plugin_inactifs
+// http://code.spip.net/@liste_plugin_inactifs
 function liste_plugin_inactifs(){
 	return array_diff (liste_plugin_files(),liste_chemin_plugin_actifs());
 }
@@ -459,7 +459,7 @@ function liste_plugin_inactifs(){
 // Les  ecrire_meta() doivent en principe aussi initialiser la valeur a vide
 // si elle n'existe pas
 // risque de pb en php5 a cause du typage ou de null (verifier dans la doc php)
-// http://doc.spip.org/@verif_plugin
+// http://code.spip.net/@verif_plugin
 function verif_plugin($pipe_recherche = false){
 	if (!spip_connect()) return false;
 	$plugin_actifs = liste_chemin_plugin_actifs();
@@ -469,7 +469,7 @@ function verif_plugin($pipe_recherche = false){
 	return true;
 }
 
-// http://doc.spip.org/@ordonne_plugin
+// http://code.spip.net/@ordonne_plugin
 function ordonne_plugin(){
 	$liste = liste_chemin_plugin_actifs();
 	$liste_triee = array();
@@ -485,7 +485,7 @@ function ordonne_plugin(){
 	ecrire_plugin_actifs($liste_triee);
 }
 
-// http://doc.spip.org/@spip_plugin_install
+// http://code.spip.net/@spip_plugin_install
 function spip_plugin_install($action,$prefix,$version_cible){
 	$nom_meta_base_version = $prefix."_base_version";
 	switch ($action){
@@ -504,7 +504,7 @@ function spip_plugin_install($action,$prefix,$version_cible){
 	}
 }
 
-// http://doc.spip.org/@desinstalle_un_plugin
+// http://code.spip.net/@desinstalle_un_plugin
 function desinstalle_un_plugin($plug,$infos){
 	// faire les include qui vont bien
 	foreach($infos['install'] as $file){
@@ -529,7 +529,7 @@ function desinstalle_un_plugin($plug,$infos){
 	return false;
 }
 
-// http://doc.spip.org/@installe_un_plugin
+// http://code.spip.net/@installe_un_plugin
 function installe_un_plugin($plug,$infos){
 	// faire les include qui vont bien
 	foreach($infos['install'] as $file){
@@ -570,7 +570,7 @@ function installe_un_plugin($plug,$infos){
 	return false;
 }
 
-// http://doc.spip.org/@installe_plugins
+// http://code.spip.net/@installe_plugins
 function installe_plugins(){
 	
 	//on peut enregistrer le chemin ici 
@@ -592,7 +592,7 @@ function installe_plugins(){
  		return $liste; 
  }
 
-// http://doc.spip.org/@plugin_est_installe
+// http://code.spip.net/@plugin_est_installe
 function plugin_est_installe($plug_path){
 	$plugin_installes = isset($GLOBALS['meta']['plugin_installes'])?unserialize($GLOBALS['meta']['plugin_installes']):array();
 	if (!$plugin_installes) return false;
@@ -600,7 +600,7 @@ function plugin_est_installe($plug_path){
 }
 
 // lecture du fichier de configuration d'un plugin
-// http://doc.spip.org/@plugin_get_infos
+// http://code.spip.net/@plugin_get_infos
 function plugin_get_infos($plug, $force_reload=false){
 	include_spip('inc/xml');
 	static $infos=array();
@@ -704,7 +704,7 @@ function plugin_get_infos($plug, $force_reload=false){
 	return $infos[$plug];
 }
 
-// http://doc.spip.org/@plugin_verifie_conformite
+// http://code.spip.net/@plugin_verifie_conformite
 function plugin_verifie_conformite($plug,&$arbre){
 	$silence = false;
 	if (isset($arbre['plugin']) AND is_array($arbre['plugin']))
@@ -819,7 +819,7 @@ function plugin_verifie_conformite($plug,&$arbre){
 		}
 	}
 }
-// http://doc.spip.org/@plugin_pipeline_props
+// http://code.spip.net/@plugin_pipeline_props
 function plugin_pipeline_props(&$arbre){
 	$pipeline = array();
 	if (spip_xml_match_nodes(',^pipeline,',$arbre,$pipes)){
@@ -841,7 +841,7 @@ function plugin_pipeline_props(&$arbre){
 	$arbre['pipeline'] = $pipeline;
 }
 
-// http://doc.spip.org/@verifie_include_plugins
+// http://code.spip.net/@verifie_include_plugins
 function verifie_include_plugins() {
 	ecrire_meta('message_crash_plugins', 1);
 
@@ -862,7 +862,7 @@ function verifie_include_plugins() {
 }
 
 
-// http://doc.spip.org/@message_crash_plugins
+// http://code.spip.net/@message_crash_plugins
 function message_crash_plugins() {
 	if (autoriser('configurer')
 	AND lire_fichier(_CACHE_PLUGINS_VERIF,$l)
@@ -886,7 +886,7 @@ function message_crash_plugins() {
 }
 
 
-// http://doc.spip.org/@affiche_bloc_plugin
+// http://code.spip.net/@affiche_bloc_plugin
 function affiche_bloc_plugin($plug_file, $info) {
 	global $spip_lang_right;
 
@@ -983,7 +983,7 @@ function affiche_bloc_plugin($plug_file, $info) {
 	return $s;
 }
 
-// http://doc.spip.org/@plugin_propre
+// http://code.spip.net/@plugin_propre
 function plugin_propre($texte) {
 	$mem = $GLOBALS['toujours_paragrapher'];
 	$GLOBALS['toujours_paragrapher'] = false;

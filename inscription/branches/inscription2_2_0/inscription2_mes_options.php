@@ -40,7 +40,7 @@ if(!isset($GLOBALS['spip_pipeline']['i2_form_fin']))
 
 /**
  *
- * Surcharge de la boucle auteurs (à l'origine: http://doc.spip.org/@boucle_AUTEURS_dist)
+ * Surcharge de la boucle auteurs (à l'origine: http://code.spip.net/@boucle_AUTEURS_dist)
  * <BOUCLE(AUTEURS)>
  * Création d'une jointure automatique avec spip_auteurs_elargis
  *

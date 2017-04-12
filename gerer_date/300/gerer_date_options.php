@@ -17,7 +17,7 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 
 /*
 // Autoriser a publier dans la rubrique $id
-// http://doc.spip.org/@autoriser_rubrique_publierdans_dist
+// http://code.spip.net/@autoriser_rubrique_publierdans_dist
 function autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt) {
 	return
 		($qui['statut'] == '0minirezo')

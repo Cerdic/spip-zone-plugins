@@ -8,7 +8,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@balise_NOM_SITE_SPIP_dist
+// http://code.spip.net/@balise_NOM_SITE_SPIP_dist
 function balise_SLOGAN_SITE_SPIP_dist($p) {
 	$p->code = "\$GLOBALS['meta']['slogan_site']";
 	#$p->interdire_scripts = true;

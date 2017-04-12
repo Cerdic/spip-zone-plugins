@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@action_editer_motdoc_dist
+// http://code.spip.net/@action_editer_motdoc_dist
 //modifie uniquement l'intitulé de la fonction et la ligne 46
 function action_editer_motdoc_dist() {
 
@@ -24,7 +24,7 @@ function action_editer_motdoc_dist() {
 	else action_editer_motdoc_post($r);
 }
 
-// http://doc.spip.org/@action_editer_motdoc_post
+// http://code.spip.net/@action_editer_motdoc_post
 function action_editer_motdoc_post($r)
 {
 	$redirect = _request('redirect');

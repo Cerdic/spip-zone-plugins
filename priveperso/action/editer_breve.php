@@ -12,7 +12,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://doc.spip.org/@action_editer_breve_dist
+// http://code.spip.net/@action_editer_breve_dist
 function action_editer_breve_dist($arg=null) {
 
 	if (is_null($arg)){
@@ -56,7 +56,7 @@ function action_editer_breve_dist($arg=null) {
 		return array($id_breve,'');
 }
 
-// http://doc.spip.org/@insert_breve
+// http://code.spip.net/@insert_breve
 function insert_breve($id_rubrique) {
 
 	include_spip('inc/rubriques');
@@ -104,7 +104,7 @@ function insert_breve($id_rubrique) {
 
 // Enregistre une revision de breve
 // $c est un contenu (par defaut on prend le contenu via _request())
-// http://doc.spip.org/@revisions_breves
+// http://code.spip.net/@revisions_breves
 function revisions_breves ($id_breve, $c=false) {
 
 	// champs normaux
@@ -195,7 +195,7 @@ function revisions_breves ($id_breve, $c=false) {
 
 }
 
-// http://doc.spip.org/@revisions_breves_langue
+// http://code.spip.net/@revisions_breves_langue
 function revisions_breves_langue($id_breve, $id_rubrique, $changer_lang)
 {
 	if ($changer_lang == "herit") {

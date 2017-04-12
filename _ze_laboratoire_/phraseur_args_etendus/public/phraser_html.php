@@ -542,7 +542,7 @@ function phraser_criteres($params, &$result) {
 	$result->criteres = $args;
 }
 
-// http://doc.spip.org/@phraser_critere_infixe
+// http://code.spip.net/@phraser_critere_infixe
 function phraser_critere_infixe($arg1, $arg2, $args, $op, $not, $cond)
 {
 	$args[0] = new Texte;
@@ -557,7 +557,7 @@ function phraser_critere_infixe($arg1, $arg2, $args, $op, $not, $cond)
 	return $crit;
 }
 
-// http://doc.spip.org/@phraser_arguments_inclure
+// http://code.spip.net/@phraser_arguments_inclure
 function phraser_arguments_inclure($p,$rejet_filtres = false){
 	$champ = new Inclure;
 	// on assimile {var=val} a une liste de un argument sans fonction

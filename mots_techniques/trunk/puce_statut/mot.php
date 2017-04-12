@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param string $ajax
  * @return string
  */
-// http://doc.spip.org/@puce_statut_mot_dist
+// http://code.spip.net/@puce_statut_mot_dist
 function puce_statut_mot_dist($id, $statut, $id_groupe, $type, $ajax='', $menu_rapide=_ACTIVER_PUCE_RAPIDE) {
 	static $icones = array();
 	

@@ -57,7 +57,7 @@ function balise_SHOUTBOX_stat($args, $filtres) {
 	return array($a, $taille);
 }
 
-// http://doc.spip.org/@balise_SHOUTBOX_dyn
+// http://code.spip.net/@balise_SHOUTBOX_dyn
 function balise_SHOUTBOX_dyn($a, $taille) {
 
 	// Le nickname c'est celui qu'on a donne, meme si on est loge

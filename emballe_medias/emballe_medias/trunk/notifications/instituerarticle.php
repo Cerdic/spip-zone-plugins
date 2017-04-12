@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 // Fonction appelee par divers pipelines
-// http://doc.spip.org/@notifications_instituerarticle_dist
+// http://code.spip.net/@notifications_instituerarticle_dist
 function notifications_instituerarticle($quoi, $id_article, $options) {
 	spip_log('notifications_instituerarticle', 'test.'._LOG_ERREUR);
 	$t = sql_fetsel('*', 'spip_articles', 'id_article='.intval($id_article));

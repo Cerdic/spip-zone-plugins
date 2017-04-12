@@ -34,7 +34,7 @@ include_spip('base/abstract_sql');
  *  - une chaine vide si autorisation a penetrer dans l'espace prive.
  *
  *
- * http://doc.spip.org/@inc_auth_dist
+ * http://code.spip.net/@inc_auth_dist
  *
  * @return array|int|string
  */
@@ -318,7 +318,7 @@ function auth_a_loger()
 
 /**
  * Tracer en base la date de derniere connexion de l'auteur
- * http://doc.spip.org/@auth_trace
+ * http://code.spip.net/@auth_trace
  *
  * @param array $row
  * @param null|string $date

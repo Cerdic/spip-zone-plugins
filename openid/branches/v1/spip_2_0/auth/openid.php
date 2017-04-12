@@ -9,7 +9,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Authentifie via OPENID et retourne la ligne SQL decrivant l'utilisateur si ok
 
-// http://doc.spip.org/@inc_auth_ldap_dist
+// http://code.spip.net/@inc_auth_ldap_dist
 function auth_openid_dist ($login, $pass, $md5pass="", $md5next="") {
 
 	// il faut un login non vide et qui contient au moins un point

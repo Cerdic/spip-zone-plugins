@@ -28,7 +28,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('base/dump');
 
-// http://doc.spip.org/@exec_export_all_dist
+// http://code.spip.net/@exec_export_all_dist
 function exec_export_all_dist(){
 	$rub = intval(_request('id_parent'));
 	$meta = base_dump_meta_name($rub);
@@ -117,7 +117,7 @@ function export_all_end($meta, $archive){
 	ecrire_fichier($file, export_enpied(),false,false);
 }
 
-// http://doc.spip.org/@export_entete
+// http://code.spip.net/@export_entete
 function export_entete($version_archive)
 {
 	return
@@ -135,7 +135,7 @@ $GLOBALS['meta']['charset']."\"?".">\n" .
 
 
 // production de l'entete du fichier d'archive
-// http://doc.spip.org/@export_enpied
+// http://code.spip.net/@export_enpied
 function export_enpied () { return  "</SPIP>\n";}
 
 ?>

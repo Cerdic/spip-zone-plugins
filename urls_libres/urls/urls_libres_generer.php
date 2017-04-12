@@ -218,7 +218,7 @@ function finir_url_libre_dist($url, $opt = array(
 	return $opt['dist'];
 }
 
-// http://doc.spip.org/@generer_url_article
+// http://code.spip.net/@generer_url_article
 if (!function_exists('generer_url_article')) {
 function generer_url_article($id_article, $args='', $ancre='') {
 	return _generer_url_libre('article', $id_article, '',
@@ -227,7 +227,7 @@ function generer_url_article($id_article, $args='', $ancre='') {
 }
 }
 
-// http://doc.spip.org/@generer_url_rubrique
+// http://code.spip.net/@generer_url_rubrique
 if (!function_exists('generer_url_rubrique')) {
 function generer_url_rubrique($id_rubrique, $args='', $ancre='') {
 	return _generer_url_libre('rubrique', $id_rubrique, '-',
@@ -236,7 +236,7 @@ function generer_url_rubrique($id_rubrique, $args='', $ancre='') {
 }
 }
 
-// http://doc.spip.org/@generer_url_breve
+// http://code.spip.net/@generer_url_breve
 if (!function_exists('generer_url_breve')) {
 function generer_url_breve($id_breve, $args='', $ancre='') {
 	return _generer_url_libre('breve', $id_breve, '+',
@@ -247,7 +247,7 @@ function generer_url_breve($id_breve, $args='', $ancre='') {
 
 // C'est special pour les forums, generer_url_forum_dist()
 // retourne generer_url_xxx($id)."#forum$id_forum"
-// http://doc.spip.org/@generer_url_forum
+// http://code.spip.net/@generer_url_forum
 if (!function_exists('generer_url_forum')) {
 function generer_url_forum($id_forum, $args='', $ancre='', $show_thread=false) {
 	include_spip('inc/forum');
@@ -255,7 +255,7 @@ function generer_url_forum($id_forum, $args='', $ancre='', $show_thread=false) {
 }
 }
 
-// http://doc.spip.org/@generer_url_mot
+// http://code.spip.net/@generer_url_mot
 if (!function_exists('generer_url_mot')) {
 function generer_url_mot($id_mot, $args='', $ancre='') {
 	return _generer_url_libre('mot', $id_mot, '+-',
@@ -264,7 +264,7 @@ function generer_url_mot($id_mot, $args='', $ancre='') {
 }
 }
 
-// http://doc.spip.org/@generer_url_auteur
+// http://code.spip.net/@generer_url_auteur
 if (!function_exists('generer_url_auteur')) {
 function generer_url_auteur($id_auteur, $args='', $ancre='') {
 	return _generer_url_libre('auteur', $id_auteur, '_',
@@ -273,7 +273,7 @@ function generer_url_auteur($id_auteur, $args='', $ancre='') {
 }
 }
 
-// http://doc.spip.org/@generer_url_site
+// http://code.spip.net/@generer_url_site
 if (!function_exists('generer_url_site')) {
 function generer_url_site($id_syndic, $args='', $ancre='') {
 	return _generer_url_libre('site', $id_syndic, '@',
@@ -282,7 +282,7 @@ function generer_url_site($id_syndic, $args='', $ancre='') {
 }
 }
 
-// http://doc.spip.org/@generer_url_document
+// http://code.spip.net/@generer_url_document
 if (!function_exists('generer_url_document')) {
 function generer_url_document($id_document, $args='', $ancre='') {
 	include_spip('inc/documents');

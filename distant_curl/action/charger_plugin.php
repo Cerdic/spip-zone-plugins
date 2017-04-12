@@ -21,7 +21,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@action_charger_plugin_dist
+// http://code.spip.net/@action_charger_plugin_dist
 function action_charger_plugin_dist() {
 	global $spip_lang_left;
 

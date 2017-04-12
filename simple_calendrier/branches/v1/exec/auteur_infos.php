@@ -22,7 +22,7 @@ include_spip('inc/presentation');
 include_spip('inc/acces');
 include_spip('inc/autoriser');
 
-// http://doc.spip.org/@exec_auteur_infos_dist
+// http://code.spip.net/@exec_auteur_infos_dist
 function exec_auteur_infos() {
 
 	exec_auteur_infos_args(intval(_request('id_auteur')),
@@ -32,7 +32,7 @@ function exec_auteur_infos() {
 		_request('redirect'));
 }
 
-// http://doc.spip.org/@exec_auteur_infos_args
+// http://code.spip.net/@exec_auteur_infos_args
 function exec_auteur_infos_args($id_auteur, $nom, $new, $echec='', $redirect='')
 {
 	global $connect_id_auteur;
@@ -71,7 +71,7 @@ function exec_auteur_infos_args($id_auteur, $nom, $new, $echec='', $redirect='')
 	}
 }
 
-// http://doc.spip.org/@auteur_infos_ok
+// http://code.spip.net/@auteur_infos_ok
 function auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect)
 {
 	$auteur_infos = charger_fonction('auteur_infos', 'inc');
@@ -132,7 +132,7 @@ function auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect)
 	echo $form_auteur;
 }
 
-// http://doc.spip.org/@cadre_auteur_infos
+// http://code.spip.net/@cadre_auteur_infos
 function cadre_auteur_infos($id_auteur, $auteur)
 {
 	$boite = pipeline ('boite_infos', array('data' => '',
@@ -148,7 +148,7 @@ function cadre_auteur_infos($id_auteur, $auteur)
 }
 
 
-// http://doc.spip.org/@auteurs_interventions
+// http://code.spip.net/@auteurs_interventions
 function auteurs_interventions($auteur) {
 	$id_auteur = intval($auteur['id_auteur']);
 	$statut = $auteur['statut'];

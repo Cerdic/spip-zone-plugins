@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 include_spip('inc/extra');
 
-// http://doc.spip.org/@inc_editer_article_dist
+// http://code.spip.net/@inc_editer_article_dist
 function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='', $config_fonc='articles_edit_config', $row=array(), $hidden='')
 {
 	// Appel en tant que filtre d'un squelette
@@ -75,7 +75,7 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 
 /*
 // code mort
-// http://doc.spip.org/@editer_article_texte
+// http://code.spip.net/@editer_article_texte
 function editer_article_texte($texte, $config, $aider, $lang='')
 {
 	// cette meta n'est pas activable par l'interface, mais elle peut venir
@@ -128,7 +128,7 @@ function editer_article_texte($texte, $config, $aider, $lang='')
 // Gestion des textes trop longs (limitation brouteurs)
 // utile pour les textes > 32ko
 
-// http://doc.spip.org/@coupe_trop_long
+// http://code.spip.net/@coupe_trop_long
 function coupe_trop_long($texte){
 	$aider = charger_fonction('aider', 'inc');
 	if (strlen($texte) > 28*1024) {
@@ -154,7 +154,7 @@ function coupe_trop_long($texte){
 		return (array($texte,''));
 }
 
-// http://doc.spip.org/@editer_article_recolle
+// http://code.spip.net/@editer_article_recolle
 function editer_article_recolle($texte, $att_text)
 {
 	$textes_supplement = "<br /><span style='color: red'>"._T('info_texte_long')."</span>\n";
@@ -171,7 +171,7 @@ function editer_article_recolle($texte, $att_text)
 }
 
 // Choix par defaut des options de presentation
-// http://doc.spip.org/@articles_edit_config
+// http://code.spip.net/@articles_edit_config
 function articles_edit_config($row)
 {
 	global $champs_extra, $spip_ecran, $spip_lang, $spip_display;

@@ -17,7 +17,7 @@ if (is_readable(_DIR_RESTREINT_ABS.'action/logout.php')) {
 else {
   include_spip('inc/cookie');
 
-  // Issued from http://doc.spip.org/@action_logout_dist with version spip = 1.9208 - 1.9.2.d)
+  // Issued from http://code.spip.net/@action_logout_dist with version spip = 1.9208 - 1.9.2.d)
   function action_logout()
   {
 	  global $auteur_session, $ignore_auth_http;

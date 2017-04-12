@@ -62,7 +62,7 @@ function formulaires_importer_cog_verifier_dist(){
 	return $erreurs;
 }
 
-// http://doc.spip.org/@inc_editer_mot_dist
+// http://code.spip.net/@inc_editer_mot_dist
 function formulaires_importer_cog_traiter_dist(){
 
 	 $options=array(

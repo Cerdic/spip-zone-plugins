@@ -80,7 +80,7 @@ function menu_rubriques($complet = true){
 }
 
 
-// http://doc.spip.org/@bandeau_rubrique
+// http://code.spip.net/@bandeau_rubrique
 function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal) {
 	static $zmax = 6;
 
@@ -122,12 +122,12 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal) {
 }
 
 
-// http://doc.spip.org/@extraire_article
+// http://code.spip.net/@extraire_article
 function extraire_article($id_p, $t) {
 	return array_key_exists($id_p, $t) ?  $t[$id_p]: array();
 }
 
-// http://doc.spip.org/@gen_liste_rubriques
+// http://code.spip.net/@gen_liste_rubriques
 function gen_liste_rubriques() {
 
 	include_spip('inc/config');

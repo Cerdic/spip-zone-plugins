@@ -257,7 +257,7 @@ function action_odt2spip_importe() {
 }    
 
 // Efface le repertoire de dezippage de maniere recursive !
-// reprise de http://doc.spip.org/@effacer_repertoire_temporaire + correctif closedir() 
+// reprise de http://code.spip.net/@effacer_repertoire_temporaire + correctif closedir() 
 // cette fonction n'est plus utile à partir de spip 2.0.5 [12691] puisque le correctif à été intégré
 function odt2spip_effacer_repzip($nom) {
 	$d = opendir($nom);

@@ -108,7 +108,7 @@ define("_AMOCLES_POIDS_MOTS_TEXTE",
 );
 
 // Autoriser a creer un groupe de mots
-// http://doc.spip.org/@autoriser_groupemots_creer_dist
+// http://code.spip.net/@autoriser_groupemots_creer_dist
 function autoriser_groupemots_creer($faire, $type, $id, $qui, $opt) {
 	global $connect_id_auteur;
 	include_spip('inc/amocles_api_globales');
@@ -117,7 +117,7 @@ function autoriser_groupemots_creer($faire, $type, $id, $qui, $opt) {
 }
 
 // Autoriser a modifier un groupe de mots $id
-// http://doc.spip.org/@autoriser_groupemots_modifier_dist
+// http://code.spip.net/@autoriser_groupemots_modifier_dist
 function autoriser_groupemots_modifier($faire, $type, $id, $qui, $opt) {
 	global $connect_id_auteur;
 	include_spip('inc/amocles_api_globales');

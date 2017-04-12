@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-// http://doc.spip.org/@exec_config_lang_dist
+// http://code.spip.net/@exec_config_lang_dist
 function exec_config_lang_dist()
 { 
 

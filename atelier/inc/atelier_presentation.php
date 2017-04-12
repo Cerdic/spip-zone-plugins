@@ -172,7 +172,7 @@ function atelier_cadre_infos($documentation='') {
 
 	cadre_atelier(_T('atelier:titre_infos'),array(
 		'<a href="'.$documentation.'">'._T('atelier:documentation'). '</a>',
-		'<a href="http://doc.spip.org/">'._T('atelier:documentation_code'). '</a>',
+		'<a href="http://code.spip.net/">'._T('atelier:documentation_code'). '</a>',
 		'Plugin Atelier '. $info['version'].'<br />'. _T('atelier:licence')
 	));
 }

@@ -97,7 +97,7 @@ function definir_barre_boutons($contexte=array(),$icones = true, $autorise = tru
  * @param string $args
  * @return string
  */
-// http://doc.spip.org/@bandeau_creer_url
+// http://code.spip.net/@bandeau_creer_url
 function bandeau_creer_url($url, $args="", $contexte=null){
 	if (!preg_match(',[\/\?],',$url)) {
 		$url = generer_url_ecrire($url,$args,true);

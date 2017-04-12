@@ -27,7 +27,7 @@ function autoriser_feedbackcreer_menu_dist($faire, $type, $id, $qui, $opt){
 
 
 // Autoriser a creer une feedback dans la rubrique $id
-// http://doc.spip.org/@autoriser_rubrique_creerfeedbackdans_dist
+// http://code.spip.net/@autoriser_rubrique_creerfeedbackdans_dist
 function autoriser_rubrique_creerfeedbackdans_dist($faire, $type, $id, $qui, $opt) {
 	$r = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique=".intval($id));
 	return
@@ -41,7 +41,7 @@ function autoriser_rubrique_creerfeedbackdans_dist($faire, $type, $id, $qui, $op
 // Autoriser a modifier la feedback $id
 // = admins & redac si la feedback n'est pas publiee
 // = admins de rubrique parente si publiee
-// http://doc.spip.org/@autoriser_feedback_modifier_dist
+// http://code.spip.net/@autoriser_feedback_modifier_dist
 function autoriser_feedback_modifier_dist($faire, $type, $id, $qui, $opt) {
 	$r = sql_fetsel("id_rubrique,statut", "spip_feedbacks", "id_feedback=".intval($id));
 	return

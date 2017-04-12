@@ -486,7 +486,7 @@ function nomvar($composant, $nic, $nom) {
 	return 'acs'.ucfirst($composant).$nic.$nom;
 }
 
-// http://doc.spip.org/@bouton_radio
+// http://code.spip.net/@bouton_radio
 function acs_bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="", $enable=true) {
   static $id_label = 0;
 

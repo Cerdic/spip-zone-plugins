@@ -3,7 +3,7 @@
 //ajout d'un critére branchemot basé sur critére branche
 // {branchemot ?}
 // http://www.spip.net/@branche
-// http://doc.spip.org/@critere_branche_dist
+// http://code.spip.net/@critere_branche_dist
 function critere_branchemot($idb, &$boucles, $crit) {
 	$not = $crit->not;
 	$boucle = &$boucles[$idb];

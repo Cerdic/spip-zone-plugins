@@ -146,7 +146,7 @@ function association_navigation_raccourci1($texte, $image, $lien) {
 	$chemin = _DIR_PLUGIN_ASSOCIATION_ICONES.$image; // icone Associaspip
 	if ( !file_exists($chemin) )
 		$chemin = find_in_path($image); // icone alternative
-	return icone_horizontale(association_langue($texte), $lien, $chemin, 'rien.gif', FALSE); // http://doc.spip.org/@icone_horizontale
+	return icone_horizontale(association_langue($texte), $lien, $chemin, 'rien.gif', FALSE); // http://code.spip.net/@icone_horizontale
 }
 
 /** @} */

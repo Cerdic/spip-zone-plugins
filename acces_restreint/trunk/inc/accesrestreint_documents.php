@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * si ne fonctionne pas on se rabat sur creer_htaccess du core
  * qui pose un deny sur chaque sous repertoire de IMG/
  *
- * http://doc.spip.org/@gerer_htaccess
+ * http://code.spip.net/@gerer_htaccess
  *
  * @param bool $active
  * @return bool

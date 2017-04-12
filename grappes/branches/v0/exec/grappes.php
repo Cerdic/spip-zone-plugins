@@ -8,7 +8,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/actions');
 
-// http://doc.spip.org/@exec_mots_tous_dist
+// http://code.spip.net/@exec_mots_tous_dist
 function exec_grappes_dist()
 {
 	global $spip_lang, $spip_lang_left, $spip_lang_right;

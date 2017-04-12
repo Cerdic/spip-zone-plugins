@@ -753,7 +753,7 @@ function spiplistes_bouton_checkbox ($btn_name, $txt_label, $cur_val) {
 }
 
 
-// http://doc.spip.org/@bouton_radio
+// http://code.spip.net/@bouton_radio
 function spiplistes_bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="") {
 	static $id_label = 0;
 

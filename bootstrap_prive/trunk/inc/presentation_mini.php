@@ -56,7 +56,7 @@ function fin_grand_cadre(){ return "\n</div>";}
 // div extra lui-meme ferme par debut_droite qui ouvre
 // div contenu lui-meme ferme par fin_gauche() ainsi que
 // div conteneur
-// http://doc.spip.org/@debut_gauche
+// http://code.spip.net/@debut_gauche
 /**
  * Retourne le code HTML du début de la colonne gauche
  * @return string Code HTML
@@ -91,7 +91,7 @@ function debut_droite() {
 	  . "\n<div id='contenu' class='span9'>";
 }
 
-// http://doc.spip.org/@liste_articles_bloques
+// http://code.spip.net/@liste_articles_bloques
 function liste_objets_bloques($exec,$contexte=array(),$auteur=null){
 	$res = '';
 	if ($GLOBALS['meta']["articles_modif"] != "non") {
@@ -117,7 +117,7 @@ function liste_objets_bloques($exec,$contexte=array(),$auteur=null){
 
 // Fin de page de l'interface privee.
 // Elle comporte une image invisible declenchant une tache de fond
-// http://doc.spip.org/@fin_page
+// http://code.spip.net/@fin_page
 function fin_page(){
 	include_spip('inc/pipelines');
 	// avec &var_profile=1 on a le tableau de mesures SQL
@@ -167,7 +167,7 @@ function info_maj_spip(){
 	return "$maj<br />";
 }
 
-// http://doc.spip.org/@info_copyright
+// http://code.spip.net/@info_copyright
 function info_copyright() {
 	global $spip_version_affichee, $spip_lang;
 
@@ -196,7 +196,7 @@ function info_copyright() {
 
 }
 
-// http://doc.spip.org/@formulaire_recherche
+// http://code.spip.net/@formulaire_recherche
 function formulaire_recherche($page, $complement=""){
 	$recherche = _request('recherche');
 	$recherche_aff = entites_html($recherche);

@@ -23,7 +23,7 @@ define('_AGE_CACHE_ATIME', 3600);
 
 // Donne le nombre de fichiers dans un repertoire (plat, pour aller vite)
 // false si erreur
-// http://doc.spip.org/@nombre_de_fichiers_repertoire
+// http://code.spip.net/@nombre_de_fichiers_repertoire
 function nombre_de_fichiers_repertoire($dir,$nb_estim_taille = 20) {
 	$taille = 0; // mesurer la taille de N fichiers au hasard dans le repertoire
 	$nb = $nb_estim_taille;
@@ -43,7 +43,7 @@ function nombre_de_fichiers_repertoire($dir,$nb_estim_taille = 20) {
 
 // Indique la taille du repertoire cache ; pour de gros volumes,
 // impossible d'ouvrir chaque fichier, on y va donc a l'estime
-// http://doc.spip.org/@taille_du_cache
+// http://code.spip.net/@taille_du_cache
 function taille_du_cache() {
 	$total = 0;
 	$taille = 0;
@@ -59,7 +59,7 @@ function taille_du_cache() {
 
 // Invalider les caches lies a telle condition
 // ici on se contente de noter la date de mise a jour dans les metas
-// http://doc.spip.org/@suivre_invalideur
+// http://code.spip.net/@suivre_invalideur
 function suivre_invalideur($cond, $modif=true) {
 	if (!$modif)
 		return;
@@ -96,7 +96,7 @@ function suivre_invalideur($cond, $modif=true) {
 // si $atime est passee en argument, ne pas supprimer ce qui a servi
 // plus recemment que cette date (via fileatime)
 // retourne le nombre de fichiers supprimes
-// http://doc.spip.org/@purger_repertoire
+// http://code.spip.net/@purger_repertoire
 function purger_repertoire($dir, $options=array()) {
 	$handle = @opendir($dir);
 	if (!$handle) return;
@@ -136,7 +136,7 @@ function purger_repertoire($dir, $options=array()) {
 // et on le ratiboise en supprimant les fichiers qui n'ont pas
 // ete sollicites dans l'heure qui vient de s'ecouler
 //
-// http://doc.spip.org/@appliquer_quota_cache
+// http://code.spip.net/@appliquer_quota_cache
 function appliquer_quota_cache() {
 	global $quota_cache;
 	$encore = false;
@@ -187,7 +187,7 @@ function appliquer_quota_cache() {
 //
 
 // Securite : est sur que c'est un cache
-// http://doc.spip.org/@retire_cache
+// http://code.spip.net/@retire_cache
 function retire_cache($cache) {
 
 	if (preg_match(
@@ -209,7 +209,7 @@ function retire_cache($cache) {
 // Supprimer les caches marques "x"
 // A priori dans cette version la fonction ne sera pas appelee, car
 // la meta est toujours false ; mais evitons un bug si elle est appellee
-// http://doc.spip.org/@retire_caches
+// http://code.spip.net/@retire_caches
 function retire_caches($chemin = '') {
 	if (isset($GLOBALS['meta']['invalider_caches']))
 		effacer_meta('invalider_caches'); # concurrence
@@ -219,7 +219,7 @@ function retire_caches($chemin = '') {
 // Pour que le compilo ajoute un invalideur a la balise #PARAMETRES_FORUM
 // Noter l'invalideur de la page contenant ces parametres,
 // en cas de premier post sur le forum
-// http://doc.spip.org/@code_invalideur_forums
+// http://code.spip.net/@code_invalideur_forums
 function code_invalideur_forums($p, $code) {
 	return $code;
 }
@@ -228,7 +228,7 @@ function code_invalideur_forums($p, $code) {
 // Fonction permettant au compilo de calculer les invalideurs d'une page
 // (note: si absente, n'est pas appellee)
 /*
-// http://doc.spip.org/@calcul_invalideurs
+// http://code.spip.net/@calcul_invalideurs
 function calcul_invalideurs($corps, $primary, &$boucles, $id_boucle) {
 	return $corps;
 }
@@ -238,25 +238,25 @@ function calcul_invalideurs($corps, $primary, &$boucles, $id_boucle) {
 // Elle ne touche pas aux fichiers cache eux memes ; elle est
 // invoquee quand on vide tout le cache en bloc (action/purger)
 //
-// http://doc.spip.org/@supprime_invalideurs
+// http://code.spip.net/@supprime_invalideurs
 function supprime_invalideurs() { }
 
 
 // Calcul des pages : noter dans la base les liens d'invalidation
-// http://doc.spip.org/@maj_invalideurs
+// http://code.spip.net/@maj_invalideurs
 function maj_invalideurs ($fichier, &$page) { }
 
 // pour les forums l'invalideur est : 'id_forum/a23'
 // pour les petitions et autres, l'invalideur est par exemple :
 // 'varia/pet60'
-// http://doc.spip.org/@insere_invalideur
+// http://code.spip.net/@insere_invalideur
 function insere_invalideur($inval, $fichier) { }
 
 
 //
 // Marquer les fichiers caches invalides comme etant a supprimer
 //
-// http://doc.spip.org/@applique_invalideur
+// http://code.spip.net/@applique_invalideur
 function applique_invalideur($depart) { }
 
 ?>

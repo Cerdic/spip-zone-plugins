@@ -154,7 +154,7 @@ function amocles_editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, 
 	return ajax_action_greffe("editer_auteurs-$id", $res);
 }
 
-// http://doc.spip.org/@determiner_auteurs_objet
+// http://code.spip.net/@determiner_auteurs_objet
 function determiner_auteurs_objet($type, $id, $cond='', $limit='')
 {
 	$les_auteurs = array();
@@ -171,7 +171,7 @@ function determiner_auteurs_objet($type, $id, $cond='', $limit='')
 	return $result;
 }
 
-// http://doc.spip.org/@determiner_non_auteurs
+// http://code.spip.net/@determiner_non_auteurs
 function determiner_non_auteurs($type, $id, $cond_les_auteurs, $order)
 {
 	$cond = '';
@@ -186,7 +186,7 @@ function determiner_non_auteurs($type, $id, $cond_les_auteurs, $order)
 	return spip_query("SELECT * FROM spip_auteurs WHERE $cond" . "statut!='5poubelle' AND statut!='6forum' AND statut!='nouveau' ORDER BY $order");
 }
 
-// http://doc.spip.org/@rechercher_auteurs_objet
+// http://code.spip.net/@rechercher_auteurs_objet
 function rechercher_auteurs_objet($cherche_auteur, $ids, $type, $id, $script_edit_objet, $arg_ajax)
 {
 	if (!$ids) {
@@ -231,7 +231,7 @@ function rechercher_auteurs_objet($cherche_auteur, $ids, $type, $id, $script_edi
 	}
 }
 
-// http://doc.spip.org/@afficher_auteurs_objet
+// http://code.spip.net/@afficher_auteurs_objet
 function afficher_auteurs_objet($type, $id, $flag_editable, $cond_les_auteurs, $script_edit, $arg_ajax)
 {
 	global $connect_statut, $options, $connect_id_auteur, $spip_display;
@@ -333,7 +333,7 @@ function amocles_ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edi
 	);
 }
 
-// http://doc.spip.org/@objet_auteur_select
+// http://code.spip.net/@objet_auteur_select
 function objet_auteur_select($result)
 {
 	global $couleur_claire, $connect_statut ;

@@ -4,7 +4,7 @@ dans le fichier ecrire/inc/utils.php
 
 rechercher :
 
-// http://doc.spip.org/@id_table_objet
+// http://code.spip.net/@id_table_objet
 function id_table_objet($type) {
 	if ($type == 'site' OR $type == 'syndic')
 		return 'id_syndic';
@@ -21,7 +21,7 @@ et remplacer par :
 
 
 // fork pour 192 avec le code de 193 necessaire pour la primary key chelou de spip_auteurs_elargis
-// http://doc.spip.org/@id_table_objet
+// http://code.spip.net/@id_table_objet
 function id_table_objet($type) {
 	$type = preg_replace(',^spip_|s$,', '', $type);
 			spip_log("wesh".$t,"tamere");
@@ -44,7 +44,7 @@ function id_table_objet($type) {
 	}
 	return 'id_'.$type;
 }
-// http://doc.spip.org/@table_objet_sql
+// http://code.spip.net/@table_objet_sql
 function table_objet_sql($type) {
 return 'spip_' . table_objet($type);
 }

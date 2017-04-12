@@ -33,5 +33,5 @@ _ &#169; 2006 - Distribu&eacute; sous licence GPL
 	     ajouter_boutons ou ajouter_onglets
 	     -->
 	<!-- Ajoute un bouton dans le menu principal -->
-	<necessite id="SPIP" version="[1.9.2;]" /> <!-- voir http://doc.spip.org/@Plugin-xml#necessite -->
+	<necessite id="SPIP" version="[1.9.2;]" /> <!-- voir http://code.spip.net/@Plugin-xml#necessite -->
 </plugin>

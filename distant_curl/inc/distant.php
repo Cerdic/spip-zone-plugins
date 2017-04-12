@@ -21,7 +21,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Prend en argument un chemin relatif au rep racine, ou une URL
 // Renvoie un chemin relatif au rep racine, ou false
 //
-// http://doc.spip.org/@copie_locale
+// http://code.spip.net/@copie_locale
 function copie_locale($source, $mode='auto') {
 
 	// si c'est la protection de soi-meme
@@ -85,7 +85,7 @@ function copie_locale($source, $mode='auto') {
 	return $local;
 }
 
-// http://doc.spip.org/@prepare_donnees_post
+// http://code.spip.net/@prepare_donnees_post
 function prepare_donnees_post($donnees, $boundary = '') {
 
 	// permettre a la fonction qui a demande le post de formater elle meme ses donnees
@@ -173,7 +173,7 @@ function prepare_donnees_post($donnees, $boundary = '') {
 // et refuser_gz pour forcer le refus de la compression (cas des serveurs orthographiques)
 // date_verif, un timestamp unix pour arreter la recuperation si la page distante n'a pas ete modifiee depuis une date donnee
 // uri_referer, preciser un referer different
-// http://doc.spip.org/@recuperer_page
+// http://code.spip.net/@recuperer_page
 function recuperer_page($url, $munge_charset=false, $get_headers=false,
 	$taille_max = 1048576, $datas='', $boundary='', $refuser_gz = false,
 	$date_verif = '', $uri_referer = '') {
@@ -207,7 +207,7 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 // args comme ci-dessus (presque)
 // retourne l'URL en cas de 301, un tableau (entete, corps) si ok, false sinon
 
-// http://doc.spip.org/@recuperer_lapage
+// http://code.spip.net/@recuperer_lapage
 function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576, $datas='', $boundary='', $refuser_gz = false, $date_verif = '', $uri_referer = '')
 {
 	// ouvrir la connexion et envoyer la requete et ses en-tetes
@@ -258,7 +258,7 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 // Certaines decompressions gz sont subtiles
 // cf. http://fr2.php.net/manual/fr/function.gzinflate.php#77336
 // (cas de http://files.spip.org/spip-zone/paquets.xml.gz qui ne pouvait etre recupere)
-// http://doc.spip.org/@spip_gzinflate_body
+// http://code.spip.net/@spip_gzinflate_body
 function spip_gzinflate_body($gzData){
 	// return gzinflate(substr($gzData,10));
     if(substr($gzData,0,3)=="\x1f\x8b\x08"){
@@ -279,7 +279,7 @@ function spip_gzinflate_body($gzData){
 }
 
 
-// http://doc.spip.org/@recuperer_body
+// http://code.spip.net/@recuperer_body
 function recuperer_body($f, $taille_max=1048576)
 {
 	$result = '';
@@ -293,7 +293,7 @@ function recuperer_body($f, $taille_max=1048576)
 // la valeur (numerique) du statut si different de 200, notamment Not-Modified
 // le tableau des entetes dans tous les autres cas
 
-// http://doc.spip.org/@recuperer_entetes
+// http://code.spip.net/@recuperer_entetes
 function recuperer_entetes($f, $date_verif='')
 {
 	$s = @trim(fgets($f, 16384));
@@ -329,7 +329,7 @@ function recuperer_entetes($f, $date_verif='')
 // soit a un endroit canonique -- si ca peut etre bijectif c'est encore mieux,
 // mais la tout de suite je ne trouve pas l'idee, etant donne les limitations
 // des filesystems
-// http://doc.spip.org/@nom_fichier_copie_locale
+// http://code.spip.net/@nom_fichier_copie_locale
 function nom_fichier_copie_locale($source, $extension) {
 
 	include_spip('inc/getdocument');
@@ -351,7 +351,7 @@ function nom_fichier_copie_locale($source, $extension) {
 //
 // Donne le nom de la copie locale de la source
 //
-// http://doc.spip.org/@fichier_copie_locale
+// http://code.spip.net/@fichier_copie_locale
 function fichier_copie_locale($source) {
 	// Si c'est deja local pas de souci
 	if (!preg_match(',^\w+://,', $source)) {
@@ -409,7 +409,7 @@ function fichier_copie_locale($source) {
 #$a['extension'] = chaine
 #$a['fichier'] = chaine
 
-// http://doc.spip.org/@recuperer_infos_distantes
+// http://code.spip.net/@recuperer_infos_distantes
 function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = true) {
 
 	# charger les alias des types mime
@@ -515,7 +515,7 @@ function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = t
 }
 
 
-// http://doc.spip.org/@need_proxy
+// http://code.spip.net/@need_proxy
 function need_proxy($host)
 {
 	$http_proxy = $GLOBALS['meta']["http_proxy"];
@@ -533,7 +533,7 @@ function need_proxy($host)
 // Lance une requete HTTP avec entetes
 // retourne le descripteur sur lequel lire la reponse
 //
-// http://doc.spip.org/@init_http
+// http://code.spip.net/@init_http
 function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $vers="HTTP/1.0") {
 	$via_proxy = ''; $proxy_user = ''; $fopen = false;
 
@@ -570,7 +570,7 @@ function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $v
 	return array($f, $fopen);
 }
 
-// http://doc.spip.org/@lance_requete
+// http://code.spip.net/@lance_requete
 function lance_requete($method, $scheme, $host, $path, $port, $noproxy, $refuse_gz=false, $referer = '', $datas="", $vers="HTTP/1.0") {
 
 	$http_proxy = need_proxy($host);

@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@insere_1_init
+// http://code.spip.net/@insere_1_init
 function insere_1_init($request) {
 
 //  table des translations
@@ -41,7 +41,7 @@ function insere_1_init($request) {
 	return insere_1bis_init($request);
 }
 
-// http://doc.spip.org/@insere_1bis_init
+// http://code.spip.net/@insere_1bis_init
 function insere_1bis_init($request) {
 
 	// l'insertion porte sur les tables principales ...
@@ -60,7 +60,7 @@ function insere_1bis_init($request) {
 // En passe 2, relire les tables principales et les tables auxiliaires 
 // sur les mots et les documents car on sait les identifier
 
-// http://doc.spip.org/@insere_2_init
+// http://code.spip.net/@insere_2_init
 function insere_2_init($request) {
 	$t = insere_1bis_init($request);
 
@@ -81,7 +81,7 @@ function insere_2_init($request) {
 //   construire le tableau PHP de la table spip_translate
 // (mis en table pour pouvoir reprendre apres interruption)
 
-// http://doc.spip.org/@translate_init
+// http://code.spip.net/@translate_init
 function translate_init($request) {
 
 	include_spip('inc/texte'); // pour les Regexp des raccourcis
@@ -97,7 +97,7 @@ function translate_init($request) {
 }
 
 
-// http://doc.spip.org/@import_insere
+// http://code.spip.net/@import_insere
 function import_insere($values, $table, $desc, $request, $atts) {
 
 	static $jesais = array();
@@ -131,7 +131,7 @@ function import_insere($values, $table, $desc, $request, $atts) {
 // d'une entite soit calcule une seule fois, a sa premiere occurrence.
 // (Mais des requetes avec jointures eviteraient sa construction. A voir)
 
-// http://doc.spip.org/@import_translate
+// http://code.spip.net/@import_translate
 function import_translate($values, $table, $desc, $request, $atts) {
 
 	if (!function_exists($f = 'import_translate_' . $table))
@@ -145,7 +145,7 @@ function import_translate($values, $table, $desc, $request, $atts) {
 // de meme titre avec le meme contexte (parent etc) dans la base installee.
 // Une synchronisation plus fine serait preferable, cf [8004]
 
-// http://doc.spip.org/@import_inserer_translate
+// http://code.spip.net/@import_inserer_translate
 function import_inserer_translate($values, $table, $desc, $request, $atts) {
 	global $trans;
 	$p = $desc['key']["PRIMARY KEY"];
@@ -174,7 +174,7 @@ function import_inserer_translate($values, $table, $desc, $request, $atts) {
 }
 
 // Insertion avec renumerotation, y compris des raccourcis.
-// http://doc.spip.org/@import_translate_std
+// http://code.spip.net/@import_translate_std
 function import_translate_std($values, $table, $desc, $request, $atts) {
 
 	foreach ($values as $k => $v) {
@@ -187,7 +187,7 @@ function import_translate_std($values, $table, $desc, $request, $atts) {
 	import_inserer_translate($values, $table, $desc, $request, $atts);
 }
 
-// http://doc.spip.org/@import_translate_spip_articles
+// http://code.spip.net/@import_translate_spip_articles
 function import_translate_spip_articles($values, $table, $desc, $request, $atts) {
 	$v = $values['chapo']; 
 	if ($v[0]=='=' AND preg_match(_RACCOURCI_CHAPO, substr($v,1)))
@@ -197,7 +197,7 @@ function import_translate_spip_articles($values, $table, $desc, $request, $atts)
 	import_translate_std($values, $table, $desc, $request, $atts);
 }
 
-// http://doc.spip.org/@import_translate_spip_breves
+// http://code.spip.net/@import_translate_spip_breves
 function import_translate_spip_breves($values, $table, $desc, $request, $atts) {
 	if ($request['statut'] == 'on' AND $values['statut'] == 'publie')
 		$values['statut'] = 'prop';
@@ -206,7 +206,7 @@ function import_translate_spip_breves($values, $table, $desc, $request, $atts) {
 
 // Les doc importes deviennent distants, a fortiori s'ils etaient deja
 // Gerer les vieilles sauvegardes où le Path etait en dur
-// http://doc.spip.org/@import_translate_spip_documents
+// http://code.spip.net/@import_translate_spip_documents
 function import_translate_spip_documents($values, $table, $desc, $request, $atts) {
 
 	if ($values['distant'] === 'oui') {
@@ -246,7 +246,7 @@ function import_translate_spip_documents_liens($values, $table, $desc, $request,
 // recalculer le nouveau numero  si une autre occurrence est rencontree
 // a la reprise. Pas dramatique.
 
-// http://doc.spip.org/@importe_translate_maj
+// http://code.spip.net/@importe_translate_maj
 function importe_translate_maj($k, $v)
 {
 	global $trans;
@@ -268,7 +268,7 @@ function importe_translate_maj($k, $v)
 
 define('_RACCOURCI_MODELE_ALL', '@' . _RACCOURCI_MODELE .'@isS');
 
-// http://doc.spip.org/@importe_raccourci
+// http://code.spip.net/@importe_raccourci
 function importe_raccourci($v)
 {
 	if (preg_match_all(_RACCOURCI_LIEN, $v, $m, PREG_SET_ORDER)) {
@@ -303,7 +303,7 @@ function importe_raccourci($v)
 // un document importe est considere comme identique a un document local
 // s'ils ont meme taille et meme nom et que le present n'est pas detruit
 // Et ne pas importer les incoherences (docs sans extension)
-// http://doc.spip.org/@import_identifie_id_document
+// http://code.spip.net/@import_identifie_id_document
 function import_identifie_id_document($values, $table, $desc, $request) {
 	if (!$values['extension']) return false;
 	$t = $values['taille'];
@@ -320,7 +320,7 @@ function import_identifie_id_document($values, $table, $desc, $request) {
 // un type de document importe est considere comme identique a un type present
 // s'ils ont meme extension et meme titre
 // Sinon il ne sera PAS importe
-// http://doc.spip.org/@import_identifie_id_type
+// http://code.spip.net/@import_identifie_id_type
 function import_identifie_id_type($values, $table, $desc, $request) {
 	$e = $values['extension'];
 	$t = $values['titre'];
@@ -329,7 +329,7 @@ function import_identifie_id_type($values, $table, $desc, $request) {
 }
 
 // deux groupes de mots ne peuvent avoir le meme titre ==> identification
-// http://doc.spip.org/@import_identifie_id_groupe
+// http://code.spip.net/@import_identifie_id_groupe
 function import_identifie_id_groupe($values, $table, $desc, $request)  {
 	$r = sql_fetsel("id_groupe AS id, titre", "spip_groupes_mots", "titre=" . sql_quote($values['titre']));
 	return $r ? array($r['id'], $r['titre']) : false;
@@ -337,13 +337,13 @@ function import_identifie_id_groupe($values, $table, $desc, $request)  {
 
 // pour un mot le titre est insuffisant, il faut aussi l'identite du groupe.
 // Memoriser ces 2 infos et le signaler a import_translate grace a 1 negatif
-// http://doc.spip.org/@import_identifie_id_mot
+// http://code.spip.net/@import_identifie_id_mot
 function import_identifie_id_mot($values, $table, $desc, $request) {
 	return array((0 - $values['id_groupe']), $values['titre']);
 }
 
 // Passe 2: mot de meme titre et de meme groupe ==> identification
-// http://doc.spip.org/@import_identifie_parent_id_mot
+// http://code.spip.net/@import_identifie_parent_id_mot
 function import_identifie_parent_id_mot($id_groupe, $titre, $v)
 {
 	global $trans;
@@ -367,14 +367,14 @@ function import_identifie_parent_id_mot($id_groupe, $titre, $v)
 }
 
 // idem pour les articles
-// http://doc.spip.org/@import_identifie_id_article
+// http://code.spip.net/@import_identifie_id_article
 function import_identifie_id_article($values, $table, $desc, $request) {
 	return array((0 - $values['id_rubrique']), $values['titre']);
 }
 
 // Passe 2 des articles comme pour les mots
 
-// http://doc.spip.org/@import_identifie_parent_id_article
+// http://code.spip.net/@import_identifie_parent_id_article
 function import_identifie_parent_id_article($id_parent, $titre, $v)
 {
 	$id_parent = importe_translate_maj('id_rubrique', (0 - $id_parent));
@@ -397,14 +397,14 @@ function import_identifie_parent_id_article($id_parent, $titre, $v)
 }
 
 // idem pour les breves
-// http://doc.spip.org/@import_identifie_id_breve
+// http://code.spip.net/@import_identifie_id_breve
 function import_identifie_id_breve($values, $table, $desc, $request) {
 	return array((0 - $values['id_rubrique']), $values['titre']);
 }
 
 // Passe 2 des breves comme pour les mots
 
-// http://doc.spip.org/@import_identifie_parent_id_breve
+// http://code.spip.net/@import_identifie_parent_id_breve
 function import_identifie_parent_id_breve($id_parent, $titre, $v)
 {
 	$id_parent = importe_translate_maj('id_rubrique', (0 - $id_parent));
@@ -429,14 +429,14 @@ function import_identifie_parent_id_breve($id_parent, $titre, $v)
 
 // pour une rubrique le titre est insuffisant, il faut l'identite du parent
 // Memoriser ces 2 infos et le signaler a import_translate grace a 1 negatif
-// http://doc.spip.org/@import_identifie_id_rubrique
+// http://code.spip.net/@import_identifie_id_rubrique
 function import_identifie_id_rubrique($values, $table, $desc, $request) {
 	return array((0 - $values['id_parent']), $values['titre']);
 }
 
 // Passe 2 des rubriques, renumerotation en cascade. 
 // rubrique de meme titre et de meme parent ==> identification
-// http://doc.spip.org/@import_identifie_parent_id_rubrique
+// http://code.spip.net/@import_identifie_parent_id_rubrique
 function import_identifie_parent_id_rubrique($id_parent, $titre, $v)
 {
 	global $trans;
@@ -472,7 +472,7 @@ function import_identifie_parent_id_rubrique($id_parent, $titre, $v)
 // reserver la place en mettant titre et parent tout de suite
 // pour que le SELECT ci-dessus fonctionne a la prochaine occurrence
 
-// http://doc.spip.org/@import_alloue_id_rubrique
+// http://code.spip.net/@import_alloue_id_rubrique
 function import_alloue_id_rubrique($id_parent, $titre, $v) {
 	if ($r = sql_insertq('spip_rubriques', array('titre' => $titre, id_parent => $id_parent)))
 		sql_replace('spip_translate', array(

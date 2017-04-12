@@ -17,7 +17,7 @@ $GLOBALS['extracteur']['odt'] = 'extracteur_odt';
 // Necessite le parametre -enable-zip pour Linux.
 // Si vous ne pouvez pas utiliser ZipArchive (librairies manquantes ou vieille version de PHP), vous pouvez utilisez la librairie PclZip ( http://www.phpconcept.net/pclzip )
 // Necessite lib/fonctions_zip.php
-// http://doc.spip.org/@extracteur_odt
+// http://code.spip.net/@extracteur_odt
 
 function extracteur_odt($fichier, &$charset, $bin = '', $opt = '') {
 	$charset = 'UTF-8'; //On lis des XML en utf-8

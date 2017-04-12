@@ -172,7 +172,7 @@ function polyhier_publier_branche_rubrique($id_rubrique, $date=null){
  * Fonction a appeler lorsqu'on depublie ou supprime qqch dans une rubrique
  * retourne Vrai si le statut change effectivement
  *
- * http://doc.spip.org/@depublier_branche_rubrique_if
+ * http://code.spip.net/@depublier_branche_rubrique_if
  *
  * @param int/array $id_rubrique
  * @return bool

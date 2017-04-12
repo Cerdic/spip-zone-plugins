@@ -57,7 +57,7 @@ function formulaires_em_supprimer_media_verifier_dist($id_document,$type='',$obj
 	return $erreurs;
 }
 
-// http://doc.spip.org/@inc_editer_article_dist
+// http://code.spip.net/@inc_editer_article_dist
 function formulaires_em_supprimer_media_traiter_dist($id_document,$type='',$objet,$id_objet,$redirect='',$compteur='',$total=''){
 	if(!intval($id_document)){
 		$erreurs['id_document'] = 'Erreur';

@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@nettoyer_caracteres_mail
+// http://code.spip.net/@nettoyer_caracteres_mail
 function nettoyer_caracteres_mail($t) {
 
 	$t = filtrer_entites($t);
@@ -33,13 +33,13 @@ function nettoyer_caracteres_mail($t) {
 }
 
 if (!function_exists('nettoyer_titre_email')){
-	// http://doc.spip.org/@nettoyer_titre_email
+	// http://code.spip.net/@nettoyer_titre_email
 	function nettoyer_titre_email($titre) {
 		return str_replace("\n", ' ', supprimer_tags(extraire_multi($titre)));
 	}
 }
 
-// http://doc.spip.org/@envoyer_mail
+// http://code.spip.net/@envoyer_mail
 function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = "") {
 	include_spip('inc/charsets');
 	include_spip('inc/class.phpmailer');

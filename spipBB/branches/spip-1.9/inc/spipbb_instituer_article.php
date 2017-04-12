@@ -7,7 +7,7 @@ base inc/instituer_article
 if (!defined("_ECRIRE_INC_VERSION")) return;
 spipbb_log("included",3,__FILE__);
 
-// http://doc.spip.org/@inc_instituer_article_dist
+// http://code.spip.net/@inc_instituer_article_dist
 function inc_spipbb_instituer_article($id_article, $statut=-1)
 {
 	if ($statut == -1) return demande_publication($id_article);
@@ -43,7 +43,7 @@ function inc_spipbb_instituer_article($id_article, $statut=-1)
 }
 
 
-// http://doc.spip.org/@demande_publication
+// http://code.spip.net/@demande_publication
 function demande_publication($id_article)
 {
 	return debut_cadre_relief('',true) .

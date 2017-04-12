@@ -76,7 +76,7 @@ function inc_instituer_forms_donnee_dist($id_form, $id_donnee, $statut, $rang=NU
 	return ajax_action_auteur('instituer_forms_donnee',$id_donnee,'donnees_edit', "id_form=$id_form&id_donnee=$id_donnee", $res);
 }
 
-// http://doc.spip.org/@puce_statut_article
+// http://code.spip.net/@puce_statut_article
 function puce_statut_donnee($id, $statut, $id_form, $ajax = false) {
 	global $spip_lang_left, $dir_lang, $connect_statut, $options;
 	static $script=NULL;

@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // Definition des noeuds de l'arbre de syntaxe abstraite
 
-// http://doc.spip.org/@Texte
+// http://code.spip.net/@Texte
 class Texte {
 	var $type = 'texte';
 	var $texte;
@@ -23,7 +23,7 @@ class Texte {
 	var $ligne = 0;
 }
 
-// http://doc.spip.org/@Inclure
+// http://code.spip.net/@Inclure
 class Inclure {
 	var $type = 'include';
 	var $texte;
@@ -35,7 +35,7 @@ class Inclure {
 //
 // encodage d'une boucle SPIP en un objet PHP
 //
-// http://doc.spip.org/@Boucle
+// http://code.spip.net/@Boucle
 class Boucle {
 	var $type = 'boucle';
 	var $id_boucle;
@@ -91,7 +91,7 @@ class Boucle {
 
 // sous-noeud du precedent
 
-// http://doc.spip.org/@Critere
+// http://code.spip.net/@Critere
 class Critere {
 	var $op;
 	var $not;
@@ -100,7 +100,7 @@ class Critere {
 	var $ligne = 0;
 }
 
-// http://doc.spip.org/@Champ
+// http://code.spip.net/@Champ
 class Champ {
 	var $type = 'champ';
 	var $nom_champ;
@@ -127,7 +127,7 @@ class Champ {
 }
 
 
-// http://doc.spip.org/@Idiome
+// http://code.spip.net/@Idiome
 class Idiome {
 	var $type = 'idiome';
 	var $nom_champ = ""; // la chaine a traduire
@@ -148,7 +148,7 @@ class Idiome {
 	var $ligne = 0;
 }
 
-// http://doc.spip.org/@Polyglotte
+// http://code.spip.net/@Polyglotte
 class Polyglotte {
 	var $type = 'polyglotte';
 	var $traductions = array(); // les textes ou choisir
@@ -176,7 +176,7 @@ $exception_des_connect[] = ''; // ne pas transmettre le connect='' par les inclu
 //ces variables ne sont pas initialisees par "$var = array()"
 // afin de permettre leur extension dans mes_options.php etc
 
-// http://doc.spip.org/@declarer_interfaces
+// http://code.spip.net/@declarer_interfaces
 function declarer_interfaces(){
  global $exceptions_des_tables, $table_des_tables, $table_date, $table_titre;
 

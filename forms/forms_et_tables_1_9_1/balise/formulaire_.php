@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 include_spip('inc/filtres');
 
 /* prendre en charge par defaut les balises formulaires simples */
-// http://doc.spip.org/@balise_FORMULAIRE__dist
+// http://code.spip.net/@balise_FORMULAIRE__dist
 function balise_FORMULAIRE__dist($p) {
 	preg_match(",^FORMULAIRE_(.*)?$,", $p->nom_champ, $regs);
 	if (!strlen($form = $regs[1])){
@@ -24,12 +24,12 @@ function balise_FORMULAIRE__dist($p) {
 	return calculer_balise_dynamique($p,"FORMULAIRE_$form",array());
 }
 
-// http://doc.spip.org/@protege_valeurs
+// http://code.spip.net/@protege_valeurs
 function protege_valeurs($valeur){
 	return is_string($valeur)?entites_html($valeur):(is_array($valeur)?serialize($valeur):$valeur);
 }
 /* prendre en charge par defaut les balises dynamiques formulaires simples */
-// http://doc.spip.org/@balise_FORMULAIRE__dyn
+// http://code.spip.net/@balise_FORMULAIRE__dyn
 function balise_FORMULAIRE__dyn($form)
 {
 	// recuperer les arguments passes a la balise

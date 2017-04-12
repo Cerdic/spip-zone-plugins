@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/forum');
 
-// http://doc.spip.org/@exec_naviguer_dist
+// http://code.spip.net/@exec_naviguer_dist
 function exec_naviguer_dist()
 {
 	exec_naviguer_args(intval(_request('id_rubrique')),
@@ -23,7 +23,7 @@ function exec_naviguer_dist()
 			   intval(_request('select_groupe')));
 }
 
-// http://doc.spip.org/@exec_naviguer_args
+// http://code.spip.net/@exec_naviguer_args
 function exec_naviguer_args($id_rubrique, $cherche_mot, $select_groupe)
 {
 	if (!$id_rubrique) {
@@ -103,7 +103,7 @@ function exec_naviguer_args($id_rubrique, $cherche_mot, $select_groupe)
 	}
 }
 
-// http://doc.spip.org/@naviguer_droite
+// http://code.spip.net/@naviguer_droite
 function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_forums, $editer_mots, $flag_editable, $boucles)
 {
 	global $spip_lang_right, $connect_toutes_rubriques;
@@ -171,7 +171,7 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_
 	  (_INTERFACE_ONGLETS?"":$onglet_enfants.$onglet_documents.$onglet_interactivite);
 }
 
-// http://doc.spip.org/@infos_naviguer
+// http://code.spip.net/@infos_naviguer
 function infos_naviguer($id_rubrique, $statut, $row, $n_forums)
 {
 	$boite = pipeline ('boite_infos', array('data' => '',
@@ -205,7 +205,7 @@ function infos_naviguer($id_rubrique, $statut, $row, $n_forums)
 }
 
 
-// http://doc.spip.org/@raccourcis_naviguer
+// http://code.spip.net/@raccourcis_naviguer
 function raccourcis_naviguer($id_rubrique, $id_parent)
 {
 	$res = icone_horizontale(_T('icone_tous_articles'), generer_url_ecrire("articles_page"), "article-24.gif", '',false);
@@ -229,7 +229,7 @@ function raccourcis_naviguer($id_rubrique, $id_parent)
 	echo bloc_des_raccourcis($res);
 }
 
-// http://doc.spip.org/@langue_naviguer
+// http://code.spip.net/@langue_naviguer
 function langue_naviguer($id_rubrique, $id_parent, $flag_editable)
 {
 	$res = "";
@@ -266,7 +266,7 @@ function langue_naviguer($id_rubrique, $id_parent, $flag_editable)
 	return $res;
 }
 
-// http://doc.spip.org/@contenu_naviguer
+// http://code.spip.net/@contenu_naviguer
 function contenu_naviguer($id_rubrique, $id_parent) {
 
 	global  $spip_lang_right;
@@ -394,7 +394,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	return $res;
 }
 
-// http://doc.spip.org/@naviguer_doc
+// http://code.spip.net/@naviguer_doc
 function naviguer_doc ($id, $type = "article", $script, $flag_editable) {
 	global $spip_lang_left;
 
@@ -435,7 +435,7 @@ function naviguer_doc ($id, $type = "article", $script, $flag_editable) {
 	. $res;
 }
 
-// http://doc.spip.org/@montre_naviguer
+// http://code.spip.net/@montre_naviguer
 function montre_naviguer($id_rubrique, $titre, $id_parent, $ze_logo, $flag_editable)
 {
 	global $spip_lang_right;
@@ -463,7 +463,7 @@ function montre_naviguer($id_rubrique, $titre, $id_parent, $ze_logo, $flag_edita
 		. "<div class='nettoyeur'></div>\n";
 }
 
-// http://doc.spip.org/@tester_rubrique_vide
+// http://code.spip.net/@tester_rubrique_vide
 function tester_rubrique_vide($id_rubrique) {
 	if (sql_countsel('spip_rubriques', "id_parent=$id_rubrique"))
 		return false;
@@ -486,7 +486,7 @@ function tester_rubrique_vide($id_rubrique) {
 	return true;
 }
 
-// http://doc.spip.org/@bouton_supprimer_naviguer
+// http://code.spip.net/@bouton_supprimer_naviguer
 function bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable)
 {
 	if (($id_rubrique>0) AND tester_rubrique_vide($id_rubrique) AND $flag_editable)

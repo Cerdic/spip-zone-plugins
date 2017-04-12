@@ -1,6 +1,6 @@
 <?php
 
-// http://doc.spip.org/@inc_editer_mot_dist
+// http://code.spip.net/@inc_editer_mot_dist
 function formulaires_choisir_commune_charger($type,$id){
 
 
@@ -28,7 +28,7 @@ function formulaires_choisir_commune_verifier_dist($type,$id){
 	return $erreurs;
 }
 
-// http://doc.spip.org/@inc_editer_mot_dist
+// http://code.spip.net/@inc_editer_mot_dist
 function formulaires_choisir_commune_traiter_dist($type,$id){
 	include_spip('cog_fonctions');
 	$table='spip_cog_communes_liens';

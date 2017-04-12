@@ -40,7 +40,7 @@ charger_generer_url(); # pour recuperer_parametres_url
 // il est recommande de modifier $_GET['toto'] (meme si la page est
 // appelee avec la methode POST).
 //
-// http://doc.spip.org/@calculer_contexte
+// http://code.spip.net/@calculer_contexte
 function calculer_contexte() {
 	global $_GET, $_POST;
 
@@ -62,7 +62,7 @@ function calculer_contexte() {
 	return $contexte;
 }
 
-// http://doc.spip.org/@analyse_resultat_skel
+// http://code.spip.net/@analyse_resultat_skel
 function analyse_resultat_skel($nom, $cache, $corps) {
 	$headers = array();
 
@@ -91,7 +91,7 @@ function analyse_resultat_skel($nom, $cache, $corps) {
 // Calcul de la rubrique associee a la requete
 // (selection de squelette specifique par id_rubrique & lang)
 
-// http://doc.spip.org/@sql_rubrique_fond
+// http://code.spip.net/@sql_rubrique_fond
 function sql_rubrique_fond($contexte) {
 
 	if (isset($contexte['id_rubrique'])) {
@@ -139,7 +139,7 @@ function sql_rubrique_fond($contexte) {
 
 # retourne le chapeau d'un article, et seulement s'il est publie
 
-// http://doc.spip.org/@sql_chapo
+// http://code.spip.net/@sql_chapo
 function sql_chapo($id_article) {
 	$chapo= spip_abstract_fetsel(array('chapo'),
 		array('spip_articles'),
@@ -150,7 +150,7 @@ function sql_chapo($id_article) {
 
 # retourne le parent d'une rubrique
 
-// http://doc.spip.org/@sql_parent
+// http://code.spip.net/@sql_parent
 function sql_parent($id_rubrique) {
 	if (!$id_rubrique = intval($id_rubrique))
 		return 0;
@@ -167,7 +167,7 @@ function sql_parent($id_rubrique) {
 
 # retourne la profondeur d'une rubrique
 
-// http://doc.spip.org/@sql_profondeur
+// http://code.spip.net/@sql_profondeur
 function sql_profondeur($id) {
 	$n = 0;
 	while ($id) {
@@ -179,7 +179,7 @@ function sql_profondeur($id) {
 
 # retourne la rubrique d'un article
 
-// http://doc.spip.org/@sql_rubrique
+// http://code.spip.net/@sql_rubrique
 function sql_rubrique($id_article) {
 	$id_rubrique = spip_abstract_fetsel(array('id_rubrique'),
 			array('spip_articles'),
@@ -187,7 +187,7 @@ function sql_rubrique($id_article) {
 	return $id_rubrique['id_rubrique'];
 }
 
-// http://doc.spip.org/@sql_petitions
+// http://code.spip.net/@sql_petitions
 function sql_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
 	$retour = spip_abstract_fetsel(
 		array('texte'),
@@ -204,7 +204,7 @@ function sql_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
 }
 
 # retourne le champ 'accepter_forum' d'un article
-// http://doc.spip.org/@sql_accepter_forum
+// http://code.spip.net/@sql_accepter_forum
 function sql_accepter_forum($id_article) {
 	static $cache = array();
 
@@ -234,7 +234,7 @@ function sql_accepter_forum($id_article) {
 
 # En cas d'erreur process_ins est absent et texte est un tableau de 2 chaines
 
-// http://doc.spip.org/@public_parametrer_dist
+// http://code.spip.net/@public_parametrer_dist
 function public_parametrer_dist($fond, $local='', $cache='')  {
 	// verifier que la fonction assembler est bien chargee (cf. #608)
 	$assembler = charger_fonction('assembler', 'public');

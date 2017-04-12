@@ -19,7 +19,7 @@ define('_TRANCHES', 10);
 // Elle renvoie une enumeration HTML de ces lignes formatees, 
 // avec une pagination appelable en Ajax si $idom et $url sont fournis
 
-// http://doc.spip.org/@inc_presenter_liste_dist
+// http://code.spip.net/@inc_presenter_liste_dist
 function inc_presenter_liste_dist($requete, $fonc, &$prims, $own, $force, $styles, $idom='', $title='', $icone='', $url='', $cpt=NULL)
 {
 	global $spip_display, $spip_lang_left;
@@ -92,7 +92,7 @@ function inc_presenter_liste_dist($requete, $fonc, &$prims, $own, $force, $style
 	  . fin_cadre('liste');
 }
 
-// http://doc.spip.org/@afficher_tranches_requete
+// http://code.spip.net/@afficher_tranches_requete
 function afficher_tranches_requete($num_rows, $idom, $url='', $nb_aff = 10, $old_arg=NULL) {
 	static $ancre = 0;
 	global $browser_name, $spip_lang_right, $spip_display;
@@ -118,7 +118,7 @@ function afficher_tranches_requete($num_rows, $idom, $url='', $nb_aff = 10, $old
 	  . "\" /></a></div>\n";
 }
 
-// http://doc.spip.org/@affiche_tranche_bandeau
+// http://code.spip.net/@affiche_tranche_bandeau
 function affiche_tranche_bandeau(&$requete, $idom, $url='', $cpt=NULL, $pas=10)
 {
 	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';

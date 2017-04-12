@@ -74,7 +74,7 @@ function formulaires_editer_shortcut_url_verifier_dist($id_shortcut_url = 'new',
 	return $erreurs;
 }
 
-// http://doc.spip.org/@inc_editer_shortcut_url_dist
+// http://code.spip.net/@inc_editer_shortcut_url_dist
 function formulaires_editer_shortcut_url_traiter_dist($id_shortcut_url = 'new', $objet = '', $id_objet = '', $retour = '', $ajaxload = 'oui', $options = '') {
 	include_spip('inc/distant');
 	$result = $set = array();

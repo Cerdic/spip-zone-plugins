@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Cette action permet de basculer du mode image au mode document et vice versa
 
-// http://doc.spip.org/@action_changer_mode_document_dist
+// http://code.spip.net/@action_changer_mode_document_dist
 function action_changer_mode_document_dist($arg=null)
 {
 	if(is_null($arg)){
@@ -28,7 +28,7 @@ function action_changer_mode_document_dist($arg=null)
 	else action_changer_mode_document_post($r[1],$r[2]);
 }
 
-// http://doc.spip.org/@action_changer_mode_document_post
+// http://code.spip.net/@action_changer_mode_document_post
 function action_changer_mode_document_post($id_document, $mode)
 {
 	// - id_document le doc a modifier

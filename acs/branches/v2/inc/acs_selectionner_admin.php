@@ -15,7 +15,7 @@ include_spip('inc/selectionner');
 // Affiche un mini-navigateur ajax sur les admins
 //
 
-// http://doc.spip.org/@inc_selectionner_auteur_dist
+// http://code.spip.net/@inc_selectionner_auteur_dist
 function inc_acs_selectionner_admin_dist($admid)
 {
 	global $spip_lang_right, $couleur_foncee;
@@ -34,7 +34,7 @@ function inc_acs_selectionner_admin_dist($admid)
 	return acs_construire_selectionner_hierarchie($idom, $futurs, _T('acs:admins'), $url, 'nouv_admin_'.$admid);
 }
 
-// http://doc.spip.org/@selectionner_auteur_boucle
+// http://code.spip.net/@selectionner_auteur_boucle
 function selectionner_admin_boucle($query, $idom, $admid)
 {
 	global  $spip_lang_left;
@@ -62,7 +62,7 @@ function selectionner_admin_boucle($query, $idom, $admid)
 	return $res;
 }
 
-// fonction pompee sur http://doc.spip.org/@construire_selectionner_hierarchie
+// fonction pompee sur http://code.spip.net/@construire_selectionner_hierarchie
 // possede des classes en plus de l'original permettant de styler la presentation
 function acs_construire_selectionner_hierarchie($idom, $liste, $racine, $url, $name, $url_init='')
 {

@@ -964,7 +964,7 @@ function spiplistes_listes_boite_moderateurs ($id_liste, $script_retour, $id_con
 } //
 
 
-// http://doc.spip.org/@bonhomme_statut
+// http://code.spip.net/@bonhomme_statut
 function bonhomme_statut($row) {
 	$puce_statut = charger_fonction('puce_statut', 'inc');
 	return $puce_statut(0, $row['statut'], 0, 'auteur');

@@ -13,7 +13,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // Alerte sur les articles publies post-dates
 //
-// http://doc.spip.org/@genie_visites_dist
+// http://code.spip.net/@genie_visites_dist
 function genie_microblog_dist($last) {
 	$cfg = @unserialize($GLOBALS['meta']['microblog']);
 	// si le site utilise les articles postdates

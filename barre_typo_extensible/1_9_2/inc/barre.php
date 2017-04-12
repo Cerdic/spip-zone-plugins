@@ -21,7 +21,7 @@ if (!function_exists('afficher_claret')){
 	}
 }
 
-// http://doc.spip.org/@bouton_barre_racc
+// http://code.spip.net/@bouton_barre_racc
 function bouton_barre_racc($action, $img, $help, $champhelp) {
 	include_spip('inc/charsets');
 
@@ -383,7 +383,7 @@ function MajPreview(id) {
 	return $ret;
 }
 
-// http://doc.spip.org/@afficher_textarea_barre
+// http://code.spip.net/@afficher_textarea_barre
 function afficher_textarea_barre($texte, $forum=false)
 {
 	global $spip_display, $spip_ecran;

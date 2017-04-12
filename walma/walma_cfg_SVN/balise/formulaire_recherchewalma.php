@@ -15,13 +15,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 // Pas besoin de contexte de compilation
 
 
-// http://doc.spip.org/@balise_FORMULAIRE_RECHERCHEWALMA
+// http://code.spip.net/@balise_FORMULAIRE_RECHERCHEWALMA
 function balise_FORMULAIRE_RECHERCHEWALMA ($p) 
 {
 	return calculer_balise_dynamique($p, 'FORMULAIRE_RECHERCHEWALMA', array());
 }
 
-// http://doc.spip.org/@balise_FORMULAIRE_RECHERCHEWALMA_stat
+// http://code.spip.net/@balise_FORMULAIRE_RECHERCHEWALMA_stat
 function balise_FORMULAIRE_RECHERCHEWALMA_stat($args, $filtres) {
 	// Si le moteur n'est pas active, pas de balise
 	if ($GLOBALS['meta']["activer_moteur"] != "oui")
@@ -32,7 +32,7 @@ function balise_FORMULAIRE_RECHERCHEWALMA_stat($args, $filtres) {
 	  return array($filtres[0], $args[0]);
 }
  
-// http://doc.spip.org/@balise_FORMULAIRE_RECHERCHEWALMA_dyn
+// http://code.spip.net/@balise_FORMULAIRE_RECHERCHEWALMA_dyn
 function balise_FORMULAIRE_RECHERCHEWALMA_dyn($lien, $rech) {
 
 	if ($GLOBALS['spip_lang'] != $GLOBALS['meta']['langue_site'])

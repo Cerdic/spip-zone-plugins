@@ -18,7 +18,7 @@ include_spip('base/abstract_sql');
 include_spip('inc/agenda_gestion');
 include_spip('inc/pim_agenda_gestion');
 
-// http://doc.spip.org/@exec_mots_tous_dist
+// http://code.spip.net/@exec_mots_tous_dist
 function exec_mots_tous_dist()
 {
   global $acces_comite, $acces_forum, $acces_minirezo, $new, $articles, $breves, $change_type, $conf_mot, $connect_statut, $connect_toutes_rubriques, $descriptif, $id_groupe, $modifier_groupe, $obligatoire, $rubriques, $spip_lang, $spip_lang_right, $supp_group, $syndic, $texte, $unseul;
@@ -275,7 +275,7 @@ fin_page();
 // Calculer les nombres d'elements (articles, etc.) lies a chaque mot
 //
 
-// http://doc.spip.org/@calculer_liens_mots
+// http://code.spip.net/@calculer_liens_mots
 function calculer_liens_mots()
 {
 
@@ -316,7 +316,7 @@ else $aff_articles = "'prop','publie'";
 	      'syndic' => $syndic);
 }
 
-// http://doc.spip.org/@afficher_groupe_mots
+// http://code.spip.net/@afficher_groupe_mots
 function afficher_groupe_mots($id_groupe) {
 	global $connect_id_auteur, $connect_statut;
 	global $spip_lang_right, $couleur_claire, $spip_lang;
@@ -385,7 +385,7 @@ function afficher_groupe_mots($id_groupe) {
 	return "<div id='$tmp_var' style='position: relative;'>$res</div>";
 }
 
-// http://doc.spip.org/@afficher_groupe_mots_boucle
+// http://code.spip.net/@afficher_groupe_mots_boucle
 function afficher_groupe_mots_boucle($row, $occurrences)
 {
 	global $connect_statut, $connect_toutes_rubriques;

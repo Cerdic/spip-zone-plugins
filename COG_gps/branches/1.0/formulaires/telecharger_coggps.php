@@ -45,7 +45,7 @@ function formulaires_telecharger_coggps_verifier_dist(){
 	return $erreurs;
 }
 
-// http://doc.spip.org/@inc_editer_mot_dist
+// http://code.spip.net/@inc_editer_mot_dist
 function formulaires_telecharger_coggps_traiter_dist(){
 include_spip('coggps_config');
 include_spip('inc/cog_import');

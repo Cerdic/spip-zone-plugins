@@ -301,7 +301,7 @@ function calcul_prevision_visites() {
 
 // Afficher les referers d'un article (ou du site)
 //
-// http://doc.spip.org/@aff_referers
+// http://code.spip.net/@aff_referers
 function aff_referers($result, $limit, $plus) {
 	global $spip_lang_right, $source_vignettes;
 	// Charger les moteurs de recherche

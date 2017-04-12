@@ -30,7 +30,7 @@ function spipbb_chargespipbb($x) {
 }
 
 // inspire de :
-// http://doc.spip.org/@notifications_forumvalide_dist
+// http://code.spip.net/@notifications_forumvalide_dist
 function notifications_forumvalide($quoi, $id_forum) {
 	spipbb_log("notifications_forumvalide: $quoi : $id_forum :",3,__FILE__);
 
@@ -162,7 +162,7 @@ function notifications_forumvalide($quoi, $id_forum) {
 
 }
 
-// http://doc.spip.org/@notifications_forumposte_dist
+// http://code.spip.net/@notifications_forumposte_dist
 function notifications_forumposte($quoi, $id_forum) {
 	$t = sql_fetsel("*", "spip_forum", "id_forum=".sql_quote($id_forum));
 	if (!$t) return;
@@ -242,7 +242,7 @@ function generer_url_forum_spipbb($id_forum) {
 		. "?"._SPIP_PAGE."=voirsujet&id_forum=".$id_forum;
 }
 
-// http://doc.spip.org/@email_notification_forum
+// http://code.spip.net/@email_notification_forum
 function email_notification_forum_spipbb ($t, $email) {
 	spipbb_log('email_notification_forum_spipbb :'.serialize($t).":",3,__FILE__);
 

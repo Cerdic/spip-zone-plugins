@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // construit un tableau de raccourcis pour un noeud de DOM 
 
-// http://doc.spip.org/@afficher_barre
+// http://code.spip.net/@afficher_barre
 function afficher_barre($champ, $forum=false, $lang='') {
 	global $spip_lang, $spip_lang_right, $spip_lang_left, $spip_lang;
 	static $num_barre = 0;
@@ -52,7 +52,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 // pour compatibilite arriere. utiliser directement le corps a present.
 
-// http://doc.spip.org/@afficher_claret
+// http://code.spip.net/@afficher_claret
 function afficher_claret() {
 	include_spip('inc/layer');
 	return $GLOBALS['browser_caret'];

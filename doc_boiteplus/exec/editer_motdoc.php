@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 
-// http://doc.spip.org/@exec_editer_motdoc_dist
+// http://code.spip.net/@exec_editer_motdoc_dist
 //modifie uniquement l'intitulé de la fonction
 //function exec_editer_motdoc_dist()
 function exec_editer_motdoc_dist()

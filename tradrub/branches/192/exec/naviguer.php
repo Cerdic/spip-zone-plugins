@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/forum');
 
-// http://doc.spip.org/@exec_naviguer_dist
+// http://code.spip.net/@exec_naviguer_dist
 function exec_naviguer_dist()
 {
 	global $id_rubrique, $spip_display, $cherche_mot,  $select_groupe;
@@ -144,7 +144,7 @@ function exec_naviguer_dist()
 	echo fin_gauche(), fin_page();
 }
 
-// http://doc.spip.org/@infos_naviguer
+// http://code.spip.net/@infos_naviguer
 function infos_naviguer($id_rubrique, $statut, $ze_logo)
 {
 	if ($id_rubrique > 0) {
@@ -191,7 +191,7 @@ function infos_naviguer($id_rubrique, $statut, $ze_logo)
 }
 
 
-// http://doc.spip.org/@raccourcis_naviguer
+// http://code.spip.net/@raccourcis_naviguer
 function raccourcis_naviguer($id_rubrique, $id_parent)
 {
 	global $connect_statut;
@@ -217,7 +217,7 @@ function raccourcis_naviguer($id_rubrique, $id_parent)
 	echo bloc_des_raccourcis($res);
 }
 
-// http://doc.spip.org/@langue_naviguer
+// http://code.spip.net/@langue_naviguer
 function langue_naviguer($id_rubrique, $id_parent, $flag_editable)
 {
 
@@ -254,7 +254,7 @@ if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBAL
  }
 }
 
-// http://doc.spip.org/@contenu_naviguer
+// http://code.spip.net/@contenu_naviguer
 function contenu_naviguer($id_rubrique, $id_parent) {
 
 	global  $connect_toutes_rubriques, $spip_lang_right;
@@ -375,7 +375,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	return $res;
 }
 
-// http://doc.spip.org/@naviguer_doc
+// http://code.spip.net/@naviguer_doc
 function naviguer_doc ($id, $type = "article", $script, $flag_editable) {
 	global $spip_lang_left;
 
@@ -409,7 +409,7 @@ EOF;
 	. $res;
 }
 
-// http://doc.spip.org/@montre_naviguer
+// http://code.spip.net/@montre_naviguer
 function montre_naviguer($id_rubrique, $titre, $descriptif, $logo, $flag_editable)
 {
   global $spip_lang_right, $spip_lang_left;
@@ -436,7 +436,7 @@ function montre_naviguer($id_rubrique, $titre, $descriptif, $logo, $flag_editabl
   echo "</table>\n";
 }
 
-// http://doc.spip.org/@tester_rubrique_vide
+// http://code.spip.net/@tester_rubrique_vide
 function tester_rubrique_vide($id_rubrique) {
 	$n = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_rubriques WHERE id_parent='$id_rubrique' LIMIT 1"));
 	if ($n['n'] > 0) return false;
@@ -456,7 +456,7 @@ function tester_rubrique_vide($id_rubrique) {
 	return true;
 }
 
-// http://doc.spip.org/@bouton_supprimer_naviguer
+// http://code.spip.net/@bouton_supprimer_naviguer
 function bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable)
 {
 	if (($id_rubrique>0) AND tester_rubrique_vide($id_rubrique) AND $flag_editable) {

@@ -675,7 +675,7 @@ $newtab="";
 }
 
 
-// http://doc.spip.org/@multi_trad
+// http://code.spip.net/@multi_trad
 function extension_multilingue_multi_trad_lang ($trads, $langue_souhaitee) {
 	 
 
@@ -694,7 +694,7 @@ function extension_multilingue_multi_trad_lang ($trads, $langue_souhaitee) {
 }
 
 // analyse un bloc multi
-// http://doc.spip.org/@extraire_trad
+// http://code.spip.net/@extraire_trad
 function extension_multilingue_extraire_trad_lang ($bloc, $langue_souhaitee) {
 	$lang = '';
 // ce reg fait planter l'analyse multi s'il y a de l'{italique} dans le champ
@@ -713,7 +713,7 @@ function extension_multilingue_extraire_trad_lang ($bloc, $langue_souhaitee) {
 }
 
 // repere les blocs multi dans un texte et extrait le bon
-// http://doc.spip.org/@extraire_multi
+// http://code.spip.net/@extraire_multi
 function extension_multilingue_extraire_multi_lang ($letexte, $langue_souhaitee) {
 	if (strpos($letexte, '<multi>') === false) return $letexte; // perf
 	if (preg_match_all("@<multi>(.*?)</multi>@sS", $letexte, $regs, PREG_SET_ORDER))

@@ -27,7 +27,7 @@ include_spip('inc/lien');
 // Un auteur sans autorisation de modification de soi  est un visiteur;
 // il n'a pas de messagerie interne, et n'a publie que des messages de forum
 
-// http://doc.spip.org/@inc_formater_auteur_dist
+// http://code.spip.net/@inc_formater_auteur_dist
 function inc_formater_auteur_dist($id_auteur, $row=NULL) {
 
   global $connect_id_auteur, $connect_statut;
@@ -84,7 +84,7 @@ $row = sql_fetsel("*", "spip_auteurs", "id_auteur=$id_auteur");   //RERS
 	return $vals;
 }
 
-// http://doc.spip.org/@formater_auteur_mail
+// http://code.spip.net/@formater_auteur_mail
 function formater_auteur_mail($row, $id_auteur)
 {
 	if (!in_array($row['statut'], array('0minirezo', '1comite')))

@@ -1,6 +1,6 @@
 <?php
 
-// http://doc.spip.org/@inc_afficher_articles_dist
+// http://code.spip.net/@inc_afficher_articles_dist
 function inc_afficher_articles($titre, $requete, $formater='') {
 
 	if (!isset($requete['FROM'])) $requete['FROM'] = 'spip_articles AS articles';
@@ -30,7 +30,7 @@ function inc_afficher_articles($titre, $requete, $formater='') {
 }
 
 
-// http://doc.spip.org/@inc_formater_article_dist
+// http://code.spip.net/@inc_formater_article_dist
 function inc_formater_article($row, $own='')
 {
 	global $spip_lang_right, $spip_display;

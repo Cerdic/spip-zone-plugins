@@ -256,7 +256,7 @@ redirige_par_entete($url);
 
 
 // #FORMULAIRE_UPLOAD
-// se r�f�rer � http://doc.spip.org/@afficher_documents_colonne
+// se r�f�rer � http://code.spip.net/@afficher_documents_colonne
 //afficher_documents_walma pour telecharger uniquement les docs
 // [(#ID_ARTICLE|upload_documents_walma)]
 function upload_documents_walma($id, $type="article",$script=NULL) {

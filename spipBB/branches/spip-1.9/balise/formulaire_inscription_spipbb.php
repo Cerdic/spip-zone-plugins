@@ -22,7 +22,7 @@ include_spip('inc/filtres');
 
 // Balise independante du contexte
 
-// http://doc.spip.org/@balise_FORMULAIRE_INSCRIPTION
+// http://code.spip.net/@balise_FORMULAIRE_INSCRIPTION
 function balise_FORMULAIRE_INSCRIPTION_SPIPBB ($p) {
 
 	return calculer_balise_dynamique($p, 'FORMULAIRE_INSCRIPTION_SPIPBB', array());
@@ -34,7 +34,7 @@ function balise_FORMULAIRE_INSCRIPTION_SPIPBB ($p) {
 // [(#FORMULAIRE_INSCRIPTION{nom_inscription, #ID_RUBRIQUE})]
 // attention en 1.9.3 mode=6forum en 1.9.2 mode=forum !!!!
 
-// http://doc.spip.org/@balise_FORMULAIRE_INSCRIPTION_stat
+// http://code.spip.net/@balise_FORMULAIRE_INSCRIPTION_stat
 function balise_FORMULAIRE_INSCRIPTION_SPIPBB_stat($args, $filtres) {
 	list($mode, $id, $focus) = $args;
 	if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_REQSQL,'<')) {
@@ -56,7 +56,7 @@ function balise_FORMULAIRE_INSCRIPTION_SPIPBB_stat($args, $filtres) {
 // Autrement 2e appel, envoyer un mail et le squelette ne produira pas de
 // formulaire.
 
-// http://doc.spip.org/@balise_FORMULAIRE_INSCRIPTION_dyn
+// http://code.spip.net/@balise_FORMULAIRE_INSCRIPTION_dyn
 function balise_FORMULAIRE_INSCRIPTION_SPIPBB_dyn($mode, $focus, $id=0) {
 	if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_REQSQL,'<')) {
 		$mode='forum';
@@ -107,7 +107,7 @@ function balise_FORMULAIRE_INSCRIPTION_SPIPBB_dyn($mode, $focus, $id=0) {
 // Retour: une chaine message d'erreur
 // ou un tableau avec au minimum email, nom, mode (redac / forum)
 
-// http://doc.spip.org/@test_inscription_dist
+// http://code.spip.net/@test_inscription_dist
 function test_inscription_dist($mode, $mail, $nom, $id=0) {
 
 	include_spip('inc/filtres');
@@ -122,7 +122,7 @@ function test_inscription_dist($mode, $mail, $nom, $id=0) {
 // ou le tableau representant la ligne SQL le decrivant.
 // $mode = 'forum' ou 'redac' selon ce a quoi on s'inscrit
 // $id = une id_rubrique eventuelle (?)
-// http://doc.spip.org/@message_inscription
+// http://code.spip.net/@message_inscription
 function message_inscription($mail, $nom, $mode, $id=0) {
 	if (function_exists('test_inscription'))
 		$f = 'test_inscription';
@@ -156,7 +156,7 @@ function message_inscription($mail, $nom, $mode, $id=0) {
 // provisoirement dans le champ Bio, afin de ne pas visualiser les inactifs
 // A sa premiere connexion il obtiendra son statut final (auth->activer())
 
-// http://doc.spip.org/@inscription_nouveau
+// http://code.spip.net/@inscription_nouveau
 function inscription_nouveau($declaration)
 {
 	if (!isset($declaration['login']))
@@ -181,7 +181,7 @@ function inscription_nouveau($declaration)
 // fonction redefinissable qui doit retourner false si tout est ok
 // ou une chaine non vide expliquant pourquoi le mail n'a pas ete envoye
 
-// http://doc.spip.org/@envoyer_inscription_dist
+// http://code.spip.net/@envoyer_inscription_dist
 function envoyer_inscription_dist($ids, $nom, $mode, $id) {
 	if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_REQSQL,'<')) {
 		include_spip('inc/mail'); // pour nettoyer_titre_email
@@ -211,7 +211,7 @@ function envoyer_inscription_dist($ids, $nom, $mode, $id) {
 		return _T('form_forum_probleme_mail');
 }
 
-// http://doc.spip.org/@test_login
+// http://code.spip.net/@test_login
 function test_login($nom, $mail) {
 	include_spip('inc/charsets');
 	$nom = strtolower(translitteration($nom));
@@ -241,7 +241,7 @@ function test_login($nom, $mail) {
 	}
 }
 
-// http://doc.spip.org/@creer_pass_pour_auteur
+// http://code.spip.net/@creer_pass_pour_auteur
 function creer_pass_pour_auteur($id_auteur) {
 	include_spip('inc/acces');
 	$pass = creer_pass_aleatoire(8, $id_auteur);

@@ -17,7 +17,7 @@ include_spip('inc/plugin');
 include_spip('inc/presentation');
 include_spip('inc/securiser_action');
 
-// http://doc.spip.org/@exec_admin_plugin
+// http://code.spip.net/@exec_admin_plugin
 function exec_layout() {
 	global $connect_statut;
 	global $connect_toutes_rubriques;

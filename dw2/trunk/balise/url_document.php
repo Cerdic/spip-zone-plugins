@@ -1,7 +1,7 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@balise_URL_DOCUMENT_dist
+// http://code.spip.net/@balise_URL_DOCUMENT_dist
 function balise_URL_DOCUMENT_dist($p) {
 	if (!isset($GLOBALS['dw2_param']) or !is_array($GLOBALS['dw2_param'])) {
 		include_spip('inc/dw2_lireconfig');

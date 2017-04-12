@@ -15,13 +15,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/documents');
 
-// http://doc.spip.org/@exec_rubriques_edit_dist
+// http://code.spip.net/@exec_rubriques_edit_dist
 function exec_rubriques_edit_dist()
 {
 	exec_rubriques_edit_args(intval(_request('id_rubrique')), intval(_request('id_parent')), _request('new'));
 }
 
-// http://doc.spip.org/@exec_rubriques_edit_args
+// http://code.spip.net/@exec_rubriques_edit_args
 function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 {
 	global $connect_toutes_rubriques, $champs_extra, $connect_statut, $spip_lang_right;

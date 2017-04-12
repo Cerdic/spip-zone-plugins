@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/rubriques');
 
-// http://doc.spip.org/@action_editer_rubrique_dist
+// http://code.spip.net/@action_editer_rubrique_dist
 function action_editer_rubrique_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -34,7 +34,7 @@ function action_editer_rubrique_dist() {
 }
 
 
-// http://doc.spip.org/@insert_rubrique
+// http://code.spip.net/@insert_rubrique
 function insert_rubrique($id_parent) {
 	include_spip('base/abstract_sql');
 	return spip_abstract_insert("spip_rubriques",
@@ -45,7 +45,7 @@ function insert_rubrique($id_parent) {
 
 // Enregistrer certaines modifications d'une rubrique
 // $c est un tableau qu'on peut proposer en lieu et place de _request()
-// http://doc.spip.org/@revisions_rubriques
+// http://code.spip.net/@revisions_rubriques
 function revisions_rubriques($id_rubrique, $c=false) {
 	include_spip('inc/autoriser');
 	include_spip('inc/filtres');

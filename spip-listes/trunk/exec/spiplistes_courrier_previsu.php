@@ -358,7 +358,7 @@ function exec_spiplistes_courrier_previsu () {
 	exit(0);
 }	
 
-// http://doc.spip.org/@format_mysql_date
+// http://code.spip.net/@format_mysql_date
 function format_mysql_date($annee=0, $mois=0, $jour=0, $h=0, $m=0, $s=0) {
 	$annee = sprintf("%04s",$annee);
 	$mois = sprintf("%02s",$mois);

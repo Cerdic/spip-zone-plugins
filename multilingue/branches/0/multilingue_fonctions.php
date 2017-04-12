@@ -8,7 +8,7 @@ include_spip('inc/config');
 if (!lire_config('multilingue/desactiver_traduction_logo_objet'))
   $traduire_logo = 'ok';
 if ($traduire_logo == 'ok') {
-  // surcharge de http://doc.spip.org/@inc_chercher_logo_dist pour ajouter
+  // surcharge de http://code.spip.net/@inc_chercher_logo_dist pour ajouter
   function inc_chercher_logo($id, $_id_objet, $mode = 'on') {
     include_spip('inc/chercher_logo');
     global $formats_logos;

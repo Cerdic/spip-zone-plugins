@@ -20,7 +20,7 @@ function instituer_auteur_ici($auteur=array()){
 	return $instituer_auteur($auteur);
 }
 
-// http://doc.spip.org/@inc_editer_mot_dist
+// http://code.spip.net/@inc_editer_mot_dist
 function formulaires_editer_auteur_charger_dist($id_auteur='new', $retour='', $lier_id_article=0, $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('auteur',$id_auteur,0,0,$retour,$config_fonc,$row,$hidden);
 	if ($lier_id_article) $valeurs['lier_id_article'] = $lier_id_article;
@@ -40,7 +40,7 @@ function formulaires_editer_auteur_identifier_dist($id_auteur='new', $retour='',
 
 
 // Choix par defaut des options de presentation
-// http://doc.spip.org/@articles_edit_config
+// http://code.spip.net/@articles_edit_config
 function auteurs_edit_config($row)
 {
 	global $spip_ecran, $spip_lang, $spip_display;
@@ -118,7 +118,7 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 	return $erreurs;
 }
 
-// http://doc.spip.org/@inc_editer_mot_dist
+// http://code.spip.net/@inc_editer_mot_dist
 function formulaires_editer_auteur_traiter_dist($id_auteur='new', $retour='', $lier_article=0, $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
 	if (_request('saisie_webmestre') OR _request('webmestre'))
 		set_request('webmestre',_request('webmestre')?_request('webmestre'):'non');

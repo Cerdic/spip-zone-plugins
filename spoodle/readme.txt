@@ -68,7 +68,7 @@ http://www.doodle.com/f7k5dr97ypmgq39a
 
 ////////////     6 AVRIL 2009 ///////////////
 
-http://doc.spip.org/@Les-points-d-entree-pipelines
+http://code.spip.net/@Les-points-d-entree-pipelines
 
 
  http://trac.rezo.net/trac/spip/browser/spip/ecrire/inc_version.php -->
@@ -78,7 +78,7 @@ ici    <necessite id="nomplugin" version="[versionminimale;versionmax]" />
 apl le prefixe déclaré au dessus
 
 pour le contenu du fichier
-http://doc.spip.org/@plugin-xml
+http://code.spip.net/@plugin-xml
 
 
 DECLARER UNE NOUVELLE TABLE

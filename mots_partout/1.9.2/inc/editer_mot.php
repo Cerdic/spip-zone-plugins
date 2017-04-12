@@ -15,7 +15,7 @@ include_spip('inc/actions');
 include_spip('inc/mots');
 include_spip('public/assembler'); //pour recuperer_fond
 
-// http://doc.spip.org/@inc_editer_mot_dist
+// http://code.spip.net/@inc_editer_mot_dist
 function inc_editer_mot($objet, $id_objet, $cherche_mot, $select_groupe, $flag,$simplifie='non') {
 	global $options, $connect_statut, $spip_lang_rtl, $spip_lang_right, $spip_lang;
 	
@@ -126,7 +126,7 @@ function inc_editer_mot($objet, $id_objet, $cherche_mot, $select_groupe, $flag,$
 	return ajax_action_greffe("editer_mot-$id_objet", $res);
 }
 
-// http://doc.spip.org/@inserer_mot
+// http://code.spip.net/@inserer_mot
 function inserer_mot($table, $table_id, $id_objet, $id_mot)
 {
 	$result = spip_num_rows(spip_query("SELECT id_mot FROM $table WHERE id_mot=$id_mot AND $table_id=$id_objet"));
@@ -138,7 +138,7 @@ function inserer_mot($table, $table_id, $id_objet, $id_mot)
 }
 
 
-// http://doc.spip.org/@recherche_mot_cle
+// http://code.spip.net/@recherche_mot_cle
 function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table, $table_id, $url_base)
 {
 	/////////////////////
@@ -191,7 +191,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 	return array($res, $nouveaux_mots);
 }
 
-// http://doc.spip.org/@afficher_mots_cles
+// http://code.spip.net/@afficher_mots_cles
 function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id, $url_base, $visible,$simplifie='non')
 {
 	global $spip_lang_rtl, $spip_lang, $spip_lang_right, $connect_statut, $connect_toutes_rubriques;
@@ -294,7 +294,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 	return $res;
 }
 
-// http://doc.spip.org/@formulaire_mot_remplace
+// http://code.spip.net/@formulaire_mot_remplace
 function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet)
 {
 	$result = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe = $id_groupe ORDER by titre");
@@ -324,7 +324,7 @@ function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_
 }
 
 
-// http://doc.spip.org/@formulaire_mots_cles
+// http://code.spip.net/@formulaire_mots_cles
 function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet,$simplifie='non') {
 
 		
@@ -436,7 +436,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 }
 
 
-// http://doc.spip.org/@menu_mots
+// http://code.spip.net/@menu_mots
 function menu_mots($row, $id_groupes_vus, $les_mots, $cle_objet='',$table="articles")
 {
 	$rand = rand(0,10000); # pour antifocus & ajax
@@ -515,7 +515,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots, $cle_objet='',$table="artic
 
 
 
-// http://doc.spip.org/@select_sous_menu_groupe_mots
+// http://code.spip.net/@select_sous_menu_groupe_mots
 function select_sous_menu_groupe_mots($id_groupe,$table='articles',$niveau=0){
 //fonction recursive qui permet de recuperer larborescence des groupes de mots et les mots
 

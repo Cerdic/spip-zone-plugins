@@ -8,7 +8,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-// http://doc.spip.org/@exec_mots_type_dist
+// http://code.spip.net/@exec_mots_type_dist
 function exec_grappes_edit_dist()
 {
 	$id_grappe= intval(_request('id_grappe'));

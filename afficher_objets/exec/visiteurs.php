@@ -22,7 +22,7 @@ include_spip('inc/presentation');
 // pour que l'affichage par defaut soit les visiteurs
 #@define('AUTEURS_DEFAUT', '!');
 
-// http://doc.spip.org/@exec_auteurs_dist
+// http://code.spip.net/@exec_auteurs_dist
 function exec_visiteurs_dist()
 {
 	$tri = preg_replace('/\W/', '', _request('tri'));
@@ -48,7 +48,7 @@ function exec_visiteurs_dist()
 }
 
 
-// http://doc.spip.org/@exec_auteurs_args
+// http://code.spip.net/@exec_auteurs_args
 function exec_auteurs_args($statut, $tri, $debut, $recherche=NULL, $trouve='', $cherche='')
 {/*
 	if ($recherche !=='') {
@@ -112,7 +112,7 @@ function exec_auteurs_args($statut, $tri, $debut, $recherche=NULL, $trouve='', $
 #	}
 }
 
-// http://doc.spip.org/@bandeau_auteurs
+// http://code.spip.net/@bandeau_auteurs
 function bandeau_auteurs($tri, $visiteurs)
 {
 	global $connect_id_auteur,   $connect_statut,   $connect_toutes_rubriques;
@@ -157,7 +157,7 @@ function bandeau_auteurs($tri, $visiteurs)
 	return $ret;
 }
 
-// http://doc.spip.org/@statut_min_redac
+// http://code.spip.net/@statut_min_redac
 function statut_min_redac($statut)
 {
   $x = (!$statut)
@@ -167,7 +167,7 @@ function statut_min_redac($statut)
   return $statut[0] =='!' ? !$x : $x;
 }
 
-// http://doc.spip.org/@lettres_d_auteurs
+// http://code.spip.net/@lettres_d_auteurs
 function lettres_d_auteurs($query, $debut, $max_par_page, $tri)
 {
 	$auteurs = $lettre = array();
@@ -195,7 +195,7 @@ function lettres_d_auteurs($query, $debut, $max_par_page, $tri)
 	return array($auteurs, $lettre, $nombre_auteurs, $debut);
 }
 
-// http://doc.spip.org/@auteurs_tranches
+// http://code.spip.net/@auteurs_tranches
 function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_page, $nombre_auteurs, $cherche='')
 {
 	global $spip_lang_right;
@@ -298,7 +298,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 	. fin_cadre();
 }
 
-// http://doc.spip.org/@auteurs_href
+// http://code.spip.net/@auteurs_href
 function auteurs_href($clic, $args='', $att='')
 {
 	$h = generer_url_ecrire('auteurs', $args);
@@ -311,7 +311,7 @@ function auteurs_href($clic, $args='', $att='')
 }
 
 
-// http://doc.spip.org/@requete_auteurs
+// http://code.spip.net/@requete_auteurs
 function requete_auteurs($tri, $statut, $recherche=NULL)
 {
 	global $connect_statut, $spip_lang, $connect_id_auteur;
@@ -390,7 +390,7 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 		     'ORDER BY' => $sql_order);
 }
 
-// http://doc.spip.org/@afficher_n_auteurs
+// http://code.spip.net/@afficher_n_auteurs
 function afficher_n_auteurs($auteurs) {
 
 	$res = '';

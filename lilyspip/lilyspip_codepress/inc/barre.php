@@ -18,7 +18,7 @@ $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirn
 
 // construit un bouton (ancre) de raccourci avec icone et aide
 
-// http://doc.spip.org/@bouton_barre_racc
+// http://code.spip.net/@bouton_barre_racc
 function bouton_barre_racc($action, $img, $help, $champhelp) {
 	include_spip('inc/charsets');
 
@@ -42,7 +42,7 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 		."' style=\"height: 16px; width: 16px; background-position: center center;\" alt=\"$a\" /></a>";
 }
 
-// http://doc.spip.org/@afficher_barre
+// http://code.spip.net/@afficher_barre
 function afficher_barre($champ, $forum=false, $lang='') {
 	global $spip_lang, $spip_lang_right, $spip_lang_left, $spip_lang;
 	static $num_barre = 0;
@@ -153,7 +153,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 
 
-// http://doc.spip.org/@afficher_textarea_barre
+// http://code.spip.net/@afficher_textarea_barre
 function afficher_textarea_barre($texte, $forum=false) {
 	global $spip_display, $spip_ecran;
 

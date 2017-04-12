@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@action_tourner_dist
+// http://code.spip.net/@action_tourner_dist
 function action_tourner_dist($arg=null) {
 	if(is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -24,7 +24,7 @@ function action_tourner_dist($arg=null) {
 	} else  action_tourner_post($r[1],$r[2]);
 }
 
-// http://doc.spip.org/@action_tourner_post
+// http://code.spip.net/@action_tourner_post
 function action_tourner_post($id_document,$angle)
 {
 	$row = sql_fetsel("fichier,extension", "spip_documents", "id_document=".intval($id_document));
@@ -103,7 +103,7 @@ function action_tourner_post($id_document,$angle)
 
 // Appliquer l'EXIF orientation
 // cf. http://trac.rezo.net/trac/spip/ticket/1494
-// http://doc.spip.org/@tourner_selon_exif_orientation
+// http://code.spip.net/@tourner_selon_exif_orientation
 function tourner_selon_exif_orientation($id_document, $fichier) {
 
 	if (function_exists('exif_read_data')

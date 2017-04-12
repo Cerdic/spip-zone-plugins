@@ -165,5 +165,5 @@ _ &#169; 2006 - Distribu&eacute; sous licence GPL
 		<action>taches_generales_cron</action>
 		<inclure>template_pipelines_cron.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" /> <!-- voir http://doc.spip.org/@Plugin-xml#necessite -->
+	<necessite id="SPIP" version="[1.9.0;]" /> <!-- voir http://code.spip.net/@Plugin-xml#necessite -->
 </plugin>

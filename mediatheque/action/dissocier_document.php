@@ -44,7 +44,7 @@ function action_dissocier_document_dist($arg=null){
 		spip_log("Interdit de modifier $objet $id_objet $document","spip");
 }
 
-// http://doc.spip.org/@supprimer_lien_document
+// http://code.spip.net/@supprimer_lien_document
 function supprimer_lien_document($id_document, $objet, $id_objet, $supprime = false, $check = false) {
 	if (!$id_document = intval($id_document))
 		return false;

@@ -16,7 +16,7 @@ $GLOBALS['extracteur']['doc'] = 'extracteur_doc';
 // Exemple pour utilisation sous Linux : define("_FULLTEXT_DOC_EXE","/usr/local/bin/catdoc");
 // Exemple d'option pour extraction de .doc au format Windows vers format iso-8859-1  : define("_FULLTEXT_DOC_CMD_OPTIONS","-s cp1252 -d 8859-1 ");
 // Les anciens developpements pour les autres librairies (metamail, wvText, antiword) ont ete conservee.
-// http://doc.spip.org/@extracteur_doc
+// http://code.spip.net/@extracteur_doc
 function extracteur_doc($fichier, &$charset, $bin='', $opt = '') {
 
 	$charset = 'iso-8859-1';

@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@action_editer_mot_dist
+// http://code.spip.net/@action_editer_mot_dist
 function action_editer_mot_dist() {
 
 	
@@ -24,7 +24,7 @@ function action_editer_mot_dist() {
 	else action_editer_mot_post($r);
 }
 
-// http://doc.spip.org/@action_editer_mot_post
+// http://code.spip.net/@action_editer_mot_post
 function action_editer_mot_post($r)
 {
 	$redirect = _request('redirect');

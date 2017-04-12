@@ -22,11 +22,11 @@ $GLOBALS['extracteur'] = array (
 );
 
 // Filtres d'indexation
-// http://doc.spip.org/@unserialize_join
+// http://code.spip.net/@unserialize_join
 function unserialize_join($extra){
 	return @join(' ', unserialize($extra));
 }
-// http://doc.spip.org/@contenu_page_accueil
+// http://code.spip.net/@contenu_page_accueil
 function contenu_page_accueil($url){
 	$texte = '';
 	if ($GLOBALS['meta']["visiter_sites"] == "oui") {
@@ -38,7 +38,7 @@ function contenu_page_accueil($url){
 }
 
 // Extracteur des documents 'txt'
-// http://doc.spip.org/@extracteur_txt
+// http://code.spip.net/@extracteur_txt
 function extracteur_txt($fichier, &$charset) {
 	lire_fichier($fichier, $contenu);
 
@@ -51,7 +51,7 @@ function extracteur_txt($fichier, &$charset) {
 }
 
 // Extracteur des documents 'html'
-// http://doc.spip.org/@extracteur_html
+// http://code.spip.net/@extracteur_html
 function extracteur_html($fichier, &$charset) {
 	lire_fichier($fichier, $contenu);
 
@@ -64,7 +64,7 @@ function extracteur_html($fichier, &$charset) {
 }
 
 // Indexer le contenu d'un document
-// http://doc.spip.org/@indexer_contenu_document
+// http://code.spip.net/@indexer_contenu_document
 function indexer_contenu_document ($row, $min_long=3) {
 	global $extracteur;
 
@@ -103,7 +103,7 @@ function indexer_contenu_document ($row, $min_long=3) {
 }
 
 // n'indexer que les objets publies
-// http://doc.spip.org/@critere_indexation
+// http://code.spip.net/@critere_indexation
 function critere_indexation($table) {
 	global $INDEX_critere_indexation;
 	if (isset($INDEX_critere_indexation[$table]))
@@ -112,7 +112,7 @@ function critere_indexation($table) {
 	  return '1=1'; // indexation par defaut
 }
 
-// http://doc.spip.org/@deja_indexe
+// http://code.spip.net/@deja_indexe
 function deja_indexe($table, $id_objet) {
 	$id_table = id_index_table($table);
 	$n = sql_countsel(
@@ -122,7 +122,7 @@ function deja_indexe($table, $id_objet) {
 	return ($n > 0);
 }
 
-// http://doc.spip.org/@indexer_objet
+// http://code.spip.net/@indexer_objet
 function indexer_objet($table, $id_objet, $forcer_reset = true) {
 
 	global $index, $mots;
@@ -207,7 +207,7 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 }
 
 
-// http://doc.spip.org/@primary_index_table
+// http://code.spip.net/@primary_index_table
 function primary_index_table($table){
 	global $tables_principales;
 	/*global $table_des_tables;
@@ -262,12 +262,12 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 }
 
 
-// http://doc.spip.org/@creer_liste_indexation
+// http://code.spip.net/@creer_liste_indexation
 function creer_liste_indexation() {
 	spip_query("UPDATE spip_indexation SET idx=0");
 }
 
-// http://doc.spip.org/@liste_index_tables
+// http://code.spip.net/@liste_index_tables
 function liste_index_tables() {
 	$liste_tables = array();
 	if (!isset($GLOBALS['meta']['index_table'])) {
@@ -278,7 +278,7 @@ function liste_index_tables() {
 	return $liste_tables;
 }
 
-// http://doc.spip.org/@id_index_table
+// http://code.spip.net/@id_index_table
 function id_index_table($table){
 	/*global $table_des_tables;
 	$t = $table_des_tables[$table];
@@ -297,7 +297,7 @@ function id_index_table($table){
 // pour les tables additionnelles, selon l'ordre dans lequel
 // elles sont reperees. On stocke le tableau de conversion table->id_table
 // dans spip_meta
-// http://doc.spip.org/@update_index_tables
+// http://code.spip.net/@update_index_tables
 function update_index_tables(){
 	global $tables_principales;
 	global $INDEX_tables_interdites;
@@ -486,7 +486,7 @@ if ($reindex)
 
 
 // Renvoie la liste des "mots" d'un texte (ou d'une requete adressee au moteur)
-// http://doc.spip.org/@mots_indexation
+// http://code.spip.net/@mots_indexation
 function nettoyer_texte_indexation($texte) {
 	include_spip('inc/charsets');
 	include_spip('inc/texte');
@@ -506,7 +506,7 @@ function nettoyer_texte_indexation($texte) {
 }
 
 
-// http://doc.spip.org/@indexer_chaine
+// http://code.spip.net/@indexer_chaine
 function indexer_chaine($texte, $val = 1, $min_long = 3) {
 	global $index, $mots;
 
@@ -516,7 +516,7 @@ function indexer_chaine($texte, $val = 1, $min_long = 3) {
 	$mots = trim($mots.' * '.$texte);
 }
 
-// http://doc.spip.org/@indexer_les_champs
+// http://code.spip.net/@indexer_les_champs
 function indexer_les_champs(&$row,&$index_desc,$ponderation = 1, $min_long=3){
 	reset($index_desc);
 	while (list($quoi,$poids) = each($index_desc)){
@@ -548,7 +548,7 @@ function indexer_les_champs(&$row,&$index_desc,$ponderation = 1, $min_long=3){
 }
 
 // Indexer les documents, auteurs, mots-cles associes a l'objet
-// http://doc.spip.org/@indexer_elements_associes
+// http://code.spip.net/@indexer_elements_associes
 function indexer_elements_associes($table, $id_objet, $table_associe, $valeur, $min_long=3) {
 	global $INDEX_elements_associes, $tables_jointures, $tables_auxiliaires, $tables_principales;
 
@@ -596,7 +596,7 @@ function indexer_elements_associes($table, $id_objet, $table_associe, $valeur, $
 
 
 // API pour l'espace prive pour marquer un objet d'une table a reindexer
-// http://doc.spip.org/@marquer_indexer
+// http://code.spip.net/@marquer_indexer
 function Indexation_post_edition ($x) {
 	$table = $x['args']['table'];
 

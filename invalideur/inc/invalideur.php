@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('base/serial');
 include_spip('inc/meta');
 
-// http://doc.spip.org/@supprime_invalideurs
+// http://code.spip.net/@supprime_invalideurs
 function supprime_invalideurs() {
 	spip_query("DELETE FROM spip_caches");
 }
@@ -30,7 +30,7 @@ function taille_du_cache() {
 //
 // Calcul des pages : noter dans la base les liens d'invalidation
 //
-// http://doc.spip.org/@maj_invalideurs
+// http://code.spip.net/@maj_invalideurs
 function maj_invalideurs ($fichier, &$page) {
 	// ne pas noter les POST et les delais=0
 	if ($fichier == '') return;
@@ -54,7 +54,7 @@ function maj_invalideurs ($fichier, &$page) {
 // pour les forums l'invalideur est : 'id_forum/a23'
 // pour les petitions et autres, l'invalideur est par exemple :
 // 'varia/pet60'
-// http://doc.spip.org/@insere_invalideur
+// http://code.spip.net/@insere_invalideur
 function insere_invalideur($inval, $fichier) {
 	if ($inval)
 	foreach ($inval as $type => $a) {
@@ -72,7 +72,7 @@ function insere_invalideur($inval, $fichier) {
 // Invalider les caches lies a telle condition
 // on en profite pour noter la date de mise a jour dans les metas
 //
-// http://doc.spip.org/@suivre_invalideur
+// http://code.spip.net/@suivre_invalideur
 function suivre_invalideur($cond, $modif=true) {
 	if ($modif) {
 		ecrire_meta('derniere_modif', time());
@@ -91,7 +91,7 @@ function suivre_invalideur($cond, $modif=true) {
 //
 // Supprimer les vieux caches
 //
-// http://doc.spip.org/@retire_vieux_caches
+// http://code.spip.net/@retire_vieux_caches
 function retire_vieux_caches() {
 	$condition = "type='t' AND id<".time();
 	suivre_invalideur($condition);
@@ -101,7 +101,7 @@ function retire_vieux_caches() {
 //
 // Marquer les fichiers caches invalides comme etant a supprimer
 //
-// http://doc.spip.org/@applique_invalideur
+// http://code.spip.net/@applique_invalideur
 function applique_invalideur($depart) {
 
 	if ($depart) {
@@ -128,7 +128,7 @@ function applique_invalideur($depart) {
 
 // Utilisee pour vider le cache depuis l'espace prive
 // (ou juste les squelettes si un changement de config le necessite)
-// http://doc.spip.org/@purger_repertoire
+// http://code.spip.net/@purger_repertoire
 function purger_repertoire($dir) {
 	$handle = @opendir($dir);
 	if (!$handle) return;
@@ -146,7 +146,7 @@ function purger_repertoire($dir) {
 	closedir($handle);
 }
 
-// http://doc.spip.org/@cron_invalideur
+// http://code.spip.net/@cron_invalideur
 function cron_invalideur($t) {
 	//
 	// menage des vieux fichiers du cache
@@ -184,7 +184,7 @@ function cron_invalideur($t) {
 //
 
 // Securite : est sur que c'est un cache
-// http://doc.spip.org/@retire_cache
+// http://code.spip.net/@retire_cache
 function retire_cache($cache) {
 
 	if (preg_match(
@@ -197,7 +197,7 @@ function retire_cache($cache) {
 }
 
 // Supprimer les caches marques "x"
-// http://doc.spip.org/@retire_caches
+// http://code.spip.net/@retire_caches
 function retire_caches($chemin = '') {
 	include_spip('base/abstract_sql');
 	lire_metas();
@@ -256,7 +256,7 @@ function retire_caches($chemin = '') {
 // Pour que le compilo ajoute un invalideur a la balise #PARAMETRES_FORUM
 // Noter l'invalideur de la page contenant ces parametres,
 // en cas de premier post sur le forum
-// http://doc.spip.org/@code_invalideur_forums
+// http://code.spip.net/@code_invalideur_forums
 function code_invalideur_forums($p, $code) {
 	$type = 'id_forum';
 	$valeur = "\n\t\tcalcul_index_forum("
@@ -273,7 +273,7 @@ function code_invalideur_forums($p, $code) {
 
 
 // Fonction permettant au compilo de calculer les invalideurs d'une page
-// http://doc.spip.org/@calcul_invalideurs
+// http://code.spip.net/@calcul_invalideurs
 function calcul_invalideurs($corps, $primary, &$boucles, $id_boucle) {
 	if ($primary == 'id_forum'
 	OR in_array($primary, explode(',', $GLOBALS['invalider_caches']))) {

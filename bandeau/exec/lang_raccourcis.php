@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/traduire');
 
-// http://doc.spip.org/@exec_lang_raccourcis_dist
+// http://code.spip.net/@exec_lang_raccourcis_dist
 function exec_lang_raccourcis_dist() {
 	global  $spip_lang_left;
 
@@ -64,7 +64,7 @@ function exec_lang_raccourcis_dist() {
 
 }
 
-// http://doc.spip.org/@afficher_raccourcis
+// http://code.spip.net/@afficher_raccourcis
 function afficher_raccourcis($module = "public") {
 	global $spip_lang;
 	

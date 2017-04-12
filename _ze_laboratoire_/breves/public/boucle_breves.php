@@ -5,7 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // <BOUCLE(BREVES)>
 //
-// http://doc.spip.org/@boucle_BREVES_dist
+// http://code.spip.net/@boucle_BREVES_dist
 function boucle_BREVES_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;

@@ -24,7 +24,7 @@ if(!function_exists('icone_inline')) {
 	}
 }
 
-// http://doc.spip.org/@exec_mots_tous_dist
+// http://code.spip.net/@exec_mots_tous_dist
 function exec_mots_tous_dist()
 {
 	global $spip_lang, $spip_lang_left, $spip_lang_right, $son_groupe;
@@ -160,7 +160,7 @@ function exec_mots_tous_dist()
 	echo fin_gauche(), fin_page();
 }
 
-// http://doc.spip.org/@confirmer_mot
+// http://code.spip.net/@confirmer_mot
 function confirmer_mot ($conf_mot, $son_groupe, $total)
 {
 	$row = spip_fetch_array(spip_query("SELECT * FROM spip_mots WHERE id_mot=$conf_mot"));

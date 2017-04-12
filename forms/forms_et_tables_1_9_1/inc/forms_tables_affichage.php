@@ -32,7 +32,7 @@ function forms_inserer_crayons($out){
 }
 
 // l'argument align n'est plus jamais fourni
-// http://doc.spip.org/@icone
+// http://code.spip.net/@icone
 function icone_etendue($texte, $lien, $fond, $fonction="", $align="", $afficher='oui', $expose=false){
 	global $spip_display;
 

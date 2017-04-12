@@ -29,7 +29,7 @@ function mutu_minipres($titre="",$contenu=""){
 	return minipres($titre,"<div class='petit-centre'>" . $contenu . "</div>");
 }
 
-// http://doc.spip.org/@mutualiser_creer
+// http://code.spip.net/@mutualiser_creer
 function mutualiser_creer($e, $options) {
 	include_spip('base/abstract_sql');
 	include_once(dirname(__FILE__).'/base/abstract_mutu.php');

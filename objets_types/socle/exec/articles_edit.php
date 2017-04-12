@@ -16,7 +16,7 @@ include_spip('inc/presentation');
 include_spip('inc/article_select');
 include_spip('inc/documents');
 
-// http://doc.spip.org/@exec_articles_edit_dist
+// http://code.spip.net/@exec_articles_edit_dist
 function exec_articles_edit_dist()
 {
 	exec_articles_edit_args(_request('id_article'), // intval plus tard
@@ -27,7 +27,7 @@ function exec_articles_edit_dist()
 }
 
 
-// http://doc.spip.org/@exec_articles_edit_args
+// http://code.spip.net/@exec_articles_edit_args
 function exec_articles_edit_args($id_article, $id_rubrique,$lier_trad,  $id_version, $new)
 {
 	$row = article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad, $id_version);
@@ -42,7 +42,7 @@ function exec_articles_edit_args($id_article, $id_rubrique,$lier_trad,  $id_vers
 	} else articles_edit($id_article, $id_rubrique,$lier_trad, $id_version, $new, 'articles_edit_config', $row);
 }
 
-// http://doc.spip.org/@articles_edit
+// http://code.spip.net/@articles_edit
 function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new, $config_fonc, $row)
 {
 	$id_article = $row['id_article'];
@@ -98,7 +98,7 @@ function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new,
 	echo fin_gauche(), fin_page();
 }
 
-// http://doc.spip.org/@articles_edit_presentation
+// http://code.spip.net/@articles_edit_presentation
 function articles_edit_presentation($new, $id_rubrique, $lier_trad, $id_article, $titre)
 {
 	global $spip_lang_right;

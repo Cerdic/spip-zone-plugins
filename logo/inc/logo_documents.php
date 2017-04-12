@@ -5,7 +5,7 @@ if (!function_exists('check_upload_error')) {
     // renvoie false si pas d'erreur
     // et true si erreur = pas de fichier
     // pour les autres erreurs affiche le message d'erreur et meurt
-    // http://doc.spip.org/@check_upload_error
+    // http://code.spip.net/@check_upload_error
     function check_upload_error($error, $msg='') {
 	    global $spip_lang_right;
 
@@ -58,7 +58,7 @@ if (!function_exists('deplacer_fichier_upload')) {
     /**
      * Deplacer ou copier un fichier
      *
-     * http://doc.spip.org/@deplacer_fichier_upload
+     * http://code.spip.net/@deplacer_fichier_upload
      *
      * @param string $source
      * @param string $dest

@@ -34,7 +34,7 @@ function formulaires_editer_relecture_verifier_dist($id_relecture='oui', $redire
 	return $erreurs;
 }
 
-// http://doc.spip.org/@inc_editer_article_dist
+// http://code.spip.net/@inc_editer_article_dist
 function formulaires_editer_relecture_traiter_dist($id_relecture='oui', $redirect='') {
 
 	// Ouverture d'une relecture sur un article

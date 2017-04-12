@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/filtres');
 
-// http://doc.spip.org/@action_referencer_traduction_dist
+// http://code.spip.net/@action_referencer_traduction_dist
 function action_referencer_traduction_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -54,7 +54,7 @@ function action_referencer_traduction_dist() {
 	}
 }
 
-// http://doc.spip.org/@instituer_langue_article
+// http://code.spip.net/@instituer_langue_article
 function instituer_langue_article($id_article, $id_rubrique) {
 
 	$changer_lang = _request('changer_lang');
@@ -71,7 +71,7 @@ function instituer_langue_article($id_article, $id_rubrique) {
 		}
 	}
 }
-// http://doc.spip.org/@instituer_langue_article
+// http://code.spip.net/@instituer_langue_article
 function instituer_langue_rubrique($id_rubrique) {
 
 	$changer_lang = _request('changer_lang');

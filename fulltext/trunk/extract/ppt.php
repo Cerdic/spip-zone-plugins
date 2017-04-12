@@ -17,7 +17,7 @@ $GLOBALS['extracteur']['ppt'] = 'extracteur_ppt';
 // Necessite catppt de la librairie catdoc (à définir dans _FULLTEXT_PPT_EXE dans mes_options.php ou dans le panneau de configuration) :
 // Exemple pour utilisation en local sous Windows : define("_FULLTEXT_PPT_EXE","C:\catdoc\catppt.exe");
 // Exemple pour utilisation sous Linux : define("_FULLTEXT_PPT_EXE","/usr/local/bin/catppt");
-// http://doc.spip.org/@extracteur_ppt
+// http://code.spip.net/@extracteur_ppt
 function extracteur_ppt($fichier, &$charset, $bin = '', $opt = '') {
 	$charset = 'iso-8859-1';
 
