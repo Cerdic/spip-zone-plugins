@@ -143,13 +143,16 @@ function objets_virtuels_objet_compte_enfants($flux) {
  * @return array
  */
 function objets_virtuels_calculer_rubriques($flux) {
-	$rubriques_virtuelles_non_publiees = sql_allfetsel(
-		'id_rubrique, statut, id_parent',
-		'spip_rubriques',
-		'statut_tmp != "publie" AND virtuel != ""'
-	);
-	foreach ($rubriques_virtuelles_non_publiees as $rub) {
-		sql_updateq('spip_rubriques', array('statut_tmp'=> 'publie'), 'id_rubrique='.intval($rub['id_rubrique']));
+	include_spip('objets_virtuels_fonctions');
+	if (in_array('spip_rubriques', objets_virtuels_tables_actives())) {
+		$rubriques_virtuelles_non_publiees = sql_allfetsel(
+			'id_rubrique, statut, id_parent',
+			'spip_rubriques',
+			'statut_tmp != "publie" AND virtuel != ""'
+		);
+		foreach ($rubriques_virtuelles_non_publiees as $rub) {
+			sql_updateq('spip_rubriques', array('statut_tmp' => 'publie'), 'id_rubrique=' . intval($rub['id_rubrique']));
+		}
 	}
 	return $flux;
 }
@@ -172,9 +175,11 @@ if (!function_exists('autoriser_rubrique_supprimer')) {
 	 */
 	function autoriser_rubrique_supprimer($faire, $type, $id, $qui, $opt) {
 		include_spip('objets_virtuels_fonctions');
-		$virtuel = quete_objet_virtuel('rubrique', intval($id));
-		if (strlen($virtuel) > 0) {
-			return false;
+		if (in_array('spip_rubriques', objets_virtuels_tables_actives())) {
+			$virtuel = quete_objet_virtuel('rubrique', intval($id));
+			if (strlen($virtuel) > 0) {
+				return false;
+			}
 		}
 		return autoriser_rubrique_supprimer_dist($faire, $type, $id, $qui, $opt);
 	}
