@@ -26,18 +26,19 @@ function action_selection_interface() {
 		}
 		sql_updateq("spip_pb_selection", array("ordre" => $ordre_prec), "id_rubrique = '$id_rubrique' AND id_article='$remonter'");
 		sql_updateq("spip_pb_selection", array("ordre" => $ordre), "id_rubrique = '$id_rubrique' AND id_article='$art_prec'");
+		// invalider les caches
+		include_spip('inc/invalideur');
+		suivre_invalideur("id='id_rubrique/$id_rubrique'");
 	}
-	
-
 
 
 	if ($_GET["descendre_ordre"] > 0) {
 		$descendre = _request("descendre_ordre");
-	
+
 		if (!autoriser('modifier','rubrique', $id_rubrique)) die ("Interdit");
-	
+
 		$result = sql_select("ordre", "spip_pb_selection", "id_rubrique=$id_rubrique AND id_article=$descendre", "", "ordre");
-		
+
 		if ($row = sql_fetch($result)) {
 			$ordre = $row["ordre"];
 			
@@ -48,7 +49,9 @@ function action_selection_interface() {
 	
 				sql_updateq("spip_pb_selection", array("ordre" => $ordre_suiv), "id_rubrique = '$id_rubrique' AND id_article='$descendre'");
 				sql_updateq("spip_pb_selection", array("ordre" => $ordre), "id_rubrique = '$id_rubrique' AND id_article='$art_suiv'");
-	
+				// invalider les caches
+				include_spip('inc/invalideur');
+				suivre_invalideur("id='id_rubrique/$id_rubrique'");
 			}
 		
 		}
@@ -74,7 +77,9 @@ function action_selection_interface() {
 				}
 				$ordre ++;
 				sql_insertq("spip_pb_selection", array('id_rubrique' => $id_rubrique, 'id_article'=>$ajouter, 'ordre'=>$ordre));
-				
+				// invalider les caches
+				include_spip('inc/invalideur');
+				suivre_invalideur("id='id_rubrique/$id_rubrique'");
 			}
 	
 		} else {
@@ -89,7 +94,9 @@ function action_selection_interface() {
 		
 		if (!autoriser('modifier','rubrique', $id_rubrique)) die ("Interdit");
 		sql_delete("spip_pb_selection", "id_rubrique=$id_rubrique AND id_article=$supprimer");
-	
+		// invalider les caches
+		include_spip('inc/invalideur');
+		suivre_invalideur("id='id_rubrique/$id_rubrique'");
 	}
 
 	if ($_GET["nouvel_ordre"]) {
@@ -108,6 +115,9 @@ function action_selection_interface() {
 							'ordre'=>$ordre)
 						);
 			}
+			// invalider les caches
+			include_spip('inc/invalideur');
+			suivre_invalideur("id='id_rubrique/$id_rubrique'");
 		}
 	}
 
