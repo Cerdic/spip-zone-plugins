@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'abbr_hors_taxe' => 'HT',
 	'abbr_prix_unitaire' => 'P.U',
 	'abbr_quantite' => 'Qté',
+	'abbr_total_ht' => 'Total HT',
 	'abbr_toutes_taxes_comprises' => 'TTC',
 	'action_facture' => 'Facture',
 	'action_modifier' => 'Modifier',

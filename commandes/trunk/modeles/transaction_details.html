@@ -1,50 +1,50 @@
 <BOUCLE_transaction(TRANSACTIONS){id_transaction}>
-#SET{ttc,''}
-#SET{ht,''}
+[(#REM)
+  Montant total de la facture : si c'est le montant de la transaction
+   ce qui couvre tous les cas d'usage : 1ere transaction d'une facture ou Xeme transaction (paiement en plusieurs fois, paiements recurrents)
+	Sur la premiere transaction d'une commande on detail les prix unitaires car ils sont OK, sur les transactions suivantes on ne mets pas de detail, uniquement le prix total
+   en general on a 1 seul article (abonnement) donc ca va, sinon tant pis...
+]
+#SET{ttc,#MONTANT}
+#SET{ht,#MONTANT_HT}
+#SET{afficher_prix_detail,' '}
+<BOUCLE_nbtrans(TRANSACTIONS){id_commande}{statut=ok}{1,1}>#SET{afficher_prix_detail,''}</BOUCLE_nbtrans>
 <BOUCLE_commande(COMMANDES){id_commande}>
 <B_liste>
 <table>
 	<thead>
 		<tr>
 			<th class="descriptif"><:commandes:designation:></th>
-			<th class="quantite"><abbr title="<:commandes:label_quantite|attribut_html:>"><:commandes:abbr_quantite:></abbr></th>
 			<th class="taxe"><:commandes:label_taxe:></th>
-			<th class="montant"><abbr title="<:commandes:label_prix_unitaire|attribut_html:>"><:commandes:abbr_prix_unitaire:></abbr></th>
+			<th class="quantite"><abbr title="<:commandes:label_quantite|attribut_html:>"><:commandes:abbr_quantite:></abbr></th>
+			<th class="prix_unitaire"><abbr title="<:commandes:label_prix_unitaire|attribut_html:>"><:commandes:abbr_prix_unitaire:></abbr></th>
+			<th class="montant"><abbr title="<:commandes:label_total_ht|attribut_html:>"><:commandes:abbr_total_ht:></abbr></th>
 		</tr>
 		</thead>
 	<tbody>
 		<BOUCLE_liste(COMMANDES_DETAILS)
 			{id_commande}{par id_commandes_detail}
 		>
-		[(#REM)
-			Si la transaction est un montant différent du total de la commande
-			on considère que c'est un renouvellement de commande
-			et on part du principe que pour les renouvellements,
-			ce sont forcément des commandes avec UNE SEULE chose.
-		]
-		<BOUCLE_test_renouvellement(CONDITION){si #MONTANT*|floatval|round{2}|!={#PRIX*|round{2}}}>
-		#SET{ttc,#MONTANT*|floatval|round{2}}
-		#SET{ht,#GET{ttc}|div{#TAXE*|plus{1}}|round{2}}
-		</BOUCLE_test_renouvellement>
 		<tr>
-			<td class="descriptif">[(#QUANTITE|>{1}|oui)<strong>#QUANTITE &times; </strong>][(#DESCRIPTIF*|typo|supprimer_numero)]</td>
+			<td class="descriptif">[(#DESCRIPTIF*|typo|supprimer_numero)]</td>
+			<td class="taxe[ (#TAXE*|floatval|>{0.0}|non)null]">[(#GET{afficher_prix_detail}|oui) [(#TAXE*|mult{100}|number_format{1})%] ]</td>
 			<td class="quantite[ (#QUANTITE*|>{0}|non)null]">[(#QUANTITE)]</td>
-			<td class="taxe[ (#TAXE*|floatval|>{0.0}|non)null]">[(#TAXE*|mult{100}|number_format{1})&nbsp;%]</td>
-			<td class="montant">[(#GET{ht}|sinon{#PRIX_UNITAIRE_HT*}|round{2}|prix_formater)]</td>
+			<td class="prix_unitaire">[(#GET{afficher_prix_detail}|oui) [(#PRIX_UNITAIRE_HT*|round{2}|prix_formater)] ]</td>
+			<td class="montant">[(#GET{afficher_prix_detail}|oui) [(#PRIX_UNITAIRE_HT*|mult{#QUANTITE}|round{2}|prix_formater)] ]</td>
 		</tr>
 		</BOUCLE_liste>
 	</tbody>
 	<tfoot>
 		<tr>
-			<td class="def" colspan="3"><:prix:label_total_ht:></td>
+			<td class="def" colspan="4"><:prix:label_total_ht:></td>
 			<td class="montant">[(#GET{ht}|sinon{#PRIX_HT*}|prix_formater)]</td>
 		</tr>		
 		<tr>
-			<td class="def" colspan="3"><:prix:label_taxes:></td>
+			<td class="def" colspan="4"><:prix:label_taxes:></td>
 			<td class="montant">[(#GET{ttc}|sinon{#PRIX*}|moins{#GET{ht}|sinon{#PRIX_HT*}}|prix_formater)]</td>
 		</tr>		
 		<tr class="total_ttc">
-			<td class="def" colspan="3"><:prix:label_total_ttc:></td>
+			<td class="def" colspan="4"><:prix:label_total_ttc:></td>
 			<td class="montant">[(#GET{ttc}|sinon{#PRIX*}|prix_formater)]</td>
 		</tr>		
 	</tfoot>
