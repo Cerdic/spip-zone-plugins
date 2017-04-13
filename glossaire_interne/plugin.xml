@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Glossaire interne</nom>
 	<slogan>Gestion automatique d'un glossaire interne au site</slogan>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<prefix>Glossaire</prefix>
 	<etat>stable</etat>
 	<licence>GNU/GPL</licence>
@@ -18,5 +18,5 @@
 		<nom>insert_head</nom>
 	</pipeline>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[1.9.0;3.2.*]" />
+	<necessite id="SPIP" version="[1.9.0;3.2.99]" />
 </plugin>
