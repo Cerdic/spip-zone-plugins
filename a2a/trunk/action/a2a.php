@@ -79,6 +79,9 @@ function action_a2a_lier_article_dist($id_article_cible, $id_article_source, $ty
 				'type_liaison' => $type_liaison,
 				));
 	}
+	// invalider les caches
+	include_spip('inc/invalideur');
+	suivre_invalideur("id='id_article/$id_article_source'");
 	return true;
 }
 
@@ -143,7 +146,9 @@ function action_a2a_modifier_rang_dist($id_article_cible, $id_article, $type_lia
 		//on met à jour le rang de l'article à modifier
 		sql_update('spip_articles_lies', array('rang' => --$rang), 'id_article=' . sql_quote($id_article) . ' AND id_article_lie=' . sql_quote($id_article_cible) . ' AND type_liaison=' . sql_quote($type_liaison));
 	}
-
+	// invalider les caches
+	include_spip('inc/invalideur');
+	suivre_invalideur("id='id_article/$id_article'");
 	return true;
 }
 
