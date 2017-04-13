@@ -99,10 +99,18 @@ function formulaires_rediriger_objet_virtuel_traiter_dist($objet, $id_objet, $re
 	include_spip('action/editer_objet');
 	objet_modifier($objet, $id_objet, ['virtuel' => $url]);
 
+	// Exception : si c'est une rubrique, la publier.
+	if (objet_type($objet) == 'rubrique') {
+		sql_updateq(table_objet_sql($objet), array('statut' => 'publie'), id_table_objet($objet) . '=' . $id_objet);
+	}
+
 	// malheureusement le ajax=wysiwyg n'est pas toujours présent sur l’inclusion prive/objets/contenu/xx,
 	// donc ce JS n'actualise pas toujours le centre de la page.
 	$js = _AJAX ? '<script type="text/javascript">
-		if (window.ajaxReload) $("#objet_virtuel").ajaxReload({args:{virtuel:"' . $url . '"}});
+		if (window.ajaxReload) {
+			$("#objet_virtuel").ajaxReload({args:{virtuel:"' . $url . '"}});
+			ajaxReload("navigation");
+		}
 	</script>' : '';
 
 	return [

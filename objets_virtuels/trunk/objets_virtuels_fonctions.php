@@ -49,10 +49,11 @@ function lien_objet_virtuel($virtuel) {
  *
  * @param string $objet
  * @param int $id_objet
- * @param stsring $connect
+ * @param string $connect
+ * @param bool $statut Test du statut ?
  * @return array|bool|null
  */
-function quete_objet_virtuel($objet, $id_objet, $connect) {
+function quete_objet_virtuel($objet, $id_objet, $connect = '', $statut = false) {
 	$table = table_objet_sql($objet);
 	$infos = lister_tables_objets_sql($table);
 	$id_table_objet = id_table_objet($objet);
@@ -61,7 +62,7 @@ function quete_objet_virtuel($objet, $id_objet, $connect) {
 
 	// gros bazar pour prendre en compte du mieux que l'on peut le champ statut
 	// s'il y en a un de déclaré.
-	if (!empty($infos['statut'])) {
+	if ($statut and !empty($infos['statut'])) {
 		$principal = array_shift($infos['statut']);
 		if (
 			!empty($principal['champ'])
@@ -114,7 +115,7 @@ function public_tester_redirection($fond, $contexte, $connect) {
 			and $id_objet = intval($contexte[$id_table_objet])
 		) {
 			$objet = objet_type($table);
-			$m = quete_objet_virtuel($objet, $id_objet, $connect);
+			$m = quete_objet_virtuel($objet, $id_objet, $connect, true);
 			if (strlen($m)) {
 				include_spip('inc/texte');
 				// les navigateurs pataugent si l'URL est vide

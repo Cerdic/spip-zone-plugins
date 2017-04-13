@@ -73,6 +73,7 @@ function objets_virtuels_afficher_config_objet($flux) {
  *     Données du pipeline
  */
 function objets_virtuels_affiche_milieu($flux) {
+	include_spip('objets_virtuels_fonctions');
 
 	// si on est sur une page ou il faut inserer les mots cles...
 	if ($desc = trouver_objet_exec($flux['args']['exec'])
@@ -84,7 +85,7 @@ function objets_virtuels_affiche_milieu($flux) {
 		and ($id = intval($flux['args'][$id_table_objet]))
 		and (in_array($desc['table_objet_sql'], objets_virtuels_tables_actives()))
 	) {
-		$virtuel = sql_getfetsel('virtuel', $desc['table_objet_sql'], $id_table_objet . '=' . $id);
+		$virtuel = quete_objet_virtuel($desc['table'], $id);
 		$texte = recuperer_fond(
 			'prive/squelettes/inclure/redirection_objet_virtuel',
 			['virtuel' => $virtuel],
@@ -100,4 +101,81 @@ function objets_virtuels_affiche_milieu($flux) {
 	}
 
 	return $flux;
+}
+
+
+/**
+ * Insertion dans le pipeline objet_compte_enfants (SPIP)
+ *
+ * Une objet est considérée comme vide lorsqu'il n'a pas d'objets liés (articles, rubriques, documents).
+ * Ici on impose que le champ "virtuel" doit être vide pour que l'objet soit considéré comme vide.
+ *
+ * @pipeline objet_compte_enfants
+ * @param array $flux
+ * @return array
+ */
+function objets_virtuels_objet_compte_enfants($flux) {
+	include_spip('objets_virtuels_fonctions');
+
+	if (
+		$objet = $flux['args']['objet']
+		and $id_objet = $flux['args']['id_objet']
+		and $table = table_objet_sql($objet)
+		and in_array($table, objets_virtuels_tables_actives())
+	) {
+		$virtuel = quete_objet_virtuel($objet, $id_objet);
+		if (strlen(trim($virtuel)) > 0) {
+			$flux['data']['redirection'] = 1;
+		}
+	}
+	return $flux;
+}
+
+
+/**
+ * Insertion dans le pipeline calculer_rubriques (SPIP)
+ * (cf calculer_rubriques_publiees() dans inc/rubriques)
+ *
+ * Évite de dépublier une rubrique avec une redirection
+ *
+ * @pipeline calculer_rubriques
+ * @param array $flux
+ * @return array
+ */
+function objets_virtuels_calculer_rubriques($flux) {
+	$rubriques_virtuelles_non_publiees = sql_allfetsel(
+		'id_rubrique, statut, id_parent',
+		'spip_rubriques',
+		'statut_tmp != "publie" AND virtuel != ""'
+	);
+	foreach ($rubriques_virtuelles_non_publiees as $rub) {
+		sql_updateq('spip_rubriques', array('statut_tmp'=> 'publie'), 'id_rubrique='.intval($rub['id_rubrique']));
+	}
+	return $flux;
+}
+
+/**
+ * Pipeline d'autorisation
+ * @pipeline autoriser
+ */
+function objets_virtuels_autoriser() {}
+
+if (!function_exists('autoriser_rubrique_supprimer')) {
+	/**
+	 * Ne pas pouvoir supprimer une rubrique si elle a un champ de redirection actif
+	 * @param string $faire
+	 * @param string $type
+	 * @param int $id
+	 * @param array $qui
+	 * @param array $opt
+	 * @return bool
+	 */
+	function autoriser_rubrique_supprimer($faire, $type, $id, $qui, $opt) {
+		include_spip('objets_virtuels_fonctions');
+		$virtuel = quete_objet_virtuel('rubrique', intval($id));
+		if (strlen($virtuel) > 0) {
+			return false;
+		}
+		return autoriser_rubrique_supprimer_dist($faire, $type, $id, $qui, $opt);
+	}
 }
