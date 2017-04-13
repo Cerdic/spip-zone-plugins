@@ -101,7 +101,9 @@ function formulaires_rediriger_objet_virtuel_traiter_dist($objet, $id_objet, $re
 
 	// malheureusement le ajax=wysiwyg n'est pas toujours présent sur l’inclusion prive/objets/contenu/xx,
 	// donc ce JS n'actualise pas toujours le centre de la page.
-	$js = _AJAX ? '<script type="text/javascript">if (window.ajaxReload) ajaxReload("wysiwyg");</script>' : '';
+	$js = _AJAX ? '<script type="text/javascript">
+		if (window.ajaxReload) $("#objet_virtuel").ajaxReload({args:{virtuel:"' . $url . '"}});
+	</script>' : '';
 
 	return [
 		'message_ok' => ($url ? _T('info_redirection_activee') : _T('info_redirection_desactivee')) . $js,

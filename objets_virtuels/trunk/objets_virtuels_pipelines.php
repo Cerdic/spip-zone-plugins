@@ -83,15 +83,16 @@ function objets_virtuels_affiche_milieu($flux) {
 		and isset($flux['args'][$id_table_objet])
 		and ($id = intval($flux['args'][$id_table_objet]))
 		and (in_array($desc['table_objet_sql'], objets_virtuels_tables_actives()))
-		and $virtuel = sql_getfetsel('virtuel', $desc['table_objet_sql'], $id_table_objet . '=' . $id)
 	) {
+		$virtuel = sql_getfetsel('virtuel', $desc['table_objet_sql'], $id_table_objet . '=' . $id);
 		$texte = recuperer_fond(
 			'prive/squelettes/inclure/redirection_objet_virtuel',
-			array(
-				'virtuel' => $virtuel,
-			)
+			['virtuel' => $virtuel],
+			['ajax' => true]
 		);
-		if ($p = strpos($flux['data'], '<!--affiche_milieu-->')) {
+		if ($p = strpos($flux['data'], '<div id="wys')) {
+			$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
+		} elseif ($p = strpos($flux['data'], '<!--affiche_milieu-->')) {
 			$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
 		} else {
 			$flux['data'] .= $texte;
