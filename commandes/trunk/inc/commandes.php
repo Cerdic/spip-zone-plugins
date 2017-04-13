@@ -57,25 +57,6 @@ function creer_commande_encours(){
 }
 
 /**
- * Distribuer une commande : pour chaque ligne de la commande on appelle l'api distribuer
- * si elle est implementee pour l'objet concerne
- *
- * @param int $id_commande
- */
-function commandes_distribuer($id_commande){
-	$commande = sql_fetsel("*","spip_commandes","id_commande=".intval($id_commande));
-	$details = sql_allfetsel("*","spip_commandes_details","id_commande=".intval($id_commande));
-	if ($details){
-		foreach($details as $detail){
-			$objet = $detail['objet'];
-			if ($distribuer = charger_fonction($objet,"distribuer",true)){
-				$distribuer($detail['id_objet'],$detail,$commande);
-			}
-		}
-	}
-}
-
-/**
  * Supprimer une ou plusieurs commandes et leurs données associées
  *
  * La fonction va supprimer : 
