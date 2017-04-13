@@ -7,7 +7,6 @@ function action_selection_interface() {
 	if (!autoriser('modifier','rubrique', $id_rubrique)) die ("Interdit");
 
 
-
 	// Bouton REMONTER
 	if ($_GET["remonter_ordre"] > 0) {
 	
@@ -54,11 +53,11 @@ function action_selection_interface() {
 		
 		}
 	
-	}	
+	}
 
 	if ($_GET["ajouter_selection"] > 0) {
 		$ajouter = _request("ajouter_selection");
-		
+
 		if (!autoriser('modifier','rubrique', $id_rubrique)) die ("Interdit");
 	
 		$result = sql_select("id_article", "spip_articles", "id_article=$ajouter");
@@ -84,7 +83,7 @@ function action_selection_interface() {
 	
 	
 	}
-	
+
 	if ($_GET["supprimer_ordre"] > 0) {
 		$supprimer = _request("supprimer_ordre");
 		
@@ -92,7 +91,7 @@ function action_selection_interface() {
 		sql_delete("spip_pb_selection", "id_rubrique=$id_rubrique AND id_article=$supprimer");
 	
 	}
-	
+
 	if ($_GET["nouvel_ordre"]) {
 		$nouvel_ordre = explode(",", $_GET["nouvel_ordre"]);
 		if (count($nouvel_ordre) > 0) {
@@ -111,15 +110,11 @@ function action_selection_interface() {
 			}
 		}
 	}
-	
 
+	include_spip("inc/utils");
+	include_spip("public/assembler");
+	$contexte = array('id_rubrique'=>$_GET["id_rubrique"]);
 
-		include_spip("inc/utils");
-		include_spip("public/assembler");
-		$contexte = array('id_rubrique'=>$_GET["id_rubrique"]);
-
-		$p = evaluer_fond("selection_interface", $contexte);
-		$ret .= $p["texte"];
-		echo $ret;
-}		
-?>
+	$p = evaluer_fond("selection_interface", $contexte);
+	echo $p["texte"];
+}
