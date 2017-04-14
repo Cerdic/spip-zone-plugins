@@ -136,13 +136,21 @@ function commandes_accueil_encours($flux) {
 function commandes_affiche_auteurs_interventions($flux) {
 
 	if ($id_auteur = intval($flux['args']['id_auteur'])) {
-		$flux['data'] .= recuperer_fond('prive/objets/liste/commandes', array(
+
+		$ins = recuperer_fond('prive/objets/liste/commandes', array(
 			'id_auteur' => $id_auteur,
 			'titre' => _T('commandes:titre_commandes_auteur'),
 			'cacher_tri' => true
 			),
 			array('ajax' => true)
 		);
+		$mark = '<!--bank-->';
+		if ($p = strpos($flux['data'], $mark) !== false) {
+			$flux['data'] = substr_replace($flux['data'], $ins, $p + strlen($mark) - 1, 0);
+		}
+		else {
+			$flux['data'] .= $ins;
+		}
 	}
 
 	return $flux;
