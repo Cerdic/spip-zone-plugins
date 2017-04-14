@@ -19,13 +19,22 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * aussi on supprime de la base toute ancienne commande `encours` présente en session avant d'en créer une nouvelle.
  * L'identifiant de la nouvelle commande est ensuite placé dans la session.
  *
+ * Si le visiteur n'est pas identifie mais connu, on peut passer son id_auteur en argument pour permettre le rattachement de la commande a son compte
+ * mais attention dans tous les cas la commande sera associee a la session en cours.
+ * C'est utile si par exemple on demande l'email au visiteur dans le processus d'achat mais on veut pas l'obliger a se connecter pour simplifier le workflow :
+ * il peut faire tout le processus en restant non connecte, mais la commande sera quand meme rattachee a son compte
+ * Et ca permet aussi de faire une commande pour le compte de quelqu'un d'autre sans avoir besoin de ses identifiants (ie payer un abonnement a un ami)
+ *
  * @uses commandes_reference()
  * @uses commande_inserer()
  *
+ * @param int $id_auteur
+ *   permet de preciser l'id_auteur de la session au cas ou le visiteur n'est pas connecte mais connu
+ *   (par son email qu'il a rentre dans le processus de commande par exemple)
  * @return int $id_commande
  *     identifiant SQL de la commande
  */
-function creer_commande_encours(){
+function creer_commande_encours($id_auteur = 0){
 	include_spip('inc/session');
 
 	// S'il y a une commande en cours dans la session, on la supprime
@@ -42,7 +51,9 @@ function creer_commande_encours(){
 	}
 
 	// Le visiteur en cours
-	$id_auteur = session_get('id_auteur') > 0 ? session_get('id_auteur') : 0;
+	if (!$id_auteur and session_get('id_auteur')>0) {
+		$id_auteur = session_get('id_auteur');
+	}
 
 	$champs = array(
 		'id_auteur' => $id_auteur
