@@ -25,16 +25,20 @@ function action_distribuer_commande_dist($id_commande){
 
 		// appeler un pipeline qui permet aux plugins peripheriques de gerer
 		// exemple creer a la volee un compte client si on est arrive jusqu'ici avec id_auteur=0 (nouveau client, workflow simplifie)
+		// un plugin peut aussi annuler la distribution pour la remettre a plus tard en retournant false
 		$commande = pipeline('commandes_pre_distribuer_commande',$commande);
 
-		if ($details = sql_allfetsel("*","spip_commandes_details","id_commande=".intval($id_commande)) ){
-			foreach ($details as $detail){
-				$objet = $detail['objet'];
-				if ($distribuer = charger_fonction($objet, "distribuer", true)){
-					$distribuer($detail['id_objet'], $detail, $commande);
+		if ($commande and $id_commande = $commande['id_commande']) {
+			if ($details = sql_allfetsel("*","spip_commandes_details","id_commande=".intval($id_commande)) ){
+				foreach ($details as $detail){
+					$objet = $detail['objet'];
+					if ($distribuer = charger_fonction($objet, "distribuer", true)){
+						$distribuer($detail['id_objet'], $detail, $commande);
+					}
 				}
 			}
 		}
+
 	}
 
 }
