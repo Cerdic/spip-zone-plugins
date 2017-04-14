@@ -8,15 +8,13 @@ function saveauto_a_telecharger() {
 
 	$prefixe = lire_config('saveauto/prefixe_save');
 	$laver_auto = (lire_config('saveauto/nettoyage_journalier') == 'oui');
-	$dir_dump = lire_config('saveauto/repertoire_save');
-
+	$dir_dump = find_in_path(lire_config('saveauto/repertoire_save'));//find in path car nous sommes dans l'espace privé
 	$pattern = "${prefixe}.*\.(zip|sql)$";
 
 	if ($laver_auto)
 		$liste = preg_files($dir_dump, $pattern);
 	else
 		$liste = preg_files($dir_dump, $pattern, 50);
-
 	// On filtre les fichiers vides ou corrompues qui sont des résultats d'erreur lors de l'archivage
 	foreach ($liste as $_cle => $_sauvegarde) {
 		if (!is_file($_sauvegarde)
