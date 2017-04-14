@@ -1,7 +1,7 @@
 <paquet
 	prefix="commandes"
 	categorie="divers"
-	version="1.9.2"
+	version="1.9.3"
 	etat="stable"
 	compatibilite="[3.0.5;3.1.*]"
 	logo="prive/themes/spip/images/commande.png"
@@ -25,6 +25,8 @@
 	<utilise nom="coordonnees" compatibilite="[2.2.2;]" />
 	<utilise nom="notifavancees" compatibilite="[0.3.1;]" />
 	<utilise nom="bank" compatibilite="[3.0.0;]" />
+
+	<pipeline nom="commandes_pre_distribuer_commande" action="" />
 
 	<pipeline nom="affiche_milieu" inclure="commandes_pipelines.php" />
 	<pipeline nom="accueil_encours" inclure="commandes_pipelines.php" />
