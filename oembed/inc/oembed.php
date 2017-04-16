@@ -250,9 +250,7 @@ function oembed_detecter_lien($url) {
 
 	$oembed_recuperer_url = charger_fonction('oembed_recuperer_url', 'inc');
 	// on recupere le contenu de la page
-	include_spip('inc/distant');
-
-	if ($html = recuperer_page($url)) {
+	if ($html = $oembed_recuperer_url($url, $url, 'html')) {
 		// types de liens oembed à détecter
 		$linktypes = array(
 			'application/json+oembed' => 'json',

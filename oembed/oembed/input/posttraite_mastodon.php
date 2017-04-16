@@ -9,6 +9,29 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+include_spip('inc/charsets');
+
+function emojify_names($name) {
+	$name = ':'.str_replace(' ','_',strtolower($name)).':';
+	return $name;
+}
+function emojify($texte, &$need_emoji) {
+	if (
+		(strpos($texte, ':')!==false and preg_match(',:\w+:,',$texte))
+	  or is_utf8($texte)) {
+		if (!function_exists('emoji_convert')) {
+			include_spip('lib/php-emoji/emoji');
+			$GLOBALS['emoji_maps']['names_to_unified'] = array_flip(array_map('emojify_names',$GLOBALS['emoji_maps']['names']));
+		}
+		// convertir les emoji nommes type :satellite: en utf
+		$texte = emoji_convert($texte, 'names_to_unified');
+		// convertir les emoji utf en html
+		$texte = emoji_unified_to_html($texte);
+		$need_emoji = (strpos($texte, 'emoji-sizer') !== false);
+	}
+	return $texte;
+}
+
 function oembed_input_posttraite_mastodon_dist($data) {
 
 	if ($iframe = extraire_balise($data['html'], 'iframe')) {
@@ -19,33 +42,46 @@ function oembed_input_posttraite_mastodon_dist($data) {
 		$data['html'] = str_replace($data['html'], $iframe, $iframe_cor);
 		$src = extraire_attribut($iframe_cor, 'src');
 
-		// si on sait mieux faire en faisant un extract du contenu de l'iframe on y go, car les iframe c'est moche
-		if ($html = recuperer_page($src)) {
-			$texte = $date_link = "";
-			if ($p = strpos($html, 'status__content')
-			  and $p1 = strpos($html, '<p', $p)
-			  and $p2 = strpos($html, '</p>', $p1)
-			) {
-				$texte = substr($html, $p1, $p2 - $p1 +4);
-			}
-			if ($p = strpos($html, 'dt-published')
-			  and $p1 = strpos($html, '<a', $p)
-			  and $p2 = strpos($html, '</a>', $p1)
-			) {
-				$date_link = substr($html, $p1, $p2 - $p1 +4);
+
+		$oembed_recuperer_url = charger_fonction('oembed_recuperer_url', 'inc');
+		$url = preg_replace(',/embed$,','', $src);
+		$src_atom = $url.'.atom';
+		if ($xml = $oembed_recuperer_url($src_atom, $src_atom, 'xml')) {
+
+			$need_emoji = false;
+
+			$name = "@".strip_tags(extraire_balise($xml, 'email'));
+			$content = strip_tags(extraire_balise($xml, 'content'));
+			$content = emojify(filtrer_entites($content), $need_emoji);
+			$date = strip_tags(extraire_balise($xml, 'published'));
+			$date = date('Y-m-d H:i:s',strtotime($date));
+
+			$screen_name = emojify($data['author_name'], $need_emoji);
+
+			$contexte = array(
+				'url' => $url,
+				'width' => $data['width'],
+				'height' => $data['height'],
+				'author_screen_name' => $screen_name,
+				'author_name' => $name,
+				'author_url' => $data['author_url'],
+				'author_thumbnail' => '',
+				'content' => $content,
+				'published' => $date,
+				'need_emoji' => ($need_emoji?' ':''),
+			);
+
+			$links = extraire_balises($xml, 'link');
+			foreach ($links as $link) {
+				if (extraire_attribut($link, 'rel') === 'avatar') {
+					$contexte['author_thumbnail'] = extraire_attribut($link, 'href');
+					$contexte['author_thumbnail_width'] = extraire_attribut($link, 'media:width');
+					$contexte['author_thumbnail_height'] = extraire_attribut($link, 'media:height');
+				}
 			}
 
-			if ($texte and $date_link) {
-				$html = "<blockquote class=\"twitter-tweet\">".$texte."\n&mdash; ".$data['author_name'];
-				$author_account = explode('/users/', $data['author_url']);
-				$a = "@".end($author_account)."@".trim(protocole_implicite(reset($author_account)),'/');
-				$html .= " ($a) $date_link\n</blockquote>";
-
-				$data['html'] = $html;
-				$data['height'] = null;
-			}
+			$data['html'] = recuperer_fond('modeles/toot', $contexte);
 		}
-
 
 	}
 	$data['provider_name'] = 'Mastodon';

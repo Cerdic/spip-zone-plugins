@@ -1,0 +1,18 @@
+<blockquote class="mastodon-toot" style="[max-width:(#ENV{width});]">
+
+	<span class="toot-author">
+
+		[<a href="#ENV{url}" class="toot-published">(#ENV{published}|affdate_heure)</a>]
+		<a href="#ENV{author_url}" class="toot-author-url">
+			[(#ENV{author_thumbnail}|image_reduire{48,48}|inserer_attribut{class,toot-author-thumbnail})]
+			[<span class="toot-author-screen-name">(#ENV*{author_screen_name})</span>]
+			[<span class="toot-author-name">(#ENV{author_name})</span>]
+		</a>
+		[<span class="toot-content">(#ENV*{content})</span>]
+
+	</span>
+
+</blockquote>
+[(#ENV{need_emoji}|oui)
+<style type="text/css">@import url("[(#CHEMIN{lib/php-emoji/emoji.css}|url_absolue)]");</style>
+]

@@ -89,3 +89,19 @@ figure.oe-image-block figcaption {background:#eee;padding: 10px;text-align: left
 .oembed_mastodon .oembed-source {display: none;}
 .oembed_mastodon .spip_doc_titre {display: none;}
 .oembed_mastodon .oe-rich {max-width:none !important;}
+.oembed_mastodon .oembed-source {display: none;}
+.oembed_mastodon .oe-rich {background: #f8f8f8;padding: 15px;border-radius: 4px;margin: 1em auto;}
+.oembed_mastodon .rwd-rich-container {height: auto !important;}
+.oembed_mastodon .spip_doc_titre {display: none;}
+.oembed_mastodon .oe-rich {max-width:none !important;}
+.mastodon-toot {padding:0;margin:0;padding-left:63px;font-family: Arial,Helvetica,Sans-Serif;}
+.mastodon-toot .toot-published {float: right;color:#9baec8;text-decoration: none !important;}
+.mastodon-toot .toot-published:active,.mastodon-toot .toot-published:focus,.mastodon-toot .toot-published:hover {text-decoration: underline !important;}
+.mastodon-toot .toot-author-url {color:#9baec8;text-decoration: none !important;}
+.mastodon-toot .toot-author-thumbnail {float: left;margin-left:-63px;width: 48px;height: 48px;border-radius: 4px;}
+.mastodon-toot .toot-author-screen-name {color:#282c37;}
+.mastodon-toot .toot-author-url:active .toot-author-screen-name,.mastodon-toot .toot-author-url:focus .toot-author-screen-name,.mastodon-toot .toot-author-url:hover .toot-author-screen-name {text-decoration: underline;}
+.mastodon-toot .toot-content a {color:#2b90d9;text-decoration: none !important;}
+.mastodon-toot .toot-content a:active,.mastodon-toot .toot-content a:focus,.mastodon-toot .toot-content a:hover {text-decoration: underline !important;}
+.mastodon-toot .invisible {display: none}
+.mastodon-toot .ellipsis::after {display: inline;content:'...'}
