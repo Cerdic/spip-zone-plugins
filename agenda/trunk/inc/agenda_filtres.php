@@ -120,13 +120,14 @@ function critere_agendafull_dist($idb, &$boucles, $crit) {
  * - Du 20 au 23 fevrier
  * - du 20 fevrier au 30 mars
  * - du 20 fevrier 2007 au 30 mars 2008
- * $horaire='oui' permet d'afficher l'horaire, toute autre valeur n'indique que le jour
- * $forme peut contenir abbr (afficher le nom des jours en abbrege) et ou hcal (generer une date au format hcal)
  *
- * @param string $date_debut
- * @param string $date_fin
- * @param string $horaire
- * @param string $forme
+ * @param string $date_debut : la date de début au format mysql
+ * @param string $date_fin : la date de fin au format mysql
+ * @param string $horaire : oui / non, permet d'afficher l'horaire, toute autre valeur n'indique que le jour
+ * @param string $forme : forme que prendra la date :
+ * 		- abbr (afficher le nom des jours en abbrege)
+ * 		- hcal (generer une date au format hcal)
+ * 		- h-event (generer une date au format h-event, dans une balise <time> HTML5)
  * @return string
  */
 function agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme = '') {
@@ -144,6 +145,10 @@ function agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $for
 		$dtstart = "<abbr class='dtstart' title='".date_iso($date_debut)."'>";
 		$dtend = "<abbr class='dtend' title='".date_iso($date_fin)."'>";
 		$dtabbr = '</abbr>';
+	} else if (strpos($forme, 'h-event') !== false) {
+		$dtstart = "<time class='dt-start' datetime='".date_iso($date_debut)."'>";
+		$dtend = "<time class='dt-end' datetime='".date_iso($date_fin)."'>";
+		$dtabbr = '</time>';
 	}
 
 	$date_debut = strtotime($date_debut);
