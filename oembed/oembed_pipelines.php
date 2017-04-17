@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return string
  */
 function oembed_insert_head_css($head) {
-	$head .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('css/oembed.css').'" />'."\n";
+	$head .= '<link rel="stylesheet" type="text/css" href="'.timestamp(find_in_path('css/oembed.css')).'" />'."\n";
 	return $head;
 }
 

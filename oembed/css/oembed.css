@@ -86,22 +86,23 @@ figure.oe-image-block figcaption {background:#eee;padding: 10px;text-align: left
 .oembed_audio .oe-play-button:hover button:before{border-color:#fff;}
 
 /* Mastodon */
-.oembed_mastodon .oembed-source {display: none;}
-.oembed_mastodon .spip_doc_titre {display: none;}
-.oembed_mastodon .oe-rich {max-width:none !important;}
-.oembed_mastodon .oembed-source {display: none;}
-.oembed_mastodon .oe-rich {background: #f8f8f8;padding: 15px;border-radius: 4px;margin: 1em auto;}
+.oembed_mastodon .oe-rich {max-width:none !important;background: #f8f8f8;padding: 15px;border-radius: 4px;margin: 1em auto;}
 .oembed_mastodon .rwd-rich-container {height: auto !important;}
+.oembed_mastodon .oembed-source {display: none;}
 .oembed_mastodon .spip_doc_titre {display: none;}
-.oembed_mastodon .oe-rich {max-width:none !important;}
-.mastodon-toot {padding:0;margin:0;padding-left:63px;font-family: Arial,Helvetica,Sans-Serif;}
-.mastodon-toot .toot-published {float: right;color:#9baec8;text-decoration: none !important;}
+.mastodon-toot {padding:0;margin:0;padding-left:63px;font-family: Arial,Helvetica,Sans-Serif;font-size: 1.0em;line-height: 1.5em;}
+.mastodon-toot a {background: transparent !important;text-decoration: none !important;}
+.mastodon-toot .emoji-sizer {vertical-align: top;}
+.mastodon-toot .toot-published {float: right;color:#9baec8;}
 .mastodon-toot .toot-published:active,.mastodon-toot .toot-published:focus,.mastodon-toot .toot-published:hover {text-decoration: underline !important;}
-.mastodon-toot .toot-author-url {color:#9baec8;text-decoration: none !important;}
-.mastodon-toot .toot-author-thumbnail {float: left;margin-left:-63px;width: 48px;height: 48px;border-radius: 4px;}
+.mastodon-toot .toot-author-url {color:#9baec8;}
+.mastodon-toot .toot-author-thumbnail {float: left;margin-left:-63px;margin-top:4px;width: 48px;height: 48px;border-radius: 4px;}
 .mastodon-toot .toot-author-screen-name {color:#282c37;}
 .mastodon-toot .toot-author-url:active .toot-author-screen-name,.mastodon-toot .toot-author-url:focus .toot-author-screen-name,.mastodon-toot .toot-author-url:hover .toot-author-screen-name {text-decoration: underline;}
-.mastodon-toot .toot-content a {color:#2b90d9;text-decoration: none !important;}
+.mastodon-toot .toot-content {display:block;margin: 0.75em 0 0.25em;}
+.mastodon-toot .toot-content p {margin-bottom: 0.75em;}
+.mastodon-toot .toot-content p:last-child {margin-bottom: 0;}
+.mastodon-toot .toot-content a {color:#2b90d9;}
 .mastodon-toot .toot-content a:active,.mastodon-toot .toot-content a:focus,.mastodon-toot .toot-content a:hover {text-decoration: underline !important;}
 .mastodon-toot .invisible {display: none}
-.mastodon-toot .ellipsis::after {display: inline;content:'...'}
+.mastodon-toot .ellipsis::after {display: inline;content:'\2026'}
