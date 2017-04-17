@@ -9,7 +9,7 @@
 		</a>
 	</span>
 	[<span class="toot-content">(#ENV*{content})</span>]
-
+	[<a href="#ENV{enclosure}" type="#ENV{enclosure_type}" class="toot-enclosure"><span class="toot-enclosure-inner" style="background-image:url('(#ENV{enclosure})');"></span></a>]
 </blockquote>
 [(#ENV{need_emoji}|oui)
 <style type="text/css">@import url("[(#CHEMIN{lib/php-emoji/emoji.css}|url_absolue)]");</style>

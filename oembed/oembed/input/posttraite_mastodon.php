@@ -66,17 +66,26 @@ function oembed_input_posttraite_mastodon_dist($data) {
 				'author_name' => $name,
 				'author_url' => $data['author_url'],
 				'author_thumbnail' => '',
+				'author_thumbnail_width' => '',
+				'author_thumbnail_height' => '',
 				'content' => $content,
 				'published' => $date,
 				'need_emoji' => ($need_emoji?' ':''),
+				'enclosure' => '',
+				'enclosure_type' => '',
 			);
 
 			$links = extraire_balises($xml, 'link');
 			foreach ($links as $link) {
-				if (extraire_attribut($link, 'rel') === 'avatar') {
+				$rel = extraire_attribut($link, 'rel');
+				if ($rel === 'avatar') {
 					$contexte['author_thumbnail'] = extraire_attribut($link, 'href');
 					$contexte['author_thumbnail_width'] = extraire_attribut($link, 'media:width');
 					$contexte['author_thumbnail_height'] = extraire_attribut($link, 'media:height');
+				}
+				if ($rel === "enclosure" and !$contexte['enclosure']) {
+					$contexte['enclosure'] = extraire_attribut($link, 'href');
+					$contexte['enclosure_type'] = extraire_attribut($link, 'type');
 				}
 			}
 
