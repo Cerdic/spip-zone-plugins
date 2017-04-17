@@ -176,7 +176,7 @@ function filtre_slugify_dist($texte, $type = '', $options = array()) {
 	$texte = translitteration($texte);
 
 	// On remplace tout ce qui n'est pas un mot par un separateur
-	$texte = preg_replace(",\W+,ms", $separateur, $texte);
+	$texte = preg_replace(',\W+,ms', $separateur, $texte);
 
 	// nettoyer les doubles occurences du separateur si besoin
 	while (strpos($texte, "$separateur$separateur") !== false) {
@@ -189,12 +189,12 @@ function filtre_slugify_dist($texte, $type = '', $options = array()) {
 	// en minuscules
 	$texte = strtolower($texte);
 
-	switch($type) {
+	switch ($type) {
 		case 'class':
 		case 'id':
 		case 'anchor':
 			if (preg_match(',^\d,', $texte)) {
-				$texte = substr($type,0,1).$texte;
+				$texte = substr($type, 0, 1).$texte;
 			}
 	}
 
@@ -206,7 +206,7 @@ function filtre_slugify_dist($texte, $type = '', $options = array()) {
 }
 
 if (!function_exists('slugify')) {
-	function slugify($texte, $type='', $options=array()) {
+	function slugify($texte, $type = '', $options = array()) {
 		$slugify = chercher_filtre('slugify');
 		return $slugify($texte, $type, $options);
 	}
