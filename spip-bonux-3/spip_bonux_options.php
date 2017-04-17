@@ -7,7 +7,7 @@
  *
  */
 
-// Proposer array_column 
+// Proposer array_column
 if (!function_exists('array_column')) {
 	function array_column($input = null, $columnKey = null, $indexKey = null) {
 		if (!function_exists('_array_column')) {
@@ -18,7 +18,9 @@ if (!function_exists('array_column')) {
 }
 
 
-if (!defined('_PREVISU_TEMPORAIRE_ACTIVE')) define('_PREVISU_TEMPORAIRE_ACTIVE', true);
+if (!defined('_PREVISU_TEMPORAIRE_ACTIVE')) {
+	define('_PREVISU_TEMPORAIRE_ACTIVE', true);
+}
 
 if (_request('var_mode')=='preview'
 	and _PREVISU_TEMPORAIRE_ACTIVE
