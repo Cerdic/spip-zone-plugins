@@ -206,7 +206,7 @@ function filtre_slugify_dist($texte, $type = '', $options = array()) {
 }
 
 if (!function_exists('slugify')) {
-	function slugify($texte, $type, $options) {
+	function slugify($texte, $type='', $options=array()) {
 		$slugify = chercher_filtre('slugify');
 		return $slugify($texte, $type, $options);
 	}
