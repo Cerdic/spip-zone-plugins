@@ -251,6 +251,9 @@ L.Map.Gis = L.Map.extend({
 				else
 					map.setView(map.markerCluster.getBounds().getCenter(), map.options.zoom);
 			}
+			if (map.options.openId) {
+				gis_focus_marker(map.options.openId,map.options.mapId);
+			}
 		}
 	},
 	
