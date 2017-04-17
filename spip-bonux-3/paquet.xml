@@ -1,9 +1,9 @@
 <paquet
 	prefix="spip_bonux"
 	categorie="outil"
-	version="3.4.3"
+	version="3.4.4"
 	etat="stable"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="img_pack/spip-bonux.png"
 	documentation="https://contrib.spip.net/Bonux-pour-SPIP3"
 >
