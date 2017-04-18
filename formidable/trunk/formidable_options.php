@@ -45,3 +45,13 @@ if (!function_exists('array_fill_keys')) {
 		array_combine($keys, array_fill(0, count($keys), $value));
 	}
 }
+
+/* Lieux de stockages des fichiers, qu'on définit ici pour pouvoir l'utiliser en squelette
+*/
+if (!defined('_DIR_FICHIERS')) { // En attendant que ce soit natif spip
+	define('_DIR_FICHIERS', _DIR_ETC.'fichiers/');
+}
+
+if (!defined('_DIR_FICHIERS_FORMIDABLE')) {
+	define('_DIR_FICHIERS_FORMIDABLE', _DIR_FICHIERS.'formidable/');
+}

@@ -6,13 +6,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 include_spip('inc/flock');
 include_spip('inc/documents');
-if (!defined('_DIR_FICHIERS')) { // En attendant que ce soit natif spip
-	define('_DIR_FICHIERS', _DIR_ETC.'fichiers/');
-}
-
-if (!defined('_DIR_FICHIERS_FORMIDABLE')) {
-	define('_DIR_FICHIERS_FORMIDABLE', _DIR_FICHIERS.'formidable/');
-}
 if (!defined('_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL')) {
 	// Combien de temps un lien par email dans fichier est valable (en seconde)
 	define('_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL', 24*3600);
