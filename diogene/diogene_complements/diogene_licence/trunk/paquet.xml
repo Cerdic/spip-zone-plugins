@@ -1,7 +1,7 @@
 <paquet
 	prefix="diogene_licence"
 	categorie="edition"
-	version="1.1.1"
+	version="1.2.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/diogene-128.png"
@@ -11,7 +11,7 @@
 
 	<auteur>b_b</auteur>
 	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
-	<copyright>2010-2014</copyright>
+	<copyright>2010-2017</copyright>
 
 	<pipeline nom="diogene_ajouter_saisies" inclure="diogene_licence_pipelines.php" />
 	<pipeline nom="diogene_verifier" inclure="diogene_licence_pipelines.php" />
@@ -20,6 +20,6 @@
 	<pipeline nom="diogene_champs_texte" inclure="diogene_licence_pipelines.php" />
 	<pipeline nom="diogene_champs_pre_edition" inclure="diogene_licence_pipelines.php" />
 
-	<necessite nom="diogene" compatibilite="[1.0.0;[" />
+	<necessite nom="diogene" compatibilite="[1.9.0;[" />
 	<necessite nom="licence" compatibilite="[0.4.0;[" />
 </paquet>

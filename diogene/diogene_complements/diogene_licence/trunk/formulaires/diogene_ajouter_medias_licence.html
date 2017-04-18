@@ -13,11 +13,11 @@
 [(#GET{complements}|table_valeur{id_licence_defaut}|intval|oui)
 	#SET{licence_defaut,#GET{complements}|table_valeur{id_licence_defaut}}	
 ]
-<li class="fieldset diogene_licence">
+<[(#DIV|sinon{li})] class="fieldset diogene_licence">
 <fieldset>
 	<legend><:diogene_licence:form_legend:></legend>
-	<ul>
-		<li class="editer editer_licence[ (#ENV**{erreurs}|table_valeur{licence}|oui)erreur]">
+	<[(#DIV|sinon{ul})] class="editer_groupe">
+		<[(#DIV|sinon{li})] class="editer editer_licence[ (#ENV**{erreurs}|table_valeur{licence}|oui)erreur]">
 			<label for="licence"><:licence:label_select_licence:></label>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{licence})</span>]
 			<select name="id_licence" id="licence">
@@ -28,7 +28,7 @@
 				<option value="#GET{licence}"[(#GET{licence}|=={#ENV{id_licence,#GET{licence_defaut,#CONFIG{licence/licence_defaut}}}}|oui) selected="selected"]>#GET{name_licence}[ - (#VALEUR|table_valeur{description})]</option>
 			</BOUCLE_selection>
 			</select>
-		</li>
-	</ul>
+		</[(#DIV|sinon{li})]>
+	</[(#DIV|sinon{ul})]>
 </fieldset>
-</li>
+</[(#DIV|sinon{li})]>
