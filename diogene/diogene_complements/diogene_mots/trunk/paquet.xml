@@ -1,7 +1,7 @@
 <paquet
 	prefix="diogene_mots"
 	categorie="edition"
-	version="1.5.3"
+	version="1.6.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/diogene-128.png"
@@ -14,7 +14,7 @@
 	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
 	<auteur>Severo</auteur>
 
-	<copyright>2010-2014</copyright>
+	<copyright>2010-2017</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
@@ -26,7 +26,7 @@
 	<pipeline nom="diogene_champs_texte" inclure="diogene_mots_pipelines.php" />
 	<pipeline nom="pre_edition" inclure="diogene_mots_pipelines.php" />
 
-	<necessite nom="diogene" compatibilite="[1.0.0;[" />
+	<necessite nom="diogene" compatibilite="[1.9.0;[" />
 	<necessite nom="mots" compatibilite="[2.4.6;[" />
 	<necessite nom="saisies" compatibilite="[1.26.2;[" />
 
