@@ -1,7 +1,7 @@
 <paquet
 	prefix="diogene_agenda"
 	categorie="edition"
-	version="1.4.2"
+	version="1.5.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/diogene-128.png"
@@ -24,6 +24,6 @@
 	<pipeline nom="diogene_avant_formulaire" inclure="diogene_agenda_pipelines.php" />
 	<pipeline nom="insert_head_css" inclure="diogene_agenda_pipelines.php" />
 
-	<necessite nom="diogene" compatibilite="[1.0.0;[" />
+	<necessite nom="diogene" compatibilite="[1.9.0;[" />
 	<necessite nom="agenda" compatibilite="[3.12.0;[" />
 </paquet>

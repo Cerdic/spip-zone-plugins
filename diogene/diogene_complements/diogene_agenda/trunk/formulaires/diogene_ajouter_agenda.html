@@ -1,28 +1,28 @@
-<li class="agenda_fieldset agenda fieldset">
+<[(#DIV|sinon{li})] class="editer-groupe agenda_fieldset agenda fieldset">
 	<fieldset>
 		[<h3 class="legend">(#ENV{agenda_legende,<:diogene_agenda:form_legend_agenda:>})</h3>]
 		[<input type="hidden" name="id_evenement" value="(#ENV{id_evenement})" />]
-		<ul>
-			<li class='editer editer_date fieldset'>
-				<ul>
-					[(#ENV{agenda_obligatoire}|=={on}|non|et{#ENV{id_article}|intval|>{0}|et{#ENV{id_evenement}|intval|>{0}}|oui}|oui)<li class="editer editer_supprimer_evenement">
+		<[(#DIV|sinon{ul})]>
+			<[(#DIV|sinon{li})] class='editer editer_date fieldset'>
+				<[(#DIV|sinon{ul})]>
+					[(#ENV{agenda_obligatoire}|=={on}|non|et{#ENV{id_article}|intval|>{0}|et{#ENV{id_evenement}|intval|>{0}}|oui}|oui)<[(#DIV|sinon{li})] class="editer editer_supprimer_evenement">
 						<label for="supprimer_evenement"><:diogene_agenda:evenement_supprimer:></label>
 						<div class="choix">
 							<input type="checkbox" name="supprimer_evenement" id="supprimer_evenement"[(#ENV{supprimer_evenement}|=={on}|oui)checked="checked"] />
 						</div>
-					</li>]
-					<li class="editer editer_titre_evenement obligatoire[ (#ENV**{erreurs}|table_valeur{titre_evenement}|oui)erreur]">
+					</[(#DIV|sinon{li})]>]
+					<[(#DIV|sinon{li})] class="editer editer_titre_evenement obligatoire[ (#ENV**{erreurs}|table_valeur{titre_evenement}|oui)erreur]">
 						<label for="titre_evenement"><:agenda:evenement_titre:></label>[
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre_evenement})</span>
 						]<input type='text' class='text' name='titre_evenement' id='titre_evenement' value="#ENV{titre_evenement}" />
-					</li>
-					<li class="editer editer_horaire[ (#ENV**{erreurs}|table_valeur{horaire}|oui)erreur]">
+					</[(#DIV|sinon{li})]>
+					<[(#DIV|sinon{li})] class="editer editer_horaire[ (#ENV**{erreurs}|table_valeur{horaire}|oui)erreur]">
 						<label for="horaire"><:agenda:evenement_horaire:></label>[
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{horaire})</span>
 						] <input type='checkbox' name='horaire' id='horaire' value='non' [(#ENV{horaire}|=={oui}|non)checked='checked']
 							onclick="if (this.checked==false) { $('span.afficher_horaire').show();} else {$('span.afficher_horaire').hide();}" />
-					</li>
-					<li class="editer editer_date_debut_fin[(#ENV{agenda_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur][ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
+					</[(#DIV|sinon{li})]>
+					<[(#DIV|sinon{li})] class="editer editer_date_debut_fin[(#ENV{agenda_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur][ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
 						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_debut})</span>]<label for="date_debut"><:agenda:evenement_date_de:></label><input type='text' class='text date' name='date_debut' id='date_debut' size='10' maxlength='10' value="[(#ENV{date_debut})]" />
 						<span class='afficher_horaire[(#ENV{horaire}|=={oui}|non)none]'>
 						<label for='heure_debut' class='heure'><:agenda:evenement_date_a_immediat:></label>
@@ -33,11 +33,11 @@
 						<span class='afficher_horaire[(#ENV{horaire}|=={oui}|non)none]'><label for='heure_fin' class='heure'><:agenda:evenement_date_a_immediat:></label>
 						<input type='text' class='text heure' name='heure_fin' id='heure_fin' size='4' maxlength='5' value="[(#ENV{heure_fin})]"
 						/></span><input type='text' class='text date' name='date_fin' id='date_fin' size='10' maxlength='10' value="[(#ENV{date_fin})]" />
-					</li>
-				</ul>
-			</li>
+					</[(#DIV|sinon{li})]>
+				</[(#DIV|sinon{ul})]>
+			</[(#DIV|sinon{li})]>
 			[(#VAL{repetitions}|in_array{#ENV{agenda_caches,#ARRAY}}|non)
-			<li class="editer editer_repetitions[ (#ENV**{erreurs}|table_valeur{repetitions}|oui)erreur]">
+			<[(#DIV|sinon{li})] class="editer editer_repetitions[ (#ENV**{erreurs}|table_valeur{repetitions}|oui)erreur]">
 				<label for="repetitions"><:agenda:evenement_repetitions:></label>[
 				(#ENV{repetitions}|non)<a href='#' onclick="$(this).hide().next().show('fast');return false;"><:agenda:ajouter_repetition:></a>
 				<div class='ajouter_repetitions none'>][
@@ -45,15 +45,15 @@
 				]<div id='repetitions_picker'></div>
 				<textarea name='repetitions' id='repetitions'>#ENV{repetitions}</textarea>[
 				(#ENV{repetitions}|non)</div>]
-			</li>]
+			</[(#DIV|sinon{li})]>]
 			[(#VAL{descriptif}|in_array{#ENV{agenda_caches,#ARRAY}}|non)
-			<li class="editer editer_descriptif editer_descriptif_evenement[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
+			<[(#DIV|sinon{li})] class="editer editer_descriptif editer_descriptif_evenement[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
 				<label for="descriptif_evenement"><:agenda:evenement_descriptif:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
 				]<textarea name='descriptif_evenement' rows='5' id='descriptif_evenement' class="inserer_barre_edition">[(#ENV{descriptif_evenement})]</textarea>
-			</li>][
+			</[(#DIV|sinon{li})]>][
 			(#VAL{inscription}|in_array{#ENV{agenda_caches,#ARRAY}}|non)
-			<li class="editer editer_inscription[ (#ENV**{erreurs}|table_valeur{inscription}|oui)erreur]">
+			<[(#DIV|sinon{li})] class="editer editer_inscription[ (#ENV**{erreurs}|table_valeur{inscription}|oui)erreur]">
 				<div class='choix inscription'>
 					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{inscription})</span>]
 					<input type='checkbox' class='checkbox' name='inscription' id='inscription' value="1"[ (#ENV{inscription}|oui)checked="checked"] />
@@ -65,20 +65,20 @@
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{places})</span>
 				]<input type='text' class='text' name='places' id='places' value="[(#ENV{places})]" />
 				</div>]
-			</li>][
+			</[(#DIV|sinon{li})]>][
 			(#VAL{lieu}|in_array{#ENV{agenda_caches,#ARRAY}}|non)
-			<li class="editer editer_lieu[ (#ENV**{erreurs}|table_valeur{lieu}|oui)erreur]">
+			<[(#DIV|sinon{li})] class="editer editer_lieu[ (#ENV**{erreurs}|table_valeur{lieu}|oui)erreur]">
 				<label for="lieu"><:agenda:evenement_lieu:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lieu})</span>
 				]<input type='text' class='text' name='lieu' id='lieu' value="[(#ENV{lieu})]" />
-			</li>][
+			</[(#DIV|sinon{li})]>][
 			(#VAL{adresse}|in_array{#ENV{agenda_caches,#ARRAY}}|non)
-			<li class="editer editer_adresse[ (#ENV**{erreurs}|table_valeur{adresse}|oui)erreur]">
+			<[(#DIV|sinon{li})] class="editer editer_adresse[ (#ENV**{erreurs}|table_valeur{adresse}|oui)erreur]">
 				<label for="adresse"><:agenda:evenement_adresse:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse})</span>
 				]<textarea name='adresse' rows='3' id='adresse'>[(#ENV{adresse})]</textarea>
-			</li>]
-		</ul>
+			</[(#DIV|sinon{li})]>]
+		</[(#DIV|sinon{ul})]>
 	</fieldset>
 	#INCLURE{fond=formulaires/dateur/inc-dateur}
 	[(#VAL{repetitions}|in_array{#ENV{agenda_caches,#ARRAY}}|non)
@@ -106,4 +106,4 @@
 			}
 		});
 	</script>]
-</li>
+</[(#DIV|sinon{li})]>
