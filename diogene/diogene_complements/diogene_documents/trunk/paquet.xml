@@ -1,7 +1,7 @@
 <paquet
 	prefix="diogene_documents"
 	categorie="edition"
-	version="1.1.1"
+	version="1.2.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/diogene-128.png"
@@ -11,7 +11,7 @@
 
 	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
 
-	<copyright>2014-2015</copyright>
+	<copyright>2014-2017</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
@@ -21,7 +21,7 @@
 	<pipeline nom="diogene_objets" inclure="diogene_documents_pipelines.php" />
 	<pipeline nom="diogene_champs_pre_edition" inclure="diogene_documents_pipelines.php" />
 
-	<necessite nom="diogene" compatibilite="[1.0.0;[" />
+	<necessite nom="diogene" compatibilite="[1.9.0;[" />
 	<necessite nom="medias" compatibilite="[2.7.27;]" />
 
 </paquet>
