@@ -1,6 +1,6 @@
 #CACHE{0}
-<li class="editer editer_logo[ (#ENV**{erreurs}|table_valeur{logo}|oui)erreur]">
-	<label for="diogene_logo">[(#ENV{objet}|objet_info{texte_logo_objet}|_T)]</label>
+<[(#DIV|sinon{li})] class="editer editer_logo[ (#ENV**{erreurs}|table_valeur{logo}|oui)erreur]">
+	<label for="logo_[(#ENV{objet})]">[(#ENV{objet}|objet_info{texte_logo_objet}|_T)]</label>
 	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo})</span>]
 	[<p class="explication">(#ENV{explications_logo})</p>]
 	[<div class="logo_preview">
@@ -12,4 +12,4 @@
 		<label for="supprimer_logo_on_[(#ENV{objet})]"><:lien_supprimer:></label>
 	</div>]
 	<input type="file" name="logo_on" id="logo_[(#ENV{objet})]" />
-</li>
+</[(#DIV|sinon{li})]>

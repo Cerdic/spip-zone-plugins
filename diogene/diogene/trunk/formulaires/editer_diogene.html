@@ -9,7 +9,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_diogene' value='#ENV{id_diogene}' />
 		<input type='hidden' name='objet' value='#ENV{objet}' />
-		<ul>
+		<[(#DIV|sinon{ul})] class="editer-groupe">
 			[(#SAISIE{input,titre,
 				label=<:info_titre:>,
 				class=multilang,
@@ -63,7 +63,7 @@
 				label=<:diogene:label_menu:>,
 				label_case=<:diogene:label_menu_case:>})]
 				
-			<li class="fieldset">
+			<[(#DIV|sinon{li})] class="fieldset">
 				<fieldset>
 				<legend><:diogene:legende_champs_diogene:></legend>
 				<ul>
@@ -108,16 +108,16 @@
 							label=<:diogene:label_polyhier:>,
 							label_case=<:diogene:label_polyhier_desactiver:>})]
 					]
-				</ul>
+				</[(#DIV|sinon{ul})]>
 				</fieldset>
-			</li>
+			</[(#DIV|sinon{li})]>
 
 			[(#PIPELINE{diogene_champs_texte,[(#ARRAY{args,[(#ENV**|unserialize)],data,''})]})]
 	
-			<li class="fieldset">
+			<[(#DIV|sinon{li})] class="fieldset">
 				<fieldset>
 				<legend><:diogene:legende_statuts_diogene:></legend>
-				<ul>
+				<[(#DIV|sinon{ul})]>
 					[(#SAISIE{statuts_auteurs,statut_auteur,
 						cacher_option_intro=oui,
 						explication=<:diogene:explication_statut_auteur:>,
@@ -135,13 +135,13 @@
 						explication=<:diogene:explication_workflow_simplifie:>,
 						label=<:diogene:label_workflow_simplifie:>,
 						label_case=<:diogene:label_workflow_simplifie_case:>})]
-				</ul>
+				</[(#DIV|sinon{ul})]>
 				</fieldset>
-			</li>
-		</ul>
+			</[(#DIV|sinon{li})]>
+		</[(#DIV|sinon{ul})]>
 
-	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
-	  <!--extra-->
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
 		<p class='boutons'>
 			<input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' />
 		</p>

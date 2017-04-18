@@ -2,7 +2,7 @@
 <B_rubriques>
 <BOUCLE_rubriques(RUBRIQUES){id_rubrique=#ENV{id_rubrique_limite,0}}{id_rubrique != #ENV{id_rubrique}}{par num titre,titre}{tout}>
 	<B_ss_rubriques>
-	<li class="editer editer_id_parent diogene_selecteur_rubrique">
+	<[(#DIV|sinon{li})] class="editer editer_id_parent diogene_selecteur_rubrique">
 	<label for="id_parent"><:diogene:texte_choix_rubrique:></label>
 	<select name="[(#ENV{selecteur_type}|=={polyhier}|?{parents[(#VAL{91}|chr)][(#VAL{93}|chr)],id_parent})]" id="id_parent">
 		[(#ENV{afficher_option_nulle}|=={oui}|oui)<option value=""> - </option>]
@@ -32,15 +32,15 @@
 			</BOUCLE_ssss_rubriques>
 		</BOUCLE_ss_rubriques>
 	</select>
-	</li>
+	</[(#DIV|sinon{li})]>
 	</B_ss_rubriques>
-	<li class="editer editer_id_parent diogene_selecteur_rubrique_unique">
+	<[(#DIV|sinon{li})] class="editer editer_id_parent diogene_selecteur_rubrique_unique">
 	<BOUCLE_polyhier(CONDITION){si #ENV{selecteur_type}|=={polyhier}|oui}>
 	<input type="hidden" name="parents[(#VAL{91}|chr)][(#VAL{93}|chr)]" value="rubrique|#ID_RUBRIQUE" />
 	</BOUCLE_polyhier>
 	<input type="hidden" name="id_parent" value="#ID_RUBRIQUE" />
 	<//B_polyhier>
-	</li>
+	</[(#DIV|sinon{li})]>
 	<//B_ss_rubriques>
 </BOUCLE_rubriques>
 </B_rubriques>

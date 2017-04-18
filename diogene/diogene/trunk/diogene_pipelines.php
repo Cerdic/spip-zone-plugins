@@ -147,13 +147,13 @@ function diogene_editer_contenu_objet($flux) {
 					if ($champ == 'urlref') {
 						$champ = 'liens_sites';
 					}
-					if (($champ == 'liens_sites') && preg_match(",<li [^>]*class=[\"']editer editer_($champ).*<fieldset>.*<\/fieldset>.*<\/li>,Uims", $flux['data'], $regs)) {
-						$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer (editer_$champ).*<fieldset>.*<\/fieldset>.*<\/li>),Uims", '', $flux['data'], 1);
+					if (($champ == 'liens_sites') && preg_match(",<(li|div) [^>]*class=[\"']editer editer_($champ).*<fieldset>.*<\/fieldset>.*<\/(li|div)>,Uims", $flux['data'], $regs)) {
+						$flux['data'] = preg_replace(",(<(li|div) [^>]*class=[\"']editer (editer_$champ).*<fieldset>.*<\/fieldset>.*<\/(li|div)>),Uims", '', $flux['data'], 1);
 					} elseif (($champ != 'liens_site')
 						and (!isset($args['contexte'][$champ])
 							or (strlen($args['contexte'][$champ]) == 0))
-						and preg_match(",<li [^>]*class=[\"']editer editer_($champ).*<\/li>,Uims", $flux['data'], $regs)) {
-						$flux['data'] = preg_replace(",<li [^>]*class=[\"']editer editer_$champ.*<\/li>,Uims", '', $flux['data'], 1);
+						and preg_match(",<(li|div) [^>]*class=[\"']editer editer_($champ).*<\/(li|div)>,Uims", $flux['data'], $regs)) {
+						$flux['data'] = preg_replace(",<(li|div) [^>]*class=[\"']editer editer_$champ.*<\/(li|div)>,Uims", '', $flux['data'], 1);
 					}
 				}
 			}
@@ -288,7 +288,8 @@ function diogene_editer_contenu_objet($flux) {
 					$args['contexte']['type'] = $type;
 					$saisie .= trim(recuperer_fond('formulaires/selecteur_statut_objet', $contexte));
 				}
-				$flux['data'] = preg_replace(',(.*)(<!--extra-->),ims', "\\1<ul>".$saisie."</ul>\\2", $flux['data'], 1);
+				$balise = saisie_balise_structure_formulaire('ul');
+				$flux['data'] = preg_replace(',(.*)(<!--extra-->),ims', "\\1<".$balise.">".$saisie."</".$balise.">\\2", $flux['data'], 1);
 			}
 			if (($champs_sup = unserialize($diogene['champs_ajoutes']))
 				and is_array($champs_sup)
@@ -300,6 +301,7 @@ function diogene_editer_contenu_objet($flux) {
 			spip_log('pas de diogene', 'diogene.'._LOG_ERREUR);
 		}
 	}
+	spip_log($flux['data'], 'diogene_agenda.'._LOG_ERREUR);
 	return $flux;
 }
 
@@ -453,6 +455,7 @@ function diogene_formulaire_verifier($flux) {
 				'data' => $flux['data']
 			)
 		);
+		unset($flux['data']['id_parent']);
 		$messages = $flux['data'];
 		unset($messages['message_ok']);
 		if (count($messages) > 0) {
@@ -466,6 +469,7 @@ function diogene_formulaire_verifier($flux) {
 			$flux['data']['message_erreur'] = _T('diogene:message_erreur_general');
 		}
 	}
+	spip_log($flux, 'diogene_agenda.'._LOG_ERREUR);
 	return $flux;
 }
 

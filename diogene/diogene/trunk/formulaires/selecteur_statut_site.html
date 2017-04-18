@@ -1,9 +1,9 @@
 #CACHE{0}
-<li class="fieldset diogene_selecteur_statut">
+<[(#DIV|sinon{li})] class="fieldset diogene_selecteur_statut">
 <fieldset>
 	<legend><:diogene:legende_selecteur_statut:></legend>
-	<ul>
-		<li class="editer editer_statut">
+	<[(#DIV|sinon{ul})]>
+		<[(#DIV|sinon{li})] class="editer editer_statut">
 			<label for="statut"><:diogene:label_change_statut_normal_site:></label>
 			<select id="statut" name="statut">
 				<option value="publie"[(#ENV{statut}|=={publie}|oui) selected="selected"]>
@@ -20,7 +20,7 @@
 					[(#ENV{statut}|=={refuse}|non)<:diogene:texte_statut_poubelle_site:>]
 				</option>]
 			</select>
-		</li>
-	</ul>
+		</[(#DIV|sinon{li})]>
+	</[(#DIV|sinon{ul})]>
 </fieldset>
-</li>
+</[(#DIV|sinon{li})]>

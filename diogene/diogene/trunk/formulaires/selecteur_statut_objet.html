@@ -1,9 +1,9 @@
 #CACHE{0}
-<li class="fieldset diogene_selecteur_statut">
+<[(#DIV|sinon{li})] class="editer_groupe fieldset diogene_selecteur_statut">
 <fieldset>
 	<legend><:diogene:legende_selecteur_statut:></legend>
-	<ul>
-		<li class="editer editer_statut">
+	<[(#DIV|sinon{ul})]>
+		<[(#DIV|sinon{li})] class="editer editer_statut">
 			<label for="statut">[(#ENV{type}|objet_info{texte_changer_statut}|_T|sinon{<:diogene:label_change_statut_normal:>})]</label>
 			<select id="statut" name="statut">
 				<BOUCLE_statuts(DATA){source tableau,#ENV{type}|table_objet|objet_info{'statut_textes_instituer'}}>[(#AUTORISER{instituer,#ENV{type},#ENV{id_objet},'',#ARRAY{statut,#CLE}}|oui)[
@@ -12,10 +12,10 @@
 				[(#ENV{statut}|=={#CLE}|non)<option value="#CLE">#GET{statut_texte}</option>]]
 				</BOUCLE_statuts>
 			</select>
-		</li>
-	</ul>
+		</[(#DIV|sinon{li})]>
+	</[(#DIV|sinon{ul})]>
 </fieldset>
-</li>
+</[(#DIV|sinon{li})]>
 <script type="text/javascript">
 	var statut_defaut = "#ENV{statut}";
 	jQuery('#statut').change(function(){

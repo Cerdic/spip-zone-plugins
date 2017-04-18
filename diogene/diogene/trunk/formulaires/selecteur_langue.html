@@ -10,7 +10,7 @@
 	- un array des langues disponibles
 
 ]#CACHE{0}
-<li class="editer editer_langue">
+<[(#DIV|sinon{li})] class="editer editer_langue">
 	<label for="langue"><:diogene:choix_langue:></label>
 	#SET{langues_dispos,#ENV{langues_dispos}}
 	<BOUCLE_art(ARTICLES){id_article}{statut?}>
@@ -36,4 +36,4 @@
 		</BOUCLE_langues>
 	</select>
 	</B_langues>
-</li>
+</[(#DIV|sinon{li})]>
