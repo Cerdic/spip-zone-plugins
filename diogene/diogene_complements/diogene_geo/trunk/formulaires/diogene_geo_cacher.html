@@ -1,7 +1,7 @@
-<li class="fieldset">
+<[(#DIV|sinon{li})] class="fieldset">
 	<fieldset>
 		<legend><:gis:info_geolocalisation:></legend>
-		<ul>
+		<[(#DIV|sinon{ul})] class="editer-groupe">
 			[(#SAISIE{case, geo_forcer_existant,
 				label=<:diogene_geo:label_geo_forcer_existant:>,
 				valeur=[(#ENV**{options_complements}|unserialize|table_valeur{geo_forcer_existant})],
@@ -11,6 +11,6 @@
 				label=<:diogene_geo:label_geo_cacher:>,
 				valeur=[(#ENV**{options_complements}|unserialize|table_valeur{geo_cacher})],
 				label_case=<:diogene_geo:label_geo_cacher_defaut:>})]
-		</ul>
+		</[(#DIV|sinon{ul})]>
 	</fieldset>
-</li>
+</[(#DIV|sinon{li})]>
