@@ -200,7 +200,7 @@ function diogene_editer_contenu_objet($flux) {
 			if (in_array($type, array('article','page'))
 				and (count($langues_dispos)>1)) {
 				$saisie_langue = recuperer_fond('formulaires/selecteur_langue', array('langues_dispos' => $langues_dispos, 'id_article' => $args['contexte']['id_article']));
-				$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_titre.*<\/li>),Uims", "\\1".$saisie_langue, $flux['data'], 1);
+				$flux['data'] = preg_replace(",(<(li|div) [^>]*class=[\"']editer editer_titre.*<\/(li|div)>),Uims", "\\1".$saisie_langue, $flux['data'], 1);
 			}
 			/**
 			 * On remplace le selecteur de rubrique par le notre dans le public
@@ -208,8 +208,8 @@ function diogene_editer_contenu_objet($flux) {
 			 * On laisse le séleceteur normal dans le prive pour pouvoir changer l'objet de place
 			 */
 			if (!test_espace_prive()
-				and preg_match(",<li [^>]*class=[\"']editer editer_parent,Uims", $flux['data'], $regs)
-				and (!preg_match(",<li [^>]*class=[\"']editer editer_parents,Uims", $flux['data'], $regs2)
+				and preg_match(",<(li|div) [^>]*class=[\"']editer editer_parent,Uims", $flux['data'], $regs)
+				and (!preg_match(",<(li|div) [^>]*class=[\"']editer editer_parents,Uims", $flux['data'], $regs2)
 				or ($args['options_complements']['polyhier_desactiver'] == 'on'))) {
 				$contexte_selecteur = array(
 					'id_rubrique_limite'=>$id_secteur,
@@ -235,28 +235,28 @@ function diogene_editer_contenu_objet($flux) {
 
 				$saisie_rubrique = recuperer_fond('formulaires/selecteur_rubrique', $contexte_selecteur);
 				if ($args['contexte']['id_parent'] > 0) {
-					$flux['data'] = preg_replace(",(<li [^>]*class=[\"']$class.*)(<li [^>]*class=[\"'](editer|fieldset).*),Uims", $saisie_rubrique."\\2", $flux['data'], 1);
+					$flux['data'] = preg_replace(",(<(div|li) [^>]*class=[\"']$class.*)(<(div|li) [^>]*class=[\"'](editer|fieldset).*),Uims", $saisie_rubrique."\\3", $flux['data'], 1);
 				} else {
-					$flux['data'] = preg_replace(",(<li [^>]*class=[\"']$class.*)(<li [^>]*class=[\"'](editer|fieldset).*),Uims", "\\2", $flux['data'], 1);
+					$flux['data'] = preg_replace(",(<(div|li) [^>]*class=[\"']$class.*)(<(div|li) [^>]*class=[\"'](editer|fieldset).*),Uims", "\\3", $flux['data'], 1);
 				}
 				if (($class == 'editer editer_parents')
 					and ($args['options_complements']['polyhier_desactiver'] == 'on')) {
 					$sous_rub_count = sql_countsel('spip_rubriques', 'id_secteur='.intval($args['id_secteur']));
 					if ($sous_rub_count == 0) {
-						$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_parent.*)(<li [^>]*class=[\"']editer.*),Uims", ''."\\2", $flux['data'], 1);
-						$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_parents.*)(<li [^>]*class=[\"']editer.*),Uims", ''."\\2", $flux['data'], 1);
+						$flux['data'] = preg_replace(",(<(div|li) [^>]*class=[\"']editer editer_parent.*)(<(div|li) [^>]*class=[\"']editer.*),Uims", ''."\\3", $flux['data'], 1);
+						$flux['data'] = preg_replace(",(<(div|li) [^>]*class=[\"']editer editer_parents.*)(<(div|li) [^>]*class=[\"']editer.*),Uims", ''."\\3", $flux['data'], 1);
 					} else {
-						$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_parents.*)(<li [^>]*class=[\"']editer.*),Uims", ''."\\2", $flux['data'], 1);
+						$flux['data'] = preg_replace(",(<(div|li) [^>]*class=[\"']editer editer_parents.*)(<(div|li) [^>]*class=[\"']editer.*),Uims", ''."\\3", $flux['data'], 1);
 					}
 				}
 			} else if (!test_espace_prive()
 				and ($type != 'page')
-				and preg_match(",<li [^>]*class=[\"']editer editer_parents,Uims", $flux['data'], $regs)) {
+				and preg_match(",<(div|li) [^>]*class=[\"']editer editer_parents,Uims", $flux['data'], $regs)) {
 				$contexte = $args['contexte'];
 				$contexte['id_rubrique'] = $diogene['id_secteur'];
 				$contexte['limite_branche'] = $diogene['id_secteur'];
 				$saisie_rubrique = recuperer_fond('formulaires/inc-selecteur-parents_diogene', $contexte);
-				$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_parents.*)(<li [^>]*class=[\"']editer.*),Uims", $saisie_rubrique."\\2", $flux['data'], 1);
+				$flux['data'] = preg_replace(",(<(div|li) [^>]*class=[\"']editer editer_parents.*)(<(div|li) [^>]*class=[\"']editer.*),Uims", $saisie_rubrique."\\3", $flux['data'], 1);
 			}
 			/**
 			 * On ajoute en fin de formulaire les blocs supplémentaires
