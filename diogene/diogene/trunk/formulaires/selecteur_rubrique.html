@@ -1,13 +1,13 @@
 #SET{prefix,#ENV{selecteur_type}|=={polyhier}|?{'rubrique|',''}}
-<B_rubriques>
-<BOUCLE_rubriques(RUBRIQUES){id_rubrique=#ENV{id_rubrique_limite,0}}{id_rubrique != #ENV{id_rubrique}}{par num titre,titre}{tout}>
+[(#ENV{type}|=={rubrique}|oui)#SET{exclue,#ENV{id_rubrique}}]
+<BOUCLE_rubriques(RUBRIQUES){id_rubrique=#ENV{id_rubrique_limite,0}}{id_rubrique != #GET{exclue,0}}{par num titre,titre}{tout}>
 	<B_ss_rubriques>
 	<[(#DIV|sinon{li})] class="editer editer_id_parent diogene_selecteur_rubrique">
 	<label for="id_parent"><:diogene:texte_choix_rubrique:></label>
 	<select name="[(#ENV{selecteur_type}|=={polyhier}|?{parents[(#VAL{91}|chr)][(#VAL{93}|chr)],id_parent})]" id="id_parent">
 		[(#ENV{afficher_option_nulle}|=={oui}|oui)<option value=""> - </option>]
 		[(#ENV{rubrique_principale}|=={oui}|oui)<option value="#GET{prefixe}#ID_RUBRIQUE" [(#ID_RUBRIQUE|=={#ENV{id_parent}}|oui)selected="selected"]>[(#TITRE|supprimer_numero)]</option>]
-		<BOUCLE_ss_rubriques(RUBRIQUES){id_parent}{id_rubrique != #ENV{id_rubrique}}{par num titre,titre}{tout}>
+		<BOUCLE_ss_rubriques(RUBRIQUES){id_parent}{id_rubrique != #GET{exclue}}{par num titre,titre}{tout}>
 			#SET{sep,''}
 			[(#PROFONDEUR|=={1}|oui) #SET{sep,&nbsp;&rsaquo;}]
 			[(#PROFONDEUR|=={2}|oui) #SET{sep,&nbsp;&rsaquo;&nbsp;&rsaquo;}]
@@ -15,10 +15,10 @@
 			[(#PROFONDEUR|=={4}|oui) #SET{sep,&nbsp;&rsaquo;&nbsp;&rsaquo;&nbsp;&rsaquo;&nbsp;&rsaquo;}]
 			[(#PROFONDEUR|=={5}|oui) #SET{sep,&nbsp;&rsaquo;&nbsp;&rsaquo;&nbsp;&rsaquo;&nbsp;&rsaquo;&nbsp;&rsaquo;}]
 			<option value="#GET{prefixe}#ID_RUBRIQUE" [(#ID_RUBRIQUE|=={#ENV{id_parent}}|oui)selected="selected"]>
-				[(#GET{sep})&nbsp;][(#TITRE|supprimer_numero)]
+				[(#GET{sep})&nbsp;][(#TITRE)]
 			</option>
 			<B_ssss_rubriques>
-			<BOUCLE_ssss_rubriques(RUBRIQUES){id_parent}{id_rubrique != #ENV{id_rubrique}}{par num titre,titre}{tout}>
+			<BOUCLE_ssss_rubriques(RUBRIQUES){id_parent}{id_rubrique != #GET{exclue}}{par num titre,titre}{tout}>
 			#SET{sep,''}
 			[(#PROFONDEUR|=={1}|oui) #SET{sep,&nbsp;&rsaquo;}]
 			[(#PROFONDEUR|=={2}|oui) #SET{sep,&nbsp;&rsaquo;&nbsp;&rsaquo;}]
@@ -26,7 +26,7 @@
 			[(#PROFONDEUR|=={4}|oui) #SET{sep,&nbsp;&rsaquo;&nbsp;&rsaquo;&nbsp;&rsaquo;&nbsp;&rsaquo;}]
 			[(#PROFONDEUR|=={5}|oui) #SET{sep,&nbsp;&rsaquo;&nbsp;&rsaquo;&nbsp;&rsaquo;&nbsp;&rsaquo;&nbsp;&rsaquo;}]
 			<option value="#GET{prefixe}#ID_RUBRIQUE" [(#ID_RUBRIQUE|=={#ENV{id_parent}}|oui)selected="selected"]>
-				[(#GET{sep})&nbsp;][(#TITRE|supprimer_numero)]
+				[(#GET{sep})&nbsp;][(#TITRE)]
 			</option>
 			<BOUCLE_ssssss_rubriques(BOUCLE_ssss_rubriques)> </BOUCLE_ssssss_rubriques>
 			</BOUCLE_ssss_rubriques>
