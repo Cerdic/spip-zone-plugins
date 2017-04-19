@@ -3,14 +3,12 @@
 	Plugins Xiti
 
 ]<div id="xiti-tag">[(#SET{smarttime,[(#CHEMIN{javascript/smarttag.js}|filemtime)]})]
-	[<script type="text/javascript" src="(#PRODUIRE{fond=javascript/xiti.js,smart=#GET{smarttime}}|url_absolue)"></script>]
-	<script type="text/javascript">
-		[(#REM)
+	[<script type="text/javascript" src="(#PRODUIRE{fond=javascript/xiti.js,smart=#GET{smarttime}}|timestamp|url_absolue)"></script>]
+	<script type="text/javascript">[(#REM)
 
 			Si le plugin cookiebar est installé
 
-		]
-		var cookie = true;
+		]var cookie = true, conf_page = {};
 		if(window.jQuery && window.jQuery.cookieBar){
 			cookie = jQuery.cookieBar('cookies');
 		}
