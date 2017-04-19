@@ -22,7 +22,7 @@
 			conf_page = {
 				name: '[(#ENV{page})]'<B_chapitres>,<BOUCLE_chapitres(DATA){source table, #ENV{chapitres,#ARRAY}}{','}>
 				chapter[(#COMPTEUR_BOUCLE)]: '#VALEUR'</BOUCLE_chapitres>[,
-				level2: (#ENV{niveau2}|intval|trim)
+				level2: (#ENV{niveau2}|trim)
 			]}
 			ATTag.page.set(conf_page);
 
