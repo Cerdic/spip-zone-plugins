@@ -11,6 +11,7 @@
 			]
 			<h4 class="titrem"><span class="#EDIT{titre}"><a href="#URL">#TITRE</a></span></h4>
 			<div class="descriptif #EDIT{descriptif}">#DESCRIPTIF</div>
+			[<div class="css #EDIT{css}"><code>(#CHAMP_SQL{css}|attribut_html)</code></div>]
 			[(#ENV{editer_contenu,non}|=={non}|oui)
 			<div class="actions">
 				[(#AUTORISER{supprimer,selections_contenu,#ID_SELECTIONS_CONTENU}|oui)
