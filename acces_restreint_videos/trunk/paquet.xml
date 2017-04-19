@@ -1,7 +1,7 @@
 <paquet
 	prefix="accesrestreintvideos"
 	categorie="auteur"
-	version="1.2.1"
+	version="1.2.2"
 	etat="stable"
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/accesrestreintvideos-64.png"
@@ -16,9 +16,9 @@
 	<auteur lien='http://www.ldd.fr'>Les Développements Durables</auteur>
 
 	<licence>GNU/GPL v3</licence>
-	
+
 	<pipeline nom="accesrestreint_afficher_document" inclure="accesrestreintvideos_pipelines.php" />
-	
+
 	<necessite nom="accesrestreint" compatibilite="[3.12.8;]" />
 	<necessite nom="oembed" compatibilite="[0.9.9;]" />
 </paquet>

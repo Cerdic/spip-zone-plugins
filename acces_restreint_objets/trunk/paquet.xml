@@ -1,7 +1,7 @@
 <paquet
 	prefix="accesrestreintobjets"
 	categorie="auteur"
-	version="1.0.0"
+	version="1.0.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="accesrestreintobjets.png"
@@ -13,7 +13,7 @@
 	<licence>GNU/GPL v3</licence>
 
 	<necessite nom="accesrestreint" compatibilite="[3.9.0;]" />
-	
+
 	<pipeline nom="affiche_milieu" inclure="accesrestreintobjets_pipelines.php" />
 	<pipeline nom="post_edition_lien" inclure="accesrestreintobjets_pipelines.php" />
 	<pipeline nom="recuperer_fond" inclure="accesrestreintobjets_pipelines.php" />
