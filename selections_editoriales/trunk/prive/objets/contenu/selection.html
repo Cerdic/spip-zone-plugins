@@ -15,6 +15,11 @@
     <div dir='#LANG_DIR' class='span #EDIT{identifiant} identifiant'>(#IDENTIFIANT)</div>
 </div>]
 
+[<div class="champ contenu_css[ (#CHAMP_SQL{css}|strlen|?{'',vide})]">
+    <div class="label"><:selection:champ_css_label:> : </div>
+    <div dir='#LANG_DIR' class='span #EDIT{css} css'><code>(#CHAMP_SQL{css})</code></div>
+</div>]
+
 [<div class="champ contenu_limite[ (#LIMITE*|strlen|?{'',vide})]">
     <div class="label"><:selection:champ_limite_label:> : </div>
     <div dir='#LANG_DIR' class='span #EDIT{limite} limite'>(#LIMITE)</div>
