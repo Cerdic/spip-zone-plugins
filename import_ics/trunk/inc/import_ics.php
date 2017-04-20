@@ -20,13 +20,13 @@ function trouver_evenements_almanach($id_almanach,$champs='uid,id_evenement',$to
 		$liens = sql_allfetsel($champs,
 			'spip_evenements
 			INNER JOIN spip_almanachs_liens AS L
-			ON id_evenement = L.id_objet AND L.id_almanach='.intval($id_almanach));	
+			ON id_evenement = L.id_objet AND L.id_almanach='.intval($id_almanach));
 	}
 	else{
 		$liens = sql_allfetsel($champs,
 			'spip_evenements
 			INNER JOIN spip_almanachs_liens AS L
-			ON id_evenement = L.id_objet AND L.id_almanach='.intval($id_almanach),"statut!=".sql_quote("archive"));	
+			ON id_evenement = L.id_objet AND L.id_almanach='.intval($id_almanach),"statut!=".sql_quote("archive"));
   }
 	return $liens;
 }
@@ -39,11 +39,11 @@ function importer_almanach($id_almanach,$url,$id_article,$decalage){
 	$cal->parse();
 	$statut = sql_getfetsel('statut','spip_almanachs',"`id_almanach`=$id_almanach");
 	$liens = trouver_evenements_almanach($id_almanach);
-	
+
 	// rechercher les mots clefs lié à un objet_modifier
 	$mots = lister_objets_lies('mot','almanach',$id_almanach,'spip_mots_liens');
-	
-	
+
+
 	// on definit un tableau des uid présentes dans la base
 	$uid =array();
 	foreach ($liens as $u ) {
@@ -51,7 +51,7 @@ function importer_almanach($id_almanach,$url,$id_article,$decalage){
 	};
 	$les_uid_distant = array();
 	while ($comp = $cal->getComponent()){
-			#les variables qui vont servir à vérifier l'existence et l'unicité 
+			#les variables qui vont servir à vérifier l'existence et l'unicité
 			$uid_distante = $comp->getProperty("UID");#uid de l'evenement
 			$les_uid_distant[] = 	$uid_distante;
 			$last_modified_distant = $comp->getProperty("LAST-MODIFIED");
@@ -73,15 +73,15 @@ function importer_almanach($id_almanach,$url,$id_article,$decalage){
 						autoriser_exception('evenement','modifier',$id_evenement,false);
 						spip_log ("Mise à jour de l'évènement $id_evenement, almanach $id_almanach","import_ics"._LOG_INFO);
 					}
-				} 
+				}
 			else {
 				importer_evenement($comp,$id_almanach,$id_article,$decalage,$statut,$mots);
-			};//l'evenement n'est pas dans la bdd, on va l'y mettre	
+			};//l'evenement n'est pas dans la bdd, on va l'y mettre
 		}
 		if (_IMPORT_ICS_DEPUBLIER_ANCIENS_EVTS == 'on' or  lire_config("import_ics/depublier_anciens_evts") == 'on'){
 			depublier_ancients_evts($uid,$les_uid_distant,$id_article);
 		}
-		
+
 		// mettre à jour les infos de synchronisation. Le champ derniere_synchro n'est pas un champ éditable, donc on passe par sql_update et pas par editer_objet
 		sql_update("spip_almanachs",array("derniere_synchro"=>"NOW()"),"id_almanach=".intval($id_almanach));
 }
@@ -95,9 +95,9 @@ function depublier_ancients_evts($les_uid_local,$les_uid_distant,$id_article){
 		autoriser_exception('instituer','evenement',$id_evenement);
 		autoriser_exception('modifier','article',$id_article);
 		objet_instituer('evenement',$id_evenement,array("statut"=>'archive'));
-		spip_log ("Archivage de l'évènement $id_evenement","import_ics"._LOG_INFO);
+		spip_log ("Archivage de l'évènement $id_evenement (uid:$uid)","import_ics"._LOG_INFO);
 		autoriser_exception('instituer','evenement',$id_evenement,false);
-		autoriser_exception('modifier','article',$id_article,false);		
+		autoriser_exception('modifier','article',$id_article,false);
 	}
 }
 /**
@@ -111,12 +111,12 @@ function importer_evenement($objet_evenement,$id_almanach,$id_article,$decalage,
 				"date_creation"=>date('Y-m-d H:i:s')
 		)
 	);
-	
+
 	# création de l'evt
 	autoriser_exception('creer','evenement','');
   $id_evenement= objet_inserer('spip_evenements',$id_article,$champs_sql);
 	autoriser_exception('creer','evenement','',false);
-	
+
 	autoriser_exception('instituer','evenement',$id_evenement);
 	autoriser_exception('modifier','article',$id_article);
 	objet_instituer('evenement',$id_evenement,array("statut"=>$statut));
@@ -128,13 +128,13 @@ function importer_evenement($objet_evenement,$id_almanach,$id_article,$decalage,
 	autoriser_exception('instituer','evenement',$id_evenement,false);
 	autoriser_exception('modifier','article',$id_article,false);
 
-	
+
 	#on associe l'événement à l'almanach
-	objet_associer(array('almanach'=>$id_almanach),array('evenement'=>$id_evenement),array('vu'=>'oui'));	
+	objet_associer(array('almanach'=>$id_almanach),array('evenement'=>$id_evenement),array('vu'=>'oui'));
 	spip_log ("Import de l'évènement $id_evenement, almanach $id_almanach","import_ics"._LOG_INFO);
 }
 
-/* 
+/*
 ** Récupérer les propriétés d'un evenements de sorte qu'on puisse en faire la requete sql
 */
 function evenement_ical_to_sql($objet_evenement,$decalage){
@@ -168,7 +168,7 @@ function evenement_ical_to_sql($objet_evenement,$decalage){
 			// Est-ce que l'evt dure toute la journée?
 			if ($end_all_day and $start_all_day){
 				$horaire = "non";
-				$date_fin = "DATE_SUB('$date_fin', INTERVAL 1 DAY)";// Si un évènement dure toute la journée du premie août, le flux ICAL indique pour DTEND le 2 août (cf http://www.faqs.org/rfcs/rfc2445.html). Par contre le plugin agenda lui dit simplement "evenement du 1er aout au 1er aout, sans horaire". D'où le fait qu'on décale $date_fin par rapport aux flux originel. 
+				$date_fin = "DATE_SUB('$date_fin', INTERVAL 1 DAY)";// Si un évènement dure toute la journée du premie août, le flux ICAL indique pour DTEND le 2 août (cf http://www.faqs.org/rfcs/rfc2445.html). Par contre le plugin agenda lui dit simplement "evenement du 1er aout au 1er aout, sans horaire". D'où le fait qu'on décale $date_fin par rapport aux flux originel.
 			}
 			else{
 				$horaire = "oui";
@@ -189,5 +189,3 @@ function evenement_ical_to_sql($objet_evenement,$decalage){
 			'last_modified_distant'=>$last_modified_distant,
 			'notes'=>$url);
 }
-
-
