@@ -1,6 +1,6 @@
 [(#SET{defaut_tri,#ARRAY{
-	titre,1, 
-	date,-1, 
+	titre,1,
+	date,-1,
 	id_almanach,1,
 	points,-1
 }})]<B_liste_almanachs>
@@ -10,7 +10,7 @@
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{almanach:info_1_almanach,almanach:info_nb_almanachs}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
 			<th class='picto' scope='col'></th>
 			<th class='titre' scope='col'>[(#TRI{titre,<:almanach:label_titre:>,ajax})]</th>
 			<th class='utilisations' scope='col'></th>
@@ -20,9 +20,9 @@
 	<tbody>
 	<BOUCLE_liste_almanachs(ALMANACHS){id_article?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
-			<td class='statut'>[(#STATUT|puce_statut{almanach,#ID_ALMANACH})]</td> 
+			<td class='statut'>[(#STATUT|puce_statut{almanach,#ID_ALMANACH})]</td>
 			<td class='picto'>[(#CHEMIN_IMAGE{almanach-16.png}|balise_img)]</td>
-			<td class='titre principale'>[(#LOGO_ALMANACH|image_reduire{20,26})]<a href="[(#ID_ALMANACH|generer_url_entite{almanach})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ALMANACH">[(#RANG). ]#TITRE</a></td>
+			<td class='titre principale'>[(#LOGO_ALMANACH|image_reduire{20,26})]<a href="[(#ID_ALMANACH|generer_url_entite{almanach})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ALMANACH">[(#RANG). ]#TITRE[ (#DERNIERE_SYNCHRO|strtotime|<{#DERNIERE_ERREUR|strtotime}|oui)(<:almanach:erreur_synchro:>)]</a></td>
 			<td class='utilisations secondaire'>
 			<!--on compte le nombre d'événemnts liés à cet almanach et on regarde donc s'il est utilisé-->
 			<BOUCLE_combien(spip_almanachs_liens) {id_almanach}></BOUCLE_combien>

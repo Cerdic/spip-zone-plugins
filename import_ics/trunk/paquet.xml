@@ -1,12 +1,12 @@
 <paquet
 	prefix="import_ics"
 	categorie="date"
-	version="4.3.2"
+	version="4.3.3"
 	etat="stable"
 	compatibilite="[3.0.7;3.1.*]"
 	logo="prive/themes/spip/images/import_ics-64.png"
 	documentation="https://contrib.spip.net/4816"
-	schema="1.0.9"
+	schema="1.0.10"
 >
 	<nom>Import_ics</nom>
 
@@ -14,11 +14,11 @@
 	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
 	<auteur>Touti</auteur>
 	<licence>GNU/GPL</licence>
-	
+
 	<traduire module="almanach" reference="fr" />
 	<traduire module="import_ics" reference="fr" />
 	<traduire module="paquet-import_ics" reference="fr" />
-	
+
 	<necessite nom="agenda" compatibilite="[3.16.0;[" />
 	<necessite nom="icalendar" compatibilite="[0.4.4;[" />
 	<necessite nom="cextras" compatibilite="[3.0.5;[" />
@@ -36,7 +36,7 @@
 	<pipeline nom="optimiser_base_disparus" inclure="import_ics_pipelines.php" />
 	<pipeline nom="post_edition" inclure="import_ics_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="import_ics_pipelines.php" />
-	<pipeline nom="evenement_liaisons_colonne_gauche" inclure="import_ics_pipelines.php" /> 
+	<pipeline nom="evenement_liaisons_colonne_gauche" inclure="import_ics_pipelines.php" />
 	<pipeline nom="post_edition_lien" inclure="import_ics_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="import_ics_pipelines.php" />
 	<pipeline nom="corbeille_table_infos" inclure="import_ics_pipelines.php" />

@@ -68,7 +68,9 @@ function import_ics_upgrade($nom_meta_base_version, $version_cible) {
 		array('effacer_config','import_ics/id_mot'),
 		array('effacer_config','import_ics/id_groupe')
 	);
-
+	$maj["1.0.10"] = array(
+		array('sql_alter',"TABLE spip_almanachs ADD derniere_erreur datetime NOT NULL DEFAULT '0000-00-00 00:00:00'"),
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -108,7 +110,7 @@ function dupliquer_decalage(){
 }
 
 /**
-* Lors du passage en 3.0, on publie tout les almanachs, 
+* Lors du passage en 3.0, on publie tout les almanachs,
 * pour que la rupture de compat ne soit pas trop forte
 **/
 function publier_almanachs_tous(){

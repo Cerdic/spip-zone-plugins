@@ -36,7 +36,12 @@ function importer_almanach($id_almanach,$url,$id_article,$decalage){
 	//configuration nécessaire à la récupération
 	$config = array("unique_id"=>"","url"=>$url);
 	$cal = new vcalendar($config);
-	$cal->parse();
+	if (!$cal->parse()){
+		spip_log("Erreur lors de l'analyse de l'url $url (almanach $id_almanach)","import_ics"._LOG_ERREUR);
+		sql_update("spip_almanachs",array("derniere_erreur"=>"NOW()"),"id_almanach=".intval($id_almanach));
+		return;
+	}
+
 	$statut = sql_getfetsel('statut','spip_almanachs',"`id_almanach`=$id_almanach");
 	$liens = trouver_evenements_almanach($id_almanach);
 

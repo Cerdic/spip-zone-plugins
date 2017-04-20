@@ -47,14 +47,15 @@ function import_ics_declarer_tables_objets_sql($tables) {
 			"id_article"         => "bigint(21) NOT NULL DEFAULT 0",
 			"decalage_ete"       => "tinyint NOT NULL DEFAULT 0",
 			"decalage_hiver"     => "tinyint NOT NULL DEFAULT 0",
-			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", 
-			"statut"             => "varchar(20) DEFAULT '0' NOT NULL", 
+			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
+			"statut"             => "varchar(20) DEFAULT '0' NOT NULL",
 			"maj"                => "TIMESTAMP",
-			"derniere_synchro"	 => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'"
+			"derniere_synchro"	 => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
+			"derniere_erreur"	 	 => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'"
 		),
 		'key' => array(
 			"PRIMARY KEY"        => "id_almanach",
-			"KEY statut"         => "statut", 
+			"KEY statut"         => "statut",
 		),
 		'titre' => "titre AS titre, '' AS lang",
 		'date' => "date",
@@ -73,15 +74,15 @@ function import_ics_declarer_tables_objets_sql($tables) {
 				'champ'     => 'statut',
 				'publie'    => 'publie',
 				'previsu'   => 'publie,prop,prepa',
-				'post_date' => 'date', 
+				'post_date' => 'date',
 				'exception' => array('statut','tout')
 			)
 		),
-		'texte_changer_statut' => 'almanach:texte_changer_statut_almanach', 
-		
+		'texte_changer_statut' => 'almanach:texte_changer_statut_almanach',
+
 
 	);
-	
+
 	// les jointures automatiques
 	$tables['spip_evenements']['tables_jointures'][] = 'almanachs_liens';
 	$tables['spip_evenements']['tables_jointures'][] = 'almanachs';
@@ -144,28 +145,28 @@ function import_ics_declarer_champs_extras($champs = array()){
 		'saisie' => 'input',// type de saisie
 		'options' => array(
 			'nom' => 'attendee',
-			'label' => _T('almanach:attendee'), 
+			'label' => _T('almanach:attendee'),
 			'sql' => "varchar(256) NOT NULL DEFAULT ''", // declaration sql
 			'rechercher'=>true,
-			'defaut' => '',	
+			'defaut' => '',
 	));
 	$champs['spip_evenements']['origin'] = array(
 		'saisie' => 'input',
 		'options' => array(
 			'nom' => 'origin', // nom sql
-			'label' => _T('almanach:origin'), 
+			'label' => _T('almanach:origin'),
 			'sql' => "varchar(256) NOT NULL DEFAULT ''", // declaration sql
 			'rechercher'=>true,
-			'defaut' => '',	
+			'defaut' => '',
 	));
 	$champs['spip_evenements']['notes'] = array(
 		'saisie' => 'textarea',
 		'options' => array(
 			'nom' => 'notes', // nom sql
-			'label' => _T('almanach:notes'), 
+			'label' => _T('almanach:notes'),
 			'sql' => "text NOT NULL DEFAULT ''", // declaration sql
 			'rechercher'=>true,
-			'defaut' => '',	
+			'defaut' => '',
 			'rows' => 4,
 			'traitements' => '_TRAITEMENT_RACCOURCIS',
 			'class'	=>'inserer_barre_edition',
@@ -174,10 +175,10 @@ function import_ics_declarer_champs_extras($champs = array()){
 		'saisie' => 'hidden',
 		'options' => array(
 			'nom' => 'uid', // nom sql
-			'label' => _T('almanach:uid'), 
+			'label' => _T('almanach:uid'),
 			'sql' => "text NOT NULL", // declaration sql
 			'rechercher'=>false,
-			'defaut' => '',	
+			'defaut' => '',
 			'rows' => 4,
 			'versionner' => true,
 			'modifier' => array()
@@ -186,27 +187,27 @@ function import_ics_declarer_champs_extras($champs = array()){
 		'saisie' => 'hidden',
 		'options' => array(
 			'nom' => 'sequence', // nom sql
-			'label' => _T('almanach:sequence'), 
+			'label' => _T('almanach:sequence'),
 			'sql' => "bigint(21) DEFAULT '0' NOT NULL", // declaration sql
 			'rechercher'=>false,
-			'defaut' => '',	
+			'defaut' => '',
 			'rows' => 4,
 			'versionner' => true,
 			'modifier' => array()
-	));	
+	));
 	$champs['spip_evenements']['last_modified_distant'] = array(
 		'saisie' => 'hidden',
 		'options' => array(
 			'nom' => 'last_modified_distant', // nom sql
-			'label' => _T('almanach:last_modified_distant'), 
+			'label' => _T('almanach:last_modified_distant'),
 			'sql' => "last_modified_distant text NOT NULL", // declaration sql
 			'rechercher'=>false,
-			'defaut' => '',	
+			'defaut' => '',
 			'rows' => 4,
 			'versionner' => true,
 			'modifier' => array(),
 			'traitements' => 'affdate_heure(date_ical_to_sql(unserialize(%s),"",True))'
-	));	
+	));
 	return $champs;
 }
 

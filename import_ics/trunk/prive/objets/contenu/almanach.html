@@ -34,19 +34,25 @@
   #INCLURE{fond=prive/objets/liste/evenements_almanach,env,ajax}
 
 
-	
+
 	[<div class='maj'>
 	(#DERNIERE_SYNCHRO|!={"0000-00-00 00:00:00"}|?{
 		<:almanach:info_derniere_synchronisation:>&nbsp;[(#DERNIERE_SYNCHRO|affdate_heure)],
 		<:almanach:info_jamais_synchro:>
 	})
 </div>]
-	
+[(#DERNIERE_SYNCHRO|strtotime|<{#DERNIERE_ERREUR|strtotime}|oui)
+<div class="error">
+	#SET{date,#DERNIERE_ERREUR|affdate_heure}
+<:almanach:info_erreur_synchronisation{date=#GET{date}}:>
+</div>
+]
+
 	<div class='synchro_almanach'>
 		[(#BOUTON_ACTION{<:almanach:lien_synchro_almanach:>,#URL_ACTION_AUTEUR{synchro_almanach,#ID_ALMANACH,#SELF},ajax,<:almanach:confirmation_mise_a_jour_evenements{titre_almanach=#TITRE}:>,})]
 	</div>
 
-	
+
 	<BOUCLE_nb_evenement(spip_almanachs_liens){id_almanach=#ID_ALMANACH}{objet=evenement}>
 	</BOUCLE_nb_evenement>
 	<div class='purger_almanach'><:almanach:purger_almanach:></div>
@@ -54,7 +60,7 @@
 		[(#BOUTON_ACTION{<:almanach:info_supprimer_evenements:>,#URL_ACTION_AUTEUR{supprimer_evenements_almanach,#ID_ALMANACH,#SELF},ajax,<:almanach:confirmation_suppression_evenements{titre_almanach=#TITRE}:>,'','(function(me){$(me).parents("tr").animateRemove();return true;})(this)'})]
 	]
 	</B_nb_evenement>
-	
+
 	[(#REM) tenter une réparation si aucun évènement, peut-être du à une désinstallation du plugin agenda]
 	<BOUCLE_aucun_evenement(EVENEMENTS){tout}{0,1}>
 	</BOUCLE_aucun_evenement>
@@ -67,5 +73,5 @@
 		]
 	]
 	<//B_aucun_evenement>
-	
+
 </BOUCLE_almanach>

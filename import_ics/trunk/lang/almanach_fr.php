@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_resa_auto' => 'On peut réserver automatiquement une salle pour tous les événements d’un même almanach (modifiable individuellement ensuite).',
 	'explication_titre' => 'Titre de l’almanach',
 	'explication_url' => 'URL d’origine du calendrier',
+	'erreur_synchro' => 'Erreur à la dernière synchronisation',
 
 	// F
 	'forcer_install_import_ics' => 'Forcer la réinstallation',
@@ -50,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_almanach' => 'Un almanach',
 	'info_almanachs_auteur' => 'Les almanachs de cet auteur',
 	'info_aucun_almanach' => 'Aucun almanach',
+	'info_erreur_synchronisation' => 'Erreur lors de la synchronisation de cet almanach (@date@)',
 	'info_derniere_synchronisation' => 'La dernière synchronisation de cet almanach a été effectuée le',
 	'info_evenement_almanach' => 'Les événements de cet almanach',
 	'info_jamais_synchro' => 'Cet almanach n’a jamais été synchronisé',
