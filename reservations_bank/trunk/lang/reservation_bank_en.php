@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
-	'label_cacher_paiement_public' => 'do not display the paiment form on the public site', # MODIF
+	'label_cacher_paiement_public' => 'do not display the paiment form on the public site',
 	'label_fieldset_montant_detail' => 'Specify the amount (in @devise@) for each booking item',
 	'label_fieldset_specifier' => 'Specify',
 	'label_specifier_montant' => 'Specify the amount',
