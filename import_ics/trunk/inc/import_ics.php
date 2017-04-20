@@ -91,6 +91,9 @@ function importer_almanach($id_almanach,$url,$id_article,$decalage){
 **/
 function depublier_ancients_evts($les_uid_local,$les_uid_distant,$id_article){
 	$diff = array_diff ($les_uid_local,$les_uid_distant);
+	$print_local = print_r($les_uid_local,true);
+	$print_distant = print_r($les_uid_distant,true);
+	spip_log("UID local:$print_local;UID_distant:$print_distant","import_ics"._LOG_INFO);
 	foreach ($diff as $id_evenement =>$uid){
 		autoriser_exception('instituer','evenement',$id_evenement);
 		autoriser_exception('modifier','article',$id_article);
