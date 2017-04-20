@@ -1,7 +1,7 @@
 <B_reservation>
 [(#BOITE_OUVRIR{
-    [(#CHEMIN_IMAGE{reservation_evenement-32.png}|balise_img{'','cadre-icone'})]
-    ,'simple personnel infos'})]  
+		[(#CHEMIN_IMAGE{reservation_evenement-32.png}|balise_img{'','cadre-icone'})]
+		,'simple personnel infos'})]
 <BOUCLE_reservation(RESERVATIONS){id_reservation}{statut?}>
 <div class='infos'>
 [(#SET{texte_objet,<:reservation:titre_reservation:>})]
@@ -12,12 +12,13 @@
 #SET{envoi_separe_count,#GET{envoi_separe}|count}
 
 [(#GET{envoi_separe_count}|>{0}|et{#CONFIG{reservation_evenement/activer}}|oui)
-    #SET{statuts,#GET{envoi_separe}|nom_statuts|implode{','}|trim}
-   [(#BOITE_OUVRIR{<:reservation:titre_envoi_separe:>,'notice'})]
-    <:reservation:explication_envoi_separe{statuts=#GET{statuts}}:>
-   #BOITE_FERMER   
+		#SET{statuts,#GET{envoi_separe}|nom_statuts|implode{','}|trim}
+	 [(#BOITE_OUVRIR{<:reservation:titre_envoi_separe:>,'notice'})]
+		<:reservation:explication_envoi_separe{statuts=#GET{statuts}}:>
+	 #BOITE_FERMER
 ]
 </div>
 </BOUCLE_reservation>
-#BOITE_FERMER     
+<!-- Infos extras -->
+#BOITE_FERMER
 </B_reservation>
