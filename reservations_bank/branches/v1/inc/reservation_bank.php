@@ -2,8 +2,6 @@
 /**
  * Génère le montant_reservations_detail
  *
- * @pipeline bank_traiter_reglement
- *
  * @param int $id_reservation
  *
  * @return array
