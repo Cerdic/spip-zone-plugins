@@ -38,7 +38,7 @@ function formulaires_editer_almanach_charger_dist($id_almanach='new', $retour=''
 			$valeurs['tableau_decalage'][strval($i)] = strval($i)." "._T("date_heures");
 		}
 		else {
-			$valeurs['tableau_decalage'][strval($i)] = strval($i)." "._T("date_une_heure");		
+			$valeurs['tableau_decalage'][strval($i)] = strval($i)." "._T("date_une_heure");
 		}
 		$i++;
 	}
@@ -49,9 +49,9 @@ function formulaires_editer_almanach_charger_dist($id_almanach='new', $retour=''
 			$valeurs['tableau_decalage'][strval($i)] = "+".strval($i)." "._T("date_heures");
 		}
 		else {
-			$valeurs['tableau_decalage'][strval($i)] = "+".strval($i)." "._T("date_une_heure");		
+			$valeurs['tableau_decalage'][strval($i)] = "+".strval($i)." "._T("date_une_heure");
 		}
-		$i++;		
+		$i++;
 	}
 	return $valeurs;
 
@@ -106,16 +106,16 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 		$ancien_url = $anciens_champs['url'];
 	}
 	$chargement = formulaires_editer_objet_traiter('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
-	
+
 	#on recupère l'id de l'almanach dont on aura besoin plus tard
 	$id_almanach = $chargement['id_almanach'];
 	$url = _request("url");
 	$id_article = _request("id_article");
 	$decalage['ete'] = _request("decalage_ete");
 	$decalage['hiver'] = _request("decalage_hiver");
-	
-	
-	
+
+
+
 	// Corriger les évènements existants si certaines propriétés de l'almanache sont modifiés
 	$evenements = trouver_evenements_almanach($id_almanach,'id_evenement,date_debut,date_fin',true);
 	if (is_array($evenements) and count($evenements)>0){
@@ -128,7 +128,7 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	}
 	# on importe les autres évènement
 	importer_almanach($id_almanach,$url,$id_article,$decalage);
-	
+
 	return $chargement;
 }
 
@@ -136,13 +136,13 @@ function corriger_decalage($id_almanach,$nouveau_decalage,$ancien_decalage,$lien
 	include_spip('action/editer_evenement');
 	$decalage_ete = intval($nouveau_decalage['ete']) - intval($ancien_decalage['ete']);
 	$decalage_hiver = intval($nouveau_decalage['hiver']) - intval($ancien_decalage['hiver']);
-	
+
 	foreach ($liens as $l){
 		$champs_sql = array();
 		$id_evenement = intval($l["id_evenement"]);
 		$heure_ete_debut = intval(affdate($l['date_debut'],'I'));//Est-ce que la date de début se trouve en période d'heure d'été?
 		$heure_ete_fin = intval(affdate($l['date_fin'],'I'));// Est-ce que la date de fin se trouve en période d'heure d'été?
-		
+
 		if ($heure_ete_debut){
 			$champs_sql['date_debut'] = "DATE_ADD(date_debut, INTERVAL  $decalage_ete HOUR)";
 		}
@@ -156,7 +156,7 @@ function corriger_decalage($id_almanach,$nouveau_decalage,$ancien_decalage,$lien
 		else {
 			$champs_sql['date_fin'] = "DATE_ADD(date_fin, INTERVAL  $decalage_hiver HOUR)";
 		}
-	
+
 		autoriser_exception('evenement','modifier',$id_evenement);
 		objet_modifier('evenement',$id_evenement,$champs_sql);
 		autoriser_exception('evenement','modifier',$id_evenement,false);
@@ -166,11 +166,11 @@ function corriger_decalage($id_almanach,$nouveau_decalage,$ancien_decalage,$lien
 
 function corriger_article_referent($id_almanach,$id_article,$ancien_id_article,$liens){
 	if ($id_article != $ancien_id_article){
-		
+
 		$c = array(
 			"id_parent" => $id_article,
 		);
-		
+
 		foreach ($liens as $l){
 			$id_evenement = intval($l["id_evenement"]);
 			autoriser_exception('evenement','modifier',$id_article);
