@@ -13,8 +13,6 @@ if (!defined("_ECRIRE_INC_VERSION"))
 		$config = lire_config('bank');
 
 		list($id_reservation, $presta) = explode('-', $arg);
-		spip_log($id_reservation, 'teste');
-		spip_log($presta, 'teste');
 
 		$id_transaction = rb_inserer_transaction($id_reservation);
 
