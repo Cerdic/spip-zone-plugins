@@ -1,6 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/cvt-upload/trunk/lang/
+// extrait automatiquement de https://trad.spip.net/tradlang_module/paquet-cvtupload?lang_cible=en
+// ** ne pas modifier le fichier **
+
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
