@@ -19,7 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 function sociaux_insert_head_css($head) {
 	include_spip('inc/config');
 	if (lire_config('sociaux/css', 0)) {
-		$head .= '<link rel="stylesheet" type="text/css" href="' . find_in_path('lib/socicon/styles.css') . '" />' . "\n";
+		$head .= '<link rel="stylesheet" type="text/css" href="' . find_in_path('lib/socicon/style.css') . '" />' . "\n";
 		$head .= '<link rel="stylesheet" type="text/css" href="' . find_in_path('css/sociaux.css') . '" />' . "\n";
 	}
 
@@ -57,7 +57,7 @@ function sociaux_sociaux_lister($flux) {
  * @return string
  **/
 function sociaux_header_prive($flux){
-	$css = find_in_path('lib/socicon/styles.css');
+	$css = find_in_path('lib/socicon/style.css');
 	$flux .= "\n<link rel='stylesheet' href='$css' type='text/css' media='all' />\n";
 	return $flux;
 }

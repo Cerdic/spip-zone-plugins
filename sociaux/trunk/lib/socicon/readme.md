@@ -7,6 +7,9 @@ Socicon was created to give people an easy way to customize social icons.
 **Made in France**  
 In France we are very proud of our food (sometimes a bit too much)!   Socicon refers to the [saucisson](http://en.wikipedia.org/wiki/Saucisson), a sort of dry sausage that we eat as an aperitif with a drink, with cheese, in a packed lunch, well we can really eat saucisson any time, anywhere and with anyone!
 
+##Desktop usage
+To use Socicon in desktop programs, you can install the TTF font. In order to copy the character associated with each icon, refer to the text box at the bottom right corner of each glyph in demo.html. The character inside this text box may be invisible; but it can still be copied. You can go to [Socicon Cheatsheet](http://www.socicon.com/chart.php) and copy-paste icons from there to your desktop program.
+
 ##License
 
 Socicon is released under SIL Open Font License 1.1 ([http://scripts.sil.org/OFL](http://scripts.sil.org/OFL)).  
