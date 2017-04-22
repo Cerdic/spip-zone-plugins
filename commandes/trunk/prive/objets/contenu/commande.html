@@ -60,6 +60,10 @@
 	[(#REM) Transactions liées ]
 	[(#PLUGIN{bank}|oui)
 	<INCLURE{fond=prive/objets/liste/transactions, id_commande}>
+	<style type="text/css">
+		#wysiwyg .liste-objets.transactions th.id_commande,
+		#wysiwyg .liste-objets.transactions td.id_commande {display: none}
+	</style>
 	]
 
 </div>
