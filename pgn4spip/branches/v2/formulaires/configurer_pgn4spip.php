@@ -1,0 +1,33 @@
+<?php
+/**********************************************************************************
+ * @Subject "OK" and "Reinit" buttons for the configurer_pgn4spip.html config form 
+ * @package pgn4spip plugin to embed pgn4web Chessboard in a SPIP 3.x article
+ * @copyright copyright (c) 2012 Matt Chesstale 
+ * @license GNU General Public License version 3
+ * @language PHP for SPIP 3
+ *
+ **********************************************************************************/
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
+define('PLUGIN_Form', "configurer_pgn4spip" );
+
+// Implement "Reinit" and "Save" buttons
+function formulaires_configurer_pgn4spip_traiter()
+{
+	include_spip('inc/cvt_configurer'); include_spip('inc/meta');
+	global $optValue; // Current values of options
+
+	if (_request('reinit'))
+	{	// The user clicks to the "reinit" button in the configuration form
+		InitOptionValueByDefault($optValue); // Initial values of options
+		effacer_meta(pgn4spip); // Deleting the configuration restores default settings in the form
+		return array('message_ok'=>_T('pgn4spip:config_reinit'), 'editable'=>true);
+	}
+	else // The user clicks to the "Save" button
+	{	// Save current values of options from the GUI form to the configuration
+		cvtconf_formulaires_configurer_enregistre(PLUGIN_Form, func_get_args());
+		return array('message_ok'=>_T('config_info_enregistree'), 'editable'=>true);
+	}
+}
