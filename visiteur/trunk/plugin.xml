@@ -1,17 +1,20 @@
 <plugin>
-	<nom>visiteur</nom>
-	<slogan>Outils pour squelettes personnalisés selon le visiteur</slogan>
+	<nom>Visiteurs efficaces</nom>
+	<slogan>Accéder aux données du visiteur en suivant recommandations webperf</slogan>
 	<icon></icon>
 	<auteur>JLuc, marcimat</auteur>
 	<licence>GPL</licence>
-	<version>0.4.1</version>
+	<version>0.5.0</version>
 	<etat>dev</etat>
 	<description>
-		Macro #_VISITEUR, #_VISITEUR_SI, #_VISITEUR_SINON, #_VISITEUR_FINSI pour accéder aux données de la session du visiteur courant et les tester efficacement dans un squelette (Développement, test de concepts, exploration de code).
+	Macros SPIP : #_VISITEUR, #_VISITEUR_SI, #_VISITEUR_SINON, #_VISITEUR_FIN
+	pour accéder aux données de la session du visiteur courant et les tester efficacement dans un squelette
+	ou à des données de sessions étendues, provenant d'ailleurs que la session spip,
+	dans le respect des recommandations webperf (cf https://contrib.spip.net/4611 )
 	</description>
 	<prefix>visiteur</prefix>
-	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.2.99]" />
 	<categorie>outil</categorie>
-	<lien>https://contrib.spip.net/4823</lien> 
+	<lien>http://contrib.spip.net/4823</lien> 
 	<options>visiteurs_options.php</options>
 </plugin>

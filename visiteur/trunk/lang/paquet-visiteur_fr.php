@@ -9,6 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'visiteur_nom' => 'Outils pour squelettes personnalisés selon le visiteur',
-	'visiteur_slogan' => 'Macro #_VISITEUR, #_VISITEUR_SI, #_VISITEUR_SINON, #_VISITEUR_FINSI pour accéder aux données de la session du visiteur courant et les tester efficacement dans un squelette (Développement, test de concepts, exploration de code).'
+	'visiteur_nom' => 'Visiteurs efficaces',
+	'visiteur_slogan' => 'Macros SPIP : #_VISITEUR, #_VISITEUR_SI, #_VISITEUR_SINON, #_VISITEUR_FIN pour accéder aux données de la session du visiteur courant (ou à des données provenant dailleurs que la session SPIP locale), et les tester dans un squelette en suivant les recommandations webperf (cf https://contrib.spip.net/4611 ).',
 );

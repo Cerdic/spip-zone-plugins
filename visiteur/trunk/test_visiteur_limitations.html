@@ -1,0 +1,49 @@
+<html><head></head>
+<body>
+   <h1>Test cache eval session</h1>
+   Squelette : [(#DATE|affdate{'Y-m-d H:i:s'})]<br>
+   php session_get <?= session_get('nom') ?> --> php date <?= date('Y-m-d H:i:s') ?> :: SPIP eval session_get : #EVAL{session_get('nom')} :: SPIP eval globals : #EVAL{$GLOBALS['visiteur_session']['nom']}
+	<br><br>
+  _VISITEUR [(#_VISITEUR{nom})] avec [(|len)] : [(#_VISITEUR{nom}|strlen)]
+   <br>
+   On boucle avec {si EVAL{session_get('nom')}} = Ça ne dépend pas de la session mais de ce qu'il y a en cache<br>
+   <BOUCLE_articles(ARTICLES){si #EVAL{session_get('nom')}}>
+	   #ID_ARTICLE ;
+   </BOUCLE_articles>
+	<br><br>
+   <b>_VISITEUR{nom} : #_VISITEUR{nom}</b><br> 
+   et avec le filtre strlen : [(#_VISITEUR{nom}|strlen)]
+   <br><hr><br>
+  _VISITEUR_SI{nom} : #_VISITEUR_SI{nom} / IL Y A UN_VISITEUR #_VISITEUR_FIN / après_VISITEUR_finsi
+   <br><br>
+  _VISITEUR_SI{nom} puis SINON : #_VISITEUR_SI{nom} / apres_VISITEUR_si #_VISITEUR_SINON / PAS DE_VISITEUR #_VISITEUR_FIN / après_VISITEUR_finsi
+   <br><br>
+  _VISITEUR_SI{nom,Secretaire} : #_VISITEUR_SI{nom,Secretaire} / c'est egal #_VISITEUR_FIN / après_VISITEUR_finsi
+   <br><br>
+	_VISITEUR_SI{nom,Secretaire} puis SINON : #_VISITEUR_SI{nom,Secretaire} / c'est encore egal #_VISITEUR_SINON / pas egal #_VISITEUR_FIN / après_VISITEUR_finsi
+	<br><br>
+	<h4>Emboitements</h4>
+	#_VISITEUR_SI{nom}
+		le nom existe
+		#_VISITEUR_SI{nom,Secretaire}
+			et vaut bien Secrétaire
+		#_VISITEUR_SINON
+			et ne vaut pas Secrétaire. Il vaut #_VISITEUR{nom}.
+		#_VISITEUR_FIN
+	#_VISITEUR_SINON
+		le nom n'existe pas !
+	#_VISITEUR_FIN
+	
+	<h3>Ce qu'il ne faut pas faire</h3>
+	#SET{var,var} var vaut var<br>
+	_VISITEUR_SI{nom} : 
+	#_VISITEUR_SI{nom} 
+		/ #SET{var,oui_visiteur} IL Y A UN_VISITEUR var vaut oui_visiteur : #GET{var}<br>
+	#_VISITEUR_SINON{nom} 
+		/ #SET{var,pas_de_visiteur} IL Y A UN_VISITEUR var vaut pas_de_visiteur : #GET{var}<br>
+	#_VISITEUR_FIN 
+		/ après_VISITEUR_finsi var vaut : #GET{var}<br>
+
+
+</body>
+</html>

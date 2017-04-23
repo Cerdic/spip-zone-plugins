@@ -1,0 +1,30 @@
+<h1>Test # _VISITEUR avec _SI, _SINON, _FIN et accés session étendue</h1>
+<ul>
+<li>nom : #_VISITEUR{nom}</li>
+<li>est abonne : #_VISITEUR{est_abonne}</li>
+<li>nbreste : #_VISITEUR{nbreste}</li>
+<li>a reçu : #_VISITEUR{envois_revues_liste}</li>
+</ul>
+<h4>SI nbreste</h4>
+#_VISITEUR_SI{nbreste}
+il vous reste des numéros à recevoir
+#_VISITEUR_SINON
+	vous n'êtes plus abonné
+#_VISITEUR_FIN
+<h4>SI nbreste==0</h4>
+#_VISITEUR_SI{nbreste,==,0}
+il vous reste exactement plus aucun numéro à recevoir !
+#_VISITEUR_SINON
+	ah, il vous reste des numéros à recevoir... exactement #_VISITEUR{nbreste}
+#_VISITEUR_FIN
+
+
+<hr>
+<h3>Tous les tests</h3>
+<ul>
+<li><a href="?page=test_visiteur">test_visiteur</a></li>
+<li><a href="?page=test_visiteur_etendu">test_visiteur_etendu</a></li>
+<li><a href="?page=test_visiteur_si">test_visiteur_si</a></li>
+<li><a href="?page=test_visiteur_si_etendu">test_visiteur_si_etendu</a></li>
+</ul>
+

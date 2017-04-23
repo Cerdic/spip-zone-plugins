@@ -1,16 +1,17 @@
 <paquet
 	prefix="visiteur"
 	categorie="outil"
-	version="0.4.1"
-	etat="dev"
-	compatibilite="[2.1.0;3.1.*]"
+	version="0.5.0"
+	etat="test"
+	compatibilite="[2.1.0;3.2.*]"
 	documentation="https://contrib.spip.net/4823"
 >
-	<nom>Outils pour squelettes personnalisés selon le visiteur</nom>
+	<nom>Visiteurs efficaces</nom>
 	<!-- 
-	macro SPIP : #_VISITEUR, #_VISITEUR_SI, #_VISITEUR_SINON, #_VISITEUR_FINSI 
-	pour accéder aux données de la session du visiteur courant et les tester efficacement dans un squelette
-	ou à des données de sessions étendues, provenant d'ailleurs que la session spip
+	macros SPIP : #_VISITEUR, #_VISITEUR_SI, #_VISITEUR_SINON, #_VISITEUR_FIN
+	pour accéder aux données de la session du visiteur courant ou à des données de sessions étendues,
+	et les tester efficacement dans un squelette en suivant les recommandations webperf 
+	(cf https://contrib.spip.net/4611 )
 	-->
 	<auteur lien="https://contrib.spip.net/JLuc">JLuc</auteur>
 	<auteur lien="https://contrib.spip.net/Matthieu-Marcillaud">marcimat</auteur>

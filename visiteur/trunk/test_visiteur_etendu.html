@@ -1,0 +1,31 @@
+#_VISITEUR{nbreste,plus,3}
+<h1>Appel de _VISITEUR avec champ de session étendue</h1>
+
+nom : #_VISITEUR{nom}<br>
+
+<h4>champ étendu : nbreste</h4>
+<dl>
+	<dt>nbreste</dt><dd> #_VISITEUR{nbreste}</dd>
+	<dt>a reçu</dt><dd>#_VISITEUR{envois_revues_liste}</dd>
+</dl>
+<h4>avec filtres</h4>
+<dl>
+	<dt>nbreste |+ 3 </dt>
+		<dd>#_VISITEUR{nbreste,plus,3}</dd>
+	<dt>nbreste |choixsivide vide! pasvide </dt>
+		<dd> #_VISITEUR{nbreste,choixsivide,vide!,pasvide}</dd>
+	<dt>nbreste |? pasvide! vide </dt>
+		<dd> #_VISITEUR{nbreste,?,pas vide!,vide}</dd>
+	<dt>a reçu |strlen</dt>
+		<dd>#_VISITEUR{envois_revues_liste,strlen}</dd>
+</dl>
+</ul>
+
+<hr>
+<h3>Tous les tests</h3>
+<ul>
+<li><a href="?page=test_visiteur">test_visiteur</a></li>
+<li><a href="?page=test_visiteur_etendu">test_visiteur_etendu</a></li>
+<li><a href="?page=test_visiteur_si">test_visiteur_si</a></li>
+<li><a href="?page=test_visiteur_si_etendu">test_visiteur_si_etendu</a></li>
+</ul>
