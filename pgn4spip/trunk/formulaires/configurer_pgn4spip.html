@@ -13,9 +13,14 @@
 
 .formulaire_spip label, .formulaire_spip .gauche label
 {
-	margin:0 10px 0 0;
+	margin:0 10px 0 10px;
 	line-height:25px;
 }
+
+.formulaire_spip select
+{ 	max-width:15%;
+}
+
 
 </style>
 
@@ -28,9 +33,10 @@
 #ACTION_FORMULAIRE{#ENV{action}}
 
 <div class="fieldset">
+			[(#REM) paramétrage général du module ]
 <fieldset ><legend><:pgn4spip:module:></legend>
 
-	<select name="cfg_l" style="max-width:15%;"> 
+	<select name="cfg_l"  > 
 		<option value="h" [(#CONFIG{pgn4spip/cfg_l, "h"}|=={"h"}|?{selected="selected",''})]><:pgn4spip:horizontal:></option>
 		<option value="v" [(#CONFIG{pgn4spip/cfg_l, "h"}|=={"v"}|?{selected="selected",''})]><:pgn4spip:vertical:></option>
 	</select>
@@ -42,10 +48,11 @@
 </fieldset>
 </div>
 <div class="fieldset">
+			[(#REM) paramétrage de l'échiquier ]
 <fieldset><legend><:pgn4spip:chessboard:></legend>
 	<div class="editer-groupe">
-<p>			
-			
+<p>
+
 	<label for="cfg_ss"><:pgn4spip:square:></label><input type="text" name="cfg_ss" value="[(#CONFIG{pgn4spip/cfg_ss, 26})]" size="1"><:pgn4spip:pixels:>
 	<label for="cfg_lch"><:pgn4spip:white:></label><input type="text" name="cfg_lch" value="[(#CONFIG{pgn4spip/cfg_lch, "F0F0F0"})]" size="5"/>
 	<label for="cfg_dch"><:pgn4spip:black:></label><input type="text" name="cfg_dch" value="[(#CONFIG{pgn4spip/cfg_dch, "ABABAB"})]" size="5"/> 
@@ -57,80 +64,67 @@
 	<label for="cfg_bch"><:pgn4spip:background:></label><input type="text" name="cfg_bch" value="[(#CONFIG{pgn4spip/cfg_bch, "F6F6F6"})]" size="5"/>
 </p>
 
-<p>
-	<label for="cfg_ps"><:pgn4spip:piece:></label>
-<input type="text" name="cfg_ps" value="[(#CONFIG{pgn4spip/cfg_ps, <:pgn4spip:default:>})]" size="5">
-<label for="cfg_pf"><:pgn4spip:font:></label>
-
-	<select name="cfg_pf"  style="max-width:30%;"> 
-		<option value="d" [(#CONFIG{pgn4spip/cfg_pf, "d"}|=={"d"}|?{selected="selected",''})]><:pgn4spip:default:></option>
-		<option value="a" [(#CONFIG{pgn4spip/cfg_pf, "d"}|=={"a"}|?{selected="selected",''})]><:pgn4spip:alpha:></option>
-		<option value="m" [(#CONFIG{pgn4spip/cfg_pf, "d"}|=={"m"}|?{selected="selected",''})]><:pgn4spip:merida:></option>
-		<option value="u" [(#CONFIG{pgn4spip/cfg_pf, "d"}|=={"u"}|?{selected="selected",''})]><:pgn4spip:ucsf:></option>
-		<option value="s" [(#CONFIG{pgn4spip/cfg_pf, "d"}|=={"s"}|?{selected="selected",''})]><:pgn4spip:svgchess:></option>
-	</select >
-</p>			
 	</div >
-			
+
 <p><:pgn4spip:squareclick:></p>
 
 </fieldset>
 </div>
 
 <div class="fieldset">
+			[(#REM) paramétrage des textes et commentaires ]
 <fieldset ><legend><:pgn4spip:pgn:></legend>
 			<div class="editer-groupe">
-<label for="cfg_md"><:pgn4spip:showmoves:></label>	<select name="cfg_md" style="max-width:20%;"> <br />
+<p>
+<label for="cfg_md"><:pgn4spip:showmoves:></label>	<select name="cfg_md" > <br />
 	<option value="f" [(#CONFIG{pgn4spip/cfg_md, "f"}|=={"f"}|?{selected="selected",''})]><:pgn4spip:figurine:></option><
 	<option value="t" [(#CONFIG{pgn4spip/cfg_md, "f"}|=={"t"}|?{selected="selected",''})]><:pgn4spip:text:></option><br />
 	<option value="p" [(#CONFIG{pgn4spip/cfg_md, "f"}|=={"p"}|?{selected="selected",''})]><:pgn4spip:puzzle:></option><br />
 	<option value="h" [(#CONFIG{pgn4spip/cfg_md, "f"}|=={"h"}|?{selected="selected",''})]><:pgn4spip:hidden:></option><br />
 	<option value="l" [(#CONFIG{pgn4spip/cfg_md, "f"}|=={"l"}|?{selected="selected",''})]><:pgn4spip:live:></option><br />
 	</select>
-
 <label for="cfg_fhch"><:pgn4spip:pgnheader:></label>	<input type="text" name="cfg_fhch" value="[(#CONFIG{pgn4spip/cfg_fhch, "000000"})]" size="5"/>
 <label for="cfg_fmch"><:pgn4spip:pgnmove:></label>	<input type="text" name="cfg_fmch" value="[(#CONFIG{pgn4spip/cfg_fmch, "000000"})]" size="5"/>
-	<p>
+</p>
+
+<p>
 <label for="cfg_fcch"><:pgn4spip:pgncomment:></label>		<input type="text" name="cfg_fcch" value="[(#CONFIG{pgn4spip/cfg_fcch, "000080"})]" size="5"/>
-	<select name="cfg_cd" style="max-width:20%;"> 
+	<select name="cfg_cd" > 
 		<option value="n" [(#CONFIG{pgn4spip/cfg_cd, "n"}|=={"n"}|?{selected="selected",''})]><:pgn4spip:newline:></option>
 		<option value="i" [(#CONFIG{pgn4spip/cfg_cd, "n"}|=={"i"}|?{selected="selected",''})]><:pgn4spip:inline:></option>
 		<option value="h" [(#CONFIG{pgn4spip/cfg_cd, "n"}|=={"h"}|?{selected="selected",''})]><:pgn4spip:hidden2:></option>
 	</select>
 <label for="cfg_hmch"><:pgn4spip:pgnfocus:></label><input type="text" name="cfg_hmch" value="[(#CONFIG{pgn4spip/cfg_hmch, "E0E0E0"})]" size="5"/>
 <label for="cfg_d"><:pgn4spip:pgndelay:></label>	<input type="text" name="cfg_d" value="[(#CONFIG{pgn4spip/cfg_d, "3000"})]" size="5"/>
-	
-	</p>
+</p>
 
-			
+<p>
 
 <label for="cfg_bd"><:pgn4spip:ctrlbrowse:></label>
-	<select name="cfg_bd" style="max-width:12%;"> 
+	<select name="cfg_bd" > 
 		<option value="c" [(#CONFIG{pgn4spip/cfg_bd, "c"}|=={"c"}|?{selected="selected",''})]><:pgn4spip:custom:></option>
 		<option value="s" [(#CONFIG{pgn4spip/cfg_bd, "c"}|=={"s"}|?{selected="selected",''})]><:pgn4spip:standard:></option>
 		<option value="h" [(#CONFIG{pgn4spip/cfg_bd, "c"}|=={"h"}|?{selected="selected",''})]><:pgn4spip:hidden2:></option>
 	</select>
-	
-	
 <label for="cfg_ctch"><:pgn4spip:ctrlarrow:></label><input type="text" name="cfg_ctch" value="[(#CONFIG{pgn4spip/cfg_ctch, "696969"})]" size="5"/>	
 <label for="cfg_cbch"><:pgn4spip:ctrlbckgrnd:><input type="text" name="cfg_cbch" value="[(#CONFIG{pgn4spip/cfg_cbch, "E1E1E1"})]" size="5"/></td>
-
-	<select name="cfg_hm" style="max-width:20%;"> 
+	<select name="cfg_hm" > 
 		<option value="b" [(#CONFIG{pgn4spip/cfg_hm, "b"}|=={"b"}|?{selected="selected",''})]><:pgn4spip:focusborder:></option>
 		<option value="s" [(#CONFIG{pgn4spip/cfg_hm, "b"}|=={"s"}|?{selected="selected",''})]><:pgn4spip:focussquare:></option>
 		<option value="n" [(#CONFIG{pgn4spip/cfg_hm, "b"}|=={"n"}|?{selected="selected",''})]><:pgn4spip:none:></option>
 	</select>
-	<:pgn4spip:liverate:>
+</p>
 
-<label for="cfg_am"><:pgn4spip:autoplay:></label>
-
-	<select name="cfg_am"style="max-width:20%;"> 
+<p>
+	<label for="cfg_am"><:pgn4spip:autoplay:></label>
+	<select name="cfg_am"> 
 		<option value="n" [(#CONFIG{pgn4spip/cfg_am, "n"}|=={"n"}|?{selected="selected",''})]><:pgn4spip:none:></option>
 		<option value="g" [(#CONFIG{pgn4spip/cfg_am, "n"}|=={"g"}|?{selected="selected",''})]><:pgn4spip:game:></option>
 		<option value="l" [(#CONFIG{pgn4spip/cfg_am, "n"}|=={"l"}|?{selected="selected",''})]><:pgn4spip:loop:></option>
 	</select>
-
+	<label for="cfg_rm"><:pgn4spip:liverate:></label>
 	<input type="text" name="cfg_rm" value="[(#CONFIG{pgn4spip/cfg_rm, "1.0"})]" size="5"/>
+</p>
 
 </fieldset>
 </div>
@@ -166,7 +160,6 @@
 </tr>
 <tr><td colspan="2"><b>m</b>oves<b>D</b>isplay=[<b>f</b>]igurine | (<b>t</b>)ext | (<b>p</b>)uzzle | (<b>h</b>)idden | (<b>l</b>)ive<br />
 					<b>i</b>nitial<b>H</b>alfmove=[<b>s</b>]tart | (<b>e</b>)nd | (<b>r</b>)andom | (<b>c</b>)omment | <i><:pgn4spip:nombre:></i><br />
-					<b>p</b>iece<b>F</b>ont=[<b>d</b>]efault | (<b>a</b>)lpha | (<b>m</b>)erida | (<b>u</b>)scf | (<b>s</b>)vgchess
 	</td>
 </tr>
 </table>
