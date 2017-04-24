@@ -60,15 +60,27 @@ function reservation_bank_formulaire_charger($flux) {
 		if ($count > 0) {
 			$montant_transaction_detail = $montant_transaction / $count;
 		}
+
 		$montant_ouvert = '';
 		$montant_defaut = '';
+		$fonction_prix = '';
+		if (charger_fonction('prix', 'inc/', TRUE)) {
+			$fonction_prix = charger_fonction('prix', 'inc/');
+		}
+
 		while ( $data = sql_fetch($sql) ) {
 			$id_reservations_detail = $data['id_reservations_detail'];
 			$devise = $data['devise'];
 			$montant_paye[$id_reservations_detail] = $data['montant_paye'];
 
-			if ($montant = $data['prix'] <= 0) {
-				$montant = $data['prix_ht'] + $data['taxe'];
+			if ($fonction_prix) {
+				$montant = $fonction_prix('reservations_detail', $id_reservations_detail);
+			}
+			else {
+				$montant = $data['prix'];
+				if ($montant <= 0) {
+					$montant = $data['prix_ht'] + $data['taxe'];
+				}
 			}
 
 			$montant_reservations_detail_total[$id_reservations_detail] = $montant;
@@ -412,7 +424,6 @@ $id_reservation = sql_getfetsel('id_reservation', 'spip_reservations', 'referenc
  * @return array mixed
  */
 function reservation_bank_bank_traiter_reglement($flux) {
-
 	// Si on est dans le bon cas d'un paiement de reservation et qu'il y a un id_reservation et que la reservation existe toujours
 	if ($id_transaction = $flux['args']['id_transaction']
 			and $transaction = sql_fetsel("*", "spip_transactions",
