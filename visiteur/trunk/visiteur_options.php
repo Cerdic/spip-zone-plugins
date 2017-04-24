@@ -18,22 +18,31 @@ include_spip ('inc/filtres');
 // todo : à la compilation appeler chercher_filtre pour savoir quelle est la fonction appelée par le filtre et insérer dans le code compilé un appel direct à cette fonction --> plus besoin d'inclure inc/filtres dans mes_options
 
 //
-// Accés étendu aux données des visiteurs
+// Accés étendu aux données de session des visiteurs
 //
 // Aucun test n'est fait en amont sur la présence ou non d'une session :
-// la fonction _visiteur_session_get définie par ailleurs (autre plugin...)
-// doit gérer cette éventualité et renvoyer null ou une valeur par défaut
+// le pipeline session_get peut être défini par ailleurs (autre plugin...)
+// Il reçoit un tableau avec 2 arguments : 'champ' contient le champ recherché,
+// et 'visiteur_session' contient la session en cours d'élaboration,
+// qu'il peut, ou non, utiliser pour le calcul ou la recherche de la valeur demandée
 //
-// todo : un pipeline à la spip
-//
-function extended_session_get ($champ) {
-	if ((!defined('_VISITEUR_SESSION_GLOBALE_NON_PRIORITAIRE') // todo revoir sémantique et nomenklatura de ces constantes
-			or !_VISITEUR_SESSION_GLOBALE_NON_PRIORITAIRE)
-		and isset($GLOBALS['visiteur_session'][$champ]))
+// Actuellement le pipeline n'est appelé que si la valeur demandée
+// n'est pas déjà présente dans la session globale SPIP de base...
+// 
+function pipelined_session_get ($champ) {
+	if (!isset ($GLOBALS['visiteur_session']))
+		return '';
+	elseif (isset ($GLOBALS['visiteur_session'][$champ]))
 		return $GLOBALS['visiteur_session'][$champ];
-	if (function_exists ('_visiteur_session_get'))
-		return _visiteur_session_get($champ);
-	return null;
+
+	$session = 
+		array (	'champ' => $champ,
+				'visiteur_session' => $GLOBALS['visiteur_session']);
+	$session = pipeline ('session_get', $session);
+	if (isset ($session['visiteur_session'][$champ]))
+		return $session['visiteur_session'][$champ];
+	else 
+		return '';
 };
 
 if (!function_exists('existe_argument_balise')) {
@@ -69,7 +78,7 @@ define (V_FERME_PHP, ' ?' . "'.'>'");
 // $champ est entre quotes ''
 // le code renvoyé sera inséré à l'intérieur d'un '...'
 function compile_appel_visiteur ($p, $champ,$n=2) {
-	$get_champ = "extended_session_get('.\"$champ\".')";
+	$get_champ = "pipelined_session_get('.\"$champ\".')";
 	
 	// champ sans application de filtre
 	if (!existe_argument_balise($n, $p)) 
@@ -95,7 +104,7 @@ function compile_appel_visiteur ($p, $champ,$n=2) {
 										
 		$r = "($get_champ $comparateur '.\"$arg_un\".')";
 		// #_VISITEUR{nom,==,JLuc} donnera 
-		// '<'.'?php  echo (extended_session_get('."'nom'".') == '."'JLuc'".');  ?'.'>'
+		// '<'.'?php  echo (pipelined_session_get('."'nom'".') == '."'JLuc'".');  ?'.'>'
 		// #_VISITEUR_SI{nom
 		return $r;
 	}
@@ -106,8 +115,8 @@ function compile_appel_visiteur ($p, $champ,$n=2) {
 	};
 
 // produira par exemple ensuite :
-// '<'.'?php  echo appliquer_filtre(extended_session_get('."'nom'".'), '."'strlen'".');  ?'.'>'
-// ou '<'.'?php  echo appliquer_filtre( extended_session_get('."'nbreste'".'), '."'plus'" .', "'3'" .');  ?'.'>'
+// '<'.'?php  echo appliquer_filtre(pipelined_session_get('."'nom'".'), '."'strlen'".');  ?'.'>'
+// ou '<'.'?php  echo appliquer_filtre( pipelined_session_get('."'nbreste'".'), '."'plus'" .', "'3'" .');  ?'.'>'
 	$r = "appliquer_filtre($get_champ, '.\"$filtre\" $virgule_arg_un $virgule_arg_deux .')";
 
 	return $r;
@@ -142,7 +151,7 @@ function balise__VISITEUR_dist($p) {
  * - soit un comparateur : ==, <, >, >=, <= 
  * - soit un filtre (nom de fonction) recevant 2 arguments : la valeur du champ et val. C'est le retour qui est alors testé.
  * Produit par exemple le code suivant :
- * '<'.'?php  echo extended_session_get('."'nom'".');  ?'.'>'
+ * '<'.'?php  echo pipelined_session_get('."'nom'".');  ?'.'>'
 */
 function balise__VISITEUR_SI_dist($p) {
 	$champ = interprete_argument_balise(1, $p);
