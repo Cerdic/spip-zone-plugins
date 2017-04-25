@@ -509,3 +509,28 @@ function reservation_bank_insert_head_css($flux) {
 	$flux .= "<link rel='stylesheet' type='text/css' media='all' href='$css' />\n";
 	return $flux;
 }
+
+/**
+ * Ajouter les configurations dans celle de réservation événements.
+ *
+ * @pipeline reservation_evenement_objets_configuration
+ *
+ * @param array $flux
+ *        	Données du pipeline
+ * @return array Données du pipeline
+ */
+function reservation_bank_reservation_evenement_objets_configuration($flux) {
+
+	$objets = array(
+		'bank' => array(
+			'label' => _T('bank:titre_menu_configurer'),
+		),
+		'reservation_bank' => array(
+			'label' => _T('reservation_bank:reservation_bank_titre'),
+		),
+	);
+
+	$flux['data'] = array_merge($flux['data'], $objets);
+
+	return $flux;
+}
