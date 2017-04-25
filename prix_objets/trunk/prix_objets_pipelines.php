@@ -59,4 +59,25 @@ function prix_objets_shop_objets($flux) {
 
 	return $flux;
 }
-?>
+
+/**
+ * Ajouter les configurations dans celle de réservation événements.
+ *
+ * @pipeline reservation_evenement_objets_configuration
+ *
+ * @param array $flux
+ *        	Données du pipeline
+ * @return array Données du pipeline
+ */
+function prix_objets_reservation_evenement_objets_configuration($flux) {
+
+	$objets = array(
+		'prix_objets' => array(
+			'label' => _T('paquet-prix_objets:prix_objets_nom'),
+		),
+	);
+
+	$flux['data'] = array_merge($flux['data'], $objets);
+
+	return $flux;
+}
