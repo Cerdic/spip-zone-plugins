@@ -1,8 +1,9 @@
 <traduction module="verifier" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/verifier/lang/" reference="fr">
 	<langue code="ca" url="https://trad.spip.net/tradlang_module/verifier?lang_cible=ca" total="148" traduits="40" relire="0" modifs="8" nouveaux="100" pourcent="27.03">
 	</langue>
-	<langue code="de" url="https://trad.spip.net/tradlang_module/verifier?lang_cible=de" total="148" traduits="62" relire="0" modifs="8" nouveaux="78" pourcent="41.89">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/verifier?lang_cible=de" total="148" traduits="70" relire="0" modifs="0" nouveaux="78" pourcent="47.30">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
+		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
 	<langue code="en" url="https://trad.spip.net/tradlang_module/verifier?lang_cible=en" total="148" traduits="135" relire="0" modifs="4" nouveaux="9" pourcent="91.22">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
