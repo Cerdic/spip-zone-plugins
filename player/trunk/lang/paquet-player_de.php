@@ -14,5 +14,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Die Player werden für alle <code><docXX|player></code> Tags in Artikeltexten und SKeletten eingesetzt.
 
 -* In einen Text fügt der Code  <code><docXX|player></code> einen von mehreren Flash-Audioplayern ein.
--* In ein Skelett fügt der Code  <code>#MODELE{playliste}</code> eine Abspielliste der letzten MP3-Datein ein.' # MODIF
+-* In ein Skelett fügt der Code  <code>#MODELE{playliste}</code> eine Abspielliste der letzten MP3-Datein ein.',
+	'player_slogan' => 'MP3 Dateien abspielen'
 );
