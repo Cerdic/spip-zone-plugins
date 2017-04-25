@@ -338,3 +338,25 @@ function reservations_multiples_post_insertion($flux) {
 
 	return $flux;
 }
+
+/**
+ * Ajouter les configurations dans celle de réservation événements.
+ *
+ * @pipeline reservation_evenement_objets_configuration
+ *
+ * @param array $flux
+ *        	Données du pipeline
+ * @return array Données du pipeline
+ */
+function reservations_multiples_reservation_evenement_objets_configuration($flux) {
+
+	$objets = array(
+		'reservations_multiples' => array(
+			'label' => _T('reservations_multiples:reservations_multiples_titre'),
+		),
+	);
+
+	$flux['data'] = array_merge($flux['data'], $objets);
+
+	return $flux;
+}

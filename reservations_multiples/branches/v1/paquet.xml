@@ -1,7 +1,7 @@
 <paquet
 	prefix="reservations_multiples"
 	categorie="communication"
-	version="1.4.4"
+	version="1.4.5"
 	etat="test"
 	compatibilite="[3.0.16;3.1.*]"
 	logo="prive/themes/spip/images/reservations_multiples-64.png"
@@ -26,6 +26,6 @@
 	<pipeline nom="formulaire_traiter" inclure="reservations_multiples_pipelines.php" />
 	<pipeline nom="post_insertion" inclure="reservations_multiples_pipelines.php" />
 	<pipeline nom="insert_head" inclure="reservations_multiples_pipelines.php" />
-
+	<pipeline nom="reservation_evenement_objets_configuration" inclure="reservations_multiples_pipelines.php" />
 
 </paquet>
