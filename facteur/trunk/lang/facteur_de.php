@@ -11,9 +11,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'config_info_enregistree' => 'Die Konfiguration des Briefträgers wurde gespeichert.',
-	'configuration_adresse_envoi' => 'Absenderadresse einstellen', # MODIF
+	'configuration_adresse_envoi' => 'Standard-Absenderadresse',
 	'configuration_facteur' => 'Briefträger',
-	'configuration_mailer' => 'Konfiguration des Mailers', # MODIF
+	'configuration_facteur_smtp_tls_allow_self_signed' => 'Validierung des SSL-Zertifikats',
+	'configuration_mailer' => 'Versandart',
 	'configuration_smtp' => 'Auswahl der Versandmethode',
 	'configuration_smtp_descriptif' => 'Im Zweifel hier die mail() Funktion von PHP eintragen.',
 	'corps_email_de_test' => 'Das ist ein Versandtest mit Sondärzeichen: Bär Größe Maß accentué',
@@ -32,8 +33,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_adresse_envoi_nom' => 'Name:',
 	'facteur_bcc' => 'Blindkopie (BCC) :',
 	'facteur_cc' => 'Kopie (CC) :',
-	'facteur_copies' => 'Kopien:', # MODIF
+	'facteur_copies' => 'Kopien:',
 	'facteur_copies_descriptif' => 'Eine Kopie der E-Mails wird an die angegebenen Adressen geschickt. Geben sie eine Adresse als Empfänger der Kopie bzw. Blindkopie an.',
+	'facteur_email_test' => 'Eine Testmail versenden an:',
 	'facteur_filtre_accents' => 'Sonderzeichen in HTML-Entitäten umwandeln (z.B. für Hotmail).',
 	'facteur_filtre_css' => 'Stile zwischen <head> und </head> zu "inline" Stilen umwandeln, sinnvoll für Webmail die inline-Stile externen vorzieht.',
 	'facteur_filtre_images' => 'Verlinkte Bilder in E-Mail einbetten',
@@ -50,15 +52,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_secure_non' => 'nein',
 	'facteur_smtp_secure_ssl' => 'SSL (obsolet)',
 	'facteur_smtp_secure_tls' => 'TLS (empfohlen)',
-	'facteur_smtp_sender' => 'Fehlercodes (optional)', # MODIF
-	'facteur_smtp_sender_descriptif' => 'Legt im Kopf der Mail die Empfängeradresse für Fehlermeldungen fest (bzw. den Return-Path), bestimmt ebenfalls die Absenderadresse bei Versand per SMTP.', # MODIF
+	'facteur_smtp_sender' => 'Fehlercodes (optional)',
+	'facteur_smtp_sender_descriptif' => 'Legt im Kopf der Mail die Empfängeradresse für Fehlermeldungen fest (bzw. den Return-Path).',
+	'facteur_smtp_tls_allow_self_signed_non' => 'Das SSL-Zertifikat des SMTP-Servers ist von einer Zertifizierungsstelle erstellt worden (empfohlen).',
+	'facteur_smtp_tls_allow_self_signed_oui' => 'das SSL-Zertifikat des SMTP-Servers ist selbst signiert.',
 	'facteur_smtp_username' => 'Benutzername:',
+
+	// L
+	'label_facteur_forcer_from' => 'Diese Versandadresse anzeigen wenn  das <tt>From</tt> nicht von derselben Domain ist', # RELIRE
 
 	// M
 	'message_identite_email' => 'Die Konfiguration des Plugins Briefträger (facteur) überschreibt diese Adresse für den Mailversand.',
 
 	// N
-	'note_test_configuration' => 'Eine Mail wird an die Absendeadresse geschickt (oder an den Webmaster).', # MODIF
+	'note_test_configuration' => 'Eine Mail wird an diese Adresse geschickt.',
 
 	// P
 	'personnaliser' => 'Individuelle Einstellungen',
@@ -69,7 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// U
 	'utiliser_mail' => 'Funktion mail() von PHP verwenden',
-	'utiliser_reglages_site' => 'Einstellungen von SPIP verwenden: als Name wird die Bezeichnung der SPIP-Website verwendet und als Adresse die des Webmasters.', # MODIF
+	'utiliser_reglages_site' => 'Einstellungen von SPIP verwenden: <br /><tt>@from@</tt> ',
 	'utiliser_smtp' => 'SMTP verwenden',
 
 	// V
