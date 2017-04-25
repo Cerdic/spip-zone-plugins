@@ -164,3 +164,25 @@ function reservations_supprimer($ids_reservations) {
 
 	return true;
 }
+
+/**
+ *
+ */
+function re_objets_configuration() {
+	$objets = array(
+		'reservation_evenement' => array(
+			'label' => _T('reservation_evenement:reservation_evenement_titre'),
+			'chemin' => 'prive/squelettes/contenu/inc-configurer_reservation_evenement',
+			),
+	);
+
+	$objets = pipeline(
+			'reservation_evenement_objets_configuration',
+			array(
+				'args' => calculer_contexte(),
+				'data' => $objets
+			)
+		);
+
+	return $objets;
+}

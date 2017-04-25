@@ -1,7 +1,34 @@
 [(#AUTORISER{configurer,_reservation_evenement}|sinon_interdire_acces)]
 
-<h1 class="grostitre"><:reservation_evenement:titre_page_configurer_reservation_evenement:></h1>
+#SET{chemin_defaut,prive/squelettes/contenu/inc-configurer_reservation_evenement}
+#SET{config_defaut, reservation_evenement}
 
-<div class="ajax">
-	#FORMULAIRE_CONFIGURER_RESERVATION_EVENEMENT
+<B_objets>
+<div class="onglets_simple second clearfix">
+		<ul>
+<BOUCLE_objets(DATA){source tableau, #REM|re_objets_configuration}>
+		<li>
+			[(#ENV{config,#GET{config_defaut}}|=={#CLE}|oui)
+				<strong class="on">[(#LABEL)]</strong>
+				[(#VALEUR|table_valeur{chemin}|?{
+					#SET{chemin,#VALEUR{chemin}},
+					#SET{chemin,prive/squelettes/contenu/configurer_#CLE},
+					}
+				)]
+			]
+			[(#ENV{config,#GET{config_defaut}}|=={#CLE}|non)
+					<a
+						class="ajax nocache"
+						href="[(#URL_ECRIRE{configurer_reservation_evenement}
+							|parametre_url{config,#CLE})]">
+							#LABEL
+					</a>
+			]
+		</li>
+</BOUCLE_objets>
+		</ul>
 </div>
+</B_objets>
+
+
+[(#INCLURE{fond=#GET{chemin},env})]

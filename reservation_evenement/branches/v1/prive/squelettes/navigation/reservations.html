@@ -50,11 +50,12 @@
 		</li>
 		</B_reservations>
 		[(#REM) permet aux plugins d'insérér dun contenu au menu]
-		[(#PIPELINE{reservation_evenement_menu_admin,
-		[(#ARRAY{
-		args,[(#ARRAY{exec,#ENV{exec}})],
-		data,'',
-		})]})]
+		[(#PIPELINE{
+			reservation_evenement_menu_admin,
+			[(#ARRAY{
+				args,[(#ARRAY{exec,#ENV{exec}})],
+				data,'',})]}
+		)]
 		<li>
 			[(#ENV{exec}|=={configurer_reservation_evenement}|non)#SET{a, </a>}
 			<a href="#URL_ECRIRE{configurer_reservation_evenement}" class="cellule-h">][(#CHEMIN_IMAGE{cfg-16.png}|balise_img)] <:spip:icone_configuration_site:>#GET{a}
