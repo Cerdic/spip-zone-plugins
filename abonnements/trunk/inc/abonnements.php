@@ -50,7 +50,7 @@ function abonnements_creer_ou_renouveler($id_auteur, $id_abonnements_offre, $for
 					'statut != "poubelle"'
 				),
 				'',
-				'maj desc',
+				'statut asc, maj desc',
 				'0,1'
 			)
 			and (
