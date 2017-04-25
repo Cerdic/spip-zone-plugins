@@ -24,7 +24,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<BOUCLE_liste_reservation_credit_mouvements(RESERVATION_CREDIT_MOUVEMENTS){id_reservation_credit ?}{id_reservations_detail?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num },#GET{defaut_tri}}{par date_creation}{inverse}{pagination #ENV{nb,10}}>
+				<BOUCLE_liste_reservation_credit_mouvements(RESERVATION_CREDIT_MOUVEMENTS){id_reservation_credit ?}{id_reservations_detail?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par, id_reservation_credit_mouvement},#GET{defaut_tri}}{par date_creation}{inverse}{pagination #ENV{nb,10}}>
 					<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})] #TYPE'>
 						<td class='picto'>[(#CHEMIN_IMAGE{reservation_credit_mouvement-16.png}|balise_img)]</td>
 						<td class='type'>[(#VAL{reservation_credit_mouvement:type_#TYPE}|_T)]</td>
