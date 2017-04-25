@@ -1,5 +1,5 @@
 <BOUCLE_campagne(CAMPAGNES){id_campagne}>
-	#SET{url_action, #URL_ACTION_AUTEUR{cliquer_campagne,#ID_CAMPAGNE}|parametre_url{referer,#SELF}}
+	#SET{url_action, #VAL{spip.php}|parametre_url{action, cliquer_campagne}|parametre_url{arg, #ID_CAMPAGNE}|parametre_url{referer, #SELF}|url_absolue}
 	[(#REM) On va chercher le document lié )]
 	<B_document>
 	[(#ENV{masquelabel}|non)<span class="encart-label"><:campagne:titre_campagne:></span>]
