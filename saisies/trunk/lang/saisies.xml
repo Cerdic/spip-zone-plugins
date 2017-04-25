@@ -1,7 +1,7 @@
 <traduction module="saisies" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/saisies/trunk/lang/" reference="fr">
 	<langue code="ca" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=ca" total="176" traduits="85" relire="0" modifs="9" nouveaux="82" pourcent="48.30">
 	</langue>
-	<langue code="de" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=de" total="176" traduits="144" relire="0" modifs="4" nouveaux="28" pourcent="81.82">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=de" total="176" traduits="149" relire="0" modifs="4" nouveaux="23" pourcent="84.66">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
