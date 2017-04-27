@@ -116,7 +116,8 @@ function linkcheck_lister_liens($champs) {
 			// Ajout au tableau du lien
 			$url_site = trim($url_site);
 			if (!empty($tab_temp)) {
-				$liens=array_unique($tab_temp);
+				$tab_temp = array_unique($tab_temp);
+				$liens = array_unique(array_merge($liens, $tab_temp));
 			}
 		}
 	}

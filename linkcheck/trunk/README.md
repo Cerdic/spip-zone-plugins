@@ -21,6 +21,10 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 
 ## Versions 1.4.x
 
+### Version 1.4.3
+
+- La détection des liens ne prenait qu'un champ à chaque fois, il réinitialisait le compte de liens à chaque champ testé.
+
 ### Version 1.4.2
 
 * Dans le pipeline `post_edition` s'assurer que le second argument passé à `in_array` est bien un tableau
