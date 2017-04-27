@@ -1097,6 +1097,7 @@ function inscription3_editer_contenu_objet($flux) {
 				$flux['data'],
 				1
 			);
+			spip_log(inscription3_regexp_capturer_balise('class', 'editer editer_cextra_creation', true), 'test.'._LOG_ERREUR);
 			$flux['data'] = preg_replace(
 				inscription3_regexp_capturer_balise('class', 'editer editer_cextra_creation', true),
 				'',
@@ -1187,7 +1188,7 @@ function inscription3_editer_contenu_objet($flux) {
 function inscription3_regexp_capturer_balise($attr, $valeur, $flou = false, $balise = 'div', $modificateurs = 'ims') {
 	$regexp =
 		# une balise indiquée avec un attribut ouvrant avec soit " ou ' (info capturée en \1)
-		'/<' . $balise . ' [^>]*' . $attr . '=(["\'])'
+		'#<' . $balise . ' [^>]*' . $attr . '=(["\'])'
 		# la valeur cherchée, avec ou sans flou autour
 		. ($flou ? '(?:(?!\1).)*' . $valeur . '(?:(?!\1).)*': $valeur)
 		# la fin de guillement de l'attribut trouvé
@@ -1229,7 +1230,7 @@ function inscription3_regexp_capturer_balise($attr, $valeur, $flou = false, $bal
 		# la fin de notre balise
 		. '</' . $balise . '>'
 		# les modificateurs
-		. '/' . $modificateurs;
+		. '#' . $modificateurs;
 
 	return $regexp;
 }
