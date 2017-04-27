@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	
 	'titre_page_configurer_rsspropose' => 'Un flux RSS pour suivre les validations',
-	'token' => 'Indiquez la clé de votre choix (clé numérique UNIQUEMENT)',
+	'token' => 'Indiquez la clé de votre choix',
 	
 	
 );
