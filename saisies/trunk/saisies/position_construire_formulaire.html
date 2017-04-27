@@ -13,7 +13,7 @@
 		<BOUCLE_test_enfants(CONDITION){si #GET{saisie/options/nom}|!={#ENV{saisie_a_positionner}}|et{#GET{saisie/saisies}|is_array}}>
 		#SET{tab,#GET{saisie/saisies}}
 		#SET{padding,#GET{padding}|plus{20}}
-		#SET_PUSH{liste_parents,#GET{saisie/options/nom}}
+		#SET{liste_parents,#GET{liste_parents}|push{#GET{saisie/options/nom}}}
 		<BOUCLE_parcours_recursif(BOUCLE_parcours)/>
 		#SET{padding,#GET{padding}|moins{20}}
 		#SET{liste_parents,#GET{liste_parents}|array_slice{0,-1}}

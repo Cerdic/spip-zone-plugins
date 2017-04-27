@@ -179,11 +179,16 @@
 				.find('> fieldset > .editer-groupe').show();
 		});
 
-		[(#ENV{erreurs}|non|et{#ENV{_chemin_ui}})
-			$.getScript("#CHEMIN{#ENV{_chemin_ui}core.js}", function(){
-			$.getScript("#CHEMIN{#ENV{_chemin_ui}widget.js}", function(){
-			$.getScript("#CHEMIN{#ENV{_chemin_ui}mouse.js}", function(){
+		[(#ENV{erreurs}|non|et{#ENV{_jquery_ui_all}|ou{#ENV{_chemin_ui}}})
+			[
+				$.getScript("(#ENV{_jquery_ui_all})", function(){
+			]
+			[(#ENV{_chemin_ui}|oui)
+				$.getScript("#CHEMIN{#ENV{_chemin_ui}core.js}", function(){
+				$.getScript("#CHEMIN{#ENV{_chemin_ui}widget.js}", function(){
+				$.getScript("#CHEMIN{#ENV{_chemin_ui}mouse.js}", function(){
 				$.getScript("#CHEMIN{#ENV{_chemin_ui}sortable.js}", function(){
+			]
 					if ($.fn.sortable) {
 						$( "#deplacable, #deplacable .editer-groupe" ).sortable({
 							revert: true,
@@ -220,18 +225,10 @@
 							}
 						});
 					}
-				});
-				/*
-				$.getScript("#CHEMIN{#ENV{_chemin_ui}draggable.js}", function(){
-					if ($.fn.draggable) {
-						$( "#attrapable" ).draggable({
-							connectToSortable: "#deplacable, #deplacable ul",
-							helper: "clone"
-						});
-					}
-				});
-				*/
-			});});});
+			});
+			[(#ENV{_chemin_ui}|oui)
+				});});});
+			]
 		]
 
 	})(jQuery);

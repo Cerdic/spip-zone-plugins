@@ -51,12 +51,18 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 	$contexte['fond_generer'] = 'formulaires/inc-generer_saisies_configurables';
 
 	// On cherche jquery UI pour savoir si on pourra glisser-déplacer
-	// SPIP 3.1 - jquery_ui
-	if (find_in_path('javascript/ui/sortable.js') and find_in_path('javascript/ui/draggable.js')) {
+	$contexte['_jquery_ui_all'] = false;
+
+	// SPIP 3.2
+	if ($jquery_ui_all = find_in_path('javascript/ui/jquery-ui.js')) {
+		$contexte['_jquery_ui_all'] = $jquery_ui_all;
+	// SPIP 3.1
+	} elseif (find_in_path('javascript/ui/sortable.js') and find_in_path('javascript/ui/draggable.js')) {
 		$contexte['_chemin_ui'] = 'javascript/ui/';
+	// SPIP 3.0
 	} elseif (find_in_path('javascript/ui/jquery.ui.sortable.js') and find_in_path('javascript/ui/jquery.ui.draggable.js')) {
-		// SPIP 3 - jquery_ui
 		$contexte['_chemin_ui'] = 'javascript/ui/jquery.ui.';
+	// Plugin jquery-ui absent.
 	} else {
 		$contexte['_chemin_ui'] = false;
 	}
@@ -443,7 +449,7 @@ function construire_formulaire_generer_saisie_configurable($saisie, $env) {
 					'nom' => $nom,
 					'identifiant' => $identifiant,
 					'formulaire_config' => $formulaire_config,
-					'deplacable' => $env['_chemin_ui']
+					'deplacable' => (!empty($env['_jquery_ui_all']) or !empty($env['_chemin_ui']))
 				)
 			),
 			'debut'
