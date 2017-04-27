@@ -27,7 +27,7 @@ function titre_logo_recuperer_fond($flux) {
 				? array_filter($objets_autorises)
 				: array();
 
-		 	$table_objet = table_objet_sql($objet);
+			$table_objet = table_objet_sql($objet);
 			$texte = $flux['data']['texte'];
 
 			// regarder si c'est bien l'otion a bien été activé pour cet objet
