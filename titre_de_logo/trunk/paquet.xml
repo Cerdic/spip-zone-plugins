@@ -21,7 +21,6 @@
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/titre_logo.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/titre_logo.php" />
-	<pipeline nom="autoriser" inclure="titre_logo_autorisations.php" />
 	<pipeline nom="recuperer_fond" inclure="titre_logo_pipelines.php" />
 
 	<menu nom="configurer_titre_logo" titre="paquet-titre_logo:titre_logo_nom" parent="menu_configuration" icone="images/image-16.png" />

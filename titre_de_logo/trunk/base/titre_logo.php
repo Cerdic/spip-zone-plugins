@@ -3,14 +3,14 @@
 /**
  * Déclarations relatives à la base de données.
  *
- * @plugin     Titre de logo
+ * @plugin	 Titre de logo
  *
  * @copyright  2015
- * @author     Arno*
- * @licence    GPL 3
+ * @author	 Arno*
+ * @licence	GPL 3
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
-    return;
+	return;
 }
 
 /**
@@ -18,16 +18,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @pipeline declarer_tables_interfaces
  *
- * @param array $interfaces    Déclarations d'interface pour le compilateur
+ * @param array $interfaces	Déclarations d'interface pour le compilateur
  *
- * @return array    Déclarations d'interface pour le compilateur
+ * @return array	Déclarations d'interface pour le compilateur
  */
-function titre_logo_declarer_tables_interfaces($interfaces)
-{
-    $interfaces['table_des_traitements']['TITRE_LOGO'][] = _TRAITEMENT_TYPO;
-    $interfaces['table_des_traitements']['DESCRIPTIF_LOGO'][] = _TRAITEMENT_RACCOURCIS;
+function titre_logo_declarer_tables_interfaces($interfaces) {
+	$interfaces['table_des_traitements']['TITRE_LOGO'][] = _TRAITEMENT_TYPO;
+	$interfaces['table_des_traitements']['DESCRIPTIF_LOGO'][] = _TRAITEMENT_RACCOURCIS;
 
-    return $interfaces;
+	return $interfaces;
 }
 
 /**
@@ -37,12 +36,11 @@ function titre_logo_declarer_tables_interfaces($interfaces)
  *
  * @return array
  */
-function titre_logo_declarer_tables_objets_sql($tables)
-{
+function titre_logo_declarer_tables_objets_sql($tables) {
 
-    // champs titre_logo et descriptif_logo sur tous les objets
-    $tables[]['field']['titre_logo'] = "text DEFAULT '' NOT NULL";
-    $tables[]['field']['descriptif_logo'] = "text DEFAULT '' NOT NULL";
+	// champs titre_logo et descriptif_logo sur tous les objets
+	$tables[]['field']['titre_logo'] = "text DEFAULT '' NOT NULL";
+	$tables[]['field']['descriptif_logo'] = "text DEFAULT '' NOT NULL";
 
-    return $tables;
+	return $tables;
 }
