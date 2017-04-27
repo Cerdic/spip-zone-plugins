@@ -11,7 +11,8 @@ function centre_image_croix(el, x, y) {
 			containment: "parent",
 			stop: function(event, ui) {
 				var lien = el.attr("href");
-				var url = lien.replace(/^\.\.\//, '')
+				var url = lien.replace(/^\.\.\//, '');
+				url = url.split('?').shift();
 
 				var x = ui.position.left / el.find("img.img_source").width();
 				var y = ui.position.top / el.find("img.img_source").height();
@@ -39,17 +40,18 @@ function centre_image_calculer_croix(el) {
 }
 
 jQuery.fn.centre_images = function() {
-	$(this).find("a[href$=jpg].hasbox, a[href$=png].hasbox, a[href$=gif].hasbox").each(function () {
+	var images = $(this).find("a[href$=jpg].hasbox, a[href$=png].hasbox, a[href$=gif].hasbox, a[type='image/jpeg'].hasbox, a[type='image/png'].hasbox, a[type='image/gif'].hasbox");
+	images.each(function () {
 		// recuperer l'URL sans les ../
 		var lien = $(this).attr("href");
-		var url = lien.replace(/^\.\.\//, '')
+		var url = lien.replace(/^\.\.\//, '');
+		url = url.split('?').shift();
 
 		if ($(this).parents(".spip_documents").length == 0) {
 			$(this).attr("data-href", url);
 		}
 
 		$.getJSON("../index.php?page=centre_image_json&url=" + url,
-			{lien: lien},
 			function (data) {
 				var el = $("a[data-href='" + url + "']");
 				el.data('x', data.x);
@@ -61,7 +63,8 @@ jQuery.fn.centre_images = function() {
 }
 
 jQuery.fn.centre_images_rafraichir = function() {
-	$(this).find("a[href$=jpg].hasbox, a[href$=png].hasbox, a[href$=gif].hasbox").each(function () {
+	var images = $(this).find("a[href$=jpg].hasbox, a[href$=png].hasbox, a[href$=gif].hasbox, a[type='image/jpeg'].hasbox, a[type='image/png'].hasbox, a[type='image/gif'].hasbox");
+	images.each(function () {
 		centre_image_calculer_croix($(this));
 	});
 }

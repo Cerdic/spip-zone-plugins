@@ -35,6 +35,36 @@ function centre_image($fichier) {
 }
 
 /**
+ * Calcule le chemin correct théorique du fichier
+ *
+ * - extrait l'URL d'une éventuel attribut 'src' d'une balise
+ * - passe en url relative si c'était en absolu
+ * - enlève un timestamp ou un token éventuel (accès restreint)
+ *
+ * @param string $fichier
+ * return string
+ */
+function centre_image_preparer_fichier($fichier) {
+	// nettoyer le fichier (qui peut être dans un <img>)
+	if (preg_match("/src\=/", $fichier)) {
+		$fichier = extraire_attribut($fichier, "src");
+	}
+
+	// Enlever timestamp ou token
+	$fichier = array_shift(explode('?', $fichier, 2));
+
+	// si URL absolue de l'image, on passe en relatif
+	if (tester_url_absolue($fichier)) {
+		$url_site = url_de_base();
+		if (strpos($fichier, $url_site) === 0) {
+			$fichier = substr($fichier, strlen($url_site));
+		}
+	}
+
+	return $fichier;
+}
+
+/**
  * Retourne les coordonnées du point d'intérêt de l'image transmise
  *
  * Retourne les coordonnées `[0.5, 0.5]` par défaut (si le calcul échoue par exemple).
@@ -49,9 +79,7 @@ function centre_image($fichier) {
 function centre_image_densite($fichier) {
 	static $spip_centre_image = array();
 
-	// nettoyer le fichier (qui peut être dans un <img> ou qui peut être daté)
-	if (preg_match("/src\=/", $fichier)) $fichier = extraire_attribut($fichier, "src");
-	$fichier = preg_replace(",\?[0-9]*$,", "", $fichier);
+	$fichier = centre_image_preparer_fichier($fichier);
 
 	// on mémorise le résultat -> don
 	if (isset($spip_centre_image[$fichier])) {
@@ -158,10 +186,8 @@ function centre_image_y($fichier) {
 **/
 function centre_image_visage($fichier) {
 	static $spip_centre_image_visage = array();
-	if (preg_match("/src\=/", $fichier)) {
-		$fichier = extraire_attribut($fichier, "src");
-	}
-	$fichier = preg_replace(",\?[0-9]*$,", "", $fichier);
+
+	$fichier = centre_image_preparer_fichier($fichier);
 
 	// on mémorise le résultat -> don
 	if (isset($spip_centre_image_visage["$fichier"]) AND $spip_centre_image_visage["$fichier"]) {
