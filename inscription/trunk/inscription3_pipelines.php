@@ -507,7 +507,7 @@ function inscription3_formulaire_verifier($flux) {
 					$valeurs[$clef] = trim(_request($clef));
 					$type['options'] = array_merge(array_merge(is_array($type['options']) ?
 						$type['options'] : array(), $_GET), $options);
-					$erreurs[$clef] = $verifier($valeurs[$clef],$type['type'],$type['options']);
+					$erreurs[$clef] = $verifier($valeurs[$clef], $type['type'], $type['options']);
 					if ($erreurs[$clef] == null) {
 						unset($erreurs[$clef]);
 					}
