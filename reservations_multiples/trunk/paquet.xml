@@ -1,9 +1,9 @@
 <paquet
 	prefix="reservations_multiples"
 	categorie="communication"
-	version="1.4.5"
+	version="1.4.6"
 	etat="test"
-	compatibilite="[3.0.16;3.1.*]"
+	compatibilite="[3.0.16;3.2.*]"
 	logo="prive/themes/spip/images/reservations_multiples-64.png"
 	documentation=""
 >
@@ -15,8 +15,8 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="reservation_evenement" compatibilite="[1.21.24;]" />
-	<necessite nom="saisies" compatibilite="[2.7.3;]" />
+	<necessite nom="reservation_evenement" compatibilite="[1.25.1;]" />
+	<necessite nom="saisies" compatibilite="[2.18.12;]" />
 
 	<utilise nom="reservations_mailsubscribers" compatibilite="[1.2.4;]" />
 
