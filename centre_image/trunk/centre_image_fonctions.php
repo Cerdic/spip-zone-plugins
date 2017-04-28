@@ -51,7 +51,8 @@ function centre_image_preparer_fichier($fichier) {
 	}
 
 	// Enlever timestamp ou token
-	$fichier = array_shift(explode('?', $fichier, 2));
+	$fichier = explode('?', $fichier, 2);
+	$fichier = array_shift($fichier);
 
 	// si URL absolue de l'image, on passe en relatif
 	if (tester_url_absolue($fichier)) {
