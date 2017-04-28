@@ -1,5 +1,63 @@
-<h1 class="grostitre"><:reservation_evenement:titre_page_configurer_reservation_evenement:></h1>
+#SET{config_objets_configuration,#ARRAY{}}
+#SET{config,#CONFIG{reservation_evenement}}
+#SET{panneau_defaut,reservation_evenement}
+#SET{panneau,#ENV{panneau,#GET{panneau_defaut}}}
 
-<div class="ajax">
-	#FORMULAIRE_CONFIGURER_RESERVATION_EVENEMENT
+#SET{objets_configuration,#GET{config}|table_valeur{objets_configuration}}
+
+
+[(#GET{config}|table_valeur{selection_objets_configuration}|?{
+	#SET{config_selection_objets_configuration, #GET{config}|table_valeur{selection_objets_configuration}},
+	#SET{config_selection_objets_configuration, ''}
+})]
+
+[(#GET{objets_configuration}|?{
+	#SET{config_objets_configuration,
+		#LISTE{reservation_evenement}|array_merge{#GET{objets_configuration}}
+	}
+	,
+	#SET{config_objets_configuration,#LISTE{reservation_evenement}}
+	})
+]
+
+<B_objets>
+<div class="onglets_simple second clearfix">
+		<ul>
+<BOUCLE_objets(DATA){source tableau, #ENV{objets_configuration}}>
+#SET{afficher,oui}
+[(#GET{config_selection_objets_configuration}|oui)
+	[(#CLE|in_array{#GET{config_objets_configuration}}|non)
+		#SET{afficher,non}
+	]
+]
+[(#GET{afficher}|=={oui}|oui)
+	<li>
+		[(#ENV{panneau,#GET{panneau_defaut}}|=={#CLE}|oui)
+			<strong class="on">[(#LABEL)]</strong>
+			[(#VALEUR|table_valeur{chemin}|?{
+				#SET{chemin,#VALEUR|table_valeur{chemin}},
+				#SET{chemin,prive/squelettes/contenu/configurer_#GET{panneau}}
+				[(#CLE|=={reservation_evenement}|oui)
+					#SET{chemin,prive/squelettes/contenu/inc-configurer_reservation_evenement_form}
+				]
+				}
+			)]
+		]
+		[(#ENV{panneau,#GET{panneau_defaut}}|=={#CLE}|non)
+			<a
+				class="ajax nocache"
+				href="[(#URL_ECRIRE{configurer_reservation_evenement}
+					|parametre_url{panneau,#CLE})]">
+					#LABEL
+			</a>
+		]
+	</li>
+]
+</BOUCLE_objets>
+		</ul>
 </div>
+</B_objets>
+
+[(#GET{chemin}|oui)
+	[(#INCLURE{fond=#GET{chemin},env})]
+]

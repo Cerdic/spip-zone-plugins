@@ -166,13 +166,15 @@ function reservations_supprimer($ids_reservations) {
 }
 
 /**
+ * Définit les différents panneau de configuration intégrés dans le panneau.
  *
+ * @return array les objets.
  */
 function re_objets_configuration() {
+	include_spip('public/assembler');
 	$objets = array(
 		'reservation_evenement' => array(
 			'label' => _T('reservation_evenement:reservation_evenement_titre'),
-			'chemin' => 'prive/squelettes/contenu/inc-configurer_reservation_evenement',
 			),
 	);
 
