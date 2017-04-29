@@ -90,8 +90,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_obets_choix' => 'Articles ou événements disponibles pour la promotion :',
 	'label_objet_article' => 'Choissisez les articles dont les événements seront disponibles pour la promotion :',
 	'label_objet_evenement' => 'Choissisez les les événements disponibles pour la promotion :',
-	'label_objets_configuration' => 'Les panneaux disponibles :',
 	'label_objet_promotion' => 'Définir sur quel niveau on applique la promotion :',
+	'label_objets_configuration' => 'Les panneaux disponibles :',
 	'label_reference' => 'Référence :',
 	'label_reservation' => 'Réservation :',
 	'label_selection_objets_configuration' => 'Sélectionner les panneaux de configuration à intégrer',
@@ -166,7 +166,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rubrique_reservation_label' => 'Définir une/des zones pour l’application de ce plugin',
 
 	// S
-	'selection_objets_configuration_explication'  => 'si desactivé, tous les panneaux sont intégrés',
+	'selection_objets_configuration_explication' => 'si desactivé, tous les panneaux sont intégrés',
 	'simple' => 'Simple',
 	'statuts_complet_explication' => 'Les statuts du détails de résérvation pris en compte pour déterminer si l’événement est complet.',
 	'sujet_une_reservation_accepte' => 'Réservation confirmé sur @nom@',
