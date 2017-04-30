@@ -1,7 +1,7 @@
 <paquet
 	prefix="inscription3"
 	categorie="auteur"
-	version="3.6.8"
+	version="3.6.9"
 	etat="stable"
 	compatibilite="[3.1.0;3.1.*]"
 	logo="prive/themes/spip/images/inscription3-64.png"
@@ -16,7 +16,7 @@
 	<auteur lien="http://www.kent1.info">kent1</auteur>
 	<auteur>BoOz</auteur>
 
-	<copyright>2007-2016</copyright>
+	<copyright>2007-2017</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
