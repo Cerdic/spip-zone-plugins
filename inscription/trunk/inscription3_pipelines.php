@@ -279,13 +279,12 @@ function inscription3_formulaire_charger($flux) {
 					$valeurs['naissance_mois'] = $date_naissance[2];
 					$valeurs['naissance_jour'] = $date_naissance[3];
 				} else {
-					$valeurs['naissance_annee'] = _request('naissance_annee');
-					$valeurs['naissance_mois'] = _request('naissance_mois');
-					$valeurs['naissance_jour'] = _request('naissance_jour');
+					$valeurs['naissance_annee'] = _request('naissance_annee') ? _request('naissance_annee') : '';
+					$valeurs['naissance_mois'] = _request('naissance_mois') ? _request('naissance_mois') : '';
+					$valeurs['naissance_jour'] = _request('naissance_jour') ? _request('naissance_jour') : '';
 				}
 			}
 		}
-
 		include_spip('cextras_pipelines');
 		$saisies = champs_extras_objet('spip_auteurs');
 		foreach ($champs as $valeur) {
@@ -312,6 +311,14 @@ function inscription3_formulaire_charger($flux) {
 		} else {
 			$flux['data'] = $valeurs;
 		}
+	}
+
+	if (in_array($flux['args']['form'], array('editer_auteur', 'inscription'))
+		and (isset($flux['data']['naissance']) and $flux['data']['naissance'] == '0000-00-00')) {
+		unset($flux['data']['naissance']);
+		unset($flux['data']['naissance_annee']);
+		unset($flux['data']['naissance_mois']);
+		unset($flux['data']['naissance_jour']);
 	}
 
 	return $flux;
@@ -738,6 +745,10 @@ function inscription3_formulaire_traiter($flux) {
 				$mois = _request('naissance_mois');
 				$jour = _request('naissance_jour');
 				$valeurs[$valeur] = sql_format_date($annee, $mois, $jour);
+				if ($valeurs[$valeur] == '0000-00-00') {
+					unset($valeurs[$valeur]);
+					set_request($valeur, '');
+				}
 			}
 		}
 		// Definir le login s'il a besoin de l'etre
