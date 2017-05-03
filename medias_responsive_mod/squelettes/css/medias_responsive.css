@@ -1,3 +1,6 @@
+.spip_documents picture {
+	display: block;
+}
 .spip_documents_left, .spip_documents_right {
 	margin-top: 0.5em;
 	margin-bottom: 0.5em;

@@ -29,7 +29,6 @@
 [(#LARGEUR|>={800}|oui)[(#SET{a,a})]]
 [(#HAUTEUR|>={800}|oui)[(#SET{a,a})]]
 
-
 <figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align}|sinon{center})][ spip_documents_(#GET{flip})][ spip_documents_(#ENV{shape})][(#ENV{rond}|oui)rond][(#ENV{large}|oui)large][(#ENV{kenburns}|oui)kenburns][ (#ENV{class})] spip_lien_ok'
  style="[max-width:(#ENV{largeur}|sinon{#FICHIER|largeur})px;][-webkit-shape-outside: content-box (#GET{polygon});][shape-outside: content-box (#GET{polygon});]"[ data-w="(#ENV{largeur}|sinon{#FICHIER|largeur})"][ data-zoom-responsive="(#GET{kenburns})"]>
 [<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"]>]
@@ -48,7 +47,7 @@
 		]
 	]
 
-[(#ENV{lien}|?{</a>,</#GET{a}>})]
+[(#ENV{lien}|?{</a>,</[(#GET{a})]>})]
 [(#GET{kenburns}|oui)
 <style><!--
 	.spip_document_#ID_DOCUMENT.kenburns picture img {
