@@ -9,6 +9,7 @@
 define('_EXTRAIRE_RESSOURCES', ',' . '<"?(https?://|[\w -]+\.[\w -]+).*>'.',UimsS');
 define('_RESSOURCE_VIGNETTE_LARGEUR_DEFAUT','small');
 define('_RESSOURCE_IMAGE_LARGEUR_DEFAUT', 'large');
+include_spip('inc/filtres_images_mini');
 
 /* pipeline pour typo */
 function ressource_post_typo($t) {
