@@ -21,7 +21,7 @@ options:
       label: '<:verifier:option_comparaison_champ_comparaison_label:>'
       explication: '<:verifier:option_comparaison_champ_comparaison_explication:>'
       datas:
-        '': '<:verifier:option_comparaison_champ_egal:>'
+        egal: '<:verifier:option_comparaison_champ_egal:>'
         egal_type: '<:verifier:option_comparaison_champ_egal_type:>'
         petit: '<:verifier:option_comparaison_champ_petit:>'
         petit_egal: '<:verifier:option_comparaison_champ_petit_egal:>'
