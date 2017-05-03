@@ -4,6 +4,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('base/abstract_sql');
+include_spip('inc/headers');
 
 /**
  * Incrémente le compteur de clics + redirige vers la bonne URL
@@ -18,17 +19,18 @@ function action_cliquer_campagne_dist($arg=null) {
 	}
 
 	// Si on a bien un id valide et que c'est pas un bot
+	// Et que la campagne existe
 	if (
 		$id_campagne = intval($arg)
 		and !_IS_BOT
+		and $campagne = sql_fetsel('url,id_encart', 'spip_campagnes', 'id_campagne = '.$id_campagne)
+		
 	) {
 		include_spip('inc/campagnes');
 		$infos = campagnes_recuperer_infos_visiteur();		
 		
-		// On teste si la personne n'a pas déjà cliqué sur ce lien
-		// Attention, le champ date étant de type DATE, il faut réduire NOW à juste la DATE
-		if (
-			!sql_fetsel(
+		// Si la personne n'a pas déjà cliqué dessus le jour même
+		if (!sql_fetsel(
 				'id_campagne',
 				'spip_campagnes_clics',
 				array(
@@ -37,8 +39,6 @@ function action_cliquer_campagne_dist($arg=null) {
 					'date=DATE(NOW())',
 				)
 			)
-			// Et que la campagne voulue existe bien !
-			and $campagne = sql_fetsel('url,id_encart', 'spip_campagnes', 'id_campagne = '.$id_campagne)
 		) {
 			// On cherche la page d'où est venu le clic, soit explicitement soit par le referer
 			$page = _request('referer');
@@ -56,10 +56,11 @@ function action_cliquer_campagne_dist($arg=null) {
 			);
 		}
 				
-		// Si c'est bon on redirige
-		if ($ok !== false){
-			include_spip('inc/headers');
-			redirige_par_entete($campagne['url']);
-		}
+		// On redirige toujours vers la campagne
+		redirige_par_entete($campagne['url']);
+	}
+	// Si on n'a pas trouvé de campagne, on redirige vers le site lui-même
+	else {
+		redirige_par_entete($GLOBALS['meta']['adresse_site']);
 	}
 }
