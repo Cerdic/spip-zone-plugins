@@ -1,0 +1,16 @@
+<div>
+	<label for="#ENV{prefix}_col0"><:storify:label_line_action_bloc_0:></label>[
+	<span class='erreur_message'>(#GET{erreurs})</span>
+	]<textarea name="story_lines[#K][blocks][0]" id="#ENV{prefix}_col0" class="textarea">
+#ENV*{story_lines/#K/blocks/0}</textarea>
+</div>
+<div>
+	<label for="#ENV{prefix}_col1"><:storify:label_line_action_bloc_1:></label>[
+	<span class='erreur_message'>(#GET{erreurs})</span>
+	]<input type="text" name="story_lines[#K][blocks][1]" class="text" value="#ENV*{story_lines/#K/blocks/1}" id="#ENV{prefix}_col1" />
+</div>
+<div>
+	<label for="#ENV{prefix}_col2"><:storify:label_line_action_bloc_2:></label>[
+	<span class='erreur_message'>(#GET{erreurs})</span>
+	]<input type="text" name="story_lines[#K][blocks][2]" class="text" value="#ENV*{story_lines/#K/blocks/2}" id="#ENV{prefix}_col2" />
+</div>

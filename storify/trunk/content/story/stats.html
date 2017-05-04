@@ -1,0 +1,39 @@
+#SET{logo,#ENV**{logo}|extraire_balise{img}|image_reduire{1360,0}|extraire_attribut{src}}
+#SET{nb,0}
+[(#ENV**{blocks/1}|trim|strlen|oui)#SET{nb,#GET{nb}|plus{1}}})]
+[(#ENV**{blocks/3}|trim|strlen|oui)#SET{nb,#GET{nb}|plus{1}}})]
+[(#ENV**{blocks/5}|trim|strlen|oui)#SET{nb,#GET{nb}|plus{1}}})]
+[(#ENV**{blocks/7}|trim|strlen|oui)#SET{nb,#GET{nb}|plus{1}}})]
+#SET{class,#ARRAY{0,col-sm-12,1,col-sm-12,2,col-sm-6,3,col-sm-4,4,col-sm-3}}
+<div class="inner-bg" style="background-image:url([(#GET{logo})])">
+	<span class="opacity"></span>
+	<div class="container-fluid padding-large center">
+		[<h3 class="spip">(#ENV**{blocks/0}|propre|PtoBR)</h3>]
+		<div class="row">
+			[<div class="#GET{class/#GET{nb}}">
+				<div class="padding-large">
+					<strong class="number">(#ENV**{blocks/1}|propre|PtoBR)</strong>
+					[<div class="legende">(#ENV**{blocks/2}|propre|PtoBR)</div>]
+				</div>
+			</div>]
+			[<div class="#GET{class/#GET{nb}}">
+				<div class="padding-large">
+					<strong class="number">(#ENV**{blocks/3}|propre|PtoBR)</strong>
+					[<div class="legende">(#ENV**{blocks/4}|propre|PtoBR)</div>]
+				</div>
+			</div>]
+			[<div class="#GET{class/#GET{nb}}">
+				<div class="padding-large">
+					<strong class="number">(#ENV**{blocks/5}|propre|PtoBR)</strong>
+					[<div class="legende">(#ENV**{blocks/6}|propre|PtoBR)</div>]
+				</div>
+			</div>]
+			[<div class="#GET{class/#GET{nb}}">
+				<div class="padding-large">
+					<strong class="number">(#ENV**{blocks/7}|propre|PtoBR)</strong>
+					[<div class="legende">(#ENV**{blocks/8}|propre|PtoBR)</div>]
+				</div>
+			</div>]
+		</div>
+	</div>
+</div>

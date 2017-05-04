@@ -1,0 +1,18 @@
+<BOUCLE_content(ARTICLES){id_article}>
+<article>
+
+	<div class="main">
+		<BOUCLE_lines(POUR){tableau #TEXTE**|story_lines_from_texte}>
+		#SET{even,#COMPTEUR_BOUCLE|alterner{0,1}}
+		<div class="story-line [story-line-(#VALEUR{type}) ][(#GET{even}|?{even,odd})]">
+			<INCLURE{fond=content/story/#VALEUR{type},blocks=#VALEUR{blocks},id_article,even=#GET{even},logo=#LOGO_ARTICLE_NORMAL} />
+		</div>
+		</BOUCLE_lines>
+	</div>
+
+	<footer class="container-fluid">
+		[<div class="notes p"><h2><:info_notes:></h2>(#NOTES)</div>]
+	</footer>
+
+</article>
+</BOUCLE_content>
