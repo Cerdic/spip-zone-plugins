@@ -1,8 +1,8 @@
 <div class="fichier_precedent">
 	<input type="hidden" name="cvtupload_fichiers_precedents[(#ENV{crochets})]" value="#ENV{infos_encodees}" />
 	<div class="description">
-		[(#EXTENSION|in_array{#LISTE{jpg,png,gif}}|?{
-			[(#ENV{vignette}|balise_img|image_reduire{150})],
+		[(#EXTENSION**|in_array{#LISTE{jpg,png,gif}}|?{
+			[(#ENV**{vignette}|balise_img|_image_reduire_base64{150})],
 			[(#ENV{vignette}|balise_img|image_reduire{48})]
 			}
 		)]
