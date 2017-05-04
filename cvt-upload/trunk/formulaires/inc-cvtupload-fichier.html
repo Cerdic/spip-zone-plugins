@@ -1,7 +1,11 @@
 <div class="fichier_precedent">
 	<input type="hidden" name="cvtupload_fichiers_precedents[(#ENV{crochets})]" value="#ENV{infos_encodees}" />
 	<div class="description">
-		[(#ENV{vignette}|image_reduire{48})]
+		[(#EXTENSION|in_array{#LISTE{jpg,png,gif}}|?{
+			[(#ENV{vignette}|balise_img|image_reduire{150})],
+			[(#ENV{vignette}|balise_img|image_reduire{48})]
+			}
+		)]
 		[<a href="(#ENV{url}|attribut_html)"[ (#HTML5|oui)download="download"]>]#ENV{name}[(#ENV{url}|oui)</a>]
 	</div>
 	<div class="action">

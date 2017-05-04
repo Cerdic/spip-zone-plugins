@@ -107,13 +107,19 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer=true
 				// Et qu'on génère bien un nom de fichier aléatoire pour déplacer le fichier
 				and $chemin_aleatoire = tempnam($repertoire, $form.'_')
 			) {
+				$extension = strtolower(pathinfo($fichier['name'][$cle], PATHINFO_EXTENSION));
 				// Déplacement du fichier vers le dossier de réception temporaire + récupération d'infos
 				if (deplacer_fichier_upload($fichier['tmp_name'][$cle], $chemin_aleatoire, $deplacer)) {
 					$infos[$cle]['tmp_name'] = $chemin_aleatoire;
 					$infos[$cle]['name'] = $nom;
-					// On en déduit l'extension et du coup la vignette
-					$infos[$cle]['extension'] = pathinfo($fichier['name'][$cle], PATHINFO_EXTENSION);
-					$infos[$cle]['vignette'] = $vignette_par_defaut($infos[$cle]['extension'], false, true);
+					$infos[$cle]['extension'] = $extension;
+					// si image on fait une copie avec l'extension pour pouvoir avoir l'image réduite en vignette
+					if (in_array($extension, array('png','jpg','gif'))) {
+						deplacer_fichier_upload($chemin_aleatoire, $chemin_aleatoire.".$extension",false);
+						$infos[$cle]['vignette'] = $chemin_aleatoire.".$extension";
+					} else {
+						$infos[$cle]['vignette'] = $vignette_par_defaut($infos[$cle]['extension'], false, true);
+					}
 					//On récupère le type MIME du fichier aussi
 					$infos[$cle]['mime'] = cvt_upload_determiner_mime($fichier['type'][$cle],$infos[$cle]['extension']);
 					$infos[$cle]['taille'] = $fichier['size'][$cle];
