@@ -9,7 +9,7 @@
 	
 	<!-- Sites des extensions & contributions SPIP -->
 	<groupe type="extension">
-		<site alias="plugin" src="http://plugins.spip.net/" actif="oui" />
+		<site alias="plugin" src="https://plugins.spip.net/" actif="oui" />
 		<site alias="plugincode" src="http://code.plugins.spip.net/" actif="oui" />
 		<site alias="contrib" src="https://contrib.spip.net/" actif="oui" />
 		<site alias="trad" src="http://trad.spip.net/" actif="oui" />
@@ -32,7 +32,7 @@
 		<site alias="herbier" src="http://herbier.spip.net/" actif="oui" />
 		<site alias="video" src="http://medias.spip.net/" actif="oui" />
 		<site alias="demo" src="https://demo.spip.net/" actif="oui" />
-		<site alias="test" src="http://grml.eu/" actif="oui" />
+		<site alias="test" src="https://grml.eu/" actif="oui" />
 		<site alias="syntaxe" src="http://syntaxe.spip.net/" actif="oui" />
 	</groupe>
 
@@ -40,7 +40,7 @@
 	<groupe type="actualite">
 		<site alias="blog" src="https://blog.spip.net/" actif="oui" />
 		<site alias="twit" src="http://spip.org/" actif="non" />
-		<site alias="sedna" src="http://sedna.spip.net/" actif="oui" />
+		<site alias="sedna" src="https://sedna.spip.net/" actif="oui" />
 		<site alias="zine" src="http://zine.spip.net/" actif="non" />
 		<site alias="mag" src="http://mag.spip.net/" actif="non" />
 	</groupe>
