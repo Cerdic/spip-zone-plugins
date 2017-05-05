@@ -1,0 +1,16 @@
+#CACHE{0}
+<B_compte_objets>
+<ul class="spip" id="compteur_objet_index">
+<BOUCLE_compte_objets(DATA){source table, #LISTE{article, document}}>
+#SET{url,#CONFIG{elasticsearch_config/url_serveur}/#CONFIG{elasticsearch_config/nom_index_ecriture}/#VALEUR/_count}
+[<li class="compteur #VALEUR">(#GET{url}|phpcurl_get|json_decode{true}|table_valeur{count}) de type #VALEUR</li>]
+</BOUCLE_compte_objets>
+</ul>
+</B_compte_objets>
+<BOUCLE_job(jobs){fonction=indexer_bloc}>
+</BOUCLE_job>
+<script type="text/javascript">/*<![CDATA[*/
+function index_reload(){jQuery('#compteur_objet_index').ajaxReload();}
+if (window.jQuery) setTimeout(index_reload,2000);
+/*]]>*/</script>
+</B_job>

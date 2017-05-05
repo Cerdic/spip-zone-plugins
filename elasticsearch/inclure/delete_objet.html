@@ -1,0 +1,2 @@
+#SET{url,#CONFIG{elasticsearch_config/url_serveur}/#CONFIG{elasticsearch_config/nom_index_ecriture}/#ENV{objet}/#ID_OBJET}
+[(#GET{url}|phpcurl_delete)]

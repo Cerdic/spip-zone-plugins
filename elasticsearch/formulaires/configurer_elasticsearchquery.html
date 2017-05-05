@@ -1,0 +1,41 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem">Gestion des requêtes QUERY</h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="_meta_casier" value="elasticsearch_ponderation" />
+		<fieldset>
+			<legend>Poids des paramètres Query</legend>
+			
+			[(#SAISIE{input, elastic_body, label=_body})]
+			[(#SAISIE{input, elastic_body_shingle, label=_body.shingle})]
+			[(#SAISIE{input, elastic_body_ngram, label=_body.ngram})]
+			[(#SAISIE{input, elastic_body_whitespace, label=_body.whitespace})]
+
+			[(#SAISIE{input, elastic_title, label=_title})]
+			[(#SAISIE{input, elastic_title_shingle, label=_title.shingle})]
+			[(#SAISIE{input, elastic_title_ngram, label=_title.ngram})]
+			[(#SAISIE{input, elastic_title_whitespace, label=_title.whitespace})]
+
+			[(#SAISIE{input, elastic_mots_title, label=_mots.title})]
+			[(#SAISIE{input, elastic_mots_title_shingle, label=_mots.title.shingle})]
+			[(#SAISIE{input, elastic_mots_title_whitespace, label=_mots.title.whitespace})]
+			[(#SAISIE{input, elastic_mots_title_exact, label=_mots.title.exact})]
+
+			[(#SAISIE{input, elastic_documents_titre, label=_documents.titre})]
+			[(#SAISIE{input, elastic_documents_url, label=_documents.url})]
+
+			[(#SAISIE{input, elastic_hierarchie_titre, label=_hierarchie.titre})]
+			
+			[(#SAISIE{input, elastic_authors, label=_authors})]
+
+		</fieldset>
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

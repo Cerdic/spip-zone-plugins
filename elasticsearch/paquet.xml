@@ -1,0 +1,41 @@
+<paquet
+	prefix="elasticsearch"
+	categorie="navigation"
+	version="2.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/elasticsearch-64.png"
+	documentation=""
+	schema="1.0.1" 
+>
+	<!--
+		Paquet généré le 2016-09-14 16:03:56
+		(Vous pouvez bien entendu supprimer ces commentaires) 
+	-->
+
+	<nom>Elasticsearch</nom>
+	<!-- Utiliser Elasticsearch pour la recherche -->
+
+	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs --> 
+	<auteur>Guy Cesaro</auteur>
+	<auteur>Joachim Guedj</auteur>
+	
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="saisies"  compatibilite="[2.0.3;]" />
+	<necessite nom="phpcurl"  compatibilite="[1.0.0;]" />
+	<!-- 
+		pour le pipeline post_edition_lien
+		il faut passer après accès restreint
+		pour pousser les maj de zones
+		il faut donc un utilise sur accès restreint
+	--> 
+	<utilise nom="extrairedoc"  compatibilite="[1.2.2;]" />
+
+	<pipeline nom="post_edition" inclure="elasticsearch_pipelines.php" />
+	<pipeline nom="post_edition_lien" inclure="elasticsearch_pipelines.php" />
+	<pipeline nom="boite_infos" inclure="elasticsearch_pipelines.php" />
+	<pipeline nom="autoriser" inclure="elasticsearch_autorisations.php" /> 
+
+
+</paquet>

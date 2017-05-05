@@ -1,0 +1,61 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type: application/json; charset=#CHARSET}
+{
+  "from": #ENV{from,0},
+  "size": #ENV{size,10},
+  "query": {
+    "bool" : {
+<BOUCLE_date(CONDITION){si #ENV{date_debut}|oui|ou{#ENV{date_fin}|oui}}>
+      "filter": [
+          {
+            "range":{
+              "date":{
+                ["gte":"(#ENV{date_debut})"[(#ENV{date_fin}|?{',',''})]]
+                ["lte":"(#ENV{date_fin})"],
+                "format": "dd/MM/yyyy"
+              }
+            }
+          }
+        ],
+</BOUCLE_date>
+      "must" : [
+          {
+            "multi_match":{
+              "query": "[(#ENV{recherche})]",
+			  "type":  "best_fields",
+              "fields":[
+                "*_body[^(#CONFIG{elasticsearch/elastic_body}|sinon{20})]",
+                "*_body.shingle[^(#CONFIG{elasticsearch/elastic_body_shingle}|sinon{30})]",
+                "*_body.ngram[^(#CONFIG{elasticsearch/elastic_body_ngram})]",
+                "*_body.whitespace[^(#CONFIG{elasticsearch/elastic_body_whitespace}|sinon{30})]",
+                "*_title[^(#CONFIG{elasticsearch/elastic_title}|sinon{20})]",
+                "*_body.special_chars^20",
+                "*_title.special_chars^20",
+                "*_title.shingle[^(#CONFIG{elasticsearch/elastic_title_shingle}|sinon{60})]",
+                "*_title.ngram[^(#CONFIG{elasticsearch/elastic_title_ngram})]",
+                "*_title.whitespace[^(#CONFIG{elasticsearch/elastic_title_whitespace}|sinon{20})]",
+                "*_mots.title[^(#CONFIG{elasticsearch/elastic_mots_title}|sinon{20})]",
+                "*_mots.title.shingle[^(#CONFIG{elasticsearch/elastic_mots_title_shingle}|sinon{20})]",
+                "*_mots.title.whitespace[^(#CONFIG{elasticsearch/elastic_mots_title_whitespace}|sinon{20})]",
+                "*_mots.title.exact[^(#CONFIG{elasticsearch/elastic_mots_title_exact}|sinon{40})]",
+                "*_documents.titre[^(#CONFIG{elasticsearch/elastic_documents_titre}|sinon{20})]",
+                "*_documents.url[^(#CONFIG{elasticsearch/elastic_documents_url})]",
+                "*_hierarchie.titre[^(#CONFIG{elasticsearch/elastic_hierarchie_titre}|sinon{10})]"
+              ],
+			"tie_breaker": 0.3
+
+            }
+          }
+        ]
+    }
+  },
+    "highlight": {
+        "pre_tags" : ["<em><strong>"],
+        "post_tags" : ["</strong></em>"],
+		"fields": [
+		        {"*_titl*" : {}},
+                {"*_bod*" : {}}
+            ]
+
+	}
+}

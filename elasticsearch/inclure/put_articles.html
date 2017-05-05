@@ -1,0 +1,8 @@
+#CACHE{0}
+<BOUCLE_push (ARTICLES) {#ENV{debut,0}, #ENV{pas,100}}{si #ENV{total}|non}>
+[(#CONFIG{elasticsearch_config/nom_index_ecriture}|oui)#INCLURE{fond=inclure/put_article, id_article}]
+</BOUCLE_push>
+<BOUCLE_total(ARTICLES){si #ENV{total}|oui}>
+</BOUCLE_total>
+#TOTAL_BOUCLE
+</B_total>

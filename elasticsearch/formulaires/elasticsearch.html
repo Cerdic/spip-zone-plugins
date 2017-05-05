@@ -1,0 +1,67 @@
+<div ng-controller="FormRechercheCtrl as formRechercheCtrl">
+	<button class="btn btn-recherche pull-right" ng-click="formRechercheCtrl.rechercheSrv.focus(); formRechercheCtrl.rechercheSrv.getRecherche(formRechercheCtrl.recherche,0,10)">Rechercher</button>
+	<div class="overlay-recherche"></div>
+	<div class="recherche-suggestion">
+		<div class="container">
+			<div class="center">
+				<button class="btn btn-recherche-fermer" ng-click="formRechercheCtrl.rechercheSrv.focus()">Fermer</button>
+			</div>
+			<div class="formulaire_spip formulaire_recherche[ (#ENV{class})]" id="formulaire_recherche">
+				<form action="[(#ENV{action})]" method="get">
+					<div class="editer-groupe">
+						[(#ENV{action}|form_hidden)]
+						[<input type="hidden" name="lang" value="(#ENV{lang})" />]
+						<div class="input-group">
+							<input
+								type="[(#HTML5|?{search,text})]"
+								class="search text form-control"
+								name="recherche"
+								id="#ENV{_id_champ}"
+								[value="(#ENV{recherche})"]
+								accesskey="4"
+								autocapitalize="off"
+								autocorrect="off"
+								placeholder="Rechercher&hellip;"
+								ng-model="formRechercheCtrl.recherche"
+								ng-change="formRechercheCtrl.rechercheSrv.getRecherche(formRechercheCtrl.recherche,0,10)"
+								[ng-model-options="{ debounce: (#CONFIG{icdc_config/delay_recherche}|sinon{500}) }"]
+							/>
+							<span class="input-group-btn">
+								<button type="submit" class="submit btn btn-primary" title="<:info_rechercher:>"><i class="icon-loupe_recherche"></i></button>
+							</span>
+						</div>
+					</div>
+				</form>
+			</div>
+			<h2 class="h1" ng-if="formRechercheCtrl.rechercheSrv.result!=''">Suggestions</h2>
+
+
+
+			<div class="row">			
+				<div class="bloc-actu" ng-repeat="o in formRechercheCtrl.rechercheSrv.result">
+					<div class="bloc-actu--img col-sm-12 col-md-4 col-lg-5">
+					<a href="{{o._source[o._type+'_url']}}" title="Accéder à l'article" >
+						[<img src="(#CHEMIN{images/no-logo_article.png})" class="img-responsive" alt="Logo de l'article" ng-if="!o._source\[o._type+'_logo'\]">]
+						<img ng-src="{{o._source[o._type+'_logo']}}" class="img-responsive" alt="Logo de l'article" ng-if="o._source[o._type+'_logo']">
+						<span class="container-date">
+							<span class="in">
+								<span class="jour" ng-bind="formRechercheCtrl.rechercheSrv.convertJour(o._source.date)"></span>
+								<span class="mois" ng-bind="formRechercheCtrl.rechercheSrv.convertMois(o._source.date)"></span>
+							</span>
+						</span>
+					</a>
+					</div>
+					<div class="bloc-actu--txt col-sm-12 col-md-8 col-lg-7">
+					<a href="{{o._source[o._type+'_url']}}" title="Accéder à l'article">
+						<h2 class="h2" ng-bind-html="o.highlight[o._type+'_title'].join(' (...) ') || o._source[o._type+'_title']"></h2>
+						<p ng-bind-html="o.highlight[o._type+'_body'].join(' (...) ') || o._source[o._type+'_body'] | limitTo: 250"></p>
+						[(#REM)<div class="tags">
+								<span class="tag" ng-repeat="t in o._source.keywords_title" ng-bind-html="t.title"></span>
+						</div>]
+					</a>
+					</div>
+				</div>
+		</div>
+		</div>
+	</div>
+</div>

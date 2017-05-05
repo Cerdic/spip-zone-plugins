@@ -1,0 +1,8 @@
+#CACHE{0}
+<BOUCLE_push (DOCUMENTS documents_liens){statut=publie}{#ENV{debut,0}, #ENV{pas,10}}{si #ENV{total}|non}{extension IN #LISTE{doc,docm,docx,html,odp,odt,ots,pdf,pps,ppsx,ppt,pptx,txt,xml,xls,xlsm,xlsx}}>
+[(#CONFIG{elasticsearch_config/nom_index_ecriture}|oui)#INCLURE{fond=inclure/put_document, id_document}]
+</BOUCLE_push>
+<BOUCLE_total(DOCUMENTS documents_liens){statut=publie}{si #ENV{total}|oui}{extension IN #LISTE{doc,docm,docx,html,odp,odt,ots,pdf,pps,ppsx,ppt,pptx,txt,xml,xls,xlsm,xlsx}}>
+</BOUCLE_total>
+#TOTAL_BOUCLE
+</B_total>

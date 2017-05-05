@@ -1,0 +1,94 @@
+#CACHE{0}
+<div id="filtres_recherche" class="formulaire_#FORM form">
+	<form method="get" action="#ENV{action}" id="form_filtres_recherche" name="formulaire_#FORM">
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+		<div class="row">
+			<h1 class="h1">Recherche ICDC</h1>
+		</div>
+
+		<div class="editer-groupe row">
+			<div class="input-group recherche">
+				<input
+					type="[(#HTML5|?{search,text})]"
+					class="search text form-control"
+					name="recherche"
+					id="recherche"
+					[value="(#ENV{recherche})"]
+					accesskey="4"
+					autocapitalize="off"
+					autocorrect="off"
+					placeholder="Rechercher&hellip;"
+				/>
+				<span class="input-group-btn">
+					<button type="submit" class="submit btn btn-primary" title="<:info_rechercher:>"><i class="icon-loupe_recherche"></i></button>
+				</span>
+			</div>
+			<!-- / input-group  -->
+		</div>
+		<!-- / editer-groupe -->
+
+		<div class="editer-groupe row">
+			<div class="tri_type col-sm-8">
+				<div class="list-group">
+					<div class="choix list-group-item aff_contenu[(#ENV{type_objet}|non) active]">
+						<input type="radio" class="radio" name="type_objet" value="" id="tout_objet"[ (#ENV{type_objet}|non) checked="checked"] />
+						<label for="tout_objet">Afficher tout</label>
+					</div>
+					<div class="choix list-group-item aff_contenu[(#ENV{type_objet}|=={article}|oui) active]">
+						<input type="radio" class="radio" name="type_objet" value="article" id="article"[ (#ENV{type_objet}|=={article}|oui) checked="checked"] />
+						<label for="article">Afficher les contenus</label>
+					</div>
+					<div class="choix list-group-item aff_contenu[(#ENV{type_objet}|=={document}|oui) active]">
+						<input type="radio" class="radio" name="type_objet" value="document" id="document"[ (#ENV{type_objet}|=={document}|oui) checked="checked"] />
+						<label for="document">Afficher les documents</label>
+					</div>
+				</div>
+			</div>
+			<!-- / tri_type -->
+			<div class="tri_type_select col-sm-4">
+				<div class="dropdown">
+					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						[(#ENV{date_debut_label}|?{#ENV{date_debut_label},Date indifférente})]<i></i>
+					</button>
+					<ul class="dropdown-menu" name="date_debut">
+					[(#ENV{date_debut}|?{
+						<li><input type="radio" class="radio" name="date_debut" value="" [(#ENV{date_debut}|?{checked="checked"})] id="date_indifférente" /><label for="date_indifférente"> Date indifférente</label></li>
+					})]
+						<li><input type="radio" class="radio" name="date_debut" value="#EVAL{date('d/m/Y', strtotime('-1 week'))}" [(#ENV{date_debut}|=={#EVAL{date('d/m/Y', strtotime('-1 week'))}}|oui) checked="checked"] id="une_semaine" /><label for="une_semaine"> Moins d'une semaine</label></li>
+						<li><input type="radio" class="radio" name="date_debut" value="#EVAL{date('d/m/Y', strtotime('-1 month'))}" [(#ENV{date_debut}|=={#EVAL{date('d/m/Y', strtotime('-1 month'))}}|oui)checked="checked"] id="un_mois" /><label for="un_mois"> Moins d'un mois</label></li>
+						<li><input type="radio" class="radio" name="date_debut" value="#EVAL{date('d/m/Y', strtotime('-3 month'))}" [(#ENV{date_debut}|=={#EVAL{date('d/m/Y', strtotime('-3 month'))}}|oui)checked="checked"] id="trois_mois" /><label for="trois_mois"> Moins de 3 mois</label></li>
+						<li><input type="radio" class="radio" name="date_debut" value="#EVAL{date('d/m/Y', strtotime('-6 month'))}" [(#ENV{date_debut}|=={#EVAL{date('d/m/Y', strtotime('-3 month'))}}|oui)checked="checked"] id="trois_mois" /><label for="trois_mois"> Moins de 6 mois</label></li>
+						<li><input type="radio" class="radio" name="date_debut" id="un_an" value="#EVAL{date('d/m/Y', strtotime('-1 year'))}" [(#ENV{date_debut}|=={#EVAL{date('d/m/Y', strtotime('-1 year'))}}|oui)checked="checked"] id="un_an" /><label for="un_an"> Moins d'un an</label></li>
+					</ul>
+					<input type="hidden" name="date_debut_label" value="#ENV{date_debut_label}" />
+				</div>
+			</div>
+			<!-- / tri_type_select -->
+		</div>
+		<!-- / editer-groupe -->
+
+		<div class="row">
+			<INCLURE{fond=inclure/resultats_recherche, env, ajax} />
+		</div>
+
+		<script>
+			$(document).ready(function () {
+					$('.aff_contenu').on('click', function(){
+					   $(this).children('input[type="radio"]').prop('checked', true);
+					   $(this).parents('form').submit();
+					});
+					$(".dropdown-menu li").on('click', function(){
+					  $(this).children('input[type="radio"]').prop('checked', true);
+					  var selText = $(this).children('label').text();
+					  $(this).parents('.dropdown').find('.dropdown-toggle').html(selText+'<i></i>');
+					  $("input[name='date_debut_label']").val(selText);
+					  $(this).parents('form').submit();
+					});
+				});
+		</script>
+
+	</form>
+	<!-- / form_filtres_recherche -->
+</div>
+<!-- / filtres_recherche -->
