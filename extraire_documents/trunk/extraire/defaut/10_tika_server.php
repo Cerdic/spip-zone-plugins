@@ -5,9 +5,12 @@
  **/
 function extraire_defaut_10_tika_server_test_dist($mime) {
 	include_spip('inc/distant');
-	
+	include_spip('inc/config');
+
+	$url_serveur = (lire_config('extrairedoc_config/url_serveur')!='') ? lire_config('extrairedoc_config/url_serveur') : 'localhost';
+	$port = (lire_config('extrairedoc_config/port')!='') ? lire_config('extrairedoc_config/port') : 9998;
 	// On cherche si le serveur Tika est bien lancé en local (valeurs peut-être à configurer…)
-	$tika_version = recuperer_page('http://localhost:9998/version');
+	$tika_version = recuperer_page($url_serveur.':'.$port.'/version');
 	
 	if (
 		strpos($tika_version, 'Apache Tika') !== false
@@ -30,8 +33,12 @@ function extraire_defaut_10_tika_server_test_dist($mime) {
  * @return Scontenu le contenu brut
  **/
 function extraire_defaut_10_tika_server_extraire_dist($fichier, $infos) {
-    $infos = array('contenu' => false);
+    $infos = array('contenu' => false, 'metadata' => false);
     $contenu = '';
+	include_spip('inc/config');
+
+	$url_serveur = (lire_config('extrairedoc_config/url_serveur')!='') ? lire_config('extrairedoc_config/url_serveur') : 'localhost';
+	$port = (lire_config('extrairedoc_config/port')!='') ? lire_config('extrairedoc_config/port') : 9998;
 
     // Bespoin de charger composer
     if (!class_exists('Composer\\Autoload\\ClassLoader')) {
@@ -45,12 +52,14 @@ function extraire_defaut_10_tika_server_extraire_dist($fichier, $infos) {
     $loader->register();
 	
 	// On récupère le client pour discuter avec Tika
-	$client = \Vaites\ApacheTika\Client::make();
+	$client = \Vaites\ApacheTika\Client::make($url_serveur, $port);
 	
 	// On tente de récupérer le texte brut du fichier
     try {
         set_time_limit (0);
         $contenu = $client->getText(_DIR_RACINE . $fichier);
+		$metadata = (array) $client->getMetadata(_DIR_RACINE . $fichier);
+		$meta = (array) $metadata['meta'];
     }
     catch (Exception $e) {
         //Pour toute exception on s'arrete et on retourne un contenu vide
@@ -64,7 +73,9 @@ function extraire_defaut_10_tika_server_extraire_dist($fichier, $infos) {
 	
 	// Si on a trouvé du texte
 	if ($contenu) {
-		$infos['contenu'] = $contenu;
+		$infos['body'] = $contenu;
+		$infos['title'] = $metadata['title'];
+
 	}
 	
     return $infos;
