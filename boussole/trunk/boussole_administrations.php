@@ -33,7 +33,7 @@ function boussole_upgrade($nom_meta_base_version, $version_cible){
 	// Configuration par défaut à la première activation du plugin
 	$defaut_config_03 = array(
 		'client' => array('serveurs_disponibles' =>
-							array('spip' => array('url' => 'http://boussole.spip.net'))),
+							array('spip' => array('url' => 'https://boussole.spip.net'))),
 		'serveur' => array('boussoles_disponibles' => array())
 	);
 	$defaut_config_04 = array(
@@ -59,6 +59,11 @@ function boussole_upgrade($nom_meta_base_version, $version_cible){
 	// A partir de ce schéma, le plugin migre la constante _BOUSSOLE_ALIAS_SERVEUR en configuration
 	$maj['0.4'] = array(
 		array('maj04_boussole', $defaut_config_04)
+	);
+
+	// A partir de ce schéma, le serveur de boussole spip est en https
+	$maj['0.5'] = array(
+		array('maj05_boussole', $defaut_config_03['client']['serveurs_disponibles']['spip']['url'])
 	);
 
 	include_spip('base/upgrade');
@@ -217,6 +222,33 @@ function maj04_boussole($defaut_config) {
 	// -- On met à jour l'activité et le nom du serveur
 	$config['serveur']['actif'] = defined('_BOUSSOLE_ALIAS_SERVEUR') ? 'on' : $defaut_config['serveur']['actif'];
 	$config['serveur']['nom'] = defined('_BOUSSOLE_ALIAS_SERVEUR') ? _BOUSSOLE_ALIAS_SERVEUR : $defaut_config['serveur']['nom'];
+
+	// Mise à jour en BDD de la confguration migrée
+	ecrire_config('boussole', $config);
+
+	spip_log('Maj 0.4 des données du plugin : ' . serialize(lire_config('boussole')),_BOUSSOLE_LOG . _LOG_INFO);
+}
+
+
+/**
+ * Migration du schéma 0.4 au 0.5.
+ *
+ * Le serveur de boussoles spip passe en https.
+ *
+ * @param array $defaut_config
+ * 		Configuration par défaut supplémentaire ajoutée pour ce schéma.
+ *
+ * @return void
+ */
+function maj05_boussole($url_serveur_spip) {
+
+	// Initialisation de la configuration migrée avec la configuration existante.
+	include_spip('inc/config');
+	$config = lire_config('boussole');
+
+	// Migration de l'adresse du serveur spip en https
+	// -- On met à jour l'adresse du serveur
+	$config['client']['serveurs_disponibles']['spip']['url'] = $url_serveur_spip;
 
 	// Mise à jour en BDD de la confguration migrée
 	ecrire_config('boussole', $config);
