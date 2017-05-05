@@ -3,7 +3,7 @@
 	<slogan>Autoriser les forums sur un secteur particulier</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
-	<version>0.7.0</version>
+	<version>0.7.1</version>
 	<version_base>0.3</version_base>
 	<etat>stable</etat>
 	<description>
@@ -41,7 +41,7 @@
 		<titre>forumsectorise:titre_menu</titre>
 		<url>configurer_forumsectorise</url>
 	</bouton>
-	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.2.99]" />
 	<necessite id="saisies" version="[1.9.0;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<categorie>communication</categorie>
