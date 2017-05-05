@@ -14,15 +14,15 @@ include_spip('base/abstract_sql');
 function inc_extraire_document($document = array()) {
 	// Pour garder en mémoire les extracteurs déjà trouvés
 	static $extracteurs_ok = array();
-
+	
 	// On commence par chercher le fichier à travailler
 	if (
 		!isset($document['id_document'])
 		or !is_numeric($document['id_document'])
-	) {	
+	) {
 		return false;
 	}
-
+	
 	if (
 		!isset($document['fichier'])
 		or !is_numeric($document['fichier'])

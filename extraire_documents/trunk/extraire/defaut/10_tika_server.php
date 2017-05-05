@@ -73,8 +73,8 @@ function extraire_defaut_10_tika_server_extraire_dist($fichier, $infos) {
 	
 	// Si on a trouvé du texte
 	if ($contenu) {
-		$infos['body'] = $contenu;
-		$infos['title'] = $metadata['title'];
+		$infos['contenu'] = $contenu;
+		$infos['titre'] = $metadata['title'];
 
 	}
 	
