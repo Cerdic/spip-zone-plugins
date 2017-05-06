@@ -166,7 +166,7 @@ function reservations_supprimer($ids_reservations) {
 }
 
 /**
- * Définit les différents panneau de configuration intégrés dans le panneau.
+ * Définit les différents panneau de configuration intégrés dans le panneau principal
  *
  * @return array les objets.
  */
@@ -185,6 +185,35 @@ function re_objets_configuration() {
 				'data' => $objets
 			)
 		);
+
+	return $objets;
+}
+
+/**
+ * Définit les ĺéments du menu de navigation de la page
+ *
+ * @return array les objets.
+ * 			[(#ENV{exec}|in_array{#LISTE{clients,client}}|non)#SET{a, </a>}
+			<a href="#URL_ECRIRE{clients}" class="cellule-h">][(#CHEMIN_IMAGE{clients-16.png}|balise_img)] <:reservation:titre_clients:>
+			#GET{a}
+
+ */
+function re_objets_navigation() {
+	include_spip('public/assembler');
+	$objets = array(
+		'clients' => array(
+			'label' => _T('reservation:titre_clients'),
+			'objets' => array('client', 'clients'),
+		),
+	);
+
+	$objets = pipeline(
+			'reservation_evenement_objets_navigation',
+			array(
+				'args' => calculer_contexte(),
+				'data' => $objets
+			)
+			);
 
 	return $objets;
 }

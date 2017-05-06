@@ -44,18 +44,18 @@
 					#GET{a}
 				</li>
 			</ul>
-		<li>
-			[(#ENV{exec}|in_array{#LISTE{clients,client}}|non)#SET{a, </a>}
-			<a href="#URL_ECRIRE{clients}" class="cellule-h">][(#CHEMIN_IMAGE{clients-16.png}|balise_img)] <:reservation:titre_clients:>#GET{a}
-		</li>
+			<BOUCLE_menu_items(DATA){source tableau, #REM|re_objets_navigation}>
+			[(#OBJETS|?{
+				#SET{objets,#OBJETS},
+				#SET{objets,#LISTE{#CLE}}
+			})]
+				<li>
+					[(#ENV{exec}|in_array{#GET{objets}}|non)#SET{a, </a>}
+					<a href="#URL_ECRIRE{#CLE}" class="cellule-h">][(#CHEMIN_IMAGE{#CLE-16.png}|balise_img)] #LABEL #GET{a}
+				</li>
+			</BOUCLE_menu_items>
 		</B_reservations>
-		[(#REM) permet aux plugins d'insérér dun contenu au menu]
-		[(#PIPELINE{
-			reservation_evenement_menu_admin,
-			[(#ARRAY{
-				args,[(#ARRAY{exec,#ENV{exec}})],
-				data,'',})]}
-		)]
+
 		<li>
 			[(#ENV{exec}|=={configurer_reservation_evenement}|non)#SET{a, </a>}
 			<a href="#URL_ECRIRE{configurer_reservation_evenement}" class="cellule-h">][(#CHEMIN_IMAGE{cfg-16.png}|balise_img)] <:spip:icone_configuration_site:>#GET{a}
