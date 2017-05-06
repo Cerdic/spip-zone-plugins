@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_radio_info_pas_de_forum' => 'Pas de forum',
 
 	// C
-	'configurer_explication' => 'Définir les options des forums publics par secteur : tous les nouveaux articles créés dans ce(s) secteur(s) se verront attribuer le type de forum défini ici. Ce réglage surcharge le mode de fonctionnement des forums publics défini dans la <a href="?exec=configurer_forum" title="page de configuration des forums">page de configuration des forums</a>',
+	'configurer_explication' => 'Définir les types et les options des forums publics par secteur : tous les nouveaux articles créés dans ce(s) secteur(s) se verront attribuer le type de forum défini ici. Ce réglage surcharge le mode de fonctionnement des forums publics défini dans la <a href="?exec=configurer_forum" title="page de configuration des forums">page de configuration des forums</a>',
 	'configurer_titre' => 'Configuration du plugin Forum sectorisé',
 
 	// E
@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_ident_secteur' => 'Secteur(s)',
 	'label_type' => 'Type de forum',
 	'label_option' => 'Options',
-	'label_masqueroptions' => 'Sur le page de chaque article',
+	'label_masqueroptions' => 'Sur la page de chaque article',
 	'label_case_masqueroptions' => 'Masquer les options de forum. Vous ne pourrez plus changer ni les types ni les options de forums en dehors du paramétrage ci-dessus.',
 	'label_parsecteur' => 'Par secteur',
 	'label_pourtoussecteurs' => 'Pour tous les secteurs',
