@@ -57,6 +57,11 @@ function logo_supprimer($objet, $id_objet, $role) {
 				'spip_documents_liens',
 				array('objet="site"', 'id_objet=0', 'role='.sql_quote($role))
 			);
+
+			include_spip('inc/config');
+			$logos_site = lire_config('logos_site');
+			unset($logos_site[$role]);
+			ecrire_config('logos_site', $logos_site);
 		} else {
 			objet_dissocier(
 				array('document' => '*'),
@@ -148,6 +153,15 @@ function logo_modifier_document($objet, $id_objet, $role, $id_document) {
 				'role' => $role,
 			)
 		);
+
+		// On enregistre les logos du site dans une meta, pour pouvoir les rétablir
+		// automatiquement après le passage du CRON d'optimisation, qui efface les
+		// liens vers des id_objet qui valent 0.
+		include_spip('inc/config');
+
+		$logos_site = lire_config('logos_site') ?: array();
+		$logos_site[$role] = intval($id_document);
+		ecrire_config('logos_site', $logos_site);
 
 	// Cas des autres logos
 	} else {

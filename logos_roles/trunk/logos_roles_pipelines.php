@@ -98,3 +98,30 @@ function logos_roles_formulaire_charger($flux) {
 
 	return $flux;
 }
+
+/**
+ * Rétablir les logos du site, qui sont systématiquement effacés dans le CRON
+ * d'optimisation.
+ *
+ * @pipeline optimiser_base_disparus
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function logos_roles_optimiser_base_disparus($flux) {
+
+	include_spip('inc/config');
+
+	foreach (lire_config('logos_site') as $role => $id_document) {
+		sql_insertq(
+			'spip_documents_liens',
+			array(
+				'id_document' => intval($id_document),
+				'objet' => 'site',
+				'id_objet' => 0,
+				'role' => $role,
+			)
+		);
+	}
+
+	return $flux;
+}
