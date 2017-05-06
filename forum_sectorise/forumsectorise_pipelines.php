@@ -15,4 +15,15 @@ function forumsectorise_pre_insertion($flux) {
 }
 
 
-?>
+// pour ne pas afficher les options de forum sur les objets/articles
+function forumsectorise_afficher_config_objet($flux) {
+	if (($type = $flux['args']['type'])
+		and $id = $flux['args']['id']
+		and lire_config('forumsectorise/masqueroptions') == 'on'
+	) {
+		$aremplacer = recuperer_fond("prive/objets/configurer/moderation",
+				array('id_objet' => $id, 'objet' => objet_type(table_objet($type))));
+		$flux['data'] = str_replace($aremplacer,'',$flux['data']);
+	}
+	return $flux;
+}

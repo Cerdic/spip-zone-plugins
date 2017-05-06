@@ -10,50 +10,77 @@ function formulaires_configurer_forumsectorise_saisies_dist(){
 
 	return array(
 		array(
-			'saisie' => 'explication',
+			'saisie' => 'fieldset',
 			'options' => array(
-				'nom' => 'explication',
-				'texte' => _T('forumsectorise:configurer_explication')
-			)
-		),
-		array(
-			'saisie' => 'secteur',
-			'options' => array(
-				'nom' => 'ident_secteur',
-				'label' => _T('forumsectorise:label_ident_secteur'),
-				'explication' => _T('forumsectorise:explication_ident_secteur'),
-				'multiple' => 'oui',
-				'defaut' => $config['ident_secteur']
-			)
-		),
-		array(
-			'saisie' => 'selection',
-			'options' => array(
-				'nom' => 'type',
-				'label' => _T('forumsectorise:label_type'),
-				'explication' => _T('forumsectorise:explication_type'),
-				'cacher_option_intro' => 'on',
-				'defaut' => $config['type'],
-            'datas' => array(
-						'pos' => _T('forumsectorise:bouton_radio_publication_immediate'),
-						'pri' => _T('forumsectorise:bouton_radio_moderation_priori'),
-						'abo' => _T('forumsectorise:bouton_radio_enregistrement_obligatoire'),
-						'non' => _T('forumsectorise:bouton_radio_info_pas_de_forum')
+				'nom' => 'parsecteur',
+				'label' => _T('forumsectorise:label_parsecteur')
+			),
+			'saisies' => array(
+				array(
+					'saisie' => 'explication',
+					'options' => array(
+						'nom' => 'explication',
+						'texte' => _T('forumsectorise:configurer_explication')
+					)
+				),
+				array(
+					'saisie' => 'secteur',
+					'options' => array(
+						'nom' => 'ident_secteur',
+						'label' => _T('forumsectorise:label_ident_secteur'),
+						'explication' => _T('forumsectorise:explication_ident_secteur'),
+						'multiple' => 'oui',
+						'defaut' => $config['ident_secteur']
+					)
+				),
+				array(
+					'saisie' => 'selection',
+					'options' => array(
+						'nom' => 'type',
+						'label' => _T('forumsectorise:label_type'),
+						'explication' => _T('forumsectorise:explication_type'),
+						'cacher_option_intro' => 'on',
+						'defaut' => $config['type'],
+						'datas' => array(
+							'pos' => _T('forumsectorise:bouton_radio_publication_immediate'),
+							'pri' => _T('forumsectorise:bouton_radio_moderation_priori'),
+							'abo' => _T('forumsectorise:bouton_radio_enregistrement_obligatoire'),
+							'non' => _T('forumsectorise:bouton_radio_info_pas_de_forum')
+						)
+					)
+				),
+				array(
+					'saisie' => 'radio',
+					'options' => array(
+						'nom' => 'option',
+						'label' => _T('forumsectorise:label_option'),
+						'explication' => _T('forumsectorise:explication_option'),
+						'multiple' => 'oui',
+						'defaut' => $config['option'],
+						'datas' => array(
+							'futur' => _T('forumsectorise:bouton_radio_articles_futurs'),
+							'saufnon' => _T('forumsectorise:bouton_radio_articles_tous_sauf_forum_desactive'),
+							'tous' => _T('forumsectorise:bouton_radio_articles_tous')
+						)
+					)
 				)
 			)
 		),
 		array(
-			'saisie' => 'radio',
+			'saisie' => 'fieldset',
 			'options' => array(
-				'nom' => 'option',
-				'label' => _T('forumsectorise:label_option'),
-				'explication' => _T('forumsectorise:explication_option'),
-				'multiple' => 'oui',
-				'defaut' => $config['option'],
-            'datas' => array(
-               'futur' => _T('forumsectorise:bouton_radio_articles_futurs'),
-               'saufnon' => _T('forumsectorise:bouton_radio_articles_tous_sauf_forum_desactive'),
-               'tous' => _T('forumsectorise:bouton_radio_articles_tous')
+				'nom' => 'pourtoussecteurs',
+				'label' => _T('forumsectorise:label_pourtoussecteurs')
+			),
+			'saisies' => array(
+				array(
+					'saisie' => 'case',
+					'options' => array(
+						'nom' => 'masqueroptions',
+						'label' => _T('forumsectorise:label_masqueroptions'),
+						'label_case' => _T('forumsectorise:label_case_masqueroptions'),
+						'defaut' => $config['masqueroptions']
+					)
 				)
 			)
 		)
