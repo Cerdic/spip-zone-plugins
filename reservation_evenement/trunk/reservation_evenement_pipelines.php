@@ -13,7 +13,7 @@ if (! defined('_ECRIRE_INC_VERSION'))
 
 	// Afficher les box infos et téléchargement des réservations
 function reservation_evenement_affiche_gauche($flux) {
-	include_spip('inc/presentation');
+	include_spip('inc/reservation_evenements');
 	$exec = $flux['args']['exec'];
 	$objets_affichage = array (
 		'rubrique',
@@ -22,6 +22,7 @@ function reservation_evenement_affiche_gauche($flux) {
 	);
 
 	if (in_array($exec, $objets_affichage)) {
+		include_spip('inc/presentation');
 		include_spip('inc/config');
 		include_spip('formulaires/selecteur/generique_fonctions');
 		include_spip('inc/reservation_evenements');
@@ -40,6 +41,25 @@ function reservation_evenement_affiche_gauche($flux) {
 			$flux['data'] .= recuperer_fond('inclure/reservations', $contexte);
 		}
 	}
+
+	$definition_objets_navigation = re_objets_navigation();
+	$objets_navigation = array_column($definition_objets_navigation,'objets');
+
+	$objets_navigation = array_reduce($objets_navigation, function ($a, $b) {
+		return array_merge($a, (array) $b);
+	}, []);
+
+		if (in_array($exec, $objets_navigation)) {
+			$soustitre = isset($definition_objets_navigation[$exec]) ? $definition_objets_navigation[$exec]['label'] :
+			(isset($definition_objets_navigation[$exec . 's']) ? $definition_objets_navigation[$exec . 's']['label'] : '');
+
+			$contexte = $flux['args'];
+			if ($soustitre) {
+				$contexte['soustitre'] = $soustitre;
+			}
+			$flux['data'] .= recuperer_fond('prive/squelettes/navigation/reservations', $contexte);
+		}
+
 	return $flux;
 }
 

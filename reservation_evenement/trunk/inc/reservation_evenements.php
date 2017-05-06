@@ -193,10 +193,6 @@ function re_objets_configuration() {
  * Définit les ĺéments du menu de navigation de la page
  *
  * @return array les objets.
- * 			[(#ENV{exec}|in_array{#LISTE{clients,client}}|non)#SET{a, </a>}
-			<a href="#URL_ECRIRE{clients}" class="cellule-h">][(#CHEMIN_IMAGE{clients-16.png}|balise_img)] <:reservation:titre_clients:>
-			#GET{a}
-
  */
 function re_objets_navigation() {
 	include_spip('public/assembler');
