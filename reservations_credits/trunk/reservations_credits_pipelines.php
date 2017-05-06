@@ -144,3 +144,26 @@ function reservations_credits_header_prive($flux) {
 	$flux .= "<link rel='stylesheet' type='text/css' media='all' href='$css' />\n";
 	return $flux;
 }
+
+/**
+ * Ajouter les configurations dans celle de réservation événements.
+ *
+ * @pipeline reservation_evenement_objets_configuration
+ *
+ * @param array $flux
+ *        	Données du pipeline
+ * @return array Données du pipeline
+ */
+
+
+function reservations_credits_reservation_evenement_objets_navigation($flux) {
+
+	$flux['data']['reservation_credits'] = array(
+			'label' => _T('reservation_credit:titre_reservation_credits'),
+			'icone' => 'reservation_credit-16.png',
+			'objets' => array('reservation_credit', 'reservation_credits')
+	);
+
+	return $flux;
+}
+

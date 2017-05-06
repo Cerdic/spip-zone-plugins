@@ -1,7 +1,7 @@
 <paquet
 	prefix="reservations_credits"
 	categorie="date"
-	version="1.1.5"
+	version="1.1.6"
 	etat="test"
 	compatibilite="[3.0.20;3.1.*]"
 	logo="prive/themes/spip/images/reservations_credits-64.png"
@@ -13,40 +13,18 @@
 	<auteur>Rainer</auteur>
 	<licence>GNU/GPL</licence>
 
-	<necessite
-		nom="saisies"
-		compatibilite="[2.18.5;]" />
-	<necessite
-		nom="verifier"
-		compatibilite="[1.6.2;]" />
-	<necessite
-		nom="reservation_evenement"
-		compatibilite="[1.23.15;]" />
-	<necessite
-		nom="reservation_bank"
-		compatibilite="[1.1.10;]" />
+	<necessite nom="saisies" compatibilite="[2.18.5;]" />
+	<necessite nom="verifier" compatibilite="[1.6.2;]" />
+	<necessite nom="reservation_evenement" compatibilite="[1.23.15;]" />
+	<necessite nom="reservation_bank" compatibilite="[1.1.10;]" />
 
-	<pipeline
-		nom="affiche_gauche"
-		inclure="reservations_credits_pipelines.php" />
-	<pipeline
-		nom="autoriser"
-		inclure="reservations_credits_autorisations.php" />
-	<pipeline
-		nom="declarer_tables_objets_sql"
-		inclure="base/reservations_credits.php" />
-	<pipeline
-		nom="declarer_tables_interfaces"
-		inclure="base/reservations_credits.php" />
-	<pipeline
-		nom="post_edition"
-		inclure="reservations_credits_pipelines.php" />
-	<pipeline
-		nom="reservation_evenement_menu_admin"
-		inclure="reservations_credits_pipelines.php" />
-	<pipeline
-		nom="header_prive"
-		inclure="reservations_credits_pipelines.php" />
+	<pipeline nom="affiche_gauche" inclure="reservations_credits_pipelines.php" />
+	<pipeline nom="autoriser" inclure="reservations_credits_autorisations.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/reservations_credits.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/reservations_credits.php" />
+	<pipeline nom="post_edition" inclure="reservations_credits_pipelines.php" />
+	<pipeline nom="header_prive" inclure="reservations_credits_pipelines.php" />
+	<pipeline nom="reservation_evenement_objets_navigation" inclure="reservations_credits_pipelines.php" />
 
 
 	<menu
