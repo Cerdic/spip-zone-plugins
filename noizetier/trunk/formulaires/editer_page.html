@@ -148,7 +148,7 @@
 			<legend><:noizetier:formulaire_modifier_composition_heritages:></legend>
 			<p class="explication"><:noizetier:explication_heritages_composition:></p>
 			<ul class="editer-groupe">
-			<BOUCLE_heritage(DATA){source table,#ENV{_heritiers}}{par cle}>
+		<BOUCLE_heritage(DATA){source table, #ENV{_heritiers}}{par cle}>
 				<B_type>
 				#SET{name,heritage-#CLE}
 				#SET{obli,''}
@@ -159,13 +159,13 @@
 					<select class="select" name="#GET{name}" id="#GET{name}">
 						<option value=""><:noizetier:ne_pas_definir_d_heritage:></option>
 						<option value="-"[(#ENV{#GET{name}}|=={'-'}|oui)selected="selected"]><:compositions:composition_defaut:></option>
-						<BOUCLE_type(POUR){tableau #VALEUR}{par cle}>
+				<BOUCLE_type(DATA){source table, #VALEUR}{par cle}>
 						<option value="#CLE"[(#ENV{heritage-#_heritage:CLE}|=={#CLE}|oui)selected="selected"]>[(#VALEUR|table_valeur{nom}|sinon{#CLE})]</option>
-						</BOUCLE_type>
+				</BOUCLE_type>
 					</select>
 				</li>
 				</B_type>
-			</BOUCLE_heritage>
+		</BOUCLE_heritage>
 			</ul>
 		</fieldset>
 		</B_heritage>

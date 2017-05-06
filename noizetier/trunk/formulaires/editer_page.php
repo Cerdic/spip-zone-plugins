@@ -50,14 +50,7 @@ function formulaires_editer_page_charger_dist($page, $edition, $description_page
 		$valeurs['nom'] = $description_page['nom'];
 		$valeurs['description'] = $description_page['description'];
 		$valeurs['icon'] = $description_page['icon'];
-
-		$valeurs['_heritiers'] = lister_heritiers($valeurs['type_page']);
-		$compositions_virtuelles = lire_config('noizetier_compositions', array());
-		foreach ($valeurs['_heritiers'] as $_objet => $_infos) {
-			if (isset($compositions_virtuelles[$valeurs['page']]['branche'][$_objet])) {
-				$valeurs["heritage-.${_objet}"] = $compositions_virtuelles[$page]['branche'][$_objet];
-			}
-		}
+		$valeurs = array_merge($valeurs, construire_heritages($page, $valeurs['type_page']));
 
 	} elseif ($edition == 'dupliquer') {
 		// La page désignée est la page source que l'on souhaite dupliquer pour créer une nouvelle
@@ -67,6 +60,7 @@ function formulaires_editer_page_charger_dist($page, $edition, $description_page
 		$valeurs['type_page'] = $description_page['type'];
 		$valeurs['composition_source'] = $description_page;
 		$valeurs['nom'] = _T('noizetier:copie_de', array('source' => $description_page['nom']));
+		$valeurs = array_merge($valeurs, construire_heritages($page, $valeurs['type_page']));
 
 	} elseif ($edition == 'creer') {
 		// On crée une nouvelle page from scratch.
@@ -162,7 +156,7 @@ function formulaires_editer_page_traiter_dist($page, $edition, $description_page
 	$noizetier_compositions = isset($GLOBALS['meta']['noizetier_compositions']) && unserialize($GLOBALS['meta']['noizetier_compositions']) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
 	$type_page = _request('type_page');
 	$composition = _request('composition');
-	$peupler = ($acte == 'dupliquer') ? true : (($acte == 'creer' and _request('peupler')) ? true : false);
+	$peupler = ($edition == 'dupliquer') ? true : (($edition == 'creer' and _request('peupler')) ? true : false);
 
 	// Au cas où on n'a pas encore configuré de compositions
 	if (!is_array($noizetier_compositions)) {
@@ -194,7 +188,7 @@ function formulaires_editer_page_traiter_dist($page, $edition, $description_page
 		$peupler
 		and $type_page != 'page'
 	) {
-		$composition_ref = ($acte == 'creer') ? '' : noizetier_page_composition($page); // si on ne créé pas, c'est qu'on duplique
+		$composition_ref = ($edition == 'creer') ? '' : noizetier_page_composition($page); // si on ne créé pas, c'est qu'on duplique
 		include_spip('base/abstract_sql');
 		$config_mere = sql_allfetsel(
 			'rang, type, composition, bloc, noisette, parametres',
@@ -218,13 +212,13 @@ function formulaires_editer_page_traiter_dist($page, $edition, $description_page
 	}
 
 	// On invalide le cache en cas de création ou  de dpulication
-	if (in_array($acte, array('creer', 'dupliquer'))) {
+	if (in_array($edition, array('creer', 'dupliquer'))) {
 		include_spip('inc/invalideur');
 		suivre_invalideur("id='page/$type_page-$composition'");
 	}
 
 	$res['message_ok'] = _T('info_modification_enregistree');
-	if (in_array($acte, array('creer', 'dupliquer'))) {
+	if (in_array($edition, array('creer', 'dupliquer'))) {
 		$res['redirect'] = parametre_url(parametre_url(self(), 'new', ''), 'page', $type_page.'-'.$composition);
 	} elseif ($retour) {
 		if (strncmp($retour, 'javascript:', 11) == 0) {
@@ -239,14 +233,23 @@ function formulaires_editer_page_traiter_dist($page, $edition, $description_page
 }
 
 
-// Détermine les compositions héritables par ce type de page
-function lister_heritiers($type) {
-	$heritiers = array();
+// Détermine les compositions héritables par ce type de page et les héritages pour chaque branche
+function construire_heritages($page, $type) {
+	$heritages = array('_heritiers' => array());
 	foreach (compositions_recuperer_heritage() as $_objet => $_parent) {
 		if ($_parent == $type) {
-			$heritiers = array_merge($heritiers, compositions_lister_disponibles($_objet));
+			$heritages['_heritiers'] = array_merge($heritages['_heritiers'], compositions_lister_disponibles($_objet));
 		}
 	}
 
-	return $heritiers;
+	if ($heritages['_heritiers']) {
+		$compositions_virtuelles = lire_config('noizetier_compositions', array());
+		foreach ($heritages['_heritiers'] as $_objet => $_infos) {
+			if (isset($compositions_virtuelles[$page]['branche'][$_objet])) {
+				$heritages["heritage-.${_objet}"] = $compositions_virtuelles[$page]['branche'][$_objet];
+			}
+		}
+	}
+
+	return $heritages;
 }

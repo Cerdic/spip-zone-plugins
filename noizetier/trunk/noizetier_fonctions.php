@@ -1076,6 +1076,7 @@ function noizetier_page_repertorier() {
 								foreach ($configuration['necessite'] as $plugin) {
 									if (!defined('_DIR_PLUGIN_'.strtoupper($plugin))) {
 										$page_a_garder = false;
+										break;
 									}
 								}
 							}
@@ -1110,7 +1111,7 @@ function noizetier_page_repertorier() {
 
 
 /**
- * Retourne la configuration de la page, de la composition explicite ou de la composition vrtuelle demandée.
+ * Retourne la configuration de la page, de la composition explicite ou de la composition virtuelle demandée.
  *
  * @uses noizetier_obtenir_dossier_pages()
  * @uses noizetier_bloc_defaut()
@@ -1159,7 +1160,7 @@ function noizetier_page_informer($page, $information = '', $options =array()) {
 			$identifiants[0] = $identifiants[1];
 			$identifiants[1] = '';
 		}
-		$composition_virtuelle = false;
+		$est_virtuelle = false;
 
 		// La recherche de la page est basée sur l'heuristique suivante:
 		//  1- Les pages ou compositions explicites sont les plus fréquentes et on les recherche
@@ -1249,15 +1250,23 @@ function noizetier_page_informer($page, $information = '', $options =array()) {
 				} else {
 					$description['blocs'] = array_diff($options['blocs_defaut'], $description['blocs_exclus']);
 				}
-				$composition_virtuelle = true;
+				$est_virtuelle = true;
 			}
 		}
 
 		// Sauvegarde de la description de la page pour une consultation ultérieure dans le même hit.
 		if ($description) {
+			// Renuméroter les blocs à cause des exclusions
+			sort($description['blocs']);
+			// Stockage des identifiants séparément
 			$description['type'] = $identifiants[0];
 			$description['composition'] = $identifiants[1];
-			$description['composition_virtuelle'] = $composition_virtuelle;
+			// Identifie si la page est celle d'un objet SPIP (toujours vrai pour une composition)
+			include_spip('base/objets');
+			$tables_objets = array_keys(lister_tables_objets_sql());
+			$description['est_page_objet'] = in_array(table_objet_sql($description['type']), $tables_objets) ? 'oui' : 'non';
+			// Stockage de l'information indiquant si la page ou la composition est virtuelle ou pas
+			$description['est_virtuelle'] = $est_virtuelle;
 			$description_page[$page] = $description;
 		} else {
 			$description_page[$page] = array();

@@ -22,7 +22,6 @@
 	<pipeline nom="declarer_tables_principales" inclure="base/noizetier_tables.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/noizetier_tables.php" />
 	<pipeline nom="autoriser" inclure="noizetier_autoriser.php" />
-	<pipeline nom="header_prive" inclure="noizetier_pipelines.php" />
 	<pipeline nom="recuperer_fond" inclure="noizetier_pipelines.php" />
 	<pipeline nom="styliser" inclure="noizetier_pipelines.php" />
 	<pipeline nom="compositions_lister_disponibles" inclure="noizetier_pipelines.php" />
@@ -46,5 +45,5 @@
 	<utilise nom="ieconfig" compatibilite="[1.3.0;[" />
 	<utilise nom="Z" compatibilite="[1.7.15;1.9.*]" />
 
-	<menu nom="noizetier" titre="noizetier:editer_noizetier_titre" parent="menu_squelette" icone="images/noizetier-16.png" action="noizetier_pages" />
+	<menu nom="noizetier" titre="noizetier:editer_noizetier_titre" parent="menu_squelette" icone="images/noizetier-16.png" action="noizetier_pages" parametres="est_page_objet=oui" />
 </paquet>
