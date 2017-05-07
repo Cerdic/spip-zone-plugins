@@ -4,9 +4,22 @@
 <form method="post" action="#ENV{action}"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<fieldset>
+		<legend></legend>
+		
+	</fieldset>
+	<fieldset>
 		<legend>LazySize Options</legend>
 		<p class="explication">Options de configuration du script</p>
 		<div class="editer-groupe">
+			<div class="editer editer_css editer_radio">
+				<p class="explication"><:lazysizes:cfg_explication_css:></p>
+				<div class="choix">
+					<input type="checkbox" name="css" class="checkbox" value='on' id='cssn'[(#ENV{css}|oui)checked="checked" ]/>
+					<label for='cssn'>
+						<:lazysizes:cfg_label_css:>
+					</label>
+				</div>
+			</div>
 			<div class="editer editer_lazy_class">
 				<label for="lazy_class">LazyClass</label>
 				<p class="explication">
