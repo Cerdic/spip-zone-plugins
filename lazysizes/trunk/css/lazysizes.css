@@ -1,0 +1,38 @@
+.lazyload {
+    opacity: 0;
+    transition: opacity 0.2s 0.2s;
+}
+
+.lazyloading {
+    opacity: 1;
+    background: #f7f7f7 url(../images/loader.gif) no-repeat center;
+    /*min-height: 60px;*/
+}
+
+
+.lazyloaded {
+    opacity: 1;
+    /*transition: 300ms opacity;*/
+}
+
+
+
+.ratio-container {
+    position: relative;
+}
+.ratio-container:after {
+    content:'';
+    display: block;
+    height: 0;
+    width: 100%;
+    /* 16:9 = 56.25% = calc(9 / 16 * 100%) */
+    padding-bottom: 50%;
+    content:"";
+}
+.ratio-container > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

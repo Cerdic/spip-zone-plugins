@@ -1,0 +1,33 @@
+<div class="formulaire_spip formulaire_configurer formulaire_configurer_lazysizes_options">
+[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<fieldset>
+		<legend>LazySize Options</legend>
+		<p class="explication">Options de configuration du script</p>
+		<div class="editer-groupe">
+			<div class="editer editer_lazy_class">
+				<label for="lazy_class">LazyClass</label>
+				<p class="explication">
+					<code>(lazyload !default)</code> Marqueur pour les éléments qui bénéficierons du chargement différé
+				</p>
+				<input type="text" class="text" name="lazy_class" id="lazy_class" value="#ENV{lazy_class}" />
+			</div>
+			<div class="editer editer_preload_class">
+				<label for="preload_class">preloadClass</label>
+				<p class="explication"><code>(lazypreload !default)</code>
+					Marqueur pour les éléments qui bénéficierons du chargement différé sur l'événement onload
+					(chargement de la page)
+				</p>
+				<input type="text" class="text" name="preload_class" id="preload_class" value="#ENV{preload_class}" />
+			</div>
+		</div>
+	</fieldset>
+	
+	<input type="hidden" name="_meta_casier" value="lazysizes/options" />
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+	</p>
+</div></form>
+</div>

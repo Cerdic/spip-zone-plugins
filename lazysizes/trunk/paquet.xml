@@ -1,0 +1,24 @@
+<paquet
+	prefix="lazysizes"
+	categorie="outil"
+	version="0.0.1"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/theme/spip/images/lazysize-32.png"
+	documentation="http://afarkas.github.io/lazysizes/"
+>
+	<nom>LazySizes</nom>
+	<auteur lien='http://www.mister-graphx.com'>Arnaud B. (Mist. GraphX)</auteur>
+	<credit lien="https://github.com/aFarkas/lazysizes">Lazysizes</credit>
+                   
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="insert_head" action="insert_head_public" inclure="lazysizes_pipelines.php" />
+	
+	<style source="css/lazysizes.css" type="public"/>
+
+
+	<utilise nom="medias" compatibilite="[2.10.38;]" />
+	
+	<!--<menu nom="souscriptions" titre="lazysizes:menu_configurer_lazysizes" parent="menu_configuration" icone="images/lazysizes-16.png" action="configurer_lazysizes" />-->
+</paquet>
