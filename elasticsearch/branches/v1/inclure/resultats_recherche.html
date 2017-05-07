@@ -1,0 +1,65 @@
+[(#ENV{recherche}|?{
+#SET{recherche,#ENV{recherche,''}|json_encode},
+#SET{recherche,''}
+})]
+[(#SET{url, [(#VAL{#CONFIG{elasticsearch_config/url_serveur}/#CONFIG{elasticsearch_config/nom_alias}/[(#ENV{type_objet})/]_search})]})]
+
+#SET{query, #INCLURE{fond=json/elasticsearch_query,recherche=#GET{recherche},from=#ENV{debut_pagination},size=#ENV{nb_item,10},date_debut=#ENV{date_debut,''},date_fin=#ENV{date_fin,''}}}
+[(#SET{data, [(#GET{url}|phpcurl_get{[(#GET{query})]})]}
+)]
+<BOUCLE_total(DATA){source json, #GET{data}}{cle=hits}>
+
+[<div class="row"><span class="nombre-articles">(#VALEUR{total}|singulier_ou_pluriel{elasticsearch:nb_resultat, elasticsearch:nb_resultats}|sinon{<:elasticsearch:aucun_resultat:>}) <:elasticsearch:pour_votre_recherche{recherche=#ENV{recherche}}:></span></div>]
+
+[(#REM) feinte pour obtenir une pagination sur le total en envoyer à elastic_query le from et le size via la pagination spip]
+<BOUCLE_pagination(DATA){enum 1, #VALEUR{total}}{pagination #ENV{nb_item,10}} >
+</BOUCLE_pagination>
+#ANCRE_PAGINATION
+<BOUCLE_resultats(DATA) {source table,#VALEUR{hits}}>
+#SET{titre,''}
+#SET{body,''}
+<BOUCLE_highlight(DATA){source json, #VALEUR{highlight}|json_encode}>
+[(#CLE|strpos{#VAL{title}}|oui)#SET{titre,#VALEUR|implode{(...)}}]
+[(#CLE|strpos{#VAL{body}}|oui)#SET{body,#VALEUR|implode{(...)}}]
+</BOUCLE_highlight>
+<div class="bloc-actu row[ (#COMPTEUR_BOUCLE|alterner{odd, even})]">
+[(#VALEUR{_source/#VALEUR{_type}_logo}|!={''}|?{#SET{logo,#VALEUR{_source/#VALEUR{_type}_logo}},#SET{logo,#CHEMIN{images/no-logo_article.png}}})]
+
+		<div class="bloc-actu--img col-sm-12 col-md-3 col-lg-3">
+		<a href="#VALEUR{_source/#VALEUR{_type}_url}" class="no-picto">
+		<BOUCLE_reduire (CONDITION){si #CHEMIN{#GET{logo}}|hauteur|<{150}|ou{#CHEMIN{#GET{logo}}|largeur|<{150}}}>
+		[(#CHEMIN{#GET{logo}}|balise_img{"Logo de l'article","img-responsive"}|image_recadre{242,242, center, #EEEEEE})]
+		</BOUCLE_reduire>
+		[(#CHEMIN{#GET{logo}}|balise_img{"Logo de l'article","img-responsive"})]
+		<//B_reduire>
+
+			<span class="container-date">
+				<span class="in">
+				[(#VALEUR{_source/date}|affdate{Y}|=={#DATE|affdate{Y}}|oui)
+					<span class="jour">[(#VALEUR{_source/date}|affdate{j})]</span>
+					<span class="mois">[(#VALEUR{_source/date}|affdate_base{nom_mois,#ARRAY{'param','abbr'}})]</span>
+					]
+				[(#VALEUR{_source/date}|affdate{Y}|=={#DATE|affdate{Y}}|non)
+					<span class="mois">[(#VALEUR{_source/date}|affdate_base{nom_mois,#ARRAY{'param','abbr'}})]</span>
+					<span class="annee">[(#VALEUR{_source/date}|affdate{Y})]</span>
+				]
+				</span>
+			</span>
+		</a>
+		</div>
+		<div class="bloc-actu--txt col-sm-12 col-md-9 col-lg-9">
+		<a href="#VALEUR{_source/#VALEUR{_type}_url}">
+			[<h2>(#GET{titre}|sinon{#VALEUR{_source/#VALEUR{_type}_title}})</h2>]
+			#SET{body,#GET{body}|sinon{#VALEUR{_source/#VALEUR{_type}_body}}|sinon{' '}}
+			[<p>(#GET{body}|couper{250})</p>]
+			</a>
+		</div>
+
+
+
+</div>
+</BOUCLE_resultats>
+<div class="text-center"><p class="pagination">#PAGINATION</p></div>
+</B_pagination>
+
+</BOUCLE_total>

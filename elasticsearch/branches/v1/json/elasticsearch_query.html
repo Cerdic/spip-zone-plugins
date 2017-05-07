@@ -1,0 +1,61 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type: application/json; charset=#CHARSET}
+{
+  "from": #ENV{from,0},
+  "size": #ENV{size,10},
+  "query": {
+    "bool" : {
+<BOUCLE_date(CONDITION){si #ENV{date_debut}|oui|ou{#ENV{date_fin}|oui}}>
+      "filter": [
+          {
+            "range":{
+              "date":{
+                ["gte":"(#ENV{date_debut})"[(#ENV{date_fin}|?{',',''})]]
+                ["lte":"(#ENV{date_fin})"],
+                "format": "dd/MM/yyyy"
+              }
+            }
+          }
+        ],
+</BOUCLE_date>
+      "must" : [
+          {
+            "multi_match":{
+              "query": "[(#ENV{recherche})]",
+			  "type":  "best_fields",
+              "fields":[
+                "*_body^20",
+                "*_body.shingle^30",
+                "*_body.ngram",
+                "*_body.whitespace^30",
+                "*_title^20",
+                "*_body.special_chars^20",
+                "*_title.special_chars^20",
+                "*_title.shingle^60",
+                "*_title.ngram",
+                "*_title.whitespace^20",
+                "*_mots.title^20",
+                "*_mots.title.shingle^20",
+                "*_mots.title.whitespace^20",
+                "*_mots.title.exact^40",
+                "*_documents.titre^20",
+                "*_documents.url",
+                "*_hierarchie.titre^10"
+              ],
+			"tie_breaker": 0.3
+
+            }
+          }
+        ]
+    }
+  },
+    "highlight": {
+        "pre_tags" : ["<em><strong>"],
+        "post_tags" : ["</strong></em>"],
+		"fields": [
+		        {"*_titl*" : {}},
+                {"*_bod*" : {}}
+            ]
+
+	}
+}
