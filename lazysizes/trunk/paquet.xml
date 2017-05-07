@@ -14,6 +14,7 @@
 	<licence>GNU/GPL</licence>
 
 	<pipeline nom="insert_head" action="insert_head_public" inclure="lazysizes_pipelines.php" />
+	<pipeline nom="ieconfig_metas" inclure="lazysizes_pipelines.php" />
 	
 	<style source="css/lazysizes.css" type="public"/>
 

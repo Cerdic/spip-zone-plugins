@@ -7,5 +7,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_page'	=> 'Configurer LazySizes',
+	'lazysizes_titre'	=> 'LazySizes',
+
 
 );

@@ -4,6 +4,17 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+/*
+ * function lazysizes_ieconfig_metas
+ * @url http://contrib.spip.net/Importeur-Exporteur-de-configurations-documentation
+ */
+
+function lazysizes_ieconfig_metas($table){
+        $table['lazysizes']['titre'] = _T('lazysizes:lazysizes_titre');
+        $table['lazysizes']['icone'] = 'lazysizes-16.png';
+        $table['lazysizes']['metas_serialize'] = 'lazysizes';
+        return $table;
+}
 
 /*
  * function lazysizes_insert_head_public
@@ -18,7 +29,7 @@ function lazysizes_insert_head_public($flux) {
 	
 	foreach($active_addons as $addon => $state){
 		if(array_key_exists($addon, $ls_addons)){
-			$file = find_in_path('javascript/addons/'.$addon.'/'.$ls_addons[$addon].'.js');
+			$file = timestamp(find_in_path('javascript/addons/'.$addon.'/'.$ls_addons[$addon].'.js'));
 			$flux .= "<script type='text/javascript' src='$file' ></script>\n"; 
 		}
 	}
