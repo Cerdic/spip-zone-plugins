@@ -39,7 +39,7 @@
 	<!-- Sites des actualites SPIP -->
 	<groupe type="actualite">
 		<site alias="blog" src="https://blog.spip.net/" actif="oui" />
-		<site alias="twit" src="https://www.spip.net/" actif="non" />
+		<site alias="twit" src="http://spip.org/" actif="non" />
 		<site alias="sedna" src="https://sedna.spip.net/" actif="oui" />
 		<site alias="zine" src="http://zine.spip.net/" actif="non" />
 		<site alias="mag" src="http://mag.spip.net/" actif="non" />
