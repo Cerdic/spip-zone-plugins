@@ -1,0 +1,17 @@
+#HTTP_HEADER{Content-Type: text/javascript}
+
+[(#SET{options, #CONFIG{lazysizes/options}})]
+
+window.lazySizesConfig = window.lazySizesConfig || {};
+
+[window.lazySizesConfig.lazyClass = '(#GET{options/lazy_class})';]
+// preloadClass
+[window.lazySizesConfig.preloadClass = '(#GET{options/preload_class})';]
+[lazySizesConfig.loadingClass = '(#GET{options/loading_class})';]
+// use data-original instead of data-src
+//lazySizesConfig.srcAttr = 'data-original';
+
+//page is optimized for fast onload event
+//lazySizesConfig.loadMode = 1;
+
+//console.log(lazySizesConfig);
