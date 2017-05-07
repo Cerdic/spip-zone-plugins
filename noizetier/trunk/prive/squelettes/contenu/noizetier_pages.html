@@ -1,9 +1,8 @@
 [(#AUTORISER{configurer, noizetier}|sinon_interdire_acces)]
 <h1 class="grostitre">
-	<:noizetier:noizetier:>&nbsp;-&nbsp;<:noizetier:liste_pages:>
+	<:noizetier:noizetier:>
 </h1>
 <B_pages>
-#BOITE_OUVRIR{'','simple'}
 <p><:noizetier:editer_noizetier_explication:></p>
 <ul class="liste-items liste-pages noizetier-liste-pages">
 <BOUCLE_pages(DATA) {source table, #NOIZETIER_PAGE_INFOS}{est_page_objet?}{par cle}>
@@ -11,7 +10,7 @@
 		<div[ class="composition"(#VALEUR{composition}|oui)]>
 			[(#REM) Informations de base sur la page ]
 			<div class="resume">
-				<a[ href="(#URL_ECRIRE{noizetier_page}|parametre_url{page, #CLE})"]>[(#VALEUR{nom}|sinon{#CLE})]</a>
+				<a[ href="(#URL_ECRIRE{noizetier_page}|parametre_url{page, #CLE})"] title="<:noizetier:bulle_configurer_page_noisettes:>">[(#VALEUR{nom}|sinon{#CLE})]</a>
 				<i>[ \((#CLE)\)]</i>
 				[<br />(#VALEUR{description}|ptobr|sinon{&nbsp;})]
 				[(#REM) Logo de la page ]
@@ -23,19 +22,19 @@
 			<div class="edition">
 				[(#VALEUR{composition}|non)
 					[(#AUTORISER{creercomposition, noizetier})
-						[<a href="(#URL_ECRIRE{noizetier_page_edit}|parametre_url{edition, creer}|parametre_url{source, #VALEUR{type}})" title="">
+						[<a href="(#URL_ECRIRE{noizetier_page_edit}|parametre_url{edition, creer}|parametre_url{source, #VALEUR{type}})" title="<:noizetier:bulle_creer_composition{page=#VALEUR{type}}:>">
 							[<img height="24" width="24" src="(#CHEMIN_IMAGE{composition-add-24.png})" alt="" />]
 						</a>]
 					]
 				]
 				[(#VALEUR{composition}|oui)
 					[(#AUTORISER{modifiercomposition, noizetier}|et{#VALEUR{est_virtuelle}}|oui)
-						[<a href="(#URL_ECRIRE{noizetier_page_edit}|parametre_url{edition, modifier}|parametre_url{page, #CLE})" title="">
+						[<a href="(#URL_ECRIRE{noizetier_page_edit}|parametre_url{edition, modifier}|parametre_url{page, #CLE})" title="<:noizetier:bulle_modifier_composition:>">
 							[<img height="24" width="24" src="(#CHEMIN_IMAGE{edit-24.png})" alt="" />]
 						</a>]
 					]
 					[(#AUTORISER{dupliquercomposition, noizetier})
-						[<a href="(#URL_ECRIRE{noizetier_page_edit}|parametre_url{edition, dupliquer}|parametre_url{source, #CLE})" title="">
+						[<a href="(#URL_ECRIRE{noizetier_page_edit}|parametre_url{edition, dupliquer}|parametre_url{source, #CLE})" title="<:noizetier:bulle_dupliquer_composition{page=#CLE}:>">
 							[<img height="24" width="24" src="(#CHEMIN_IMAGE{composition-copy-24.png})" alt="" />]
 						</a>]
 					]
@@ -45,9 +44,9 @@
 	</li>
 </BOUCLE_pages>
 </ul>
-#BOITE_FERMER
 </B_pages>
 
+[(#REM) Affichage ou effacement des boutons d'actions de chaque page ]
 <script type="text/javascript">
 	$(function(){
 		$('.item.page .edition').hide();

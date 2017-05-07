@@ -151,7 +151,7 @@ function noizetier_formulaire_fond($flux) {
 		$composition = isset($flux['args']['contexte']['composition']) ? $flux['args']['contexte']['composition'] : '';
 		$type_page = $objet.($composition ? '-'.$composition : '');
 		$noizetier_compositions_meta = isset($GLOBALS['meta']['noizetier_compositions']) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
-		$noizetier_compositions_xml = array_keys(noizetier_lister_pages());
+		$noizetier_compositions_xml = array_keys(noizetier_page_repertorier());
 
 		// On vérifie que cette composition existe
 		if ((isset($noizetier_compositions_meta[$objet][$composition]) and is_array($noizetier_compositions_meta[$objet][$composition]))
@@ -178,11 +178,12 @@ function noizetier_formulaire_fond($flux) {
  * @return array
  */
 function noizetier_compositions_lister_disponibles($flux) {
+return $flux; // TODO : revoir l'introduction des compositions du noizetier
 	$noizetier_compositions = isset($GLOBALS['meta']['noizetier_compositions']) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
 	if (!is_array($noizetier_compositions)) {
 		$noizetier_compositions = array();
 	}
-	unset($noizetier_compositions['page']);
+	unset($noizetier_compositions['page']); // TODO : ça sert à quoi ?
 	$type = $flux['args']['type'];
 	$informer = $flux['args']['informer'];
 

@@ -12,6 +12,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bloc_sans_noisette' => 'Ce bloc ne contient pas de noisette.',
+	'bulle_creer_composition' => 'Créer une composition virtuelle de la page « @page@ »',
+	'bulle_dupliquer_composition' => 'Créer une composition virtuelle copiée de la composition « @page@ »',
+	'bulle_modifier_composition' => 'Editer les informations de base la composition',
+	'bulle_configurer_page_noisettes' => 'Configurer les noisettes de la page',
+	'bulle_configurer_objet_noisettes' => 'Configurer les noisettes spécifiques à cet objet',
 
 	// C
 	'choisir_noisette' => 'Choisissez la noisette que vous voulez ajouter :',
@@ -49,6 +54,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_heritages_composition' => 'Vous pouvez définir ici les compositions qui seront héritées par les objets de la branche.',
 	'explication_noizetier_css' => 'Vous pouvez ajouter à la noisette d’éventuelles classes CSS supplémentaires.',
 	'explication_raccourcis_typo' => 'Vous pouvez utiliser les raccourcis typographiques de SPIP.',
+	'explication_objet' => 'Objet de type « @type@ »',
+	'explication_page' => 'Page autonome non liée à un objet',
+	'explication_page_objet' => 'Page liée à l\'objet « @type@ »',
+	'explication_composition' => 'Composition dérivée de la page  « @type@ »',
+	'explication_composition_virtuelle' => 'Composition <strong>virtuelle</strong> dérivée de la page  « @type@ »',
 
 	// F
 	'formulaire_ajouter_noisette' => 'Ajouter une noisette',
@@ -61,7 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_deplacer_haut' => 'Déplacer vers le haut',
 	'formulaire_description' => 'Description',
 	'formulaire_description_explication' => 'Vous pouvez utilisez les raccourcis SPIP usuels, notamment la balise  &lt;multi&gt;.',
-	'formulaire_dupliquer_page' => 'Dupliquer cette page',
+	'formulaire_dupliquer_page' => 'Dupliquer cette composition',
 	'formulaire_dupliquer_page_entete' => 'Dupliquer une page',
 	'formulaire_dupliquer_page_titre' => 'Dupliquer la page « @page@ »',
 	'formulaire_erreur_format_identifiant' => 'L’identifiant ne peut contenir que des minuscules sans accent, des chiffres et le caractère _ (underscore).',
@@ -77,7 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_modifier_composition' => 'Modifier cette composition :',
 	'formulaire_modifier_composition_heritages' => 'Modifier les héritages',
 	'formulaire_modifier_noisette' => 'Modifier cette noisette',
-	'formulaire_modifier_page' => 'Modifier cette page',
+	'formulaire_modifier_page' => 'Modifier cette composition',
 	'formulaire_noisette_sans_parametre' => 'Cette noisette ne propose pas de paramètre.',
 	'formulaire_nom' => 'Titre',
 	'formulaire_nom_explication' => 'Vous pouvez utilisez la balise  &lt;multi&gt;.',
@@ -85,8 +95,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_obligatoire' => 'Champs obligatoire',
 	'formulaire_supprimer_noisette' => 'Supprimer cette noisette',
 	'formulaire_supprimer_noisettes_bloc' => 'Supprimer les noisettes du bloc',
-	'formulaire_supprimer_noisettes_page' => 'Supprimer les noisettes de la page',
-	'formulaire_supprimer_page' => 'Supprimer cette page',
+	'formulaire_supprimer_noisettes_page' => 'Supprimer toutes les noisettes',
+	'formulaire_supprimer_page' => 'Supprimer cette composition',
 	'formulaire_type' => 'Type de page',
 	'formulaire_type_explication' => 'Indiquez sur quel objet porte cette composition ou si vous souhaitez créer une page autonome.',
 	'formulaire_type_import' => 'Type d’importation',
@@ -108,6 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_afficher_titre_noisette' => 'Afficher un titre de noisettes ?',
 	'label_code' => 'Code Spip :',
 	'label_description_code' => 'Description :',
+	'label_identifiant' => 'identifiant :',
 	'label_niveau_titre' => 'Niveau du titre :',
 	'label_noizetier_css' => 'Classes CSS :',
 	'label_texte' => 'Texte :',
@@ -116,11 +127,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_titre_noisette' => 'Titre de la noisette :',
 	'label_titre_noisette_perso' => 'Titre personnalisé :',
 	'liste_icones' => 'Liste d’icônes',
-	'liste_objets' => 'Liste des objets possédant une configuration de noisettes',
+	'liste_objets' => 'Objets possédant une configuration de noisettes',
 	'liste_objets_configures' => 'Liste des objets',
 	'liste_pages' => 'Liste des pages',
-	'liste_pages_objet_non' => 'Liste des pages non liées à un type d’objet',
-	'liste_pages_objet_oui' => 'Liste des pages liées à un type d’objet',
+	'liste_pages_objet_non' => 'Pages non liées à un type d’objet',
+	'liste_pages_objet_oui' => 'Pages liées à un type d’objet',
 
 	// M
 	'masquer' => 'Masquer',
@@ -166,6 +177,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'suggestions' => 'Suggestions',
+
+	// T
 
 	// W
 	'warning_noisette_plus_disponible' => 'ATTENTION : cette noisette n’est plus disponible.',

@@ -1,21 +1,19 @@
 [(#AUTORISER{configurer, noizetier}|sinon_interdire_acces)]
 <h1 class="grostitre">
-	<:noizetier:noizetier:>&nbsp;-&nbsp;<:noizetier:liste_objets_configures:>
+	<:noizetier:noizetier:>
 </h1>
 <B_objet_types>
-#BOITE_OUVRIR{'','simple'}
 <p><:noizetier:editer_noizetier_explication_objets:></p>
 <BOUCLE_objet_types(DATA) {source table, #NOIZETIER_OBJET_INFOS}{par cle}>
 <h3>[(#CLE|objet_info{texte_objets}|_T)]</h3>
 <ul class="liste-items liste-pages noizetier-liste-objets">
 	<BOUCLE_objets(DATA) {source table, #VALEUR}{par cle}>
 	<li class="item objet" [ style="background-image: url((#VALEUR{logo}|image_reduire{24}|extraire_attribut{src}));"]>
-		<a[ href="(#URL_ECRIRE{noizetier_page}|parametre_url{objet, #_objet_types:CLE}|parametre_url{id_objet,#CLE})"]>
+		<a[ href="(#URL_ECRIRE{noizetier_page}|parametre_url{objet, #_objet_types:CLE}|parametre_url{id_objet,#CLE})"] title="<:noizetier:bulle_configurer_objet_noisettes:>">
 			[(#VALEUR{titre}|sinon{#_types:CLE&nbsp;-&nbsp;#CLE})]
 		</a>
 	</li>
 	</BOUCLE_objets>
 </ul>
 </BOUCLE_objet_types>
-#BOITE_FERMER
 </B_objet_types>
