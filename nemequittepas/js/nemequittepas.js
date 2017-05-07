@@ -11,20 +11,20 @@ jQuery.fn.bindFirst = function(/*String*/ eventType, /*[Object], Function*/ even
 	eventData = typeof eventData == "function" ? {} : eventData;
 
 	return this.each(function() {
-		var jQuerythis = jQuery(this);
+		var $this = jQuery(this);
 		var currentAttrListener = this["on" + eventType];
 
 		if (currentAttrListener) {
-			jQuerythis.bind(eventType, function(e) {
+			$this.bind(eventType, function(e) {
 				return currentAttrListener(e.originalEvent); 
 			});
 
 			this["on" + eventType] = null;
 		}
 
-		jQuerythis.bind(eventType + eventNameSpace, eventData, handler);
+		$this.bind(eventType + eventNameSpace, eventData, handler);
 
-		var allEvents = jQuery._data(jQuerythis[0], "events");
+		var allEvents = jQuery._data($this[0], "events");
 		var typeEvents = allEvents[eventType];
 		var newEvent = typeEvents.pop();
 		typeEvents.unshift(newEvent);
