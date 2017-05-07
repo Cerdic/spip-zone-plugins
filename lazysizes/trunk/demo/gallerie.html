@@ -89,7 +89,7 @@ A noter qu'il est préférable que la première image du `data-srcset` soit cell
 <div class="media fade-box">	
  <img 	src="[(#FICHIER|image_reduire{48,0}|extraire_attribut{src})]"
 		data-src="#FICHIER" width="#LARGEUR" height="#HAUTEUR"
-		class="lazyload" alt="#TITRE"
+		class="lazyload" alt="[(#TITRE|attribut_html)]"
 		itemprop="image" >
 </div>
 </BOUCLE_listDocs>
