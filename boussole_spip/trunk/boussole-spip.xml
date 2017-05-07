@@ -2,7 +2,7 @@
 
 	<!-- Sites de reference SPIP -->
 	<groupe type="reference">
-		<site alias="net" src="http://www.spip.net/" actif="oui" />
+		<site alias="net" src="https://www.spip.net/" actif="oui" />
 		<site alias="doc" src="https://code.spip.net/" actif="oui" />
 		<site alias="programmer" src="https://programmer.spip.net/" actif="oui" />
 	</groupe>
@@ -12,7 +12,7 @@
 		<site alias="plugin" src="https://plugins.spip.net/" actif="oui" />
 		<site alias="plugincode" src="https://code.plugins.spip.net/" actif="oui" />
 		<site alias="contrib" src="https://contrib.spip.net/" actif="oui" />
-		<site alias="trad" src="http://trad.spip.net/" actif="oui" />
+		<site alias="trad" src="https://trad.spip.net/" actif="oui" />
 		<site alias="core" src="https://core.spip.net/" actif="oui" />
 		<site alias="zone" src="https://zone.spip.org/" actif="oui" />
 	</groupe>
@@ -39,7 +39,7 @@
 	<!-- Sites des actualites SPIP -->
 	<groupe type="actualite">
 		<site alias="blog" src="https://blog.spip.net/" actif="oui" />
-		<site alias="twit" src="http://spip.org/" actif="non" />
+		<site alias="twit" src="https://www.spip.net/" actif="non" />
 		<site alias="sedna" src="https://sedna.spip.net/" actif="oui" />
 		<site alias="zine" src="http://zine.spip.net/" actif="non" />
 		<site alias="mag" src="http://mag.spip.net/" actif="non" />
