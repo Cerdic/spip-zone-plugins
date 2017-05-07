@@ -49,6 +49,7 @@ function saveauto_affiche_milieu($flux) {
 
 	// on exclut le cas d'affichage de la page après le dump SQLite
 	if ((($type = $flux['args']['type-page'])=='sauvegarder')
+	AND (isset($flux['args']['status']))
 	AND (!$flux['args']['status'])) {
 		$contexte = array();
 		if (isset($flux['args']['etat']))
