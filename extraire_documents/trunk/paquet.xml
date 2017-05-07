@@ -1,9 +1,9 @@
 <paquet
 	prefix="extrairedoc"
 	categorie="outil"
-	version="1.2.4"
+	version="1.2.5"
 	etat="test"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo=""
 	documentation=""
 >
