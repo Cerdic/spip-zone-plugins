@@ -116,11 +116,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_titre_noisette' => 'Titre de la noisette :',
 	'label_titre_noisette_perso' => 'Titre personnalisé :',
 	'liste_icones' => 'Liste d’icônes',
+	'liste_objets' => 'Liste des objets possédant une configuration de noisettes',
 	'liste_objets_configures' => 'Liste des objets',
 	'liste_pages' => 'Liste des pages',
-	'liste_pages_objet_oui' => 'Liste des pages liées à un type d\'objet',
-	'liste_pages_objet_non' => 'Liste des pages non liées à un type d\'objet',
-	'liste_objets' => 'Liste des objets possédant une configuration de noisettes',
+	'liste_pages_objet_non' => 'Liste des pages non liées à un type d’objet',
+	'liste_pages_objet_oui' => 'Liste des pages liées à un type d’objet',
 
 	// M
 	'masquer' => 'Masquer',
