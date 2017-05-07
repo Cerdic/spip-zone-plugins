@@ -15,7 +15,21 @@ function lazysizes_ieconfig_metas($table){
         $table['lazysizes']['metas_serialize'] = 'lazysizes';
         return $table;
 }
+/**
+ * Inserer les styles
+ *
+ * @param $head
+ *
+ * @return string
+ */
+function lazysizes_insert_head_css($head) {
+	include_spip('inc/config');
+	if (lire_config('lazysizes/options/css', 0)) {
+		$head .= '<link rel="stylesheet" type="text/css" href="' . find_in_path('css/lazysizes.css') . '" />' . "\n";
+	}
 
+	return $head;
+}
 /*
  * function lazysizes_insert_head_public
  * @param $flux
