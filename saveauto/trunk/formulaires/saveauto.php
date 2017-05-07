@@ -73,4 +73,3 @@ function formulaires_saveauto_traiter_dist() {
 	return $retour;
 }
 
-?>

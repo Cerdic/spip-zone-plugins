@@ -15,4 +15,3 @@ function genie_saveauto_cleaner_dist($last) {
 	return 1;
 }
 
-?>

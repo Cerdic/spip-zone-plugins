@@ -25,4 +25,3 @@ function genie_saveauto_dist($last) {
 	return 1;
 }
 
-?>

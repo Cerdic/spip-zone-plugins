@@ -34,4 +34,3 @@ function action_saveauto_telecharger() {
 	redirige_par_entete(generer_url_ecrire('sauvegarder', 'etat=ok_tele', true));
 	return;
 }
-?>

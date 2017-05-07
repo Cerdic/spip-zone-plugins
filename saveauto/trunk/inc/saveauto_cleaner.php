@@ -64,4 +64,3 @@ function inc_saveauto_cleaner_dist($options=array()){
 
     return $liste;
 }
-?>

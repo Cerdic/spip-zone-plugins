@@ -77,4 +77,3 @@ function inc_envoyer_notification_dist($emails, $texte, $sujet="", $pieces=array
 
 }
 
-?>

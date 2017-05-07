@@ -22,4 +22,3 @@ function inc_preparer_destinataires($quoi, $id, $options) {
 	return $destinataires;
 }
 
-?>

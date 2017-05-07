@@ -256,4 +256,3 @@ function informer_mysql_version() {
    return $match[0] . "." . $match[1] . "." . $match[2];
 }
 
-?>
