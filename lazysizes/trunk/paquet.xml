@@ -1,7 +1,7 @@
 <paquet
 	prefix="lazysizes"
 	categorie="outil"
-	version="0.0.3"
+	version="0.0.4"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/lazysizes-32.png"

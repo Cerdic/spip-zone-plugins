@@ -3,15 +3,13 @@
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 <form method="post" action="#ENV{action}"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
-	<fieldset>
-		<legend></legend>
-		
-	</fieldset>
+	
 	<fieldset>
 		<legend>LazySize Options</legend>
-		<p class="explication">Options de configuration du script</p>
+		<p class="explication">Options de configuration</p>
 		<div class="editer-groupe">
 			<div class="editer editer_css editer_radio">
+				<label for="lazy_class"><:lazysizes:cfg_label_css:></label>
 				<p class="explication"><:lazysizes:cfg_explication_css:></p>
 				<div class="choix">
 					<input type="checkbox" name="css" class="checkbox" value='on' id='cssn'[(#ENV{css}|oui)checked="checked" ]/>
@@ -20,6 +18,8 @@
 					</label>
 				</div>
 			</div>
+		</div>
+		<div class="editer-groupe">
 			<div class="editer editer_lazy_class">
 				<label for="lazy_class">LazyClass</label>
 				<p class="explication">
@@ -34,6 +34,15 @@
 					(chargement de la page)
 				</p>
 				<input type="text" class="text" name="preload_class" id="preload_class" value="#ENV{preload_class}" />
+			</div>
+			<div class="editer editer_loading_class">
+				<label for="loading_class">loading_class</label>
+				<p class="explication">
+					<code>(lazyloading !default)</code>
+					Classe ajouté dès le début du chargement.
+					Peut être utilisée pour signaler la progression.
+				</p>
+				<input type="text" class="text" name="loading_class" id="loading_class" value="#ENV{loading_class}" />
 			</div>
 		</div>
 	</fieldset>
