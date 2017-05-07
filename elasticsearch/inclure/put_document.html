@@ -10,7 +10,7 @@
 [(#SET{doc,[(#GET{doc}|extraire_un_document)]})]
 
 [(#REM) si on n'arrive pas à récupérer le contenu du document, inutile d'indexer le document]
-[(#GET{doc/body}|oui)
+[(#GET{doc/contenu}|oui)
 [(#REM) si le titre est renseigné en base, on le prend, sinon le titre extrait par tika, sinon le nom du fichier]
 #SET{title,#TITRE|sinon{#GET{doc/title}|sinon{#FICHIER|basename}}}
 [(#SET{json,[(#ARRAY{
@@ -19,7 +19,7 @@ document_extension, #EXTENSION,
 document_url, [(#URL_DOCUMENT)],
 date, #DATE,
 document_title,[(#GET{title}|textebrut)],
-document_body,[(#GET{doc/body})][ (#DESCRIPTIF|textebrut)]})]})]
+document_body,[(#GET{doc/contenu})][ (#DESCRIPTIF|textebrut)]})]})]
 ]
 ]
 </BOUCLE_doc>
