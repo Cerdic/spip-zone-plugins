@@ -1,6 +1,7 @@
 TODO.txt (fichier généré par le plugin Atelier 2008-07-24 19:10:46)
 -------------------------------------------------------------------
 
+Fin de cette branche : le 8 mai 2017
 * ajouter le format AbeBooks :
 - ajouter le format AbeBooks
 
