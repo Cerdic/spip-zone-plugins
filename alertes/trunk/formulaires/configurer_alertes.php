@@ -19,15 +19,15 @@ function formulaires_configurer_alertes_charger_dist() {
 	}
 	// Chargement de la configuration
 	$valeurs = array(
-		'activer_alertes' => (_request('activer_alertes')) ? _request('activer_alertes') : $a['activer_alertes'],
-		'activer_alertes_articles' => (_request('activer_alertes_articles')) ? _request('activer_alertes_articles') : $a['activer_alertes_articles'],
-		'groupes' => (_request('groupes')) ? _request('groupes') : $a['groupes'],
-		'secteurs' => (_request('secteurs')) ? _request('secteurs') : $a['secteurs'],
-		'rubriques' => (_request('rubriques')) ? _request('rubriques') : $a['rubriques'],
-		'auteurs' => (_request('auteurs')) ? _request('auteurs') : $a['auteurs'],
-		'mode_envoi' => (_request('mode_envoi')) ? _request('mode_envoi') : $a['mode_envoi'],
-		'intervalle_cron' => (_request('intervalle_cron')) ? _request('intervalle_cron') : $a['intervalle_cron'],
-		'nb_mails' => (_request('nb_mails')) ? _request('nb_mails') : $a['nb_mails'],
+		'activer_alertes' => (_request('activer_alertes')) ? _request('activer_alertes') : (isset($a['activer_alertes']) ? $a['activer_alertes'] : ''),
+		'activer_alertes_articles' => (_request('activer_alertes_articles')) ? _request('activer_alertes_articles') : (isset($a['activer_alertes_articles']) ? $a['activer_alertes_articles'] : ''),
+		'groupes' => (_request('groupes')) ? _request('groupes') : (isset($a['groupes']) ? $a['groupes'] : ''),
+		'secteurs' => (_request('secteurs')) ? _request('secteurs') : (isset($a['secteurs']) ? $a['secteurs'] : ''),
+		'rubriques' => (_request('rubriques')) ? _request('rubriques') : (isset($a['rubriques']) ? $a['rubriques'] : ''),
+		'auteurs' => (_request('auteurs')) ? _request('auteurs') : (isset($a['auteurs']) ? $a['auteurs'] : ''),
+		'mode_envoi' => (_request('mode_envoi')) ? _request('mode_envoi') : (isset($a['mode_envoi']) ? $a['mode_envoi'] : ''),
+		'intervalle_cron' => (_request('intervalle_cron')) ? _request('intervalle_cron') : (isset($a['intervalle_cron']) ? $a['intervalle_cron'] : ''),
+		'nb_mails' => (_request('nb_mails')) ? _request('nb_mails') : (isset($a['nb_mails']) ? $a['nb_mails'] : ''),
 	);
 
 	return $valeurs;
