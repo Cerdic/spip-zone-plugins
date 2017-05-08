@@ -1,0 +1,13 @@
+<BOUCLE_contexte(LIVRES){id_livre}>
+	<title>[(#TITRE|couper{80}|textebrut) : ][(#SOUSTITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+	[<meta name="description" content="(#TEXTE|couper{150}|textebrut)" />]
+	[<link rel="canonical" href="(#URL_LIVRE|url_absolue)" />]
+	<meta property="og:title" content="[(#TITRE|couper{80}|textebrut)]"/>
+	[<meta property="og:image" content="(#LOGO_LIVRE|fichier|url_absolue)"/>]
+	<meta property="og:url" content="#URL_LIVRE"/>
+	<meta property="og:site_name" content="#NOM_SITE_SPIP"/>
+	[<meta property="og:description" content="(#INTRODUCTION{150}|attribut_html)"/>]
+	<meta name="twitter:title" content="[(#TITRE|couper{80}|textebrut)]" />
+	[<meta name="twitter:image" content="(#LOGO_LIVRE|fichier|url_absolue)" />]
+	[<meta name="twitter:url" content="(#URL_LIVRE|url_absolue)" />]
+</BOUCLE_contexte>

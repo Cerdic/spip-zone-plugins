@@ -1,0 +1,35 @@
+[(#SET{defaut_tri,#ARRAY{
+	nom,1,
+	id_livres_auteur,1,
+	points,-1
+}})]<B_liste_livres_auteurs>
+#ANCRE_PAGINATION
+<div class="liste-objets livres_auteurs">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{livres_auteur:info_1_livres_auteur,livres_auteur:info_nb_livres_auteurs}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class="nom" scope="col" colspan='2'>[(#TRI{nom,<:livres_auteur:champ_nom_label:>,ajax})]</th>
+			<th class="id" scope="col">[(#TRI{id_livres_auteur,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_livres_auteurs(LIVRES_AUTEURS){id_livres_auteur?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num nom},#GET{defaut_tri}}{par nom}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="statut">[(#STATUT|puce_statut{livres_auteur,#ID_LIVRES_AUTEUR})]</td> 
+			<td class="nom principale"[(#LOGO_LIVRES_AUTEUR_NORMAL|non)colspan='2']><a href="[(#ID_LIVRES_AUTEUR|generer_url_entite{livres_auteur})]" title="<:info_numero_abbreviation|attribut_html:> #ID_LIVRES_AUTEUR">[(#RANG). ][(#PRENOM) ]#NOM</a></td>
+			[<td class='logo'>(#LOGO_LIVRES_AUTEUR_NORMAL|image_reduire{50,50})</td>]
+			<td class="id">[(#AUTORISER{modifier,livres_auteur,#ID_LIVRES_AUTEUR}|?{
+				<a href="[(#URL_ECRIRE{livres_auteur_edit,id_livres_auteur=#ID_LIVRES_AUTEUR})]">#ID_LIVRES_AUTEUR</a>,
+				#ID_LIVRES_AUTEUR
+			})]</td>
+		</tr>
+	</BOUCLE_liste_livres_auteurs>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_livres_auteurs>[
+<div class="liste-objets livres_auteurs caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_livres_auteurs>

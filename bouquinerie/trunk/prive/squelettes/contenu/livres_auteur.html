@@ -1,0 +1,58 @@
+[(#AUTORISER{voir,livres_auteur,#ID_LIVRES_AUTEUR}|sinon_interdire_acces)]
+[(#SET{url_voir,#VAL{livres_auteur}|objet_info{url_voir}})]
+[(#SET{url_edit,#VAL{livres_auteur}|objet_info{url_edit}})]
+<BOUCLE_livres_auteur(LIVRES_AUTEURS){id_livres_auteur}{statut==.*}{si #ENV{exec}|=={#GET{url_voir}}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,livres_auteur,#ID_LIVRES_AUTEUR})
+		[(#ID_LIVRES_AUTEUR|afficher_qui_edite{livres_auteur}|non)
+			[(#URL_ECRIRE{#GET{url_edit},id_livres_auteur=#ID_LIVRES_AUTEUR}|icone_verticale{<:livres_auteur:icone_modifier_livres_auteur:>,livres_auteur,edit,right ajax preload})]
+		]
+		[(#ID_LIVRES_AUTEUR|afficher_qui_edite{livres_auteur}|oui)
+			[(#URL_ECRIRE{#GET{url_edit},id_livres_auteur=#ID_LIVRES_AUTEUR}|icone_verticale{#ID_LIVRES_AUTEUR|afficher_qui_edite{livres_auteur},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ][(#PRENOM) ](#NOM|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{livres_auteur-24.png}|balise_img{livres_auteur,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{livres_auteur,#ID_LIVRES_AUTEUR}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/livres_auteur,id=#ID_LIVRES_AUTEUR,id_livres_auteur=#ID_LIVRES_AUTEUR,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,livres_auteur,#ID_LIVRES_AUTEUR})
+	[(#ID_LIVRES_AUTEUR|afficher_qui_edite{livres_auteur}|non)
+		[(#URL_ECRIRE{#GET{url_edit},id_livres_auteur=#ID_LIVRES_AUTEUR}|icone_verticale{<:livres_auteur:icone_modifier_livres_auteur:>,livres_auteur,edit,right ajax preload})]
+	]
+	[(#ID_LIVRES_AUTEUR|afficher_qui_edite{livres_auteur}|oui)
+		[(#URL_ECRIRE{#GET{url_edit},id_livres_auteur=#ID_LIVRES_AUTEUR}|icone_verticale{#ID_LIVRES_AUTEUR|afficher_qui_edite{livres_auteur},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+<div class="nettoyeur"></div>
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,livres_auteur,id,#ID_LIVRES_AUTEUR},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/livres_auteur-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/livres_auteur-enfants,id_livres_auteur,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,livres_auteur,id_livres_auteur,#ID_LIVRES_AUTEUR,objet,livres_auteur,id_objet,#ID_LIVRES_AUTEUR},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_livres_auteur>
+[(#ENV**{exec}|=={#GET{url_edit}}|?{#INCLURE{fond=prive/squelettes/contenu/#GET{url_edit},redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_livres_auteur>
