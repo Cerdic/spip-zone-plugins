@@ -40,7 +40,6 @@ function lazysizes_insert_head_public($flux) {
 	$lazy_options = lire_config('lazysizes/options');
 	$js_init_options = generer_url_public('lazysizes_init.js') ;
 	$flux .= "<script type='text/javascript' src='$js_init_options' ></script>\n";;
-	var_dump($js_init_options);
 	
 	// Addons
 	$active_addons = lire_config('lazysizes/addons');
