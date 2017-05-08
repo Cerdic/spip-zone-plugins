@@ -12,11 +12,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bloc_sans_noisette' => 'Ce bloc ne contient pas de noisette.',
-	'bulle_creer_composition' => 'Créer une composition virtuelle de la page « @page@ »',
-	'bulle_dupliquer_composition' => 'Créer une composition virtuelle copiée de la composition « @page@ »',
-	'bulle_modifier_composition' => 'Editer les informations de base la composition',
-	'bulle_configurer_page_noisettes' => 'Configurer les noisettes de la page',
 	'bulle_configurer_objet_noisettes' => 'Configurer les noisettes spécifiques à cet objet',
+	'bulle_configurer_page_noisettes' => 'Configurer les noisettes de la page',
+	'bulle_creer_composition' => 'Créer une composition virtuelle de la page « @page@ »',
+	'bulle_dupliquer_composition' => 'Créer une composition virtuelle copiée de la composition « @page@ »',
+	'bulle_modifier_composition' => 'Editer les informations de base la composition',
 
 	// C
 	'choisir_noisette' => 'Choisissez la noisette que vous voulez ajouter :',
@@ -46,6 +46,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_doit_choisir_noisette' => 'Vous devez choisir une noisette.',
 	'erreur_mise_a_jour' => 'Une erreur s’est produite pendant la mise à jour de la base de donnée.',
 	'explication_code' => 'ATTENTION : pour utilisateur avancé. Vous pouvez saisir du code Spip (boucles et balises) qui sera interprété comme s’il s’agissait d’un squelette. La noisette aura par ailleurs accès à toutes les variables de l’environnement de la page.',
+	'explication_composition' => 'Composition dérivée de la page  « @type@ »',
+	'explication_composition_virtuelle' => 'Composition <strong>virtuelle</strong> dérivée de la page  « @type@ »',
 	'explication_description_code' => 'À usage interne. Non affichée sur le site public.',
 	'explication_dupliquer_composition_reference' => 'L’identifiant de la page dupliquée est <i>@composition@</i>.
 	Vous pouvez choisir un nouvel identifiant ou suffixer l’identifiant de référence ainsi : <i>@composition@<strong>_suffixe</strong></i>',
@@ -53,12 +55,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_glisser_deposer' => 'Vous pouvez ajouter une noisette ou les réordonner par simple glisser/déposer.',
 	'explication_heritages_composition' => 'Vous pouvez définir ici les compositions qui seront héritées par les objets de la branche.',
 	'explication_noizetier_css' => 'Vous pouvez ajouter à la noisette d’éventuelles classes CSS supplémentaires.',
-	'explication_raccourcis_typo' => 'Vous pouvez utiliser les raccourcis typographiques de SPIP.',
 	'explication_objet' => 'Objet de type « @type@ »',
 	'explication_page' => 'Page autonome non liée à un objet',
-	'explication_page_objet' => 'Page liée à l\'objet « @type@ »',
-	'explication_composition' => 'Composition dérivée de la page  « @type@ »',
-	'explication_composition_virtuelle' => 'Composition <strong>virtuelle</strong> dérivée de la page  « @type@ »',
+	'explication_page_objet' => 'Page liée à l’objet « @type@ »',
+	'explication_raccourcis_typo' => 'Vous pouvez utiliser les raccourcis typographiques de SPIP.',
 
 	// F
 	'formulaire_ajouter_noisette' => 'Ajouter une noisette',
@@ -118,7 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_afficher_titre_noisette' => 'Afficher un titre de noisettes ?',
 	'label_code' => 'Code Spip :',
 	'label_description_code' => 'Description :',
-	'label_identifiant' => 'identifiant :',
+	'label_identifiant' => 'identifiant :',
 	'label_niveau_titre' => 'Niveau du titre :',
 	'label_noizetier_css' => 'Classes CSS :',
 	'label_texte' => 'Texte :',
@@ -177,8 +177,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'suggestions' => 'Suggestions',
-
-	// T
 
 	// W
 	'warning_noisette_plus_disponible' => 'ATTENTION : cette noisette n’est plus disponible.',

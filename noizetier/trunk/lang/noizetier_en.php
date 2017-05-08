@@ -59,7 +59,7 @@ You can choose a new identifier or suffix the reference identifier as follows:
 	'formulaire_deplacer_haut' => 'Move up',
 	'formulaire_description' => 'Description',
 	'formulaire_description_explication' => 'You can use SPIP usual shortcuts, especially the &lt;multi&gt; tag.',
-	'formulaire_dupliquer_page' => 'Duplicate this page',
+	'formulaire_dupliquer_page' => 'Duplicate this page', # MODIF
 	'formulaire_dupliquer_page_entete' => 'Duplicate a page',
 	'formulaire_dupliquer_page_titre' => 'Duplicate the page « @page@ »',
 	'formulaire_erreur_format_identifiant' => 'The identifier can only contain lowercase letters without accents, numbers and the "_" (underscore) character.',
@@ -75,7 +75,7 @@ nuts on the following pages:',
 	'formulaire_modifier_composition' => 'Edit this composition:',
 	'formulaire_modifier_composition_heritages' => 'Edit the heritages',
 	'formulaire_modifier_noisette' => 'Edit this nut',
-	'formulaire_modifier_page' => 'Edit this page',
+	'formulaire_modifier_page' => 'Edit this page', # MODIF
 	'formulaire_noisette_sans_parametre' => 'This nut has no parameters.',
 	'formulaire_nom' => 'Title',
 	'formulaire_nom_explication' => 'You can use the &lt;multi&gt; tag.',
@@ -83,7 +83,7 @@ nuts on the following pages:',
 	'formulaire_obligatoire' => 'Required field',
 	'formulaire_supprimer_noisette' => 'Delete this nuts',
 	'formulaire_supprimer_noisettes_page' => 'Delete the nuts of this page', # MODIF
-	'formulaire_supprimer_page' => 'Delete this page',
+	'formulaire_supprimer_page' => 'Delete this page', # MODIF
 	'formulaire_type' => 'Page type',
 	'formulaire_type_explication' => 'Indicate on which object does this composition apply or if you wish to create a specific page.',
 	'formulaire_type_import' => 'Import type',
