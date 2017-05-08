@@ -54,12 +54,12 @@ function glossaire_zone_plugins($chemin, $ligne=0) {
 function glossaire_spip_url($type='core', $chemin, $ligne) {
 	static $sources = array(
 		'dev' => array(
-			'core' => 'http://core.spip.org/projects/spip/repository/entry/spip/@file@',
+			'core' => 'https://core.spip.net/projects/spip/repository/entry/spip/@file@',
 			'core_plugins' => 'http://zone.spip.org/trac/spip-zone/browser/_core_/plugins/@file@',
 			'zone_plugins' => 'http://zone.spip.org/trac/spip-zone/browser/_plugins_/@file@',
 		),
 		'branches' => array(
-			'core' => 'http://core.spip.org/projects/spip/repository/entry/branches/spip-@branche@/@file@',
+			'core' => 'https://core.spip.net/projects/spip/repository/entry/branches/spip-@branche@/@file@',
 			'core_plugins' => 'http://zone.spip.org/trac/spip-zone/browser/_core_/branches/spip-@branche@/plugins/@file@',
 			'zone_plugins' => 'http://zone.spip.org/trac/spip-zone/browser/_plugins_/@file@',
 		),
@@ -96,13 +96,13 @@ function glossaire_spip_url($type='core', $chemin, $ligne) {
 # @define('_URL_BROWSER_TRAC', 'http://trac.rezo.net/trac/spip/browser/spip/');
 
 // trac GIT
-#@define('_URL_BROWSER_TRAC', 'http://core.spip.org/trac/spip/browser/@file@?rev=spip-2.1');
+#@define('_URL_BROWSER_TRAC', 'https://core.spip.net/trac/spip/browser/@file@?rev=spip-2.1');
 
 // redmine SVN (trunk)
-@define('_URL_BROWSER_TRAC', 'http://core.spip.org/projects/spip/repository/entry/spip/@file@');
+@define('_URL_BROWSER_TRAC', 'https://core.spip.net/projects/spip/repository/entry/spip/@file@');
 
 // redmine SVN (branche 2.1)
-#@define('_URL_BROWSER_TRAC', 'http://core.spip.org/projects/spip/repository/entry/branches/spip-2.1/@file@');
+#@define('_URL_BROWSER_TRAC', 'https://core.spip.net/projects/spip/repository/entry/branches/spip-2.1/@file@');
 
 /*
  * Obsolete, a migrer vers les nouveaux glossaires

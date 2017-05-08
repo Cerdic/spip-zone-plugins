@@ -90,7 +90,7 @@ function collections_declarer_tables_objets_sql($tables) {
 	$tables[]['tables_jointures'][]= 'collections';
 
 	// cas particulier des auteurs et mots : declarer explicitement auteurs_liens comme jointure privilegiee
-	// cf http://core.spip.org/issues/2329
+	// cf https://core.spip.net/issues/2329
 	$tables['spip_collections']['tables_jointures'][]= 'auteurs_liens';
 	$tables['spip_collections']['tables_jointures'][]= 'auteurs';
 	$tables['spip_collections']['tables_jointures'][]= 'collections_liens';

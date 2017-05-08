@@ -76,7 +76,7 @@ function zotspip_porte_plume_lien_classe_vers_icone($flux) {
 	return array_merge($flux, $icones);
 }
 
-// Pipeline post-boucle, utilise pour le champs annee de zitems, cf. http://core.spip.org/issues/2912
+// Pipeline post-boucle, utilise pour le champs annee de zitems, cf. https://core.spip.net/issues/2912
 
 function zotspip_post_boucle ($boucle) {
 	if ($boucle->id_table == 'zitems') {

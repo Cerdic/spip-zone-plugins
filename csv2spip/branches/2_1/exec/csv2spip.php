@@ -12,7 +12,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('auth/sha256.inc');
 
 // a partir de SPIP 2.1 il faut crypter les pass en sha256 a l place du md5 des version precedentes
-// commit de creation de la version 2.1: 14864 cf http://core.spip.org/projects/spip/repository/revisions/14864
+// commit de creation de la version 2.1: 14864 cf https://core.spip.net/projects/spip/repository/revisions/14864
 function csv2spip_crypt_pass($input) {			
 	global $spip_version_code;
     if ($spip_version_code < 14864)

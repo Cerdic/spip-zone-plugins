@@ -826,7 +826,7 @@ JS;
 	/**
 	 * Find and get attribute value in an HTML tag
 	 * Regexp from function extraire_attribut() in
-	 * http://core.spip.org/projects/spip/repository/entry/spip/ecrire/inc/filtres.php#L2013
+	 * https://core.spip.net/projects/spip/repository/entry/spip/ecrire/inc/filtres.php#L2013
 	 * @param $tag
 	 *   html tag
 	 * @param $attribute

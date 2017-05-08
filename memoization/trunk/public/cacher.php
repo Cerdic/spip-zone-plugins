@@ -335,7 +335,7 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 
 	if (intval($GLOBALS['spip_version_branche'])<3){
 		// HEAD : cas sans jamais de calcul pour raisons de performance
-		// supprime en SPIP 3 par http://core.spip.org/projects/spip/repository/revisions/19959
+		// supprime en SPIP 3 par https://core.spip.net/projects/spip/repository/revisions/19959
 		if ($_SERVER['REQUEST_METHOD'] == 'HEAD') {
 			$use_cache = 0;
 			$page = array('contexte_implicite'=>$contexte_implicite);

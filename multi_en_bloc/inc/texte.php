@@ -117,7 +117,7 @@ if (!defined('_BALISES_BLOCS')) define('_BALISES_BLOCS',
 // echappe est un div ou un span
 // https://code.spip.net/@code_echappement
 
-//Petit backport issu de http://core.spip.org/projects/spip/repository/revisions/17424 pour Spip 3
+//Petit backport issu de https://core.spip.net/projects/spip/repository/revisions/17424 pour Spip 3
 //function code_echappement($rempl, $source='', $no_transform=false) {
 
 function code_echappement($rempl, $source='', $no_transform=false, $mode=NULL) {

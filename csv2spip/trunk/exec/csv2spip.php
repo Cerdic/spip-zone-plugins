@@ -16,7 +16,7 @@ include_spip('inc/csv2spip_import');
 
 // a partir de SPIP 2.1 il faut crypter les pass en sha256 a l place du md5 des version precedentes
 // commit de creation de la version 2.1: 14864 cf 
-// http://core.spip.org/projects/spip/repository/revisions/14864
+// https://core.spip.net/projects/spip/repository/revisions/14864
 
 function csv2spip_crypt_pass($input) {			
 	global $spip_version_code;

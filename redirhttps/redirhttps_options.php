@@ -1,6 +1,6 @@
 <?php
 // Le traffic HTTP est redirige en HTTPS quand l'utilisateur est connecte ou pour la page de login
-// a noter: il faut avoir applique le patch: http://core.spip.org/projects/spip/repository/revisions/17941
+// a noter: il faut avoir applique le patch: https://core.spip.net/projects/spip/repository/revisions/17941
 //    -> dans le core depuis la version 2.1.11
 if (
         (

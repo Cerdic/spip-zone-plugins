@@ -288,7 +288,7 @@ function importer_mailsubscribers_importe($filename,$options=array()){
 				else {
 					$set['email'] = $email;
 					if ($id = objet_inserer("mailsubscriber",0,$set)) {
-						// on garde tous les champs car objet_inserer n'a pas forcement fait le boulot (depend de http://core.spip.org/projects/spip/repository/revisions/20021)
+						// on garde tous les champs car objet_inserer n'a pas forcement fait le boulot (depend de https://core.spip.net/projects/spip/repository/revisions/20021)
 						$set['statut'] = $d['statut'];
 						objet_modifier("mailsubscriber",$id,$set);
 						$res['count']++;

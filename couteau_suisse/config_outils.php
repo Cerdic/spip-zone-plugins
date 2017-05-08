@@ -1554,11 +1554,11 @@ add_outil( array(
 ));
 
 $cs_temp = defined('_SPIP30000')?array(
-	'distant_action' => 'http://core.spip.org/projects/spip/repository/raw/branches/spip-2.1/ecrire/action/charger_plugin.php',
-	'distant_inc' => 'http://core.spip.org/projects/spip/repository/raw/branches/spip-2.1/ecrire/inc/charger_plugin.php',
+	'distant_action' => 'https://core.spip.net/projects/spip/repository/raw/branches/spip-2.1/ecrire/action/charger_plugin.php',
+	'distant_inc' => 'https://core.spip.net/projects/spip/repository/raw/branches/spip-2.1/ecrire/inc/charger_plugin.php',
 ):(defined('_SPIP20100')?array():array(
 	'version-min' => '1.9300',
-	'distant' => 'http://core.spip.org/projects/spip/repository/raw/branches/spip-2.1/ecrire/genie/mise_a_jour.php',
+	'distant' => 'https://core.spip.net/projects/spip/repository/raw/branches/spip-2.1/ecrire/genie/mise_a_jour.php',
 ));
 add_outil(array_merge(array(
 	'id' => 'maj_auto',

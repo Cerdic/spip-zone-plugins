@@ -1313,7 +1313,7 @@ function extraire_multi($letexte, $lang=null, $echappe_span=false) {
 				$trad = $trads[$l];
 				$typographie = charger_fonction(lang_typo($l), 'typographie');
 				$trad = $typographie($trad);
-//backport du commit http://core.spip.org/projects/spip/repository/revisions/17424 pour Spip 3
+//backport du commit https://core.spip.net/projects/spip/repository/revisions/17424 pour Spip 3
 				include_spip('inc/texte');
 				$trad_propre = propre($trad);
 				// Tester si on echappe en span ou en div

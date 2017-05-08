@@ -8,7 +8,7 @@
    <categorie>edition</categorie>
 	<description>
 	Permet de g&#233;rer correctement les changements de langues dans les balises multi
-contenant des mises en forme typo qui vont g&#233;n&#233;rer des blocks html. Report du patch: http://core.spip.org/projects/spip/repository/revisions/17424 dans Spip 2.1
+contenant des mises en forme typo qui vont g&#233;n&#233;rer des blocks html. Report du patch: https://core.spip.net/projects/spip/repository/revisions/17424 dans Spip 2.1
 	</description>
 	<prefix>multi_bloc</prefix>
 	<necessite id="SPIP" version="[2.1.7;2.1.99]" />
