@@ -8,7 +8,7 @@
 	schema="0.1.0"
 >
 	<nom>socicon</nom>
-	<auteur lien='http://www.erational.org'>erational</auteur>
+	<auteur>Teddy Payet</auteur>
 	<licence>GNU/GPL</licence>
 
 	<pipeline nom="sociaux_lister" inclure="socicon_pipelines.php"/>
