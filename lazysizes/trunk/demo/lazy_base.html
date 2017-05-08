@@ -8,32 +8,13 @@
 <style>
 .media {
 	width: 100%;
+	padding: 1rem 0;
 	clear: both;
 }
 .media img {
+	display: block;
 	margin: 0 auto;
 	text-align: center;
-}
-
-.blur-up {
-	-webkit-filter: blur(5px);
-	filter: blur(5px);
-	transition: filter 400ms, -webkit-filter 400ms;
-}
-
-.blur-up.lazyloaded {
-	-webkit-filter: blur(0);
-	filter: blur(0);
-}
-
-.fade-box .lazyload,
-.fade-box .lazyloading {
-   opacity: 0.5;
-   transition: opacity 400ms;
-}
-
-.fade-box img.lazyloaded {
-	opacity: 1;
 }
 </style>
 </head>
@@ -44,7 +25,6 @@
 Markup standard : avec loader.gif et transition sur l'opactité	
 <img data-src="#FICHIER" width="#LARGEUR" height="#HAUTEUR" class="lazyload" alt="#TITRE">
 	
-
 -->]
 <BOUCLE_listDocs(DOCUMENTS){tout}{0,100}{extension==jpg|png|gif}>
 <div class="media">
