@@ -15,7 +15,7 @@ Si vous utilisez mod_security ou mod_security2, il faut désactiver la directive
 ## Plugins SPIP
 
 * [geoip_lite](http://zone.spip.org/trac/spip-zone/browser/_plugins_/geoip/branches/v1) [nécessite]
-* [Fulltext](http://plugins.spip.net/fulltext.html) [nécessite]
+* [Fulltext](https://plugins.spip.net/fulltext.html) [nécessite]
 * [d3js](http://zone.spip.org/trac/spip-zone/browser/_plugins_/d3js) [utilise]
 
 ## Changelog
@@ -48,7 +48,7 @@ Si vous utilisez mod_security ou mod_security2, il faut désactiver la directive
 #### Version 1.2.0 (13/06/2016)
 
 - Traduction chaîne de langue et pétouille de commentaire
-- Nécessite le plugin [fulltext](http://plugins.spip.net/fulltext.html) sinon la recherche sur les urls ne fonctionne pas.
+- Nécessite le plugin [fulltext](https://plugins.spip.net/fulltext.html) sinon la recherche sur les urls ne fonctionne pas.
 - Ajout dans le README.md de la remarque concernant mod security 
 
 #### Version 1.1.6 (05/06/2016)

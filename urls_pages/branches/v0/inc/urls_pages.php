@@ -167,7 +167,7 @@ function urls_pages_lister_pages () {
 					$exclure = true;
 				// squelettes des objets éditoriaux, ex: article, article-10, article=10, article_10, article.en, article-10.en
 				// cf. https://www.spip.net/fr_article3445.html
-				// cf. http://plugins.spip.net/variantesarticles.html
+				// cf. https://plugins.spip.net/variantesarticles.html
 				if ( is_array($exclure_objets) ) {
 					foreach ( $exclure_objets as $objet ) {
 						if ( preg_match("/^$objet((-|=|_)\d*)?((\.)[a-zA-Z]{2})?$/", $squelette)

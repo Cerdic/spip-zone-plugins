@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	El plugin instala varios plugins
 	
-	- [Traducción entre secciones->http://plugins.spip.net/tradrub.html]
+	- [Traducción entre secciones->https://plugins.spip.net/tradrub.html]
 	- [Idioma preferido del visitante->https://contrib.spip.net/Plugin-Langue-preferee-par-l-internaute]
 	- [Traducciones de secciones de otra forma->https://contrib.spip.net/Traductions-de-rubriques-autrement-3]
 	

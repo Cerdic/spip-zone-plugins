@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => 'Această pagină permite configurarea stilului lupei. Un stil personalizat poate fi declarat; vedeţi <a href="http://plugins.spip.net/?page=article&id_article=48">documentaţia on-line</a>.', # MODIF
+	'descriptif' => 'Această pagină permite configurarea stilului lupei. Un stil personalizat poate fi declarat; vedeţi <a href="https://plugins.spip.net/?page=article&id_article=48">documentaţia on-line</a>.', # MODIF
 
 	// E
 	'example' => 'Rezultat grafic',

@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	Zásuvný modul si vynúti inštaláciu viacerých zásuvných modulov
 	
-	- [preklad rubrík,->http://plugins.spip.net/tradrub.html]
+	- [preklad rubrík,->https://plugins.spip.net/tradrub.html]
 	- [jazyk, ktorý preferuje používateľ,->https://contrib.spip.net/Plugin-Langue-preferee-par-l-internaute]
 	- [preklady iných rubrík,->https://contrib.spip.net/Traductions-de-rubriques-autrement-3]
 	- [preklady iných článkov.->https://contrib.spip.net/Traductions-d-articles-autrement-3]

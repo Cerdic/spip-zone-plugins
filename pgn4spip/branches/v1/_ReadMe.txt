@@ -35,7 +35,7 @@ license: GNU GPL 3.0 (c) 2012
 
 It does not require the CFG 3.x plug-in for its configuration in SPIP 3.x
 It requires the CFG 1.x plug-in for its configuration in SPIP 2.x
-http://plugins.spip.net/cfg.html
+https://plugins.spip.net/cfg.html
 
 pgn4spip is compatible with the plug-in Swiss Knife 1.8.x, 
 tool "Curly inverted commas" << French double quotes >>

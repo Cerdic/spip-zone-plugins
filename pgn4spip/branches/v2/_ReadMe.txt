@@ -32,7 +32,7 @@ license: GNU GPL 3.0 (c) 2012
 
 It does not require the CFG 3.x plug-in for its configuration in SPIP 3.x
 It requires the CFG 1.x plug-in for its configuration in SPIP 2.x
-http://plugins.spip.net/cfg.html
+https://plugins.spip.net/cfg.html
 
 In case you use the tool "Curly inverted commas" << French double quotes >> of the plug-in Swiss Knife, then pgn4spip must be enabled AFTER Swiss Knife.
 

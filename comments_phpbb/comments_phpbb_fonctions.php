@@ -21,7 +21,7 @@ function datetime_unix2mysql($timestamp) {
 function bbcode($chaine) {
 /*
  * Source originale : Plugin "Du BBCode dans SPIP
- * http://plugins.spip.net/Du-BBcode-dans-SPIP
+ * https://plugins.spip.net/Du-BBcode-dans-SPIP
  * Modifiée par David Dorchies http://dorch.fr 13/07/2009
  */
   $chaine = stripslashes($chaine);

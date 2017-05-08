@@ -25,7 +25,7 @@ function inc_plugins_spip_dist($plugin = array(), $branche_spip = null) {
 			return false;
 		}
 		$prefixe = strtolower($plugin['prefixe']);
-		$content_json = recuperer_page("http://plugins.spip.net/http.api/svp/plugins/" . $prefixe);
+		$content_json = recuperer_page("https://plugins.spip.net/http.api/svp/plugins/" . $prefixe);
 		// Utilisation de la fonction PHP pour pouvoir avoir un tableau et non un objet
 		$svp_plugin = json_decode($content_json, true);
 		if (isset($svp_plugin['erreur']) and $svp_plugin['erreur']['status'] !== 404) {

@@ -37,7 +37,7 @@ Licence : GNU GPL 3.0 (c) 2012
 
 Il ne nécessite pas le plug-in CFG 3.x pour sa configuration dans SPIP 3.x
 Il nécessite le plug-in CFG 1.x pour sa configuration dans SPIP 2.x
-http://plugins.spip.net/cfg.html
+https://plugins.spip.net/cfg.html
 
 pgn4spip est compatible avec le plug-in Couteau Suisse 1.8.x, 
 lame "Améliorations des textes : Guillemets typographiques"

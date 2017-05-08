@@ -96,7 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_ajouter_mailsubscriber' => 'Newsletter-Abonnent hinzufügen',
 	'texte_avertissement_import' => 'Die Spalte <tt>Status</tt> ist vorhanden: Daten werden unverändert importiert, bei bereits vorhandenen E-MaIadressen wird der Status überschrieben.',
 	'texte_changer_statut_mailsubscriber' => 'Dieser Abonnent ist :',
-	'texte_import_export_bonux' => 'Um Abonnentenlisten zu im- und exportieren, installieren sie bitte das Plugin  <a href="http://plugins.spip.net/spip_bonux">SPIP-Bonux</a>.',
+	'texte_import_export_bonux' => 'Um Abonnentenlisten zu im- und exportieren, installieren sie bitte das Plugin  <a href="https://plugins.spip.net/spip_bonux">SPIP-Bonux</a>.',
 	'texte_statut_en_attente_confirmation' => 'unbestätigt',
 	'texte_statut_pas_encore_inscrit' => 'nicht angemeldet',
 	'texte_statut_refuse' => 'abgelehnt',

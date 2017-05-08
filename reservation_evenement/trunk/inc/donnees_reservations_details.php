@@ -46,12 +46,12 @@ if (!defined('_ECRIRE_INC_VERSION'))
 						// Si le prix n'est pas fournit, on essaye de le trouver
 						if (!isset($set['prix']) and !isset($set['prix_ht'])) {
 
-							/* Existence d'un prix via le plugin Prix Objets http://plugins.spip.net/prix_objets.html */
+							/* Existence d'un prix via le plugin Prix Objets https://plugins.spip.net/prix_objets.html */
 							if ($prix_objets = test_plugin_actif('prix_objets')) {
 								$fonction_prix = charger_fonction('prix', 'inc/');
 								$fonction_prix_ht = charger_fonction('ht', 'inc/prix');
 
-								// si le plugin déclinaison produit (http://plugins.spip.net/declinaisons.html)
+								// si le plugin déclinaison produit (https://plugins.spip.net/declinaisons.html)
 								// est active il peut y avoir plusieurs prix par évenement
 								if (test_plugin_actif('declinaisons')) {
 									$id_prix = isset($set['id_prix_objet']) ? $set['id_prix_objet'] : $reservations_details['id_prix_objet'];
