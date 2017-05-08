@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
  * Fonction pour le pipeline, n'a rien a effectuer
  *
  * @note
- *   http://programmer.spip.net/autoriser
+ *   https://programmer.spip.net/autoriser
  */
 function association_autoriser() {
 }
@@ -93,11 +93,11 @@ function is_in_groups($id_auteur, $id_groupes) {
  *   Options supplementaires pour l'autorisation
  * @return bool
  * @note
- *   http://programmer.spip.net/La-librairie-autoriser
- *   http://programmer.spip.net/Definir-des-boutons
- *   http://programmer.spip.net/Definir-des-onglets
- *   http://programmer.spip.net/Processus-de-la-fonction-autoriser
- *   http://programmer.spip.net/Creer-ou-surcharger-des
+ *   https://programmer.spip.net/La-librairie-autoriser
+ *   https://programmer.spip.net/Definir-des-boutons
+ *   https://programmer.spip.net/Definir-des-onglets
+ *   https://programmer.spip.net/Processus-de-la-fonction-autoriser
+ *   https://programmer.spip.net/Creer-ou-surcharger-des
  *
 ** @{ */
 

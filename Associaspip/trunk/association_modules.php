@@ -80,7 +80,7 @@ function association_navigation_onglets($titre='', $top_exec='', $INSERT_HEAD=TR
 		$res = $commencer_page();
 	}
 	$res .= '<div class="table_page">';
-	$res .= '<h1 class="asso_titre">'. ( $titre?association_langue($titre):_T('asso:gestion_de_lassoc', array('nom'=>$GLOBALS['association_metas']['nom']) ) ) .'</h1>'; // Nom du module. cf:  <http://programmer.spip.org/Contenu-d-un-fichier-exec>
+	$res .= '<h1 class="asso_titre">'. ( $titre?association_langue($titre):_T('asso:gestion_de_lassoc', array('nom'=>$GLOBALS['association_metas']['nom']) ) ) .'</h1>'; // Nom du module. cf:  <https://programmer.spip.net/Contenu-d-un-fichier-exec>
 	if ($onglets_actifs)
 		$res .= '<div class="bandeau_actions barre_onglet clearfix">'. debut_onglet() .$onglets_actifs. fin_onglet() .'</div>'; // Onglets actifs
 	$res .= '</div>';
@@ -163,7 +163,7 @@ function association_navigation_raccourci1($texte, $image, $lien) {
  * @note
  *   Cette fonction remplace le couplet final :
  *   echo fin_gauche(), fin_page();
- *   http://programmer.spip.org/Contenu-d-un-fichier-exec
+ *   https://programmer.spip.net/Contenu-d-un-fichier-exec
  */
 function fin_page_association($FIN_CADRE_RELIEF=TRUE) {
 	if ($FIN_CADRE_RELIEF)

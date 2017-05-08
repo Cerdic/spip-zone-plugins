@@ -1,6 +1,6 @@
 <?php
 
-// http://programmer.spip.net/Recuperer-objet-et-id_objet
+// https://programmer.spip.net/Recuperer-objet-et-id_objet
 function balise_COULEUR($p){
 	// on prend nom de la cle primaire de l'objet pour calculer sa valeur
 	$_id_objet = $p->boucles[$p->id_boucle]->primary;

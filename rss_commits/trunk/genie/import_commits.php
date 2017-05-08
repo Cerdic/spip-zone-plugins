@@ -31,7 +31,7 @@ function genie_import_commits_dist($t) {
 			}
 		}
 		// On insère par lot les nouveaux commits pour éviter un débordement de mémoire
-		// cf. http://programmer.spip.net/sql_insertq_multi,591
+		// cf. https://programmer.spip.net/sql_insertq_multi,591
 		if (count($commits_nouveaux) > 0) {
 			sql_insertq_multi('spip_commits', $commits_nouveaux);
 		} else {

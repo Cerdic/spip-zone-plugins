@@ -13,7 +13,7 @@
 
 	Le multilinguisme est supporté de la façon suivante :
 
--* Utilisation d'une structure unique de rubriques avec traduction des titres et texte des rubriques à l'aide des balises [&lt;multi&gt;->http://programmer.spip.net/Les-Polyglottes-multi];
+-* Utilisation d'une structure unique de rubriques avec traduction des titres et texte des rubriques à l'aide des balises [&lt;multi&gt;->https://programmer.spip.net/Les-Polyglottes-multi];
 -* Utilisation des mécanismes SPIP de traduction des articles. Les articles non traduits sont remplacés par l'article de référence des traductions.
 
 Le formulaire d'exportation se trouve dans le menu Publication de l'espace privé.",

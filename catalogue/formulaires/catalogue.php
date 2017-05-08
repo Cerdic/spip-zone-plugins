@@ -131,11 +131,11 @@ function formulaires_catalogue_traiter($id_article=0)
             set_request('return', $GLOBALS['spipal_metas']['url_retour']);
             set_request('notify_url', $GLOBALS['spipal_metas']['notify_url']);
             // on renvoie le formulaire ainsi cree...
-            $retours['action'] = $GLOBALS['spipal_metas']['url_paypal']; //@ http://programmer.spip.org/Autres-options-de-chargement
+            $retours['action'] = $GLOBALS['spipal_metas']['url_paypal']; //@ https://programmer.spip.net/Autres-options-de-chargement
             $retours['redirect'] = $GLOBALS['spipal_metas']['url_paypal']; //@ http://www.mail-archive.com/spip@rezo.net/msg28067.html
             $retours['editable'] = FALSE; // pour verification+confirmation avant redirection (nouvelle adresse d'action)
             return $retours;
-//            echo redirige_action_post('activer_plugins','activer', 'admin_plugin','', $corps); // http://programmer.spip.org/Fonctions-predefinies-d-actions
+//            echo redirige_action_post('activer_plugins','activer', 'admin_plugin','', $corps); // https://programmer.spip.net/Fonctions-predefinies-d-actions
         }
     } else {
         $envoyer_mail = charger_fonction('envoyer_mail','inc');

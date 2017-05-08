@@ -5,7 +5,7 @@
  */
 
 // Insertion dans le flux SPIP
-//@: http://programmer.spip.org/affiche_milieu
+//@: https://programmer.spip.net/affiche_milieu
 function autartrole_affiche_milieu($flux)
 {
 //	if ($flux['args']['exec']=='articles' AND $id_article = $flux['args']['id_article'])

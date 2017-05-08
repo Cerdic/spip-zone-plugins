@@ -25,7 +25,7 @@
 /// pays anglophones/germanophones/etc. : '@devise@&nbsp;@nombre@'
 /// pour l'usage, cf.
 /// http:///programmer.spip.org/Syntaxe-complete-des-codes-de
-/// http://programmer.spip.org/Codes-de-langue-en-PHP
+/// https://programmer.spip.net/Codes-de-langue-en-PHP
 
 /// pour les mois (definis dans SPIP  sous leur nom complet), voir
 /// http://fr.wikipedia.org/wiki/Mois#Abr.C3.A9viations

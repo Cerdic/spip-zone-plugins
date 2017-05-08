@@ -11,7 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-// http://programmer.spip.net/declarer_tables_principales
+// https://programmer.spip.net/declarer_tables_principales
 function association_declarer_tables_principales($tables_principales) {
 
 	//-- Table CATEGORIES COTISATION ------------------------------------------
@@ -291,7 +291,7 @@ function association_declarer_tables_principales($tables_principales) {
 	return $tables_principales;
 }
 
-// http://programmer.spip.net/declarer_tables_auxiliaires
+// https://programmer.spip.net/declarer_tables_auxiliaires
 function association_declarer_tables_auxiliaires($tables_auxiliaires) {
 	$spip_asso_metas = array(
 		'nom' => "VARCHAR(255) NOT NULL",
@@ -309,7 +309,7 @@ function association_declarer_tables_auxiliaires($tables_auxiliaires) {
 	return $tables_auxiliaires;
 }
 
-// http://programmer.spip.net/declarer_tables_interfaces,379
+// https://programmer.spip.net/declarer_tables_interfaces,379
 function association_declarer_tables_interfaces($tables_interfaces) {
 	$tables_interfaces['table_des_tables']['asso_dons'] = 'asso_dons';
 	$tables_interfaces['table_des_tables']['asso_ventes'] = 'asso_ventes';
@@ -341,7 +341,7 @@ function association_declarer_tables_interfaces($tables_interfaces) {
 	return  $tables_interfaces;
 }
 
-// http://programmer.spip.net/declarer_tables_objets_surnoms
+// https://programmer.spip.net/declarer_tables_objets_surnoms
 function association_declarer_tables_objets_surnoms($objets_surnoms) {
 	// constructions irregulieres ("table" n'est pas "objet" suffixe de "s")
 	// $objets_surnoms["objet"] = "table";

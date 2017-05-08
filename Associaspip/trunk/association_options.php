@@ -2015,7 +2015,7 @@ function association_form_listepdf($objet, $params=array(), $prefixeLibelle='', 
 	}
 	$frm .= '</div>'; //l2.1
 	$champsExtras = association_trouver_iextras("asso_$objet");
-	$desc_table = charger_fonction('trouver_table', 'base'); // https://code.spip.net/@description_table deprecier donc preferer http://programmer.spip.net/trouver_table,620
+	$desc_table = charger_fonction('trouver_table', 'base'); // https://code.spip.net/@description_table deprecier donc preferer https://programmer.spip.net/trouver_table,620
 	$champsPresents = $desc_table("spip_asso_${objet}s");
 	$frm .= '<ul><li class="edit_champs">'; //l2.2
 	foreach ($champsPresents['field'] as $k => $v) { // donner le menu des choix
@@ -2099,7 +2099,7 @@ function association_form_etiquettes($where_adherents, $jointure_adherents='', $
  * @param ressource $reponse_sql
  *   Ressource de requete sql_select sur cette table (avec jointure eventuelle)
  *   https://code.spip.net/@sql_select
- *   http://programmer.spip.net/sql_select,569
+ *   https://programmer.spip.net/sql_select,569
  * @param array $presentation
  *   Tableau decrivant les donnees affichees :
  *   'nom_ou_alias_du_champ' => array('chaine_de:langue_du_libelle_d_entete', 'nom_du_format', 'parametre1', ...)

@@ -100,7 +100,7 @@ function update_spip_asso_membre($id_auteur) {
  * Definition de la periodicite d'execution des taches dans genie/
  *
  * Attention : durees en secondes ; ne pas descendre en dessous de 30 secondes !
- * http://programmer.spip.net/Declarer-une-tache
+ * https://programmer.spip.net/Declarer-une-tache
  * https://contrib.spip.net/Ajouter-une-tache-CRON-dans-un-plugin-SPIP
  */
 function association_taches_generales_cron($crontab) {

@@ -225,7 +225,7 @@ function simplecal_affiche_gauche($flux) {
 
 
 // Liste des contributions d'un auteur (depuis spip 2.1.0)
-// http://programmer.spip.org/compter_contributions_auteur
+// https://programmer.spip.net/compter_contributions_auteur
 function simplecal_compter_contributions_auteur($flux){
     $id_auteur = intval($flux['args']['id_auteur']);
     $nb = sql_countsel("spip_auteurs_evenements as lien", "lien.id_auteur = ".$id_auteur);
@@ -289,7 +289,7 @@ function simplecal_afficher_nombre_objets_associes_a($flux){
 }
 
 // Définir le squelette evenement.html pour les urls de type spip.php?evenement123
-// http://programmer.spip.org/declarer_url_objets
+// https://programmer.spip.net/declarer_url_objets
 function simplecal_declarer_url_objets($array){
     $array[] = 'evenement';
     return $array;

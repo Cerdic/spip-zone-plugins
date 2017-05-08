@@ -1,7 +1,7 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-//cf http://programmer.spip.org/Definir-des-boutons
+//cf https://programmer.spip.net/Definir-des-boutons
 
 // fonction pour le pipeline, n'a rien a effectuer
 function malettre_autoriser(){}

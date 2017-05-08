@@ -13,7 +13,7 @@
 
 	 Multilingualism is supported as follows:
 
-- * Using a unique structure of sections with titles and texts of the sections translated using tags [& lt; multi & gt; -> http://programmer.spip.net/Les-Polyglottes-multi];
+- * Using a unique structure of sections with titles and texts of the sections translated using tags [& lt; multi & gt; -> https://programmer.spip.net/Les-Polyglottes-multi];
 - * Use of translation mechanisms SPIP articles. Untranslated items are replaced by the reference article translations.
 
 The export form can be found in Publication menu of private area.",

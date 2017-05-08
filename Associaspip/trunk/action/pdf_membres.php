@@ -35,7 +35,7 @@ function action_pdf_membres() {
 
 		//On définit les colonnes (champs,largeur,intitulé,alignement)
 		$champsExtras = association_trouver_iextras("asso_$objet");
-		$desc_table = charger_fonction('trouver_table', 'base'); // cf. http://programmer.spip.net/sql_showtable,619
+		$desc_table = charger_fonction('trouver_table', 'base'); // cf. https://programmer.spip.net/sql_showtable,619
 		$champs = $desc_table('spip_asso_membres');
 		$sent = _request('champs');
 		foreach ($champs['field'] as $k => $v) {

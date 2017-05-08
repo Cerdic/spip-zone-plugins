@@ -21,7 +21,7 @@ function cadre_veille_tous_infos() {
 
 
 /** ----- Fonction principale d'execution (exec_*_dist) de la page 'exec/*.php ----- **/
-/**  Pour un exemple type : http://programmer.spip.org/Contenu-d-un-fichier-exec   **/
+/**  Pour un exemple type : https://programmer.spip.net/Contenu-d-un-fichier-exec   **/
 
 function exec_veille_tous_dist(){
 

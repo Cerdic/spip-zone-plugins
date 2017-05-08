@@ -91,7 +91,7 @@ function simplecal_declarer_tables_auxiliaires($tables_auxiliaires){
 	return $tables_auxiliaires;
 }
 
-// cf. http://programmer.spip.org/declarer_tables_interfaces,379
+// cf. https://programmer.spip.net/declarer_tables_interfaces,379
 function simplecal_declarer_tables_interfaces($interface){
 
     // ----------------------------------------

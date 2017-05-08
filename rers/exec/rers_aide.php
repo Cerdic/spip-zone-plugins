@@ -2,7 +2,7 @@
 // rers page d'aide aux adhérents
 //  INUTILE depuis son remplacement en sept 2009 par un fichier PDF.  !!!!!!!!
 
-// doc : http://programmer.spip.org/Contenu-d-un-fichier-exec
+// doc : https://programmer.spip.net/Contenu-d-un-fichier-exec
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');

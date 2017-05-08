@@ -4,7 +4,7 @@
  * Plugin Fil d'Ariane pour SPIP
  * Auteur : Cyril Marion, Ateliers CYM
  *
- * Tres forte inspiration du site http://programmer.spip.org/
+ * Tres forte inspiration du site https://programmer.spip.net/
  * Notamment la rubrique Recuperer-objet-et-id_objet
  */
 

@@ -54,7 +54,7 @@ function exec_compte_bilan() {
 	$query = sql_select(
 		'classe', // select
 		'spip_asso_plan', // from
-		sql_in('classe', array($GLOBALS['association_metas']['classe_charges'],$GLOBALS['association_metas']['classe_produits'],$GLOBALS['association_metas']['classe_contributions_volontaires']), 'NOT'), // where http://programmer.spip.org/sql_in,642
+		sql_in('classe', array($GLOBALS['association_metas']['classe_charges'],$GLOBALS['association_metas']['classe_produits'],$GLOBALS['association_metas']['classe_contributions_volontaires']), 'NOT'), // where https://programmer.spip.net/sql_in,642
 		'classe', // group by
 		'classe' // order by
 	);
