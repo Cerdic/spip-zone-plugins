@@ -5,7 +5,7 @@
 	<version>0.2.0</version>
 	<etat>stable</etat>
 	<description>
-	Applique tidy sur les pages de l'espace public, cf. [->http://www.spip.net/fr_article3070.html].
+	Applique tidy sur les pages de l'espace public, cf. [->https://www.spip.net/fr_article3070.html].
 - Avec PHP 5, fonctionne d&#232;s l'activation, en mode php_tidy.
 - Sinon, installer le binaire <code>tidy</code> et d&#233;finir le chemin du binaire dans <code>options.php</code>:
 _ <code>define('_TIDY_COMMAND', 'tidy');</code>

@@ -242,7 +242,7 @@ _ • [Tüm eklentinin|Eklentini ilk durumuna dönülmesi->@reset@]@install@
 
 Bu logoyu tanımlamak için « Konfigürasyon » düğmesine tıklayarak « Site konfigürasyonu » sayfasına gidiniz.', # MODIF
 	'icone_visiter:nom' => '« Ziyaret Et » düğmesi', # MODIF
-	'insert_head:description' => '[#INSERT_HEAD->http://www.spip.net/fr_article1902.html] komutunu (bu komutu &lt;head&gt; ve &lt;/head&gt; arasında içerseler de içermeseler de) tüm iskeletlerde etkinleştirir . Bu seçenek sayesinde eklentiler javascript (.js) veya stil sayfası (.css) ekleyebilirler.',
+	'insert_head:description' => '[#INSERT_HEAD->https://www.spip.net/fr_article1902.html] komutunu (bu komutu &lt;head&gt; ve &lt;/head&gt; arasında içerseler de içermeseler de) tüm iskeletlerde etkinleştirir . Bu seçenek sayesinde eklentiler javascript (.js) veya stil sayfası (.css) ekleyebilirler.',
 	'insert_head:nom' => '#INSERT_HEAD komutu',
 	'insertions:description' => 'DiKKAT : geliştirilmekte olan gereç !! [[%insertions%]]',
 	'insertions:nom' => 'Otomatik düzeltmeler',
@@ -530,7 +530,7 @@ _ Kullanılan SPIP fonksiyonu şudur : <code>_T(\'zincir\')</code>.
 
 Bu gereç argüman da kabûl eder. Örneğin <code><:chaine{arg1=bir metin, arg2=bir başka metin}:></code> kısaltması 2 argümanın şu zincire geçirilmesine izin verir : <code>\'chaine\'=>\'İşte benim argümanlarım : @arg1@ et @arg2@\'</code>.
 
-<code>\'zincir\'</code> anahtarının dil dosyalarında düzgün biçimde tanımlandığından emin olun. [Bu konuyla ilgili şu adresteki ->http://www.spip.net/fr_article2128.html] SPIP belgelerine göz atınız.', # MODIF
+<code>\'zincir\'</code> anahtarının dil dosyalarında düzgün biçimde tanımlandığından emin olun. [Bu konuyla ilgili şu adresteki ->https://www.spip.net/fr_article2128.html] SPIP belgelerine göz atınız.', # MODIF
 	'toutmulti:nom' => 'Çok dilli bloklar',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'Bu site çok yakında tekrar yayına başlayacak.
@@ -548,7 +548,7 @@ Aşağıdaki öneriler SQL \'ORDER BY\' fonksiyonuna dayanmaktadır: bu kişisel
 	'trousse_balises:nom' => 'Komut kutusu',
 	'type_urls:description' => '@puce@ SPIP, sitenizin sayfalarına erişime izin veren bağlantılar üretmek için için  bir takım URL\'ler sunar. 
 
-Daha fazla bilgi için : [->http://www.spip.net/fr_article765.html]. « [.->boites_privees] » gereci size her SPIP nesnesinin sayfasında ona bağlı özel URL\'yi görme olanağı tanır.
+Daha fazla bilgi için : [->https://www.spip.net/fr_article765.html]. « [.->boites_privees] » gereci size her SPIP nesnesinin sayfasında ona bağlı özel URL\'yi görme olanağı tanır.
 [[%radio_type_urls3%]]
 <q3>@_CS_ASTER@{html}, {propre}, {propre2}, {libres} veya {arborescentes} formatlarını kullanabilmek için SPIP sitesinin kök dizininin "htaccess.txt" dosyasını ".htaccess" ismiyle kopyalayın (bu dosyaya koymuş olabileceğiniz başka ayarları ezmemeye dikkat edin); eğer siteniz bir "alt-dizinde" ise bu dosyada ayrıca "RewriteBase" satırını da düzenlemelisiniz. Bu şekilde tanımlanan URL\'ler SPIP dosyalarına yönlendirilecektir.</q3>
 
@@ -665,7 +665,7 @@ Site yöneticisi olarak siz de burada -- eğer birden fazlaysa iki noktayla birb
 	'webmestres:nom' => 'Webmaster listesi',
 
 	// X
-	'xml:description' => 'Xml onaylayıcısını, kamusal alan için [şu belgede->http://www.spip.net/fr_article3541.html] belirtildiği gibi aktive eder. « Analyse XML » başlıklı bir düğme diğer yönetim düğmelerine eklenecektir.', # MODIF
+	'xml:description' => 'Xml onaylayıcısını, kamusal alan için [şu belgede->https://www.spip.net/fr_article3541.html] belirtildiği gibi aktive eder. « Analyse XML » başlıklı bir düğme diğer yönetim düğmelerine eklenecektir.', # MODIF
 	'xml:nom' => 'XML onaylayıcısı'
 );
 

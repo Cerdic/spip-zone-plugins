@@ -26,7 +26,7 @@ _ Ligazón de test : [->test@test.com] (vexa a páxina completamente).[[%envelop
 	'admins_seuls' => 'Só para administradores/as',
 	'aff_tout:description' => 'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de ton site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
 
-Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et t\'évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de tes squelettes.',
+Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->https://www.spip.net/fr_article4250.html], cet outil automatise le processus et t\'évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de tes squelettes.',
 	'aff_tout:nom' => 'Affiche tout',
 	'attente' => 'En espera...',
 	'auteur_forum:description' => 'Invite a todos os autores de mensaxes públicas a fornecer (cando menos cunha letra!) un nome e/ou un correo co fin de evitar as colaboracións totalmente anónimas. Esta utilidade procede a facer unha verificación JavaScript sobre a caixa de correo do visitante.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
@@ -292,7 +292,7 @@ _ • [De todo o módulo|Volver ao estado inicial do módulo->@reset@]@install@
 
 Para definir o logo, vaia á páxina « Configuración do web » premendo sobre o botón « Configuración ».', # MODIF
 	'icone_visiter:nom' => 'Botón « Visitar »', # MODIF
-	'insert_head:description' => 'Activa automaticamente a baliza [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] en todos os esqueletos, que teñan ou non esta baliza entre &lt;head&gt; e &lt;/head&gt;. Mercé a esta opción, os plugins poderán inserir javascript (.js) ou follas de estilo (.css).',
+	'insert_head:description' => 'Activa automaticamente a baliza [#INSERT_HEAD->https://www.spip.net/fr_article1902.html] en todos os esqueletos, que teñan ou non esta baliza entre &lt;head&gt; e &lt;/head&gt;. Mercé a esta opción, os plugins poderán inserir javascript (.js) ou follas de estilo (.css).',
 	'insert_head:nom' => 'Baliza #INSERT_HEAD',
 	'insertions:description' => 'AVISO : ferramenta en proceso de desenvolvemento !! [[%insertions%]]',
 	'insertions:nom' => 'Correccións automáticas',
@@ -600,7 +600,7 @@ A sintaxe <html>#TITRE_XXX{yy}</html> é igualmente aceptada. Exemplo : <html>#T
 	'toutmulti:aide' => 'Bloques multilingües : <b><:trad:></b>', # MODIF
 	'toutmulti:description' => 'Ao instar isto, pode facelo xa nos seus esqueletos, esta utilidade permítelle usar librementemente as cadeas de linguas de SPIP ou dos seus esqueletos: nos contidos do seu web (artigos, títulos, mensaxes, etc.) coa axuda co atallo <code><:chaine:></code>.
 
-Consulte [aqui->http://www.spip.net/fr_article2128.html] a documentación de SPIP sobre este asunto.
+Consulte [aqui->https://www.spip.net/fr_article2128.html] a documentación de SPIP sobre este asunto.
 
 Esta ferramenta acepta igualmente os argumentos introducidos por SPIP 2.0. Por exemplo, o atallo <code><:miña_cadea{nome=Carlos Martín, idade=37}:>/code> permite pasar dous parámetros á cadea seguinte: <code>\'miña_cadea\'=>"Bos días, eu son @nome@ e teño @idade@ anos\\"</code>.
 
@@ -635,7 +635,7 @@ _ Está dispoñible igualmente un argumento para os seus contidos: sitúe <code>
 	'trousse_balises:nom' => 'Caixa de balizas',
 	'type_urls:description' => '@puce@ SPIP ofrece unha elección entre varios xogos de URL para facer as ligazóns de acceso ás páxinas do seu web :
 
-Máis info : [->http://www.spip.net/fr_article765.html].
+Máis info : [->https://www.spip.net/fr_article765.html].
 A ferramenta « [.->boites_privees] » permite ver na páxina de cada obxecto SPIP o URL propio asociado.
 [[%radio_type_urls3%]]
 <q3>@_CS_ASTER@para usar os formatos {html}, {proprias} ou {proprias2}, {libres} ou {arborescentes} copie o ficheiro "htaccess.txt" do cartafol raíz de SPIP co nome ".htaccess" (preste atención a non borrar outras regraxes que vostede teña posto nese ficheiro); se o seu web está nun subcartafol, deberá tamén editar a liña "RewriteBase" neste ficheiro. Os URL definidos serán logo redirixidos cara aos ficheiros de SPIP.</q3>
@@ -755,7 +755,7 @@ En tanto que webmáster, ten dereito a modificar esta lista de id -- separados p
 	'webmestres:nom' => 'Lista de webmásters',
 
 	// X
-	'xml:description' => 'Activa o validador xml para o espazo público tal como se describe na [documentación->http://www.spip.net/fr_article3541.html]. Un botón titulado « Analise XML » foi engadido aos outros botóns de administración.', # MODIF
+	'xml:description' => 'Activa o validador xml para o espazo público tal como se describe na [documentación->https://www.spip.net/fr_article3541.html]. Un botón titulado « Analise XML » foi engadido aos outros botóns de administración.', # MODIF
 	'xml:nom' => 'Validador XML'
 );
 

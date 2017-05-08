@@ -51,7 +51,7 @@ function copie_locale($source, $mode='auto') {
 				curl_setopt($ch, CURLOPT_URL, $source);
 				$fp = fopen(_DIR_RACINE.$local, 'w');
 				curl_setopt($ch, CURLOPT_FILE, $fp);
-				curl_setopt($ch, CURLOPT_USERAGENT, $GLOBALS['spip_version_affichee']." (http://www.spip.net/)");
+				curl_setopt($ch, CURLOPT_USERAGENT, $GLOBALS['spip_version_affichee']." (https://www.spip.net/)");
 				curl_setopt($ch, CURLOPT_REFERER, $GLOBALS['meta']["adresse_site"].'/');
 				curl_exec ($ch);
 				curl_close ($ch);
@@ -593,7 +593,7 @@ function lance_requete($method, $scheme, $host, $path, $port, $noproxy, $refuse_
 
 	$req = "$method $path $vers\r\n"
 	. "Host: $host\r\n"
-	. "User-Agent: SPIP-".$GLOBALS['spip_version_affichee']." (http://www.spip.net/)\r\n"
+	. "User-Agent: SPIP-".$GLOBALS['spip_version_affichee']." (https://www.spip.net/)\r\n"
 	. ($refuse_gz ? '' : "Accept-Encoding: gzip\r\n")
 	. (!$site ? '' : "Referer: $site/$referer\r\n")
 	. (!$proxy_user ? '' :

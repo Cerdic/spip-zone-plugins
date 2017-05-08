@@ -121,7 +121,7 @@ les listes d'items (liste d'articles, de breves, de rubriques ...)
 			qui contient un ou des li.item
 
 les formulaires
-	selon convention décrite dans http://www.spip.net/fr_article3791.html
+	selon convention décrite dans https://www.spip.net/fr_article3791.html
 
 les tableaux de données
 	tables.spip

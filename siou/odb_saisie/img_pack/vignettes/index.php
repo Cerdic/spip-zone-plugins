@@ -6,7 +6,7 @@
 </head>
 <body>
 	<center>
-		<h1>Index des vignettes de <a href='http://www.spip.net'>Spip</a></h1>
+		<h1>Index des vignettes de <a href='https://www.spip.net'>Spip</a></h1>
 <table><tr><th colspan='10'>Format png &amp; gif</th>
 <?php
 	$myDir = opendir('.');

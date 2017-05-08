@@ -17,7 +17,7 @@
 		[es] Juego de esqueletos por defecto en SPIP 2.0 y SPIP 2.1. Esos esqueletos son basados en Layout Gala y su proposito es pedag&oacute;gico. Incorporan los microformatos.
 		</multi>
 	</description>
-	<lien>http://www.spip.net/fr_article3784.html</lien>
+	<lien>https://www.spip.net/fr_article3784.html</lien>
 	<prefix>dist</prefix>
 	<necessite id="SPIP" version="[2.1.0 dev;)" />
 </plugin>

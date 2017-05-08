@@ -1,6 +1,6 @@
 #Cartes - un générateur de cartes dynamiques "simples""
 
-Ce plugin pour [SPIP](http://www.spip.net) ajoute un objet "carte" (au même titre que les articles, les rubriques, les auteurs ...) et permet de configurer des cartes dans les moindres détails (du moins au maximum).
+Ce plugin pour [SPIP](https://www.spip.net) ajoute un objet "carte" (au même titre que les articles, les rubriques, les auteurs ...) et permet de configurer des cartes dans les moindres détails (du moins au maximum).
 
 
 ## Les plugins connexes

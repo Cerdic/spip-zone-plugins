@@ -2,7 +2,7 @@
 /**
 Docs :
 
-Formulaires CVT par l'exemple : http://www.spip.net/fr_article3796.html
+Formulaires CVT par l'exemple : https://www.spip.net/fr_article3796.html
 
 */
 

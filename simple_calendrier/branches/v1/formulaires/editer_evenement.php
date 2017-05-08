@@ -14,7 +14,7 @@ include_spip('inc/simplecal_utils');
 // NOTES : 
 // paramètres des fonctions = fournis lors de l'appel du formulaire par #FORMULAIRE_xxx{arg1, arg2, arg3}
 // dans editer_evenement.html, d'ou vient le #ENV{action} ?
-// => reponse : du tableau de valeurs de la fonction charger. S'il n'y est pas (recommandé), il s'agit de l'url de la page en cours. cf. http://www.spip.net/fr_article4151.html - section "champs particuliers"
+// => reponse : du tableau de valeurs de la fonction charger. S'il n'y est pas (recommandé), il s'agit de l'url de la page en cours. cf. https://www.spip.net/fr_article4151.html - section "champs particuliers"
 // id_evenement sert pour la fonction Traiter (et pour le choix de la rubrique parente.)
 
 

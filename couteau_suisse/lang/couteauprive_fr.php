@@ -59,7 +59,7 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'admins_seuls' => 'Les administrateurs seulement',
 	'aff_tout:description' => 'Il parfois utile d’afficher toutes les rubriques ou tous les auteurs de votre site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n’affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
 
-Bien qu’il soit possible de contourner ce comportement à l’aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d’ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.',
+Bien qu’il soit possible de contourner ce comportement à l’aide du critère [<html>{tout}</html>->https://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d’ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.',
 	'aff_tout:nom' => 'Affiche tout',
 	'alerte_urgence:description' => 'Affiche en tête de toutes les pages publiques un bandeau d’alerte pour diffuser le message d’urgence défini ci-dessous.
 _ Les balises <code><multi/></code> sont recommandées en cas de site multilingue.[[%alerte_message%]]',
@@ -452,7 +452,7 @@ Arguments disponibles : {zone}, {format} et/ou {id}.',
 
 Pour définir ce logo, rendez-vous sur la page «<:titre_configuration:>» en cliquant sur le bouton «<:icone_configuration_site:>».',
 	'icone_visiter:nom' => 'Bouton « <:icone_visiter_site:> »',
-	'insert_head:description' => 'Active automatiquement la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] sur tous les squelettes, qu\'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Grâce à cette option, les plugins pourront insérer du JavaScript (.js) ou des feuilles de style (.css).',
+	'insert_head:description' => 'Active automatiquement la balise [#INSERT_HEAD->https://www.spip.net/fr_article1902.html] sur tous les squelettes, qu\'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Grâce à cette option, les plugins pourront insérer du JavaScript (.js) ou des feuilles de style (.css).',
 	'insert_head:nom' => 'Balise #INSERT_HEAD',
 	'insertions:description' => 'ATTENTION : outil en cours de développement !! [[%insertions%]]',
 	'insertions:nom' => 'Corrections automatiques',
@@ -891,7 +891,7 @@ Exemple d\'utilisation : le titre d\'un livre cité dans le titre d\'un article,
 	'toutmulti:aide' => 'Blocs multilingues : <b><:ma_chaine:></b>',
 	'toutmulti:description' => 'À l’instar de ce vous pouvez déjà faire dans vos squelettes, cet outil vous permet d’utiliser librement les chaînes de langues (de SPIP ou de vos squelettes) dans tous les contenus de votre site (articles, titres, messages, etc.) à l’aide du raccourci <code><:</code><code>ma_chaine:></code>.
 
-Consultez [ici ->http://www.spip.net/fr_article2128.html] la documentation de SPIP à ce sujet.
+Consultez [ici ->https://www.spip.net/fr_article2128.html] la documentation de SPIP à ce sujet.
 
 Cet outil accepte également les arguments introduits par SPIP 2.0. Par exemple, le raccourci <code><:</code><code>ma_chaine{nom=Charles Martin, age=37}:></code> permet de passer deux paramètres à la chaîne suivante : <code>"ma_chaine"=>"Bonjour, je suis @</code><code>nom@ et j\'ai @</code><code>age@ ans"</code>.
 
@@ -947,7 +947,7 @@ _ Un modèle est également disponible pour vos contenus : placez <code><bolo300
 	'trousse_balises:nom' => 'Trousse à balises',
 	'type_urls:description' => '@puce@ SPIP offre un choix sur plusieurs jeux d\'URLs pour fabriquer les liens d\'accès aux pages de votre site.
 
-Plus d\'infos : [->http://www.spip.net/fr_article765.html]. L\'outil « [.->boites_privees] » vous permet de voir sur la page de chaque objet SPIP l\'URL propre associée.
+Plus d\'infos : [->https://www.spip.net/fr_article765.html]. L\'outil « [.->boites_privees] » vous permet de voir sur la page de chaque objet SPIP l\'URL propre associée.
 [[%radio_type_urls3%]]
 <q3>@_CS_ASTER@pour utiliser les formats {html}, {propres}, {propres2}, {libres} ou {arborescentes}, recopiez le fichier &quot;htaccess.txt&quot; du répertoire de base du site SPIP sous le sous le nom &quot;.htaccess&quot; (attention à ne pas écraser d\'autres réglages que vous pourriez avoir mis dans ce fichier) ; si votre site est en &quot;sous-répertoire&quot;, vous devrez aussi éditer la ligne &quot;RewriteBase&quot; ce fichier. Les URLs définies seront alors redirigées vers les fichiers de SPIP.</q3>
 
@@ -1076,7 +1076,7 @@ En tant que webmestre vous-même, vous avez ici les droits de modifier cette lis
 	'webmestres:nom' => 'Liste des webmestres',
 
 	// X
-	'xml:description' => 'Active le validateur XML pour l’espace public tel qu’il est décrit dans la [documentation de SPIP->http://www.spip.net/fr_article3541.html]. Cet outil n\'est visible que des administrateurs du site : un bouton intitulé « Analyse XML » est ajouté aux autres boutons d’administration.
+	'xml:description' => 'Active le validateur XML pour l’espace public tel qu’il est décrit dans la [documentation de SPIP->https://www.spip.net/fr_article3541.html]. Cet outil n\'est visible que des administrateurs du site : un bouton intitulé « Analyse XML » est ajouté aux autres boutons d’administration.
 
 @puce@ Utile notamment pour valider la syntaxe de vos pages finales, et résoudre les problèmes d’accessibilité du Web aux déficients visuels.',
 	'xml:nom' => 'Validateur XML'

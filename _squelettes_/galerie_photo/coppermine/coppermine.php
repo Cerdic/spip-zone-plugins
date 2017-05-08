@@ -1,7 +1,7 @@
 <?php
 
 // Plugin pour interfacer SPIP 1.9 et la Galerie Photo Coppermine
-// http://www.spip.net - http://coppermine.sourceforge.net
+// https://www.spip.net - http://coppermine.sourceforge.net
 //
 // Auteur : Philippe Drouot - phil at africacomputing dot org
 // (c) 2006 - Distribue sous licence GNU/GPL

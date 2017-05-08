@@ -1,6 +1,6 @@
 <?php
 // traitement CVT du formulaire lettre
-// doc. http://www.spip.net/fr_article3796.html
+// doc. https://www.spip.net/fr_article3796.html
 
 // TODO possible
 // avoir une option de confirmation par email

@@ -3,7 +3,7 @@
  * Formulaire d'inscription
  * 
  * @since SPIP 2.0
- * @see http://www.spip.net/fr_article3796.html
+ * @see https://www.spip.net/fr_article3796.html
  * @see formulaires/spip_listes_inscription.html
  * 		qui est le squelette de construction
  * 		utilisé ici

@@ -143,7 +143,7 @@ function balise_PUCE_dist($p) {
 // #DATE
 // Cette fonction sait aller chercher dans le contexte general
 // quand #DATE est en dehors des boucles
-// http://www.spip.net/fr_article1971.html
+// https://www.spip.net/fr_article1971.html
 function balise_DATE_dist ($p) {
 	$_date = champ_sql('date', $p);
 	$p->code = "$_date";
@@ -152,7 +152,7 @@ function balise_DATE_dist ($p) {
 }
 
 // #DATE_REDAC
-// http://www.spip.net/fr_article1971.html
+// https://www.spip.net/fr_article1971.html
 function balise_DATE_REDAC_dist ($p) {
 	$_date = champ_sql('date_redac', $p);
 	$p->code = "$_date";
@@ -161,7 +161,7 @@ function balise_DATE_REDAC_dist ($p) {
 }
 
 // #DATE_MODIF
-// http://www.spip.net/fr_article1971.html
+// https://www.spip.net/fr_article1971.html
 function balise_DATE_MODIF_dist ($p) {
 	$_date = champ_sql('date_modif', $p);
 	$p->code = "$_date";
@@ -170,7 +170,7 @@ function balise_DATE_MODIF_dist ($p) {
 }
 
 // #DATE_NOUVEAUTES
-// http://www.spip.net/fr_article1971.html
+// https://www.spip.net/fr_article1971.html
 function balise_DATE_NOUVEAUTES_dist($p) {
 	$p->code = "((lire_meta('quoi_de_neuf') == 'oui'
 	AND @file_exists(_DIR_SESSIONS . 'mail.lock')) ?
@@ -461,7 +461,7 @@ function balise_SPIP_CRON_dist ($p) {
 
 
 // #INTRODUCTION
-// http://www.spip.net/@introduction
+// https://www.spip.net/@introduction
 function balise_INTRODUCTION_dist ($p) {
 	$_type = $p->type_requete;
 	$_texte = champ_sql('texte', $p);
@@ -486,8 +486,8 @@ function balise_LANG_dist ($p) {
 
 // #LESAUTEURS
 // les auteurs d'un article (ou d'un article syndique)
-// http://www.spip.net/fr_article902.html
-// http://www.spip.net/fr_article911.html
+// https://www.spip.net/fr_article902.html
+// https://www.spip.net/fr_article911.html
 function balise_LESAUTEURS_dist ($p) {
 	// Cherche le champ 'lesauteurs' dans la pile
 	$_lesauteurs = champ_sql('lesauteurs', $p); 
@@ -539,7 +539,7 @@ function balise_PETITION_dist ($p) {
 
 
 // #POPULARITE
-// http://www.spip.net/fr_article1846.html
+// https://www.spip.net/fr_article1846.html
 function balise_POPULARITE_dist ($p) {
 	$_popularite = champ_sql('popularite', $p);
 	$p->code = "(ceil(min(100, 100 * $_popularite
@@ -776,7 +776,7 @@ function code_invalideur_forums($p, $code) {
 // Reference a l'URL de la page courante
 // Attention dans un INCLURE() ou une balise dynamique on n'a pas le droit de
 // mettre en cache #SELF car il peut correspondre a une autre page (attaque XSS)
-// http://www.spip.net/@self
+// https://www.spip.net/@self
 function balise_SELF_dist($p) {
 	$p->code = 'quote_amp($GLOBALS["clean_link"]->getUrl())';
 	$p->statut = 'php';

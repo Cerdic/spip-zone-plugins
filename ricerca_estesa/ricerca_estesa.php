@@ -1,7 +1,7 @@
 <?php
 
 // {recherche}
-// http://www.spip.net/@recherche
+// https://www.spip.net/@recherche
 // http://code.spip.net/@critere_recherche_dist
 function critere_recherche_ext($idb, &$boucles, $crit) {
 	global $table_des_tables;

@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de https://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -270,7 +270,7 @@ _ • [De todo o m&oacute;dulo|Volver ao estado inicial do m&oacute;dulo->@reset
 
 Para definir o logo, vaia &aacute; p&aacute;xina &laquo;&nbsp;Configuraci&oacute;n do web&nbsp;&raquo; premendo sobre o bot&oacute;n &laquo;&nbsp;Configuraci&oacute;n&nbsp;&raquo;.',
 	'icone_visiter:nom' => 'Bot&oacute;n &laquo;&nbsp;Visitar&nbsp;&raquo;',
-	'insert_head:description' => 'Activa automaticamente a baliza [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] en todos os esqueletos, que te&ntilde;an ou non esta baliza entre &lt;head&gt; e &lt;/head&gt;. Merc&eacute; a esta opci&oacute;n, os plugins poder&aacute;n inserir javascript (.js) ou follas de estilo (.css).',
+	'insert_head:description' => 'Activa automaticamente a baliza [#INSERT_HEAD->https://www.spip.net/fr_article1902.html] en todos os esqueletos, que te&ntilde;an ou non esta baliza entre &lt;head&gt; e &lt;/head&gt;. Merc&eacute; a esta opci&oacute;n, os plugins poder&aacute;n inserir javascript (.js) ou follas de estilo (.css).',
 	'insert_head:nom' => 'Baliza #INSERT_HEAD',
 	'insertions:description' => 'AVISO : ferramenta en proceso de desenvolvemento !! [[%insertions%]]',
 	'insertions:nom' => 'Correcci&oacute;ns autom&aacute;ticas',
@@ -571,7 +571,7 @@ A sintaxe <html>#TITRE_XXX{yy}</html> &eacute; igualmente aceptada. Exemplo : <h
 	'toutmulti:aide' => 'Bloques multiling&uuml;es&nbsp;: <b><:trad:></b>',
 	'toutmulti:description' => 'Ao instar isto, pode facelo xa nos seus esqueletos, esta utilidade perm&iacute;telle usar librementemente as cadeas de linguas de SPIP ou dos seus esqueletos: nos contidos do seu web (artigos, t&iacute;tulos, mensaxes, etc.) coa axuda co atallo <code><:chaine:></code>.
 
-Consulte [aqui->http://www.spip.net/fr_article2128.html] a documentaci&oacute;n de SPIP sobre este asunto.
+Consulte [aqui->https://www.spip.net/fr_article2128.html] a documentaci&oacute;n de SPIP sobre este asunto.
 
 Esta ferramenta acepta igualmente os argumentos introducidos por SPIP 2.0. Por exemplo, o atallo <code><:mi&ntilde;a_cadea{nome=Carlos Mart&iacute;n, idade=37}:>/code> permite pasar dous par&aacute;metros &aacute; cadea seguinte: <code>\'mi&ntilde;a_cadea\'=>"Bos d&iacute;as, eu son @nome@ e te&ntilde;o @idade@ anos\\"</code>.
 
@@ -594,7 +594,7 @@ As propostas que seguen est&aacute;n baseadas na funcionalidade SQL \'ORDER BY\'
 	'tri_titre' => 'Ordenaci&oacute;n sobre o t&iacute;tulo (ORDER BY 0+titre,titre)',
 	'type_urls:description' => '@puce@ SPIP ofrece unha elecci&oacute;n entre varios xogos de URL para facer as ligaz&oacute;ns de acceso &aacute;s p&aacute;xinas do seu web :
 
-M&aacute;is info : [->http://www.spip.net/fr_article765.html].
+M&aacute;is info : [->https://www.spip.net/fr_article765.html].
 A ferramenta &laquo;&nbsp;[.->boites_privees]&nbsp;&raquo; permite ver na p&aacute;xina de cada obxecto SPIP o URL propio asociado.
 [[%radio_type_urls3%]]
 <q3>@_CS_ASTER@para usar os formatos {html}, {proprias} ou {proprias2}, {libres} ou {arborescentes} copie o ficheiro "htaccess.txt" do cartafol ra&iacute;z de SPIP co nome ".htaccess" (preste atenci&oacute;n a non borrar outras regraxes que vostede te&ntilde;a posto nese ficheiro); se o seu web est&aacute; nun subcartafol, deber&aacute; tam&eacute;n editar a li&ntilde;a "RewriteBase" neste ficheiro. Os URL definidos ser&aacute;n logo redirixidos cara aos ficheiros de SPIP.</q3>
@@ -714,7 +714,7 @@ En tanto que webm&aacute;ster, ten dereito a modificar esta lista de id -- separ
 	'webmestres:nom' => 'Lista de webm&aacute;sters',
 
 	// X
-	'xml:description' => 'Activa o validador xml para o espazo p&uacute;blico tal como se describe na [documentaci&oacute;n->http://www.spip.net/fr_article3541.html]. Un bot&oacute;n titulado &laquo;&nbsp;Analise XML&nbsp;&raquo; foi engadido aos outros bot&oacute;ns de administraci&oacute;n.',
+	'xml:description' => 'Activa o validador xml para o espazo p&uacute;blico tal como se describe na [documentaci&oacute;n->https://www.spip.net/fr_article3541.html]. Un bot&oacute;n titulado &laquo;&nbsp;Analise XML&nbsp;&raquo; foi engadido aos outros bot&oacute;ns de administraci&oacute;n.',
 	'xml:nom' => 'Validador XML'
 );
 

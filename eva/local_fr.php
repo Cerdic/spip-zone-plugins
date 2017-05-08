@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'contributions_forum' => 'contribution(s) au forum',
-'copyright' => 'Ce site utilise <a href="http://www.spip.net/fr">(#SPIP_VERSION)</a> et utilise le squelette <a href="http://spip-edu.edres74.net/eva/">EVA-Web 2.3</a>',
+'copyright' => 'Ce site utilise <a href="https://www.spip.net/fr">(#SPIP_VERSION)</a> et utilise le squelette <a href="http://spip-edu.edres74.net/eva/">EVA-Web 2.3</a>',
 '' => '',
 
 // D

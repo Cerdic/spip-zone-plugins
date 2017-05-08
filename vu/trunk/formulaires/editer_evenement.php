@@ -2,7 +2,7 @@
 
 /*	Fichier PHP du formulaire CVT : editer_evenement. Etroitement 	*/
 /*	lie a la structure HTML du meme nom. Pour plus d'infos sur 	*/
-/*	les formulaires CVT : http://www.spip.net/fr_article3800.html .	*/
+/*	les formulaires CVT : https://www.spip.net/fr_article3800.html .	*/
 /*	Ces deux sont conjointement appeles par la balise 		*/
 /*	#FORMULAIRE_EDITER_EVENEMENT dans le fond				*/ 
 /*	'prive/editer/evenement.html'.					*/

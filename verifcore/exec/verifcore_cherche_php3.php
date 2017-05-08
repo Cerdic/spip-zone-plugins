@@ -25,7 +25,7 @@ function exec_verifcore_cherche_php3() {
   if( count($verifcore_fichierphp3) != 0){
     debut_cadre_trait_couleur("", false, "","Recherche fichiers php3");
     echo "Depuis spip 1.9, les fichiers php3 ont disparu du coeur de spip (mis &agrave; part inc-public.html) c'est pourquoi je vous propose de lister les fichiers php3 qui vous reste sur votre serveur.<br />\n" ;
-    echo "Suivez les conseils de l'article  <a href=\"http://www.spip.net/fr_article3370.html\" >la migration vers spip 1.9 de spip.net</a><br /> " ;
+    echo "Suivez les conseils de l'article  <a href=\"https://www.spip.net/fr_article3370.html\" >la migration vers spip 1.9 de spip.net</a><br /> " ;
     echo "Voici la liste des fichiers php3 : <br />\n" ;
     foreach ($verifcore_fichierphp3 as $file){
       echo "<li>$file</li>\n" ;

@@ -1,7 +1,7 @@
-> quote [SPIP->http://www.spip.net]
+> quote [SPIP->https://www.spip.net]
 
 indented:
-   > quote [SPIP->http://www.spip.net]
+   > quote [SPIP->https://www.spip.net]
 
 no space after `>`:
->quote [SPIP->http://www.spip.net]
+>quote [SPIP->https://www.spip.net]

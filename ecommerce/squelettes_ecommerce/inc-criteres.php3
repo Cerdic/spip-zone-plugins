@@ -21,7 +21,7 @@ define("_INC_CRITERES", "1");
 
 
 // {racine}
-// http://www.spip.net/@racine
+// https://www.spip.net/@racine
 function critere_racine_dist($idb, &$boucles, $crit) {
 	$not = $crit->not;
 	$boucle = &$boucles[$idb];
@@ -34,7 +34,7 @@ function critere_racine_dist($idb, &$boucles, $crit) {
 }
 
 // {exclus}
-// http://www.spip.net/@exclus
+// https://www.spip.net/@exclus
 function critere_exclus_dist($idb, &$boucles, $crit) {
 	$param = $crit->op;
 	$not = $crit->not;
@@ -49,7 +49,7 @@ function critere_exclus_dist($idb, &$boucles, $crit) {
 }
 
 // {doublons} ou {unique}
-// http://www.spip.net/@doublons
+// https://www.spip.net/@doublons
 // attention: boucle->doublons designe une variable qu'on affecte
 function critere_doublons_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
@@ -69,7 +69,7 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 }
 
 // {lang_select}
-// http://www.spip.net/@lang_select
+// https://www.spip.net/@lang_select
 function critere_lang_select_dist($idb, &$boucles, $crit) {
 	if (!($param = $crit->param[1][0]->texte)) $param = 'oui';
 	if ($crit->not)	$param = ($param=='oui') ? 'non' : 'oui';
@@ -78,7 +78,7 @@ function critere_lang_select_dist($idb, &$boucles, $crit) {
 }
 
 // {debut_xxx}
-// http://www.spip.net/@debut_
+// https://www.spip.net/@debut_
 function critere_debut_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$boucle->limit = 'intval($GLOBALS["debut' .
@@ -89,7 +89,7 @@ function critere_debut_dist($idb, &$boucles, $crit) {
 }
 
 // {recherche}
-// http://www.spip.net/@recherche
+// https://www.spip.net/@recherche
 function critere_recherche_dist($idb, &$boucles, $crit) {
 
 	$boucle = &$boucles[$idb];
@@ -109,7 +109,7 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 }
 
 // {traduction}
-// http://www.spip.net/@traduction
+// https://www.spip.net/@traduction
 //   (id_trad>0 AND id_trad=id_trad(precedent))
 //    OR id_article=id_article(precedent)
 function critere_traduction_dist($idb, &$boucles, $crit) {
@@ -127,7 +127,7 @@ function critere_traduction_dist($idb, &$boucles, $crit) {
 }
 
 // {origine_traduction}
-// http://www.spip.net/@origine_traduction
+// https://www.spip.net/@origine_traduction
 function critere_origine_traduction_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$boucle->where[] = $boucle->id_table.".id_trad = "
@@ -136,7 +136,7 @@ function critere_origine_traduction_dist($idb, &$boucles, $crit) {
 
 
 // {meme_parent}
-// http://www.spip.net/@meme_parent
+// https://www.spip.net/@meme_parent
 function critere_meme_parent_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	if ($boucle->type_requete == 'rubriques') {
@@ -155,7 +155,7 @@ function critere_meme_parent_dist($idb, &$boucles, $crit) {
 }
 
 // {branche ?}
-// http://www.spip.net/@branche
+// https://www.spip.net/@branche
 function critere_branche_dist($idb, &$boucles, $crit) {
 	$not = $crit->not;
 	$boucle = &$boucles[$idb];
@@ -176,7 +176,7 @@ function critere_branche_dist($idb, &$boucles, $crit) {
 }
 
 // Tri : {par xxxx}
-// http://www.spip.net/@par
+// https://www.spip.net/@par
 function critere_par_dist($idb, &$boucles, $crit) {
   critere_parinverse($idb, $boucles, $crit, '') ;
 }
@@ -270,7 +270,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 
 
 // {inverse}
-// http://www.spip.net/@inverse
+// https://www.spip.net/@inverse
 // obsolete. utiliser {!par ...}
 function critere_inverse_dist($idb, &$boucles, $crit) {
 
@@ -484,7 +484,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 	  // cas special: statut=
 	  // si on l'invoque dans une boucle il faut interdire
 	  // a la boucle de mettre ses propres criteres de statut
-	  // http://www.spip.net/@statut (a documenter)
+	  // https://www.spip.net/@statut (a documenter)
 	if ($col == 'statut')
 		  $boucle->where['statut'] = '1';
 

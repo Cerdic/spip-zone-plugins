@@ -211,7 +211,7 @@ function spiplistes_courrier_version_texte($in) {
 	$out = preg_replace("/<style[^>]*>[^<]*<\/style>/", '', $out);
 	
 	// les puces
-	// @see http://www.spip.net/fr_article1825.html
+	// @see https://www.spip.net/fr_article1825.html
 	if (isset($GLOBALS['puce'])) {
 		$out = str_replace($GLOBALS['puce'], $eol.'-', $out);
 	}

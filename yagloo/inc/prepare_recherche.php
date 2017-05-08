@@ -228,7 +228,7 @@ function Yagloo_recuperer_pages($urls = array()) {
 		curl_setopt($ch[$url], CURLOPT_REFERER,
 		$GLOBALS['meta']['adresse_site'].'/');
 		curl_setopt($ch[$url], CURLOPT_USERAGENT,
-		"SPIP-".$GLOBALS['spip_version_affichee']." (http://www.spip.net/)");
+		"SPIP-".$GLOBALS['spip_version_affichee']." (https://www.spip.net/)");
 		curl_multi_add_handle($mh, $ch[$url]);
 		spip_log('Recuperer '.$url);
 	}

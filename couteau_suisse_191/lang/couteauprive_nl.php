@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de https://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -248,7 +248,7 @@ _ &bull; [De tout le plugin|Revenir &agrave; l\'&eacute;tat initial du plugin->@
 
 Pour d&eacute;finir ce logo, rendez-vous sur la page &laquo;&nbsp;Configuration du site&nbsp;&raquo; en cliquant sur le bouton &laquo;&nbsp;Configuration&nbsp;&raquo;.',
 	'icone_visiter:nom' => 'Knoop &laquo;&nbsp;Bezoeken&nbsp;&raquo;',
-	'insert_head:description' => '<MODIF>Actief automatisch het baken [#INSERT_HEAD-> http://www.spip.net/fr_article1902.html] op alle skeletten, dat zij of niet dit baken tussen &lt;head&gt; en &lt;/head&gt;. Dank zij deze keuze, zullen plugins van javascript (.js) of de bladen van stijl (.css) kunnen opnemen.',
+	'insert_head:description' => '<MODIF>Actief automatisch het baken [#INSERT_HEAD-> https://www.spip.net/fr_article1902.html] op alle skeletten, dat zij of niet dit baken tussen &lt;head&gt; en &lt;/head&gt;. Dank zij deze keuze, zullen plugins van javascript (.js) of de bladen van stijl (.css) kunnen opnemen.',
 	'insert_head:nom' => 'Baken #INSERT_HEAD',
 	'insertions:description' => 'OPGELET: werktuig in ontwikkeling!! [[%insertions%]]',
 	'insertions:nom' => 'Automatische correcties',
@@ -527,7 +527,7 @@ Par exemple, dans une boucle sur (ARTICLES), #TITRE_SECTEUR donnera le titre du 
 	'toutmulti:aide' => 'Meertalige blokken&nbsp;: <b><:trad:></b>',
 	'toutmulti:description' => '<MODIF><MODIF>&Agrave; l\'instar de ce vous pouvez d&eacute;j&agrave; faire dans vos squelettes, cet outil vous permet d\'utiliser librement les cha&icirc;nes de langues (de SPIP ou de vos squelettes) dans tous les contenus de votre site (articles, titres, messages, etc.) &agrave; l\'aide du raccourci <code><:chaine:></code>.
  
-Consultez [ici ->http://www.spip.net/fr_article2128.html] la documentation de SPIP &agrave; ce sujet.
+Consultez [ici ->https://www.spip.net/fr_article2128.html] la documentation de SPIP &agrave; ce sujet.
 
 Cet outil accepte &eacute;galement les arguments introduits par SPIP 2.0. Par exemple, le raccourci <code><:ma_chaine{nom=Charles Martin, age=37}:></code> permet de passer deux param&egrave;tres &agrave; la cha&icirc;ne suivante : <code>\'ma_chaine\'=>"Bonjour, je suis @nom@ et j\'ai @age@ ans\\"</code>.
 
@@ -550,7 +550,7 @@ Les propositions ci-dessous sont bas&eacute;es sur la fonctionnalit&eacute; SQL 
 	'tri_titre' => 'Sorteren op de titel (ORDER BY 0+titre,titre)',
 	'type_urls:description' => '<MODIF>@puce@ SPIP offre un choix sur plusieurs jeux d\'URLs pour fabriquer les liens d\'acc&egrave;s aux pages de votre site.
 
-Plus d\'infos : [->http://www.spip.net/fr_article765.html]. L\'outil &laquo;&nbsp;[.->boites_privees]&nbsp;&raquo; vous permet de voir sur la page de chaque objet SPIP l\'URL propre associ&eacute;e.
+Plus d\'infos : [->https://www.spip.net/fr_article765.html]. L\'outil &laquo;&nbsp;[.->boites_privees]&nbsp;&raquo; vous permet de voir sur la page de chaque objet SPIP l\'URL propre associ&eacute;e.
 [[%radio_type_urls3%]]
 <q3>@_CS_ASTER@pour utiliser les formats {html}, {propres}, {propres2}, {libres} ou {arborescentes}, recopiez le fichier "htaccess.txt" du r&eacute;pertoire de base du site SPIP sous le sous le nom ".htaccess" (attention &agrave; ne pas &eacute;craser d\'autres r&eacute;glages que vous pourriez avoir mis dans ce fichier) ; si votre site est en "sous-r&eacute;pertoire", vous devrez aussi &eacute;diter la ligne "RewriteBase" ce fichier. Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de SPIP.</q3>
 
@@ -662,7 +662,7 @@ Als webmestre zelf, hebt u hier de rechten om deze lijst van ids te wijzigen  ge
 	'webmestres:nom' => 'Webmestres lijst',
 
 	// X
-	'xml:description' => 'Actief validateur xml voor de openbare ruimte zoals hij in  [documentatie->http://www.spip.net/en_article3582.html]  wordt beschreven. Een knoop getiteld &laquo;&nbsp;Analyse XML&nbsp;&raquo; wordt aan de andere knopen van bestuur toegevoegd.',
+	'xml:description' => 'Actief validateur xml voor de openbare ruimte zoals hij in  [documentatie->https://www.spip.net/en_article3582.html]  wordt beschreven. Een knoop getiteld &laquo;&nbsp;Analyse XML&nbsp;&raquo; wordt aan de andere knopen van bestuur toegevoegd.',
 	'xml:nom' => 'XML Validatie'
 );
 

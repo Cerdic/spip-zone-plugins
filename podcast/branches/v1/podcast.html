@@ -29,7 +29,7 @@
 		<itunes:summary>(#CONFIG{podcast/description_podcast,#DESCRIPTIF_SITE_SPIP}|sinon{<:podcast:descriptif_flux_defaut{site=#NOM_SITE_SPIP}:>}|supprimer_tags|texte_backend)</itunes:summary>][
 		<itunes:subtitle>(#CONFIG{podcast/resume_podcast,#SLOGAN_SITE_SPIP}|sinon{<:podcast:resume_flux_defaut{site=#NOM_SITE_SPIP}:>}|supprimer_tags|texte_backend)</itunes:subtitle>][
 		<language>(#ENV{lang})</language>]
-		<generator>#NOM_SITE_SPIP (SPIP - http://www.spip.net)</generator>
+		<generator>#NOM_SITE_SPIP (SPIP - https://www.spip.net)</generator>
 		<ttl>3600</ttl>[
 		<itunes:keywords>(#CONFIG{podcast/keywords_podcast}|supprimer_tags|texte_backend)</itunes:keywords>]
 		<BOUCLE_categories_principales(POUR){tableau #CONFIG{podcast/itunes_categories_principales,#ARRAY}}>

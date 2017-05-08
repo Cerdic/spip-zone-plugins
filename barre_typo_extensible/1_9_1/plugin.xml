@@ -26,7 +26,7 @@ Rajoute une barre typographique enrichie et les raccourcis typographiques corres
 -** {{Petites capitales}} {&lt;sc&gt;}texte en petite capitales{&lt;/sc&gt;}
 -** {{Biff&#233;}} {&lt;del&gt;}texte biff&#233;{&lt;/del&gt;}
 -** {{Bulle d'aide}} <code>[GPL|Gnu Public Licence]</code>
--** {{Lien avec bulle d'aide}} <code>[texte du lien|Le site officiel de SPIP->http://www.spip.net/]</code>
+-** {{Lien avec bulle d'aide}} <code>[texte du lien|Le site officiel de SPIP->https://www.spip.net/]</code>
 -** {{Ancre et retour &#224; l'ancre}} {[}definition_ancre&lt;-{]} et {[}retour &#224; l'ancre-&gt;#definition_ancre{]}
 
 -* La barre est enrichie de plusieurs barres th&#233;matiques pour:

@@ -11,7 +11,7 @@
  */
 
 // {branche ?}
-// http://www.spip.net/@branche
+// https://www.spip.net/@branche
 function critere_branche($idb, &$boucles, $crit) {
 	$not = $crit->not;
 	$boucle = &$boucles[$idb];

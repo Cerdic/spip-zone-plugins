@@ -1391,7 +1391,7 @@ function extraire_trads($bloc) {
 # 1) si la donnee est grosse, mettre son md5 comme cle
 # 2) purger $mem quand on change de squelette (sinon bug inclusions)
 //
-// http://www.spip.net/@unique
+// https://www.spip.net/@unique
 // http://code.spip.net/@unique
 function unique($donnee, $famille='', $cpt = false) {
 	static $mem;

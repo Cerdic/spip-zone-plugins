@@ -18,7 +18,7 @@
 
 // critere recherche utilisant l'indexation
 // {recherche} ou {recherche susan}
-// http://www.spip.net/@recherche
+// https://www.spip.net/@recherche
 function critere_recherche($idb, &$boucles, $crit) {
 	global $table_des_tables;
 	$boucle = &$boucles[$idb];

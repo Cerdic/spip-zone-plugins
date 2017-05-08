@@ -47,11 +47,11 @@
       [<dc:language>(#LANG)</dc:language>]
       [<dc:creator>(#LESAUTEURS|supprimer_tags|texte_backend)</dc:creator>]
       <BOUCLE_statut(MOTS){id_syndic_article}{id_groupe = #CONFIG{aff_zone/id_groupe_statuts}}{0,1}>
-      <category domain="http://www.spip.net/fr_article3448.html#etat">#TITRE</category>#SET{statut_plug, #TITRE}
+      <category domain="https://www.spip.net/fr_article3448.html#etat">#TITRE</category>#SET{statut_plug, #TITRE}
       </BOUCLE_statut>
       <enclosure url="http://files.spip.org" length="123456" type="application/zip"/>
       <description>[(#DESCRIPTIF|texte_backend|sauts_lignes)]
-[&lt;a href="http://www.spip.net/fr_article3448.html#etat" rel="directory"&gt;(#GET{statut_plug}|texte_backend)&lt;/a&gt;]
+[&lt;a href="https://www.spip.net/fr_article3448.html#etat" rel="directory"&gt;(#GET{statut_plug}|texte_backend)&lt;/a&gt;]
       <BOUCLE_categorie(MOTS){id_syndic_article}{id_groupe IN #GET{categories}}{0,1}>
 [&lt;a href="#URL_SITE_SPIP/?page=affzone_html[&amp;statut=(#ENV{statut})]" rel="tag"&gt;(#TYPE|supprimer_numero|texte_backend)&lt;/a&gt; ]
 

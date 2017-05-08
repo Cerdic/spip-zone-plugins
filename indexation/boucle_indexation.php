@@ -30,7 +30,7 @@ if (isset($GLOBALS['meta']['Recherche_etendue_exceptions'])){
 
 
 // {recherche}
-// http://www.spip.net/@recherche
+// https://www.spip.net/@recherche
 // gestion du cas ou le critere recherche est applique a la boucle INDEX
 // sion renvoi vers la boucle _dist
 function critere_recherche($idb, &$boucles, $crit) {

@@ -20,7 +20,7 @@ function qrcode_getpng($texte, $taille, $ecc) {
 		$matrixPointSize = 4;
 		if (isset($taille))
 			$matrixPointSize = min(max((int)$taille, 1), 10);
-		$data = 'http://www.spip.net' ;
+		$data = 'https://www.spip.net' ;
 		if (isset($texte))
 			$data = $texte ;
 

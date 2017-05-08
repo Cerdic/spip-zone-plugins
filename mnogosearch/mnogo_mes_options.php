@@ -48,7 +48,7 @@ function boucle_MNOGOSEARCH_dist($id_boucle, &$boucles) {
 }
 
 // {recherche}
-// http://www.spip.net/@recherche
+// https://www.spip.net/@recherche
 // gestion du cas ou le critere recherche est applique a la boucle MNOGOSEARCH
 // sinon renvoi vers la boucle _dist
 function critere_recherche($idb, &$boucles, $crit) {

@@ -43,7 +43,7 @@ The value of 1,000,000 pixels appears to be reasonable for a configuration with 
 	'admins_seuls' => 'Only administrators',
 	'aff_tout:description' => 'It may be useful to view all sections or all authors on your site regardless of their status (during development, for example). By default, SPIP does display in public area the authors and sections with at least one published element.
 
-Although it is possible to override this behavior using the criterion [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], this tool automates the process and avoid to add this criterion to all loops SECTIONS and/or your AUTHORS skeletons.',
+Although it is possible to override this behavior using the criterion [<html>{tout}</html>->https://www.spip.net/fr_article4250.html], this tool automates the process and avoid to add this criterion to all loops SECTIONS and/or your AUTHORS skeletons.',
 	'aff_tout:nom' => 'Display all',
 	'alerte_urgence:description' => 'Displayed at the top of all public pages headband alert to broadcast the emergency message defined below.
 _The <code><multi/></code> tag are recommended in case of multilingual website. [[%alerte_message%]]',
@@ -427,7 +427,7 @@ Available arguments: {zone}, {format} and/or {id}.',
 
 To define this logo, go to the "<:titre_configuration:>" page by clicking on the "<:icone_configuration_site:>" button.',
 	'icone_visiter:nom' => '"<:icone_visiter_site:>" button',
-	'insert_head:description' => 'Activate the tag [#INSERT_HEAD->http://www.spip.net/en_article2421.html] in all templates, whether or not this tag is present between &lt;head&gt; et &lt;/head&gt;. This option can be used to allow plugins to insert javascript code (.js) or stylesheets (.css).',
+	'insert_head:description' => 'Activate the tag [#INSERT_HEAD->https://www.spip.net/en_article2421.html] in all templates, whether or not this tag is present between &lt;head&gt; et &lt;/head&gt;. This option can be used to allow plugins to insert javascript code (.js) or stylesheets (.css).',
 	'insert_head:nom' => '#INSERT_HEAD tag',
 	'insertions:description' => 'N.B.: tool in development!! [[%insertions%]]',
 	'insertions:nom' => 'Auto-correct',
@@ -857,7 +857,7 @@ Example of use: the title of a book mentioned in the title of an article, to put
 	'toutmulti:aide' => 'Multilingual blocks: <b><:trad:></b>',
 	'toutmulti:description' => 'Like what you already do in your skeletons, this tool allows you to freely use the language strings (from SPIP or your skeletons) in all content of your site (articles, titles, messages, etc.. ) using the shortcut <code>my_string:></code>.
 
-More information on this can be found in [this article->http://www.spip.net/en_article2444.html].
+More information on this can be found in [this article->https://www.spip.net/en_article2444.html].
 
 User variables can also be added to the shortcuts. This feature was introduced with SPIP 2.0. For example, <code><:</code><code>my_string{name=Charles Martin, age=37}:></code> makes it possible to pass the values to the SPIP language file: <code>\'my_string\'=>\'Hi, I\'m @name@ and I am @age@ years old.</code>.
 
@@ -911,7 +911,7 @@ _ It can also be used as a model in content. Place <code><bolo300></code> in any
 	'trousse_balises:nom' => 'Box of tags',
 	'type_urls:description' => '@puce@ SPIP offers a choice between several types of URLs to generate for the access links on the pages of your site:
 
-More information: [->http://www.spip.net/en_article3588.html] The "[.->boites_privees]" tool allows you to see on the page of each SPIP object the clean URL which is associated with it.[[%radio_type_urls3%]]
+More information: [->https://www.spip.net/en_article3588.html] The "[.->boites_privees]" tool allows you to see on the page of each SPIP object the clean URL which is associated with it.[[%radio_type_urls3%]]
 <q3>@_CS_ASTER@to use the types {html}, {propres}, {propres2}, {libres} or {arborescentes}, copy the file "htaccess.txt" from the root directory of the SPIP site to a file (also at the root) named ".htaccess" (be careful not to overwrite any existing configuration if there already is a file of this name). If your site is in a subdirectory, you may need to edit the line "RewriteBase" in the file in order for the defined URLs to direct requests to the SPIP files.</q3>
 
 <radio_type_urls3 valeur="page">@puce@ {{"page" URLs}}: the default type for SPIP since version 1.9x.
@@ -1031,7 +1031,7 @@ As a webmaster yourself, you have the administrative power to change this list o
 	'webmestres:nom' => 'List of webmasters',
 
 	// X
-	'xml:description' => 'Activates the XML validator for the public site, as described in the [documentation->http://www.spip.net/en_article3582.html]. 
+	'xml:description' => 'Activates the XML validator for the public site, as described in the [documentation->https://www.spip.net/en_article3582.html]. 
 This tool is only visible for the site administrators: a button labeled "XML parsing" is added to the other administration.
 
 @puce@ Useful to validate the syntax of your final pages, and manage Web accessibility troubles for the visually impaired.',

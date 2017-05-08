@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de https://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -280,7 +280,7 @@ _ • [Whole plugin|Reset to the original state of the plugin->@reset@]@install@
 
 To set this logo, go to the page "Site configuration" by clicking the "Configuration" button.',
 	'icone_visiter:nom' => '"Visit" button',
-	'insert_head:description' => 'Activate the tag [#INSERT_HEAD->http://www.spip.net/en_article2421.html] in all templates, whether or not this tag is present between &lt;head&gt; et &lt;/head&gt;. This option can be used to allow plugins to insert javascript code (.js) or stylesheets (.css).',
+	'insert_head:description' => 'Activate the tag [#INSERT_HEAD->https://www.spip.net/en_article2421.html] in all templates, whether or not this tag is present between &lt;head&gt; et &lt;/head&gt;. This option can be used to allow plugins to insert javascript code (.js) or stylesheets (.css).',
 	'insert_head:nom' => '#INSERT_HEAD tag',
 	'insertions:description' => 'N.B.: tool in development!! [[%insertions%]]',
 	'insertions:nom' => 'Auto-correct',
@@ -585,7 +585,7 @@ For example, in an (ARTICLES) loop, #TITRE_SECTEUR will give the title of the se
 	'toutmulti:aide' => 'Multilingual blocks: <b><:trad:></b>',
 	'toutmulti:description' => 'Makes it possible to use the shortcut <code><:a_text:></code> in order to place multilingual blocks from language files, whether SPIP\'s own or your customised ones, anywhere in the text, titles, etc. of an article.
 
-More information on this can be found in [this article->http://www.spip.net/en_article2444.html].
+More information on this can be found in [this article->https://www.spip.net/en_article2444.html].
 
 User variables can also be added to the shortcuts. This was introduced with SPIP 2.0. For example, <code><:a_text{name=John, tel=2563}:></code> makes it possible to pass the values to the SPIP language file: <code>\'a_text\'=>\'Please contact @name@, the administrator, on @tel@.</code>.
 
@@ -619,7 +619,7 @@ _ It can also be used as a model in content. Place <code><bolo300></code> in any
 	'trousse_balises:nom' => 'Box of tags',
 	'type_urls:description' => '@puce@ SPIP offers a choice between several types of URLs for your site:
 
-More information: [->http://www.spip.net/en_article3588.html] The "[.->boites_privees]" tool allows you to see on the page of each SPIP object the clean URL which is associated with it.
+More information: [->https://www.spip.net/en_article3588.html] The "[.->boites_privees]" tool allows you to see on the page of each SPIP object the clean URL which is associated with it.
 [[%radio_type_urls3%]]
 <q3>@_CS_ASTER@to use the types {html}, {propres}, {propres2}, {libres} or {arborescentes}, copy the file "htaccess.txt" from the root directory of the SPIP site to a file (also at the root) named ".htaccess" (be careful not to overwrite any existing configuration if there already is a file of this name). If your site is in a subdirectory, you may need to edit the line "RewriteBase" in the file in order for the defined URLs to direct requests to the SPIP files.</q3>
 
@@ -737,7 +737,7 @@ As a webmaster yourself, you can change this list od IDs. Use a colon as a separ
 	'webmestres:nom' => 'list of webmasters',
 
 	// X
-	'xml:description' => 'Activates the XML validator for the public site, as described in the [documentation->http://www.spip.net/en_article3582.html]. An &laquo;&nbsp;Analyse XML&nbsp;&raquo; button is added to the other admin buttons.',
+	'xml:description' => 'Activates the XML validator for the public site, as described in the [documentation->https://www.spip.net/en_article3582.html]. An &laquo;&nbsp;Analyse XML&nbsp;&raquo; button is added to the other admin buttons.',
 	'xml:nom' => 'XML validator'
 );
 

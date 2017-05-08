@@ -75,7 +75,7 @@ function _gmap_table_geopoints() {
 
 
 // Pipeline declarer_tables_objets_sql pour déclarer toutes les tables en SPIP 3 
-// Cf. http://www.spip.net/fr_article5525.html
+// Cf. https://www.spip.net/fr_article5525.html
 // Cf. code SPIP : ecrire/base/objets.php
 function gmap_declarer_tables_objets_sql($tables) {
 

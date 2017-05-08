@@ -29,7 +29,7 @@ define("_INC_CALCUL_OUTILS", "1");
 // Pour les documents comme pour les logos, le filtre |fichier donne
 // le chemin du fichier apres 'IMG/' ;  peut-etre pas d'une purete
 // remarquable, mais a conserver pour compatibilite ascendante.
-// -> http://www.spip.net/fr_article901.html
+// -> https://www.spip.net/fr_article901.html
 function calcule_fichier_logo($on) {
 	$r = ereg_replace("^" . _DIR_IMG, "", $on);
 	return $r;

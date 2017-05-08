@@ -19,7 +19,7 @@
 /*                    SPIP-Listes                         */
 /**********************************************************/
 
-Allows the creation of newsletters from a SPIP site (http://www.spip.net), either manually or automatically.
+Allows the creation of newsletters from a SPIP site (https://www.spip.net), either manually or automatically.
 
 To achieve this task, SPIP-Listes lets you:
 

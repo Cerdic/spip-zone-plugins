@@ -80,7 +80,7 @@ $GLOBALS['i18n_pubban_fr'] = array(
 	'doc_titre_court' => 'Documentation Pub Banner',
 	'doc_titre_page' => 'Documentation du plugin "Pub Banner"',
 	'docskel_sep' => '----',
-	'documentation_1' => 'Le plugin PUB BANNER s\'installe de la m&ecirc;me mani&egrave;re que l\'ensemble des plugins SPIP ({[article d&eacute;di&eacute; sur spip.net->http://www.spip.net/fr_article3396.html]}).
+	'documentation_1' => 'Le plugin PUB BANNER s\'installe de la m&ecirc;me mani&egrave;re que l\'ensemble des plugins SPIP ({[article d&eacute;di&eacute; sur spip.net->https://www.spip.net/fr_article3396.html]}).
 
 Des valeurs par d&eacute;faut sont entr&eacute;es dans les tables, &agrave; savoir :
 -* quatre emplacements "type", les plus r&eacute;pandus sur le web :

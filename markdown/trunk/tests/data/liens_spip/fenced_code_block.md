@@ -1,14 +1,14 @@
 ```
 <?php
 
-$message = 'fenced code block [SPIP->http://www.spip.net]';
+$message = 'fenced code block [SPIP->https://www.spip.net]';
 echo $message;
 ```
 
 ~~~
-tilde [SPIP->http://www.spip.net]
+tilde [SPIP->https://www.spip.net]
 ~~~
 
 ```php
-echo 'language identifier [SPIP->http://www.spip.net]';
+echo 'language identifier [SPIP->https://www.spip.net]';
 ```

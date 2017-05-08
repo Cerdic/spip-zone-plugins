@@ -1,6 +1,6 @@
 [(#SET{proprietaire,[(#CONFIG{spip_proprietaire})]})]BEGIN:VCARD
 VERSION:3.0
-PRODID: SPIP http://www.spip.net
+PRODID: SPIP https://www.spip.net
 N:[(#GET*{proprietaire}|table_valeur{proprietaire_nom}|extraire_multi|filtrer_ical)];;;;
 FN:[(#GET*{proprietaire}|table_valeur{proprietaire_nom}|extraire_multi|filtrer_ical)]
 ORG:[(#NOM_SITE_SPIP|filtrer_ical)];

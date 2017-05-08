@@ -34,7 +34,7 @@ if(!function_exists('info_maj_spip')) {
 		if (!$maj) return "";
 		list(,$maj) = explode('|',$maj,2);
 		if (strncmp($maj,"<a",2)==0) $maj = extraire_attribut ($maj, 'title');
-		$res = _T('couteau:maj_rev_ok',array('revision'=>$maj, 'url'=>"http://www.spip.net/$GLOBALS[spip_lang]_download", 'zip'=>''));
+		$res = _T('couteau:maj_rev_ok',array('revision'=>$maj, 'url'=>"https://www.spip.net/$GLOBALS[spip_lang]_download", 'zip'=>''));
 		include_spip('lib/maj_auto/distant_mise_a_jour');
 		return $res;
 	}
@@ -93,7 +93,7 @@ function info_maj_spip2(){
 	if (!autoriser('webmestre')) return "";
 	$tmp = "<fieldset><legend $style>"._T('couteauprive:help2', array('version'=>'SPIP '.$GLOBALS['spip_version_branche'])).'</legend>';
 	if(defined('_CS_PAS_DE_DISTANT'))
-		return $tmp . ' <b>'.cs_lien("http://www.spip.net/$GLOBALS[spip_lang]_download", couteauprive_T('version_distante_off')) . '</b></fieldset>';
+		return $tmp . ' <b>'.cs_lien("https://www.spip.net/$GLOBALS[spip_lang]_download", couteauprive_T('version_distante_off')) . '</b></fieldset>';
 	include_spip('inc/presentation');
 	// Plus grosse version de SPIP dispo (API d'origine)
 	$res = info_maj_spip();

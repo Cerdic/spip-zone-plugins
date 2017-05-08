@@ -41,8 +41,8 @@
   ),
   2 => 
   array (
-    0 => '\'Un texte avec des <a href="http://spip.net">liens</a> [Article 1->art1] [spip->http://www.spip.net] http://www.spip.net\'',
-    1 => 'Un texte avec des <a href="http://spip.net">liens</a> [Article 1->art1] [spip->http://www.spip.net] http://www.spip.net',
+    0 => '\'Un texte avec des <a href="http://spip.net">liens</a> [Article 1->art1] [spip->https://www.spip.net] https://www.spip.net\'',
+    1 => 'Un texte avec des <a href="http://spip.net">liens</a> [Article 1->art1] [spip->https://www.spip.net] https://www.spip.net',
   ),
   3 => 
   array (
@@ -61,8 +61,8 @@
   ),
   6 => 
   array (
-    0 => '\'Un modele <modeleinexistant|lien=[->http://www.spip.net]>\'',
-    1 => 'Un modele <modeleinexistant|lien=[->http://www.spip.net]>',
+    0 => '\'Un modele <modeleinexistant|lien=[->https://www.spip.net]>\'',
+    1 => 'Un modele <modeleinexistant|lien=[->https://www.spip.net]>',
   ),
 );
 		return $essais;

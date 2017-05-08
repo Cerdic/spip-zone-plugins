@@ -1,7 +1,7 @@
-- paragraph [SPIP->http://www.spip.net]
+- paragraph [SPIP->https://www.spip.net]
 
-  paragraph [SPIP->http://www.spip.net]
+  paragraph [SPIP->https://www.spip.net]
 
-- paragraph [SPIP->http://www.spip.net]
+- paragraph [SPIP->https://www.spip.net]
 
-  > quote [SPIP->http://www.spip.net]
+  > quote [SPIP->https://www.spip.net]

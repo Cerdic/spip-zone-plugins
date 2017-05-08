@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de https://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -280,7 +280,7 @@ _ • [De tot el plugin|Tornar a l\'estat inicial del plugin->@reset@]@install@
 
 Per definir aquest logotip, dirigiu-vos a la p&agrave;gina &laquo;&nbsp;Configuraci&oacute; del lloc&nbsp;&raquo; fent un clic damunt del bot&oacute; &laquo;&nbsp;Configuraci&oacute;&nbsp;&raquo;.',
 	'icone_visiter:nom' => 'Bot&oacute; &laquo;&nbsp;Visitar&nbsp;&raquo;',
-	'insert_head:description' => 'Activa autom&agrave;ticament l\'etiqueta [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] a tots els esquelets, tinguin o no aquesta etiqueta entre &lt;head&gt; i &lt;/head&gt;. Gr&agrave;cies a aquesta opci&oacute;, els plugins podran inserir JavaScript (.js) o fulls d\'estil (.css).',
+	'insert_head:description' => 'Activa autom&agrave;ticament l\'etiqueta [#INSERT_HEAD->https://www.spip.net/fr_article1902.html] a tots els esquelets, tinguin o no aquesta etiqueta entre &lt;head&gt; i &lt;/head&gt;. Gr&agrave;cies a aquesta opci&oacute;, els plugins podran inserir JavaScript (.js) o fulls d\'estil (.css).',
 	'insert_head:nom' => 'Etiqueta #INSERT_HEAD',
 	'insertions:description' => 'ATENCI&Oacute;: eina en curs de desenvolupament!! [[%insertions%]]',
 	'insertions:nom' => 'Correccions autom&agrave;tiques',
@@ -587,7 +587,7 @@ La sintaxi <html>#TITRE_XXX{yy}</html> se suporta igualment. Exemple: <html>#TIT
 	'toutmulti:aide' => 'Blocs multiling&uuml;es&nbsp;: <b><:trad:></b>',
 	'toutmulti:description' => 'De manera semblant al que ja podeu fer en els vostres esquelets, aquesta eina us permet utilitzar lliurement les cadenes de lleng&uuml;es (d\'SPIP o dels vostres esquelets) en tots els continguts del vostre lloc Web (articles, t&iacute;tols, missatges, etc.) amb l\'ajuda de la drecera <code><:chaine:></code>.
  
-Consulteu [aqu&iacute; ->http://www.spip.net/ca_article2191.html] la documentaci&oacute; d\'SPIP que fa refer&egrave;ncia a aquest tema.
+Consulteu [aqu&iacute; ->https://www.spip.net/ca_article2191.html] la documentaci&oacute; d\'SPIP que fa refer&egrave;ncia a aquest tema.
 
 Aquesta eina accepta igualment els arguments introdu&iuml;ts per SPIP 2.0. Per exemple, la drecera <:ma_chaine{nom=Charles Martin, age=37}:></code> permet passar dos par&agrave;metres a la seg&uuml;ent cadena: <code>\'ma_chaine\'=>"Bonjour, je suis @nom@ et j\'ai @age@ ans\\"</code>.
 
@@ -621,7 +621,7 @@ _ Tamb&eacute; teniu un model disponible pels vostres continguts: situeu <code><
 	'trousse_balises:nom' => 'Joc d\'etiquetes',
 	'type_urls:description' => '@puce@ SPIP ofereix la possibilitat d\'escollir entre diversos jocs d\'URLs per fabricar els enlla&ccedil;os d\'acc&eacute;s a les p&agrave;gines del vostre lloc:
 
-M&eacute;s informacions a: [->http://www.spip.net/ca_article2237.html]. L\'eina &laquo;&nbsp;[.->boites_privees]&raquo; us permet veure a la p&agrave;gina de cada objecte SPIP el URL propi associat.
+M&eacute;s informacions a: [->https://www.spip.net/ca_article2237.html]. L\'eina &laquo;&nbsp;[.->boites_privees]&raquo; us permet veure a la p&agrave;gina de cada objecte SPIP el URL propi associat.
 [[%radio_type_urls3%]]
 <q3>@_CS_ASTER@per utilitzar els formats {html}, {propre}, {propre2}, {libres} o {arborescentes}, torneu a copiar el fitxer "htaccess.txt" del directori de base del lloc SPIP amb el nom ".htaccess" (alerta a no esborrar altres ajustos que pogu&eacute;ssiu haver posat a dins d\'aquest fitxer) ; si el vostre lloc est&agrave; en un "subdirectori", haureu tamb&eacute; d\'editar la l&iacute;nia "RewriteBase" a aquest fitxer. Els URLs definit seran dirigits llavors cap els fitxer d\'SPIP.</q3>
 
@@ -742,7 +742,7 @@ Vosaltres mateixos, com a webmestres, teniu els drets de modificar aquesta llist
 	'webmestres:nom' => 'Llista de webmestres',
 
 	// X
-	'xml:description' => 'Activa el validador xml per l\'espai p&uacute;blic tal i com est&agrave; descrit a la [documentaci&oacute;->http://www.spip.net/ca_article3577.html]. Un bot&oacute; anomenat &laquo;&nbsp;An&agrave;lisi XML&nbsp;&raquo; s\'afegeix als altres botons d\'administraci&oacute;.',
+	'xml:description' => 'Activa el validador xml per l\'espai p&uacute;blic tal i com est&agrave; descrit a la [documentaci&oacute;->https://www.spip.net/ca_article3577.html]. Un bot&oacute; anomenat &laquo;&nbsp;An&agrave;lisi XML&nbsp;&raquo; s\'afegeix als altres botons d\'administraci&oacute;.',
 	'xml:nom' => 'Validador XML'
 );
 

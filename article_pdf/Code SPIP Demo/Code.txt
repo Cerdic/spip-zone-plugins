@@ -63,7 +63,7 @@ Exemple de tableau
 | Marso | Ben | 23 ans |
 | [Lien interne vers Capitaine->5] | Toto | non connu |
 | Philant | [Lien interne vers Philippe->2] | 46 ans |
-| [Lien externe vers SPIP->http://www.spip.net/]| Bébé | <img10|right> |
+| [Lien externe vers SPIP->https://www.spip.net/]| Bébé | <img10|right> |
 
 Exemple de note [[note 2]]
 
@@ -105,7 +105,7 @@ Exemple de lien vers une ancre [->art5#Ancre]
 Exemple de note «forcée» [[<20> Note forçée]]
 
 
-Exemple de lien externe vers le site de [SPIP->http://www.spip.net/].
+Exemple de lien externe vers le site de [SPIP->https://www.spip.net/].
 
 
 Exemple de puces imbriquées :

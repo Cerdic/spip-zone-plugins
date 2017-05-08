@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'gravatar_info_forum' => 'Pour afficher votre trombine avec votre message, enregistrez-la d\'abord sur <a href="http://www.gravatar.com/" rel="external nofollow" class="spip_out">gravatar.com</a> (gratuit et indolore) et n\'oubliez pas d\'indiquer votre adresse e-mail ici.',
 
 'forum_texte' => 'Message&nbsp;:',
-'info_creation_paragraphe' => 'Ce formulaire accepte les <a href="http://www.spip.net/fr_article1578.html" rel="external nofollow" class="spip_out">raccourcis&nbsp;SPIP</a> et le code&nbsp;HTML. Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.',
+'info_creation_paragraphe' => 'Ce formulaire accepte les <a href="https://www.spip.net/fr_article1578.html" rel="external nofollow" class="spip_out">raccourcis&nbsp;SPIP</a> et le code&nbsp;HTML. Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.',
 
 'forum_voir_avant' => 'Pr&eacute;visualiser',
 'forum_message_definitif' => 'Confirmer l\'envoi',

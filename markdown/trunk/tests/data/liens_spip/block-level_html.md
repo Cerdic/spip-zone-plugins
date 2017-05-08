@@ -1,8 +1,8 @@
-<div>_content_ avec un lien [SPIP->http://www.spip.net]</div>
+<div>_content_ avec un lien [SPIP->https://www.spip.net]</div>
 
-[SPIP->http://www.spip.net]
+[SPIP->https://www.spip.net]
 sparse:
 
 <div>
-_content_ avec un lien [SPIP->http://www.spip.net]
+_content_ avec un lien [SPIP->https://www.spip.net]
 </div>

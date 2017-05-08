@@ -50,7 +50,7 @@ Dans `commandes_pipelines.php` :
 
 ### API `editer_liens` et limitations
 
-On peut se servir de [l'API d'édition de liens](http://www.spip.net/fr_article5477.html) pour lier ponctuellement une coordonnée à un objet.
+On peut se servir de [l'API d'édition de liens](https://www.spip.net/fr_article5477.html) pour lier ponctuellement une coordonnée à un objet.
 Mais il y a une limitation : l'API ne permet de faire qu'un seul lien d'objet à objet. On ne peut pas lier 2 fois une coordonnée au même objet, avec 2 types de liaison différents.
 Ainsi, avec le code suivant :
 

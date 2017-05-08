@@ -18,7 +18,7 @@ Deux solutions :
 
 L\'enregistrement et la gestion des scores n\'est possible qu\'en utilisant la seconde solution.
 
-Ce plugin fonctionne de façon optimale sur les squelettes disposant de la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] et peut également &#234;tre testé dans l\'espace privé.
+Ce plugin fonctionne de façon optimale sur les squelettes disposant de la balise [#INSERT_HEAD->https://www.spip.net/fr_article1902.html] et peut également &#234;tre testé dans l\'espace privé.
 
 _* Pour les jeux graphiques, il faut avoir les librairies {{GD}} installées sur votre server.
 _* Ce plugin est encore en évolution, procédez régulièrement à vos mises à jour.

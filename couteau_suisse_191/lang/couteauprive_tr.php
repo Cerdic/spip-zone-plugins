@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de https://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -238,7 +238,7 @@ _ • [T&uuml;m eklentinin|Eklentini ilk durumuna d&ouml;n&uuml;lmesi->@reset@]@
 
 Bu logoyu tan&#305;mlamak i&ccedil;in &laquo;&nbsp;Konfig&uuml;rasyon&nbsp;&raquo; d&uuml;&#287;mesine t&#305;klayarak &laquo;&nbsp;Site konfig&uuml;rasyonu&nbsp;&raquo; sayfas&#305;na gidiniz.',
 	'icone_visiter:nom' => '&laquo;&nbsp;Ziyaret Et&nbsp;&raquo; d&uuml;&#287;mesi',
-	'insert_head:description' => '<MODIF>[#INSERT_HEAD->http://www.spip.net/fr_article1902.html] komutunu t&uuml;m iskeletlerde aktif hale getirir (bu komutu &lt;head&gt; ve &lt;/head&gt; aras&#305;nda i&ccedil;erseler de i&ccedil;ermeseler de). Bu se&ccedil;enek sayesinde eklentiler javascript (.js) veya stil sayfas&#305; (.css) ekleyebilirler.',
+	'insert_head:description' => '<MODIF>[#INSERT_HEAD->https://www.spip.net/fr_article1902.html] komutunu t&uuml;m iskeletlerde aktif hale getirir (bu komutu &lt;head&gt; ve &lt;/head&gt; aras&#305;nda i&ccedil;erseler de i&ccedil;ermeseler de). Bu se&ccedil;enek sayesinde eklentiler javascript (.js) veya stil sayfas&#305; (.css) ekleyebilirler.',
 	'insert_head:nom' => '#INSERT_HEAD komutu',
 	'insertions:description' => 'DiKKAT : geli&#351;tirilmekte olan gere&ccedil; !! [[%insertions%]]',
 	'insertions:nom' => 'Otomatik d&uuml;zeltmeler',
@@ -521,7 +521,7 @@ _ Kullan&#305;lan SPIP fonksiyonu &#351;udur : <code>_T(\'zincir\')</code>.
 
 Bu gere&ccedil; arg&uuml;man da kab&ucirc;l eder. &Ouml;rne&#287;in <code><:chaine{arg1=bir metin, arg2=bir ba&#351;ka metin}:></code> k&#305;saltmas&#305; 2 arg&uuml;man&#305;n &#351;u zincire ge&ccedil;irilmesine izin verir : <code>\'chaine\'=>\'&#304;&#351;te benim arg&uuml;manlar&#305;m : @arg1@ et @arg2@\'</code>.
 
-<code>\'zincir\'</code> anahtar&#305;n&#305;n dil dosyalar&#305;nda d&uuml;zg&uuml;n bi&ccedil;imde tan&#305;mland&#305;&#287;&#305;ndan emin olun. [Bu konuyla ilgili &#351;u adresteki ->http://www.spip.net/fr_article2128.html] SPIP belgelerine g&ouml;z at&#305;n&#305;z.',
+<code>\'zincir\'</code> anahtar&#305;n&#305;n dil dosyalar&#305;nda d&uuml;zg&uuml;n bi&ccedil;imde tan&#305;mland&#305;&#287;&#305;ndan emin olun. [Bu konuyla ilgili &#351;u adresteki ->https://www.spip.net/fr_article2128.html] SPIP belgelerine g&ouml;z at&#305;n&#305;z.',
 	'toutmulti:nom' => '&Ccedil;ok dilli bloklar',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'Bu site &ccedil;ok yak&#305;nda tekrar yay&#305;na ba&#351;layacak.
@@ -538,7 +538,7 @@ Les propositions ci-dessous sont bas&eacute;es sur la fonctionnalit&eacute; SQL 
 	'tri_titre' => 'Ba&#351;l&#305;&#287;a g&ouml;re s&#305;ralama (ORDER BY 0+titre,titre)',
 	'type_urls:description' => '<MODIF><MODIF>@puce@ SPIP offre un choix sur plusieurs jeux d\'URLs pour fabriquer les liens d\'acc&egrave;s aux pages de votre site.
 
-Plus d\'infos : [->http://www.spip.net/fr_article765.html]. L\'outil &laquo;&nbsp;[.->boites_privees]&nbsp;&raquo; vous permet de voir sur la page de chaque objet SPIP l\'URL propre associ&eacute;e.
+Plus d\'infos : [->https://www.spip.net/fr_article765.html]. L\'outil &laquo;&nbsp;[.->boites_privees]&nbsp;&raquo; vous permet de voir sur la page de chaque objet SPIP l\'URL propre associ&eacute;e.
 [[%radio_type_urls3%]]
 <q3>@_CS_ASTER@pour utiliser les formats {html}, {propre}, {propre2}, {libres} ou {arborescentes}, recopiez le fichier "htaccess.txt" du r&eacute;pertoire de base du site SPIP sous le sous le nom ".htaccess" (attention &agrave; ne pas &eacute;craser d\'autres r&eacute;glages que vous pourriez avoir mis dans ce fichier) ; si votre site est en "sous-r&eacute;pertoire", vous devrez aussi &eacute;diter la ligne "RewriteBase" ce fichier. Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de SPIP.</q3>
 
@@ -646,7 +646,7 @@ En tant que webmestre vous-m&ecirc;me, vous avez ici les droits de modifier cett
 	'webmestres:nom' => 'Webmaster listesi',
 
 	// X
-	'xml:description' => 'Xml onaylay&#305;c&#305;s&#305;n&#305;, kamusal alan i&ccedil;in [&#351;u belgede->http://www.spip.net/fr_article3541.html] belirtildi&#287;i gibi aktive eder. &laquo;&nbsp;Analyse XML&nbsp;&raquo; ba&#351;l&#305;kl&#305; bir d&uuml;&#287;me di&#287;er y&ouml;netim d&uuml;&#287;melerine eklenecektir.',
+	'xml:description' => 'Xml onaylay&#305;c&#305;s&#305;n&#305;, kamusal alan i&ccedil;in [&#351;u belgede->https://www.spip.net/fr_article3541.html] belirtildi&#287;i gibi aktive eder. &laquo;&nbsp;Analyse XML&nbsp;&raquo; ba&#351;l&#305;kl&#305; bir d&uuml;&#287;me di&#287;er y&ouml;netim d&uuml;&#287;melerine eklenecektir.',
 	'xml:nom' => 'XML onaylay&#305;c&#305;s&#305;'
 );
 

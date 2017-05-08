@@ -10,7 +10,7 @@
  *
  * @history:
  * 2.61.0: Initial version for SPIP 3
- * @reference: _AUTOBR in http://www.spip.net/en_article5533.html
+ * @reference: _AUTOBR in https://www.spip.net/en_article5533.html
  * pipeline "post_propre" happens after the HTML iframe generation by pgn4spip_fonctions.php
  * and after spip3\plugins-dist\textwheel\inc\texte.php replaces "\n" with "<p><br class='autobr' /></p>"
  * The user does NOT need to define the constant _AUTOBR as '' in spip3\ecrire\mes_options.php

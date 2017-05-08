@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de https://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -376,7 +376,7 @@ Arguments disponibles : {zone}, {format} et/ou {id}.', # NEW
 
 Pour définir ce logo, rendez-vous sur la page «<:titre_configuration:>» en cliquant sur le bouton «<:icone_configuration_site:>».', # NEW
 	'icone_visiter:nom' => 'Bouton « <:icone_visiter_site:> »', # NEW
-	'insert_head:description' => 'Active automatiquement la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] sur tous les squelettes, qu\'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Grâce à cette option, les plugins pourront insérer du javascript (.js) ou des feuilles de style (.css).', # MODIF
+	'insert_head:description' => 'Active automatiquement la balise [#INSERT_HEAD->https://www.spip.net/fr_article1902.html] sur tous les squelettes, qu\'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Grâce à cette option, les plugins pourront insérer du javascript (.js) ou des feuilles de style (.css).', # MODIF
 	'insert_head:nom' => 'علامة #INSERT_HEAD',
 	'insertions:description' => 'ATTENTION : outil en cours de développement !! [[%insertions%]]', # NEW
 	'insertions:nom' => 'تدقيق آلي',
@@ -781,7 +781,7 @@ _ Un modèle est également disponible pour vos contenus : placez <code><bolo300
 - {{standard}} : URLs utilisées par SPIP v1.8 et précédentes : <code>article.php3?id_article=123</code>
 - {{propres-qs}} : ce système fonctionne en &quot;Query-String&quot;, c\'est-à-dire sans utilisation de .htaccess ; les liens sont de la forme : <code>/?Mon-titre-d-article</code>.</div>
 
-Plus d\'infos : [->http://www.spip.net/fr_article765.html]
+Plus d\'infos : [->https://www.spip.net/fr_article765.html]
 [[%radio_type_urls3%]]
 <p style=\'font-size:85%\'>@_CS_ASTER@pour utiliser les formats {html}, {propre} ou {propre2}, Recopiez le fichier &quot;htaccess.txt&quot; du répertoire de base du site SPIP sous le sous le nom &quot;.htaccess&quot; (attention à ne pas écraser d\'autres réglages que vous pourriez avoir mis dans ce fichier) ; si votre site est en &quot;sous-répertoire&quot;, vous devrez aussi éditer la ligne &quot;RewriteBase&quot; ce fichier. Les URLs définies seront alors redirigées vers les fichiers de SPIP.</p>
 
@@ -864,7 +864,7 @@ En tant que webmestre vous-même, vous avez ici les droits de modifier cette lis
 	'webmestres:nom' => 'Liste des webmestres', # NEW
 
 	// X
-	'xml:description' => 'Active le validateur xml pour l\'espace public tel qu\'il est décrit dans la [documentation->http://www.spip.net/fr_article3541.html]. Un bouton intitulé « Analyse XML » est ajouté aux autres boutons d\'administration.', # NEW
+	'xml:description' => 'Active le validateur xml pour l\'espace public tel qu\'il est décrit dans la [documentation->https://www.spip.net/fr_article3541.html]. Un bouton intitulé « Analyse XML » est ajouté aux autres boutons d\'administration.', # NEW
 	'xml:nom' => 'Validateur XML' # NEW
 );
 

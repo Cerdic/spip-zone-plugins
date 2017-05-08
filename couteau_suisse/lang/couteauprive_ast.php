@@ -280,7 +280,7 @@ _ • [De tol plugin|Tornar a l\'estáu inicial del plugin->@reset@]@install@
 
 Pa definir esti logo, vete a la páxina de «Configuración del sitiu» calcando nel botón «Configuración».', # MODIF
 	'icone_visiter:nom' => 'Botón «Visitar»', # MODIF
-	'insert_head:description' => 'Activa automáticamente la baliza [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] en toes les cadarmes, da igual que tengan o non esta baliza ente &lt;head&gt; y &lt;/head&gt;. Gracies a esta opción, los plugins podrán enxertar JavaScript (.js) o fueyes d\'estilu (.css).',
+	'insert_head:description' => 'Activa automáticamente la baliza [#INSERT_HEAD->https://www.spip.net/fr_article1902.html] en toes les cadarmes, da igual que tengan o non esta baliza ente &lt;head&gt; y &lt;/head&gt;. Gracies a esta opción, los plugins podrán enxertar JavaScript (.js) o fueyes d\'estilu (.css).',
 	'insert_head:nom' => 'Baliza #INSERT_HEAD',
 	'insertions:description' => 'ATENCIÓN: ¡¡ferramienta en cursu de desendolcu!! [[%insertions%]]',
 	'insertions:nom' => 'Correiciones automátiques',
@@ -572,7 +572,7 @@ La sintaxis <html>#TITRE_XXX{yy}</html> sopórtase igualmente. Exemplu: <html>#T
 	'toutmulti:aide' => 'Bloques multillingües: <b><:trad:></b>', # MODIF
 	'toutmulti:description' => 'Del mesmu mou que ya podíes facelo nes tos cadarmes, esta ferramienta te permite utilizar llibremente les cadenes de llingües (de SPIP o de les cadarmes) nel conteníu ensembre del sitiu (artículos, títulos, mensaxes, etc.) con l\'aida de l\'atayu <code><:cadena:></code>.
 
-Consulta [equí ->http://www.spip.net/fr_article2128.html] la documentación de SPIP pa esti asuntu.
+Consulta [equí ->https://www.spip.net/fr_article2128.html] la documentación de SPIP pa esti asuntu.
 
 Esta ferramienta acepta igualmente los argumentos que apaecieron con SPIP 2.0. Por exemplu, l\'atayu <code><:mio_cadena{nome=Charles Martin, eda=37}:></code> permite pasa-y dos parámetros a la siguiente cadena: <code>\'mio_cadena\'=>"Bones, soi @nome@ y tengo @eda@ años\\"</code>.
 
@@ -606,7 +606,7 @@ _ Tamién hai disponible un modelu pa los conteníos: pon <code><bolo300></code>
 	'trousse_balises:nom' => 'Caxón de balices',
 	'type_urls:description' => '@puce@ SPIP ufre una esbilla de xuegos d\'URLs pa fabricar los enllaces d\'accesu a les páxines del sitiu Web.
 
-Más info: [->http://www.spip.net/fr_article765.html]. La ferramienta « [.->boites_privees] » te permite ver na páxina de cada oxetu SPIP la URL propia asociada.
+Más info: [->https://www.spip.net/fr_article765.html]. La ferramienta « [.->boites_privees] » te permite ver na páxina de cada oxetu SPIP la URL propia asociada.
 [[%radio_type_urls3%]]
 <q3>@_CS_ASTER@pa utilizar los formatos {html}, {propies}, {propies2}, {llibres} o {arborescentes}, copia l\'archivu "htaccess.txt" del direutoriu base del sitiu SPIP col nome ".htaccess" (atención pa nun esborrar otros axustes que pudieras tener conseñaos nesti archivu); si el to sitiu ta nun "sub-direutoriu", has d\'iguar también la llinia "RewriteBase" nel archivu. Les URLs definies van redirixise agora a los archivos de SPIP.</q3>
 
@@ -727,7 +727,7 @@ Por ser webmaster tú mesmu, equi tienes permisos pa iguar esta llista de ids --
 	'webmestres:nom' => 'Llista de webmasters',
 
 	// X
-	'xml:description' => 'Activa el validador xml pa l\'espaciu públicu como ta esplicao na [documentación->http://www.spip.net/fr_article3541.html]. Améstase un botón tituláu «Análisis XML» a los otros botones d\'alministración.', # MODIF
+	'xml:description' => 'Activa el validador xml pa l\'espaciu públicu como ta esplicao na [documentación->https://www.spip.net/fr_article3541.html]. Améstase un botón tituláu «Análisis XML» a los otros botones d\'alministración.', # MODIF
 	'xml:nom' => 'Validador XML'
 );
 

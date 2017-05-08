@@ -309,7 +309,7 @@ _ • [Van hele plugin|Aan de eerste stand van plugin terugkomen->@reset@]@insta
 
 Pour définir ce logo, rendez-vous sur la page « Configuration du site » en cliquant sur le bouton « Configuration ».', # MODIF
 	'icone_visiter:nom' => 'Knoop « Bezoeken »', # MODIF
-	'insert_head:description' => 'Actief automatisch het baken [#INSERT_HEAD-> http://www.spip.net/fr_article1902.html] op alle skeletten, dat zij of niet dit baken tussen <head> en </head>. Dank zij deze keuze, zullen plugins van javascript (.js) of de bladen van stijl (.css) kunnen opnemen.', # MODIF
+	'insert_head:description' => 'Actief automatisch het baken [#INSERT_HEAD-> https://www.spip.net/fr_article1902.html] op alle skeletten, dat zij of niet dit baken tussen <head> en </head>. Dank zij deze keuze, zullen plugins van javascript (.js) of de bladen van stijl (.css) kunnen opnemen.', # MODIF
 	'insert_head:nom' => 'Baken #INSERT_HEAD',
 	'insertions:description' => 'OPGELET: werktuig in ontwikkeling!! [[%insertions%]]',
 	'insertions:nom' => 'Automatische correcties',
@@ -589,7 +589,7 @@ Par exemple, dans une boucle sur (ARTICLES), #TITRE_SECTEUR donnera le titre du 
 	'toutmulti:aide' => 'Meertalige blokken : <b><:trad:></b>', # MODIF
 	'toutmulti:description' => 'À l\'instar de ce vous pouvez déjà faire dans vos squelettes, cet outil vous permet d\'utiliser librement les chaînes de langues (de SPIP ou de vos squelettes) dans tous les contenus de votre site (articles, titres, messages, etc.) à l\'aide du raccourci <code><:chaine:></code>.
  
-Consultez [ici ->http://www.spip.net/fr_article2128.html] la documentation de SPIP à ce sujet.
+Consultez [ici ->https://www.spip.net/fr_article2128.html] la documentation de SPIP à ce sujet.
 
 Cet outil accepte également les arguments introduits par SPIP 2.0. Par exemple, le raccourci <code><:ma_chaine{nom=Charles Martin, age=37}:></code> permet de passer deux paramètres à la chaîne suivante : <code>\'ma_chaine\'=>"Bonjour, je suis @nom@ et j\'ai @age@ ans\\"</code>.
 
@@ -622,7 +622,7 @@ _ Un modèle est également disponible pour vos contenus : placez <code><bolo300
 @puce@ {{#LESMOTS}} : ', # MODIF
 	'type_urls:description' => '@puce@ SPIP offre un choix sur plusieurs jeux d\'URLs pour fabriquer les liens d\'accès aux pages de votre site.
 
-Plus d\'infos : [->http://www.spip.net/fr_article765.html]. L\'outil « [.->boites_privees] » vous permet de voir sur la page de chaque objet SPIP l\'URL propre associée.
+Plus d\'infos : [->https://www.spip.net/fr_article765.html]. L\'outil « [.->boites_privees] » vous permet de voir sur la page de chaque objet SPIP l\'URL propre associée.
 [[%radio_type_urls3%]]
 <q3>@_CS_ASTER@pour utiliser les formats {html}, {propres}, {propres2}, {libres} ou {arborescentes}, recopiez le fichier "htaccess.txt" du répertoire de base du site SPIP sous le sous le nom ".htaccess" (attention à ne pas écraser d\'autres réglages que vous pourriez avoir mis dans ce fichier) ; si votre site est en "sous-répertoire", vous devrez aussi éditer la ligne "RewriteBase" ce fichier. Les URLs définies seront alors redirigées vers les fichiers de SPIP.</q3>
 
@@ -735,7 +735,7 @@ Als webmestre zelf, hebt u hier de rechten om deze lijst van ids te wijzigen  ge
 	'webmestres:nom' => 'Webmestres lijst',
 
 	// X
-	'xml:description' => 'Actief validateur xml voor de openbare ruimte zoals hij in  [documentatie->http://www.spip.net/en_article3582.html]  wordt beschreven. Een knoop getiteld « Analyse XML » wordt aan de andere knopen van bestuur toegevoegd.', # MODIF
+	'xml:description' => 'Actief validateur xml voor de openbare ruimte zoals hij in  [documentatie->https://www.spip.net/en_article3582.html]  wordt beschreven. Een knoop getiteld « Analyse XML » wordt aan de andere knopen van bestuur toegevoegd.', # MODIF
 	'xml:nom' => 'XML Validatie'
 );
 

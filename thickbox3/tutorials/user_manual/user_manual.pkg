@@ -16,7 +16,7 @@
 	<refsect1 id="{@id install}">
 		<title>Installation</title>
 		<para>
-		Le plugin Thickbox_v3 s'installe de la m&ecirc;me mani&egrave;re que l'ensemble des plugins SPIP (<i><a href="http://www.spip.net/fr_article3396.html" target="_blank">article d&eacute;di&eacute; sur 'spip.net'</a></i>).
+		Le plugin Thickbox_v3 s'installe de la m&ecirc;me mani&egrave;re que l'ensemble des plugins SPIP (<i><a href="https://www.spip.net/fr_article3396.html" target="_blank">article d&eacute;di&eacute; sur 'spip.net'</a></i>).
 		</para>
 	</refsect1>
 	<refsect1 id="{@id jquery}">

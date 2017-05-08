@@ -265,7 +265,7 @@ _ • [De todo el plugin|Volver al estado inicial del plugin->@reset@]@install@
 
 Para definir el logo, entra en la página de «Configuración de sitio» pulsando el botón «Configuración».', # MODIF
 	'icone_visiter:nom' => 'Botón «Visitar»', # MODIF
-	'insert_head:description' => 'Activa automáticamente la baliza [#INSERT_HEAD->http://www.spip.net/es_article2132.html] en todos los esqueletos, tengan o no esta baliza entre &lt;head&gt; y &lt;/head&gt;. Gracias a esta opción, los plugins podrán insertar JavaScript (.js) u hojas de estilo (.css).',
+	'insert_head:description' => 'Activa automáticamente la baliza [#INSERT_HEAD->https://www.spip.net/es_article2132.html] en todos los esqueletos, tengan o no esta baliza entre &lt;head&gt; y &lt;/head&gt;. Gracias a esta opción, los plugins podrán insertar JavaScript (.js) u hojas de estilo (.css).',
 	'insert_head:nom' => 'Baliza #INSERT_HEAD',
 	'insertions:description' => 'ATENCIÓN : ¡¡herramienta en fase de desarrollo!! [[%insertions%]]',
 	'insertions:nom' => 'Correcciones automáticas',
@@ -541,7 +541,7 @@ Igualmente está soportada la sintaxis <html>#TITRE_XXX{yy}</html>. Ejemplo: <ht
 	'toutmulti:aide' => 'Bloques multilingües: <b><:trad:></b>', # MODIF
 	'toutmulti:description' => 'Del mismo modo que puedes hacer en los esqueletos, esta herramienta te permite utilizar libremente las cadenas de idioma (de SPIP o de tus esqueletos) en todos los contenidos del sitio (artículos, títulos, mensajes, etc.) con ayuda del atajo <code><:cadena:></code>.
 
-Consulta [aquí ->http://www.spip.net/es_article2247.html] la documentación de SPIP sobre el tema.
+Consulta [aquí ->https://www.spip.net/es_article2247.html] la documentación de SPIP sobre el tema.
 
 Esta herramienta también acepta argumentos introducidos por SPIP 2.0. Por ejemplo, el atajo <code><:cadena{nombre=José García, edad=37}:></code> permite pasar dos parámetros en la cadena siguiente: <code>\'cadena\'=>"Hola, soy @nombre@ y tengo @edad@ años\\"</code>.
 
@@ -564,7 +564,7 @@ Las propuestas siguientes se basan en la función SQL \'ORDER BY\': utiliza la o
 	'tri_titre' => 'Ordenar por título (ORDER BY 0+titre,titre)',
 	'type_urls:description' => '@puce@ SPIP te permite elegir entre varios tipos de URLs para crear los enlaces de acceso a las páginas de tu sitio:
 
-Más información: [->http://www.spip.net/es_article2024.html]. La utilidad « [.->boites_privees] » te permite ver en la página de cada objeto SPIP la URL propia asociada.
+Más información: [->https://www.spip.net/es_article2024.html]. La utilidad « [.->boites_privees] » te permite ver en la página de cada objeto SPIP la URL propia asociada.
 [[%radio_type_urls3%]]
 <q3>@_CS_ASTER@para utilizar los formatos {html}, {propre}, {propre2}, {libres} o {arborescentes}, copia el archivo "htaccess.txt" de la carpeta base del sitio SPIP y ponle el nombre ".htaccess" (primero haz una copia de seguridad, y ten cuidado para no borrar otros ajustes que podrías haber puesto en ese archivo); si tu sitio está como "subdirectorio", tendrás que editar también la línea "RewriteBase" de ese fichero. Las URLs definidas ahora se redirigirán hacia los ficheros de SPIP.</q3>
 
@@ -683,7 +683,7 @@ Al ser webmaster tu mismo, aquí tienes permisos para modificar esta lista de id
 	'webmestres:nom' => 'Lista de webmasters',
 
 	// X
-	'xml:description' => 'Activa el validador de xml para el espacio público como se describe en la [documentación->http://www.spip.net/fr_article3541.html]. Se añade un botón titulado « Análisis XML » a los botones de administración.', # MODIF
+	'xml:description' => 'Activa el validador de xml para el espacio público como se describe en la [documentación->https://www.spip.net/fr_article3541.html]. Se añade un botón titulado « Análisis XML » a los botones de administración.', # MODIF
 	'xml:nom' => 'Validador de XML'
 );
 

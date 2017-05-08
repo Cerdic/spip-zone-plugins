@@ -152,7 +152,7 @@ if (function_exists('spiplistes_spip_est_inferieur_193') AND spiplistes_spip_est
  * du style : [(#TEXTE|liens_publics)]
  * @version CP-20110629
  * @example [(#TEXTE|liens_publics)]
- * @see http://www.spip.net/fr_article3377.html
+ * @see https://www.spip.net/fr_article3377.html
  * @param string $texte
  * @return string
  */

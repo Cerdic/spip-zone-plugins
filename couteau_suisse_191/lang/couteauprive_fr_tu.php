@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de https://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -269,7 +269,7 @@ _ • [De tout le plugin|Revenir &agrave; l\'&eacute;tat initial du plugin->@res
 
 Pour d&eacute;finir ce logo, vas sur la page &laquo;&nbsp;Configuration du site&nbsp;&raquo; en cliquant sur le bouton &laquo;&nbsp;Configuration&nbsp;&raquo;.',
 	'icone_visiter:nom' => 'Bouton &laquo;&nbsp;Visiter&nbsp;&raquo;',
-	'insert_head:description' => 'Active automatiquement la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] sur tous les squelettes, qu\'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Gr&acirc;ce &agrave; cette option, les plugins pourront ins&eacute;rer du JavaScript (.js) ou des feuilles de style (.css).',
+	'insert_head:description' => 'Active automatiquement la balise [#INSERT_HEAD->https://www.spip.net/fr_article1902.html] sur tous les squelettes, qu\'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Gr&acirc;ce &agrave; cette option, les plugins pourront ins&eacute;rer du JavaScript (.js) ou des feuilles de style (.css).',
 	'insert_head:nom' => 'Balise #INSERT_HEAD',
 	'insertions:description' => 'ATTENTION : outil en cours de d&eacute;veloppement !! [[%insertions%]]',
 	'insertions:nom' => 'Corrections automatiques',
@@ -571,7 +571,7 @@ La syntaxe <html>#TITRE_XXX{yy}</html> est &eacute;galement support&eacute;e. Ex
 	'toutmulti:aide' => 'Blocs multilingues&nbsp;: <b><:trad:></b>',
 	'toutmulti:description' => '&Agrave; l\'instar de ce tu peux d&eacute;j&agrave; faire dans tes squelettes, cet outil te permet d\'utiliser librement les cha&icirc;nes de langues (de SPIP ou de tes squelettes) dans tous les contenus de ton site (articles, titres, messages, etc.) &agrave; l\'aide du raccourci <code><:chaine:></code>.
  
-Consulte [ici ->http://www.spip.net/fr_article2128.html] la documentation de SPIP &agrave; ce sujet.
+Consulte [ici ->https://www.spip.net/fr_article2128.html] la documentation de SPIP &agrave; ce sujet.
 
 Cet outil accepte &eacute;galement les arguments introduits par SPIP 2.0. Par exemple, le raccourci <code><:ma_chaine{nom=Charles Martin, age=37}:></code> permet de passer deux param&egrave;tres &agrave; la cha&icirc;ne suivante : <code>\'ma_chaine\'=>"Bonjour, je suis @nom@ et j\'ai @age@ ans\\"</code>.
 
@@ -594,7 +594,7 @@ Les propositions ci-dessous sont bas&eacute;es sur la fonctionnalit&eacute; SQL 
 	'tri_titre' => 'Tri sur le titre (ORDER BY 0+titre,titre)',
 	'type_urls:description' => '@puce@ SPIP offre un choix sur plusieurs jeux d\'URLs pour fabriquer les liens d\'acc&egrave;s aux pages de ton site.
 
-Plus d\'infos : [->http://www.spip.net/fr_article765.html]. L\'outil &laquo;&nbsp;[.->boites_privees]&nbsp;&raquo; te permet de voir sur la page de chaque objet SPIP l\'URL propre associ&eacute;e.
+Plus d\'infos : [->https://www.spip.net/fr_article765.html]. L\'outil &laquo;&nbsp;[.->boites_privees]&nbsp;&raquo; te permet de voir sur la page de chaque objet SPIP l\'URL propre associ&eacute;e.
 [[%radio_type_urls3%]]
 <q3>@_CS_ASTER@pour utiliser les formats {html}, {propres}, {propres2}, {libres} ou {arborescentes}, recopie le fichier "htaccess.txt" du r&eacute;pertoire de base du site SPIP sous le sous le nom ".htaccess" (attention &agrave; ne pas &eacute;craser d\'autres r&eacute;glages que tu pourrais avoir mis dans ce fichier) ; si ton site est en "sous-r&eacute;pertoire", tu devras aussi &eacute;diter la ligne "RewriteBase" ce fichier. Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de SPIP.</q3>
 
@@ -715,7 +715,7 @@ En tant que webmestre toi-m&ecirc;me, tu as ici les droits de modifier cette lis
 	'webmestres:nom' => 'Liste des webmestres',
 
 	// X
-	'xml:description' => 'Active le validateur xml pour l\'espace public tel qu\'il est d&eacute;crit dans la [documentation->http://www.spip.net/fr_article3541.html]. Un bouton intitul&eacute; &laquo;&nbsp;Analyse XML&nbsp;&raquo; est ajout&eacute; aux autres boutons d\'administration.',
+	'xml:description' => 'Active le validateur xml pour l\'espace public tel qu\'il est d&eacute;crit dans la [documentation->https://www.spip.net/fr_article3541.html]. Un bouton intitul&eacute; &laquo;&nbsp;Analyse XML&nbsp;&raquo; est ajout&eacute; aux autres boutons d\'administration.',
 	'xml:nom' => 'Validateur XML'
 );
 

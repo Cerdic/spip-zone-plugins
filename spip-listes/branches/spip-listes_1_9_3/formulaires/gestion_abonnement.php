@@ -1,8 +1,8 @@
 <?php
 /**
  * @since SPIP 2.0
- * @see http://www.spip.net/fr_article3800.html (les formulaires CVT)
- * @see http://www.spip.net/fr_article3796.html (CVT par l'exemple)
+ * @see https://www.spip.net/fr_article3800.html (les formulaires CVT)
+ * @see https://www.spip.net/fr_article3796.html (CVT par l'exemple)
  * @package spiplistes
  */
  // $LastChangedRevision$

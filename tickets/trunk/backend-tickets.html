@@ -38,7 +38,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 	<link>[(#ENV{id_ticket}|?{[(#URL_TICKET{#ENV{id_ticket}}|url_absolue)],[(#URL_PAGE{tickets}|parametre_url{id_auteur,#ENV{id_auteur}}|parametre_url{id_assigne,#ENV{id_assigne}}|url_absolue)]})]</link>
 	[<description>(#ENV{id_ticket}|?{[(#INFO_TEXTE{ticket,#ENV{id_ticket}}|supprimer_tags|texte_backend)],[(#DESCRIPTIF_SITE_SPIP|supprimer_tags|texte_backend)]})</description>]
 	<language>#LANG</language>
-	<generator>SPIP #SPIP_VERSION (http://www.spip.net)</generator>
+	<generator>SPIP #SPIP_VERSION (https://www.spip.net)</generator>
 	<atom:link href="[(#SELF|url_absolue)]" rel="self" type="application/rss+xml" />
 
 [	<image>

@@ -4,7 +4,7 @@
  * @package pgn4spip plugin to embed pgn4web Chessboard in a SPIP article
  * @copyright copyright (c) 2012 Matt Chesstale 
  * @license GNU General Public License version 3
- * @reference: _AUTOBR in http://www.spip.net/en_article5533.html
+ * @reference: _AUTOBR in https://www.spip.net/en_article5533.html
  * pipeline "post_propre" happens after the HTML iframe generation by pgn4spip_fonctions.php
  * and after spip3\plugins-dist\textwheel\inc\texte.php replaces "\n" with "<p><br class='autobr' /></p>"
  * The user does NOT need to define the constant _AUTOBR as '' in spip3\ecrire\mes_options.php

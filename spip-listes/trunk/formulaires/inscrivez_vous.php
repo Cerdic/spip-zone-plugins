@@ -18,8 +18,8 @@
  * @author CP
  * @version CP-20110822
  * 
- * @see http://www.spip.net/fr_article3800.html (les formulaires CVT)
- * @see http://www.spip.net/fr_article3796.html (CVT par l'exemple)
+ * @see https://www.spip.net/fr_article3800.html (les formulaires CVT)
+ * @see https://www.spip.net/fr_article3796.html (CVT par l'exemple)
  * @package spiplistes
  */
  // $LastChangedRevision$

@@ -62,8 +62,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	- leur position dans le diaporama, combinaison des valeurs d\'alignement "left/center/right" et "top/center/bottom" (ex "left center")<br />
 	- leur taille finale souhaitée (largeur hauteur)<br /><br />
 	Pour en savoir plus, consulter l\'explication sur spip.net des fonctions<br />
-	- <a href="http://www.spip.net/fr_article3327.html#image_reduire" target="_blank">image_reduire</a>;<br />
-	- <a href="http://www.spip.net/fr_article3327.html#image_recadre" target="_blank">image_recadre</a>.',
+	- <a href="https://www.spip.net/fr_article3327.html#image_reduire" target="_blank">image_reduire</a>;<br />
+	- <a href="https://www.spip.net/fr_article3327.html#image_recadre" target="_blank">image_recadre</a>.',
 		
 	'sjcycle_img_position' => 'Positionnement',
 	

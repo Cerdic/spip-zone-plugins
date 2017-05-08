@@ -78,7 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'doc_titre_court' => 'Documentation Pub Banner',
 	'doc_titre_page' => 'Documentation du plugin "Pub Banner"',
 	'docskel_sep' => '----',
-	'documentation_1' => 'Le plugin PUB BANNER s’installe de la même manière que l’ensemble des plugins SPIP ({[article dédié sur spip.net->http://www.spip.net/fr_article3396.html]}).
+	'documentation_1' => 'Le plugin PUB BANNER s’installe de la même manière que l’ensemble des plugins SPIP ({[article dédié sur spip.net->https://www.spip.net/fr_article3396.html]}).
 
 Des valeurs par défaut sont entrées dans les tables, à savoir :
 -* quatre bannières "type", les plus répandues sur le web :

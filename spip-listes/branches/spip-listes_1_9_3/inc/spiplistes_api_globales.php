@@ -155,7 +155,7 @@ function spiplistes_server_rezo_local () {
  * @version CP-20080324
  * @staticvar $is_inf
  * @global $GLOBALS['spip_version_code']
- * @see http://www.spip.net/fr_article4449.html
+ * @see https://www.spip.net/fr_article4449.html
  * @return bool
  */
 function spiplistes_spip_est_inferieur_193 () {

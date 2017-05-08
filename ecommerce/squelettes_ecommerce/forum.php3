@@ -4,7 +4,7 @@ $fond = "forum";
 $delais = 3600;
 
 // Exemples de personnalisation :
-// @ http://www.spip.net/fr_article1825.html
+// @ https://www.spip.net/fr_article1825.html
 //
 // 1. seuls les mots-cles du groupe de mots numero 1 doivent s'afficher
 // $afficher_groupe = array(1);

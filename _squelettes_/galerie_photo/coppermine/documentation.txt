@@ -38,7 +38,7 @@ Vous pouvez vous inscrire comme rédacteur pour tester l'upload d'images.
 $default_bridge_data['spip'] = array(
   'full_name' => 'SPIP 1.9',
   'short_name' => 'SPIP',
-  'support_url' => 'http://www.spip.net/',
+  'support_url' => 'https://www.spip.net/',
   'full_forum_url_default' => 'http://www.votresite.tld',
   'full_forum_url_used' => 'mandatory,not_empty,no_trailing_slash',
   'relative_path_to_config_file_default' => '../ecrire/',

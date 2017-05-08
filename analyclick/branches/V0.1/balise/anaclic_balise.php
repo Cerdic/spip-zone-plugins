@@ -50,7 +50,7 @@ function balise_COMPTEUR_TELECHARGEMENT_dist($p)
  *
  * @balise
  * @uses generer_generer_url()
- * @link http://www.spip.net/3963
+ * @link https://www.spip.net/3963
  * @example
  *     ```
  *     #URL_DOCUMENT

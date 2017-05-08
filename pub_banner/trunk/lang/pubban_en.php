@@ -80,7 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'doc_titre_court' => 'Ad Banner Documentation',
 	'doc_titre_page' => 'Documentation of plugin "Ad Banner"',
 	'docskel_sep' => '----',
-	'documentation_1' => 'The plugin "Ad Banner" can be installed in the same way that all SPIP plugins ({[dedicated article on spip.net->http://www.spip.net/fr_article3396.html]}).
+	'documentation_1' => 'The plugin "Ad Banner" can be installed in the same way that all SPIP plugins ({[dedicated article on spip.net->https://www.spip.net/fr_article3396.html]}).
 
 Default values ​​are entered in the tables, namely:
 -* Four "example" banners , the most popular on the web :

@@ -1708,7 +1708,7 @@ function association_tablinfos_intro($titre, $type='', $id=0, $DesLignes=array()
 	if ( count($DesLignes) OR $ObjetEtendu )
 		$res .= "\n<dl class='verdana1 spip_xx-small'>";
 	foreach ($DesLignes as $dt=>$dd) {
-		$res .= "\n<dt>". association_langue($dt) ."</dt>\n<dd>". propre($dd) .'</dd>'; // propre() paragraphe (rajoute <p>)... mais ce comportement peut etre change en mettant "paragrapher" a FALSE dans mes_options.php : http://www.spip.net/fr_article889.html Cette presentation-ci est propre a Associaspip ; Habituellement on a : $res .= "<div class='$dt'><strong>". association_langue($dt) ."</strong> $dd</div>";
+		$res .= "\n<dt>". association_langue($dt) ."</dt>\n<dd>". propre($dd) .'</dd>'; // propre() paragraphe (rajoute <p>)... mais ce comportement peut etre change en mettant "paragrapher" a FALSE dans mes_options.php : https://www.spip.net/fr_article889.html Cette presentation-ci est propre a Associaspip ; Habituellement on a : $res .= "<div class='$dt'><strong>". association_langue($dt) ."</strong> $dd</div>";
 	}
 	if ($ObjetEtendu) {
 		$champsExtras = association_trouver_iextras($ObjetEtendu, $id); // on recupere les champs extras crees manuellement (i.e. via l'interface d'edition du prive, pas ceux rajoutes par les plugins !)

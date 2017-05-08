@@ -90,7 +90,7 @@ En application des [articles L. 111-1 et L. 123-1 du Code de la Propriété Inte
 ',
 	'mentions_legales_fonctionnement' => '{{{Fonctionnement du site}}}
 
-Les pages et le contenu de ce site sont générés par le logiciel libre {{SPIP}}, distribué sous licence GNU / GPL ({Licence Publique Générale}). Vous pouvez l’utiliser librement pour réaliser votre propre site web. Pour plus d’informations, reportez-vous au site : [spip.net->http://www.spip.net].
+Les pages et le contenu de ce site sont générés par le logiciel libre {{SPIP}}, distribué sous licence GNU / GPL ({Licence Publique Générale}). Vous pouvez l’utiliser librement pour réaliser votre propre site web. Pour plus d’informations, reportez-vous au site : [spip.net->https://www.spip.net].
 
 <small>
 {{SPIP, Système de Publication pour l\'Internet
