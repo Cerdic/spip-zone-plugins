@@ -87,6 +87,6 @@ puis une liste ordonnée avec la syntaxe spip:
 - http://herbier.spip.net
 - https://contrib.spip.net
 
-dernier test vers nos amis de spip-party: http://party.spip.net/ 
+dernier test vers nos amis de spip-party: https://party.spip.net/ 
 _ ouf ! 
 _ merci [spip->https://www.spip.net]
