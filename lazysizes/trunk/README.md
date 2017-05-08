@@ -8,6 +8,32 @@ Outil / lib de lazyloading extensible via un système de plugin/addons.
 Permet notamment de déférer le téléchargement de ressources (images, iframes, vidéos, ..) de manière a ce que l'utilisateur
 ne charge que ce qui est visible dans la fenetre de navigation, ou quand on souhaite sur un autre évenement via un sytème de hooks.
 
+Lazysizes est un script de lazyloading rapide et sans dépendance a un framework d'images
+(incluant les images responsives picture/srcset), les iframes, les scripts/widgets, …
+Il agit sur la priorité des pré-chargement en différenciant les éléments
+suivant la distance plus ou moins importante du champ visible, afin d'augmenter l'impression de rapidité.
+
+LazySizes peut aussi devenir votre outil numéro 1 pour intégrer à votre site les images responsive.
+
+LazySizes peut calculer automatiquement la taille et le ratio de vos images.
+
+Il peut vous permettre de partager vos media queries entre vos css et les attributs de vos medias,
+aidant ainsi à séparer votre layout (CSS) de votre contenu/structure (HTML),
+rendant ainsi l'intégration des images responsive dans n'importe quel environement ou contexte beaucoup plus simple.
+
+Il inclu aussi un système de plugin, permettant d'étendre ses fonctionnalitées.
+
+
+## Pourquoi LazySize
+
+**Amélioration SEO**:
+
+Lazysize ne masque pas les images/ressources à google ou aux autre robots des moteurs de recherche.
+Ces robots ne défilent pas dans la page et n'interragissent pas avec votre site.
+Lazysize detecte, si l'agent utilisateur (user agent) est capable de défiler
+dans la page et révèle dans ce cas les contenus/ressources immédiatement.
+
+
 
 
 ## Addons :
@@ -111,5 +137,5 @@ puis les charger dans insert_head
 - [X] config export ie_config()
 - [] traduire la doc 
 - [] Ajouter via define ou config les options de configuration
-- [] surcharger les modèles media, interressant a "lazyloader"
+- [] surcharger les modèles media, interressants a "lazyloader"
 - [] Chaines de langue, et docs/aide des addons
