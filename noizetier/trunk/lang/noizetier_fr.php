@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'apercu' => 'Aperçu',
 
 	// B
-	'bloc_sans_noisette' => 'Ce bloc ne contient pas de noisette.',
+	'bloc_sans_noisette' => 'Ajouter des noisettes en utilisant le bouton “ajouter une noisette” ou en glissant-déposant la noisette choisie sur cet emplacement.',
 	'bulle_configurer_objet_noisettes' => 'Configurer les noisettes spécifiques à cet objet',
 	'bulle_configurer_page_noisettes' => 'Configurer les noisettes de la page',
 	'bulle_creer_composition' => 'Créer une composition virtuelle de la page « @page@ »',

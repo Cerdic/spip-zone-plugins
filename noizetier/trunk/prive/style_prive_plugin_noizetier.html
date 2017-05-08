@@ -35,8 +35,10 @@ ul.liste-noisettes li:hover .icone {display:block;}
 .formulaire_editer_noisette li.editer_description_code label, .formulaire_editer_noisette li.editer_code label {width:100%; margin-left:0; float:none;}
 
 /* Styles de la liste des pages liées ou non à un objet (noizetier_pages) */
-ul.noizetier-liste-pages li.page {padding-left: 30px; padding-right: 60px; position:relative;}
-ul.noizetier-liste-pages li.page .icone {
+ul.noizetier-liste-pages li.page,
+ul.noizetier-liste-objets li.objet {padding-left: 30px; padding-right: 60px; position:relative;}
+ul.noizetier-liste-pages li.page .icone,
+ul.noizetier-liste-objets li.objet .icone {
 	position: absolute;
 	top: .6925em;
 	left: 0;
@@ -58,8 +60,6 @@ ul.noizetier-liste-pages li.page.virtuelle {
 	opacity: 0.8;}
 ul.noizetier-liste-pages li.page .composition {margin-left: 30px;}
 ul.noizetier-liste-pages li.page .composition .icone {left: 30px;}
-
-ul.noizetier-liste-objets li.objet {padding-left: 30px; background-repeat: no-repeat; background-position: left 9px;}
 
 /* Styles de la page de configuration des noisettes d'une page donnée (noizetier_page) */
 .infos .numero p#identifiant {font-size: 1.2em;}

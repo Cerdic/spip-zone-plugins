@@ -27,7 +27,7 @@
 	<br class="clear" />
 	[(#ENV{page}|oui)
 		<div id="wysiwyg">
-			[<div class="champ contenu_texte[ (#GET{informations/description}|strlen|?{'',vide})]">
+			[<div class="champ contenu_description[ (#GET{informations/description}|strlen|?{'',vide})]">
 				<div dir='#LANG_DIR' class="texte">(#GET{informations/description})</div>
 			</div>]
 		</div>

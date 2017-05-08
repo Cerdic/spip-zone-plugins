@@ -8,10 +8,17 @@
 <h3>[(#CLE|objet_info{texte_objets}|_T)]</h3>
 <ul class="liste-items liste-pages noizetier-liste-objets">
 	<BOUCLE_objets(DATA) {source table, #VALEUR}{par cle}>
-	<li class="item objet" [ style="background-image: url((#VALEUR{logo}|image_reduire{24}|extraire_attribut{src}));"]>
-		<a[ href="(#URL_ECRIRE{noizetier_page}|parametre_url{objet, #_objet_types:CLE}|parametre_url{id_objet,#CLE})"] title="<:noizetier:bulle_configurer_objet_noisettes:>">
-			[(#VALEUR{titre}|sinon{#_types:CLE&nbsp;-&nbsp;#CLE})]
-		</a>
+	<li class="item objet">
+		<div>
+			<div class="resume">
+				<a[ href="(#URL_ECRIRE{noizetier_page}|parametre_url{objet, #_objet_types:CLE}|parametre_url{id_objet,#CLE})"] title="<:noizetier:bulle_configurer_objet_noisettes:>">
+					[(#VALEUR{titre}|sinon{#_types:CLE&nbsp;-&nbsp;#CLE})]
+				</a>
+				<div class="icone">
+					[(#VALEUR{logo}|image_reduire{24}|extraire_attribut{src}|balise_img)]
+				</div>
+			</div>
+		</div>
 	</li>
 	</BOUCLE_objets>
 </ul>
