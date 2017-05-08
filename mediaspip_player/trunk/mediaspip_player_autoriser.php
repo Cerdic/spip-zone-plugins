@@ -19,7 +19,7 @@ function mediaspip_player_autoriser() {
 
 /**
  * Surcharges des autorisations du plugin medias
- * depuis http://zone.spip.org/trac/spip-zone/changeset/89155/_core_#file3
+ * depuis https://zone.spip.org/trac/spip-zone/changeset/89155/_core_#file3
  * On doit lier des docs à d'autres docs
  */
 include_spip('plugins/installer');

@@ -19,7 +19,7 @@ include_spip('base/abstract_sql');
 
 // A chaque modif de la base SQL ou ses conventions (raccourcis etc)
 // le fichier plugin.xml doit indiquer le numero de depot qui l'implemente sur
-// http://zone.spip.org/trac/spip-zone/timeline
+// https://zone.spip.org/trac/spip-zone/timeline
 // Ce numero est fourni automatiquement par la fonction spip_plugin_install
 // lors de l'appel des fonctions de ce fichier.
 
@@ -283,7 +283,7 @@ function association_maj_16181() {
 			$GLOBALS['association_maj_erreur'] = 62;
 		return;
 	} else { // On continue a utiliser la table asso_adherents....
-		// asso_adherents.statut devient asso_adherents.statut_relance (nom recherche par I2 si je comprends bien http://zone.spip.org/trac/spip-zone/browser/tags/inscription2_192/base/inscription2_installer.php#L70 ? mais I2 utilise statut_interne d'apres http://zone.spip.org/trac/spip-zone/changeset/16209/_plugins_/_test_/Association/Association_1.9.2/exec/action_cotisations.php#L31 ! bon, pas inclus dans maj_16181...)
+		// asso_adherents.statut devient asso_adherents.statut_relance (nom recherche par I2 si je comprends bien https://zone.spip.org/trac/spip-zone/browser/tags/inscription2_192/base/inscription2_installer.php#L70 ? mais I2 utilise statut_interne d'apres https://zone.spip.org/trac/spip-zone/changeset/16209/_plugins_/_test_/Association/Association_1.9.2/exec/action_cotisations.php#L31 ! bon, pas inclus dans maj_16181...)
 		sql_alter("TABLE spip_asso_adherents ADD statut_relance TEXT NOT NULL");
 		sql_update('spip_asso_adherents', array('statut_relance' => 'statut'), "statut<>''");
 		sql_alter("TABLE spip_asso_adherents DROP statut");

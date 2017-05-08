@@ -156,7 +156,7 @@ function medias_deplacer_documents_repertoire_orphelins()
  * des erreurs recontrées dans un fichier de log.
  *
  * Script repris de ce fichier :
- * http://zone.spip.org/trac/spip-zone/browser/_outils_/repare_doc.html
+ * https://zone.spip.org/trac/spip-zone/browser/_outils_/repare_doc.html
  *
  * @uses medias_lister_logos_fichiers()
  * @uses _DIR_IMG

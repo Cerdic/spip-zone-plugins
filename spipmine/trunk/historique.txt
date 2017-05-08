@@ -1,6 +1,6 @@
 
 L'ancien plugin spip-mine était là :
-- http://zone.spip.org/trac/spip-zone/browser/_plugins_/spip_mine?rev=39168
+- https://zone.spip.org/trac/spip-zone/browser/_plugins_/spip_mine?rev=39168
 
 Il contenait les idées suivantes :
 - spip_mine_comptes

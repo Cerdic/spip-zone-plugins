@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Compat ascendante pour d'autre plugins
- * http://zone.spip.org/trac/spip-zone/changeset/36546
+ * https://zone.spip.org/trac/spip-zone/changeset/36546
  */
 
 function agenda_verifier_corriger_date_saisie($suffixe,$horaire,&$erreurs){

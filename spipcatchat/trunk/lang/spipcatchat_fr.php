@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_en_ligne' => 'En ligne :',
 'info_statut' => 'Changer de statut : ',
 'info_configuration' => 'Bienvenue sur l&apos;espace de paramétrage du syst&egrave;me de communication instantan&eacute;e d&eacute;velopp&eacute; pour Spip.<br/>Il existe deux parties dans ce plugin, un salon de discussion dans l’espace public et un autre dans l’espace privé dont vous retrouvez dans le menu des paramètres les formulaires de configuration ainsi que les réglages en commun.',
-'info_configuration2' => 'Pour plus d&apos;information sur la configuration et l&apos;installation voir la documentation sur <a href="https://contrib.spip.net/Plugin-SpipCatChat">Contribution Spip</a> et pour l&apos;utilisation voir <a href="https://contrib.spip.net/IMG/pdf/guide_de_l_utilisateur.pdf">le guide de  l&apos;utilisateur</a>.<br/><br/>Contact : <a href="mailto:claude.codden@nic-nac.org">Claude Codden</a><br/>D&eacute;veloppement : <a href="http://zone.spip.org/trac/spip-zone/browser/_plugins_/spipcatchat/trunk">SPIP Zone</a>',
+'info_configuration2' => 'Pour plus d&apos;information sur la configuration et l&apos;installation voir la documentation sur <a href="https://contrib.spip.net/Plugin-SpipCatChat">Contribution Spip</a> et pour l&apos;utilisation voir <a href="https://contrib.spip.net/IMG/pdf/guide_de_l_utilisateur.pdf">le guide de  l&apos;utilisateur</a>.<br/><br/>Contact : <a href="mailto:claude.codden@nic-nac.org">Claude Codden</a><br/>D&eacute;veloppement : <a href="https://zone.spip.org/trac/spip-zone/browser/_plugins_/spipcatchat/trunk">SPIP Zone</a>',
 'info_gnu' => 'Ce plugin est un logiciel libre distribue sous licence GNU/GPL.',
 'index_attent' => 'Chargement du chat en cours...',
 'info_auteur' => 'Salon des auteurs',

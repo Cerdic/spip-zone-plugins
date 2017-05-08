@@ -1106,7 +1106,7 @@ JS;
 
 	/**
 	 * Resize without bluring, and save image with needed quality if JPG image
-	 * @author : Arno* from http://zone.spip.org/trac/spip-zone/browser/_plugins_/image_responsive/action/image_responsive.php
+	 * @author : Arno* from https://zone.spip.org/trac/spip-zone/browser/_plugins_/image_responsive/action/image_responsive.php
 	 *
 	 * @param string $source
 	 * @param string $dest
@@ -1222,7 +1222,7 @@ JS;
 	}
 
 	/**
-	 * @author : Arno* from http://zone.spip.org/trac/spip-zone/browser/_plugins_/image_responsive/action/image_responsive.php
+	 * @author : Arno* from https://zone.spip.org/trac/spip-zone/browser/_plugins_/image_responsive/action/image_responsive.php
 	 *
 	 * @param int $intOrig
 	 * @param int $intFinal

@@ -23,7 +23,7 @@ Ajout d'une plateforme d'exportation/importation des rŽglages du plugin d'un
 site ˆ l'autre
 
 20/09/2010 - MISE EN DEV SVN SUR SPIP-ZONE :
-http://zone.spip.org/trac/spip-zone/browser/_plugins_/spip_proprietaire
+https://zone.spip.org/trac/spip-zone/browser/_plugins_/spip_proprietaire
 
 version 1.1 -> 1.2
 

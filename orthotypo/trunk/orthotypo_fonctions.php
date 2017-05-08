@@ -132,8 +132,8 @@ function orthotypo_echappe_balise_html($m) {
 /* *********************************************************************************************************************
  * Guillemets
  * merge de
- * - http://zone.spip.org/trac/spip-zone/browser/_plugins_/typo_guillemets/typo_guillemets_fonctions.php?rev=54676
- * - http://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau_suisse/outils/guillemets.php?rev=64721
+ * - https://zone.spip.org/trac/spip-zone/browser/_plugins_/typo_guillemets/typo_guillemets_fonctions.php?rev=54676
+ * - https://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau_suisse/outils/guillemets.php?rev=64721
  */
 
 /*
@@ -281,8 +281,8 @@ function orthotypo_espaces_fines_post_typo($t='') {
 /* *********************************************************************************************************************
  * Exposants
  * Merge de
- * - http://zone.spip.org/trac/spip-zone/browser/_plugins_/typo_exposants/typo_exposants_fonctions.php?rev=61523
- * - http://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau_suisse/outils/typo_exposants.php?rev=63425
+ * - https://zone.spip.org/trac/spip-zone/browser/_plugins_/typo_exposants/typo_exposants_fonctions.php?rev=61523
+ * - https://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau_suisse/outils/typo_exposants.php?rev=63425
  */
 
 // Filtre typographique exposants pour langue francaise
@@ -290,7 +290,7 @@ function orthotypo_espaces_fines_post_typo($t='') {
 // Toutes les infos sur : https://contrib.spip.net/?article1564
 
 // TODO : raccourci pour les exposants et indices (Pouce^2 ou Pouce^2^, H_2O ou H_2_O ou H,,2,,O
-// exemple : http://zone.spip.org/trac/spip-zone/wiki/WikiFormatting
+// exemple : https://zone.spip.org/trac/spip-zone/wiki/WikiFormatting
 
 include_spip('inc/charsets');
 if (!defined('_TYPO_class')) define('_TYPO_class', '<sup class="typo_exposants">');
@@ -397,7 +397,7 @@ function orthotypo_exposants_post_typo($texte){
 /* *********************************************************************************************************************
  * Typo des Mois : espace insecable entre le numero du jour et le mois : 12 Mars => 12&nbsp;Mars
  * Tire de
- * - http://zone.spip.org/trac/spip-zone/browser/_plugins_/typo_mois/typo_mois_fonctions.php?rev=43239
+ * - https://zone.spip.org/trac/spip-zone/browser/_plugins_/typo_mois/typo_mois_fonctions.php?rev=43239
  * avec ameliorations :
  * - prise en compte des echappements de balise
  * - prise en compte de la langue
@@ -434,7 +434,7 @@ function orthotypo_mois_post_typo($texte){
 /* *********************************************************************************************************************
  * Typo des Caps : espace insecable entre le numero du jour et le mois : 12 Mars => 12&nbsp;Mars
  * Tire de
- * - http://zone.spip.org/trac/spip-zone/browser/_plugins_/typo_caps/typo_caps_fonctions.php?rev=43238
+ * - https://zone.spip.org/trac/spip-zone/browser/_plugins_/typo_caps/typo_caps_fonctions.php?rev=43238
  * avec ameliorations :
  * - prise en compte des echappements de balise
  */

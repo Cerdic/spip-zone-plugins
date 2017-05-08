@@ -13,7 +13,7 @@ if(version_compare(PHP_VERSION, '5.0.0', '>='))
 define('_MAJ_SVN_FILE', 'file:///home/svn/repository/spip-zone/');
 define('_MAJ_SVN_DEBUT', 'svn://zone.spip.org/spip-zone/');
 define('_MAJ_SVN_TRAC', 'svn://trac.rezo.net/spip-zone/'); // ancienne URL
-define('_MAJ_ZONE', 'http://zone.spip.org/trac/spip-zone/');
+define('_MAJ_ZONE', 'https://zone.spip.org/trac/spip-zone/');
 define('_MAJ_LOG_DEBUT', _MAJ_ZONE.'log/');
 define('_MAJ_LOG_FIN', '?format=changelog');
 define('_MAJ_LOG_CS', _MAJ_LOG_DEBUT .'_plugins_/couteau_suisse');

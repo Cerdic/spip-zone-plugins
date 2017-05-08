@@ -105,7 +105,7 @@ Suivie du nom de la banni&egrave;re que vous souhaitez afficher. La balise est r
 	'documentation_2' => 'Pour une raison pratique [[Spip Bonux est utilis&eacute; par Pub Banner pour sa fonctionnalit&eacute; \'POUR\', qui permet de cr&eacute;er des boucles depuis des array PHP (ndlr) ...]], le plugin PUB BANNER n&eacute;cessite d\'avoir install&eacute; au pr&eacute;alable le plugin {{Spip Bonux}} en version 1.3 au minimum.
 
 -* Vous pouvez lire une description de ce plugin sur le site Spip-Contrib &agrave; l\'adresse : [->https://contrib.spip.net/SPIP-Bonux].
--* Vous pouvez le t&eacute;l&eacute;charger &agrave; l\'adresse : [->http://zone.spip.org/trac/spip-zone/browser/_plugins_/spip-bonux-2?rev=31575] ({ici en version 2}).
+-* Vous pouvez le t&eacute;l&eacute;charger &agrave; l\'adresse : [->https://zone.spip.org/trac/spip-zone/browser/_plugins_/spip-bonux-2?rev=31575] ({ici en version 2}).
 ',
 	'documentation_3' => 'Le plugin propose de suivre l\'efficacit&eacute; des campagnes de plusieurs fa&ccedil;ons :
 -* via la page de "statistiques" de l\'espace priv&eacute;, qui pr&eacute;sente diff&eacute;rents graphes de suivi des affichages et des clics, selon plusieurs p&eacute;riodes au choix, pour chaque banni&egrave;re,

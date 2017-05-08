@@ -2729,7 +2729,7 @@ function association_langue_index($index, $head) {
 	return _T((strpos($head,':') ? '' : 'asso:'). $head . $index);
 }
 
-if (!include_spip('inc/filtres_ecrire') OR !function_exists('sinon_interdire_acces')) { // Le filtre existe dans : Bonux, SPIP3... On conditionne comme ici : http://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau-kiss/exec/configurer_ck.php?rev=50006
+if (!include_spip('inc/filtres_ecrire') OR !function_exists('sinon_interdire_acces')) { // Le filtre existe dans : Bonux, SPIP3... On conditionne comme ici : https://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau-kiss/exec/configurer_ck.php?rev=50006
 	/**
 	 * Interdire l'acces a une page si on n'a pas l'autorisation
 	 *

@@ -91,7 +91,7 @@ function spipbb_recap_config()
 	$version=$GLOBALS['spipbb']['version'];
 	if ($svn_revision = version_svn_courante(_DIR_PLUGIN_SPIPBB)) {
 		$version .= ' ' . (($svn_revision < 0) ? 'SVN ':'')
-		. "[<a href='http://zone.spip.org/trac/spip-zone/changeset/"
+		. "[<a href='https://zone.spip.org/trac/spip-zone/changeset/"
 		. abs($svn_revision) . "' onclick=\"window.open(this.href); return false;\">"
 		. abs($svn_revision) . "</a>]";
 	}

@@ -4,4 +4,4 @@ Existent en deux versions : 128x128 px et 52x52 px.
 
 Utilisation de la police Liberation pour les extensions (http://en.wikipedia.org/wiki/Liberation_fonts).
 
-Les sources SVG sont disponibles sur SPIP-Zone : http://zone.spip.org/trac/spip-zone/browser/_graphismes_/vignettes/oxygen
+Les sources SVG sont disponibles sur SPIP-Zone : https://zone.spip.org/trac/spip-zone/browser/_graphismes_/vignettes/oxygen

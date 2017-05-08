@@ -4,7 +4,7 @@
 
 // CP-20080324
 // Script issu de :
-//   http://zone.spip.org/trac/spip-zone/browser/_plugins_/_stable_/cfg/inc/compat_cfg.php
+//   https://zone.spip.org/trac/spip-zone/browser/_plugins_/_stable_/cfg/inc/compat_cfg.php
 // $LastChangedRevision$
 // $LastChangedBy$
 // $LastChangedDate$

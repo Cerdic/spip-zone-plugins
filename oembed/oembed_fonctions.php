@@ -140,7 +140,7 @@ function oembed_traiter_ressource($rac) {
 		}
 	}
 	// compat SPIP < 3.0.14
-	// sans le patch http://zone.spip.org/trac/spip-zone/changeset/79139/_core_/branches/spip-3.0/plugins/textwheel
+	// sans le patch https://zone.spip.org/trac/spip-zone/changeset/79139/_core_/branches/spip-3.0/plugins/textwheel
 	if (is_null($texte)) {
 		if (is_null($null_allowed)) {
 			if (version_compare($GLOBALS['spip_version_branche'], '3.0.14', '<')) {

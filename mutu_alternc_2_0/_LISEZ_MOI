@@ -3,7 +3,7 @@
  * (c) Daniel Viñar Ulriksen, dani@rezo.net, GPL
  *
  *  Ce commit est une branche issue du plugin mutualisation: 
- *  http://zone.spip.org/trac/spip-zone/browser/_plugins_/_stable_/mutualisation
+ *  https://zone.spip.org/trac/spip-zone/browser/_plugins_/_stable_/mutualisation
  *
  *  Il ajoute au plugin "mutualisation" un couplage avec un panel AlternC: 
  *  On donne au plugin (cf. constantes dans mes_options.php.txt) l'url d'une install

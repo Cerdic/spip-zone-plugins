@@ -125,7 +125,7 @@ define('_PUBBAN_UPDATE', 'http://files.spip.org/spip-zone/pub_banner.zip');
 /**
  * Traceur de dev.
  */
-define('_PUBBAN_TRAC', 'http://zone.spip.org/trac/spip-zone/browser/_plugins_/pub_banner');
+define('_PUBBAN_TRAC', 'https://zone.spip.org/trac/spip-zone/browser/_plugins_/pub_banner');
 
 // charger la config
 include_spip('inc/pubban_configset');

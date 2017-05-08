@@ -13,7 +13,7 @@ Présentation :
 EVA-WEB est un squelette complet doté de fonctionnalités telles que
 des albums photographiques automatiques par mot-clefs ou un menu dépliant.
 Consulter <http://spip-edu.edres74.net/rubrique.php3?id_rubrique=22> pour
-plus de détails ainsi que <http://zone.spip.org/trac/spip-zone/wiki/LesProjets>
+plus de détails ainsi que <https://zone.spip.org/trac/spip-zone/wiki/LesProjets>
 pour les autres projets issus d'EVA-WEB.
 
 Le plugin eva est une reprise de ces squelettes, modifiés (parfois de manière

@@ -1,9 +1,9 @@
 <?php
 
-// Fonction reprise de http://zone.spip.org/trac/spip-zone/browser/_plugins_/simpletest/inc/tests.php
+// Fonction reprise de https://zone.spip.org/trac/spip-zone/browser/_plugins_/simpletest/inc/tests.php
 // En attendant une éventuelle intégration dans le core
 // Préfixée pour éviter tout conflit
-// Voir aussi http://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau_suisse/cout_pipelines.php?rev=77088#L293
+// Voir aussi https://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau_suisse/cout_pipelines.php?rev=77088#L293
 
 if (!defined('_DIR_CODE')) {
 	include_spip('inc/flock');

@@ -19,7 +19,7 @@ include_spip('inc/editer');
  * @param int $id_objet L'id_objet de l'objet auquel il est attaché
  * @param string $retour L'url de retour
  * @param string $ajaxload initialiser la carte à chaque onAjaxLoad()
- * @param array $options TODO à documenter, voir avec l'auteur de http://zone.spip.org/trac/spip-zone/changeset/53906
+ * @param array $options TODO à documenter, voir avec l'auteur de https://zone.spip.org/trac/spip-zone/changeset/53906
  */
 function formulaires_editer_gis_charger_dist($id_gis = 'new', $objet = '', $id_objet = '', $retour = '', $ajaxload = 'oui', $options = '') {
 	$valeurs = formulaires_editer_objet_charger('gis', $id_gis, '', '', $retour, '');

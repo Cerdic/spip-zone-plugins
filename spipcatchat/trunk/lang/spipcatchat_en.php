@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_en_ligne' => 'Currently online authors :',
 'info_statut' => 'Changing status',
 'index_attent' => 'Loading chat room...',
-'info_configuration' => 'Système de communication instantanée développé pour Spip.<br/> Pour plus d\'information sur la configuration et l\'installation voir la documentation sur <a href="https://contrib.spip.net/Plugin-SpipCatChat">Contribution Spip</a> et pour l\'utilisation voir <a href="https://contrib.spip.net/IMG/pdf/guide_de_l_utilisateur.pdf">le guide de  l\'utilisateur</a>.<br/><br/>Contact : <a href="mailto:claude.codden@nic-nac.org">Claude Codden</a><br/>Développement : <a href="http://zone.spip.org/trac/spip-zone/browser/_plugins_/spipcatchat/trunk">SPIP Zone</a>',
+'info_configuration' => 'Système de communication instantanée développé pour Spip.<br/> Pour plus d\'information sur la configuration et l\'installation voir la documentation sur <a href="https://contrib.spip.net/Plugin-SpipCatChat">Contribution Spip</a> et pour l\'utilisation voir <a href="https://contrib.spip.net/IMG/pdf/guide_de_l_utilisateur.pdf">le guide de  l\'utilisateur</a>.<br/><br/>Contact : <a href="mailto:claude.codden@nic-nac.org">Claude Codden</a><br/>Développement : <a href="https://zone.spip.org/trac/spip-zone/browser/_plugins_/spipcatchat/trunk">SPIP Zone</a>',
 /*--F--*/
 
 'formulaire_addusers' => 'Adding member...',

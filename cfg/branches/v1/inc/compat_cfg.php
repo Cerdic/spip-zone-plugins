@@ -45,7 +45,7 @@ if (version_compare($GLOBALS['spip_version_code'], '1.9300', '<')
  * mais c'est le prix a payer pour l'independance des plugins entre eux :-(
  *
  * la version commune a tous est developpee sur
- * {@link http://zone.spip.org/spip-zone/browser/_dev_/compat/ svn://zone.spip.org/spip-zone/_dev_/compat/}
+ * {@link https://zone.spip.org/spip-zone/browser/_dev_/compat/ svn://zone.spip.org/spip-zone/_dev_/compat/}
  *
  * @param Array $quoi
  */

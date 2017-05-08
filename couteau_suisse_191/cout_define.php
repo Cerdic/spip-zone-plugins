@@ -10,7 +10,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Les constantes utilisees dans la description des outils ont la forme @_CS_MACONSTANTE@
 
 function cout_define($contexte) {
-$rss_source = 'http://zone.spip.org/trac/spip-zone/log/_plugins_/couteau_suisse?format=rss&mode=stop_on_copy&limit=20';
+$rss_source = 'https://zone.spip.org/trac/spip-zone/log/_plugins_/couteau_suisse?format=rss&mode=stop_on_copy&limit=20';
 switch($contexte) {
 	case 'distant':
 		// RSS de trac
@@ -18,7 +18,7 @@ switch($contexte) {
 		// Doc de spip-contrib.net
 		@define('_URL_CONTRIB', 'https://contrib.spip.net/?article');
 		// Revisions du CS
-		@define('_URL_CS_PLUGIN_XML', 'http://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau_suisse/plugin.xml?format=txt');
+		@define('_URL_CS_PLUGIN_XML', 'https://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau_suisse/plugin.xml?format=txt');
 		// on met a jour le flux rss toutes les 2 heures
 		// contrib ici qui devra passer en fond et utiliser le cache de SPIP !
 		define('_CS_RSS_UPDATE', 2*3600);

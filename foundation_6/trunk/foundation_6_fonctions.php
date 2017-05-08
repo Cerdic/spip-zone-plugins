@@ -122,7 +122,7 @@ function filtre_bouton_action($libelle, $url, $class = '', $confirm = '', $title
 
 		// Détection de la class ajax
 		// Code reprit (et modifié) du plugin bootstrap:
-		// http://zone.spip.org/trac/spip-zone/browser/_plugins_/bootstrap/trunk/bootstrap3_fonctions.php#L109
+		// https://zone.spip.org/trac/spip-zone/browser/_plugins_/bootstrap/trunk/bootstrap3_fonctions.php#L109
 		$array_class = explode(' ', $class);
 		$ajax_index = array_search('ajax', $array_class);
 		if ($ajax_index !== false) {

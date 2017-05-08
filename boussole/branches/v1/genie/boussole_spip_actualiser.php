@@ -10,7 +10,7 @@ function genie_boussole_spip_actualiser_dist($last) {
 	$meta_boussole = 'boussole_infos_spip';
 	if (lire_meta($meta_boussole)) {
 		// On appelle donc la fonction d'actualisation
-		$xml = 'http://zone.spip.org/trac/spip-zone/export/HEAD/_galaxie_/boussole.spip.org/boussole_spip.xml';
+		$xml = 'https://zone.spip.org/trac/spip-zone/export/HEAD/_galaxie_/boussole.spip.org/boussole_spip.xml';
 		if (!$url = boussole_localiser_xml($xml)) {
 			// Le fichier est introuvable
 			spip_log("ERREUR ACTUALISATION CRON : fichier xml introuvable", 'boussole' . _LOG_ERREUR);

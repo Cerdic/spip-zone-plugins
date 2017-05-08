@@ -5,14 +5,14 @@
 |  <http://www.opensource.org/licenses/gpl-3.0.html>               |
 +------------------------------------------------------------------+
 dev sur le SVN de spip-zone :
-<http://zone.spip.org/trac/spip-zone/browser/_plugins_/tipafriend>
+<https://zone.spip.org/trac/spip-zone/browser/_plugins_/tipafriend>
 =============================================
 Ce fichier recense quelques pistes, bugs ou 'choses à faire' pour l'évolution du 
 plugin, n'hésitez pas à y jeter un oeil, ajouter des bugs ou toute autre information.
 
 Vous pouvez suivre en ligne les modifications du plugin à l'adresse suivante :
 
-<http://zone.spip.org/trac/spip-zone/log/_plugins_/tipafriend>
+<https://zone.spip.org/trac/spip-zone/log/_plugins_/tipafriend>
 Une documentation complète est disponible sur Spip-Contrib à l'adresse :
 
 <https://contrib.spip.net/?article3638>
@@ -46,7 +46,7 @@ Indiquez simplement votre contact (adresse email) avec chaque message.
 passage en état 'stable'
 25/12/2010 - 013
 - Mise en développement sur le SVN de la zone :
-	-> repository : http://zone.spip.org/trac/spip-zone/browser/_plugins_/tipafriend
+	-> repository : https://zone.spip.org/trac/spip-zone/browser/_plugins_/tipafriend
 - Ajout à "archivelist.txt" pour création de zip par la zone
 25/12/2010 - 012
 - Refonte de la doc : squelette "universel" et doc en fichier de langue

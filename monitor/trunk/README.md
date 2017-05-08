@@ -12,10 +12,10 @@ Les relevés sont réalisés avec la commande curl ou par le fonction SPIP recup
 
 ## Plugins SPIP utilisé
 
-* sites (http://zone.spip.org/trac/spip-zone/browser/_core_/plugins/sites) 
-* d3js (http://zone.spip.org/trac/spip-zone/browser/_plugins_/d3js/trunk)
-* geoip (http://zone.spip.org/trac/spip-zone/browser/_plugins_/geoip/branches/v1)
-* spip_bonux (http://zone.spip.org/trac/spip-zone/browser/_plugins_/spip-bonux-3)
+* sites (https://zone.spip.org/trac/spip-zone/browser/_core_/plugins/sites) 
+* d3js (https://zone.spip.org/trac/spip-zone/browser/_plugins_/d3js/trunk)
+* geoip (https://zone.spip.org/trac/spip-zone/browser/_plugins_/geoip/branches/v1)
+* spip_bonux (https://zone.spip.org/trac/spip-zone/browser/_plugins_/spip-bonux-3)
 
 ## Ce que fait le plugin
 

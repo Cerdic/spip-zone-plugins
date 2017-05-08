@@ -166,5 +166,5 @@ function action_adapt_img_dist(){
 
 This library is already available through plugins in:
 
-* SPIP CMS <https://contrib.spip.net/Adaptive-Images-4458> [See the implementation](http://zone.spip.org/trac/spip-zone/browser/_plugins_/adaptive_images/trunk/adaptive_images_options.php)
+* SPIP CMS <https://contrib.spip.net/Adaptive-Images-4458> [See the implementation](https://zone.spip.org/trac/spip-zone/browser/_plugins_/adaptive_images/trunk/adaptive_images_options.php)
 * DotClear blog engine <http://plugins.dotaddict.org/dc2/details/adaptiveImages>

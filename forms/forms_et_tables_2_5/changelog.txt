@@ -148,4 +148,4 @@ _ To do : generaliser le tri sur les autres champs
 -* Probleme confirmation d'une reponse a un sondage (a voir). La fonction de confirmation d'une reponse dans un sondage est pour l'instant by passee, la reponse est automatiquement valide sans passage par confirmation = attente. Cette fonction doit servir a traiter des  multiple via des robots ou quelque chose comme ça.
 _ To do : faire marcher cette fonction de confirmation de la reponse, sur SPIP2, et enlever le by pass decrit ci-dessus.
 
-<a href="http://zone.spip.org/trac/spip-zone/wiki/SpipForms" target="_new">documentation</a> 
+<a href="https://zone.spip.org/trac/spip-zone/wiki/SpipForms" target="_new">documentation</a> 

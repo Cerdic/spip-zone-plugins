@@ -14,9 +14,9 @@ Si vous utilisez mod_security ou mod_security2, il faut désactiver la directive
 
 ## Plugins SPIP
 
-* [geoip_lite](http://zone.spip.org/trac/spip-zone/browser/_plugins_/geoip/branches/v1) [nécessite]
+* [geoip_lite](https://zone.spip.org/trac/spip-zone/browser/_plugins_/geoip/branches/v1) [nécessite]
 * [Fulltext](https://plugins.spip.net/fulltext.html) [nécessite]
-* [d3js](http://zone.spip.org/trac/spip-zone/browser/_plugins_/d3js) [utilise]
+* [d3js](https://zone.spip.org/trac/spip-zone/browser/_plugins_/d3js) [utilise]
 
 ## Changelog
 
@@ -54,7 +54,7 @@ Si vous utilisez mod_security ou mod_security2, il faut désactiver la directive
 #### Version 1.1.6 (05/06/2016)
 
 - Suppression de la lib geoip
-- Necessite le plugin [geoip V1.0.0](http://zone.spip.org/trac/spip-zone/browser/_plugins_/geoip/branches/v1)
+- Necessite le plugin [geoip V1.0.0](https://zone.spip.org/trac/spip-zone/browser/_plugins_/geoip/branches/v1)
 
 #### Version 1.1.5 (02/05/2016)
 

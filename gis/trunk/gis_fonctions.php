@@ -44,7 +44,7 @@ function dms_to_dec($ref, $deg, $min, $sec) {
 /**
  * Filtre distance pour renvoyer la distance entre deux points
  * http://snipplr.com/view/2531/calculate-the-distance-between-two-coordinates-latitude-longitude/
- * sinon voir ici : http://zone.spip.org/trac/spip-zone/browser/_plugins_/forms/geoforms/inc/gPoint.php
+ * sinon voir ici : https://zone.spip.org/trac/spip-zone/browser/_plugins_/forms/geoforms/inc/gPoint.php
  *
  * @param int|array $from
  *     id_gis du point de référence ou tableau de coordonnées

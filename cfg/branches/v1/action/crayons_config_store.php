@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
- * on reprend la fonction de {@link http://zone.spip.org/trac/spip-zone/browser/_plugins_/crayons/action/crayons_store.php crayons}...
+ * on reprend la fonction de {@link https://zone.spip.org/trac/spip-zone/browser/_plugins_/crayons/action/crayons_store.php crayons}...
  * 
  * @return Array
  */
@@ -26,7 +26,7 @@ function action_crayons_config_store_dist() {
 }
 
 /**
- * pour le traitement, on appelle {@link http://zone.spip.org/trac/spip-zone/browser/_plugins_/crayons/action/crayons_store.php crayons_store} avec 2 fonctions
+ * pour le traitement, on appelle {@link https://zone.spip.org/trac/spip-zone/browser/_plugins_/crayons/action/crayons_store.php crayons_store} avec 2 fonctions
  * - la premiere pour recuperer la valeur avant modification
  * - la seconde pour realiser les modifications 
  * 

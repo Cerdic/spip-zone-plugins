@@ -8,7 +8,7 @@
  * @copyright    2010-2015 Yves Tannier
  *
  * @link         https://contrib.spip.net/3719
- * @link         http://zone.spip.org/trac/spip-zone/browser/_plugins_/spipdf
+ * @link         https://zone.spip.org/trac/spip-zone/browser/_plugins_/spipdf
  * @link         http://www.grafactory.net/
  *
  * @license      GPL Gnu Public Licence
@@ -66,7 +66,7 @@ if (!defined('_DIR_LIB')){
 include_spip('inc/charsets');
 
 // repris dans le plugin article_pdf => a modifier
-// http://zone.spip.org/trac/spip-zone/browser/_plugins_/article_pdf
+// https://zone.spip.org/trac/spip-zone/browser/_plugins_/article_pdf
 function spipdf_first_clean($texte){
 
 	// supprimer les remarques HTML (du Couteau Suisse ?)

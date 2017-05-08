@@ -111,7 +111,7 @@ define('_PUBBAN_UPDATE', 'http://files.spip.org/spip-zone/pub_banner_spip3.zip')
 /**
  * Traceur de dev.
  */
-define('_PUBBAN_TRAC', 'http://zone.spip.org/trac/spip-zone/browser/_plugins_/pub_banner');
+define('_PUBBAN_TRAC', 'https://zone.spip.org/trac/spip-zone/browser/_plugins_/pub_banner');
 
 // Si admin, lib pubban_prive
 if(test_espace_prive()) include_spip('inc/pubban_prive');

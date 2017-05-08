@@ -22,7 +22,7 @@ function inc_todo_formater_commit_dist($valeur, &$info) {
 
 	if (preg_match('#^(z|c)([0-9]+)$#Uis', $valeur, $m)) {
 		if ($m[1] == 'z')
-			$href = 'http://zone.spip.org/trac/spip-zone/changeset/' . $m[2];
+			$href = 'https://zone.spip.org/trac/spip-zone/changeset/' . $m[2];
 		else
 			$href = 'https://core.spip.net/projects/spip/repository/revisions/' . $m[2];
 		$commit = '<a class="spip_out" rel="external" href="' . $href . '">' . $m[2] . '</a>';

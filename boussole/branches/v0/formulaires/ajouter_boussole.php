@@ -33,7 +33,7 @@ function formulaires_ajouter_boussole_traiter_dist(){
 
 	// Cas de la boussole SPIP
 	if ($mode == 'standard')
-		$xml = url_absolue('http://zone.spip.org/trac/spip-zone/export/HEAD/_galaxie_/boussole.spip.org/boussole_spip.xml');
+		$xml = url_absolue('https://zone.spip.org/trac/spip-zone/export/HEAD/_galaxie_/boussole.spip.org/boussole_spip.xml');
 
 	// On fait des verifications dans traiter pour renvoyer les resultats dans le message d'erreur global
 	if (!$url = boussole_localiser_xml($xml)) {

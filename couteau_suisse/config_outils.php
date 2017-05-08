@@ -316,7 +316,7 @@ add_outil( array(
 	'pipeline:pre_boucle' => 'previsu_redac_pre_boucle',
 	'pipeline:boite_infos' => 'previsu_redac_boite_infos',
 	// fichier distant pour les pipelines
-	'distant_pipelines' => 'http://zone.spip.org/trac/spip-zone/export/53447/_plugins_/previsu_redaction/previsu_redac_pipelines.php',
+	'distant_pipelines' => 'https://zone.spip.org/trac/spip-zone/export/53447/_plugins_/previsu_redaction/previsu_redac_pipelines.php',
 	'version-min' => '1.9300', // SPIP 2.0 : oui
 	'version-max' => '17743', // SPIP 3.0 : non
 ));
@@ -334,7 +334,7 @@ add_outil( array(
 	'auteur' => 'Nicolas Hoizey, St&eacute;phanie Caron',
 	'pipeline:pre_boucle' => 'masquer_pre_boucle',
 	// fichier distant pour le pipeline
-	'distant_pipelines' => 'http://zone.spip.org/trac/spip-zone/export/70583/_plugins_/masquer/masquer_pipelines.php',
+	'distant_pipelines' => 'https://zone.spip.org/trac/spip-zone/export/70583/_plugins_/masquer/masquer_pipelines.php',
 	'code:options' => "%%mot_masquer%%",
 	'code:fonctions' => 'if (!function_exists("critere_tout_voir_dist")){
   function critere_tout_voir_dist($idb, &$boucles, $crit) {
@@ -489,7 +489,7 @@ add_outil( array(
 	'id' => 'ecran_securite',
 	'code:spip_options' => '%%ecran_load%%%%ecran_actif%%',
 	'categorie' => 'securite',
-	'distant' => 'http://zone.spip.org/trac/spip-zone/browser/_core_/securite/ecran_securite.php?format=txt',
+	'distant' => 'https://zone.spip.org/trac/spip-zone/browser/_core_/securite/ecran_securite.php?format=txt',
 	'pipeline:fichier_distant' => defined('_SPIP20100')?'ecran_securite_fichier_distant':'', 
 	'pipelinecode:pre_description_outil' => 'if($id=="ecran_securite") $flux["non"] = !%%ecran_actif%% || !$flux["actif"];',
 	'pipeline:pre_description_outil' => 'ecran_securite_pre_description_outil',
@@ -1684,7 +1684,7 @@ add_outil( array(
 	'code:options' => '%%multidomaines%%',
 	'pipeline:pre_edition' => 'correction_liens_internes_pre_edition',
 	// fichier distant pour le pipeline
-	'distant_pipelines' => 'http://zone.spip.org/trac/spip-zone/export/79119/_plugins_/correction_liens_internes/trunk/correction_liens_internes_pipelines.php',
+	'distant_pipelines' => 'https://zone.spip.org/trac/spip-zone/export/79119/_plugins_/correction_liens_internes/trunk/correction_liens_internes_pipelines.php',
 	'version-min' => '17743', // SPIP 3.0 mini
 	'pipelinecode:pre_description_outil' => 'if($id=="liens_internes") $texte=str_replace("@_DOMAINE@",url_de_base(),$texte);',
 ));

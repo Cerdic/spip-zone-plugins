@@ -55,13 +55,13 @@ function glossaire_spip_url($type='core', $chemin, $ligne) {
 	static $sources = array(
 		'dev' => array(
 			'core' => 'https://core.spip.net/projects/spip/repository/entry/spip/@file@',
-			'core_plugins' => 'http://zone.spip.org/trac/spip-zone/browser/_core_/plugins/@file@',
-			'zone_plugins' => 'http://zone.spip.org/trac/spip-zone/browser/_plugins_/@file@',
+			'core_plugins' => 'https://zone.spip.org/trac/spip-zone/browser/_core_/plugins/@file@',
+			'zone_plugins' => 'https://zone.spip.org/trac/spip-zone/browser/_plugins_/@file@',
 		),
 		'branches' => array(
 			'core' => 'https://core.spip.net/projects/spip/repository/entry/branches/spip-@branche@/@file@',
-			'core_plugins' => 'http://zone.spip.org/trac/spip-zone/browser/_core_/branches/spip-@branche@/plugins/@file@',
-			'zone_plugins' => 'http://zone.spip.org/trac/spip-zone/browser/_plugins_/@file@',
+			'core_plugins' => 'https://zone.spip.org/trac/spip-zone/browser/_core_/branches/spip-@branche@/plugins/@file@',
+			'zone_plugins' => 'https://zone.spip.org/trac/spip-zone/browser/_plugins_/@file@',
 		),
 	);
 
