@@ -64,7 +64,7 @@ A new window will open, please follow the instructions it will provide.',
 	'cfg_api_key' => 'API Key',
 	'cfg_api_secret' => 'API Secret',
 	'cfg_tag_machine_legend' => 'Integration with the site keywords',
-	'cfg_tag_machine_info' => 'If you have installed the plugin <a href="http://files.spip.org/spip-zone/tag-machine.zip">tag-machine</a>, FpipR will be able to add the Flickr photo tags as standard SPIP keywords to the documents you add with this plugin.',
+	'cfg_tag_machine_info' => 'If you have installed the plugin <a href="https://files.spip.net/spip-zone/tag-machine.zip">tag-machine</a>, FpipR will be able to add the Flickr photo tags as standard SPIP keywords to the documents you add with this plugin.',
 	'cfg_tag_machine_desactiver' => 'Disable',
 	'cfg_tag_machine_group' => 'Keyword group where to put the Flickr tags'
 );

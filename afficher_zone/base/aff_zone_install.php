@@ -36,11 +36,11 @@
     }
    
   // syndication de la zone dans la rubrique 1
-    if (sql_countsel('spip_syndic', "url_syndic = 'http://files.spip.org/spip-zone/ref.rss.xml.gz'") == 0) {
+    if (sql_countsel('spip_syndic', "url_syndic = 'https://files.spip.net/spip-zone/ref.rss.xml.gz'") == 0) {
         sql_insertq('spip_syndic', 
                       array('id_rubrique'=>1, 'id_secteur'=>1, 'nom_site'=>'SPIP-zone - liste des plugins',
                             'url_site'=>'http://trac.rezo.net/trac/spip-zone/browser/_plugins_',
-                            'url_syndic'=>'http://files.spip.org/spip-zone/ref.rss.xml.gz',
+                            'url_syndic'=>'https://files.spip.net/spip-zone/ref.rss.xml.gz',
                             'date'=>date('Y-m-d H:i:s'),
                             'syndication'=>'oui', 'statut'=>'publie', 'resume'=>'non'
                       )

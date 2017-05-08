@@ -24,7 +24,7 @@ function spixplorer_install($action)
 
 	echo 'install spixplorer<br />';
 	spip_log(
-	 'installer spixplorer depuis http://files.spip.org/externe/quixplorer.zip'
+	 'installer spixplorer depuis https://files.spip.net/externe/quixplorer.zip'
 	);
 
 /* manque un chouille
@@ -44,7 +44,7 @@ function spixplorer_install($action)
    	include_spip('inc/chargeur');
 	$statut = chargeur_charger_zip(array(
 // si ca marchait ce serait $match[1], ...
-		'zip' => 'http://files.spip.org/externe/quixplorer_2_3_1.zip',
+		'zip' => 'https://files.spip.net/externe/quixplorer_2_3_1.zip',
 		'remove' => 'quixplorer_2_3_1',
 		'dest' => $cible,
 		'rename' => array(

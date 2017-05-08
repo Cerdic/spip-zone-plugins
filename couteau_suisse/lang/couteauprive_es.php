@@ -186,7 +186,7 @@ Esta herramienta puede acoplarse con « [.->sommaire] ».', # MODIF
 	'detail_fichiers' => 'Ficheros:',
 	'detail_inline' => 'Código en línea:',
 	'detail_jquery2' => 'Esta herramienta necesita la biblioteca {jQuery}.', # MODIF
-	'detail_jquery3' => '{{Atención}}: esta herramienta necesita el plugin [jQuery para SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] para funcionar correctamente con esta versión de SPIP.',
+	'detail_jquery3' => '{{Atención}}: esta herramienta necesita el plugin [jQuery para SPIP 1.92->https://files.spip.net/spip-zone/jquery_192.zip] para funcionar correctamente con esta versión de SPIP.',
 	'detail_pipelines' => 'Pipelines:',
 	'detail_traitements' => 'Procesado:',
 	'dossier_squelettes:description' => 'Modifica la carpeta de esqueleto utilizada. Por ejemplo: "esqueletos/miesqueleto". Puedes registrar varias carpetas separándolas con dos puntos <html>« : »</html>. Si se deja vacío el siguiente cuadro (o escribiendo "dist"), se usará el esqueleto original "dist" proporcionado por SPIP.[[%dossier_squelettes%]]',

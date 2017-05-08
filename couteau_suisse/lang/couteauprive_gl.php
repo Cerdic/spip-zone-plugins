@@ -211,7 +211,7 @@ _ Esta utilidade pode ser emparellada con « [.->sommaire] ».', # MODIF
 	'detail_fichiers' => 'Ficheiros :',
 	'detail_inline' => 'Código inline :',
 	'detail_jquery2' => 'Esta ferramenta necesita a biblioteca {jQuery}.',
-	'detail_jquery3' => '{{Aviso}} : esta utilidade necesita o plugin [jQuery para SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] para funcionar correctamente con esta versión de  SPIP.',
+	'detail_jquery3' => '{{Aviso}} : esta utilidade necesita o plugin [jQuery para SPIP 1.92->https://files.spip.net/spip-zone/jquery_192.zip] para funcionar correctamente con esta versión de  SPIP.',
 	'detail_pipelines' => 'Tubarías (pipelines) :',
 	'detail_traitements' => 'Tratamentos :',
 	'dossier_squelettes:description' => 'Modifica o cartafol do esqueleto usado. Por exemplo : "squelettes/monsquelette". Pode rexistrar varios cartafoles separándoos polos dous puntos <html>« : »</html>. Deixando baleira caixa seguinte (ou escribindo "dist"), vai ser o esqueleto orixinal "dist" fornecido por SPIP o que será usado.[[%dossier_squelettes%]]',

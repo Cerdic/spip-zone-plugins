@@ -48,7 +48,7 @@
                 ce qui permet que la bidouille de #TITRE|traiter_titre sélectionne cette version
         ]
         <BOUCLE_liste_plugs(SYNDIC_ARTICLES)
-            {url_syndic = http://files.spip.org/spip-zone/ref.rss.xml.gz}
+            {url_syndic = https://files.spip.net/spip-zone/ref.rss.xml.gz}
             {tags LIKE #GET{ch_statut}}
             {url LIKE '%/_plugins_/%'}
             {par SUBSTRING_INDEX(titre," - ",1)} 

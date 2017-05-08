@@ -175,7 +175,7 @@ Cet outil peut &ecirc;tre coupl&eacute; avec &laquo;&nbsp;[.->sommaire]&nbsp;&ra
 	'detail_inline' => 'Code inline :',
 	'detail_jquery1' => '{{Aandacht}}: dit werktuig maakt plugin {jQuery} het noodzakelijk om met deze versie van SPIP te werken.',
 	'detail_jquery2' => 'Dit werktuig vereist de boekhandel {jQuery}.',
-	'detail_jquery3' => '<MODIF>{{Attention}} : deze tool heeft een andere plugin nodig[jQuery pour SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip]om efficient te functioneren met deze spip versie.',
+	'detail_jquery3' => '<MODIF>{{Attention}} : deze tool heeft een andere plugin nodig[jQuery pour SPIP 1.92->https://files.spip.net/spip-zone/jquery_192.zip]om efficient te functioneren met deze spip versie.',
 	'detail_pipelines' => 'Pijpleidingen :',
 	'detail_traitements' => 'Behandelingen :',
 	'dossier_squelettes:description' => 'Wijzigt het dossier van het gebruikte skelet. Bijvoorbeeld: &#132;skeletten/mijnskelet&#147;. U kunt verschillende dossiers inschrijven door ze te scheiden door beide punten <html> &laquo;&nbsp;:&nbsp;&raquo;</html>. Door leegte te laten het hokje dat (of door "dist" te typen) volgt, is het originele skelet dat "dist" door SPIP wordt geleverd, dat zal gebruikt worden. [[%dossier_squelettes%]]',

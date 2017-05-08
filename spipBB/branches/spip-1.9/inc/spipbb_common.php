@@ -74,7 +74,7 @@ else
 // Pour la verifciation d'une nouvelle version
 define('_URL_SPIPBB_PLUGIN_XML', 'https://zone.spip.org/trac/spip-zone/browser/_plugins_/_dev_/spipBB/branches/spip-1.9/plugin.xml?format=txt');
 define('_URL_CHECK_DELAY',3600); // Delais entre 2 verifications (1h)
-define('_URL_SPIPBB_PLUGIN_ZIP','http://files.spip.org/spip-zone/spipBB-1_9.zip');
+define('_URL_SPIPBB_PLUGIN_ZIP','https://files.spip.net/spip-zone/spipBB-1_9.zip');
 define('_URL_SPIPBB_SVN_CHANGESET','https://zone.spip.org/trac/spip-zone/changeset/@rev_num@/_plugins_/_dev_/spipBB/branches/spip-1.9/');
 
 

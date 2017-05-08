@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function recuperer_releases_spip_dist() {
-	$url_page_releases = 'http://files.spip.org/spip/archives/';
+	$url_page_releases = 'https://files.spip.net/spip/archives/';
 	$content_page = file_get_contents($url_page_releases);
 	preg_match_all("/>SPIP-v(.*)<\/a>/", $content_page, $matches);
 	$releases = array();

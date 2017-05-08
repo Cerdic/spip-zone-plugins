@@ -230,7 +230,7 @@ Cet outil peut être couplé avec « [.->sommaire] ».', # MODIF
 	'detail_fichiers_distant' => 'Verwijderde bestanden :',
 	'detail_inline' => 'Code inline :',
 	'detail_jquery2' => 'Dit werktuig gebruikt de )bibliotheek {jQuery}.',
-	'detail_jquery3' => '{{Opgelet}} : deze tool heeft een andere plugin nodig[jQuery pour SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip]om efficient te functioneren met deze spip versie.',
+	'detail_jquery3' => '{{Opgelet}} : deze tool heeft een andere plugin nodig[jQuery pour SPIP 1.92->https://files.spip.net/spip-zone/jquery_192.zip]om efficient te functioneren met deze spip versie.',
 	'detail_pipelines' => 'Pijpleidingen :',
 	'detail_traitements' => 'Behandelingen :',
 	'distant_aide' => 'Dit werktuig vereist verwijderde bestanden die allemaal juist in boekhandel geplaatst moeten worden. Alvorens dit werktuig of om dit kader, bij te werken te activeren waarborgt u dat de vereiste bestanden zeer aanwezig zijn op de verwijderde server.',

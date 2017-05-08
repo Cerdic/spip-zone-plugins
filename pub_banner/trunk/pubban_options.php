@@ -107,7 +107,7 @@ define('_PUBBAN_URL', 'https://contrib.spip.net/?article3637');
 /**
  * URL de telechargement des mises a jour
  */
-define('_PUBBAN_UPDATE', 'http://files.spip.org/spip-zone/pub_banner_spip3.zip');
+define('_PUBBAN_UPDATE', 'https://files.spip.net/spip-zone/pub_banner_spip3.zip');
 /**
  * Traceur de dev.
  */

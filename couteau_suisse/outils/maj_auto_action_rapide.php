@@ -17,8 +17,8 @@ define('_MAJ_ZONE', 'https://zone.spip.org/trac/spip-zone/');
 define('_MAJ_LOG_DEBUT', _MAJ_ZONE.'log/');
 define('_MAJ_LOG_FIN', '?format=changelog');
 define('_MAJ_LOG_CS', _MAJ_LOG_DEBUT .'_plugins_/couteau_suisse');
-define('_MAJ_ZIP', 'http://files.spip.org/spip-zone/');
-define('_MAJ_ZIP_SPIP', 'http://files.spip.org/spip/archives/SPIP-v');
+define('_MAJ_ZIP', 'https://files.spip.net/spip-zone/');
+define('_MAJ_ZIP_SPIP', 'https://files.spip.net/spip/archives/SPIP-v');
 define('_MAJ_ECRAN_SECU', _MAJ_ZONE.'browser/_core_/securite/ecran_securite.php?format=txt');
 
 // Pour SPIP = 2.0.X

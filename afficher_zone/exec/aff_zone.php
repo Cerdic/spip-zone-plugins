@@ -153,7 +153,7 @@
     // récupérer l'id_syndic du flux de la zone
       $sql = sql_select('spip_syndic.id_syndic',
                         'spip_syndic',
-                        array("url_syndic = 'http://files.spip.org/spip-zone/ref.rss.xml.gz'"),
+                        array("url_syndic = 'https://files.spip.net/spip-zone/ref.rss.xml.gz'"),
                         '', '',
                         '0,1'
                        );

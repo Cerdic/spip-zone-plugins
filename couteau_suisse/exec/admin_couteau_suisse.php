@@ -290,7 +290,7 @@ if(!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p>
 
 // clic pour la mise a jour du Couteau Suisse
 function chargement_automatique($dir) {
-	$zip = 'http://files.spip.org/spip-zone/couteau_suisse.zip';
+	$zip = 'https://files.spip.net/spip-zone/couteau_suisse.zip';
 	$auto = strpos(_DIR_PLUGIN_COUTEAU_SUISSE,'plugins/auto/')!==false;
 	if($auto && defined('_SPIP30000')) {
 		//  passage par SVP ?

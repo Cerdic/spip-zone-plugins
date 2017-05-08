@@ -79,8 +79,8 @@ Bkz [Spip-Contrib ile ilgili belgeler->http://contrib.spip.net/SpipBB-le-forum] 
 	'admin_interface' => 'Arayüz seçenekleri',
 	'admin_nombre_lignes_messages' => 'İleti satırı sayısı',
 	'admin_plugin_requis_erreur' => 'Şu eklenti eksik. Aktive edin !',
-	'admin_plugin_requis_erreur_balisesession' => 'Balise SESSION eklentisini kurun ve aktive edin ! [Belge için bkz->http://contrib.spip.net/?article1224], [Zip arşivi için bkz->http://files.spip.org/spip-zone/balise_session.zip].', # MODIF
-	'admin_plugin_requis_erreur_cfg' => 'CFG eklentisini kurun ve aktive edin ![Belge için bkz->http://contrib.spip.net/?article1605], [Zip arşivi için bkz->http://files.spip.org/spip-zone/cfg.zip].', # MODIF
+	'admin_plugin_requis_erreur_balisesession' => 'Balise SESSION eklentisini kurun ve aktive edin ! [Belge için bkz->http://contrib.spip.net/?article1224], [Zip arşivi için bkz->https://files.spip.net/spip-zone/balise_session.zip].', # MODIF
+	'admin_plugin_requis_erreur_cfg' => 'CFG eklentisini kurun ve aktive edin ![Belge için bkz->http://contrib.spip.net/?article1605], [Zip arşivi için bkz->https://files.spip.net/spip-zone/cfg.zip].', # MODIF
 	'admin_plugin_requis_erreur_s' => 'Şu eklentiler eksik. Aktive edin !',
 	'admin_plugin_requis_ok' => 'Kurulu ve aktif eklentiler :',
 	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://contrib.spip.net/?article1224] : güvenlik kontrolünden geçmiş ziyaretçilerin bilgilerini sunar.', # MODIF

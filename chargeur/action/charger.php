@@ -16,7 +16,7 @@
  *
  * Options supplementaires:
  *  &url_retour=[url retour], défaut ecrire/
- *  &depot=[url du depot des zip] defaut http://files.spip.org/spip-zone/
+ *  &depot=[url du depot des zip] defaut https://files.spip.net/spip-zone/
  *
  * On peut aussi simplement activer un plugin deja present par:
  *   ?action=charger&activer=[prefixe plugin]
@@ -35,7 +35,7 @@ function action_charger()
 	}
 	$plugin = chargeur_request('plugin');
 	$zip = chargeur_request('zip', $plugin);
-	$depot =  chargeur_request('depot', 'http://files.spip.org/spip-zone/');
+	$depot =  chargeur_request('depot', 'https://files.spip.net/spip-zone/');
 	$remove = chargeur_request('remove_path', 'spip' . ($plugin ? '/plugins' : ''));
 	$dest = chargeur_request('dest_path', _DIR_RACINE . ($plugin ? 'plugins/' : ''));
 

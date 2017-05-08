@@ -168,7 +168,7 @@ _ Bu gere&ccedil; {makaleleriniz i&ccedil;in bir &ouml;zet} ile birlikte kullan&
 	'detail_inline' => 'Inline kod :',
 	'detail_jquery1' => '{{Dikkat}} : bu alet SPIP\'in bu s&uuml;r&uuml;m&uuml;yle &ccedil;al&#305;&#351;abilmek i&ccedil;in {jQuery} eklentisini gerektirir.',
 	'detail_jquery2' => 'Bu alet {jQuery} k&uuml;t&uuml;phanesini gerektirir.',
-	'detail_jquery3' => '{{Dikkat}} : bu gere&ccedil; sorunsuz &ccedil;al&#305;&#351;abilmek i&ccedil;in [SPIP 1.92-i&ccedil;in jQuery>http://files.spip.org/spip-zone/jquery_192.zip] eklentisi gerektirir.',
+	'detail_jquery3' => '{{Dikkat}} : bu gere&ccedil; sorunsuz &ccedil;al&#305;&#351;abilmek i&ccedil;in [SPIP 1.92-i&ccedil;in jQuery>https://files.spip.net/spip-zone/jquery_192.zip] eklentisi gerektirir.',
 	'detail_pipelines' => 'Boru hatlar&#305; (pipeline) :',
 	'detail_traitements' => '&#304;&#351;lemler :',
 	'dossier_squelettes:description' => 'Kullan&#305;lan iskelet dizinini de&#287;i&#351;tirir. &Ouml;rne&#287;in : "squelettes/iskeletim". Dizinleri iki nokta ile ay&#305;rarak bir &ccedil;ok dizin belirtebilirsiniz  <html>&laquo;&nbsp;:&nbsp;&raquo;</html>. &#304;zleyen kutuyu bo&#351; b&#305;rakarak (veya "dist" yazarak) SPIP taraf&#305;ndan sunulan orijinal "dist" iskeletini kullanabilirsiniz. [[%dossier_squelettes%]]',

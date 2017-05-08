@@ -79,8 +79,8 @@ Consulta la [documentación de Spip-Contrib->http://contrib.spip.net/SpipBB-le-f
 	'admin_interface' => 'Opciones de l’interfaz',
 	'admin_nombre_lignes_messages' => 'Númberu de llinies de mensaxes',
 	'admin_plugin_requis_erreur' => 'Falta el siguiente plugin requeríu. ¡Actívalu!',
-	'admin_plugin_requis_erreur_balisesession' => '¡Instala el plugin Balise SESSION y actívalu! [La documentación ta equí->http://contrib.spip.net/?article1224], [l’archivu ZIP ta nesti lláu->http://files.spip.org/spip-zone/balise_session.zip].', # MODIF
-	'admin_plugin_requis_erreur_cfg' => '¡Instala el plugin CFG y actívalu! [Documentación per equí->http://contrib.spip.net/?article1605], [archivu ZIP allá->http://files.spip.org/spip-zone/cfg.zip].', # MODIF
+	'admin_plugin_requis_erreur_balisesession' => '¡Instala el plugin Balise SESSION y actívalu! [La documentación ta equí->http://contrib.spip.net/?article1224], [l’archivu ZIP ta nesti lláu->https://files.spip.net/spip-zone/balise_session.zip].', # MODIF
+	'admin_plugin_requis_erreur_cfg' => '¡Instala el plugin CFG y actívalu! [Documentación per equí->http://contrib.spip.net/?article1605], [archivu ZIP allá->https://files.spip.net/spip-zone/cfg.zip].', # MODIF
 	'admin_plugin_requis_erreur_s' => 'Falten los siguientes plugins requeríos. ¡Actívalos!',
 	'admin_plugin_requis_ok' => 'Plugin(s) instaláu(os) y activu(os):',
 	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://contrib.spip.net/?article1224]: ufre información tocante a los visitantes autentificaos.', # MODIF

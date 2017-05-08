@@ -31,7 +31,7 @@ function exec_cs_version_dist() {
 	if (!$distant)
 		return ajax_retour('<span style="color: red;">'._T('couteauprive:erreur:probleme', array('pb'=>cs_lien(_URL_CS_PLUGIN_XML,_T('couteauprive:erreur:distant')))).'</span>');
 	ajax_retour(ptobr(propre($distant==$version?_T('couteauprive:version_a_jour'):(
-		$distant?_T('couteauprive:version_nouvelle', array('version' => "[{$distant}->http://files.spip.org/spip-zone/couteau_suisse.zip]")):''
+		$distant?_T('couteauprive:version_nouvelle', array('version' => "[{$distant}->https://files.spip.net/spip-zone/couteau_suisse.zip]")):''
 	))));
 }
 ?>

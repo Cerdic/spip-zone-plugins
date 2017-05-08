@@ -29,6 +29,6 @@
 		<inclure>pb_couleur_rubrique.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
-	<necessite id="lib:farbtastic_1_3_1" src="http://files.spip.org/contribs/farbtastic_1_3_1.zip" />
+	<necessite id="lib:farbtastic_1_3_1" src="https://files.spip.net/contribs/farbtastic_1_3_1.zip" />
 	<categorie>maintenance</categorie>
 </plugin>

@@ -10,7 +10,7 @@
 	</description>
 	<lien>https://contrib.spip.net/Presentation-de-Walma</lien>
 	<prefix>walma</prefix>
-	<!-- recommande id="cfg" version='[1.5.0;]' src="http://files.spip.org/spip-zone/cfg.zip" / -->
+	<!-- recommande id="cfg" version='[1.5.0;]' src="https://files.spip.net/spip-zone/cfg.zip" / -->
 	<install>
 	walma_fonctions.php
 	</install>

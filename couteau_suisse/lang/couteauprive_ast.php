@@ -198,7 +198,7 @@ Esta ferramienta puede acoplase con «[.->sommaire]».', # MODIF
 	'detail_fichiers' => 'Archivos:',
 	'detail_inline' => 'Códigu en llinia:',
 	'detail_jquery2' => 'Esta ferramienta necesita la llibrería {jQuery}.', # MODIF
-	'detail_jquery3' => '{{Atención}}: esta ferramienta necesita el plugin [jQuery pa SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] pa funcionar correutamente con esta versión de SPIP.',
+	'detail_jquery3' => '{{Atención}}: esta ferramienta necesita el plugin [jQuery pa SPIP 1.92->https://files.spip.net/spip-zone/jquery_192.zip] pa funcionar correutamente con esta versión de SPIP.',
 	'detail_pipelines' => 'Tuberíes:',
 	'detail_traitements' => 'Tratamientos:',
 	'dossier_squelettes:description' => 'Modifica la carpeta de cadarma utilizada. Por exemplu: "squelettes/miocadarma". Pues escribir dellos direutorios separtaos por dos puntos <html>« : »</html>. Si dexes vacíu el cuadru siguiente (o escribiendo "dist"), sedrá la cadarma orixinal "dist" que ufre SPIP la que se use.[[%dossier_squelettes%]]',

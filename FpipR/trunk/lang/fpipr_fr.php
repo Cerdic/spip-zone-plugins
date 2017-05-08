@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_api_key' => 'Clef de l\'API',
 	'cfg_api_secret' => 'Secret',
 	'cfg_tag_machine_legend' => 'Int&eacute;gration avec les mots clefs',
-	'cfg_tag_machine_info' => 'Si vous avez install&eacute; le plugin <a href="http://files.spip.org/spip-zone/tag-machine.zip">tag-machine</a>, le plugin FpipR pourra ajouter automatiquement les tags Flickr comme mots clefs aux documents que vous ajout&eacute;s avec ce plugin.',
+	'cfg_tag_machine_info' => 'Si vous avez install&eacute; le plugin <a href="https://files.spip.net/spip-zone/tag-machine.zip">tag-machine</a>, le plugin FpipR pourra ajouter automatiquement les tags Flickr comme mots clefs aux documents que vous ajout&eacute;s avec ce plugin.',
 	'cfg_tag_machine_desactiver' => 'D&eacute;sactiver',
 	'cfg_tag_machine_group' => 'Groupe de mots clefs pour les tags Flickr'
 );

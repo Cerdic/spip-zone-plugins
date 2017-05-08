@@ -24,7 +24,7 @@ Walma cr&eacute;&eacute;e des galeries &agrave; partir des images jointes &agrav
 
 _ Il suffit ensuite de se rendre sur [?page=walma->../?page=walma]
 
-_ le plugin [CFG->http://files.spip.org/spip-zone/cfg.zip] est n&#233;cessaire pour [configurer walma->../ecrire/?exec=cfg&amp;cfg=walma]
+_ le plugin [CFG->https://files.spip.net/spip-zone/cfg.zip] est n&#233;cessaire pour [configurer walma->../ecrire/?exec=cfg&amp;cfg=walma]
 
 _ Explications et forum voir [->http://elastick.net/?id_article=51]
 	</description>
@@ -32,7 +32,7 @@ _ Explications et forum voir [->http://elastick.net/?id_article=51]
 	<prefix>
 walma
 	</prefix>
-	<!-- recommande id="cfg" version='[1.5.0;]' src="http://files.spip.org/spip-zone/cfg.zip" / -->
+	<!-- recommande id="cfg" version='[1.5.0;]' src="https://files.spip.net/spip-zone/cfg.zip" / -->
 	<fonctions>
 		walma_fonctions.php
 	</fonctions>

@@ -77,8 +77,8 @@ Consultez la [documentation sur Spip-Contrib->https://contrib.spip.net/SpipBB-le
 	'admin_interface' => 'Offentlig brugerflade muligheder',
 	'admin_nombre_lignes_messages' => 'Antal linnier i et indlæg',
 	'admin_plugin_requis_erreur' => 'mangler påkrævet Plugin',
-	'admin_plugin_requis_erreur_balisesession' => 'Installez le plugin Balise SESSION et activez le ! [Documentation ici->https://contrib.spip.net/?article1224], [Archive ZIP l&agrave;->http://files.spip.org/spip-zone/balise_session.zip].', # NEW
-	'admin_plugin_requis_erreur_cfg' => 'Installez le plugin CFG et activez le ! [Documentation ici->https://contrib.spip.net/?article1605], [Archive ZIP l&agrave;->http://files.spip.org/spip-zone/cfg.zip].', # NEW
+	'admin_plugin_requis_erreur_balisesession' => 'Installez le plugin Balise SESSION et activez le ! [Documentation ici->https://contrib.spip.net/?article1224], [Archive ZIP l&agrave;->https://files.spip.net/spip-zone/balise_session.zip].', # NEW
+	'admin_plugin_requis_erreur_cfg' => 'Installez le plugin CFG et activez le ! [Documentation ici->https://contrib.spip.net/?article1605], [Archive ZIP l&agrave;->https://files.spip.net/spip-zone/cfg.zip].', # NEW
 	'admin_plugin_requis_erreur_s' => 'Les plugins requis suivants manquent. Activez-les !', # NEW
 	'admin_plugin_requis_ok' => 'påkrævet Plugin installered',
 	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->https://contrib.spip.net/?article1224] : fourni les informations sur les visiteurs authentifi&eacute;.', # NEW

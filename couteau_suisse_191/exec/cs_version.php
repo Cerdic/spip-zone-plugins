@@ -40,7 +40,7 @@ function exec_cs_version_dist() {
 	if (!$distant) ajax_retour('');
 	include_spip('inc/texte');
 	ajax_retour(ptobr(propre($distant==$version?_T('couteauprive:version_a_jour'):(
-		$distant?_T('couteauprive:version_nouvelle', array('version' => "[{$distant}->http://files.spip.org/spip-zone/couteau_suisse.zip]")):''
+		$distant?_T('couteauprive:version_nouvelle', array('version' => "[{$distant}->https://files.spip.net/spip-zone/couteau_suisse.zip]")):''
 	))));
 }
 ?>

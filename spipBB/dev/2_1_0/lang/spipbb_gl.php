@@ -79,8 +79,8 @@ Consulte a [documentación en Spip-Contrib->http://contrib.spip.net/SpipBB-le-fo
 	'admin_interface' => 'Opcións da interface',
 	'admin_nombre_lignes_messages' => 'Número de liñas de mensaxes',
 	'admin_plugin_requis_erreur' => 'O módulo requirido falta. Actíveo !',
-	'admin_plugin_requis_erreur_balisesession' => 'Instale o módulo Balise SESSION e actíveo ! [Documentación aquí->http://contrib.spip.net/?article1224], [Arquivo ZIP aquí->http://files.spip.org/spip-zone/balise_session.zip].', # MODIF
-	'admin_plugin_requis_erreur_cfg' => 'Instale o módulos CFG e actíveo ! [Documentación aquí->http://contrib.spip.net/?article1605], [Arquivo ZIP aquí->http://files.spip.org/spip-zone/cfg.zip].', # MODIF
+	'admin_plugin_requis_erreur_balisesession' => 'Instale o módulo Balise SESSION e actíveo ! [Documentación aquí->http://contrib.spip.net/?article1224], [Arquivo ZIP aquí->https://files.spip.net/spip-zone/balise_session.zip].', # MODIF
+	'admin_plugin_requis_erreur_cfg' => 'Instale o módulos CFG e actíveo ! [Documentación aquí->http://contrib.spip.net/?article1605], [Arquivo ZIP aquí->https://files.spip.net/spip-zone/cfg.zip].', # MODIF
 	'admin_plugin_requis_erreur_s' => 'Os módulos requiridos faltan. Actíveos !',
 	'admin_plugin_requis_ok' => 'Modulo(s)  instalado(s) e activo(s) :',
 	'admin_plugin_requis_ok_balisesession' => '[Módulo BALISE_SESSION->http://contrib.spip.net/?article1224] : fornece os datos sobe visitantes autenticados.', # MODIF

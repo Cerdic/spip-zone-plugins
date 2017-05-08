@@ -166,7 +166,7 @@ _ Bu gereç {makaleleriniz için bir özet} ile birlikte kullanılabilir.', # MO
 	'detail_fichiers' => 'Dosyalar :',
 	'detail_inline' => 'Inline kod :',
 	'detail_jquery2' => 'Bu alet {jQuery} kütüphanesini gerektirir.', # MODIF
-	'detail_jquery3' => '{{Dikkat}} : bu gereç sorunsuz çalışabilmek için [SPIP 1.92-için jQuery>http://files.spip.org/spip-zone/jquery_192.zip] eklentisi gerektirir.',
+	'detail_jquery3' => '{{Dikkat}} : bu gereç sorunsuz çalışabilmek için [SPIP 1.92-için jQuery>https://files.spip.net/spip-zone/jquery_192.zip] eklentisi gerektirir.',
 	'detail_pipelines' => 'Boru hatları (pipeline) :',
 	'detail_traitements' => 'İşlemler :',
 	'dossier_squelettes:description' => 'Kullanılan iskelet dizinini değiştirir. Örneğin : "squelettes/iskeletim". Dizinleri iki nokta ile ayırarak bir çok dizin belirtebilirsiniz  <html>« : »</html>. İzleyen kutuyu boş bırakarak (veya "dist" yazarak) SPIP tarafından sunulan orijinal "dist" iskeletini kullanabilirsiniz. [[%dossier_squelettes%]]',

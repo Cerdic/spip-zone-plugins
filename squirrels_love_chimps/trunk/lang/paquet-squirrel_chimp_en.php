@@ -15,9 +15,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 It provides the MailChimp API and a framework to easily add other plugins
 
 Currently exist for the following plugins
--* [Squirrels Love Chimps Lists->http://files.spip.org/spip-zone/squirrels_love_chimps_lists.zip](squirrel_chimp_lists)
--* [Squirrels Love Chimps Lists us->http://files.spip.org/spip-zone/squirrels_love_chimps_lists_plus.zip](squirrel_chimp_lists_plus)
--* [Squirrels Love Chimps Campagnes->http://files.spip.org/spip-zone/squirrels_love_chimps_campaigns.zip](squirrel_chimp_campaigns)',
+-* [Squirrels Love Chimps Lists->https://files.spip.net/spip-zone/squirrels_love_chimps_lists.zip](squirrel_chimp_lists)
+-* [Squirrels Love Chimps Lists us->https://files.spip.net/spip-zone/squirrels_love_chimps_lists_plus.zip](squirrel_chimp_lists_plus)
+-* [Squirrels Love Chimps Campagnes->https://files.spip.net/spip-zone/squirrels_love_chimps_campaigns.zip](squirrel_chimp_campaigns)',
 	'squirrel_chimp_nom' => 'Squirrels Love Chimps',
 	'squirrel_chimp_slogan' => 'Connect SPIP with Mailchimp'
 );

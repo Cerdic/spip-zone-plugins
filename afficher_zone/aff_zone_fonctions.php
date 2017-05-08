@@ -56,7 +56,7 @@
   function url_zip($url_trac) {
     $Turl = explode('/', $url_trac);
     for ($i = 1; $i < count($Turl); $i++) {
-        if ($next) return 'http://files.spip.org/spip-zone/'.$Turl[$i].'.zip';
+        if ($next) return 'https://files.spip.net/spip-zone/'.$Turl[$i].'.zip';
         if (in_array($Turl[$i], array('_dev_','_test_','_stable_'))) $next = true;
     }
   }
