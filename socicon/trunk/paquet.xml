@@ -1,0 +1,20 @@
+<paquet
+	prefix="socicon"
+	categorie="edition"
+	version="0.1.0"
+	etat="test"
+	compatibilite="[3.0.20;3.2.*]"
+	logo="prive/themes/spip/images/socicon-64.png"
+	schema="0.1.0"
+>
+	<nom>socicon</nom>
+	<auteur lien='http://www.erational.org'>erational</auteur>
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="sociaux_lister" inclure="socicon_pipelines.php"/>
+	<pipeline nom="autoriser" inclure="socicon_autorisations.php" />
+	<pipeline nom="header_prive" inclure="socicon_pipelines.php" />
+
+	<necessite nom="sociaux"  compatibilite="[2.0.0;]" />
+
+</paquet>

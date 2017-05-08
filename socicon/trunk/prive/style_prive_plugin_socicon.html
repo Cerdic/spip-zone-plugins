@@ -1,0 +1,247 @@
+[(#REM)<style>
+/**
+    Ce squelette definit les styles de l'espace prive
+
+    Note: l'entete "Vary:" sert a repousser l'entete par
+    defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+    genant en cas de "rotation du cookie de session" apres
+    un changement d'IP (effet de clignotement).
+
+    ATTENTION: il faut absolument le charset sinon Firefox croit que
+    c'est du text/html !
+**/
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+/* #SQUELETTE */
+/*
+Valeurs par defaut :
+#SET{claire,##ENV{couleur_claire,edf3fe}} [claire: (#GET{claire});]
+#SET{foncee,##ENV{couleur_foncee,3874b0}} [foncee: (#GET{foncee});]
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}} [left: (#GET{left});]
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}} [right: (#GET{right});]
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}} [rtl: (#GET{rtl});]
+#SET{dir,#ENV{ltr}|choixsiegal{left,ltr,rtl}} [dir: (#GET{dir});]
+
+#SET{font-size,#ENV{font-size,0.8125em}} [font-size: (#GET{font-size});]
+#SET{line-height,#ENV{line-height,1.385em}} [line-height: (#GET{line-height});]
+#SET{margin-bottom,#ENV{margin-bottom,#GET{line-height}}} [margin-bottom: (#GET{margin-bottom});]
+#SET{text-indent,#ENV{text-indent,50px}} [text-indent: (#GET{text-indent});]
+#SET{font-family,#ENV*{font-family,'Helvetica, Arial, sans-serif'}} [font-family: (#GET{font-family});]
+#SET{background-color,#ENV{background-color,#F8F7F3}} [background-color : (#GET{background-color});]
+#SET{color,#ENV{color,#000000}} [color: (#GET{color});]
+*/
+
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix * {
+	color: white;
+}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix {
+    width: 29%;
+    position: relative;
+    border: 0 transparent;
+    height: 50px;
+    padding: 1em 1% 0;
+	margin: 0.5em 1%;
+	color: white;
+	border-radius: 5px;
+	opacity: 0.5;
+	background-color: #GET{color};
+    float: #GET{left};
+}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix:hover {
+	opacity: 1;
+}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix input {
+    display: inline;
+    float: #GET{left};
+}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix label {
+    position: relative;
+    width: 85%;
+    float: #GET{left};
+}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix .socicon {
+    font-size: 3em;
+    display: block;
+    padding-#GET{right}: 0.25em;
+	clear: #GET{right};
+    float: #GET{left};
+}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.checked {
+	opacity: 1;
+}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-500px { background-color:#58a9de}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-8tracks { background-color:#122c4b}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-airbnb { background-color:#ff5a5f}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-alliance { background-color:#144587}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-amazon { background-color:#ff9900}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-amplement { background-color:#0996c3}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-android { background-color:#8ec047}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-angellist { background-color:#000000}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-apple { background-color:#b9bfc1}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-appnet { background-color:#494949}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-baidu { background-color:#2629d9}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-bandcamp { background-color:#619aa9}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-battlenet { background-color:#0096cd}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-beam { background-color:#536dfe}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-bebee { background-color:#f28f16}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-bebo { background-color:#ef1011}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-behance { background-color:#000000}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-blizzard { background-color:#01b2f1}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-blogger { background-color:#ec661c}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-buffer { background-color:#000000}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-chrome { background-color:#757575}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-coderwall { background-color:#3e8dcc}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-curse { background-color:#f26522}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-dailymotion { background-color:#004e72}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-deezer { background-color:#32323d}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-delicious { background-color:#020202}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-deviantart { background-color:#c5d200}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-diablo { background-color:#8b1209}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-digg { background-color:#1d1d1b}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-discord { background-color:#7289da}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-disqus { background-color:#2e9fff}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-douban { background-color:#3ca353}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-draugiem { background-color:#ffa32b}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-dribbble { background-color:#e84d88}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-drupal { background-color:#00598e}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-ebay { background-color:#333333}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-ello { background-color:#000000}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-endomodo { background-color:#86ad00}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-envato { background-color:#597c3a}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-etsy { background-color:#f56400}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-facebook { background-color:#3e5b98}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-feedburner { background-color:#ffcc00}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-filmweb { background-color:#ffc404}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-firefox { background-color:#484848}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-flattr { background-color:#f67c1a}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-flickr { background-color:#1e1e1b}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-formulr { background-color:#ff5a60}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-forrst { background-color:#5b9a68}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-foursquare { background-color:#f94877}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-friendfeed { background-color:#2f72c4}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-github { background-color:#221e1b}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-goodreads { background-color:#463020}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-google { background-color:#4285f4}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-googlegroups { background-color:#4f8ef5}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-googlephotos { background-color:#212121}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-googleplus { background-color:#dd4b39}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-googlescholar { background-color:#4285f4}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-grooveshark { background-color:#000000}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-hackerrank { background-color:#2ec866}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-hearthstone { background-color:#ec9313}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-hellocoton { background-color:#d30d66}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-heroes { background-color:#2397f7}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-hitbox { background-color:#99cc00}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-horde { background-color:#84121c}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-houzz { background-color:#7cc04b}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-icq { background-color:#7ebd00}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-identica { background-color:#000000}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-imdb { background-color:#e8ba00}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-instagram { background-color:#000000}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-issuu { background-color:#f26f61}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-istock { background-color:#000000}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-itunes { background-color:#ff5e51}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-keybase { background-color:#ff7100}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-lanyrd { background-color:#3c80c9}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-lastfm { background-color:#d41316}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-line { background-color:#00b901}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-linkedin { background-color:#3371b7}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-livejournal { background-color:#0099cc}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-lyft { background-color:#ff00bf}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-macos { background-color:#000000}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-mail { background-color:#000000}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-medium { background-color:#000000}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-meetup { background-color:#e2373c}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-mixcloud { background-color:#000000}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-modelmayhem { background-color:#000000}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-mumble { background-color:#5ab5d1}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-myspace { background-color:#323232}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-newsvine { background-color:#075b2f}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-nintendo { background-color:#f58a33}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-npm { background-color:#c12127}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-odnoklassniki { background-color:#f48420}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-openid { background-color:#f78c40}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-opera { background-color:#ff1b2d}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-outlook { background-color:#0072c6}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-overwatch { background-color:#9e9e9e}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-patreon { background-color:#e44727}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-paypal { background-color:#009cde}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-periscope { background-color:#3aa4c6}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-persona { background-color:#e6753d}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-pinterest { background-color:#c92619}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-play { background-color:#000000}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-player { background-color:#6e41bd}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-playstation { background-color:#000000}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-pocket { background-color:#ed4055}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-qq { background-color:#4297d3}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-quora { background-color:#cb202d}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-raidcall { background-color:#073558}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-ravelry { background-color:#b6014c}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-reddit { background-color:#e74a1e}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-renren { background-color:#2266b0}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-researchgate { background-color:#00ccbb}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-residentadvisor { background-color:#b3be1b}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-reverbnation { background-color:#000000}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-rss { background-color:#f26109}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-sharethis { background-color:#01bf01}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-skype { background-color:#28abe3}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-slideshare { background-color:#4ba3a6}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-smugmug { background-color:#acfd32}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-snapchat { background-color:#fffa37}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-songkick { background-color:#f80046}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-soundcloud { background-color:#fe3801}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-spotify { background-color:#7bb342}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-stackexchange { background-color:#2f2f2f}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-stackoverflow { background-color:#fd9827}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-starcraft { background-color:#002250}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-stayfriends { background-color:#f08a1c}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-steam { background-color:#171a21}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-storehouse { background-color:#25b0e6}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-strava { background-color:#fc4c02}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-streamjar { background-color:#503a60}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-stumbleupon { background-color:#e64011}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-swarm { background-color:#fc9d3c}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-teamspeak { background-color:#465674}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-teamviewer { background-color:#168ef4}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-technorati { background-color:#5cb030}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-telegram { background-color:#0088cc}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-tripadvisor { background-color:#4b7e37}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-tripit { background-color:#1982c3}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-triplej { background-color:#e53531}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-tumblr { background-color:#45556c}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-twitch { background-color:#6441a5}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-twitter { background-color:#4da7de}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-uber { background-color:#000000}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-ventrilo { background-color:#77808a}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-viadeo { background-color:#e4a000}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-viber { background-color:#7b519d}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-viewbug { background-color:#2b9fcf}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-vimeo { background-color:#51b5e7}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-vine { background-color:#00b389}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-vkontakte { background-color:#5a7fa6}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-warcraft { background-color:#1eb10a}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-wechat { background-color:#09b507}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-weibo { background-color:#e31c34}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-whatsapp { background-color:#20b038}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-wikipedia { background-color:#000000}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-windows { background-color:#00bdf6}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-wordpress { background-color:#464646}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-wykop { background-color:#328efe}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-xbox { background-color:#92c83e}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-xing { background-color:#005a60}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-yahoo { background-color:#6e2a85}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-yammer { background-color:#1175c4}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-yandex { background-color:#ff0000}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-yelp { background-color:#c83218}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-younow { background-color:#61c03e}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-youtube { background-color:#e02a20}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-zapier { background-color:#ff4a00}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-zerply { background-color:#9dbc7a}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-zomato { background-color:#cb202d}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-zynga { background-color:#dc0606}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-spreadshirt { background-color:#00b2a6}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-trello { background-color:#0079bf}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-gamejolt { background-color:#191919}
+.configurer_socicon #contenu .formulaire_configurer_socicon .editer_socicon .choix.icon-tunein { background-color:#36b4a7}

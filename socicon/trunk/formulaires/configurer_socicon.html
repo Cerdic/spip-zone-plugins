@@ -1,0 +1,70 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+		<div>
+
+			#ACTION_FORMULAIRE{#ENV{action}}
+
+			<ul class="editer-groupe">
+				<li class="editer editer-search">
+					<label for="search-socicon"><:socicon:label_search_icon:></label>
+					<input type="text" name="search-socicon" id="search-socicon" class="text" />
+				</li>
+			</ul>
+			<!-- les reseaux -->
+			<p class="explication"><:socicon:cfg_explication:></p>
+			<B_rezo>
+				<ul class="editer-groupe">
+					<li class="editer editer_socicon pleine_largeur">
+						<label><:socicon:label_socicon_selection:></label>
+					<BOUCLE_rezo (DATA){source tableau,#REM|lister_socicon}>
+						<!-- #VALEUR -->
+					<div class="choix icon-[(#VALEUR)][(#VALEUR|in_array{#ENV{socicon}}|oui)checked]">
+							<input type="checkbox" name="socicon[]" id="socicon-[(#VALEUR)]" value="#VALEUR" class="checkbox"[(#VALEUR|in_array{#ENV{socicon}}|oui)checked="checked"]/>
+							<label for="socicon-[(#VALEUR)]"><span class="socicon socicon-#VALEUR"></span> [(#VALEUR)]</label>
+						</div>
+					</BOUCLE_rezo>
+					</li>
+				</ul>
+			</B_rezo>
+
+
+			<input type="hidden" name="_meta_casier" value="socicon"/>
+			<p class="boutons">
+				<span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>"/>
+			</p>
+		</div>
+	</form>
+</div>
+
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+      $.expr[":"].contains_ci = $.expr.createPseudo(function(arg) {
+        return function( elem ) {
+          return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+        };
+      });
+
+// Detect a click in the "Search" button or enter from keyboard
+      $('#search-socicon').on('click keyup', function(event) {
+        // Prevent the original click for not reloading the whole page
+        event.preventDefault();
+
+        // Get value from search input
+        var searchInputValue = $('#search-socicon').val();
+
+        // Search the list and if it matches display it, else hide it
+        $('.choix').hide().find('label:contains_ci(' + searchInputValue + ')').parents('.choix').show();
+      });
+      $('.choix input').on('change', function(){
+        if($(this).is(':checked')) {
+          $(this).parent().addClass('checked');
+        } else {
+          $(this).parent().removeClass('checked')
+        }
+      });
+	});
+</script>
