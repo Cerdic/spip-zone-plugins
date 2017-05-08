@@ -1,10 +1,10 @@
-<traduction module="paquet-facteur" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/facteur/trunk/lang/" reference="fr">
+<traduction module="paquet-facteur" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/facteur/trunk/lang/" reference="fr">
 	<langue code="en" />
-	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-facteur?lang_cible=es">
-		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
+	<langue code="es" url="https://trad.spip.net/tradlang_module/paquet-facteur?lang_cible=es">
+		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel" />
 	</langue>
 	<langue code="fr" />
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/paquet-facteur?lang_cible=sk">
-		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/paquet-facteur?lang_cible=sk">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>

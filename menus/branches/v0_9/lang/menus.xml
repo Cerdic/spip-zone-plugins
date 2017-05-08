@@ -1,4 +1,4 @@
-<traduction module="menus" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/menus/trunk/lang/" reference="fr">
+<traduction module="menus" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/menus/trunk/lang/" reference="fr">
 	<langue code="ca" />
 	<langue code="de">
 		<traducteur nom="klaus" />

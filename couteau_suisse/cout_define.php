@@ -21,7 +21,7 @@ define('_CS_RSS_COUNT', 15);
 // Fichier 
 define('_CS_TMP_RSS', _DIR_TMP.'rss_couteau_suisse.html');
 // Traductions des modules
-define('_CS_TRAD_ACCUEIL', 'http://trad.spip.org/');
+define('_CS_TRAD_ACCUEIL', 'https://trad.spip.net/');
 define('_CS_TRAD_MODULE', _CS_TRAD_ACCUEIL.'tradlang_module/');
 
 
