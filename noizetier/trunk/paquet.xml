@@ -21,7 +21,7 @@
 
 	<pipeline nom="declarer_tables_principales" inclure="base/noizetier_tables.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/noizetier_tables.php" />
-	<pipeline nom="autoriser" inclure="noizetier_autoriser.php" />
+	<pipeline nom="autoriser" inclure="noizetier_autorisations.php" />
 	<pipeline nom="recuperer_fond" inclure="noizetier_pipelines.php" />
 	<pipeline nom="styliser" inclure="noizetier_pipelines.php" />
 	<pipeline nom="compositions_lister_disponibles" inclure="noizetier_pipelines.php" />

@@ -20,24 +20,20 @@
 			</div>
 			[(#REM) Actions possibles sur la page ]
 			<div class="edition">
-				[(#VALEUR{composition}|non)
-					[(#AUTORISER{creercomposition, noizetier})
-						[<a href="(#URL_ECRIRE{noizetier_page_edit}|parametre_url{edition, creer}|parametre_url{source, #VALEUR{type}})" title="<:noizetier:bulle_creer_composition{page=#VALEUR{type}}:>">
-							[<img height="24" width="24" src="(#CHEMIN_IMAGE{composition-add-24.png})" alt="" />]
-						</a>]
-					]
+				[(#AUTORISER{creercomposition, noizetier, '', '', #ARRAY{page, #CLE}})
+					[<a href="(#URL_ECRIRE{noizetier_page_edit}|parametre_url{edition, creer}|parametre_url{source, #VALEUR{type}})" title="<:noizetier:bulle_creer_composition{page=#VALEUR{type}}:>">
+						[<img height="24" width="24" src="(#CHEMIN_IMAGE{composition-add-24.png})" alt="" />]
+					</a>]
 				]
-				[(#VALEUR{composition}|oui)
-					[(#AUTORISER{modifiercomposition, noizetier}|et{#VALEUR{est_virtuelle}}|oui)
-						[<a href="(#URL_ECRIRE{noizetier_page_edit}|parametre_url{edition, modifier}|parametre_url{page, #CLE})" title="<:noizetier:bulle_modifier_composition:>">
-							[<img height="24" width="24" src="(#CHEMIN_IMAGE{edit-24.png})" alt="" />]
-						</a>]
-					]
-					[(#AUTORISER{dupliquercomposition, noizetier})
-						[<a href="(#URL_ECRIRE{noizetier_page_edit}|parametre_url{edition, dupliquer}|parametre_url{source, #CLE})" title="<:noizetier:bulle_dupliquer_composition{page=#CLE}:>">
-							[<img height="24" width="24" src="(#CHEMIN_IMAGE{composition-copy-24.png})" alt="" />]
-						</a>]
-					]
+				[(#AUTORISER{modifiercomposition, noizetier, '', '', #ARRAY{page, #CLE}})
+					[<a href="(#URL_ECRIRE{noizetier_page_edit}|parametre_url{edition, modifier}|parametre_url{page, #CLE})" title="<:noizetier:bulle_modifier_composition:>">
+						[<img height="24" width="24" src="(#CHEMIN_IMAGE{edit-24.png})" alt="" />]
+					</a>]
+				]
+				[(#AUTORISER{dupliquercomposition, noizetier, '', '', #ARRAY{page, #CLE}})
+					[<a href="(#URL_ECRIRE{noizetier_page_edit}|parametre_url{edition, dupliquer}|parametre_url{source, #CLE})" title="<:noizetier:bulle_dupliquer_composition{page=#CLE}:>">
+						[<img height="24" width="24" src="(#CHEMIN_IMAGE{composition-copy-24.png})" alt="" />]
+					</a>]
 				]
 			</div>
 		</div>
