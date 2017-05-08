@@ -1057,13 +1057,13 @@ function noizetier_page_repertorier() {
 			if ($fichiers = find_all_in_path($options['repertoire_pages'], '.+[.]html$')) {
 				foreach ($fichiers as $squelette => $chemin) {
 					$page = basename($squelette, '.html');
-					$dossier = str_replace($squelette, '', $chemin);
-					// essayer dirname
+					$dossier = dirname($chemin);
 					// Exclure certaines pages :
 					// -- celles du privé situes dans prive/contenu
 					// -- page liée au plugin Zpip en v1
 					// -- z_apl liée aux plugins Zpip v1 et Zcore
-					if ((substr($dossier, -14) != 'prive/contenu/')
+					// -- TODO : les compositions explicites si le plugin Compositions n'est pas activé
+					if ((substr($dossier, -13) != 'prive/contenu')
 					and (($page != 'page') or !defined('_DIR_PLUGIN_Z'))
 					and (($page != 'z_apl') or (!defined('_DIR_PLUGIN_Z') and !defined('_DIR_PLUGIN_ZCORE')))) {
 						if ($configuration = noizetier_page_informer($page, '', $options)) {
@@ -1231,7 +1231,7 @@ function noizetier_page_informer($page, $information = '', $options =array()) {
 			// 2- la page est une composition du noizetier
 			if (empty($options['compositions'])) {
 				include_spip('inc/config');
-				// todo : ne peut-on pas limiter à la page ?
+				// TODO : ne peut-on pas limiter à la page ?
 				$options['compositions'] = lire_config('noizetier_compositions', array());
 			}
 			if (isset($options['compositions'][$page])) {

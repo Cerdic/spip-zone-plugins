@@ -6,7 +6,7 @@
 })]
 
 [(#BOITE_OUVRIR{
-	[(#GET{informations/est_virtuelle}|oui)
+	[(#ENV{page}|et{#AUTORISER{modifiercomposition, noizetier, '', '', #ARRAY{page, #ENV{page}}}}|oui)
 		[(#URL_ECRIRE{noizetier_page_edit}
 			|parametre_url{edition, modifier}
 			|parametre_url{page,#ENV{page}}

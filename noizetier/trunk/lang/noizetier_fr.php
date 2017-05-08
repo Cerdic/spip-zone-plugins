@@ -63,7 +63,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'formulaire_ajouter_noisette' => 'Ajouter une noisette',
 	'formulaire_composition' => 'Identifiant de composition',
-	'formulaire_composition_explication' => 'Indiquez un mot-clé unique (minuscules, sans espace, sans tiret et sans accent) permettant d’identifier cette composition.<br />Par exemple : <i>macompo</i>.',
+	'formulaire_creer_composition' => 'Créer une composition',
+	'formulaire_composition_explication' => 'Mot-clé unique (minuscules, sans espace, sans tiret et sans accent) permettant d’identifier la composition.',
 	'formulaire_composition_mise_a_jour' => 'Composition mise à jour',
 	'formulaire_configurer_bloc' => 'Configurer le bloc :',
 	'formulaire_configurer_page' => 'Configurer la page :',
@@ -98,7 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_supprimer_noisettes_page' => 'Supprimer toutes les noisettes',
 	'formulaire_supprimer_page' => 'Supprimer cette composition',
 	'formulaire_type' => 'Type de page',
-	'formulaire_type_explication' => 'Indiquez sur quel objet porte cette composition ou si vous souhaitez créer une page autonome.',
+	'formulaire_type_explication' => 'Objet ou page autonome dont hérite la composition.',
 	'formulaire_type_import' => 'Type d’importation',
 	'formulaire_type_import_explication' => 'Vous pouvez fusionner le fichier de configuration avec votre configuration actuelle (les noisettes de chaque page seront ajoutées à vos noisettes déjà définies) ou bien remplacer votre configuration par celle-ci.',
 

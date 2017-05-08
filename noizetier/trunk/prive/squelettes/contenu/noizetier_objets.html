@@ -11,7 +11,10 @@
 	<li class="item objet">
 		<div>
 			<div class="resume">
-				<a[ href="(#URL_ECRIRE{noizetier_page}|parametre_url{objet, #_objet_types:CLE}|parametre_url{id_objet,#CLE})"] title="<:noizetier:bulle_configurer_objet_noisettes:>">
+				<a[ href="(#URL_ECRIRE{noizetier_page}
+							|parametre_url{objet, #_objet_types:CLE}
+							|parametre_url{id_objet,#CLE})"]
+					title="<:noizetier:bulle_configurer_objet_noisettes:>">
 					[(#VALEUR{titre}|sinon{#_types:CLE&nbsp;-&nbsp;#CLE})]
 				</a>
 				<div class="icone">

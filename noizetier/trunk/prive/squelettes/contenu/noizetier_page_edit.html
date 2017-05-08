@@ -1,37 +1,37 @@
-[(#REM) On teste l'autorisation en fonctio ndu type d'édition ]
-[(#ENV{edition}|=={creer}|et{#AUTORISER{creercomposition, noizetier}}
-	|ou{#ENV{edition}|=={modifier}|et{#AUTORISER{modifiercomposition, noizetier, '', '', #ARRAY{page, #ENV{page}}}}}
-	|ou{#ENV{edition}|=={dupliquer}|et{#AUTORISER{dupliquercomposition, noizetier, '', '', #ARRAY{page, #ENV{page}}}}}
+[(#REM) On teste l'autorisation en fonction du type d'édition ]
+[(#ENV{edition}|=={modifier}|et{#AUTORISER{modifiercomposition, noizetier, '', '', #ARRAY{page, #ENV{page}}}}
+	|ou{#ENV{edition}|=={creer}|et{#AUTORISER{creercomposition, noizetier, '', '', #ARRAY{page, #ENV{source}}}}}
+	|ou{#ENV{edition}|=={dupliquer}|et{#AUTORISER{dupliquercomposition, noizetier, '', '', #ARRAY{page, #ENV{source}}}}}
 	|sinon_interdire_acces)]
 
-#SET{description_page, #ARRAY}
-[(#ENV{edition}|in_array{#LISTE{modifier, dupliquer}}|oui)
-	#SET{description_page, #NOIZETIER_PAGE_INFOS{#ENV{page}}}
-]
+#SET{description_page, #NOIZETIER_PAGE_INFOS{#ENV{page}|?{#ENV{page}, #ENV{source}}}}
 [(#ENV{edition}|=={modifier}|oui)
 	#SET{redirect, #URL_ECRIRE{noizetier_page}|parametre_url{page, #ENV{page}}}
+	#SET{retour, #URL_ECRIRE{noizetier_page}|parametre_url{page, #ENV{page}}}
 	#SET{icone_retour, #GET{description_page/icon}}
 ]
-[(#ENV{edition}|in_array{#LISTE{creer,dupliquer}}|oui)
-	#SET{redirect,#URL_ECRIRE{noizetier_pages}}
-	#SET{icone_retour,noizetier-24.png}
+[(#ENV{edition}|=={modifier}|non)
+	#SET{redirect, ''}
+	#SET{retour, #URL_ECRIRE{noizetier_pages}|parametre_url{est_page_objet, #GET{description_page/est_page_objet}}}
+	#SET{icone_retour, noizetier-24.png}
 ]
-#SET{redirect,#ENV{redirect}|sinon{#GET{redirect}}}
+#SET{redirect, #ENV{redirect}|sinon{#GET{redirect}}}
 
 <div class="cadre-formulaire-editer">
 	<div class="entete-formulaire">
-		[(#GET{redirect}|icone_verticale{<:noizetier:retour:>, #GET{icone_retour}, '', left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+		[(#GET{retour}|icone_verticale{<:noizetier:retour:>, #GET{icone_retour}, '', left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
 		[(#ENV{edition}|=={modifier}|oui)<:noizetier:formulaire_modifier_page:>]
+		[(#ENV{edition}|=={creer}|oui)<:noizetier:formulaire_creer_composition:>]
 		[(#ENV{edition}|=={dupliquer}|oui)<:noizetier:formulaire_dupliquer_page_entete:>]
 		<h1>
-			[(#ENV{edition}|=={creer}|oui)<:noizetier:editer_nouvelle_page:>]
 			[(#ENV{edition}|=={modifier}|oui)[(#GET{description_page/nom})]]
+			[(#ENV{edition}|=={creer}|oui)<:info_sans_titre:>]
 			[(#ENV{edition}|=={dupliquer}|oui)<:noizetier:formulaire_dupliquer_page_titre{page=#GET{description_page/nom}}:>]
 		</h1>
 	</div>
 
 	[(#ENV{retourajax,''}|oui)
-		#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+		#SET{retour,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
 	]
 	<div class="ajax">
 		[(#FORMULAIRE_EDITER_PAGE{#ENV{page}, #ENV{edition}, #GET{description_page}, #GET{redirect}})]

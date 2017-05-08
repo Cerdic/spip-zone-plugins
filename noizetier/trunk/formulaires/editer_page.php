@@ -27,7 +27,7 @@ if (!function_exists('autoriser')) {
  * @param string $retour
  *                       URL de redirection
  */
-function formulaires_editer_page_charger_dist($page, $edition, $description_page, $retour = '') {
+function formulaires_editer_page_charger_dist($page, $edition, $description_page, $redirect = '') {
 
 	// Initialisation des données communes à charger dans le formulaire
 	$valeurs = array(
@@ -63,33 +63,11 @@ function formulaires_editer_page_charger_dist($page, $edition, $description_page
 		$valeurs = array_merge($valeurs, construire_heritages($page, $valeurs['type_page']));
 
 	} elseif ($edition == 'creer') {
-		// On crée une nouvelle page from scratch.
-		// Toute la configuration de la page est donc vide
-		// Il faut constituer la liste des pages dont la composition va s'inspirer afin de proposer ce choix à
-		// l'utilisateur.
-		$valeurs['_pages_composables'] = array();
-		if (defined('_NOIZETIER_COMPOSITIONS_TYPE_PAGE') and _NOIZETIER_COMPOSITIONS_TYPE_PAGE) {
-			$valeurs['_pages_composables']['page'] = _T('noizetier:page_autonome');
-		}
-		// Si on voulait se baser sur la config de compositions, on utiliserait compositions_objets_actives().
-		// En fait, à la création d'une composition du noizetier, on modifie la config de compositions.
-		// On se base donc sur la liste des objets sur lesquels compositions est activable
-		// et qui dispose déjà d'une page dans le noizetier.
-		include_spip('base/objets');
-		$tables_objet = lister_tables_objets_sql();
-		if ($tables_objet) {
-			foreach ($tables_objet as $_table) {
-				// On ne sélectionne que les tables ayant une page publique configurée et qui appartient
-				// à la liste des pages accessibles par le noiZetier.
-				if (!empty($_table['page']) and ($configuration = noizetier_page_informer($_table['page']))) {
-					$valeurs['_pages_composables'][$_table['page']] = $configuration['nom'];
-				}
-			}
-		}
-		// Hack pour les groupes de mots-clés (car ils n'ont pas d'entrée page dans lister_tables_objets_sql()).
-		if (isset($tables_objet['groupe_mots'])) {
-			$valeurs['_pages_composables']['groupe_mots'] = 'groupe_mots';
-		}
+		// On crée une nouvelle composition à partir d'une page source.
+		// L'argument $description_page contient donc la configuration complète de la page source.
+		$valeurs['type_page'] = $description_page['type'];
+		$valeurs = array_merge($valeurs, construire_heritages($page, $valeurs['type_page']));
+
 	} else {
 		$valeurs['editable'] = false;
 	}
@@ -109,24 +87,27 @@ function formulaires_editer_page_charger_dist($page, $edition, $description_page
  * @param string $retour
  *                       URL de redirection
  */
-function formulaires_editer_page_verifier_dist($page, $edition, $description_page, $retour = '')
+function formulaires_editer_page_verifier_dist($page, $edition, $description_page, $redirect = '')
 {
 	$erreurs = array();
+
+	// On vérifie que les champs obligatoires ont été bien remplis
 	foreach (array('type_page', 'composition', 'nom') as $champ) {
 		if (!_request($champ)) {
 			$erreurs[$champ] = _T('noizetier:formulaire_obligatoire');
 		}
 	}
-	// On vérifie, dans le cas d'une nouvelle composition que $composition n'est pas déjà pris
-	// On vérifie aussi que $composition ne contient ni espace, ni tiret
-	if (_request('new') and _request('composition')) {
+
+	// On vérifie, dans le cas d'une nouvelle composition que l'identifiant saisi n'est pas déjà pris
+	// par une autre composition. La syntaxe de l'identifiant est aussi vérifiée (ni espace, ni tiret).
+	if ($edition != 'modifier') {
 		$type_page = _request('type_page');
 		$composition = _request('composition');
-		$liste_pages = noizetier_lister_pages();
-		if (isset($liste_pages[$type_page.'-'.$composition]) and is_array($liste_pages[$type_page.'-'.$composition])) {
+		$pages = noizetier_page_repertorier();
+		if (isset($pages[$type_page.'-'.$composition]) and is_array($pages[$type_page.'-'.$composition])) {
 			$erreurs['composition'] = _T('noizetier:formulaire_identifiant_deja_pris');
 		}
-		if (preg_match('#^[a-z0-9_]+$#', $composition) == 0) {
+		if (!preg_match('#^[a-z0-9_]+$#', $composition)) {
 			$erreurs['composition'] = _T('noizetier:formulaire_erreur_format_identifiant');
 		}
 	}
@@ -146,90 +127,90 @@ function formulaires_editer_page_verifier_dist($page, $edition, $description_pag
  * @param string $retour
  *                       URL de redirection
  */
-function formulaires_editer_page_traiter_dist($page, $edition, $description_page, $retour = '')
-{
-	if (!autoriser('configurer', 'noizetier')) {
-		return array('message_erreur' => _T('noizetier:probleme_droits'));
-	}
+function formulaires_editer_page_traiter_dist($page, $edition, $description_page, $redirect = '') {
 
-	$res = array();
-	$noizetier_compositions = isset($GLOBALS['meta']['noizetier_compositions']) && unserialize($GLOBALS['meta']['noizetier_compositions']) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
+	$retour = array();
+
+	// Identifiant de la composition résultante.
+	// -- on le recalcule systématiquement même si pour une modification il correspond à $page
 	$type_page = _request('type_page');
 	$composition = _request('composition');
-	$peupler = ($edition == 'dupliquer') ? true : (($edition == 'creer' and _request('peupler')) ? true : false);
+	$identifiant = "${type_page}-${composition}";
 
-	// Au cas où on n'a pas encore configuré de compositions
-	if (!is_array($noizetier_compositions)) {
-		$noizetier_compositions = array();
-	}
-
-	$noizetier_compositions["${type_page}-${composition}"] = array(
+	// Mise à jour ou création des données de base de la composition virtuelle résultante
+	$compositions_virtuelles = lire_config('noizetier_compositions', array());
+	$compositions_virtuelles[$identifiant] = array(
 		'nom' => _request('nom'),
 		'description' => _request('description'),
 		'icon' => _request('icon'),
 	);
 
+	// Traitement des blocs configurables
+	// TODO: ajouter les blocs
+	$compositions_virtuelles[$identifiant]['blocs'] = noizetier_bloc_defaut();
+
+	// Traitement des branches éventuelles pour la composition virtuelle résultante
 	$branche = array();
-	foreach (heritiers($type_page) as $t => $i) {
-		if ($h = _request('heritage-'.$t)) {
-			$branche[$t] = $h;
+	$heritages = construire_heritages($identifiant, $type_page);
+	foreach ($heritages['_heritiers'] as $_objet => $_infos) {
+		if ($heritage = _request("heritage-${_objet}")) {
+			$branche[$_objet] = $heritage;
 		}
 	}
-	if (count($branche) > 0) {
-		$noizetier_compositions["${type_page}-${composition}"]['branche'] = $branche;
-	}
+	$compositions_virtuelles[$identifiant]['branche'] = $branche;
 
-	ecrire_meta('noizetier_compositions', serialize($noizetier_compositions));
-	$retours['message_ok'] = _T('noizetier:formulaire_composition_mise_a_jour');
+	// Mise à jour de la composition virtuelle dans la meta
+	ecrire_config('noizetier_compositions', serialize($compositions_virtuelles));
 
-	// On pré-remplit avec les noisettes de la page mère en cas de nouvelle composition,
-	// ou avec celles de la page de référence en cas de duplication
-	if (
-		$peupler
-		and $type_page != 'page'
-	) {
-		$composition_ref = ($edition == 'creer') ? '' : noizetier_page_composition($page); // si on ne créé pas, c'est qu'on duplique
-		include_spip('base/abstract_sql');
-		$config_mere = sql_allfetsel(
-			'rang, type, composition, bloc, noisette, parametres',
-			'spip_noisettes',
-			'type='.sql_quote($type_page).' AND composition="'.$composition_ref.'"'
-		);
-		if (count($config_mere) > 0) {
-			foreach ($config_mere as $cle => $noisette) {
-				$config_mere[$cle]['composition'] = $composition;
+	// Pour une modification, le traitement s'arrête ici.
+	// Pour une création ou un diplication, il faut traiter le peuplement automatique des noisettes
+	// de la page source si requis.
+	// -- on préremplit avec les noisettes de la page source, systématiquement en cas de duplication
+	//    ou si demandé, en cas de création.
+	if (in_array($edition, array('creer', 'dupliquer'))) {
+		$copier_noisettes = ($edition == 'dupliquer') ? true : (($edition == 'creer' and _request('peupler')) ? true : false);
+		if ($copier_noisettes and $type_page != 'page') {
+			$composition_ref = ($edition == 'creer') ? '' : noizetier_page_composition($page); // si on ne créé pas, c'est qu'on duplique
+			include_spip('base/abstract_sql');
+			$config_mere = sql_allfetsel(
+				'rang, type, composition, bloc, noisette, parametres',
+				'spip_noisettes',
+				'type='.sql_quote($type_page).' AND composition="'.$composition_ref.'"'
+			);
+			if (count($config_mere) > 0) {
+				foreach ($config_mere as $cle => $noisette) {
+					$config_mere[$cle]['composition'] = $composition;
+				}
+				sql_insertq_multi('spip_noisettes', $config_mere);
 			}
-			sql_insertq_multi('spip_noisettes', $config_mere);
+			// On vérifie également que les compositions sont actives sur ce type d'objet
+			$compositions_actives = compositions_objets_actives();
+			if (!in_array($type_page, $compositions_actives)) {
+				$compositions_config = unserialize($GLOBALS['meta']['compositions']);
+				include_spip('base/objets');
+				$compositions_config['objets'][] = table_objet_sql($type_page);
+				ecrire_meta('compositions', serialize($compositions_config));
+			}
 		}
-		// On vérifie également que les compositions sont actives sur ce type d'objet
-		$compositions_actives = compositions_objets_actives();
-		if (!in_array($type_page, $compositions_actives)) {
-			$compositions_config = unserialize($GLOBALS['meta']['compositions']);
-			include_spip('base/objets');
-			$compositions_config['objets'][] = table_objet_sql($type_page);
-			ecrire_meta('compositions', serialize($compositions_config));
-		}
-	}
 
-	// On invalide le cache en cas de création ou  de dpulication
-	if (in_array($edition, array('creer', 'dupliquer'))) {
+		// On invalide le cache en cas de création ou  de dpulication
 		include_spip('inc/invalideur');
-		suivre_invalideur("id='page/$type_page-$composition'");
+		suivre_invalideur("id='page/$identifiant'");
 	}
 
-	$res['message_ok'] = _T('info_modification_enregistree');
+	$retour['message_ok'] = _T('noizetier:formulaire_composition_mise_a_jour');
 	if (in_array($edition, array('creer', 'dupliquer'))) {
-		$res['redirect'] = parametre_url(parametre_url(self(), 'new', ''), 'page', $type_page.'-'.$composition);
-	} elseif ($retour) {
-		if (strncmp($retour, 'javascript:', 11) == 0) {
-			$res['message_ok'] .= '<script type="text/javascript">/*<![CDATA[*/'.substr($retour, 11).'/*]]>*/</script>';
-			$res['editable'] = true;
+		$retour['redirect'] = $redirect;
+	} elseif ($redirect) {
+		if (strncmp($redirect, 'javascript:', 11) == 0) {
+			$retour['message_ok'] .= '<script type="text/javascript">/*<![CDATA[*/'.substr($redirect, 11).'/*]]>*/</script>';
+			$retour['editable'] = true;
 		} else {
-			$res['redirect'] = $retour;
+			$retour['redirect'] = $redirect;
 		}
 	}
 
-	return $res;
+	return $retour;
 }
 
 
