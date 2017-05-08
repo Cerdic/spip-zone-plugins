@@ -7,7 +7,7 @@
 	logo="images/sedna-logo.jpg"
 	schema="0.1.0"
 	documentation="https://contrib.spip.net/Sedna-agregateur"
-	demonstration="http://sedna.spip.net"
+	demonstration="https://sedna.spip.net"
 >
 
 	<nom>Sedna</nom>
