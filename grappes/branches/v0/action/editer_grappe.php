@@ -10,7 +10,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/filtres');
 
 // Modifier le reglage des forums publics de l'article x
-// http://code.spip.net/@action_editer_groupe_mot_dist
+// https://code.spip.net/@action_editer_groupe_mot_dist
 function action_editer_grappe_dist()
 {
 

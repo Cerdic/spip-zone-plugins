@@ -85,7 +85,7 @@ if(!function_exists('http_calendrier_init')){
 	/// Fonction récupérée des anciens SPIP
 	///
 	
-	// http://code.spip.net/@http_calendrier_init
+	// https://code.spip.net/@http_calendrier_init
 	function http_calendrier_init($time='', $type='mois', $echelle='', $partie_cal='', $script='', $evt=null){
 		if (is_array($time)) {
 			list($j,$m,$a) = $time;
@@ -126,7 +126,7 @@ if(!function_exists('calendrier_retire_args_ancre')){
 	/// sait remplacer les arguments au bon endroit -- Fil)
 	/// Pas si simple: certains param ne sont pas remplaces 
 	/// et doivent reprendre leur valeur par defaut -- esj.
-	/// http://code.spip.net/@calendrier_retire_args_ancre
+	/// https://code.spip.net/@calendrier_retire_args_ancre
 	function calendrier_retire_args_ancre($script){
 	
 		if (preg_match(',^(.*)#([\w-]+)$,',$script, $m)) {

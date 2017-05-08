@@ -50,7 +50,7 @@ function recuperer_type($objet, $id) {
 	return $type ? $type : $objet;
 }
 
-// http://code.spip.net/@composer_url_page
+// https://code.spip.net/@composer_url_page
 function composer_url_page($page,$id, $args='', $ancre='') {
 	$url = _debut_urls_page . $page . _separateur_urls_page
 	  . $id . _terminaison_urls_page;
@@ -58,44 +58,44 @@ function composer_url_page($page,$id, $args='', $ancre='') {
 	return $url . $args . ($ancre ? "#$ancre" : '');
 }
 
-// http://code.spip.net/@generer_url_article
+// https://code.spip.net/@generer_url_article
 function generer_url_article($id_article, $args='', $ancre='') {
 	return composer_url_page(recuperer_type('article', $id_article), $id_article, $args, $ancre);
 }
 
-// http://code.spip.net/@generer_url_rubrique
+// https://code.spip.net/@generer_url_rubrique
 function generer_url_rubrique($id_rubrique, $args='', $ancre='') {
 	return composer_url_page(recuperer_type('rubrique', $id_rubrique), $id_rubrique, $args, $ancre);
 }
 
-// http://code.spip.net/@generer_url_breve
+// https://code.spip.net/@generer_url_breve
 function generer_url_breve($id_breve, $args='', $ancre='') {
 	return composer_url_page('breve', $id_breve, $args, $ancre);
 }
 
-// http://code.spip.net/@generer_url_mot
+// https://code.spip.net/@generer_url_mot
 function generer_url_mot($id_mot, $args='', $ancre='') {
 	return composer_url_page('mot', $id_mot, $args, $ancre);
 }
 
-// http://code.spip.net/@generer_url_site
+// https://code.spip.net/@generer_url_site
 function generer_url_site($id_syndic, $args='', $ancre='') {
 	return composer_url_page('site', $id_syndic, $args, $ancre);
 }
 
-// http://code.spip.net/@generer_url_auteur
+// https://code.spip.net/@generer_url_auteur
 function generer_url_auteur($id_auteur, $args='', $ancre='') {
 	return composer_url_page('auteur', $id_auteur, $args, $ancre);
 }
 
-// http://code.spip.net/@generer_url_document
+// https://code.spip.net/@generer_url_document
 function generer_url_document($id_document, $args='', $ancre='') {
 	include_spip('inc/documents');
 	return generer_url_document_dist($id_document);
 }
 
 // retrouve le fond et les parametres d'une URL abregee
-// http://code.spip.net/@urls_page_dist
+// https://code.spip.net/@urls_page_dist
 function urls_type_dist(&$fond, $url) {
 	global $contexte;
 
@@ -161,7 +161,7 @@ function urls_type_dist(&$fond, $url) {
 // URLs des forums
 //
 
-// http://code.spip.net/@generer_url_forum
+// https://code.spip.net/@generer_url_forum
 function generer_url_forum($id_forum, $args='', $ancre='') {
 	include_spip('inc/forum');
 	return generer_url_forum_dist($id_forum, $args, $ancre);

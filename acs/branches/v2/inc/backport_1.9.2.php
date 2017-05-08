@@ -3,14 +3,14 @@
 // SPIP 1.9.2 ne contenait pas encore la fonction spip_xml_match_nodes() ni la fonction spip_xml_decompose_tag(), ni spip_xml_tagname(),
 // ni touch_meta()
 
-// http://code.spip.net/@spip_xml_tagname
+// https://code.spip.net/@spip_xml_tagname
 function spip_xml_tagname($tag){
 	if (preg_match(',^([a-z][\w:]*),i',$tag,$reg))
 		return $reg[1];
 	return "";
 }
 
-// http://code.spip.net/@spip_xml_decompose_tag
+// https://code.spip.net/@spip_xml_decompose_tag
 function spip_xml_decompose_tag($tag){
 	$tagname = spip_xml_tagname($tag);
 	$liste = array();
@@ -30,7 +30,7 @@ function spip_xml_decompose_tag($tag){
 	return array($tagname,$liste);
 }
 
-// http://code.spip.net/@spip_xml_match_nodes
+// https://code.spip.net/@spip_xml_match_nodes
 function spip_xml_match_nodes($regexp,&$arbre,&$matches){
 	if(is_array($arbre) && count($arbre))
 		foreach(array_keys($arbre) as $tag){

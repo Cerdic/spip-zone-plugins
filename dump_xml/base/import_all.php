@@ -82,7 +82,7 @@ function base_import_all_dist($titre='', $reprise=false)
 	affiche_progression_javascript('100 %', 0);
 }
 
-// http://code.spip.net/@import_all_milieu
+// https://code.spip.net/@import_all_milieu
 function import_all_milieu($request, $archive)
 {
 	global $trans;
@@ -96,13 +96,13 @@ function import_all_milieu($request, $archive)
 	return import_tables($request, $archive);
 }
 
-// http://code.spip.net/@import_all_debut
+// https://code.spip.net/@import_all_debut
 function import_all_debut() {
 	ecrire_meta("restauration_status", "0",'non');
 	ecrire_meta("restauration_status_copie", "0",'non');
 }
 
-// http://code.spip.net/@import_all_fin
+// https://code.spip.net/@import_all_fin
 function import_all_fin($request) {
 
 	effacer_meta("charset_restauration");

@@ -1,7 +1,7 @@
 <?php
 
 
-// http://code.spip.net/@inc_editer_mot_dist
+// https://code.spip.net/@inc_editer_mot_dist
 function formulaires_importer_codes_postaux_charger(){
 	include_spip('codes_postaux_config');
 	return array();
@@ -26,7 +26,7 @@ function formulaires_importer_codes_postaux_verifier_dist(){
 	return $erreurs;
 }
 
-// http://code.spip.net/@inc_editer_mot_dist
+// https://code.spip.net/@inc_editer_mot_dist
 function formulaires_importer_codes_postaux_traiter_dist(){
 include_spip('codes_postaux_config');
 	 $options=array(

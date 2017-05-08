@@ -46,7 +46,7 @@ function formulaires_telecharger_codes_postaux_verifier_dist(){
 	return $erreurs;
 }
 
-// http://code.spip.net/@inc_editer_mot_dist
+// https://code.spip.net/@inc_editer_mot_dist
 function formulaires_telecharger_codes_postaux_traiter_dist(){
 include_spip('codes_postaux_config');
 include_spip('inc/codes_postaux_import');

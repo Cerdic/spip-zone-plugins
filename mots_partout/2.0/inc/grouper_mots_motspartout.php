@@ -18,7 +18,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 //YOANN
-// http://code.spip.net/@calcul_generation
+// https://code.spip.net/@calcul_generation
 function calcul_generationmot ($generation) {
 	include_spip('base/abstract_sql');
 	$lesfils = array();
@@ -32,7 +32,7 @@ function calcul_generationmot ($generation) {
 	return join(",",$lesfils);
 }
 
-// http://code.spip.net/@calcul_branche
+// https://code.spip.net/@calcul_branche
 function calcul_branchemot ($generation) {
 	if (!$generation) 
 		return '0';

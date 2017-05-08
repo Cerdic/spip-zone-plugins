@@ -10,7 +10,7 @@
 // voulu ; dans le cas contraire le document sera lu comme s'il etait
 // dans le charset iso-8859-1
 
-// http://code.spip.net/@extracteur_pdf
+// https://code.spip.net/@extracteur_pdf
 function extracteur_pdf($fichier, &$charset) {
 
 #	/* methode tout PHP
@@ -46,12 +46,12 @@ $GLOBALS['extracteur']['pdf'] = 'extracteur_pdf';
 // Methode tout PHP (a tester)
 //
 
-// http://code.spip.net/@Format_PDF
+// https://code.spip.net/@Format_PDF
 class Format_PDF {
 	var $trans_chars;
 	var $flag_mono, $flag_brut;
 
-// http://code.spip.net/@convertir_caracteres
+// https://code.spip.net/@convertir_caracteres
 	function convertir_caracteres($texte) {
 		if (!$this->trans_chars) {
 			// Caracteres speciaux
@@ -75,7 +75,7 @@ class Format_PDF {
 		return $texte;
 	}
 
-// http://code.spip.net/@recoller_texte
+// https://code.spip.net/@recoller_texte
 	function recoller_texte($stream) {
 		static $chars_voyelles, $chars_fusion, $chars_caps, $chars_nums, $bichars_fusion;
 		if (!$chars_voyelles) {
@@ -171,7 +171,7 @@ class Format_PDF {
 		return $extrait;
 	}
 
-// http://code.spip.net/@extraire_texte
+// https://code.spip.net/@extraire_texte
 	function extraire_texte($fichier) {
 
 		$source_len = 1024*1024;

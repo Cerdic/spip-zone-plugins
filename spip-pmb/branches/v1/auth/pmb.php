@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	  error_reporting(E_ALL);
 // Authentifie via PMB et retourne la ligne SQL decrivant l'utilisateur si ok
 
-// http://code.spip.net/@inc_auth_ldap_dist
+// https://code.spip.net/@inc_auth_ldap_dist
 function auth_pmb_dist ($login, $pass, $md5pass="", $md5next="") {
 
 	spip_log("pmb $login " . ($pass ? "mdp fourni" : "mdp absent"). ($md5pass ? "md5mdp fourni" : "md5mdp absent"));

@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/charsets'); # pour le nom de fichier
 include_spip('inc/actions');
 
-// http://code.spip.net/@action_joindre_dist
+// https://code.spip.net/@action_joindre_dist
 function action_joindre_dist()
 {
 	global $redirect;
@@ -34,7 +34,7 @@ function action_joindre_dist()
 	$redirect = action_joindre_sous_action($id, $id_document, $mode, $type, $actifs);
 }
 
-// http://code.spip.net/@action_joindre_sous_action
+// https://code.spip.net/@action_joindre_sous_action
 function action_joindre_sous_action($id, $id_document, $mode, $type, &$documents_actifs)
 {
 	$hash = _request('hash');
@@ -134,7 +134,7 @@ function action_joindre_sous_action($id, $id_document, $mode, $type, &$documents
 
 // Cas d'un document distant reference sur internet
 
-// http://code.spip.net/@inc_joindre2_dist
+// https://code.spip.net/@inc_joindre2_dist
 function inc_joindre2_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	return joindre_documents(array(
@@ -146,7 +146,7 @@ function inc_joindre2_dist($path, $mode, $type, $id, $id_document,$hash, $redire
 
 // Cas d'un fichier transmis
 
-// http://code.spip.net/@inc_joindre1_dist
+// https://code.spip.net/@inc_joindre1_dist
 function inc_joindre1_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	$files = array();
@@ -163,7 +163,7 @@ function inc_joindre1_dist($path, $mode, $type, $id, $id_document,$hash, $redire
 
 // copie de tout ou partie du repertoire upload
 
-// http://code.spip.net/@inc_joindre3_dist
+// https://code.spip.net/@inc_joindre3_dist
 function inc_joindre3_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	if (!$path || strstr($path, '..')) return;
@@ -194,7 +194,7 @@ function inc_joindre3_dist($path, $mode, $type, $id, $id_document,$hash, $redire
 // Charger la fonction surchargeable receptionnant un fichier
 // et l'appliquer sur celui ou ceux indiques.
 
-// http://code.spip.net/@joindre_documents
+// https://code.spip.net/@joindre_documents
 function joindre_documents($files, $mode, $type, $id, $id_document, $hash, $redirect, &$actifs, $iframe_redirect)
 {
 	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
@@ -249,7 +249,7 @@ function joindre_documents($files, $mode, $type, $id, $id_document, $hash, $redi
 
 //  Zip avec confirmation "tel quel"
 
-// http://code.spip.net/@inc_joindre5_dist
+// https://code.spip.net/@inc_joindre5_dist
 function inc_joindre5_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
 {
 	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
@@ -258,7 +258,7 @@ function inc_joindre5_dist($path, $mode, $type, $id, $id_document,$hash, $redire
 
 // Zip a deballer. 
 
-// http://code.spip.net/@inc_joindre6_dist
+// https://code.spip.net/@inc_joindre6_dist
 function inc_joindre6_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	$x = joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
@@ -269,14 +269,14 @@ function inc_joindre6_dist($path, $mode, $type, $id, $id_document,$hash, $redire
 
 // Zip avec les 2 options a la fois
 
-// http://code.spip.net/@inc_joindre4_dist
+// https://code.spip.net/@inc_joindre4_dist
 function inc_joindre4_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
 	return inc_joindre5_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
 }
 
-// http://code.spip.net/@joindre_deballes
+// https://code.spip.net/@joindre_deballes
 function joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
 {
 	    $ajouter_documents = charger_fonction('ajouter_documents', 'inc');

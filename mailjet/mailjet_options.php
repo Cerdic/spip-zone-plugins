@@ -12,7 +12,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 if (!test_plugin_actif('facteur')){
 	if ($GLOBALS['meta']['mailjet_enabled']){
-		// http://code.spip.net/@envoyer_mail
+		// https://code.spip.net/@envoyer_mail
 		function inc_envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 			include_spip('mailjet/envoyer_mail');
 			return mailjet_envoyer_mail($email, $sujet, $texte, $from, $headers);

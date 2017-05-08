@@ -1,7 +1,7 @@
 <?php
 
 // variante repliee de la fonction de l'affichage de l'arbre des repertoires
-// http://code.spip.net/@tree_open_close_dir
+// https://code.spip.net/@tree_open_close_dir
 function skeleditor_tree_open_close_dir(&$current,$target,$current_file){
 	if ($current == $target) return "";
 	$tcur = explode("/",$current);

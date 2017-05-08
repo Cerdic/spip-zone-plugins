@@ -4,13 +4,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-// http://code.spip.net/@exec_puce_statut_dist
+// https://code.spip.net/@exec_puce_statut_dist
 function exec_puce_statut_formulaires_dist()
 {
 	exec_puce_statut_formulaires_args(_request('id'),  _request('type'));
 }
 
-// http://code.spip.net/@exec_puce_statut_args
+// https://code.spip.net/@exec_puce_statut_args
 function exec_puce_statut_formulaires_args($id, $type)
 {
 	if (in_array($type,array('formulaires','formulaires_reponse'))) {

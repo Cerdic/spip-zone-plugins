@@ -13,7 +13,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
-// http://code.spip.net/@recuperer_parametres_url
+// https://code.spip.net/@recuperer_parametres_url
 if (!function_exists('recuperer_parametres_url')){
 function recuperer_parametres_url(&$fond, $url) {
 	global $contexte;

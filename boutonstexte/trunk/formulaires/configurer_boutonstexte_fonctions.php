@@ -3,7 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-// http://code.spip.net/@find_all_in_path
+// https://code.spip.net/@find_all_in_path
 function find_boutons_skins(){
 	$liste_fichiers=array();
 	$maxfiles = 10000;

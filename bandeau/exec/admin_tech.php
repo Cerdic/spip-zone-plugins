@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-// http://code.spip.net/@exec_admin_tech_dist
+// https://code.spip.net/@exec_admin_tech_dist
 function exec_admin_tech_dist()
 {
 	if (!autoriser('detruire')){
@@ -85,7 +85,7 @@ function exec_admin_tech_dist()
 		echo fin_gauche(), fin_page();
 	}
 }
-// http://code.spip.net/@autres_bases
+// https://code.spip.net/@autres_bases
 function autres_bases()
 {
 	include_spip('inc/install');

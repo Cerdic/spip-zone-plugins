@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-// http://code.spip.net/@exec_admin_tech_dist
+// https://code.spip.net/@exec_admin_tech_dist
 function exec_admin_restore_dist()
 {
 	if (!autoriser('detruire')){
@@ -126,7 +126,7 @@ function admin_sauvegardes($dir_dump, $tri)
 }
 
 
-// http://code.spip.net/@liste_sauvegardes
+// https://code.spip.net/@liste_sauvegardes
 function liste_sauvegardes($key, $fichier, $class, $selected, $date, $taille)
 {
 	return "\n<tr class='$class'><td><input type='radio' name='archive' value='"

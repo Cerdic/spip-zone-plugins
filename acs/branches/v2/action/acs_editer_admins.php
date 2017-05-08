@@ -89,7 +89,7 @@ function supprimer_admin_et_rediriger($type, $id, $id_admin, $redirect) {
   if ($redirect) redirige_par_entete($redirect);
 }
 
-// ~ http://code.spip.net/@ajouter_auteur_et_rediriger (spip 1.9208)
+// ~ https://code.spip.net/@ajouter_auteur_et_rediriger (spip 1.9208)
 function ajouter_admin_et_rediriger($type, $id, $id_admin, $redirect) {
   if ($id == 0) {
     $admins = explode($GLOBALS['meta']['ACS_ADMINS'],',');
@@ -105,7 +105,7 @@ function ajouter_admin_et_rediriger($type, $id, $id_admin, $redirect) {
   if ($redirect) redirige_par_entete($redirect);
 }
 
-// ~ http://code.spip.net/@rechercher_auteurs (spip 1.9208)
+// ~ https://code.spip.net/@rechercher_auteurs (spip 1.9208)
 function rechercher_admins($cherche_admin)
 {
   include_spip('inc/mots');

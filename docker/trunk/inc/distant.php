@@ -27,7 +27,7 @@ if (!defined('_INC_DISTANT_USER_AGENT')) define('_INC_DISTANT_USER_AGENT', 'SPIP
 // Prend en argument un chemin relatif au rep racine, ou une URL
 // Renvoie un chemin relatif au rep racine, ou false
 //
-// http://code.spip.net/@copie_locale
+// https://code.spip.net/@copie_locale
 function copie_locale($source, $mode='auto') {
 
 	// si c'est la protection de soi-meme
@@ -73,7 +73,7 @@ function copie_locale($source, $mode='auto') {
 	return $local;
 }
 
-// http://code.spip.net/@prepare_donnees_post
+// https://code.spip.net/@prepare_donnees_post
 function prepare_donnees_post($donnees, $boundary = '') {
 
 	// permettre a la fonction qui a demande le post de formater elle meme ses donnees
@@ -165,7 +165,7 @@ function prepare_donnees_post($donnees, $boundary = '') {
 // * si c'est une chaine longue, alors c'est un nom de fichier
 //   dans lequel on ecrit directement la page
 // * si c'est true/null ca correspond a une demande d'encodage/charset
-// http://code.spip.net/@recuperer_page
+// https://code.spip.net/@recuperer_page
 function recuperer_page($url, $trans=false, $get_headers=false,
 	$taille_max = null, $datas='', $boundary='', $refuser_gz = false,
 	$date_verif = '', $uri_referer = '') {
@@ -207,7 +207,7 @@ function recuperer_page($url, $trans=false, $get_headers=false,
 // retourne l'URL en cas de 301, un tableau (entete, corps) si ok, false sinon
 // si $trans est null -> on ne veut que les headers
 // si $trans est une chaine, c'est un nom de fichier pour ecrire directement dedans
-// http://code.spip.net/@recuperer_lapage
+// https://code.spip.net/@recuperer_lapage
 function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576, $datas='', $refuser_gz = false, $date_verif = '', $uri_referer = '')
 {
 	// $copy = copier le fichier ?
@@ -277,7 +277,7 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 	return array($headers, $result);
 }
 
-// http://code.spip.net/@recuperer_body
+// https://code.spip.net/@recuperer_body
 function recuperer_body($f, $taille_max=1048576, $fichier='')
 {
 	$taille = 0;
@@ -307,7 +307,7 @@ function recuperer_body($f, $taille_max=1048576, $fichier='')
 // la valeur (numerique) du statut si different de 200, notamment Not-Modified
 // le tableau des entetes dans tous les autres cas
 
-// http://code.spip.net/@recuperer_entetes
+// https://code.spip.net/@recuperer_entetes
 function recuperer_entetes($f, $date_verif='')
 {
 	$s = @trim(fgets($f, 16384));
@@ -343,7 +343,7 @@ function recuperer_entetes($f, $date_verif='')
 // soit a un endroit canonique -- si ca peut etre bijectif c'est encore mieux,
 // mais la tout de suite je ne trouve pas l'idee, etant donne les limitations
 // des filesystems
-// http://code.spip.net/@nom_fichier_copie_locale
+// https://code.spip.net/@nom_fichier_copie_locale
 function inc_nom_fichier_copie_locale_dist($source, $extension) {
 
 	include_spip('inc/getdocument');
@@ -365,7 +365,7 @@ function inc_nom_fichier_copie_locale_dist($source, $extension) {
 //
 // Donne le nom de la copie locale de la source
 //
-// http://code.spip.net/@fichier_copie_locale
+// https://code.spip.net/@fichier_copie_locale
 function fichier_copie_locale($source) {
 	// Si c'est deja local pas de souci
 	if (!preg_match(',^\w+://,', $source)) {
@@ -425,7 +425,7 @@ function fichier_copie_locale($source) {
 #$a['extension'] = chaine
 #$a['fichier'] = chaine
 
-// http://code.spip.net/@recuperer_infos_distantes
+// https://code.spip.net/@recuperer_infos_distantes
 function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = true) {
 
 	# charger les alias des types mime
@@ -544,7 +544,7 @@ function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = t
 }
 
 
-// http://code.spip.net/@need_proxy
+// https://code.spip.net/@need_proxy
 function need_proxy($host)
 {
 	$http_proxy = @$GLOBALS['meta']["http_proxy"];
@@ -562,7 +562,7 @@ function need_proxy($host)
 // Lance une requete HTTP avec entetes
 // retourne le descripteur sur lequel lire la reponse
 //
-// http://code.spip.net/@init_http
+// https://code.spip.net/@init_http
 function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $vers="HTTP/1.0", $date='') {
 	$user = $via_proxy = $proxy_user = ''; 
 	$fopen = false;
@@ -598,7 +598,7 @@ function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $v
 	return array($f, $fopen);
 }
 
-// http://code.spip.net/@lance_requete
+// https://code.spip.net/@lance_requete
 function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz=false, $referer = '', $datas="", $vers="HTTP/1.0", $date='') {
 
 	$proxy_user = '';

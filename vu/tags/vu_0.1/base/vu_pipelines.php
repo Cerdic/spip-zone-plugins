@@ -2,7 +2,7 @@
 // Pipelines.
 // Objectifs : 
 //	- Declarer et ajouter des tables dans la base de donnees
-// Voir la doc suivante : http://code.spip.net/@Ajouter-des-tables-et-des-boucles
+// Voir la doc suivante : https://code.spip.net/@Ajouter-des-tables-et-des-boucles
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

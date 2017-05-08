@@ -23,7 +23,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // 5. le nombre d'articles publies
 //
 
-// http://code.spip.net/@inc_formater_auteur_dist
+// https://code.spip.net/@inc_formater_auteur_dist
 function inc_formater_auteur_liste_dist($id_auteur, $script_edition = 'abonne_edit') {
 
   global $connect_id_auteur, $spip_lang_rtl, $connect_statut;
@@ -65,7 +65,7 @@ function inc_formater_auteur_liste_dist($id_auteur, $script_edition = 'abonne_ed
 	return $vals;
 }
 
-// http://code.spip.net/@formater_auteur_mail
+// https://code.spip.net/@formater_auteur_mail
 function formater_auteur_listes_mail($email, $id_auteur)
 {
 	global $spip_lang_rtl;

@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/export');
 include_spip('inc/minipres');
 
-// http://code.spip.net/@action_export_all_dist
+// https://code.spip.net/@action_export_all_dist
 function action_export_all_dist()
 {
 	global $spip_lang_left,$spip_lang_right;

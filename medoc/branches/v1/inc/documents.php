@@ -17,7 +17,7 @@ include_spip('inc/date');
 
 // donne le chemin du fichier relatif a _DIR_IMG
 // pour stockage 'tel quel' dans la base de donnees
-// http://code.spip.net/@set_spip_doc
+// https://code.spip.net/@set_spip_doc
 function set_spip_doc($fichier) {
 	if (strpos($fichier, _DIR_IMG) === 0)
 		return substr($fichier, strlen(_DIR_IMG));
@@ -26,7 +26,7 @@ function set_spip_doc($fichier) {
 }
 
 // donne le chemin complet du fichier
-// http://code.spip.net/@get_spip_doc
+// https://code.spip.net/@get_spip_doc
 function get_spip_doc($fichier) {
 	// fichier distant
 	if (preg_match(',^\w+://,', $fichier))
@@ -51,7 +51,7 @@ function get_spip_doc($fichier) {
 // Filtre pour #FICHIER permettant d'incruster le contenu d'un document
 // Si 2e arg fourni, conversion dans le charset du site si possible
 
-// http://code.spip.net/@contenu_document
+// https://code.spip.net/@contenu_document
 function contenu_document($arg, $charset='')
 {
 	if (is_numeric($arg)) {
@@ -80,7 +80,7 @@ function contenu_document($arg, $charset='')
 	return $r;
 }
 
-// http://code.spip.net/@generer_url_document_dist
+// https://code.spip.net/@generer_url_document_dist
 function generer_url_document_dist($id_document, $args='', $ancre='') {
 
 	include_spip('inc/autoriser');
@@ -122,7 +122,7 @@ function generer_url_document_dist($id_document, $args='', $ancre='') {
 // Laissée pour compatibilité SPIP < 2.1.0 rev 15773
 // Appelé dans public/quete
 
-// http://code.spip.net/@vignette_par_defaut
+// https://code.spip.net/@vignette_par_defaut
 function vignette_par_defaut($ext, $size=true, $loop = true) {
 
 	if (!$ext)
@@ -167,7 +167,7 @@ function vignette_par_defaut($ext, $size=true, $loop = true) {
 //
 // A noter : dans le portfolio prive on pousse le vice jusqu'a reduire la taille
 // de la vignette -> c'est a ca que sert la variable $portfolio
-// http://code.spip.net/@image_pattern
+// https://code.spip.net/@image_pattern
 // TO BE DELETED
 function image_pattern($vignette) {
 	return "<img src='"
@@ -186,7 +186,7 @@ function image_pattern($vignette) {
 //
 // A noter : dans le portfolio prive on pousse le vice jusqu'a reduire la taille
 // de la vignette -> c'est a ca que sert la variable $portfolio
-// http://code.spip.net/@vignette_automatique
+// https://code.spip.net/@vignette_automatique
 // TO BE DELETED // utilise par ecrire/quete.php
 function vignette_automatique($img, $doc, $lien, $x=0, $y=0, $align='', $class='spip_logos')
 {
@@ -257,7 +257,7 @@ function image_du_document($document)
 }
 
 
-// http://code.spip.net/@document_et_vignette
+// https://code.spip.net/@document_et_vignette
 // TO BE DELETED // utilise par tourner()
 function document_et_vignette($document, $url, $portfolio=false) {
 	$extension = $document['extension'];
@@ -316,7 +316,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 // Afficher un document dans la colonne de gauche
 //
 
-// http://code.spip.net/@afficher_documents_colonne
+// https://code.spip.net/@afficher_documents_colonne
 // TO BE DELETED
 function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	if (!is_array($GLOBALS['medias_exec_colonne_document']) OR !in_array(_request('exec'),$GLOBALS['medias_exec_colonne_document']))
@@ -428,7 +428,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 // Affiche le raccourci <doc123|left>
 // et l'insere quand on le clique
 //
-// http://code.spip.net/@affiche_raccourci_doc
+// https://code.spip.net/@affiche_raccourci_doc
 function affiche_raccourci_doc($doc, $id, $align) {
 	static $num = 0;
 	$doc = 'doc';
@@ -449,7 +449,7 @@ function affiche_raccourci_doc($doc, $id, $align) {
 
 
 // Est-ce que le document est inclus dans le texte ?
-// http://code.spip.net/@est_inclus
+// https://code.spip.net/@est_inclus
 // TO BE DELETED
 function est_inclus($id_document) {
 	return isset($GLOBALS['doublons_documents_inclus']) ?
@@ -461,7 +461,7 @@ function est_inclus($id_document) {
 //
 // TODO: il y a du code a factoriser avec inc/documenter
 
-// http://code.spip.net/@afficher_case_document
+// https://code.spip.net/@afficher_case_document
 // TO BE DELETED
 function afficher_case_document($id_document, $id, $script, $type, $deplier=false) {
 	global $spip_lang_right;
@@ -613,7 +613,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 // ici on ne join pas avec la table objet pour voir si l'objet existe vraiment
 // on considere que c'est le role d'optimiser que de nettoyer les liens morts
 // sinon eventuellement appeler avant une fonction nettoyer_liens_documents
-// http://code.spip.net/@lister_les_documents_orphelins
+// https://code.spip.net/@lister_les_documents_orphelins
 /*
 function lister_les_documents_orphelins() {
 	$s = sql_select("d.id_document, d.id_vignette",
@@ -644,7 +644,7 @@ function lister_les_documents_orphelins() {
 // Supprimer les documents de la table spip_documents,
 // ainsi que les fichiers correspondants dans IMG/
 // Fonction a n'appeler que sur des documents orphelins
-// http://code.spip.net/@supprimer_documents
+// https://code.spip.net/@supprimer_documents
 /*
 function supprimer_documents($liste = array()) {
 	if (!count($liste))

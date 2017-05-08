@@ -23,7 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // Si ca reference un champ SQL, on le memorise dans la structure $boucles
 // afin de construire un requete SQL minimale (plutot qu'un brutal 'SELECT *')
 
-// http://code.spip.net/@index_pile
+// https://code.spip.net/@index_pile
 function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 
 	$i = 0;
@@ -60,7 +60,7 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 	return('@$Pile[0][\''. strtolower($nom_champ) . '\']');
 }
 
-// http://code.spip.net/@index_tables_en_pile
+// https://code.spip.net/@index_tables_en_pile
 function index_tables_en_pile($idb, $nom_champ, &$boucles) {
 	global $exceptions_des_tables;
 
@@ -105,7 +105,7 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles) {
 // Ca peut meme etre d'un champ dans une jointure
 // qu'il faut provoquer si ce n'est fait
 
-// http://code.spip.net/@index_exception
+// https://code.spip.net/@index_exception
 function index_exception(&$boucle, $desc, $nom_champ, $excep)
 {
 	static $trouver_table;
@@ -150,14 +150,14 @@ function index_exception(&$boucle, $desc, $nom_champ, $excep)
 
 
 // cette fonction sert d'API pour demander le champ '$champ' dans la pile
-// http://code.spip.net/@champ_sql
+// https://code.spip.net/@champ_sql
 function champ_sql($champ, $p) {
 	return index_pile($p->id_boucle, $champ, $p->boucles, $p->nom_boucle);
 }
 
 // cette fonction sert d'API pour demander une balise Spip avec filtres
 
-// http://code.spip.net/@calculer_champ
+// https://code.spip.net/@calculer_champ
 function calculer_champ($p) {
 	$p = calculer_balise($p->nom_champ, $p);
 	return applique_filtres($p);
@@ -172,7 +172,7 @@ function calculer_champ($p) {
 // Si pas de fonction, c'est une reference a une colonne de table SQL connue.
 // Les surcharges des colonnes SQL via charger_fonction sont donc possibles.
 
-// http://code.spip.net/@calculer_balise
+// https://code.spip.net/@calculer_balise
 function calculer_balise($nom, $p) {
 
 	// S'agit-t-il d'une balise_XXXX[_dist]() ?
@@ -241,7 +241,7 @@ define('CODE_EXECUTER_BALISE', "executer_balise_dynamique('%s',
 	array(%s%s),
 	array(%s%s))");
 
-// http://code.spip.net/@calculer_balise_dynamique
+// https://code.spip.net/@calculer_balise_dynamique
 function calculer_balise_dynamique($p, $nom, $l, $supp=array()) {
 
 	if (!balise_distante_interdite($p)) {
@@ -278,7 +278,7 @@ function calculer_balise_dynamique($p, $nom, $l, $supp=array()) {
 // En revanche ils n'ont pas de filtres, donc on appelle calculer_balise qui
 // ne s'occupe pas de ce qu'il y a dans $p (mais qui va y ecrire le code)
 
-// http://code.spip.net/@collecter_balise_dynamique
+// https://code.spip.net/@collecter_balise_dynamique
 function collecter_balise_dynamique($l, &$p, $nom) {
 	$args = array();
 	foreach($l as $c) { $x = calculer_balise($c, $p); $args[] = $x->code;}
@@ -291,7 +291,7 @@ function collecter_balise_dynamique($l, &$p, $nom) {
 // En attendant, cette fonction permet de refuser une authentification
 // sur qqch qui n'a rien a voir.
 
-// http://code.spip.net/@balise_distante_interdite
+// https://code.spip.net/@balise_distante_interdite
 function balise_distante_interdite($p) {
 	$nom = $p->id_boucle;
 
@@ -309,7 +309,7 @@ function balise_distante_interdite($p) {
 // Traitements standard de divers champs
 // definis par $table_des_traitements, cf. ecrire/public/interfaces
 //
-// http://code.spip.net/@champs_traitements
+// https://code.spip.net/@champs_traitements
 function champs_traitements ($p) {
 	global $table_des_traitements;
 
@@ -378,7 +378,7 @@ function champs_traitements ($p) {
 //  - une etoile => pas de processeurs standards
 //  - deux etoiles => pas de securite non plus !
 //
-// http://code.spip.net/@applique_filtres
+// https://code.spip.net/@applique_filtres
 function applique_filtres($p) {
 
 	// Traitements standards (cf. supra)
@@ -410,7 +410,7 @@ function applique_filtres($p) {
 }
 
 // Cf. function pipeline dans ecrire/inc_utils.php
-// http://code.spip.net/@compose_filtres
+// https://code.spip.net/@compose_filtres
 function compose_filtres(&$p, $code) {
 
 	$image_miette = false;
@@ -492,7 +492,7 @@ function filtre_logique($fonc, $code, $arg)
 	return '';
 }
 
-// http://code.spip.net/@compose_filtres_args
+// https://code.spip.net/@compose_filtres_args
 function compose_filtres_args($p, $args, $sep)
 {
 	$arglist = "";
@@ -508,7 +508,7 @@ function compose_filtres_args($p, $args, $sep)
 // la boucle parente ; attention en recursif il faut les reserver chez soi-meme
 // ET chez sa maman
 // 
-// http://code.spip.net/@calculer_argument_precedent
+// https://code.spip.net/@calculer_argument_precedent
 function calculer_argument_precedent($idb, $nom_champ, &$boucles) {
 
 	// si recursif, forcer l'extraction du champ SQL mais ignorer le code
@@ -533,7 +533,7 @@ function calculer_argument_precedent($idb, $nom_champ, &$boucles) {
 // "SELECT XXXX AS points"
 //
 
-// http://code.spip.net/@rindex_pile
+// https://code.spip.net/@rindex_pile
 function rindex_pile($p, $champ, $motif) 
 {
 	$n = 0;

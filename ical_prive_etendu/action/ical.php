@@ -15,12 +15,12 @@ include_spip('inc/auth');
 
 // avec le nouveau compilateur tout ceci me semble faisable en squelette.
 
-// http://code.spip.net/@ligne_uid
+// https://code.spip.net/@ligne_uid
 function ligne_uid ($texte) {
 	echo filtrer_ical("UID:$texte @ " . url_de_base())."\n";
 }
 
-// http://code.spip.net/@action_ical_dist
+// https://code.spip.net/@action_ical_dist
 function action_ical()
 {
 	global $id_auteur, $arg, $action, $titres;
@@ -140,7 +140,7 @@ function action_ical()
 	echo filtrer_ical ("END:VCALENDAR"), "\n";
 }
 
-// http://code.spip.net/@spip_ical_rendez_vous
+// https://code.spip.net/@spip_ical_rendez_vous
 function spip_ical_rendez_vous($id_utilisateur, $nom_site, $age)
 {
 	// Les messages non affichés dans le calendrier sont également pris en compte 
@@ -193,7 +193,7 @@ function spip_ical_rendez_vous($id_utilisateur, $nom_site, $age)
 	}
 }
 
-// http://code.spip.net/@spip_ical_taches
+// https://code.spip.net/@spip_ical_taches
 function spip_ical_taches($id_utilisateur, $nom_site, $age)
 {
 	if ($age==0) $cond=''; else $cond="AND (TO_DAYS(NOW()) - TO_DAYS(date_heure) <= $age)";
@@ -239,7 +239,7 @@ function spip_ical_taches($id_utilisateur, $nom_site, $age)
 	}
 }
 
-// http://code.spip.net/@spip_ical_articles
+// https://code.spip.net/@spip_ical_articles
 function spip_ical_articles($nom_site, $id_utilisateur, $id_secteur, $age)
 {
 	global $titres;
@@ -317,7 +317,7 @@ function spip_ical_articles($nom_site, $id_utilisateur, $id_secteur, $age)
 }
 
 
-// http://code.spip.net/@spip_ical_breves
+// https://code.spip.net/@spip_ical_breves
 function spip_ical_breves($nom_site, $id_utilisateur, $id_secteur, $age)
 {
 	global $titres;
@@ -378,7 +378,7 @@ function spip_ical_breves($nom_site, $id_utilisateur, $id_secteur, $age)
 }
 
 
-// http://code.spip.net/@spip_ical_messages
+// https://code.spip.net/@spip_ical_messages
 function spip_ical_messages($id_utilisateur, $nom_site, $age)
 {
 	if ($age==0) $cond=''; else $cond="AND (TO_DAYS(NOW()) - TO_DAYS(date_heure) <= $age)";
@@ -440,7 +440,7 @@ function spip_ical_messages($id_utilisateur, $nom_site, $age)
 	}	
 }
 
-// http://code.spip.net/@spip_ical_forums
+// https://code.spip.net/@spip_ical_forums
 function spip_ical_forums($id_utilisateur, $nom_site)
 {
 	$result_forum = spip_query("SELECT * FROM spip_forum WHERE statut = 'prop'");

@@ -8,7 +8,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://code.spip.net/@plugin_verifie_conformite
+// https://code.spip.net/@plugin_verifie_conformite
 function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLUGINS){
 	$silence = false;
 	if (isset($arbre['plugin']) AND is_array($arbre['plugin']))
@@ -126,7 +126,7 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 
 include_spip('inc/plugin');
 if (!function_exists('plugin_pipeline_props')){
-// http://code.spip.net/@plugin_pipeline_props
+// https://code.spip.net/@plugin_pipeline_props
 function plugin_pipeline_props(&$arbre){
 	$pipeline = array();
 	if (spip_xml_match_nodes(',^pipeline,',$arbre,$pipes)){

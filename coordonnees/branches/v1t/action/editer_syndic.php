@@ -8,7 +8,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // Prend en charge le formulaire de base du core :
-// http://code.spip.net/@action_editer_site_dist
+// https://code.spip.net/@action_editer_site_dist
 // Mais ne gere ni l'URL automatique ni le logo...
 // Raison pour laquelle on ne surcharge pas ;-P
 function action_editer_syndic_dist($arg=NULL) {
@@ -35,7 +35,7 @@ function action_editer_syndic_dist($arg=NULL) {
 
 // Referencer un nouveau site
 // (en grande partie compatible avec le core
-// http://code.spip.net/@insert_syndic
+// https://code.spip.net/@insert_syndic
 // mais prend en charge les liaisons !
 // tandis que ne prend pas la rubrique en argument
 // -- c'est puise dans la requete-- et n'en impose
@@ -125,7 +125,7 @@ function insert_site() {
 
 // Enregistrer certaines modifications d'un site
 // (grandement compatible avec le core
-// http://code.spip.net/@revisions_sites
+// https://code.spip.net/@revisions_sites
 // mais prend en charge les liaisons !)
 function revisions_syndic($id_syndic, $c=FALSE) {
 

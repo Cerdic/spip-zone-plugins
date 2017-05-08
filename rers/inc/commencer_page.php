@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Presentation de l'interface privee, debut du HTML
 //
 
-// http://code.spip.net/@inc_commencer_page_dist
+// https://code.spip.net/@inc_commencer_page_dist
 function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $id_rubrique = "",$menu=true,$minipres=false, $alertes = true) {
 	global $spip_ecran;
 	global $connect_id_auteur;
@@ -42,7 +42,7 @@ function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubri
 }
 
 // envoi du doctype et du <head><title>...</head>
-// http://code.spip.net/@init_entete
+// https://code.spip.net/@init_entete
 function init_entete($titre='', $id_rubrique=0, $minipres=false) {
 	include_spip('inc/gadgets');
 
@@ -83,7 +83,7 @@ function init_entete($titre='', $id_rubrique=0, $minipres=false) {
 }
 
 // fonction envoyant la double serie d'icones de redac
-// http://code.spip.net/@init_body
+// https://code.spip.net/@init_body
 function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='',$menu=true) {
 	global $connect_id_auteur, $auth_can_disconnect;
 	global $spip_display, $spip_ecran;
@@ -173,7 +173,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 	  	.  "</div></div>\n";
 }
 
-// http://code.spip.net/@avertissement_messagerie
+// https://code.spip.net/@avertissement_messagerie
 function avertissement_messagerie($id_auteur) {
 
 	$result_messages = sql_allfetsel("lien.id_message", "spip_messages AS messages, spip_auteurs_messages AS lien", "lien.id_auteur=".sql_quote($id_auteur)." AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message",'','');
@@ -187,7 +187,7 @@ function avertissement_messagerie($id_auteur) {
 	else return '';
 }
 
-// http://code.spip.net/@alertes_auteur
+// https://code.spip.net/@alertes_auteur
 function alertes_auteur($id_auteur) {
 
 	$alertes = array();
@@ -221,7 +221,7 @@ function alertes_auteur($id_auteur) {
 			."</div></div>";
 }
 
-// http://code.spip.net/@auteurs_recemment_connectes
+// https://code.spip.net/@auteurs_recemment_connectes
 function auteurs_recemment_connectes($id_auteur)
 {
 	$result = sql_allfetsel("*", "spip_auteurs",  "id_auteur!=" .intval($id_auteur) .  " AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE) AND " . sql_in('statut', array('1comite', '0minirezo')));
@@ -243,7 +243,7 @@ function auteurs_recemment_connectes($id_auteur)
 }
 
 
-// http://code.spip.net/@lien_change_var
+// https://code.spip.net/@lien_change_var
 function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") {
 	$lien = parametre_url($lien, $set, $couleur);
 	return "\n<area shape='rect' href='$lien' coords='$coords' title=\"$titre\" alt=\"$titre\" $mouseOver />";

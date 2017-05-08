@@ -92,7 +92,7 @@ function formulaires_login_charger_dist($cible = "", $login = "", $prive = null)
 // page_auteur=#URL_PAGE{informer_auteur} dans le squelette login
 // N'y aurait-il pas plus simple ?
 
-// http://code.spip.net/@informer_login
+// https://code.spip.net/@informer_login
 function informer_login($login){
 	if (!$login) return array();
 	$row = retrouver_login($login);
@@ -264,7 +264,7 @@ function retrouver_login($login){
 // Essayer les differentes sources d'authenfication dans l'ordre specifie.
 // S'en souvenir dans visiteur_session['auth']
 
-// http://code.spip.net/@verifier_login
+// https://code.spip.net/@verifier_login
 function verifier_login($login, $password, $md5pass = "", $md5next = ""){
 	foreach ($GLOBALS['liste_des_authentifications'] as $methode){
 		if ($auth = charger_fonction($methode, 'auth')

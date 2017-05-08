@@ -25,7 +25,7 @@ include_spip('base/abstract_sql');
 // restauration_status en cas d'interruption sur TimeOut.
 // Evite au maximum les recopies
 
-// http://code.spip.net/@xml_fetch_tag
+// https://code.spip.net/@xml_fetch_tag
 function xml_fetch_tag($f, &$before, $_fread='fread', $skip='!') {
 	global $abs_pos;
 	static $buf='';
@@ -74,7 +74,7 @@ function xml_fetch_tag($f, &$before, $_fread='fread', $skip='!') {
 	return xml_fetch_tag($f,$before,$_fread,$skip);
 }
 
-// http://code.spip.net/@xml_parse_tag
+// https://code.spip.net/@xml_parse_tag
 function xml_parse_tag($t) {
 
 	preg_match(',^([\w[?!%.;:-]*),s', $t, $res);
@@ -129,7 +129,7 @@ $tables_trans = array(
 );
 
 
-// http://code.spip.net/@import_init_tables
+// https://code.spip.net/@import_init_tables
 function import_init_tables($request){
   global $connect_id_auteur;
 
@@ -153,13 +153,13 @@ function import_init_tables($request){
 // c'est que la sauvegarde etait incomplete et on restaure le compte
 // pour garder la connection au site (mais il doit pas etre bien beau)
 
-// http://code.spip.net/@detruit_restaurateur
+// https://code.spip.net/@detruit_restaurateur
 function detruit_restaurateur()
 {
 	base_detruire_copieur_si_besoin();
 }
 
-// http://code.spip.net/@import_tables
+// https://code.spip.net/@import_tables
 function import_tables($request, $archive) {
 	global $import_ok, $abs_pos,  $affiche_progression_pourcent;
 
@@ -369,7 +369,7 @@ function import_tables($request, $archive) {
 	return '' ;
 }
 
-// http://code.spip.net/@import_init_meta
+// https://code.spip.net/@import_init_meta
 function import_init_meta($tag, $atts, $charset, $request)
 {
 	$version_archive = $atts['version_archive'];
@@ -424,7 +424,7 @@ function import_init_meta($tag, $atts, $charset, $request)
 	return $version_archive;
 }
 
-// http://code.spip.net/@import_affiche_javascript
+// https://code.spip.net/@import_affiche_javascript
 function import_affiche_javascript($taille)
 {
 	$max_time = ini_get('max_execution_time')*1000;
@@ -440,7 +440,7 @@ function import_affiche_javascript($taille)
 
 
 
-// http://code.spip.net/@affiche_progression_javascript
+// https://code.spip.net/@affiche_progression_javascript
 function affiche_progression_javascript($abs_pos,$size, $table="") {
 
 	include_spip('inc/charsets');
@@ -472,7 +472,7 @@ function affiche_progression_javascript($abs_pos,$size, $table="") {
 }
 
 
-// http://code.spip.net/@import_table_choix
+// https://code.spip.net/@import_table_choix
 function import_table_choix($request){
 	spip_log("noimport:".implode(',',lister_tables_noimport()),'noimport');
 	list($tables,) = base_liste_table_for_dump(lister_tables_noimport());

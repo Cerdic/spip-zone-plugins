@@ -93,7 +93,7 @@ function formulaires_import_wordpress_verifier_dist()
 }
 
 
-// http://code.spip.net/@inc_editer_mot_dist
+// https://code.spip.net/@inc_editer_mot_dist
 function formulaires_import_wordpress_traiter_dist()
 {
 

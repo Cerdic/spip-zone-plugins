@@ -29,7 +29,7 @@ function get_nom_serveur($p) {
 //
 // #URL_ACTION_AUTEUR{converser,arg,redirect} -> ecrire/?action=converser&arg=arg&hash=xxx&redirect=redirect
 //
-// http://code.spip.net/@balise_URL_ACTION_AUTEUR_dist
+// https://code.spip.net/@balise_URL_ACTION_AUTEUR_dist
 function balise_URL_ACTION_AUTEUR($p) {
 	$p->descr['session'] = true;
 
@@ -49,7 +49,7 @@ function balise_URL_ACTION_AUTEUR($p) {
 //
 // #URL_ECRIRE{naviguer} -> ecrire/?exec=naviguer
 //
-// http://code.spip.net/@balise_URL_ECRIRE_dist
+// https://code.spip.net/@balise_URL_ECRIRE_dist
 function balise_URL_ECRIRE($p) {
 
 	// si serveur externe, ce n'est pas possible

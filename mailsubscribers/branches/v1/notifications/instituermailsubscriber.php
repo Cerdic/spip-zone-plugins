@@ -8,7 +8,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // Fonction appelee par divers pipelines
-// http://code.spip.net/@notifications_instituerarticle_dist
+// https://code.spip.net/@notifications_instituerarticle_dist
 function notifications_instituermailsubscriber_dist($quoi, $id_mailsubscriber, $options) {
 
 	// ne devrait jamais se produire

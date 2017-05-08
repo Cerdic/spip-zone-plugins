@@ -148,7 +148,7 @@ $GLOBALS['spip_mysql_functions_1'] = array(
 /**
  * Appelée à chaque connexion, cette requête fixe le charset utilisé pour les futures requêtes
  *
- * @link    http://code.spip.net/@spip_mysql_set_charset
+ * @link    https://code.spip.net/@spip_mysql_set_charset
  * @param   string  $charset   Le charset à utiliser
  * @param   string  $serveur   Identifiant du serveur concerné
  * @param   bool    $requeter  Inutilisé
@@ -170,7 +170,7 @@ function spip_mysqli_set_charset($charset, $serveur='',$requeter=true,$requeter=
 /**
  * Récupère les charsets disponibles
  *
- * @link    http://code.spip.net/@spip_mysql_get_charset
+ * @link    https://code.spip.net/@spip_mysql_get_charset
  * @param   array   $charset   Pattern pour restreindre les résultats
  * @param   string  $serveur   Identifiant du serveur
  * @param   bool    $requeter  Inutilisé
@@ -187,7 +187,7 @@ function spip_mysqli_get_charset($charset=array(), $serveur='',$requeter=true){
 /**
  * Fonction de requête générale, munie d'une trace à la demande
  *
- * @link    http://code.spip.net/@spip_mysql_query
+ * @link    https://code.spip.net/@spip_mysql_query
  * @param   string  $query     La requête MySQL
  * @param   string  $serveur   Identifiant du connecteur à utiliser
  * @param   bool    $requeter  Inutilisé
@@ -234,7 +234,7 @@ function spip_mysqli_query($query, $serveur='',$requeter=true) {
  * sql_alter("TABLE table DROP colonneA, DROP colonneB");
  * </code>
  *
- * @link    http://code.spip.net/@spip_mysql_alter
+ * @link    https://code.spip.net/@spip_mysql_alter
  * @param   string  $query     La requête MySQL
  * @param   string  $serveur   Identifiant du connecteur à utiliser
  * @param   bool    $requeter  Inutilisé
@@ -247,7 +247,7 @@ function spip_mysqli_alter($query, $serveur='',$requeter=true){
 /**
  * Lance la défragmentation d'une table
  *
- * @link    http://code.spip.net/@spip_mysql_optimize
+ * @link    https://code.spip.net/@spip_mysql_optimize
  * @param   string  $table     La table à défragmenter
  * @param   string  $serveur   Identifiant du connecteur à utiliser
  * @param   bool    $requeter  Inutilisé
@@ -261,7 +261,7 @@ function spip_mysqli_optimize($table, $serveur='',$requeter=true){
 /**
  * Obtenir des informations sur les SELECT
  *
- * @link    http://code.spip.net/@spip_mysql_explain
+ * @link    https://code.spip.net/@spip_mysql_explain
  * @param   string  $query	   La requête MySQL
  * @param   string  $serveur   Identifiant du connecteur à utiliser
  * @param   bool    $requeter	 Inutilisé
@@ -282,12 +282,12 @@ function spip_mysqli_explain($query, $serveur='',$requeter=true){
 /**
  * fonction instance de sql_select
  *
- * voir ses specs dans {@link http://code.spip.net/abstract_sql-php abstract_sql.php}<br>
+ * voir ses specs dans {@link https://code.spip.net/abstract_sql-php abstract_sql.php}<br>
  * Traite_mysqli_query pourrait y etre fait d'avance ce serait moins cher<br>
  * Les \n et \t sont utiles au debusqueur.
  *
- * La fonction {@link http://code.spip.net/@sql_select sql_select()} est souvent couplée à
- * {@link http://code.spip.net/@sql_select sql_fetch()} comme ceci :
+ * La fonction {@link https://code.spip.net/@sql_select sql_select()} est souvent couplée à
+ * {@link https://code.spip.net/@sql_select sql_fetch()} comme ceci :
  * <code>
  * // sélection
  * if ($resultats = sql_select('colonne', 'table')) {
@@ -299,7 +299,7 @@ function spip_mysqli_explain($query, $serveur='',$requeter=true){
  * }
  * </code>
  *
- * @link    http://code.spip.net/@spip_mysql_select
+ * @link    https://code.spip.net/@spip_mysql_select
  * @param   string|array    $select     liste des champs à récupérer
  * @param   string|array    $from       Liste des tables
  * @param   string|array    $where      Conditions que les lignes sélectionnées doivent satisfaire
@@ -340,7 +340,7 @@ function spip_mysqli_select($select, $from, $where='',
  *
  * Pas portable malheureusement, on laisse pour le moment.
  *
- * @link    http://code.spip.net/@spip_mysql_order
+ * @link    https://code.spip.net/@spip_mysql_order
  * @param   string|array    $orderby   Le ou les colonnes
  * @return  string
  */
@@ -353,7 +353,7 @@ function spip_mysqli_order($orderby)
 /**
  * Construction d'une expression_where
  *
- * @link    http://code.spip.net/@calculer_mysqli_where
+ * @link    https://code.spip.net/@calculer_mysqli_where
  * @param   array|string    $v   arbre abstrait des conditions
  * @return  string
  */
@@ -381,7 +381,7 @@ function calculer_mysqli_where($v)
 /**
  * Calcule un bloc d'expression MySQL
  *
- * @link    http://code.spip.net/@calculer_mysql_expression
+ * @link    https://code.spip.net/@calculer_mysql_expression
  * @param   string          $expression   Expression déjà évaluée
  * @param   array|string    $v            tableau des éléments à rassembler
  * @param   string          $join         séparateur servant à rassembler les éléments de $v
@@ -406,7 +406,7 @@ function calculer_mysqli_expression($expression, $v, $join = 'AND'){
 /**
  * Création de la liste des éléments à sélectionner dans la requête SQL
  *
- * @link    http://code.spip.net/@spip_mysql_select_as
+ * @link    https://code.spip.net/@spip_mysql_select_as
  * @param   array   $args   Liste des éléments
  * @return  string
  */
@@ -443,7 +443,7 @@ define('_SQL_PREFIXE_TABLE', '/([,\s])spip_/S');
 /**
  * Prépare une requête incomplète
  *
- * @link    http://code.spip.net/@traite_mysql_query
+ * @link    https://code.spip.net/@traite_mysql_query
  * @param   string  $query    La requête partielle
  * @param   string  $db	      Le nom de la base
  * @param   string  $prefixe  Prefixe des tables SPIP
@@ -475,7 +475,7 @@ function traite_mysqli_query($query, $db='', $prefixe='') {
 /**
  * Sélectionne une base de données par défaut pour les requêtes
  *
- * @link    http://code.spip.net/@spip_mysql_selectdb
+ * @link    https://code.spip.net/@spip_mysql_selectdb
  * @param   string  $db	       Nom de la base
  * @param   string  $serveur   Identifiant du connecteur SPIP
  * @param   bool    $requeter  Inutilisé
@@ -491,7 +491,7 @@ function spip_mysqli_selectdb($db, $serveur='',$requeter=true) {
  *
  * Attention on n'a pas toujours les droits
  *
- * @link    http://code.spip.net/@spip_mysql_listdbs
+ * @link    https://code.spip.net/@spip_mysql_listdbs
  * @param   string  $serveur   Identifiant du connecteur SPIP
  * @param   bool    $requeter  Inutilisé
  * @return  mysqli_result
@@ -510,7 +510,7 @@ function spip_mysqli_listdbs($serveur='',$requeter=true) {
  * si $autoinc, c'est une auto-increment (i.e. serial) sur la Primary Key.<br>
  * Le nom des caches doit être inférieur à 64 caractères
  *
- * @link    http://code.spip.net/@spip_mysql_create
+ * @link    https://code.spip.net/@spip_mysql_create
  * @param   string  $nom        Table à créer
  * @param   array   $champs     Liste des champs
  * @param   array   $cles       Liste des clés
@@ -594,7 +594,7 @@ function spip_mysqli_create_base($nom, $serveur='',$requeter=true) {
  * // utiliser :
  * $titre = sql_getfetsel('t', 'spip_short_rub', 'id=8');
  * </code>
- * @link    http://code.spip.net/@spip_mysql_create_view
+ * @link    https://code.spip.net/@spip_mysql_create_view
  * @param   string  $nom
  * @param   string  $query_select
  * @param   string  $serveur         Identifiant du connecteur à utiliser
@@ -617,7 +617,7 @@ function spip_mysqli_create_view($nom, $query_select, $serveur='',$requeter=true
 /**
  * Supprime une table MySQL
  *
- * @link    http://code.spip.net/@spip_mysql_drop_table
+ * @link    https://code.spip.net/@spip_mysql_drop_table
  * @param   string  $table      La table
  * @param   string  $exist      Est-ce qu'on teste l'existence de la table
  * @param   string  $serveur    Identifiant du connecteur à utiliser
@@ -633,7 +633,7 @@ function spip_mysqli_drop_table($table, $exist='', $serveur='',$requeter=true)
 /**
  * Supprime une vue
  *
- * @link    http://code.spip.net/@spip_mysql_drop_view
+ * @link    https://code.spip.net/@spip_mysql_drop_view
  * @param   string  $view      Nom de la vue
  * @param   string  $exist     Doit-on tester son existence ?
  * @param   string  $serveur   Identifiant du connecteur à utiliser
@@ -648,7 +648,7 @@ function spip_mysqli_drop_view($view, $exist='', $serveur='',$requeter=true) {
 /**
  * Liste des tables selon un certain critère
  *
- * @link    http://code.spip.net/@spip_mysql_showbase
+ * @link    https://code.spip.net/@spip_mysql_showbase
  * @param   string  $match     Critère de recherche
  * @param   string  $serveur   Identifiant du connecteur à utiliser
  * @param   bool    $requeter  Inutilisé
@@ -662,7 +662,7 @@ function spip_mysqli_showbase($match, $serveur='',$requeter=true)
 /**
  * Tente la réparation d'une table
  *
- * @link    http://code.spip.net/@spip_mysql_repair
+ * @link    https://code.spip.net/@spip_mysql_repair
  * @param   string  $table     La table
  * @param   string  $serveur   Identifiant du connecteur à utiliser
  * @param   bool    $requeter  Inutilisé
@@ -679,7 +679,7 @@ function spip_mysqli_repair($table, $serveur='',$requeter=true)
  * Les éléments obtenus sont les colonnes, indexes, etc.. <br>
  * au même format que la définition des tables de SPIP
  *
- * @link    http://code.spip.net/@spip_mysql_showtable
+ * @link    https://code.spip.net/@spip_mysql_showtable
  * @param   string  $nom_table   nom de la table ou vue MySQL
  * @param   string  $serveur     Identifiant du connecteur à utiliser
  * @param   bool    $requeter    TRUE pour créer une représentation abstraite SPIP
@@ -769,7 +769,7 @@ function spip_mysqli_showtable($nom_table, $serveur='',$requeter=true)
  * }
  * </code>
  *
- * @link http://code.spip.net/@spip_mysql_fetch
+ * @link https://code.spip.net/@spip_mysql_fetch
  * @param   mysqli_result   $r         Le jeu de résultats
  * @param   int             $t         Type de résultat : MYSQLI_ASSOC, MYSQLI_NUM ou MYSQLI_BOTH
  * @param   string          $serveur   Inutilisé
@@ -819,7 +819,7 @@ function spip_mysqli_seek($r, $row_number, $serveur='',$requeter=true) {
  * }
  * </code>
  *
- * @link    http://code.spip.net/@spip_mysql_countsel
+ * @link    https://code.spip.net/@spip_mysql_countsel
  * @param   array|string   $from
  * @param   array|string   $where
  * @param   array|string   $groupby
@@ -845,7 +845,7 @@ function spip_mysqli_countsel($from = array(), $where = array(),
 /**
  * Retourne une chaîne décrivant la dernière erreur
  *
- * @link    http://code.spip.net/@spip_mysql_error
+ * @link    https://code.spip.net/@spip_mysql_error
  * @param   string   $serveur   Identifiant du connecteur à utiliser
  * @return  string
  */
@@ -860,7 +860,7 @@ function spip_mysqli_error($serveur='') {
  *
  * En cas de perte de connexion avec le serveur, il ne faut pas recalculer le cache.
  *
- * @link    http://code.spip.net/@spip_mysql_errno
+ * @link    https://code.spip.net/@spip_mysql_errno
  * @param   string  $serveur   Identifiant du connecteur à utiliser
  * @return  int
  */
@@ -878,7 +878,7 @@ function spip_mysqli_errno($serveur='') {
 /**
  * Retourne le nombre de lignes dans le jeu de résultats.
  *
- * @link    http://code.spip.net/@spip_mysql_count
+ * @link    https://code.spip.net/@spip_mysql_count
  * @param   mysqli_result   $r
  * @param   string          $serveur   Identifiant du connecteur à utiliser
  * @param   bool            $requeter  Inutilisé
@@ -894,11 +894,11 @@ function spip_mysqli_count($r, $serveur='',$requeter=true) {
  * Libère la mémoire associée à un résultat.
  *
  * À noter que des fonctions de l’API appellent cette fonction automatiquement. C’est le cas de :
- * - {@link http://code.spip.net/@sql_fetsel sql_fetsel} (et {@link http://code.spip.net/@sql_getfetsel sql_getfetsel}),
- * - {@link http://code.spip.net/@sql_fetch_all sql_fetch_all} (et {@link http://code.spip.net/@sql_allfetsel sql_allfetsel}),
- * - {@link http://code.spip.net/@sql_in_select sql_in_select}.
+ * - {@link https://code.spip.net/@sql_fetsel sql_fetsel} (et {@link https://code.spip.net/@sql_getfetsel sql_getfetsel}),
+ * - {@link https://code.spip.net/@sql_fetch_all sql_fetch_all} (et {@link https://code.spip.net/@sql_allfetsel sql_allfetsel}),
+ * - {@link https://code.spip.net/@sql_in_select sql_in_select}.
 
- * @link    http://code.spip.net/@spip_mysql_free
+ * @link    https://code.spip.net/@spip_mysql_free
  * @param   mysqli_result   $r
  * @param   string          $serveur    Identifiant du connecteur à utiliser
  * @param   bool            $requeter   Inutilisé
@@ -912,7 +912,7 @@ function spip_mysqli_free($r, $serveur='',$requeter=true) {
 /**
  * insère une nouvelle ligne dans une table existante.
  *
- * @link    http://code.spip.net/@spip_mysql_insert
+ * @link    https://code.spip.net/@spip_mysql_insert
  * @param   string  $table     La table
  * @param   string  $champs    Liste des champs
  * @param   string  $valeurs   valeurs de chaque champ
@@ -949,7 +949,7 @@ function spip_mysqli_insert($table, $champs, $valeurs, $desc='', $serveur='',$re
 /**
  * Insère une nouvelle ligne dans une table existante.
  *
- * @link    http://code.spip.net/@spip_mysql_insertq
+ * @link    https://code.spip.net/@spip_mysql_insertq
  * @param   string  $table     La table
  * @param   array   $couples   couples champ => valeur
  * @param   array   $desc      description de la table
@@ -974,7 +974,7 @@ function spip_mysqli_insertq($table, $couples=array(), $desc=array(), $serveur='
 /**
  * Insère plusieures lignes dans une table existante.
  *
- * @link    http://code.spip.net/@spip_mysql_insertq_multi
+ * @link    https://code.spip.net/@spip_mysql_insertq_multi
  * @param   string  $table         La table
  * @param   array   $tab_couples   couples champ => valeur
  * @param   array   $desc          description de la table
@@ -1011,7 +1011,7 @@ function spip_mysqli_insertq_multi($table, $tab_couples=array(), $desc=array(), 
 /**
  * Modifie une ligne dans une table existante.
  *
- * @link    http://code.spip.net/@spip_mysql_update
+ * @link    https://code.spip.net/@spip_mysql_update
  * @param   string  $table    La table
  * @param   array   $champs   tableau associatif champ => valeur
  * @param   string  $where    Condition que doivent respecter les lignes modifiées
@@ -1038,7 +1038,7 @@ function spip_mysqli_update($table, $champs, $where='', $desc='', $serveur='',$r
  * les valeurs sont des constantes a mettre entre apostrophes
  * sauf les expressions de date lorsqu'il s'agit de fonctions SQL (NOW etc)
  *
- * @link    http://code.spip.net/@spip_mysql_updateq
+ * @link    https://code.spip.net/@spip_mysql_updateq
  * @param   string          $table    La table
  * @param   array           $champs   tableau associatif champ => valeur
  * @param   array|string    $where    Condition que doivent respecter les lignes modifiées
@@ -1071,7 +1071,7 @@ function spip_mysqli_updateq($table, $champs, $where='', $desc=array(), $serveur
  * <code>
  * sql_delete("spip_mots_rubriques", "id_mot=$id_mot");
  * </code>
- * @link    http://code.spip.net/@spip_mysql_delete
+ * @link    https://code.spip.net/@spip_mysql_delete
  * @param   string         $table      La table
  * @param   array|string   $where      Condition que doivent respecter les lignes supprimées
  * @param   string         $serveur    Identifiant du connecteur à utiliser
@@ -1098,7 +1098,7 @@ function spip_mysqli_delete($table, $where='', $serveur='',$requeter=true) {
  * la vieille ligne sera remplacée par la nouvelle.
  * Le nombre de lignes affectées sera alors de 2
  *
- * @link    http://code.spip.net/@spip_mysql_replace
+ * @link    https://code.spip.net/@spip_mysql_replace
  * @param   string  $table     La table
  * @param   array   $couples   tableau associatif champ => valeur
  * @param   array   $desc      Inutilisé
@@ -1114,7 +1114,7 @@ function spip_mysqli_replace($table, $couples, $desc=array(), $serveur='',$reque
 /**
  * Remplace plusieures lignes d'une table existente
  *
- * @link    http://code.spip.net/@spip_mysql_replace_multi
+ * @link    https://code.spip.net/@spip_mysql_replace_multi
  * @param   string  $table         La table
  * @param   array   $tab_couples   tableau associatif champ => valeur
  * @param   array   $desc          Inutilisé
@@ -1136,7 +1136,7 @@ function spip_mysqli_replace_multi($table, $tab_couples, $desc=array(), $serveur
 /**
  * Construit une expression pour extraire un champ multi dans une requête.
  *
- * @link    http://code.spip.net/@spip_mysql_multi
+ * @link    https://code.spip.net/@spip_mysql_multi
  * @param   string  $objet  champ MySQL contenant éventuellement un champ multi
  * @param   string  $lang   code langue qui determine le champ multi à récupérer
  * @return  string
@@ -1173,7 +1173,7 @@ function spip_mysqli_multi ($objet, $lang) {
 /**
  * Contruire une chaîne permettant d'utiliser un code hexadécimal dans une requête.
  *
- * @link    http://code.spip.net/@spip_mysql_hex
+ * @link    https://code.spip.net/@spip_mysql_hex
  * @param   int    $v
  * @return  string
  */
@@ -1197,7 +1197,7 @@ function spip_mysqli_quote($v, $type='')
 /**
  * Préparer un élément pour qu'il puisse être utilisé dans les requêtes plus tard.
  *
- * @link http://code.spip.net/@_q
+ * @link https://code.spip.net/@_q
  * @internal Le traitement se fait de manière récursive sur les tableaux
  * @param   mixed   $a
  * @return  mixed
@@ -1236,7 +1236,7 @@ function spip_mysqli_date_proche($champ, $interval, $unite)
 /**
  * IN (...) est limité à 255 elements, d'où cette fonction assistante.
  *
- * @link    http://code.spip.net/@spip_mysql_in
+ * @link    https://code.spip.net/@spip_mysql_in
  * @param   string  $val
  * @param   string  $valeurs
  * @param   string  $not
@@ -1265,7 +1265,7 @@ function spip_mysqli_in($val, $valeurs, $not='', $serveur='',$requeter=true) {
 /**
  * Echappe une chaine pour l'utiliser dans une requête MySQL.
  *
- * @link    http://code.spip.net/@spip_mysql_cite
+ * @link    https://code.spip.net/@spip_mysql_cite
  * @param   string  $v	    la valeur à traiter
  * @param   string  $type   son type
  * @return  string  la chaine préparée

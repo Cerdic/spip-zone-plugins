@@ -5,7 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 include_spip('inc/editer');
 
-// http://code.spip.net/@inc_editer_article_dist
+// https://code.spip.net/@inc_editer_article_dist
 function formulaires_editer_projets_charger_dist($id_projet='new', $id_parent=0, $retour='', $lier_trad=0, $config_fonc='projet_edit_config', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('projet',$id_projet,$id_parent,$lier_trad,$retour,$config_fonc,$row,$hidden);
 	// il faut enlever l'id_rubrique car la saisie se fait sur id_parent
@@ -16,7 +16,7 @@ function formulaires_editer_projets_charger_dist($id_projet='new', $id_parent=0,
 }
 
 // Choix par defaut des options de presentation
-// http://code.spip.net/@articles_edit_config
+// https://code.spip.net/@articles_edit_config
 function projet_edit_config($row)
 {
 	global $spip_ecran, $spip_lang, $spip_display;
@@ -36,7 +36,7 @@ function formulaires_editer_projets_verifier_dist($id_projet='new', $id_parent=0
 	return $erreurs;
 }
 
-// http://code.spip.net/@inc_editer_article_dist
+// https://code.spip.net/@inc_editer_article_dist
 function formulaires_editer_projets_traiter_dist($id_projet='new', $id_parent=0, $retour='', $lier_trad=0, $config_fonc='projet_edit_config', $row=array(), $hidden=''){
 	return formulaires_editer_objet_traiter('projet',$id_projet,$id_parent,$lier_trad,$retour,$config_fonc,$row,$hidden);
 }

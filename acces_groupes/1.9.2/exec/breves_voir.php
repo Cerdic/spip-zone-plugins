@@ -19,7 +19,7 @@ include_spip("inc/indexation");
 include_spip('exec/accesgroupes_admin_fonctions');
 
 
-// http://code.spip.net/@afficher_breves_voir
+// https://code.spip.net/@afficher_breves_voir
 function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 {
 	global $champs_extra, $options, $connect_statut, $les_notes,$spip_display;
@@ -282,7 +282,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
   echo fin_page();
 }
 
-// http://code.spip.net/@exec_breves_voir_dist
+// https://code.spip.net/@exec_breves_voir_dist
 function exec_breves_voir_dist()
 {
 	afficher_breves_voir(intval(_request('id_breve')), _request('cherche_mot'), _request('select_groupe'));

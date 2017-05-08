@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-// http://code.spip.net/@exec_configuration_dist
+// https://code.spip.net/@exec_configuration_dist
 function exec_configuration_dist(){
 
 	if (!autoriser('configurer', 'configuration')) {

@@ -142,7 +142,7 @@ function critere_si($idb, &$boucles, $crit) {
 // {pagination #ENV{pages,5}} etc
 // {pagination 20 #ENV{truc,chose}} pour utiliser la variable debut_#ENV{truc,chose}
 // https://www.spip.net/@pagination
-// http://code.spip.net/@critere_pagination
+// https://code.spip.net/@critere_pagination
 function critere_pagination($idb, &$boucles, $crit) {
 
 	$boucle = &$boucles[$idb];

@@ -1,6 +1,6 @@
 <?php
 
-// modification de http://code.spip.net/@barre_textarea
+// modification de https://code.spip.net/@barre_textarea
 function cocomment_barre_textarea($texte, $uniq_id, $rows, $cols, $lang='') {
   $num_textarea = $uniq_id;
   include_spip('inc/layer'); // definit browser_barre

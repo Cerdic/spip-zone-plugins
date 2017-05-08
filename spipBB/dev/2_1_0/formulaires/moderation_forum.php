@@ -119,7 +119,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour) {
 // Ce systeme n'est pas fonctionnel pour les forums sans previsu (notamment
 // si $afficher_texte = 'non')
 
-// http://code.spip.net/@forum_fichier_tmp
+// https://code.spip.net/@forum_fichier_tmp
 function forum_fichier_tmp($arg)
 {
 # astuce : mt_rand pour autoriser les hits simultanes
@@ -257,7 +257,7 @@ function forum_documents_acceptes()
 	return $formats;
 }
 
-// http://code.spip.net/@inclure_previsu
+// https://code.spip.net/@inclure_previsu
 function inclure_previsu($texte,$titre, $url_site, $nom_site, $ajouter_mot, $doc,
 $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic) {
 	global $table_des_traitements;

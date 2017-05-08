@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://code.spip.net/@inc_discuter_dist
+// https://code.spip.net/@inc_discuter_dist
 function inc_discuter_dist($id, $script, $objet, $statut='prive', $debut=NULL, $pas=NULL, $id_parent = 0)
 {
 	if ($GLOBALS['meta']['forum_prive_objets'] == 'non')

@@ -20,7 +20,7 @@ include_spip('base/abstract_sql');
 include_spip("inc/indexation");
 
 
-// http://code.spip.net/@afficher_breves_voir
+// https://code.spip.net/@afficher_breves_voir
 function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_groupe)
 {
 	global $champs_extra, $options, $connect_statut, $les_notes,$spip_display;
@@ -258,7 +258,7 @@ fin_cadre_relief();
 fin_page();
 }
 
-// http://code.spip.net/@exec_breves_voir_dist
+// https://code.spip.net/@exec_breves_voir_dist
 function exec_breves_voir()
 {
 global $id_breve, $id_parent, $texte, $titre, $statut,

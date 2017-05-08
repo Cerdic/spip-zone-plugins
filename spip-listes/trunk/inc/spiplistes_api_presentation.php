@@ -326,7 +326,7 @@ function spiplistes_boite_info_spiplistes($return=false) {
 }
 
 // Pour construire des menu avec SELECTED
-// http://code.spip.net/@mySel
+// https://code.spip.net/@mySel
 function mySel($varaut,$variable, $option = NULL) {
 	$res = ' value="'.$varaut.'"' . (($variable==$varaut) ? ' selected="selected"' : '');
 

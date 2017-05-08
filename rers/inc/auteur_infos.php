@@ -19,7 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // eventuellement editable
 // $quoi introduit pour pouvoir demander simplement les infos ou la partie editable
 // ""=>tout, "infos"=>infos simplement, "edit"=>formulaire d'edition simplement
-// http://code.spip.net/@inc_auteur_infos_dist
+// https://code.spip.net/@inc_auteur_infos_dist
 function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redirect, $quoi="") {
 
 	if (!$new AND $quoi!="edit") {
@@ -89,7 +89,7 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 	return $corps;
 }
 
-// http://code.spip.net/@afficher_erreurs_auteur
+// https://code.spip.net/@afficher_erreurs_auteur
 function afficher_erreurs_auteur($echec) {
 	foreach (split('@@@',$echec) as $e)
 		$corps .= '<p>' . _T($e) . "</p>\n";
@@ -106,12 +106,12 @@ function afficher_erreurs_auteur($echec) {
 }
 
 
-// http://code.spip.net/@legender_auteur_saisir
+// https://code.spip.net/@legender_auteur_saisir
 //
 // Apparaitre dans la liste des redacteurs connectes
 //
 
-// http://code.spip.net/@apparait_auteur_infos
+// https://code.spip.net/@apparait_auteur_infos
 function apparait_auteur_infos($id_auteur, $auteur) {
 
 	if ($auteur['imessage']=="non"){
@@ -141,7 +141,7 @@ function apparait_auteur_infos($id_auteur, $auteur) {
 }
 
 
-// http://code.spip.net/@legender_auteur_voir
+// https://code.spip.net/@legender_auteur_voir
 function legender_auteur_voir($auteur) {
 	global $spip_lang_right;
 	$res = "";

@@ -45,7 +45,7 @@ function formulaires_telecharger_cp_verifier_dist(){
 	return $erreurs;
 }
 
-// http://code.spip.net/@inc_editer_mot_dist
+// https://code.spip.net/@inc_editer_mot_dist
 function formulaires_telecharger_cp_traiter_dist(){
 include_spip('cp_config');
 include_spip('inc/cp_import');

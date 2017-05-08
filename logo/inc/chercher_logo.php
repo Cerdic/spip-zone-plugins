@@ -12,7 +12,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://code.spip.net/@inc_chercher_logo_dist
+// https://code.spip.net/@inc_chercher_logo_dist
 function inc_chercher_logo_dist($id, $_id_objet, $mode='on') {
 	global $formats_logos;
 	# attention au cas $id = '0' pour LOGO_SITE_SPIP : utiliser intval()
@@ -29,7 +29,7 @@ function inc_chercher_logo_dist($id, $_id_objet, $mode='on') {
 	return array();
 }
 
-// http://code.spip.net/@type_du_logo
+// https://code.spip.net/@type_du_logo
 function type_du_logo($_id_objet) {
 	return isset($GLOBALS['table_logos'][$_id_objet])
 		? $GLOBALS['table_logos'][$_id_objet]

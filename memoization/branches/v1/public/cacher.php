@@ -29,7 +29,7 @@ if(defined('_LOG_INFO_IMPORTANTE')) {
 	function memoization_log($log) { spip_log($log); }
 }
 
-// http://code.spip.net/@generer_nom_fichier_cache
+// https://code.spip.net/@generer_nom_fichier_cache
 function generer_nom_fichier_cache($contexte, $page) {
 	// l'indicateur sert a savoir un peu de quoi il s'agit
 	// quand on regarde dans le cache ; on le met a la fin
@@ -68,7 +68,7 @@ function cache_signature(&$page) {
  * @param int $date
  * @return int -1|0|1
  */
-/// http://code.spip.net/@cache_valide
+/// https://code.spip.net/@cache_valide
 function cache_valide(&$page, $date) {
 	$now = $_SERVER['REQUEST_TIME'];
 
@@ -162,7 +162,7 @@ function cache_valide(&$page, $date) {
 
 // Creer le fichier cache
 # Passage par reference de $page par souci d'economie
-// http://code.spip.net/@creer_cache
+// https://code.spip.net/@creer_cache
 function creer_cache(&$page, &$chemin_cache, &$memo) {
 
 	// Ne rien faire si on est en preview, debug, ou si une erreur
@@ -232,7 +232,7 @@ function creer_cache(&$page, &$chemin_cache, &$memo) {
 
 // purger un petit cache (tidy ou recherche) qui ne doit pas contenir de
 // vieux fichiers ; (cette fonction ne sert que dans des plugins obsoletes)
-// http://code.spip.net/@nettoyer_petit_cache
+// https://code.spip.net/@nettoyer_petit_cache
 function nettoyer_petit_cache($prefix, $duree = 300) {
 	// determiner le repertoire a purger : 'tmp/CACHE/rech/'
 	$dircache = sous_repertoire(_DIR_CACHE,$prefix);
@@ -259,7 +259,7 @@ function nettoyer_petit_cache($prefix, $duree = 300) {
 // Elle retourne '' si tout va bien
 // un message d'erreur si le calcul de la page est totalement impossible
 
-// http://code.spip.net/@public_cacher_dist
+// https://code.spip.net/@public_cacher_dist
 function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmodified) {
 	$chemin_cache_session = false;
 	
@@ -392,7 +392,7 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 
 // Faut-il decompresser ce cache ?
 // (passage par reference pour alleger)
-// http://code.spip.net/@gunzip_page
+// https://code.spip.net/@gunzip_page
 function gunzip_page(&$page) {
 	if ($page['gz']) {
 		$page['texte'] = gzuncompress($page['texte']);

@@ -19,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Redéfinition de la balise #URL_ARTICLE
- * http://code.spip.net/@balise_URL_ARTICLE_dist
+ * https://code.spip.net/@balise_URL_ARTICLE_dist
  *
  * Si l'article n'existe pas ou n'est pas publié, on envoie vers la page publique de publication
  * Pratique pour les liens vers associé à une auteur mais pas encore publiés

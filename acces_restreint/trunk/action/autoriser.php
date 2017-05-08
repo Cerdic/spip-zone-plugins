@@ -23,7 +23,7 @@ include_spip('base/abstract_sql');
 //  il verifie soit que le demandeur est authentifie
 // soit que le fichier est joint a au moins 1 article, breve ou rubrique publie
 
-// http://code.spip.net/@action_autoriser_dist
+// https://code.spip.net/@action_autoriser_dist
 function action_autoriser_dist() {
 	$arg = intval(_request('arg'));
 
@@ -35,7 +35,7 @@ function action_autoriser_dist() {
 		redirige_par_entete('./?page=404');
 	} else {
 		if (!function_exists('mime_content_type')) {
-			// http://code.spip.net/@mime_content_type
+			// https://code.spip.net/@mime_content_type
 			function mime_content_type($f) {
 				preg_match('/\.(\w+)/', $f, $r);
 				return $r[1];

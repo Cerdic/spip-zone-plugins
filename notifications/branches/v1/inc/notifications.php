@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // La fonction de notification de base, qui dispatche le travail
-// http://code.spip.net/@inc_notifications_dist
+// https://code.spip.net/@inc_notifications_dist
 function inc_notifications_dist($quoi, $id=0, $options=array()) {
 	
 	// charger les fichiers qui veulent ajouter des definitions
@@ -113,7 +113,7 @@ function email_notification_objet($id_objet, $type_objet, $modele) {
 }
 
 // Compatibilite, ne plus utiliser
-// http://code.spip.net/@notifier_publication_article
+// https://code.spip.net/@notifier_publication_article
 function notifier_publication_article($id_article) {
 	if ($GLOBALS['meta']["suivi_edito"] == "oui") {
 		$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
@@ -123,7 +123,7 @@ function notifier_publication_article($id_article) {
 }
 
 // Compatibilite, ne plus utiliser
-// http://code.spip.net/@notifier_proposition_article
+// https://code.spip.net/@notifier_proposition_article
 function notifier_proposition_article($id_article) {
 	if ($GLOBALS['meta']["suivi_edito"] == "oui") {
 		$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];

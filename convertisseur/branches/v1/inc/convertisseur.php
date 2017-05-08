@@ -481,7 +481,7 @@ function conversion_format($conv_in, $format) {
 
 # callback pour le deballage d'un zip telecharge
 # http://www.phpconcept.net/pclzip/man/en/?options-pclzip_cb_pre_extractfunction
-// cf. http://code.spip.net/@callback_deballe_fichier
+// cf. https://code.spip.net/@callback_deballe_fichier
 function callback_admissibles($p_event, &$p_header) {
 	if (accepte_fichier_upload2($p_header['filename'])) {
 		$p_header['filename'] = _tmp_dir

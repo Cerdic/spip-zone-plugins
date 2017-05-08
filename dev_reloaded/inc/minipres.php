@@ -19,7 +19,7 @@ include_spip('inc/texte'); //inclue inc/lang et inc/filtres
 // Presentation des pages d'installation et d'erreurs
 //
 
-// http://code.spip.net/@install_debut_html
+// https://code.spip.net/@install_debut_html
 function install_debut_html($titre = 'AUTO', $onLoad = '') {
 	global $spip_lang_right,$spip_lang_left;
 	
@@ -57,7 +57,7 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 	<div>\n";
 }
 
-// http://code.spip.net/@install_fin_html
+// https://code.spip.net/@install_fin_html
 function install_fin_html() {
 	if (!_request('exec')=='install' && _DEBUG_MINIPRES) {
 		echo "<pre>";
@@ -67,7 +67,7 @@ function install_fin_html() {
 	return "\n\t</div>\n\t</div>\n</body>\n</html>";
 }
 
-// http://code.spip.net/@minipres
+// https://code.spip.net/@minipres
 function minipres($titre='', $corps="", $onload='')
 {
 	if (!defined('_AJAX')) define('_AJAX', false); // par securite

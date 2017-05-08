@@ -26,7 +26,7 @@ include_spip('inc/forum');
 // dans le fichier d'appel, et si la table de reference est OK, proposer
 // la liste des mots-cles
 
-// http://code.spip.net/@balise_FORMULAIRE_FORUM
+// https://code.spip.net/@balise_FORMULAIRE_FORUM
 function balise_FORMULAIRE_SPIPBB_FORUM ($p) {
 
 	$p = calculer_balise_dynamique($p,'FORMULAIRE_FORUM', array('id_rubrique', 'id_forum', 'id_article', 'id_breve', 'id_syndic', 'ajouter_mot', 'ajouter_groupe', 'afficher_texte'));
@@ -44,7 +44,7 @@ function balise_FORMULAIRE_SPIPBB_FORUM ($p) {
 // valeurs possibles : 'pos'teriori, 'pri'ori, 'abo'nnement
 // Donner aussi la table de reference pour afficher_groupes[]
 
-// http://code.spip.net/@balise_FORMULAIRE_FORUM_stat
+// https://code.spip.net/@balise_FORMULAIRE_FORUM_stat
 function balise_FORMULAIRE_SPIPBB_FORUM_stat($args, $filtres) {
 
 	// le denier arg peut contenir l'url sur lequel faire le retour

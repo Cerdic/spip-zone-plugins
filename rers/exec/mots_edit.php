@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('base/abstract_sql');
 
-// http://code.spip.net/@exec_mots_edit_dist
+// https://code.spip.net/@exec_mots_edit_dist
 function exec_mots_edit_dist()
 {
 	exec_mots_edit_args(intval(_request('id_mot')),
@@ -32,7 +32,7 @@ function exec_mots_edit_dist()
 
 // attention, ajouter_id_article n'est pas forcement un id d'article
 
-// http://code.spip.net/@exec_mots_edit_args
+// https://code.spip.net/@exec_mots_edit_args
 function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='', $titre='', $redirect='', $ajouter_id_article='')
 {
 	global $spip_lang_right, $connect_statut, $les_notes;

@@ -3,7 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Recuperer le reglage des forums publics de l'article x
-// http://code.spip.net/@get_forums_publics
+// https://code.spip.net/@get_forums_publics
 function get_notes_publics($id_objet=0, $objet='article') {
 	if ($objet=='article' AND $id_objet) {
 		$obj = sql_fetsel("accepter_note", "spip_articles", "id_article=".intval($id_objet));

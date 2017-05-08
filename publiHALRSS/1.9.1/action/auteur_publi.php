@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://code.spip.net/@action_instituer_syndic_dist
+// https://code.spip.net/@action_instituer_syndic_dist
 function action_auteur_publi() {
 	include_spip('inc/publiHAL_gestion');
 	// controles de sécurité semble-t-il 

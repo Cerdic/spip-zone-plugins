@@ -22,12 +22,12 @@ define('_DIR_PLUGIN_CAPTCHA2',(_DIR_PLUGINS.end($p))); // surcharge plugin
 // Le contexte indique dans quelle rubrique le visiteur peut proposer le site
 
 
-// http://code.spip.net/@balise_FORMULAIRE_SITE
+// https://code.spip.net/@balise_FORMULAIRE_SITE
 function balise_FORMULAIRE_SITE ($p) {
   return calculer_balise_dynamique($p,'FORMULAIRE_SITE', array('id_rubrique'));
 }
 
-// http://code.spip.net/@balise_FORMULAIRE_SITE_stat
+// https://code.spip.net/@balise_FORMULAIRE_SITE_stat
 function balise_FORMULAIRE_SITE_stat($args, $filtres) {
 
 	// Pas d'id_rubrique ? Erreur de squelette
@@ -42,7 +42,7 @@ function balise_FORMULAIRE_SITE_stat($args, $filtres) {
 	return (($GLOBALS['meta']["proposer_sites"] != 2) ? '' : $args);
 }
 
-// http://code.spip.net/@balise_FORMULAIRE_SITE_dyn
+// https://code.spip.net/@balise_FORMULAIRE_SITE_dyn
 function balise_FORMULAIRE_SITE_dyn($id_rubrique) {
   session_start();                                           // surcharge plugin
 

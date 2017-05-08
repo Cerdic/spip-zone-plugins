@@ -56,7 +56,7 @@ jQuery(document).ready(function() {
 // $texte : texte du bouton
 // $deplie : true (deplie) ou false (plie) ou -1 (inactif) ou 'incertain' pour que le bouton s'auto init au chargement de la page 
 // $ids : id des div lies au bouton (facultatif, par defaut c'est le div.bloc_depliable qui suit)
-// http://code.spip.net/@bouton_block_depliable
+// https://code.spip.net/@bouton_block_depliable
 function gmap_bouton_block_depliable($texte,$deplie,$ids="", $eventTarget = "")
 {
 	// Le code est recopier de SPIP 2.0.9, seule les fonctions javascript depliant et depliant_clicancre sont modifiées

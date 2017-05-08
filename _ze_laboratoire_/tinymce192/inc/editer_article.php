@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 include_spip('inc/extra');
 
-// http://code.spip.net/@inc_editer_article_dist
+// https://code.spip.net/@inc_editer_article_dist
 function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='', $config_fonc='articles_edit_config', $row=array(), $hidden='')
 {
 	// Appel en tant que filtre d'un squelette 
@@ -64,7 +64,7 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 	return generer_action_auteur("editer_article", $id_article, $retour, $form, " method='post' name='formulaire'");
 }
 
-// http://code.spip.net/@editer_article_texte
+// https://code.spip.net/@editer_article_texte
 function editer_article_texte($texte, $config, $aider)
 {
 	$att_text = " class='formo' "
@@ -98,7 +98,7 @@ function editer_article_texte($texte, $config, $aider)
 	. (_DIR_RESTREINT ? '' : "<script type='text/javascript'><!--\njQuery(hauteurTextarea);\n//--></script>\n");
 }
 
-// http://code.spip.net/@editer_article_titre
+// https://code.spip.net/@editer_article_titre
 function editer_article_titre($titre, $onfocus, $config, $aider)
 {
 	return	"\n<p>" .
@@ -111,7 +111,7 @@ function editer_article_titre($titre, $onfocus, $config, $aider)
 		  " />\n</p>";
 }
 
-// http://code.spip.net/@editer_article_rubrique
+// https://code.spip.net/@editer_article_rubrique
 function editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider)
 {
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
@@ -128,7 +128,7 @@ function editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider)
 	return debut_cadre_couleur($logo, true, "", $msg) . $opt .fin_cadre_couleur(true);
 }
 
-// http://code.spip.net/@editer_article_surtitre
+// https://code.spip.net/@editer_article_surtitre
 function editer_article_surtitre($surtitre, $config, $aider)
 {
 	if (($config['articles_surtitre'] == 'non') AND !$surtitre)
@@ -143,7 +143,7 @@ function editer_article_surtitre($surtitre, $config, $aider)
 		 "\" size='40' /></p>");
 }
 
-// http://code.spip.net/@editer_article_soustitre
+// https://code.spip.net/@editer_article_soustitre
 function editer_article_soustitre($soustitre, $config, $aider)
 {
 	if (($config['articles_soustitre'] == "non") AND !$soustitre)
@@ -158,7 +158,7 @@ function editer_article_soustitre($soustitre, $config, $aider)
 		"\" size='40' /><br /><br /></p>\n");
 }
 
-// http://code.spip.net/@editer_article_descriptif
+// https://code.spip.net/@editer_article_descriptif
 function editer_article_descriptif($descriptif, $config, $aider)
 {
 	if (($config['articles_descriptif'] == "non") AND !$descriptif)
@@ -174,7 +174,7 @@ function editer_article_descriptif($descriptif, $config, $aider)
 		"</textarea></p>");
 }
 
-// http://code.spip.net/@editer_article_url
+// https://code.spip.net/@editer_article_url
 function editer_article_url($url, $nom, $config, $aider)
 {
 	if (($config['articles_urlref'] == "non") AND !$url AND !$nom)
@@ -190,7 +190,7 @@ function editer_article_url($url, $nom, $config, $aider)
 	  "\n<input type='text' name='url_site' class='forml' size='40' value=\"$url\"/>\n";
 }
 
-// http://code.spip.net/@editer_article_ps
+// https://code.spip.net/@editer_article_ps
 function editer_article_ps($ps, $config, $aider)
 {
 	if (($config['articles_ps'] == "non") AND !$ps)
@@ -208,7 +208,7 @@ function editer_article_ps($ps, $config, $aider)
 // Gestion des textes trop longs (limitation brouteurs)
 // utile pour les textes > 32ko
 
-// http://code.spip.net/@coupe_trop_long
+// https://code.spip.net/@coupe_trop_long
 function coupe_trop_long($texte){
 	$aider = charger_fonction('aider', 'inc');
 	if (strlen($texte) > 28*1024) {
@@ -234,7 +234,7 @@ function coupe_trop_long($texte){
 		return (array($texte,''));
 }
 
-// http://code.spip.net/@editer_article_recolle
+// https://code.spip.net/@editer_article_recolle
 function editer_article_recolle($texte, $att_text)
 {
 	$textes_supplement = "<br /><font color='red'>"._T('info_texte_long')."</font>\n";
@@ -252,7 +252,7 @@ function editer_article_recolle($texte, $att_text)
 }
 
 
-// http://code.spip.net/@editer_article_chapo
+// https://code.spip.net/@editer_article_chapo
 function editer_article_chapo($chapo, $config, $aider)
 {
 	$chapo = entites_html($chapo);
@@ -293,7 +293,7 @@ function editer_article_chapo($chapo, $config, $aider)
 	}
 }
 
-// http://code.spip.net/@editer_article_extra
+// https://code.spip.net/@editer_article_extra
 function editer_article_extra($extra, $config, $aider)
 {
 	if (!$config['extra'])
@@ -303,7 +303,7 @@ function editer_article_extra($extra, $config, $aider)
 }
 
 // Choix par defaut des options de presentation
-// http://code.spip.net/@articles_edit_config
+// https://code.spip.net/@articles_edit_config
 function articles_edit_config($row)
 {
 	global $champs_extra, $spip_ecran, $options, $spip_lang;

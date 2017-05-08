@@ -2,7 +2,7 @@
 
 // compatibilite trans 1.9.1-1.9.2
 // Cadre formulaires
-// http://code.spip.net/@debut_cadre_formulaire
+// https://code.spip.net/@debut_cadre_formulaire
 function Panoramas_debut_cadre_formulaire($style='', $return=false){
 	$x = "\n<div class='cadre-formulaire'" .
 	  (!$style ? "" : " style='$style'") .
@@ -10,7 +10,7 @@ function Panoramas_debut_cadre_formulaire($style='', $return=false){
 	if ($return) return  $x; else echo $x;
 }
 
-// http://code.spip.net/@fin_cadre_formulaire
+// https://code.spip.net/@fin_cadre_formulaire
 function Panoramas_fin_cadre_formulaire($return=false){
 	if ($return) return "</div>\n"; else echo "</div>\n";
 }
@@ -21,7 +21,7 @@ function Panoramas_fin_cadre_formulaire($return=false){
 
 
 
-// http://code.spip.net/@naviguer_doc
+// https://code.spip.net/@naviguer_doc
 function naviguer_doc ($id, $type = "article", $script, $flag_editable) {
 	global $spip_lang_left;
 

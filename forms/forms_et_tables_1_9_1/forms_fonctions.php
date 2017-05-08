@@ -262,7 +262,7 @@
 	// ATTENTION: cette barre injecte un script JS que le squelette doit accepter
 	// donc ce filtre doit IMPERATIVEMENT assurer la securite a sa place
 	
-	// http://code.spip.net/@barre_textarea
+	// https://code.spip.net/@barre_textarea
 	function forms_textarea($texte, $rows, $cols, $name, $id='', $class='forml', $lang='', $active='') {
 		static $num_textarea = 0;
 		if ($active=='oui')

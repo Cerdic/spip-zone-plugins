@@ -81,7 +81,7 @@ function definir_raccourcis_alineas()
 // On initialise la puce pour eviter find_in_path() a chaque rencontre de \n-
 // Mais attention elle depend de la direction et de X_fonctions.php, ainsi que
 // de l'espace choisi (public/prive)
-// http://code.spip.net/@definir_puce
+// https://code.spip.net/@definir_puce
 function definir_puce() {
 
 	// Attention au sens, qui n'est pas defini de la meme facon dans
@@ -115,7 +115,7 @@ if (!defined('_BALISES_BLOCS')) define('_BALISES_BLOCS',
 // Creer un bloc base64 correspondant a $rempl ; au besoin en marquant
 // une $source differente ; le script detecte automagiquement si ce qu'on
 // echappe est un div ou un span
-// http://code.spip.net/@code_echappement
+// https://code.spip.net/@code_echappement
 
 //Petit backport issu de http://core.spip.org/projects/spip/repository/revisions/17424 pour Spip 3
 //function code_echappement($rempl, $source='', $no_transform=false) {
@@ -147,13 +147,13 @@ function code_echappement($rempl, $source='', $no_transform=false, $mode=NULL) {
 }
 
 // Echapper les <html>...</ html>
-// http://code.spip.net/@traiter_echap_html_dist
+// https://code.spip.net/@traiter_echap_html_dist
 function traiter_echap_html_dist($regs) {
 	return $regs[3];
 }
 
 // Echapper les <code>...</ code>
-// http://code.spip.net/@traiter_echap_code_dist
+// https://code.spip.net/@traiter_echap_code_dist
 function traiter_echap_code_dist($regs) {
 	list(,,$att,$corps) = $regs;
 	$echap = htmlspecialchars($corps); // il ne faut pas passer dans entites_html, ne pas transformer les &#xxx; du code !
@@ -177,7 +177,7 @@ function traiter_echap_code_dist($regs) {
 }
 
 // Echapper les <cadre>...</ cadre> aka <frame>...</ frame>
-// http://code.spip.net/@traiter_echap_cadre_dist
+// https://code.spip.net/@traiter_echap_cadre_dist
 function traiter_echap_cadre_dist($regs) {
 	$echap = trim(entites_html($regs[3]));
 	// compter les lignes un peu plus finement qu'avec les \n
@@ -189,12 +189,12 @@ function traiter_echap_cadre_dist($regs) {
 	$echap = "\n<textarea readonly='readonly' cols='40' rows='$n' class='spip_cadre' dir='ltr'>$echap</textarea>";
 	return generer_form_ecrire('', $echap, " method='get'");
 }
-// http://code.spip.net/@traiter_echap_frame_dist
+// https://code.spip.net/@traiter_echap_frame_dist
 function traiter_echap_frame_dist($regs) {
 	return traiter_echap_cadre_dist($regs);
 }
 
-// http://code.spip.net/@traiter_echap_script_dist
+// https://code.spip.net/@traiter_echap_script_dist
 function traiter_echap_script_dist($regs) {
 	// rendre joli (et inactif) si c'est un script language=php
 	if (preg_match(',<script\b[^>]+php,ims', $regs[0]))
@@ -208,7 +208,7 @@ define('_PROTEGE_BLOCS', ',<(html|code|cadre|frame|script)(\s[^>]*)?>(.*)</\1>,U
 
 // - pour $source voir commentaire infra (echappe_retour)
 // - pour $no_transform voir le filtre post_autobr dans inc/filtres
-// http://code.spip.net/@echappe_html
+// https://code.spip.net/@echappe_html
 function echappe_html($letexte, $source='', $no_transform=false,
 $preg='') {
 	if (!is_string($letexte) or !strlen($letexte))
@@ -258,7 +258,7 @@ $preg='') {
 // Traitement final des echappements
 // Rq: $source sert a faire des echappements "a soi" qui ne sont pas nettoyes
 // par propre() : exemple dans multi et dans typo()
-// http://code.spip.net/@echappe_retour
+// https://code.spip.net/@echappe_retour
 function echappe_retour($letexte, $source='', $filtre = "") {
 	if (strpos($letexte,"base64$source")) {
 		# spip_log(htmlspecialchars($letexte));  ## pour les curieux
@@ -288,7 +288,7 @@ function echappe_retour($letexte, $source='', $filtre = "") {
 
 // Reinserer le javascript de confiance (venant des modeles)
 
-// http://code.spip.net/@echappe_retour_modeles
+// https://code.spip.net/@echappe_retour_modeles
 function echappe_retour_modeles($letexte, $interdire_scripts=false)
 {
 	$letexte = echappe_retour($letexte);
@@ -301,7 +301,7 @@ function echappe_retour_modeles($letexte, $interdire_scripts=false)
 }
 
 
-// http://code.spip.net/@couper
+// https://code.spip.net/@couper
 function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
 	if (!($length=strlen($texte)) OR $taille <= 0) return '';
 	$offset = 400 + 2*$taille;
@@ -380,7 +380,7 @@ function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
 //
 
 // afficher joliment les <script>
-// http://code.spip.net/@echappe_js
+// https://code.spip.net/@echappe_js
 function echappe_js($t,$class=' class="echappe-js"') {
 	if (preg_match_all(',<script.*?($|</script.),isS', $t, $r, PREG_SET_ORDER))
 	foreach ($r as $regs)
@@ -389,7 +389,7 @@ function echappe_js($t,$class=' class="echappe-js"') {
 			$t);
 	return $t;
 }
-// http://code.spip.net/@protege_js_modeles
+// https://code.spip.net/@protege_js_modeles
 function protege_js_modeles($t) {
 	if (isset($GLOBALS['visiteur_session'])){
 		if (preg_match_all(',<script.*?($|</script.),isS', $t, $r, PREG_SET_ORDER)){
@@ -417,7 +417,7 @@ function protege_js_modeles($t) {
 // si elles sont appelees en direct
 // il ne faut pas desactiver globalement la fonction dans l'espace prive car elle protege
 // aussi les balises des squelettes qui ne passent pas forcement par propre ou typo apres
-// http://code.spip.net/@interdire_scripts
+// https://code.spip.net/@interdire_scripts
 function interdire_scripts($arg) {
 	// on memorise le resultat sur les arguments non triviaux
 	static $dejavu = array();
@@ -460,7 +460,7 @@ function interdire_scripts($arg) {
 }
 
 // Securite : utiliser SafeHTML s'il est present dans ecrire/safehtml/
-// http://code.spip.net/@safehtml
+// https://code.spip.net/@safehtml
 function safehtml($t) {
 	static $safehtml;
 
@@ -482,7 +482,7 @@ function safehtml($t) {
 // Typographie generale
 // avec protection prealable des balises HTML et SPIP
 
-// http://code.spip.net/@typo
+// https://code.spip.net/@typo
 function typo($letexte, $echapper=true, $connect=null) {
 	// Plus vite !
 	if (!$letexte) return $letexte;
@@ -532,7 +532,7 @@ define('_TYPO_PROTECTEUR', "\x1\x2\x3\x4\x5\x6\x7\x8");
 
 define('_TYPO_BALISE', ",</?[a-z!][^<>]*[".preg_quote(_TYPO_PROTEGER)."][^<>]*>,imsS");
 
-// http://code.spip.net/@corriger_typo
+// https://code.spip.net/@corriger_typo
 function corriger_typo($letexte, $lang='') {
 	// Plus vite !
 	if (!$letexte) return $letexte;
@@ -583,7 +583,7 @@ function corriger_typo($letexte, $lang='') {
 
 define('_RACCOURCI_TH_SPAN', '\s*(?:{{[^{}]+}}\s*)?|<');
 
-// http://code.spip.net/@traiter_tableau
+// https://code.spip.net/@traiter_tableau
 function traiter_tableau($bloc) {
 
 	// Decouper le tableau en lignes
@@ -721,7 +721,7 @@ function traiter_tableau($bloc) {
 //
 // Traitement des listes (merci a Michael Parienti)
 //
-// http://code.spip.net/@traiter_listes
+// https://code.spip.net/@traiter_listes
 function traiter_listes ($texte) {
 	global $class_spip, $class_spip_plus;
 	$parags = preg_split(",\n[[:space:]]*\n,S", $texte);
@@ -811,7 +811,7 @@ function traiter_listes ($texte) {
 // on ne sait pas (encore) rapatrier les documents joints
 // Sert aussi a nettoyer un texte qu'on veut mettre dans un <a> etc.
 // TODO: gerer les modeles ?
-// http://code.spip.net/@supprime_img
+// https://code.spip.net/@supprime_img
 function supprime_img($letexte, $message=NULL) {
 	if ($message===NULL) $message = '(' . _T('img_indisponible') . ')';
 	return preg_replace(',<(img|doc|emb)([0-9]+)(\|([^>]*))?'.'\s*/?'.'>,i',
@@ -825,7 +825,7 @@ function supprime_img($letexte, $message=NULL) {
 //
 // deuxieme argument : forcer les <p> meme pour un seul paragraphe
 //
-// http://code.spip.net/@paragrapher
+// https://code.spip.net/@paragrapher
 function paragrapher($letexte, $forcer=true) {
 	global $class_spip;
 
@@ -867,7 +867,7 @@ function paragrapher($letexte, $forcer=true) {
 	return $letexte;
 }
 
-// http://code.spip.net/@traiter_poesie
+// https://code.spip.net/@traiter_poesie
 function traiter_poesie($letexte)
 {
 	if (preg_match_all(",<(poesie|poetry)>(.*)<\/(poesie|poetry)>,UimsS",
@@ -886,7 +886,7 @@ function traiter_poesie($letexte)
 }
 
 // Harmonise les retours chariots et mange les paragraphes html
-// http://code.spip.net/@traiter_retours_chariots
+// https://code.spip.net/@traiter_retours_chariots
 function traiter_retours_chariots($letexte) {
 	$letexte = preg_replace(",\r\n?,S", "\n", $letexte);
 	$letexte = preg_replace(",<p[>[:space:]],iS", "\n\n\\0", $letexte);
@@ -903,7 +903,7 @@ define('_RACCOURCI_PROTECTEUR', "\x1\x2\x3\x4");
 define('_RACCOURCI_BALISE', ",</?[a-z!][^<>]*[".preg_quote(_RACCOURCI_PROTEGER)."][^<>]*>,imsS");
 
 // Nettoie un texte, traite les raccourcis autre qu'URL, la typo, etc.
-// http://code.spip.net/@traiter_raccourcis
+// https://code.spip.net/@traiter_raccourcis
 function traiter_raccourcis($letexte) {
 
 	// Appeler les fonctions de pre_traitement
@@ -968,7 +968,7 @@ function traiter_raccourcis($letexte) {
 
 
 // Filtre a appliquer aux champs du type #TEXTE*
-// http://code.spip.net/@propre
+// https://code.spip.net/@propre
 function propre($t, $connect=null) {
 	// les appels directs a cette fonction depuis le php de l'espace
 	// prive etant historiquement ecrits sans argment $connect

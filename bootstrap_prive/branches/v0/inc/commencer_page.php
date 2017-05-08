@@ -16,7 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // Presentation de l'interface privee, debut du HTML
 //
 
-// http://code.spip.net/@inc_commencer_page_dist
+// https://code.spip.net/@inc_commencer_page_dist
 function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $id_rubrique = "",$menu=true,$minipres=false, $alertes = true) {
 	global $connect_id_auteur;
 
@@ -34,7 +34,7 @@ function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubri
 }
 
 // envoi du doctype et du <head><title>...</head>
-// http://code.spip.net/@init_entete
+// https://code.spip.net/@init_entete
 function init_entete($titre='', $dummy=0, $minipres=false) {
 	include_spip('inc/texte');
 	if (!$nom_site_spip = textebrut(typo($GLOBALS['meta']["nom_site"])))
@@ -57,7 +57,7 @@ function init_head($titre='', $dummy=0, $minipres=false) {
 }
 
 // fonction envoyant la double serie d'icones de redac
-// http://code.spip.net/@init_body
+// https://code.spip.net/@init_body
 function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='',$menu=true) {
 	global $connect_id_auteur, $auth_can_disconnect;
 
@@ -92,13 +92,13 @@ function init_body_class() {
 }
 
 
-// http://code.spip.net/@lien_change_var
+// https://code.spip.net/@lien_change_var
 function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") {
 	$lien = parametre_url($lien, $set, $couleur);
 	return "\n<area shape='rect' href='$lien' coords='$coords' title=\"$titre\" alt=\"$titre\" $mouseOver />";
 }
 
-// http://code.spip.net/@auteurs_recemment_connectes
+// https://code.spip.net/@auteurs_recemment_connectes
 function auteurs_recemment_connectes($id_auteur){
 	return recuperer_fond('prive/objets/liste/auteurs_enligne');
 }

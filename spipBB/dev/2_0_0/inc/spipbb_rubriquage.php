@@ -29,7 +29,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 spipbb_log('included',2,__FILE__);
 
 // ------------------------------------------------------------------------------
-// voir http://code.spip.net/@sous_enfant_rub
+// voir https://code.spip.net/@sous_enfant_rub
 // ------------------------------------------------------------------------------
 function sous_enfant_rubfo($collection2){
 	global $lang_dir, $spip_lang_dir, $spip_lang_left;
@@ -58,7 +58,7 @@ function sous_enfant_rubfo($collection2){
 } // sous_enfant_rubfo
 
 // ------------------------------------------------------------------------------
-// voir http://code.spip.net/@enfant_rub
+// voir https://code.spip.net/@enfant_rub
 // ------------------------------------------------------------------------------
 function enfant_rubfo($collection){
 	global $couleur_foncee, $lang_dir;
@@ -135,7 +135,7 @@ function enfant_rubfo($collection){
 } // enfant_rubfo
 
 // ------------------------------------------------------------------------------
-// voir http://code.spip.net/@afficher_enfant_rub
+// voir https://code.spip.net/@afficher_enfant_rub
 // ------------------------------------------------------------------------------
 function afficher_enfant_rubfo($id_rubrique, $afficher_bouton_creer=false) {
 	global  $spip_lang_right;

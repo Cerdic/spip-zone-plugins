@@ -69,7 +69,7 @@ function auth_pmb_retrouver_login($login, $serveur='') {
 
 // Authentifie via PMB et retourne la ligne SQL decrivant l'utilisateur si ok
 
-// http://code.spip.net/@inc_auth_ldap_dist
+// https://code.spip.net/@inc_auth_ldap_dist
 function auth_pmb_dist ($login, $pass, $serveur='') {
 
 	# spip_log("pmb $login " . ($pass ? "mdp fourni" : "mdp absent"));

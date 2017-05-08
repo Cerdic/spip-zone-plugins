@@ -15,7 +15,7 @@ include_spip('maj/vieille_base/10000/serial');
 include_spip('maj/vieille_base/10000/auxiliaires');
 include_spip('maj/vieille_base/10000/typedoc');
 
-// http://code.spip.net/@creer_base
+// https://code.spip.net/@creer_base
 function maj_vieille_base_10000_create($server='') {
 	global $tables_principales, $tables_auxiliaires, $tables_images, $tables_sequences, $tables_documents, $tables_mime;
 
@@ -64,7 +64,7 @@ function maj_vieille_base_10000_create($server='') {
 			 $desc);
 }
 
-// http://code.spip.net/@stripslashes_base
+// https://code.spip.net/@stripslashes_base
 /*
 function stripslashes_base($table, $champs) {
 	$modifs = '';

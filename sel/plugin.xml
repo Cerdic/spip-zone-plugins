@@ -52,7 +52,7 @@
 	<install>sel_administrations.php</install>
 
 	<!-- ensemble des pipelines :
-		http://code.spip.net/autodoc/@Les-points-d-entree-pipelines
+		https://code.spip.net/autodoc/@Les-points-d-entree-pipelines
 		https://core.spip.net/projects/spip/repository/changes/spip/ecrire/inc_version.php
 		On peut rajouter dans la section pipeline <action>fonction</action>...
 	-->	

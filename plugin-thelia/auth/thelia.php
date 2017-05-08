@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 error_reporting(E_ALL);
 // Authentifie via Thélia et retourne la ligne SQL decrivant l'utilisateur si ok
 
-// http://code.spip.net/@inc_auth_ldap_dist
+// https://code.spip.net/@inc_auth_ldap_dist
 function auth_thelia_dist($login, $pass, $md5pass = "", $md5next = ""){
 
 	if (lire_config("spip_thelia/auth_unique_spip_thelia", "non")=="oui"){

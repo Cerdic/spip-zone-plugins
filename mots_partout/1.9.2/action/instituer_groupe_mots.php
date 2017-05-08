@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/filtres');
 include_spip('base/abstract_sql');
 
-// http://code.spip.net/@action_instituer_groupe_mots_dist
+// https://code.spip.net/@action_instituer_groupe_mots_dist
 function action_instituer_groupe_mots()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -29,7 +29,7 @@ function action_instituer_groupe_mots()
 }
 
 
-// http://code.spip.net/@action_instituer_groupe_mots_post
+// https://code.spip.net/@action_instituer_groupe_mots_post
 function action_instituer_groupe_mots_post($r)
 {
 //	global $messages, $acces_comite, $acces_forum, $acces_minirezo, $new, $articles, $breves, $change_type, $descriptif, $id_groupe, $obligatoire, $rubriques, $syndic, $texte, $unseul;
@@ -67,7 +67,7 @@ function action_instituer_groupe_mots_post($r)
 }
 
 
-// http://code.spip.net/@action_instituer_groupe_mots_get
+// https://code.spip.net/@action_instituer_groupe_mots_get
 function action_instituer_groupe_mots_get($table)
 {
 	$titre = _T('info_mot_sans_groupe');

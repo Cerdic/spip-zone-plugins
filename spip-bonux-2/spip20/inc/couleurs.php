@@ -18,7 +18,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Avec un argument de type tableau, elle remplace le tableau par defaut
 // par celui donne en argument
 
-// http://code.spip.net/@inc_couleurs_dist
+// https://code.spip.net/@inc_couleurs_dist
 function inc_couleurs_dist($choix=NULL,$ajouter = false)
 {
 	static $couleurs_spip = array(

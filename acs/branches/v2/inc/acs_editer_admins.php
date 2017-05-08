@@ -66,7 +66,7 @@ function acs_bouton_bloc_depliable($titre_boite, $flag, $id) {
 
 
 // doc: acs_editer_admins($type, $id, $flag_editable, $cherche_auteur, $ids, $titre_boite = NULL, $script_edit_objet = NULL)
-// (ça ressemble à http://code.spip.net/@inc_editer_auteurs_dist)
+// (ça ressemble à https://code.spip.net/@inc_editer_auteurs_dist)
 // $id est l'id de l'objet à éditer. pour ACS, c'est sans importance puisque l'objet est ACS lui-même
 // Cette usine à gaz spip-ajax sert seulement à affecter à ACS_ADMINS la liste des admins ACS autorisés ...
 function inc_acs_editer_admins($type, $id, $flag, $cherche_auteur, $ids, $titre_boite = NULL, $script_edit_objet = NULL,  $icon="auteur-24.gif") {
@@ -89,7 +89,7 @@ function inc_acs_editer_admins($type, $id, $flag, $cherche_auteur, $ids, $titre_
 	return editer_admins_objet($type, $id, $flag, $cherche_auteur, $ids, $aff_les_admins, $futurs, $titre_boite,$script_edit_objet, $arg_ajax, $icon, $extras);
 }
 
-// http://code.spip.net/@editer_admins_objet
+// https://code.spip.net/@editer_admins_objet
 function editer_admins_objet($type, $id, $flag, $cherche_auteur, $ids, $les_auteurs, $futurs, $titre_boite, $script_edit_objet, $arg_ajax, $icon)
 {
 	global $spip_lang_left, $spip_lang_right, $options;
@@ -123,7 +123,7 @@ function editer_admins_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aute
 	return acs_ajax_action_greffe("acs_editer_admins", $id, $res);
 }
 
-// http://code.spip.net/@determiner_admins_objet
+// https://code.spip.net/@determiner_admins_objet
 function determiner_admins_objet($type, $id, $cond='', $limit='')
 {
 	$les_auteurs = array();
@@ -148,7 +148,7 @@ function determiner_admins_objet($type, $id, $cond='', $limit='')
 
 	return $result;
 }
-// http://code.spip.net/@determiner_non_auteurs
+// https://code.spip.net/@determiner_non_auteurs
 function determiner_non_admins($type, $id, $cond_les_auteurs, $order)
 {
 	$cond = '';
@@ -162,7 +162,7 @@ function determiner_non_admins($type, $id, $cond_les_auteurs, $order)
 	return spip_query("SELECT id_auteur, nom, email, statut FROM spip_auteurs WHERE $cond statut='0minirezo'");
 }
 
-// http://code.spip.net/@afficher_admins_objet
+// https://code.spip.net/@afficher_admins_objet
 function afficher_admins_objet($type, $id, $flag_editable, $cond_les_auteurs, $script_edit, $arg_ajax)
 {
 	global $connect_statut, $options,$connect_id_auteur, $spip_display;
@@ -224,7 +224,7 @@ function afficher_admins_objet($type, $id, $flag_editable, $cond_les_auteurs, $s
 }
 
 
-// http://code.spip.net/@ajouter_auteurs_objet
+// https://code.spip.net/@ajouter_auteurs_objet
 function ajouter_admins_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_ajax)
 {
 	if (!$determiner_non_admins = charger_fonction('determiner_non_admins'.$type,'inc',true))
@@ -257,7 +257,7 @@ function ajouter_admins_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_a
 }
 
 if (!is_callable('afficher_tranches_requete')) {
-  // http://code.spip.net/@afficher_tranches_requete from Spip 1.9.2d (Deleted from 2.0)
+  // https://code.spip.net/@afficher_tranches_requete from Spip 1.9.2d (Deleted from 2.0)
   function afficher_tranches_requete($num_rows, $tmp_var, $url='', $nb_aff = 10, $old_arg=NULL) {
     static $ancre = 0;
     global $browser_name, $spip_lang_right, $spip_display;
@@ -318,7 +318,7 @@ if (!is_callable('afficher_tranches_requete')) {
   
     return $texte;
   }
-  // http://code.spip.net/@afficher_liste
+  // https://code.spip.net/@afficher_liste
   function afficher_liste($largeurs, $table, $styles = '') {
     global $spip_display;
   
@@ -340,7 +340,7 @@ if (!is_callable('afficher_tranches_requete')) {
     return $res;
   }
   
-  // http://code.spip.net/@afficher_liste_display_neq4
+  // https://code.spip.net/@afficher_liste_display_neq4
   function afficher_liste_display_neq4($largeurs, $t, $styles = '') {
     global $spip_lang_left,$browser_name;
     if (!is_array($t) or !count($t)) return "";
@@ -364,7 +364,7 @@ if (!is_callable('afficher_tranches_requete')) {
     return "\n<tr class='tr_liste'$evt>$res</tr>";
   }
   
-  // http://code.spip.net/@afficher_liste_display_eq4
+  // https://code.spip.net/@afficher_liste_display_eq4
   function afficher_liste_display_eq4($largeurs, $t, $styles = '') {
     global $spip_lang_left;
     if (!is_array($t) or !count($t)) return "";
@@ -381,7 +381,7 @@ if (!is_callable('afficher_tranches_requete')) {
     return $res;
   }
 }
-// http://code.spip.net/@objet_auteur_select
+// https://code.spip.net/@objet_auteur_select
 function objet_admin_select($result)
 {
 	global $couleur_claire, $connect_statut ;
@@ -422,7 +422,7 @@ function objet_admin_select($result)
 	return $res;
 }
 
-// http://code.spip.net/@selecteur_auteur_ajax
+// https://code.spip.net/@selecteur_auteur_ajax
 function selecteur_admin_ajax($type, $id, $js, $text)
 {
   include_spip('inc/chercher_rubrique');

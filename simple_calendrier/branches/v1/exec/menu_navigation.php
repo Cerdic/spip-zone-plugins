@@ -21,7 +21,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-// http://code.spip.net/@exec_menu_navigation_dist
+// https://code.spip.net/@exec_menu_navigation_dist
 function exec_menu_navigation_dist() {
 	global $connect_id_auteur, $spip_lang_left;
 

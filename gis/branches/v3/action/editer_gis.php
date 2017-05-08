@@ -58,7 +58,7 @@ function gis_inserer() {
 /**
  * Appelle toutes les fonctions de modification d'un point gis
  * $err est de la forme chaine de langue ou vide si pas d'erreur
- * http://code.spip.net/@articles_set
+ * https://code.spip.net/@articles_set
  *
  * @param  $id_gis
  * @param null $set

@@ -134,7 +134,7 @@ function formulaires_inscription_traiter_dist($mode, $focus, $id=0) {
 // Retour: une chaine message d'erreur 
 // ou un tableau avec au minimum email, nom, mode (redac / forum)
 
-// http://code.spip.net/@test_inscription_dist
+// https://code.spip.net/@test_inscription_dist
 function test_inscription_dist($mode, $mail, $nom, $id=0) {
 
 	include_spip('inc/filtres');
@@ -149,7 +149,7 @@ function test_inscription_dist($mode, $mail, $nom, $id=0) {
 // provisoirement dans le champ Bio, afin de ne pas visualiser les inactifs
 // A sa premiere connexion il obtiendra son statut final (auth->activer())
 
-// http://code.spip.net/@inscription_nouveau
+// https://code.spip.net/@inscription_nouveau
 function inscription_nouveau($desc)
 {
 	if (!isset($desc['login']))
@@ -170,7 +170,7 @@ function inscription_nouveau($desc)
 // fonction redefinissable qui doit retourner un tableau
 // dont les elements seront les arguments de inc_envoyer_mail
 
-// http://code.spip.net/@envoyer_inscription_dist
+// https://code.spip.net/@envoyer_inscription_dist
 function envoyer_inscription_dist($desc, $nom, $mode, $id) {
 
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
@@ -191,7 +191,7 @@ function envoyer_inscription_dist($desc, $nom, $mode, $id) {
 		     $message);
 }
 
-// http://code.spip.net/@test_login
+// https://code.spip.net/@test_login
 function test_login($nom, $mail) {
 	include_spip('inc/charsets');
 	$nom = strtolower(translitteration($nom));
@@ -221,7 +221,7 @@ function test_login($nom, $mail) {
 	}
 }
 
-// http://code.spip.net/@creer_pass_pour_auteur
+// https://code.spip.net/@creer_pass_pour_auteur
 function creer_pass_pour_auteur($id_auteur) {
 	include_spip('inc/acces');
 	$pass = creer_pass_aleatoire(8, $id_auteur);

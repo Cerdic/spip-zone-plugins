@@ -17,7 +17,7 @@ include_spip('public/assembler');
 include_spip('inc/lang');
 include_spip('inc/headers');
 
-// http://code.spip.net/@action_inscription
+// https://code.spip.net/@action_inscription
 function action_inscription() {
 
 	utiliser_langue_visiteur();

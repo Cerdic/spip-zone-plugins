@@ -44,7 +44,7 @@ function moyenne_glissante($valeur = false, $glisse = 0) {
 /**
  * Calculer la moyenne d'un tableau de valeurs
  *
- * http://code.spip.net/@statistiques_moyenne
+ * https://code.spip.net/@statistiques_moyenne
  *
  * @param array $tab
  * @return float

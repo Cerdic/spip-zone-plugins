@@ -16,14 +16,14 @@ include_spip('inc/presentation');
 include_spip('inc/date');
 
 
-// http://code.spip.net/@exec_message_edit_dist
+// https://code.spip.net/@exec_message_edit_dist
 function exec_message_edit_dist()
 {
 	exec_message_edit_args(intval(_request('id_message')), 
 			       _request('new'),
 			       intval(_request('dest')));
 }
-// http://code.spip.net/@exec_message_edit_args
+// https://code.spip.net/@exec_message_edit_args
 function exec_message_edit_args($id_message, $new, $dest)
 {
 	global  $connect_id_auteur, $connect_statut;
@@ -137,7 +137,7 @@ if ( ($rers_email_cache !== "on" AND $connect_statut !== '0minirezo') OR $connec
 	}
 }
 
-// http://code.spip.net/@afficher_si_rdv
+// https://code.spip.net/@afficher_si_rdv
 function afficher_si_rdv($date_heure, $date_fin, $choix)
 {
 	$heures_debut = heures($date_heure);

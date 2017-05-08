@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/filtres');
 include_spip('base/abstract_sql');
 
-// http://code.spip.net/@action_instituer_groupe_mots_dist
+// https://code.spip.net/@action_instituer_groupe_mots_dist
 function action_instituer_groupe_mots_dist()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -31,7 +31,7 @@ function action_instituer_groupe_mots_dist()
 }
 
 
-// http://code.spip.net/@action_instituer_groupe_mots_post
+// https://code.spip.net/@action_instituer_groupe_mots_post
 function action_instituer_groupe_mots_post($r)
 {
 	global $acces_comite, $acces_forum, $acces_minirezo, $new, $articles, $breves, $change_type, $descriptif, $id_groupe, $obligatoire, $rubriques, $syndic, $evenements, $pim_agenda, $texte, $unseul;

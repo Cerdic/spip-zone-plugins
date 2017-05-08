@@ -18,7 +18,7 @@ include_spip('inc/actions');
 
 // Choix dynamique de la couleur
 
-// http://code.spip.net/@choix_couleur
+// https://code.spip.net/@choix_couleur
 function choix_couleur() {
 	global $couleurs_spip;
 	if ($couleurs_spip) {
@@ -32,7 +32,7 @@ function choix_couleur() {
 //
 // affiche un bouton imessage
 //
-// http://code.spip.net/@bouton_imessage
+// https://code.spip.net/@bouton_imessage
 function bouton_imessage($destinataire, $row = '') {
 	// si on passe "force" au lieu de $row, on affiche l'icone sans verification
 	global $connect_id_auteur;
@@ -61,7 +61,7 @@ function bouton_imessage($destinataire, $row = '') {
 
 // Faux HR, avec controle de couleur
 
-// http://code.spip.net/@hr
+// https://code.spip.net/@hr
 function hr($color, $retour = false) {
 	$ret = "<div style='height: 1px; margin-top: 5px; padding-top: 5px; border-top: 1px solid $color;'></div>";
 	
@@ -74,7 +74,7 @@ function hr($color, $retour = false) {
 // Cadres
 //
 
-// http://code.spip.net/@debut_cadre
+// https://code.spip.net/@debut_cadre
 function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	global $spip_display, $spip_lang_left,$accesskey;
 	//use a global var to manage accesskey via debut_cadre and #GET_ACCESSKEY 
@@ -139,7 +139,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	return $ret;
 }
 
-// http://code.spip.net/@fin_cadre
+// https://code.spip.net/@fin_cadre
 function fin_cadre($style) {
 
 	$ret = "</div>";
@@ -151,7 +151,7 @@ function fin_cadre($style) {
 }
 
 
-// http://code.spip.net/@debut_cadre_relief
+// https://code.spip.net/@debut_cadre_relief
 function debut_cadre_relief($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('r', $icone, $fonction, $titre);
 
@@ -159,7 +159,7 @@ function debut_cadre_relief($icone='', $return = false, $fonction='', $titre = '
 	else echo $retour_aff;
 }
 
-// http://code.spip.net/@fin_cadre_relief
+// https://code.spip.net/@fin_cadre_relief
 function fin_cadre_relief($return = false){
 	$retour_aff = fin_cadre('r');
 
@@ -168,7 +168,7 @@ function fin_cadre_relief($return = false){
 }
 
 
-// http://code.spip.net/@debut_cadre_enfonce
+// https://code.spip.net/@debut_cadre_enfonce
 function debut_cadre_enfonce($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('e', $icone, $fonction, $titre);
 
@@ -176,7 +176,7 @@ function debut_cadre_enfonce($icone='', $return = false, $fonction='', $titre = 
 	else echo $retour_aff;
 }
 
-// http://code.spip.net/@fin_cadre_enfonce
+// https://code.spip.net/@fin_cadre_enfonce
 function fin_cadre_enfonce($return = false){
 
 	$retour_aff = fin_cadre('e');
@@ -186,14 +186,14 @@ function fin_cadre_enfonce($return = false){
 }
 
 
-// http://code.spip.net/@debut_cadre_sous_rub
+// https://code.spip.net/@debut_cadre_sous_rub
 function debut_cadre_sous_rub($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('sous_rub', $icone, $fonction, $titre);
 	if ($return) return $retour_aff;
 	else echo $retour_aff;
 }
 
-// http://code.spip.net/@fin_cadre_sous_rub
+// https://code.spip.net/@fin_cadre_sous_rub
 function fin_cadre_sous_rub($return = false){
 	$retour_aff = fin_cadre('sous_rub');
 	if ($return) return $retour_aff;
@@ -202,7 +202,7 @@ function fin_cadre_sous_rub($return = false){
 
 
 
-// http://code.spip.net/@debut_cadre_forum
+// https://code.spip.net/@debut_cadre_forum
 function debut_cadre_forum($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('forum', $icone, $fonction, $titre);
 
@@ -210,7 +210,7 @@ function debut_cadre_forum($icone='', $return = false, $fonction='', $titre = ''
 	else echo $retour_aff;
 }
 
-// http://code.spip.net/@fin_cadre_forum
+// https://code.spip.net/@fin_cadre_forum
 function fin_cadre_forum($return = false){
 	$retour_aff = fin_cadre('forum');
 
@@ -218,7 +218,7 @@ function fin_cadre_forum($return = false){
 	else echo $retour_aff;
 }
 
-// http://code.spip.net/@debut_cadre_thread_forum
+// https://code.spip.net/@debut_cadre_thread_forum
 function debut_cadre_thread_forum($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('thread-forum', $icone, $fonction, $titre);
 
@@ -226,7 +226,7 @@ function debut_cadre_thread_forum($icone='', $return = false, $fonction='', $tit
 	else echo $retour_aff;
 }
 
-// http://code.spip.net/@fin_cadre_thread_forum
+// https://code.spip.net/@fin_cadre_thread_forum
 function fin_cadre_thread_forum($return = false){
 	$retour_aff = fin_cadre('thread-forum');
 
@@ -234,7 +234,7 @@ function fin_cadre_thread_forum($return = false){
 	else echo $retour_aff;
 }
 
-// http://code.spip.net/@debut_cadre_gris_clair
+// https://code.spip.net/@debut_cadre_gris_clair
 function debut_cadre_gris_clair($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('gris-clair', $icone, $fonction, $titre);
 
@@ -242,7 +242,7 @@ function debut_cadre_gris_clair($icone='', $return = false, $fonction='', $titre
 	else echo $retour_aff;
 }
 
-// http://code.spip.net/@fin_cadre_gris_clair
+// https://code.spip.net/@fin_cadre_gris_clair
 function fin_cadre_gris_clair($return = false){
 	$retour_aff = fin_cadre('gris-clair');
 
@@ -251,7 +251,7 @@ function fin_cadre_gris_clair($return = false){
 }
 
 
-// http://code.spip.net/@debut_cadre_couleur
+// https://code.spip.net/@debut_cadre_couleur
 function debut_cadre_couleur($icone='', $return = false, $fonction='', $titre=''){
 	$retour_aff = debut_cadre('couleur', $icone, $fonction, $titre);
 
@@ -259,7 +259,7 @@ function debut_cadre_couleur($icone='', $return = false, $fonction='', $titre=''
 	else echo $retour_aff;
 }
 
-// http://code.spip.net/@fin_cadre_couleur
+// https://code.spip.net/@fin_cadre_couleur
 function fin_cadre_couleur($return = false){
 	$retour_aff = fin_cadre('couleur');
 
@@ -268,7 +268,7 @@ function fin_cadre_couleur($return = false){
 }
 
 
-// http://code.spip.net/@debut_cadre_couleur_foncee
+// https://code.spip.net/@debut_cadre_couleur_foncee
 function debut_cadre_couleur_foncee($icone='', $return = false, $fonction='', $titre=''){
 	$retour_aff = debut_cadre('couleur-foncee', $icone, $fonction, $titre);
 
@@ -276,7 +276,7 @@ function debut_cadre_couleur_foncee($icone='', $return = false, $fonction='', $t
 	else echo $retour_aff;
 }
 
-// http://code.spip.net/@fin_cadre_couleur_foncee
+// https://code.spip.net/@fin_cadre_couleur_foncee
 function fin_cadre_couleur_foncee($return = false){
 	$retour_aff = fin_cadre('couleur-foncee');
 
@@ -284,7 +284,7 @@ function fin_cadre_couleur_foncee($return = false){
 	else echo $retour_aff;
 }
 
-// http://code.spip.net/@debut_cadre_trait_couleur
+// https://code.spip.net/@debut_cadre_trait_couleur
 function debut_cadre_trait_couleur($icone='', $return = false, $fonction='', $titre=''){
 	$retour_aff = debut_cadre('trait-couleur', $icone, $fonction, $titre);
 
@@ -292,7 +292,7 @@ function debut_cadre_trait_couleur($icone='', $return = false, $fonction='', $ti
 	else echo $retour_aff;
 }
 
-// http://code.spip.net/@fin_cadre_trait_couleur
+// https://code.spip.net/@fin_cadre_trait_couleur
 function fin_cadre_trait_couleur($return = false){
 	$retour_aff = fin_cadre('trait-couleur');
 
@@ -305,13 +305,13 @@ function fin_cadre_trait_couleur($return = false){
 //
 // une boite alerte
 //
-// http://code.spip.net/@debut_boite_alerte
+// https://code.spip.net/@debut_boite_alerte
 function debut_boite_alerte() {
 	echo "<p><table cellpadding='6' border='0'><tr><td width='100%' bgcolor='red'>";
 	echo "<table width='100%' cellpadding='12' border='0'><tr><td width='100%' bgcolor='white'>";
 }
 
-// http://code.spip.net/@fin_boite_alerte
+// https://code.spip.net/@fin_boite_alerte
 function fin_boite_alerte() {
 	echo "</td></tr></table>";
 	echo "</td></tr></table>";
@@ -321,13 +321,13 @@ function fin_boite_alerte() {
 //
 // une boite info
 //
-// http://code.spip.net/@debut_boite_info
+// https://code.spip.net/@debut_boite_info
 function debut_boite_info($return=false) {
 	$r ="<div class='cadre-info verdana1'>";
 	if ($return) return $r; else echo $r;
 }
 
-// http://code.spip.net/@fin_boite_info
+// https://code.spip.net/@fin_boite_info
 function fin_boite_info($return=false) {
 	//echo "</font></td></tr></table></div>\n\n";
 	$r = "</div>";
@@ -337,7 +337,7 @@ function fin_boite_info($return=false) {
 //
 // une autre boite
 //
-// http://code.spip.net/@bandeau_titre_boite
+// https://code.spip.net/@bandeau_titre_boite
 function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true) {
 	global $couleur_foncee;
 	if ($boite_importante) {
@@ -363,7 +363,7 @@ function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true
 //
 // une autre boite
 //
-// http://code.spip.net/@bandeau_titre_boite2
+// https://code.spip.net/@bandeau_titre_boite2
 function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $echo = true) {
 	global $spip_lang_left, $spip_display, $browser_name;
 	
@@ -387,7 +387,7 @@ function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $
 
 // Afficher un petit "+" pour lien vers autre page
 
-// http://code.spip.net/@afficher_plus
+// https://code.spip.net/@afficher_plus
 function afficher_plus($lien) {
 	global $options, $spip_lang_right, $spip_display, $browser_name;
 	
@@ -403,7 +403,7 @@ function afficher_plus($lien) {
 // Fonctions d'affichage
 //
 
-// http://code.spip.net/@afficher_liste
+// https://code.spip.net/@afficher_liste
 function afficher_liste($largeurs, $table, $styles = '') {
 	global $browser_name, $spip_display, $spip_lang_left;
 
@@ -450,7 +450,7 @@ function afficher_liste($largeurs, $table, $styles = '') {
 	return $res;
 }
 
-// http://code.spip.net/@afficher_tranches_requete
+// https://code.spip.net/@afficher_tranches_requete
 function afficher_tranches_requete($num_rows, $colspan, $tmp_var, $url='', $nb_aff = 10) {
 	static $ancre = 0;
 	global $spip_lang_right, $spip_display;
@@ -521,7 +521,7 @@ function afficher_tranches_requete($num_rows, $colspan, $tmp_var, $url='', $nb_a
 }
 
 
-// http://code.spip.net/@affiche_tranche_bandeau
+// https://code.spip.net/@affiche_tranche_bandeau
 function affiche_tranche_bandeau($requete, $icone, $col, $fg, $bg, $tmp_var, $titre, $force, $largeurs, $styles, $skel, $own='')
 {
 	global $spip_display ;
@@ -563,21 +563,21 @@ function affiche_tranche_bandeau($requete, $icone, $col, $fg, $bg, $tmp_var, $ti
 }
 
 
-// http://code.spip.net/@afficher_liste_debut_tableau
+// https://code.spip.net/@afficher_liste_debut_tableau
 function afficher_liste_debut_tableau() {
 	global $spip_display;
 
 	if ($spip_display != 4) return "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 }
 
-// http://code.spip.net/@afficher_liste_fin_tableau
+// https://code.spip.net/@afficher_liste_fin_tableau
 function afficher_liste_fin_tableau() {
 	global $spip_display;
 	if ($spip_display != 4) return "</table>";
 }
 
 
-// http://code.spip.net/@puce_statut_article
+// https://code.spip.net/@puce_statut_article
 function puce_statut_article($id, $statut, $id_rubrique) {
 	global $spip_lang_left, $dir_lang, $connect_statut, $options;
 	
@@ -636,7 +636,7 @@ function puce_statut_article($id, $statut, $id_rubrique) {
 	return $inser_puce;
 }
 
-// http://code.spip.net/@puce_statut_breve
+// https://code.spip.net/@puce_statut_breve
 function puce_statut_breve($id, $statut, $type, $droit) {
 	global $spip_lang_left, $dir_lang;
 
@@ -703,7 +703,7 @@ function afficher_script_statut($id, $type, $n, $img, $statut, $title)
 //
 // Afficher tableau d'articles
 //
-// http://code.spip.net/@afficher_articles
+// https://code.spip.net/@afficher_articles
 function afficher_articles($titre_table, $requete, $afficher_visites = false, $afficher_auteurs = true, $obligatoire = false, $afficher_cadre = true, $afficher_descriptif = true) {
 
 	global $connect_id_auteur, $connect_statut, $dir_lang;
@@ -860,7 +860,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	return $tous_id;
 }
 
-// http://code.spip.net/@afficher_articles_boucle
+// https://code.spip.net/@afficher_articles_boucle
 function afficher_articles_boucle($row, &$tous_id, $afficher_auteurs, $afficher_langue, $langue_defaut, $voir_logo)
 {
   global $connect_id_auteur, $dir_lang, $options, $spip_lang_right;
@@ -947,7 +947,7 @@ function afficher_articles_boucle($row, &$tous_id, $afficher_auteurs, $afficher_
 }
 
 
-// http://code.spip.net/@afficher_articles_trad
+// https://code.spip.net/@afficher_articles_trad
 function afficher_articles_trad($titre_table, $requete, $afficher_visites = false, $afficher_auteurs = true,
 		$obligatoire = false, $afficher_cadre = true, $afficher_descriptif = true) {
 
@@ -1064,7 +1064,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 	return $tous_id;
 }
 
-// http://code.spip.net/@afficher_articles_trad_boucle
+// https://code.spip.net/@afficher_articles_trad_boucle
 function afficher_articles_trad_boucle($row, &$tous_id, $afficher_langue, $langue_defaut, $langues_site)
 {
 	global $dir_lang,  $spip_lang_right;
@@ -1152,7 +1152,7 @@ function afficher_articles_trad_boucle($row, &$tous_id, $afficher_langue, $langu
 // Afficher tableau de breves
 //
 
-// http://code.spip.net/@afficher_breves
+// https://code.spip.net/@afficher_breves
 function afficher_breves($titre_table, $requete, $affrub=false) {
 	global  $couleur_foncee, $options;	
  
@@ -1182,7 +1182,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 
 }
 
-// http://code.spip.net/@afficher_breves_boucle
+// https://code.spip.net/@afficher_breves_boucle
 function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 {
   global  $dir_lang, $options, $connect_statut, $spip_lang_right;
@@ -1246,7 +1246,7 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 // Afficher tableau de rubriques
 //
 
-// http://code.spip.net/@afficher_rubriques
+// https://code.spip.net/@afficher_rubriques
 function afficher_rubriques($titre_table, $requete) {
 	global $options;
 
@@ -1256,7 +1256,7 @@ function afficher_rubriques($titre_table, $requete) {
 	return affiche_tranche_bandeau($requete, "rubrique-24.gif", 3, "#999999", "white", $tmp_var, $titre_table, false, $largeurs, $styles, 'afficher_rubriques_boucle');
 }
 
-// http://code.spip.net/@afficher_rubriques_boucle
+// https://code.spip.net/@afficher_rubriques_boucle
 function afficher_rubriques_boucle($row, &$tous_id)
 {
 	$vals = '';
@@ -1294,7 +1294,7 @@ function afficher_rubriques_boucle($row, &$tous_id)
 //
 // Afficher des auteurs sur requete SQL
 //
-// http://code.spip.net/@bonhomme_statut
+// https://code.spip.net/@bonhomme_statut
 function bonhomme_statut($row) {
 	global $connect_statut;
 
@@ -1323,7 +1323,7 @@ function bonhomme_statut($row) {
 }
 
 // La couleur du statut
-// http://code.spip.net/@puce_statut
+// https://code.spip.net/@puce_statut
 function puce_statut($statut, $type='article') {
 	switch ($statut) {
 		case 'publie':
@@ -1340,7 +1340,7 @@ function puce_statut($statut, $type='article') {
 }
 
 
-// http://code.spip.net/@afficher_auteurs
+// https://code.spip.net/@afficher_auteurs
 function afficher_auteurs ($titre_table, $requete) {
 
 	if (!$requete['SELECT']) $requete['SELECT'] = '*' ;
@@ -1391,7 +1391,7 @@ function afficher_auteurs ($titre_table, $requete) {
 	return $tous_id;
 }
 
-// http://code.spip.net/@affiche_auteur_boucle
+// https://code.spip.net/@affiche_auteur_boucle
 function affiche_auteur_boucle($row, &$tous_id)
 {
 	$vals = '';
@@ -1413,7 +1413,7 @@ function affiche_auteur_boucle($row, &$tous_id)
 // Afficher les forums
 //
 
-// http://code.spip.net/@afficher_forum
+// https://code.spip.net/@afficher_forum
 function afficher_forum($request, $retour, $arg, $controle_id_article = false) {
 	global $spip_display;
 	static $compteur_forum = 0;
@@ -1446,7 +1446,7 @@ function afficher_forum($request, $retour, $arg, $controle_id_article = false) {
 	return $res;
 }
 
-// http://code.spip.net/@afficher_forum_thread
+// https://code.spip.net/@afficher_forum_thread
 function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_forum, $i, $retour, $arg) {
 	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right, $spip_display;
 	static $voir_logo = array(); // pour ne calculer qu'une fois
@@ -1560,7 +1560,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 }
 
 
-// http://code.spip.net/@afficher_forum_logo
+// https://code.spip.net/@afficher_forum_logo
 function afficher_forum_logo($statut, $titre_boite)
 {
 	if ($statut == "prive") $logo = "forum-interne-24.gif";
@@ -1570,7 +1570,7 @@ function afficher_forum_logo($statut, $titre_boite)
 	return debut_cadre_forum($logo, true, "", $titre_boite);
 }
 
-// http://code.spip.net/@afficher_forum_mots
+// https://code.spip.net/@afficher_forum_mots
 function afficher_forum_mots($id_forum)
 {
 	$result = spip_query("SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot");
@@ -1589,7 +1589,7 @@ function afficher_forum_mots($id_forum)
 
 // affiche les traits de liaisons entre les reponses
 
-// http://code.spip.net/@afficher_forum_4
+// https://code.spip.net/@afficher_forum_4
 function afficher_forum_4($compteur_forum, $nb_forum, $thread)
 {
 	global $spip_lang_rtl;
@@ -1611,7 +1611,7 @@ function afficher_forum_4($compteur_forum, $nb_forum, $thread)
 }
 
 
-// http://code.spip.net/@envoi_link
+// https://code.spip.net/@envoi_link
 function envoi_link($nom_site_spip, $rubrique="") {
 	global $connect_statut, $connect_toutes_rubriques, $spip_display;
 	global $spip_lang, $couleur_claire, $couleur_foncee;
@@ -1674,7 +1674,7 @@ function envoi_link($nom_site_spip, $rubrique="") {
 	return $res . $js;
 }
 
-// http://code.spip.net/@debut_javascript
+// https://code.spip.net/@debut_javascript
 function debut_javascript($admin, $stat)
 {
 	global $spip_lang_left, $browser_name, $browser_version;
@@ -1719,14 +1719,14 @@ function debut_javascript($admin, $stat)
 
 // Fonctions onglets
 
-// http://code.spip.net/@onglet_relief_inter
+// https://code.spip.net/@onglet_relief_inter
 function onglet_relief_inter(){
 	
 	echo "<td>&nbsp;</td>";
 	
 }
 
-// http://code.spip.net/@debut_onglet
+// https://code.spip.net/@debut_onglet
 function debut_onglet(){
 
 	echo "\n\n";
@@ -1734,13 +1734,13 @@ function debut_onglet(){
 	echo "<tr>";
 }
 
-// http://code.spip.net/@fin_onglet
+// https://code.spip.net/@fin_onglet
 function fin_onglet(){
 	echo "</tr>";
 	echo "</table></div>\n\n";
 }
 
-// http://code.spip.net/@onglet
+// https://code.spip.net/@onglet
 function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 	global $spip_display, $spip_lang_left ;
 
@@ -1783,7 +1783,7 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 	echo "</td>";
 }
 
-// http://code.spip.net/@barre_onglets
+// https://code.spip.net/@barre_onglets
 function barre_onglets($rubrique, $ongletCourant){
 	$onglets= definir_barre_onglets($rubrique);
 	if(count($onglets)==0) return;
@@ -1884,7 +1884,7 @@ function icone_bandeau_principal($detail, $page = "vide", $rubrique = "", $sous_
 
 
 
-// http://code.spip.net/@icone_bandeau_secondaire
+// https://code.spip.net/@icone_bandeau_secondaire
 function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique, $aide=""){
 	global $spip_display;
 	global $menu_accesskey, $compteur_survol;
@@ -1948,7 +1948,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 
 
 
-// http://code.spip.net/@icone
+// https://code.spip.net/@icone
 function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 	global $spip_display, $compteur_survol;
 
@@ -2002,7 +2002,7 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 		return $icone;
 }
 
-// http://code.spip.net/@icone_horizontale
+// https://code.spip.net/@icone_horizontale
 function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = true, $javascript='') {
 	global $spip_display;
 
@@ -2081,7 +2081,7 @@ function bandeau_barre_verticale(){
 
 
 // lien changement de couleur
-// http://code.spip.net/@lien_change_var
+// https://code.spip.net/@lien_change_var
 function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") {
 	$lien = parametre_url($lien, $set, $couleur);
 	return "\n<area shape='rect' href='$lien' coords='$coords' title=\"$titre\" alt=' ' $mouseOver>";
@@ -2091,7 +2091,7 @@ function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") 
 // Presentation de l'interface privee, debut du HTML
 //
 
-// http://code.spip.net/@debut_page
+// https://code.spip.net/@debut_page
 function debut_page($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $onLoad = "", $css="", $id_rubrique = "") {
 	
 	include_spip('public/assembler');
@@ -2150,7 +2150,7 @@ function init_entete($titre, $rubrique, $css='',$onLoad = '') {
 //This function can be used for both squelette and php pages
 //squelette pages call this function from debut_page.html     
 //$onLoad is not supported. Use the pipeline "header_prive"
-// http://code.spip.net/@init_body
+// https://code.spip.net/@init_body
 function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $id_rubrique='',$echo=true) {
 	global $couleur_foncee, $couleur_claire, $adresse_site;
 	global $connect_id_auteur;
@@ -2230,7 +2230,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 }
 
 
-// http://code.spip.net/@debut_corps_page
+// https://code.spip.net/@debut_corps_page
 function debut_corps_page($rubrique='',$echo=true) {
 	global $couleur_foncee;
 	global $connect_id_auteur;
@@ -2285,7 +2285,7 @@ function debut_corps_page($rubrique='',$echo=true) {
 }
 
 
-// http://code.spip.net/@gros_titre
+// https://code.spip.net/@gros_titre
 function gros_titre($titre, $ze_logo='', $aff=true){
 	global $couleur_foncee, $spip_display;
 	if ($spip_display == 4) {
@@ -2305,7 +2305,7 @@ function gros_titre($titre, $ze_logo='', $aff=true){
 // Cadre centre (haut de page)
 //
 
-// http://code.spip.net/@debut_grand_cadre
+// https://code.spip.net/@debut_grand_cadre
 function debut_grand_cadre($return=false){
 	global $spip_ecran;
 	
@@ -2316,7 +2316,7 @@ function debut_grand_cadre($return=false){
 
 }
 
-// http://code.spip.net/@fin_grand_cadre
+// https://code.spip.net/@fin_grand_cadre
 function fin_grand_cadre($return=false){
 	$res = "\n</td></tr></table>";
 	if ($return) return $res; else echo $res;
@@ -2324,14 +2324,14 @@ function fin_grand_cadre($return=false){
 
 // Cadre formulaires
 
-// http://code.spip.net/@debut_cadre_formulaire
+// https://code.spip.net/@debut_cadre_formulaire
 function debut_cadre_formulaire($style=''){
 	echo "\n<div class='cadre-formulaire'" .
 	  (!$style ? "" : " style='$style'") .
 	   ">";
 }
 
-// http://code.spip.net/@fin_cadre_formulaire
+// https://code.spip.net/@fin_cadre_formulaire
 function fin_cadre_formulaire(){
 	echo "</div>\n";
 }
@@ -2342,7 +2342,7 @@ function fin_cadre_formulaire(){
 // Debut de la colonne de gauche
 //
 
-// http://code.spip.net/@debut_gauche
+// https://code.spip.net/@debut_gauche
 function debut_gauche($rubrique = "accueil", $return=false) {
 	global $connect_statut;
 	global $options, $spip_display;
@@ -2388,7 +2388,7 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 // Presentation de l''interface privee, marge de droite
 //
 
-// http://code.spip.net/@creer_colonne_droite
+// https://code.spip.net/@creer_colonne_droite
 function creer_colonne_droite($rubrique="", $return=false){
 	global $deja_colonne_droite;
 	global $flag_3_colonnes, $flag_centre_large;
@@ -2424,7 +2424,7 @@ function creer_colonne_droite($rubrique="", $return=false){
 
 }
 
-// http://code.spip.net/@debut_droite
+// https://code.spip.net/@debut_droite
 function debut_droite($rubrique="", $return=false) {
 	global $options, $spip_ecran, $deja_colonne_droite, $spip_display;
 	global $spip_lang_left, $couleur_foncee, $couleur_claire;
@@ -2508,7 +2508,7 @@ function liste_articles_bloques()
 // Presentation de l'interface privee, fin de page et flush()
 //
 
-// http://code.spip.net/@fin_html
+// https://code.spip.net/@fin_html
 function fin_html() {
 
 	echo "</font>", $GLOBALS['rejoue_session'];
@@ -2522,7 +2522,7 @@ function fin_html() {
 }
 
 
-// http://code.spip.net/@fin_page
+// https://code.spip.net/@fin_page
 function fin_page($credits='') {
 	global $spip_display;
 
@@ -2549,7 +2549,7 @@ function fin_page($credits='') {
 	fin_html();
 }
 
-// http://code.spip.net/@debloquer_article
+// https://code.spip.net/@debloquer_article
 function debloquer_article($arg, $texte) {
 	$lien = parametre_url(self(), 'debloquer_article', $arg, '&');
 	return "<a href='" .
@@ -2602,7 +2602,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30)
 // Afficher la hierarchie des rubriques
 //
 
-// http://code.spip.net/@afficher_hierarchie
+// https://code.spip.net/@afficher_hierarchie
 function afficher_hierarchie($id_rubrique) {
 	global $spip_lang_left;
 
@@ -2642,7 +2642,7 @@ function afficher_hierarchie($id_rubrique) {
 }
 
 // Pour construire des menu avec SELECTED
-// http://code.spip.net/@mySel
+// https://code.spip.net/@mySel
 function mySel($varaut,$variable, $option = NULL) {
 	$res = ' value="'.$varaut.'"' . (($variable==$varaut) ? ' selected="selected"' : '');
 
@@ -2651,7 +2651,7 @@ function mySel($varaut,$variable, $option = NULL) {
 
 
 // Voir en ligne, ou apercu, ou rien (renvoie tout le bloc)
-// http://code.spip.net/@voir_en_ligne
+// https://code.spip.net/@voir_en_ligne
 function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $echo = true) {
 	global $connect_statut;
 
@@ -2705,7 +2705,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $echo
 
 //
 // Creer un bouton qui renvoie vers la bonne url spip_rss
-// http://code.spip.net/@bouton_spip_rss
+// https://code.spip.net/@bouton_spip_rss
 function bouton_spip_rss($op, $args, $fmt='rss') {
 
 	include_spip('inc/acces');
@@ -2747,7 +2747,7 @@ function bouton_spip_rss($op, $args, $fmt='rss') {
 
 // Fonction pour la messagerie et la page d'accueil
 
-// http://code.spip.net/@http_calendrier_rv
+// https://code.spip.net/@http_calendrier_rv
 function http_calendrier_rv($messages, $type) {
 	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 

@@ -304,7 +304,7 @@ function sql_updateq($table, $exp, $where='', $desc=array(), $serveur='')
 
 #------------------------------------------------------------#
 // from req/mysql.php 193
-// http://code.spip.net/@spip_mysql_updateq
+// https://code.spip.net/@spip_mysql_updateq
 #------------------------------------------------------------#
 if (!function_exists('spip_mysql_updateq')) {
 function spip_mysql_updateq($table, $champs, $where='', $desc=array(), $serveur='')
@@ -429,7 +429,7 @@ function sql_showtable($table, $table_spip = false, $serveur='')
 } } // sql_showtable
 
 #------------------------------------------------------------#
-# voir http://code.spip.net/@sql_in
+# voir https://code.spip.net/@sql_in
 #------------------------------------------------------------#
 if (!function_exists('sql_in')) {
 function sql_in($val, $valeurs, $not='', $serveur='') {
@@ -443,7 +443,7 @@ function sql_in($val, $valeurs, $not='', $serveur='') {
 
 #------------------------------------------------------------#
 # orig req/mysql
-# voir http://code.spip.net/@sql_in
+# voir https://code.spip.net/@sql_in
 #------------------------------------------------------------#
 if (!function_exists('spip_mysql_quote')) {
 function spip_mysql_quote($v)
@@ -453,7 +453,7 @@ function spip_mysql_quote($v)
 
 #------------------------------------------------------------#
 # orig base/connect_sql
-# voir http://code.spip.net/@_q
+# voir https://code.spip.net/@_q
 #------------------------------------------------------------#
 if (!function_exists('_q')) {
 function _q ($a) {
@@ -463,7 +463,7 @@ function _q ($a) {
 } } // _q
 
 #------------------------------------------------------------#
-# voir http://code.spip.net/@sql_in
+# voir https://code.spip.net/@sql_in
 #
 # IN (...) est limite a 255 elements, d'ou cette fonction assistante
 #
@@ -488,7 +488,7 @@ function spip_mysql_in($val, $valeurs, $not='', $serveur='') {
 } } // spip_mysql_in
 
 #------------------------------------------------------------#
-// cf http://code.spip.net/@sql_quote
+// cf https://code.spip.net/@sql_quote
 #------------------------------------------------------------#
 if (!function_exists('sql_quote')) {
 function sql_quote($val, $serveur='')
@@ -497,7 +497,7 @@ function sql_quote($val, $serveur='')
 } } // sql_quote
 
 #------------------------------------------------------------#
-// cf http://code.spip.net/@sql_countsel
+// cf https://code.spip.net/@sql_countsel
 #------------------------------------------------------------#
 if (!function_exists('sql_countsel')) {
 function sql_countsel($from = array(), $where = array(),

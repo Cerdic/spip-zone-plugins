@@ -27,7 +27,7 @@
     <!--pipeline, surcharge de fonction à des moments précis de la génération d'une page SPIP => traitements ajoutés au core, modifier comportement spip -->
     <pipeline>
        <!-- pour connaître l'ensemble des pipelines voir :
-      http://code.spip.net/@Les-points-d-entree-pipelines
+      https://code.spip.net/@Les-points-d-entree-pipelines
       http://trac.rezo.net/trac/spip/browser/spip/ecrire/inc_version.php -->
 			 <nom>declarer_tables_principales</nom>
        <!-- nom de la fonction à appeler sans son prefixe -->

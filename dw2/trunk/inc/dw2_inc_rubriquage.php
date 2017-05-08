@@ -13,7 +13,7 @@
 */
 
 
-// modif de (inc/rubrique) http://code.spip.net/@sous_enfant_rub
+// modif de (inc/rubrique) https://code.spip.net/@sous_enfant_rub
 function sous_enfants_rubrique($collection2){
 	global $lang_dir, $spip_lang_dir, $spip_lang_left;
 
@@ -48,7 +48,7 @@ function sous_enfants_rubrique($collection2){
 }
 
 
-// origine: http://code.spip.net/@enfant_rub
+// origine: https://code.spip.net/@enfant_rub
 function enfants_rubrique($collection){
 	global $couleur_foncee, $lang_dir;
 	global $spip_display, $spip_lang_left, $spip_lang_right, $spip_lang;
@@ -290,7 +290,7 @@ function afficher_entete_restreindre($id_rubrique,$id_article) {
 
 
 
-// http://code.spip.net/@afficher_enfant_rub
+// https://code.spip.net/@afficher_enfant_rub
 // rubrique-secteur / sous-rub dble colonne
 function afficher_enfants_rubrique($id_rubrique) {
 	global  $spip_lang_right;

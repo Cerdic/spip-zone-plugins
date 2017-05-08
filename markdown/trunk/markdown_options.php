@@ -19,7 +19,7 @@ $GLOBALS['spip_pipeline']['post_propre'] = (isset($GLOBALS['spip_pipeline']['pos
 
 // - pour $source voir commentaire infra (echappe_retour)
 // - pour $no_transform voir le filtre post_autobr dans inc/filtres
-// http://code.spip.net/@echappe_html
+// https://code.spip.net/@echappe_html
 function echappe_html_3017($letexte, $source='', $no_transform=false,
 $preg='') {
 	if (!is_string($letexte) or !strlen($letexte))

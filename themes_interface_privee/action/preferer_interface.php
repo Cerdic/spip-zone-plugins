@@ -2,7 +2,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
-// http://code.spip.net/@action_preferer_dist
+// https://code.spip.net/@action_preferer_dist
 function action_preferer_interface() {
 	$arg = $_GET['arg'];
 

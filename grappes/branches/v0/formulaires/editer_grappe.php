@@ -26,7 +26,7 @@ function formulaires_editer_grappe_charger_dist($id_grappe='new',$retour='', $co
 }
 
 // Choix par defaut des options de presentation
-// http://code.spip.net/@articles_edit_config
+// https://code.spip.net/@articles_edit_config
 function grappes_edit_config($row)
 {
 	global $spip_ecran, $spip_lang, $spip_display;
@@ -44,7 +44,7 @@ function formulaires_editer_grappe_verifier_dist($id_grappes='new',$retour='', $
 	return $erreurs;
 }
 
-// http://code.spip.net/@inc_editer_groupe_mot_dist
+// https://code.spip.net/@inc_editer_groupe_mot_dist
 function formulaires_editer_grappe_traiter_dist($id_grappes='new',$retour='', $config_fonc='grappes_edit_config', $row=array(), $hidden=''){
 	$message = '';
 	set_request('redirect','');

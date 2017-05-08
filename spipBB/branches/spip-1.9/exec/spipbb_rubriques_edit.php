@@ -37,7 +37,7 @@ spipbb_log('included',3,__FILE__);
 include_spip('inc/documents');
 
 // ------------------------------------------------------------------------------
-// source http://code.spip.net/@exec_rubriques_edit_dist
+// source https://code.spip.net/@exec_rubriques_edit_dist
 // ------------------------------------------------------------------------------
 function exec_spipbb_rubriques_edit_dist() {
 

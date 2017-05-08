@@ -16,7 +16,7 @@ include_spip('maj/vieille_base/13000/auxiliaires');
 include_spip('maj/vieille_base/13000/typedoc');
 include_spip('base/create');
 
-// http://code.spip.net/@creer_base
+// https://code.spip.net/@creer_base
 function maj_vieille_base_13000_create($serveur='') {
 	global $tables_principales, $tables_auxiliaires;
 

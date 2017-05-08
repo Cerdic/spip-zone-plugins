@@ -8,7 +8,7 @@ spipbb_log("included",3,__FILE__);
 # base  script :inc/extra.php : function extra_recup_saisie()
 # qq modifs, retourne un array()
 // recupere les valeurs postees pour reconstituer l'extra
-// http://code.spip.net/@extra_recup_saisie
+// https://code.spip.net/@extra_recup_saisie
 function spipbb_extra_recup_saisie($type, $c=false) {
 	$champs = $GLOBALS['champs_extra'][$type];
 	$extra = Array();

@@ -9,7 +9,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/forum');
 
-// http://code.spip.net/@exec_naviguer_dist
+// https://code.spip.net/@exec_naviguer_dist
 function exec_naviguer_dist()
 {
 	global $id_rubrique, $spip_display, $cherche_mot,  $select_groupe;
@@ -135,7 +135,7 @@ function exec_naviguer_dist()
 	echo fin_gauche(), fin_page();
 }
 
-// http://code.spip.net/@infos_naviguer
+// https://code.spip.net/@infos_naviguer
 function infos_naviguer($id_rubrique, $statut, $ze_logo)
 {
 	if ($id_rubrique > 0) {
@@ -182,7 +182,7 @@ function infos_naviguer($id_rubrique, $statut, $ze_logo)
 }
 
 
-// http://code.spip.net/@raccourcis_naviguer
+// https://code.spip.net/@raccourcis_naviguer
 function raccourcis_naviguer($id_rubrique, $id_parent)
 {
 	global $connect_statut;
@@ -208,7 +208,7 @@ function raccourcis_naviguer($id_rubrique, $id_parent)
 	echo bloc_des_raccourcis($res);
 }
 
-// http://code.spip.net/@langue_naviguer
+// https://code.spip.net/@langue_naviguer
 function langue_naviguer($id_rubrique, $id_parent, $flag_editable)
 {
 
@@ -245,7 +245,7 @@ if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBAL
  }
 }
 
-// http://code.spip.net/@contenu_naviguer
+// https://code.spip.net/@contenu_naviguer
 function contenu_naviguer($id_rubrique, $id_parent) {
 
 	global  $connect_toutes_rubriques, $spip_lang_right;
@@ -372,7 +372,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	return $res;
 }
 
-// http://code.spip.net/@naviguer_doc
+// https://code.spip.net/@naviguer_doc
 function naviguer_doc ($id, $type = "article", $script, $flag_editable) {
 	global $spip_lang_left;
 
@@ -406,7 +406,7 @@ EOF;
 	. $res;
 }
 
-// http://code.spip.net/@montre_naviguer
+// https://code.spip.net/@montre_naviguer
 function montre_naviguer($id_rubrique, $titre, $descriptif, $logo, $flag_editable)
 {
   global $spip_lang_right, $spip_lang_left;
@@ -433,7 +433,7 @@ function montre_naviguer($id_rubrique, $titre, $descriptif, $logo, $flag_editabl
   echo "</table>\n";
 }
 
-// http://code.spip.net/@tester_rubrique_vide
+// https://code.spip.net/@tester_rubrique_vide
 function tester_rubrique_vide($id_rubrique) {
 	$n = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_rubriques WHERE id_parent='$id_rubrique' LIMIT 1"));
 	if ($n['n'] > 0) return false;
@@ -453,7 +453,7 @@ function tester_rubrique_vide($id_rubrique) {
 	return true;
 }
 
-// http://code.spip.net/@bouton_supprimer_naviguer
+// https://code.spip.net/@bouton_supprimer_naviguer
 function bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable)
 {
 	if (($id_rubrique>0) AND tester_rubrique_vide($id_rubrique) AND $flag_editable) {

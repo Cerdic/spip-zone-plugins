@@ -24,7 +24,7 @@ spip_connect();
 // Voir commentaires dans balise/formulaire_forum
 
 
-// http://code.spip.net/@controler_forum_abo
+// https://code.spip.net/@controler_forum_abo
 function controler_forum_abo($retour)
 {
 	global $auteur_session;
@@ -44,7 +44,7 @@ function controler_forum_abo($retour)
 		}
 }
 
-// http://code.spip.net/@controler_forum
+// https://code.spip.net/@controler_forum
 function controler_forum($id) {
 
 	// Reglage forums d'article
@@ -60,7 +60,7 @@ function controler_forum($id) {
 
 }
 
-// http://code.spip.net/@mots_du_forum
+// https://code.spip.net/@mots_du_forum
 function mots_du_forum($ajouter_mot, $id_message)
 {
 	foreach ($ajouter_mot as $id_mot)
@@ -69,14 +69,14 @@ function mots_du_forum($ajouter_mot, $id_message)
 }
 
 
-// http://code.spip.net/@reduce_strlen
+// https://code.spip.net/@reduce_strlen
 function reduce_strlen($n, $c) 
 {
   return $n - strlen($c);
 }
 
 
-// http://code.spip.net/@tracer_erreur_forum
+// https://code.spip.net/@tracer_erreur_forum
 function tracer_erreur_forum($type='') {
 	spip_log("erreur forum ($type): ".print_r($_POST, true));
 
@@ -90,7 +90,7 @@ function tracer_erreur_forum($type='') {
 	}
 }
 
-// http://code.spip.net/@inc_forum_insert_dist
+// https://code.spip.net/@inc_forum_insert_dist
 function inc_forum_insert() {
 
 	// Ne pas se laisser polluer par les pollueurs de globales

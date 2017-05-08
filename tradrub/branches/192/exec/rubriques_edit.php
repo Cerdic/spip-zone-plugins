@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/documents');
 
-// http://code.spip.net/@exec_rubriques_edit_dist
+// https://code.spip.net/@exec_rubriques_edit_dist
 function exec_rubriques_edit_dist()
 {
 	global

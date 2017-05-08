@@ -12,7 +12,7 @@ function auteurs_syndic_autoriser(){}
 /**
  * 
  * Autoriser a modifier un site
- * Voir l'original également http://code.spip.net/@autoriser_site_modifier_dist
+ * Voir l'original également https://code.spip.net/@autoriser_site_modifier_dist
  * 
  * @param unknown_type $faire
  * @param unknown_type $type

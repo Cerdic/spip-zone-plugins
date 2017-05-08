@@ -35,7 +35,7 @@ include_spip('inc/headers');
 // il faut ignorer son appel si la meta indiquant l'action en cours 
 // est absente.
 
-// http://code.spip.net/@exec_import_all_dist
+// https://code.spip.net/@exec_import_all_dist
 function exec_import_all_dist()
 {
 	$archive=_request('archive');
@@ -94,7 +94,7 @@ function exec_import_all_dist()
 	}
 }
 
-// http://code.spip.net/@import_queldir
+// https://code.spip.net/@import_queldir
 function import_queldir()
 {
 	global $connect_toutes_rubriques, $connect_login;

@@ -10,7 +10,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// similar to http://code.spip.net/@exec_editer_auteurs_dist
+// similar to https://code.spip.net/@exec_editer_auteurs_dist
 //
 function exec_acs_editer_admins() {
 	$type = _request('type');

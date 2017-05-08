@@ -23,7 +23,7 @@ include_spip('inc/headers');
  * joint a au moins 1 article, breve ou rubrique publie
  *
  * Action fortement pompée sur acceder_document du core
- * http://code.spip.net/@action_acceder_document_dist
+ * https://code.spip.net/@action_acceder_document_dist
  *
  * @return
  */

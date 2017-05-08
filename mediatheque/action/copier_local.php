@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Il s'agit de la partie logique, c'est a dire que cette fonction
 // realise la copie.
 
-// http://code.spip.net/@action_copier_local_dist
+// https://code.spip.net/@action_copier_local_dist
 function action_copier_local_dist($id_document=0) {
 
 	if (!$id_document){
@@ -37,7 +37,7 @@ function action_copier_local_dist($id_document=0) {
 	}
 }
 
-// http://code.spip.net/@action_copier_local_post
+// https://code.spip.net/@action_copier_local_post
 function action_copier_local_post($id_document) {
 
 	// Il faut la source du document pour le copier

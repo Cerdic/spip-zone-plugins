@@ -113,7 +113,7 @@ function tickets_affiche($id_ticket, $row){
 	echo fin_gauche(), fin_page();
 }
 
-// http://code.spip.net/@bouton_modifier_articles
+// https://code.spip.net/@bouton_modifier_articles
 function bouton_modifier_tickets($id_ticket, $flag_modif, $mode, $ip, $im, $align='')
 {
 	if ($flag_modif) {
@@ -123,7 +123,7 @@ function bouton_modifier_tickets($id_ticket, $flag_modif, $mode, $ip, $im, $alig
 	else return icone_inline(_T('tickets:icone_modifier_ticket'), generer_url_ecrire("ticket_editer","id_ticket=$id_ticket"), find_in_path('imgs/bugs.png'), "edit.gif", $align);
 }
 
-// http://code.spip.net/@afficher_corps_articles
+// https://code.spip.net/@afficher_corps_articles
 function afficher_corps_tickets($id_ticket, $row)
 {
 	$res = '';

@@ -21,7 +21,7 @@ include_spip('inc/date');
 // En mode Ajax pour eviter de recharger toute la page ou il se trouve
 // (surtout si c'est un portfolio)
 
-// http://code.spip.net/@inc_legender_dist
+// https://code.spip.net/@inc_legender_dist
 function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre, $deplier=false) {
 
 	// + securite (avec le script exec=legender ca vient de dehors)
@@ -149,7 +149,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	return ajax_action_greffe("legender-$id_document", $corps);
 }
 
-// http://code.spip.net/@vignette_formulaire_legender
+// https://code.spip.net/@vignette_formulaire_legender
 function vignette_formulaire_legender($id_document, $document, $script, $type, $id, $ancre)
 {
 	$id_vignette = $document['id_vignette'];
@@ -184,7 +184,7 @@ function vignette_formulaire_legender($id_document, $document, $script, $type, $
 
 
 // Bloc d'edition de la taille du doc (pour embed)
-// http://code.spip.net/@formulaire_taille
+// https://code.spip.net/@formulaire_taille
 function formulaire_taille($document) {
 
 	// (on ne le propose pas pour les images qu'on sait
@@ -218,7 +218,7 @@ function formulaire_taille($document) {
 	}
 }
 
-// http://code.spip.net/@date_formulaire_legender
+// https://code.spip.net/@date_formulaire_legender
 function date_formulaire_legender($date, $id_document) {
 
 	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)){

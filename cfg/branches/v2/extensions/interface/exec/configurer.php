@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // apres sa modification par appel du script action/configurer 
 // redirigeant ici.
 
-// http://code.spip.net/@exec_configurer_dist
+// https://code.spip.net/@exec_configurer_dist
 function exec_configurer_dist()
 {
 	// pour la petite histoire, les formulaires de configurations

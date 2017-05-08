@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // pour le support des vieux dump
 // pff ou vous l'avez trouve ce dump ?
-// http://code.spip.net/@inc_import_0_0_dist
+// https://code.spip.net/@inc_import_0_0_dist
 function inc_import_0_0_dist($f, $request, $gz='fread') {
 	global $import_ok;
 

@@ -13,14 +13,14 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;    #securite
 
 
-// http://code.spip.net/@balise_FORMULAIRE_ADMIN
+// https://code.spip.net/@balise_FORMULAIRE_ADMIN
 function balise_FORMULAIRE_ADMIN ($p) {
     return calculer_balise_dynamique($p,'FORMULAIRE_ADMIN', array());
 }
 
 # on ne peut rien dire au moment de l'execution du squelette
 
-// http://code.spip.net/@balise_FORMULAIRE_ADMIN_stat
+// https://code.spip.net/@balise_FORMULAIRE_ADMIN_stat
 function balise_FORMULAIRE_ADMIN_stat($args, $filtres) {
     return $args;
 }
@@ -32,7 +32,7 @@ function balise_FORMULAIRE_ADMIN_stat($args, $filtres) {
 # Pas question de recompiler: ca fait boucler !
 # Le debuger transmet donc ses donnees, et cette balise y retrouve son petit.
 
-// http://code.spip.net/@balise_FORMULAIRE_ADMIN_dyn
+// https://code.spip.net/@balise_FORMULAIRE_ADMIN_dyn
 function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 
     global $var_preview, $use_cache, $forcer_debug, $xhtml;

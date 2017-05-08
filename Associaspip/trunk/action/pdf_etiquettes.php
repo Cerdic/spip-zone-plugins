@@ -71,7 +71,7 @@ function action_pdf_etiquettes() {
 	$where = "l.objet='auteur' AND ( (a.code_postal<>'' AND a.ville<>'') OR (a.boite_postale<>'') ) AND ". sql_in('l.id_objet', $liste_id_auteurs) .' AND l.type LIKE '.sql_quote($typadr);
 	$res = sql_select('l.id_objet, a.*','spip_adresses_liens l INNER JOIN spip_adresses a ON l.id_adresse=a.id_adresse', $where,'' );
 	$indice = 0;
-	include_spip('filtres','inc'); // http://code.spip.net/@extraire_multi
+	include_spip('filtres','inc'); // https://code.spip.net/@extraire_multi
 	while($val = sql_fetch($res)) {
 		$etiquette = array( // cf. : http://fr.wikipedia.org/wiki/Adresse_postale#Exemples
 			'ligne1' => $val['id_objet'],

@@ -146,7 +146,7 @@ function url_arbo_type($type){
 // precedent, un tableau indiquant le titre de l'objet, son type, son id,
 // et doit donner en retour une chaine d'url, sans se soucier de la
 // duplication eventuelle, qui sera geree apres
-// http://code.spip.net/@creer_chaine_url
+// https://code.spip.net/@creer_chaine_url
 function urls_arbo_creer_chaine_url($x) {
 	// NB: ici url_old ne sert pas, mais un plugin qui ajouterait une date
 	// pourrait l'utiliser pour juste ajouter la 
@@ -186,7 +186,7 @@ function urls_arbo_creer_chaine_url($x) {
   return $x;
 }
 
-// http://code.spip.net/@declarer_url_arbo_rec
+// https://code.spip.net/@declarer_url_arbo_rec
 function declarer_url_arbo_rec($url,$type,$parent,$type_parent){
 	if (is_null($parent)){
 		return $url;
@@ -199,7 +199,7 @@ function declarer_url_arbo_rec($url,$type,$parent,$type_parent){
 	}
 }
 
-// http://code.spip.net/@declarer_url_arbo
+// https://code.spip.net/@declarer_url_arbo
 function declarer_url_arbo($type, $id_objet) {
 	static $urls=array();
 	
@@ -298,7 +298,7 @@ function declarer_url_arbo($type, $id_objet) {
 	return declarer_url_arbo_rec($urls[$type][$id_objet]['url'],$type,$urls[$type][$id_objet]['parent'],$urls[$type][$id_objet]['type_parent']);
 }
 
-// http://code.spip.net/@_generer_url_arbo
+// https://code.spip.net/@_generer_url_arbo
 function _generer_url_arbo($type, $id, $args='', $ancre='') {
 
 	if ($generer_url_externe = charger_fonction("generer_url_$type",'urls',true)) {
@@ -341,7 +341,7 @@ function _generer_url_arbo($type, $id, $args='', $ancre='') {
 
 
 // @return array([contexte],[type],[url_redirect],[fond]) : url decodee
-// http://code.spip.net/@urls_arbo_dist
+// https://code.spip.net/@urls_arbo_dist
 function urls_arbo_dist($i, $entite, $args='', $ancre='') {
 	if (is_numeric($i))
 		return _generer_url_arbo($entite, $i, $args, $ancre);

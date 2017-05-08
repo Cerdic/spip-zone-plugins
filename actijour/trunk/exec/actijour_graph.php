@@ -24,7 +24,7 @@ include_spip('inc/presentation');
 // Doit etre un entier "rond", pas trop eloigne du max, et dont
 // les graduations (divisions par huit) soient jolies :
 // on prend donc le plus proche au-dessus de x de la forme 12,16,20,40,60,80,100
-// http://code.spip.net/@maxgraph
+// https://code.spip.net/@maxgraph
 function maxgraph($max) {
 	$max = max(10, $max);
 	$p = pow(10, strlen($max) - 2);
@@ -39,7 +39,7 @@ function maxgraph($max) {
 }
 
 
-// http://code.spip.net/@http_img_rien
+// https://code.spip.net/@http_img_rien
 function http_img_rien($width, $height, $style = '', $title = '') {
 
 	return http_img_pack('rien.gif', $title,
@@ -55,7 +55,7 @@ function http_img_rien($width, $height, $style = '', $title = '') {
 // FONCTIONS QUI ONT DISPARU DANS SPIP 2.0 Fichier ecrire/inc/minipres.php
 ////////////////////////////////////////////////////////////////////////////
 
-// http://code.spip.net/@http_href_img
+// https://code.spip.net/@http_href_img
 function http_href_img($href, $img, $att, $alt, $title = '', $style = '', $class = '', $evt = '') {
 	if (!$title) {
 		$title = $alt;
@@ -68,7 +68,7 @@ function http_href_img($href, $img, $att, $alt, $title = '', $style = '', $class
 /// attention au cas ou la href est du Javascript avec des "'"
 /// pour un href conforme au validateur W3C, faire & --> &amp; avant
 
-// http://code.spip.net/@http_href
+// https://code.spip.net/@http_href
 function http_href($href, $clic, $title='', $style='', $class='', $evt='') {
         if ($style) $evt .= " style='$style'";
         $r = lien_ou_expose($href, $clic, false, $class, $title, 'nofollow', $evt);

@@ -28,7 +28,7 @@ include_once(_DIR_RESTREINT.'exec/articles_edit.php');
 // Gestion des textes trop longs (limitation brouteurs)
 //
 
-// http://code.spip.net/@coupe_trop_long
+// https://code.spip.net/@coupe_trop_long
 // Modifs Jaxe
 /*
 function coupe_trop_long($texte){	// utile pour les textes > 32ko
@@ -55,7 +55,7 @@ function coupe_trop_long($texte){	// utile pour les textes > 32ko
 		return (array($texte,''));
 }
 
-// http://code.spip.net/@articles_edit_recolle
+// https://code.spip.net/@articles_edit_recolle
 function articles_edit_recolle($texte, $att_text)
 {
 	$textes_supplement = "<br /><font color='red'>"._T('info_texte_long')."</font>\n";
@@ -72,7 +72,7 @@ function articles_edit_recolle($texte, $att_text)
 	return array($texte,$textes_supplement);
 }
 
-// http://code.spip.net/@chapo_articles_edit
+// https://code.spip.net/@chapo_articles_edit
 function chapo_articles_edit($chapo, $articles_chapeau)
 {
 	global $spip_ecran;
@@ -122,7 +122,7 @@ function chapo_articles_edit($chapo, $articles_chapeau)
 }
 */
 
-// http://code.spip.net/@formulaire_articles_edit
+// https://code.spip.net/@formulaire_articles_edit
 // Modifs Jaxe
 //function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 function exec_formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
@@ -289,7 +289,7 @@ function exec_formulaire_articles_edit($row, $lier_trad, $new, $champs_article) 
 
 }
 
-// http://code.spip.net/@exec_articles_edit_dist
+// https://code.spip.net/@exec_articles_edit_dist
 // Modifs Jaxe
 //function exec_articles_edit_dist()
 function exec_articles_edit()

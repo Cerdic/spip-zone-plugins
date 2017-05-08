@@ -16,7 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 
-// http://code.spip.net/@balise_URL_ARTICLE_dist
+// https://code.spip.net/@balise_URL_ARTICLE_dist
 function balise_URL_PAGE_UNIQUE_dist($p) {
 
 	$_id = interprete_argument_balise(1, $p);

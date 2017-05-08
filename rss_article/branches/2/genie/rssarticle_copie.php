@@ -182,7 +182,7 @@ function rssarticle_get_id_auteur($nom) {
 
 //
 // extraire les documents taggues enclosure 
-// voir http://code.spip.net/@afficher_enclosures
+// voir https://code.spip.net/@afficher_enclosures
 function extraire_enclosures($tags) {
 	$s = array();
 	foreach (extraire_balises($tags, 'a') as $tag) {

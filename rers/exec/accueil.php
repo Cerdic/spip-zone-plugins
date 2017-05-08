@@ -44,7 +44,7 @@ function encours_accueil_derniers_savoirs_rers()
 }
 
 
-// http://code.spip.net/@encours_accueil
+// https://code.spip.net/@encours_accueil
 function encours_accueil()
 {
 //  RERS     Remarque : la fonction encours_accueil n'est appelée que pour les administrateurs
@@ -128,7 +128,7 @@ function encours_accueil()
 // Raccourcis pour malvoyants
 //
 
-// http://code.spip.net/@colonne_droite_eq4
+// https://code.spip.net/@colonne_droite_eq4
 function colonne_droite_eq4($id_rubrique, $activer_breves, $activer_sites, $articles_mots) {
 	global  $connect_statut, $connect_toutes_rubriques;
 
@@ -155,7 +155,7 @@ function colonne_droite_eq4($id_rubrique, $activer_breves, $activer_sites, $arti
 // Raccourcis pour voyants ...
 //
 
-// http://code.spip.net/@colonne_droite_neq4
+// https://code.spip.net/@colonne_droite_neq4
 function colonne_droite_neq4($id_rubrique, $activer_breves, $activer_sites, $articles_mots) {
   global  $connect_statut, $connect_id_auteur, $connect_login;
 
@@ -239,7 +239,7 @@ function colonne_droite_neq4($id_rubrique, $activer_breves, $activer_sites, $art
 
 // Cartouche d'identification, avec les rubriques administrees
 
-// http://code.spip.net/@personnel_accueil
+// https://code.spip.net/@personnel_accueil
 function personnel_accueil($coockcookie)
 {
 	global $spip_lang_left, $connect_id_auteur, $connect_id_rubrique ;
@@ -300,7 +300,7 @@ function personnel_accueil($coockcookie)
 
 // Cartouche du site, avec le nombre d'articles, breves et messages de forums
 
-// http://code.spip.net/@etat_base_accueil
+// https://code.spip.net/@etat_base_accueil
 function etat_base_accueil()
 {
 	global $spip_display, $spip_lang_left, $connect_id_rubrique;
@@ -411,7 +411,7 @@ function etat_base_accueil()
 }
 
 
-// http://code.spip.net/@accueil_liste_participants
+// https://code.spip.net/@accueil_liste_participants
 function accueil_liste_participants()
 {
 	global $spip_lang_left;
@@ -436,7 +436,7 @@ function accueil_liste_participants()
 	return $res; 
 }
 
-// http://code.spip.net/@exec_accueil_dist
+// https://code.spip.net/@exec_accueil_dist
 function exec_accueil_dist()
 {
   global $connect_statut; //rers

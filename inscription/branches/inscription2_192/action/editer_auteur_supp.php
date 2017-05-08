@@ -29,7 +29,7 @@ function action_editer_auteur_supp_dist()
 	}
 }
 
-// http://code.spip.net/@action_legender_post
+// https://code.spip.net/@action_legender_post
 function action_editer_auteur_supp_post($r){
 	global $auteur_session;
 

@@ -46,7 +46,7 @@ function formulaires_telecharger_cog_verifier_dist(){
 	return $erreurs;
 }
 
-// http://code.spip.net/@inc_editer_mot_dist
+// https://code.spip.net/@inc_editer_mot_dist
 function formulaires_telecharger_cog_traiter_dist(){
 include_spip('cog_config');
 include_spip('inc/cog_import');

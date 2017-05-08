@@ -22,7 +22,7 @@ $GLOBALS['extracteur']['xlsx'] = 'extracteur_xlsx';
 // NOTE : l'enregistrement se fait en "csv-like" en base avec double guillemet (") autour des colonnes et la virgule (,) comme caractere de séparation.
 // Ce n'est pas forcemment l'ideal mais l'indexation semble fonctionner
 
-// http://code.spip.net/@extracteur_docx
+// https://code.spip.net/@extracteur_docx
 
 function extracteur_xlsx($fichier, &$charset, $bin = '', $opt = '') {
 	$charset = 'UTF-8';

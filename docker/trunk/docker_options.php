@@ -39,7 +39,7 @@ if($copie_idem OR $minuscules){
 // soit a un endroit canonique -- si ca peut etre bijectif c'est encore mieux,
 // mais la tout de suite je ne trouve pas l'idee, etant donne les limitations
 // des filesystems
-// http://code.spip.net/@nom_fichier_copie_locale_dist
+// https://code.spip.net/@nom_fichier_copie_locale_dist
 function inc_nom_fichier_copie_locale_docker($source, $extension){
 	include_spip('inc/documents');
 
@@ -61,7 +61,7 @@ function inc_nom_fichier_copie_locale_docker($source, $extension){
 /**
  * Ajouter un document (au format $_FILES)
  *
- * http://code.spip.net/@ajouter_un_document
+ * https://code.spip.net/@ajouter_un_document
  *
  * @param int $id_document
  *   document a remplacer, ou pour une vignette, l'id_document de maman

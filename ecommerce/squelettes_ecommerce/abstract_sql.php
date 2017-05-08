@@ -34,7 +34,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // - le serveur sollicite (pour retrouver la connexion)
 
 
-// http://code.spip.net/@spip_mysql_showtable
+// https://code.spip.net/@spip_mysql_showtable
 function spip_abstract_mysql_showtable($nom_table)
 {
 	$a = spip_query("SHOW TABLES LIKE '$nom_table'");
@@ -71,7 +71,7 @@ function spip_abstract_mysql_showtable($nom_table)
 }
 
 
-// http://code.spip.net/@spip_abstract_select
+// https://code.spip.net/@spip_abstract_select
 function spip_abstract_select (
 	$select = array(), $from = array(), $where = array(),
 	$groupby = '', $orderby = array(), $limit = '',
@@ -95,7 +95,7 @@ function spip_abstract_select (
 
 // Chargement a la volee de la description d'un serveur de base de donnees
 
-// http://code.spip.net/@spip_abstract_serveur
+// https://code.spip.net/@spip_abstract_serveur
 function spip_abstract_serveur($ins_sql, $serveur) {
 	$f = 'spip_' . $serveur . '_' . $ins_sql;
 	if (function_exists($f)) return $f;
@@ -113,14 +113,14 @@ function spip_abstract_serveur($ins_sql, $serveur) {
 	return 'spip_log';
 }
 
-// http://code.spip.net/@spip_abstract_fetch
+// https://code.spip.net/@spip_abstract_fetch
 function spip_abstract_fetch($res, $serveur='') {
 	if (!$serveur) return spip_fetch_array($res, SPIP_ASSOC);
 	$f = spip_abstract_serveur('fetch', $serveur);
 	return $f($res);
 }
 
-// http://code.spip.net/@spip_abstract_count
+// https://code.spip.net/@spip_abstract_count
 function spip_abstract_count($res, $serveur='')
 {
   if (!$serveur) return spip_num_rows($res);
@@ -128,7 +128,7 @@ function spip_abstract_count($res, $serveur='')
   return $f($res);
 }
 
-// http://code.spip.net/@spip_abstract_free
+// https://code.spip.net/@spip_abstract_free
 function spip_abstract_free($res, $serveur='')
 {
   if (!$serveur) return spip_free_result($res);
@@ -136,7 +136,7 @@ function spip_abstract_free($res, $serveur='')
   return $f($res);
 }
 
-// http://code.spip.net/@spip_abstract_insert
+// https://code.spip.net/@spip_abstract_insert
 function spip_abstract_insert($table, $noms, $valeurs, $serveur='')
 {
   $f = (!$serveur ? 'spip_mysql_insert' :
@@ -144,7 +144,7 @@ function spip_abstract_insert($table, $noms, $valeurs, $serveur='')
   return $f($table, $noms, $valeurs);
 }
 
-// http://code.spip.net/@spip_abstract_showtable
+// https://code.spip.net/@spip_abstract_showtable
 function spip_abstract_showtable($table, $serveur='', $table_spip = false)
 {
 /*
@@ -164,7 +164,7 @@ echo "<p>ecrire base $table_spip" ;
 }
 
 # une composition tellement frequente...
-// http://code.spip.net/@spip_abstract_fetsel
+// https://code.spip.net/@spip_abstract_fetsel
 function spip_abstract_fetsel(
 	$select = array(), $from = array(), $where = array(),
 	$groupby = '', $orderby = array(), $limit = '',
@@ -180,7 +180,7 @@ $sousrequete, $having, $table, $id, $serveur),
 //
 // IN (...) est limite a 255 elements, d'ou cette fonction assistante
 //
-// http://code.spip.net/@calcul_mysql_in
+// https://code.spip.net/@calcul_mysql_in
 function calcul_mysql_in($val, $valeurs, $not='') {
 	if (!strlen(trim($valeurs))) return ($not ? "0=0" : '0=1');
 

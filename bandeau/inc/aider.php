@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/filtres');
 
-// http://code.spip.net/@inc_aider_dist
+// https://code.spip.net/@inc_aider_dist
 function inc_aider_dist($aide='') {
 	global $spip_lang, $spip_lang_rtl, $spip_display;
 
@@ -34,7 +34,7 @@ function inc_aider_dist($aide='') {
 }
 
 // en hebreu le ? ne doit pas etre inverse
-// http://code.spip.net/@aide_lang_dir
+// https://code.spip.net/@aide_lang_dir
 function aide_lang_dir($spip_lang,$spip_lang_rtl) {
 	return ($spip_lang<>'he') ? $spip_lang_rtl : '';
 }

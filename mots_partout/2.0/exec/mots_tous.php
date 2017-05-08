@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/actions');
 
-// http://code.spip.net/@exec_mots_tous_dist
+// https://code.spip.net/@exec_mots_tous_dist
 function exec_mots_tous_dist()
 {
 	global $spip_lang, $spip_lang_left, $spip_lang_right, $son_groupe, $conf_mot;
@@ -97,7 +97,7 @@ function exec_mots_tous_dist()
 
 
 //YOANN
-// http://code.spip.net/@mots_partout_arbo_affiche_sous_groupe
+// https://code.spip.net/@mots_partout_arbo_affiche_sous_groupe
 function mots_partout_arbo_affiche_sous_groupe($id_groupe=0){
 //cette fonction permet d'afficher recursivement les groupes et leurs sous groupes de mots clefs
     global $conf_mot, $spip_lang, $spip_lang_right, $son_groupe;
@@ -255,7 +255,7 @@ function mots_partout_arbo_affiche_sous_groupe($id_groupe=0){
 //FIN YOANN
 
 
-// http://code.spip.net/@confirmer_mot
+// https://code.spip.net/@confirmer_mot
 function confirmer_mot ($conf_mot, $son_groupe, $total)
 {
 	$row = spip_fetch_array(spip_query("SELECT * FROM spip_mots WHERE id_mot=$conf_mot"));

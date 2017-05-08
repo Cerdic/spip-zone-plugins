@@ -23,7 +23,7 @@ if (!defined('_DIR_PLUGIN_GESTIONDOCUMENTS')){
 
 
 
-// http://code.spip.net/@inc_formater_article_dist
+// https://code.spip.net/@inc_formater_article_dist
 function inc_formater_article($row){
 	global $options, $spip_lang_right, $spip_display;
 	static $pret = false;

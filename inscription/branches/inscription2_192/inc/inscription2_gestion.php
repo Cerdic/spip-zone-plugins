@@ -15,7 +15,7 @@ include_spip('inc/presentation');
 include_spip('inc/acces');
 include_spip('inc/action');
 
-// http://code.spip.net/@exec_legender_auteur_dist
+// https://code.spip.net/@exec_legender_auteur_dist
 function inscription2_ajouts()
 {
 	global $connect_id_auteur, $spip_display;

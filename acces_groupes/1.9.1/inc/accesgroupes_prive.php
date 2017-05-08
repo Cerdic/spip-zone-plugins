@@ -1,7 +1,7 @@
 <?php
 // toutes les fonctions exec_xxx de l'espace privé modifiées par accesgroupes
 
-// http://code.spip.net/@exec_articles_dist
+// https://code.spip.net/@exec_articles_dist
 function exec_articles() {
       	global $cherche_auteur, $ids, $cherche_mot,  $select_groupe, $debut, $id_article, $trad_err; 
       
@@ -214,7 +214,7 @@ function exec_articles() {
 }
       
 
-// http://code.spip.net/@exec_articles_edit_dist
+// https://code.spip.net/@exec_articles_edit_dist
 function exec_articles_edit()
 {
 	$id_article = _request('id_article');
@@ -299,7 +299,7 @@ function exec_articles_edit()
 }
 
 
-// http://code.spip.net/@exec_articles_versions_dist
+// https://code.spip.net/@exec_articles_versions_dist
 function exec_articles_versions()
 {
   global
@@ -617,7 +617,7 @@ fin_page();
 
 
 
-// http://code.spip.net/@exec_breves_edit_dist
+// https://code.spip.net/@exec_breves_edit_dist
 function exec_breves_edit()
 {
 global
@@ -804,7 +804,7 @@ fin_page();
 }
 
 
-// http://code.spip.net/@exec_rubriques_edit_dist
+// https://code.spip.net/@exec_rubriques_edit_dist
 function exec_rubriques_edit()
 {
   global
@@ -984,7 +984,7 @@ fin_page();
 }
 
 
-// http://code.spip.net/@exec_naviguer_dist
+// https://code.spip.net/@exec_naviguer_dist
 function exec_naviguer()
 {
 	global $new, $id_parent, $id_rubrique, $spip_display,  $connect_statut, $champs_extra, $cherche_mot,  $select_groupe, $descriptif, $texte, $titre;

@@ -9,7 +9,7 @@ include_spip('inc/presentation');
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
 define('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS.end($p)));
 
-// http://code.spip.net/@exec_mots_type_dist
+// https://code.spip.net/@exec_mots_type_dist
 function exec_mots_type()
 {
   global $connect_statut, $descriptif, $id_groupe, $new, $options, $texte, $titre;

@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/rubriques');
 
-// http://code.spip.net/@action_editer_rubrique_dist
+// https://code.spip.net/@action_editer_rubrique_dist
 function action_editer_rubrique_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -35,7 +35,7 @@ function action_editer_rubrique_dist() {
 }
 
 
-// http://code.spip.net/@insert_rubrique
+// https://code.spip.net/@insert_rubrique
 function insert_rubrique($id_parent) {
 	return sql_insertq("spip_rubriques", array(
 		'titre' => _T('item_nouvelle_rubrique'),
@@ -45,7 +45,7 @@ function insert_rubrique($id_parent) {
 
 // Enregistrer certaines modifications d'une rubrique
 // $c est un tableau qu'on peut proposer en lieu et place de _request()
-// http://code.spip.net/@revisions_rubriques
+// https://code.spip.net/@revisions_rubriques
 function revisions_rubriques($id_rubrique, $c=false) {
 	include_spip('inc/autoriser');
 	include_spip('inc/filtres');
@@ -159,7 +159,7 @@ function revisions_rubriques($id_rubrique, $c=false) {
 // que si $confirme_deplace == 'oui', et changer l'id_rubrique des
 // breves en question
 
-// http://code.spip.net/@editer_rubrique_breves
+// https://code.spip.net/@editer_rubrique_breves
 function editer_rubrique_breves($id_rubrique, $id_parent, $c=false)
 {
 	$t = sql_countsel('spip_breves', "id_rubrique=$id_rubrique");

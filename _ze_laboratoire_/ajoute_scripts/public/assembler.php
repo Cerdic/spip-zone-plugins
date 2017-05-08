@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // fonction principale declenchant tout le service
 // elle-meme ne fait que traiter les cas particuliers, puis passe la main.
-// http://code.spip.net/@public_assembler_dist
+// https://code.spip.net/@public_assembler_dist
 function public_assembler_dist($fond) {
 	  global $auteur_session, $forcer_lang, $ignore_auth_http, $var_mode;
 
@@ -61,7 +61,7 @@ function public_assembler_dist($fond) {
 }
 
 
-// http://code.spip.net/@is_preview
+// https://code.spip.net/@is_preview
 function is_preview()
 {
 	global $var_mode;
@@ -74,7 +74,7 @@ function is_preview()
 //
 // calcule la page et les entetes
 //
-// http://code.spip.net/@assembler_page
+// https://code.spip.net/@assembler_page
 function assembler_page ($fond) {
 	global $flag_ob, $flag_preserver,$lastmodified,
 		$use_cache, $var_mode, $var_preview;
@@ -177,7 +177,7 @@ function assembler_page ($fond) {
 // 2 fonctions pour compatibilite arriere. Sont probablement superflues
 //
 
-// http://code.spip.net/@auto_content_type
+// https://code.spip.net/@auto_content_type
 function auto_content_type($page)
 {
 	global $flag_preserver;
@@ -187,14 +187,14 @@ function auto_content_type($page)
 	  }
 }
 
-// http://code.spip.net/@stop_inclure
+// https://code.spip.net/@stop_inclure
 function stop_inclure($fragment) {
 	if ($fragment == _request('var_fragment')) {
 		define('_STOP_INCLURE', 1);
 		#spip_log("fin du fragment $fragment, on arrete d'inclure");
 	}
 }
-// http://code.spip.net/@inclure_page
+// https://code.spip.net/@inclure_page
 function inclure_page($fond, $contexte_inclus) {
 	global $lastmodified;
 	if (!defined('_PAS_DE_PAGE_404'))
@@ -261,7 +261,7 @@ function inclure_page($fond, $contexte_inclus) {
 # (voir l'exemple de spip_inscription et spip_pass)
 # $echo = faut-il faire echo ou return
 
-// http://code.spip.net/@inclure_balise_dynamique
+// https://code.spip.net/@inclure_balise_dynamique
 function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 	global $contexte_inclus; # provisoire : c'est pour le debuggueur
 
@@ -309,7 +309,7 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 }
 
 // Traiter var_recherche ou le referrer pour surligner les mots
-// http://code.spip.net/@f_surligne
+// https://code.spip.net/@f_surligne
 function f_surligne ($texte) {
 	if (isset($_SERVER['HTTP_REFERER']) || $_GET['var_recherche']) {
 		include_spip('inc/surligne');
@@ -319,7 +319,7 @@ function f_surligne ($texte) {
 }
 
 // Valider/indenter a la demande.
-// http://code.spip.net/@f_tidy
+// https://code.spip.net/@f_tidy
 function f_tidy ($texte) {
 	global $xhtml;
 
@@ -341,7 +341,7 @@ function f_tidy ($texte) {
 // Offre #INSERT_HEAD sur tous les squelettes (bourrin)
 // a activer dans mes_options via :
 // $spip_pipeline['affichage_final'] .= '|f_insert_head';
-// http://code.spip.net/@f_insert_head
+// https://code.spip.net/@f_insert_head
 function f_insert_head($texte) {
 	if (!$GLOBALS['html']) return $texte;
 	include_spip('public/admin'); // pour strripos
@@ -359,7 +359,7 @@ function f_insert_head($texte) {
 }
 
 // Inserer au besoin les boutons admins
-// http://code.spip.net/@f_admin
+// https://code.spip.net/@f_admin
 function f_admin ($texte) {
 	if ($GLOBALS['affiche_boutons_admin']) {
 		include_spip('public/admin');
@@ -370,7 +370,7 @@ function f_admin ($texte) {
 }
 
 //ajoute a la volee scripts a le squelette jquery.js.html
-// http://code.spip.net/@ajouter_js_affichage_final
+// https://code.spip.net/@ajouter_js_affichage_final
 function ajouter_js_affichage_final($page,$scripts,$inline = false) {
   if(!$scripts || (!$inline && !preg_match(",\w+\|?,",$scripts)) || ($inline && !preg_match(",^\s*<script.*</script>\s*$,Us",$scripts))) {
     spip_log("ajouter_js_afficaghe_final interdite $scripts");
@@ -390,7 +390,7 @@ function ajouter_js_affichage_final($page,$scripts,$inline = false) {
 
 //verifie si le squelette jquery.js.html est appelle dans un flux de page et donnee 
 //false ou un tableau avec la position et la chaine de l'appelle
-// http://code.spip.net/@jquery_chargee
+// https://code.spip.net/@jquery_chargee
 function jquery_chargee($page) {
     $pos_debut_head=strpos($page,"<head>");
     $pos_fin_head=strpos($page,"</head>",$pos_debut_head);
@@ -406,7 +406,7 @@ function jquery_chargee($page) {
     return false;
 }
 
-// http://code.spip.net/@analyse_js_ajoutee
+// https://code.spip.net/@analyse_js_ajoutee
 function analyse_js_ajoutee($page) {
   //verifie si jquery.js.html est chargee
   $corps = $page['texte'];
@@ -508,7 +508,7 @@ function collecte_head_squelette(&$corps,$effache=false) {
   return $scripts_a_ajouter;  
 }
 
-// http://code.spip.net/@push_script
+// https://code.spip.net/@push_script
 function push_script(&$scripts,$script,$inline = false) {
   if(($inline && preg_match(",^\s*<script.*</script>\s*$,Us",$script)) || (!$inline && preg_match(",^\w+$,",$script)))
     $scripts[]= $script;
@@ -516,7 +516,7 @@ function push_script(&$scripts,$script,$inline = false) {
     spip_log("insert_js ".($inline?"inline":"")." interdite $script");
 }
 
-// http://code.spip.net/@message_erreur_404
+// https://code.spip.net/@message_erreur_404
 function message_erreur_404 ($erreur= "") {
 	if (defined('_PAS_DE_PAGE_404'))
 		return "erreur";
@@ -543,7 +543,7 @@ function message_erreur_404 ($erreur= "") {
 
 // fonction permettant de recuperer le resultat du calcul d'un squelette
 // pour une inclusion dans un flux
-// http://code.spip.net/@recuperer_fond
+// https://code.spip.net/@recuperer_fond
 function recuperer_fond($fond, $contexte=array(),$protect_xml=false, $trim=true) {
 	// on est peut etre dans l'espace prive au moment de l'appel
 	define ('_INC_PUBLIC', 1);
@@ -572,7 +572,7 @@ function recuperer_fond($fond, $contexte=array(),$protect_xml=false, $trim=true)
 
 // temporairement ici : a mettre dans le futur inc/modeles
 // creer_contexte_de_modele('left', 'autostart=true', ...) renvoie un array()
-// http://code.spip.net/@creer_contexte_de_modele
+// https://code.spip.net/@creer_contexte_de_modele
 function creer_contexte_de_modele($args) {
 	$contexte = array();
 	$params = array();
@@ -595,7 +595,7 @@ function creer_contexte_de_modele($args) {
 }
 
 // Calcule le modele et retourne la mini-page ainsi calculee
-// http://code.spip.net/@inclure_modele
+// https://code.spip.net/@inclure_modele
 function inclure_modele($type, $id, $params, $lien) {
 	static $compteur;
 	if (++$compteur>10) return ''; # ne pas boucler indefiniment

@@ -12,7 +12,7 @@ spipbb_log('included',2,__FILE__);
 
 # h.30/11 .. ok !
 
-// http://code.spip.net/@action_instituer_article_dist
+// https://code.spip.net/@action_instituer_article_dist
 function action_spipbb_instituer_article_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');

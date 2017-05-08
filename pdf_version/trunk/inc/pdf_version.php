@@ -32,7 +32,7 @@ function generer_pdf_version_objet($objet, $id_objet, $pdf_file){
  * si ne fonctionne pas on se rabat sur creer_htaccess du core
  * qui pose un deny sur chaque sous repertoire de IMG/
  *
- * http://code.spip.net/@gerer_htaccess
+ * https://code.spip.net/@gerer_htaccess
  *
  * @param bool $active
  * @return bool

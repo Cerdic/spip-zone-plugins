@@ -7,7 +7,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('inc/filtres');
 
 // Editer (modification) d'un rezosocio-cle
-// http://code.spip.net/@action_editer_rezosocio_dist
+// https://code.spip.net/@action_editer_rezosocio_dist
 function action_editer_rezosocio_dist($arg = null) {
 	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');

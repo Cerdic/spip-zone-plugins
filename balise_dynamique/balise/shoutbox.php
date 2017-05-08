@@ -64,7 +64,7 @@ function balise_SHOUTBOX_stat($args, $filtres) {
 	return array($defaut, $a);
 }
 
-// http://code.spip.net/@balise_SHOUTBOX_dyn
+// https://code.spip.net/@balise_SHOUTBOX_dyn
 function balise_SHOUTBOX_dyn($defaut, $a) {
 
 	spip_log('balise_SHOUTBOX_dyn()');

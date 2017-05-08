@@ -62,7 +62,7 @@ function boucle_SPIP_GALUSE_dist($id_boucle, &$boucles) {
 //
 // <BOUCLE(DOCUMENTS)>
 //
-// http://code.spip.net/@boucle_DOCUMENTS_dist
+// https://code.spip.net/@boucle_DOCUMENTS_dist
 function boucle_GALUSE_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;

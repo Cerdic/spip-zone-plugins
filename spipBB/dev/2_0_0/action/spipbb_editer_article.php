@@ -11,7 +11,7 @@ spipbb_log('included',2,__FILE__);
 //include_spip('inc/spipbb_util');
 
 
-// http://code.spip.net/@action_editer_article_dist
+// https://code.spip.net/@action_editer_article_dist
 function action_spipbb_editer_article() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -44,7 +44,7 @@ function action_spipbb_editer_article() {
 
 // Appelle toutes les fonctions de modification d'un article
 // $err est de la forme '&trad_err=1'
-// http://code.spip.net/@articles_set
+// https://code.spip.net/@articles_set
 function articles_set($id_article, $c=false) {
 	$err = '';
 
@@ -60,7 +60,7 @@ function articles_set($id_article, $c=false) {
 	return $err;
 }
 
-// http://code.spip.net/@insert_article
+// https://code.spip.net/@insert_article
 function insert_article($id_rubrique) {
 
 	include_spip('base/abstract_sql');
@@ -111,7 +111,7 @@ function insert_article($id_rubrique) {
 
 // Enregistre une revision d'article
 // $c est un contenu (par defaut on prend le contenu via _request())
-// http://code.spip.net/@revisions_articles
+// https://code.spip.net/@revisions_articles
 function revisions_articles ($id_article, $c=false) {
 	include_spip('inc/modifier');
 
@@ -150,7 +150,7 @@ function revisions_articles ($id_article, $c=false) {
 //
 // statut et rubrique sont lies, car un admin restreint peut deplacer
 // un article publie vers une rubrique qu'il n'administre pas
-// http://code.spip.net/@instituer_article
+// https://code.spip.net/@instituer_article
 function instituer_article($id_article, $c, $calcul_rub=true) {
 
 	include_spip('inc/autoriser');
@@ -287,7 +287,7 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 // Reunit les textes decoupes parce que trop longs
 //
 
-// http://code.spip.net/@trop_longs_articles
+// https://code.spip.net/@trop_longs_articles
 function trop_longs_articles() {
 	if (is_array($plus = _request('texte_plus'))) {
 		foreach ($plus as $n=>$t) {
@@ -298,7 +298,7 @@ function trop_longs_articles() {
 }
 
 // Poser un lien de traduction vers un article de reference
-// http://code.spip.net/@article_referent
+// https://code.spip.net/@article_referent
 function article_referent ($id_article, $c) {
 
 	if (!$lier_trad = intval(_request('lier_trad', $c))) return;

@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // pour le support des vieux dump
-// http://code.spip.net/@inc_import_1_2_dist
+// https://code.spip.net/@inc_import_1_2_dist
 function inc_import_1_2_dist($f, $request, $gz='fread') {
   global $import_ok;
 	static $field_desc = array ();

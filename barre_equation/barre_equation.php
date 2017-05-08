@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define('_DIR_BTEQ_IMG', _DIR_PLUGIN_TYPOEQUATION.'/img_pack/icones_barre/');
 
 
-// http://code.spip.net/@afficher_barre
+// https://code.spip.net/@afficher_barre
 //function TypoEquation_bt_toolbox($flux)
 /*
 function TypoEnluminee_bt_toolbox($params) {
@@ -156,7 +156,7 @@ $tableau_formulaire = '
 
   return produceWharf('tableau_equations','',$tableau_formulaire);  
 }
-// http://code.spip.net/@bouton_barre_racc1
+// https://code.spip.net/@bouton_barre_racc1
 function bouton_barre_racc1($action, $img, $help, $champhelp) {
 
    $a = attribut_html($help);

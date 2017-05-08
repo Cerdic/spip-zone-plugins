@@ -50,7 +50,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Le fichier homonyme du repertoire "genie/" est automatiquement lu
 // et il est suppose definir cette fonction.
 
-// http://code.spip.net/@inc_genie_dist
+// https://code.spip.net/@inc_genie_dist
 function inc_genie_dist($taches = array()) {
 	include_spip('inc/queue');
 
@@ -77,7 +77,7 @@ function inc_genie_dist($taches = array()) {
 // les serveurs Http n'accordant en general pas plus de 30 secondes
 // a leur sous-processus
 //
-// http://code.spip.net/@taches_generales
+// https://code.spip.net/@taches_generales
 function taches_generales($taches_generales = array()) {
 
 	// verifier que toutes les taches cron sont planifiees
@@ -124,7 +124,7 @@ function taches_generales($taches_generales = array()) {
 // - elle peut retirer les fichiers perimes
 // - elle fait appliquer le quota
 // En cas de quota sur le CACHE/, nettoyer les fichiers les plus vieux
-// http://code.spip.net/@genie_invalideur_dist
+// https://code.spip.net/@genie_invalideur_dist
 function genie_invalideur_dist($t) {
 
 	include_spip('inc/invalideur');

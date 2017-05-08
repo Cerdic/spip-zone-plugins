@@ -75,7 +75,7 @@ function balise_IMG($p) {
 // #SET{foncee,##ENV{couleur_foncee,3874b0}}
 // #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 // #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
-// http://code.spip.net/@parametres_css_prive
+// https://code.spip.net/@parametres_css_prive
 function adminpublic_insert_head($flux){
 	$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_ADMINPUBLIC.'adminpublic.css" type="text/css" media="projection, screen, tv" />';
 	$flux .= '<script type="text/javascript" src="'.generer_url_public('adminpublic.js').'"></script>';

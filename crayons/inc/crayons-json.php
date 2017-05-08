@@ -77,7 +77,7 @@ function crayons_json_encode($v) {
 	return $v;
 }
 
-// http://code.spip.net/@json_export
+// https://code.spip.net/@json_export
 function crayons_json_export($var) {
 	return crayons_json_encode($var);
 

@@ -284,7 +284,7 @@ function _generer_url_arbopoly($type, $id, $args = '', $ancre = '') {
  * ou decoder cette url si c'est une chaine
  * array([contexte],[type],[url_redirect],[fond]) : url decodee
  *
- * http://code.spip.net/@urls_arbo_dist
+ * https://code.spip.net/@urls_arbo_dist
  *
  * @param string|int $i
  * @param string $entite

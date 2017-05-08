@@ -12,7 +12,7 @@
  */
 // compatibilite trans 1.9.1-1.9.2
 // Cadre formulaires
-// http://code.spip.net/@debut_cadre_formulaire
+// https://code.spip.net/@debut_cadre_formulaire
 function forms_debut_cadre_formulaire($style='', $return=false){
 	$x = "\n<div class='cadre-formulaire'" .
 	  (!$style ? "" : " style='$style'") .
@@ -20,7 +20,7 @@ function forms_debut_cadre_formulaire($style='', $return=false){
 	if ($return) return  $x; else echo $x;
 }
 
-// http://code.spip.net/@fin_cadre_formulaire
+// https://code.spip.net/@fin_cadre_formulaire
 function forms_fin_cadre_formulaire($return=false){
 	if ($return) return  "</div>\n"; else echo "</div>\n";
 }

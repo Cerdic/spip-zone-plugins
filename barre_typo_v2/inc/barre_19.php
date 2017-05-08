@@ -16,7 +16,7 @@ define('_DIR_BTV2_IMG', _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/')
 
 // construit un bouton (ancre) de raccourci avec icone et aide
 
-// http://code.spip.net/@bouton_barre_racc
+// https://code.spip.net/@bouton_barre_racc
 function bouton_barre_racc($action, $img, $help, $champhelp) {
 
 	$a = attribut_html($help);
@@ -229,7 +229,7 @@ function config_bte($cfg, $valeur) {
 
 // construit un tableau de raccourcis pour un noeud de DOM
 
-// http://code.spip.net/@afficher_barre
+// https://code.spip.net/@afficher_barre
 function afficher_barre($champ, $forum=false, $lang='') {
 	global $spip_lang, $spip_lang_right, $spip_lang_left;
 	static $num_barre = 0;
@@ -400,7 +400,7 @@ $(document).ready(function(){';
 
 // expliciter les 3 arguments pour avoir xhtml strict
 
-// http://code.spip.net/@afficher_textarea_barre
+// https://code.spip.net/@afficher_textarea_barre
 function afficher_textarea_barre($texte, $forum=false, $form='')
 {
 	global $spip_display, $spip_ecran;

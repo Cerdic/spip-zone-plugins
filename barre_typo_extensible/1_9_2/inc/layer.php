@@ -20,7 +20,7 @@ $compteur_block = 0;
 if (_request('var_ajaxcharset') || _request("iframe")=="iframe")
 $compteur_block = rand(1,2500)*500;	// astuce idiote pour que les blocs ahah n'aient pas les memes numeros de triangle que la page principale (sinon le triangle d'un bloc importe par ahah agit sur un autre triangle... vivement jquery...).
 
-// http://code.spip.net/@block_parfois_visible
+// https://code.spip.net/@block_parfois_visible
 function block_parfois_visible($nom, $invite, $masque, $style='', $visible=false)
 {
 	if (!$GLOBALS['browser_layer']) return '';
@@ -47,7 +47,7 @@ function block_parfois_visible($nom, $invite, $masque, $style='', $visible=false
 }
 
 
-// http://code.spip.net/@renomme_block
+// https://code.spip.net/@renomme_block
 function renomme_block($nom_block)
 {
 	global $numero_block, $compteur_block;
@@ -58,7 +58,7 @@ function renomme_block($nom_block)
 	return $numero_block["$nom_block"];
 }
 
-// http://code.spip.net/@debut_block_visible
+// https://code.spip.net/@debut_block_visible
 function debut_block_visible($nom_block){
 	global $browser_layer;
 	if (!$browser_layer) return '';
@@ -66,7 +66,7 @@ function debut_block_visible($nom_block){
 
 }
 
-// http://code.spip.net/@debut_block_invisible
+// https://code.spip.net/@debut_block_invisible
 function debut_block_invisible($nom_block){
 	global $browser_layer;
 	if (!$browser_layer) return '';
@@ -78,13 +78,13 @@ function debut_block_invisible($nom_block){
 	return "<div id='Layer".renomme_block($nom_block)."' style='display: none;'>";
 }
 
-// http://code.spip.net/@fin_block
+// https://code.spip.net/@fin_block
 function fin_block() {
 	if ($GLOBALS['browser_layer'])
 		return "<div style='clear: both;'></div></div>";
 }
 
-// http://code.spip.net/@bouton_block_invisible
+// https://code.spip.net/@bouton_block_invisible
 function bouton_block_invisible($nom_block, $icone='') {
 	global $numero_block, $compteur_block, $browser_layer, $spip_lang_rtl;
 	if (!$browser_layer) return '';
@@ -109,7 +109,7 @@ function bouton_block_invisible($nom_block, $icone='') {
 }
 
 
-// http://code.spip.net/@bouton_block_visible
+// https://code.spip.net/@bouton_block_visible
 function bouton_block_visible($nom_block){
 	global $numero_block, $compteur_block, $browser_layer, $spip_lang_rtl;
 	if (!$browser_layer) return '';
@@ -130,7 +130,7 @@ function bouton_block_visible($nom_block){
 	return produire_acceder_couche($couches, $numero_block[$nom_block], "deplierbas.gif");
 }
 
-// http://code.spip.net/@produire_acceder_couche
+// https://code.spip.net/@produire_acceder_couche
 function produire_acceder_couche($couches, $nom, $icone) {
 
 	global $spip_lang_rtl;
@@ -163,7 +163,7 @@ function produire_acceder_couche($couches, $nom, $icone) {
 //
 // Tests sur le nom du butineur
 //
-// http://code.spip.net/@verif_butineur
+// https://code.spip.net/@verif_butineur
 function verif_butineur() {
 
 	global $browser_name, $browser_version;
@@ -221,7 +221,7 @@ function verif_butineur() {
 
 // teste si accepte le SVG et pose un cookie en cas de demande explicite
 // (fonction a appeler en debut de page, avant l'envoi de contenu)
-// http://code.spip.net/@flag_svg
+// https://code.spip.net/@flag_svg
 function flag_svg() {
 	global $browser_name, $browser_rev;
 
@@ -259,7 +259,7 @@ ondblclick='storeCaret(this);'");
 	// meme principe que le behavior win_width.htc pour MSIE
 $GLOBALS['browser_verifForm'] = (eregi("mozilla", $GLOBALS["browser_name"]) AND $GLOBALS["browser_rev"] >= 1.7) ?  "verifForm();" : "";
 
-// http://code.spip.net/@http_script
+// https://code.spip.net/@http_script
 function http_script($script, $src='', $noscript='') {
 	return '<script type="text/javascript"'
 		. ($src ? " src=\"$src\"" : '')

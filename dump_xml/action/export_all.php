@@ -16,7 +16,7 @@ include_spip('inc/lang');
 include_spip('inc/actions');
 include_spip('base/dump');
 
-// http://code.spip.net/@action_export_all_dist
+// https://code.spip.net/@action_export_all_dist
 function action_export_all_dist()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -31,7 +31,7 @@ function action_export_all_dist()
 	export_all_fin($file, $meta, $rub);
 }
 
-// http://code.spip.net/@export_all_fin
+// https://code.spip.net/@export_all_fin
 function export_all_fin($file, $meta, $rub)
 {
 	global $spip_lang_left,$spip_lang_right;

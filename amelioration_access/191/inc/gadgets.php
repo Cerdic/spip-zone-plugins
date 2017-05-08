@@ -27,7 +27,7 @@ include_spip('inc/presentation');
 //
 // GADGET DES RUBRIQUES
 //
-// http://code.spip.net/@extraire_article
+// https://code.spip.net/@extraire_article
 function extraire_article($id_p) {
 	if (array_key_exists($id_p, $GLOBALS['db_art_cache'])) {
 		return $GLOBALS['db_art_cache'][$id_p];
@@ -36,7 +36,7 @@ function extraire_article($id_p) {
 	}
 }
 
-// http://code.spip.net/@gen_liste_rubriques
+// https://code.spip.net/@gen_liste_rubriques
 function gen_liste_rubriques() {
 	// ici, un petit fichier cache ne fait pas de mal
 	if (lire_fichier(_DIR_SESSIONS.'cache-menu-rubriques.txt', $cache)
@@ -72,7 +72,7 @@ function gen_liste_rubriques() {
 }
 
 
-// http://code.spip.net/@gadget_rubriques
+// https://code.spip.net/@gadget_rubriques
 function gadget_rubriques() {
 	global $max_lignes;
 
@@ -112,7 +112,7 @@ function gadget_rubriques() {
 }
 
 
-// http://code.spip.net/@bandeau_rubrique
+// https://code.spip.net/@bandeau_rubrique
 function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 	global $zdecal;
 	global $max_lignes;
@@ -181,7 +181,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 //
 // GADGET DE NAVIGATION RAPIDE
 //
-// http://code.spip.net/@gadget_navigation
+// https://code.spip.net/@gadget_navigation
 function gadget_navigation($id_rubrique) {
 	global $connect_id_auteur, $connect_login, $connect_statut, $couleur_claire,$couleur_foncee, $spip_lang_left, $spip_lang_right, $spip_ecran;
 
@@ -279,7 +279,7 @@ function gadget_navigation($id_rubrique) {
 }
 
 
-// http://code.spip.net/@bandeau_gadgets
+// https://code.spip.net/@bandeau_gadgets
 function bandeau_gadgets($largeur, $options, $id_rubrique) {
 	global $connect_id_auteur, $connect_login, $connect_statut, $couleur_claire,$couleur_foncee, $spip_lang_left, $spip_lang_right, $spip_ecran;
 
@@ -404,7 +404,7 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 	return $bandeau;
 }
 
-// http://code.spip.net/@gadget_agenda
+// https://code.spip.net/@gadget_agenda
 function gadget_agenda() {
 	global $connect_id_auteur;
 
@@ -443,7 +443,7 @@ function gadget_agenda() {
 	return $gadget;
 }
 
-// http://code.spip.net/@gadget_messagerie
+// https://code.spip.net/@gadget_messagerie
 function gadget_messagerie() {
 	global $connect_statut;
 
@@ -457,7 +457,7 @@ function gadget_messagerie() {
 }
 
 
-// http://code.spip.net/@dessiner_gadgets
+// https://code.spip.net/@dessiner_gadgets
 function dessiner_gadgets($id_rubrique) {
 	if ($_COOKIE['spip_accepte_ajax'] != -1) {
 		return "\n<!-- javascript gadgets -->\n" .

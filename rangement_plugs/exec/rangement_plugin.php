@@ -11,7 +11,7 @@ include_spip('inc/layer');
 include_spip('inc/actions');
 include_spip('inc/rangement_flock');
 
-// http://code.spip.net/@exec_admin_plugin
+// https://code.spip.net/@exec_admin_plugin
 function exec_rangement_plugin() {
 	global $connect_statut;
 	global $connect_toutes_rubriques;

@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
 
-// http://code.spip.net/@afficher_sites
+// https://code.spip.net/@afficher_sites
 function afficher_sites($titre_table, $requete)
 {
 	global $couleur_claire;
@@ -24,7 +24,7 @@ function afficher_sites($titre_table, $requete)
 	return affiche_tranche_bandeau($requete, "site-24.gif", $couleur_claire, "black", $tmp_var, $titre_table, false,  array('','',''), array('arial11', 'arial1', 'arial1'), 'afficher_sites_boucle');
 }
 
-// http://code.spip.net/@afficher_sites_boucle
+// https://code.spip.net/@afficher_sites_boucle
 function afficher_sites_boucle($row, &$tous_id, $voir_logo, $bof)
 {
 	global $spip_lang_right;
@@ -110,7 +110,7 @@ function afficher_sites_boucle($row, &$tous_id, $voir_logo, $bof)
 	return $vals;
 }
 
-// http://code.spip.net/@afficher_syndic_articles
+// https://code.spip.net/@afficher_syndic_articles
 function afficher_syndic_articles($titre_table, $requete, $id = 0) {
 	global $connect_statut, $spip_lang_right;
 
@@ -134,7 +134,7 @@ function afficher_syndic_articles($titre_table, $requete, $id = 0) {
 	return affiche_tranche_bandeau($requete, "site-24.gif", "#999999", "white", $tmp_var, $titre_table, $obligatoire, $largeurs, $styles, 'afficher_syndic_articles_boucle', array($tmp_var, $id));
 }
 
-// http://code.spip.net/@afficher_syndic_articles_boucle
+// https://code.spip.net/@afficher_syndic_articles_boucle
 function afficher_syndic_articles_boucle($row, &$my_sites, $bof, $redirect)
 {
 	global  $connect_statut, $spip_lang_right;

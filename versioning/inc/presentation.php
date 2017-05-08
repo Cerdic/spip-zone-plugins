@@ -13,7 +13,7 @@ include_spip('inc/actions');
 
 // Faux HR, avec controle de couleur
 
-// http://code.spip.net/@hr
+// https://code.spip.net/@hr
 function hr($color, $retour = false) {
 	$ret = "\n<div style='height: 1px; margin-top: 5px; padding-top: 5px; border-top: 1px solid $color;'></div>";
 	
@@ -25,7 +25,7 @@ function hr($color, $retour = false) {
 // Cadres
 //
 
-// http://code.spip.net/@debut_cadre
+// https://code.spip.net/@debut_cadre
 function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	global $spip_display, $spip_lang_left;
 	static $accesskey = 97; // a
@@ -83,7 +83,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	return $ret . "</div>\n<div class='cadre-padding'>";
 }
 
-// http://code.spip.net/@fin_cadre
+// https://code.spip.net/@fin_cadre
 function fin_cadre($style) {
 
 	$ret = ($style == "e") ? "</div></div></div>\n" : "</div></div>\n";
@@ -95,14 +95,14 @@ function fin_cadre($style) {
 }
 
 
-// http://code.spip.net/@debut_cadre_relief
+// https://code.spip.net/@debut_cadre_relief
 function debut_cadre_relief($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('r', $icone, $fonction, $titre);
 
 	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
-// http://code.spip.net/@fin_cadre_relief
+// https://code.spip.net/@fin_cadre_relief
 function fin_cadre_relief($return = false){
 	$retour_aff = fin_cadre('r');
 
@@ -110,14 +110,14 @@ function fin_cadre_relief($return = false){
 }
 
 
-// http://code.spip.net/@debut_cadre_enfonce
+// https://code.spip.net/@debut_cadre_enfonce
 function debut_cadre_enfonce($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('e', $icone, $fonction, $titre);
 
 	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
-// http://code.spip.net/@fin_cadre_enfonce
+// https://code.spip.net/@fin_cadre_enfonce
 function fin_cadre_enfonce($return = false){
 
 	$retour_aff = fin_cadre('e');
@@ -126,13 +126,13 @@ function fin_cadre_enfonce($return = false){
 }
 
 
-// http://code.spip.net/@debut_cadre_sous_rub
+// https://code.spip.net/@debut_cadre_sous_rub
 function debut_cadre_sous_rub($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('sous_rub', $icone, $fonction, $titre);
 	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
-// http://code.spip.net/@fin_cadre_sous_rub
+// https://code.spip.net/@fin_cadre_sous_rub
 function fin_cadre_sous_rub($return = false){
 	$retour_aff = fin_cadre('sous_rub');
 	if ($return) return $retour_aff; else echo $retour_aff;
@@ -140,28 +140,28 @@ function fin_cadre_sous_rub($return = false){
 
 
 
-// http://code.spip.net/@debut_cadre_forum
+// https://code.spip.net/@debut_cadre_forum
 function debut_cadre_forum($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('forum', $icone, $fonction, $titre);
 
 	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
-// http://code.spip.net/@fin_cadre_forum
+// https://code.spip.net/@fin_cadre_forum
 function fin_cadre_forum($return = false){
 	$retour_aff = fin_cadre('forum');
 
 	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
-// http://code.spip.net/@debut_cadre_thread_forum
+// https://code.spip.net/@debut_cadre_thread_forum
 function debut_cadre_thread_forum($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('thread-forum', $icone, $fonction, $titre);
 
 	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
-// http://code.spip.net/@fin_cadre_thread_forum
+// https://code.spip.net/@fin_cadre_thread_forum
 function fin_cadre_thread_forum($return = false){
 	$retour_aff = fin_cadre('thread-forum');
 
@@ -169,14 +169,14 @@ function fin_cadre_thread_forum($return = false){
 }
 
 
-// http://code.spip.net/@debut_cadre_couleur
+// https://code.spip.net/@debut_cadre_couleur
 function debut_cadre_couleur($icone='', $return = false, $fonction='', $titre=''){
 	$retour_aff = debut_cadre('couleur', $icone, $fonction, $titre);
 
 	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
-// http://code.spip.net/@fin_cadre_couleur
+// https://code.spip.net/@fin_cadre_couleur
 function fin_cadre_couleur($return = false){
 	$retour_aff = fin_cadre('couleur');
 
@@ -184,27 +184,27 @@ function fin_cadre_couleur($return = false){
 }
 
 
-// http://code.spip.net/@debut_cadre_couleur_foncee
+// https://code.spip.net/@debut_cadre_couleur_foncee
 function debut_cadre_couleur_foncee($icone='', $return = false, $fonction='', $titre=''){
 	$retour_aff = debut_cadre('couleur-foncee', $icone, $fonction, $titre);
 
 	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
-// http://code.spip.net/@fin_cadre_couleur_foncee
+// https://code.spip.net/@fin_cadre_couleur_foncee
 function fin_cadre_couleur_foncee($return = false){
 	$retour_aff = fin_cadre('couleur-foncee');
 
 	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
-// http://code.spip.net/@debut_cadre_trait_couleur
+// https://code.spip.net/@debut_cadre_trait_couleur
 function debut_cadre_trait_couleur($icone='', $return = false, $fonction='', $titre=''){
 	$retour_aff = debut_cadre('trait-couleur', $icone, $fonction, $titre);
 	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
-// http://code.spip.net/@fin_cadre_trait_couleur
+// https://code.spip.net/@fin_cadre_trait_couleur
 function fin_cadre_trait_couleur($return = false){
 	$retour_aff = fin_cadre('trait-couleur');
 
@@ -215,12 +215,12 @@ function fin_cadre_trait_couleur($return = false){
 //
 // une boite alerte
 //
-// http://code.spip.net/@debut_boite_alerte
+// https://code.spip.net/@debut_boite_alerte
 function debut_boite_alerte() {
 	return "<table width='100%' cellpadding='6' border='0'><tr><td style='width: 100%; background-color: red'><table width='100%' cellpadding='12' border='0'><tr><td style='width: 100%; background-color: white'>";
 }
 
-// http://code.spip.net/@fin_boite_alerte
+// https://code.spip.net/@fin_boite_alerte
 function fin_boite_alerte() {
 	return "</td></tr></table></td></tr></table>";
 }
@@ -229,13 +229,13 @@ function fin_boite_alerte() {
 //
 // une boite info
 //
-// http://code.spip.net/@debut_boite_info
+// https://code.spip.net/@debut_boite_info
 function debut_boite_info($return=false) {
 	$r ="\n<div class='cadre-info verdana1'>";
 	if ($return) return $r; else echo $r;
 }
 
-// http://code.spip.net/@fin_boite_info
+// https://code.spip.net/@fin_boite_info
 function fin_boite_info($return=false) {
 	$r = "</div>";
 	if ($return) return $r; else echo $r;
@@ -244,7 +244,7 @@ function fin_boite_info($return=false) {
 //
 // une autre boite
 //
-// http://code.spip.net/@bandeau_titre_boite2
+// https://code.spip.net/@bandeau_titre_boite2
 function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $af = true) {
 	global $spip_lang_left, $spip_display, $browser_name;
 	
@@ -269,7 +269,7 @@ function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $
 // La boite des raccourcis
 // Se place a droite si l'ecran est en mode panoramique.
 
-// http://code.spip.net/@bloc_des_raccourcis
+// https://code.spip.net/@bloc_des_raccourcis
 function bloc_des_raccourcis($bloc) {
 	global $spip_display;
 
@@ -288,7 +288,7 @@ function bloc_des_raccourcis($bloc) {
 
 // Afficher un petit "+" pour lien vers autre page
 
-// http://code.spip.net/@afficher_plus
+// https://code.spip.net/@afficher_plus
 function afficher_plus($lien) {
 	global $options, $spip_lang_right, $spip_display;
 	
@@ -304,7 +304,7 @@ function afficher_plus($lien) {
 // Fonctions d'affichage
 //
 
-// http://code.spip.net/@afficher_liste
+// https://code.spip.net/@afficher_liste
 function afficher_liste($largeurs, $table, $styles = '') {
 	global $spip_display;
 
@@ -326,7 +326,7 @@ function afficher_liste($largeurs, $table, $styles = '') {
 	return $res;
 }
 
-// http://code.spip.net/@afficher_liste_display_neq4
+// https://code.spip.net/@afficher_liste_display_neq4
 function afficher_liste_display_neq4($largeurs, $t, $styles = '') {
 	global $spip_lang_left,$browser_name;
 	if (!is_array($t) or !count($t)) return "";
@@ -350,7 +350,7 @@ function afficher_liste_display_neq4($largeurs, $t, $styles = '') {
 	return "\n<tr class='tr_liste'$evt>$res</tr>";
 }
 
-// http://code.spip.net/@afficher_liste_display_eq4
+// https://code.spip.net/@afficher_liste_display_eq4
 function afficher_liste_display_eq4($largeurs, $t, $styles = '') {
 	global $spip_lang_left;
 	if (!is_array($t) or !count($t)) return "";
@@ -367,7 +367,7 @@ function afficher_liste_display_eq4($largeurs, $t, $styles = '') {
 	return $res;
 }
 
-// http://code.spip.net/@afficher_tranches_requete
+// https://code.spip.net/@afficher_tranches_requete
 function afficher_tranches_requete($num_rows, $tmp_var, $url='', $nb_aff = 10, $old_arg=NULL) {
 	static $ancre = 0;
 	global $browser_name, $spip_lang_right, $spip_display;
@@ -430,7 +430,7 @@ function afficher_tranches_requete($num_rows, $tmp_var, $url='', $nb_aff = 10, $
 }
 
 
-// http://code.spip.net/@affiche_tranche_bandeau
+// https://code.spip.net/@affiche_tranche_bandeau
 function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, $force, $largeurs, $styles, $skel, $own='')
 {
 
@@ -477,7 +477,7 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 }
 
 
-// http://code.spip.net/@afficher_liste_debut_tableau
+// https://code.spip.net/@afficher_liste_debut_tableau
 function afficher_liste_debut_tableau() {
 	global $spip_display;
 
@@ -485,7 +485,7 @@ function afficher_liste_debut_tableau() {
 	else return '<ul>';
 }
 
-// http://code.spip.net/@afficher_liste_fin_tableau
+// https://code.spip.net/@afficher_liste_fin_tableau
 function afficher_liste_fin_tableau() {
 	global $spip_display;
 	if ($spip_display != 4) return "</table>";
@@ -493,7 +493,7 @@ function afficher_liste_fin_tableau() {
 }
 
 
-// http://code.spip.net/@puce_statut_article
+// https://code.spip.net/@puce_statut_article
 function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax = false) {
 	global $spip_lang_left, $dir_lang, $connect_statut, $options;
 	
@@ -576,7 +576,7 @@ function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax 
 	. '</span>';
 }
 
-// http://code.spip.net/@puce_statut_breve
+// https://code.spip.net/@puce_statut_breve
 function puce_statut_breve($id, $statut, $id_rubrique, $type) {
 	global $spip_lang_left, $dir_lang;
 
@@ -627,7 +627,7 @@ function puce_statut_breve($id, $statut, $id_rubrique, $type) {
 		.  "</span></span>";
 }
 
-// http://code.spip.net/@afficher_script_statut
+// https://code.spip.net/@afficher_script_statut
 function afficher_script_statut($id, $type, $n, $img, $statut, $title, $act)
 {
   return http_href_img("javascript:selec_statut('$id', '$type', $n, '" .
@@ -642,7 +642,7 @@ function afficher_script_statut($id, $type, $n, $img, $statut, $title, $act)
 //
 // Afficher tableau d'articles
 //
-// http://code.spip.net/@afficher_articles
+// https://code.spip.net/@afficher_articles
 function afficher_articles($titre, $requete, $formater='') {
 
 	if (!isset($requete['FROM'])) $requete['FROM'] = 'spip_articles AS articles';
@@ -696,7 +696,7 @@ function afficher_articles($titre, $requete, $formater='') {
 	return afficher_articles_trad($titre, $requete, $formater, $tmp_var, $hash, $cpt);
 }
 
-// http://code.spip.net/@afficher_articles_trad
+// https://code.spip.net/@afficher_articles_trad
 function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $hash, $cpt, $trad=0) {
 
 	global $options, $spip_lang_right;
@@ -752,7 +752,7 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 	return ajax_action_greffe($tmp_var,$res);
 }
 
-// http://code.spip.net/@afficher_articles_trad_boucle
+// https://code.spip.net/@afficher_articles_trad_boucle
 function afficher_articles_trad_boucle($row)
 {
   	global $dir_lang,  $spip_lang_right, $spip_display;
@@ -856,7 +856,7 @@ function afficher_articles_trad_boucle($row)
 // Afficher tableau de breves
 //
 
-// http://code.spip.net/@afficher_breves
+// https://code.spip.net/@afficher_breves
 function afficher_breves($titre_table, $requete, $affrub=false) {
 	global  $couleur_foncee, $options;
  
@@ -886,7 +886,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 
 }
 
-// http://code.spip.net/@afficher_breves_boucle
+// https://code.spip.net/@afficher_breves_boucle
 function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 {
   global  $dir_lang, $options, $connect_statut, $spip_lang_right;
@@ -954,7 +954,7 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 // Afficher tableau de rubriques
 //
 
-// http://code.spip.net/@afficher_rubriques
+// https://code.spip.net/@afficher_rubriques
 function afficher_rubriques($titre_table, $requete) {
 	global $options;
 
@@ -964,7 +964,7 @@ function afficher_rubriques($titre_table, $requete) {
 	return affiche_tranche_bandeau($requete, "rubrique-24.gif", "#999999", "white", $tmp_var, $titre_table, false, $largeurs, $styles, 'afficher_rubriques_boucle');
 }
 
-// http://code.spip.net/@afficher_rubriques_boucle
+// https://code.spip.net/@afficher_rubriques_boucle
 function afficher_rubriques_boucle($row, &$tous_id)
 {
 	$vals = '';
@@ -1000,7 +1000,7 @@ function afficher_rubriques_boucle($row, &$tous_id)
 //
 // Afficher des auteurs sur requete SQL
 //
-// http://code.spip.net/@bonhomme_statut
+// https://code.spip.net/@bonhomme_statut
 function bonhomme_statut($row) {
 	global $connect_statut;
 
@@ -1029,7 +1029,7 @@ function bonhomme_statut($row) {
 }
 
 // La couleur du statut
-// http://code.spip.net/@puce_statut
+// https://code.spip.net/@puce_statut
 function puce_statut($statut, $type='article') {
 	switch ($statut) {
 		case 'publie':
@@ -1052,7 +1052,7 @@ function puce_statut($statut, $type='article') {
 // Afficher les forums
 //
 
-// http://code.spip.net/@afficher_forum
+// https://code.spip.net/@afficher_forum
 function afficher_forum($request, $retour, $arg, $controle_id_article = false) {
 	global $spip_display;
 	static $compteur_forum = 0;
@@ -1084,7 +1084,7 @@ function afficher_forum($request, $retour, $arg, $controle_id_article = false) {
 	return $res;
 }
 
-// http://code.spip.net/@afficher_forum_thread
+// https://code.spip.net/@afficher_forum_thread
 function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_forum, $i, $retour, $arg) {
 	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right, $spip_display;
 	static $voir_logo = array(); // pour ne calculer qu'une fois
@@ -1213,7 +1213,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 }
 
 
-// http://code.spip.net/@forum_logo
+// https://code.spip.net/@forum_logo
 function forum_logo($statut)
 {
 	if ($statut == "prive") return "forum-interne-24.gif";
@@ -1222,7 +1222,7 @@ function forum_logo($statut)
 	else return "forum-public-24.gif";
 }
 
-// http://code.spip.net/@afficher_forum_mots
+// https://code.spip.net/@afficher_forum_mots
 function afficher_forum_mots($id_forum)
 {
 	$result = spip_query("SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot");
@@ -1241,7 +1241,7 @@ function afficher_forum_mots($id_forum)
 
 // affiche les traits de liaisons entre les reponses
 
-// http://code.spip.net/@afficher_forum_4
+// https://code.spip.net/@afficher_forum_4
 function afficher_forum_4($compteur_forum, $nb_forum, $thread)
 {
 	global $spip_lang_rtl;
@@ -1261,7 +1261,7 @@ function afficher_forum_4($compteur_forum, $nb_forum, $thread)
 }
 
 
-// http://code.spip.net/@envoi_link
+// https://code.spip.net/@envoi_link
 function envoi_link($nom_site_spip) {
 	global $connect_statut, $connect_toutes_rubriques, $spip_display;
 	global $spip_lang, $couleur_claire, $couleur_foncee;
@@ -1326,7 +1326,7 @@ function envoi_link($nom_site_spip) {
 	return $res . $js;
 }
 
-// http://code.spip.net/@debut_javascript
+// https://code.spip.net/@debut_javascript
 function debut_javascript($admin, $stat)
 {
 	global $spip_lang_left, $browser_name, $browser_version;
@@ -1375,7 +1375,7 @@ function debut_javascript($admin, $stat)
 // Fonctions onglets
 
 
-// http://code.spip.net/@debut_onglet
+// https://code.spip.net/@debut_onglet
 function debut_onglet(){
 
 	return "
@@ -1383,12 +1383,12 @@ function debut_onglet(){
 ";
 }
 
-// http://code.spip.net/@fin_onglet
+// https://code.spip.net/@fin_onglet
 function fin_onglet(){
 	return "</tr></table></div>\n";
 }
 
-// http://code.spip.net/@onglet
+// https://code.spip.net/@onglet
 function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 	global $spip_display, $spip_lang_left ;
 
@@ -1431,7 +1431,7 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 	return $res;
 }
 
-// http://code.spip.net/@icone
+// https://code.spip.net/@icone
 function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 	global $spip_display;
 
@@ -1494,7 +1494,7 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 	if ($afficher == 'oui')	echo $icone; else return $icone;
 }
 
-// http://code.spip.net/@icone_horizontale
+// https://code.spip.net/@icone_horizontale
 function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true, $javascript='') {
 	global $spip_display;
 
@@ -1536,7 +1536,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true
 }
 
 
-// http://code.spip.net/@gros_titre
+// https://code.spip.net/@gros_titre
 function gros_titre($titre, $ze_logo='', $aff=true){
 	global $couleur_foncee, $spip_display;
 	if ($spip_display == 4) {
@@ -1556,7 +1556,7 @@ function gros_titre($titre, $ze_logo='', $aff=true){
 // Cadre centre (haut de page)
 //
 
-// http://code.spip.net/@debut_grand_cadre
+// https://code.spip.net/@debut_grand_cadre
 function debut_grand_cadre($return=false){
 	global $spip_ecran;
 	
@@ -1566,7 +1566,7 @@ function debut_grand_cadre($return=false){
 	if ($return) return $res; else echo $res;
 }
 
-// http://code.spip.net/@fin_grand_cadre
+// https://code.spip.net/@fin_grand_cadre
 function fin_grand_cadre($return=false){
 	$res = "\n</td></tr></table>";
 	if ($return) return $res; else echo $res;
@@ -1574,7 +1574,7 @@ function fin_grand_cadre($return=false){
 
 // Cadre formulaires
 
-// http://code.spip.net/@debut_cadre_formulaire
+// https://code.spip.net/@debut_cadre_formulaire
 function debut_cadre_formulaire($style='', $return=false){
 	$x = "\n<div class='cadre-formulaire'" .
 	  (!$style ? "" : " style='$style'") .
@@ -1582,7 +1582,7 @@ function debut_cadre_formulaire($style='', $return=false){
 	if ($return) return  $x; else echo $x;
 }
 
-// http://code.spip.net/@fin_cadre_formulaire
+// https://code.spip.net/@fin_cadre_formulaire
 function fin_cadre_formulaire($return=false){
 	if ($return) return  "</div>\n"; else echo "</div>\n";
 }
@@ -1593,7 +1593,7 @@ function fin_cadre_formulaire($return=false){
 // Debut de la colonne de gauche
 //
 
-// http://code.spip.net/@debut_gauche
+// https://code.spip.net/@debut_gauche
 function debut_gauche($rubrique = "accueil", $return=false) {
 	global $spip_display;
 	global $spip_ecran;
@@ -1621,7 +1621,7 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 	if ($return) return $res; else echo $res;
 }
 
-// http://code.spip.net/@fin_gauche
+// https://code.spip.net/@fin_gauche
 function fin_gauche()
 {
 	return "</td></tr></table>";
@@ -1631,7 +1631,7 @@ function fin_gauche()
 // Presentation de l''interface privee, marge de droite
 //
 
-// http://code.spip.net/@creer_colonne_droite
+// https://code.spip.net/@creer_colonne_droite
 function creer_colonne_droite($rubrique="", $return= false){
 	static $deja_colonne_droite;
 	global $spip_ecran, $spip_lang_rtl, $spip_lang_left;
@@ -1663,13 +1663,13 @@ function creer_colonne_droite($rubrique="", $return= false){
 	if ($return) return $res; else echo $res;
 }
 
-// http://code.spip.net/@formulaire_large
+// https://code.spip.net/@formulaire_large
 function formulaire_large()
 {
 	return isset($_GET['exec'])?preg_match(',^((articles|breves|rubriques)_edit|forum_envoi),', $_GET['exec']):false;
 }
 
-// http://code.spip.net/@debut_droite
+// https://code.spip.net/@debut_droite
 function debut_droite($rubrique="", $return= false) {
 	global $options, $spip_ecran, $spip_display;
 	global $spip_lang_left, $couleur_foncee, $couleur_claire;
@@ -1701,7 +1701,7 @@ function debut_droite($rubrique="", $return= false) {
 	if ($return) return $res; else echo $res;
 }
 
-// http://code.spip.net/@liste_articles_bloques
+// https://code.spip.net/@liste_articles_bloques
 function liste_articles_bloques()
 {
 	global $connect_id_auteur, $couleur_foncee;
@@ -1750,7 +1750,7 @@ function liste_articles_bloques()
 // Fin de page de l'interface privee. 
 // Elle comporte une image invisble declenchant une tache de fond
 
-// http://code.spip.net/@fin_page
+// https://code.spip.net/@fin_page
 function fin_page()
 {
 	global $spip_display;
@@ -1779,7 +1779,7 @@ function fin_page()
 	. "</body></html>\n";
 }
 
-// http://code.spip.net/@debloquer_article
+// https://code.spip.net/@debloquer_article
 function debloquer_article($arg, $texte) {
 
 	// cas d'un article pas liberable : on esst sur sa page d'edition
@@ -1799,7 +1799,7 @@ function debloquer_article($arg, $texte) {
 	  "</a>";
 }
 
-// http://code.spip.net/@meme_rubrique
+// https://code.spip.net/@meme_rubrique
 function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $ajax=false)
 {
 
@@ -1874,7 +1874,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 	. "\n<div id='imgstatut$idom$id_rubrique' class='bandeau_rubriques' style='z-index: 1;'>$retour</div>";
 }
 
-// http://code.spip.net/@afficher_numero_edit
+// https://code.spip.net/@afficher_numero_edit
 function afficher_numero_edit($id, $key, $type)
 {
 	global $spip_lang_right, $spip_lang_left;
@@ -1907,7 +1907,7 @@ function afficher_numero_edit($id, $key, $type)
 // Afficher la hierarchie des rubriques
 //
 
-// http://code.spip.net/@afficher_hierarchie
+// https://code.spip.net/@afficher_hierarchie
 function afficher_hierarchie($id_rubrique) {
 	global $spip_lang_left;
 
@@ -1947,7 +1947,7 @@ function afficher_hierarchie($id_rubrique) {
 }
 
 
-// http://code.spip.net/@enfant_rub
+// https://code.spip.net/@enfant_rub
 function enfant_rub($collection){
 	global $couleur_foncee, $lang_dir;
 	global $spip_display, $spip_lang_left, $spip_lang_right, $spip_lang;
@@ -2014,7 +2014,7 @@ function enfant_rub($collection){
 
 }
 
-// http://code.spip.net/@sous_enfant_rub
+// https://code.spip.net/@sous_enfant_rub
 function sous_enfant_rub($collection2){
 	global $lang_dir, $spip_lang_dir, $spip_lang_left;
 
@@ -2037,7 +2037,7 @@ function sous_enfant_rub($collection2){
 	return $retour;
 }
 
-// http://code.spip.net/@afficher_enfant_rub
+// https://code.spip.net/@afficher_enfant_rub
 function afficher_enfant_rub($id_rubrique, $bouton=false, $return=false) {
 	global  $spip_lang_right, $spip_display;
 	
@@ -2081,7 +2081,7 @@ function afficher_enfant_rub($id_rubrique, $bouton=false, $return=false) {
 }
 
 // Pour construire des menu avec SELECTED
-// http://code.spip.net/@mySel
+// https://code.spip.net/@mySel
 function mySel($varaut,$variable, $option = NULL) {
 	$res = ' value="'.$varaut.'"' . (($variable==$varaut) ? ' selected="selected"' : '');
 
@@ -2090,7 +2090,7 @@ function mySel($varaut,$variable, $option = NULL) {
 
 
 // Voir en ligne, ou apercu, ou rien (renvoie tout le bloc)
-// http://code.spip.net/@voir_en_ligne
+// https://code.spip.net/@voir_en_ligne
 function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af = true) {
 	global $connect_statut;
 
@@ -2144,7 +2144,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 
 //
 // Creer un bouton qui renvoie vers la bonne url spip_rss
-// http://code.spip.net/@bouton_spip_rss
+// https://code.spip.net/@bouton_spip_rss
 function bouton_spip_rss($op, $args, $fmt='rss') {
 
 	include_spip('inc/acces');

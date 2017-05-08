@@ -20,7 +20,7 @@ function formulaires_editer_montant_charger_dist($id_montant='new',$retour='', $
 }
 
 // Choix par defaut des options de presentation
-// http://code.spip.net/@articles_edit_config
+// https://code.spip.net/@articles_edit_config
 function montants_edit_config($row)
 {
 	$config = $GLOBALS['meta'];
@@ -36,7 +36,7 @@ function formulaires_editer_montant_verifier_dist($id_montant='new',$retour='', 
 	return $erreurs;
 }
 
-// http://code.spip.net/@inc_editer_groupe_mot_dist
+// https://code.spip.net/@inc_editer_groupe_mot_dist
 function formulaires_editer_montant_traiter_dist($id_montant='new',$retour='', $config_fonc='montants_edit_config', $row=array(), $hidden=''){
 	$res = array();
 	$res['editable'] = true;

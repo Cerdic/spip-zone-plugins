@@ -57,7 +57,7 @@ function acs_acces($page) {
   }
 }
 
-// (ressemble vaguement à exec_configuration_dist() de spip 1.9.2 - http://code.spip.net/@exec_configuration_dist)
+// (ressemble vaguement à exec_configuration_dist() de spip 1.9.2 - https://code.spip.net/@exec_configuration_dist)
 function acs_exit() {
   global $spip_version_code;
 

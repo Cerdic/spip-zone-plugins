@@ -12,7 +12,7 @@ include_spip('inc/actions');
 include_spip('inc/article_select');
 include_spip('versioning_fonctions');
 
-// http://code.spip.net/@exec_articles_dist
+// https://code.spip.net/@exec_articles_dist
 function exec_articles_dist()
 {
 	$id_article= intval(_request('id_article'));
@@ -49,7 +49,7 @@ function exec_articles_dist()
 		fin_page();
 }
 
-// http://code.spip.net/@articles_affiche
+// https://code.spip.net/@articles_affiche
 function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot,  $select_groupe, $trad_err)
 {
 	global $spip_display, $spip_lang_left, $spip_lang_right, $dir_lang;
@@ -174,7 +174,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	. fin_cadre_relief(true);
 }
 
-// http://code.spip.net/@articles_documents
+// https://code.spip.net/@articles_documents
 function articles_documents($flag_editable, $type, $id)
 {
 	global $spip_lang_left;
@@ -211,7 +211,7 @@ EOF;
 	. $res;
 }
 
-// http://code.spip.net/@boite_info_articles
+// https://code.spip.net/@boite_info_articles
 function boite_info_articles($id_article, $statut_article, $visites, $id_version)
 {
 	global $connect_statut, $options, $flag_revisions;
@@ -249,7 +249,7 @@ function boite_info_articles($id_article, $statut_article, $visites, $id_version
 // Boites de configuration avancee
 //
 
-// http://code.spip.net/@boites_de_config_articles
+// https://code.spip.net/@boites_de_config_articles
 function boites_de_config_articles($id_article)
 {
 	if (autoriser('modererforum', 'article', $id_article)) {
@@ -282,7 +282,7 @@ function boites_de_config_articles($id_article)
 	. fin_cadre_relief(true);
 }
 
-// http://code.spip.net/@boite_article_virtuel
+// https://code.spip.net/@boite_article_virtuel
 function boite_article_virtuel($id_article, $virtuel, $flag)
 {
 
@@ -312,7 +312,7 @@ function bouton_creer_versions($id_article,$align='')
 // Fin Gestion des versions - Netapsys
 
 
-// http://code.spip.net/@bouton_modifier_articles
+// https://code.spip.net/@bouton_modifier_articles
 function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode, $ip, $im, $align='')
 {
 	if ($flag_modif) {
@@ -323,7 +323,7 @@ function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode,
 	else return icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.gif", "edit.gif", $align, false);
 }
 
-// http://code.spip.net/@titres_articles
+// https://code.spip.net/@titres_articles
 function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique, $modif)
 {
 	global  $dir_lang, $spip_lang_left, $spip_lang_right;
@@ -385,7 +385,7 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 	. "</tr></table>\n";
 }
 
-// http://code.spip.net/@afficher_corps_articles
+// https://code.spip.net/@afficher_corps_articles
 function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 {
   global $revision_nbsp, $activer_revision_nbsp, $champs_extra, $les_notes, $dir_lang;

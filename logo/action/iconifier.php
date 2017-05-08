@@ -39,7 +39,7 @@ function action_iconifier_dist()
 	}
 }
 
-// http://code.spip.net/@action_spip_image_effacer_dist
+// https://code.spip.net/@action_spip_image_effacer_dist
 function action_spip_image_effacer_dist($arg) {
 
 	if (!strstr($arg, ".."))
@@ -52,7 +52,7 @@ function action_spip_image_effacer_dist($arg) {
 
 // $source = $_FILES[0]
 // $dest = arton12.xxx
-// http://code.spip.net/@action_spip_image_ajouter_dist
+// https://code.spip.net/@action_spip_image_ajouter_dist
 function action_spip_image_ajouter_dist($arg,$sousaction2,$source) {
 	global $formats_logos;
 

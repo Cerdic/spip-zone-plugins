@@ -22,7 +22,7 @@ function produits_liens_autoriser(){}
  * au hack id_objet = 0-id_auteur
  * Il faut aussi que les liens de produits aient ete actives sur les objets concernes
  *
- * http://code.spip.net/@autoriser_joindredocument_dist
+ * https://code.spip.net/@autoriser_joindredocument_dist
  *
  * @return bool
  */

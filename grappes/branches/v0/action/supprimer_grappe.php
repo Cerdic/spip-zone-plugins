@@ -9,7 +9,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/filtres');
 
-// http://code.spip.net/@action_instituer_groupe_mots_dist
+// https://code.spip.net/@action_instituer_groupe_mots_dist
 function action_supprimer_grappe_dist()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -20,7 +20,7 @@ function action_supprimer_grappe_dist()
 	} else action_supprimer_grappe_post($r[1]);
 }
 
-// http://code.spip.net/@action_instituer_groupe_mots_post
+// https://code.spip.net/@action_instituer_groupe_mots_post
 function action_supprimer_grappe_post($id_grappe)
 {
 	if ($id_grappe < 0){

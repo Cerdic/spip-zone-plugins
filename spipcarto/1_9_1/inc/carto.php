@@ -472,7 +472,7 @@ function afficher_srs ($id_srs=''){
 	fin_cadre_enfonce();
 
 }
-// http://code.spip.net/@puce_statut_carto_carte
+// https://code.spip.net/@puce_statut_carto_carte
 function puce_statut_carto_carte($id, $statut) {
 	global $spip_lang_left, $dir_lang, $connect_statut, $options;
 	
@@ -531,7 +531,7 @@ function puce_statut_carto_carte($id, $statut) {
 	return $inser_puce;
 }
 
-// http://code.spip.net/@puce_statut_carto_objet
+// https://code.spip.net/@puce_statut_carto_objet
 function puce_statut_carto_objet($id, $statut, $type, $droit) {
 	global $spip_lang_left, $dir_lang;
 

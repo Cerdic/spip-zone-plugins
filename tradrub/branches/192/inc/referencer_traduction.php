@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-// http://code.spip.net/@inc_referencer_traduction_dist
+// https://code.spip.net/@inc_referencer_traduction_dist
 function inc_referencer_traduction_dist($id, $flag, $id_rubrique, $id_trad, $trad_err='',$type='article')
 {
 	global $connect_statut, $couleur_claire, $options, $connect_toutes_rubriques, $spip_lang_right, $spip_display, $dir_lang;
@@ -153,7 +153,7 @@ function inc_referencer_traduction_dist($id, $flag, $id_rubrique, $id_trad, $tra
 }
 
 
-// http://code.spip.net/@articles_traduction
+// https://code.spip.net/@articles_traduction
 function articles_traduction($id_article, $id_trad)
 {
 	global $connect_toutes_rubriques, $dir_lang;
@@ -198,7 +198,7 @@ function articles_traduction($id_article, $id_trad)
 
 	return $table;
 }
-// http://code.spip.net/@rubriques_traduction
+// https://code.spip.net/@rubriques_traduction
 function rubriques_traduction($id_rubrique, $id_trad)
 {
 	global $connect_toutes_rubriques, $dir_lang;

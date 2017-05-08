@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 include_spip('inc/mots');
 
-// http://code.spip.net/@inc_editer_motdoc_dist
+// https://code.spip.net/@inc_editer_motdoc_dist
 //voir les memes noms de fichier dans action et exec ajout global $id_article
 function inc_editer_motdoc_dist($objet, $id_objet, $cherche_mot, $select_groupe, $flag) {
 	global $id_article, $options, $connect_statut, $spip_lang_rtl, $spip_lang_right, $spip_lang;
@@ -110,7 +110,7 @@ function inc_editer_motdoc_dist($objet, $id_objet, $cherche_mot, $select_groupe,
 	return ajax_action_greffe("editer_motdoc-$id_objet", $res);
 }
 
-// http://code.spip.net/@inserer_motdoc
+// https://code.spip.net/@inserer_motdoc
 function inserer_motdoc($table, $table_id, $id_objet, $id_mot)
 {
 	$result = spip_num_rows(spip_query("SELECT id_mot FROM $table WHERE id_mot=$id_mot AND $table_id=$id_objet"));
@@ -122,7 +122,7 @@ function inserer_motdoc($table, $table_id, $id_objet, $id_mot)
 }
 
 
-// http://code.spip.net/@inserer_motdoc_cle
+// https://code.spip.net/@inserer_motdoc_cle
 function inserer_motdoc_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table, $table_id, $url_base)
 {
 	if ($table == 'articles') $ou = _T('info_l_article');
@@ -165,7 +165,7 @@ function inserer_motdoc_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table
 	return array($res, $nouveaux_mots);
 }
 
-// http://code.spip.net/@afficher_motsdoc_cles
+// https://code.spip.net/@afficher_motsdoc_cles
 //alm cette fonction marche mais il faudrait alléger carrément l'affichage, il ne faut pas mettre option mot unique
 function afficher_motsdoc_cles($flag_editable, $objet, $id_objet, $table, $table_id, $url_base, $visible)
 {
@@ -258,7 +258,7 @@ function afficher_motsdoc_cles($flag_editable, $objet, $id_objet, $table, $table
 	return $res;
 }
 
-// http://code.spip.net/@formulaire_motdoc_remplace
+// https://code.spip.net/@formulaire_motdoc_remplace
 function formulaire_motdoc_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet)
 {
 	$result = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe = $id_groupe ORDER by titre");
@@ -290,7 +290,7 @@ function formulaire_motdoc_remplace($id_groupe, $id_mot, $url_base, $table, $tab
 }
 
 
-// http://code.spip.net/@formulaire_motsdoc_cles //pas de modif
+// https://code.spip.net/@formulaire_motsdoc_cles //pas de modif
 function formulaire_motsdoc_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet) {
 	global $connect_statut, $spip_lang, $spip_lang_right, $spip_lang_rtl;
 
@@ -370,7 +370,7 @@ function formulaire_motsdoc_cles($id_groupes_vus, $id_objet, $les_mots, $table, 
 }
 
 
-// http://code.spip.net/@menu_motsdoc non modifié
+// https://code.spip.net/@menu_motsdoc non modifié
 function menu_motsdoc($row, $id_groupes_vus, $les_mots)
 {
 	$rand = rand(0,10000); # pour antifocus & ajax

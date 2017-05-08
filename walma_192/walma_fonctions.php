@@ -93,7 +93,7 @@ $flux.= '<script src="' .generer_url_public('walma.js', $paramjs). '" type="text
 }
 
 // #FORMULAIRE_UPLOAD
-// voir http://code.spip.net/@afficher_documents_colonne
+// voir https://code.spip.net/@afficher_documents_colonne
 //afficher_documents_walma pour telecharger uniquement les docs
 // [(#ID_ARTICLE|upload_documents_walma)]
 function upload_documents_walma($id, $type="article",$script=NULL) {

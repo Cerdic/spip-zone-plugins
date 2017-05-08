@@ -26,7 +26,7 @@ function formulaires_commenter_relecture_verifier_dist($element, $id_relecture='
 	return $erreurs;
 }
 
-// http://code.spip.net/@inc_editer_article_dist
+// https://code.spip.net/@inc_editer_article_dist
 function formulaires_commenter_relecture_traiter_dist($element, $id_relecture='oui', $redirect='') {
 	$messages = array();
 	return $messages;

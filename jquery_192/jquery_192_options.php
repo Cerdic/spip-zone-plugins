@@ -11,7 +11,7 @@ $GLOBALS['spip_pipeline']['jquery_plugins'] = '';
 
 // Inserer jQuery
 // et au passage verifier qu'on ne doublonne pas #INSERT_HEAD
-// http://code.spip.net/@f_jQuery
+// https://code.spip.net/@f_jQuery
 function f_jQuery_192($texte) {
 	static $doublon=0;
 	if ($doublon++) {

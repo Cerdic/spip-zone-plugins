@@ -17,7 +17,7 @@ $GLOBALS['extracteur']['docx'] = 'extracteur_docx';
 // Necessite le parametre -enable-zip pour Linux.
 // Si vous ne pouvez pas utiliser ZipArchive (librairies manquantes ou vieille version de PHP), vous pouvez utilisez la librairie PclZip ( http://www.phpconcept.net/pclzip )
 // Necessite lib/fonctions_zip.php
-// http://code.spip.net/@extracteur_docx
+// https://code.spip.net/@extracteur_docx
 
 function extracteur_docx($fichier, &$charset, $bin = '', $opt = '') {
 	if(include_spip('lib/fonctions_zip')){

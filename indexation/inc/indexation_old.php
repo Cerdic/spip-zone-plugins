@@ -132,11 +132,11 @@ if ($reindex) creer_liste_indexation();
 
 
 // Filtres d'indexation
-// http://code.spip.net/@unserialize_join
+// https://code.spip.net/@unserialize_join
 function unserialize_join($extra){
 	return @join(' ', unserialize($extra));
 }
-// http://code.spip.net/@contenu_page_accueil
+// https://code.spip.net/@contenu_page_accueil
 function contenu_page_accueil($url){
 	$texte = '';
 	if ($GLOBALS['meta']["visiter_sites"] == "oui") {
@@ -146,13 +146,13 @@ function contenu_page_accueil($url){
 	}
 	return $texte;
 }
-// http://code.spip.net/@nettoie_nom_fichier
+// https://code.spip.net/@nettoie_nom_fichier
 function nettoie_nom_fichier($fichier){
 	return preg_replace(',^(IMG/|.*://),', '', $fichier);
 }
 
 // Renvoie la liste des "mots" d'un texte (ou d'une requete adressee au moteur)
-// http://code.spip.net/@mots_indexation
+// https://code.spip.net/@mots_indexation
 function mots_indexation($texte, $min_long = 3) {
 	include_spip('inc/charsets');
 	include_spip('inc/texte');
@@ -196,7 +196,7 @@ function mots_indexation($texte, $min_long = 3) {
 	return pipeline('mots_indexation',array('args'=>array('min_long'=>$min_long),'data'=>preg_split("/ +/", trim($texte))));
 }
 
-// http://code.spip.net/@indexer_chaine
+// https://code.spip.net/@indexer_chaine
 function indexer_chaine($texte, $val = 1, $min_long = 3) {
 	global $index, $mots;
 	global $translitteration_complexe;
@@ -221,7 +221,7 @@ function indexer_chaine($texte, $val = 1, $min_long = 3) {
 // pour les tables additionnelles, selon l'ordre dans lequel
 // elles sont reperees. On stocke le tableau de conversion table->id_table
 // dans spip_meta
-// http://code.spip.net/@update_index_tables
+// https://code.spip.net/@update_index_tables
 function update_index_tables(){
 	global $tables_principales;
 	global $INDEX_tables_interdites;
@@ -289,7 +289,7 @@ function update_index_tables(){
 	ecrire_metas();
 }
 
-// http://code.spip.net/@liste_index_tables
+// https://code.spip.net/@liste_index_tables
 function liste_index_tables() {
 	$liste_tables = array();
 	if (!isset($GLOBALS['meta']['index_table'])) {
@@ -300,7 +300,7 @@ function liste_index_tables() {
 	return $liste_tables;
 }
 
-// http://code.spip.net/@id_index_table
+// https://code.spip.net/@id_index_table
 function id_index_table($table){
 	/*global $table_des_tables;
 	$t = $table_des_tables[$table];
@@ -315,7 +315,7 @@ function id_index_table($table){
 	return $id_table;
 }
 
-// http://code.spip.net/@primary_index_table
+// https://code.spip.net/@primary_index_table
 function primary_index_table($table){
 	global $tables_principales;
 	/*global $table_des_tables;
@@ -333,7 +333,7 @@ function primary_index_table($table){
 	return $p;
 }
 
-// http://code.spip.net/@deja_indexe
+// https://code.spip.net/@deja_indexe
 function deja_indexe($table, $id_objet) {
 	$table_index = 'spip_index';
 	$id_table = id_index_table($table);
@@ -342,7 +342,7 @@ function deja_indexe($table, $id_objet) {
 }
 
 // Extracteur des documents 'txt'
-// http://code.spip.net/@extracteur_txt
+// https://code.spip.net/@extracteur_txt
 function extracteur_txt($fichier, &$charset) {
 	lire_fichier($fichier, $contenu);
 
@@ -355,7 +355,7 @@ function extracteur_txt($fichier, &$charset) {
 }
 
 // Extracteur des documents 'html'
-// http://code.spip.net/@extracteur_html
+// https://code.spip.net/@extracteur_html
 function extracteur_html($fichier, &$charset) {
 	lire_fichier($fichier, $contenu);
 
@@ -370,7 +370,7 @@ function extracteur_html($fichier, &$charset) {
 
 
 // Indexer le contenu d'un document
-// http://code.spip.net/@indexer_contenu_document
+// https://code.spip.net/@indexer_contenu_document
 function indexer_contenu_document ($row, $min_long=3) {
 	global $extracteur;
 
@@ -409,7 +409,7 @@ function indexer_contenu_document ($row, $min_long=3) {
 
 
 
-// http://code.spip.net/@indexer_les_champs
+// https://code.spip.net/@indexer_les_champs
 function indexer_les_champs(&$row,&$index_desc,$ponderation = 1, $min_long=3){
 	reset($index_desc);
 	while (list($quoi,$poids) = each($index_desc)){
@@ -441,7 +441,7 @@ function indexer_les_champs(&$row,&$index_desc,$ponderation = 1, $min_long=3){
 }
 
 // Indexer les documents, auteurs, mots-cles associes a l'objet
-// http://code.spip.net/@indexer_elements_associes
+// https://code.spip.net/@indexer_elements_associes
 function indexer_elements_associes($table, $id_objet, $table_associe, $valeur, $min_long=3) {
 	global $INDEX_elements_associes, $tables_jointures, $tables_auxiliaires, $tables_principales;
 
@@ -473,7 +473,7 @@ function indexer_elements_associes($table, $id_objet, $table_associe, $valeur, $
  	}
 }
 
-// http://code.spip.net/@indexer_objet
+// https://code.spip.net/@indexer_objet
 function indexer_objet($table, $id_objet, $forcer_reset = true) {
 	global $index, $mots, $translitteration_complexe;
 	global $INDEX_elements_objet;
@@ -610,7 +610,7 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 */
 
 // API pour l'espace prive pour marquer un objet d'une table a reindexer
-// http://code.spip.net/@marquer_indexer
+// https://code.spip.net/@marquer_indexer
 function marquer_indexer ($table, $id_objet) {
 	if (!isset($GLOBALS['INDEX_elements_objet'][$table]))
 		return;
@@ -620,13 +620,13 @@ function marquer_indexer ($table, $id_objet) {
 }
 
 // A garder pour compatibilite bouton memo...
-// http://code.spip.net/@indexer_article
+// https://code.spip.net/@indexer_article
 function indexer_article($id_article) {
 	marquer_indexer('spip_articles', $id_article);
 }
 
 // n'indexer que les objets publies
-// http://code.spip.net/@critere_indexation
+// https://code.spip.net/@critere_indexation
 function critere_indexation($table) {
 	global $INDEX_critere_indexation;
 	if (isset($INDEX_critere_indexation[$table]))
@@ -636,7 +636,7 @@ function critere_indexation($table) {
 }
 
 // ne desindexer que les objets non-publies
-// http://code.spip.net/@critere_optimisation
+// https://code.spip.net/@critere_optimisation
 function critere_optimisation($table) {
 	global $INDEX_critere_optimisation;
 	if (isset($INDEX_critere_optimisation[$table]))
@@ -646,7 +646,7 @@ function critere_optimisation($table) {
 }
 
 
-// http://code.spip.net/@effectuer_une_indexation
+// https://code.spip.net/@effectuer_une_indexation
 function effectuer_une_indexation($nombre_indexations = 1) {
 	global $INDEX_iteration_nb_maxi;
 	$vu = array();
@@ -676,7 +676,7 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 	return $vu;
 }
 
-// http://code.spip.net/@executer_une_indexation_syndic
+// https://code.spip.net/@executer_une_indexation_syndic
 function executer_une_indexation_syndic() {
 	$id_syndic = 0;
 	spip_connect();
@@ -689,13 +689,13 @@ function executer_une_indexation_syndic() {
 	return $id_syndic;
 }
 
-// http://code.spip.net/@creer_liste_indexation
+// https://code.spip.net/@creer_liste_indexation
 function creer_liste_indexation() {
 	foreach (liste_index_tables() as $table)
 		spip_query("UPDATE $table SET idx='1' WHERE idx!='non'");
 }
 
-// http://code.spip.net/@purger_index
+// https://code.spip.net/@purger_index
 function purger_index() {
 		spip_query("DELETE FROM spip_index");
 		spip_query("DELETE FROM spip_index_dico");
@@ -703,7 +703,7 @@ function purger_index() {
 
 // rechercher un mot dans le dico
 // retourne deux methodes : lache puis strict
-// http://code.spip.net/@requete_dico
+// https://code.spip.net/@requete_dico
 function requete_dico($val, $min_long = 3) {
 	
 	preg_match(",^([+\-]?)(.*),",$val,$mod);
@@ -731,7 +731,7 @@ function requete_dico($val, $min_long = 3) {
 
 
 // decode la chaine recherchee et la traduit en hash
-// http://code.spip.net/@requete_hash
+// https://code.spip.net/@requete_hash
 function requete_hash ($rech) {
 	$min_long = isset($GLOBALS['INDEX_mots_min_long'])?intval($GLOBALS['INDEX_mots_min_long']):3;
 
@@ -858,7 +858,7 @@ function requete_hash ($rech) {
 // Note : si le critere est optionnel {recherche?}, ne pas s'activer
 // si la recherche est vide
 //
-// http://code.spip.net/@prepare_recherche
+// https://code.spip.net/@prepare_recherche
 function prepare_recherche($recherche, $primary = 'id_article', $id_table='articles',$nom_table='spip_articles', $cond=false) {
 	static $cache = array();
 	static $fcache = array();
@@ -971,7 +971,7 @@ function prepare_recherche($recherche, $primary = 'id_article', $id_table='artic
 }
 
 
-// http://code.spip.net/@cron_indexation
+// https://code.spip.net/@cron_indexation
 function cron_indexation($t) {
 	$c = count(effectuer_une_indexation());
 	// si des indexations ont ete effectuees, on passe la periode a 0 s
@@ -983,7 +983,7 @@ function cron_indexation($t) {
 		return 0;
 }
 
-// http://code.spip.net/@optimiser_base_indexation
+// https://code.spip.net/@optimiser_base_indexation
 function optimiser_base_indexation($attente) {
 	// les objets inutiles
 	include_spip('inc/indexation');

@@ -108,7 +108,7 @@ function formulaires_editer_document_verifier_dist($id_document='new', $id_paren
 	return $erreurs;
 }
 
-// http://code.spip.net/@inc_editer_article_dist
+// https://code.spip.net/@inc_editer_article_dist
 function formulaires_editer_document_traiter_dist($id_document='new', $id_parent='', $retour='', $lier_trad=0, $config_fonc='documents_edit_config', $row=array(), $hidden=''){
 	if (is_null(_request('parents')))
 		set_request('parents',array());

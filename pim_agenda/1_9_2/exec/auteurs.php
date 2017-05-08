@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-// http://code.spip.net/@exec_auteurs_dist
+// https://code.spip.net/@exec_auteurs_dist
 function exec_auteurs_dist()
 {
 
@@ -48,7 +48,7 @@ function exec_auteurs_dist()
 	}
 }
 
-// http://code.spip.net/@lettres_d_auteurs
+// https://code.spip.net/@lettres_d_auteurs
 function lettres_d_auteurs($query, $debut, $max_par_page, $tri)
 {
 	$auteurs = $lettre = array();
@@ -77,7 +77,7 @@ function lettres_d_auteurs($query, $debut, $max_par_page, $tri)
 }
 
 
-// http://code.spip.net/@bandeau_auteurs
+// https://code.spip.net/@bandeau_auteurs
 function bandeau_auteurs($tri, $statut)
 {
 	global $options, $spip_lang_right, $connect_id_auteur,   $connect_statut,   $connect_toutes_rubriques;
@@ -138,7 +138,7 @@ function bandeau_auteurs($tri, $statut)
 	echo "\n<br />";
 }
 
-// http://code.spip.net/@auteurs_tranches
+// https://code.spip.net/@auteurs_tranches
 function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_page, $nombre_auteurs)
 {
 	global $options, $spip_lang_right;
@@ -228,7 +228,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 	. fin_cadre_relief(true);
 }
 
-// http://code.spip.net/@auteurs_href
+// https://code.spip.net/@auteurs_href
 function auteurs_href($clic, $args='', $att='')
 {
 	$h = generer_url_ecrire('auteurs', $args);
@@ -240,7 +240,7 @@ function auteurs_href($clic, $args='', $att='')
 	return "<a href='$h#$a'$att>$clic</a>";
 }
 
-// http://code.spip.net/@requete_auteurs
+// https://code.spip.net/@requete_auteurs
 function requete_auteurs($tri, $statut, $groupe)
 {
   global $connect_statut, $spip_lang, $connect_id_auteur;
@@ -310,7 +310,7 @@ default:
  return $row;
 }
 
-// http://code.spip.net/@afficher_n_auteurs
+// https://code.spip.net/@afficher_n_auteurs
 function afficher_n_auteurs($auteurs) {
 	global $connect_statut, $options;
 

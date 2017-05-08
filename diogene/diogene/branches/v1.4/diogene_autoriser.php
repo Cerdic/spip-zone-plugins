@@ -85,7 +85,7 @@ function autoriser_diogene_utiliser($faire, $type, $id, $qui, $opt) {
  * @param array $opt Des options
  * @return boolean true/false
  * 
- * http://code.spip.net/@autoriser_rubrique_creerarticledans_dist
+ * https://code.spip.net/@autoriser_rubrique_creerarticledans_dist
  */
 function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt) {
 	if(_DIR_PLUGIN_PAGES){
@@ -192,7 +192,7 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 
 /**
  * Autoriser a creer un site dans la rubrique $id
- * Surcharge de SPIP : http://code.spip.net/@autoriser_rubrique_creersitedans_dist
+ * Surcharge de SPIP : https://code.spip.net/@autoriser_rubrique_creersitedans_dist
  * 
  * @param string $faire L'action
  * @param string $type Le type d'objet

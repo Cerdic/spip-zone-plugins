@@ -40,7 +40,7 @@ function action_supprimer_pdf_dist($arg = null) {
 	$supp = supprimer_lien_document($id_document, $objet, $id, true);
 
 	// note: si le 4e arg vaut TRUE, le document est également supprimé de la table spip_document si plus lie à aucun objet
-	// voir http://code.spip.net/autodoc/tree/plugins-dist/medias/action/dissocier_document.php.html#function_supprimer_lien_document
+	// voir https://code.spip.net/autodoc/tree/plugins-dist/medias/action/dissocier_document.php.html#function_supprimer_lien_document
 	
 	// si la suppresion c'est bien faite dans spip_documents et spip_documents_liens,
 	// on remet à 0 l'id du document dans la table ad-hoc

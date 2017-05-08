@@ -11,7 +11,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://code.spip.net/@supprimer_document
+// https://code.spip.net/@supprimer_document
 function action_spipmotion_supprimer_encodages_doubles_dist() {
 	include_spip('inc/autoriser');
 	if (!autoriser('webmestre')){

@@ -2,7 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://code.spip.net/@inc_instituer_article_dist
+// https://code.spip.net/@inc_instituer_article_dist
 function inc_instituer_projet_dist($id_projet, $statut, $id_parent)
 {
 	if (!autoriser('modifier', 'projet', $id_projet)) return '';

@@ -3,7 +3,7 @@
 
 
 
-// http://code.spip.net/@inc_editer_mot_dist
+// https://code.spip.net/@inc_editer_mot_dist
 function formulaires_completer_commune_gps_charger(){
 include_spip('coggps_config');
 $fichier=false;
@@ -20,7 +20,7 @@ include_spip('coggps_config');
 	return $erreurs;
 }
 
-// http://code.spip.net/@inc_editer_mot_dist
+// https://code.spip.net/@inc_editer_mot_dist
 function formulaires_completer_commune_gps_traiter_dist(){
 include_spip('coggps_config');
 

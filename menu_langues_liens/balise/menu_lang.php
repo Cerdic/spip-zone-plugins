@@ -6,7 +6,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 // et preselectionne celle la globale $lang
 // ou de l'argument fourni: #MENU_LANG{#ENV{malangue}} 
 
-// http://code.spip.net/@balise_MENU_LANG
+// https://code.spip.net/@balise_MENU_LANG
 function balise_MENU_LANG ($p) {
 	$i_boucle = $p->nom_boucle ? $p->nom_boucle : ($p->id_boucle ? $p->id_boucle :'');
 	if($i_boucle){
@@ -24,7 +24,7 @@ function balise_MENU_LANG ($p) {
 }
 
 // s'il n'y a qu'une langue eviter definitivement la balise ?php 
-// http://code.spip.net/@balise_MENU_LANG_stat
+// https://code.spip.net/@balise_MENU_LANG_stat
 function balise_MENU_LANG_stat ($args, $context_compil) {
 	if (strpos($GLOBALS['meta']['langues_multilingue'],',') === false) return '';
 	$objet = $args[0];
@@ -41,7 +41,7 @@ function balise_MENU_LANG_stat ($args, $context_compil) {
 }
 
 // normalement $opt sera toujours non vide suite au test ci-dessus
-// http://code.spip.net/@balise_MENU_LANG_dyn
+// https://code.spip.net/@balise_MENU_LANG_dyn
 function balise_MENU_LANG_dyn($objet,$id_objet,$id_table_objet) {
 	include_spip('inc/lang');
 	# lien a partir de /

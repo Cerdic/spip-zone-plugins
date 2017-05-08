@@ -219,7 +219,7 @@ $GLOBALS['spip_pipeline']['insert_head'] = str_replace('|f_jQuery','|cache_cool_
 
 // Inserer jQuery sans test de doublon
 // incompatible avec le calcul multiple de squelettes sur un meme hit
-// http://code.spip.net/@f_jQuery
+// https://code.spip.net/@f_jQuery
 function cache_cool_f_jQuery ($texte) {
 	$x = '';
 	foreach (pipeline('jquery_plugins',

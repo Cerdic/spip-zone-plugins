@@ -2,7 +2,7 @@
 
 // creer le contexte de traitement des formulaires dynamiques en charger/valider/modifier
 // et les hidden de l'url d'action
-// http://code.spip.net/@balise_ACTION_FORMULAIRE
+// https://code.spip.net/@balise_ACTION_FORMULAIRE
 function balise_ACTION_FORMULAIRE($p){
 	$_url = interprete_argument_balise(1,$p);
 	if (!$_form = interprete_argument_balise(2,$p)){
@@ -26,7 +26,7 @@ function balise_ACTION_FORMULAIRE($p){
 	return $p;
 }
 
-// http://code.spip.net/@traiter_formulaires_dynamiques
+// https://code.spip.net/@traiter_formulaires_dynamiques
 function traiter_formulaires_dynamiques(){
 	static $done = false;
 	if (!$done) {
@@ -136,7 +136,7 @@ function traiter_formulaires_dynamiques(){
 // Encoder un contexte pour l'ajax, le signer avec une cle, le crypter
 // avec le secret du site, le gziper si possible...
 // l'entree peut etre serialisee (le #ENV** des fonds ajax et ajax_stat)
-// http://code.spip.net/@encoder_contexte_ajax
+// https://code.spip.net/@encoder_contexte_ajax
 function encoder_contexte_ajax($c) {
 	if (is_string($c)
 	AND !is_null(@unserialize($c)))
@@ -161,7 +161,7 @@ function encoder_contexte_ajax($c) {
 }
 
 // la procedure inverse de encoder_contexte_ajax()
-// http://code.spip.net/@decoder_contexte_ajax
+// https://code.spip.net/@decoder_contexte_ajax
 function decoder_contexte_ajax($c) {
 	include_spip("inc/securiser_action");
 
@@ -177,7 +177,7 @@ function decoder_contexte_ajax($c) {
 
 // encrypter/decrypter un message
 // http://www.php.net/manual/fr/language.operators.bitwise.php#81358
-// http://code.spip.net/@_xor
+// https://code.spip.net/@_xor
 function _xor($message, $key=null){
 	if (is_null($key)) {
 		include_spip("inc/securiser_action");
@@ -195,7 +195,7 @@ function _xor($message, $key=null){
 
 // Le secret du site doit rester aussi secret que possible, et est eternel
 // On ne doit pas l'exporter
-// http://code.spip.net/@secret_du_site
+// https://code.spip.net/@secret_du_site
 function secret_du_site() {
 	if (!isset($GLOBALS['meta']['secret_du_site'])
 	OR !strlen($GLOBALS['meta']['secret_du_site'])
@@ -206,18 +206,18 @@ function secret_du_site() {
 	return $GLOBALS['meta']['secret_du_site'];
 }
 
-// http://code.spip.net/@calculer_cle_action
+// https://code.spip.net/@calculer_cle_action
 function calculer_cle_action($action) {
 	return md5($action . secret_du_site());
 }
 
-// http://code.spip.net/@verifier_cle_action
+// https://code.spip.net/@verifier_cle_action
 function verifier_cle_action($action, $cle) {
 	return ($cle == calculer_cle_action($action));
 }
 
 
-// http://code.spip.net/@redirige_formulaire
+// https://code.spip.net/@redirige_formulaire
 function redirige_formulaire($url, $equiv = '') {
 	if (!_request('var_ajax')
 	  && !_request('var_ajaxcharset')

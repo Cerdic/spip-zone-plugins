@@ -22,7 +22,7 @@ include_spip('inc/lang');
 // des fichiers d'appel, en verifiant qu'elles n'ont pas ete passees
 // par le visiteur (sinon, pas de cache)
 //
-// http://code.spip.net/@tester_variable
+// https://code.spip.net/@tester_variable
 function tester_variable($var, $val){
 	if (!isset($GLOBALS[$var]))
 		$GLOBALS[$var] = $val;
@@ -36,7 +36,7 @@ function tester_variable($var, $val){
 
 // on initialise la puce ici car il serait couteux de faire le find_in_path()
 // a chaque hit, alors qu'on n'a besoin de cette valeur que lors du calcul
-// http://code.spip.net/@definir_puce
+// https://code.spip.net/@definir_puce
 function definir_puce() {
 	static $les_puces = array();
 
@@ -79,7 +79,7 @@ define('_BALISES_BLOCS',
 
 
 // Ne pas afficher le chapo si article virtuel
-// http://code.spip.net/@nettoyer_chapo
+// https://code.spip.net/@nettoyer_chapo
 function nettoyer_chapo($chapo){
 	return (substr($chapo,0,1) == "=") ? '' : $chapo;
 }
@@ -92,7 +92,7 @@ function nettoyer_chapo($chapo){
 // Creer un bloc base64 correspondant a $rempl ; au besoin en marquant
 // une $source differente ; le script detecte automagiquement si ce qu'on
 // echappe est un div ou un span
-// http://code.spip.net/@code_echappement
+// https://code.spip.net/@code_echappement
 function code_echappement($rempl, $source='') {
 	if (!strlen($rempl)) return '';
 
@@ -110,13 +110,13 @@ function code_echappement($rempl, $source='') {
 }
 
 // Echapper les <html>...</ html>
-// http://code.spip.net/@traiter_echap_html_dist
+// https://code.spip.net/@traiter_echap_html_dist
 function traiter_echap_html_dist($regs) {
 	return $regs[3];
 }
 
 // Echapper les <code>...</ code>
-// http://code.spip.net/@traiter_echap_code_dist
+// https://code.spip.net/@traiter_echap_code_dist
 function traiter_echap_code_dist($regs) {
 	$echap = entites_html($regs[3]);
 	// supprimer les sauts de ligne debut/fin
@@ -139,7 +139,7 @@ function traiter_echap_code_dist($regs) {
 }
 
 // Echapper les <cadre>...</ cadre> aka <frame>...</ frame>
-// http://code.spip.net/@traiter_echap_cadre_dist
+// https://code.spip.net/@traiter_echap_cadre_dist
 function traiter_echap_cadre_dist($regs) {
 	$echap = trim(entites_html($regs[3]));
 	$total_lignes = substr_count($echap, "\n") + 1;
@@ -150,12 +150,12 @@ function traiter_echap_cadre_dist($regs) {
 	."</textarea></div></form>";
 	return $echap;
 }
-// http://code.spip.net/@traiter_echap_frame_dist
+// https://code.spip.net/@traiter_echap_frame_dist
 function traiter_echap_frame_dist($regs) {
 	return traiter_echap_cadre_dist($regs);
 }
 
-// http://code.spip.net/@traiter_echap_script_dist
+// https://code.spip.net/@traiter_echap_script_dist
 function traiter_echap_script_dist($regs) {
 	// rendre joli (et inactif) si c'est un script language=php
 	if (preg_match(',<script\b[^>]+php,ims',
@@ -169,7 +169,7 @@ function traiter_echap_script_dist($regs) {
 
 // - pour $source voir commentaire infra (echappe_retour)
 // - pour $no_transform voir le filtre post_autobr dans inc_filtres.php3
-// http://code.spip.net/@echappe_html
+// https://code.spip.net/@echappe_html
 function echappe_html($letexte, $source='', $no_transform=false,
 $preg='') {
 	if (!strlen($letexte)) return '';
@@ -221,7 +221,7 @@ $preg='') {
 // Rq: $source sert a faire des echappements "a soi" qui ne sont pas nettoyes
 // par propre() : exemple dans ecrire/inc_articles_ortho.php, $source='ORTHO'
 // ou encore dans typo()
-// http://code.spip.net/@echappe_retour
+// https://code.spip.net/@echappe_retour
 function echappe_retour($letexte, $source='') {
 	if (strpos($letexte,"base64$source")) {
 		# spip_log(htmlspecialchars($letexte));  ## pour les curieux
@@ -240,7 +240,7 @@ function echappe_retour($letexte, $source='') {
 	return $letexte;
 }
 
-// http://code.spip.net/@nettoyer_raccourcis_typo
+// https://code.spip.net/@nettoyer_raccourcis_typo
 function nettoyer_raccourcis_typo($texte){
 	$texte = pipeline('nettoyer_raccourcis_typo',$texte);
 	// remplacer les liens
@@ -261,7 +261,7 @@ function nettoyer_raccourcis_typo($texte){
 	return $texte;
 }
 
-// http://code.spip.net/@couper
+// https://code.spip.net/@couper
 function couper($texte, $taille=50) {
 	$offset = 400 + 2*$taille;
 	if (	$offset<strlen($texte)
@@ -332,7 +332,7 @@ function couper($texte, $taille=50) {
 }
 
 // prendre <intro>...</intro> sinon couper a la longueur demandee
-// http://code.spip.net/@couper_intro
+// https://code.spip.net/@couper_intro
 function couper_intro($texte, $long) {
 	$texte = extraire_multi(eregi_replace("(</?)intro>", "\\1intro>", $texte)); // minuscules
 	$intro = '';
@@ -361,7 +361,7 @@ function couper_intro($texte, $long) {
 
 /*
 // Securite : empecher l'execution de code PHP ou javascript ou autre malice
-// http://code.spip.net/@interdire_scripts
+// https://code.spip.net/@interdire_scripts
 function interdire_scripts($source) {
 	$source = preg_replace(",<(\%|\?|/?[[:space:]]*(script|base)),imsS", "&lt;\\1", $source);
 	return $source;
@@ -369,7 +369,7 @@ function interdire_scripts($source) {
 */
 
 // afficher joliment les <script>
-// http://code.spip.net/@echappe_js
+// https://code.spip.net/@echappe_js
 function echappe_js($t,$class='') {
 	if (preg_match_all(',<script.*?($|</script.),isS', $t, $r, PREG_SET_ORDER))
 	foreach ($r as $regs)
@@ -378,7 +378,7 @@ function echappe_js($t,$class='') {
 			$t);
 	return $t;
 }
-// http://code.spip.net/@protege_js_modeles
+// https://code.spip.net/@protege_js_modeles
 function protege_js_modeles($t) {
 	if (isset($GLOBALS['auteur_session']['alea_actuel'])){
 		$a = $GLOBALS['auteur_session']['alea_actuel'];
@@ -390,7 +390,7 @@ function protege_js_modeles($t) {
 }
 
 // Securite : empecher l'execution de code PHP, en le transformant en joli code
-// http://code.spip.net/@interdire_scripts
+// https://code.spip.net/@interdire_scripts
 function interdire_scripts($t) {
 
 	// rien ?
@@ -423,7 +423,7 @@ function interdire_scripts($t) {
 }
 
 // Securite : utiliser SafeHTML s'il est present dans ecrire/safehtml/
-// http://code.spip.net/@safehtml
+// https://code.spip.net/@safehtml
 function safehtml($t) {
 	static $safehtml;
 
@@ -443,7 +443,7 @@ function safehtml($t) {
 }
 
 // Correction typographique francaise
-// http://code.spip.net/@typo_fr
+// https://code.spip.net/@typo_fr
 function typo_fr($letexte) {
 	static $trans;
 
@@ -500,7 +500,7 @@ function typo_fr($letexte) {
 }
 
 // rien sauf les "~" et "-,"
-// http://code.spip.net/@typo_en
+// https://code.spip.net/@typo_en
 function typo_en($letexte) {
 
 	$cherche1 = array(
@@ -532,7 +532,7 @@ function typo_en($letexte) {
 // Typographie generale
 // note: $echapper = false lorsqu'on appelle depuis propre() [pour accelerer]
 //
-// http://code.spip.net/@typo
+// https://code.spip.net/@typo
 function typo($letexte, $echapper=true) {
 
 	// Plus vite !
@@ -623,7 +623,7 @@ function typo($letexte, $echapper=true) {
 
 define('_RACCOURCI_URL', ',^(\S*?)\s*(\d+)(\?.*?)?(#[^\s]*)?$,S');
 
-// http://code.spip.net/@typer_raccourci
+// https://code.spip.net/@typer_raccourci
 function typer_raccourci ($lien) {
 
 	if (!preg_match(_RACCOURCI_URL, trim($lien), $match)) return false;
@@ -649,7 +649,7 @@ function typer_raccourci ($lien) {
 // 'titre': seulement T ci-dessus (i.e. le TITRE ci-dessus ou dans table SQL)
 // 'url':   seulement L (i.e. generer_url_RACCOURCI)
 
-// http://code.spip.net/@calculer_url
+// https://code.spip.net/@calculer_url
 function calculer_url ($lien, $texte='', $pour='url') {
 	$lien = vider_url($lien); # supprimer 'http://' ou 'mailto:'
 
@@ -713,7 +713,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 	return ($pour == 'url') ? $lien : array($lien, $class, $texte, '');
 }
 
-// http://code.spip.net/@calculer_url_article
+// https://code.spip.net/@calculer_url_article
 function calculer_url_article($id, $texte='') {
 	$lien = generer_url_article($id);
 	$s = spip_query("SELECT titre,lang FROM spip_articles WHERE id_article=$id");
@@ -723,7 +723,7 @@ function calculer_url_article($id, $texte='') {
 	return array($lien, 'spip_in', $texte, $row['lang']);
 }
 
-// http://code.spip.net/@calculer_url_rubrique
+// https://code.spip.net/@calculer_url_rubrique
 function calculer_url_rubrique($id, $texte='')
 {
 	$lien = generer_url_rubrique($id);
@@ -734,7 +734,7 @@ function calculer_url_rubrique($id, $texte='')
 	return array($lien, 'spip_in', $texte, $row['lang']);
 }
 
-// http://code.spip.net/@calculer_url_mot
+// https://code.spip.net/@calculer_url_mot
 function calculer_url_mot($id, $texte='')
 {
 	$lien = generer_url_mot($id);
@@ -745,7 +745,7 @@ function calculer_url_mot($id, $texte='')
 	return array($lien, 'spip_in', $texte);
 }
 
-// http://code.spip.net/@calculer_url_breve
+// https://code.spip.net/@calculer_url_breve
 function calculer_url_breve($id, $texte='')
 {
 	$lien = generer_url_breve($id);
@@ -756,7 +756,7 @@ function calculer_url_breve($id, $texte='')
 	return array($lien, 'spip_in', $texte, $row['lang']);
 }
 
-// http://code.spip.net/@calculer_url_auteur
+// https://code.spip.net/@calculer_url_auteur
 function calculer_url_auteur($id, $texte='')
 {
 	$lien = generer_url_auteur($id);
@@ -768,7 +768,7 @@ function calculer_url_auteur($id, $texte='')
 	return array($lien, 'spip_in', $texte); # pas de hreflang
 }
 
-// http://code.spip.net/@calculer_url_document
+// https://code.spip.net/@calculer_url_document
 function calculer_url_document($id, $texte='')
 {
 	$lien = generer_url_document($id);
@@ -782,7 +782,7 @@ function calculer_url_document($id, $texte='')
 	return array($lien, 'spip_in', $texte); # pas de hreflang
 }
 
-// http://code.spip.net/@calculer_url_site
+// https://code.spip.net/@calculer_url_site
 function calculer_url_site($id, $texte='')
 {
 	# attention dans le cas des sites le lien pointe non pas sur
@@ -797,7 +797,7 @@ function calculer_url_site($id, $texte='')
 	return array($lien, 'spip_out', $texte, $row['lang']);
 }
 
-// http://code.spip.net/@calculer_url_forum
+// https://code.spip.net/@calculer_url_forum
 function calculer_url_forum($id, $texte='')
 {
 	$lien = generer_url_forum($id);
@@ -814,7 +814,7 @@ function calculer_url_forum($id, $texte='')
 //
 // Tableaux
 //
-// http://code.spip.net/@traiter_tableau
+// https://code.spip.net/@traiter_tableau
 function traiter_tableau($bloc) {
 
 	// Decouper le tableau en lignes
@@ -928,7 +928,7 @@ function traiter_tableau($bloc) {
 //
 // Traitement des listes (merci a Michael Parienti)
 //
-// http://code.spip.net/@traiter_listes
+// https://code.spip.net/@traiter_listes
 function traiter_listes ($texte) {
 	$parags = preg_split(",\n[[:space:]]*\n,S", $texte);
 	$texte ='';
@@ -1011,7 +1011,7 @@ function traiter_listes ($texte) {
 // fonction en cas de texte extrait d'un serveur distant:
 // on ne sait pas (encore) rapatrier les documents joints
 // TODO: gerer les modeles ?
-// http://code.spip.net/@supprime_img
+// https://code.spip.net/@supprime_img
 function supprime_img($letexte) {
 	$message = _T('img_indisponible');
 	return preg_replace(',<(img|doc|emb)([0-9]+)(\|([^>]*))?'.'>,i',
@@ -1024,7 +1024,7 @@ function supprime_img($letexte) {
 // Le nom du modele doit faire au moins trois caracteres (evite <h2>)
 // Si $doublons==true, on repere les documents sans calculer les modeles
 // mais on renvoie les params (pour l'indexation par le moteur de recherche)
-// http://code.spip.net/@traiter_modeles
+// https://code.spip.net/@traiter_modeles
 
 define('_RACCOURCI_MODELE', 
 	 '(<([a-z_-]{3,})' # <modele
@@ -1036,7 +1036,7 @@ define('_RACCOURCI_MODELE',
 
 define('_RACCOURCI_MODELE_DEBUT', '/^' . _RACCOURCI_MODELE .'/is');
 
-// http://code.spip.net/@traiter_modeles
+// https://code.spip.net/@traiter_modeles
 function traiter_modeles($texte, $doublons=false, $echap='') {
 	// detecter les modeles (rapide)
 	if (preg_match_all('/<[a-z_-]{3,}\s*[0-9|]+/iS',
@@ -1096,7 +1096,7 @@ function traiter_modeles($texte, $doublons=false, $echap='') {
 //
 // deuxieme argument : forcer les <p> meme pour un seul paragraphe
 //
-// http://code.spip.net/@paragrapher
+// https://code.spip.net/@paragrapher
 function paragrapher($letexte, $forcer=true) {
 	$letexte = trim($letexte);
 	if (!strlen($letexte))
@@ -1147,7 +1147,7 @@ function paragrapher($letexte, $forcer=true) {
 // 2=>double fleche (historiquement, liens ouvrants)
 // 3=>url
 //
-// http://code.spip.net/@traiter_raccourci_lien
+// https://code.spip.net/@traiter_raccourci_lien
 function traiter_raccourci_lien($regs) {
 
 	$bulle = $hlang = '';
@@ -1202,7 +1202,7 @@ function traiter_raccourci_lien($regs) {
 
 define('_RACCOURCI_CHAPO', ',^(\W*)(\W*)(\w*\d+([?#].*)?)$,');
 
-// http://code.spip.net/@chapo_redirige
+// https://code.spip.net/@chapo_redirige
 function chapo_redirige($chapo)
 {
 	if (!preg_match(_RACCOURCI_LIEN, $chapo, $m))
@@ -1215,7 +1215,7 @@ function chapo_redirige($chapo)
 define('_RACCOURCI_LIEN', ",\[([^][]*)->(>?)([^]]*)\],msS");
 
 // Nettoie un texte, traite les raccourcis spip, la typo, etc.
-// http://code.spip.net/@traiter_raccourcis
+// https://code.spip.net/@traiter_raccourcis
 function traiter_raccourcis($letexte) {
 	global $debut_intertitre, $fin_intertitre, $ligne_horizontale, $url_glossaire_externe;
 	global $compt_note;
@@ -1498,7 +1498,7 @@ function traiter_raccourcis($letexte) {
 	return $letexte;
 }
 
-// http://code.spip.net/@traiter_les_notes
+// https://code.spip.net/@traiter_les_notes
 function traiter_les_notes($mes_notes) {
 	$mes_notes = propre('<p>'.$mes_notes);
 	$mes_notes = str_replace(
@@ -1508,7 +1508,7 @@ function traiter_les_notes($mes_notes) {
 
 
 // Filtre a appliquer aux champs du type #TEXTE*
-// http://code.spip.net/@propre
+// https://code.spip.net/@propre
 function propre($letexte) {
 	if (!$letexte) return $letexte;
 

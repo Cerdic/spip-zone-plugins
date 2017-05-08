@@ -15,7 +15,7 @@ include_spip('maj/vieille_base/1927/serial');
 include_spip('maj/vieille_base/1927/auxiliaires');
 include_spip('maj/vieille_base/1927/typedoc');
 
-// http://code.spip.net/@creer_base
+// https://code.spip.net/@creer_base
 function maj_vieille_base_1927_create() {
   global $tables_principales, $tables_auxiliaires, $tables_images, $tables_sequences, $tables_documents, $tables_mime;
 

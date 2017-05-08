@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Recuperer le reglage des forums publics de l'article x
-// http://code.spip.net/@get_forums_publics
+// https://code.spip.net/@get_forums_publics
 function get_forums_publics($id_article=0) {
 
 	if ($id_article) {
@@ -28,7 +28,7 @@ function get_forums_publics($id_article=0) {
 }
 
 // Cree le formulaire de modification du reglage des forums de l'article
-// http://code.spip.net/@inc_regler_moderation_dist
+// https://code.spip.net/@inc_regler_moderation_dist
 function inc_regler_moderation($id_article, $script, $args) {
 	include_spip('inc/presentation');
 

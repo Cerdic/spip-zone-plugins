@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/actions');
 
-// http://code.spip.net/@exec_mots_tous_dist
+// https://code.spip.net/@exec_mots_tous_dist
 function exec_mots_tous_dist()
 {
 	global $spip_lang, $spip_lang_left, $spip_lang_right;
@@ -184,7 +184,7 @@ if ($connect_statut == '0minirezo') // rers
 	echo fin_gauche(), fin_page();
 }
 
-// http://code.spip.net/@confirmer_mot
+// https://code.spip.net/@confirmer_mot
 function confirmer_mot ($conf_mot, $son_groupe, $total)
 {
 	$row = sql_fetsel("*", "spip_mots", "id_mot=$conf_mot");

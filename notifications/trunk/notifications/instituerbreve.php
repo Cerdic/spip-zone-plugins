@@ -9,7 +9,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Fonction appelee par divers pipelines
-// http://code.spip.net/@notifications_instituerbreve_dist
+// https://code.spip.net/@notifications_instituerbreve_dist
 function notifications_instituerbreve_dist($quoi, $id_breve, $options) {
 
 	// ne devrait jamais se produire

@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
 
-// http://code.spip.net/@inc_iconifier_dist
+// https://code.spip.net/@inc_iconifier_dist
 function inc_iconifier_dist($id_objet, $id,  $script, $visible=false, $flag_modif=true) {
 	if ($GLOBALS['spip_display'] == 4) return "";
 	$texteon = $GLOBALS['logo_libelles'][($id OR $id_objet != 'id_rubrique') ? $id_objet : 'id_racine'];
@@ -93,7 +93,7 @@ $logo_libelles = array(
 		       'id_notification' => _T('facteur:logo_notifications')
 		       );
 
-// http://code.spip.net/@indiquer_logo
+// https://code.spip.net/@indiquer_logo
 function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 
 	global $formats_logos;
@@ -150,7 +150,7 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 		" enctype='multipart/form-data' class='form_upload_icon'");
 }
 
-// http://code.spip.net/@decrire_logo
+// https://code.spip.net/@decrire_logo
 function decrire_logo($id_objet, $mode, $id, $width, $height, $img, $titre="", $script="", $flag_modif=true) {
 
 	list($fid, $dir, $nom, $format) = $img;

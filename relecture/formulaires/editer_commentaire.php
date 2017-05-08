@@ -103,7 +103,7 @@ function formulaires_editer_commentaire_verifier_dist($id_commentaire, $redirect
 	return $erreurs;
 }
 
-// http://code.spip.net/@inc_editer_article_dist
+// https://code.spip.net/@inc_editer_article_dist
 function formulaires_editer_commentaire_traiter_dist($id_commentaire, $redirect='') {
 
 	// Ouverture d'une relecture sur un article

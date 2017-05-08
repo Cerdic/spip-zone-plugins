@@ -33,7 +33,7 @@ charger_generer_url();
 // dans le fichier d'appel, et si la table de reference est OK, proposer
 // la liste des mots-cles
 
-// http://code.spip.net/@balise_FORMULAIRE_FORUM
+// https://code.spip.net/@balise_FORMULAIRE_FORUM
 function balise_FORMULAIRE_FORUM ($p) {
 
 	$p = calculer_balise_dynamique($p,'FORMULAIRE_FORUM', array('id_rubrique', 'id_forum', 'id_article', 'id_breve', 'id_syndic', 'ajouter_mot', 'ajouter_groupe', 'afficher_texte'));
@@ -47,7 +47,7 @@ function balise_FORMULAIRE_FORUM ($p) {
 }
 
 // verification des droits a faire du forum
-// http://code.spip.net/@balise_FORMULAIRE_FORUM_stat
+// https://code.spip.net/@balise_FORMULAIRE_FORUM_stat
 function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 
 	// Note : ceci n'est pas documente !!
@@ -85,7 +85,7 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 		$idr, $idf, $ida, $idb, $ids, $am, $ag, $af, $url);
 }
 
-// http://code.spip.net/@balise_FORMULAIRE_FORUM_dyn
+// https://code.spip.net/@balise_FORMULAIRE_FORUM_dyn
 function balise_FORMULAIRE_FORUM_dyn(
 $titre, $table, $type, $script,
 $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic,
@@ -212,7 +212,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 		));
 }
 
-// http://code.spip.net/@inclure_previsu
+// https://code.spip.net/@inclure_previsu
 function inclure_previsu($texte,$titre, $email_auteur, $auteur, $url_site, $nom_site, $ajouter_mot)
 {
 	$erreur = $bouton = '';
@@ -261,7 +261,7 @@ function inclure_previsu($texte,$titre, $email_auteur, $auteur, $url_site, $nom_
 // Ce systeme n'est pas fonctionnel pour les forums sans previsu (notamment
 // si $afficher_texte = 'non')
 
-// http://code.spip.net/@forum_fichier_tmp
+// https://code.spip.net/@forum_fichier_tmp
 function forum_fichier_tmp($arg)
 {
 # astuce : mt_rand pour autoriser les hits simultanes
@@ -289,7 +289,7 @@ function forum_fichier_tmp($arg)
 // Chercher le titre et la configuration du forum de l'element auquel on repond
 //
 
-// http://code.spip.net/@sql_recherche_donnees_forum
+// https://code.spip.net/@sql_recherche_donnees_forum
 function sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids) {
 
 	// changer la table de reference s'il y a lieu (pour afficher_groupes[] !!)

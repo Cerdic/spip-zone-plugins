@@ -251,7 +251,7 @@ function joindre_decrire_contenu_zip($zip) {
 
 
 
-// http://code.spip.net/@joindre_deballes
+// https://code.spip.net/@joindre_deballes
 function joindre_deballer_lister_zip($path,$tmp_dir) {
   include_spip('inc/pclzip');
 	$archive = new PclZip($path);
@@ -280,7 +280,7 @@ if (!function_exists('fixer_extension_document')){
  * @param unknown_type $doc
  * @return unknown
  */
-// http://code.spip.net/@fixer_extension_document
+// https://code.spip.net/@fixer_extension_document
 function fixer_extension_document($doc) {
 	$extension = '';
 	$name = $doc['name'];

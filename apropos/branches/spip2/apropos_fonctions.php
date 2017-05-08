@@ -86,7 +86,7 @@ function apropos_affiche_les_PiG($lcpa,$lpf){
 return $h3.$corps."</div>\n";
 }
 
-// Extrait de http://code.spip.net/@affiche_les_plugins
+// Extrait de https://code.spip.net/@affiche_les_plugins
 function apropos_affiche_les_plugin($liste_plugins, $liste_plugins_actifs, $format='liste'){
 	if (!$format)
 		$format = 'liste';
@@ -98,7 +98,7 @@ function apropos_affiche_les_plugin($liste_plugins, $liste_plugins_actifs, $form
 	return	$res;
 }
 
-// Extrait de  http://code.spip.net/@affiche_liste_plugins
+// Extrait de  https://code.spip.net/@affiche_liste_plugins
 /* Creation de la liste des plugins actifs, trie de la liste par ordre alphabetique*/
 function apropos_plugins_afficher_list_dist($url_page,$liste_plugins, $liste_plugins_actifs, $dir_plugins=_DIR_PLUGINS,$afficher_un = 'afficher_plugin'){
 	$get_infos = charger_fonction('get_infos','plugins');
@@ -134,7 +134,7 @@ function apropos_plugins_afficher_list_dist($url_page,$liste_plugins, $liste_plu
 	return $res ? "<ul class='liste-items plugins $class'>$res</ul>" : "";
 }
 
-// Extrait de  http://code.spip.net/@ligne_plug
+// Extrait de  https://code.spip.net/@ligne_plug
 /* Extrait les infos de chaque plugin */
 function apropos_plugins_afficher_plugins_dist($url_page, $plug_file, $class_li="item", $dir_plugins=_DIR_PLUGINS) {
 

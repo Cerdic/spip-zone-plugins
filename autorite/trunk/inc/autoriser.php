@@ -444,7 +444,7 @@ function autoriser_voirstats($faire, $type, $id, $qui, $opt) {
 
 // Autoriser a modifier un groupe de mots $id
 // y compris en ajoutant/modifiant les mots lui appartenant
-// http://code.spip.net/@autoriser_groupemots_modifier
+// https://code.spip.net/@autoriser_groupemots_modifier
 ##
 ## autoriser_groupemots_modifier
 ##

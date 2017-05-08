@@ -1,7 +1,7 @@
 <?php
 
 
-// http://code.spip.net/@inc_editer_mot_dist
+// https://code.spip.net/@inc_editer_mot_dist
 function formulaires_importer_cp_charger(){
 include_spip('cp_config');
 
@@ -28,7 +28,7 @@ include_spip('cp_config');
 	return $erreurs;
 }
 
-// http://code.spip.net/@inc_editer_mot_dist
+// https://code.spip.net/@inc_editer_mot_dist
 function formulaires_importer_cp_traiter_dist(){
 include_spip('cp_config');
 	 $options=array(

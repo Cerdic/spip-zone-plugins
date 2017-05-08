@@ -2,7 +2,7 @@
 
 // {recherche}
 // https://www.spip.net/@recherche
-// http://code.spip.net/@critere_recherche_dist
+// https://code.spip.net/@critere_recherche_dist
 function critere_recherche_ext($idb, &$boucles, $crit) {
 	global $table_des_tables;
 	$boucle = &$boucles[$idb];
@@ -231,7 +231,7 @@ function requete_hash_ext($rech) {
 }
 
 // Renvoie la liste des "mots" d'un texte (ou d'une requete adressee au moteur)
-// http://code.spip.net/@mots_indexation
+// https://code.spip.net/@mots_indexation
 function mots_indexation_ext($texte, $min_long = 3) {
 	include_spip('inc/charsets');
 	include_spip('inc/texte');
@@ -280,7 +280,7 @@ function mots_indexation_ext($texte, $min_long = 3) {
 
 // rechercher un mot dans le dico
 // retourne deux methodes : lache puis strict
-// http://code.spip.net/@requete_dico
+// https://code.spip.net/@requete_dico
 function requete_dico_ext($val) {
 	$min_long = 3;
 	

@@ -8,7 +8,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('versioning_fonctions');
 
-// http://code.spip.net/@inc_instituer_article_dist
+// https://code.spip.net/@inc_instituer_article_dist
 function inc_instituer_article_dist($id_article, $statut=-1)
 {
 	if ($statut == -1) return demande_publication($id_article);
@@ -67,7 +67,7 @@ function inc_instituer_article_dist($id_article, $statut=-1)
 }
 
 
-// http://code.spip.net/@demande_publication
+// https://code.spip.net/@demande_publication
 function demande_publication($id_article)
 {
 	return debut_cadre_relief('',true) .

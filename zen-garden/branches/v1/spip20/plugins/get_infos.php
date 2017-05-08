@@ -9,7 +9,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // lecture du fichier de configuration d'un plugin
-// http://code.spip.net/@plugin_get_infos
+// https://code.spip.net/@plugin_get_infos
 function plugins_get_infos_dist($plug, $force_reload=false, $dir_plugins = _DIR_PLUGINS){
 	include_spip('inc/xml');
 	static $infos=array();

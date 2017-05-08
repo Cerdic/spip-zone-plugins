@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://code.spip.net/@exec_referencer_traduction_dist
+// https://code.spip.net/@exec_referencer_traduction_dist
 function exec_referencer_traduction_dist()
 {
 	$type = _request('type');

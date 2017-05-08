@@ -19,7 +19,7 @@ include_spip('inc/actions');
 define('_SPIP_SELECT_MIN_AUTEURS', 30); // en dessous: balise Select
 define('_SPIP_SELECT_MAX_AUTEURS', 30); // au-dessus: saisie + return
 
-// http://code.spip.net/@inc_editer_auteurs_dist
+// https://code.spip.net/@inc_editer_auteurs_dist
 function inc_editer_auteurs_dist($type, $id, $flag, $cherche_auteur, $ids, $titre_boite = NULL, $script_edit_objet = NULL) {
 
 	$arg_ajax = "&id_{$type}=$id&type=$type";
@@ -41,7 +41,7 @@ function inc_editer_auteurs_dist($type, $id, $flag, $cherche_auteur, $ids, $titr
 	return editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $aff_les_auteurs, $futurs, $ldap,$titre_boite,$script_edit_objet, $arg_ajax);
 }
 
-// http://code.spip.net/@editer_auteurs_objet
+// https://code.spip.net/@editer_auteurs_objet
 function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_auteurs, $futurs, $statut, $titre_boite,$script_edit_objet, $arg_ajax)
 {
 	global $spip_lang_left, $spip_lang_right;
@@ -119,7 +119,7 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 // Retourne les auteurs attaches a l'objet $id de type $type
 // ou rien s'il y en a trop
 
-// http://code.spip.net/@determiner_auteurs_objet
+// https://code.spip.net/@determiner_auteurs_objet
 function determiner_auteurs_objet($type, $id, $cond='', $limit=200)
 {
 	if (!preg_match(',^[a-z]*$,',$type)) return array();
@@ -131,13 +131,13 @@ function determiner_auteurs_objet($type, $id, $cond='', $limit=200)
 	else return array_map('array_shift', sql_allfetsel("id_auteur", $jointure, $cond));
 }
 
-// http://code.spip.net/@determiner_non_auteurs
+// https://code.spip.net/@determiner_non_auteurs
 function determiner_non_auteurs($type, $id, $andcond='')
 {
 	return auteurs_autorises(determiner_auteurs_objet($type, $id, $andcond));
 }
 
-// http://code.spip.net/@rechercher_auteurs_objet
+// https://code.spip.net/@rechercher_auteurs_objet
 function rechercher_auteurs_objet($cherche_auteur, $ids, $type, $id, $script_edit_objet, $arg_ajax)
 {
 	if (!$ids) {
@@ -182,7 +182,7 @@ function rechercher_auteurs_objet($cherche_auteur, $ids, $type, $id, $script_edi
 	}
 }
 
-// http://code.spip.net/@afficher_auteurs_objet
+// https://code.spip.net/@afficher_auteurs_objet
 function afficher_auteurs_objet($type, $id, $edit, $cond, $script, $arg_ajax)
 {
 	
@@ -212,7 +212,7 @@ function afficher_auteurs_objet($type, $id, $edit, $cond, $script, $arg_ajax)
 	return 	$presenter_liste($requete, $f, $tableau, array($formater, $retirer, $arg_ajax, $edit, $id, $type, $script), false, $styles, $tmp_var, '','', $url);
 }
 
-// http://code.spip.net/@ajouter_auteur_un
+// https://code.spip.net/@ajouter_auteur_un
 function ajouter_auteur_un($row, $own) {
 	global $connect_statut, $connect_id_auteur;
 	list($formater, $retirer, $arg_ajax, $flag, $id, $type, $script_edit) = $own;
@@ -226,7 +226,7 @@ function ajouter_auteur_un($row, $own) {
 	return $vals;
 }
 
-// http://code.spip.net/@ajouter_auteurs_objet
+// https://code.spip.net/@ajouter_auteurs_objet
 function ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_ajax)
 {
 	if (!$determiner_non_auteurs = charger_fonction('determiner_non_auteurs_'.$type,'inc',true))
@@ -258,7 +258,7 @@ function ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_
 	return ajax_action_post('editer_auteurs', "$id,$type", $script_edit, "id_{$type}=$id", $sel, $clic, " class='fondo visible_au_chargement' id='$menu'",'', $arg_ajax);
 }
 
-// http://code.spip.net/@objet_auteur_select
+// https://code.spip.net/@objet_auteur_select
 function objet_auteur_select($cond)
 {
 	$count = sql_countsel('spip_auteurs', $cond);
@@ -303,7 +303,7 @@ if ( $rers_email_cache == "on" AND $connect_statut !== '0minirezo' )
 	  . "\n</optgroup>";
 }
 
-// http://code.spip.net/@selecteur_auteur_ajax
+// https://code.spip.net/@selecteur_auteur_ajax
 function selecteur_auteur_ajax($type, $id, $js, $text, $idom='')
 {
 	include_spip('inc/chercher_rubrique');

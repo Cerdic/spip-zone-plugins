@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://code.spip.net/@action_dater_dist
+// https://code.spip.net/@action_dater_dist
 function action_evdater_dist() {
    /**/
 	$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -25,7 +25,7 @@ function action_evdater_dist() {
 	 action_evdater_post($r);
 }
 
-// http://code.spip.net/@action_dater_post
+// https://code.spip.net/@action_dater_post
 function action_evdater_post($r)
 {
 	include_spip('inc/date');

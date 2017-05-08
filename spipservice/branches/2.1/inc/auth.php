@@ -28,20 +28,20 @@ include_spip('base/abstract_sql');
 // Fonctions de gestion de l'acces restreint aux rubriques
 //
 
-// http://code.spip.net/@acces_restreint_rubrique
+// https://code.spip.net/@acces_restreint_rubrique
 function acces_restreint_rubrique($id_rubrique) {
 	global $connect_id_rubrique;
 
 	return (isset($connect_id_rubrique[$id_rubrique]));
 }
 
-// http://code.spip.net/@auteurs_article
+// https://code.spip.net/@auteurs_article
 function auteurs_article($id_article, $cond='')
 {
 	return sql_allfetsel("id_auteur", "spip_auteurs_articles", "id_article=$id_article". ($cond ? " AND $cond" : ''));
 }
 
-// http://code.spip.net/@auteurs_autorises
+// https://code.spip.net/@auteurs_autorises
 function auteurs_autorises($in, $cond='')
 {
 	return sql_in("statut", array('0minirezo','1comite'))
@@ -54,7 +54,7 @@ function auteurs_autorises($in, $cond='')
 // On le verifie, car la config a peut-etre change depuis,
 // et pour compatibilite avec les anciennes versions n'utilisait pas "bio".
 
-// http://code.spip.net/@acces_statut
+// https://code.spip.net/@acces_statut
 function acces_statut($id_auteur, $statut, $bio)
 {
 	if ($statut != 'nouveau') return $statut;
@@ -75,7 +75,7 @@ function acces_statut($id_auteur, $statut, $bio)
 //  - code numerique d'erreur SQL
 //  - une chaine vide si autorisation a penetrer dans l'espace prive.
 
-// http://code.spip.net/@inc_auth_dist
+// https://code.spip.net/@inc_auth_dist
 function inc_auth_dist() {
 	
 	spip_log("YEPYEPYEPYEPYEPYEPYEPYEP!!!!!");
@@ -340,7 +340,7 @@ function auth_a_loger()
 	return $redirect;
 }
 
-// http://code.spip.net/@auth_trace
+// https://code.spip.net/@auth_trace
 function auth_trace($row, $date=null)
 {
 	// Indiquer la connexion. A la minute pres ca suffit.

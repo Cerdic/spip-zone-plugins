@@ -404,7 +404,7 @@ function branche_articles($id) {
 // nb : les forums prives (privrac ou prive), une fois effaces
 // (privoff), ne sont pas revalidables ; le forum d'admin (privadm)
 // n'est pas effacable
-// http://code.spip.net/@boutons_controle_forum
+// https://code.spip.net/@boutons_controle_forum
 /*
 function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref, $forum_ip) {
 	$controle = '';

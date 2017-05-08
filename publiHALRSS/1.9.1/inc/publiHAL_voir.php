@@ -5,7 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/actions');
 
-// http://code.spip.net/@afficher_syndic_articles
+// https://code.spip.net/@afficher_syndic_articles
 function publiHAL_afficher_syndic_articles($titre_table, $requete, $id = 0) {
 	global $connect_statut, $spip_lang_right;
 

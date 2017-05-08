@@ -19,7 +19,7 @@ include_spip('inc/layer');
 include_spip('inc/actions');
 include_spip('inc/securiser_action');
 
-// http://code.spip.net/@exec_admin_plugin_dist
+// https://code.spip.net/@exec_admin_plugin_dist
 function exec_admin_plugin_dist($retour='') {
 
 	if (!autoriser('configurer', 'plugins')) {
@@ -145,7 +145,7 @@ function exec_admin_plugin_dist($retour='') {
 	}
 }
 
-// http://code.spip.net/@affiche_les_plugins
+// https://code.spip.net/@affiche_les_plugins
 function affiche_les_plugins($liste_plugins, $liste_plugins_actifs, $format='arbre'){
 	if ($format=='liste'){
 		$liste_plugins = array_flip($liste_plugins);
@@ -183,7 +183,7 @@ function affiche_les_plugins($liste_plugins, $liste_plugins_actifs, $format='arb
 	") . $res;
 }
 
-// http://code.spip.net/@affiche_block_initiale
+// https://code.spip.net/@affiche_block_initiale
 function affiche_block_initiale($initiale,$block,$block_actif){
 	if (strlen($block)){
 		return "<li>"
@@ -196,7 +196,7 @@ function affiche_block_initiale($initiale,$block,$block_actif){
 	return "";
 }
 
-// http://code.spip.net/@affiche_liste_plugins
+// https://code.spip.net/@affiche_liste_plugins
 function affiche_liste_plugins($liste_plugins, $liste_plugins_actifs){
 	$block_par_lettre = count($liste_plugins)>10;
 	$fast_liste_plugins_actifs = array_flip($liste_plugins_actifs);
@@ -226,7 +226,7 @@ function affiche_liste_plugins($liste_plugins, $liste_plugins_actifs){
 	. "</ul>";
 }
 
-// http://code.spip.net/@tree_open_close_dir
+// https://code.spip.net/@tree_open_close_dir
 function tree_open_close_dir(&$current,$target,$deplie=array()){
 	if ($current == $target) return "";
 	$tcur = explode("/",$current);
@@ -263,12 +263,12 @@ function tree_open_close_dir(&$current,$target,$deplie=array()){
 
 // vraiment n'importe quoi la gestion des chemins des plugins 
 // une fonction pour aider... 
-// http://code.spip.net/@chemin_plug 
+// https://code.spip.net/@chemin_plug 
 function chemin_plug($racine, $plug) { 
 	return preg_replace(',[^/]+/[.][.]/,', '', "$racine/$plug"); 
 }
 
-// http://code.spip.net/@affiche_arbre_plugins
+// https://code.spip.net/@affiche_arbre_plugins
 function affiche_arbre_plugins($liste_plugins, $liste_plugins_actifs){
 	$racine = basename(_DIR_PLUGINS);
 	$init_dir = $current_dir = "";
@@ -322,7 +322,7 @@ function affiche_arbre_plugins($liste_plugins, $liste_plugins_actifs){
 	. "</ul>";
 }
 
-// http://code.spip.net/@ligne_plug
+// https://code.spip.net/@ligne_plug
 function ligne_plug($plug_file, $actif, $id){
 	global $spip_lang_right;
 	static $id_input=0;

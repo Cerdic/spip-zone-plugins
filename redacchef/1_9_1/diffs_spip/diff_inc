@@ -14,7 +14,7 @@ diff -aburN spip191ref/ecrire/inc/auth.php spip191redac/ecrire/inc/auth.php
 +	//FJ
  }
  
- // http://code.spip.net/@acces_restreint_rubrique
+ // https://code.spip.net/@acces_restreint_rubrique
 diff -aburN spip191ref/ecrire/inc/presentation.php spip191redac/ecrire/inc/presentation.php
 --- spip191ref/ecrire/inc/presentation.php	2006-09-29 17:46:08.000000000 +0200
 +++ spip191redac/ecrire/inc/presentation.php	2006-11-14 14:02:41.000000000 +0100

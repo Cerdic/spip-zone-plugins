@@ -51,7 +51,7 @@ include_spip('public/jointures');
 // mais pas pour <INCLURE> dont le fond est defini explicitement.
 
 
-// http://code.spip.net/@argumenter_inclure
+// https://code.spip.net/@argumenter_inclure
 function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, $echap=true, $lang = '', $fond1=false){
 	$l = array();
 	$erreur_p_i_i = '';
@@ -123,7 +123,7 @@ else erreur_squelette(array("fichier_introuvable", array("fichier" => "%s")), ar
 
 define('CODE_RECUPERER_FOND', 'recuperer_fond(%s, %s, array(%s), %s)');
 
-// http://code.spip.net/@calculer_inclure
+// https://code.spip.net/@calculer_inclure
 function calculer_inclure($p, &$boucles, $id_boucle) {
 
 	$_contexte = argumenter_inclure($p->param, false, $p, $boucles, $id_boucle, true, '', true);
@@ -227,7 +227,7 @@ function calculer_where_statut($mstatut,$liste){
  * Ici on distingue boucles recursives et boucle a requete SQL
  * et on insere le code d'envoi au debusqueur du resultat de la fonction.
  *
- * http://code.spip.net/@calculer_boucle
+ * https://code.spip.net/@calculer_boucle
  *
  * @param  $id_boucle
  * @param  $boucles
@@ -334,7 +334,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 // il suffit (ET IL FAUT) sauvegarder les valeurs des arguments passes par
 // reference, car par definition un tel passage ne les sauvegarde pas
 
-// http://code.spip.net/@calculer_boucle_rec
+// https://code.spip.net/@calculer_boucle_rec
 function calculer_boucle_rec($id_boucle, &$boucles, $trace) {
 	$nom = $boucles[$id_boucle]->param[0];
 	return "\n\t\$save_numrows = (\$Numrows['$nom']);"
@@ -375,7 +375,7 @@ define('CODE_CORPS_BOUCLE', '%s
 	return $t0;'
 );
 
-// http://code.spip.net/@calculer_boucle_nonrec
+// https://code.spip.net/@calculer_boucle_nonrec
 function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 	$boucle = &$boucles[$id_boucle];
 	$return = $boucle->return;
@@ -523,7 +523,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 }
 
 
-// http://code.spip.net/@calculer_requete_sql
+// https://code.spip.net/@calculer_requete_sql
 function calculer_requete_sql($boucle)
 {
 	return ($boucle->hierarchie ? "\n\t$boucle->hierarchie" : '')
@@ -567,7 +567,7 @@ function reconstruire_contexte_compil($context_compil)
 	return $p;
 }
 
-// http://code.spip.net/@calculer_dec
+// https://code.spip.net/@calculer_dec
 function calculer_dec($nom, $val)
 {
 	$static = 'if (!isset($command[\''.$nom.'\'])) ';
@@ -586,7 +586,7 @@ function calculer_dec($nom, $val)
 	return "\n\t" . $static . '$command[\''.$nom.'\'] = ' . $val . ';';
 }
 
-// http://code.spip.net/@calculer_dump_array
+// https://code.spip.net/@calculer_dump_array
 function calculer_dump_array($a)
 {
   if (!is_array($a)) return $a ;
@@ -602,7 +602,7 @@ function calculer_dump_array($a)
   }
 }
 
-// http://code.spip.net/@calculer_dump_join
+// https://code.spip.net/@calculer_dump_join
 function calculer_dump_join($a)
 {
   $res = "";
@@ -611,7 +611,7 @@ function calculer_dump_join($a)
   return 'array(' . substr($res,2) . ')';
 }
 
-// http://code.spip.net/@calculer_from
+// https://code.spip.net/@calculer_from
 function calculer_from(&$boucle)
 {
   $res = "";
@@ -619,7 +619,7 @@ function calculer_from(&$boucle)
   return 'array(' . substr($res,1) . ')';
 }
 
-// http://code.spip.net/@calculer_from_type
+// https://code.spip.net/@calculer_from_type
 function calculer_from_type(&$boucle)
 {
   $res = "";
@@ -627,7 +627,7 @@ function calculer_from_type(&$boucle)
   return 'array(' . substr($res,1) . ')';
 }
 
-// http://code.spip.net/@calculer_order
+// https://code.spip.net/@calculer_order
 function calculer_order(&$boucle)
 {
 	if (!$order = $boucle->order
@@ -648,7 +648,7 @@ function calculer_order(&$boucle)
 // Retourne une expression PHP,
 // (qui sera argument d'un Return ou la partie droite d'une affectation).
 
-// http://code.spip.net/@calculer_liste
+// https://code.spip.net/@calculer_liste
 function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 	if (!$tableau) return "''";
 	if (!isset($descr['niv'])) $descr['niv'] = 0;
@@ -682,7 +682,7 @@ define('_REGEXP_COND_VIDE_NONVIDE',"/^[(](.*)[?]\s*''\s*:\s*('[^']+')\s*[)]$/");
 define('_REGEXP_COND_NONVIDE_VIDE',"/^[(](.*)[?]\s*('[^']+')\s*:\s*''\s*[)]$/");
 define('_REGEXP_CONCAT_NON_VIDE', "/^(.*)[.]\s*'[^']+'\s*$/");
 
-// http://code.spip.net/@compile_cas
+// https://code.spip.net/@compile_cas
 function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 
         $codes = array();
@@ -858,7 +858,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 // mais si EXP est de la forme (t ? 'C' : '') on produit (t ? (p . C . s) : a)
 // de meme si EXP est de la forme (t ? '' : 'C')
 
-// http://code.spip.net/@compile_retour
+// https://code.spip.net/@compile_retour
 function compile_retour($code, $avant, $apres, $altern, $tab, $n)
 {
 	if ($avant == "''") $avant = '';
@@ -913,7 +913,7 @@ function compile_inclure_doublons($lexemes)
 // - 'entetes' => tableau des entetes http
 // En cas d'erreur, elle retournera un tableau des 2 premiers elements seulement
 
-// http://code.spip.net/@public_compiler_dist
+// https://code.spip.net/@public_compiler_dist
 function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect=''){
 	// Pre-traitement : reperer le charset du squelette, et le convertir
 	// Bonus : supprime le BOM

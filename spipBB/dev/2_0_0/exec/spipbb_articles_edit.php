@@ -39,7 +39,7 @@ include_spip('inc/article_select');
 include_spip('inc/documents');
 
 // ------------------------------------------------------------------------------
-// Source http://code.spip.net/@exec_articles_edit_dist
+// Source https://code.spip.net/@exec_articles_edit_dist
 // ------------------------------------------------------------------------------
 function exec_spipbb_articles_edit() {
 	# requis spipbb
@@ -54,7 +54,7 @@ function exec_spipbb_articles_edit() {
 } // exec_spipbb_articles_edit
 
 // ------------------------------------------------------------------------------
-// Source http://code.spip.net/@articles_edit
+// Source https://code.spip.net/@articles_edit
 // ------------------------------------------------------------------------------
 function spipbb_articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new, $config_fonc)
 {
@@ -132,7 +132,7 @@ function spipbb_articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version
 } // spipbb_articles_edit
 
 // ------------------------------------------------------------------------------
-// http://code.spip.net/@articles_edit_presentation
+// https://code.spip.net/@articles_edit_presentation
 // ------------------------------------------------------------------------------
 function articles_edit_presentation($new, $id_rubrique, $lier_trad, $id_article, $titre)
 {

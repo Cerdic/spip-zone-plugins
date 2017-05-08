@@ -22,7 +22,7 @@ if(!function_exists('icone_inline')) {
 	}
 }
 
-// http://code.spip.net/@exec_mots_type_dist
+// https://code.spip.net/@exec_mots_type_dist
 function exec_mots_type_dist()
 {
 	global $connect_statut, $descriptif, $id_groupe, $new, $options, $texte, $titre;

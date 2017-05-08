@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://code.spip.net/@action_instituer_carto_carte_dist
+// https://code.spip.net/@action_instituer_carto_carte_dist
 function action_instituer_carto_carte_dist() {
 
 	include_spip('inc/actions');

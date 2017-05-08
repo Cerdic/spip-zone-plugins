@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define('_EXPORT_TRANCHES_LIMITE', 200);
 define('_EXTENSION_PARTIES', '.gz');
 
-// http://code.spip.net/@exec_export_all_args
+// https://code.spip.net/@exec_export_all_args
 function inc_export_dist($meta)
 {
 	if (!isset($GLOBALS['meta'][$meta])) {
@@ -132,7 +132,7 @@ function inc_export_dist($meta)
 }
 
 
-// http://code.spip.net/@complete_secteurs
+// https://code.spip.net/@complete_secteurs
 function complete_secteurs($les_rubriques)
 {
 	$res = array();
@@ -149,7 +149,7 @@ function complete_secteurs($les_rubriques)
 	return $res;
 }
 
-// http://code.spip.net/@complete_fils
+// https://code.spip.net/@complete_fils
 function complete_fils($rubriques)
 {
 	$r = $rubriques;
@@ -170,7 +170,7 @@ function complete_fils($rubriques)
 // et sans detruire les tranches: au final renommage+destruction massive pour
 // prevenir autant que possible un Time-out.
 
-// http://code.spip.net/@ramasse_parties
+// https://code.spip.net/@ramasse_parties
 function ramasse_parties($but, $files)
 {
 	$ok = true;
@@ -202,7 +202,7 @@ function ramasse_parties($but, $files)
 // et ne sera normalement pas interrompu car le temps pour ramasser
 // est plus court que le temps pour creer les parties
 
-// http://code.spip.net/@export_objets
+// https://code.spip.net/@export_objets
 function export_objets($table, $cpt, $total, $filetable, $les_rubriques, $les_meres, $meta) {
 	global $tables_principales;
 
@@ -255,7 +255,7 @@ function export_objets($table, $cpt, $total, $filetable, $les_rubriques, $les_me
 
 // Construit la version xml  des champs d'une table
 
-// http://code.spip.net/@build_while
+// https://code.spip.net/@build_while
 function build_while($debut, $table, $prim, $les_rubriques, $les_meres) {
 	global  $chercher_logo ;
 
@@ -293,7 +293,7 @@ function build_while($debut, $table, $prim, $les_rubriques, $les_meres) {
 // et la table document_articles avant la table documents
 // (faudrait blinder, c'est un bug potentiel)
 
-// http://code.spip.net/@export_select
+// https://code.spip.net/@export_select
 function export_select($row, $les_rubriques, $les_meres) {
 	static $articles = array();
 	static $documents = array();
@@ -354,7 +354,7 @@ function export_select($row, $les_rubriques, $les_meres) {
 }
 
 // Conversion texte -> xml (ajout d'entites)
-// http://code.spip.net/@text_to_xml
+// https://code.spip.net/@text_to_xml
 function text_to_xml($string) {
 	return str_replace(array('&','<','>'), array('&amp;','&lt;','&gt;'), $string);
 }

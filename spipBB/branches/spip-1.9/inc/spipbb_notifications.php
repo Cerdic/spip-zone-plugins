@@ -23,7 +23,7 @@ spipbb_log("included",3,__FILE__);
 // il ne faudrait utiliser cette fonction que pour les id dans le secteur gere par spipbb et sinon renvoyer sur la fonction de la dist.
 // sinon envoyer un email reformatte avec les bonnes URLs
 
-// http://code.spip.net/@notifications_forumvalide_dist
+// https://code.spip.net/@notifications_forumvalide_dist
 function notifications_forumvalide($quoi, $id_forum) {
 	spipbb_log("notifications_forumvalide: $quoi : $id_forum :",3,__FILE__);
 	// c: 10/2/8 compat multibases
@@ -154,7 +154,7 @@ function notifications_forumvalide($quoi, $id_forum) {
 
 }
 
-// http://code.spip.net/@notifications_forumposte_dist
+// https://code.spip.net/@notifications_forumposte_dist
 function notifications_forumposte($quoi, $id_forum) {
 	$s = spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum));
 	if (!$t = spip_fetch_array($s))
@@ -236,7 +236,7 @@ function generer_url_forum_spipbb($id_forum) {
 	return get_spip_script('./')."?page=voirsujet&id_forum=".$id_forum;
 }
 
-// http://code.spip.net/@email_notification_forum
+// https://code.spip.net/@email_notification_forum
 function email_notification_forum_spipbb ($t, $email) {
 	spipbb_log('email_notification_forum_spipbb :'.serialize($t).":",3,__FILE__);
 	// Rechercher eventuellement la langue du destinataire

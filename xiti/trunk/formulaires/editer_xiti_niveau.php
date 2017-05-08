@@ -31,7 +31,7 @@ function formulaires_editer_xiti_niveau_verifier_dist($id_xiti_niveau = 'new', $
 	return $erreurs;
 }
 
-// http://code.spip.net/@inc_editer_article_dist
+// https://code.spip.net/@inc_editer_article_dist
 function formulaires_editer_xiti_niveau_traiter_dist($id_xiti_niveau = 'new', $id_rubrique = 0, $retour = '') {
 	return formulaires_editer_objet_traiter('xiti_niveau', $id_xiti_niveau, $id_rubrique, '', $retour);
 }

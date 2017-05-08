@@ -18,7 +18,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 // Donne la liste des champs/tables ou l'on sait chercher/remplacer
 // avec un poids pour le score
-// http://code.spip.net/@liste_des_champs
+// https://code.spip.net/@liste_des_champs
 function liste_des_champs() {
 	static $liste=null;
 	if (is_null($liste)) {
@@ -40,7 +40,7 @@ function liste_des_champs() {
 
 // Recherche des auteurs et mots-cles associes
 // en ne regardant que le titre ou le nom
-// http://code.spip.net/@liste_des_jointures
+// https://code.spip.net/@liste_des_jointures
 function liste_des_jointures() {
 	static $liste=null;
 	if (is_null($liste)) {
@@ -209,7 +209,7 @@ function expression_recherche($recherche, $options) {
 // - champs pour retourner les champs concernes
 // - score pour retourner un score
 // On peut passer les tables, ou une chaine listant les tables souhaitees
-// http://code.spip.net/@recherche_en_base
+// https://code.spip.net/@recherche_en_base
 function recherche_en_base($recherche = '', $tables = null, $options = array(), $serveur = '') {
 	include_spip('base/abstract_sql');
 
@@ -292,7 +292,7 @@ function recherche_en_base($recherche = '', $tables = null, $options = array(), 
 
 
 // Effectue une recherche sur toutes les tables de la base de donnees
-// http://code.spip.net/@remplace_en_base
+// https://code.spip.net/@remplace_en_base
 function remplace_en_base($recherche = '', $remplace = null, $tables = null, $options = array()) {
 	include_spip('inc/modifier');
 

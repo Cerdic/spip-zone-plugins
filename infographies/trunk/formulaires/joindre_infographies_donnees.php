@@ -84,7 +84,7 @@ function formulaires_joindre_infographies_donnees_verifier_dist($id_infographies
 	return $erreurs;
 }
 
-// http://code.spip.net/@inc_joindre_infographies_donnees_dist
+// https://code.spip.net/@inc_joindre_infographies_donnees_dist
 function formulaires_joindre_infographies_donnees_traiter_dist($id_infographies_data, $retour='', $config_fonc='infographies_edit_config'){
 	$i = 0;
 	if($fichier = _request('path')){

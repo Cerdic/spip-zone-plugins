@@ -75,7 +75,7 @@ function date_depuis($date) {
  	    return $retour;
 }
 
-// http://code.spip.net/@inc_editer_auteurs_dist
+// https://code.spip.net/@inc_editer_auteurs_dist
 function inc_editer_auteurs($type, $id, $flag, $cherche_auteur, $ids, $titre_boite = NULL, $script_edit_objet = NULL) {
 	global $options;
 	$arg_ajax = "&id_{$type}=$id";

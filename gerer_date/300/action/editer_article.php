@@ -12,7 +12,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://code.spip.net/@action_editer_article_dist
+// https://code.spip.net/@action_editer_article_dist
 function action_editer_article_dist($arg=null) {
 	$err="";
 	if (is_null($arg)){
@@ -43,7 +43,7 @@ function action_editer_article_dist($arg=null) {
 /**
  * Appelle toutes les fonctions de modification d'un article
  * $err est de la forme chaine de langue ou vide si pas d'erreur
- * http://code.spip.net/@articles_set
+ * https://code.spip.net/@articles_set
  *
  * @param  $id_article
  * @param null $set
@@ -95,7 +95,7 @@ function article_modifier($id_article, $set=null) {
 
 /**
  * Inserer un nouvel article en base
- * http://code.spip.net/@insert_article
+ * https://code.spip.net/@insert_article
  *
  * @param int $id_rubrique
  * @return int
@@ -177,7 +177,7 @@ function article_inserer($id_rubrique) {
 //
 // statut et rubrique sont lies, car un admin restreint peut deplacer
 // un article publie vers une rubrique qu'il n'administre pas
-// http://code.spip.net/@instituer_article
+// https://code.spip.net/@instituer_article
 function article_instituer($id_article, $c, $calcul_rub=true) {
 
 	include_spip('inc/autoriser');
@@ -299,7 +299,7 @@ function article_instituer($id_article, $c, $calcul_rub=true) {
 
 // fabrique la requete de modification de l'article, avec champs herites
 
-// http://code.spip.net/@editer_article_heritage
+// https://code.spip.net/@editer_article_heritage
 function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $cond=true) {
 
 	// Si on deplace l'article
@@ -332,7 +332,7 @@ function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $c
 // Reunit les textes decoupes parce que trop longs
 //
 
-// http://code.spip.net/@trop_longs_articles
+// https://code.spip.net/@trop_longs_articles
 function trop_longs_articles() {
 	if (is_array($plus = _request('texte_plus'))) {
 		foreach ($plus as $n=>$t) {

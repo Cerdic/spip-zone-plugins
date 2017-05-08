@@ -41,7 +41,7 @@ c'est-a-dire sans utilisation de .htaccess ; les adresses sont de la forme
 define ('_terminaison_urls_propres', '');
 define ('_debut_urls_propres', '');
 
-// http://code.spip.net/@_generer_url_propre
+// https://code.spip.net/@_generer_url_propre
 function _generer_url_propre($type, $id_objet) {
 	$table = "spip_".table_objet($type);
 	$col_id = id_table_objet($type);
@@ -135,7 +135,7 @@ function _generer_url_propre($type, $id_objet) {
 	return $url;
 }
 
-// http://code.spip.net/@generer_url_article
+// https://code.spip.net/@generer_url_article
 function generer_url_article($id_article) {
 	$url = _generer_url_propre('article', $id_article);
 	if ($url)
@@ -144,7 +144,7 @@ function generer_url_article($id_article) {
 		return get_spip_script('./')."?page=article&id_article=$id_article";
 }
 
-// http://code.spip.net/@generer_url_rubrique
+// https://code.spip.net/@generer_url_rubrique
 function generer_url_rubrique($id_rubrique) {
 	$url = _generer_url_propre('rubrique', $id_rubrique);
 	if ($url)
@@ -153,7 +153,7 @@ function generer_url_rubrique($id_rubrique) {
 		return get_spip_script('./')."?page=rubrique&id_rubrique=$id_rubrique";
 }
 
-// http://code.spip.net/@generer_url_breve
+// https://code.spip.net/@generer_url_breve
 function generer_url_breve($id_breve) {
 	$url = _generer_url_propre('breve', $id_breve);
 	if ($url)
@@ -162,13 +162,13 @@ function generer_url_breve($id_breve) {
 		return get_spip_script('./')."?page=breve&id_breve=$id_breve";
 }
 
-// http://code.spip.net/@generer_url_forum
+// https://code.spip.net/@generer_url_forum
 function generer_url_forum($id_forum, $show_thread=false) {
 	include_spip('inc/forum');
 	return generer_url_forum_dist($id_forum, $show_thread);
 }
 
-// http://code.spip.net/@generer_url_mot
+// https://code.spip.net/@generer_url_mot
 function generer_url_mot($id_mot) {
 	$url = _generer_url_propre('mot', $id_mot);
 	if ($url)
@@ -177,7 +177,7 @@ function generer_url_mot($id_mot) {
 		return get_spip_script('./')."?page=mot&id_mot=$id_mot";
 }
 
-// http://code.spip.net/@generer_url_auteur
+// https://code.spip.net/@generer_url_auteur
 function generer_url_auteur($id_auteur) {
 	$url = _generer_url_propre('auteur', $id_auteur);
 	if ($url)
@@ -186,7 +186,7 @@ function generer_url_auteur($id_auteur) {
 		return get_spip_script('./')."?page=auteur&id_auteur=$id_auteur";
 }
 
-// http://code.spip.net/@generer_url_site
+// https://code.spip.net/@generer_url_site
 function generer_url_site($id_syndic) {
 	$url = _generer_url_propre('site', $id_syndic);
 	if ($url)
@@ -195,7 +195,7 @@ function generer_url_site($id_syndic) {
 		return get_spip_script('./')."?page=site&id_syndic=$id_syndic";
 }
 
-// http://code.spip.net/@generer_url_document
+// https://code.spip.net/@generer_url_document
 function generer_url_document($id_document) {
 	if (($id_document = intval($id_document)) <= 0)
 		return '';
@@ -206,7 +206,7 @@ function generer_url_document($id_document) {
 	return '';
 }
 
-// http://code.spip.net/@recuperer_parametres_url
+// https://code.spip.net/@recuperer_parametres_url
 function recuperer_parametres_url(&$fond, $url) {
 	global $contexte;
 	$id_objet = 0;

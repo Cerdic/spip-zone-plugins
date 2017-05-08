@@ -116,7 +116,7 @@ function tradlang_set($id_tradlang, $set = null) {
 //
 // statut et rubrique sont lies, car un admin restreint peut deplacer
 // un article publie vers une rubrique qu'il n'administre pas
-// http://code.spip.net/@instituer_article
+// https://code.spip.net/@instituer_article
 function instituer_tradlang($id_tradlang, $c) {
 
 	include_spip('inc/autoriser');

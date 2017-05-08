@@ -16,7 +16,7 @@ include_spip('inc/presentation');
 include_spip('inc/article_select');
 include_spip('inc/documents');
 
-// http://code.spip.net/@exec_articles_edit_dist
+// https://code.spip.net/@exec_articles_edit_dist
 function exec_articles_edit_dist()
 {
   articles_edit(_request('id_article'), // intval plus tard
@@ -28,7 +28,7 @@ function exec_articles_edit_dist()
 }
 
 
-// http://code.spip.net/@articles_edit
+// https://code.spip.net/@articles_edit
 function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new, $config_fonc)
 {
 
@@ -103,7 +103,7 @@ function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new,
 	echo fin_gauche(), fin_page();
 }
 
-// http://code.spip.net/@articles_edit_presentation
+// https://code.spip.net/@articles_edit_presentation
 function articles_edit_presentation($new, $id_rubrique, $lier_trad, $id_article, $titre)
 {
 	$oups = ($lier_trad ?

@@ -17,7 +17,7 @@ include_spip('inc/cookie');
 // changer de langue: pas de secu si espace public ou login ou installation
 // mais alors on n'accede pas a la base, on pose seulement le cookie.
 
-// http://code.spip.net/@action_converser_dist
+// https://code.spip.net/@action_converser_dist
 function action_converser_dist()
 {
 	$update_session = false;
@@ -56,7 +56,7 @@ function action_converser_changer_langue($update_session){
 	return $lang;
 }
 
-// http://code.spip.net/@action_converser_post
+// https://code.spip.net/@action_converser_post
 function action_converser_post($lang, $ecrire=false)
 {
 	if ($lang) {

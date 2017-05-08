@@ -37,7 +37,7 @@ function formulaires_editer_infographie_verifier_dist($id_infographie='new', $re
 	return $erreurs;
 }
 
-// http://code.spip.net/@inc_editer_infographie_dist
+// https://code.spip.net/@inc_editer_infographie_dist
 function formulaires_editer_infographie_traiter_dist($id_infographie='new', $retour='', $lier_trad=0, $config_fonc='infographies_edit_config', $row=array(), $hidden=''){
 	return formulaires_editer_objet_traiter('infographie',$id_infographie,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
 }
