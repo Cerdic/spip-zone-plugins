@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>LazySize : Base</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="#CHEMIN{css/lazysizes.css}">
+	#INSERT_HEAD
+<style>
+.media {
+	width: 100%;
+	clear: both;
+}
+.media img {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.blur-up {
+	-webkit-filter: blur(5px);
+	filter: blur(5px);
+	transition: filter 400ms, -webkit-filter 400ms;
+}
+
+.blur-up.lazyloaded {
+	-webkit-filter: blur(0);
+	filter: blur(0);
+}
+
+.fade-box .lazyload,
+.fade-box .lazyloading {
+   opacity: 0.5;
+   transition: opacity 400ms;
+}
+
+.fade-box img.lazyloaded {
+	opacity: 1;
+}
+</style>
+</head>
+<body>
+	<h1>Demo LazySize : base</h1>
+[(#REM)<!-- 
+
+Markup standard : avec loader.gif et transition sur l'opactité	
+<img data-src="#FICHIER" width="#LARGEUR" height="#HAUTEUR" class="lazyload" alt="#TITRE">
+	
+
+-->]
+<BOUCLE_listDocs(DOCUMENTS){tout}{0,100}{extension==jpg|png|gif}>
+<div class="media">
+	<img 	src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+			data-src="#FICHIER"
+			width="#LARGEUR"
+			height="#HAUTEUR"
+			class="lazyload" alt="#TITRE"
+			itemprop="image" >
+</div>	
+</BOUCLE_listDocs>
+</body>
+</html>
