@@ -3,7 +3,7 @@
  * Définit les autorisations du plugin Lister les pages ?exec=xxx
  *
  * @plugin     Lister les pages ?exec=xxx
- * @copyright  2013-2015
+ * @copyright  2013-2017
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\ListerExec\Autorisations
