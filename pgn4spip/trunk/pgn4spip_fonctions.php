@@ -34,8 +34,7 @@ define('PATH_Conf', find_in_path('pgn4spip_conf.php'));
 if (!function_exists('ReadCurrentConfiguration')) require 'pgn4spip_conf.php';
 
 define('TAG_pgn', "[pP][gG][nN]"); // pgn or PGN
-define('PATH_board',_DIR_RACINE . 'lib/pgn4web/board.html');
-define('PATH_live', _DIR_PLUGIN_PGN4SPIP . 'boardLive.html');
+define('PATH_board', find_in_path('pgn4web/board.html'));
 define('indFullPattern', 0);
 define('indPgnOption', 1);
 define('indPgnGame', 2);
