@@ -35,16 +35,34 @@ function notifications_archive_taches_generales_cron($taches){
  */
 function notifications_archive_reservation_evenement_objets_configuration($flux) {
 
-	$objets = array(
-		'notifications_archive' => array(
-			'label' => _T('notifications_archive:notifications_archive_titre'),
-		),
-	);
 
-	$flux['data'] = array_merge($flux['data'], $objets);
+
+
+
+
+	$flux['data']['notifications_archive'] = array(
+			'label' => _T('notifications_archive:notifications_archive_titre'),
+	);
 
 	return $flux;
 }
 
+/**
+ * Ajouter une entré au menu de navigation de résrvation événement.
+ *
+ * @pipeline reservation_evenement_objets_navigation
+ *
+ * @param array $flux
+ *        	Données du pipeline
+ * @return array Données du pipeline
+ */
 
-?>
+function notifications_archive_reservation_evenement_objets_navigation($flux) {
+
+	$flux['data']['notifications'] = array(
+			'label' => _T('notification:titre_notification'),
+			'objets' => array('notification', 'notifications')
+	);
+
+	return $flux;
+}
