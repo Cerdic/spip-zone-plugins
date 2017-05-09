@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'apercu' => 'Anketa',
 
 	// B
-	'bloc_sans_noisette' => 'V tomto bloku nie sú žiadne oriešky.',
+	'bloc_sans_noisette' => 'V tomto bloku nie sú žiadne oriešky.', # MODIF
 
 	// C
 	'choisir_noisette' => 'Vyberte si oriešok, ktorý chcete pridať:',
@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'formulaire_ajouter_noisette' => 'Pridať oriešok',
 	'formulaire_composition' => 'Identifikátor rozloženia',
-	'formulaire_composition_explication' => 'Zadajte jedinečné kľúčové slovo (malými písmenami, bez medzier, bez pomlčiek (-) a diakritiky), ktoré umožní jednoznačne označiť toto rozmiestnenie.<br />Napríklad: <i>mojeroz.</i>',
+	'formulaire_composition_explication' => 'Zadajte jedinečné kľúčové slovo (malými písmenami, bez medzier, bez pomlčiek (-) a diakritiky), ktoré umožní jednoznačne označiť toto rozmiestnenie.<br />Napríklad: <i>mojeroz.</i>', # MODIF
 	'formulaire_composition_mise_a_jour' => 'Rozmiestnenie aktualizované',
 	'formulaire_configurer_bloc' => 'Nastaviť blok:',
 	'formulaire_configurer_page' => 'Nastaviť stránku:',
@@ -77,7 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_supprimer_noisettes_page' => 'Odstrániť oriešky tejto stránky', # MODIF
 	'formulaire_supprimer_page' => 'Odstrániť túto stránku', # MODIF
 	'formulaire_type' => 'Typ stránky',
-	'formulaire_type_explication' => 'Uveďte, ktorý objekt/ktorá stránka používa toto rozmiestnenie alebo či chcete vytvoriť samostatnú stránku.',
+	'formulaire_type_explication' => 'Uveďte, ktorý objekt/ktorá stránka používa toto rozmiestnenie alebo či chcete vytvoriť samostatnú stránku.', # MODIF
 	'formulaire_type_import' => 'Typ nahrávania',
 	'formulaire_type_import_explication' => 'Súbor s nastaveniami môžete zlúčiť so svojimi aktuálnymi nastaveniami (oriešky každej stránky budú pridané k orieškom, ktoré sú už definované) alebo ním môžete svoje nastavenia nahradiť.',
 

@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'apercu' => 'Preview',
 
 	// B
-	'bloc_sans_noisette' => 'This block doesn’t contain nuts.',
+	'bloc_sans_noisette' => 'This block doesn’t contain nuts.', # MODIF
 
 	// C
 	'choisir_noisette' => 'Choose the nut you want to add:',
@@ -51,7 +51,7 @@ You can choose a new identifier or suffix the reference identifier as follows:
 	// F
 	'formulaire_ajouter_noisette' => 'Add a nut',
 	'formulaire_composition' => 'Identifier of composition',
-	'formulaire_composition_explication' => 'Specify a unique keyword (lowercase, no spaces, no dashes (-) and without accents) to identify the composition. <br />For example: <i>mycompo</i>.',
+	'formulaire_composition_explication' => 'Specify a unique keyword (lowercase, no spaces, no dashes (-) and without accents) to identify the composition. <br />For example: <i>mycompo</i>.', # MODIF
 	'formulaire_composition_mise_a_jour' => 'Composition updated',
 	'formulaire_configurer_bloc' => 'Configure the block:',
 	'formulaire_configurer_page' => 'Configure the page:',
@@ -85,7 +85,7 @@ nuts on the following pages:',
 	'formulaire_supprimer_noisettes_page' => 'Delete the nuts of this page', # MODIF
 	'formulaire_supprimer_page' => 'Delete this page', # MODIF
 	'formulaire_type' => 'Page type',
-	'formulaire_type_explication' => 'Indicate on which object does this composition apply or if you wish to create a specific page.',
+	'formulaire_type_explication' => 'Indicate on which object does this composition apply or if you wish to create a specific page.', # MODIF
 	'formulaire_type_import' => 'Import type',
 	'formulaire_type_import_explication' => 'You can merge the configuration file with your actual configuration (the nuts of each page will be added to your already defined nuts) or you can replace your configuration by this one.',
 

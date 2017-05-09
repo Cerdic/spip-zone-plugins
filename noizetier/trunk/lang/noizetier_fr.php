@@ -63,11 +63,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'formulaire_ajouter_noisette' => 'Ajouter une noisette',
 	'formulaire_composition' => 'Identifiant de composition',
-	'formulaire_creer_composition' => 'Créer une composition',
 	'formulaire_composition_explication' => 'Mot-clé unique (minuscules, sans espace, sans tiret et sans accent) permettant d’identifier la composition.',
 	'formulaire_composition_mise_a_jour' => 'Composition mise à jour',
 	'formulaire_configurer_bloc' => 'Configurer le bloc :',
 	'formulaire_configurer_page' => 'Configurer la page :',
+	'formulaire_creer_composition' => 'Créer une composition',
 	'formulaire_deplacer_bas' => 'Déplacer vers le bas',
 	'formulaire_deplacer_haut' => 'Déplacer vers le haut',
 	'formulaire_description' => 'Description',

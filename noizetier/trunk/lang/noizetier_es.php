@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'apercu' => 'Ver', # "Aperçu" lo he traducido como "ver", podría también traducirse como "visión de conjunto"
 
 	// B
-	'bloc_sans_noisette' => 'Este bloc no contiene noisette ', # "Bloc" en castellano sería "bloque", y "noisette" "nuez", pero prefiero dejar las palabras  en francés, pues son términos que considero es preferible dejarlos en la lengua de origen.
+	'bloc_sans_noisette' => 'Este bloc no contiene noisette ', # "Bloc" en castellano sería "bloque", y "noisette" "nuez", pero prefiero dejar las palabras  en francés, pues son términos que considero es preferible dejarlos en la lengua de origen. MODIF
 
 	// C
 	'choisir_noisette' => 'Elija la noisette que usted quiere añadir :',
@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'formulaire_ajouter_noisette' => 'Añadir una  noisette', # No se si poner avellana o noisette....
 	'formulaire_composition' => 'identificador  de composition',
-	'formulaire_composition_explication' => 'Indique una  palabra-clave única (minúsculas, sin espacio, sin guión y sin acento)  de manera que permita   identificar esta composición.<br />Por ejemplo : <i>micompo</i>.',
+	'formulaire_composition_explication' => 'Indique una  palabra-clave única (minúsculas, sin espacio, sin guión y sin acento)  de manera que permita   identificar esta composición.<br />Por ejemplo : <i>micompo</i>.', # MODIF
 	'formulaire_composition_mise_a_jour' => 'Composición actualizada ',
 	'formulaire_configurer_bloc' => 'Configurar el bloc :', # También se puede traducir bloc por bloque, pero prefiero dejarlo así de momento....
 	'formulaire_configurer_page' => 'Configurar la página :',
@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_supprimer_noisettes_page' => 'Suprimir las noisettes de esta página', # MODIF
 	'formulaire_supprimer_page' => 'Suprimir esta página', # MODIF
 	'formulaire_type' => 'Tipo de página',
-	'formulaire_type_explication' => 'Indique  sobre  que objeto se aplica esta composición o bien si usted desea crear una página autónoma. ',
+	'formulaire_type_explication' => 'Indique  sobre  que objeto se aplica esta composición o bien si usted desea crear una página autónoma. ', # MODIF
 	'formulaire_type_import' => 'Tipo de importación',
 	'formulaire_type_import_explication' => 'Puede usted fusionar el fichero de configuración con su  configuración actual (las noisettes de cada página serán añadidas a sus noisettes ya definidas) o bien puede remplazar su  configuración por esta otra.',
 

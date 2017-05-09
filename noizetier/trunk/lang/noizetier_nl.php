@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'apercu' => 'Overzicht',
 
 	// B
-	'bloc_sans_noisette' => 'Dit blok bevat geen nootjes.',
+	'bloc_sans_noisette' => 'Dit blok bevat geen nootjes.', # MODIF
 
 	// C
 	'choisir_noisette' => 'Kies het nootje dat je wilt toevoegen:',
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'formulaire_ajouter_noisette' => 'Een nootje toevoegen',
 	'formulaire_composition' => 'Identificatie van de compositie',
-	'formulaire_composition_explication' => 'Geef een uniek trefwoord (kleine letters, zonder spatie, haakje of accent) om deze compositie te kenmerken.<br />Bijvoorbeeld: <i>mijncompo</i>.',
+	'formulaire_composition_explication' => 'Geef een uniek trefwoord (kleine letters, zonder spatie, haakje of accent) om deze compositie te kenmerken.<br />Bijvoorbeeld: <i>mijncompo</i>.', # MODIF
 	'formulaire_composition_mise_a_jour' => 'Compositie aangepast',
 	'formulaire_configurer_bloc' => 'Configureer het blok:',
 	'formulaire_configurer_page' => 'Configureer de bladzijde:',
@@ -86,7 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_supprimer_noisettes_page' => 'Verwijder de nootjes van deze bladzijde', # MODIF
 	'formulaire_supprimer_page' => 'Verwijder deze bladzijde', # MODIF
 	'formulaire_type' => 'Type bladzijde',
-	'formulaire_type_explication' => 'Geef aan op welk object deze comositie is gebaseerd of dat je een onafhankelijke bladzijde wilt maken.',
+	'formulaire_type_explication' => 'Geef aan op welk object deze comositie is gebaseerd of dat je een onafhankelijke bladzijde wilt maken.', # MODIF
 	'formulaire_type_import' => 'Type import',
 	'formulaire_type_import_explication' => 'Je kunt het configuratiebestand samenvoegen met de huidige configuratie (de nootjes van iedere bladzijde worden aan de al gedefinieerde nootjes toegevoegd) of de huidige configuratie vervangen.',
 
