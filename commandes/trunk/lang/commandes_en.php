@@ -173,7 +173,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_expediteur_explication' => 'Choose the sender notifications for the seller and buyer',
 	'notifications_expediteur_label' => 'Sender',
 	'notifications_expediteur_webmaster_label' => 'Select a webmaster:',
-	'notifications_explication' => 'Notifications allow to send emails after changes in order status : Pending, ongoing, sent, partially paid, paid, returned, partially return. This feature requires <a href="https://plugins.spip.net/notifavancees.html">Advanced notification plugin</a>.',
+	'notifications_explication' => 'Notifications allow to send emails after changes in order status : Pending, ongoing, sent, partially paid, paid, returned, partially return. This feature requires <a href="http://plugins.spip.net/notifavancees.html">Advanced notification plugin</a>.', # MODIF
 	'notifications_parametres' => 'Parameters of notifications',
 	'notifications_quand_explication' => 'Which are changes of status that will send a notification?',
 	'notifications_quand_label' => 'Outbreak',
