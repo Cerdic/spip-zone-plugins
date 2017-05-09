@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'analyser_site_linkchecks' => 'Analyseer de links op mijn site',
 
 	// B
+	'bouton_exporter_selection' => 'De selectie in CSV exporteren',
 	'bouton_tester_lien' => 'Test deze link',
 
 	// C
@@ -26,6 +27,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'descriptif' => 'Deze plugin controleert of links op deze site nog steeds naar een bestaande pagina verwijzen.',
+	'distant_non' => 'Interne links',
+	'distant_oui' => 'Remote links',
 
 	// E
 	'etat' => 'Status',
@@ -57,6 +60,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liens_malades' => 'niet te controleren links',
 	'liens_morts' => 'ongeldige links',
 	'liens_oks' => 'gevalideerde links',
+	'liens_publies' => 'Online zichtbaar',
+	'liens_publies_non' => 'Niet online zichtbaar',
 	'linkcheck' => 'LinkCheck',
 	'liste_des_liens' => 'Lijst van links',
 
@@ -90,7 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tester_liens_linkchecks' => 'Test de links van mijn site',
 	'titre_linkcheck' => 'Verificatie van links',
 	'titre_page_configurer' => 'Configureer plugin Linkcheck',
-	'tous_les_liens' => 'Alle links', # MODIF
+	'tous_les_liens' => 'Alle links',
 
 	// U
 	'url' => 'URL',
