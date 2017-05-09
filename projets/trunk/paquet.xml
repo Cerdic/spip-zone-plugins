@@ -1,9 +1,9 @@
 <paquet
 	prefix="projets"
 	categorie="divers"
-	version="1.1.16"
+	version="1.1.17"
 	etat="test"
-	compatibilite="[3.0.5;3.1.*]"
+	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/projets-64.png"
 	documentation="https://contrib.spip.net/Plugin-Projets"
 	schema="1.1.3"
@@ -12,6 +12,7 @@
 
 	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs -->
 	<auteur>Cyril Marion</auteur>
+	<auteur>Teddy Payet</auteur>
 
 	<licence>GNU/GPL</licence>
 

@@ -4,7 +4,7 @@
  * Supprimer un projet
  *
  * @plugin  Projets
- * @license GPL (c) 2009 - 2016
+ * @license GPL (c) 2009-2017
  * @author  Cyril Marion, Matthieu Marcillaud, RastaPopoulos
  *
  * @package SPIP\Projets\Actions
