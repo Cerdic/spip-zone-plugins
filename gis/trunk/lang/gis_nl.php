@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_lien' => 'Verwijder deze link',
 
 	// C
-	'cfg_descr_gis' => 'Geografisch Informatie Systeem.<br /><a href="http://www.spip-contrib.net/4189" class="spip_out">Naar de documentatie</a>.', # MODIF
+	'cfg_descr_gis' => 'Geografisch Informatie Systeem.<br /><a href="http://www.spip-contrib.net/4189" class="spip_out">Naar de documentatie</a>.',
 	'cfg_inf_adresse' => 'Toon extra addresvelden (land, stad, staat, adres ...)',
 	'cfg_inf_bing' => 'De Bing Aerial layer heeft een sleutel nodig die je kunt aanmaken op <a href=\'@url@\' class="spip_out">de Bing website</a>.',
 	'cfg_inf_geocoder' => 'Maak geocoder functies mogelijk (adres zoeken, adres vinden aan de hand van coördinaten).',
@@ -137,6 +137,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_ajouter_gis' => 'Voeg dit punt toe',
 	'lon' => 'Lengtegraad',
 
+	// M
+	'message_limite_atteinte' => 'Je beschikt over meer geolocatie punten dan er kunnen worden weergegeven.<br /> Wil je ze allemaal tonen, volg dan <a href="@url@">deze link</a>.',
+
+	// O
+	'onglet_carte' => 'Kaart',
+	'onglet_liste' => 'Lijst',
+
 	// P
 	'placeholder_geocoder' => 'Een adres, een plaats, een land, een toeristische plek...',
 
@@ -150,6 +157,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_bloc_creer_point' => 'Koppel een nieuw punt',
 	'titre_bloc_points_lies' => 'Gekoppelde punten',
 	'titre_bloc_rechercher_point' => 'Zoek een punt',
+	'titre_limite_atteinte' => 'Limiet van weer te geven punten (@limite@) bereikt',
 	'titre_nombre_utilisation' => 'Eén toepassing',
 	'titre_nombre_utilisations' => '@nb@ toepassingen',
 	'titre_nouveau_point' => 'Nieuw punt',
