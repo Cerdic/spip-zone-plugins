@@ -3,7 +3,7 @@
  * Définit les autorisations du plugin Lister les objets principaux de SPIP
  *
  * @plugin     Lister les objets principaux de SPIP
- * @copyright  2013-2015
+ * @copyright  2013-2017
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\ListerFonctions\Autorisations
