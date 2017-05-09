@@ -3,7 +3,7 @@
  * Définit les autorisations du plugin Documentation technique
  *
  * @plugin     Documentation technique
- * @copyright  2013
+ * @copyright  2013-2017
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\Doc_tech\Autorisations

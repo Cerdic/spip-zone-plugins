@@ -6,7 +6,7 @@
 #SET{prefixe_lang,#GET{prefixe_lang}|array_unique|array_filter}
 	<B_info_table>
 <textarea rows="20" cols="40" class="doc_tech_lang_perso">
-<BOUCLE_info_table(DATA) {source table, #EVAL{$GLOBALS['tables_principales'][#GET{spip_table}]}}{cle==field}>// ----------
+<BOUCLE_info_table(DATA) {source table, [(#REM|lister_tables_principales|table_valeur{#GET{spip_table}})]}{cle==field}>// ----------
 // [Objet : (#_tables:GET{spip_table})]
 // <:doc_tech:chaines_a_placer_dans:> [(#_tables:VALEUR|concat{'s'})]/lang/[(#_tables:VALEUR|concat{'_',#LANG,'.php'})]
 // La chaine de langue 'explication' peut être utile sur les # SAISIES des pages d'édition de l'objet.

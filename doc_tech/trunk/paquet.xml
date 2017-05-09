@@ -1,9 +1,9 @@
 <paquet
 	prefix="doc_tech"
 	categorie="outil"
-	version="0.6.0"
+	version="0.7.0"
 	etat="dev"
-	compatibilite="[3.0.9;3.1.*]"
+	compatibilite="[3.0.9;3.2.*]"
 	logo="prive/themes/spip/images/doc_tech-32.png"
 	documentation=""
 >

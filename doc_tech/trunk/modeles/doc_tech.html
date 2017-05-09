@@ -3,7 +3,7 @@
 [(#SET{spip_table,[(#VALEUR|table_objet_sql)]})]
 	<B_info_table>
 	<table>
-		<BOUCLE_info_table (DATA) {source table, #EVAL{$GLOBALS['tables_principales'][#GET{spip_table}]}}{cle==field}>
+		<BOUCLE_info_table (DATA) {source table, [(#VAL|lister_tables_principales|table_valeur{#GET{spip_table}})]}{cle==field}>
 			<caption id="[(#_tables:GET{spip_table}|attribut_html)]">#_tables:GET{spip_table}</caption>
 		<thead>
 			<th><:doc_tech:nom_du_champ:></th>
