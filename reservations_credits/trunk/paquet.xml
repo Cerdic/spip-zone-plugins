@@ -15,7 +15,7 @@
 
 	<necessite nom="saisies" compatibilite="[2.18.5;]" />
 	<necessite nom="verifier" compatibilite="[1.6.2;]" />
-	<necessite nom="reservation_evenement" compatibilite="[1.23.15;]" />
+	<necessite nom="reservation_evenement" compatibilite="[1.25.2;]" />
 	<necessite nom="reservation_bank" compatibilite="[1.1.10;]" />
 
 	<pipeline nom="affiche_gauche" inclure="reservations_credits_pipelines.php" />
