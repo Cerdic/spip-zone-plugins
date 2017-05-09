@@ -1,14 +1,15 @@
 <paquet
 	prefix="medias_nettoyage"
 	categorie="outil"
-	version="0.11.1"
+	version="0.11.2"
 	etat="stable"
-	compatibilite="[2.1.0;3.1.*]"
+	compatibilite="[2.1.0;3.2.*]"
 	logo="prive/themes/spip/images/medias_nettoyage-64.png"
 	documentation="https://contrib.spip.net/Nettoyer-la-mediatheque"
+	schema="0.1.0"
 >
 
-	<nom>Nettoyer la m&#233;diath&#232;que</nom>
+	<nom>Nettoyer la médiathèque</nom>
 	<!-- On range nos medias! -->
 
 	<auteur>Venfu</auteur>
