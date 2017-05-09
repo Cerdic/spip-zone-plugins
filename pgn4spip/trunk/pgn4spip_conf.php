@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 define('DEFAULT_Val', "d"); // (d)efault value
 define('TRANSPARENT', 't'); // (t)ransparent color
-define('DEFAULT_ss', '26'); // Square Size by default: [26] was 28
+define('DEFAULT_ss', '38'); // Square Size by default: [26] was 28
 
 // Read the current configuration of the parameters of the plugin
 // @out: 	$optValue: default values of options overriden with the current configuration
