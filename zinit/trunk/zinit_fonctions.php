@@ -5,7 +5,7 @@
  *
  * @plugin     Initialiser Zcore
  *
- * @copyright  2015
+ * @copyright  2015-2017
  * @author     Teddy Payet
  * @licence    GNU/GPL
  */
@@ -192,7 +192,7 @@ function zinit_check_skel_dist() {
 			'.DS_Store',
 		)); // On ne liste pas le répertoire ^.
 		foreach ($contenus_skel_dist as $fichier) {
-			if (preg_match("/"._EXTENSION_SQUELETTES."$/", $fichier)) {
+			if (preg_match("/" . _EXTENSION_SQUELETTES . "$/", $fichier)) {
 				$fichiers[] = $fichier;
 			}
 		}

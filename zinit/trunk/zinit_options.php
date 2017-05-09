@@ -5,7 +5,7 @@
  *
  * @plugin     Initialiser Zcore
  *
- * @copyright  2015
+ * @copyright  2015-2017
  * @author     Teddy Payet
  * @licence    GNU/GPL
  */

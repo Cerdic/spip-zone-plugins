@@ -1,9 +1,9 @@
 <paquet
 	prefix="zinit"
 	categorie="outil"
-	version="0.3.0"
+	version="0.3.1"
 	etat="experimental"
-	compatibilite="[3.0.9;3.1.*]"
+	compatibilite="[3.0.9;3.2.*]"
 	logo="prive/themes/spip/images/zinit-64.png"
 	documentation="https://contrib.spip.net/4699"
 >

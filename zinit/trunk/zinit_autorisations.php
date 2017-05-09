@@ -5,7 +5,7 @@
  *
  * @plugin     Initialiser Zcore
  *
- * @copyright  2015
+ * @copyright  2015-2017
  * @author     Teddy Payet
  * @licence    GNU/GPL
  */
@@ -15,6 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Fonction d'appel pour le pipeline.
+ *
  * @pipeline autoriser
  */
 function zinit_autoriser() {

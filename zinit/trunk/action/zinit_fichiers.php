@@ -23,7 +23,7 @@ function action_zinit_fichiers_dist($arg = null) {
 
 		if ($repertoires and $fichiers) {
 			if (!$redirect = _request('redirect')) {
-				$redirect = parametre_url(generer_url_ecrire('zcore_skel'));
+				$redirect = parametre_url(generer_url_ecrire('zcore_skel'),'');
 			}
 			$redirect = str_replace('&amp;', '&', urldecode($redirect));
 			include_spip('inc/headers');
