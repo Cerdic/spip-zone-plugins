@@ -3,7 +3,7 @@
  * Options du plugin Lister les dossiers au chargement
  *
  * @plugin     Lister les dossiers
- * @copyright  2014
+ * @copyright  2014-2017
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\Lister_dossiers\Options
