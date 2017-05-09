@@ -3,7 +3,7 @@
  * Définit les autorisations du plugin Lister les constantes PHP de SPIP
  *
  * @plugin     Lister les constantes PHP de SPIP
- * @copyright  2013-2015
+ * @copyright  2013-2017
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\ListerConstantes\Autorisations
