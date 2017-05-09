@@ -50,14 +50,22 @@ function reservation_evenement_affiche_gauche($flux) {
 	}, []);
 
 		if (in_array($exec, $objets_navigation)) {
-			$soustitre = isset($definition_objets_navigation[$exec]) ? $definition_objets_navigation[$exec]['label'] :
-			(isset($definition_objets_navigation[$exec . 's']) ? $definition_objets_navigation[$exec . 's']['label'] : '');
+			include_spip('inc/config');
+			$config = lire_config('reservation_evenement');
+			$selection_objets_navigation = isset($config['selection_objets_navigation']) ? $config['selection_objets_navigation'] : '';
+			$objets_navigation = isset($config['objets_navigation']) ? $config['objets_navigation'] : array();
+			if (!$selection_objets_navigation OR
+				($selection_objets_navigation AND in_array($exec, $objets_navigation))) {
+				$soustitre = isset($definition_objets_navigation[$exec]) ? $definition_objets_navigation[$exec]['label'] :
+				(isset($definition_objets_navigation[$exec . 's']) ? $definition_objets_navigation[$exec . 's']['label'] : '');
 
-			$contexte = $flux['args'];
-			if ($soustitre) {
-				$contexte['soustitre'] = $soustitre;
+				$contexte = $flux['args'];
+				if ($soustitre) {
+					$contexte['soustitre'] = $soustitre;
+				}
+				$flux['data'] .= recuperer_fond('prive/squelettes/navigation/reservations', $contexte);
 			}
-			$flux['data'] .= recuperer_fond('prive/squelettes/navigation/reservations', $contexte);
+
 		}
 
 	return $flux;
