@@ -3,7 +3,7 @@
  * Fichier de configurer du Plugin SPIP
  *
  * @plugin     Info SPIP
- * @copyright  2013-2016
+ * @copyright  2013-2017
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\Info_SPIP\Configurer
