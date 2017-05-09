@@ -16,7 +16,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function socicon_sociaux_lister($flux){
 	include_spip('inc/config');
 	$socicon_config = lire_config('socicon');
-	var_dump($flux);
 
 	if (empty($socicon_config) or count($socicon_config) == 0) {
 		$socicon_config = array('facebook','twitter','instagram','googleplus','blogger','pinterest','linkedin','youtube','rss','mail','tripadvisor','vimeo','flickr');
@@ -31,7 +30,6 @@ function socicon_sociaux_lister($flux){
 	foreach ($socicon_config as $value) {
 		$flux['data'][$value] = ucwords($value);
 	}
-	var_dump($flux);
 
 	return $flux;
 }

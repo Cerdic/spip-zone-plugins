@@ -1,7 +1,7 @@
 <paquet
 	prefix="socicon"
 	categorie="edition"
-	version="0.1.0"
+	version="0.2.0"
 	etat="test"
 	compatibilite="[3.0.20;3.2.*]"
 	logo="prive/themes/spip/images/socicon-64.png"

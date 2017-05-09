@@ -3,7 +3,7 @@
  * Définit les autorisations du plugin Socicon
  *
  * @plugin     Socicon
- * @copyright  2014-2016
+ * @copyright  2014-2017
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\Socicon\Autorisations

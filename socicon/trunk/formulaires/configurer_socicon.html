@@ -9,9 +9,20 @@
 			#ACTION_FORMULAIRE{#ENV{action}}
 
 			<ul class="editer-groupe">
-				<li class="editer editer-search">
+				<li class="editer editer_search long_label">
 					<label for="search-socicon"><:socicon:label_search_icon:></label>
 					<input type="text" name="search-socicon" id="search-socicon" class="text" />
+				</li>
+				<li class="editer editer long_label">
+					<label><:socicon:label_show_checked:></label>
+					<div class="choix">
+						<input type="radio" name="show_checked" id="show_checked_oui" class="radio" value="oui" />
+						<label for="show_checked_oui"><:socicon:label_oui:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="show_checked" id="show_checked_non" class="radio" value="non" checked="checked" />
+						<label for="show_checked_non"><:socicon:label_non:></label>
+					</div>
 				</li>
 			</ul>
 			<!-- les reseaux -->
@@ -31,7 +42,6 @@
 				</ul>
 			</B_rezo>
 
-
 			<input type="hidden" name="_meta_casier" value="socicon"/>
 			<p class="boutons">
 				<span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>"/>
@@ -41,30 +51,53 @@
 </div>
 
 <script type="text/javascript">
-	jQuery(document).ready(function(){
-      $.expr[":"].contains_ci = $.expr.createPseudo(function(arg) {
-        return function( elem ) {
-          return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
-        };
-      });
+  jQuery(document).ready(function(){
+    $.expr[":"].contains_ci = $.expr.createPseudo(function(arg) {
+      return function( elem ) {
+        return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+      };
+    });
 
-// Detect a click in the "Search" button or enter from keyboard
-      $('#search-socicon').on('click keyup', function(event) {
-        // Prevent the original click for not reloading the whole page
-        event.preventDefault();
+    /**
+     * Detect a click in the "Search" button or enter from keyboard
+     */
+    $('#search-socicon').on('click keyup', function(event) {
+      // Prevent the original click for not reloading the whole page
+      event.preventDefault();
 
-        // Get value from search input
-        var searchInputValue = $('#search-socicon').val();
+      // Get value from search input
+      var searchInputValue = $('#search-socicon').val();
 
-        // Search the list and if it matches display it, else hide it
-        $('.choix').hide().find('label:contains_ci(' + searchInputValue + ')').parents('.choix').show();
-      });
-      $('.choix input').on('change', function(){
-        if($(this).is(':checked')) {
-          $(this).parent().addClass('checked');
-        } else {
-          $(this).parent().removeClass('checked')
-        }
-      });
-	});
+      // Search the list and if it matches display it, else hide it
+      $('.editer_socicon .choix').hide().find('label:contains_ci(' + searchInputValue + ')').parents('.choix').show();
+    });
+    /**
+     * When an input is checked, add the class checked to its parents
+     */
+    $('.editer_socicon .choix input').on('change', function(){
+      if($(this).is(':checked')) {
+        $(this).parent().addClass('checked');
+      } else {
+        $(this).parent().removeClass('checked')
+      }
+    });
+    /**
+     * When #show_checked is equal to 'oui', only all the input checked will be display
+     */
+    $('input[name="show_checked"]').on('change', function(){
+      if ($(this).val() == 'oui') {
+        $('.editer_socicon .choix input').each(function(){
+          if ($(this).is(':checked')) {
+            $(this).parent('.choix').show();
+          } else {
+            $(this).parent('.choix').hide();
+          }
+        });
+      } else {
+        $('.editer_socicon .choix input').each(function(){
+          $(this).parent('.choix').show();
+        });
+      }
+    });
+  });
 </script>
