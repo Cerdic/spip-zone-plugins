@@ -79,8 +79,8 @@ Raadpleegt [documentatie over Spip-Contrib->http://contrib.spip.net/SpipBB-le-fo
 	'admin_interface' => 'Opties van de interface',
 	'admin_nombre_lignes_messages' => 'Aantal lijnen van berichten',
 	'admin_plugin_requis_erreur' => 'Vereiste plugin volgend gebrek. Activeert !',
-	'admin_plugin_requis_erreur_balisesession' => 'Plaatst plugin Baken ZITTING en activeert! [Documentatie ici-> http://contrib.spip.net/?article1224], [Archief ZIP daar -> https://files.spip.net/spip-zone/balise_session.zip].', # MODIF
-	'admin_plugin_requis_erreur_cfg' => 'Plaatst plugin CFG en activeert! [Documentatie ici-> http://contrib.spip.net/?article1605], [Archief ZIP daar - > https://files.spip.net/spip-zone/cfg.zip].', # MODIF
+	'admin_plugin_requis_erreur_balisesession' => 'Plaatst plugin Baken ZITTING en activeert! [Documentatie ici-> http://contrib.spip.net/?article1224], [Archief ZIP daar -> http://files.spip.org/spip-zone/balise_session.zip].', # MODIF
+	'admin_plugin_requis_erreur_cfg' => 'Plaatst plugin CFG en activeert! [Documentatie ici-> http://contrib.spip.net/?article1605], [Archief ZIP daar - > http://files.spip.org/spip-zone/cfg.zip].', # MODIF
 	'admin_plugin_requis_erreur_s' => 'Volgende vereiste plugins hebben aan gebrek. Activeert ze !',
 	'admin_plugin_requis_ok' => 'Geplaatste(s) en actieve(n) Plugin(s) :',
 	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION-> http://contrib.spip.net/?article1224]: geleverd de informatie over de echt verklaard bezoekers.', # MODIF

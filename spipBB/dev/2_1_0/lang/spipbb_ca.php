@@ -79,8 +79,8 @@ Consulteu la [documentació a Spip-Contrib->http://contrib.spip.net/SpipBB-le-fo
 	'admin_interface' => 'Opcions de la interfície',
 	'admin_nombre_lignes_messages' => 'Número de línies dels missatges',
 	'admin_plugin_requis_erreur' => 'Falta el següent plugin requerit. Activeu-lo!',
-	'admin_plugin_requis_erreur_balisesession' => 'Instal·leu el plugin Balise SESSION i activeu-lo! [Documentació aquí->http://contrib.spip.net/?article1224], [Archiu ZIP aquí->https://files.spip.net/spip-zone/balise_session.zip].', # MODIF
-	'admin_plugin_requis_erreur_cfg' => 'Instal·leu el plugin CFG i activeu-lo! [Documentació aquí->http://contrib.spip.net/?article1605], [Archiu ZIP aquí->https://files.spip.net/spip-zone/cfg.zip].', # MODIF
+	'admin_plugin_requis_erreur_balisesession' => 'Instal·leu el plugin Balise SESSION i activeu-lo! [Documentació aquí->http://contrib.spip.net/?article1224], [Archiu ZIP aquí->http://files.spip.org/spip-zone/balise_session.zip].', # MODIF
+	'admin_plugin_requis_erreur_cfg' => 'Instal·leu el plugin CFG i activeu-lo! [Documentació aquí->http://contrib.spip.net/?article1605], [Archiu ZIP aquí->http://files.spip.org/spip-zone/cfg.zip].', # MODIF
 	'admin_plugin_requis_erreur_s' => 'Falten els següents plugins requerits. Activeu-los!',
 	'admin_plugin_requis_ok' => 'Plugin(s) instal·lat(s) i actiu(s): ',
 	'admin_plugin_requis_ok_balisesession' => 'Plugin BALISE_SESSION->http://contrib.spip.net/?article1224]: proporciona les informacions sobre els visitants autentificats.', # MODIF

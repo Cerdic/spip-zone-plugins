@@ -79,8 +79,8 @@ Bitte ziehen sie die [Dokumentation auf Spip-Contrib->http://contrib.spip.net/Sp
 	'admin_interface' => 'Einstellungen der Oberfläche',
 	'admin_nombre_lignes_messages' => 'Zeilen an Beiträgen',
 	'admin_plugin_requis_erreur' => 'Das erforderliche Plugin fehlt. Bitte aktivieren!',
-	'admin_plugin_requis_erreur_balisesession' => 'Bitte instalieren und aktivieren sie das Plugin Balise SESSION! [Dokumentation->http://contrib.spip.net/?article1224], [ZIP-Archiv zum runterladen->https://files.spip.net/spip-zone/balise_session.zip].', # MODIF
-	'admin_plugin_requis_erreur_cfg' => 'Bitte instalieren und aktivieren sie das Plugin CFG! [Dokumentation->http://contrib.spip.net/?article1605], [ZIP-Archiv zum runterladen->https://files.spip.net/spip-zone/cfg.zip].', # MODIF
+	'admin_plugin_requis_erreur_balisesession' => 'Bitte instalieren und aktivieren sie das Plugin Balise SESSION! [Dokumentation->http://contrib.spip.net/?article1224], [ZIP-Archiv zum runterladen->http://files.spip.org/spip-zone/balise_session.zip].', # MODIF
+	'admin_plugin_requis_erreur_cfg' => 'Bitte instalieren und aktivieren sie das Plugin CFG! [Dokumentation->http://contrib.spip.net/?article1605], [ZIP-Archiv zum runterladen->http://files.spip.org/spip-zone/cfg.zip].', # MODIF
 	'admin_plugin_requis_erreur_s' => 'Die folgenden erforderlichen Plugins fehlen. Bitte aktivieren!',
 	'admin_plugin_requis_ok' => 'Installierte und aktivierte Plugin(s):',
 	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://contrib.spip.net/?article1224]: liefert Informationen über athentifizierte Benutzer.', # MODIF

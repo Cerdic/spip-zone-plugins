@@ -79,8 +79,8 @@ Consulta la [documentación en Spip-Contrib->http://contrib.spip.net/SpipBB-le-f
 	'admin_interface' => 'Opciones de la interfaz',
 	'admin_nombre_lignes_messages' => 'Número de líneas de mensajes',
 	'admin_plugin_requis_erreur' => 'Falta el siguiente plugin requerido. ¡Actívalo!',
-	'admin_plugin_requis_erreur_balisesession' => '¡Instala el plugin Balise SESSION y actívalo! [Documentación aquí->http://contrib.spip.net/?article1224], [Archivo ZIP acá->https://files.spip.net/spip-zone/balise_session.zip].', # MODIF
-	'admin_plugin_requis_erreur_cfg' => '¡Instala el plugin CFG y actívalo! [Documentación aquí->http://contrib.spip.net/?article1605], [Archivo ZIP acá->https://files.spip.net/spip-zone/cfg.zip].', # MODIF
+	'admin_plugin_requis_erreur_balisesession' => '¡Instala el plugin Balise SESSION y actívalo! [Documentación aquí->http://contrib.spip.net/?article1224], [Archivo ZIP acá->http://files.spip.org/spip-zone/balise_session.zip].', # MODIF
+	'admin_plugin_requis_erreur_cfg' => '¡Instala el plugin CFG y actívalo! [Documentación aquí->http://contrib.spip.net/?article1605], [Archivo ZIP acá->http://files.spip.org/spip-zone/cfg.zip].', # MODIF
 	'admin_plugin_requis_erreur_s' => 'Faltan los siguientes plugins requeridos. ¡Actívalos!',
 	'admin_plugin_requis_ok' => 'Plugin(s) instalado(s) y activo(s):',
 	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://contrib.spip.net/Baliza-SESSION]: ofrece información sobre los visitantes autentificados.', # MODIF

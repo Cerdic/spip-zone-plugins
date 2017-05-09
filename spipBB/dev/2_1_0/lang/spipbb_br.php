@@ -79,8 +79,8 @@ Gwelit an [dielloù diwar-benn Spip-Contrib->http://contrib.spip.net/SpipBB-le-f
 	'admin_interface' => 'Dilennoù an etrefas',
 	'admin_nombre_lignes_messages' => 'Niver a linennoù er c’hemennadennoù',
 	'admin_plugin_requis_erreur' => 'Mankout a ra an astenn da-heul. Enaouit anezhañ !',
-	'admin_plugin_requis_erreur_balisesession' => 'Staliit an astenn Balise SESSION hag enaouit anezhañ ! [Titouroù amañ->http://contrib.spip.net/?article1224], [Restr ZIP là->https://files.spip.net/spip-zone/balise_session.zip].', # MODIF
-	'admin_plugin_requis_erreur_cfg' => 'Staliit ar plugin CFG hag enaouit anezhañ ![Titouroù amañ->http://contrib.spip.net/?article1605], [Restr ZIPlà->https://files.spip.net/spip-zone/cfg.zip].', # MODIF
+	'admin_plugin_requis_erreur_balisesession' => 'Staliit an astenn Balise SESSION hag enaouit anezhañ ! [Titouroù amañ->http://contrib.spip.net/?article1224], [Restr ZIP là->http://files.spip.org/spip-zone/balise_session.zip].', # MODIF
+	'admin_plugin_requis_erreur_cfg' => 'Staliit ar plugin CFG hag enaouit anezhañ ![Titouroù amañ->http://contrib.spip.net/?article1605], [Restr ZIPlà->http://files.spip.org/spip-zone/cfg.zip].', # MODIF
 	'admin_plugin_requis_erreur_s' => 'An astennoù da-heul a vank. Enaouit anezho !',
 	'admin_plugin_requis_ok' => 'Astenn(où) staliet oberiant :',
 	'admin_plugin_requis_ok_balisesession' => '[Astenn BALISE_SESSION->http://contrib.spip.net/?article1224] : reiñ a ra titouroù diwar-benn ar weladennerien enrollet', # MODIF
