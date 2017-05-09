@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 Плагин автоматически устанавливает следующие плагины
 
-- [Перевод между секторами-> https://plugins.spip.net/tradrub.html]
+- [Перевод между секторами-> http://plugins.spip.net/tradrub.html]
 - [Предпочитаемый язык пользователя-> http://contrib.spip.net/Plugin-Langue-preferee-par-l-internaute]
 - [Легкий перевод разделов-> http://contrib.spip.net/Traductions-de-rubriques-autrement-3]
 - [Легкий перевод статей-> http://contrib.spip.net/Traductions-d-articles-autrement-3]
