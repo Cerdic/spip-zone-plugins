@@ -3,7 +3,7 @@
  * Options du plugin Sites pour projetsau chargement
  *
  * @plugin     Sites pour projets
- * @copyright  2013-2016
+ * @copyright  2013-2017
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\Projets_sites\Options

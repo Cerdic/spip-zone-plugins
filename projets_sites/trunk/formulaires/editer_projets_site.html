@@ -14,14 +14,14 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_projets_site' value='#ENV{id_projets_site}' />
 			[(#ENV{id_projets_site}|intval|>{0}|sinon{#ENV{webservice}}|non)
-			<fieldset class="editer editer_referencement_automatise fieldset">
-				<ul class="editer-groupe">
-					<li class="editer editer_url_auto pleine_largeur[ (#ENV**{erreurs}|table_valeur{url_auto}|oui)erreur]">
+			<fieldset class="editer_referencement_automatise fieldset">
+				<[(#DIV|sinon{ul})] class="editer-groupe">
+					<[(#DIV|sinon{li})] class="editer editer_url_auto pleine_largeur[ (#ENV**{erreurs}|table_valeur{url_auto}|oui)erreur]">
 						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_auto})</span>]
 						<p class="explication"><:projets_site:texte_referencement_automatique:></p>
 						<input type="text" name="url_auto" id="url_auto" class='text' size='40' value="[(#ENV{webservice}|sinon{http://})]" />
-					</li>
-				</ul>
+					</[(#DIV|sinon{li})]>
+				</[(#DIV|sinon{ul})]>
 				<p class="boutons"><input type='submit' class='submit' name='ajoute_url_auto' value='<:bouton_ajouter:>' /></p>
 				<p class="explication"><:projets_site:texte_non_fonction_referencement:></p>
 			</fieldset>
