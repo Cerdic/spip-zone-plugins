@@ -14,11 +14,10 @@ function formulaires_configurer_reservation_evenement_saisies_dist() {
 	$statuts_selectionnees = array();
 	$config = lire_config('reservation_evenement', array());
 	$quand = isset($config['quand']) ? $config['quand'] : array();
-
-	// Les objets 'a afficher dans le panneau config.
-	$objets_configuration = re_objets_configuration();
-	$fieldset_espace_prive = array();
 	$saisies_espace_prives= array();
+
+	// Les objets à afficher dans le panneau config.
+	$objets_configuration = re_objets_configuration();
 
 	// Si il y a d'autres panneau que celui du présent plugin.
 	if (count($objets_configuration) > 1) {
@@ -28,8 +27,7 @@ function formulaires_configurer_reservation_evenement_saisies_dist() {
 				$configuration[$objet] = $valeur['label'];
 			}
 		}
-		$saisies_espace_prives = array(
-			array(
+		$saisies_espace_prives[] = array(
 				'saisie' => 'oui_non',
 				'options' => array(
 					'nom' => 'selection_objets_configuration',
@@ -37,8 +35,8 @@ function formulaires_configurer_reservation_evenement_saisies_dist() {
 					'explication' => _T('reservation:selection_objets_configuration_explication'),
 					'defaut' => $config['selection_objets_configuration']
 				)
-			),
-			array(
+			);
+		$saisies_espace_prives[] = array(
 				'saisie' => 'checkbox',
 				'options' => array(
 					'nom' => 'objets_configuration',
@@ -47,6 +45,37 @@ function formulaires_configurer_reservation_evenement_saisies_dist() {
 					'defaut' => $config['objets_configuration'],
 					'afficher_si' => '@selection_objets_configuration@ == "on"',
 				)
+			);
+	}
+
+
+	// Les objets à afficher dans le menu de navigation.
+	$objets_navigation= re_objets_navigation();
+	$fieldset_espace_prive = array();
+
+	// Si il y a des menus à choisir.
+	if (count($objets_navigation) > 1) {
+		$navigation = array();
+		foreach ($objets_navigation AS $objet => $valeur) {
+			$navigation[$objet] = $valeur['label'];
+		}
+		$saisies_espace_prives[] = array(
+			'saisie' => 'oui_non',
+			'options' => array(
+				'nom' => 'selection_objets_navigation',
+				'label' => _T('reservation:label_selection_objets_navigation'),
+				'explication' => _T('reservation:selection_objets_configuration_explication'),
+				'defaut' => $config['selection_objets_navigation']
+			)
+		);
+		$saisies_espace_prives[] = array(
+			'saisie' => 'checkbox',
+			'options' => array(
+				'nom' => 'objets_navigation',
+				'datas' => $navigation,
+				'label' => _T('reservation:label_objets_navigation'),
+				'defaut' => $config['objets_navigation'],
+				'afficher_si' => '@selection_objets_navigation@ == "on"',
 			)
 		);
 	}

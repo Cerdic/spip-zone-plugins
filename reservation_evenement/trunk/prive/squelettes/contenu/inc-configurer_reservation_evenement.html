@@ -1,7 +1,7 @@
 #SET{config_objets_configuration,#ARRAY{}}
 #SET{config,#CONFIG{reservation_evenement}}
 #SET{panneau_defaut,reservation_evenement}
-#SET{panneau,#ENV{panneau,#GET{panneau_defaut}}}
+#SET{panneau,#GET{panneau_defaut}}
 
 #SET{objets_configuration,#GET{config}|table_valeur{objets_configuration}}
 

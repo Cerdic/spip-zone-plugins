@@ -1,6 +1,16 @@
 #SET{id_evenement,#ARRAY}
 #SET{id_rubrique,#ARRAY}
-#SET{self,#SELF|parametre_url{id_evenement|date_debut|debut_liste_evt,''}
+#SET{self,#SELF|parametre_url{id_evenement|date_debut|debut_liste_evt,''}}
+
+#SET{config,#CONFIG{reservation_evenement}}
+
+[(#GET{config}|table_valeur{objets_navigation}|?{
+	#SET{config_objets_navigation,#GET{config}|table_valeur{objets_navigation}},
+	#SET{config_objets_navigation,#ARRAY}
+})]
+
+#SET{config_selection_objets_navigation, #GET{config}|table_valeur{selection_objets_navigation}}
+[(#GET{config}|table_valeur{selection_objets_navigation})]
 
 [(#BOITE_OUVRIR{
 [(#CHEMIN_IMAGE{reservation_evenement-32.png}|balise_img{'','cadre-icone'})]
@@ -44,18 +54,26 @@
 					#GET{a}
 				</li>
 			</ul>
-		<li>
-			[(#ENV{exec}|in_array{#LISTE{clients,client}}|non)#SET{a, </a>}
-			<a href="#URL_ECRIRE{clients}" class="cellule-h">][(#CHEMIN_IMAGE{clients-16.png}|balise_img)] <:reservation:titre_clients:>#GET{a}
-		</li>
+			<BOUCLE_menu_items(DATA){source tableau, #REM|re_objets_navigation}>
+			#SET{afficher,oui}
+			[(#GET{config_selection_objets_navigation}|oui)
+				[(#CLE|in_array{#GET{config_objets_navigation}}|non)
+					#SET{afficher,non}
+				]
+			]
+			[(#GET{afficher}|=={oui}|oui)
+				[(#OBJETS|?{
+					#SET{objets,#OBJETS},
+					#SET{objets,#LISTE{#CLE}}
+				})]
+				<li>
+					[(#ENV{exec}|in_array{#GET{objets}}|non)#SET{a, </a>}
+					<a href="#URL_ECRIRE{#CLE}" class="cellule-h">][(#CHEMIN_IMAGE{#CLE-16.png}|balise_img)] [(#LABEL)] #GET{a}
+				</li>
+			]
+			</BOUCLE_menu_items>
 		</B_reservations>
-		[(#REM) permet aux plugins d'insérér dun contenu au menu]
-		[(#PIPELINE{
-			reservation_evenement_menu_admin,
-			[(#ARRAY{
-				args,[(#ARRAY{exec,#ENV{exec}})],
-				data,'',})]}
-		)]
+
 		<li>
 			[(#ENV{exec}|=={configurer_reservation_evenement}|non)#SET{a, </a>}
 			<a href="#URL_ECRIRE{configurer_reservation_evenement}" class="cellule-h">][(#CHEMIN_IMAGE{cfg-16.png}|balise_img)] <:spip:icone_configuration_site:>#GET{a}
