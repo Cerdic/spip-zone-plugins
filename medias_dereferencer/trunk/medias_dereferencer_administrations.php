@@ -3,7 +3,7 @@
  * Fichier gérant l'installation et désinstallation du plugin medias_dereferencer
  *
  * @plugin     Déréférencer les médias
- * @copyright  2015-2016
+ * @copyright  2015-2017
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\medias_dereferencer\Installation
