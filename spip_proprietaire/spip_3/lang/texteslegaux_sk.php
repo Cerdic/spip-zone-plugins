@@ -59,13 +59,13 @@ Internetovú stránku {{[@nom_site@->@url_site@]}} prevádzkuje jej šéfredakto
 Podľa [paragrafov L. 111-1 a L. 123-1 francúzskeho zákona o duševnom vlastníctve|Zobraziť text (legifrance.gouv.fr) [fr]->http://www.legifrance.gouv.fr/affichCode.do?cidTexte=LEGITEXT000006069414] je celý obsah tejto stránky ({texty, obrázky, videá a akékoľvek multimédiá vo všeobecnosti}) {{chránený autorskými právami,}} ak nie je uvedené inak. Rozširovanie obsahu stránok tejto internetovej stránky, i čiatočné,  bez predchádzajúceho súhlasu  @proprietaire_forme@ [{{@proprietaire_nom@}}->#proprietaire] je prísne zakázané.',
 	'mentions_legales_fonctionnement' => '{{{Fungovanie stránky}}}
 
-Stránky a obsah týchto stránok je vytvorený v programe {{SPIP,}} v slobodnom softvéri, distribuovanom s licenciou GNU / GPL ({licencia General Public License}). Môžete ho slobodne využívať na vytvorenie svojej vlastnej internetovej stránky. Ak chcete zistiť viac informácií, navštívte stránku: [spip.net.->https://www.spip.net]
+Stránky a obsah týchto stránok je vytvorený v programe {{SPIP,}} v slobodnom softvéri, distribuovanom s licenciou GNU / GPL ({licencia General Public License}). Môžete ho slobodne využívať na vytvorenie svojej vlastnej internetovej stránky. Ak chcete zistiť viac informácií, navštívte stránku: [spip.net.->http://www.spip.net]
 
 <small>
 {{SPIP, Système de Publication pour l’Internet
 <br />Copyright © 2001-2008, Arnaud Martin, Antoine Pitrou, Philippe Rivière et Emmanuel Saint-James.}}
 </small>
-',
+', # MODIF
 
 	// O
 	'os_du_serveur' => ' funguje na systéme {{@os_serveur@}}',
