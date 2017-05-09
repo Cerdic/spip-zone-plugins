@@ -3,7 +3,7 @@
  * Déclarations relatives à la base de données
  *
  * @plugin     Commits de projet
- * @copyright  2014-2016
+ * @copyright  2014-2017
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\RSSCommits\Pipelines
