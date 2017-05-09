@@ -67,7 +67,7 @@
 				})]
 				<li>
 					[(#ENV{exec}|in_array{#GET{objets}}|non)#SET{a, </a>}
-					<a href="#URL_ECRIRE{#CLE}" class="cellule-h">][(#CHEMIN_IMAGE{#CLE-16.png}|balise_img)] [(#LABEL)] #GET{a}
+					<a href="#URL_ECRIRE{#CLE}" class="cellule-h">][(#CHEMIN_IMAGE{#ICONE|sinon{#CLE-16.png}}|balise_img)] [(#LABEL)] #GET{a}
 				</li>
 			]
 			</BOUCLE_menu_items>
