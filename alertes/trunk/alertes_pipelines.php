@@ -434,3 +434,14 @@ function alertes_affiche_droite($flux) {
 
 	return $flux;
 }
+
+function alertes_afficher_complement_objet($flux) {
+	include_spip('base/abstract_sql');
+	include_spip('inc/config');
+
+	if ($flux['args']['type'] === 'auteur'){
+		$flux['data'] .= recuperer_fond('prive/objets/liste/alertes', array('id_auteur' => $flux['args']['id']), array('ajax' => false));
+	}
+
+	return $flux;
+}

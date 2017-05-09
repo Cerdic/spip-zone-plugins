@@ -3,7 +3,7 @@
  * Définit les autorisations du plugin Alertes
  *
  * @plugin     Alertes
- * @copyright  2016
+ * @copyright  2016-2017
  * @author     Netapsys
  * @licence    GNU/GPL
  * @package    SPIP\Alertes\Autorisations
