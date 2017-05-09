@@ -534,3 +534,22 @@ function reservation_bank_reservation_evenement_objets_configuration($flux) {
 
 	return $flux;
 }
+
+/**
+ * Ajouter une entré au menu de navigation de résrvation événement.
+ *
+ * @pipeline reservation_evenement_objets_navigation
+ *
+ * @param array $flux
+ *        	Données du pipeline
+ * @return array Données du pipeline
+ */
+
+function reservation_bank_reservation_evenement_objets_navigation($flux) {
+	$flux['data']['transactions'] = array(
+			'label' => _T('bank:titre_menu_transactions'),
+			'icone' => 'credit-card-16.png'
+	);
+
+	return $flux;
+}
