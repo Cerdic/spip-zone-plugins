@@ -97,6 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_ajouter_mailsubscriber' => 'Een inschrijving aan de nieuwsbrief toevoegen',
 	'texte_avertissement_import' => 'Een kolom met de <tt>status</tt> wordt meegeleverd, de gegevens worden geïmporteerd zoals ze zijn en zullen sommige emailadressen overschrijven.',
 	'texte_changer_statut_mailsubscriber' => 'Deze gebruiker is aangemeld voor de nieuwsbrief:',
+	'texte_import_export_bonux' => 'Om lijsten van abonnees te importeren of exporteren, moet je de plugin <a href="https://plugins.spip.net/spip_bonux">SPIP-Bonux</a> installeren',
 	'texte_statut_en_attente_confirmation' => 'in afwachting van bevestiging',
 	'texte_statut_pas_encore_inscrit' => 'niet geregistreerd',
 	'texte_statut_refuse' => 'opgeschort',
