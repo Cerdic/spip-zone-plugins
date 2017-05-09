@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => 'اين صفحه به شما اجازه مي‌دهد شيوه‌ي ذره‌بين را پيكربندي كنيد. مي‌توان يك شيوه‌ي شخصي را پيكر‌بندي كرد: بنگريد به <a href="https://plugins.spip.net/?page=article&id_article=48"> سندهاي وصل‌خط</a>.', # MODIF
+	'descriptif' => 'اين صفحه به شما اجازه مي‌دهد شيوه‌ي ذره‌بين را پيكربندي كنيد. مي‌توان يك شيوه‌ي شخصي را پيكر‌بندي كرد: بنگريد به <a href="http://plugins.spip.net/?page=article&id_article=48"> سندهاي وصل‌خط</a>.', # MODIF
 
 	// E
 	'example' => 'نتيجه‌ي گرافيكي ',

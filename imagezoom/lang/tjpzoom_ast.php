@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => 'Esta páxina permite configurar l’estilu de la lente. Pue declarase un estilu personalizáu; ver <a href="https://plugins.spip.net/?page=article&id_article=48">la documentación en llinia</a>.', # MODIF
+	'descriptif' => 'Esta páxina permite configurar l’estilu de la lente. Pue declarase un estilu personalizáu; ver <a href="http://plugins.spip.net/?page=article&id_article=48">la documentación en llinia</a>.', # MODIF
 
 	// E
 	'example' => 'Resultau gráficu',

@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => 'Táto stránka vám umožní nastaviť štýl lupy. Môžete nastaviť vlastný štýl; prečítajte si <a href="https://plugins.spip.net/?page=article&id_article=48">online dokumentáciu.</a>', # MODIF
+	'descriptif' => 'Táto stránka vám umožní nastaviť štýl lupy. Môžete nastaviť vlastný štýl; prečítajte si <a href="http://plugins.spip.net/?page=article&id_article=48">online dokumentáciu.</a>', # MODIF
 
 	// E
 	'example' => 'Výsledok v grafickej podobe',
