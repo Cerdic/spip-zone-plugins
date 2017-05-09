@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_mots' => 'Toon automatisch een menu met artikelen met het trefwoord.',
 	'description_menu_objet' => 'Maak een link met een SPIP object: artikel, rubriek of anders. Standaard wordt de titel van het objet gebruikt.',
 	'description_menu_page_speciale' => 'Voeg een link toe naar een bladzijde die toegankelijk is via <code>spip.php?page=nom&param1=xx&param2=yyy...</code>.',
-	'description_menu_page_speciale_zajax' => 'Voeg een link toe naar een blok van een bladzijde van het type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> (plugin <a href="http://contrib.spip.net/MediaBox">médiabox</a>).', # MODIF
+	'description_menu_page_speciale_zajax' => 'Voeg een link toe naar een blok van een bladzijde van het type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> (plugin <a href="http://contrib.spip.net/MediaBox">médiabox</a>).',
 	'description_menu_rubriques_articles' => 'Toon een lijst van rubrieken en desgewenst subrubrieken met artikelen op verschillende niveaus. Standaard vanaf de root, gesorteerd op titel. De artikelen worden systematisch na de rubrieken vermeld.',
 	'description_menu_rubriques_completes' => 'Toon een lijst van rubrieken en desgewenst subrubrieken met artikelen op verschillende niveaus. Standaard vanaf de root, gesorteerd op titel.',
 	'description_menu_secteurlangue' => 'Deze parameter is specifiek voor rubrieken per taal. Automatsich wordt de rubriek (met subrubrieken) van de juiste taal gekozen. Standaard vanaf de root, gesorteerd op titel.',
