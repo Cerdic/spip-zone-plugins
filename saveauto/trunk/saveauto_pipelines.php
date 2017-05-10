@@ -48,9 +48,9 @@ function saveauto_mes_fichiers_a_sauver($flux){
 function saveauto_affiche_milieu($flux) {
 
 	// on exclut le cas d'affichage de la page après le dump SQLite
-	if ((($type = $flux['args']['type-page'])=='sauvegarder')
-	AND (isset($flux['args']['status']))
-	AND (!$flux['args']['status'])) {
+	if (isset($flux['args']['type-page']) 
+	AND (($flux['args']['type-page'])=='sauvegarder')
+	AND (empty($flux['args']['status']))) {
 		$contexte = array();
 		if (isset($flux['args']['etat']))
 			$contexte['etat'] = $flux['args']['etat'];
