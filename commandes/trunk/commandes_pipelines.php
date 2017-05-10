@@ -344,6 +344,14 @@ function commandes_bank_abos_decrire_echeance($flux) {
 			$echeances = floatval($echeances);
 			$flux['data']['montant'] = $echeances;
 		}
+		// ou un array d'une seule echeance
+		elseif (count($echeances) == 1) {
+			$echeance = reset($echeances);
+			$flux['data']['montant'] = floatval($echeance['montant']);
+			if (isset($echeance['nb'])) {
+				$flux['data']['count'] = $echeance['nb'];
+			}
+		}
 		// Sinon c'est un peu plus compliqué, et pour l'instant on ne gère que DEUX montants possibles
 		elseif (count($echeances) >= 2) {
 			// Premier montant d'échéances
@@ -356,7 +364,7 @@ function commandes_bank_abos_decrire_echeance($flux) {
 			}
 		}
 	}
-	
+
 	return $flux;
 }
 
