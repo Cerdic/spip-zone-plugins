@@ -59,53 +59,6 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		y2: selection_initiale.y2 / zoom
 	};
 
-	/* On crée ensuite le slider de zoom */
-	slider = $('#zoom-slider').slider({
-		max: 1,
-		min: 0.01,
-		value: options.zoom,
-		step: 0.01,
-		create: function () {
-
-			zoom = $('input#champ_zoom').attr('value');
-
-			if (premier_chargement && mode_dimensions_forcees) {
-				zoom = calculer_zoom_min();
-				$(this).slider('option', 'value', zoom);
-				maj_image(zoom);
-				selection_initiale = forcer_dimensions_selection({
-					x1: 0,
-					x2: Math.round(img.width()),
-					y1: 0,
-					y2: Math.round(img.height())
-				}, zoom);
-			} else {
-				maj_image(zoom);
-			}
-			maj_formulaire(selection_initiale, zoom);
-		},
-		slide: function (event, ui) {
-
-			zoom = ui.value;
-
-			maj_image(zoom);
-
-			var selection = zoomer_selection(selection_nozoom, zoom);
-
-			if (mode_dimensions_forcees) {
-				selection = forcer_dimensions_selection(selection, zoom);
-			}
-
-			maj_selection(selection);
-			maj_formulaire(selection, zoom);
-
-			imgAreaSelector.setOptions({
-				minWidth: Math.round(forcer_largeur * zoom),
-				minHeight: Math.round(forcer_hauteur * zoom)
-			});
-		}
-	});
-
 	/* On crée le widget de sélection */
 	imgAreaSelector = img.imgAreaSelect({
 		instance: true,
@@ -115,6 +68,30 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		x2: selection_initiale.x2,
 		y1: selection_initiale.y1,
 		y2: selection_initiale.y2,
+		/* On fait toutes les initialisations des autres widgets dans ce callback,
+		 * pour être certain de pouvoir utiliser imgAreaSelector.setOptions sans
+		 * faire planter le widget. */
+		onInit: function () {
+
+			init_slider();
+
+			/* Options propres au mode avec dimensions imposées */
+			if (mode_dimensions_forcees) {
+
+				slider.slider('option', 'min', calculer_zoom_min());
+
+				imgAreaSelector.setOptions({
+					aspectRatio: forcer_largeur + ':' + forcer_hauteur,
+					minWidth: Math.round(forcer_largeur * zoom),
+					minHeight: Math.round(forcer_hauteur * zoom)
+				});
+
+				imgAreaSelector.update();
+			}
+
+			init_selecteur_format();
+			init_bouton_reinit();
+		},
 		onSelectChange: function (img, selection) {
 			selection_nozoom = {
 				x1: selection.x1 / zoom,
@@ -126,92 +103,134 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		}
 	});
 
-	/* Options propres au mode avec dimensions imposées */
-	if (mode_dimensions_forcees) {
+	/* Initialisation du slider de zoom */
+	function init_slider () {
+		slider = $('#zoom-slider').slider({
+			max: 1,
+			min: 0.01,
+			value: options.zoom,
+			step: 0.01,
+			create: function () {
 
-		slider.slider('option', 'min', calculer_zoom_min());
+				zoom = $('input#champ_zoom').attr('value');
 
-		imgAreaSelector.setOptions({
-			aspectRatio: forcer_largeur + ':' + forcer_hauteur,
-			minWidth: Math.round(forcer_largeur * zoom),
-			minHeight: Math.round(forcer_hauteur * zoom)
+				if (premier_chargement && mode_dimensions_forcees) {
+					zoom = calculer_zoom_min();
+					$(this).slider('option', 'value', zoom);
+					maj_image(zoom);
+					selection_initiale = forcer_dimensions_selection({
+						x1: 0,
+						x2: Math.round(img.width()),
+						y1: 0,
+						y2: Math.round(img.height())
+					}, zoom);
+				} else {
+					maj_image(zoom);
+				}
+				maj_formulaire(selection_initiale, zoom);
+			},
+			slide: function (event, ui) {
+
+				zoom = ui.value;
+
+				maj_image(zoom);
+
+				var selection = zoomer_selection(selection_nozoom, zoom);
+
+				if (mode_dimensions_forcees) {
+					selection = forcer_dimensions_selection(selection, zoom);
+				}
+
+				maj_selection(selection);
+				maj_formulaire(selection, zoom);
+
+				imgAreaSelector.setOptions({
+					minWidth: Math.round(forcer_largeur * zoom),
+					minHeight: Math.round(forcer_hauteur * zoom)
+				});
+			}
 		});
 	}
 
 	/* Gestion du selecteur de format */
-	select_format.change(function (e) {
+	function init_selecteur_format () {
 
-		var format = e.target.value;
+		select_format.change(function (e) {
 
-		afficher_erreur('');
+			var format = e.target.value;
 
-		if (format) {
-			mode_dimensions_forcees = true;
+			afficher_erreur('');
 
-			format = format.split(':');
-			forcer_largeur = parseInt(format[0], 10);
-			forcer_hauteur = parseInt(format[1], 10);
+			if (format) {
+				mode_dimensions_forcees = true;
 
-			if ((largeur_image < forcer_largeur) || (hauteur_image < forcer_hauteur)) {
-				afficher_erreur(options.messages.erreur_image_trop_petite);
-			} else {
-				slider.slider('option', 'min', calculer_zoom_min());
+				format = format.split(':');
+				forcer_largeur = parseInt(format[0], 10);
+				forcer_hauteur = parseInt(format[1], 10);
 
-				imgAreaSelector.setOptions({
-					aspectRatio: forcer_largeur + ':' + forcer_hauteur,
-					minWidth: Math.round(forcer_largeur * zoom),
-					minHeight: Math.round(forcer_hauteur * zoom)
-				});
+				if ((largeur_image < forcer_largeur) || (hauteur_image < forcer_hauteur)) {
+					afficher_erreur(options.messages.erreur_image_trop_petite);
+				} else {
+					slider.slider('option', 'min', calculer_zoom_min());
 
-				selection_initiale = forcer_dimensions_selection(
-					imgAreaSelector.getSelection(),
-					zoom
-				);
+					imgAreaSelector.setOptions({
+						aspectRatio: forcer_largeur + ':' + forcer_hauteur,
+						minWidth: Math.round(forcer_largeur * zoom),
+						minHeight: Math.round(forcer_hauteur * zoom)
+					});
 
-				maj_selection(selection_initiale);
+					selection_initiale = forcer_dimensions_selection(
+						imgAreaSelector.getSelection(),
+						zoom
+					);
 
-				maj_formulaire(selection_initiale, zoom);
+					maj_selection(selection_initiale);
 
-				return;
+					maj_formulaire(selection_initiale, zoom);
+
+					return;
+				}
 			}
-		}
 
-		mode_dimensions_forcees = false;
+			mode_dimensions_forcees = false;
 
-		forcer_largeur = null;
-		forcer_hauteur = null;
+			forcer_largeur = null;
+			forcer_hauteur = null;
 
-		slider.slider('option', 'min', 0.01);
+			slider.slider('option', 'min', 0.01);
 
-		imgAreaSelector.setOptions({
-			aspectRatio: '',
-			minWidth: 1,
-			minHeight: 1
-		});
-	})
+			imgAreaSelector.setOptions({
+				aspectRatio: '',
+				minWidth: 1,
+				minHeight: 1
+			});
+		})
 		.trigger('change');
+	}
 
-	/* Et enfin on s'occupe du bouton de réinitialisation */
-	$('#formulaire_massicoter_image_reset').click(function (e) {
+	/* Initialisation du bouton de réinitialisation */
+	function init_bouton_reinit () {
+		$('#formulaire_massicoter_image_reset').click(function (e) {
 
-		$('#zoom-slider').slider('option', 'value', 1);
-		select_format.val('').trigger('change');
+			$('#zoom-slider').slider('option', 'value', 1);
+			select_format.val('').trigger('change');
 
-		maj_image(1);
+			maj_image(1);
 
-		var selection = {
-			x1: 0,
-			x2: Math.round(img.width()),
-			y1: 0,
-			y2: Math.round(img.height())
-		};
-		selection_nozoom = selection;
-		maj_selection(selection);
-		maj_formulaire(selection, 1);
+			var selection = {
+				x1: 0,
+				x2: Math.round(img.width()),
+				y1: 0,
+				y2: Math.round(img.height())
+			};
+			selection_nozoom = selection;
+			maj_selection(selection);
+			maj_formulaire(selection, 1);
 
-		e.preventDefault();
-		return false;
-	});
+			e.preventDefault();
+			return false;
+		});
+	}
 
 	/*************/
 	/* Fonctions */
@@ -291,13 +310,13 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		nouvelle_selection.x1 = Math.max(0, nouvelle_selection.x1);
 		nouvelle_selection.y1 = Math.max(0, nouvelle_selection.y1);
 		nouvelle_selection.x2 = Math.min(
-        nouvelle_selection.x2,
-        Math.round(img.width())
-    );
+				nouvelle_selection.x2,
+				Math.round(img.width())
+		);
 		nouvelle_selection.y2 = Math.min(
-        nouvelle_selection.y2,
-        Math.round(img.height())
-    );
+				nouvelle_selection.y2,
+				Math.round(img.height())
+		);
 
 		return nouvelle_selection;
 	}
