@@ -57,17 +57,27 @@ function logos_roles_pre_boucle($boucle) {
 }
 
 /**
- * Insérer du js et du css dans le head de l'espace privé
+ * Insérer du js dans le head de l'espace privé
+ *
+ * @pipeline jquery_plugins
+ * @param  array $scripts Données du pipeline
+ * @return array       Données du pipeline
+ */
+function logos_roles_jquery_plugins($scripts) {
+
+	$scripts[] = 'javascript/logos_roles.js';
+
+	return $scripts;
+}
+
+/**
+ * Insérer du css dans le head de l'espace privé
  *
  * @pipeline header_prive
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
  */
 function logos_roles_header_prive($flux) {
-
-	$flux .= '<script type="text/javascript" src="'
-		. find_in_path('javascript/logos_roles.js')
-		. '"></script>';
 
 	$flux .= '<link rel="stylesheet" href="'
 		. find_in_path('css/logos_roles.css')
