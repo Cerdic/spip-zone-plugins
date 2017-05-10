@@ -9,9 +9,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-define('DEFAULT_Val', "d"); // (d)efault value
+define('DEFAULT_Val', 'd'); // (d)efault value
 define('TRANSPARENT', 't'); // (t)ransparent color
-define('DEFAULT_ss', '38'); // Square Size by default: [26] was 28
+define('DEFAULT_ss', '38'); // Square Size by default: [38] 
 
 // Read the current configuration of the parameters of the plugin
 // @out: 	$optValue: default values of options overriden with the current configuration
@@ -31,7 +31,7 @@ function ReadCurrentConfiguration(&$optValue)
 			{
 				$optValue[$optShort] = $valueFromConf;
 			}
-		}			
+		}
 		$isManual = lire_config('pgn4spip/cfg_isManual');
 		if ($isManual != '')
 		{
@@ -79,7 +79,7 @@ $optValue = array(		// Initial value of each option
 'ps'	=> DEFAULT_Val,	// 'pieceSize',			// [d]efault <- squareSize
 'rd'	=> 'f',			// 'refreshDemo',		// [f]alse | (t)rue
 'rm'	=> '1',			// 'refreshMinutes',	// [1] minute
-'ss'	=> DEFAULT_ss,	// 'squareSize',		// [26] was 28
+'ss'	=> DEFAULT_ss,	// 'squareSize',		// [38]
 						// textHeight: nbr, optional if frameHeight
 'tm'	=> '13',		// 'textMargin'			// [13] was 0. Set left/right margin width of the  textual section, header and/or moves text
 						// textWidth: nbr, optional if frameWidth
@@ -98,7 +98,7 @@ function IsOptionValueOk($optShort, $valueNew, $valuePrevious)
 		$isHexColor = (substr($optShort, $lenOpt - 2) == 'ch'); // (c)olor (h)ex
 	else
 		$isHexColor = false;
-	
+
 	if ($valueNew != $valuePrevious)
 	{
 		if ($isHexColor)
