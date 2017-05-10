@@ -19,7 +19,8 @@
 function massicot_jquery_plugins($scripts) {
 
 	if (test_espace_prive()) {
-		$scripts[] = find_in_path('lib/jquery.imgareaselect.js/jquery.imgareaselect.dev.js');
+		$scripts[] = 'lib/jquery.imgareaselect.js/jquery.imgareaselect.dev.js';
+		$scripts[] = 'javascripts/formulaireMassicoterImage.js';
 	}
 
 	return $scripts;
