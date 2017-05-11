@@ -53,7 +53,11 @@
 	<div class="editer-groupe">
 <p>
 
-	<label for="cfg_ss"><:pgn4spip:square:></label><input type="text" name="cfg_ss" value="[(#CONFIG{pgn4spip/cfg_ss, 38})]" size="1"><:pgn4spip:pixels:>
+	<label for="cfg_ss"><:pgn4spip:square:></label><select name="cfg_ss" > 
+	<option value="22" [(#CONFIG{pgn4spip/cfg_ss, "22"}|=={"22"}|?{selected="selected",''})]><:22:></option>
+	<option value="38" [(#CONFIG{pgn4spip/cfg_ss, "38"}|=={"38"}|?{selected="selected",''})]><:38:></option>
+	<option value="56" [(#CONFIG{pgn4spip/cfg_ss, "56"}|=={"56"}|?{selected="selected",''})]><:56:></option>
+	</select>
 	<label for="cfg_lch"><:pgn4spip:white:></label><input type="text" name="cfg_lch" value="[(#CONFIG{pgn4spip/cfg_lch, "F0F0F0"})]" size="5"/>
 	<label for="cfg_dch"><:pgn4spip:black:></label><input type="text" name="cfg_dch" value="[(#CONFIG{pgn4spip/cfg_dch, "ABABAB"})]" size="5"/> 
 </p>
