@@ -86,6 +86,9 @@ function numero_info_objet($objet,$id_objet=0){
 				$infos[$objet]['numerotable'] = false;
 			}
 		}
+		elseif(!isset($desc['field']['titre'])) {
+			$infos[$objet]['numerotable'] = false;
+		}
 	}
 	$res = $infos[$objet];
 
