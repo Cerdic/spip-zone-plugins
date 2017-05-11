@@ -1,7 +1,7 @@
 <paquet
 	prefix="forumsectorise"
 	categorie="communication"
-	version="0.8.0"
+	version="0.8.1"
 	etat="stable"
 	compatibilite="[2.1.0;3.2.*]"
 	logo="prive/themes/spip/images/forumsectorise-32.png"
@@ -23,7 +23,7 @@
 	<pipeline nom="afficher_config_objet" inclure="forumsectorise_pipelines.php" />
 	
 	<necessite nom="saisies" compatibilite="[1.9.0;[" />
-	<necessite nom="forum" compatibilite="[1.10.1;[" />
+	<necessite nom="forum" compatibilite="[1.8.43;[" />
 
 	<menu nom="forumsectorise" titre="forumsectorise:titre_menu" parent="bando_configuration" icone="images/forumsectorise-16.png" action="configurer_forumsectorise" />
 </paquet>
