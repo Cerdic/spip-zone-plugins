@@ -17,8 +17,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Insertion de la feuille de style CSS sur les pages publiques
  *
  * @pipeline insert_head_css
- * @param  array $flux Données du pipeline
- * @return array       Données du pipeline
+ * @param  string $flux Données du pipeline
+ * @return string       Données du pipeline
  */
 function commandes_insert_head_css($flux){
 	$css = find_in_path('css/commandes.css');
@@ -226,7 +226,7 @@ function commandes_bank_traiter_reglement($flux){
 		
 		// S'il y a bien un statut à changer
 		if ($statut_nouveau !== $statut_commande){
-			spip_log("commandes_bank_traiter_reglement marquer la commande #$id_commande statut=$statut_nouveau mode=$transaction_mode",'commandes');
+			spip_log("commandes_bank_traiter_reglement marquer la commande #$id_commande statut: $statut_commande -> $statut_nouveau mode=$transaction_mode",'commandes');
 			// On met a jour la commande
 			include_spip("action/editer_commande");
 			commande_modifier($id_commande, array('statut'=>$statut_nouveau, 'mode'=>$transaction_mode));
