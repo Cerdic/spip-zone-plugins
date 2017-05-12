@@ -4,7 +4,7 @@
 	version="2.1.1"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
-    documentation="http://www.paris-beyrouth.org/Plugin-SPIP-Fond-espace-prive"
+	documentation="http://www.paris-beyrouth.org/Plugin-SPIP-Fond-espace-prive"
 >
 
 	<nom>Fond d’écran pour l’espace privé</nom>
