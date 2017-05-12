@@ -185,17 +185,17 @@ function exec_mutualisation_dist() {
 		$page .= "<br /><br /><table class='plugins'>
     <thead>\n
         <tr>
-            <td>#</td>
-            <td>Plugins utilis&#233;s ($nombre_plugins) </td>
-            <td>Plugins-dist</td>
-            <td>Version</td>
-            <td>Sites</td>
+            <td class='nombre'>#</td>
+            <td class='prefixe'>Plugins utilis&#233;s ($nombre_plugins) </td>
+            <td class='dist'>Plugins-dist</td>
+            <td class='version'>Version</td>
+            <td class='liste'>Sites</td>
         </tr>\n
     </thead>
     <tbody>";
 		foreach ($lsplugs as $plugin => $c) {
-			$plnum[count($c)] .= "<tr>\n<td>" . count($c) . "</td>\n<td>$plugin</td>\n" . '<td>' . pluginDist($list_dist,
-					$plugin) . "</td>\n<td>" . $versionplug[$plugin] . "</td>\n<td>" . implode(', ',
+			$plnum[count($c)] .= "<tr class='plugin $plugin'>\n<td class='nombre'>" . count($c) . "</td>\n<td class='prefixe'>$plugin</td>\n" . '<td class=\'dist\'>' . pluginDist($list_dist,
+					$plugin) . "</td>\n<td class='version'>" . $versionplug[$plugin] . "</td>\n<td class='liste'>" . implode(' ',
 					ancre_site($c)) . '</td>' . "\n" . '</tr>' . "\n";
 		}
 		krsort($plnum);
@@ -493,7 +493,7 @@ function mutualisation_lister_sites_dist() {
 // faire une ancre vers le tableau des sites en haut de page
 function ancre_site($c) {
 	foreach ($c as $key => $value) {
-		$c[$key] = "<a href='#$value'>" . $value . '</a>';
+		$c[$key] = "<a href='#$value' class='$value'>" . $value . ',</a> ';
 	}
 
 	return $c;
