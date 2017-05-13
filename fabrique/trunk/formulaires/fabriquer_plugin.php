@@ -825,12 +825,24 @@ function fabrique_completer_contexte_images($data) {
 	// on ajoute la localisation de l'image dans le contexte si presente
 	// logo de plugin
 	if (isset($images['paquet']['logo'][0]['fichier']) and $f = $images['paquet']['logo'][0]['fichier']) {
+		if (!isset($data['paquet']['logo']) or !is_array($data['paquet']['logo'])) {
+			$data['paquet']['logo'] = array();
+		}
+		if (!isset($data['paquet']['logo'][0]) or !is_array($data['paquet']['logo'][0])) {
+			$data['paquet']['logo'][0] = array();
+		}
 		$data['paquet']['logo'][0]['fichier'] = $f;
 	}
 	// logo des objets
 	foreach ($images['objets'] as $c=>$image) {
 		foreach (array(0, 32, 24, 16, 12) as $taille) {
 			if (isset($image['logo'][$taille]['fichier']) and $f = $image['logo'][$taille]['fichier']) {
+				if (!isset($data['objets'][$c]['logo']) or !is_array($data['objets'][$c]['logo'])) {
+					$data['objets'][$c]['logo'] = array();
+				}
+				if (!isset($data['objets'][$c]['logo'][$taille]) or !is_array($data['objets'][$c]['logo'][$taille])) {
+					$data['objets'][$c]['logo'][$taille] = array();
+				}
 				$data['objets'][$c]['logo'][$taille]['fichier'] = $f;
 			}
 		}
