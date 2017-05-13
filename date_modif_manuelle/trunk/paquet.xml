@@ -1,11 +1,11 @@
 <paquet
 	prefix="date_modif_manuelle"
 	categorie="date"
-	version="1.0.0"
-	etat="dev"
+	version="1.0.1"
+	etat="test"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="prive/themes/spip/images/date_modif_manuelle-64.png"
-	documentation=""
+	documentation="https://contrib.spip.net/4899"
 	schema="1.0.0" 
 >
 
