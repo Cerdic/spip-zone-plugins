@@ -11,7 +11,7 @@ function exec_mutualisation_dist() {
 	$timestart = microtime(true);
 	$memory_limit = strtolower(ini_get('memory_limit'));
 
-	$plnum = array();
+	$plnum = $lsplugs = $versionplug = array();
 
 	include_spip('inc/minipres');
 	include_spip('inc/filtres');
@@ -98,7 +98,8 @@ function exec_mutualisation_dist() {
 		) {
 			$url .= '/';
 			$nom_site = sinon(importer_charset($meta['nom_site'], $meta['charset']), $v);
-			$stats = intval($meta['popularite_total']);
+			$popularite_total = (isset($meta['popularite_total']) ? $meta['popularite_total'] : 0);
+			$stats = intval($popularite_total);
 			if ($cfg = @unserialize($meta['plugin'])) {
 				$plugins = array_keys($cfg);
 				ksort($plugins);
@@ -150,18 +151,18 @@ function exec_mutualisation_dist() {
         </script>
         ';
 
-		$page .= "<tr class='tr" . $nsite%2 . "'" . " style='background-image: url(${url}ecrire/index.php?exec=mutualisation&amp;renouvelle_alea=yo)' id='$alias[$v]'>\n
-            <td class='text-right'><img src='${url}favicon.ico' class='favicon' />$v$erreur$version_installee</td>\n
-            <td><a href='${url}'>" . typo($nom_site) . "</a></td>\n
-            <td><a href='${url}ecrire/'>ecrire</a><br />
-                <a href='${url}$url_admin_plugin'>plugins</a><br />
-                <a href='${url}$url_admin_vider'>cache</a></td>
+		$page .= "<tr class='tr" . $nsite%2 . "' style='background-image: url(" . $url . "ecrire/index.php?exec=mutualisation&amp;renouvelle_alea=yo)' id='$alias[$v]'>\n
+            <td class='text-right'><img src='" . $url . "favicon.ico' class='favicon' />$v$erreur$version_installee</td>\n
+            <td><a href='" . $url . "'>" . typo($nom_site) . "</a></td>\n
+            <td><a href='" . $url . "ecrire/'>ecrire</a><br />
+                <a href='" . $url . "$url_admin_plugin'>plugins</a><br />
+                <a href='" . $url . "$url_admin_vider'>cache</a></td>
             <td><div id='IMG$nsite' class='taille loading'></div></td>\n
             <td><div id='local$nsite' class='taille loading'></div></td>\n
             <td><div id='cache$nsite' class='taille loading'></div></td>\n
-            <td class='text-right'><a href='${url}$url_stats'>${stats}</a></td>\n
-            <td>$adminplugin<div class='liste-plugins'><a href='${url}$url_admin_plugin'>${cntplugins}</a> <small>${plugins}</small></div></td>\n
-            <td><a href='${url}$url_compresseur'>$compression</a></td>\n
+            <td class='text-right'><a href='" . $url . "$url_stats'>${stats}</a></td>\n
+            <td>$adminplugin<div class='liste-plugins'><a href='" . $url . "$url_admin_plugin'>${cntplugins}</a> <small>${plugins}</small></div></td>\n
+            <td><a href='" . $url . "$url_compresseur'>$compression</a></td>\n
             <td class='text-right'>" . date_creation_repertoire_site($v) . "</td>\n
             </tr>\n";
 		++$nsite;
@@ -194,9 +195,24 @@ function exec_mutualisation_dist() {
     </thead>
     <tbody>";
 		foreach ($lsplugs as $plugin => $c) {
-			$plnum[count($c)] .= "<tr class='plugin $plugin'>\n<td class='nombre'>" . count($c) . "</td>\n<td class='prefixe'>$plugin</td>\n" . '<td class=\'dist\'>' . pluginDist($list_dist,
-					$plugin) . "</td>\n<td class='version'>" . $versionplug[$plugin] . "</td>\n<td class='liste'>" . implode(' ',
-					ancre_site($c)) . '</td>' . "\n" . '</tr>' . "\n";
+			$ligne = "<tr class='plugin $plugin'>\n<td class='nombre'>"
+				. count($c)
+				. "</td>\n<td class='prefixe'>$plugin</td>\n"
+				. '<td class=\'dist\'>'
+				. pluginDist($list_dist, $plugin)
+				. "</td>\n<td class='version'>"
+				. $versionplug[$plugin]
+				. "</td>\n<td class='liste'>"
+				. implode(' ', ancre_site($c))
+				. '</td>'
+				. "\n"
+				. '</tr>'
+				. "\n";
+			if (isset($plnum[count($c)])) {
+				$plnum[count($c)] .= $ligne;
+			} else {
+				$plnum[count($c)] = $ligne;
+			}
 		}
 		krsort($plnum);
 		$page .= implode('', $plnum);
@@ -373,11 +389,12 @@ function exec_mutualisation_dist() {
 
 function test_upgrade_site($meta) {
 	if ($GLOBALS['spip_version_base'] != str_replace(',', '.', $meta['version_installee'])) {
-		$secret = $meta['version_installee'] . '-' . $meta['popularite_total'];
+		$secret = $meta['version_installee'] . '-' . (isset($meta['popularite_total']) ? $meta['popularite_total'] : '0');
 		$secret = md5($secret);
+		$adresse_site = isset($meta['adresse_site']) ? $meta['adresse_site'] : '';
 
 		return <<<EOF
-<form action='$meta[adresse_site]/ecrire/index.php?exec=mutualisation' method='post' class='upgrade' target='_blank'>
+<form action='$adresse_site/ecrire/index.php?exec=mutualisation' method='post' class='upgrade' target='_blank'>
 <div>
 <input type='hidden' name='secret' value='$secret' />
 <input type='hidden' name='exec' value='mutualisation' />
@@ -429,16 +446,17 @@ function upgrade_placeholder($meta, $buttontxt = 'Upgrade plugins (forcé)') {
 	$id++;
 	$secret = $meta['version_installee'] . '-' . $meta['secret_du_site'];
 	$secret = md5($secret);
+	$adresse_site = isset($meta['adresse_site']) ? $meta["adresse_site"] : '';
 	$upgrade = '<script type="text/javascript">
 	//<![CDATA[
-	tableau_upgrade.push(["' . $meta[adresse_site] . '/ecrire/?exec=mutualisation&secret=' . $secret . '&upgradeplugins=oui&ajax=oui"]);
+	tableau_upgrade.push(["' . $adresse_site . '/ecrire/?exec=mutualisation&secret=' . $secret . '&upgradeplugins=oui&ajax=oui"]);
 	//]]>
 	</script>
 	';
 
 	return <<<EOF
 $upgrade
-<form action='$meta[adresse_site]/ecrire/?exec=mutualisation' method='get' class='upgrade' target='_blank'>
+<form action='$adresse_site/ecrire/?exec=mutualisation' method='get' class='upgrade' target='_blank'>
 <div id='upgrade$id' class='taille'>
 <input type='hidden' name='secret' value='$secret' />
 <input type='hidden' name='exec' value='mutualisation' />
