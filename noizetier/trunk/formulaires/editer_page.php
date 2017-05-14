@@ -39,6 +39,8 @@ function formulaires_editer_page_charger_dist($page, $edition, $description_page
 		'nom' => '',
 		'description' => '',
 		'icon' => '',
+		'_blocs' => array(),
+		'_blocs_defaut' => array(),
 	);
 
 	if ($edition == 'modifier') {
@@ -67,9 +69,23 @@ function formulaires_editer_page_charger_dist($page, $edition, $description_page
 		// L'argument $description_page contient donc la configuration complète de la page source.
 		$valeurs['type_page'] = $description_page['type'];
 		$valeurs = array_merge($valeurs, construire_heritages($page, $valeurs['type_page']));
-
 	} else {
 		$valeurs['editable'] = false;
+	}
+
+	// Ajout  de la liste des blocs configurables afin de choisir de possibles exclusions.
+	// En outre, on initialise les blocs exclus par défaut qui coincident
+	// pour une modification, à la liste des blocs exclus de la composition en cours de modification
+	// pour une duplication ou une création de composition, à la liste des blocs exclus de la source.
+	// Ainsi cette liste est toujours l'iverse de l'index [blocs] de l'argument $description_page.
+	if ($valeurs['editable']) {
+		$blocs = noizetier_bloc_repertorier();
+		foreach ($blocs as $_bloc => $_infos) {
+			$valeurs['_blocs'][$_bloc] = $_infos['nom'];
+			if (!in_array($_bloc, $description_page['blocs'])) {
+				$valeurs['_blocs_defaut'][] = $_bloc;
+			}
+		}
 	}
 
 	return $valeurs;
@@ -146,8 +162,12 @@ function formulaires_editer_page_traiter_dist($page, $edition, $description_page
 	);
 
 	// Traitement des blocs configurables
-	// TODO: ajouter les blocs
 	$compositions_virtuelles[$identifiant]['blocs'] = noizetier_bloc_defaut();
+	$blocs_exclus = _request('blocs_exclus');
+	if ($blocs_exclus) {
+		$compositions_virtuelles[$identifiant]['blocs'] = array_diff($compositions_virtuelles[$identifiant]['blocs'], $blocs_exclus);
+	}
+
 
 	// Traitement des branches éventuelles pour la composition virtuelle résultante
 	$branche = array();

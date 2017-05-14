@@ -11,7 +11,6 @@
 			[(#REM) Le type de page n'est pas éditable car la composition est toujours basée sur une page précise ]
 			[(#SAISIE{input, type_page,
 						label=<:noizetier:formulaire_type:>,
-						explication=<:noizetier:formulaire_type_explication:>,
 						disable=oui,
 						obligatoire=oui,
 			})]
@@ -25,25 +24,20 @@
 						obligatoire=oui,
 			})]
 
-			#SET{name, nom}
-			#SET{obli, obligatoire}
-			#SET{erreurs, #ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-				<label for="#GET{name}"><:noizetier:formulaire_nom:></label>
-				<div class="explication"><:noizetier:formulaire_nom_explication:></div>
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				<input type="text" class="text" name="#GET{name}" id="#GET{name}" size="40" value="#ENV{#GET{name}}" />
-			</li>
+			[(#REM) Le titre de la composition est obligatoire ]
+			[(#SAISIE{input, nom,
+						label=<:noizetier:formulaire_nom:>,
+						explication=<:noizetier:formulaire_nom_explication:>,
+						size=40,
+						obligatoire=oui,
+			})]
 
-			#SET{name, description}
-			#SET{obli, ''}
-			#SET{erreurs, #ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-				<label for="#GET{name}"><:noizetier:formulaire_description:></label>
-				<div class="explication"><:noizetier:formulaire_description_explication:></div>
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				<textarea class="textarea" name="#GET{name}" id="#GET{name}">#ENV{#GET{name}}</textarea>
-			</li>
+			[(#REM) La description est recommandée mais pas obligatoire ]
+			[(#SAISIE{textarea, description,
+						label=<:noizetier:formulaire_description:>,
+						explication=<:noizetier:formulaire_description_explication:>,
+						rows=3,
+			})]
 
 			#SET{name, icon}
 			#SET{obli, ''}
@@ -91,19 +85,23 @@
 			/*\]\]>*/</script>
 			</li>
 
+			[(#REM) Choix des blocs que l'on souhaote exclure de la configuration de noisettes ]
+			[(#SAISIE{checkbox, blocs_exclus,
+				label=<:noizetier:formulaire_blocs_exclus:>,
+				explication=<:noizetier:formulaire_description_blocs_exclus:>,
+				datas=#ENV{_blocs},
+				defaut=#ENV{_blocs_defaut},
+			})]
+
+			[(#REM) Si on crée une composition virtuelle à partir d'une page, il est possible de copier les noisettes
+					de la page ]
+			#SET{label, #VAL{noizetier:formulaire_peuplement}|_T{#ARRAY{page, #ENV{type_page}}}
 			[(#ENV{edition}|=={creer}|oui)
-			#SET{name, peupler}
-			#SET{obli, ''}
-			#SET{defaut, 'on'}
-			#SET{erreurs, #ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-				<label>Noisettes</label>
-				<div class="explication">Vous pouvez peupler d'avance la nouvelle composition avec les noisettes de la composition mère (sauf s'il s'agit d'une page autonome).</div>
-				<div class="choix">
-					<input name="#GET{name}\[\]" id="#GET{name}_oui" value="on" type="checkbox"[ checked="(#ENV{#GET{name},#GET{defaut}}|=={'on'}|?{'checked',''})"]>
-					<label for="#GET{name}_oui">copier les noisettes de la composition mère</label>
-				</div>
-			</li>
+				[(#SAISIE{case, peupler,
+					label_case=#GET{label},
+					explication=<:noizetier:formulaire_description_peuplement:>,
+					defaut=on,
+				})]
 			]
 		</ul>
 
