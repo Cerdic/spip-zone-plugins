@@ -39,8 +39,10 @@ function logo_supprimer($objet, $id_objet, $role) {
 	}
 
 	$logo = $chercher_logo($id_objet, $primary, $role);
-	// si pas de logo ou qu'on est dans le cas d'un logo par défaut, on ne fait rien
-	if ((! $logo) or est_logo_par_defaut($logo[0], $id_objet, $objet, $role)) {
+	// si pas de logo ou qu'on est dans le cas d'un logo attribué par défaut, on
+	// ne fait rien
+	if ((! $logo) or
+			(($role != 'logo') and est_logo_par_defaut($logo[0], $id_objet, $objet, $role))) {
 		return;
 	}
 
