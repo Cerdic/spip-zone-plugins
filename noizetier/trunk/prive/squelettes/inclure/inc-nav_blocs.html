@@ -8,6 +8,7 @@
 	#SET{bloc_affiche, #ENV{bloc}},
 	#SET{bloc_affiche, #GET{blocs}|reset}
 })]
+[(#SET{blocs_decompte, [(#ENV{page}|?{#ENV{page}, #ENV{objet}-#ENV{id_objet}}|noizetier_bloc_compter_noisettes)]})]
 [(#ENV{page}|?{
 	#SET{url_base, #URL_ECRIRE{#ENV{exec}}|parametre_url{page, #ENV{page}}},
 	#SET{url_base, #URL_ECRIRE{#ENV{exec}}|parametre_url{objet, #ENV{objet}}|parametre_url{id_objet, #ENV{id_objet}}}
@@ -18,11 +19,12 @@
 [<h3>(#VAL{noizetier:menu_blocs}|_T)</h3>]
 <ul class="liste-items sous_navigation">
 <BOUCLE_blocs(DATA){source table, #GET{blocs}}>
+	#SET{nb_noisettes, #GET{blocs_decompte/#VALEUR}|sinon{0}}
 	[<li class="item">
 		(#GET{url_base}
 			|parametre_url{bloc, #VALEUR}
 			|lien_ou_expose{
-				#NOIZETIER_BLOC_INFOS{#VALEUR, nom},
+				#NOIZETIER_BLOC_INFOS{#VALEUR, nom}&nbsp;\(#GET{nb_noisettes}\),
 				#VALEUR|=={#GET{bloc_affiche}}})
 	</li>]
 </BOUCLE_blocs>

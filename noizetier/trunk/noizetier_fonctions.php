@@ -1027,6 +1027,54 @@ function noizetier_bloc_informer($bloc, $information = '', $options = array()) {
 }
 
 
+/**
+ * Renvoie le nombre de noisettes de chaque bloc configurables d'une page, d'une composition
+ * ou d'un objet.
+ *
+ * @param string $identifiant
+ * 		L'identifiant de la page, de la composition ou de l'objet au format:
+ * 		- pour une page : type
+ * 		- pour une composition : type-composition
+ * 		- pour un objet : type_objet-id
+ *
+ * @return array
+ */
+function noizetier_bloc_compter_noisettes($identifiant) {
+	static $blocs_compteur = array();
+
+	if (!isset($blocs_compteur[$identifiant])) {
+		// Initialisation des compteurs par bloc
+		$nb_noisettes = array();
+
+		// Le nombre de noisettes par bloc doit être calculé par une lecture de la table spip_noisettes.
+		$from = array('spip_noisettes');
+		$select = array('bloc', "count(noisette) as 'noisettes'");
+		// -- Contruction du where identifiant préciément la page ou l'objet concerné
+		$identifiants = explode('-', $identifiant);
+		if (!isset($identifiants[1])) {
+			// L'identifiant est celui d'une page
+			$where = array('type=' . sql_quote($identifiant));
+		} elseif (intval($identifiants[1])) {
+			// L'identifiant est celui d'un objet
+			$where = array('objet=' . sql_quote($identifiants[0]), 'id_objet=' . intval($identifiants[1]));
+		} else {
+			$where = array('type=' . sql_quote($identifiant[0]), 'composition=' . sql_quote($identifiant[1]));
+		}
+		$group = array('bloc');
+		$compteurs = sql_allfetsel($select, $from, $where, $group);
+		if ($compteurs) {
+			// On formate le tableau [bloc] = nb noisettes
+			foreach ($compteurs as $_compteur) {
+				$nb_noisettes[$_compteur['bloc']] = $_compteur['noisettes'];
+			}
+		}
+		$blocs_compteur[$identifiant] = $nb_noisettes;
+	}
+
+	return (isset($blocs_compteur[$identifiant]) ? $blocs_compteur[$identifiant] : array());
+}
+
+
 // -------------------------------------------------------------------
 // ---------------------------- API PAGES ----------------------------
 // -------------------------------------------------------------------
@@ -1281,6 +1329,7 @@ function noizetier_page_informer($page, $information = '', $options =array()) {
 		return '';
 	}
 }
+
 
 /**
  * Renvoie le type d'une page à partir de son identifiant.

@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bloc_sans_noisette' => 'Ajouter des noisettes en utilisant le bouton “ajouter une noisette” ou en glissant-déposant la noisette choisie sur cet emplacement.',
-	'bulle_configurer_objet_noisettes' => 'Configurer les noisettes spécifiques à cet objet',
+	'bulle_configurer_objet_noisettes' => 'Configurer les noisettes spécifiques à ce oontenu',
 	'bulle_configurer_page_noisettes' => 'Configurer les noisettes de la page',
 	'bulle_creer_composition' => 'Créer une composition virtuelle de la page « @page@ »',
 	'bulle_dupliquer_composition' => 'Créer une composition virtuelle copiée de la composition « @page@ »',
@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_exporter_configuration' => 'Exporter la configuration',
 	'editer_importer_configuration' => 'Importer une config.',
 	'editer_noizetier_explication' => 'Sélectionnez la page dont vous souhaitez configurer les noisettes.',
-	'editer_noizetier_explication_objets' => 'Sélectionnez l’objet dont vous souhaitez configurer les noisettes.',
+	'editer_noizetier_explication_objets' => 'Sélectionnez le contenu dont vous souhaitez personnaliser les noisettes.',
 	'editer_noizetier_titre' => 'Gérer les noisettes',
 	'editer_nouvelle_page' => 'Créer une nouvelle page / composition',
 	'erreur_aucune_noisette_selectionnee' => 'Vous devez sélectionner une noisette !',
@@ -55,9 +55,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_glisser_deposer' => 'Vous pouvez ajouter une noisette ou les réordonner par simple glisser/déposer.',
 	'explication_heritages_composition' => 'Vous pouvez définir ici les compositions qui seront héritées par les objets de la branche.',
 	'explication_noizetier_css' => 'Vous pouvez ajouter à la noisette d’éventuelles classes CSS supplémentaires.',
-	'explication_objet' => 'Objet de type « @type@ »',
-	'explication_page' => 'Page autonome non liée à un objet',
-	'explication_page_objet' => 'Page liée à l’objet « @type@ »',
+	'explication_objet' => 'Contenu de type « @type@ »',
+	'explication_page' => 'Page autonome non liée à un tye pde contenu',
+	'explication_page_objet' => 'Page liée au type de contenu « @type@ »',
 	'explication_raccourcis_typo' => 'Vous pouvez utiliser les raccourcis typographiques de SPIP.',
 
 	// F
@@ -99,7 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_supprimer_noisettes_page' => 'Supprimer toutes les noisettes',
 	'formulaire_supprimer_page' => 'Supprimer cette composition',
 	'formulaire_type' => 'Type de page',
-	'formulaire_type_explication' => 'Objet ou page autonome dont hérite la composition.',
+	'formulaire_type_explication' => 'Contenu ou page autonome dont hérite la composition.',
 	'formulaire_type_import' => 'Type d’importation',
 	'formulaire_type_import_explication' => 'Vous pouvez fusionner le fichier de configuration avec votre configuration actuelle (les noisettes de chaque page seront ajoutées à vos noisettes déjà définies) ou bien remplacer votre configuration par celle-ci.',
 
@@ -128,11 +128,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_titre_noisette' => 'Titre de la noisette :',
 	'label_titre_noisette_perso' => 'Titre personnalisé :',
 	'liste_icones' => 'Liste d’icônes',
-	'liste_objets' => 'Objets possédant une configuration de noisettes',
+	'liste_objets' => 'Contenus possédant une configuration de noisettes',
 	'liste_objets_configures' => 'Liste des objets',
 	'liste_pages' => 'Liste des pages',
-	'liste_pages_objet_non' => 'Pages non liées à un type d’objet',
-	'liste_pages_objet_oui' => 'Pages liées à un type d’objet',
+	'liste_pages_objet_non' => 'Pages non liées à un type de contenu',
+	'liste_pages_objet_oui' => 'Pages liées à un type de contenu',
 
 	// M
 	'masquer' => 'Masquer',
