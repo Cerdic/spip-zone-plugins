@@ -1051,14 +1051,15 @@ function noizetier_bloc_compter_noisettes($identifiant) {
 		$select = array('bloc', "count(noisette) as 'noisettes'");
 		// -- Contruction du where identifiant préciément la page ou l'objet concerné
 		$identifiants = explode('-', $identifiant);
-		if (!isset($identifiants[1])) {
-			// L'identifiant est celui d'une page
-			$where = array('type=' . sql_quote($identifiant));
-		} elseif (intval($identifiants[1])) {
+		if (isset($identifiants[1]) and ($id = intval($identifiants[1]))) {
 			// L'identifiant est celui d'un objet
-			$where = array('objet=' . sql_quote($identifiants[0]), 'id_objet=' . intval($identifiants[1]));
+			$where = array('objet=' . sql_quote($identifiants[0]), 'id_objet=' . $id);
 		} else {
-			$where = array('type=' . sql_quote($identifiant[0]), 'composition=' . sql_quote($identifiant[1]));
+			if (!isset($identifiants[1])) {
+				// L'identifiant est celui d'une page
+				$identifiants[1] = '';
+			}
+			$where = array('type=' . sql_quote($identifiants[0]), 'composition=' . sql_quote($identifiants[1]));
 		}
 		$group = array('bloc');
 		$compteurs = sql_allfetsel($select, $from, $where, $group);
