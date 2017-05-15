@@ -25,8 +25,6 @@ function medias_responsive_mod_header_prive($flux) {
 }
 
 function medias_responsive_mod_post_echappe_html_propre($txt) {
-	$txt = str_replace ("</ul>
-<ul class=\"portfolio_ligne\">", "", $txt);
-	
+	$txt = preg_replace (",</ul>[\r\n\ ]*<ul class=\"portfolio_ligne\">,", "", $txt);
 	return $txt;
 }
