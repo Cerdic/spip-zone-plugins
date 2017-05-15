@@ -1,12 +1,12 @@
 <paquet
 	prefix="slick"
 	categorie="multimedia"
-	version="1.1.3"
+	version="1.1.4"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/slick-64.png"
 	schema="1.0"
-	documentation=""
+	documentation="https://contrib.spip.net/?article4897"
 >
 	<nom>Slick</nom>
 

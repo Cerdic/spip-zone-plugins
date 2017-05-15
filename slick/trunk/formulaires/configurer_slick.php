@@ -25,14 +25,16 @@ function formulaires_configurer_slick_saisies_dist() {
                     'saisie' => 'input',
                     'options' => array(
                         'nom' => 'selecteur',
-                        'label' => _T('slick:selecteur')
+                        'label' => _T('slick:selecteur'),
+                        'explication' => _T('slick:explication_selecteur')
                     )
                 ),
                 array(
                     'saisie' => 'input',
                     'options' => array(
                         'nom' => 'slide',
-                        'label' => _T('slick:slide')
+                        'label' => _T('slick:slide'),
+                        'explication' => _T('slick:explication_slide')
                     )
                 ),
                 array(
@@ -46,7 +48,8 @@ function formulaires_configurer_slick_saisies_dist() {
                     'saisie' => 'input',
                     'options' => array(
                         'nom' => 'slidesToScroll',
-                        'label' => _T('slick:slidesToScroll')
+                        'label' => _T('slick:slidesToScroll'),
+                        'explication' => _T('slick:explication_slidesToScroll')
                     )
                 ),
                 array(
@@ -61,6 +64,7 @@ function formulaires_configurer_slick_saisies_dist() {
                     'options' => array(
                         'nom' => 'autoplaySpeed',
                         'label' => _T('slick:autoplaySpeed'),
+                        'explication' => _T('slick:explication_autoplaySpeed'),
                         'afficher_si' => '@autoplay@=="true"'
                     )
                 ),
@@ -101,7 +105,8 @@ function formulaires_configurer_slick_saisies_dist() {
                     'saisie' => 'true_false',
                     'options' => array(
                         'nom' => 'centerMode',
-                        'label' => _T('slick:centerMode')
+                        'label' => _T('slick:centerMode'),
+                        'explication' => _T('slick:explication_centerMode')
                     )
                 ),
                 array(
@@ -109,6 +114,7 @@ function formulaires_configurer_slick_saisies_dist() {
                     'options' => array(
                         'nom' => 'centerPadding',
                         'label' => _T('slick:centerPadding'),
+                        'explication' => _T('slick:explication_centerPadding'),
                         'afficher_si' => '@centerMode@=="true"'
                     )
                 ),
@@ -116,7 +122,8 @@ function formulaires_configurer_slick_saisies_dist() {
                     'saisie' => 'input',
                     'options' => array(
                         'nom' => 'cssEase',
-                        'label' => _T('slick:cssEase')
+                        'label' => _T('slick:cssEase'),
+                        'explication' => _T('slick:explication_cssEase')
                     )
                 ),
                 array(
