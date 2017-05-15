@@ -46,7 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_deplacer_bas' => 'Nach unten',
 	'formulaire_deplacer_haut' => 'Nach oben',
 	'formulaire_description' => 'Beschreibung',
-	'formulaire_description_explication' => 'Sie können die gewohnten SPIP-Tags verwenden, insbesondere  &lt;multi&gt;.',
+	'formulaire_description_explication' => 'Sie können die gewohnten SPIP-Tags verwenden, insbesondere  &lt;multi&gt;.', # MODIF
 	'formulaire_erreur_format_identifiant' => 'Der Bezeichner darf nur kleingeschriebene Zeichen ohne Akzente und Umlaute, Ziffern und den Unterstrich (_) enthalten.',
 	'formulaire_icon' => 'Icon',
 	'formulaire_icon_explication' => 'Sie können den relativen Pfad zu einem Icon angeben (z.B.: <i>images/objekt-liste-inhalte.png</i>). Eine Liste der Icons in Standardverzeichnissen finden sie<a href="../spip.php?page=icones_preview">auf dieser Seite</a>.', # MODIF
@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_modifier_noisette' => 'Diese Code-Nuss ändern',
 	'formulaire_noisette_sans_parametre' => 'Diese Code-Nuss bietet keine Parameter.',
 	'formulaire_nom' => 'Titre',
-	'formulaire_nom_explication' => 'Sie können des SPIP-Tag &lt;multi&gt; verwenden.',
+	'formulaire_nom_explication' => 'Sie können des SPIP-Tag &lt;multi&gt; verwenden.', # MODIF
 	'formulaire_nouvelle_composition' => 'Neue Komposition',
 	'formulaire_obligatoire' => 'Pflichtfeld',
 	'formulaire_supprimer_noisette' => 'Diese Code-Nuss löschen',

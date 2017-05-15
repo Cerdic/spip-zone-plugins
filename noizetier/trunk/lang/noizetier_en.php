@@ -58,7 +58,7 @@ You can choose a new identifier or suffix the reference identifier as follows:
 	'formulaire_deplacer_bas' => 'Move down',
 	'formulaire_deplacer_haut' => 'Move up',
 	'formulaire_description' => 'Description',
-	'formulaire_description_explication' => 'You can use SPIP usual shortcuts, especially the &lt;multi&gt; tag.',
+	'formulaire_description_explication' => 'You can use SPIP usual shortcuts, especially the &lt;multi&gt; tag.', # MODIF
 	'formulaire_dupliquer_page' => 'Duplicate this page', # MODIF
 	'formulaire_dupliquer_page_entete' => 'Duplicate a page',
 	'formulaire_dupliquer_page_titre' => 'Duplicate the page « @page@ »',
@@ -78,7 +78,7 @@ nuts on the following pages:',
 	'formulaire_modifier_page' => 'Edit this page', # MODIF
 	'formulaire_noisette_sans_parametre' => 'This nut has no parameters.',
 	'formulaire_nom' => 'Title',
-	'formulaire_nom_explication' => 'You can use the &lt;multi&gt; tag.',
+	'formulaire_nom_explication' => 'You can use the &lt;multi&gt; tag.', # MODIF
 	'formulaire_nouvelle_composition' => 'New composition',
 	'formulaire_obligatoire' => 'Required field',
 	'formulaire_supprimer_noisette' => 'Delete this nuts',
