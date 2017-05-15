@@ -38,21 +38,6 @@ function formulaires_configurer_slick_saisies_dist() {
                     )
                 ),
                 array(
-                    'saisie' => 'input',
-                    'options' => array(
-                        'nom' => 'slidesToShow',
-                        'label' => _T('slick:slidesToShow')
-                    )
-                ),
-                array(
-                    'saisie' => 'input',
-                    'options' => array(
-                        'nom' => 'slidesToScroll',
-                        'label' => _T('slick:slidesToScroll'),
-                        'explication' => _T('slick:explication_slidesToScroll')
-                    )
-                ),
-                array(
                     'saisie' => 'true_false',
                     'options' => array(
                         'nom' => 'autoplay',
@@ -69,13 +54,6 @@ function formulaires_configurer_slick_saisies_dist() {
                     )
                 ),
                 array(
-                    'saisie' => 'true_false',
-                    'options' => array(
-                        'nom' => 'fade',
-                        'label' => _T('slick:fade')
-                    )
-                ),
-                array(
                     'saisie' => 'input',
                     'options' => array(
                         'nom' => 'speed',
@@ -85,9 +63,59 @@ function formulaires_configurer_slick_saisies_dist() {
                 array(
                     'saisie' => 'true_false',
                     'options' => array(
+                        'nom' => 'fade',
+                        'label' => _T('slick:fade')
+                    )
+                ),
+                array(
+                    'saisie' => 'input',
+                    'options' => array(
+                        'nom' => 'slidesToShow',
+                        'label' => _T('slick:slidesToShow'),
+                        'afficher_si' => '@fade@=="false"'
+                    )
+                ),
+                array(
+                    'saisie' => 'input',
+                    'options' => array(
+                        'nom' => 'slidesToScroll',
+                        'label' => _T('slick:slidesToScroll'),
+                        'explication' => _T('slick:explication_slidesToScroll'),
+                        'afficher_si' => '@fade@=="false"'
+                    )
+                ),
+                array(
+                    'saisie' => 'true_false',
+                    'options' => array(
                         'nom' => 'vertical',
                         'label' => _T('slick:vertical'),
                         'afficher_si' => '@fade@=="false"'
+                    )
+                ),
+                array(
+                    'saisie' => 'true_false',
+                    'options' => array(
+                        'nom' => 'centerMode',
+                        'label' => _T('slick:centerMode'),
+                        'explication' => _T('slick:explication_centerMode'),
+                        'afficher_si' => '@fade@=="false"'
+                    )
+                ),
+                array(
+                    'saisie' => 'input',
+                    'options' => array(
+                        'nom' => 'centerPadding',
+                        'label' => _T('slick:centerPadding'),
+                        'explication' => _T('slick:explication_centerPadding'),
+                        'afficher_si' => '@fade@=="false" && @centerMode@=="true"'
+                    )
+                ),
+                array(
+                    'saisie' => 'input',
+                    'options' => array(
+                        'nom' => 'cssEase',
+                        'label' => _T('slick:cssEase'),
+                        'explication' => _T('slick:explication_cssEase')
                     )
                 ),
                 array(
@@ -100,31 +128,6 @@ function formulaires_configurer_slick_saisies_dist() {
                             'ondemand' => _T('slick:lazyload_ondemand'),
                             'progressive' => _T('slick:lazyload_progressive')
                         )
-                    )
-                ),
-                array(
-                    'saisie' => 'true_false',
-                    'options' => array(
-                        'nom' => 'centerMode',
-                        'label' => _T('slick:centerMode'),
-                        'explication' => _T('slick:explication_centerMode')
-                    )
-                ),
-                array(
-                    'saisie' => 'input',
-                    'options' => array(
-                        'nom' => 'centerPadding',
-                        'label' => _T('slick:centerPadding'),
-                        'explication' => _T('slick:explication_centerPadding'),
-                        'afficher_si' => '@centerMode@=="true"'
-                    )
-                ),
-                array(
-                    'saisie' => 'input',
-                    'options' => array(
-                        'nom' => 'cssEase',
-                        'label' => _T('slick:cssEase'),
-                        'explication' => _T('slick:explication_cssEase')
                     )
                 ),
                 array(
