@@ -95,9 +95,10 @@ function formulaires_configurer_slick_saisies_dist() {
                     'options' => array(
                         'nom' => 'lazyload',
                         'label' => _T('slick:lazyload'),
+                        'explication' => _T('slick:explication_lazyload'),
                         'datas' => array(
-                            'ondemand' => 'ondemand',
-                            'progressive' => 'progressive'
+                            'ondemand' => _T('slick:lazyload_ondemand'),
+                            'progressive' => _T('slick:lazyload_progressive')
                         )
                     )
                 ),

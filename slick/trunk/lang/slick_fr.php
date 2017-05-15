@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // T
     'titre_page_configurer_slick' => 'Slick',
+    'charger' => 'Activer  Slick',
     'selecteur' => 'Sélécteur jQuery pour Slick',
     'explication_selecteur' => 'Cibler le bloc englobant les diapositives.',
     'autoplay' => 'Lecture automatique',
@@ -28,7 +29,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'slide' => 'Elément à utiliser comme diapositive',
     'explication_slide' => 'L\'élément doit être un enfant direct du bloc englobant.',
     'lazyload' => 'Préchargement',
-    'charger' => 'Activer  Slick',
+    'explication_lazyload' => 'Ne charger les images que pour les voir, ou bien les précharger (avant de les voir).',
+    'lazyload_ondemand' => 'Sans préchargement',
+    'lazyload_progressive' => 'Avec préchargement',
     'explication_charger' => 'Active le diaporama automatiquement suivant les paramètres ci-dessous.',
     'centerMode' => 'Centrer les éléments',
     'explication_centerMode' => 'Si vous avez choisi d\'afficher 1 diapositive ou bien 3 ou plus, centrer l\'image dans la liste.',
