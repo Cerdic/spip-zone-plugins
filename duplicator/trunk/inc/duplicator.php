@@ -79,15 +79,20 @@ function dupliquer_article($id_article,$rubrique){
 		"type='article'",
 	);
 	$infos_url = sql_fetsel('*', 'spip_urls', $where, 'date', 'date DESC');
-	
-	$infos_url['id_objet'] = $id_article;
-	$url = $infos_url['url'];
-	//$infos_url['url']
-	$u = preg_replace('/(.*)(-|,)\d*$/', '$1', $url, -1, $c); // supprimer le numéro à la fin
-	if ($c == 0) $infos_url['url'] = $url.'-'.$id_article; // Ajoute le numéro de l'article
-	else $infos_url['url'] = $u.'-'.$id_article;
-	sql_insertq('spip_urls', $infos_url);
-	
+	if ($infos_url) {
+		$infos_url['id_objet'] = $id_article;
+		$url = $infos_url['url'];
+		//$infos_url['url']
+		$u = preg_replace('/(.*)(-|,)\d*$/', '$1', $url, -1, $c); // supprimer le numéro à la fin
+		if ($c == 0) {
+			$infos_url['url'] = $url.'-'.$id_article; // Ajoute le numéro de l'article
+		} else {
+			$infos_url['url'] = $u.'-'.$id_article;
+		}
+
+		sql_insertq('spip_urls', $infos_url);
+	}
+
 	return $id_article;
 }
 
@@ -243,8 +248,13 @@ function dupliquer_logo($id_source, $id_destination, $type='article', $bsurvol =
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 
 	$logo_source = $chercher_logo($id_source, 'id_'.$type, $logo_type );
+	if (!$logo_source) {
+		return false;
+	}
 	$logo_source = $logo_source[0];
-	if ( !file_exists($logo_source) ) return false;
+	if ( !file_exists($logo_source) ) {
+		return false;
+	}
 
 	$size = @getimagesize($logo_source);
 	$mime = !$size ? '': $size['mime'];
