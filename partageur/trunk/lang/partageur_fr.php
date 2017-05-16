@@ -69,6 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_partageur' => 'Site partageur',
 	'titre_partageurs' => 'Sites partageurs',
 	'titre_partageurs_rubrique' => 'Sites partageurs de la rubrique',
+	'titre_partageur_origine' => 'Adresse d’origine de l’article importé : ',
   
 );
 

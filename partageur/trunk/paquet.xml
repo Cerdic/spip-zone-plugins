@@ -1,12 +1,12 @@
 <paquet
 	prefix="partageur"
 	categorie="edition"
-	version="1.0.7"
+	version="1.1.0"
 	etat="stable"
 	compatibilite="[3.0.5;3.1.*]"
 	logo="prive/themes/spip/images/partageur-64.png"
 	documentation="https://contrib.spip.net/Partageur"
-	schema="1.1.0" 
+	schema="1.2.0" 
 >
 	<nom>Partageur</nom>
 	<auteur lien='http://www.erational.org'>erational</auteur>
@@ -19,6 +19,7 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/partageur.php" />
 	<pipeline nom="header_prive_css" action="insert_head_prive_css" inclure="partageur_pipelines.php" />
 	<pipeline nom="affiche_enfants" inclure="partageur_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="partageur_pipelines.php" />
 
 	<menu nom="partageurs" titre="partageur:titre_partageurs" parent="menu_edition" icone="images/partageur-16.png" action="partageurs" />
 </paquet>

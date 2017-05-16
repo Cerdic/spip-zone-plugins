@@ -74,6 +74,12 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
 	} else {
 		$id_import_mot_groupe = -1;
 	}
+	if (!defined('_PARTAGEUR_RECUPERER_CONTENU')) {
+		define('_PARTAGEUR_RECUPERER_CONTENU', true);
+	}
+	if (!defined('_PARTAGEUR_RECUPERER_DOC')) {
+		define('_PARTAGEUR_RECUPERER_DOC', true);
+	}
 
 	//-------------------------------
 	// selection du site
@@ -134,7 +140,9 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
 								// tout est bon, on insert les donnnees !
 
 								// etape 1 -  traitement des documents
-								$_documents = $article['documents'];
+								if (_PARTAGEUR_RECUPERER_DOC) {
+									$_documents = $article['documents'];
+								}
 								$documents_current_article = array();
 
 								if ($_documents!="") {
@@ -152,30 +160,28 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
 										}
 
 										if ($a = $fonction_renseigner($source)) {
-											unset($a['mime_type']);
-											unset($a['type_image']);
-											unset($a['body']);
-											unset($a['mode']);
-											$a['date'] = 'NOW()';
-											$a['distant'] = 'oui';
-											$a['fichier'] = set_spip_doc($source);
+											if (is_array($a)) {
+												unset($a['mime_type']);
+												unset($a['type_image']);
+												unset($a['body']);
+												unset($a['mode']);
+												$a['date'] = 'NOW()';
+												$a['distant'] = 'oui';
+												$a['fichier'] = set_spip_doc($source);
 
-											$a['titre'] = $titre;     // infos partageur, recuperer via le flux
-											$a['descriptif'] = $desc;
-											$documents_current_article[$id_distant] = sql_insertq("spip_documents", $a);
+												$a['titre'] = $titre;     // infos partageur, recuperer via le flux
+												$a['descriptif'] = $desc;
+												$documents_current_article[$id_distant] = sql_insertq("spip_documents", $a);
+											}
 										}
 									}
 								}
 
 
 								// etape 2 -  traitement de l'article
-								$_surtitre = $article['surtitre'];
 								$_titre = $article['titre'];
-								$_soustitre = $article['soustitre'];
-								$_descriptif = partageur_convert_extra($article['descriptif'],$documents_current_article,$version_flux);
-								$_chapo = partageur_convert_extra($article['chapo'],$documents_current_article,$version_flux);
-								$_texte = partageur_convert_extra($article['texte'],$documents_current_article,$version_flux);
-								$_ps = partageur_convert_extra($article['ps'],$documents_current_article,$version_flux);
+								$_s2s_url_site_distant = $article['s2s_url_site_distant'];
+								$_s2s_id_article_distant = $article['s2s_id_article_distant'];
 								$_date =  date('Y-m-d H:i:s',time()); // $article['date'];  // date de la syndication ou date de l'article ?
 								$_lang = $article['lang'];
 								$_logo = $article['logo'];
@@ -185,6 +191,21 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
 								$_id_auteur = $article['auteur'];
 								$_link = $article['link'];
 								$_trad = $article['trad'];
+								if (_PARTAGEUR_RECUPERER_CONTENU) {
+									$_surtitre = $article['surtitre'];
+									$_soustitre = $article['soustitre'];
+									$_descriptif = partageur_convert_extra($article['descriptif'],$documents_current_article,$version_flux);
+									$_chapo = partageur_convert_extra($article['chapo'],$documents_current_article,$version_flux);
+									$_texte = partageur_convert_extra($article['texte'],$documents_current_article,$version_flux);
+									$_ps = partageur_convert_extra($article['ps'],$documents_current_article,$version_flux);
+								} else {
+									$_surtitre = '';
+									$_soustitre = '';
+									$_descriptif = '';
+									$_chapo = '';
+									$_texte = '';
+									$_ps = '';									
+								}
 
 
 								// ....dans la table articles
@@ -206,6 +227,8 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
 										'date' => $_date,
 										's2s_url' => $_link,
 										's2s_url_trad' => $_trad,
+										's2s_url_site_distant' => $_s2s_url_site_distant,
+										's2s_id_article_distant' => $_s2s_id_article_distant,
 									)
 								);
 								$log_html  .= "<a href='?exec=articles&amp;id_article=$id_nouvel_article' style='padding:5px;border-bottom:3px solid;background:#eee;display:block;'>"._T('spiptospip:imported_view')."</a>";
@@ -355,7 +378,7 @@ function analyser_backend_partageur($rss){
   include_spip("inc_texte.php"); # pour couper()
 	include_spip("inc_filtres.php"); # pour filtrer_entites()
 
-	$xml_tags = array('surtitre','titre','soustitre','descriptif','chapo','texte','ps','auteur','link','trad','evenements', 'lang','logo','keyword','mots','licence','documents');
+	$xml_tags = array('surtitre','titre','soustitre','descriptif','chapo','texte','ps','auteur','link','s2s_url_site_distant','s2s_id_article_distant','trad','evenements', 'lang','logo','keyword','mots','licence','documents');
 
 	$syndic_regexp = array(
 		'item'           => ',<item[>[:space:]],i',
@@ -370,6 +393,8 @@ function analyser_backend_partageur($rss){
 		'ps'             => ',<ps[^>]*>(.*?)</ps[^>]*>,ims',
 		'auteur'         => ',<auteur[^>]*>(.*?)</auteur[^>]*>,ims',
 		'link'           => ',<link[^>]*>(.*?)</link[^>]*>,ims',
+		's2s_url_site_distant' => ',<s2s_url_site_distant[^>]*>(.*?)</s2s_url_site_distant[^>]*>,ims',
+		's2s_id_article_distant' => ',<s2s_id_article_distant[^>]*>(.*?)</s2s_id_article_distant[^>]*>,ims',
 		'trad'           => ',<trad[^>]*>(.*?)</trad[^>]*>,ims',
 		'evenements'     => ',<evenements[^>]*>(.*?)</evenements[^>]*>,ims',
 		'lang'           => ',<lang[^>]*>(.*?)</lang[^>]*>,ims',

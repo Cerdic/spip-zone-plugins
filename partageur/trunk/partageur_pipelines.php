@@ -53,8 +53,15 @@ function partageur_affiche_enfants($flux) {
 	return $flux;
 }
 
+function partageur_affiche_milieu($flux) {
+	$exec = $flux["args"]["exec"];
 
-
-
-
-
+	if ($exec == "article") {
+		$id_article = $flux["args"]["id_article"];
+		$contexte = array('id_article'=>$id_article);
+		$ret = recuperer_fond("prive/squelettes/inc/partageur_origine", $contexte);
+		$flux["data"] .= $ret;
+	}
+ 
+	return $flux;
+}
