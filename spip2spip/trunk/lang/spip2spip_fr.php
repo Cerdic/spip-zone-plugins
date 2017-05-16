@@ -114,6 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'titre_page_configurer_spip2spip' => 'SPIP2SPIP',
     'titre_spip2spip' => 'Site',
     'titre_spip2spips' => 'Sites SPIP2SPIP',
+	'titre_spip2spip_origine' => 'Adresse d’origine de l’article importé : ',
 
     // V
     'voir_thematique' => 'Voir le mot-clé',

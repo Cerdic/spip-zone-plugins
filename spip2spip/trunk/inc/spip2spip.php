@@ -50,6 +50,12 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
     $import_mot_evt = lire_config('spip2spip/import_mot_evnt') ? true : false;
     $import_mot_groupe_creer = lire_config('spip2spip/import_mot_groupe_creer') ? true : false;
     $id_import_mot_groupe = lire_config('spip2spip/import_mot_groupe_creer', -1);
+	if (!defined('_SPIP2SPIP_RECUPERER_CONTENU')) {
+		define('_SPIP2SPIP_RECUPERER_CONTENU', true);
+	}
+	if (!defined('_SPIP2SPIP_RECUPERER_DOC')) {
+		define('_SPIP2SPIP_RECUPERER_DOC', true);
+	}
 
     //-------------------------------
     // selection du site
@@ -123,7 +129,9 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                 // -----------------------------------
                                 // etape 1 -  traitement des documents
                                 // -----------------------------------
-                                $_documents = $article['documents'];
+                                if (_SPIP2SPIP_RECUPERER_DOC) {
+									$_documents = $article['documents'];
+								}
                                 $documents_current_article = array();
                                 if ($_documents != "") {
                                     $_documents = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_documents);
@@ -137,28 +145,30 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
 
                                         // inspire de @ajouter_un_document() - inc/ajout_documents.php
                                         if ($a = recuperer_infos_distantes($source)) {
+											if (is_array($a)) {
 
-                                            $type_image = $a['type_image'];
+												$type_image = $a['type_image'];
 
-                                            unset($a['type_image']);
-                                            unset($a['body']);
-                                            unset($a['mode']);
+												unset($a['type_image']);
+												unset($a['body']);
+												unset($a['mode']);
 
-                                            $a['date'] = 'NOW()';
-                                            $a['distant'] = 'oui';
+												$a['date'] = 'NOW()';
+												$a['distant'] = 'oui';
 
-                                            $a['mode'] = 'document';
-                                            $a['fichier'] = set_spip_doc($source);
+												$a['mode'] = 'document';
+												$a['fichier'] = set_spip_doc($source);
 
-                                            unset($a['mime_type']);
+												unset($a['mime_type']);
 
-                                            $a['titre'] = $titre;
-                                             // infos spip2spip, recupere via le flux
-                                            $a['descriptif'] = $desc;
-                                            $a['credits'] = $credits;
+												$a['titre'] = $titre;
+												 // infos spip2spip, recupere via le flux
+												$a['descriptif'] = $desc;
+												$a['credits'] = $credits;
 
-                                            $documents_current_article[$id_distant] = sql_insertq("spip_documents", $a);
-                                        }
+												$documents_current_article[$id_distant] = sql_insertq("spip_documents", $a);
+											}
+										}
                                     }
                                 }
                                  // Fin de l'étape 1 de traitement des documents
@@ -166,13 +176,24 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                 // -----------------------------------
                                 // etape 2 -  traitement de l'article
                                 // -----------------------------------
-                                $_surtitre = $article['surtitre'];
                                 $_titre = $article['titre'];
-                                $_soustitre = $article['soustitre'];
-                                $_descriptif = spip2spip_convert_extra($article['descriptif'], $documents_current_article, $version_flux);
-                                $_chapo = spip2spip_convert_extra($article['chapo'], $documents_current_article, $version_flux);
-                                $_texte = spip2spip_convert_extra($article['texte'], $documents_current_article, $version_flux);
-                                $_ps = spip2spip_convert_extra($article['ps'], $documents_current_article, $version_flux);
+								$_s2s_url_site_distant = $article['s2s_url_site_distant'];
+								$_s2s_id_article_distant = $article['s2s_id_article_distant'];
+								if (_SPIP2SPIP_RECUPERER_CONTENU) {
+									$_surtitre = $article['surtitre'];
+									$_soustitre = $article['soustitre'];
+									$_descriptif = spip2spip_convert_extra($article['descriptif'], $documents_current_article, $version_flux);
+									$_chapo = spip2spip_convert_extra($article['chapo'], $documents_current_article, $version_flux);
+									$_texte = spip2spip_convert_extra($article['texte'], $documents_current_article, $version_flux);
+									$_ps = spip2spip_convert_extra($article['ps'], $documents_current_article, $version_flux);
+								} else {
+									$_surtitre = '';
+									$_soustitre = '';
+									$_descriptif = '';
+									$_chapo = '';
+									$_texte = '';
+									$_ps = '';									
+								}
 
                                 // ----------
                                 //date de la syndication ou date de l'article ?
@@ -235,6 +256,8 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                     'date_modif' => $_date_modif,
                                     's2s_url' => $_link,
                                     's2s_url_trad' => $_trad,
+									's2s_url_site_distant' => $_s2s_url_site_distant,
+									's2s_id_article_distant' => $_s2s_id_article_distant,
                                 ));
                                 $log_html.= "<br/>\n" . "<strong>" . _T('spip2spip:label_thematique') . ':</strong> ' . $article['keyword'] . "<br/>\n<a href='" . generer_url_ecrire('article', "id_article=$id_nouvel_article") . "'>" . _T('spip2spip:imported_view') . "</a>\n";
 
@@ -453,7 +476,7 @@ function analyser_backend_spip2spip($rss) {
     include_spip("inc_texte.php"); // pour couper()
     include_spip("inc_filtres.php"); // pour filtrer_entites()
 
-    $xml_tags = array('surtitre', 'titre', 'soustitre', 'descriptif', 'chapo', 'texte', 'ps', 'auteur', 'auteurs', 'link', 'trad', 'date', 'date_redac', 'date_modif', 'statut', 'nom_site', 'url_site', 'virtuel', 'evenements', 'lang', 'logo', 'logosurvol', 'keyword', 'mots', 'licence', 'documents');
+    $xml_tags = array('surtitre', 'titre', 'soustitre', 'descriptif', 'chapo', 'texte', 'ps', 'auteur', 'auteurs', 'link', 's2s_url_site_distant', 's2s_id_article_distant', 'trad', 'date', 'date_redac', 'date_modif', 'statut', 'nom_site', 'url_site', 'virtuel', 'evenements', 'lang', 'logo', 'logosurvol', 'keyword', 'mots', 'licence', 'documents');
 
     $syndic_regexp = array(
         'item' => ',<item[>[:space:]],i',
@@ -469,6 +492,8 @@ function analyser_backend_spip2spip($rss) {
         'auteur' => ',<auteur[^>]*>(.*?)</auteur[^>]*>,ims',        // spip2spip v1.8
         'auteurs' => ',<auteurs[^>]*>(.*?)</auteurs[^>]*>,ims',     // spip2spip v1.9
         'link' => ',<link[^>]*>(.*?)</link[^>]*>,ims',
+		's2s_url_site_distant' => ',<s2s_url_site_distant[^>]*>(.*?)</s2s_url_site_distant[^>]*>,ims',
+		's2s_id_article_distant' => ',<s2s_id_article_distant[^>]*>(.*?)</s2s_id_article_distant[^>]*>,ims',
         'trad' => ',<trad[^>]*>(.*?)</trad[^>]*>,ims',
         'date' => ',<date[^>]*>(.*?)</date[^>]*>,ims',
         'date_redac' => ',<date_redac[^>]*>(.*?)</date_redac[^>]*>,ims',

@@ -40,3 +40,16 @@ function spip2spip_header_prive($flux)
 	return $flux;
 }
 
+function spip2spip_affiche_milieu($flux) {
+	$exec = $flux["args"]["exec"];
+
+	if ($exec == "article") {
+		$id_article = $flux["args"]["id_article"];
+		$contexte = array('id_article'=>$id_article);
+		$ret = recuperer_fond("prive/squelettes/inc/spip2spip_origine", $contexte);
+		$flux["data"] .= $ret;
+	}
+ 
+	return $flux;
+}
+

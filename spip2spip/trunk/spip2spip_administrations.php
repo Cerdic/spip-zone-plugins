@@ -18,14 +18,21 @@ function spip2spip_upgrade($nom_meta_base_version, $version_cible) {
 		array('maj_tables', array('spip_spip2spips')),
 		array('sql_alter','TABLE spip_articles ADD s2s_url VARCHAR(255) DEFAULT \'\' NOT NULL'),
 		array('sql_alter','TABLE spip_articles ADD s2s_url_trad VARCHAR(255) DEFAULT \'\' NOT NULL'),
+		array('sql_alter','TABLE spip_articles ADD s2s_url_site_distant TEXT NOT NULL'),
+		array('sql_alter','TABLE spip_articles ADD s2s_id_article_distant BIGINT(20) DEFAULT NULL'),
 		array('spip2spip_create'),
 	);
 
 	// pour la migration venant de SPIP 2 : renommer champs id et le nom de la table
-	$maj['1.1'] = array(
+	$maj['1.1.0'] = array(
 		array('sql_alter',"TABLE spip_spip2spip CHANGE `id` `id_spip2spip` BIGINT( 21 ) NOT NULL AUTO_INCREMENT"),
 		array('sql_alter',"TABLE spip_spip2spip CHANGE `last_syndic` `maj` TIMESTAMP"),
 		array('sql_alter',"TABLE spip_spip2spip RENAME spip_spip2spips"),
+	);
+
+	$maj['1.3.0'] = array(
+		array('sql_alter','TABLE spip_articles ADD s2s_url_site_distant TEXT NOT NULL'),
+		array('sql_alter','TABLE spip_articles ADD s2s_id_article_distant BIGINT(20) DEFAULT NULL'),
 	);
 
 	include_spip('base/upgrade');
@@ -34,7 +41,7 @@ function spip2spip_upgrade($nom_meta_base_version, $version_cible) {
 
 
 // creation des mots-clés de travail "- spip2spip - "
-function  spip2spip_create() {
+function spip2spip_create() {
 	sql_insertq("spip_groupes_mots", array(
 		'titre' => '- spip2spip -',
 		'descriptif' => _T('spip2spip:install_spip2spip_4'),
@@ -59,8 +66,8 @@ function spip2spip_vider_tables($nom_meta_base_version) {
 	# Nettoyer les colonnes en extra
 	sql_alter("TABLE spip_articles DROP COLUMN s2s_url");
 	sql_alter("TABLE spip_articles DROP COLUMN s2s_url_trad");
-
+	sql_alter("TABLE spip_articles DROP COLUMN s2s_url_site_distant");
+	sql_alter("TABLE spip_articles DROP COLUMN s2s_id_article_distant");
 
 	effacer_meta($nom_meta_base_version);
 }
-

@@ -23,6 +23,8 @@ version="1.0"[ encoding="(#CHARSET)"]?>[
 	[<texte>(#TEXTE*|liens_absolus|spip2spip_respecte_ln|spip2spip_respecte_img|texte_backend)</texte>]
 	[<ps>(#PS*|liens_absolus|spip2spip_respecte_ln|texte_backend)</ps>]
 	<link>#URL_SITE_SPIP/#URL_ARTICLE</link>
+	<s2s_url_site_distant>[(#S2S_URL_SITE_DISTANT|sinon{#URL_SITE_SPIP})]</s2s_url_site_distant>
+	<s2s_id_article_distant>[(#S2S_ID_ARTICLE_DISTANT|sinon{#ID_ARTICLE})]</s2s_id_article_distant>
 	<BOUCLE_trad_dispo (ARTICLES){traduction}{0,1}{exclus}> </BOUCLE_trad_dispo><BOUCLE_trad (ARTICLES){traduction}{origine_traduction}><trad>#URL_SITE_SPIP/#URL_ARTICLE</trad></BOUCLE_trad></B_trad_dispo>
 	[<virtuel>(#VIRTUEL*)</virtuel>]
 	[<statut>(#STATUT*)</statut>]
