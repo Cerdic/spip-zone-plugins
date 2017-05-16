@@ -32,6 +32,35 @@
               </span>]
               <input type='file' class='file' name='#CLE' size="[(#ENV{_options}|table_valeur{size_input}|sinon{12})]" id='#CLE_#ENV{objet}_#ENV{id_objet}' value="" />
 					    #SET{valider,' '}
+
+              <div class="mediatheque">
+                <input class="hidden" name="document_mediatheque_#CLE" type="hidden" value=""/>
+                <input class="invisible" name="choisir_document_mediatheque_#CLE"
+                       type="submit" value="<:logos_roles:valider:>"/>
+
+                <a href="#" id="choisir_document_#CLE">
+                  <:logos_roles:choisir_mediatheque:>
+                </a>
+
+                <script type="text/javascript">
+                 $(function () {
+                   // Ouvrir une modale de sélection dans la médiathèque avec le lien
+                   $('#choisir_document_#CLE').click(function (e) {
+                     e.preventDefault();
+                     $.modalboxload(
+                       '[(#URL_ECRIRE*{popin-choisir_document, var_zajax=contenu&selectfunc=maj_document_mediatheque_[(#CLE)]})]',
+                       {autoResize: true}
+                     );
+                   });
+                 });
+                 // Callback du popin, on ferme la modale, on met à jour le formulaire et on le soumet
+                 function maj_document_mediatheque_[(#CLE)] (id) {
+                   $.modalboxclose();
+                   $('input\[name="document_mediatheque_#CLE"\]').val(id);
+                   $('input\[name="choisir_document_mediatheque_#CLE"\]').click();
+                 };
+                </script>
+              </div>
             ]
           </div>
         ]
