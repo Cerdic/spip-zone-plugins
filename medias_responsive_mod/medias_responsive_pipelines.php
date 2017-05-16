@@ -26,5 +26,29 @@ function medias_responsive_mod_header_prive($flux) {
 
 function medias_responsive_mod_post_echappe_html_propre($txt) {
 	$txt = preg_replace (",</ul>[\r\n\ ]*<ul class=\"portfolio_ligne\">,", "", $txt);
+	$txt = preg_replace (",</ul>[\r\n\ ]*<ul class=\"portfolio_slide\">,", "", $txt);
+	
+	$txt = preg_replace_callback(
+			",<ul class=\"portfolio_slide\">(.*)<\/ul>,sU",
+			function($matches) {
+				$m = $matches[0];
+				
+				$rand = rand(0,100000);
+				if (preg_match_all(",<li>,s", $m, $res)){
+					$nombre = count($res[0]);
+				}
+				
+				$chk = "";
+				$nav = "";
+				for ( $i = 0; $i < $nombre; $i++) {
+					if ($i == 0) $checked=" checked";
+					else $checked = "";
+					$chk .= "<input type='radio' id='check_ligne_$rand$i' class='portfolio_slide_radio sel$i' name='check_ligne_$rand' value='$i'$checked>";
+					if ($i > 0) $nav .= "<label for='check_ligne_$rand".($i-1)."' class='label_ligne label_ligne_precedent label_ligne_$i'>&larr; <span>"._T('precedent')."</span></label>";
+					if ($i < $nombre-1) $nav .= "<label for='check_ligne_$rand".($i+1)."' class='label_ligne label_ligne_suivant label_ligne_$i'><span>"._T('suivant')."</span> &rarr;</label>";
+				}
+				return "<div class=\"portfolio_slide_container\">".$chk.$m.$nav."</div>";
+			},
+			$txt);
 	return $txt;
 }

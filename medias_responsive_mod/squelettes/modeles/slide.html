@@ -1,0 +1,39 @@
+<BOUCLE_document (DOCUMENTS) {id_document IN #ENV{id}} {mode?} {tout}>
+[(#REM)
+
+	Modele pour <slide>
+
+]
+
+[(#SET{a,span})]
+[(#LARGEUR|>={800}|oui)[(#SET{a,a})]]
+[(#HAUTEUR|>={800}|oui)[(#SET{a,a})]]
+
+<ul class="portfolio_slide">
+<li>
+<figure class='spip_document_#ID_DOCUMENT spip_documents_slide spip_documents [ (#ENV{class})] spip_lien_ok'
+ style="[max-width:(#ENV{largeur}|sinon{#FICHIER|largeur})px;]"[ data-w="(#ENV{largeur}|sinon{#FICHIER|largeur})"]>
+ 
+ 	<span class="precedent"></span>
+ 	<span class="suivant"></span>
+ 
+[<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"]>]
+[(#ENV{lien}|non)
+<[(#GET{a})] href="#FICHIER"[ title="(#TITRE|supprimer_numero|texte_backend)"] class="fond mediabox" type="#MIME_TYPE" data-photo-w="#LARGEUR" data-photo-h="#HAUTEUR" >
+]
+		[(#FICHIER|image_responsive{160/320/640/1200/1920})]
+
+[(#ENV{lien}|?{</a>,</[(#GET{a})]>})]
+
+	[(#TITRE|sinon{#DESCRIPTIF}|sinon{#CREDITS}|oui)
+	<figcaption class='spip_doc_intitules[ spip_doc_intitules_(#EVAL{_SPIP_DOC_INTITULES_ALIGN})]'>
+		[<div class='spip_doc_titre #EDIT{titre}'><strong>(#TITRE|propre|ptobr)</strong></div>]
+		[<div class='spip_doc_descriptif #EDIT{descriptif}'>(#DESCRIPTIF|propre|PtoBR)[(#NOTES|PtoBR)]</div>]
+		[<div class='spip_doc_credits  #EDIT{credits}'>(#CREDITS|propre|PtoBR)</div>]
+	</figcaption>
+	]
+</figure>
+</li></ul>
+
+</BOUCLE_document>
+#FILTRE{mini_html}
