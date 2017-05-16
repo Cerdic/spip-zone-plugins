@@ -43,5 +43,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'pauseOnHover' => 'Pause au survol',
     'pauseOnDotsHover' => 'Pause au survol des bulles de contrôle',
     'rtl' => 'Support du sens de lecture de droite à gauche (RTL)',
-    'explication_slidesToScroll' => 'Combien de diapositives défilent en même temps.'
+    'explication_slidesToScroll' => 'Combien de diapositives défilent en même temps.',
+    'adaptiveHeight' => 'Hauteur adaptée',
+    'explication_adaptiveHeight' => 'La hauteur est adaptée à chaque diapositive, ou bien la plus haute donne la hauteur de l\'ensemble.',
+    'arrows' => 'Flèches précédent/suivant',
+    'explication_arrows' => 'Utiliser la navigation précédent/suivant.'
 );

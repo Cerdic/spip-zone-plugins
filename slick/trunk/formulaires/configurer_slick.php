@@ -89,6 +89,7 @@ function formulaires_configurer_slick_saisies_dist() {
                     'options' => array(
                         'nom' => 'vertical',
                         'label' => _T('slick:vertical'),
+                        'defaut' => 'false',
                         'afficher_si' => '@fade@=="false"'
                     )
                 ),
@@ -108,6 +109,24 @@ function formulaires_configurer_slick_saisies_dist() {
                         'label' => _T('slick:centerPadding'),
                         'explication' => _T('slick:explication_centerPadding'),
                         'afficher_si' => '@fade@=="false" && @centerMode@=="true"'
+                    )
+                ),
+                array(
+                    'saisie' => 'true_false',
+                    'options' => array(
+                        'nom' => 'adaptiveHeight',
+                        'label' => _T('slick:adaptiveHeight'),
+                        'defaut' => 'false',
+                        'explication' => _T('slick:explication_adaptiveHeight')
+                    )
+                ),
+                array(
+                    'saisie' => 'true_false',
+                    'options' => array(
+                        'nom' => 'arrows',
+                        'label' => _T('slick:arrows'),
+                        'defaut' => 'false',
+                        'explication' => _T('slick:explication_arrows')
                     )
                 ),
                 array(
