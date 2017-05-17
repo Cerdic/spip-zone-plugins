@@ -49,7 +49,7 @@ La sélection des articles se fait via un mot-clef technique
             [(#ENV{caption,oui}|=={oui}|oui)
             <div class="caption[ (#ENV{caption_css})]">[<h3 class="title">(#TITRE)</h3>][<p class="description">(#INTRODUCTION|couper{200}|textebrut)</p>]</div>]
             [(#ENV{lien,oui}|=={oui}|oui)<a href="#URL_ARTICLE">]
-            <img [(#ENV{lazyLoad}|=={true}|oui)class="owl-lazy" data-]src="[IMG/(#LOGO_ARTICLE|fichier)]" alt="[(#TITRE|textebrut)]">
+            <img [(#ENV{lazyLoad}|=={true}|oui)class="owl-lazy" data-]src="[(#LOGO_ARTICLE||extraire_attribut{src})]" alt="[(#TITRE|textebrut)]">
             [(#ENV{lien,oui}|=={oui}|oui)</a>]
         </div>
     </BOUCLE_listItems>
