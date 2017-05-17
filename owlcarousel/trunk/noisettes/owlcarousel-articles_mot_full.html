@@ -12,7 +12,7 @@ La sélection des articles se fait via un mot-clef technique
 @param : navigation : true par defaut : affiche les boutons précédents suivants
 @param : caption_css : ajouter des css sur la description (par exemple : invisible).
 @param : autoPlay : true (false par défaut) : le carousel démarre automatiquement.
-@param : stopOnHover : true (false par défaut) : pause sur le rollHover
+@param : autoplayHoverPause : true (false par défaut) : pause sur le rollHover
 @param : lazyLoad : true (false par défaut) : ne charge que les images visibles pour optimiser le chargement sur périphériques mobiles.
 
 -->]
@@ -39,20 +39,20 @@ La sélection des articles se fait via un mot-clef technique
     
     [#(#ENV{id-carousel,demo})] .owl-slide img{
         display: block;
-        /*width: 100%;*/
+        width: 100%;
         height: auto;
     }
 </style>
-<div id="#ENV{id-carousel,demo}" class="owl-carousel">
-        <BOUCLE_listItems(ARTICLES){titre_mot=#ENV{titre_mot}}{tout_voir}>
-            <div class="owl-slide">
-                [(#ENV{caption,oui}|=={oui}|oui)
-                <div class="caption[ (#ENV{caption_css})]">[<h3 class="title">(#TITRE)</h3>][<p class="hidden-phone">(#DESCRIPTIF|textebrut)</p>]</div>]
-                [(#ENV{lien,oui}|=={oui}|oui)<a href="#URL_ARTICLE">]
-                <img [(#ENV{lazyLoad}|=={true}|oui)class="lazyOwl" data-]src="[IMG/(#LOGO_ARTICLE|fichier)]" alt="[(#TITRE|textebrut)]">
-                [(#ENV{lien,oui}|=={oui}|oui)</a>]
-            </div>
-        </BOUCLE_listItems>
+<div id="#ENV{id-carousel,demo}" class="owl-carousel owl-theme">
+    <BOUCLE_listItems(ARTICLES){titre_mot=#ENV{titre_mot}}>
+        <div class="owl-slide">
+            [(#ENV{caption,oui}|=={oui}|oui)
+            <div class="caption[ (#ENV{caption_css})]">[<h3 class="title">(#TITRE)</h3>][<p class="description">(#INTRODUCTION|couper{200}|textebrut)</p>]</div>]
+            [(#ENV{lien,oui}|=={oui}|oui)<a href="#URL_ARTICLE">]
+            <img [(#ENV{lazyLoad}|=={true}|oui)class="owl-lazy" data-]src="[IMG/(#LOGO_ARTICLE|fichier)]" alt="[(#TITRE|textebrut)]">
+            [(#ENV{lien,oui}|=={oui}|oui)</a>]
+        </div>
+    </BOUCLE_listItems>
 </div>
 <script>
 jQuery(function($){
@@ -60,9 +60,9 @@ jQuery(function($){
         [navigation : (#ENV{navigation,true}),]
         slideSpeed : 300,
         paginationSpeed : 400,
-        singleItem : true[,
-        autoPlay :(#ENV{autoPlay,false}),][
-        stopOnHover : (#ENV{stopOnHover,false}),][
+        items : 1[,
+        autoplay :(#ENV{autoplay,false}),][
+        autoplayHoverPause : (#ENV{autoplayHoverPause,false}),][
         lazyLoad : (#ENV{lazyLoad,false}),]
         navigationText : ["<:owlcarousel:prec:>","<:owlcarousel:suiv:>"]
     });
