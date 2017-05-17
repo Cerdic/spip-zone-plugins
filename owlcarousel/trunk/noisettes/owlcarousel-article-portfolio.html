@@ -1,0 +1,138 @@
+[(#REM)<!-- # OwlCarousel - Portfolio Articles
+
+
+Gallerie portfolio avec Owl Carousel
+@see - http://owlgraphic.com/owlcarousel/index.html#customizing
+
+
+@param : id-carousel : id unique du carousel
+@param : titre_mot : le titre du mot clef technique qui sélectionne les articles
+@param : caption : oui : Affiche la description de l'image.
+@param : navigation : true par defaut : affiche les boutons précédents suivants
+@param : caption_css : ajouter des css sur la description (par exemple : invisible).
+@param : autoPlay : true (false par défaut) : le carousel démarre automatiquement.
+@param : stopOnHover : true (false par défaut) : pause sur le rollHover
+@param : lazyLoad : true (false par défaut) : ne charge que les images visibles pour optimiser le chargement.
+
+-->]
+<style>
+    [#(#ENV{id-carousel,demo})] .owl-slide > .caption{
+        z-index: 100;
+        position: absolute;
+        left:55%;
+        width: 40%;
+        bottom:5%;
+    }
+    [#(#ENV{id-carousel,demo})] .owl-slide > .caption > .title{
+        background: #000;
+        color : #FFF;
+        padding: 5px;
+        width: auto;
+    }
+    [#(#ENV{id-carousel,demo})] .owl-slide > .caption > p {
+        background-color: rgba(88, 88, 88, 0.75) ;
+        /*float: right;*/
+        color: #FFF;
+        padding: 5px;
+    }
+    
+    [#(#ENV{id-carousel,demo})] .owl-slide img{
+        display: block;
+        /*width: 100%;*/
+        height: auto;
+        margin: 0 auto;
+    }
+    
+    .diapo_vignettes .owl-slide {
+        padding:.5em;
+        border: 1px solid silver;
+        border-radius: 3px;
+        height:110px;
+        margin-right: .5em;
+    }
+    .diapo_vignettes .owl-slide:hover,
+    .diapo_vignettes .owl-slide.active {
+        border: 1px solid blue;
+    }
+    .diapo_vignettes .owl-slide > a {
+        display: block;
+    }
+    
+</style>
+[(#REM) <!-- Visuel Grand -->]
+<div id="#ENV{id-carousel,demo}" class="owl-carousel">
+        <BOUCLE_kelArt(ARTICLES){id_article=#ENV{id_article}}>
+            <BOUCLE_listDocs(DOCUMENTS){id_article}{mode=document}{extension==jpg|png|gif}>
+            <div class="owl-slide">
+                [(#ENV{caption,oui}|=={oui}|oui)
+                <div class="caption[ (#ENV{caption_css})]">[<h3 class="title">(#TITRE)</h3>][<p class="hidden-phone">(#DESCRIPTIF|textebrut)</p>]</div>]
+                    <a href="#FICHIER" class="js-colorbox" rel="diaporama">
+                        <img [(#ENV{lazyLoad}|=={true}|oui)class="lazyOwl" data-]src="[(#FICHIER|image_reduire{600,400}|extraire_attribut{src})]" alt="[(#TITRE|textebrut)]">
+                    </a>
+            </div>
+            </BOUCLE_listDocs>
+        </BOUCLE_kelArt>
+</div>
+
+[(#REM) <!-- Vignettes --> ]
+<B_docs>
+<div class="diapo_vignettes">
+    <ul id="list-thumbnails" class="diapo_thumbnails owl-carousel">
+    <BOUCLE_docs(DOCUMENTS){id_article=#ENV{id_article}}{extension==jpg|png|gif}>
+        [<li class="owl-slide">
+            <a class="diapo_thumbnail[ (#ENV{doc}|=={#ID_DOCUMENT}|oui)active]"
+               href="[(#SELF|parametre_url{doc,#ID_DOCUMENT})]"
+               [ title="(#TITRE|couper{80}|texte_backend)"] data-target="#COMPTEUR_BOUCLE">
+            (#LOGO_DOCUMENT||image_reduire{100,100}|image_recadre{100,100,'center','transparent'}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})
+            </a>    
+        </li>]
+    </BOUCLE_docs>
+    </ul>
+</div>
+</B_docs>
+
+
+<script>
+jQuery(function($){
+    $("[#(#ENV{id-carousel,demo})]").owlCarousel({
+        navigation : false,
+        slideSpeed : 300,
+        pagination: false,
+        paginationSpeed : 400,
+        autoHeight:false,
+        singleItem : true[,
+        autoPlay :(#ENV{autoPlay,false}),][
+        stopOnHover : (#ENV{stopOnHover,false}),][
+        lazyLoad : (#ENV{lazyLoad,false}),]
+        navigationText : ["<:owlcarousel:prec:>","<:owlcarousel:suiv:>"]
+    });
+    
+    var owl = $("[#(#ENV{id-carousel,demo})]").data('owlCarousel');
+    
+    $('a.diapo_thumbnail').click(function(e){
+        e.preventDefault();
+        
+        var owlTarget = $(this).attr("data-target")-1;
+        owl.goTo(owlTarget);
+        
+        $("#list-thumbnails li.owl-slide").removeClass("active");
+        
+        $(this).parent().toggleClass('active');
+        
+    });
+    
+    // Carousel des vignettes
+    $("#list-thumbnails").owlCarousel({
+        items: 6,
+        navigation:false,
+        navigationText : ["<:owlcarousel:prec:>","<:owlcarousel:suiv:>"],
+        pagination:true,
+        paginationNumbers:true
+    });
+    
+    // Gallerie Colorbox
+    $("a.js-colorbox").colorbox({
+        rel:'diaporama',
+        });
+});
+</script>
