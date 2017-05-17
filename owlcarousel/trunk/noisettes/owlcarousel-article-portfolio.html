@@ -2,15 +2,14 @@
 
 Gallerie portfolio avec Owl Carousel
 
-
-
+@param : id_article
 @param : id-carousel : id unique du carousel
 @param : caption : oui : Affiche la description de l'image.
 @param : navigation : true par defaut : affiche les boutons précédents suivants
 @param : caption_css : ajouter des css sur la description (par exemple : invisible).
 @param : autoplay : true (false par défaut) : le carousel démarre automatiquement.
-@param : stopOnHover : true (false par défaut) : pause sur le rollHover
-@param : lazyload : true (false par défaut) : ne charge que les images visibles pour optimiser le chargement.
+@param : autoplayHoverPause : true (false par défaut) : pause sur le rollHover en mode autoplay
+@param : lazyLoad : true (false par défaut) : ne charge que les images visibles pour optimiser le chargement.
 
 -->]
 <style>
@@ -99,12 +98,12 @@ jQuery(function($){
     $("[#(#ENV{id-carousel,demo})]").owlCarousel({
         loop:true,
         margin:0,
-        items: 1,[
+        items: 1,
+        dots: true,[
         nav:(#ENV{navigation, false}),][
-        autoplay: (#ENV{autoplay}),]
-        autoplayHoverPause: true,
-        dots: true,
-        lazyLoad: true,
+        autoplay: (#ENV{autoplay}),][
+        autoplayHoverPause: (#ENV{autoplayHoverPause}),][
+        lazyLoad: (#ENV{lazyLoad}),]
         responsive:false,
         URLhashListener:true,
         startPosition: 'URLHash'
