@@ -81,19 +81,13 @@ function commande_inserer($id_parent=null, $champs=array()) {
 	include_spip('inc/autoriser');
 	if (autoriser('commander','',0,$id_auteur)){
 		// La date de tout de suite
-		$champs['date'] = date('Y-m-d H:i:s');
+		$champs['date'] = date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
 		
 		// Le statut en cours par défaut
 		if (!isset($champs['statut'])) {
 			$champs['statut'] = 'encours';
 		}
 
-		// La référence si elle n'est pas déjà donnée
-		if (!isset($champs['reference'])) {
-			$fonction_reference = charger_fonction('commandes_reference', 'inc/');
-			$champs['reference'] = $fonction_reference($champs['id_auteur']);
-		}
-		
 		// Envoyer aux plugins avant insertion
 		$champs = pipeline('pre_insertion',
 			array(
@@ -103,7 +97,7 @@ function commande_inserer($id_parent=null, $champs=array()) {
 				'data' => $champs
 			)
 		);
-		
+
 		// Si on veut insérer des échéances et que ce n'est pas déjà sérialisé, on sérialise TOUJOURS ce champ
 		if (isset($champs['echeances']) and @unserialize($champs['echeances']) === false) {
 			$champs['echeances'] = serialize($champs['echeances']);
@@ -111,6 +105,13 @@ function commande_inserer($id_parent=null, $champs=array()) {
 		
 		// Insérer l'objet
 		$id_commande = sql_insertq("spip_commandes", $champs);
+
+		// La référence si elle n'est pas déjà donnée : on attend d'avoir l'id_commande pour pouvoir generer un numero unique
+		if (!isset($champs['reference'])) {
+			$commandes_reference = charger_fonction('commandes_reference', 'inc/');
+			$champs['reference'] = $commandes_reference($id_auteur, $id_commande);
+			sql_updateq('spip_commandes', array('reference' => $champs['reference']), 'id_commande=' . intval($id_commande));
+		}
 
 		// Envoyer aux plugins après insertion
 		pipeline('post_insertion',

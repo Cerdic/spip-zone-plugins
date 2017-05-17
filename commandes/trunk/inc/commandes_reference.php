@@ -22,13 +22,23 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     $fonction_reference = charger_fonction('commandes_reference', 'inc/');
  *     ```
  *
- * @param string $id_auteur
- *     (inutilisé) identifiant de l'auteur
- * @return int
- *     Nombre de secondes écoulées depuis le 1er janvier 1970
+ * @param int $id_commande
+ * @param int $id_auteur
+ *     (optionnel) identifiant de l'auteur
+ * @return string
+ *     reference de la commande
 **/
-function inc_commandes_reference_dist($id_auteur=0){
-	return time();
-}
+function inc_commandes_reference_dist($id_commande, $id_auteur=0){
 
-?>
+	if ($date = sql_getfetsel('date', 'spip_commandes', 'id_commande='.intval($id_commande))) {
+		$t = strtotime($date);
+	}
+	else {
+		$t = $_SERVER['REQUEST_TIME'];
+	}
+
+	// format YYYYMMDDNNNNNN
+	$reference = date('Ymd', $t) . str_pad(intval($id_commande), 6, '0', STR_PAD_LEFT);
+
+	return $reference;
+}
