@@ -1,13 +1,13 @@
 <paquet
 	prefix="medias_responsive_mod"
 	categorie="outil"
-	version="1.9.0"
+	version="1.8.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="imgs/medias_responsive.png"
 >
 
-	<nom>Insertion avancée d'images</nom>
+	<nom>Médias compatibles responsive et modifiés</nom>
 	<!-- Varier les mises en page selon les rubriques, les articles... -->
 
 	<auteur lien="http://www.paris-beyrouth.org">Arnaud Martin / Paris-Beyrouth</auteur>
