@@ -12,7 +12,7 @@ Gallerie portfolio avec Owl Carousel
 @param : caption_css : ajouter des css sur la description (par exemple : invisible).
 @param : autoPlay : true (false par défaut) : le carousel démarre automatiquement.
 @param : stopOnHover : true (false par défaut) : pause sur le rollHover
-@param : lazyLoad : true (false par défaut) : ne charge que les images visibles pour optimiser le chargement.
+@param : lazyload : true (false par défaut) : ne charge que les images visibles pour optimiser le chargement.
 
 -->]
 <style>
@@ -101,7 +101,6 @@ jQuery(function($){
     $("[#(#ENV{id-carousel,demo})]").owlCarousel({
         loop:true,
         margin:0,
-        //autoWidth:true,
         items: 1,
         nav:false,
         dots: true,
@@ -110,19 +109,7 @@ jQuery(function($){
         startPosition: 'URLHash'
     });
     
-    var owl = $("[#(#ENV{id-carousel,demo})]").data('owlCarousel');
-    
-    //$('a.diapo_thumbnail').click(function(e){
-    //    e.preventDefault();
-    //    
-    //    var owlTarget = $(this).attr("data-target")-1;
-    //    owl.goTo(owlTarget);
-    //    
-    //    $("#list-thumbnails li.owl-slide").removeClass("active");
-    //    
-    //    $(this).parent().toggleClass('active');
-    //    
-    //});
+   
     
     //// Carousel des vignettes
     $("#list-thumbnails").owlCarousel({
