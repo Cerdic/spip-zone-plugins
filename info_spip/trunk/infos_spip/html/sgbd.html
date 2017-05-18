@@ -14,48 +14,41 @@
 ]   [(#SET{bdd,[(#EVAL{'_FILE_CONNECT'}|file_get_contents|match{"spip_connect_db\((.*)\);"}|explode{","})]})]
 	[(#SET{bdd_host,#GET{bdd}|table_valeur{0}|explode{"'"}|table_valeur{1}})]
 	[(#SET{bdd_port,#GET{bdd}|table_valeur{1}|explode{"'"}|table_valeur{1}})]
-[(#REM)
-	[(#SET{bdd_login,#GET{bdd}|table_valeur{2}|explode{"'"}|table_valeur{1}})]
-	[(#SET{bdd_pass,#GET{bdd}|table_valeur{3}|explode{"'"}|table_valeur{1}})]
-]
 	[(#SET{bdd_nom,#GET{bdd}|table_valeur{4}|explode{"'"}|table_valeur{1}})]
 	[(#SET{bdd_type,#GET{bdd}|table_valeur{5}|explode{"'"}|table_valeur{1}})]
 	[(#SET{bdd_prefixe,#GET{bdd}|table_valeur{6}|explode{"'"}|table_valeur{1}})]
-[(#REM)
-	[(#SET{bdd_auth,#GET{bdd}|table_valeur{7}|explode{"'"}|table_valeur{1}})]
-]
-<div class="fieldset sgbd_fieldset">
+<div class="fieldset sgbd_fieldset" id="[(#SQUELETTE|explode{'/'}|array_pop|replace{'.html',''})]">
 	<h3 class="legend titrem"><:info_spip:sgbd_fieldset_label:></h3>
 </div>
 
 <div class="champ contenu_sgbd_serveur">
 	<div class="label visible"><:info_spip:sgbd_serveur_label:></div>
-	<div dir='#LANG_DIR' class='sgbd_nom span'>#GET{bdd_host}</div>
+	<div dir='#LANG_DIR' class='sgbd_nom span'>[(#VAL{host}|sgbd_get_infos|sinon{#GET{bdd_host}})]</div>
 </div>
 
 <div class="champ contenu_sgbd_port">
 	<div class="label visible"><:info_spip:sgbd_port_label:></div>
-	<div dir='#LANG_DIR' class='sgbd_nom span'>#GET{bdd_port}</div>
+	<div dir='#LANG_DIR' class='sgbd_nom span'>[(#VAL{port}|sgbd_get_infos|sinon{#GET{bdd_port}})]</div>
 </div>
 
 <div class="champ contenu_sgbd_type">
 	<div class="label visible"><:info_spip:sgbd_type_label:></div>
-	<div dir='#LANG_DIR' class='sgbd_type span'>#GET{bdd_type}</div>
+	<div dir='#LANG_DIR' class='sgbd_type span'>[(#VAL{type}|sgbd_get_infos|sinon{#GET{bdd_type}})]</div>
 </div>
 
 <div class="champ contenu_sgbd_version">
 	<div class="label visible"><:info_spip:sgbd_version_label:></div>
-	<div dir='#LANG_DIR' class='sgbd_version span'>#EVAL{sql_version()}</div>
+	<div dir='#LANG_DIR' class='sgbd_version span'>[(#VAL{version}|sgbd_get_infos)]</div>
 </div>
 
 <div class="champ contenu_sgbd_nom">
 	<div class="label visible"><:info_spip:sgbd_nom_label:></div>
-	<div dir='#LANG_DIR' class='sgbd_nom span'>#GET{bdd_nom}</div>
+	<div dir='#LANG_DIR' class='sgbd_nom span'>[(#VAL{db}|sgbd_get_infos|sinon{#GET{bdd_nom}})]</div>
 </div>
 
 <div class="champ contenu_sgbd_prefixe">
 	<div class="label visible"><:info_spip:sgbd_prefixe_label:></div>
-	<div dir='#LANG_DIR' class='sgbd_prefixe span'>#GET{bdd_prefixe}</div>
+	<div dir='#LANG_DIR' class='sgbd_prefixe span'>[(#VAL{prefixe}|sgbd_get_infos|sinon{#GET{bdd_prefixe}})]</div>
 </div>
 
 <div class="champ contenu_sgbd_charset">

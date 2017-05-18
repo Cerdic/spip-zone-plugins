@@ -21,5 +21,3 @@ function info_spip_affiche_gauche($flux) {
 
 	return $flux;
 }
-
-?>

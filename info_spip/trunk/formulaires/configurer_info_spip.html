@@ -21,7 +21,7 @@
 					explication=<:info_spip:type_site_explication:>})]
 
 				[(#SET{modules,#ARRAY})]
-				<BOUCLE_module_info (DATA) {source table, (#VAL{'html'}|lister_noisettes_info_spip)}>[(#SET{nom,[(#VAL{'info_spip:'}|concat{#VALEUR,'_nom'}|_T)]})]
+				<BOUCLE_module_info (DATA) {source table, (#VAL{'html'}|lister_noisettes_info_spip)}>[(#SET{nom,[(#VALEUR|nommer_noisettes_info_spip)]})]
 					[(#SET{modules,#GET{modules}|array_merge{#ARRAY{#VALEUR,#GET{nom}}}})]
 				</BOUCLE_module_info>
 				[(#SAISIE{checkbox, modules,

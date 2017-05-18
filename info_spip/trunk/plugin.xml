@@ -2,7 +2,7 @@
 	<nom><multi>[fr]Info SPIP</multi></nom>
 	<icon>prive/themes/spip/images/info_spip-32.png</icon>
 	<auteur>Teddy Payet</auteur>
-	<version>0.10.0</version>
+	<version>0.11.0</version>
 	<version_base>0.1.0</version_base>
 	<etat>stable</etat>
 	<description><multi>
