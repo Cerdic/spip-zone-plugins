@@ -28,8 +28,8 @@ function slick_insert_head($flux) {
 // Ajouter le css de slick
 function slick_insert_head_css($flux) {
     $flux .= '<link rel="stylesheet" href="'.find_in_path('lib/slick/slick.css').'" type="text/css" />';
-
     $flux .= '<link rel="stylesheet" href="'.find_in_path('lib/slick/slick-theme.css').'" type="text/css" />';
+    $flux .= '<link rel="stylesheet" href="'.find_in_path('css/slick-spip.css').'" type="text/css" />';
 
     return $flux;
 }
