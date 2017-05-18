@@ -11,7 +11,7 @@ function _getComputedTranslateX(obj)
 
 function activer_porfolio_slide() {
 
-	$(".portfolio_slide").on("mousedown touchstart MSPointerDown pointerdown", function(e) {
+	$(".portfolio_slide").on("touchstart MSPointerDown pointerdown", function(e) {
 		var event = e.originalEvent;
 		if (event.pointerType && (event.pointerType == event.MSPOINTER_TYPE_MOUSE || event.pointerType == "mouse" )) return;
 
@@ -20,7 +20,7 @@ function activer_porfolio_slide() {
 		$(this).addClass("notrans");
 		this.margin_left_init = _getComputedTranslateX(this);		
 		
-	}).on("mousemove touchmove MSPointerMove pointermove", function(e) {
+	}).on("touchmove MSPointerMove pointermove", function(e) {
 		var event = e.originalEvent;
 		if (event.pointerType && (event.pointerType == event.MSPOINTER_TYPE_MOUSE || event.pointerType == "mouse" )) return;
 		//event.preventDefault();
@@ -36,7 +36,7 @@ function activer_porfolio_slide() {
 		
 			$(this).css("transform", "translate3d("+ decal +"px, 0,0)");
 		
-	}).on("mouseup touchend MSPointerUp pointerup", function(e) {
+	}).on("touchend MSPointerUp pointerup", function(e) {
 		var event = e.originalEvent;
 		if (event.pointerType && (event.pointerType == event.MSPOINTER_TYPE_MOUSE || event.pointerType == "mouse" )) return;
 
