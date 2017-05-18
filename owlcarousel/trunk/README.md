@@ -1,5 +1,6 @@
 # OwlCarousel
 
+
 ## SOURCES :
 
 http://www.owlgraphic.com/owlcarousel/#more-demos
@@ -35,6 +36,22 @@ Affiche le logo de l'article en fond et le titre ainsi que #INTRODUCTION
 		{lazyLoad=true}
 		{env}
 		{ajax} />
+```
+
+### Afficher une selection_editoriale
+
+```
+
+<INCLURE{fond=noisettes/owlcarousel-selections_editoriales}
+	{identifiant='sommaire'}
+	{id-carousel=sommaire_hero}
+	{navigation=true}
+	{autoplay=true}
+	{autoplayHoverPause=true}
+	{lazyLoad=true}
+	{env}
+	{ajax} />
+	
 ```
 
 ## TRAVAUX :

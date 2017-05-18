@@ -13,12 +13,12 @@
 [(#SET{tri, #ENV{selection_tri,'rang'}})]
 <BOUCLE_listSelections(SELECTIONS){identifiant=#GET{identifiant}}>
     <B_listContenus>
-    <div class="selection[ (#CHAMP_SQL{css}|attribut_html)]">
+    <div class="selection js-cover-carousel owl-carousel owl-theme[ (#CHAMP_SQL{css}|attribut_html)]">
         <BOUCLE_listContenus(SELECTIONS_CONTENUS){id_selection}{par #GET{tri}}>
             <article  class="contenu[ (#CHAMP_SQL{css}|attribut_html)]">
                     [<div class="contenu-thumbnail">(#LOGO_SELECTIONS_CONTENU)</div>]
                     <div class="contenu-content entry article hentry">
-                        <div class="titre entry-title">
+                        <div class="title entry-title">
                             [(#GET{link_title}|=={true}|oui)<a href="#URL"]
                             <h2[ class="(#EDIT{titre})"]>[(#TITRE)]</h2>
                             [(#GET{link_title}|=={true}|oui)</a>]
@@ -41,11 +41,12 @@ jQuery(function($){
     $('.js-cover-carousel').owlCarousel({
         loop:true,
         margin:0,
-        //autoWidth:true,
         items: 1,
-        nav:false,
-        dots: true,
-        autoplay: true,
+        dots: true,[
+        nav:(#ENV{navigation, false}),][
+        autoplay: (#ENV{autoplay}),][
+        autoplayHoverPause: (#ENV{autoplayHoverPause}),][
+        lazyLoad: (#ENV{lazyLoad}),]
         responsive:false
     });
 });
