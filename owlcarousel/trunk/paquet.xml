@@ -1,8 +1,8 @@
 <paquet
 	prefix="owlcarousel"
 	categorie="multimedia"
-	version="1.0.0"
-	etat="dev"
+	version="1.0.1"
+	etat="test"
 	compatibilite="[3.0.5;3.1.*]"
 	logo="prive/themes/spip/images/owlcarousel-64.png"
 	documentation="https://owlcarousel2.github.io/OwlCarousel2/"

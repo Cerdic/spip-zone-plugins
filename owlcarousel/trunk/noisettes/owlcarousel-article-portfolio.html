@@ -93,7 +93,7 @@ Gallerie portfolio avec Owl Carousel
 </B_docs>
 
 
-<script>
+<script type="text/javascript">
 jQuery(function($){
     $("[#(#ENV{id-carousel,demo})]").owlCarousel({
         loop:true,
@@ -109,15 +109,13 @@ jQuery(function($){
         startPosition: 'URLHash'
     });
     
-   
-    
-    //// Carousel des vignettes
     $("#list-thumbnails").owlCarousel({
         items: 6,
         navigation:false,
         navigationText : ["<:owlcarousel:prec:>","<:owlcarousel:suiv:>"],
         pagination:true,
-        paginationNumbers:true
+        paginationNumbers:true,
+        responsive: #ENV*{thumbnails_responsive, false}
     });
     
     // Gallerie Colorbox
