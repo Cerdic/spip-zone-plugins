@@ -1,0 +1,51 @@
+.lat .formulaire_spip_installer_fonds {
+	padding: 0;
+	xoverflow: hidden;
+	
+	p.boutons {
+		margin: 0;
+	}
+	
+	ul {
+		margin: 0;
+		
+		li {
+			padding: 5px;
+			overflow: hidden;
+			font-size: 90%;
+			
+
+			.contenu_li {
+				padding: 5px;
+			}
+			button.delete {
+				position: absolute; 
+				top: 5px; 
+				right: 10px; 
+				padding: 2px 5px;
+				-spip-border-radius: 4px;
+				background-color: rgba(255,255,255,0.6);
+				color: red;
+				
+				img {
+					vertical-align: middle;
+					display: inline;
+				}
+			}
+
+		}
+		li.img_fond {
+			border-top: 1px solid #ccc; 
+			border-bottom: 1px solid #ccc; 
+			position: relative; 
+			padding: 0px;
+			a {
+				display: block !important;
+			}
+			img {
+				display: block;
+			}
+			
+		}
+	}
+}

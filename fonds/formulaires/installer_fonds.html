@@ -1,0 +1,138 @@
+#CACHE{0}
+<BOUCLE_principale(ARTICLES){id_article=#ENV{id_article}}{statut!=rien}>
+<div class="formulaire_spip formulaire_spip_installer_fonds">
+<form method="post" action="#ENV{action}"  enctype='multipart/form-data'>
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+	
+	<ul style="[background-color:#(#ENV{fond_couleur});  [color: #(#FOND_COULEUR|sinon{ffffff}|couleur_extreme|couleur_inverser)]]">
+
+		[(#REM)  
+			Ici insérer un bouton invisible mais non caché, 
+			pour «attraper» la validation des champs texte sans  
+			supprimer les images
+		]
+		<li style="margin: 0; padding: 0; margin-top: -1px; width: 1px; height: 1px; overflow: hidden;"><button type="submit" name="rien2" style="xdisplay: none;"></button></li>
+
+	
+	
+		[(#IMG_HAUT|oui)
+		<li style="position: relative; padding: 0">
+			[<img src="(#IMG_HAUT|image_reduire{300,0}|extraire_attribut{src}|timestamp)" style="width: 100%; display: block;">]
+			
+			<button type="submit" class="button link delete" name="supprimer_img_haut" value="X">Supprimer [<img src="(#CHEMIN{themes/spip/images/supprimer-12.png})" alt="X" width="12" height="12">]</button>
+		</li>
+		]
+		[(#IMG_HAUT|non)
+		<li>
+			<label for="img_haut" style="[color: #(#FOND_COULEUR|sinon{ffffff}|couleur_extreme|couleur_inverser)]">Image du haut :</label>
+			<input type="file" name="img_haut" accept="image/jpeg">
+		</li>
+		]
+
+
+		[(#FOND_HAUT|oui)
+		<li style="position: relative; padding: 0;">
+			[<img src="(#FOND_HAUT|image_reduire{300,0}|extraire_attribut{src}|timestamp)" style="width: 100%; display: block;">]
+			<button type="submit" class="button link delete" name="supprimer_fond_haut" value="X">Supprimer [<img src="(#CHEMIN{themes/spip/images/supprimer-12.png})" alt="X" width="12" height="12">]</button>
+		</li>
+		]
+		[(#FOND_HAUT|non)
+		<li>
+			<label for="fond_haut" style="[color: #(#FOND_COULEUR|sinon{ffffff}|couleur_extreme|couleur_inverser)]">Dégradé du haut :</label>
+			<input type="file" name="fond_haut" accept="image/jpeg">
+		</li>
+		]
+		
+		[(#IMG_HAUT|sinon{#FOND_HAUT}|oui)
+		<li>
+			<label for="credit_haut" style="[color: #(#FOND_COULEUR|sinon{ffffff}|couleur_extreme|couleur_inverser)]">Crédits de l’image du haut&nbsp;:</label>
+			<input type="text" name="credit_haut" value="#ENV{credit_haut}" style="width: 98%;">
+		</li>
+		]
+		<li>
+			<label for="fond_couleur" style="[color: #(#FOND_COULEUR|sinon{ffffff}|couleur_extreme|couleur_inverser)]">Couleur du fond&nbsp;:</label>
+			<br>
+				<button style="float: right; background: [(#ENV{fond_couleur}|couleur_extreme|couleur_inverser|couleur_rgba{0.3})]; border: 0; border-radius: 50%; padding: 5px; margin-top: -5px;" type="submit" class="button link" name="pipette_fond" value="P">
+					[<img src="(#CHEMIN{imgs/pipette.png})" alt="P" width="24" height="24">]
+				</button>
+
+
+			#<input name="fond_couleur" type="text" value="#ENV{fond_couleur}" style="font-size: 1.3em; max-width: 100px;" maxlength="6">
+		</li>
+
+		[(#IMG_BAS|sinon{#FOND_BAS}|oui)
+		<li>
+			<label for="credit_bas" style="[color: #(#FOND_COULEUR|sinon{ffffff}|couleur_extreme|couleur_inverser)]">Crédits de l’image du bas&nbsp;:</label>
+			<input type="text" name="credit_bas" value="#ENV{credit_bas}" style="width: 98%;">
+		</li>
+		]
+		
+
+		[(#FOND_BAS|oui)
+		<li style="position: relative; padding: 0;">
+			[<img src="(#FOND_BAS|image_reduire{300,0}|extraire_attribut{src}|timestamp)" style="width: 100%; display: block;">]
+			<button type="submit" class="button link delete" name="supprimer_fond_bas" value="X">Supprimer [<img src="(#CHEMIN{themes/spip/images/supprimer-12.png})" alt="X" width="12" height="12">]</button>
+		</li>
+		]
+		[(#FOND_BAS|non)
+		<li>
+			<label for="fond_bas" style="[color: #(#FOND_COULEUR|sinon{ffffff}|couleur_extreme|couleur_inverser)]">Dégradé du bas&nbsp;:</label>
+			<input type="file" name="fond_bas" accept="image/jpeg">
+		</li>
+		]
+
+		[(#IMG_BAS|oui)
+		<li style="position: relative; padding: 0">
+			[<img src="(#IMG_BAS|image_reduire{300,0}|extraire_attribut{src}|timestamp)" style="width: 100%; display: block;">]
+			
+			<button type="submit" class="button link delete" name="supprimer_img_bas" value="X">Supprimer [<img src="(#CHEMIN{themes/spip/images/supprimer-12.png})" alt="X" width="12" height="12">]</button>
+		</li>
+		]
+		[(#IMG_BAS|non)
+		<li>
+			<label for="img_bas" style="[color: #(#FOND_COULEUR|sinon{ffffff}|couleur_extreme|couleur_inverser)]">Image du bas&nbsp;:</label>
+			<input type="file" name="img_bas" accept="image/jpeg">
+		</li>
+		]
+
+		<li class="img_fond">
+			[<a href="[(#IMG_FOND|extraire_attribut{src}|timestamp)]" class="mediabox cboxElement hasbox" style="display: block;"><img src="(#IMG_FOND|image_reduire{300,0}|extraire_attribut{src}|timestamp)" style="width: 100%; display: block;"></a>]
+			
+			[(#IMG_FOND|oui)
+					<button type="submit" class="button link delete" name="supprimer_img_fond" value="X">Supprimer [<img src="(#CHEMIN{themes/spip/images/supprimer-12.png})" alt="X" width="12" height="12">]</button>
+			
+			]
+			[(#IMG_FOND|non)
+				<div class="contenu_li">
+				<label for="fond_bas" style="[color: #(#FOND_COULEUR|sinon{ffffff}|couleur_extreme|couleur_inverser)]"><b>ou</b> Image de fond&nbsp;:</label>
+				<input type="file" name="img_fond" accept="image/jpeg,image/svg+xml">
+				</div>
+			]
+		</li>
+
+		<li>
+			<div style="[color: #(#FOND_COULEUR|sinon{ffffff}|couleur_extreme|couleur_inverser)]">Format du pavé&nbsp;:</div>
+			<div>
+				<input type="radio" name="remplir_vertical" value="non" [(#REMPLIR_VERTICAL|=={non}|oui)checked="checked"] [(#REMPLIR_VERTICAL|=={''}|oui)checked="checked"]> Taille automatique
+			</div>
+			<div>
+				<input type="radio" name="remplir_vertical" value="oui" [(#REMPLIR_VERTICAL|=={oui}|oui)checked="checked"]> Remplir l’écran
+			</div>
+			<div>
+				<input type="radio" name="remplir_vertical" value="img" [(#REMPLIR_VERTICAL|=={img}|oui)checked="checked"]> Proportions de l’image
+			</div>
+			
+			
+		</li>
+
+
+			
+	</ul>
+	<p class="boutons">
+		<input type='submit' class='submit' name='' value='Enregistrer' />
+	</p>
+
+</form>
+</div>
+</BOUCLE_principale>
