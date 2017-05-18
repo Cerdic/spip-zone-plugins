@@ -5,6 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="imgs/medias_responsive.png"
+	documentation="http://www.paris-beyrouth.org/Plugin-SPIP-Insertion-avancee-d-images"
 >
 
 	<nom>Médias compatibles responsive et modifiés</nom>
