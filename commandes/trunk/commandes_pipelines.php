@@ -488,6 +488,7 @@ function commandes_pre_edition($flux){
 		AND $flux['args']['action'] == 'instituer'
 		AND $flux['data']['statut'] == 'paye') {
 
+		/*
 		$id_commande = $flux['args']['id_objet'];
 
 		$transaction = sql_fetsel('id_transaction, transaction_hash, statut', 'spip_transactions', 'id_commande='.intval($id_commande));
@@ -498,6 +499,7 @@ function commandes_pre_edition($flux){
 			include_spip('inc/headers');
 			redirige_url_ecrire('payer' , $arguments);
 		}
+		*/
 	}
 	return $flux;
 }
