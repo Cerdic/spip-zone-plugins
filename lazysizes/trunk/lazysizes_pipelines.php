@@ -34,7 +34,6 @@ function lazysizes_insert_head_css($head) {
  * function lazysizes_insert_head_public
  * @param $flux
  */
-
 function lazysizes_insert_head_public($flux) {
 	include_spip('inc/config');
 	$lazy_options = lire_config('lazysizes/options');

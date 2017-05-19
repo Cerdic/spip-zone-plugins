@@ -26,6 +26,52 @@ Il inclu aussi un système de plugin, permettant d'étendre ses fonctionnalitée
 
 ## Pourquoi LazySize
 
+
+Lazysizes est conçut différement des autres scripts de lazyload d'image.
+
+Il detecte automatiquement les changement de visibilité affectant l'élément courrant a précharger
+ainsi que les suivant, et ce dans n'importe quel environement :
+
+Le script fonctionne de manière autonome, auto initialisé, auto configuré,
+de manière universelle, désactivant ou adaptant les composants future a précharger images ou iframes
+en fonction de leur visibilité, que ce soit via un défilement utilisateur,
+une animation css déclenchée par un changement d'état (:hover)
+ou par un événement/action js (carousel, slider, masonry, isotope, filtrage, Ajax).
+
+Il fonctionne aussi automatiquement en conjonction avec n'importe quel JS/CSS/front end framework
+(jQuery mobile, Bootstrap, Backbone, Angular, React, Ember (voir si besoin l'extension attrchange/re-initialization )).
+
+
+**À l'épreuve du futur** :
+
+Inclue nativement le chargement différé sur les images responsives picture/srcset.
+
+**Separation of concerns** :
+
+For responsive image support it adds an automatic sizes calculation as also alias names for media queries feature.
+There is also no JS change needed if you add a scrollable container with CSS (overflow: auto)
+or create a mega menu containing images.
+
+**Performance** :
+
+It's based on highly efficient, best practice code (runtime and network)
+to work jank-free at 60fps and can be used with hundreds of images/iframes on CSS and JS-heavy pages or webapps.
+	
+**Extendable** :
+
+It provides JS and CSS hooks to extend lazysizes with any kind of lazy loading, lazy instantiation,
+in view callbacks or effects (see also the available plugins/snippets).
+
+**Intelligent prefetch/Intelligent resource prioritization** :
+
+lazysizes prefetches/preloads near the view assets to improve user experience,
+but only while the browser network is idling (see also expand, expFactor and loadMode options).
+This way in view elements are loaded faster and near of view images are preloaded lazily before they come into view.
+
+**Lightweight, but mature solution**:
+
+lazysizes has the right balance between a lightweight and a fast, reliable solution.
+
 **Amélioration SEO**:
 
 Lazysize ne masque pas les images/ressources à google ou aux autre robots des moteurs de recherche.
@@ -41,6 +87,7 @@ dans la page et révèle dans ce cas les contenus/ressources immédiatement.
 ### respimg polyfill plugin
 
 Polyfill alternatif léger pour les images responsives (picture et image src-set).
+
 
 ### OPTIMUMX plugin
 
