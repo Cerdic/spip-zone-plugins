@@ -4,7 +4,7 @@
 	version="0.0.4"
 	etat="dev"
 	compatibilite="[2.0.0;3.2.*]"
-	logo=""
+	logo="traduire-texte-32.png"
 	documentation="https://contrib.spip.net/Traduire-texte"
 	schema="0.0.1"
 >
