@@ -12,6 +12,8 @@ function exec_mutualisation_dist() {
 	$memory_limit = strtolower(ini_get('memory_limit'));
 
 	$plnum = $lsplugs = $versionplug = array();
+	$adminplugin = $compression = '';
+	$cntplugins = 0;
 
 	include_spip('inc/minipres');
 	include_spip('inc/filtres');
@@ -208,10 +210,10 @@ function exec_mutualisation_dist() {
 				. "\n"
 				. '</tr>'
 				. "\n";
-			if (isset($plnum[count($c)])) {
-				$plnum[count($c)] .= $ligne;
+			if (isset($plnum[intval(count($c))])) {
+				$plnum[intval(count($c))] .= $ligne;
 			} else {
-				$plnum[count($c)] = $ligne;
+				$plnum[intval(count($c))] = $ligne;
 			}
 		}
 		krsort($plnum);
@@ -391,7 +393,7 @@ function test_upgrade_site($meta) {
 	if ($GLOBALS['spip_version_base'] != str_replace(',', '.', $meta['version_installee'])) {
 		$secret = $meta['version_installee'] . '-' . (isset($meta['popularite_total']) ? $meta['popularite_total'] : '0');
 		$secret = md5($secret);
-		$adresse_site = isset($meta['adresse_site']) ? $meta['adresse_site'] : '';
+		$adresse_site = isset($meta['adresse_site']) ? $meta["adresse_site"] : '';
 
 		return <<<EOF
 <form action='$adresse_site/ecrire/index.php?exec=mutualisation' method='post' class='upgrade' target='_blank'>
