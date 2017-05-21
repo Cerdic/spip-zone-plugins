@@ -1083,6 +1083,8 @@ function noizetier_bloc_compter_noisettes($identifiant) {
 /**
  * Retourne la liste des pages, des compositions explicites et des compositions virtuelles.
  * Chaque page est fournie avec l'ensemble de sa configuration.
+ * Si le plugin Compositions n'est pas actif, les compositions explicites ou virtuelles ne sont
+ * pas listées.
  *
  * @uses noizetier_informer_page()
  * @api
@@ -1111,10 +1113,12 @@ function noizetier_page_repertorier() {
 					// -- celles du privé situes dans prive/contenu
 					// -- page liée au plugin Zpip en v1
 					// -- z_apl liée aux plugins Zpip v1 et Zcore
-					// -- TODO : les compositions explicites si le plugin Compositions n'est pas activé
+					// -- les compositions explicites si le plugin Compositions n'est pas activé
 					if ((substr($dossier, -13) != 'prive/contenu')
 					and (($page != 'page') or !defined('_DIR_PLUGIN_Z'))
-					and (($page != 'z_apl') or (!defined('_DIR_PLUGIN_Z') and !defined('_DIR_PLUGIN_ZCORE')))) {
+					and (($page != 'z_apl') or (!defined('_DIR_PLUGIN_Z') and !defined('_DIR_PLUGIN_ZCORE')))
+					and (defined('_DIR_PLUGIN_COMPOSITIONS')
+						or (!defined('_DIR_PLUGIN_COMPOSITIONS') and !noizetier_page_est_composition($page)))) {
 						if ($configuration = noizetier_page_informer($page, '', $options)) {
 							// On n'inclue la page que si les plugins qu'elle nécessite explicitement dans son
 							// fichier de configuration sont bien tous activés.
@@ -1137,7 +1141,8 @@ function noizetier_page_repertorier() {
 				}
 			}
 
-			// On ajoute les compositions virtuelles qui ne sont définies que dans une meta propre au noiZetier.
+			// Si le plugin Compositions est activé, on ajoute les compositions virtuelles
+			// qui ne sont définies que dans une meta propre au noiZetier.
 			if (defined('_DIR_PLUGIN_COMPOSITIONS')) {
 				include_spip('inc/config');
 				$options['compositions'] = lire_config('noizetier_compositions', array());
@@ -1276,7 +1281,7 @@ function noizetier_page_informer($page, $information = '', $options =array()) {
 			$description['nom'] = $page;
 			$description['icon'] = 'img/ic_page.png';
 			$description['blocs'] = $options['blocs_defaut'];
-		} elseif (defined('_DIR_PLUGIN_COMPOSITIONS')) {
+		} else {
 			// 2- la page est une composition du noizetier
 			if (empty($options['compositions'])) {
 				include_spip('inc/config');
@@ -1364,6 +1369,24 @@ function noizetier_page_composition($page) {
 	$composition = isset($composition[1]) ? $composition[1] : '';
 
 	return $composition;
+}
+
+/**
+ * Détermine, à partir de son identifiant, si la page est une composition.
+ *
+ * @param string $page
+ * 		L'identifiant de la page.
+ *
+ * @return boolean
+ *      `true` si la page est une composition, `false` sinon.
+ */
+function noizetier_page_est_composition($page) {
+	$est_composition = false;
+	if (strpos($page, '-') !== false) {
+		$est_composition = true;
+	}
+
+	return $est_composition;
 }
 
 // --------------------------------------------------------------------

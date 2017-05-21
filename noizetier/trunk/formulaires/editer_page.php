@@ -75,9 +75,9 @@ function formulaires_editer_page_charger_dist($page, $edition, $description_page
 
 	// Ajout  de la liste des blocs configurables afin de choisir de possibles exclusions.
 	// En outre, on initialise les blocs exclus par défaut qui coincident
-	// pour une modification, à la liste des blocs exclus de la composition en cours de modification
-	// pour une duplication ou une création de composition, à la liste des blocs exclus de la source.
-	// Ainsi cette liste est toujours l'iverse de l'index [blocs] de l'argument $description_page.
+	// -- pour une modification, à la liste des blocs exclus de la composition en cours de modification
+	// -- pour une duplication ou une création de composition, à la liste des blocs exclus de la source.
+	// Ainsi cette liste est toujours l'inverse de l'index [blocs] de l'argument $description_page.
 	if ($valeurs['editable']) {
 		$blocs = noizetier_bloc_repertorier();
 		foreach ($blocs as $_bloc => $_infos) {
