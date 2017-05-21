@@ -167,7 +167,7 @@ $(document).ready(function() {
 						data-cycle-title="[(#TITRE|attribut_html)]" data-cycle-desc="[(#DESCRIPTIF|attribut_html)]">
 		#SET{fermer_a,oui}]
 	
-			<img class="no_image_filtrer no-adapt-img" src="(#FICHIER|image_reduire{#GET{largeurmax},#GET{hauteurmax}}|image_recadre{#GET{largeurmax},#GET{hauteurmax},top center,#GET{backgroundcolor}}|extraire_attribut{src})" alt="[(#TITRE|attribut_html)][ &copy;(#CREDITS)]" 
+			<img class="filtre_inactif no_image_filtrer no-adapt-img" src="(#FICHIER|image_reduire{#GET{largeurmax},#GET{hauteurmax}}|image_recadre{#GET{largeurmax},#GET{hauteurmax},top center,#GET{backgroundcolor}}|extraire_attribut{src})" alt="[(#TITRE|attribut_html)][ &copy;(#CREDITS)]" 
 				 data-cycle-title="[(#TITRE|attribut_html)]" data-cycle-desc="[(#DESCRIPTIF|attribut_html)]"
 			/>
 			
