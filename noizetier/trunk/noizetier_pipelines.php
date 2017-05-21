@@ -178,49 +178,35 @@ function noizetier_formulaire_fond($flux) {
  * @return array
  */
 function noizetier_compositions_lister_disponibles($flux) {
-return $flux; // TODO : revoir l'introduction des compositions du noizetier
-	$noizetier_compositions = isset($GLOBALS['meta']['noizetier_compositions']) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
-	if (!is_array($noizetier_compositions)) {
-		$noizetier_compositions = array();
-	}
-	unset($noizetier_compositions['page']); // TODO : ça sert à quoi ?
+
+	// Initialisation des arguments du pipeline
 	$type = $flux['args']['type'];
 	$informer = $flux['args']['informer'];
 
-	include_spip('inc/texte');
-	foreach ($noizetier_compositions as $t => $compos_type) {
-		foreach ($compos_type as $c => $info_compo) {
-			if ($informer) {
-				$noizetier_compositions[$t][$c]['nom'] = typo($info_compo['nom']);
-				$noizetier_compositions[$t][$c]['description'] = propre($info_compo['description']);
-				if ($info_compo['icon'] != '') {
-					$icone = $info_compo['icon'];
-				} else {
-					$info_page = noizetier_lister_pages($t);
-					$icone = (isset($info_page['icon']) && $info_page['icon'] != '') ? $info_page['icon'] : 'composition-24.png';
-				}
-				$noizetier_compositions[$t][$c]['icon'] = noizetier_chemin_icone($icone);
+	// Récupération des compositions virtuelles du noiZetier afin de les injecter dans le pipeline
+	// étant donné qu'elles ne peuvent pas être détectées par Compositions car sans XML
+	// -- filtre sur l'indicateur est_virtuelle qui n'est à vrai que pour les compositions
+	// -- filtre sur le type de contenu
+	$filtres = array('est_virtuelle' => true, 'type' => $type);
+	$compositions_virtuelles = noizetier_page_repertorier($filtres);
+
+	if ($compositions_virtuelles) {
+		// On insère les compositions virtuelles selon le format imposé par le plugin Compositions
+		foreach ($compositions_virtuelles as $_identifiant => $_configuration) {
+			if ($informer){
+				$flux['data'][$type][$_configuration['composition']] = array(
+					'nom' 			=> $_configuration['nom'],
+					'description'	=> isset($_configuration['description']) ? $_configuration['description'] : '',
+					'icon' 			=> noizetier_chemin_icone($_configuration['icon']),
+					'branche' 		=> isset($_configuration['branche']) ? $_configuration['branche'] : array(),
+					'class' 		=> '',
+					'configuration'	=> '',
+					'image_exemple'	=> '',
+				);
 			} else {
-				$noizetier_compositions[$t][$c] = 1;
+				$flux['date'][$type][$_configuration['composition']] = 1;
 			}
 		}
-	}
-
-	if ($type == '' and count($noizetier_compositions) > 0) {
-		if (!is_array($flux['data'])) {
-			$flux['data'] = array();
-		}
-		
-		$flux['data'] = array_merge_recursive($flux['data'], $noizetier_compositions);
-	} elseif (isset($noizetier_compositions[$type]) and count($noizetier_compositions[$type]) > 0) {
-		if (!isset($flux['data'][$type]) or (isset($flux['data'][$type]) and !is_array($flux['data'][$type]))) {
-			$flux['data'][$type] = array();
-		}
-		if (!isset($noizetier_compositions[$type]) or (isset($noizetier_compositions[$type]) and !is_array($noizetier_compositions[$type]))) {
-			$noizetier_compositions[$type] = array();
-		}
-		
-		$flux['data'][$type] = array_merge_recursive($flux['data'][$type], $noizetier_compositions[$type]);
 	}
 
 	return $flux;
