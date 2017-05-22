@@ -285,7 +285,7 @@ function retour_image_responsive($img, $taille, $dpr, $xsendfile, $retour="http"
 				}
 			}
 		} else {
-			return $dest;
+			return timestamp($dest);
 		}
 
 	}

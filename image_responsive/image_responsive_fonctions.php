@@ -89,6 +89,7 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 	if (file_exists($source)) {
 		$l = largeur($source);
 		$h = hauteur($source);
+		$timestamp = filemtime($source);
 
 		$img = vider_attribut($img, "width");
 		$img = vider_attribut($img, "height");
@@ -176,9 +177,9 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 				$src = retour_image_responsive($source, $taille_defaut, 1, 0, "file");
 			} else {
 				if ($htactif) {
-					$src = preg_replace(",\.(jpg|png|gif)$,", "-resp$taille_defaut$v.$1", $source);
+					$src = preg_replace(",\.(jpg|png|gif)$,", "-resp$taille_defaut$v.$1?$timestamp", $source);
 				} else {
-					$src = "index.php?action=image_responsive&amp;img=$source&amp;taille=$taille_defaut$v";
+					$src = "index.php?action=image_responsive&amp;img=$source&amp;taille=$taille_defaut$v&amp;$timestamp";
 				}
 			}
 		}
@@ -218,11 +219,11 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 					$fichiers[$i][2] = retour_image_responsive($source_tmp, "$t$v", 2, 0, "file");
 				} else {
 					if ($htactif) {
-						$fichiers[$i][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v.$1", $source_tmp);
-						$fichiers[$i][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v-2.$1", $source_tmp);
+						$fichiers[$i][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v.$1?$timestamp", $source_tmp);
+						$fichiers[$i][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v-2.$1?$timestamp", $source_tmp);
 					} else {
-						$fichiers[$i][1] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v";
-						$fichiers[$i][2] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v&amp;dpr=2";
+						$fichiers[$i][1] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v&amp;$timestamp";
+						$fichiers[$i][2] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v&amp;dpr=2&amp;$timestamp";
 					}
 				}
 
