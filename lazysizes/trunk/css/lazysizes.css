@@ -15,7 +15,9 @@
     /*transition: 300ms opacity;*/
 }
 
-
+.no-js img.lazyload {
+    display: none;
+}
 
 .ratio-container {
     position: relative;
