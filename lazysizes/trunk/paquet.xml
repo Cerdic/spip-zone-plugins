@@ -1,7 +1,7 @@
 <paquet
 	prefix="lazysizes"
 	categorie="outil"
-	version="0.0.5"
+	version="0.0.6"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/lazysizes-32.png"
@@ -16,8 +16,9 @@
 	
 	<pipeline nom="insert_head_css" action="insert_head_css" inclure="lazysizes_pipelines.php" />
 	<pipeline nom="insert_head" action="insert_head_public" inclure="lazysizes_pipelines.php" />
+	<pipeline nom="header_prive" inclure="lazysizes_pipelines.php" />
 	<pipeline nom="ieconfig_metas" inclure="lazysizes_pipelines.php" />
 
-	<!--<utilise nom="medias" compatibilite="[2.10.38;]" />-->
+	<utilise nom="medias" compatibilite="[2.10.38;]" />
 	
 </paquet>
