@@ -35,14 +35,17 @@
 image complete ?
 -->
 ][(#GET{image})
+	[(#SET{width, #LARGEUR})]
+	[(#SET{height,#HAUTEUR})]
 <span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[
  style='float:(#ENV{align}|match{left|right});']>
 [<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"]>]
-<img data-src='#URL_DOCUMENT' class="lazyload"[ width="(#LARGEUR)"][ height="(#HAUTEUR)"] alt="[(#TITRE|texte_backend)]"[ title="(#TITRE|texte_backend)"] itemprop="image" />[(#ENV{lien}|?{</a>})]</span>
+<noscript><img src='#URL_DOCUMENT' class="lazyload"[ width="(#GET{width})"][ height="(#GET{height})"] alt="[(#TITRE|texte_backend)]"[ title="(#TITRE|texte_backend)"] itemprop="image" /></noscript>
+<img data-src='#URL_DOCUMENT' class="lazyload"[ width="(#GET{width})"][ height="(#GET{height})"] alt="[(#TITRE|texte_backend)]"[ title="(#TITRE|texte_backend)"] itemprop="image" />[(#ENV{lien}|?{</a>})]</span>
 ][(#REM)<!--
 
 sinon logo document + lien + alt + title etc
-pas de lazyloading sur les logos
+pas de lazyloading sur les logos ?
 -->
 ][(#GET{image}|non)
 	[(#SET{fichier,[(#LOGO_DOCUMENT|extraire_attribut{src})]})]
