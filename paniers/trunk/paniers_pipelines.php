@@ -43,7 +43,7 @@ function paniers_optimiser_base_disparus($flux){
 
 // La CSS pour le panier
 function paniers_insert_head_css($flux){
-	$css = find_in_path('css/paniers.css');
+	$css = timestamp(find_in_path('css/paniers.css'));
 	$flux .= "<link rel='stylesheet' type='text/css' media='all' href='$css' />\n";
 	return $flux;
 }
