@@ -71,13 +71,9 @@ function prix_objets_shop_objets($flux) {
  */
 function prix_objets_reservation_evenement_objets_configuration($flux) {
 
-	$objets = array(
-		'prix_objets' => array(
-			'label' => _T('paquet-prix_objets:prix_objets_nom'),
-		),
+	$flux['data']['prix_objets'] = array(
+		'label' => _T('paquet-prix_objets:prix_objets_nom'),
 	);
-
-	$flux['data'] = array_merge($flux['data'], $objets);
 
 	return $flux;
 }

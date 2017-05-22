@@ -55,13 +55,17 @@ function formulaires_prix_charger_dist($id_objet, $objet = 'article') {
 	return $valeurs;
 }
 function formulaires_prix_verifier_dist($id_objet, $objet = 'article') {
-	foreach (array(
-		'prix',
-		'code_devise'
-	) as $obligatoire)
 
-		if (!_request($obligatoire))
-			$erreurs[$obligatoire] = _T('info_obligatoire');
+
+	if (!_request('code_devise')) {
+		$erreurs['code_devise'] = _T('info_obligatoire');
+	}
+
+	if (!is_numeric(_request('prix'))) {
+		$erreurs['prix'] = _T('info_obligatoire');
+	}
+
+
 
 	return $erreurs; // si c'est vide, traiter sera appele, sinon le formulaire sera resoumis
 }
