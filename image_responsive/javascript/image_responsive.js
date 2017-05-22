@@ -12,7 +12,7 @@ function charger_url_image_responsive(this_img) {
 			var dim= parseInt(this_img.parent().width());
 		}
 		
-		var forcer_zoom = this_img.parents("[data-zoom-responsive]").attr("data-zoom-responsive");
+		var forcer_zoom = this_img.attr("data-zoom-responsive");
 		if (forcer_zoom) dim = dim * forcer_zoom;
 		
 		var tailles = this_img.attr("data-tailles");
@@ -222,7 +222,7 @@ function charger_url_image_responsive_svg(this_img) {
 		}
 		
 		
-		var forcer_zoom = this_img.parents("[data-zoom-responsive]").attr("data-zoom-responsive");
+		var forcer_zoom = this_img.attr("data-zoom-responsive");
 		if (forcer_zoom) dim = dim * forcer_zoom;
 		
 		
@@ -360,6 +360,12 @@ function charger_image_lazy() {
 
 
 function _charger_image_responsive () {
+
+	$("[data-zoom-responsive]").each(function() {
+		var forcer_zoom = $(this).attr("data-zoom-responsive");
+		if (forcer_zoom > 1) $(this).find(".image_responsive").attr("data-zoom-responsive", forcer_zoom);
+	});
+
 	// Remplacer les URL non lazy
 	$(".image_responsive:not('.lazy'):not('.avec_picturefill')").each(function() {
 		charger_url_image_responsive($(this));

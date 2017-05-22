@@ -241,7 +241,7 @@ function retour_image_responsive($img, $taille, $dpr, $xsendfile, $retour="http"
 			}
 		}
 		
-		if (!file_exists($dest) OR filemtime($dest) < filemtime($img)) {
+		if (!file_exists($dest) OR filemtime($dest) < filemtime($img) ) {
 			// Là on fabrique l'image
 			// et on la recopie vers $dest
 			//
@@ -249,7 +249,7 @@ function retour_image_responsive($img, $taille, $dpr, $xsendfile, $retour="http"
 			// parce qu'on connait le nom du fichier à l'avance
 			// et on fait donc les tests sans déclencher la cavalerie
 			
-			if ($v) {
+			if ($v) {	
 				$img_new = image_reduire_net ($img, 0, $taille, $dpr);
 			} else {
 				$img_new = image_reduire_net ($img, $taille, 0, $dpr);
