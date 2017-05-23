@@ -8,7 +8,7 @@
 
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) {
-return;
+	return;
 }
 
 include_spip('inc/formidable');
@@ -209,8 +209,7 @@ function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires
 *     Tableau des erreurs
 **/
 function formulaires_formidable_verifier($id, $valeurs = array(), $id_formulaires_reponse = false) {
-$erreurs = array();
-
+	$erreurs = array();
 	// On peut donner soit un id soit un identifiant
 	if (!$id_formulaire = formidable_id_formulaire($id)) {
 		$erreurs['message_erreur'] = _T('formidable:erreur_base');
