@@ -21,7 +21,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *     id_commande : identifiant de la commande
  * @return void
  */
-function action_supprimer_commande_dist($arg=null) {
+function action_abandonner_commande_dist($arg=null) {
 
 	// Si $arg n'est pas donné directement, le récupérer via _POST ou _GET
 	if (is_null($arg)){
