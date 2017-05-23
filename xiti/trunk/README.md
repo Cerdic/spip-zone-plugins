@@ -34,6 +34,32 @@
 
 ### Version 2.x.x (Passage à smarttag.js)
 
+#### Version 2.1.0 (2017-05-23)
+
+- Ne pas limiter la taille des "pages", dixit le support AT-Internet : *La limite du nombre de caractères au sein d'un nom de page est de 255. Au delà de ce nombre, nous ne prendrons plus en compte ceux-ci*. Du coup, ne pas limiter plutôt que de couper aléatoirement.
+- Limiter le nombre de chapitres à 3 qui est limité ainsi chez AT-Internet.
+- Pour les pages qui auraient dû avoir plus de 3 chapitres, ajouter le titre des rubriques manquantes dans la variable page en les séparant par des `/`.
+- Si présence du plugin spip-bonux, utiliser le filtre `slugify` pour générer le nom de page.
+
+#### Version 2.0.4 (2017-04-19)
+
+- Éviter un niveau 2 "0"
+- Un timestamp sur le js produit
+- Une variable js `conf_page` modifiable
+
+#### Version 2.0.3 (2017-02-27)
+
+* Amélioration de la prise en charge des niveaux 2
+
+#### Version 2.0.2 (2017-02-23)
+
+- Correction d'un bug dans le squelette du marqueur
+
+#### Version 2.0.1 (2017-02-23)
+
+- Oubli d'une virgule dans le marqueur js
+- Avoir le lien en https aussi pour le hit en `<noscript>`
+
 #### Version 2.0.0
 
 * Pouvoir configurer la valeur `logssl` pour chaque cas de figure

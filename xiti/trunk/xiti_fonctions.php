@@ -38,8 +38,13 @@ function xiti_nettoyeur($texte) {
 }
 
 function xiti($texte) {
-	$texte = strtolower(strtoascii($texte));
-	$texte = preg_replace('[^a-z0-9_:~\\\/\-]', '_', $texte);
+	$slugify = chercher_filtre('slugify');
+	if ($slugify) {
+		$texte = $slugify($texte);
+	} else {
+		$texte = strtolower(strtoascii($texte));
+		$texte = preg_replace('[^a-z0-9_:~\\\/\-]', '_', $texte);
+	}
 	return $texte;
 }
 
@@ -70,8 +75,8 @@ function xiti_xtdmc($url) {
  * @return string
  */
 function strtoascii($texte, $encoding = 'utf-8') {
-	$aaccent = array(' ', '#', '’', '\x98\"', '\x99’', '#8217', '&amp;', '&', '?', ',', ';', '"', '&nbsp;');
-	$saccent = array('_', '_', '_', '_', '_', '_', '', '', '_', '_', '_', '-', '_');
+	$aaccent = array(' ', '#8217;', '&nbsp;', '#', '’', '\x98\"', '\x99’', '&amp;', '&', '?', ',', ';', '"', );
+	$saccent = array('_', '_', '_', '_', '_', '_', '_', '', '', '_', '_', '_', '-');
 
 	$texte = str_replace($aaccent, $saccent, $texte);
 	mb_regex_encoding($encoding); // jeu de caractères courant pour les expressions rationnelles.

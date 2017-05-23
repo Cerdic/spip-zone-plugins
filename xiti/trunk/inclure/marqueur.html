@@ -16,6 +16,7 @@
 [(#SET{xtdmc,[(#CONFIG{xiti/xtdmc_xiti,[(#URL_SITE_SPIP|xiti_xtdmc)]})]})]
 [(#SET{profondeur, -1})]
 [(#SET{chapitres, #ARRAY})]
+[(#SET{prefixe_chapitres, ''})]
 <BOUCLE_artourub(ARTICLES){id_article}>
 	[(#CONFIG{xiti/secteur_xiti}|=={oui}|oui)
 		[(#CONFIG{xiti/xtsite_xiti_#ID_SECTEUR}|trim|strlen|>{2}|oui)
@@ -47,12 +48,15 @@
 	</BOUCLE_xtn2_art>
 	[(#REM) placer un libelle de page pour les rapports Xiti]
 	<BOUCLE_chemin_art2(HIERARCHIE){si #CONFIG{xiti/xtpage_xiti}|=={oui}}{id_article}{profondeur > #GET{profondeur}}>
-		[(#SET{chapitres,[(#GET{chapitres}|push{[(#TITRE|xiti|couper{50,''}|textebrut)]})]})]
+		[(#GET{chapitres}|count|<{3}|?{
+			[(#SET{chapitres,[(#GET{chapitres}|push{[(#TITRE|xiti|couper{50,''}|textebrut)]})]})],
+			[(#SET{prefixe_chapitres,[(#GET{prefixe_chapitres}|concat{[[(#GET{prefixe_chapitres}|strlen|>{0}|?{'/',''})](#TITRE|xiti|couper{50,''}|textebrut)]})]})]
+		})]
 		<BOUCLE_xtn2_hierarchie_art(XITI_NIVEAUX){si #GET{xtn2}|non|et{#CONFIG{xiti/niveaux_deux}|=={on}}}{id_rubrique}>
 		[(#SET{niveau2,#NIVEAU})]
 		</BOUCLE_xtn2_hierarchie_art>
 	</BOUCLE_chemin_art2>
-	[(#SET{page,[(#TITRE|xiti|couper{50,''}|textebrut)]})]
+	[(#SET{page,[(#TITRE|xiti|textebrut)]})]
 </BOUCLE_artourub>
 	<BOUCLE_rubchemin(RUBRIQUES){id_rubrique}>
 		[(#CONFIG{xiti/secteur_xiti}|=={oui}|oui)
@@ -88,13 +92,16 @@
 		</BOUCLE_xtn2_rub>
 		[(#REM) placer un libelle de page pour les rapports Xiti]
 		<BOUCLE_chemin2(HIERARCHIE){si #CONFIG{xiti/xtpage_xiti}|=={oui}}{id_rubrique}{profondeur > #GET{profondeur}}>
-			[(#SET{chapitres,[(#GET{chapitres}|push{[(#TITRE|xiti|couper{50,''}|textebrut)]})]})]
+			[(#GET{chapitres}|count|<{3}|?{
+				[(#SET{chapitres,[(#GET{chapitres}|push{[(#TITRE|xiti|couper{50,''}|textebrut)]})]})],
+				[(#SET{prefixe_chapitres,[(#GET{prefixe_chapitres}|concat{[[(#GET{prefixe_chapitres}|strlen|>{0}|?{'/',''})](#TITRE|xiti|couper{50,''}|textebrut)]})]})]
+			})]
 			<BOUCLE_xtn2_hierarchie_rub(XITI_NIVEAUX){si #GET{xtn2}|non|et{#CONFIG{xiti/niveaux_deux}|=={on}}}{id_rubrique}>
 			[(#SET{niveau2,#NIVEAU})]
 			</BOUCLE_xtn2_hierarchie_rub>
 		</BOUCLE_chemin2>
 		[(#PROFONDEUR|>{#GET{profondeur}}|oui)
-		[(#SET{page,[(#TITRE|xiti|couper{50,''}|textebrut)]})]]
+		[(#SET{page,[(#TITRE|xiti|textebrut)]})]]
 	</BOUCLE_rubchemin>
 <//B_artourub>
 [(#ENV{page}|=={recherche}|oui)
@@ -126,7 +133,8 @@
 	[(#SET{niveau2,[(#ENV{niveau2,[(#CONFIG{xiti/xtn2_xiti})]})]})]
 ]
 #SET{https,#EVAL{$_SERVER\['HTTPS'\]}}
-
+[(#GET{prefixe_chapitres}|strlen|>{0}|oui)
+[(#SET{page,[(#GET{prefixe_chapitres}|concat{[/(#GET{page})]})]})]]
 <INCLURE{fond=inclure/marqueur_js,
 	xtnv=#GET{xtnv},
 	xtsd=#GET{xtsd,#CONFIG{xiti/xtsd_xiti}},
