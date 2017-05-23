@@ -278,9 +278,12 @@ function reservation_bank_pre_edition($flux) {
 
 		$montant_paye = $montant_paye[$id_reservations_detail] + $montant_reservations_detail;
 
+		spip_log($flux, 'teste');
+		spip_log("montant payé:$montant_paye montant_total:$montant_total", 'teste');
 		// Si le montant payé est inférieur au montant dû on change les statuts.
+
 		$statut = $flux['data']['statut'];
-		if ($montant_paye < $montant_total) {
+		if ($montant_paye < $montant_total AND (!empty($montant_total) AND $montant_total != 0)) {
 			if ($statut == 'accepte') {
 				$flux['data']['statut'] = 'accepte_part';
 			}
