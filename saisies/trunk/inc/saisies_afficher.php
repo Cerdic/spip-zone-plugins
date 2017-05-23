@@ -382,9 +382,32 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 						$condition = preg_replace('#@'.preg_quote($nom).'@#U', '($(form).find(".checkbox[name=\''.$nom.'\']").is(":checked") ? $(form).find(".checkbox[name=\''.$nom.'\']").val() : "")', $condition);
 						break;
 					case 'checkbox':
-						preg_match_all('#@(.+)@\s*==\s*"(.*)"$#U', $condition, $matches2);
+						/**
+						 * Faire fonctionner @checkbox_xx@ == 'valeur'
+						 */
+						preg_match_all('#@(.+)@\s*==\s*[\'"](.*?)[\'"]$#U', $condition, $matches2);
 						foreach ($matches2[2] as $value) {
 							$condition = preg_replace('#@'.preg_quote($nom).'@#U', '($(form).find(".checkbox[name=\''.$nom.'[]\'][value='.$value.']").is(":checked") ? $(form).find(".checkbox[name=\''.$nom.'[]\'][value='.$value.']").val() : "")', $condition);
+						}
+						/**
+						 * Faire fonctionner @checkbox_xx@ IN 'valeur' ou @checkbox_xx@ !IN 'valeur'
+						 */
+						preg_match_all('#@(.+)@\s*(!IN|IN)\s*[\'"](.*?)[\'"]$#U', $condition, $matches3);
+						foreach ($matches3[3] as $key => $value) {
+							$not = '';
+							if ($matches3[2][$key] == '!IN') {
+								$not = '!';
+							}
+							$values = explode(',', $value);
+							$new_condition = $not.'(';
+							foreach ($values as $key2 => $cond) {
+								if ($key2 > 0) {
+									$new_condition .= ' || ';
+								}
+								$new_condition .= '($(form).find(".checkbox[name=\''.$nom.'[]\'][value='.$cond.']").is(":checked") ? $(form).find(".checkbox[name=\''.$nom.'[]\'][value='.$cond.']").val() : "") == "'.$cond.'"';
+							}
+							$new_condition .= ')';
+							$condition = str_replace($matches3[0][$key], $new_condition, $condition);
 						}
 						break;
 					default:
@@ -488,7 +511,7 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 				$config = lire_config($plugin);
 				$condition = preg_replace('#@config:'.$plugin.':'.$matches[2][0].'@#U', '"'.$config[$matches[2][0]].'"', $condition);
 			}
-			// On transforme en une condition valide
+			// On transforme en une condition PHP valide
 			$condition_originale = $condition;
 			if (is_null($env)) {
 				$condition = preg_replace('#@(.+)@#U', '_request(\'$1\')', $condition);
@@ -496,6 +519,23 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 				$condition = preg_replace('#@(.+)@#U', '$env["valeurs"][\'$1\']', $condition);
 			}
 
+			/**
+			 * Tester si la condition utilise des champs qui sont des tableaux
+			 * Si le _request renvoie un tableau, changer == et != par in_array et !in_array
+			 * TODO: c'est vraiment pas terrible comme fonctionnement
+			 */
+			preg_match_all("/(_request\('.*?'\))\s*(!=|==|IN|!IN)\s*['\"](.*?)['\"]/", $condition, $matches);
+			foreach ($matches[1] as $key => $val) {
+				eval('$requete = '.$val.';');
+				if (is_array($requete)) {
+					$not = '>';
+					if (in_array($matches[2][$key], array('!=', '!IN'))) {
+						$not = '==';
+					}
+					$array = var_export(explode(',', $matches[3][$key]), true);
+					$condition = str_replace($matches[0][$key], "(count(array_intersect($val, $array)) $not 0)", $condition);
+				}
+			}
 			// On vérifie que l'on a pas @toto@="valeur" qui fait planter l'eval(),
 			// on annule cette condition dans ce cas pour éviter une erreur du type :
 			// PHP Fatal error:  Can't use function return value in write context
