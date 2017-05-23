@@ -190,13 +190,13 @@ function multilang_make_menu_lang(container,target) {
 		if($(this).is('.change_lang') && !$(this).is('.on')){
 			$(this).parents('form > .menu_multilang').find('a.on').removeClass('on');
 			$(this).parents('form > .menu_multilang').find('.multilang_message').detach();
-			$(this).parents('form').find('li.editer_titre_numero,div.editer_titre_numero').show();
+			$(this).parents('form').find('.editer_titre_numero').show();
 			$(this).addClass('on');
 			multilang_change_lang(this,container,target);
 		}else if(!$(this).is('.on') && $(this).is('.recover_lang')){
 			$(this).parents('form > .menu_multilang').find('a.on').removeClass('on');
 			$(this).parents('form > .menu_multilang').append('<div class="multilang_message"><p>'+multilang_lang.champs_readonly+'<\/p><\/div>');
-			$(this).parents('form').find('li.editer_titre_numero,div.editer_titre_numero').hide();
+			$(this).parents('form').find('.editer_titre_numero').hide();
 			$(this).addClass('on');
 			multilang_multi_recover(this,container,target,'submit');
 		}
@@ -270,8 +270,9 @@ function multilang_multi_recover(el,container,target,event){
 				this.value = (count > 1 ? "<multi>"+value+"</multi>":value.replace(/^\[[a-z_]+\]/,''));
 			}
 			// Add the title number to the final value
-			if(multilang_is_title(this) && ($('#'+this.id+'_numero').val() != ''))
-				this.value= $('#'+this.id+'_numero').val().replace(/\.|\s+/,'') + ". " + this.value;
+			if(multilang_is_title(this) && ($(this).parents('form').find('#'+this.id+'_numero').val() != '')) {
+				this.value = $(this).parents('form').find('#'+this.id+'_numero').val().replace(/\.|\s+/,'') + ". " + this.value;
+			}
 		});
 		return true;
 	}
@@ -409,10 +410,10 @@ function multilang_change_lang(el,container,target) {
 		multilang_forms_fields[target_id].each(function(){
 			var me = $(this);
 			if(me.parents(multilang_root_opt).size()>0){
-		        if(me.is(multilang_fields_selector_opt))
-		        	multilang_init_field(this,lang,true);
-		    }else
-		    	multilang_init_field(this,lang,true);
+				if(me.is(multilang_fields_selector_opt))
+					multilang_init_field(this,lang,true);
+			}else
+				multilang_init_field(this,lang,true);
 		});
 		target[0].isfull = false;
 	}else{
