@@ -78,4 +78,30 @@ function filtre_generer_url_commande_facture_dist($id_commande) {
 }
 
 
+/**
+ * Une fonction pour memoriser les taxes par taux et retourner le tableau de detail en recap
+ * @param null|float $prix_ht
+ * @param null|float $prix_ttc
+ * @return array|string
+ */
+function commande_totalise_taxes($prix_ht = null, $prix_ttc = null) {
+	static $taxes = array();
+
+	if ($prix_ht
+		and $prix_ttc
+		and (floatval($prix_ttc) - floatval($prix_ht))>0.001) {
+		$taux = (string)round((floatval($prix_ttc)/floatval($prix_ht) - 1.0) * 100, 1);
+
+		if (!isset($taxes[$taux])) {
+			$taxes[$taux] = 0;
+		}
+		$taxes[$taux] += ($prix_ttc - $prix_ht);
+	}
+
+	if (is_null($prix_ht) or !strlen($prix_ht)){
+		return $taxes;
+	}
+	return '';
+}
+
 

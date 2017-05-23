@@ -57,7 +57,7 @@
 				<td class="montant">[(#VALEUR{prix}|prix_formater)]</td>
 			</tr>
 			[(#SET{total,[(#GET{total}|plus{[(#VALEUR{prix})]})]})]
-			[(#SET{total_ht,[(#GET{total_ht}|plus{[(#VALEUR{prix_ht})]})]})]
+			[(#VALEUR{prix_ht}|commande_totalise_taxes{#VALEUR{prix}})]
 			</BOUCLE_details>
 		</tbody>
 		
@@ -66,10 +66,12 @@
 				<td class="descriptif"><:prix:label_total_ttc:></td>
 				<td class="montant">[(#GET{total}|prix_formater)]</td>
 			</tr>
+			<BOUCLE_total_taxes(POUR){tableau #REM|commande_totalise_taxes}>
 			<tr class="total_taxe">
-				<td class="descriptif"><:commandes:label_dont_taxe:></td>
-				<td class="montant">[(#GET{total}|moins{#GET{total_ht}}|prix_formater)]</td>
+				<td class="descriptif"><:commandes:label_dont_taxe:> [(#CLE)%]</td>
+				<td class="montant">[(#VALEUR|prix_formater)]</td>
 			</tr>
+			</BOUCLE_total_taxes>
 		</tfoot>
 	</table>
 <//B_test_format_texte>
