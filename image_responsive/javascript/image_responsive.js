@@ -367,7 +367,7 @@ function charger_image_lazy() {
 
 function _charger_image_responsive () {
 
-	$("[data-zoom-responsive]").each(function() {
+	$("[data-zoom-responsive]").each(function() {
 		var forcer_zoom = $(this).attr("data-zoom-responsive");
 		if (forcer_zoom > 1) $(this).find(".image_responsive").attr("data-zoom-responsive", forcer_zoom);
 	});
