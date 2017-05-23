@@ -31,7 +31,7 @@ function action_ordonner_liens_dist() {
 	// ordre des éléments
 	$ordre = _request('ordre');
 
-	if (!$objet or !$objet_lie or !$id_objet_lie OR !$ordre or !objet_associable($objet)) {
+	if (!$objet or !$objet_lie or !$id_objet_lie or !$ordre or !objet_associable($objet)) {
 		return ordoc_json_erreur(_T('ordoc:erreur_objet_absent') . ' ' . _T('ordoc:erreur_deplacement_impossible'));
 	}
 
@@ -55,7 +55,9 @@ function action_ordonner_liens_dist() {
 
 	$futurs = array_flip($ordre);
 	// ordre de 1 à n (pas de 0 à n).
-	array_walk($futurs, function(&$v) { $v++; });
+	array_walk($futurs, function (&$v) {
+		$v++;
+	});
 
 	$updates = array();
 
