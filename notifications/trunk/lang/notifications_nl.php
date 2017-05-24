@@ -9,9 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0' => '--------------',
-
 	// A
 	'alt_logo_conf' => 'Logo van plugin Notifications',
 	'article_prive' => 'Publicatie van artikelen',
@@ -74,6 +71,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forums_public_thread' => '<strong>Draad van een discussie</strong>: deelnemers aan dezelfde publieke discussie ontvangen forumnotificaties. Uitgezonderd zijn verwijderde of als SPAM aangeduide berichten.',
 
 	// I
+	'info_diffusion_nouveaute_partielle_non' => 'Volledige inhoud verspreiden',
+	'info_diffusion_nouveaute_partielle_oui' => 'Slechts een extract verspreiden',
+	'info_diffusion_nouveautes' => 'Inhoud van mails die nieuws over de site aankondigen',
 	'info_lien_publier_commentaire' => 'Dit commentaar plaatsen',
 	'info_lien_signaler_spam_commentaire' => 'Als SPAM aanmerken',
 	'info_lien_supprimer_commentaire' => 'Dit commentaar verwijderen',
@@ -93,7 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'inscription_statut_webmestres' => 'Webmasters',
 
 	// L
-	'lien_documentation' => '<a href="http://contrib.spip.net/Notifications" class="spip_out">Zie documentatie</a>', # MODIF
+	'lien_documentation' => '<a href="https://contrib.spip.net/Notifications" class="spip_out">Zie documentatie</a>',
 	'limiter_rubriques_explication' => 'Vermeld hier de identificatie van iedere rubriek waarvoor de notificaties moeten worden geactiveerd, gescheiden door een komma. bv: "11,26"',
 	'limiter_rubriques_label' => 'Uitsluitend deze rubrieken:',
 
@@ -123,6 +123,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'suivis_perso_url_suivis' => '<strong>Zet een aangepaste URL</strong> in de notificatie-emails. Aan de hand van deze URL kan de gebruiker zijn persoonlijke notificatie-instellingen aanpassen.',
 	'suivis_public_article_thread' => 'TODO: keuze op ieder artikel/draad',
 	'suivis_public_changer_email' => 'TODO: email veranderen',
+
+	// 0
+	'0' => '--------------',
+
+	// S
 	'suivis_public_description' => 'Je kunt hier (zodra dit werkt...) al je forumberichten terugvinden, een RSS-feed krijgen van alle reacties, jouw wijze van notificatie kiezen, enz.',
 	'suivis_public_notif_desactiver' => 'TODO: aankruisen om geen notificaties meer te ontvangen',
 	'suivis_public_vos_forums' => 'Je forums',
