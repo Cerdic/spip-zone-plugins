@@ -64,6 +64,7 @@ function commandes_declarer_tables_objets_sql($tables) {
 			'echeances_type' => 'varchar(25) not null default ""', // périodicité (ex : mois, annee) ou nombre précis d'échances (ex : 3)
 			'echeances_date_debut' => 'datetime not null default "0000-00-00 00:00:00"', // date de debut des echeances, eventuellement si dans le futur (facultatif)
 			'echeances' => 'text not null default ""', // tableau sérialisé décrivant les échéances
+			'taxe_exoneree_raison' => 'varchar(25) not null default ""',
 		),
 		'key' => array(
 			"PRIMARY KEY" => "id_commande",
@@ -72,8 +73,8 @@ function commandes_declarer_tables_objets_sql($tables) {
 		),
 		'date' => "date",
 		'titre' => "reference AS titre, '' AS lang",
-		'champs_editables' => array('reference', 'id_auteur', 'date_paiement', 'date_envoi', 'mode', 'bank_uid'),
-		'champs_versionnes' => array('reference', 'id_auteur', 'date', 'date_paiement', 'date_envoi', 'bank_uid'),
+		'champs_editables' => array('reference', 'id_auteur', 'date_paiement', 'date_envoi', 'mode', 'bank_uid', 'taxe_exoneree_raison'),
+		'champs_versionnes' => array('reference', 'id_auteur', 'date', 'date_paiement', 'date_envoi', 'bank_uid', 'taxe_exoneree_raison'),
 		'rechercher_champs' => array('reference' => 8, 'id_commande' => 8),
 		'rechercher_jointures' => array(
 			'auteur' => array('nom' => 1),
