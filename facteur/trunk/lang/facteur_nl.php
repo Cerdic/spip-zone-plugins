@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_info_enregistree' => 'De configuratie is opgeslagen',
 	'configuration_adresse_envoi' => 'Configuratie van het verzendadres',
 	'configuration_facteur' => 'Postbode',
+	'configuration_facteur_smtp_tls_allow_self_signed' => 'Validatie van het SSL certificaat',
 	'configuration_mailer' => 'Configuratie van de mailer',
 	'configuration_smtp' => 'Verzendwijze',
 	'configuration_smtp_descriptif' => 'Kies, wanneer je twijfelt voor de functie PHP mail.',
@@ -53,6 +54,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_secure_tls' => 'TLS (aanbevolen)',
 	'facteur_smtp_sender' => 'Return-Path (optioneel)',
 	'facteur_smtp_sender_descriptif' => 'Geef het Return-Path voor de mail aan, bv voor feedback. In SMTP bepaalt het het emailadres van de verzender.',
+	'facteur_smtp_tls_allow_self_signed_non' => 'het SSL certificaat van de SMTP server is uitgegeven door een Certificaatautoriteit (aanbevolen).',
+	'facteur_smtp_tls_allow_self_signed_oui' => 'het SSL certificaat van de SMTP server is auto-signé.',
 	'facteur_smtp_username' => 'Naam van de gebruiker:',
 
 	// L
