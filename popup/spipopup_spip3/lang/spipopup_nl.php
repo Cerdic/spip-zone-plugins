@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'btn_imprimer_ttl' => 'Deze pagina afdrukken',
 
 	// D
-	'descr_cfg' => 'Documentatie van de plugin voor meer informatie: [spip-contrib.net/ ?article3573->http://contrib.spip.net/?article3573]', # MODIF
+	'descr_cfg' => 'Documentatie van de plugin voor meer informatie: [spip-contrib.net/ ?article3573->https://contrib.spip.net/?article3573]',
 
 	// E
 	'editor' => 'Popup link aanpassen',
