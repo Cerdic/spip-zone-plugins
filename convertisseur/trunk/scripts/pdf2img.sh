@@ -11,6 +11,10 @@ shave="${3-0}"
 
 repdest=${dest}
 
+# a t'on bien tout les outils qu'il faut sur le serveur ?
+command -v convert >/dev/null 2>&1 || { echo >&2 "\nErreur. Installer imagemagick pour traiter les images. brew install imagemagick\n"; exit 1; }
+command -v pdfinfo >/dev/null 2>&1 || { echo >&2 "\nErreur. Installer poppler pour extraire le texte des PDF. brew install brew install poppler\n"; exit 1; }
+
 # cas d'un pdf multipages avec format des pages indiqué en dest : pdf_%02d.jpg
 regex="\.jpg$"
 if [[ "$dest" =~ $regex ]] ; then 

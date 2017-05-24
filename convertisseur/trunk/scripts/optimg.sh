@@ -8,6 +8,8 @@
 #echo ${@}
 #exit
 
+command -v convert >/dev/null 2>&1 || { echo >&2 "\nErreur. Installer imagemagick. brew install imagemagick\n"; exit 1; }
+
 nom="${1##*/}" # basename
 resize=${2-0} # 0 par défaut
 compress=${4-0} # 0 par défaut
