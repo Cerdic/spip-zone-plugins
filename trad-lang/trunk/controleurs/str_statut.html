@@ -42,7 +42,7 @@
 	var contenu_orig = '[(#STR**|tradlang_utf8|entites_html|replace{"\n","_"}|replace{"\r",""}|replace{"\t",""})]',
 		statut_orig = '#STATUT',
 		id = cQuery(".tradlang-str_statut-#_a:ID_TRADLANG").crayon().find('form'),
-		vars = cQuery('#str_orig_#ID_TRADLANG').val().match('@[^<@]+@','gi');
+		vars = cQuery('#str_orig_#ID_TRADLANG').val().match('@[^<@][a-z:_]+@','gi');
 	cQuery(id).bind('form-submit-validate',function(truc,a, e, options, veto){
 		if(vars){
 			erreur_chaine = '<:tradlang:erreur_variable_manquante:>';
