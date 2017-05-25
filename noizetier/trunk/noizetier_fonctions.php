@@ -10,6 +10,11 @@ define('_CACHE_CONTEXTE_NOISETTES', 'noisettes_contextes.php');
 define('_CACHE_DESCRIPTIONS_NOISETTES', 'noisettes_descriptions.php');
 define('_CACHE_INCLUSIONS_NOISETTES', 'noisettes_inclusions.php');
 
+
+// -------------------------------------------------------------------
+// ------------------------- API NOISETTES ---------------------------
+// -------------------------------------------------------------------
+
 /**
  * Lister les noisettes disponibles dans les dossiers noisettes/.
  *
@@ -214,28 +219,6 @@ function noizetier_charger_contexte_noisette($noisette) {
 	}
 
 	return $contexte_noisettes[$noisette];
-}
-
-/**
- * Déterminer le répertoire dans lequel le NoiZetier peut lister les pages pouvant supporter
- * l'insertion de noisettes.
- *
- * @return string
- * 		Le répertoire des pages sous la forme dossier/.
- */
-function noizetier_obtenir_dossier_pages() {
-
-	if (defined('_NOIZETIER_REPERTOIRE_PAGES')) {
-		$repertoire_pages = _NOIZETIER_REPERTOIRE_PAGES;
-	}
-	elseif (isset($GLOBALS['z_blocs'])) {
-		$premier_bloc = reset($GLOBALS['z_blocs']);
-		$repertoire_pages = "$premier_bloc/";
-	} else {
-		$repertoire_pages = 'contenu/';
-	}
-
-	return $repertoire_pages;
 }
 
 
@@ -555,24 +538,6 @@ function noizetier_deplacer_noisette($id_noisette, $sens) {
 	}
 }
 
-/**
- * Supprime une composition du noizetier.
- *
- * @param string $page
- *
- * @return void
- */
-function noizetier_supprimer_composition($page) {
-	$type_page = noizetier_page_type($page);
-	$composition = noizetier_page_composition($page);
-	$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
-	unset($noizetier_compositions[$type_page][$composition]);
-	if (count($noizetier_compositions[$type_page]) == 0) {
-		unset($noizetier_compositions[$type_page]);
-	}
-	ecrire_meta('noizetier_compositions', serialize($noizetier_compositions));
-}
-
 
 /**
  * Liste les blocs pour lesquels il y a des noisettes a inserer.
@@ -635,24 +600,6 @@ function noizetier_lister_blocs_avec_noisettes_objet($objet, $id_objet) {
 	}
 
 	return $liste_blocs[$objet][$id_objet];
-}
-
-/**
- * Liste d'icones en 24px obtenues en fouillant le theme.
- *
- * @staticvar array $liste_icones
- *
- * @return array
- */
-function noizetier_lister_icones() {
-	static $liste_icones = null;
-
-	if (is_null($liste_icones)) {
-		$match = '.+-24[.](jpg|jpeg|png|gif)$';
-		$liste_icones = find_all_in_path('prive/themes/spip/images/', $match);
-	}
-
-	return $liste_icones;
 }
 
 
@@ -910,19 +857,57 @@ function noizetier_importer_configuration($type_import, $import_compos, $config)
 	return $ok;
 }
 
+
+// -------------------------------------------------------------------
+// --------------------------- API ICONES ----------------------------
+// -------------------------------------------------------------------
+
 /**
- * Retourne le chemin complet d'une icone, vérifie d'abord chemin_image, sinon passe par find_in_path.
+ * Retourne le chemin complet d'une icone.
+ * La fonction vérifie d'abord que l'icone est dans le thème du privé (chemin_image),
+ * sinon cherche dans le path SPIP (find_in_path).
+ *
+ * @package SPIP/NOIZETIER/API/ICONE
+ * @api
+ * @filtre
  *
  * @param string $icone
  *
  * @return string
  */
-function noizetier_chemin_icone($icone){
-	if ($i = chemin_image($icone)) {
-		return $i;
-	} else {
-		return find_in_path($icone);
+function noizetier_icone_chemin($icone){
+
+	if (!$chemin = chemin_image($icone)) {
+		$chemin = find_in_path($icone);
 	}
+
+	return $chemin;
+}
+
+
+/**
+ * Liste d'icones d'une taille donnée en pixels obtenues en fouillant dans les thème
+ * spip du privé.
+ *
+ * @package SPIP/NOIZETIER/API/ICONE
+ * @api
+ * @filtre
+ *
+ * @param $taille	int
+ * 		Taille en pixels des icones à répertorier.
+ *
+ * @return array
+ * 		Tableau des chemins complets des icones trouvés dans le path SPIP.
+ */
+function noizetier_icone_repertorier($taille = 24) {
+	static $icones = null;
+
+	if (is_null($icones)) {
+		$pattern = ".+-${taille}[.](jpg|jpeg|png|gif)$";
+		$icones = find_all_in_path('prive/themes/spip/images/', $pattern);
+	}
+
+	return $icones;
 }
 
 
@@ -933,6 +918,9 @@ function noizetier_chemin_icone($icone){
 /**
  * La liste des blocs par defaut d'une page peut etre modifiee via le pipeline noizetier_blocs_defaut.
  *
+ * @package SPIP/NOIZETIER/API/BLOC
+ * @api
+ * @filtre
  *
  * @return array
  */
@@ -959,7 +947,9 @@ function noizetier_bloc_defaut() {
 /**
  * Retourne la liste des descriptions des blocs par defaut du squelette.
  *
- *
+ * @package SPIP/NOIZETIER/API/BLOC
+ * @api
+ * @filtre
  *
  * @return array
  */
@@ -983,6 +973,9 @@ function noizetier_bloc_repertorier() {
  * Retourne la description complète d'un bloc.
  * La description est disponible dans un fichier YAML.
  *
+ * @package SPIP/NOIZETIER/API/BLOC
+ * @api
+ * @filtre
  *
  * @return array|string
  */
@@ -1030,6 +1023,10 @@ function noizetier_bloc_informer($bloc, $information = '', $options = array()) {
 /**
  * Renvoie le nombre de noisettes de chaque bloc configurables d'une page, d'une composition
  * ou d'un objet.
+ *
+ * @package SPIP/NOIZETIER/API/BLOC
+ * @api
+ * @filtre
  *
  * @param string $identifiant
  * 		L'identifiant de la page, de la composition ou de l'objet au format:
@@ -1086,6 +1083,7 @@ function noizetier_bloc_compter_noisettes($identifiant) {
  * Si le plugin Compositions n'est pas actif, les compositions explicites ou virtuelles ne sont
  * pas listées.
  *
+ * @package SPIP/NOIZETIER/API/PAGE
  * @uses noizetier_informer_page()
  * @api
  * @filtre
@@ -1098,7 +1096,7 @@ function noizetier_page_repertorier($filtres = array()) {
 
 	if (is_null($pages)) {
 		// Choisir le bon répertoire des pages
-		$options['repertoire_pages'] = noizetier_obtenir_dossier_pages();
+		$options['repertoire_pages'] = noizetier_page_obtenir_dossier();
 
 		if ($options['repertoire_pages']) {
 			// Initialiser les blocs par défaut
@@ -1172,6 +1170,7 @@ function noizetier_page_repertorier($filtres = array()) {
 						foreach ($options['compositions'] as $_composition => $_configuration) {
 							if ($configuration = noizetier_page_informer($_composition, '', $options)) {
 								$page_a_garder = true;
+								// Application des filtres éventuellement demandés en argument de la fonction
 								if ($filtres) {
 									foreach ($filtres as $_critere => $_valeur) {
 										if (($_critere != 'est_composition')
@@ -1203,8 +1202,10 @@ function noizetier_page_repertorier($filtres = array()) {
 /**
  * Retourne la configuration de la page, de la composition explicite ou de la composition virtuelle demandée.
  *
- * @uses noizetier_obtenir_dossier_pages()
+ * @uses noizetier_page_obtenir_dossier()
  * @uses noizetier_bloc_defaut()
+
+ * @package SPIP/NOIZETIER/API/PAGE
  * @api
  * @filtre
  *
@@ -1230,7 +1231,7 @@ function noizetier_page_informer($page, $information = '', $options =array()) {
 
 		// Choisir le bon répertoire des pages
 		if (empty($options['repertoire_pages'])) {
-			$options['repertoire_pages'] = noizetier_obtenir_dossier_pages();
+			$options['repertoire_pages'] = noizetier_page_obtenir_dossier();
 		}
 
 		// Initialiser les blocs par défaut
@@ -1385,6 +1386,10 @@ function noizetier_page_informer($page, $information = '', $options =array()) {
 /**
  * Renvoie le type d'une page à partir de son identifiant.
  *
+ * @package SPIP/NOIZETIER/API/PAGE
+ * @api
+ * @filtre
+ *
  * @param string $page
  * 		L'identifiant de la page.
  *
@@ -1401,6 +1406,10 @@ function noizetier_page_type($page) {
 
 /**
  * Détermine, à partir de son identifiant, la composition d'une page si elle existe.
+ *
+ * @package SPIP/NOIZETIER/API/PAGE
+ * @api
+ * @filtre
  *
  * @param string $page
  * 		L'identifiant de la page.
@@ -1419,6 +1428,10 @@ function noizetier_page_composition($page) {
 /**
  * Détermine, à partir de son identifiant, si la page est une composition.
  *
+ * @package SPIP/NOIZETIER/API/PAGE
+ * @api
+ * @filtre
+ *
  * @param string $page
  * 		L'identifiant de la page.
  *
@@ -1434,12 +1447,43 @@ function noizetier_page_est_composition($page) {
 	return $est_composition;
 }
 
+/**
+ * Déterminer le répertoire dans lequel le NoiZetier peut lister les pages pouvant supporter
+ * l'insertion de noisettes.
+ *
+ * @package SPIP/NOIZETIER/API/PAGE
+ * @api
+ * @filtre
+ *
+ * @return string
+ * 		Le répertoire des pages sous la forme dossier/.
+ */
+function noizetier_page_obtenir_dossier() {
+
+	if (defined('_NOIZETIER_REPERTOIRE_PAGES')) {
+		$repertoire_pages = _NOIZETIER_REPERTOIRE_PAGES;
+	}
+	elseif (isset($GLOBALS['z_blocs'])) {
+		$premier_bloc = reset($GLOBALS['z_blocs']);
+		$repertoire_pages = "$premier_bloc/";
+	} else {
+		$repertoire_pages = 'contenu/';
+	}
+
+	return $repertoire_pages;
+}
+
+
 // --------------------------------------------------------------------
 // ---------------------------- API OBJETS ----------------------------
 // --------------------------------------------------------------------
 
 /**
  * Lister les objets ayant des noisettes spéciquement configurées pour leur page.
+ *
+ * @package SPIP/NOIZETIER/API/OBJET
+ * @api
+ * @filtre
  *
  * @param string $objet
  * 		Type d'objet ou chaine vide.
@@ -1480,7 +1524,7 @@ function noizetier_objet_informer($objet = '', $id_objet = 0, $information = '')
 					$description['logo'] = isset($logo_infos['src']) ? $logo_infos['src'] : '';
 				}
 				if (!$description['logo']) {
-					$description['logo'] = noizetier_chemin_icone("{$_objet['objet']}.png");
+					$description['logo'] = noizetier_icone_chemin("{$_objet['objet']}.png");
 				}
 				$description['noisettes'] = $_objet['noisettes'];
 

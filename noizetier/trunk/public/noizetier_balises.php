@@ -6,12 +6,17 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 // Cette balise renvoie le tableau de la liste des pages
 function balise_NOIZETIER_PAGE_INFOS_dist($p) {
-	$page = interprete_argument_balise(1, $p);
-	if (isset($page)) {
-		$page = str_replace('\'', '"', $page);
-		$information = interprete_argument_balise(2, $p);
-		$information = isset($information) ? str_replace('\'', '"', $information) : '""';
-		$p->code = "noizetier_page_informer($page, $information)";
+	$argument = interprete_argument_balise(1, $p);
+	if (isset($argument)) {
+		if (!is_array($argument)) {
+			$page = str_replace('\'', '"', $argument);
+			$information = interprete_argument_balise(2, $p);
+			$information = isset($information) ? str_replace('\'', '"', $information) : '""';
+			$p->code = "noizetier_page_informer($page, $information)";
+		} else {
+			$filtres = str_replace('\'', '"', $argument);
+			$p->code = "noizetier_page_repertorier($filtres)";
+		}
 	} else {
 		$p->code = "noizetier_page_repertorier()";
 	}

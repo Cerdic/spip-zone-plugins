@@ -25,7 +25,7 @@
 		<ul class="editer-groupe liste-items liste-noisettes bloc">
 		<BOUCLE_noisettes(NOISETTES){objet?}{id_objet?}{type=#ENV{page}|noizetier_page_type}{composition=#ENV{page}|noizetier_page_composition}{bloc=#GET{bloc_affiche}}{par rang}>
 			#SET{infos_noisette, #NOISETTE|noizetier_info_noisette}
-			<li class="editer item noisette" id="noisette-#ID_NOISETTE"[ style="background-image: url((#GET{infos_noisette}|table_valeur{icon}|sinon{noisette-24.png}|noizetier_chemin_icone));"]>
+			<li class="editer item noisette" id="noisette-#ID_NOISETTE"[ style="background-image: url((#GET{infos_noisette}|table_valeur{icon}|sinon{noisette-24.png}|noizetier_icone_chemin));"]>
 				[<strong>(#GET{infos_noisette}|table_valeur{nom}|sinon{#NOISETTE})</strong>]
 				[(#AUTORISER{configurer,noizetier}|oui)
 					[(#URL_ECRIRE{noisette_edit,id_noisette=#ID_NOISETTE}|icone_verticale{<:noizetier:formulaire_modifier_noisette:>,noisette,edit,right ajax preload})]

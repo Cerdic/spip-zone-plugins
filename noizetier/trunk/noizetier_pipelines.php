@@ -197,7 +197,7 @@ function noizetier_compositions_lister_disponibles($flux) {
 				$flux['data'][$type][$_configuration['composition']] = array(
 					'nom' 			=> $_configuration['nom'],
 					'description'	=> isset($_configuration['description']) ? $_configuration['description'] : '',
-					'icon' 			=> noizetier_chemin_icone($_configuration['icon']),
+					'icon' 			=> noizetier_icone_chemin($_configuration['icon']),
 					'branche' 		=> isset($_configuration['branche']) ? $_configuration['branche'] : array(),
 					'class' 		=> '',
 					'configuration'	=> '',

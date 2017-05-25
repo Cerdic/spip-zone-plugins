@@ -16,7 +16,7 @@
 	<h1>
 		[(#ENV{page}|oui)
 			[(#GET{informations/nom})]
-			[(#GET{informations/icon}|sinon{page-24.png}|noizetier_chemin_icone|balise_img{page,cadre-icone})]
+			[(#GET{informations/icon}|sinon{page-24.png}|noizetier_icone_chemin|balise_img{page,cadre-icone})]
 		]
 		[(#ENV{page}|non)
 			<a[ href="(#ID_OBJET|generer_url_entite{#OBJET})"]>#GET{informations/titre}</a>
