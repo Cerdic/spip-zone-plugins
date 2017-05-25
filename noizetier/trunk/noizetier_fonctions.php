@@ -1328,7 +1328,7 @@ function noizetier_page_informer($page, $information = '', $options =array()) {
 			$description['icon'] = 'img/ic_page.png';
 			$description['blocs'] = $options['blocs_defaut'];
 		} else {
-			// 2- la page est une composition du noizetier
+			// 2- la page est une composition virtuelle
 			if (empty($options['compositions'])) {
 				include_spip('inc/config');
 				// TODO : ne peut-on pas limiter à la page ?

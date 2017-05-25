@@ -162,12 +162,12 @@ function formulaires_editer_page_traiter_dist($page, $edition, $description_page
 	);
 
 	// Traitement des blocs configurables
-	$compositions_virtuelles[$identifiant]['blocs'] = noizetier_bloc_defaut();
 	$blocs_exclus = _request('blocs_exclus');
 	if ($blocs_exclus) {
-		$compositions_virtuelles[$identifiant]['blocs'] = array_diff($compositions_virtuelles[$identifiant]['blocs'], $blocs_exclus);
+		$compositions_virtuelles[$identifiant]['blocs_exclus'] = $blocs_exclus;
+		// TODO : si on exclut des blocs il faut supprimer leur noisettes.
+		// Une autre solution serait d'interdire l'exclusion d'un bloc contenant une noisette
 	}
-
 
 	// Traitement des branches éventuelles pour la composition virtuelle résultante
 	$branche = array();
