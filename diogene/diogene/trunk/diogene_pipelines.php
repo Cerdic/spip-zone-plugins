@@ -289,7 +289,7 @@ function diogene_editer_contenu_objet($flux) {
 					$saisie .= trim(recuperer_fond('formulaires/selecteur_statut_objet', $contexte));
 				}
 				$balise = saisie_balise_structure_formulaire('ul');
-				$flux['data'] = preg_replace(',(.*)(<!--extra-->),ims', "\\1<".$balise.">".$saisie."</".$balise.">\\2", $flux['data'], 1);
+				$flux['data'] = preg_replace(',(.*)(<!--extra-->),ims', "\\1<".$balise.'>'.$saisie.'</'.$balise.">\\2", $flux['data'], 1);
 			}
 			if (($champs_sup = unserialize($diogene['champs_ajoutes']))
 				and is_array($champs_sup)
@@ -301,7 +301,6 @@ function diogene_editer_contenu_objet($flux) {
 			spip_log('pas de diogene', 'diogene.'._LOG_ERREUR);
 		}
 	}
-	spip_log($flux['data'], 'diogene_agenda.'._LOG_ERREUR);
 	return $flux;
 }
 
@@ -469,7 +468,7 @@ function diogene_formulaire_verifier($flux) {
 			$flux['data']['message_erreur'] = _T('diogene:message_erreur_general');
 		}
 	}
-	spip_log($flux, 'diogene_agenda.'._LOG_ERREUR);
+	spip_log($flux, 'diogene.'._LOG_ERREUR);
 	return $flux;
 }
 
@@ -897,13 +896,42 @@ function diogene_diogene_traiter($flux) {
 		include_spip('formulaires/editer_logo');
 		$objet = $flux['args']['type'];
 		include_spip('action/editer_logo');
-		$sources = formulaire_editer_logo_get_sources();
-		foreach ($sources as $etat => $file) {
-			if ($file and $file['error'] == 0) {
-				if ($err = logo_modifier($objet, $flux['args']['id_objet'], $etat, $file)) {
-					$flux['message_erreur'] = $err;
+		/**
+		 * A partir de SPIP 3.1
+		 */
+		if (function_exists('logo_modifier')) {
+			$sources = formulaire_editer_logo_get_sources();
+			foreach ($sources as $etat => $file) {
+				if ($file and $file['error'] == 0) {
+					if ($err = logo_modifier($objet, $flux['args']['id_objet'], $etat, $file)) {
+						$flux['message_erreur'] = $err;
+					}
+					set_request('logo_up', ' ');
 				}
-				set_request('logo_up', ' ');
+			}
+		} else {
+			/**
+			 * Avant SPIP 3.1
+			 */
+			$_id_objet = id_table_objet($objet);
+			// supprimer l'ancien logo puis copier le nouveau
+			include_spip('inc/chercher_logo');
+			include_spip('inc/flock');
+			$type = type_du_logo($_id_objet);
+			$chercher_logo = charger_fonction('chercher_logo', 'inc');
+			include_spip('action/iconifier');
+			$ajouter_image = charger_fonction('spip_image_ajouter', 'action');
+			foreach ($sources as $etat => $file) {
+				if ($file and $file['error']==0) {
+					$logo = $chercher_logo($flux['args']['id_objet'], $_id_objet, 'on');
+					if ($logo) {
+						spip_unlink($logo[0]);
+					}
+					if ($err = $ajouter_image($type.$etat.$id_objet, ' ', $file, true)) {
+						flux['message_erreur'] = $err;
+						set_request('logo_up', ' ');
+					}
+				}
 			}
 		}
 	}
