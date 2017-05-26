@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2008-2016 - Distribué sous licence GNU/GPL
+ * 2008-2017 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -183,10 +183,12 @@ function encodage($source, $options) {
 		$codec_audio = lire_config("spipmotion/acodec_$extension_attente");
 		if ($extension_attente == 'mp3') {
 			$codec_audio = 'libmp3lame';
-		} elseif (in_array($extension_attente, array('ogg','oga')) || $codec_audio == 'vorbis') {
+		} elseif (in_array($extension_attente, array('ogg','oga')) or $codec_audio == 'vorbis') {
 			$codec_audio = 'libvorbis';
 		} elseif (!$codec_audio) {
 			if ($extension_attente == 'ogv') {
+				$codec_audio = 'libvorbis';
+			} else if ($extension_attente == 'webm') {
 				$codec_audio = 'libvorbis';
 			}
 		}
@@ -502,7 +504,7 @@ function encodage($source, $options) {
 			 * Du coup on utilise exactement les mêmes réglages dans les 2 passes
 			 */
 			$infos_sup_normal_1 = "--params_supp \"$preset_1 -passlogfile $pass_log_file $infos_sup_normal\"";
-			$encodage_1 = $spipmotion_sh." --force true --pass 1 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $vcodec $fps $bitrate $infos_sup_normal_1 --s $fichier_temp --log $fichier_log";
+			$encodage_1 = $spipmotion_sh." --force true --pass 1 $acodec $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $vcodec $fps $bitrate $infos_sup_normal_1 --s $fichier_temp --log $fichier_log";
 			spip_log($encodage_1, 'spipmotion');
 			$lancement_encodage_1 = exec($encodage_1, $retour_1, $retour_int_1);
 			if ($retour_int_1 != 0) {
