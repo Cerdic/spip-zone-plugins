@@ -133,10 +133,8 @@ function generer_url_publier($id = null, $objet = 'article', $id_secteur = 0, $f
 	if ($forcer === false and objet_test_si_publie($objet, $id)) {
 		return generer_url_entite($id, $objet);
 	} else if (($forcer_ecrire == 'non' or !$forcer_ecrire) and is_numeric($id)) {
-		spip_log('ici', 'test.'._LOG_ERREUR);
 		$fields = objet_info($objet, 'field');
 		if (isset($fields['id_secteur'])) {
-			spip_log('On a id_secteur', 'test.'._LOG_ERREUR);
 			$table = table_objet_sql($objet);
 			$id_table_objet = id_table_objet($objet) ? id_table_objet($objet) : 'id_article';
 			
@@ -153,7 +151,6 @@ function generer_url_publier($id = null, $objet = 'article', $id_secteur = 0, $f
 					'spip_diogenes',
 					'id_secteur='.intval($id_secteur).' AND '.sql_in('objet', $objets)
 				);
-				spip_log($type_objet, 'test.'._LOG_ERREUR);
 				if ($type_objet) {
 					$page_publier = defined('_PAGE_PUBLIER') ? _PAGE_PUBLIER : 'publier';
 					$url = generer_url_public($page_publier, 'type_objet='.$type_objet, '', true);
