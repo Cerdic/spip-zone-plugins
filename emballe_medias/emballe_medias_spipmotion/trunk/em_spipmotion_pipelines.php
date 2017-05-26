@@ -5,7 +5,7 @@
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  *
- * © 2009/2015 - Distribue sous licence GNU/GPL
+ * © 2009/2017 - Distribue sous licence GNU/GPL
  *
  * Insertion dans les pipelines
  **/

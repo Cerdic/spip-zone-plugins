@@ -1,9 +1,9 @@
 <paquet
 	prefix="em_spipmotion"
 	categorie="edition"
-	version="1.0.4"
+	version="1.0.5"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="images/emballe_medias.png"
 >	
 
