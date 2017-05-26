@@ -153,7 +153,7 @@ function generer_url_publier($id = null, $objet = 'article', $id_secteur = 0, $f
 				);
 				if ($type_objet) {
 					$page_publier = defined('_PAGE_PUBLIER') ? _PAGE_PUBLIER : 'publier';
-					$url = generer_url_public($page_publier, 'type_objet='.$type_objet, '', true);
+					$url = parametre_url(generer_url_public($page_publier, 'type_objet='.$type_objet, '', true), $id_table_objet, $id);
 					return $url;
 				}
 			}
