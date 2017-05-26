@@ -928,7 +928,7 @@ function diogene_diogene_traiter($flux) {
 						spip_unlink($logo[0]);
 					}
 					if ($err = $ajouter_image($type.$etat.$id_objet, ' ', $file, true)) {
-						flux['message_erreur'] = $err;
+						$flux['message_erreur'] = $err;
 						set_request('logo_up', ' ');
 					}
 				}
