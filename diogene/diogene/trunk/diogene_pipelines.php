@@ -197,6 +197,9 @@ function diogene_editer_contenu_objet($flux) {
 				$type=$old_type;
 				$args['type'] = $old_type;
 			}
+			/**
+			 * TODO : Les rubriques aussi peuvent être multilingues
+			 */
 			if (in_array($type, array('article','page'))
 				and (count($langues_dispos)>1)) {
 				$saisie_langue = recuperer_fond('formulaires/selecteur_langue', array('langues_dispos' => $langues_dispos, 'id_article' => $args['contexte']['id_article']));
@@ -468,7 +471,6 @@ function diogene_formulaire_verifier($flux) {
 			$flux['data']['message_erreur'] = _T('diogene:message_erreur_general');
 		}
 	}
-	spip_log($flux, 'diogene.'._LOG_ERREUR);
 	return $flux;
 }
 
@@ -600,6 +602,7 @@ function diogene_pre_edition($flux) {
 
 	/**
 	 * Attention au herit envoyé dans le privé
+	 * TODO : Les articles ne sont pas les seuls à avoir une langue
 	 */
 	if (($flux['args']['table'] == 'spip_articles')
 		and _request('changer_lang')
