@@ -169,7 +169,7 @@ function action_emballe_medias_upload_dist() {
 				$id_document = $ancien_document;
 			}
 			$ajouter_doc = charger_fonction('ajouter_documents', 'action');
-			$id_document = $ajouter_doc($id_document,$files, $objet, $id_objet, 'document');
+			$id_document = $ajouter_doc($id_document, $files, $objet, $id_objet, 'document');
 			if (intval(reset($id_document))) {
 				$id_document = reset($id_document);
 			}
