@@ -164,6 +164,11 @@
 					cacher_option_intro=oui,
 					defaut=#GET{acodec_defaut},
 					datas=#GET{acodecs}})]]
+			[(#GET{acodecs}|count|=={1}|oui)
+				[(#SAISIE{input,acodec_#ENV{valeur},
+					type=hidden,
+					defaut=[(#GET{acodecs}|table_valeur{0})]})]
+			]
 			
 			[(#GET{acodecs}|count|=={1}|oui)
 				[(#SET{codec,[(#GET{acodecs}|table_valeur{0})]})]
