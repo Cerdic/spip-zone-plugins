@@ -1,6 +1,8 @@
 <?php 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Insertion dans le pipeline em_post_upload_medias
@@ -9,11 +11,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param array $flux Le contexte
  * @return array $flux le contexte complété
  */
-function em_doc2img_em_post_upload_medias($flux){
-	if(defined('_DIR_PLUGIN_FULLTEXT')){
-		$row = sql_fetsel('*','spip_documents','id_document='.intval($flux['args']['id_document']));
+function em_doc2img_em_post_upload_medias($flux) {
+	if (defined('_DIR_PLUGIN_FULLTEXT')) {
+		$row = sql_fetsel('*', 'spip_documents', 'id_document='.intval($flux['args']['id_document']));
 		if (include_spip('extract/'.$row['extension'])
-			&& ($lire = charger_fonction($row['extension'],'extracteur'))) {
+			and ($lire = charger_fonction($row['extension'],'extracteur'))) {
 			include_spip('inc/distant');
 			include_spip('inc/documents');
 			if (!$fichier = copie_locale(get_spip_doc($row['fichier']))) {
@@ -34,17 +36,19 @@ function em_doc2img_em_post_upload_medias($flux){
 				sql_updateq("spip_documents", array('contenu' => $contenu, 'extrait' => 'oui'), "id_document=".intval($row['id_document']));
 			}
 		}
-		if(!function_exists('lire_config'))
+		if (!function_exists('lire_config')) {
 			include_spip('inc/config');
-		if((lire_config('emballe_medias/fichiers/remplir_texte_article', 'on') != 'off') && $contenu && ($flux['args']['objet'] == 'article') && intval($flux['args']['id_objet'])){
-			$texte = sql_getfetsel('texte','spip_articles','id_article='.intval($flux['args']['id_objet']));
-			if(strlen(trim($texte)) == 0){
-				spip_log('on va ajouter le contenu du coup','fulltext');
+		}
+		if ((lire_config('emballe_medias/fichiers/remplir_texte_article', 'on') != 'off') 
+				and $contenu && ($flux['args']['objet'] == 'article') 
+				and intval($flux['args']['id_objet'])) {
+			$texte = sql_getfetsel('texte', 'spip_articles', 'id_article='.intval($flux['args']['id_objet']));
+			if (strlen(trim($texte)) == 0) {
 				include_spip('action/editer_article');
-				article_modifier($flux['args']['id_objet'], array('texte'=>$contenu));
+				article_modifier($flux['args']['id_objet'], array('texte' => $contenu));
 			}
 		}
 	}
 	return $flux;
 }
-?>
+
