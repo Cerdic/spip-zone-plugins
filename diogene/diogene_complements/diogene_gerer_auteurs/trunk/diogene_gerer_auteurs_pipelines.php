@@ -106,10 +106,12 @@ function diogene_gerer_auteurs_diogene_traiter($flux) {
 		foreach ($auteurs as $auteur) {
 			$auteurs_liste[] = $auteur['id_auteur'];
 		}
+		
+		$auteurs = _request('diogene_gerer_auteurs');
 		/**
 		 * diogene_gerer_auteurs n'est pas un array, on supprime tous les auteurs sauf soi même si on n'est pas admin
 		 */
-		if (!is_array(_request('diogene_gerer_auteurs'))) {
+		if (!is_array($auteurs)) {
 			foreach ($auteurs_liste as $auteur) {
 				/**
 				 * On ne peut pas s'enlever soit même des auteurs si l'on n'est pas admin
@@ -121,7 +123,7 @@ function diogene_gerer_auteurs_diogene_traiter($flux) {
 				}
 			}
 		} else {
-			foreach (_request('diogene_gerer_auteurs', array()) as $auteur) {
+			foreach ($auteurs as $auteur) {
 				if (!in_array($auteur, $auteurs_liste)
 					and $id_auteur = sql_getfetsel('id_auteur', 'spip_auteurs', 'id_auteur='.intval($auteur))) {
 					auteur_associer($auteur, array($type => $id_objet));
@@ -129,7 +131,7 @@ function diogene_gerer_auteurs_diogene_traiter($flux) {
 				}
 			}
 			foreach ($auteurs_liste as $id_auteur) {
-				if (!in_array($id_auteur, _request('diogene_gerer_auteurs'))) {
+				if (!in_array($id_auteur, $auteurs)) {
 					if ($id_auteur != $GLOBALS['visiteur_session']['id_auteur']
 						or $GLOBALS['visiteur_session']['statut'] == '0minirezo') {
 						auteur_dissocier($id_auteur, array($type => $id_objet));
