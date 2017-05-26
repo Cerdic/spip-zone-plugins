@@ -117,62 +117,51 @@ if (!test_espace_prive() and (defined('_DIOGENE_MODIFIER_PUBLIC') ? _DIOGENE_MOD
  */
 function generer_url_publier($id = null, $objet = 'article', $id_secteur = 0, $forcer = true, $forcer_ecrire = 'non') {
 	include_spip('inc/urls');
-
-	$id_table_objet = id_table_objet($objet) ? id_table_objet($objet) : 'id_article';
-	$table = table_objet_sql($objet);
-	$table_objet = table_objet($objet);
-
-	$infos_cherchees = array('statut');
-	$trouver_table = charger_fonction('trouver_table', 'base');
-
-	if ($desc = $trouver_table($table_objet)
-		and isset($desc['field']['id_secteur'])) {
-		$infos_cherchees[] = 'id_secteur';
+	
+	if (!function_exists('objet_test_si_publie')) {
+		include_spip('base/objets');
 	}
-
-	if (is_numeric($id)) {
-		$infos_objet = sql_fetsel($infos_cherchees, $table, $id_table_objet.'='.intval($id));
-		$id_secteur = $infos_objet['id_secteur'] ? $infos_objet['id_secteur'] : 0;
-	} else {
-		$infos_objet = array();
+	
+	if (!function_exists('objet_info')) {
+		include_spip('inc/filtres');
 	}
-
+	
 	/**
-	 * Si on ne force pas, on envoit vers la page de l'objet
+	 * Si on ne force pas et si l'objet est publie
+	 * on envoit vers la page publique de l'objet
 	 */
-	if ($forcer === false) {
-		if (in_array($infos_objet['statut'], array('publie','archive'))) {
-			return generer_url_entite($id, $objet);
+	if ($forcer === false and objet_test_si_publie($objet, $id)) {
+		return generer_url_entite($id, $objet);
+	} else if (($forcer_ecrire == 'non' or !$forcer_ecrire) and is_numeric($id)) {
+		$fields = objet_info($objet, 'field');
+		if (isset($fields['id_secteur'])) {
+			$table = table_objet_sql($objet);
+			$id_table_objet = id_table_objet($objet) ? id_table_objet($objet) : 'id_article';
+			
+			$objets[] = $objet;
+			if ($objet == 'article') {
+				$objets[] = 'emballe_media';
+				$objets[] = 'page';
+			}
+			
+			$id_secteur = sql_getfetsel('id_secteur', $table, $id_table_objet.'='.intval($id));
+			if (intval($id_secteur) > 0) {
+				$type_objet = sql_getfetsel(
+					'type',
+					'spip_diogenes',
+					'id_secteur='.intval($id_secteur).' AND '.sql_in('objet', $objets)
+				);
+				if ($type_objet) {
+					$page_publier = defined('_PAGE_PUBLIER') ? _PAGE_PUBLIER : 'publier';
+					$url = generer_url_public($page_publier, 'type_objet='.$type_objet, '', true);
+				}
+			}
 		}
 	}
-	$objets = array();
-	$objets[] = $objet;
-	if ($objet == 'article') {
-		$objets[] = 'emballe_media';
-		$objets[] = 'page';
-	}
-
-	if ($forcer_ecrire == 'prive') {
-		$type_objet = sql_getfetsel(
-			'type',
-			'spip_diogenes',
-			'id_secteur='.intval($id_secteur).' AND '.sql_in('objet', $objets)
-		);
-	}
-
-	if (isset($type_objet) and $type_objet) {
-		$page_publier = defined('_PAGE_PUBLIER') ? _PAGE_PUBLIER : 'publier';
-		$url = generer_url_public($page_publier, 'type_objet=' . $type_objet, '', true);
-		if (is_numeric($id)) {
-			$url = parametre_url($url, $id_table_objet, intval($id));
-		}
-	} else {
-		$a = id_table_objet($objet) . '=' . intval($id);
-		if (!function_exists('objet_info')) {
-			include_spip('inc/filtres');
-		}
-		$url = generer_url_ecrire(objet_info($objet, 'url_voir'), $a);
-	}
+	
+	$a = id_table_objet($objet) . '=' . intval($id);
+	$url = generer_url_ecrire(objet_info($objet, 'url_voir'), $a);
+	
 	return $url;
 }
 
