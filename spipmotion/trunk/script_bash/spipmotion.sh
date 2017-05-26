@@ -16,7 +16,7 @@
 #    http://technique.arscenic.org/compilation-de-logiciel/article/compiler-ffmpeg
 #
 
-VERSION="0.4.0"
+VERSION="0.5.0"
 
 ################ LOCALISATION #####################
 messageaide="
