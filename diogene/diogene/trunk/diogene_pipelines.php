@@ -577,8 +577,8 @@ function diogene_formulaire_traiter($flux) {
  */
 function diogene_pre_insertion($flux) {
 	if (($flux['args']['table'] == 'spip_articles') and _request('changer_lang')) {
-		$flux['data']['lang'] = _request('changer_lang');
-		$flux['data']['langue_choisie'] = 'oui';
+		set_request('lang', _request('changer_lang'));
+		set_request('langue_choisie', 'oui');
 	}
 	return $flux;
 }
@@ -597,18 +597,21 @@ function diogene_pre_insertion($flux) {
 function diogene_pre_edition($flux) {
 	$pipeline = pipeline('diogene_objets', array());
 	if (in_array($flux['args']['type'], array_keys($pipeline)) and ($flux['args']['action']=='modifier')) {
-		$flux = pipeline('diogene_traiter', $flux);
+		$data = pipeline('diogene_traiter', $flux);
+		if (isset($data['data'])) {
+			$flux = $data;
+		} else {
+			$flux['data'] = $data;
+		}
 	}
 
 	/**
 	 * Attention au herit envoyé dans le privé
-	 * TODO : Les articles ne sont pas les seuls à avoir une langue
 	 */
-	if (($flux['args']['table'] == 'spip_articles')
-		and _request('changer_lang')
+	if (_request('changer_lang')
 		and _request('changer_lang') != 'herit') {
-		$flux['data']['lang'] = _request('changer_lang');
-		$flux['data']['langue_choisie'] = 'oui';
+		set_request('lang', _request('changer_lang'));
+		set_request('langue_choisie', _request('oui'));
 	}
 
 	if ($flux['args']['table'] == 'spip_diogenes') {
@@ -874,7 +877,6 @@ function diogene_diogene_traiter($flux) {
 			suivre_invalideur("id='id_forum/$id_objet'");
 		}
 	}
-
 	// effectuer la suppression si demandee d'un logo
 	if (_request('supprimer_logo_on')) {
 		$objet = $flux['args']['type'];
