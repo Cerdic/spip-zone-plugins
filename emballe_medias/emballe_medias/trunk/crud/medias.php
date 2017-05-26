@@ -107,7 +107,7 @@ function crud_medias_create_dist($dummy, $set = null) {
 					$c['id_parent'] = $id_rubrique;
 				}
 
-				$res = $crud('create','article','',$c);
+				$res = $crud('create', 'article', '', $c);
 				if (is_numeric($res['result']['id'])) {
 					$id_article = $res['result']['id'];
 				} else {
@@ -124,7 +124,7 @@ function crud_medias_create_dist($dummy, $set = null) {
 						$c[$champ] = $set[$champ];
 					}
 				}
-				$res_update_article = $crud('update','article',$id_article,$c);
+				$res_update_article = $crud('update', 'article', $id_article, $c);
 			}
 
 			if (!$e && intval($id_article)) {
@@ -181,7 +181,7 @@ function crud_medias_create_dist($dummy, $set = null) {
 							if (intval($id_gis) > 0) {
 								$gis = $crud('update', 'gis', $id_gis, $set['gis']);
 							} else {
-								$gis = $crud('create','gis','',$set['gis']);
+								$gis = $crud('create', 'gis', '', $set['gis']);
 							}
 						}
 					}
@@ -265,7 +265,7 @@ function crud_medias_update_dist($id, $set = null) {
 			$c['statut'] = $set['statut'];
 		}
 
-		$article = $crud('update','article', $id, $c);
+		$article = $crud('update', 'article', $id, $c);
 		if ($article['success']) {
 			/**
 			 * Mise à jour du point géolocalisé ou création si non existant

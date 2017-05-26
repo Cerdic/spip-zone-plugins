@@ -95,5 +95,3 @@ function formulaires_em_supprimer_media_traiter_dist($id_document, $type='', $ob
 	}
 	return $res;
 }
-
-?>
