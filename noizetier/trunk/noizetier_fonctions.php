@@ -875,6 +875,7 @@ function noizetier_importer_configuration($type_import, $import_compos, $config)
  *
  * @return string
  */
+ // TODO : faut-il garder cette fonction ou simplifier en utilisant uniquement chemin_image() ?
 function noizetier_icone_chemin($icone){
 
 	if (!$chemin = chemin_image($icone)) {
@@ -1088,6 +1089,8 @@ function noizetier_bloc_compter_noisettes($identifiant) {
  * @api
  * @filtre
  *
+ * @param array $filtres
+ *
  * @return array|null
  * 		Tableau des pages, l'index est l'identifiant de la page.
  */
@@ -1105,50 +1108,37 @@ function noizetier_page_repertorier($filtres = array()) {
 			// On recherche en premier lieu les pages et les compositions explicites
 			// -- on optimise la recherche si on a un filtre est_vrituelle à true inutile de récupérer les pages
 			//    et compositions explicites
-			if (!$filtres or ($filtres and empty($filtres['est_virtuelle']))) {
-				if ($fichiers = find_all_in_path($options['repertoire_pages'], '.+[.]html$')) {
-					foreach ($fichiers as $squelette => $chemin) {
-						$page = basename($squelette, '.html');
-						$dossier = dirname($chemin);
-						// Exclure certaines pages :
-						// -- celles du privé situes dans prive/contenu
-						// -- page liée au plugin Zpip en v1
-						// -- z_apl liée aux plugins Zpip v1 et Zcore
-						// -- les compositions explicites si le plugin Compositions n'est pas activé
-						if ((substr($dossier, -13) != 'prive/contenu')
-						and (($page != 'page') or !defined('_DIR_PLUGIN_Z'))
-						and (($page != 'z_apl') or (!defined('_DIR_PLUGIN_Z') and !defined('_DIR_PLUGIN_ZCORE')))
-						and (defined('_DIR_PLUGIN_COMPOSITIONS')
-							or (!defined('_DIR_PLUGIN_COMPOSITIONS') and !noizetier_page_est_composition($page)))) {
-							if ($configuration = noizetier_page_informer($page, '', $options)) {
-								// On n'inclue la page que si les plugins qu'elle nécessite explicitement dans son
-								// fichier de configuration sont bien tous activés.
-								// Rappel : si une page est incluse dans un plugin non actif elle ne sera pas détectée
-								//          lors du find_all_in_path() puisque le plugin n'est pas dans le path SPIP.
-								$page_a_garder = true;
-								if (isset($configuration['necessite'])) {
-									foreach ($configuration['necessite'] as $plugin) {
-										if (!defined('_DIR_PLUGIN_'.strtoupper($plugin))) {
-											$page_a_garder = false;
-											break;
-										}
+			if ($fichiers = find_all_in_path($options['repertoire_pages'], '.+[.]html$')) {
+				foreach ($fichiers as $squelette => $chemin) {
+					$page = basename($squelette, '.html');
+					$dossier = dirname($chemin);
+					// Exclure certaines pages :
+					// -- celles du privé situes dans prive/contenu
+					// -- page liée au plugin Zpip en v1
+					// -- z_apl liée aux plugins Zpip v1 et Zcore
+					// -- les compositions explicites si le plugin Compositions n'est pas activé
+					if ((substr($dossier, -13) != 'prive/contenu')
+					and (($page != 'page') or !defined('_DIR_PLUGIN_Z'))
+					and (($page != 'z_apl') or (!defined('_DIR_PLUGIN_Z') and !defined('_DIR_PLUGIN_ZCORE')))
+					and (defined('_DIR_PLUGIN_COMPOSITIONS')
+						or (!defined('_DIR_PLUGIN_COMPOSITIONS') and !noizetier_page_est_composition($page)))) {
+						if ($configuration = noizetier_page_informer($page, '', $options)) {
+							// On n'inclue la page que si les plugins qu'elle nécessite explicitement dans son
+							// fichier de configuration sont bien tous activés.
+							// Rappel : si une page est incluse dans un plugin non actif elle ne sera pas détectée
+							//          lors du find_all_in_path() puisque le plugin n'est pas dans le path SPIP.
+							$page_a_garder = true;
+							if (isset($configuration['necessite'])) {
+								foreach ($configuration['necessite'] as $plugin) {
+									if (!defined('_DIR_PLUGIN_'.strtoupper($plugin))) {
+										$page_a_garder = false;
+										break;
 									}
 								}
-								// Application des filtres éventuellement demandés en argument de la fonction
-								if ($filtres) {
-									foreach ($filtres as $_critere => $_valeur) {
-										if ((($_critere == 'est_composition') and $_valeur and !$configuration['composition'])
-										or (($_critere == 'est_composition') and !$_valeur and $configuration['composition'])
-										or (isset($configuration[$_critere]) and ($configuration[$_critere] != $_valeur))) {
-											$page_a_garder = false;
-											break;
-										}
-									}
-								}
+							}
 
-								if ($page_a_garder) {
-									$pages[$page] = $configuration;
-								}
+							if ($page_a_garder) {
+								$pages[$page] = $configuration;
 							}
 						}
 					}
@@ -1159,32 +1149,13 @@ function noizetier_page_repertorier($filtres = array()) {
 			// qui ne sont définies que dans une meta propre au noiZetier.
 			// -- on optimise la recherche si on a un filtre est_virtuelle ou est_composition à false inutile de récupérer les
 			//    compositions virtuelles du noiZetier
-			if (!$filtres
-			or ($filtres
-				and (!isset($filtres['est_virtuelle']) or (isset($filtres['est_virtuelle']) and $filtres['est_virtuelle']))
-				and (!isset($filtres['est_composition']) or (isset($filtres['est_composition']) and $filtres['est_composition'])))) {
-				if (defined('_DIR_PLUGIN_COMPOSITIONS')) {
-					include_spip('inc/config');
-					$options['compositions'] = lire_config('noizetier_compositions', array());
-					if ($options['compositions']) {
-						foreach ($options['compositions'] as $_composition => $_configuration) {
-							if ($configuration = noizetier_page_informer($_composition, '', $options)) {
-								$page_a_garder = true;
-								// Application des filtres éventuellement demandés en argument de la fonction
-								if ($filtres) {
-									foreach ($filtres as $_critere => $_valeur) {
-										if (($_critere != 'est_composition')
-										and ($_critere != 'est_virtuelle')
-										and (isset($configuration[$_critere]) and ($configuration[$_critere] != $_valeur))) {
-											$page_a_garder = false;
-											break;
-										}
-									}
-								}
-								if ($page_a_garder) {
-									$pages[$_composition] = $configuration;
-								}
-							}
+			if (defined('_DIR_PLUGIN_COMPOSITIONS')) {
+				include_spip('inc/config');
+				$options['compositions'] = lire_config('noizetier_compositions', array());
+				if ($options['compositions']) {
+					foreach ($options['compositions'] as $_composition => $_configuration) {
+						if ($configuration = noizetier_page_informer($_composition, '', $options)) {
+								$pages[$_composition] = $configuration;
 						}
 					}
 				}
@@ -1195,7 +1166,22 @@ function noizetier_page_repertorier($filtres = array()) {
 		}
 	}
 
-	return $pages;
+	// Application des filtres éventuellement demandés en argument de la fonction
+	$pages_repertoriees = $pages;
+	if ($filtres) {
+		foreach ($pages_repertoriees as $_page => $_configuration) {
+			foreach ($filtres as $_critere => $_valeur) {
+				if ((($_critere == 'est_composition') and $_valeur and !$_configuration['composition'])
+				or (($_critere == 'est_composition') and !$_valeur and $_configuration['composition'])
+				or (isset($_configuration[$_critere]) and ($_configuration[$_critere] != $_valeur))) {
+					unset($pages_repertoriees[$_page]);
+					break;
+				}
+			}
+		}
+	}
+
+	return $pages_repertoriees;
 }
 
 

@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	Vous pouvez choisir un nouvel identifiant ou suffixer l’identifiant de référence ainsi : <i>@composition@<strong>_suffixe</strong></i>',
 	'explication_dupliquer_composition_suffixer' => '.',
 	'explication_glisser_deposer' => 'Vous pouvez ajouter une noisette ou les réordonner par simple glisser/déposer.',
-	'explication_heritages_composition' => 'Vous pouvez définir ici les compositions qui seront héritées par les objets de la branche.',
+	'explication_heritages_composition' => 'La composition en cours d\'édition est basée sur le type de contenu « @type@ » qui possède des types de contenu enfants. Vous pouvez définir pour chaque type de contenu enfant une composition à appliquer par défaut.',
 	'explication_noizetier_css' => 'Vous pouvez ajouter à la noisette d’éventuelles classes CSS supplémentaires.',
 	'explication_objet' => 'Contenu de type « @type@ »',
 	'explication_page' => 'Page autonome non liée à un type de contenu',
@@ -89,7 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_liste_compos_config' => 'Ce fichier de configuration définis les compositions du noizetier suivantes :',
 	'formulaire_liste_pages_config' => 'Ce fichier de configuration définis des noisettes sur les pages suivantes :',
 	'formulaire_modifier_composition' => 'Modifier cette composition :',
-	'formulaire_modifier_composition_heritages' => 'Modifier les héritages',
+	'formulaire_modifier_composition_heritages' => 'Compositions héritées',
 	'formulaire_modifier_noisette' => 'Modifier cette noisette',
 	'formulaire_modifier_page' => 'Modifier cette composition',
 	'formulaire_noisette_sans_parametre' => 'Cette noisette ne propose pas de paramètre.',
@@ -146,7 +146,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modifier_dans_prive' => 'Modifier dans l’espace privé',
 
 	// N
-	'ne_pas_definir_d_heritage' => 'Ne pas définir d’héritage',
+	'ne_pas_definir_d_heritage' => 'Ne pas définir de composition héritée',
 	'noisette_numero' => 'noisette numéro :',
 	'noisettes_composition' => 'Noisettes spécifiques à la composition <i>@composition@</i> :',
 	'noisettes_configurees_aucune' => 'Aucune noisette configurée',

@@ -6,7 +6,6 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<input type="hidden" name="page" value="#ENV{page}" />
 		<div class="editer-groupe">
 			[(#REM) Le type de page n'est pas éditable car la composition est toujours basée sur une page précise ]
 			[(#SAISIE{input, type_page,
@@ -91,8 +90,9 @@
 				defaut=#ENV{_blocs_defaut},
 			})]
 
-			[(#REM) Si on crée une composition virtuelle à partir d'une page, il est possible de copier les noisettes
-					de la page ]
+			[(#REM) Si on crée une composition virtuelle à partir d'une page, il est possible de copier ou pas
+					les noisettes de la page. Pour une duplication de composition, la copie des noisettes est
+					systématique. ]
 			#SET{label, #VAL{noizetier:formulaire_peuplement}|_T{#ARRAY{page, #ENV{type_page}}}
 			[(#ENV{edition}|=={creer}|oui)
 				[(#SAISIE{case, peupler,
@@ -106,7 +106,7 @@
 		<B_heritage>
 		<fieldset>
 			<legend><:noizetier:formulaire_modifier_composition_heritages:></legend>
-			<p class="explication"><:noizetier:explication_heritages_composition:></p>
+			<p class="explication"><:noizetier:explication_heritages_composition{type=#ENV{type_page}}:></p>
 			<div class="editer-groupe">
 		<BOUCLE_heritage(DATA){source table, #ENV{_heritiers}}{par cle}>
 				<B_type>
@@ -114,13 +114,13 @@
 				#SET{obli,''}
 				#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-					<label for="#GET{name}">[(#NOIZETIER_LISTE_PAGES|table_valeur{#CLE}|table_valeur{nom}|sinon{#CLE})]</label>
+					<label for="#GET{name}">[(#CLE|objet_info{texte_objet}|_T)]</label>
 					[<span class='erreur_message'>(#GET{erreurs})</span>]
 					<select class="select" name="#GET{name}" id="#GET{name}">
 						<option value=""><:noizetier:ne_pas_definir_d_heritage:></option>
-						<option value="-"[(#ENV{#GET{name}}|=={'-'}|oui)selected="selected"]><:compositions:composition_defaut:></option>
+						<option value="-"[(#ENV{#GET{name}}|=={'-'}|oui)selected="selected"]><:compositions:composition_defaut|ucfirst:>[ \((#_heritage:CLE)\)]</option>
 				<BOUCLE_type(DATA){source table, #VALEUR}{par cle}>
-						<option value="#CLE"[(#ENV{heritage-#_heritage:CLE}|=={#CLE}|oui)selected="selected"]>[(#VALEUR|table_valeur{nom}|sinon{#CLE})]</option>
+						<option value="#CLE"[(#ENV{heritage-#_heritage:CLE}|=={#CLE}|oui)selected="selected"]>[(#VALEUR) ][\([(#_heritage:CLE)]-(#CLE)\)]</option>
 				</BOUCLE_type>
 					</select>
 				</div>

@@ -186,15 +186,18 @@ function noizetier_compositions_lister_disponibles($flux) {
 	// Récupération des compositions virtuelles du noiZetier afin de les injecter dans le pipeline
 	// étant donné qu'elles ne peuvent pas être détectées par Compositions car sans XML
 	// -- filtre sur l'indicateur est_virtuelle qui n'est à vrai que pour les compositions
-	// -- filtre sur le type de contenu
-	$filtres = array('est_virtuelle' => true, 'type' => $type);
+	// -- filtre sur le type de contenu ou pas suivant l'appel
+	$filtres = array('est_virtuelle' => true);
+	if ($type) {
+		$filtres['type'] = $type;
+	}
 	$compositions_virtuelles = noizetier_page_repertorier($filtres);
 
 	if ($compositions_virtuelles) {
 		// On insère les compositions virtuelles selon le format imposé par le plugin Compositions
 		foreach ($compositions_virtuelles as $_identifiant => $_configuration) {
 			if ($informer){
-				$flux['data'][$type][$_configuration['composition']] = array(
+				$flux['data'][$_configuration['type']][$_configuration['composition']] = array(
 					'nom' 			=> $_configuration['nom'],
 					'description'	=> isset($_configuration['description']) ? $_configuration['description'] : '',
 					'icon' 			=> noizetier_icone_chemin($_configuration['icon']),
@@ -204,7 +207,7 @@ function noizetier_compositions_lister_disponibles($flux) {
 					'image_exemple'	=> '',
 				);
 			} else {
-				$flux['date'][$type][$_configuration['composition']] = 1;
+				$flux['date'][$_configuration['type']][$_configuration['composition']] = 1;
 			}
 		}
 	}

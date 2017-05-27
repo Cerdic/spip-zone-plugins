@@ -34,7 +34,7 @@
 		#SET{retour,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
 	]
 	<div class="ajax">
-		[(#FORMULAIRE_EDITER_PAGE{#ENV{page}, #ENV{edition}, #GET{description_page}, #GET{redirect}})]
+		[(#FORMULAIRE_EDITER_PAGE{#ENV{edition}, #GET{description_page}, #GET{redirect}})]
 	</div>
 	[(#EVAL{_AJAX}|oui)
 		<script type="text/javascript">/*<!\[CDATA\[*/
