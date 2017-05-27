@@ -4,6 +4,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+// TODO : à quoi ça sert vraiement?
 if (!function_exists('autoriser')) {
 	include_spip('inc/autoriser');
 }     // si on utilise le formulaire dans le public
@@ -172,10 +173,10 @@ function formulaires_editer_page_traiter_dist($edition, $description_page, $redi
 
 	// Traitement des branches éventuelles pour la composition virtuelle résultante
 	$branche = array();
-	$heritages = construire_heritages($type_page, $identifiant);
-	foreach ($heritages['_heritiers'] as $_objet => $_infos) {
-		if ($heritage = _request("heritage-${_objet}")) {
-			$branche[$_objet] = $heritage;
+	$heritages = construire_heritages($type_page);
+	foreach ($heritages['_heritiers'] as $_objet => $_composition) {
+		if ($composition_heritee = _request("heritage-${_objet}")) {
+			$branche[$_objet] = $composition_heritee;
 		}
 	}
 	$compositions_virtuelles[$identifiant]['branche'] = $branche;
@@ -248,7 +249,7 @@ function formulaires_editer_page_traiter_dist($edition, $description_page, $redi
  *
  * @return array
  */
-function construire_heritages($type, $page) {
+function construire_heritages($type, $page = '') {
 
 	// Initialisation du tableau
 	$heritages = array('_heritiers' => array());
@@ -266,7 +267,13 @@ function construire_heritages($type, $page) {
 			// Pour chaque composition répertoriée par le noiZetier, on détecte si celle-ci est affectable à
 			// un des types d'objet ayant un parent et on liste les compositions par objet héritier.
 			if (in_array($_configuration['type'], $objets_heritiers)) {
-				$heritages['_heritiers'][$_configuration['type']][$_configuration['composition']] = $_configuration['nom'];
+				if (empty($heritages['_heritiers'][$_configuration['type']]['-'])) {
+					// Ne pas oublier d'insérer une fois la page par défaut de l'objet
+					$heritages['_heritiers'][$_configuration['type']]['-'] =
+						ucfirst(_T('compositions:composition_defaut')) . ' (' . $_configuration['type'] . ')';
+				}
+				$heritages['_heritiers'][$_configuration['type']][$_configuration['composition']] =
+					$_configuration['nom'] . ' (' . $_configuration['type'] . '-' . $_configuration['composition'] . ')';
 				// On initialise, pour la page concernée si besoin, la composition affectée.
 				if (($_page == $page) and !empty($_configuration['branche'])) {
 					foreach ($_configuration['branche'] as $_objet => $_composition) {
