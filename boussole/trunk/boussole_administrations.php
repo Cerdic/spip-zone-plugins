@@ -138,7 +138,7 @@ function maj02_boussole() {
 	if ($akas_boussole) {
 		foreach (array_map('reset', $akas_boussole) as $_aka_boussole) {
 			if ($_aka_boussole != 'spip')
-				supprimer_boussole($_aka_boussole);
+				boussole_supprimer($_aka_boussole);
 		}
 	}
 	spip_log('Maj 0.2 des données du plugin',_BOUSSOLE_LOG . _LOG_INFO);
