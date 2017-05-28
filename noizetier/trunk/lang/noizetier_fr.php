@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	Vous pouvez choisir un nouvel identifiant ou suffixer l’identifiant de référence ainsi : <i>@composition@<strong>_suffixe</strong></i>',
 	'explication_dupliquer_composition_suffixer' => '.',
 	'explication_glisser_deposer' => 'Vous pouvez ajouter une noisette ou les réordonner par simple glisser/déposer.',
-	'explication_heritages_composition' => 'La composition en cours d\'édition est basée sur le type de contenu « @type@ » qui possède des types de contenu enfants. Vous pouvez définir pour chaque type de contenu enfant une composition à appliquer par défaut.',
+	'explication_heritages_composition' => 'La composition en cours d’édition est basée sur le type de contenu « @type@ » qui possède des types de contenu enfants. Vous pouvez définir pour chaque type de contenu enfant une composition à appliquer par défaut.',
 	'explication_noizetier_css' => 'Vous pouvez ajouter à la noisette d’éventuelles classes CSS supplémentaires.',
 	'explication_objet' => 'Contenu de type « @type@ »',
 	'explication_page' => 'Page autonome non liée à un type de contenu',

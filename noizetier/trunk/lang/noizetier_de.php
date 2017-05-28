@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_noizetier_titre' => 'Nussbaum', # MODIF
 	'erreur_doit_choisir_noisette' => 'Sie müssen eine Code-Nuss auswählen.',
 	'erreur_mise_a_jour' => 'Beim Aktualisieren der Datenbank ist ein Fehler aufgetreten.',
-	'explication_heritages_composition' => 'Hier können sie die Kompositionen festlegen, die den Objekten des Zweigs vererbt weden.',
+	'explication_heritages_composition' => 'Hier können sie die Kompositionen festlegen, die den Objekten des Zweigs vererbt weden.', # MODIF
 	'explication_noizetier_css' => 'Sie können der Code-Nus zusätzliche CSS-Lassen zuordnen.',
 	'explication_raccourcis_typo' => 'Sie können SPIP-Tags verwenden.',
 
@@ -93,7 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_icones' => 'Icon-Liste',
 
 	// N
-	'ne_pas_definir_d_heritage' => 'Keine Vererbung festlegen',
+	'ne_pas_definir_d_heritage' => 'Keine Vererbung festlegen', # MODIF
 	'noisettes_composition' => 'Code-Nüsse der Komposition <i>@composition@</i> :',
 	'noisettes_page' => 'Code-Nüsse der Seite <i>@type@</i> :',
 	'noisettes_toutes_pages' => 'Code-Nüsse für alle Seiten:',

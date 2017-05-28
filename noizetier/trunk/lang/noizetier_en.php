@@ -44,7 +44,7 @@ You can choose a new identifier or suffix the reference identifier as follows:
 <i>@composition@<strong>_suffixe</strong></i>',
 	'explication_dupliquer_composition_suffixer' => '.',
 	'explication_glisser_deposer' => 'You can add a nut or order them by drag and drop.',
-	'explication_heritages_composition' => 'Here you can set the compositions that will be inherited by the objects of the branch.',
+	'explication_heritages_composition' => 'Here you can set the compositions that will be inherited by the objects of the branch.', # MODIF
 	'explication_noizetier_css' => 'You can add some additional CSS classes to the nut.',
 	'explication_raccourcis_typo' => 'You can use the SPIP typographical shortcuts.',
 
@@ -73,7 +73,7 @@ You can choose a new identifier or suffix the reference identifier as follows:
 	'formulaire_liste_pages_config' => 'This configuration file defines
 nuts on the following pages:',
 	'formulaire_modifier_composition' => 'Edit this composition:',
-	'formulaire_modifier_composition_heritages' => 'Edit the heritages',
+	'formulaire_modifier_composition_heritages' => 'Edit the heritages', # MODIF
 	'formulaire_modifier_noisette' => 'Edit this nut',
 	'formulaire_modifier_page' => 'Edit this page', # MODIF
 	'formulaire_noisette_sans_parametre' => 'This nut has no parameters.',
@@ -122,7 +122,7 @@ nuts on the following pages:',
 	'modifier_dans_prive' => 'Modify in the private area',
 
 	// N
-	'ne_pas_definir_d_heritage' => 'Do not define heritage',
+	'ne_pas_definir_d_heritage' => 'Do not define heritage', # MODIF
 	'noisette_numero' => 'nut number :',
 	'noisettes_composition' => 'Specific nuts to the composition <i>@composition@</i>:',
 	'noisettes_disponibles' => 'Nuts available',

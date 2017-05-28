@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_doit_choisir_noisette' => 'Usted debe elegir una noisette.',
 	'erreur_mise_a_jour' => 'Un error se ha producido durante la actualización  de la base de datos. ',
 	'explication_glisser_deposer' => 'Usted puede añadir una noisette o bien reordenarlas por simple deslizar-depositar',
-	'explication_heritages_composition' => 'Usted puede definir aquí las composiciones que serán heredadas por los objetos de la rama.',
+	'explication_heritages_composition' => 'Usted puede definir aquí las composiciones que serán heredadas por los objetos de la rama.', # MODIF
 	'explication_noizetier_css' => 'Puede añadir  a la noisette otras  clases CSS suplementarias.',
 	'explication_raccourcis_typo' => 'Puede utilizar los  atajos tipográficos de SPIP.',
 
@@ -63,7 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_liste_compos_config' => 'Este fichero de configuración define las composiciones del noizetier siguientes : ',
 	'formulaire_liste_pages_config' => 'Este fichero de configuración define las noisettes sobre las siguientes páginas :',
 	'formulaire_modifier_composition' => 'Modificar esta composición :',
-	'formulaire_modifier_composition_heritages' => 'Modificar las herencias',
+	'formulaire_modifier_composition_heritages' => 'Modificar las herencias', # MODIF
 	'formulaire_modifier_noisette' => 'Modificar esta  noisette',
 	'formulaire_modifier_page' => 'Modificar esta página', # MODIF
 	'formulaire_noisette_sans_parametre' => 'Esta  noisette no propone parámetro',
@@ -110,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modifier_dans_prive' => 'Modificar en el espacio privado',
 
 	// N
-	'ne_pas_definir_d_heritage' => 'No definir la herencia',
+	'ne_pas_definir_d_heritage' => 'No definir la herencia', # MODIF
 	'noisette_numero' => 'noisette numero :',
 	'noisettes_composition' => 'Noisettes específicas a la composición <i>@composition@</i> :', # lo que es código, no lo traduzco, lo dejo tal cual
 	'noisettes_disponibles' => 'Noisettes disponibles',

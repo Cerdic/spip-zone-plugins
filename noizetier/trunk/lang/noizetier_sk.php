@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_code' => 'POZOR! Pre pokročilých používateľov. Môžete zadať kód SPIPu (cykly a tagy), ktorý sa zobrazí tak, akoby to bola šablóna. Oriešok bude mať prístup aj k všetkým premenným prostredia danej stránky.',
 	'explication_description_code' => 'Na interné použitie. Nezobrazí sa na verejne prístupnej stránke.',
 	'explication_glisser_deposer' => 'Môžete pridať oriešok alebo oriešky inak usporiadať jednoduchým kliknutím a uvoľnením myši.',
-	'explication_heritages_composition' => 'Tu môžete nastaviť rozmiestnenia, ktoré budú používať objekty danej vetvy.',
+	'explication_heritages_composition' => 'Tu môžete nastaviť rozmiestnenia, ktoré budú používať objekty danej vetvy.', # MODIF
 	'explication_noizetier_css' => 'Oriešku môžete pridať hocijaké ďalšie triedy CSS',
 	'explication_raccourcis_typo' => 'Môžete používať klávesové skratky SPIPu.',
 
@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_liste_compos_config' => 'Tento súbor s nastaveniami definuje tieto rozmiestnenia modulu noizetier:',
 	'formulaire_liste_pages_config' => 'Tento súbor s nastaveniami definuje oriešky na týchto stránkach:',
 	'formulaire_modifier_composition' => 'Upraviť toto rozloženie:',
-	'formulaire_modifier_composition_heritages' => 'Upraviť závislosti tohto rozmiestnenia:',
+	'formulaire_modifier_composition_heritages' => 'Upraviť závislosti tohto rozmiestnenia:', # MODIF
 	'formulaire_modifier_noisette' => 'Upraviť tento oriešok',
 	'formulaire_modifier_page' => 'Upraviť túto stránku', # MODIF
 	'formulaire_noisette_sans_parametre' => 'Tento oriešok neponúka nastavenie.',
@@ -114,7 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modifier_dans_prive' => 'Upraviť zo súkromnej zóny',
 
 	// N
-	'ne_pas_definir_d_heritage' => 'Nedefinovať dedičnosť',
+	'ne_pas_definir_d_heritage' => 'Nedefinovať dedičnosť', # MODIF
 	'noisette_numero' => 'oriešok číslo:',
 	'noisettes_composition' => 'Oriešky, ktoré sa používa iba toto rozmiestnení <i>@composition@:</i>',
 	'noisettes_disponibles' => 'Dostupné oriešky',

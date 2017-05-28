@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_doit_choisir_noisette' => 'مي‌توانيد يك فندق انتخاب كنيد.',
 	'erreur_mise_a_jour' => 'هنگام به هنگام سازي پايگاه داده‌ها خطايي رخ داده است.',
 	'explication_heritages_composition' => 'اينجا مي‌توانيد تركيب‌هايي را تنظيم كنيد كه اشياي اين شاخه به ارث خواهند برد.
-',
+', # MODIF
 	'explication_noizetier_css' => 'مي‌تواند بعضي از طبقات اضافي سي.اس.اس‌ را به اين فندق اضافه كنيد.
 ',
 	'explication_raccourcis_typo' => 'مي‌توانيد از ميان‌ برهاي حروف‌نگاري اسپيپ استفاه كنيد.',
@@ -94,7 +94,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_icones' => 'فهرست صورتك‌ها',
 
 	// N
-	'ne_pas_definir_d_heritage' => 'تعريف نكردن ميراث',
+	'ne_pas_definir_d_heritage' => 'تعريف نكردن ميراث', # MODIF
 	'noisettes_composition' => 'فندق‌هاي مشخص شده در تركيب <i>@composition@</i>:',
 	'noisettes_page' => 'فندق‌هاي مشخص شده براي صفحه‌ي <i>@type@</i> :',
 	'noisettes_toutes_pages' => 'فندق‌هاي مشترك در تمام صفحه‌ها: ',

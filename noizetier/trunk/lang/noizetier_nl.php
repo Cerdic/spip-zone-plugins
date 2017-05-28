@@ -46,7 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	Je kunt een nieuwe identificatie kozen, of de bestaande van een suffix voorzien: <i>@composition@<strong>_suffix</strong></i>',
 	'explication_dupliquer_composition_suffixer' => '.',
 	'explication_glisser_deposer' => 'Je kunt een nootje toevoegen of met schuiven en plakken herschikken.',
-	'explication_heritages_composition' => 'Je kunt hier de composities vastleggen die door onderliggende  objecten zullen worden geërfd.',
+	'explication_heritages_composition' => 'Je kunt hier de composities vastleggen die door onderliggende  objecten zullen worden geërfd.', # MODIF
 	'explication_noizetier_css' => 'Je kunt eventueel extra CSS classes aan het nootje toevoegen.',
 	'explication_raccourcis_typo' => 'Je kunt de typografische snelkoppelingen van SPIP gebruiken.',
 
@@ -74,7 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_liste_compos_config' => 'Dit configuratiebestand bepaalt de volgende composities:',
 	'formulaire_liste_pages_config' => 'Dit configuratiebestand bepaalt de nootjes op de volgende bladzijden:',
 	'formulaire_modifier_composition' => 'Deze compositie aanpassen:',
-	'formulaire_modifier_composition_heritages' => 'Pas het erven aan',
+	'formulaire_modifier_composition_heritages' => 'Pas het erven aan', # MODIF
 	'formulaire_modifier_noisette' => 'Dit nootje aanpassen',
 	'formulaire_modifier_page' => 'Deze bladzijde aanpassen', # MODIF
 	'formulaire_noisette_sans_parametre' => 'Dit nootje heeft geen parameters.',
@@ -123,7 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modifier_dans_prive' => 'Aanpassen in de privé-ruimte',
 
 	// N
-	'ne_pas_definir_d_heritage' => 'Erven niet bepalen',
+	'ne_pas_definir_d_heritage' => 'Erven niet bepalen', # MODIF
 	'noisette_numero' => 'nootje nummer:',
 	'noisettes_composition' => 'nootjes specifiek voor compositie <i>@composition@</i>:',
 	'noisettes_configurees_aucune' => 'Geen enkel geconfigureerd nootje',
