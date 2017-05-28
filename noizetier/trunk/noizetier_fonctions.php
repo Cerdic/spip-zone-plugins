@@ -223,34 +223,6 @@ function noizetier_charger_contexte_noisette($noisette) {
 
 
 /**
- * @return array|null
- */
-function noizetier_lister_objets_exclus() {
-
-	static $exclusions = null;
-
-	if (is_null($exclusions)) {
-		$exclusions = array();
-		include_spip('base/objets');
-
-		// On récupère les tables d'objets sous la forme spip_xxxx.
-		$tables = lister_tables_objets_sql();
-		$tables = array_keys($tables);
-
-		// On récupère la liste des pages disponibles et on transforme le type d'objet en table SQL.
-		$pages = noizetier_lister_pages();
-		$pages = array_keys($pages);
-		$pages = array_map('table_objet_sql', $pages);
-
-		// On exclut donc les tables qui ne sont pas dans la liste issues des pages.
-		$exclusions = array_diff($tables, $pages);
-	}
-
-	return $exclusions;
-}
-
-
-/**
  * Ajoute une noisette à un bloc d'une page
  *
  * @param string $noisette
@@ -876,6 +848,11 @@ function noizetier_importer_configuration($type_import, $import_compos, $config)
  * @return string
  */
  // TODO : faut-il garder cette fonction ou simplifier en utilisant uniquement chemin_image() ?
+/**
+ * @param string $icone
+ *
+ * @return bool|string
+ */
 function noizetier_icone_chemin($icone){
 
 	if (!$chemin = chemin_image($icone)) {
@@ -1347,7 +1324,7 @@ function noizetier_page_informer($page, $information = '', $options =array()) {
 			// Stockage des identifiants séparément
 			$description['type'] = $identifiants[0];
 			$description['composition'] = $identifiants[1];
-			// Identifie si la page est celle d'un objet SPIP (toujours vrai pour une composition)
+			// Identifie si la page est celle d'un objet SPIP
 			include_spip('base/objets');
 			$tables_objets = array_keys(lister_tables_objets_sql());
 			$description['est_page_objet'] = in_array(table_objet_sql($description['type']), $tables_objets) ? 'oui' : 'non';
@@ -1541,5 +1518,42 @@ function noizetier_objet_informer($objet = '', $id_objet = 0, $information = '')
 		return $objets;
 	}
 }
+
+
+/**
+ * Renvoie la liste des types d'objet ne pouvant pas être personnaliser car ne possédant pas de page
+ * détectable par le noiZetier.
+ *
+ * @package SPIP\NOIZETIER\API\OBJET
+ * @api
+ * @filtre
+ *
+ * @return array|null
+ */
+function noizetier_objet_lister_exclusions() {
+
+	static $exclusions = null;
+
+	if (is_null($exclusions)) {
+		$exclusions = array();
+		include_spip('base/objets');
+
+		// On récupère les tables d'objets sous la forme spip_xxxx.
+		$tables = lister_tables_objets_sql();
+		$tables = array_keys($tables);
+
+		// On récupère la liste des pages disponibles et on transforme le type d'objet en table SQL.
+		$filtres = array('est_composition' => false, 'est_page_objet' => 'oui');
+		$pages = noizetier_page_repertorier($filtres);
+		$pages = array_keys($pages);
+		$pages = array_map('table_objet_sql', $pages);
+
+		// On exclut donc les tables qui ne sont pas dans la liste issues des pages.
+		$exclusions = array_diff($tables, $pages);
+	}
+
+	return $exclusions;
+}
+
 
 include_spip('public/noizetier_balises');

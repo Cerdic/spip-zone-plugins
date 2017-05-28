@@ -11,7 +11,7 @@ if (!function_exists('autoriser')) {
 	include_spip('inc/autoriser');
 }     // si on utilise le formulaire dans le public
 
-function formulaires_editer_noisette_charger_dist($id_noisette, $retour = '') {
+function formulaires_editer_noisette_charger_dist($id_noisette, $redirect = '') {
 	$valeurs = array();
 	$valeurs['id_noisette'] = $id_noisette;
 	$entree = sql_fetsel(
@@ -48,19 +48,19 @@ function formulaires_editer_noisette_charger_dist($id_noisette, $retour = '') {
 	return $valeurs;
 }
 
-function formulaires_editer_noisette_verifier_dist($id_noisette, $retour = '') {
+function formulaires_editer_noisette_verifier_dist($id_noisette, $redirect = '') {
 	$noisette = _request('noisette');
 	$infos_noisette = noizetier_info_noisette($noisette);
 
 	return saisies_verifier($infos_noisette['parametres'], false);
 }
 
-function formulaires_editer_noisette_traiter_dist($id_noisette, $retour = '') {
+function formulaires_editer_noisette_traiter_dist($id_noisette, $redirect = '') {
 	if (!autoriser('configurer', 'noizetier')) {
 		return array('message_erreur' => _T('noizetier:probleme_droits'));
 	}
 
-	$res = array();
+	$retour = array();
 	$css = _request('css');
 	$noisette = _request('noisette');
 	$infos_noisette = noizetier_info_noisette($noisette);
@@ -72,18 +72,18 @@ function formulaires_editer_noisette_traiter_dist($id_noisette, $retour = '') {
 		// On invalide le cache
 		include_spip('inc/invalideur');
 		suivre_invalideur("id='noisette/$id_noisette'");
-		$res['message_ok'] = _T('info_modification_enregistree');
-		if ($retour) {
-			if (strncmp($retour, 'javascript:', 11) == 0) {
-				$res['message_ok'] .= '<script type="text/javascript">/*<![CDATA[*/'.substr($retour, 11).'/*]]>*/</script>';
-				$res['editable'] = true;
+		$retour['message_ok'] = _T('info_modification_enregistree');
+		if ($redirect) {
+			if (strncmp($redirect, 'javascript:', 11) == 0) {
+				$retour['message_ok'] .= '<script type="text/javascript">/*<![CDATA[*/'.substr($redirect, 11).'/*]]>*/</script>';
+				$retour['editable'] = true;
 			} else {
-				$res['redirect'] = $retour;
+				$retour['redirect'] = $redirect;
 			}
 		}
 	} else {
-		$res['message_erreur'] = _T('noizetier:erreur_mise_a_jour');
+		$retour['message_erreur'] = _T('noizetier:erreur_mise_a_jour');
 	}
 
-	return $res;
+	return $retour;
 }

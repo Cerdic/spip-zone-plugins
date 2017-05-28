@@ -6,13 +6,28 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
-		[(#REM) Il faut exclure les objets qui n'ont pas de page explicitement détectable par le noiZetier ]
-		#SET{objets_exclus, #VAL|noizetier_lister_objets_exclus}
+		<div class="editer-groupe">
+			[(#SAISIE{case, div_noisette,
+				label_case=<:noizetier:label_div_noisette:>,
+				explication=<:noizetier:explication_div_noisette:>,
+			})]
+
+			[(#SAISIE{case, ajax_noisette,
+				label_case=<:noizetier:label_ajax_noisette:>,
+				explication=<:noizetier:explication_ajax_noisette:>,
+			})]
+		</div>
+
+		[(#REM) Il faut exclure les types d'objet qui n'ont pas de page explicitement détectable par le noiZetier pour
+		        ne proposer que les types d'objet potentiellement utilisables ]
+		<div class="editer-groupe">
+		#SET{objets_exclus, #VAL|noizetier_objet_lister_exclusions}
 		[(#SAISIE{choisir_objets, objets_noisettes,
 			label=<:noizetier:configurer_objets_noisettes_label:>,
 			explication=<:noizetier:configurer_objets_noisettes_explication:>,
 			exclus=#GET{objets_exclus}})]
-		
+		</div>
+
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>
 	</form>

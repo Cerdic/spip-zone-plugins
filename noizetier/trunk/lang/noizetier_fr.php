@@ -45,10 +45,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_aucune_noisette_selectionnee' => 'Vous devez sélectionner une noisette !',
 	'erreur_doit_choisir_noisette' => 'Vous devez choisir une noisette.',
 	'erreur_mise_a_jour' => 'Une erreur s’est produite pendant la mise à jour de la base de donnée.',
+	'explication_ajax_noisette' => 'Le mode par défaut d\'inclusion AJAX peut être modifié unitairement par noisette (fichier YAML).',
 	'explication_code' => 'ATTENTION : pour utilisateur avancé. Vous pouvez saisir du code Spip (boucles et balises) qui sera interprété comme s’il s’agissait d’un squelette. La noisette aura par ailleurs accès à toutes les variables de l’environnement de la page.',
 	'explication_composition' => 'Composition dérivée de la page « @type@ »',
 	'explication_composition_virtuelle' => 'Composition <strong>virtuelle</strong> dérivée de la page « @type@ »',
 	'explication_description_code' => 'À usage interne. Non affichée sur le site public.',
+	'explication_div_noisette' => 'Le mode par défaut d\'inclusion dans une balise div peut être modifié unitairement par noisette (paramètrage).',
 	'explication_dupliquer_composition_reference' => 'L’identifiant de la page dupliquée est <i>@composition@</i>.
 	Vous pouvez choisir un nouvel identifiant ou suffixer l’identifiant de référence ainsi : <i>@composition@<strong>_suffixe</strong></i>',
 	'explication_dupliquer_composition_suffixer' => '.',
@@ -120,9 +122,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_titre_perso' => 'titre personnalisé',
 
 	// L
+	'label_ajax_noisette' => 'Par défaut, inclure chaque noisette en AJAX',
 	'label_afficher_titre_noisette' => 'Afficher un titre de noisettes ?',
 	'label_code' => 'Code Spip :',
 	'label_description_code' => 'Description :',
+	'label_div_noisette' => 'Par défaut, inclure chaque noisette dans une balise div',
 	'label_identifiant' => 'identifiant :',
 	'label_niveau_titre' => 'Niveau du titre :',
 	'label_noizetier_css' => 'Classes CSS :',
