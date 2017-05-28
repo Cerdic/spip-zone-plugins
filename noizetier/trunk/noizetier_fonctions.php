@@ -15,6 +15,152 @@ define('_CACHE_INCLUSIONS_NOISETTES', 'noisettes_inclusions.php');
 // ------------------------- API NOISETTES ---------------------------
 // -------------------------------------------------------------------
 
+function noizetier_noisette_repertorier($filtres = array()) {
+	static $noisettes = null;
+
+	if (is_null($noisettes)) {
+		// On détermine l'existence et le contenu du cache.
+		$cache_noisettes = array();
+		$cache = _DIR_CACHE._CACHE_DESCRIPTIONS_NOISETTES;
+		if (lire_fichier_securise($cache, $contenu)) {
+			$cache_noisettes = unserialize($contenu);
+		}
+
+		if (!$cache_noisettes
+		or (_request('var_mode') == 'recalcul')
+		or (defined('_NO_CACHE') and (_NO_CACHE != 0))) {
+			// On doit recalculer le cache
+			if ($fichiers = find_all_in_path('noisettes/', '.+[.]yaml$')) {
+				foreach ($fichiers as $_fichier => $_chemin) {
+					$noisette = basename($_fichier, '.yaml');
+					$options = array('reload' => true, 'yaml' => $_chemin);
+					if ($configuration = noizetier_noisette_informer($noisette, '', $options)) {
+						// On n'inclue la noisette que si les plugins qu'elle nécessite explicitement dans son
+						// fichier de configuration sont bien tous activés.
+						// Rappel : si une noisette est incluse dans un plugin non actif elle ne sera pas détectée
+						//          lors du find_all_in_path() puisque le plugin n'est pas dans le path SPIP.
+						$noisette_a_garder = true;
+						if (isset($configuration['necessite'])) {
+							foreach ($configuration['necessite'] as $plugin) {
+								if (!defined('_DIR_PLUGIN_'.strtoupper($plugin))) {
+									$noisette_a_garder = false;
+									break;
+								}
+							}
+						}
+
+						if ($noisette_a_garder) {
+							$noisettes[$noisette] = $configuration;
+						}
+					}
+				}
+				// Mise à jour du cache des descriptions
+				if ($noisettes) {
+					ecrire_fichier_securise($cache, serialize($noisettes));
+				}
+			}
+		} else {
+			// On renvoie le cache des descriptions.
+			$noisettes = $cache_noisettes;
+		}
+	}
+
+	// Application des filtres éventuellement demandés en argument de la fonction
+	$noisettes_repertoriees = $noisettes;
+	if ($filtres) {
+		foreach ($noisettes_repertoriees as $_noisette => $_configuration) {
+			foreach ($filtres as $_critere => $_valeur) {
+				if (isset($_configuration[$_critere]) and ($_configuration[$_critere] != $_valeur)) {
+					unset($noisettes_repertoriees[$_noisette]);
+					break;
+				}
+			}
+		}
+	}
+
+	return $noisettes_repertoriees;
+}
+
+
+function noizetier_noisette_informer($noisette, $information = '', $options = array()) {
+
+	static $description_noisette = array();
+
+	if (!isset($description_noisette[$noisette])) {
+		// On essaye d'abord de récupérer la description dans le cache sauf si l'option reload est activée
+		if (empty($options['reload'])) {
+			$cache_noisettes = array();
+			$cache = _DIR_CACHE._CACHE_DESCRIPTIONS_NOISETTES;
+			if (lire_fichier_securise($cache, $contenu)) {
+				$cache_noisettes = unserialize($contenu);
+				if (isset($cache_noisettes[$noisette])) {
+					$description_noisette[$noisette] = $cache_noisettes[$noisette];
+				} else {
+					// On a pas trouvé la noisette dans le cache, on essaye de la charger directement
+					$options['reload'] = true;
+				}
+			}
+		}
+
+		if (!empty($options['reload'])) {
+			// Initialisation de la description et d'une description par défaut
+			$description = array();
+			$defaut = array(
+				'nom' => $noisette,
+				'description' => '',
+				'icon' => 'noisette-24.png',
+				'parametres' => array(),
+				'necessite' => array(),
+				'contexte' => array(),
+				'ajax' => 'defaut',
+				'inclusion' => 'statique',
+			);
+
+			// Le fichier YAML de la noisette est soit passé en argument soit à déterminer à partir de
+			// l'identifiant de la noisette.
+			$fichier = isset($options['yaml']) ? $options['yaml'] : find_in_path("noisettes/${noisette}.yaml");
+			if ($fichier) {
+				include_spip('inc/yaml');
+				if ($description = yaml_charger_inclusions(yaml_decode_file($fichier))) {
+					if (isset($description['nom'])) {
+						$description['nom'] = _T_ou_typo($description['nom']);
+					}
+					if (isset($description['description'])) {
+						$description['description'] = _T_ou_typo($description['description']);
+					}
+					if (!empty($description['necessite']) and is_string($description['necessite'])) {
+						$description['necessite'] = array($description['necessite']);
+					}
+					if (!empty($description['contexte']) and is_string($description['contexte'])) {
+						$description['contexte'] = array($description['contexte']);
+					}
+
+					// Merge pour obtenir une description complète
+					$description = array_merge($defaut, $description);
+				}
+			}
+
+			// Sauvegarde de la description de la noisette pour une consultation ultérieure dans le même hit.
+			if ($description) {
+				// Ajout du type de noisette
+				$identifiants = explode('-', $noisette, 2);
+				$description['type'] = isset($identifiants[1]) ? $identifiants[0] : '';
+				$description_noisette[$noisette] = $description;
+			} else {
+				$description_noisette[$noisette] = array();
+			}
+		}
+	}
+
+	if (!$information) {
+		return $description_noisette[$noisette];
+	} elseif (isset($description_noisette[$noisette][$information])) {
+		return $description_noisette[$noisette][$information];
+	} else {
+		return '';
+	}
+}
+
 /**
  * Lister les noisettes disponibles dans les dossiers noisettes/.
  *
@@ -847,14 +993,8 @@ function noizetier_importer_configuration($type_import, $import_compos, $config)
  *
  * @return string
  */
- // TODO : faut-il garder cette fonction ou simplifier en utilisant uniquement chemin_image() ?
-/**
- * @param string $icone
- *
- * @return bool|string
- */
-function noizetier_icone_chemin($icone){
-
+ function noizetier_icone_chemin($icone){
+	// TODO : faut-il garder cette fonction ou simplifier en utilisant uniquement chemin_image() ?
 	if (!$chemin = chemin_image($icone)) {
 		$chemin = find_in_path($icone);
 	}
@@ -1086,9 +1226,9 @@ function noizetier_page_repertorier($filtres = array()) {
 			// -- on optimise la recherche si on a un filtre est_vrituelle à true inutile de récupérer les pages
 			//    et compositions explicites
 			if ($fichiers = find_all_in_path($options['repertoire_pages'], '.+[.]html$')) {
-				foreach ($fichiers as $squelette => $chemin) {
-					$page = basename($squelette, '.html');
-					$dossier = dirname($chemin);
+				foreach ($fichiers as $_squelette => $_chemin) {
+					$page = basename($_squelette, '.html');
+					$dossier = dirname($_chemin);
 					// Exclure certaines pages :
 					// -- celles du privé situes dans prive/contenu
 					// -- page liée au plugin Zpip en v1

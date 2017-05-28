@@ -6,25 +6,18 @@
 <div id="container">
 <?php
 	include_spip('noizetier_fonctions');
-//	$timestamp_debut = microtime(true);
-//	$infos = noizetier_charger_infos_page('', 'article');
-//	$infos = noizetier_informer_page('article');
-//	$infos = noizetier_charger_infos_page('', 'rubrique');
-//	$infos = noizetier_informer_page('article-evenement');
+	$infos = array();
+	$timestamp_debut = microtime(true);
+//	$infos = noizetier_info_noisette('article-filariane');
+//	$infos = noizetier_noisette_informer('article-filariane');
+//	$infos = noizetier_lister_noisettes();
+	$infos = noizetier_noisette_repertorier();
 
-//	include_spip('inc/config');
-//	$compos = lire_config('noizetier_compositions', array());
-
-//	$infos = noizetier_repertorier_pages();
-
-//	$timestamp_fin = microtime(true);
-//	$duree = $timestamp_fin - $timestamp_debut;
-//	var_dump($duree*1000, $infos);
-//	var_dump($duree*1000, $compos);
+	$timestamp_fin = microtime(true);
+	$duree = $timestamp_fin - $timestamp_debut;
+	var_dump($duree*1000);
+	var_dump($infos);
 ?>
-
-	#SET{liste, #NOIZETIER_PAGE_INFOS}
-	[(#GET{liste}|bel_env{#EVAL{true}})]
 
 </div>
 </body>
