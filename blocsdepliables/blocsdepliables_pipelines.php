@@ -77,7 +77,7 @@ function blocsdepliables_callback($matches) {
 		$res = '';
 	}
 	// types de blocs : bloc|invisible|visible
-	if ($matches[1]=='visible' || defined('_CS_PRINT')) {
+	if (in_array($matches[1], array('visible', 'visible#')) || defined('_CS_PRINT')) {
 		$h = $d = '';
 		$r = ' blocs_invisible blocs_slide';
 	} else {
