@@ -93,7 +93,7 @@ function blocsdepliables_callback($matches) {
 		?"<div class='blocs_title blocs_invisible'>".join(_BLOC_TITLE_SEP, blocs_title($titre, $corps, $matches[2], $h<>'')).'</div>'
 		:''; // valeur par defaut geree en JS
 	$hn = blocdepliable_balise_titre();
-	return "<div class='cs_blocs$b'><$hn class='blocs_titre$h blocs_click'><a href='javascript:;'>$titre</a></$hn>"
+	return "<div class='cs_blocs$b'><$hn class='blocs_titre$h blocs_click'><a href='javascript:;' class='ouvrir_fermer'>$titre</a></$hn>"
 		.(strlen($res)?"<div class='blocs_resume$r'>\n$res\n</div>" : '')
 		."<div class='blocs_destination$d'>\n\n".blocsdepliables_rempl($corps)."\n\n</div>$title</div>";
 }

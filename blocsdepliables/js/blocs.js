@@ -40,7 +40,7 @@ jQuery.fn.blocs_toggle = function() {
 	var url = lien.attr("href");
 	if(url != 'javascript:;') {
 		// une fois le bloc ajax en place, plus besoin de le recharger ensuite
-		lien.attr("href", 'javascript:;');
+		lien.attr("href", 'javascript:;').addClass('ouvrir_fermer');
 		// ici, on charge !
 		cible.parent().children(".blocs_destination")
 		//.animeajax()
@@ -69,14 +69,15 @@ var blocs_clic_ajax = null;
 function blocs_init() {
 	// clic sur un titre de bloc
 	jQuery('.blocs_titre', this).cs_todo()
-	  .click( function(){
-		jQuery(this).blocs_replie_tout().blocs_toggle();
-		// annulation du clic
-		return false;
-	   })
-	  .each( function(){
-		jQuery(this).blocs_set_title();
-	  });
+		.each( function(){
+			jQuery(this).blocs_set_title()
+				.find('a.ouvrir_fermer')
+				.on('click', function(){
+					jQuery(this).parent().blocs_replie_tout().blocs_toggle();
+					// annulation du clic
+					return false;
+				});
+		});
 	// pour un lien 'replier_bloc' present dans le bloc
 	jQuery('.blocs_destination a.replier_bloc', this).cs_todo()
 	 .click( function(){
@@ -218,7 +219,9 @@ jQuery(document).ready(function(){
 */
 
 /* Init */
-jQuery.fn.cs_todo=function(){return this.not('.cs_done').addClass('cs_done');};
+jQuery.fn.cs_todo=function(){
+	return this.not('.cs_done').addClass('cs_done');
+};
 var cs_sel_jQuery='';
 jQuery(function(){
 blocs_init.apply(document);
