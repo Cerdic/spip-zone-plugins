@@ -9,6 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_activer_javascript' => 'SVP, veuillez activer Javascript.',
+	'cfg_afterorappend' => 'Emplacement :',
+	'cfg_afterorappend_exp' => 'Insertion après le bloc du sélecteur (par défaut), ou dans le bloc du sélecteur ?',
 	'cfg_badge_fb' => 'Badge/Widget Facebook',
 	'cfg_badge_fb_existe' => 'Si vous avez un Badge Facebook (<a href="http://www.facebook.com/facebook-widgets/" class="spip_out">aide sur le site FB</a>), indiquez ci-dessous son contenu, soit en JS, soit en HTML.',
 	'cfg_badge_html' => 'Badge HTML',
@@ -39,6 +41,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_noisette_badge_facebook' => 'Affiche le badge Facebook défini dans la page de configuration',
 	'description_noisette_facebook_like' => 'Affiche le bouton Facebook <b>J’aime</b> ou <b>Recommander</b> et éventuellement <b>Envoyer</b>',
 	'description_noisette_facebook_like_box' => 'Affiche la boîte Facebook <b>J’aime</b>. Elle affiche notamment le nombre de fans aimant la page Facebook référencée',
+	
+	// I
+	'item_after' => 'À l’intérieur',
+	'item_append' => 'Après',
 
 	// N
 	'noisette_action_like' => 'J’aime',

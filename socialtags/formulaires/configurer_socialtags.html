@@ -70,6 +70,14 @@
 							</dl>
 						</div>
 					</li>
+					<li class="editer editer_afterorappend">
+						<label for="afterorappend"><:socialtags:cfg_afterorappend:></label>
+						<p class="explication"><:socialtags:cfg_afterorappend_exp:></p>
+						<div class="choix">
+							<input type="radio" name="afterorappend" id="afterorappend_append" value="after"[ (#ENV{afterorappend, 'after'}|=={after}|oui) checked="checked"]><label for="afterorappend_append"><:socialtags:item_append:></label>&nbsp;&nbsp;
+							<input type="radio" name="afterorappend" id="afterorappend_after" value="append"[ (#ENV{afterorappend, 'after'}|=={after}|non) checked="checked"]><label for="afterorappend_after"><:socialtags:item_after:></label>
+						</div>
+					</li>
 					<li class="editer editer_wopen">
 						<label for="wopen"><:socialtags:cfg_wopen:></label>
 						<p class="explication"><:socialtags:cfg_wopen_exp:></p>

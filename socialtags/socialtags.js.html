@@ -43,7 +43,7 @@
 			.attr('title', this.n).wrap('<li class="'+this.a+'"><\/li>')
 			.parent().appendTo(ul);
 		}});
-		selector.after(ul.wrap('<div class="socialtags"><\/div>').parent());
+		selector.#CONFIG{socialtags/afterorappend,'after'}(ul.wrap('<div class="socialtags"><\/div>').parent());
 		[(#CONFIG{socialtags/plusone}|?{[$('<li>(#GOOGLEPLUS1)</li>').appendTo(ul);],''})]
 		#CONFIG{socialtags/badgejs}
 	};
