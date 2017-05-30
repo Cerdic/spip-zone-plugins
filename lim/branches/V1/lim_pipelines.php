@@ -125,9 +125,15 @@ function lim_formulaire_verifier($flux){
 			$opt = null;
 			$msg_error = _T('lim:info_creer_dans_rubrique_non_autorise');
 		}
+		// mise en berne car il faudrait pourvoir gérer les cas suivants :
+		// 1- cas de la création : voir #122 (juste au dessus)
+		// 2- en l'état avec SPIP, impossible de surcharger deux fois une autorisation. Du coup devient compliqué de gérer aussi le cas des rédacteurs
+		// voir à ce propos : https://www.spip.net/fr_article3517.html et https://core.spip.net/projects/spip/repository/entry/spip/ecrire/inc/autoriser.php#L555
+		/*
 		if (!autoriser($faire, 'rubrique', _request('id_parent'),'', $opt)) {
 			$flux['data']['id_parent'] = $msg_error;
 		}
+		*/
 	}
 	return $flux;
 }
