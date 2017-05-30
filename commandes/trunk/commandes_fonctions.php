@@ -89,6 +89,8 @@ function commande_totalise_taxes($prix_ht = null, $prix_ttc = null) {
 
 	if ($prix_ht
 		and $prix_ttc
+		and $prix_ht = floatval(str_replace(',','.',$prix_ht))
+		and $prix_ttc = floatval(str_replace(',','.',$prix_ttc))
 		and (floatval($prix_ttc) - floatval($prix_ht))>0.001) {
 		$taux = (string)round((floatval($prix_ttc)/floatval($prix_ht) - 1.0) * 100, 1);
 
