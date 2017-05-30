@@ -353,33 +353,6 @@ function commandes_appliquer_taxes($id_commande, $exoneration_raison) {
 		commande_modifier($id_commande, array('taxe_exoneree_raison' => $exoneration_raison));
 	}
 
-	$appliquer_taxe = (strlen($exoneration_raison)?false:true);
-
-	$fonction_prix = charger_fonction('prix', 'inc/');
-	$fonction_prix_ht = charger_fonction('ht', 'inc/prix');
-	$details = sql_allfetsel('*','spip_commandes_details','id_commande='.intval($id_commande));
-	foreach ($details as $detail) {
-		$set = array();
-		// si TVA applicable mais pas de taxe sur cet item, on recalcul et on met a jour si besoin
-		if ($appliquer_taxe and $detail['taxe'] == 0) {
-			$prix_ht = $fonction_prix_ht($detail['objet'], $detail['id_objet'], 4);
-			$prix = $fonction_prix($detail['objet'], $detail['id_objet'], 4);
-
-			if ($prix_ht > 0) {
-				$set['taxe'] = round(($prix - $prix_ht) / $prix_ht, 4);
-			}
-		}
-		// si TVA non applicable on met la taxe a 0 si besoin
-		if (!$appliquer_taxe and $detail['taxe'] > 0) {
-			$set['taxe'] = 0;
-		}
-		if ($set) {
-			sql_updateq('spip_commandes_details', $set, 'id_commandes_detail=' . intval($detail['id_commandes_detail']));
-		}
-	}
-
-	$details = sql_allfetsel('*','spip_commandes_details','id_commande='.intval($id_commande));
-
 }
 
 

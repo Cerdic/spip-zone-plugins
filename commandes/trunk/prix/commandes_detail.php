@@ -46,11 +46,25 @@ function prix_commandes_detail_ht_dist($id_commandes_detail, $ligne){
  *     Retourne le prix TTC du détail sinon 0
  */
 function prix_commandes_detail_dist($id_commandes_detail, $prix_ht){
+	static $taxe_applicable = array();
 	$prix = $prix_ht;
 
+	if (!function_exists('sql_fetsel')) {
+		include_spip('base/abstract_sql');
+	}
+	$detail = sql_fetsel('*', 'spip_commandes_details', 'id_commandes_detail = '.intval($id_commandes_detail));
+
+	if (!isset($taxe_applicable[$detail['id_commande']])) {
+		$taxe_applicable[$detail['id_commande']] = true;
+		$taxe_exoneree_raison = sql_getfetsel('taxe_exoneree_raison', 'spip_commandes', 'id_commande='.intval($detail['id_commande']));
+		if (strlen($taxe_exoneree_raison)) {
+			$taxe_applicable[$detail['id_commande']] = false;
+		}
+	}
+
 	if (
-		include_spip('base/abstract_sql')
-		and ($taxe = sql_getfetsel('taxe', 'spip_commandes_details', 'id_commandes_detail = '.$id_commandes_detail)) !== null
+		$taxe_applicable[$detail['id_commande']]
+		and ($taxe = $detail['taxe']) !== null
 	){
 		$prix += $prix*$taxe;
 	}
