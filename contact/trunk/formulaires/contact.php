@@ -17,7 +17,7 @@ include_spip('contact_fonctions');
  * 		cf : https://contrib.spip.net/Le-formulaire-de-contact-evolue#tracabilite
  * @param $options array
  * 		Un tableau d'options permettant de surcharger certaines options de configuration?
- * 		Pour l'instant ne concerne que le type de choix de destinataires dont la valeur peut être :
+ * 		string type_choix : type de choix de destinataires dont la valeur peut être :
  * 			- tous
  * 			- tous_et
  * 			- tous_ou
@@ -27,6 +27,9 @@ include_spip('contact_fonctions');
  * 			- plusieurs
  * 			- plusieurs_et
  * 			- plusieurs_ou
+ *    array defaut
+ *      valeurs par defaut pour les champs qu'on veut pre-remplir
+ * @return array
  */
 function formulaires_contact_charger_dist($id_auteur = '', $tracer = '', $options = array()) {
 	$valeurs = array();
@@ -126,6 +129,15 @@ function formulaires_contact_charger_dist($id_auteur = '', $tracer = '', $option
 	if ((!$valeurs['mail'] || $valeurs['mail'] == '') && isset($GLOBALS['visiteur_session']['email'])) {
 		$valeurs['mail'] = $GLOBALS['visiteur_session']['email'];
 	}
+
+	if (isset($options['defaut']) and $options['defaut']) {
+		foreach ($valeurs as $k=>$v) {
+			if (isset($options['defaut'][$k])) {
+				$valeurs[$k] = $options['defaut'][$k];
+			}
+		}
+	}
+
 	return $valeurs;
 }
 
