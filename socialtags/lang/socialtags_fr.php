@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_noisette_badge_facebook' => 'Affiche le badge Facebook défini dans la page de configuration',
 	'description_noisette_facebook_like' => 'Affiche le bouton Facebook <b>J’aime</b> ou <b>Recommander</b> et éventuellement <b>Envoyer</b>',
 	'description_noisette_facebook_like_box' => 'Affiche la boîte Facebook <b>J’aime</b>. Elle affiche notamment le nombre de fans aimant la page Facebook référencée',
-	
+
 	// I
 	'item_after' => 'À l’intérieur',
 	'item_append' => 'Après',
