@@ -18,6 +18,9 @@ function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0) {
 	// ordre de preference des formats graphiques pour creer les vignettes
 	// le premier format disponible, selon la methode demandee, est utilise
 
+	// initialisations
+	$force = false;
+	$test_cache_only = false;
 
 	//$force = true;
 	include_spip('inc/filtres_images_lib_mini');
@@ -66,8 +69,9 @@ function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0) {
 		$creation = true;
 		// calculer la taille
 		if (($srcWidth=$valeurs['largeur']) && ($srcHeight=$valeurs['hauteur'])){
-			if (!($destWidth=$valeurs['largeur_dest']) || !($destHeight=$valeurs['hauteur_dest']))
-				list ($destWidth,$destHeight) = _image_ratio($valeurs['largeur'], $valeurs['hauteur'], $maxWidth, $maxHeight);
+			if (!($destWidth=$valeurs['largeur_dest']) || !($destHeight=$valeurs['hauteur_dest'])) {
+				list ($destWidth, $destHeight) = _image_ratio($valeurs['largeur'], $valeurs['hauteur'], $maxWidth, $maxHeight);
+			}
 		}
 		else {
 			$destWidth = $maxWidth;
