@@ -4,7 +4,7 @@
 	<icon></icon>
 	<auteur>JLuc, marcimat</auteur>
 	<licence>GPL</licence>
-	<version>0.5.0</version>
+	<version>0.5.1</version>
 	<etat>dev</etat>
 	<description>
 	Macros SPIP : #_VISITEUR, #_VISITEUR_SI, #_VISITEUR_SINON, #_VISITEUR_FIN
