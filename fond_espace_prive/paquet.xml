@@ -1,13 +1,13 @@
 <paquet
 	prefix="fond_espace_prive"
 	categorie="outil"
-	version="2.1.1"
+	version="2.2.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	documentation="http://www.paris-beyrouth.org/Plugin-SPIP-Fond-espace-prive"
 >
 
-	<nom>Fond d’écran pour l’espace privé</nom>
+	<nom>Écran de connexion</nom>
 	<!-- Varier les mises en page selon les rubriques, les articles... -->
 
 	<auteur lien="http://www.paris-beyrouth.org">Arnaud Martin / Paris-Beyrouth</auteur>
