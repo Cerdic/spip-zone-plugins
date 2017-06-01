@@ -30,7 +30,9 @@ include_spip ('inc/filtres');
 // n'est pas déjà présente dans la session globale SPIP de base...
 // 
 function pipelined_session_get ($champ) {
-	if (!isset ($GLOBALS['visiteur_session']))
+	if (!isset ($GLOBALS['visiteur_session'])
+		or !isset($GLOBALS['visiteur_session']['id_auteur'])	// il semble que ces précisions soient nécessaires
+		or !$GLOBALS['visiteur_session']['id_auteur'] )
 		return '';
 	elseif (isset ($GLOBALS['visiteur_session'][$champ]))
 		return $GLOBALS['visiteur_session'][$champ];
