@@ -36,6 +36,9 @@ if (  isset($_COOKIE['spip_pwl']) AND $_COOKIE['spip_pwl']
  * @return int|number
  */
 function paniers_nombre_produits($id_panier){
+	if (!function_exists('sql_getfetsel')) {
+		include_spip('base/abstract_sql');
+	}
 	$quantite = intval(sql_getfetsel("SUM(quantite)","spip_paniers_liens","id_panier=".intval($id_panier)));
 	return $quantite;
 }
