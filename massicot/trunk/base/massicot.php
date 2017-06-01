@@ -90,7 +90,7 @@ function massicot_declarer_tables_interfaces($interfaces) {
 	);
 	$interfaces = ajouter_traitement_automatique(
 		$interfaces,
-		'massicoter_largeur(%s, $Pile[1])',
+		'massicoter_hauteur(%s, $Pile[1])',
 		'HAUTEUR',
 		'documents'
 	);
