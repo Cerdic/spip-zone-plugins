@@ -11,13 +11,14 @@ function prix_ht_objet($id_objet, $type_objet){
 
 // La balise qui va avec le prix HT
 function balise_PRIX_HT_dist($p) {
+	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 	if (!$_type = interprete_argument_balise(1,$p)){
-		$_type = sql_quote($p->type_requete);
-		$_id = champ_sql($p->boucles[$p->id_boucle]->primary,$p);
+		$_type = sql_quote($p->boucles[$b]->type_requete);
+		$_id = champ_sql($p->boucles[$b]->primary,$p);
 	}
 	else
 		$_id = interprete_argument_balise(2,$p);
-	$connect = $p->boucles[$p->id_boucle]->sql_serveur;
+	$connect = $p->boucles[$b]->sql_serveur;
 	$p->code = "prix_ht_objet(intval(".$_id."),".$_type.','.sql_quote($connect).")";
 	$p->interdire_scripts = false;
 	return $p;
@@ -31,13 +32,14 @@ function prix_objet($id_objet, $type_objet, $serveur = ''){
 
 // La balise qui va avec le prix TTC
 function balise_PRIX_dist($p) {
+	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 	if (!$_type = interprete_argument_balise(1,$p)){
-		$_type = _q($p->type_requete);
-		$_id = champ_sql($p->boucles[$p->id_boucle]->primary,$p);
+		$_type = sql_quote($p->boucles[$b]->type_requete);
+		$_id = champ_sql($p->boucles[$b]->primary,$p);
 	}
 	else
 		$_id = interprete_argument_balise(2,$p);
-	$connect = $p->boucles[$p->id_boucle]->sql_serveur;
+	$connect = $p->boucles[$b]->sql_serveur;
 	$p->code = "prix_objet(intval(".$_id."),".$_type.','.sql_quote($connect).")";
 	$p->interdire_scripts = false;
 	return $p;
