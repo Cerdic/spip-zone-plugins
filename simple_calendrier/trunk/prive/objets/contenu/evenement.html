@@ -8,11 +8,6 @@
 		</div>
 	</div>
 	
-	[<div class="champ contenu_notes">
-		<div class="label"><:simplecal:lieu:> : </div>
-		<div dir="#LANG_DIR" class="#EDIT{lieu} lieu">(#LIEU)</div>
-	</div>]
-	
 	<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
 		<div class="label"><:simplecal:descriptif:> : </div>
 		<div dir="#LANG_DIR" class="#EDIT{descriptif} descriptif">[(#DESCRIPTIF|image_reduire{500,0})]</div>
@@ -22,6 +17,11 @@
 		<div class="label"><:simplecal:texte:></div>
 		<div dir="#LANG_DIR" class="#EDIT{texte} texte">[(#TEXTE|image_reduire{500,0})]</div>
 	</div>
+
+	[<div class="champ contenu_notes">
+		<div dir="#LANG_DIR" class="#EDIT{lieu} lieu"><b>(#LIEU)</b></div>
+		[<div dir="#LANG_DIR" class="#EDIT{lieu} lieu">(#ADRESSE)</div>]
+	</div>]
 	
 	[(#TYPE|oui)
 	<div class="champ contenu_notes">

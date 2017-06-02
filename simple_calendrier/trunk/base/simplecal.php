@@ -2,7 +2,7 @@
 /**
  * Plugin Simple Calendrier v2 pour SPIP 3
  * Licence GNU/GPL
- * 2010-2016
+ * 2010-2017
  *
  * cf. paquet.xml pour plus d'infos.
  */
@@ -12,12 +12,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function simplecal_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['evenements'] = 'evenements';
-	
-	// Titre pour URL propres
-	//$interface['table_titre']['evenements'] = "titre, '' AS lang";
-	
-	//$interface['table_des_traitements']['DATE_DEBUT'][] = 'normaliser_date(%s)';
-	//$interface['table_des_traitements']['DATE_FIN'][] = 'normaliser_date(%s)';
+
+	$interfaces['table_des_traitements']['LIEU'][]= _TRAITEMENT_RACCOURCIS;
+	$interfaces['table_des_traitements']['ADRESSE'][]= _TRAITEMENT_RACCOURCIS;
+
 	
 	// ---------------------------------------------------------------------------
 	// Champs de type 'date' pour la gestion des criteres age, age_relatif, etc.
@@ -43,9 +41,10 @@ function simplecal_declarer_tables_objets_sql($tables){
 		"date_debut"        => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
 		"date_fin"          => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
 		"horaire"           => "varchar(3) NOT NULL DEFAULT 'oui'",
-		"lieu"              => "varchar(255) NOT NULL",
 		"descriptif"        => "text NOT NULL",
 		"texte"             => "text NOT NULL",
+		'lieu'				=> "text NOT NULL DEFAULT ''",
+		'adresse'			=> "text NOT NULL DEFAULT ''",
 		"lien_titre"        => "varchar(255) NOT NULL",
 		"lien_url"          => "varchar(255) NOT NULL",
 		"date"              => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", // creation ou publication (selon statut) 
@@ -106,8 +105,8 @@ function simplecal_declarer_tables_objets_sql($tables){
 		'join' => $join,
 		'titre' => 'titre, lang',
 		'date' => 'date', // indique le nom du field pour le formulaires_dater_charger_dist
-		'champs_editables' => array('titre', 'date_debut', 'date_fin', 'horaire', 'lieu', 'descriptif', 'texte', 'lien_titre', 'lien_url', 'type', 'id_objet'),
-		'champs_versionnes' => array('id_rubrique', 'titre', 'descriptif', 'texte', 'lieu', 'date_debut', 'date_fin', 'lien_titre', 'lien_url', 'jointure_auteurs'),
+		'champs_editables' => array('titre', 'date_debut', 'date_fin', 'horaire', 'descriptif', 'texte', 'lieu', 'adresse', 'lien_titre', 'lien_url', 'type', 'id_objet'),
+		'champs_versionnes' => array('id_rubrique', 'titre', 'descriptif', 'texte', 'lieu', 'adresse', 'date_debut', 'date_fin', 'lien_titre', 'lien_url', 'jointure_auteurs'),
 		'rechercher_champs' => array('titre'=>8, 'descriptif'=>4, 'texte'=>2),
 		'rechercher_jointures' => array('document' => array('titre' => 2, 'descriptif' => 1)),
 		'tables_jointures' => array('id_auteur' => 'auteurs_liens'),
