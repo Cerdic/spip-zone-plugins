@@ -47,6 +47,11 @@ function pays_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_update', 'spip_pays', array('code_alpha3' => 'CZE'), array('id_pays=185')),
 	);
 
+	$maj['1.4.2'] = array(
+		array('sql_update', 'spip_pays', array('code' => 'KP', 'code_num' => 408, 'code_alpha3' => 'PRK'), array('id_pays=51')),
+		array('sql_update', 'spip_pays', array('code' => 'KR', 'code_num' => 410, 'code_alpha3' => 'KOR'), array('id_pays=52')),
+	);
+
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
