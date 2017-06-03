@@ -1,11 +1,11 @@
 <paquet
 	prefix="simplecal"
 	categorie="date"
-	version="2.1.2"
-	etat="stable"
+	version="2.2.0"
+	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/evenement-32.png"
-	schema="2.1.4"
+	schema="2.1.5"
 	documentation="https://contrib.spip.net/Simple-Calendrier-v2"
 > 
 

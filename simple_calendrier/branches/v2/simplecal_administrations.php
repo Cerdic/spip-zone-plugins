@@ -2,7 +2,7 @@
 /**
  * Plugin Simple Calendrier v2 pour SPIP 3
  * Licence GNU/GPL
- * 2010-2016
+ * 2010-2017
  *
  * cf. paquet.xml pour plus d'infos.
  */
@@ -91,6 +91,10 @@ function simplecal_upgrade($nom_meta_base_version,$version_cible){
 	);
 	$maj['2.1.4'] = array(
 		array('sql_update', 'spip_evenements', array('date_fin' => 'date_debut'), "date_fin = '0000-00-00 00:00:00'"),
+	);
+	$maj['2.1.5'] = array(
+		array('sql_alter',"TABLE spip_evenements CHANGE `lieu` `lieu` TEXT NOT NULL DEFAULT '' AFTER texte"),
+		array('sql_alter',"TABLE spip_evenements ADD `adresse` TEXT NOT NULL DEFAULT '' AFTER lieu"),
 	);
 	
 	include_spip('base/upgrade');
