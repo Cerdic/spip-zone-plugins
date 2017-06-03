@@ -92,7 +92,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'enregistrer_dabord_une_fois' => 'C’est possible ! <br /><br />Pour cela, veuillez enregistrer la fiche une première fois...',
 	'entree_evenement_publie' => 'Cet évènement est :',
-	'entree_lieu_evenement' => 'Lieu de l\'événement',
+	'entree_lieu_evenement' => 'Lieu de l’événement',
 	'evenement' => 'Évènement',
 	'evenement_date' => 'Date',
 	'evenement_horaire' => 'Toute la journée',
