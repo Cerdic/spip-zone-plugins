@@ -6,15 +6,11 @@ function autolang_aiguiller(){
 	$langue = (isset($_COOKIE['spip_lang']) ? $_COOKIE['spip_lang'] : '');
 	if (!$langue) {
 		include_spip('inc/lang');
-		$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
 		$langue = utiliser_langue_visiteur();
-		if (!in_array($langue, $langues)) {
-			$langue = $GLOBALS['meta']['langue_site'];
-		}
 		include_spip('inc/cookie');
 		spip_setcookie('spip_lang', $langue);
 		include_spip('inc/headers');
-		redirige_par_entete(parametre_url(self(),'var_lang',$langue));
+		redirige_par_entete(self());
 	}
 }
 
