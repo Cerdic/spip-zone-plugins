@@ -1,0 +1,18 @@
+<paquet
+	prefix="autolang"
+	categorie="navigation"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/autolang-64.png"
+	documentation=""
+>
+
+	<nom>AutoLang</nom>
+	<!-- Aiguiller le visiteur selon sa langue de navigateur -->
+
+	<auteur>RealET</auteur>
+
+	<licence>GNU/GPL</licence>
+
+</paquet>
