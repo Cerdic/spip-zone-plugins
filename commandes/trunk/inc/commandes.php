@@ -172,6 +172,8 @@ function commandes_ajouter_detail($id_commande, $emplette, $ajouter=true){
 			$where[] = "$k=".sql_quote($w);
 		}
 	}
+
+	include_spip('action/editer_objet');
 	// est-ce que cette ligne est deja la ?
 	if ($ajouter
 	  or !$id_commandes_detail = sql_getfetsel("id_commandes_detail","spip_commandes_details",$where)){
