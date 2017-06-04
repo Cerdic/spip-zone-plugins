@@ -16,7 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Cette action est réservée aux webmestres. Elle nécessite des arguments dont la liste dépend
  * du contexte.
  *
- * @uses noizetier_supprimer_noisettes()
+ * @uses supprimer_noisettes()
  *
  * @return void
  */

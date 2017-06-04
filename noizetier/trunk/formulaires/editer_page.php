@@ -205,16 +205,6 @@ function formulaires_editer_page_traiter_dist($edition, $description_page, $redi
 				}
 				sql_insertq_multi($from, $noisettes_source);
 			}
-
-			// On vérifie également que les compositions sont actives sur ce type d'objet
-			// TODO : que signifie ce code ? Il existe une meta 'compositions_types' qui ressemble mais pas 'compositions'
-			$compositions_actives = compositions_objets_actives();
-			if (!in_array($type_page, $compositions_actives)) {
-				$compositions_config = unserialize($GLOBALS['meta']['compositions']);
-				include_spip('base/objets');
-				$compositions_config['objets'][] = table_objet_sql($type_page);
-				ecrire_meta('compositions', serialize($compositions_config));
-			}
 		}
 
 		// On invalide le cache en cas de création ou  de dpulication

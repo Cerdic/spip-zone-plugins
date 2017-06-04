@@ -15,6 +15,11 @@ define('_CACHE_INCLUSIONS_NOISETTES', 'noisettes_inclusions.php');
 // ------------------------- API NOISETTES ---------------------------
 // -------------------------------------------------------------------
 
+/**
+ * @param array $filtres
+ *
+ * @return array|mixed|null
+ */
 function noizetier_noisette_repertorier($filtres = array()) {
 	static $noisettes = null;
 
@@ -82,6 +87,13 @@ function noizetier_noisette_repertorier($filtres = array()) {
 }
 
 
+/**
+ * @param        $noisette
+ * @param string $information
+ * @param array  $options
+ *
+ * @return mixed|string
+ */
 function noizetier_noisette_informer($noisette, $information = '', $options = array()) {
 
 	static $description_noisette = array();
@@ -89,7 +101,6 @@ function noizetier_noisette_informer($noisette, $information = '', $options = ar
 	if (!isset($description_noisette[$noisette])) {
 		// On essaye d'abord de récupérer la description dans le cache sauf si l'option reload est activée
 		if (empty($options['reload'])) {
-			$cache_noisettes = array();
 			$cache = _DIR_CACHE._CACHE_DESCRIPTIONS_NOISETTES;
 			if (lire_fichier_securise($cache, $contenu)) {
 				$cache_noisettes = unserialize($contenu);
@@ -158,194 +169,6 @@ function noizetier_noisette_informer($noisette, $information = '', $options = ar
 		return $description_noisette[$noisette][$information];
 	} else {
 		return '';
-	}
-}
-
-/**
- * Lister les noisettes disponibles dans les dossiers noisettes/.
- *
- * @staticvar array $liste_noisettes
- *
- * @param string $type     renvoyer seulement un type de noisettes
- * @param string $noisette renvoyer spécifiquement une noisette données
- *
- * @return array
- */
-function noizetier_lister_noisettes($type = 'tout') {
-	static $liste_noisettes = array();
-	if ($type == 'tout') {
-		return noizetier_obtenir_infos_noisettes();
-	}
-	if (isset($liste_noisettes[$type])) {
-		return $liste_noisettes[$type];
-	}
-
-	$noisettes = noizetier_obtenir_infos_noisettes();
-	if ($type == '') {
-		$match = '^[^-]*$';
-	} else {
-		$match = $type.'-[^-]*$';
-	}
-
-	foreach ($noisettes as $noisette => $description) {
-		if (preg_match("/$match/", $noisette)) {
-			$liste_noisettes[$type][$noisette] = $description;
-		}
-	}
-
-	return isset($liste_noisettes[$type]) ? $liste_noisettes[$type]: '';
-}
-
-/**
- * Renvoie les info d'une seule noisette.
- *
- * @param string $noisette renvoyer spécifiquement une noisette données
- *
- * @return array
- */
-function noizetier_info_noisette($noisette) {
-	$noisettes = noizetier_obtenir_infos_noisettes();
-	if (isset($noisettes[$noisette])) {
-		$noisette = $noisettes[$noisette];
-	} else {
-		$noisette = array('nom' => _T('noizetier:formulaire_erreur_noisette_introuvable', array('noisette' => $noisette)));
-	}
-
-	return $noisette;
-}
-
-/**
- * Obtenir les infos de toutes les noisettes disponibles dans les dossiers noisettes/
- * On utilise un cache php pour alleger le calcul.
- *
- * @param
- *
- * @return
- **/
-function noizetier_obtenir_infos_noisettes() {
-	static $noisettes = false;
-
-	// seulement 1 fois par appel, on lit ou calcule tous les contextes
-	if ($noisettes === false) {
-		// lire le cache des descriptions sauvees
-		lire_fichier_securise(_DIR_CACHE._CACHE_DESCRIPTIONS_NOISETTES, $noisettes);
-		$noisettes = @unserialize($noisettes);
-		// s'il en mode recalcul, on recalcule toutes les descriptions des noisettes trouvees.
-		// ou si le cache est desactive
-		if (!$noisettes or (_request('var_mode') == 'recalcul') or (defined('_NO_CACHE') and _NO_CACHE != 0)) {
-			$noisettes = noizetier_obtenir_infos_noisettes_direct();
-			ecrire_fichier_securise(_DIR_CACHE._CACHE_DESCRIPTIONS_NOISETTES, serialize($noisettes));
-		}
-	}
-
-	return $noisettes;
-}
-
-/**
- * Obtenir les infos de toutes les noisettes disponibles dans les dossiers noisettes/
- * C'est un GROS calcul lorsqu'il est a faire.
- *
- * @return array
- */
-function noizetier_obtenir_infos_noisettes_direct() {
-	$liste_noisettes = array();
-
-	$match = '[^-]*[.]html$';
-	$liste = find_all_in_path('noisettes/', $match);
-
-	if (count($liste)) {
-		foreach ($liste as $squelette => $chemin) {
-			$noisette = preg_replace(',[.]html$,i', '', $squelette);
-			$dossier = str_replace($squelette, '', $chemin);
-			// On ne garde que les squelettes ayant un fichier YAML de config
-			if (file_exists("$dossier$noisette.yaml")
-				and ($infos_noisette = noizetier_charger_infos_noisette_yaml($dossier.$noisette))
-			) {
-				$liste_noisettes[$noisette] = $infos_noisette;
-			}
-		}
-	}
-
-	// supprimer de la liste les noisettes necessitant un plugin qui n'est pas actif.
-	// On s'arrête au premier inactif.
-	foreach ($liste_noisettes as $noisette => $infos_noisette) {
-		if (!empty($infos_noisette['necessite'])) {
-			foreach ($infos_noisette['necessite'] as $plugin) {
-				if (!defined('_DIR_PLUGIN_'.strtoupper($plugin))) {
-					unset($liste_noisettes[$noisette]);
-					break;
-				}
-			}
-		}
-	}
-
-	return $liste_noisettes;
-}
-
-/**
- * Charger les informations contenues dans le YAML d'une noisette.
- *
- * @param string $noisette
- * @param string $info
- *
- * @return array
- */
-function noizetier_charger_infos_noisette_yaml($noisette, $info = '') {
-	include_spip('inc/yaml');
-	include_spip('inc/texte');
-	
-	// on peut appeler avec le nom du squelette
-	$fichier = preg_replace(',[.]html$,i', '', $noisette).'.yaml';
-	
-	$infos_noisette = array();
-	if ($infos_noisette = yaml_charger_inclusions(yaml_decode_file($fichier))) {
-		if (isset($infos_noisette['nom'])) {
-			$infos_noisette['nom'] = _T_ou_typo($infos_noisette['nom']);
-		}
-		if (isset($infos_noisette['description'])) {
-			$infos_noisette['description'] = _T_ou_typo($infos_noisette['description']);
-		}
-		if (isset($infos_noisette['icon'])) {
-			$infos_noisette['icon'] = $infos_noisette['icon'];
-		}
-
-		if (!isset($infos_noisette['parametres'])) {
-			$infos_noisette['parametres'] = array();
-		}
-
-		// necessite de plugins : toujours renvoyer un array
-		if (!isset($infos_noisette['necessite'])) {
-			$infos_noisette['necessite'] = array();
-		}
-
-		if (is_string($infos_noisette['necessite'])) {
-			$infos_noisette['necessite'] = array($infos_noisette['necessite']);
-		}
-
-		// contexte
-		if (!isset($infos_noisette['contexte'])) {
-			$infos_noisette['contexte'] = array();
-		}
-		
-		if (is_string($infos_noisette['contexte'])) {
-			$infos_noisette['contexte'] = array($infos_noisette['contexte']);
-		}
-
-		// ajax
-		if (!isset($infos_noisette['ajax'])) {
-			$infos_noisette['ajax'] = 'oui';
-		}
-		
-		// inclusion
-		if (!isset($infos_noisette['inclusion'])) {
-			$infos_noisette['inclusion'] = 'statique';
-		}
-	}
-
-	if (!$info) {
-		return $infos_noisette;
-	} else {
-		return isset($infos_noisette[$info]) ? $infos_noisette[$info] : '';
 	}
 }
 
@@ -1229,6 +1052,7 @@ function noizetier_page_repertorier($filtres = array()) {
 				foreach ($fichiers as $_squelette => $_chemin) {
 					$page = basename($_squelette, '.html');
 					$dossier = dirname($_chemin);
+					$est_composition = noizetier_page_est_composition($page);
 					// Exclure certaines pages :
 					// -- celles du privé situes dans prive/contenu
 					// -- page liée au plugin Zpip en v1
@@ -1237,8 +1061,7 @@ function noizetier_page_repertorier($filtres = array()) {
 					if ((substr($dossier, -13) != 'prive/contenu')
 					and (($page != 'page') or !defined('_DIR_PLUGIN_Z'))
 					and (($page != 'z_apl') or (!defined('_DIR_PLUGIN_Z') and !defined('_DIR_PLUGIN_ZCORE')))
-					and (defined('_DIR_PLUGIN_COMPOSITIONS')
-						or (!defined('_DIR_PLUGIN_COMPOSITIONS') and !noizetier_page_est_composition($page)))) {
+					and (!$est_composition or ($est_composition	and defined('_DIR_PLUGIN_COMPOSITIONS')))) {
 						if ($configuration = noizetier_page_informer($page, '', $options)) {
 							// On n'inclue la page que si les plugins qu'elle nécessite explicitement dans son
 							// fichier de configuration sont bien tous activés.
@@ -1283,16 +1106,26 @@ function noizetier_page_repertorier($filtres = array()) {
 		}
 	}
 
-	// Application des filtres éventuellement demandés en argument de la fonction
+	// Filtrage des pages et compositions récupérées:
+	// - de façon systématique, si le plugin Compositions est activé, on ne retient que les compositions
+	//   basées sur des types d'objets pour lesquels les compositions sont actives (configuration du plugin Compositions)
+	// - a la demande, on applique les filtres éventuellement demandés en argument de la fonction
 	$pages_repertoriees = $pages;
-	if ($filtres) {
-		foreach ($pages_repertoriees as $_page => $_configuration) {
-			foreach ($filtres as $_critere => $_valeur) {
-				if ((($_critere == 'est_composition') and $_valeur and !$_configuration['composition'])
-				or (($_critere == 'est_composition') and !$_valeur and $_configuration['composition'])
-				or (isset($_configuration[$_critere]) and ($_configuration[$_critere] != $_valeur))) {
-					unset($pages_repertoriees[$_page]);
-					break;
+	foreach ($pages_repertoriees as $_page => $_configuration) {
+		if (defined('_DIR_PLUGIN_COMPOSITIONS')
+		and $_configuration['composition']
+		and ($_configuration['est_page_objet'] == 'oui')
+		and !in_array($_configuration['type'], compositions_objets_actives())) {
+			unset($pages_repertoriees[$_page]);
+		} else {
+			if ($filtres) {
+				foreach ($filtres as $_critere => $_valeur) {
+					if ((($_critere == 'est_composition') and $_valeur and !$_configuration['composition'])
+					or (($_critere == 'est_composition') and !$_valeur and $_configuration['composition'])
+					or (isset($_configuration[$_critere]) and ($_configuration[$_critere] != $_valeur))) {
+						unset($pages_repertoriees[$_page]);
+						break;
+					}
 				}
 			}
 		}
@@ -1550,6 +1383,36 @@ function noizetier_page_est_composition($page) {
 	return $est_composition;
 }
 
+
+
+/**
+ * Détermine si les compositions sont possibles sur un type de page.
+ *
+ * @package SPIP\NOIZETIER\API\OBJET
+ * @api
+ * @filtre
+ *
+ * @param string $type
+ * 		Identifiant du type de page.
+ *
+ * @return boolean
+ * 		True si les compositions sont autorisées, false sinon.
+ */
+function noizetier_page_composition_activee($type) {
+
+	$est_activee = false;
+
+	if (defined('_DIR_PLUGIN_COMPOSITIONS')) {
+		include_spip('compositions_fonctions');
+		if (in_array($type, compositions_objets_actives())) {
+			$est_activee = true;
+		}
+	}
+
+	return $est_activee;
+}
+
+
 /**
  * Déterminer le répertoire dans lequel le NoiZetier peut lister les pages pouvant supporter
  * l'insertion de noisettes.
@@ -1597,18 +1460,18 @@ function noizetier_page_obtenir_dossier() {
  * 		Si le type et l'id de l'objet sont fournis, on renvoie la description de la page de cet objet.
  * 		Sinon, on renvoie le tableau de toutes les objets sous la forme [type_objet][id_objet].
  */
-function noizetier_objet_informer($objet = '', $id_objet = 0, $information = '') {
+function noizetier_objet_informer($type_objet = '', $id_objet = 0, $information = '') {
 	static $objets = null;
 	static $description_objet = array();
 
-	if ((!$objet and !$id_objet and is_null($objets))
-	or ($objet and $id_objet and !isset($description_objet[$objet][$id_objet]))) {
+	if ((!$type_objet and !$id_objet and is_null($objets))
+	or ($type_objet and $id_objet and !isset($description_objet[$type_objet][$id_objet]))) {
 		// On récupère le ou les objets ayant des noisettes dans la table spip_noisettes.
 		$from = array('spip_noisettes');
 		$select = array('objet', 'id_objet', "count(noisette) as 'noisettes'");
 		$where = array('id_objet>0');
-		if ($objet and $id_objet) {
-			$where = array('objet=' . sql_quote($objet), 'id_objet=' . intval($id_objet));
+		if ($type_objet and $id_objet) {
+			$where = array('objet=' . sql_quote($type_objet), 'id_objet=' . intval($id_objet));
 		}
 		$group = array('objet', 'id_objet');
 		$objets_configures = sql_allfetsel($select, $from, $where, $group);
@@ -1633,9 +1496,9 @@ function noizetier_objet_informer($objet = '', $id_objet = 0, $information = '')
 
 				// On rajoute les blocs du type de page dont l'objet est une instance et on sauvegarde
 				// la description complète.
-				if ($objet and $id_objet) {
-					$description['blocs'] = noizetier_page_informer($objet, 'blocs');
-					$description_objet[$objet][$id_objet] = $description;
+				if ($type_objet and $id_objet) {
+					$description['blocs'] = noizetier_page_informer($type_objet, 'blocs');
+					$description_objet[$type_objet][$id_objet] = $description;
 				} else {
 					$description['blocs'] = noizetier_page_informer($_objet['objet'], 'blocs');
 					$objets[$_objet['objet']][$_objet['id_objet']] = $description;
@@ -1644,18 +1507,27 @@ function noizetier_objet_informer($objet = '', $id_objet = 0, $information = '')
 		}
 	}
 
-	if ($objet and $id_objet) {
+	if ($type_objet and $id_objet) {
 		if (!$information) {
-			return isset($description_objet[$objet][$id_objet])
-				? $description_objet[$objet][$id_objet]
+			return isset($description_objet[$type_objet][$id_objet])
+				? $description_objet[$type_objet][$id_objet]
 				: array();
 		} else {
-			return isset($description_objet[$objet][$id_objet][$information])
-				? $description_objet[$objet][$id_objet][$information]
+			return isset($description_objet[$type_objet][$id_objet][$information])
+				? $description_objet[$type_objet][$id_objet][$information]
 				: '';
 		}
 	} else {
-		return $objets;
+		// Filtrage des objets répertoriés:
+		// - de façon systématique, on ne retient que les objets dont le type est activé dans la configuration du plugin.
+		// - a la demande, on applique les filtres éventuellement demandés en argument de la fonction
+		$objets_repertories = $objets;
+		foreach ($objets_repertories as $_type_objet => $_objets) {
+			if (!noizetier_objet_type_active($_type_objet)) {
+				unset($objets_repertories[$_type_objet]);
+			}
+		}
+		return $objets_repertories;
 	}
 }
 
@@ -1696,4 +1568,224 @@ function noizetier_objet_lister_exclusions() {
 }
 
 
+/**
+ * Détermine si un type d'objet est activé par configuration du noiZetier.
+ * Si oui, ses objets peuvent recevoir une configuration de noisettes.
+ *
+ * @package SPIP\NOIZETIER\API\OBJET
+ * @api
+ * @filtre
+ *
+ * @param string $type_objet
+ * 		Type d'objet SPIP comme article, rubrique...
+ *
+ * @return boolean
+ * 		True si le type d'objet est activé, false sinon.
+ */
+function noizetier_objet_type_active($type_objet) {
+
+	$est_active = false;
+
+	include_spip('inc/config');
+	$tables_actives = lire_config('noizetier/objets_noisettes', array());
+	if ($tables_actives and in_array($type_objet, array_map('objet_type', $tables_actives))) {
+		$est_active = true;
+	}
+
+	return $est_active;
+}
+
+
 include_spip('public/noizetier_balises');
+
+
+// -------------------------------------------------------------------
+// API NOISETTES OBSOLOETE : A VIRER A TERME
+// -------------------------------------------------------------------
+/**
+ * Lister les noisettes disponibles dans les dossiers noisettes/.
+ *
+ * @staticvar array $liste_noisettes
+ *
+ * @param string $type     renvoyer seulement un type de noisettes
+ * @param string $noisette renvoyer spécifiquement une noisette données
+ *
+ * @return array
+ */
+function noizetier_lister_noisettes($type = 'tout') {
+	static $liste_noisettes = array();
+	if ($type == 'tout') {
+		return noizetier_obtenir_infos_noisettes();
+	}
+	if (isset($liste_noisettes[$type])) {
+		return $liste_noisettes[$type];
+	}
+
+	$noisettes = noizetier_obtenir_infos_noisettes();
+	if ($type == '') {
+		$match = '^[^-]*$';
+	} else {
+		$match = $type.'-[^-]*$';
+	}
+
+	foreach ($noisettes as $noisette => $description) {
+		if (preg_match("/$match/", $noisette)) {
+			$liste_noisettes[$type][$noisette] = $description;
+		}
+	}
+
+	return isset($liste_noisettes[$type]) ? $liste_noisettes[$type]: '';
+}
+
+/**
+ * Renvoie les info d'une seule noisette.
+ *
+ * @param string $noisette renvoyer spécifiquement une noisette données
+ *
+ * @return array
+ */
+function noizetier_info_noisette($noisette) {
+	$noisettes = noizetier_obtenir_infos_noisettes();
+	if (isset($noisettes[$noisette])) {
+		$noisette = $noisettes[$noisette];
+	} else {
+		$noisette = array('nom' => _T('noizetier:formulaire_erreur_noisette_introuvable', array('noisette' => $noisette)));
+	}
+
+	return $noisette;
+}
+
+/**
+ * Obtenir les infos de toutes les noisettes disponibles dans les dossiers noisettes/
+ * On utilise un cache php pour alleger le calcul.
+ *
+ * @param
+ *
+ * @return
+ **/
+function noizetier_obtenir_infos_noisettes() {
+	static $noisettes = false;
+
+	// seulement 1 fois par appel, on lit ou calcule tous les contextes
+	if ($noisettes === false) {
+		// lire le cache des descriptions sauvees
+		lire_fichier_securise(_DIR_CACHE._CACHE_DESCRIPTIONS_NOISETTES, $noisettes);
+		$noisettes = @unserialize($noisettes);
+		// s'il en mode recalcul, on recalcule toutes les descriptions des noisettes trouvees.
+		// ou si le cache est desactive
+		if (!$noisettes or (_request('var_mode') == 'recalcul') or (defined('_NO_CACHE') and _NO_CACHE != 0)) {
+			$noisettes = noizetier_obtenir_infos_noisettes_direct();
+			ecrire_fichier_securise(_DIR_CACHE._CACHE_DESCRIPTIONS_NOISETTES, serialize($noisettes));
+		}
+	}
+
+	return $noisettes;
+}
+
+/**
+ * Obtenir les infos de toutes les noisettes disponibles dans les dossiers noisettes/
+ * C'est un GROS calcul lorsqu'il est a faire.
+ *
+ * @return array
+ */
+function noizetier_obtenir_infos_noisettes_direct() {
+	$liste_noisettes = array();
+
+	$match = '[^-]*[.]html$';
+	$liste = find_all_in_path('noisettes/', $match);
+
+	if (count($liste)) {
+		foreach ($liste as $squelette => $chemin) {
+			$noisette = preg_replace(',[.]html$,i', '', $squelette);
+			$dossier = str_replace($squelette, '', $chemin);
+			// On ne garde que les squelettes ayant un fichier YAML de config
+			if (file_exists("$dossier$noisette.yaml")
+				and ($infos_noisette = noizetier_charger_infos_noisette_yaml($dossier.$noisette))
+			) {
+				$liste_noisettes[$noisette] = $infos_noisette;
+			}
+		}
+	}
+
+	// supprimer de la liste les noisettes necessitant un plugin qui n'est pas actif.
+	// On s'arrête au premier inactif.
+	foreach ($liste_noisettes as $noisette => $infos_noisette) {
+		if (!empty($infos_noisette['necessite'])) {
+			foreach ($infos_noisette['necessite'] as $plugin) {
+				if (!defined('_DIR_PLUGIN_'.strtoupper($plugin))) {
+					unset($liste_noisettes[$noisette]);
+					break;
+				}
+			}
+		}
+	}
+
+	return $liste_noisettes;
+}
+
+/**
+ * Charger les informations contenues dans le YAML d'une noisette.
+ *
+ * @param string $noisette
+ * @param string $info
+ *
+ * @return array
+ */
+function noizetier_charger_infos_noisette_yaml($noisette, $info = '') {
+	include_spip('inc/yaml');
+	include_spip('inc/texte');
+
+	// on peut appeler avec le nom du squelette
+	$fichier = preg_replace(',[.]html$,i', '', $noisette).'.yaml';
+
+	$infos_noisette = array();
+	if ($infos_noisette = yaml_charger_inclusions(yaml_decode_file($fichier))) {
+		if (isset($infos_noisette['nom'])) {
+			$infos_noisette['nom'] = _T_ou_typo($infos_noisette['nom']);
+		}
+		if (isset($infos_noisette['description'])) {
+			$infos_noisette['description'] = _T_ou_typo($infos_noisette['description']);
+		}
+		if (isset($infos_noisette['icon'])) {
+			$infos_noisette['icon'] = $infos_noisette['icon'];
+		}
+
+		if (!isset($infos_noisette['parametres'])) {
+			$infos_noisette['parametres'] = array();
+		}
+
+		// necessite de plugins : toujours renvoyer un array
+		if (!isset($infos_noisette['necessite'])) {
+			$infos_noisette['necessite'] = array();
+		}
+
+		if (is_string($infos_noisette['necessite'])) {
+			$infos_noisette['necessite'] = array($infos_noisette['necessite']);
+		}
+
+		// contexte
+		if (!isset($infos_noisette['contexte'])) {
+			$infos_noisette['contexte'] = array();
+		}
+
+		if (is_string($infos_noisette['contexte'])) {
+			$infos_noisette['contexte'] = array($infos_noisette['contexte']);
+		}
+
+		// ajax
+		if (!isset($infos_noisette['ajax'])) {
+			$infos_noisette['ajax'] = 'oui';
+		}
+
+		// inclusion
+		if (!isset($infos_noisette['inclusion'])) {
+			$infos_noisette['inclusion'] = 'statique';
+		}
+	}
+
+	if (!$info) {
+		return $infos_noisette;
+	} else {
+		return isset($infos_noisette[$info]) ? $infos_noisette[$info] : '';
+	}
+}
