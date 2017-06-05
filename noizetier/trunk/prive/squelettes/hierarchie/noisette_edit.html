@@ -5,14 +5,16 @@
 	<a href="[(#URL_ECRIRE{noizetier_pages}|parametre_url{est_page_objet, #GET{informations/est_page_objet}})]">
 		[(#VAL{noizetier:liste_pages_objet_}|concat{#GET{informations/est_page_objet}}|_T)]
 	</a> &gt;
-	<a href="[(#URL_ECRIRE{noizetier_page}|parametre_url{page, #GET{page}})]"> [(#GET{informations/nom})]</a> >
+	<a href="[(#URL_ECRIRE{noizetier_page}|parametre_url{page, #GET{page}})]">[ (#GET{informations/nom})]</a> &gt;
 ]
 [(#TYPE|non)
-	<a href="#URL_ECRIRE{noizetier_objets}"><:noizetier:liste_objets:></a> >
+	<a href="#URL_ECRIRE{noizetier_objets}"><:noizetier:liste_objets:></a> &gt;
 	[(#INFO_LANG{#OBJET,#ID_OBJET}|changer_typo)]
-	<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]"> [(#INFO_TITRE{#OBJET, #ID_OBJET}|couper{80})]</a> >
+	<a href="[(#URL_ECRIRE{noizetier_page}|parametre_url{objet, #OBJET}|parametre_url{id_objet, #ID_OBJET})]">
+		[ (#INFO_TITRE{#OBJET, #ID_OBJET}|couper{80})]
+	</a> &gt;
 ]
-	<strong class="on">[(#NOIZETIER_NOISETTE_INFOS{#NOISETTE, nom}|sinon{<:ecrire:info_sans_titre:>})]</strong>
+	<strong class="on">[ (#NOIZETIER_NOISETTE_INFOS{#NOISETTE, nom}|sinon{<:ecrire:info_sans_titre:>})]</strong>
 [(#TYPE|non)
 	[(#REM|changer_typo)]
 ]

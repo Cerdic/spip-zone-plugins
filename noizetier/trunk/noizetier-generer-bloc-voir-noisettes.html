@@ -1,9 +1,12 @@
-#SET{type,#OBJET|?{'',#ENV{type,#ENV{type-page,#ENV{page}}}}}
-#SET{composition,#OBJET|?{'',#ENV{composition}}}
+#SET{type, #OBJET|?{'', #ENV{type, #ENV{type-page, #ENV{page}}}}}
+#SET{composition, #OBJET|?{'', #ENV{composition}}}
+[(#SET{page, #GET{type}[-(#GET{composition})]})]
+[(#OBJET|?{
+	#SET{informations, #NOIZETIER_OBJET_INFOS{#OBJET, #ID_OBJET}},
+	#SET{informations, #NOIZETIER_PAGE_INFOS{#GET{page}}}
+})]
 
-<div class="noizetier-bloc" id="noizetier-bloc-#ENV{bloc}"
-	style="padding:10px; border:4px dotted #DF454F; margin:10px 0;"
->
+<div class="noizetier-bloc" id="noizetier-bloc-#ENV{bloc}" style="padding:10px; border:4px dotted #DF454F; margin:10px 0;">
 	<input type='hidden' name='ordre[]' value='bloc-#ENV{bloc}' class="noizetier-tri" />
 	[(#GET{type}|oui)
 	<input type='hidden' name='ordre\[\]' value='page-#GET{type}[-(#GET{composition})]' class="noizetier-tri" />
@@ -14,22 +17,7 @@
 	]
 
 	<div style="color:#8A1F11; font-size:2em; margin:5px 0;">
-		[(#NOIZETIER_LISTE_PAGES{[(#GET{type}|sinon{#OBJET})][-(#GET{composition})]}|table_valeur{blocs}|table_valeur{#ENV{bloc}}|table_valeur{nom}|sinon{#ENV{bloc}})]
-	</div>
-
-	<div>
-		[(#GET{type}|oui)
-			[<strong>(#NOIZETIER_LISTE_PAGES{#GET{type}[-(#ENV{composition})]}|table_valeur{nom})</strong>]
-			([(#GET{type})][-(#ENV{composition})])
-		]
-
-		[(#GET{type}|?{
-			[(#SET{url_admin,[(#URL_ECRIRE{noizetier_page,page=#GET{type}[-(#ENV{composition})]})]})],
-			#SET{url_admin,#URL_ECRIRE{noizetier_page}|parametre_url{objet,#OBJET}|parametre_url{id_objet,#ID_OBJET}}
-		})]
-		[\[<a href="(#GET{url_admin})">
-			<:noizetier:modifier_dans_prive:>
-		</a>\]]
+		[(#NOIZETIER_BLOC_INFOS{#ENV{bloc}, nom})]
 	</div>
 
 	<BOUCLE_noisettes(NOISETTES){objet?}{id_objet?}{bloc=#ENV{bloc}}{type=#GET{type}}{composition=#GET{composition}}{par rang}>

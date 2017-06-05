@@ -2,13 +2,13 @@
 	[(#ENV{page}|oui)
 		<a href="[(#URL_ECRIRE{noizetier_pages}|parametre_url{est_page_objet, #NOIZETIER_PAGE_INFOS{#ENV{page}, est_page_objet}})]">
 			[(#VAL{noizetier:liste_pages_objet_}|concat{#NOIZETIER_PAGE_INFOS{#ENV{page}, est_page_objet}}|_T)]
-		</a>
-		&gt; <strong class="on"> [(#NOIZETIER_PAGE_INFOS{#ENV{page}, nom})]</strong>
+		</a> &gt;
+		<strong class="on">[ (#NOIZETIER_PAGE_INFOS{#ENV{page}, nom})]</strong>
 	]
 	[(#ENV{page}|non)
-		<a href="#URL_ECRIRE{noizetier_objets}"><:noizetier:liste_objets:></a>
+		<a href="#URL_ECRIRE{noizetier_objets}"><:noizetier:liste_objets:></a> &gt;
 		[(#INFO_LANG{#ENV{objet},#ENV{id_objet}}|changer_typo)]
-		&gt; <strong class="on">[(#INFO_TITRE{#ENV{objet},#ENV{id_objet}}|couper{80}|sinon{<:ecrire:info_sans_titre:>})]</strong>
+		<strong class="on">[ (#INFO_TITRE{#ENV{objet},#ENV{id_objet}}|couper{80}|sinon{<:ecrire:info_sans_titre:>})]</strong>
 		[(#REM|changer_typo)]
 	]
 ]

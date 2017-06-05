@@ -1,5 +1,4 @@
 [(#AUTORISER{configurer,noizetier}|sinon_interdire_acces)]
-
 [(#OBJET|et{#ID_OBJET}|?{
 	[(#SET{retour, [(#URL_ECRIRE{noizetier_page}
 						|parametre_url{objet, #OBJET}
@@ -17,7 +16,7 @@
 
 <div class='cadre-formulaire-editer'>
 <div class="entete-formulaire">
-	[(#GET{retour}|icone_verticale{<:noizetier:retour:>,page-noisettes-24,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	[(#GET{retour}|icone_verticale{<:noizetier:retour:>, page-noisettes-24, '', left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
 	<:noizetier:formulaire_modifier_noisette:>
 	<h1>
 		<:noizetier:formulaire_ajouter_noisette:>

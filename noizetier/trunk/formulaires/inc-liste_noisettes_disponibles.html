@@ -2,7 +2,7 @@
 #SET{composition,#ENV{page,#OBJET}|noizetier_page_composition}
 
 <B_composition_noisettes>
-[(#SET{nom_type,[(#NOIZETIER_LISTE_PAGES|table_valeur{#ENV{page,#OBJET}}|table_valeur{nom})]})]
+[(#SET{nom_type,[(#NOIZETIER_PAGE_INFOS{#ENV{page, #OBJET}, nom})]})]
 <h4><:noizetier:noisettes_composition{composition=#GET{nom_type}}:></h4>
 <ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
 <BOUCLE_composition_noisettes(DATA){source tableau, #NOIZETIER_LISTE_NOISETTES{#ENV{page,#OBJET}}}{par cle}{si #GET{composition}}>
@@ -17,7 +17,7 @@
 </B_composition_noisettes>
 
 <B_type_noisettes>
-[(#SET{nom_type,[(#NOIZETIER_LISTE_PAGES|table_valeur{#GET{type}}|table_valeur{nom})]})]
+[(#SET{nom_type,[(#NOIZETIER_PAGE_INFOS{#GET{type}, nom})]})]
 <h4><:noizetier:noisettes_page{type=#GET{nom_type}}:></h4>
 <ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
 <BOUCLE_type_noisettes(DATA){source tableau, #NOIZETIER_LISTE_NOISETTES{#GET{type}}}{par cle}>
