@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'compositions_non_installe' => '<b>Plugin Composities:</b> deze plugin is niet op de site geïnstalleerd. Dat is niet vereist, maar wanneer hij is geactiveerd, kun je direct composities aanwijzen.',
 	'configurer_objets_noisettes_explication' => 'Bij dit soort inhoud mogen de nootjes <strong>per inhoud</strong> worden aangepast.',
 	'configurer_objets_noisettes_label' => 'Aanpassing op inhoud toestaan voor:',
-	'configurer_titre' => 'NoiZetier configureren',
+	'configurer_titre' => 'NoiZetier configureren', # MODIF
 
 	// D
 	'description_bloc_contenu' => 'Voornaamste inhoud van iedere bladzijde.',

@@ -8,14 +8,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'apercu' => 'Aperçu',
 	'activer_composition' => 'Activer les compositions',
+	'apercu' => 'Aperçu',
 
 	// B
 	'bloc_sans_noisette' => 'Ajouter des noisettes en utilisant le bouton “ajouter une noisette” ou en glissant-déposant la noisette choisie sur cet emplacement.',
+	'bulle_activer_composition' => 'Activer les compositions sur le type de contenu « @type@ »',
 	'bulle_configurer_objet_noisettes' => 'Configurer les noisettes spécifiques à ce contenu',
 	'bulle_configurer_page_noisettes' => 'Configurer les noisettes de la page',
-	'bulle_activer_composition' => 'Activer les compositions sur le type de contenu « @type@ »',
 	'bulle_creer_composition' => 'Créer une composition virtuelle de la page « @page@ »',
 	'bulle_dupliquer_composition' => 'Créer une composition virtuelle copiée de la composition « @page@ »',
 	'bulle_modifier_composition' => 'Editer les informations de base la composition',
