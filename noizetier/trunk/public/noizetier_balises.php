@@ -55,3 +55,19 @@ function balise_NOIZETIER_BLOC_INFOS_dist($p) {
 
 	return $p;
 }
+
+// Cette balise renvoie le tableau de description d'une noisette particulière
+function balise_NOIZETIER_NOISETTE_INFOS_dist($p)
+{
+	$noisette = interprete_argument_balise(1, $p);
+	if (isset($noisette)) {
+		$noisette = str_replace('\'', '"', $noisette);
+		$information = interprete_argument_balise(2, $p);
+		$information = isset($information) ? str_replace('\'', '"', $information) : '""';
+		$p->code = "noizetier_noisette_informer($noisette, $information)";
+	} else {
+		$p->code = "noizetier_noisette_repertorier()";
+	}
+
+	return $p;
+}

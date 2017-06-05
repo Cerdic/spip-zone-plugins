@@ -14,7 +14,7 @@ function noizetier_upgrade($nom_meta_base_version, $version_cible) {
 	// Configurations par défaut
 	$config_060 = array(
 		'objets_noisettes' => array(),
-		'div_noisette' => 'on',
+		'balise_noisette' => 'on',
 		'ajax_noisette' => 'on',
 	);
 
@@ -83,7 +83,18 @@ function noizetier_vider_tables($nom_meta_version_base) {
  */
 function maj_060($config_defaut) {
 
+	// Ajout de la colonne div qui indique pour chaque noisette si le noiZetier doit l'inclure dans un div
+	// englobant ou pas. Le champ prend les valeurs 'on', '' ou 'defaut' qui indique qu'il faut prendre
+	// en compte la valeur configurée par défaut pour toutes les noisettes.
+	sql_alter("TABLE spip_noisettes ADD balise varchar(6) DEFAULT 'defaut' NOT NULL AFTER parametres");
+
+	// Mise à jour de la configuration du plugin
 	include_spip('inc/config');
+	$config = lire_config('noizetier', array());
+	if ($config and isset($config['objets_noisettes'])) {
+		$config_defaut['objets_noisettes'] = $config['objets_noisettes'];
+	}
+	ecrire_config('noizetier', $config_defaut);
 
 	// Mise à jour de la liste des compositions virtuelles
 	$compositions = lire_config('noizetier_compositions', array());
@@ -97,11 +108,4 @@ function maj_060($config_defaut) {
 		}
 		ecrire_config('noizetier_compositions', $compositions_060);
 	}
-
-	// Mise à jour de la configuration du plugin
-	$config = lire_config('noizetier', array());
-	if ($config and isset($config['objets_noisettes'])) {
-		$config_defaut['objets_noisettes'] = $config['objets_noisettes'];
-	}
-	ecrire_config('noizetier', $config_defaut);
 }

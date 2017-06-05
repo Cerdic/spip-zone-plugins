@@ -28,7 +28,7 @@
 			<li class="editer item noisette" id="noisette-#ID_NOISETTE"[ style="background-image: url((#GET{infos_noisette}|table_valeur{icon}|sinon{noisette-24.png}|noizetier_icone_chemin));"]>
 				[<strong>(#GET{infos_noisette}|table_valeur{nom}|sinon{#NOISETTE})</strong>]
 				[(#AUTORISER{configurer,noizetier}|oui)
-					[(#URL_ECRIRE{noisette_edit,id_noisette=#ID_NOISETTE}|icone_verticale{<:noizetier:formulaire_modifier_noisette:>,noisette,edit,right ajax preload})]
+					[(#URL_ECRIRE{noisette_edit,id_noisette=#ID_NOISETTE}|icone_verticale{<:noizetier:formulaire_modifier_noisette:>,noisette,edit,right})]
 					[(#URL_ACTION_AUTEUR{supprimer_noisettes,noisette:#ID_NOISETTE,#GET{self}#bloc-#GET{bloc_affiche}}|icone_verticale{<:noizetier:formulaire_supprimer_noisette:>,noisette,del,right})]
 					[(#URL_ACTION_AUTEUR{deplacer_noisette,#ID_NOISETTE-bas,#GET{self}#noisette-#ID_NOISETTE}|icone_verticale{<:noizetier:formulaire_deplacer_bas:>,noisette-down,'',right})]
 					[(#URL_ACTION_AUTEUR{deplacer_noisette,#ID_NOISETTE-haut,#GET{self}#noisette-#ID_NOISETTE}|icone_verticale{<:noizetier:formulaire_deplacer_haut:>,noisette-up,'',right})]

@@ -1520,7 +1520,6 @@ function noizetier_objet_informer($type_objet = '', $id_objet = 0, $information 
 	} else {
 		// Filtrage des objets répertoriés:
 		// - de façon systématique, on ne retient que les objets dont le type est activé dans la configuration du plugin.
-		// - a la demande, on applique les filtres éventuellement demandés en argument de la fonction
 		$objets_repertories = $objets;
 		foreach ($objets_repertories as $_type_objet => $_objets) {
 			if (!noizetier_objet_type_active($_type_objet)) {
@@ -1600,7 +1599,7 @@ include_spip('public/noizetier_balises');
 
 
 // -------------------------------------------------------------------
-// API NOISETTES OBSOLOETE : A VIRER A TERME
+// API NOISETTES OBSOLETE : A VIRER A TERME
 // -------------------------------------------------------------------
 /**
  * Lister les noisettes disponibles dans les dossiers noisettes/.

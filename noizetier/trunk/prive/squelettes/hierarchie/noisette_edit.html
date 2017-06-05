@@ -1,6 +1,19 @@
-<BOUCLE_ariane (NOISETTES) {id_noisette}>
-<a href="#URL_ECRIRE{noizetier_pages}"><:noizetier:liste_pages:></a>
-&gt; <a href="[(#URL_ECRIRE{noizetier_page,page=#TYPE[-(#COMPOSITION)]})]"> [(#NOIZETIER_LISTE_PAGES{#TYPE[-(#COMPOSITION)]}|table_valeur{nom})]</a>
-&gt; [(#NOIZETIER_LISTE_PAGES{#TYPE[-(#COMPOSITION)]}|table_valeur{blocs}|table_valeur{#BLOC}|table_valeur{nom})]
-&gt; <strong class="on">[(#NOIZETIER_INFO_NOISETTE{#NOISETTE}|table_valeur{nom})]</strong>
+<BOUCLE_ariane(NOISETTES) {id_noisette}>
+[(#TYPE|oui)
+	[(#SET{page, #TYPE[-(#COMPOSITION)]})]
+	#SET{informations, #NOIZETIER_PAGE_INFOS{#GET{page}}}
+	<a href="[(#URL_ECRIRE{noizetier_pages}|parametre_url{est_page_objet, #GET{informations/est_page_objet}})]">
+		[(#VAL{noizetier:liste_pages_objet_}|concat{#GET{informations/est_page_objet}}|_T)]
+	</a> &gt;
+	<a href="[(#URL_ECRIRE{noizetier_page}|parametre_url{page, #GET{page}})]"> [(#GET{informations/nom})]</a> >
+]
+[(#TYPE|non)
+	<a href="#URL_ECRIRE{noizetier_objets}"><:noizetier:liste_objets:></a> >
+	[(#INFO_LANG{#OBJET,#ID_OBJET}|changer_typo)]
+	<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]"> [(#INFO_TITRE{#OBJET, #ID_OBJET}|couper{80})]</a> >
+]
+	<strong class="on">[(#NOIZETIER_NOISETTE_INFOS{#NOISETTE, nom}|sinon{<:ecrire:info_sans_titre:>})]</strong>
+[(#TYPE|non)
+	[(#REM|changer_typo)]
+]
 </BOUCLE_ariane>

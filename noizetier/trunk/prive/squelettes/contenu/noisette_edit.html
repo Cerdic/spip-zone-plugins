@@ -1,4 +1,4 @@
-[(#AUTORISER{configurer,noizetier}|sinon_interdire_acces)]
+[(#AUTORISER{configurer, noizetier}|sinon_interdire_acces)]
 <BOUCLE_noisette(NOISETTES){id_noisette}>
 [(#OBJET|et{#ID_OBJET}|?{
 	[(#SET{redirect, [(#URL_ECRIRE{noizetier_page}
@@ -18,7 +18,7 @@
 	[(#GET{redirect}|icone_verticale{<:noizetier:retour:>,page-noisettes-24,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
 	<:noizetier:formulaire_modifier_noisette:>
 	<h1>
-		[(#NOISETTE|noizetier_info_noisette|table_valeur{nom})]
+		[(#NOISETTE|noizetier_noisette_informer{nom})]
 	</h1>
 </div>
 
@@ -27,7 +27,7 @@
 	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
 ]
 <div class="ajax">
-	[(#FORMULAIRE_EDITER_NOISETTE{#ID_NOISETTE,#GET{redirect}})]
+	[(#FORMULAIRE_EDITER_NOISETTE{#ID_NOISETTE, #GET{redirect}})]
 </div>
 [(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\[CDATA\[*/

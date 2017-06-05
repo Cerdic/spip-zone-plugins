@@ -1,8 +1,8 @@
 <?php
 
 // Fonction reprise de https://zone.spip.org/trac/spip-zone/browser/_plugins_/simpletest/inc/tests.php
-// En attendant une éventuelle intégration dans le core
-// Préfixée pour éviter tout conflit
+// En attendant une Ã©ventuelle intÃ©gration dans le core
+// PrÃ©fixÃ©e pour Ã©viter tout conflit
 // Voir aussi https://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau_suisse/cout_pipelines.php?rev=77088#L293
 
 if (!defined('_DIR_CODE')) {

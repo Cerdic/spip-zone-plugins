@@ -24,6 +24,7 @@ function noizetier_declarer_tables_principales($tables_principales) {
 		'bloc'        => "tinytext DEFAULT '' NOT NULL",
 		'noisette'    => "tinytext DEFAULT '' NOT NULL",
 		'parametres'  => "text DEFAULT '' NOT NULL",
+		'balise'      => "varchar(6) DEFAULT 'defaut' NOT NULL",
 		'css'         => "tinytext DEFAULT '' NOT NULL",
 	);
 

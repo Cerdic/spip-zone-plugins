@@ -3,15 +3,37 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
-		[(#REM) declarer les hidden qui declencheront le service du formulaire 
-		parametre : url d'action ]
+		[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<input type='hidden' name='id_noisette' value='#ENV{id_noisette}' />
 		<input type='hidden' name='noisette' value='#ENV{noisette}' />
-		[<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
-		(#GENERER_SAISIES{#ENV{_params}})
-		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>]
-		[(#ENV{_params}|non)<div class="explication"><:noizetier:formulaire_noisette_sans_parametre:></div>]
+
+		[(#REM) Paramètres de configuration propres à la noisette ]
+		<fieldset>
+			<legend><:noizetier:legende_noisette_parametrage:></legend>
+			[<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+				(#GENERER_SAISIES{#ENV{_champs}})
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>]
+			[(#ENV{_champs}|non)#BOITE_OUVRIR{'','notice'}<:noizetier:formulaire_noisette_sans_parametre:>#BOITE_FERMER]
+		</fieldset>
+
+		[(#REM) Paramètres de configuration généraux à toute noisette (div englobant, CSS) ]
+		<fieldset>
+			<legend><:noizetier:legende_noisette_inclusion:></legend>
+			<div class="editer-groupe">
+				[(#REM) Choix d'une balise englobante pour la noisette ]
+				[(#SAISIE{radio, balise,
+					label=<:noizetier:label_noisette_balise:>,
+					datas=#ENV{_balise_options},
+					defaut=#ENV{balise},
+				})]
+
+				[(#REM) CSS spécifiques qui seront insérés dans la balise englobante si utilisée ]
+				[<div id="css">(#SAISIE{input, css,
+					label=<:noizetier:label_noisette_css:>,
+					explication=<:noizetier:explication_noisette_css:>,
+				})</div>]
+			</div>
+		</fieldset>
 
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
@@ -19,3 +41,23 @@
 	</div></form>
 	]
 </div>
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{balise}|=={''}|ou{#ENV{balise}|=={defaut}|et{#CONFIG{noizetier/balise_noisette}|!={on}}}|oui)
+			jQuery('#css').hide();
+		]
+		jQuery("input[name='balise']").change(function() {
+			if (jQuery("input[name='balise']:checked").val() == '') {
+				jQuery("#css").hide();
+			} else if (jQuery("input[name='balise']:checked").val() == 'on') {
+				jQuery("#css").show();
+			} else {
+				[(#CONFIG{noizetier/balise_noisette}|=={on}|oui)jQuery("#css").show();]
+				[(#CONFIG{noizetier/balise_noisette}|=={on}|non)jQuery("#css").hide();]
+			}
+			jQuery(this).blur();
+		});
+	});
+//]]>
+</script>
