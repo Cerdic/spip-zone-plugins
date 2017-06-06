@@ -1,36 +1,31 @@
-[(#REM)
-Note : css automatique dans /prive/themes/spip/lists.css.html
-]
-
-<B_liste_evt>
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	date_debut,1,
+	id_evenements,1,
+	points,-1
+}})]<B_liste_evt>
 #ANCRE_PAGINATION
 <div class="liste-objets evenements">
 <table class="spip liste">
 [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{simplecal:info_1_evenement,simplecal:info_nb_evenements}})</strong></caption>]
 	<thead>
 		<tr class="first_row">
-			<th class="statut"><span title="<:lien_trier_statut|attribut_html:>">#</span></th>
-			<th class="titre"><:info_titre:></th>
-			<th class="auteur"><:auteur:></th>
-			<th class="date"><:date:></th>
-			<th class="id"><:info_numero_abbreviation:></th>
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class="titre" scope="col">[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class="date" scope="col">[(#TRI{date_debut,<:simplecal:dates:>,ajax})]</th> 
+			<th class="id" scope="col">[(#TRI{id_evenement,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
-
-	<!-- id_auteur + id_mot pose pb ensemble ... -->
-	<BOUCLE_liste_evt(EVENEMENTS){id_evenement?}{id_auteur?}{id_secteur?}{id_rubrique?}{id_mot?}{statut?}{where?}{par date_debut, date}{pagination 10}>
+	<BOUCLE_liste_evt(EVENEMENTS){id_evenement?}{id_auteur?}{id_secteur?}{id_rubrique?}{id_mot?}{statut?}{where?}{tri #ENV{par, titre},#GET{defaut_tri}}{par date_debut, date_fin}{pagination 10}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="statut">[(#STATUT|puce_statut{'evenement',#ID_EVENEMENT,#ID_RUBRIQUE})]</td>
 			<td class="titre principale">
 				[(#LOGO_EVENEMENT|image_reduire{20,26})]
 				<a href="[(#ID_EVENEMENT|generer_url_entite{evenement})]" 
 					title="<:info_numero_abbreviation|attribut_html:> #ID_EVENEMENT"
-					[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]>#TITRE</a>
-					[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,non})][ - (#LIEU)]
-			</td>
-			<td class="auteur"><BOUCLE_auteurs(AUTEURS){id_evenement}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
-			<td class="date secondaire">[(#DATE|affdate_jourcourt)]</td>
+					[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]>#TITRE</a>[(#LIEU|textebrut)]</td>
+			<td class="date secondaire">[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,non,abbr})]</td>
 			<td class="id">[(#AUTORISER{modifier,evenement,#ID_EVENEMENT}|?{
 				<a href="[(#URL_ECRIRE{evenement_edit,id_evenement=#ID_EVENEMENT})]">#ID_EVENEMENT</a>,
 				#ID_EVENEMENT

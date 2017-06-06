@@ -7,7 +7,7 @@
 [(#SET{where,[(#VAL{''}|simplecal_evenements_where{#ENV{mode,''}, #ENV{annee,''},#ENV{mois,''}})]})]
 
 
-[(#INCLURE{fond=prive/objets/liste/evenements,where=#GET{where},par=date,ajax,env})]
+[(#INCLURE{fond=prive/objets/liste/evenements,where=#GET{where},par=date_debut,ajax,env})]
 
 
 [(#GET{editable})
