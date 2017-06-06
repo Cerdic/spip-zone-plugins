@@ -5,7 +5,11 @@
 	id_article,1,
 	points,-1
 }})
-]<B_liste_art>
+]
+[(#REM) traiter le cas où l'objet 'article' n'a pas été sélectionné dans la conf du plugin]
+[(#VAL{article}|rang_objet_dans_config|non) [(#VAL{date}|setenv{par})] ]
+[(#VAL{article}|rang_objet_dans_config|oui) [(#VAL{rang}|setenv{par})] ]
+<B_liste_art>
 #ANCRE_PAGINATION
 <div class="liste-objets articles">
 <table class='spip liste'>
