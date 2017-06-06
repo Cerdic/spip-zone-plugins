@@ -55,7 +55,7 @@ if (is_entravaux()){
 		else {
 			// desactiver le cache sauf si inhibe par define
 			if (!defined('_ENTRAVAUX_GARDER_CACHE'))
-				define('_NO_CACHE',1);
+				if (!defined('_NO_CACHE')) define('_NO_CACHE',1);
 		}
 	}
 	// si espace prive : die avec page travaux
