@@ -139,6 +139,10 @@ function commandes_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.7.6'] = array(
 	    array('maj_tables', array('spip_commandes')),
 	);
+	// ajout du champ reduction
+	$maj['0.7.7'] = array(
+	    array('maj_tables', array('spip_commandes_details')),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

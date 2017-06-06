@@ -144,3 +144,38 @@ function commandes_afficher_quantite_descriptif($quantite, $objet='', $id_objet=
 function commandes_afficher_quantite($quantite, $objet='', $id_objet=0) {
 	return commandes_arrondir_quantite($quantite, $objet, $id_objet);
 }
+
+
+function commandes_afficher_prix_detaille_abbr($prix_ttc, $quantite, $prix_unit_ht, $reduction, $taxe) {
+
+	// cas facile, aucun calul a detailler
+	if ($quantite == 1 and $reduction == 0.0 and $taxe == 0.0) {
+		return $prix_ttc;
+	}
+
+	$abbr = prix_formater($prix_unit_ht);
+	$parentheses = false;
+	if ($reduction>0.0) {
+		$abbr = "$abbr - " . round($reduction*100, 2) . "% &times; $abbr";
+		$prix_unit_ht = $prix_unit_ht * (1.0 - $reduction);
+		$parentheses = true;
+	}
+	if ($taxe) {
+		if ($parentheses) {
+			$abbr = "($abbr)";
+		}
+		$taxe_unit = $prix_unit_ht * $taxe;
+		$abbr = "$abbr + ".prix_formater($taxe_unit);
+		$parentheses = true;
+	}
+
+	if ($quantite != 1) {
+		if ($parentheses) {
+			$abbr = "($abbr)";
+		}
+		$abbr = "{$quantite} &times; $abbr";
+	}
+
+
+	return '<abbr title="= '.attribut_html($abbr).'">'.$prix_ttc.'</abbr>';
+}

@@ -138,6 +138,7 @@ function commandes_declarer_tables_objets_sql($tables) {
 			'quantite' => 'int not null default 0',
 			'prix_unitaire_ht' => 'float not null default 0',
 			'taxe' => 'decimal(4,4) not null default 0',
+			'reduction' => 'decimal(4,4) not null default 0',
 			'statut' => 'varchar(25) not null default ""',
 			'objet' => 'varchar(25) not null default ""',
 			'id_objet' => 'bigint(21) not null default 0',

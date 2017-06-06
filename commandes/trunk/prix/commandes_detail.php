@@ -29,8 +29,16 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function prix_commandes_detail_ht_dist($id_commandes_detail, $ligne){
 	// La quantité "0" ne voulant rien dire, cela signifie que ce n'est pas un produit quantifiable
 	// mais des lignes en plus comme les frais de livraison, des frais de dossier, des déductions, etc
-	if ($ligne['quantite'] > 0) return $ligne['quantite'] * $ligne['prix_unitaire_ht'];
-	else return $ligne['prix_unitaire_ht'];
+	$prix = $ligne['prix_unitaire_ht'];
+	if ($ligne['quantite'] > 0) $prix = $ligne['quantite'] * $ligne['prix_unitaire_ht'];
+
+	if (isset($ligne['reduction'])
+	  and ($reduction = floatval($ligne['reduction']))>0) {
+		$reduction = min($reduction, 1.0); // on peut pas faire une reduction de plus de 100%;
+		$prix = $prix * (1.0 - $reduction);
+	}
+
+	return $prix;
 }
 
 /**

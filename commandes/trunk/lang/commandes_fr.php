@@ -154,6 +154,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_quantite' => 'Quantité',
 	'label_recherche' => 'Rechercher',
 	'label_statuts_actifs' => 'Statuts',
+	'label_reduction' => 'Reduc.',
 	'label_taxe' => 'Taxe',
 
 	// M
