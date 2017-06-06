@@ -107,7 +107,7 @@
 						#SET{objet_base, #OBJET|table_objet_sql|sql_countsel{#OBJET|id_table_objet|concat{=,#ID_OBJET}}}
 						[(#GET{objet_spip}|oui)
 						<li>
-							[(#QUANTITE)&times;&nbsp;][(#GET{objet_base}|oui)<a href="[(#INFO_URL{#OBJET,#ID_OBJET})]">]
+							[(#QUANTITE|commandes_afficher_quantite{#OBJET,#ID_OBJET})&times; ][(#GET{objet_base}|oui)<a href="[(#INFO_URL{#OBJET,#ID_OBJET})]">]
 								[(#DESCRIPTIF*|typo|supprimer_numero|sinon{#VAL{info_sans_titre}|_T|wrap{<em>}})]
 							[(#GET{objet_base}|oui)</a>]
 						</li>

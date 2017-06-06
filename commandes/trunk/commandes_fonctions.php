@@ -107,3 +107,40 @@ function commande_totalise_taxes($prix_ht = null, $prix_ttc = null) {
 }
 
 
+/**
+ * Filtre pour utiliser la fonction d'arrondi des quantite
+ * @param int|float $quantite
+ * @param string $objet
+ * @param int $id_objet
+ * @return int|float
+ */
+function commandes_arrondir_quantite($quantite, $objet='', $id_objet=0) {
+	$commandes_arrondir_quantite = charger_fonction('commandes_arrondir_quantite', 'inc');
+	return $commandes_arrondir_quantite($quantite, $objet, $id_objet);
+}
+
+/**
+ * Afficher la quantite si differente de 1
+ * @param int|float $quantite
+ * @param string $objet
+ * @param int $id_objet
+ * @return string
+ */
+function commandes_afficher_quantite_descriptif($quantite, $objet='', $id_objet=0) {
+	if ($quantite!==1) {
+		return commandes_afficher_quantite($quantite) . " &times;";
+	}
+	return '';
+}
+
+/**
+ * Afficher la quantite, en arrondissant eventuellement
+ * (par defaut fait juste l'arrondi int natif)
+ * @param int|float $quantite
+ * @param string $objet
+ * @param int $id_objet
+ * @return string
+ */
+function commandes_afficher_quantite($quantite, $objet='', $id_objet=0) {
+	return commandes_arrondir_quantite($quantite, $objet, $id_objet);
+}
