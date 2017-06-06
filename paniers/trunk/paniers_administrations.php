@@ -38,6 +38,11 @@ function paniers_upgrade($nom_meta_base_version, $version_cible){
 		)
 	);
 
+	// ajout du champ reduction
+	$maj['0.3.0'] = array(
+	    array('maj_tables', array('spip_paniers_liens')),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

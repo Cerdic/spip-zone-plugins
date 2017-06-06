@@ -151,6 +151,7 @@ function panier2commande_remplir_commande($id_commande, $id_panier, $append = tr
 				'id_objet' => $emplette['id_objet'],
 				'descriptif' => generer_info_entite($emplette['id_objet'], $emplette['objet'], 'titre', '*'),
 				'quantite' => $emplette['quantite'],
+				'reduction' => $emplette['reduction'],
 				'prix_unitaire_ht' => $prix_ht,
 				'taxe' => $taxe,
 				'statut' => 'attente'
@@ -175,5 +176,19 @@ function panier2commande_remplir_commande($id_commande, $id_panier, $append = tr
 			// supprimer les details qui n'ont rien a voir avec ce panier
 			sql_delete("spip_commandes_details", "id_commande=" . intval($id_commande) . " AND " . sql_in('id_commandes_detail', $details, "NOT"));
 		}
+
+		// Envoyer aux plugins après édition pour verification eventuelle du contenu de la commande
+		pipeline(
+			'post_edition',
+			array(
+				'args' => array(
+					'table' => 'spip_commandes',
+					'id_objet' => $id_commande,
+					'action' => 'remplir_commande',
+				),
+				'data' => array()
+			)
+		);
+
 	}
 }
