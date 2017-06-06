@@ -1,0 +1,25 @@
+<paquet
+	prefix="paniers_commandes_quantites_decimal"
+	categorie="divers"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="paniers_commandes_quantites_decimal-32.png"
+	documentation=""
+	schema="0.2.0"
+>
+
+	<nom>Paniers et Commandes avec Quantites decimales</nom>
+	<!-- Paniers dans SPIP -->
+
+	<auteur lien="https://nursit.com">C&#233;dric Morin</auteur>
+
+	<licence lien="http://org.rodage.com/gpl-3.0.fr.txt">GPL v3</licence>
+
+	<necessite nom="paniers" compatibilite="[0.1.2;]" />
+	<necessite nom="commandes" compatibilite="[1.13.0;]" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/paniers_commandes_quantites_decimal.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/paniers_commandes_quantites_decimal.php" />
+
+</paquet>
