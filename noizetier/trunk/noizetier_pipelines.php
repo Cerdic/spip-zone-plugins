@@ -293,10 +293,10 @@ function noizetier_affiche_milieu($flux) {
 	if ($exec == 'admin_plugin') {
 		include_spip('inc/flock');
 		include_spip('noizetier_fonctions');
-		supprimer_fichier(_DIR_CACHE._CACHE_AJAX_NOISETTES);
-		supprimer_fichier(_DIR_CACHE._CACHE_CONTEXTE_NOISETTES);
-		supprimer_fichier(_DIR_CACHE._CACHE_INCLUSIONS_NOISETTES);
-		supprimer_fichier(_DIR_CACHE._CACHE_DESCRIPTIONS_NOISETTES);
+		supprimer_fichier(_CACHE_AJAX_NOISETTES);
+		supprimer_fichier(_CACHE_CONTEXTE_NOISETTES);
+		supprimer_fichier(_CACHE_INCLUSIONS_NOISETTES);
+		supprimer_fichier(_CACHE_DESCRIPTIONS_NOISETTES);
 	}
 
 	return $flux;

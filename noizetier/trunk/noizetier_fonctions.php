@@ -5,10 +5,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-define('_CACHE_AJAX_NOISETTES', 'noisettes_ajax.php');
-define('_CACHE_CONTEXTE_NOISETTES', 'noisettes_contextes.php');
-define('_CACHE_DESCRIPTIONS_NOISETTES', 'noisettes_descriptions.php');
-define('_CACHE_INCLUSIONS_NOISETTES', 'noisettes_inclusions.php');
+define('_CACHE_AJAX_NOISETTES', _DIR_CACHE . 'noisettes_ajax.php');
+define('_CACHE_CONTEXTE_NOISETTES', _DIR_CACHE . 'noisettes_contextes.php');
+define('_CACHE_DESCRIPTIONS_NOISETTES', _DIR_CACHE . 'noisettes_descriptions.php');
+define('_CACHE_INCLUSIONS_NOISETTES', _DIR_CACHE . 'noisettes_inclusions.php');
 
 
 // -------------------------------------------------------------------
@@ -26,8 +26,7 @@ function noizetier_noisette_repertorier($filtres = array()) {
 	if (is_null($noisettes)) {
 		// On détermine l'existence et le contenu du cache.
 		$cache_noisettes = array();
-		$cache = _DIR_CACHE._CACHE_DESCRIPTIONS_NOISETTES;
-		if (lire_fichier_securise($cache, $contenu)) {
+		if (lire_fichier_securise(_CACHE_DESCRIPTIONS_NOISETTES, $contenu)) {
 			$cache_noisettes = unserialize($contenu);
 		}
 
@@ -61,7 +60,7 @@ function noizetier_noisette_repertorier($filtres = array()) {
 				}
 				// Mise à jour du cache des descriptions
 				if ($noisettes) {
-					ecrire_fichier_securise($cache, serialize($noisettes));
+					ecrire_fichier_securise(_CACHE_DESCRIPTIONS_NOISETTES, serialize($noisettes));
 				}
 			}
 		} else {
@@ -101,8 +100,7 @@ function noizetier_noisette_informer($noisette, $information = '', $options = ar
 	if (!isset($description_noisette[$noisette])) {
 		// On essaye d'abord de récupérer la description dans le cache sauf si l'option reload est activée
 		if (empty($options['reload'])) {
-			$cache = _DIR_CACHE._CACHE_DESCRIPTIONS_NOISETTES;
-			if (lire_fichier_securise($cache, $contenu)) {
+			if (lire_fichier_securise(_CACHE_DESCRIPTIONS_NOISETTES, $contenu)) {
 				$cache_noisettes = unserialize($contenu);
 				if (isset($cache_noisettes[$noisette])) {
 					$description_noisette[$noisette] = $cache_noisettes[$noisette];
@@ -171,6 +169,51 @@ function noizetier_noisette_informer($noisette, $information = '', $options = ar
 		return '';
 	}
 }
+
+
+function noizetier_noisette_ajax($noisette) {
+	static $est_ajax = array();
+
+	if (!isset($est_ajax[$noisette])) {
+		// On détermine l'existence et le contenu du cache.
+		if (lire_fichier_securise(_CACHE_AJAX_NOISETTES, $contenu)) {
+			$est_ajax = unserialize($contenu);
+		}
+
+		// On doit recalculer le cache.
+		if (!$est_ajax
+		or (_request('var_mode') == 'recalcul')
+		or (defined('_NO_CACHE') and (_NO_CACHE != 0))) {
+			// On détermine la valeur par défaut de l'ajax des noisettes
+			include_spip('inc/config');
+			$defaut_ajax = lire_config('noizetier/ajax_noisette') == 'on' ? true : false;
+
+			// On repertorie toutes les noisettes disponibles et on compare
+			// avec la valeur par défaut configurée pour le noiZetier.
+			$noisettes = noizetier_noisette_repertorier();
+			foreach ($noisettes as $_noisette => $_configuration) {
+				$est_ajax[$_noisette] = ($_configuration['ajax'] == 'defaut')
+					? $defaut_ajax
+					: ($_configuration['ajax'] == 'non' ? false : true);
+			}
+
+			// On vérifie que la noisette demandée est bien dans la liste.
+			// Si non, on la rajoute en utilisant la valeur ajax par défaut afin de toujours renvoyer
+			// quelque chose.
+			if (!isset($est_ajax[$noisette])) {
+				$est_ajax[$noisette] = $defaut_ajax;
+			}
+
+			// On met à jour in fine le cache
+			if ($est_ajax) {
+				ecrire_fichier_securise(_CACHE_AJAX_NOISETTES, serialize($est_ajax));
+			}
+		}
+	}
+
+	return $est_ajax[$noisette];
+}
+
 
 /**
  * Charger les informations des contexte pour une noisette.
@@ -592,7 +635,7 @@ function noizetier_obtenir_contexte($noisette) {
 	// seulement 1 fois par appel, on lit ou calcule tous les contextes
 	if ($noisettes === false) {
 		// lire le cache des contextes sauves
-		lire_fichier_securise(_DIR_CACHE._CACHE_CONTEXTE_NOISETTES, $noisettes);
+		lire_fichier_securise(_CACHE_CONTEXTE_NOISETTES, $noisettes);
 		$noisettes = @unserialize($noisettes);
 
 		// s'il en mode recalcul, on recalcule tous les contextes des noisettes trouvees.
@@ -602,7 +645,7 @@ function noizetier_obtenir_contexte($noisette) {
 			foreach ($infos as $cle_noisette => $infos) {
 				$noisettes[$cle_noisette] = ($infos['contexte'] ? $infos['contexte'] : array());
 			}
-			ecrire_fichier_securise(_DIR_CACHE._CACHE_CONTEXTE_NOISETTES, serialize($noisettes));
+			ecrire_fichier_securise(_CACHE_CONTEXTE_NOISETTES, serialize($noisettes));
 		}
 	}
 
@@ -613,39 +656,6 @@ function noizetier_obtenir_contexte($noisette) {
 	return array();
 }
 
-/**
- * Retourne true ou false pour indiquer si la noisette doit être inclue en ajax.
- *
- * @param
- *
- * @return
- **/
-function noizetier_ajaxifier_noisette($noisette) {
-	static $noisettes = false;
-
-	// seulement 1 fois par appel, on lit ou calcule tous les contextes
-	if ($noisettes === false) {
-		// lire le cache des contextes sauves
-		lire_fichier_securise(_DIR_CACHE._CACHE_AJAX_NOISETTES, $noisettes);
-		$noisettes = @unserialize($noisettes);
-
-		// s'il en mode recalcul, on recalcule tous les contextes des noisettes trouvees.
-		if (!$noisettes or (_request('var_mode') == 'recalcul')) {
-			$infos = noizetier_lister_noisettes();
-			$noisettes = array();
-			foreach ($infos as $cle_noisette => $infos) {
-				$noisettes[$cle_noisette] = ($infos['ajax'] == 'non') ? false : true;
-			}
-			ecrire_fichier_securise(_DIR_CACHE._CACHE_AJAX_NOISETTES, serialize($noisettes));
-		}
-	}
-
-	if (isset($noisettes[$noisette])) {
-		return $noisettes[$noisette];
-	}
-
-	return true;
-}
 
 /**
  * Retourne true ou false pour indiquer si la noisette doit être inclue dynamiquement.
@@ -660,7 +670,7 @@ function noizetier_inclusion_dynamique($noisette) {
 	// seulement 1 fois par appel, on lit ou calcule tous les contextes
 	if ($noisettes === false) {
 		// lire le cache des contextes sauves
-		lire_fichier_securise(_DIR_CACHE._CACHE_INCLUSIONS_NOISETTES, $noisettes);
+		lire_fichier_securise(_CACHE_INCLUSIONS_NOISETTES, $noisettes);
 		$noisettes = @unserialize($noisettes);
 
 		// s'il en mode recalcul, on recalcule tous les contextes des noisettes trouvees.
@@ -670,7 +680,7 @@ function noizetier_inclusion_dynamique($noisette) {
 			foreach ($infos as $cle_noisette => $infos) {
 				$noisettes[$cle_noisette] = ($infos['inclusion'] == 'dynamique') ? true : false;
 			}
-			ecrire_fichier_securise(_DIR_CACHE._CACHE_INCLUSIONS_NOISETTES, serialize($noisettes));
+			ecrire_fichier_securise(_CACHE_INCLUSIONS_NOISETTES, serialize($noisettes));
 		}
 	}
 
@@ -1668,13 +1678,13 @@ function noizetier_obtenir_infos_noisettes() {
 	// seulement 1 fois par appel, on lit ou calcule tous les contextes
 	if ($noisettes === false) {
 		// lire le cache des descriptions sauvees
-		lire_fichier_securise(_DIR_CACHE._CACHE_DESCRIPTIONS_NOISETTES, $noisettes);
+		lire_fichier_securise(_CACHE_DESCRIPTIONS_NOISETTES, $noisettes);
 		$noisettes = @unserialize($noisettes);
 		// s'il en mode recalcul, on recalcule toutes les descriptions des noisettes trouvees.
 		// ou si le cache est desactive
 		if (!$noisettes or (_request('var_mode') == 'recalcul') or (defined('_NO_CACHE') and _NO_CACHE != 0)) {
 			$noisettes = noizetier_obtenir_infos_noisettes_direct();
-			ecrire_fichier_securise(_DIR_CACHE._CACHE_DESCRIPTIONS_NOISETTES, serialize($noisettes));
+			ecrire_fichier_securise(_CACHE_DESCRIPTIONS_NOISETTES, serialize($noisettes));
 		}
 	}
 
@@ -1787,4 +1797,38 @@ function noizetier_charger_infos_noisette_yaml($noisette, $info = '') {
 	} else {
 		return isset($infos_noisette[$info]) ? $infos_noisette[$info] : '';
 	}
+}
+
+/**
+ * Retourne true ou false pour indiquer si la noisette doit être inclue en ajax.
+ *
+ * @param
+ *
+ * @return
+ **/
+function noizetier_ajaxifier_noisette($noisette) {
+	static $noisettes = false;
+
+	// seulement 1 fois par appel, on lit ou calcule tous les contextes
+	if ($noisettes === false) {
+		// lire le cache des contextes sauves
+		lire_fichier_securise(_CACHE_AJAX_NOISETTES, $noisettes);
+		$noisettes = @unserialize($noisettes);
+
+		// s'il en mode recalcul, on recalcule tous les contextes des noisettes trouvees.
+		if (!$noisettes or (_request('var_mode') == 'recalcul')) {
+			$infos = noizetier_lister_noisettes();
+			$noisettes = array();
+			foreach ($infos as $cle_noisette => $infos) {
+				$noisettes[$cle_noisette] = ($infos['ajax'] == 'non') ? false : true;
+			}
+			ecrire_fichier_securise(_CACHE_AJAX_NOISETTES, serialize($noisettes));
+		}
+	}
+
+	if (isset($noisettes[$noisette])) {
+		return $noisettes[$noisette];
+	}
+
+	return true;
 }

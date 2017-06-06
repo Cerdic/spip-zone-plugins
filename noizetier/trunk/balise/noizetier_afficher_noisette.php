@@ -27,13 +27,13 @@ function balise_NOIZETIER_AFFICHER_NOISETTE_dist($p)
 	$inclusion_dynamique = "\"<?php echo recuperer_fond(
 		'noisettes/\".$noisette.\"',
 		\".var_export(array_merge(unserialize($parametres), noizetier_choisir_contexte($noisette, $environnement, $id_noisette)),true).\",
-		\".var_export(array('ajax'=>($_ajax && noizetier_ajaxifier_noisette($noisette))),true).\"
+		\".var_export(array('ajax'=>($_ajax && noizetier_noisette_ajax($noisette))),true).\"
 	);?>\"";
 
 	$inclusion_statique = "recuperer_fond(
 		'noisettes/'.$noisette,
 		array_merge(unserialize($parametres), noizetier_choisir_contexte($noisette, $environnement, $id_noisette)),
-		array('ajax'=>($_ajax && noizetier_ajaxifier_noisette($noisette)))
+		array('ajax'=>($_ajax && noizetier_noisette_ajax($noisette)))
 	)";
 
 	$code = "((noizetier_inclusion_dynamique($noisette)) ? $inclusion_dynamique : $inclusion_statique)";

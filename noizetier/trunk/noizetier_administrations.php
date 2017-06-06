@@ -68,10 +68,10 @@ function noizetier_vider_tables($nom_meta_version_base) {
 	// Effacer les fichiers du cache créés par le noizetier
 	include_spip('inc/flock');
 	include_spip('noizetier_fonctions');
-	supprimer_fichier(_DIR_CACHE._CACHE_AJAX_NOISETTES);
-	supprimer_fichier(_DIR_CACHE._CACHE_CONTEXTE_NOISETTES);
-	supprimer_fichier(_DIR_CACHE._CACHE_INCLUSIONS_NOISETTES);
-	supprimer_fichier(_DIR_CACHE._CACHE_DESCRIPTIONS_NOISETTES);
+	supprimer_fichier(_CACHE_AJAX_NOISETTES);
+	supprimer_fichier(_CACHE_CONTEXTE_NOISETTES);
+	supprimer_fichier(_CACHE_INCLUSIONS_NOISETTES);
+	supprimer_fichier(_CACHE_DESCRIPTIONS_NOISETTES);
 }
 
 /**
