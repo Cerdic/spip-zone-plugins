@@ -32,8 +32,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_mise_a_jour' => 'هنگام به هنگام سازي پايگاه داده‌ها خطايي رخ داده است.',
 	'explication_heritages_composition' => 'اينجا مي‌توانيد تركيب‌هايي را تنظيم كنيد كه اشياي اين شاخه به ارث خواهند برد.
 ', # MODIF
-	'explication_noizetier_css' => 'مي‌تواند بعضي از طبقات اضافي سي.اس.اس‌ را به اين فندق اضافه كنيد.
-',
 	'explication_raccourcis_typo' => 'مي‌توانيد از ميان‌ برهاي حروف‌نگاري اسپيپ استفاه كنيد.',
 
 	// F
@@ -60,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_modifier_composition' => 'اصلاح اين تركيب: ',
 	'formulaire_modifier_composition_heritages' => 'اصلاح ميراث اين تركيب: ', # MODIF
 	'formulaire_modifier_noisette' => 'اصلاح اين فندق',
-	'formulaire_noisette_sans_parametre' => 'اين فندوق پارامتري را پيشنهاد نمي‌كند.',
+	'formulaire_noisette_sans_parametre' => 'اين فندوق پارامتري را پيشنهاد نمي‌كند.', # MODIF
 	'formulaire_nom' => 'تيتر',
 	'formulaire_nom_explication' => 'مي‌توانيد از برچسب &lt;multi&gt استفاده كنيد؛', # MODIF
 	'formulaire_nouvelle_composition' => 'تركيب جديد',
@@ -86,7 +84,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_afficher_titre_noisette' => 'نمايش تيتر فندق؟',
 	'label_niveau_titre' => 'تراز تيتر: ',
-	'label_noizetier_css' => 'كلاس‌هاي سي.اس.اس.:',
 	'label_texte' => 'متن:',
 	'label_titre' => 'تيتر:',
 	'label_titre_noisette' => 'تيتر فندق:',

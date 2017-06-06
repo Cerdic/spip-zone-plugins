@@ -33,7 +33,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_doit_choisir_noisette' => 'Sie müssen eine Code-Nuss auswählen.',
 	'erreur_mise_a_jour' => 'Beim Aktualisieren der Datenbank ist ein Fehler aufgetreten.',
 	'explication_heritages_composition' => 'Hier können sie die Kompositionen festlegen, die den Objekten des Zweigs vererbt weden.', # MODIF
-	'explication_noizetier_css' => 'Sie können der Code-Nus zusätzliche CSS-Lassen zuordnen.',
 	'explication_raccourcis_typo' => 'Sie können SPIP-Tags verwenden.',
 
 	// F
@@ -59,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_modifier_composition' => 'Diese Komposition ändern:',
 	'formulaire_modifier_composition_heritages' => 'Vererbungen dieser Komposition ändern:', # MODIF
 	'formulaire_modifier_noisette' => 'Diese Code-Nuss ändern',
-	'formulaire_noisette_sans_parametre' => 'Diese Code-Nuss bietet keine Parameter.',
+	'formulaire_noisette_sans_parametre' => 'Diese Code-Nuss bietet keine Parameter.', # MODIF
 	'formulaire_nom' => 'Titre',
 	'formulaire_nom_explication' => 'Sie können des SPIP-Tag &lt;multi&gt; verwenden.', # MODIF
 	'formulaire_nouvelle_composition' => 'Neue Komposition',
@@ -85,7 +84,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_afficher_titre_noisette' => 'Einen Titel für die Code-Nuss anzeigen?',
 	'label_niveau_titre' => 'Ebene des Titels:',
-	'label_noizetier_css' => 'CSS-Klassen:',
 	'label_texte' => 'Text:',
 	'label_titre' => 'Titel:',
 	'label_titre_noisette' => 'Titel der Code-Nuss:',

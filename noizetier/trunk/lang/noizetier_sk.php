@@ -41,7 +41,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_description_code' => 'Na interné použitie. Nezobrazí sa na verejne prístupnej stránke.',
 	'explication_glisser_deposer' => 'Môžete pridať oriešok alebo oriešky inak usporiadať jednoduchým kliknutím a uvoľnením myši.',
 	'explication_heritages_composition' => 'Tu môžete nastaviť rozmiestnenia, ktoré budú používať objekty danej vetvy.', # MODIF
-	'explication_noizetier_css' => 'Oriešku môžete pridať hocijaké ďalšie triedy CSS',
 	'explication_raccourcis_typo' => 'Môžete používať klávesové skratky SPIPu.',
 
 	// F
@@ -68,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_modifier_composition_heritages' => 'Upraviť závislosti tohto rozmiestnenia:', # MODIF
 	'formulaire_modifier_noisette' => 'Upraviť tento oriešok',
 	'formulaire_modifier_page' => 'Upraviť túto stránku', # MODIF
-	'formulaire_noisette_sans_parametre' => 'Tento oriešok neponúka nastavenie.',
+	'formulaire_noisette_sans_parametre' => 'Tento oriešok neponúka nastavenie.', # MODIF
 	'formulaire_nom' => 'Názov',
 	'formulaire_nom_explication' => 'Môžete používať tag  &lt;multi&gt;.', # MODIF
 	'formulaire_nouvelle_composition' => 'Nové rozloženie',
@@ -98,7 +97,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_code' => 'Kód SPIPu:',
 	'label_description_code' => 'Opis:',
 	'label_niveau_titre' => 'Úroveň nadpisu:',
-	'label_noizetier_css' => 'Triedy CSS:',
 	'label_texte' => 'Text:',
 	'label_texte_introductif' => 'Úvodný text (nepovinné):',
 	'label_titre' => 'Názov:',

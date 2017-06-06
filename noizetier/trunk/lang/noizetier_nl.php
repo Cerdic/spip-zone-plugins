@@ -47,7 +47,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_dupliquer_composition_suffixer' => '.',
 	'explication_glisser_deposer' => 'Je kunt een nootje toevoegen of met schuiven en plakken herschikken.',
 	'explication_heritages_composition' => 'Je kunt hier de composities vastleggen die door onderliggende  objecten zullen worden geërfd.', # MODIF
-	'explication_noizetier_css' => 'Je kunt eventueel extra CSS classes aan het nootje toevoegen.',
 	'explication_raccourcis_typo' => 'Je kunt de typografische snelkoppelingen van SPIP gebruiken.',
 
 	// F
@@ -77,7 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_modifier_composition_heritages' => 'Pas het erven aan', # MODIF
 	'formulaire_modifier_noisette' => 'Dit nootje aanpassen',
 	'formulaire_modifier_page' => 'Deze bladzijde aanpassen', # MODIF
-	'formulaire_noisette_sans_parametre' => 'Dit nootje heeft geen parameters.',
+	'formulaire_noisette_sans_parametre' => 'Dit nootje heeft geen parameters.', # MODIF
 	'formulaire_nom' => 'Titel',
 	'formulaire_nom_explication' => 'Je kunt het baken &lt;multi&gt; gebruiken.', # MODIF
 	'formulaire_nouvelle_composition' => 'Nieuwe compositie',
@@ -107,7 +106,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_code' => 'SPIP code:',
 	'label_description_code' => 'Omschrijving:',
 	'label_niveau_titre' => 'Niveau van de titel:',
-	'label_noizetier_css' => 'CSS classes:',
 	'label_texte' => 'Tekst:',
 	'label_texte_introductif' => 'Introductietekst (optioneel):',
 	'label_titre' => 'Titel:',

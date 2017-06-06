@@ -45,7 +45,6 @@ You can choose a new identifier or suffix the reference identifier as follows:
 	'explication_dupliquer_composition_suffixer' => '.',
 	'explication_glisser_deposer' => 'You can add a nut or order them by drag and drop.',
 	'explication_heritages_composition' => 'Here you can set the compositions that will be inherited by the objects of the branch.', # MODIF
-	'explication_noizetier_css' => 'You can add some additional CSS classes to the nut.',
 	'explication_raccourcis_typo' => 'You can use the SPIP typographical shortcuts.',
 
 	// F
@@ -76,7 +75,7 @@ nuts on the following pages:',
 	'formulaire_modifier_composition_heritages' => 'Edit the heritages', # MODIF
 	'formulaire_modifier_noisette' => 'Edit this nut',
 	'formulaire_modifier_page' => 'Edit this page', # MODIF
-	'formulaire_noisette_sans_parametre' => 'This nut has no parameters.',
+	'formulaire_noisette_sans_parametre' => 'This nut has no parameters.', # MODIF
 	'formulaire_nom' => 'Title',
 	'formulaire_nom_explication' => 'You can use the &lt;multi&gt; tag.', # MODIF
 	'formulaire_nouvelle_composition' => 'New composition',
@@ -106,7 +105,6 @@ nuts on the following pages:',
 	'label_code' => 'Spip code:',
 	'label_description_code' => 'Description:',
 	'label_niveau_titre' => 'Title level:',
-	'label_noizetier_css' => 'CSS classes:',
 	'label_texte' => 'Text:',
 	'label_texte_introductif' => 'Introduction text (optional):',
 	'label_titre' => 'Title:',

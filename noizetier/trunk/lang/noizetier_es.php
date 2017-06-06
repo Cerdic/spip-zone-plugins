@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_mise_a_jour' => 'Un error se ha producido durante la actualización  de la base de datos. ',
 	'explication_glisser_deposer' => 'Usted puede añadir una noisette o bien reordenarlas por simple deslizar-depositar',
 	'explication_heritages_composition' => 'Usted puede definir aquí las composiciones que serán heredadas por los objetos de la rama.', # MODIF
-	'explication_noizetier_css' => 'Puede añadir  a la noisette otras  clases CSS suplementarias.',
 	'explication_raccourcis_typo' => 'Puede utilizar los  atajos tipográficos de SPIP.',
 
 	// F
@@ -66,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_modifier_composition_heritages' => 'Modificar las herencias', # MODIF
 	'formulaire_modifier_noisette' => 'Modificar esta  noisette',
 	'formulaire_modifier_page' => 'Modificar esta página', # MODIF
-	'formulaire_noisette_sans_parametre' => 'Esta  noisette no propone parámetro',
+	'formulaire_noisette_sans_parametre' => 'Esta  noisette no propone parámetro', # MODIF
 	'formulaire_nom' => 'Título',
 	'formulaire_nom_explication' => 'Puede utilizar la baliza  <multi>.', # veo que en la versión original hay un error al transformar un el signo < en su entidad html MODIF
 	'formulaire_nouvelle_composition' => 'Nueva composición',
@@ -94,7 +93,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_afficher_titre_noisette' => '¿ Mostrar un título   de noisette ?',
 	'label_niveau_titre' => 'Nivel del título :',
-	'label_noizetier_css' => 'Clases CSS : ',
 	'label_texte' => 'Texto :',
 	'label_texte_introductif' => 'Texto introductivo (opcional) :',
 	'label_titre' => 'Título : ',
