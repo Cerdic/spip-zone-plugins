@@ -32,15 +32,22 @@ if (  isset($_COOKIE['spip_pwl']) AND $_COOKIE['spip_pwl']
 
 /**
  * Calculer rapidement le nombre de produits dans un panier
- * @param $id_panier
+ * @param int $id_panier
+ * @param bool $compte_quantite
+ *   si true on compte le nombre de produits en additionnant les quantites, sinon on compte le nombre d'items
  * @return int|number
  */
-function paniers_nombre_produits($id_panier){
+function paniers_nombre_produits($id_panier, $compte_quantite = true){
 	if (!function_exists('sql_getfetsel')) {
 		include_spip('base/abstract_sql');
 	}
-	$quantite = intval(sql_getfetsel("SUM(quantite)","spip_paniers_liens","id_panier=".intval($id_panier)));
-	return $quantite;
+	if ($compte_quantite) {
+		$nombre = intval(sql_getfetsel("SUM(quantite)","spip_paniers_liens","id_panier=".intval($id_panier)));
+	}
+	else {
+		$nombre = intval(sql_getfetsel("COUNT(*)","spip_paniers_liens","id_panier=".intval($id_panier)));
+	}
+	return $nombre;
 }
 
 // Eviter une collistion de fonction si le plugin deprecie panier2commande est encore actif

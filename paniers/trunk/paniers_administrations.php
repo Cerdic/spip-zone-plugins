@@ -63,5 +63,3 @@ function paniers_vider_tables($nom_meta_base_version){
 	effacer_config('paniers');
 
 }
-
-?>

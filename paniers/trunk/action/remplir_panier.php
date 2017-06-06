@@ -16,9 +16,22 @@ function action_remplir_panier_dist($arg=null) {
 	// On récupère les infos de l'argument
 	@list($objet, $id_objet, $quantite, $negatif) = explode('-', $arg);
 
-	$quantite = intval($quantite) ? intval($quantite) : 1;
+	$paniers_arrondir_quantite = charger_fonction('paniers_arrondir_quantite', 'inc');
+	if (!isset($quantite) or is_null($quantite) or !strlen($quantite)) {
+		$quantite = 1;
+	}
+
+	$quantite = $paniers_arrondir_quantite($quantite, $objet, $id_objet);
+
+	// si la quantite est nulle, on ne fait rien
+	if ($quantite<=0) {
+		return;
+	}
+
 	// retirer un objet du panier
-	if(isset($negatif)) $quantite = intval(-$quantite);
+	if(isset($negatif)) {
+		$quantite = $paniers_arrondir_quantite(-1 * $quantite, $objet, $id_objet);
+	}
 		
 	// Il faut cherche le panier du visiteur en cours
 	include_spip('inc/paniers');
@@ -43,7 +56,7 @@ function action_remplir_panier_dist($arg=null) {
 	// On ne fait que s'il y a bien un panier existant et un objet valable
 	if ($id_panier > 0 and $objet and $id_objet) {
 		// Il faut maintenant chercher si cet objet précis est *déjà* dans le panier
-		$quantite_deja = intval(sql_getfetsel(
+		$quantite_deja = sql_getfetsel(
 			'quantite',
 			'spip_paniers_liens',
 			array(
@@ -51,21 +64,24 @@ function action_remplir_panier_dist($arg=null) {
 				'objet = '.sql_quote($objet),
 				'id_objet = '.intval($id_objet)
 			)
-		));
+		);
+		$quantite_deja = $paniers_arrondir_quantite($quantite_deja, $objet, $id_objet);
 		
-				
 		// Si on a déjà une quantité, on fait une mise à jour
-		if ($quantite_deja){
-			$cumul_quantite = $quantite_deja + $quantite;
+		if ($quantite_deja > 0){
+			$cumul_quantite = $paniers_arrondir_quantite($quantite_deja + $quantite, $objet, $id_objet);
 			//Si le cumul_quantite est 0, on efface
-			if ($cumul_quantite <= 0) 
-				sql_delete('spip_paniers_liens','id_panier = '.intval($id_panier).' and objet = '.sql_quote($objet).' and id_objet = '.intval($id_objet));
+			if ($cumul_quantite <= 0) {
+				sql_delete('spip_paniers_liens', 'id_panier = ' . intval($id_panier) . ' and objet = ' . sql_quote($objet) . ' and id_objet = ' . intval($id_objet));
+			}
 			//Sinon on met à jour
-			else sql_updateq(
-				'spip_paniers_liens',
-				array('quantite' => $cumul_quantite),
-				'id_panier = '.intval($id_panier).' and objet = '.sql_quote($objet).' and id_objet = '.intval($id_objet)
-			);
+			else {
+				sql_updateq(
+					'spip_paniers_liens',
+					array('quantite' => $cumul_quantite),
+					'id_panier = ' . intval($id_panier) . ' and objet = ' . sql_quote($objet) . ' and id_objet = ' . intval($id_objet)
+				);
+			}
 		}
 		// Sinon on crée le lien
 		else {
@@ -93,5 +109,3 @@ function action_remplir_panier_dist($arg=null) {
 	suivre_invalideur("id='$objet/$id_objet'");
 
 }
-
-?>

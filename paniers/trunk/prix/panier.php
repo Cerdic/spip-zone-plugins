@@ -38,5 +38,3 @@ function prix_panier_dist($id_panier, $prix_ht){
 	
 	return $prix;
 }
-
-?>

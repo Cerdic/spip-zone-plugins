@@ -24,10 +24,14 @@ function formulaires_panier_verifier($id_panier=0){
 	if (!_request('vider')){
 		$quantites = _request('quantites');
 
+		$paniers_arrondir_quantite = charger_fonction('paniers_arrondir_quantite', 'inc');
+
 		if (is_array($quantites)){
 			foreach ($quantites as $objet => $objets_de_ce_type){
 				foreach ($objets_de_ce_type as $id_objet => $quantite){
-					if (!is_numeric($quantite) or $quantite!=intval($quantite) or (is_numeric($quantite) and $quantite<0)){
+					if (!is_numeric($quantite) or
+						$quantite!=$paniers_arrondir_quantite($quantite, $objet, $id_objet)
+						or (is_numeric($quantite) and $quantite<0)){
 						$erreurs['message_erreur'] = _T('paniers:panier_erreur_quantites');
 						$erreurs['quantites'][$objet][$id_objet] = 'erreur';
 					}
@@ -55,11 +59,13 @@ function formulaires_panier_traiter($id_panier=0){
 		$ok = 0;
 
 		if (is_array($quantites))
+			$paniers_arrondir_quantite = charger_fonction('paniers_arrondir_quantite', 'inc');
+
 			foreach($quantites as $objet => $objets_de_ce_type)
 				foreach($objets_de_ce_type as $id_objet => $quantite){
-					$quantite = intval($quantite);
+					$quantite = $paniers_arrondir_quantite($quantite, $objet, $id_objet);
 					// Si la quantite est 0, on supprime du panier
-					if (!$quantite)
+					if ($quantite<=0)
 						$ok += sql_delete(
 							'spip_paniers_liens',
 							'id_panier = '.intval($id_panier).' and objet = '.sql_quote($objet).' and id_objet = '.intval($id_objet)
