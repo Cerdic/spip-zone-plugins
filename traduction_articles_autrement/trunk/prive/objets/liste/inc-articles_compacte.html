@@ -1,12 +1,25 @@
 [(#REM)Adaptation du plugin du plugin afficher objets]
-[(#SET{defaut_tri,#ARRAY{
-	rang,1
-	date,#ENV{date_sens,-1},
-	num titre,1,
-	id_article,1,
-	points,-1
-}})
-][(#REM)Trie préalalable pour éviter l'oubli des articles dont le traduction correpsondent au critères de sélection, mais pas l'article de traduction]
+[(#PLUGIN{rang}|et{#VAL{article}|appliquer_filtre{rang_objet_dans_config}}|?{
+	#SET{tri,rang}
+	[(#SET{defaut_tri,#ARRAY{
+		rang,1,
+		date,#ENV{date_sens,-1},
+		num titre,1,
+		id_article,1,
+		points,-1
+	}})]
+,
+	#SET{tri,date}
+	[(#SET{defaut_tri,#ARRAY{
+		date,#ENV{date_sens,-1},
+		num titre,1,
+		id_article,1,
+		points,-1
+	}})]
+})]
+
+
+[(#REM)Trie préalalable pour éviter l'oubli des articles dont le traduction correpsondent au critères de sélection, mais pas l'article de traduction]
 
 #SET{id_articles,#ARRAY}
 
@@ -26,7 +39,7 @@
 	<thead>
 		<tr class="first_row">
 			[(#PLUGIN{rang}|oui)
-				[(#ENV{id_rubrique}|et{#VAL{article}|rang_objet_dans_config}|oui)<th class="picto" scope="col"></th>]
+				[(#ENV{id_rubrique}|et{#VAL{article}|appliquer_filtre{rang_objet_dans_config}}|oui)<th class="picto" scope="col"></th>]
 			]
 			<th class="statut'">[(#TRI{statut,<span title="<:afficher_objets:info_statut|attribut_html:>">#</span>,ajax})]</th>
 			<th class='rang'>[(#TRI{num titre,<:taa:rang:>,ajax})]</th>
@@ -38,14 +51,14 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_art(ARTICLES){id_article IN #GET{id_articles}}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri rang,#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}{!lang_select}>
+	<BOUCLE_liste_art(ARTICLES){id_article IN #GET{id_articles}}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #GET{tri},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}{!lang_select}>
 	#SET{class,#COMPTEUR_BOUCLE|alterner{row_odd,row_even}}
 		<INCLURE{fond=prive/objets/liste/inc-articles_row}{env}{trads=oui}{id_article}{class=#GET{class}}{exclus=}/>
 	</BOUCLE_liste_art>
 	</tbody>
 </table>
 [(#PLUGIN{rang}|oui)
-	[(#ENV{id_rubrique}|et{#VAL{article}|rang_objet_dans_config}|oui)
+	[(#ENV{id_rubrique}|et{#VAL{article}|appliquer_filtre{rang_objet_dans_config}}|oui)
 	<INCLURE{fond=prive/squelettes/inclure/rang,objet=articles,id_rubrique,suffixe_pagination=art}/>
 	]
 ]
