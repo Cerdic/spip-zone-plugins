@@ -45,15 +45,15 @@ function livre_seul($i){
 
 }
 function bible_analyser_ref($passage,$traduction){
-    $tableau_traduction = bible_tableau('traduction');
-    $tableau_separateur = bible_tableau('separateur');
+	$tableau_traduction = bible_tableau('traduction');
+	$tableau_separateur = bible_tableau('separateur');
 	$tableau_livres = bible_tableau('livres');
 	global $spip_lang;
-    $verset_debut = '';
+	$verset_debut = '';
 
 	$lang = $tableau_traduction[$traduction]['lang'];
-    $langues_originales = bible_tableau('original');
-    array_key_exists($lang,$langues_originales) ? $lang = $spip_lang : $lang = $lang;
+	$langues_originales = bible_tableau('original');
+	array_key_exists($lang,$langues_originales) ? $lang = $spip_lang : $lang = $lang;
 	
 	$separateur = $tableau_separateur[$lang];
     
