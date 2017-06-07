@@ -3,10 +3,10 @@
 	categorie="navigation"
 	version="0.4.6"
 	etat="stable"
-	compatibilite="[1.9.2;3.1.99]"
+	compatibilite="[1.9.2;3.1.*]"
 	logo="langue-preferee.png"
 	documentation="https://contrib.spip.net/Plugin-Langue-preferee-par-l-internaute"
->	
+>
 
 	<nom>Langue pr&#233;f&#233;r&#233;e</nom>
 	<!-- Diriger l'internaute vers le secteur de sa langue -->
