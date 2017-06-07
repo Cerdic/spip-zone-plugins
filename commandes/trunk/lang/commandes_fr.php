@@ -156,6 +156,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_reduction' => 'Reduc.',
 	'label_statuts_actifs' => 'Statuts',
 	'label_taxe' => 'Taxe',
+	'label_total_ht' => 'Total Hors Taxe',
 
 	// M
 	'merci_de_votre_commande' => 'Nous avons bien enregistré votre commande et nous vous remercions de votre confiance.',

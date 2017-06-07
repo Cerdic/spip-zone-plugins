@@ -179,3 +179,10 @@ function commandes_afficher_prix_detaille_abbr($prix_ttc, $quantite, $prix_unit_
 
 	return '<abbr title="= '.attribut_html($abbr).'">'.$prix_ttc.'</abbr>';
 }
+
+function commandes_afficher_reduction_si($reduction) {
+	if ($reduction<=0.0) {
+		return '';
+	}
+	return round($reduction * 100, 2).'%';
+}
