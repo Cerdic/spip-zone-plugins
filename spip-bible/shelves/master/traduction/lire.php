@@ -52,5 +52,3 @@ function recuperer_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_f
 	}
 	return $tableau_resultat;
 }
-
-?>
