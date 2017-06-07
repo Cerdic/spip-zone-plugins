@@ -2,6 +2,8 @@
 include_spip('inc/bible_tableau');
 function generer_url_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lire,$lang){
 	list($chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$petit) = lire_petit_livre($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang);
+	$url = "http://lire.la-bible.net/lecture/$livre/$chapitre_debut/$verset_debut/$lire";
+	return $url;
 }
 
 function lire_petit_livre($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang){
