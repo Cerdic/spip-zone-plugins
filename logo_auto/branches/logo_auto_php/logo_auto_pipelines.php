@@ -4,6 +4,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+/**
+ * Cherche le logo d'un contenu précis
+ *
+ * Dans l'ordre, si aucun logo n'a été trouvé avant :
+ * - 1ère image jointe au contenu
+ * - 1ère vignette de document joint au contenu
+ *
+ * @param array $flux
+ * @return array
+ */
 function logo_auto_quete_logo_objet($flux) {
 	// Si personne n'a trouvé de logo avant et que c'est pas pour le survol
 	if (empty($flux['data']) and $flux['args']['mode'] !== 'off') {
@@ -11,7 +21,9 @@ function logo_auto_quete_logo_objet($flux) {
 		include_spip('base/abstract_sql');
 		if ($image = sql_fetsel(
 			'fichier, extension',
-			'spip_documents as d inner join spip_documents_liens as l on d.id_document = l.id_document',
+			'spip_documents AS d' .
+				' INNER JOIN spip_documents_liens AS l' .
+				' ON d.id_document = l.id_document',
 			array(
 				'l.objet = '.sql_quote($flux['args']['objet']),
 				'l.id_objet = '.intval($flux['args']['id_objet']),
@@ -30,13 +42,11 @@ function logo_auto_quete_logo_objet($flux) {
 		// Si on ne trouve pas d'image, on cherche une vignette de document
 		elseif ($vignette = sql_fetsel(
 			'v.fichier',
-			array(
-				'spip_documents_liens as l',
-				'spip_documents as v
-					inner join spip_documents as d
-					on d.id_vignette = v.id_document
-					and d.id_document = l.id_document',
-			),
+			'spip_documents_liens AS l' .
+				' JOIN spip_documents AS v' .
+				' INNER JOIN spip_documents as d' .
+					' ON d.id_vignette = v.id_document' .
+					' AND d.id_document = l.id_document',
 			array(
 				'l.objet = '.sql_quote($flux['args']['objet']),
 				'l.id_objet = '.intval($flux['args']['id_objet']),
