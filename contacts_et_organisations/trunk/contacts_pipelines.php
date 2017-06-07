@@ -363,7 +363,7 @@ function contacts_formulaire_verifier($flux) {
 			}
 		}
 	}
-	return $flux['data'];
+	return $flux;
 }
 
 function contacts_formulaire_traiter($flux) {
