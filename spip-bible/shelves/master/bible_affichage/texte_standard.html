@@ -1,0 +1,4 @@
+<BOUCLE_chapitre(POUR){tableau #ENV{passage_texte}}>[{{#CLE}}(#ENV{numeros}|=={oui}|oui)][(#ENV{retour}|=={oui}|oui)[(#COMPTEUR_BOUCLE|>{1}|oui)_ ]]<BOUCLE_verset(POUR){tableau #VALEUR}>[(#ENV{retour}|=={oui}|oui)[(#COMPTEUR_BOUCLE|>{1}|oui)
+_ ]][<sup>#CLE</sup>(#ENV{numeros}|=={oui}|oui)] #VALEUR</BOUCLE_verset>
+</BOUCLE_chapitre>
+[(#ENV{propre}|=={non}|non)#FILTRE{propre}]

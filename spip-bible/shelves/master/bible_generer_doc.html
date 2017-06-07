@@ -1,0 +1,7 @@
+#CACHE{0}
+#HTTP_HEADER{content-type:text/html;charset:utf-8}
+[(#ENV{lang_doc}|?{
+    [(#ENV{lang_doc}|bible_generer_doc_lang)],
+    [(#REM|bible_generer_doc)]
+})
+]
