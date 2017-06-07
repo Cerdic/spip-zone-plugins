@@ -88,6 +88,7 @@ function massicot_declarer_tables_interfaces($interfaces) {
 		'LARGEUR',
 		'documents'
 	);
+
 	$interfaces = ajouter_traitement_automatique(
 		$interfaces,
 		'massicoter_hauteur(%s, $Pile[1])',
@@ -102,19 +103,19 @@ function massicot_declarer_tables_interfaces($interfaces) {
 			if ($table !== 'spip_documents') {
 				$interfaces = ajouter_traitement_automatique(
 					$interfaces,
-					'massicoter_logo(%s, '.objet_type($table).', $Pile[1][\''.id_table_objet($table).'\'])',
+					'massicoter_logo(%s, \''.objet_type($table).'\', $Pile[1][\''.id_table_objet($table).'\'])',
 					strtoupper('LOGO_'.objet_type($table))
 				);
 
 				$interfaces = ajouter_traitement_automatique(
 					$interfaces,
-					'massicoter_logo(%s, '.objet_type($table).', $Pile[1][\''.id_table_objet($table).'\'])',
+					'massicoter_logo(%s, \''.objet_type($table).'\', $Pile[1][\''.id_table_objet($table).'\'])',
 					strtoupper('LOGO_'.objet_type($table)) . '_NORMAL'
 				);
 
 				$interfaces = ajouter_traitement_automatique(
 					$interfaces,
-					'massicoter_logo(%s, '.objet_type($table).', $Pile[1][\''.id_table_objet($table).'\'], \'logo_survol\')',
+					'massicoter_logo(%s, \''.objet_type($table).'\', $Pile[1][\''.id_table_objet($table).'\'], \'logo_survol\')',
 					strtoupper('LOGO_'.objet_type($table)) . '_SURVOL'
 				);
 			}
