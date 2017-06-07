@@ -8,18 +8,20 @@
  * © 2007 - Distribue sous licence GNU/GPL
  */
 
-function balise_LANGUE_PREFEREE_LIEN_EFFACE_COOKIE($p)
-{
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
+
+function balise_LANGUE_PREFEREE_LIEN_EFFACE_COOKIE($p) {
 	return calculer_balise_dynamique($p, 'LANGUE_PREFEREE_LIEN_EFFACE_COOKIE', array());
 }
 
-function balise_LANGUE_PREFEREE_LIEN_EFFACE_COOKIE_stat($args, $filtres)
-{
+function balise_LANGUE_PREFEREE_LIEN_EFFACE_COOKIE_stat($args, $filtres){
 	return $args;
 }
 
-function balise_LANGUE_PREFEREE_LIEN_EFFACE_COOKIE_dyn($texte = '')
-{
+function balise_LANGUE_PREFEREE_LIEN_EFFACE_COOKIE_dyn($texte = '') {
 	if ($texte == '') {
 		$texte = _T('languepreferee:efface_cookie');
 	}
@@ -38,4 +40,3 @@ function balise_LANGUE_PREFEREE_LIEN_EFFACE_COOKIE_dyn($texte = '')
 	}
 	return $lien;
 }
-?>

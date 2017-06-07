@@ -1,11 +1,14 @@
 <?php
-function chemin_cookie()
-{
-	static $chemin;
-    if (!isset($chemin)) {
-        include_spip('inc/meta');
-    	$chemin = preg_replace("/^https?:\/\/([^\/]+)(\/.*)$/", "$2", lire_meta('adresse_site').'/');
-    }
-    return $chemin;
+
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
 }
-?>
+
+function chemin_cookie() {
+	static $chemin;
+	if (!isset($chemin)) {
+		include_spip('inc/meta');
+		$chemin = preg_replace("/^https?:\/\/([^\/]+)(\/.*)$/", "$2", lire_meta('adresse_site').'/');
+	}
+	return $chemin;
+}

@@ -7,14 +7,15 @@
  * Nicolas Hoizey
  * modification : chryjs - exclusion de rubriques
  * modification : BobCaTT (www.menfin.net) suport spip 2.0
- * © 2007 - Distribue sous licence GNU/GPL
+ * © 2007 - 2017 Distribue sous licence GNU/GPL
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // compatibilite spip 1.9.2
-if ($GLOBALS['spip_version_code']<1.93)
-{
+if ($GLOBALS['spip_version_code']<1.93) {
 	if (!function_exists('sql_fetch')) { function sql_fetch($req) {
 		return spip_fetch_array($req) ;
 	} }
@@ -23,18 +24,15 @@ if ($GLOBALS['spip_version_code']<1.93)
 	} }
 } // fin compat
 
-function balise_LANGUE_PREFEREE_SECTEUR_REDIRECTION($p)
-{
+function balise_LANGUE_PREFEREE_SECTEUR_REDIRECTION($p) {
 	return calculer_balise_dynamique($p, 'LANGUE_PREFEREE_SECTEUR_REDIRECTION', array());
 }
 
-function balise_LANGUE_PREFEREE_SECTEUR_REDIRECTION_stat($args, $filtres)
-{
+function balise_LANGUE_PREFEREE_SECTEUR_REDIRECTION_stat($args, $filtres){
 	return $args;
 }
 
-function balise_LANGUE_PREFEREE_SECTEUR_REDIRECTION_dyn($liste_rub_exclues="")
-{
+function balise_LANGUE_PREFEREE_SECTEUR_REDIRECTION_dyn($liste_rub_exclues="") {
 	include_spip('inc/meta');
 
 	// Recuperation des langues des secteurs
@@ -52,14 +50,14 @@ function balise_LANGUE_PREFEREE_SECTEUR_REDIRECTION_dyn($liste_rub_exclues="")
 		$langue_preferee = $_GET['lang'];
 		include_spip('inc/cookie');
 		// On pose un cookie d'un an de duree de vie
-		spip_setcookie('spip_langue_preferee', $langue_preferee, time() + 3660*24*365, chemin_cookie());
+		spip_setcookie('spip_langue_preferee', $langue_preferee, time() + 3600*24*365, chemin_cookie());
 	} elseif(isset($_COOKIE['spip_lang']) && in_array($_COOKIE['spip_lang'], $langues_secteurs)){
 		//Soit un cookie lang est présent
 		$langue_preferee = $_COOKIE['spip_lang'];
 		include_spip('inc/cookie');
 		// On pose un cookie d'un an de duree de vie
-		spip_setcookie('spip_langue_preferee', $langue_preferee, time() + 3660*24*365, chemin_cookie());
-	}elseif (isset($_COOKIE['spip_langue_preferee']) && in_array($_COOKIE['spip_langue_preferee'], $langues_secteurs)) {
+		spip_setcookie('spip_langue_preferee', $langue_preferee, time() + 3600*24*365, chemin_cookie());
+	} elseif (isset($_COOKIE['spip_langue_preferee']) && in_array($_COOKIE['spip_langue_preferee'], $langues_secteurs)) {
 		// Soit deja enregistree dans un cookie
 		$langue_preferee = $_COOKIE['spip_langue_preferee'];
 	} else {
@@ -104,16 +102,15 @@ function balise_LANGUE_PREFEREE_SECTEUR_REDIRECTION_dyn($liste_rub_exclues="")
 	$res = sql_query($query) ; // was spip_query($query);
 	if ($row = sql_fetch($res)) { // was spip_fetch_array
 		$id_rubrique = $row['id_rubrique'];
-		if ( $GLOBALS['spip_version_code']<1.93) { // spip 1.9.x
+		if ( $GLOBALS['spip_version_code'] < 1.93) { // spip 1.9.x
 			if (!function_exists('generer_url_rubrique')) { include_spip('urls/'.$GLOBALS['type_urls']); }
 			$url_rubrique = generer_url_rubrique($id_rubrique);
 		} else { // spip 2.x
 			if (!function_exists('generer_url_entite')) { include_spip('inc/utils'); }
 			$url_rubrique = generer_url_entite($id_rubrique,'rubrique');
 		}
-		spip_log('Redirection vers '.$url_rubrique);
+		spip_log('Redirection vers '.$url_rubrique, 'languepreferee');
 		header('Location: '.$url_rubrique);
 		exit;
 	}
 }
-?>
