@@ -2,12 +2,8 @@
 include_spip('inc/bible_tableau');
 function generer_url_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lire,$lang){
 	list($chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$petit) = lire_petit_livre($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang);
-	if (!$petit){
-		return "http://lire.la-bible.net/index.php?reference=$livre+$chapitre_debut&versions%5B%5D=$lire";	
-	}
-	else {
-		return "http://lire.la-bible.net/index.php?reference=$livre&versions%5B%5D=$lire";	
-	}
+	$url = "http://lire.la-bible.net/lecture/$livre/$chapitre_debut/$verset_debut/$lire";
+	return $url;
 }
 
 function lire_petit_livre($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang){
@@ -27,7 +23,7 @@ function lire_petit_livre($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$ve
 
 }
 function recuperer_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lire,$lang){
-	$param_cache = array(	'version'=>3,
+	$param_cache = array(	'version'=>4,
 				'livre'=>$livre,
 				'chapitre_debut'=>$chapitre_debut,
 				'verset_debut'=>$verset_debut,
@@ -43,116 +39,70 @@ function recuperer_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_f
 			return $cache;	
 		}
 	}
-	$url_base="http://lire.la-bible.net/texte.php?versions[]=".$lire;
-	
-	
 	list($chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$petit) = lire_petit_livre($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang);
 	
+	$tableau_resultat = array();
 
-	$tableau_resulat = array();
-	
-		//recuperation du passage
+	//recuperation du passage
 	include_spip("inc/distant");
 	include_spip("inc/charsets");
-	
-	
-	$texte = '';
-	$i = $chapitre_debut;
-	while ($i<=$chapitre_fin){
-		$url = $url_base."&reference=".$livre."+".$i;
-		
-		$i == $chapitre_debut ? $debut = $verset_debut : $debut=1;
-		$i == $chapitre_fin ? $fin = $verset_fin : $fin = '';
-		$verset_debut =='' and $i==$chapitre_debut ? $debut=1 : $debut=$debut;
-		$verset_fin =='' and $i==$chapitre_fin ? $debut=1 : $debut=$debut;		
-		$fin == '' ? $fin ='' : $fin =$fin +1; 
-		
-		$tableau_resultat[$i] = recuperer_versets(lire_traiter_code(importer_charset(recuperer_page($url,'utf-8'))),$debut,$fin);
-		
-		$i++;
+	include_spip("inc/querypath");
+	$chapitre =	intval($chapitre_debut);
+	$chapitre_fin = intval($chapitre_fin);
+	while ($chapitre <= $chapitre_fin) {
+		// Créer un sous tableau
+		$tableau_resultat[$chapitre] = array();
+
+		// recuperer les fichiers distants
+		$url = generer_url_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lire,$lang);
+		$code = charset2unicode(importer_charset(recuperer_page($url,'utf-8')));
+
+		//// elagage pour recuperer juste zone_verset
+		$tableau = explode("<main", $code);
+		$code = "<main".$tableau[1];
+		$tableau = explode("</main>", $code);
+		$code = $tableau[0]."</main>";
+
+		$qp = htmlqp($code, '', array( 'ignore_parser_warnings'=>true,'omit_xml_declaration'=>true));
+		$qp->remove(".chapitre, .titre2,  .titre3,  .titre4");//suppression des intertitres:
+		$versets = $qp->find("li[rel=\"$lire\"]  div.zone_versets");
+		$versets = $versets->xml(); // le code fournit par lire.la-bible.net est tellement irrégulier que je renonce à parser directement le xml avec query_path, on va refaire d'une manière salle
+		$versets = explode('<span class="reference">', $versets);
+		unset($versets[0]);
+		foreach ($versets as $nb => $texte){
+			$tableau = explode('</span></a>', $texte);
+			$texte = $tableau[1];
+			$texte = strip_tags($texte);
+			$texte = preg_replace( "/\r|\n/", " ", $texte);
+			$texte = trim($texte);
+		// Insérer le texte dans le tableau, si on a demandé ce verset
+			if ($chapitre_debut == $chapitre_fin) { // sur un seul chapitre 
+				if (
+						($nb >= $verset_debut and $nb <= $verset_fin) // verset de fin et verset de debut
+						or 
+						($verset_debut == $verset_fin and $verset_fin == '') // pas de précision de verset > chapitre complet
+				) {
+					$tableau_resultat[$chapitre][$nb] = $texte;
+				}	
+			}	elseif ($chapitre == $chapitre_debut) { // Si plusieurs chapitres, et qu'on parse en ce moment le chapitre de début
+					if ($nb >= $verset_debut or $verset_debut == '') {
+						$tableau_resultat[$chapitre][$nb] = $texte;
+					}	
+			} elseif ($chapitre == $chapitre_fin) { // Si plusieurs chapitres, et qu'on parse en ce moment le chapitre de fin {
+					if ($nb <= $verset_fin or $verset_fin == '') {
+						$tableau_resultat[$chapitre][$nb] = $texte;
+					}
+			} else { // si plusieurs chapitres et qu'on parse en ce moment un chapitre intermédiaire
+					$tableau_resultat[$chapitre][$nb] = $texte;
+			}
+		}
+
+		// passer au chapitre suivant
+		$chapitre++;
 	}
+	
 	if (_NO_CACHE == 0){
 		bible_ecrire_cache($param_cache,$tableau_resultat);
 	}
 	return $tableau_resultat;
 }
-
-function lire_traiter_code($code){
-	$code = lire_supprimer_interitre($code);
-	$tableau = explode('<div class="styletxt">',$code);
-	$tableau = explode('</div>',$tableau[1]);
-	
-	$code = $tableau[0];
-	
-	$code = preg_replace('#<span class="reference">[0-9]*</span>#i','*spip*',$code);
-	$code = strip_tags($code);
-	$tableau = explode("*spip*",$code);
-	$total = count($tableau);
-	$tableau = array_slice($tableau,1,$total-1);
-	
-	$code = ''; 
-	
-	$i = 1;
-	foreach ($tableau as $verset){
-		$i == 1 ? $code .= '<sup>1</sup> '.$verset : $code .= '<br /><sup>'.$i.'</sup> '.$verset;
-		
-		$i++;
-	} 
-
-	return $code;
-	
-}
-function supprimer_rupture_ligne($code){
-	return preg_replace("#(\n|\r)#"," ",$code);
-	}
-function recuperer_versets($code,$vd,$vf){
-	
-	$resultat = array();
-	$tableau = explode('<sup>'.$vd.'</sup>',$code);
-	
-	$code = '<sup>'.$vd.'</sup>'.$tableau[1];
-	
-	$tableau = explode('<sup>'.$vf.'</sup>',$code);
-
-	$code = str_replace('<br />','',$tableau[0]);
-	$versets = array();
-	preg_match_all("#<sup>([0-9]*)</sup>#",$code,$versets);
-
-		
-	$texte_verset = preg_split('#<sup>([0-9]*)</sup>#',$code);
-	if ($texte_verset[0] == ''){
-		array_shift($texte_verset);	
-	}
-
-	$i = 0;
-	foreach ($versets[1] as $verset){
-		$resultat[$verset] = trim($texte_verset[$i]);
-		$i++;	
-	}
-	
-	return supprimer_rupture_ligne($resultat);
-
-}
-
-function lire_supprimer_interitre($texte){
-   
-    $texte = preg_replace("#<p></p>#","",$texte); 
-    if (preg_match('#p class="titre4"#',$texte) == false){ // c'est ton jamais, des fois qu'il n'y auarit pas d'intertitre ce serait gentils
-        return $texte;
-    
-    }
-    
-    $tableau = explode('<p class="titre4">',$texte);
-   
-    $texte = array_shift($tableau);
-    foreach ($tableau as $chaine){
-        $tableau2 = explode("</p>",$chaine);
-        $i = array_shift($tableau2); // on peut avoir des paragraphes pour la poesie, et pas seulement pour les intertitres
-        $texte .= implode($tableau2,'</p>');
-       
-    
-    }
-  
-    return $texte;
-}
-?>
