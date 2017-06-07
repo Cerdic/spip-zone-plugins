@@ -61,7 +61,6 @@ function bible_analyser_ref($passage,$traduction){
 	
 	// phase d'anaylse
 	
-	$livre = strtolower($livre);
 	$tableau = explode('-',$passage);
 	if (count($tableau)==2){
 		$fin=$tableau[1];
