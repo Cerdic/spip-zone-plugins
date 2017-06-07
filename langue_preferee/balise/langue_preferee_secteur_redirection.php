@@ -66,6 +66,7 @@ function balise_LANGUE_PREFEREE_SECTEUR_REDIRECTION_dyn($liste_rub_exclues="") {
 		// On supprime les taux de pertinence des langues acceptees
 		$langues_navigateur = preg_replace("/;q=[.0-9]+(,)?/", "$1", $langues_navigateur);
 		$langues_navigateur = explode(',', $langues_navigateur);
+        // spip_log($langues_navigateur, 'languepreferee');
 		// Quelles sont les langues acceptees disponibles dans les secteurs
 		$langues_possibles = array_intersect($langues_navigateur, $langues_secteurs);
 		if (count($langues_possibles)) {
@@ -83,6 +84,9 @@ function balise_LANGUE_PREFEREE_SECTEUR_REDIRECTION_dyn($liste_rub_exclues="") {
 			$langues_reduites_possibles = array_intersect($langues_navigateur_reduites, $langues_secteurs);
 			if (count($langues_reduites_possibles)) {
 				list(, $langue_preferee) = each($langues_reduites_possibles);
+			} elseif (defined('_LANGUE_PREFEREE_DEFAUT')) {
+				// Constante pour forcer la langue de redirection si ce n'est pas la langue par defaut du site
+                $langue_preferee = _LANGUE_PREFEREE_DEFAUT;
 			} elseif (in_array(lire_meta('langue_site'), $langues_secteurs)) {
 				// Quelle est alors la langue par defaut du site
 				$langue_preferee = lire_meta('langue_site');
@@ -109,7 +113,7 @@ function balise_LANGUE_PREFEREE_SECTEUR_REDIRECTION_dyn($liste_rub_exclues="") {
 			if (!function_exists('generer_url_entite')) { include_spip('inc/utils'); }
 			$url_rubrique = generer_url_entite($id_rubrique,'rubrique');
 		}
-		spip_log('Redirection vers '.$url_rubrique, 'languepreferee');
+		spip_log('Redirection vers : '.$url_rubrique, 'languepreferee');
 		header('Location: '.$url_rubrique);
 		exit;
 	}
