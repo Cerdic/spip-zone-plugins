@@ -23,4 +23,5 @@
 	<pipeline nom="insert_head" action="insert_head" inclure="bible_pipelines.php" />
 	<pipeline nom="affiche_droite" action="affiche_droite" inclure="bible_pipelines.php" />
 
+	<necessite nom="querypath" compatibilite="[1.1.1;[" />
 </paquet>
