@@ -5,7 +5,9 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // Commentez cette ligne si vous voulez donner un acces eventuel aux autres bases masquees
 // cette option est non fonctionnelle en SQLite, on la desactive par defaut
