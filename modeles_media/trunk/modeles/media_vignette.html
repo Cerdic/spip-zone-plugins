@@ -8,7 +8,7 @@
 	On est indépendant du mode de l'image et des réglages de génération automatique des vignettes.
 ]
 [(#SET{vignette,#LOGO_DOCUMENT{vignette}|sinon{#URL_DOCUMENT|media_generer_vignette{#EXTENSION}}|sinon{#LOGO_DOCUMENT{icone}}})]
-[(#SET{img,#MEDIA_IMAGE_RETAILLEE{#GET{'vignette'}}})]
+[(#SET{img,#MEDIA_IMAGE_RETAILLEE{#GET{vignette}}})]
 [(#SET{width,[(#GET{img}|extraire_attribut{width})]})]
 [(#MEDIA_AFFICHER_LEGENDE|oui)
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_vignette[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>

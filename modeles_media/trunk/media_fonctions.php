@@ -27,12 +27,12 @@ function balise_MEDIA_LEGENDE_dist($p) {
 
 function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_titre,$sql_descriptif,$sql_credits,$sql_type,$sql_poids,$args,$connect=''){
 	$ret = '';
-	$env_legende = $args['legende'];
-	$env_titre = $args['titre'];
-	$env_descriptif =$args['descriptif'];
-	$env_credits = $args['credits'];
-	$env_type = $args['args']['type']; // On regarde dans 'args' pour eviter interference avec variable type herite du contexte de l'article
-	$env_poids = $args['poids'];
+	$env_legende = isset($args['legende']) ? $args['legende'] : '0';
+	$env_titre = isset($args['titre']) ? $args['titre'] : '0';
+	$env_descriptif = isset($args['descriptif']) ? $args['descriptif'] : '0';
+	$env_credits = isset($args['credits']) ? $args['credits'] : '0';
+	$env_type = isset($args['args']['type']) ? $args['args']['type'] : '0'; // On regarde dans 'args' pour eviter interference avec variable type herite du contexte de l'article
+	$env_poids = isset($args['poids']) ? $args['poids'] : '0';
 	
 	// Doit-on afficher une légende ?
 	if ($env_legende || $env_titre || $env_descriptif || $env_credits || $env_poids || $env_type) {
@@ -126,7 +126,7 @@ function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_t
 // Balise placée dans une boucle DOCUMENTS et appelée dans un modèle <media>
 function balise_MEDIA_AFFICHER_LEGENDE_dist($p) {
 	$conteneur = interprete_argument_balise(1,$p);
-	$p->code = "\$Pile[0]['legende'] || \$Pile[0]['titre'] || \$Pile[0]['descriptif'] || \$Pile[0]['credits'] || \$Pile[0]['args']['type'] || \$Pile[0]['poids'] ? ' ' : ''";
+	$p->code = "!empty(\$Pile[0]['legende']) || !empty(\$Pile[0]['titre']) || !empty(\$Pile[0]['descriptif']) || !empty(\$Pile[0]['credits']) || !empty(\$Pile[0]['args']['type']) || !empty(\$Pile[0]['poids']) ? ' ' : ''";
 	return $p;
 }
 
@@ -145,11 +145,11 @@ function balise_MEDIA_IMAGE_RETAILLEE_dist($p) {
 }
 
 function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$args,$sql_titre,$sql_type,$sql_poids){
-	$taille = isset($args['taille']) ? $args['taille'] : '';
-	$hauteur = isset($args['hauteur']) ? $args['hauteur'] : '';
-	$largeur = isset($args['largeur']) ? $args['largeur'] : '';
-	$alt = isset($args['alt']) ? $args['alt'] : '';
-	$titre = isset($args['titre']) ? $args['titre'] : '';
+	$taille = isset($args['taille']) ? $args['taille'] : '0';
+	$hauteur = isset($args['hauteur']) ? $args['hauteur'] : '0';
+	$largeur = isset($args['largeur']) ? $args['largeur'] : '0';
+	$alt = isset($args['alt']) ? $args['alt'] : '0';
+	$titre = isset($args['titre']) ? $args['titre'] : '0';
 
 	$src = extraire_attribut($image, 'src');
 	$url_site_spip=$GLOBALS['meta']['adresse_site'];
@@ -253,13 +253,13 @@ function balise_MEDIA_LIEN_dist($p) {
 	if (isset($p->boucles[$p->id_boucle]))
 		$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 	$connect = _q($connect);
-	$p->code = "calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$url_document,\$Pile[0]['args'],\$Pile[0]['lien'],\$Pile[0]['lang'],$connect)";
+	$p->code = "calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$url_document,\$Pile[0]['args'],!empty(\$Pile[0]['lien']),!empty(\$Pile[0]['lang']),$connect)";
 	return $p;
 }
 
 function calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$url_document,$args,$lien,$lang,$connect='') {
-	$titre_lien = isset($args['titre_lien']) ? $args['titre_lien'] : '';
-	$titre = isset($args['titre']) ? $args['titre'] : '';
+	$titre_lien = isset($args['titre_lien']) ? $args['titre_lien'] : '0';
+	$titre = isset($args['titre']) ? $args['titre'] : '0';
 	
 	// A-t-on demandé un lien
 	if (!$lien && !$forcer_lien)
@@ -300,9 +300,9 @@ function balise_MEDIA_TAILLE_dist($p) {
 }
 
 function calculer_balise_MEDIA_TAILLE($dim,$args,$sql_largeur,$sql_hauteur){
-	$taille = isset($args['taille']) ? $args['taille'] : '';
-	$hauteur = isset($args['hauteur']) ? $args['hauteur'] : '';
-	$largeur = isset($args['largeur']) ? $args['largeur'] : '';
+	$taille = isset($args['taille']) ? $args['taille'] : '0';
+	$hauteur = isset($args['hauteur']) ? $args['hauteur'] : '0';
+	$largeur = isset($args['largeur']) ? $args['largeur'] : '0';
 	
 	$hauteur_defaut = array(
 		'icone' => 52,
@@ -381,10 +381,6 @@ function balise_MEDIA_IGNORE_PARAMS_dist($p) {
 	$p->code = "array('id_media', 'legende','titre','descriptif','credits','poids','type','taille','hauteur','largeur','class','lien','lien_class')";
 	return $p;
 }
-
-
-// Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Filtre media_generer_vignette pour générer une vignette automatique à partir du fichier
 // Recherche l'existence d'un filtre media_generer_vignette_ext et renvoie le résultat de ce filtre, sinon rien
