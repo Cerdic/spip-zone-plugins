@@ -145,11 +145,11 @@ function balise_MEDIA_IMAGE_RETAILLEE_dist($p) {
 }
 
 function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$args,$sql_titre,$sql_type,$sql_poids){
-	$taille = $args['taille'];
-	$hauteur = $args['hauteur'];
-	$largeur = $args['largeur'];
-	$alt = $args['alt'];
-	$titre = $args['titre'];
+	$taille = isset($args['taille']) ? $args['taille'] : '';
+	$hauteur = isset($args['hauteur']) ? $args['hauteur'] : '';
+	$largeur = isset($args['largeur']) ? $args['largeur'] : '';
+	$alt = isset($args['alt']) ? $args['alt'] : '';
+	$titre = isset($args['titre']) ? $args['titre'] : '';
 
 	$src = extraire_attribut($image, 'src');
 	$url_site_spip=$GLOBALS['meta']['adresse_site'];
@@ -258,8 +258,8 @@ function balise_MEDIA_LIEN_dist($p) {
 }
 
 function calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$url_document,$args,$lien,$lang,$connect='') {
-	$titre_lien = $args['titre_lien'];
-	$titre = $args['titre'];
+	$titre_lien = isset($args['titre_lien']) ? $args['titre_lien'] : '';
+	$titre = isset($args['titre']) ? $args['titre'] : '';
 	
 	// A-t-on demandé un lien
 	if (!$lien && !$forcer_lien)
@@ -300,9 +300,9 @@ function balise_MEDIA_TAILLE_dist($p) {
 }
 
 function calculer_balise_MEDIA_TAILLE($dim,$args,$sql_largeur,$sql_hauteur){
-	$taille = $args['taille'];
-	$hauteur = $args['hauteur'];
-	$largeur = $args['largeur'];
+	$taille = isset($args['taille']) ? $args['taille'] : '';
+	$hauteur = isset($args['hauteur']) ? $args['hauteur'] : '';
+	$largeur = isset($args['largeur']) ? $args['largeur'] : '';
 	
 	$hauteur_defaut = array(
 		'icone' => 52,
