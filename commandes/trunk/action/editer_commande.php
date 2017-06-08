@@ -109,7 +109,7 @@ function commande_inserer($id_parent=null, $champs=array()) {
 		// La référence si elle n'est pas déjà donnée : on attend d'avoir l'id_commande pour pouvoir generer un numero unique
 		if (!isset($champs['reference'])) {
 			$commandes_reference = charger_fonction('commandes_reference', 'inc/');
-			$champs['reference'] = $commandes_reference($id_auteur, $id_commande);
+			$champs['reference'] = $commandes_reference($id_commande, $id_auteur=0);
 			sql_updateq('spip_commandes', array('reference' => $champs['reference']), 'id_commande=' . intval($id_commande));
 		}
 
