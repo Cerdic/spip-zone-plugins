@@ -1,0 +1,52 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,#ENV{date_sens,-1},
+	num titre,1,
+	id_album,1,
+	points,-1
+}})
+]<B_liste_album>
+#ANCRE_PAGINATION
+<div class="liste-objets albums">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{album:info_1_album,albums:info_nb_albums}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre principale' scope='col'>[(#TRI{num titre,<:info_titre:>,ajax})]</th>
+			<th class='utilisations' scope='col'><:album:info_utilisation:></th>
+			<th class='docs_lies' scope='col'><:album:info_docslies:></th>
+			<th class='date secondaire' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_album,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_album(ALBUMS documents){id_album?}
+		{documents.id_document?}{documents.media?}{documents.extension?}
+		{albums_liens.objet?}{albums_liens.id_objet?}{albums_liens.vu?}{orphelins?}
+		{auteurs_liens.id_auteur?}{mots_liens.id_mot?}
+		{statut?}
+		{recherche?}
+		{where?}
+		{tri #ENV{par,date},#GET{defaut_tri}}
+		{par titre}
+		{pagination #ENV{nb,10}}{!lang_select}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[(#STATUT|puce_statut{album,#ID_ALBUM})]</td>
+			<td class='titre principale'>[(#LOGO_ALBUM|image_reduire{20,26})]<a href="[(#ID_ALBUM|generer_url_entite{album})]"
+					title="<:info_numero_abbreviation|attribut_html:> #ID_ALBUM">[(#RANG). ][(#TITRE)]</a></td>
+			<td class='utilisations'><BOUCLE_utilisations_album(albums_liens){id_album}> </BOUCLE_utilisations_album> [(#TOTAL_BOUCLE|singulier_ou_pluriel{album:info_1_utilisation,album:info_nb_utilisations})]</B_utilisations_album></td>
+			<td class='docs_lies'><BOUCLE_doclies_album(documents_liens){objet=album}{id_objet=#ID_ALBUM}> </BOUCLE_doclies_album> [(#TOTAL_BOUCLE)]</B_doclies_album></td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='id'>[(#AUTORISER{modifier,album,#ID_ALBUM}|?{
+				<a href="[(#URL_ECRIRE{album_edit,id_album=#ID_ALBUM})]">#ID_ALBUM</a>,
+				#ID_ALBUM
+			})]</td>
+		</tr>
+	</BOUCLE_liste_album>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{#ENV{pagination,prive}})</p>]
+</div>
+</B_liste_album>[
+<div class="liste-objets albums caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_album>
