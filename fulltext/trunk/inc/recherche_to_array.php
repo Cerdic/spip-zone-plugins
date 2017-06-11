@@ -113,6 +113,14 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 			$r .= ' '.$r2;
 		}
 
+		if(defined('_FULLTEXT_ASTERISQUE_PARTOUT') && _FULLTEXT_ASTERISQUE_PARTOUT) {
+			$r = explode(' ', $r);
+			foreach ($r as $key => $item) {
+				$r[$key] = preg_match('#[\*\(\)]+#', $item) ? $item : $item.'*';
+			}
+			$r = join(' ', $r);
+		}
+
 		$p = sql_quote(trim("$r"), $serveur);
 
 		// On va additionner toutes les cles FULLTEXT
