@@ -30,7 +30,8 @@ function getZapl(bloc) {
 window.zapl_loop_index = 0;
 zapl_loop = setInterval(function() {
 		//console.log("loop index : " +  window.zapl_loop_index + " - jQuery chargé ? : " + (typeof jQuery.spip.triggerAjaxLoad !== 'undefined') + " - Nb zapl traités:" + window.zapl_list.length );
-	if (  (typeof jQuery.spip.triggerAjaxLoad === 'function') &&
+	if (	(typeof jQuery.spip === 'object') &&
+				(typeof jQuery.spip.triggerAjaxLoad === 'function') &&
 				(typeof window.zapl_list !== 'undefined') &&
 				!(document.querySelectorAll("[id^='zapl-']").length) ) {
 			clearInterval(zapl_loop);
