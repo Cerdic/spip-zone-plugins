@@ -15,6 +15,6 @@
 
 	<pipeline nom="autoriser" inclure="statut_articles_autorisations.php" />
 
-    <menu nom="changer_statut_articles" titre="statut_articles:menu_changer_statuts" parent="menu_publication" icone="images/statut_articles-16.png" action="changer_statut_articles" />
+	<menu nom="changer_statut_articles" titre="statut_articles:menu_changer_statuts" parent="menu_publication" icone="images/statut_articles-16.png" action="changer_statut_articles" />
 
 </paquet>
