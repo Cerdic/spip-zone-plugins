@@ -165,7 +165,7 @@ function zcore_pre_propre($flux) {
 }
 
 /**
- * Ajouter les scripts pour getZaplBloc() dans head, directement, sans src
+ * Ajouter les scripts pour getZaplBloc()
  * Ajouter le inc-insert-head du theme si il existe
  *
  * @param string $flux
@@ -173,9 +173,16 @@ function zcore_pre_propre($flux) {
  * @return string
  */
 function zcore_insert_head($flux) {
-	// on utilise recuperer_fond()  car on veut pouvoir s'affranchir de jQl pour agir plus tôt
-	if ( defined('_Z_AJAX_PARALLEL_LOAD_OK') AND $fond = recuperer_fond('javascript/zapl.scripts.js', array(), array('ajax' => false) )) {
-		$flux = "\n<script type=\"text/javascript\">\n" . compacte($fond,"js") . "</script>\n". $flux;
+
+	// insertion du script pour le chargement parallelisé des zblocs (ZAPL)
+	// mode "one-liner" car on veut rester hors de la compression des js ou du chargement différe jQl pour agir plus vite.
+	if ( defined('_Z_AJAX_PARALLEL_LOAD_OK') AND ($file = find_in_path('javascript/zapl.scripts.js')) ) {
+		include_spip('filtres/compresseur');
+		if (function_exists('compacte')) {
+			$file = compacte($file, 'js');
+		}
+		lire_fichier($file, $js);
+		$flux .= "\n".'<script type="text/javascript">/*<![CDATA[*/'. str_replace(PHP_EOL,'',$js) .'/*]]>*/</script>'."\n";
 	}
 
 	if (find_in_path('inc-insert-head.html')) {
@@ -193,6 +200,7 @@ function zcore_insert_head($flux) {
  * @return string
  */
 function zcore_insert_head_css($flux) {
+
 	include_spip('public/styliser_par_z');
 	$contenu = z_blocs(false);
 	$contenu = reset($contenu);
