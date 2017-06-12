@@ -8,6 +8,7 @@ function activite_editoriale_upgrade($nom_meta_base_version,$version_cible) {
 	$maj = array();
 	cextras_api_upgrade(activite_editoriale_declarer_champs_extras(), $maj['create']);
 	cextras_api_upgrade(activite_editoriale_declarer_champs_extras(), $maj['0.2.0']);
+	cextras_api_upgrade(activite_editoriale_declarer_champs_extras(), $maj['0.2.1']);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

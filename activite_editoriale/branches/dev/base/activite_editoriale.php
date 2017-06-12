@@ -29,6 +29,16 @@ function activite_editoriale_declarer_champs_extras($champs = array()) {
 					'explication' => _T('activite_editoriale:extras_identifiants_explications'),
 					'obligatoire' => false, // 'true', 'false' ou ''
 			)),
+			'extras_emails' => array(
+				'saisie' => 'input',
+				'options' => array(
+					'nom'=>'extras_emails',
+					'sql' => "tinytext NOT NULL DEFAULT ''",
+					'rechercher' => false,
+					'label' => _T('activite_editoriale:extras_emails_label'),
+					'explication' => _T('activite_editoriale:extras_emails_explications'),
+					'obligatoire' => false, // 'true', 'false' ou ''
+			)),
 			'extras_frequence' => array(
 				'saisie' => 'input',
 				'options' => array(
