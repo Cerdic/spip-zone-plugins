@@ -81,7 +81,7 @@ function activite_editoriale_envoyer_mail($list) {
 			if ($envoyer_mail($to, $subject, $body)) {
 				spip_log("Message envoyé à".$to, "activite_editoriale");
 			} else {
-				spip_log("Message n'a pu être envoyé à ".$to, "activite_editoriale");
+				spip_log('Message n\'a pu être envoyé à '.$to, 'activite_editoriale');
 			}
 		}
 	}
