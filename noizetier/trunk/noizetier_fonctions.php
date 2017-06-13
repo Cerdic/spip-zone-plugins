@@ -9,6 +9,7 @@ define('_CACHE_AJAX_NOISETTES', _DIR_CACHE . 'noisettes_ajax.php');
 define('_CACHE_CONTEXTE_NOISETTES', _DIR_CACHE . 'noisettes_contextes.php');
 define('_CACHE_DESCRIPTIONS_NOISETTES', _DIR_CACHE . 'noisettes_descriptions.php');
 define('_CACHE_INCLUSIONS_NOISETTES', _DIR_CACHE . 'noisettes_inclusions.php');
+define('_CACHE_MD5_PAGES', _DIR_CACHE . 'noisettes_pages_md5.php');
 
 
 // -------------------------------------------------------------------
@@ -37,7 +38,7 @@ function noizetier_noisette_repertorier($filtres = array()) {
 			if ($fichiers = find_all_in_path('noisettes/', '.+[.]yaml$')) {
 				foreach ($fichiers as $_fichier => $_chemin) {
 					$noisette = basename($_fichier, '.yaml');
-					$options = array('reload' => true, 'yaml' => $_chemin);
+					$options = array('recharger' => true, 'yaml' => $_chemin);
 					if ($configuration = noizetier_noisette_informer($noisette, '', $options)) {
 						// On n'inclue la noisette que si les plugins qu'elle nécessite explicitement dans son
 						// fichier de configuration sont bien tous activés.
@@ -98,20 +99,20 @@ function noizetier_noisette_informer($noisette, $information = '', $options = ar
 	static $description_noisette = array();
 
 	if (!isset($description_noisette[$noisette])) {
-		// On essaye d'abord de récupérer la description dans le cache sauf si l'option reload est activée
-		if (empty($options['reload'])) {
+		// On essaye d'abord de récupérer la description dans le cache sauf si l'option recharger est activée
+		if (empty($options['recharger'])) {
 			if (lire_fichier_securise(_CACHE_DESCRIPTIONS_NOISETTES, $contenu)) {
 				$cache_noisettes = unserialize($contenu);
 				if (isset($cache_noisettes[$noisette])) {
 					$description_noisette[$noisette] = $cache_noisettes[$noisette];
 				} else {
 					// On a pas trouvé la noisette dans le cache, on essaye de la charger directement
-					$options['reload'] = true;
+					$options['recharger'] = true;
 				}
 			}
 		}
 
-		if (!empty($options['reload'])) {
+		if (!empty($options['recharger'])) {
 			// Initialisation de la description et d'une description par défaut
 			$description = array();
 			$defaut = array(
@@ -1028,11 +1029,289 @@ function noizetier_bloc_compter_noisettes($identifiant) {
 // ---------------------------- API PAGES ----------------------------
 // -------------------------------------------------------------------
 
+function noizetier_page_charger($recharger = false) {
+
+	// Retour de la fonction
+	$retour = false;
+
+	// Initialiser les blocs par défaut
+	$options['blocs_defaut'] = noizetier_bloc_defaut();
+
+	// Choisir le bon répertoire des pages
+	$options['repertoire_pages'] = noizetier_page_obtenir_dossier();
+
+	// Initialiser le contexte de rechargement
+	// TODO : en attente de voir si on rajoute un var_mode
+	$forcer_chargement = $recharger;
+
+	// Initaliser le where des pages non vrituelles
+	$where = array('est_virtuelle=' . sql_quote('non'));
+
+	// On recherche les pages et les compositions explicites par le fichier HTML en premier
+	// Si on le trouve, on récupère la configuration du fichier XML ou YAML.
+	if ($fichiers = find_all_in_path($options['repertoire_pages'], '.+[.]html$')) {
+		$pages_nouvelles = $pages_modifiees = $pages_obsoletes = array();
+		// Récupération des signatures md5 des pages déjà enregistrées.
+		// Si on force le rechargement il est inutile de gérer les signatures et les pages modifiées ou obsolètes.
+		$signatures = array();
+		if (!$forcer_chargement) {
+			$select = array('page', 'signature');
+			if ($signatures = sql_allfetsel($select, 'spip_noisettes_pages', $where)) {
+				$signatures = array_column($signatures, 'signature', 'page');
+			}
+			// On initialise la liste des pages à supprimer avec l'ensemble des pages non virtuelles
+			$pages_obsoletes = $signatures ? array_keys($signatures) : array();
+		}
+
+		foreach ($fichiers as $_squelette => $_chemin) {
+			$page = basename($_squelette, '.html');
+			$dossier = dirname($_chemin);
+			$est_composition = noizetier_page_est_composition($page);
+			// Exclure certaines pages :
+			// -- celles du privé situes dans prive/contenu
+			// -- page liée au plugin Zpip en v1
+			// -- z_apl liée aux plugins Zpip v1 et Zcore
+			// -- les compositions explicites si le plugin Compositions n'est pas activé
+			if ((substr($dossier, -13) != 'prive/contenu')
+			and (($page != 'page') or !defined('_DIR_PLUGIN_Z'))
+			and (($page != 'z_apl') or (!defined('_DIR_PLUGIN_Z') and !defined('_DIR_PLUGIN_ZCORE')))
+			and (!$est_composition or ($est_composition	and defined('_DIR_PLUGIN_COMPOSITIONS')))) {
+				// On passe le md5 de la page si il existe sinon la chaine vide. Cela permet de déterminer
+				// si on doit ajouter la page ou la mettre à jour.
+				// Si le md5 est le même et qu'il n'est donc pas utile de recharger la page, la configuration
+				// retournée est vide.
+				$options['md5'] = isset($signatures[$page]) ? $signatures[$page] : '';
+				$options['recharger'] = $forcer_chargement;
+				if ($configuration = noizetier_page_phraser($page, $options)) {
+					if (empty($configuration['identique'])) {
+						// La page a été chargée (nouvelle) ou rechargée (modifiée).
+						// Néanmoins, on n'inclue cette page que si les plugins qu'elle nécessite explicitement dans son
+						// fichier de configuration sont bien tous activés.
+						// Rappel: si une page est incluse dans un plugin non actif elle ne sera pas détectée
+						//         lors du find_all_in_path() puisque le plugin n'est pas dans le path SPIP.
+						//         Ce n'est pas ce cas qui est traité ici.
+						$page_a_garder = true;
+						$necessite = unserialize($configuration['necessite']);
+						if (!empty($necessite)) {
+							foreach ($necessite as $plugin) {
+								if (!defined('_DIR_PLUGIN_'.strtoupper($plugin))) {
+									$page_a_garder = false;
+									break;
+								}
+							}
+						}
+
+						// Si la page est à garder on détermine si elle est nouvelle ou modifiée.
+						// En mode rechargement forcé toute page est considérée comme nouvelle.
+						// Sinon, la page doit être retirée de la base car un plugin qu'elle nécessite a été désactivée:
+						// => il suffit pour cela de la laisser dans la liste des pages obsolètes.
+						if ($page_a_garder) {
+							if (!$options['md5'] or $forcer_chargement) {
+								// La page est soit nouvelle soit on est en mode rechargement forcé:
+								// => il faut la rajouter dans la table.
+								$pages_nouvelles[] = $configuration;
+							} else {
+								// La configuration stockée dans la table a été modifiée et le mode ne force pas le rechargement:
+								// => il faut mettre à jour la page dans la table.
+								$pages_modifiees[] = $configuration;
+								// => il faut donc la supprimer de la liste des pages obsolètes
+								$pages_obsoletes = array_diff($pages_obsoletes, array($page));
+							}
+						}
+					} else {
+						// La page n'a pas changée et n'a donc pas été réchargée:
+						// => Il faut donc juste indiquer qu'elle n'est pas obsolète.
+						$pages_obsoletes = array_diff($pages_obsoletes, array($page));
+					}
+				} else {
+					// Il y a eu une erreur sur lors du rechargement de la page.
+					// Ce peut être en particulier le cas où une page HTML sans XML n'est plus détectée car le
+					// paramètre _NOIZETIER_LISTER_PAGES_SANS_XML a été positionné de true à false.
+					// => il faut donc ne rien faire pour laisser la page dans les obsolètes
+				}
+			}
+		}
+
+		// Mise à jour de la table des pages
+		// -- Suppression des pages obsolètes ou de toute les pages non virtuelles si on est en mode
+		//    rechargement forcé.
+		if ($pages_obsoletes) {
+			sql_replace_multi('spip_noisettes_pages', $pages_obsoletes);
+		} elseif ($forcer_chargement) {
+			sql_delete('spip_noisettes_pages', $where);
+		}
+		// -- Update des pages modifiées
+		if ($pages_modifiees) {
+			sql_replace_multi('spip_noisettes_pages', $pages_modifiees);
+		}
+		// -- Insertion des nouvelles pages
+		if ($pages_nouvelles) {
+			sql_insertq_multi('spip_noisettes_pages', $pages_nouvelles);
+		}
+
+		$retour = true;
+	}
+
+	return $retour;
+}
+
+
+function noizetier_page_phraser($page, $options = array()) {
+
+	// Initialisation de la description
+	$description = array();
+
+	// Choisir le bon répertoire des pages
+	if (empty($options['repertoire_pages'])) {
+		$options['repertoire_pages'] = noizetier_page_obtenir_dossier();
+	}
+
+	// Initialiser les blocs par défaut
+	if (empty($options['blocs_defaut'])) {
+		$options['blocs_defaut'] = noizetier_bloc_defaut();
+	}
+
+	// Initialiser le contexte de chargment
+	if (!isset($options['recharger'])) {
+		$options['recharger'] = false;
+	}
+	if (!isset($options['md5']) or $options['recharger']) {
+		$options['md5'] = '';
+	}
+
+	// Initialiser les composants de l'identifiant de la page:
+	// - type-composition si la page est une composition
+	// - type sinon
+	// On gère aussi le cas de Zpip v1 où page-xxxx désigne une page et non une composition.
+	// Dans ce cas, on doit donc obtenir type = xxxx et composition vide.
+	$identifiants = explode('-', $page);
+	if (!isset($identifiants[1])) {
+		$identifiants[1] = '';
+	} elseif ($identifiants[0] == 'page') {
+		$identifiants[0] = $identifiants[1];
+		$identifiants[1] = '';
+	}
+
+	// Initialisation de la description par défaut de la page
+	$description_defaut = array(
+		'page'           => $page,
+		'type'           => $identifiants[0],
+		'composition'    => $identifiants[1],
+		'nom'            => $page,
+		'description'    => '',
+		'icon'           => 'page-24.png',
+		'blocs_exclus'   => array(),
+		'necessite'      => array(),
+		'branche'        => array(),
+		'est_virtuelle'  => 'non',
+		'est_page_objet' => 'non',
+		'signature'      => '',
+	);
+
+	// Recherche des pages ou compositions explicites suivant le processus :
+	// a- Le fichier YAML est recherché en premier,
+	// b- ensuite le fichier XML pour compatibilité ascendante.
+	// c- enfin, si il n'y a ni YAML, ni XML et que le mode le permet, on renvoie une description standard minimale
+	//    basée sur le fichier HTML uniquement
+	$md5 = '';
+	if ($fichier = find_in_path("{$options['repertoire_pages']}${page}.yaml")) {
+		// 1a- il y a un fichier YAML de configuration, on vérifie le md5 avant de charger le contenu.
+		$md5 = md5_file($fichier);
+		if ($md5 != $options['md5']) {
+			include_spip('inc/yaml');
+			$description = yaml_charger_inclusions(yaml_decode_file($fichier));
+		}
+	} elseif ($fichier = find_in_path("{$options['repertoire_pages']}${page}.xml")) {
+		// 1b- il y a un fichier XML de configuration, on vérifie le md5 avant de charger le contenu.
+		//     on extrait et on parse le XML de configuration en tenant compte que ce peut être
+		//     celui d'une page ou d'une composition, ce qui change la balise englobante.
+		$md5 = md5_file($fichier);
+		if ($md5 != $options['md5']) {
+			include_spip('inc/xml');
+			if ($xml = spip_xml_load($fichier, false)
+			and (isset($xml['page']) or isset($xml['composition']))) {
+				$xml = isset($xml['page']) ? reset($xml['page']) : reset($xml['composition']);
+				// Titre (nom), description et icone
+				if (isset($xml['nom'])) {
+					$description['nom'] = spip_xml_aplatit($xml['nom']);
+				}
+				if (isset($xml['description'])) {
+					$description['description'] = spip_xml_aplatit($xml['description']);
+				}
+				if (isset($xml['icon'])) {
+					$description['icon'] = reset($xml['icon']);
+				}
+
+				// Liste des blocs autorisés pour la page. On vérifie que les blocs configurés sont bien dans
+				// la liste des blocs par défaut et on calcule les blocs exclus qui sont les seuls insérés en base.
+				$blocs_inclus = array();
+				if (spip_xml_match_nodes(',^bloc,', $xml, $blocs)) {
+					foreach (array_keys($blocs) as $_bloc) {
+						list(, $attributs) = spip_xml_decompose_tag($_bloc);
+						$blocs_inclus[] = $attributs['id'];
+					}
+				}
+				if ($blocs_inclus) {
+					$description['blocs_exclus'] = array_diff($options['blocs_defaut'], array_intersect($options['blocs_defaut'], $blocs_inclus));
+				}
+
+				// Liste des plugins nécessaires pour utiliser la page
+				if (spip_xml_match_nodes(',^necessite,', $xml, $necessites)) {
+					$description['necessite'] = array();
+					foreach (array_keys($necessites) as $_necessite) {
+						list(, $attributs) = spip_xml_decompose_tag($_necessite);
+						$description['necessite'][] = $attributs['id'];
+					}
+				}
+
+				// Liste des héritages
+				if (spip_xml_match_nodes(',^branche,', $xml, $branches)) {
+					$description['branche'] = array();
+					foreach (array_keys($branches) as $_branche) {
+						list(, $attributs) = spip_xml_decompose_tag($_branche);
+						$description['branche'][$attributs['type']] = $attributs['composition'];
+					}
+				}
+			}
+		}
+	} elseif (defined('_NOIZETIER_LISTER_PAGES_SANS_XML') ? _NOIZETIER_LISTER_PAGES_SANS_XML : false) {
+		// 1c- il est autorisé de ne pas avoir de fichier XML de configuration
+		// Ces pages sans XML sont toujours rechargées.
+		$description['icon'] = 'page_noxml-24.png';
+		$md5 = md5('_NOIZETIER_LISTER_PAGES_SANS_XML');
+	}
+
+	// Si la description est remplie c'est que le chargement a correctement eu lieu.
+	// Sinon, si la page n'a pas changée on renvoie une description limitée à un indicateur d'identité pour
+	// distinguer ce cas avec une erreur de chargement qui renvoie une description vide.
+	if ($description) {
+		// Mise à jour du md5
+		$description['signature'] = $md5;
+		// Identifie si la page est celle d'un objet SPIP
+		include_spip('base/objets');
+		$tables_objets = array_keys(lister_tables_objets_sql());
+		$description['est_page_objet'] = in_array(table_objet_sql($description_defaut['type']), $tables_objets) ? 'oui' : 'non';
+		// Complétude de la description avec les valeurs par défaut
+		$description = array_merge($description_defaut, $description);
+		// Sérialisation des champs blocs_exclus, necessite et branche qui sont des tableaux
+		$description['blocs_exclus'] = serialize($description['blocs_exclus']);
+		$description['necessite'] = serialize($description['necessite']);
+		$description['branche'] = serialize($description['branche']);
+	} elseif ($md5 == $options['md5']) {
+		$description['identique'] = true;
+	}
+
+	return $description;
+}
+
+
+function noizetier_page_blocs_autorises($page) {}
+
 /**
  * Retourne la liste des pages, des compositions explicites et des compositions virtuelles.
  * Chaque page est fournie avec l'ensemble de sa configuration.
  * Si le plugin Compositions n'est pas actif, les compositions explicites ou virtuelles ne sont
- * pas listées.
+ * pas retournées.
  *
  * @package SPIP\NOIZETIER\API\PAGE
  * @uses noizetier_informer_page()
@@ -1044,75 +1323,109 @@ function noizetier_bloc_compter_noisettes($identifiant) {
  * @return array|null
  * 		Tableau des pages, l'index est l'identifiant de la page.
  */
-function noizetier_page_repertorier($filtres = array()) {
+function noizetier_page_repertorier($filtres = array(), $options = array()) {
 	static $pages = null;
 
 	if (is_null($pages)) {
-		// Choisir le bon répertoire des pages
-		$options['repertoire_pages'] = noizetier_page_obtenir_dossier();
+		// Les compositions virtuelles sont insérées directement dans la table spip_noisettes_pages.
+		// Les pages et compositions explicites sont décrites par un fichier XML ou YAML et la description
+		// contenue dans le fichier est inséré dans la même stable spip_noisettes_pages.
+		// Pour savoir si il faut recharger la base et donc le tableau statique il faut vérifier que soit il n'y
+		// a aucune page ou composition explicite dans la table ou que l'option de rechargement est activée.
 
-		if ($options['repertoire_pages']) {
-			// Initialiser les blocs par défaut
-			$options['blocs_defaut'] = noizetier_bloc_defaut();
+		// Détermination des blocs par défaut
+		$blocs_defaut = noizetier_bloc_defaut();
 
-			// On recherche en premier lieu les pages et les compositions explicites
-			// -- on optimise la recherche si on a un filtre est_vrituelle à true inutile de récupérer les pages
-			//    et compositions explicites
-			if ($fichiers = find_all_in_path($options['repertoire_pages'], '.+[.]html$')) {
-				foreach ($fichiers as $_squelette => $_chemin) {
-					$page = basename($_squelette, '.html');
-					$dossier = dirname($_chemin);
-					$est_composition = noizetier_page_est_composition($page);
-					// Exclure certaines pages :
-					// -- celles du privé situes dans prive/contenu
-					// -- page liée au plugin Zpip en v1
-					// -- z_apl liée aux plugins Zpip v1 et Zcore
-					// -- les compositions explicites si le plugin Compositions n'est pas activé
-					if ((substr($dossier, -13) != 'prive/contenu')
-					and (($page != 'page') or !defined('_DIR_PLUGIN_Z'))
-					and (($page != 'z_apl') or (!defined('_DIR_PLUGIN_Z') and !defined('_DIR_PLUGIN_ZCORE')))
-					and (!$est_composition or ($est_composition	and defined('_DIR_PLUGIN_COMPOSITIONS')))) {
-						if ($configuration = noizetier_page_informer($page, '', $options)) {
-							// On n'inclue la page que si les plugins qu'elle nécessite explicitement dans son
-							// fichier de configuration sont bien tous activés.
-							// Rappel : si une page est incluse dans un plugin non actif elle ne sera pas détectée
-							//          lors du find_all_in_path() puisque le plugin n'est pas dans le path SPIP.
-							$page_a_garder = true;
-							if (isset($configuration['necessite'])) {
-								foreach ($configuration['necessite'] as $plugin) {
-									if (!defined('_DIR_PLUGIN_'.strtoupper($plugin))) {
-										$page_a_garder = false;
-										break;
+		// Lecture des pages et compositions explicites si elle existe
+		$select = array('spip_noisettes_pages');
+		$where = array('est_virtuelle=' . sql_quote('non'));
+		if ((sql_countsel($select, $where) > 0) and !$options['recharger']) {
+			// A priori la liste est à jour en base de données, on peut donc lire toutes les pages et compositions
+			// et stocker leur description dans le tableau statique.
+			$configurations = sql_allfetsel('*', $select, '', '', array('type', 'composition'));
+
+			// Mise au point du tableau issu de la base de données
+			foreach ($configurations as $_configuration) {
+				$configurations[$_configuration]['nom'] = _T_ou_typo($_configuration['nom']);
+				$configurations[$_configuration]['description'] = _T_ou_typo($_configuration['nom']);
+				$configurations[$_configuration]['blocs_exclus'] = $_configuration['blocs_exclus']
+					? unserialize($_configuration['blocs_exclus'])
+					: array();
+				if (!isset($_configuration['blocs_exclus'])) {
+					$configurations[$_configuration]['blocs'] = $blocs_defaut;
+				} else {
+					$configurations[$_configuration]['blocs'] = array_diff($blocs_defaut, $_configuration['blocs_exclus']);
+				}
+				$configurations[$_configuration]['necessite'] = $_configuration['necessite']
+					? unserialize($_configuration['necessite'])
+					: array();
+				$configurations[$_configuration]['branche'] = $_configuration['branche']
+					? unserialize($_configuration['branche'])
+					: array();
+			}
+
+			// Mise à jour du tableau statique des pages
+			$pages = $configurations;
+			$table_a_maj = false;
+		}
+		else {
+			// Il faut recalculer les pages et les compositions explicites à partir de leurs fichiers XML ou YAML.
+			// Les compositions virtuelles ne sont pas concernées car elles sont mise à jour directement en base.
+			$options['recharger'] = true;
+			$table_a_maj = true;
+			// Choisir le bon répertoire des pages
+			$options['repertoire_pages'] = noizetier_page_obtenir_dossier();
+			if ($options['repertoire_pages']) {
+				// Initialiser les blocs par défaut
+				$options['blocs_defaut'] = $blocs_defaut;
+
+				// On recherche les pages et les compositions explicites par le fichier HTML en premier
+				// Si on le trouve, on récupère la configuration du fichier XML ou YAML.
+				if ($fichiers = find_all_in_path($options['repertoire_pages'], '.+[.]html$')) {
+					foreach ($fichiers as $_squelette => $_chemin) {
+						$page = basename($_squelette, '.html');
+						$dossier = dirname($_chemin);
+						$est_composition = noizetier_page_est_composition($page);
+						// Exclure certaines pages :
+						// -- celles du privé situes dans prive/contenu
+						// -- page liée au plugin Zpip en v1
+						// -- z_apl liée aux plugins Zpip v1 et Zcore
+						// -- les compositions explicites si le plugin Compositions n'est pas activé
+						if ((substr($dossier, -13) != 'prive/contenu')
+						and (($page != 'page') or !defined('_DIR_PLUGIN_Z'))
+						and (($page != 'z_apl') or (!defined('_DIR_PLUGIN_Z') and !defined('_DIR_PLUGIN_ZCORE')))
+						and (!$est_composition or ($est_composition	and defined('_DIR_PLUGIN_COMPOSITIONS')))) {
+							if ($configuration = noizetier_page_informer($page, '', $options)) {
+								// On n'inclue la page que si les plugins qu'elle nécessite explicitement dans son
+								// fichier de configuration sont bien tous activés.
+								// Rappel : si une page est incluse dans un plugin non actif elle ne sera pas détectée
+								//          lors du find_all_in_path() puisque le plugin n'est pas dans le path SPIP.
+								$page_a_garder = true;
+								if (isset($configuration['necessite'])) {
+									foreach ($configuration['necessite'] as $plugin) {
+										if (!defined('_DIR_PLUGIN_'.strtoupper($plugin))) {
+											$page_a_garder = false;
+											break;
+										}
 									}
 								}
-							}
 
-							if ($page_a_garder) {
-								$pages[$page] = $configuration;
+								if ($page_a_garder) {
+									$pages[$page] = $configuration;
+								}
 							}
 						}
 					}
 				}
 			}
+		}
 
-			// Si le plugin Compositions est activé, on ajoute les compositions virtuelles
-			// qui ne sont définies que dans une meta propre au noiZetier.
-			// -- on optimise la recherche si on a un filtre est_virtuelle ou est_composition à false inutile de récupérer les
-			//    compositions virtuelles du noiZetier
-			if (defined('_DIR_PLUGIN_COMPOSITIONS')) {
-				include_spip('inc/config');
-				$options['compositions'] = lire_config('noizetier_compositions', array());
-				if ($options['compositions']) {
-					foreach ($options['compositions'] as $_composition => $_configuration) {
-						if ($configuration = noizetier_page_informer($_composition, '', $options)) {
-								$pages[$_composition] = $configuration;
-						}
-					}
-				}
-			}
+		// Appel du pipeline noizetier_lister_pages pour éventuellement compléter ou modifier la liste des pages
+		$pages = pipeline('noizetier_lister_pages', $pages);
 
-			// Appel du pipeline noizetier_lister_pages pour éventuellement compléter ou modifier la liste
-			$pages = pipeline('noizetier_lister_pages', $pages);
+		// Mise à jour de la table spip_noisettes_pages si on est en mode recalcul
+		if ($table_a_maj) {
+
 		}
 	}
 
@@ -1197,7 +1510,7 @@ function noizetier_page_informer($page, $information = '', $options =array()) {
 			$identifiants[0] = $identifiants[1];
 			$identifiants[1] = '';
 		}
-		$est_virtuelle = false;
+		$est_virtuelle = 'non';
 
 		// La recherche de la page est basée sur l'heuristique suivante:
 		//  1- Les pages ou compositions explicites sont les plus fréquentes et on les recherche
@@ -1248,7 +1561,7 @@ function noizetier_page_informer($page, $information = '', $options =array()) {
 						$description['blocs'][] = $attributs['id'];
 					}
 				}
-				$description['blocs'] = $description['blocs'] ? array_intersect($options['blocs_defaut'], $blocs) : $options['blocs_defaut'];
+				$description['blocs'] = $description['blocs'] ? array_intersect($options['blocs_defaut'], $description['blocs']) : $options['blocs_defaut'];
 
 				// Liste des plugins nécessaires pour utiliser la page
 				if (spip_xml_match_nodes(',^necessite,', $xml, $necessites)) {
@@ -1296,7 +1609,7 @@ function noizetier_page_informer($page, $information = '', $options =array()) {
 				} else {
 					$description['blocs'] = array_diff($options['blocs_defaut'], $description['blocs_exclus']);
 				}
-				$est_virtuelle = true;
+				$est_virtuelle = 'oui';
 			}
 		}
 
@@ -1831,4 +2144,39 @@ function noizetier_ajaxifier_noisette($noisette) {
 	}
 
 	return true;
+}
+
+function maj_noisettes_pages() {
+	include_spip('inc/config');
+	$compositions = lire_config('noizetier_compositions', array());
+	if ($compositions) {
+		$compositions_060 = array();
+		foreach ($compositions as $_page => $_composition) {
+			$_composition['type'] = noizetier_page_type($_page);
+			$_composition['composition'] = noizetier_page_composition($_page);
+			if (empty($_composition['nom'])) {
+				$_description['nom'] = $_page;
+			}
+			if (empty($_composition['icon'])) {
+				$_composition['icon'] = 'composition-24.png';
+			}
+			$_composition['blocs_exclus'] = isset($_composition['blocs_exclus'])
+				? serialize($_composition['blocs_exclus'])
+				: serialize(array());
+			$_composition['necessite'] = isset($_composition['necessite'])
+				? serialize($_composition['necessite'])
+				: serialize(array());
+			$_composition['branche'] = isset($_composition['branche'])
+				? serialize($_composition['branche'])
+				: serialize(array());
+			include_spip('base/objets');
+			$tables_objets = array_keys(lister_tables_objets_sql());
+			$_composition['est_page_objet'] = in_array(table_objet_sql($_composition['type']), $tables_objets) ? 'oui' : 'non';
+			$_composition['est_virtuelle'] = 'oui';
+			$compositions_060[] = $_composition;
+		}
+		if ($compositions_060) {
+			sql_insertq_multi('spip_noisettes_pages', $compositions_060);
+		}
+	}
 }

@@ -184,7 +184,7 @@ function autoriser_noizetier_modifiercomposition_dist($faire, $type, $id, $qui, 
 	include_spip('noizetier_fonctions');
 	if ((is_array($opt) and !empty($opt))
 	and (!empty($opt['page']) and ($configuration = noizetier_page_informer($opt['page']))
-	and $configuration['est_virtuelle'])
+	and ($configuration['est_virtuelle'] == 'oui'))
 	and autoriser('creercomposition', 'noizetier', $id, $qui,  array('page' => $configuration['type']))) {
 		$autoriser = true;
 	}

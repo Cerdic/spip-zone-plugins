@@ -185,9 +185,9 @@ function noizetier_compositions_lister_disponibles($flux) {
 
 	// Récupération des compositions virtuelles du noiZetier afin de les injecter dans le pipeline
 	// étant donné qu'elles ne peuvent pas être détectées par Compositions car sans XML
-	// -- filtre sur l'indicateur est_virtuelle qui n'est à vrai que pour les compositions
+	// -- filtre sur l'indicateur est_virtuelle qui n'est à oui que pour les compositions
 	// -- filtre sur le type de contenu ou pas suivant l'appel
-	$filtres = array('est_virtuelle' => true);
+	$filtres = array('est_virtuelle' => 'oui');
 	if ($type) {
 		$filtres['type'] = $type;
 	}

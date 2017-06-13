@@ -11,7 +11,7 @@
 		[(#ENV{page}|oui)
 			#SET{informations, #NOIZETIER_PAGE_INFOS{#ENV{page}}}
 			[(#ENV{page}|et{#GET{informations/composition}}|oui)
-				[(#GET{informations/est_virtuelle}|?{
+				[(#GET{informations/est_virtuelle}|=={oui}|?{
 					#SET{explication, noizetier:explication_composition_virtuelle},
 					#SET{explication, noizetier:explication_composition}})]
 			]
@@ -32,7 +32,7 @@
 			[(#URL_ACTION_AUTEUR{activer_composition, #GET{informations/type}, #SELF}
 				|icone_horizontale{<:noizetier:activer_composition:>, composition-set-24, '', #LANG_LEFT ajax})]
 		]
-		[(#ENV{page}|et{#GET{informations/est_virtuelle}}|oui)
+		[(#ENV{page}|et{#GET{informations/est_virtuelle}|=={oui}}|oui)
 			[(#URL_ACTION_AUTEUR{supprimer_composition, #ENV{page}, #URL_ECRIRE{noizetier_pages}|parametre_url{est_page_objet, #GET{informations/est_page_objet}}}
 				|icone_horizontale{<:noizetier:formulaire_supprimer_page:>, composition, del, #LANG_LEFT})]
 		]

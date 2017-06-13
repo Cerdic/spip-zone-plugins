@@ -5,9 +5,23 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-include_spip('inc/meta');
-
-// Installation et mise à jour
+/**
+ * Installation du schéma de données propre au plugin et gestion des migrations suivant
+ * les évolutions du schéma.
+ *
+ * Le schéma comprend des tables et des variables de configuration propres au plugin.
+ *
+ * @api
+ * @see boussole_declarer_tables_principales()
+ * @see boussole_declarer_tables_interfaces()
+ *
+ * @param string $nom_meta_base_version
+ * 		Nom de la meta dans laquelle sera rangée la version du schéma
+ * @param string $version_cible
+ * 		Version du schéma de données en fin d'upgrade
+ *
+ * @return void
+ */
 function noizetier_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
@@ -19,7 +33,7 @@ function noizetier_upgrade($nom_meta_base_version, $version_cible) {
 	);
 
 	$maj['create'] = array(
-		array('maj_tables',array('spip_noisettes')),
+		array('maj_tables',array('spip_noisettes_pages', 'spip_noisettes')),
 		array('ecrire_config', 'noizetier', $config_060),
 	);
 
@@ -53,16 +67,25 @@ function noizetier_upgrade($nom_meta_base_version, $version_cible) {
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
-// Désinstallation
+/**
+ * Suppression de l'ensemble du schéma de données propre au plugin, c'est-à-dire
+ * les tables et les variables de configuration.
+ *
+ * @api
+ *
+ * @param string $nom_meta_base_version
+ * 		Nom de la meta dans laquelle sera rangée la version du schéma
+ *
+ * @return void
+ */
 function noizetier_vider_tables($nom_meta_version_base) {
 	// On efface les tables du plugin
+	sql_drop_table('spip_noisettes_pages');
 	sql_drop_table('spip_noisettes');
 
-	// On efface la version enregistrée
+	// On efface la version enregistrée du schéma des données du plugin
 	effacer_meta($nom_meta_version_base);
-	// On efface les compositions enregistrées
-	effacer_meta('noizetier_compositions');
-	// On efface la configuration
+	// On efface la configuration du plugin
 	effacer_meta('noizetier');
 
 	// Effacer les fichiers du cache créés par le noizetier
@@ -72,21 +95,42 @@ function noizetier_vider_tables($nom_meta_version_base) {
 	supprimer_fichier(_CACHE_CONTEXTE_NOISETTES);
 	supprimer_fichier(_CACHE_INCLUSIONS_NOISETTES);
 	supprimer_fichier(_CACHE_DESCRIPTIONS_NOISETTES);
+	supprimer_fichier(_CACHE_MD5_PAGES);
 }
 
 /**
- * Transformer le tableau des compositions virtuelles stocké en meta et ajouter les
- * valeurs par défaut des paramètres de configuration.
- * Jusqu'au schéma 0.5.0 le tableau était de la forme [$type][$composition].
- * A partir du schéma 0.6.0 le tableau prend la forme [$type-$composition].
+ * Migration du schéma 0.5 au 0.6.
  *
+ * Les actions effectuées sont les suivantes:
+ * - ajout de la tables `spip_noisettes_pages` pour stocker l'ensemble des pages et compositions
+ * explicites et virtuelles.
+ * - ajout du champ `balise` à la table `spip_noisettes` pour déterminer si le noiZetier doit inclure
+ * la noisette concernée dans un div englobant.
+ * - mise à jour de la taille des champs type, composition et objet dans la table `spip_noisettes`
+ * - ajout d'une liste de variables de configuration initialisées
+ * - transfert des compositions virtuelles de la meta `noizetier_compositions` dans la nouvelle
+ * table `spip_noisettes_pages` et suppression définitive de la meta.
+ *
+ * @param array $config_defaut
+ * 		Tableau des variables de configuration intialisées.
+ *
+ * @return void
  */
 function maj_060($config_defaut) {
 
-	// Ajout de la colonne div qui indique pour chaque noisette si le noiZetier doit l'inclure dans un div
+	// Ajout de la tables des pages du noizetier qui contiendra pages et compositions qu'elles soient
+	// explicites ou virtuelles.
+	include_spip('base/create');
+	maj_tables('spip_noisettes_pages');
+
+	// Ajout de la colonne 'balise' qui indique pour chaque noisette si le noiZetier doit l'inclure dans un div
 	// englobant ou pas. Le champ prend les valeurs 'on', '' ou 'defaut' qui indique qu'il faut prendre
-	// en compte la valeur configurée par défaut pour toutes les noisettes.
-	sql_alter("TABLE spip_noisettes ADD balise varchar(6) DEFAULT 'defaut' NOT NULL AFTER parametres");
+	// en compte la valeur configurée par défaut (configuration du noizetier).
+	sql_alter("TABLE spip_noisettes ADD balise VARCHAR(6) DEFAULT 'defaut' NOT NULL AFTER parametres");
+	// Mise à jour des tailles des colonnes type, composition et objet pour cohérence
+	sql_alter("TABLE spip_noisettes MODIFY type VARCHAR(127) NOT NULL");
+	sql_alter("TABLE spip_noisettes MODIFY composition VARCHAR(127) NOT NULL");
+	sql_alter("TABLE spip_noisettes MODIFY balise VARCHAR(25) NOT NULL");
 
 	// Mise à jour de la configuration du plugin
 	include_spip('inc/config');
@@ -96,16 +140,50 @@ function maj_060($config_defaut) {
 	}
 	ecrire_config('noizetier', $config_defaut);
 
-	// Mise à jour de la liste des compositions virtuelles
+	// Insertion de la liste des compositions virtuelles dans la table 'spip_noisettes_pages'
 	$compositions = lire_config('noizetier_compositions', array());
 	if ($compositions) {
-		// On transforme le tableau de [type][composition] en [type-composition]
 		$compositions_060 = array();
 		foreach ($compositions as $_type => $_compositions) {
 			foreach ($_compositions as $_composition => $_description) {
-				$compositions_060["${_type}-${_composition}"] = $_description;
+				// Type et composition (ne sont jamais vides)
+				$_description['type'] = $_type;
+				$_description['composition'] = $_composition;
+				// Construction de l'identifiant de la page
+				$_description['page'] = "${_type}-${_composition}";
+				// Nom par défaut si non précisé (identifiant de la page)
+				if (empty($_description['nom'])) {
+					$_description['nom'] = $_description['page'];
+				}
+				// Icone par défaut si non précisé
+				if (empty($_description['icon'])) {
+					$_description['icon'] = 'composition-24.png';
+				}
+				// Blocs, necessite et branche: des tableaux à sérialiser
+				$_description['blocs_exclus'] = isset($_description['blocs_exclus'])
+					? serialize($_description['blocs_exclus'])
+					: serialize(array());
+				$_description['necessite'] = isset($_description['necessite'])
+					? serialize($_description['necessite'])
+					: serialize(array());
+				$_description['branche'] = isset($_description['branche'])
+					? serialize($_description['branche'])
+					: serialize(array());
+				// Indicateur de type d'objet
+				include_spip('base/objets');
+				$tables_objets = array_keys(lister_tables_objets_sql());
+				$_description['est_page_objet'] = in_array(table_objet_sql($_type), $tables_objets) ? 'oui' : 'non';
+				// Indicateur de composition virtuelle
+				$description['est_virtuelle'] = 'oui';
+				$compositions_060[] = $_description;
 			}
 		}
-		ecrire_config('noizetier_compositions', $compositions_060);
+		// Insertion dans la table spip_noisettes_pages
+		if ($compositions_060) {
+			sql_insertq_multi('spip_noisettes_pages', $compositions_060);
+		}
 	}
+	// On efface la meta des compositions maintenant que celles-ci sont stockées
+	// dans une table dédiées aux pages du noizetier
+	effacer_meta('noizetier_compositions');
 }
