@@ -81,4 +81,3 @@ function action_telecharger()
 		echo "<a href='$url'>$url (".$nb.")</a>";
 	}
 }
-?>

@@ -33,4 +33,3 @@ function action_anaclic_config_dist()
 	}
 }
 
-?>

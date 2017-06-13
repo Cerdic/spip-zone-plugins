@@ -32,4 +32,3 @@ function autoriser_statistiques_anaclic_nav_bouton_dist($faire, $type, $id, $qui
 {	return ($GLOBALS['meta']['activer_statistiques']!='oui' && autoriser('statistiques_anaclic_bouton', $type, $id, $qui, $opt));
 }
 
-?>

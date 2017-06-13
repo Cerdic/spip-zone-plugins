@@ -2,7 +2,7 @@
 	<nom>Analyclick</nom>
 	<slogan>Compteur de t&#233;l&#233;chargements pour les documents SPIP</slogan>
 	<auteur>[Jean-Marc Viglino->https://contrib.spip.net/_Viglino-Jean-Marc_]</auteur>
-	<version>0.3.2</version>
+	<version>0.3.3</version>
 	<icon>anaclic.png</icon>
 	<etat>test</etat>
 	<description>

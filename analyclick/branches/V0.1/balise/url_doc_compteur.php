@@ -38,4 +38,3 @@ function balise_URL_DOC_COMPTEUR_dyn($id_document)
 	);
 }
 
-?>

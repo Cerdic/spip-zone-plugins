@@ -169,4 +169,4 @@ function exec_statistiques_anaclic_args($id_document, $duree, $interval, $type, 
 	echo fin_gauche(), fin_page();	
 }
 
-?>
+

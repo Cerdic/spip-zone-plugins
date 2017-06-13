@@ -29,4 +29,3 @@ function anaclic_install($action)
 	}
 }
 
-?>

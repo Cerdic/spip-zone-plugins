@@ -71,4 +71,3 @@ function exec_anaclic_config_dist()
 	echo fin_gauche(), fin_page();	
 }
 
-?>

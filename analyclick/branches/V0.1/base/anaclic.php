@@ -46,4 +46,3 @@ $table_des_tables['doc_compteurs']		= 'doc_compteurs';
 global $tables_jointures;
 $tables_jointures['spip_doc_compteurs']['id_document'] = 'documents';
 
-?>

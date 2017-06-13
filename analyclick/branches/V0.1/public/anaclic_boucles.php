@@ -30,4 +30,3 @@ function boucle_DOC_COMPTEURS_dist($id_boucle, &$boucles) {
 	
 	return calculer_boucle($id_boucle, $boucles); 
 }
-?>
