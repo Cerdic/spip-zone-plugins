@@ -10,7 +10,9 @@
 *
 **/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 // Lien pour le comptage avant telechargement
 function generer_url_doc_compteur($id_document)
@@ -24,4 +26,4 @@ function balise_URL_DOC_COMPTEUR_dist($p)
 	return $p;
 }
 
-?>
+

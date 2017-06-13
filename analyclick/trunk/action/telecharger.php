@@ -10,7 +10,10 @@
 *
 **/
 
-if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
+
 include_spip("base/anaclic");
 
 function action_telecharger() 
@@ -69,4 +72,4 @@ function action_telecharger()
 		echo "<a href='$url'>$url</a>";
 	}
 }
-?>
+

@@ -10,6 +10,11 @@
 * Autorisation des boutons
 *
 **/
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
+
+
 
 function anaclic_autoriser(){}
 
@@ -19,4 +24,3 @@ function autoriser_statistiques_anaclic_bouton_dist($faire, $type='', $id=0, $qu
 	return autoriser('voirstats', $type, $id, $qui, $opt);
 }
 
-?>

@@ -10,7 +10,9 @@
 *
 **/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 function anaclic_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_documents'][] = 'clics';
@@ -42,4 +44,4 @@ function anaclic_declarer_tables_auxiliaires($tables_auxiliaires){
 	return $tables_auxiliaires;
 }
 
-?>
+
