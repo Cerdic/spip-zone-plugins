@@ -8,9 +8,6 @@ function action_linkcheck_reinit_dist() {
 	include_spip('inc/autoriser');
 	include_spip('inc/config');
 
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
-
 	if (autoriser('reinitialiser', 'linkcheck')) {
 		sql_delete('spip_linkchecks');
 		sql_delete('spip_linkchecks_liens');

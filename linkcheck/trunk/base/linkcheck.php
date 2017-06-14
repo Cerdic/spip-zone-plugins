@@ -21,7 +21,7 @@ function linkcheck_declarer_tables_interfaces($interfaces) {
 function linkcheck_declarer_tables_objets_sql($tables) {
 	$tables['spip_linkchecks'] = array(
 		'type' => 'linkcheck',
-		'principale' => 'non',
+		'principale' => 'oui',
 		'type_surnoms' => array(),
 		'page'=>'',
 		'date' => 'date',
@@ -32,9 +32,9 @@ function linkcheck_declarer_tables_objets_sql($tables) {
 			'etat'				=> "varchar(10) NOT NULL DEFAULT ''",
 			'code'				=> "varchar(10) NOT NULL DEFAULT ''",
 			'redirection'		=> "text NOT NULL DEFAULT ''",
-			'essais'				=> 'int(1) DEFAULT 0',
+			'essais'			=> 'int(1) DEFAULT 0',
 			'date'				=> "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
-			'publie'				=> "varchar(3) NOT NULL DEFAULT ''",
+			'publie'			=> "varchar(3) NOT NULL DEFAULT ''",
 			'maj'				=> 'TIMESTAMP'
 		),
 		'key' => array(

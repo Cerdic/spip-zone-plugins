@@ -1,12 +1,12 @@
 <paquet
 	prefix="linkcheck"
 	categorie="maintenance"
-	version="1.4.3"
+	version="1.4.4"
 	etat="stable"
 	compatibilite="[3.0.5;3.1.*]"
 	logo="prive/themes/spip/images/linkcheck-64.png"
 	documentation="https://contrib.spip.net/article4605"
-	schema="1.4.0"
+	schema="1.4.4"
 >
 
 	<nom>LinkCheck</nom>
@@ -17,7 +17,6 @@
 	<auteur lien="http://www.declic3000.com">Guillaume Wauquier</auteur>
 
 	<licence>GNU/GPL</licence>
-
 
 	<necessite nom="saisies" compatibilite="[2.2.3;]" />
 	<necessite nom="facteur" compatibilite="[3.4.7;]" /> 

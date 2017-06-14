@@ -9,9 +9,6 @@ function action_linkcheck_parcours_dist() {
 	include_spip('inc/autoriser');
 	include_spip('inc/linkcheck_fcts');
 
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
-
 	include_spip('inc/linkcheck_vars');
 	include_spip('inc/linkcheck_fcts');
 	include_spip('inc/autoriser');

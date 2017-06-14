@@ -21,6 +21,12 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 
 ## Versions 1.4.x
 
+### Version 1.4.4
+
+- Remettre la table `spip_linkchecks` en table principale sinon l'autoincrement ne se fait pas.
+- Fonction d'upgrade qui permet de corriger ce problème sur des versions buggées déjà installées
+- Enlever la table `spip_linkchecks` de la liste des tables à traiter
+
 ### Version 1.4.3
 
 - La détection des liens ne prenait qu'un champ à chaque fois, il réinitialisait le compte de liens à chaque champ testé.

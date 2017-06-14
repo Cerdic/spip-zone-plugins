@@ -27,7 +27,7 @@
 <div class='onglets_simple second clearfix'>
 	<ul>
 		[<li>(#SELF|parametre_url{objet,''}|parametre_url{debut_ListeLink,''}|lien_ou_expose{<:linkcheck:tous_les_liens:>,#ENV{objet,''}|=={''},ajax})</li>]
-		<BOUCLE_objets(spip_linkchecks_liens){fusion objet}{par objet}>
+		<BOUCLE_objets(spip_linkchecks_liens){fusion objet}{objet != linkcheck}{par objet}>
 		[<li>(#SELF|parametre_url{objet,#OBJET}|parametre_url{debut_ListeLink,''}|lien_ou_expose{#OBJET,#ENV{objet}|=={#OBJET},ajax})</li>]
 		</BOUCLE_objets>
 	</ul>
@@ -52,7 +52,7 @@
 		<th class='date' scope='col'><:linkcheck:maj:></th>
 		</tr>
 	</thead>
-<BOUCLE_ListeLink(LINKCHECKS){objet?}{!par maj}{code?}{etat?}{url?}{publie?}{url LIKE %#ENV{recherche}%}{distant IN #GET{distant}}{pagination #ENV{pagination,10}}>
+<BOUCLE_ListeLink(LINKCHECKS){objet?}{objet != linkcheck}{!par maj}{code?}{etat?}{url?}{publie?}{url LIKE %#ENV{recherche}%}{distant IN #GET{distant}}{pagination #ENV{pagination,10}}>
 	<INCLURE{fond=prive/objets/liste/linkcheck_detail,id_linkcheck,env}>
 </BOUCLE_ListeLink>
 	</table>

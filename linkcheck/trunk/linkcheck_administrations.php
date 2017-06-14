@@ -44,11 +44,24 @@ function linkcheck_upgrade($nom_meta_base_version, $version_cible) {
 		array('maj_tables', array('spip_linkchecks', 'spip_linkchecks_liens'))
 	);
 
+	/**
+	 * Ajout de l'autoincrement sur la table spip_linkckecks si manquant
+	 * Relancer la première récupération de liens
+	 */
+	$maj['1.4.4'] = array(
+		array('linkcheck_maj_autoinc')
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 
+function linkcheck_maj_autoinc() {
+	sql_alter('TABLE spip_linkchecks MODIFY COLUMN id_linkcheck bigint(21) AUTO_INCREMENT');
+	$reinit = charger_fonction('linkcheck_reinit', 'action');
+	$reinit();
+}
 /**
  * Fonction de désinstallation du plugin.
  * Vous devez :
