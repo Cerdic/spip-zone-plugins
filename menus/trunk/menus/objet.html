@@ -25,6 +25,7 @@
 
 [(#ENV{trad}|=={trad}|et{#ENV{type_objet}|=={article}}|oui)#SET{info_trad,#VAL{menus:info_traduction_recuperee}|_T}]
 
+
 #SET{visible,oui}
 [(#ENV{connexion}|=={session}|oui)
 	[(#SESSION{statut}|non)
@@ -35,6 +36,10 @@
 	[(#SESSION{statut}|oui)
 		#SET{visible,non}]
 	#SET{info_session,#VAL{menus:info_deconnexion_obligatoire}|_T}
+]
+
+[(#ENV{type_objet}|objet_test_si_publie{#GET{id_objet}}|non)
+	#SET{visible,non}
 ]
 
 [(#ENV{appel_formulaire}|oui)

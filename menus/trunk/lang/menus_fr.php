@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_lien' => 'Ajoute un lien arbitraire, en interne (URL relative) ou externe (http://...).',
 	'description_menu_mapage' => 'Si le visiteur est connecté, ajoute un lien vers sa page auteur.',
 	'description_menu_mots' => 'Affiche automatiquement un menu listant les articles liés au mot clé.',
-	'description_menu_objet' => 'Crée un lien vers un objet de SPIP : article, rubrique ou autre. Par défaut, l’entrée aura le titre de l’objet.',
+	'description_menu_objet' => 'Crée un lien vers un objet de SPIP : article, rubrique ou autre. Par défaut, l’entrée aura le titre de l’objet. L\'entrée ne sera visible que si l\'objet est publié.',
 	'description_menu_page_speciale' => 'Ajoute un lien vers un squelette page accessible par une url du type <code>spip.php ?page=nom&param1=xx&param2=yyy...</code> Ces pages sont souvent fournies par des plugins.',
 	'description_menu_page_speciale_zajax' => 'Ajoute un lien vers un bloc d’une page accessible par une url du type <code>spip.php ?page=nom&param1=xx&param2=yyy...</code> Ceci nécéssite une squelette de type Z et le plugin <a href="https://contrib.spip.net/MediaBox">médiabox</a>.',
 	'description_menu_rubriques_articles' => 'Affiche une liste de rubriques et, si on veut, les sous-rubriques et les articles sur plusieurs niveaux. Par défaut, affiche toutes les rubriques depuis la racine, triées par titre (numériquement puis alphabétiquement). Les articles sont placés systématiquement après les rubriques.',
