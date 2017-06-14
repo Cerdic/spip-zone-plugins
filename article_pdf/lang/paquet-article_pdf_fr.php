@@ -19,4 +19,3 @@ Insérez la balise <code>#ARTICLE_PDF</code> dans votre squelette pour avoir un 
 	'article_pdf_nom' => 'Article PDF',
 	'article_pdf_slogan' => 'Convertir l\'article affiché au format pdf',
 );
-?>

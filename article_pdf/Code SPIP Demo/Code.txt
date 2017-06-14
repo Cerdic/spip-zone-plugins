@@ -1,11 +1,11 @@
 Sur-titre :
-Résumé
+RÃ©sumÃ©
 
 Titre :
-Titre avec des caractères accentués - êèàç
+Titre avec des caractÃ¨res accentuÃ©s - ÃªÃ¨Ã Ã§
 
 Descriptif rapide :
-Article de test pour la génération de PDF
+Article de test pour la gÃ©nÃ©ration de PDF
 
 Chapeau :
 Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, 
@@ -23,25 +23,25 @@ Texte :
 {{gras}}
 
 
-<HTML><u>souligné en forçant le code html</u></HTML>
+<HTML><u>soulignÃ© en forÃ§ant le code html</u></HTML>
 
-<HTML><i>italique avec la balise i en forçant le code html</i></HTML>
+<HTML><i>italique avec la balise i en forÃ§ant le code html</i></HTML>
 
-<HTML><b>gras avec la balise b en forçant le code html</b></HTML>
+<HTML><b>gras avec la balise b en forÃ§ant le code html</b></HTML>
 
 
 <img7|left>
 
-Image déportée à gauche
+Image dÃ©portÃ©e Ã  gauche
 
 ----
 <HTML><br /><br /><br /></HTML>
-Image centrée <img11|center>
+Image centrÃ©e <img11|center>
 
 ----
 <HTML><br /><br /><br /></HTML>
 
-Image déportée à droite
+Image dÃ©portÃ©e Ã  droite
 <img10|right>
 
 
@@ -59,11 +59,11 @@ Exemple d'ancre [Ancre<-]
 
 Exemple de tableau
 
-| {{Nom}} | {{Prénom}} | {{Age}} |
+| {{Nom}} | {{PrÃ©nom}} | {{Age}} |
 | Marso | Ben | 23 ans |
 | [Lien interne vers Capitaine->5] | Toto | non connu |
 | Philant | [Lien interne vers Philippe->2] | 46 ans |
-| [Lien externe vers SPIP->https://www.spip.net/]| Bébé | <img10|right> |
+| [Lien externe vers SPIP->https://www.spip.net/]| BÃ©bÃ© | <img10|right> |
 
 Exemple de note [[note 2]]
 
@@ -71,9 +71,9 @@ Exemple de puces :
 
 - Qu'est-ce que cela peut faire que je lutte pour la mauvaise cause 
 puisque je suis de bonne foi?
-- Et qu'est-ce que ça peut faire que je sois de mauvaise foi 
+- Et qu'est-ce que Ã§a peut faire que je sois de mauvaise foi 
 puisque c'est pour la bonne cause. (Jacques 
-Prévert)
+PrÃ©vert)
 
 
 Exemple de note [[note 3]]
@@ -81,19 +81,19 @@ Exemple de note [[note 3]]
 
 [Exemple de lien vers Rubrique->rub1] 
 
-[Exemple de lien vers Brève->br1] 
+[Exemple de lien vers BrÃ¨ve->br1] 
 
-Auteurs, mots-clés, sites, images, documents :
+Auteurs, mots-clÃ©s, sites, images, documents :
 
-lien vers [un auteur->aut13] ou [le même auteur->auteur13]
+lien vers [un auteur->aut13] ou [le mÃªme auteur->auteur13]
 
 lien vers [un mot->mot32]
 
-lien vers [un site syndiqué->site1]
+lien vers [un site syndiquÃ©->site1]
 
-lien vers [un document joint->doc17] ou [le même document->document17]
+lien vers [un document joint->doc17] ou [le mÃªme document->document17]
 
-lien vers [une image->img13] ou [la même image->image13] 
+lien vers [une image->img13] ou [la mÃªme image->image13] 
 
 
 Exemple de lien vers une ancre [->art5#Ancre]
@@ -102,13 +102,13 @@ Exemple de lien vers une ancre [->art5#Ancre]
 <quote>Exemple de citation</quote>
 
 
-Exemple de note «forcée» [[<20> Note forçée]]
+Exemple de note Â«forcÃ©eÂ» [[<20> Note forÃ§Ã©e]]
 
 
 Exemple de lien externe vers le site de [SPIP->https://www.spip.net/].
 
 
-Exemple de puces imbriquées :
+Exemple de puces imbriquÃ©es :
 
 -* Ton cheval est:
 -** alezan;
@@ -117,17 +117,17 @@ Exemple de puces imbriquées :
 -* mais mon lapin est:
 -** blanc;
 -*** angora; 
--*** ou à poil ras.
+-*** ou Ã  poil ras.
 
 
-Exemple de liste numérotée : 
+Exemple de liste numÃ©rotÃ©e : 
 
 -# premier
 -# deuxieme
 -# troisieme
 
-Exemple de retour à la ligne_ 
-Exemple de retour à la ligne_ 
+Exemple de retour Ã  la ligne_ 
+Exemple de retour Ã  la ligne_ 
 
 Exemple de code informatique :
 
@@ -139,7 +139,7 @@ Exemple de code informatique :
 
 Exemple de lien vers un glossaire externe :
 
-{À la recherche du temps perdu} est l'œuvre majeure de [?Marcel Proust]
+{Ã€ la recherche du temps perdu} est l'Âœuvre majeure de [?Marcel Proust]
 
 
 {{{Titre paragraphe 1}}}

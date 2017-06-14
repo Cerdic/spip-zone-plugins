@@ -18,4 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Fügen Sie den Tag <code>#ARTICLE_PDF</code> in Ihr Skelett ein um über einen Link zum Herunterladen des Artikels im PDF Format zu verfügen',
 	'article_pdf_nom' => 'PDF Artikel',
 );
-?>

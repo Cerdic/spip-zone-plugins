@@ -2,7 +2,7 @@
 /**
  * class PDF extends FPDF : FPDF/tutoriel/tuto6.htm
  * 
- * Février-Août 2003 : Jérôme Fenal (jerome.fenal@logicacmg.com)
+ * FÃ©vrier-AoÃ»t 2003 : JÃ©rÃ´me Fenal (jerome.fenal@logicacmg.com)
  * Ajout de la prise en compte des tableaux, tag <code>, et diverses autres choses de SPIP
  */ 
 
@@ -14,9 +14,9 @@ class PDF extends FPDF
 var $HREF;
 var $texteAddSpace;
 var $SRC;
-var $columnProp=array();		# propriétés de la ligne
-var $lineProp=array();		# propriétés de la ligne
-var $inFirstRow;		# flag si première ligne en cours
+var $columnProp=array();		# propriÃ©tÃ©s de la ligne
+var $lineProp=array();		# propriÃ©tÃ©s de la ligne
+var $inFirstRow;		# flag si premiÃ¨re ligne en cours
 var $TableX;			# abscisse du tableau
 var $HeaderColor;
 var $RowColors;
@@ -28,20 +28,20 @@ var $BlocTags=array();
 
 var $ProcessingTable=false;	# =1 : en cours lecture table
 var $ProcessingCadre=false;	# =1 : en cours lecture contenu d'un cadre SPIP (TEXTAREA HTML)
-var $tableCurrentCol;	# numéro de cellule courante
+var $tableCurrentCol;	# numÃ©ro de cellule courante
 var $tableCurrentRow;	# Numero de ligne courante pendant la lecture d'un tableau
-var $tableContent=array();		# Contenu de la table courante pendant son absorption. Non réentrant car SPIP ne permet pas de faire
+var $tableContent=array();		# Contenu de la table courante pendant son absorption. Non rÃ©entrant car SPIP ne permet pas de faire
 						# de table dans une autre table.
-var $listDepth=0;		# profondeur courante de liste à puce
-var $listParm = array();	# paramètres des listes à puces en fonction du niveau
+var $listDepth=0;		# profondeur courante de liste Ã  puce
+var $listParm = array();	# paramÃ¨tres des listes Ã  puces en fonction du niveau
 
 var $TopLinkIDArray = array(); #Sauve les IDs des liens internes (notes dans le texte)
-var $TopLinkIDArrayIt = 0; #Itérateur dans le tableau des IDs des liens internes
+var $TopLinkIDArrayIt = 0; #ItÃ©rateur dans le tableau des IDs des liens internes
 
 var $BottomLinkIDArray = array(); #Sauve les IDs des liens internes (notes en fin de document)
-var $BottomLinkIDArrayIt = 0; #Itérateur dans le tableau des IDs des liens internes
+var $BottomLinkIDArrayIt = 0; #ItÃ©rateur dans le tableau des IDs des liens internes
 
-var $FirstIteration = TRUE;  # booleen pour la génération des liens
+var $FirstIteration = TRUE;  # booleen pour la gÃ©nÃ©ration des liens
 var $CurrentTag=array();
 
 
@@ -92,16 +92,16 @@ function unhtmlentities($string)
 function WriteHTML($html,$LineFeedHeight)
 {
 	$this->texteAddSpace=false;
-	//Parseur HTML, enlevé pour une meilleure récupération des tag.
-	//Il faut détecter les vraies balises "<" HTML et pas les < de texte "&lt;" HTML 
-	//Parseur remis + loin pour l'édition du texte
+	//Parseur HTML, enlevÃ© pour une meilleure rÃ©cupÃ©ration des tag.
+	//Il faut dÃ©tecter les vraies balises "<" HTML et pas les < de texte "&lt;" HTML 
+	//Parseur remis + loin pour l'Ã©dition du texte
 	//$html=$this->unhtmlentities($html);
 	
 	$a=preg_split(',(<[/a-zA-Z].*>),Ums', $html, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 	// $a = le tableau de tags
-	// $i = index de l'élément courant
-	// $e = valeur de l'élément courant
+	// $i = index de l'Ã©lÃ©ment courant
+	// $e = valeur de l'Ã©lÃ©ment courant
 	foreach($a as $i=>$e) 
   {
 		//Balise 
@@ -134,7 +134,7 @@ function WriteHTML($html,$LineFeedHeight)
 			if(strlen($e)){
 				$e = $this->texteAddSpace?" $e":$e;
 				$this->texteAddSpace = $next_add_space;
-				# Attention, ce mécanisme ne permet pas de traiter les liens dans les tableaux...
+				# Attention, ce mÃ©canisme ne permet pas de traiter les liens dans les tableaux...
 				# ni les tableaux dans les tableaux, d'ailleurs...
 				if (($this->ProcessingBloc))
 					$this->BlocContent[$this->ProcessingBloc-1] .= $e;
@@ -152,7 +152,7 @@ function WriteHTML($html,$LineFeedHeight)
 						}
 						else
 						{
-							// C'est une note (référence dans le texte)
+							// C'est une note (rÃ©fÃ©rence dans le texte)
 							if ( strstr($Link,"#nb") )
 							{
 								if ($this->FirstIteration)
@@ -160,19 +160,19 @@ function WriteHTML($html,$LineFeedHeight)
 									$LinkID=$this->AddLink();
 									$this->SetLink($LinkID,-1,-1);
 									$this->TopLinkIDArray[]=$LinkID;
-									$this->PutLink($Link,$Text);  // Lien bidon (première itération)
+									$this->PutLink($Link,$Text);  // Lien bidon (premiÃ¨re itÃ©ration)
 								}
 								else
 								{
 									$LinkID=$this->BottomLinkIDArray[$this->BottomLinkIDArrayIt++];
-									$this->PutLink($LinkID,$Text);   // Bon lien  (deuxième itération)
+									$this->PutLink($LinkID,$Text);   // Bon lien  (deuxiÃ¨me itÃ©ration)
 								}
 							}
-							// C'est une note (détail de bas de texte)
+							// C'est une note (dÃ©tail de bas de texte)
 							else if ( strstr($Link,"#nh") )
 							{
 							
-								// C'est le lien "#nh1" (le premier) : on met un trait séparateur
+								// C'est le lien "#nh1" (le premier) : on met un trait sÃ©parateur
 								if ( strlen($Link)==4 && $Link[3]=="1" )
 								{
 									$this->SetLineWidth(0.3);
@@ -184,12 +184,12 @@ function WriteHTML($html,$LineFeedHeight)
 									$LinkID=$this->AddLink();
 									$this->SetLink($LinkID,-1,-1);
 									$this->BottomLinkIDArray[]=$LinkID;
-									$this->PutLink($Link,$Text);  // Lien bidon (première itération)
+									$this->PutLink($Link,$Text);  // Lien bidon (premiÃ¨re itÃ©ration)
 								}
 								else
 								{
 									$LinkID=$this->TopLinkIDArray[$this->TopLinkIDArrayIt++];
-									$this->PutLink($LinkID,$Text);		// Bon lien  (deuxième itération)
+									$this->PutLink($LinkID,$Text);		// Bon lien  (deuxiÃ¨me itÃ©ration)
 								}
 								
 							}
@@ -197,7 +197,7 @@ function WriteHTML($html,$LineFeedHeight)
 							else
 							{
 								$WebSiteURL=entites_html(lire_meta("adresse_site"));
-								// Bug d'interprétation du point d'interrogation remplacé par 3 points. Correctif ici
+								// Bug d'interprÃ©tation du point d'interrogation remplacÃ© par 3 points. Correctif ici
 								$Link=str_replace("...","?",$Link);
 								
 								$this->PutLink($WebSiteURL . "/" . $Link, $Text);
@@ -315,7 +315,7 @@ function OpenTag($tag,$e,$LineFeedHeight)
 		$this->SetLeftMargin($this->lMargin+7);
 		$this->listDepth++;
 		$this->listParm[$this->listDepth]['type']=$tag;
-		$this->listParm[$this->listDepth]['curr']=0;		# numéro si OL
+		$this->listParm[$this->listDepth]['curr']=0;		# numÃ©ro si OL
 	}
 
 	if($tag=='LI'){ 
@@ -344,7 +344,7 @@ function OpenTag($tag,$e,$LineFeedHeight)
 		}
 		else
 		{
-			$size=getimagesize($this->SRC);		# Attention, utilisation de GD !!! FPDF ne sait pas lire les images à moitié... et je n'ai pas envie de surcharger la méthode Image...
+			$size=getimagesize($this->SRC);		# Attention, utilisation de GD !!! FPDF ne sait pas lire les images Ã  moitiÃ©... et je n'ai pas envie de surcharger la mÃ©thode Image...
 			if ($size[0] < 30 && $size[1] < 30) {
 				# pixel / 3 pour avoir des cm. Petite cuisine...
 				$imgX=$size[0]/3;
@@ -356,7 +356,7 @@ function OpenTag($tag,$e,$LineFeedHeight)
 				$this->SetX($this->GetX()+$size[0]/2);
 			} else if ($size[0] < 600 && $size[1] < 600) {
 				$pwidth=$this->w-$this->lMargin-$this->rMargin;
-				$ratio = 0.24;	# ce qui fait environ 600 pixels sur 16cm d'espace utile (160/600) - 2 pouillièmes
+				$ratio = 0.24;	# ce qui fait environ 600 pixels sur 16cm d'espace utile (160/600) - 2 pouilliÃ¨mes
 				$imgX=$size[0]*$ratio;
 				$imgY=$size[1]*$ratio;
 				if ($this->GetY() + $imgY > $this->h - $this->bMargin) {
@@ -370,12 +370,12 @@ function OpenTag($tag,$e,$LineFeedHeight)
 				$this->Image($this->SRC, $this->GetX()+($pwidth-$imgX)/2, $this->GetY(), $imgX, $imgY,'',$this->HREF);
 				$this->SetY($this->GetY()+$imgY);
 			} else {
-				// les deux dimensions sont supérieurs à 600 pixels
+				// les deux dimensions sont supÃ©rieurs Ã  600 pixels
 				$pwidth=$this->w-$this->lMargin-$this->rMargin;
 				$ratioX = $pwidth / $size[0];
 				$plen=$this->h-$this->GetY()-$this->bMargin-20;		// on retire 20mm pour placer le cartouche de l'image
 				$ratioY = $plen / $size[1];
-				$ratio = 0.24;	# ce qui fait environ 600 pixels sur 16cm d'espace utile (160/600) - 2 pouillièmes
+				$ratio = 0.24;	# ce qui fait environ 600 pixels sur 16cm d'espace utile (160/600) - 2 pouilliÃ¨mes
 				$imgX=$size[0]*$ratio;
 				$imgY=$size[1]*$ratio;
 
@@ -545,7 +545,7 @@ function CloseTag($tag,$LineFeedHeight)
 		$this->ProcessingBloc--;
 	}
 	if($tag=='TR') {
-		$this->inFirstRow=0;	# on a fini une ligne donc la première aussi
+		$this->inFirstRow=0;	# on a fini une ligne donc la premiÃ¨re aussi
 	}
 	if($tag=='TABLE') {
 		$this->TableShow('C',$LineFeedHeight);
@@ -587,7 +587,7 @@ function SetStyle($tag,$enable,$size=0)
 	}
 }
 
-// $Link peut être un entier (ID de lien interne)  ou une chaîne (URL)
+// $Link peut Ãªtre un entier (ID de lien interne)  ou une chaÃ®ne (URL)
 function PutLink($Link,$Text)
 {
 	//Place un hyperlien
@@ -604,10 +604,10 @@ function Header()
 }
 
 /*
-Pas utilisé pour l'instant
+Pas utilisÃ© pour l'instant
 function Header()
 {
-    //Imprime l'en-tête du tableau si nécessaire
+    //Imprime l'en-tÃªte du tableau si nÃ©cessaire
     if($this->ProcessingTable)
         $this->TableHeader();
 }
@@ -691,13 +691,13 @@ function TableShow($align,$LineFeedHeight)
 	$oldFontFamily=$this->FontFamily;
 
 	$tableFontFamily='helvetica';
-	$cellmargin=3.0;		// pifomètre : un peu de marge sur la largeur de cellule
+	$cellmargin=3.0;		// pifomÃ¨tre : un peu de marge sur la largeur de cellule
 	$wrwi=$this->w - $this->lMargin - $this->rMargin;
 	//-----------
 	$tableFontSize=10;
 	$TableWidth = 1.01*$wrwi;
 	$max_width=0;
-	$min_font_size=6.0; // mis à 6, 5 était vraiment petit
+	$min_font_size=6.0; // mis Ã  6, 5 Ã©tait vraiment petit
 	$maxiter = 10;
 	do {
 		$tableFontSize = $tableFontSize *min(1.0,$wrwi/$TableWidth)*0.99; // 0.99 pour converger plus vite
@@ -709,7 +709,7 @@ function TableShow($align,$LineFeedHeight)
 		$tableFontSize = max($min_font_size,$tableFontSize);
 		// on boucle sur la taille de police tant que la largeur du tableau ne rentre pas dans la page
 		
-		// remise à zéro des largeurs de colonnes
+		// remise Ã  zÃ©ro des largeurs de colonnes
 		foreach ($this->columnProp as $i=>$cprop)
 			if ($fixed_width)	$this->columnProp[$i]['w']=$this->columnProp[$i]['w']*$coeff;// redimenssioner la largeur de la colonne
 			else	$this->columnProp[$i]['w']=0.0;
@@ -717,7 +717,7 @@ function TableShow($align,$LineFeedHeight)
 			$this->lineProp[$j]['h']=0.0;
 		
 		// on passe toutes les cellules du tableau en revue
-		// de façon à calculer la largeur max de chaque colonne pour la taille de police courante
+		// de faÃ§on Ã  calculer la largeur max de chaque colonne pour la taille de police courante
 		foreach($this->tableContent as $j=>$row) {
 			foreach($row as $i=>$cell) {
 				$htmlContent = $cell['content']."<br />";
@@ -797,7 +797,7 @@ function InitDumpFile()
 }
 
 
-// trace une chaîne dans un fichier 
+// trace une chaÃ®ne dans un fichier 
 function Dump($String)
 {
 	if ($f = @fopen(DUMP_FILE_FULL_PATH_NAME,"a"))
@@ -824,5 +824,3 @@ function DumpArray($String,$Array)
 }
 
 }	// class PDF extends FPDF
-
-?>

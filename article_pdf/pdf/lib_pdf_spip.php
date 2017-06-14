@@ -35,7 +35,7 @@ function Header()
 
 	$this->Cell(0,$this->tMargin/2, $titre ,0,0,'C');
 	
-	// $this->tMargin = marge du haut, définie dans FPDF
+	// $this->tMargin = marge du haut, dÃ©finie dans FPDF
 	$this->Ln(9);
 }
 
@@ -58,7 +58,7 @@ function Footer()
 	// Copyright
 	$this->Cell(0,6,texte_script(pdf_first_clean(_T('articlepdf:copyright'))).$conf_nom_site ,0,0,'L',0,$conf_url_site );
 	
-	//Numéro de page
+	//NumÃ©ro de page
 	$this->SetX($this->w-$this->rMargin*2-5);
 	$this ->Cell(0,6,'Page '.$this->PageNo().'/{nb}', 0, 1, 'C');
 }
@@ -72,7 +72,7 @@ function GenerateTitlePage()
 	global $DateParution,$DateMiseEnLigne;
 	
 	
-	// En-tête
+	// En-tÃªte
 	if (file_exists($logo_site))
 	{
 		$this->Image($logo_site,$this->rMargin+3,$this->tMargin+2,20,20);
@@ -93,7 +93,7 @@ function GenerateTitlePage()
 	$this->MultiCell(170,6,$surtitre,0,'C',0);
 	
 	
-	//Titre centré
+	//Titre centrÃ©
 	$this->SetXY(20,100);
 	$this->SetFont('helvetica','B',32);
 	$this->unhtmlentities($titre);
@@ -197,7 +197,7 @@ function BuildDocument()
 	$this->AddPage();
 	$this->GenerateText();
 	
-	// On repasse en police à la bonne taille pour le nombre de pages.
+	// On repasse en police Ã  la bonne taille pour le nombre de pages.
 	$this->SetFont('helvetica','I',8);
 	$this->AliasNbPages();
 }
@@ -210,5 +210,3 @@ function SetCopyright($copyright)
 
 //
 }
-
-?>
