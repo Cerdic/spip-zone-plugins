@@ -173,3 +173,26 @@ function oembed_traiter_ressource($rac) {
 	}
 	return $texte;
 }
+
+/**
+ * Securiser la vignette utilisee pour les videos oembed en mode async :
+ * si c'est une image locale il faut
+ * - en faire une copie dans local/ via image_reduire pour le cas ou acces_retreint
+ * - appliquer url_absolue dessus car si on est sur une page avec url arbo le <base> ne s'appliquera pas dans le style inline
+ * @param string $img
+ * @return string
+ */
+function oembed_safe_thumbnail($img) {
+
+	if (!tester_url_absolue($img) and file_exists($img)) {
+		if (!function_exists('image_filtrer')) {
+			include_spip('inc/filtres');
+		}
+		$img = image_filtrer(array('image_reduire', $img, 1200, 1200));
+		$img = image_filtrer(array('image_graver', $img));
+		$img = extraire_attribut($img, 'src');
+		$img = url_absolue($img);
+	}
+
+	return $img;
+}
