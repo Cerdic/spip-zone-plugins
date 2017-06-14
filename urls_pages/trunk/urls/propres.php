@@ -44,11 +44,12 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 function urls_propres($i, $entite, $args = '', $ancre = '') {
 
 	// 1) Gestion des pages (voir @note)
-	if (is_string($i)
+	if (is_string($i) // c'est une URL et pas un id
 		and strlen($i)
 		and strpos($i, '/') === false // ce n'est pas une URL arborescente
 		and !$entite // ce n'est pas l'URL d'un objet
-		and $ligne = sql_fetsel('page, url', 'spip_urls', array('url = ' . sql_quote($i), 'page != \'\''))
+		and $url = strtok($i, '?') // retirer les query strings
+		and $ligne = sql_fetsel('page, url', 'spip_urls', array('url = ' . sql_quote($url), 'page != \'\''))
 	) {
 		$fond = $page = $ligne['page'];
 		// récupérer le contexte
