@@ -9,7 +9,6 @@ define('_CACHE_AJAX_NOISETTES', _DIR_CACHE . 'noisettes_ajax.php');
 define('_CACHE_CONTEXTE_NOISETTES', _DIR_CACHE . 'noisettes_contextes.php');
 define('_CACHE_DESCRIPTIONS_NOISETTES', _DIR_CACHE . 'noisettes_descriptions.php');
 define('_CACHE_INCLUSIONS_NOISETTES', _DIR_CACHE . 'noisettes_inclusions.php');
-define('_CACHE_MD5_PAGES', _DIR_CACHE . 'noisettes_pages_md5.php');
 
 
 // -------------------------------------------------------------------
