@@ -70,7 +70,14 @@ function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto',
 function formulaires_uploadhtml5_traiter_dist($objet, $id_objet, $mode = 'auto', $ajaxReload = '', $args = array()) {
 
     if (isset($args['logo']) and $args['logo'] == 'oui') {
-        uploadhtml5_uploader_logo($objet, $id_objet, $_FILES['file_logo']['tmp_name']);
+		// si on a les plugin logo_svg et que l'on est en presence d'un fichier svg
+		if (test_plugin_actif(logo_svg) and preg_match('/\.svg$/', $_FILES['file_logo']['name'])) {
+			include_spip("action/editer_logo");
+			include_spip("formulaires/editer_logo");
+			logo_modifier_svg($objet, $id_objet, 'on', $_FILES['file_logo']);
+		} else {
+			uploadhtml5_uploader_logo($objet, $id_objet, $_FILES['file_logo']['tmp_name']);
+		}
     } else {
         uploadhtml5_uploader_document($objet, $id_objet, $_FILES, 'new', $mode);
     }
