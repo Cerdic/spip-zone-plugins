@@ -85,7 +85,7 @@ function GenerateTitlePage()
 	
 	$this->SetFont('times','',12);
 	$this->SetXY($this->rMargin+25,$this->tMargin+6);
-	$this->MultiCell(0,5, texte_script(pdf_first_clean(_T('articlepdf:extrait_de'))) . $site);
+	//$this->MultiCell(0,5, texte_script(pdf_first_clean(_T('articlepdf:extrait_de'))) . $site);
 	
 	$this->SetXY($this->rMargin+25,$this->tMargin+14);
 	$this->PutLink($conf_url_site,$conf_url_site);
@@ -112,16 +112,13 @@ function GenerateTitlePage()
 	
 	// Logo
 
-	if ($logo_fichier!="") {
-	$x = $this->GetX();
-	$y = $this->GetY();
+	if (isset($logo_fichier)) {
+		$x = $this->GetX();
+		$y = $this->GetY();
 		$this->SetLink($link);
-//		$this->Image($logo_fichier,50,170,'','','','','0');
-//		$this->Image($logo_fichier,50-($w/2),170,50,50,'','','0');
-		$this->Image($logo_fichier,50-($w/2),170,'','','',$logo_lien,'0');
+		$this->Image($logo_fichier,30,170,50,'','',$logo_lien,'0');
 		$this->SetXY($xi, $yi);
-    	}
-
+    }
 
 	//Dates
 	$this->SetFont('times','',10);
@@ -142,6 +139,7 @@ function GenerateTitlePage()
 	
 
 	// Descriptif 	
+	/*
 	if ($descriptif)
 	{
 		
@@ -153,6 +151,7 @@ function GenerateTitlePage()
 		$this->SetFont('times', '', 8);
 		$this->WriteHTML($descriptif,5) ;
 	}
+	*/
 	
 	if ($this->copyright)
 	{
