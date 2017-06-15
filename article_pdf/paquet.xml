@@ -6,7 +6,7 @@
 	compatibilite="[2.0.0;3.1.*]"
 	logo="prive/themes/spip/images/article_pdf-64.png"
 	documentation="https://contrib.spip.net/Article-PDF,2226"
->	
+>
 
 	<nom>Article PDF</nom>
 	<!-- Convertir l'article affiché au format pdf -->
