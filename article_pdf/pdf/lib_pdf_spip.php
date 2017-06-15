@@ -73,9 +73,14 @@ function GenerateTitlePage()
 	
 	
 	// En-tête
-	if (file_exists($logo_site))
+	if (isset($logo_site))
 	{
-		$this->Image($logo_site,$this->rMargin+3,$this->tMargin+2,20,20);
+		//Logo du site centré
+		$w = $this->w;
+		$largeur = 60;
+		$position_x = ($w/2)-($largeur/2);
+		$position_y = 50;
+		$this->Image($logo_site, $position_x, $position_y, $largeur);
 	}
 	
 	$this->SetFont('times','',12);
