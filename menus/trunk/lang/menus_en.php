@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_lien' => 'Adds an individually specified link, either an internal one (relative URL), or an external one (http://...).',
 	'description_menu_mapage' => 'If visitors are connected, add a link to their author page.',
 	'description_menu_mots' => 'Automatically shows a menu listing the articles linked to a keyword.',
-	'description_menu_objet' => 'Creates a link to s SPIP object: article, section or other. By default, the entry will bear the the title of the object.',
+	'description_menu_objet' => 'Creates a link to s SPIP object: article, section or other. By default, the entry will bear the the title of the object.', # MODIF
 	'description_menu_page_speciale' => 'Adds a link to a page template using a URL of the form <code>spip.php?page=name&param1=xx&param2=yyy...</code> Such pages are often used by plugins.',
 	'description_menu_page_speciale_zajax' => 'Add a link to a block in a page accessible by a URL of the type <code>spip.php?page=name&param1=xx&param2=yyy...</code> This requires a Z type template and the <a href="http://contrib.spip.net/MediaBox">médiabox</a> plugin.', # MODIF
 	'description_menu_rubriques_articles' => 'Display a list of sections, optionally including sub-sections and articles nested to several levels. By default, all sections will be displayed starting from the site root and sorted by title (numerically then alphabetically).Articles in a given section will always be listed after any sub-sections.',

@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_lien' => 'Aggiunge un link arbitrario, interno (URL relativo) o esterno (http://...).',
 	'description_menu_mapage' => 'Se il visitatore è connesso, aggiunge un link verso la sua pagina autore.',
 	'description_menu_mots' => 'Mostra automaticamente un menù che elenca gli articoli collegati alla parola chiave.',
-	'description_menu_objet' => 'Crea un link verso un oggetto di SPIP: articolo, rubrica o altro. In maniera predefinita, il link avrà il titolo dell’oggetto.',
+	'description_menu_objet' => 'Crea un link verso un oggetto di SPIP: articolo, rubrica o altro. In maniera predefinita, il link avrà il titolo dell’oggetto.', # MODIF
 	'description_menu_page_speciale' => 'Aggiunge un link verso un modello accessibile con un url del tipo <code>spip.php?page=nome&param1=xx&param2=yyy...</code> Queste pagina sono spesso fornite dai plugin.',
 	'description_menu_secteurlangue' => 'Questa voce è specifica per i siti che utilizzano un settore per lingua. Mostra automaticamente un menù che elenca le rubriche del settore corrispondente alla lingua della pagina e, se si vuole, le sotto rubriche su più livelli. Normalmente, mostra tutte le rubriche dalla radice, ordinate per titolo (numericamente e poi alfabeticamente).',
 

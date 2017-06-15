@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_lien' => 'Fügt eine beliebigen Link hinzu, der entweder intern (rekative URL)oder extern (http://...) sein kann.',
 	'description_menu_mapage' => 'Wenn der Besucher angemeldet ist, füge einen Link zu seiner persönlichen Seite hinzu.',
 	'description_menu_mots' => 'Zeigt automatisch ein Menü, das die Artikel zum Schlagwort anzeigt.',
-	'description_menu_objet' => 'Link zu einem SPIP-Objekt anlegen: Artikel, Rubrik, usw. In der Grundeinstellung trägt der Eintrag den Namen des Objekts.',
+	'description_menu_objet' => 'Link zu einem SPIP-Objekt anlegen: Artikel, Rubrik, usw. In der Grundeinstellung trägt der Eintrag den Namen des Objekts.', # MODIF
 	'description_menu_page_speciale' => 'Fügt einen URL zu einer Skelettseite im Format  <code>spip.php?page=nom&param1=xx&param2=yyy...</code> hinzu. Diese Skelette werden von Plugins bereitgestellt',
 	'description_menu_page_speciale_zajax' => 'Fügt einen Link zu einem Block auf einer Seite hinzu, die über einen URL mit der Syntax <code>spip.php?page=nom¶m1=xx¶m2=yyy...</code> erreichbar ist. Dazu sind ein Skelett des Typs Z und das Plugin <a href="http://contrib.spip.net/MediaBox">médiabox</a> Voraussetzung.', # MODIF
 	'description_menu_rubriques_articles' => 'Zeigt einen Liste der Rubriken und auf Wunsch der Unterrubriken und Artikel als Hierarchie an. In der Grundeinstellung werden alle Rubriken von der obersten Ebene an dargestellt. Sie werden nach Titeln (zuerst numerisch und dann alphabetisch) sortiert. Artikel werden immer hinter den Rubriken angezeigt.',

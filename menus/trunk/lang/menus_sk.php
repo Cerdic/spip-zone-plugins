@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_lien' => 'Pridá samostatne zadaný odkaz, a to buď interný (relatívna adresa), alebo externý(http://...).',
 	'description_menu_mapage' => 'Ak je návštevník prihlásený, pridá odkaz na jeho autorskú stránku.',
 	'description_menu_mots' => 'Automaticky zobrazí menu so zoznamom článkov prepojených s kľúčovým slovom.',
-	'description_menu_objet' => 'Vytvorí odkaz na objekt SPIPu: článok, rubriku alebo iný. Podľa predvolených nastavení bude niesť názov objektu.',
+	'description_menu_objet' => 'Vytvorí odkaz na objekt SPIPu: článok, rubriku alebo iný. Podľa predvolených nastavení bude niesť názov objektu.', # MODIF
 	'description_menu_page_speciale' => 'Pridá odkaz na stránku šablóny pomocou adresy formulára <code>spip.php?page=name&param1=xx&param2=yyy...</code> Takéto stránky často využívajú zásuvné moduly.',
 	'description_menu_page_speciale_zajax' => 'Pridať odkaz do bolu na stránke, na ktorú sa dá dostať progredníctvom adresy typu <code>spip.php?page=name&param1=xx&param2=yyy...</code> Na to treba šablónu typu Z a zásuvný modul <a href="http://contrib.spip.net/MediaBox">médiabox.</a>', # MODIF
 	'description_menu_rubriques_articles' => 'Zobrazí zoznam rubrík, v ktorom môžu byť podrubriky a články včlenené do rôznych úrovní. Podľa predvolených nastavení sa zobrazia všetky rubriky počnúc koreňovým adresárom stránky a budú zotriedené podľa názvu (najprv čísla, potom písmená). Články v danej rubrike budú vždy uvedené po jej podrubrikách.',

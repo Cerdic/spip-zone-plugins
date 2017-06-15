@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_lien' => 'Inclui qualquer link, interno (URL relativo) ou externo (http://...).',
 	'description_menu_mapage' => 'Si o visitante esta conectado, inclui um link até sua página pessoal.',
 	'description_menu_mots' => 'Exibi automaticamente um menu listando as matérias vinculadas no palavra-chave.',
-	'description_menu_objet' => 'Crie um link até um objeto de SPIP : matéria, seção ou outro. O valor padrão do nome da entrada é o título do objeto.',
+	'description_menu_objet' => 'Crie um link até um objeto de SPIP : matéria, seção ou outro. O valor padrão do nome da entrada é o título do objeto.', # MODIF
 	'description_menu_page_speciale' => 'Inclui um link até uma  página template acessível através um endereço (URL) do tipo <code>spip.php?page=nom&param1=xx&param2=yyy...</code>. Essas páginas template são entregadas geralmente com cada plugin.',
 	'description_menu_page_speciale_zajax' => 'Inclui um link até um bloco duma página acessível através um endereço (URL) do tipo <code>spip.php?page=nom&param1=xx&param2=yyy...</code>. Precisa dum template de tipo Z e do plugin <a href="http://contrib.spip.net/MediaBox">Mediabox</a>.', # MODIF
 	'description_menu_rubriques_articles' => 'Exibi uma lista de seções, e si você quiser, as subseções e matérias através vários níveis. O valor padrão exibi todas as seções desde a raiz, classificadas por título (numericamente e depois alfabeticamente). As matérias estão armazenadas sistematicamente depois as seções. ',
