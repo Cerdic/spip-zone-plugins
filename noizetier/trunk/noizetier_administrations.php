@@ -80,7 +80,7 @@ function noizetier_upgrade($nom_meta_base_version, $version_cible) {
  */
 function noizetier_vider_tables($nom_meta_version_base) {
 	// On efface les tables du plugin
-	sql_drop_table('spip_noisettes_pages');
+	sql_drop_table('spip_noizetier_pages');
 	sql_drop_table('spip_noisettes');
 
 	// On efface la version enregistrée du schéma des données du plugin
@@ -95,7 +95,6 @@ function noizetier_vider_tables($nom_meta_version_base) {
 	supprimer_fichier(_CACHE_CONTEXTE_NOISETTES);
 	supprimer_fichier(_CACHE_INCLUSIONS_NOISETTES);
 	supprimer_fichier(_CACHE_DESCRIPTIONS_NOISETTES);
-	supprimer_fichier(_CACHE_MD5_PAGES);
 }
 
 /**
@@ -121,16 +120,17 @@ function maj_060($config_defaut) {
 	// Ajout de la tables des pages du noizetier qui contiendra pages et compositions qu'elles soient
 	// explicites ou virtuelles.
 	include_spip('base/create');
-	maj_tables('spip_noisettes_pages');
+	maj_tables('spip_noizetier_pages');
 
 	// Ajout de la colonne 'balise' qui indique pour chaque noisette si le noiZetier doit l'inclure dans un div
 	// englobant ou pas. Le champ prend les valeurs 'on', '' ou 'defaut' qui indique qu'il faut prendre
 	// en compte la valeur configurée par défaut (configuration du noizetier).
-	sql_alter("TABLE spip_noisettes ADD balise VARCHAR(6) DEFAULT 'defaut' NOT NULL AFTER parametres");
+	sql_alter("TABLE spip_noisettes ADD balise varchar(6) DEFAULT 'defaut' NOT NULL AFTER parametres");
+	sql_alter("TABLE spip_noisettes ADD maj timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL");
 	// Mise à jour des tailles des colonnes type, composition et objet pour cohérence
-	sql_alter("TABLE spip_noisettes MODIFY type VARCHAR(127) NOT NULL");
-	sql_alter("TABLE spip_noisettes MODIFY composition VARCHAR(127) NOT NULL");
-	sql_alter("TABLE spip_noisettes MODIFY balise VARCHAR(25) NOT NULL");
+	sql_alter("TABLE spip_noisettes MODIFY type varchar(127) NOT NULL");
+	sql_alter("TABLE spip_noisettes MODIFY composition varchar(127) NOT NULL");
+	sql_alter("TABLE spip_noisettes MODIFY balise varchar(25) NOT NULL");
 
 	// Mise à jour de la configuration du plugin
 	include_spip('inc/config');
@@ -180,7 +180,7 @@ function maj_060($config_defaut) {
 		}
 		// Insertion dans la table spip_noisettes_pages
 		if ($compositions_060) {
-			sql_insertq_multi('spip_noisettes_pages', $compositions_060);
+			sql_insertq_multi('spip_noizetier_pages', $compositions_060);
 		}
 	}
 	// On efface la meta des compositions maintenant que celles-ci sont stockées

@@ -1044,7 +1044,7 @@ function noizetier_page_charger($recharger = false) {
 	$forcer_chargement = $recharger;
 
 	// Initaliser la table et le where des pages non virtuelles qui sont utilisés plusieurs fois.
-	$from ='spip_noisettes_pages';
+	$from ='spip_noizetier_pages';
 	$where = array('est_virtuelle=' . sql_quote('non'));
 
 	// On recherche les pages et les compositions explicites par le fichier HTML en premier

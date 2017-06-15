@@ -21,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function noizetier_declarer_tables_interfaces($interface) {
 	// 'spip_' dans l'index de $tables_principales
 	$interface['table_des_tables']['noisettes'] = 'noisettes';
-	$interface['table_des_tables']['noisettes_pages'] = 'noisettes_pages';
+	$interface['table_des_tables']['noizetier_pages'] = 'noizetier_pages';
 
 	return $interface;
 }
@@ -43,23 +43,24 @@ function noizetier_declarer_tables_interfaces($interface) {
  */
 function noizetier_declarer_tables_principales($tables_principales) {
 
-	// Table spip_noisettes_pages
+	// Table spip_noizetier_pages
 	$pages = array(
-		'page'           => "VARCHAR(255) DEFAULT '' NOT NULL",
-		'type'           => "VARCHAR(127) DEFAULT '' NOT NULL",
-		'composition'    => "VARCHAR(127) DEFAULT '' NOT NULL",
+		'page'           => "varchar(255) DEFAULT '' NOT NULL",
+		'type'           => "varchar(127) DEFAULT '' NOT NULL",
+		'composition'    => "varchar(127) DEFAULT '' NOT NULL",
 		'nom'            => "text DEFAULT '' NOT NULL",
 		'description'    => "text DEFAULT '' NOT NULL",
-		'icon'           => "VARCHAR(255) DEFAULT '' NOT NULL",
+		'icon'           => "varchar(255) DEFAULT '' NOT NULL",
 		'blocs_exclus'   => "text DEFAULT '' NOT NULL",
 		'necessite'      => "text DEFAULT '' NOT NULL",
 		'branche'        => "text DEFAULT '' NOT NULL",
-		'est_page_objet' => "VARCHAR(3) DEFAULT 'oui' NOT NULL",
-		'est_virtuelle'  => "VARCHAR(3) DEFAULT 'non' NOT NULL",
-		'image_exemple'  => "VARCHAR(255) DEFAULT '' NOT NULL",
-		'class'          => "VARCHAR(255) DEFAULT '' NOT NULL",
-		'configuration'  => "VARCHAR(255) DEFAULT '' NOT NULL",
-		'signature'      => "VARCHAR(32) DEFAULT '' NOT NULL",
+		'est_page_objet' => "varchar(3) DEFAULT 'oui' NOT NULL",
+		'est_virtuelle'  => "varchar(3) DEFAULT 'non' NOT NULL",
+		'image_exemple'  => "varchar(255) DEFAULT '' NOT NULL",
+		'class'          => "varchar(255) DEFAULT '' NOT NULL",
+		'configuration'  => "varchar(255) DEFAULT '' NOT NULL",
+		'signature'      => "varchar(32) DEFAULT '' NOT NULL",
+		"maj"			 => "timestamp",
 	);
 
 	$pages_cles = array(
@@ -70,7 +71,7 @@ function noizetier_declarer_tables_principales($tables_principales) {
 		"KEY est_virtuelle"  => "est_virtuelle",
 	);
 
-	$tables_principales['spip_noisettes_pages'] = array(
+	$tables_principales['spip_noizetier_pages'] = array(
 		'field' => &$pages,
 		'key' => &$pages_cles,
 	);

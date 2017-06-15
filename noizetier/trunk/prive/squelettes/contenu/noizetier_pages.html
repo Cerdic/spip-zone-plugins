@@ -5,48 +5,48 @@
 <B_pages>
 <p><:noizetier:editer_noizetier_explication:></p>
 <ul class="liste-items liste-pages noizetier-liste-pages">
-<BOUCLE_pages(DATA) {source table, #NOIZETIER_PAGE_INFOS}{est_page_objet?}{par cle}>
-	<li class="item page[ virtuelle"(#VALEUR{est_virtuelle}|=={oui}|oui)]">
-		<div[ class="composition"(#VALEUR{composition}|oui)]>
+<BOUCLE_pages(NOIZETIER_PAGES) {est_page_objet?}{par type}>
+	<li class="item page[ virtuelle"(#EST_VIRTUELLE|=={oui}|oui)]">
+		<div[ class="composition"(#COMPOSITION|oui)]>
 			[(#REM) Informations de base sur la page ]
 			<div class="resume">
-				<a[ href="(#URL_ECRIRE{noizetier_page}|parametre_url{page, #CLE})"] title="<:noizetier:bulle_configurer_page_noisettes:>">[(#VALEUR{nom}|sinon{#CLE})]</a>
-				<i>[ \((#CLE)\)]</i>
-				[<br />(#VALEUR{description}|ptobr|sinon{&nbsp;})]
+				<a[ href="(#URL_ECRIRE{noizetier_page}|parametre_url{page, #PAGE})"] title="<:noizetier:bulle_configurer_page_noisettes:>">[(#NOM|_T_ou_typo)]</a>
+				<i>[ \((#PAGE)\)]</i>
+				[<br />(#DESCRIPTION|_T_ou_typo|ptobr|sinon{&nbsp;})]
 				[(#REM) Logo de la page ]
 				<div class="icone">
-					[(#VALEUR{icon}|sinon{page-24.png}|noizetier_icone_chemin|image_reduire{24}|extraire_attribut{src}|balise_img)]
+					[(#ICON|noizetier_icone_chemin|image_reduire{24}|extraire_attribut{src}|balise_img)]
 				</div>
 			</div>
 			[(#REM) Actions possibles sur la page ]
 			<div class="edition">
-				[(#AUTORISER{creercomposition, noizetier, '', '', #ARRAY{page, #CLE}})
+				[(#AUTORISER{creercomposition, noizetier, '', '', #ARRAY{page, #PAGE}})
 					[<a href="(#URL_ECRIRE{noizetier_page_edit}
 								|parametre_url{edition, creer}
-								|parametre_url{source, #VALEUR{type}})"
-						title="<:noizetier:bulle_creer_composition{page=#VALEUR{type}}:>">
+								|parametre_url{source, #TYPE})"
+						title="<:noizetier:bulle_creer_composition{page=#TYPE}:>">
 						[<img height="24" width="24" src="(#CHEMIN_IMAGE{composition-add-24.png})" alt="" />]
 					</a>]
 				]
-				[(#AUTORISER{activercomposition, noizetier, '', '', #ARRAY{page, #CLE}})
-					[<a href="(#URL_ACTION_AUTEUR{activer_composition, #CLE, #SELF})"
-						title="<:noizetier:bulle_activer_composition{type=#VALEUR{type}}:>">
+				[(#AUTORISER{activercomposition, noizetier, '', '', #ARRAY{page, #PAGE}})
+					[<a href="(#URL_ACTION_AUTEUR{activer_composition, #PAGE, #SELF})"
+						title="<:noizetier:bulle_activer_composition{type=#TYPE}:>">
 						[<img height="24" width="24" src="(#CHEMIN_IMAGE{composition-set-24.png})" alt="" />]
 					</a>]
 				]
-				[(#AUTORISER{modifiercomposition, noizetier, '', '', #ARRAY{page, #CLE}})
+				[(#AUTORISER{modifiercomposition, noizetier, '', '', #ARRAY{page, #PAGE}})
 					[<a href="(#URL_ECRIRE{noizetier_page_edit}
 								|parametre_url{edition, modifier}
-								|parametre_url{page, #CLE})"
+								|parametre_url{page, #PAGE})"
 						title="<:noizetier:bulle_modifier_composition:>">
 						[<img height="24" width="24" src="(#CHEMIN_IMAGE{edit-24.png})" alt="" />]
 					</a>]
 				]
-				[(#AUTORISER{dupliquercomposition, noizetier, '', '', #ARRAY{page, #CLE}})
+				[(#AUTORISER{dupliquercomposition, noizetier, '', '', #ARRAY{page, #PAGE}})
 					[<a href="(#URL_ECRIRE{noizetier_page_edit}
 								|parametre_url{edition, dupliquer}
-								|parametre_url{source, #CLE})"
-						title="<:noizetier:bulle_dupliquer_composition{page=#CLE}:>">
+								|parametre_url{source, #PAGE})"
+						title="<:noizetier:bulle_dupliquer_composition{page=#PAGE}:>">
 						[<img height="24" width="24" src="(#CHEMIN_IMAGE{composition-copy-24.png})" alt="" />]
 					</a>]
 				]
