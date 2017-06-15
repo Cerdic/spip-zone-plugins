@@ -2,7 +2,7 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
-	'abscisse'          => "Abscissa",
+	'abscisse'          => "Abscissa (m)",
 	'acier_lamine'      => "Rolled steel - Smooth concrete",
 	'amont'				=> "upstream",
 	'arret_calcul'      => "Calculation stopped: Critical elevation reached at abscissa",

@@ -210,7 +210,7 @@ abstract class formulaire {
 
 		//On récupère les données
 		foreach($tChOblig as $champ) {
-			if (_request($champ)){
+			if (_request($champ)!==false){
 				$data[$champ] = _request($champ);
 			} else {
 				$data[$champ] = 999.;

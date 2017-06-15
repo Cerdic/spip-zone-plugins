@@ -360,7 +360,7 @@ class form_courbe_remous extends form_section {
 			$echo.='<table class="spip">
 				<thead>
 					<tr class="row_first">
-						<th scope="col" colspan="1" rowspan="2">'._T('hydraulic:abscisse').' (m)</th>
+						<th scope="col" colspan="1" rowspan="2">'._T('hydraulic:abscisse').'</th>
 						<th scope="col" colspan="2" rowspan="1">'._T('hydraulic:ligne_eau_fluviale').'</th>
 						<th scope="col" colspan="2" rowspan="1">'._T('hydraulic:ligne_eau_torrentielle').'</th>
 					</tr>
