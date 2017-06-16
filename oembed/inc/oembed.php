@@ -298,7 +298,7 @@ function oembed_detecter_lien($url) {
 	}
 
 	// detecter certains providers specifiques : ex mastodon, chaque instance a son nom et on peut pas l'identifier par son URL
-	if (strpos($html, '//github.com/tootsuite/mastodon') !== false) {
+	if (strpos($html, '//github.com/tootsuite/mastodon') !== false or strpos($html, '//joinmastodon.org') !== false) {
 		$res['provider_name'] = 'Mastodon';
 	}
 
