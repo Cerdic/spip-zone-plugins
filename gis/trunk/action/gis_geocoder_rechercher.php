@@ -31,7 +31,8 @@ function action_gis_geocoder_rechercher_dist() {
 		header('Content-Type: application/json; charset=UTF-8');
 		if ($geocoder == 'photon') {
 			if (isset($arguments['accept-language'])) {
-				$arguments['lang'] = $arguments['accept-language'];
+				// ne garder que les deux premiers caractères du code de langue, car les variantes spipiennes comme fr_fem posent problème
+				$arguments['lang'] = substr($arguments['accept-language'], 0, 2);
 				unset($arguments['accept-language']);
 			}
 			if ($mode == 'search') {
