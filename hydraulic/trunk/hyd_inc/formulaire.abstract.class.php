@@ -210,6 +210,7 @@ abstract class formulaire {
 
 		//On récupère les données
 		foreach($tChOblig as $champ) {
+			if(self::DBG) spip_log( $champ.'=>'._request($champ),'hydraulic',_LOG_DEBUG);
 			if (_request($champ)!==false){
 				$data[$champ] = _request($champ);
 			} else {
@@ -224,6 +225,7 @@ abstract class formulaire {
 		foreach($tChCalc as $cle){
 			$choix_radio[$cle] = _request('choix_champs_'.$cle);
 		}
+		if(self::DBG) spip_log($choix_radio,'hydraulic',_LOG_DEBUG);
 
 		$data['min'] = 0;
 		$data['max'] = 0;
@@ -263,17 +265,24 @@ abstract class formulaire {
 		$this->charge_data();
 		$tCtrl = array();
 		$tData = array();
+		$sValCal = (isset($this->data['ValCal']))?$this->data['ValCal']:false;
 
 		foreach($this->saisies as $fs) {
 			foreach($fs[1] as $cle=>$val) {
-				$tData[$cle] = (isset($this->data[$cle]))?$this->data[$cle]:999;
-				$tCtrl[$cle] = $val[2];
+				if($cle != $sValCal) {
+					if(isset($this->data[$cle])) {
+						$tData[$cle] = $this->data[$cle];
+					}
+					$tCtrl[$cle] = $val[2];
+				}
 			}
 		}
 		// Vérifications des données
 		$erreurs = array();
 		foreach($tCtrl as $Cle=>$Ctrl) {
-			$tData[$Cle] = trim(str_replace(',','.',$tData[$Cle]));
+			if(isset($tData[$Cle])) {
+				$tData[$Cle] = trim(str_replace(',','.',$tData[$Cle]));
+			}
 			if(strpos($Ctrl,'o')!==false & (!isset($tData[$Cle]) | $tData[$Cle]=="")) {
 				// Champ obligatoire
 				$erreurs[$Cle] = _T('hydraulic:erreur_obligatoire');
