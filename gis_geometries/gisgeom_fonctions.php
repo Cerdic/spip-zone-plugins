@@ -154,7 +154,7 @@ function zoner_geometrie($geometrie, $type = 'wkt', $distance = 0.05, $tolerance
 	$select = 'ST_AsText(' . $select . ')';
 	$zone = sql_getfetsel($select);
 
-	// Simplifié le tracé de la zone, le récupérer au format d’entrée
+	// Simplifier le tracé de la zone, le récupérer au format d’entrée
 	$zone = simplifier_geometrie($zone, 'wkt', $tolerance, $type);
 	return $zone;
 }
