@@ -1,0 +1,23 @@
+#BOITE_OUVRIR{'', info}
+<div class="infos">
+	<div class="numero">
+		<:noizetier:label_identifiant:>
+		<p id="identifiant">[(#ENV{page}|sinon{#ENV{id_objet}})]</p>
+	</div>
+
+	[<p class="explication">(#ENV{explication}|_T{#ARRAY{type, #ENV{type}}})</p>]
+
+	[(#ENV{page}|oui)
+		[(#AUTORISER{activercomposition, noizetier, '', '', #ARRAY{page, #ENV{type}}})
+			[(#URL_ACTION_AUTEUR{activer_composition, #ENV{type}, #SELF}
+				|icone_horizontale{<:noizetier:activer_composition:>, composition-set-24, '', #LANG_LEFT ajax})]
+		]
+		[(#ENV{est_virtuelle}|=={oui}|oui)
+			[(#URL_ACTION_AUTEUR{supprimer_composition, #ENV{page}, #URL_ECRIRE{noizetier_pages}|parametre_url{est_page_objet, #ENV{est_page_objet}}}
+				|icone_horizontale{<:noizetier:formulaire_supprimer_page:>, composition, del, #LANG_LEFT})]
+		]
+	]
+	[(#URL_ACTION_AUTEUR{supprimer_noisettes, [(#ENV{page}|?{page:#ENV{page}, objet:#ENV{id_objet}:#ENV{type}})], #SELF}
+		|icone_horizontale{<:noizetier:formulaire_supprimer_noisettes_page:>, noizetier-24, del, #LANG_LEFT})]
+</div>
+#BOITE_FERMER

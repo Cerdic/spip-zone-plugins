@@ -1312,6 +1312,17 @@ function noizetier_page_phraser($page, $options = array()) {
 	return $description;
 }
 
+function noizetier_page_lister_blocs($page) {
+
+	$blocs = noizetier_bloc_defaut();
+	$where = array('page=' . sql_quote($page));
+	if ($blocs_exclus = sql_getfetsel('blocs_exclus', 'spip_noizetier_pages', $where)) {
+		$blocs = array_diff($blocs, unserialize($blocs_exclus));
+		sort($blocs);
+	}
+
+	return $blocs;
+}
 
 /**
  * Retourne la liste des pages, des compositions explicites et des compositions virtuelles.

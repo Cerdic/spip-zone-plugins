@@ -1,7 +1,7 @@
 [(#REM) <!-- Navigation dans les blocs configurables de la page --> ]
 
 [(#ENV{page}|?{
-	#SET{blocs, #NOIZETIER_PAGE_INFOS{#ENV{page}, blocs}},
+	#SET{blocs, #ENV{page}|noizetier_page_lister_blocs},
 	#SET{blocs, #NOIZETIER_OBJET_INFOS{#ENV{objet}, #ENV{id_objet}, blocs}}
 })]
 [(#ENV{bloc}|et{#ENV{bloc}|in_array{#GET{blocs}}}|?{
