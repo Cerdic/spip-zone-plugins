@@ -1,13 +1,13 @@
 <paquet
 	prefix="gisgeom"
 	categorie="divers"
-	version="1.10.4"
+	version="1.11.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/gis.png"
 	schema="1.0.0"
 	documentation="https://contrib.spip.net/4215"
->	
+>
 
 	<nom>GIS Geometries</nom>
 	<!-- Prise en charge de formes géométriques dans GIS -->
