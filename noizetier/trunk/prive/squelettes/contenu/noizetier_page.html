@@ -1,38 +1,35 @@
 [(#AUTORISER{configurerpage, noizetier, '', '', #ENV{page}|?{#ARRAY{page, #ENV{page}}, #ARRAY{objet,#OBJET,id_objet,#ID_OBJET}}}|sinon_interdire_acces)]
 <BOUCLE_page_contenu(CONDITION) {si #ENV{exec}|=={noizetier_page}|et{#ENV{page}|ou{#OBJET|et{#ID_OBJET}}}}>
-[(#ENV{page}|?{
-	#SET{informations, #NOIZETIER_PAGE_INFOS{#ENV{page}}},
-	#SET{informations, #NOIZETIER_OBJET_INFOS{#OBJET, #ID_OBJET}}
-})]
-
-[(#BOITE_OUVRIR{
-	[(#ENV{page}|et{#AUTORISER{modifiercomposition, noizetier, '', '', #ARRAY{page, #ENV{page}}}}|oui)
-		[(#URL_ECRIRE{noizetier_page_edit}
-			|parametre_url{edition, modifier}
-			|parametre_url{page,#ENV{page}}
-			|icone_verticale{<:noizetier:formulaire_modifier_page:>,page,edit,right ajax preload})]
-	]
-
-	<h1>
-		[(#ENV{page}|oui)
-			[(#GET{informations/nom})]
-			[(#GET{informations/icon}|sinon{page-24.png}|noizetier_icone_chemin|balise_img{page,cadre-icone})]
+	<BOUCLE_si_page(NOIZETIER_PAGES) {page}>
+	[(#BOITE_OUVRIR{
+		[(#AUTORISER{modifiercomposition, noizetier, '', '', #ARRAY{page, #PAGE}}|oui)
+			[(#URL_ECRIRE{noizetier_page_edit}
+				|parametre_url{edition, modifier}
+				|parametre_url{page,#PAGE}
+				|icone_verticale{<:noizetier:formulaire_modifier_page:>,page,edit,right ajax preload})]
 		]
-		[(#ENV{page}|non)
-			<a[ href="(#ID_OBJET|generer_url_entite{#OBJET})"]>#GET{informations/titre}</a>
-			[(#GET{informations/logo}|image_reduire{24}|extraire_attribut{src}|balise_img{page,cadre-icone})]
-		]
-	</h1>
-,simple fiche_objet})]
-	<br class="clear" />
-	[(#ENV{page}|oui)
+
+		<h1>
+			[(#NOM|_T_ou_typo)]
+			[(#ICON|noizetier_icone_chemin|balise_img{page,cadre-icone})]
+		</h1>
+	,simple fiche_objet})]
+		<br class="clear" />
 		<div id="wysiwyg">
-			[<div class="champ contenu_description[ (#GET{informations/description}|strlen|?{'',vide})]">
-				<div dir='#LANG_DIR' class="texte">(#GET{informations/description})</div>
+			[<div class="champ contenu_description[ (#DESCRIPTION|strlen|?{'',vide})]">
+				<div dir='#LANG_DIR' class="texte">(#DESCRIPTION|_T_ou_typo)</div>
 			</div>]
 		</div>
-	]
-#BOITE_FERMER
+	</BOUCLE_si_page>
+	#SET{informations, #NOIZETIER_OBJET_INFOS{#OBJET, #ID_OBJET}}
+	[(#BOITE_OUVRIR{
+		<h1>
+			<a[ href="(#ID_OBJET|generer_url_entite{#OBJET})"]>[(#GET{informations/titre})]</a>
+			[(#GET{informations/logo}|image_reduire{24}|extraire_attribut{src}|balise_img{page,cadre-icone})]
+		</h1>
+	,simple fiche_objet})]
+	<//B_si_page>
+	#BOITE_FERMER
 
 <div class="ajax">#FORMULAIRE_LISTER_NOISETTES_PAGE{#ENV{page,#ARRAY{objet,#OBJET,id_objet,#ID_OBJET}}, #ENV{bloc}}</div>
 
@@ -41,7 +38,8 @@
 #BOITE_OUVRIR{#GET{titre},'info noisettes_disponibles none'}
 <p><:noizetier:explication_glisser_deposer:></p>
 <INCLURE{fond=formulaires/inc-liste_noisettes_disponibles,
-	page,objet,
+	page,
+	objet,
 	id_objet,
 	ordre=oui} />
 #BOITE_FERMER
