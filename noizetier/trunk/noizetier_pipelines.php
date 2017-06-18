@@ -92,8 +92,8 @@ function noizetier_recuperer_fond($flux) {
 				
 				$page = isset($contexte['type']) ? $contexte['type'] : (isset($contexte['type-page']) ? $contexte['type-page'] : '');
 				$page .= (isset($contexte['composition']) && $contexte['composition']) ? '-'.$contexte['composition'] : '';
-				$info_page = noizetier_page_informer($page);
-				if (isset($info_page['blocs'][$bloc])) {
+				$blocs = noizetier_page_lister_blocs($page);
+				if (isset($blocs[$bloc])) {
 					$complements = recuperer_fond('noizetier-generer-bloc-voir-noisettes', $contexte, array('raw' => true));
 					$flux['data']['texte'] .= $complements['texte'];
 				}

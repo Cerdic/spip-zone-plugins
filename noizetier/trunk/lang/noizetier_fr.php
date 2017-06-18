@@ -70,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_composition' => 'Identifiant de composition',
 	'formulaire_composition_explication' => 'Mot-clé unique (minuscules, sans espace, sans tiret et sans accent) permettant d’identifier la composition.',
 	'formulaire_composition_mise_a_jour' => 'Composition mise à jour',
+	'formulaire_composition_erreur' => 'Requête non aboutie pour la composition',
 	'formulaire_configurer_bloc' => 'Configurer le bloc :',
 	'formulaire_configurer_page' => 'Configurer la page :',
 	'formulaire_creer_composition' => 'Créer une composition',

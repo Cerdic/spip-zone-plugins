@@ -4,7 +4,8 @@
 	|ou{#ENV{edition}|=={dupliquer}|et{#AUTORISER{dupliquercomposition, noizetier, '', '', #ARRAY{page, #ENV{source}}}}}
 	|sinon_interdire_acces)]
 
-#SET{description_page, #NOIZETIER_PAGE_INFOS{#ENV{page}|?{#ENV{page}, #ENV{source}}}}
+#SET{page_concernee, #ENV{page}|?{#ENV{page}, #ENV{source}}}
+#SET{description_page, #GET{page_concernee}|noizetier_page_informer}
 [(#ENV{edition}|=={modifier}|oui)
 	#SET{redirect, #URL_ECRIRE{noizetier_page}|parametre_url{page, #ENV{page}}}
 	#SET{retour, #URL_ECRIRE{noizetier_page}|parametre_url{page, #ENV{page}}}

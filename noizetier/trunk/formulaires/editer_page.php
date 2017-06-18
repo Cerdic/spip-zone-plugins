@@ -4,7 +4,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-// TODO : à quoi ça sert vraiement?
+// TODO : à quoi ça sert vraiment?
 if (!function_exists('autoriser')) {
 	include_spip('inc/autoriser');
 }     // si on utilise le formulaire dans le public
@@ -44,6 +44,7 @@ function formulaires_editer_page_charger_dist($edition, $description_page, $redi
 		'_blocs_defaut' => array(),
 	);
 
+	// TODO : _T_ou_typo sur nom et description ???
 	if ($edition == 'modifier') {
 		// La page désignée par $page est déjà une composition virtuelle dont on souhaite modifier une
 		// partie de la configuration (hors noisettes).
@@ -101,9 +102,18 @@ function formulaires_editer_page_charger_dist($edition, $description_page, $redi
 }
 
 /**
- * @param        $edition
- * @param        $description_page
+ * @param string $edition
+ * 		Type d'édition à savoir :
+ * 		- `modifier`: édition de la configuration de base d'une composition virtuelle
+ * 		- `créer`: création d'une composition virtuelle à partir d'une page source
+ * 		- `dupliquer`: copie d'une composition pour créer une nouvelle composition virtuelle
+ * @param array  $description_page
+ * 		La configuration complète d'une page ou composition :
+ * 		- `modifier`: la description de la composition virtuelle en cours d'édition
+ * 		- `créer`: la description de la page source
+ * 		- `dupliquer`: la description de la composition source
  * @param string $redirect
+ * 		URL de redirection. La valeur dépend du type d'édition.
  *
  * @return array
  */
@@ -125,8 +135,12 @@ function formulaires_editer_page_verifier_dist($edition, $description_page, $red
 		$composition = _request('composition');
 
 		include_spip('noizetier_fonctions');
-		$pages = noizetier_page_repertorier();
-		if (isset($pages[$type_page.'-'.$composition]) and is_array($pages[$type_page.'-'.$composition])) {
+		// TODO : réduire la recherche aux compositions
+		$pages = sql_allfetsel('page', 'spip_noizetier_pages');
+		if (is_array($pages)) {
+			$pages = array_map('reset', $pages);
+		}
+		if (isset($pages[$type_page.'-'.$composition])) {
 			$erreurs['composition'] = _T('noizetier:formulaire_identifiant_deja_pris');
 		}
 		if (!preg_match('#^[a-z0-9_]+$#', $composition)) {
@@ -138,38 +152,43 @@ function formulaires_editer_page_verifier_dist($edition, $description_page, $red
 }
 
 /**
- * @param        $edition
- * @param        $description_page
+ *
+ *
+ * @param string $edition
+ * 		Type d'édition à savoir :
+ * 		- `modifier`: édition de la configuration de base d'une composition virtuelle
+ * 		- `créer`: création d'une composition virtuelle à partir d'une page source
+ * 		- `dupliquer`: copie d'une composition pour créer une nouvelle composition virtuelle
+ * @param array  $description_page
+ * 		La configuration complète d'une page ou composition :
+ * 		- `modifier`: la description de la composition virtuelle en cours d'édition
+ * 		- `créer`: la description de la page source
+ * 		- `dupliquer`: la description de la composition source
  * @param string $redirect
+ * 		URL de redirection. La valeur dépend du type d'édition.
  *
  * @return array
  */
 function formulaires_editer_page_traiter_dist($edition, $description_page, $redirect = '') {
 
 	$retour = array();
+	$description = array();
 
 	// Identifiant de la composition résultante.
-	// -- on le recalcule systématiquement même si pour une modification il correspond à $page
 	$type_page = _request('type_page');
 	$composition = _request('composition');
 	$identifiant = "${type_page}-${composition}";
 
-	// Mise à jour ou création des données de base de la composition virtuelle résultante
-	include_spip('inc/config');
-	$compositions_virtuelles = lire_config('noizetier_compositions', array());
-	$compositions_virtuelles[$identifiant] = array(
-		'nom' => _request('nom'),
-		'description' => _request('description'),
-		'icon' => _request('icon'),
-	);
+	// Récupération des champs descriptifs et de l'icone.
+	$description['nom'] = _request('nom');
+	$description['description'] = _request('description');
+	$description['icon'] = _request('icon');
 
 	// Traitement des blocs configurables
 	$blocs_exclus = _request('blocs_exclus');
-	if ($blocs_exclus) {
-		$compositions_virtuelles[$identifiant]['blocs_exclus'] = $blocs_exclus;
-		// TODO : si on exclut des blocs il faut supprimer leurs éventuelles noisettes.
-		// Une autre solution serait d'interdire l'exclusion d'un bloc contenant une noisette
-	}
+	$description['blocs_exclus'] = $blocs_exclus;
+	// TODO : si on exclut des blocs il faut supprimer leurs éventuelles noisettes.
+	// Une autre solution serait d'interdire l'exclusion d'un bloc contenant une noisette
 
 	// Traitement des branches éventuelles pour la composition virtuelle résultante
 	$branche = array();
@@ -179,48 +198,91 @@ function formulaires_editer_page_traiter_dist($edition, $description_page, $redi
 			$branche[$_objet] = $composition_heritee;
 		}
 	}
-	$compositions_virtuelles[$identifiant]['branche'] = $branche;
+	$description['branche'] = $branche;
 
-	// Mise à jour de la composition virtuelle dans la meta
-	ecrire_config('noizetier_compositions', serialize($compositions_virtuelles));
-
-	// Pour une modification, le traitement s'arrête ici.
 	if ($edition != 'modifier') {
+		// Initialisation de la description pour une composition virtuelle.
+		$description_defaut = array(
+			'page'           => $identifiant,
+			'type'           => $type_page,
+			'composition'    => $composition,
+			'nom'            => $identifiant,
+			'description'    => '',
+			'icon'           => 'page-24.png',
+			'blocs_exclus'   => array(),
+			'necessite'      => array(),
+			'branche'        => array(),
+			'est_virtuelle'  => 'oui',
+			'est_page_objet' => 'non',
+			'signature'      => '',
+		);
+
+		// Identifie si la page est celle d'un objet SPIP
+		include_spip('base/objets');
+		$tables_objets = array_keys(lister_tables_objets_sql());
+		$description['est_page_objet'] = in_array(table_objet_sql($type_page), $tables_objets) ? 'oui' : 'non';
+
+		// Complétude de la description avec les valeurs par défaut
+		$description = array_merge($description_defaut, $description);
+	}
+
+	// On termine en sérialisant les tableaux des blocs exclus, necessite et branche.
+	$description['blocs_exclus'] = serialize($description['blocs_exclus']);
+	$description['branche'] = serialize($description['branche']);
+	if (isset($description['necessite'])) {
+		$description['necessite'] = serialize($description['necessite']);
+	}
+
+	// Mise ou insertion de la composition virtuelle
+	if ($edition == 'modifier') {
+		// -- Update de la compositon modifiée
+		$where = array('page=' . sql_quote($identifiant));
+		$retour_sql = sql_updateq('spip_noizetier_pages', $description, $where);
+	} else {
+		// -- Insertion de la nouvelle composition
+		$retour_sql = sql_insertq('spip_noizetier_pages', $description);
+
 		// Pour une création ou un duplication, il faut traiter le peuplement automatique des noisettes
 		// de la page source si requis.
 		// -- on préremplit avec les noisettes de la page source, systématiquement en cas de duplication
 		//    ou si demandé, en cas de création.
-		if (($type_page != 'page')
-		and (($edition == 'dupliquer') or (($edition == 'creer') and _request('peupler')))) {
-			// Récupération des noisettes de la page source
-			$select = array('rang', 'type', 'composition', 'bloc', 'noisette', 'parametres');
-			$from = 'spip_noisettes';
-			$where = array('type=' . sql_quote($type_page), 'composition=' . sql_quote($description_page['composition']));
-			$noisettes_source = sql_allfetsel($select, $from, $where);
-			// Injection des noisettes de la source dans la composition virtuelle en cours de création qui diffère
-			// uniquement par l'identifiant de composition.
-			if ($noisettes_source) {
-				foreach ($noisettes_source as $_index => $_noisette) {
-					$noisettes_source[$_index]['composition'] = $composition;
+		if ($retour_sql) {
+			if (($type_page != 'page')
+			and (($edition == 'dupliquer') or (($edition == 'creer') and _request('peupler')))) {
+				// Récupération des noisettes de la page source
+				$select = array('rang', 'type', 'composition', 'bloc', 'noisette', 'parametres');
+				$from = 'spip_noisettes';
+				$where = array('type=' . sql_quote($type_page), 'composition=' . sql_quote($description_page['composition']));
+				$noisettes_source = sql_allfetsel($select, $from, $where);
+				// Injection des noisettes de la source dans la composition virtuelle en cours de création qui diffère
+				// uniquement par l'identifiant de composition.
+				if ($noisettes_source) {
+					foreach ($noisettes_source as $_index => $_noisette) {
+						$noisettes_source[$_index]['composition'] = $composition;
+					}
+					sql_insertq_multi($from, $noisettes_source);
 				}
-				sql_insertq_multi($from, $noisettes_source);
 			}
-		}
 
-		// On invalide le cache en cas de création ou  de dpulication
-		include_spip('inc/invalideur');
-		suivre_invalideur("id='page/$identifiant'");
+			// On invalide le cache en cas de création ou  de duplication
+			include_spip('inc/invalideur');
+			suivre_invalideur("id='page/$identifiant'");
+		}
 	}
 
-	$retour['message_ok'] = _T('noizetier:formulaire_composition_mise_a_jour');
-	if (in_array($edition, array('creer', 'dupliquer'))) {
-		$retour['redirect'] = $redirect;
-	} elseif ($redirect) {
-		if (strncmp($redirect, 'javascript:', 11) == 0) {
-			$retour['message_ok'] .= '<script type="text/javascript">/*<![CDATA[*/'.substr($redirect, 11).'/*]]>*/</script>';
-			$retour['editable'] = true;
-		} else {
+	if ($retour_sql === false) {
+		$retour['message_nok'] = _T('noizetier:formulaire_composition_erreur');
+	} else {
+		$retour['message_ok'] = _T('noizetier:formulaire_composition_mise_a_jour');
+		if (in_array($edition, array('creer', 'dupliquer'))) {
 			$retour['redirect'] = $redirect;
+		} elseif ($redirect) {
+			if (strncmp($redirect, 'javascript:', 11) == 0) {
+				$retour['message_ok'] .= '<script type="text/javascript">/*<![CDATA[*/'.substr($redirect, 11).'/*]]>*/</script>';
+				$retour['editable'] = true;
+			} else {
+				$retour['redirect'] = $redirect;
+			}
 		}
 	}
 

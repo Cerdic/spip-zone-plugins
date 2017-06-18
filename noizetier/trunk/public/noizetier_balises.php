@@ -12,7 +12,7 @@ function balise_NOIZETIER_PAGE_INFOS_dist($p) {
 			$page = str_replace('\'', '"', $argument);
 			$information = interprete_argument_balise(2, $p);
 			$information = isset($information) ? str_replace('\'', '"', $information) : '""';
-			$p->code = "noizetier_page_informer($page, $information)";
+			$p->code = "page_informer($page, $information)";
 		} else {
 			$filtres = str_replace('\'', '"', $argument);
 			$p->code = "noizetier_page_repertorier($filtres)";
