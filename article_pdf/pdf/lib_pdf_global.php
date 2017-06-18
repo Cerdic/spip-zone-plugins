@@ -331,20 +331,28 @@ function OpenTag($tag,$e,$LineFeedHeight)
 
 	if ($tag=='IMG') {
 		$this->SRC=extraire_attribut($e,'src');
+		//élimine les ?34423/ABC345 qui suive le nom de fichier
+		$this->SRC = preg_replace(',[?].*+$,','',$this->SRC);
 
 		// si l'image est manquante mettre un lien avec le texte alt
-		if (!@is_readable($this->SRC)){
+		if (!@getimagesize($this->SRC)){
 			$alt = extraire_attribut($e,'alt');
-			if ($alt==NULL) $alt = $this->SRC;
-			//var_dump("img:href=".$this->HREF.':');
-			if ($this->HREF=="")
+			if ($alt==NULL) {
+				$alt = $this->SRC;
+			}
+			if ($this->HREF=="" && $alt!=''){
 				$this->Write(5,"[$alt]");
-			else 
-				$this->PutLink($this->HREF,"[$alt]");
-		}
-		else
-		{
+			} else {
+				$this->PutLink($this->HREF,"$alt");
+			}
+			
+			spip_log('NO ? '.$e.' !@getimagesize pour'. $this->SRC.' alt ='.$alt,'article_pdf');
+
+		} else {
+			
 			$size=getimagesize($this->SRC);		# Attention, utilisation de GD !!! FPDF ne sait pas lire les images à moitié... et je n'ai pas envie de surcharger la méthode Image...
+			
+			//Largeur && Hauteur
 			if ($size[0] < 30 && $size[1] < 30) {
 				# pixel / 3 pour avoir des cm. Petite cuisine...
 				$imgX=$size[0]/3;
