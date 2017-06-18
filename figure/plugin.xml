@@ -3,7 +3,7 @@
 	<prefix>figure</prefix>
 	<icon>figure.png</icon>
 
-	<version>0.4.0</version>
+	<version>0.4.1</version>
 	<etat>dev</etat>
 	<categorie>multimedia</categorie>
 
@@ -15,4 +15,5 @@
 	<utilise id="medias" version="[1.6.8;]" />
 	<utilise id="medoc" version="[1.0.0;]" />
 	<utilise id="accessibilite" />
+	<utilise id="oembed" version="[1.8.0;]"/>
 </plugin>
