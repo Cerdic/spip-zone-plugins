@@ -145,6 +145,7 @@ function noizetier_boite_infos($flux){
  * dans le formulaire de sélection de composition d'un objet
  */
 function noizetier_formulaire_fond($flux) {
+// TODO : a priori inutile, à virer !
 	// formulaire d'edition de la composition d'un objet
 	if (isset($flux['args']['form']) and $flux['args']['form'] == 'editer_composition_objet') {
 		$objet = isset($flux['args']['contexte']['objet']) ? $flux['args']['contexte']['objet'] : '';
@@ -187,21 +188,25 @@ function noizetier_compositions_lister_disponibles($flux) {
 	// étant donné qu'elles ne peuvent pas être détectées par Compositions car sans XML
 	// -- filtre sur l'indicateur est_virtuelle qui n'est à oui que pour les compositions
 	// -- filtre sur le type de contenu ou pas suivant l'appel
-	$filtres = array('est_virtuelle' => 'oui');
+	$select = array('page', 'type', 'composition', 'nom', 'description', 'icon', 'branche');
+	$where = array('est_virtuelle=' . sql_quote('oui'));
 	if ($type) {
-		$filtres['type'] = $type;
+		$where[] = 'type=' . sql_quote($type);
 	}
-	$compositions_virtuelles = noizetier_page_repertorier($filtres);
+	$compositions_virtuelles = sql_allfetsel($select, 'spip_noizetier_pages', $where);
 
 	if ($compositions_virtuelles) {
+		// On réindexe le tableau entier par l'identifiant de la page
+		$compositions_virtuelles = array_column($compositions_virtuelles, null, 'page');
+
 		// On insère les compositions virtuelles selon le format imposé par le plugin Compositions
 		foreach ($compositions_virtuelles as $_identifiant => $_configuration) {
 			if ($informer){
 				$flux['data'][$_configuration['type']][$_configuration['composition']] = array(
-					'nom' 			=> $_configuration['nom'],
-					'description'	=> isset($_configuration['description']) ? $_configuration['description'] : '',
+					'nom' 			=> _T_ou_typo($_configuration['nom']),
+					'description'	=> isset($_configuration['description']) ? _T_ou_typo($_configuration['description']) : '',
 					'icon' 			=> noizetier_icone_chemin($_configuration['icon']),
-					'branche' 		=> isset($_configuration['branche']) ? $_configuration['branche'] : array(),
+					'branche' 		=> unserialize($_configuration['branche']),
 					'class' 		=> '',
 					'configuration'	=> '',
 					'image_exemple'	=> '',

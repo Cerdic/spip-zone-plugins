@@ -307,29 +307,34 @@ function construire_heritages($type, $page = '') {
 	$heritages = array('_heritiers' => array());
 
 	// Récupération des compositions explicites et virtuelles
-	$filtres = array('est_composition' => true);
-	$compositions = noizetier_page_repertorier($filtres);
+	$select = array('page', 'type', 'composition', 'nom', 'branche');
+	$where = array('composition!=' . sql_quote(''));
+	$compositions = sql_allfetsel($select, 'spip_noizetier_pages', $where);
+	if ($compositions) {
+		// On réindexe le tableau entier par l'identifiant de la page
+		$compositions = array_column($compositions, null, 'page');
 
-	// Récupération des types d'objet (objets héritiers) possédant un type d'objet parent.
-	// Par exemple, article qui à a un parent rubrique.
-	include_spip('compositions_fonctions');
-	$objets_heritiers = array_keys(compositions_recuperer_heritage(), $type);
-	if ($objets_heritiers) {
-		foreach ($compositions as $_page => $_configuration) {
-			// Pour chaque composition répertoriée par le noiZetier, on détecte si celle-ci est affectable à
-			// un des types d'objet ayant un parent et on liste les compositions par objet héritier.
-			if (in_array($_configuration['type'], $objets_heritiers)) {
-				if (empty($heritages['_heritiers'][$_configuration['type']]['-'])) {
-					// Ne pas oublier d'insérer une fois la page par défaut de l'objet
-					$heritages['_heritiers'][$_configuration['type']]['-'] =
-						ucfirst(_T('compositions:composition_defaut')) . ' (' . $_configuration['type'] . ')';
-				}
-				$heritages['_heritiers'][$_configuration['type']][$_configuration['composition']] =
-					$_configuration['nom'] . ' (' . $_configuration['type'] . '-' . $_configuration['composition'] . ')';
-				// On initialise, pour la page concernée si besoin, la composition affectée.
-				if (($_page == $page) and !empty($_configuration['branche'])) {
-					foreach ($_configuration['branche'] as $_objet => $_composition) {
-						$heritages["heritage-${_objet}"] = $_composition;
+		// Récupération des types d'objet (objets héritiers) possédant un type d'objet parent.
+		// Par exemple, article qui à a un parent rubrique.
+		include_spip('compositions_fonctions');
+		$objets_heritiers = array_keys(compositions_recuperer_heritage(), $type);
+		if ($objets_heritiers) {
+			foreach ($compositions as $_page => $_configuration) {
+				// Pour chaque composition répertoriée par le noiZetier, on détecte si celle-ci est affectable à
+				// un des types d'objet ayant un parent et on liste les compositions par objet héritier.
+				if (in_array($_configuration['type'], $objets_heritiers)) {
+					if (empty($heritages['_heritiers'][$_configuration['type']]['-'])) {
+						// Ne pas oublier d'insérer une fois la page par défaut de l'objet
+						$heritages['_heritiers'][$_configuration['type']]['-'] =
+							ucfirst(_T('compositions:composition_defaut')) . ' (' . $_configuration['type'] . ')';
+					}
+					$heritages['_heritiers'][$_configuration['type']][$_configuration['composition']] =
+						$_configuration['nom'] . ' (' . $_configuration['type'] . '-' . $_configuration['composition'] . ')';
+					// On initialise, pour la page concernée si besoin, la composition affectée.
+					if (($_page == $page) and ($branches = unserialize($_configuration['branche'])) and !empty($branches)) {
+						foreach ($branches as $_objet => $_composition) {
+							$heritages["heritage-${_objet}"] = $_composition;
+						}
 					}
 				}
 			}

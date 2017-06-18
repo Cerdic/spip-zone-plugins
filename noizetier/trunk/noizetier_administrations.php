@@ -33,7 +33,7 @@ function noizetier_upgrade($nom_meta_base_version, $version_cible) {
 	);
 
 	$maj['create'] = array(
-		array('maj_tables',array('spip_noisettes_pages', 'spip_noisettes')),
+		array('maj_tables',array('spip_noisettes_pages', 'spip_noizetier_noisettes', 'spip_noisettes')),
 		array('ecrire_config', 'noizetier', $config_060),
 	);
 
@@ -81,6 +81,7 @@ function noizetier_upgrade($nom_meta_base_version, $version_cible) {
 function noizetier_vider_tables($nom_meta_version_base) {
 	// On efface les tables du plugin
 	sql_drop_table('spip_noizetier_pages');
+	sql_drop_table('spip_noizetier_noisettes');
 	sql_drop_table('spip_noisettes');
 
 	// On efface la version enregistrée du schéma des données du plugin
@@ -120,7 +121,7 @@ function maj_060($config_defaut) {
 	// Ajout de la tables des pages du noizetier qui contiendra pages et compositions qu'elles soient
 	// explicites ou virtuelles.
 	include_spip('base/create');
-	maj_tables('spip_noizetier_pages');
+	maj_tables(array('spip_noizetier_pages', 'spip_noizetier_noisettes'));
 
 	// Ajout de la colonne 'balise' qui indique pour chaque noisette si le noiZetier doit l'inclure dans un div
 	// englobant ou pas. Le champ prend les valeurs 'on', '' ou 'defaut' qui indique qu'il faut prendre
@@ -180,7 +181,13 @@ function maj_060($config_defaut) {
 		}
 		// Insertion dans la table spip_noisettes_pages
 		if ($compositions_060) {
+			if (sql_preferer_transaction()) {
+				sql_demarrer_transaction();
+			}
 			sql_insertq_multi('spip_noizetier_pages', $compositions_060);
+			if (sql_preferer_transaction()) {
+				sql_terminer_transaction();
+			}
 		}
 	}
 	// On efface la meta des compositions maintenant que celles-ci sont stockées
