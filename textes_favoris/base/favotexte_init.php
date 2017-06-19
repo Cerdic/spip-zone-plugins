@@ -29,9 +29,6 @@ function favotexte_install($action){
 			else
       { include_spip('base/favotexte');
         creer_base();
-		//$envoyer_mail = charger_fonction('envoyer_mail','inc'); 
-		//$site=$GLOBALS['meta']['adresse_site'];
-		//$envoyer_mail("bernard.blazin@free.fr", "install favoris", "sur le site " .$site);
       }
 			break;
 		// Supprimer la base
