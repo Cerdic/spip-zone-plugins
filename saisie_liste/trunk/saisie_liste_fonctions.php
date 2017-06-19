@@ -209,7 +209,11 @@ function permuter($tableau, $permutations) {
  */
 function executer_actions_liste_objet($valeurs) {
 
-	$permutations = explode(',', $valeurs['permutations']);
+	if (isset($valeur['permutations'])) {
+		$permutations = explode(',', $valeurs['permutations']);
+	} else {
+		$permutations = range(0, count($tableau));
+	}
 
 	if (array_key_exists('action', $valeurs)) {
 		foreach ($valeurs['action'] as $details_action => $valeur_submit) {
