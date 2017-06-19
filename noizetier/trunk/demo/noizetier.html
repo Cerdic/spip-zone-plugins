@@ -14,10 +14,7 @@
 //	$infos = noizetier_noisette_repertorier();
 
 //	noizetier_page_repertorier();
-//	noizetier_page_charger();
-
-	include_spip('base/create');
-	maj_tables(array('spip_noizetier_noisettes'));
+	noizetier_noisette_charger();
 
 
 	$timestamp_fin = microtime(true);
