@@ -1,9 +1,9 @@
 (function () {
 // Plugin Leaflet L.Map.Gis
 L.Map.Gis = L.Map.extend({
-	
+
 	includes: L.Mixin.Events,
-	
+
 	options:{
 		mapId: 'map_gis',
 		utiliser_bb: false,
@@ -48,10 +48,10 @@ L.Map.Gis = L.Map.extend({
 		topojson: false,
 		langue: false
 	},
-	
+
 	initialize: function (id,options) {
 		L.Util.setOptions(this, options);
-		
+
 		this.on('load', function () {
 			// Affecter sur l'objet du DOM
 			jQuery('#'+this._container.id).get(0).map = this;
@@ -61,9 +61,9 @@ L.Map.Gis = L.Map.extend({
 			// trigger load sur l'objet du DOM
 			jQuery('#'+this._container.id).trigger('load',this);
 		});
-		
+
 		L.Map.prototype.initialize.call(this, id, options);
-		
+
 		if (this.options.utiliser_bb) {
 			this.fitBounds(
 				L.latLngBounds(
@@ -72,15 +72,15 @@ L.Map.Gis = L.Map.extend({
 				)
 			);
 		}
-		
+
 		this.populateTileLayers(this.options.affiche_layers);
-		
+
 		this.initControls();
-		
+
 		this.loadData();
-		
+
 		this.addOverlays();
-		
+
 		if (this.options.localize_visitor) {
 			var maxZoom = this.options.localize_visitor_zoom;
 			this.on('locationerror',function (e) {
@@ -89,7 +89,7 @@ L.Map.Gis = L.Map.extend({
 			});
 			this.locate({setView: true, maxZoom: maxZoom});
 		}
-		
+
 		// Si pas de points affichés trigger ready ici
 		if (!this.options.affiche_points || !Object.keys(this.options.json_points).length) {
 			jQuery('#'+this._container.id).trigger('ready', this);
@@ -133,7 +133,7 @@ L.Map.Gis = L.Map.extend({
 			L.control.minimap(minimap_layer,{width: 100,height: 100, toggleDisplay: true}).addTo(this);
 		}
 	},
-	
+
 	createTileLayer: function (name) {
 		var layer;
 		if (typeof this.options.gis_layers[name]!=='undefined')
@@ -159,13 +159,13 @@ L.Map.Gis = L.Map.extend({
 			layer.setIcon(L.icon(icon_options));
 		}
 	},
-	
+
 	// API setGeoJsonFeaturePopup : Pour Ajouter le texte de popup d'un point (feature = item d'un GeoJson)
 	setGeoJsonFeaturePopup: function (feature, layer) {
 		// Déclarer le contenu de la popup s'il y en a
-		if (feature.properties 
-			&& !feature.properties.noclick 
-			&& (feature.properties.title || feature.properties.description || 
+		if (feature.properties
+			&& !feature.properties.noclick
+			&& (feature.properties.title || feature.properties.description ||
 				(this.options.langue && (feature.properties['title_'+this.options.langue] || feature.properties['description_'+this.options.langue])))) {
 			var popupContent = '',
 				popupOptions = '',
@@ -189,48 +189,23 @@ L.Map.Gis = L.Map.extend({
 			layer.bindPopup(popupContent,popupOptions);
 		}
 	},
-	
+
 	// API parseGeoJson
 	parseGeoJson: function (data) {
 		var map = this;
 		// Analyse des points et déclaration (sans regroupement des points en cluster)
 		if (!map.options.cluster) {
-			if (data.features && data.features.length > 0) {
-				var geojson = L.geoJson('', {
-					style: this.options.pathStyles ? this.options.pathStyles : function (feature) {
-						if (feature.properties && feature.properties.styles)
-							return feature.properties.styles;
-						else
-							return '';
-					},
-					onEachFeature: function (feature, layer) {
-						// Déclarer l'icone du point
-						if (feature.geometry.type == 'Point') {
-							map.setGeoJsonFeatureIcon(feature, layer);
-						}
-						// Déclarer le contenu de la popup s'il y en a
-						map.setGeoJsonFeaturePopup(feature, layer);
-					}
-				}).addData(data).addTo(map);
-
-				if (map.options.autocenterandzoom) {
-					if (data.features.length == 1 && data.features[0].geometry.type == 'Point')
-						map.setView(geojson.getBounds().getCenter(), map.options.zoom);
-					else
-						map.fitBounds(geojson.getBounds());
-				}
-				if (map.options.openId)
-					gis_focus_marker(map.options.openId,map.options.mapId);
-
-				if (typeof map.geojsons=='undefined') map.geojsons = [];
-				map.geojsons.push(geojson);
-			}
+			this.parseGeoJsonFeatures(data);
 		} else {
 			map.markerCluster = L.markerClusterGroup(map.options.clusterOptions).addTo(map);
 			var markers = [];
+			var autres = {
+				type: 'FeatureCollection',
+				features: []
+			};
 			/* Pour chaque points présents, on crée un marqueur */
 			jQuery.each(data.features, function (i, feature) {
-				if (feature.geometry.coordinates[0]) {
+				if (feature.geometry.type == 'Point' && feature.geometry.coordinates[0]) {
 					var marker = L.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]]);
 
 					// Déclarer l'icone du point
@@ -240,10 +215,13 @@ L.Map.Gis = L.Map.extend({
 
 					marker.id = feature.id;
 					markers.push(marker);
+				} else {
+					autres.features.push(feature);
 				}
 			});
 
 			map.markerCluster.addLayers(markers);
+			this.parseGeoJsonFeatures(autres);
 
 			if (map.options.autocenterandzoom) {
 				if (data.features.length > 1)
@@ -254,6 +232,40 @@ L.Map.Gis = L.Map.extend({
 			if (map.options.openId) {
 				gis_focus_marker(map.options.openId,map.options.mapId);
 			}
+		}
+	},
+
+	parseGeoJsonFeatures: function(data) {
+		var map = this;
+		if (data.features && data.features.length > 0) {
+			var geojson = L.geoJson('', {
+				style: this.options.pathStyles ? this.options.pathStyles : function (feature) {
+					if (feature.properties && feature.properties.styles)
+						return feature.properties.styles;
+					else
+						return '';
+				},
+				onEachFeature: function (feature, layer) {
+					// Déclarer l'icone du point
+					if (feature.geometry.type == 'Point') {
+						map.setGeoJsonFeatureIcon(feature, layer);
+					}
+					// Déclarer le contenu de la popup s'il y en a
+					map.setGeoJsonFeaturePopup(feature, layer);
+				}
+			}).addData(data).addTo(map);
+
+			if (map.options.autocenterandzoom) {
+				if (data.features.length == 1 && data.features[0].geometry.type == 'Point')
+					map.setView(geojson.getBounds().getCenter(), map.options.zoom);
+				else
+					map.fitBounds(geojson.getBounds());
+			}
+			if (map.options.openId)
+				gis_focus_marker(map.options.openId,map.options.mapId);
+
+			if (typeof map.geojsons=='undefined') map.geojsons = [];
+			map.geojsons.push(geojson);
 		}
 	},
 	
