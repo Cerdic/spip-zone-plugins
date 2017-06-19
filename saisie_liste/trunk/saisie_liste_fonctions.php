@@ -44,7 +44,6 @@ function preparer_tableau_saisie($tableau_saisie) {
 	        and (! is_array($tableau_saisie['saisies']) ))
 	    or ((isset($tableau_saisie['options']))
 	          and ( ! is_array($tableau_saisie['options']) ))) {
-
 		erreur_squelette(
 			_T(
 				'erreur_saisie_invalide',
@@ -218,28 +217,28 @@ function executer_actions_liste_objet($valeurs) {
 			$action      = $details_action[0];
 			$index_objet = $details_action[1];
 			switch ($action) {
-			case 'supprimer':
-				unset($valeurs[intval($index_objet)]);
-				break;
-			case 'ajouter':
-				// on n'as rien à faire pour ajouter un objet, il suffit de
-				// recharger le formulaire
-				break;
-			case 'monter':
-				// il faut opérer sur la liste des permutations, parce ce qu'elle
-				// correspond à l'ordre des objets affichés quand l'utilisateur
-				// a submit.
-				$index_objet     = array_search($index_objet, $permutations);
-				$objet_au_dessus = $permutations[$index_objet-1];
-				$permutations[$index_objet-1] = $permutations[$index_objet];
-				$permutations[$index_objet]   = $objet_au_dessus;
-				break;
-			case 'descendre':
-				$index_objet      = array_search($index_objet, $permutations);
-				$objet_en_dessous = $permutations[$index_objet+1];
-				$permutations[$index_objet+1] = $permutations[$index_objet];
-				$permutations[$index_objet]   = $objet_en_dessous;
-				break;
+				case 'supprimer':
+					unset($valeurs[intval($index_objet)]);
+					break;
+				case 'ajouter':
+					// on n'as rien à faire pour ajouter un objet, il suffit de
+					// recharger le formulaire
+					break;
+				case 'monter':
+					// il faut opérer sur la liste des permutations, parce ce qu'elle
+					// correspond à l'ordre des objets affichés quand l'utilisateur
+					// a submit.
+					$index_objet     = array_search($index_objet, $permutations);
+					$objet_au_dessus = $permutations[$index_objet-1];
+					$permutations[$index_objet-1] = $permutations[$index_objet];
+					$permutations[$index_objet]   = $objet_au_dessus;
+					break;
+				case 'descendre':
+					$index_objet      = array_search($index_objet, $permutations);
+					$objet_en_dessous = $permutations[$index_objet+1];
+					$permutations[$index_objet+1] = $permutations[$index_objet];
+					$permutations[$index_objet]   = $objet_en_dessous;
+					break;
 			}
 		}
 	}
