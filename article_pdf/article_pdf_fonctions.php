@@ -58,15 +58,16 @@ function filtre_supprimer_param_logo($texte){
 **/
 
 function pdf_nommer($titre_parent, $objet, $id_parent){
-//au choix, selon le cas (voir les avantages et les inconvéniants de chaque selon le site):
+// utiliser la constante _DIR_STOCK_PDF
+//  au choix, selon le cas (voir les avantages et les inconvéniants de chaque selon le site):
 //	$path_pdf = sous_repertoire(_DIR_CACHE, "article_PDF"); // stockage dans le cache SPIP
-	$path_pdf = sous_repertoire(_DIR_IMG, "article_PDF"); //stockage sous le dossier IMG
+//	$path_pdf = sous_repertoire(_DIR_IMG, "article_PDF"); //stockage sous le dossier IMG
 	
 	include_spip('action/editer_url');
 	$titre = url_nettoyer($titre_parent,60);
 	$lettre = substr($objet, 0, 1);
 	$nom_pdf = $titre."_".$lettre.$id_parent.".pdf";
-	return $path_pdf.$nom_pdf;
+	return $nom_pdf;
 }
 
 /**
