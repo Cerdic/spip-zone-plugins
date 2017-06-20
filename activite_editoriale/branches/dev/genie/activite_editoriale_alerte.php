@@ -76,7 +76,6 @@ function activite_editoriale_envoyer_mail($list) {
 	
 	if ($auteurLists = sql_select("*", "spip_auteurs", "id_auteur in (".$list['extras_identifiants'].")")) {
 		while($auteurs = sql_fetch($auteurLists)) {
-			var_dump($auteurs);
 			$to = $auteurs['email'];
 			if ($envoyer_mail($to, $subject, $body)) {
 				spip_log("Message envoyé à".$to, "activite_editoriale");
