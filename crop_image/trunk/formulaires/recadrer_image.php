@@ -3,6 +3,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function formulaires_recadrer_image_charger_dist($objet="document", $id_objet, $redirect=''){
 	$valeurs = array();
+	include_spip('inc/autoriser');
+
+
 	if ($objet == "document") {
 		$valeurs['id_document'] = intval($id_objet);
 		if (autoriser('modifier','document',intval($id_objet))) {
