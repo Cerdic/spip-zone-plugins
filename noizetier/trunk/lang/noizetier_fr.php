@@ -193,9 +193,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'quitter_mode_noisettes' => 'Quitter l’édition des noisettes',
 
 	// R
-	'retour' => 'Retour',
 	'recharger_noisette' => 'Recharger les noisettes',
 	'recharger_page' => 'Recharger les pages',
+	'retour' => 'Retour',
 
 	// S
 	'suggestions' => 'Suggestions',
