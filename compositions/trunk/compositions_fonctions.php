@@ -295,6 +295,12 @@ function compositions_recuperer_heritage($type = null) {
  * @return string
  */
 function compositions_determiner($type, $id, $serveur = '', $etoile = false) {
+	// le compilateur produi(sait) des occurences de compositions_determiner('',...)
+	// qui provoquent un appel a $trouver_table('')
+	// qui vide le cache des descriptions SQL
+	// evitons ce cas
+	if (!$type) return '';
+
 	static $composition = array();
 	$id = intval($id);
 
@@ -418,15 +424,18 @@ function compositions_heriter($type, $id, $id_parent = null, $serveur = '') {
  */
 function balise_COMPOSITION_dist($p) {
 	$_composition = '';
+	$_objet = '';
 	if ($_objet = interprete_argument_balise(1, $p)) {
 		$_id_objet = interprete_argument_balise(2, $p);
 	} else {
 		$_composition = champ_sql('composition', $p);
-		$_id_objet = champ_sql($p->boucles[$p->id_boucle]->primary, $p);
-		$_objet = "objet_type('" . $p->boucles[$p->id_boucle]->id_table . "')";
+		if($p->id_boucle) {
+			$_id_objet = champ_sql($p->boucles[$p->id_boucle]->primary, $p);
+			$_objet = "objet_type('" . $p->boucles[$p->id_boucle]->id_table . "')";
+		}
 	}
 	// si on veut le champ brut, et qu'on l'a sous la main, inutile d'invoquer toute la machinerie
-	if ($_composition and $p->etoile) {
+	if ($_composition and (!$_objet or $p->etoile)) {
 		$p->code = $_composition;
 	} else {
 		$connect = $p->boucles[$p->id_boucle]->sql_serveur;
