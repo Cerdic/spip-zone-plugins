@@ -21,6 +21,7 @@ function formulaires_importer_cog_charger()
                 $nom_fichier = $emplacement . $infos_fichier['filename'] . '.' . $infos_fichier['extension'];
                 if ($infos_fichier['extension'] == 'zip') {
                     $nom_fichier = $emplacement . $infos_fichier['filename'] . '.txt';
+					$nom_fichier = str_replace('-txt', '', $nom_fichier);
                 }
                 if (!file_exists($nom_fichier)) {
                     $nom_fichier = $emplacement . $infos_fichier['filename'] . '.xls';
@@ -68,6 +69,7 @@ function formulaires_importer_cog_verifier_dist()
                 }
 
                 $fichier = $infos_fichier['filename'] . '.' . $extension;
+				$fichier = str_replace('-txt', '', $fichier);
                 $emplacement_local = realpath(_DIR_PLUGIN_COG . '/data') . '/';
                 if (!file_exists($emplacement . $fichier) && !file_exists($emplacement_local . $fichier)) {
                     $fichier = $infos_fichier['filename'] . '.xls';

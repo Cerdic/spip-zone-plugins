@@ -10,7 +10,7 @@ function cog_config_tab_fichier($objet=null)
 $tab_cog_fichier = array(
 'cog_commune'				=> array(	'nom'=>'Communes',
 									'cle_unique'=>array('departement','code'),
-									'fichier'=>'http://www.insee.fr/fr/methodes/nomenclatures/cog/telechargement/2015/txt/comsimp2015.zip'),
+									'fichier'=>'https://www.insee.fr/fr/statistiques/fichier/2114819/comsimp2016-txt.zip'),
 'cog_canton'				=> array(	'nom'=>'Cantons',
 									'cle_unique'=>array('departement','arrondissement','code'),
 									'fichier'=>'http://www.insee.fr/fr/methodes/nomenclatures/cog/telechargement/2015/txt/canton2015.txt'),
