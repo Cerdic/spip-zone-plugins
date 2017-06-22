@@ -4,7 +4,8 @@ if (!defined('_ECRIRE_INC_VERSION')){
 	return;
 }
 
-// au choix, selon le cas (voir les avantages et les inconvéniants de chaque selon le site):
+// au choix, selon le cas (voir les avantages et les inconvénients de chaque selon le site):
+// si besoin on fera un define de la constante en amont dans le fichier config/mes_options.php
 //define('_DIR_STOCK_PDF', sous_repertoire(_DIR_CACHE, "article_PDF"));
 if (!defined('_DIR_STOCK_PDF')) {
 		define('_DIR_STOCK_PDF', sous_repertoire(_DIR_IMG, "article_PDF"));

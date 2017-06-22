@@ -8,6 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
+	'configurer_titre' => 'Configurer le plugin article_pdf',
+	'cfg_titre_parametrages' => 'Paramétrer les pdfs créés',
 	'copyright' => 'Copyright © ',
 
 	// D
@@ -19,9 +21,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'enregistrer_pdf' => 'Enregistrer au format PDF',
 	'extrait_de' => 'Extrait du ',
 
+	//L
+	'label_pdf_to_document' => 'Seulement si je suis en SPIP3',
+	'label_pdf_to_document_oui' => 'Enregistrer et lier le pdf en tant que document',
+	
 	// P
 	'post_scriptum' => 'Post-scriptum : ',
 
 	// T
-	'tous_droits_reserves' => ' - Tous droits réservés'
+	'tous_droits_reserves' => ' - Tous droits réservés',
+	
 );
