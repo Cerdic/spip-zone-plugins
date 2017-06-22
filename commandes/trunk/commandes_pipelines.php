@@ -418,35 +418,49 @@ function commandes_bank_abos_preparer_echeance($flux){
 		isset($flux['args']['id'])
 		and $id = $flux['args']['id']
 		and strncmp($id,"uid:",4) == 0
-		and $bank_uid = substr($id, 4)
-		and $commande = sql_fetsel('*', 'spip_commandes', 'bank_uid = '.sql_quote($bank_uid))
-		and $id_commande = intval($commande['id_commande'])
-		and $echeances = unserialize($commande['echeances'])
-		and $echeances_type = $commande['echeances_type']
-	){
-		include_spip('inc/commandes_echeances');
-		
-		// Si on a bien trouvé une prochaine échéance
-		if ($montant = commandes_trouver_prochaine_echeance($id_commande, $echeances)) {
-			include_spip('action/editer_objet');
-			
-			// On remet la commande en attente de paiement puisqu'on… attend un paiement !
-			objet_modifier('commande', $id_commande, array('statut' => 'attente'));
-			
-			// On crée la transaction qui testera le vrai paiement
-			$inserer_transaction = charger_fonction('inserer_transaction', 'bank');
-			$options_transaction = array(
-				'id_auteur' => intval($commande['id_auteur']),
-				'champs' => array(
-					'id_commande' => $id_commande,
-				),
-			);
-			$id_transaction = intval($inserer_transaction($montant, $options_transaction));
-			
-			$flux['data'] = $id_transaction;
+		and $bank_uid = substr($id, 4)) {
+
+		// robustesse pour retrouver la comande correspondant a un numero d'abonnement
+		if ($id_commande = sql_getfetsel('id_commande','spip_commandes','bank_uid='.sql_quote($bank_uid))
+		  or $id_commande = sql_getfetsel('id_commande','spip_transactions','abo_uid='.sql_quote($bank_uid))) {
+
+			if ($commande = sql_fetsel('*', 'spip_commandes', 'id_commande='.intval($id_commande))
+			  and $echeances = unserialize($commande['echeances'])
+			  and $echeances_type = $commande['echeances_type'] ) {
+
+				include_spip('inc/commandes_echeances');
+
+				// Si on a bien trouvé une prochaine échéance
+				if ($montant = commandes_trouver_prochaine_echeance($id_commande, $echeances)) {
+					include_spip('action/editer_objet');
+
+					$set = array('statut' => 'attente');
+					// robustesse/reparation si echec d'update a la premiere echeance payee
+					if (!$commande['bank_uid']) {
+						$set['bank_uid'] = $bank_uid;
+					}
+
+					// On remet la commande en attente de paiement puisqu'on… attend un paiement !
+					objet_modifier('commande', $id_commande, $set);
+
+					// On crée la transaction qui testera le vrai paiement
+					$inserer_transaction = charger_fonction('inserer_transaction', 'bank');
+					$options_transaction = array(
+						'id_auteur' => intval($commande['id_auteur']),
+						'champs' => array(
+							'id_commande' => $id_commande,
+						),
+					);
+					$id_transaction = intval($inserer_transaction($montant, $options_transaction));
+
+					$flux['data'] = $id_transaction;
+				}
+
+			}
 		}
+
 	}
-	
+
 	return $flux;
 }
 
