@@ -143,7 +143,10 @@ if(isset($tab_colonne['liaison'])){
 					}
 
 			if($option_relier_communes){
-				$id_cog_commune=sql_getfetsel('id_cog_commune','spip_cog_communes','departement='.$tab['code_departement'].' and (nom_majuscule = '.sql_quote(strtoupper($tab['titre'])).'or concat(MID(article_majuscule,2,LENGTH(article_majuscule)-2),concat(\' \',nom_majuscule)) = '.sql_quote(strtoupper($tab['titre'])).')');
+				$id_cog_commune=sql_getfetsel('id_cog_commune','spip_cog_communes','departement='.$tab['code_departement'].' and (nom_majuscule = '.sql_quote(str_replace('’',"'",strtoupper($tab['titre'])))
+					.' or concat(MID(article_majuscule,2,LENGTH(article_majuscule)-2),concat(\' \',nom_majuscule)) = '.sql_quote(str_replace('’',"'",strtoupper($tab['titre'])))
+					.' or concat(MID(article_majuscule,2,LENGTH(article_majuscule)-2),concat(\'\',nom_majuscule)) = '.sql_quote(str_replace('’',"'",strtoupper($tab['titre'])))
+				.')');
 				if($id_cog_commune){
 					sql_insertq("spip_cog_communes_liens",array('id_cog_commune'=>$id_cog_commune,'objet'=>'code_postal','id_objet'=>$id_code_postal));
 					}
