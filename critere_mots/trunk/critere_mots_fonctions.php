@@ -23,6 +23,8 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 	$_table = table_objet($boucle->id_table);
 	$objet_delatable=objet_type($_table);
 	$id_objet = id_table_objet($boucle->id_table);
+	$tri = false;
+
 	if (isset($crit->param[0][2]) and ($crit->param[0][2]->texte == "tri" or $crit->param[0][2]->texte=="!tri")){
 			$tri = true;
 	}
@@ -50,7 +52,7 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 	}
 
 	$boucle->where[] = "\n\t\t".'$mots_where';
-	if ($tri==True) {
+	if ($tri == true) {
 
 		$boucle->jointures[]="mots_liens" ;
 		$boucle->from['mots_liens'] = "spip_mots_liens";
