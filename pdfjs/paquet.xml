@@ -1,7 +1,7 @@
 <paquet
 	prefix="pdfjs"
 	categorie="multimedia"
-	version="0.5.2"
+	version="0.6.1"
 	etat="stable"
 	compatibilite="[2.0.0;3.2.*]"
 	logo="prive/themes/spip/images/pdfjs-32.png"
