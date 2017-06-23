@@ -1,15 +1,15 @@
 <paquet
 	prefix="critere_mots"
 	categorie="navigation"
-	version="4.0.3"
+	version="4.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="img_pack/stock_filter-data-by-criteria-24.png"
 	documentation="https://contrib.spip.net/Critere-mots"
->	
+>
 
-	<nom>Crit&#232;re mots</nom>
-	<!-- S&#233;lectionner des objets ayant des mots cl&#233;s en communs -->
+	<nom>Critère mots</nom>
+	<!-- Sélectionner des objets ayant des mots clés en communs -->
 
 	<auteur>Fil</auteur>
 	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>

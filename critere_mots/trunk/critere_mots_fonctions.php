@@ -5,6 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 define ('_CRITERE_MOTS_OPTIMISE',1);// pour pouvoir revenir aux anciennes requetes si besoin
+
 // Critere {mots} : "l'article est lie a tous les mots demandes"
 // {mots?} ne s'applique que si au moins un mot est demande
 // on passe dans l'url &mots[]=titre1&mots[]=titre2
@@ -25,6 +26,9 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 	$id_objet = id_table_objet($boucle->id_table);
 	$tri = false;
 
+	// pouvoir utiliser plusieurs fois le critère dans une même boucle.
+	$hash = substr(uniqid(), -4);
+
 	if (isset($crit->param[0][2]) and ($crit->param[0][2]->texte == "tri" or $crit->param[0][2]->texte=="!tri")){
 			$tri = true;
 	}
@@ -43,7 +47,7 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 	$boucle->hash .= '
 	// {MOTS}
 	$prepare_mots = charger_fonction(\'prepare_mots\', \'inc\');
-	$mots_where = $prepare_mots('.$quoi.', "'.$boucle->id_table.'", "'.$crit->cond.'", '.$score.', "' . $boucle->sql_serveur . '","'.$id_ou_titre.'");
+	$mots_where_' . $hash . ' = $prepare_mots('.$quoi.', "'.$boucle->id_table.'", "'.$crit->cond.'", '.$score.', "' . $boucle->sql_serveur . '","'.$id_ou_titre.'");
 	';
 
 	$t = $boucle->id_table . '.' . $boucle->primary;
@@ -51,7 +55,7 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 		$boucle->select[]= $t; # pour postgres, neuneu ici
 	}
 
-	$boucle->where[] = "\n\t\t".'$mots_where';
+	$boucle->where[] = "\n\t\t".'$mots_where_' . $hash;
 	if ($tri == true) {
 
 		$boucle->jointures[]="mots_liens" ;
