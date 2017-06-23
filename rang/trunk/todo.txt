@@ -9,3 +9,5 @@ TODO
 - que se passe t-il si on déplace un article d’une rubrique à une autre via Plan ?
 - Gestion du plugin Pages uniques ;
 - API (?) pour les plugins (Albums, Menus, Bank, etc.) ;
+
+- quand on ajoute un objet dans une liste d'objets triés par rang, faire en sorte que le nouvel objet se place à la fin de la liste (qu'il prenne max(rang) + 1)
