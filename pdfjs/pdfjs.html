@@ -28,6 +28,7 @@
    	window.addEventListener('load',function(){
 	  PDFJS.workerSrc = '#CHEMIN{lib/pdfjs/build/pdf.worker.js}';
 	  PDFJS.cMapUrl = '#CHEMIN{lib/pdfjs/web/cmaps/}';
+	  PDFViewerApplication.preferences.set('disableFontFace', true);
 	  DEFAULT_URL = '[(#DISTANT|=={oui}|?{[(#URL_DOCUMENT|copie_locale)],[(#URL_DOCUMENT)]})]';
 	  PDFViewerApplication.open(DEFAULT_URL);
     });
