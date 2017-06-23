@@ -242,6 +242,7 @@ function cog_import($objet, $options)
     $extension = $infos_fichier['extension'];
     if ($extension == 'zip') {
         $extension = 'txt';
+		$infos_fichier['filename'] = str_replace('-txt', '', $infos_fichier['filename']);
     }
 
     if (!file_exists($fichier_modele = realpath(_DIR_PLUGIN_COG . '/data') . '/' . $infos_fichier['filename'] . '.' . $extension)) {
