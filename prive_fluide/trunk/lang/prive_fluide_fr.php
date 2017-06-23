@@ -8,6 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
-	'message_configurer_largeur_ecran' => 'Ces options n\'ont pas d\'incidence sur la largeur de l\'écran. L\'option « Grand écran » place la colonne #extra à droite.',
+	'message_configurer_largeur_ecran' => '[Plugin espace privé fluide] Ces options n\'ont pas d\'incidence sur la largeur de l\'écran. L\'option « Grand écran » place la colonne #extra à droite.',
 
 );

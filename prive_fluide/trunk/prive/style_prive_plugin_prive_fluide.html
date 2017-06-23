@@ -12,7 +12,6 @@
 #HTTP_HEADER{Content-Type: text/css;charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-
 /*
   ==========
   conteneurs
@@ -21,21 +20,30 @@
   Oui, on ignore les préférences utilisateur (de toute façon le mode « écran large » rendait le contenu central... plus étroit !).
 */
 
+body,
+body.large {
+  min-width: auto;
+}
+
 .largeur, #conteneur, .table_page,
 .large .largeur, .large #conteneur, .large .table_page {
   width: auto;
 }
 
-.largeur, #conteneur, .table_page {
+#bando_haut .largeur,
+#haut,
+#conteneur,
+#pied .largeur,
+.table_page {
   padding: 0 30px; /* = margin-left de #contenu */
 }
 
-.large .largeur, .large #conteneur, .large .table_page {
+.large #bando_haut .largeur,
+.large #conteneur,
+.large #haut,
+.large #pied .largeur,
+.large .table_page {
   padding: 0 24px; /* = margin-left de #contenu */
-}
-
-.largeur #conteneur {
-  padding: 0;
 }
 
 
@@ -44,16 +52,17 @@
   layout
   ======
   On passe les 3 items #contenu, #navigation et #extra en flexbox.
-  Avantage : quand #navigation ou #extra sont vides, le contenu central s'adapte pour prendre tout l'espace disponible.
-  On gère le ratio contenu/colonnes avec la propriété flex-grow.
-  On met 4/1, mais ça ne fait pas 75%/25%, c'est plus compliqué : https://css-tricks.com/flex-grow-is-weird/
-  Pas de largeur définie pour #navigation et #extra, sinon ça laisse un espace blanc quand ils sont vides.
+  De base, une colonne et on place #contenu en premier.
 */
 
 #conteneur {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 #contenu, #navigation, #extra,
@@ -62,44 +71,90 @@
   width: auto;
 }
 
-#contenu {
-  -webkit-box-flex: 4;
-  -ms-flex-positive: 4;
-  flex-grow: 4;
+/* ordre des items */
+#contenu { 
+  -webkit-box-ordinal-group: 2; 
+      -ms-flex-order: 1; 
+          order: 1;
+  margin-left: 0;
+}
+.large #contenu {
+  margin-left: 0;
+}
+#navigation {
+  -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+          order: 2;
+}
+#extra {
+  -webkit-box-ordinal-group: 4;
+      -ms-flex-order: 3;
+          order: 3;
 }
 
-#navigation, #extra {
-  -webkit-box-flex: 0;
-  -ms-flex-positive: 0;
-  flex-grow: 0;
-  -ms-flex-negative: 1;
-  flex-shrink: 1;
-  max-width: 20%;
-}
-
+/* prévisualisation du contenu éditorial */
 #wysiwyg {
   max-width: 45em; /* ~70 caractères par ligne */
   margin-left: auto;
   margin-right: auto;
 }
 
-/* spécificités du mode large : on place #extra à droite */
 
-.large #navigation {
-  -webkit-box-ordinal-group: 2;
-  -ms-flex-order: 1;
-  order: 1;
-}
+/*
+    ==========
+    Responsive
+    ==========
+    On passe en colonnes au-delà de 780px
+    Cette valeur est tirée de la largeur minimale de la page par défaut dans les styles vanilla de SPIP.
+    Quand #navigation ou #extra sont vides, le contenu central s'adapte pour prendre tout l'espace disponible.
+    On gère le ratio contenu/colonnes avec la propriété flex-grow.
+    On met 4/1, mais ça ne fait pas 75%/25%, c'est plus compliqué : https://css-tricks.com/flex-grow-is-weird/
+    Pas de largeur définie pour #navigation et #extra, sinon ça laisse un espace blanc quand ils sont vides.
+*/
 
-.large #contenu {
-  -webkit-box-ordinal-group: 3;
-  -ms-flex-order: 2;
-  order: 2;
-}
+@media (min-width: 780px) {
 
-.large #extra {
-  -webkit-box-ordinal-group: 4;
-  -ms-flex-order: 3;
-  order: 3;
-  margin-left: 24px; /* = margin-left de #contenu */
+  /* Conteneur */
+  #conteneur {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+
+  /* contenu principal */
+  #contenu {
+    -webkit-box-flex: 4;
+    -ms-flex-positive: 4;
+    flex-grow: 4;
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
+    margin-left: 30px;
+  }
+
+  /* colonne */
+  #navigation, #extra {
+    -webkit-box-flex: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    -ms-flex-negative: 1;
+    flex-shrink: 1;
+    max-width: 20%;
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
+  }
+
+  /* mode large : on place #extra à droite */
+  .large #extra {
+    -webkit-box-ordinal-group: 4;
+    -ms-flex-order: 3;
+    order: 3;
+    margin-left: 24px; /* = margin-left de #contenu */
+  }
+  .large #contenu {
+    margin-left: 24px;
+  }
+
 }
