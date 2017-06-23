@@ -7,8 +7,8 @@
 }})
 ]
 [(#REM) traiter le cas où l'objet 'article' n'a pas été sélectionné dans la conf du plugin]
-[(#VAL{article}|rang_objet_dans_config|non) [(#VAL{date}|setenv{par})] ]
-[(#VAL{article}|rang_objet_dans_config|oui) [(#VAL{rang}|setenv{par})] ]
+[(#VAL{article}|rang_objet_dans_config|non) [(#VAL{date}|setenv{par})] #SET{tri,date} ]
+[(#VAL{article}|rang_objet_dans_config|oui) [(#VAL{rang}|setenv{par})] #SET{tri,rang} ]
 <B_liste_art>
 #ANCRE_PAGINATION
 <div class="liste-objets articles">
@@ -26,7 +26,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_art(ARTICLES){id_article?}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri rang,#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}{!lang_select}>
+	<BOUCLE_liste_art(ARTICLES){id_article?}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #GET{tri},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}{!lang_select}>
 		[(#LANG|changer_typo)]
 		<tr id="id_#ID_ARTICLE" class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			[(#ENV{id_rubrique}|et{#VAL{article}|rang_objet_dans_config}|oui)<td class="picto">[(#CHEMIN_IMAGE{draggable-16.png}|balise_img)]</td>]
