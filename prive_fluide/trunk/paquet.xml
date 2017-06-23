@@ -1,0 +1,19 @@
+<paquet
+	prefix="prive_fluide"
+	categorie="edition"
+	version="0.1.0"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/prive_fluide-64.png"
+	documentation=""
+>
+	<nom>Espace privé fluide</nom>
+	<!-- Ce plugin fait en sorte que l'espace privé de SPIP occupe toute la largeur disponible. -->
+
+	<auteur lien="http://razack.wordpress.com">tcharlss</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="formulaire_fond" inclure="prive_fluide_pipelines.php" />
+
+</paquet>
