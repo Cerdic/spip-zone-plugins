@@ -9,6 +9,7 @@
 
 	[(#ENV{est_virtuelle}|=={non}|et{#VAL{page}|noizetier_configuration_est_modifiee{#ENV{page}}}|oui)
 		[(#SET{libelle, #ENV{composition}|?{<:noizetier:recharger_composition:>, <:noizetier:recharger_page:>}})]
+		<!-- TODO : voir comment ne recharger que la page concernée -->
 		[(#URL_ACTION_AUTEUR{recharger_configuration, page, #SELF}
 			|icone_horizontale{#GET{libelle}, page-maj-24, '', #LANG_LEFT})]
 	]

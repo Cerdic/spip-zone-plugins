@@ -1113,6 +1113,7 @@ function noizetier_objet_type_active($type_objet) {
  * @return boolean
  * 		`true` si la configuration a été modifiée, `false` sinon.
  */
+ // TODO : a voir si cete fonction n'est pas utilisée pour les noisettes on la renommera
 function noizetier_configuration_est_modifiee($entite, $identifiant) {
 
 	$est_modifiee = true;

@@ -134,17 +134,16 @@ function formulaires_editer_page_verifier_dist($edition, $description_page, $red
 		$type_page = _request('type_page');
 		$composition = _request('composition');
 
-		include_spip('noizetier_fonctions');
-		// TODO : réduire la recherche aux compositions
-		$pages = sql_allfetsel('page', 'spip_noizetier_pages');
-		if (is_array($pages)) {
+		$where = array('composition!=' . sql_quote(''));
+		$pages = sql_allfetsel('page', 'spip_noizetier_pages', $where);
+		if ($pages) {
 			$pages = array_map('reset', $pages);
-		}
-		if (isset($pages[$type_page.'-'.$composition])) {
-			$erreurs['composition'] = _T('noizetier:formulaire_identifiant_deja_pris');
-		}
-		if (!preg_match('#^[a-z0-9_]+$#', $composition)) {
-			$erreurs['composition'] = _T('noizetier:formulaire_erreur_format_identifiant');
+			if (isset($pages[$type_page.'-'.$composition])) {
+				$erreurs['composition'] = _T('noizetier:formulaire_identifiant_deja_pris');
+			}
+			if (!preg_match('#^[a-z0-9_]+$#', $composition)) {
+				$erreurs['composition'] = _T('noizetier:formulaire_erreur_format_identifiant');
+			}
 		}
 	}
 
