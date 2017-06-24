@@ -1,5 +1,5 @@
 <B_art_or>
-<li class='editer editer_id_evenement[ (#ENV**{erreurs}|table_valeur{id_evenement}|oui)erreur]'>
+<div class='editer editer_id_evenement[ (#ENV**{erreurs}|table_valeur{id_evenement}|oui)erreur]'>
 	[<div class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_evenement})</div>]
 <BOUCLE_art_or (DATA){source tableau,#ENV{evenements}} {id_evenement_source ?} {par date_debut}>
 	#SET{prix,#VALEUR{prix}}
@@ -21,11 +21,10 @@
 
 		#SET{id_article,#ID_ARTICLE}
 	[(#COMPTEUR_BOUCLE|!={1}|oui)
-		</li>
-		<li class='editer editer_id_evenement[ (#ENV**{erreurs}|table_valeur{id_evenement}|oui)erreur]'>
+		</div>
+		<div class='editer editer_id_evenement[ (#ENV**{erreurs}|table_valeur{id_evenement}|oui)erreur]'>
 	]
 	<a href="#URL_EVENEMENT{#ID_EVENEMENT}">#TITRE</a>
-	[(#ID_EVENEMENT)]
 	#SET{date_fin,#DATE_FIN}
 	<BOUCLE_evenements_lies(EVENEMENTS) {id_evenement_source=#VALEUR{id_evenement}}{!par date_fin} {0,1}>
 		#SET{date_fin,#DATE_FIN}

@@ -73,8 +73,8 @@ function formulaires_editer_reservation_charger_dist($id_reservation = 'new', $r
 	include_spip('cextras_pipelines');
 
 	if (function_exists('champs_extras_objet')) {
-		// Charger les d��finitions pour la cr��ation des formulaires
-
+		// Charger les valeurs extras
+		//Les auteurs
 		$valeurs['champs_extras_auteurs'] = champs_extras_objet(table_objet_sql('auteur'));
 		foreach ($valeurs['champs_extras_auteurs'] as $key => $value) {
 			$donnees_auteur = unserialize($valeurs['donnees_auteur']);
