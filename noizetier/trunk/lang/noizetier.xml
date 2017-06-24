@@ -1,8 +1,8 @@
 <traduction module="noizetier" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/noizetier/trunk/lang/" reference="fr">
-	<langue code="de" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=de" total="164" traduits="66" relire="0" modifs="15" nouveaux="83" pourcent="40.24">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=de" total="166" traduits="66" relire="0" modifs="15" nouveaux="85" pourcent="39.76">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=en" total="164" traduits="100" relire="0" modifs="13" nouveaux="51" pourcent="60.98">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=en" total="166" traduits="100" relire="0" modifs="13" nouveaux="53" pourcent="60.24">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Gilles" lien="https://trad.spip.net/auteur/gilles" />
@@ -11,19 +11,19 @@
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Martin McCaffery" lien="https://trad.spip.net/auteur/martin-mccaffery" />
 	</langue>
-	<langue code="es" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=es" total="164" traduits="91" relire="0" modifs="12" nouveaux="61" pourcent="55.49">
+	<langue code="es" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=es" total="166" traduits="91" relire="0" modifs="12" nouveaux="63" pourcent="54.82">
 		<traducteur nom="alf" lien="https://trad.spip.net/auteur/alf" />
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 	</langue>
-	<langue code="fa" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=fa" total="164" traduits="69" relire="0" modifs="12" nouveaux="83" pourcent="42.07">
+	<langue code="fa" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=fa" total="166" traduits="69" relire="0" modifs="12" nouveaux="85" pourcent="41.57">
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=fr" total="164" traduits="164" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=fr" total="166" traduits="166" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="nl" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=nl" total="164" traduits="106" relire="0" modifs="14" nouveaux="44" pourcent="64.63">
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=nl" total="166" traduits="106" relire="0" modifs="14" nouveaux="46" pourcent="63.86">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
-	<langue code="sk" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=sk" total="164" traduits="96" relire="0" modifs="12" nouveaux="56" pourcent="58.54">
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=sk" total="166" traduits="96" relire="0" modifs="12" nouveaux="58" pourcent="57.83">
 		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>

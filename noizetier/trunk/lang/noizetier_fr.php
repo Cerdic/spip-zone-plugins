@@ -195,8 +195,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'recharger_composition' => 'Recharger la composition',
 	'recharger_noisettes' => 'Recharger les noisettes',
-	'recharger_pages' => 'Recharger les pages',
 	'recharger_page' => 'Recharger la page',
+	'recharger_pages' => 'Recharger les pages',
 	'retour' => 'Retour',
 
 	// S
