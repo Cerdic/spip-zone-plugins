@@ -448,6 +448,7 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 					."\t}\n";
 		}
 	}
+	$code .= "$(form).trigger('saisies_afficher_si_js_ok');\n";
 	$code .= "};\n";
 	$code .= "\t".'$("#afficher_si_'.$id_form.'").parents("form").each(function(){'."\n\t\t".'verifier_saisies_'.$id_form.'(this);});'."\n";
 	$code .= "\t".'$("#afficher_si_'.$id_form.'").parents("form").change(function(){'."\n\t\t".'verifier_saisies_'.$id_form.'(this);});'."\n";
