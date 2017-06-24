@@ -34,13 +34,14 @@ $(document).ready(function(){
 		});
 
 		/* Installer les onglets et accordions */
-		/* Renouveler tous les 7 jours… ie. Pas la peine de garder si on utilise plus cette version */
+		[(#SPIP_VERSION|spip_version_compare{3.2-dev,<}|oui)
 		$.getScript("[(#CHEMIN{javascript/ui/core.js}|timestamp)]", function(){
 		$.getScript("[(#CHEMIN{javascript/ui/widget.js}|timestamp)]", function(){
 		$.getScript("[(#CHEMIN{javascript/ui/mouse.js}|timestamp)]", function(){
 		$.getScript("[(#CHEMIN{javascript/ui/tabs.js}|timestamp)]", function(){
 		$.getScript("[(#CHEMIN{javascript/ui/accordion.js}|timestamp)]", function(){
 		$.getScript("[(#CHEMIN{javascript/ui/sortable.js}|timestamp)]", function(){
+		]
 			/*
 				ACCORDION avant TABS sinon la largeur de
 				l'accordion actif (autre que le premier)
@@ -118,7 +119,9 @@ $(document).ready(function(){
 						}
 					});
 			}
+		[(#SPIP_VERSION|spip_version_compare{3.2-dev,<}|oui)
 		})})})})})});
+		]
 
 		<BOUCLE_skeleditor(CONDITION){si #PLUGIN{skeleditor}}>
 		/* un peu de coloration syntaxique */
