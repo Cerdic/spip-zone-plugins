@@ -138,38 +138,6 @@ function noizetier_boite_infos($flux){
 	return $flux;
 }
 
-/**
- * Personnaliser le fond des formulaires.
- *
- * Ajout d'un lien vers la page de configuration
- * dans le formulaire de sélection de composition d'un objet
- */
-function noizetier_formulaire_fond($flux) {
-// TODO : a priori inutile, à virer !
-	// formulaire d'edition de la composition d'un objet
-	if (isset($flux['args']['form']) and $flux['args']['form'] == 'editer_composition_objet') {
-		$objet = isset($flux['args']['contexte']['objet']) ? $flux['args']['contexte']['objet'] : '';
-		$composition = isset($flux['args']['contexte']['composition']) ? $flux['args']['contexte']['composition'] : '';
-		$type_page = $objet.($composition ? '-'.$composition : '');
-		$noizetier_compositions_meta = isset($GLOBALS['meta']['noizetier_compositions']) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
-		$noizetier_compositions_xml = array_keys(noizetier_page_repertorier());
-
-		// On vérifie que cette composition existe
-		if ((isset($noizetier_compositions_meta[$objet][$composition]) and is_array($noizetier_compositions_meta[$objet][$composition]))
-			or in_array($type_page, $noizetier_compositions_xml)
-		) {
-			$balise_img = charger_filtre('balise_img');
-			$lien = generer_url_ecrire('noizetier_page', "page=$type_page");
-			$alt = _T('noizetier:editer_configurer_page');
-			$cherche = "/(<span[^>]*class=('|\")toggle_box_link[^>]*>)/is";
-			$icone = inserer_attribut($balise_img(find_in_path('prive/themes/spip/images/noisette-16.png')), 'style', 'vertical-align:middle;');
-			$remplace = '$1'."<a href=\"$lien\" title=\"$alt\">".$icone.'</a> ';
-			$flux['data'] = preg_replace($cherche, $remplace, $flux['data']);
-		}
-	}
-
-	return $flux;
-}
 
 /**
  * Pipeline compositions_lister_disponibles pour ajouter les compositions du noizetier.

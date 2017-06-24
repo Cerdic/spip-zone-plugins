@@ -65,7 +65,7 @@ function balise_NOIZETIER_NOISETTE_INFOS_dist($p)
 			$noisette = str_replace('\'', '"', $argument);
 			$information = interprete_argument_balise(2, $p);
 			$information = isset($information) ? str_replace('\'', '"', $information) : '""';
-			$p->code = "noizetier_noisette_informer($noisette, $information)";
+			$p->code = "noisette_informer($noisette, $information)";
 		} else {
 			$filtres = str_replace('\'', '"', $argument);
 			$p->code = "noizetier_noisette_repertorier($filtres)";

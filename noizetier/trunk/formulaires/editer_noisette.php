@@ -30,7 +30,7 @@ function formulaires_editer_noisette_charger_dist($id_noisette, $redirect = '') 
 			// stockées dans le champ 'parametres' de la table 'spip_noisettes'.
 			// Cette structure de formulaire est générée automatiquement par le plugin Saisies.
 			include_spip('noizetier_fonctions');
-			$champs = noizetier_noisette_informer($valeurs['noisette'], 'parametres');
+			$champs = noisette_informer($valeurs['noisette'], 'parametres');
 			if ($champs) {
 				$valeurs['_champs'] = $champs;
 
@@ -70,7 +70,7 @@ function formulaires_editer_noisette_verifier_dist($id_noisette, $redirect = '')
 
 	// TODO : rajouter la vérification des css
 	$noisette = _request('noisette');
-	$champs = noizetier_noisette_informer($noisette, 'parametres');
+	$champs = noisette_informer($noisette, 'parametres');
 
 	return saisies_verifier($champs, false);
 }
@@ -83,7 +83,7 @@ function formulaires_editer_noisette_traiter_dist($id_noisette, $redirect = '') 
 	if (autoriser('configurer', 'noizetier')) {
 		// Paramètres propres de la noisette
 		$noisette = _request('noisette');
-		$champs = noizetier_noisette_informer($noisette, 'parametres');
+		$champs = noisette_informer($noisette, 'parametres');
 		$parametres = array();
 		foreach (saisies_lister_champs($champs, false) as $_champ) {
 			$parametres[$_champ] = _request($_champ);

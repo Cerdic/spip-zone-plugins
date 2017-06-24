@@ -47,7 +47,8 @@ function autoriser_noizetier_menu_dist($faire, $type, $id, $qui, $opt) {
  * Autorisation de configuration d'une page ou d'un objet du noiZetier.
  * Il faut :
  * - être autorisé à configurer le noiZetier,
- * - que la page ou l'objet existe et soit bien accessible pour le noiZetier,
+ * - que la page ou l'objet existe et soit bien accessible pour le noiZetier (i.e. plugin Compositions actif
+ *   si on est en présence d'une composition),
  * - et que :
  *   - si on est en présence d'un objet, son type soit bien activé dans la configuration,
  *   - ou que si on est en présence d'une composition basée sur un type d'objet, celui-ci
@@ -157,6 +158,35 @@ function autoriser_noizetier_creercomposition_dist($faire, $type, $id, $qui, $op
 	and (defined('_DIR_PLUGIN_COMPOSITIONS'))
 	and (($configuration['est_page_objet'] == 'non')
 		or (($configuration['est_page_objet'] == 'oui') and noizetier_page_composition_activee($configuration['type'])))) {
+		$autoriser = true;
+	}
+
+	return $autoriser;
+}
+
+/**
+ * Autorisation de suppression d'une composition virtuelle du noiZetier.
+ * Il faut :
+ * - être autorisé à configurer le noiZetier
+ * - et que la page existe toujours et soit bien une composition virtuelle.
+ *
+ * @param $faire
+ * @param $type
+ * @param $id
+ * @param $qui
+ * @param $opt
+ *
+ * @return bool
+ */
+function autoriser_noizetier_supprimercomposition_dist($faire, $type, $id, $qui, $opt) {
+	$autoriser = false;
+
+	include_spip('noizetier_fonctions');
+	if (autoriser('configurer', 'noizetier', $id, $qui,  $opt)
+	and (is_array($opt) and !empty($opt))
+	and (!empty($opt['page']) and ($configuration = noizetier_page_informer($opt['page']))
+	and $configuration['composition'])
+	and ($configuration['est_virtuelle'] == 'oui')) {
 		$autoriser = true;
 	}
 

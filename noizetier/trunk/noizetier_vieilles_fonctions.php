@@ -631,7 +631,7 @@ function noizetier_noisette_repertorier($filtres = array()) {
 				foreach ($fichiers as $_fichier => $_chemin) {
 					$noisette = basename($_fichier, '.yaml');
 					$options = array('recharger' => true, 'yaml' => $_chemin);
-					if ($configuration = noizetier_noisette_informer($noisette, '', $options)) {
+					if ($configuration = noisette_informer($noisette, '', $options)) {
 						// On n'inclue la noisette que si les plugins qu'elle nécessite explicitement dans son
 						// fichier de configuration sont bien tous activés.
 						// Rappel : si une noisette est incluse dans un plugin non actif elle ne sera pas détectée
@@ -687,7 +687,7 @@ function noizetier_noisette_repertorier($filtres = array()) {
  *
  * @return mixed|string
  */
-function noizetier_noisette_informer($noisette, $information = '', $options = array()) {
+function noisette_informer($noisette, $information = '', $options = array()) {
 
 	static $description_noisette = array();
 

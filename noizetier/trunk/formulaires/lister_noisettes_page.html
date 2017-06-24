@@ -14,7 +14,7 @@
 	[#BOITE_OUVRIR{'','error'}(#ENV*{message_erreur})#BOITE_FERMER]
 	[#BOITE_OUVRIR{'','success'}(#ENV*{message_ok})#BOITE_FERMER]
 
-	#SET{blocs, #NOIZETIER_PAGE_INFOS{#ENV{page, #ENV{objet}}, blocs}}
+	#SET{blocs, #ENV{page, #ENV{objet}}|noizetier_page_lister_blocs}
 	#SET{bloc_affiche, #ENV{bloc}|sinon{#GET{blocs}|reset}}
 	<BOUCLE_bloc_affiche(CONDITION){si #GET{bloc_affiche}}>
 	#SET{infos_bloc_affiche, #NOIZETIER_BLOC_INFOS{#GET{bloc_affiche}}}

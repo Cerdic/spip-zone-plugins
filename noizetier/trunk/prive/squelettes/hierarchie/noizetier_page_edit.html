@@ -1,10 +1,13 @@
-[(#ENV{exec}|=={noizetier_page_edit}|oui)
-	#SET{description_page, #NOIZETIER_PAGE_INFOS{#ENV{page}|?{#ENV{page}, #ENV{source}}}}
-	<a href="[(#URL_ECRIRE{noizetier_pages}|parametre_url{est_page_objet, #GET{description_page/est_page_objet}})]">
-		[(#VAL{noizetier:liste_pages_objet_}|concat{#GET{description_page/est_page_objet}}|_T)]
-	</a> &gt;
-	<strong class="on">[
-		(#ENV{edition}|=={creer}|oui) <:info_sans_titre:>][
-		(#ENV{edition}|=={modifier}|oui)[ (#GET{description_page/nom})]][
-		(#ENV{edition}|=={dupliquer}|oui) <:noizetier:formulaire_dupliquer_page_titre{page=#GET{description_page/nom}}:>]</strong>
-]
+<BOUCLE_page_edit_hierarchie(CONDITION) {si #ENV{exec}|=={noizetier_page_edit}}>
+	#SET{page, #ENV{page}|?{#ENV{page}, #ENV{source}}}
+	<BOUCLE_page(NOIZETIER_PAGES) {page=#GET{page}}>
+		<a href="[(#URL_ECRIRE{noizetier_pages}|parametre_url{est_page_objet, #EST_PAGE_OBJET})]">
+			[(#VAL{noizetier:liste_pages_objet_}|concat{#EST_PAGE_OBJET}|_T)]
+		</a> &gt;
+		<strong class="on">[
+			(#ENV{edition}|=={creer}|oui) <:info_sans_titre:>][
+			(#ENV{edition}|=={modifier}|oui)[ (#NOM)]][
+			(#ENV{edition}|=={dupliquer}|oui) <:noizetier:copie_de{source=#NOM}:>]
+		</strong>
+	</BOUCLE_page>
+</BOUCLE_page_edit_hierarchie>

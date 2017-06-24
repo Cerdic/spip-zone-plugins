@@ -14,6 +14,7 @@
 	<auteur lien="https://contrib.spip.net/Joseph">Joseph</auteur>
 	<auteur lien="https://contrib.spip.net/Matthieu-Marcillaud">Matthieu Marcillaud</auteur>
 	<auteur lien="http://www.kent1.info">kent1</auteur>
+	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
@@ -34,7 +35,6 @@
 	<pipeline nom="formulaire_admin" inclure="noizetier_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="noizetier_pipelines.php" />
 	<pipeline nom="boite_infos" inclure="noizetier_pipelines.php" />
-	<pipeline nom="formulaire_fond" inclure="noizetier_pipelines.php" />
 	<pipeline nom="compagnon_messages" inclure="noizetier_pipelines.php" />
 
 	<necessite nom="yaml" compatibilite="[1.5.2;[" />

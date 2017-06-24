@@ -68,6 +68,7 @@ function formulaires_editer_page_charger_dist($edition, $description_page, $redi
 		// On crée une nouvelle composition à partir d'une page source.
 		// L'argument $description_page contient donc la configuration complète de la page source.
 		$valeurs['type_page'] = $description_page['type'];
+		$valeurs['nom'] = _T('info_sans_titre');
 
 	} else {
 		$valeurs['editable'] = false;

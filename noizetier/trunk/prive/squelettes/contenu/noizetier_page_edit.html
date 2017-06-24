@@ -27,7 +27,7 @@
 		<h1>
 			[(#ENV{edition}|=={modifier}|oui)[(#GET{description_page/nom})]]
 			[(#ENV{edition}|=={creer}|oui)<:info_sans_titre:>]
-			[(#ENV{edition}|=={dupliquer}|oui)<:noizetier:formulaire_dupliquer_page_titre{page=#GET{description_page/nom}}:>]
+			[(#ENV{edition}|=={dupliquer}|oui)<:noizetier:copie_de{source=#GET{description_page/nom}}:>]
 		</h1>
 	</div>
 
