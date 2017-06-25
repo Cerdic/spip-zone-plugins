@@ -396,7 +396,7 @@ function noizetier_page_charger($recharger = false) {
 	$options['blocs_defaut'] = noizetier_bloc_defaut();
 
 	// Choisir le bon répertoire des pages
-	$options['repertoire_pages'] = noizetier_page_obtenir_dossier();
+	$options['repertoire_pages'] = noizetier_page_repertoire();
 
 	// Initialiser le contexte de rechargement
 	// TODO : en attente de voir si on rajoute un var_mode ou autre
@@ -694,7 +694,7 @@ function noizetier_page_composition_activee($type) {
  * @return string
  * 		Le répertoire des pages sous la forme dossier/.
  */
-function noizetier_page_obtenir_dossier() {
+function noizetier_page_repertoire() {
 
 	if (defined('_NOIZETIER_REPERTOIRE_PAGES')) {
 		$repertoire_pages = _NOIZETIER_REPERTOIRE_PAGES;
@@ -891,7 +891,7 @@ function noizetier_configuration_est_modifiee($entite, $identifiant) {
 	$est_modifiee = true;
 
 	// Détermination du répertoire par défaut
-	$repertoire = ($entite == 'page') ? noizetier_page_obtenir_dossier() : 'noisettes/';
+	$repertoire = ($entite == 'page') ? noizetier_page_repertoire() : 'noisettes/';
 
 	// Récupération du md5 enregistré en base de données
 	$from = "spip_noizetier_${entite}s";

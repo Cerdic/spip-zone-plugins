@@ -1026,7 +1026,7 @@ function noizetier_page_repertorier($filtres = array()) {
 
 	if (is_null($pages)) {
 		// Choisir le bon répertoire des pages
-		$options['repertoire_pages'] = noizetier_page_obtenir_dossier();
+		$options['repertoire_pages'] = noizetier_page_repertoire();
 
 		if ($options['repertoire_pages']) {
 			// Initialiser les blocs par défaut
@@ -1125,7 +1125,7 @@ function noizetier_page_repertorier($filtres = array()) {
 /**
  * Retourne la configuration de la page, de la composition explicite ou de la composition virtuelle demandée.
  *
- * @uses noizetier_page_obtenir_dossier()
+ * @uses noizetier_page_repertoire()
  * @uses noizetier_bloc_defaut()
 
  * @package SPIP\NOIZETIER\API\PAGE
@@ -1154,7 +1154,7 @@ function page_informer($page, $information = '', $options =array()) {
 
 		// Choisir le bon répertoire des pages
 		if (empty($options['repertoire_pages'])) {
-			$options['repertoire_pages'] = noizetier_page_obtenir_dossier();
+			$options['repertoire_pages'] = noizetier_page_repertoire();
 		}
 
 		// Initialiser les blocs par défaut

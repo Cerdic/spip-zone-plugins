@@ -93,7 +93,7 @@ function phraser_page($page, $options = array()) {
 
 	// Choisir le bon répertoire des pages
 	if (empty($options['repertoire_pages'])) {
-		$options['repertoire_pages'] = noizetier_page_obtenir_dossier();
+		$options['repertoire_pages'] = noizetier_page_repertoire();
 	}
 
 	// Initialiser les blocs par défaut
