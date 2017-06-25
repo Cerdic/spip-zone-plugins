@@ -30,7 +30,7 @@ function balise_NOIZETIER_BLOC_INFOS_dist($p) {
 		$information = isset($information) ? str_replace('\'', '"', $information) : '""';
 		$p->code = "noizetier_bloc_informer($bloc, $information)";
 	} else {
-		$p->code = "noizetier_bloc_repertorier()";
+		$p->code = "noizetier_bloc_informer()";
 	}
 
 	return $p;

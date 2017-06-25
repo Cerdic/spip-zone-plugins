@@ -263,31 +263,6 @@ function noizetier_bloc_defaut() {
 
 
 /**
- * Retourne la liste des descriptions des blocs par defaut du squelette.
- *
- * @package SPIP\NOIZETIER\API\BLOC
- * @api
- * @filtre
- *
- * @return array
- */
-function noizetier_bloc_repertorier() {
-	static $blocs = null;
-
-	if (is_null($blocs)) {
-		$options['blocs_defaut'] = noizetier_bloc_defaut();
-		foreach ($options['blocs_defaut'] as $_bloc) {
-			if ($configuration = noizetier_bloc_informer($_bloc, '', $options)) {
-				$blocs[$_bloc] = $configuration;
-			}
-		}
-	}
-
-	return $blocs;
-}
-
-
-/**
  * Retourne la description complète d'un bloc.
  * La description est disponible dans un fichier YAML.
  *
@@ -297,43 +272,60 @@ function noizetier_bloc_repertorier() {
  *
  * @return array|string
  */
-function noizetier_bloc_informer($bloc, $information = '', $options = array()) {
+function noizetier_bloc_informer($bloc = '', $information = '') {
+
+	static $blocs = null;
 	static $description_bloc = array();
 
-	if (!isset($description_bloc[$bloc])) {
-		if ($fichier = find_in_path("${bloc}/bloc.yaml")) {
-			// Il y a un fichier YAML de configuration dans le répertoire du bloc
-			include_spip('inc/yaml');
-			if ($description = yaml_charger_inclusions(yaml_decode_file($fichier))) {
-				$description['nom'] = isset($description['nom']) ? _T_ou_typo($description['nom']) : ucfirst($bloc);
-				if (isset($description['description'])) {
-					$description['description'] = _T_ou_typo($description['description']);
+	if ((!$bloc and is_null($blocs))
+	or ($bloc and !isset($description_bloc[$bloc]))) {
+		// On détermine les blocs pour lesquels on retourne la description
+		$identifiants_blocs = $bloc ? array($bloc) : noizetier_bloc_defaut();
+
+		foreach ($identifiants_blocs as $_bloc) {
+			$description = array();
+			if ($fichier = find_in_path("${_bloc}/bloc.yaml")) {
+				// Il y a un fichier YAML de configuration dans le répertoire du bloc
+				include_spip('inc/yaml');
+				if ($description = yaml_charger_inclusions(yaml_decode_file($fichier))) {
+					$description['nom'] = isset($description['nom']) ? _T_ou_typo($description['nom']) : ucfirst($bloc);
+					if (isset($description['description'])) {
+						$description['description'] = _T_ou_typo($description['description']);
+					}
+					if (!isset($description['icon'])) {
+						$description['icon'] = 'bloc-24.png';
+					}
 				}
-				if (!isset($description['icon'])) {
-					$description['icon'] = 'bloc-24.png';
-				}
+			} elseif (!defined('_DIR_PLUGIN_ZCORE') and in_array($_bloc, array('contenu', 'navigation', 'extra'))) {
+				// Avec Zpip v1, les blocs sont toujours les mêmes : on en donne une description standard.
+				$description = array(
+					'nom' => _T("noizetier:nom_bloc_${_bloc}"),
+					'description' => _T("noizetier:description_bloc_${_bloc}"),
+					'icon' => "bloc-${_bloc}-24.png",
+				);
+			} else {
+				// Aucune description, on renvoie juste le nom qui coincide avec l'identifiant du bloc
+				$description = array('nom' => ucfirst($_bloc));
 			}
-		} elseif (!defined('_DIR_PLUGIN_ZCORE') and in_array($bloc, array('contenu', 'navigation', 'extra'))) {
-			// Avec Zpip v1, les blocs sont toujours les mêmes : on en donne une description standard.
-			$description = array(
-				'nom' => _T("noizetier:nom_bloc_${bloc}"),
-				'description' => _T("noizetier:description_bloc_${bloc}"),
-				'icon' => "bloc-${bloc}-24.png",
-			);
-		} else {
-			// Aucune description, on renvoie juste le nom qui coincide avec l'identifiant du bloc
-			$description = array('nom' => ucfirst($bloc));
+			// Sauvegarde de la description du bloc pour une consultation ultérieure dans le même hit.
+			if ($bloc) {
+				$description_bloc[$_bloc] = $description;
+			} else {
+				$blocs[$_bloc] = $description;
+			}
 		}
-		// Sauvegarde de la description du bloc pour une consultation ultérieure dans le même hit.
-		$description_bloc[$bloc] = $description;
 	}
 
-	if (!$information) {
-		return $description_bloc[$bloc];
-	} elseif (isset($description_bloc[$bloc][$information])) {
-		return $description_bloc[$bloc][$information];
+	if ($bloc) {
+		if (!$information) {
+			return $description_bloc[$bloc];
+		} else {
+			return isset($description_bloc[$bloc][$information])
+				? $description_bloc[$bloc][$information]
+				: '';
+		}
 	} else {
-		return '';
+		return $blocs;
 	}
 }
 
@@ -736,9 +728,10 @@ function noizetier_page_obtenir_dossier() {
  *
  * @return array|string
  * 		Si le type et l'id de l'objet sont fournis, on renvoie la description de la page de cet objet.
- * 		Sinon, on renvoie le tableau de toutes les objets sous la forme [type_objet][id_objet].
+ * 		Sinon, on renvoie le tableau des descriptions des pages de tous les objets indexés par [type_objet][id_objet].
  */
 function noizetier_objet_informer($type_objet = '', $id_objet = 0, $information = '') {
+
 	static $objets = null;
 	static $description_objet = array();
 
