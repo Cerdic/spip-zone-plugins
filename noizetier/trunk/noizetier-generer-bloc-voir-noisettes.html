@@ -3,7 +3,7 @@
 [(#SET{page, #GET{type}[-(#GET{composition})]})]
 [(#OBJET|?{
 	#SET{informations, #NOIZETIER_OBJET_INFOS{#OBJET, #ID_OBJET}},
-	#SET{informations, #NOIZETIER_PAGE_INFOS{#GET{page}}}
+	#SET{informations, #GET{page}|noizetier_page_informer}
 })]
 
 <div class="noizetier-bloc" id="noizetier-bloc-#ENV{bloc}" style="padding:10px; border:4px dotted #DF454F; margin:10px 0;">

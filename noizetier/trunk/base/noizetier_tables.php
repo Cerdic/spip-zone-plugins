@@ -81,6 +81,7 @@ function noizetier_declarer_tables_principales($tables_principales) {
 	$noisettes = array(
 		'noisette'       => "varchar(255) DEFAULT '' NOT NULL",
 		'type'           => "varchar(127) DEFAULT '' NOT NULL",
+		'composition'    => "varchar(127) DEFAULT '' NOT NULL",
 		'nom'            => "text DEFAULT '' NOT NULL",
 		'description'    => "text DEFAULT '' NOT NULL",
 		'icon'           => "varchar(255) DEFAULT '' NOT NULL",
@@ -96,6 +97,7 @@ function noizetier_declarer_tables_principales($tables_principales) {
 	$noisettes_cles = array(
 		'PRIMARY KEY'    => 'noisette',
 		'KEY type'       => 'type',
+		'KEY composition'    => 'composition',
 		'KEY ajax'       => 'ajax',
 		'KEY inclusion'  => 'inclusion',
 	);

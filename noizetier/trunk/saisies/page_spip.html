@@ -1,6 +1,7 @@
 [(#REM)
 
-Saisies qui liste les pages du site SPIP (appelables par spip.php?page=xxx)
+Saisies qui liste les pages du site SPIP (appelables par spip.php?page=xxx).
+Les compositions sont exclues.
 
   Parametres :
   - class : classe(s) css ajoutes au select
@@ -16,14 +17,13 @@ Saisies qui liste les pages du site SPIP (appelables par spip.php?page=xxx)
 <select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"]>
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)<option value="0">[(#ENV{option_intro})]</option>]
 	<B_pages>
+	<!-- TODO : c'est quoi #TITRE ??? -->
 	<optgroup label="#TITRE">
-	<BOUCLE_pages(DATA){source table, #NOIZETIER_PAGE_INFOS}{par cle}>
-	[(#VALEUR{composition}|non)
+	<BOUCLE_pages(NOIZETIER_PAGES) {composition=''}{par page}>
 		[(#ENV{multiple}|oui)
-		<option value="#VALEUR{type}"[(#VALEUR{type}|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>[(#VALEUR{nom})] ([(#VALEUR{type})])</option>]
+		<option value="#TYPE"[(#TYPE|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>[(#NOM)][ \((#TYPE)\)])</option>]
 		[(#ENV{multiple}|non)
-		<option value="#VALEUR{type}"[(#VALEUR{type}|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>[(#VALEUR{nom})] ([(#VALEUR{type})])</option>]
-	]
+		<option value="#TYPE"[(#TYPE|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>[(#NOM)][ \((#TYPE)\)]</option>]
 	</BOUCLE_pages>
 	</optgroup>
 	</B_pages>

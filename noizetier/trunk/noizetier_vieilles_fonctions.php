@@ -1003,6 +1003,8 @@ function noizetier_ajaxifier_noisette($noisette) {
 // ---------------------------- API PAGES ----------------------------
 // -------------------------------------------------------------------
 
+// API traitées
+// ------------
 /**
  * Retourne la liste des pages, des compositions explicites et des compositions virtuelles.
  * Chaque page est fournie avec l'ensemble de sa configuration.
