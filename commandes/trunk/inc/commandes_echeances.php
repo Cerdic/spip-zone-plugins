@@ -48,7 +48,7 @@ function commandes_lister_paiements_echeances($echeances) {
 			$paiements_echeances[] = $paiement;
 		}
 	}
-	var_dump($paiements_echeances);
+
 	return $paiements_echeances;
 }
 
