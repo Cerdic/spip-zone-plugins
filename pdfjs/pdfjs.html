@@ -18,15 +18,15 @@
 	<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 	[(#ENV{file}|non)
 	<link rel="stylesheet" href="#CHEMIN{lib/pdfjs/web/viewer.css}"/>
-	[<script type="text/javascript" src="(#CHEMIN{lib/pdfjs/web/compatibility.js})"></script>]
-	[<script type="text/javascript" src="(#CHEMIN{lib/pdfjs/web/debugger.js})"></script>]
-	<link rel="resource" type="application/l10n" href="#CHEMIN{lib/pdfjs/web/locale/locale.properties}"/>
-	[<script type="text/javascript" src="(#CHEMIN{lib/pdfjs/web/l10n.js})"></script>]
-	[<script type="text/javascript" src="(#CHEMIN{lib/pdfjs/build/pdf.js})"></script>]
-	[<script type="text/javascript" src="(#CHEMIN{lib/pdfjs/web/viewer.js})"></script>]
+	[<script type="text/javascript" src="(#CHEMIN{lib/pdfjs/web/compatibility.js}|timestamp)"></script>]
+	[<script type="text/javascript" src="(#CHEMIN{lib/pdfjs/web/debugger.js}|timestamp)"></script>]
+	[<link rel="resource" type="application/l10n" href="(#CHEMIN{lib/pdfjs/web/locale/locale.properties}|timestamp)"/>]
+	[<script type="text/javascript" src="(#CHEMIN{lib/pdfjs/web/l10n.js}|timestamp)"></script>]
+	[<script type="text/javascript" src="(#CHEMIN{lib/pdfjs/build/pdf.js}|timestamp)"></script>]
+	[<script type="text/javascript" src="(#CHEMIN{lib/pdfjs/web/viewer.js}|timestamp)"></script>]
 	<script type="text/javascript">
 	window.addEventListener('load',function(){
-		PDFJS.workerSrc = '#CHEMIN{lib/pdfjs/build/pdf.worker.js}';
+		PDFJS.workerSrc = '[(#CHEMIN{lib/pdfjs/build/pdf.worker.js}|timestamp)]';
 		PDFJS.cMapUrl = '#CHEMIN{lib/pdfjs/web/cmaps/}';
 		PDFViewerApplication.preferences.set('disableFontFace', true);
 		DEFAULT_URL = '[(#DISTANT|=={oui}|?{[(#URL_DOCUMENT|copie_locale)],[(#URL_DOCUMENT)]})]';
