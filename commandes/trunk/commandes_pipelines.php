@@ -202,16 +202,20 @@ function commandes_bank_traiter_reglement($flux){
 		$montant_regle = $transaction['montant_regle'];
 		$transaction_mode = $transaction['mode'];
 		$statut_nouveau = 'paye';
-		
+
+
 		// Si la commande n'a pas d'échéance, le montant attendu est celui du prix de la commande
-		if (!$commande['echeances'] or !$echeances = unserialize($commande['echeances'])) {
+		include_spip('inc/commandes_echeances');
+		if (!$commande['echeances']
+			or !$echeances = unserialize($commande['echeances'])
+		  or !$desc = commandes_trouver_prochaine_echeance_desc($id_commande, $echeances, true)
+		  or !isset($desc['montant'])) {
 			$fonction_prix = charger_fonction('prix', 'inc/');
 			$montant_attendu = $fonction_prix('commande', $id_commande);
 		}
 		// Sinon le montant attendu est celui de la prochaine échéance (en ignorant la dernière transaction OK que justement on cherche à tester)
 		else {
-			include_spip('inc/commandes_echeances');
-			$montant_attendu = commandes_trouver_prochaine_echeance($id_commande, $echeances, true);
+			$montant_attendu = $desc['montant'];
 		}
 		spip_log("commande #$id_commande attendu:$montant_attendu regle:$montant_regle", 'commandes');
 
@@ -431,7 +435,8 @@ function commandes_bank_abos_preparer_echeance($flux){
 				include_spip('inc/commandes_echeances');
 
 				// Si on a bien trouvé une prochaine échéance
-				if ($montant = commandes_trouver_prochaine_echeance($id_commande, $echeances)) {
+				if ($desc = commandes_trouver_prochaine_echeance_desc($id_commande, $echeances)
+				  and isset($desc['montant'])) {
 					include_spip('action/editer_objet');
 
 					$set = array('statut' => 'attente');
@@ -444,6 +449,7 @@ function commandes_bank_abos_preparer_echeance($flux){
 					objet_modifier('commande', $id_commande, $set);
 
 					// On crée la transaction qui testera le vrai paiement
+					$montant = $desc['montant'];
 					$inserer_transaction = charger_fonction('inserer_transaction', 'bank');
 					$options_transaction = array(
 						'id_auteur' => intval($commande['id_auteur']),
@@ -451,6 +457,9 @@ function commandes_bank_abos_preparer_echeance($flux){
 							'id_commande' => $id_commande,
 						),
 					);
+					if (isset($desc['montant_ht'])) {
+						$options_transaction['montant_ht'] = $desc['montant_ht'];
+					}
 					$id_transaction = intval($inserer_transaction($montant, $options_transaction));
 
 					$flux['data'] = $id_transaction;
