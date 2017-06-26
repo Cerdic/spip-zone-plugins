@@ -10,6 +10,8 @@
 	[(#EDITABLE)
 	<form method="post" action="#ENV{action}#confirmation">
 		<div>
+			<[(#DIV|sinon{ul})] class="editer-groupe">
+			
 			#ACTION_FORMULAIRE{#ENV{action}}
 			
 			[(#SAISIE{selecteur_rubrique, rubrique_racine, 
@@ -22,14 +24,17 @@
 			
 			#SET{intitule_bouton,#EVAL{_T('previsualiser')}}
 			[<a name="confirmation"></a>
-			<li class="">
+			<[(#DIV|sinon{li})] class="editer">
 				<span class="h3"><:rubriqueur:apercu_import:></span>
 				(#ENV**{erreurs}|table_valeur{previsu}|propre)
-			</li>
+			</[(#DIV|sinon{li})]>
+							
 			[(#SAISIE{oui_non, confirmer, label=<:rubriqueur:confirmer_import:>})]
 			#SET{intitule_bouton,#EVAL{_T('rubriqueur:bouton_creer')}}
 			]
-			
+									
+			</[(#DIV|sinon{ul})]>
+								
 			<p class="boutons">
 				<span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="#GET{intitule_bouton}"/>
 			</p>
