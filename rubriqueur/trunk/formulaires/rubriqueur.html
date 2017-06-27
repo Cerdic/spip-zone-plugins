@@ -22,15 +22,21 @@
 			explication=<:rubriqueur:rubriques_explications:>})]
 					
 		#SET{intitule_bouton,#EVAL{_T('previsualiser')}}
-		[<a name="confirmation"></a>
-		<[(#DIV|sinon{li})] class="editer">
-			<span class="h3"><:rubriqueur:apercu_import:></span>
+		<a name="confirmation"></a>
+					
+		[
+		#SET{intitule_bouton,#EVAL{_T('rubriqueur:bouton_creer')}}
+		<[(#DIV|sinon{li})] class="editer rubriqueur_previsu">
 			(#ENV**{erreurs}|table_valeur{previsu}|propre)
 		</[(#DIV|sinon{li})]>
-						
 		[(#SAISIE{oui_non, confirmer, label=<:rubriqueur:confirmer_import:>})]
-		#SET{intitule_bouton,#EVAL{_T('rubriqueur:bouton_creer')}}
 		]
+		
+		[
+		<[(#DIV|sinon{li})] class="editer">
+			(#ENV**{erreurs}|table_valeur{erreur_analyse}|propre)
+		</[(#DIV|sinon{li})]>
+		]		
 								
 		</[(#DIV|sinon{ul})]>
 							

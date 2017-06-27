@@ -4,7 +4,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-define('_RUBRIQUEUR_SEPARATEUR', '%%SLASH%%');
+define('_RUBRIQUEUR_DEUX_POINTS_SUBSTITUT', '%%DEUXPOINTS%%');
 
 function formulaires_rubriqueur_charger_dist() {
 
@@ -25,30 +25,38 @@ function formulaires_rubriqueur_verifier_dist() {
 		$retour['message_erreur'] = _T('rubriqueur:pas_autorise');
 	}
 
-	// confirmation interméfiaire
+	// confirmation intermédiaire
 	if (!$retour && _request('confirmer') != 'on') {
-		$data = rubriqueur_parse_texte(_request('rubriques'), 'previsu');
-		if ((int)_request('rubrique_racine')) {
-			$previsu = _T('rubriqueur:dans_la_rubrique') . ' ' . sql_getfetsel('titre', 'spip_rubriques',
-					'id_rubrique=' . $rubrique_racine);
-		} else {
-			$previsu = _T('rubriqueur:a_la_racine');
+		$data = _rubriqueur_parse_texte(_request('rubriques'), 'previsu');
+		// les données calculées sont un tableau ? l'analyse yaml a réussi
+		if (is_array($data)) {
+			$previsu = '{{{' . _T('rubriqueur:apercu_import') . '}}}';
+			if ((int)_request('rubrique_racine')) {
+				$previsu .= _T('rubriqueur:dans_la_rubrique') . ' {{' . sql_getfetsel('titre', 'spip_rubriques',
+						'id_rubrique=' . $rubrique_racine) . '}}';
+			} else {
+				$previsu .= _T('rubriqueur:a_la_racine');
+			}
+			$previsu                  .= _rubriqueur_traiter_rubrique($data, $rubrique_racine, 'previsu');
+			$retour['previsu']        = $previsu;
+			$retour['message_erreur'] = _T('rubriqueur:confirmer_import');
+		} 
+		// sinon, on retourne le message d'erreur
+		else {
+			$retour['erreur_analyse'] = _T('rubriqueur:erreur_analyse') . "\n\n" . '{{'.$data.'}}';
+			$retour['message_erreur'] = _T('rubriqueur:erreur_analyse');
 		}
-		$previsu           .= "\n" . join("\n", $data);
-		$retour['previsu'] = $previsu;
 	}
 
 	return $retour;
 }
 
 function formulaires_rubriqueur_traiter_dist() {
-	$rubrique_racine = picker_selected(_request('rubrique_racine'), 'rubrique');
-	$rubrique_racine = array_pop($rubrique_racine);
-	$rubriques       = rubriqueur_parse_texte(_request('rubriques'));
-	include_spip('inc/rubriques');
-	foreach ($rubriques as $rubrique) {
-		rubriqueur_creer_rubrique_nommee($rubrique, $rubrique_racine, _RUBRIQUEUR_SEPARATEUR);
-	}
+	$rubrique_racine = array_pop(picker_selected(_request('rubrique_racine'), 'rubrique'));
+	$rubriques       = _rubriqueur_parse_texte(_request('rubriques'));
+
+	_rubriqueur_traiter_rubrique($rubriques, $rubrique_racine);
+
 	// mettre à jour les status, id_secteur et profondeur
 	include_spip('inc/rubriques');
 	calculer_rubriques();
@@ -60,93 +68,58 @@ function formulaires_rubriqueur_traiter_dist() {
 	);
 }
 
-function rubriqueur_parse_texte($texte, $mode = 'creer', $indentation = '  ') {
-	$retour            = array();
-	$rappel_profondeur = 0;
-	$chemin            = array();
-	$lignes            = explode("\n", $texte);
-	foreach ($lignes as $ligne) {
-		if (!trim($ligne)) {
-			continue;
-		}
-		$profondeur = 0;
-		while (substr($ligne, 0, strlen($indentation)) === $indentation) {
-			$profondeur += 1;
-			$ligne      = substr($ligne, strlen($indentation));
-		}
-		if ($rappel_profondeur > $profondeur) {
-			array_splice($chemin, $profondeur);
-		}
-		$chemin[$profondeur] = trim($ligne);
-		if ($mode == 'previsu') {
-			$retour[] = '-' . str_repeat('*', $profondeur) . '* ' . $ligne;
+function _rubriqueur_traiter_rubrique($rubriques, $id_parent = 0, $mode = 'creer', $profondeur = 0, $retour = '') {
+	foreach ($rubriques as $key => $value) {
+		if (is_numeric($key)) {
+			$titre = str_replace(_RUBRIQUEUR_DEUX_POINTS_SUBSTITUT, ':', $value);
+			if ($mode == 'creer') {
+				sql_insertq('spip_articles', array(
+					'titre'       => $titre,
+					'id_rubrique' => $id_parent,
+					'statut'      => 'publie',
+					'date'        => date('Y-m-d H:i:s'),
+				));
+			} else {
+				$retour .= "\n" . '-' . str_repeat('*', $profondeur) . '* <span class="article">' . $titre . '</span>';
+			}
 		} else {
-			$retour[] = join(_RUBRIQUEUR_SEPARATEUR, $chemin);
+			$titre = str_replace(_RUBRIQUEUR_DEUX_POINTS_SUBSTITUT, ':', $key);
+			if ($mode == 'creer') {
+				$id_rubrique = sql_insertq('spip_rubriques', array(
+					'titre'     => $titre,
+					'id_parent' => $id_parent,
+					'statut'    => 'publie',
+					'date'      => date('Y-m-d H:i:s'),
+				));
+			} else {
+				$retour .= "\n" . '-' . str_repeat('*', $profondeur) . '* <span class="rubrique">' . $titre . '</span>';
+			}
+			$retour .= _rubriqueur_traiter_rubrique($value, $id_rubrique, $mode, $profondeur + 1);
 		}
-		$rappel_profondeur = $profondeur;
 	}
 
 	return $retour;
 }
 
-/**
- * Crée une arborescence de rubrique
- *
- * Copie modifiée de creer_rubrique_nommee() depuis /ecrire/inc/rubriques,
- * pour ne pas modifier la signature de la fonction originale.
- * Ajout du séparateur en paramètre.
- *
- * @param string $titre
- *     Titre des rubriques, séparés par des $separateur
- * @param int    $id_parent
- *     Identifiant de la rubrique parente
- * @param string $separateur
- *     Séparateur du chemin
- * @param string $serveur
- *     Nom du connecteur à la base de données
- *
- * @return int
- *     Identifiant de la rubrique la plus profonde.
- */
-function rubriqueur_creer_rubrique_nommee($titre, $id_parent = 0, $separateur = '/', $serveur = '') {
+function _rubriqueur_parse_texte($texte, $mode = 'creer', $indentation = '  ') {
+	require_spip('inc/yaml');
 
-	// eclater l'arborescence demandee
-	// echapper les </multi> et autres balises fermantes html
-	$titre = preg_replace(",</([a-z][^>]*)>,ims", "<@\\1>", $titre);
-	$arbo  = explode($separateur, preg_replace(',^/,', '', $titre));
-	include_spip('base/abstract_sql');
-	foreach ($arbo as $titre) {
-		// retablir les </multi> et autres balises fermantes html
-		$titre = preg_replace(",<@([a-z][^>]*)>,ims", "</\\1>", $titre);
-		$r     = sql_getfetsel("id_rubrique", "spip_rubriques",
-			"titre = " . sql_quote($titre) . " AND id_parent=" . intval($id_parent),
-			$groupby = array(), $orderby = array(), $limit = '', $having = array(), $serveur);
-		if ($r !== null) {
-			$id_parent = $r;
-		} else {
-			$id_rubrique = sql_insertq('spip_rubriques', array(
-					'titre'     => $titre,
-					'id_parent' => $id_parent,
-					'statut'    => 'prive',
-				)
-				, $desc = array(), $serveur);
-			if ($id_parent > 0) {
-				$data       = sql_fetsel("id_secteur,lang", "spip_rubriques", "id_rubrique=$id_parent",
-					$groupby = array(), $orderby = array(), $limit = '', $having = array(), $serveur);
-				$id_secteur = $data['id_secteur'];
-				$lang       = $data['lang'];
-			} else {
-				$id_secteur = $id_rubrique;
-				$lang       = $GLOBALS['meta']['langue_site'];
-			}
+	// transformer le texte en YAML pour pouvoir le décoder 
 
-			sql_updateq('spip_rubriques', array('id_secteur' => $id_secteur, "lang" => $lang),
-				"id_rubrique=$id_rubrique", $desc = '', $serveur);
+	// remplacer les : des titres par un marqueur qu'on supprimera ensuite
+	$yaml = str_replace(':', _RUBRIQUEUR_DEUX_POINTS_SUBSTITUT, $texte);
+	// ajouter : à la fin de chaque ligne pour indiquer les sous rubriques
+	$yaml = preg_replace('#^(\s*)([^\r\n]+).*$#m', '$1$2:', $yaml);
+	// supprimer les : sur les lignes d'articles (pas d'enfants)
+	$yaml = preg_replace('#^(\s*)(\-\s)([^:\r\n]+)(:).*$#m', '$1- $3', $yaml);
 
-			// pour la recursion
-			$id_parent = $id_rubrique;
-		}
+	// retourner un tableau en cas de succès, une chaine en cas d'erreur
+	try {
+		$retour = yaml_decode($yaml);
+	} catch (Exception $e) {
+		$retour = $e->getMessage();
 	}
 
-	return intval($id_parent);
+	return $retour;
+
 }

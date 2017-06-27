@@ -1,7 +1,7 @@
 <paquet
 	prefix="rubriqueur"
 	categorie="edition"
-	version="1.0.4"
+	version="2.0.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/rubriqueur-64.png"
@@ -17,7 +17,9 @@
 	<menu nom="rubriqueur" titre="rubriqueur:rubriqueur_titre" parent="menu_edition" icone="images/rubriqueur-16.png" action="rubriqueur" />
 
 	<pipeline nom="autoriser" inclure="rubriqueur_autorisations.php"/>
+	<pipeline nom="header_prive" inclure="rubriqueur_pipelines.php"/>
 
 	<necessite nom="saisies" compatibilite="[2.0.3;[" />
+	<necessite nom="yaml" compatibilite="[1.5.3;[" />
 
 </paquet>

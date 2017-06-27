@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rubriqueur_nom'         => 'Rubriqueur',
 	'rubriqueur_slogan'      => 'Créer rapidement des rubriques',
 );
-
-?>
