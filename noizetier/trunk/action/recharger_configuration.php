@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * soit l'ensemble des pages à partir de leur fichier XML ou YAML, soit l'ensemble des noisettes
  * à partir de leur fichier YAML.
  *
- * Cette action est réservée aux utilisateurs pouvant configurer le noiZetier.
+ * Cette action est réservée aux utilisateurs pouvant utiliser le noiZetier.
  * Elle nécessite l'objet concerné soit page ou noisette.
  *
  * @return void
@@ -28,7 +28,7 @@ function action_recharger_configuration_dist() {
 	$argument = $securiser_action();
 
 	// Verification des autorisations
-	if (!autoriser('configurer', 'noizetier')) {
+	if (!autoriser('noizetier')) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit();

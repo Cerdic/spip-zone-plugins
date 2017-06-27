@@ -11,8 +11,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function noizetier_autoriser() {}
 
 /**
- * Autorisation minimale d'accès à toutes les pages du noiZetier y compris celle de configuration.
- * Par défaut, seuls les webmestres sont autorisés à utiliser le noiZetier.
+ * Autorisation minimale d'accès à toutes les pages du noiZetier sauf celle de configuration
+ * du plugin lui-même.
+ * Par défaut, seuls les administrateurs complets sont autorisés à utiliser le noiZetier.
  * Cette autorisation est toujours à la base de toutes les autres autorisations du plugin.
  *
  * @param $faire
@@ -23,8 +24,8 @@ function noizetier_autoriser() {}
  *
  * @return bool
  */
-function autoriser_noizetier_configurer_dist($faire, $type, $id, $qui, $opt) {
-	return autoriser('webmestre');
+function autoriser_noizetier_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('defaut');
 }
 
 /**
@@ -40,7 +41,24 @@ function autoriser_noizetier_configurer_dist($faire, $type, $id, $qui, $opt) {
  * @return bool
  */
 function autoriser_noizetier_menu_dist($faire, $type, $id, $qui, $opt) {
-	return autoriser('configurer', 'noizetier', $id, $qui,  $opt);
+	return autoriser('noizetier');
+}
+
+/**
+ * Autorisation d'accès à la page de configuration du plugin noiZetier.
+ * Par défaut, seuls les webmestres sont autorisés à modifier la configuration du noiZetier
+ * et en particulier la liste des pages accessibles par les utilisateurs.
+ *
+ * @param $faire
+ * @param $type
+ * @param $id
+ * @param $qui
+ * @param $opt
+ *
+ * @return bool
+ */
+function autoriser_noizetier_configurer_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('webmestre');
 }
 
 /**
@@ -72,7 +90,7 @@ function autoriser_noizetier_configurerpage_dist($faire, $type, $id, $qui, $opt)
 	$autoriser = false;
 
 	include_spip('noizetier_fonctions');
-	if (autoriser('configurer', 'noizetier', $id, $qui,  $opt)
+	if (autoriser('noizetier')
 	and (is_array($opt) and !empty($opt))) {
 		if (!empty($opt['page']) and ($configuration = noizetier_page_informer($opt['page']))
 		and (!$configuration['composition']
@@ -117,7 +135,7 @@ function autoriser_noizetier_activercomposition_dist($faire, $type, $id, $qui, $
 	$autoriser = false;
 
 	include_spip('noizetier_fonctions');
-	if (autoriser('configurer', 'noizetier', $id, $qui,  $opt)
+	if (autoriser('noizetier')
 	and (is_array($opt) and !empty($opt))
 	and (!empty($opt['page']) and ($configuration = noizetier_page_informer($opt['page']))
 	and !$configuration['composition'])
@@ -151,7 +169,7 @@ function autoriser_noizetier_creercomposition_dist($faire, $type, $id, $qui, $op
 	$autoriser = false;
 
 	include_spip('noizetier_fonctions');
-	if (autoriser('configurer', 'noizetier', $id, $qui,  $opt)
+	if (autoriser('noizetier')
 	and (is_array($opt) and !empty($opt))
 	and (!empty($opt['page']) and ($configuration = noizetier_page_informer($opt['page']))
 	and !$configuration['composition'])
@@ -182,7 +200,7 @@ function autoriser_noizetier_supprimercomposition_dist($faire, $type, $id, $qui,
 	$autoriser = false;
 
 	include_spip('noizetier_fonctions');
-	if (autoriser('configurer', 'noizetier', $id, $qui,  $opt)
+	if (autoriser('noizetier')
 	and (is_array($opt) and !empty($opt))
 	and (!empty($opt['page']) and ($configuration = noizetier_page_informer($opt['page']))
 	and $configuration['composition'])
@@ -196,9 +214,9 @@ function autoriser_noizetier_supprimercomposition_dist($faire, $type, $id, $qui,
 /**
  * Autorisation de modification d'une composition virtuelle du noiZetier.
  * Il faut :
- * - que la composition existe bien et est virtuelle.
+ * - que la composition existe bien et soit virtuelle.
  * - et être autorisé à créer une composition virtuelle du noiZetier à partir d'une page source qui
- *   coincide avec le type de la composition virtuelle
+ *   coincide avec le type de la composition virtuelle.
  *
  * @param $faire
  * @param $type
@@ -242,7 +260,7 @@ function autoriser_noizetier_dupliquercomposition_dist($faire, $type, $id, $qui,
 	$autoriser = false;
 
 	include_spip('noizetier_fonctions');
-	if (autoriser('configurer', 'noizetier', $id, $qui,  $opt)
+	if (autoriser('noizetier')
 	and (is_array($opt) and !empty($opt))
 	and (!empty($opt['page']) and ($configuration = noizetier_page_informer($opt['page']))
 	and $configuration['composition'])

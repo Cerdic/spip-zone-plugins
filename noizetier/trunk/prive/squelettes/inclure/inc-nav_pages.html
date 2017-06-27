@@ -22,6 +22,7 @@
 				<:noizetier:liste_objets:>,
 				#GET{page_exec}|=={#ENV{exec}}})
 	</li>]
+	[(#AUTORISER{configurer, noizetier})
 	#SET{page_exec, configurer_noizetier}
 	[<li class="item">
 		(#URL_ECRIRE{#GET{page_exec}}
@@ -29,6 +30,7 @@
 				<:noizetier:configurer_titre:>,
 				#GET{page_exec}|=={#ENV{exec}}})
 	</li>]
+	]
 </ul>
 
 [(#REM) Racourcis de rechargement des pages et des noisettes à partir de leur fichier de configuration ]
