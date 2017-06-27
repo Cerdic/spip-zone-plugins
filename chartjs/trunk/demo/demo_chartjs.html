@@ -23,15 +23,33 @@
 			<h2 id="bar"><:chartjs:demo_bar:></h2>
 			#SET{data,"40,32,50,35 next 20,25,45,42 next 40,43, 61,50 next 33,15,40,22"}
 			#SET{labels,"Salé,Sucré,Amer,Acide"}
-			[(#MODELE{chart}{id=barre,type=bar,canvaswidth=450,canvasheight=450,datasets=#GET{data},labels=#GET{labels}})]
+			#SET{datalabels,"poire,pomme,courgette,citron"}
+			[(#MODELE{chart}{id=barre,type=bar,datasets=#GET{data},labels=#GET{labels},dataLabels=#GET{datalabels}})]
 			<pre class="code-chart">
-			&lt;chart
-			|id=barre
-			|type=bar
-			|datasets=40,32,50,35 next 20,25,45,42 next 40,43, 61,50 next 33,15,40,22
-			|labels=Salé,Sucré,Amer,Acide
-			|canvaswidth=450
-			|canvasheight=450&gt;
+&lt;chart
+  |id=barre
+  |type=bar
+  |datasets=40,32,50,35 next 20,25,45,42 next 40,43, 61,50 next 33,15,40,22
+  |labels=Salé,Sucré,Amer,Acide
+  |dataLabels=poire,pomme,courgette,citron0&gt;
+			</pre>
+		</div>
+
+		<!-- stacked bar -->
+		<div class="col-md-6 col-lg-4">
+			<h2 id="bar_stacked"><:chartjs:demo_bar:></h2>
+			#SET{data,"40,32,50,35 next 20,25,45,42 next 40,43, 61,50 next 33,15,40,22"}
+			#SET{labels,"Salé,Sucré,Amer,Acide"}
+			#SET{datalabels,"poire,pomme,courgette,citron"}
+			[(#MODELE{chart}{id=barre_stacked,type=bar,datasets=#GET{data},labels=#GET{labels},dataLabels=#GET{datalabels},stacked=true})]
+			<pre class="code-chart">
+&lt;chart
+  |id=barre
+  |type=bar
+  |datasets=40,32,50,35 next 20,25,45,42 next 40,43, 61,50 next 33,15,40,22
+  |labels=Salé,Sucré,Amer,Acide
+  |dataLabels=poire,pomme,courgette,citron
+  |stacked=true&gt;
 			</pre>
 		</div>
 
@@ -40,15 +58,15 @@
 			<h2 id="ligne"><:chartjs:demo_line:></h2>
 			#SET{data,"40,43,61,50 next 33,15,40,22"}
 			#SET{labels,"Janvier, Février, Mars, Avril"}
-			[(#MODELE{chart}{id=ligne,type=line,datasets=#GET{data},labels=#GET{labels}})]
+			#SET{datalabels,"patates,poireaux"}
+			[(#MODELE{chart}{id=ligne,type=line,datasets=#GET{data},labels=#GET{labels},dataLabels=#GET{datalabels}})]
 			<pre class="code-chart">
-			&lt;chart
-			|id=ligne
-			|type=line
-			|datasets=40,43,61,50 next 33,15,40,22
-			|labels=Janvier, Février, Mars, Avril
-			|canvaswidth=450
-			|canvasheight=450&gt;
+&lt;chart
+  |id=ligne
+  |type=line
+  |datasets=40,43,61,50 next 33,15,40,22
+  |labels=Janvier, Février, Mars, Avril0
+  |dataLabels=patates,poireaux&gt;
 			</pre>
 		</div>
 
@@ -59,11 +77,11 @@
 			#SET{labels,"Tôkyô - 東京,Kyoto, Osaka,Chiba,Hiroshima"}
 			[(#MODELE{chart}{id=camembert1,type=pie,data=#GET{data},labels=#GET{labels}})]
 			<pre class="code-chart">
-			&lt;chart
-			|id=camembert1
-			|type=pie
-			|labels=Tôkyô - 東京,Kyoto, Osaka,Chiba,Hiroshima
-			|data=10,32,50,25,5&gt;
+&lt;chart
+  |id=camembert1
+  |type=pie
+  |labels=Tôkyô - 東京,Kyoto, Osaka,Chiba,Hiroshima
+  |data=10,32,50,25,5&gt;
 			</pre>
 		</div>
 
@@ -72,14 +90,15 @@
 			<h2 id="doughnut"><:chartjs:demo_doughnut:></h2>
 			#SET{data,"30,10,55,25,15,8"}
 			#SET{colors,"#69D2E7,#E0E4CC,#F38630,#96CE7F,#CEBC17,#CE4264"}
-			[(#MODELE{chart}{id=anneau,type=doughnut,align=right,data=#GET{data},colors=#GET{colors}})]
+			[(#MODELE{chart}{id=anneau,type=doughnut,align=right,data=#GET{data},colors=#GET{colors},labels=#GET{labels}})]
 			<pre class="code-chart">
-			&lt;chart
-			|id=anneau
-			|type=doughnut
-			|align=right
-			|data=30,10,55,25,15,8
-			|colors=#69D2E7,#E0E4CC,#F38630,#96CE7F,#CEBC17,#CE4264&gt;
+&lt;chart
+  |id=anneau
+  |type=doughnut
+  |align=right
+  |data=30,10,55,25,15,8
+  |labels=Tôkyô - 東京,Kyoto, Osaka,Chiba,Hiroshima
+  |colors=#69D2E7,#E0E4CC,#F38630,#96CE7F,#CEBC17,#CE4264&gt;
 			</pre>
 		</div>
 
@@ -88,16 +107,14 @@
 			<h2 id="polararea"><:chartjs:demo_polaire:></h2>
 			#SET{data,"40,32,5,25,50,45"}
 			#SET{labels,"Noix,Amandes,Raisins,Autres sucreries,Salés,Six"}
-			[(#MODELE{chart}{id=polaire,type=polarArea,align=center,canvaswidth=250,canvasheight=250,data=#GET{data},labels=#GET{labels}})]
+			[(#MODELE{chart}{id=polaire,type=polarArea,data=#GET{data},labels=#GET{labels}})]
 			<pre class="code-chart">
-			&lt;chart
-			|id=polaire
-			|type=polarArea
-			|align=center
-			|data=40,32,5,25,50,45
-			|labels=Noix,Amandes,Raisins,Autres sucreries,Salés,Six
-			|canvaswidth=250
-			|canvasheight=250&gt;
+&lt;chart
+  |id=polaire
+  |type=polarArea
+  |align=center
+  |data=40,32,5,25,50,45
+  |labels=Noix,Amandes,Raisins,Autres sucreries,Salés,Six&gt;
 			</pre>
 		</div>
 
@@ -107,21 +124,19 @@
 			#SET{data,"20,22,40,25,55 next 15,20,30,40,35"}
 			#SET{labels,"Précis, Rapide, Joli, Complet, かわい"}
 			#SET{colors,"#CEBC17,#CE4264"}
-			[(#MODELE{chart}{id=radar45,type=radar,canvaswidth=450,canvasheight=450,datasets=#GET{data},labels=#GET{labels},colors=#GET{colors}})]
+			[(#MODELE{chart}{id=radar,type=radar,datasets=#GET{data},labels=#GET{labels},colors=#GET{colors}})]
 			<pre class="code-chart">
-			&lt;chart
-			|id=radar45
-			|type=radar
-			|datasets=40,43,61,50 next 33,15,40,22
-			|labels=Précis, Rapide, Joli, Complet, かわい
-			|canvaswidth=450
-			|canvasheight=450
-			|colors=#CEBC17,#CE4264&gt;
+&lt;chart
+  |id=radar45
+  |type=radar
+  |datasets=40,43,61,50 next 33,15,40,22
+  |labels=Précis, Rapide, Joli, Complet, かわい
+  |colors=#CEBC17,#CE4264&gt;
 			</pre>
 		</div>
 
 		<!-- spip -->
-		<div class="col-md-6 col-lg-4">
+		<div class="col-md-6">
 			<h2><:chartjs:demo_spip_data:></h2>
 			#SET{nb_article,0}
 			<BOUCLE_articles(ARTICLES)> </BOUCLE_articles>#SET{nb_article,#TOTAL_BOUCLE} </B_articles>
@@ -129,20 +144,20 @@
 			<BOUCLE_auteurs(AUTEURS)> </BOUCLE_auteurs>#SET{nb_auteur,#TOTAL_BOUCLE} </B_auteurs>
 			#SET{data,#GET{nb_article}|concat{",",#GET{nb_auteur}}} 
 			#SET{labels,"Articles, Auteurs"}
-			[(#MODELE{chart}{id=barrespip,type=bar,canvaswidth=450,canvasheight=450,datasets=#GET{data},labels=#GET{labels}})]
+			[(#MODELE{chart}{id=barrespip,type=bar,datasets=#GET{data},labels=#GET{labels}})]
 			<pre class="code-chart">
-			&#35;SET{nb_article,0}
-			&lt;BOUCLE_articles(ARTICLES)&gt; &lt;/BOUCLE_articles&gt;&#35;SET{nb_article,&#35;TOTAL_BOUCLE} &lt;/B_articles&gt;
-			&#35;SET{nb_auteur,0}
-			&lt;BOUCLE_auteurs(AUTEURS)&gt; &lt;/BOUCLE_auteurs&gt;&#35;SET{nb_auteur,&#35;TOTAL_BOUCLE} &lt;/B_auteurs&gt;
-			&#35;SET{data,&#35;GET{nb_article}|concat{",",&#35;GET{nb_auteur}}} 
-			&#35;SET{labels,"Articles, Auteurs"}
-			[(&#35;MODELE{chart}{id=barrespip,type=bar,canvaswidth=450,canvasheight=450,datasets=&#35;GET{data},labels=&#35;GET{labels}})]
+&#35;SET{nb_article,0}
+&lt;BOUCLE_articles(ARTICLES)&gt; &lt;/BOUCLE_articles&gt;&#35;SET{nb_article,&#35;TOTAL_BOUCLE} &lt;/B_articles&gt;
+&#35;SET{nb_auteur,0}
+&lt;BOUCLE_auteurs(AUTEURS)&gt; &lt;/BOUCLE_auteurs&gt;&#35;SET{nb_auteur,&#35;TOTAL_BOUCLE} &lt;/B_auteurs&gt;
+&#35;SET{data,&#35;GET{nb_article}|concat{",",&#35;GET{nb_auteur}}} 
+&#35;SET{labels,"Articles, Auteurs"}
+[(&#35;MODELE{chart}{id=barrespip,type=bar,datasets=&#35;GET{data},labels=&#35;GET{labels}})]
 			</pre>
 		</div>
 
 		<!-- spip data -->
-		<div class="col-md-6 col-lg-4">
+		<div class="col-md-6">
 			<h2><:chartjs:demo_spip_bigdata:></h2>
 			#SET{data,''}
 			#SET{labels,''}
@@ -155,21 +170,21 @@
 			</BOUCLE_cours>
 			#SET{data,#GET{data}|substr{1}}
 			#SET{labels,#GET{labels}|substr{1}} 
-			[(#MODELE{chart}{id=coursduyen,type=line,width=auto,height=auto,canvaswidth=850,canvasheight=350,datasets=#GET{data},labels=#GET{labels}})]
+			[(#MODELE{chart}{id=coursduyen,type=line,datasets=#GET{data},labels=#GET{labels}})]
 			<strong><:chartjs:demo_spip_legend:></strong>
 			<pre class="code-chart">
-			&#35;SET{data,''}
-			&#35;SET{labels,''}
-			&lt;BOUCLE_cours(DATA){source simplexml,http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml?&#35;ENV{date}}{datapath root/children/cube/0/children/cube}{0,30}&gt;
-			&#35;SET{labels, &#35;GET{labels}|concat{",",&#35;VALEUR{attributes/time}|affdate{d/m/y}}} 
-			&lt;BOUCLE_yen(DATA){source tableau,&#35;VALEUR{children/cube}}&gt;[
-			(&#35;VALEUR{attributes/currency}|=={JPY}|oui)
-			 &#35;SET{data,&#35;GET{data}|concat{",",&#35;VALEUR{attributes/rate}}
-			]&lt;/BOUCLE_yen&gt; 
-			&lt;/BOUCLE_cours&gt;
-			&#35;SET{data,&#35;GET{data}|substr{1}}
-			&#35;SET{labels,&#35;GET{labels}|substr{1}} 
-			[(&#35;MODELE{chart}{id=coursduyen,type=line,width=auto,height=auto,canvaswidth=850,canvasheight=350,datasets=&#35;GET{data},labels=&#35;GET{labels}})]
+&#35;SET{data,''}
+&#35;SET{labels,''}
+&lt;BOUCLE_cours(DATA){source simplexml,http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml?&#35;ENV{date}}{datapath root/children/cube/0/children/cube}{0,30}&gt;
+&#35;SET{labels, &#35;GET{labels}|concat{",",&#35;VALEUR{attributes/time}|affdate{d/m/y}}} 
+&lt;BOUCLE_yen(DATA){source tableau,&#35;VALEUR{children/cube}}&gt;[
+(&#35;VALEUR{attributes/currency}|=={JPY}|oui)
+ &#35;SET{data,&#35;GET{data}|concat{",",&#35;VALEUR{attributes/rate}}
+]&lt;/BOUCLE_yen&gt; 
+&lt;/BOUCLE_cours&gt;
+&#35;SET{data,&#35;GET{data}|substr{1}}
+&#35;SET{labels,&#35;GET{labels}|substr{1}} 
+[(&#35;MODELE{chart}{id=coursduyen,type=line,width=auto,height=auto,datasets=&#35;GET{data},labels=&#35;GET{labels}})]
 			</pre>
 		</div>
 
