@@ -24,15 +24,6 @@ function chartjs_insert_head_css($flux){
  * @return mixed
  */
 function chartjs_insert_head($flux){
-
-  $flux .= 
-           "<!--[if lte IE 8]><script src='".find_in_path('js/excanvas.compiled.js')."'></script><![endif]-->\n"
-         . "<script type='text/javascript' src='".find_in_path('js/Chart.js')."'></script>"
-         . "<script type='text/javascript' src='".find_in_path('js/chart_extra.js')."'></script>";
-  
-  return $flux;
+	$flux .=  "<script type='text/javascript' src='" . find_in_path('lib/chartjs/Chart.js') . "'></script>";
+	return $flux;
 }
-
-
-
-?>

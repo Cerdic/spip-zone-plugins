@@ -68,9 +68,9 @@
  [(#GET{colors}|table_valeur{#CLE}|oui)  #SET{color_temp,#GET{colors}|table_valeur{#CLE}|chartjs_hex2rgb}] 
  #SET{color_temp2,#GET{color_temp}|concat{",",#GET{fillopacity}}}
  [(#SET{dataJs,#GET{dataJs}|concat{\{
-                        fillColor 	: "rgba\(#GET{color_temp2},)",
+                        backgroundColor 	: "rgba\(#GET{color_temp2},)",
                         ",",
-                        strokeColor	: "rgba\(#GET{color_temp},",",1)",
+                        borderColor	: "rgba\(#GET{color_temp},",",1)",
                         ",",
                         data: \[#VALEUR\],'},'}})]
 </BOUCLE_barre>
@@ -80,41 +80,44 @@
  [(#GET{colors}|table_valeur{#CLE}|oui)  #SET{color_temp,#GET{colors}|table_valeur{#CLE}|chartjs_hex2rgb}] 
  #SET{color_temp2,#GET{color_temp}|concat{",",#GET{fillopacity}}}
  [(#SET{dataJs,#GET{dataJs}|concat{\{
-                        fillColor 	: "rgba\(#GET{color_temp2},)",
+                        backgroundColor 	: "rgba\(#GET{color_temp2},)",
                         ",",
-                        strokeColor	: "rgba\(#GET{color_temp},",",1)",
-                        ",",
-                        pointColor	: "rgba\(#GET{color_temp},",",1)",
-                        ",",
-                        pointStrokeColor	: "rgba\(#GET{color_temp},",",1)",
-                        ",",
+                        borderColor	: "rgba\(#GET{color_temp},",",1)",
                         data: \[#VALEUR\],'},'}})]
 </BOUCLE_line>
  
 [(#GET{type}|match{'Line|Radar|Bar'}|oui) [(#SET{dataJs,#GET{dataJs}|concat{']};'}})] ]
 [(#GET{type}|match{'Line|Radar|Bar'}|non) [(#SET{dataJs,#GET{dataJs}|concat{'];'}})] ]
 
+
 <div class="spip-chart-wrap [spip-chart-align-(#GET{align})] [(#GET{class})]" 
      style="max-width:100%;width:[(#GET{width}|!={null}|?{#GET{width},#GET{canvaswidth}px})];height:[(#GET{height}|!={null}|?{#GET{height},#GET{canvasheight}px})];"><canvas id="#GET{title}" height="#GET{canvasheight}" width="#GET{canvaswidth}" class="spip-chart-canvas"></canvas></div>
 <script>
-var [(#GET{title})]Ops = { 	animation: #GET{animation},
-[(#GET{type}|match{'Line|Radar|Bar|PolarArea'}|oui)
-     scaleFontSize:#GET{scalefontsize},
-     scaleFontColor:"#GET{scalefontcolor}",
-     scaleOverride:#GET{scaleoverride},
-     scaleSteps:#GET{scalesteps},
-     scaleStepWidth:#GET{scalestepwidth},
-     scaleStartValue:#GET{scalestartvalue},
-][(#GET{type}|=={'Line'}|oui)
-     bezierCurve:#GET{bezierCurve},
-][(#GET{type}|match{'Line|Radar'}|oui)
-     datasetFill:#GET{datasetFill},
-][(#GET{type}|match{'Line|Bar'}|oui)
-     scaleLabel:"<%=value%>[ (#GET{scaleLabelUnit})]",
-]};
+$(document).ready(function(){
+  var [(#GET{title})]Ops = {
+    [(#GET{type}|match{'Line|Radar|Bar|PolarArea'}|oui)
+       scaleFontSize:#GET{scalefontsize},
+       scaleFontColor:"#GET{scalefontcolor}",
+       scaleOverride:#GET{scaleoverride},
+       scaleSteps:#GET{scalesteps},
+       scaleStepWidth:#GET{scalestepwidth},
+       scaleStartValue:#GET{scalestartvalue},
+    ][(#GET{type}|=={'Line'}|oui)
+       bezierCurve:#GET{bezierCurve},
+    ][(#GET{type}|match{'Line|Radar'}|oui)
+       datasetFill:#GET{datasetFill},
+    ][(#GET{type}|match{'Line|Bar'}|oui)
+       scaleLabel:"<%=value%>[ (#GET{scaleLabelUnit})]",
+  ]};
 
-var [(#GET{title})]Data = #GET{dataJs};
-[(#GET{type}|match{'Pie|Doughnut|Line|Radar|Bar|PolarArea'}|oui) 
-    var spipChart[(#GET{title})][(#GET{type})] = new Chart(document.getElementById("[(#GET{title})]").getContext("2d")).[(#GET{type})]([(#GET{title})]Data,[(#GET{title})]Ops);
-]
+  var [(#GET{title})]Data = #GET{dataJs}
+  [(#GET{type}|match{'Pie|Doughnut|Line|Radar|Bar|PolarArea'}|oui)
+      var ctx = document.getElementById("[(#GET{title})]");
+      var chart_stats = new Chart(ctx, {
+        type: ['(#GET{type}|strtolower)'],
+        data: [(#GET{title})]Data,
+        options: [(#GET{title})]Ops
+      });
+  ]
+});
 </script>
