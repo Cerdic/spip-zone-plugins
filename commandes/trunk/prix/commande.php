@@ -49,11 +49,16 @@ function prix_commande_ht_dist($id_commande) {
  * @param int $id_commande
  *     Identifiant de la commande
  * @param float $prix_ht
- *     Prix HT de la commande
+ *     Prix HT de la commande, si null, on le calcule automatiquement
  * @return float
  *     Retourne le prix TTC de la commande sinon 0
  */
-function prix_commande_dist($id_commande, $prix_ht) {
+function prix_commande_dist($id_commande, $prix_ht = null) {
+	if (is_null($prix_ht)) {
+		$fonction_ht = charger_fonction('ht', 'prix/commande');
+		$prix_ht = $fonction_ht($id_commande);
+	}
+
 	$prix = 0;
 
 	// On va chercher tous les détails
