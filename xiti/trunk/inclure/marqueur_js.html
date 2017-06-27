@@ -12,7 +12,6 @@
 		if(window.jQuery && window.jQuery.cookieBar){
 			cookie = jQuery.cookieBar('cookies');
 		}
-
 		if(cookie) {
 			window.ATTag = new ATInternet.Tracker.Tag({[
 				site: (#ENV{xtsite}|trim),][
@@ -25,7 +24,6 @@
 				level2: (#ENV{niveau2}|trim)
 			]}
 			ATTag.page.set(conf_page);
-
 			ATTag.dispatch();
 		}
 	</script>

@@ -52,7 +52,7 @@
 			[(#SET{chapitres,[(#GET{chapitres}|push{[(#TITRE|xiti|couper{50,''}|textebrut)]})]})],
 			[(#SET{prefixe_chapitres,[(#GET{prefixe_chapitres}|concat{[[(#GET{prefixe_chapitres}|strlen|>{0}|?{'/',''})](#TITRE|xiti|couper{50,''}|textebrut)]})]})]
 		})]
-		<BOUCLE_xtn2_hierarchie_art(XITI_NIVEAUX){si #GET{xtn2}|non|et{#CONFIG{xiti/niveaux_deux}|=={on}}}{id_rubrique}>
+		<BOUCLE_xtn2_hierarchie_art(XITI_NIVEAUX){si #GET{niveau2}|non|et{#CONFIG{xiti/niveaux_deux}|=={on}}}{id_rubrique}>
 		[(#SET{niveau2,#NIVEAU})]
 		</BOUCLE_xtn2_hierarchie_art>
 	</BOUCLE_chemin_art2>
@@ -87,7 +87,7 @@
 				[(#SET{xtsite,[(#CONFIG{xiti/xtsite_xiti_[(#LANG)]})]})]
 			]
 		]
-		<BOUCLE_xtn2_rub(XITI_NIVEAUX){si #CONFIG{xiti/niveaux_deux}|=={on}|et{#GET{xtn2}|non}}{id_rubrique}>
+		<BOUCLE_xtn2_rub(XITI_NIVEAUX){si #CONFIG{xiti/niveaux_deux}|=={on}|et{#GET{niveau2}|non}}{id_rubrique}>
 		[(#SET{niveau2,#NIVEAU})]
 		</BOUCLE_xtn2_rub>
 		[(#REM) placer un libelle de page pour les rapports Xiti]
@@ -96,7 +96,7 @@
 				[(#SET{chapitres,[(#GET{chapitres}|push{[(#TITRE|xiti|couper{50,''}|textebrut)]})]})],
 				[(#SET{prefixe_chapitres,[(#GET{prefixe_chapitres}|concat{[[(#GET{prefixe_chapitres}|strlen|>{0}|?{'/',''})](#TITRE|xiti|couper{50,''}|textebrut)]})]})]
 			})]
-			<BOUCLE_xtn2_hierarchie_rub(XITI_NIVEAUX){si #GET{xtn2}|non|et{#CONFIG{xiti/niveaux_deux}|=={on}}}{id_rubrique}>
+			<BOUCLE_xtn2_hierarchie_rub(XITI_NIVEAUX){si #GET{niveau2}|non|et{#CONFIG{xiti/niveaux_deux}|=={on}}}{id_rubrique}>
 			[(#SET{niveau2,#NIVEAU})]
 			</BOUCLE_xtn2_hierarchie_rub>
 		</BOUCLE_chemin2>

@@ -34,6 +34,10 @@
 
 ### Version 2.x.x (Passage à smarttag.js)
 
+#### Version 2.1.1 (2017-06-27)
+
+* Bien prendre en compte le niveau 2 lorsqu'on est sur la rubrique sur laquelle il a été stipulé
+
 #### Version 2.1.0 (2017-05-23)
 
 - Ne pas limiter la taille des "pages", dixit le support AT-Internet : *La limite du nombre de caractères au sein d'un nom de page est de 255. Au delà de ce nombre, nous ne prendrons plus en compte ceux-ci*. Du coup, ne pas limiter plutôt que de couper aléatoirement.
