@@ -9,7 +9,9 @@
  * @package    SPIP\Clil\Pipelines
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -99,10 +101,7 @@ function clil_declarer_champs_extras($champs = array()) {
 		unset($sous_tab);
 	}
 
-	// étape 2 : récupérer les restrictions par rubrique
-	$liste_rub = clil_affichage_dans_rubriques();
-
-	// étape 3 : on peut maintenant déclarer le champ extra
+	// étape 2 : on peut maintenant déclarer le champ extra
 	$champs['spip_livres']['code_clil'] = array(
 		'saisie' => 'selection', //Type du champ (voir plugin Saisies)
 		'options' => array(
@@ -110,34 +109,11 @@ function clil_declarer_champs_extras($champs = array()) {
 			'label' => _T('clil_theme:label_code_clil'), 
 			'sql' => "int(11) NOT NULL DEFAULT '0'",
 			'datas' => $datas,
-			'restrictions'=>array('rubrique' => $liste_rub, 					 // restrictions par rubrique
-								  'voir' 	 => array('auteur' => '0minirezo'),  // Tout le monde peut voir
+			'restrictions'=>array('voir' 	 => array('auteur' => '0minirezo'),  // Tout le monde peut voir
 								  'modifier' => array('auteur' => '0minirezo')), // Seuls les webmestres peuvent modifier
 		),
 	);
 	return $champs;
 }
-
-function clil_affichage_dans_rubriques() {
-
-	$liste_rub = '';
-	if (!is_null($quelles_rubriques = lire_config('clil_rubriques/clil_theme'))) {
-		foreach ($quelles_rubriques as $key => $value) {
-			$liste_rub .= $value.':';
-		}
-		$liste_rub = substr($liste_rub, 0, -1);
-	}
-	// Sinon, aucume rubriques sélectionnées, on affiche tout
-	else {
-		$res = sql_allfetsel('id_rubrique', 'spip_rubriques', "statut='publie'");
-		foreach ($res as $key => $value) {
-			$liste_rub .= $value['id_rubrique'].':';
-		}
-		$liste_rub = substr($liste_rub, 0, -1);
-	}
-	return $liste_rub;
-}
-
-
 
 ?>

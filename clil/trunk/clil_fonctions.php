@@ -9,7 +9,9 @@
  * @package    SPIP\Clil\Fonctions
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Nombre de sous-thèmes pour un secteur
@@ -18,7 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @id_secteur Int
  * @return mixed
  */
-function clil_themes_nombre_sous_themes($id, $recherche =''){
+function clil_themes_nombre_sous_themes($id, $recherche ='') {
 
 	if (empty($recherche)) {
 		if (($res = sql_countsel('spip_clil_themes', "id_parent=$id")) > 0)

@@ -9,7 +9,9 @@
  * @package    SPIP\Clil\Options
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // augmenter la profondeur d’exécution pour le plugin Extras chez hébergeurs ayant activés xdebug
 // voir https://contrib.spip.net/Champs-Extras-3
