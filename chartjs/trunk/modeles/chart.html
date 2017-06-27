@@ -85,11 +85,13 @@
 #SET{type,         #ENV{type,pie}|trim|strtolower}
 #SET{alias,        #ARRAY{polararea,polarArea}}
 #SET{type,         #GET{alias/GET{type}}|sinon{#GET{type}}}
-#SET{id,           #ENV{id,chart}|replace{' '}}
-#SET{donnees,      #ENV{data,datasets}}
+#SET{id,           #VAL{spipchart_}|concat{#ENV{id,chart}|replace{' '}}}
+#SET{donnees,      #ENV{data,#ENV{datasets}}}
 [(#REM) Apparence ]
 #SET{width,        #ENV{width,#ENV{canvaswidth}}}
+#SET{width,        #GET{width}|concat{#GET{width}|match{\\w\{2\}$}|?{px}}}
 #SET{height,       #ENV{height,#ENV{canvasheight}}}
+#SET{height,       #GET{width}|concat{#GET{height}|match{\\w\{2\}$}|?{px}}}
 #SET{colors,       #ENV{colors}|is_null|?{
 	#LISTE{#69D2E7,#E0E4CC,#F38630,#96CE7F,#CEBC17,#CE4264,#F7464A,#46BFBD,#FDB45C},
 	#ENV{colors}|is_string|?{#ENV{colors}|replace{' '}|explode{','}, #ENV{colors}}
