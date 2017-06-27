@@ -19,12 +19,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * @param int $id_commande
  *     Identifiant de la commande
- * @param array $ligne
- *     ?? (paramètre inutilisé)
  * @return float
  *     Retourne le prix HT de la commande sinon 0
  */
-function prix_commande_ht_dist($id_commande, $ligne) {
+function prix_commande_ht_dist($id_commande) {
 	$prix_ht = 0;
 
 	// On va chercher tous les détails
