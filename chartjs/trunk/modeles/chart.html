@@ -1,123 +1,207 @@
 [(#REM)
-    modèle pour chart.js
+
+	Modèle pour produire des graphiques avec Chart.js
+
+	Usage recommandé (les 2 exemples produisent le même résultat) :
+	- Dans le texte d'un contenu :
+	<chart|id=toto|type=line|data="10,20,30 next 5,10,15"|labels="2005,2006,2007"|dataLabels="patates,poireaux">
+	- Dans un squelette :
+	#MODELE{chart, id=toto, type=line, data=#ARRAY{patates,#ARRAY{10,20,30},poireaux,#ARRAY{5,10,15}}}
+
+	Paramètres :
+	**obligatoires
+	*recommandés
+
+	<!-- Conteneur -->
+	- *id :           Identifiant du graphe
+	- *class :        Classes supplémentaires du conteneur
+	- width :         Largeur du conteneur, avec l'unité
+	- height :        Hauteur du conteneur, avec l'unité
+
+	<!-- Données et textes -->
+	- **type :        Type de graphique (string)
+	                  pie (défaut) | line | bar | radar | doughnut | polarArea | bubble | scatter | area | mixed
+	- **data :        Jeux de données (string|array)
+	                  - a) soit des séries de nombres séparés par des virgules et le séparateur 'next'
+                      Ex. : "10,20,30 next 5,10,15"
+	                  - b) soit un tableau linéaire
+	                    Ex. #LISTE{10,20,30}
+	                  - c) soit un tableau simple avec labels et données (recommandé)
+	                    Ex. : #ARRAY{
+	                            patates, #ARRAY{10,20,30},
+	                            poireaux, #ARRAY{5,10,15}
+	                          }
+	                  - d) soit un tableau complet avec *toutes* les options, si on sait ce qu'on fait.
+	                    Dans ce cas là, c'est vous qui décidez de tout : les couleurs etc.
+	                    Ex. : #LISTE{
+	                            #ARRAY{label,patates, data,#LISTE{10,20,30}, borderColor,red},
+	                            #ARRAY{label,poireaux, data,#LISTE{5,10,15}, borderColor,blue}
+	                          }
+	- *labels :       Labels utilisés en abscisse (string|array)
+	                  - soit des mots séparés par des virgules : "2005,2006,2007"
+	                  - soit un tableau : #LISTE{carotte,chou,tomate}
+	- dataLabels :   Labels de chaque jeu de données (string|array)
+	                  Inutile si vous passez un tableau c) ou d) au paramètre 'data'
+	                  - soit des mots séparés par des virgules : "patates,poireaux"
+	                  - soit un tableau : #LISTE{patates,poireaux}
+
+	<!-- Apparence -->
+	- colors :        Codes de couleurs à utiliser : nom, hexadécimal, rgb, rgba, hsl, hsla
+	                  - soit des valeurs séparées par des virgules : "turquoise,blue"
+	                  - soit un tableau : #LISTE{turquoise,blue}
+	- borderWidth :   Épaisseur des bordures, sans l'unité (int)
+	                  Défaut = 1
+	- fill :          Remplir ou pas les graphes (string|bool)
+	                  true | false (dépend des types)
+
+	<!-- Options générales -->
+	- options :      Tableaux complet d'options, si on sait ce qu'on fait (array)
+	                 Prend le pas sur les autres options données individuellement
+	                 Exemple : #ARRAY{responsive,false}
+	- stacked :      Pour avoir des données empilées (string)
+                   true | false (défaut)
+	- responsive :   Mode responsive
+                   true (défaut) | false
+
+	<!-- Dépréciés -->
+	- datasets :      Utiliser 'data'
+	- animation :     ?
+	- datasetFill :   Utiliser 'fill'
+	- canvaswidth :   Utiliser 'width'
+	- canvasheight :  Utiliser 'height'
+	- strokeColor :   Utiliser 'borderColor'
+	- pointColor :    Utiliser 'backgroundColor'
+	- pointstrokecolor : Utiliser 'borderColor'
+	- pointHighlightFill : Utiliser 'backgroundColor'
+	- pointHighlightStroke : Utiliser 'borderColor'
 
 ]
-#SET{type,pie}         [(#ENV{type}|oui) #SET{type,#ENV{type}|trim|strtolower|ucfirst}]
-                       [(#GET{type}|=={Polararea}|oui) #SET{type,PolarArea}]
-#SET{title,chart}      [(#ENV{id}|oui) #SET{title,#ENV{id}|trim}]
-#SET{canvaswidth,625}  [(#ENV{canvaswidth}|oui) #SET{canvaswidth,#ENV{canvaswidth}|intval}]
-#SET{canvasheight,625} [(#ENV{canvasheight}|oui) #SET{canvasheight,#ENV{canvasheight}|intval}]
-#SET{width,null}       [(#ENV{width}|oui) #SET{width,#ENV{width}|trim}]
-#SET{height,null}      [(#ENV{height}|oui) #SET{height,#ENV{height}|trim}]
-#SET{align,none} [(#ENV{align}|oui) #SET{align,#ENV{align}|trim}]
-#SET{class,class-none} [(#ENV{class}|oui) #SET{class,#ENV{class}|trim}]
-#SET{labels,null}      [(#ENV{labels}|oui) #SET{labels,#ENV{labels}|trim}]
-#SET{data,0}           [(#ENV{data}|oui) #SET{data,#ENV{data}|trim}] 
-#SET{datasets,null}    [(#ENV{datasets}|oui) #SET{datasets,#ENV{datasets}|trim}] 
-#SET{colors,'#69D2E7,#E0E4CC,#F38630,#96CE7F,#CEBC17,#CE4264,#F7464A,#46BFBD,#FDB45C'}   
-                       [(#ENV{colors}|oui) #SET{colors,#ENV{colors}|trim}]
-#SET{fillopacity,0.7}  [(#ENV{fillopacity}|oui) #SET{fillopacity,#ENV{fillopacity}|trim}]
-#SET{pointstrokecolor,#FFFFFF}    
-                       [(#ENV{pointstrokecolor}|oui) #SET{pointstrokecolor,#ENV{pointstrokecolor}|trim}]
-#SET{animation,true}   [(#ENV{animation}|oui) #SET{animation,#ENV{animation}|trim}] 
-#SET{scalefontsize,12} [(#ENV{scalefontsize}|oui) #SET{scalefontsize,#ENV{scalefontsize}|trim}]
-#SET{scalefontcolor,#666}  [(#ENV{scalefontcolor}|oui) #SET{scalefontcolor,#ENV{scalefontcolor}|trim}]
-#SET{scaleoverride,false}  [(#ENV{scaleoverride}|oui) #SET{scaleoverride,#ENV{scaleoverride}|trim}]
-#SET{scalesteps,null}      [(#ENV{scalesteps}|oui) #SET{scalesteps,#ENV{scalesteps}|trim}]
-#SET{scalestepwidth,null}  [(#ENV{scalestepwidth}|oui) #SET{scalestepwidth,#ENV{scalestepwidth}|trim}]
-#SET{scalestartvalue,null} [(#ENV{scalestartvalue}|oui) #SET{scalestartvalue,#ENV{scalestartvalue}|trim}]
-#SET{scaleLabelUnit,''}  [(#ENV{scaleLabelUnit}|oui) #SET{scaleLabelUnit,#ENV{scaleLabelUnit}|trim}]
-#SET{bezierCurve,true}     [(#ENV{bezierCurve}|oui) #SET{bezierCurve,#ENV{bezierCurve}|trim}]
-#SET{datasetFill,true}     [(#ENV{datasetFill}|oui) #SET{datasetFill,#ENV{datasetFill}|trim}]
-
-[(#REM) traitement]
-#SET{title,#GET{title}|replace{" ",""}}   
-#SET{data,#GET{data}|replace{" ",""}|explode{","}} 
-#SET{datasets,#GET{datasets}|replace{" ",""}|explode{"next"}}
-#SET{colors,#VAL{'/[-,]/'}|preg_split{#GET{colors}|replace{" ",""}}}
-#SET{labels,#GET{labels}|replace{"&#039;","'"}|html_entity_decode|addslashes|explode{","}|}
-
-#SET{dataJs,''}   
-[(#GET{type}|match{'Line|Radar|Bar'}|oui) [(#SET{dataJs,#GET{dataJs}|concat{'{'}})] ]
-[(#GET{type}|match{'Line|Radar|Bar'}|non) [(#SET{dataJs,#GET{dataJs}|concat{'\['}})] ]
-                   
-
-<BOUCLE_rond(POUR){tableau #GET{data}}{si #GET{type}|match{'Pie|Doughnut|PolarArea'}}>
- #SET{color_temp,#f60}
- [(#GET{colors}|table_valeur{#CLE}|oui)  #SET{color_temp,#GET{colors}|table_valeur{#CLE}}  ]
- #SET{label_temp,''} 
- [(#GET{labels}|table_valeur{#CLE}|oui)  [(#GET{labels}|table_valeur{#CLE}|!={null}|oui) #SET{label_temp,#GET{labels}|table_valeur{#CLE}}  ]]
- [(#SET{dataJs,#GET{dataJs}|concat{\{value:#VALEUR,",",color:",#GET{color_temp},'",label:"',#GET{label_temp},'"},'}})]
-</BOUCLE_rond>
-
-#SET{dataLabel,''}
-<BOUCLE_label(POUR){tableau #GET{labels}}{si #GET{type}|match{'Line|Radar|Bar'}}>
-  [(#SET{dataLabel,#GET{dataLabel}|concat{'"',#VALEUR,'",'}})]  
-</BOUCLE_label>
+[(#REM)
+	============================
+	1) Normaliser les paramètres
+	============================
+]
+[(#REM) Base ]
+#SET{type,         #ENV{type,pie}|trim|strtolower}
+#SET{alias,        #ARRAY{polararea,polarArea}}
+#SET{type,         #GET{alias/GET{type}}|sinon{#GET{type}}}
+#SET{id,           #ENV{id,chart}|replace{' '}}
+#SET{donnees,      #ENV{data,datasets}}
+[(#REM) Apparence ]
+#SET{width,        #ENV{width,#ENV{canvaswidth}}}
+#SET{height,       #ENV{height,#ENV{canvasheight}}}
+#SET{colors,       #ENV{colors}|is_null|?{
+	#LISTE{#69D2E7,#E0E4CC,#F38630,#96CE7F,#CEBC17,#CE4264,#F7464A,#46BFBD,#FDB45C},
+	#ENV{colors}|is_string|?{#ENV{colors}|replace{' '}|explode{','}, #ENV{colors}}
+}}
+#SET{fills,        #ARRAY{line,false,bar,true,pie,true}}
+#SET{fill,         #ENV{fill,#GET{fills/#GET{type}}}}
+[(#REM) Options ]
+#SET{stacked,      #ENV{stacked}|=={true}|?{true}}
+#SET{responsive,   #ENV{responsive}|=={false}|?{false}}
 
 
-[(#GET{type}|match{'Line|Radar|Bar'}|oui) 
-   [(#SET{dataJs,#GET{dataJs}|concat{'labels : \[',#GET{dataLabel},'\]'}})]
-   [(#SET{dataJs,#GET{dataJs}|concat{',datasets : \['}})]
+[(#REM)
+	==================================
+	2) Préparer les données pour le JS
+	==================================
+	On construit des tableaux qu'ils nous suffira d'encoder en JS dans le script.
+]
 
+[(#REM)
+	Jeux de données
+	Au final on veut obtenir un tableau de la forme suivante :
+	array (
+		array (
+			'label'   => 'patates',
+			'data'    => array(10,30,20),
+			'option1' => 'x',
+			'option2' => 'y',
+		),
+		array (
+			'label'   => 'poireaux',
+			'data'    => array(20,40,10),
+			'option1' => 'x',
+			'option2' => 'y',
+		)
+	)
+]
+[(#REM) On convertit le texte en tableau si nécessaire ]
+[(#GET{donnees}|is_string|oui)
+#SET{donnees, #VAL{chartjs_explode_virgule}|array_map{#GET{donnees}|explode{next}}}
+]
+[(#REM) Si on a un tableau linéaire, on le réarrange ]
+[(#GET{donnees/0}|is_string|oui)
+#SET{donnees,#LISTE{#GET{donnees}}}
+]
+[(#REM) Maintenant on a 2 options :
+	- si on a un tableau complet on le prend tel quel
+	- sinon on construit le tableau complet nous-même
+]
+#SET{datasets, #ARRAY}
+#SET{tableau_est_complet, #GET{donnees/0/data}|?{oui}}
+<BOUCLE_datasets(DATA){source table, #GET{donnees}}{si #GET{tableau_est_complet}|non}>
+#SET{compteur, #COMPTEUR_BOUCLE|moins{1}}
+#SET{borderColor, #GET{colors/#GET{compteur}}}
+#SET{backgroundColor, #GET{colors/#GET{compteur}}}
+#SET{dataset, #ARRAY{
+	label,           #CLE,
+	data,            #VALEUR,
+	borderColor,     #GET{borderColor},
+	backgroundColor, #GET{backgroundColor},
+	fill,            #GET{fill}
+}}
+#SET{datasets, #GET{datasets}|push{#GET{dataset}}}
+</BOUCLE_datasets>
+#SET{datasets, #GET{donnees}}
+<//B_datasets>
+
+[(#REM) Labels en abscisse ]
+#SET{labels, #ENV{labels}|is_string|?{#ENV{labels}|replace{' '}|explode{','}, #ENV{labels}}}
+
+[(#REM) Options générales :
+	- si on a un tableau complet, on le prend tel quel
+	- sinon, on les prend individuellement
+]
+<BOUCLE_options(CONDITION){si #ENV{options}|is_array}>
+#SET{options, #ENV{options}}
+</BOUCLE_options>
+#SET{scales, #ARRAY{
+	xAxes,#LISTE{#ARRAY{stacked,#GET{stacked}|?{true}}},
+	yAxes,#LISTE{#ARRAY{stacked,#GET{stacked}|?{true}}}
+}}
+#SET{options,#ARRAY{
+	responsive, #GET{responsive},
+	scales,     #GET{scales}
+}}
+#SET{options, #GET{options}|chartjs_array_filter_recursive}
+<//B_options>
+
+
+[(#REM)
+	========================
+	3) Affichage du graphique
+	========================
 ]
 
 
-<BOUCLE_barre(POUR){tableau #GET{datasets}}{si #GET{type}|match{'Bar'}}>
- #SET{color_temp,#f60}
- [(#GET{colors}|table_valeur{#CLE}|oui)  #SET{color_temp,#GET{colors}|table_valeur{#CLE}|chartjs_hex2rgb}] 
- #SET{color_temp2,#GET{color_temp}|concat{",",#GET{fillopacity}}}
- [(#SET{dataJs,#GET{dataJs}|concat{\{
-                        backgroundColor 	: "rgba\(#GET{color_temp2},)",
-                        ",",
-                        borderColor	: "rgba\(#GET{color_temp},",",1)",
-                        ",",
-                        data: \[#VALEUR\],'},'}})]
-</BOUCLE_barre>
+<div
+	class="spip-chart-wrap[ spip-chart-align-(#GET{align})][ (#GET{class})]" 
+	style="position:relative; max-width:100%;[ width:(#GET{width})];[ height:(#GET{height})];"
+>
+	<canvas id="#GET{id}" class="spip-chart-canvas"></canvas>
+</div>
 
-<BOUCLE_line(POUR){tableau #GET{datasets}}{si #GET{type}|match{'Line|Radar'}}>
- #SET{color_temp,#f60}
- [(#GET{colors}|table_valeur{#CLE}|oui)  #SET{color_temp,#GET{colors}|table_valeur{#CLE}|chartjs_hex2rgb}] 
- #SET{color_temp2,#GET{color_temp}|concat{",",#GET{fillopacity}}}
- [(#SET{dataJs,#GET{dataJs}|concat{\{
-                        backgroundColor 	: "rgba\(#GET{color_temp2},)",
-                        ",",
-                        borderColor	: "rgba\(#GET{color_temp},",",1)",
-                        data: \[#VALEUR\],'},'}})]
-</BOUCLE_line>
- 
-[(#GET{type}|match{'Line|Radar|Bar'}|oui) [(#SET{dataJs,#GET{dataJs}|concat{']};'}})] ]
-[(#GET{type}|match{'Line|Radar|Bar'}|non) [(#SET{dataJs,#GET{dataJs}|concat{'];'}})] ]
-
-
-<div class="spip-chart-wrap [spip-chart-align-(#GET{align})] [(#GET{class})]" 
-     style="max-width:100%;width:[(#GET{width}|!={null}|?{#GET{width},#GET{canvaswidth}px})];height:[(#GET{height}|!={null}|?{#GET{height},#GET{canvasheight}px})];"><canvas id="#GET{title}" height="#GET{canvasheight}" width="#GET{canvaswidth}" class="spip-chart-canvas"></canvas></div>
 <script>
 $(document).ready(function(){
-  var [(#GET{title})]Ops = {
-    [(#GET{type}|match{'Line|Radar|Bar|PolarArea'}|oui)
-       scaleFontSize:#GET{scalefontsize},
-       scaleFontColor:"#GET{scalefontcolor}",
-       scaleOverride:#GET{scaleoverride},
-       scaleSteps:#GET{scalesteps},
-       scaleStepWidth:#GET{scalestepwidth},
-       scaleStartValue:#GET{scalestartvalue},
-    ][(#GET{type}|=={'Line'}|oui)
-       bezierCurve:#GET{bezierCurve},
-    ][(#GET{type}|match{'Line|Radar'}|oui)
-       datasetFill:#GET{datasetFill},
-    ][(#GET{type}|match{'Line|Bar'}|oui)
-       scaleLabel:"<%=value%>[ (#GET{scaleLabelUnit})]",
-  ]};
-
-  var [(#GET{title})]Data = #GET{dataJs}
-  [(#GET{type}|match{'Pie|Doughnut|Line|Radar|Bar|PolarArea'}|oui)
-      var ctx = document.getElementById("[(#GET{title})]");
-      var chart_stats = new Chart(ctx, {
-        type: ['(#GET{type}|strtolower)'],
-        data: [(#GET{title})]Data,
-        options: [(#GET{title})]Ops
-      });
-  ]
+	var conteneur[_(#GET{id})] = $("[#(#GET{id})]");
+	var spipChart[_(#GET{id})] = new Chart(conteneur[_(#GET{id})], {
+		type: ['(#GET{type})'], // Type de graphe
+		data: {
+			labels:   [(#GET{labels}|json_encode)], // Labels en abscisse
+			datasets: [(#GET{datasets}|chartjs_array_typecaster|json_encode)], // Jeux de données et leurs options
+		},
+		options: [(#GET{options}|chartjs_array_typecaster|json_encode)] // Options générales
+	});
 });
 </script>
