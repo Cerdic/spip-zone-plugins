@@ -8,7 +8,7 @@ if( !defined('_ECRIRE_INC_VERSION') ){
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
-	'rubriqueur_description' => 'Créer rapidement une arborescence de rubriques à partir d\'une liste saisie dans un simple formulaire',
+	'rubriqueur_description' => 'Créer rapidement une arborescence de rubriques et d\'articles à partir d\'une liste saisie dans un simple formulaire',
 	'rubriqueur_nom'         => 'Rubriqueur',
-	'rubriqueur_slogan'      => 'Créer rapidement des rubriques',
+	'rubriqueur_slogan'      => 'Créer rapidement des rubriques et des articles',
 );
