@@ -12,11 +12,11 @@
 **/
 
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (! defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Action de création / modification d'un contact
- * 
+ *
  * @param null|int $arg
  *     Identifiant du contact.
  *     En absence utilise l'argument de l'action sécurisée.
@@ -24,7 +24,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     Liste (identifiant du contact, Texte d'erreur éventuel)
  */
 function action_editer_contact_dist($arg = null) {
-	if (is_null($arg)){
+	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	}
@@ -37,12 +37,15 @@ function action_editer_contact_dist($arg = null) {
 			include_spip('action/editer_liens_simples');
 			objet_associer_simples(
 				array('organisation' => $id_organisation),
-				array('contact' => $id_contact));
+				array('contact' => $id_contact)
+			);
 		}
 	}
 
 	// Enregistre l'envoi dans la BD
-	if ($id_contact > 0) $err = contact_modifier($id_contact);
+	if ($id_contact > 0) {
+		$err = contact_modifier($id_contact);
+	}
 
 	return array($id_contact, $err);
 }
@@ -52,7 +55,7 @@ function action_editer_contact_dist($arg = null) {
  *
  * @pipeline_appel pre_insertion
  * @pipeline_appel post_insertion
- * 
+ *
  * @param array $champs
  *     Un tableau avec les champs par défaut lors de l'insertion
  * @return int
@@ -61,7 +64,8 @@ function action_editer_contact_dist($arg = null) {
 function contact_inserer($id_parent = null, $champs = array()) {
 
 	// Envoyer aux plugins avant insertion
-	$champs = pipeline('pre_insertion',
+	$champs = pipeline(
+		'pre_insertion',
 		array(
 			'args' => array(
 				'table' => 'spip_contacts',
@@ -74,7 +78,8 @@ function contact_inserer($id_parent = null, $champs = array()) {
 	$id_contact = sql_insertq('spip_contacts', $champs);
 
 	// Envoyer aux plugins après insertion
-	pipeline('post_insertion',
+	pipeline(
+		'post_insertion',
 		array(
 			'args' => array(
 				'table' => 'spip_contacts',
@@ -83,7 +88,7 @@ function contact_inserer($id_parent = null, $champs = array()) {
 			'data' => $champs
 		)
 	);
-	
+
 	return $id_contact;
 }
 
@@ -93,7 +98,7 @@ function contact_inserer($id_parent = null, $champs = array()) {
  *
  * Récupère les valeurs qui ont été postées d'un formulaire d'édition
  * automatiquement.
- * 
+ *
  * @param int $id_contact
  *     Identifiant du contact
  * @param null|array $set
@@ -114,12 +119,16 @@ function contact_modifier($id_contact, $set = null) {
 		$set
 	);
 
-	if ($err = objet_modifier_champs('contact', $id_contact,
+	if ($err = objet_modifier_champs(
+		'contact',
+		$id_contact,
 		array(
 			'data' => $set,
-			'nonvide' => array('nom' => _T('contacts:contact_nouveau_titre')." "._T('info_numero_abbreviation').$id_contact),
+			'nonvide' => array(
+				'nom' => _T('contacts:contact_nouveau_titre').' '._T('info_numero_abbreviation').$id_contact),
 		),
-		$c)) {
+		$c
+	)) {
 		return $err;
 	}
 
