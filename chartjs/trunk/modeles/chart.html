@@ -15,8 +15,8 @@
 	<!-- Conteneur -->
 	- *id :           Identifiant du graphe
 	- *class :        Classes supplémentaires du conteneur
-	- width :         Largeur du conteneur, avec l'unité
-	- height :        Hauteur du conteneur, avec l'unité
+	- width :         Largeur en px, sans l'unité
+	- height :        Hauteur en px, sans l'unité
 
 	<!-- Données et textes -->
 	- **type :        Type de graphique (string)
@@ -89,9 +89,11 @@
 #SET{donnees,      #ENV{data,#ENV{datasets}}}
 [(#REM) Apparence ]
 #SET{width,        #ENV{width,#ENV{canvaswidth}}}
-#SET{width,        #GET{width}|concat{#GET{width}|match{\w\{2\}$}|?{px}}}
+#SET{width_unit,   #GET{width}|concat{#GET{width}|match{\w\{2\}$}|?{px}}}
+#SET{width_int,    #GET{width}|intval|sinon{''}}
 #SET{height,       #ENV{height,#ENV{canvasheight}}}
-#SET{height,       #GET{height}|concat{#GET{height}|match{\w\{2\}$}|?{px}}}
+#SET{height_unit,  #GET{height}|concat{#GET{height}|match{\w\{2\}$}|?{px}}}
+#SET{height_int,   #GET{height}|intval|sinon{''}}
 #SET{colors,       #ENV{colors}|is_null|?{
 	#LISTE{#69D2E7,#E0E4CC,#F38630,#96CE7F,#CEBC17,#CE4264,#F7464A,#46BFBD,#FDB45C},
 	#ENV{colors}|is_string|?{#ENV{colors}|replace{' '}|explode{','}, #ENV{colors}}
@@ -181,9 +183,12 @@
 	xAxes,#LISTE{#ARRAY{stacked,#GET{stacked}|?{true}}},
 	yAxes,#LISTE{#ARRAY{stacked,#GET{stacked}|?{true}}}
 }}
+#SET{nb_dimensions,#LISTE{#GET{width_int},#GET{height_int}}|array_filter|count}
+#SET{maintainaspectratio,#GET{nb_dimensions}|=={1}|?{false}}
 #SET{options,#ARRAY{
-	responsive, #GET{responsive},
-	scales,     #GET{scales}
+	responsive,          #GET{responsive},
+	scales,              #GET{scales},
+	maintainAspectRatio, #GET{maintainaspectratio}
 }}
 #SET{options, #GET{options}|chartjs_array_filter_recursive}
 <//B_options>
@@ -198,9 +203,9 @@
 
 <div
 	class="spip-chart-wrap[ spip-chart-align-(#GET{align})][ (#GET{class})]" 
-	style="position:relative; max-width:100%;[ width:(#GET{width});][ height:(#GET{height});]"
+	style="position:relative; max-width:100%;"
 >
-	<canvas id="#GET{id}" class="spip-chart-canvas"></canvas>
+	<canvas id="#GET{id}" class="spip-chart-canvas"[ width=(#GET{width_int})][ height=(#GET{height_int})]></canvas>
 </div>
 
 <script>

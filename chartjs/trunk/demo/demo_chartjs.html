@@ -30,13 +30,15 @@
 			#SET{data,"40,32,50,35 next 20,25,45,42 next 40,43, 61,50 next 33,15,40,22"}
 			#SET{labels,"Salé,Sucré,Amer,Acide"}
 			#SET{datalabels,"poire,pomme,courgette,citron"}
-			[(#MODELE{chart}{id=barre,type=bar,datasets=#GET{data},labels=#GET{labels},dataLabels=#GET{datalabels}})]
+			[(#MODELE{chart}{id=barre,type=bar,datasets=#GET{data},labels=#GET{labels},dataLabels=#GET{datalabels},width=500,height=500})]
 			<pre class="code-chart"><code class="language-html">&lt;chart
   |id=barre
   |type=bar
   |datasets=40,32,50,35 next 20,25,45,42 next 40,43, 61,50 next 33,15,40,22
   |labels=Salé,Sucré,Amer,Acide
-  |dataLabels=poire,pomme,courgette,citron0&gt;
+  |dataLabels=poire,pomme,courgette,citron
+  |width=500
+  |height=500&gt;
 			</code></pre>
 		</div>
 
@@ -46,13 +48,15 @@
 			#SET{data,"40,43,61,50 next 33,15,40,22"}
 			#SET{labels,"Janvier, Février, Mars, Avril"}
 			#SET{datalabels,"patates,poireaux"}
-			[(#MODELE{chart}{id=ligne,type=line,datasets=#GET{data},labels=#GET{labels},dataLabels=#GET{datalabels}})]
+			[(#MODELE{chart}{id=ligne,type=line,datasets=#GET{data},labels=#GET{labels},dataLabels=#GET{datalabels},width=500,height=500})]
 			<pre class="code-chart"><code class="language-html">&lt;chart
   |id=ligne
   |type=line
   |datasets=40,43,61,50 next 33,15,40,22
   |labels=Janvier, Février, Mars, Avril0
-  |dataLabels=patates,poireaux&gt;
+  |dataLabels=patates,poireaux
+  |width=500
+  |height=500&gt;
 			</code></pre>
 		</div>
 
