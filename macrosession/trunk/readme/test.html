@@ -1,0 +1,60 @@
+<html><head></head>
+<body>
+   <h1>Test cache eval session</h1>
+   Squelette : [(#DATE|affdate{'Y-m-d H:i:s'})]<br>
+   php session_get <?= session_get('nom') ?> --> php date <?= date('Y-m-d H:i:s') ?> :: SPIP eval session_get : #EVAL{session_get('nom')} :: SPIP eval globals : #EVAL{$GLOBALS['visiteur_session']['nom']}
+   <br>
+   <b>_SESSION{nom} : #_SESSION{nom}</b><br> 
+   <br><hr><br>
+ 
+  _SESSION_SI{nom} : 
+  #_SESSION_SI{nom} 
+        / IL Y A UNE_SESSION 
+  #_SESSION_FINSI 
+  / après_SESSION_finsi
+ 
+  <br><br>
+ 
+  _SESSION_SI{nom} puis SINON : 
+  #_SESSION_SI{nom} 
+      / apres_SESSION_si 
+  #_SESSION_SINON 
+      / PAS DE_SESSION 
+  #_SESSION_FINSI 
+  / après_SESSION_finsi
+ 
+   <br><br>
+ 
+  _SESSION_SI_EGAL{nom,Secretaire} : 
+  #_SESSION_SI_EGAL{nom,Secretaire} 
+      / c'est egal 
+  #_SESSION_FINSI 
+  / après_SESSION_finsi
+ 
+  <br><br>
+ 
+  _SESSION_SI_EGAL{nom,Secretaire} puis SINON : 
+  #_SESSION_SI_EGAL{nom,Secretaire} 
+      / c'est encore egal 
+  #_SESSION_SINON 
+      / pas egal 
+  #_SESSION_FINSI 
+  / après_SESSION_finsi
+
+  <br><br>
+
+<h4>Emboitements</h4>
+#_SESSION_SI{nom}
+	le nom existe
+	#_SESSION_SI_EGAL{nom,Secretaire}
+		et vaut bien Secrétaire
+	#_SESSION_SINON
+		et ne vaut pas Secrétaire. Il vaut #_SESSION{nom}.
+	#_SESSION_FINSI
+#_SESSION_SINON
+	le nom n'existe pas !
+#_SESSION_FINSI
+
+ 
+</body>
+</html>

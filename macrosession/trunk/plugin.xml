@@ -1,0 +1,20 @@
+<plugin>
+	<nom>Macro session étendue</nom>
+	<slogan>webperf de l'accés aux données de sesssions et sessions étendues</slogan>
+	<icon></icon>
+	<auteur>JLuc, marcimat</auteur>
+	<licence>GPL</licence>
+	<version>0.6.0</version>
+	<etat>dev</etat>
+	<description>
+	Macros SPIP : #_SESSION, #_SESSION_SI, #_SESSION_SINON, #_SESSION_FIN
+	pour accéder aux données de la session de la _session courant et les tester efficacement
+	dans le respect des recommandations webperf (cf https://contrib.spip.net/4611 )
+	ou à des données de sessions étendues, d'une autre origine que la session spip,
+	</description>
+	<prefix>macrosession</prefix>
+	<necessite id="SPIP" version="[2.1.0;3.2.99]" />
+	<categorie>outil</categorie>
+	<lien>http://contrib.spip.net/4823</lien> 
+	<options>macrosession_options.php</options>
+</plugin>

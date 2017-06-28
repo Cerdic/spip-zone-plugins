@@ -1,22 +1,22 @@
-<h1>Test # _VISITEUR avec _SI, _SINON, _FIN et accés session étendue</h1>
+<h1>Test # _SESSION avec _SI, _SINON, _FIN et accés session étendue</h1>
 <ul>
-<li>nom : #_VISITEUR{nom}</li>
-<li>est abonne : #_VISITEUR{est_abonne}</li>
-<li>nbreste : #_VISITEUR{nbreste}</li>
-<li>a reçu : #_VISITEUR{envois_revues_liste}</li>
+<li>nom : #_SESSION{nom}</li>
+<li>est abonne : #_SESSION{est_abonne}</li>
+<li>nbreste : #_SESSION{nbreste}</li>
+<li>a reçu : #_SESSION{envois_revues_liste}</li>
 </ul>
 <h4>SI nbreste</h4>
-#_VISITEUR_SI{nbreste}
+#_SESSION_SI{nbreste}
 il vous reste des numéros à recevoir
-#_VISITEUR_SINON
+#_SESSION_SINON
 	vous n'êtes plus abonné
-#_VISITEUR_FIN
+#_SESSION_FIN
 <h4>SI nbreste==0</h4>
-#_VISITEUR_SI{nbreste,==,0}
+#_SESSION_SI{nbreste,==,0}
 il vous reste exactement plus aucun numéro à recevoir !
-#_VISITEUR_SINON
-	ah, il vous reste des numéros à recevoir... exactement #_VISITEUR{nbreste}
-#_VISITEUR_FIN
+#_SESSION_SINON
+	ah, il vous reste des numéros à recevoir... exactement #_SESSION{nbreste}
+#_SESSION_FIN
 
 
 <hr>

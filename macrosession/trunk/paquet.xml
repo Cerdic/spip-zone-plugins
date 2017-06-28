@@ -1,0 +1,20 @@
+<paquet
+	prefix="macrosession"
+	categorie="outil"
+	version="0.6.0"
+	etat="test"
+	compatibilite="[2.1.0;3.2.*]"
+	documentation="https://contrib.spip.net/4823"
+>
+	<nom>Macro session étendue</nom>
+	<!-- 
+	webperf de l'accés aux données de sesssions et sessions étendues :
+	macros SPIP : #_SESSION, #_SESSION_SI, #_SESSION_SINON, #_SESSION_FIN
+	pour accéder aux données de la session de la _session courant
+	en suivant les recommandations webperf 	(cf https://contrib.spip.net/4611 )
+	ou à des données de sessions étendues, d'une autre origine que la session SPIP
+	-->
+	<auteur lien="https://contrib.spip.net/JLuc">JLuc</auteur>
+	<auteur lien="https://contrib.spip.net/Matthieu-Marcillaud">marcimat</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+</paquet>
