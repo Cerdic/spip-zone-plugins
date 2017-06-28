@@ -44,8 +44,7 @@ function action_instituer_forum_paremail_dist() {
 			AND isset($GLOBALS['visiteur_session']['id_auteur'])
 			AND $GLOBALS['visiteur_session']['id_auteur']
 			AND isset($GLOBALS['visiteur_session']['email'])
-			AND $GLOBALS['visiteur_session']['email']==$email)
-		{
+			AND $GLOBALS['visiteur_session']['email']==$email){
 			$message = sql_fetsel("id_objet,objet,statut","spip_forum","id_forum=".intval($id_forum));
 			if (autoriser("modererforum",$message['objet'],$message['id_objet'])){
 				$erreur_auteur = "";
