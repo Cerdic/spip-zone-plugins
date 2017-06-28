@@ -132,5 +132,8 @@ function contact_modifier($id_contact, $set = null) {
 		return $err;
 	}
 
+	$c = collecter_requests(array('statut'), array(), $set);
+	$err = objet_instituer('contact', $id_contact, $c);
+
 	return $err;
 }
