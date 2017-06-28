@@ -46,6 +46,16 @@
 	                  Inutile si vous passez un tableau c) ou d) au paramètre 'data'
 	                  - soit des mots séparés par des virgules : "patates,poireaux"
 	                  - soit un tableau : #LISTE{patates,poireaux}
+	
+	<!-- Axes -->
+	- labelX :        Label de l'abscisse (string)
+	- labelY :        Label de l'ordonnée (string)
+	- uniteX :        TODO Unité ajoutée aux valeurs de l'abscisse (string)
+	- uniteY :        TODO Unité ajoutée aux valeurs de l'ordonnée (string)
+	- axeX :          Afficher l'ordonnée (bool|string)
+	                  true (défaut) | false
+	- axeY :          Afficher l'abscisse (bool|string)
+	                  true (défaut) | false
 
 	<!-- Apparence -->
 	- colors :        Codes de couleurs à utiliser : nom, hexadécimal, rgb, rgba, hsl, hsla
@@ -55,6 +65,10 @@
 	                  Défaut = 1
 	- fill :          Remplir ou pas les graphes (string|bool)
 	                  true | false (dépend des types)
+	- fontSize :      Taille de police en px, sans l'unité (int)
+	- fontColor :     Code couleur de la police : nom, hexadécimal, etc.
+	- lineTension :   Lissage des courbes (int) 
+	                  Nombre entre 0 (lignes droites) et 1 (courbes, défaut)
 
 	<!-- Options générales -->
 	- options :      Tableaux complet d'options, si on sait ce qu'on fait (array)
@@ -66,16 +80,20 @@
                    true (défaut) | false
 
 	<!-- Dépréciés -->
-	- datasets :      Utiliser 'data'
-	- animation :     ?
-	- datasetFill :   Utiliser 'fill'
-	- canvaswidth :   Utiliser 'width'
-	- canvasheight :  Utiliser 'height'
-	- strokeColor :   Utiliser 'borderColor'
-	- pointColor :    Utiliser 'backgroundColor'
-	- pointstrokecolor : Utiliser 'borderColor'
-	- pointHighlightFill : Utiliser 'backgroundColor'
-	- pointHighlightStroke : Utiliser 'borderColor'
+	- datasets :             => data
+	- animation :            ?
+	- datasetFill :          => fill
+	- canvaswidth :          => width
+	- canvasheight :         => height
+	- strokeColor :          => borderColor
+	- pointColor :           => backgroundColor
+	- pointstrokecolor :     => borderColor
+	- pointHighlightFill :   => backgroundColor
+	- pointHighlightStroke : => borderColor
+	- scaleFontSize :        => fontSize
+	- scaleFontColor :       => fontColor
+	- scaleLabelUnit :       => uniteY
+	- bezierCurve :          => interpolation
 
 ]
 [(#REM)
@@ -89,24 +107,43 @@
 #SET{type,         #GET{alias/#GET{type}}|sinon{#GET{type}}}
 #SET{id,           #VAL{spipchart_}|concat{#ENV{id,chart}|replace{' '}}}
 #SET{donnees,      #ENV{data,#ENV{datasets}}}
-[(#REM) Apparence ]
+
+[(#REM) Dimensions ]
 #SET{width,        #ENV{width,#ENV{canvaswidth}}}
 #SET{width_unit,   #GET{width}|concat{#GET{width}|match{\w\{2\}$}|?{px}}}
 #SET{width_int,    #GET{width}|intval|sinon{''}}
 #SET{height,       #ENV{height,#ENV{canvasheight}}}
 #SET{height_unit,  #GET{height}|concat{#GET{height}|match{\w\{2\}$}|?{px}}}
 #SET{height_int,   #GET{height}|intval|sinon{''}}
+
+[(#REM) Apparence ]
 #SET{colors_defaut,#LISTE{#69D2E7,#E0E4CC,#F38630,#96CE7F,#CEBC17,#CE4264,#F7464A,#46BFBD,#FDB45C}}
 #SET{colors,       #ENV{colors}|is_null|?{
 	#ARRAY,
 	#ENV{colors}|is_string|?{#ENV{colors}|replace{' '}|explode{','}, #ENV{colors}}
 }}
 #SET{colors,       #GET{colors}|array_merge{#GET{colors_defaut}}}
-#SET{fills,        #ARRAY{line,false,bar,true,pie,true,radar,false,polarArea,false,scatter,false,bubble,true}}
-#SET{fill,         #ENV{fill,#GET{fills/#GET{type}}}}
+#SET{fills,        #ARRAY{line,false, bar,true, pie,true, radar,false, polarArea,false, scatter,false, bubble,true}}
+#SET{fill,         #ENV{fill,#ENV{datasetFill,#GET{fills/#GET{type}}}}}
+#SET{lineTension,  #ENV{lineTension,#ENV{bezierCurve}}}
+#SET{lineTension,  #GET{lineTension}|is_null|?{'',#GET{lineTension}|=={true}|?{
+	1,
+	#GET{lineTension}|=={false}|?{0,#GET{lineTension}}
+}|floatval}}
+
+[(#REM) Axes ]
+#SET{axeX,         #ENV{axeX}}
+#SET{axeY,         #ENV{axeY}}
+#SET{labelX,       #ENV{labelX}}
+#SET{labelY,       #ENV{labelY}}
+#SET{uniteX,       #ENV{uniteX}}
+#SET{uniteY,       #ENV{uniteY}}
+
 [(#REM) Options ]
 #SET{stacked,      #ENV{stacked}|=={true}|?{true}}
 #SET{responsive,   #ENV{responsive}|=={false}|?{false}}
+#SET{fontSize,     #ENV{fontSize,#ENV{scaleFontSize}}|intval|sinon{''}}
+#SET{fontColor,    #ENV{fontColor,#ENV{scaleFontColor}}}
 
 
 [(#REM)
@@ -150,7 +187,7 @@
 #SET{datalabels, #ENV{dataLabels}|is_string|?{#ENV{dataLabels}|replace{' '}|explode{','}, #ENV{dataLabels}}}
 #SET{tableau_est_complet, #GET{donnees/0/data}|?{oui}}
 <BOUCLE_datasets(DATA){source table, #GET{donnees}}{si #GET{tableau_est_complet}|non}>
-#SET{cle, #COMPTEUR_BOUCLE|moins{1}}
+#SET{cle,   #COMPTEUR_BOUCLE|moins{1}}
 #SET{label, #GET{datalabels/#GET{cle}}|sinon{#CLE}}
 #SET{data,  #VALEUR}
 <BOUCLE_data_bubble(DATA){source table, #VALEUR|array_chunk{3}}{si #GET{type}|=={bubble}}>
@@ -175,13 +212,15 @@
 	data,            #GET{data},
 	borderColor,     #GET{borderColor},
 	backgroundColor, #GET{backgroundColor},
-	fill,            #GET{fill,true}
+	fill,            #GET{fill,true},
 }}
+[(#GET{lineTension}|ou{#GET{lineTension}|=={0}}|oui)
+#SET{dataset, #GET{dataset}|array_merge{#ARRAY{lineTension,#GET{lineTension}}}}
+]
 #SET{datasets, #GET{datasets}|push{#GET{dataset}}}
 </BOUCLE_datasets>
 #SET{datasets, #GET{donnees}}
 <//B_datasets>
-
 
 [(#REM) Labels en abscisse ]
 #SET{labels, #ENV{labels}|is_string|?{#ENV{labels}|replace{' '}|explode{','}, #ENV{labels}}}
@@ -190,22 +229,37 @@
 	- si on a un tableau complet, on le prend tel quel
 	- sinon, on les prend individuellement
 ]
-<BOUCLE_options(CONDITION){si #ENV{options}|is_array}>
+<BOUCLE_options_completes(CONDITION){si #ENV{options}|is_array}>
 #SET{options, #ENV{options}}
-</BOUCLE_options>
+</BOUCLE_options_completes>
 #SET{scales, #ARRAY{
-	xAxes,#LISTE{#ARRAY{stacked,#GET{stacked}|?{true}}},
-	yAxes,#LISTE{#ARRAY{stacked,#GET{stacked}|?{true}}}
+	xAxes, #LISTE{#ARRAY{
+		display, #GET{axeX},
+		stacked, #GET{stacked},
+		scaleLabel, #ARRAY{display,#GET{labelX}|?{true}, labelString,#GET{labelX}},
+	}},
+	yAxes, #LISTE{#ARRAY{
+		display, #GET{axeY},
+		stacked, #GET{stacked},
+		scaleLabel, #ARRAY{display,#GET{labelY}|?{true}, labelString,#GET{labelY}},
+	}}
 }}
-#SET{nb_dimensions,#LISTE{#GET{width_int},#GET{height_int}}|array_filter|count}
-#SET{maintainaspectratio,#GET{nb_dimensions}|=={1}|?{false}}
+#SET{legend, #ARRAY{
+	labels, #ARRAY{
+		fontSize,  #GET{fontSize},
+		fontColor, #GET{fontColor}
+	}
+}}
+#SET{nb_dimensions, #LISTE{#GET{width_int},#GET{height_int}}|array_filter|count}
+#SET{maintainaspectratio, #GET{nb_dimensions}|=={1}|?{false}}
 #SET{options,#ARRAY{
-	responsive,          #GET{responsive},
 	scales,              #GET{scales},
+	legend,              #GET{legend},
+	responsive,          #GET{responsive},
 	maintainAspectRatio, #GET{maintainaspectratio}
 }}
 #SET{options, #GET{options}|chartjs_array_filter_recursive}
-<//B_options>
+<//B_options_completes>
 
 
 [(#REM)
@@ -235,3 +289,5 @@ $(document).ready(function(){
 	});
 });
 </script>
+
+#FILTRE{compacte}
