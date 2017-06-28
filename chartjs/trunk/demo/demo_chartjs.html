@@ -11,6 +11,7 @@
 		body { margin: 3rem; font-family: sans; }
 		h1, h2, h3 { text-align: center; }
 		pre.code-chart { font-size: 0.9em }
+		code.type {display:inline-block; margin-left:1em; background:#eee; borde-radius:3px; padding: 0.2em; color: #0270ff}
 		hr {border: 1px solid #ddd; border-width: 1px 0 0; margin: 2rem 0;}
 	</style>
 </head>
@@ -26,7 +27,7 @@
 
 		<!-- bar -->
 		<div class="col-md-6 col-lg-4">
-			<h3 id="bar"><:chartjs:demo_bar:></h3>
+			<h3 id="bar"><:chartjs:demo_bar:> <code class="type"><:chartjs:demo_type{type=bar}:></code></h3>
 			#SET{data,"40,32,50,35 next 20,25,45,42 next 40,43, 61,50 next 33,15,40,22"}
 			#SET{labels,"Salé,Sucré,Amer,Acide"}
 			#SET{datalabels,"poire,pomme,courgette,citron"}
@@ -44,7 +45,7 @@
 
 		<!-- line -->
 		<div class="col-md-6 col-lg-4">
-			<h3 id="ligne"><:chartjs:demo_line:></h3>
+			<h3 id="ligne"><:chartjs:demo_line:> <code class="type"><:chartjs:demo_type{type=line}:></code></h3>
 			#SET{data,"40,43,61,50 next 33,15,40,22"}
 			#SET{labels,"Janvier, Février, Mars, Avril"}
 			#SET{datalabels,"patates,poireaux"}
@@ -62,7 +63,7 @@
 
 		<!-- pie -->
 		<div class="col-md-6 col-lg-4">
-			<h3 id="pie"><:chartjs:demo_pie:></h3>
+			<h3 id="pie"><:chartjs:demo_pie:> <code class="type"><:chartjs:demo_type{type=pie}:></code></h3>
 			#SET{data,"10,32,50,25,5"}
 			#SET{labels,"Tôkyô - 東京,Kyoto, Osaka,Chiba,Hiroshima"}
 			[(#MODELE{chart}{id=camembert1,type=pie,data=#GET{data},labels=#GET{labels}})]
@@ -76,7 +77,7 @@
 
 		<!-- Doughnut -->
 		<div class="col-md-6 col-lg-4">
-			<h3 id="doughnut"><:chartjs:demo_doughnut:></h3>
+			<h3 id="doughnut"><:chartjs:demo_doughnut:> <code class="type"><:chartjs:demo_type{type=doughnut}:></code></h3>
 			#SET{data,"30,10,55,25,15,8"}
 			#SET{colors,"#69D2E7,#E0E4CC,#F38630,#96CE7F,#CEBC17,#CE4264"}
 			[(#MODELE{chart}{id=anneau,type=doughnut,align=right,data=#GET{data},colors=#GET{colors},labels=#GET{labels}})]
@@ -92,14 +93,13 @@
 
 		<!-- polarArea -->
 		<div class="col-md-6 col-lg-4">
-			<h3 id="polararea"><:chartjs:demo_polaire:></h3>
+			<h3 id="polararea"><:chartjs:demo_polaire:> <code class="type"><:chartjs:demo_type{type=polarArea}:></code></h3>
 			#SET{data,"40,32,5,25,50,45"}
 			#SET{labels,"Noix,Amandes,Raisins,Autres sucreries,Salés,Six"}
 			[(#MODELE{chart}{id=polaire,type=polarArea,data=#GET{data},labels=#GET{labels}})]
 			<pre class="code-chart"><code class="language-html">&lt;chart
   |id=polaire
   |type=polarArea
-  |align=center
   |data=40,32,5,25,50,45
   |labels=Noix,Amandes,Raisins,Autres sucreries,Salés,Six&gt;
 			</code></pre>
@@ -107,7 +107,7 @@
 
 		<!-- radar -->
 		<div class="col-md-6 col-lg-4">
-			<h3 id="radar"><:chartjs:demo_radar:></h3>
+			<h3 id="radar"><:chartjs:demo_radar:> <code class="type"><:chartjs:demo_type{type=radar}:></code></h3>
 			#SET{data,"20,22,40,25,55 next 15,20,30,40,35"}
 			#SET{labels,"Précis, Rapide, Joli, Complet, かわい"}
 			#SET{colors,"#CEBC17,#CE4264"}
@@ -118,6 +118,34 @@
   |datasets=40,43,61,50 next 33,15,40,22
   |labels=Précis, Rapide, Joli, Complet, かわい
   |colors=#CEBC17,#CE4264&gt;
+			</code></pre>
+		</div>
+
+		<!-- bubble -->
+		<div class="col-md-6 col-lg-4">
+			<h3 id="bubble"><:chartjs:demo_bubble:> <code class="type"><:chartjs:demo_type{type=bubble}:></code></h3>
+			#SET{data,"2,5,10, 10,7,5 next 15,20,5, 10,12,15"}
+			#SET{datalabels,"poireaux, patates"}
+			[(#MODELE{chart}{id=bubble,type=bubble,datasets=#GET{data},dataLabels=#GET{datalabels}})]
+			<pre class="code-chart"><code class="language-html">&lt;chart
+  |id=bubble
+  |type=bubble
+  |datasets=2,5,10 10,7,5 next 15,20,5 ,10,12,15
+  |dataLabels=poireaux,patates&gt;
+			</code></pre>
+		</div>
+
+		<!-- scatter -->
+		<div class="col-md-6 col-lg-4">
+			<h3 id="scatter"><:chartjs:demo_scatter:> <code class="type"><:chartjs:demo_type{type=scatter}:></code></h3>
+			#SET{data,"5,10, 10,0, 15,10 next 5,20, 6,25, 7,20 next 13,20, 14,25, 15,20"}
+			#SET{datalabels,"poireaux, patates, piments"}
+			[(#MODELE{chart}{id=scatter,type=scatter,datasets=#GET{data},dataLabels=#GET{datalabels}})]
+			<pre class="code-chart"><code class="language-html">&lt;chart
+  |id=scatter
+  |type=scatter
+  |datasets=5,10, 10,0, 15,10 next 5,20, 6,25, 7,20 next 13,20, 14,25, 15,20
+  |dataLabels=poireaux,patates,piments&gt;
 			</code></pre>
 		</div>
 

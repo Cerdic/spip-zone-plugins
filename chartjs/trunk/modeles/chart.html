@@ -37,6 +37,8 @@
 	                            #ARRAY{label,patates, data,#LISTE{10,20,30}, borderColor,red},
 	                            #ARRAY{label,poireaux, data,#LISTE{5,10,15}, borderColor,blue}
 	                          }
+	                  Pour le type bubble, il faut des séries de 3 chiffres correspondant à x, y, et radius
+	                  Pour le type scatter, il faut des séries de 2 chiffres correspondant à x et y
 	- *labels :       Labels utilisés en abscisse (string|array)
 	                  - soit des mots séparés par des virgules : "2005,2006,2007"
 	                  - soit un tableau : #LISTE{carotte,chou,tomate}
@@ -94,11 +96,13 @@
 #SET{height,       #ENV{height,#ENV{canvasheight}}}
 #SET{height_unit,  #GET{height}|concat{#GET{height}|match{\w\{2\}$}|?{px}}}
 #SET{height_int,   #GET{height}|intval|sinon{''}}
+#SET{colors_defaut,#LISTE{#69D2E7,#E0E4CC,#F38630,#96CE7F,#CEBC17,#CE4264,#F7464A,#46BFBD,#FDB45C}}
 #SET{colors,       #ENV{colors}|is_null|?{
-	#LISTE{#69D2E7,#E0E4CC,#F38630,#96CE7F,#CEBC17,#CE4264,#F7464A,#46BFBD,#FDB45C},
+	#ARRAY,
 	#ENV{colors}|is_string|?{#ENV{colors}|replace{' '}|explode{','}, #ENV{colors}}
 }}
-#SET{fills,        #ARRAY{line,false,bar,true,pie,true,radar,false,polarArea,false}}
+#SET{colors,       #GET{colors}|array_merge{#GET{colors_defaut}}}
+#SET{fills,        #ARRAY{line,false,bar,true,pie,true,radar,false,polarArea,false,scatter,false,bubble,true}}
 #SET{fill,         #ENV{fill,#GET{fills/#GET{type}}}}
 [(#REM) Options ]
 #SET{stacked,      #ENV{stacked}|=={true}|?{true}}
@@ -109,7 +113,7 @@
 	==================================
 	2) Préparer les données pour le JS
 	==================================
-	On construit des tableaux qu'ils nous suffira d'encoder en JS dans le script.
+	On construit 3 tableaux qu'ils nous suffira d'encoder en JS dans le script : data, labels, options.
 ]
 
 [(#REM)
@@ -146,19 +150,29 @@
 #SET{datalabels, #ENV{dataLabels}|is_string|?{#ENV{dataLabels}|replace{' '}|explode{','}, #ENV{dataLabels}}}
 #SET{tableau_est_complet, #GET{donnees/0/data}|?{oui}}
 <BOUCLE_datasets(DATA){source table, #GET{donnees}}{si #GET{tableau_est_complet}|non}>
-#SET{compteur, #COMPTEUR_BOUCLE|moins{1}}
-#SET{cle, #GET{datalabels/#GET{compteur}}|sinon{#CLE}}
-#SET{borderColor, #GET{type}|match{pie|doughnut|polarArea}|?{
+#SET{cle, #COMPTEUR_BOUCLE|moins{1}}
+#SET{label, #GET{datalabels/#GET{cle}}|sinon{#CLE}}
+#SET{data,  #VALEUR}
+<BOUCLE_data_bubble(DATA){source table, #VALEUR|array_chunk{3}}{si #GET{type}|=={bubble}}>
+[(#COMPTEUR_BOUCLE|=={1}|oui)#SET{data,#ARRAY}]
+#SET{data, #GET{data}|push{#ARRAY{x,#VALEUR{0},y,#VALEUR{1},r,#VALEUR{2}}}}
+</BOUCLE_data_bubble>
+<BOUCLE_data_scatter(DATA){source table, #VALEUR|array_chunk{2}}{si #GET{type}|=={scatter}}>
+[(#COMPTEUR_BOUCLE|=={1}|oui)#SET{data,#ARRAY}]
+#SET{data, #GET{data}|push{#ARRAY{x,#VALEUR{0},y,#VALEUR{1}}}}
+</BOUCLE_data_scatter>
+#SET{multiple_colors,pie|doughnut|polarArea}
+#SET{borderColor, #GET{type}|match{#GET{multiple_colors}}|?{
 	#GET{colors},
-	#GET{colors/#GET{compteur}}
+	#GET{colors/#GET{cle}}
 }}
-#SET{backgroundColor, #GET{type}|match{pie|doughnut|polarArea}|?{
+#SET{backgroundColor, #GET{type}|match{#GET{multiple_colors}}|?{
 	#GET{colors},
-	#GET{colors/#GET{compteur}}
+	#GET{colors/#GET{cle}}
 }}
 #SET{dataset, #ARRAY{
-	label,           #GET{cle},
-	data,            #VALEUR,
+	label,           #GET{label},
+	data,            #GET{data},
 	borderColor,     #GET{borderColor},
 	backgroundColor, #GET{backgroundColor},
 	fill,            #GET{fill,true}
