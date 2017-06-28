@@ -1,9 +1,9 @@
 <paquet
 	prefix="fabrique"
 	categorie="outil"
-	version="2.3.10-dev"
+	version="2.4.0-dev"
 	etat="stable"
-	compatibilite="[3.1.0;3.1.*]"
+	compatibilite="[3.2.0-beta;3.2.*]"
 	logo="prive/themes/spip/images/fabrique-64.png"
 	documentation="https://contrib.spip.net/?article4134"
 	schema="1.0.0"
