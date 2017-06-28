@@ -2,6 +2,13 @@ Plugin Fabrique pour SPIP
 Ce plugin génère d'autres plugins !
 -----------------------------------
 
+2.3.11 le 28 06 2017
+-------------------
+* Compatibilité SPIP 3.2
+
+2.3.10 le 26 06 2017
+-------------------
+* Compatibilité SPIP 3.2 des JS
 
 2.3.9 le 13 12 2016
 -------------------
