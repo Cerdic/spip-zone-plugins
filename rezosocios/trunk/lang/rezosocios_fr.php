@@ -47,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_objets_lies_rezosocio' => 'Objets liés à ce réseau social',
 	'titre_page_rezosocios_page' => 'Les liens de réseaux sociaux',
 	'titre_tweetsde' => 'Tweets de @@name@',
+	'twitter_hashtag' => 'Twitter (hashtag)',
 
 	// Y
 	'youtube_channel' => 'Youtube (chaîne)',
