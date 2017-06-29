@@ -110,6 +110,8 @@ function contact_modifier($id_contact, $set = null) {
 
 	include_spip('inc/modifier');
 	include_spip('inc/filtres');
+	include_spip('action/editer_objet');
+
 	$c = collecter_requests(
 		// white list
 		objet_info('contact', 'champs_editables'),
