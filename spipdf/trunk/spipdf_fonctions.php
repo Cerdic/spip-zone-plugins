@@ -57,11 +57,6 @@ if (SPIPDF_CHARSET=='UTF-8'){
 	define('SPIPDF_UNICODE', false);
 }
 
-// les librairies necessaires doivent-être dans "lib". A la racine ou dans le répertoire du plugin
-if (!defined('_DIR_LIB')){
-	define('_DIR_LIB', _DIR_RACINE . 'lib/');
-}
-
 // pour les function unicode2charset
 include_spip('inc/charsets');
 
@@ -267,13 +262,10 @@ function spipdf_html2pdf($html){
 		$librairie_pdf = 'mpdf';
 	}
 
-	// tester si la librairie est dans /lib à la racine du spip ou dans le répertoire du plugin
-	if (is_dir(_DIR_LIB . $librairie_pdf)){
-		$dir_librairie_pdf = _DIR_LIB . $librairie_pdf . '/';
-	} elseif (is_dir(dirname(__FILE__) . '/lib/' . $librairie_pdf)) {
-		$dir_librairie_pdf = dirname(__FILE__) . '/lib/' . $librairie_pdf . '/';
-	} else {
-		die('Impossible de trouver la librairie de génération de PDF ' . $librairie_pdf . '. vérifiez que vous l\'avez bien téléchargée et installée dans /lib');
+	// tester si la librairie dans un sous-dossier de lib/ à la racine du spip ou dans le dossier squelettes/ ou dans un plugin
+	$dir_librairie_pdf = find_in_path("lib/$librairie_pdf/");
+	if (!$dir_librairie_pdf){
+		die('Impossible de trouver la librairie de génération de PDF ' . $librairie_pdf . '. vérifiez que vous l\'avez bien téléchargée et installée dans lib/ ou squelettes/lib/');
 	}
 
 	// nettoyer le HTML et gérer les placements d'image en fonction de la librairie utilisée
@@ -348,7 +340,7 @@ function spipdf_html2pdf($html){
 	} elseif ($librairie_pdf=='dompdf') { // la librairie dompdf beta 0.6 // EXPERIMENTAL
 
 		// le chemin relatif vers mPDF
-		require_once _DIR_LIB . 'dompdf/dompdf_config.inc.php';
+		require_once $dir_librairie_pdf . 'dompdf_config.inc.php';
 
 		$dompdf = new DOMPDF();
 		$dompdf->load_html($html, SPIPDF_CHARSET);
