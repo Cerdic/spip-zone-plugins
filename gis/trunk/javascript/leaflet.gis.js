@@ -2,7 +2,7 @@
 // Plugin Leaflet L.Map.Gis
 L.Map.Gis = L.Map.extend({
 
-	includes: L.Evented.prototype,
+	includes: L.Mixin.Events,
 
 	options:{
 		mapId: 'map_gis',

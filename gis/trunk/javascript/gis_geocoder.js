@@ -4,7 +4,7 @@
 
 L.Geocoder = L.Class.extend({
 
-	includes: L.Evented.prototype,
+	includes: L.Mixin.Events,
 
 	options: {
 		forwardUrl: L.geocoderConfig.forwardUrl,
