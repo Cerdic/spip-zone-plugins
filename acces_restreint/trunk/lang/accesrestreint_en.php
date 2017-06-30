@@ -11,9 +11,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_droits_auteur' => 'Give me access to this area',
-	'aucune_zone' => 'No zones',
+	'aucune_zone' => 'No restricted area',
 	'auteur' => '@nb@ author',
 	'auteurs' => '@nb@ authors',
+	'auteurs_tous' => 'All connected people',
 
 	// B
 	'bouton_configurer_acces' => 'Configuring .htaccess access',
@@ -37,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_menu_config' => 'Restricted access',
 	'icone_supprimer_zone' => 'Delete this area',
-	'info_1_zone' => '1 zone',
+	'info_1_zone' => '1 restricted area',
 	'info_acces_restreint' => 'Access to this page is restricted. Please log in to continue',
 	'info_ajouter_auteur' => 'Add this author',
 	'info_ajouter_auteurs' => 'Add all authors',
@@ -47,7 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucune_zone' => 'No areas',
 	'info_auteurs_lies_zone' => 'Authors with access to this area',
 	'info_lien_action_proteger' => 'Restrict access to this section',
-	'info_nb_zones' => '@nb@ zones',
+	'info_nb_zones' => '@nb@ restricted areas',
 	'info_page' => 'This page allows you to create restricted areas in your site',
 	'info_retirer_auteurs' => 'Remove all authors',
 	'info_retirer_zone' => 'Remove from area',
@@ -59,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_creer_htaccess' => 'Access to the attached document by their URL',
 	'label_creer_htaccess_non' => 'allow read',
 	'label_creer_htaccess_oui' => 'forbid the reading',
+	'label_droits_acces' => 'Access rights',
 	'label_titre_zone' => 'Title',
 
 	// M
@@ -82,7 +84,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_ajouter_zone' => 'Add a zone',
 	'texte_creer_associer_zone' => 'Create and assign a zone',
 	'titre' => 'Title',
-	'titre_ajouter_zone' => 'Add to a restricted area',
+	'titre_ajouter_zone' => 'Append to this restricted area',
 	'titre_boite_protegee_non' => 'Unrestricted access',
 	'titre_boite_protegee_oui' => 'Restricted access',
 	'titre_cadre_modifier_zone' => 'Edit an area',
@@ -97,6 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Z
 	'zone_numero' => 'AREA NUMBER:',
+	'zone_restreinte_autoriser_si_connexion_label' => 'Allow access to all connected people',
 	'zone_restreinte_espace_prive' => 'Restrict access to this area in the private area',
 	'zone_restreinte_publique' => 'Restrict access to this area in the public site'
 );
