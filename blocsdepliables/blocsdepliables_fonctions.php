@@ -179,7 +179,7 @@ function blocs_balises($type, $args = array()) {
 			}
 			$replie = $replie>0?' blocs_replie':'';
 			$h = blocdepliable_balise_titre();
-			return "<div class=\"cs_blocs$numero\"><$h class=\"blocs_titre$replie$ajax\"$id><a href=\"$fragment\">";
+			return "<div class=\"cs_blocs$numero\"><$h class=\"blocs_titre$replie$ajax\"$id><a href=\"$fragment\" class=\"ouvrir_fermer\">";
 		case 'resume':
 			$class=$bloc_stade[$k]>0?'':' blocs_invisible blocs_slide';
 			if ($stade<1 || $stade>2) {
