@@ -157,8 +157,10 @@ function traiter_email_dist($args, $retours) {
 			$traitements['email']['pj'] == 'on'
 		) {
 			$joindre_pj = true;
+			foreach (array_keys($saisies_fichiers) as $nom) {
+				$saisies = saisies_supprimer($saisies,$nom);	
+			}
 		}
-
 		// On génère le mail avec le fond
 		$html = recuperer_fond(
 			$notification,
