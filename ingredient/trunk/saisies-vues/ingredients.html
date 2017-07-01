@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_ingredients_selectionnes>
+	<ul>
+	<BOUCLE_ingredients_selectionnes(INGREDIENTS){id_ingredient IN #GET*{valeur}}
+		{par num titre, titre}{tout}>
+		<li class="choix">#TITRE (#ID_INGREDIENT)</li>
+	</BOUCLE_ingredients_selectionnes>
+	</ul>
+	</B_ingredients_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_ingredients_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_ingredient_selectionne(INGREDIENTS){id_ingredient=#ENV{valeur}}
+		{par num titre, titre}{tout}>
+	  	<p>#TITRE (#ID_INGREDIENT)</p>
+	</BOUCLE_ingredient_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_ingredient_selectionne>
+<//B_test_multiple>

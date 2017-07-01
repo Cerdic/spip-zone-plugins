@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/ingredients, par=titre, env, ajax, sinon=<:ingredient:info_aucun_ingredient:>}>
+
+[(#AUTORISER{creer,ingredient})
+	[(#URL_ECRIRE{ingredient_edit,new=oui}|icone_verticale{<:ingredient:icone_creer_ingredient:>,ingredient,new,right})]
+]

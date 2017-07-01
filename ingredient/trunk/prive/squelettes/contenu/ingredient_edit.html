@@ -1,0 +1,30 @@
+[(#ID_OBJET|oui)
+	[(#AUTORISER{modifier,ingredient,#ID_INGREDIENT}|sinon_interdire_acces)]
+][(#ID_OBJET|non)
+	[(#AUTORISER{creer,ingredient}|sinon_interdire_acces)]
+]
+ 
+#SET{redirect,#ENV{redirect}|sinon{#ID_INGREDIENT|?{#ID_INGREDIENT|generer_url_entite{ingredient},#URL_ECRIRE{ingredients}}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_INGREDIENT|oui)
+	[(#GET{redirect}|icone_verticale{Retour,ingredient,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_INGREDIENT|?{<:ingredient:icone_modifier_ingredient:>,<:ingredient:icone_creer_ingredient:>})]
+		<h1>(#ENV{titre,#INFO_TITRE{ingredient,#ID_INGREDIENT}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_INGREDIENT|generer_url_entite{ingredient}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_INGREDIENT{#ENV{id_ingredient,oui}, #GET{redirect}, #ENV{associer_objet}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>
