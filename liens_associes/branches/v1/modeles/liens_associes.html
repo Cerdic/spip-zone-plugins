@@ -1,0 +1,14 @@
+<B_liens_associes>
+<div class="menu menu_liens_associes">
+<h2><:associe_lien:titre_associe_liens:></h2>
+	#ANCRE_PAGINATION
+	<ul>
+		<BOUCLE_liens_associes(ASSOCIE_LIENS) {id_objet} {objet}{!par num titre, titre} {pagination}>
+		<li dir="#LANG_DIR" class="hentry clearfix text-#LANG_LEFT">
+			<a href="#URL_LIEN_ASSOCIE">#TITRE</a>
+		</li>
+		</BOUCLE_liens_associes>
+	</ul>
+	[<p class="pagination">(#PAGINATION)</p>]
+</div>
+</B_liens_associes>

@@ -1,0 +1,119 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_associe_lien,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_associe_lien" value="#ENV{id_associe_lien}" />
+		<div class="editer-groupe">
+
+			[(#SAISIE{oui_non, lien_interne,
+				label=<:associe_lien:champ_lien_interne_label:>,
+				explication=<:associe_lien:champ_lien_interne_explication:> })]
+
+			[(#SAISIE{choisir_objet, objet_spip,
+				label=<:associe_lien:champ_objet_spip_label:>,
+				explication=<:associe_lien:champ_objet_spip_explication:> })]
+
+			<INCLURE{fond=formulaires/inc-editer_associe_lien_champ_id_objet_spip,ajax=champ_id_objet_spip,env,objet_spip}/>
+
+			[(#SAISIE{input, titre, obligatoire=oui,
+				label=<:associe_lien:champ_titre_label:>})]
+
+
+			[(#SAISIE{url, url,
+				label=<:associe_lien:champ_url_label:>})]
+
+			[(#SAISIE{textarea, descriptif,
+				label=<:associe_lien:champ_descriptif_label:>,
+				conteneur_class=pleine_largeur, class=inserer_barre_edition, rows=4})]
+
+		</div>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	]
+</div>
+
+<script type="text/javascript">
+
+	// Show hide fields
+	if($('input:radio[name="lien_interne"]:checked', '.formulaire_editer_associe_lien').val() == 'on') {
+
+		hide_field([".editer_url"]);
+		show_field([".editer_objet_spip"]);
+	}
+	else {
+		hide_field([".editer_objet_spip"]);
+		show_field([".editer_url"]);
+	}
+
+	if($("select#champ_objet_spip").val() != '') {
+		show_field([".editer_id_objet_spip"]);
+
+	}
+	else {
+		hide_field([".editer_id_objet_spip"]);
+	}
+
+
+	// Chagement du type de lien.
+	$('input:radio[name="lien_interne"]', '.formulaire_editer_associe_lien').change(
+		function(){
+			var objet = $('#champ_objet_spip').val();
+				if ($(this).val() == '') {
+					hide_field([".editer_objet_spip"]);
+					show_field([".editer_url"]);
+				}
+				else {
+					hide_field([".editer_url"]);
+					show_field([".editer_objet_spip"]);
+				}
+
+				ajaxReload('champ_id_objet_spip', {
+					args:{
+						objet_spip:objet,
+						lien_interne: $(this).val()
+					},
+				});
+		}
+	);
+
+	// Changement de l'objet.
+	$('select[name="objet_spip"]', '.formulaire_editer_associe_lien').change(
+			function(){
+				var lien_interne = $('input:radio[name="lien_interne"]').val();
+				console.log(lien_interne);
+				ajaxReload('champ_id_objet_spip', {
+					args:{
+						objet_spip:$(this).val(),
+						lien_interne: lien_interne
+					},
+				});
+			}
+		);
+
+	function hide_field(fields, speed){
+		speed = speed || 800;
+
+		jQuery.each(fields, function(index, field) {
+			$(field).hide(speed);
+			$(field +' input').removeAttr('required');
+			$(field + ' > label span').replaceWith('');
+			$(field).removeClass('obligatoire');
+		});
+	}
+
+	function show_field(fields, speed){
+		speed = speed || 800;
+		jQuery.each(fields, function(index, field) {
+			$(field).show(speed);
+			$(field +' input').prop('required','true');
+			$(field + ' > label span').replaceWith('');
+			$(field + ' > label').append('<span class="obligatoire"> <:info_obligatoire_02:></span>');
+			$(field).addClass('obligatoire');
+		});
+	}
+
+</script>

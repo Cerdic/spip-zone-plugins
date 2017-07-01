@@ -1,0 +1,35 @@
+[(#ID_ASSOCIE_LIEN|oui)
+	[(#AUTORISER{modifier,associe_lien,#ID_ASSOCIE_LIEN}|sinon_interdire_acces)]
+]
+
+
+[(#ID_ASSOCIE_LIEN|non)
+	[(#AUTORISER{creer,associe_lien}|sinon_interdire_acces)]
+]
+
+#SET{redirect,#ENV{redirect}|sinon{#ID_ASSOCIE_LIEN|?{#ID_ASSOCIE_LIEN|generer_url_entite{associe_lien},#URL_ECRIRE{associe_liens}}}}
+
+
+
+<div class="cadre-formulaire-editer">
+<div class="entete-formulaire">
+	[(#ID_ASSOCIE_LIEN|oui)
+	[(#GET{redirect}|icone_verticale{<:icone_retour:>,associe_lien,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_ASSOCIE_LIEN|?{<:associe_lien:icone_modifier_associe_lien:>,<:associe_lien:icone_creer_associe_lien:>})]
+		<h1>(#ENV{titre,#INFO_TITRE{associe_lien,#ID_ASSOCIE_LIEN}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_ASSOCIE_LIEN|generer_url_entite{associe_lien}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_ASSOCIE_LIEN{#ENV{id_associe_lien,oui}, #GET{redirect}, #ENV{associer_objet}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>

@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_associe_liens_selectionnes>
+	<ul>
+	<BOUCLE_associe_liens_selectionnes(ASSOCIE_LIENS){id_associe_lien IN #GET*{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+		<li class="choix">#TITRE (#ID_ASSOCIE_LIEN)</li>
+	</BOUCLE_associe_liens_selectionnes>
+	</ul>
+	</B_associe_liens_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_associe_liens_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_associe_lien_selectionne(ASSOCIE_LIENS){id_associe_lien=#ENV{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+	  	<p>#TITRE (#ID_ASSOCIE_LIEN)</p>
+	</BOUCLE_associe_lien_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_associe_lien_selectionne>
+<//B_test_multiple>

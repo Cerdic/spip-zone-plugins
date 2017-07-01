@@ -1,0 +1,72 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi titre,1,
+	date,-1,
+	id_associe_lien,1
+}})
+]
+#SET{exclus,#ENV**{exclus,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#SET{debut,#ENV{debutassa,#EVAL{_request("debutassa");}}}
+<B_liste_associe_liens>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutassa,#EVAL{_request("debutassa");}}}
+#SET{afficher_lettres,#TRI|=={'multi titre'}|oui}
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-associer associe_liens">
+<table class="spip liste">
+[<caption><span class="caption"><strong>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{associe_lien:info_1_associe_lien,associe_lien:info_nb_associe_liens}})</strong>
+<span class="recherche">
+	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
+	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" />
+	<input type="submit" class="tout_voir" name="tout_voir" value="<:info_tout_afficher:>" />
+</span>
+</span>
+</caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(ASSOCIE_LIENS){tout}{!id_associe_lien IN #GET{exclus}}{where?}{recherche?}{statut?}
+			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_associe_lien==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#TITRE**|extraire_multi|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutassa,@#ID_ASSOCIE_LIEN}|ancre_url{paginationassa}|afficher_initiale{#TITRE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="3"><p class="pagination">(#GET{p})</p></td></tr>]
+
+		<tr class="first_row">
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class="titre" scope="col">[(#TRI{multi titre,<:associe_lien:champ_titre_label:>,ajax})]</th>
+			<th class="action" scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_associe_liens(ASSOCIE_LIENS){!id_associe_lien IN #GET{exclus}}{where?}{recherche?}{statut?}
+		{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} assa}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
+			<td class="statut">[(#STATUT|puce_statut{associe_lien})]</td>
+			<td class="titre">[(#LOGO_ASSOCIE_LIEN|image_reduire{20,20})]<a href="[(#ID_ASSOCIE_LIEN|generer_url_entite{associe_lien})]">#TITRE</a></td>
+			<td class="action">
+				<button type="submit" class="button link add" name="ajouter_lien\[associe_lien-#ID_ASSOCIE_LIEN-#OBJET-#ID_OBJET\]" value="+"><:associe_lien:ajouter_lien_associe_lien:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
+			</td>
+		</tr>
+	</BOUCLE_liste_associe_liens>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_associe_liens>[(#ENV{recherche}|oui)
+<div class="liste-objets liste-objets-associer associe_liens caption-wrap">
+<span class="caption"><strong>[(#VAL{info_recherche_auteur_zero}|_T{#ARRAY{cherche_auteur,#ENV{recherche}}})]</strong>
+<span class="recherche">
+	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
+	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" />
+	<input type="submit" class="tout_voir" name="tout_voir" value="<:info_tout_afficher:>" />
+</span>
+</span>
+</div>
+]<//B_liste_associe_liens>

@@ -1,0 +1,25 @@
+[(#ENV{objet_spip}|et{#ENV{lien_interne}}|oui)
+	[(#SAISIE{input, id_objet_spip, obligatoire=oui,
+		label=<:associe_lien:champ_id_objet_spip_label:>,
+		explication=<:associe_lien:champ_id_objet_spip_label_explication:>})]
+]
+
+<script type="text/javascript">
+	// Autocomplete search internal links.
+	var url = '#URL_PAGE{la_recherche_objet}'
+
+	$(".formulaire_editer_associe_lien #champ_id_objet_spip").autocomplete({
+			source: parametre_url(url, 'table', '#ENV{objet_spip}', '&'),
+			dataType: 'json',
+			minLength: 2,
+			autoFocus: true,
+			select: function(event, ui) {
+				// Afficher l'id dans le champ
+				event.preventDefault();
+				$(event.target).val(ui.item.data);
+
+				// Préremplir le titre avec le label/titre du json.
+				$('#champ_titre').val(ui.item.label)
+			},
+	});
+</script>

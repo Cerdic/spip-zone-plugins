@@ -1,0 +1,25 @@
+<BOUCLE_associe_lien(ASSOCIE_LIENS){id_associe_lien}{statut?}>
+[<div class="champ contenu_lien_interne[ (#LIEN_INTERNE*|strlen|?{'',vide})]">
+	<label><:associe_lien:champ_lien_interne_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{lien_interne} lien_interne">(#LIEN_INTERNE)</span>
+</div>]
+
+
+[<div class="champ contenu_lien">
+	<label><:associe_lien:titre_associe_lien:> : </label>
+	<span dir="#LANG_DIR" class="lien"><a href="(#URL_LIEN_ASSOCIE)">#URL_LIEN_ASSOCIE</a></span>
+</div>]
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:associe_lien:champ_titre_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{titre} titre">(#TITRE)</span>
+</div>]
+
+
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<label><:associe_lien:champ_descriptif_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{descriptif} descriptif">(#DESCRIPTIF)</span>
+</div>]
+
+</BOUCLE_associe_lien>
