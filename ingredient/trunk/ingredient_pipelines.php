@@ -62,7 +62,8 @@ function ingredient_affiche_milieu($flux) {
 	if ($texte) {
 		if ($p=strpos($flux['data'], '<!--affiche_milieu-->')) {
 			$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
-		} else { 			$flux['data'] .= $texte;
+		} else {
+			$flux['data'] .= $texte;
 		}
 	}
 
