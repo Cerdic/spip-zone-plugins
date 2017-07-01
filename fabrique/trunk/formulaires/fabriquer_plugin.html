@@ -26,7 +26,7 @@
 <BOUCLE_editable(CONDITION){si #ENV{editable}}>
 
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
-		#ACTION_FORMULAIRE{#ENV{action}}
+		#ACTION_FORMULAIRE
 		<input type='submit' name='creer' class='submit invisible' value='<:fabrique:bouton_creer:>' />
 		<input type='hidden' name='open_tab' value='#ENV{open_tab}' id="open_tab" />
 		<BOUCLE_tab_open_accordion(DATA){enum 0,(#OBJETS|count|plus{1})}>
