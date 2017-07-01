@@ -47,5 +47,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_titre_quantite' => 'Quantité',
 	'message_ajoute_ok' => 'Ingredient corectement ajouté à la recette',
 	'unite' => 'Unité de mesure',
-	'unite_explication' => "Unité de mesure par défaut de l'ingrédient, elle sera automatiquement ajoutée au quantité des recettes."
+	'unite_explication' => "Unité de mesure par défaut de l'ingrédient, elle sera automatiquement ajoutée au quantité des recettes.",
+	'titre_liste_ingredients' => 'Les ingrédients de cette recette'
 );
