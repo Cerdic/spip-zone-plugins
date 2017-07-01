@@ -32,6 +32,7 @@ a mis a jour la valeur avec la page reelle]
 
 		<tr class='first_row'>
 			<th class='titre' scope='col'>[(#TRI{multi titre,<:ingredient:champ_titre_label:>,ajax})]</th>
+      <th class='quantite' scope='col'><:ingredient:quantite:></th>
 			<th class='action' scope='col'></th>
 		</tr>
 	</thead>
@@ -39,8 +40,17 @@ a mis a jour la valeur avec la page reelle]
 	<BOUCLE_liste_ingredients(INGREDIENTS){id_ingredient IN #GET{selection}}
 		{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} ingl}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_INGREDIENT|=={#ENV{id_lien_ajoute}}|oui)append]">
-			<td class='titre'>[(#LOGO_INGREDIENT|image_reduire{20,20})]<a href="[(#ID_INGREDIENT|generer_url_entite{ingredient})]">#TITRE</a></td>
+			<td class='titre'>
+        [(#LOGO_INGREDIENT|image_reduire{20,20})]
+        <a href="[(#ID_INGREDIENT|generer_url_entite{ingredient})]">#TITRE</a>
+      </td>
+      <td class="quantite">
+        [(#REM) <INCLURE{fond=prive/squelettes/quantite, env} /> ]
+        <input name="quantite" type="text" value=""/>
+        <input type="submit" value="ok"/>
 
+        <button name="quantite[]">test</button>
+      </td>
 			<td class='action'>
 				[(#ENV{editable}|oui)
 					<button class="button link delete" name="supprimer_lien\[ingredient-#ID_INGREDIENT-#OBJET-#ID_OBJET\]" value="X"><:ingredient:retirer_lien_ingredient:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
