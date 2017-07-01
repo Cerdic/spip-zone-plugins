@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return array
  */
 function noizetier_recuperer_fond($flux) {
-	if (defined('_NOIZETIER_RECUPERER_FOND') ? _NOIZETIER_RECUPERER_FOND : true) {
+	if ((defined('_NOIZETIER_RECUPERER_FOND') ? _NOIZETIER_RECUPERER_FOND : true) and !test_espace_prive()) {
 		include_spip('noizetier_fonctions');
 		
 		$fond = isset($flux['args']['fond']) ? $flux['args']['fond'] : '';
