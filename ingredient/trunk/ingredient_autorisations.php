@@ -51,7 +51,7 @@ function autoriser_configurer_ingredient_dist($faire, $type, $id, $qui, $opt) {
 **/
 function autoriser_ingredients_menu_dist($faire, $type, $id, $qui, $opt){
 	return true;
-} 
+}
 
 
 /**
@@ -65,7 +65,7 @@ function autoriser_ingredients_menu_dist($faire, $type, $id, $qui, $opt){
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_ingredient_creer_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite')); 
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
 /**
@@ -125,5 +125,3 @@ function autoriser_associeringredients_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
 }
 
-
-?>
