@@ -22,7 +22,7 @@ function traiter_email_dist($args, $retours) {
 	$traitements = unserialize($formulaire['traitements']);
 	$champs = saisies_lister_champs($saisies);
 	$destinataires = array();
-
+	$taille_fichiers = 0; //taille des fichiers en email
 	// On récupère les destinataires
 	if ($options['champ_destinataires']) {
 		$destinataires = _request($options['champ_destinataires']);
@@ -96,6 +96,7 @@ function traiter_email_dist($args, $retours) {
 				if ($ajouter_fichier) {
 					$retours['fichiers'][$champ] = $valeurs[$champ];
 				}
+				$taille_fichiers += formidable_calculer_taille_fichiers_saisie($valeurs[$champ]);
 			} else {
 				$valeurs[$champ] = _request($champ);
 			}
@@ -143,6 +144,14 @@ function traiter_email_dist($args, $retours) {
 			$notification = 'notifications/formulaire_'.$formulaire['identifiant'].'_email';
 		} else {
 			$notification = 'notifications/formulaire_email';
+		}
+		// Est-ce qu'on est assez léger pour joindre les pj
+		$joindre_pj = false;
+		if ($taille_fichiers < 1024 * 1024 * _FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL
+			and
+			$traitements['email']['pj'] == 'on'
+		) {
+			$joindre_pj = true;
 		}
 
 		// On génère le mail avec le fond
@@ -453,6 +462,20 @@ function vues_saisies_supprimer_action_recuperer_fichier_par_email($saisies, $vu
 		}
 	}
 	return $vues;
+}
+
+/**
+ * Calcul la taille totale des fichiers 
+ * d'après une saisie de type fichiers
+ * @param array $saisie
+ * @return int $taille (en octets)
+**/
+function formidable_calculer_taille_fichiers_saisie($saisie) {
+	$taille = 0;
+	foreach ($saisie as $k => $info) {
+		$taille += $info['taille'];
+	}	
+	return $taille;
 }
 /**
  * Retourne des secondes sous une jolie forme, du type xx jours, yy heures, zz minutes, aa secondes
