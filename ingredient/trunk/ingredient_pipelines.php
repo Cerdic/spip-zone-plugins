@@ -10,7 +10,7 @@
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
-	
+
 
 /*
  * Un fichier de pipelines permet de regrouper
@@ -97,4 +97,8 @@ function ingredient_optimiser_base_disparus($flux){
 	return $flux;
 }
 
-?>
+function ingredient_pre_edition_lien($flux) {
+
+    var_dump($flux);
+    return $flux;
+}
