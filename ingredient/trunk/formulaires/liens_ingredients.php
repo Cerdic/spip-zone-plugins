@@ -9,7 +9,7 @@ function formulaires_liens_ingredients_saisies_dist() {
             'options' => array(
                 'nom' => 'ingredient',
                 'label' => _T('ingredient:titre_ingredient'),
-                'class' => 'selectize'
+                'class' => 'chosen'
             )
         ),
         array(
