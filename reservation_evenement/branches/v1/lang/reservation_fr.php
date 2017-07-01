@@ -104,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_statuts_complet' => 'Le(s) Statut(s) complet(s) :',
 	'label_type_paiement' => 'Type de paiemement :',
 	'label_type_selection' => 'Type de sélection :',
+	'legend_infos_generales' => 'Infos générales réservation',
 	'legend_donnees_auteur' => 'Les données du client',
 	'legend_donnees_reservation' => 'Les données de la réservation',
 
