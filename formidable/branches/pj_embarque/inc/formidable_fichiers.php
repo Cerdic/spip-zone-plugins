@@ -287,7 +287,7 @@ function formidable_retourner_fichier($chemin, $f) {
  * @param array $options
  * 		des options, dépendantes du type de traitement,
  * 		qui permettent d'indiquer où l'on déplace le fichier
- * return array un tableau de "vue" de la saisie
+ * @return array un tableau de "vue" de la saisie
 **/
 function formidable_deplacer_fichiers_produire_vue_saisie($saisie, $options) {
 	$nb_fichiers_max = $saisie['options']['nb_fichiers'];

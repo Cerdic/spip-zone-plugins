@@ -465,7 +465,7 @@ function vues_saisies_supprimer_action_recuperer_fichier_par_email($saisies, $vu
 }
 
 /**
- * Calcul la taille totale des fichiers 
+ * Calcule la taille totale des fichiers
  * d'après une saisie de type fichiers
  * @param array $saisie
  * @return int $taille (en octets)
