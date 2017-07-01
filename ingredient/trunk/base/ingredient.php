@@ -59,7 +59,7 @@ function ingredient_declarer_tables_objets_sql($tables) {
 		'champs_versionnes' => array('titre', 'descriptif', 'texte'),
 		'rechercher_champs' => array("titre" => 8, "descriptif" => 7, "texte" => 7),
 		'tables_jointures'  => array('spip_ingredients_liens'),
-		
+
 
 	);
 

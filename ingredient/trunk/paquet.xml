@@ -10,12 +10,12 @@
 >
 	<!--
 		Paquet genere le 2015-02-02 18:06:00
-		(Vous pouvez bien entendu supprimer ces commentaires) 
+		(Vous pouvez bien entendu supprimer ces commentaires)
 	-->
 
 	<nom>ingrédients</nom>
 
-	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs --> 
+	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs -->
 	<auteur lien='http://p.henix.be'>Phenix</auteur>
 
 	<licence>GNU/GPL</licence>
@@ -29,27 +29,27 @@
 		* pipelines
 		<pipeline nom="autoriser" inclure="ingredient_autorisations.php" />
 		<pipeline nom="insert_head" inclure="ingredient_pipelines.php" />
-		* declarer un pipeline 
+		* declarer un pipeline
 		<pipeline nom="mon_pipeline" action="" />
 		* parents de menus de SPIP :
 				menu_accueil (A eviter), menu_edition, menu_publication,
-				menu_activite, menu_squelette, menu_administration, menu_configuration 
+				menu_activite, menu_squelette, menu_administration, menu_configuration
 		<menu nom="ingredient" titre="ingredient:ingredient_titre" parent="menu_edition"  icone="images/ingredient-16.png" />
-		* parents d'onglets... configuration, plugins, statistiques, ... 
+		* parents d'onglets... configuration, plugins, statistiques, ...
 		<onglet nom="ingredient" titre="ingredient:ingredient_titre" parent="configuration" icone="images/ingredient-24.png" />
 	-->
 
-	<necessite nom="saisies"  compatibilite="[1.24.0;]" /> 
+	<necessite nom="saisies"  compatibilite="[1.24.0;]" />
 
 
-	<pipeline nom="autoriser" inclure="ingredient_autorisations.php" /> 
+	<pipeline nom="autoriser" inclure="ingredient_autorisations.php" />
 
-	<pipeline nom="declarer_tables_objets_sql" inclure="base/ingredient.php" /> 
-	<pipeline nom="declarer_tables_interfaces" inclure="base/ingredient.php" /> 
-	<pipeline nom="declarer_tables_auxiliaires" inclure="base/ingredient.php" /> 
-	<pipeline nom="affiche_milieu" inclure="ingredient_pipelines.php" /> 
-	<pipeline nom="affiche_auteurs_interventions" inclure="ingredient_pipelines.php" /> 
-	<pipeline nom="optimiser_base_disparus" inclure="ingredient_pipelines.php" /> 
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/ingredient.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/ingredient.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/ingredient.php" />
+	<pipeline nom="affiche_milieu" inclure="ingredient_pipelines.php" />
+	<pipeline nom="affiche_auteurs_interventions" inclure="ingredient_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="ingredient_pipelines.php" />
 
-	<menu nom="ingredients" titre="ingredient:titre_ingredients" parent="menu_edition" icone="images/ingredient-16.png" action="ingredients" /> 
+	<menu nom="ingredients" titre="ingredient:titre_ingredients" parent="menu_edition" icone="images/ingredient-16.png" action="ingredients" />
 </paquet>
