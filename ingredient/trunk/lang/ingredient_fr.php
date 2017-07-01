@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_ingredients' => '@nb@ ingrédients',
 
 	// R
-	'retirer_lien_ingredient' => 'Retirer ce ingrédient',
+	'retirer_lien_ingredient' => 'Retirer cet ingrédient',
 	'retirer_tous_liens_ingredients' => 'Retirer tous les ingrédients',
 
 	// T
