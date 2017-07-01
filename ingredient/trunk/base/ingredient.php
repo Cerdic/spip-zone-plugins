@@ -48,6 +48,7 @@ function ingredient_declarer_tables_objets_sql($tables) {
 			"titre"              => "text NOT NULL DEFAULT ''",
 			"descriptif"         => "text DEFAULT '' NOT NULL COLLATE NOCASE",
 			"texte"              => "longtext DEFAULT '' NOT NULL COLLATE NOCASE",
+            "unite"              => "VARCHAR(25) DEFAULT '' NOT NULL",
 			"maj"                => "TIMESTAMP"
 		),
 		'key' => array(
@@ -55,12 +56,10 @@ function ingredient_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "titre AS titre, '' AS lang",
 		 #'date' => "",
-		'champs_editables'  => array('titre', 'descriptif', 'texte'),
-		'champs_versionnes' => array('titre', 'descriptif', 'texte'),
+		'champs_editables'  => array('titre', 'descriptif', 'texte', 'unite'),
+		'champs_versionnes' => array('titre', 'descriptif', 'texte', 'unite'),
 		'rechercher_champs' => array("titre" => 8, "descriptif" => 7, "texte" => 7),
 		'tables_jointures'  => array('spip_ingredients_liens'),
-
-
 	);
 
 	return $tables;
