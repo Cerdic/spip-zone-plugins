@@ -178,7 +178,7 @@ function traiter_email_dist($args, $retours) {
 		include_spip('facteur_fonctions');
 		$texte = facteur_mail_html2text($html);
 
-		// On utilise la forme avancé de Facteur
+		// On utilise la forme avancée de Facteur
 		$corps = array(
 			'html' => $html,
 			'texte' => $texte,
