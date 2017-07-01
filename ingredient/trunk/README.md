@@ -1,3 +1,3 @@
 # Ingredient
 
-Plugin SPIP pour la gestion de d'ingrédient dans les articles
+Plugin SPIP pour la gestion d'ingrédients dans les articles de SPIP.
