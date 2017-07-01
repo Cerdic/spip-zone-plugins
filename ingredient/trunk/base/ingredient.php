@@ -25,6 +25,8 @@ function ingredient_declarer_tables_interfaces($interfaces) {
 
 	$interfaces['table_des_tables']['ingredients'] = 'ingredients';
 
+    $interfaces['table_des_traitements']['QUANTITE'][] = "ingredient_ajoute_unite(%s, \$Pile[1])";
+
 	return $interfaces;
 }
 
