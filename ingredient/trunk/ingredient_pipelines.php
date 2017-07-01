@@ -47,15 +47,7 @@ function ingredient_affiche_milieu($flux) {
 		$texte .= recuperer_fond('prive/objets/editer/lier_ingredients', array(
 			'table_source' => 'ingredients',
 			'objet' => $e['type'],
-			'id_objet' => $flux['args'][$e['id_table_objet']]
-		));
-	}
-
-    if (!$e['edition'] AND in_array($e['type'], array('article'))) {
-		$texte .= recuperer_fond('prive/objets/editer/liens', array(
-			'table_source' => 'ingredients',
-			'objet' => $e['type'],
-			'id_objet' => $flux['args'][$e['id_table_objet']]
+			'id_article' => $flux['args'][$e['id_table_objet']]
 		));
 	}
 
