@@ -31,6 +31,7 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/ingredient.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/ingredient.php" />
 	<pipeline nom="affiche_milieu" inclure="ingredient_pipelines.php" />
+	<pipeline nom="affiche_gauche" inclure="ingredient_pipelines.php" />
 	<pipeline nom="affiche_auteurs_interventions" inclure="ingredient_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="ingredient_pipelines.php" />
 

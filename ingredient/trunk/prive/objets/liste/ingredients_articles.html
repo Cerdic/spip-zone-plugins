@@ -1,0 +1,17 @@
+[(#REM)
+Afficher les articles de l'ingredient
+]
+[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{article-24.png}|balise_img{'',cadre-icone})]<:info_articles_2:>, box info})]
+<B_ingredients_articles>
+  #ANCRE_PAGINATION
+  <ul class="spip">
+    <BOUCLE_ingredients_articles(ARTICLES spip_ingredients_liens){id_ingredient}{pagination}>
+    <li>#TITRE</li>
+  </BOUCLE_ingredients_articles>
+  </ul>
+  [<p class="pagination">(#PAGINATION)</p>]
+</B_ingredients_articles>
+<:ingredient:aucun_ingredient_article:>
+<//B_ingredients_articles>
+
+#BOITE_FERMER

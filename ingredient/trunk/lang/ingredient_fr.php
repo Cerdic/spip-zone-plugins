@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_langue_ingredient' => 'Langue de ce ingrédient',
 	'titre_logo_ingredient' => 'Logo de ce ingrédient',
 
+    'aucun_ingredient_article' => "Cet ingredient n'est pas utilisé.",
     'champ_titre_quantite' => 'Quantité',
     'message_ajoute_ok' => 'Ingredient corectement ajouté à la recette',
     'unite' => 'Unité de mesure',

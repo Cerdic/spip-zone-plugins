@@ -62,6 +62,18 @@ function ingredient_affiche_milieu($flux) {
 }
 
 
+function ingredient_affiche_gauche($flux) {
+
+    if ($flux['args']['exec'] == 'ingredient') {
+        $flux['data'] .= recuperer_fond('prive/objets/liste/ingredients_articles', array(
+            'id_ingredient' => $flux['args']['id_ingredient']
+        ));
+    }
+
+    return $flux;
+}
+
+
 /**
  * Ajout de liste sur la vue d'un auteur
  *
