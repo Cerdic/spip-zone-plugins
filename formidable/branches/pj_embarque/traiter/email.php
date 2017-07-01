@@ -184,6 +184,11 @@ function traiter_email_dist($args, $retours) {
 			'texte' => $texte,
 			'nom_envoyeur' => filtrer_entites($nom_envoyeur),
 		);
+		// Joindre les pj si léger
+		if ($joindre_pj) {
+			$corps['pieces_jointes'] = $fichiers_facteur;
+		}
+	
 		// Si l'utilisateur n'a pas indiqué autrement, on met le courriel de l'envoyeur dans
 		// Reply-To et on laisse le from par defaut de Facteur car sinon ca bloque sur les
 		// SMTP un peu restrictifs.
