@@ -6,7 +6,7 @@
 	compatibilite="[3.0.17;3.0.*]"
 	logo="prive/themes/spip/images/ingredient-64.png"
 	documentation=""
-	schema="1.0.2"
+	schema="1.0.0"
 >
 	<!--
 		Paquet genere le 2015-02-02 18:06:00
@@ -19,25 +19,6 @@
 	<auteur lien='http://p.henix.be'>Phenix</auteur>
 
 	<licence>GNU/GPL</licence>
-
-	<!--
-		Exemple de commandes
-		* dependances
-		<necessite nom="saisies" compatibilite="[1.21.0;]" />
-		<utilise nom="saisies" compatibilite="[1.21.0;]" />
-		<lib nom="simplehtmldom" lien="http://chemin_vers_archive.zip" />
-		* pipelines
-		<pipeline nom="autoriser" inclure="ingredient_autorisations.php" />
-		<pipeline nom="insert_head" inclure="ingredient_pipelines.php" />
-		* declarer un pipeline
-		<pipeline nom="mon_pipeline" action="" />
-		* parents de menus de SPIP :
-				menu_accueil (A eviter), menu_edition, menu_publication,
-				menu_activite, menu_squelette, menu_administration, menu_configuration
-		<menu nom="ingredient" titre="ingredient:ingredient_titre" parent="menu_edition"  icone="images/ingredient-16.png" />
-		* parents d'onglets... configuration, plugins, statistiques, ...
-		<onglet nom="ingredient" titre="ingredient:ingredient_titre" parent="configuration" icone="images/ingredient-24.png" />
-	-->
 
 	<necessite nom="saisies"  compatibilite="[1.24.0;]" />
   <necessite nom="selectize" compatibilite="[1.0.0;]" />

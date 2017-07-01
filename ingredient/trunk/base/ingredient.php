@@ -25,8 +25,6 @@ function ingredient_declarer_tables_interfaces($interfaces) {
 
 	$interfaces['table_des_tables']['ingredients'] = 'ingredients';
 
-    $interfaces['table_des_traitements']['QUANTITE'][] = "ingredient_ajoute_unite(%s, \$Pile[1])";
-
 	return $interfaces;
 }
 
@@ -50,7 +48,6 @@ function ingredient_declarer_tables_objets_sql($tables) {
 			"titre"              => "text NOT NULL DEFAULT ''",
 			"descriptif"         => "text DEFAULT '' NOT NULL COLLATE NOCASE",
 			"texte"              => "longtext DEFAULT '' NOT NULL COLLATE NOCASE",
-            "unite"              => "VARCHAR(25) DEFAULT '' NOT NULL",
 			"maj"                => "TIMESTAMP"
 		),
 		'key' => array(
