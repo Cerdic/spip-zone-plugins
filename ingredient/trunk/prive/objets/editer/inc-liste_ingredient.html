@@ -2,12 +2,14 @@
 <B_ingredient_liee>
   <table>
     <tr>
+      <th></th>
       <th><:ingredient:champ_titre_quantite:></th>
       <th><:ingredient:titre_ingredients:></th>
       <th></th>
     </tr>
     <BOUCLE_ingredient_liee(INGREDIENTS ingredients_liens){id_article}{pagination}>
       <tr>
+        <td>[(#LOGO_INGREDIENT|image_reduire{20,20})]</td>
         <td>#QUANTITE</td>
         <td>#TITRE</td>
         <td>
