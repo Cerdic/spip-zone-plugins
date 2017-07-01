@@ -36,8 +36,6 @@ function formulaires_liens_ingredients_saisies_dist() {
 function formulaires_liens_ingredients_verifier_dist() {
     $erreurs = array();
 
-
-
     return $erreurs;
 }
 
