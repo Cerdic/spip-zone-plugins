@@ -1,7 +1,9 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -13,8 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_descriptif_label' => 'Descriptif',
 	'champ_texte_label' => 'Texte',
 	'champ_titre_label' => 'Titre',
-    'quantite' => 'Quantité(e)',
-    'quantite_confirme' => 'La quantitée a été mise à jour.',
+	'quantite' => 'Quantité(e)',
+	'quantite_confirme' => 'La quantitée a été mise à jour.',
 
 	// I
 	'icone_creer_ingredient' => 'Créer un ingrédient',
@@ -39,11 +41,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_langue_ingredient' => 'Langue de ce ingrédient',
 	'titre_logo_ingredient' => 'Logo de ce ingrédient',
 
-    'lien_article' => 'Liés à cet ingrédient :',
+	'lien_article' => 'Liés à cet ingrédient :',
 
-    'aucun_ingredient_article' => "Cet ingredient n'est pas utilisé.",
-    'champ_titre_quantite' => 'Quantité',
-    'message_ajoute_ok' => 'Ingredient corectement ajouté à la recette',
-    'unite' => 'Unité de mesure',
-    'unite_explication' => "Unité de mesure par défaut de l'ingrédient, elle sera automatiquement ajoutée au quantité des recettes."
+	'aucun_ingredient_article' => "Cet ingredient n'est pas utilisé.",
+	'champ_titre_quantite' => 'Quantité',
+	'message_ajoute_ok' => 'Ingredient corectement ajouté à la recette',
+	'unite' => 'Unité de mesure',
+	'unite_explication' => "Unité de mesure par défaut de l'ingrédient, elle sera automatiquement ajoutée au quantité des recettes."
 );
