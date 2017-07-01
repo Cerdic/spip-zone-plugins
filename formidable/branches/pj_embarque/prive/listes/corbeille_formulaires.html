@@ -1,0 +1,18 @@
+<B_formulaires>
+<div class="liste corbeille-formulaires">
+[<h3 class="titrem">(#GRAND_TOTAL|singulier_ou_pluriel{formidable:formulaires_corbeille_un,formidable:formulaires_corbeille_tous})</h3>]
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul class='liste-items checkables'>
+<BOUCLE_formulaires(FORMULAIRES){statut}{pagination 5}{!par date}{recherche ?}>
+<li class='item'>
+<label for='formulaire-#ID_FORMULAIRE'><:corbeille:selectionner:></label>
+<input type='checkbox' name='elements[]' id="formulaire-#ID_FORMULAIRE" value='#ID_FORMULAIRE'[ (#ID_FORMULAIRE|in_any{#ENV{elements}}|oui)checked='checked']/>
+<h4>[##ID_FORMULAIRE - (#TITRE|sinon{<:info_sans_titre:>})]</h4>
+<small>[(#DATE|affdate)][ (#DATE|heures)]:[(#DATE|minutes)]</small>
+<p class='actions'><a href='#URL_ECRIRE{formulaire,id_formulaire=#ID_FORMULAIRE}'><:corbeille:voir_detail:></a></p>
+</li>
+</BOUCLE_formulaires>
+</ul>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_formulaires>
