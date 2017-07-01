@@ -40,7 +40,7 @@
 	-->
 
 	<necessite nom="saisies"  compatibilite="[1.24.0;]" />
-
+  <necessite nom="selectize" compatibilite="[1.0.0;]" />
 
 	<pipeline nom="autoriser" inclure="ingredient_autorisations.php" />
 
