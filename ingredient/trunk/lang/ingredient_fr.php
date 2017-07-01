@@ -13,6 +13,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_descriptif_label' => 'Descriptif',
 	'champ_texte_label' => 'Texte',
 	'champ_titre_label' => 'Titre',
+    'quantite' => 'Quantité(e)',
+    'quantite_confirme' => 'La quantitée a été mise à jour.',
+
 
 	// I
 	'icone_creer_ingredient' => 'Créer un ingrédient',
