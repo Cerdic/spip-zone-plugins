@@ -47,8 +47,8 @@ function ingredient_declarer_tables_objets_sql($tables) {
 		'field'=> array(
 			'id_ingredient'		 => 'bigint(21) NOT NULL',
 			'titre'				 => "text NOT NULL DEFAULT ''",
-			'descriptif'		 => "text DEFAULT '' NOT NULL COLLATE NOCASE",
-			'texte'				 => "longtext DEFAULT '' NOT NULL COLLATE NOCASE",
+			'descriptif'		 => "text DEFAULT '' NOT NULL",
+			'texte'				 => "longtext DEFAULT '' NOT NULL",
 			'maj'				 => 'TIMESTAMP'
 		),
 		'key' => array(
