@@ -16,7 +16,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'quantite' => 'Quantité(e)',
     'quantite_confirme' => 'La quantitée a été mise à jour.',
 
-
 	// I
 	'icone_creer_ingredient' => 'Créer un ingrédient',
 	'icone_modifier_ingredient' => 'Modifier ce ingrédient',
@@ -39,6 +38,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_ingredients_rubrique' => 'Ingrédients de la rubrique',
 	'titre_langue_ingredient' => 'Langue de ce ingrédient',
 	'titre_logo_ingredient' => 'Logo de ce ingrédient',
+
+    'lien_article' => 'Liés à cet ingrédient :',
 
     'aucun_ingredient_article' => "Cet ingredient n'est pas utilisé.",
     'champ_titre_quantite' => 'Quantité',
