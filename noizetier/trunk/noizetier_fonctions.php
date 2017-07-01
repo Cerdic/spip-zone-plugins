@@ -565,7 +565,7 @@ function noizetier_page_informer($page, $traitement_typo = true) {
 
 	static $description_page = array();
 
-	if (!isset($description_page[$page])) {
+	if (!isset($description_page[$traitement_typo][$page])) {
 		// Chargement de toute la configuration de la page en base de données.
 		$description = sql_fetsel('*', 'spip_noizetier_pages', array('page=' . sql_quote($page)));
 
@@ -584,13 +584,13 @@ function noizetier_page_informer($page, $traitement_typo = true) {
 			$description['branche'] = unserialize($description['branche']);
 			// Calcul des blocs
 			$description['blocs'] = noizetier_page_lister_blocs($page, $description['blocs_exclus']);
-			$description_page[$page] = $description;
+			$description_page[$traitement_typo][$page] = $description;
 		} else {
-			$description_page[$page] = array();
+			$description_page[$traitement_typo][$page] = array();
 		}
 	}
 
-	return $description_page[$page];
+	return $description_page[$traitement_typo][$page];
 }
 
 
