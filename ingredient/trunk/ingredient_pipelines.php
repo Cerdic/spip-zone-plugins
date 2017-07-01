@@ -89,8 +89,6 @@ function ingredient_affiche_auteurs_interventions($flux) {
 	return $flux;
 }
 
-
-
 /**
  * Optimiser la base de données en supprimant les liens orphelins
  * de l'objet vers quelqu'un et de quelqu'un vers l'objet.
@@ -103,10 +101,4 @@ function ingredient_optimiser_base_disparus($flux){
 	include_spip('action/editer_liens');
 	$flux['data'] += objet_optimiser_liens(array('ingredient'=>'*'),'*');
 	return $flux;
-}
-
-function ingredient_pre_edition_lien($flux) {
-
-    var_dump($flux);
-    return $flux;
 }
