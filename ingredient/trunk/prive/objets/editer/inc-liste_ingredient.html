@@ -11,7 +11,7 @@
       <tr>
         <td>[(#LOGO_INGREDIENT|image_reduire{20,20})]</td>
         <td>#QUANTITE</td>
-        <td>#TITRE</td>
+        <td><a href="#URL_ECRIRE{ingredient, id_ingredient=#ID_INGREDIENT}" [title="(#TITRE|attribut_html)"]>#TITRE</a></td>
         <td>
           [(#AUTORISER{ingredient, dissocier}|oui)
           [(#BOUTON_ACTION{<:ingredient:retirer_lien_ingredient:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{X})], #URL_ACTION_AUTEUR{supprimer_lien, ingredient-#ID_INGREDIENT-article-#ID_OBJET, #SELF}, link delete ajax})]
