@@ -44,6 +44,8 @@
 
 	<pipeline nom="autoriser" inclure="ingredient_autorisations.php" />
 
+	<pipeline nom="pre_edition_lien" inclure="ingredient_pipelines.php" />
+
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/ingredient.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/ingredient.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/ingredient.php" />
