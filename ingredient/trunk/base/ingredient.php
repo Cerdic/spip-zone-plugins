@@ -37,7 +37,7 @@ function ingredient_declarer_tables_interfaces($interfaces) {
  * @param array $tables
  *	   Description des tables
  * @return array
- *	   Description complétée des tables
+ *	   Description complète des tables
  */
 function ingredient_declarer_tables_objets_sql($tables) {
 
