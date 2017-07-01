@@ -2,13 +2,11 @@
 	<table[ class="(#ENV{table_class})"]>
 		<caption><:ingredient:titre_liste_ingredients:></caption>
 		<tr>
-			<th></th>
 			<th><:ingredient:champ_titre_quantite:></th>
 			<th><:ingredient:titre_ingredients:></th>
 		</tr>
 		<BOUCLE_ingredient_liee(INGREDIENTS ingredients_liens){id_article}{par titre}>
 			<tr[ class="(#ENV{tr_class})"]>
-				<td[ class="(#ENV{td_class})"]>[(#LOGO_INGREDIENT|image_reduire{20,20})]</td>
 				<td[ class="(#ENV{td_class})"]>#QUANTITE</td>
 				<td[ class="(#ENV{td_class})"]><a href="#URL_INGREDIENT" [title="(#TITRE|attribut_html)"]>#TITRE</a></td>
 			</tr>
