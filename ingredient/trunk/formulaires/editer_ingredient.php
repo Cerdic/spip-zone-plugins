@@ -9,7 +9,9 @@
  * @package    SPIP\Ingredient\Formulaires
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/actions');
 include_spip('inc/editer');
@@ -35,7 +37,7 @@ include_spip('inc/editer');
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_ingredient_identifier_dist($id_ingredient='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_ingredient_identifier_dist($id_ingredient = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	return serialize(array(intval($id_ingredient), $associer_objet));
 }
 
@@ -64,8 +66,8 @@ function formulaires_editer_ingredient_identifier_dist($id_ingredient='new', $re
  * @return array
  *     Environnement du formulaire
  */
-function formulaires_editer_ingredient_charger_dist($id_ingredient='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	$valeurs = formulaires_editer_objet_charger('ingredient',$id_ingredient,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+function formulaires_editer_ingredient_charger_dist($id_ingredient = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+	$valeurs = formulaires_editer_objet_charger('ingredient', $id_ingredient, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 	return $valeurs;
 }
 
@@ -94,10 +96,9 @@ function formulaires_editer_ingredient_charger_dist($id_ingredient='new', $retou
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_editer_ingredient_verifier_dist($id_ingredient='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_ingredient_verifier_dist($id_ingredient = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 
-	return formulaires_editer_objet_verifier('ingredient',$id_ingredient, array('titre'));
-
+	return formulaires_editer_objet_verifier('ingredient', $id_ingredient, array('titre'));
 }
 
 /**
@@ -125,24 +126,20 @@ function formulaires_editer_ingredient_verifier_dist($id_ingredient='new', $reto
  * @return array
  *     Retours des traitements
  */
-function formulaires_editer_ingredient_traiter_dist($id_ingredient='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	$res = formulaires_editer_objet_traiter('ingredient',$id_ingredient,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
- 
+function formulaires_editer_ingredient_traiter_dist($id_ingredient = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+	$res = formulaires_editer_objet_traiter('ingredient', $id_ingredient, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+
 	// Un lien a prendre en compte ?
-	if ($associer_objet AND $id_ingredient = $res['id_ingredient']) {
+	if ($associer_objet and $id_ingredient = $res['id_ingredient']) {
 		list($objet, $id_objet) = explode('|', $associer_objet);
 
-		if ($objet AND $id_objet AND autoriser('modifier', $objet, $id_objet)) {
+		if ($objet and $id_objet and autoriser('modifier', $objet, $id_objet)) {
 			include_spip('action/editer_liens');
 			objet_associer(array('ingredient' => $id_ingredient), array($objet => $id_objet));
 			if (isset($res['redirect'])) {
-				$res['redirect'] = parametre_url ($res['redirect'], "id_lien_ajoute", $id_ingredient, '&');
+				$res['redirect'] = parametre_url($res['redirect'], 'id_lien_ajoute', $id_ingredient, '&');
 			}
 		}
 	}
 	return $res;
-
 }
-
-
-?>

@@ -9,7 +9,9 @@
  * @package    SPIP\Ingredient\Installation
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -74,13 +76,13 @@ function ingredient_vider_tables($nom_meta_base_version) {
 	# sql_drop_table("spip_xx");
 	# sql_drop_table("spip_xx_liens");
 
-	sql_drop_table("spip_ingredients");
-	sql_drop_table("spip_ingredients_liens");
+	sql_drop_table('spip_ingredients');
+	sql_drop_table('spip_ingredients_liens');
 
 	# Nettoyer les versionnages et forums
-	sql_delete("spip_versions",              sql_in("objet", array('ingredient')));
-	sql_delete("spip_versions_fragments",    sql_in("objet", array('ingredient')));
-	sql_delete("spip_forum",                 sql_in("objet", array('ingredient')));
+	sql_delete('spip_versions', sql_in('objet', array('ingredient')));
+	sql_delete('spip_versions_fragments', sql_in('objet', array('ingredient')));
+	sql_delete('spip_forum', sql_in('objet', array('ingredient')));
 
 	effacer_meta($nom_meta_base_version);
 }
