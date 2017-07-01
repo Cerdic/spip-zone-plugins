@@ -284,6 +284,11 @@ function traiter_email_dist($args, $retours) {
 				'nom_envoyeur' => filtrer_entites($nom_envoyeur_accuse),
 			);
 
+			// Joindre les pj si léger et nécessaire
+			if ($joindre_pj and  _FORMIDABLE_LIENS_FICHIERS_ACCUSE_RECEPTION == false) {
+				$corps['pieces_jointes'] = $fichiers_facteur;
+			}
+
 			$ok = $envoyer_mail($courriel_envoyeur, $sujet_accuse, $corps, $courriel_from_accuse, 'X-Originating-IP: '.$GLOBALS['ip']);
 		}
 
