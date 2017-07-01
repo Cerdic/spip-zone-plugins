@@ -50,6 +50,7 @@ function ingredient_upgrade($nom_meta_base_version, $version_cible) {
 	# ...
 
 	$maj['create'] = array(array('maj_tables', array('spip_ingredients', 'spip_ingredients_liens')));
+	$maj['1.0.1'] = array(array('maj_tables', array('spip_ingredients_liens')));
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

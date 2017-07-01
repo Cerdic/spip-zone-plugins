@@ -83,6 +83,7 @@ function ingredient_declarer_tables_auxiliaires($tables) {
 			"id_ingredient"      => "bigint(21) DEFAULT '0' NOT NULL",
 			"id_objet"           => "bigint(21) DEFAULT '0' NOT NULL",
 			"objet"              => "VARCHAR(25) DEFAULT '' NOT NULL",
+			"quantite"           => "text DEFAULT '' NOT NULL",
 			"vu"                 => "VARCHAR(6) DEFAULT 'non' NOT NULL"
 		),
 		'key' => array(

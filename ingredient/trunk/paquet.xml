@@ -6,7 +6,7 @@
 	compatibilite="[3.0.17;3.0.*]"
 	logo="prive/themes/spip/images/ingredient-64.png"
 	documentation=""
-	schema="1.0.0" 
+	schema="1.0.1"
 >
 	<!--
 		Paquet genere le 2015-02-02 18:06:00
