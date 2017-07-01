@@ -55,7 +55,6 @@ function formulaires_liens_ingredients_traiter_dist() {
     // Donnée de retour.
     return array(
         'editable' => true,
-        'message_ok' => '',
-        'redirect' => ''
+        'message_ok' => _T('ingredient:message_ajoute_ok')."<script type='text/javascript'>$(function () {ajaxReload('liste-ingredient')})</script>"
     );
 }
