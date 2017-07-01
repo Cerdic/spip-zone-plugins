@@ -83,6 +83,7 @@ function noizetier_vider_tables($nom_meta_version_base) {
 	sql_drop_table('spip_noizetier_pages');
 	sql_drop_table('spip_noizetier_noisettes');
 	sql_drop_table('spip_noisettes');
+//	sql_drop_table('spip_noizetier');
 
 	// On efface la version enregistrée du schéma des données du plugin
 	effacer_meta($nom_meta_version_base);
@@ -123,15 +124,33 @@ function maj_060($config_defaut) {
 	include_spip('base/create');
 	maj_tables(array('spip_noizetier_pages', 'spip_noizetier_noisettes'));
 
-	// Ajout de la colonne 'balise' qui indique pour chaque noisette si le noiZetier doit l'inclure dans un div
-	// englobant ou pas. Le champ prend les valeurs 'on', '' ou 'defaut' qui indique qu'il faut prendre
-	// en compte la valeur configurée par défaut (configuration du noizetier).
+	// Modification de la table spip_noisettes
+	// -- Ajout de la colonne 'balise' qui indique pour chaque noisette si le noiZetier doit l'inclure dans un div
+	//    englobant ou pas. Le champ prend les valeurs 'on', '' ou 'defaut' qui indique qu'il faut prendre
+	//    en compte la valeur configurée par défaut (configuration du noizetier).
 	sql_alter("TABLE spip_noisettes ADD balise varchar(6) DEFAULT 'defaut' NOT NULL AFTER parametres");
 	sql_alter("TABLE spip_noisettes ADD maj timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL");
+	// -- Suppression des index pour des colonnes dont on va modifier la taille ou le type
+	sql_alter("TABLE spip_noisettes DROP INDEX type");
+	sql_alter("TABLE spip_noisettes DROP INDEX composition");
+	sql_alter("TABLE spip_noisettes DROP INDEX bloc");
+	sql_alter("TABLE spip_noisettes DROP INDEX noisette");
 	// Mise à jour des tailles des colonnes type, composition et objet pour cohérence
+	sql_alter("TABLE spip_noisettes MODIFY bloc varchar(255) DEFAULT '' NOT NULL");
+	sql_alter("TABLE spip_noisettes MODIFY noisette varchar(255) DEFAULT '' NOT NULL");
+	// -- Mise à jour des tailles des colonnes type, composition et objet pour cohérence
 	sql_alter("TABLE spip_noisettes MODIFY type varchar(127) NOT NULL");
 	sql_alter("TABLE spip_noisettes MODIFY composition varchar(127) NOT NULL");
 	sql_alter("TABLE spip_noisettes MODIFY balise varchar(25) NOT NULL");
+	// -- Mise à jour de la valeur par défaut du rang
+	sql_alter("TABLE spip_noisettes MODIFY rang smallint DEFAULT 1 NOT NULL");
+	// -- Création des index détruits précédemment
+	sql_alter("TABLE spip_noisettes ADD INDEX type (type)");
+	sql_alter("TABLE spip_noisettes ADD INDEX composition (composition)");
+	sql_alter("TABLE spip_noisettes ADD INDEX bloc (bloc)");
+	sql_alter("TABLE spip_noisettes ADD INDEX noisette (noisette)");
+	// -- TODO : Renommage de la table
+//	sql_alter("TABLE spip_noisettes RENAME spip_noizetier");
 
 	// Mise à jour de la configuration du plugin
 	include_spip('inc/config');

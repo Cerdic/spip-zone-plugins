@@ -21,6 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function noizetier_declarer_tables_interfaces($interface) {
 
 	// Les tables : permet d'appeler une boucle avec le *type* de la table uniquement
+	// TODO : a renommer à terme spip_noizetier
 	$interface['table_des_tables']['noisettes'] = 'noisettes';
 	$interface['table_des_tables']['noizetier_pages'] = 'noizetier_pages';
 	$interface['table_des_tables']['noizetier_noisettes'] = 'noizetier_noisettes';
@@ -123,8 +124,8 @@ function noizetier_declarer_tables_principales($tables_principales) {
 		'key' => &$noisettes_cles,
 	);
 
-	// Table spip_noisettes
 	// TODO : a renommer à terme spip_noizetier
+	// Table spip_noisettes
 	$noizetier = array(
 		'id_noisette' => 'bigint(21) NOT NULL',
 		'rang'        => "smallint DEFAULT 1 NOT NULL",
