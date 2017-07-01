@@ -1,17 +1,16 @@
 <B_ingredient_liee>
-  <table>
-    <tr>
-      <th></th>
-      <th><:ingredient:champ_titre_quantite:></th>
-      <th><:ingredient:titre_ingredients:></th>
-    </tr>
-    <BOUCLE_ingredient_liee(INGREDIENTS ingredients_liens){id_article}{pagination}>
-      <tr>
-        <td>[(#LOGO_INGREDIENT|image_reduire{20,20})]</td>
-        <td>#QUANTITE</td>
-        <td><a href="#URL_INGREDIENT" [title="(#TITRE|attribut_html)"]>#TITRE</a></td>
-      </tr>
-    </BOUCLE_ingredient_liee>
-  </table>
-  [<p class="pagination">(#PAGINATION)</p>]
+	<table>
+		<tr>
+			<th></th>
+			<th><:ingredient:champ_titre_quantite:></th>
+			<th><:ingredient:titre_ingredients:></th>
+		</tr>
+		<BOUCLE_ingredient_liee(INGREDIENTS ingredients_liens){id_article}>
+			<tr>
+				<td>[(#LOGO_INGREDIENT|image_reduire{20,20})]</td>
+				<td>#QUANTITE</td>
+				<td><a href="#URL_INGREDIENT" [title="(#TITRE|attribut_html)"]>#TITRE</a></td>
+			</tr>
+		</BOUCLE_ingredient_liee>
+	</table>
 </B_ingredient_liee>
