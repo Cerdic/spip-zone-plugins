@@ -6,7 +6,7 @@
 			<th><:ingredient:champ_titre_quantite:></th>
 			<th><:ingredient:titre_ingredients:></th>
 		</tr>
-		<BOUCLE_ingredient_liee(INGREDIENTS ingredients_liens){id_article}>
+		<BOUCLE_ingredient_liee(INGREDIENTS ingredients_liens){id_article}{par titre}>
 			<tr>
 				<td>[(#LOGO_INGREDIENT|image_reduire{20,20})]</td>
 				<td>#QUANTITE</td>
