@@ -36,11 +36,21 @@ function formulaires_liens_ingredients_saisies_dist() {
 function formulaires_liens_ingredients_verifier_dist() {
     $erreurs = array();
 
+
+
     return $erreurs;
 }
 
 function formulaires_liens_ingredients_traiter_dist() {
     //Traitement du formulaire.
+
+    include_spip('action/editer_liens');
+
+    objet_associer(
+        array('id_ingredient' => _request('ingredient')),
+        array('id_article' => _request('id_article')),
+        array('quantite' => _request('quantite'))
+    );
 
     // Donnée de retour.
     return array(
