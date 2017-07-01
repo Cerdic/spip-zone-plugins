@@ -33,7 +33,7 @@ function noizetier_upgrade($nom_meta_base_version, $version_cible) {
 	);
 
 	$maj['create'] = array(
-		array('maj_tables',array('spip_noisettes_pages', 'spip_noizetier_noisettes', 'spip_noisettes')),
+		array('maj_tables',array('spip_noizetier_pages', 'spip_noizetier_noisettes', 'spip_noisettes')),
 		array('ecrire_config', 'noizetier', $config_060),
 	);
 
