@@ -39,6 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_ingredients_rubrique' => 'Ingrédients de la rubrique',
 	'titre_langue_ingredient' => 'Langue de ce ingrédient',
 	'titre_logo_ingredient' => 'Logo de ce ingrédient',
-);
 
-?>
+    'champ_titre_quantite' => 'Quantité'
+);
