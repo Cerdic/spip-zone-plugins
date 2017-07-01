@@ -27,13 +27,13 @@ function formulaires_liens_ingredients_saisies_dist() {
 }
 
 /*
- *   Fonction de vérification, cela fonction avec un tableau d'erreur.
- *   Le tableau est formater de la sorte:
- *   if (!_request('NomErreur')) {
- *       $erreurs['message_erreur'] = '';
- *       $erreurs['NomErreur'] = '';
- *   }
- *   Pensez à utiliser _T('info_obligatoire'); pour les éléments obligatoire.
+ *	 Fonction de vérification, cela fonction avec un tableau d'erreur.
+ *	 Le tableau est formater de la sorte:
+ *	 if (!_request('NomErreur')) {
+ *		 $erreurs['message_erreur'] = '';
+ *		 $erreurs['NomErreur'] = '';
+ *	 }
+ *	 Pensez à utiliser _T('info_obligatoire'); pour les éléments obligatoire.
  */
 function formulaires_liens_ingredients_verifier_dist() {
 	$erreurs = array();
@@ -55,6 +55,7 @@ function formulaires_liens_ingredients_traiter_dist() {
 	// Donnée de retour.
 	return array(
 		'editable' => true,
-		'message_ok' => _T('ingredient:message_ajoute_ok')."<script type='text/javascript'>$(function () {ajaxReload('liste-ingredient')})</script>"
+		'message_ok' => _T('ingredient:message_ajoute_ok')
+		.'<script type="text/javascript">$(function () {ajaxReload("liste-ingredient")})</script>'
 	);
 }
