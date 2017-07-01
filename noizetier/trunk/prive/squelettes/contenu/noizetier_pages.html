@@ -10,9 +10,9 @@
 		<div[ class="composition"(#COMPOSITION|oui)]>
 			[(#REM) Informations de base sur la page ]
 			<div class="resume">
-				<a[ href="(#URL_ECRIRE{noizetier_page}|parametre_url{page, #PAGE})"] title="<:noizetier:bulle_configurer_page_noisettes:>">[(#NOM|_T_ou_typo)]</a>
+				<a[ href="(#URL_ECRIRE{noizetier_page}|parametre_url{page, #PAGE})"] title="<:noizetier:bulle_configurer_page_noisettes:>">[(#NOM)]</a>
 				<i>[ \((#PAGE)\)]</i>
-				[<br />(#DESCRIPTION|_T_ou_typo|ptobr|sinon{&nbsp;})]
+				[<br />(#DESCRIPTION|ptobr|sinon{&nbsp;})]
 				[(#REM) Logo de la page ]
 				<div class="icone">
 					[(#ICON|noizetier_icone_chemin|image_reduire{24}|extraire_attribut{src}|balise_img)]

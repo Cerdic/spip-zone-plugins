@@ -18,18 +18,18 @@ if (!function_exists('autoriser')) {
  * 		- `modifier`: édition de la configuration de base d'une composition virtuelle
  * 		- `créer`: création d'une composition virtuelle à partir d'une page source
  * 		- `dupliquer`: copie d'une composition pour créer une nouvelle composition virtuelle
- * @param array  $description_page
- * 		La configuration complète d'une page ou composition :
- * 		- `modifier`: la description de la composition virtuelle en cours d'édition
- * 		- `créer`: la description de la page source
- * 		- `dupliquer`: la description de la composition source
+ * @param string $page
+ * 		L'identifiant de la page ou de la composition :
+ * 		- `modifier`: la composition virtuelle en cours d'édition
+ * 		- `créer`: la page source
+ * 		- `dupliquer`: la composition source
  * @param string $redirect
  * 		URL de redirection. La valeur dépend du type d'édition.
  *
  * @return array
  * 		Tableau des champs postés pour l'affichage du formulaire.
  */
-function formulaires_editer_page_charger_dist($edition, $description_page, $redirect = '') {
+function formulaires_editer_page_charger_dist($edition, $page, $redirect = '') {
 
 	// Initialisation des données communes à charger dans le formulaire
 	$valeurs = array(
@@ -44,32 +44,36 @@ function formulaires_editer_page_charger_dist($edition, $description_page, $redi
 		'_blocs_defaut' => array(),
 	);
 
-	// TODO : _T_ou_typo sur nom et description ???
-	if ($edition == 'modifier') {
-		// La page désignée par $page est déjà une composition virtuelle dont on souhaite modifier une
-		// partie de la configuration (hors noisettes).
-		// L'argument $description_page contient donc la configuration complète de cette page.
-		$valeurs['type_page'] = $description_page['type'];
-		$valeurs['composition'] = $description_page['composition'];
-		$valeurs['nom'] = $description_page['nom'];
-		$valeurs['description'] = $description_page['description'];
-		$valeurs['icon'] = $description_page['icon'];
+	$description_page = noizetier_page_informer($page, false);
+	if ($description_page) {
+		if ($edition == 'modifier') {
+			// La page désignée par $page est déjà une composition virtuelle dont on souhaite modifier une
+			// partie de la configuration (hors noisettes).
+			// L'argument $description_page contient donc la configuration complète de cette page.
+			$valeurs['type_page'] = $description_page['type'];
+			$valeurs['composition'] = $description_page['composition'];
+			$valeurs['nom'] = $description_page['nom'];
+			$valeurs['description'] = $description_page['description'];
+			$valeurs['icon'] = $description_page['icon'];
 
-	} elseif ($edition == 'dupliquer') {
-		// La page désignée est la composition source que l'on souhaite dupliquer pour créer une nouvelle
-		// composition virtuelle. La nouvelle composition virtuelle aura donc le même type de page et
-		// un identifiant de composition différent initialisé à 'copie_composition'.
-		// On initialise aussi le nom de la nouvelle composition à 'copie de nom_page_source'.
-		$valeurs['type_page'] = $description_page['type'];
-		$valeurs['composition'] = "copie_{$description_page['composition']}";
-		$valeurs['nom'] = _T('noizetier:copie_de', array('source' => $description_page['nom']));
+		} elseif ($edition == 'dupliquer') {
+			// La page désignée est la composition source que l'on souhaite dupliquer pour créer une nouvelle
+			// composition virtuelle. La nouvelle composition virtuelle aura donc le même type de page et
+			// un identifiant de composition différent initialisé à 'copie_composition'.
+			// On initialise aussi le nom de la nouvelle composition à 'copie de nom_page_source'.
+			$valeurs['type_page'] = $description_page['type'];
+			$valeurs['composition'] = "copie_{$description_page['composition']}";
+			$valeurs['nom'] = _T('noizetier:copie_de', array('source' => $description_page['nom']));
 
-	} elseif ($edition == 'creer') {
-		// On crée une nouvelle composition à partir d'une page source.
-		// L'argument $description_page contient donc la configuration complète de la page source.
-		$valeurs['type_page'] = $description_page['type'];
-		$valeurs['nom'] = _T('info_sans_titre');
+		} elseif ($edition == 'creer') {
+			// On crée une nouvelle composition à partir d'une page source.
+			// L'argument $description_page contient donc la configuration complète de la page source.
+			$valeurs['type_page'] = $description_page['type'];
+			$valeurs['nom'] = _T('info_sans_titre');
 
+		} else {
+			$valeurs['editable'] = false;
+		}
 	} else {
 		$valeurs['editable'] = false;
 	}
@@ -108,17 +112,17 @@ function formulaires_editer_page_charger_dist($edition, $description_page, $redi
  * 		- `modifier`: édition de la configuration de base d'une composition virtuelle
  * 		- `créer`: création d'une composition virtuelle à partir d'une page source
  * 		- `dupliquer`: copie d'une composition pour créer une nouvelle composition virtuelle
- * @param array  $description_page
- * 		La configuration complète d'une page ou composition :
- * 		- `modifier`: la description de la composition virtuelle en cours d'édition
- * 		- `créer`: la description de la page source
- * 		- `dupliquer`: la description de la composition source
+ * @param string $page
+ * 		L'identifiant de la page ou de la composition :
+ * 		- `modifier`: la composition virtuelle en cours d'édition
+ * 		- `créer`: la page source
+ * 		- `dupliquer`: la composition source
  * @param string $redirect
  * 		URL de redirection. La valeur dépend du type d'édition.
  *
  * @return array
  */
-function formulaires_editer_page_verifier_dist($edition, $description_page, $redirect = '') {
+function formulaires_editer_page_verifier_dist($edition, $page, $redirect = '') {
 	$erreurs = array();
 
 	// On vérifie que les champs obligatoires ont été bien saisis
@@ -159,17 +163,17 @@ function formulaires_editer_page_verifier_dist($edition, $description_page, $red
  * 		- `modifier`: édition de la configuration de base d'une composition virtuelle
  * 		- `créer`: création d'une composition virtuelle à partir d'une page source
  * 		- `dupliquer`: copie d'une composition pour créer une nouvelle composition virtuelle
- * @param array  $description_page
- * 		La configuration complète d'une page ou composition :
- * 		- `modifier`: la description de la composition virtuelle en cours d'édition
- * 		- `créer`: la description de la page source
- * 		- `dupliquer`: la description de la composition source
+ * @param string $page
+ * 		L'identifiant de la page ou de la composition :
+ * 		- `modifier`: la composition virtuelle en cours d'édition
+ * 		- `créer`: la page source
+ * 		- `dupliquer`: la composition source
  * @param string $redirect
  * 		URL de redirection. La valeur dépend du type d'édition.
  *
  * @return array
  */
-function formulaires_editer_page_traiter_dist($edition, $description_page, $redirect = '') {
+function formulaires_editer_page_traiter_dist($edition, $page, $redirect = '') {
 
 	$retour = array();
 	$description = array();
@@ -252,7 +256,7 @@ function formulaires_editer_page_traiter_dist($edition, $description_page, $redi
 				// Récupération des noisettes de la page source
 				$select = array('rang', 'type', 'composition', 'bloc', 'noisette', 'parametres');
 				$from = 'spip_noisettes';
-				$where = array('type=' . sql_quote($type_page), 'composition=' . sql_quote($description_page['composition']));
+				$where = array('type=' . sql_quote($type_page), 'composition=' . sql_quote(noizetier_page_composition($page)));
 				$noisettes_source = sql_allfetsel($select, $from, $where);
 				// Injection des noisettes de la source dans la composition virtuelle en cours de création qui diffère
 				// uniquement par l'identifiant de composition.

@@ -3,17 +3,17 @@
 	|ou{#ENV{edition}|=={creer}|et{#AUTORISER{creercomposition, noizetier, '', '', #ARRAY{page, #ENV{source}}}}}
 	|ou{#ENV{edition}|=={dupliquer}|et{#AUTORISER{dupliquercomposition, noizetier, '', '', #ARRAY{page, #ENV{source}}}}}
 	|sinon_interdire_acces)]
-
 #SET{page_concernee, #ENV{page}|?{#ENV{page}, #ENV{source}}}
-#SET{description_page, #GET{page_concernee}|noizetier_page_informer}
+
+<BOUCLE_page_concernee(NOIZETIER_PAGES) {page=#GET{page_concernee}}>
 [(#ENV{edition}|=={modifier}|oui)
 	#SET{redirect, #URL_ECRIRE{noizetier_page}|parametre_url{page, #ENV{page}}}
 	#SET{retour, #URL_ECRIRE{noizetier_page}|parametre_url{page, #ENV{page}}}
-	#SET{icone_retour, #GET{description_page/icon}}
+	#SET{icone_retour, #ICON}
 ]
 [(#ENV{edition}|=={modifier}|non)
 	#SET{redirect, ''}
-	#SET{retour, #URL_ECRIRE{noizetier_pages}|parametre_url{est_page_objet, #GET{description_page/est_page_objet}}}
+	#SET{retour, #URL_ECRIRE{noizetier_pages}|parametre_url{est_page_objet, #EST_PAGE_OBJET}}
 	#SET{icone_retour, noizetier-24.png}
 ]
 #SET{redirect, #ENV{redirect}|sinon{#GET{redirect}}}
@@ -25,9 +25,9 @@
 		[(#ENV{edition}|=={creer}|oui)<:noizetier:formulaire_creer_composition:>]
 		[(#ENV{edition}|=={dupliquer}|oui)<:noizetier:formulaire_dupliquer_page_entete:>]
 		<h1>
-			[(#ENV{edition}|=={modifier}|oui)[(#GET{description_page/nom})]]
+			[(#ENV{edition}|=={modifier}|oui)[(#NOM)]]
 			[(#ENV{edition}|=={creer}|oui)<:info_sans_titre:>]
-			[(#ENV{edition}|=={dupliquer}|oui)<:noizetier:copie_de{source=#GET{description_page/nom}}:>]
+			[(#ENV{edition}|=={dupliquer}|oui)<:noizetier:copie_de{source=#NOM}:>]
 		</h1>
 	</div>
 
@@ -35,7 +35,7 @@
 		#SET{retour,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
 	]
 	<div class="ajax">
-		[(#FORMULAIRE_EDITER_PAGE{#ENV{edition}, #GET{description_page}, #GET{redirect}})]
+		[(#FORMULAIRE_EDITER_PAGE{#ENV{edition}, #GET{page_concernee}, #GET{redirect}})]
 	</div>
 	[(#EVAL{_AJAX}|oui)
 		<script type="text/javascript">/*<!\[CDATA\[*/
@@ -44,3 +44,4 @@
 		/*\]\]>*/</script>
 	]
 </div>
+</BOUCLE_page_concernee>

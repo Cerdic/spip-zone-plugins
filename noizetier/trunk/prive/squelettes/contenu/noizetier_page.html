@@ -10,14 +10,14 @@
 		]
 
 		<h1>
-			[(#NOM|_T_ou_typo)]
+			[(#NOM)]
 			[(#ICON|noizetier_icone_chemin|balise_img{page,cadre-icone})]
 		</h1>
 	,simple fiche_objet})]
 		<br class="clear" />
 		<div id="wysiwyg">
 			[<div class="champ contenu_description[ (#DESCRIPTION|strlen|?{'',vide})]">
-				<div dir='#LANG_DIR' class="texte">(#DESCRIPTION|_T_ou_typo)</div>
+				<div dir='#LANG_DIR' class="texte">(#DESCRIPTION)</div>
 			</div>]
 		</div>
 	</BOUCLE_si_page>

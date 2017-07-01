@@ -554,10 +554,14 @@ function noizetier_page_lister_blocs($page, $blocs_exclus = array()) {
  *
  * @param string	$page
  * 		Identifiant de la page ou de la composition.
+ * @param boolean	$traitement_typo
+ *      Indique si les données textuelles doivent être retournées brutes ou si elles doivent être traitées
+ *      en utilisant la fonction _T_ou_typo.
+ * 		Les champs sérialisés sont toujours désérialisés.
  *
  * @return array
  */
-function noizetier_page_informer($page) {
+function noizetier_page_informer($page, $traitement_typo = true) {
 
 	static $description_page = array();
 
@@ -568,12 +572,13 @@ function noizetier_page_informer($page) {
 		// Sauvegarde de la description de la page pour une consultation ultérieure dans le même hit.
 		if ($description) {
 			// Traitements des champs textuels
-			// TODO : faut-il rajouter le _T_ou_typo sur les champs concernés ?
-//			$description['nom'] = _T_ou_typo($description['nom']);
-//			if (isset($description['description'])) {
-//				$description['description'] = _T_ou_typo($description['description']);
-//			}
-			// Traitements des champs sérialisés
+			if ($traitement_typo) {
+				$description['nom'] = _T_ou_typo($description['nom']);
+				if (isset($description['description'])) {
+					$description['description'] = _T_ou_typo($description['description']);
+				}
+			}
+			// Traitements des champs tableaux sérialisés
 			$description['blocs_exclus'] = unserialize($description['blocs_exclus']);
 			$description['necessite'] = unserialize($description['necessite']);
 			$description['branche'] = unserialize($description['branche']);

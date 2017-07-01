@@ -9,7 +9,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Déclaration des informations tierces (alias, traitements, jointures, etc)
  * sur les tables de la base de données modifiées ou ajoutées par le plugin.
  *
- * Le plugin se contente de déclarer les alias des tables.
+ * Le plugin se contente de déclarer les alias des tables et quelques traitements.
  *
  * @pipeline declarer_tables_interfaces
  *
@@ -19,10 +19,25 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *		Tableau fourni en entrée et mis à jour avec les nouvelles informations
  */
 function noizetier_declarer_tables_interfaces($interface) {
-	// 'spip_' dans l'index de $tables_principales
+
+	// Les tables : permet d'appeler une boucle avec le *type* de la table uniquement
 	$interface['table_des_tables']['noisettes'] = 'noisettes';
 	$interface['table_des_tables']['noizetier_pages'] = 'noizetier_pages';
 	$interface['table_des_tables']['noizetier_noisettes'] = 'noizetier_noisettes';
+
+	// Les traitements
+	// - table spip_noizetier_pages : on desérialise les tableaux et on passe _T_ou_typo
+	$interface['table_des_traitements']['BLOCS_EXCLUS']['noizetier_pages'] = 'unserialize(%s)';
+	$interface['table_des_traitements']['BRANCHE']['noizetier_pages'] = 'unserialize(%s)';
+	$interface['table_des_traitements']['NECESSITE']['noizetier_pages'] = 'unserialize(%s)';
+	$interface['table_des_traitements']['NOM']['noizetier_pages'] = '_T_ou_typo(%s)';
+	$interface['table_des_traitements']['DESCRIPTION']['noizetier_pages'] = '_T_ou_typo(%s)';
+	// - table spip_noizetier_noisettes : on desérialise les tableaux et on passe _T_ou_typo
+	$interface['table_des_traitements']['PARAMETRES']['noizetier_noisettes'] = 'unserialize(%s)';
+	$interface['table_des_traitements']['CONTEXTE']['noizetier_noisettes'] = 'unserialize(%s)';
+	$interface['table_des_traitements']['NECESSITE']['noizetier_noisettes'] = 'unserialize(%s)';
+	$interface['table_des_traitements']['NOM']['noizetier_noisettes'] = '_T_ou_typo(%s)';
+	$interface['table_des_traitements']['DESCRIPTION']['noizetier_noisettes'] = '_T_ou_typo(%s)';
 
 	return $interface;
 }
@@ -30,10 +45,11 @@ function noizetier_declarer_tables_interfaces($interface) {
 /**
  * Déclaration des nouvelles tables de la base de données propres au plugin.
  *
- * Le plugin déclare deux nouvelles tables qui sont :
+ * Le plugin déclare trois nouvelles tables qui sont :
  *
- * - `spip_noisettes_pages`, qui contient les éléments descriptifs des pages et compositions,
- * - `spip_noisettes`, qui contient la desxcription de l'utilisation des noisettes dans les pages concernées.
+ * - `spip_noizetier_pages`, qui contient les éléments descriptifs des pages et compositions,
+ * - `spip_noizetier_noisettes`, qui contient les éléments descriptifs des noisettes disponibles,
+ * - `spip_noisettes`, qui contient l'utilisation des noisettes dans les pages concernées.
  *
  * @pipeline declarer_tables_principales
  *
