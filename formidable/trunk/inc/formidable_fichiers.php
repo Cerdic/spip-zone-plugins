@@ -6,6 +6,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 include_spip('inc/flock');
 include_spip('inc/documents');
+if (!defined('_FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL')) {// la taille maximum (en Mio) des fichiers qu'on autorise directement en PJ dans les emails. 
+	define('_FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL', 10);
+}
+
 if (!defined('_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL')) {
 	// Combien de temps un lien par email dans fichier est valable (en seconde)
 	define('_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL', 24*3600);
@@ -283,7 +287,7 @@ function formidable_retourner_fichier($chemin, $f) {
  * @param array $options
  * 		des options, dépendantes du type de traitement,
  * 		qui permettent d'indiquer où l'on déplace le fichier
- * return array un tableau de "vue" de la saisie
+ * @return array un tableau de "vue" de la saisie
 **/
 function formidable_deplacer_fichiers_produire_vue_saisie($saisie, $options) {
 	$nb_fichiers_max = $saisie['options']['nb_fichiers'];
@@ -517,3 +521,29 @@ function formidable_generer_url_action_recuperer_fichier_email($saisie, $fichier
 	$url = generer_url_action($action, "arg=$arg&hash=$hash", true, true);
 	return $url;
 }
+
+/** Générer le chemin d'un fichier d'après les paramètres passés en argument
+ * @param array $param, paramètres décrivant le fichiers: nom, timestamp de la réponse ou numéro d'enregistrement de la réponse, id du formulaire,  champ formidable
+ * @return string $chemin;
+**/
+function formidable_generer_chemin_fichier($param){
+	$chemin_fichier = '';
+	if (isset($param['reponse'])) {
+		$chemin_fichier = _DIR_FICHIERS_FORMIDABLE
+			.'formulaire_'.$param['formulaire']
+			.'/reponse_'.$param['reponse']
+			.'/'.$param['saisie']
+			.'/'.$param['fichier'];
+	} elseif (isset($param['timestamp'])) {
+		$chemin_fichier = _DIR_FICHIERS_FORMIDABLE
+			. 'timestamp/'
+			. $param['timestamp'].'/'
+			. $param['saisie'].'/'
+			. $param['fichier'];
+	} else {
+		include_spip('inc/minipres');
+		echo minipres(_T('formidable:erreur_fichier_introuvable'));
+	}
+	return $chemin_fichier;
+}
+

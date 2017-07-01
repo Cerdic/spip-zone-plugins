@@ -22,7 +22,8 @@ function traiter_email_dist($args, $retours) {
 	$traitements = unserialize($formulaire['traitements']);
 	$champs = saisies_lister_champs($saisies);
 	$destinataires = array();
-
+	$taille_fichiers = 0; //taille des fichiers en email
+	$fichiers_facteur = array(); // tableau qui stockera les fichiers à envoyer avec facteur
 	// On récupère les destinataires
 	if ($options['champ_destinataires']) {
 		$destinataires = _request($options['champ_destinataires']);
@@ -96,6 +97,11 @@ function traiter_email_dist($args, $retours) {
 				if ($ajouter_fichier) {
 					$retours['fichiers'][$champ] = $valeurs[$champ];
 				}
+				$taille_fichiers += formidable_calculer_taille_fichiers_saisie($valeurs[$champ]);
+				$fichiers_facteur = array_merge(
+					$fichiers_facteur,
+					vue_fichier_to_tableau_facteur($valeurs[$champ])
+				);
 			} else {
 				$valeurs[$champ] = _request($champ);
 			}
@@ -144,7 +150,17 @@ function traiter_email_dist($args, $retours) {
 		} else {
 			$notification = 'notifications/formulaire_email';
 		}
-
+		// Est-ce qu'on est assez léger pour joindre les pj
+		$joindre_pj = false;
+		if ($taille_fichiers < 1024 * 1024 * _FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL
+			and
+			$traitements['email']['pj'] == 'on'
+		) {
+			$joindre_pj = true;
+			foreach (array_keys($saisies_fichiers) as $nom) {
+				$saisies = saisies_supprimer($saisies,$nom);	
+			}
+		}
 		// On génère le mail avec le fond
 		$html = recuperer_fond(
 			$notification,
@@ -164,12 +180,17 @@ function traiter_email_dist($args, $retours) {
 		include_spip('facteur_fonctions');
 		$texte = facteur_mail_html2text($html);
 
-		// On utilise la forme avancé de Facteur
+		// On utilise la forme avancée de Facteur
 		$corps = array(
 			'html' => $html,
 			'texte' => $texte,
 			'nom_envoyeur' => filtrer_entites($nom_envoyeur),
 		);
+		// Joindre les pj si léger
+		if ($joindre_pj) {
+			$corps['pieces_jointes'] = $fichiers_facteur;
+		}
+	
 		// Si l'utilisateur n'a pas indiqué autrement, on met le courriel de l'envoyeur dans
 		// Reply-To et on laisse le from par defaut de Facteur car sinon ca bloque sur les
 		// SMTP un peu restrictifs.
@@ -262,6 +283,11 @@ function traiter_email_dist($args, $retours) {
 				'texte' => $texte,
 				'nom_envoyeur' => filtrer_entites($nom_envoyeur_accuse),
 			);
+
+			// Joindre les pj si léger et nécessaire
+			if ($joindre_pj and  _FORMIDABLE_LIENS_FICHIERS_ACCUSE_RECEPTION == false) {
+				$corps['pieces_jointes'] = $fichiers_facteur;
+			}
 
 			$ok = $envoyer_mail($courriel_envoyeur, $sujet_accuse, $corps, $courriel_from_accuse, 'X-Originating-IP: '.$GLOBALS['ip']);
 		}
@@ -454,6 +480,39 @@ function vues_saisies_supprimer_action_recuperer_fichier_par_email($saisies, $vu
 	}
 	return $vues;
 }
+
+/**
+ * Calcule la taille totale des fichiers
+ * d'après une saisie de type fichiers
+ * @param array $saisie
+ * @return int $taille (en octets)
+**/
+function formidable_calculer_taille_fichiers_saisie($saisie) {
+	$taille = 0;
+	foreach ($saisie as $k => $info) {
+		$taille += $info['taille'];
+	}
+	return $taille;
+}
+
+/**
+ * Converti une description d'une vue fichiers en description passable à facteur
+ * @param array $vue
+ * @return array $tableau_facteur
+**/
+function vue_fichier_to_tableau_facteur($vue) {
+	$tableau_facteur = array();
+	foreach ($vue as $fichier) {
+		$arg = unserialize(parametre_url($fichier['url'],'arg'));
+		$tableau_facteur[] = array(
+			'chemin' => formidable_generer_chemin_fichier($arg),
+			'nom' => $fichier['fichier'],
+			'encodage' => 'base64',
+			'mime' => $fichier['mime']);
+	}
+	return $tableau_facteur;
+}
+
 /**
  * Retourne des secondes sous une jolie forme, du type xx jours, yy heures, zz minutes, aa secondes
  * @param int $seconde

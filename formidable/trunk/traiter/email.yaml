@@ -62,6 +62,13 @@ options:
   -
     saisie: 'case'
     options:
+      nom: 'pj'
+      li_class: 'pleine_largeur'
+      label_case: '<:formidable:traiter_email_option_pj_label:>'
+      explication: '<:formidable:traiter_email_option_pj_explication:>'
+  -
+    saisie: 'case'
+    options:
       nom: 'masquer_liens'
       li_class: 'pleine_largeur'
       label_case: '<:formidable:traiter_email_option_masquer_liens_label_case:>'

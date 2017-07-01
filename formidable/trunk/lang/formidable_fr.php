@@ -31,8 +31,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_analyse_classe_explication' => 'Vous pouvez indiquer des classes CSS qui seront ajoutées
-		sur le conteneur de chaque graphique, tel que <code>gray</code>,<code>blue</code>,
-		<code>orange</code>, <code>green</code> ou tout ce qui vous plairait !',
+	sur le conteneur de chaque graphique, tel que <code>gray</code>,<code>blue</code>,
+	<code>orange</code>, <code>green</code> ou tout ce qui vous plairait !',
 	'cfg_analyse_classe_label' => 'Classe CSS de la barre de progression',
 	'cfg_objets_explication' => 'Choisir les contenus auxquels pourront être liés les formulaires.',
 	'cfg_objets_label' => 'Lier les formulaires aux contenus',
@@ -224,7 +224,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_destinataires_plus_explication' => 'Une liste d’adresses séparées par des virgules.',
 	'traiter_email_option_destinataires_plus_label' => 'Destinataires supplémentaires',
 	'traiter_email_option_destinataires_selon_champ_explication' => 'Permet d’indiquer un ou plusieurs destinataires en fonction de la valeur d’un champ. 
-		Indiquer le champ, sa valeur, et le ou les courriels concernés (séparés par une virgule) suivant ce format, tel que : "@selection_1@/choix1 : mail@example.tld". Vous pouvez indiquer plusieurs tests, en revenant à ligne entre chaque test.',
+	Indiquer le champ, sa valeur, et le ou les courriels concernés (séparés par une virgule) suivant ce format, tel que : "@selection_1@/choix1 : mail@example.tld". Vous pouvez indiquer plusieurs tests, en revenant à ligne entre chaque test.',
 	'traiter_email_option_destinataires_selon_champ_label' => 'Destinataires en fonction d’un champ',
 	'traiter_email_option_envoyeur_courriel_explication' => 'Choisissez le champ qui contiendra le courriel de l’envoyeur.',
 	'traiter_email_option_envoyeur_courriel_label' => 'Courriel de l’envoyeur',
@@ -233,6 +233,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_masquer_liens_label_case' => 'Masquer les liens d’administration dans le courriel.',
 	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Précisez le nom de l’expéditeur utilisé pour envoyer l’accusé de réception. À défaut, le destinataire sera l’expéditeur.',
 	'traiter_email_option_nom_envoyeur_accuse_label' => 'Nom de l’expéditeur de l’accusé de réception',
+	'traiter_email_option_pj_explication' => 'Si les documents postés pèsent moins de '._FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL.' Mio (constante modifiable par le·la webmestre).',
+	'traiter_email_option_pj_label' => 'Joindre les fichiers dans le courriel',
 	'traiter_email_option_sujet_accuse_label' => 'Sujet de l’accusé de réception',
 	'traiter_email_option_sujet_explication' => 'Construisez le sujet à l’aide des @raccourcis@. Si vous ne mettez rien, le sujet sera construit automatiquement.',
 	'traiter_email_option_sujet_label' => 'Sujet du message',

@@ -21,23 +21,7 @@ function action_formidable_recuperer_fichier_par_email() {
 		or $hash==_action_auteur("$action-$arg", '', $pass, 'alea_ephemere_ancien')) {
 		$arg = unserialize($arg);
 		// Construire le chemin du fichier, en fonction de ce qu'on reçoit
-		if (isset($arg['reponse'])) {
-			$chemin_fichier = _DIR_FICHIERS_FORMIDABLE
-				.'formulaire_'.$arg['formulaire']
-				.'/reponse_'.$arg['reponse']
-				.'/'.$arg['saisie']
-				.'/'.$arg['fichier'];
-		} elseif (isset($arg['timestamp'])) {
-			$chemin_fichier = _DIR_FICHIERS_FORMIDABLE
-				. 'timestamp/'
-				. $arg['timestamp'].'/'
-				. $arg['saisie'].'/'
-				. $arg['fichier'];
-		} else {
-			include_spip('inc/minipres');
-			echo minipres(_T('formidable:erreur_fichier_introuvable'));
-		}
-
+		$chemin_fichier = formidable_generer_chemin_fichier($arg);
 		// Vérifier que le fichier existe, qu'il n'est pas trop vieux, et l'envoyer le cas échéant
 		if (@file_exists($chemin_fichier)) {
 			$f = $arg['fichier'];
