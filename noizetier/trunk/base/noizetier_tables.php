@@ -127,7 +127,7 @@ function noizetier_declarer_tables_principales($tables_principales) {
 	// TODO : a renommer à terme spip_noizetier
 	$noizetier = array(
 		'id_noisette' => 'bigint(21) NOT NULL',
-		'rang'        => "smallint DEFAULT '1' NOT NULL",
+		'rang'        => "smallint DEFAULT 1 NOT NULL",
 		'type'        => "varchar(127) DEFAULT '' NOT NULL",
 		'composition' => "varchar(127) DEFAULT '' NOT NULL",
 		'objet'       => 'varchar(25) not null default ""',
@@ -141,10 +141,10 @@ function noizetier_declarer_tables_principales($tables_principales) {
 
 	$noizetier_cles = array(
 		'PRIMARY KEY'     => 'id_noisette',
-		'KEY type'        => 'type(255)',
-		'KEY composition' => 'composition(255)',
-		'KEY bloc'        => 'bloc(255)',
-		'KEY noisette'    => 'noisette(255)',
+		'KEY type'        => 'type',
+		'KEY composition' => 'composition',
+		'KEY bloc'        => 'bloc',
+		'KEY noisette'    => 'noisette',
 		'KEY objet'       => 'objet',
 		'KEY id_objet'    => 'id_objet',
 	);
