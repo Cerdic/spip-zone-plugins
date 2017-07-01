@@ -23,6 +23,7 @@ function traiter_email_dist($args, $retours) {
 	$champs = saisies_lister_champs($saisies);
 	$destinataires = array();
 	$taille_fichiers = 0; //taille des fichiers en email
+	$fichiers_facteur = array(); // tableau qui stockera les fichiers à envoyer avec facteur
 	// On récupère les destinataires
 	if ($options['champ_destinataires']) {
 		$destinataires = _request($options['champ_destinataires']);
@@ -97,6 +98,10 @@ function traiter_email_dist($args, $retours) {
 					$retours['fichiers'][$champ] = $valeurs[$champ];
 				}
 				$taille_fichiers += formidable_calculer_taille_fichiers_saisie($valeurs[$champ]);
+				$fichiers_facteur = array_merge(
+					$fichiers_facteur,
+					vue_fichier_to_tableau_facteur($valeurs[$champ])
+				);
 			} else {
 				$valeurs[$champ] = _request($champ);
 			}
@@ -474,9 +479,28 @@ function formidable_calculer_taille_fichiers_saisie($saisie) {
 	$taille = 0;
 	foreach ($saisie as $k => $info) {
 		$taille += $info['taille'];
-	}	
+	}
 	return $taille;
 }
+
+/**
+ * Converti une description d'une vue fichiers en description passable à facteur
+ * @param array $vue
+ * @return array $tableau_facteur
+**/
+function vue_fichier_to_tableau_facteur($vue) {
+	$tableau_facteur = array();
+	foreach ($vue as $fichier) {
+		$arg = unserialize(parametre_url($fichier['url'],'arg'));
+		$tableau_facteur[] = array(
+			'chemin' => formidable_generer_chemin_fichier($arg),
+			'nom' => $fichier['fichier'],
+			'encodage' => 'base64',
+			'mime' => $fichier['mime']);
+	}
+	return $tableau_facteur;
+}
+
 /**
  * Retourne des secondes sous une jolie forme, du type xx jours, yy heures, zz minutes, aa secondes
  * @param int $seconde
