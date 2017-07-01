@@ -521,3 +521,29 @@ function formidable_generer_url_action_recuperer_fichier_email($saisie, $fichier
 	$url = generer_url_action($action, "arg=$arg&hash=$hash", true, true);
 	return $url;
 }
+
+/** Générer le chemin d'un fichier d'après les paramètres passés en argument
+ * @param array $param, paramètres décrivant le fichiers: nom, timestamp de la réponse ou numéro d'enregistrement de la réponse, id du formulaire,  champ formidable
+ * @return string $chemin;
+**/
+function formidable_generer_chemin_fichier($param){
+	$chemin_fichier = '';
+	if (isset($param['reponse'])) {
+		$chemin_fichier = _DIR_FICHIERS_FORMIDABLE
+			.'formulaire_'.$param['formulaire']
+			.'/reponse_'.$param['reponse']
+			.'/'.$param['saisie']
+			.'/'.$param['fichier'];
+	} elseif (isset($param['timestamp'])) {
+		$chemin_fichier = _DIR_FICHIERS_FORMIDABLE
+			. 'timestamp/'
+			. $param['timestamp'].'/'
+			. $param['saisie'].'/'
+			. $param['fichier'];
+	} else {
+		include_spip('inc/minipres');
+		echo minipres(_T('formidable:erreur_fichier_introuvable'));
+	}
+	return $chemin_fichier;
+}
+
