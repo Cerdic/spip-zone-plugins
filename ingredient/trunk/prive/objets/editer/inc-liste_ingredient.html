@@ -12,7 +12,7 @@
         <td>#TITRE</td>
         <td>
           [(#AUTORISER{ingredient, dissocier}|oui)
-          [(#BOUTON_ACTION{<:ingredient:retirer_lien_ingredient:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{X})], #URL_ACTION_AUTEUR{supprimer_lien, ingredient-#ID_INGREDIENT-article-#ID_OBJET}, link delete ajax, '', #SELF})]
+          [(#BOUTON_ACTION{<:ingredient:retirer_lien_ingredient:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{X})], #URL_ACTION_AUTEUR{supprimer_lien, ingredient-#ID_INGREDIENT-article-#ID_OBJET, #SELF}, link delete ajax})]
           ]
 
         </td>
