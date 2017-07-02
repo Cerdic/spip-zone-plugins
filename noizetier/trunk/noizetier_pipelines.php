@@ -323,3 +323,18 @@ function noizetier_compagnon_messages($flux) {
 
 	return $flux;
 }
+
+
+function noizetier_pre_boucle($boucle) {
+
+	if (!defined('_DIR_PLUGIN_COMPOSITIONS')) {
+		// Si le plugin Compositions n'est pas actif, il faut exclure les compositions de la boucle NOIZETIER_PAGES.
+		if ($boucle->type_requete == 'noizetier_pages'
+		and empty($boucle->modificateur['tout'])) {
+			// Pour exclure les compositions il faut insérer le critère {composition=''} systématiquement.
+			$boucle->where[] = array("'='", "'noizetier_pages.composition'", "'\"\"'");
+		}
+	}
+
+	return $boucle;
+}

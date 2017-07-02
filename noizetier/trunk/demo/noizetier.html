@@ -8,20 +8,93 @@
 	include_spip('noizetier_fonctions');
 	$infos = array();
 	$timestamp_debut = microtime(true);
-//	$infos = noizetier_info_noisette('article-filariane');
-//	$infos = noisette_informer('article-filariane');
-//	$infos = noizetier_lister_noisettes();
-//	$infos = noizetier_noisette_repertorier();
 
-//	noizetier_page_repertorier();
-	noizetier_noisette_charger();
 
 
 	$timestamp_fin = microtime(true);
 	$duree = $timestamp_fin - $timestamp_debut;
-	var_dump($duree*1000);
-	var_dump($infos);
+//	var_dump($duree*1000);
 ?>
+
+	#SET{valeur, ''}
+
+	[(#ENV*|bel_env{#EVAL{true}})]
+	<p>{composition}</p>
+	<B_pages_1>
+	<ul class="liste-items liste-pages noizetier-liste-pages">
+	<BOUCLE_pages_1(NOIZETIER_PAGES) {composition} {par type, composition}>
+		<li>#TYPE - #COMPOSITION</li>
+	</BOUCLE_pages_1>
+	</ul>
+	</B_pages_1>
+		Aucune page
+	<//B_pages_1>
+
+	<p>{composition}</p>
+	<B_pages_11>
+	<ul class="liste-items liste-pages noizetier-liste-pages">
+	<BOUCLE_pages_11(NOIZETIER_PAGES) {composition}{tout} {par type, composition}>
+		<li>#TYPE - #COMPOSITION</li>
+	</BOUCLE_pages_11>
+	</ul>
+	</B_pages_11>
+		Aucune page
+	<//B_pages_11>
+
+	<p>{composition?}</p>
+	<B_pages_2>
+	<ul class="liste-items liste-pages noizetier-liste-pages">
+	<BOUCLE_pages_2(NOIZETIER_PAGES) {composition?} {par type, composition}>
+		<li>#TYPE - #COMPOSITION</li>
+	</BOUCLE_pages_2>
+	</ul>
+	</B_pages_2>
+		Aucune page
+	<//B_pages_2>
+
+	<p>{!composition}</p>
+	<B_pages_3>
+	<ul class="liste-items liste-pages noizetier-liste-pages">
+	<BOUCLE_pages_3(NOIZETIER_PAGES) {!composition} {par type, composition}>
+		<li>#TYPE - #COMPOSITION</li>
+	</BOUCLE_pages_3>
+	</ul>
+	</B_pages_3>
+		Aucune page
+	<//B_pages_3>
+
+	<p>{composition=x}</p>
+	<B_pages_4>
+	<ul class="liste-items liste-pages noizetier-liste-pages">
+	<BOUCLE_pages_4(NOIZETIER_PAGES) {composition=#GET{valeur}} {par type, composition}>
+		<li>#TYPE - #COMPOSITION</li>
+	</BOUCLE_pages_4>
+	</ul>
+	</B_pages_4>
+		Aucune page
+	<//B_pages_4>
+
+	<p>{composition!=x}</p>
+	<B_pages_5>
+	<ul class="liste-items liste-pages noizetier-liste-pages">
+	<BOUCLE_pages_5(NOIZETIER_PAGES) {composition!=#GET{valeur}} {par type, composition}>
+		<li>#TYPE - #COMPOSITION</li>
+	</BOUCLE_pages_5>
+	</ul>
+	</B_pages_5>
+		Aucune page
+	<//B_pages_5>
+
+	<p>{!composition=x}</p>
+	<B_pages_6>
+	<ul class="liste-items liste-pages noizetier-liste-pages">
+	<BOUCLE_pages_6(NOIZETIER_PAGES) {!composition=#GET{valeur}} {par type, composition}>
+		<li>#TYPE - #COMPOSITION</li>
+	</BOUCLE_pages_6>
+	</ul>
+	</B_pages_6>
+		Aucune page
+	<//B_pages_6>
 
 </div>
 </body>

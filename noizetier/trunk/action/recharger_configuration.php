@@ -27,7 +27,8 @@ function action_recharger_configuration_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$argument = $securiser_action();
 
-	// Verification des autorisations
+	// Verification des autorisations : pour recharger les pages ou les noisettes il suffit
+	// d'avoir l'autorisation minimale d'accéder au noizetier.
 	if (!autoriser('noizetier')) {
 		include_spip('inc/minipres');
 		echo minipres();

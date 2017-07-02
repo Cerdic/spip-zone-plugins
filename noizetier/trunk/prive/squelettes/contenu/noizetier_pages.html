@@ -10,6 +10,12 @@
 		<div[ class="composition"(#COMPOSITION|oui)]>
 			[(#REM) Informations de base sur la page ]
 			<div class="resume">
+				[(#REM) <!-- Inutile d'utiliser l'autorisation configurerpage car
+				             - l'autorisation noizetier est ok
+				             - les compositions ne sont pas affichées si le plugin Compositions est désactivé
+				             - et si la page est de type objet et dans la table spip_noizetier c'est forcément parce
+				               que le type d'objet est autorisé.
+				-->]
 				<a[ href="(#URL_ECRIRE{noizetier_page}|parametre_url{page, #PAGE})"] title="<:noizetier:bulle_configurer_page_noisettes:>">[(#NOM)]</a>
 				<i>[ \((#PAGE)\)]</i>
 				[<br />(#DESCRIPTION|ptobr|sinon{&nbsp;})]
