@@ -264,8 +264,10 @@ function noizetier_affiche_milieu($flux) {
 	$exec = $flux['args']['exec'];
 
 	if ($exec == 'admin_plugin') {
-		include_spip('inc/flock');
 		include_spip('noizetier_fonctions');
+		noizetier_page_charger();
+
+		include_spip('inc/flock');
 		supprimer_fichier(_CACHE_AJAX_NOISETTES);
 		supprimer_fichier(_CACHE_CONTEXTE_NOISETTES);
 		supprimer_fichier(_CACHE_INCLUSIONS_NOISETTES);

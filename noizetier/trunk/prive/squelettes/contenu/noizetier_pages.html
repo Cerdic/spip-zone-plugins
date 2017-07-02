@@ -5,7 +5,7 @@
 <B_pages>
 <p><:noizetier:editer_noizetier_explication:></p>
 <ul class="liste-items liste-pages noizetier-liste-pages">
-<BOUCLE_pages(NOIZETIER_PAGES) {est_page_objet?}{par type}>
+<BOUCLE_pages(NOIZETIER_PAGES) {est_page_objet?}{par type, composition}>
 	<li class="item page[ virtuelle"(#EST_VIRTUELLE|=={oui}|oui)]">
 		<div[ class="composition"(#COMPOSITION|oui)]>
 			[(#REM) Informations de base sur la page ]
