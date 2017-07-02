@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_analyse_classe_explication' => 'You can specify CSS classes that will be added on the container of each graph, such as 
 <code>gray</code>,<code>blue</code>,
-		<code>orange</code>, <code>green</code> or whatever you like!',
+		<code>orange</code>, <code>green</code> or whatever you like!', # MODIF
 	'cfg_analyse_classe_label' => 'CSS class of the progress bar',
 	'cfg_titre_page_configurer_formidable' => 'Configure Formidable',
 	'cfg_titre_parametrages_analyse' => 'Settings in the answers analysis',

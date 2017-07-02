@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_analyse_classe_explication' => 'Môžete zadať triedy CSS, ktoré budú pridané 
 		na každý graf ako <code>sivý,</code> <code>modrý,</code>
-		<code>oranžový,</code> <code>zelený</code> alebo akýkoľvek iný stĺpec!',
+		<code>oranžový,</code> <code>zelený</code> alebo akýkoľvek iný stĺpec!', # MODIF
 	'cfg_analyse_classe_label' => 'Trieda CSS stĺpca dokončenia úkonu',
 	'cfg_titre_page_configurer_formidable' => 'Nastaviť Formidable',
 	'cfg_titre_parametrages_analyse' => 'Nastavenia analýzy odpovedí',

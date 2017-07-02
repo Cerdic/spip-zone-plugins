@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_revert_formulaire' => 'Reverter à última versão gravada',
 
 	// C
-	'cfg_analyse_classe_explication' => 'Você pode informar as classes CSS que serão adicionadas ao conteúdo de cada gráfico, como <code>gray</code>,<code>blue</code>,<code>orange</code>,<code>green</code> ou como preferir!',
+	'cfg_analyse_classe_explication' => 'Você pode informar as classes CSS que serão adicionadas ao conteúdo de cada gráfico, como <code>gray</code>,<code>blue</code>,<code>orange</code>,<code>green</code> ou como preferir!', # MODIF
 	'cfg_analyse_classe_label' => 'Classe CSS da barra de progresso',
 	'cfg_objets_explication' => 'Escolher os conteúdos a que os formulários podem ser vinculados.',
 	'cfg_objets_label' => 'Vincular os formulários aos conteúdos',
@@ -223,7 +223,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_destinataires_label' => 'Destinatários',
 	'traiter_email_option_destinataires_plus_explication' => 'Uma lista de e-mails separados por vírgulas.',
 	'traiter_email_option_destinataires_plus_label' => 'Destinatários suplementares',
-	'traiter_email_option_destinataires_selon_champ_explication' => 'Permite indicar um ou mais destinatários em função do valor de um campo. Indique o campo, o seu valor, e o(s) respectivo(s) endereço(s) de e-mail (separados por uma vírgula), de acordo com o formato a seguir: "@selection_1@/choix1 : mail@exemplo.tld". Você pode indicar diversos testes, um por linha.',
+	'traiter_email_option_destinataires_selon_champ_explication' => 'Permite indicar um ou mais destinatários em função do valor de um campo. Indique o campo, o seu valor, e o(s) respectivo(s) endereço(s) de e-mail (separados por uma vírgula), de acordo com o formato a seguir: "@selection_1@/choix1 : mail@exemplo.tld". Você pode indicar diversos testes, um por linha.', # MODIF
 	'traiter_email_option_destinataires_selon_champ_label' => 'Destinatários em função de um campo',
 	'traiter_email_option_envoyeur_courriel_explication' => 'Escolha o campo que conterá o e-mail do remetente.',
 	'traiter_email_option_envoyeur_courriel_label' => 'E-mail do remetente',
