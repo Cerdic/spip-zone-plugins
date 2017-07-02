@@ -117,7 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'temperature_max' => 'max',
 	'temperature_min' => 'min',
-	'temperature_ressentie' => 'feltro',
+	'temperature_ressentie' => 'percepita',
 	'tendance_symbole_falling' => '↓',
 	'tendance_symbole_rising' => '↑',
 	'tendance_symbole_steady' => '→',
