@@ -1,10 +1,9 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/liens_associes/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -16,12 +15,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_associe_lien_label' => 'Objet',
 	'champ_descriptif_label' => 'Déscriptif',
 	'champ_id_associe_lien_label' => 'Titre ',
-	'champ_id_objet_spip_label' => 'Identifiant de l\'objet',
-	'champ_id_objet_spip_label_explication' => 'Vous pouvez le chercher en tapant le titre de l\'objet',
-	'champ_lien_interne_explication' => 'S\'agit-il d\'un lien du même site (lien interne) ou non.',
+	'champ_id_objet_spip_label' => 'Identifiant de l’objet',
+	'champ_id_objet_spip_label_explication' => 'Vous pouvez le chercher en tapant le titre de l’objet',
+	'champ_lien_interne_explication' => 'S’agit-il d’un lien du même site (lien interne) ou non.',
 	'champ_lien_interne_label' => 'Lien interne',
-	'champ_objet_spip_label' => 'Objet',
 	'champ_objet_spip_explication' => 'Type de contenu',
+	'champ_objet_spip_label' => 'Objet',
 	'champ_titre_label' => 'Titre',
 	'champ_url_label' => 'URL',
 	'confirmer_supprimer_associe_lien' => 'Confirmez-vous la suppression de cet lien associé ?',
@@ -51,5 +50,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_associe_liens_rubrique' => 'Liens associés de la rubrique',
 	'titre_langue_associe_lien' => 'Langue de ce lien associé',
 	'titre_logo_associe_lien' => 'Logo de ce lien associé',
-	'titre_objets_lies_associe_lien' => 'Liés à ce lien associé',
+	'titre_objets_lies_associe_lien' => 'Liés à ce lien associé'
 );
