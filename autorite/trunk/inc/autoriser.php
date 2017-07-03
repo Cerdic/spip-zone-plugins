@@ -294,11 +294,26 @@ function autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt) {
         && ($qui['statut'] == '0minirezo')
         && ($qui['restreint'] AND $id AND in_array($id, $qui['restreint'])))
             return true;
-    /*
+    // Vérifier que le rédacteur·trice est bien l'auteur·e de l'objet
     if (($GLOBALS['autorite']['publierdans'] & 8)
-        && ($qui['statut'] == '1comite'))
+        && ($qui['statut'] == '1comite')) {
+
+        // qui demande le changement de statut ?
+        $id_auteur  = $qui['id_auteur'];
+
+        // changement pour quel type d'objet?
+        $objet = _request('exec');
+        $cle_primaire = id_table_objet($objet);
+        $id_objet = _request($cle_primaire);
+        
+        //  qui est l'auteur de l'objet ?
+        $id_auteur_objet = sql_getfetsel('id_auteur', 'spip_auteurs_liens', "objet =".sql_quote($objet)." AND id_objet =".intval($id_objet));
+
+        // on peut vérifier maintenant…
+        if ($id_auteur == $id_auteur_objet) {
             return true;
-    */
+        }
+    }
     // Sinon, verifier si la rubrique est ouverte aux publieurs
     // et si on est bien enregistre
     if (isset($GLOBALS['autorite']['espace_publieur'])) {

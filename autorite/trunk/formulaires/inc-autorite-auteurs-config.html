@@ -67,10 +67,8 @@
 				<option value="#GET{val}"[(#ENV{#GET{name},3}|=={#GET{val}}|oui)selected="selected"]><:autorite:admin_complets:></option>
 				#SET{val,7}
 				<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:admin_tous:></option>
-				[(#REM)
-				#SET{val,15}
+				#SET{val,14}
 				<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:redacs:></option>
-				]
 			</select>
 		</li>
 	</ul>
