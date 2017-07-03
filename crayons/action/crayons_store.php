@@ -421,7 +421,12 @@ function vues_dist($type, $modele, $id, $content, $wid) {
 function crayons_objet_modifier($id, $data, $type, $ref) {
 	if (include_spip('action/editer_objet')
 		and function_exists('objet_modifier')) {
-		return objet_modifier(objet_type($type), $id, $data);
+		$type = objet_type($type);
+		// objet_modifier attend id_parent pour le parent et pas id_rubrique
+		if (isset($data['id_rubrique']) and !isset($data['id_parent']) and $type!=='rubrique') {
+			$data['id_parent'] = $data['id_rubrique'];
+		}
+		return objet_modifier($type, $id, $data);
 	}
 	// fallback
 	return crayons_update($id, $data, $type);
