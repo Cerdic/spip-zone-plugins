@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admins' => 'Administrators',
 	'admins_redacs' => 'Administrators and Editors',
 	'admins_rubriques' => 'The administrators associated to sections have:',
-	'attention_crayons' => '<small><strong>Alert.</strong> The settings below can only work if you use a plugin providing an editing interface (like done by <a href="http://contrib.spip.net/Crayons,2698">Crayons</a>).</small>', # MODIF
+	'attention_crayons' => '<small><strong>Warning.</strong> The settings below can only work if you use a plug-in providing an editing interface (for example <a href="http://contrib.spip.net/Crayons,2698">Crayons</a>).</small>',
 	'attention_version' => 'Note the following choices can not work with your version of SPIP:',
 	'auteur_message_advitam' => 'The author of the message ad vitam',
 	'auteur_message_heure' => 'The author of the message, during one hour',
@@ -43,17 +43,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'deja_defini_suite' => 'The plugin « Authority » can not change certain settings below therefore it may not work.
 	<br />To resolve this problem, you should check if your <tt>mes_options.php</tt> (or another active plugin) has defined these functions',
 	'descriptif_1' => 'This setup page is reserved for the webmaster of the site:',
-	'descriptif_2' => '<hr />
-<p><small>If you want to edit this list, please edit the file <tt>config/mes_options.php</tt> (create it when needed) and indicate the list of identifiers of webmasters as follows:</small></p>
+	'descriptif_2' => '<p>If you want to edit this list, please edit the file <tt>config/mes_options.php</tt> (create it if needed) and indicate the list of  the webmasters identifiers thus:</p>
 <pre>&lt;?php
   define(
     \'_ID_WEBMESTRES\',
     \'1:5:8\');
 ?&gt;</pre>
-<p><small>As of SPIP 2.1 it is also possible to grant webmaster rights to an administrator using the the author modification screen.</small></p>
-<p><small>Note: Webmasters defined in this way do not need to make the FTP authentication for sensitive operations (upgrading the database, for example).</small></p>
+<p>As of SPIP 2.1 it is also possible to grant webmaster rights to an administrator using the author’s edition screen.</p>
+<p>Note: Webmasters defined in this way do not need to go through the FTP authentication for sensitive operations (upgrading the database, for example).</p>
 
-<a href=\'http://contrib.spip.net/Autorite\' class=\'spip_out\'>See documentation</a>', # MODIF
+<a href=\'http://contrib.spip.net/Autorite\' class=\'spip_out\'>See documentation</a>',
 	'details_option_auteur' => '<small><br />For now, the option "author" works only for registered authors (forums by subscription, for example). And if it is enabled, the site administrators also have the ability to edit the forums.
 	</small>',
 	'droits_des_auteurs' => 'Authors rights',
@@ -113,7 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redacteur_modifie_article' => '<strong>Editor changes proposed</strong> : 	Each editor can edit an article proposed for publication, even if he is not the author.',
 	'refus_1' => '<p>Only webmasters of the site',
 	'refus_2' => 'are allowed to change these settings.</p>
-<p>For more information, see <a href="http://contrib.spip.net/Autorite">the documentation</a>.</p>', # MODIF
+<p>For more information, see <a href="http://contrib.spip.net/Autorite">the documentation</a>.</p>',
 	'reglage_autorisations' => 'Setting Permissions',
 
 	// S
