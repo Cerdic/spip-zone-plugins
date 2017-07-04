@@ -21,16 +21,7 @@ function pays_upgrade($nom_meta_base_version, $version_cible){
 		array('maj_tables', array('spip_pays')),
 		array('peupler_base_pays')
 	);
-	$maj['1.2.0'] = array(
-		array('sql_update', array('spip_pays',array("code" => "0"),array("code='IR'", "id_pays=109", ))),
-		array('sql_update', array('spip_pays',array("code" => "IR"),array("code='IQ'","id_pays=110", ))),
-		array('sql_update', array('spip_pays',array("code" => "IQ"),array("code='0'", "id_pays=109", ))),
-	);
-	$maj['1.2.1'] = array(
-		array('sql_update', array('spip_pays',array("code" => "0"),array("code='KR'", "id_pays=52", ))),
-		array('sql_update', array('spip_pays',array("code" => "KP"),array("code='KR'","id_pays=51", ))),
-		array('sql_update', array('spip_pays',array("code" => "KP"),array("code='0'", "id_pays=52", ))),
-	);
+
 	include_spip('base/upgrade');
 	include_spip('base/pays_peupler_base');
 	$maj['1.3.0'] = array(
@@ -43,13 +34,19 @@ function pays_upgrade($nom_meta_base_version, $version_cible){
 		array('maj_tables', array('spip_pays_liens')),
 	);
 
-	$maj['1.4.1'] = array(
-		array('sql_update', 'spip_pays', array('code_alpha3' => 'CZE'), array('id_pays=185')),
-	);
-
-	$maj['1.4.2'] = array(
-		array('sql_update', 'spip_pays', array('code' => 'KP', 'code_num' => 408, 'code_alpha3' => 'PRK'), array('id_pays=51')),
-		array('sql_update', 'spip_pays', array('code' => 'KR', 'code_num' => 410, 'code_alpha3' => 'KOR'), array('id_pays=52')),
+	// upgrades 1.2.0, 1.2.1, 1.4.2, 1.4.3 en erreur… on les refait correctement …
+	// (bien échapper l’insertion, et tenir compte des index uniques !)
+	$maj['1.4.3'] = array(
+		// Inversion de 2 pays
+		array('sql_updateq', 'spip_pays', array('code' => '0'), 'id_pays=52'),
+		array('sql_updateq', 'spip_pays', array('code' => 'KP', 'code_num' => 408, 'code_alpha3' => 'PRK'), 'id_pays=51'),
+		array('sql_updateq', 'spip_pays', array('code' => 'KR', 'code_num' => 410, 'code_alpha3' => 'KOR'), 'id_pays=52'),
+		// Inversion de 2 pays
+		array('sql_updateq', 'spip_pays', array('code' => '0'), 'id_pays=110'),
+		array('sql_updateq', 'spip_pays', array('code' => 'IQ', 'code_num' => 368, 'code_alpha3' => 'IRQ'), 'id_pays=109'),
+		array('sql_updateq', 'spip_pays', array('code' => 'IR', 'code_num' => 364, 'code_alpha3' => 'IRN'), 'id_pays=110'),
+		// Coquille code alpha3.
+		array('sql_updateq', 'spip_pays', array('code' => 'CZ', 'code_num' => 203, 'code_alpha3' => 'CZE'), 'id_pays=185'),
 	);
 
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
