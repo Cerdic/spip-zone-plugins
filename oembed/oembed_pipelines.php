@@ -148,7 +148,13 @@ function oembed_renseigner_document_distant($flux) {
 			$doc['mode'] = 'document';
 			$doc['oembed'] = $flux['source'];
 			$doc['titre'] = $data['title'];
+			if (isset($data['web_page'])) {
+				$doc['titre'] = '['.$doc['titre'].'->'.$data['web_page'].']';
+			}
 			$doc['credits'] = $data['author_name'];
+			if (isset($data['author_url'])) {
+				$doc['credits']= '['.$doc['credits'].'->'.$data['author_url'].']';
+			}
 			if (isset($data['media'])) {
 				$doc['media'] = $data['media'];
 			} elseif (isset($medias[$data['type']])) {
@@ -285,7 +291,7 @@ function oembed_pre_liens($t) {
 
 function oembed_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_traitements']['TITRE']['documents']= 'PtoBR('._TRAITEMENT_RACCOURCIS.')';
-	$interfaces['table_des_traitements']['CREDITS']['documents']= _TRAITEMENT_RACCOURCIS;
+	$interfaces['table_des_traitements']['CREDITS']['documents']= 'PtoBR('._TRAITEMENT_RACCOURCIS.')';
 	return $interfaces;
 }
 
