@@ -18,7 +18,7 @@ function emojify_names($name) {
 function emojify($texte, &$need_emoji) {
 	if (
 		(strpos($texte, ':')!==false and preg_match(',:\w+:,',$texte))
-	  or is_utf8($texte)) {
+		or is_utf8($texte)) {
 		if (!function_exists('emoji_convert')) {
 			include_spip('lib/php-emoji/emoji');
 			$GLOBALS['emoji_maps']['names_to_unified'] = array_flip(array_map('emojify_names',$GLOBALS['emoji_maps']['names']));
