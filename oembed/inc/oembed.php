@@ -121,7 +121,6 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 	$provider = false;
 
 	$provider = oembed_verifier_provider($url);
-
 	if ((!$provider)
 		and (($detecter_lien != 'non')
 		or lire_config('oembed/detecter_lien', 'non') == 'oui')) {
@@ -133,7 +132,6 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 	}
 
 	$data_url = url_absolue($provider['endpoint'], url_de_base());
-
 	// certains oembed fournissent un endpoint qui contient deja l'URL, parfois differente de celle de la page
 	if (!parametre_url($data_url, 'url')) {
 		$data_url = parametre_url($data_url, 'url', $url, '&');
@@ -161,7 +159,6 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 		$provider_name = reset($provider_name);
 	}
 	$provider_name = preg_replace(',\W+,', '_', strtolower($provider_name));
-
 	if ($oembed_endpoint_pretraite = charger_fonction("pretraite_$provider_name", 'oembed/input', true)) {
 		$a = func_get_args();
 		$args = array('url'=>array_shift($a));
@@ -192,7 +189,6 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 
 	$oembed_recuperer_url = charger_fonction('oembed_recuperer_url', 'inc');
 	$cache[$data_url] = $oembed_recuperer_url($data_url, $url, $format);
-
 	// si une fonction de post-traitement est fourni pour ce provider+type, l'utiliser
 	if ($cache[$data_url]) {
 		$provider_name2= str_replace(' ', '_', strtolower($cache[$data_url]['provider_name']));
@@ -203,13 +199,12 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 		$f3 = preg_replace(',\W,', '', "posttraite_{$provider_name}_$type");
 		$f4 = preg_replace(',\W,', '', "posttraite_{$provider_name}");
 		if (
-		     $oembed_provider_posttraite = charger_fonction($f1, 'oembed/input', true)
-		  or $oembed_provider_posttraite = charger_fonction($f2, 'oembed/input', true)
-		  or $oembed_provider_posttraite = charger_fonction($f3, 'oembed/input', true)
-		  or $oembed_provider_posttraite = charger_fonction($f4, 'oembed/input', true) ) {
+			$oembed_provider_posttraite = charger_fonction($f1, 'oembed/input', true)
+			or $oembed_provider_posttraite = charger_fonction($f2, 'oembed/input', true)
+			or $oembed_provider_posttraite = charger_fonction($f3, 'oembed/input', true)
+			or $oembed_provider_posttraite = charger_fonction($f4, 'oembed/input', true) ) {
 			$cache[$data_url] = $oembed_provider_posttraite($cache[$data_url], $url);
 		}
-
 		ecrire_fichier($oembed_cache, serialize($cache[$data_url]));
 	}
 	spip_log('infos oembed pour '.$url.' : '.var_export($cache[$data_url], true), 'oembed.'._LOG_DEBUG);
