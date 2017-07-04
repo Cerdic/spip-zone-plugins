@@ -11,5 +11,5 @@
 	</div>
 	<style><!--/**/.oe-video .loading {background-image:url("#CHEMIN_IMAGE{searching.gif}")!important;background-size:auto !important;}/**/--></style>
 </div>
-[<div class="spip_doc_titre" style="max-width:#ENV{data/width}px;"><a href="#ENV*{url}" class="oe-title">(#ENV*{data/title})</a>[
-<span class="oe-author_name"><br /><i><:par_auteur:> <a href="#ENV*{data/author_url}">(#ENV*{data/author_name})</a></i></span>]</div>]
+[<div class="spip_doc_titre" style="max-width:#ENV{data/width}px;"><a href="#ENV*{url}" class="oe-title">(#ENV*{data/title})</a>[(#ENV*{data/author_name}|oui)
+<span class="oe-author_name"><br /><i><:par_auteur:> [(#ENV*{data/author_url}|?{[<a href="#ENV*{data/author_url}">(#ENV*{data/author_name})</a>],#ENV*{data/author_name}})]</i></span>]</div>]
