@@ -70,6 +70,19 @@ function oembed_recuperer_fond($flux) {
 		$i = _T('oembed:explication_upload_url', array('hosts' => $hosts));
 		$i = "<p class='explication small'>$i</p>";
 		$flux['data'] = str_replace($t = '<!--editer_url-->', $t. $i, $flux['data']);
+	} else if ($flux['args']['fond'] == 'modeles/document_case') {
+		$infos_doc = sql_fetsel('id_document, mode, media, oembed', 'spip_documents', 'id_document='.intval($flux['args']['contexte']['id_document']));
+		if (in_array($infos_doc['media'], array('video', 'audio'))
+			and ($infos_doc['mode'] == 'document')
+			and (strlen($infos_doc['oembed']) > 1)) {
+			$info_vignette = '<span>' . _T('medias:info_inclusion_vignette') . '</span>';
+			$flux['data'] = str_replace("<div class='raccourcis'>", "<div class='raccourcis'>".$info_vignette, $flux['data']);
+			$raccourci = "<div class='raccourcis'><span>" . _T('medias:info_inclusion_directe') . '</span>'
+				. affiche_raccourci_doc('emb', $infos_doc['id_document'], 'left')
+				. affiche_raccourci_doc('emb', $infos_doc['id_document'], 'center')
+				. affiche_raccourci_doc('emb', $infos_doc['id_document'], 'right').'</div>';
+			$flux['data'] = str_replace('<div class="actions', $raccourci.'<div class="actions', $flux['data']);
+		}
 	}
 	return $flux;
 }
@@ -152,7 +165,7 @@ function oembed_renseigner_document_distant($flux) {
 function oembed_post_edition($flux) {
 	if (
 		isset($flux['args']['action'])
-		and $flux['args']['action'] == 'ajouter_document' 
+		and $flux['args']['action'] == 'ajouter_document'
 		and !empty($flux['data']['oembed'])
 	) {
 		$id_document = $flux['args']['id_objet'];
@@ -263,8 +276,6 @@ function oembed_pre_liens($t) {
 	}
 	return $t;
 }
-
-
 
 include_spip('inc/config');
 if (!function_exists('lire_config')) {
