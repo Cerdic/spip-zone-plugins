@@ -31,7 +31,9 @@ function inc_oembed_recuperer_url($oembed_url, $url, $format) {
 		curl_setopt($c, CURLOPT_FOLLOWLOCATION, true);
 		curl_setopt($c, CURLOPT_SSL_VERIFYHOST, false);
 		curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
-		//curl_setopt($c, CURLOPT_SSLVERSION, 1 );
+		$browser = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.16 (KHTML, like Gecko) \Chrome/24.0.1304.0 Safari/537.16';
+		curl_setopt($c, CURLOPT_USERAGENT, $browser);
+		//curl_setopt($c, CURLOPT_SSLVERSION, 1);
 
 		if (isset($GLOBALS['meta']['http_proxy']) and $GLOBALS['meta']['http_proxy']){
 			curl_setopt($c, CURLOPT_PROXY, $GLOBALS['meta']['http_proxy']);
@@ -67,10 +69,10 @@ function inc_oembed_recuperer_url($oembed_url, $url, $format) {
 	}
 
 	if (!$data) {
-		spip_log('infos oembed brutes pour '."$url | $oembed_url".' : ' . "ECHEC $erreur", 'oembed.'._LOG_ERREUR);
+		spip_log('infos oembed brutes pour '."$url |ï¿½$oembed_url".' : ' . "ECHEC $erreur", 'oembed.'._LOG_ERREUR);
 	}
 	else {
-		spip_log('infos oembed brutes pour '."$url | $oembed_url".' : '.(($format == 'html')?substr($data,0,100):$data), 'oembed.'._LOG_DEBUG);
+		spip_log('infos oembed brutes pour '."$url |ï¿½$oembed_url".' : '.(($format == 'html')?substr($data,0,100):$data), 'oembed.'._LOG_DEBUG);
 	}
 
 	if ($data) {
@@ -81,6 +83,5 @@ function inc_oembed_recuperer_url($oembed_url, $url, $format) {
 		//if ($format == 'xml')
 		//	$cache[$oembed_url] = false;
 	}
-
 	return $data;
 }
