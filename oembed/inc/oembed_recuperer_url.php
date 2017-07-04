@@ -69,10 +69,10 @@ function inc_oembed_recuperer_url($oembed_url, $url, $format) {
 	}
 
 	if (!$data) {
-		spip_log('infos oembed brutes pour '."$url |�$oembed_url".' : ' . "ECHEC $erreur", 'oembed.'._LOG_ERREUR);
+		spip_log('infos oembed brutes pour '."$url | $oembed_url".' : ' . "ECHEC $erreur", 'oembed.'._LOG_ERREUR);
 	}
 	else {
-		spip_log('infos oembed brutes pour '."$url |�$oembed_url".' : '.(($format == 'html')?substr($data,0,100):$data), 'oembed.'._LOG_DEBUG);
+		spip_log('infos oembed brutes pour '."$url | $oembed_url".' : '.(($format == 'html')?substr($data,0,100):$data), 'oembed.'._LOG_DEBUG);
 	}
 
 	if ($data) {
