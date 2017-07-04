@@ -10,6 +10,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'aucun_provider' => 'Aucun provider',
 
+	// B
+	'bouton_lecture' => 'Lecture',
+
 	// E
 	'erreur_ajout_provider' => 'Erreur lors de l’ajout du provider.',
 	'erreur_scheme_doublon' => 'Ce scheme est déjà présent dans la liste.',
