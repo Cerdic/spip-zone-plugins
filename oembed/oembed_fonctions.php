@@ -95,10 +95,16 @@ function oembed_force_video_autoplay($html) {
 		} else {
 			$src_autoplay = parametre_url($src, 'autoplay', '1', '&');
 		}
-		if (strpos($html, $src_amp)) {
-			$html = str_replace($src_amp, $src_autoplay, $html);
-		} else {
-			$html = str_replace($src, $src_autoplay, $html);
+		/**
+		 * Ne pas mettre d'autoplay sur les vidéos facebook sinon elles perdent le son
+		 * Le son est plus compliqué à remettre qu'à recliquer une seconde fois pour voir la vidéo
+		 */
+		if (strpos($src, 'facebook') == false) {
+			if (strpos($html, $src_amp)) {
+				$html = str_replace($src_amp, $src_autoplay, $html);
+			} else {
+				$html = str_replace($src, $src_autoplay, $html);
+			}
 		}
 	}
 	return $html;
