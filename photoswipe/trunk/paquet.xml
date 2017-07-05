@@ -2,7 +2,7 @@
 	prefix="photoswipe"
 	categorie="multimedia"
 	version="0.3.5"
-	etat="test"
+	etat="stable"
  	compatibilite="[2.0.0;3.1.*]"
 	logo="photoswipe-128.png"
 	documentation="https://contrib.spip.net/4825"
