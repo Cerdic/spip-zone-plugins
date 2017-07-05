@@ -289,6 +289,9 @@ function calculer_balise_LISTER_VALEURS($objet, $colonne, $cles) {
 	// exploser les cles !
 	$cles = explode(',', $cles);
 
+	// pas de valeur vide '', (ou d’espace … peu probable) !
+	$cles = array_filter($cles, 'trim');
+
 	// si pas de cles, on part aussi gentiment
 	if (!$cles) return array();
 
