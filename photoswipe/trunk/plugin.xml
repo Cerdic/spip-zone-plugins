@@ -12,7 +12,7 @@
 	</auteur>
 	<version>0.3.5</version>
 	<icon>photoswipe-128.png</icon>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<description>Une lightbox simple et élégante</description>
 	<lien>https://contrib.spip.net/4825</lien>
 	<prefix>photoswipe</prefix>
