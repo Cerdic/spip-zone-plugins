@@ -1,4 +1,4 @@
-<?php
+	<?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/rezosocios/trunk/lang
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_creation_rezosocio' => 'Créer un lien de réseau social',
+	'icone_supprimer_rezosocio' => 'Supprimer ce réseau social',
 	'icone_rezosocios' => 'Réseaux sociaux',
 	'info_langue' => 'Langue du profil',
 	'info_modifier_rezosocio' => 'Modifier le lien de réseau social',

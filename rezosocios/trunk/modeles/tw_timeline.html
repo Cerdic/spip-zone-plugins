@@ -33,7 +33,6 @@
 [(#SET{lang,[(#ENV{lang})_[(#ENV{lang}|strtoupper)]]})]
 
 <a class="twitter-timeline" width="#ENV{width,100%}" height="#ENV{height,275}" href="https://twitter.com/#GET{name_twitter}"[ data-link-color="(#ENV{link-color})"][ data-chrome="(#ENV{chrome})"][ data-show-replies="(#ENV{show-replies}|in_array{#LISTE{true,false}}|?{#ENV{show-replies}})"][ data-related="(#ENV{related})"][ data-tweet-limit="(#ENV{tweet-limit}|is_numeric|?{#ENV{tweet-limit}})"][ data-theme="(#ENV{theme}|in_array{#LISTE{light,dark}}|?{#ENV{theme}})"] data-widget-id="407475350688378880"[ data-aria-polite="(#ENV{aria-polite})"] data-screen-name="[(#GET{name_twitter})]" lang="#ENV{lang}"><:rezosocios:titre_tweetsde{name=#GET{name_twitter}}:></a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 </BOUCLE_rezostwitter>
 #FILTRE{trim}
