@@ -8,7 +8,7 @@
 	]
 	<BOUCLE_doc(DOCUMENTS){id_objet?}{objet?}{id_document?}{mode?}{extension IN png,jpg,gif}{par num titre,titre}{doublons}{vu?} {0,#ENV{limite,1000}}>
 		<li class="[(#EXPOSE{is-active}) ]orbit-slide">
-			<a href="[(#CREDITS|url_absolue)]">
+			<a href="[(#CREDITS|url_absolue|sinon{#INFO_URL{#ENV{objet},#ENV{id_objet}}})]">
 				[(#FICHIER|image_passe_partout{#ENV{width},#ENV{height}}|image_recadre{#ENV{width},#ENV{height},#ENV{imageAlign},#ENV{imageBackcolor}}|inserer_attribut{title,#DESCRIPTIF})]
 				[<figcaption class="orbit-caption">(#TITRE)</figcaption>]
 			</a>
