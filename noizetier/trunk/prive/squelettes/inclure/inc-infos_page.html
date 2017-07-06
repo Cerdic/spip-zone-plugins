@@ -20,7 +20,7 @@
 			[(#URL_ACTION_AUTEUR{activer_composition, #ENV{type}, #SELF}
 				|icone_horizontale{<:noizetier:activer_composition:>, composition-set-24, '', #LANG_LEFT ajax})]
 		]
-		[(#AUTORISER{supprimercomposition, noizetier, '', '', #ARRAY{page, #ENV{type}}})
+		[(#AUTORISER{supprimercomposition, noizetier, '', '', #ARRAY{page, #ENV{page}}})
 			[(#URL_ACTION_AUTEUR{supprimer_composition, #ENV{page}, #URL_ECRIRE{noizetier_pages}|parametre_url{est_page_objet, #ENV{est_page_objet}}}
 				|icone_horizontale{<:noizetier:formulaire_supprimer_page:>, composition, del, #LANG_LEFT})]
 		]

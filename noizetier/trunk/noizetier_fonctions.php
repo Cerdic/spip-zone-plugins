@@ -21,7 +21,7 @@ function noizetier_noisette_charger($recharger = false) {
 	$retour = false;
 
 	// Initialiser le contexte de rechargement
-	// TODO : en attente de voir si on rajoute un var_mode ou autre
+	// TODO : en attente de voir si on rajoute un var_mode=vider_noizetier
 	$forcer_chargement = $recharger;
 
 	// Initaliser la table et le where des noisettes.
@@ -130,6 +130,55 @@ function noizetier_noisette_charger($recharger = false) {
 }
 
 
+/**
+ * Retourne la configuration de la noisette demandée.
+ * La configuration est stockée en base de données, certains champs sont recalculés avant d'être fournis.
+ *
+ * @package SPIP\NOIZETIER\API\NOISETTE
+ * @api
+ * @filtre
+ *
+ * @param string	$noisette
+ * 		Identifiant de la $noisette.
+ * @param boolean	$traitement_typo
+ *      Indique si les données textuelles doivent être retournées brutes ou si elles doivent être traitées
+ *      en utilisant la fonction _T_ou_typo.
+ * 		Les champs sérialisés sont toujours désérialisés.
+ *
+ * @return array
+ */
+function noizetier_noisette_informer($noisette, $traitement_typo = true) {
+
+	static $description_noisette = array();
+
+	if (!isset($description_noisette[$traitement_typo][$noisette])) {
+		// Chargement de toute la configuration de la noisette en base de données.
+		$description = sql_fetsel('*', 'spip_noizetier_noisettes', array('noisette=' . sql_quote($noisette)));
+
+		// Sauvegarde de la description de la page pour une consultation ultérieure dans le même hit.
+		if ($description) {
+			// Traitements des champs textuels
+			if ($traitement_typo) {
+				$description['nom'] = _T_ou_typo($description['nom']);
+				if (isset($description['description'])) {
+					$description['description'] = _T_ou_typo($description['description']);
+				}
+			}
+			// Traitements des champs tableaux sérialisés
+			$description['contexte'] = unserialize($description['contexte']);
+			$description['necessite'] = unserialize($description['necessite']);
+			$description['parametres'] = unserialize($description['parametres']);
+			// Calcul des blocs
+			$description_noisette[$traitement_typo][$noisette] = $description;
+		} else {
+			$description_noisette[$traitement_typo][$noisette] = array();
+		}
+	}
+
+	return $description_noisette[$traitement_typo][$noisette];
+}
+
+
 function noizetier_noisette_ajax($noisette) {
 	static $est_ajax = array();
 
@@ -151,10 +200,10 @@ function noizetier_noisette_ajax($noisette) {
 			// avec la valeur par défaut configurée pour le noiZetier.
 			if ($noisettes = sql_allfetsel('noisette, ajax', 'spip_noizetier_noisettes')) {
 				$noisettes = array_column($noisettes, 'ajax', 'noisette');
-				foreach ($noisettes as $_noisette => $_configuration) {
-					$est_ajax[$_noisette] = ($_configuration['ajax'] == 'defaut')
+				foreach ($noisettes as $_noisette => $_ajax) {
+					$est_ajax[$_noisette] = ($_ajax == 'defaut')
 						? $defaut_ajax
-						: ($_configuration['ajax'] == 'non' ? false : true);
+						: ($_ajax == 'non' ? false : true);
 				}
 			}
 
@@ -399,7 +448,7 @@ function noizetier_page_charger($recharger = false) {
 	$options['repertoire_pages'] = noizetier_page_repertoire();
 
 	// Initialiser le contexte de rechargement
-	// TODO : en attente de voir si on rajoute un var_mode ou autre
+	// TODO : en attente de voir si on rajoute un var_mode=vider_noizetier
 	$forcer_chargement = $recharger;
 
 	// Initaliser la table et le where des pages non virtuelles qui sont utilisés plusieurs fois.
