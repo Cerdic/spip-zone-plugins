@@ -88,7 +88,6 @@ function adminer_object() {
         // specify enabled plugins here
         new AdminerAllowedDatabases(array($GLOBALS['connexions'][0]["db"])),
     );
-
     
     return new AdminerPlugin($plugins);
 }

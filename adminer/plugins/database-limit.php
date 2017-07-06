@@ -14,7 +14,7 @@ class AdminerAllowedDatabases {
 	/**
 	* @param array case insensitive database names in values
 	*/
-	function AdminerAllowedDatabases($visible) {
+	function __construct($visible) {
 		$this->visible = array_map('strtolower', $visible);
 	}
 	
