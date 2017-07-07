@@ -86,6 +86,7 @@ function adminer_object() {
     
     $plugins = array(
         // specify enabled plugins here
+        new AdminerLoginSqlite(),
         new AdminerAllowedDatabases(array($GLOBALS['connexions'][0]["db"])),
     );
     
