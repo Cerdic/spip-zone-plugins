@@ -7,6 +7,10 @@
  *
  */
 
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
 // Proposer array_column
 if (!function_exists('array_column')) {
 	function array_column($input = null, $columnKey = null, $indexKey = null) {
@@ -34,7 +38,7 @@ if (_request('var_mode')=='preview'
 }
 
 function spip_bonux_affichage_final($flux) {
-	if (_PREVISU_TEMPORAIRE_ACTIVE and defined('_VAR_PREVIEW') and _VAR_PREVIEW) {
+	if (_PREVISU_TEMPORAIRE_ACTIVE and defined('_VAR_PREVIEW') and _VAR_PREVIEW and !empty($GLOBALS['html'])) {
 		$p = stripos($flux, '</body>');
 		$url_relecture = parametre_url(self(), 'var_mode', 'preview', '&');
 		$js = '';
@@ -53,9 +57,6 @@ function spip_bonux_affichage_final($flux) {
 	return $flux;
 }
 
-if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
-}
 
 /**
  * une fonction qui regarde si $texte est une chaine de langue
