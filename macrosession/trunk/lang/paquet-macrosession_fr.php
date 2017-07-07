@@ -9,6 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'visiteur_nom' => 'Visiteurs efficaces',
-	'visiteur_slogan' => 'Macros SPIP : #_VISITEUR, #_VISITEUR_SI, #_VISITEUR_SINON, #_VISITEUR_FIN pour accéder aux données de la session du visiteur courant (ou à des données provenant dailleurs que la session SPIP locale), et les tester dans un squelette en suivant les recommandations webperf (cf https://contrib.spip.net/4611 ).',
+	'macrosession_nom' => 'Macros de session étendue',
+	'macrosession_slogan' => "Macros SPIP : #_SESSION, #_SESSION_SI, #_SESSION_SINON, #_SESSION_FIN pour accéder aux données de session SPIP ou d'autres origines, et les tester dans un squelette en suivant les recommandations https://contrib.spip.net/4611.',
 );
