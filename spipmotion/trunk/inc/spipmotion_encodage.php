@@ -193,7 +193,7 @@ function encodage($source, $options) {
 			}
 		}
 		$acodec = $codec_audio ? '--acodec '.$codec_audio : '';
-
+		
 		if (in_array($codec_audio, array('libvorbis'))) {
 			$qualite = lire_config("spipmotion/qualite_audio_$extension_attente", '4');
 			$audiobitrate_ffmpeg = "--audioquality $qualite";
@@ -495,7 +495,7 @@ function encodage($source, $options) {
 			if ($source['rotation'] == '90') {
 				$metadatas = '-metadata:s:v:0 rotate=0';
 				$rotation = '-filter:v transpose=1';
-				$infos_sup_normal .= "$rotation $metadatas";
+				$infos_sup_normal .= " $rotation $metadatas";
 			}
 
 			/**
