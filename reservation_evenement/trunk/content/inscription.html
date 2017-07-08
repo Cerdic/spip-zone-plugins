@@ -5,12 +5,6 @@
 		</h1>
 	</header>
 	<div class="main">
-		<div class="ajax">
-			#FORMULAIRE_RESERVATION{
-				#ENV{id_evenement},
-				#ENV{id_article},
-				#ENV{retour},
-				#ENV{options}}
-		</div>
+		<INCLURE{fond=modeles/reservation,env} />
 	</div>
 </article>
