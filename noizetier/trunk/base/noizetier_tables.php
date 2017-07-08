@@ -133,8 +133,8 @@ function noizetier_declarer_tables_principales($tables_principales) {
 		'composition' => "varchar(127) DEFAULT '' NOT NULL",
 		'objet'       => 'varchar(25) NOT NULL default ""',
 		'id_objet'    => 'bigint(21) NOT NULL default 0',
-		'bloc'        => "tinytext DEFAULT '' NOT NULL",
-		'noisette'    => "tinytext DEFAULT '' NOT NULL",
+		'bloc'        => "varchar(255) DEFAULT '' NOT NULL",
+		'noisette'    => "varchar(255) DEFAULT '' NOT NULL",
 		'parametres'  => "text DEFAULT '' NOT NULL",
 		'balise'      => "varchar(6) DEFAULT 'defaut' NOT NULL",
 		'css'         => "tinytext DEFAULT '' NOT NULL",
@@ -144,15 +144,19 @@ function noizetier_declarer_tables_principales($tables_principales) {
 		'PRIMARY KEY'     => 'id_noisette',
 		'KEY type'        => 'type',
 		'KEY composition' => 'composition',
-		'KEY bloc'        => 'bloc(255)',
-		'KEY noisette'    => 'noisette(255)',
+		'KEY bloc'        => 'bloc',
+		'KEY noisette'    => 'noisette',
 		'KEY objet'       => 'objet',
 		'KEY id_objet'    => 'id_objet',
 	);
 
 	$tables_principales['spip_noisettes'] = array(
 		'field' => &$noizetier,
-		'key' => &$noizetier_cles,
+		'key'   => &$noizetier_cles,
+		'join'  => array(
+			'id_noisette' => 'id_noisette',
+			'noisette'    => 'noisette',
+		),
 	);
 
 	return $tables_principales;

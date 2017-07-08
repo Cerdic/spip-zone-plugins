@@ -1,8 +1,9 @@
-<BOUCLE_nav(NOISETTES){id_noisette}>
-#BOITE_OUVRIR{'','info'}
-<div class='infos'>
-<div class='numero'><:noizetier:noisette_numero:><p>#ID_NOISETTE</p></div>
-[(#NOIZETIER_NOISETTE_INFOS{#NOISETTE, description})]
-</div>
-#BOITE_FERMER
-</BOUCLE_nav>
+<BOUCLE_navigation_noisette(NOISETTES noizetier_noisettes){id_noisette}>
+[(#REM) <!-- Boite d'info de la noisette --> ]
+#SET{explication, #DESCRIPTION|_T_ou_typo}
+<INCLURE{fond=prive/squelettes/inclure/inc-infos_noisette,
+	id_noisette,
+	noisette,
+	explication=#GET{explication},
+	env} />
+</BOUCLE_navigation_noisette>

@@ -56,6 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_dupliquer_composition_suffixer' => '.',
 	'explication_glisser_deposer' => 'Vous pouvez ajouter une noisette ou les réordonner par simple glisser/déposer.',
 	'explication_heritages_composition' => 'La composition en cours d’édition est basée sur le type de contenu « @type@ » qui possède des types de contenu enfants. Vous pouvez définir pour chaque type de contenu enfant une composition à appliquer par défaut.',
+	'explication_noisette' => 'Noisette de type « @noisette@ »',
 	'explication_noisette_css' => 'Vous pouvez ajouter à la balise englobante de la noisette d’éventuelles classes CSS supplémentaires.',
 	'explication_noizetier_ajax' => 'Le mode par défaut d’inclusion AJAX peut être modifié unitairement pour chaque noisette (fichier YAML).',
 	'explication_noizetier_balise' => 'Le mode par défaut d’inclusion dans une balise englobante peut être modifié unitairement pour chaque noisette (paramètrage).',
