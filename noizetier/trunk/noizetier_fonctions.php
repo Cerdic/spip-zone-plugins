@@ -168,7 +168,7 @@ function noizetier_noisette_informer($noisette, $traitement_typo = true) {
 			$description['contexte'] = unserialize($description['contexte']);
 			$description['necessite'] = unserialize($description['necessite']);
 			$description['parametres'] = unserialize($description['parametres']);
-			// Calcul des blocs
+			// Stockage de la description
 			$description_noisette[$traitement_typo][$noisette] = $description;
 		} else {
 			$description_noisette[$traitement_typo][$noisette] = array();
@@ -222,6 +222,86 @@ function noizetier_noisette_ajax($noisette) {
 	}
 
 	return $est_ajax[$noisette];
+}
+
+/**
+ * Ajoute une noisette à un bloc d'une page ou d'un contenu.
+ *
+ * @param string       $noisette
+ * 		Nom de la noisette à ajouter.
+ * @param string|array $page
+ *      Identifiant de la page ou de la composition (chaine) ou tableau associatif contenant
+ *      le type d'objet (index `objet`) et l'id de l'objet (index `id_objet`).
+ * @param string       $bloc
+ * 		Nom du bloc où ajouter la noisette.
+ *
+ * @return int
+ * 		Retourne l'identifiant de la nouvelle instance de noisette créée ou 0 en cas d'erreur.
+ **/
+function noizetier_ajouter_noisette($noisette, $page, $bloc) {
+
+	// Initialisation de la valeur de sortie.
+	$id_noisette = 0;
+
+	if (is_array($page)) {
+		$identifiant['objet'] = $page['objet'];
+		$identifiant['id_objet'] = $page['id_objet'];
+		$identifiant['page'] = '';
+	}
+	else {
+		$identifiant['page'] = $page;
+		$identifiant['objet'] = '';
+		$identifiant['id_objet'] = 0;
+	}
+
+	if (autoriser('configurerpage', 'noizetier', 0, '', $identifiant)
+	and $noisette) {
+		include_spip('inc/saisies');
+		$configuration = noizetier_noisette_informer($noisette, false);
+		$parametres = saisies_lister_valeurs_defaut($configuration['parametres']);
+
+		// On construit le where pour savoir quelles noisettes chercher
+		$where = array();
+		if ($identifiant['page']) {
+			$where[] = 'type=' . sql_quote(noizetier_page_type($identifiant['page']));
+			$where[] = 'composition=' . sql_quote(noizetier_page_composition($identifiant['page']));
+		}
+		else {
+			$where[] = 'objet=' . sql_quote($identifiant['objet']);
+			$where[] = 'id_objet=' . intval($identifiant['id_objet']);
+		}
+		$where[] = 'bloc=' . sql_quote($bloc);
+
+		// On cherche le rang suivant
+		$rang = intval(sql_getfetsel(
+			'rang',
+			'spip_noisettes',
+			$where,
+			'',
+			'rang DESC',
+			'0,1'
+		)) + 1;
+
+		if ($id_noisette = sql_insertq(
+			'spip_noisettes',
+			array(
+				'type' => noizetier_page_type($identifiant['page']),
+				'composition' => noizetier_page_composition($identifiant['page']),
+				'objet' => $identifiant['objet'],
+				'id_objet' => $identifiant['id_objet'],
+				'bloc' => $bloc,
+				'noisette' => $noisette,
+				'rang' => $rang,
+				'parametres' => serialize($parametres),
+			)
+		)) {
+			// On invalide le cache
+			include_spip('inc/invalideur');
+			suivre_invalideur("id='noisette/$id_noisette'");
+		}
+	}
+
+	return $id_noisette;
 }
 
 

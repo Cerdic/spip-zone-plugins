@@ -10,39 +10,36 @@ if (!function_exists('autoriser')) {
 
 function formulaires_editer_noisette_charger_dist($id_noisette, $redirect = '') {
 
-	$valeurs = array(
-		'editable' => autoriser('configurer', 'noizetier'),
-		'id_noisette' => intval($id_noisette),
-		'_champs'  => array(),
-	);
+	$valeurs = array('editable' => false);
 
-	if ($valeurs['editable']) {
-		$select = array('noisette', 'parametres', 'balise', 'css');
-		$from = array('spip_noisettes');
-		$where = array('id_noisette=' . $valeurs['id_noisette']);
+	if (autoriser( 'editernoisette', 'noizetier', $id_noisette)) {
+		// Récupération des informations sur la noisette en cours d'édition et sur le type de noisette
+		$valeurs['id_noisette'] = intval($id_noisette);
+		$select = array(
+			't1.noisette as noisette',
+			't1.parametres as parametres',
+			't1.balise as balise',
+			't1.css as css',
+			't2.parametres as champs');
+		$from = array('spip_noisettes as t1', 'spip_noizetier_noisettes as t2');
+		$where = array('t1.id_noisette=' . $valeurs['id_noisette'], 't1.noisette=t2.noisette');
 		$noisette = sql_fetsel($select, $from, $where);
 		if ($noisette) {
-			// Acquisition des informations spécifiques de la noisette en base de données
+			// Type de la noisette
 			$valeurs['noisette'] = $noisette['noisette'];
 
-			// Acquisition de la structure de configuration standard de la noisette définie dans son fichier YAML.
+			// Configuration standard de la noisette définie dans son fichier YAML.
 			// Cette configuration peut comporter des paramètres de saisie spécifiques dont les valeurs sont ensuite
 			// stockées dans le champ 'parametres' de la table 'spip_noisettes'.
 			// Cette structure de formulaire est générée automatiquement par le plugin Saisies.
-			include_spip('noizetier_fonctions');
-			$champs = noisette_informer($valeurs['noisette'], 'parametres');
-			if ($champs) {
-				$valeurs['_champs'] = $champs;
+			$valeurs['_champs'] = unserialize($noisette['champs']);
 
-				// Insérer dans le contexte les valeurs des paramètres spécifiques stockées en BD.
-				// On doit passer par saisies_charger_champs() au cas ou la definition de la noisette a change
-				// et qu'il y a de nouveau champs a prendre en compte
-				include_spip('inc/saisies');
-				$parametres = unserialize($noisette['parametres']);
-				if (is_array($parametres)) {
-					$valeurs = array_merge($valeurs, saisies_charger_champs($champs), $parametres);
-				}
-			}
+			// Insérer dans le contexte les valeurs des paramètres spécifiques stockées en BD.
+			// On doit passer par saisies_charger_champs() au cas ou la définition de la noisette a changé
+			// et qu'il y a de nouveaux champs à prendre en compte
+			include_spip('inc/saisies');
+			$parametres = unserialize($noisette['parametres']);
+			$valeurs = array_merge($valeurs, saisies_charger_champs($valeurs['_champs']), $parametres);
 
 			// Insérer dans le contexte les valeurs des paramètres généraux stockées en BD.
 			// Ces paramètres généraux sont inclus manuellement dans le formulaire.
@@ -58,39 +55,48 @@ function formulaires_editer_noisette_charger_dist($id_noisette, $redirect = '') 
 				'on'     => _T('noizetier:option_noisette_balise_oui'),
 				''       => _T('noizetier:option_noisette_balise_non')
 			);
-		} else {
-			$valeurs['editable'] = false;
+			$valeurs['editable'] = true;
 		}
 	}
 
 	return $valeurs;
 }
 
+
 function formulaires_editer_noisette_verifier_dist($id_noisette, $redirect = '') {
 
-	// TODO : rajouter la vérification des css
-	$noisette = _request('noisette');
-	$champs = noisette_informer($noisette, 'parametres');
+	$erreurs = array();
 
-	return saisies_verifier($champs, false);
+	// Vérifier les champs correspondant aux paramètres spécifiques de ce type de noisette
+	include_spip('noizetier_fonctions');
+	$configuration = noizetier_noisette_informer(_request('noisette'), false);
+	if ($configuration['parametres']) {
+		$erreurs = saisies_verifier($configuration['parametres'], false);
+	}
+
+	// TODO : rajouter la vérification des css
+
+	return $erreurs;
 }
+
 
 function formulaires_editer_noisette_traiter_dist($id_noisette, $redirect = '') {
 
 	$retour = array();
 
-	// TODO : a quoi sert l'autorisation sur les formulaires ???
-	if (autoriser('configurer', 'noizetier')) {
-		// Paramètres propres de la noisette
-		$noisette = _request('noisette');
-		$champs = noisette_informer($noisette, 'parametres');
+	if (autoriser( 'editernoisette', 'noizetier', $id_noisette)) {
+		// On constitue le tableau des valeurs des paramètres spécifiques de la noisette
+		include_spip('noizetier_fonctions');
+		$configuration = noizetier_noisette_informer(_request('noisette'), false);
 		$parametres = array();
-		foreach (saisies_lister_champs($champs, false) as $_champ) {
-			$parametres[$_champ] = _request($_champ);
+		if ($configuration['parametres']) {
+			foreach (saisies_lister_champs($configuration['parametres'], false) as $_champ) {
+				$parametres[$_champ] = _request($_champ);
+			}
 		}
 
 		// Paramètres généraux d'inclusion de la noisette
-		include_spip('inc:config');
+		include_spip('inc/config');
 		$balise = _request('balise');
 		$css = _request('css');
 		if (!$balise or (($balise == 'defaut') and !lire_config('noizetier/balise_noisette'))) {

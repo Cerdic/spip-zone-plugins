@@ -44,6 +44,7 @@ function formulaires_editer_page_charger_dist($edition, $page, $redirect = '') {
 		'_blocs_defaut' => array(),
 	);
 
+	include_spip('noizetier_fonctions');
 	$description_page = noizetier_page_informer($page, false);
 	if ($description_page) {
 		if ($edition == 'modifier') {
@@ -84,7 +85,6 @@ function formulaires_editer_page_charger_dist($edition, $page, $redirect = '') {
 		// -- pour une modification, à la liste des blocs exclus de la composition en cours de modification
 		// -- pour une duplication ou une création de composition, à la liste des blocs exclus de la source.
 		// Ainsi cette liste est toujours l'inverse de l'index [blocs] de l'argument $description_page.
-		include_spip('noizetier_fonctions');
 		$blocs = noizetier_bloc_informer();
 		foreach ($blocs as $_bloc => $_configuration) {
 			$valeurs['_blocs'][$_bloc] = $_configuration['nom'];

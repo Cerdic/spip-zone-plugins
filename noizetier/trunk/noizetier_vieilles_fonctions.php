@@ -31,82 +31,6 @@ function noizetier_charger_contexte_noisette($noisette) {
 	return $contexte_noisettes[$noisette];
 }
 
-
-/**
- * Ajoute une noisette à un bloc d'une page
- *
- * @param string $noisette
- * 		Nom de la noisette à ajouter
- * @param string|array $page
- * 		Nom de la page-composition OU tableau contenant l'objet et l'id_objet
- * @param string $bloc
- * 		Nom du bloc où ajouter la noisette
- *
- * @return int
- * 		Retourne l'identifiant de la nouvelle noisette
- **/
-function noizetier_ajouter_noisette($noisette, $page, $bloc) {
-	$objet = '';
-	$id_objet = 0;
-	if (is_array($page)) {
-		$objet = $page['objet'];
-		$id_objet = $page['id_objet'];
-		$page = null;
-	}
-
-	if (autoriser('configurer', 'noizetier') && $noisette) {
-		include_spip('inc/saisies');
-		$info_noisette = noizetier_info_noisette($noisette);
-		$parametres = saisies_lister_valeurs_defaut($info_noisette['parametres']);
-
-		// On construit le where pour savoir quelles noisettes chercher
-		$where = array();
-		if ($page) {
-			$where[] = 'type = '.sql_quote(noizetier_page_type($page));
-			$where[] = 'composition = '.sql_quote(noizetier_page_composition($page));
-		}
-		else {
-			$where[] = 'objet = '.sql_quote($objet);
-			$where[] = 'id_objet = '.intval($id_objet);
-		}
-		$where[] = 'bloc = '.sql_quote($bloc);
-
-		// On cherche le rang suivant
-		$rang = intval(sql_getfetsel(
-			'rang',
-			'spip_noisettes',
-			$where,
-			'',
-			'rang DESC',
-			'0,1'
-		)) + 1;
-
-		$id_noisette = sql_insertq(
-			'spip_noisettes',
-			array(
-				'type' => noizetier_page_type($page),
-				'composition' => noizetier_page_composition($page),
-				'objet' => $objet,
-				'id_objet' => $id_objet,
-				'bloc' => $bloc,
-				'noisette' => $noisette,
-				'rang' => $rang,
-				'parametres' => serialize($parametres),
-			)
-		);
-
-		if ($id_noisette) {
-			// On invalide le cache
-			include_spip('inc/invalideur');
-			suivre_invalideur("id='noisette/$id_noisette'");
-
-			return $id_noisette;
-		}
-	}
-
-	return 0;
-}
-
 /**
  * Tri les noisettes d'une page
  * Attention : parfois la page est transmise dans $ordre (et peu éventuellement changer en cours, cas de la page-dist de Zpip-vide).
@@ -608,6 +532,9 @@ function noizetier_importer_configuration($type_import, $import_compos, $config)
 
 // API en cours de traitement
 // --------------------------
+
+// API traitées
+// ------------
 /**
  * @param array $filtres
  *
@@ -764,8 +691,6 @@ function noisette_informer($noisette, $information = '', $options = array()) {
 	}
 }
 
-// API traitées
-// ------------
 /**
  * Lister les noisettes disponibles dans les dossiers noisettes/.
  *
