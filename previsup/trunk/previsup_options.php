@@ -48,7 +48,7 @@ if (
 	and !empty($GLOBALS['visiteur_session']['statut'])
 	and !in_array($GLOBALS['visiteur_session']['statut'], array('6forum', '5poubelle'))
 ) {
-	$var_mode = explode(',', trim(_request('var_mode')));
+	$var_mode = array_filter(explode(',', trim(_request('var_mode'))));
 	if (empty($_COOKIE[_COOKIE_PREVISUALISATION_PERSISTANTE])) {
 		if (in_array('preview', $var_mode)) {
 			// creation du cookie
