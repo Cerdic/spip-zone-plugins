@@ -105,9 +105,7 @@ function noizetier_recuperer_fond($flux) {
 }
 
 /**
- * Insertion dans le pipeline boite_infos (SPIP)
- * 
- * Ajouter un lien pour configurer les noisettes de ce contenu précisément
+ * Insertion dans le pipeline boite_infos : ajouter un lien pour configurer les noisettes de ce contenu précisément.
  * 
  * @param array $flux 
  * 		Le contexte du pipeline
@@ -115,24 +113,29 @@ function noizetier_recuperer_fond($flux) {
  * 		Le contexte modifié
  */
 function noizetier_boite_infos($flux){
+
 	include_spip('inc/autoriser');
-	
-	if (autoriser('configurernoisettes', $flux['args']['type'], $flux['args']['id'])) {
-		include_spip('inc/presentation');
-		
-		// On cherche le nombre de noisettes déjà configurées pour ce contenu
-		$nb = sql_countsel('spip_noisettes', array('objet = '.sql_quote($flux['args']['type']), 'id_objet = '.intval($flux['args']['id'])));
-		if (!$nb) {
+	$opt = array('objet' => $flux['args']['type'], 'id_objet' => intval($flux['args']['id']));
+	if (autoriser('configurerpage', 'noizetier', 0, '', $opt)) {
+		// On cherche le nombre de noisettes déjà configurées pour ce contenu.
+		$where = array('objet = ' . sql_quote($flux['args']['type']), 'id_objet = ' . intval($flux['args']['id']));
+		$nbr_noisettes = sql_countsel('spip_noisettes', $where);
+		if (!$nbr_noisettes) {
 			$texte = _T('noizetier:noisettes_configurees_aucune');
 		}
-		elseif ($nb == 1) {
+		elseif ($nbr_noisettes == 1) {
 			$texte = _T('noizetier:noisettes_configurees_une');
 		}
 		else {
-			$texte = _T('noizetier:noisettes_configurees_nb', array('nb'=>$nb));
+			$texte = _T('noizetier:noisettes_configurees_nb', array('nb'=>$nbr_noisettes));
 		}
-		
-		$flux['data'] .= icone_horizontale($texte, parametre_url(parametre_url(generer_url_ecrire('noizetier_page'), 'id_objet', $flux['args']['id']), 'objet', $flux['args']['type']), 'noisette', $fonction="", $dummy="", $javascript="");
+
+		// On construit le bouton avec l'url adéquate.
+		include_spip('inc/presentation');
+		$url = generer_url_ecrire('noizetier_page');
+		$url = parametre_url($url, 'objet', $flux['args']['type']);
+		$url = parametre_url($url, 'id_objet', $flux['args']['id']);
+		$flux['data'] .= icone_horizontale($texte, $url, 'noisette', $fonction='', $dummy='', $javascript='');
 	}
 	
 	return $flux;

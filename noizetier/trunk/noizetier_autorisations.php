@@ -103,11 +103,15 @@ function autoriser_noizetier_configurerpage_dist($faire, $type, $id, $qui, $opt)
 			// Cas d'une page
 			$autoriser = true;
 		} else {
-			if (!empty($opt['objet']) and isset($opt['id_objet']) and intval($opt['id_objet'])
-			and ($configuration = noizetier_objet_informer($opt['objet'], $opt['id_objet']))
+			if (!empty($opt['objet']) and isset($opt['id_objet']) and ($id_objet = intval($opt['id_objet']))
 			and noizetier_objet_type_active($opt['objet'])) {
-				// Cas d'un objet dont le type est activé
-				$autoriser = true;
+				// Cas d'un objet dont le type est activé : on vérifie juste que l'objet existe bien
+				include_spip('base/objets');
+				if (($from = table_objet_sql($opt['objet']))
+				and ($id_table_objet = id_table_objet($opt['objet']))
+				and sql_countsel($from, array($id_table_objet . '=' . $id_objet))) {
+					$autoriser = true;
+				}
 			}
 		}
 	}
@@ -274,15 +278,43 @@ function autoriser_noizetier_dupliquercomposition_dist($faire, $type, $id, $qui,
 }
 
 /**
- * Autorisation pour configurer les noisettes d'un contenu précis
+ * Autorisation d'édition d'une noisette déjà ajoutée dans le bloc d'une page ou d'un contenu
+ * (page=noisette_edit).
+ * Il faut :
+ * - que la noisette existe bien,
+ * - et être autorisé à configurer la page ou le contenu auquel est rattachée la noisette
  *
- * Avoir le droit de modifier l'objet et avoir configuré cet objet pour pouvoir personnaliser ses noisettes
- **/
-function autoriser_configurernoisettes_dist($faire, $type, $id, $qui, $opt) {
-	include_spip('inc/config');
-	$liste_objets_noisettes = lire_config('noizetier/objets_noisettes', array());
+ * @param $faire
+ * @param $type
+ * @param $id
+ * @param $qui
+ * @param $opt
+ *
+ * @return bool
+ */
+function autoriser_noizetier_editernoisette_dist($faire, $type, $id, $qui, $opt) {
+	$autoriser = false;
 
-	return
-		autoriser('modifier', $type, $id)
-		and in_array(table_objet_sql($type), $liste_objets_noisettes);
+	if ($id_noisette = intval($id)) {
+		// On vérifie que la noisette existe bien et on récupère sa localisation (page ou objet) afin d'appeler
+		// l'autorisation de configurer cette page ou objet.
+		$select = array('type', 'composition', 'objet', 'id_objet');
+		$where = array('id_noisette=' . $id_noisette);
+		$noisette = sql_fetsel($select, 'spip_noisettes', $where);
+		if ($noisette) {
+			if ($noisette['objet'] and intval($noisette['id_objet'])) {
+				$opt['objet'] = $noisette['objet'];
+				$opt['id_objet'] = $noisette['id_objet'];
+			} else {
+				$opt['page'] = $noisette['composition']
+					? $noisette['type'] . '-' . $noisette['composition']
+					: $noisette['type'];
+			}
+			if (autoriser('configurerpage', 'noizetier', 0, '', $opt)) {
+				$autoriser = true;
+			}
+		}
+	}
+
+	return $autoriser;
 }

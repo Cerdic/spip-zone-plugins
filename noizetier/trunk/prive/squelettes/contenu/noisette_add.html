@@ -1,4 +1,4 @@
-[(#AUTORISER{configurer,noizetier}|sinon_interdire_acces)]
+[(#AUTORISER{configurerpage, noizetier, '', '', #ENV{page}|?{#ARRAY{page, #ENV{page}}, #ARRAY{objet,#OBJET,id_objet,#ID_OBJET}}}|sinon_interdire_acces)]
 [(#OBJET|et{#ID_OBJET}|?{
 	[(#SET{retour, [(#URL_ECRIRE{noizetier_page}
 						|parametre_url{objet, #OBJET}
@@ -17,10 +17,9 @@
 <div class='cadre-formulaire-editer'>
 <div class="entete-formulaire">
 	[(#GET{retour}|icone_verticale{<:noizetier:retour:>, page-noisettes-24, '', left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
-	<:noizetier:formulaire_modifier_noisette:>
+	<:noizetier:formulaire_ajouter_noisette:>
 	<h1>
-		<:noizetier:formulaire_ajouter_noisette:>
-		[(#CHEMIN_IMAGE{'noisette-add-24.png'}|balise_img{page,cadre-icone})]
+		<:ecrire:info_sans_titre:>
 	</h1>
 </div>
 

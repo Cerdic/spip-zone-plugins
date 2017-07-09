@@ -769,7 +769,7 @@ function noizetier_page_repertoire() {
 // --------------------------------------------------------------------
 
 /**
- * Lister les objets ayant des noisettes spéciquement configurées pour leur page.
+ * Lister les contenus ayant des noisettes spécifiquement configurées pour leur page.
  *
  * @package SPIP\NOIZETIER\API\OBJET
  * @api
@@ -781,8 +781,8 @@ function noizetier_page_repertoire() {
  * 		Id de l'objet ou 0.
  *
  * @return array|string
- * 		Si le type et l'id de l'objet sont fournis, on renvoie la description de la page de cet objet.
- * 		Sinon, on renvoie le tableau des descriptions des pages de tous les objets indexés par [type_objet][id_objet].
+ * 		Si le type et l'id du contenu sont fournis, on renvoie la description de la page de ce contenu.
+ * 		Sinon, on renvoie le tableau des descriptions des pages de tous les contenus indexés par [type_objet][id_objet].
  */
 function noizetier_objet_informer($type_objet = '', $id_objet = 0, $information = '') {
 
@@ -908,11 +908,17 @@ function noizetier_objet_lister_exclusions() {
  */
 function noizetier_objet_type_active($type_objet) {
 
+	static $tables_actives = null;
 	$est_active = false;
 
-	include_spip('inc/config');
-	$tables_actives = lire_config('noizetier/objets_noisettes', array());
-	if ($tables_actives and in_array($type_objet, array_map('objet_type', $tables_actives))) {
+	// Si la liste des tables d'objet actives est null on la calcule une seule fois
+	if ($tables_actives === null) {
+		include_spip('inc/config');
+		$tables_actives = array_map('objet_type', lire_config('noizetier/objets_noisettes', array()));
+	}
+
+	// Si la liste est non vide, on détermine si le type d'objet est bien activé.
+	if ($tables_actives and in_array($type_objet, $tables_actives)) {
 		$est_active = true;
 	}
 

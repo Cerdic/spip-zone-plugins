@@ -19,6 +19,11 @@ function formulaires_configurer_noizetier_traiter_dist() {
 		supprimer_fichier(_CACHE_AJAX_NOISETTES);
 	}
 
+	// On filtre le tableau des objets configurables pour éviter l'index vide fourni systématiquement par la saisie.
+	$objets_configurables = _request('objets_noisettes');
+	$objets_configurables = is_array($objets_configurables) ? array_filter($objets_configurables) : array();
+	set_request('objets_noisettes', $objets_configurables);
+
 	// On enregistre les nouvelles valeurs saisies
 	include_spip('inc/cvt_configurer');
 	$trace = cvtconf_formulaires_configurer_enregistre('configurer_noizetier', array());

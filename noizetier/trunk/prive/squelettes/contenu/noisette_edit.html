@@ -1,4 +1,4 @@
-[(#AUTORISER{configurer, noizetier}|sinon_interdire_acces)]
+[(#AUTORISER{editernoisette, noizetier, #ENV{id_noisette}}|sinon_interdire_acces)]
 <BOUCLE_noisette(NOISETTES){id_noisette}>
 [(#OBJET|et{#ID_OBJET}|?{
 	[(#SET{redirect, [(#URL_ECRIRE{noizetier_page}
