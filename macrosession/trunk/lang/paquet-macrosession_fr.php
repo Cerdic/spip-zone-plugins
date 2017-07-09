@@ -10,5 +10,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'macrosession_nom' => 'Macros de session étendue',
-	'macrosession_slogan' => "Macros SPIP : #_SESSION, #_SESSION_SI, #_SESSION_SINON, #_SESSION_FIN pour accéder aux données de session SPIP ou d'autres origines, et les tester dans un squelette en suivant les recommandations https://contrib.spip.net/4611.',
+	'macrosession_slogan' => 'Macros SPIP : #_SESSION, #_SESSION_SI, #_SESSION_SINON, #_SESSION_FIN pour accéder aux données de session SPIP ou d’autres origines, et les tester dans un squelette en suivant les recommandations https://contrib.spip.net/4611.',
 );
