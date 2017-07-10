@@ -59,7 +59,7 @@ function action_linkcheck_parcours_dist() {
 							'->[^\]]\]');*/
 						$classe_alpha = 'a-zA-Z0-9âäéèëêïîôöùüû²';
 						$tab_expreg_mysql = array(
-							"(((http|https|ftp|ftps)://)?www\.)|((http|https|ftp|ftps)://(?:\S+(?::\S*)?@)?.([".$classe_alpha."\-]*\.)?))([".$classe_alpha."+\-]*\.)+[a-zA-Z0-9]{2,9}(/[".$classe_alpha."=.?&~+\_\\@\:\,/%#\-\]*)?)(\'|\"| |\.|\->|\]|,|;|\s)/?",
+							"(((http|https|ftp|ftps)://)?www\.)|((http|https|ftp|ftps)://(?:\S+(?::\S*)?@)?.([".$classe_alpha."\-]*\.)?))([".$classe_alpha."+\-]*\.)+[a-zA-Z0-9]{2,9}(?::\d{2,5})?(/[".$classe_alpha."=.?&~+\_\\@\:\,/%#\-\]*)?)(\'|\"| |\.|\->|\]|,|;|\s)/?",
 							'(\->)([a-zA-Z]{3,10}[0-9]{1,})\]'
 						);
 

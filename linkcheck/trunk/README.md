@@ -21,6 +21,12 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 
 ## Versions 1.4.x
 
+### Version 1.4.5 (2017-07-10)
+
+- Permettre d'avoir `user:pass@` en début d'URL
+- Prise en charge du port dans une URL
+- Permetre le caractère tilde `~` dans l'URL
+
 ### Version 1.4.4
 
 - Remettre la table `spip_linkchecks` en table principale sinon l'autoincrement ne se fait pas.
