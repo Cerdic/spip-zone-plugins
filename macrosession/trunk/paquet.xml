@@ -1,10 +1,11 @@
 <paquet
 	prefix="macrosession"
 	categorie="outil"
-	version="0.6.3"
+	version="0.6.4"
 	etat="test"
 	compatibilite="[2.1.0;3.2.*]"
 	documentation="https://contrib.spip.net/4823"
+	logo="images/macrosession-128.png"
 >
 	<nom>Macro session étendue</nom>
 	<!-- 

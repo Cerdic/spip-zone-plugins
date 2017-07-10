@@ -86,6 +86,7 @@ define (V_FERME_PHP, ' ?' . "'.'>'");
 // $champ est entre quotes ''
 // le code renvoyé sera inséré à l'intérieur d'un '...'
 function compile_appel_macro_session ($p, $champ,$n=2) {
+	debug_log ("compile_appel_macro_session avec n=$n et champ=".print_r($champ,1), "_macrosession");
 	$get_champ = "pipelined_session_get('.\"$champ\".')";
 	
 	// champ sans application de filtre
@@ -113,7 +114,6 @@ function compile_appel_macro_session ($p, $champ,$n=2) {
 		$r = "($get_champ $comparateur '.\"$arg_un\".')";
 		// #_SESSION{nom,==,JLuc} donnera 
 		// '<'.'?php  echo (pipelined_session_get('."'nom'".') == '."'JLuc'".');  ?'.'>'
-		// #_SESSION_SI{nom
 		return $r;
 	}
 	
