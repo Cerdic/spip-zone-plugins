@@ -94,7 +94,7 @@ function noizetier_trier_noisette($page, $ordre) {
 			$rang += 1;
 		}
 		if ($entree[0] == 'ajouter') {
-			$id_noisette = noizetier_ajouter_noisette($entree[1], $page, $bloc);
+			$id_noisette = noizetier_noisette_ajouter($entree[1], $page, $bloc);
 			$modifs[$id_noisette] = array(
 				'bloc' => $bloc,
 				'type' => $type,

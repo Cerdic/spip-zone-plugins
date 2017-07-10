@@ -49,7 +49,7 @@ function formulaires_ajouter_noisette_traiter_dist($page, $bloc, $redirect = '')
 	if (autoriser('configurerpage', 'noizetier', 0, '', $identifiant)) {
 		if ($noisette = _request('noisette')) {
 			include_spip('noizetier_fonctions');
-			if ($id_noisette = noizetier_ajouter_noisette($noisette, $page, $bloc)) {
+			if ($id_noisette = noizetier_noisette_ajouter($noisette, $page, $bloc)) {
 				$retour['message_ok'] = _T('info_modification_enregistree');
 				if ($redirect) {
 					// Note : $retour indique la page à charger en cas d'ajout

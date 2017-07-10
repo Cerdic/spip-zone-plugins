@@ -238,7 +238,7 @@ function noizetier_noisette_ajax($noisette) {
  * @return int
  * 		Retourne l'identifiant de la nouvelle instance de noisette créée ou 0 en cas d'erreur.
  **/
-function noizetier_ajouter_noisette($noisette, $page, $bloc) {
+function noizetier_noisette_ajouter($noisette, $page, $bloc) {
 
 	// Initialisation de la valeur de sortie.
 	$id_noisette = 0;
@@ -272,15 +272,9 @@ function noizetier_ajouter_noisette($noisette, $page, $bloc) {
 		}
 		$where[] = 'bloc=' . sql_quote($bloc);
 
-		// On cherche le rang suivant
-		$rang = intval(sql_getfetsel(
-			'rang',
-			'spip_noisettes',
-			$where,
-			'',
-			'rang DESC',
-			'0,1'
-		)) + 1;
+		// La noisette est ajoutée en fin de liste : on cherche donc le dernier rang utilisé et on se
+		// positionne au rang suivant.
+		$rang = intval(sql_getfetsel('max(rang)', 'spip_noisettes', $where)) + 1;
 
 		if ($id_noisette = sql_insertq(
 			'spip_noisettes',
@@ -292,9 +286,7 @@ function noizetier_ajouter_noisette($noisette, $page, $bloc) {
 				'bloc' => $bloc,
 				'noisette' => $noisette,
 				'rang' => $rang,
-				'parametres' => serialize($parametres),
-			)
-		)) {
+				'parametres' => serialize($parametres)))) {
 			// On invalide le cache
 			include_spip('inc/invalideur');
 			suivre_invalideur("id='noisette/$id_noisette'");
