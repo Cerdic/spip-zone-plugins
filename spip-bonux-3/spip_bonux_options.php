@@ -28,7 +28,8 @@ if (!defined('_PREVISU_TEMPORAIRE_ACTIVE')) {
 
 if (_request('var_mode')=='preview'
 	and _PREVISU_TEMPORAIRE_ACTIVE
-	and $cle = _request('var_relecture')) {
+	and $cle = _request('var_relecture')
+) {
 	include_spip('spip_bonux_fonctions');
 	if (previsu_verifier_cle_temporaire($cle)) {
 		include_spip('inc/autoriser');
@@ -43,7 +44,13 @@ function spip_bonux_affichage_final($flux) {
 		$url_relecture = parametre_url(self(), 'var_mode', 'preview', '&');
 		$js = '';
 		if (!defined('_VAR_PREVIEW_EXCEPTION')) {
-			$url_relecture = parametre_url($url_relecture, 'var_relecture', previsu_cle_temporaire(), '&');
+			include_spip('plugins/installer');
+			if (spip_version_compare($GLOBALS['spip_version_branche'], '3.2.0-beta3', '>=')) {
+				include_spip('inc/securiser_action');
+				$url_relecture = parametre_url($url_relecture, 'var_previewtoken', calculer_token_previsu(url_absolue($url_relecture)), '&');
+			} else {
+				$url_relecture = parametre_url($url_relecture, 'var_relecture', previsu_cle_temporaire(), '&');
+			}
 			$label = 'Relecture temporaire';
 		} else {
 			$label = _T('previsualisation');
