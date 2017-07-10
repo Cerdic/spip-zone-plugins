@@ -2,8 +2,10 @@
 
 /**
  * Outils SPIP supplémentaires pour une gestion efficace pour l'hébergement 
- * des accés aux données du visiteur courant
- * Balises #_VISITEUR, #_VISITEUR_SI, #_VISITEUR_SINON, #_VISITEUR_FIN
+ * des accés aux données de la _session courant
+ * et pour l'accès à des données de session étendue
+ * 
+ * Balises #_SESSION, #_SESSION_SI, #_SESSION_SINON, #_SESSION_FIN
  *
  * @copyright	2016, 2017
  * @author 		JLuc
@@ -14,8 +16,12 @@
 
 include_spip('inc/session');
 include_spip ('inc/filtres'); 
-// appeler appliquer_filtre dans le code compilé est une somptuosité superfétatoire
-// todo : à la compilation appeler chercher_filtre pour savoir quelle est la fonction appelée par le filtre et insérer dans le code compilé un appel direct à cette fonction --> plus besoin d'inclure inc/filtres dans mes_options
+
+//
+// FIXME : appeler appliquer_filtre dans le code compilé est une somptuosité superfétatoire
+// Au lieu de cela, appeler chercher_filtre à la compilation pour savoir quelle est la fonction appelée par le filtre et insérer dans le code compilé un appel direct à cette fonction 
+// Comme ça plus besoin d'inclure inc/filtres dans mes_options
+//
 
 //
 // Accés étendu aux données de session des visiteurs
@@ -79,7 +85,7 @@ define (V_FERME_PHP, ' ?' . "'.'>'");
 // Appelé uniquement au recalcul pour la compilation
 // $champ est entre quotes ''
 // le code renvoyé sera inséré à l'intérieur d'un '...'
-function compile_appel_visiteur ($p, $champ,$n=2) {
+function compile_appel_macro_session ($p, $champ,$n=2) {
 	$get_champ = "pipelined_session_get('.\"$champ\".')";
 	
 	// champ sans application de filtre
@@ -105,9 +111,9 @@ function compile_appel_visiteur ($p, $champ,$n=2) {
 		$comparateur = trim ($filtre, "'");
 										
 		$r = "($get_champ $comparateur '.\"$arg_un\".')";
-		// #_VISITEUR{nom,==,JLuc} donnera 
+		// #_SESSION{nom,==,JLuc} donnera 
 		// '<'.'?php  echo (pipelined_session_get('."'nom'".') == '."'JLuc'".');  ?'.'>'
-		// #_VISITEUR_SI{nom
+		// #_SESSION_SI{nom
 		return $r;
 	}
 	
@@ -131,31 +137,31 @@ function compile_appel_visiteur ($p, $champ,$n=2) {
 //
 
 /*
- * #_VISITEUR rend l'id_auteur si l'internaute est connecté
- * #_VISITEUR(champ) rend la valeur du champ de session étendue de l'internaute connecté
- * #_VISITEUR(champ, filtre[, arg1[, arg2]]) applique le filtre au champ de session étendue, avec 0, 1 ou 2 arguments supplémentaires et rend la valeur résultat
+ * #_SESSION rend l'id_auteur si l'internaute est connecté
+ * #_SESSION(champ) rend la valeur du champ de session étendue de l'internaute connecté
+ * #_SESSION(champ, filtre[, arg1[, arg2]]) applique le filtre au champ de session étendue, avec 0, 1 ou 2 arguments supplémentaires et rend la valeur résultat
  */
-function balise__VISITEUR_dist($p) {
+function balise__SESSION_dist($p) {
 	$champ = interprete_argument_balise(1, $p);
 	if (!$champ)
 		$champ = "'id_auteur'";
-	$p->code = V_OUVRE_PHP . ' echo '. compile_appel_visiteur($p, $champ). '; ' . V_FERME_PHP;
+	$p->code = V_OUVRE_PHP . ' echo '. compile_appel_macro_session($p, $champ). '; ' . V_FERME_PHP;
 	$p->interdire_scripts = false;
 	// echo "On insèrera l'évaluation du code suivant : <pre>".$p->code."</pre>\n\n"; 
 	return $p;
 }
 
 /*
- * #_VISITEUR_SI(champ) teste si le champ de session est non vide
- * #_VISITEUR_SI(champ, val) teste si le champ de session est égal à la valeur spécifiée
- * #_VISITEUR_SI(champ, val, operateur) teste si le champ de session se compare positivement à la valeur spécifiée
+ * #_SESSION_SI(champ) teste si le champ de session est non vide
+ * #_SESSION_SI(champ, val) teste si le champ de session est égal à la valeur spécifiée
+ * #_SESSION_SI(champ, val, operateur) teste si le champ de session se compare positivement à la valeur spécifiée
  * 	selon l'opérateur spécifié, qui peut etre 
  * - soit un comparateur : ==, <, >, >=, <= 
  * - soit un filtre (nom de fonction) recevant 2 arguments : la valeur du champ et val. C'est le retour qui est alors testé.
  * Produit par exemple le code suivant :
  * '<'.'?php  echo pipelined_session_get('."'nom'".');  ?'.'>'
 */
-function balise__VISITEUR_SI_dist($p) {
+function balise__SESSION_SI_dist($p) {
 	$champ = interprete_argument_balise(1, $p);
 	if (!$champ)
 		$champ = "'id_auteur'";
@@ -163,18 +169,18 @@ function balise__VISITEUR_SI_dist($p) {
 	$p->interdire_scripts = false;
 
 	// Appelé uniquement au recalcul
-	$p->code = V_OUVRE_PHP . 'if ('.compile_appel_visiteur($p, $champ).') { ' . V_FERME_PHP;
+	$p->code = V_OUVRE_PHP . 'if ('.compile_appel_macro_session($p, $champ).') { ' . V_FERME_PHP;
 	// echo "On insèrera l'évaluation du code suivant : <pre>".$p->code."</pre>\n\n";
 	return $p;
 }
 
-function balise__VISITEUR_SINON_dist($p) {
+function balise__SESSION_SINON_dist($p) {
 	$p->code="'<'.'" . '?php } else { ?' . "'.'>'";
 	$p->interdire_scripts = false;
 	return $p;
 }
 
-function balise__VISITEUR_FIN_dist($p) {
+function balise__SESSION_FIN_dist($p) {
 	$p->code="'<'.'" . '?php }; ?' . "'.'>'";
 	$p->interdire_scripts = false;
 	return $p;
