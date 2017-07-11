@@ -13,8 +13,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-define('_PREVIEW_TOKEN', true);
-
 if (!defined('_ACTIVER_PREVISUALISATION_PERSISTANTE')) {
 	/** @var bool Activer la prévisu persistante sur le site */
 	define('_ACTIVER_PREVISUALISATION_PERSISTANTE', true);
