@@ -106,7 +106,7 @@ function formulaires_editer_livre_charger_dist($id_livre = 'new', $id_rubrique =
 function formulaires_editer_livre_verifier_dist($id_livre = 'new', $id_rubrique = 0, $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	$erreurs = array();
 
-	$erreurs = formulaires_editer_objet_verifier('livre', $id_livre, array('titre', 'pages'));
+	$erreurs = formulaires_editer_objet_verifier('livre', $id_livre, array('titre'));
 
 	return $erreurs;
 }

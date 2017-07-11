@@ -11,15 +11,15 @@
 			[(#SAISIE{input, titre, obligatoire=oui,
 				label=<:livre:champ_titre_label:>})]
 
+			[(#SAISIE{input, soustitre,
+				label=<:livre:champ_soustitre_label:>})]
+
 			[<div class="editer editer_rubrique[ (#ENV**{erreurs/id_parent}|oui)erreur]">
 					<label for="id_parent"><:titre_cadre_interieur_rubrique:></label>[
 					<span class="erreur_message">(#ENV**{erreurs/id_parent})</span>
 					]
 					(#VAL|chercher_rubrique{#ENV{id_livre},#ENV{id_parent},'livre',#ENV{id_secteur},'',0,form_simple})
 			</div>]
-
-			[(#SAISIE{input, soustitre,
-				label=<:livre:champ_soustitre_label:>})]
 
 			[(#SAISIE{input, volume,
 				label=<:livre:champ_volume_label:>})]
@@ -44,7 +44,7 @@
 			[(#SAISIE{input, isbn,
 				label=<:livre:champ_isbn_label:>})]
 
-			[(#SAISIE{input, pages, obligatoire=oui,
+			[(#SAISIE{input, pages,
 				label=<:livre:champ_pages_label:>})]
 
 			[(#SAISIE{input, reliure,
