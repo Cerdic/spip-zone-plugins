@@ -27,7 +27,7 @@ body.large {
 
 .largeur, #conteneur, .table_page,
 .large .largeur, .large #conteneur, .large .table_page {
-  width: auto;
+  width: auto !important;
 }
 
 #bando_haut .largeur,
@@ -72,7 +72,7 @@ body.large {
 }
 
 /* ordre des items */
-#contenu { 
+#contenu {
   -webkit-box-ordinal-group: 2; 
       -ms-flex-order: 1; 
           order: 1;
@@ -94,7 +94,7 @@ body.large {
 
 /* prévisualisation du contenu éditorial */
 #wysiwyg {
-  max-width: 45em; /* ~70 caractères par ligne */
+  max-width: 50em; /* ~70 caractères par ligne */
   margin-left: auto;
   margin-right: auto;
 }
@@ -107,9 +107,7 @@ body.large {
     On passe en colonnes au-delà de 780px
     Cette valeur est tirée de la largeur minimale de la page par défaut dans les styles vanilla de SPIP.
     Quand #navigation ou #extra sont vides, le contenu central s'adapte pour prendre tout l'espace disponible.
-    On gère le ratio contenu/colonnes avec la propriété flex-grow.
-    On met 4/1, mais ça ne fait pas 75%/25%, c'est plus compliqué : https://css-tricks.com/flex-grow-is-weird/
-    Pas de largeur définie pour #navigation et #extra, sinon ça laisse un espace blanc quand ils sont vides.
+    Malheureusement on ne peut pas mettre de largeur en pourcentage pour les colonnes, sinon on a des colonnes fantomes en absence de contenu.
 */
 
 @media (min-width: 780px) {
@@ -122,28 +120,37 @@ body.large {
             flex-direction: row;
   }
 
+   #contenu, #navigation, #extra {
+     width: auto !important;
+   }
+
   /* contenu principal */
   #contenu {
-    -webkit-box-flex: 4;
-    -ms-flex-positive: 4;
-    flex-grow: 4;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
     -webkit-box-ordinal-group: 3;
         -ms-flex-order: 2;
             order: 2;
-    margin-left: 30px;
+    margin-left: 30px !important;
   }
 
   /* colonne */
   #navigation, #extra {
+    width: initial !important; /* pas de colonne fantome en abscence de contenu */
     -webkit-box-flex: 0;
     -ms-flex-positive: 0;
-    flex-grow: 0;
+    flex-grow: 0; /* pas de colonne fantome en abscence de contenu */
     -ms-flex-negative: 1;
     flex-shrink: 1;
-    max-width: 20%;
+    /*max-width: 25%;*/
     -webkit-box-ordinal-group: 2;
         -ms-flex-order: 1;
             order: 1;
+  }
+  /* largeur de colonne : on cible le premier contenu pour éviter une colonne fantome en abscence de contenu */
+  #navigation > .ajaxbloc:first-child > * {
+    width: 22rem;
   }
 
   /* mode large : on place #extra à droite */
@@ -151,10 +158,10 @@ body.large {
     -webkit-box-ordinal-group: 4;
     -ms-flex-order: 3;
     order: 3;
-    margin-left: 24px; /* = margin-left de #contenu */
+    margin-left: 24px !important; /* = margin-left de #contenu */
   }
   .large #contenu {
-    margin-left: 24px;
+    margin-left: 24px !important;
   }
 
 }
