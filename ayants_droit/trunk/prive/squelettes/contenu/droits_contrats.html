@@ -1,6 +1,22 @@
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 <div class="nettoyeur"></div>
 
+[(#REM) Filtrer les contrats par années de clôture ]
+<B_annees>
+	<div class="onglets_simple second clearfix">
+		<strong><:droits_contrat:filtre_annees_fin:> :</strong>
+		<ul>
+			[<li>(#SELF|parametre_url{annee_fin,''}|lien_ou_expose{<:droits_contrat:filtre_annees_fin_toutes:>,#ENV{annee_fin}|=={''}})</li>]
+			<BOUCLE_annees(DROITS_CONTRATS){fusion YEAR(date_fin)}{date_fin != '0000-00-00 00:00:00'}{par date_fin}>
+		#SET{annee,#DATE_FIN|annee}
+		[<li>(#SELF|parametre_url{annee_fin,#GET{annee}}|lien_ou_expose{#GET{annee},#ENV{annee_fin}|=={#GET{annee}}})</li>]
+		</BOUCLE_annees>
+		</ul>
+	</div>
+</B_annees>
+
+</BOUCLE_annees>
+
 <INCLURE{fond=prive/objets/liste/droits_contrats, statut=#LISTE{ok}, env, ajax, sinon=<:droits_contrat:info_aucun_droits_contrat:>}>
 
 <INCLURE{fond=prive/objets/liste/droits_contrats, titre=<:droits_contrat:titre_droits_contrats_prop:>, statut=#LISTE{a_faire,en_cours}, env, ajax}>

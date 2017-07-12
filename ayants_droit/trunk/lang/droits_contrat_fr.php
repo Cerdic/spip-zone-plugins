@@ -24,6 +24,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_supprimer_droits_contrat' => 'Confirmez-vous la suppression de ce contrat de cession ?',
 	'contenus_nb' => '@nb@ contenus',
 
+	// F
+	'filtre_annees_fin_toutes' => 'Toutes',
+	'filtre_annees_fin' => 'Année de clôture',
+
 	// I
 	'icone_creer_droits_contrat' => 'Créer un contrat de cession',
 	'icone_modifier_droits_contrat' => 'Modifier ce contrat de cession',

@@ -22,7 +22,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_droits_contrats(DROITS_CONTRATS droits_ayants){statut?}{id_droits_ayant?}{objet?}{id_objet?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,nom},#GET{defaut_tri}}{par nom}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_droits_contrats(DROITS_CONTRATS droits_ayants){statut?}{id_droits_ayant?}{objet?}{id_objet?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{date_fin?}{annee_fin?}{date_debut?}{annee_debut?}{tri #ENV{par,nom},#GET{defaut_tri}}{par nom}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="statut">[(#STATUT|puce_statut{droits_contrat,#ID_DROITS_CONTRAT})]</td> 
 			<td class="titre principale"><a href="[(#ID_DROITS_CONTRAT|generer_url_entite{droits_contrat})]" title="<:info_numero_abbreviation|attribut_html:> #ID_DROITS_CONTRAT">[(#NOM|sinon{<:droits_contrat:champ_id_droits_ayant_inconnu:>})]</a></td>

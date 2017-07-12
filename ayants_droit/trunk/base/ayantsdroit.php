@@ -103,7 +103,7 @@ function ayantsdroit_declarer_tables_objets_sql($tables) {
 			'spip_droits_contrats_liens',
 		),
 		'titre' => "concat('Contrat ', id_droits_contrat) AS titre, '' AS lang",
-		//'date' => '',
+		'date' => 'date_debut',
 		'champs_editables'  => array('id_droits_ayant', 'id_licence', 'date_debut', 'date_fin', 'montant', 'credits', 'commentaires'),
 		'champs_versionnes' => array('id_droits_ayant', 'id_licence', 'date_debut', 'date_fin', 'montant', 'credits', 'commentaires'),
 		'rechercher_champs' => array('credits'=>5, 'commentaires' => 3),
