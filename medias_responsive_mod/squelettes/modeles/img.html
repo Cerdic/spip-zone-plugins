@@ -34,7 +34,7 @@
  style="[max-width:(#ENV{largeur}|sinon{#FICHIER|largeur})px;][-webkit-shape-outside: content-box (#GET{polygon});][shape-outside: content-box (#GET{polygon});]"[ data-w="(#ENV{largeur}|sinon{#FICHIER|largeur})"][ data-zoom-responsive="(#GET{kenburns})"]>
 [<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"]>]
 [(#ENV{lien}|non)
-<[(#GET{a})] href="#FICHIER"[ title="(#TITRE|supprimer_numero|texte_backend)"] class="fond mediabox" type="#MIME_TYPE" data-photo-w="#LARGEUR" data-photo-h="#HAUTEUR" >
+<[(#GET{a})][(#GET{a}|=={a}|oui) href="#FICHIER"[ title="(#TITRE|supprimer_numero|texte_backend)"] class="fond mediabox" type="#MIME_TYPE" data-photo-w="#LARGEUR" data-photo-h="#HAUTEUR"] >
 ]
 	[(#ENV{largeur}|non)
 		[(#FICHIER|image_responsive{160/320/640/1200/1920})]
