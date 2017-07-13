@@ -34,6 +34,10 @@
 
 ### Version 2.x.x (Passage à smarttag.js)
 
+#### Version 2.1.2 (2017-07-13)
+
+- Ne prendre en compte le niveau 2 de hiérarchie que si on n'a pas de niveau x deux sur l'objet actuel
+
 #### Version 2.1.1 (2017-06-27)
 
 * Bien prendre en compte le niveau 2 lorsqu'on est sur la rubrique sur laquelle il a été stipulé
