@@ -7,7 +7,7 @@
 	points,-1
 }})]
 <BOUCLE_montant_total(DROITS_CONTRATS){statut?}{id_droits_ayant?}{objet?}{id_objet?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{date_fin?}{annee_fin?}{date_debut?}{annee_debut?}>
-#SET{montant,#GET{montant,0}|plus{#MONTANT}}
+#SET{montant,#GET{montant,0}|plus{#MONTANT|floatval}}
 </BOUCLE_montant_total>
 [(#GET{montant}|intval|=={0}|oui)#SET{montant,''}]
 <B_liste_droits_contrats>

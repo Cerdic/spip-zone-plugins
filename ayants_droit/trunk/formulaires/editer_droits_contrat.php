@@ -68,6 +68,9 @@ function formulaires_editer_droits_contrat_saisies_dist($id_droits_contrat='new'
 				'nom' => 'montant',
 				'label' => _T('droits_contrat:champ_montant_label'),
 			),
+			'verifier' => array(
+				'type' => 'decimal',
+			),
 		),
 		array(
 			'saisie' => 'textarea',
