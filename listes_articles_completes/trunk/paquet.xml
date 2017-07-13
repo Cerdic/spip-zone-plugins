@@ -4,7 +4,7 @@
 	version="2.0.0"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
-	logo="images/porte_plume_blocs-64.png"
+	logo="images/listes_articles_completes-32.png"
 	documentation="http://www.paris-beyrouth.org/Plugin-Listes-d-articles-completes"
 >
 	<nom>Listes d'articles compl&#232;tes</nom>
