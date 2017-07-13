@@ -5,11 +5,16 @@
 	id_droits_contrat,1,
 	id_licence,1,
 	points,-1
-}})]<B_liste_droits_contrats>
+}})]
+<BOUCLE_montant_total(DROITS_CONTRATS){statut?}{id_droits_ayant?}{objet?}{id_objet?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{date_fin?}{annee_fin?}{date_debut?}{annee_debut?}>
+#SET{montant,#GET{montant,0}|plus{#MONTANT}}
+</BOUCLE_montant_total>
+[(#GET{montant}|intval|=={0}|oui)#SET{montant,''}]
+<B_liste_droits_contrats>
 #ANCRE_PAGINATION
 <div class="liste-objets droits_contrats">
 <table class="spip liste">
-	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{droits_contrat:info_1_droits_contrat,droits_contrat:info_nb_droits_contrats}})</strong></caption>]
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{droits_contrat:info_1_droits_contrat,droits_contrat:info_nb_droits_contrats}})[ - <:droits_contrat:texte_montant_total:> (#GET{montant})]</strong></caption>]
 	<thead>
 		<tr class="first_row">
 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
