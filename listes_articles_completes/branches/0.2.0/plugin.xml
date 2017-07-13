@@ -8,7 +8,7 @@
 	</description>
 	<lien>http://www.paris-beyrouth.org/Plugin-Listes-d-articles-completes</lien>
 
-	<version>1.0.0</version>
+	<version>0.2.1</version>
 	<etat>stable</etat>
 
 	<prefix>listes_articles_completes</prefix>
@@ -20,6 +20,6 @@
 		<inclure>listes_articles_completes.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[2.0.0;3.2.*]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<categorie>navigation</categorie>
 </plugin>

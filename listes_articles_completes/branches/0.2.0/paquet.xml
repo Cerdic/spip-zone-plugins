@@ -1,9 +1,9 @@
 <paquet
 	prefix="listes_articles_completes"
 	categorie="navigation"
-	version="1.0.0"
+	version="0.2.1"
 	etat="stable"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/listes_articles_completes-32.png"
 	documentation="http://www.paris-beyrouth.org/Plugin-Listes-d-articles-completes"
 >
