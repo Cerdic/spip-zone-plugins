@@ -12,15 +12,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'ajouter_lien_selection' => 'Add this editorial selection',
 
+	// B
+	'bouton_enlever_selection' => 'Unlink',
+	'bouton_supprimer_selection' => 'Delete this selection',
+
 	// C
-	'champ_css_explication' => 'CSS classes added to this selection', # RELIRE
+	'champ_css_explication' => 'CSS classes added to this selection',
 	'champ_css_label' => 'Css',
 	'champ_descriptif_label' => 'Description',
 	'champ_identifiant_explication' => 'A unique text identifier to simplify calling up this selection.',
 	'champ_identifiant_label' => 'Identifier',
 	'champ_limite_explication' => 'Maximum number of content within this selection.',
 	'champ_limite_label' => 'Limit',
-	'champ_nombre_contenus' => 'Number of items', # RELIRE
+	'champ_nombre_contenus' => 'Number of items',
 	'champ_titre_label' => 'Title',
 
 	// E
@@ -45,8 +49,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_creer_associer_selection' => 'Create and link an editorial selection',
 	'titre_langue_selection' => 'Language of this editorial selection',
 	'titre_logo_selection' => 'Logo of this editorial selection',
+	'titre_nouvelle_selection' => 'New editorial selection',
 	'titre_selection' => 'Editorial selection',
 	'titre_selection_nouvelle' => 'Selection',
+	'titre_selections' => 'Editorial selections',
+	'titre_selections_autonomes' => 'Autonomous editorial selections',
 	'titre_selections_objets' => 'Editorial selections attached to contents',
 	'titre_selections_rubrique' => 'Editorial selections in this section'
 );
