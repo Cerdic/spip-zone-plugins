@@ -3,7 +3,7 @@
 	categorie="navigation"
 	version="1.0.0"
 	etat="stable"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[2.0.0;3.2.*]"
 	logo="images/listes_articles_completes-32.png"
 	documentation="http://www.paris-beyrouth.org/Plugin-Listes-d-articles-completes"
 >
@@ -15,4 +15,3 @@
 
 	<pipeline nom="header_prive" inclure="listes_articles_completes.php" />
 </paquet>
-
