@@ -11,6 +11,7 @@ function exclure_sect_pre_boucle($boucle){
 		or (!empty($boucle->modificateur['tout']) and lire_config('secteur/tout') == 'oui') 
 		or test_espace_prive() == 1 
 		or (!empty($boucle->nom) and $boucle->nom == 'calculer_langues_utilisees')
+		or ($boucle->sql_serveur != '')
 	) {
 		return $boucle;
 	}
