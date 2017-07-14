@@ -4,26 +4,20 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-include_spip('noizetier_fonctions');
-include_spip('base/abstract_sql');
 
 function formulaires_lister_noisettes_page_charger_dist($page, $bloc) {
 
-	// Détermination de l'élément concerné : page ou objet
-	if (is_array($page)) {
-		// On est sur un objet précis connu par son type et son id
-		$contexte = $page;
-	}
-	else {
-		// On est sur une page classique ou une composition connu par son identifiant.
-		$contexte = array('page' => $page);
-	}
+	// Si on est en présence d'une page, il faut convertir l'identifiant en tableau.
+	// Sinon, on est en présence d'un objet précis connu par son type et son id fourni dans un
+	// tableau.
+	$valeurs = is_array($page) ? $page : array('page' => $page);
 
-	// Ajout du bloc
-	$contexte['bloc'] = $bloc;
+	// Ajout du bloc recevant les noisettes
+	$valeurs['bloc'] = $bloc;
 	
-	return $contexte;
+	return $valeurs;
 }
+
 
 function formulaires_lister_noisettes_page_traiter_dist($page, $bloc) {
 	if (_request('cancel')) {
@@ -36,6 +30,7 @@ function formulaires_lister_noisettes_page_traiter_dist($page, $bloc) {
 	
 	$ordre = _request('ordre');
 	if (_request('save') && $ordre) {
+		include_spip('noizetier_fonctions');
 		if (noizetier_trier_noisette($page, $ordre)) {
 			return array('message_ok' => _T('info_modification_enregistree'));
 		}
