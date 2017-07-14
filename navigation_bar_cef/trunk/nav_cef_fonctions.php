@@ -9,7 +9,7 @@ window.cefAsyncInit = function() {
 };
 (function() {
 var e = document.createElement(\'script\'); e.async = true;
-e.src = \'http://recherche.catholique.fr/api/cef.js\';
+e.src = \'https://recherche.catholique.fr/api/cef.js\';
 document.getElementById(\'cef-root\').appendChild(e);
 }());
 </script>'";
