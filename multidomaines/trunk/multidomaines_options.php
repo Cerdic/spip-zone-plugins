@@ -19,8 +19,8 @@ if (is_array($options)) {
 				$partie_url['port'] = $partie_url['scheme'] == 'https'? 443:80;
 			}
 			if ($partie_url['host'] == $_SERVER['HTTP_HOST'] AND $partie_url['port'] == $_SERVER['SERVER_PORT']) {
-				$GLOBALS['multidomaine_id_secteur_courant'] = $id_secteur;
 				if ($options['squelette_' .$id_secteur]) {
+					$GLOBALS['multidomaine_id_secteur_courant'] = $id_secteur;
 					$GLOBALS['dossier_squelettes'] = trim($GLOBALS['dossier_squelettes'] .':'. $options['squelette_' .$id_secteur], ':');
 				}
 			}
@@ -57,4 +57,4 @@ function multidomaines_squelettespardefaut_dist() {
 
 	$GLOBALS['dossier_squelettes'] = trim($GLOBALS['dossier_squelettes'] . $dossiers_port . $dossiers, ':');
 }
-?>
+
