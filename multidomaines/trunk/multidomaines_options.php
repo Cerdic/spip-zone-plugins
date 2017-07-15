@@ -23,9 +23,11 @@ if (is_array($options)) {
 				if ($options['squelette_' .$id_secteur]) {
 					$GLOBALS['dossier_squelettes'] = trim($GLOBALS['dossier_squelettes'] .':'. $options['squelette_' .$id_secteur], ':');
 				}
-				else {multidomaines_squelettespardefaut_dist();}
 			}
 		}
+	}
+	if(!$GLOBALS['dossier_squelettes']) {
+		multidomaines_squelettespardefaut_dist();
 	}
 }
 
