@@ -1,7 +1,7 @@
 <?php
 /**
  * Ce fichier contient l'action `supprimer_noisettes` lancée par un utilisateur pour
- * supprimer de façon sécurisée une noisette ou plusieur noisettes.
+ * supprimer de façon sécurisée une ou plusieurs noisettes.
  *
  * @package SPIP\NOIZETIER\ACTION
  */
@@ -27,18 +27,12 @@ function action_supprimer_noisettes_dist() {
 	// - noisette:id_noisette, pour supprimer un noisette connue par son id
 	// - page:id_page, pour supprimer toutes les noisettes d'une page (y compris les compositions)
 	// - objet:type_objet:id_objet, pour supprimer toutes les noisettes d'une page pour un objet précis
-	// - page:id_page|bloc:id_bloc, pour supprimer toutes les noisettes d'un bloc d'une page (y compris les compositions)
-	// - objet:id_objet:type_objet|bloc:id_bloc, pour supprimer toutes les noisettes d'un bloc d'une page pour un objet précis
+	// - page:id_page/bloc:id_bloc, pour supprimer toutes les noisettes d'un bloc d'une page (y compris les compositions)
+	// - objet:id_objet:type_objet/bloc:id_bloc, pour supprimer toutes les noisettes d'un bloc d'une page pour un objet précis
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arguments = $securiser_action();
 
-	// Verification des autorisations
-	if (!autoriser('configurer', 'noizetier')) {
-		include_spip('inc/minipres');
-		echo minipres();
-		exit();
-	}
-
+	// -- récupération de la page ou de l'objet
 	if ($arguments) {
 		$bloc = '';
 		$contexte = 'page';
@@ -56,23 +50,51 @@ function action_supprimer_noisettes_dist() {
 		// On l'extrait à son tour et on complète le contexte.
 		$element = explode(':', $arguments);
 		if (count($element) > 1) {
-			// Détermination du contexte si il n'a pas été positionné.
+			// L'id de la noisette ou de l'objet ou l'identifiant de la page est toujours passé.
+			// Le type ne concerne qu'un objet.
+			$identifiant['id'] = $element[1];
+			$identifiant['type'] = '';
+
+			$options = array();
 			if ($element[0] == 'noisette') {
 				$contexte = 'noisette';
+				// Dans le cas d'une suppression d'une noisette, les données de la page ne sont
+				// pas fournies en argument, il faut les lire en base de données.
+				$select = array('type', 'composition', 'objet', 'id_objet');
+				$where = array('id_noisette=' . intval($identifiant['id']));
+				$noisette = sql_fetsel($select, 'spip_noisettes', $where);
+				if ($noisette['type']) {
+					$options['page'] = $noisette['composition']
+						? $noisette['type'] . '-' . $noisette['composition']
+						: $noisette['type'];
+				} else {
+					$options['objet'] = $noisette['objet'];
+					$options['id_objet'] = $noisette['id_objet'];
+				}
+			} else {
+				// Pour un objet, l'id est complété par le type d'objet.
+				if (count($element) > 2) {
+					$identifiant['type'] = $element[2];
+				}
+
+				// On construit le tableau $options pour l'autorisation.
+				if ($identifiant['type']) {
+					$options['objet'] = $identifiant['type'];
+					$options['id_objet'] = $identifiant['id'];
+				} else {
+					$options['page'] = $identifiant['id'];
+				}
 			}
 
-			// Identification de l'objet concerné par la suppression : noisette, page ou objet d'un type donné
-			$objet['id'] = $element[1];
-			if (count($element) > 2) {
-				$objet['type'] = $element[2];
+			// Verification des autorisations
+			if (!autoriser('configurerpage', 'noizetier', '', 0, $options)) {
+				include_spip('inc/minipres');
+				echo minipres();
+				exit();
 			}
 
 			// Suppression des noisettes concernées. On vérifie la sécurité des id numériques.
-			if ((($contexte == 'noisette') and intval($objet['id']))
-			or (($contexte != 'noisette')
-				and (!isset($objet['type']) or (isset($objet['type']) and intval($objet['id']))))) {
-				supprimer_noisettes($contexte, $objet, $bloc);
-			}
+			supprimer_noisettes($contexte, $identifiant, $bloc);
 		}
 	}
 }
@@ -88,7 +110,7 @@ function action_supprimer_noisettes_dist() {
  * 		- 'noisette' : suppression d'une noisette identifiée par son id
  * 		- 'bloc'     : suppression de toutes les noisettes d'un bloc d'une page ou d'un objet associé à une page
  * 		- 'page'     : suppression de toutes les noisettes d'une page ou d'un objet associé à une page
- * @param array		$objet
+ * @param array		$identifiant
  * 		Tableau contenant les identifiants de l'objet concerné par la suppression:
  * 		- 'id'   : identifiant de la noisette (id_noisette), de la page (type) ou de l'objet (id_objet)
  * 		- 'type' : type d'objet si l'index existe
@@ -97,29 +119,31 @@ function action_supprimer_noisettes_dist() {
  *
  * return void
  */
-function supprimer_noisettes($contexte, $objet, $bloc) {
+function supprimer_noisettes($contexte, $identifiant, $bloc) {
 
 	$where = array();
 	if ($contexte == 'noisette') {
 		// Suppression d'une noisette
-		$where[] = 'id_noisette=' . intval($objet['id']);
-		$invalideur = "id='noisette/{$objet['id']}'";
+		$where[] = 'id_noisette=' . intval($identifiant['id']);
+		$invalideur = "id='noisette/{$identifiant['id']}'";
 	} else {
-		if (isset($objet['type'])) {
+		if ($identifiant['type']) {
 			// Suppression des noisettes d'un objet d'un type donnée
-			$where[] = 'objet=' . sql_quote($objet['type']);
-			$where[] = 'id_objet=' . intval($objet['id']);
-			$invalideur = "id='{$objet['type']}/{$objet['id']}'";
+			$where[] = 'objet=' . sql_quote($identifiant['type']);
+			$where[] = 'id_objet=' . intval($identifiant['id']);
+			$invalideur = "id='{$identifiant['type']}/{$identifiant['id']}'";
 		} else {
 			// Suppression des noisettes d'une page.
 			// Il faut tenir compte du cas où la page est une composition auquel cas le type et la
 			// composition sont insérées séparément dans la table spip_noisettes.
-			$page = explode('-', $objet['id'], 2);
+			$page = explode('-', $identifiant['id'], 2);
 			$where[] = 'type=' . sql_quote($page[0]);
 			if (isset($page[1])) {
 				$where[] = 'composition=' . sql_quote($page[1]);
+			} else {
+				$where[] = 'composition=' . sql_quote('');
 			}
-			$invalideur = "id='page/{$objet['id']}'";
+			$invalideur = "id='page/{$identifiant['id']}'";
 		}
 		if ($contexte == 'bloc') {
 			// Limitation à un bloc donné

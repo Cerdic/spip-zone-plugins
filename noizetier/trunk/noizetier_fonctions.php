@@ -225,7 +225,7 @@ function noizetier_noisette_ajax($noisette) {
 }
 
 /**
- * Ajoute une noisette à un bloc d'une page ou d'un contenu.
+ * Ajoute, en dernier rang, une noisette à un bloc d'une page ou d'un contenu.
  *
  * @param string       $noisette
  * 		Nom de la noisette à ajouter.
@@ -243,50 +243,44 @@ function noizetier_noisette_ajouter($noisette, $page, $bloc) {
 	// Initialisation de la valeur de sortie.
 	$id_noisette = 0;
 
-	if (is_array($page)) {
-		$identifiant['objet'] = $page['objet'];
-		$identifiant['id_objet'] = $page['id_objet'];
-		$identifiant['page'] = '';
-	}
-	else {
-		$identifiant['page'] = $page;
-		$identifiant['objet'] = '';
-		$identifiant['id_objet'] = 0;
-	}
-
-	if (autoriser('configurerpage', 'noizetier', 0, '', $identifiant)
-	and $noisette) {
+	if ($noisette) {
 		include_spip('inc/saisies');
 		$configuration = noizetier_noisette_informer($noisette, false);
 		$parametres = saisies_lister_valeurs_defaut($configuration['parametres']);
 
-		// On construit le where pour savoir quelles noisettes chercher
-		$where = array();
-		if ($identifiant['page']) {
-			$where[] = 'type=' . sql_quote(noizetier_page_type($identifiant['page']));
-			$where[] = 'composition=' . sql_quote(noizetier_page_composition($identifiant['page']));
+		// On initialise la description de la noisette à ajouter
+		$description = array(
+			'type'        => '',
+			'composition' => '',
+			'objet'       => '',
+			'id_objet'    => 0,
+			'bloc'        => $bloc,
+			'noisette'    => $noisette,
+			'parametres'  => serialize($parametres)
+		);
+
+		// On construit le where pour savoir quelles noisettes chercher et on complète
+		// la description avec l'identifiant de la page ou de l'objet.
+		$where = array('bloc=' . sql_quote($bloc));
+		if (is_array($page)) {
+			$description['objet'] = $page['objet'];
+			$description['id_objet'] = $page['id_objet'];
+			$where[] = 'objet=' . sql_quote($description['objet']);
+			$where[] = 'id_objet=' . intval($description['id_objet']);
 		}
 		else {
-			$where[] = 'objet=' . sql_quote($identifiant['objet']);
-			$where[] = 'id_objet=' . intval($identifiant['id_objet']);
+			$description['type'] = noizetier_page_type($page);
+			$description['composition'] = noizetier_page_composition($page);
+			$where[] = 'type=' . sql_quote($description['type']);
+			$where[] = 'composition=' . sql_quote($description['composition']);
 		}
-		$where[] = 'bloc=' . sql_quote($bloc);
 
 		// La noisette est ajoutée en fin de liste : on cherche donc le dernier rang utilisé et on se
-		// positionne au rang suivant.
+		// positionne au rang suivant et on finalise la description de la noisette
 		$rang = intval(sql_getfetsel('max(rang)', 'spip_noisettes', $where)) + 1;
+		$description['rang'] = $rang;
 
-		if ($id_noisette = sql_insertq(
-			'spip_noisettes',
-			array(
-				'type' => noizetier_page_type($identifiant['page']),
-				'composition' => noizetier_page_composition($identifiant['page']),
-				'objet' => $identifiant['objet'],
-				'id_objet' => $identifiant['id_objet'],
-				'bloc' => $bloc,
-				'noisette' => $noisette,
-				'rang' => $rang,
-				'parametres' => serialize($parametres)))) {
+		if ($id_noisette = sql_insertq('spip_noisettes', $description)) {
 			// On invalide le cache
 			include_spip('inc/invalideur');
 			suivre_invalideur("id='noisette/$id_noisette'");
@@ -294,6 +288,104 @@ function noizetier_noisette_ajouter($noisette, $page, $bloc) {
 	}
 
 	return $id_noisette;
+}
+
+
+
+/**
+ * Réordonne les noisettes d'un bloc d'une page ou d'un objet.
+ * L'ordre est renvoyé pour l'ensemble des noisettes du bloc.
+ *
+ * @param array         $ordre
+ *
+ * @return bool
+ */
+function noizetier_noisette_ranger($ordre) {
+
+	if (sql_preferer_transaction()) {
+		sql_demarrer_transaction();
+	}
+
+	// On modifie le rang de chaque noisette en suivant l'ordre du tableau.
+	foreach ($ordre as $_cle => $_id_noisette) {
+		$modification = array('rang' => $_cle + 1);
+		$where = array('id_noisette=' . intval($_id_noisette));
+		sql_updateq('spip_noisettes', $modification, $where);
+	}
+
+	if (sql_preferer_transaction()) {
+		sql_terminer_transaction();
+	}
+
+	return true;
+}
+
+
+/**
+ * Déplace d'un rang, vers le haut ou vers le bas, une noisette au sein d'un bloc.
+ * Le déplacement se fait en mode rouleau.
+ *
+ * @param int    $id_noisette
+ * @param string $sens
+ * @param array  $noisette
+ *
+ * @return boolean
+ */
+function noizetier_noisette_deplacer($id_noisette, $sens, $noisette) {
+
+	$retour = false;
+
+	if (in_array($sens, array('bas', 'haut')) and intval($id_noisette)) {
+		// On récupère l'ordre actuel des noisettes du bloc
+		$where = array(
+			'type=' . sql_quote($noisette['type']),
+			'composition=' . sql_quote($noisette['composition']),
+			'objet=' . sql_quote($noisette['objet']),
+			'id_objet=' . intval($noisette['id_objet']),
+			'bloc=' . sql_quote($noisette['bloc']),
+		);
+		$ordre = sql_allfetsel('id_noisette', 'spip_noisettes', $where, '', 'rang');
+		$ordre = array_map('intval', array_column($ordre, 'id_noisette'));
+
+		// Si il y a plus d'une noisette ans le bloc et que la noisette appartient bien au bloc.
+		if (count($ordre) > 1) {
+			// Mise à jour de l'ordre en fonction de la demande.
+			$index_noisette = array_search($id_noisette, $ordre);
+			$index_max = count($ordre) - 1;
+			if ($sens == 'bas') {
+				if ($index_noisette < $index_max) {
+					// La noisette peut être échangée avec la suivante
+					$id_destination = $ordre[$index_noisette + 1];
+					$ordre[$index_noisette + 1] = $id_noisette;
+					$ordre[$index_noisette] = $id_destination;
+				} else {
+					// La noisette passe en début de liste
+					unset($ordre[$index_noisette]);
+					array_unshift($ordre, $id_noisette);
+				}
+			} elseif ($sens == 'haut') {
+				if ($index_noisette > 0) {
+					// La noisette peut être échangée avec la précédente
+					$id_destination = $ordre[$index_noisette - 1];
+					$ordre[$index_noisette - 1] = $id_noisette;
+					$ordre[$index_noisette] = $id_destination;
+				} else {
+					// La noisette passe en fin de liste
+					array_shift($ordre);
+					$ordre[] = $id_noisette;
+				}
+			}
+
+			// On appelle la fonction de mise à jour du nouvel ordre
+			noizetier_noisette_ranger($ordre);
+
+			// On invalide le cache
+			include_spip('inc/invalideur');
+			suivre_invalideur("id='noisette/$id_noisette'");
+		}
+	}
+
+	return $retour;
 }
 
 

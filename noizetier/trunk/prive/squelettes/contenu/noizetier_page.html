@@ -31,7 +31,9 @@
 	<//B_si_page>
 	#BOITE_FERMER
 
-	<div class="ajax">#FORMULAIRE_LISTER_NOISETTES_PAGE{#ENV{page,#ARRAY{objet,#OBJET,id_objet,#ID_OBJET}}, #ENV{bloc}}</div>
+	#SET{blocs, #ENV{page, #OBJET}|noizetier_page_lister_blocs}
+	#SET{bloc_affiche, #ENV{bloc}|sinon{#GET{blocs}|reset}}
+	<div class="ajax">#FORMULAIRE_LISTER_NOISETTES_PAGE{#ENV{page,#ARRAY{objet,#OBJET,id_objet,#ID_OBJET}}, #GET{bloc_affiche}}</div>
 
 	[(#REM) <!-- Liste des noisettes disponibles --> ]
 	#SET{titre,#VAL{noizetier:noisettes_disponibles}|_T}

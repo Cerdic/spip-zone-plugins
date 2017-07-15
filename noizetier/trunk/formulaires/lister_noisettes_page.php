@@ -20,21 +20,16 @@ function formulaires_lister_noisettes_page_charger_dist($page, $bloc) {
 
 
 function formulaires_lister_noisettes_page_traiter_dist($page, $bloc) {
-	if (_request('cancel')) {
-		return array('message_erreur' => _T('noizetier:operation_annulee'));
-	}
 
-	if (!autoriser('configurer', 'noizetier')) {
-		return array('message_erreur' => _T('noizetier:probleme_droits'));
-	}
-	
+	$retour = array();
+
 	$ordre = _request('ordre');
-	if (_request('save') && $ordre) {
-		include_spip('noizetier_fonctions');
-		if (noizetier_trier_noisette($page, $ordre)) {
-			return array('message_ok' => _T('info_modification_enregistree'));
-		}
+	include_spip('noizetier_fonctions');
+	if (noizetier_noisette_ranger($ordre, $page, $bloc)) {
+		$retour['message_ok'] = _T('info_modification_enregistree');
+	} else {
+		$retour['message_erreur'] = _T('noizetier:erreur_mise_a_jour');
 	}
 
-	return array('message_erreur' => _T('noizetier:erreur_mise_a_jour'));
+	return $retour;
 }
