@@ -15,7 +15,7 @@
 				<label for="squelette"><:multidomaines:label_squelette:></label>
 				<input type="text" name="squelette" class="text" id="squelette" value="#ENV{squelette}" />
 			</li>
-		<BOUCLE_multiracine(RUBRIQUES){racine}{tous}>
+		<BOUCLE_multiracine(RUBRIQUES){id_parent=#EVAL{_MULTIDOMAINE_RACINE}|sinon{0}}{tous}>
 			<li class="fieldset">
 				<fieldset><legend>#TITRE</legend>
 				<ul>
