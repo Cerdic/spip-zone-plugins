@@ -1,8 +1,8 @@
 #SET{id_evenement,#ARRAY}
 #SET{id_article,#ARRAY}
 <BOUCLE_liste_evt(EVENEMENTS){id_evenement?}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}{where?}{statut?}{recherche?}{inscription=1}>
-    #SET{id_evenement,#GET{id_evenement}|push{#ID_EVENEMENT}}
-    #SET{id_article,#GET{id_article}|push{#ID_ARTICLE}}    
+		#SET{id_evenement,#GET{id_evenement}|push{#ID_EVENEMENT}}
+		#SET{id_article,#GET{id_article}|push{#ID_ARTICLE}}
 </BOUCLE_liste_evt>
 
 
