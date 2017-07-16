@@ -1,12 +1,12 @@
 <?php
 /**
- * Définit les autorisations du plugin Référencement
+ * Définit les autorisations du plugin SEOptimiz'R
  *
- * @plugin     referencement
- * @copyright  2014
+ * @plugin     seoptimizr
+ * @copyright  2014 - 2017
  * @author     Loiseau2nuit
  * @licence    GNU/GPL
- * @package    SPIP\srp\Autorisations
+ * @package    SPIP\seoptimizr\Autorisations
  */
 
 if( !defined('_ECRIRE_INC_VERSION') ){
@@ -18,7 +18,7 @@ if( !defined('_ECRIRE_INC_VERSION') ){
  * Fonction d'appel pour le pipeline
  * @pipeline autoriser
  */
-function srp_autoriser() { }
+function seoptimizr_autoriser() { }
 
 /**
  * Autorisation pour affichage dans le menu
@@ -30,6 +30,6 @@ function srp_autoriser() { }
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
  **/
-function autoriser_srp_menu_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_seoptimizr_menu_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo';
 }
