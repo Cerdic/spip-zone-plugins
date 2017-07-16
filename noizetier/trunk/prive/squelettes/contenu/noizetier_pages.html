@@ -6,8 +6,8 @@
 <p><:noizetier:editer_noizetier_explication:></p>
 <ul class="liste-items liste-pages noizetier-liste-pages">
 <BOUCLE_pages(NOIZETIER_PAGES) {est_page_objet?}{par type, composition}>
-	<li class="item page[ virtuelle"(#EST_VIRTUELLE|=={oui}|oui)]">
-		<div[ class="composition"(#COMPOSITION|oui)]>
+	<li class="item page[(#EST_VIRTUELLE|=={oui}|oui) virtuelle]">
+		<div[(#COMPOSITION|oui) class="composition"]>
 			[(#REM) Informations de base sur la page ]
 			<div class="resume">
 				[(#REM) <!-- Inutile d'utiliser l'autorisation configurerpage car
@@ -65,6 +65,7 @@
 
 [(#REM) Affichage ou effacement des boutons d'actions de chaque page ]
 <script type="text/javascript">
+/*<!\[CDATA\[*/
 	$(function(){
 		$('.item.page .edition').hide();
 		$('.item.page')
@@ -77,4 +78,5 @@
 				}
 			);
 	});
+/*\]\]>*/
 </script>

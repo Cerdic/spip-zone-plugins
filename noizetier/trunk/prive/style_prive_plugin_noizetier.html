@@ -16,7 +16,7 @@
 #HTTP_HEADER{Vary: Accept-Encoding}
 
 .formulaire_editer_noisette li.fieldset {margin-left:10px; margin-right:10px; border-left: solid 1px #CCC; border-right: solid 1px #CCC; border-bottom: solid 1px #CCC;}
-ul.liste-noisettes li.noisette {padding-left: 30px; background-repeat: no-repeat; background-position: left 9px;}
+ul.liste-noisettes li.noisette {padding-left: 30px; background-repeat: no-repeat; background-position: left 9px; min-height: 24px;}
 ul.bloc li.noisette {min-height:36px;}
 ul.liste-noisettes .icone {width:36px; height:36px; padding:0; margin-left: 10px;}
 ul.liste-noisettes .icone a {width:36px; height:36px; padding:0;}
@@ -50,8 +50,7 @@ ul.noizetier-liste-pages li.page .edition {
 	position: absolute;
 	right: 0;
 	top: .6925em;
-	text-align: right;
-}
+	text-align: right;}
 ul.noizetier-liste-pages li.page .edition a {margin-left: 2px;}
 ul.noizetier-liste-pages li.page.virtuelle {
 	background-image:url(#CHEMIN_IMAGE{fond-page_virtuelle.png}) !important;
@@ -67,10 +66,36 @@ ul.noizetier-liste-pages li.page .composition .icone {left: 30px;}
 .infos .numero p#identifiant {font-size: 1.2em;}
 .infos p.explication {margin-top: 0.5em;}
 
+/* -- Liste des noisettes incluses dans un bloc */
+ul.liste-noisettes-bloc li.noisette {padding-left: 30px; padding-right: 120px; position:relative; min-height: 36px;}
+ul.liste-noisettes-bloc li.noisette .resume .icone {
+	position: absolute;
+	margin: 0;
+	top: .6925em;
+	left: 0;
+	width: 24px;
+	height: 24px;
+	overflow: hidden;}
+ul.liste-noisettes-bloc li.noisette .edition {
+	position: absolute;
+	right: 0;
+	top: .6925em;
+	text-align: right;}
+ul.liste-noisettes-bloc li.noisette .edition a {margin-left: 2px;}
+ul.liste-noisettes-bloc li.noisette .edition a:not(.visible) {display: none;}
+
+
 /* Styles du formulaire d'édition d'une page (editer_page) */
 /* -- choix et aperçu de l'icone */
 .formulaire_editer_page div#aide_choix_icone,
 .formulaire_editer_page div#suggestions_icones {display: none;}
 .formulaire_editer_page div#afficher_suggestions,
 .formulaire_editer_page div#bouton_suggestion {float: right;}
-.formulaire_editer_page .suggestion_icone {float:left; width:75px; text-align:center; height:75px; font-size:10px; line-height:12px; cursor:pointer;}
+.formulaire_editer_page .suggestion_icone {
+	float:left;
+	width:75px;
+	text-align:center;
+	height:75px;
+	font-size:10px;
+	line-height:12px;
+	cursor:pointer;}
