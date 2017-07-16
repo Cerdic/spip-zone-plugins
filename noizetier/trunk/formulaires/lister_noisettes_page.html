@@ -69,38 +69,37 @@
 			|icone_verticale{<:noizetier:formulaire_supprimer_noisettes_bloc:>,noizetier-24,'del',#LANG_LEFT})]
 	#BOITE_FERMER
 
-	<script type="text/javascript">
-	/*<!\[CDATA\[*/
-		[(#REM) Autoriser le tri des noisettes du bloc ]
-		jQuery('ul.liste-noisettes-bloc').sortable({
-			items: 'li.noisette',
-			axis: 'y',
-			opacity: 0.5,
-			connectWith: 'ul.liste-noisettes-bloc',
-			forcePlaceholderSize: true,
-			cursor: 'move',
-			update: function(event, ui) {
-				form = $(this).closest('form');
-				form.submit();
-			}
-		});
-
-		[(#REM) Affichage ou effacement des boutons d'actions de chaque page ]
-		$(function(){
-			$('.item.noisette .edition a:not(.visible)').hide();
-			$('.item.noisette')
-				.hover(
-					function(){
-						$(this).find('.edition a').show();
-					},
-					function(){
-						$(this).find('.edition a:not(.visible)').hide();
-					}
-				);
-		});
-	/*\]\]>*/
-	</script>
-
-	[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	[(#REM) <!-- ajouter les saisies supplementaires : extra et autre, a cet endroit -->]
 	<!--extra-->
 </form>
+<script type="text/javascript">
+/*<!\[CDATA\[*/
+	[(#REM) <!-- Autoriser le tri des noisettes du bloc -->]
+	jQuery('ul.liste-noisettes-bloc').sortable({
+		items: 'li.noisette',
+		axis: 'y',
+		opacity: 0.5,
+		connectWith: 'ul.liste-noisettes-bloc',
+		forcePlaceholderSize: true,
+		cursor: 'move',
+		update: function(event, ui) {
+			form = $(this).closest('form');
+			form.submit();
+		}
+	});
+
+	[(#REM) <!-- Affichage ou effacement des boutons d'actions de chaque page -->]
+	$(function(){
+		$('.item.noisette .edition a:not(.visible)').hide();
+		$('.item.noisette')
+			.hover(
+				function(){
+					$(this).find('.edition a').show();
+				},
+				function(){
+					$(this).find('.edition a:not(.visible)').hide();
+				}
+			);
+	});
+/*\]\]>*/
+</script>
