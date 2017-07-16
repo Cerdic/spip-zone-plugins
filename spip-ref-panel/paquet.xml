@@ -1,51 +1,30 @@
 <paquet
-	prefix="seoptimizr"
-	categorie="statistique"
-	version="0.2.0"
-	etat="experimental"
-	compatibilite="[3.0.0;3.*.*]"
-	logo="images/seoptimizr-24.png"
-	schema="1.0"
-	documentation=""
+    prefix="seoptimizr"
+    categorie="statistique"
+    version="0.2.0"
+    etat="experimental"
+    compatibilite="[3.0.0;3.*.*]"
+    logo="images/seoptimizr-24.png"
+    documentation=""
+    schema="1.0"
 >
 
-	<nom>SEOptimiz'R pour SPIP</nom>
-    <slogan>Prenez en main le référencement de votre site SPIP</slogan>
-    <description>
-        !!! HAUTEMENT EXPERIMENTAL !!!
-        Prenez en main le référencement de votre site SPIP (version 3 minimum) avec ce plugin
-        
-        A l'activation de ce plugin :
+    <nom>SEOptimiz'R pour SPIP</nom>
+    <auteur lien="http://loiseau.2nu.it/">Loiseau2nuit</auteur>
+    
+    <pipeline nom="declarer_champs_extras" inclure="base/seoptimizr_cextras.php" />
 
-        - il télécharge (meta plugin) et active plusieurs autres plugins SPIP reconnus d'utilité pour l'amélioration et/ou le pilotage du référencement
-
-        - offre un jeu de squelettes 'page' ( <code>spip.php?page=panel-articles ; spip.php?page=panel-rubriques ; spip.php?page=panel-mots</code> ) permettant la modifications de masse (grâce à crayons) sur les informations les plus courament manipulées par les référenceurs (Titles, metas, urls, Titrailles, ...)
-
-        - il ajoute à la base de données des champs extras techniques pour pouvoir controller le référencement de CHAQUE objet éditorial de type rubriques, articles, mots clés (pour l'instant !)
-        
-        - il proposera (peut-être à terme) d'appliquer des reset HTML spécifiques sur certains objets 
-        (ex: reset mots-cles : https://codepen.io/loiseau2nuit/pen/aFcnL )
-
-        pré-requis :
-        
-        - dans l'immédiat, devrait logiquement fonctionner tel quel sur tout type de squelettes Z 
-
-        - Pour tout autre type de squelettes (dist ou ...) des modifications sont à prévoir dans votre code pour que le plugin fonctionne efficacement ! (en savoir + bientôt)
-    </description>
-	<auteur lien="http://loiseau.2nu.it/">Loiseau2nuit</auteur>
-	<lib nom="jquery.table-filter-master" lien="https://github.com/hail2u/jquery.table-filter/archive/master.zip" />
-
-	<onglet nom="seoptimizr" titre="seoptimizr:seoptimiz_it" parent="menu_publication" icone="images/seoptimizr-24.png" action="seoptimizr"/>
-	<menu nom="seoptimizr" titre="seoptimizr:seoptimiz_it" parent="menu_publication" icone="images/seoptimizr-16.png" action="seoptimizr"/>
+    <onglet nom="seoptimizr" titre="seoptimizr:seoptimiz_it" parent="menu_publication" icone="images/seoptimizr-24.png" action="seoptimizr"/>
+    <menu nom="seoptimizr" titre="seoptimizr:seoptimiz_it" parent="menu_publication" icone="images/seoptimizr-16.png" action="seoptimizr"/>
 
     <chemin path="squelettes" />
+    
+    <lib nom="jquery.table-filter-master" lien="https://github.com/hail2u/jquery.table-filter/archive/master.zip" />
+
     <necessite nom="saisies" compatibilite="[1.0.0;[" />
     <necessite nom="cextras" compatibilite="[2.0.0;[" />
     <necessite nom="crayons" compatibilite="[1.0.0;[" />
     <necessite nom="metas" compatibilite="[1.4.0;[" />
     <necessite nom="googleanalytics" compatibilite="[0.1.0;[" />
     <necessite nom="piwik" compatibilite="[0.1.0;[" />
-    <lib nom="tabFilter" lien="https://github.com/hail2u/jquery.table-filter/archive/master.zip" />	
-
-    <pipeline nom="declarer_champs_extras" inclure="base/seoptimizr_cextras.php" />
 </paquet>
