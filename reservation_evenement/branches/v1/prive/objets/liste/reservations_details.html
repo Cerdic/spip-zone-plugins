@@ -23,7 +23,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<BOUCLE_liste_reservations_details(RESERVATIONS_DETAILS){id_reservation?}{id_evenement ?IN #ENV{id_evenement}}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num descriptif},#GET{defaut_tri}}{par descriptif}{pagination #ENV{nb,10}}>
+				<BOUCLE_liste_reservations_details(RESERVATIONS_DETAILS reservations){id_reservation?}{id_evenement ?IN #ENV{id_evenement}}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num descriptif},#GET{defaut_tri}}{par descriptif}{pagination #ENV{nb,10}}>
 					<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 						<td class='picto'>[(#CHEMIN_IMAGE{reservations_detail-16.png}|balise_img)]</td>
 						<td class='statut'>[(#STATUT|puce_statut{reservations_detail,#ID_RESERVATIONS_DETAIL})]</td>
@@ -42,7 +42,6 @@
 									<span>(#MONTANT_PAYE|appliquer_filtre{prix_formater})</span>
 								</div>]
 						</td>
-						<BOUCLE_reservation(RESERVATIONS){id_reservation}{tout}>
 						<td class='reservation'>
 							<a href="[(#ID_RESERVATION|generer_url_entite{reservation})]" title="<:reservation:label_reference:> #REFERENCE">
 								#REFERENCE
@@ -54,7 +53,6 @@
 							</BOUCLE_auteur>
 								<a href="#URL_ECRIRE{client,email=#EMAIL}" title="#NOM">#NOM</a> - <a href="mailto:#EMAIL">#EMAIL</a>
 							<//B_auteur>
-						</BOUCLE_reservation>
 						</td>
 						<td class='quantite'>#QUANTITE</td>
 						<td class='id'>[(#AUTORISER{modifier,reservations_detail,#ID_RESERVATIONS_DETAIL}|?{ <a href="[(#URL_ECRIRE{reservations_detail_edit,id_reservations_detail=#ID_RESERVATIONS_DETAIL})]">#ID_RESERVATIONS_DETAIL</a>,
