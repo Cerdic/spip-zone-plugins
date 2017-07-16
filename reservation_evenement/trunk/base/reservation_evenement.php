@@ -92,8 +92,10 @@ if (! defined ( '_ECRIRE_INC_VERSION' ))
 				"nom" => 8
 			),
 			'tables_jointures' => array (
-				'id_reservation',
-				'id_auteur'
+				'spip_auteurs',
+			),
+			'join' => array (
+				'id_auteur' => 'id_auteur',
 			),
 			'statut_textes_instituer' => array (
 				'attente' => 'reservation:texte_statut_attente',
