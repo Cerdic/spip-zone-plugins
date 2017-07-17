@@ -400,6 +400,7 @@ $id_reservation = sql_getfetsel('id_reservation', 'spip_reservations', 'referenc
 
 	}
 
+	// Ajoute un bouton de paimeent pour le réservations en cours.
 	if ($fond == 'prive/squelettes/navigation/reservation') {
 		if ($statut = sql_getfetsel('statut',
 					'spip_reservations',

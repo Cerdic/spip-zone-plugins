@@ -1,7 +1,6 @@
 #SET{config,#CONFIG{reservation_bank}}
-
 #SET{prestataire_defaut, #GET{config}|table_valeur{presta_defaut}}
-#SET{prestataires_simples_actives,#REM|rb_prestataires_simples_actives}
+#SET{prestataires_simples_actives,#ID_RESERVATION|rb_prestataires_simples_actives}
 [(#BOITE_OUVRIR{})]
 <p><strong><:reservation_bank:label_choisir_mode_paiement:></strong></p>
 <BOUCLE_teste(CONDITION){si #GET{prestataire_defaut}|oui}>

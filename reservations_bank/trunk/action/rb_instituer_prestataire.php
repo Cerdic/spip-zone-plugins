@@ -23,6 +23,10 @@ if (!defined("_ECRIRE_INC_VERSION"))
 
 		$response['autorisation_id'] = 'wait';
 		$config['presta'] = $presta;
+		$response['autorisation_id'] = 'wait';
+		if ($presta == 'gratuit') {
+			$response['autorisation_id'] = 'ok';
+		}
 
 		bank_simple_call_response($config, $response);
 
