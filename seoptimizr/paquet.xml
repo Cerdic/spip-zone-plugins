@@ -1,30 +1,30 @@
 <paquet
-    prefix="seoptimizr"
-    categorie="statistique"
-    version="0.2.0"
-    etat="experimental"
-    compatibilite="[3.0.0;3.*.*]"
-    logo="images/seoptimizr-24.png"
-    documentation=""
-    schema="1.0"
+	prefix="seoptimizr"
+	categorie="statistique"
+	version="0.2.0"
+	etat="experimental"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="images/seoptimizr-24.png"
+	documentation=""
+	schema="1.0"
 >
 
-    <nom>SEOptimiz'R pour SPIP</nom>
-    <auteur lien="http://loiseau.2nu.it/">Loiseau2nuit</auteur>
-    
-    <pipeline nom="declarer_champs_extras" inclure="base/seoptimizr_cextras.php" />
+	<nom>SEOptimiz'R pour SPIP</nom>
+	<auteur lien="http://loiseau.2nu.it/">Loiseau2nuit</auteur>
 
-    <onglet nom="seoptimizr" titre="seoptimizr:seoptimiz_it" parent="menu_publication" icone="images/seoptimizr-24.png" action="seoptimizr"/>
-    <menu nom="seoptimizr" titre="seoptimizr:seoptimiz_it" parent="menu_publication" icone="images/seoptimizr-16.png" action="seoptimizr"/>
+	<pipeline nom="declarer_champs_extras" inclure="base/seoptimizr_cextras.php" />
 
-    <chemin path="squelettes" />
-    
-    <lib nom="jquery.table-filter-master" lien="https://github.com/hail2u/jquery.table-filter/archive/master.zip" />
+	<onglet nom="seoptimizr" titre="seoptimizr:seoptimiz_it" parent="menu_publication" icone="images/seoptimizr-24.png" action="seoptimizr"/>
+	<menu nom="seoptimizr" titre="seoptimizr:seoptimiz_it" parent="menu_publication" icone="images/seoptimizr-16.png" action="seoptimizr"/>
 
-    <necessite nom="saisies" compatibilite="[1.0.0;[" />
-    <necessite nom="cextras" compatibilite="[2.0.0;[" />
-    <necessite nom="crayons" compatibilite="[1.0.0;[" />
-    <necessite nom="metas" compatibilite="[1.4.0;[" />
-    <necessite nom="googleanalytics" compatibilite="[0.1.0;[" />
-    <necessite nom="piwik" compatibilite="[0.1.0;[" />
+	<chemin path="squelettes" />
+
+	<lib nom="jquery.table-filter-master" lien="https://github.com/hail2u/jquery.table-filter/archive/master.zip" />
+
+	<necessite nom="saisies" compatibilite="[1.0.0;[" />
+	<necessite nom="cextras" compatibilite="[2.0.0;[" />
+	<necessite nom="crayons" compatibilite="[1.0.0;[" />
+	<necessite nom="metas" compatibilite="[1.4.0;[" />
+	<necessite nom="googleanalytics" compatibilite="[0.1.0;[" />
+	<necessite nom="piwik" compatibilite="[0.1.0;[" />
 </paquet>
