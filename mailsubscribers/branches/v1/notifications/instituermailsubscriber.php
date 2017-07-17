@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 // Fonction appelee par divers pipelines
-// http://doc.spip.org/@notifications_instituerarticle_dist
+// https://code.spip.net/@notifications_instituerarticle_dist
 function notifications_instituermailsubscriber_dist($quoi, $id_mailsubscriber, $options) {
 
 	// ne devrait jamais se produire
