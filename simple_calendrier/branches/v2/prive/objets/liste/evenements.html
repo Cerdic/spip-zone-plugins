@@ -17,7 +17,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_evt(EVENEMENTS){id_evenement?}{id_auteur?}{id_secteur?}{id_rubrique?}{id_mot?}{statut?}{where?}{tri #ENV{par, titre},#GET{defaut_tri}}{par date_debut, date_fin}{pagination 10}>
+	<BOUCLE_liste_evt(EVENEMENTS){id_evenement?}{id_auteur?}{id_secteur?}{id_rubrique?}{id_mot?}{statut?}{where?}{recherche?}{tri #ENV{par, titre},#GET{defaut_tri}}{par date_debut, date_fin}{pagination 10}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="statut">[(#STATUT|puce_statut{'evenement',#ID_EVENEMENT,#ID_RUBRIQUE})]</td>
 			<td class="titre principale">
