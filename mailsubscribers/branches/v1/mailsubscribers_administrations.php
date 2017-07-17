@@ -5,7 +5,9 @@
  * Licence GNU/GPL v3
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -290,4 +292,3 @@ function mailsubscribers_vider_tables($nom_meta_base_version) {
 	effacer_meta($nom_meta_base_version);
 }
 
-?>

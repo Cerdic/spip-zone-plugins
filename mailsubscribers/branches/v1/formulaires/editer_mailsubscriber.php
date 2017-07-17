@@ -5,7 +5,9 @@
  * Licence GNU/GPL v3
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/actions');
 include_spip('inc/mailsubscribers');
@@ -72,4 +74,3 @@ function formulaires_editer_mailsubscriber_traiter_dist($id_mailsubscriber='new'
 }
 
 
-?>

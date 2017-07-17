@@ -5,7 +5,9 @@
  * Licence GNU/GPL v3
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Declarer les champs postes et y integrer les valeurs par defaut
@@ -56,5 +58,3 @@ function formulaires_newsletter_unsubscribe_traiter_dist($listes=''){
 	return array('message_ok'=>_T('newsletter:unsubscribe_message_ok',array('email'=>"<b>$email</b>")),'editable'=>true);
 }
 
-
-?>

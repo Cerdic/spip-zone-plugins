@@ -5,18 +5,19 @@
  * Licence GNU/GPL v3
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Exporter la base au format CSV
  *
- * @param null|string $statut
+ * @param null|string $args
  */
-function action_mailsubscribers_export_dist($statut=null){
-	if (is_null($statut)){
+function action_mailsubscribers_export_dist($args = null){
+	if (is_null($args)){
 		$securiser_action = charger_fonction('securiser_action','inc');
-		$statut = $securiser_action();
+		$args = $securiser_action();
 	}
 
 	if (!autoriser('exporter','_mailsubscribers')){
@@ -25,13 +26,21 @@ function action_mailsubscribers_export_dist($statut=null){
 		exit;
 	}
 
+	$args = explode("-", $args);
+	$statut = $args[0];
+	$liste = (isset($args[1])) ? trim($args[1]) : false;
+
 	$where = array();
 	// '' ou 'all' pour tout exporter (sauf poubelle)
-	if (in_array($statut,array('','all')))
+	if (in_array($statut,array('','all'))) {
 		$where[] = "statut<>".sql_quote('poubelle');
-	else
+	} else {
 		$where[] = "statut=".sql_quote($statut);
+	}
 
+	if ($liste) {
+		$where[] = "listes LIKE '%".$liste."%'";
+	}
 
 	$entetes = array(
 		'email',

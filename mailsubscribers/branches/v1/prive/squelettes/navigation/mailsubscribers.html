@@ -20,9 +20,14 @@
 ]
 
 [(#PLUGIN{spip_bonux}|non)
-<p>Pour importer ou exporter les listes d'inscrits, installez le plugin <a href="https://plugins.spip.net/spip_bonux">SPIP-Bonux</a></p>
+<p>Pour importer ou exporter les listes d'inscrits, installez le plugin <a href="http://plugins.spip.net/spip_bonux">SPIP-Bonux</a></p>
 ]
 [(#PLUGIN{spip_bonux}|oui)
+
+[(#ENV{liste}|oui)
+[(#URL_ACTION_AUTEUR{mailsubscribers_export,valide-#ENV{liste}}|icone_horizontale{<:mailsubscriber:titre_export_mailsubscribers_liste_courante:>,mailsubscriber-24,export})]
+<hr />
+]
 [(#URL_ACTION_AUTEUR{mailsubscribers_export,valide}|icone_horizontale{<:mailsubscriber:titre_export_mailsubscribers:>,mailsubscriber-24,export})]
 [(#URL_ACTION_AUTEUR{mailsubscribers_export,all}|icone_horizontale{<:mailsubscriber:titre_export_mailsubscribers_all:>,mailsubscriber-24,export})]
 

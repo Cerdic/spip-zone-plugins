@@ -5,10 +5,12 @@
  * Licence GNU/GPL v3
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // Fonction appelee par divers pipelines
-// https://code.spip.net/@notifications_instituerarticle_dist
+// http://doc.spip.org/@notifications_instituerarticle_dist
 function notifications_instituermailsubscriber_dist($quoi, $id_mailsubscriber, $options) {
 
 	// ne devrait jamais se produire
@@ -69,4 +71,4 @@ function notifications_instituermailsubscriber_dist($quoi, $id_mailsubscriber, $
 	}
 }
 
-?>
+

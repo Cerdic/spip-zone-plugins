@@ -5,7 +5,9 @@
  * Licence GNU/GPL v3
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function mailsubscribers_taches_generales_cron($taches){
 	// a peu pres tous les jours mais en se decalant un peu
