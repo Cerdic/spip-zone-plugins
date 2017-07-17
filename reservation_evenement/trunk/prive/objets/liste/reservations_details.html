@@ -37,10 +37,12 @@
 									<span>#PRIX</span>
 								</div>]
 							[(#REM) Champ venant du plugin Réservation Bank]
+							[(#MONTANT_PAYE|>{0}|oui)
 							[<div class="champ contenu_montant_paye">
 									<label><:reservation_bank:montant_paye:></label>
 									<span>(#MONTANT_PAYE|appliquer_filtre{prix_formater})</span>
 								</div>]
+							]
 						</td>
 						<td class='reservation'>
 							<a href="[(#ID_RESERVATION|generer_url_entite{reservation})]" title="<:reservation:label_reference:> #REFERENCE">
