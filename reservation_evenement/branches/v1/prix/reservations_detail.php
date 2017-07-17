@@ -7,10 +7,11 @@
  * $prix_ht = $fonction_ht($id_objet, $ligne);
  */
 function prix_reservations_detail_ht($id_objet, $les_prix) {
-	if ($les_prix['prix_ht'] != '0.00') {
+	$prix_ht = 0;
+	if ($les_prix['prix_ht'] > '0.00') {
 		$prix_ht = $les_prix['prix_ht'];
 	}
-	else {
+	elseif($les_prix['prix'] > '0.00') {
 		$taxe = isset($les_prix['taxe']) ? $les_prix['taxe'] : 0;
 
 		if ($taxe > 0.00) {
@@ -25,21 +26,22 @@ function prix_reservations_detail_ht($id_objet, $les_prix) {
 
 // Le prix TTC
 function prix_reservations_detail_dist($id_reservations_detail) {
+	$prix = 0;
 	$les_prix = sql_fetsel('prix,prix_ht,taxe', 'spip_reservations_details', 'id_reservations_detail=' . $id_reservations_detail);
-
-	if ($les_prix['prix'] != '0.00')
+	if ($les_prix['prix'] >'0.00') {
 		$prix = $les_prix['prix'];
-		else {
-			$taxe = isset($les_prix['taxe']) ? $les_prix['taxe'] : 0;
+	}
+	elseif($les_prix['prix_ht'] > '0.00')  {
+		$taxe = isset($les_prix['taxe']) ? $les_prix['taxe'] : 0;
 
-			if ($taxe > 0.00) {
-				$prix = $les_prix['prix_ht'] + ($les_prix['prix_ht'] * $taxe);
-			}
-			else {
-				$prix = $les_prix['prix_ht'];
-			}
+		if ($taxe > 0.00) {
+			$prix = $les_prix['prix_ht'] + ($les_prix['prix_ht'] * $taxe);
 		}
-		return $prix;
+		else {
+			$prix = $les_prix['prix_ht'];
+		}
+	}
+	return $prix;
 }
 
 ?>
