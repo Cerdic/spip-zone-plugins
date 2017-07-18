@@ -44,25 +44,34 @@
 			[(#SAISIE{input, isbn,
 				label=<:livre:champ_isbn_label:>})]
 
-			[(#SAISIE{input, pages,
-				label=<:livre:champ_pages_label:>})]
+		</div>
+		
 
-			[(#SAISIE{input, reliure,
-				label=<:livre:champ_reliure_label:>,
-				explication=<:livre:champ_reliure_explication:> })]
+		<fieldset class="fermer">
+			<legend>Données techniques</legend>
+			<div class="editer-groupe">
+				[(#SAISIE{input, pages,
+					label=<:livre:champ_pages_label:>})]
 
-			[(#SAISIE{input, largeur,
-				label=<:livre:champ_largeur_label:>,
-				explication=<:livre:champ_largeur_explication:> })]
+				[(#SAISIE{input, reliure,
+					label=<:livre:champ_reliure_label:>,
+					explication=<:livre:champ_reliure_explication:> })]
 
-			[(#SAISIE{input, hauteur,
-				label=<:livre:champ_hauteur_label:>,
-				explication=<:livre:champ_hauteur_explication:> })]
+				[(#SAISIE{input, largeur,
+					label=<:livre:champ_largeur_label:>,
+					explication=<:livre:champ_largeur_explication:> })]
 
-			[(#SAISIE{input, poids,
-				label=<:livre:champ_poids_label:>,
-				explication=<:livre:champ_poids_explication:> })]
+				[(#SAISIE{input, hauteur,
+					label=<:livre:champ_hauteur_label:>,
+					explication=<:livre:champ_hauteur_explication:> })]
 
+				[(#SAISIE{input, poids,
+					label=<:livre:champ_poids_label:>,
+					explication=<:livre:champ_poids_explication:> })]
+			</div>
+		</fieldset>
+
+		<div class="editer-groupe">
 			[(#SAISIE{input, prix,
 				label=<:livre:champ_prix_label:>,
 				explication=<:livre:champ_prix_explication:> })]

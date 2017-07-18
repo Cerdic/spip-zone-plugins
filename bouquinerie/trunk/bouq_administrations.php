@@ -39,6 +39,11 @@ function bouq_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter',"TABLE spip_livres CHANGE  `ISBN` `ISBN` VARCHAR(20) NOT NULL DEFAULT ''")
 	);
 
+	/* revenir à une ecriture minuscule */
+	$maj['1.0.3'] = array(
+		array('sql_alter',"TABLE spip_livres CHANGE  `ISBN` `isbn` VARCHAR(20) NOT NULL DEFAULT ''")
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
