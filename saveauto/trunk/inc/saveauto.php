@@ -153,6 +153,7 @@ function inc_saveauto_dist($tables=array(), $options=array()) {
 								foreach ($rowdata as $champ=>$valeur) {
 									if ($valeur === NULL) {
 										$lesDonnees .= "NULL";
+									}
 									else {
 										$lesDonnees .= "'" . addslashes($valeur) . "'";
 									}
