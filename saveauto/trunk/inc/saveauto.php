@@ -151,7 +151,11 @@ function inc_saveauto_dist($tables=array(), $options=array()) {
 								$lesDonnees = "";
 								$j = 0;
 								foreach ($rowdata as $champ=>$valeur) {
-									$lesDonnees .= "'" . addslashes($valeur) . "'";
+									if ($valeur === NULL) {
+										$lesDonnees .= "NULL";
+									else {
+										$lesDonnees .= "'" . addslashes($valeur) . "'";
+									}
 									//on ajoute a la fin une virgule si necessaire
 									if ($j<$num_fields-1) $lesDonnees .= ", ";
 									$j++;
