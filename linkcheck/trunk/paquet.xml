@@ -1,7 +1,7 @@
 <paquet
 	prefix="linkcheck"
 	categorie="maintenance"
-	version="1.4.5"
+	version="1.4.6"
 	etat="stable"
 	compatibilite="[3.0.5;3.1.*]"
 	logo="prive/themes/spip/images/linkcheck-64.png"
@@ -15,6 +15,7 @@
 	<auteur>Benjamin Grapeloux</auteur>
 	<auteur lien="http://www.pyrat.net/">Jacques Pyrat</auteur>
 	<auteur lien="http://www.declic3000.com">Guillaume Wauquier</auteur>
+	<auteur lien="http://www.kent1.info">kent1</auteur>
 
 	<licence>GNU/GPL</licence>
 

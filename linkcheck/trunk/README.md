@@ -21,6 +21,13 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 
 ## Versions 1.4.x
 
+### Version 1.4.6 (2017-07-19)
+
+- Eviter de vérifier les certificats pour éviter de considérer des pages comme mortes lorsque le certificat est pourri ou mal configuré
+- Lorsque l'ajax est en erreur sur la page listant tous les liens, le relancer et pas juste planter
+- Simplifier la regexp mysql qui ne sert qu'à sortir les champs ayant potentiellement des liens (MySQL ne supportant pas UTF-8), par contre, autoriser les caractères UTF-8 coté PHP qui font partie de la séquence `\u00a1-\uffff`
+- Les extensions de domaines `.test`, `.example`, `.invalid` et `.localhost` sont réservées pour des domaines de test (cf [cette RFC2606](https://tools.ietf.org/html/rfc2606#section-2)), on ne les extrait pas.
+
 ### Version 1.4.5 (2017-07-10)
 
 - Permettre d'avoir `user:pass@` en début d'URL
