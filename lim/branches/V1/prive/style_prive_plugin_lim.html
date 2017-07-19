@@ -24,7 +24,13 @@
 
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
-.lim_icon { transition: color 0.5s ease; font-size:30px; line-height:0;}
+.lim_icon {
+	-webkit-transition: all .9s ease;
+	-moz-transition: 	all .9s ease;
+	-o-transition: 		all .9s ease;
+	transition: 		all .9s ease;
+	font-size:25px; 
+}
 .icon-on { color:[(#ENV{foncee})]; }
 .icon-off { color:#bebebe; }
 .formulaire_configurer_lim_logos .choix label { vertical-align:middle; }
@@ -32,7 +38,7 @@
 input[type=checkbox].lim_hidden {display:none; }
 .formulaire_configurer_lim_logos,
 .formulaire_configurer_lim_rubriques .pin				{ position:relative; top:10px; left:10px ;}
-.formulaire_configurer_lim_rubriques .secteur 			{ margin:0px 0 10px 0; padding:10px 5px 5px 5px; border:1px solid #ddd; border-radius:5px; }
+.formulaire_configurer_lim_rubriques .secteur 			{ margin:0px 0 10px 0; padding:10px 5px 5px 5px; border:1px solid #ddd; border-radius:5px; background-color:#fff; }
 .formulaire_configurer_lim_rubriques .sousrub			{ padding-left:15px; margin-bottom:15px; }
 .formulaire_configurer_lim_rubriques .sousrub .sousrub	{ border-left:1px dotted #aaa; }
 
