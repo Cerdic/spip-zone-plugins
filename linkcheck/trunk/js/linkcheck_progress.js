@@ -3,6 +3,7 @@ function linkcheck_verifier_liens(adresse){
 		dataType: 'json',
 		url: adresse,
 		success: function(msg){
+			console.log('ok');
 			$('#nb_lien_mort').text(msg["nb_lien_mort"]);
 			$('#nb_lien_malade').text(msg["nb_lien_malade"]);
 			$('#nb_lien_deplace').text(msg["nb_lien_deplace"]);
@@ -17,6 +18,10 @@ function linkcheck_verifier_liens(adresse){
 			} else {
 				linkcheck_verifier_liens(adresse)
 			}
+		},
+		error: function(msg){
+			console.log(msg);
+			linkcheck_verifier_liens(adresse)
 		}
 	});
 }
