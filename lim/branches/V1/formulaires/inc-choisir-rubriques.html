@@ -44,7 +44,7 @@
 <BOUCLE_titre_rubrique(RUBRIQUES){racine}{par num titre,titre}{tout}>
 	<div class='pin'><img src='#CHEMIN_IMAGE{rubrique-16.png}'></div>
 	<div class='secteur'>
-		<div class="tab rub">#TITRE</div>
+		<div class="tab rub"><a href="#URL_ECRIRE{rubrique,id_rubrique=#ID_RUBRIQUE}">#TITRE</a></div>
 		<BOUCLE_par_traduction1(DATA){source tableau,#GET{type}}{par cle}>
 			[(#INCLURE{fond=formulaires/inc-input-rub,env,name=#VALEUR}{#VALEUR=#ENV{#VALEUR}}{id_rubrique=#ID_RUBRIQUE}{secteur=oui})]
 		</BOUCLE_par_traduction1>
