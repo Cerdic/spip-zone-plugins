@@ -85,7 +85,7 @@ function linkcheck_lister_liens($champs) {
 	 * TODO : trouver une regexp mieux que cela et complète
 	 * @var string $classe_alpha
 	 */
-	$classe_alpha = 'a-zA-Z0-9âäéèëêïîôöùüû²';
+	$classe_alpha = 'a-zA-Z0-9\x{00a1}-\x{FFFF}';
 	$tab_expreg = array(
 		"('|\"| |\.|\->|\]|,|;|\s)(((((http|https|ftp|ftps)://)?www\.)|((http|https|ftp|ftps)://(?:\S+(?::\S*)?@)?.([".$classe_alpha."'\-]*\.)?))(['".$classe_alpha."'0-9\-\+]*\.)+[a-zA-Z0-9]{2,9}(?::\d{2,5})?(/['".$classe_alpha."=.?&~_\->\-\+\@\:\,/%#]*)?)('|\"| |\.|\->|\]|,|;|\s)?",
 		'(\->)([a-zA-Z]{3,10}[0-9]{1,})\]'

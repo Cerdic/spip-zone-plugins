@@ -46,7 +46,7 @@ function action_linkcheck_parcours_dist() {
 						continue;
 					}
 					$champs_a_traiter = is_array($tab_champs_a_traiter) ?
-						implode(',', array_keys($tab_champs_a_traiter)) : '*';
+					implode(',', array_keys($tab_champs_a_traiter)) : '*';
 
 					// Recommencer à l'endroit ou l'on s'est arrêté
 					$where  = $nom_champ_id.'>'.intval($dio);
@@ -54,12 +54,8 @@ function action_linkcheck_parcours_dist() {
 					// Ne sélectionner que les objets dans la base qui contiennent des URLs
 					// @todo Tester pour oracle et sqlite
 					if ($db_ok['type'] === 'mysql') {
-						/*$tab_expreg_mysql = array(
-							'(((https?|ftps?)://)|(((https?|ftps?)://)?[A-Za-z0-9\-]*\.))[A-Za-z0-9\-]+\.[a-zA-Z]{2,9}/?',
-							'->[^\]]\]');*/
-						$classe_alpha = 'a-zA-Z0-9âäéèëêïîôöùüû²';
 						$tab_expreg_mysql = array(
-							"(((http|https|ftp|ftps)://)?www\.)|((http|https|ftp|ftps)://(?:\S+(?::\S*)?@)?.([".$classe_alpha."\-]*\.)?))([".$classe_alpha."+\-]*\.)+[a-zA-Z0-9]{2,9}(?::\d{2,5})?(/[".$classe_alpha."=.?&~+\_\\@\:\,/%#\-\]*)?)(\'|\"| |\.|\->|\]|,|;|\s)/?",
+							"(((http|https|ftp|ftps)://)?www\.)|((http|https|ftp|ftps)://(.*\.)?))(.*\.)+[a-zA-Z0-9]{2,9}(/.*)?)(\'|\"| |\.|\->|\]|,|;|\s)/?",
 							'(\->)([a-zA-Z]{3,10}[0-9]{1,})\]'
 						);
 
@@ -78,7 +74,7 @@ function action_linkcheck_parcours_dist() {
 					// On réduit la recherche à une branche du site
 
 					$where .= ($branche > 0) ?
-						' AND (id_rubrique IN(' . implode(',', linkcheck_marmots($branche)) . '))' : '';
+					' AND (id_rubrique IN(' . implode(',', linkcheck_marmots($branche)) . '))' : '';
 
 					if (isset($info_table['statut'][0]['previsu'])) {
 						$statuts = explode(',', str_replace('/auteur', '', $info_table['statut'][0]['previsu']));
@@ -96,12 +92,12 @@ function action_linkcheck_parcours_dist() {
 					}
 
 					$sql = sql_allfetsel(
-						$nom_champ_id.','.$champs_a_traiter,
-						$table_sql,
-						$where,
-						'',
-						$nom_champ_id.' ASC'
-					);
+									$nom_champ_id.','.$champs_a_traiter,
+									$table_sql,
+									$where,
+									'',
+									$nom_champ_id.' ASC'
+									);
 
 					//pour chaque objet
 					$objet = objet_type($table_sql);
