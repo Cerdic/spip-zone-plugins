@@ -14,6 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_objet' => 'Ningún objeto',
 
 	// B
+	'bouton_annuler_title' => 'Cancelar la edición, borrar todos los cambios.',
+	'bouton_enregistrer_title' => 'Guardar los cambios.',
 	'bouton_lier' => 'Asociar este punto',
 	'bouton_supprimer_gis' => 'Eliminar definitivamente este punto',
 	'bouton_supprimer_lien' => 'Eliminar este enlace',
@@ -25,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_inf_geocoder' => 'Activar las funciones del geocoder (búsqueda desde una dirección, recuperación de una dirección partiendo de coordenadas).',
 	'cfg_inf_geolocaliser_user_html5' => 'Si el navegador del usuario lo permite, su ubicación geográfica aproximada se recupera para dar la posición por defecto durante la creación de un punto.',
 	'cfg_inf_google' => 'Esta API necesita crear una clave en <a href=\'@url@\'>el sitio de GoogleMaps</a>.', # MODIF
+	'cfg_inf_styles' => 'Muestra campos adicionales de estilo (color, opacidad, espesor ...)',
 	'cfg_lbl_activer_objets' => 'Activar la geolocalización en los contenidos:',
 	'cfg_lbl_adresse' => 'Mostrar los campos de dirección',
 	'cfg_lbl_api' => 'API de cartografía',
@@ -36,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_layer_defaut' => 'Capa por defecto',
 	'cfg_lbl_layers' => 'Capas propuestas',
 	'cfg_lbl_maptype' => 'Fondo cartográfico',
+	'cfg_lbl_styles' => 'Mostrar los campos de estilos',
 	'cfg_titre_gis' => 'configuración de GIS',
 
 	// E
@@ -46,9 +50,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_recherche_pas_resultats' => 'Ningún punto corresponde a la búsqueda.',
 	'erreur_xmlrpc_lat_lon' => 'La latitud y la longitud deben indicarse como parámetros',
 	'explication_api_forcee' => 'La API esta impuesta por otro plugin o esqueleto.',
+	'explication_color' => 'Color en formato CSS (valor por defecto: #0033FF)',
+	'explication_fillopacity' => 'Opacidadde relleno de 0 a 1 (valor por defecto: 0.2)',
 	'explication_import' => 'Importar un archivo en formato GPX o KML.',
 	'explication_layer_forcee' => 'La capa se ha impuesto por otro plugin o esqueleto. ',
 	'explication_maptype_force' => 'El fondo del mapa está impuesto por otro plugin o esqueleto.',
+	'explication_weight' => 'Grosor de la línea (valor por defecto: 5)',
 
 	// F
 	'formulaire_creer_gis' => 'Crear un punto geolocalizado:',
@@ -80,7 +87,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_adress' => 'Dirección',
 	'label_code_pays' => 'Código país',
 	'label_code_postal' => 'Código postal',
+	'label_color' => 'Color',
 	'label_departement' => 'Departamento',
+	'label_fillcolor' => 'Color de relleno',
+	'label_fillopacity' => 'Opacidad de relleno',
 	'label_import' => 'Importar',
 	'label_inserer_modele_articles' => 'asociados a los artículos',
 	'label_inserer_modele_articles_sites' => 'asociados a los artículos + sitios',
@@ -113,15 +123,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_inserer_modele_rubriques' => 'asociados a las secciones',
 	'label_inserer_modele_sites' => 'asociados a los sitios',
 	'label_inserer_modele_titre_carte' => 'Título del mapa',
+	'label_opacity' => 'Opacidad',
 	'label_pays' => 'País',
 	'label_rechercher_address' => 'Buscar una dirección',
 	'label_rechercher_point' => 'Buscar un punto',
 	'label_region' => 'Región',
 	'label_ville' => 'Ciudad',
+	'label_weight' => 'Espesor', # RELIRE
 	'lat' => 'Latitud',
 	'libelle_logo_gis' => 'LOGOTIPO DEL PUNTO',
 	'lien_ajouter_gis' => 'Añadir este punto',
 	'lon' => 'Longitud',
+
+	// O
+	'onglet_carte' => 'Mapa',
+	'onglet_liste' => 'Lista',
+
+	// P
+	'placeholder_geocoder' => 'Una dirección, una ciudad, un país, un lugar turístico...',
 
 	// T
 	'telecharger_gis' => 'Descargar en formato @format@',
@@ -138,9 +157,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_nouveau_point' => 'Nuevo punto',
 	'titre_objet' => 'Título',
 	'toolbar_actions_title' => 'Cancelar el trazado',
+	'toolbar_buttons_circle' => 'Trazar un círculo',
 	'toolbar_buttons_marker' => 'Trazar un punto',
 	'toolbar_buttons_polygon' => 'Trazar un polígono',
 	'toolbar_buttons_polyline' => 'Trazar una línea',
+	'toolbar_buttons_rectangle' => 'Trazar un rectángulo',
+	'toolbar_edit_buttons_edit' => 'Modificar el objeto',
+	'toolbar_edit_buttons_editdisabled' => 'Ningún objeto para modificar', # RELIRE
+	'toolbar_edit_buttons_remove' => 'Eliminar el objeto',
+	'toolbar_edit_buttons_removedisabled' => 'Ningún objeto para eliminar', # RELIRE
+	'toolbar_edit_handlers_edit_tooltip_subtext' => 'Haga click para descartar los cambios', # RELIRE
+	'toolbar_edit_handlers_remove_tooltip_text' => 'haga click en un objeto para eliminar',
+	'toolbar_finish_text' => 'Terminar',
+	'toolbar_finish_title' => 'Acabar la traza',
 	'toolbar_handlers_marker_tooltip_start' => 'Haga clic para situar el marcador',
 	'toolbar_handlers_polygon_tooltip_cont' => 'Haga clic para continuar trazando el polígono',
 	'toolbar_handlers_polygon_tooltip_end' => 'Haga clic sobre el primer punto para cerrar el polígono',
@@ -148,6 +177,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'toolbar_handlers_polyline_tooltip_cont' => 'Haga clic para continuar trazando la línea',
 	'toolbar_handlers_polyline_tooltip_end' => 'Haga clic sobre el último punto para terminar la línea',
 	'toolbar_handlers_polyline_tooltip_start' => 'Haga clic para comenzar a trazar la línea',
+	'toolbar_handlers_rectangle_tooltip_start' => 'Haga clic y arrastre para dibujar un rectángulo', # RELIRE
 	'toolbar_undo_text' => 'Borrar el última punto',
 	'toolbar_undo_title' => 'Borrar el último punto dibujado',
 

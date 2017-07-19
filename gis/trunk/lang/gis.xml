@@ -8,9 +8,10 @@
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="https://trad.spip.net/tradlang_module/gis?lang_cible=es" total="157" traduits="122" relire="0" modifs="3" nouveaux="32" pourcent="77.71">
+	<langue code="es" url="https://trad.spip.net/tradlang_module/gis?lang_cible=es" total="157" traduits="143" relire="5" modifs="3" nouveaux="6" pourcent="91.08">
 		<traducteur nom="alf" lien="https://trad.spip.net/auteur/alf" />
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
+		<traducteur nom="danielquisbert" lien="https://trad.spip.net/auteur/danielquisbert" />
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
 	</langue>
