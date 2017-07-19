@@ -376,29 +376,31 @@ function balise_EDIT($p) {
  * @return Champ
  *   Pile complétée par le code à générer
 **/
-function balise_EDIT_CONFIG_dist($p) {
+if (!function_exists('balise_EDIT_CONFIG_dist')) {
+	function balise_EDIT_CONFIG_dist($p) {
 
-	// le code compile de ce qui se trouve entre les {} de la balise
-	$config = interprete_argument_balise(1, $p);
-	if (!$config) {
+		// le code compile de ce qui se trouve entre les {} de la balise
+		$config = interprete_argument_balise(1, $p);
+		if (!$config) {
+			return $p;
+		}
+
+		// chaque / du nom de config doit être transformé pour css.
+		// nous utiliserons '__' à la place.
+
+		$type = 'meta';
+		$label= 'valeur';
+
+		$p->code = "classe_boucle_crayon('"
+			. $type
+			. "','"
+			. $label
+			. "',"
+			. "str_replace('/', '__', $config)"
+			. ").' '";
+		$p->interdire_scripts = false;
 		return $p;
 	}
-
-	// chaque / du nom de config doit être transformé pour css.
-	// nous utiliserons '__' à la place.
-
-	$type = 'meta';
-	$label= 'valeur';
-
-	$p->code = "classe_boucle_crayon('"
-		. $type
-		. "','"
-		. $label
-		. "',"
-		. "str_replace('/', '__', $config)"
-		. ").' '";
-	$p->interdire_scripts = false;
-	return $p;
 }
 
 /**
