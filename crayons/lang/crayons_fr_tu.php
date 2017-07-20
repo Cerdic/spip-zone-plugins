@@ -10,6 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'absence_cle_primaire' => 'Pas de clé primaire !',
 	'activation_barre_impossible' => 'Un autre plugin interdit l’usage du porte-plume dans l’espace public.',
 	'annuler' => 'Annuler',
 
@@ -26,9 +27,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_tout' => 'Éditer tout',
 	'effets' => 'Effets',
 	'explication_exec_autorise' => 'Pages autorisées à la modification
-  (?exec=...) : (, pour séparer les exec - * pour toutes).', # MODIF
-	'explication_introduction_article' => 'L’introduction d’un article affiche le descriptif de l’article, sinon affiche ses 600 premiers caractères (chapeau puis texte).', # MODIF
-	'explication_reduire_logo' => 'Réduire le logo s’il dépasse la taille maximale indiquée en pixels. Exemple : 100. (0 = jamais)', # MODIF
+        (?exec=...) : (, pour séparer les exec - * pour toutes).',
+	'explication_introduction_article' => 'L’introduction d’un article affiche le descriptif de l’article,
+    sinon affiche ses 600 premiers caractères (chapeau puis texte).',
+	'explication_reduire_logo' => 'Réduire le logo s’il dépasse
+        la taille maximale indiquée en pixels. Exemple : 100. (0 = jamais)',
 
 	// I
 	'info_experimental' => 'Expérimental',
@@ -58,6 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_documents' => 'Upload de documents',
 	'legend_editer_prive' => 'Éditer l’espace privé (expérimental)',
 	'legend_introduction_article' => 'Texte introductif de l’article',
+	'legend_introduction_rubrique' => 'Texte introductif de la rubrique',
 
 	// M
 	'message_image_obligatoire' => 'Il faut choisir une image',
