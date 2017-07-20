@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_code_postal' => 'Ce code postal est incorrect.',
-	'erreur_comparaison_egal' => 'La valeur doit être égale au champ "@nom_champ@"', # MODIF
+	'erreur_comparaison_egal' => 'La valeur doit être égale au champ "@nom_champ@".',
 	'erreur_comparaison_egal_type' => 'La valeur doit être égale et de même type que le champ "@nom_champ@"', # MODIF
 	'erreur_comparaison_grand' => 'La valeur doit être supérieure au champ "@nom_champ@"', # MODIF
 	'erreur_comparaison_grand_egal' => 'La valeur doit être supérieure ou égale au champ "@nom_champ@"', # MODIF

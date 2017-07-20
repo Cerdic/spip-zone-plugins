@@ -23,9 +23,10 @@
 	</langue>
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/verifier?lang_cible=fr" total="148" traduits="148" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/verifier?lang_cible=fr_tu" total="148" traduits="84" relire="0" modifs="11" nouveaux="53" pourcent="56.76">
+	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/verifier?lang_cible=fr_tu" total="148" traduits="85" relire="0" modifs="10" nouveaux="53" pourcent="57.43">
 		<traducteur nom="beatnick" lien="https://trad.spip.net/auteur/beatnick" />
 		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
+		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
 		<traducteur nom="stefdn" lien="https://trad.spip.net/auteur/stefdn" />
 	</langue>
 	<langue code="it" url="https://trad.spip.net/tradlang_module/verifier?lang_cible=it" total="148" traduits="62" relire="0" modifs="8" nouveaux="78" pourcent="41.89">
