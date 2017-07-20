@@ -110,3 +110,56 @@ function rang_objet_select($id_mot, $id_objet, $objet){
 
 // 	return $tab_result;
 // }
+
+/**
+ * supprimer un mot, puis réordonner
+ *
+ * @param array $objets
+ *     liste d'objets
+ * @return array
+ *     note : sans ce return (a priori inutile, la fonction plante (???)
+ **/
+function rang_creer_champs ($objets) {
+	// création du champ 'rang' dans les tables sélectionnées
+	// + insertion de valeur dans ce champ
+	foreach ($objets as $key => $table) {
+
+		if (!empty($table)) {
+			// si le champ 'rang' n'existe pas, le créer et le remplir
+			$champs_table = sql_showtable($table);
+			if (!isset($champs_table['field']['rang'])) {
+
+				// créer le champ 'rang'
+				sql_alter('TABLE '.$table.' ADD rang SMALLINT NOT NULL');
+
+				// remplir #1 : si aucun numero_titre n'est trouvé, on met la valeur de l'id_prefixe dans rang
+				if (!rang_tester_presence_numero($table)) {
+					$id = id_table_objet($table);
+					$desc = lister_tables_objets_sql($table);
+					if (isset($desc['field']['id_rubrique'])) {
+						$quelles_rubriques = sql_allfetsel('id_rubrique', $table, '', 'id_rubrique');
+
+						foreach ($quelles_rubriques as $key => $value) {
+							$id_rub =  $value['id_rubrique'];
+							$quelles_items = sql_allfetsel($id, $table, 'id_rubrique='.$id_rub);
+
+							$i = 1;
+							foreach ($quelles_items as $key => $value) {
+								$id_prefixe = $value[$id];
+								sql_update($table, array( 'rang' => $i ), "$id = $id_prefixe");
+								$i++;
+							}
+						}
+					}
+				}
+
+				// remplir #2 sinon , recuperer le numero_titre et l'insérer dans rang
+				// à faire !!
+			}
+		}
+	}
+}
+
+function rang_tester_presence_numero($table) {
+	return false;
+}

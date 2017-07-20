@@ -50,6 +50,7 @@ function rang_vider_tables($nom_meta_base_version) {
 	}
 
 	// Effacer les métas
-	effacer_meta('rang_objets');
+	effacer_meta('rang/rang_objets');
+	effacer_meta('rang/rang_max');
 	effacer_meta($nom_meta_base_version);
 }

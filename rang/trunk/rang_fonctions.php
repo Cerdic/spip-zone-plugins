@@ -38,6 +38,6 @@ function balise_RANG($p) {
  **/
 function rang_objet_dans_config($objet) {
 	$table = table_objet_sql($objet);
-	$liste = explode(',', lire_config('rang_objets'));
+	$liste = explode(',', lire_config('rang/rang_objets'));
 	return in_array($table, $liste);
 }

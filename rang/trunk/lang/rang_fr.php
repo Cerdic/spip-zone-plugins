@@ -9,8 +9,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rang_titre' => 'Rang',
 
 	// C
-	'cfg_exemple' => 'Exemple',
-	'cfg_exemple_explication' => 'Explication de cet exemple',
+	'cfg_objets' => 'Choisir les objets',
+	'cfg_objets_explication' => 'Choisir les objets pour lesquels vous voulez activer le réordonnement par Drag&Drop.',
+	'cfg_rang_max' => 'Ranger les objets',
+	'cfg_rang_max_explication' => 'Donner un rang aux objets quand ils sont publiés et les classer à la suite des autres.',
 	'cfg_titre_parametrages' => 'Paramétrages',
 
 	// I

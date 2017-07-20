@@ -21,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function rang_declarer_tables_objets_sql($tables){
 	include_spip('inc/config');
 
-	$rang_objets = rtrim(lire_config('rang_objets'), ',');
+	$rang_objets = rtrim(lire_config('rang/rang_objets'), ',');
 	$liste_objets = explode(',', $rang_objets);
 
 	foreach ($liste_objets as  $table) {
@@ -48,7 +48,7 @@ function rang_recuperer_fond($flux){
 	// Ajouter automatiquement un contexte
 	// pour les objets sans rubrique, on ajoute le contexte ?exec=objet
 	include_spip('inc/config');
-	$objets_selectionnes = lire_config('rang_objets');
+	$objets_selectionnes = lire_config('rang/rang_objets');
 	$liste = lister_tables_objets_sql();
 	foreach ($liste as $key => $value) {
 		if ($value['editable'] == 'oui' AND !isset($value['field']['id_rubrique'])) {
@@ -115,7 +115,7 @@ function rang_get_sources() {
 	}
 	
 	$sources = array();
-	$objets_selectionnes = lire_config('rang_objets');
+	$objets_selectionnes = lire_config('rang/rang_objets');
 	$objets=explode(',',$objets_selectionnes);
 
 	foreach ($objets as $value) {
@@ -126,4 +126,41 @@ function rang_get_sources() {
 		}
 	}
 	return $sources;
+}
+
+/**
+ * Insertion dans le pipeline pre_edition pour le classer l'objet quand on le publie
+ * @param array $flux
+ * @return array
+ */
+function rang_pre_edition($flux){
+
+	if($flux['args']['action']=='instituer' && $flux['data']['statut']=='publie' && lire_config('rang/rang_max')) {
+		
+		$rang_objets  = rtrim(lire_config('rang/rang_objets'), ',');
+		$liste_objets = explode(',', $rang_objets);
+		$table        = $flux['args']['table'];
+
+		if (in_array($table, $liste_objets)) {
+			// ici, on aurait bien besoin de objet_parent et id_parent
+			// dans la définition des tables, pour automatiser
+			switch($table) {
+				case 'spip_articles' :
+					$id_rubrique = sql_getfetsel('id_rubrique','spip_articles','id_article = '.$flux['args']['id_objet']);
+					$rang = sql_getfetsel('max(rang)','spip_articles','id_rubrique = '.$id_rubrique);
+					// todo : on classe l'article à la fin (rang max) mais on pourrait vouloir le classer au début
+					// il faudrait donc une configuration pour ça, et dans ce cas reclasser tous les autres à un rang++
+					$flux['data']['rang'] = $rang+1;
+					break;
+				case 'spip_mots' :
+				case 'spip_rubriques' :
+				case '...etc...' :
+					// todo : traiter les autres cas
+					break;
+				
+			}
+		}
+	}
+	
+	return $flux;
 }
