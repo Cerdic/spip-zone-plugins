@@ -9,9 +9,7 @@ function balise_URL_ARTICLE_ABSOLU_dist($p) {
 		if (strlen(trim($id_article)) == 0) {
 			$id_article = calculer_balise('id_article', $p)->code;
 		}
-		$id_article = preg_replace('#[^\d]+#','',$id_article);
-		$id_rubrique = sql_getfetsel('id_rubrique', 'spip_articles', 'id_article=' . intval($id_article));
-		$p->code     = "calculer_URL_SECTEUR(sinon($id_rubrique,0))." . generer_generer_url('article', $p);
+		$p->code = "calculer_URL_SECTEUR(sinon(sql_getfetsel('id_rubrique','spip_articles','id_article=' . intval($id_article)))).".generer_generer_url('article', $p);
 	}
 	$p->interdire_scripts = false;
 
