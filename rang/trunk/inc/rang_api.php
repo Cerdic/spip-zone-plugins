@@ -112,16 +112,14 @@ function rang_objet_select($id_mot, $id_objet, $objet){
 // }
 
 /**
- * supprimer un mot, puis réordonner
+ * Créer les champs 'rang' sur les tables des objets reçus en paramètre
+ * et initialiser la valeur du rang
+ * TODO : à compléter !
  *
  * @param array $objets
  *     liste d'objets
- * @return array
- *     note : sans ce return (a priori inutile, la fonction plante (???)
  **/
 function rang_creer_champs ($objets) {
-	// création du champ 'rang' dans les tables sélectionnées
-	// + insertion de valeur dans ce champ
 	foreach ($objets as $key => $table) {
 
 		if (!empty($table)) {
