@@ -30,10 +30,11 @@
 	</langue>
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=fr" total="66" traduits="66" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=fr_tu" total="66" traduits="63" relire="0" modifs="0" nouveaux="3" pourcent="95.45">
+	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=fr_tu" total="66" traduits="66" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="beatnick" lien="https://trad.spip.net/auteur/beatnick" />
 		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
 		<traducteur nom="orlammd" lien="https://trad.spip.net/auteur/orlammd" />
+		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
 	</langue>
 	<langue code="gl" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=gl" total="66" traduits="39" relire="0" modifs="2" nouveaux="25" pourcent="59.09">
 	</langue>
