@@ -1,7 +1,7 @@
 <paquet
 	prefix="googleanalytics"
 	categorie="statistique"
-	version="0.4.9"
+	version="0.5.0"
 	etat="stable"
 	compatibilite="[1.9.2;3.1.*]"
 	logo="images/ga-32.png"
