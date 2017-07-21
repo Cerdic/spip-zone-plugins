@@ -13,6 +13,7 @@ function phpcurl_get($url, $data_string = NULL, $content_type = 'Content-Type: a
 		);
 	}
 	$result = curl_exec($ch);
+	curl_close($ch);
 	if(!$silent) {
 		return $result;
 	}
@@ -31,6 +32,7 @@ function phpcurl_post($url, $data_string = NULL, $content_type = 'Content-Type: 
 	); 
 	 
 	$result = curl_exec($ch);
+	curl_close($ch);
 	if(!$silent) {
 		return $result;
 	}
@@ -49,6 +51,7 @@ function phpcurl_put($url, $data_string = NULL, $content_type = 'Content-Type: a
 	); 
 	 
 	$result = curl_exec($ch);
+	curl_close($ch);
 	if(!$silent) {
 		return $result;
 	}
@@ -68,6 +71,7 @@ function phpcurl_delete($url, $data_string = NULL, $content_type = 'Content-Type
 		); 
 	}
 	$result = curl_exec($ch);
+	curl_close($ch);
 	if(!$silent) {
 		return $result;
 	}
