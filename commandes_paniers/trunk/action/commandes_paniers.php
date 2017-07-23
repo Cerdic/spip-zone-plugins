@@ -65,7 +65,9 @@ function action_commandes_paniers_dist($arg = null) {
 	// plutot que de recreer N commandes pour un meme panier
 	// (cas de l'utilisateur qui revient en arriere puis retourne a la commande)
 	include_spip('inc/session');
-	$id_commande = sql_getfetsel("id_commande", "spip_commandes", $w = "statut=" . sql_quote('encours') . " AND date>" . sql_quote(date('Y-m-d H:i:s', strtotime('-' . lire_config('paniers/limite_ephemere', 24) . ' hour'))) . " AND source=" . sql_quote("panier#$id_panier") . " AND id_commande=" . session_get('id_commande'));
+	if (intval(session_get('id_commande'))){
+		$id_commande = sql_getfetsel("id_commande", "spip_commandes", $w = "statut=" . sql_quote('encours') . " AND date>" . sql_quote(date('Y-m-d H:i:s', strtotime('-' . lire_config('paniers/limite_ephemere', 24) . ' hour'))) . " AND source=" . sql_quote("panier#$id_panier") . " AND id_commande=" . session_get('id_commande'));
+	}
 
 	// sinon on cree une commande "en cours"
 	if (!$id_commande) {
