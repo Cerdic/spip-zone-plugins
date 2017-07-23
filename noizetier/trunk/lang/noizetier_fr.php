@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'apercu' => 'Aperçu',
 
 	// B
-	'bloc_sans_noisette' => 'Ajouter des noisettes en utilisant le bouton “ajouter une noisette” ou en glissant-déposant la noisette choisie sur cet emplacement.',
+	'bloc_sans_noisette' => 'Ajouter des noisettes en utilisant le bouton “ajouter une noisette” ou en glissant-déposant le type de noisette désiré sur cet emplacement.',
 	'bulle_activer_composition' => 'Activer les compositions sur le type de contenu « @type@ »',
 	'bulle_configurer_objet_noisettes' => 'Configurer les noisettes spécifiques à ce contenu',
 	'bulle_configurer_page_noisettes' => 'Configurer les noisettes de la page',
@@ -54,7 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_dupliquer_composition_reference' => 'L’identifiant de la page dupliquée est <i>@composition@</i>.
 	Vous pouvez choisir un nouvel identifiant ou suffixer l’identifiant de référence ainsi : <i>@composition@<strong>_suffixe</strong></i>',
 	'explication_dupliquer_composition_suffixer' => '.',
-	'explication_glisser_deposer' => 'Vous pouvez ajouter une noisette ou les réordonner par simple glisser/déposer.',
+	'explication_glisser_deposer' => 'Les types de noisettes pouvant être ajouter aux blocs de la page sont listés ci-dessous.',
 	'explication_heritages_composition' => 'La composition en cours d’édition est basée sur le type de contenu « @type@ » qui possède des types de contenu enfants. Vous pouvez définir pour chaque type de contenu enfant une composition à appliquer par défaut.',
 	'explication_noisette' => 'Noisette de type « @noisette@ »',
 	'explication_noisette_css' => 'Vous pouvez ajouter à la balise englobante de la noisette d’éventuelles classes CSS supplémentaires.',
@@ -163,7 +163,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisettes_configurees_aucune' => 'Aucune noisette configurée',
 	'noisettes_configurees_nb' => '@nb@ noisettes configurées',
 	'noisettes_configurees_une' => 'Une noisette configurée',
-	'noisettes_disponibles' => 'Noisettes disponibles',
+	'noisettes_disponibles' => 'Types de noisette disponibles',
 	'noisettes_page' => 'Noisettes spécifiques à la page <i>@type@</i> :',
 	'noisettes_pour' => 'Noisettes pour : ',
 	'noisettes_toutes_pages' => 'Noisettes communes à toutes les pages :',

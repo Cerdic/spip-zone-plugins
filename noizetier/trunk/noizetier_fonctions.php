@@ -224,6 +224,51 @@ function noizetier_noisette_ajax($noisette) {
 	return $est_ajax[$noisette];
 }
 
+
+function noizetier_noisette_type_compter($page) {
+
+	// Initialisation des compteurs par bloc
+	$nb_types = array(
+		'composition' => 0,
+		'type'        => 0,
+		'commun'      => 0
+	);
+
+	// Acquisition du type et de la composition éventuelle.
+	$type = noizetier_page_type($page);
+	$composition = noizetier_page_composition($page);
+
+	// Les compteurs de types de noisettes d'une page sont calculés par une lecture de la table spip_noizetier_noisettes.
+	$from = array('spip_noizetier_noisettes');
+
+	// On cherche maintenant les 3 compteurs possibles :
+	// - les types de noisettes spécifiques de la composition si la page en est une.
+	if ($composition) {
+		$where = array('type=' . sql_quote($type), 'composition=' . sql_quote($composition));
+		$compteur = sql_countsel($from, $where);
+		if ($compteur) {
+			$nb_types['composition'] = $compteur;
+		}
+	}
+	// - les types de noisettes spécifiques de la page ou du type de la composition
+	$where[1] = 'composition=' . sql_quote('');
+	$compteur = sql_countsel($from, $where);
+	if ($compteur) {
+		$nb_types['type'] = $compteur;
+	}
+	// - les types de noisettes communes.
+	$where[0] = 'type=' . sql_quote('');
+	$compteur = sql_countsel($from, $where);
+	if ($compteur) {
+		$nb_types['commun'] = $compteur;
+	}
+
+	$nb_types['total'] = array_sum($nb_types);
+
+	return $nb_types;
+}
+
+
 /**
  * Ajoute, à un rang donné ou en dernier rang, une noisette à un bloc d'une page ou d'un contenu.
  *
@@ -584,7 +629,7 @@ function noizetier_bloc_compter_noisettes($identifiant) {
 		// Le nombre de noisettes par bloc doit être calculé par une lecture de la table spip_noisettes.
 		$from = array('spip_noisettes');
 		$select = array('bloc', "count(noisette) as 'noisettes'");
-		// -- Contruction du where identifiant préciément la page ou l'objet concerné
+		// -- Contruction du where identifiant précisément la page ou l'objet concerné
 		$identifiants = explode('-', $identifiant);
 		if (isset($identifiants[1]) and ($id = intval($identifiants[1]))) {
 			// L'identifiant est celui d'un objet

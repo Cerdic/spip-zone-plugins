@@ -1,78 +1,83 @@
-<BOUCLE_infos_page(NOIZETIER_PAGES) {page=#ENV{page, #OBJET}}>
-	[(#SET{type, #TYPE})]
-	[(#SET{composition, #COMPOSITION})]
-	[(#SET{nom, #NOM})]
-</BOUCLE_infos_page>
+#SET{compteurs, #ENV{page, #OBJET}|noizetier_noisette_type_compter}
+<BOUCLE_si_noisette(CONDITION) {si #GET{compteurs/total}}>
+	<BOUCLE_infos_page(NOIZETIER_PAGES) {page=#ENV{page, #OBJET}}>
+		[(#SET{type, #TYPE})]
+		[(#SET{composition, #COMPOSITION})]
+		[(#COMPOSITION|oui)#SET{nom_composition, #NOM}]
+		<BOUCLE_infos_type(NOIZETIER_PAGES) {page=#GET{type}}{composition=''}>#SET{nom_type, #NOM}</BOUCLE_infos_type>
+	</BOUCLE_infos_page>
 
-<div id="onglets-noisettes-disponibles">
-	<ul>
-	  <li><a href="#noisettes-composition">#GET{nom}</a></li>
-	  <li><a href="#noisettes-page">#GET{nom}</a></li>
-	  <li><a href="#noisettes-communes"><:noizetier:noisettes_toutes_pages:></a></li>
-	</ul>
-
-<BOUCLE_si_composition(CONDITION) {si #GET{composition}}>
-	<B_noisettes_composition>
-	<div id="noisettes-composition">
-		<p class="explication"><:noizetier:noisettes_composition{composition=#GET{nom}}:></p>
-		<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
-	<BOUCLE_noisettes_composition(NOIZETIER_NOISETTES){type=#GET{type}}{composition=#GET{composition}}{par noisette}>
-			<li class="editer item noisette">
-				<INCLURE{fond=formulaires/inclure/inc-input_noisette,
-					noisette,
-					nom=#NOM,
-					icon,
-					input_radio} />
-			</li>
-	</BOUCLE_noisettes_composition>
+	<div id="onglets-noisettes-disponibles">
+		<ul>
+			[(#GET{compteurs/composition}|oui)<li><a href="#noisettes-composition">[(#GET{nom_composition})]</a></li>]
+			[(#GET{compteurs/type}|oui)<li><a href="#noisettes-page">[(#GET{nom_type})]</a></li>]
+			[(#GET{compteurs/commun}|oui)<li><a href="#noisettes-communes"><:noizetier:noisettes_toutes_pages:></a></li>]
 		</ul>
-	</div>
-	</B_noisettes_composition>
-	<BOUCLE_infos_type(NOIZETIER_PAGES) {page=#GET{type}}{composition=''}>#SET{nom, #NOM}</BOUCLE_infos_type>
-</BOUCLE_si_composition>
 
-<B_noisettes_type>
-	<div id="noisettes-page">
-		<p class="explication"><:noizetier:noisettes_page{type=#GET{nom}}:></p>
-		<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
-<BOUCLE_noisettes_type(NOIZETIER_NOISETTES){type=#GET{type}}{composition=''}{par noisette}>
-			<li class="editer item noisette">
-				<INCLURE{fond=formulaires/inclure/inc-input_noisette,
-					noisette,
-					nom=#NOM,
-					icon,
-					input_radio} />
-			</li>
-</BOUCLE_noisettes_type>
-		</ul>
-	</div>
-</B_noisettes_type>
+	<BOUCLE_si_composition(CONDITION) {si #GET{composition}}>
+		<B_noisettes_composition>
+		<div id="noisettes-composition">
+			<p class="explication"><:noizetier:noisettes_composition{composition=#GET{nom_composition}}:></p>
+			<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
+		<BOUCLE_noisettes_composition(NOIZETIER_NOISETTES){type=#GET{type}}{composition=#GET{composition}}{par noisette}>
+				<li class="editer item noisette">
+					<INCLURE{fond=formulaires/inclure/inc-input_noisette,
+						noisette,
+						nom=#NOM,
+						icon,
+						input_radio} />
+				</li>
+		</BOUCLE_noisettes_composition>
+			</ul>
+		</div>
+		</B_noisettes_composition>
+	</BOUCLE_si_composition>
 
-<B_noisettes_communes>
-	<div id="noisettes-communes">
-		<p class="explication"><:noizetier:noisettes_toutes_pages:></p>
-		<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
-<BOUCLE_noisettes_communes(NOIZETIER_NOISETTES){type=''}{composition=''}{par noisette}>
-			<li class="editer item noisette">
-				<INCLURE{fond=formulaires/inclure/inc-input_noisette,
-					noisette,
-					nom=#NOM,
-					icon,
-					input_radio} />
-			</li>
-</BOUCLE_noisettes_communes>
-		</ul>
-	</div>
-</B_noisettes_communes>
-</div>
+	<B_noisettes_type>
+		<div id="noisettes-page">
+			<p class="explication"><:noizetier:noisettes_page{type=#GET{nom_type}}:></p>
+			<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
+	<BOUCLE_noisettes_type(NOIZETIER_NOISETTES){type=#GET{type}}{composition=''}{par noisette}>
+				<li class="editer item noisette">
+					<INCLURE{fond=formulaires/inclure/inc-input_noisette,
+						noisette,
+						nom=#NOM,
+						icon,
+						input_radio} />
+				</li>
+	</BOUCLE_noisettes_type>
+			</ul>
+		</div>
+	</B_noisettes_type>
 
-<script type="text/javascript">
-/*<!\[CDATA\[*/
-	$(function() {
-		$("#onglets-noisettes-disponibles").tabs({
-			heightStyle: "auto",
-			event: "mouseover"
+	<B_noisettes_communes>
+		<div id="noisettes-communes">
+			<p class="explication"><:noizetier:noisettes_toutes_pages:></p>
+			<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
+	<BOUCLE_noisettes_communes(NOIZETIER_NOISETTES){type=''}{composition=''}{par noisette}>
+				<li class="editer item noisette">
+					<INCLURE{fond=formulaires/inclure/inc-input_noisette,
+						noisette,
+						nom=#NOM,
+						icon,
+						input_radio} />
+				</li>
+	</BOUCLE_noisettes_communes>
+			</ul>
+		</div>
+	</B_noisettes_communes>
+	</div>
+
+	<script type="text/javascript">
+	/*<!\[CDATA\[*/
+		$(function() {
+			$("#onglets-noisettes-disponibles").tabs({
+				heightStyle: "auto",
+				event: "mouseover"
+			});
 		});
-	});
-/*\]\]>*/
-</script>
+	/*\]\]>*/
+	</script>
+</BOUCLE_si_noisette>
+	<:noizetier:aucun_type_noisette:>
+<//B_si_noisette>
