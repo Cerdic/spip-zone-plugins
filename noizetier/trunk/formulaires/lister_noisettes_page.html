@@ -22,7 +22,7 @@
 			<li class="editer item noisette" id="noisette-#ID_NOISETTE">
 				<div>
 					<div class="resume">
-						[(#NOM)]
+						[(#NOM|_T_ou_typo)]
 						[<br />(#NOIZETIER_NOISETTE_PREVIEW)]
 						[(#REM) Logo de la noisette ]
 						<div class="icone">
@@ -52,7 +52,10 @@
 				</div>
 			</li>
 		</BOUCLE_noisettes>
+			<input type="hidden" name="nb_noisettes" value="#TOTAL_BOUCLE" />
+		</B_noisettes>
 			<li class="editer item">#BOITE_OUVRIR{'','notice'}<:noizetier:bloc_sans_noisette:>#BOITE_FERMER</li>
+			<input type="hidden" name="nb_noisettes" value="0" />
 		<//B_noisettes>
 		</ul>
 		[(#ENV{page}|?{

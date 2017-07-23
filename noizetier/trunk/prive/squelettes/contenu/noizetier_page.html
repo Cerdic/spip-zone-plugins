@@ -36,22 +36,21 @@
 	<div class="ajax">#FORMULAIRE_LISTER_NOISETTES_PAGE{#ENV{page,#ARRAY{objet,#OBJET,id_objet,#ID_OBJET}}, #GET{bloc_affiche}}</div>
 
 	[(#REM) <!-- Liste des noisettes disponibles --> ]
-	#SET{titre,#VAL{noizetier:noisettes_disponibles}|_T}
-	#BOITE_OUVRIR{#GET{titre},'info noisettes_disponibles none'}
+	<h3><:noizetier:noisettes_disponibles:></h3>
 	<p><:noizetier:explication_glisser_deposer:></p>
-	<INCLURE{fond=formulaires/inc-liste_noisettes_disponibles,
+	<INCLURE{fond=formulaires/inclure/inc-noisettes_disponibles,
 		page,
 		objet,
 		id_objet,
-		ordre=oui} />
-	#BOITE_FERMER
+		input_radio=''} />
 	<script type="text/javascript">/*<!\[CDATA\[*/
 		jQuery('.noisettes_disponibles').show();
 		jQuery('ul.liste-noisettes-disponibles li.noisette').draggable({
-			connectToSortable: "ul.bloc",
-			helper: "clone",
-			revert: "invalid",
-			cursor: 'move'
+			connectToSortable: 'ul.liste-noisettes-bloc',
+			helper: 'clone',
+			revert: 'invalid',
+			cursor: 'move',
+			opacity: 0.5
 		});
 	/*\]\]>*/</script>
 

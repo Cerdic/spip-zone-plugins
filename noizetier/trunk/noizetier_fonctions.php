@@ -225,7 +225,7 @@ function noizetier_noisette_ajax($noisette) {
 }
 
 /**
- * Ajoute, en dernier rang, une noisette à un bloc d'une page ou d'un contenu.
+ * Ajoute, à un rang donné ou en dernier rang, une noisette à un bloc d'une page ou d'un contenu.
  *
  * @param string       $noisette
  * 		Nom de la noisette à ajouter.
@@ -234,11 +234,14 @@ function noizetier_noisette_ajax($noisette) {
  *      le type d'objet (index `objet`) et l'id de l'objet (index `id_objet`).
  * @param string       $bloc
  * 		Nom du bloc où ajouter la noisette.
+ * @param int          $rang
+ * 		Rang où insérer la noisette. Si l'argument n'est pas fourni ou est égal à 0 on insère la
+ *      noisette en fin de bloc.
  *
  * @return int
  * 		Retourne l'identifiant de la nouvelle instance de noisette créée ou 0 en cas d'erreur.
  **/
-function noizetier_noisette_ajouter($noisette, $page, $bloc) {
+function noizetier_noisette_ajouter($noisette, $page, $bloc, $rang = 0) {
 
 	// Initialisation de la valeur de sortie.
 	$id_noisette = 0;
@@ -255,6 +258,7 @@ function noizetier_noisette_ajouter($noisette, $page, $bloc) {
 			'objet'       => '',
 			'id_objet'    => 0,
 			'bloc'        => $bloc,
+			'rang'        => $rang,
 			'noisette'    => $noisette,
 			'parametres'  => serialize($parametres)
 		);
@@ -275,10 +279,13 @@ function noizetier_noisette_ajouter($noisette, $page, $bloc) {
 			$where[] = 'composition=' . sql_quote($description['composition']);
 		}
 
-		// La noisette est ajoutée en fin de liste : on cherche donc le dernier rang utilisé et on se
+		// La noisette est ajoutée soit à un rang donné par l'argument fourni si celui-ci est > 0,
+		// soit en fin de liste : dans ce cas, on cherche donc le dernier rang utilisé et on se
 		// positionne au rang suivant et on finalise la description de la noisette
-		$rang = intval(sql_getfetsel('max(rang)', 'spip_noisettes', $where)) + 1;
-		$description['rang'] = $rang;
+		// Le rang d'une noisette commence à 1.
+		if (!$description['rang']) {
+			$description['rang'] = intval(sql_getfetsel('max(rang)', 'spip_noisettes', $where)) + 1;
+		}
 
 		if ($id_noisette = sql_insertq('spip_noisettes', $description)) {
 			// On invalide le cache
@@ -293,28 +300,36 @@ function noizetier_noisette_ajouter($noisette, $page, $bloc) {
 
 
 /**
- * Réordonne les noisettes d'un bloc d'une page ou d'un objet.
+ * Réordonne les noisettes d'un bloc d'une page ou d'un objet à partir d'un index donné du tableau.
  * L'ordre est renvoyé pour l'ensemble des noisettes du bloc.
+ * Si l'index à partir duquel les noisettes sont réordonnées n'est pas fourni ou est égal à 0
+ * la fonction réordonne toutes les noisettes.
  *
- * @param array         $ordre
+ * @param array	$ordre
+ * @param int	$index_initial
  *
  * @return bool
  */
-function noizetier_noisette_ranger($ordre) {
+function noizetier_noisette_ranger($ordre, $index_initial = 0) {
 
-	if (sql_preferer_transaction()) {
-		sql_demarrer_transaction();
-	}
+	if ($index_initial < count($ordre)) {
+		if (sql_preferer_transaction()) {
+			sql_demarrer_transaction();
+		}
 
-	// On modifie le rang de chaque noisette en suivant l'ordre du tableau.
-	foreach ($ordre as $_cle => $_id_noisette) {
-		$modification = array('rang' => $_cle + 1);
-		$where = array('id_noisette=' . intval($_id_noisette));
-		sql_updateq('spip_noisettes', $modification, $where);
-	}
+		// On modifie le rang de chaque noisette en suivant l'ordre du tableau à partir de l'index
+		// initial.
+		foreach ($ordre as $_cle => $_id_noisette) {
+			if ($_cle >= $index_initial) {
+				$modification = array('rang' => $_cle + 1);
+				$where = array('id_noisette=' . intval($_id_noisette));
+				sql_updateq('spip_noisettes', $modification, $where);
+			}
+		}
 
-	if (sql_preferer_transaction()) {
-		sql_terminer_transaction();
+		if (sql_preferer_transaction()) {
+			sql_terminer_transaction();
+		}
 	}
 
 	return true;
@@ -347,7 +362,7 @@ function noizetier_noisette_deplacer($id_noisette, $sens, $noisette) {
 		$ordre = sql_allfetsel('id_noisette', 'spip_noisettes', $where, '', 'rang');
 		$ordre = array_map('intval', array_column($ordre, 'id_noisette'));
 
-		// Si il y a plus d'une noisette ans le bloc et que la noisette appartient bien au bloc.
+		// Si il y a plus d'une noisette dans le bloc et que la noisette appartient bien au bloc.
 		if (count($ordre) > 1) {
 			// Mise à jour de l'ordre en fonction de la demande.
 			$index_noisette = array_search($id_noisette, $ordre);

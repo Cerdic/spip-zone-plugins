@@ -1,0 +1,11 @@
+[(#ENV{input_radio}|oui)
+	[(#SET{id,#VAL{noisettes_}|uniqid})]
+	<input type="radio" name="noisette" value="#ENV{noisette}" id="#GET{id}" />
+	<label for="#GET{id}">
+]
+[(#ENV{nom})]
+[(#ENV{input_radio}|oui)</label>]
+<div class="icone">
+	[(#ENV{icon}|noizetier_icone_chemin|image_reduire{24}|extraire_attribut{src}|balise_img)]
+</div>
+[(#ENV{input_radio}|non)<input type="hidden" name="ordre\[\]" value="#ENV{noisette}" />]
