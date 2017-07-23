@@ -42,6 +42,7 @@ function lazysizes_header_prive($flux){
 	return $flux;
 }
 
+
 /*
  * function lazysizes_insert_head_public
  * @param $flux
@@ -49,7 +50,7 @@ function lazysizes_header_prive($flux){
 function lazysizes_insert_head_public($flux) {
 	include_spip('inc/config');
 	$lazy_options = lire_config('lazysizes/options');
-	$js_init_options = generer_url_public('lazysizes_init.js') ;
+	$js_init_options = generer_url_public('lazysizes_config.js') ;
 	$flux .= "<script type='text/javascript' src='$js_init_options' ></script>\n";;
 	
 	// Addons
@@ -68,5 +69,8 @@ function lazysizes_insert_head_public($flux) {
 	$lazysizes = timestamp(find_in_path('javascript/lazysizes.js'));	
 	$flux .= "<script type='text/javascript' src='$lazysizes' ></script>\n";
 
+	
+	$flux .= "<script>lazySizes.init();</script>";
+	
 	return $flux;
 }
