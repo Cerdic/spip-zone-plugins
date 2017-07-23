@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'annuler' => 'إلغاء',
+	'annuler' => 'ئەۋەگېڵای',
 
 	// D
 	'deja_modifie' => 'عدّل سابقاً',
