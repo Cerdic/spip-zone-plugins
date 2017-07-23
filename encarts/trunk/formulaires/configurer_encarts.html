@@ -9,11 +9,14 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
-		<ul>
-			[(#SAISIE{input, exemple,
-				label=<:encarts:cfg_exemple:>,
-				explication=<:encarts:cfg_exemple_explication:>})]
-		</ul>
+		[<(#DIV|sinon{ul})>]
+
+			[(#SAISIE{choisir_objets, objets,
+				label=<:encarts:champ_objets_label:>,
+				explication=<:encarts:champ_objets_explication:>,
+				exclus=spip_encarts})]
+
+		[</(#DIV|sinon{ul})>]
 
 		<input type="hidden" name="_meta_casier" value="encarts" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>

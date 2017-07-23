@@ -1,12 +1,12 @@
 <paquet
 	prefix="encarts"
 	categorie="edition"
-	version="2.2.0"
-	etat="dev"
-	compatibilite="[3.0.0;3.1.*]"
+	version="2.3.0"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/encarts-64.png"
 	documentation="https://contrib.spip.net/Plugin-Encarts"
-	schema="1.0.0"
+	schema="1.1.0"
 >
 
 	<nom>encarts</nom>

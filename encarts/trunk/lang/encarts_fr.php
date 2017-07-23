@@ -14,6 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_exemple' => 'Exemple',
 	'cfg_exemple_explication' => 'Explication de cet exemple',
 	'cfg_titre_parametrages' => 'Paramétrages',
+	'champ_objets_label' => 'Objets',
+	'champ_objets_explication' => 'Choisissez les objets sur lesquels activer les encarts',
 
 	// T
 	'titre_page_configurer_encarts' => 'Paramétrage des encarts',

@@ -32,11 +32,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function encarts_affiche_milieu($flux) {
 	include_spip('inc/pipelines_ecrire');
 	include_spip('inc/utils');
+	include_spip('inc/config');
 	$texte = "";
 	$e = trouver_objet_exec($flux['args']['exec']);
 
-	// encarts sur les articles
-	if (!$e['edition'] AND in_array($e['type'], array('article'))) {
+	// encarts sur les objets configurés
+	if (!$e['edition']
+		and $tables_objets = lire_config('encarts/objets')
+		and is_array($tables_objets)
+		and in_array(table_objet_sql($e['type']), $tables_objets)
+	) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
 			'table_source' => 'encarts',
 			'objet' => $e['type'],
