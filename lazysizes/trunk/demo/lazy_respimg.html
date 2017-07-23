@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>LazySize : Respimg plugin</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="#CHEMIN{css/lazysizes.css}">
+	#INSERT_HEAD
+<style>
+.media {
+	width: 100%;
+	padding: 1rem 0;
+	clear: both;
+}
+.media img,
+.media picture{
+	width: 100%;
+	height: auto;
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+}
+
+</style>
+</head>
+<body>
+	<h1>Demo LazySize : Respimg plugin</h1>
+	<p><a href="https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/respimg">https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/respimg</a></p>
+[(#REM)<!-- 
+
+Markup picture : avec loader.gif et transition sur l'opactité	
+Necessite l'activation du plugin lazysizes/respimg dans la config
+
+-->]
+<BOUCLE_listDocs(DOCUMENTS){tout}{0,100}{extension==jpg|png|gif}>
+<div class="media">
+	<picture>
+                  <!--[if IE 9]><video style="display: none;"><![endif]-->
+                  <source data-srcset="[(#FICHIER|image_reduire{1400}|extraire_attribut{src})]"
+                     media="(min-width: 960px)">
+                  <source data-srcset="[(#FICHIER|image_reduire{950}|extraire_attribut{src})]"
+                     media="(min-width: 700px)">
+                  <source data-srcset="[(#FICHIER|image_reduire{500}|extraire_attribut{src})]"
+					 media="(min-width: 480px)"/>
+				  <source data-srcset="[(#FICHIER|image_reduire{400}|extraire_attribut{src})]"
+					 />
+                  <!--[if IE 9]></video><![endif]-->
+                  <img  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+						alt="Responsive image test"
+						class="lazyload">
+    </picture>
+</div>	
+</BOUCLE_listDocs>
+</body>
+</html>
