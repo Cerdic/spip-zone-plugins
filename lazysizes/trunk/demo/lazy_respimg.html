@@ -24,29 +24,52 @@
 </head>
 <body>
 	<h1>Demo LazySize : Respimg plugin</h1>
-	<p><a href="https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/respimg">https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/respimg</a></p>
+	<p>
+		<a href="https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/respimg">https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/respimg</a>
+	<br>
+	<a href="https://codepen.io/chriscodeweb/pen/XXyVvX">https://codepen.io/chriscodeweb/pen/XXyVvX</a>
+	<br><a href="http://afarkas.github.io/lazysizes/#examples">http://afarkas.github.io/lazysizes/#examples</a>
+	
+	</p>
 [(#REM)<!-- 
 
 Markup picture : avec loader.gif et transition sur l'opactité	
 Necessite l'activation du plugin lazysizes/respimg dans la config
 
+l'attribut alt doit être renseigné due a un bug Chrome :
+
+
+On renseigne la hauteur / largeur de l'image  ainsi que le ratio pour 
+préserver le layout le temps du chargement
+
+https://github.com/aFarkas/lazysizes#tip-specifying-image-dimensions-minimizing-reflows-and-avoiding-page-jumps
+
+http://www.mademyday.de/css-height-equals-width-with-pure-css.html
+
+
+
 -->]
 <BOUCLE_listDocs(DOCUMENTS){tout}{0,100}{extension==jpg|png|gif}>
-<div class="media">
+<!--	#HAUTEUR / #LARGEUR * 100% -->
+<div class="media ratio-box" style="padding-bottom: [(#VAL{#HAUTEUR}|div{#LARGEUR}|mult{100})%]">
 	<picture>
-                  <!--[if IE 9]><video style="display: none;"><![endif]-->
-                  <source data-srcset="[(#FICHIER|image_reduire{1400}|extraire_attribut{src})]"
-                     media="(min-width: 960px)">
-                  <source data-srcset="[(#FICHIER|image_reduire{950}|extraire_attribut{src})]"
-                     media="(min-width: 700px)">
-                  <source data-srcset="[(#FICHIER|image_reduire{500}|extraire_attribut{src})]"
-					 media="(min-width: 480px)"/>
-				  <source data-srcset="[(#FICHIER|image_reduire{400}|extraire_attribut{src})]"
-					 />
-                  <!--[if IE 9]></video><![endif]-->
-                  <img  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-						alt="Responsive image test"
-						class="lazyload">
+		<!--[if IE 9]><video style="display: none;"><![endif]-->
+		<source data-srcset="[(#FICHIER|image_reduire{1400}|extraire_attribut{src})]"
+		   media="(min-width: 960px)">
+		<source data-srcset="[(#FICHIER|image_reduire{950}|extraire_attribut{src})]"
+		   media="(min-width: 700px)">
+		<source data-srcset="[(#FICHIER|image_reduire{500}|extraire_attribut{src})]"
+		   media="(min-width: 480px)"/>
+		<source data-srcset="[(#FICHIER|image_reduire{400}|extraire_attribut{src})]"
+		   />
+		<!--[if IE 9]></video><![endif]-->
+		<img  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+			  data-src="[(#FICHIER|image_reduire{1400}|extraire_attribut{src})]"
+			  alt="Responsive image test"
+			  data-sizes="auto"
+			  width="#LARGEUR"
+			  height="#HAUTEUR"
+			  class="lazyload">
     </picture>
 </div>	
 </BOUCLE_listDocs>
