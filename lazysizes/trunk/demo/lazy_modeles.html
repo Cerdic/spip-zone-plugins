@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>LazySize : Liste des modèles</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="#CHEMIN{css/lazysizes.css}">
+	#INSERT_HEAD
+<style>
+.media {
+	width: 100%;
+	padding: 1rem 0;
+	clear: both;
+}
+.media img,
+.media picture{
+	width: 100%;
+	height: auto;
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+}
+
+</style>
+</head>
+<body>
+	<h1>Demo LazySize : les modèles</h1>
+	<p> Page de test et exemple des modèles fournis</p>
+
+
+[(#REM)<!-- 
+
+HTML5 Picture
+
+https://webdesign.tutsplus.com/tutorials/quick-tip-how-to-use-html5-picture-for-responsive-images--cms-21015
+https://html.spec.whatwg.org/multipage/embedded-content.html#embedded-content
+https://html.spec.whatwg.org/multipage/embedded-content.html#attr-source-sizes
+
+Micro-data et seo pour les galleries d'images :
+http://photoswipe.com/documentation/seo.html
+
+
+Markup picture : avec loader.gif et transition sur l'opactité	
+Necessite l'activation du plugin lazysizes/respimg dans la config
+
+- preserve le ratio la mise en page/layout
+- valid W3C html5
+
+l'attribut alt doit être renseigné due a un bug Chrome :
+
+
+On renseigne la hauteur / largeur de l'image  ainsi que le ratio pour 
+préserver le layout le temps du chargement
+
+https://github.com/aFarkas/lazysizes#tip-specifying-image-dimensions-minimizing-reflows-and-avoiding-page-jumps
+
+http://www.mademyday.de/css-height-equals-width-with-pure-css.html
+
+-->]
+<h2>le modèle <code>picture</code></h2>
+<BOUCLE_listDocs(DOCUMENTS){tout}{0,10}{extension==jpg|png|gif}>
+[(#INCLURE{fond=modeles/picture}{id_document}{class=media}{env})]
+</BOUCLE_listDocs>
+</body>
+</html>
