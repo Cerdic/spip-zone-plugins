@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_mise_a_jour' => 'Pri aktualizovaní databázy sa vyskytla chyba.',
 	'explication_code' => 'POZOR! Pre pokročilých používateľov. Môžete zadať kód SPIPu (cykly a tagy), ktorý sa zobrazí tak, akoby to bola šablóna. Oriešok bude mať prístup aj k všetkým premenným prostredia danej stránky.',
 	'explication_description_code' => 'Na interné použitie. Nezobrazí sa na verejne prístupnej stránke.',
-	'explication_glisser_deposer' => 'Môžete pridať oriešok alebo oriešky inak usporiadať jednoduchým kliknutím a uvoľnením myši.',
+	'explication_glisser_deposer' => 'Môžete pridať oriešok alebo oriešky inak usporiadať jednoduchým kliknutím a uvoľnením myši.', # MODIF
 	'explication_heritages_composition' => 'Tu môžete nastaviť rozmiestnenia, ktoré budú používať objekty danej vetvy.', # MODIF
 	'explication_raccourcis_typo' => 'Môžete používať klávesové skratky SPIPu.',
 
@@ -115,7 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ne_pas_definir_d_heritage' => 'Nedefinovať dedičnosť', # MODIF
 	'noisette_numero' => 'oriešok číslo:',
 	'noisettes_composition' => 'Oriešky, ktoré sa používa iba toto rozmiestnení <i>@composition@:</i>',
-	'noisettes_disponibles' => 'Dostupné oriešky',
+	'noisettes_disponibles' => 'Dostupné oriešky', # MODIF
 	'noisettes_page' => 'Špeciálne oriešky pre stránku <i>@type@</i>:',
 	'noisettes_toutes_pages' => 'Oriešky spoločné pre všetky stránky:',
 	'noizetier' => 'noiZetier',

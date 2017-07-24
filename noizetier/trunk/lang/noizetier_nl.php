@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_dupliquer_composition_reference' => 'De identificatie van de gedupliceerde bladzijde is <i>@composition@</i>.
 	Je kunt een nieuwe identificatie kozen, of de bestaande van een suffix voorzien: <i>@composition@<strong>_suffix</strong></i>',
 	'explication_dupliquer_composition_suffixer' => '.',
-	'explication_glisser_deposer' => 'Je kunt een nootje toevoegen of met schuiven en plakken herschikken.',
+	'explication_glisser_deposer' => 'Je kunt een nootje toevoegen of met schuiven en plakken herschikken.', # MODIF
 	'explication_heritages_composition' => 'Je kunt hier de composities vastleggen die door onderliggende  objecten zullen worden geërfd.', # MODIF
 	'explication_raccourcis_typo' => 'Je kunt de typografische snelkoppelingen van SPIP gebruiken.',
 
@@ -127,7 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisettes_configurees_aucune' => 'Geen enkel geconfigureerd nootje',
 	'noisettes_configurees_nb' => '@nb@ geconfigureerde nootjes',
 	'noisettes_configurees_une' => 'Eén geconfigureerd nootje',
-	'noisettes_disponibles' => 'beschikbare nootjes',
+	'noisettes_disponibles' => 'beschikbare nootjes', # MODIF
 	'noisettes_page' => 'nootjes specifiek voor bladzijde <i>@type@</i>:',
 	'noisettes_pour' => 'Nootjes voor: ',
 	'noisettes_toutes_pages' => 'nootjes voor alle bladzijdes:',

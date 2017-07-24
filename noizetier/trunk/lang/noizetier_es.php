@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_aucune_noisette_selectionnee' => 'Usted debe seleccionar una noisette !', # Prefiero no traducir noisette que sería avellana , pues es un término técnico importante del plugin, y le da el nombre al plugin.
 	'erreur_doit_choisir_noisette' => 'Usted debe elegir una noisette.',
 	'erreur_mise_a_jour' => 'Un error se ha producido durante la actualización  de la base de datos. ',
-	'explication_glisser_deposer' => 'Usted puede añadir una noisette o bien reordenarlas por simple deslizar-depositar',
+	'explication_glisser_deposer' => 'Usted puede añadir una noisette o bien reordenarlas por simple deslizar-depositar', # MODIF
 	'explication_heritages_composition' => 'Usted puede definir aquí las composiciones que serán heredadas por los objetos de la rama.', # MODIF
 	'explication_raccourcis_typo' => 'Puede utilizar los  atajos tipográficos de SPIP.',
 
@@ -111,7 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ne_pas_definir_d_heritage' => 'No definir la herencia', # MODIF
 	'noisette_numero' => 'noisette numero :',
 	'noisettes_composition' => 'Noisettes específicas a la composición <i>@composition@</i> :', # lo que es código, no lo traduzco, lo dejo tal cual
-	'noisettes_disponibles' => 'Noisettes disponibles',
+	'noisettes_disponibles' => 'Noisettes disponibles', # MODIF
 	'noisettes_page' => 'Noisettes específicas a la página  <i>@type@</i> :',
 	'noisettes_toutes_pages' => 'Noisettes comunes a todas las páginas :',
 	'noizetier' => 'noiZetier', # Dejamos {noizetier} en vez de {avellano}, para mas claridad  en  la comprensión de la programación del plugin.

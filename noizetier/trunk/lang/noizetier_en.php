@@ -43,7 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 You can choose a new identifier or suffix the reference identifier as follows:
 <i>@composition@<strong>_suffixe</strong></i>',
 	'explication_dupliquer_composition_suffixer' => '.',
-	'explication_glisser_deposer' => 'You can add a nut or order them by drag and drop.',
+	'explication_glisser_deposer' => 'You can add a nut or order them by drag and drop.', # MODIF
 	'explication_heritages_composition' => 'Here you can set the compositions that will be inherited by the objects of the branch.', # MODIF
 	'explication_raccourcis_typo' => 'You can use the SPIP typographical shortcuts.',
 
@@ -123,7 +123,7 @@ nuts on the following pages:',
 	'ne_pas_definir_d_heritage' => 'Do not define heritage', # MODIF
 	'noisette_numero' => 'nut number :',
 	'noisettes_composition' => 'Specific nuts to the composition <i>@composition@</i>:',
-	'noisettes_disponibles' => 'Nuts available',
+	'noisettes_disponibles' => 'Nuts available', # MODIF
 	'noisettes_page' => 'Specific nuts to the page <i>@type@</i>:',
 	'noisettes_toutes_pages' => 'Common nuts to all pages:',
 	'noizetier' => 'Nuts Manager',

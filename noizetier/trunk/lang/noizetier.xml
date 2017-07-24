@@ -2,7 +2,7 @@
 	<langue code="de" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=de" total="167" traduits="66" relire="0" modifs="15" nouveaux="86" pourcent="39.52">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=en" total="167" traduits="100" relire="0" modifs="13" nouveaux="54" pourcent="59.88">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=en" total="167" traduits="98" relire="0" modifs="15" nouveaux="54" pourcent="58.68">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Gilles" lien="https://trad.spip.net/auteur/gilles" />
@@ -11,7 +11,7 @@
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Martin McCaffery" lien="https://trad.spip.net/auteur/martin-mccaffery" />
 	</langue>
-	<langue code="es" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=es" total="167" traduits="91" relire="0" modifs="12" nouveaux="64" pourcent="54.49">
+	<langue code="es" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=es" total="167" traduits="89" relire="0" modifs="14" nouveaux="64" pourcent="53.29">
 		<traducteur nom="alf" lien="https://trad.spip.net/auteur/alf" />
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 	</langue>
@@ -20,10 +20,10 @@
 	</langue>
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=fr" total="167" traduits="167" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="nl" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=nl" total="167" traduits="106" relire="0" modifs="14" nouveaux="47" pourcent="63.47">
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=nl" total="167" traduits="104" relire="0" modifs="16" nouveaux="47" pourcent="62.28">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
-	<langue code="sk" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=sk" total="167" traduits="96" relire="0" modifs="12" nouveaux="59" pourcent="57.49">
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=sk" total="167" traduits="94" relire="0" modifs="14" nouveaux="59" pourcent="56.29">
 		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
