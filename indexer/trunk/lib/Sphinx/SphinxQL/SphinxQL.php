@@ -17,13 +17,15 @@ class SphinxQL {
 	 * Se connecter à Sphinx
 	**/
 	public function connect() {
+		mysqli_report(MYSQLI_REPORT_STRICT);
 		try {
 			$this->sql = new \MySQLi($this->host, null, null, null, $this->port);
 		} catch (\Exception $e) {
-			var_dump($e->getMessage());
+			spip_log($e->getMessage(), 'indexer.' . _LOG_ERREUR);
+			mysqli_report(MYSQLI_REPORT_OFF);
 			return false;
 		}
-		
+		mysqli_report(MYSQLI_REPORT_OFF); 
 		return !!!$this->sql->connect_error;
 	}
 
