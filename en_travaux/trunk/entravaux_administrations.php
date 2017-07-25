@@ -25,14 +25,16 @@ function entravaux_upgrade($nom_meta_base_version,$version_cible){
 
 	// seul un webmestre peut activer les travaux sur le site
 	// si c'est un autre admin qui active le plugin, il ne fait rien en base
+	$maj = array('create' => array(array('strtolower', '')));
+
 	if (autoriser('travaux')) {
 		$maj['create'] = array(
 			array('entravaux_poser_verrou','accesferme'),
 		);
-		include_spip('base/upgrade');
-		maj_plugin($nom_meta_base_version, $version_cible, $maj);
 	}
-	// sinon on ne fait *rien* (activation par un admin, ou upgrade silencieux apres import de base)
+
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 /**

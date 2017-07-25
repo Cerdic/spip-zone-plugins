@@ -1,13 +1,13 @@
 <paquet
 	prefix="entravaux"
 	categorie="maintenance"
-	version="3.1.30"
+	version="3.1.31"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/entravaux-32.png"
 	schema="0.2.0"
 	documentation="https://contrib.spip.net/3047"
->	
+>
 
 	<nom>En travaux</nom>
 	<!-- Indiquer une phase de maintenance -->

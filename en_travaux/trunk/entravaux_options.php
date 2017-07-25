@@ -108,9 +108,9 @@ function entravaux_styliser($flux){
 		if (defined('_SKEL_HORS_TRAVAUX')) $skels_ok = explode(',',_SKEL_HORS_TRAVAUX); 
 		else $skels_ok = array();
 		if (!autoriser('travaux')
-			AND !in_array($flux['args']['fond'],$pages_ok)
-			AND !in_array($flux['args']['fond'],$skels_ok)
-			AND !in_array($flux['args']['contexte'][_SPIP_PAGE],$pages_ok)
+			AND !in_array($flux['args']['fond'], $pages_ok)
+			AND !in_array($flux['args']['fond'], $skels_ok)
+			AND !(isset($flux['args']['contexte'][_SPIP_PAGE]) and in_array($flux['args']['contexte'][_SPIP_PAGE], $pages_ok))
 			AND !((_request('var_mode') === 'preview') AND (_request('var_previewtoken') != '') AND autoriser('previsualiser'))
 			// et on laisse passer modeles et formulaires,
 			// qui ne peuvent etre inclus ou appeles que legitimement
