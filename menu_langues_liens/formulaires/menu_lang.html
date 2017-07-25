@@ -21,10 +21,13 @@
 </BOUCLE_TraductionArticleCourant>
 </BOUCLE_article>
 
-[(#REM) 
-	Y-a-t'il plus d'une langue reellement utilisee dans le site (moins les langues "invisibles") ?
+[(#REM)
+	Y-a-t'il plus d'une langue à afficher (moins les langues "invisibles") ?
 	Si oui, on affiche le menu de langue
 	Si non, rien
+	
+	Si _MLL_LANGUES_MULTILINGUE est definie, on utilise la variable meta langues_multilingue (langues à disposition des rédacteurs, comportement natif de SPIP).
+	Sinon, on utilise langues_utilisees (langues reellement utilisees dans les articles).
 	
 	Les langues "invisibles" sont les langues que le webmestre peut choisir de ne pas afficher dans le menu,
 	a partir du formulaire de configuration du plugin.
@@ -34,7 +37,12 @@
 	avec la fonction PHP 'array_diff' http://www.php.net/manual/fr/function.array-diff.php qui renvoie elle-meme un tableau.
 ]
 
-[(#SET{langues_a_afficher,[(#CONFIG{langues_utilisees}|explode{","}|array_diff{#CONFIG{menu_lang_liens/langues_invisibles, #ARRAY}})]})]
+[(#EVAL{_MLL_LANGUES_MULTILINGUE}|=={true}|?{
+	#SET{mll_langues,langues_multilingue}
+,
+	#SET{mll_langues,langues_utilisees}
+})]
+[(#SET{langues_a_afficher,[(#CONFIG{#GET{mll_langues}}|explode{","}|array_diff{#CONFIG{menu_lang_liens/langues_invisibles, #ARRAY}})]})]
 #SET{liste,#CONFIG{menu_lang_liens/formatliste,bloc}}
 #SET{format,#CONFIG{menu_lang_liens/format,abrege}}
 #SET{separateur,#CONFIG{menu_lang_liens/separateur,''}}
