@@ -180,6 +180,43 @@
 		});
 
 		[(#ENV{erreurs}|non|et{#ENV{_jquery_ui_all}|ou{#ENV{_chemin_ui}}})
+			var saisies_sortable = function() {
+				$( "#deplacable, #deplacable .editer-groupe" ).sortable({
+					revert: true,
+					containment: '#deplacable',
+					connectWith: "#deplacable, #deplacable .editer-groupe",
+					placeholder: "ui-state-highlight",
+					handle: '>.actions .deplacer_saisie',
+					start: function(event, ui) {
+						$('.ui-state-highlight')
+							.css('height', ui.item.css('height'))
+							.css('height', '+=20px');
+					},
+					update: function(event, ui) {
+						id = ui.item.data('id');
+						ou = ui.item.next().data('id');
+						// avant le suivant
+						if (!ou) {
+							// sinon dans le parent
+							ou = ui.item.closest('.fieldset').data('id');
+							if (ou) {
+								ou = '\[' + ou + '\]';
+							}
+						}
+						url = "#URL_ECRIRE";
+						$.get(url, {
+							session: '#ENV{_identifiant_session}',
+							action: 'deplacer_saisie',
+							saisie: id,
+							ou: ou
+						}, function() {
+							//$('input.vide').submit();
+							$('.formulaire_#ENV{form}').addClass('modifie').trigger('modifsaisies');
+						});
+					}
+				});
+			}
+			if (!$.fn.sortable) {
 			[
 				$.getScript("(#ENV{_jquery_ui_all})", function(){
 			]
@@ -190,45 +227,15 @@
 				$.getScript("#CHEMIN{#ENV{_chemin_ui}sortable.js}", function(){
 			]
 					if ($.fn.sortable) {
-						$( "#deplacable, #deplacable .editer-groupe" ).sortable({
-							revert: true,
-							containment: '#deplacable',
-							connectWith: "#deplacable, #deplacable .editer-groupe",
-							placeholder: "ui-state-highlight",
-							handle: '>.actions .deplacer_saisie',
-							start: function(event, ui) {
-								$('.ui-state-highlight')
-									.css('height', ui.item.css('height'))
-									.css('height', '+=20px');
-							},
-							update: function(event, ui) {
-								id = ui.item.data('id');
-								ou = ui.item.next().data('id');
-								// avant le suivant
-								if (!ou) {
-									// sinon dans le parent
-									ou = ui.item.closest('.fieldset').data('id');
-									if (ou) {
-										ou = '\[' + ou + '\]';
-									}
-								}
-								url = "#URL_ECRIRE";
-								$.get(url, {
-									session: '#ENV{_identifiant_session}',
-									action: 'deplacer_saisie',
-									saisie: id,
-									ou: ou
-								}, function() {
-									//$('input.vide').submit();
-									$('.formulaire_#ENV{form}').addClass('modifie').trigger('modifsaisies');
-								});
-							}
-						});
+						saisies_sortable();
 					}
 			});
 			[(#ENV{_chemin_ui}|oui)
 				});});});
 			]
+			} else {
+				saisies_sortable();
+			}
 		]
 
 	})(jQuery);
