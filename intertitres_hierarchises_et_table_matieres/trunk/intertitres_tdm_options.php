@@ -114,6 +114,7 @@ function IntertitresTdm_table_des_matieres($texte, $tableseule = false, $url_art
 	$lastlevel = 1;
 	$cite[''] = '';
 
+	$ajout = 0;
 	// décalle le matching quand on repasse sur le texte avec tableseule
 	if ($tableseule) {
 		$ajout = 1;
@@ -141,7 +142,9 @@ function IntertitresTdm_table_des_matieres($texte, $tableseule = false, $url_art
 		if ($tableseule) {
 			$titre=preg_replace("/(<a id=')(.*?)('><\/a>)/", '', $titre);
 		}
-		$ref = $matches[5+$ajout][$j];
+		if (isset($matches[5+$ajout])) {
+			$ref = $matches[5+$ajout][$j];
+		}
 
 		// si tableseule alors le $ref correspond au contenu du <a id=''></a>... Je sais pas si ça marche: pas testé ! :o)
 		if ($tableseule) {
@@ -211,7 +214,9 @@ function IntertitresTdm_table_des_matieres($texte, $tableseule = false, $url_art
 		}
 
 		//on se rappelle du raccourcis
-		$cite[$ref] = $numeros;
+		if (isset($ref)) {
+			$cite[$ref] = $numeros;
+		}
 		//$table .= "<li><a href=\"$url_article#a$numeros\" title=\"Aller directement &agrave; &laquo;&nbsp;".attribut_html($titre)."&nbsp;&raquo;\">$titre</a>";
 		$table .= "<li><a href=\"$url_article#$ancre\" title=\""
 			. _T('itdm:aller_directement_a_', array('titre'=>attribut_html($titre)))
