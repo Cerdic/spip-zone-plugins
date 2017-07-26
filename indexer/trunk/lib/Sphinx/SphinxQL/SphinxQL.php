@@ -21,11 +21,12 @@ class SphinxQL {
 		try {
 			$this->sql = new \MySQLi($this->host, null, null, null, $this->port);
 		} catch (\Exception $e) {
+			spip_log('Connexion erronnée pour host : ' . $this->host . ' , port: ' . $this->port, 'indexer.' . _LOG_ERREUR);
 			spip_log($e->getMessage(), 'indexer.' . _LOG_ERREUR);
 			mysqli_report(MYSQLI_REPORT_OFF);
 			return false;
 		}
-		mysqli_report(MYSQLI_REPORT_OFF); 
+		mysqli_report(MYSQLI_REPORT_OFF);
 		return !!!$this->sql->connect_error;
 	}
 
