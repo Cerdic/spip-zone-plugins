@@ -38,6 +38,7 @@
 
 * passer par le pipeline `optimiser_base_disparus` pour supprimer les liens de niveaux 2 sur des objets qui auraient été supprimés définitivement
 * passer par le pipeline `trig_supprimer_objets_lies` pour supprimer les liens de niveaux 2 sur des objets du core supprimés directement
+* sur la page d'édition d'un niveau 2, on utilise l'échafaudage  simple de SPIP, il n'y a que deux paramètres passés au formulaire, l'id de l'objet et le retour. L'id_rubrique n'est absolument pas utile. Du coup cela rend fonctionnel le retour ajax après validation du formulaire.
 
 #### Version 2.1.2 (2017-07-13)
 
