@@ -35,3 +35,20 @@ function lazysizes_addons() {
 	
 	return $lazy_addons;
 }
+
+/*
+ * function titrer_document
+ *
+ * transforme un nom de fichier en chaine lisible
+ * tire de la fonction ajouter_document du core
+ * https://zone.spip.org/trac/spip-zone/browser/_core_/plugins/medias/action/ajouter_documents.php#L149
+ *
+ * @param $fichier
+ * @return string
+ */
+
+function titrer_document($fichier) {
+	$titre = substr($fichier, 0, strrpos($fichier, '.')); // Enlever l'extension du nom du fichier
+	$titre = preg_replace(',[[:punct:][:space:]]+,u', ' ', $titre);
+	return preg_replace(',\.([^.]+)$,', '', $titre);
+}

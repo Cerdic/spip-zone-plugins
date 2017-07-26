@@ -29,7 +29,7 @@ la description du breakpoint devrais pouvoir etre une mediaquerie OU utiliser un
 <BOUCLE_doc(DOCUMENTS){id_document=#ENV{id_document}}{tout}>
 [(#SET{fichier, #FICHIER})]
 [(#SET{mime_type, #MIME_TYPE})]
-[(#SET{alt,#ENV{alt,#TITRE|sinon{#FICHIER}|basename|concat{' - '#MIME_TYPE}}})]
+[(#SET{alt,#ENV{alt, #TITRE|sinon{#FICHIER|basename|titrer_document}|concat{' - '#MIME_TYPE}}})]
 [(#SET{largeur,#LARGEUR})]
 [(#SET{hauteur,#HAUTEUR})]
 </BOUCLE_doc>
@@ -38,7 +38,7 @@ la description du breakpoint devrais pouvoir etre une mediaquerie OU utiliser un
 
 [(#SET{fichier,#ENV{fichier}})]
 [(#SET{mime_type,#GET{fichier}|mime_content_type})]
-[(#SET{alt,#ENV{alt, #GET{fichier}|basename|concat{' - '#GET{mime_type}}}})]
+[(#SET{alt,#ENV{alt, #GET{fichier}|basename|titrer_document|concat{' - '#GET{mime_type}}}})]
 [(#SET{largeur,#GET{fichier}|largeur})]
 [(#SET{hauteur,#GET{fichier}|hauteur})]
 
