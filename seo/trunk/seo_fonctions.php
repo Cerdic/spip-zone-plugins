@@ -116,12 +116,14 @@ function seo_insere_remplace_metas($head, $contexte) {
 	}
 	/* META GOOGLE WEBMASTER TOOLS */
 	if (isset($config['webmaster_tools'])
+		and isset($config['webmaster_tools']['activate'])
 		and $config['webmaster_tools']['activate']=='yes'
 		and $is_sommaire) {
 		$append .= "\n" . seo_generer_webmaster_tools();
 	}
 
 	if (isset($config['bing'])
+		and isset($config['bing']['activate'])
 		and $config['bing']['activate'] == 'yes'
 		and $is_sommaire) {
 		$append .= "\n" . seo_generer_bing();
@@ -129,19 +131,22 @@ function seo_insere_remplace_metas($head, $contexte) {
 
 	/* CANONICAL URL */
 	if (isset($config['canonical_url'])
+		and isset($config['canonical_url']['activate'])
 		and $config['canonical_url']['activate']=='yes') {
 		$append .= "\n" . seo_generer_urls_canoniques($contexte);
 	}
 
 	/* GOOGLE ANALYTICS */
 	if (isset($config['analytics'])
+		and isset($config['analytics']['activate'])
 		and $config['analytics']['activate']=='yes') {
 		$append .= "\n" . seo_generer_google_analytics();
 	}
 
 	/* ALEXA */
 	if (isset($config['alexa'])
-		and $config['alexa']['activate']=='yes'
+		and isset($config['alexa']['activate'])
+		and $config['alexa']['activate'] == 'yes'
 		and $is_sommaire) {
 		$append .= "\n" . seo_generer_alexa();
 	}
