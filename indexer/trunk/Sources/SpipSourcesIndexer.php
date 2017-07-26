@@ -229,7 +229,7 @@ echo  "$skey, $source\n";
             spip_timer('indexing');
             $ret = $this->indexer->replaceDocuments($documents);
             $t = spip_timer('indexing', true);
-            
+
             if (!$ret) {
                 fwrite(STDERR, "<h4>Erreur à l’enregistrement des documents.</h4>\n");
                 exit(1);

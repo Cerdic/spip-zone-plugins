@@ -59,7 +59,7 @@ class SpipDocuments implements SourceInterface {
 			$where = array();
 			if ($start) $where[] = "$column >= $start";
 			if ($end)   $where[] = "$column < $end";
-			
+
 			$all = sql_allfetsel(
 				'*',
 				$this->table_objet, // la table de l'objet défini
@@ -140,7 +140,7 @@ class SpipDocuments implements SourceInterface {
 			else {
 				$doc['title'] = '';
 			}
-			
+
 			// Pour le contenu principal, on va chercher la liste des champs fulltext déclarés
 			if ($rechercher_champs = array_keys(objet_info($this->objet, 'rechercher_champs'))) {
 				$doc['content'] = '';
@@ -165,7 +165,7 @@ class SpipDocuments implements SourceInterface {
 			else {
 				$doc['content'] = '';
 			}
-			
+
 			// Pour le résumé, on utilise le filtre d'intro de SPIP
 			// = descriptif s'il existe sinon le contenu principal précédent coupé
 			$descriptif = isset($contenu['descriptif']) ? $contenu['descriptif'] : ''; // on s'assure que le descriptif soit bien une chaine
@@ -175,7 +175,7 @@ class SpipDocuments implements SourceInterface {
 			else {
 				$doc['summary'] = couper($doc['content'], 400);
 			}
-			
+
 			// Pour la date
 			// S'il y a un champ de date de rédaction et qu'il est utilisé, on prend en priorité à celle de publication
 			if (isset($contenu['date_redac']) and substr($contenu['date_redac'],0,4) != '0000') {
@@ -206,7 +206,7 @@ class SpipDocuments implements SourceInterface {
 			else {
 				$doc['properties']['maj'] = '0000-00-00 00:00:00';
 			}
-			
+
 			// S'il y a une langue, la noter et gérer les bons blocs multi
 			if (isset($contenu['lang'])) {
 				$doc['properties']['lang'] = $contenu['lang'];
@@ -298,7 +298,7 @@ class SpipDocuments implements SourceInterface {
 				// On ajoute la branche dans le fulltext
 				$doc['content'] .= "\n\n".join(' / ', $doc['properties']['parents']['titres']);
 			}
-			
+
 			// On cherche les jointures pour cet objet
 			// Pour chaque, on va déléguer à une fonction dédiée pour plus de lisibilité, et en plus ça permet d'être surchargeable
 			foreach (indexer_lister_jointures($this->objet) as $jointure) {
@@ -313,7 +313,7 @@ class SpipDocuments implements SourceInterface {
 					$doc = $jointure_fonction($this->objet, $id, $doc);
 				}
 			}
-			
+
 			// Travail specifique sur les auteurs :
 			if ($this->objet === "auteur") {
 				// - retirer les parametres de securite
@@ -361,7 +361,6 @@ class SpipDocuments implements SourceInterface {
 				$doc['summary'] = nettoyer_raccourcis_typo($doc['summary']);
 			}
 		}
-		
 		// On crée le Document avec les infos
 		$doc = new Document($doc);
 
