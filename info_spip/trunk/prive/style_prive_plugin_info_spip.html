@@ -132,3 +132,11 @@ body.accueil #navigation .box.info.type_site .cadre-icone {
 	margin: 0;
 	padding: 0;
 }
+[(#SET{info_config,[(#CONFIG{'info_spip/modules'})]})]
+<B_module_info>
+<BOUCLE_module_info (DATA) {source table, (#VAL{'html'}|lister_noisettes_info_spip)}>[(#VALEUR|in_array{#GET{info_config}}|oui)
+.navigation_avec_icones .bando2_[(#VALEUR)] \{
+	background-image: url\([(#CHEMIN_IMAGE{[(#VALEUR|concat{'-16.png'})]}|sinon{[(#CHEMIN_IMAGE{'info_spip-16.png'})]})]\);
+\}]
+</BOUCLE_module_info>
+</B_module_info>
