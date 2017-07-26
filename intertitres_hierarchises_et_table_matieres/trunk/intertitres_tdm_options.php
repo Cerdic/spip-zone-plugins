@@ -271,7 +271,7 @@ function IntertitresTdm_table_des_matieres($texte, $tableseule = false, $url_art
 
 	// Comme la TDM est désormais affichée de manière externe aux articles, si un auteur met #TABLEMATIERES dans son article, celà crée un lien vers la TDM externe, d'où un remplacement de:
 	//$texte = str_replace('#TABLEMATIERES',$table,$texte); par:
-	$texte = str_replace('#TABLEMATIERES', '<a href="#table_des_matieres" title="'._T('itdm:title_lien_table_matieres').'">'._T('itdm:titre_table_matieres').'</a>', $texte);
+	$texte = str_replace('#TABLEMATIERES', '<a href="#table_des_matieres" id="table_des_matieres_renvoi" title="'._T('itdm:title_lien_table_matieres').'">'._T('itdm:titre_table_matieres').'</a>', $texte);
 
 	// si tableseule on ne renvoit que la table, sinon, on renvoie tout
 	if ($tableseule) {
