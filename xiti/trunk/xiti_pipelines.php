@@ -37,3 +37,43 @@ function xiti_affiche_milieu($flux) {
 	}
 	return $flux;
 }
+
+function xiti_optimiser_base_disparus($flux){
+	$n = &$flux['data'];
+	$mydate = $flux['args']['date'];
+	/**
+	 * les niveaux 2 lies a une id_objet inexistant
+	 */
+	$r = sql_select("DISTINCT objet",'spip_xiti_niveaux_liens');
+	while ($t = sql_fetch($r)){
+		if ($type = $t['objet']) {
+			$spip_table_objet = table_objet_sql($type);
+			$id_table_objet = id_table_objet($type);
+			$res = sql_allfetsel('*', 'spip_xiti_niveaux_liens', 'objet='.sql_quote($type));
+			$res = sql_select('xiti.id_objet AS id',
+						"spip_xiti_niveaux_liens AS xiti
+							LEFT JOIN $spip_table_objet AS O
+								ON O.$id_table_objet=xiti.id_objet AND xiti.objet=".sql_quote($type),
+							"xiti.objet=".sql_quote($type)." AND O.$id_table_objet IS NULL AND xiti.id_objet>0");
+
+			while ($row = sql_fetch($res)) {
+				sql_delete('spip_xiti_niveaux_liens', 'objet='.sql_quote($type).' AND id_objet='.intval($row['id']));
+			}
+			sql_delete('spip_xiti_niveaux_liens', 'id_xiti_niveau=0');
+		}
+	}
+	return $flux;
+}
+
+/**
+ * Supprimer les niveaux deux lies aux objets du core lors de leur suppression
+ *
+ * @param array $objets
+ * @return array
+ */
+function xiti_trig_supprimer_objets_lies($objets){
+	foreach($objets as $objet){
+		sql_delete('spip_xiti_niveaux_liens', 'objet='.sql_quote($objet['type']).' AND id_objet='.intval($objet['id']));
+	}
+	return $objets;
+}

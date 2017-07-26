@@ -34,6 +34,11 @@
 
 ### Version 2.x.x (Passage à smarttag.js)
 
+#### Version 2.2.0 (2017-07-25)
+
+* passer par le pipeline `optimiser_base_disparus` pour supprimer les liens de niveaux 2 sur des objets qui auraient été supprimés définitivement
+* passer par le pipeline `trig_supprimer_objets_lies` pour supprimer les liens de niveaux 2 sur des objets du core supprimés directement
+
 #### Version 2.1.2 (2017-07-13)
 
 - Ne prendre en compte le niveau 2 de hiérarchie que si on n'a pas de niveau x deux sur l'objet actuel
