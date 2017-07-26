@@ -6,12 +6,12 @@
 
 <B_compte>
 <h3>Objets indexés</h3>
-<ul>
+<ul class="spip">
 <BOUCLE_compte(SPHINX)
-{select properties.objet AS objet, COUNT(*) AS compte}
+{select properties.objet AS objet, COUNT(*) AS nombre}
 {groupby properties.objet}
-{!par compte}>
-<li>[(#OBJET|sinon{n/a})]: #COMPTE</li>
+{!par nombre}>
+<li>[(#OBJET|sinon{n/a})]: #NOMBRE</li>
 </BOUCLE_compte>
 </ul>
 </B_compte>
