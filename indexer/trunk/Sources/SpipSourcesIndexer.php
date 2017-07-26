@@ -153,18 +153,21 @@ echo  "$skey, $source\n";
                 );
             }
 
-            $this->indexSource($source, $skey, $stats);
-
             if ($this->isTimeout()) {
+                break;
+            }
+
+            if (!$this->indexSource($source, $skey, $stats)) {
+                // timeout, on reste sur cette source, qui n’a pas fini d’indexer
                 break;
             }
 
             $sources->next();
         }
 
-        if ($this->isTimeout()) {
+        // si ce n’est pas le dernier élément, sauver l’état pour continuer l’indexation au hit suivant.
+        if ($sources->valid() and $this->isTimeout()) {
             $this->saveIndexesStats($stats);
-            
             return false;
         }
 
@@ -174,7 +177,16 @@ echo  "$skey, $source\n";
     }
 
 
-
+	/**
+	 * Indexe une source, en le faisant par petits morceaux
+	 *
+	 * @param SourceInterface $source
+	 * @param string $skey Nom / objet de la source
+	 * @param array $stats Statistiques d’avancement de l’indexation
+	 * @return bool
+	 *     - true si l’indexation est finie
+	 *     - false si timeout et indexation non finie.
+	 */
     private function indexSource($source, $skey, &$stats) {
         echo "<h2>Analyse de $source :</h2>\n";
         spip_timer('source');
@@ -208,6 +220,9 @@ echo  "$skey, $source\n";
         $stats['sources'][$skey]['time']['total'] += $t;
         echo $this->getNiceTime( $stats['sources'][$skey]['time']['total'] );
         echo "</p><hr />";
+
+        // arrivé là on a réussi à indexer toutes les parts sans timeout.
+        return true;
     }
 
     private function indexSourcePart($source, $skey, $part, &$stats) {
