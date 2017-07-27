@@ -44,7 +44,7 @@ class SphinxGenererAutocomplete extends Command {
 		// On se fait un dossier final
 		$dossier_autocomplete = sous_repertoire(_DIR_IMG . 'indexer_autocomplete');
 		
-		$sphinxql = new \Sphinx\SphinxQL\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
+		$sphinxql = \Sphinx\SphinxQL\SphinxQLSingleton::getInstance(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
 		
 		// On fait produire les bons fichiers pour le RT
 		$sphinxql->query("FLUSH RAMCHUNK $index");

@@ -34,13 +34,13 @@ function indexer_indexer(){
 	
 	if (is_null($indexer)){
 		// On crée un indexeur
-		$indexer = new Indexer\Indexer();
+		$indexer = new \Indexer\Indexer();
 	
 		// On tente de le configurer avec Sphinx et les define()
 		try {
 			$indexer->registerStorage(
-				new Indexer\Storage\Sphinx(
-					new Sphinx\SphinxQL\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT),
+				new \Indexer\Storage\Sphinx(
+					\Sphinx\SphinxQL\SphinxQLSingleton::getInstance(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT),
 					SPHINX_DEFAULT_INDEX
 				)
 			);
@@ -152,7 +152,7 @@ function indexer_statistiques_indexes_depuis($date_reference = null) {
 	FROM " . SPHINX_DEFAULT_INDEX . "
 	GROUP BY recent, properties.objet, properties.source";
 
-	$sphinx = new Sphinx\SphinxQL\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
+	$sphinx = \Sphinx\SphinxQL\SphinxQLSingleton::getInstance(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
 
 	$all = $sphinx->allfetsel($query);
 
@@ -305,7 +305,7 @@ function indexer_motiver_mots($mots) {
 	$m = join(' ', $mots);
 	$query = "SELECT id FROM " . SPHINX_DEFAULT_INDEX . " WHERE MATCH('$m') LIMIT 1";
 
-	$sphinx = new Sphinx\SphinxQL\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
+	$sphinx = \Sphinx\SphinxQL\SphinxQLSingleton::getInstance(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
 	$all = $sphinx->allfetsel($query);
 
 	if (!is_array($all)
@@ -357,7 +357,7 @@ function indexer_dumpsql($index = null, $format = 'sphinx', $dest = null, $bloc 
 		return false;
 	}
 
-	$sphinx = new Sphinx\SphinxQL\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
+	$sphinx = \Sphinx\SphinxQL\SphinxQLSingleton::getInstance(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
 
 
 	$version = unserialize(lire_meta('plugin'));

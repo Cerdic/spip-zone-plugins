@@ -45,7 +45,6 @@ class SphinxQL {
 		if (!$this->sql) {
 			return false;
 		}
-		
 		return $this->sql->multi_query($query);
 	}
 

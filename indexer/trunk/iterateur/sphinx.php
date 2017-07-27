@@ -132,7 +132,7 @@ class IterateurSPHINX implements Iterator {
 
 		include_spip('inc/indexer');
 
-		$this->sphinxQL  = new \Sphinx\SphinxQL\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
+		$this->sphinxQL  = \Sphinx\SphinxQL\SphinxQLSingleton::getInstance(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
 		$this->queryApi  = new \Sphinx\SphinxQL\QueryApi();
 
 		$this->setIndex($this->command['index']);
