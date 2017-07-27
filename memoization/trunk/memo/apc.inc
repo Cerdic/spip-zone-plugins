@@ -60,12 +60,18 @@ class MCacheBackend_apc extends MCacheBackend {
 	}
 
 	function size() {
-		if (!class_exists('APCIterator'))
-			return false;
-		$a = new APCIterator('user');
+		// le cache n'est pas vidé au moment de la demande de vidage mais au moment de l'affichage de la taille
+		// (avant, les éléments étaient considérés comme périmés donc recalculés au besoin, mais conservés)
+		// todo plus générique : personnaliser action_purger_dist selon la méthode de cache
+		if ($mark = $GLOBALS['meta']['cache_mark']) {
+			spip_log("cache_mark=$mark; apc_clear_cache('user')");
+			apc_clear_cache('user');
+			ecrire_meta('cache_mark', 0);
+			$GLOBALS['meta']['cache_mark']=0;
+		}; 
+		$a = new APCIterator('user'); 
 		return $a->getTotalSize ();
 	}
-
 }
 
 ?>
