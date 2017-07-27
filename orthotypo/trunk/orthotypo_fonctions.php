@@ -217,7 +217,7 @@ function orthotypo_guillemets_rempl($texte){
 		$texte = preg_replace_callback('/(<[^>]+"[^>]*>)/Ums', 'orthotypo_guillemets_echappe_balises_callback', $texte);
 	}
 
-	// si le texte ne contient pas de guill droit
+	// si le texte ne contient pas de guillemets droits
 	// ou s'il contient deja des guillemets élaborés
 	// on ne touche pas
 	if (strpos($texte, '"')!==false
@@ -307,8 +307,10 @@ function orthotypo_exposants_en($texte){
 			',(?<=2)(nd)\b,',
 			',(?<=3)(rd)\b,',
 			',(?<=\d)(th)\b,',
+			',(?<=\m)(2)\b,',
+			',(?<=\m)(3)\b,',
 		), array(
-			_TYPO_sup, _TYPO_sup, _TYPO_sup, _TYPO_sup,
+			_TYPO_sup, _TYPO_sup, _TYPO_sup, _TYPO_sup, _TYPO_sup, _TYPO_sup,
 		));
 	}
 	return preg_replace($typo[0], $typo[1], $texte);
@@ -476,7 +478,7 @@ function orthotypo_caps_rempl($texte){
 	if (is_null($cap_finder)){
 		$cap_finder = "/(
 	            (\b[A-Z\d]*        # Group 2: Any amount of caps and digits
-	            [A-Z]\d*[A-Z]      # A cap string much at least include two caps (but they can have digits between them)
+	            [A-Z]\d*[A-Z]      # A cap string must at least include two caps (but they can have digits between them)
 	            [A-Z\d]*\b)        # Any amount of caps and digits
 	            | (\b[A-Z]+\.\s?   # OR: Group 3: Some caps, followed by a '.' and an optional space
 	            (?:[A-Z]+\.\s?)+)  # Followed by the same thing at least once more
@@ -546,5 +548,3 @@ function orthotypo_corrections_rempl($texte) {
 function orthotypo_corrections_pre_propre($texte) {
 	return orthotypo_filtre_texte_echappe($texte,'orthotypo_corrections_rempl');
 }
-
-?>
