@@ -62,12 +62,7 @@ la description du breakpoint devrais pouvoir etre une mediaquerie OU utiliser un
 				type="#GET{mime_type}"
 		   />
 		<!--[if IE 9]></video><![endif]-->
-		<img  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-			  data-src="[(#GET{fichier}|image_reduire{#GET{largeur_max}}|extraire_attribut{src})]"
-			  alt="#GET{alt}"
-			  data-sizes="auto"
-			  width="#GET{largeur}"
-			  height="#GET{hauteur}"
-			  class="lazyload">
+		<img[(#REM|test_espace_prive|oui) src="#GET{fichier}"]
+			[(#REM|test_espace_prive|non) src="[(#CHEMIN{rien.gif}|embarque_src)]" data-src="[(#GET{fichier}|image_reduire{#GET{largeur_max}}|extraire_attribut{src})]" data-sizes="auto" class="lazyload" ]alt="#GET{alt}" width="#GET{largeur}" height="#GET{hauteur}">
 </picture>
 </div>

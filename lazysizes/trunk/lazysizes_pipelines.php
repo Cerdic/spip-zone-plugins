@@ -36,8 +36,8 @@ function lazysizes_insert_head_css($head) {
  */
 function lazysizes_header_prive($flux){
 	
-	$lazysizes = timestamp(find_in_path('javascript/lazysizes.js'));	
-	$flux .= "<script type='text/javascript' src='$lazysizes' ></script>\n";
+	//$lazysizes = timestamp(find_in_path('javascript/lazysizes.js'));	
+	//$flux .= "<script type='text/javascript' src='$lazysizes' ></script>\n";
 
 	return $flux;
 }

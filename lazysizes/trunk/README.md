@@ -179,8 +179,13 @@ https://github.com/aFarkas/lazysizes
 ## @todo
 
 
-- [X] Inclure les plugins lazysize depuis un panneau de config ou un define
+- [-] Inclure les plugins lazysize depuis un panneau de config ou un define
 puis les charger dans insert_head
+	- [] Inclure les plugins lazysize depuis un define
+	- [] ajouter les scripts dans le privé vu que les modèle sont dipponibles
+- [] 	preview des modeles dans l'espace privé
+		par exemple : `<picture5|id_document=5>`
+		
 - [X] config export ie_config()
 - [] traduire la doc 
 - [] Ajouter via define ou config les options de configuration
