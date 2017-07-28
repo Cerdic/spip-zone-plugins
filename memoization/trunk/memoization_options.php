@@ -11,6 +11,7 @@ class MCacheBackend {
 	function lock($key, /* private */ $unlock = false) {}
 	function unlock($key) {}
 	function init($params = null) {}
+	function purge() {}
 }
 
 /* objet MCache */
@@ -33,8 +34,9 @@ class MCache {
 	}
 
 	static function methode($methode = null) {
+
 		if (!$methode) {
-			$methodes = array('apc', 'xcache', 'eaccelerator', 'filecache', 'nocache');
+			$methodes = array('apc', 'xcache', 'eaccelerator', 'filecache', 'redis', 'nocache');
 			while (!MCache::methode($methode = array_shift($methodes))){};
 			return $methode;
 		}
@@ -52,6 +54,8 @@ class MCache {
 			case 'eaccelerator':
 				return function_exists('eaccelerator_put');
 			case 'filecache':
+			case 'redis':
+				return extension_loaded('redis');
 			case 'nocache':
 				return true;
 		}
@@ -102,6 +106,15 @@ class MCache {
 		if (method_exists($this->backend, 'size'))
 			return $this->backend->size();
 	}
+
+	/* bool */
+	function purge($key) {
+		if (method_exists($this->backend, 'purge'))
+			return $this->backend->purge();
+		else
+			return false;
+	}
+
 }
 
 
@@ -176,6 +189,12 @@ function cache_unlock($key) {
 	return $Memoization->unlock($key);
 }
 
+/* null */
+function cache_purge() {
+	global $Memoization;
+	return $Memoization->purge();
+}
+
 /* filtre pour la page de cfg */
 function memoization_methode($methode=null) {
 	return MCache::methode($methode);
@@ -227,4 +246,27 @@ function cfg_memcache_servers() {
 	return $s[0];
 }
 
+function cfg_redis_server() {
+	$cfg = @unserialize($GLOBALS['meta']['memoization']);
+	if (!$cfg || !isset($cfg['redis_type']) || empty($cfg['redis_type'])) {
+		$cfg = array(
+			'redis_type' => 'serveur',
+			'redis_server' => '127.0.0.1:6379',
+			'redis_sock' => '/tmp/redis.sock',
+			'redis_auth' => '',
+			'redis_dbindex' => 0,
+			'redis_serializer' => 'php',
+		);
+	}
+	return $cfg;
+}
+
+function redis_serializer() {
+	$serializers = array();
+    if (defined('Redis::SERIALIZER_IGBINARY') && extension_loaded('igbinary')) {
+        $serializers['igbinary'] = 'SERIALIZER_IGBINARY';
+    }
+    $serializers['php'] = 'SERIALIZER_PHP';
+    return $serializers;
+}
 ?>

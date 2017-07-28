@@ -43,6 +43,10 @@
 							selected="(#ENV{methode}|=={nocache}|?{selected})"][
 								disabled="(#VAL{nocache}|memoization_methode|non|?{disabled})"]
 								><:memoization:option_methode_nocache:></option>
+						<option value="redis"[
+							selected="(#ENV{methode}|=={redis}|?{selected})"][
+								disabled="(#VAL{redis}|memoization_methode|non|?{disabled})"]
+								><:memoization:option_methode_redis:></option>
 					</select>
 				</li>
 			</ul>
@@ -58,7 +62,51 @@
 				</li>
 			</ul>
 		</fieldset>
-		<script type="text/javascript"><!--
+		<fieldset id="redis_options">
+			<h3 class="legend"><:memoization:legend_redis:></h3>
+			<ul>
+				<li class="editer">
+					<div class="choix">
+						<input name="redis_type" [(#ENV{redis_type}|=={server}|ou{#ENV{redis_type}|=={""}}|oui) checked="checked"] class="radio" id="radio_server" value="server" aria-describedby="radio_explication" type="radio">
+						<label for="radio_server" style="margin-right: 20px;"><:memoization:redis_type_serveur:></label>
+						<input name="redis_type" [(#ENV{redis_type}|=={sock}|oui) checked="checked"] class="radio" id="radio_sock" value="sock" aria-describedby="radio_explication" type="radio">
+						<label for="radio_sock"><:memoization:redis_type_sock:></label>
+					</div>
+				<li>
+				<li class="editer editer_redis_server">
+					<label for="redis_server"><:memoization:redis_serveur:></label>
+					<p class="explication">(<:memoization:explication_redis_serveur:>)</p>
+					<input type="text" name="redis_server" id="redis_server" class="text" value="[(#ENV{redis_server}|sinon{127.0.0.1:6379})]" />
+				</li>
+				<li class="editer editer_redis_sock">
+					<label for="redis_sock"><:memoization:redis_sock:></label>
+					<p class="explication">(<:memoization:explication_redis_sock:>)</p>
+					<input type="text" name="redis_sock" value="[(#ENV{redis_sock}|sinon{'/tmp/redis.sock'})]" class="text" />
+				</li>
+				<li class="editer editer_redis_auth">
+					<label for="redis_auth"><:memoization:redis_auth:></label>
+					<p class="explication">(<:memoization:explications_redis_auth:>)</p>
+					<input type="text" name="redis_auth" value="[(#ENV{redis_auth})]" class="text" />
+				</li>
+				<li class="editer editer_redis_dbindex">
+					<label for="redis_dbindex"><:memoization:redis_dbindex:></label>
+					<p class="explication">(<:memoization:explication_redis_dbindex:>)</p>
+					<input type="text" name="redis_dbindex" value="[(#ENV{redis_dbindex}|sinon{0})]" class="text" />
+				</li>
+				<li class="editer editer_redis_serializer">
+					<label for="redis_serializer"><:memoization:redis_serializer:></label>
+					<p class="explication">(<:memoization:explication_redis_serializer:>)</p>
+					<select id="redis_serializer" name="redis_serializer" class="select">
+						[(#SET{serializers,[(#ARRAY{}|redis_serializer)]})]
+					    <BOUCLE_serializer(DATA){source tableau, #GET{serializers}}>
+					    <option value="#CLE" [(#ENV{redis_serializer}|=={#CLE}|oui) selected="selected"]>#VALEUR</option>
+					    </BOUCLE_serializer> 
+					</select>
+				</li>
+			</ul>
+		</fieldset>
+		<script type="text/javascript">
+		<!--
 			var methode_memcache = function() {
 				if ($("#methode").val() == 'memcache')
 					$('#memcache_options').slideDown();
@@ -66,8 +114,33 @@
 					$('#memcache_options').hide();
 			};
 			methode_memcache();
+
+			var methode_redis = function() {
+				if ($("#methode").val() == 'redis')
+					$('#redis_options').slideDown();
+				else
+					$('#redis_options').hide();
+			};
+			methode_redis();
+
 			$("#methode")
-			.bind('change', methode_memcache);
+			.bind('change', methode_memcache)
+			.bind('change', methode_redis);
+
+			var config_redis = function() {
+				var choix = $('input[name=redis_type]:checked').val();
+				if (choix == "server") {
+					$('.editer_redis_server').slideDown();
+					$('.editer_redis_sock').hide();
+				}else{
+					$('.editer_redis_sock').slideDown();
+					$('.editer_redis_server').hide();
+				}
+			};
+			config_redis();
+
+			$('input[name=redis_type]')
+			.bind('change', config_redis);
 		// -->
 		</script>
 		[(#REM) ------------------------ BOUTON OK ------------------------ ]

@@ -43,6 +43,10 @@ function action_purger_dist($arg=null)
 			break;
 
 		case 'cache':
+			// suppression du cache si la methode de memoization selectionnée implemente la fonction purge
+			$m = &$GLOBALS['Memoization'];
+			$m->purge();
+
 			supprime_invalideurs();
 			@spip_unlink(_CACHE_RUBRIQUES);
 			@spip_unlink(_CACHE_PIPELINES);
