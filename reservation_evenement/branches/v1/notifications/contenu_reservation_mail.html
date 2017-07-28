@@ -7,6 +7,7 @@
 ]
 
 <BOUCLE_art(RESERVATIONS){id_reservation}{tout}>
+[(#GET{statut}|non) #SET{statut,#STATUT}]
 #SET{nom_client,#NOM}
 #SET{extras,#DONNEES_AUTEUR|unserialize}
 #SET{email,#EMAIL}
@@ -32,18 +33,18 @@
 
 
 	<h3><:reservation:recapitulatif:></h3>
-	
+
 	<p><:reservation:reservation_numero:>#REFERENCE</p>
 	<p><:reservation:reservation_date:>#DATE</p>
 	<p><:reservation:label_email:> #GET{email}</p>
 	<BOUCLE_champs_extras(DATA){source tableau, #GET{extras}}>
-	
-		<p>[(#CLE|chercher_label|extraire_multi)] : #VALEUR</p>    
+
+		<p>[(#CLE|chercher_label|extraire_multi)] : #VALEUR</p>
 	</BOUCLE_champs_extras>
-	
+
 	<p><:reservation:details_reservation:></p>
 	<INCLURE{fond=inclure/reservation,id_reservation,env,statut=#GET{statut}}/>
-	
+
 	[(#ENV{qui}|=={client}|oui)
 		<p><:reservation:remerciement:></p>
 	]

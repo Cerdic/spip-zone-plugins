@@ -79,17 +79,20 @@ function inc_reservation_enregistrer_dist($id = '', $id_article = '', $id_auteur
 	if (! _request('id_reservation_source'))
 		session_set('id_reservation', $id_reservation);
 
-	$message = '<p>' . _T('reservation:reservation_enregistre') . '</p>';
+	$message = '<div class="intro"><p>' . _T('reservation:reservation_enregistre') . '</p></div>';
+	$message .= '<div class="detail_reservation">';
 	$message .= '<h3>' . _T('reservation:details_reservation') . '</h3>';
 	$message .= recuperer_fond('inclure/reservation', array(
 		'id_reservation' => $id_reservation
 	));
+	$message .= '</div>';
 
 	// Ivalider les caches
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='reservation/$id_reservation'");
 	suivre_invalideur("id='reservations_detail/$id_reservations_detail'");
 	return array(
+		'id_reservation' => $id_reservation,
 		'message_ok' => $message,
 		'editable' => false
 	);
