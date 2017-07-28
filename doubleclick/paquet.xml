@@ -3,15 +3,10 @@
 	categorie="performance"
 	version="1.0.3"
 	etat="dev"
-	compatibilite="[3.0.14;3.0.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/doubleclick-64.png"
 	documentation=""
 >
-	<!--
-		Paquet genere le 2014-07-30 10:20:06
-		(Vous pouvez bien entendu supprimer ces commentaires) 
-	-->
-
 	<nom>Double Click</nom>
 
 	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs --> 
