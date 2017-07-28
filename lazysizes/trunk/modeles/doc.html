@@ -37,9 +37,8 @@ Si largeur ou hauteur fournit en parametre, redimensionner
 	[<a href="(#GET{url})"[
 		class="(#ENV{lien_class})"] title='[(#GET{title}|attribut_html)]'[
 		(#ENV{lien}|?{'',type="#MIME_TYPE"})]>]
-		
-		<img[(#REM|test_espace_prive|oui) src="#GET{fichier}"]
-			[(#REM|test_espace_prive|non) src="[(#CHEMIN{rien.gif}|embarque_src)]" data-src='#GET{fichier}' data-sizes="auto" class="lazyload"] alt="#GET{title}" width="#GET{width}" height="#GET{height}">[(#GET{url}|?{</a>})][
+		<img src="#CHEMIN{rien.gif}" data-src="#GET{fichier}" data-sizes="auto" class="lazyload"
+			alt="#GET{title}" width="#GET{width}" height="#GET{height}">[(#GET{url}|?{</a>})][
 	(#TITRE|ou{#DESCRIPTIF}|ou{#CREDITS}|oui)
 		<INCLURE{fond=modeles/inc_figcaption,titre=#TITRE,descriptif=#DESCRIPTIF,credits=#CREDITS,width=#GET{width}}>]
 </figure>
