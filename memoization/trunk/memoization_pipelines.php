@@ -11,7 +11,7 @@ function memoization_formulaire_verifier($flux){
 
 	if ($flux['args']['form'] == 'configurer_memoization'){
 		$methode = _request('methode');
-		if ($methode == "redis"){
+		if ($methode == "redis") {
 
 			$redis_type = _request('redis_type');
 			$redis_server = _request('redis_server');
@@ -21,37 +21,36 @@ function memoization_formulaire_verifier($flux){
 
 			$redis = new Redis();
 			
-			if($redis_type == "server"){
+			if ($redis_type == "server") {
 				list($host, $port) = explode(':', $redis_server);
 				$port = intval($port);
-				$connect = $redis->connect($host, $port, 2.5);
+				$connect = @$redis->connect($host, $port, 5);
 			}else{
-				$connect = $redis->connect($redis_sock);
+				$connect = @$redis->connect($redis_sock);
 			}
 			
-
-			if($connect) {
+			if ($connect) {
 
 				if(!empty($redis_auth)){
 					$auth = $redis->auth($redis_auth);
 					if (!$auth)
-						$flux['data']['message_erreur'] = "Le mot de passe renseigné est incorrect.";
-				}
-
-				try{
-					$ping = $redis->ping();
-				} catch (Exception $e) {
-					$flux['data']['message_erreur'] = "Erreur de connexion au serveur Redis: ".$e->getMessage();
+						$flux['data']['message_erreur'] = _T('memoization:redis_erreur_password');
 				}
 
 				if(is_int($redis_dbindex)){
 					$redis->select($redis_dbindex);
 					if (!$dbindex)
-						$flux['data']['message_erreur'] = "Impossible de sélectionner la base de données demandée.";
+						$flux['data']['message_erreur'] = _T('memoization:redis_erreur_database');
+				}
+
+				try{
+					$ping = $redis->ping();
+				} catch (Exception $e) {
+					$flux['data']['message_erreur'] = _T('memoization:redis_erreur_connexion').": ".$e->getMessage();
 				}
 
 			}else{
-				$flux['data']['message_erreur'] = "Erreur de connexion au serveur Redis, vérifier les paramètres.";
+				$flux['data']['message_erreur'] = _T('memoization:redis_erreur_connexion');
 			}
 			
 		}

@@ -59,6 +59,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redis_type_serveur' => 'Server',
 	'redis_type_sock' => 'Unix Socket',
 	'redis_serializer' => 'Serialization:',
+	'redis_erreur_password' => 'The password is incorrect',
+	'redis_erreur_database' => 'Unable to select database requested',
+	'redis_erreur_connexion' => 'Error connecting to redis server',
 
 	// T
 	'taille_tototale_indisponible' => 'Total size not available'

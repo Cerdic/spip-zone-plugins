@@ -35,6 +35,10 @@
 							selected="(#ENV{methode}|=={memcache}|?{selected})"][
 								disabled="(#VAL{memcache}|memoization_methode|non|?{disabled})"]
 								><:memoization:option_methode_memcache:></option>
+						<option value="redis"[
+							selected="(#ENV{methode}|=={redis}|?{selected})"][
+								disabled="(#VAL{redis}|memoization_methode|non|?{disabled})"]
+								><:memoization:option_methode_redis:></option>
 						<option value="filecache"[
 							selected="(#ENV{methode}|=={filecache}|?{selected})"][
 								disabled="(#VAL{filecache}|memoization_methode|non|?{disabled})"]
@@ -43,10 +47,6 @@
 							selected="(#ENV{methode}|=={nocache}|?{selected})"][
 								disabled="(#VAL{nocache}|memoization_methode|non|?{disabled})"]
 								><:memoization:option_methode_nocache:></option>
-						<option value="redis"[
-							selected="(#ENV{methode}|=={redis}|?{selected})"][
-								disabled="(#VAL{redis}|memoization_methode|non|?{disabled})"]
-								><:memoization:option_methode_redis:></option>
 					</select>
 				</li>
 			</ul>
