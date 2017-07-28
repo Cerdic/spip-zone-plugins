@@ -264,9 +264,11 @@ function cfg_redis_server() {
 function redis_serializer() {
 	$serializers = array();
     if (defined('Redis::SERIALIZER_IGBINARY') && extension_loaded('igbinary')) {
-        $serializers['igbinary'] = 'SERIALIZER_IGBINARY';
-    }
-    $serializers['php'] = 'SERIALIZER_PHP';
+        $serializers['igbinary'] = array('libelle' => 'SERIALIZER_IGBINARY', 'statut' => 'actif');
+    }else{
+		 $serializers['igbinary'] = array('libelle' => 'SERIALIZER_IGBINARY', 'statut' => 'inactif');
+	}
+    $serializers['php'] = array('libelle' => 'SERIALIZER_PHP', 'statut' => 'actif');
     return $serializers;
 }
 ?>

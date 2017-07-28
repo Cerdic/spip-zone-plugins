@@ -99,7 +99,7 @@
 					<select id="redis_serializer" name="redis_serializer" class="select">
 						[(#SET{serializers,[(#ARRAY{}|redis_serializer)]})]
 					    <BOUCLE_serializer(DATA){source tableau, #GET{serializers}}>
-					    <option value="#CLE" [(#ENV{redis_serializer}|=={#CLE}|oui) selected="selected"]>#VALEUR</option>
+					    <option value="#CLE"[(#ENV{redis_serializer}|=={#CLE}|oui) selected="selected"][(#VALEUR{statut}|=={inactif}|oui) disabled="disabled"]>#VALEUR{libelle}</option>
 					    </BOUCLE_serializer> 
 					</select>
 				</li>
