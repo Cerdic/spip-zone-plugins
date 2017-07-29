@@ -8,12 +8,6 @@
 	</BOUCLE_infos_page>
 
 	<div id="onglets-noisettes-disponibles">
-		<ul>
-			[(#GET{compteurs/composition}|oui)<li><a href="#noisettes-composition">[(#GET{nom_composition})]</a></li>]
-			[(#GET{compteurs/type}|oui)<li><a href="#noisettes-page">[(#GET{nom_type})]</a></li>]
-			[(#GET{compteurs/commun}|oui)<li><a href="#noisettes-communes"><:noizetier:noisettes_toutes_pages:></a></li>]
-		</ul>
-
 	<BOUCLE_si_composition(CONDITION) {si #GET{composition}}>
 		<B_noisettes_composition>
 		<div id="noisettes-composition">
@@ -67,17 +61,6 @@
 		</div>
 	</B_noisettes_communes>
 	</div>
-
-	<script type="text/javascript">
-	/*<!\[CDATA\[*/
-		$(function() {
-			$("#onglets-noisettes-disponibles").tabs({
-				heightStyle: "auto",
-				event: "mouseover"
-			});
-		});
-	/*\]\]>*/
-	</script>
 </BOUCLE_si_noisette>
 	<:noizetier:aucun_type_noisette:>
 <//B_si_noisette>
