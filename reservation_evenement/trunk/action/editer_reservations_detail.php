@@ -112,7 +112,6 @@ function reservations_detail_modifier($id_reservations_detail, $set = null) {
 		'statut',
 		'id_parent'
 	), array(), $set);
-	spip_log($c, 'teste');
 	$err = reservations_detail_instituer($id_reservations_detail, $c);
 
 	return $err;
@@ -187,9 +186,6 @@ function reservations_detail_inserer($id_parent = null, $set = null) {
  * @return string
  */
 function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub = true) {
-	spip_log('reservations_detail_instituer', 'teste');
-	spip_log($c, 'teste');
-
 	include_spip('inc/autoriser');
 	include_spip('inc/rubriques');
 	include_spip('inc/modifier');
