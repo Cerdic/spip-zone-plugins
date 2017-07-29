@@ -28,6 +28,7 @@
 	<pipeline nom="insert_head_css" inclure="reservation_bank_pipelines.php" />
 	<pipeline nom="reservation_evenement_objets_configuration" inclure="reservation_bank_pipelines.php" />
 	<pipeline nom="reservation_evenement_objets_navigation" inclure="reservation_bank_pipelines.php" />
+	<pipeline nom="reservation_evenement_donnees_details" inclure="reservation_bank_pipelines.php" />
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/reservation_bank.php" />
 
