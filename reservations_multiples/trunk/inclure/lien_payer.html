@@ -1,0 +1,8 @@
+<BOUCLE_transactions(TRANSACTIONS){id_transaction}>
+	<h4><:bank:titre_mode_paiement_securise:></h4>
+	<p>
+		<a  class="btn btn-primary" href="[(#URL_PAGE{payer}|parametre_url{id_transaction,#ID_TRANSACTION}|parametre_url{transaction_hash,#TRANSACTION_HASH})]">
+		<:bank:titre_menu_configurer:>
+		</a>
+	</p>
+</BOUCLE_transactions>
