@@ -255,7 +255,7 @@ function formulaires_editer_page_traiter_dist($edition, $page, $redirect = '') {
 			and (($edition == 'dupliquer') or (($edition == 'creer') and _request('peupler')))) {
 				// Récupération des noisettes de la page source
 				$select = array('rang', 'type', 'composition', 'bloc', 'noisette', 'parametres');
-				$from = 'spip_noisettes';
+				$from = 'spip_noizetier';
 				$where = array('type=' . sql_quote($type_page), 'composition=' . sql_quote(noizetier_page_composition($page)));
 				$noisettes_source = sql_allfetsel($select, $from, $where);
 				// Injection des noisettes de la source dans la composition virtuelle en cours de création qui diffère

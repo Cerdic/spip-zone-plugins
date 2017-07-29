@@ -62,7 +62,7 @@ function action_supprimer_noisettes_dist() {
 				// pas fournies en argument, il faut les lire en base de données.
 				$select = array('type', 'composition', 'objet', 'id_objet');
 				$where = array('id_noisette=' . intval($identifiant['id']));
-				$noisette = sql_fetsel($select, 'spip_noisettes', $where);
+				$noisette = sql_fetsel($select, 'spip_noizetier', $where);
 				if ($noisette['type']) {
 					$options['page'] = $noisette['composition']
 						? $noisette['type'] . '-' . $noisette['composition']
@@ -135,7 +135,7 @@ function supprimer_noisettes($contexte, $identifiant, $bloc) {
 		} else {
 			// Suppression des noisettes d'une page.
 			// Il faut tenir compte du cas où la page est une composition auquel cas le type et la
-			// composition sont insérées séparément dans la table spip_noisettes.
+			// composition sont insérées séparément dans la table spip_noizetier.
 			$page = explode('-', $identifiant['id'], 2);
 			$where[] = 'type=' . sql_quote($page[0]);
 			if (isset($page[1])) {
@@ -152,7 +152,7 @@ function supprimer_noisettes($contexte, $identifiant, $bloc) {
 	}
 
 	// Suppression en base de données
-	sql_delete('spip_noisettes', $where);
+	sql_delete('spip_noizetier', $where);
 
 	// On invalide le cache
 	include_spip('inc/invalideur');

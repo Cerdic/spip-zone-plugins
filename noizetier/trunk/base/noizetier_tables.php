@@ -21,8 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function noizetier_declarer_tables_interfaces($interface) {
 
 	// Les tables : permet d'appeler une boucle avec le *type* de la table uniquement
-	// TODO : a renommer à terme spip_noizetier
-	$interface['table_des_tables']['noisettes'] = 'noisettes';
+	$interface['table_des_tables']['noizetier'] = 'noizetier';
 	$interface['table_des_tables']['noizetier_pages'] = 'noizetier_pages';
 	$interface['table_des_tables']['noizetier_noisettes'] = 'noizetier_noisettes';
 
@@ -50,7 +49,7 @@ function noizetier_declarer_tables_interfaces($interface) {
  *
  * - `spip_noizetier_pages`, qui contient les éléments descriptifs des pages et compositions,
  * - `spip_noizetier_noisettes`, qui contient les éléments descriptifs des noisettes disponibles,
- * - `spip_noisettes`, qui contient l'utilisation des noisettes dans les pages concernées.
+ * - `spip_noizetier`, qui contient l'utilisation des noisettes dans les pages concernées.
  *
  * @pipeline declarer_tables_principales
  *
@@ -95,7 +94,7 @@ function noizetier_declarer_tables_principales($tables_principales) {
 	);
 
 	// Table spip_noizetier_noisettes
-	$noisettes = array(
+	$types_noisettes = array(
 		'noisette'       => "varchar(255) DEFAULT '' NOT NULL",
 		'type'           => "varchar(127) DEFAULT '' NOT NULL",
 		'composition'    => "varchar(127) DEFAULT '' NOT NULL",
@@ -111,7 +110,7 @@ function noizetier_declarer_tables_principales($tables_principales) {
 		"maj"			 => "timestamp",
 	);
 
-	$noisettes_cles = array(
+	$types_noisettes_cles = array(
 		'PRIMARY KEY'    => 'noisette',
 		'KEY type'       => 'type',
 		'KEY composition'    => 'composition',
@@ -120,12 +119,11 @@ function noizetier_declarer_tables_principales($tables_principales) {
 	);
 
 	$tables_principales['spip_noizetier_noisettes'] = array(
-		'field' => &$noisettes,
-		'key' => &$noisettes_cles,
+		'field' => &$types_noisettes,
+		'key' => &$types_noisettes_cles,
 	);
 
-	// TODO : a renommer à terme spip_noizetier
-	// Table spip_noisettes
+	// Table spip_noizetier
 	$noizetier = array(
 		'id_noisette' => 'bigint(21) NOT NULL',
 		'rang'        => "smallint DEFAULT 1 NOT NULL",
@@ -150,7 +148,7 @@ function noizetier_declarer_tables_principales($tables_principales) {
 		'KEY id_objet'    => 'id_objet',
 	);
 
-	$tables_principales['spip_noisettes'] = array(
+	$tables_principales['spip_noizetier'] = array(
 		'field' => &$noizetier,
 		'key'   => &$noizetier_cles,
 		'join'  => array(

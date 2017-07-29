@@ -11,7 +11,7 @@
 	<BOUCLE_si_composition(CONDITION) {si #GET{composition}}>
 		<B_noisettes_composition>
 		<div id="noisettes-composition">
-			<p class="explication"><:noizetier:noisettes_composition{composition=#GET{nom_composition}}:></p>
+			<h4><:noizetier:noisettes_composition{composition=#GET{nom_composition}}:></h4>
 			<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
 		<BOUCLE_noisettes_composition(NOIZETIER_NOISETTES){type=#GET{type}}{composition=#GET{composition}}{par noisette}>
 				<li class="editer item noisette">
@@ -29,7 +29,7 @@
 
 	<B_noisettes_type>
 		<div id="noisettes-page">
-			<p class="explication"><:noizetier:noisettes_page{type=#GET{nom_type}}:></p>
+			<h4><:noizetier:noisettes_page{type=#GET{nom_type}}:></h4>
 			<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
 	<BOUCLE_noisettes_type(NOIZETIER_NOISETTES){type=#GET{type}}{composition=''}{par noisette}>
 				<li class="editer item noisette">
@@ -46,7 +46,7 @@
 
 	<B_noisettes_communes>
 		<div id="noisettes-communes">
-			<p class="explication"><:noizetier:noisettes_toutes_pages:></p>
+			<h4><:noizetier:noisettes_toutes_pages:></h4>
 			<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
 	<BOUCLE_noisettes_communes(NOIZETIER_NOISETTES){type=''}{composition=''}{par noisette}>
 				<li class="editer item noisette">

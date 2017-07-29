@@ -33,7 +33,7 @@ function noizetier_upgrade($nom_meta_base_version, $version_cible) {
 	);
 
 	$maj['create'] = array(
-		array('maj_tables',array('spip_noizetier_pages', 'spip_noizetier_noisettes', 'spip_noisettes')),
+		array('maj_tables',array('spip_noizetier_pages', 'spip_noizetier_noisettes', 'spip_noizetier')),
 		array('ecrire_config', 'noizetier', $config_060),
 	);
 
@@ -82,8 +82,7 @@ function noizetier_vider_tables($nom_meta_version_base) {
 	// On efface les tables du plugin
 	sql_drop_table('spip_noizetier_pages');
 	sql_drop_table('spip_noizetier_noisettes');
-	sql_drop_table('spip_noisettes');
-//	sql_drop_table('spip_noizetier');
+	sql_drop_table('spip_noizetier');
 
 	// On efface la version enregistrée du schéma des données du plugin
 	effacer_meta($nom_meta_version_base);
@@ -105,9 +104,9 @@ function noizetier_vider_tables($nom_meta_version_base) {
  * Les actions effectuées sont les suivantes:
  * - ajout de la tables `spip_noisettes_pages` pour stocker l'ensemble des pages et compositions
  * explicites et virtuelles.
- * - ajout du champ `balise` à la table `spip_noisettes` pour déterminer si le noiZetier doit inclure
+ * - ajout du champ `balise` à la table `spip_noizetier` pour déterminer si le noiZetier doit inclure
  * la noisette concernée dans un div englobant.
- * - mise à jour de la taille des champs type, composition et objet dans la table `spip_noisettes`
+ * - mise à jour de la taille des champs type, composition et objet dans la table `spip_noizetier`
  * - ajout d'une liste de variables de configuration initialisées
  * - transfert des compositions virtuelles de la meta `noizetier_compositions` dans la nouvelle
  * table `spip_noisettes_pages` et suppression définitive de la meta.
@@ -149,8 +148,8 @@ function maj_060($config_defaut) {
 	sql_alter("TABLE spip_noisettes ADD INDEX composition (composition)");
 	sql_alter("TABLE spip_noisettes ADD INDEX bloc (bloc)");
 	sql_alter("TABLE spip_noisettes ADD INDEX noisette (noisette)");
-	// -- TODO : Renommage de la table
-//	sql_alter("TABLE spip_noisettes RENAME spip_noizetier");
+	// -- Renommage de la table
+	sql_alter("TABLE spip_noisettes RENAME spip_noizetier");
 
 	// Mise à jour de la configuration du plugin
 	include_spip('inc/config');

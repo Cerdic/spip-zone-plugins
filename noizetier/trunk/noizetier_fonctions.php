@@ -329,10 +329,10 @@ function noizetier_noisette_ajouter($noisette, $page, $bloc, $rang = 0) {
 		// positionne au rang suivant et on finalise la description de la noisette
 		// Le rang d'une noisette commence à 1.
 		if (!$description['rang']) {
-			$description['rang'] = intval(sql_getfetsel('max(rang)', 'spip_noisettes', $where)) + 1;
+			$description['rang'] = intval(sql_getfetsel('max(rang)', 'spip_noizetier', $where)) + 1;
 		}
 
-		if ($id_noisette = sql_insertq('spip_noisettes', $description)) {
+		if ($id_noisette = sql_insertq('spip_noizetier', $description)) {
 			// On invalide le cache
 			include_spip('inc/invalideur');
 			suivre_invalideur("id='noisette/$id_noisette'");
@@ -368,7 +368,7 @@ function noizetier_noisette_ranger($ordre, $index_initial = 0) {
 			if ($_cle >= $index_initial) {
 				$modification = array('rang' => $_cle + 1);
 				$where = array('id_noisette=' . intval($_id_noisette));
-				sql_updateq('spip_noisettes', $modification, $where);
+				sql_updateq('spip_noizetier', $modification, $where);
 			}
 		}
 
@@ -404,7 +404,7 @@ function noizetier_noisette_deplacer($id_noisette, $sens, $noisette) {
 			'id_objet=' . intval($noisette['id_objet']),
 			'bloc=' . sql_quote($noisette['bloc']),
 		);
-		$ordre = sql_allfetsel('id_noisette', 'spip_noisettes', $where, '', 'rang');
+		$ordre = sql_allfetsel('id_noisette', 'spip_noizetier', $where, '', 'rang');
 		$ordre = array_map('intval', array_column($ordre, 'id_noisette'));
 
 		// Si il y a plus d'une noisette dans le bloc et que la noisette appartient bien au bloc.
@@ -626,8 +626,8 @@ function noizetier_bloc_compter_noisettes($identifiant) {
 		// Initialisation des compteurs par bloc
 		$nb_noisettes = array();
 
-		// Le nombre de noisettes par bloc doit être calculé par une lecture de la table spip_noisettes.
-		$from = array('spip_noisettes');
+		// Le nombre de noisettes par bloc doit être calculé par une lecture de la table spip_noizetier.
+		$from = array('spip_noizetier');
 		$select = array('bloc', "count(noisette) as 'noisettes'");
 		// -- Contruction du where identifiant précisément la page ou l'objet concerné
 		$identifiants = explode('-', $identifiant);
@@ -1015,8 +1015,8 @@ function noizetier_objet_informer($type_objet = '', $id_objet = 0, $information 
 
 	if ((!$type_objet and !$id_objet and is_null($objets))
 	or ($type_objet and $id_objet and !isset($description_objet[$type_objet][$id_objet]))) {
-		// On récupère le ou les objets ayant des noisettes dans la table spip_noisettes.
-		$from = array('spip_noisettes');
+		// On récupère le ou les objets ayant des noisettes dans la table spip_noizetier.
+		$from = array('spip_noizetier');
 		$select = array('objet', 'id_objet', "count(noisette) as 'noisettes'");
 		$where = array('id_objet>0');
 		if ($type_objet and $id_objet) {

@@ -13,236 +13,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 // API à traiter
 // -------------
-/**
- * Charger les informations des contexte pour une noisette.
- *
- * @param string $noisette
- *
- * @return array
- */
-function noizetier_charger_contexte_noisette($noisette) {
-	static $contexte_noisettes = null;
-
-	if (is_null($contexte_noisettes[$noisette])) {
-		$noisettes = noizetier_lister_noisettes();
-		$contexte_noisettes[$noisette] = $noisettes[$noisette]['contexte'];
-	}
-
-	return $contexte_noisettes[$noisette];
-}
-
-/**
- * Tri les noisettes d'une page
- * Attention : parfois la page est transmise dans $ordre (et peu éventuellement changer en cours, cas de la page-dist de Zpip-vide).
- *
- * @param string  $page
- * @param array $ordre
- *
- * @return bool
- */
-function noizetier_trier_noisette($page, $ordre) {
-	// Vérifications
-	if (
-		!autoriser('configurer', 'noizetier')
-		or !is_array($ordre)
-		or substr($ordre[0], 0, 4) != 'bloc'
-	) {
-		return false;
-	}
-
-	$objet = '';
-	$id_objet = 0;
-	if (is_array($page)) {
-		$objet = $page['objet'];
-		$id_objet = $page['id_objet'];
-		$type = '';
-		$composition = '';
-	}
-	elseif ($page) {
-		$type = noizetier_page_type($page);
-		$composition = noizetier_page_composition($page);
-	}
-
-	$modifs = array();
-	foreach ($ordre as $entree) {
-		$entree = explode('-', $entree, 2);
-
-		if ($entree[0] == 'bloc') {
-			$bloc = $entree[1];
-			$rang = 1;
-		}
-		if ($entree[0] == 'page') {
-			$page = $entree[1];
-			$type = noizetier_page_type($page);
-			$composition = noizetier_page_composition($page);
-		}
-		if ($entree[0] == 'objet') {
-			$objet = $entree[1];
-		}
-		if ($entree[0] == 'id_objet') {
-			$id_objet = intval($entree[1]);
-		}
-		if ($entree[0] == 'noisette') {
-			$modifs[$entree[1]] = array(
-				'bloc' => $bloc,
-				'type' => $type,
-				'composition' => $composition,
-				'objet' => $objet,
-				'id_objet' => $id_objet,
-				'rang' => $rang,
-			);
-			$rang += 1;
-		}
-		if ($entree[0] == 'ajouter') {
-			$id_noisette = noizetier_noisette_ajouter($entree[1], $page, $bloc);
-			$modifs[$id_noisette] = array(
-				'bloc' => $bloc,
-				'type' => $type,
-				'composition' => $composition,
-				'objet' => $objet,
-				'id_objet' => $id_objet,
-				'rang' => $rang,
-			);
-			$rang += 1;
-		}
-	}
-
-	foreach ($modifs as $id_noisette => $valeurs) {
-		sql_updateq('spip_noisettes', $valeurs, 'id_noisette='.intval($id_noisette));
-	}
-
-	return true;
-}
-
-/**
- * Déplace une noisette au sein d'un bloc.
- *
- * @param int $id_noisette
- * @param string $sens
- */
-function noizetier_deplacer_noisette($id_noisette, $sens) {
-	$id_noisette = intval($id_noisette);
-	if ($sens != 'bas') {
-		$sens = 'haut';
-	}
-
-	if (autoriser('configurer', 'noizetier') and $id_noisette) {
-		// On récupère des infos sur le placement actuel
-		$noisette = sql_fetsel(
-			'bloc, type, composition, objet, id_objet, rang',
-			'spip_noisettes',
-			'id_noisette = '.$id_noisette
-		);
-		$bloc = $noisette['bloc'];
-		$type = $noisette['type'];
-		$composition = $noisette['composition'];
-		$objet = $noisette['objet'];
-		$id_objet = intval($noisette['id_objet']);
-		$rang_actuel = intval($noisette['rang']);
-
-		// On teste si y a une noisette suivante
-		$dernier_rang = intval(sql_getfetsel(
-			'rang',
-			'spip_noisettes',
-			array(
-				'bloc = '.sql_quote($bloc),
-				'type = '.sql_quote($type),
-				'composition = '.sql_quote($composition),
-				'objet = '.sql_quote($objet),
-				'id_objet = '.$id_objet,
-			),
-			'',
-			'rang desc',
-			'0,1'
-		));
-
-		// Tant qu'on ne veut pas faire de tour complet
-		if (!($sens == 'bas' and $rang_actuel == $dernier_rang) and !($sens == 'haut' and $rang_actuel == 1)) {
-			// Alors on ne fait qu'échanger deux noisettes
-			$rang_echange = ($sens == 'bas') ? ($rang_actuel + 1) : ($rang_actuel - 1);
-			$ok = sql_updateq(
-				'spip_noisettes',
-				array(
-					'rang' => $rang_actuel,
-				),
-				array(
-					'bloc = '.sql_quote($bloc),
-					'type = '.sql_quote($type),
-					'composition = '.sql_quote($composition),
-					'objet = '.sql_quote($objet),
-					'id_objet = '.$id_objet,
-					'rang = '.$rang_echange,
-				)
-			);
-			if ($ok) {
-				$ok = sql_updateq(
-					'spip_noisettes',
-					array(
-						'rang' => $rang_echange,
-					),
-					'id_noisette = '.$id_noisette
-				);
-			}
-		}
-		// Sinon on fait un tour complet en déplaçant tout
-		else {
-			if ($sens == 'bas') {
-				// Tout le monde descend d'un rang
-				$ok = sql_update(
-					'spip_noisettes',
-					array(
-						'rang' => 'rang + 1',
-					),
-					array(
-						'bloc = '.sql_quote($bloc),
-						'type = '.sql_quote($type),
-						'composition = '.sql_quote($composition),
-						'objet = '.sql_quote($objet),
-						'id_objet = '.$id_objet,
-					)
-				);
-				// La noisette passe tout en haut
-				if ($ok) {
-					$ok = sql_updateq(
-						'spip_noisettes',
-						array(
-							'rang' => 1,
-						),
-						'id_noisette = '.$id_noisette
-					);
-				}
-			} else {
-				// Tout le monde monte d'un rang
-				$ok = sql_update(
-					'spip_noisettes',
-					array(
-						'rang' => 'rang - 1',
-					),
-					array(
-						'bloc = '.sql_quote($bloc),
-						'type = '.sql_quote($type),
-						'composition = '.sql_quote($composition),
-						'objet = '.sql_quote($objet),
-						'id_objet = '.$id_objet,
-					)
-				);
-				// La noisette passe tout en bas
-				if ($ok) {
-					$ok = sql_updateq(
-						'spip_noisettes',
-						array(
-							'rang' => $dernier_rang,
-						),
-						'id_noisette = '.$id_noisette
-					);
-				}
-			}
-		}
-		// On invalide le cache
-		include_spip('inc/invalideur');
-		suivre_invalideur("id='noisette/$id_noisette'");
-	}
-}
 
 
 /**
@@ -261,7 +31,7 @@ function noizetier_lister_blocs_avec_noisettes() {
 		$liste_blocs = array();
 		$resultats = sql_allfetsel(
 			array('bloc', 'type', 'composition'),
-			'spip_noisettes',
+			'spip_noizetier',
 			'1',
 			array('bloc', 'type', 'composition')
 		);
@@ -293,7 +63,7 @@ function noizetier_lister_blocs_avec_noisettes_objet($objet, $id_objet) {
 		$liste_blocs[$objet][$id_objet] = array();
 		$resultats = sql_allfetsel(
 			array('bloc'),
-			'spip_noisettes',
+			'spip_noizetier',
 			array(
 				'objet = '.sql_quote($objet),
 				'id_objet = '.intval($id_objet),
@@ -424,7 +194,7 @@ function noizetier_tableau_export() {
 	// On calcule le tableau des noisettes
 	$data['noisettes'] = sql_allfetsel(
 		'type, composition, bloc, noisette, parametres, css',
-		'spip_noisettes',
+		'spip_noizetier',
 		'1',
 		'',
 		'type, composition, bloc, rang'
@@ -474,7 +244,7 @@ function noizetier_importer_configuration($type_import, $import_compos, $config)
 		$page = '';
 
 		if ($type_import == 'remplacer') {
-			sql_delete('spip_noisettes', '1');
+			sql_delete('spip_noizetier', '1');
 		}
 
 		foreach ($noisettes as $noisette) {
@@ -484,7 +254,7 @@ function noizetier_importer_configuration($type_import, $import_compos, $config)
 				$page = $type.'-'.$composition;
 				$rang = 1;
 				if ($type_import == 'fusion') {
-					$rang = sql_getfetsel('rang', 'spip_noisettes', 'type='.sql_quote($type).' AND composition='.sql_quote($composition), '', 'rang DESC') + 1;
+					$rang = sql_getfetsel('rang', 'spip_noizetier', 'type='.sql_quote($type).' AND composition='.sql_quote($composition), '', 'rang DESC') + 1;
 				}
 			} else {
 				$rang = $rang + 1;
@@ -494,7 +264,7 @@ function noizetier_importer_configuration($type_import, $import_compos, $config)
 			$noisettes_insert[] = $noisette;
 		}
 
-		$ok = sql_insertq_multi('spip_noisettes', $noisettes_insert);
+		$ok = sql_insertq_multi('spip_noizetier', $noisettes_insert);
 	}
 
 	// On s'occupe des compositions du noizetier
@@ -535,6 +305,238 @@ function noizetier_importer_configuration($type_import, $import_compos, $config)
 
 // API traitées
 // ------------
+/**
+ * Charger les informations des contexte pour une noisette.
+ *
+ * @param string $noisette
+ *
+ * @return array
+ */
+function noizetier_charger_contexte_noisette($noisette) {
+	static $contexte_noisettes = null;
+
+	if (is_null($contexte_noisettes[$noisette])) {
+		$noisettes = noizetier_lister_noisettes();
+		$contexte_noisettes[$noisette] = $noisettes[$noisette]['contexte'];
+	}
+
+	return $contexte_noisettes[$noisette];
+}
+
+
+/**
+ * Déplace une noisette au sein d'un bloc.
+ *
+ * @param int $id_noisette
+ * @param string $sens
+ */
+function noizetier_deplacer_noisette($id_noisette, $sens) {
+	$id_noisette = intval($id_noisette);
+	if ($sens != 'bas') {
+		$sens = 'haut';
+	}
+
+	if (autoriser('configurer', 'noizetier') and $id_noisette) {
+		// On récupère des infos sur le placement actuel
+		$noisette = sql_fetsel(
+			'bloc, type, composition, objet, id_objet, rang',
+			'spip_noizetier',
+			'id_noisette = '.$id_noisette
+		);
+		$bloc = $noisette['bloc'];
+		$type = $noisette['type'];
+		$composition = $noisette['composition'];
+		$objet = $noisette['objet'];
+		$id_objet = intval($noisette['id_objet']);
+		$rang_actuel = intval($noisette['rang']);
+
+		// On teste si y a une noisette suivante
+		$dernier_rang = intval(sql_getfetsel(
+			'rang',
+			'spip_noizetier',
+			array(
+				'bloc = '.sql_quote($bloc),
+				'type = '.sql_quote($type),
+				'composition = '.sql_quote($composition),
+				'objet = '.sql_quote($objet),
+				'id_objet = '.$id_objet,
+			),
+			'',
+			'rang desc',
+			'0,1'
+		));
+
+		// Tant qu'on ne veut pas faire de tour complet
+		if (!($sens == 'bas' and $rang_actuel == $dernier_rang) and !($sens == 'haut' and $rang_actuel == 1)) {
+			// Alors on ne fait qu'échanger deux noisettes
+			$rang_echange = ($sens == 'bas') ? ($rang_actuel + 1) : ($rang_actuel - 1);
+			$ok = sql_updateq(
+				'spip_noizetier',
+				array(
+					'rang' => $rang_actuel,
+				),
+				array(
+					'bloc = '.sql_quote($bloc),
+					'type = '.sql_quote($type),
+					'composition = '.sql_quote($composition),
+					'objet = '.sql_quote($objet),
+					'id_objet = '.$id_objet,
+					'rang = '.$rang_echange,
+				)
+			);
+			if ($ok) {
+				$ok = sql_updateq(
+					'spip_noizetier',
+					array(
+						'rang' => $rang_echange,
+					),
+					'id_noisette = '.$id_noisette
+				);
+			}
+		}
+		// Sinon on fait un tour complet en déplaçant tout
+		else {
+			if ($sens == 'bas') {
+				// Tout le monde descend d'un rang
+				$ok = sql_update(
+					'spip_noizetier',
+					array(
+						'rang' => 'rang + 1',
+					),
+					array(
+						'bloc = '.sql_quote($bloc),
+						'type = '.sql_quote($type),
+						'composition = '.sql_quote($composition),
+						'objet = '.sql_quote($objet),
+						'id_objet = '.$id_objet,
+					)
+				);
+				// La noisette passe tout en haut
+				if ($ok) {
+					$ok = sql_updateq(
+						'spip_noizetier',
+						array(
+							'rang' => 1,
+						),
+						'id_noisette = '.$id_noisette
+					);
+				}
+			} else {
+				// Tout le monde monte d'un rang
+				$ok = sql_update(
+					'spip_noizetier',
+					array(
+						'rang' => 'rang - 1',
+					),
+					array(
+						'bloc = '.sql_quote($bloc),
+						'type = '.sql_quote($type),
+						'composition = '.sql_quote($composition),
+						'objet = '.sql_quote($objet),
+						'id_objet = '.$id_objet,
+					)
+				);
+				// La noisette passe tout en bas
+				if ($ok) {
+					$ok = sql_updateq(
+						'spip_noizetier',
+						array(
+							'rang' => $dernier_rang,
+						),
+						'id_noisette = '.$id_noisette
+					);
+				}
+			}
+		}
+		// On invalide le cache
+		include_spip('inc/invalideur');
+		suivre_invalideur("id='noisette/$id_noisette'");
+	}
+}
+
+
+/**
+ * Tri les noisettes d'une page
+ * Attention : parfois la page est transmise dans $ordre (et peu éventuellement changer en cours, cas de la page-dist de Zpip-vide).
+ *
+ * @param string  $page
+ * @param array $ordre
+ *
+ * @return bool
+ */
+function noizetier_trier_noisette($page, $ordre) {
+	// Vérifications
+	if (
+		!autoriser('configurer', 'noizetier')
+		or !is_array($ordre)
+		or substr($ordre[0], 0, 4) != 'bloc'
+	) {
+		return false;
+	}
+
+	$objet = '';
+	$id_objet = 0;
+	if (is_array($page)) {
+		$objet = $page['objet'];
+		$id_objet = $page['id_objet'];
+		$type = '';
+		$composition = '';
+	}
+	elseif ($page) {
+		$type = noizetier_page_type($page);
+		$composition = noizetier_page_composition($page);
+	}
+
+	$modifs = array();
+	foreach ($ordre as $entree) {
+		$entree = explode('-', $entree, 2);
+
+		if ($entree[0] == 'bloc') {
+			$bloc = $entree[1];
+			$rang = 1;
+		}
+		if ($entree[0] == 'page') {
+			$page = $entree[1];
+			$type = noizetier_page_type($page);
+			$composition = noizetier_page_composition($page);
+		}
+		if ($entree[0] == 'objet') {
+			$objet = $entree[1];
+		}
+		if ($entree[0] == 'id_objet') {
+			$id_objet = intval($entree[1]);
+		}
+		if ($entree[0] == 'noisette') {
+			$modifs[$entree[1]] = array(
+				'bloc' => $bloc,
+				'type' => $type,
+				'composition' => $composition,
+				'objet' => $objet,
+				'id_objet' => $id_objet,
+				'rang' => $rang,
+			);
+			$rang += 1;
+		}
+		if ($entree[0] == 'ajouter') {
+			$id_noisette = noizetier_noisette_ajouter($entree[1], $page, $bloc);
+			$modifs[$id_noisette] = array(
+				'bloc' => $bloc,
+				'type' => $type,
+				'composition' => $composition,
+				'objet' => $objet,
+				'id_objet' => $id_objet,
+				'rang' => $rang,
+			);
+			$rang += 1;
+		}
+	}
+
+	foreach ($modifs as $id_noisette => $valeurs) {
+		sql_updateq('spip_noizetier', $valeurs, 'id_noisette='.intval($id_noisette));
+	}
+
+	return true;
+}
 /**
  * @param array $filtres
  *

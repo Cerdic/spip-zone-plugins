@@ -21,7 +21,7 @@ function formulaires_editer_noisette_charger_dist($id_noisette, $redirect = '') 
 			't1.balise as balise',
 			't1.css as css',
 			't2.parametres as champs');
-		$from = array('spip_noisettes as t1', 'spip_noizetier_noisettes as t2');
+		$from = array('spip_noizetier as t1', 'spip_noizetier_noisettes as t2');
 		$where = array('t1.id_noisette=' . $valeurs['id_noisette'], 't1.noisette=t2.noisette');
 		$noisette = sql_fetsel($select, $from, $where);
 		if ($noisette) {
@@ -30,7 +30,7 @@ function formulaires_editer_noisette_charger_dist($id_noisette, $redirect = '') 
 
 			// Configuration standard de la noisette définie dans son fichier YAML.
 			// Cette configuration peut comporter des paramètres de saisie spécifiques dont les valeurs sont ensuite
-			// stockées dans le champ 'parametres' de la table 'spip_noisettes'.
+			// stockées dans le champ 'parametres' de la table 'spip_noizetier'.
 			// Cette structure de formulaire est générée automatiquement par le plugin Saisies.
 			$valeurs['_champs'] = unserialize($noisette['champs']);
 
@@ -107,7 +107,7 @@ function formulaires_editer_noisette_traiter_dist($id_noisette, $redirect = '') 
 		// Mise à jour de la noisette en base de données
 		$valeurs = array('parametres' => serialize($parametres), 'balise' => $balise, 'css' => $css);
 		$where = array('id_noisette=' . intval($id_noisette));
-		if (sql_updateq('spip_noisettes', $valeurs, $where)) {
+		if (sql_updateq('spip_noizetier', $valeurs, $where)) {
 			// On invalide le cache
 			include_spip('inc/invalideur');
 			suivre_invalideur("id='noisette/$id_noisette'");

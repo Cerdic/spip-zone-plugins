@@ -32,7 +32,7 @@ function action_deplacer_noisette_dist() {
 		if (in_array($sens, array('bas', 'haut')) and ($id_noisette = intval($id_noisette))) {
 			$select = array('type', 'composition', 'objet', 'id_objet', 'bloc', 'rang');
 			$where = array('id_noisette=' . $id_noisette);
-			$noisette = sql_fetsel($select, 'spip_noisettes', $where);
+			$noisette = sql_fetsel($select, 'spip_noizetier', $where);
 			$options = array();
 			if ($noisette['type']) {
 				$options['page'] = $noisette['composition']
