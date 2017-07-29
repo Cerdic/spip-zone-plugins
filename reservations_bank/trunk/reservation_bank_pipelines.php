@@ -229,24 +229,26 @@ if (!defined('_ECRIRE_INC_VERSION'))
 		// Affiche le formulaire de paiment au retour du formulaire réservation
 		if ($form == 'reservation') {
 			include_spip('inc/config');
-			$config = lire_config('reservation_bank', array());
-			$cacher_paiement_public = isset($config['cacher_paiement_public']) ? $config['cacher_paiement_public'] : '';
-			$preceder_formulaire = isset($config['preceder_formulaire']) ? $config['preceder_formulaire'] : '';
-			$id_transaction = rb_inserer_transaction(session_get('id_reservation'));
-			if (!$cacher_paiement_public) {
-				$message_ok = preg_replace('/<p[^>]*>.*?<\/p>/i', '',$flux['data']['message_ok']);
-				$tag_regex = '/<div[^>]*'.$attr.'="'.$value.'">(.*?)<\/div>/si';
-				if ($preceder_formulaire) {
-					$flux['data']['message_ok'] = '<div class="intro">' . recuperer_fond('inclure/paiement_reservation', array (
-						'id_reservation' => session_get('id_reservation'),
-						'cacher_paiement_public' => FALSE
-					)) . '</div>'. $message_ok;
-				}
-				else {
-					$flux['data']['message_ok'] = $message_ok . '<div class="intro">' . recuperer_fond('inclure/paiement_reservation', array (
-						'id_reservation' => session_get('id_reservation'),
-						'cacher_paiement_public' => FALSE
-					)) . '</div>';
+			if (_request('statut') == 'encours') {
+				$config = lire_config('reservation_bank', array());
+				$cacher_paiement_public = isset($config['cacher_paiement_public']) ? $config['cacher_paiement_public'] : '';
+				$preceder_formulaire = isset($config['preceder_formulaire']) ? $config['preceder_formulaire'] : '';
+				$id_transaction = rb_inserer_transaction(session_get('id_reservation'));
+				if (!$cacher_paiement_public) {
+					$message_ok = preg_replace('/<p[^>]*>.*?<\/p>/i', '',$flux['data']['message_ok']);
+					$tag_regex = '/<div[^>]*'.$attr.'="'.$value.'">(.*?)<\/div>/si';
+					if ($preceder_formulaire) {
+						$flux['data']['message_ok'] = '<div class="intro">' . recuperer_fond('inclure/paiement_reservation', array (
+							'id_reservation' => session_get('id_reservation'),
+							'cacher_paiement_public' => FALSE
+						)) . '</div>'. $message_ok;
+					}
+					else {
+						$flux['data']['message_ok'] = $message_ok . '<div class="intro">' . recuperer_fond('inclure/paiement_reservation', array (
+							'id_reservation' => session_get('id_reservation'),
+							'cacher_paiement_public' => FALSE
+						)) . '</div>';
+					}
 				}
 
 			}
@@ -274,7 +276,23 @@ if (!defined('_ECRIRE_INC_VERSION'))
 					$prix_ht = array_sum(array_column($montants, 'prix_ht'));
 					$prix = array_sum(array_column($montants, 'prix'));
 					if ($prix_ht <= 0 && $prix <= 0) {
-						set_request('statut' , 'accepte');
+						include_spip('inc/config');
+						$statut_calculer_auto = lire_config('reservation_evenement/statut_calculer_auto');
+						//Etablir si tous les détails d'événement ont le statut de la réservation
+						if ($statut_calculer_auto == 'on') {
+							$statut = 'accepte';
+							$statuts_details_reservation = _request('statuts_details_reservation');
+							$statut_modifie = array();
+
+							foreach ($statuts_details_reservation AS $id_detail_reservation => $data) {
+								$statut_modifie[] = $data['statut_modifie'];
+							}
+							//Sinon lui attibuer le statut accepté partiellement.
+							if (array_sum($statut_modifie) > 0)
+								$statut = 'accepte_part';
+						}
+								$flux['data']['statut'] = $statut;
+								set_request('statut', $statut);
 					}
 		}
 
