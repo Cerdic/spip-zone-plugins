@@ -194,6 +194,7 @@ if (! defined ( '_ECRIRE_INC_VERSION' ))
 				'accepte_part' => 'reservation:texte_statut_accepte_part',
 				'accepte' => 'reservation:texte_statut_accepte',
 				'cloture' => 'reservation:texte_statut_cloture',
+				'encours' => 'reservation:texte_statut_encours',
 				'refuse' => 'reservation:texte_statut_refuse',
 				'poubelle' => 'reservation:texte_statut_poubelle'
 			),
@@ -202,7 +203,7 @@ if (! defined ( '_ECRIRE_INC_VERSION' ))
 				'attente_paiement' => 'puce-reservation-attente_paiement-16.png',
 				'accepte_part' => 'puce-reservation-accepte_part-16.png',
 				'accepte' => 'puce-reservation-accepte-16.png',
-
+				'encours' => 'puce-reservation-encours-16.png',
 				'cloture' => 'puce-reservation-cloture-16.png',
 				'refuse' => 'puce-reservation-refuse-16.png',
 				'poubelle' => 'puce-reservation-poubelle-16.png'
