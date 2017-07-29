@@ -13,11 +13,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'explication_memcache_servers' => 'indiquer un serveur par ligne, sous la forme <kbd>host:port</kbd>',
-	'explication_redis_serveur' => 'sous la forme <kbd>host:port</kbd>',
-	'explication_redis_sock' => 'chemin d\'accès à un socket de domaine Unix',
-	'explications_redis_auth' => 'authentifiez la connexion en utilisant un mot de passe',
 	'explication_redis_dbindex' => 'changer la base de données sélectionnée',
 	'explication_redis_serializer' => 'méthode de sérialisation / désérialisation. ATTENTION vider le cache en cas de changement de méthode',
+	'explication_redis_serveur' => 'sous la forme <kbd>host:port</kbd>',
+	'explication_redis_sock' => 'chemin d’accès à un socket de domaine Unix',
+	'explications_redis_auth' => 'authentifiez la connexion en utilisant un mot de passe',
 
 	// I
 	'info_taille_cache_inconnue' => 'La méthode @methode@ ne permet pas de connaître la taille du cache.',
@@ -30,8 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_cache_methode' => 'Méthode de mémoization',
 	'legend_cache_pages' => 'Cache des pages',
 	'legend_memcache' => 'Réglages de memcache',
-	'lien_administration_memcache' => 'Administrer memcache',
 	'legend_redis' => 'Paramètres de Redis',
+	'lien_administration_memcache' => 'Administrer memcache',
 
 	// M
 	'memcached_donnes' => 'Données de votre serveur memcached',
@@ -47,20 +47,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_methode_filecache' => 'Fichiers (filecache)',
 	'option_methode_memcache' => 'Memcache',
 	'option_methode_nocache' => 'Désactivé (nocache)',
-	'option_methode_xcache' => 'XCache',
 	'option_methode_redis' => 'Redis',
+	'option_methode_xcache' => 'XCache',
 
 	// R
-	'redis_serveur' => 'Serveur:',
-	'redis_sock' => 'Socket Unix:',
-	'redis_auth' => 'Mot de passe:',
-	'redis_dbindex' => 'Base de données:',
+	'redis_auth' => 'Mot de passe :',
+	'redis_dbindex' => 'Base de données :',
+	'redis_erreur_connexion' => 'Erreur de connexion au serveur redis',
+	'redis_erreur_database' => 'Impossible de sélectionner la base de données demandée',
+	'redis_erreur_password' => 'Le mot de passe renseigné est incorrect',
+	'redis_serializer' => 'Sérialisation :',
+	'redis_serveur' => 'Serveur :',
+	'redis_sock' => 'Socket Unix :',
 	'redis_type_serveur' => 'Serveur',
 	'redis_type_sock' => 'Socket Unix',
-	'redis_serializer' => 'Sérialisation:',
-	'redis_erreur_password' => 'Le mot de passe renseigné est incorrect',
-	'redis_erreur_database' => 'Impossible de sélectionner la base de données demandée',
-	'redis_erreur_connexion' => 'Erreur de connexion au serveur redis',
 
 	// T
 	'taille_tototale_indisponible' => 'Taille totale non disponible'
