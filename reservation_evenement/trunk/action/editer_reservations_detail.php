@@ -71,6 +71,9 @@ function reservations_detail_modifier($id_reservations_detail, $set = null) {
 		'args' => $set,
 		'data' => array_merge($c, $details)
 	));
+	if (isset($c['statut'])) {
+		$set['statut'] =  $c['statut'];
+	}
 
 	// Ajouter les montants à l'environnment
 	$montants = _request('montants') ? _request('montants') : array();
@@ -108,7 +111,8 @@ function reservations_detail_modifier($id_reservations_detail, $set = null) {
 		$champ_date,
 		'statut',
 		'id_parent'
-	), array (), $set);
+	), array(), $set);
+	spip_log($c, 'teste');
 	$err = reservations_detail_instituer($id_reservations_detail, $c);
 
 	return $err;
@@ -183,6 +187,9 @@ function reservations_detail_inserer($id_parent = null, $set = null) {
  * @return string
  */
 function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub = true) {
+	spip_log('reservations_detail_instituer', 'teste');
+	spip_log($c, 'teste');
+
 	include_spip('inc/autoriser');
 	include_spip('inc/rubriques');
 	include_spip('inc/modifier');
