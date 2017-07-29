@@ -291,8 +291,9 @@ if (!defined('_ECRIRE_INC_VERSION'))
 							if (array_sum($statut_modifie) > 0)
 								$statut = 'accepte_part';
 						}
-								$flux['data']['statut'] = $statut;
-								set_request('statut', $statut);
+
+						set_request('statut', $statut);
+						reservation_instituer($flux['args']['id_reservation'], array('statut' => $statut));
 					}
 		}
 
