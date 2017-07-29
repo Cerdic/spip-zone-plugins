@@ -64,7 +64,7 @@
 							option_statut=oui})]
 					]				</ul>
 
-					[(#PLUGIN{ZPIP}|ou{#PLUGIN{Z}}|non)
+					[(#PLUGIN{Zpip}|ou{#PLUGIN{Zcore}}|ou{#PLUGIN{Z}}|non)
 						<li>
 							<label><:tickets:cfg_lbl_notification_publique:></label>
 							<p class="explication"><:tickets:message_zpip_inactif:></p>
@@ -89,13 +89,13 @@
 				<fieldset>
 				<h3 class="legend"><:tickets:cfg_lgd_champs_options_autres:></h3>
 				<ul>
-				[(#PLUGIN{ZPIP}|ou{#PLUGIN{Z}}|oui)
+				[(#PLUGIN{Zpip}|ou{#PLUGIN{Zcore}}|ou{#PLUGIN{Z}}|oui)
 					[(#SAISIE{case, desactiver_public,
 						label=<:tickets:cfg_lbl_desactiver_public:>,
 						label_case=<:tickets:cfg_explication_desactiver_public:>,
 						defaut=''})]
 					]
-				[(#PLUGIN{ZPIP}|ou{#PLUGIN{Z}}|non)
+				[(#PLUGIN{Zpip}|ou{#PLUGIN{Zcore}}|ou{#PLUGIN{Z}}|non)
 					<li>
 						<label><:tickets:cfg_lbl_desactiver_public:></label>
 						<p class="explication"><:tickets:message_zpip_inactif:></p>
@@ -105,7 +105,7 @@
 					label_case=<:tickets:cfg_explication_cacher_moteurs:>,
 					label=<:tickets:cfg_lbl_cacher_moteurs:>,
 					defaut=on})]
-				[(#PLUGIN{ZPIP}|ou{#PLUGIN{Z}}|oui)
+				[(#PLUGIN{Zpip}|ou{#PLUGIN{Zcore}}|ou{#PLUGIN{Z}}|oui)
 					[(#SAISIE{case, notification_publique,
 						label=<:tickets:cfg_lbl_notification_publique:>,
 						label_case=<:tickets:cfg_lbl_case_notification_publique:>})]

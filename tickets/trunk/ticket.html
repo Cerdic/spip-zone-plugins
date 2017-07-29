@@ -1,9 +1,9 @@
 <BOUCLE_principale_ticket(TICKETS){id_ticket}{tout}>
-[(#PLUGIN{Zpip}|oui)
+[(#PLUGIN{Zpip}|ou{#PLUGIN{Zcore}}|oui)
 	<INCLURE{fond=structure,type-page=ticket,composition,env} />
 ][(#PLUGIN{Z}|oui)
 	<INCLURE{fond=structure,type=ticket,composition,env} />
-][(#PLUGIN{Zpip}|ou{#PLUGIN{Z}}|non)
+][(#PLUGIN{Zpip}|ou{#PLUGIN{Zcore}}|ou{#PLUGIN{Z}}|non)
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
