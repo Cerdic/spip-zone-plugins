@@ -72,7 +72,6 @@ function reservations_detail_modifier($id_reservations_detail, $set = null) {
 		'data' => array_merge($c, $details)
 	));
 
-	spip_log($c, 'teste');
 	// Ajouter les montants à l'environnment
 	$montants = _request('montants') ? _request('montants') : array();
 	set_request('montants', $montants + array(
