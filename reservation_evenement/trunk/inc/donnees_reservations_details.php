@@ -1,7 +1,6 @@
 <?php
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
-
 function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 	if (count($set) > 0) {
 		include_spip('inc/filtres');

@@ -72,6 +72,17 @@ function reservations_detail_modifier($id_reservations_detail, $set = null) {
 		'data' => array_merge($c, $details)
 	));
 
+	spip_log($c, 'teste');
+	// Ajouter les montants à l'environnment
+	$montants = _request('montants') ? _request('montants') : array();
+	set_request('montants', $montants + array(
+		$id_reservations_detail => array(
+			'prix_ht' => $c['prix_ht'],
+			'prix' => $c['prix'],
+			'taxe' => $c['taxe']
+		)
+	));
+
 	// Si l'objet est publie, invalider les caches et demander sa reindexation
 	if (objet_test_si_publie($objet, $id)) {
 		$invalideur = "id='reservations_detail/$id_reservations_detail'";
