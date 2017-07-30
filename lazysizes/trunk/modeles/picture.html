@@ -13,6 +13,9 @@ on ne peut pas passer un fichier en parametre
 la description du breakpoint devrais pouvoir etre une mediaquerie OU utiliser un keyword
 (ex: __small) comme proposé par lazysizes
 
+@todo - on ne peut pas utiliser #ARRAY pour passer les tailles
+de source au modele quand il est utilisé/appelé par un rédacteur  
+
 @todo - ajouter les micro-data
 
 
@@ -26,45 +29,45 @@ la description du breakpoint devrais pouvoir etre une mediaquerie OU utiliser un
 -->]
 <BOUCLE_isDoc(CONDITION){si #ENV{id_document}}>
 
-<BOUCLE_doc(DOCUMENTS){id_document=#ENV{id_document}}{tout}>
-[(#SET{fichier, #FICHIER})]
-[(#SET{mime_type, #MIME_TYPE})]
-[(#SET{alt,#ENV{alt, #TITRE|sinon{#FICHIER|basename|titrer_document}|concat{' - '#MIME_TYPE}}})]
-[(#SET{largeur,#LARGEUR})]
-[(#SET{hauteur,#HAUTEUR})]
-</BOUCLE_doc>
+	<BOUCLE_doc(DOCUMENTS){id_document=#ENV{id_document}}{tout}>
+	[(#SET{fichier, #FICHIER})]
+	[(#SET{mime_type, #MIME_TYPE})]
+	[(#SET{alt,#ENV{alt, #TITRE|sinon{#FICHIER|basename|titrer_document}|concat{' - '#MIME_TYPE}}})]
+	[(#SET{largeur,#LARGEUR})]
+	[(#SET{hauteur,#HAUTEUR})]
+	</BOUCLE_doc>
 
 </BOUCLE_isDoc>
-
-[(#SET{fichier,#ENV{fichier}})]
-[(#SET{mime_type,#GET{fichier}|mime_content_type})]
-[(#SET{alt,#ENV{alt, #GET{fichier}|basename|titrer_document|concat{' - '#GET{mime_type}}}})]
-[(#SET{largeur,#GET{fichier}|largeur})]
-[(#SET{hauteur,#GET{fichier}|hauteur})]
-
-
+	[(#SET{fichier,#ENV{fichier}})]
+	[(#SET{mime_type,#GET{fichier}|mime_content_type})]
+	[(#SET{alt,#ENV{alt, #GET{fichier}|basename|titrer_document|concat{' - '#GET{mime_type}}}})]
+	[(#SET{largeur,#GET{fichier}|largeur})]
+	[(#SET{hauteur,#GET{fichier}|hauteur})]
 <//B_isDoc>
 
 [(#SET{variations,#ENV{variations,#ARRAY{1400,960px,950,700px,500,480px}}})]
 [(#SET{largeur_max,#ENV{largeur_max,1200}})]
 [(#SET{largeur_min,#ENV{largeur_min,400}})]
+[(#SET{transparent, [(#CHEMIN{rien.gif})] })]
 <div class="[(#ENV{class}) ]ratio-box" style="padding-bottom: [(#VAL{#GET{hauteur}}|div{#GET{largeur}}|mult{100})%]">	
 <picture>
 		<!--[if IE 9]><video style="display: none;"><![endif]-->
 		<BOUCLE_listSources(DATA){source table, #GET{variations}}>
-		<source srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-			data-srcset="[(#GET{fichier}|image_reduire{#CLE}|extraire_attribut{src})]"
+		<source srcset="[(#GET{transparent})]"
+			[(#GET{options/srcset_attr,data-srcset})]="[(#GET{fichier}|image_reduire{#CLE}|extraire_attribut{src})]"
 			type="#GET{mime_type}"
 			media="(min-width: #VALEUR)">
 		</BOUCLE_listSources>
-		<source srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-				data-srcset="[(#GET{fichier}|image_reduire{#GET{largeur_min}}|extraire_attribut{src})]"
+		<source srcset="[(#GET{transparent})]"
+				[(#GET{options/srcset_attr,data-srcset})]="[(#GET{fichier}|image_reduire{#GET{largeur_min}}|extraire_attribut{src})]"
 				type="#GET{mime_type}"
 		   />
 		<!--[if IE 9]></video><![endif]-->
-		<img src="[(#CHEMIN{rien.gif}|embarque_src)]"
-			data-src="[(#GET{fichier}|image_reduire{#GET{largeur_max}}|extraire_attribut{src})]" data-sizes="auto" class="lazyload" 
-			alt="#GET{alt}" width="#GET{largeur}" height="#GET{hauteur}">
+		<img src="[(#GET{transparent})]"
+			 [(#GET{options/src_attr,data-src})]="[(#GET{fichier}|image_reduire{#GET{largeur_max}}|extraire_attribut{src})]"
+			 [(#GET{options/sizes_attr,data-sizes})]="auto"
+			 class="[(#GET{options/lazy_class,lazyload})]"
+			 alt="#GET{alt}" width="#GET{largeur}" height="#GET{hauteur}">
 </picture>
 </div>
 
