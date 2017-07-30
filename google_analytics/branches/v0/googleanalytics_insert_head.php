@@ -11,8 +11,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param $flux
  * @return string
  */
-function googleanalytics_insert_head_css($flux){
-	return googleanalytics_snippet().$flux;
+function googleanalytics_insert_head_css($flux) {
+	return $flux . googleanalytics_snippet();
 }
 
 /**
@@ -22,7 +22,7 @@ function googleanalytics_insert_head_css($flux){
  * @param $flux
  * @return string
  */
-function googleanalytics_insert_head($flux){
+function googleanalytics_insert_head($flux) {
 	return $flux . googleanalytics_snippet();
 }
 
@@ -33,9 +33,17 @@ function googleanalytics_insert_head($flux){
 function googleanalytics_snippet(){
 	include_spip('inc/config');
 	$id_google = lire_config('googleanalytics/idGoogle');
+	$cookiebar = $_COOKIE["cb-enabled"];
+	if ($_COOKIE["displayCookieConsent"] != '') {
+		$displayCookieConsent = $_COOKIE["displayCookieConsent"];
+	} else {
+		$displayCookieConsent = 'y';
+	}
 	if ($id_google
 	  AND $id_google !== '_'
-	  AND (strncmp($id_google,"UA-xxx",6)!=0)) {
+	  AND (strncmp($id_google,"UA-xxx",6)!=0)
+	  AND $cookiebar !== 'declined'
+	  AND $displayCookieConsent === 'y') {
 	    if (lire_config('googleanalytics/ga_universal')) {
 	        return "<script type='text/javascript'>/*<![CDATA[*/
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })
