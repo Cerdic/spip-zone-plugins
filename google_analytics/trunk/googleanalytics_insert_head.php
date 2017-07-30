@@ -34,7 +34,11 @@ function googleanalytics_snippet(){
 	include_spip('inc/config');
 	$id_google = lire_config('googleanalytics/idGoogle');
 	$cookiebar = $_COOKIE["cb-enabled"];
-	$displayCookieConsent = $_COOKIE["displayCookieConsent"];
+	if ($_COOKIE["displayCookieConsent"] != '') {
+		$displayCookieConsent = $_COOKIE["displayCookieConsent"];
+	} else {
+		$displayCookieConsent = 'y';
+	}
 	if ($id_google
 	  AND $id_google !== '_'
 	  AND (strncmp($id_google,"UA-xxx",6)!=0)
