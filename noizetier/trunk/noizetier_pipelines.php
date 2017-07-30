@@ -298,7 +298,6 @@ function noizetier_affiche_milieu($flux) {
 		supprimer_fichier(_CACHE_AJAX_NOISETTES);
 		supprimer_fichier(_CACHE_CONTEXTE_NOISETTES);
 		supprimer_fichier(_CACHE_INCLUSIONS_NOISETTES);
-		supprimer_fichier(_CACHE_DESCRIPTIONS_NOISETTES);
 	}
 
 	return $flux;
