@@ -25,12 +25,24 @@ function inc_safehtml($t) {
 	
 
 	$config = HTMLPurifier_Config::createDefault();
+	$config->set('HTML.Doctype', 'HTML 4.01 Transitional');
+	$config->set('CSS.AllowTricky', true);
 	$config->set('Cache.SerializerPath', preg_replace(',/$,', '', realpath(_DIR_TMP)));
 	$def = $config->getHTMLDefinition(true);
 	
 	// HTML5
 	// https://github.com/lukusw/php-htmlpurfier-html5/blob/master/htmlpurifier_html5.php
 	// http://developers.whatwg.org/grouping-content.html
+	// http://developers.whatwg.org/sections.html
+    $def->addElement('section', 'Block', 'Flow', 'Common');
+    $def->addElement('nav',     'Block', 'Flow', 'Common');
+    $def->addElement('article', 'Block', 'Flow', 'Common');
+    $def->addElement('aside',   'Block', 'Flow', 'Common');
+    $def->addElement('header',  'Block', 'Flow', 'Common');
+    $def->addElement('footer',  'Block', 'Flow', 'Common');
+	
+	$def->addElement('picture', 'Block', 'Flow', 'Common');
+	
     $def->addElement('figure', 'Block', 'Optional: (figcaption, Flow) | (Flow, figcaption) | Flow', 'Common');
     $def->addElement('figcaption', 'Inline', 'Flow', 'Common');
 	
@@ -45,8 +57,13 @@ function inc_safehtml($t) {
       'controls' => 'Bool',
     ));
 	
+	
+	
     $def->addElement('source', 'Block', 'Flow', 'Common', array(
       'src' => 'URI',
+	  'data-srcset' => 'URI',
+	  'srcset' => 'URI',
+	  'media' => 'Text',
       'type' => 'Text',
     ));
 	
@@ -60,6 +77,7 @@ function inc_safehtml($t) {
 	
 	
 	$def->addAttribute('img', 'data-src', 'URI');
+	$def->addAttribute('img', 'data-srcset', 'URI');
 	$def->addAttribute('img', 'data-sizes', 'CDATA');
 	
 	//var_dump($def);
