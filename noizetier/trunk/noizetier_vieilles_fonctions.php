@@ -16,70 +16,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 /**
- * Liste les blocs pour lesquels il y a des noisettes a inserer.
- *
- * @staticvar array $liste_blocs
- *
- * @return array
- */
-function noizetier_lister_blocs_avec_noisettes() {
-	static $liste_blocs = null;
-
-	if (is_null($liste_blocs)) {
-		include_spip('base/abstract_sql');
-
-		$liste_blocs = array();
-		$resultats = sql_allfetsel(
-			array('bloc', 'type', 'composition'),
-			'spip_noizetier',
-			'1',
-			array('bloc', 'type', 'composition')
-		);
-		foreach ($resultats as $res) {
-			if ($res['composition']) {
-				$liste_blocs[] = $res['bloc'].'/'.$res['type'].'-'.$res['composition'];
-			} else {
-				$liste_blocs[] = $res['bloc'].'/'.$res['type'];
-			}
-		}
-	}
-
-	return $liste_blocs;
-}
-
-/**
- * Liste les blocs pour lesquels il y a des noisettes a inserer POUR UN OBJET
- *
- * @staticvar array $liste_blocs
- *
- * @return array
- */
-function noizetier_lister_blocs_avec_noisettes_objet($objet, $id_objet) {
-	static $liste_blocs = null;
-
-	if (is_null($liste_blocs[$objet][$id_objet])) {
-		include_spip('base/abstract_sql');
-
-		$liste_blocs[$objet][$id_objet] = array();
-		$resultats = sql_allfetsel(
-			array('bloc'),
-			'spip_noizetier',
-			array(
-				'objet = '.sql_quote($objet),
-				'id_objet = '.intval($id_objet),
-			),
-			array('bloc')
-		);
-		foreach ($resultats as $res) {
-			$liste_blocs[$objet][$id_objet][] = $res['bloc'].'/'.$objet;
-		}
-	}
-
-	return $liste_blocs[$objet][$id_objet];
-}
-
-
-/**
  * Retourne les elements du contexte uniquement
  * utiles a la noisette demande.
  *
@@ -88,7 +24,7 @@ function noizetier_lister_blocs_avec_noisettes_objet($objet, $id_objet) {
  * @return
  **/
 function noizetier_choisir_contexte($noisette, $contexte_entrant, $id_noisette) {
-	$contexte_noisette = array_flip(noizetier_obtenir_contexte($noisette));
+	$contexte_noisette = array_flip(noizetier_noisette_contexte($noisette));
 
 	// On transmet toujours l'id_noisette et les variables se terminant par _$id_noisette (utilisees par exemple par Aveline pour la pagination)
 	$contexte_min = array('id_noisette' => $id_noisette);
@@ -112,75 +48,6 @@ function noizetier_choisir_contexte($noisette, $contexte_entrant, $id_noisette) 
 	}
 
 	return $contexte_entrant;
-}
-
-/**
- * Retourne la liste des contextes donc peut avoir besoin une noisette.
- *
- * @param
- *
- * @return
- **/
-function noizetier_obtenir_contexte($noisette) {
-	static $noisettes = false;
-
-	// seulement 1 fois par appel, on lit ou calcule tous les contextes
-	if ($noisettes === false) {
-		// lire le cache des contextes sauves
-		lire_fichier_securise(_CACHE_CONTEXTE_NOISETTES, $noisettes);
-		$noisettes = @unserialize($noisettes);
-
-		// s'il en mode recalcul, on recalcule tous les contextes des noisettes trouvees.
-		if (!$noisettes or (_request('var_mode') == 'recalcul')) {
-			$infos = noizetier_lister_noisettes();
-			$noisettes = array();
-			foreach ($infos as $cle_noisette => $infos) {
-				$noisettes[$cle_noisette] = ($infos['contexte'] ? $infos['contexte'] : array());
-			}
-			ecrire_fichier_securise(_CACHE_CONTEXTE_NOISETTES, serialize($noisettes));
-		}
-	}
-
-	if (isset($noisettes[$noisette])) {
-		return $noisettes[$noisette];
-	}
-
-	return array();
-}
-
-
-/**
- * Retourne true ou false pour indiquer si la noisette doit être inclue dynamiquement.
- *
- * @param
- *
- * @return
- **/
-function noizetier_inclusion_dynamique($noisette) {
-	static $noisettes = false;
-
-	// seulement 1 fois par appel, on lit ou calcule tous les contextes
-	if ($noisettes === false) {
-		// lire le cache des contextes sauves
-		lire_fichier_securise(_CACHE_INCLUSIONS_NOISETTES, $noisettes);
-		$noisettes = @unserialize($noisettes);
-
-		// s'il en mode recalcul, on recalcule tous les contextes des noisettes trouvees.
-		if (!$noisettes or (_request('var_mode') == 'recalcul')) {
-			$infos = noizetier_lister_noisettes();
-			$noisettes = array();
-			foreach ($infos as $cle_noisette => $infos) {
-				$noisettes[$cle_noisette] = ($infos['inclusion'] == 'dynamique') ? true : false;
-			}
-			ecrire_fichier_securise(_CACHE_INCLUSIONS_NOISETTES, serialize($noisettes));
-		}
-	}
-
-	if (isset($noisettes[$noisette])) {
-		return $noisettes[$noisette];
-	}
-
-	return false;
 }
 
 /**
@@ -305,6 +172,77 @@ function noizetier_importer_configuration($type_import, $import_compos, $config)
 
 // API traitées
 // ------------
+
+/**
+ * Retourne la liste des contextes donc peut avoir besoin une noisette.
+ *
+ * @param
+ *
+ * @return
+ **/
+function noizetier_obtenir_contexte($noisette) {
+	static $noisettes = false;
+
+	// seulement 1 fois par appel, on lit ou calcule tous les contextes
+	if ($noisettes === false) {
+		// lire le cache des contextes sauves
+		lire_fichier_securise(_CACHE_CONTEXTE_NOISETTES, $noisettes);
+		$noisettes = @unserialize($noisettes);
+
+		// s'il en mode recalcul, on recalcule tous les contextes des noisettes trouvees.
+		if (!$noisettes or (_request('var_mode') == 'recalcul')) {
+			$infos = noizetier_lister_noisettes();
+			$noisettes = array();
+			foreach ($infos as $cle_noisette => $infos) {
+				$noisettes[$cle_noisette] = ($infos['contexte'] ? $infos['contexte'] : array());
+			}
+			ecrire_fichier_securise(_CACHE_CONTEXTE_NOISETTES, serialize($noisettes));
+		}
+	}
+
+	if (isset($noisettes[$noisette])) {
+		return $noisettes[$noisette];
+	}
+
+	return array();
+}
+
+
+/**
+ * Retourne true ou false pour indiquer si la noisette doit être inclue dynamiquement.
+ *
+ * @param
+ *
+ * @return
+ **/
+function noizetier_inclusion_dynamique($noisette) {
+	static $noisettes = false;
+
+	// seulement 1 fois par appel, on lit ou calcule tous les contextes
+	if ($noisettes === false) {
+		// lire le cache des contextes sauves
+		lire_fichier_securise(_CACHE_INCLUSIONS_NOISETTES, $noisettes);
+		$noisettes = @unserialize($noisettes);
+
+		// s'il en mode recalcul, on recalcule tous les contextes des noisettes trouvees.
+		if (!$noisettes or (_request('var_mode') == 'recalcul')) {
+			$infos = noizetier_lister_noisettes();
+			$noisettes = array();
+			foreach ($infos as $cle_noisette => $infos) {
+				$noisettes[$cle_noisette] = ($infos['inclusion'] == 'dynamique') ? true : false;
+			}
+			ecrire_fichier_securise(_CACHE_INCLUSIONS_NOISETTES, serialize($noisettes));
+		}
+	}
+
+	if (isset($noisettes[$noisette])) {
+		return $noisettes[$noisette];
+	}
+
+	return false;
+}
+
+
 /**
  * Charger les informations des contexte pour une noisette.
  *
@@ -312,6 +250,70 @@ function noizetier_importer_configuration($type_import, $import_compos, $config)
  *
  * @return array
  */
+/**
+ * Liste les blocs pour lesquels il y a des noisettes a inserer.
+ *
+ * @staticvar array $liste_blocs
+ *
+ * @return array
+ */
+function noizetier_lister_blocs_avec_noisettes() {
+	static $liste_blocs = null;
+
+	if (is_null($liste_blocs)) {
+		include_spip('base/abstract_sql');
+
+		$liste_blocs = array();
+		$resultats = sql_allfetsel(
+			array('bloc', 'type', 'composition'),
+			'spip_noizetier',
+			'1',
+			array('bloc', 'type', 'composition')
+		);
+		foreach ($resultats as $res) {
+			if ($res['composition']) {
+				$liste_blocs[] = $res['bloc'].'/'.$res['type'].'-'.$res['composition'];
+			} else {
+				$liste_blocs[] = $res['bloc'].'/'.$res['type'];
+			}
+		}
+	}
+
+	return $liste_blocs;
+}
+
+/**
+ * Liste les blocs pour lesquels il y a des noisettes a inserer POUR UN OBJET
+ *
+ * @staticvar array $liste_blocs
+ *
+ * @return array
+ */
+function noizetier_lister_blocs_avec_noisettes_objet($objet, $id_objet) {
+	static $liste_blocs = null;
+
+	if (is_null($liste_blocs[$objet][$id_objet])) {
+		include_spip('base/abstract_sql');
+
+		$liste_blocs[$objet][$id_objet] = array();
+		$resultats = sql_allfetsel(
+			array('bloc'),
+			'spip_noizetier',
+			array(
+				'objet = '.sql_quote($objet),
+				'id_objet = '.intval($id_objet),
+			),
+			array('bloc')
+		);
+		foreach ($resultats as $res) {
+			$liste_blocs[$objet][$id_objet][] = $res['bloc'].'/'.$objet;
+		}
+	}
+
+	return $liste_blocs[$objet][$id_objet];
+}
+
+
 function noizetier_charger_contexte_noisette($noisette) {
 	static $contexte_noisettes = null;
 

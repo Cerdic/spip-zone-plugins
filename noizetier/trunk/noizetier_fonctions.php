@@ -7,7 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 define('_CACHE_AJAX_NOISETTES', _DIR_CACHE . 'noisettes_ajax.php');
 define('_CACHE_CONTEXTE_NOISETTES', _DIR_CACHE . 'noisettes_contextes.php');
-define('_CACHE_DESCRIPTIONS_NOISETTES', _DIR_CACHE . 'noisettes_descriptions.php');
 define('_CACHE_INCLUSIONS_NOISETTES', _DIR_CACHE . 'noisettes_inclusions.php');
 
 
@@ -222,6 +221,82 @@ function noizetier_noisette_ajax($noisette) {
 	}
 
 	return $est_ajax[$noisette];
+}
+
+
+function noizetier_noisette_dynamique($noisette) {
+	static $est_dynamique = array();
+
+	if (!isset($est_dynamique[$noisette])) {
+		// On détermine l'existence et le contenu du cache.
+		if (lire_fichier_securise(_CACHE_INCLUSIONS_NOISETTES, $contenu)) {
+			$est_dynamique = unserialize($contenu);
+		}
+
+		// On doit recalculer le cache.
+		if (!$est_dynamique
+		or (_request('var_mode') == 'recalcul')
+		or (defined('_NO_CACHE') and (_NO_CACHE != 0))) {
+			// On repertorie toutes les types de noisettes disponibles et on compare la valeur
+			// du champ inclusion.
+			if ($noisettes = sql_allfetsel('noisette, inclusion', 'spip_noizetier_noisettes')) {
+				$noisettes = array_column($noisettes, 'inclusion', 'noisette');
+				foreach ($noisettes as $_noisette => $_inclusion) {
+					$est_dynamique[$_noisette] = ($_inclusion == 'dynamique') ? true : false;
+				}
+			}
+
+			// On vérifie que la noisette demandée est bien dans la liste.
+			// Si non, on la rajoute en utilisant en positionnant l'inclusion dynamique à false.
+			if (!isset($est_dynamique[$noisette])) {
+				$est_dynamique[$noisette] = false;
+			}
+
+			// On met à jour in fine le cache
+			if ($est_dynamique) {
+				ecrire_fichier_securise(_CACHE_INCLUSIONS_NOISETTES, serialize($est_dynamique));
+			}
+		}
+	}
+
+	return $est_dynamique[$noisette];
+}
+
+
+function noizetier_noisette_contexte($noisette) {
+	static $contexte = array();
+
+	if (!isset($contexte[$noisette])) {
+		// On détermine l'existence et le contenu du cache.
+		if (lire_fichier_securise(_CACHE_CONTEXTE_NOISETTES, $contenu)) {
+			$contexte = unserialize($contenu);
+		}
+
+		// On doit recalculer le cache.
+		if (!$contexte
+		or (_request('var_mode') == 'recalcul')
+		or (defined('_NO_CACHE') and (_NO_CACHE != 0))) {
+			// On repertorie toutes les types de noisettes disponibles et on compare la valeur
+			// du champ inclusion.
+			if ($noisettes = sql_allfetsel('noisette, contexte', 'spip_noizetier_noisettes')) {
+				$noisettes = array_column($noisettes, 'contexte', 'noisette');
+				$contexte = array_map('unserialize', $noisettes);
+			}
+
+			// On vérifie que la noisette demandée est bien dans la liste.
+			// Si non, on la rajoute en utilisant en positionnant le contexte à tableau vide.
+			if (!isset($contexte[$noisette])) {
+				$contexte[$noisette] = array();
+			}
+
+			// On met à jour in fine le cache
+			if ($contexte) {
+				ecrire_fichier_securise(_CACHE_CONTEXTE_NOISETTES, serialize($contexte));
+			}
+		}
+	}
+
+	return $contexte[$noisette];
 }
 
 
@@ -615,7 +690,7 @@ function noizetier_bloc_informer($bloc = '', $information = '') {
  * 		L'identifiant de la page, de la composition ou de l'objet au format:
  * 		- pour une page : type
  * 		- pour une composition : type-composition
- * 		- pour un objet : type_objet-id
+ * 		- pour un objet : type_objet-id_objet
  *
  * @return array
  */

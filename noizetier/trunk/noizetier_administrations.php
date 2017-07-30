@@ -95,7 +95,6 @@ function noizetier_vider_tables($nom_meta_version_base) {
 	supprimer_fichier(_CACHE_AJAX_NOISETTES);
 	supprimer_fichier(_CACHE_CONTEXTE_NOISETTES);
 	supprimer_fichier(_CACHE_INCLUSIONS_NOISETTES);
-	supprimer_fichier(_CACHE_DESCRIPTIONS_NOISETTES);
 }
 
 /**
@@ -158,6 +157,9 @@ function maj_060($config_defaut) {
 		$config_defaut['objets_noisettes'] = $config['objets_noisettes'];
 	}
 	ecrire_config('noizetier', $config_defaut);
+
+	// Suppression du cache des descriptions qui est devenu inutile
+	supprimer_fichier(_DIR_CACHE . 'noisettes_descriptions.php');
 
 	// Insertion de la liste des compositions virtuelles dans la table 'spip_noisettes_pages'
 	$compositions = lire_config('noizetier_compositions', array());
