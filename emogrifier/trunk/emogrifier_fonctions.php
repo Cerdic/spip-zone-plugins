@@ -21,7 +21,11 @@ function filtre_emogrifier($html, $fichier_css = _EMOGRIFIER_CSS) {
 
   include_spip('lib/emogrifier/Classes/Emogrifier');
 
-  $css = file_get_contents(find_in_path($fichier_css));
+  $fichiers = explode(',', $fichier_css);
+  foreach ($fichiers as $fichier) {
+	  $css .= file_get_contents(find_in_path(trim($fichier)));
+  }
+
   // Pouvoir dire à DOMDocument.loadHTML de râler en silence sur le html mal formé
   if (!_EMOGRIFIER_LIBXML_ERROR) {
 	  libxml_use_internal_errors(true);
