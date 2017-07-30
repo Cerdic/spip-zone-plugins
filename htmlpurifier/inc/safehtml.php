@@ -22,12 +22,15 @@ function inc_safehtml($t) {
 		return $a;
 
 	include_spip('lib/HTMLPurifier.standalone');
-	if (!isset($purifier))
-		$purifier = new HTMLPurifier();
+	
 
 	$config = HTMLPurifier_Config::createDefault();
-	$config->set('Cache.SerializerPath', preg_replace(',/$,', '', realpath(_DIR_TMP)));
 
+	$config->set('Cache.SerializerPath', preg_replace(',/$,', '', realpath(_DIR_TMP)));
+	
+	if (!isset($purifier))
+		$purifier = new HTMLPurifier($config);
+	
 	// HTML Purifier prefere l'utf-8
 	if ($GLOBALS['meta']['charset'] == 'utf-8')
 		$t = $purifier->purify($t);
