@@ -31,9 +31,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nombre_limite_explication' => 'Si vide aucune limitation',
 
 	// R
+	'reservation_supplementaire' => 'Réservation supplémentaire :',
 	'reservations_multiples_titre' => 'Réservations multiples',
-	'reservation_supplementaire' => 'Réservation supplémentaire :',
-	'reservations_supplementaires' => 'Réservations supplémentaires :',
+	'reservations_supplementaires' => 'Réservations supplémentaires :',
 
 	// T
 	'titre_page_configurer_reservations_multiples' => 'Réservations multiples',
