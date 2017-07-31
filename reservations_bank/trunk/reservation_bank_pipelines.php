@@ -265,7 +265,7 @@ function reservation_bank_formulaire_traiter($flux) {
  *
  * @param array $flux
  *        	Données du pipeline
- * @return array Données du pipelinehttps://zone.spip.org/trac/spip-zone/changeset/105527/_plugins_/reservations_multiples/trunk/lang/reservations_multiples.xml
+ * @return array Données du pipeline.
  */
 function reservation_bank_pre_edition($flux) {
 	$table = $flux['args']['table'];
