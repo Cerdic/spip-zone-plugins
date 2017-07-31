@@ -38,7 +38,7 @@ function lazysizes_header_prive($flux){
 	
 	$flux .= '<link rel="stylesheet" type="text/css" href="' . find_in_path('css/lazysizes.css') . '" />' . "\n";
 	
-	$flux .= lazysizes_insertion_js($flux);
+	$flux .= lazysizes_insertion_js();
 	
 	return $flux;
 }

@@ -1,4 +1,19 @@
-(function(window, document){
+(function(window, factory) {
+	var globalInstall = function(){
+		factory(window.lazySizes);
+		window.removeEventListener('lazyunveilread', globalInstall, true);
+	};
+
+	factory = factory.bind(null, window, window.document);
+
+	if(typeof module == 'object' && module.exports){
+		factory(require('lazysizes'));
+	} else if(window.lazySizes) {
+		globalInstall();
+	} else {
+		window.addEventListener('lazyunveilread', globalInstall, true);
+	}
+}(window, function(window, document, lazySizes) {
 	'use strict';
 	if(!window.addEventListener){return;}
 
@@ -6,7 +21,6 @@
 
 	var addObserver = function(){
 		var connect, disconnect, observer, connected;
-		var lazySizes = window.lazySizes;
 		var lsCfg = lazySizes.cfg;
 		var attributes = {'data-bgset': 1, 'data-include': 1, 'data-poster': 1, 'data-bg': 1, 'data-script': 1};
 		var regClassTest = '(\\s|^)(' + lsCfg.loadedClass;
@@ -106,4 +120,4 @@
 
 
 	addEventListener('lazybeforeunveil', addObserver);
-})(window, document);
+}));

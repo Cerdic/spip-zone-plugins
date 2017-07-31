@@ -15,7 +15,22 @@
  	see a live demo here: http://afarkas.github.io/lazysizes/maxdpr/
  */
 
-(function(window, document, undefined){
+(function(window, factory) {
+	var globalInstall = function(){
+		factory(window.lazySizes);
+		window.removeEventListener('lazyunveilread', globalInstall, true);
+	};
+
+	factory = factory.bind(null, window, window.document);
+
+	if(typeof module == 'object' && module.exports){
+		factory(require('lazysizes'));
+	} else if(window.lazySizes) {
+		globalInstall();
+	} else {
+		window.addEventListener('lazyunveilread', globalInstall, true);
+	}
+}(window, function(window, document, lazySizes) {
 	/*jshint eqnull:true */
 	'use strict';
 	if(!window.addEventListener){return;}
@@ -192,7 +207,7 @@
 	};
 
 	var extentLazySizes = function(){
-		if(window.lazySizes && !window.lazySizes.getOptimumX){
+		if(lazySizes && !lazySizes.getOptimumX){
 			lazySizes.getX = getOptimumX;
 			lazySizes.pWS = parseWsrcset;
 			docElem.removeEventListener('lazybeforeunveil', extentLazySizes);
@@ -202,7 +217,7 @@
 	docElem.addEventListener('lazybeforeunveil', extentLazySizes);
 	setTimeout(extentLazySizes);
 
-	config = (window.lazySizes && lazySizes.cfg) || window.lazySizesConfig;
+	config = (lazySizes && lazySizes.cfg) || window.lazySizesConfig;
 
 	if(!config){
 		config = {};
@@ -226,6 +241,8 @@
 	if(!window.devicePixelRatio){return;}
 
 	addEventListener('lazybeforesizes', function(e){
+		if(e.detail.instance != lazySizes){return;}
+
 		var optimumx, lazyData, width, attr;
 
 		var elem = e.target;
@@ -253,4 +270,4 @@
 		}
 	});
 
-})(window, document);
+}));

@@ -1,7 +1,22 @@
 /**
  * FF's first picture implementation is static and does not react to viewport changes, this tiny script fixes this.
  */
-(function(window) {
+(function(window, factory) {
+	var globalInstall = function(){
+		factory(window.lazySizes);
+		window.removeEventListener('lazyunveilread', globalInstall, true);
+	};
+
+	factory = factory.bind(null, window, window.document);
+
+	if(typeof module == 'object' && module.exports){
+		factory(require('lazysizes'));
+	} else if(window.lazySizes) {
+		globalInstall();
+	} else {
+		window.addEventListener('lazyunveilread', globalInstall, true);
+	}
+}(window, function(window, document, lazySizes) {
 	/*jshint eqnull:true */
 	var ua = navigator.userAgent;
 
@@ -63,4 +78,4 @@
 			return onResize;
 		})());
 	}
-})(window);
+}));

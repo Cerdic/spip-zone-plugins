@@ -12,6 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function lazysizes_addons() {
 	$lazy_addons = array(
+		'artdirect' => 'ls.artdirect',
 		'aspectratio' => 'ls.aspectratio',
 		'attrchange' => 'ls.attrchange',
 		'bgset' => 'ls.bgset',
@@ -36,7 +37,8 @@ function lazysizes_addons() {
 	return $lazy_addons;
 }
 
-function lazysizes_insertion_js($flux){
+function lazysizes_insertion_js(){
+	$flux = '';
 	include_spip('inc/config');
 	$lazy_options = lire_config('lazysizes/options');
 	$js_init_options = generer_url_public('lazysizes_config.js') ;
@@ -59,7 +61,7 @@ function lazysizes_insertion_js($flux){
 	$flux .= "<script type='text/javascript' src='$lazysizes' ></script>\n";
 
 	
-	$flux .= "<script>lazySizes.init();</script>";
+	$flux .= "<script type='text/javascript'>window.lazySizes.init();</script>";
 	
 	return $flux;
 }

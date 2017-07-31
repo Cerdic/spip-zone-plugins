@@ -1,4 +1,19 @@
-(function(window, document, undefined){
+(function(window, factory) {
+	var globalInstall = function(){
+		factory(window.lazySizes);
+		window.removeEventListener('lazyunveilread', globalInstall, true);
+	};
+
+	factory = factory.bind(null, window, window.document);
+
+	if(typeof module == 'object' && module.exports){
+		factory(require('lazysizes'));
+	} else if(window.lazySizes) {
+		globalInstall();
+	} else {
+		window.addEventListener('lazyunveilread', globalInstall, true);
+	}
+}(window, function(window, document, lazySizes) {
 	'use strict';
 	if(!document.addEventListener){return;}
 	var config, checkElements, expand;
@@ -137,4 +152,4 @@
 	}
 
 	addEventListener('lazybeforeunveil', init);
-})(window, document);
+}));

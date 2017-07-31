@@ -2,7 +2,22 @@
  This plugin extends lazySizes to lazyLoad and/or conditionally load content
  */
 
-(function(window, document){
+(function(window, factory) {
+	var globalInstall = function(){
+		factory(window.lazySizes);
+		window.removeEventListener('lazyunveilread', globalInstall, true);
+	};
+
+	factory = factory.bind(null, window, window.document);
+
+	if(typeof module == 'object' && module.exports){
+		factory(require('lazysizes'));
+	} else if(window.lazySizes) {
+		globalInstall();
+	} else {
+		window.addEventListener('lazyunveilread', globalInstall, true);
+	}
+}(window, function(window, document, lazySizes) {
 	/*jshint eqnull:true */
 	'use strict';
 
@@ -110,7 +125,7 @@
 		};
 	})();
 
-	config = (window.lazySizes && lazySizes.cfg) || window.lazySizesConfig;
+	config = (lazySizes && lazySizes.cfg) || window.lazySizesConfig;
 
 	if(!config){
 		config = {};
@@ -420,11 +435,7 @@
 			event = lazySizes.fire(elem, 'lazyincludeloaded', detail);
 
 			if(detail.insert && detail.isSuccess && !event.defaultPrevented && detail.content != null && detail.content != elem.innerHTML){
-				if(window.jQuery){
-					jQuery(elem).html(detail.content);
-				} else {
-					elem.innerHTML = detail.content;
-				}
+				elem.innerHTML = detail.content;
 			}
 
 			queue.d();
@@ -491,7 +502,7 @@
 	}
 
 	function beforeUnveil(e){
-		if(e.defaultPrevented || !e.target.getAttribute('data-include')){return;}
+		if(e.detail.instance != lazySizes || e.defaultPrevented || !e.target.getAttribute('data-include')){return;}
 		queue.q(e.target);
 		e.detail.firesLoad = true;
 	}
@@ -501,4 +512,4 @@
 	addEventListener('resize', refreshIncludes, false);
 	addEventListener('lazyrefreshincludes', refreshIncludes, false);
 
-})(window, document);
+}));
