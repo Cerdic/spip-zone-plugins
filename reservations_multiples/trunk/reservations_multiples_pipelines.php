@@ -212,6 +212,7 @@ function reservations_multiples_formulaire_traiter($flux) {
 			$message_original = $flux['data']['message_ok'];
 			$message_ok = array();
 			while ($i <= $nombre) {
+				set_request('gratuit', FALSE);
 				// recupérer les champs par défaut
 				$nr = $i++;
 				$email = _request('email_' . $nr);
@@ -242,14 +243,19 @@ function reservations_multiples_formulaire_traiter($flux) {
 				}
 
 				// Envoyer une notification.
-				if(test_plugin_actif('reservation_bank') && $notifications = charger_fonction('notifications', 'inc', true)) {
+				if(test_plugin_actif('reservation_bank') &&
+						$notifications = charger_fonction('notifications', 'inc', true) AND
+						!_request('gratuit')) {
 					include_spip('inc/config');
 					$config_reservation_evenement = lire_config('reservation_evenement');
 					$preceder_formulaire= lire_config('reservation_bank/preceder_formulaire');
 					$id_transaction = rb_inserer_transaction($id_reservation);
+					$quand = isset($config['quand']) ? $config['quand'] : array();
+
 
 
 					$row = sql_fetsel('statut,date,id_auteur,email,lang,donnees_auteur', 'spip_reservations', 'id_reservation=' . intval($id_reservation));
+					$statut = $row['statut'];
 
 					//Déterminer la langue pour les notifications
 					$lang = isset($row['lang']) ? $row['lang'] : lire_config('langue_site');
@@ -266,7 +272,7 @@ function reservations_multiples_formulaire_traiter($flux) {
 
 
 					// Envoyer au vendeur et au client
-					if ($config_reservation_evenement['client']) {
+					if ($config_reservation_evenement['client'] && !in_array($statut, $quand)) {
 						if (intval($row['id_auteur']) AND $row['id_auteur'] > 0) {
 							$options['email'] = sql_getfetsel('email', 'spip_auteurs', 'id_auteur=' . $row['id_auteur']);
 						}
