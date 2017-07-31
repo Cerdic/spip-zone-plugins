@@ -7,16 +7,16 @@
 			var form = jQuery(this).parent().next('.formulaire_trier_tickets');
 			if(form.is(':hidden')){
 				jQuery(this).removeClass('off').addClass('on');
-				form.slideDown('slow');
+				form.slideDown();
 			}
 			else{
-				form.slideUp('slow');
+				form.slideUp();
 				jQuery(this).removeClass('on').addClass('off');
 			}
 			return false;
 		});
 	}
-	jQuery(document).ready(function(){
+	jQuery(function(){
 		tickets_trier();
 		onAjaxLoad(tickets_trier);
 	});
