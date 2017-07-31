@@ -5,6 +5,7 @@ TODO
 - corrolaire : si un objet à des "num titre", traiter.
 - gérer les rubriques;
 - gérer les mots-clés;
+- gérer le rang des liaisons (objets liés à un autre objet)(ex. : pouvoir ordonner la liste des mots clés d'un article)(Roland)
 - gérer les objets éditoriaux historiques de SPIP : brèves + sites ;
 - que se passe t-il si on déplace un article d’une rubrique à une autre via Plan ?
 - Gestion du plugin Pages uniques ;
