@@ -24,7 +24,7 @@
 <table class="spip">
 	<thead>
 		<tr>
-			<th></th>
+			<th>#</th>
 			<th[(#ENV{tri_detaillee}|=={id_objet}|oui)class="tri"]>
 				[(#ENV{tri_detaillee}|=={id_objet}|non)[(#TRI{id_objet,#,ajax}|inserer_attribut{rel,nofollow})]]
 				[(#ENV{tri_detaillee}|=={id_objet}|oui)

@@ -28,7 +28,8 @@ table.tickets { margin:0 0 .5em 0;}
 
 .formulaire_editer_ticket input.text {width:98%;}
 .formulaire_editer_statut_ticket li.editer_statut .explication {color:#D06C07;}
-li.editer_forum_ticket .explication {display:none;}
+
+.editer_forum_ticket .explication {display:none;}
 
 /* start - table */
 table.tickets,
