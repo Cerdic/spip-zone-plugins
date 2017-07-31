@@ -26,10 +26,10 @@ function reservation_bank_formulaire_charger($flux) {
 		$flux['data']['checkout'] = _request('checkout');
 		if ($flux['data']['checkout'] = _request('checkout')) {
 			$flux['data']['editable'] = FALSE;
-			$flux['data']['message_ok'] .= recuperer_fond('inclure/paiement_reservation', array (
+			$flux['data']['message_ok'] .= recuperer_fond('inclure/paiement_reservation', array(
 				'id_reservation' => session_get('id_reservation'),
-				'cacher_paiement_public' => FALSE,
-				));
+				'cacher_paiement_public' => FALSE
+			));
 		}
 	}
 
@@ -48,13 +48,12 @@ function reservation_bank_formulaire_charger($flux) {
 			$flux['_hidden'] .= '<input name="email_client" value="' . $email_client . '" type="hidden"/>';
 		}
 
-
 		// Définir les champs pour les détails de réservation.
 		$sql = sql_select('id_reservations_detail,prix,prix_ht,quantite,devise,taxe,descriptif,montant_paye', 'spip_reservations_details', 'id_reservation=' . $id_reservation);
 
-		$montant_detail = array ();
-		$montant_reservations_detail_defaut = array ();
-		$montant_reservations_detail_total = array ();
+		$montant_detail = array();
+		$montant_reservations_detail_defaut = array();
+		$montant_reservations_detail_total = array();
 		$count = sql_count($sql);
 		$montant_transaction_detail = '';
 		if ($count > 0) {
@@ -68,7 +67,7 @@ function reservation_bank_formulaire_charger($flux) {
 			$fonction_prix = charger_fonction('prix', 'inc/');
 		}
 
-		while ( $data = sql_fetch($sql) ) {
+		while ($data = sql_fetch($sql)) {
 			$id_reservations_detail = $data['id_reservations_detail'];
 			$devise = $data['devise'];
 			$montant_paye[$id_reservations_detail] = $data['montant_paye'];
@@ -99,14 +98,14 @@ function reservation_bank_formulaire_charger($flux) {
 
 			if ($montant_defaut > 0) {
 
-				$montant_detail[] = array (
-						'saisie' => 'input',
-						'options' => array (
-								'nom' => 'montant_reservations_detail_' . $id_reservations_detail,
-								'label' => $data['descriptif'],
-								'defaut' => $montant_defaut,
-								'size' => 20
-						)
+				$montant_detail[] = array(
+					'saisie' => 'input',
+					'options' => array(
+						'nom' => 'montant_reservations_detail_' . $id_reservations_detail,
+						'label' => $data['descriptif'],
+						'defaut' => $montant_defaut,
+						'size' => 20
+					)
 				);
 			}
 
@@ -119,35 +118,35 @@ function reservation_bank_formulaire_charger($flux) {
 			$flux['_hidden'] .= '<input name="credit" value="' . $credit[$devise] . '" type="hidden"/>';
 		}
 
-		$flux['_mes_saisies'] = array (
-				array (
-						'saisie' => 'fieldset',
-						'options' => array (
-								'nom' => 'specifier',
-								'label' => _T('reservation_bank:label_fieldset_specifier')
-						),
-						'saisies' => array (
-								array (
-										'saisie' => 'oui_non',
-										'options' => array (
-												'nom' => 'specifier_montant',
-												'label' => _T('reservation_bank:label_specifier_montant'),
-												'defaut' => _request('specifier_montant')
-										)
-								)
-						)
+		$flux['_mes_saisies'] = array(
+			array(
+				'saisie' => 'fieldset',
+				'options' => array(
+					'nom' => 'specifier',
+					'label' => _T('reservation_bank:label_fieldset_specifier')
 				),
-				array (
-						'saisie' => 'fieldset',
-						'options' => array (
-								'nom' => 'montant',
-								'label' => _T('reservation_bank:label_fieldset_montant_detail', array (
-										'devise' => $devise
-								)),
-								'afficher_si' => '@specifier_montant@ == "on"'
-						),
-						'saisies' => $montant_detail
+				'saisies' => array(
+					array(
+						'saisie' => 'oui_non',
+						'options' => array(
+							'nom' => 'specifier_montant',
+							'label' => _T('reservation_bank:label_specifier_montant'),
+							'defaut' => _request('specifier_montant')
+						)
+					)
 				)
+			),
+			array(
+				'saisie' => 'fieldset',
+				'options' => array(
+					'nom' => 'montant',
+					'label' => _T('reservation_bank:label_fieldset_montant_detail', array(
+						'devise' => $devise
+					)),
+					'afficher_si' => '@specifier_montant@ == "on"'
+				),
+				'saisies' => $montant_detail
+			)
 		);
 		$flux['data']['specifier_montant'] = _request('specifier_montant');
 		$flux['data']['montant_reservations_detail_defaut'] = '';
@@ -180,18 +179,18 @@ function reservation_bank_formulaire_verifier($flux) {
 		$montant_reservations_detail_defaut = _request('montant_reservations_detail_defaut') ? unserialize(_request('montant_reservations_detail_defaut')) : array();
 		$montant_reservations_detail_total = _request('montant_reservations_detail_total') ? unserialize(_request('montant_reservations_detail_total')) : array();
 
-		if ($montant_reservations_detail_defaut){
+		if ($montant_reservations_detail_defaut) {
 			set_request('montant_reservations_detail_defaut', $montant_reservations_detail_defaut);
 		}
 		if ($montant_reservations_detail_total) {
-			set_request('montant_reservations_detail_total',$montant_reservations_detail_total);
+			set_request('montant_reservations_detail_total', $montant_reservations_detail_total);
 		}
 
 		$sql = sql_select('id_reservations_detail,montant_paye', 'spip_reservations_details', 'id_reservation=' . $id_reservation);
-		$montant_ouvert = array ();
-		$montant_paye = array ();
-		$montants = array ();
-		while ( $data = sql_fetch($sql) ) {
+		$montant_ouvert = array();
+		$montant_paye = array();
+		$montants = array();
+		while ($data = sql_fetch($sql)) {
 			$id_reservations_detail = $data['id_reservations_detail'];
 			$montant = _request('montant_reservations_detail_' . $id_reservations_detail);
 			$montant_defaut = $montant_reservations_detail_defaut[$id_reservations_detail];
@@ -199,14 +198,16 @@ function reservation_bank_formulaire_verifier($flux) {
 			$montant_paye[$id_reservations_detail] = $paye = $data['montant_paye'];
 			$montants[] = $montant;
 
-			if (_request('specifier_montant') AND $montant > $montant_defaut) {
-				$flux['data']['montant_reservations_detail_' .$id_reservations_detail]= _T('reservation_bank:message_erreur_montant_reservations_detail',array('montant_ouvert' => $montant_defaut));
+			if (_request('specifier_montant') and $montant > $montant_defaut) {
+				$flux['data']['montant_reservations_detail_' . $id_reservations_detail] = _T('reservation_bank:message_erreur_montant_reservations_detail', array(
+					'montant_ouvert' => $montant_defaut
+				));
 			}
 		}
 		set_request('montant_paye', $montant_paye);
 		if ($credit = _request('credit') and $credit < array_sum($montants)) {
-			$flux['data']['specifier_montant'] = _T('reservation_bank:message_erreur_montant_credit', array (
-					'credit' => $credit
+			$flux['data']['specifier_montant'] = _T('reservation_bank:message_erreur_montant_credit', array(
+				'credit' => $credit
 			));
 		}
 		session_set('encaisser_montant_regle', array_sum($montants));
@@ -228,27 +229,29 @@ function reservation_bank_formulaire_traiter($flux) {
 
 	// Affiche le formulaire de paiment au retour du formulaire réservation
 	if ($form == 'reservation') {
-		include_spip('inc/config');
-		$config = lire_config('reservation_bank', array());
-		$cacher_paiement_public = isset($config['cacher_paiement_public']) ? $config['cacher_paiement_public'] : '';
-		$preceder_formulaire = isset($config['preceder_formulaire']) ? $config['preceder_formulaire'] : '';
-		$id_transaction = rb_inserer_transaction(session_get('id_reservation'));
-		if (!$cacher_paiement_public) {
-			$message_ok = preg_replace('/<p[^>]*>.*?<\/p>/i', '',$flux['data']['message_ok']);
-			$tag_regex = '/<div[^>]*'.$attr.'="'.$value.'">(.*?)<\\/div>/si';
-			if ($preceder_formulaire) {
-				$flux['data']['message_ok'] = recuperer_fond('inclure/paiement_reservation', array (
-					'id_reservation' => session_get('id_reservation'),
-					'cacher_paiement_public' => FALSE
-				)) . '<br />'. $message_ok;
-			}
-			else {
-				$flux['data']['message_ok'] = $message_ok . recuperer_fond('inclure/paiement_reservation', array (
-					'id_reservation' => session_get('id_reservation'),
-					'cacher_paiement_public' => FALSE
-				));
-			}
+		if (!_request('gratuit')) {
+			include_spip('inc/config');
+			$config = lire_config('reservation_bank', array());
+			$cacher_paiement_public = isset($config['cacher_paiement_public']) ? $config['cacher_paiement_public'] : '';
+			$preceder_formulaire = isset($config['preceder_formulaire']) ? $config['preceder_formulaire'] : '';
+			$id_transaction = rb_inserer_transaction(session_get('id_reservation'));
+			if (!$cacher_paiement_public) {
+				$message_ok = preg_replace('/<p[^>]*>.*?<\/p>/i', '', $flux['data']['message_ok']);
+				$tag_regex = '/<div[^>]*' . $attr . '="' . $value . '">(.*?)<\/div>/si';
+				if ($preceder_formulaire) {
+					$flux['data']['message_ok'] = '<div class="intro">' . recuperer_fond('inclure/paiement_reservation', array(
+						'id_reservation' => session_get('id_reservation'),
+						'cacher_paiement_public' => FALSE
+					)) . '</div>' . $message_ok;
+				}
+				else {
+					$flux['data']['message_ok'] = $message_ok . '<div class="intro">' . recuperer_fond('inclure/paiement_reservation', array(
+						'id_reservation' => session_get('id_reservation'),
+						'cacher_paiement_public' => FALSE
+					)) . '</div>';
+				}
 
+			}
 		}
 	}
 
@@ -262,14 +265,44 @@ function reservation_bank_formulaire_traiter($flux) {
  *
  * @param array $flux
  *        	Données du pipeline
- * @return array Données du pipeline
+ * @return array Données du pipelinehttps://zone.spip.org/trac/spip-zone/changeset/105527/_plugins_/reservations_multiples/trunk/lang/reservations_multiples.xml
  */
 function reservation_bank_pre_edition($flux) {
 	$table = $flux['args']['table'];
 
-	if ($table == 'spip_reservations_details'
-		and $montant_reservations_detail_total = _request('montant_reservations_detail_total')
-		and $montant_paye = _request('montant_paye')) {
+	if (!_request('gratuit') &&
+			$table == 'spip_reservations' &&
+			$flux['args']['statut_ancien'] == 'encours' &&
+			_request('statut') == 'encours' &&
+			$montants = _request('montants')
+			) {
+			$id_reservation = $flux['args']['id_reservation'];
+			$prix_ht = array_sum(array_column($montants, 'prix_ht'));
+			$prix = array_sum(array_column($montants, 'prix'));
+			if ($prix_ht <= 0 && $prix <= 0) {
+				spip_log($flux, 'teste');
+				$id_transaction = rb_inserer_transaction($id_reservation);
+				$row = sql_fetsel('*','spip_transactions','id_transaction='.intval($id_transaction));
+
+				$set = array(
+					"mode"=>'gratuit',
+					"montant_regle" => 0,
+					"date_paiement" => date('Y-m-d H:i:s'),
+					"statut"=>'ok',
+					"reglee"=>'oui'
+				);
+				sql_updateq("spip_transactions", $set,	"id_transaction=".intval($id_transaction));
+				spip_log("call_resonse : id_transaction $id_transaction, reglee",$mode);
+				set_request('gratuit', TRUE);
+
+				$regler_transaction = charger_fonction('regler_transaction', 'bank');
+				$regler_transaction($id_transaction, array('row_prec'=>$row));
+			}
+
+	}
+
+
+	if ($table == 'spip_reservations_details' and $montant_reservations_detail_total = _request('montant_reservations_detail_total') and $montant_paye = _request('montant_paye')) {
 
 		$id_reservations_detail = $flux['args']['id_reservations_detail'];
 
@@ -281,7 +314,8 @@ function reservation_bank_pre_edition($flux) {
 		// Si le montant payé est inférieur au montant dû on change les statuts.
 
 		$statut = $flux['data']['statut'];
-		if ($montant_paye < $montant_total AND (!empty($montant_total) AND $montant_total != 0)) {
+
+		if ($montant_paye < $montant_total and (!empty($montant_total) and $montant_total != 0)) {
 			if ($statut == 'accepte') {
 				$flux['data']['statut'] = 'accepte_part';
 			}
@@ -336,8 +370,8 @@ function reservation_bank_recuperer_fond($flux) {
 		$id_reservation = $contexte['id_reservation'];
 		$sql = sql_select('montant_paye', 'spip_reservations_details', 'id_reservation=' . $id_reservation);
 
-		$montant_paye = array ();
-		while ( $data = sql_fetch($sql) ) {
+		$montant_paye = array();
+		while ($data = sql_fetch($sql)) {
 			$montant_paye[] = $data['montant_paye'];
 		}
 		$contexte['montant_paye'] = array_sum($montant_paye);
@@ -346,71 +380,56 @@ function reservation_bank_recuperer_fond($flux) {
 	}
 
 	// Ajoute le message de paiement à la notification de réservation.
-	if ($fond == 'inclure/reservation'
-			and $id_reservation = $flux['data']['contexte']['id_reservation']
-			and $statut = sql_getfetsel('statut', 'spip_reservations', 'id_reservation=' . $id_reservation)
-			and ($statut == 'attente_paiement' or $statut == 'accepte')) {
-				$qui = $flux['data']['contexte']['qui'];
-				$transaction = sql_fetsel('mode, id_transaction, transaction_hash, message, tracking_id',
-				'spip_transactions',
-				'id_reservation=' . $id_reservation,
-				'',
-				'date_transaction DESC'
-				);
+	if ($fond == 'inclure/reservation' and
+			$id_reservation = $flux['data']['contexte']['id_reservation'] and
+			$statut = sql_getfetsel('statut', 'spip_reservations', 'id_reservation=' . $id_reservation) and
+			($statut == 'attente_paiement' or $statut == 'accepte')) {
+		$qui = $flux['data']['contexte']['qui'];
+		$transaction = sql_fetsel('mode, id_transaction, transaction_hash, message, tracking_id', 'spip_transactions', 'id_reservation=' . $id_reservation, '', 'date_transaction DESC');
 		$mode = $transaction['mode'];
 		$id_transaction = $transaction['id_transaction'];
 		if ($qui == 'client') {
 			if ($statut == 'attente_paiement') {
-				$pattern = array('|<p class="titre h4">|','|</p>|');
-				$replace = array('<h3>','</h3>');
-				$texte = preg_replace($pattern, $replace, bank_afficher_attente_reglement(
-						$mode,
-						$id_transaction,
-						$transaction['transaction_hash'],
-						'')
-						);
+				$pattern = array(
+					'|<p class="titre h4">|',
+					'|</p>|'
+				);
+				$replace = array(
+					'<h3>',
+					'</h3>'
+				);
+				$texte = preg_replace($pattern, $replace, bank_afficher_attente_reglement($mode, $id_transaction, $transaction['transaction_hash'], ''));
 			}
-			else{
+			else {
 				$texte = '<p>' . $transaction['message'] . '</p>';
 			}
 		}
-		else {
+		elseif ($qui == 'vendeur') {
 			$url = generer_url_ecrire('transaction', 'id_transaction=' . $id_transaction);
 			$texte = '<h2>' . _T('reservation_bank:titre_paiement_vendeur') . '</h2>';
 			$texte .= '<p>' . _T('reservation_bank:message_paiement_vendeur', array(
 				'mode' => $mode,
-				'url' => $url,
-				)
-			) . '</p>';
+				'url' => $url
+			)) . '</p>';
 		}
 
 		$flux['data']['texte'] .= $texte;
 	}
 
 	// Ajouter le message pour la référence su paiement par virement.
-	if ($fond == 'presta/virement/payer/attente'and
-			$tracking_id = sql_getfetsel('tracking_id',
-					'spip_transactions',
-					'id_transaction=' . $contexte['id_transaction']) and
-$id_reservation = sql_getfetsel('id_reservation', 'spip_reservations', 'reference LIKE '. sql_quote($tracking_id))) {
+	if ($fond == 'presta/virement/payer/attente' and $tracking_id = sql_getfetsel('tracking_id', 'spip_transactions', 'id_transaction=' . $contexte['id_transaction']) and $id_reservation = sql_getfetsel('id_reservation', 'spip_reservations', 'reference LIKE ' . sql_quote($tracking_id))) {
 
-			$texte = '<strong>' . _T('reservation_bank:reservation_paiement_reference',
-					array('reference' => $tracking_id)) . '</strong>';
-			$flux['data']['texte'] = str_replace('</div>', $texte . '</div>', $flux['data']['texte']);
-
+		$texte = '<strong>' . _T('reservation_bank:reservation_paiement_reference', array(
+			'reference' => $tracking_id
+		)) . '</strong>';
+		$flux['data']['texte'] = str_replace('</div>', $texte . '</div>', $flux['data']['texte']);
 	}
 
-	// Ajoute un bouton de paiement pour le réservations en cours.
+	// Ajoute un bouton de paimeent pour le réservations en cours.
 	if ($fond == 'prive/squelettes/navigation/reservation') {
-		if ($statut = sql_getfetsel('statut',
-					'spip_reservations',
-					'id_reservation= ' . $contexte['id_reservation']) AND
-				$statut == 'encours') {
+		if ($statut = sql_getfetsel('statut', 'spip_reservations', 'id_reservation= ' . $contexte['id_reservation']) and $statut == 'encours') {
 			$button = recuperer_fond('inclure/bouton_inserer_prestataire', $contexte);
-			$flux['data']['texte'] = str_replace(
-					'<!-- Infos extras -->',
-					$button . ' <!-- Infos extras -->',
-					$flux['data']['texte']);
+			$flux['data']['texte'] = str_replace('<!-- Infos extras -->', $button . ' <!-- Infos extras -->', $flux['data']['texte']);
 		}
 	}
 
@@ -427,48 +446,52 @@ $id_reservation = sql_getfetsel('id_reservation', 'spip_reservations', 'referenc
  */
 function reservation_bank_bank_traiter_reglement($flux) {
 	// Si on est dans le bon cas d'un paiement de reservation et qu'il y a un id_reservation et que la reservation existe toujours
-	if ($id_transaction = $flux['args']['id_transaction']
-			and $transaction = sql_fetsel("*", "spip_transactions",
-				"id_transaction=" . intval($id_transaction))
-			and $id_reservation = $transaction['id_reservation']
-			and $reservation = sql_fetsel('statut, reference',
-					'spip_reservations',
-					'id_reservation='.intval($id_reservation))) {
-		if (!$montant_reservations_detail_total = _request('montant_reservations_detail_total')) {
-			include_spip('inc/reservation_bank');
-			$montant_reservations_detail_total = montant_reservations_detail_total($id_reservation);
-		}
 
-		$paiement_detail = array ();
-		foreach ( array_keys($montant_reservations_detail_total) as $id_reservation_detail ) {
-			$paiement_detail[$id_reservation_detail] = _request('montant_reservations_detail_' . $id_reservation_detail);
-		}
+	if ($id_transaction = $flux['args']['id_transaction'] and
+			$transaction = sql_fetsel("*", "spip_transactions", "id_transaction=" . intval($id_transaction)) and
+			$id_reservation = $transaction['id_reservation'] and
+			$reservation = sql_fetsel('statut, reference', 'spip_reservations', 'id_reservation=' . intval($id_reservation))) {
 
-		if (!$montant_regle = array_sum($paiement_detail)) {
-			$montant_regle = $transaction['montant_regle'];
-		}
-		elseif (is_array($montant_regle)) {
-			$montant_regle = array_sum($montant_regle);
-		}
+		$paiement_detail = array();
+		if (!_request('gratuit')) {
+			if (!$montant_reservations_detail_total = _request('montant_reservations_detail_total')) {
+				include_spip('inc/reservation_bank');
+				$montant_reservations_detail_total = montant_reservations_detail_total($id_reservation);
+			}
+
+			foreach (array_keys($montant_reservations_detail_total) as $id_reservation_detail) {
+				$paiement_detail[$id_reservation_detail] = _request('montant_reservations_detail_' . $id_reservation_detail);
+			}
+
+			if (!$montant_regle = array_sum($paiement_detail)) {
+				$montant_regle = $transaction['montant_regle'];
+			}
+			elseif (is_array($montant_regle)) {
+				$montant_regle = array_sum($montant_regle);
+			}
+
+
 
 		set_request('montant_regle', $montant_regle);
 
-		$set = array (
-				'montant_regle' => $montant_regle,
-				'paiement_detail' => serialize($paiement_detail)
+		$set = array(
+			'montant_regle' => $montant_regle,
+			'paiement_detail' => serialize($paiement_detail)
 		);
 
 		sql_updateq('spip_transactions', $set, 'id_transaction=' . $id_transaction);
+		}
 
 		include_spip('action/editer_objet');
-		objet_instituer('reservation', $id_reservation, array (
-				'statut' => 'accepte',
-				'date_paiement' => $transaction['date_transaction']
+		objet_instituer('reservation', $id_reservation, array(
+			'statut' => 'accepte',
+			'date_paiement' => $transaction['date_transaction']
 		));
 
 		// un message gentil pour l'utilisateur qui vient de payer, on lui rappelle son numero de commande
-		$flux['data'] .= "<br />"._T('reservation_bank:merci_de_votre_reservation_paiement',
-				array('reference' => $reservation['reference']));
+		$flux['data'] .= "<br />" . _T('reservation_bank:merci_de_votre_reservation_paiement', array(
+			'reference' => $reservation['reference']
+		));
 
 	}
 
@@ -484,13 +507,10 @@ function reservation_bank_bank_traiter_reglement($flux) {
  * @return array
  */
 function reservation_bank_trig_bank_reglement_en_attente($flux) {
-	if ($id_reservation = sql_getfetsel(
-			'id_reservation',
-			'spip_transactions',
-			'id_transaction=' . $flux['args']['id_transaction'])) {
+	if ($id_reservation = sql_getfetsel('id_reservation', 'spip_transactions', 'id_transaction=' . $flux['args']['id_transaction'])) {
 		include_spip('action/editer_objet');
-		objet_instituer('reservation', $id_reservation, array (
-			'statut' => 'attente_paiement',
+		objet_instituer('reservation', $id_reservation, array(
+			'statut' => 'attente_paiement'
 		));
 	}
 
@@ -522,14 +542,13 @@ function reservation_bank_insert_head_css($flux) {
  * @return array Données du pipeline
  */
 function reservation_bank_reservation_evenement_objets_configuration($flux) {
-
 	$objets = array(
 		'bank' => array(
-			'label' => _T('bank:titre_menu_configurer'),
+			'label' => _T('bank:titre_menu_configurer')
 		),
 		'reservation_bank' => array(
-			'label' => _T('reservation_bank:reservation_bank_titre'),
-		),
+			'label' => _T('reservation_bank:reservation_bank_titre')
+		)
 	);
 
 	$flux['data'] = array_merge($flux['data'], $objets);
@@ -546,12 +565,38 @@ function reservation_bank_reservation_evenement_objets_configuration($flux) {
  *        	Données du pipeline
  * @return array Données du pipeline
  */
-
 function reservation_bank_reservation_evenement_objets_navigation($flux) {
 	$flux['data']['transactions'] = array(
-			'label' => _T('bank:titre_menu_transactions'),
-			'icone' => 'credit-card-16.png'
+		'label' => _T('bank:titre_menu_transactions'),
+		'icone' => 'credit-card-16.png'
 	);
 
 	return $flux;
 }
+
+/**
+ * Intervention sur les détails de réservation.
+ *
+ * @pipeline reservation_evenement_donnees_details.
+ *
+ * @param array $flux
+ *        	Données du pipeline
+ * @return array
+ *          Données du pipeline
+ */
+function reservation_bank_reservation_evenement_donnees_details($flux) {
+	$data = $flux['data'];
+	if ($flux['args']['statut'] == 'encours') {
+		if (isset($data['prix_ht']) && isset($data['prix'])) {
+			$prix_ht = $data['prix_ht'];
+			$prix = $data['prix'];
+			if ($prix <= 0 && $prix_ht <= 0) {
+				$flux['data']['statut'] = 'accepte';
+			}
+		}
+	}
+
+
+	return $flux;
+}
+
