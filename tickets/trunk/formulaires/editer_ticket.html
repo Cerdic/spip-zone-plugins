@@ -8,7 +8,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_ticket' value='#ID_TICKET' />
 		<input type='hidden' name='groupesmots' value="[(#ENV{groupesmots}|implode{','})]" />
-		<ul>
+		<[(#DIV|sinon{ul})] class="editer-groupe">
 			[(#SAISIE{input, titre,
 				label=<:tickets:champ_titre_ticket:>,
 				obligatoire=oui})]
@@ -57,7 +57,7 @@
 				label=<:tickets:champ_statut:>,
 				cacher_option_intro=oui,
 				datas=[(#ENV{id_ticket}|tickets_liste_statut)]})]]
-		</ul>
+		</[(#DIV|sinon{ul})]>
 		<!--extra-->
 		<p class='boutons'>
 			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />

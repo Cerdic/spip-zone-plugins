@@ -1,6 +1,6 @@
 [(#ENV{editable}|oui)
 <script type="text/javascript">
-  $( document ).ready(function() {
+  jQuery(function($) {
     $("#validation_bouton_assigner").hide();
   });
 </script>
@@ -11,15 +11,15 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
-			<li class="editer_assigner editer">
+		<[(#DIV|sinon{ul})] class='editer-groupe'>
+			<[(#DIV|sinon{li})] class="editer_assigner editer">
 				<label for="id_assigne"><:tickets:champ_assigner:></label>
 				<select name="id_assigne" id="id_assigne" class="text" onchange="jQuery('#validation_bouton_assigner').slideDown();">
 					<option value="0" [(#ENV{id_assigne}|=={0}|?{" selected='selected'",""})]><:tickets:no_assignation:></option>
 					[(#ENV{id_assigne}|tickets_select_assignation)]
 				</select>
-			</li>
-		</ul>
+			</[(#DIV|sinon{li})]>
+		</[(#DIV|sinon{ul})]>
 		<p class='boutons' id="validation_bouton_assigner">
 			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
 		</p>

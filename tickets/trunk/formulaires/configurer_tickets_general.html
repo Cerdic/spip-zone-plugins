@@ -6,27 +6,27 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
+		<[(#DIV|sinon{ul})] class="editer-groupe">
 			[(#PLUGIN{medias}|oui)
-			<li class="fieldset">
+			<[(#DIV|sinon{li})] class="fieldset">
 				<fieldset>
 				<h3 class="legend"><:tickets:cfg_lgd_fichiers:></h3>
-				<ul>
+				<[(#DIV|sinon{ul})]>
 						[(#SAISIE{case, joindre_fichiers,
 							label=<:tickets:cfg_lbl_joindre_fichiers:>,
 							label_case=<:tickets:cfg_lbl_case_joindre_fichiers:>})]
 						[(#SAISIE{input, formats_documents_ticket,
 							label=<:tickets:cfg_lbl_formats_documents_ticket:>,
 							explication=<:tickets:cfg_explication_formats_documents_ticket:>})]
-				</ul>
+				</[(#DIV|sinon{ul})]>
 				</fieldset>
-			</li>
+			</[(#DIV|sinon{li})]>
 			]
 
-			<li class="fieldset">
+			<[(#DIV|sinon{li})] class="fieldset">
 				<fieldset>
 				<h3 class="legend"><:tickets:cfg_lgd_commentaires:></h3>
-				<ul>
+				<[(#DIV|sinon{ul})] class="editer-groupe">
 					[(#SAISIE{radio, forums_publics,
 						label=<:tickets:cfg_lbl_forums_publics:>,
 						defaut=posteriori,
@@ -36,14 +36,14 @@
 							priori,<:forum:bouton_radio_moderation_priori:>,
 							abo,<:forum:bouton_radio_enregistrement_obligatoire:>,
 						})]})]
-				</ul>
+				</[(#DIV|sinon{ul})]>
 				</fieldset>
-			</li>
+			</[(#DIV|sinon{li})]>
 
-			<li class="fieldset">
+			<[(#DIV|sinon{li})] class="fieldset">
 				<fieldset>
 				<h3 class="legend"><:tickets:cfg_lgd_notifications:></h3>
-				<ul>
+				<[(#DIV|sinon{ul})] class="editer-groupe">
 					[(#EVAL{defined("_TICKETS_AUTORISATION_NOTIFIER")}|non)
 						[(#SAISIE{radio,notif_destinataires,
 							label=<:tickets:cfg_lbl_notif_destinataires:>,
@@ -62,33 +62,34 @@
 							label=<:tickets:cfg_notif_liste_auteurs:>,
 							multiple=oui,
 							option_statut=oui})]
-					]				</ul>
-
-					[(#PLUGIN{Zpip}|ou{#PLUGIN{Zcore}}|ou{#PLUGIN{Z}}|non)
-						<li>
-							<label><:tickets:cfg_lbl_notification_publique:></label>
-							<p class="explication"><:tickets:message_zpip_inactif:></p>
-						</li>
 					]
-				</fieldset>
-			</li>
+					[(#PLUGIN{Zpip}|ou{#PLUGIN{Zcore}}|ou{#PLUGIN{Z}}|non)
+					<[(#DIV|sinon{li})] class="editer">
+						<label><:tickets:cfg_lbl_notification_publique:></label>
+						<p class="explication"><:tickets:message_zpip_inactif:></p>
+					</[(#DIV|sinon{li})]>
+					]
+				</[(#DIV|sinon{ul})]>
 
-			<li class="fieldset">
+				</fieldset>
+			</[(#DIV|sinon{li})]>
+
+			<[(#DIV|sinon{li})] class="fieldset">
 				<fieldset>
 				<h3 class="legend"><:tickets:cfg_lgd_objets:></h3>
-				<ul>
-					<li class="editer editer_tickets_associer">
+				<[(#DIV|sinon{ul})] class="editer-groupe">
+					<[(#DIV|sinon{li})] class="editer editer_tickets_associer">
 						<label><:tickets:info_tickets_cles_association:></label>
 						<INCLURE{fond=formulaires/inc-choisir-tables-liees,selected=#ENV*{tables_liees},name=tables_liees} />
-					</li>
-				</ul>
+					</[(#DIV|sinon{li})]>
+				</[(#DIV|sinon{ul})]>
 				</fieldset>
-			</li>
+			</[(#DIV|sinon{li})]>
 			
-			<li class="fieldset">
+			<[(#DIV|sinon{li})] class="fieldset">
 				<fieldset>
 				<h3 class="legend"><:tickets:cfg_lgd_champs_options_autres:></h3>
-				<ul>
+				<[(#DIV|sinon{ul})] class="editer-groupe">
 				[(#PLUGIN{Zpip}|ou{#PLUGIN{Zcore}}|ou{#PLUGIN{Z}}|oui)
 					[(#SAISIE{case, desactiver_public,
 						label=<:tickets:cfg_lbl_desactiver_public:>,
@@ -96,10 +97,10 @@
 						defaut=''})]
 					]
 				[(#PLUGIN{Zpip}|ou{#PLUGIN{Zcore}}|ou{#PLUGIN{Z}}|non)
-					<li>
+					<[(#DIV|sinon{li})]>
 						<label><:tickets:cfg_lbl_desactiver_public:></label>
 						<p class="explication"><:tickets:message_zpip_inactif:></p>
-					</li>
+					</[(#DIV|sinon{li})]>
 				]
 				[(#SAISIE{case, cacher_moteurs,
 					label_case=<:tickets:cfg_explication_cacher_moteurs:>,
@@ -113,26 +114,24 @@
 
 		<script type="text/javascript">
 		//<![CDATA[
-			jQuery(document).ready(function() {
+			jQuery(function($) {
 				// on cache la liste des auteurs
-				//jQuery("li.editer_notif_auteurs").not('.visible').hide();
 				function verifier_affichage_notif_auteurs(){
-					if(jQuery('input[name=notif_destinataires]:checked').val()=='liste'){
-						jQuery("li.editer_notif_auteurs").not('.visible').show();
-						}
-					else{
-						jQuery("li.editer_notif_auteurs").not('.visible').hide();
+					if ($('input[name=notif_destinataires]:checked').val()=='liste'){
+						$(".editer_notif_auteurs").not('.visible').show();
+					} else {
+						$(".editer_notif_auteurs").not('.visible').hide();
 					}
 				};
 				verifier_affichage_notif_auteurs();
-				jQuery("input[name=notif_destinataires]").change(function(){verifier_affichage_notif_auteurs()});
+				$("input[name=notif_destinataires]").change(function(){verifier_affichage_notif_auteurs()});
 			});
 		//]]>
 		</script>
-				</ul>
+				</[(#DIV|sinon{ul})]>
 				</fieldset>
-			</li>
-		</ul>
+			</[(#DIV|sinon{li})]>
+		</[(#DIV|sinon{ul})]>
 		<input type="hidden" name="_meta_casier" value="tickets/general" />
 		<p class="boutons">
 			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
