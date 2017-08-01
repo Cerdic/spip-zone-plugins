@@ -39,7 +39,8 @@ function domlang_definir_langue() {
 	$trouve = false;
 	if ($langues = domlang_domaines_langues()) {
 		foreach ($langues as $lang => $url) {
-			if (false !== strpos($url, $_SERVER['HTTP_HOST'])) {
+			$url = str_replace(['http://', 'https://'], '', $url);
+			if (0 === strpos($url, $_SERVER['HTTP_HOST'])) {
 				$trouve = true;
 				break;
 			}
