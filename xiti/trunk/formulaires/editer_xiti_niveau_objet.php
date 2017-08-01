@@ -38,14 +38,14 @@ function formulaires_editer_xiti_niveau_objet_charger($type, $id) {
 			$valeurs['id_secteur'] = sql_getfetsel('id_secteur', $table_objet_sql, $id_table_objet.'='.intval($id));
 		}
 	}
-
+	// Donner la valeur par défaut du xtsite_xiti
+	$valeurs['xtsite'] = lire_config('xiti/xtsite_xiti');
+	// Si on a une configuration par secteur, on va chercher xtsite_xiti par secteur.
 	if (in_array($type, array('article', 'rubrique')) and lire_config('xiti/secteur_xiti', '') == 'oui') {
 		$id_secteur = sql_getfetsel('id_secteur', $table_objet_sql, $id_table_objet.' = '.intval($id));
 		$config_secteur = lire_config('xiti/xtsite_xiti_'.intval($id_secteur));
-		if ($config_secteur and $config_secteur != lire_config('xiti/xtsite_xiti')) {
+		if ($config_secteur and $config_secteur != $valeurs['xtsite']) {
 			$valeurs['xtsite'] = $config_secteur;
-		} else {
-			$valeurs['xtsite'] = lire_config('xiti/xtsite_xiti');
 		}
 	}
 	$valeurs['id_xiti_niveau'] = $row['id_xiti_niveau'];
