@@ -14,9 +14,9 @@
 	<auteur lien='https://www.erational.org'>erational</auteur>
 	<licence>GNU/GPL</licence>
 
-    <necessite nom="saisies" compatibilite="[2.0.3;]" />
+	<necessite nom="saisies" compatibilite="[2.0.3;]" />
 
-    <pipeline nom="alertes_auteur" inclure="vacances_pipelines.php" />
+	<pipeline nom="alertes_auteur" inclure="vacances_pipelines.php" />
 
 	<menu nom="vacances" titre="vacances:mode_vacances" parent="menu_administration" icone="images/vacances-16.png" action="configurer_vacances"/>
 
