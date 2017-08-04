@@ -48,11 +48,23 @@ function identifiants_editer_contenu_objet($flux) {
 			)
 		);
 
-		// ajouter la saisie au niveau des champs extras
-		$balise = defined('_DIR_PLUGIN_SAISIES') ? saisie_balise_structure_formulaire('ul') : 'div';
-		$cherche = '%(<!--extra-->)%is';
-		$remplace = "<$balise class='editer-groupe identifiant'>$saisie</$balise>\n" . '$1';
-		$flux['data'] = preg_replace($cherche, $remplace, $flux['data']);
+		// On insère la saisie après le titre si l'objet possède ce champ,
+		// sinon après le premier champ (qu'on considère comme le titre),
+		// sinon au niveau des champs extras.
+		$cherche_titre = "/(<(?:li|div)[^>]*class=(?:'|\")editer editer_titre.*?<\/(?:li|div)>)\s*(<(?:li|div)[^>]*class=(?:'|\")editer)/is";
+		$cherche_1er_champ = "/(<(?:ul|div)[^>]*?>\s*<(?:li|div)[^>]*class=(?:'|\")editer.*?<\/(?:li|div)>)\s*(<(?:li|div)[^>]*class=(?:'|\")editer)/is";
+		$cherche_extra = '%(<!--extra-->)%is';
+
+		if (preg_match($cherche_titre, $flux['data'])){
+			$flux['data'] = preg_replace($cherche_titre, '$1'.$saisie.'$2', $flux['data']);
+		} elseif (preg_match($cherche_1er_champ, $flux['data'])){
+			$flux['data'] = preg_replace($cherche_1er_champ, '$1'.$saisie.'$2', $flux['data']);
+		} elseif (preg_match($cherche_extra, $flux['data'])){
+			$balise = (floatval(spip_version()) >= 3.1 ? 'div' : 'ul');
+			$remplace_extra = "<$balise class='editer-groupe identifiant'>$saisie</$balise>\n" . '$1';
+			$flux['data'] = preg_replace($cherche_extra, $remplace_extra, $flux['data']);
+		}
+
 	}
 
 	return $flux;
