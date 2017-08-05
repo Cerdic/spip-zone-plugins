@@ -1,0 +1,22 @@
+<paquet
+	prefix="Ncore"
+	categorie="outil"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="ncore_logo-32.png"
+>
+	<nom>N-Core</nom>
+	<!-- Un coeur fondant aux noisettes -->
+
+	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="recuperer_fond" inclure="noizetier_pipelines.php" />
+
+	<necessite nom="yaml" compatibilite="[1.5.2;[" />
+	<necessite nom="saisies" compatibilite="[2.2.3;[" />
+
+	<utilise nom="Z" compatibilite="[1.7.15;1.9.*]" />
+</paquet>
