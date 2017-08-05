@@ -1,9 +1,9 @@
 <paquet
 	prefix="curator"
 	categorie="edition"
-	version="1.2.0"
+	version="1.2.1"
 	etat="test"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/curator-64.png"
 	documentation="http://ydikoi.net/706"
 >
