@@ -2,6 +2,7 @@
 
 
 function embed_url($url) {
+
 	$max_w = 440;
 	$max_i = 300;
 
@@ -66,6 +67,35 @@ function embed_url($url) {
 			$html, $regs)) {
 				$pre = $regs[0];
 				$code_ae = "<div class='oembed-container oembed-code'>$pre</div>";
+			}
+		}
+		else if (preg_match("/^https?\:\/\/(bl\.ocks|blockbuilder)\.org\/(\w+\/\w+)/i", $url, $regs)) {
+			$urlb = "https://bl.ocks.org/".$regs[2];
+			$page = file_get_contents($urlb);
+			if ($page) {
+				if (preg_match(',<meta property="og:image" content="(.*)",Uims', $page, $i1)) {
+					$thumbnail = $i1[1];
+				}
+				if (preg_match(',<meta property="og:title" content="(.*)",Uims', $page, $i1)) {
+					$title = $i1[1];
+				}
+				if (preg_match(',<meta property="og:description" content="(.*)",Uims', $page, $i1)) {
+					$author = preg_replace('/’s block.*$/i', '', $i1[1]);
+				}
+				
+				if ($thumbnail) {
+					$pre = "<figure>
+					<a href=\"$url\" target=\"_blank\"><img src=\"$thumbnail\"></a>
+					<figcaption>
+						<a href=\"$url\">$title</a> <em class=\"author\"> - $author</em>
+					</figcaption>
+					</figure>
+					";
+				} else {
+					$pre = "<a href=\"$url\" target=\"_blank\">$title</a> <em class=\"author\"> - $author</em>";
+				}
+				
+				$code_ae = "<div class='oembed-container oembed-block'>$pre</div>";
 			}
 		}
 		else if (preg_match("/^https?\:\/\/(www\.)?soundcloud\.com/i", $url)) {
