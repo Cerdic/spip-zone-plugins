@@ -24,15 +24,15 @@
 	<tfoot>
       <tr>
          <td class="def"><:prix:label_total_ht:></td>
-         <td class="prix">[(#PRIX_HT)]</td>
+         <td class="prix">[(#_commande:PRIX_HT)]</td>
       </tr>
       <tr>
          <td class="def"><:prix:label_taxes:></td>
-         <td class="prix">[(#PRIX*|moins{#PRIX_HT*}|prix_formater)]</td>
+         <td class="prix">[(#_commande:PRIX*|moins{#_commande:PRIX_HT*}|prix_formater)]</td>
       </tr>
       <tr class="total">
          <td class="def"><:prix:label_total_ttc:></td>
-         <td class="prix">[(#PRIX)]</td>
+         <td class="prix">[(#_commande:PRIX)]</td>
       </tr>
 	</tfoot>
 </table>
