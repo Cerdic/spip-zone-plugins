@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 /**
  * Ajout de contenu dans le bloc «actions» des documents
  *
- * - Formulaire pour définir les rôles des documents de type image
+ * - Formulaire pour définir les rôles des documents
  *
  * @pipeline document_desc_actions
  *
@@ -35,7 +35,6 @@ function roles_documents_document_desc_actions($flux) {
 		$exec !== false // page d'un objet éditorial
 		and $exec['edition'] === false // pas en mode édition
 		and $id_document = intval($flux['args']['id_document'])
-		// AND ($media=sql_getfetsel('media','spip_documents',"id_document=".$id_document)=='image') // que pour les images
 		and autoriser('modifier', 'document', $id_document)
 		and $objet
 		and $id_objet
@@ -44,13 +43,12 @@ function roles_documents_document_desc_actions($flux) {
 		$ajaxreload = !empty($flux['args']['ajaxreload']) ? $flux['args']['ajaxreload'] : '#documents';
 		// mini-formulaire
 		$form = recuperer_fond(
-			'prive/squelettes/inclure/editer_roles_objet_lie',
+			'prive/squelettes/inclure/editer_roles_document',
 			array(
-				'objet_source'    => 'document',
-				'id_objet_source' => $id_document,
-				'objet'           => $objet,
-				'id_objet'        => $id_objet,
-				'options' => array(
+				'id_document' => $id_document,
+				'objet'       => $objet,
+				'id_objet'    => $id_objet,
+				'options'     => array(
 					'ajaxReload' => $ajaxreload,
 				),
 			)
@@ -161,6 +159,17 @@ function roles_documents_post_edition($flux) {
 	return $flux;
 }
 
+
+/**
+ * Chercher le logo d'un ojet
+ *
+ * S'il n'y a pas de logo, on prend la 1ère image avec le rôle "logo"
+ *
+ * @pipeline quete_logo_objet
+ *
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
 function roles_documents_quete_logo_objet($flux) {
 	// Si personne n'a trouvé de logo avant
 	if (empty($flux['data'])) {
