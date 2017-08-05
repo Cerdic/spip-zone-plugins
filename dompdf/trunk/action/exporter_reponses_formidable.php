@@ -1,13 +1,14 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Action qui va exporter TOUTES les réponses d'un formulaire SPIP
  */
-function action_exporter_reponses_formidable_dist($arg=null) {
-	if (is_null($arg)){
+function action_exporter_reponses_formidable_dist($arg = null) {
+	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	}

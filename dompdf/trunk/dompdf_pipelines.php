@@ -1,7 +1,8 @@
 <?php
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Ajouter le cadre DOMPDF dans formidable

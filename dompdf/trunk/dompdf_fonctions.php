@@ -20,7 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @access public
  * @return mixed
  */
-function dompdf_trouver_html($squelette, $contexte=array()) {
+function dompdf_trouver_html($squelette, $contexte = array()) {
 	// Si on a passé un squelette
 	if (trouver_fond($squelette)) {
 		// On récupère le html du squelette.
@@ -45,12 +45,12 @@ function dompdf_cadre($url_action, $titre = null, $titre_export = null) {
 	include_spip('inc/presentation');
 
 	return
-		debut_cadre_relief('',true,'', $titre).
+		debut_cadre_relief('', true, '', $titre).
 		icone_horizontale(
 			$titre_export,
 			$url_action,
 			'pdf-24.png',
-			"export",
+			'export',
 			false).
 		fin_cadre_relief(true);
 }

@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 use Dompdf\Dompdf;
 
@@ -35,6 +37,5 @@ function inc_exporter_pdf_dist($squelette, $contexte = array(), $filename = 'sor
 	$dompdf = spip_dompdf($dompdf);
 	$dompdf->render();
 
-	$dompdf->stream($filename, array("Attachment" => false));
+	$dompdf->stream($filename, array('Attachment' => false));
 }
-
