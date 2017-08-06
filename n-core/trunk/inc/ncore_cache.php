@@ -20,6 +20,11 @@ if (!defined('_NCORE_DIR_CACHE')) {
 
 
 /**
+ * Lit le cache spécifié pour un service donné et renvoie le contenu sous forme de tableau éventuellement
+ * vide.
+ *
+ * @package SPIP\NCORE\CACHE
+ *
  * @param string	$service
  *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
  *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
@@ -29,7 +34,7 @@ if (!defined('_NCORE_DIR_CACHE')) {
  * 		Nom et extension du fichier cache.
  *
  * @return array
- * 		Contenu du fichier sous la forme d'un tableau ou tableau vide sinon.
+ * 		Contenu du fichier sous la forme d'un tableau éventuellement vide.
  */
 function cache_lire($service, $nom_cache) {
 
@@ -49,6 +54,10 @@ function cache_lire($service, $nom_cache) {
 
 
 /**
+ * Ecrit le contenu d'un tableau dans le cache spécifié pour un service donné.
+ *
+ * @package SPIP\NCORE\CACHE
+ *
  * @param string	$service
  *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
  *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
@@ -56,6 +65,8 @@ function cache_lire($service, $nom_cache) {
  * 		spécifiques au service.
  * @param string	$nom_cache
  * 		Nom et extension du fichier cache.
+ * @param array     $contenu_cache
+ * 		Contenu sous forme de tableau à stocker dans un fichier cache après sérialisation.
  *
  * @return void
  */
@@ -76,4 +87,30 @@ function cache_ecrire($service, $nom_cache, $contenu_cache) {
 	// Ecriture du fichier cache
 	include_spip('inc/flock');
 	ecrire_fichier_securise($fichier_cache, serialize($contenu_cache));
+}
+
+
+/**
+ * Supprime le cache cache spécifié pour un service donné.
+ *
+ * @package SPIP\NCORE\CACHE
+ *
+ * @param string	$service
+ *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
+ *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ *      La fonction utilisera les fonctions de lecture des md5 et de stockage des descriptions de noisettes
+ * 		spécifiques au service.
+ * @param string	$nom_cache
+ * 		Nom et extension du fichier cache.
+ *
+ * @return void
+ */
+function cache_supprimer($service, $nom_cache) {
+
+	// Détermination du nom du cache en fonction du service appelant et du type
+	$fichier_cache = _NCORE_DIRCACHE . "${service}/${nom_cache}";
+
+	// Suppression du fichier cache
+	include_spip('inc/flock');
+	supprimer_fichier($fichier_cache);
 }

@@ -57,8 +57,8 @@ function ncore_noisette_charger($service, $dossier = 'noisettes/', $recharger = 
 		// Si on force le rechargement il est inutile de gérer les signatures et les noisettes modifiées ou obsolètes.
 		$signatures = array();
 		if (!$options['recharger']) {
-			$lire_md5 = "${service}_noisette_lire_signature";
-			$signatures = $lire_md5();
+			$lister_md5 = "${service}_noisette_lister_signatures";
+			$signatures = $lister_md5();
 			// On initialise la liste des noisettes à supprimer avec l'ensemble des noisettes en base de données.
 			$noisettes_obsoletes = $signatures ? array_keys($signatures) : array();
 		}
@@ -130,7 +130,7 @@ function ncore_noisette_charger($service, $dossier = 'noisettes/', $recharger = 
 			$noisettes['obsoletes'] = $noisettes_obsoletes;
 			$noisettes['modifiees'] = $noisettes_modifiees;
 		}
-		$stocker = "${service}_noisette_stocker_description";
+		$stocker = "${service}_noisette_stocker";
 		$retour = $stocker($noisettes, $options['recharger']);
 	}
 
@@ -172,11 +172,12 @@ function ncore_noisette_informer($service, $noisette, $information = '', $traite
 
 	// Stocker la description de la noisette si besoin
 	if (!isset($description_noisette[$noisette])) {
-		// Lecture de toute la configuration de la noisette: les données retournées sont brutes.
-		// -- On charge l'API du service appelant
+		// On charge l'API du service appelant
 		include_spip("ncore/${service}");
-		$lire_description = "${service}_noisette_lire_description";
-		$description = $lire_description($noisette);
+
+		// Lecture de toute la configuration de la noisette: les données retournées sont brutes.
+		$decrire = "${service}_noisette_decrire";
+		$description = $decrire($noisette);
 
 		// Sauvegarde de la description de la page pour une consultation ultérieure dans le même hit.
 		if ($description) {
@@ -256,13 +257,13 @@ function ncore_noisette_ajax($service, $noisette) {
 			include_spip("ncore/${service}");
 
 			// On détermine la valeur par défaut de l'ajax des noisettes pour le service appelant.
-			$config_ajax = "${service}_noisette_defaut_ajax";
+			$config_ajax = "${service}_noisette_config_ajax";
 			$defaut_ajax = $config_ajax();
 
 			// On repertorie la configuration ajax de toutes les noisettes disponibles et on compare
 			// avec la valeur par défaut configurée pour le service appelant.
-			$lire_ajax = "${service}_noisette_lire_ajax";
-			if ($ajax_noisettes = $lire_ajax()) {
+			$lister = "${service}_noisette_lister";
+			if ($ajax_noisettes = $lister('ajax')) {
 				foreach ($ajax_noisettes as $_noisette => $_ajax) {
 					$est_ajax[$_noisette] = ($_ajax == 'defaut')
 						? $defaut_ajax
