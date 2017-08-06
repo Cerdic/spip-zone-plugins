@@ -5,13 +5,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-define('_NCORE_CACHE_AJAX_NOISETTES', _DIR_CACHE . 'noisettes_ajax.php');
-define('_NCORE_CACHE_CONTEXTE_NOISETTES', _DIR_CACHE . 'noisettes_contexte.php');
-define('_NCORE_CACHE_INCLUSION_NOISETTES', _DIR_CACHE . 'noisettes_inclusion.php');
-define('_NCORE_NOISETTE_CACHE_MD5', _DIR_CACHE . 'noisettes_md5.php');
-define('_NCORE_NOISETTE_CACHE_DESCRIPTION', _DIR_CACHE . 'noisettes_description.php');
-
-
 // -------------------------------------------------------------------
 // ------------------------- API NOISETTES ---------------------------
 // -------------------------------------------------------------------
@@ -22,6 +15,10 @@ define('_NCORE_NOISETTE_CACHE_DESCRIPTION', _DIR_CACHE . 'noisettes_description.
  * La fonction optimise le chargement en effectuant uniquement les traitements nécessaires
  * en fonction des modifications, ajouts et suppressions de noisettes identifiés en comparant les md5
  * des fichiers YAML.
+ *
+ * @package SPIP\NCORE\NOISETTE
+ * @api
+ * @filtre
  *
  * @param string	$service
  *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
@@ -142,76 +139,131 @@ function ncore_noisette_charger($service, $dossier = 'noisettes/', $recharger = 
 
 
 /**
- * Retourne la configuration de la noisette demandée.
- * La configuration est stockée en base de données, certains champs sont recalculés avant d'être fournis.
+ * Retourne la description complète ou seulement une information précise d'une noisette donnée.
+ * Les données textuelles peuvent subir une traitement typo si demandé.
  *
- * @package SPIP\NOIZETIER\API\NOISETTE
+ * @package SPIP\NCORE\NOISETTE
  * @api
  * @filtre
  *
+ * @param string	$service
+ *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
+ *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ *      La fonction utilisera les fonctions de lecture des md5 et de stockage des descriptions de noisettes
+ * 		spécifiques au service.
  * @param string	$noisette
  * 		Identifiant de la $noisette.
- * @param boolean	$traitement_typo
+ * @param string	$information
+ * 		Information spécifique à retourner ou vide pour retourner toute la description.
+ * @param boolean	$traiter_typo
  *      Indique si les données textuelles doivent être retournées brutes ou si elles doivent être traitées
- *      en utilisant la fonction _T_ou_typo.
- * 		Les champs sérialisés sont toujours désérialisés.
+ *      en utilisant la fonction _T_ou_typo. Par défaut l'indicateur vaut `false`.
+ * 		Les champs sérialisés sont eux toujours désérialisés.
  *
- * @return array
+ * @return array|string
  */
-function ncore_noisette_informer($noisette, $traitement_typo = true) {
+function ncore_noisette_informer($service, $noisette, $information = '', $traiter_typo = false) {
 
+	// On indexe pas le tableau des descriptions par le service appelant car on considère que dans
+	// le même hit on ne peut avoir qu'un seul service appelant.
+	// TODO : vérifier si ok, sinon on indexera
+	static $donnees_typo = array('nom', 'description');
 	static $description_noisette = array();
 
-	if (!isset($description_noisette[$traitement_typo][$noisette])) {
-		// Chargement de toute la configuration de la noisette en base de données.
-		$description = sql_fetsel('*', 'spip_noizetier_noisettes', array('noisette=' . sql_quote($noisette)));
+	// Stocker la description de la noisette si besoin
+	if (!isset($description_noisette[$noisette])) {
+		// Lecture de toute la configuration de la noisette: les données retournées sont brutes.
+		// -- On charge l'API du service appelant
+		include_spip("ncore/${service}");
+		$lire_description = "${service}_noisette_lire_description";
+		$description = $lire_description($noisette);
 
 		// Sauvegarde de la description de la page pour une consultation ultérieure dans le même hit.
 		if ($description) {
-			// Traitements des champs textuels
-			if ($traitement_typo) {
-				$description['nom'] = _T_ou_typo($description['nom']);
-				if (isset($description['description'])) {
-					$description['description'] = _T_ou_typo($description['description']);
-				}
-			}
 			// Traitements des champs tableaux sérialisés
 			$description['contexte'] = unserialize($description['contexte']);
 			$description['necessite'] = unserialize($description['necessite']);
 			$description['parametres'] = unserialize($description['parametres']);
+
 			// Stockage de la description
-			$description_noisette[$traitement_typo][$noisette] = $description;
+			$description_noisette[$noisette] = $description;
 		} else {
-			$description_noisette[$traitement_typo][$noisette] = array();
+			$description_noisette[$noisette] = array();
 		}
 	}
 
-	return $description_noisette[$traitement_typo][$noisette];
+	if ($information) {
+		if (isset($description_noisette[$noisette][$information])) {
+			if (in_array($information, $donnees_typo) and $traiter_typo) {
+				// Traitements de la donnée textuelle
+				$retour = _T_ou_typo($description_noisette[$noisette][$information]);
+			} else {
+				$retour = $description_noisette[$noisette][$information];
+			}
+		} else {
+			$retour = '';
+		}
+	} else {
+		$retour = $description_noisette[$noisette];
+		// Traitements des données textuels
+		if ($traiter_typo) {
+			$retour['nom'] = _T_ou_typo($retour['nom']);
+			if (isset($retour['description'])) {
+				$retour['description'] = _T_ou_typo($retour['description']);
+			}
+		}
+	}
+
+	return $retour;
 }
 
 
-function ncore_noisette_ajax($noisette) {
+/**
+ * Détermine si la noisette spécifiée doit être incluse en AJAX ou pas.
+ *
+ * @package SPIP\NCORE\NOISETTE
+ * @api
+ * @filtre
+ *
+ * @param string	$service
+ *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
+ *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ *      La fonction utilisera les fonctions de lecture des md5 et de stockage des descriptions de noisettes
+ * 		spécifiques au service.
+ * @param string	$noisette
+ * 		Identifiant de la $noisette.
+ *
+ * @return bool
+ * 		`true` si la noisette doit être ajaxée, `false` sinon.
+ */
+function ncore_noisette_ajax($service, $noisette) {
+
+	// On indexe pas le tableau des indicateurs ajax par le service appelant car on considère que dans
+	// le même hit on ne peut avoir qu'un seul service appelant.
+	// TODO : vérifier si ok, sinon on indexera
 	static $est_ajax = array();
 
 	if (!isset($est_ajax[$noisette])) {
-		// On détermine l'existence et le contenu du cache.
-		if (lire_fichier_securise(_CACHE_AJAX_NOISETTES, $contenu)) {
-			$est_ajax = unserialize($contenu);
-		}
+		// On détermine le cache en fonction du service, puis son existence et son contenu.
+		include_spip('inc/ncore_cache');
+		$est_ajax = cache_lire($service, _NCORE_NOMCACHE_NOISETTE_AJAX);
 
 		// On doit recalculer le cache.
 		if (!$est_ajax
 		or (_request('var_mode') == 'recalcul')
 		or (defined('_NO_CACHE') and (_NO_CACHE != 0))) {
-			// On détermine la valeur par défaut de l'ajax des noisettes
-			include_spip('inc/config');
-			$defaut_ajax = lire_config('noizetier/ajax_noisette') == 'on' ? true : false;
+			// On charge l'API du service appelant
+			include_spip("ncore/${service}");
 
-			// On repertorie toutes les noisettes disponibles et on compare
-			// avec la valeur par défaut configurée pour le noiZetier.
-			if ($noisettes = sql_allfetsel('noisette, ajax', 'spip_noizetier_noisettes')) {
-				$noisettes = array_column($noisettes, 'ajax', 'noisette');
-				foreach ($noisettes as $_noisette => $_ajax) {
+			// On détermine la valeur par défaut de l'ajax des noisettes pour le service appelant.
+			$config_ajax = "${service}_noisette_defaut_ajax";
+			$defaut_ajax = $config_ajax();
+
+			// On repertorie la configuration ajax de toutes les noisettes disponibles et on compare
+			// avec la valeur par défaut configurée pour le service appelant.
+			$lire_ajax = "${service}_noisette_lire_ajax";
+			if ($ajax_noisettes = $lire_ajax()) {
+				foreach ($ajax_noisettes as $_noisette => $_ajax) {
 					$est_ajax[$_noisette] = ($_ajax == 'defaut')
 						? $defaut_ajax
 						: ($_ajax == 'non' ? false : true);
@@ -226,9 +278,7 @@ function ncore_noisette_ajax($noisette) {
 			}
 
 			// On met à jour in fine le cache
-			if ($est_ajax) {
-				ecrire_fichier_securise(_CACHE_AJAX_NOISETTES, serialize($est_ajax));
-			}
+			cache_ecrire($service, _NCORE_NOMCACHE_NOISETTE_AJAX, $est_ajax);
 		}
 	}
 
@@ -236,6 +286,11 @@ function ncore_noisette_ajax($noisette) {
 }
 
 
+/**
+ * @param $noisette
+ *
+ * @return mixed
+ */
 function ncore_noisette_dynamique($noisette) {
 	static $est_dynamique = array();
 
@@ -275,6 +330,11 @@ function ncore_noisette_dynamique($noisette) {
 }
 
 
+/**
+ * @param $noisette
+ *
+ * @return mixed
+ */
 function ncore_noisette_contexte($noisette) {
 	static $contexte = array();
 
