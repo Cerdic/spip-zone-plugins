@@ -15,7 +15,7 @@ if($var_color=_request('var_color')) {
 	$_COOKIE['sedna_color'] = $var_color;
 }
 
-$GLOBALS['marqueur'].=isset($_COOKIE['sedna_color'])?(":".$_COOKIE['sedna_color']):"";
+$GLOBALS['marqueur'] = (isset($GLOBALS['marqueur'])?$GLOBALS['marqueur']:'').isset($_COOKIE['sedna_color'])?(":".$_COOKIE['sedna_color']):"";
 
 function sedna_utils(){
 	$GLOBALS['forcer_lang']= true;
