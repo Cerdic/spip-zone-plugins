@@ -142,14 +142,14 @@ function image_smush($im) {
 			/**
 			 * Comparaison des version jpg et png si cela est le cas
 			 */
-			if ($dest_jpg && $file_size_jpg && file_exists($dest) && filesize($dest) > $file_size_jpg) {
+			if (isset($dest_jpg) AND $dest_jpg && $file_size_jpg && file_exists($dest) && filesize($dest) > $file_size_jpg) {
 				spip_unlink($dest);
 				$im = $dest = $dest_jpg;
-			} elseif ($dest_jpg && file_exists($dest_jpg)) {
+			} elseif (isset($dest_jpg) AND $dest_jpg && file_exists($dest_jpg)) {
 				spip_unlink($dest_jpg);
 			}
 
-			if ($dest_png && file_exists($dest_png)) {
+			if (isset($dest_png) AND $dest_png && file_exists($dest_png)) {
 				spip_unlink($dest_png);
 			}
 			if (file_exists($nq)) {
