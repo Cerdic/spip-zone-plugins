@@ -95,7 +95,7 @@ function dictionnaires_replace_callback($captures){
 	$retour = $captures[0];
 	
 	// On cherche la définition du terme trouvé
-	if ($definition = $definitions[$captures[2]] or $definition = $definitions[strtolower($captures[2])]){
+	if (isset($definitions[$captures[2]]) AND ($definition = $definitions[$captures[2]] or $definition = $definitions[strtolower($captures[2])])){
 		$type = $definition['type'];
 		
 		// Si on a demandé à remplacer uniquement le premier mot trouvé
