@@ -363,7 +363,7 @@ function ncore_noisette_contexte($service, $noisette) {
 	if (!isset($contexte[$noisette])) {
 		// On détermine le cache en fonction du service, puis son existence et son contenu.
 		include_spip('inc/ncore_cache');
-		$est_dynamique = cache_lire($service, _NCORE_NOMCACHE_NOISETTE_CONTEXTE);
+		$contexte = cache_lire($service, _NCORE_NOMCACHE_NOISETTE_CONTEXTE);
 
 		// On doit recalculer le cache.
 		if (!$contexte
