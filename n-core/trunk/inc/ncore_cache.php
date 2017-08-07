@@ -8,13 +8,19 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 if (!defined('_NCORE_DIRCACHE')) {
 	define('_NCORE_DIRCACHE', _DIR_CACHE . 'ncore/');
 }
-if (!defined('_NCORE_DIR_CACHE')) {
+if (!defined('_NCORE_NOMCACHE_NOISETTE_SIGNATURE')) {
+	define('_NCORE_NOMCACHE_NOISETTE_SIGNATURE', 'noisettes_signature.php');
+}
+if (!defined('_NCORE_NOMCACHE_NOISETTE_DESCRIPTION')) {
+	define('_NCORE_NOMCACHE_NOISETTE_DESCRIPTION', 'noisettes_description.php');
+}
+if (!defined('_NCORE_NOMCACHE_NOISETTE_AJAX')) {
 	define('_NCORE_NOMCACHE_NOISETTE_AJAX', 'noisettes_ajax.php');
 }
-if (!defined('_NCORE_DIR_CACHE')) {
+if (!defined('_NCORE_NOMCACHE_NOISETTE_INCLUSION')) {
 	define('_NCORE_NOMCACHE_NOISETTE_INCLUSION', 'noisettes_inclusion.php');
 }
-if (!defined('_NCORE_DIR_CACHE')) {
+if (!defined('_NCORE_NOMCACHE_NOISETTE_CONTEXTE')) {
 	define('_NCORE_NOMCACHE_NOISETTE_CONTEXTE', 'noisettes_contexte.php');
 }
 

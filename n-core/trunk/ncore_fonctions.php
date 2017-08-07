@@ -38,7 +38,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function ncore_noisette_charger($service, $dossier = 'noisettes/', $recharger = false) {
 
 	// Retour de la fonction
-	$retour = false;
+	$retour = true;
 
 	// Initialiser le contexte de rechargement
 	// -- TODO : en attente de voir si on rajoute un var_mode=recalcul_noisettes
@@ -120,18 +120,21 @@ function ncore_noisette_charger($service, $dossier = 'noisettes/', $recharger = 
 			}
 		}
 
-		// Mise à jour du stockage des noisettes:
+		// Mise à jour du stockage des noisettes si au moins un des 3 tableaux est non vide et que le chargement forcé
+		// n'est pas demandé:
 		// -- Suppression des noisettes obsolètes ou de toutes les noisettes si on est en mode rechargement forcé.
 		//    Pour permettre une optimisation du traitement en mode rechargement forcé on passe toujours le mode.
 		// -- Update des pages modifiées
 		// -- Insertion des nouvelles pages
-		$noisettes = array('nouvelles' => $noisettes_nouvelles);
-		if (!$options['recharger']) {
-			$noisettes['obsoletes'] = $noisettes_obsoletes;
-			$noisettes['modifiees'] = $noisettes_modifiees;
+		if (!$recharger and ($noisettes_nouvelles or $noisettes_obsoletes or $noisettes_modifiees)) {
+			$noisettes = array('nouvelles' => $noisettes_nouvelles);
+			if (!$options['recharger']) {
+				$noisettes['obsoletes'] = $noisettes_obsoletes;
+				$noisettes['modifiees'] = $noisettes_modifiees;
+			}
+			$stocker = "${service}_noisette_stocker";
+			$retour = $stocker($noisettes, $options['recharger']);
 		}
-		$stocker = "${service}_noisette_stocker";
-		$retour = $stocker($noisettes, $options['recharger']);
 	}
 
 	return $retour;
