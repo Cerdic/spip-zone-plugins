@@ -12,10 +12,10 @@ if (!defined('_NCORE_DIR_CACHE')) {
 	define('_NCORE_NOMCACHE_NOISETTE_AJAX', 'noisettes_ajax.php');
 }
 if (!defined('_NCORE_DIR_CACHE')) {
-	define('_NCORE_NOMCACHE_NOISETTE_CONTEXTE', 'noisettes_contexte.php');
+	define('_NCORE_NOMCACHE_NOISETTE_INCLUSION', 'noisettes_inclusion.php');
 }
 if (!defined('_NCORE_DIR_CACHE')) {
-	define('_NCORE_NOMCACHE_NOISETTE_INCLUSION', 'noisettes_inclusion.php');
+	define('_NCORE_NOMCACHE_NOISETTE_CONTEXTE', 'noisettes_contexte.php');
 }
 
 
