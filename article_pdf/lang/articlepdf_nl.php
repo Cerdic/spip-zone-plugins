@@ -10,6 +10,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
+	'cfg_titre_parametrages' => 'De gemaakte PDF’s van parameters voorzien',
+	'configurer_titre' => 'De plugin article_pdf configureren',
 	'copyright' => 'Copyright © ',
 
 	// D
@@ -20,6 +22,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'enregistrer_pdf' => 'In PDF-formaat opslaan',
 	'extrait_de' => 'Uittreksel van ',
+
+	// L
+	'label_pdf_to_document' => 'Alleen in SPIP3',
+	'label_pdf_to_document_oui' => 'De PDF registreren en koppelen als document',
 
 	// P
 	'post_scriptum' => 'PS: ',
