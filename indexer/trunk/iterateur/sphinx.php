@@ -626,7 +626,7 @@ class IterateurSPHINX implements Iterator {
 		// compter le nombre de filtres ajoutés à la requête.
 		static $nb = 0;
 
-		$facets = array_filter($filters);
+		$filters = array_filter($filters);
 		if (!$filters) {
 			return false;
 		}
