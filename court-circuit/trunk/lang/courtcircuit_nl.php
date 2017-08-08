@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'courtcircuit' => 'Kortsluiting',
 
 	// E
+	'explication_compositions_exclure' => 'Lijst van te negeren samenstellingen bij het behandelen van doorverwijzingen (gescheiden door een komma).',
 	'explication_liens_rubriques' => 'De URL van de doorverwezen rubrieken direkt in de skeletten aanpassen?',
 	'explication_regles' => 'De hieronder staande regels worden in deze volgorde getoetst. Wanneer geen enkele regel een doorverwijzing bepaalt, wordt de rubriek normaal getoond.',
 	'explication_restreindre_langue' => 'Wanneer deze optie actief is worden alleen de artikelen van de taal meegenomen voor het bepalen van de doorverwijzing. Deze optie is alleen zinvol wanneer de rubrieken artikelen in meerdere talen bevatten. Gebruik hem niet als de site is gestructureerd in taalrubrieken of wanneer je de optie multi gebruikt.',
@@ -32,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_article_accueil' => 'Introductie-artikel van de rubriek',
 	'label_composition_rubrique' => 'Rubriek met compositie',
+	'label_compositions_exclure' => 'Te negeren samenstellingen',
 	'label_exceptions' => 'Uitzonderingen',
 	'label_liens' => 'URL van de rubrieken',
 	'label_liens_rubriques' => 'Op #URL_RUBRIQUE reageren?',
