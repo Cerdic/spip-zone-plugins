@@ -71,6 +71,7 @@ function incarner_affichage_final($html) {
 
 	$id_auteur = array_search($cle_actuelle, $cles);
 
+	include_spip('incarner_fonctions');
 	if ((! incarner_cle_valide($cle_actuelle))
 			or (session_get('id_auteur') === $id_auteur)) {
 		return $html;
