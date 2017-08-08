@@ -104,6 +104,12 @@ class IterateurSPHINX implements Iterator {
 	protected $pagination_limit;
 
 	/**
+	 * Liste des filtres spécifiques
+	 * @var string[]
+	 */
+	protected $added_filters = array('ALL_IN');
+
+	/**
 	 * Constructeur
 	 *
 	 * @param  $command
@@ -619,6 +625,12 @@ class IterateurSPHINX implements Iterator {
 	/**
 	 * Définit des filtres
 	 *
+	 * Certains sélecteurs existent dans Sphinx pour faciliter les sélections,
+	 * tel que IN, ALL, ANY.
+	 *
+	 * On ajoute en plus un ALL_IN() qui fonctionne comme IN() mais
+	 * nécessite tous les éléments du tableau transmis (IN n’en cherche qu’un seul)
+	 *
 	 * @param array $facets Tableau des filtres demandées
 	 * @return bool
 	**/
@@ -656,7 +668,6 @@ class IterateurSPHINX implements Iterator {
 			$aucun = ($valeur === '-'); // si aucun demandé
 			$valeur = $this->quote($valeur);
 			$valeurs = array_map(array($this, 'quote'), $valeurs);
-			$valeurs = implode(', ', $valeurs);
 
 			if ($aucun and $filter['select_null']) {
 				$f = $filter['select_null'];
@@ -664,13 +675,57 @@ class IterateurSPHINX implements Iterator {
 				$f = $filter['select_oui'];
 			}
 
+			foreach ($this->added_filters as $function) {
+				if (stripos($f, $function . '(') !== false) {
+					$f = $this->adaptFilter($function, $f, $valeurs, $valeur);
+				}
+			}
+
 			// remplacer d'abord le pluriel !
+			$valeurs = implode(', ', $valeurs);
 			$f = str_replace(array('@valeurs', '@valeur'), array($valeurs, $valeur), $f);
+
 			$this->queryApi->select("($f) AS f$nb");
 			$this->queryApi->where("f$nb = 1");
 			$nb++;
 		}
 	}
+
+	/**
+	 * Adapte le filtre pour l’instruction demandée.
+	 *
+	 * Transforme:
+	 *     ALL_IN(properties.tags, @valeurs)
+	 * En:
+	 *     IN(properties.tags, v1) & IN(properties.tags, v2) & ...
+	 *
+	 * @param string $function Nom de la fonction de sélection (tel que ALL_IN)
+	 * @param string $filter Expression de sélection à transformer
+	 * @param array $valeurs Liste des valeurs transmises
+	 * @param string $valeur La valeur unique transmise
+	 * @return string
+	 */
+	function adaptFilter($function, $filter, $valeurs, $valeur) {
+		$regexp =  '#' . $function . '(\([^()]*(?:(?1)[^()]*)*+\))#i';
+		if (preg_match_all($regexp, $filter, $m, PREG_SET_ORDER)) {
+			foreach ($m as $element) {
+				switch($function) {
+					case 'ALL_IN':
+						$f = array();
+						$cond = str_replace('ALL_IN', 'IN', $element[0]);
+						foreach ($valeurs as $v) {
+							$f[] = str_replace('@valeurs', $v, $cond);
+						}
+						$f = implode(' & ', $f);
+						$filter = str_replace($element[0], $f, $filter);
+						break;
+				}
+			}
+		}
+		return $filter;
+	}
+
+
 	
 	function setFiltersMono($filters){
 		$filters = array_filter($filters);

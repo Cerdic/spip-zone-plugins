@@ -218,6 +218,43 @@ Chaque filtre crée le where associé (filtre = 1).
 {filter #ENV{favs}, @valeur <= LENGTH(properties.share)}
 ```
 
+FILTRES IN, ALL, ANY et ALL_IN
+------------------------------
+
+Sphinx propose différents filtres pour sélectionner des éléments contenus dans des tableaux json. Il propose IN, ALL, ANY. 
+
+### IN
+
+`IN(champ, valeur1[, valeur2])` permet de trouver le texte 'valeur1' dans le tableau 'champ'. Si plusieurs valeurs sont passées, il retourne VRAI si l’une des valeurs est présentes. C'est donc un OR qui est fait.
+
+  Exemple : retourner les résulats qui ont au moins 1 des identifiants de mots contenus dans le tableau `#ENV{tag}` s’il existe
+  ```
+  {filter #ENV{tag}, 'IN(properties.mots.ids, @valeurs)', 'LENGTH(properties.mots.ids) = 0'}
+  ```
+  
+### ALL_IN
+
+`ALL_IN(champ, valeur1[, valeur2])` est spécifique à ce plugin. Il permet de trouver les documents qui ont toutes les valeurs transmises présentes dans le champ. Il retourne VRAI si toutes les valeurs sont présentes. C'est donc un AND qui est fait.
+
+  Exemple : retourner les résulats qui ont tous 1 des identifiants de mots contenus dans le tableau `#ENV{tag}` s’il existe
+  ```
+  {filter #ENV{tag}, 'ALL_IN(properties.mots.ids, @valeurs)', 'LENGTH(properties.mots.ids) = 0'}
+  ```
+
+### ANY
+
+`ANY(cond FOR item IN champ)` Retourne vrai si au moins un des éléments du tableau champ valide la condition cond.
+
+  Exemple à vérifier : `ANY(id>10 AND id<20 FOR id IN properties.mots.ids)`
+  Retourne vrai si un des identifiants de mots est entre 10 et 20.
+
+### ALL
+
+`ALL(cond FOR item IN champ)` Retourne vrai si tous les éléments du tableau champ valident la condition cond.
+
+  Exemple à vérifier : `ALL(id>10 AND id<20 FOR id IN properties.mots.ids)`
+  Retourne vrai si tous les identifiants de mots sont entre 10 et 20.
+
 
 
 
