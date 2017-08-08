@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_lien' => 'Voeg een arbitraire link toe, intern (relatieve URL) of extern (http://...).',
 	'description_menu_mapage' => 'Wanneer een bezoeker is aangemeld een link naar zijn auteur bladzijde toevoegen.',
 	'description_menu_mots' => 'Toon automatisch een menu met artikelen met het trefwoord.',
-	'description_menu_objet' => 'Maak een link met een SPIP object: artikel, rubriek of anders. Standaard wordt de titel van het objet gebruikt.', # MODIF
+	'description_menu_objet' => 'Maak een link met een SPIP object: artikel, rubriek of anders. Standaard wordt de titel van het object gebruikt. Deze wordt pas na publicatie zichtbaar.',
 	'description_menu_page_speciale' => 'Voeg een link toe naar een bladzijde die toegankelijk is via <code>spip.php?page=nom&param1=xx&param2=yyy...</code>.',
 	'description_menu_page_speciale_zajax' => 'Voeg een link toe naar een blok van een bladzijde van het type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> (plugin <a href="http://contrib.spip.net/MediaBox">médiabox</a>).',
 	'description_menu_rubriques_articles' => 'Toon een lijst van rubrieken en desgewenst subrubrieken met artikelen op verschillende niveaus. Standaard vanaf de root, gesorteerd op titel. De artikelen worden systematisch na de rubrieken vermeld.',
