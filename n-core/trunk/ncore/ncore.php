@@ -5,13 +5,27 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 if (!defined('_NCORE_CONFIG_AJAX_DEFAUT')) {
+	/**
+	 * Valeur par défaut de la configuration AJAX des noisettes.
+	 * Pour N-Core, le défaut est `true`.
+	 *
+	 */
 	define('_NCORE_CONFIG_AJAX_DEFAUT', true);
 }
 if (!defined('_NCORE_DYNAMIQUE_DEFAUT')) {
+	/**
+	 * Valeur par défaut de l'indicateur d'inclusion dynamique des noisettes.
+	 * Pour N-Core, le défaut est `false`
+	 */
 	define('_NCORE_DYNAMIQUE_DEFAUT', false);
 }
 
 
+/**
+ * @param $service
+ *
+ * @return array
+ */
 function ncore_noisette_lister_signatures($service) {
 
 	// On recherche au préalable si il existe une fonction propre au service et si oui on l'appelle.
@@ -29,6 +43,13 @@ function ncore_noisette_lister_signatures($service) {
 	return $signatures;
 }
 
+/**
+ * @param $service
+ * @param $noisettes
+ * @param $recharger
+ *
+ * @return bool
+ */
 function ncore_noisette_stocker($service, $noisettes, $recharger) {
 
 	$retour = true;
@@ -88,6 +109,12 @@ function ncore_noisette_stocker($service, $noisettes, $recharger) {
 	return $retour;
 }
 
+/**
+ * @param $service
+ * @param $noisette
+ *
+ * @return array
+ */
 function ncore_noisette_decrire($service, $noisette) {
 
 	$description = array();
@@ -111,6 +138,11 @@ function ncore_noisette_decrire($service, $noisette) {
 	return $description;
 }
 
+/**
+ * @param $service
+ *
+ * @return bool
+ */
 function ncore_noisette_config_ajax($service) {
 
 	// On recherche au préalable si il existe une fonction propre au service et si oui on l'appelle.
@@ -126,6 +158,12 @@ function ncore_noisette_config_ajax($service) {
 	return $defaut_ajax;
 }
 
+/**
+ * @param $service
+ * @param $information
+ *
+ * @return array
+ */
 function ncore_noisette_lister($service, $information) {
 
 	// Initialisation du tableau de sortie

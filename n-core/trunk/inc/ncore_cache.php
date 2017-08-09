@@ -34,8 +34,6 @@ if (!defined('_NCORE_NOMCACHE_NOISETTE_CONTEXTE')) {
  * @param string	$service
  *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
  *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- *      La fonction utilisera les fonctions de lecture des md5 et de stockage des descriptions de noisettes
- * 		spécifiques au service.
  * @param string	$nom_cache
  * 		Nom et extension du fichier cache.
  *
@@ -67,8 +65,6 @@ function cache_lire($service, $nom_cache) {
  * @param string	$service
  *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
  *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- *      La fonction utilisera les fonctions de lecture des md5 et de stockage des descriptions de noisettes
- * 		spécifiques au service.
  * @param string	$nom_cache
  * 		Nom et extension du fichier cache.
  * @param array     $contenu_cache
@@ -104,8 +100,6 @@ function cache_ecrire($service, $nom_cache, $contenu_cache) {
  * @param string	$service
  *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
  *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- *      La fonction utilisera les fonctions de lecture des md5 et de stockage des descriptions de noisettes
- * 		spécifiques au service.
  * @param string	$nom_cache
  * 		Nom et extension du fichier cache.
  *
