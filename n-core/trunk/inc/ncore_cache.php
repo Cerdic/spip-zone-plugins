@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Ce fichier contient les fonctions de gestion des caches utilisés par N-Core.
+ *
+ * @package SPIP\NCORE\CACHE
+ */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
