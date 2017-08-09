@@ -53,9 +53,9 @@ class MCache {
 				return function_exists('memcache_set');
 			case 'eaccelerator':
 				return function_exists('eaccelerator_put');
-			case 'filecache':
 			case 'redis':
 				return extension_loaded('redis');
+			case 'filecache':
 			case 'nocache':
 				return true;
 		}
