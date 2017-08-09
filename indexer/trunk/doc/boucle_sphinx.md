@@ -20,7 +20,7 @@ INDEX
 * @defaut SPHINX_DEFAULT_INDEX.
 * @unique
 
-** Exemples **
+**Exemples**
 
 ```
 {index *}
@@ -40,7 +40,7 @@ SELECT
 Note: Certains critères modifient également la partie SELECT de la requête.
 C'est le cas de : `{snippet ...}`, `{recherche ...}`
 
-** Exemples **
+**Exemples**
 
 ```
 {select *}
@@ -64,7 +64,7 @@ Si plusieurs phrases sont passées, elles seront concaténées par un espace.
 Note: le critère `{recherche ...}` modifie également la partie SELECT de la requête
 en ajoutant le calcul du score de recherche dans le champ `score`.
 
-** Exemples **
+**Exemples**
 
 ```
 {recherche #ENV*{recherche}}
@@ -81,7 +81,7 @@ PAR
 
 Critère de SPIP surchargé.
 
-** Exemples **
+**Exemples**
 
 ```
 {!par date}
@@ -100,7 +100,7 @@ INVERSE
 
 Critère de SPIP surchargé
 
-** Exemples **
+**Exemples**
 
 ```
 {par date}{inverse}
@@ -127,7 +127,7 @@ En absence de critère, dès que des phrases sont disponibles
 avec les valeurs par défaut et les mots extraits de ces phrases.
 
 
-** Exemples **
+**Exemples**
 
 ```
 {snippet content}                               // calculera automatiquement les mots
@@ -147,7 +147,7 @@ FACET
 
 Ajoute une sous requête de facette selon la syntaxe de sphinx.
 
-** Exemples **
+**Exemples**
 
 ```
 {facet auteurs, properties.authors ORDER BY COUNT(*) DESC}
@@ -197,21 +197,32 @@ Formule reprise de [Doing time segments, geodistance searches, and overrides in 
 FILTRER
 -------
 
-En attendant mieux…
+- @syntaxe `{filter #TRUC, expression select si contenu, expression select si '-'}`
 
-Cette histoire de filtres n'est vraiment pas simple. En attendant mieux, on propose de définir la présence d'un select (et d'un where associé) si la valeur transmise possède du contenu, sinon le filtre n'est pas appliqué.
+Dans Sphinx on ne peut pas appliquer de critères calculés dans le WHERE directement.
+Il faut créer un calcul dans la partie SELECT, avec un AS, puis utiliser le résultat
+de ce calcul dans la partie WHERE.
 
-Le 3è paramètre utilise une autre sélection, si la valeur vaut '-'. Les clés `@valeur` et `@valeurs` sont remplacées par la donnée attendue quotée, ou les données attendues quotées et séparées par des virgules.
+Pour simplifier, le critère `{filter ...}` s’occupe de gérer cela, avec quelques limitations. Notamment on suppose ici que la sélection retourne un booléen (1 ou 0). Chaque filtre crée le where associé (filtre = 1).
 
-Si `#ENV{tags}` vaut `array('toto','tata')`, `@valeurs` aura `"'toto', 'tata'"`
+- Le premier paramètre est la donnée, souvent issue de l’environnement du squelette,
+qui servira à restreindre notre sélection. On ne peut passer qu’une donnée extérieure.
+ Le filtre ne s’appliquera que si la donnée existe et a du contenu. Exemple `#ENV{auteur}`
+- Le dexième paramètre est une expression de SELECT, sans le AS. Les mots `@valeur` ou `@valeurs` seront remplacés par une valeur ou une liste de valeurs, provenant du premier paramètre. Exemple : `IN(properties.authors, @valeurs)`
+- Le troisième paramètre optionnel est une expression SELECT qui s’applique si on demande à trouver des documents SANS quelque chose, en passant `-` à la variable.
+ Exemple : `LENGTH(properties.authors) = 0`, sera utilisé si `#ENV{auteur}` vaut `-`
 
-Chaque filtre crée le where associé (filtre = 1).
+
+**Remplacements automatiques** 
+
+Les clés `@valeur` et `@valeurs` sont remplacées par la donnée attendue quotée, ou les données attendues quotées et séparées par des virgules.
+
+Si `#ENV{tags}` vaut `array('toto','tata')`, alors `@valeurs` aura `"'toto', 'tata'"`
 
 
-** Exemples **
+**Exemples**
 
 ```
-{filter #TRUC, select si contenu, select si '-'}
 {filter #ENV{auteur}, 'IN(properties.authors, @valeurs)', 'LENGTH(properties.authors) = 0'}
 {filter #ENV{tag}, 'IN(properties.tag, @valeurs)', 'LENGTH(properties.tags) = 0'}
 {filter #ENV{annee}, 'YEAR(date) = @valeur' }
@@ -221,40 +232,71 @@ Chaque filtre crée le where associé (filtre = 1).
 FILTRES IN, ALL, ANY et ALL_IN
 ------------------------------
 
-Sphinx propose différents filtres pour sélectionner des éléments contenus dans des tableaux json. Il propose IN, ALL, ANY. 
+Sphinx propose différentes fonctions pour sélectionner des éléments contenus dans des tableaux json. Il propose IN, ALL, ANY. Ces fonctions peuvent être utilisées dans les sélections pour le critère `filter`.
 
 ### IN
 
-`IN(champ, valeur1[, valeur2])` permet de trouver le texte 'valeur1' dans le tableau 'champ'. Si plusieurs valeurs sont passées, il retourne VRAI si l’une des valeurs est présentes. C'est donc un OR qui est fait.
+- @syntaxe `IN(champ, valeur1[, valeur2])` 
 
-  Exemple : retourner les résulats qui ont au moins 1 des identifiants de mots contenus dans le tableau `#ENV{tag}` s’il existe
-  ```
-  {filter #ENV{tag}, 'IN(properties.mots.ids, @valeurs)', 'LENGTH(properties.mots.ids) = 0'}
-  ```
+Permet de trouver les documents ayant le texte 'valeur1' dans le tableau 'champ'. 
+Si plusieurs valeurs sont passées, il retourne VRAI si l’une des valeurs est présentes. C'est donc un OR qui est fait.
+
+**Exemple** 
+
+Retourner les résulats qui ont au moins 1 des identifiants de mots contenus dans le tableau `#ENV{tag}` s’il existe
+
+```
+{filter #ENV{tag}, 'IN(properties.mots.ids, @valeurs)', 'LENGTH(properties.mots.ids) = 0'}
+```
   
-### ALL_IN
+### ALL_IN (spécifique)
 
-`ALL_IN(champ, valeur1[, valeur2])` est spécifique à ce plugin. Il permet de trouver les documents qui ont toutes les valeurs transmises présentes dans le champ. Il retourne VRAI si toutes les valeurs sont présentes. C'est donc un AND qui est fait.
+Cette fonction est ajoutée par ce plugin (ne fait pas partie de l’API Sphinx).
 
-  Exemple : retourner les résulats qui ont tous 1 des identifiants de mots contenus dans le tableau `#ENV{tag}` s’il existe
-  ```
-  {filter #ENV{tag}, 'ALL_IN(properties.mots.ids, @valeurs)', 'LENGTH(properties.mots.ids) = 0'}
-  ```
+- @syntaxe `ALL_IN(champ, valeur1[, valeur2])`
+
+Permet de trouver les documents ayant le texte 'valeur1' dans le tableau 'champ'. 
+Si plusieurs valeurs sont passées, il retourne VRAI si toutes les valeurs sont présentes. C'est donc un AND qui est fait.
+
+En interne on remplace `ALL_IN(champ, v1, v2, v3)` par `IN(champ, v1) & IN(champ, v2) & IN(champ, v3)`. De même avec `ALL_IN(champ, @valeurs)` sur chaque valeur.
+
+**Exemple**
+
+Retourner les résulats qui ont tous les identifiants de mots contenus dans le tableau `#ENV{tag}` s’il existe
+
+```
+{filter #ENV{tag}, 'ALL_IN(properties.mots.ids, @valeurs)', 'LENGTH(properties.mots.ids) = 0'}
+```
+
 
 ### ANY
 
-`ANY(cond FOR item IN champ)` Retourne vrai si au moins un des éléments du tableau champ valide la condition cond.
+- @syntaxe `ANY(cond FOR item IN champ)` 
 
-  Exemple à vérifier : `ANY(id>10 AND id<20 FOR id IN properties.mots.ids)`
-  Retourne vrai si un des identifiants de mots est entre 10 et 20.
+Retourne vrai si au moins un des éléments du tableau champ valide la condition cond.
+
+**Exemple à vérifier**
+  
+Retourne vrai si un des identifiants de mots est entre 10 et 20.
+
+```
+ANY(id>10 AND id<20 FOR id IN properties.mots.ids)
+```
+
 
 ### ALL
 
-`ALL(cond FOR item IN champ)` Retourne vrai si tous les éléments du tableau champ valident la condition cond.
+- @syntaxe `ALL(cond FOR item IN champ)` 
 
-  Exemple à vérifier : `ALL(id>10 AND id<20 FOR id IN properties.mots.ids)`
-  Retourne vrai si tous les identifiants de mots sont entre 10 et 20.
+Retourne vrai si tous les éléments du tableau champ valident la condition cond.
 
+**Exemple à vérifier** 
+
+Retourne vrai si tous les identifiants de mots sont entre 10 et 20.
+
+```
+ALL(id>10 AND id<20 FOR id IN properties.mots.ids)
+```
 
 
 
