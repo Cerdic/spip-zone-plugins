@@ -23,8 +23,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string	$service
  *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
  *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- *      La fonction utilisera les fonctions de lecture des md5 et de stockage des descriptions de noisettes
- * 		spécifiques au service.
+ *      La fonction utilisera les fonctions de lecture des md5 et de stockage des descriptions de noisettes,
+ * 		spécifiques au service, ou à défaut, celles fournies par N-Core.
  * @param string	$dossier
  * 		Chemin relatif (avec un `/` final) dans lequel chercher les fichiers YAML de description des noisettes.
  * 		Par défaut, les noisettes seront recherchées dans le dossier `noisettes/`.
@@ -47,8 +47,9 @@ function ncore_noisette_charger($service, $dossier = 'noisettes/', $recharger = 
 	// On recherche les noisettes directement par leur fichier YAML de configuration car il est obligatoire
 	// -- la recherche s'effectue dans
 	if ($fichiers = find_all_in_path($dossier, '.+[.]yaml$')) {
-		// On charge l'API du service appelant
-		include_spip("ncore/${service}");
+		// On charge l'API de NCore.
+		// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
+		include_spip("ncore/ncore");
 
 		// Initialisation des tableaux de noisettes
 		$noisettes_nouvelles = $noisettes_modifiees = $noisettes_obsoletes = array();
@@ -57,8 +58,7 @@ function ncore_noisette_charger($service, $dossier = 'noisettes/', $recharger = 
 		// Si on force le rechargement il est inutile de gérer les signatures et les noisettes modifiées ou obsolètes.
 		$signatures = array();
 		if (!$options['recharger']) {
-			$lister_md5 = "${service}_noisette_lister_signatures";
-			$signatures = $lister_md5();
+			$signatures = ncore_noisette_lister_signatures($service);
 			// On initialise la liste des noisettes à supprimer avec l'ensemble des noisettes en base de données.
 			$noisettes_obsoletes = $signatures ? array_keys($signatures) : array();
 		}
@@ -126,14 +126,14 @@ function ncore_noisette_charger($service, $dossier = 'noisettes/', $recharger = 
 		//    Pour permettre une optimisation du traitement en mode rechargement forcé on passe toujours le mode.
 		// -- Update des pages modifiées
 		// -- Insertion des nouvelles pages
-		if (!$recharger and ($noisettes_nouvelles or $noisettes_obsoletes or $noisettes_modifiees)) {
+		if ($recharger
+		or (!$recharger and ($noisettes_nouvelles or $noisettes_obsoletes or $noisettes_modifiees))) {
 			$noisettes = array('nouvelles' => $noisettes_nouvelles);
 			if (!$options['recharger']) {
 				$noisettes['obsoletes'] = $noisettes_obsoletes;
 				$noisettes['modifiees'] = $noisettes_modifiees;
 			}
-			$stocker = "${service}_noisette_stocker";
-			$retour = $stocker($noisettes, $options['recharger']);
+			$retour = ncore_noisette_stocker($service, $noisettes, $options['recharger']);
 		}
 	}
 
@@ -152,8 +152,8 @@ function ncore_noisette_charger($service, $dossier = 'noisettes/', $recharger = 
  * @param string	$service
  *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
  *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- *      La fonction utilisera les fonctions de lecture des md5 et de stockage des descriptions de noisettes
- * 		spécifiques au service.
+ *      La fonction utilisera la fonction de lecture de la description brute d'une noisette, spécifique
+ *      au service, ou à défaut, celle fournie par N-Core.
  * @param string	$noisette
  * 		Identifiant de la $noisette.
  * @param string	$information
@@ -167,20 +167,19 @@ function ncore_noisette_charger($service, $dossier = 'noisettes/', $recharger = 
  */
 function ncore_noisette_informer($service, $noisette, $information = '', $traiter_typo = false) {
 
-	// On indexe pas le tableau des descriptions par le service appelant car on considère que dans
-	// le même hit on ne peut avoir qu'un seul service appelant.
-	// TODO : vérifier si ok, sinon on indexera
+	// On indexe le tableau des indicateurs ajax par le service appelant en cas d'appel sur le même hit
+	// par deux services différents.
 	static $donnees_typo = array('nom', 'description');
 	static $description_noisette = array();
 
 	// Stocker la description de la noisette si besoin
-	if (!isset($description_noisette[$noisette])) {
-		// On charge l'API du service appelant
-		include_spip("ncore/${service}");
+	if (!isset($description_noisette[$service][$noisette])) {
+		// On charge l'API de NCore.
+		// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
+		include_spip("ncore/ncore");
 
 		// Lecture de toute la configuration de la noisette: les données retournées sont brutes.
-		$decrire = "${service}_noisette_decrire";
-		$description = $decrire($noisette);
+		$description = ncore_noisette_decrire($service, $noisette);
 
 		// Sauvegarde de la description de la page pour une consultation ultérieure dans le même hit.
 		if ($description) {
@@ -190,25 +189,25 @@ function ncore_noisette_informer($service, $noisette, $information = '', $traite
 			$description['parametres'] = unserialize($description['parametres']);
 
 			// Stockage de la description
-			$description_noisette[$noisette] = $description;
+			$description_noisette[$service][$noisette] = $description;
 		} else {
-			$description_noisette[$noisette] = array();
+			$description_noisette[$service][$noisette] = array();
 		}
 	}
 
 	if ($information) {
-		if (isset($description_noisette[$noisette][$information])) {
+		if (isset($description_noisette[$service][$noisette][$information])) {
 			if (in_array($information, $donnees_typo) and $traiter_typo) {
 				// Traitements de la donnée textuelle
-				$retour = _T_ou_typo($description_noisette[$noisette][$information]);
+				$retour = _T_ou_typo($description_noisette[$service][$noisette][$information]);
 			} else {
-				$retour = $description_noisette[$noisette][$information];
+				$retour = $description_noisette[$service][$noisette][$information];
 			}
 		} else {
 			$retour = '';
 		}
 	} else {
-		$retour = $description_noisette[$noisette];
+		$retour = $description_noisette[$service][$noisette];
 		// Traitements des données textuels
 		if ($traiter_typo) {
 			$retour['nom'] = _T_ou_typo($retour['nom']);
@@ -232,8 +231,8 @@ function ncore_noisette_informer($service, $noisette, $information = '', $traite
  * @param string	$service
  *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
  *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- *      La fonction utilisera les fonctions de lecture des md5 et de stockage des descriptions de noisettes
- * 		spécifiques au service.
+ *      La fonction utilisera les fonctions de lecture de la configuration globale de l'ajax et de
+ *      lecture du paramètre ajax de la noisette, spécifiques au service, ou à défaut, celles fournies par N-Core.
  * @param string	$noisette
  * 		Identifiant de la $noisette.
  *
@@ -242,33 +241,31 @@ function ncore_noisette_informer($service, $noisette, $information = '', $traite
  */
 function ncore_noisette_est_ajax($service, $noisette) {
 
-	// On indexe pas le tableau des indicateurs ajax par le service appelant car on considère que dans
-	// le même hit on ne peut avoir qu'un seul service appelant.
-	// TODO : vérifier si ok, sinon on indexera
+	// On indexe le tableau des indicateurs ajax par le service appelant en cas d'appel sur le même hit
+	// par deux services différents.
 	static $est_ajax = array();
 
-	if (!isset($est_ajax[$noisette])) {
+	if (!isset($est_ajax[$service][$noisette])) {
 		// On détermine le cache en fonction du service, puis son existence et son contenu.
 		include_spip('inc/ncore_cache');
-		$est_ajax = cache_lire($service, _NCORE_NOMCACHE_NOISETTE_AJAX);
+		$est_ajax[$service] = cache_lire($service, _NCORE_NOMCACHE_NOISETTE_AJAX);
 
 		// On doit recalculer le cache.
-		if (!$est_ajax
+		if (!$est_ajax[$service]
 		or (_request('var_mode') == 'recalcul')
 		or (defined('_NO_CACHE') and (_NO_CACHE != 0))) {
-			// On charge l'API du service appelant
-			include_spip("ncore/${service}");
+			// On charge l'API de NCore.
+			// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
+			include_spip("ncore/ncore");
 
 			// On détermine la valeur par défaut de l'ajax des noisettes pour le service appelant.
-			$config_ajax = "${service}_noisette_config_ajax";
-			$defaut_ajax = $config_ajax();
+			$defaut_ajax = ncore_noisette_config_ajax($service);
 
 			// On repertorie la configuration ajax de toutes les noisettes disponibles et on compare
 			// avec la valeur par défaut configurée pour le service appelant.
-			$lister = "${service}_noisette_lister";
-			if ($ajax_noisettes = $lister('ajax')) {
+			if ($ajax_noisettes = ncore_noisette_lister($service,'ajax')) {
 				foreach ($ajax_noisettes as $_noisette => $_ajax) {
-					$est_ajax[$_noisette] = ($_ajax == 'defaut')
+					$est_ajax[$service][$_noisette] = ($_ajax == 'defaut')
 						? $defaut_ajax
 						: ($_ajax == 'non' ? false : true);
 				}
@@ -277,16 +274,16 @@ function ncore_noisette_est_ajax($service, $noisette) {
 			// On vérifie que la noisette demandée est bien dans la liste.
 			// Si non, on la rajoute en utilisant la valeur ajax par défaut afin de toujours renvoyer
 			// quelque chose.
-			if (!isset($est_ajax[$noisette])) {
-				$est_ajax[$noisette] = $defaut_ajax;
+			if (!isset($est_ajax[$service][$noisette])) {
+				$est_ajax[$service][$noisette] = $defaut_ajax;
 			}
 
 			// In fine, on met à jour le cache
-			cache_ecrire($service, _NCORE_NOMCACHE_NOISETTE_AJAX, $est_ajax);
+			cache_ecrire($service, _NCORE_NOMCACHE_NOISETTE_AJAX, $est_ajax[$service]);
 		}
 	}
 
-	return $est_ajax[$noisette];
+	return $est_ajax[$service][$noisette];
 }
 
 
@@ -300,8 +297,8 @@ function ncore_noisette_est_ajax($service, $noisette) {
  * @param string	$service
  *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
  *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- *      La fonction utilisera les fonctions de lecture des md5 et de stockage des descriptions de noisettes
- * 		spécifiques au service.
+ *      La fonction utilisera les fonctions de lecture du paramètre d'inclusion de la noisette,
+ *      spécifique au service, ou à défaut, celle fournie par N-Core.
  * @param string	$noisette
  * 		Identifiant de la $noisette.
  *
@@ -310,86 +307,98 @@ function ncore_noisette_est_ajax($service, $noisette) {
  */
 function ncore_noisette_est_dynamique($service, $noisette) {
 
-	// On indexe pas le tableau des indicateurs d'inclusion par le service appelant car on considère que dans
-	// le même hit on ne peut avoir qu'un seul service appelant.
-	// TODO : vérifier si ok, sinon on indexera
+	// On indexe le tableau des indicateurs ajax par le service appelant en cas d'appel sur le même hit
+	// par deux services différents.
 	static $est_dynamique = array();
 
-	if (!isset($est_dynamique[$noisette])) {
+	if (!isset($est_dynamique[$service][$noisette])) {
 		// On détermine le cache en fonction du service, puis son existence et son contenu.
 		include_spip('inc/ncore_cache');
-		$est_dynamique = cache_lire($service, _NCORE_NOMCACHE_NOISETTE_INCLUSION);
+		$est_dynamique[$service] = cache_lire($service, _NCORE_NOMCACHE_NOISETTE_INCLUSION);
 
 		// On doit recalculer le cache.
-		if (!$est_dynamique
+		if (!$est_dynamique[$service]
 		or (_request('var_mode') == 'recalcul')
 		or (defined('_NO_CACHE') and (_NO_CACHE != 0))) {
-			// On charge l'API du service appelant
-			include_spip("ncore/${service}");
+			// On charge l'API de N-Core.
+			// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
+			include_spip("ncore/ncore");
 
 			// On repertorie la configuration d'inclusion de toutes les noisettes disponibles et on
 			// détermine si celle-ci est dynamique ou pas.
-			$lister = "${service}_noisette_lister";
-			if ($inclusion_noisettes = $lister('inclusion')) {
+			if ($inclusion_noisettes = ncore_noisette_lister($service,'inclusion')) {
 				foreach ($inclusion_noisettes as $_noisette => $_inclusion) {
-					$est_dynamique[$_noisette] = ($_inclusion == 'dynamique') ? true : false;
+					$est_dynamique[$service][$_noisette] = ($_inclusion == 'dynamique') ? true : false;
 				}
 			}
 
 			// On vérifie que la noisette demandée est bien dans la liste.
 			// Si non, on la rajoute en utilisant en positionnant l'inclusion dynamique à false.
-			if (!isset($est_dynamique[$noisette])) {
-				$est_dynamique[$noisette] = false;
+			if (!isset($est_dynamique[$service][$noisette])) {
+				$est_dynamique[$service][$noisette] = _NCORE_DYNAMIQUE_DEFAUT;
 			}
 
 			// In fine, on met à jour le cache
-			cache_ecrire($service, _NCORE_NOMCACHE_NOISETTE_INCLUSION, $est_dynamique);
+			cache_ecrire($service, _NCORE_NOMCACHE_NOISETTE_INCLUSION, $est_dynamique[$service]);
 		}
 	}
 
-	return $est_dynamique[$noisette];
+	return $est_dynamique[$service][$noisette];
 }
 
 
 /**
- * @param $noisette
+ * Renvoie le contexte de la noisette sous la forme d'un tableau éventuellement vide.
  *
- * @return mixed
+ * @package SPIP\NCORE\NOISETTE
+ * @api
+ * @filtre
+ *
+ * @param string	$service
+ *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
+ *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ *      La fonction utilisera les fonctions de lecture du contexte de la noisette, spécifique au service,
+ *      ou à défaut, celle fournie par N-Core.
+ * @param string	$noisette
+ * 		Identifiant de la $noisette.
+ *
+ * @return array
+ * 		Le tableau éventuellement vide des éléments de contexte de la noisette.
  */
 function ncore_noisette_contexte($service, $noisette) {
 
-	// On indexe pas le tableau des contextes par le service appelant car on considère que dans
-	// le même hit on ne peut avoir qu'un seul service appelant.
-	// TODO : vérifier si ok, sinon on indexera
+	// On indexe le tableau des indicateurs ajax par le service appelant en cas d'appel sur le même hit
+	// par deux services différents.
 	static $contexte = array();
 
-	if (!isset($contexte[$noisette])) {
+	if (!isset($contexte[$service][$noisette])) {
 		// On détermine le cache en fonction du service, puis son existence et son contenu.
 		include_spip('inc/ncore_cache');
-		$contexte = cache_lire($service, _NCORE_NOMCACHE_NOISETTE_CONTEXTE);
+		$contexte[$service] = cache_lire($service, _NCORE_NOMCACHE_NOISETTE_CONTEXTE);
 
 		// On doit recalculer le cache.
-		if (!$contexte
+		if (!$contexte[$service]
 		or (_request('var_mode') == 'recalcul')
 		or (defined('_NO_CACHE') and (_NO_CACHE != 0))) {
-			// On charge l'API du service appelant
-			include_spip("ncore/${service}");
+			// On charge l'API de N-Core.
+			// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
+			include_spip("ncore/ncore");
 
 			// On repertorie la configuration du contexte de toutes les noisettes disponibles et on
-			// le renvoie tel quel.
-			$lister = "${service}_noisette_lister";
-			$contexte = $lister('contexte');
+			// le renvoie le résultat tel quel.
+			$contexte[$service] = ncore_noisette_lister($service, 'contexte');
+			$contexte[$service] = unserialize($contexte[$service]);
 
 			// On vérifie que la noisette demandée est bien dans la liste.
 			// Si non, on la rajoute en utilisant en positionnant le contexte à tableau vide.
-			if (!isset($contexte[$noisette])) {
-				$contexte[$noisette] = array();
+			if (!isset($contexte[$service][$noisette])) {
+				$contexte[$service][$noisette] = array();
 			}
 
 			// In fine, on met à jour le cache
-			cache_ecrire($service, _NCORE_NOMCACHE_NOISETTE_CONTEXTE, $contexte);
+			cache_ecrire($service, _NCORE_NOMCACHE_NOISETTE_CONTEXTE, $contexte[$service]);
 		}
 	}
 
-	return $contexte[$noisette];
+	return $contexte[$service][$noisette];
 }

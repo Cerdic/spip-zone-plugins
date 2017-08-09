@@ -4,12 +4,27 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+if (!defined('_NCORE_CONFIG_AJAX_DEFAUT')) {
+	define('_NCORE_CONFIG_AJAX_DEFAUT', true);
+}
+if (!defined('_NCORE_DYNAMIQUE_DEFAUT')) {
+	define('_NCORE_DYNAMIQUE_DEFAUT', false);
+}
+
+
 function ncore_noisette_lister_signatures($service) {
 
-	// Récupération des signatures md5 des noisettes déjà enregistrées.
-	// -- Les signatures md5 sont sockées dans un fichier cache séparé de celui des descriptions de noisettes.
-	include_spip('inc/ncore_cache');
-	$signatures = cache_lire($service, _NCORE_NOMCACHE_NOISETTE_SIGNATURE);
+	// On recherche au préalable si il existe une fonction propre au service et si oui on l'appelle.
+	include_spip("ncore/${service}");
+	$lister_md5 = "${service}_noisette_lister_signatures";
+	if (function_exists($lister_md5)) {
+		$signatures = $lister_md5();
+	} else {
+		// Le service ne propose pas de fonction propre, on utilise celle de N-Core.
+		// -- Les signatures md5 sont sockées dans un fichier cache séparé de celui des descriptions de noisettes.
+		include_spip('inc/ncore_cache');
+		$signatures = cache_lire($service, _NCORE_NOMCACHE_NOISETTE_SIGNATURE);
+	}
 
 	return $signatures;
 }
@@ -18,50 +33,57 @@ function ncore_noisette_stocker($service, $noisettes, $recharger) {
 
 	$retour = true;
 
-	// Les descriptions de noisettes et les signatures sont stockés dans deux caches distincts.
-	// -- Les descriptions : on conserve la signature pour chaque description, le tableau est réindexé avec l'identifiant
-	//    de la noisette.
-	// -- Les signatures : on isole la liste des signatures et on indexe le tableau avec l'identifiant de la noisette.
-	include_spip('inc/ncore_cache');
-	if ($recharger) {
-		// Si le rechargement est forcé, toutes les noisettes sont nouvelles, on peut donc écraser les caches
-		// existants sans s'en préoccuper.
-		$descriptions = array_column($noisettes['nouvelles'], null, 'noisette');
-		cache_ecrire($service, _NCORE_NOMCACHE_NOISETTE_DESCRIPTION, $descriptions);
-
-		$signatures = array_column($noisettes['nouvelles'], 'signature', 'noisette');
-		cache_ecrire($service, _NCORE_NOMCACHE_NOISETTE_SIGNATURE, $signatures);
+	// On recherche au préalable si il existe une fonction propre au service et si oui on l'appelle.
+	include_spip("ncore/${service}");
+	$stocker = "${service}_noisette_stocker";
+	if (function_exists($stocker)) {
+		$retour = $stocker($noisettes, $recharger);
 	} else {
-		// On lit les cache existants et on applique les modifications.
-		$descriptions = cache_lire($service, _NCORE_NOMCACHE_NOISETTE_DESCRIPTION);
-		$signatures = cache_lire($service, _NCORE_NOMCACHE_NOISETTE_SIGNATURE);
+		// Le service ne propose pas de fonction propre, on utilise celle de N-Core.
+		// Les descriptions de noisettes et les signatures sont stockés dans deux caches distincts.
+		// -- Les descriptions : on conserve la signature pour chaque description, le tableau est réindexé avec l'identifiant
+		//    de la noisette.
+		// -- Les signatures : on isole la liste des signatures et on indexe le tableau avec l'identifiant de la noisette.
+		include_spip('inc/ncore_cache');
+		if ($recharger) {
+			// Si le rechargement est forcé, toutes les noisettes sont nouvelles, on peut donc écraser les caches
+			// existants sans s'en préoccuper.
+			$descriptions = array_column($noisettes['nouvelles'], null, 'noisette');
+			cache_ecrire($service, _NCORE_NOMCACHE_NOISETTE_DESCRIPTION, $descriptions);
 
-		// On supprime les noisettes obsolètes
-		if ($noisettes['obsoletes']) {
-			$descriptions_obsoletes = array_column($noisettes['obsoletes'], null, 'noisette');
-			$descriptions = array_diff($descriptions, $descriptions_obsoletes);
+			$signatures = array_column($noisettes['nouvelles'], 'signature', 'noisette');
+			cache_ecrire($service, _NCORE_NOMCACHE_NOISETTE_SIGNATURE, $signatures);
+		} else {
+			// On lit les cache existants et on applique les modifications.
+			$descriptions = cache_lire($service, _NCORE_NOMCACHE_NOISETTE_DESCRIPTION);
+			$signatures = cache_lire($service,_NCORE_NOMCACHE_NOISETTE_SIGNATURE);
 
-			$signatures_obsoletes = array_column($noisettes['obsoletes'], 'signature', 'noisette');
-			$signatures = array_diff($signatures, $signatures_obsoletes);
+			// On supprime les noisettes obsolètes
+			if (!empty($noisettes['obsoletes'])) {
+				$descriptions_obsoletes = array_column($noisettes['obsoletes'], null, 'noisette');
+				$descriptions = array_diff($descriptions, $descriptions_obsoletes);
+
+				$signatures_obsoletes = array_column($noisettes['obsoletes'], 'signature', 'noisette');
+				$signatures = array_diff($signatures, $signatures_obsoletes);
+			}
+
+			// On remplace les noisettes modifiées et on ajoute les noisettes nouvelles. Cette opération peut-être
+			// réalisée en une action avec la fonction array_merge.
+			if (!empty($noisettes['modifiees']) or !empty($noisettes['nouvelles'])) {
+				$descriptions_modifiees = array_column($noisettes['modifiees'], null, 'noisette');
+				$descriptions_nouvelles = array_column($noisettes['nouvelles'], null, 'noisette');
+				$descriptions = array_merge($descriptions, $descriptions_modifiees, $descriptions_nouvelles);
+
+				$signatures_modifiees = array_column($noisettes['modifiees'], 'signature', 'noisette');
+				$signatures_nouvelles = array_column($noisettes['nouvelles'], 'signature', 'noisette');
+				$signatures = array_merge($signatures, $signatures_modifiees, $signatures_nouvelles);
+			}
+
+			// On recrée les caches.
+			cache_ecrire($service, _NCORE_NOMCACHE_NOISETTE_DESCRIPTION, $descriptions);
+			cache_ecrire($service, _NCORE_NOMCACHE_NOISETTE_SIGNATURE, $signatures);
 		}
-
-		// On remplace les noisettes modifiées et on ajoute les noisettes nouvelles. Cette opération peut-être
-		// réalisée en une action avec la fonction array_merge.
-		if ($noisettes['modifiees'] or $noisettes['nouvelles']) {
-			$descriptions_modifiees = array_column($noisettes['modifiees'], null, 'noisette');
-			$descriptions_nouvelles = array_column($noisettes['nouvelles'], null, 'noisette');
-			$descriptions = array_merge($descriptions, $descriptions_modifiees, $descriptions_nouvelles);
-
-			$signatures_modifiees = array_column($noisettes['modifiees'], 'signature', 'noisette');
-			$signatures_nouvelles = array_column($noisettes['nouvelles'], 'signature', 'noisette');
-			$signatures = array_diff($signatures, $signatures_modifiees, $signatures_nouvelles);
-		}
-
-		// On recrée les caches.
-		cache_ecrire($service, _NCORE_NOMCACHE_NOISETTE_DESCRIPTION, $descriptions);
-		cache_ecrire($service, _NCORE_NOMCACHE_NOISETTE_SIGNATURE, $signatures);
 	}
-
 
 	return $retour;
 }
@@ -70,12 +92,20 @@ function ncore_noisette_decrire($service, $noisette) {
 
 	$description = array();
 
-	// Chargement de toute la configuration de la noisette en base de données.
-	// Les données sont renvoyées brutes sans traitement sur les textes ni les tableaux sérialisés.
-	include_spip('inc/ncore_cache');
-	$descriptions = cache_lire($service, _NCORE_NOMCACHE_NOISETTE_DESCRIPTION);
-	if (isset($descriptions[$noisette])) {
-		$description = $descriptions[$noisette];
+	// On recherche au préalable si il existe une fonction propre au service et si oui on l'appelle.
+	include_spip("ncore/${service}");
+	$decrire = "${service}_noisette_decrire";
+	if (function_exists($decrire)) {
+		$description = $decrire($noisette);
+	} else {
+		// Le service ne propose pas de fonction propre, on utilise celle de N-Core.
+		// Chargement de toute la configuration de la noisette en base de données.
+		// Les données sont renvoyées brutes sans traitement sur les textes ni les tableaux sérialisés.
+		include_spip('inc/ncore_cache');
+		$descriptions = cache_lire($service, _NCORE_NOMCACHE_NOISETTE_DESCRIPTION);
+		if (isset($descriptions[$noisette])) {
+			$description = $descriptions[$noisette];
+		}
 	}
 
 	return $description;
@@ -83,22 +113,38 @@ function ncore_noisette_decrire($service, $noisette) {
 
 function ncore_noisette_config_ajax($service) {
 
-	// On détermine la valeur par défaut de l'ajax des noisettes qui est stocké dans la configuration du plugin.
+	// On recherche au préalable si il existe une fonction propre au service et si oui on l'appelle.
+	include_spip("ncore/${service}");
+	$config_ajax = "${service}_noisette_config_ajax";
+	if (function_exists($config_ajax)) {
+		$defaut_ajax = $config_ajax();
+	} else {
+		// Le service ne propose pas de fonction propre, on utilise celle de N-Core.
+		$defaut_ajax = _NCORE_CONFIG_AJAX_DEFAUT;
+	}
 
-	return false;
+	return $defaut_ajax;
 }
 
 function ncore_noisette_lister($service, $information) {
 
 	// Initialisation du tableau de sortie
-	$info_noisettes = array();
+	$information_noisettes = array();
 
-	if ($information) {
-		include_spip('inc/ncore_cache');
-		if ($descriptions = cache_lire($service, _NCORE_NOMCACHE_NOISETTE_DESCRIPTION)) {
-			$info_noisettes = array_column($descriptions, $information, 'noisette');
+	// On recherche au préalable si il existe une fonction propre au service et si oui on l'appelle.
+	include_spip("ncore/${service}");
+	$lister = "${service}_noisette_lister";
+	if (function_exists($lister)) {
+		$information_noisettes = $lister($information);
+	} else {
+		// Le service ne propose pas de fonction propre, on utilise celle de N-Core.
+		if ($information) {
+			include_spip('inc/ncore_cache');
+			if ($descriptions = cache_lire($service, _NCORE_NOMCACHE_NOISETTE_DESCRIPTION)) {
+				$information_noisettes = array_column($descriptions, $information, 'noisette');
+			}
 		}
 	}
 
-	return $info_noisettes;
+	return $information_noisettes;
 }
