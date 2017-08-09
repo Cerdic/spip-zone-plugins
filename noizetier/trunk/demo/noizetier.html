@@ -5,16 +5,7 @@
 <body dir="#LANG_DIR">
 <div id="container">
 <?php
-	include_spip('base/abstract');
-	$where = array('type='.sql_quote('articles'), 'composition='.sql_quote(''), 'bloc='.sql_quote('content'));
-	$timestamp_debut = microtime(true);
-
-//	echo intval(sql_getfetsel('rang', 'spip_noizetier', $where, '', 'rang DESC', '0,1'));
-	echo intval(sql_getfetsel('max(rang)', 'spip_noizetier', $where));
-
-	$timestamp_fin = microtime(true);
-	$duree = $timestamp_fin - $timestamp_debut;
-	var_dump($duree*1000);
+	include_spip('demo/noizetier');
 ?>
 
 	#SET{valeur, ''}
