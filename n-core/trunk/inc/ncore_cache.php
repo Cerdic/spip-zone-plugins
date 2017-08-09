@@ -30,6 +30,7 @@ if (!defined('_NCORE_NOMCACHE_NOISETTE_DESCRIPTION')) {
 	 * Chaque description contient aussi l'identifiant de la noisette déjà utilisé en index et la signature.
 	 */
 	define('_NCORE_NOMCACHE_NOISETTE_DESCRIPTION', 'noisettes_description.php');
+}
 if (!defined('_NCORE_NOMCACHE_NOISETTE_AJAX')) {
 	/**
 	 * Cache du paramétrage ajax des noisettes.
