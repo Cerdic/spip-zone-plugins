@@ -33,8 +33,6 @@ if (!defined('_NCORE_NOMCACHE_NOISETTE_CONTEXTE')) {
  * Lit le cache spécifié pour un service donné et renvoie le contenu sous forme de tableau éventuellement
  * vide.
  *
- * @package SPIP\NCORE\CACHE
- *
  * @param string	$service
  *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
  *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
@@ -63,8 +61,6 @@ function cache_lire($service, $nom_cache) {
 
 /**
  * Ecrit le contenu d'un tableau dans le cache spécifié pour un service donné.
- *
- * @package SPIP\NCORE\CACHE
  *
  * @param string	$service
  *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
@@ -98,8 +94,6 @@ function cache_ecrire($service, $nom_cache, $contenu_cache) {
 
 /**
  * Supprime le cache cache spécifié pour un service donné.
- *
- * @package SPIP\NCORE\CACHE
  *
  * @param string	$service
  *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
