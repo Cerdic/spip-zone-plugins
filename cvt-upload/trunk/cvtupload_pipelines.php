@@ -1,7 +1,9 @@
 <?php
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/cvtupload');
 
@@ -13,12 +15,12 @@ function cvtupload_formulaire_charger($flux) {
 		$contexte['cvtupload_fichiers_precedents'] = array();
 
 		// On met dans le contexte le HTML pour les fichiers précédemment postés
-		$_fichiers = _request("_fichiers");
-		$forcer = _request("_cvtupload_precharger_fichiers_forcer");
+		$_fichiers = _request('_fichiers');
+		$forcer = _request('_cvtupload_precharger_fichiers_forcer');
 		if ($html_fichiers = cvtupload_generer_html() and $_fichiers) {
 			$contexte['_fichiers_precedents_html'] = $html_fichiers;
-		} elseif (isset($flux['data']['cvtupload_precharger_fichiers']) and ($flux['args']['je_suis_poste']==false or $forcer == true)){
-			$precharger_fichiers = charger_fonction('cvtupload_precharger_fichiers','inc');
+		} elseif (isset($flux['data']['cvtupload_precharger_fichiers']) and ($flux['args']['je_suis_poste']==false or $forcer == true)) {
+			$precharger_fichiers = charger_fonction('cvtupload_precharger_fichiers', 'inc');
 			$contexte['_fichiers_precedents_html'] = cvtupload_generer_html($precharger_fichiers($flux['data']['cvtupload_precharger_fichiers'],$flux['args']['form']));
 		}
 	}
@@ -56,8 +58,7 @@ function cvtupload_formulaire_verifier($flux) {
 							$infos_fichiers[$champ][$cle]['infos_encodees'] = encoder_contexte_ajax($infos_decodees, $flux['args']['form']);
 
 							// Si suppression ou un autre fichier uploadé en remplacement
-							if (
-								isset($supprimer_fichier[$champ][$cle])
+							if (isset($supprimer_fichier[$champ][$cle])
 								or (
 									isset($_FILES[$champ]['name'][$cle])
 									and $_FILES[$champ]['error'][$cle] === UPLOAD_ERR_OK
@@ -71,7 +72,7 @@ function cvtupload_formulaire_verifier($flux) {
 								}
 								if (isset($supprimer_fichier[$champ][$cle])) {
 									// On génère une erreur pour réafficher le form de toute façon
-									$erreurs["$champ"] = _T('cvtupload:erreur_fichier_supprime', array("nom" => $name));
+									$erreurs["$champ"] = _T('cvtupload:erreur_fichier_supprime', array('nom' => $name));
 								}
 							}
 						}
@@ -82,8 +83,7 @@ function cvtupload_formulaire_verifier($flux) {
 					$infos_fichiers[$champ]['infos_encodees'] = encoder_contexte_ajax($infos_decodees, $flux['args']['form']);
 
 					// Si suppression ou un autre fichier uploadé en remplacement
-					if (
-						isset($supprimer_fichier[$champ])
+					if (isset($supprimer_fichier[$champ])
 						or (
 							isset($_FILES[$champ]['name'])
 							and $_FILES[$champ]['error'] === UPLOAD_ERR_OK
@@ -92,9 +92,9 @@ function cvtupload_formulaire_verifier($flux) {
 						supprimer_fichier($infos_fichiers[$champ]['tmp_name']);
 						$name = $infos_fichiers[$champ]['name'];
 						unset($infos_fichiers[$champ]);
-						if(isset($supprimer_fichier[$champ])) {
+						if (isset($supprimer_fichier[$champ])) {
 							// On génère une erreur pour réafficher le form de toute façon
-							$erreurs["$champ"] = _T('cvtupload:erreur_fichier_supprime', array("nom" => $name));
+							$erreurs["$champ"] = _T('cvtupload:erreur_fichier_supprime', array('nom' => $name));
 						}
 					}
 				}
@@ -102,20 +102,18 @@ function cvtupload_formulaire_verifier($flux) {
 
 			// On déplace le(s) fichier(s) dans notre dossier tmp de SPIP
 			// Et on met à jour les infos par rapport aux anciennes versions
-			if (
-				isset($_FILES[$champ])
-				and $infos = cvtupload_deplacer_fichier($_FILES[$champ], $repertoire_tmp, $flux['args']['form'],$champ)
-			){
+			if (isset($_FILES[$champ])
+				and $infos = cvtupload_deplacer_fichier($_FILES[$champ], $repertoire_tmp, $flux['args']['form'], $champ)
+			) {
 				if (isset($infos_fichiers[$champ])) {
 					$infos_fichiers[$champ] = $infos_fichiers[$champ] + $infos;//ne pas utiliser array_merge, car sinon cela réindexe le tableau, et cela nous perturbe pour le déplacement de $_FILES
 					ksort($infos_fichiers[$champ]);
-				}
-				else {
+				} else {
 					$infos_fichiers[$champ] = $infos;
 				}
 			}
 		}
-		set_request('_fichiers',$infos_fichiers);
+		set_request('_fichiers', $infos_fichiers);
 		// On utilise ces infos pour générer le HTML et le garder pour charger()
 		cvtupload_generer_html($infos_fichiers);
 		cvtupload_modifier_files($infos_fichiers);//On modifier $_FILES pour que cela soit transparent pour les traitements futurs
@@ -126,13 +124,11 @@ function cvtupload_formulaire_verifier($flux) {
 
 function cvtupload_formulaire_fond($flux) {
 	// Si ça a déjà été posté (après verifier()) et qu'il y a des champs fichiers déclarés
-	if (
-		($flux['args']['je_suis_poste'] or isset($flux['args']['contexte']['cvtupload_precharger_fichiers']))
+	if (($flux['args']['je_suis_poste'] or isset($flux['args']['contexte']['cvtupload_precharger_fichiers']))
 		and $champs_fichiers = cvtupload_chercher_fichiers($flux['args']['form'], $flux['args']['args'])
 	) {
 		include_spip('inc/filtres');
-		if (
-			isset($flux['args']['contexte']['_fichiers_precedents_html'])
+		if (isset($flux['args']['contexte']['_fichiers_precedents_html'])
 			and $fichiers = $flux['args']['contexte']['_fichiers_precedents_html']
 		) {
 			foreach ($champs_fichiers as $champ) {
@@ -144,9 +140,8 @@ function cvtupload_formulaire_fond($flux) {
 							$fichiers[$champ],
 							$flux['data']
 						);
-					}
-					else { // Sinon c'est un multiple
-						foreach ($fichiers[$champ] as $cle=>$html) {
+					} else { // Sinon c'est un multiple
+						foreach ($fichiers[$champ] as $cle => $html) {
 							$regexp_par_cle = "#<input[^>]*name=['\"]${champ}(?:\&\#91;|\[)${cle}(?:\&\#93;|\])[^>]*>#i";// cherche les <input name="champ[cle]"> ou <input name="champ#91;cle#93;">
 							$regexp_alternative = "#<input[^>]*name=['\"]${champ}[^>]*>#i";
 
@@ -175,7 +170,7 @@ function cvtupload_formulaire_fond($flux) {
 	return $flux;
 }
 
-function cvtupload_insert_head_css($flux, $prive=false) {
+function cvtupload_insert_head_css($flux, $prive = false) {
 	if (!$prive) {
 		$css = find_in_path('css/cvtupload.css');
 

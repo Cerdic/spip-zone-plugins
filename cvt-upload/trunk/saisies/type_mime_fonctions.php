@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-/** 
+/**
  * Remplit un tableau de description de types mime
  * Sous la forme type_mime => 'Nom du type (extensions)'
  *

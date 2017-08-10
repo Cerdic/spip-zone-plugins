@@ -1,7 +1,9 @@
 <?php
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('base/abstract_sql');
 /**
@@ -45,7 +47,7 @@ function cvtupload_generer_html($infos_fichiers = null) {
 	static $html_fichiers = array();
 	// Si on a des infos de fichiers, on va re-générer du HTML
 	if ($infos_fichiers and is_array($infos_fichiers)) {
-		foreach ($infos_fichiers as $champ=>$fichier) {
+		foreach ($infos_fichiers as $champ => $fichier) {
 			// Si c'est un champ unique
 			if (isset($fichier['name'])) {
 				$html_fichiers[$champ] = recuperer_fond(
@@ -55,10 +57,9 @@ function cvtupload_generer_html($infos_fichiers = null) {
 						'champ'    => "$champ",
 					))
 				);
-			}
-			// Sinon c'est un champ multiple
+			} // Sinon c'est un champ multiple
 			else {
-				foreach ($fichier as $cle=>$infos) {
+				foreach ($fichier as $cle => $infos) {
 					$html_fichiers[$champ][$cle] = recuperer_fond(
 						'formulaires/inc-cvtupload-fichier',
 						array_merge($infos, array(
@@ -87,21 +88,20 @@ function cvtupload_generer_html($infos_fichiers = null) {
  * @return array
  * 		Retourne un tableau d'informations sur le fichier ou un tableau de tableaux si plusieurs fichiers. Ce tableau est compatible avec l'action "ajouter_un_fichier" de SPIP.
  **/
-function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer=true) {
+function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer = true) {
 	$vignette_par_defaut = charger_fonction('vignette', 'inc/');
 	$infos = array();
 
 	// On commence par nettoyer le dossier
 	cvtupload_nettoyer_repertoire($repertoire);
 	if (is_array($fichier['name'])) {
-		foreach ($fichier['name'] as $cle=>$nom) {
+		foreach ($fichier['name'] as $cle => $nom) {
 			// On commence par transformer le nom du fichier pour éviter les conflits, on supprime notamment les accents
 			$nom = preg_replace(',\.\.+,', '.', $nom); // pas de .. dans le nom du doc
 			$nom = preg_replace("/[^.=\w-]+/", "_",
 				translitteration(preg_replace("/<[^>]*>/", '', $nom)));
 			$nom = strtolower($nom);
-			if (
-				// Si le fichier a bien un nom et qu'il n'y a pas d'erreur associé à ce fichier
+			if (// Si le fichier a bien un nom et qu'il n'y a pas d'erreur associé à ce fichier
 				($nom != null)
 				and ($fichier['error'][$cle] == 0)
 				// Et qu'on génère bien un nom de fichier aléatoire pour déplacer le fichier
@@ -115,13 +115,13 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer=true
 					$infos[$cle]['extension'] = $extension;
 					// si image on fait une copie avec l'extension pour pouvoir avoir l'image réduite en vignette
 					if (in_array($extension, array('png','jpg','gif'))) {
-						deplacer_fichier_upload($chemin_aleatoire, $chemin_aleatoire.".$extension",false);
+						deplacer_fichier_upload($chemin_aleatoire, $chemin_aleatoire.".$extension", false);
 						$infos[$cle]['vignette'] = $chemin_aleatoire.".$extension";
 					} else {
 						$infos[$cle]['vignette'] = $vignette_par_defaut($infos[$cle]['extension'], false, true);
 					}
 					//On récupère le type MIME du fichier aussi
-					$infos[$cle]['mime'] = cvt_upload_determiner_mime($fichier['type'][$cle],$infos[$cle]['extension']);
+					$infos[$cle]['mime'] = cvt_upload_determiner_mime($fichier['type'][$cle], $infos[$cle]['extension']);
 					$infos[$cle]['taille'] = $fichier['size'][$cle];
 					// On stocke des infos sur le formulaire
 					$infos[$cle]['form'] = $form;
@@ -129,12 +129,10 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer=true
 				}
 			}
 		}
-	}
-	else {
+	} else {
 		// On commence par transformer le nom du fichier pour éviter les conflits
 		$nom = trim(preg_replace('/[\s]+/', '_', strtolower(translitteration($fichier['name']))));
-		if (
-			// Si le fichier a bien un nom et qu'il n'y a pas d'erreur associé à ce fichier
+		if (// Si le fichier a bien un nom et qu'il n'y a pas d'erreur associé à ce fichier
 			($nom != null)
 			and ($fichier['error'] == 0)
 			// Et qu'on génère bien un nom de fichier aléatoire pour déplacer le fichier
@@ -145,7 +143,7 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer=true
 				$infos['tmp_name'] = $chemin_aleatoire;
 				$infos['name'] = $nom;
 				// On en déduit l'extension et du coup la vignette
-				$infos['extension'] = pathinfo($fichier['name'], PATHINFO_EXTENSION);;
+				$infos['extension'] = pathinfo($fichier['name'], PATHINFO_EXTENSION);
 				$infos['vignette'] = $vignette_par_defaut($infos['extension'], false, true);
 				//On récupère le type MIME du fichier aussi, ainsi que la taille
 				$infos['mime'] = cvt_upload_determiner_mime($fichier['type'], $infos['extension']);
@@ -172,15 +170,14 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer=true
 **/
 function cvtupload_modifier_files($infos_fichiers) {
 	foreach ($infos_fichiers as $champ => $description) {
-		if (isset($description['tmp_name'])){//Upload unique
+		if (isset($description['tmp_name'])) {//Upload unique
 			 $_FILES[$champ] = array();//On surcharge tout la description $_FILES pour ce champ.  Dans tous les cas les infos ont été stockées dans $description
 			 $_FILES[$champ]['name'] = $description['name'];
 			 $_FILES[$champ]['tmp_name'] = $description['tmp_name'];
 			 $_FILES[$champ]['type'] = $description['mime'];
 			 $_FILES[$champ]['error'] = 0; //on fait comme s'il n'y avait pas d'erreur, ce qui n'est pas forcément vrai…
 			 $_FILES[$champ]['size'] = $description['taille'];
-		}
-		else {//Upload multiple
+		} else {//Upload multiple
 			//On surcharge tout la description $_FILES pour ce champ. Dans tous les cas les infos ont été stockées dans $description
 			if (isset($_FILES[$champ])) {
 				$old_FILES_champ = $_FILES[$champ];
@@ -231,15 +228,14 @@ function cvtupload_modifier_files($infos_fichiers) {
  * 	Si un upload unique, une chaîne, qui si non vide, indique qu'il faut effacer le $_FILE[$champ]
  * @return void
 **/
-function cvtupload_nettoyer_files_selon_erreurs($champ,$erreurs){
+function cvtupload_nettoyer_files_selon_erreurs($champ, $erreurs) {
 	if (is_array($erreurs)) { // cas d'upload multiple
-		foreach ($erreurs as $cle=>$erreur) {
-			foreach ($_FILES[$champ] as $propriete=>$valeur) {
+		foreach ($erreurs as $cle => $erreur) {
+			foreach ($_FILES[$champ] as $propriete => $valeur) {
 				unset($_FILES[$champ][$propriete][$cle]);
-			 }
+			}
 		}
-	}
-	elseif ($erreurs!='') { // cas d'upload unique avec erreur
+	} elseif ($erreurs!='') { // cas d'upload unique avec erreur
 		unset($_FILES[$champ]);
 	}
 }
@@ -256,7 +252,7 @@ function cvt_upload_determiner_mime($mime_suppose, $extension) {
 	if (!in_array($mime_suppose, array('text/plain', '', 'application/octet-stream'))) { // si on a un mime précis, on le renvoie, tout simplement
 		return $mime_suppose;
 	}
-	$mime_spip = sql_getfetsel('mime_type','spip_types_documents','extension='.sql_quote($extension));
+	$mime_spip = sql_getfetsel('mime_type', 'spip_types_documents', 'extension='.sql_quote($extension));
 	if ($mime_spip) {
 		return $mime_spip;
 	} else {
@@ -288,8 +284,7 @@ function cvtupload_nettoyer_repertoire($repertoire, $age_max = _CVTUPLOAD_AGE_MA
 
 				if (is_file($chemin_fichier) and !jeune_fichier($chemin_fichier, $age_max)) {
 					supprimer_fichier($chemin_fichier);
-				}
-				else {
+				} else {
 					$fichiers[@filemtime($chemin_fichier).'_'.rand()] = $chemin_fichier;
 				}
 			}

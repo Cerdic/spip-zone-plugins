@@ -1,7 +1,9 @@
 <?php
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 include_spip('inc/cvtupload');
 /**
  * Une fonction qui permet de précharger des fichiers.
@@ -32,7 +34,7 @@ function inc_cvtupload_precharger_fichiers_dist($fichiers, $form) {
 				'size'=>array()
 			);
 		if (is_array($valeur)) {
-			foreach ($valeur as $f => $fichier){
+			foreach ($valeur as $f => $fichier) {
 				$chemin = $fichier['chemin'];
 				$pseudo_files[$champ]['tmp_name'][$f] = $chemin;
 				$pseudo_files[$champ]['name'][$f] = basename($chemin);
@@ -54,7 +56,7 @@ function inc_cvtupload_precharger_fichiers_dist($fichiers, $form) {
 	$repertoire_tmp = sous_repertoire(_DIR_TMP.'cvtupload/');
 	$infos_fichiers = array();
 	foreach ($pseudo_files as $champ => $pseudo) {
-		$infos_fichiers[$champ] = cvtupload_deplacer_fichier($pseudo, $repertoire_tmp, $form, False);
+		$infos_fichiers[$champ] = cvtupload_deplacer_fichier($pseudo, $repertoire_tmp, $form, false);
 
 		// ajouter l'url
 		if (isset($infos_fichiers[$champ]['tmp_name'])) { // si input simple
