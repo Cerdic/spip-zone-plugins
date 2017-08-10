@@ -1,5 +1,14 @@
 <?php
-
+/**
+ * Ce fichier contient les fonctions du service N-Core pour les noisettes.
+ *
+ * Chaque fonction, soit aiguille vers une fonction "homonyme" propre au service si elle existe,
+ * soit déroule sa propre implémentation pour le service appelant.
+ * Ainsi, les services externes peuvent, si elle leur convient, utiliser l'implémentation proposée par N-Core
+ * sans coder la moindre fonction.
+ *
+ * @package SPIP\NCORE\NOISETTE\SERVICE
+ */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -15,16 +24,26 @@ if (!defined('_NCORE_CONFIG_AJAX_DEFAUT')) {
 if (!defined('_NCORE_DYNAMIQUE_DEFAUT')) {
 	/**
 	 * Valeur par défaut de l'indicateur d'inclusion dynamique des noisettes.
-	 * Pour N-Core, le défaut est `false`
+	 * Pour N-Core, le défaut est `false`.
 	 */
 	define('_NCORE_DYNAMIQUE_DEFAUT', false);
 }
 
 
 /**
- * @param $service
+ * Retourne la liste des signatures des fichiers YAML des noisettes détectées par le service.
+ *
+ * Le service N-Core lit les signatures dans un cache dédié.
+ *
+ * @uses cache_lire()
+ *
+ * @param string	$service
+ *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
+ *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * 		Cet argument n'est utilisé que si la fonction N-Core est appelée.
  *
  * @return array
+ * 		Tableau des signatures de noisettes au format `[noisette] = signature`.
  */
 function ncore_noisette_lister_signatures($service) {
 
@@ -44,11 +63,32 @@ function ncore_noisette_lister_signatures($service) {
 }
 
 /**
- * @param $service
- * @param $noisettes
- * @param $recharger
+ * Stocke les descriptions de noisettes en distinguant les noisettes obsolètes, les noisettes modifiées et
+ * les noisettes nouvelles.
+ * Chaque description de noisette est un tableau associatif dont tous les index possibles - y compris la signature -
+ * sont initialisés quelque soit le contenu du fichier YAML.
+ *
+ * Le service N-Core stocke les descriptions dans un cache dédié et les signatures dans un autre.
+ *
+ * @uses cache_lire()
+ * @uses cache_ecrire()
+ *
+ * @param string	$service
+ *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
+ *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * 		Cet argument n'est utilisé que si la fonction N-Core est appelée.
+ * @param array		$noisettes
+ * 		Tableau associatif à 3 entrées fournissant les descriptions des noisettes nouvelles, obsolètes et modifiées:
+ * 		- `obsoletes` : liste des identifiants de noisette devenus obsolètes;
+ * 		- `modifiees` : liste des descriptions des noisettes dont le fichier YAML a été modifié;
+ *		- `nouvelles` : liste des descriptions de nouvelles noisettes. Cet index est le seul fourni si l'indicateur
+ * 		                $recharger est à `true`.
+ * @param bool		$recharger
+ *      Indique si le chargement en cours est forcé ou pas. Cela permet à la fonction N-Core ou du service
+ *        concerné d'optimiser le traitement sachant que seules les noisettes nouvelles sont fournies.
  *
  * @return bool
+ * 		`true` si le traitement s'est bien déroulé, `false` sinon.
  */
 function ncore_noisette_stocker($service, $noisettes, $recharger) {
 
@@ -110,10 +150,22 @@ function ncore_noisette_stocker($service, $noisettes, $recharger) {
 }
 
 /**
- * @param $service
- * @param $noisette
+ * Renvoie la description brute d'une noisette sans traitement typo ni désérialisation des champs.
+ *
+ * Le service N-Core lit la description de la noisette concernée dans le cache des descriptions.
+ *
+ * @uses cache_lire()
+ *
+ * @param string	$service
+ *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
+ *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * 		Cet argument n'est utilisé que si la fonction N-Core est appelée.
+ * @param string	$noisette
+ * 		Identifiant de la noisette.
  *
  * @return array
+ * 		Tableau de la description de la noisette. Les champs textuels et les champs de type tableau sérialisé
+ * 		sont retournés en l'état.
  */
 function ncore_noisette_decrire($service, $noisette) {
 
@@ -139,9 +191,19 @@ function ncore_noisette_decrire($service, $noisette) {
 }
 
 /**
- * @param $service
+ * Renvoie la configuration par défaut de l'ajax à appliquer pour les noisettes.
+ * Cette information est utilisée si la description YAML d'une noisette ne contient pas de tag ajax
+ * ou contient un tag ajax à `defaut`.
+ *
+ * Le service N-Core considère que toute noisette est par défaut insérée en ajax.
+ *
+ * @param string	$service
+ *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
+ *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * 		Cet argument n'est utilisé que si la fonction N-Core est appelée.
  *
  * @return bool
+ * 		`true` si par défaut une noisette est insérée en ajax, `false` sinon.
  */
 function ncore_noisette_config_ajax($service) {
 
@@ -159,10 +221,20 @@ function ncore_noisette_config_ajax($service) {
 }
 
 /**
- * @param $service
- * @param $information
+ * Renvoie l'information brute demandée pour l'ensemble des noisettes utilisées par le service.
+ *
+ * @uses cache_lire()
+ *
+ * @param string	$service
+ *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
+ *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * 		Cet argument n'est utilisé que si la fonction N-Core est appelée.
+ * @param string	$information
+ *      Identifiant d'un champ de la description d'une noisette. Si l'argument est vide ou invalide,
+ * 		la fonction renvoie un tableau vide.
  *
  * @return array
+ * 		Tableau de la forme `[noisette] = information`.
  */
 function ncore_noisette_lister($service, $information) {
 
@@ -179,6 +251,7 @@ function ncore_noisette_lister($service, $information) {
 		if ($information) {
 			include_spip('inc/ncore_cache');
 			if ($descriptions = cache_lire($service, _NCORE_NOMCACHE_NOISETTE_DESCRIPTION)) {
+				// Si $information n'est pas une colonne valide la fonction retournera un tableau vide.
 				$information_noisettes = array_column($descriptions, $information, 'noisette');
 			}
 		}

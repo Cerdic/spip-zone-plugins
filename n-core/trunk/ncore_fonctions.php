@@ -1,6 +1,9 @@
 <?php
-
-// Securite
+/**
+ * Ce fichier contient l'API N-Core de gestion des noisettes.
+ *
+ * @package SPIP\NCORE\NOISETTE\API
+ */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -10,13 +13,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 // -------------------------------------------------------------------
 
 /**
- * Chargement ou rechargement de descriptions de noisettes à partir de leurs fichiers YAML.
+ * Charge ou recharge les descriptions de noisettes à partir des fichiers YAML.
  * Les noisettes sont recherchées dans un répertoire relatif fourni en argument.
  * La fonction optimise le chargement en effectuant uniquement les traitements nécessaires
  * en fonction des modifications, ajouts et suppressions de noisettes identifiés en comparant les md5
  * des fichiers YAML.
  *
- * @package SPIP\NCORE\NOISETTE
  * @api
  * @filtre
  *
@@ -145,7 +147,6 @@ function ncore_noisette_charger($service, $dossier = 'noisettes/', $recharger = 
  * Retourne la description complète ou seulement une information précise pour une noisette donnée.
  * Les données textuelles peuvent subir une traitement typo si demandé.
  *
- * @package SPIP\NCORE\NOISETTE
  * @api
  * @filtre
  *
@@ -164,6 +165,9 @@ function ncore_noisette_charger($service, $dossier = 'noisettes/', $recharger = 
  * 		Les champs sérialisés sont eux toujours désérialisés.
  *
  * @return array|string
+ * 		La description complète ou l'information précise demandée pour une noisette donnée. Les champs
+ * 		de type tableau sont systématiquement désérialisés et si demandé, les champs textuels peuvent être
+ * 		traités avec la fonction _T_ou_typo().
  */
 function ncore_noisette_informer($service, $noisette, $information = '', $traiter_typo = false) {
 
@@ -174,7 +178,7 @@ function ncore_noisette_informer($service, $noisette, $information = '', $traite
 
 	// Stocker la description de la noisette si besoin
 	if (!isset($description_noisette[$service][$noisette])) {
-		// On charge l'API de NCore.
+		// On charge l'API de N-Core.
 		// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
 		include_spip("ncore/ncore");
 
@@ -224,7 +228,6 @@ function ncore_noisette_informer($service, $noisette, $information = '', $traite
 /**
  * Détermine si la noisette spécifiée doit être incluse en AJAX ou pas.
  *
- * @package SPIP\NCORE\NOISETTE
  * @api
  * @filtre
  *
@@ -254,7 +257,7 @@ function ncore_noisette_est_ajax($service, $noisette) {
 		if (!$est_ajax[$service]
 		or (_request('var_mode') == 'recalcul')
 		or (defined('_NO_CACHE') and (_NO_CACHE != 0))) {
-			// On charge l'API de NCore.
+			// On charge l'API de N-Core.
 			// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
 			include_spip("ncore/ncore");
 
@@ -290,7 +293,6 @@ function ncore_noisette_est_ajax($service, $noisette) {
 /**
  * Détermine si la noisette spécifiée doit être incluse dynamiquement ou pas.
  *
- * @package SPIP\NCORE\NOISETTE
  * @api
  * @filtre
  *
@@ -350,7 +352,6 @@ function ncore_noisette_est_dynamique($service, $noisette) {
 /**
  * Renvoie le contexte de la noisette sous la forme d'un tableau éventuellement vide.
  *
- * @package SPIP\NCORE\NOISETTE
  * @api
  * @filtre
  *
