@@ -13,7 +13,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function inc_safehtml($t) {
+function inc_safehtml($t, $allowed = null) {
 	static $purifier;
 
 	include_spip('inc/memoization');
@@ -23,13 +23,15 @@ function inc_safehtml($t) {
 
 	include_spip('lib/HTMLPurifier.standalone');
 	
+	
 
 	$config = HTMLPurifier_Config::createDefault();
 	$config->set('HTML.Doctype', 'HTML 4.01 Transitional');
 	$config->set('CSS.AllowTricky', true);
+	$config->set('HTML.Allowed', $allowed);
 	$config->set('Cache.SerializerPath', preg_replace(',/$,', '', realpath(_DIR_TMP)));
 	$def = $config->getHTMLDefinition(true);
-	
+	 
 	// HTML5
 	// https://github.com/lukusw/php-htmlpurfier-html5/blob/master/htmlpurifier_html5.php
 	// http://developers.whatwg.org/grouping-content.html
@@ -45,7 +47,12 @@ function inc_safehtml($t) {
 	
     $def->addElement('figure', 'Block', 'Optional: (figcaption, Flow) | (Flow, figcaption) | Flow', 'Common');
     $def->addElement('figcaption', 'Inline', 'Flow', 'Common');
-	
+	/*
+	 * element_name,
+	 * element_type,
+	 * element_childs_attributes,
+	 * attributes
+	 **/
 	// http://developers.whatwg.org/the-video-element.html#the-video-element
     $def->addElement('video', 'Block', 'Optional: (source, Flow) | (Flow, source) | Flow', 'Common', array(
       'src' => 'URI',

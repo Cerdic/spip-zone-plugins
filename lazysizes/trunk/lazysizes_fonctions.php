@@ -37,8 +37,7 @@ function lazysizes_addons() {
 	return $lazy_addons;
 }
 
-function lazysizes_insertion_js(){
-	$flux = '';
+function lazysizes_insertion_js($flux = ''){
 	include_spip('inc/config');
 	$lazy_options = lire_config('lazysizes/options');
 	$js_init_options = generer_url_public('lazysizes_config.js') ;
