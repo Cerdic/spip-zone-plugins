@@ -4,7 +4,9 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function rssarticle_taches_generales_cron($taches_generales){ 
 	// si cfg dispo, on charge les valeurs
@@ -44,4 +46,3 @@ function rssarticle_affiche_milieu($flux) {
 	return $flux;
 }
 
-?>

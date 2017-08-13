@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS['rssarticle_base_version'] = 0.3;
 
@@ -56,4 +58,4 @@ function rssarticle_vider_tables() {
 	effacer_meta('rssarticle_base_version');
 	ecrire_metas();
 }
-?>
+

@@ -5,6 +5,9 @@
  * 
  *
  */
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // TODO
 // - gerer les mots-clés hors enclosure ?
@@ -255,8 +258,9 @@ function html2spip($lapage){
 	$lapage = str_replace("\r", "\n", $lapage);
 
 	// SUPPRIME LES TAGS
-	if (eregi("<title.*>(.*)</title>", $lapage, $regs))
-	$titre = textebrut($regs[1]);
+    if (preg_match("/<title.*>(.*)<\/title>/i", $lapage, $regs)) {
+        $titre = textebrut($regs[1]);
+	}
 	$lapage = textebrut($lapage);
 	
 	// Suite tableaux
@@ -275,4 +279,3 @@ function html2spip($lapage){
 	return $lapage;
 }
 
-?>

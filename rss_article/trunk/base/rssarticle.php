@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Ajouter la table spip_articles_syndic
@@ -52,4 +54,4 @@ function rssarticle_declarer_tables_principales($tables_principales){
 }
 
 
-?>
+

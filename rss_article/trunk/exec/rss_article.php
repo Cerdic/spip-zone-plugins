@@ -7,7 +7,9 @@
  */
 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip("inc/presentation");
 
@@ -44,4 +46,3 @@ function exec_rss_article_dist(){
 	echo fin_gauche() . fin_page();
 }
 
-?>

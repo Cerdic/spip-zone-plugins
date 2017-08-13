@@ -1,7 +1,7 @@
 <paquet
 	prefix="rssarticle"
 	categorie="edition"
-	version="1.1.4"
+	version="1.1.5"
 	etat="stable"
 	compatibilite="[3.0.2;3.1.*]"
 	logo="prive/themes/spip/images/rssarticle-64.png"
@@ -9,7 +9,7 @@
 	schema="1.0.0" 
 >
 	<nom>Flux RSS en articles</nom>
-	<auteur lien='http://www.erational.org'>erational</auteur>
+	<auteur lien='https://www.erational.org'>erational</auteur>
 	<auteur>LudoRA</auteur>
 	<licence>GNU/GPL v3</licence>
 	<pipeline nom="declarer_tables_principales" inclure="base/rssarticle.php"/>

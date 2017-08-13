@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/autoriser');
 
@@ -55,4 +57,3 @@ function formulaires_editer_rssarticle_traiter_dist($id_syndic='new', $retour=''
 	return $message;
 }
 
-?>
