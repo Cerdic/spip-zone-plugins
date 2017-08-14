@@ -101,6 +101,14 @@ function produits_declarer_tables_objets_sql($tables) {
 		)
 	    ),
 	    'texte_changer_statut' => 'produits:produit_statut',
+		'join' => array(
+			"id_produit" => "id_produit",
+			"id_rubrique" => "id_rubrique"
+		),
+		'tables_jointures' => array(
+			'profondeur' => 'rubriques',
+			#'id_auteur' => 'auteurs_liens' // declaration generique plus bas
+		),
 	);
 
 	return $tables;
