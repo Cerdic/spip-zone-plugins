@@ -4,14 +4,12 @@
 == WHY
 Ce plugin a pour vocation principale de modifier certains sélecteurs CSS de SPIP pour bénéficier de ceux de Tiny Typo. Accessoirement, il distribue aussi la dernière version de Tiny Typo, mais ce n’est pas le plus important (faire un plugin juste pour distribuer du CSS… bof).
 
--> Mode d’emploi pour SPIP :
+-> Mode d’emploi de Tiny Typo pour SPIP :
 https://contrib.spip.net/Installer-Tiny-Typo-dans-SPIP?var_mode=preview
 
 == TODO V1
-- Ajouter les sélecteurs CSS de Tiny Typo dans SPIP : DONE
-- Rédiger la doc : DOING
-- prévoir feuille spip.css allégée
-- Sortir cette fichue V1 !
+- ajouter le plugin sur SPIP Plugins
+- attendre publication de la doc sur SPIP Contrib
 
 == TODO V2
 La V2 pourrait insérer automatiquement les styles, pour toujours bénéficier de la dernière version de Tiny Typo. Mais ce n’est pas génial de distribuer des styles non paramétrables, donc on ne l’impose pas.
