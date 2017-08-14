@@ -17,6 +17,6 @@
 
 <options>tinytypo_options.php</options>
 
-<necessite id="SPIP" version="[2.1.0;3.0.99]">
+<necessite id="SPIP" version="[2.1.0;3.2.99]">
 <necessite id="spip_bonux" version="[2.2.19;]"/>
 </plugin>
