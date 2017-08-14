@@ -1,0 +1,120 @@
+/* --------------------------------------------------------------
+
+   spip.css
+   Styles associes au code genere par SPIP
+
+
+-------------------------------------------------------------- */
+
+/* Sur petits ecrans, lineariser le tableau pour eviter le scroll horizontal */
+@media (max-width: 640px) {
+	.table th,
+	.table tr,
+	.table td {
+		display: block;
+	}
+	.table thead th {
+		border-bottom: none !important;
+	}
+	.table thead th+th {
+		border-top: none;
+	}
+	.table tr {
+		border-bottom: 1px solid;
+	}
+	.table td {
+		border-bottom: none;
+	}
+}
+
+/* Citations, code et poesie */
+pre, code, kbd, samp, var, tt, .spip_code, .spip_cadre { font-family: 'Courier New', Courier, monospace; }
+div.spip_code, .spip_cadre {}
+
+/* Logos, documents et images */
+.spip_logo { margin: 0; padding: 0; border: none; }
+.spip_logo.center { display: block; }
+.spip_logo.left { margin: 0 10px .1em 0; }
+.spip_logo.right { margin: 0 0 .1em 10px; }
+
+.spip_documents { max-width: 100%; margin: 0; margin-bottom: 0.1em; text-align: center; }
+.spip_documents.center { display: block; }
+.spip_documents.left { margin-right: 10px; }
+.spip_documents.right { margin-left: 10px; }
+.spip_doc_titre {}
+.spip_doc_descriptif { clear: both; }
+.spip_doc_credits { font-size: x-small; }
+
+/* fixer une largeur maximale de 100 % aux elements potentiellement problematiques */
+@media (max-width: 640px) {
+ 	.spip_documents,
+ 	.spip_doc_titre,
+ 	.spip_doc_descriptif { max-width: 100% !important; }
+}
+
+/* Modeles par defaut */
+.spip_modele { float: right; display: block; width: 25%; margin: 0 0 10px 1.5em; padding: 1.5em; background-color: #EEE; }
+
+/* Formulaires */
+.formulaire_spip {}
+.formulaire_spip li { clear: both; margin-bottom: 0.75em; }
+.formulaire_spip .boutons { clear: both; margin: 0; padding: 0; text-align: right; }
+.formulaire_spip .boutons input,
+.formulaire_spip .boutons button {}
+.formulaire_spip input.text,
+.formulaire_spip textarea { padding: .2em; border: solid 1px #aaa; }
+@media print {
+	.formulaire_spip { display: none; }
+}
+
+/* Barre typo */
+.markItUp .markItUpHeader ul .markItUpSeparator { display: none; }
+
+/* Previsu */
+.previsu { margin-bottom: 1.5em; padding: 0.75em; border: 2px dashed #F57900; }
+fieldset.previsu legend { color: #F57900; }
+
+/* Reponses */
+.reponse_formulaire { margin-bottom: 1.5em; padding: 0.75em; border: 2px solid #ddd; }
+.reponse_formulaire_ok { background: #e6efc2; color: #264409; border-color: #c6d880; }
+.reponse_formulaire_erreur { background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4; }
+.reponse_formulaire_ok a { color: #264409; }
+.reponse_formulaire_erreur a { color: #8a1f11; }
+
+.erreur_message { color: red; }
+
+.editer.erreur input[type="text"], .editer.erreur input.text,
+.editer.erreur input[type="password"], .editer.erreur input.password,
+.editer.erreur textarea,
+li.erreur input[type="text"], li.erreur input.text,
+li.erreur input[type="password"], li.erreur input.password,
+li.erreur textarea { background-color: #fbe3e4; border-color: #fbc2c4; }
+
+/* Formulaire de recherche */
+.formulaire_recherche * { display: inline; }
+
+/* Paragraphes */
+.spip_poesie, div.spip_code, .spip_cadre, .spip_documents.center, .spip_logo.center { margin-bottom: 1.5em; }
+
+/* Pagination */
+.pagination { clear: both; text-align: center; }
+.pagination .disabled { visibility: hidden; }
+@media print {
+	.pagination { display: none; }
+}
+
+/* Liens de SPIP */
+a.spip_note { font-weight: bold; }
+
+/* Compatibilite ancienne dist */
+.on { font-weight: bold; }
+
+/* Boutons d'admin */
+.ie6 .spip-admin,
+.ie6 #spip-admin { display: none; }
+@media print {
+	.spip-admin,
+	#spip-admin { display: none; }
+}
+
+/* fin */

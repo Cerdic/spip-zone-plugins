@@ -1,0 +1,94 @@
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+[(#REM)<style>
+]/* --------------------------------------------------------------
+
+   tinytypo.css.html
+   patch bourrin pour forcer quelques personnalisations
+
+-------------------------------------------------------------- */
+
+/* Valeurs :
+#SET{font-size,#CONFIG{tinytypo/typo/font-size,1em}} [ font-size: (#GET{font-size});]
+#SET{line-height,#CONFIG{tinytypo/typo/line-height,1.5}} [ line-height: (#GET{line-height});]
+#SET{margin-bottom,#CONFIG{tinytypo/typo/margin-bottom,1.5em}} [ margin-bottom: (#GET{margin-bottom});]
+#SET{alinea,#CONFIG{tinytypo/typo/alinea,1.5em}} [ alinea: (#GET{alinea});]
+
+#SET{font1,#CONFIG{tinytypo/typo/font1,'Georgia, serif'}} [ font1: (#GET{font1});]
+#SET{font2,#CONFIG{tinytypo/typo/font2,'Helvetica, Arial, sans-serif'}} [ font2: (#GET{font2});]
+#SET{font3,#CONFIG{tinytypo/typo/font3,'Courier, monospace'}} [ font3: (#GET{font3});]
+#SET{font4,#CONFIG{tinytypo/typo/font4,'fantasy'}} [ font4: (#GET{font4});]
+
+#SET{color-bg,#CONFIG{tinytypo/typo/color-bg,#F8F8F8}} [ color-bg : (#GET{color-bg});]
+#SET{color-txt,#CONFIG{tinytypo/typo/color-txt,#222222}} [ color-txt: (#GET{color-txt});]
+#SET{color-mid,#CONFIG{tinytypo/typo/color-mid,#666666}} [ color-mid: (#GET{color-mid});]
+#SET{color,#CONFIG{tinytypo/typo/color,#990000}} [ color: (#GET{color});]
+*/
+
+body {
+	background-color: #GET{color-bg};
+	font-size: #GET{font-size};
+	line-height: #GET{line-height};
+	font-family: #GET{font1};
+	color: #GET{color-txt};
+}
+
+.font1 { font-family: #GET{font1}; }
+.font2 { font-family: #GET{font2}; }
+.font3 { font-family: #GET{font3}; }
+.font4 { font-family: #GET{font4}; }
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6,
+.lead {
+  font-family: #GET{font2};
+  color: #GET{color};
+}
+.lead,
+.quiet { color: #GET{color-mid}; }
+
+p,
+.p,
+ul,
+ol,
+dl,
+dd,
+blockquote,
+address,
+pre,
+.table,
+fieldset {
+  margin-bottom: #GET{margin-bottom};
+}
+
+ol,
+ul,
+dd {
+  margin-left: #GET{alinea};
+}
+
+blockquote {
+  padding-left: #GET{alinea};
+}
+
+pre,
+code,
+kbd,
+samp,
+var,
+tt {
+  font-family: #GET{font3};
+}
+
+/* end */

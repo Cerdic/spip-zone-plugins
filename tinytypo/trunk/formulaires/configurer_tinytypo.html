@@ -1,0 +1,85 @@
+<style type="text/css">
+.formulaire_spip, .formulaire_spip * { font-size: 100% !important; }
+.formulaire_spip fieldset { border: 0; }
+.formulaire_spip legend { background: none; font-weight: bold; }
+.formulaire_spip .explication { padding: 5px 10px; background: none; border: 0; }
+.formulaire_spip li .explication { padding: 0; font-size: .9em !important; line-height: 1; color: #666; }
+</style>
+
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="_meta_casier" value="tinytypo/typo" />
+		<fieldset>
+			<legend>R&eacute;glage de la base typographique g&eacute;n&eacute;rale du site</legend>
+			<p class="explication">Indiquez vos valeurs en CSS.<span class="none"><br>Pour voir, affichez la page de test <code>?page=demo/tinytypo</code>.</span></p>
+			<ul>
+				<li class="tinytypo_font1[ (#ENV**{erreurs}|table_valeur{font1}|oui)erreur]">
+					<label for="font1">Police principale</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{font1})</span>
+					]<input type="text" class="text" name="font1" id="font1" [ value="(#ENV{font1,'Georgia, serif'})"] placeholder="'Lucida Bright', Georgia, 'Times New Roman', serif" />
+					<p class="explication">Exemple : Georgia, 'Times New Roman', serif</p>
+				</li>
+				<li class="tinytypo_font2[ (#ENV**{erreurs}|table_valeur{font2}|oui)erreur]">
+					<label for="font2">Police des titres</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{font2})</span>
+					]<input type="text" class="text" name="font2" id="font2" [ value="(#ENV{font2,'Helvetica, Arial, sans-serif'})"] placeholder="Helvetica, Arial, sans-serif" />
+				</li>
+				<li class="tinytypo_font3[ (#ENV**{erreurs}|table_valeur{font3}|oui)erreur]">
+					<label for="font3">Police du code</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{font3})</span>
+					]<input type="text" class="text" name="font3" id="font3" [ value="(#ENV{font3,'Courier, monospace'})"] placeholder='"Courier New", Courier, monospace' />
+				</li>
+				<li class="tinytypo_font4[ (#ENV**{erreurs}|table_valeur{font4}|oui)erreur]">
+					<label for="font4">Police fantaisie</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{font4})</span>
+					]<input type="text" class="text" name="font4" id="font4" [ value="(#ENV{font4,'fantasy'})"] placeholder="Aclonica, fantasy" />
+				</li>
+				<li class="tinytypo_font-size[ (#ENV**{erreurs}|table_valeur{font-size}|oui)erreur]">
+					<label for="font-size">Taille</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{font-size})</span>
+					]<input type="text" class="text" name="font-size" id="font-size" [ value="(#ENV{font-size,1em})"] placeholder="1em" style="width: 6em;" />
+				</li>
+				<li class="tinytypo_line-height[ (#ENV**{erreurs}|table_valeur{line-height}|oui)erreur]">
+					<label for="line-height">Interligne</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{line-height})</span>
+					]<input type="text" class="text" name="line-height" id="line-height" [ value="(#ENV{line-height,1.5})"] placeholder="1.5" style="width: 6em;" />
+				</li>
+				<li class="tinytypo_margin-bottom[ (#ENV**{erreurs}|table_valeur{margin-bottom}|oui)erreur]">
+					<label for="margin-bottom">Paragraphe</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{margin-bottom})</span>
+					]<input type="text" class="text" name="margin-bottom" id="margin-bottom" [ value="(#ENV{margin-bottom,[(#ENV{line-height,1.5em})]})"] placeholder="1.5em" style="width: 6em;" />
+				</li>
+				<li class="tinytypo_alinea[ (#ENV**{erreurs}|table_valeur{alinea}|oui)erreur]">
+					<label for="alinea">Alin&eacute;a</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{alinea})</span>
+					]<input type="text" class="text" name="alinea" id="alinea" [ value="(#ENV{alinea,1.5em})"] placeholder="20px" style="width: 6em;" />
+				</li>
+				<li class="tinytypo_color-bg[ (#ENV**{erreurs}|table_valeur{color-bg}|oui)erreur]">
+					<label for="color-bg">Couleur du fond</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{color-bg})</span>
+					]<input type="color" class="text" name="color-bg" id="color-bg" [ value="(#ENV{color-bg,#F8F8F8})"] style="width: 6em;" />
+				</li>
+				<li class="tinytypo_color-txt[ (#ENV**{erreurs}|table_valeur{color-txt}|oui)erreur]">
+					<label for="color-txt">Couleur du texte</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{color-txt})</span>
+					]<input type="color" class="text" name="color-txt" id="color-txt" [ value="(#ENV{color-txt,#222222})"] style="width: 6em;" />
+				</li>
+				<li class="tinytypo_color-mid[ (#ENV**{erreurs}|table_valeur{color-mid}|oui)erreur]">
+					<label for="color-mid">Gris moyen</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{color-mid})</span>
+					]<input type="color" class="text" name="color-mid" id="color-mid" [ value="(#ENV{color-mid,#666666})"] style="width: 6em;" />
+				</li>
+				<li class="tinytypo_color[ (#ENV**{erreurs}|table_valeur{color}|oui)erreur]">
+					<label for="color">Thème</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{color})</span>
+					]<input type="color" class="text" name="color" id="color" [ value="(#ENV{color,#990000})"] style="width: 6em;" />
+				</li>
+			</ul>
+		</fieldset>
+		<p class="boutons"><input type="submit" name="enregistrer" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+</div>
+<p class="reponse_formulaire error"><strong>Pensez &agrave; vider les caches</strong> (du navigateur et de SPIP) apr&egrave;s chaque modification&nbsp;!</p>
