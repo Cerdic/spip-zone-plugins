@@ -4,9 +4,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+
 /**
- * @param       $noisette
- * @param array $options
+ * Phrase le fichier YAML d'une espece de noisette et renvoie sa description si celle-ci a changé
+ * sinon renvoie un indicateur permettant de savoir que le YAML est identique.
+ *
+ * @param string	$noisette
+ * @param array		$options
  *
  * @return array
  */

@@ -9,8 +9,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 // -------------------------------------------------------------------
-// ------------------------- API NOISETTES ---------------------------
+// ------------------------- API COMPILATION ---------------------------
 // -------------------------------------------------------------------
+
 
 /**
  * Charge ou recharge les descriptions de noisettes à partir des fichiers YAML.
@@ -20,10 +21,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * des fichiers YAML.
  *
  * @api
- * @filtre
  *
  * @param string	$service
- *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
+ *      Le service permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  *      La fonction utilisera les fonctions de lecture des md5 et de stockage des descriptions de noisettes,
  * 		spécifiques au service, ou à défaut, celles fournies par N-Core.
@@ -148,7 +148,6 @@ function ncore_noisette_charger($service, $dossier = 'noisettes/', $recharger = 
  * Les données textuelles peuvent subir une traitement typo si demandé.
  *
  * @api
- * @filtre
  *
  * @param string	$service
  *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou

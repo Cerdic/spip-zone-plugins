@@ -79,11 +79,11 @@ function ncore_noisette_lister_signatures($service) {
  * 		Cet argument n'est utilisé que si la fonction N-Core est appelée.
  * @param array		$noisettes
  * 		Tableau associatif à 3 entrées fournissant les descriptions des noisettes nouvelles, obsolètes et modifiées:
- * 		- `obsoletes` : liste des identifiants de noisette devenus obsolètes
- * 		- `modifiees` : liste des descriptions des noisettes dont le fichier YAML a été modifié
- *      - `nouvelles` : liste des descriptions de nouvelles noisettes.
- * 		Si $recharger est à `true`, seul l'index `nouvelles` est fourni dans le tableau $noisettes.
+ * 		- 'obsoletes' : liste des identifiants de noisette devenus obsolètes
+ * 		- 'modifiees' : liste des descriptions des noisettes dont le fichier YAML a été modifié
+ *      - 'nouvelles' : liste des descriptions de nouvelles noisettes.
  *
+ * 		Si $recharger est à `true`, seul l'index `nouvelles` est fourni dans le tableau $noisettes.
  * @param bool		$recharger
  *      Indique si le chargement en cours est forcé ou pas. Cela permet à la fonction N-Core ou au service
  *      concerné d'optimiser le traitement sachant que seules les noisettes nouvelles sont fournies.
