@@ -34,7 +34,7 @@ function tinytypo($texte) {
 	$texte = str_replace('spip_logo_center', 'center', $texte);
 	$texte = str_replace('spip_documents_center', 'center', $texte);
 	$texte = str_replace('center center', 'center', $texte); // éviter les doublons
-	$texte = str_replace('margin-right:auto;margin-left:auto;text-align:center;', '', $texte); // grrr
+	$texte = str_replace('margin-right:auto;margin-left:auto;text-align:center;', '', $texte); // grrr corrigé notamment ici : https://zone.spip.org/trac/spip-zone/changeset/105778/_plugins_
 	$texte = str_replace('spip_logo_left', 'left', $texte);
 	$texte = str_replace('spip_documents_left', 'left', $texte);
 	$texte = str_replace('left left', 'left', $texte); // éviter les doublons
