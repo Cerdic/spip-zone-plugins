@@ -2,17 +2,17 @@
 = pour Tiny Typo
 
 == WHY
-Ce plugin a pour vocation principale de modifier certains sélecteurs CSS de SPIP pour bénéficier de ceux de Tiny Typo. Accessoirement, il distribue aussi la dernière version de Tiny Typo, mais ce n’est pas le plus important (faire un plugin juste pour distribuer du CSS… bof).
+Ce plugin a pour vocation principale de modifier certains sélecteurs CSS de SPIP pour bénéficier de ceux de Tiny Typo. Accessoirement, il distribue aussi les styles de Tiny Typo, mais ce n’est pas le plus important (faire un plugin juste pour distribuer du CSS… bof).
 
 -> Mode d’emploi de Tiny Typo pour SPIP :
 https://contrib.spip.net/Installer-Tiny-Typo-dans-SPIP?var_mode=preview
 
 == TODO V1
-- ajouter le plugin sur SPIP Plugins
-- attendre publication de la doc sur SPIP Contrib
+- attendre publication de la doc sur SPIP Contrib :
+https://contrib.spip.net/Plugin-Tiny-Typo?var_mode=preview
 
 == TODO V2
-La V2 pourrait insérer automatiquement les styles, pour toujours bénéficier de la dernière version de Tiny Typo. Mais ce n’est pas génial de distribuer des styles non paramétrables, donc on ne l’impose pas.
+Comment attendu par beaucoup, la V2 pourrait insérer les styles automatiquement, pour toujours bénéficier de la dernière version de Tiny Typo. Mais ce n’est pas génial de distribuer des styles non paramétrables, donc on ne l’impose pas.
 
 - Insérer la feuille tinytypo (par défaut ?) MAIS permettre de la désactiver (ou l’inverse ?) => prévoir panneau de conf pour activer/désactiver
 - Si le plugin Daisy est actif, ne pas insérer la feuille tinytypo.css
