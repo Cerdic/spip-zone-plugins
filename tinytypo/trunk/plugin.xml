@@ -1,33 +1,34 @@
 <plugin>
-<nom>Tiny Typo</nom>
-<prefix>tinytypo</prefix>
-<icon>prive/img/tinytypo.png</icon>
+	<nom>Tiny Typo</nom>
+	<prefix>tinytypo</prefix>
+	<categorie>outil</categorie>
+	<version>2.0.0</version>
+	<icon>prive/img/tinytypo.png</icon>
+	<etat>experimental</etat>
+	<lien>https://zone.spip.org/trac/spip-zone/browser/_plugins_/tinytypo/trunk/todo.txt</lien>
 
-<version>2.0.0</version>
-<etat>experimental</etat>
-<categorie>outil</categorie>
+	<slogan>Tiny Typo pour SPIP</slogan>
+	<auteur>&copy; 2010-2017 MIT [tetue->http://spip.tetue.net]</auteur>
+	
+	<description>
+		ATTENTION : ceci est une version très expérimentale ! et bancale… qui n'aboutira sans doute pas.
+		Base CSS pour le contenu éditorial web, pour des pages web lisibles.
+		Ce plugin porte Tiny Typo v1.3.4 dans SPIP : il met le CSS à disposition et permet de tirer profit de TOUS les styles de Tiny Typo dans SPIP.
+	</description>
 
-<slogan>Tiny Typo pour SPIP</slogan>
-<description>
-	ATTENTION : ceci est une version très expérimentale ! et bancale… qui n'aboutira sans doute pas.
-	Base CSS pour le contenu éditorial web, pour des pages web lisibles.
-	Ce plugin porte Tiny Typo v1.3.4 dans SPIP : il met le CSS à disposition et permet de tirer profit de TOUS les styles de Tiny Typo dans SPIP.
-</description>
-<auteur>&copy; 2010-2017 MIT [tetue->http://spip.tetue.net]</auteur>
-<lien>https://zone.spip.org/trac/spip-zone/browser/_plugins_/tinytypo/trunk/todo.txt</lien>
+	<options>tinytypo_options.php</options>
 
-<options>tinytypo_options.php</options>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>tinytypo_pipelines.php</inclure>
+	</pipeline>
 
-<pipeline>
-	<nom>insert_head_css</nom>
-	<inclure>tinytypo_pipelines.php</inclure>
-</pipeline>
-<bouton id='tinytypo' parent='bando_squelette'>
-	<icone>prive/img/tinytypo-16.png</icone>
-	<titre>Tiny&nbsp;Typo</titre>
-	<url>configurer_tinytypo</url>
-</bouton>
+	<bouton id='tinytypo' parent='bando_squelette'>
+		<icone>prive/img/tinytypo-16.png</icone>
+		<titre>Tiny&nbsp;Typo</titre>
+		<url>configurer_tinytypo</url>
+	</bouton>
 
-<necessite id="SPIP" version="[2.1.0;3.2.99]">
-<necessite id="spip_bonux" version="[2.2.19;]"/>
+	<necessite id="SPIP" version="[2.1.0;3.2.99]">
+	<necessite id="spip_bonux" version="[2.2.19;]"/>
 </plugin>
