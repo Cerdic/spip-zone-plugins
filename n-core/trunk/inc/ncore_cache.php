@@ -55,7 +55,7 @@ if (!defined('_NCORE_NOMCACHE_NOISETTE_CONTEXTE')) {
 
 
 /**
- * Lit le cache spécifié pour un plugin donné et renvoie le contenu sous forme de tableau
+ * Lit le cache spécifié d'un plugin donné et renvoie le contenu sous forme de tableau
  * éventuellement vide.
  *
  * @api
@@ -88,7 +88,7 @@ function cache_lire($plugin, $nom_cache) {
 
 
 /**
- * Ecrit le contenu d'un tableau dans le cache spécifié pour un plugin donné.
+ * Ecrit le contenu d'un tableau dans le cache spécifié d'un plugin donné.
  *
  * @api
  * @uses ecrire_fichier_securise()
@@ -124,7 +124,7 @@ function cache_ecrire($plugin, $nom_cache, $contenu_cache) {
 
 
 /**
- * Supprime le cache cache spécifié pour un plugin donné.
+ * Supprime le cache cache spécifié d'un plugin donné.
  *
  * @api
  * @uses supprimer_fichier()
