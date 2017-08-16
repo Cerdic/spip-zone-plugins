@@ -218,7 +218,7 @@ function ncore_type_noisette_charger($plugin, $dossier = 'noisettes/', $recharge
  * 		de type tableau sont systématiquement désérialisés et si demandé, les champs textuels peuvent être
  * 		traités avec la fonction _T_ou_typo().
  */
-function ncore_type_noisette_informer($plugin, $noisette, $information = '', $traiter_typo = false) {
+function ncore_type_noisette_informer($plugin, $noisette, $information = '', $traiter_typo = false, $stockage = '') {
 
 	// On indexe le tableau des indicateurs ajax par le plugin appelant en cas d'appel sur le même hit
 	// par deux plugins différents.
@@ -232,7 +232,7 @@ function ncore_type_noisette_informer($plugin, $noisette, $information = '', $tr
 		include_spip("ncoredata/ncore");
 
 		// Lecture de toute la configuration de la noisette: les données retournées sont brutes.
-		$description = ncore_type_noisette_decrire($plugin, $noisette);
+		$description = ncore_type_noisette_decrire($plugin, $noisette, $stockage);
 
 		// Sauvegarde de la description de la page pour une consultation ultérieure dans le même hit.
 		if ($description) {
