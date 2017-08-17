@@ -28,6 +28,18 @@ function scss_compile($style, $contexte = array()) {
 	// lui transmettre le path qu'il utilise pour les @import
 	$scss->setImportPaths(_chemin());
 
+	// pouvoir importer des @import 'css/truc' sur fichier 'css/truc.scss.html'
+	$scss->addImportPath(function($path) {
+		// SPIP 3.0+
+		if (function_exists('produire_fond_statique')) {
+			if ($f = find_in_path($path . '.scss.html')) {
+				$f = produire_fond_statique($path . '.scss', array('format' => 'scss'));
+				return $f;
+			}
+		}
+		return null;
+	});
+
 	// Si definie on affiche les commentaires des sources et numero de ligne dans le fichier css genere
 	if (defined('_SCSS_LINE_COMMENTS') and '_SCSS_LINE_COMMENTS' == true) {
 		$scss->setLineNumberStyle(Compiler::LINE_COMMENTS);
