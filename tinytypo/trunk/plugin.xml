@@ -14,7 +14,7 @@
 		Ce plugin porte Tiny Typo v1.3.4 dans SPIP : il permet de tirer profit de TOUS les styles de Tiny Typo dans SPIP et de les paramètrer pour les ajuster à votre goût.
 	</description>
 	<lien>https://zone.spip.org/trac/spip-zone/browser/_plugins_/tinytypo/trunk/todo.txt</lien>
-	<auteur>&copy; 2010-2017 MIT [tetue->http://spip.tetue.net]</auteur>
+	<auteur>&copy; [Tiny Typo->http://tinytypo.tetue.net] 2014 - MIT License - by [tetue->http://spip.tetue.net]</auteur>
 
 	<options>tinytypo_options.php</options>
 
