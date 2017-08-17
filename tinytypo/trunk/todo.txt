@@ -2,13 +2,15 @@
 = pour Tiny Typo
 
 == WHY
-Ce plugin a pour vocation essentielle de modifier certains sélecteurs CSS de SPIP pour bénéficier de TOUS les styles de Tiny Typo. Accessoirement, il distribue aussi les styles de Tiny Typo, mais ce n’est pas le plus important (faire un plugin juste pour distribuer du CSS… bof).
+- Ce plugin a pour vocation essentielle de modifier certains sélecteurs CSS du code généré par SPIP afin de bénéficier de TOUS les styles de Tiny Typo.
+- Accessoirement, il distribue aussi les styles de Tiny Typo, mais ce n’est pas le plus important (faire un plugin juste pour distribuer du CSS… bof).
 
--> Mode d’emploi de Tiny Typo pour SPIP :
+Mode d’emploi préalable de Tiny Typo pour SPIP :
 https://contrib.spip.net/Installer-Tiny-Typo-dans-SPIP?var_mode=preview
 
 == TODO V1
-- attendre publication de la doc sur SPIP Contrib (pour linker ensuite) :
+- Internationaliser (quand ce sera stable)
+- Attendre publication de la doc sur SPIP Contrib (pour linker ensuite) :
 https://contrib.spip.net/Plugin-Tiny-Typo?var_mode=preview
 
 == TODO V2
@@ -19,17 +21,16 @@ Comment attendu par beaucoup, la V2 pourrait insérer les styles automatiquement
 - Ne pas insérer tinytypo.css si elle l’est déjà ? pour éviter les doubles appels dans le head ?
 - Idem si Tiny Typo est déjà utilisée, en plusieurs feuilles (comme dans SPIP3.1>) ? Comment deviner ?
 - D’ailleurs faut-il appeler tinytypo.css ou chacune des feuilles qui la composent ?
-- Ça devient un peu compliqué, là, non ? Tout ça pour du CSS qu’il suffit de déposer dans son dossier squelettes…
-- Bref, faut-il vraiment faire cette V2 ?
+- Distribuer AUSSI les feuilles modulaires de Tiny Typo.
+
+C’est un peu compliqué, là, non ? Tout ça pour du CSS qu’il suffit de déposer dans son dossier squelettes… Bref, faut-il vraiment faire cette V2 ?
 
 == TODO V3
-Insérer les styles n’a pas beaucoup d’intérêt. Les rendre paramétrables est BEAUCOUP plus intéressant pour le spipmestre.
+Insérer les styles n’a pas beaucoup d’intérêt. Les rendre paramétrables est BEAUCOUP plus intéressant pour le spipmestre :)
 
 - Permettre de modifier les variables de Tiny Typo MAIS PAS via feuille de style calculée, parce que c’est in-maintenable.
-- Personnaliser via LESS ? Permettre d’éditer le fichier var.less : via panneau de config + seulement si le plugin LESS est activé
+- Personnaliser via LESS ? C’est-à-dire permettre d’éditer le fichier var.less : via panneau de config + seulement si le plugin LESS est activé (env. 2500 sites)
 - Afficher l’input de saisie de la couleur en valeur hexadécimale en plus ou à la place du colorpicker, parce que c’est quand même plus pratique pour copier-coller
 voir : http://digitalmofo.com/a-look-into-html5-forms-input-types-date-color-and-range/
-
-- Internationaliser (quand ce sera stable)
 
 /* end */
