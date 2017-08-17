@@ -3,15 +3,15 @@
 	<prefix>tinytypo</prefix>
 	<icon>prive/img/tinytypo.png</icon>
 
-	<version>3.0.0</version>
-	<etat>experimental</etat>
+	<version>2.0.0</version>
+	<etat>dev</etat>
 	<categorie>outil</categorie>
 
 	<slogan>Tiny Typo pour SPIP</slogan>
 	<description>
-		ATTENTION : ceci est une version très expérimentale ! et bancale… qui n'aboutira peut-être pas.
+		ATTENTION : ceci est une version en développement, inachevée !
 		Base CSS pour le contenu éditorial web, pour des pages web lisibles.
-		Ce plugin porte Tiny Typo v1.3.4 dans SPIP : il permet de tirer profit de TOUS les styles de Tiny Typo dans SPIP et de les paramètrer pour les ajuster à votre goût.
+		Ce plugin porte Tiny Typo v1.3.4 dans SPIP et permet de tirer profit de TOUS les styles de Tiny Typo dans SPIP.
 	</description>
 	<lien>https://zone.spip.org/trac/spip-zone/browser/_plugins_/tinytypo/trunk/todo.txt</lien>
 	<auteur>&copy; 2010-2017 MIT [tetue->http://spip.tetue.net]</auteur>

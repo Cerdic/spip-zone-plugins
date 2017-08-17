@@ -14,16 +14,15 @@ https://contrib.spip.net/Installer-Tiny-Typo-dans-SPIP?var_mode=preview
 https://contrib.spip.net/Plugin-Tiny-Typo?var_mode=preview
 
 == TODO V2
-Comment attendu par beaucoup, la V2 pourrait insérer les styles automatiquement, pour toujours bénéficier de la dernière version de Tiny Typo. Mais ce n’est pas génial de distribuer des styles non paramétrables, donc on ne l’impose pas.
+Comme attendu par beaucoup, la V2 pourrait insérer les styles automatiquement, pour toujours bénéficier de la dernière version de Tiny Typo. Mais ce n’est pas génial de distribuer des styles non paramétrables, donc on ne l’impose pas. Le problème à résoudre est : comment faire pour ne pas injecter le CSS de Tiny Typo en double (voire en triple) ?
 
 - Insérer la feuille tinytypo (par défaut ?) MAIS permettre de la désactiver (ou plutôt l’inverse ?) => prévoir panneau de conf pour activer/désactiver
 - Si le plugin Daisy est actif, ne pas insérer la feuille tinytypo.css
-- Ne pas insérer tinytypo.css si elle l’est déjà ? pour éviter les doubles appels dans le head ?
-- Idem si Tiny Typo est déjà utilisée, en plusieurs feuilles (comme dans SPIP3.1>) ? Comment deviner ?
+- Ne pas insérer tinytypo.css si elle l’est déjà par ailleurs, pour éviter les doubles appels dans le head
+- Idem si Tiny Typo est déjà utilisée, en plusieurs feuilles (comme dans SPIP3.1+). Mais comment deviner ?
 - D’ailleurs faut-il appeler tinytypo.css ou chacune des feuilles qui la composent ?
-- Distribuer AUSSI les feuilles modulaires de Tiny Typo.
 
-C’est un peu compliqué, là, non ? Tout ça pour du CSS qu’il suffit de déposer dans son dossier squelettes… Bref, faut-il vraiment faire cette V2 ?
+C’est un peu compliqué, non ? Tout ça pour du CSS qu’il suffit de déposer dans son dossier squelettes… A-t-on vraiment besoin de cette V2 ?
 
 == TODO V3
 Insérer les styles n’a pas beaucoup d’intérêt. Les rendre paramétrables est BEAUCOUP plus intéressant pour le spipmestre :)

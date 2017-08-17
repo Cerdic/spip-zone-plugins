@@ -6,6 +6,9 @@
 .formulaire_spip li .explication { padding: 0; font-size: .9em !important; line-height: 1; color: #666; }
 </style>
 
+[(#REM) TODO ]
+<p>Insérer automatiquement les styles de Tiny Typo : (x) oui ( ) non</p>
+<p>Si oui, afficher ce panneau de personnalisation :</p>
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -82,4 +85,5 @@
 		<p class="boutons"><input type="submit" name="enregistrer" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div></form>
 </div>
-<p class="reponse_formulaire error"><strong>Pensez &agrave; vider les caches</strong> (du navigateur et de SPIP) apr&egrave;s chaque modification&nbsp;!</p>
+<p class="reponse_formulaire notice"><strong>Pensez &agrave; vider les caches</strong> (du navigateur et de SPIP) apr&egrave;s chaque modification&nbsp;!</p>
+<p>Pour toute autre personnalisation, compl&eacute;tez en CSS, dans votre feuille de style. Pour finir, n'oubliez pas d'activer la compression des fichiers CSS.</p>

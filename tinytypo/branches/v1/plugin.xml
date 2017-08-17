@@ -1,20 +1,19 @@
 <plugin>
 	<nom>Tiny Typo</nom>
 	<prefix>tinytypo</prefix>
-	<categorie>outil</categorie>
-	<version>1.5.0</version>
 	<icon>icon/tinytypo.png</icon>
+
+	<version>1.5.0</version>
 	<etat>stable</etat>
-	<lien>http://tinytypo.tetue.net</lien>
+	<categorie>outil</categorie>
 
 	<slogan>Tiny Typo pour SPIP</slogan>
-	<auteur>&copy; 2010-2017 MIT [tetue->http://spip.tetue.net]</auteur>
-	
 	<description>
 		Base CSS pour le contenu éditorial web, pour des pages web lisibles.
 		Ce plugin porte Tiny Typo v1.3.4 dans SPIP : il met le CSS à disposition et permet de tirer profit de TOUS les styles de Tiny Typo dans SPIP.
 	</description>
-
+	<lien>http://tinytypo.tetue.net</lien>
+	<auteur>&copy; 2010-2017 MIT [tetue->http://spip.tetue.net]</auteur>
 
 	<options>tinytypo_options.php</options>
 
