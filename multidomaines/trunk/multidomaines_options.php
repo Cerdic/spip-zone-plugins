@@ -1,11 +1,18 @@
 <?php
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/config');
-$options = lire_config('multidomaines');
-$GLOBALS['multidomaine_id_secteur_courant'] = NULL;
-if (!defined('_MULTIDOMAINE_RUBRIQUE')) define('_MULTIDOMAINE_RUBRIQUE', '0');
-if (!defined('_SECTEUR_URL')) define('_SECTEUR_URL', '0');
+$options                                    = lire_config('multidomaines');
+$GLOBALS['multidomaine_id_secteur_courant'] = null;
+$GLOBALS["multidomaine_site_principal"]     = true;
+if (!defined('_MULTIDOMAINE_RUBRIQUE')) {
+	define('_MULTIDOMAINE_RUBRIQUE', '0');
+}
+if (!defined('_SECTEUR_URL')) {
+	define('_SECTEUR_URL', '0');
+}
 
 if (is_array($options)) {
 	foreach ($options as $cle => $valeur) {
@@ -13,20 +20,21 @@ if (is_array($options)) {
 			if (empty($valeur)) {
 				$valeur = $options['editer_url'];
 			}
-			list(,,$id_secteur) = explode('_', $cle);
+			list(, , $id_secteur) = explode('_', $cle);
 			$partie_url = parse_url($valeur);
 			if (!isset($partie_url['port'])) {
-				$partie_url['port'] = $partie_url['scheme'] == 'https'? 443:80;
+				$partie_url['port'] = $partie_url['scheme'] == 'https' ? 443 : 80;
 			}
 			if ($partie_url['host'] == $_SERVER['HTTP_HOST'] AND $partie_url['port'] == $_SERVER['SERVER_PORT']) {
-				if ($options['squelette_' .$id_secteur]) {
+				if ($options['squelette_' . $id_secteur]) {
 					$GLOBALS['multidomaine_id_secteur_courant'] = $id_secteur;
-					$GLOBALS['dossier_squelettes'] = trim($GLOBALS['dossier_squelettes'] .':'. $options['squelette_' .$id_secteur], ':');
+					$GLOBALS['dossier_squelettes']              = trim($GLOBALS['dossier_squelettes'] . ':' . $options['squelette_' . $id_secteur], ':');
+					$GLOBALS["multidomaine_site_principal"]     = false;
 				}
 			}
 		}
 	}
-	if(!$GLOBALS['dossier_squelettes']) {
+	if (!$GLOBALS['dossier_squelettes']) {
 		multidomaines_squelettespardefaut_dist();
 	}
 }
@@ -37,22 +45,22 @@ function multidomaines_squelettespardefaut_dist() {
 		return multidomaines_squelettespardefaut();
 	}
 	$dossiers_port = '';
-	$dossiers = '';
+	$dossiers      = '';
 
-	if (strpos($_SERVER['HTTP_HOST'], '.') === FALSE) {
-	  // ex: localhost
-	  $dossiers = ':' . lire_config('multidomaines/squelette') . '/' . $_SERVER['HTTP_HOST'];
-	}
-	else {
-	  $parties_domaine = explode('.', $_SERVER['HTTP_HOST']);
-	  $extention = array_pop($parties_domaine);
-	  do {
-		$dossiers_port .=  ':' . lire_config('multidomaines/squelette') . '/' . implode('.', $parties_domaine) . '.' . $extention . '.' . $_SERVER['SERVER_PORT'];
-		$dossiers_port .=  ':' . lire_config('multidomaines/squelette') . '/' . implode('.', $parties_domaine) . '.' . $_SERVER['SERVER_PORT'];
-		$dossiers .=  ':' . lire_config('multidomaines/squelette') . '/' . implode('.', $parties_domaine) . '.' . $extention;
-		$dossiers .=  ':' . lire_config('multidomaines/squelette') . '/' . implode('.', $parties_domaine);
-		array_shift($parties_domaine);
-	  } while (count($parties_domaine) > 0);
+	if (strpos($_SERVER['HTTP_HOST'], '.') === false) {
+		// ex: localhost
+		$dossiers = ':' . lire_config('multidomaines/squelette') . '/' . $_SERVER['HTTP_HOST'];
+	} else {
+		$parties_domaine = explode('.', $_SERVER['HTTP_HOST']);
+		$extention       = array_pop($parties_domaine);
+		do {
+			$base = ':' . lire_config('multidomaines/squelette') . '/' . implode('.', $parties_domaine);
+			$dossiers_port .= $base . '.' . $extention . '.' . $_SERVER['SERVER_PORT'];
+			$dossiers_port .= $base . '.' . $_SERVER['SERVER_PORT'];
+			$dossiers      .= $base . '.' . $extention;
+			$dossiers      .= $base;
+			array_shift($parties_domaine);
+		} while (count($parties_domaine) > 0);
 	}
 
 	$GLOBALS['dossier_squelettes'] = trim($GLOBALS['dossier_squelettes'] . $dossiers_port . $dossiers, ':');
