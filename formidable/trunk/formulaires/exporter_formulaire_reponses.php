@@ -34,8 +34,8 @@ function formulaires_exporter_formulaire_reponses_traiter($id_formulaire = 0) {
 	$statut_reponses = _request('statut_reponses');
 	// Normaliser la date
 	$verifier = charger_fonction('verifier', 'inc/');
-	$date_debut = _request('date_debut') ? $verifier(_request('date_debut'), 'date', array('normaliser' => 'datetime')) : false;
-	$date_fin = _request('date_fin') ? $verifier(_request('date_fin'), 'date', array('normaliser' => 'datetime')) : false;
+	$verifier(_request('date_debut'), 'date', array('normaliser' => 'datetime'), $date_debut);
+	$verifier(_request('date_fin'), 'date', array('normaliser' => 'datetime'), $date_fin);
 
 	if (_request('type_export') == 'csv') {
 		$ok = exporter_formulaires_reponses($id_formulaire, ',', $statut_reponses, $date_debut, $date_fin);
@@ -56,7 +56,7 @@ function formulaires_exporter_formulaire_reponses_traiter($id_formulaire = 0) {
  * @param integer $id_formulaire
  * @return unknown_type
  */
-function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_reponses = 'publie', $date_debut = false, $date_fin = false) {
+function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_reponses = 'publie', $date_debut = '', $date_fin = '') {
 	include_spip('inc/puce_statut');
 	// on ne fait des choses seulements si le formulaire existe et qu'il a des enregistrements
 	if ($id_formulaire > 0
@@ -65,8 +65,8 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 			'*',
 			'spip_formulaires_reponses',
 			'id_formulaire = ' . intval($id_formulaire) . ($statut_reponses == 'publie' ? ' and statut = "publie"' : '')
-			. ($date_debut ? ' and date >= "'. $date_debut. '"' : '')
-			. ($date_fin ? ' and date <= "'.$date_fin.'"' : '')
+			. (strlen($date_debut) > 0 ? ' and date >= "'. $date_debut. '"' : '')
+			. (strlen($date_fin) > 0 ? ' and date <= "'.$date_fin.'"' : '')
 		)) {
 		include_spip('inc/saisies');
 		include_spip('facteur_fonctions');

@@ -24,6 +24,14 @@ function traiter_email_dist($args, $retours) {
 	$destinataires = array();
 	$taille_fichiers = 0; //taille des fichiers en email
 	$fichiers_facteur = array(); // tableau qui stockera les fichiers à envoyer avec facteur
+	if (isset($options['exclure_champs_email']) && $options['exclure_champs_email']) {
+		$champs_a_exclure = explode(",", $options['exclure_champs_email']);
+		$champs = array_diff($champs, $champs_a_exclure);
+		foreach ($champs_a_exclure as $champ_a_exclure) {
+			$saisies = saisies_supprimer($saisies,$champ_a_exclure);
+		}
+	}
+
 	// On récupère les destinataires
 	if ($options['champ_destinataires']) {
 		$destinataires = _request($options['champ_destinataires']);
