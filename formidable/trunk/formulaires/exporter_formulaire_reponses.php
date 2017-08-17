@@ -19,17 +19,28 @@ function formulaires_exporter_formulaire_reponses_charger($id_formulaire = 0) {
 function formulaires_exporter_formulaire_reponses_verifier($id_formulaire = 0) {
 	$erreurs = array();
 
+	if (_request('date_debut') && _request('date_fin')) {
+		// Vérifions que la date debut soit < date de fin
+		if (strtotime(str_replace('/', '-', _request('date_debut'))) > strtotime(str_replace('/', '-', _request('date_fin')))) {
+			$erreurs['message_erreur'] = _T('formidable:exporter_formulaire_date_erreur');
+		}
+	}
+
 	return $erreurs;
 }
 
 function formulaires_exporter_formulaire_reponses_traiter($id_formulaire = 0) {
 	$retours         = array();
 	$statut_reponses = _request('statut_reponses');
+	// Normaliser la date
+	$verifier = charger_fonction('verifier', 'inc/');
+	$date_debut = _request('date_debut') ? $verifier(_request('date_debut'), 'date', array('normaliser' => 'datetime')) : false;
+	$date_fin = _request('date_fin') ? $verifier(_request('date_fin'), 'date', array('normaliser' => 'datetime')) : false;
 
 	if (_request('type_export') == 'csv') {
-		$ok = exporter_formulaires_reponses($id_formulaire, ',', $statut_reponses);
+		$ok = exporter_formulaires_reponses($id_formulaire, ',', $statut_reponses, $date_debut, $date_fin);
 	} elseif (_request('type_export') == 'xls') {
-		$ok = exporter_formulaires_reponses($id_formulaire, 'TAB', $statut_reponses);
+		$ok = exporter_formulaires_reponses($id_formulaire, 'TAB', $statut_reponses, $date_debut, $date_fin);
 	}
 
 	if (!$ok) {
@@ -45,7 +56,7 @@ function formulaires_exporter_formulaire_reponses_traiter($id_formulaire = 0) {
  * @param integer $id_formulaire
  * @return unknown_type
  */
-function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_reponses = 'publie') {
+function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_reponses = 'publie', $date_debut = false, $date_fin = false) {
 	include_spip('inc/puce_statut');
 	// on ne fait des choses seulements si le formulaire existe et qu'il a des enregistrements
 	if ($id_formulaire > 0
@@ -54,6 +65,8 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 			'*',
 			'spip_formulaires_reponses',
 			'id_formulaire = ' . intval($id_formulaire) . ($statut_reponses == 'publie' ? ' and statut = "publie"' : '')
+			. ($date_debut ? ' and date >= "'. $date_debut. '"' : '')
+			. ($date_fin ? ' and date <= "'.$date_fin.'"' : '')
 		)) {
 		include_spip('inc/saisies');
 		include_spip('facteur_fonctions');
