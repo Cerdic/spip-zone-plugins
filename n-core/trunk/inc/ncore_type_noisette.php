@@ -50,7 +50,7 @@ function ncore_type_noisette_charger($plugin, $dossier = 'noisettes/', $recharge
 	if ($fichiers = find_all_in_path($dossier, '.+[.]yaml$')) {
 		// On charge l'API de stockge de N-Core.
 		// Ce sont ces fonctions qui aiguillent ou pas vers une éventuelle fonction spécifique de stockage.
-		include_spip("ncoredata/ncore");
+		include_spip("ncore/ncore");
 
 		// Initialisation des tableaux de types de noisette.
 		$types_noisette_a_ajouter = $types_noisette_a_changer = $types_noisette_a_effacer = array();
@@ -229,7 +229,7 @@ function ncore_type_noisette_informer($plugin, $noisette, $information = '', $tr
 	if (!isset($description_noisette[$plugin][$noisette])) {
 		// On charge l'API de N-Core.
 		// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
-		include_spip("ncoredata/ncore");
+		include_spip("ncore/ncore");
 
 		// Lecture de toute la configuration de la noisette: les données retournées sont brutes.
 		$description = ncore_type_noisette_decrire($plugin, $noisette, $stockage);

@@ -37,7 +37,7 @@ function ncore_chercher_fonction($plugin, $fonction, $stockage = '') {
 
 	// Eviter la réentrance si on demande explicitement le stockage N-Core
 	if ($stockage != 'ncore') {
-		include_spip("ncoredata/${stockage}");
+		include_spip("ncore/${stockage}");
 		$fonction_trouvee = "${stockage}_${fonction}";
 		if (!function_exists($fonction_trouvee)) {
 			$fonction_trouvee = '';
