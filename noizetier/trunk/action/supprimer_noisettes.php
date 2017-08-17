@@ -127,6 +127,8 @@ function supprimer_noisettes($contexte, $identifiant, $bloc) {
 		$where[] = 'id_noisette=' . intval($identifiant['id']);
 		$invalideur = "id='noisette/{$identifiant['id']}'";
 	} else {
+		// On ne s'occupe que des noisettes du noizetier
+		$where[] = 'plugin=' . sql_quote('noizetier');
 		if ($identifiant['type']) {
 			// Suppression des noisettes d'un objet d'un type donnée
 			$where[] = 'objet=' . sql_quote($identifiant['type']);

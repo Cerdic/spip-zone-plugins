@@ -18,7 +18,7 @@
 	[(#BOITE_OUVRIR{#GET{infos_bloc/nom}, simple, titrem})]
 		[<p>(#GET{infos_bloc/description})</p>]
 		<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-bloc">
-		<BOUCLE_noisettes(NOIZETIER noizetier_noisettes){objet?}{id_objet?}{type=#ENV{page}|noizetier_page_type}{composition=#ENV{page}|noizetier_page_composition}{bloc=#ENV{bloc}}{par rang}>
+		<BOUCLE_noisettes(NOIZETIER noizetier_noisettes){plugin=noizetier}{objet?}{id_objet?}{type=#ENV{page}|noizetier_page_type}{composition=#ENV{page}|noizetier_page_composition}{bloc=#ENV{bloc}}{par rang}>
 			<li class="editer item noisette" id="noisette-#ID_NOISETTE">
 				<div>
 					<div class="resume">

@@ -138,7 +138,10 @@ function noizetier_boite_infos($flux){
 	$opt = array('objet' => $flux['args']['type'], 'id_objet' => intval($flux['args']['id']));
 	if (autoriser('configurerpage', 'noizetier', 0, '', $opt)) {
 		// On cherche le nombre de noisettes déjà configurées pour ce contenu.
-		$where = array('objet = ' . sql_quote($flux['args']['type']), 'id_objet = ' . intval($flux['args']['id']));
+		$where = array(
+			'plugin=' . sql_quote('noizetier'),
+			'objet = ' . sql_quote($flux['args']['type']),
+			'id_objet = ' . intval($flux['args']['id']));
 		$nbr_noisettes = sql_countsel('spip_noizetier', $where);
 		if (!$nbr_noisettes) {
 			$texte = _T('noizetier:noisettes_configurees_aucune');
@@ -292,8 +295,10 @@ function noizetier_affiche_milieu($flux) {
 	if ($exec == 'admin_plugin') {
 		include_spip('noizetier_fonctions');
 		noizetier_page_charger();
-		noizetier_noisette_charger();
+		include_spip('inc/ncore_type_noisette');
+		ncore_type_noisette_charger('noizetier', 'noisettes/');
 
+		// TODO : à revoir avec N-Core
 		include_spip('inc/flock');
 		supprimer_fichier(_CACHE_AJAX_NOISETTES);
 		supprimer_fichier(_CACHE_CONTEXTE_NOISETTES);

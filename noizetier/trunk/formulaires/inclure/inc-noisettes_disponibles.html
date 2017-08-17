@@ -1,4 +1,4 @@
-#SET{compteurs, #ENV{page, #OBJET}|noizetier_noisette_type_compter}
+#SET{compteurs, #ENV{page, #OBJET}|noizetier_type_noisette_compter}
 <BOUCLE_si_noisette(CONDITION) {si #GET{compteurs/total}}>
 	<BOUCLE_infos_page(NOIZETIER_PAGES) {page=#ENV{page, #OBJET}}>
 		[(#SET{type, #TYPE})]
@@ -13,7 +13,7 @@
 		<div id="noisettes-composition">
 			<h4><:noizetier:noisettes_composition{composition=#GET{nom_composition}}:></h4>
 			<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
-		<BOUCLE_noisettes_composition(NOIZETIER_NOISETTES){type=#GET{type}}{composition=#GET{composition}}{par noisette}>
+		<BOUCLE_noisettes_composition(NOIZETIER_NOISETTES){plugin=noizetier}{type=#GET{type}}{composition=#GET{composition}}{par noisette}>
 				<li class="editer item noisette">
 					<INCLURE{fond=formulaires/inclure/inc-input_noisette,
 						noisette,
@@ -31,7 +31,7 @@
 		<div id="noisettes-page">
 			<h4><:noizetier:noisettes_page{type=#GET{nom_type}}:></h4>
 			<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
-	<BOUCLE_noisettes_type(NOIZETIER_NOISETTES){type=#GET{type}}{composition=''}{par noisette}>
+	<BOUCLE_noisettes_type(NOIZETIER_NOISETTES){plugin=noizetier}{type=#GET{type}}{composition=''}{par noisette}>
 				<li class="editer item noisette">
 					<INCLURE{fond=formulaires/inclure/inc-input_noisette,
 						noisette,
@@ -48,7 +48,7 @@
 		<div id="noisettes-communes">
 			<h4><:noizetier:noisettes_toutes_pages:></h4>
 			<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
-	<BOUCLE_noisettes_communes(NOIZETIER_NOISETTES){type=''}{composition=''}{par noisette}>
+	<BOUCLE_noisettes_communes(NOIZETIER_NOISETTES){plugin=noizetier}{type=''}{composition=''}{par noisette}>
 				<li class="editer item noisette">
 					<INCLURE{fond=formulaires/inclure/inc-input_noisette,
 						noisette,

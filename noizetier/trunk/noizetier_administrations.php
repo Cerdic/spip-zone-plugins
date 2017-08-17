@@ -90,11 +90,11 @@ function noizetier_vider_tables($nom_meta_version_base) {
 	effacer_meta('noizetier');
 
 	// Effacer les fichiers du cache créés par le noizetier
-	include_spip('inc/flock');
-	include_spip('noizetier_fonctions');
-	supprimer_fichier(_CACHE_AJAX_NOISETTES);
-	supprimer_fichier(_CACHE_CONTEXTE_NOISETTES);
-	supprimer_fichier(_CACHE_INCLUSIONS_NOISETTES);
+//	include_spip('inc/flock');
+//	include_spip('noizetier_fonctions');
+//	supprimer_fichier(_CACHE_AJAX_NOISETTES);
+//	supprimer_fichier(_CACHE_CONTEXTE_NOISETTES);
+//	supprimer_fichier(_CACHE_INCLUSIONS_NOISETTES);
 }
 
 /**
@@ -102,13 +102,14 @@ function noizetier_vider_tables($nom_meta_version_base) {
  *
  * Les actions effectuées sont les suivantes:
  * - ajout de la tables `spip_noisettes_pages` pour stocker l'ensemble des pages et compositions
- * explicites et virtuelles.
+ *   explicites et virtuelles.
  * - ajout du champ `balise` à la table `spip_noizetier` pour déterminer si le noiZetier doit inclure
- * la noisette concernée dans un div englobant.
+ *   la noisette concernée dans un div englobant et ajout du champ plugin pour étendre le stockage au-delà
+ *   du noiZetier.
  * - mise à jour de la taille des champs type, composition et objet dans la table `spip_noizetier`
  * - ajout d'une liste de variables de configuration initialisées
  * - transfert des compositions virtuelles de la meta `noizetier_compositions` dans la nouvelle
- * table `spip_noisettes_pages` et suppression définitive de la meta.
+ *   table `spip_noisettes_pages` et suppression définitive de la meta.
  *
  * @param array $config_defaut
  * 		Tableau des variables de configuration intialisées.
@@ -126,6 +127,7 @@ function maj_060($config_defaut) {
 	// -- Ajout de la colonne 'balise' qui indique pour chaque noisette si le noiZetier doit l'inclure dans un div
 	//    englobant ou pas. Le champ prend les valeurs 'on', '' ou 'defaut' qui indique qu'il faut prendre
 	//    en compte la valeur configurée par défaut (configuration du noizetier).
+	sql_alter("TABLE spip_noisettes ADD plugin varchar(30) DEFAULT '' NOT NULL AFTER id_noisette");
 	sql_alter("TABLE spip_noisettes ADD balise varchar(6) DEFAULT 'defaut' NOT NULL AFTER parametres");
 	sql_alter("TABLE spip_noisettes ADD maj timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL");
 	// -- Suppression des index pour des colonnes dont on va modifier la taille ou le type
@@ -142,13 +144,16 @@ function maj_060($config_defaut) {
 	sql_alter("TABLE spip_noisettes MODIFY balise varchar(25) NOT NULL");
 	// -- Mise à jour de la valeur par défaut du rang
 	sql_alter("TABLE spip_noisettes MODIFY rang smallint DEFAULT 1 NOT NULL");
-	// -- Création des index détruits précédemment
+	// -- Création des index détruits précédemment et du nouvel index plugin
 	sql_alter("TABLE spip_noisettes ADD INDEX type (type)");
 	sql_alter("TABLE spip_noisettes ADD INDEX composition (composition)");
 	sql_alter("TABLE spip_noisettes ADD INDEX bloc (bloc)");
 	sql_alter("TABLE spip_noisettes ADD INDEX noisette (noisette)");
+	sql_alter("TABLE spip_noisettes ADD INDEX plugin (plugin)");
 	// -- Renommage de la table
 	sql_alter("TABLE spip_noisettes RENAME spip_noizetier");
+	// -- Remplissage de la nouvelle colonne plugin avec la valeur 'noizetier'.
+	// TODO : A compléter
 
 	// Mise à jour de la configuration du plugin
 	include_spip('inc/config');
@@ -158,8 +163,12 @@ function maj_060($config_defaut) {
 	}
 	ecrire_config('noizetier', $config_defaut);
 
-	// Suppression du cache des descriptions qui est devenu inutile
+	// Suppression des caches devenus inutiles
+	include_spip('inc/flock');
 	supprimer_fichier(_DIR_CACHE . 'noisettes_descriptions.php');
+//	supprimer_fichier(_DIR_CACHE . 'noisettes_ajax.php');
+//	supprimer_fichier(_DIR_CACHE . 'noisettes_contextes.php');
+//	supprimer_fichier(_DIR_CACHE . 'noisettes_inclusions.php');
 
 	// Insertion de la liste des compositions virtuelles dans la table 'spip_noisettes_pages'
 	$compositions = lire_config('noizetier_compositions', array());

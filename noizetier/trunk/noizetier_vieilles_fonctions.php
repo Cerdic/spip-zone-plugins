@@ -9,46 +9,296 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 // -------------------------------------------------------------------
 // ------------------------- API NOISETTES ---------------------------
 // -------------------------------------------------------------------
+function noizetier_noisette_charger($recharger = false) {
+
+	// Retour de la fonction
+	$retour = false;
+
+	// Initialiser le contexte de rechargement
+	// TODO : en attente de voir si on rajoute un var_mode=vider_noizetier
+	$forcer_chargement = $recharger;
+
+	// Initaliser la table et le where des noisettes.
+	$from ='spip_noizetier_noisettes';
+
+	// On recherche les noisettes directement par leur fichier YAML de configuration car il est
+	// obligatoire contrairement à une page.
+	if ($fichiers = find_all_in_path('noisettes/', '.+[.]yaml$')) {
+		$noisettes_nouvelles = $noisettes_modifiees = $noisettes_obsoletes = array();
+		// Récupération des signatures md5 des noisettes déjà enregistrées.
+		// Si on force le rechargement il est inutile de gérer les signatures et les noisettes modifiées ou obsolètes.
+		$signatures = array();
+		if (!$forcer_chargement) {
+			$select = array('noisette', 'signature');
+			if ($signatures = sql_allfetsel($select, $from)) {
+				$signatures = array_column($signatures, 'signature', 'noisette');
+			}
+			// On initialise la liste des noisettes à supprimer avec l'ensemble des noisettes en base de données.
+			$noisettes_obsoletes = $signatures ? array_keys($signatures) : array();
+		}
+
+		include_spip('inc/noizetier_phraser');
+		foreach ($fichiers as $_squelette => $_chemin) {
+			$noisette = basename($_squelette, '.yaml');
+			// On passe le md5 de la page si il existe sinon la chaine vide. Cela permet de déterminer
+			// si on doit ajouter la page ou la mettre à jour.
+			// Si le md5 est le même et qu'il n'est donc pas utile de recharger la page, la configuration
+			// retournée est vide.
+			$options['md5'] = isset($signatures[$noisette]) ? $signatures[$noisette] : '';
+			$options['recharger'] = $forcer_chargement;
+			$options['yaml'] = $_chemin;
+			if ($configuration = phraser_noisette($noisette, $options)) {
+				if (empty($configuration['identique'])) {
+					// La noisette a été chargée (nouvelle) ou rechargée (modifiée).
+					// Néanmoins, on n'inclue cette noisette que si les plugins qu'elle nécessite explicitement dans son
+					// fichier de configuration sont bien tous activés.
+					// Rappel: si une noisette est incluse dans un plugin non actif elle ne sera pas détectée
+					//         lors du find_all_in_path() puisque le plugin n'est pas dans le path SPIP.
+					//         Ce n'est pas ce cas qui est traité ici.
+					$noisette_a_garder = true;
+					$necessite = unserialize($configuration['necessite']);
+					if (!empty($necessite)) {
+						foreach ($necessite as $plugin) {
+							if (!defined('_DIR_PLUGIN_'.strtoupper($plugin))) {
+								$noisette_a_garder = false;
+								break;
+							}
+						}
+					}
+
+					// Si la noisette est à garder on détermine si elle est nouvelle ou modifiée.
+					// En mode rechargement forcé toute noisette est considérée comme nouvelle.
+					// Sinon, la noisette doit être retirée de la base car un plugin qu'elle nécessite a été désactivée:
+					// => il suffit pour cela de la laisser dans la liste des noisettes obsolètes.
+					if ($noisette_a_garder) {
+						if (!$options['md5'] or $forcer_chargement) {
+							// La noisette est soit nouvelle soit on est en mode rechargement forcé:
+							// => il faut la rajouter dans la table.
+							$noisettes_nouvelles[] = $configuration;
+						} else {
+							// La configuration stockée dans la table a été modifiée et le mode ne force pas le rechargement:
+							// => il faut mettre à jour la noisette dans la table.
+							$noisettes_modifiees[] = $configuration;
+							// => il faut donc la supprimer de la liste des noisettes obsolètes
+							$noisettes_obsoletes = array_diff($noisettes_obsoletes, array($noisette));
+						}
+					}
+				} else {
+					// La noisette n'a pas changée et n'a donc pas été réchargée:
+					// => Il faut donc juste indiquer qu'elle n'est pas obsolète.
+					$noisettes_obsoletes = array_diff($noisettes_obsoletes, array($noisette));
+				}
+			} else {
+				// Il y a eu une erreur sur lors du rechargement de la noisette.
+				// => il faut donc ne rien faire pour laisser la noisette dans les obsolètes
+			}
+		}
+
+		// Mise à jour de la table des pages
+		// -- Suppression des pages obsolètes ou de toute les pages non virtuelles si on est en mode
+		//    rechargement forcé.
+		if (sql_preferer_transaction()) {
+			sql_demarrer_transaction();
+		}
+		if ($noisettes_obsoletes) {
+			sql_delete($from, sql_in('noisette', $noisettes_obsoletes));
+		} elseif ($forcer_chargement) {
+			sql_delete($from);
+		}
+		// -- Update des pages modifiées
+		if ($noisettes_modifiees) {
+			sql_replace_multi($from, $noisettes_modifiees);
+		}
+		// -- Insertion des nouvelles pages
+		if ($noisettes_nouvelles) {
+			sql_insertq_multi($from, $noisettes_nouvelles);
+		}
+		if (sql_preferer_transaction()) {
+			sql_terminer_transaction();
+		}
+
+		$retour = true;
+	}
+
+	return $retour;
+}
+
+
+/**
+ * Retourne la configuration de la noisette demandée.
+ * La configuration est stockée en base de données, certains champs sont recalculés avant d'être fournis.
+ *
+ * @package SPIP\NOIZETIER\API\NOISETTE
+ * @api
+ * @filtre
+ *
+ * @param string	$noisette
+ * 		Identifiant de la $noisette.
+ * @param boolean	$traitement_typo
+ *      Indique si les données textuelles doivent être retournées brutes ou si elles doivent être traitées
+ *      en utilisant la fonction _T_ou_typo.
+ * 		Les champs sérialisés sont toujours désérialisés.
+ *
+ * @return array
+ */
+function noizetier_noisette_informer($noisette, $traitement_typo = true) {
+
+	static $description_noisette = array();
+
+	if (!isset($description_noisette[$traitement_typo][$noisette])) {
+		// Chargement de toute la configuration de la noisette en base de données.
+		$description = sql_fetsel('*', 'spip_noizetier_noisettes', array('noisette=' . sql_quote($noisette)));
+
+		// Sauvegarde de la description de la page pour une consultation ultérieure dans le même hit.
+		if ($description) {
+			// Traitements des champs textuels
+			if ($traitement_typo) {
+				$description['nom'] = _T_ou_typo($description['nom']);
+				if (isset($description['description'])) {
+					$description['description'] = _T_ou_typo($description['description']);
+				}
+			}
+			// Traitements des champs tableaux sérialisés
+			$description['contexte'] = unserialize($description['contexte']);
+			$description['necessite'] = unserialize($description['necessite']);
+			$description['parametres'] = unserialize($description['parametres']);
+			// Stockage de la description
+			$description_noisette[$traitement_typo][$noisette] = $description;
+		} else {
+			$description_noisette[$traitement_typo][$noisette] = array();
+		}
+	}
+
+	return $description_noisette[$traitement_typo][$noisette];
+}
+
+
+function noizetier_noisette_ajax($noisette) {
+	static $est_ajax = array();
+
+	if (!isset($est_ajax[$noisette])) {
+		// On détermine l'existence et le contenu du cache.
+		if (lire_fichier_securise(_CACHE_AJAX_NOISETTES, $contenu)) {
+			$est_ajax = unserialize($contenu);
+		}
+
+		// On doit recalculer le cache.
+		if (!$est_ajax
+		or (_request('var_mode') == 'recalcul')
+		or (defined('_NO_CACHE') and (_NO_CACHE != 0))) {
+			// On détermine la valeur par défaut de l'ajax des noisettes
+			include_spip('inc/config');
+			$defaut_ajax = lire_config('noizetier/ajax_noisette') == 'on' ? true : false;
+
+			// On repertorie toutes les noisettes disponibles et on compare
+			// avec la valeur par défaut configurée pour le noiZetier.
+			if ($noisettes = sql_allfetsel('noisette, ajax', 'spip_noizetier_noisettes')) {
+				$noisettes = array_column($noisettes, 'ajax', 'noisette');
+				foreach ($noisettes as $_noisette => $_ajax) {
+					$est_ajax[$_noisette] = ($_ajax == 'defaut')
+						? $defaut_ajax
+						: ($_ajax == 'non' ? false : true);
+				}
+			}
+
+			// On vérifie que la noisette demandée est bien dans la liste.
+			// Si non, on la rajoute en utilisant la valeur ajax par défaut afin de toujours renvoyer
+			// quelque chose.
+			if (!isset($est_ajax[$noisette])) {
+				$est_ajax[$noisette] = $defaut_ajax;
+			}
+
+			// On met à jour in fine le cache
+			if ($est_ajax) {
+				ecrire_fichier_securise(_CACHE_AJAX_NOISETTES, serialize($est_ajax));
+			}
+		}
+	}
+
+	return $est_ajax[$noisette];
+}
+
+function noizetier_noisette_dynamique($noisette) {
+	static $est_dynamique = array();
+
+	if (!isset($est_dynamique[$noisette])) {
+		// On détermine l'existence et le contenu du cache.
+		if (lire_fichier_securise(_CACHE_INCLUSIONS_NOISETTES, $contenu)) {
+			$est_dynamique = unserialize($contenu);
+		}
+
+		// On doit recalculer le cache.
+		if (!$est_dynamique
+		or (_request('var_mode') == 'recalcul')
+		or (defined('_NO_CACHE') and (_NO_CACHE != 0))) {
+			// On repertorie toutes les types de noisettes disponibles et on compare la valeur
+			// du champ inclusion.
+			if ($noisettes = sql_allfetsel('noisette, inclusion', 'spip_noizetier_noisettes')) {
+				$noisettes = array_column($noisettes, 'inclusion', 'noisette');
+				foreach ($noisettes as $_noisette => $_inclusion) {
+					$est_dynamique[$_noisette] = ($_inclusion == 'dynamique') ? true : false;
+				}
+			}
+
+			// On vérifie que la noisette demandée est bien dans la liste.
+			// Si non, on la rajoute en utilisant en positionnant l'inclusion dynamique à false.
+			if (!isset($est_dynamique[$noisette])) {
+				$est_dynamique[$noisette] = false;
+			}
+
+			// On met à jour in fine le cache
+			if ($est_dynamique) {
+				ecrire_fichier_securise(_CACHE_INCLUSIONS_NOISETTES, serialize($est_dynamique));
+			}
+		}
+	}
+
+	return $est_dynamique[$noisette];
+}
+
+
+function noizetier_noisette_contexte($noisette) {
+	static $contexte = array();
+
+	if (!isset($contexte[$noisette])) {
+		// On détermine l'existence et le contenu du cache.
+		if (lire_fichier_securise(_CACHE_CONTEXTE_NOISETTES, $contenu)) {
+			$contexte = unserialize($contenu);
+		}
+
+		// On doit recalculer le cache.
+		if (!$contexte
+		or (_request('var_mode') == 'recalcul')
+		or (defined('_NO_CACHE') and (_NO_CACHE != 0))) {
+			// On repertorie toutes les types de noisettes disponibles et on compare la valeur
+			// du champ inclusion.
+			if ($noisettes = sql_allfetsel('noisette, contexte', 'spip_noizetier_noisettes')) {
+				$noisettes = array_column($noisettes, 'contexte', 'noisette');
+				$contexte = array_map('unserialize', $noisettes);
+			}
+
+			// On vérifie que la noisette demandée est bien dans la liste.
+			// Si non, on la rajoute en utilisant en positionnant le contexte à tableau vide.
+			if (!isset($contexte[$noisette])) {
+				$contexte[$noisette] = array();
+			}
+
+			// On met à jour in fine le cache
+			if ($contexte) {
+				ecrire_fichier_securise(_CACHE_CONTEXTE_NOISETTES, serialize($contexte));
+			}
+		}
+	}
+
+	return $contexte[$noisette];
+}
+
 
 
 // API à traiter
 // -------------
 
 
-/**
- * Retourne les elements du contexte uniquement
- * utiles a la noisette demande.
- *
- * @param
- *
- * @return
- **/
-function noizetier_choisir_contexte($noisette, $contexte_entrant, $id_noisette) {
-	$contexte_noisette = array_flip(noizetier_noisette_contexte($noisette));
-
-	// On transmet toujours l'id_noisette et les variables se terminant par _$id_noisette (utilisees par exemple par Aveline pour la pagination)
-	$contexte_min = array('id_noisette' => $id_noisette);
-
-	if (isset($contexte_noisette['env'])) {
-		return array_merge($contexte_entrant, $contexte_min);
-	}
-
-	$l = -1 * (strlen($id_noisette) + 1);
-	foreach ($contexte_entrant as $variable => $valeur) {
-		if (substr($variable, $l) == '_'.$id_noisette) {
-			$contexte_min[$variable] = $valeur;
-		}
-	}
-
-	if (isset($contexte_noisette['aucun'])) {
-		return $contexte_min;
-	}
-	if ($contexte_noisette) {
-		return array_merge(array_intersect_key($contexte_entrant, $contexte_noisette), $contexte_min);
-	}
-
-	return $contexte_entrant;
-}
 
 /**
  * Retourne le tableau des noisettes et des compositions du noizetier pour les exports.
@@ -314,6 +564,11 @@ function noizetier_lister_blocs_avec_noisettes_objet($objet, $id_objet) {
 }
 
 
+/**
+ * @param $noisette
+ *
+ * @return mixed
+ */
 function noizetier_charger_contexte_noisette($noisette) {
 	static $contexte_noisettes = null;
 

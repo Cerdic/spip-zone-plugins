@@ -95,6 +95,7 @@ function noizetier_declarer_tables_principales($tables_principales) {
 
 	// Table spip_noizetier_noisettes
 	$types_noisettes = array(
+		'plugin'         => "varchar(30) DEFAULT '' NOT NULL",
 		'noisette'       => "varchar(255) DEFAULT '' NOT NULL",
 		'type'           => "varchar(127) DEFAULT '' NOT NULL",
 		'composition'    => "varchar(127) DEFAULT '' NOT NULL",
@@ -111,7 +112,7 @@ function noizetier_declarer_tables_principales($tables_principales) {
 	);
 
 	$types_noisettes_cles = array(
-		'PRIMARY KEY'    => 'noisette',
+		'PRIMARY KEY'    => 'plugin, noisette',
 		'KEY type'       => 'type',
 		'KEY composition'    => 'composition',
 		'KEY ajax'       => 'ajax',
@@ -126,6 +127,7 @@ function noizetier_declarer_tables_principales($tables_principales) {
 	// Table spip_noizetier
 	$noizetier = array(
 		'id_noisette' => 'bigint(21) NOT NULL',
+		'plugin'      => "varchar(30) DEFAULT '' NOT NULL",
 		'rang'        => "smallint DEFAULT 1 NOT NULL",
 		'type'        => "varchar(127) DEFAULT '' NOT NULL",
 		'composition' => "varchar(127) DEFAULT '' NOT NULL",
@@ -140,6 +142,7 @@ function noizetier_declarer_tables_principales($tables_principales) {
 
 	$noizetier_cles = array(
 		'PRIMARY KEY'     => 'id_noisette',
+		'KEY plugin'      => 'plugin',
 		'KEY type'        => 'type',
 		'KEY composition' => 'composition',
 		'KEY bloc'        => 'bloc',

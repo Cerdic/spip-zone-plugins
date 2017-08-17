@@ -22,7 +22,10 @@ function formulaires_editer_noisette_charger_dist($id_noisette, $redirect = '') 
 			't1.css as css',
 			't2.parametres as champs');
 		$from = array('spip_noizetier as t1', 'spip_noizetier_noisettes as t2');
-		$where = array('t1.id_noisette=' . $valeurs['id_noisette'], 't1.noisette=t2.noisette');
+		$where = array(
+			't1.plugin=' . sql_quote('noizetier'),
+			't1.id_noisette=' . $valeurs['id_noisette'],
+			't1.noisette=t2.noisette');
 		$noisette = sql_fetsel($select, $from, $where);
 		if ($noisette) {
 			// Type de la noisette
@@ -68,10 +71,15 @@ function formulaires_editer_noisette_verifier_dist($id_noisette, $redirect = '')
 	$erreurs = array();
 
 	// Vérifier les champs correspondant aux paramètres spécifiques de ce type de noisette
-	include_spip('noizetier_fonctions');
-	$configuration = noizetier_noisette_informer(_request('noisette'), false);
-	if ($configuration['parametres']) {
-		$erreurs = saisies_verifier($configuration['parametres'], false);
+	include_spip('inc/ncore_type_noisette');
+	$champs = ncore_type_noisette_informer(
+		'noizetier',
+		 _request('noisette'),
+		 'parametres',
+		 false);
+	if ($champs) {
+		include_spip('inc/saisies');
+		$erreurs = saisies_verifier($champs, false);
 	}
 
 	// TODO : rajouter la vérification des css
@@ -86,11 +94,16 @@ function formulaires_editer_noisette_traiter_dist($id_noisette, $redirect = '') 
 
 	if (autoriser( 'editernoisette', 'noizetier', $id_noisette)) {
 		// On constitue le tableau des valeurs des paramètres spécifiques de la noisette
-		include_spip('noizetier_fonctions');
-		$configuration = noizetier_noisette_informer(_request('noisette'), false);
+		include_spip('inc/ncore_type_noisette');
+		$champs = ncore_type_noisette_informer(
+			'noizetier',
+			 _request('noisette'),
+			 'parametres',
+			 false);
 		$parametres = array();
-		if ($configuration['parametres']) {
-			foreach (saisies_lister_champs($configuration['parametres'], false) as $_champ) {
+		if ($champs) {
+			include_spip('inc/saisies_lister');
+			foreach (saisies_lister_champs($champs, false) as $_champ) {
 				$parametres[$_champ] = _request($_champ);
 			}
 		}
