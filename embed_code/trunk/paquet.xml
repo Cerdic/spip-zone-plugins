@@ -1,7 +1,7 @@
 <paquet
 	prefix="embed_code"
 	categorie="multimedia"
-	version="0.4.4"
+	version="0.4.5"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/embed_code.png"
