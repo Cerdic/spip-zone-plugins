@@ -14,7 +14,7 @@
 	- download ou telecharger string : si == oui affiche un lien de téléchargement du document sous la prévisualisation
 	- class_btn_download string : class à ajouter au bouton download
 ]
-<BOUCLE_document(DOCUMENTS){id_document=#ENV{id_document,#ENV{id}}}>
+<BOUCLE_document(DOCUMENTS){id_document=#ENV{id_document,#ENV{id}}}{tout}>
 <B_d2c>
 	
 	<div[ id="(#ANCRE_PAGINATION|extraire_attribut{id})"] class="spip_docimg spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok"[ style='float:(#ENV{align}|match{left|right});']>
