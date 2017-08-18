@@ -11,7 +11,7 @@
 	<description>
 		ATTENTION : ceci est une version très expérimentale ! et bancale… qui n'aboutira peut-être pas.
 		Base CSS pour le contenu éditorial web, pour des pages web lisibles.
-		Ce plugin porte Tiny Typo v1.3.4 dans SPIP : il permet de tirer profit de TOUS les styles de Tiny Typo dans SPIP et de les paramètrer pour les ajuster à votre goût.
+		Ce plugin porte Tiny Typo v1.3.4 dans SPIP : il permet de tirer profit de TOUS les styles de Tiny Typo dans SPIP et (pas encore) de les paramètrer pour les ajuster à votre goût.
 	</description>
 	<lien>https://zone.spip.org/trac/spip-zone/browser/_plugins_/tinytypo/trunk/todo.txt</lien>
 	<auteur>&copy; [Tiny Typo->http://tinytypo.tetue.net] 2014 - MIT License - by [tetue->http://spip.tetue.net]</auteur>
@@ -25,7 +25,7 @@
 
 	<bouton id='tinytypo' parent='bando_squelette'>
 		<icone>prive/img/tinytypo-16.png</icone>
-		<titre>Tiny&nbsp;Typo</titre>
+		<titre>Tiny Typo</titre>
 		<url>configurer_tinytypo</url>
 	</bouton>
 

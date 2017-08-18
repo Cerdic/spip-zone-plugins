@@ -3,20 +3,25 @@
 	<prefix>tinytypo</prefix>
 	<icon>icon/tinytypo.png</icon>
 
-	<version>1.5.0</version>
+	<version>1.6.0</version>
 	<etat>stable</etat>
 	<categorie>outil</categorie>
 
 	<slogan>Tiny Typo pour SPIP</slogan>
 	<description>
 		Base CSS pour le contenu éditorial web, pour des pages web lisibles.
-		Ce plugin porte Tiny Typo v1.3.4 dans SPIP : il met le CSS à disposition et permet de tirer profit de TOUS les styles de Tiny Typo dans SPIP.
+		Ce plugin porte Tiny Typo v1.3.4 dans SPIP et permet de tirer profit de TOUS les styles de Tiny Typo dans SPIP.
 	</description>
 	<lien>https://contrib.spip.net/Plugin-Tiny-Typo?var_mode=preview</lien>
 	<auteur>&copy; [Tiny Typo->http://tinytypo.tetue.net] 2014 - MIT License - by [tetue->http://spip.tetue.net]</auteur>
 
 	<options>tinytypo_options.php</options>
 
-	<necessite id="SPIP" version="[2.1.0;3.2.99]">
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>tinytypo_pipelines.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[2.1.0;3.1.0]">
 	<necessite id="spip_bonux" version="[2.2.19;]"/>
 </plugin>
