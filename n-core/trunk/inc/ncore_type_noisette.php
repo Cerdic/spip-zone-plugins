@@ -293,20 +293,21 @@ function ncore_type_noisette_informer($plugin, $type_noisette, $information = ''
  */
 function ncore_type_noisette_repertorier($plugin, $filtres = array(), $stockage = '') {
 
-	// Initialisation du tableaux des types de noisette
+	// On indexe le tableau des des types de noisette par le plugin appelant en cas d'appel sur le même hit
+	// par deux plugins différents.
 	static $types_noisette = array();
 
-	if ($types_noisette) {
+	if (!isset($types_noisette[$plugin])) {
 		// On charge l'API de N-Core.
 		// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
 		include_spip("ncore/ncore");
 
 		// On récupère la description complète de tous les types de noisettes détects par le plugin appelant
-		$types_noisette = ncore_type_noisette_lister($plugin);
+		$types_noisette[$plugin] = ncore_type_noisette_lister($plugin, '', $stockage);
 	}
 
 	// Application des filtres éventuellement demandés en argument de la fonction
-	$types_noisette_filtres = $types_noisette;
+	$types_noisette_filtres = $types_noisette[$plugin];
 	if ($filtres) {
 		foreach ($types_noisette_filtres as $_type_noisette => $_description) {
 			foreach ($filtres as $_critere => $_valeur) {
