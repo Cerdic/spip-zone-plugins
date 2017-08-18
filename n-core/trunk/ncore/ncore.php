@@ -7,7 +7,7 @@
  * Ainsi, les plugins externes peuvent, si elle leur convient, utiliser l'implémentation proposée par N-Core
  * sans coder la moindre fonction.
  *
- * @package SPIP\NCORE\DATA
+ * @package SPIP\NCORE\STOCKAGE
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -157,7 +157,8 @@ function ncore_type_noisette_decrire($plugin, $type_noisette, $stockage = '') {
 }
 
 /**
- * Renvoie l'information brute demandée pour l'ensemble des types de noisette utilisés par le plugin appelant.
+ * Renvoie l'information brute demandée pour l'ensemble des types de noisette utilisés par le plugin appelant
+ * ou toute les descriptions si aucune information n'est explicitement demandée.
  *
  * @uses cache_lire()
  *
@@ -166,18 +167,19 @@ function ncore_type_noisette_decrire($plugin, $type_noisette, $stockage = '') {
  *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param string	$information
  *      Identifiant d'un champ de la description d'un type de noisette ou `signature`.
- *      Si l'argument est vide ou invalide, la fonction renvoie un tableau vide.
+ *      Si l'argument est vide, la fonction renvoie les descriptions complètes et si l'argument est
+ * 		un champ invalide la fonction renvoie un tableau vide.
  * @param string	$stockage
  *      Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin ni celui de N-Core
  * 		ne seront utilisés. En général, cet identifiant est le préfixe du plugin fournissant le stockage.
  *
  * @return array
- * 		Tableau de la forme `[noisette] = information`.
+ * 		Tableau de la forme `[noisette] = information ou description complète`.
  */
-function ncore_type_noisette_lister($plugin, $information, $stockage = '') {
+function ncore_type_noisette_lister($plugin, $information = '', $stockage = '') {
 
 	// Initialisation du tableau de sortie
-	$information_noisettes = array();
+	$types_noisettes = array();
 
 	// On cherche le service de stockage à utiliser selon la logique suivante :
 	// - si le service de stockage est non vide on l'utilise en considérant que la fonction existe forcément;
@@ -186,21 +188,22 @@ function ncore_type_noisette_lister($plugin, $information, $stockage = '') {
 	include_spip('inc/ncore_utils');
 	if ($lister = ncore_chercher_fonction($plugin, 'type_noisette_lister', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
-		$information_noisettes = $lister($plugin, $information);
+		$types_noisettes = $lister($plugin, $information);
 	} else {
 		// Le plugin ne propose pas de fonction propre ou le stockage N-Core est explicitement demandé.
-		if ($information) {
-			include_spip('inc/ncore_cache');
-			if ($information == 'signature') {
-				// Les signatures md5 sont sockées dans un fichier cache séparé de celui des descriptions de noisettes.
-				$information_noisettes = cache_lire($plugin, _NCORE_NOMCACHE_NOISETTE_SIGNATURE);
-			}
-			elseif ($descriptions = cache_lire($plugin, _NCORE_NOMCACHE_NOISETTE_DESCRIPTION)) {
+		include_spip('inc/ncore_cache');
+		if ($information == 'signature') {
+			// Les signatures md5 sont sockées dans un fichier cache séparé de celui des descriptions de noisettes.
+			$types_noisettes = cache_lire($plugin, _NCORE_NOMCACHE_NOISETTE_SIGNATURE);
+		} elseif ($descriptions = cache_lire($plugin, _NCORE_NOMCACHE_NOISETTE_DESCRIPTION)) {
+			if ($information) {
 				// Si $information n'est pas une colonne valide array_column retournera un tableau vide.
-				$information_noisettes = array_column($descriptions, $information, 'noisette');
+				$types_noisettes = array_column($descriptions, $information, 'noisette');
+			} else {
+				$types_noisettes = $descriptions;
 			}
 		}
 	}
 
-	return $information_noisettes;
+	return $types_noisettes;
 }

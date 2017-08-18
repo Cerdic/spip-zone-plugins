@@ -30,9 +30,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *      Si `true` force le rechargement de toutes les types de noisettes, sinon le chargement se base sur le
  * 		md5 des fichiers YAML. Par défaut vaut `false`.
  * @param string	$stockage
- *      `stockage` : impose le type de stockage à utiliser pour les descriptions d'types de noisette et
- *      les signatures des fichiers YAML. Par défaut, la fonction cherche à utiliser le stockage fourni par le
- * 		le plugin appelant et, à défaut, celui fourni par N-Core.
+ *      Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
+ *      ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
+ * 		fournissant le service de stockage souhaité.
  *
  * @return bool
  * 		`false` si une erreur s'est produite, `true` sinon.
@@ -204,21 +204,25 @@ function ncore_type_noisette_charger($plugin, $dossier = 'noisettes/', $recharge
  *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  *      La fonction utilisera la fonction de lecture de la description brute d'une noisette, spécifique
  *      au service, ou à défaut, celle fournie par N-Core.
- * @param string	$noisette
- * 		Identifiant de la $noisette.
+ * @param string	$type_noisette
+ * 		Identifiant du type de noisette.
  * @param string	$information
  * 		Information spécifique à retourner ou vide pour retourner toute la description.
  * @param boolean	$traiter_typo
  *      Indique si les données textuelles doivent être retournées brutes ou si elles doivent être traitées
  *      en utilisant la fonction _T_ou_typo. Par défaut l'indicateur vaut `false`.
  * 		Les champs sérialisés sont eux toujours désérialisés.
+ * @param string	$stockage
+ *      Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
+ *      ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
+ * 		fournissant le service de stockage souhaité.
  *
  * @return array|string
  * 		La description complète ou l'information précise demandée pour une noisette donnée. Les champs
  * 		de type tableau sont systématiquement désérialisés et si demandé, les champs textuels peuvent être
  * 		traités avec la fonction _T_ou_typo().
  */
-function ncore_type_noisette_informer($plugin, $noisette, $information = '', $traiter_typo = false, $stockage = '') {
+function ncore_type_noisette_informer($plugin, $type_noisette, $information = '', $traiter_typo = false, $stockage = '') {
 
 	// On indexe le tableau des indicateurs ajax par le plugin appelant en cas d'appel sur le même hit
 	// par deux plugins différents.
@@ -226,13 +230,13 @@ function ncore_type_noisette_informer($plugin, $noisette, $information = '', $tr
 	static $description_noisette = array();
 
 	// Stocker la description de la noisette si besoin
-	if (!isset($description_noisette[$plugin][$noisette])) {
+	if (!isset($description_noisette[$plugin][$type_noisette])) {
 		// On charge l'API de N-Core.
 		// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
 		include_spip("ncore/ncore");
 
 		// Lecture de toute la configuration de la noisette: les données retournées sont brutes.
-		$description = ncore_type_noisette_decrire($plugin, $noisette, $stockage);
+		$description = ncore_type_noisette_decrire($plugin, $type_noisette, $stockage);
 
 		// Sauvegarde de la description de la page pour une consultation ultérieure dans le même hit.
 		if ($description) {
@@ -242,25 +246,25 @@ function ncore_type_noisette_informer($plugin, $noisette, $information = '', $tr
 			$description['parametres'] = unserialize($description['parametres']);
 
 			// Stockage de la description
-			$description_noisette[$plugin][$noisette] = $description;
+			$description_noisette[$plugin][$type_noisette] = $description;
 		} else {
-			$description_noisette[$plugin][$noisette] = array();
+			$description_noisette[$plugin][$type_noisette] = array();
 		}
 	}
 
 	if ($information) {
-		if (isset($description_noisette[$plugin][$noisette][$information])) {
+		if (isset($description_noisette[$plugin][$type_noisette][$information])) {
 			if (in_array($information, $donnees_typo) and $traiter_typo) {
 				// Traitements de la donnée textuelle
-				$retour = _T_ou_typo($description_noisette[$plugin][$noisette][$information]);
+				$retour = _T_ou_typo($description_noisette[$plugin][$type_noisette][$information]);
 			} else {
-				$retour = $description_noisette[$plugin][$noisette][$information];
+				$retour = $description_noisette[$plugin][$type_noisette][$information];
 			}
 		} else {
 			$retour = '';
 		}
 	} else {
-		$retour = $description_noisette[$plugin][$noisette];
+		$retour = $description_noisette[$plugin][$type_noisette];
 		// Traitements des données textuels
 		if ($traiter_typo) {
 			$retour['nom'] = _T_ou_typo($retour['nom']);
@@ -271,4 +275,48 @@ function ncore_type_noisette_informer($plugin, $noisette, $information = '', $tr
 	}
 
 	return $retour;
+}
+
+/**
+ * @param string	$plugin
+ *      Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *      ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array		$filtres
+ * 		Tableau associatif `[champ] = valeur` de critères de filtres sur les descriptions de types de noisette.
+ * 		Le seul opérateur possible est l'égalité.
+ * @param string	$stockage
+ *      Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
+ *      ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
+ * 		fournissant le service de stockage souhaité.
+ *
+ * @return array
+ */
+function ncore_type_noisette_repertorier($plugin, $filtres = array(), $stockage = '') {
+
+	// Initialisation du tableaux des types de noisette
+	static $types_noisette = array();
+
+	if ($types_noisette) {
+		// On charge l'API de N-Core.
+		// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
+		include_spip("ncore/ncore");
+
+		// On récupère la description complète de tous les types de noisettes détects par le plugin appelant
+		$types_noisette = ncore_type_noisette_lister($plugin);
+	}
+
+	// Application des filtres éventuellement demandés en argument de la fonction
+	$types_noisette_filtres = $types_noisette;
+	if ($filtres) {
+		foreach ($types_noisette_filtres as $_type_noisette => $_description) {
+			foreach ($filtres as $_critere => $_valeur) {
+				if (isset($_description[$_critere]) and ($_description[$_critere] != $_valeur)) {
+					unset($types_noisette_filtres[$_type_noisette]);
+					break;
+				}
+			}
+		}
+	}
+
+	return $types_noisette_filtres;
 }
