@@ -2,29 +2,25 @@
 = pour Tiny Typo
 
 == WHY
-- Ce plugin a pour vocation essentielle de modifier certains sélecteurs CSS du code généré par SPIP afin de bénéficier de TOUS les styles de Tiny Typo.
-- Accessoirement, il distribue aussi les styles de Tiny Typo, mais ce n’est pas le plus important (faire un plugin juste pour distribuer du CSS… bof).
+- Ce plugin a pour vocation première de modifier certains sélecteurs CSS du code généré par SPIP afin de bénéficier de TOUS les styles de Tiny Typo.
+- Accessoirement, il distribue aussi les styles de Tiny Typo à jour.
 
 Mode d’emploi préalable de Tiny Typo pour SPIP :
 https://contrib.spip.net/Installer-Tiny-Typo-dans-SPIP?var_mode=preview
 
-== TODO V1
-- Internationaliser (quand ce sera stable)
-- Attendre publication de la doc sur SPIP Contrib (pour linker ensuite) :
+== TODO V1 pour avant SPIP 3.1.1
+- Injecter auto tinytypo.css
+- Distribuer aussi font.css ? (pour SPIP 3.0)
+- Mettre à jour doc du plugin
+- Attendre publication de la doc sur SPIP Contrib (pour la linker ensuite) :
 https://contrib.spip.net/Plugin-Tiny-Typo?var_mode=preview
+- Internationaliser (quand ce sera stable)
 
-== TODO V2
-Comme attendu par beaucoup, la V2 pourrait insérer les styles automatiquement, pour toujours bénéficier de la dernière version de Tiny Typo. Mais ce n’est pas génial de distribuer des styles non paramétrables, donc on ne l’impose pas. Le problème à résoudre est : comment faire pour ne pas injecter le CSS de Tiny Typo en double (voire en triple) ?
+== TODO V2 pour après SPIP 3.1.1
+- Distribuer les 3 feuilles links.css, typo.css et media.css, en suivant le dépôt Github
+- Pas besoin d’injection auto
 
-- Insérer la feuille tinytypo (par défaut ?) MAIS permettre de la désactiver (ou plutôt l’inverse ?) => prévoir panneau de conf pour activer/désactiver
-- Si le plugin Daisy est actif, ne pas insérer la feuille tinytypo.css
-- Ne pas insérer tinytypo.css si elle l’est déjà par ailleurs, pour éviter les doubles appels dans le head
-- Idem si Tiny Typo est déjà utilisée, en plusieurs feuilles (comme dans SPIP3.1+). Mais comment deviner ?
-- D’ailleurs faut-il appeler tinytypo.css ou chacune des feuilles qui la composent ?
-
-C’est un peu compliqué, non ? Tout ça pour du CSS qu’il suffit de déposer dans son dossier squelettes… A-t-on vraiment besoin de cette V2 ?
-
-== TODO V3
+== TODO V3 = trunk
 Insérer les styles n’a pas beaucoup d’intérêt. Les rendre paramétrables est BEAUCOUP plus intéressant pour le spipmestre :)
 
 - Permettre de modifier les variables de Tiny Typo MAIS PAS via feuille de style calculée, parce que c’est in-maintenable.
