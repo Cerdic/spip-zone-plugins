@@ -43,6 +43,7 @@ function filtre_iframe_responsive($texte) {
 	$responsive_embed = charger_filtre('responsive_embed');
 	return $responsive_embed($texte);
 }
+
 /**
  * Cette balise va permettre de rendre le squelette compatible
  * avec toutes les versions de Foundation.
@@ -70,6 +71,7 @@ function balise_COLONNES_dist($p) {
 	// On calcule la class
 	$p->code = "class_grid_foundation($nombre_colonnes, $type).'columns'";
 	$p->interdire_scripts = false;
+
 	return $p;
 }
 
@@ -79,15 +81,15 @@ function balise_COLONNES_dist($p) {
 function balise_BOUTON_ACTION($p) {
 
 	$args = array();
-	for ($k=1; $k<=6; $k++) {
+	for ($k = 1; $k <= 6; $k++) {
 		$_a = interprete_argument_balise($k, $p);
 		if (!$_a) {
-			$_a="''";
+			$_a = "''";
 		}
 		$args[] = $_a;
 	}
 	// supprimer les args vides
-	while (end($args)=="''" and count($args)>2) {
+	while (end($args) == "''" and count($args) > 2) {
 		array_pop($args);
 	}
 	$args = implode(',', $args);
