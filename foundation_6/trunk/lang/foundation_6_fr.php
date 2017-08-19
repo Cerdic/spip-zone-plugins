@@ -24,5 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icons' => 'Utiliser les icones Foundation ?',
 	'icons_explication' => 'Ajouter les CSS pour les <a href="http://zurb.com/playground/foundation-icon-fonts-3" title="foundation icon">icones foundation</a>.',
 	'syntaxe_deprecie' => 'La syntaxe #ARRAY{nombre, type} est dépréciée au profit de #ARRAY{type, nombre} et sera supprimée dans les futurs versions de foundation',
-	'erreur_js' => "L'utilisation du squelette @squelette@ requière l'activation du javascript de foundation"
+	'erreur_js' => "L'utilisation du squelette @squelette@ requière l'activation du javascript de foundation",
+	'suivant' => 'Suivant',
+	'precedent' => 'Précédent'
 );
