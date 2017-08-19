@@ -25,9 +25,6 @@ function tinytypo($texte) {
 	$texte = str_replace('spip_glossaire', 'external', $texte);
 	$texte = str_replace('spip_mail', 'mailto', $texte);
 	$texte = str_replace('blockquote class="spip"', 'blockquote', $texte);
-	$texte = str_replace('code class="spip_code"', 'code', $texte);
-//	$texte = str_replace('spip_code', 'spip_code p font3', $texte); // dirty
-//	$texte = str_replace('spip_cadre', 'spip_cadre p font3', $texte); // dirty
 	$texte = str_replace('<table class="spip', '<table class="table spip', $texte);
 	$texte = str_replace('spip_logos', 'spip_logo', $texte);
 	$texte = str_replace('spip_logo', 'thumb spip_logo', $texte);
