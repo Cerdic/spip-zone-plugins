@@ -48,7 +48,7 @@
 	[(#REM) Sinon, formulaire normal ]
 	<fieldset>
 		<legend><:envoyer_message:></legend>
-		<ul>
+		<ul class="editer-groupe">
 			<BOUCLE_choix(CONDITION){si #ENV{choix_destinataires}|non}>
 				[(#REM) Si pas de choix, le destinataire est défini automatiquement ]
 				<BOUCLE_tous(POUR){tableau #ENV{destinataire}}>
@@ -57,7 +57,7 @@
 			</BOUCLE_choix>
 				[(#REM) Sinon on propose le choix, en select ou en checkbox suivant l'option "type_choix" ]
 				<B_destinataires>
-				<li class="obligatoire[ (#ENV*{erreurs}|table_valeur{destinataire}|oui)erreur]">
+				<li class="editer obligatoire[ (#ENV*{erreurs}|table_valeur{destinataire}|oui)erreur]">
 					[(#ENV{type_choix}|match{plusieurs|plusieurs_et|plusieurs_ou}|oui)
 						<label><:contact:form_destinataires:></label>
 						[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{destinataire})</span>]
@@ -112,7 +112,7 @@
 			</BOUCLE_infos>
 
 			<B_pj>
-			<li class ='pieces_jointes'>
+			<li class ='editer pieces_jointes'>
 				<label>[(#ENV{nb_max_pj}|>{1}|?{<:contact:form_pj_ajouter_pluriel:>,<:contact:form_pj_ajouter_singulier:>})]</label>
 				<ul>
 					<BOUCLE_pj(POUR){tableau #ENV{pj_fichiers}}>
