@@ -94,10 +94,8 @@ function bouq_declarer_tables_objets_sql($tables) {
 		'champs_versionnes' => array('isbn', 'id_rubrique', 'id_secteur'),
 		'rechercher_champs' => array("titre" => 10, "soustitre" => 8),
 		'tables_jointures'  => array(),
-		// stand by 'tables_jointures'  => array('spip_livres_liens'),
 		'statut_textes_instituer' => array(
 			'prepa'    => 'texte_statut_en_cours_redaction',
-			'prop'     => 'livre:texte_statut_aparaitre',
 			'publie'   => 'livre:texte_statut_paru',
 			'refuse'   => 'livre:texte_statut_epuise',
 			'poubelle' => 'texte_statut_poubelle',
@@ -106,7 +104,7 @@ function bouq_declarer_tables_objets_sql($tables) {
 			array(
 				'champ'     => 'statut',
 				'publie'    => 'publie',
-				'previsu'   => 'publie,prop,prepa',
+				'previsu'   => 'publie,prepa',
 				'post_date' => 'date',
 				'exception' => array('statut','tout')
 			)
@@ -129,7 +127,7 @@ function bouq_declarer_tables_objets_sql($tables) {
 	$tables['spip_livres_auteurs'] = array(
 		'type' => 'livres_auteur',
 		'principale' => 'oui',
-		'table_objet_surnoms' => array('livresauteur'), // table_objet('livres_auteur') => 'livres_auteurs' 
+		'table_objet_surnoms' => array('livresauteur'),
 		'field'=> array(
 			'id_livres_auteur'   => 'bigint(21) NOT NULL',
 			'nom'                => 'text NOT NULL DEFAULT ""',
@@ -149,7 +147,7 @@ function bouq_declarer_tables_objets_sql($tables) {
 		'champs_editables'  => array('nom', 'prenom', 'biographie', 'lien_titre', 'lien_url'),
 		'champs_versionnes' => array(),
 		'rechercher_champs' => array("nom" => 8, "prenom" => 6, "biographie" => 2),
-		'tables_jointures'  => array('spip_livres_auteurs_liens'),
+		'tables_jointures'  => array('livres_auteurs_liens'),
 		'statut_textes_instituer' => array(
 			'prepa'    => 'texte_statut_en_cours_redaction',
 			'publie'   => 'texte_statut_publie',
