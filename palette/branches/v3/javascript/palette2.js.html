@@ -1,0 +1,55 @@
+#HTTP_HEADER{'Content-Type: text/javascript'}
+
+{(function($){
+	$(document).ready(
+		function() {
+			init_palette();
+			onAjaxLoad(init_palette);
+		}
+	);
+
+	function init_palette() {
+		$("input.palette").each(
+			function(i, palette){
+				palette.id = palid(palette);
+				
+				/**
+				 * On doit créer un farbtastic pour mettre à jour correctement le background +color du champ
+				 */
+				$(palette)
+					.after('<div class="colorpicker"><div class="colorpicker_close" title="<:palette:fermer:>">&nbsp;&#215;&nbsp;</div><div class="colorpicker_bar"><:palette:palette:></div><div id="colorpicker"></div></div>');
+				$.farbtastic('#colorpicker', palette).updateDisplay();
+				$(".colorpicker").empty().remove();
+				
+				/**
+				 * Au focus on ouvre un farbtastic
+				 */
+				$(this).focus(function(){
+					$(".colorpicker").empty().remove();
+		  			$(palette)
+						.after('<div id="bugIE7"></div><div class="colorpicker"><div class="colorpicker_close" title="<:palette:fermer:>">&nbsp;&#215;&nbsp;</div><div class="colorpicker_bar"><:palette:palette:></div><div id="colorpicker"></div></div>');
+					$.farbtastic('#colorpicker', palette);
+					$(".colorpicker_close")
+						.hover(function() {$(this).addClass("hover");}, function(){ $(this).removeClass("hover");})
+						.click(function() {$(".colorpicker").empty().remove();});
+				});
+				
+				/**
+				 * Au blur, on ferm le farbtastic
+				 */
+				$(this).blur(function(){
+					$(".colorpicker").empty().remove();
+				});
+			}
+		);
+	};
+
+	function palid(element) {
+		if (!$(element).prop("id")){
+			/* pas de id : on en cree un aleatoire, avec un numéro élevé pour pas trop risquer de collision */  
+			var newid = parseInt(10000 + 10000*Math.random());
+			return newid;
+		}
+		return $(element).prop("id");
+	};
+})(jQuery)};

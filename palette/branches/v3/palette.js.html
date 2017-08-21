@@ -1,0 +1,6 @@
+[(#REM)
+  Charge la librairie farbtastic ainsi que le javascript du plugin Palette
+  ATTENTION !!! Le javascript du plugin Palette inclut des chaines de langues à traduire par SPIP
+]#CACHE{7*24*86400}#HTTP_HEADER{'Content-Type: text/javascript'}
+[(#INCLURE{#EVAL{_DIR_LIB_PALETTE}farbtastic.js})]
+[(#INCLURE{fond=javascript/palette2.js})]
