@@ -48,7 +48,8 @@ function livraison_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['create'] = array(array('maj_tables', array('spip_livraison_montants', 'spip_livraison_zones')));
 
 	$maj['1.0.1'] = array(array('maj_tables', array('spip_pays')));
-	$maj['1.2.0'] = array( array('ecrire_config', 'livraison', $config_livraison));
+	$maj['1.2.0'] = array(array('ecrire_config', 'livraison', $config_livraison));
+	$maj['1.2.1'] = array(array('maj_tables', array('spip_pays')));
 
 	/*Installation de champs via le plugin champs extras*/
 

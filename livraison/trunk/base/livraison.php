@@ -87,11 +87,8 @@ function livraison_declarer_tables_objets_sql($tables) {
 
 function livraison_declarer_tables_principales($tables_principales) {
 
-		$tables_principales['spip_pays'] = array(
-			'field'=>array('id_livraison_zone' => "BIGINT NOT NULL"),
-			'key'=>array('KEY id_livraison_zone' => "id_livraison_zone"),        
-			'join'=>array('id_livraison_zone' => "id_livraison_zone"),      
-		);
+		$tables_principales['spip_pays']['field']['id_livraison_zone'] = "BIGINT NOT NULL";
+		$tables_principales['spip_pays']['key']['KEY id_livraison_zone'] = "id_livraison_zone";
 
 		return $tables_principales;
 }
@@ -102,20 +99,20 @@ function livraison_declarer_champs_extras($champs = array()) {
 	include_spip('inc/config');
 	include_spip('livraison_fonctions');    
 
-	$config = lire_config('shop_livraison',array());
-	$objets_livraison = isset($config['objets_livraison'])?$config['objets_livraison']:array();
+	$config = lire_config('shop_livraison', array());
+	$objets_livraison = isset($config['objets_livraison']) ? $config['objets_livraison'] : array();
 	if (!$objets_livraison) {
-		$objets_livraison=lire_config('prix_objets/objets_prix',array());
+		$objets_livraison = lire_config('prix_objets/objets_prix',array());
 	}
-	$unite_defaut=isset($config['unite_defaut'])?$config['unite_defaut']:array();
-	$mesure_defaut=mesure_defaut(); 
+	$unite_defaut = isset($config['unite_defaut']) ? $config['unite_defaut'] : array();
+	$mesure_defaut = mesure_defaut(); 
 
 
 	/*Pour chaque objet prix on active le champ mesure*/
 	foreach($objets_livraison AS $objet) {
-	   $champs[table_objet_sql($objet)]['mesure'] = array(
-		  'saisie' => 'input',//Type du champ (voir plugin Saisies)
-		  'options' => array(
+		$champs[table_objet_sql($objet)]['mesure'] = array (
+			'saisie' => 'input',//Type du champ (voir plugin Saisies)
+			'options' => array(
 				'nom' => 'mesure', 
 				'label' => _T('livraison:label_mesure_'.$mesure_defaut), 
 				'explication'=>_T('livraison:explication__mesure',array('unite'=>$unite_defaut)), 
