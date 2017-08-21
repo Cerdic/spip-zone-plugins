@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_unite_kg' => 'Kg',
 	'label_unite_l' => 'Litres',
 	'label_unite_m3' => 'm3',
-	'label_unite_rien' => 'Acune unité',
+	'label_unite_rien' => 'Aucune unité',
 	'label_volume' => 'Volume',
 	'livraison_titre' => 'Livraisons',
 
