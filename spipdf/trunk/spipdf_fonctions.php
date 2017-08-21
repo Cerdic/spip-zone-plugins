@@ -5,7 +5,7 @@
  *
  * @package      spiPDF
  * @author       Yves Tannier [grafactory.net]
- * @copyright    2010-2015 Yves Tannier
+ * @copyright    2010-2017 Yves Tannier
  *
  * @link         https://contrib.spip.net/3719
  * @link         https://zone.spip.org/trac/spip-zone/browser/_plugins_/spipdf
@@ -13,7 +13,7 @@
  *
  * @license      GPL Gnu Public Licence
  *
- * @version      0.2
+ * @version      1.2.0
  */
 
 if (!defined('_ECRIRE_INC_VERSION')){
@@ -231,8 +231,18 @@ function getBalise($matches){
 	$GLOBALS['valeurs_page'][trim($matches[1])] = trim($matches[2]);
 }
 
-// traitement principal. avec ce pipeline, le PDF est mis en cache et recalculé "normalement"
-function spipdf_html2pdf($html){
+/**
+ * traitement principal. avec ce pipeline, le PDF est mis en cache et recalculé "normalement"
+ * 
+ * 
+ * @param string $html 
+ *   Le contenu HTML à transformer en PDF
+ * @param string/bool $file
+ *   Nom du fichier vers lequel enregistrer (uniquement fonctionnel avec mpdf pour l'instant)
+ * @return string
+ *   Contenu binaire du PDF généré
+ */
+function spipdf_html2pdf($html, $file = false){
 
 	// les librairies possibles
 	$possible_librairies = array(
@@ -334,8 +344,11 @@ function spipdf_html2pdf($html){
 		// la classe mPDF
 		$mpdf = new mPDF(SPIPDF_CHARSET, $format_page, 0, '', $backleft, $backright, $backtop, $backbottom, $margin_header, $margin_footer);
 		$mpdf->WriteHTML($html);
-
-		$html = $mpdf->Output('', 'S'); // envoyer le code binaire du PDF dans le flux
+		/**
+		 * Si un nom de fichier est fourni, on enregistre le fichier, 
+		 * sinon envoyer le code binaire du PDF dans le flux
+		 */
+		$html = $mpdf->Output($file, $file ? 'F' : 'S');
 		$echap_special_pdf_chars = true;
 	} elseif ($librairie_pdf=='dompdf') { // la librairie dompdf beta 0.6 // EXPERIMENTAL
 
@@ -346,8 +359,13 @@ function spipdf_html2pdf($html){
 		$dompdf->load_html($html, SPIPDF_CHARSET);
 		$dompdf->set_paper($format_page);
 		$dompdf->render();
-
-		$html = $dompdf->output(); // envoyer le code binaire du PDF dans le flux
+		$html = $dompdf->output();
+		
+		if ($file) {
+			include_spip('inc/flock');
+			ecrire_fichier($file, $html);
+		}
+		// envoyer le code binaire du PDF dans le flux
 		$echap_special_pdf_chars = true;
 	} else { // la librairie HTML2PDF par défaut
 
@@ -360,7 +378,7 @@ function spipdf_html2pdf($html){
 				$lang = $flux['args']['contexte']['lang'];
 			// les paramétres d'orientation et de format son écrasé par ceux défini dans la balise <page> du squelette
 			$html2pdf = new HTML2PDF('P', $format_page, $lang, SPIPDF_UNICODE, SPIPDF_CHARSET);
-      
+
 			// mode debug de HTML2PDF
 			if (defined('SPIPDF_DEBUG_HTML2PDF')){
 				$html2pdf->setModeDebug();
@@ -374,7 +392,7 @@ function spipdf_html2pdf($html){
 			$html2pdf->setDefaultFont($police_caractere);
 			$html2pdf->writeHTML($html);
 
-			$html = $html2pdf->Output('', true); // envoyer le code binaire du PDF dans le flux
+			$html = $html2pdf->Output($file, $file ? 'F' : 'S'); // envoyer le code binaire du PDF dans le flux
 			$echap_special_pdf_chars = true;
 		} catch (HTML2PDF_exception $e) {
 			echo $e;
