@@ -48,7 +48,7 @@ a mis a jour la valeur avec la page reelle]
 		{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} liva}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
 			<td class="statut">[(#STATUT|puce_statut{livres_auteur})]</td> 
-			<td class="nom">[(#LOGO_LIVRES_AUTEUR|image_reduire{20,20})]<a href="[(#ID_LIVRES_AUTEUR|generer_url_entite{livres_auteur})]">#NOM</a></td>
+			<td class="nom"><a href="[(#ID_LIVRES_AUTEUR|generer_url_entite{livres_auteur})]">#PRENOM #NOM</a>[ (#LOGO_LIVRES_AUTEUR|image_reduire{20,20})]</td>
 			<td class="action">
 				<button type="submit" class="button link add" name="ajouter_lien\[livres_auteur-#ID_LIVRES_AUTEUR-#OBJET-#ID_OBJET\]" value="+"><:livres_auteur:ajouter_lien_livres_auteur:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
 			</td>

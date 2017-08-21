@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_site_web_livres_auteur' => 'Site Web de l‘auteur',
 
 	// R
-	'retirer_lien_livres_auteur' => 'Retirer cet auteur de livres',
+	'retirer_lien_livres_auteur' => 'Retirer cet auteur de livre',
 	'retirer_tous_liens_livres_auteurs' => 'Retirer tous les auteurs de livres',
 	'role_ecrivain' => 'Écrivain',
 	'role_illustrateur' => 'Illustrateur',
@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'role_traducteur' => 'Traducteur',
 
 	// S
-	'supprimer_livres_auteur' => 'Supprimer cet auteur de livres',
+	'supprimer_livres_auteur' => 'Supprimer cet auteur de livre',
 
 	// T
 	'texte_auteur_livre' => 'Auteur',

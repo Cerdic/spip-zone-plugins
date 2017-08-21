@@ -39,7 +39,7 @@ a mis a jour la valeur avec la page reelle]
 	
 		<tr class="first_row">
 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
-			<th class="nom" scope="col">[(#TRI{multi nom,<:livres_auteur:champ_nom_label:>,ajax})]</th>
+			<th class="nom_auteur_livre" scope="col">[(#TRI{multi nom,<:livres_auteur:champ_nom_label:>,ajax})]</th>
 			<th class="role" scope="col"><:roles:role_titre:></th>
 			<th class="action" scope="col"></th>
 		</tr>
@@ -49,7 +49,7 @@ a mis a jour la valeur avec la page reelle]
 		{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} liva}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
 			<td class="statut">[(#STATUT|puce_statut{livres_auteur})]</td> 
-			<td class="nom">[(#LOGO_LIVRES_AUTEUR|image_reduire{20,20})]<a href="[(#ID_LIVRES_AUTEUR|generer_url_entite{livres_auteur})]">#NOM</a></td>
+			<td class="nom_auteur_livre"><a href="[(#ID_LIVRES_AUTEUR|generer_url_entite{livres_auteur})]">#PRENOM #NOM</a>[ (#LOGO_LIVRES_AUTEUR|image_reduire{20,20})]</td>
 			<td class="role">[(#INCLURE{fond=formulaires/inc-editer_liens_roles,env,id=#ID_LIVRES_AUTEUR,cle=livres_auteur-#ID_LIVRES_AUTEUR-#OBJET-#ID_OBJET})]</td>
 			<td class="action">
 				<button type="submit" class="button link add" name="ajouter_lien\[livres_auteur-#ID_LIVRES_AUTEUR-#OBJET-#ID_OBJET\]" value="+"><:livres_auteur:ajouter_lien_livres_auteur:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
