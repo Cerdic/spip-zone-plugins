@@ -14,6 +14,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 
+// -----------------------------------------------------------------------
+// ------------------------- TYPES DE NOISETTE ---------------------------
+// -----------------------------------------------------------------------
+
 /**
  * Stocke les descriptions des types de noisette en distinguant les types de noisette obsolètes, les types de
  * noisettes modifiés et les types de noisettes nouveaux.
@@ -206,4 +210,109 @@ function ncore_type_noisette_lister($plugin, $information = '', $stockage = '') 
 	}
 
 	return $types_noisettes;
+}
+
+
+// -----------------------------------------------------------------------
+// ----------------------------- NOISETTES -------------------------------
+// -----------------------------------------------------------------------
+
+/**
+ * @param        $plugin
+ * @param        $description
+ * @param string $stockage
+ *
+ * @return string
+ */
+function ncore_noisette_stocker($plugin, $action, $description, $stockage = '') {
+
+	// On cherche le service de stockage à utiliser selon la logique suivante :
+	// - si le service de stockage est non vide on l'utilise en considérant que la fonction existe forcément;
+	// - sinon, on utilise la fonction du plugin appelant si elle existe;
+	// - et sinon, on utilise la fonction de N-Core.
+	include_spip('inc/ncore_utils');
+	if ($stocker = ncore_chercher_fonction($plugin, 'noisette_stocker', $stockage)) {
+		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
+		$noisette = $stocker($plugin, $action, $description);
+	} else {
+		// Le plugin ne propose pas de fonction propre ou le stockage N-Core est explicitement demandé.
+		// -- N-Core stocke les noisettes dans une meta propre au plugin appelant contenant un tableau au format
+		//    [squelette][rang] = description
+		//    N-Core calcule un identifiant unique pour la noisette qui sera stocké à l'index 'id_noisette' et qui
+		//    vaudra uniqid() avec comme préfixe le plugin appelant.
+		include_spip('inc/config');
+
+		// On lit la meta de stockage des noisettes pour le plugin appelant.
+		// Le tableau est au format [squelette][rang] = description.
+		$noisettes = lire_config("${plugin}_noisettes", array());
+
+		if ($action == 'creation') {
+			// Ajout de la noisette :
+			// -- la description est complète à l'exception de l'id unique qui est créé à la volée
+			// -- et on range la noisette avec les noisettes affectées au même squelette en fonction de son rang.
+			$description['id_noisette'] = uniqid("${plugin}_");
+			$noisettes[$description['squelette']][$description['rang']] = $description;
+		} elseif ($noisettes[$description['squelette']][$description['rang']]) {
+			// Modification de certains champs de la noisette :
+			// -- les informations identifiant sont toujours fournies, à savoir, l'id, le squelette et le rang.
+			// -- on utilise le squelette et le rang pour se positionner sur la noisette concernée.
+			$noisettes[$description['squelette']][$description['rang']] = array_merge(
+				$noisettes[$description['squelette']][$description['rang']],
+				$description);
+		}
+
+		// On met à jour la meta
+		ecrire_config("${plugin}_noisettes", $noisettes);
+
+		// On renvoie l'id de la noisette ajoutée ou modifiée.
+		$noisette = $description['id_noisette'];
+	}
+
+	return $noisette;
+}
+
+/**
+ * @param        $plugin
+ * @param string $squelette
+ * @param string $information
+ * @param string $stockage
+ *
+ * @return array|mixed
+ */
+function ncore_noisette_lister($plugin, $squelette = '', $information = '', $stockage = '') {
+
+	// On cherche le service de stockage à utiliser selon la logique suivante :
+	// - si le service de stockage est non vide on l'utilise en considérant que la fonction existe forcément;
+	// - sinon, on utilise la fonction du plugin appelant si elle existe;
+	// - et sinon, on utilise la fonction de N-Core.
+	include_spip('inc/ncore_utils');
+	if ($lister = ncore_chercher_fonction($plugin, 'noisette_lister', $stockage)) {
+		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
+		$noisettes = $lister($plugin, $squelette, $information);
+	} else {
+		// Le plugin ne propose pas de fonction propre ou le stockage N-Core est explicitement demandé.
+		// -- N-Core stocke les noisettes dans une meta propre au plugin appelant contenant un tableau au format
+		//    [squelette][rang] = description
+		include_spip('inc/config');
+		$noisettes = lire_config("${plugin}_noisettes", array());
+
+		if ($squelette) {
+			if (empty($noisettes[$squelette])) {
+				$noisettes = array();
+			} else {
+				$noisettes = $noisettes[$squelette];
+				if ($information) {
+					$noisettes = array_column($noisettes, $information, 'id_noisette');
+				}
+			}
+		} elseif ($noisettes) {
+			if ($information) {
+				$noisettes = array_column($noisettes, $information, 'id_noisette');
+			} else {
+				$noisettes = array_column($noisettes, null, 'id_noisette');
+			}
+		}
+	}
+
+	return $noisettes;
 }
