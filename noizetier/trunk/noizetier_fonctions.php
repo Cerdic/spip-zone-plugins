@@ -127,9 +127,9 @@ function noizetier_noisette_ajouter($noisette, $page, $bloc, $rang = 0) {
 		include_spip('inc/ncore_type_noisette');
 		$champs = ncore_type_noisette_informer(
 			'noizetier',
-			 _request('noisette'),
-			 'parametres',
-			 false);
+			$noisette,
+			'parametres',
+			false);
 
 		include_spip('inc/saisies');
 		$parametres = saisies_lister_valeurs_defaut($champs);
@@ -149,7 +149,7 @@ function noizetier_noisette_ajouter($noisette, $page, $bloc, $rang = 0) {
 
 		// On construit le where pour savoir quelles noisettes chercher et on complète
 		// la description avec l'identifiant de la page ou de l'objet.
-		$where = array('bloc=' . sql_quote($bloc));
+		$where = array('plugin=' . sql_quote('noizetier'), 'bloc=' . sql_quote($bloc));
 		if (is_array($page)) {
 			$description['objet'] = $page['objet'];
 			$description['id_objet'] = $page['id_objet'];

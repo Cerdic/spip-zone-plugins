@@ -48,23 +48,74 @@ function noizetier_type_noisette_decrire($plugin, $noisette) {
 	return $description;
 }
 
-function noizetier_type_noisette_lister($plugin, $information) {
+function noizetier_type_noisette_lister($plugin, $information = '') {
 
-	// Initialisation du tableau de sortie
-	$info_noisettes = array();
-
-	if ($information) {
-		$select = array('noisette', $information);
-		$where = array('plugin=' . sql_quote($plugin));
-		if ($info_noisettes = sql_allfetsel($select, 'spip_noizetier_noisettes', $where)) {
+	$where = array('plugin=' . sql_quote($plugin));
+	$select = $information ? array('noisette', $information) : '*';
+	if ($info_noisettes = sql_allfetsel($select, 'spip_noizetier_noisettes', $where)) {
+		if ($information) {
 			$info_noisettes = array_column($info_noisettes, $information, 'noisette');
+		} else {
+			$info_noisettes = array_column($info_noisettes, null, 'noisette');
 		}
 	}
 
 	return $info_noisettes;
 }
 
+function noizetier_noisette_lister($plugin, $squelette = '', $information = '') {
 
+	$where = array('plugin=' . sql_quote($plugin));
+	if ($squelette) {
+		$where[] = 'squelette=' . sql_quote($squelette);
+	}
+	$select = $information ? array('squelette', 'rang', $information) : '*';
+	$order_by = array('squelette', 'rang');
+	if ($noisettes = sql_allfetsel($select, 'spip_noizetier', $where, '', $order_by)) {
+		if ($information) {
+			$noisettes = $squelette
+				? array_column($noisettes, $information, 'rang')
+				: array_column($noisettes, $information);
+		}
+
+		// On formate le tableau au format [squelette][rang]
+
+	}
+
+	return $noisettes;
+}
+
+function noizetier_noisette_stocker($plugin, $action, $description) {
+
+	$id_noisette = 0;
+
+	// Mise à jour en base de données.
+	if ($action == 'creation') {
+		// Compléter la description fournie avec les champs propres au noizetier, à savoir, ceux identifiant
+		// la page/composition ou l'objet et le bloc.
+		// On parse le squelette pour identifier les données manquantes.
+		$complement = squelette_phraser($description['squelette']);
+		$description = array_merge($description, $complement);
+
+		if ($id_noisette = sql_insertq('spip_noizetier', $description)) {
+			// On invalide le cache
+			include_spip('inc/invalideur');
+			suivre_invalideur("id='noisette/$id_noisette'");
+		}
+	} elseif ($action == 'modification') {
+		// On sauvegarde l'id de la noisette et on le retire de la description pour éviter une erreur à l'update.
+		$id_noisette = intval($description['id_noisette']);
+		unset($description['id_noisette']);
+
+		// Mise à jour de la noisette
+		$where = array('id_noisette=' . $id_noisette);
+		if (!sql_updateq('spip_noizetier', $description, $where)) {
+			$id_noisette = 0;
+		}
+	}
+
+	return $id_noisette;
+}
 
 function noizetier_noisette_config_ajax() {
 
@@ -73,4 +124,42 @@ function noizetier_noisette_config_ajax() {
 	$defaut_ajax = lire_config('noizetier/ajax_noisette') == 'on' ? true : false;
 
 	return $defaut_ajax;
+}
+
+function squelette_phraser($squelette) {
+
+	$complement = array(
+		'type'        => '',
+		'composition' => '',
+		'objet'       => '',
+		'id_objet'    => 0,
+		'bloc'        => ''
+	);
+
+
+	if ($squelette) {
+		$squelette = strtolower($squelette);
+		$page = basename($squelette);
+		$identifiants_page = explode('-', $page, 2);
+		if (!empty($identifiants_page[1])) {
+			// Forcément une composition
+			$complement['type'] = $identifiants_page[0];
+			$complement['composition'] = $identifiants_page[1];
+		} else {
+			// Page ou objet
+			if (preg_match(',([a-z_]+)(\d+)$,s', $identifiants_page[0], $identifiants_objet)) {
+				$complement['objet'] = $identifiants_objet[1];
+				$complement['id_objet'] = $identifiants_objet[2];
+			} else {
+				$complement['type'] = $identifiants_page[0];
+			}
+		}
+
+		$bloc = dirname($squelette);
+		if ($bloc != '.') {
+			$complement['bloc'] = basename($bloc);
+		}
+	}
+
+	return $complement;
 }
