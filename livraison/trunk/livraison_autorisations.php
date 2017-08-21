@@ -20,21 +20,4 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Fonction d'appel pour le pipeline
  * @pipeline autoriser */
-function livraison_autoriser(){}
-
-
-/* Exemple
-function autoriser_configurer_shop_livraison_dist($faire, $type, $id, $qui, $opt) {
-	// type est un objet (la plupart du temps) ou une chose.
-	// autoriser('configurer', '_shop_livraison') => $type = 'shop_livraison'
-	// au choix
-	return autoriser('webmestre', $type, $id, $qui, $opt); // seulement les webmestres
-	return autoriser('configurer', '', $id, $qui, $opt); // seulement les administrateurs complets
-	return $qui['statut'] == '0minirezo'; // seulement les administrateurs (même les restreints)
-	// ...
-}
-*/
-
-
-
-?>
+function livraison_autoriser() {}

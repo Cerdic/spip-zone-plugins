@@ -6,7 +6,7 @@
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_livraison_zone' value='#ENV{id_livraison_zone}' />
-		<ul>
+		<ul class="editer-groupe">
 
 			[(#SAISIE{input, nom, obligatoire=oui,
 				label=<:livraison_zone:label_nom:>})]

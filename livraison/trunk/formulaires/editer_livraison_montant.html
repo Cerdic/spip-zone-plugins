@@ -5,9 +5,9 @@
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_livraison_montant' value='#ENV{id_livraison_montant}' />
-		<ul>
-		    
-		    [(#SAISIE{livraison_zones,id_livraison_zone, obligatoire=oui,
+		<ul class="editer-groupe">
+			
+			[(#SAISIE{livraison_zones,id_livraison_zone, obligatoire=oui,
 				label=<:livraison_zone:titre_livraison_zone:>})]
 
 			[(#SAISIE{input, montant, obligatoire=oui,

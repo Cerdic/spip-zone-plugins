@@ -32,7 +32,7 @@ include_spip('inc/editer');
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_livraison_zone_identifier_dist($id_livraison_zone='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_livraison_zone_identifier_dist($id_livraison_zone='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden='') {
 	return serialize(array(intval($id_livraison_zone)));
 }
 
@@ -58,13 +58,15 @@ function formulaires_editer_livraison_zone_identifier_dist($id_livraison_zone='n
  * @return array
  *     Environnement du formulaire
  */
-function formulaires_editer_livraison_zone_charger_dist($id_livraison_zone='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-    include_spip('inc/config');
-    $config=lire_config('shop_livraison',array());
+function formulaires_editer_livraison_zone_charger_dist($id_livraison_zone='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden='') {
+	include_spip('inc/config');
+	$config=lire_config('shop_livraison',array());
 
 	$valeurs = formulaires_editer_objet_charger('livraison_zone',$id_livraison_zone,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
- 
-    if(!intval($id_livraison_zone) AND empty($valeurs['unite'])) $valeurs['unite']=$config['unite_defaut']?$config['unite_defaut']:'';  
+
+	if (!intval($id_livraison_zone) AND empty($valeurs['unite'])) {
+		$valeurs['unite'] = $config['unite_defaut']?$config['unite_defaut']:'';
+	}
 	return $valeurs;
 }
 
@@ -90,7 +92,7 @@ function formulaires_editer_livraison_zone_charger_dist($id_livraison_zone='new'
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_editer_livraison_zone_verifier_dist($id_livraison_zone='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_livraison_zone_verifier_dist($id_livraison_zone='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden='') {
 	return formulaires_editer_objet_verifier('livraison_zone',$id_livraison_zone, array('nom'));
 }
 
@@ -116,9 +118,6 @@ function formulaires_editer_livraison_zone_verifier_dist($id_livraison_zone='new
  * @return array
  *     Retours des traitements
  */
-function formulaires_editer_livraison_zone_traiter_dist($id_livraison_zone='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_livraison_zone_traiter_dist($id_livraison_zone='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden='') {
 	return formulaires_editer_objet_traiter('livraison_zone',$id_livraison_zone,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 }
-
-
-?>
