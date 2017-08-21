@@ -207,7 +207,7 @@ function spipdf_nettoyer_html($html, $params_pdf = array()){
 function traite_balise_page($html){
 
 	// on teste la balise page
-	if (preg_match('/<page(.*)>/iUms', $html, $matches)){
+	if (preg_match('/<page\s(.*)>/iUms', $html, $matches)){
 		// on crée un tableau avec (beurk) Global pour accèder aux valeurs de pages
 		if (!empty($matches[1])){
 			$balise_page = $matches[1];
@@ -216,7 +216,8 @@ function traite_balise_page($html){
 			$balise_page = preg_replace_callback($pattern, 'getBalise', $balise_page);
 
 			// supprimer <page> et </page>
-			$html = preg_replace('/<\/?page(.*)>/iUms', '', $html);
+			$html = preg_replace('/<\/?page\s(.*)>/iUms', '', $html);
+			$html = preg_replace('/<\/page>/iUms', '', $html);
 
 			return $html;
 		}
@@ -263,7 +264,7 @@ function spipdf_html2pdf($html, $file = false){
 	);
 
 	// choix de la classe de génération via la balise <page lib>
-	if (preg_match('/\<page*.lib_pdf=["|\'](.*)["|\']/iUms', $html, $match_librairie)
+	if (preg_match('/\<page\s*.lib_pdf=["|\'](.*)["|\']/iUms', $html, $match_librairie)
 		&& !empty($match_librairie[1])
 		&& array_key_exists(strtolower($match_librairie[1]), $possible_librairies)
 	){
