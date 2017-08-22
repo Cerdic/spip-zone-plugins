@@ -6,7 +6,7 @@
 	- Dans le texte d'un contenu :
 	<chart|id=toto|type=line|data="10,20,30 next 5,10,15"|labels="2005,2006,2007"|dataLabels="patates,poireaux">
 	- Dans un squelette :
-	#MODELE{chart, id=toto, type=line, data=#ARRAY{patates,#ARRAY{10,20,30},poireaux,#ARRAY{5,10,15}}}
+	#MODELE{chart, id=toto, type=line, data=#ARRAY{patates,#LISTE{10,20,30},poireaux,#LISTE{5,10,15}}}
 
 	Paramètres :
 	**obligatoires
@@ -117,7 +117,7 @@
 #SET{height_int,   #GET{height}|intval|sinon{''}}
 
 [(#REM) Apparence ]
-#SET{colors_defaut,#LISTE{#69D2E7,#E0E4CC,#F38630,#96CE7F,#CEBC17,#CE4264,#F7464A,#46BFBD,#FDB45C}}
+#SET{colors_defaut,#LISTE{#69D2E7,#E0E4CC,#F38630,#96CE7F,#CEBC17,#CE4264,#F7464A,#46BFBD,#FDB45C,#FD7B9B,#8C99FD,#A2DB2F,#DB7368,#6B84DB,#DBBF37,#DB97AB,#2EC087}}
 #SET{colors,       #ENV{colors}|is_null|?{
 	#ARRAY,
 	#ENV{colors}|is_string|?{#ENV{colors}|replace{' '}|explode{','}, #ENV{colors}}
