@@ -154,7 +154,7 @@ function contacts_declarer_tables_objets_sql($tables) {
 			'id_annuaire'		=> 'id_annuaire',
 		),
 		'tables_jointures' => array(
-			'auteurs', 'annuaires'
+			'mots_liens', 'auteurs', 'annuaires', 'organisations_liens'
 		),
 		'rechercher_champs' => array(
 			'id_organisation' => 12, 'nom' => 8, 'descriptif' => 4, 'activite' => 4, 'statut_juridique' => 2, 'ouvertures' => 1, 'tarifs' => 1,
@@ -213,7 +213,7 @@ function contacts_declarer_tables_objets_sql($tables) {
 			'id_annuaire'	=> 'id_annuaire',
 		),
 		'tables_jointures' => array(
-			'auteurs', 'annuaires', 'organisations_liens'
+			'auteurs', 'annuaires', 'organisations_liens', 'contacts_liens'
 		),
 		'rechercher_champs' => array(
 			'id_contact' => 12, 'nom' => 8, 'prenom' => 2, 'descriptif' => 4, 'fonction' => 2,
