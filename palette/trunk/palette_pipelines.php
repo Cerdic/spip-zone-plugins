@@ -27,9 +27,8 @@ function palette_header_prive($flux) {
  * @return string
  */
 function palette_header_common() {
-	$ret .= '<script type="text/javascript" src="'. find_in_path('lib/tinycolorPicker/colors.js') . '"></script>'."\n";
-	$ret .= '<script type="text/javascript" src="'. find_in_path('lib/tinycolorPicker/jqColorPicker.js') . '"></script>'."\n";
+	$ret .= '<script type="text/javascript" src="'. find_in_path('lib/tinyColorPicker/colors.js') . '"></script>'."\n";
+	$ret .= '<script type="text/javascript" src="'. find_in_path('lib/tinyColorPicker/jqColorPicker.js') . '"></script>'."\n";
 	$ret .= '<script type="text/javascript" src="'. find_in_path('javascript/palette.js') . '"></script>'."\n";
 	return $ret;
 }
-
