@@ -108,7 +108,7 @@ class MCache {
 	}
 
 	/* bool */
-	function purge($key) {
+	function purge() {
 		if (method_exists($this->backend, 'purge'))
 			return $this->backend->purge();
 		else
