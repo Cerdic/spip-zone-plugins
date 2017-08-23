@@ -4,14 +4,14 @@ function translate_requestCurl($parameters) {
 	# $url_page = "https://ajax.googleapis.com/ajax/services/language/translate?";
 	$url_page = "https://www.googleapis.com/language/translate/v2?";
 
-	$parameters_explode = explode("&", $parameters);
+	# $parameters_explode = explode("&", $parameters);
 	# $nombre_param = count($parameters_explode);
 
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url_page);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_REFERER, !empty($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : "");
-	curl_setopt($ch, CURLOPT_POST, nombre_param);
+	#curl_setopt($ch, CURLOPT_POST, nombre_param);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array('X-HTTP-Method-Override: GET'));
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -108,8 +108,45 @@ function translate_line($text, $destLang) {
 	return $trad;
 }
 
-/*
- *  traduire sans utiliser le cache ni mettre en cache le resultat
+/**
+ * Retourne le traducteur disponible et sa clé d’api
+ * @return array|false Couple traducteur, clé d’api)
+ */
+function traduire_texte_traducteur() {
+	static $traducteur = null;
+	static $key = null;
+	if (is_null($traducteur)) {
+		include_spip('inc/config');
+		if (defined('_BING_APIKEY')) {
+			$traducteur = 'bing';
+			$key = _BING_APIKEY;
+		} elseif (defined('_GOOGLETRANSLATE_APIKEY')) {
+			$traducteur = 'google';
+			$key = _GOOGLETRANSLATE_APIKEY;
+		} elseif (defined('_TRANSLATESHELL_CMD')) {
+			$traducteur = 'shell';
+			$key = _TRANSLATESHELL_CMD; // la constante est le chemin vers le binaire. Hum.
+		} elseif ($v = lire_config('traduiretexte/cle_bing')) {
+			$traducteur = 'bing';
+			$key = $v;
+		} elseif ($v = lire_config('traduiretexte/cle_google')) {
+			$traducteur = 'google';
+			$key = $v;
+		} else {
+			$traducteur = false;
+		}
+	}
+	return array($traducteur, $key);
+}
+
+
+/**
+ * Traduire sans utiliser le cache ni mettre en cache le resultat
+ *
+ * @param string $text
+ * @param string $destLang
+ * @param string $srcLang
+ * @return string|false
  */
 function traduire_texte($text, $destLang = 'fr', $srcLang = 'en') {
 	if (strlen(trim($text)) == 0) return '';
@@ -118,45 +155,68 @@ function traduire_texte($text, $destLang = 'fr', $srcLang = 'en') {
 	$destLang = urlencode($destLang);
 	$srcLang = urlencode($srcLang);
 
-	if (defined('_BING_APIKEY')) {
-		//echo "BING";
-		$trans = translate_requestCurl_bing(_BING_APIKEY, $text, $srcLang, $destLang);
-	} else if (defined('_GOOGLETRANSLATE_APIKEY')) {
-		$trans = translate_requestCurl("key=" . _GOOGLETRANSLATE_APIKEY . "&source=$srcLang&target=$destLang&q=" . rawurlencode($text));
-	} else if (defined('_TRANSLATESHELL_CMD')) {
-		$trans = translate_shell($text, $destLang);
+	list($traducteur, $apikey) = traduire_texte_traducteur();
+
+	// dispatcher. On pourrait faire des fonctions dédiées par traducteur.
+	switch ($traducteur) {
+		case 'bing':
+			$trans = translate_requestCurl_bing($apikey, $text, $srcLang, $destLang);
+			break;
+
+		case 'google':
+			$trans = translate_requestCurl("key=" . $apikey . "&source=$srcLang&target=$destLang&q=" . rawurlencode($text));
+			break;
+
+		case 'shell':
+			$trans = translate_shell($text, $destLang);
+			break;
 	}
 
 	$ltr = lang_dir($destLang, 'ltr', 'rtl');
 
-	if (strlen($trans))
+	if (strlen($trans)) {
 		return "<div dir='$ltr' lang='$destLang'>$trans</div>";
-	else
+	} else {
 		return false;
+	}
 }
 
 
-/*
- *  traduire avec un cache
+/**
+ * Traduire avec un cache
+ *
+ * @param string $text
+ * @param string $destLang
+ * @param string $srcLang
+ * @param array $options {
+ *    @var bool $raw : Retourner un tableau [texte, hash] (au lieu de simplement le texte)
+ * }
+ * @return string|false|array
  */
-function traduire($text, $destLang = 'fr', $srcLang = 'en') {
+function traduire($text, $destLang = 'fr', $srcLang = 'en', $options = array()) {
 	if (strlen(trim($text)) == 0) {
 		return '';
 	}
-	if (defined("_BING_APIKEY")) {
-		$text = mb_substr($text, 0, 10000, "UTF-8");
-	} elseif (defined("_GOOGLETRANSLATE_APIKEY")) {
-		$text = mb_substr($text, 0, 4500, "UTF-8");
+
+	list($traducteur) = traduire_texte_traducteur();
+
+	switch ($traducteur) {
+		case 'bing':
+			$text = mb_substr($text, 0, 10000, "UTF-8");
+			break;
+
+		case 'google':
+			$text = mb_substr($text, 0, 4500, "UTF-8");
+			break;
 	}
 
 	$hash = md5($text);
 
-	$query = sql_select("texte", "spip_traductions", "hash='$hash' AND langue ='$destLang'");
+	$row = sql_fetsel("texte", "spip_traductions", "hash='$hash' AND langue ='$destLang'");
 
-	if ($row = sql_fetch($query)) {
+	if ($row) {
 		$trad = $row["texte"];
 		# echo "EN BASE : ".$hash;
-		return $trad;
 	} else {
 		//echo "NOUVEAU";
 		$trad = traduire_texte($text, $destLang, $srcLang);
@@ -169,8 +229,11 @@ function traduire($text, $destLang = 'fr', $srcLang = 'en') {
 					"langue" => $destLang
 				)
 			);
-			return $trad;
-		} else
+		} else {
 			spip_log('[' . $destLang . "] ECHEC $text", 'translate');
+			$trad = false;
+		}
 	}
+
+	return empty($options['raw']) ? $trad : array($trad, $hash);
 }
