@@ -81,12 +81,10 @@ function ncore_noisette_ajouter($plugin, $type_noisette, $squelette, $rang = 0, 
 			// existantes, donc on ne fait rien.
 			// Sinon, il faut décaler les noisettes de rang supérieur ou égal.
 			if ($rang <= $rang_max) {
-				$modification['squelette'] = $description['squelette'];
 				foreach ($noisettes as $_id_noisette => $_description) {
 					if ($_description['rang'] >= $rang) {
-						$modification['id_noisette'] = $_description['id_noisette'];
-						$modification['rang'] = $_description['rang'] + 1;
- 						ncore_noisette_stocker($plugin, 'modification', $modification, $stockage);
+						$_description['rang'] += 1;
+ 						ncore_noisette_stocker($plugin, 'modification', $_description, $stockage);
 					}
 				}
 			}
@@ -97,4 +95,20 @@ function ncore_noisette_ajouter($plugin, $type_noisette, $squelette, $rang = 0, 
 	}
 
 	return $noisette_ajoutee;
+}
+
+function ncore_noisette_supprimer($plugin, $identifiant, $stockage = '') {
+
+	// Initialisation du retour
+	$retour = false;
+
+	if (intval($identifiant)) {
+		// Suppression d'un noisette connue par son id.
+		$retour = ncore_noisette_destocker($plugin, $identifiant, $stockage);
+	} elseif (is_string($identifiant) and $identifiant) {
+		// Suppression de toutes les noisettes affectées à un squelette.
+		$retour = ncore_noisette_destocker_squelette($plugin, $identifiant, $stockage);
+	}
+
+	return $retour;
 }

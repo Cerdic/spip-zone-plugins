@@ -252,13 +252,18 @@ function ncore_noisette_stocker($plugin, $action, $description, $stockage = '') 
 			// -- et on range la noisette avec les noisettes affectées au même squelette en fonction de son rang.
 			$description['id_noisette'] = uniqid("${plugin}_");
 			$noisettes[$description['squelette']][$description['rang']] = $description;
-		} elseif ($noisettes[$description['squelette']][$description['rang']]) {
-			// Modification de certains champs de la noisette :
+		} else {
+			// Modification de la noisette :
 			// -- les informations identifiant sont toujours fournies, à savoir, l'id, le squelette et le rang.
 			// -- on utilise le squelette et le rang pour se positionner sur la noisette concernée.
-			$noisettes[$description['squelette']][$description['rang']] = array_merge(
-				$noisettes[$description['squelette']][$description['rang']],
-				$description);
+			// -- pour un changement de rang il faut mettre à jour toute la description.
+			if (!isset($noisettes[$description['squelette']][$description['rang']])) {
+				$noisettes[$description['squelette']][$description['rang']] = $description;
+			} else {
+				$noisettes[$description['squelette']][$description['rang']] = array_merge(
+					$noisettes[$description['squelette']][$description['rang']],
+					$description);
+			}
 		}
 
 		// On met à jour la meta
@@ -281,6 +286,9 @@ function ncore_noisette_stocker($plugin, $action, $description, $stockage = '') 
  */
 function ncore_noisette_lister($plugin, $squelette = '', $information = '', $stockage = '') {
 
+	// Initialisation du tableau de sortie.
+	$noisettes = array();
+
 	// On cherche le service de stockage à utiliser selon la logique suivante :
 	// - si le service de stockage est non vide on l'utilise en considérant que la fonction existe forcément;
 	// - sinon, on utilise la fonction du plugin appelant si elle existe;
@@ -294,22 +302,21 @@ function ncore_noisette_lister($plugin, $squelette = '', $information = '', $sto
 		// -- N-Core stocke les noisettes dans une meta propre au plugin appelant contenant un tableau au format
 		//    [squelette][rang] = description
 		include_spip('inc/config');
-		$noisettes = lire_config("${plugin}_noisettes", array());
+		$meta_noisettes = lire_config("${plugin}_noisettes", array());
 
 		if ($squelette) {
-			if (empty($noisettes[$squelette])) {
-				$noisettes = array();
-			} else {
-				$noisettes = $noisettes[$squelette];
-				if ($information) {
-					$noisettes = array_column($noisettes, $information, 'id_noisette');
-				}
+			if (!empty($meta_noisettes[$squelette])) {
+				$noisettes = $meta_noisettes[$squelette];
+				$noisettes = $information
+					? array_column($noisettes, $information, 'id_noisette')
+					: array_column($noisettes, null, 'id_noisette');
 			}
-		} elseif ($noisettes) {
-			if ($information) {
-				$noisettes = array_column($noisettes, $information, 'id_noisette');
-			} else {
-				$noisettes = array_column($noisettes, null, 'id_noisette');
+		} elseif ($meta_noisettes) {
+			foreach ($meta_noisettes as $_squelette => $_descriptions) {
+				$noisettes_squelette = $information
+					? array_column($_descriptions, $information, 'id_noisette')
+					: array_column($_descriptions, null, 'id_noisette');
+				$noisettes = array_merge($noisettes, $noisettes_squelette);
 			}
 		}
 	}
