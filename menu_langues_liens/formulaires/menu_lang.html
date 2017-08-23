@@ -37,7 +37,7 @@
 	avec la fonction PHP 'array_diff' http://www.php.net/manual/fr/function.array-diff.php qui renvoie elle-meme un tableau.
 ]
 
-[(#EVAL{_MLL_LANGUES_MULTILINGUE}|=={true}|?{
+[(#VAL{_MLL_LANGUES_MULTILINGUE}|defined|et{#VAL{_MLL_LANGUES_MULTILINGUE}|constant|=={true}}|?{
 	#SET{mll_langues,langues_multilingue}
 ,
 	#SET{mll_langues,langues_utilisees}
