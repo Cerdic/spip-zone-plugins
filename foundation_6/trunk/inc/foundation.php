@@ -70,6 +70,9 @@ function class_grid_foundation($nombre_colonnes, $type) {
 function jQlfoundation($files) {
 	$js = '';
 
+	// Trimer le tableau pour éviter tout problème
+	$files = array_map('trim', $files);
+
 	// Dans le cas ou jQl n'est pas activé pour tout les scripts
 	if (!defined('_JS_ASYNC_LOAD') and !test_espace_prive()) {
 		// On cherche dans un premier temps si jQl existe
@@ -85,7 +88,7 @@ function jQlfoundation($files) {
 
 			// charger et utiliser jQl sur les fichiers de foundation
 			$js = "<script type=\"text/javascript\">\n".$jQl."\n";
-			$js .= 'jQl.loadjQ("'.trim($foundation_js).'");'."\n";
+			$js .= 'jQl.loadjQ("'.$foundation_js.'");'."\n";
 			$js .= '</script>';
 		}
 	} elseif (defined('_JS_ASYNC_LOAD') and !test_espace_prive()) {
