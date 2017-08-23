@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_desc' => '<strong>Palette</strong> permet d’ajouter automatiquement
   un sélecteur de couleurs à un champ input,
   simplement en lui donnant la classe CSS « palette »',
-	'config_exemple' => 'Exemple :',
+	'config_exemple' => 'Exemple :', # MODIF
 	'config_lien_doc' => '<a href="http://contrib.spip.net/Palette" class="spip_out">Cf. documentation</a>', # MODIF
 
 	// F

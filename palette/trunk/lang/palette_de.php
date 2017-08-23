@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_desc' => '<strong>Palette</strong> ermöglicht ein Eingabefeld
 mit einem Modul zur Farbauswahl zu ergänzen,
 indem es die CSS-Lasse «palette» erhält.',
-	'config_exemple' => 'Beispiel:',
+	'config_exemple' => 'Beispiel:', # MODIF
 	'config_lien_doc' => '<a href="http://contrib.spip.net/Palette" class="spip_out">Siehe Dokumentation</a>', # MODIF
 
 	// F
