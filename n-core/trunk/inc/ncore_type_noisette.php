@@ -37,7 +37,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return bool
  * 		`false` si une erreur s'est produite, `true` sinon.
  */
-function ncore_type_noisette_charger($plugin, $dossier = 'noisettes/', $recharger = false, $stockage = '') {
+function type_noisette_charger($plugin, $dossier = 'noisettes/', $recharger = false, $stockage = '') {
 
 	// Retour de la fonction
 	$retour = true;
@@ -222,7 +222,7 @@ function ncore_type_noisette_charger($plugin, $dossier = 'noisettes/', $recharge
  * 		de type tableau sont systématiquement désérialisés et si demandé, les champs textuels peuvent être
  * 		traités avec la fonction _T_ou_typo().
  */
-function ncore_type_noisette_informer($plugin, $type_noisette, $information = '', $traiter_typo = false, $stockage = '') {
+function type_noisette_lire($plugin, $type_noisette, $information = '', $traiter_typo = false, $stockage = '') {
 
 	// On indexe le tableau des indicateurs ajax par le plugin appelant en cas d'appel sur le même hit
 	// par deux plugins différents.
@@ -291,7 +291,7 @@ function ncore_type_noisette_informer($plugin, $type_noisette, $information = ''
  *
  * @return array
  */
-function ncore_type_noisette_repertorier($plugin, $filtres = array(), $stockage = '') {
+function type_noisette_repertorier($plugin, $filtres = array(), $stockage = '') {
 
 	// On indexe le tableau des des types de noisette par le plugin appelant en cas d'appel sur le même hit
 	// par deux plugins différents.

@@ -31,7 +31,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return mixed
  * 		Retourne l'identifiant de la nouvelle instance de noisette créée ou `false` en cas d'erreur.
  **/
-function ncore_noisette_ajouter($plugin, $type_noisette, $squelette, $rang = 0, $stockage = '') {
+function noisette_ajouter($plugin, $type_noisette, $squelette, $rang = 0, $stockage = '') {
 
 	// Initialisation de la valeur de sortie.
 	$noisette_ajoutee = false;
@@ -39,7 +39,7 @@ function ncore_noisette_ajouter($plugin, $type_noisette, $squelette, $rang = 0, 
 	if ($type_noisette) {
 		// On récupère les paramètres du type de noisette.
 		include_spip('inc/ncore_type_noisette');
-		$champs = ncore_type_noisette_informer(
+		$champs = type_noisette_lire(
 			$plugin,
 			$type_noisette,
 			'parametres',
@@ -97,7 +97,7 @@ function ncore_noisette_ajouter($plugin, $type_noisette, $squelette, $rang = 0, 
 	return $noisette_ajoutee;
 }
 
-function ncore_noisette_supprimer($plugin, $identifiant, $stockage = '') {
+function noisette_supprimer($plugin, $identifiant, $stockage = '') {
 
 	// Initialisation du retour
 	$retour = false;
