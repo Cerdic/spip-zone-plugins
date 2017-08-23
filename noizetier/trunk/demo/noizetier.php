@@ -10,20 +10,12 @@ include_spip('ncore/ncore');
 include_spip('ncore/noizetier');
 include_spip('noizetier_fonctions');
 
-$skels = array(
-	'article',
-	'article-evenement',
-	'content/article',
-	'content/article-evenement',
-	'squelettes/prive/contenu/accueil',
-	'article1',
-	'nav/article12',
-	'prive/squelettes/contenu/article13');
+$retour = noisette_ajouter('dashome', 'portfolio', 'content/article', 2);
+var_dump($retour);
 
-foreach ($skels as $_skel) {
-	$c = squelette_phraser($_skel);
-	var_dump($_skel, $c);
-}
+$retour = ncore_noisette_lister('dashome');
+var_dump($retour);
+
 
 
 foreach (array('dashome') as $_plugin) {
@@ -34,22 +26,22 @@ foreach (array('dashome') as $_plugin) {
 //	$retour = ncore_noisette_lister($_plugin, 'content/article');
 //	var_dump($retour);
 
-//	$retour = ncore_noisette_ajouter($_plugin, 'copdespip', 'content/article', 1);
+//	$retour = noisette_ajouter($_plugin, 'copdespip', 'content/article', 1);
 //	var_dump($retour);
 
 //	$retour = ncore_noisette_lister($_plugin, 'content/article');
 //	var_dump($retour);
 
-//	$retour = ncore_noisette_ajouter($_plugin, 'main', 'content/article');
-//	$retour = ncore_noisette_ajouter($_plugin, 'bloctexte', 'content/article');
+//	$retour = noisette_ajouter($_plugin, 'main', 'content/article');
+//	$retour = noisette_ajouter($_plugin, 'bloctexte', 'content/article');
 
-//	$retour = ncore_type_noisette_charger($_plugin, 'noisettes/',  false);
+//	$retour = type_noisette_charger($_plugin, 'noisettes/',  false);
 //	var_dump($retour);
-//	$retour = ncore_type_noisette_repertorier($_plugin, array('type' => 'article', 'composition' => ''));
+//	$retour = type_noisette_repertorier($_plugin, array('type' => 'article', 'composition' => ''));
 //	var_dump($retour);
-//	$retour = ncore_type_noisette_informer($_plugin, 'breadcrumb', 'nom');
+//	$retour = type_noisette_lire($_plugin, 'breadcrumb', 'nom');
 //	var_dump($retour);
-//	$retour = ncore_type_noisette_informer($_plugin, 'breadcrumb', 'nom', true);
+//	$retour = type_noisette_lire($_plugin, 'breadcrumb', 'nom', true);
 //	var_dump($retour);
 
 //	$retour = ncore_noisette_est_ajax($_plugin, 'breadcrumb');

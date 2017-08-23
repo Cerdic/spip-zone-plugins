@@ -41,18 +41,21 @@ function formulaires_ajouter_noisette_traiter_dist($page, $bloc, $redirect = '')
 	if (is_array($page)) {
 		$identifiant['objet'] = $page['objet'];
 		$identifiant['id_objet'] = $page['id_objet'];
+		$squelette = "${bloc}/{$identifiant['objet']}{$identifiant['id_objet']}";
 	}
 	else {
 		$identifiant['page'] = $page;
+		$squelette = "${bloc}/${page}";
 	}
 
 	if (autoriser('configurerpage', 'noizetier', 0, '', $identifiant)) {
 		if ($noisette = _request('noisette')) {
-			include_spip('noizetier_fonctions');
-			if ($id_noisette = noizetier_noisette_ajouter($noisette, $page, $bloc)) {
+			include_spip('inc/ncore_noisette');
+			// Ajout de la noisette en fin de liste pour le squelette concerné.
+			if ($id_noisette = noisette_ajouter('noizetier', $noisette, $squelette)) {
 				$retour['message_ok'] = _T('info_modification_enregistree');
 				if ($redirect) {
-					// Note : $retour indique la page à charger en cas d'ajout
+					// Note : $redirect indique la page à charger en cas d'ajout
 					//        @id_noisette@ étant alors remplacé par la bonne valeur, connue seulement après ajout de la noisette
 					// TODO : Grrr, y a surement plus propre => à trouver
 					$redirect = str_replace('&amp;', '&', $redirect);
@@ -73,7 +76,6 @@ function formulaires_ajouter_noisette_traiter_dist($page, $bloc, $redirect = '')
 	} else {
 		$retour['message_erreur'] = _T('noizetier:probleme_droits');
 	}
-
 
 	return $retour;
 }

@@ -41,6 +41,6 @@ function action_recharger_configuration_dist() {
 		noizetier_page_charger();
 	} elseif ($argument == 'noisette') {
 		include_spip('inc/ncore_type_noisette');
-		ncore_type_noisette_charger('noizetier', 'noisettes/');
+		type_noisette_charger('noizetier', 'noisettes/');
 	}
 }

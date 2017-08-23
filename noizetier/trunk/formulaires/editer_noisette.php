@@ -72,7 +72,7 @@ function formulaires_editer_noisette_verifier_dist($id_noisette, $redirect = '')
 
 	// Vérifier les champs correspondant aux paramètres spécifiques de ce type de noisette
 	include_spip('inc/ncore_type_noisette');
-	$champs = ncore_type_noisette_informer(
+	$champs = type_noisette_lire(
 		'noizetier',
 		 _request('noisette'),
 		 'parametres',
@@ -95,7 +95,7 @@ function formulaires_editer_noisette_traiter_dist($id_noisette, $redirect = '') 
 	if (autoriser( 'editernoisette', 'noizetier', $id_noisette)) {
 		// On constitue le tableau des valeurs des paramètres spécifiques de la noisette
 		include_spip('inc/ncore_type_noisette');
-		$champs = ncore_type_noisette_informer(
+		$champs = type_noisette_lire(
 			'noizetier',
 			 _request('noisette'),
 			 'parametres',

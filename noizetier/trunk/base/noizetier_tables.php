@@ -48,8 +48,8 @@ function noizetier_declarer_tables_interfaces($interface) {
  * Le plugin déclare trois nouvelles tables qui sont :
  *
  * - `spip_noizetier_pages`, qui contient les éléments descriptifs des pages et compositions,
- * - `spip_noizetier_noisettes`, qui contient les éléments descriptifs des noisettes disponibles,
- * - `spip_noizetier`, qui contient l'utilisation des noisettes dans les pages concernées.
+ * - `spip_noizetier_noisettes`, qui contient les éléments descriptifs des types de noisette disponibles,
+ * - `spip_noizetier`, qui contient l'affectation des noisettes dans les pages concernées.
  *
  * @pipeline declarer_tables_principales
  *
@@ -128,6 +128,7 @@ function noizetier_declarer_tables_principales($tables_principales) {
 	$noizetier = array(
 		'id_noisette' => 'bigint(21) NOT NULL',
 		'plugin'      => "varchar(30) DEFAULT '' NOT NULL",
+		'squelette'   => "varchar(255) DEFAULT '' NOT NULL",
 		'rang'        => "smallint DEFAULT 1 NOT NULL",
 		'type'        => "varchar(127) DEFAULT '' NOT NULL",
 		'composition' => "varchar(127) DEFAULT '' NOT NULL",
@@ -143,6 +144,7 @@ function noizetier_declarer_tables_principales($tables_principales) {
 	$noizetier_cles = array(
 		'PRIMARY KEY'     => 'id_noisette',
 		'KEY plugin'      => 'plugin',
+		'KEY squelette'   => 'squelette',
 		'KEY type'        => 'type',
 		'KEY composition' => 'composition',
 		'KEY bloc'        => 'bloc',

@@ -125,7 +125,7 @@ function noizetier_noisette_ajouter($noisette, $page, $bloc, $rang = 0) {
 
 	if ($noisette) {
 		include_spip('inc/ncore_type_noisette');
-		$champs = ncore_type_noisette_informer(
+		$champs = type_noisette_lire(
 			'noizetier',
 			$noisette,
 			'parametres',

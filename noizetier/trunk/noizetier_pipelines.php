@@ -296,7 +296,7 @@ function noizetier_affiche_milieu($flux) {
 		include_spip('noizetier_fonctions');
 		noizetier_page_charger();
 		include_spip('inc/ncore_type_noisette');
-		ncore_type_noisette_charger('noizetier', 'noisettes/');
+		type_noisette_charger('noizetier', 'noisettes/');
 
 		// TODO : à revoir avec N-Core
 		include_spip('inc/flock');

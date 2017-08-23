@@ -69,17 +69,12 @@ function noizetier_noisette_lister($plugin, $squelette = '', $information = '') 
 	if ($squelette) {
 		$where[] = 'squelette=' . sql_quote($squelette);
 	}
-	$select = $information ? array('squelette', 'rang', $information) : '*';
-	$order_by = array('squelette', 'rang');
-	if ($noisettes = sql_allfetsel($select, 'spip_noizetier', $where, '', $order_by)) {
-		if ($information) {
-			$noisettes = $squelette
-				? array_column($noisettes, $information, 'rang')
-				: array_column($noisettes, $information);
-		}
+	$select = $information ? array_merge(array('squelette', 'rang', 'id_noisette'), array($information)) : '*';
 
-		// On formate le tableau au format [squelette][rang]
-
+	if ($noisettes = sql_allfetsel($select, 'spip_noizetier', $where)) {
+		$noisettes = $information
+			? array_column($noisettes, $information, 'id_noisette')
+			: array_column($noisettes, null, 'id_noisette');
 	}
 
 	return $noisettes;

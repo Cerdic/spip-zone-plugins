@@ -88,13 +88,6 @@ function noizetier_vider_tables($nom_meta_version_base) {
 	effacer_meta($nom_meta_version_base);
 	// On efface la configuration du plugin
 	effacer_meta('noizetier');
-
-	// Effacer les fichiers du cache créés par le noizetier
-//	include_spip('inc/flock');
-//	include_spip('noizetier_fonctions');
-//	supprimer_fichier(_CACHE_AJAX_NOISETTES);
-//	supprimer_fichier(_CACHE_CONTEXTE_NOISETTES);
-//	supprimer_fichier(_CACHE_INCLUSIONS_NOISETTES);
 }
 
 /**
@@ -127,9 +120,12 @@ function maj_060($config_defaut) {
 	// -- Ajout de la colonne 'balise' qui indique pour chaque noisette si le noiZetier doit l'inclure dans un div
 	//    englobant ou pas. Le champ prend les valeurs 'on', '' ou 'defaut' qui indique qu'il faut prendre
 	//    en compte la valeur configurée par défaut (configuration du noizetier).
+	// -- Ajout de la colonne 'plugin' qui vaut 'noizetier' pour ce plugin.
+	// -- Ajout de la colonne 'squelette'.
 	sql_alter("TABLE spip_noisettes ADD plugin varchar(30) DEFAULT '' NOT NULL AFTER id_noisette");
+	sql_alter("TABLE spip_noisettes ADD squelette varchar(255) DEFAULT '' NOT NULL AFTER plugin");
 	sql_alter("TABLE spip_noisettes ADD balise varchar(6) DEFAULT 'defaut' NOT NULL AFTER parametres");
-	sql_alter("TABLE spip_noisettes ADD maj timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL");
+//	sql_alter("TABLE spip_noisettes ADD maj timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL");
 	// -- Suppression des index pour des colonnes dont on va modifier la taille ou le type
 	sql_alter("TABLE spip_noisettes DROP INDEX type");
 	sql_alter("TABLE spip_noisettes DROP INDEX composition");
@@ -154,6 +150,8 @@ function maj_060($config_defaut) {
 	sql_alter("TABLE spip_noisettes RENAME spip_noizetier");
 	// -- Remplissage de la nouvelle colonne plugin avec la valeur 'noizetier'.
 	// TODO : A compléter
+	// -- Remplissage de la nouvelle colonne squelette.
+	// TODO : A compléter
 
 	// Mise à jour de la configuration du plugin
 	include_spip('inc/config');
@@ -166,11 +164,11 @@ function maj_060($config_defaut) {
 	// Suppression des caches devenus inutiles
 	include_spip('inc/flock');
 	supprimer_fichier(_DIR_CACHE . 'noisettes_descriptions.php');
-//	supprimer_fichier(_DIR_CACHE . 'noisettes_ajax.php');
-//	supprimer_fichier(_DIR_CACHE . 'noisettes_contextes.php');
-//	supprimer_fichier(_DIR_CACHE . 'noisettes_inclusions.php');
+	supprimer_fichier(_DIR_CACHE . 'noisettes_ajax.php');
+	supprimer_fichier(_DIR_CACHE . 'noisettes_contextes.php');
+	supprimer_fichier(_DIR_CACHE . 'noisettes_inclusions.php');
 
-	// Insertion de la liste des compositions virtuelles dans la table 'spip_noisettes_pages'
+	// Déplacement de la liste des compositions virtuelles dans la table 'spip_noisettes_pages'
 	$compositions = lire_config('noizetier_compositions', array());
 	if ($compositions) {
 		$compositions_060 = array();
@@ -208,7 +206,6 @@ function maj_060($config_defaut) {
 				$compositions_060[] = $_description;
 			}
 		}
-		// Insertion dans la table spip_noisettes_pages
 		if ($compositions_060) {
 			if (sql_preferer_transaction()) {
 				sql_demarrer_transaction();
