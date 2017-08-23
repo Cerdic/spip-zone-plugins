@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Charge ou recharge les descriptions des types de noisette à partir des fichiers YAML.
- * Les types de noisettes (squelettes) sont recherchés dans un répertoire relatif fourni en argument.
+ * Les types de noisettes sont recherchés dans un répertoire relatif fourni en argument.
  * La fonction optimise le chargement en effectuant uniquement les traitements nécessaires
  * en fonction des modifications, ajouts et suppressions des types de noisettes identifiés en comparant
  * les md5 des fichiers YAML.
@@ -194,15 +194,16 @@ function type_noisette_charger($plugin, $dossier = 'noisettes/', $recharger = fa
 
 
 /**
- * Retourne la description complète ou seulement une information précise pour une noisette donnée.
- * Les données textuelles peuvent subir une traitement typo si demandé.
+ * Retourne, pour un type de noisette donné, la description complète ou seulement un champ précis.
+ * Les champs textuels peuvent subir une traitement typo si demandé.
  *
  * @api
+ * @uses ncore_type_noisette_decrire()
  *
  * @param string	$plugin
  *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
  *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- *      La fonction utilisera la fonction de lecture de la description brute d'une noisette, spécifique
+ *      La fonction utilisera la fonction de lecture de la description brute d'un type de noisette, spécifique
  *      au service, ou à défaut, celle fournie par N-Core.
  * @param string	$type_noisette
  * 		Identifiant du type de noisette.
@@ -218,7 +219,7 @@ function type_noisette_charger($plugin, $dossier = 'noisettes/', $recharger = fa
  * 		fournissant le service de stockage souhaité.
  *
  * @return array|string
- * 		La description complète ou l'information précise demandée pour une noisette donnée. Les champs
+ * 		La description complète ou champ précis demandé pour un type de noisette donné. Les champs
  * 		de type tableau sont systématiquement désérialisés et si demandé, les champs textuels peuvent être
  * 		traités avec la fonction _T_ou_typo().
  */
@@ -278,6 +279,11 @@ function type_noisette_lire($plugin, $type_noisette, $information = '', $traiter
 }
 
 /**
+ * Renvoie une liste de descriptions de types de noisette éventuellement filtrée sur certains champs.
+ *
+ * @api
+ * @uses ncore_type_noisette_lister()
+ *
  * @param string	$plugin
  *      Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *      ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
@@ -290,6 +296,7 @@ function type_noisette_lire($plugin, $type_noisette, $information = '', $traiter
  * 		fournissant le service de stockage souhaité.
  *
  * @return array
+ * 		Tableau des descriptions des types de noisette trouvés indexé par le type de noisette.
  */
 function type_noisette_repertorier($plugin, $filtres = array(), $stockage = '') {
 
