@@ -13,6 +13,12 @@
 	</BOUCLE_evenements_lies>
 	<strong>([(#DATE_DEBUT|affdate_debut_fin{#GET{date_fin},#HORAIRE})])</strong>
 	#SET{titre,#TITRE}
+	[(#PLACES|>{0}|oui)
+		<INCLURE{fond=inclure/places_disponibles,
+			id_evenement,
+			places,
+			statut=#VAL|statuts_complet} />
+	]
 	[(#INCLURE{fond=formulaires/inc-reservation_evenements_declinaisons_chercher_prix,
 		id_evenement,
 		id_article,
