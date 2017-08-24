@@ -5,8 +5,7 @@ function formulaires_traduire_texte_charger_dist() {
 		'source' => '',
 		'langue_source' => '',
 		'langue_traduction' => '',
-		'traduction' => '',
-		'hash' => ''
+		'traduction' => ''
 	);
 	if (isset($GLOBALS['meta']['langues_multilingue'])) {
 		$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
@@ -50,32 +49,19 @@ function formulaires_traduire_texte_verifier_dist() {
 function formulaires_traduire_texte_traiter_dist() {
 	$res = array('editable' => true);
 
-	if (_request('supprimer') and $hash = _request('hash')) {
-		if (autoriser('supprimer', 'traduction', $hash)) {
-			sql_delete('spip_traductions', array('hash=' . sql_quote($hash)));
-			set_request('hash', null);
-			set_request('source', null);
-			$res['message_ok'] = 'La traduction est supprimée';
-			return $res;
-		} else {
-			$res['message_erreur'] = 'Impossible de supprimer la traduction';
-			return $res;
-		}
-	}
-
 	include_spip('inc/traduire_texte');
 	$source = _request('source');
 	$langue_source = _request('langue_source');
 	$langue_traduction = _request('langue_traduction');
-	list($trad, $hash) = traduire($source, $langue_traduction, $langue_source, array('raw' => true));
+	$trad = traduire($source, $langue_traduction, $langue_source);
 
 	if (!$trad) {
 		$res['message_erreur'] = 'Une erreur est survenue pour calculer la traduction';
 		return $res;
 	}
 
-	$res['message_ok'] = 'Traduction effectuée';
+	$js = _AJAX ? '<script type="text/javascript">if (window.ajaxReload) ajaxReload("tt_traductions");</script>' : '';
+	$res['message_ok'] = 'Traduction effectuée' . $js;
 	set_request('traduction', $trad);
-	set_request('hash', $hash);
 	return $res;
 }
