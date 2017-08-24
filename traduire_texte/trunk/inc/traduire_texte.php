@@ -1,5 +1,81 @@
 <?php
 
+
+/** Description de l’outil de traduction */
+abstract class TT_Traducteur {
+	/** @var string Nom de l’outil */
+	public $type;
+	/** @var string Clé d’api */
+	public $apikey;
+	/** @var string Chemin éventuel */
+	public $path;
+	/** @var int Maximum de caractères traitables en un coup */
+	public $maxlen;
+
+	/**
+	 * TT_Traducteur constructor.
+	 * @param string $apikey
+	 */
+	public function __construct($apikey = null) {
+		$this->apikey = $apikey;
+	}
+
+	abstract public function traduire($texte, $destLang = 'fr', $srcLang = 'en');
+}
+
+class TT_Traducteur_Bing extends TT_Traducteur {
+	public $type = 'bing';
+	public $maxlen = 10000;
+	function traduire($texte, $destLang = 'fr', $srcLang = 'en') {
+		return translate_requestCurl_bing($this->apikey, $texte, $srcLang, $destLang);
+	}
+}
+
+class TT_Traducteur_GGTranslate extends TT_Traducteur {
+	public $type = 'google';
+	public $maxlen = 4500;
+	function traduire($texte, $destLang = 'fr', $srcLang = 'en') {
+		$destLang = urlencode($destLang);
+		$srcLang = urlencode($srcLang);
+		return translate_requestCurl("key=" . $this->apikey . "&source=$srcLang&target=$destLang&q=" . rawurlencode($texte));
+	}
+}
+
+
+class TT_Traducteur_Shell extends TT_Traducteur {
+	public $type = 'shell';
+	public $maxlen = 1000;
+	function traduire($texte, $destLang = 'fr', $srcLang = 'en') {
+		return translate_shell($texte, $destLang);
+	}
+}
+
+/**
+ * Retourne un traducteur disponible
+ * @return \TT_Traducteur|false
+ */
+function TT_traducteur() {
+	static $traducteur = null;
+	if (is_null($traducteur)) {
+		include_spip('inc/config');
+		if (defined('_BING_APIKEY')) {
+			$traducteur = new TT_Traducteur_Bing(_BING_APIKEY, 10000);
+		} elseif (defined('_GOOGLETRANSLATE_APIKEY')) {
+			$traducteur = new TT_Traducteur_GGTranslate(_GOOGLETRANSLATE_APIKEY);
+		} elseif (defined('_TRANSLATESHELL_CMD')) {
+			$traducteur = new TT_Traducteur_Shell();
+			$traducteur->path = _TRANSLATESHELL_CMD;
+		} elseif ($k = lire_config('traduiretexte/cle_bing')) {
+			$traducteur = new TT_Traducteur_Bing($k);
+		} elseif ($k = lire_config('traduiretexte/cle_google')) {
+			$traducteur = new TT_Traducteur_GGTranslate($k);
+		} else {
+			$traducteur = false;
+		}
+	}
+	return $traducteur;
+}
+
 function translate_requestCurl($parameters) {
 	# $url_page = "https://ajax.googleapis.com/ajax/services/language/translate?";
 	$url_page = "https://www.googleapis.com/language/translate/v2?";
@@ -46,8 +122,6 @@ function translate_requestCurl_bing($apikey, $text, $srcLang, $destLang) {
 	}
 
 	return $translation->TranslateResult;
-
-
 }
 
 
@@ -108,95 +182,114 @@ function translate_line($text, $destLang) {
 	return $trad;
 }
 
-/** Description de l’outil de traduction */
-class TT_Traducteur {
-	/** @var string Nom de l’outil */
-	public $type;
-	/** @var string Clé d’api */
-	public $apikey;
-	/** @var string Chemin éventuel */
-	public $path;
-	/** @var int Maximum de caractères traitables en un coup */
-	public $maxlen;
-
-	/**
-	 * TT_Traducteur constructor.
-	 * @param string $type
-	 * @param string $apikey
-	 * @param int $maxlen
-	 */
-	public function __construct($type, $apikey = null, $maxlen = 0) {
-		$this->type = $type;
-		$this->apikey = $apikey;
-		$this->maxlen = $maxlen;
-	}
-}
 
 /**
- * Retourne une description du traducteur disponible
- * @return \TT_Traducteur|false
+ * Découpe un code HTML en paragraphes.
+ *
+ * Découpe un texte en autant de morceaux que de balises `<p>`.
+ * Cependant, si la longueur du paragraphe dépasse `$maxlen` caractères,
+ * il est aussi découpé.
+
+ * @param string $texte
+ *     Texte à découper
+ * @param int $maxlen
+ *     Nombre maximum de caractères.
+ * @param bool $html
+ *     True pour conserver les balises HTML ; false pour les enlever.
+ * @return array
+ *     Couples [hash => paragraphe]
  */
-function traduire_texte_traducteur() {
-	static $traducteur = null;
-	if (is_null($traducteur)) {
-		include_spip('inc/config');
-		if (defined('_BING_APIKEY')) {
-			$traducteur = new TT_Traducteur('bing', _BING_APIKEY, 10000);
-		} elseif (defined('_GOOGLETRANSLATE_APIKEY')) {
-			$traducteur = new TT_Traducteur('google', _GOOGLETRANSLATE_APIKEY, 5000);
-		} elseif (defined('_TRANSLATESHELL_CMD')) {
-			$traducteur = new TT_Traducteur('shell', null, 1000);
-			$traducteur->path = _TRANSLATESHELL_CMD;
-		} elseif ($v = lire_config('traduiretexte/cle_bing')) {
-			$traducteur = new TT_Traducteur('bing', $v, 10000);
-		} elseif ($v = lire_config('traduiretexte/cle_google')) {
-			$traducteur = new TT_Traducteur('google', $v, 5000);
+function TT_decouper_texte($texte, $maxlen = 0, $html = true) {
+	$liste = array();
+	$texte = trim($texte);
+
+	if (strlen($texte) == 0) {
+		return $liste;
+	}
+
+	$prep = html2unicode($texte);
+	$options = $html ? (PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE) : PREG_SPLIT_NO_EMPTY;
+	$prep = preg_split(",(<p\b[^>]*>),i", $prep, -1, $options);
+
+	$last = ''; // remettre les <p> en début de ligne.
+	foreach ($prep as $line) {
+		if ($html) {
+			if (preg_match(",^<p\b[^>]*>$,i", $line)) {
+				$last .= $line;
+				continue;
+			} else {
+				$line = $last . $line;
+				$last = '';
+			}
 		} else {
-			$traducteur = false;
+			$line = preg_replace(",<[^>]*>,i", " ", $line);
+		}
+
+		if ($maxlen) {
+			// max line = XXX chars
+			$a = array();
+			while (mb_strlen($line) > $maxlen) {
+				$len = intval($maxlen * 0.6); // 60% de la longueur
+				$debut = mb_substr($line, 0, $len);
+				$suite = mb_substr($line, $len);
+				$point = strpos($suite, '.');
+
+				// chercher une fin de phrase pas trop loin
+				// ou a defaut, une virgule ; au pire un espace
+				if ($point === false) {
+					$point = strpos(preg_replace('/[,;?:!]/', ' ', $suite), ' ');
+				}
+				if ($point === false) {
+					$point = strpos($suite, ' ');
+				}
+				if ($point === false) {
+					$point = 0;
+				}
+				$a[] = trim($debut . mb_substr($suite, 0, 1 + $point));
+				$line = mb_substr($line, $len + 1 + $point);
+			}
+		}
+		$a[] = trim($line);
+
+		foreach ($a as $l) {
+			$liste[md5($l)] = $l;
 		}
 	}
-	return $traducteur;
+
+	return $liste;
 }
+
 
 
 /**
  * Traduire sans utiliser le cache ni mettre en cache le resultat
  *
- * @param string $text
+ * Retourne le texte traduit encadré d’une div indiquant la langue et sa direction.
+ *
+ * @param string $texte
  * @param string $destLang
  * @param string $srcLang
+ * @param bool $raw
  * @return string|false
  */
-function traduire_texte($text, $destLang = 'fr', $srcLang = 'en') {
-	if (strlen(trim($text)) == 0) return '';
+function traduire_texte($texte, $destLang = 'fr', $srcLang = 'en') {
+	if (strlen(trim($texte)) == 0) {
+		return '';
+	}
 
 	//$text = rawurlencode( $text );
 	$destLang = urlencode($destLang);
 	$srcLang = urlencode($srcLang);
 
-	$traducteur = traduire_texte_traducteur();
+	$traducteur = TT_traducteur();
 	if (!$traducteur) {
 		return false;
 	}
 
-	// dispatcher. On pourrait faire des fonctions dédiées par traducteur.
-	switch ($traducteur->type) {
-		case 'bing':
-			$trans = translate_requestCurl_bing($traducteur->apikey, $text, $srcLang, $destLang);
-			break;
-
-		case 'google':
-			$trans = translate_requestCurl("key=" . $traducteur->apikey . "&source=$srcLang&target=$destLang&q=" . rawurlencode($text));
-			break;
-
-		case 'shell':
-			$trans = translate_shell($text, $destLang);
-			break;
-	}
-
-	$ltr = lang_dir($destLang, 'ltr', 'rtl');
+	$trans = $traducteur->traduire($texte, $destLang, $srcLang);
 
 	if (strlen($trans)) {
+		$ltr = lang_dir($destLang, 'ltr', 'rtl');
 		return "<div dir='$ltr' lang='$destLang'>$trans</div>";
 	} else {
 		return false;
@@ -204,58 +297,87 @@ function traduire_texte($text, $destLang = 'fr', $srcLang = 'en') {
 }
 
 
+
 /**
  * Traduire avec un cache
  *
- * @param string $text
+ * Le texte est découpé en paragraphe ; chaque paragraphe est traduit et mis en cache.
+ * Si un paragraphe dépasse la taille maximale acceptée par le traducteur, il sera découpé
+ * lui aussi en morceaux.
+ *
+ * @param string $texte
  * @param string $destLang
  * @param string $srcLang
+ * @param array $options {
+ *     @var bool $raw
+ *         Retourne un tableau des couples [ hash => [source, trad, new(bool)] ]
+ * }
  * @return string|false|array
  */
-function traduire($text, $destLang = 'fr', $srcLang = 'en') {
-	if (strlen(trim($text)) == 0) {
+function traduire($texte, $destLang = 'fr', $srcLang = 'en', $options = array()) {
+	if (strlen(trim($texte)) == 0) {
 		return '';
 	}
 
-	$traducteur = traduire_texte_traducteur();
+	$traducteur = TT_traducteur();
 	if (!$traducteur) {
 		return false;
 	}
 
-	switch ($traducteur->type) {
-		case 'bing':
-			$text = mb_substr($text, 0, 10000, "UTF-8");
-			break;
+	$hashes = TT_decouper_texte($texte, $traducteur->maxlen, true);
+	$traductions = array_fill_keys(array_keys($hashes), null);
+	$deja_traduits = sql_allfetsel(
+		array('hash', 'texte'),
+		"spip_traductions",
+		array(
+			sql_in('hash', array_keys($hashes)),
+			'langue = ' . sql_quote($destLang),
+		)
+	);
 
-		case 'google':
-			$text = mb_substr($text, 0, 4500, "UTF-8");
-			break;
-	}
-
-	$hash = md5($text);
-
-	$row = sql_fetsel("texte", "spip_traductions", "hash='$hash' AND langue ='$destLang'");
-
-	if ($row) {
-		$trad = $row["texte"];
-		# echo "EN BASE : ".$hash;
-	} else {
-		//echo "NOUVEAU";
-		$trad = traduire_texte($text, $destLang, $srcLang);
-		if ($trad) {
-			spip_log('[' . $destLang . "] $text \n === $trad", 'translate');
-			sql_insertq("spip_traductions",
-				array(
-					"hash" => $hash,
-					"texte" => $trad,
-					"langue" => $destLang
-				)
-			);
-		} else {
-			spip_log('[' . $destLang . "] ECHEC $text", 'translate');
-			$trad = false;
+	if ($deja_traduits) {
+		$deja_traduits = array_column($deja_traduits, 'texte', 'hash');
+		foreach ($deja_traduits as $hash => $trad) {
+			$traductions[$hash] = $trad;
 		}
 	}
 
-	return $trad;
+	$todo = array_filter($traductions, 'is_null');
+	$inserts = array();
+	foreach ($todo as $hash => $dummy) {
+		$paragraphe = $hashes[$hash];
+		$trad = $traducteur->traduire($paragraphe, $destLang, $srcLang);
+		if ($trad) {
+			spip_log('[' . $destLang . "] $paragraphe \n === $trad", 'translate');
+			$traductions[$hash] = $trad;
+			$inserts[] = array(
+				"hash" => $hash,
+				"texte" => $trad,
+				"langue" => $destLang
+			);
+		} else {
+			spip_log('[' . $destLang . "] ECHEC $paragraphe", 'translate');
+		}
+	}
+	if ($inserts) {
+		sql_insertq_multi("spip_traductions", $inserts);
+	}
+
+	// retour brut
+	if (!empty($options['raw'])) {
+		$res = array();
+		foreach ($hashes as $hash => $paragraphe) {
+			$res[$hash] = array(
+				'source' => $paragraphe,
+				'trad' => $traductions[$hash],
+				'new' => array_key_exists($hash, $todo)
+			);
+		}
+		return $res;
+	}
+
+	$traductions = implode(" ", $traductions);
+	$ltr = lang_dir($destLang, 'ltr', 'rtl');
+	return "<div dir='$ltr' lang='$destLang'>$traductions</div>";
 }
+

@@ -53,6 +53,7 @@ function formulaires_traduire_texte_traiter_dist() {
 	$source = _request('source');
 	$langue_source = _request('langue_source');
 	$langue_traduction = _request('langue_traduction');
+
 	$trad = traduire($source, $langue_traduction, $langue_source);
 
 	if (!$trad) {
