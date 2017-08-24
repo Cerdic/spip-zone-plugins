@@ -7,8 +7,6 @@ abstract class TT_Traducteur {
 	public $type;
 	/** @var string Clé d’api */
 	public $apikey;
-	/** @var string Chemin éventuel */
-	public $path;
 	/** @var int Maximum de caractères traitables en un coup */
 	public $maxlen;
 
@@ -20,24 +18,83 @@ abstract class TT_Traducteur {
 		$this->apikey = $apikey;
 	}
 
-	abstract public function traduire($texte, $destLang = 'fr', $srcLang = 'en');
+	public function traduire($texte, $destLang = 'fr', $srcLang = 'en') {
+		if (strlen(trim($texte)) == 0) {
+			return '';
+		}
+		$len =  mb_strlen($texte);
+		$extrait =  mb_substr($texte, 0, 40);
+		spip_log('Trad:' . $this->type . ' ' . $len . 'c. : ' . $extrait . ($len > 40 ? '...' : ''), 'translate');
+		return $this->_traduire($texte, $destLang, $srcLang);
+	}
+
+	abstract protected function _traduire($texte, $destLang, $srcLang);
 }
 
+/**
+ * Traduire avec Bing
+ */
 class TT_Traducteur_Bing extends TT_Traducteur {
 	public $type = 'bing';
 	public $maxlen = 10000;
-	function traduire($texte, $destLang = 'fr', $srcLang = 'en') {
-		return translate_requestCurl_bing($this->apikey, $texte, $srcLang, $destLang);
+
+	protected function _traduire($texte, $destLang, $srcLang) {
+		// Bon sang, si tu n'utilises pas .NET, ce truc est documenté par les corbeaux
+		// attaquer le machin en SOAP (la méthode HTTP ne convient que pour des textes très courts (GET, pas POST)
+		try {
+			$client = new \SoapClient("http://api.microsofttranslator.com/V2/Soap.svc");
+			$params = array(
+				'appId' => $this->apikey,
+				'text' => $texte,
+				'from' => $srcLang,
+				'to' => $destLang
+			);
+			$translation = $client->translate($params);
+		} catch (Exception $e) {
+			spip_log($e->getMessage(), 'translate');
+			return false;
+		}
+
+		return $translation->TranslateResult;
 	}
 }
 
+/**
+ * Traduire avec Google Translate
+ */
 class TT_Traducteur_GGTranslate extends TT_Traducteur {
 	public $type = 'google';
 	public $maxlen = 4500;
-	function traduire($texte, $destLang = 'fr', $srcLang = 'en') {
+
+	protected function _traduire($texte, $destLang = 'fr', $srcLang = 'en') {
 		$destLang = urlencode($destLang);
 		$srcLang = urlencode($srcLang);
-		return translate_requestCurl("key=" . $this->apikey . "&source=$srcLang&target=$destLang&q=" . rawurlencode($texte));
+
+		$url_page = "https://www.googleapis.com/language/translate/v2?";
+		$parameters = "key=" . $this->apikey . "&source=$srcLang&target=$destLang&q=" . rawurlencode($texte);
+
+		# $parameters_explode = explode("&", $parameters);
+		# $nombre_param = count($parameters_explode);
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url_page);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_REFERER, !empty($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : "");
+		#curl_setopt($ch, CURLOPT_POST, nombre_param);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('X-HTTP-Method-Override: GET'));
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		$body = curl_exec($ch);
+		curl_close($ch);
+
+		$json = json_decode($body, true);
+
+		if (isset($json["error"])) {
+			spip_log($json, 'translate');
+			return false;
+		}
+
+		return urldecode($json["data"]["translations"][0]["translatedText"]);
 	}
 }
 
@@ -45,9 +102,45 @@ class TT_Traducteur_GGTranslate extends TT_Traducteur {
 class TT_Traducteur_Shell extends TT_Traducteur {
 	public $type = 'shell';
 	public $maxlen = 1000;
-	function traduire($texte, $destLang = 'fr', $srcLang = 'en') {
-		return translate_shell($texte, $destLang);
+
+	public function _traduire($texte, $destLang = 'fr', $srcLang = 'en') {
+		if (!defined('_TRANSLATESHELL_CMD')) {
+			spip_log('chemin de Translate shell non défini', 'translate.' . _LOG_ERREUR);
+			return false;
+		}
+		return $this->translate_line($texte, $destLang);
+
+		/*
+		// Équivalent ~ de l’ancien fonctionnement. (qui supprimait les tags html)
+		$liste = TT_decouper_texte($texte, $this->maxlen);
+		foreach ($liste as $l) {
+			spip_log("IN: " . $l, 'translate');
+			$trad = $this->translate_line($l, $destLang);
+			spip_log("OUT: " . $trad, 'translate');
+			$trans[] = $trad;
+		}
+		return join(" ", $trans);
+		*/
 	}
+
+	public function translate_line($texte, $destLang) {
+		if (strlen(trim($texte)) == 0) {
+			return '';
+		}
+		$descriptorspec = array(
+			0 => array("pipe", "r"),
+			1 => array("pipe", "w")
+		);
+		$cmd = _TRANSLATESHELL_CMD . ' -b ' . ':' . escapeshellarg($destLang);
+		$cmdr = proc_open($cmd, $descriptorspec, $pipes);
+		if (is_resource($cmdr)) {
+			fwrite($pipes[0], $texte) && fclose($pipes[0]);
+			$trad = stream_get_contents($pipes[1]);
+			fclose($pipes[1]);
+		}
+		return $trad;
+	}
+
 }
 
 /**
@@ -64,7 +157,6 @@ function TT_traducteur() {
 			$traducteur = new TT_Traducteur_GGTranslate(_GOOGLETRANSLATE_APIKEY);
 		} elseif (defined('_TRANSLATESHELL_CMD')) {
 			$traducteur = new TT_Traducteur_Shell();
-			$traducteur->path = _TRANSLATESHELL_CMD;
 		} elseif ($k = lire_config('traduiretexte/cle_bing')) {
 			$traducteur = new TT_Traducteur_Bing($k);
 		} elseif ($k = lire_config('traduiretexte/cle_google')) {
@@ -74,112 +166,6 @@ function TT_traducteur() {
 		}
 	}
 	return $traducteur;
-}
-
-function translate_requestCurl($parameters) {
-	# $url_page = "https://ajax.googleapis.com/ajax/services/language/translate?";
-	$url_page = "https://www.googleapis.com/language/translate/v2?";
-
-	# $parameters_explode = explode("&", $parameters);
-	# $nombre_param = count($parameters_explode);
-
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, $url_page);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_REFERER, !empty($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : "");
-	#curl_setopt($ch, CURLOPT_POST, nombre_param);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, array('X-HTTP-Method-Override: GET'));
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	$body = curl_exec($ch);
-	curl_close($ch);
-
-	$json = json_decode($body, true);
-
-	if (isset($json["error"])) {
-		spip_log($json, 'translate');
-		return false;
-	}
-	return urldecode($json["data"]["translations"][0]["translatedText"]);
-}
-
-function translate_requestCurl_bing($apikey, $text, $srcLang, $destLang) {
-	// Bon sang, si tu n'utilises pas .NET, ce truc est documenté par les corbeaux
-	// attaquer le machin en SOAP (la méthode HTTP ne convient que pour des textes très courts (GET, pas POST)
-
-	if (strlen(trim($text)) == 0) return '';
-	$client = new SoapClient("http://api.microsofttranslator.com/V2/Soap.svc");
-
-	$params = array(
-		'appId' => $apikey,
-		'text' => $text,
-		'from' => $srcLang,
-		'to' => $destLang);
-	try {
-		$translation = $client->translate($params);
-	} catch (Exception $e) {
-		return false;
-	}
-
-	return $translation->TranslateResult;
-}
-
-
-function translate_shell($text, $destLang = 'fr') {
-	if (strlen(trim($text)) == 0) return '';
-	$prep = str_replace("\n", " ", html2unicode($text));
-	$prep = preg_split(",<p\b[^>]*>,i", $prep);
-	$trans = array();
-	foreach ($prep as $k => $line) {
-		if ($k > 0) $trans[] = '<p>';
-		$line = preg_replace(",<[^>]*>,i", " ", $line);
-		// max line = 1000 chars
-		$a = array();
-		while (mb_strlen($line) > 1000) {
-			$debut = mb_substr($line, 0, 600);
-			$suite = mb_substr($line, 600);
-			$point = strpos($suite, '.');
-
-			// chercher une fin de phrase pas trop loin
-			// ou a defaut, une virgule ; au pire un espace
-			if ($point === false) {
-				$point = strpos(preg_replace('/[,;?:!]/', ' ', $suite), ' ');
-			}
-			if ($point === false) {
-				$point = strpos($suite, ' ');
-			}
-			if ($point === false) {
-				$point = 0;
-			}
-			$a[] = trim($debut . mb_substr($suite, 0, 1 + $point));
-			$line = mb_substr($line, 600 + 1 + $point);
-		}
-		$a[] = trim($line);
-		foreach ($a as $l) {
-			spip_log("IN: " . $l, 'translate');
-			$trad = translate_line($l, $destLang);
-			spip_log("OUT: " . $trad, 'translate');
-			$trans[] = $trad;
-		}
-	}
-
-	return join("\n", $trans);
-}
-
-function translate_line($text, $destLang) {
-	if (strlen(trim($text)) == 0) return '';
-	$descriptorspec = array(
-		0 => array("pipe", "r"),
-		1 => array("pipe", "w")
-	);
-	$cmd = _TRANSLATESHELL_CMD . ' -b ' . ':' . escapeshellarg($destLang);
-	$cmdr = proc_open($cmd, $descriptorspec, $pipes);
-	if (is_resource($cmdr)) {
-		fwrite($pipes[0], $text) && fclose($pipes[0]);
-		$trad = stream_get_contents($pipes[1]);
-		fclose($pipes[1]);
-	}
-	return $trad;
 }
 
 
@@ -232,15 +218,15 @@ function TT_decouper_texte($texte, $maxlen = 0, $html = true) {
 				$len = intval($maxlen * 0.6); // 60% de la longueur
 				$debut = mb_substr($line, 0, $len);
 				$suite = mb_substr($line, $len);
-				$point = strpos($suite, '.');
+				$point = mb_strpos($suite, '.');
 
 				// chercher une fin de phrase pas trop loin
 				// ou a defaut, une virgule ; au pire un espace
 				if ($point === false) {
-					$point = strpos(preg_replace('/[,;?:!]/', ' ', $suite), ' ');
+					$point = mb_strpos(preg_replace('/[,;?:!]/', ' ', $suite), ' ');
 				}
 				if ($point === false) {
-					$point = strpos($suite, ' ');
+					$point = mb_strpos($suite, ' ');
 				}
 				if ($point === false) {
 					$point = 0;
@@ -348,7 +334,6 @@ function traduire($texte, $destLang = 'fr', $srcLang = 'en', $options = array())
 		$paragraphe = $hashes[$hash];
 		$trad = $traducteur->traduire($paragraphe, $destLang, $srcLang);
 		if ($trad) {
-			spip_log('[' . $destLang . "] $paragraphe \n === $trad", 'translate');
 			$traductions[$hash] = $trad;
 			$inserts[] = array(
 				"hash" => $hash,
