@@ -134,7 +134,12 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
 								}
                                 $documents_current_article = array();
                                 if ($_documents != "") {
-                                    $_documents = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_documents);
+                                    $_documents = preg_replace_callback('!s:(\d+):"(.*?)";!', 
+									function ($matches) {
+										return strtolower("'s:'.strlen($matches[1]).':\".$matches[1].\";'");
+										}
+										,
+										$_documents);
                                     $_documents = unserialize($_documents);
                                     foreach ($_documents as $_document) {
                                         $id_distant = $_document['id'];
