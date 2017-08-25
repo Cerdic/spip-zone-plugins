@@ -25,10 +25,18 @@ function noizetier_type_noisette_stocker($plugin, $types_noisettes, $recharger) 
 	}
 	// -- Update des pages modifiées
 	if (!empty($types_noisettes['a_changer'])) {
+		// Ajouter le type et la composition compatible pour chaque type de noisette
+		foreach ($types_noisettes['a_changer'] as $_cle => $_description) {
+			$types_noisettes['a_changer'][$_cle] = noizetier_type_noisette_completer($_description);
+		}
 		sql_replace_multi($from, $types_noisettes['a_changer']);
 	}
 	// -- Insertion des nouvelles pages
 	if (!empty($types_noisettes['a_ajouter'])) {
+		// Ajouter le type et la composition compatible pour chaque type de noisette
+		foreach ($types_noisettes['a_ajouter'] as $_cle => $_description) {
+			$types_noisettes['a_ajouter'][$_cle] = noizetier_type_noisette_completer($_description);
+		}
 		sql_insertq_multi($from, $types_noisettes['a_ajouter']);
 	}
 	if (sql_preferer_transaction()) {
@@ -38,6 +46,24 @@ function noizetier_type_noisette_stocker($plugin, $types_noisettes, $recharger) 
 	return $retour;
 }
 
+function noizetier_type_noisette_completer($description) {
+
+	// Initialiser les composants de l'identifiant du type de noisette:
+	// - type_page-type_noisette si le type de noisette est dédié uniquement à une page
+	// - type_page-composition-type_noisette si le type de noisette est dédié uniquement à une composition
+	// - type_noisette sinon
+	$description['type'] = '';
+	$description['composition'] = '';
+	$identifiants = explode('-', $description['noisette']);
+	if (isset($identifiants[1])) {
+		$description['type'] = $identifiants[0];
+	}
+	if (isset($identifiants[2])) {
+		$description['composition'] = $identifiants[1];
+	}
+
+	return $description;
+}
 function noizetier_type_noisette_decrire($plugin, $noisette) {
 
 	// Chargement de toute la configuration de la noisette en base de données.

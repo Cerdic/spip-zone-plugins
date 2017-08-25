@@ -16,8 +16,6 @@ var_dump($retour);
 $retour = ncore_noisette_lister('dashome');
 var_dump($retour);
 
-
-
 foreach (array('dashome') as $_plugin) {
 	var_dump("PLUGIN : $_plugin");
 
@@ -35,7 +33,7 @@ foreach (array('dashome') as $_plugin) {
 //	$retour = noisette_ajouter($_plugin, 'main', 'content/article');
 //	$retour = noisette_ajouter($_plugin, 'bloctexte', 'content/article');
 
-//	$retour = type_noisette_charger($_plugin, 'noisettes/',  false);
+	$retour = type_noisette_charger('noizetier', 'noisettes/');
 //	var_dump($retour);
 //	$retour = type_noisette_repertorier($_plugin, array('type' => 'article', 'composition' => ''));
 //	var_dump($retour);
