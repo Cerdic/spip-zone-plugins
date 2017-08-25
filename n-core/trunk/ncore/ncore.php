@@ -7,7 +7,7 @@
  * Ainsi, les plugins externes peuvent, si elle leur convient, utiliser l'implémentation proposée par N-Core
  * sans coder la moindre fonction.
  *
- * @package SPIP\NCORE\STOCKAGE
+ * @package SPIP\NCORE\SERVICE
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -25,6 +25,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * la signature - sont initialisés quelque soit le contenu du fichier YAML.
  *
  * Le service N-Core stocke les descriptions dans un cache et les signatures dans un autre.
+ *
+ * @package SPIP\NCORE\SERVICE\TYPE_NOISETTE
  *
  * @uses cache_lire()
  * @uses cache_ecrire()
@@ -73,14 +75,14 @@ function ncore_type_noisette_stocker($plugin, $types_noisette, $recharger, $stoc
 			// Si le rechargement est forcé, tous les types de noisette sont nouveaux, on peut donc écraser les caches
 			// existants sans s'en préoccuper.
 			$descriptions = array_column($types_noisette['a_ajouter'], null, 'noisette');
-			cache_ecrire($plugin, _NCORE_NOMCACHE_NOISETTE_DESCRIPTION, $descriptions);
+			cache_ecrire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_DESCRIPTION, $descriptions);
 
 			$signatures = array_column($types_noisette['a_ajouter'], 'signature', 'noisette');
-			cache_ecrire($plugin, _NCORE_NOMCACHE_NOISETTE_SIGNATURE, $signatures);
+			cache_ecrire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_SIGNATURE, $signatures);
 		} else {
 			// On lit les cache existants et on applique les modifications.
-			$descriptions = cache_lire($plugin, _NCORE_NOMCACHE_NOISETTE_DESCRIPTION);
-			$signatures = cache_lire($plugin,_NCORE_NOMCACHE_NOISETTE_SIGNATURE);
+			$descriptions = cache_lire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_DESCRIPTION);
+			$signatures = cache_lire($plugin,_NCORE_NOMCACHE_TYPE_NOISETTE_SIGNATURE);
 
 			// On supprime les noisettes obsolètes
 			if (!empty($types_noisette['a_effacer'])) {
@@ -104,8 +106,8 @@ function ncore_type_noisette_stocker($plugin, $types_noisette, $recharger, $stoc
 			}
 
 			// On recrée les caches.
-			cache_ecrire($plugin, _NCORE_NOMCACHE_NOISETTE_DESCRIPTION, $descriptions);
-			cache_ecrire($plugin, _NCORE_NOMCACHE_NOISETTE_SIGNATURE, $signatures);
+			cache_ecrire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_DESCRIPTION, $descriptions);
+			cache_ecrire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_SIGNATURE, $signatures);
 		}
 	}
 
@@ -117,6 +119,8 @@ function ncore_type_noisette_stocker($plugin, $types_noisette, $recharger, $stoc
  * tableau sérialisé.
  *
  * Le service N-Core lit la description du type de noisette concerné dans le cache des descriptions.
+ *
+ * @package SPIP\NCORE\SERVICE\TYPE_NOISETTE
  *
  * @uses cache_lire()
  *
@@ -151,7 +155,7 @@ function ncore_type_noisette_decrire($plugin, $type_noisette, $stockage = '') {
 		// -- Lecture de toute la description du type de noisette à partir du cache.
 		// -- Les données sont renvoyées brutes sans traitement sur les textes ni sur les tableaux sérialisés.
 		include_spip('inc/ncore_cache');
-		$descriptions = cache_lire($plugin, _NCORE_NOMCACHE_NOISETTE_DESCRIPTION);
+		$descriptions = cache_lire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_DESCRIPTION);
 		if (isset($descriptions[$type_noisette])) {
 			$description = $descriptions[$type_noisette];
 		}
@@ -163,6 +167,8 @@ function ncore_type_noisette_decrire($plugin, $type_noisette, $stockage = '') {
 /**
  * Renvoie l'information brute demandée pour l'ensemble des types de noisette utilisés par le plugin appelant
  * ou toute les descriptions si aucune information n'est explicitement demandée.
+ *
+ * @package SPIP\NCORE\SERVICE\TYPE_NOISETTE
  *
  * @uses cache_lire()
  *
@@ -198,8 +204,8 @@ function ncore_type_noisette_lister($plugin, $information = '', $stockage = '') 
 		include_spip('inc/ncore_cache');
 		if ($information == 'signature') {
 			// Les signatures md5 sont sockées dans un fichier cache séparé de celui des descriptions de noisettes.
-			$types_noisettes = cache_lire($plugin, _NCORE_NOMCACHE_NOISETTE_SIGNATURE);
-		} elseif ($descriptions = cache_lire($plugin, _NCORE_NOMCACHE_NOISETTE_DESCRIPTION)) {
+			$types_noisettes = cache_lire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_SIGNATURE);
+		} elseif ($descriptions = cache_lire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_DESCRIPTION)) {
 			if ($information) {
 				// Si $information n'est pas une colonne valide array_column retournera un tableau vide.
 				$types_noisettes = array_column($descriptions, $information, 'noisette');
@@ -218,6 +224,8 @@ function ncore_type_noisette_lister($plugin, $information = '', $stockage = '') 
 // -----------------------------------------------------------------------
 
 /**
+ *
+ * @package SPIP\NCORE\SERVICE\NOISETTE
  * @param        $plugin
  * @param        $description
  * @param string $stockage
@@ -277,6 +285,9 @@ function ncore_noisette_stocker($plugin, $action, $description, $stockage = '') 
 }
 
 /**
+ *
+ * @package SPIP\NCORE\SERVICE\NOISETTE
+ *
  * @param        $plugin
  * @param string $squelette
  * @param string $information

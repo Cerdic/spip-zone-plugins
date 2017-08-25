@@ -3,7 +3,7 @@
  * Ce fichier contient l'API N-Core de gestion des noisette, c'est-à-dire les instances paramétrées
  * de types de noisette affectées à un squelette.
  *
- * @package SPIP\NCORE\NOISETTE
+ * @package SPIP\NCORE\API\NOISETTE
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -12,6 +12,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Ajoute à un squelette, à un rang donné ou en dernier rang, une noisette d'un type donné.
+ *
+ * @api
+ * @uses type_noisette_lire()
+ * @uses ncore_noisette_lister()
+ * @uses ncore_noisette_stocker()
  *
  * @param string	$plugin
  *      Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -53,8 +58,8 @@ function noisette_ajouter($plugin, $type_noisette, $squelette, $rang = 0, $stock
 		// On initialise la description de la noisette à ajouter
 		$description = array(
 			'plugin'     => $plugin,
-			'squelette'  => $squelette,
 			'noisette'   => $type_noisette,
+			'squelette'  => $squelette,
 			'rang'       => intval($rang),
 			'parametres' => serialize($parametres),
 			'balise'     => 'defaut',
@@ -97,6 +102,13 @@ function noisette_ajouter($plugin, $type_noisette, $squelette, $rang = 0, $stock
 	return $noisette_ajoutee;
 }
 
+/**
+ * @param        $plugin
+ * @param        $identifiant
+ * @param string $stockage
+ *
+ * @return bool
+ */
 function noisette_supprimer($plugin, $identifiant, $stockage = '') {
 
 	// Initialisation du retour

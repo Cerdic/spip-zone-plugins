@@ -2,7 +2,7 @@
 /**
  * Ce fichier contient les fonctions de gestion des caches utilisés par N-Core.
  *
- * @package SPIP\NCORE\CACHE
+ * @package SPIP\NCORE\API\CACHE
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -16,41 +16,41 @@ if (!defined('_NCORE_DIRCACHE')) {
 	 */
 	define('_NCORE_DIRCACHE', _DIR_CACHE . 'ncore/');
 }
-if (!defined('_NCORE_NOMCACHE_NOISETTE_SIGNATURE')) {
+if (!defined('_NCORE_NOMCACHE_TYPE_NOISETTE_SIGNATURE')) {
 	/**
 	 * Cache des signatures des fichiers YAML de noisettes.
 	 * Contient le tableau sérialisé `[noisette] = signature`.
 	 */
-	define('_NCORE_NOMCACHE_NOISETTE_SIGNATURE', 'noisettes_signature.php');
+	define('_NCORE_NOMCACHE_TYPE_NOISETTE_SIGNATURE', 'type_noisette_signatures.php');
 }
-if (!defined('_NCORE_NOMCACHE_NOISETTE_DESCRIPTION')) {
+if (!defined('_NCORE_NOMCACHE_TYPE_NOISETTE_DESCRIPTION')) {
 	/**
 	 * Cache des descriptions de noisettes issues des fichiers YAML.
 	 * Contient le tableau sérialisé `[noisette] = tableau de la description complète`.
 	 * Chaque description contient aussi l'identifiant de la noisette déjà utilisé en index et la signature.
 	 */
-	define('_NCORE_NOMCACHE_NOISETTE_DESCRIPTION', 'noisettes_description.php');
+	define('_NCORE_NOMCACHE_TYPE_NOISETTE_DESCRIPTION', 'type_noisette_descriptions.php');
 }
 if (!defined('_NCORE_NOMCACHE_NOISETTE_AJAX')) {
 	/**
 	 * Cache du paramétrage ajax des noisettes.
 	 * Contient le tableau sérialisé `[noisette] = true/false`.
 	 */
-	define('_NCORE_NOMCACHE_NOISETTE_AJAX', 'noisettes_ajax.php');
+	define('_NCORE_NOMCACHE_NOISETTE_AJAX', 'noisette_ajax.php');
 }
 if (!defined('_NCORE_NOMCACHE_NOISETTE_INCLUSION')) {
 	/**
 	 * Cache du paramétrage d'inclusion dynamique des noisettes.
 	 * Contient le tableau sérialisé `[noisette] = true/false`.
 	 */
-	define('_NCORE_NOMCACHE_NOISETTE_INCLUSION', 'noisettes_inclusion.php');
+	define('_NCORE_NOMCACHE_NOISETTE_INCLUSION', 'noisette_inclusions.php');
 }
 if (!defined('_NCORE_NOMCACHE_NOISETTE_CONTEXTE')) {
 	/**
 	 * Cache des contextes de noisettes issues des fichiers YAML.
 	 * Contient le tableau sérialisé `[noisette] = tableau des éléments du contexte`.
 	 */
-	define('_NCORE_NOMCACHE_NOISETTE_CONTEXTE', 'noisettes_contexte.php');
+	define('_NCORE_NOMCACHE_NOISETTE_CONTEXTE', 'noisette_contextes.php');
 }
 
 

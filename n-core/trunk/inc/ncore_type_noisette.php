@@ -2,7 +2,7 @@
 /**
  * Ce fichier contient l'API N-Core de gestion des types de noisette, c'est-à-dire les squelettes et leur YAML.
  *
- * @package SPIP\NCORE\TYPE_NOISETTE
+ * @package SPIP\NCORE\API\TYPE_NOISETTE
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
