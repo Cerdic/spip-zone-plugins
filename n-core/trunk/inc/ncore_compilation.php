@@ -7,7 +7,7 @@
  * Ainsi, les services externes peuvent, si elle leur convient, utiliser l'implémentation proposée par N-Core
  * sans coder la moindre fonction.
  *
- * @package SPIP\NCORE\NOISETTE\SERVICE
+ * @package SPIP\NCORE\API\COMPILATION
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
