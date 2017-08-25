@@ -1,7 +1,7 @@
 <?php
 /**
  * Ce fichier contient l'API N-Core de gestion des noisette, c'est-à-dire les instances paramétrées
- * de types de noisettes affectées à un squelette.
+ * de types de noisette affectées à un squelette.
  *
  * @package SPIP\NCORE\NOISETTE
  */

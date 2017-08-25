@@ -26,7 +26,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return string
  * 		Nom complet de la fonction si trouvée ou chaine vide sinon.
  */
-function ncore_chercher_fonction($plugin, $fonction, $stockage = '') {
+function ncore_chercher_service($plugin, $fonction, $stockage = '') {
 
 	$fonction_trouvee = '';
 

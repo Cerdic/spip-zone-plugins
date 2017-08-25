@@ -73,27 +73,10 @@ function type_noisette_charger($plugin, $dossier = 'noisettes/', $recharger = fa
 				? $signatures[$type_noisette]
 				: '';
 
-			// Initialiser les composants de l'identifiant du type de noisette:
-			// - type_page-type_noisette si le type de noisette est dédié uniquement à une page
-			// - type_page-composition-type_noisette si le type de noisette est dédié uniquement à une composition
-			// - type_noisette sinon
-			$type = '';
-			$composition = '';
-			$identifiants = explode('-', $type_noisette);
-			if (isset($identifiants[1])) {
-				$type = $identifiants[0];
-			}
-			if (isset($identifiants[2])) {
-				$composition = $identifiants[1];
-			}
-
 			// Initialisation de la description par défaut du type de noisette
 			// -- on y inclut le plugin appelant et la signature
 			$description_defaut = array(
 				'noisette'       => $type_noisette,
-				'plugin'         => $plugin,
-				'type'           => $type,
-				'composition'    => $composition,
 				'nom'            => $type_noisette,
 				'description'    => '',
 				'icon'           => 'noisette-24.png',
@@ -102,6 +85,7 @@ function type_noisette_charger($plugin, $dossier = 'noisettes/', $recharger = fa
 				'ajax'           => 'defaut',
 				'inclusion'      => 'statique',
 				'parametres'     => array(),
+				'plugin'         => $plugin,
 				'signature'      => '',
 			);
 

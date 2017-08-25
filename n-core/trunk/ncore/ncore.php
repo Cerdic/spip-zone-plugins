@@ -59,7 +59,7 @@ function ncore_type_noisette_stocker($plugin, $types_noisette, $recharger, $stoc
 	// - sinon, on utilise la fonction du plugin appelant si elle existe;
 	// - et sinon, on utilise la fonction de N-Core.
 	include_spip('inc/ncore_utils');
-	if ($stocker = ncore_chercher_fonction($plugin, 'type_noisette_stocker', $stockage)) {
+	if ($stocker = ncore_chercher_service($plugin, 'type_noisette_stocker', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$retour = $stocker($plugin, $types_noisette, $recharger);
 	} else {
@@ -143,7 +143,7 @@ function ncore_type_noisette_decrire($plugin, $type_noisette, $stockage = '') {
 	// - sinon, on utilise la fonction du plugin appelant si elle existe;
 	// - et sinon, on utilise la fonction de N-Core.
 	include_spip('inc/ncore_utils');
-	if ($decrire = ncore_chercher_fonction($plugin, 'type_noisette_decrire', $stockage)) {
+	if ($decrire = ncore_chercher_service($plugin, 'type_noisette_decrire', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$description = $decrire($plugin, $type_noisette);
 	} else {
@@ -190,7 +190,7 @@ function ncore_type_noisette_lister($plugin, $information = '', $stockage = '') 
 	// - sinon, on utilise la fonction du plugin appelant si elle existe;
 	// - et sinon, on utilise la fonction de N-Core.
 	include_spip('inc/ncore_utils');
-	if ($lister = ncore_chercher_fonction($plugin, 'type_noisette_lister', $stockage)) {
+	if ($lister = ncore_chercher_service($plugin, 'type_noisette_lister', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$types_noisettes = $lister($plugin, $information);
 	} else {
@@ -231,7 +231,7 @@ function ncore_noisette_stocker($plugin, $action, $description, $stockage = '') 
 	// - sinon, on utilise la fonction du plugin appelant si elle existe;
 	// - et sinon, on utilise la fonction de N-Core.
 	include_spip('inc/ncore_utils');
-	if ($stocker = ncore_chercher_fonction($plugin, 'noisette_stocker', $stockage)) {
+	if ($stocker = ncore_chercher_service($plugin, 'noisette_stocker', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$noisette = $stocker($plugin, $action, $description);
 	} else {
@@ -294,7 +294,7 @@ function ncore_noisette_lister($plugin, $squelette = '', $information = '', $sto
 	// - sinon, on utilise la fonction du plugin appelant si elle existe;
 	// - et sinon, on utilise la fonction de N-Core.
 	include_spip('inc/ncore_utils');
-	if ($lister = ncore_chercher_fonction($plugin, 'noisette_lister', $stockage)) {
+	if ($lister = ncore_chercher_service($plugin, 'noisette_lister', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$noisettes = $lister($plugin, $squelette, $information);
 	} else {
