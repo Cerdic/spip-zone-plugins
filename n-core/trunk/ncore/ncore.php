@@ -227,6 +227,7 @@ function ncore_type_noisette_lister($plugin, $information = '', $stockage = '') 
  *
  * @package SPIP\NCORE\SERVICE\NOISETTE
  * @param        $plugin
+ * @param        $action
  * @param        $description
  * @param string $stockage
  *
