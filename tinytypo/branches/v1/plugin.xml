@@ -7,10 +7,18 @@
 	<etat>stable</etat>
 	<categorie>outil</categorie>
 
-	<slogan>Tiny Typo pour SPIP</slogan>
+	<slogan>[fr]Tiny Typo pour SPIP[en]Tiny Typo for SPIP[es]Tiny Typo para SPIP[de]Tiny Typo für SPIP</slogan>
 	<description>
-		Base CSS pour le contenu éditorial web, pour des pages web lisibles.
-		Ce plugin porte Tiny Typo v1.3.4 dans SPIP et permet de tirer profit de TOUS les styles de Tiny Typo dans SPIP.
+		<multi>
+			[fr]Base CSS pour le contenu éditorial web, pour des pages web lisibles.
+			Ce plugin porte Tiny Typo v1.3.4 dans SPIP et permet de tirer profit de TOUS les styles de Tiny Typo dans SPIP.
+			[en]CSS foundation for web editorial content, for readable web pages.
+			This plugin brings Tiny Typo v1.3.4 in SPIP and lets take advantage of ALL styles of Tiny Typo in SPIP.
+			[es]Fundación CSS para contenido editorial web, para páginas web legibles.
+			Este plugin lleva Tiny Typo v1.3.4 en SPIP y permite aprovechar TODOS los estilos de Tiny Typo en SPIP.
+			[de]Foundation CSS für Web-Editorial-Inhalte, für lesbare Webseiten.
+			Dieses Plugin bringt Tiny Typo v1.3.4 in SPIP und lässt Sie alle Vorteile von Tiny Typo in SPIP nutzen.
+		</multi>
 	</description>
 	<lien>https://contrib.spip.net/Plugin-Tiny-Typo?var_mode=preview</lien>
 	<auteur>&copy; [Tiny Typo->http://tinytypo.tetue.net] 2014 - MIT License - by [tetue->http://spip.tetue.net]</auteur>
