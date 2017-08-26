@@ -1,5 +1,5 @@
 <plugin>
-	<nom>Court-circuit</nom>
+	<nom>[fr]Court-circuit[en]Short circuit[es]Cortocircuito[de]Kurz</nom>
 	<prefix>courtcircuit</prefix>
 	<icon>icon/courtcircuit-128.png</icon>
 
@@ -7,7 +7,7 @@
 	<etat>stable</etat>
 	<categorie>outil</categorie>
 
-	<slogan>Acc&#232;s direct aux articles</slogan>
+	<slogan>[fr]Acc&#232;s direct aux articles[en]Direct access to articles[es]Acceso directo a los artículos[de]Direkter Zugang zu~den~Artikeln</slogan>
 	<description>Permet de rediriger certaines rubriques vers un article particulier. Vous pouvez configurer, dans l'espace priv&#233;, les r&eacute;gles de redirection &#224;&nbsp;appliquer.</description>
 	<lien>https://contrib.spip.net/3831</lien>
 	<auteur>[Tetue->http://spip.tetue.net], [Joseph->https://contrib.spip.net/Joseph]</auteur>

@@ -1,5 +1,5 @@
 <plugin>
-	<nom>Court-circuit</nom>
+	<nom>[fr]Court-circuit[en]Short circuit[es]Cortocircuito[de]Kurz</nom>
 	<prefix>courtcircuit</prefix>
 	<icon>icon/courtcircuit.png</icon>
 
@@ -7,7 +7,7 @@
 	<etat>stable</etat>
 	<categorie>outil</categorie>
 
-	<slogan>Acc&#233;s direct aux articles et reset des squelettes par d#233;faut</slogan>
+	<slogan>[fr]Acc&#233;s direct aux articles et reset des squelettes par d#233;faut[en]Direct access to articles[es]Acceso directo a los artículos[de]Direkter Zugang zu~den~Artikeln</slogan>
 	<description>
 		Acc&#233;s direct aux articles et reset des squelettes par d&eacute;faut. Ce plugin court-circuite deux choses&nbsp;:
 		-* les squelettes par d&#233;faut de SPIP, qui renvoient en&nbsp;404, pour &eacute;viter les diffusions intempestives ;
