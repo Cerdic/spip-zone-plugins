@@ -7,7 +7,7 @@
 	<etat>stable</etat>
 	<categorie>multimedia</categorie>
 
-	<slogan>[fr]Favicon et touch icon du site[en]Favicon and touch icon[es]Favicon y touch icon del sitio[de]Favicon und Touch-Symbol der Website</slogan>
+	<slogan><multi>[fr]Favicon et touch icon du site[en]Favicon and touch icon[es]Favicon y touch icon del sitio[de]Favicon und Touch-Symbol der Website</multi></slogan>
 	<description>
 	Génération automatique, à partir de votre logo de site, de favicon et touch icon pour les différents navigateurs et terminaux.
 	Pour que ce soit esthétiquement réussi, votre logo de site doit être carré, de 200 pixels de côté minimum. Sinon, déposer une image nommée « favicon.png » à la racine du dossier « squelettes ».
