@@ -7,7 +7,7 @@
 	<etat>experimental</etat>
 	<categorie>outil</categorie>
 
-	<slogan>[fr]Tiny Typo pour SPIP[en]Tiny Typo for SPIP[es]Tiny Typo para SPIP[de]Tiny Typo für SPIP</slogan>
+	<slogan><multi>[fr]Tiny Typo pour SPIP[en]Tiny Typo for SPIP[es]Tiny Typo para SPIP[de]Tiny Typo für SPIP</multi></slogan>
 	<description>
 		ATTENTION : ceci est une version très expérimentale ! qui n'aboutira peut-être pas…
 		<multi>
