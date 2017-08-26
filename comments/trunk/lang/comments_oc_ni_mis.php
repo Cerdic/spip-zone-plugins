@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_comment_ok' => 'Mercì per lou vouòstre coumentari !',
 
 	// S
-	'saisie_texte_info' => 'Aquestou fourmulari acheta li escourcha SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> e lou code HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Da creà dei paràgrafou, laissàs simplamen dei ligna vuèii.',
+	'saisie_texte_info' => 'Aquestou fourmulari acheta li escourcha SPIP <code>[-&gt;url]</code> <code>{{gras}}</code> <code>{italique}</code> <code>-*liste</code> <code>&lt;quote&gt;</code> <code>&lt;code&gt;</code> e lou code HTML <code>&lt;q&gt;</code> <code>&lt;del&gt;</code> <code>&lt;ins&gt;</code>. Da creà dei paràgrafou, laissàs simplamen dei ligna vuèii.',
 	'saisie_texte_legend' => 'Ajustà aquì lou vouòstre coumentari',
 	'submit1' => 'Previsualisà',
 	'submit2' => 'Counfirmà la spedissioun',

@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_comment_ok' => '¡Gracies pol to comentariu!',
 
 	// S
-	'saisie_texte_info' => 'Esti formulariu permite los atayos de SPIP <code>[-&gt;url] {{negrina}} {cursiva} &lt;quote&gt; &lt;code&gt;</code> y el códigu HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Pa crear párrafos, basta namái con dexar llinies baleres.',
+	'saisie_texte_info' => 'Esti formulariu permite los atayos de SPIP <code>[txt-&gt;url]</code> <code>{{negrina}} {cursiva}</code> <code>&lt;quote&gt;</code> <code>&lt;code&gt;</code> y el códigu HTML <code>&lt;q&gt;</code> <code>&lt;del&gt;</code> <code>&lt;ins&gt;</code>. Pa crear párrafos, basta namái con dexar llinies baleres.',
 	'saisie_texte_legend' => 'Escribe equí el to comentariu',
 	'submit1' => 'Vista previa',
 	'submit2' => 'Confirmar l\'unviu',

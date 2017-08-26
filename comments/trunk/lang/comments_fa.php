@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_comment_ok' => 'از اظهار نظر شما ممنون! ',
 
 	// S
-	'saisie_texte_info' => 'اين فرم ميان‌‌بر‌هاي اسپيپ <code>[-&gt;url] {{سياه}} {ايرانيك} &lt;quote&gt; &lt;code&gt;</code> و كد‌هاي اچ.تي.ام.ال <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code> را مي‌پذيرد. براي ايجاد پارگراف،‌ فقط يك سطر خالي بگذاريد.',
+	'saisie_texte_info' => 'اين فرم ميان‌‌بر‌هاي اسپيپ <code>[txt-&gt;url]</code> <code>{{سياه}} {ايرانيك}</code> <code>&lt;quote&gt;</code> <code>&lt;code&gt;</code> و كد‌هاي اچ.تي.ام.ال <code>&lt;q&gt;</code> <code>&lt;del&gt;</code> <code>&lt;ins&gt;</code> را مي‌پذيرد. براي ايجاد پارگراف،‌ فقط يك سطر خالي بگذاريد.',
 	'saisie_texte_legend' => 'نظر خود را اينجا اضافه كنيد',
 	'submit1' => 'پيش‌ نمايش ',
 	'submit2' => 'تأييد',

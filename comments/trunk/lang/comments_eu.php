@@ -56,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_comment_ok' => 'Milesker zure ekarpenagatik!',
 
 	// S
-	'saisie_texte_info' => 'Inprimaki honek SPIPen lastermarkak onartzen ditu <code>[-&gt;url] {{gizena}} {etzana} &lt;quote&gt; &lt;code&gt;</code> eta HTML koda <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Paragrafo batzuen sortzeko, lerro huts batzuk utz iezazkizu.',
+	'saisie_texte_info' => 'Inprimaki honek SPIPen lastermarkak onartzen ditu <code>[txt-&gt;url]</code> <code>{{gizena}} {etzana}</code> <code>&lt;quote&gt;</code> <code>&lt;code&gt;</code> eta HTML koda <code>&lt;q&gt;</code> <code>&lt;del&gt;</code> <code>&lt;ins&gt;</code>. Paragrafo batzuen sortzeko, lerro huts batzuk utz iezazkizu.',
 	'saisie_texte_legend' => 'Zure iruzkina hemen gehitu',
 	'submit1' => 'Aurreikusi',
 	'submit2' => 'Bidalketa baieztatu',
