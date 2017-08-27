@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_comment_ok' => 'Ďakujeme vám za komentár!',
 
 	// S
-	'saisie_texte_info' => 'Tento formulár akceptuje skratky SPIPU <code>[-&gt;urls] {{tučné}} {kurzíva} &lt;úvodzovky&gt; &lt;kód&gt;</code> a HTML kód <code>&lt;q&gt;</code> <code>&lt;del&gt;</code> <code>&lt;ins&gt;</code>. Ak chcete urobiť odsek, jednoducho vynechajte prázdne riadky.',
+	'saisie_texte_info' => 'Tento formulár akceptuje skratky SPIPU <code>[-&gt;urls] {{tučné}} {kurzíva} &lt;úvodzovky&gt; &lt;kód&gt;</code> a HTML kód <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Ak chcete urobiť odsek, jednoducho vynechajte prázdne riadky.', # MODIF
 	'saisie_texte_legend' => 'Sem napíšte svoj komentár',
 	'submit1' => 'Ukážka',
 	'submit2' => 'Poslať',

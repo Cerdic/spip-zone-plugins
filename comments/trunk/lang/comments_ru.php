@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_comment_ok' => 'Спасибо за ваш комментарий!',
 
 	// S
-	'saisie_texte_info' => ' ',
+	'saisie_texte_info' => ' ', # MODIF
 	'saisie_texte_legend' => 'Напишите текст комментария ниже:',
 	'submit1' => 'Предварительный просмотр',
 	'submit2' => 'Опубликовать',

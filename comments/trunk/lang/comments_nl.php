@@ -56,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_comment_ok' => 'Bedankt voor je commentaar!',
 
 	// S
-	'saisie_texte_info' => 'In dit formulier kun je de SPIP-codes <code>[txt-&gt;url]</code> <code>{{vet}} {cursief}</code> <code>&lt;quote&gt;</code> <code>&lt;code&gt;</code> en HTML code <code>&lt;q&gt;</code> <code>&lt;del&gt;</code> <code>&lt;ins&gt;</code> gebruiken. Om een nieuwe paragraaf te maken laat je gewoon een paar regels leeg.',
+	'saisie_texte_info' => 'In dit formulier kun je de SPIP-codes <code>[-&gt;url] {{vet}} {cursief} &lt;quote&gt; &lt;code&gt;</code> en HTML code <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code> gebruiken. Om een nieuwe paragraaf te maken laat je gewoon een paar regels leeg.', # MODIF
 	'saisie_texte_legend' => 'Vul hier je commentaar in',
 	'submit1' => 'Voorvertoning',
 	'submit2' => 'Bevestig het verzenden',

@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_comment_ok' => 'Gràcies pel comentari!',
 
 	// S
-	'saisie_texte_info' => 'Aquest formulari accepta les dreceres SPIP <code>[txt-&gt;url]</code> <code>{{italique}} {italique}</code> <code>&lt;quote&gt;</code> <code>&lt;code&gt;</code> i el codi HTML <code>&lt;q&gt;</code> <code>&lt;del&gt;</code> <code>&lt;ins&gt;</code>. Per crear paràgrafs, deixeu simplement línies buides.',
+	'saisie_texte_info' => 'Aquest formulari accepta les dreceres SPIP <code>[-&gt;url] {{italique}} {italique} &lt;quote&gt; &lt;code&gt;</code> i el codi HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Per crear paràgrafs, deixeu simplement línies buides.', # MODIF
 	'saisie_texte_legend' => 'Afegeix el comentari aquí',
 	'submit1' => 'Visualització prèvia',
 	'submit2' => 'Confirmar l’enviament',

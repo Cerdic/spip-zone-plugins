@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_comment_ok' => 'شكراً للتعليق',
 
 	// S
-	'saisie_texte_info' => 'تدعم هذه الاستمارة اختصارات SPIP <code>[-&gt;عنوان] {{أسود}} {مائل} &lt;اقتباس&gt; &lt;برمجة&gt;</code> وعلامات HTML <code>&lt;q&gt;</code> <code>&lt;del&gt;</code> <code>&lt;ins&gt;</code>. لإنشاء فقرات أترك اسطر فارغة.',
+	'saisie_texte_info' => 'تدعم هذه الاستمارة اختصارات SPIP <code>[-&gt;عنوان] {{أسود}} {مائل} &lt;اقتباس&gt; &lt;برمجة&gt;</code> وعلامات HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. لإنشاء فقرات أترك اسطر فارغة.', # MODIF
 	'saisie_texte_legend' => 'إضافة تعليق هنا',
 	'submit1' => 'معاينة',
 	'submit2' => 'تأكيد الإرسال',
