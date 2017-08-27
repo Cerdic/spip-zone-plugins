@@ -48,3 +48,8 @@ input.hasDatepicker {
 .spip_documents {
   max-width:100%;
 }
+
+// Corriger le conflit entre la top-bar et orbit
+.top-bar {
+  z-index: 1;
+}
