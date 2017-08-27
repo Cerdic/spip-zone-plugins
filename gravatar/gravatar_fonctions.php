@@ -286,6 +286,7 @@ function gravatar($email, $default='404', $force=false) {
 			}
 			rename($gravatar_cache, $gravatar_cache . '.png');
 			include_spip('inc/filtres_images');
+			include_spip('inc/filtres_images_mini');
 			$img = imagecreatefrompng($gravatar_cache . '.png');
 			// Compatibilite avec la 2.1
 			if (function_exists('_image_imagejpg')){
