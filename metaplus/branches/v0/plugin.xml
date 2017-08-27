@@ -4,10 +4,12 @@
 <icon>opengraph.png</icon>
 
 <version>1.0.0</version>
-<etat>dev</etat>
+<etat>stable</etat>
 <categorie>divers</categorie>
 
-<slogan>Métadonnées pour booster vos articles</slogan>
+<slogan>
+	<multi>[fr]Métadonnées pour booster vos articles[en]Metadata to boost your articles[es]Metadatos para impulsar sus artículos[de]Metadaten, um Ihre Artikel zu steigern.</multi>
+</slogan>
 <description>Améliorez l'indexation de vos articles dans les moteurs et leur affichage sur les réseaux sociaux grâce aux métadonnées Dublin Core, Open Graph et Twitter Card.</description>
 <auteur>[tetue->http://spip.tetue.net] - 2015</auteur>
 
