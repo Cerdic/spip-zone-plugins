@@ -1,0 +1,18 @@
+<B_valeurs>
+  <span class="label">#ENV{label}</span>
+  <ul class="spip">
+    <BOUCLE_valeurs(DATA){source tableau, #ENV{valeur}}>
+      <B_saisies>
+        <ul>
+          <BOUCLE_saisies(DATA){source tableau, #ENV{saisies}}>
+
+            [(#SET{saisies, #LISTE{#VALEUR|prefixer_nom_saisie{#ENV{nom}\[#_valeurs:CLE\]}}})]
+
+            #VOIR_SAISIES{#GET{saisies}, #_valeurs:VALEUR}
+
+          </BOUCLE_saisies>
+        </ul>
+      </B_saisies>
+    </BOUCLE_valeurs>
+  </ul>
+</B_valeurs>
