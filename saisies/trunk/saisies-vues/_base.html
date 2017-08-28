@@ -33,7 +33,7 @@ Hors option 'valeur_uniquement' :
 
 [(#REM) Cas normal avec présentation ]
 [(#GET{valeur_uniquement}|non)
-<div class="champ afficher[ afficher_(#ENV{nom})][ saisie_(#ENV{type_saisie})][ (#ENV{conteneur_class,#ENV{li_class}})][ (#GET{reponse}|non)sans_reponse vide]">
+<div class="champ afficher[ afficher_(#ENV{nom}|saisie_nom2classe)][ saisie_(#ENV{type_saisie})][ (#ENV{conteneur_class,#ENV{li_class}})][ (#GET{reponse}|non)sans_reponse vide]">
 	[(#REM) S'il y a des enfants on n'inclut que la vue ]
 	[(#GET{enfants}|oui)
 		#GET{reponse}
