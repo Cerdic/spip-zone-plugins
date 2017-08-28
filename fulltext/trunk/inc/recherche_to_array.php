@@ -296,7 +296,9 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 		}
 
 		// nombre max de resultats renvoyes par l'API
-		define('_FULLTEXT_MAX_RESULTS', 500);
+		if (!defined('_FULLTEXT_MAX_RESULTS')) {
+			define('_FULLTEXT_MAX_RESULTS', 500);
+		}
 
 		// preparer la requete
 		$requete['SELECT'][] = $score;
