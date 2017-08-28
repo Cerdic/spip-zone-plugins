@@ -74,7 +74,7 @@ function balise_FORMULAIRE_NOTATION_stat($args, $filtres) {
 // bref, a integrer dans le core ? :p
 function balise_NOTATION_TYPE_BOUCLE($p) {
 	$type = $p->boucles[$p->id_boucle]->id_table;
-	$p->code = $type ? $type : "balise_hors_boucle";
+	$p->code = $type ? "objet_type('$type')" : "'balise_hors_boucle'";
 	return $p;
 }
 ?>
