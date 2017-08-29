@@ -21,12 +21,12 @@
    [acceptedFiles: "(#ENV{acceptedFiles})",]
 
    [success: function(file, response) {
-     ajaxReload("(#ENV{ajaxReload})");
+	 ajaxReload("(#ENV{ajaxReload})");
    },]
 
 
    [complete: function (file, response) {
-     window.location = "(#ENV{redirect})";
+	 window.location = "(#ENV{redirect})";
    },]
 
    // Traduire dropzone
