@@ -4,14 +4,18 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+function formulaires_uploadhtml5_fichiers($objet, $id_objet, $mode = 'auto', $ajaxReload = '', $args = array()) {
+	return array('file', 'file_logo');
+}
+
 /**
  * Formulaire d'upload en html5
  *
- * @param mixed $objet Objet cible
- * @param mixed $id_objet Id de l'objet cible
+ * @param string $objet Objet cible
+ * @param int $id_objet Id de l'objet cible
  * @param string $mode mode d'insertion des objets
  * @param string $ajaxReload Objet ajax à recharger quand une image est uploadé
- * @param mixed $args Tableau d'option
+ * @param array $args Tableau d'option
  *		  redirect => Faire une redirection après l'upload de tout les éléménts.
  *		  acceptedFiles => limiter les types de fichier accepter. Une liste d'extension (ex: jpg,gif,pdf)
  *		  paramName => Changer le name du formulaire d'envoie
@@ -21,7 +25,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *		  _footer => placer du texte ou du header dans le bas du formulaire
  *
  * @access public
- * @return mixed
+ * @return array
  */
 function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto', $ajaxReload = '', $args = array()) {
 	include_spip('uploadhtml5_fonctions');
@@ -68,17 +72,19 @@ function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto',
 
 function formulaires_uploadhtml5_traiter_dist($objet, $id_objet, $mode = 'auto', $ajaxReload = '', $args = array()) {
 
+	$fichiers = _request('_fichiers');
+
 	if (isset($args['logo']) and $args['logo'] == 'oui') {
 		// si on a les plugin logo_svg et que l'on est en presence d'un fichier svg
 		if (test_plugin_actif(logo_svg) and preg_match('/\.svg$/', $_FILES['file_logo']['name'])) {
 			include_spip('action/editer_logo');
 			include_spip('formulaires/editer_logo');
-			logo_modifier_svg($objet, $id_objet, 'on', $_FILES['file_logo']);
+			logo_modifier_svg($objet, $id_objet, 'on', $fichiers['file_logo']);
 		} else {
-			uploadhtml5_uploader_logo($objet, $id_objet, $_FILES['file_logo']['tmp_name']);
+			uploadhtml5_uploader_logo($objet, $id_objet, $fichiers['file_logo']['tmp_name']);
 		}
 	} else {
-		uploadhtml5_uploader_document($objet, $id_objet, $_FILES, 'new', $mode);
+		uploadhtml5_uploader_document($objet, $id_objet, $fichiers, 'new', $mode);
 	}
 
 	// Donnée de retour.
