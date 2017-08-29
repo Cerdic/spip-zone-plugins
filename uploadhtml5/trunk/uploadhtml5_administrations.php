@@ -2,11 +2,11 @@
 /**
  * Fichier gérant l'installation et désinstallation du plugin Formulaire upload html5
  *
- * @plugin     Formulaire upload html5
+ * @plugin	   Formulaire upload html5
  * @copyright  2014
- * @author     Phenix
- * @licence    GNU/GPL
- * @package    SPIP\Uploadhtml5\Installation
+ * @author	   Phenix
+ * @licence	   GNU/GPL
+ * @package	   SPIP\Uploadhtml5\Installation
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -24,23 +24,23 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * - mettre à jour la structure SQL
  *
  * @param string $nom_meta_base_version
- *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ *	   Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @param string $version_cible
- *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
+ *	   Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
  * @return void
 **/
 function uploadhtml5_upgrade($nom_meta_base_version, $version_cible) {
-    $maj = array();
+	$maj = array();
 
-    $config_defaut = array(
-        'max_file_size' => 5, // 5 Mb par défaut
-        'max_file' => 0 // Nombre de fichier illimité par défaut
-    );
+	$config_defaut = array(
+		'max_file_size' => 5, // 5 Mb par défaut
+		'max_file' => 0 // Nombre de fichier illimité par défaut
+	);
 
-    // Configuration par défaut de la dropzone
-    $maj['create'] = array(
-        array('ecrire_meta', 'uploadhtml5', serialize($config_defaut))
-    );
+	// Configuration par défaut de la dropzone
+	$maj['create'] = array(
+		array('ecrire_meta', 'uploadhtml5', serialize($config_defaut))
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -56,7 +56,7 @@ function uploadhtml5_upgrade($nom_meta_base_version, $version_cible) {
  * - supprimer les tables et les champs créés par le plugin.
  *
  * @param string $nom_meta_base_version
- *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ *	   Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @return void
 **/
 function uploadhtml5_vider_tables($nom_meta_base_version) {

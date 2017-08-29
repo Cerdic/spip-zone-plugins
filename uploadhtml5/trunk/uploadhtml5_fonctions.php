@@ -2,11 +2,11 @@
 /**
  * Fonctions utiles au plugin Formulaire upload html5
  *
- * @plugin     Formulaire upload html5
+ * @plugin	   Formulaire upload html5
  * @copyright  2014
- * @author     Phenix
- * @licence    GNU/GPL
- * @package    SPIP\Uploadhtml5\Fonctions
+ * @author	   Phenix
+ * @licence	   GNU/GPL
+ * @package	   SPIP\Uploadhtml5\Fonctions
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -27,8 +27,8 @@ function uploadhtml5_uploader_document($objet, $id_objet, $files, $id_document =
 	// tester l'autorisation d'ajout de document
 	include_spip('inc/autoriser');
 	/* S'il n'y a pas d'id_objet, c'est qu'on crée un nouveau
-       document. Les autorisations seront gérées en aval dans
-       ajouter_document. */
+	   document. Les autorisations seront gérées en aval dans
+	   ajouter_document. */
 	if ($id_objet and (!autoriser('joindredocument', $objet, $id_objet))) {
 		return false;
 	}
@@ -56,9 +56,9 @@ function uploadhtml5_uploader_document($objet, $id_objet, $files, $id_document =
 
 		// Obfusquer les noms de fichiers
 		if (_UPLOADHTML5_OBFUSQUER == true) {
-	        foreach ($res as $key => $id_document) {
-		        obfusquer_document($id_document);
-	        }
+			foreach ($res as $key => $id_document) {
+				obfusquer_document($id_document);
+			}
 		}
 		return $res;
 	}
@@ -164,16 +164,16 @@ function titre_cadre_logo($objet, $id_objet) {
 	$aider = function_exists('aider') ? 'aider' : 'aide';
 	switch ($objet) {
 		case 'article':
-	        $libelle .= ' ' . $aider('logoart');
-	        break;
+			$libelle .= ' ' . $aider('logoart');
+			break;
 		case 'breve':
-	        $libelle .= ' ' . $aider('breveslogo');
-	        break;
+			$libelle .= ' ' . $aider('breveslogo');
+			break;
 		case 'rubrique':
-	        $libelle .= ' ' . $aider('rublogo');
-	        break;
+			$libelle .= ' ' . $aider('rublogo');
+			break;
 		default:
-	        break;
+			break;
 	}
 
 	return $img . $libelle;

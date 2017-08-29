@@ -2,11 +2,11 @@
 /**
  * Utilisations de pipelines par Formulaire upload html5
  *
- * @plugin     Formulaire upload html5
+ * @plugin	   Formulaire upload html5
  * @copyright  2014
- * @author     Phenix
- * @licence    GNU/GPL
- * @package    SPIP\Uploadhtml5\Pipelines
+ * @author	   Phenix
+ * @licence	   GNU/GPL
+ * @package	   SPIP\Uploadhtml5\Pipelines
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -55,14 +55,14 @@ function uploadhtml5_formulaire_fond($flux) {
 
 	if ($flux['args']['form'] == 'joindre_document') {
 
-	    /**
-	     * Si on est pas sur l'espace privé et que les scripts
-	     * n'ont pas été charger sur l'espace public,
-	     * on ne fait rien au formulaire
-	     */
-	    if (!test_espace_prive() and !$config['charger_public']) {
-		    return $flux;
-	    }
+		/**
+		 * Si on est pas sur l'espace privé et que les scripts
+		 * n'ont pas été charger sur l'espace public,
+		 * on ne fait rien au formulaire
+		 */
+		if (!test_espace_prive() and !$config['charger_public']) {
+			return $flux;
+		}
 
 		// Récupérer le formulaire d'upload en html5 et lui passer une partie du contexte de joindre_document
 		$uploadhtml5 = recuperer_fond(
@@ -77,14 +77,14 @@ function uploadhtml5_formulaire_fond($flux) {
 		$flux['data'] = $uploadhtml5.$flux['data'];
 	} elseif ($flux['args']['form'] == 'editer_logo') {
 
-	    /**
-	     * Si on est pas sur l'espace privé et que les scripts
-	     * n'ont pas été charger sur l'espace public,
-	     * on ne fait rien au formulaire
-	     */
-	    if (!test_espace_prive() and !$config['charger_public']) {
-		    return $flux;
-	    }
+		/**
+		 * Si on est pas sur l'espace privé et que les scripts
+		 * n'ont pas été charger sur l'espace public,
+		 * on ne fait rien au formulaire
+		 */
+		if (!test_espace_prive() and !$config['charger_public']) {
+			return $flux;
+		}
 
 		$chercher_logo = charger_fonction('chercher_logo', 'inc');
 		if (!$chercher_logo($id_objet, id_table_objet($objet))) {
