@@ -1,0 +1,17 @@
+[(#REM)
+Ce fichier affiche les fichiers temporairement uploadés par la saisie "upload"
+]
+<div class="tmp-upload">
+	<BOUCLE_saisie_upload(DOCUMENTS){id_document IN #SESSION{upload}}{statut=tmp}>
+		<div class="image">
+			[(#LOGO_DOCUMENT
+				|image_passe_partout{100,100}
+				|image_recadre{100,100}
+				|vider_attribut{class})]
+
+			<div class="action">
+				<a href="#URL_ACTION_AUTEUR{supprimer_document_tmp, #ID_DOCUMENT, #SELF}" class="ajax supprimer">Supprimer</a>
+			</div>
+		</div>
+	</BOUCLE_saisie_upload>
+</div>
