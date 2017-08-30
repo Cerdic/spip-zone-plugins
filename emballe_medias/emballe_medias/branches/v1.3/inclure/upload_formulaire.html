@@ -268,7 +268,7 @@
 			$('#fileupload').fileupload('option',{
 				paramName: 'Filedata',
 				done: function (e, data) {
-					var that = $(this).data('fileupload');
+					var that = $(this).data('blueimpUI-fileupload') || $(this).data('fileupload');;
 					isUploading = false;
 					if (data.context) {
 						var total = format_file_size(data.total);
@@ -308,7 +308,7 @@
 						}),
 						dataType: "html",
 						beforeSend : function(){
-							$(this).animeajax().addClass('loading');
+							$(this).addClass('loading');
 						},
 						success: function(msg){
 							$(this).removeClass('loading').children().css('opacity', 1);
