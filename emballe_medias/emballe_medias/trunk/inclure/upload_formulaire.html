@@ -180,7 +180,7 @@
 			$('[#(#ENV{id_formulaire,fileupload})]').fileupload('option',{
 				paramName: 'Filedata',
 				done: function (e, data) {
-					var that = $(this).data('fileupload');
+					var that = $(this).data('blueimpUI-fileupload') || $(this).data('fileupload');
 					isUploading = false;
 					if (data.context) {
 						var total = format_file_size(data.total);
@@ -227,7 +227,7 @@
 					if(data.maxNumberOfFiles == 0){
 						jQuery('.em_charger_fichiers,#em_form_upload,.jfupload').fadeOut().detach();
 						jQuery('#formulaire_diogene').ajaxReload();
-						$('#[(#ENV{id_formulaire,fileupload})]').bind('fileuploadstop', function (e) {$(this).data('fileupload').destroy();})
+						$('#[(#ENV{id_formulaire,fileupload})]').bind('fileuploadstop', function (e) { var that = $(this).data('blueimpUI-fileupload') || $(this).data('fileupload'); that.data('fileupload').destroy();})
 					}else{
 						if(that.disabled)
 							that.enable();
