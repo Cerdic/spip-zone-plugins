@@ -52,7 +52,10 @@ function formulaires_rubriqueur_verifier_dist() {
 }
 
 function formulaires_rubriqueur_traiter_dist() {
-	$rubrique_racine = array_pop(picker_selected(_request('rubrique_racine'), 'rubrique'));
+	$rubrique_racine = 0;
+	if(_request('rubrique_racine')) {
+		$rubrique_racine = array_pop(picker_selected(_request('rubrique_racine'), 'rubrique'));
+	}
 	$rubriques       = _rubriqueur_parse_texte(_request('rubriques'));
 
 	_rubriqueur_traiter_rubrique($rubriques, $rubrique_racine);
@@ -69,6 +72,9 @@ function formulaires_rubriqueur_traiter_dist() {
 }
 
 function _rubriqueur_traiter_rubrique($rubriques, $id_parent = 0, $mode = 'creer', $profondeur = 0, $retour = '') {
+	if(!is_array($rubriques)) {
+		return;
+	}
 	foreach ($rubriques as $key => $value) {
 		if (is_numeric($key)) {
 			$titre = str_replace(_RUBRIQUEUR_DEUX_POINTS_SUBSTITUT, ':', $value);
