@@ -34,7 +34,8 @@ function uploadhtml5_upgrade($nom_meta_base_version, $version_cible) {
 
 	$config_defaut = array(
 		'max_file_size' => 5, // 5 Mb par défaut
-		'max_file' => 0 // Nombre de fichier illimité par défaut
+		'max_file' => 0, // Nombre de fichier illimité par défaut
+		'resizeQuality' => 80
 	);
 
 	// Configuration par défaut de la dropzone
