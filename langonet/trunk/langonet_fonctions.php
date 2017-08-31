@@ -136,12 +136,6 @@ function creer_selects($sel_l='0',$sel_d=array(), $exclure_paquet=true, $multipl
 	$rep_spip[] = 'squelettes-dist';
 	$rep_scan = array_merge($rep_perso, $rep_plugins, $rep_suppl, $rep_extensions, $rep_spip);
 
-	// ajout pour iclimb
-	$rep_scan = $rep_suppl;
-	// on supprime le plugin magic login
-	$magic = "iclimb_magic_login";
-	unset($rep_scan[array_search($magic, $rep_scan)]);
-
 	// construction des <select>
 	// -- les fichiers de langue
 	$sel_lang = '<select name="fichier_langue" id="fichier_langue" style="margin-bottom:1em;">'."\n";
