@@ -134,9 +134,12 @@ function notation_calculer_id($p){
  function critere_notation($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
 
-	$table = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	$table = null;
+	if (isset($crit->param[0])) {
+		$table = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	}
 
-	if (!preg_match(",^'\w+'$,",$table)){
+	if (!$table or !preg_match(",^'\w+'$,",$table)){
 		$table = $boucle->type_requete;
 		$id_table = $boucle->id_table;
 		$objet = objet_type($table);
@@ -145,7 +148,14 @@ function notation_calculer_id($p){
 
 		include_spip('inc/notation');
 		$ponderation = notation_get_ponderation();
+		$note_max = notation_get_nb_notes();
+
 		$boucle->select[]= 'COUNT(notations.note) AS nombre_votes';
+		// Pour formulaires jaime et jaime/jaimepas : nombre de votes j’aime, j’aime pas et différence
+		$boucle->select[]= 'COALESCE(SUM(notations.note=1), 0) AS nombre_votes_moins';
+		$boucle->select[]= 'COALESCE(SUM(notations.note=' . intval($note_max) . '), 0) AS nombre_votes_plus';
+		$boucle->select[]= 'COALESCE(SUM(notations.note=' . intval($note_max) . ') - SUM(notations.note=1), 0) AS nombre_votes_diff';
+		// Calculs utiles : moyenne et moyenne pondérée.
 		$boucle->select[]= 'ROUND(AVG(notations.note),2) AS moyenne';
 		$boucle->select[]= 'ROUND(AVG(notations.note)*(1-EXP(-5*COUNT(notations.note)/'.$ponderation.')),2) AS moyenne_ponderee';
 		# jointure sur spip_notations
@@ -159,17 +169,20 @@ function notation_calculer_id($p){
 		$boucle->group[]=$group;
 	
 		// Cas d'un {notation moyenne>3}
-		$op='';
-		$params = $crit->param;
-		$type = array_shift($params);
-		$type = $type[0]->texte;
-		if(preg_match(',^(\w+)([<>=]+)([0-9]+)$,',$type,$r)){
-			$type=$r[1];
-			$op=$r[2];
-			$op_val=$r[3];
+		if ($crit->param and count($crit->param) > 1) {
+			$op = '';
+			$params = $crit->param;
+			$type = array_shift($params);
+			$type = $type[0]->texte;
+			if (preg_match(',^(\w+)([<>=]+)([0-9]+)$,', $type, $r)) {
+				$type = $r[1];
+				$op = $r[2];
+				$op_val = $r[3];
+			}
+			if ($op) {
+				$boucle->having[] = array("'" . $op . "'", "'" . $type . "'", $op_val);
+			}
 		}
-		if ($op)
-			$boucle->having[]= array("'".$op."'", "'".$type."'",$op_val);
 	}
 	// on utilise la notation sur une table jointe
 	// donc evitons d'utiliser un group-by et preferons la table spip_notations_objets
@@ -203,57 +216,89 @@ function notation_calculer_id($p){
 
 
 /**
- * Retourne le nombre de vote sur un objet de SPIP.
- * Necessite le critere {notation} sur la boucle
- * <BOUCLE_(ARTICLES){notation}>#NOTATION_NOMBRE_VOTES ...
+ * Retourne le nombre de votes sur un objet de SPIP.
+ *
+ * Nécessite le critère {notation} sur la boucle `<BOUCLE_(ARTICLES){notation}>#NOTATION_NOMBRE_VOTES ...`
+ * ou objet/id_objet en paramètre `#NOTATION_NOMBRE_VOTES{article,3}`
  */
 function balise_NOTATION_NOMBRE_VOTES_dist($p) {
-	if (($_objet = interprete_argument_balise(1,$p))!==NULL
-		AND ($_id = interprete_argument_balise(2,$p))!==NULL) {
-		$p->code = "notation_generer_info($_id,$_objet,'nombre_votes')";
-		$p->interdire_scripts = false;
-		return $p;
-	}
-	else
-		return rindex_pile($p, 'nombre_votes', 'notation');
+	return calculer_balise_notation_champ($p, 'nombre_votes');
 }
 
 /**
  * Retourne la moyenne des votes sur un objet de SPIP.
- * Necessite le critere {notation} sur la boucle
- * <BOUCLE_(ARTICLES){notation}>#NOTATION_NOMBRE_VOTES ...
+ *
+ * Nécessite le critère {notation} sur la boucle `<BOUCLE_(ARTICLES){notation}>#NOTATION_MOYENNE ...`
+ * ou objet/id_objet en paramètre `#NOTATION_MOYENNE{article,3}`
  */
 function balise_NOTATION_MOYENNE_dist($p) {
-	if (($_objet = interprete_argument_balise(1,$p))!==NULL
-		AND ($_id = interprete_argument_balise(2,$p))!==NULL) {
-		$p->code = "notation_generer_info($_id,$_objet,'moyenne')";
-		$p->interdire_scripts = false;
-		return $p;
-	}
-	else
-		return rindex_pile($p, 'moyenne', 'notation');
+	return calculer_balise_notation_champ($p, 'moyenne');
 }
 
 /**
- * Retourne la moyenne ponderee des votes sur un objet de SPIP.
- * Necessite le critere {notation} sur la boucle
- * <BOUCLE_(ARTICLES){notation}>#NOTATION_NOMBRE_VOTES ...
+ * Retourne la moyenne ponderée des votes sur un objet de SPIP.
+ *
+ * Nécessite le critère {notation} sur la boucle `<BOUCLE_(ARTICLES){notation}>#NOTATION_MOYENNE_PONDEREE ...`
+ * ou objet/id_objet en paramètre `#NOTATION_MOYENNE_PONDEREE{article,3}`
  */
 function balise_NOTATION_MOYENNE_PONDEREE_dist($p) {
-	if (($_objet = interprete_argument_balise(1,$p))!==NULL
-		AND ($_id = interprete_argument_balise(2,$p))!==NULL) {
-		$p->code = "notation_generer_info($_id,$_objet,'moyenne_ponderee')";
+	return calculer_balise_notation_champ($p, 'moyenne_ponderee');
+}
+
+/**
+ * Retourne le nombre de votes positifs (jaime) sur un objet de SPIP.
+ *
+ * Nécessite le critère {notation} sur la boucle `<BOUCLE_(ARTICLES){notation}>#NOTATION_NOMBRE_VOTES_PLUS ...`
+ */
+function balise_NOTATION_NOMBRE_VOTES_PLUS_dist($p) {
+	return rindex_pile($p, 'nombre_votes_plus', 'notation');
+}
+
+/**
+ * Retourne le nombre de votes négatifs (jaimepas) sur un objet de SPIP.
+ *
+ * Nécessite le critère {notation} sur la boucle `<BOUCLE_(ARTICLES){notation}>#NOTATION_NOMBRE_VOTES_MOINS ...`
+ */
+function balise_NOTATION_NOMBRE_VOTES_MOINS_dist($p) {
+	return rindex_pile($p, 'nombre_votes_moins', 'notation');
+}
+
+/**
+ * Retourne la différence entre le nombre de votes positifs et négatifs (jaime - jaimepas) sur un objet de SPIP.
+ *
+ * Nécessite le critère {notation} sur la boucle `<BOUCLE_(ARTICLES){notation}>#NOTATION_NOMBRE_VOTES_DIFF ...`
+ */
+function balise_NOTATION_NOMBRE_VOTES_DIFF_dist($p) {
+	return rindex_pile($p, 'nombre_votes_diff', 'notation');
+}
+
+/**
+ * Retourne champ calculé par le critère `{notation}`.
+ *
+ * Si objet et id_objet est passé en paramètre de la balise,
+ * alors on calcule sans le critère.
+ * @param Champ $p
+ * @param string $champ Nom du champ souhaité.
+ * @return Champ
+ */
+function calculer_balise_notation_champ($p, $champ) {
+	if (
+		($_objet = interprete_argument_balise(1, $p))  !== NULL
+		AND ($_id = interprete_argument_balise(2, $p)) !== NULL
+	) {
+		$p->code = "notation_generer_info($_id, $_objet, $champ)";
 		$p->interdire_scripts = false;
 		return $p;
+	} else {
+		return rindex_pile($p, $champ, 'notation');
 	}
-	else
-		return rindex_pile($p, 'moyenne_ponderee', 'notation');
 }
 
 function notation_generer_info($id_objet,$objet,$info){
 	static $infos = array();
-	if (!in_array($info,array('nombre_votes','moyenne','moyenne_ponderee')))
+	if (!in_array($info,array('nombre_votes','moyenne','moyenne_ponderee'))) {
 		return '';
+	}
 
   if (!isset($infos[$objet][$id_objet])){
 	  include_spip('inc/notation');
