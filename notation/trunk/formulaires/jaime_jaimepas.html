@@ -1,6 +1,7 @@
 <!--formulaire_notation-->
+#SET{note_ponderee,0}
+#SET{total,0}
 <BOUCLE_note(NOTATIONS_OBJETS){objet=(#ENV*{_objet}|objet_type)}{id_objet=#ENV*{_id_objet}}>
-#SET{note,#NOTE}
 #SET{note_ponderee,#NOTE_PONDEREE}
 #SET{total,#NOMBRE_VOTES}
 </BOUCLE_note>
