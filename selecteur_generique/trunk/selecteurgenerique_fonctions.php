@@ -40,6 +40,15 @@ function selecteurgenerique_verifier_js($flux){
 ";
 			}
 			/**
+			 * ui.menu.js
+			 */
+			if(strpos($flux,''.$prepjs.'menu.js')===FALSE){
+				$widget = find_in_path('prive/javascript/ui/'.$prepjs.'menu.js');
+				$contenu .= "
+<script type='text/javascript' src='$widget'></script>
+";
+			}
+			/**
 			 * ui.position.js
 			 */
 			if(strpos($flux,''.$prepjs.'position.js')===FALSE){
@@ -90,6 +99,15 @@ function selecteurgenerique_verifier_js($flux){
 			$ui_css = find_in_path('css/'.$prepcss.'core.css');
 			$contenu .= "
 <link rel='stylesheet' href='$ui_css' type='text/css' media='all' />
+";
+		}
+		/**
+		 * ui.menu.css
+		 */
+		if(strpos($flux,''.$prepcss.'menu.css')===FALSE){
+			$autocomplete_css = find_in_path('css/'.$prepcss.'menu.css');
+			$contenu .= "
+<link rel='stylesheet' href='$autocomplete_css' type='text/css' media='all' />
 ";
 		}
 		/**
