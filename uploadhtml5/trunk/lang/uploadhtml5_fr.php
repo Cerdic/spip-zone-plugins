@@ -27,8 +27,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'explication_max_file' => 'Nombre de maximum de fichiers qui peuvent être uploadés simultanément (0 pour ne pas limiter).',
 	'explication_max_file_size' => 'Taille maximum des fichiers (en MB). Il est conseillé d’utiliser la valeur du serveur (@uploadmaxsize@).',
-	'explication_resizeWidth' => "L'image va être réduite à cette dimention avant d'être envoyer. Si seulement une des valeurs est remplie, hauteur ou largeur, le ratio de l'image sera respecté.",
 	'explication_resizeMethod' => 'Méthode de réduction des images dans le cas ou la hauteur <strong>et</strong> la largeur sont forcées.',
+	'explication_resizeWidth' => 'L’image va être réduite à cette dimention avant d’être envoyer. Si seulement une des valeurs est remplie, hauteur ou largeur, le ratio de l’image sera respecté.',
 
 	// L
 	'label_charger_public' => 'Script dans l’espace public',
@@ -41,9 +41,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'resizeHeight' => 'Recadrer/reduire en hauteur',
-	'resizeWidth' => 'Recadrer/réduire en largeur',
-	'resizeQuality' => 'Qualité (en %)',
 	'resizeMethod' => 'Méthode',
+	'resizeQuality' => 'Qualité (en %)',
+	'resizeWidth' => 'Recadrer/réduire en largeur',
 
 	// T
 	'titre_fieldset_image' => 'Modifier les images',
