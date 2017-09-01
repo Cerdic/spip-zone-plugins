@@ -26,7 +26,7 @@ function action_mailsubscribers_export_dist($args = null){
 		exit;
 	}
 
-	$args = explode("-", $args);
+	$args = explode("~~", $args);
 	$statut = $args[0];
 	$liste = (isset($args[1])) ? trim($args[1]) : false;
 
@@ -39,7 +39,9 @@ function action_mailsubscribers_export_dist($args = null){
 	}
 
 	if ($liste) {
-		$where[] = "listes LIKE '%".$liste."%'";
+		//$where[] = "listes LIKE '%".$liste."%'";
+		$where = array();
+		$where[] = "listes LIKE '%".$liste.",%' OR listes LIKE '%".$liste."' AND statut='valide'";
 	}
 
 	$entetes = array(
