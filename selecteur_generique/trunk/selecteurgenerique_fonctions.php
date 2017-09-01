@@ -61,8 +61,8 @@ function selecteurgenerique_verifier_js($flux){
 			 * Ajoute la prise en compte de code html dans le sélecteur et l'interprète
 			 * Par exemple des images / icones
 			 */
-			if(strpos($flux,'jquery.ui.autocomplete.html')===FALSE){
-				$autocompleter_html = find_in_path('javascript/jquery.ui.autocomplete.html.js');
+			if(strpos($flux,'autocomplete.html')===FALSE){
+				$autocompleter_html = find_in_path('javascript/ui/autocomplete.html.js');
 				$contenu .= $autocompleter_html ? "
 <script type='text/javascript' src='$autocompleter_html'></script>
 " : '';
