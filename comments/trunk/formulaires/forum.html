@@ -53,13 +53,12 @@
 
 			[(#ENV**{afficher_texte}|choixsiegal{'non', '',' '})
 
-			<INCLURE
-			{fond=formulaires/inc-login_forum}{env} />
+			<INCLURE{fond=formulaires/inc-login_forum}{env} />
 
 			<fieldset>
 				<legend><:comments:saisie_texte_legend:></legend>
 				<input type="hidden" name="titre" id="titre"[ value="(#ENV{titre})"] />
-				<ul>
+				<ul class="editer-groupe">
 					[(#CONFIG{forums_texte}|!={non}|?{
 					<li class='editer saisie_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur] obligatoire'>
 						<label for='texte'><:forum:forum_texte|typo:></label>
@@ -95,7 +94,7 @@
 			[
 			<fieldset>
 				<legend><:medias:bouton_ajouter_document:></legend>
-				<ul>
+				<ul class="editer-groupe">
 					<li class='editer saisie_document_forum[ (#ENV**{erreurs}|table_valeur{document_forum}|oui)erreur]'>
 						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{document_forum})</span>]
 						<input type="hidden" name="cle_ajouter_document" value="(#ENV{cle_ajouter_document})"/>
