@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'max_file_size' => 'Taille maximum des fichiers',
 
 	// R
-	'resizeHeight' => 'Recadrer/reduire en hauteur',
+	'resizeHeight' => 'Recadrer/réduire en hauteur',
 	'resizeMethod' => 'Méthode',
 	'resizeQuality' => 'Qualité (en %)',
 	'resizeWidth' => 'Recadrer/réduire en largeur',
