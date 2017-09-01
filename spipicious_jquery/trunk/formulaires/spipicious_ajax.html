@@ -10,23 +10,23 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		[<fieldset>(#GET{mots}|oui)
 			<legend><:spipicious:vos_tags:></legend>
-			<ul>
+			<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 				[(#SAISIE{spipicious_del_tags,remove_tags,
 					explication=<:spipicious:explication_suppression_tag:>,
 					id_objet=#ENV{id_objet},
 					objet=#ENV{type},
 					label=''})]
-			</ul>
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		</fieldset>]
 		<fieldset>
 		<legend><:spipicious:add_tags:></legend>
-		<ul>
-			<li class="editer editer_spipicious_tags">
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+			<[(#VAL{li}|saisie_balise_structure_formulaire)] class="editer editer_spipicious_tags">
 				<label><:spipicious:tags:></label>
 				<p class="explication"><:spipicious:explication_ajout_tag{separateur=&#44;}:></p>
 				<input type="text" class="text" name="spipicious_tags" id="spipicious_tags" size="50" data-selecteur="[(#VAL{tags}|parametre_url{id_objet,#ENV{id_objet}}|parametre_url{objet,#ENV{type}})]" multiple="multiple" />
-			</li>
-		</ul>
+			</[(#VAL{li}|saisie_balise_structure_formulaire)]>
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		</fieldset>
 		<p class="boutons">
 			<input type="hidden" name="spipicious_id" id="spipicious_id" value="#ENV{id_objet}" />
