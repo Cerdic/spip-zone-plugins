@@ -254,7 +254,7 @@
 		// Add the note (which we'll load with the form afterwards)
 		//var form = $('<div id="image-annotate-edit-form"><form><textarea id="image-annotate-text" name="text" rows="3" cols="30">' + this.note.text + '</textarea></form></div>');
 		
-		var form = $("'<div id=\"image-annotate-edit-form\"></div>'");
+		var form = $('<div id="image-annotate-edit-form"></div>');
 		this.form = form;
 
 		this.form.css('left', this.area.offset().left + 'px');
