@@ -1,0 +1,14 @@
+<paquet
+	prefix="sitemap_images"
+	categorie="statistique"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.1.6;3.1.*]"
+	logo="prive/themes/spip/images/sitemap_images-64.png"
+	documentation="https://contrib.spip.net/xxx"
+>
+	<nom>Sitemap images</nom>
+	<!-- Fournit un sitemap images -->
+	<auteur lien='https://www.erational.org'>erational</auteur>
+	<licence>GNU/GPL</licence>
+</paquet>
