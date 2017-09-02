@@ -77,10 +77,6 @@
 [<meta name="twitter:title" content="(#ENV{titre}|attribut_html)" />]
 [<meta name="twitter:description" content="(#ENV{desc}|couper{200,'…'}|attribut_html)" />]
 [<meta name="twitter:image" content="(#GET{logo}|url_absolue)" />]
-<!--
-	 Meta twitter "do not track" voir :
-	 https://dev.twitter.com/web/overview/privacy#what-privacy-options-do-website-publishers-have
-   -->
 <meta name="twitter:dnt" content="on">
 ]
 #FILTRE{trim}
