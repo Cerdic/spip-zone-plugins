@@ -73,7 +73,7 @@ function GenerateTitlePage()
 	
 	
 	// En-tête
-	if (isset($logo_site))
+	if (isset($logo_site) and $logo_site)
 	{
 		//Logo du site centré
 		$w = $this->w;
@@ -112,7 +112,7 @@ function GenerateTitlePage()
 	
 	// Logo
 
-	if (isset($logo_fichier)) {
+	if (isset($logo_fichier) and $logo_fichier) {
 		$x = $this->GetX();
 		$y = $this->GetY();
 		$this->SetLink($link);
