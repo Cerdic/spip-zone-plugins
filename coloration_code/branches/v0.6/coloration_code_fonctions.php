@@ -2,6 +2,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/plugin');
+
 //    Fichier créé pour SPIP avec un bout de code emprunté à celui ci.
 //    Distribué sans garantie sous licence GPL./
 //    Copyright (C) 2006  Pierre ANDREWS
@@ -126,17 +128,27 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
 	//
 	// And echo the result!
 	//
-	$rempl = $stylecss . '<' . $englobant . ' class="coloration_code"><' . $englobant . ' class="spip_'.$language.' '.$cadre.$spip_cadre.'">'.$geshi->parse_code().'</' . $englobant . '>';
+	if (defined('_DIR_PLUGIN_SIMPLEC') && _DIR_PLUGIN_SIMPLEC) {
+		// si le plugin simpleC est activé, on utilise son balisage moderne
+		$geshi->set_header_type(GESHI_HEADER_NONE);
+		$geshi->enable_line_numbers(GESHI_NO_LINE_NUMBERS);
+		$code_corps = $geshi->parse_code();
+		$rempl      = simplec_balisage_code('class="' . $language . '"', $code_corps);
+	} else {
+		$rempl = $stylecss . '<' . $englobant . ' class="coloration_code"><' . $englobant . ' class="spip_' . $language . ' ' . $cadre . $spip_cadre . '">' . $geshi->parse_code() . '</' . $englobant . '>';
 
-	if ($telecharge) {
-		$rempl .= "<div class='" . $cadre . "_download'
+		if ($telecharge) {
+			$rempl .= "<div class='" . $cadre . "_download'
 		style='text-align: $spip_lang_right;'>
 		<a href='$fichier'
 		style='font-family: verdana, arial, sans; font-weight: bold; font-style: normal;'>" .
-		  _T('bouton_download') .
+				_T('bouton_download') .
 				"</a></div>";
+		}
+		$rempl .= '</' . $englobant . '>';
 	}
-	return $rempl.'</' . $englobant . '>';
+
+	return $rempl;
 }
 
 function cadre_ou_code($regs) {
