@@ -137,7 +137,7 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
 	//
 	// And echo the result!
 	//
-	if (in_array('SIMPLEC', array_keys(liste_plugin_actifs()))) {
+	if (defined('_DIR_PLUGIN_SIMPLEC') && _DIR_PLUGIN_SIMPLEC) {
 		// si le plugin simpleC est activé, on utilise son balisage moderne
 		$geshi->set_header_type(GESHI_HEADER_NONE);
 		$geshi->enable_line_numbers(GESHI_NO_LINE_NUMBERS);
