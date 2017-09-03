@@ -11,6 +11,7 @@
 [(#SET{afficher_commandes_defaut,oui})]
 [(#SET{afficher_titres_et_actions_defaut,oui})]
 [(#SET{mode_confidentialite_defaut,oui})]
+[(#SET{enablejsapi_defaut,non})]
 
 <div class='formulaire_spip formulaire_configurer formulaire_configurer_#FORM' id='formulaire_configurer_#FORM'>
 
@@ -144,6 +145,18 @@
 					<div class="choix">
 						<input type="radio" name="afficher_suggestions" class="radio" id="afficher_suggestions_off" value="non" [(#ENV{afficher_suggestions,#GET{afficher_suggestions_defaut}}|=={non}|oui) checked="checked"] />
 						<label for='afficher_suggestions_off'><:item_non:></label>
+					</div>
+				</div>
+				<div class='editer'>
+					<label for="liste_definition"><:videos:cfg_label_enablejsapi:></label>
+					<p class='explication'><:videos:cfg_explication_enablejsapi:></p>
+					<div class="choix">
+						<input type="radio" name="enablejsapi" class="radio" id="enablejsapi_on" value="oui" [(#ENV{enablejsapi,#GET{enablejsapi_defaut}}|=={oui}|oui) checked="checked"] />
+						<label for='enablejsapi_on'><:item_oui:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="enablejsapi" class="radio" id="enablejsapi_off" value="non" [(#ENV{enablejsapi,#GET{enablejsapi_defaut}}|=={non}|oui) checked="checked"] />
+						<label for='enablejsapi_off'><:item_non:></label>
 					</div>
 				</div>
 			</div>
