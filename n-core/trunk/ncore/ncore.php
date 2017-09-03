@@ -28,29 +28,29 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @package SPIP\NCORE\SERVICE\TYPE_NOISETTE
  *
- * @uses cache_lire()
- * @uses cache_ecrire()
+ * @uses    cache_lire()
+ * @uses    cache_ecrire()
  *
- * @param string	$plugin
- *      Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
- *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param array		$types_noisette
- *      Tableau associatif à 3 entrées fournissant les descriptions des types de noisettes nouveaux, obsolètes
- * 		et modifiés:
- * 		`a_effacer` : liste des identifiants de type de noisette devenus obsolètes.
- * 		`a_changer` : liste des descriptions des types de noisette dont le fichier YAML a été modifié.
- *      `a_ajouter` : liste des descriptions des nouveaux types de noisette.
- * 		Si $recharger est à `true`, seul l'index `nouvelles` est fourni dans le tableau $types_noisette.
- * @param bool		$recharger
- *      Indique si le chargement en cours est forcé ou pas. Cela permet à la fonction N-Core ou au service
- *      concerné d'optimiser le traitement sachant que seules les types de noisette nouveaux sont fournis.
- * @param string	$stockage
- *      Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
- *      ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
- * 		fournissant le service de stockage souhaité.
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array  $types_noisette
+ *        Tableau associatif à 3 entrées fournissant les descriptions des types de noisettes nouveaux, obsolètes
+ *        et modifiés:
+ *        `a_effacer` : liste des identifiants de type de noisette devenus obsolètes.
+ *        `a_changer` : liste des descriptions des types de noisette dont le fichier YAML a été modifié.
+ *        `a_ajouter` : liste des descriptions des nouveaux types de noisette.
+ *        Si $recharger est à `true`, seul l'index `nouvelles` est fourni dans le tableau $types_noisette.
+ * @param bool   $recharger
+ *        Indique si le chargement en cours est forcé ou pas. Cela permet à la fonction N-Core ou au service
+ *        concerné d'optimiser le traitement sachant que seules les types de noisette nouveaux sont fournis.
+ * @param string $stockage
+ *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
+ *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
+ *        fournissant le service de stockage souhaité.
  *
  * @return bool
- * 		`true` si le traitement s'est bien déroulé, `false` sinon.
+ *        `true` si le traitement s'est bien déroulé, `false` sinon.
  */
 function ncore_type_noisette_stocker($plugin, $types_noisette, $recharger, $stockage = '') {
 
@@ -82,7 +82,7 @@ function ncore_type_noisette_stocker($plugin, $types_noisette, $recharger, $stoc
 		} else {
 			// On lit les cache existants et on applique les modifications.
 			$descriptions = cache_lire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_DESCRIPTION);
-			$signatures = cache_lire($plugin,_NCORE_NOMCACHE_TYPE_NOISETTE_SIGNATURE);
+			$signatures = cache_lire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_SIGNATURE);
 
 			// On supprime les noisettes obsolètes
 			if (!empty($types_noisette['a_effacer'])) {
@@ -122,21 +122,21 @@ function ncore_type_noisette_stocker($plugin, $types_noisette, $recharger, $stoc
  *
  * @package SPIP\NCORE\SERVICE\TYPE_NOISETTE
  *
- * @uses cache_lire()
+ * @uses    cache_lire()
  *
- * @param string	$plugin
- *      Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
- *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param string	$type_noisette
- * 		Identifiant du type de noisette.
- * @param string	$stockage
- *      Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
- *      ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
- * 		fournissant le service de stockage souhaité.
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param string $type_noisette
+ *        Identifiant du type de noisette.
+ * @param string $stockage
+ *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
+ *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
+ *        fournissant le service de stockage souhaité.
  *
  * @return array
- * 		Tableau de la description du type de noisette. Les champs textuels et les champs de type tableau sérialisé
- * 		sont retournés en l'état.
+ *        Tableau de la description du type de noisette. Les champs textuels et les champs de type tableau sérialisé
+ *        sont retournés en l'état.
  */
 function ncore_type_noisette_decrire($plugin, $type_noisette, $stockage = '') {
 
@@ -170,21 +170,21 @@ function ncore_type_noisette_decrire($plugin, $type_noisette, $stockage = '') {
  *
  * @package SPIP\NCORE\SERVICE\TYPE_NOISETTE
  *
- * @uses cache_lire()
+ * @uses    cache_lire()
  *
- * @param string	$plugin
- *      Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
- *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param string	$information
- *      Identifiant d'un champ de la description d'un type de noisette ou `signature`.
- *      Si l'argument est vide, la fonction renvoie les descriptions complètes et si l'argument est
- * 		un champ invalide la fonction renvoie un tableau vide.
- * @param string	$stockage
- *      Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin ni celui de N-Core
- * 		ne seront utilisés. En général, cet identifiant est le préfixe du plugin fournissant le stockage.
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param string $information
+ *        Identifiant d'un champ de la description d'un type de noisette ou `signature`.
+ *        Si l'argument est vide, la fonction renvoie les descriptions complètes et si l'argument est
+ *        un champ invalide la fonction renvoie un tableau vide.
+ * @param string $stockage
+ *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin ni celui de N-Core
+ *        ne seront utilisés. En général, cet identifiant est le préfixe du plugin fournissant le stockage.
  *
  * @return array
- * 		Tableau de la forme `[noisette] = information ou description complète`.
+ *        Tableau de la forme `[noisette] = information ou description complète`.
  */
 function ncore_type_noisette_lister($plugin, $information = '', $stockage = '') {
 
@@ -226,6 +226,7 @@ function ncore_type_noisette_lister($plugin, $information = '', $stockage = '') 
 /**
  *
  * @package SPIP\NCORE\SERVICE\NOISETTE
+ *
  * @param        $plugin
  * @param        $action
  * @param        $description
@@ -285,6 +286,37 @@ function ncore_noisette_stocker($plugin, $action, $description, $stockage = '') 
 	return $noisette;
 }
 
+function ncore_noisette_destocker($plugin, $description, $stockage = '') {
+
+	// Initialisation de la sortie.
+	$retour = false;
+
+	// On cherche le service de stockage à utiliser selon la logique suivante :
+	// - si le service de stockage est non vide on l'utilise en considérant que la fonction existe forcément;
+	// - sinon, on utilise la fonction du plugin appelant si elle existe;
+	// - et sinon, on utilise la fonction de N-Core.
+	include_spip('inc/ncore_utils');
+	if ($destocker = ncore_chercher_service($plugin, 'noisette_destocker', $stockage)) {
+		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
+		$retour = $destocker($plugin, $description);
+	} else {
+		// Le plugin ne propose pas de fonction propre ou le stockage N-Core est explicitement demandé.
+		// -- N-Core stocke les noisettes dans une meta propre au plugin appelant contenant un tableau au format
+		//    [squelette][rang] = description
+		include_spip('inc/config');
+		$meta_noisettes = lire_config("${plugin}_noisettes", array());
+
+		if (isset($meta_noisettes[$description['squelette']][$description['rang']])) {
+			unset($meta_noisettes[$description['squelette']][$description['rang']]);
+			ecrire_config("${plugin}_noisettes", $meta_noisettes);
+			$retour = true;
+		}
+	}
+
+	return $retour;
+}
+
+
 /**
  *
  * @package SPIP\NCORE\SERVICE\NOISETTE
@@ -334,4 +366,80 @@ function ncore_noisette_lister($plugin, $squelette = '', $information = '', $sto
 	}
 
 	return $noisettes;
+}
+
+
+/**
+ * Renvoie la description brute d'un type de noisette sans traitement typo ni désérialisation des champs de type
+ * tableau sérialisé.
+ *
+ * Le service N-Core lit la description du type de noisette concerné dans le cache des descriptions.
+ *
+ * @package SPIP\NCORE\SERVICE\TYPE_NOISETTE
+ *
+ * @uses    cache_lire()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param mixed  $noisette
+ *        Identifiant de la noisette qui peut prendre soit la forme d'un entier ou d'une chaine unique, soit la forme
+ *        d'un couple (squelette, rang).
+ * @param string $stockage
+ *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
+ *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
+ *        fournissant le service de stockage souhaité.
+ *
+ * @return array
+ *        Tableau de la description du type de noisette. Les champs textuels et les champs de type tableau sérialisé
+ *        sont retournés en l'état.
+ */
+function ncore_noisette_decrire($plugin, $noisette, $stockage = '') {
+
+	$description = array();
+
+	// On cherche le service de stockage à utiliser selon la logique suivante :
+	// - si le service de stockage est non vide on l'utilise en considérant que la fonction existe forcément;
+	// - sinon, on utilise la fonction du plugin appelant si elle existe;
+	// - et sinon, on utilise la fonction de N-Core.
+	include_spip('inc/ncore_utils');
+	if ($decrire = ncore_chercher_service($plugin, 'noisette_decrire', $stockage)) {
+		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
+		$description = $decrire($plugin, $noisette);
+	} else {
+		// Le plugin ne propose pas de fonction propre ou le stockage N-Core est explicitement demandé.
+		// -- N-Core stocke les noisettes dans une meta propre au plugin appelant contenant un tableau au format
+		//    [squelette][rang] = description
+		include_spip('inc/config');
+		$meta_noisettes = lire_config("${plugin}_noisettes", array());
+
+		// On recherche la description dans la meta.
+		if ($meta_noisettes) {
+			if (!is_array($noisette)) {
+				// L'identifiant est l'id unique de la noisette. Il faut donc parcourir le tableau pour trouver la
+				// noisette désirée
+				// => ce n'est pas la méthode optimale pour le stockage N-Core.
+				$noisette_trouvee = false;
+				foreach ($meta_noisettes as $_noisettes_squelette) {
+					foreach ($_noisettes_squelette as $_noisette) {
+						if ($_noisette['id_noisette'] == $noisette) {
+							$description = $_noisette;
+							$noisette_trouvee = true;
+							break;
+						}
+					}
+					if ($noisette_trouvee) {
+						break;
+					}
+				}
+			} elseif (isset($noisette['squelette']) and isset($noisette['rang']) and !empty($meta_noisettes[$noisette['squelette']][$noisette['rang']])) {
+				// L'identifiant est un tableau associatif fournissant le squelette et le rang.
+				// Comme la meta de N-Core est structurée ainsi c'est la méthode la plus adaptée pour adresser
+				// le stockage de N-Core.
+				$description = $meta_noisettes[$noisette['squelette']][$noisette['rang']];
+			}
+		}
+	}
+
+	return $description;
 }

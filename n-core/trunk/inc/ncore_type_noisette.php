@@ -209,7 +209,7 @@ function type_noisette_charger($plugin, $dossier = 'noisettes/', $recharger = fa
  */
 function type_noisette_lire($plugin, $type_noisette, $information = '', $traiter_typo = false, $stockage = '') {
 
-	// On indexe le tableau des indicateurs ajax par le plugin appelant en cas d'appel sur le même hit
+	// On indexe le tableau des descriptions par le plugin appelant en cas d'appel sur le même hit
 	// par deux plugins différents.
 	static $donnees_typo = array('nom', 'description');
 	static $description_noisette = array();
@@ -229,12 +229,10 @@ function type_noisette_lire($plugin, $type_noisette, $information = '', $traiter
 			$description['contexte'] = unserialize($description['contexte']);
 			$description['necessite'] = unserialize($description['necessite']);
 			$description['parametres'] = unserialize($description['parametres']);
-
-			// Stockage de la description
-			$description_noisette[$plugin][$type_noisette] = $description;
-		} else {
-			$description_noisette[$plugin][$type_noisette] = array();
 		}
+
+		// Stockage de la description
+		$description_noisette[$plugin][$type_noisette] = $description;
 	}
 
 	if ($information) {
@@ -252,9 +250,10 @@ function type_noisette_lire($plugin, $type_noisette, $information = '', $traiter
 		$retour = $description_noisette[$plugin][$type_noisette];
 		// Traitements des données textuels
 		if ($traiter_typo) {
-			$retour['nom'] = _T_ou_typo($retour['nom']);
-			if (isset($retour['description'])) {
-				$retour['description'] = _T_ou_typo($retour['description']);
+			foreach ($donnees_typo as $_champ) {
+				if (isset($retour[$_champ])) {
+					$retour[$_champ] = _T_ou_typo($retour[$_champ]);
+				}
 			}
 		}
 	}
