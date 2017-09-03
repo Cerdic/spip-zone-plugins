@@ -43,7 +43,7 @@ if (!defined('PLUGIN_COLORATION_CODE_LIENS_LANGAGE')) {
 // mais possede des regexp qui se trompaient parfois à quelques } ou > pres...
 // il est laisse pour ceux qui le preferaient neanmoins (le nouveau n'a pas les memes couleurs).
 if (!defined('PLUGIN_COLORATION_CODE_COLORIEUR_SPIP')) {
-	define('PLUGIN_COLORATION_CODE_COLORIEUR_SPIP', 'spip2');
+	define('PLUGIN_COLORATION_CODE_COLORIEUR_SPIP', 'spip');
 }
 
 
