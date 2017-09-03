@@ -3,10 +3,10 @@
 	<prefix>metasplus</prefix>
 	<icon>opengraph.png</icon>
 
-	<version>1.1.10</version>
+	<version>1.1.11</version>
 	<etat>stable</etat>
 	<categorie>divers</categorie>
-	
+
 	<slogan>
 		<multi>[fr]Métadonnées pour Open Graph, Duclin Core et Twitter[en]Metadata for Open Graph, Duclin Core and Twitter[es]Metadatos para  Open Graph, Duclin Core y Twitter[de]Metadaten für Open Graph, Duclin Core und Twitter</multi>
 	</slogan>
