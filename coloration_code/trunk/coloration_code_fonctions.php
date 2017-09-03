@@ -36,12 +36,6 @@ if (!defined('PLUGIN_COLORATION_CODE_LIENS_LANGAGE')) {
 	define('PLUGIN_COLORATION_CODE_LIENS_LANGAGE', true); // false pour les eviter
 }
 
-
-// pour utiliser le colorieur 'spip' ou 'spip2' si on
-// passe une class "spip" simplement.
-// note: le colorieur "spip" est celui present originellement dans le plugin
-// mais possede des regexp qui se trompaient parfois à quelques } ou > pres...
-// il est laisse pour ceux qui le preferaient neanmoins (le nouveau n'a pas les memes couleurs).
 if (!defined('PLUGIN_COLORATION_CODE_COLORIEUR_SPIP')) {
 	define('PLUGIN_COLORATION_CODE_COLORIEUR_SPIP', 'spip');
 }
