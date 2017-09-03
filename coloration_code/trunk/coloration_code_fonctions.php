@@ -10,6 +10,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+include_spip('inc/plugin');
+
 // pour interdire globalement et optionnellement le téléchargement associé
 if (!defined('PLUGIN_COLORATION_CODE_TELECHARGE')) {
 	define('PLUGIN_COLORATION_CODE_TELECHARGE', true);
@@ -135,12 +137,21 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
 	//
 	// And echo the result!
 	//
-	$rempl = $stylecss . '<' . $englobant . ' class="coloration_code '.$cadre.'"><' . $balise_code . ' class="spip_'.$language.' '.$cadre.'"'.$datatext_content.'>'.$geshi->parse_code().'</' . $balise_code . '>';
-
-	if ($telecharge) {
-		$rempl .= "<p class='download " . $cadre . "_download'><a href='$fichier'>"._T('bouton_download')."</a></p>";
+	if (in_array('SIMPLEC', array_keys(liste_plugin_actifs()))) {
+		// si le plugin simpleC est activé, on utilise son balisage moderne
+		$geshi->set_header_type(GESHI_HEADER_NONE);
+		$geshi->enable_line_numbers(GESHI_NO_LINE_NUMBERS);
+		$code_corps = $geshi->parse_code();
+		$rempl      = simplec_balisage_code('class="' . $language . '"', $code_corps);
+	} else {
+		$rempl = $stylecss . '<' . $englobant . ' class="coloration_code ' . $cadre . '"><' . $balise_code . ' class="spip_' . $language . ' ' . $cadre . '"' . $datatext_content . '>' . $geshi->parse_code() . '</' . $balise_code . '>';
+		if ($telecharge) {
+			$rempl .= "<p class='download " . $cadre . "_download'><a href='$fichier'>" . _T('bouton_download') . "</a></p>";
+		}
+		$rempl .= '</' . $englobant . '>';
 	}
-	return $rempl.'</' . $englobant . '>';
+
+	return $rempl;
 }
 
 /**
