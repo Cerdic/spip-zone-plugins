@@ -20,6 +20,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_cv' => 'Modifier ce CV',
 	'info_1_cv' => 'Un CV',
 	'info_aucun_cv' => 'Aucun CV',
+	'info_aucun_cv_a_valider' => 'Aucun CV à valider',
+	'info_aucun_cv_refuse' => 'Aucun CV refusé',
 	'info_cvs_auteur' => 'Les CV de cet auteur',
 	'info_nb_cvs' => '@nb@ CV',
 

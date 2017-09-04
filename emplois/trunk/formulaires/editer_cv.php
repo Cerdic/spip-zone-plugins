@@ -119,7 +119,15 @@ function formulaires_editer_cv_traiter_dist($id_cv='new', $id_rubrique=0, $retou
 		}
 		set_request('id_cv', $id_cv);
 
-		$retours['message_ok'] = "Votre CV a bien été enregistré.";
+		/* traitements supplémentaires si formulaire public */
+		if (!test_espace_prive()) {
+			// forcer le statut à 'proposer'
+			sql_updateq('spip_cvs', array('statut' => 'prop'), 'id_cv='.intval($id_cv));
+
+			// surcharger le message de retour de validation
+			$retours['message_ok'] = "Votre CV a bien été enregistré et nous vous en remercions.
+					<br>Il sera publié dès que nos services l'auront validé.";
+		}
 	}
 
 	return $retours;

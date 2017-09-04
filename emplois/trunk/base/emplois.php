@@ -75,6 +75,7 @@ function emplois_declarer_tables_objets_sql($tables) {
 		'tables_jointures'  => array(),
 		'statut_textes_instituer' => array(
 			'prepa'    => 'texte_statut_en_cours_redaction',
+			'prop'     => 'emplois:texte_statut_a_valider',
 			'publie'   => 'texte_statut_publie',
 			'refuse'   => 'texte_statut_refuse',
 			'poubelle' => 'texte_statut_poubelle',
@@ -121,6 +122,7 @@ function emplois_declarer_tables_objets_sql($tables) {
 		'tables_jointures'  => array(),
 		'statut_textes_instituer' => array(
 			'prepa'    => 'texte_statut_en_cours_redaction',
+			'prop'     => 'emplois:texte_statut_a_valider',
 			'publie'   => 'texte_statut_publie',
 			'refuse'   => 'texte_statut_refuse',
 			'poubelle' => 'texte_statut_poubelle',

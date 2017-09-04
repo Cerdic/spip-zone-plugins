@@ -223,8 +223,12 @@ function formulaires_editer_offre_traiter_dist($id_offre='new', $id_rubrique=0, 
 	// Important : passer id_offre dans l'environnement au cas ou le formulaire est dans un bloc ajax
 	set_request('id_offre', $id_offre);
 
-	// si on n'est pas dans l'espace privé, on reste en mode editable i.e. affichage du formulaire après validation
+	/* traitements supplémentaires si formulaire public */
 	if (!test_espace_prive()) {
+		// forcer le statut à 'proposer'
+		sql_updateq('spip_offres', array('statut' => 'prop'), 'id_offre='.intval($id_offre));
+
+		// surcharger le message de retour de validation
 		$retours['message_ok'] = "Votre offre d'emploi vient d'être enregistrée et nous vous en remercions.
 		<br>Vous pouvez vérifier / modifier cette offre tant que vous restez sur cette page.
 		<br>Ensuite, elle sera publiée dès que nos services l'auront validée.";

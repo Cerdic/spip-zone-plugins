@@ -27,6 +27,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_offre' => 'Modifier cette offre',
 	'info_1_offre' => 'Une offre d\'emploi',
 	'info_aucun_offre' => 'Aucune offre d\'emploi',
+	'info_aucun_offre_a_valider' => 'Aucune offre d\'emploi à valider',
+	'info_aucun_offre_refuse' => 'Aucune offre d\'emploi refusée',
 	'info_nb_offres' => '@nb@ offres  d\'emploi',
 	'info_nom' => 'Nom du déposant',
 	'info_offres_auteur' => 'Les offres de cet auteur',
@@ -41,6 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_ajouter_offre' => 'Ajouter une offre',
+	'texte_statut_a_valider' => 'À valider',
 	'texte_changer_statut_offre' => 'Cette offre est :',
 	'texte_creer_associer_offre' => 'Créer et associer une offre',
 	'texte_definir_comme_traduction_offre' => 'Cette offre est une traduction de la offre numéro :',
