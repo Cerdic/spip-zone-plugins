@@ -19,7 +19,7 @@
 					</label>
 					<input type="text" name="squelette" class="text" id="squelette" value="#ENV{squelette}"/>
 				</li>
-				<BOUCLE_multiracine(RUBRIQUES){id_parent=#VAL{_MULTIDOMAINE_RACINE}|constant|sinon{0}}{tous} {par titre}>
+				<BOUCLE_multiracine(RUBRIQUES){id_parent=#VAL{_MULTIDOMAINE_RACINE}|constant|sinon{0}}{tous} {par num titre}>
 				<li class="fieldset">
 					<fieldset>
 						<legend>#TITRE</legend>
@@ -40,7 +40,7 @@
 					</fieldset>
 					<B_multidomaines>
 						<ul>
-							<BOUCLE_multidomaines(RUBRIQUES) {si #VAL{_MULTIDOMAINE_RUBRIQUE}|constant|oui} {id_parent}{tous} {par titre}>
+							<BOUCLE_multidomaines(RUBRIQUES) {si #VAL{_MULTIDOMAINE_RUBRIQUE}|constant|oui} {id_parent}{tous} {par num titre}>
 							<li class="fieldset">
 								<fieldset>
 									<legend>#TITRE</legend>
