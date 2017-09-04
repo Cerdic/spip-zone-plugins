@@ -9,8 +9,9 @@
  * @package    SPIP\Emplois\Pipelines
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Ajouter les objets sur les vues de rubriques

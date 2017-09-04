@@ -9,8 +9,9 @@
  * @package    SPIP\Emplois\Autorisations
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction d'appel pour le pipeline

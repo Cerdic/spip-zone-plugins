@@ -10,16 +10,18 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function formulaires_repondre_offre_charger_dist( $id_offre ){
+function formulaires_repondre_offre_charger_dist( $id_offre ) {
 
 	$titre = sql_getfetsel('titre', 'spip_offres', "id_offre=".intval($id_offre ));
 	$valeurs = array( 'id_offre' => $id_offre, 'titre' => $titre );
 	return $valeurs;
 }
 
-function formulaires_repondre_offre_verifier_dist($id_offre ){
+function formulaires_repondre_offre_verifier_dist($id_offre ) {
 	$erreurs = array();
 	include_spip('inc/filtres');
 	
@@ -47,7 +49,7 @@ function formulaires_repondre_offre_verifier_dist($id_offre ){
 	return $erreurs;
 }
 
-function formulaires_repondre_offre_traiter_dist($id_offre ){
+function formulaires_repondre_offre_traiter_dist($id_offre ) {
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 
 	/* étape 1 : envoi de l'email au déposant de l'offre */
@@ -77,5 +79,3 @@ function formulaires_repondre_offre_traiter_dist($id_offre ){
 
 	return array('message_ok'=>$message);
 }
-
-?>

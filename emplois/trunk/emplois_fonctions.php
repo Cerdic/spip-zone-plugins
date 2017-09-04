@@ -9,7 +9,9 @@
  * @package    SPIP\Emplois\Fonctions
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * afficher le placeholder dans le formulaire de l'espace publique
