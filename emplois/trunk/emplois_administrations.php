@@ -4,7 +4,7 @@
  *
  * @plugin     Emplois
  * @copyright  2016
- * @author     Pierre Miquel
+ * @author     Peetdu
  * @licence    GNU/GPL
  * @package    SPIP\Emplois\Installation
  */

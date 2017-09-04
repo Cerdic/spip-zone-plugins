@@ -9,10 +9,9 @@
 	schema="1.0.0" 
 >
 
-
 	<nom>Emplois</nom>
 
-	<auteur lien='http://www.akilia.net'>Pierre Miquel</auteur>
+	<auteur>Peetdu</auteur>
 
 	<licence>GNU/GPL</licence>
 	
