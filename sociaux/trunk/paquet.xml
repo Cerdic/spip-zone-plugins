@@ -1,14 +1,14 @@
 <paquet
 	prefix="sociaux"
 	categorie="edition"
-	version="2.1.1"
+	version="2.1.2"
 	etat="stable"
 	compatibilite="[3.0.20;3.2.*]"
 	logo="prive/themes/spip/images/sociaux-64.png"
 	documentation="https://contrib.spip.net/4720"
 	schema="1.0.0"
 >
-	<nom>sociaux</nom>
+	<nom>Liens vers les réseaux sociaux</nom>
 	<auteur lien='http://www.erational.org'>erational</auteur>
 	<licence>GNU/GPL</licence>
 
