@@ -45,7 +45,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_ajouter_offre' => 'Ajouter une offre',
-	'texte_statut_a_valider' => 'À valider',
 	'texte_changer_statut_offre' => 'Cette offre est :',
 	'texte_creer_associer_offre' => 'Créer et associer une offre',
 	'texte_definir_comme_traduction_offre' => 'Cette offre est une traduction de la offre numéro :',

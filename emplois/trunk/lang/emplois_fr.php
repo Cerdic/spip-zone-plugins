@@ -28,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'onglet_affichage_public' => 'Affichage espace public',
 
 	// T
+	'texte_statut_a_valider' => 'À valider',
 	'titre_page_configurer_emplois' => 'Emplois',
 	'cfg_titre_configurer_affichage_public' => 'Affichage des formulaires dans l\'espace public',
 	'cfg_titre_configurer_offres_contenus' => 'Contenu des offres d\'emploi',
