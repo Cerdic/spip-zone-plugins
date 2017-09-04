@@ -46,57 +46,67 @@ function produit_inserer($id_rubrique, $set = null) {
 	$id_produit = false;
 
 	// On insère seulement s'il y a une rubrique correcte
-	if ($id_rubrique = intval($id_rubrique)) {
-		$champs = array();
+	$id_rubrique = intval($id_rubrique);
+
+	$champs = array();
+	$champs['lang'] = $GLOBALS['meta']['langue_site'];
+
+	// La rubrique est optionnelle !!
+	if (false /* !$id_rubrique */) {
+		// Code pour affecter automatiquement une rubrique.
 		// Si id_rubrique vaut 0 ou n'est pas definie, creer le produit dans la premiere rubrique racine
-		if (!$id_rubrique = intval($id_rubrique)) {
-			$row = sql_fetsel('id_rubrique, id_secteur, lang', 'spip_rubriques', 'id_parent=0','', '0+titre,titre', '1');
+		// Si la configuration limite l’ajout à un secteur, prendre le premier secteur défini.
+		include_spip('inc/config');
+		$config = lire_config('produits');
+		if (!empty($config['limiter_ajout']) and is_array($config['limiter_ident_secteur'])) {
+			$id_rubrique = reset($config['limiter_ident_secteur']);
+		}
+		if (!$id_rubrique) {
+			$row = sql_fetsel('id_rubrique, id_secteur, lang', 'spip_rubriques', 'id_parent=0', '', '0+titre,titre', '1');
 			$id_rubrique = $row['id_rubrique'];
-		} else {
-			$row = sql_fetsel('lang, id_secteur', 'spip_rubriques', 'id_rubrique='.intval($id_rubrique));
 		}
-
-		$lang_rub = $row['lang'];
-		$champs['id_rubrique'] = $id_rubrique;
-		// On propage le secteur
-		$champs['id_secteur'] = $row['id_secteur'];
-
-		// Dans un premier temps La langue a la creation : c'est la langue de la rubrique ou du site
-		$champs['lang'] = $lang_rub ? $lang_rub : $GLOBALS['meta']['langue_site'];
-
-		// La date de tout de suite
-		$champs['date'] = date('Y-m-d H:i:s');
-
-		// Le statut en cours de redac
-		$champs['statut'] = 'prop';
-
-		if ($set) {
-			$champs = array_merge($champs, $set);
-		}
-
-		// Envoyer aux plugins avant insertion
-		$champs = pipeline(
-			'pre_insertion',
-			array(
-				'args' => array(
-					'table' => 'spip_produits',
-				),
-				'data' => $champs
-			)
-		);
-		// Insérer l'objet
-		$id_produit = sql_insertq('spip_produits', $champs);
-		// Envoyer aux plugins après insertion
-		pipeline(
-			'post_insertion',
-			array(
-				'args' => array(
-					'table' => 'spip_produits',
-				),
-				'data' => $champs
-			)
-		);
 	}
+
+	if ($id_rubrique) {
+		$row = sql_fetsel('lang, id_secteur', 'spip_rubriques', 'id_rubrique=' . intval($id_rubrique));
+		$champs['lang'] = $row['lang'];
+		$champs['id_rubrique'] = $id_rubrique;
+		$champs['id_secteur'] = $row['id_secteur'];
+	}
+
+	// La date de tout de suite
+	$champs['date'] = date('Y-m-d H:i:s');
+
+	// Le statut en cours de redac
+	$champs['statut'] = 'prop';
+
+	if ($set) {
+		$champs = array_merge($champs, $set);
+	}
+
+	// Envoyer aux plugins avant insertion
+	$champs = pipeline(
+		'pre_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_produits',
+			),
+			'data' => $champs
+		)
+	);
+	// Insérer l'objet
+	$id_produit = sql_insertq('spip_produits', $champs);
+
+	// Envoyer aux plugins après insertion
+	pipeline(
+		'post_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_produits',
+			),
+			'data' => $champs
+		)
+	);
 
 	return $id_produit;
 }

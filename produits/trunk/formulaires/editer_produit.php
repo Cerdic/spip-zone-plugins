@@ -237,9 +237,13 @@ function formulaires_editer_produit_verifier($id_produit = 'new', $id_rubrique =
 	$config = lire_config('produits');
 
 	// Vérifier que la rubrique choisie se trouve dans les secteurs autorisés
-	if (isset($config['limiter_ajout']) and $config['limiter_ajout']) {
+	if (
+		!empty($config['limiter_ajout'])
+		and is_array($config['limiter_ident_secteur'])
+		and $id_rubrique = produits_id_parent()
+	) {
 		$id_secteur = sql_getfetsel('id_secteur', 'spip_rubriques', 'id_rubrique=' . intval(produits_id_parent()));
-		if (is_array($config['limiter_ident_secteur']) && !in_array($id_secteur, $config['limiter_ident_secteur'])) {
+		if (!in_array($id_secteur, $config['limiter_ident_secteur'])) {
 			$titres = '';
 			foreach ($config['limiter_ident_secteur'] as $id_secteur) {
 				$titres .= sql_getfetsel('titre', 'spip_rubriques', 'id_rubrique=' . intval($id_secteur)).' / ';
@@ -274,11 +278,18 @@ function formulaires_editer_produit_traiter($id_produit = 'new', $id_rubrique = 
 	}
 
 	if (lire_config('produits/editer_ttc')) {
-		$prix_ht = _request('prix_ttc') / (1+_request('taxe', lire_config('produits/taxe', 0)));
+		$prix_ht = _request('prix_ttc') / (1 + _request('taxe', lire_config('produits/taxe', 0)));
 		set_request('prix_ht', $prix_ht);
 	}
 
 	$retours = formulaires_editer_objet_traiter('produit', $id_produit, $id_rubrique, $lier_trad = 0, $retour);
+
+	// cas d’erreur conserver la valeur de taxe saisie.
+	if (!empty($retours['message_erreur'])) {
+		if ($taxe = _request('taxe')) {
+			set_request('taxe', $taxe*100);
+		}
+	}
 	return $retours;
 }
 

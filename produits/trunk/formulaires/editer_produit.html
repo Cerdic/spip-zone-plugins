@@ -3,13 +3,11 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
-		[(#REM) déclarer les hidden qui déclencheront le service du formulaire
-		paramêtre : url d'action ]
-		#ACTION_FORMULAIRE{#ENV{action}}
+		#ACTION_FORMULAIRE
 
 		#GENERER_SAISIES{#ENV{_saisies}}
 
-		[(#REM) ajouter les saisies supplémentaires : extra et autre, à cet endroit ]
+		[(#REM) ajouter les saisies supplÃ©mentaires : extra et autre, Ã  cet endroit ]
 		<!--extra-->
 		<p class='boutons'><span class='image_loading'>&nbsp;</span>
 			<input type='submit' class='submit' value='<:bouton_enregistrer|attribut_html:>' />
