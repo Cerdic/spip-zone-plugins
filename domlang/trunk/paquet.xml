@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="prive/themes/spip/images/domlang-64.png"
-	documentation=""
+	documentation="https://contrib.spip.net/4913"
 >
 	<nom>Domaines par secteur de langue</nom>
 	<!-- Permet de définir 1 domaine pour chaque secteur de langue -->
