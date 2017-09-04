@@ -51,7 +51,7 @@ function correction_liens_internes_correction_url_public($mauvaise_url,$composan
 }
 function correction_liens_internes_correction($texte){
     // pas de liens, on s'en va...
-    if(strpos($texte, '->') === false) return $texte;
+    if(!is_string($texte) || strpos($texte, '->') === false) return $texte;
 
     // alias historiques
     static $racc = array('article' => '', 'auteur' => 'aut', 'rubrique' => 'rub', 'breve' => 'br');
