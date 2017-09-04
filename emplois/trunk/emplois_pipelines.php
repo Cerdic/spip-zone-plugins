@@ -95,26 +95,6 @@ function emplois_objet_compte_enfants($flux) {
 	return $flux;
 }
 
-
-/**
- * Optimiser la base de données 
- * 
- * Supprime les objets à la poubelle.
- * Supprime les objets à la poubelle.
- *
- * @pipeline optimiser_base_disparus
- * @param  array $flux Données du pipeline
- * @return array       Données du pipeline
- */
-function emplois_optimiser_base_disparus($flux){
-
-	sql_delete("spip_offres", "statut='poubelle' AND maj < " . $flux['args']['date']);
-
-	sql_delete("spip_cvs", "statut='poubelle' AND maj < " . $flux['args']['date']);
-
-	return $flux;
-}
-
 /**
  * Synchroniser la valeur de id secteur
  *
@@ -166,23 +146,98 @@ function emplois_ajouter_menus($flux) {
 }
 
 /**
- * Envoyer une notification aux administrateurs du site lorsque une offre a été postée
+ * Gestion des Notifications
+ * ici envoi d'une notification au webmaster : un dépôt (offre ou CV) vient d'être fait 
  *
  * @pipeline post_insertion
- * @param  string $flux Données du pipeline
- * @return string       Données du pipeline
-**/
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
 function emplois_post_insertion($flux) {
-	$email_webmaster = lire_config('email_webmaster');
-	if ($flux['args']['table'] == 'spip_offres' AND $flux['data']['statut'] =='prepa') {
-		$envoyer_mail = charger_fonction('envoyer_mail','inc');
+	$tables_emplois = array( 'spip_offres', 'spip_cvs');
+	if (isset ($flux['args']['table']) && in_array($flux['args']['table'], $tables_emplois) && !test_espace_prive()) {
 
-		$email_to = $email_webmaster;
-		$sujet = "Nouveau dépot Offre Emploi";
-		$message = "une nouvelle offre d'emploi vient d'être postée sur le site.";
+		// ici c'est bien le statut "prepa". 
+		if ($flux['data']['statut'] == 'prepa') {
+			// récupérer le nom de la table (offres ou cvs)
+			$table = $flux['args']['table'];
+			$id_table = id_table_objet($table);
+			$type = objet_type($table);
+			$type == 'emploi' ? $type_sujet = 'nouvel emploi' : $type_sujet = 'nouveau CV';
 
-		$send = $envoyer_mail($email_to,$sujet,$message);
+			// récupérer le mail du webmaster
+			$mail_webmaster = lire_config('email_webmaster');
+
+			$envoyer_mail = charger_fonction('envoyer_mail','inc');
+			$email_to = $mail_webmaster;
+			$email_from = $mail_webmaster;
+			$sujet = "Un $type_sujet en attente de validation";
+			$message = "Un $type_sujet vient d‘etre déposé." ;
+
+			//allez zou, on envoi
+			$envoyer_mail($email_to,$sujet,$message,$email_from);
+		}
 	}
+}
+
+/**
+ * Gestion des Notifications
+ * ici envoi d'une notification au déposant d'une nouvelle offre d'emploi  ou d'un nouveau CV
+ *
+ * @pipeline post_edition
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function emplois_post_edition($flux) {
+	$tables_emplois = array( 'spip_offres', 'spip_cvs');
+	if (isset ($flux['args']['table']) 
+		&& in_array($flux['args']['table'], $tables_emplois)
+		&& $flux['args']['action'] =='instituer'
+		&& $flux['args']['statut_ancien'] == 'prop'
+		) {
+			// récupérer le nom de la table (offres ou cvs)
+			$table = $flux['args']['table'];
+			$id_table = id_table_objet($table);
+			$id = $flux['args']['id_objet'];
+			$type = objet_type($table);
+
+			// pas d'email dans la table CVs. On va le chercher dans la table spip_auteurs
+			if ($table == 'spip_cvs') {
+				$table = 'spip_auteurs';
+				$id_table  = 'id_auteur';
+				$id = sql_getfetsel('id_auteur', 'spip_cvs', 'id_cv='.intval($id));
+			}
+
+			$type == 'offre' ? $type_sujet = 'proposition d‘offre d‘emploi' : $type_sujet = 'CV';
+
+			// récupérer le mail du webmaster
+			$mail_webmaster = lire_config('email_webmaster');
+			debug('mail webmaster', $mail_webmaster);
+
+			// récupérer le mail de l'internaute à qui envoyer la notification
+			$email_deposant = sql_getfetsel('email', $table, $id_table.'='.intval($id));
+
+			if ($email_deposant) {
+				if ($flux['data']['statut'] == 'publie') {
+					$message = "Votre $type_sujet a été validé.";
+				}
+				if ($flux['data']['statut'] == 'refuse') {
+					$message = "Votre $type_sujet a été refusé.";
+				}
+
+				$message .= "\nBien cordialement.";
+				$envoyer_mail = charger_fonction('envoyer_mail','inc');
+				$email_to = $email_deposant;
+				$email_from = $mail_webmaster;
+				$sujet = "Votre $type_sujet";
+
+				//zou, on envoi
+				$envoyer_mail($email_to,$sujet,$message,$email_from);
+
+    		}
+
+    }
+    return $flux;
 }
 
 /**
@@ -214,6 +269,24 @@ function emplois_post_edition_lien($flux) {
 			sql_updateq('spip_offres', array('id_document_offre' => '0'), "id_offre =".intval($id_offre));
 		}
 	}
+}
+
+/**
+ * Optimiser la base de données 
+ * 
+ * Supprime les objets à la poubelle.
+ * Supprime les objets à la poubelle.
+ *
+ * @pipeline optimiser_base_disparus
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function emplois_optimiser_base_disparus($flux){
+
+	sql_delete("spip_offres", "statut='poubelle' AND maj < " . $flux['args']['date']);
+	sql_delete("spip_cvs", "statut='poubelle' AND maj < " . $flux['args']['date']);
+
+	return $flux;
 }
 
 
