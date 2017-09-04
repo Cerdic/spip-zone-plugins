@@ -26,5 +26,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'syntaxe_deprecie' => 'La syntaxe #ARRAY{nombre, type} est dépréciée au profit de #ARRAY{type, nombre} et sera supprimée dans les futurs versions de foundation',
 	'erreur_js' => "L'utilisation du squelette @squelette@ requière l'activation du javascript de foundation",
 	'suivant' => 'Suivant',
-	'precedent' => 'Précédent'
+	'precedent' => 'Précédent',
+	'slide_affiche' => 'Slide affiché'
 );
