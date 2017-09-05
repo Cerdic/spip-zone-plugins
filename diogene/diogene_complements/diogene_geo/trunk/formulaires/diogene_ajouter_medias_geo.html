@@ -26,7 +26,7 @@
 		<label for="gis_afficher"><:diogene_geo:label_geo_afficher:></label> 
 	</div>
 	
-	<[(#DIV|sinon{ul})] class="ul_info_gis">
+	<[(#DIV|sinon{ul})] class="editer-groupe info_gis">
 		[(#ENV{id_gis}|oui)
 			[(#SAISIE{case, gis_supprimer,
 				label=<:diogene_geo:label_supprimer_gis:>})]
@@ -35,11 +35,11 @@
 		
 		[(#SAISIE{hidden,id_gis})]
 		[(#GET{geocoder}|oui)
-		<li class="rechercher_adresse">
+		<[(#DIV|sinon{li})] class="rechercher_adresse">
 			<label for="champ_gis_adresse"><:gis:label_rechercher_address:></label>
 			<input type="text" class="text nomulti" name="champ_gis_adresse" id="champ_gis_adresse" value="" />
 			<a id="gis_rechercher"><:info_rechercher:></a>
-		</li>]
+		</[(#DIV|sinon{li})]>]
 		[(#SAISIE{input,lat,
 			label=<:gis:lat:>,
 			class=nomulti,
@@ -79,15 +79,15 @@
 
 <script type="text/javascript"> 
 	(function($){ 
-		[(#GET{geo_affiche}|=={non}|oui)$('.ul_info_gis').hide();] 
+		[(#GET{geo_affiche}|=={non}|oui)$('.info_gis').hide();] 
 		$('#gis_afficher').change(function(){
 			if($(this).is(':checked')){
-				$('.ul_info_gis').slideDown('slow',function(){
+				$('.info_gis').slideDown('slow',function(){
 					if(typeof(form_map) == 'object')
 						form_map.invalidateSize();
 				});
 			}else
-				$('.ul_info_gis').slideUp();
+				$('.info_gis').slideUp();
 		});
 	})(jQuery); 
 </script>
