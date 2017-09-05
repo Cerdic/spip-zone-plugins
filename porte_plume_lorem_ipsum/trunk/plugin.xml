@@ -6,7 +6,7 @@
 	<lien></lien>
 	<version>1.1.3</version>
 	<etat>stable</etat>
-   <description>
+	<description>
 	Cette extension ajoute des boutons pour cr&#233;er du texte factice dans la barre d'outil de SPIP.
 	</description>
 	<prefix>pp_loremipsum</prefix>
