@@ -17,7 +17,7 @@
 		[(#SET{geo_affiche,non})]	
 	]
 ]
-<li class="fieldset diogene_geo" id="diogene_geo">
+<[(#DIV|sinon{li})] class="fieldset diogene_geo" id="diogene_geo">
 <fieldset>
 	<legend><:diogene_geo:form_legend:></legend>
 	[<p class="reponse_formulaire reponse_formulaire_ok"><:diogene_geo:message_postion_auto:>(#ENV{position_auto}|oui)</p>]
@@ -26,7 +26,7 @@
 		<label for="gis_afficher"><:diogene_geo:label_geo_afficher:></label> 
 	</div>
 	
-	<ul class="editer-groupe ul_info_gis">
+	<[(#DIV|sinon{ul})] class="ul_info_gis">
 		[(#ENV{id_gis}|oui)
 			[(#SAISIE{case, gis_supprimer,
 				label=<:diogene_geo:label_supprimer_gis:>})]
@@ -73,9 +73,9 @@
 			label=<:gis:label_region:>})]
 		[(#SAISIE{#GET{input_type},pays,
 			label=<:gis:label_pays:>})]
-	</ul>
+	</[(#DIV|sinon{ul})]>
 </fieldset>
-</li>
+</[(#DIV|sinon{li})]>
 
 <script type="text/javascript"> 
 	(function($){ 
