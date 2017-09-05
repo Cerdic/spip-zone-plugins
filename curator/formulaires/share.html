@@ -1,4 +1,3 @@
-
 <div class="formulaire_spip formulaire_curator">
 <form action='#ENV{action}' method='post'>
 	#ACTION_FORMULAIRE{#ENV{action}}
@@ -8,7 +7,7 @@
 
 		<div class="editer">
 			<label for="titre"><:info_titre:></label>
-			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+			[<span class='erreur_message'>(#ENV**{erreurs/titre})</span>]
 			<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre,''})]" size="35" />
 		</div>
 

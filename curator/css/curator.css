@@ -1,23 +1,7 @@
-*,
-*:before,
-*:after {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-body {
-    background: white;
-    margin:     0;
-    padding:    0;
-    font:       0.77em "Lucida Grande", Lucida, Verdana, sans-serif;
-}
 
 .formulaire_curator {
-    margin:    2em auto 0 auto;
-    padding:   0 1em;
-    width:     100%;
-    max-width: 550px;
+    margin:    2em auto;
+    padding:   1em;
 }
 
 .formulaire_curator .editer {
@@ -35,12 +19,9 @@ body {
 .formulaire_curator select {
     font:                  inherit;
     width:                 100%;
-    border:                thin solid gray;
+    border:                thin solid #cecece;
     background:            #f0f0f0;
-    -moz-border-radius:    5px;
-    -webkit-border-radius: 5px;
     border-radius:         5px;
-    -moz-box-shadow:       0 0 5px #c4c4c6;
     box-shadow:            0 0 5px #c4c4c6;
     padding:               2px 5px;
     margin-bottom:         0.3em;
@@ -48,16 +29,11 @@ body {
 
 .formulaire_curator textarea {
     height: 130px;
+    max-width: 100%;
 }
 
 .formulaire_curator p.boutons {
     text-align: right;
-}
-
-.formulaire_curator input.submit {
-    font:    inherit;
-    padding: 5px 10px;
-    height:  2em;
 }
 
 .formulaire_curator img {

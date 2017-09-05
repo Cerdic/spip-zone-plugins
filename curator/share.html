@@ -1,29 +1,18 @@
-<!doctype html>
-<html lang="#LANG">
-<head>
-	<meta charset="#CHARSET">
-	<title>[(#NOM_SITE_SPIP|textebrut)]</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
-	<meta name="viewport" content="width=device-width,initial-scale=1" />
-	<meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
-	[<link rel="stylesheet" href="(#CHEMIN{css/curator.css}|timestamp)" type="text/css" />]
-	[<link rel="icon" type="image/x-icon" href="(#CHEMIN{favicon.ico})" />
-	[<link rel="shortcut icon" type="image/x-icon" href="(#CHEMIN{favicon.ico})" />]]
+[(#REM) habillage minipres optionnel ]
+[(#ENV{minipres}|in_array{#LISTE{0,non,no,false}}|non)
+#FILTRE{curator_minipres}
+]
 
+#INSERT_HEAD_CSS
+#INSERT_HEAD
 
-	#INSERT_HEAD
-	
-	[(#REM) 6. Vos scripts ]
-	[<script src="(#CHEMIN{js/script.js})" type="text/javascript"></script>]
-	
+<style type="text/css">
+	[(#CHEMIN{css/curator.css}|spip_file_get_contents)]
+</style>
 
-</head>
-<body>
-	[(#SESSION{en_ligne}|oui)
-		#FORMULAIRE_SHARE{env}
-	]
-	[(#SESSION{en_ligne}|non)
-		#LOGIN_PUBLIC
-	]
-</body>
-</html>
+[(#SESSION{en_ligne}|oui)
+	#FORMULAIRE_SHARE
+]
+[(#SESSION{en_ligne}|non)
+	#LOGIN_PUBLIC
+]

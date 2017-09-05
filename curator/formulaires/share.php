@@ -45,6 +45,9 @@ function formulaires_share_traiter_dist() {
 	include_spip('action/editer_objet');
 	$id_article = objet_inserer('article', $id_rubrique);
 
+	// statut de publication souhaité
+	$statut = lire_config('curator/statut_souhaite','publie');
+
 	if ($id_article) {
 		// insérer les valeurs saisies
 		$valeurs = array(
@@ -54,8 +57,7 @@ function formulaires_share_traiter_dist() {
 			'url_site' => $url_site,
 			'date'     => date('Y-m-d H:i:s'),
 			'ps'       => $ps,
-			'statut'   => 'publie',
-
+			'statut'   => $statut,
 		);
 		objet_modifier('article', $id_article, $valeurs);
 
@@ -77,6 +79,8 @@ function formulaires_share_traiter_dist() {
 
 		// ajouter le logo
 		if ($ajouter_logo && $logo) {
+			include_spip('inc/distant');
+
 			$info = pathinfo($logo);
 			$ext = $info['extension'];
 			$logo_file = _DIR_IMG.'arton'.$id_article.'.'.$ext;

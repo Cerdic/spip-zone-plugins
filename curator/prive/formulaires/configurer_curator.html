@@ -1,0 +1,70 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class="editer-goupe">
+			<div class="editer">
+				<label for="id_parent"><:curator:configurer_rubrique:></label>
+				<p class="explication"><:curator:configurer_rubrique_explication:></p>
+				[(#VAL|chercher_rubrique{'', #CONFIG{curator/id_parent}, '', '', '', 0,form_simple})]
+			</div>
+
+			<div class="editer editer-statut_souhaite">
+				[(#VAL{article}
+					|objet_info{statut_textes_instituer}
+					|array_diff_key{#ARRAY{refuse,'',poubelle,''}}
+					|set{statuts})]
+				<label for="statut_souhaite"><:curator:configurer_statut_souhaite:></label>
+				<p class="explication"><:curator:configurer_statut_souhaite_explication:></p>
+				<select name="statut_souhaite" id="statut_souhaite">
+				<BOUCLE_lister_statuts(DATA){source table, #GET{statuts} }>
+					<option value="#CLE" [(#CONFIG{curator/statut_souhaite,publie}|=={#CLE}|oui)selected="selected"] style="background-image:url([(#CLE|puce_statut{article}|extraire_attribut{src})]);">
+						[(#VALEUR|_T)]
+					</option>
+				</BOUCLE_lister_statuts>
+				</select>
+			</div>
+
+			<div class="editer">
+				<label for="groupe_mots"><:curator:configurer_groupe_mots:></label>
+				<p class="explication"><:curator:configurer_groupe_mots_explication:></p>
+				<select name="groupe_mots" id="groupe_mots">
+					<option value="">
+					<BOUCLE_groupes(GROUPES_MOTS){par titre}{tables_liees like %articles%}>
+					<option value="#ID_GROUPE" [(#ID_GROUPE|=={#ENV{groupe_mots}}|oui)selected="selected"]>#TITRE</option>
+					</BOUCLE_groupes>
+				</select>
+			</div>
+		</div> <!-- .editer-groupe -->
+		
+		<p class="boutons">
+			<span class="image_loading">&nbsp;</span>
+			<input type="submit" name="reinit" class="submit" value="<:curator:bouton_effacer:>" />
+			<input type="submit" name="enregistrer" class="submit" value="<:bouton_valider:>" />
+		</p>
+
+	</div></form>
+	
+	
+</div>
+
+#BOITE_OUVRIR
+<p>
+	Glissez le lien suivant dans votre barre de favoris, et hop !
+</p>
+<p>
+	<a class="bkl" href="javascript:<INCLURE{fond=inc/bookmarklet}>">#NOM_SITE_SPIP.share</a>
+</p>
+#BOITE_FERMER
+
+
+<style type="text/css">
+	.editer-statut_souhaite option {
+		background-repeat: no-repeat;
+		background-position: 4px center;
+		padding-left: 20px;
+	}
+</style>
+

@@ -1,6 +1,6 @@
 <?php
 /**
- * Options du plugin curatorau chargement
+ * Options du plugin curator au chargement
  *
  * @plugin     curator
  * @copyright  2014
@@ -11,6 +11,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-define('_SPIP_SELECT_RUBRIQUES', 10000);
-
-?>
+// annuler le comportement ajax sur le selecteur rubriques (ne semble plus nécessaire)
+// defined('_SPIP_SELECT_RUBRIQUES')  
+// 	or define('_SPIP_SELECT_RUBRIQUES', 10000);
