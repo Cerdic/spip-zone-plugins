@@ -14,7 +14,7 @@
 	<form method='post' action='#SELF' enctype='multipart/form-data' [(#GET{message_confirmation}|oui) onsubmit="return confirm('<:diogene:message_confirm_poubelle:>')"]><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<BOUCLE_documents_en_cours(DOCUMENTS){id_document}{tous}>
-		<ul>
+		<ul class="editer-groupe">
 			<li class="fieldset" id="formulaire_supprimer_document_#ID_DOCUMENT">
 			[(#FICHIER|get_spip_doc|file_exists|oui)
 				[(#MIME_TYPE|match{video/}|ou{[(#EXTENSION|match{mp4})]}|oui)#SET{em_type,video}]
@@ -24,7 +24,7 @@
 				#SET{nb,#ENV{compteur}}
 				<fieldset>
 					<legend>[(#ENV{compteur}|oui)<:emballe_medias:previsu_document_nb{nb=#GET{nb}}:>][(#ENV{compteur}|non)<:emballe_medias:previsu_document:>]</legend>
-					<ul>
+					<ul class="editer-groupe">
 						<li class="previsu_document #GET{type}">
 							[(#CHEMIN{prive/inc-previsu_doc_#GET{em_type}_#EXTENSION.html}|oui)
 							<INCLURE{fond=prive/inc-previsu_doc_#GET{em_type}_#EXTENSION,em_type=#GET{em_type},id_document,id_objet,objet,compteur,total,ajax}>
