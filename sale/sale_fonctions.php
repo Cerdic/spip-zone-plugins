@@ -24,7 +24,7 @@ function tag2attributs($innerTag) {
 	return $attributs;
 }
 
-function decode_entites($texte) {
+function decode_entites($texte, $quote_style = ENT_QUOTES) {
 	static $trans;
 	if (!isset($trans)) {
 		$trans = get_html_translation_table(HTML_ENTITIES, $quote_style);
@@ -236,16 +236,16 @@ function extraire_tableaux($texte) {
 	// tableaux
 	$pattern = '<table([^>]*)>(.*)</table>';
 	preg_match_all(",$pattern,Uims", $texte, $tableMatches, PREG_SET_ORDER);
-	$textMatches = preg_split(",$pattern,Uims", $texte);
-
-	foreach ($tableMatches as $key => $value) {
-		$tableMatches [$key][0] = recompose_tableau($value[1], $value[2]);
+	if ($tableMatches) {
+		$textMatches = preg_split(",$pattern,Uims", $texte);
+		foreach ($tableMatches as $key => $value) {
+			$tableMatches [$key][0] = recompose_tableau($value[1], $value[2]);
+		}
+		for ($i = 0; $i < count($tableMatches); ++$i ) {
+			$textMatches [$i] = $textMatches [$i].$tableMatches [$i] [0];
+		}
+		$texte = implode('', $textMatches);
 	}
-	for ($i = 0; $i < count($textMatches); ++$i ) {
-		$textMatches [$i] = $textMatches [$i].$tableMatches [$i] [0];
-	}
-	$texte = implode('', $textMatches);
-
 	return $texte;
 }
 
@@ -308,15 +308,16 @@ function extraire_images($texte) {
 
 	foreach ($liste_tests as $pattern => $shortcut) {
 		preg_match_all($pattern, $texte, $tagMatches, PREG_SET_ORDER);
-		$textMatches = preg_split($pattern, $texte);
-
-		foreach ($tagMatches as $key => $value) {
-			$tagMatches [$key][0] = retrouve_document($tagMatches[$key][1], $tagMatches[$key][0], $tagMatches[$key][2], $shortcut);
+		if ($tagMatches) {
+			$textMatches = preg_split($pattern, $texte);
+			foreach ($textMatches as $key => $value) {
+				$tagMatches[$key][0] = retrouve_document($tagMatches[$key][1], $tagMatches[$key][0], $tagMatches[$key][2], $shortcut);
+			}
+			for ($i = 0; $i < count($tagMatches); ++$i ) {
+				$textMatches[$i] = $textMatches[$i] . $tagMatches[$i][0];
+			}
+			$texte = implode('', $textMatches);
 		}
-		for ($i = 0; $i < count($textMatches); ++$i ) {
-			$textMatches [$i] = $textMatches [$i].$tagMatches [$i] [0];
-		}
-		$texte = implode('', $textMatches);
 	}
 
 	// reconnaitre les |center sur img
@@ -335,15 +336,16 @@ function extraire_images($texte) {
 function extraire_code($contenu) {
 	$pattern = ',<(div|span) [^>]*spip_code[^>]*><code>(.*)</code></\\1>,Uims';
 	preg_match_all($pattern, $contenu, $codeMatches, PREG_SET_ORDER);
-	$textMatches = preg_split($pattern, $contenu);
-
-	foreach ($codeMatches as $key => $value) {
-		$codeMatches [$key][0] = '<code>'.preg_replace(",<br[^>]*>\s*,i", "\r", $value[2]).'</code>';
+	if ($codeMatches) {
+		$textMatches = preg_split($pattern, $contenu);
+		foreach ($codeMatches as $key => $value) {
+			$codeMatches [$key][0] = '<code>'.preg_replace(",<br[^>]*>\s*,i", "\r", $value[2]).'</code>';
+		}
+		for ($i = 0; $i < count($codeMatches); ++$i ) {
+			$textMatches [$i] = $textMatches [$i].$codeMatches [$i] [0];
+		}
+		$contenu = implode('', $textMatches);
 	}
-	for ($i = 0; $i < count($textMatches); ++$i ) {
-		$textMatches [$i] = $textMatches [$i].$codeMatches [$i] [0];
-	}
-	$contenu = implode('', $textMatches);
 
 	return $contenu;
 }
@@ -352,15 +354,16 @@ function extraire_code($contenu) {
 function extraire_poesie($contenu) {
 	$pattern = ",<div [^>]*spip_poesie[^>]*>((\s*<div>.*</div>)*\s*)</div>,Uims";
 	preg_match_all($pattern, $contenu, $poesieMatches, PREG_SET_ORDER);
-	$textMatches = preg_split($pattern, $contenu);
-
-	foreach ($poesieMatches as $key => $value) {
-		$poesieMatches [$key][0] = '<poesie>'.preg_replace(",\s*<div>(.*)</div>,Uim", "\r\\1", $value[1]).'</poesie>';
+	if ($poesieMatches) {
+		$textMatches = preg_split($pattern, $contenu);
+		foreach ($poesieMatches as $key => $value) {
+			$poesieMatches[$key][0] = '<poesie>'.preg_replace(",\s*<div>(.*)</div>,Uim", "\r\\1", $value[1]).'</poesie>';
+		}
+		for ($i = 0; $i < count($poesieMatches); ++$i ) {
+			$textMatches[$i] = $textMatches[$i] . $poesieMatches[$i][0];
+		}
+		$contenu = implode('', $textMatches);
 	}
-	for ($i = 0; $i < count($textMatches); ++$i ) {
-		$textMatches [$i] = $textMatches [$i].$poesieMatches [$i] [0];
-	}
-	$contenu = implode('', $textMatches);
 
 	return $contenu;
 }
