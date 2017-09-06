@@ -5,6 +5,8 @@ function dublin_core_insert_head($flux){
 		if ($GLOBALS['page']['contexte']['type'] == 'article'){
 			$flux .= recuperer_fond('dublin_core_article', array('id_article'=>$GLOBALS['page']['contexte']['id_article']));
 		}
+        // en Z-Core on ne peut pas se brancher sur #INSERT_HEAD
+        } else if (defined('_DIR_PLUGIN_ZCORE')) {
 	// Sinon, on regarde juste si on dispose d'un id_article dans l'environnement
 	} else {
 		if ($GLOBALS['page']['contexte']['id_article']>0){
