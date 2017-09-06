@@ -7,7 +7,7 @@ function dublin_core_insert_head($flux){
 		}
 	// Sinon, on regarde juste si on dispose d'un id_article dans l'environnement
         } else {
-                $flux .= '<' . '? if (function_exists("dublin_core")) dublin_core(); ?' . '>';
+                $flux .= '<' . '?php if (function_exists("dublin_core")) dublin_core(); ?' . '>';
 	}
 	return $flux;
 }
