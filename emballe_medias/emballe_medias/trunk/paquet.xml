@@ -1,12 +1,12 @@
 <paquet
 	prefix="emballe_medias"
 	categorie="edition"
-	version="2.0.11"
+	version="2.0.12"
 	etat="test"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.3;3.1.*]"
 	logo="images/emballe_medias.png"
 	schema="0.2.3"
->	
+>
 
 	<nom>Emballe Medias</nom>
 	<!-- Emballer ses documents proprement -->
@@ -20,7 +20,7 @@
 
 	<pipeline nom="em_types" action="" />
 	<pipeline nom="em_post_upload_medias" action="" />
-	
+
 	<pipeline nom="declarer_tables_principales" inclure="base/emballe_medias.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/emballe_medias.php" />
 	<pipeline nom="affiche_gauche" inclure="emballe_medias_pipelines.php" />
@@ -36,14 +36,14 @@
 	<pipeline nom="post_edition" inclure="emballe_medias_pipelines.php" />
 	<pipeline nom="autoriser" inclure="emballe_medias_autoriser.php" />
 
-	<necessite nom="saisies" compatibilite="[1.1;[" />
+	<necessite nom="saisies" compatibilite="[2.18.20;[" />
 	<necessite nom="medias" compatibilite="[2.7.29;[" />
-	<necessite nom="diogene" compatibilite="[1.5.0;[" />
-	<necessite nom="swfupload" compatibilite="[1.0.0;[" />
-	<necessite nom="jfu" compatibilite="[5.16.5;[" />
-	<necessite nom="notifications" compatibilite="[3.0.10;[" />
+	<necessite nom="diogene" compatibilite="[1.9.3;[" />
+	<necessite nom="swfupload" compatibilite="[1.1.2;[" />
+	<necessite nom="jfu" compatibilite="[5.16.6;[" />
+	<necessite nom="notifications" compatibilite="[3.5.11;[" />
 
-	<utilise nom="ancres_douces" compatibilite="[1.2;[" />
+	<utilise nom="ancresdouces" compatibilite="[1.4.7;[" />
 	<utilise nom="palette" />
 	<utilise nom="legendes" />
 	<utilise nom="photo_infos" />
