@@ -212,7 +212,6 @@ function emplois_post_edition($flux) {
 
 			// récupérer le mail du webmaster
 			$mail_webmaster = lire_config('email_webmaster');
-			debug('mail webmaster', $mail_webmaster);
 
 			// récupérer le mail de l'internaute à qui envoyer la notification
 			$email_deposant = sql_getfetsel('email', $table, $id_table.'='.intval($id));
