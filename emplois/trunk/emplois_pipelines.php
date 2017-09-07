@@ -163,7 +163,7 @@ function emplois_post_insertion($flux) {
 			$table = $flux['args']['table'];
 			$id_table = id_table_objet($table);
 			$type = objet_type($table);
-			$type == 'emploi' ? $type_sujet = 'nouvel emploi' : $type_sujet = 'nouveau CV';
+			$type == 'offre' ? $type_sujet = 'nouvel emploi' : $type_sujet = 'nouveau CV';
 
 			// récupérer le mail du webmaster
 			$mail_webmaster = lire_config('email_webmaster');
@@ -172,7 +172,7 @@ function emplois_post_insertion($flux) {
 			$email_to = $mail_webmaster;
 			$email_from = $mail_webmaster;
 			$sujet = "Un $type_sujet en attente de validation";
-			$message = "Un $type_sujet vient d‘etre déposé." ;
+			$message = "Un $type_sujet vient d‘être déposé." ;
 
 			//allez zou, on envoi
 			$envoyer_mail($email_to,$sujet,$message,$email_from);
