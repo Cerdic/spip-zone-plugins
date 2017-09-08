@@ -114,7 +114,7 @@ function saisie_traitement_vue($valeur, $env) {
  * - toto[truc] => toto_truc
  *
  * @param string $nom
- * return string
+ * @return string
 **/
 function saisie_nom2classe($nom) {
 	return str_replace(array('/', '[', ']', '&#91;', '&#93;'), array('_', '_', '', '_', ''), $nom);
@@ -130,7 +130,7 @@ function saisie_nom2classe($nom) {
  *
  * @see saisie_name2nom() pour l'inverse.
  * @param string $nom
- * return string
+ * @return string
 **/
 function saisie_nom2name($nom) {
 	if (false === strpos($nom, '/')) {
@@ -152,7 +152,7 @@ function saisie_nom2name($nom) {
  *
  * @see saisie_nom2name() pour l'inverse.
  * @param string $name
- * return string
+ * @return string
  **/
 function saisie_name2nom($name) {
 	if (false === strpos($name, '[')) {
@@ -258,4 +258,22 @@ function lister_tables_objets_edit() {
 	$objets_edit = array_filter($objets_edit);
 
 	return $objets_edit;
+}
+
+/**
+ * Afficher la chaine de langue traduite.
+ *
+ * @param string $chaine
+ * @return string
+ */
+function saisies_label($chaine) {
+	$chaine = trim($chaine);
+	if (preg_match("/:>$/", $chaine)) {
+		$chaine = preg_replace("/^&lt;:/", "", $chaine);
+		$chaine = preg_replace("/^<;:/", "", $chaine);
+		$chaine = preg_replace("/:>$/", "", $chaine);
+		return _T($chaine);
+	}
+
+	return $chaine;
 }

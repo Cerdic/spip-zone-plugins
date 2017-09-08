@@ -1,7 +1,7 @@
 <paquet
 	prefix="saisies"
 	categorie="outil"
-	version="2.18.20"
+	version="2.18.21"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/logo_saisie_48.png"
@@ -24,6 +24,8 @@
 	<pipeline nom="formulaire_charger" inclure="saisies_pipelines.php" />
 	<pipeline nom="formulaire_verifier" inclure="saisies_pipelines.php" />
 	<pipeline nom="styliser" inclure="saisies_pipelines.php" />
+
+	<menu nom="saisies_doc" titre="saisies:titre_page_saisies_doc" parent="menu_developpement"  icone="images/saisies-16.png" />
 
 	<utilise nom="verifier" compatibilite="[1.6.0;]" />
 	<utilise nom="spip_bonux" compatibilite="[3.0.0;]" />
