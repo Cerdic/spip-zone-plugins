@@ -16,6 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function cookiechoices_affichage_final($page){
     include_spip('inc/filtres');
+    $lang = extraire_attribut($page, 'lang');
     if (!$lang) $lang = $GLOBALS["spip_lang"];
     $js_cookiechoices = produire_fond_statique("cookiechoices_call.js", array("lang"=>$lang));
 

@@ -1,7 +1,7 @@
 <paquet
 	prefix="cookiechoices"
 	categorie="communication"
-	version="1.0.9"
+	version="1.1.0"
 	etat="stable"
 	compatibilite="[3.0.17;3.1.*]"
 	logo="prive/themes/spip/images/cookiechoices-64.png"
