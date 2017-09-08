@@ -55,7 +55,7 @@ function action_linkcheck_parcours_dist() {
 					// @todo Tester pour oracle et sqlite
 					if ($db_ok['type'] === 'mysql') {
 						$tab_expreg_mysql = array(
-							"(((http|https|ftp|ftps)://)?www\.)|((http|https|ftp|ftps)://(.*\.)?))(.*\.)+[a-zA-Z0-9]{2,9}(/.*)?)(\'|\"| |\.|\->|\]|,|;|\s)/?",
+							"(((http|https|ftp|ftps)://)?www\.)|((http|https|ftp|ftps)://(.*\.)?)(.*\.)+[a-zA-Z0-9]{2,9}(/.*)?(\'|\"| |\.|\->|\]|,|;|\s)/?",
 							'(\->)([a-zA-Z]{3,10}[0-9]{1,})\]'
 						);
 
@@ -87,17 +87,17 @@ function action_linkcheck_parcours_dist() {
 							$where .= ' AND '.sql_in('statut', $statuts);
 						}
 					} elseif (isset($info_table['field']['statut'])) {
-						// On exclus de la selection, les objet dont le status est refuse ou poubelle
+						// On exclus de la selection, les objets dont le statut est refuse ou poubelle
 						$where .= ' AND '.sql_in('statut', array('refuse', 'poubelle'), true);
 					}
 
 					$sql = sql_allfetsel(
-									$nom_champ_id.','.$champs_a_traiter,
-									$table_sql,
-									$where,
-									'',
-									$nom_champ_id.' ASC'
-									);
+						$nom_champ_id.','.$champs_a_traiter,
+						$table_sql,
+						$where,
+						'',
+						$nom_champ_id.' ASC'
+					);
 
 					//pour chaque objet
 					$objet = objet_type($table_sql);
