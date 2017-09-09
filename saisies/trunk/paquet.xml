@@ -29,4 +29,5 @@
 
 	<utilise nom="verifier" compatibilite="[1.6.0;]" />
 	<utilise nom="spip_bonux" compatibilite="[3.0.0;]" />
+	<utilise nom="yaml" compatibilite="[1.5.0;]" />
 </paquet>

@@ -2,7 +2,7 @@
 <div class="nettoyeur"></div>
 
 <B_saisies>
-	<BOUCLE_saisies (DATA) {source table, #VAL{saisies}|saisies_lister_disponibles}>
+	<BOUCLE_saisies (DATA) {source table, #VAL{saisies}|saisies_lister_disponibles} {si #VAL{_DIR_PLUGIN_YAML}|defined}>
 		[(#BOITE_OUVRIR)]
 			<h3 id="[saisie_(#CLE)]">[(#ICONE|balise_img) ][(#TITRE)] [((#CLE))]</h3>
 			<p>[(#DESCRIPTION)]</p>
@@ -30,3 +30,5 @@
 		[(#BOITE_FERMER)]
 	</BOUCLE_saisies>
 </B_saisies>
+<:saisies:plugin_yaml_inactif:>
+<//B_saisies>
