@@ -39,7 +39,7 @@
 				// convertCallback: undefined,
 				// allMixDetails: false
 			};
-			initInstance(this, options || {});
+			initInstance(this, options || {});
 		},
 		initInstance = function(THIS, options) {
 			var importColor,
@@ -87,7 +87,7 @@
 	};
 
 	Colors.prototype.toString = function(colorMode, forceAlpha) {
-		return ColorConverter.color2text((colorMode || 'rgb').toLowerCase(), this.colors, forceAlpha);
+		return ColorConverter.color2text((colorMode || 'rgb').toLowerCase(), this.colors, forceAlpha);
 	};
 
 	// ------------------------------------------------------ //
@@ -256,12 +256,12 @@
 		color2text: function(colorMode, colors, forceAlpha) {
 			var alpha = forceAlpha !== false && _round(colors.alpha * 100) / 100,
 				hasAlpha = typeof alpha === 'number' &&
-					forceAlpha !== false && (forceAlpha || alpha !== 1),
+					forceAlpha !== false && (forceAlpha || alpha !== 1),
 				RGB = colors.RND.rgb,
 				HSL = colors.RND.hsl,
 				shouldBeHex = colorMode === 'hex' && hasAlpha,
 				isHex = colorMode === 'hex' && !shouldBeHex,
-				isRgb = colorMode === 'rgb' || shouldBeHex,
+				isRgb = colorMode === 'rgb' || shouldBeHex,
 				innerText = isRgb ? RGB.r + ', ' + RGB.g + ', ' + RGB.b :
 					!isHex ? HSL.h + ', ' + HSL.s + '%, ' + HSL.l + '%' :
 					'#' + colors.HEX;
