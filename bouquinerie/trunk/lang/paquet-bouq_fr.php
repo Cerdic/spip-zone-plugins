@@ -8,13 +8,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouq_nom' => 'Bouquinerie',
-	'bouq_slogan' => 'Gestion des livres et de leurs auteurs',
 	'bouq_description' => 'Ce plugin se veut être le plus petit dénominateur commun pour une gestion de livres et de leurs auteurs. Il devrait pouvoir être utile aux cas suivants :
 
-		- Maison d’édition de livre,
-		- Librairie,
-		- Bibliothèque,
-		- Boutique en ligne de vente de livre,
+		- Maisons d’édition de livre,<br>
+		- Librairies,<br>
+		- Bibliothèques,<br>
+		- Boutiques en ligne de vente de livre,<br>
 		- etc.',
+	'bouq_nom' => 'Bouquinerie',
+	'bouq_slogan' => 'Gestion de livres et de leurs auteurs'
+	
 );
