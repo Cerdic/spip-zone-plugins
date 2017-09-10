@@ -1,0 +1,21 @@
+[(#REM) Inclusion des fichier Javascript si la config le permet ]
+[(#CONFIG{foundation_6/javascript}|oui)
+
+[(#CHEMIN{bower_components/foundation-sites/dist/js/foundation.js}|?{
+	[(#SET{foundationjs,[(#CHEMIN{bower_components/foundation-sites/dist/js/foundation.js}|timestamp)]})],
+	[(#SET{foundationjs,[(#CHEMIN{bower_components/foundation-sites/dist/foundation.js}|timestamp)]})]
+ })]
+
+[(#REM)
+Trouver l'emplacement de what-input.js
+]
+[(#CHEMIN{bower_components/what-input/what-input.min.js}|?{
+	[(#SET{whatinpujs, [(#CHEMIN{bower_components/what-input/what-input.min.js}|timestamp)]})],
+	[(#SET{whatinpujs, [(#CHEMIN{bower_components/what-input/dist/what-input.min.js}|timestamp)]})]
+ })]
+
+[<script src="(#GET{whatinputjs})" type="text/javascript"></script>]
+[<script src="(#GET{foundationjs})" type="text/javascript"></script>]
+[<script src="(#CHEMIN{lib/foundation-6/js/app.js}|timestamp)" type="text/javascript"></script>]
+[<script src="(#CHEMIN{javascript/spip.foundation.js}|timestamp)" type="text/javascript"></script>]
+]
