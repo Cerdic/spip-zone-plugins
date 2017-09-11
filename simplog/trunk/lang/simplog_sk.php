@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_fichier_choisir' => 'Vyberte súbor, ktorý chcete analyzovať.',
+	'message_fichier_vide' => 'Súbor je prázdny.',
 
 	// T
 	'tri_croissant' => 'Zotriediť vzostupne',
