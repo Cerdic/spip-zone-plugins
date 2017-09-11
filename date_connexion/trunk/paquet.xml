@@ -1,0 +1,20 @@
+<paquet
+	prefix="date_connexion"
+	categorie="date"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="prive/themes/spip/images/date_connexion-64.png"
+	documentation=""
+	schema="1.0.0" 
+>
+	<nom>Date de connexion</nom>
+	<!-- Pouvoir utiliser des dates de connexion des auteurs -->
+
+	<auteur>Matthieu Marcillaud</auteur>
+	<credit lien='https://www.iconfinder.com/icons/326483/access_clock_time_icon'>Google (logo)</credit>
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="date_connexion_pipelines.php" />
+	<pipeline nom="preparer_fichier_session" inclure="date_connexion_pipelines.php" />
+</paquet>
