@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_label_responsive' => 'Stredná veľkosť',
 	'cfg_label_titre_descriptif' => 'Nadpis a opis',
 	'cfg_label_wmode' => 'Predvolený wmode',
+	'cfg_label_youtube_channel' => 'Kanál Youtube',
 	'cfg_titre_configurations_communes' => 'Spoločné nastavenia',
 	'cfg_titre_configurations_dailymotion' => 'Nastavenia pre Dailymotion',
 	'cfg_titre_configurations_html5' => 'Nastavenia HTML5/alternatívne',
