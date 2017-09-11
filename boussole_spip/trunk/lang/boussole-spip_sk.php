@@ -92,6 +92,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'slogan_site_spip_plugincode' => 'Dokumentáciu ku kódu zásuvných modulov',
 	'slogan_site_spip_programmer' => 'Dokumentácia vývojárov SPIPu',
 	'slogan_site_spip_sedna' => 'Kanál RSS galaxie SPIPu',
+	'slogan_site_spip_syntaxe' => 'Vyskúšajte si upravovať text v SPIPe',
 	'slogan_site_spip_test' => 'Vyskúšať inštaláciu a zavedenie SPIPu na stránku',
 	'slogan_site_spip_trad' => 'Prekladateľská zóna SPIPu a jeho rozšírení',
 	'slogan_site_spip_twit' => 'Mikroblog komunity SPIPu',
