@@ -43,7 +43,7 @@
 		<traducteur nom="olly" lien="https://trad.spip.net/auteur/olly" />
 		<traducteur nom="Serge Markitanenko" lien="https://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
-	<langue code="sk" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=sk" total="178" traduits="161" relire="0" modifs="1" nouveaux="16" pourcent="90.45">
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=sk" total="178" traduits="166" relire="0" modifs="0" nouveaux="12" pourcent="93.26">
 		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>

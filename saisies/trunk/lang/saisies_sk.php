@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'construire_action_dupliquer_copie' => '(kópia)',
 	'construire_action_supprimer' => 'Odstrániť',
 	'construire_ajouter_champ' => 'Pridať pole',
+	'construire_ajouter_groupe' => 'Pridať skupinu',
 	'construire_attention_enregistrer' => 'Nezabudnite uložiť zmeny!',
 	'construire_attention_modifie' => 'Tento formulár sa odlišuje od pôvodného. Máte možnosť ho obnoviť do stavu pred svojimi zmenami.',
 	'construire_attention_supprime' => 'Medzi vašimi zmenami je vymazanie niekoľkých polí. Potvrďte, prosím, registráciu tejto verzie formulára.',
@@ -137,6 +138,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_label' => 'Typ poľa',
 	'option_type_password' => 'Skrývaný text pri písaní (napr. heslo)',
 	'option_type_text' => 'Normálny',
+	'option_valeur_non_label' => 'Hodnota nie',
+	'option_valeur_oui_label' => 'Hodnota áno',
 
 	// S
 	'saisie_auteurs_explication' => 'Umožňuje vám vybrať jedného alebo viacerých autorov',
@@ -149,6 +152,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_date_titre' => 'Dátum',
 	'saisie_destinataires_explication' => 'Používa sa na výber jedného príjemcu alebo viacerých z dopredu vybraných autorov.',
 	'saisie_destinataires_titre' => 'Príjemcovia',
+	'saisie_email_titre' => 'E-mailová adresa',
 	'saisie_explication_explication' => 'Všeobecný vysvetľujúci text.',
 	'saisie_explication_titre' => 'Vysvetlenie',
 	'saisie_fieldset_explication' => 'Rám, v ktorom môže byť niekoľko polí.',
@@ -183,7 +187,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'tous_visiteurs' => 'Všetci návštevníci (aj ne­za­re­gis­tro­va­ní)',
-	'tout_selectionner' => 'Vybrať všetko', # MODIF
+	'tout_selectionner' => 'O(d)značiť všetko',
 
 	// V
 	'vue_sans_reponse' => '<i>Bez reakcie</i>',
