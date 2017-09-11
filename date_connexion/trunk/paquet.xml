@@ -1,7 +1,7 @@
 <paquet
 	prefix="date_connexion"
 	categorie="date"
-	version="1.0.0"
+	version="1.0.1"
 	etat="test"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="prive/themes/spip/images/date_connexion-64.png"
@@ -16,5 +16,5 @@
 	<licence>GNU/GPL</licence>
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="date_connexion_pipelines.php" />
-	<pipeline nom="preparer_fichier_session" inclure="date_connexion_pipelines.php" />
+	<pipeline nom="preparer_visiteur_session" inclure="date_connexion_pipelines.php" />
 </paquet>

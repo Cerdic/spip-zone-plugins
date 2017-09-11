@@ -34,8 +34,9 @@ function date_connexion_declarer_tables_objets_sql($tables) {
  * @param array $flux
  * @return array
  */
-function date_connexion_preparer_fichier_session($flux) {
+function date_connexion_preparer_visiteur_session($flux) {
 	if (!empty($flux['args']['row']['id_auteur'])) {
+		spip_log(debug_backtrace(), 'mm.3');
 		$id_auteur = $flux['args']['row']['id_auteur'];
 		$date_connexion = date('Y-m-d H:i:s');
 		$date_connexion_precedente = $flux['args']['row']['date_connexion'];
