@@ -279,6 +279,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_suppression_module_trads_ok' => 'Modul @module@ bol odstránený. @nb@ položiek, ktoré k nemu patrili boli odstránené tiež.',
 	'message_synchro_base_fichier_ok' => 'Súbory a databáza sú zosynchronizované.',
 	'message_synchro_base_fichier_pas_ok' => 'Súbory a databáza nie sú zosynchronizované.',
+	'message_upload_nb_modifie' => 'Zmenili ste @nb@ jazykový reťazec.',
 	'message_upload_nb_modifies' => 'Zmenili ste @nb@ jazykových reťazcov.',
 	'module_deja_importe' => 'Modul "@module@" bol už nahraný',
 	'moduletitre' => 'Dostupné moduly',
