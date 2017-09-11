@@ -40,8 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_activer_squelettes_publics_zpip1' => 'Verejné šablóny ZPIPu v1',
-	'cfg_activer_squelettes_publics_zpip1_explication' => 'Aktivovať verejné šablóny pre ZPIP vo verzii 1,
-		ktoré umožňujú prehliadať kontakty a organizácie na verejne prístupnej stránke?', # MODIF
+	'cfg_activer_squelettes_publics_zpip1_explication' => 'Aktivovať verejné šablóny pre ZPIP vo verzii 1, ktoré umožňujú prehliadať kontakty a organizácie na verejne prístupnej stránke?',
 	'cfg_afficher_infos_sur_auteurs' => 'Podrobné zobrazenie autorov?',
 	'cfg_afficher_infos_sur_auteurs_explication' => 'Zobraziť kontaktné údaje organizácie
 		aj na stránkach autorov v súkromnej zóne?', # MODIF
@@ -143,6 +142,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_statut_juridique' => 'Právna forma',
 	'label_telephone' => 'Telefón',
 	'label_type_liaison' => 'Odkaz',
+	'label_url_site' => 'Internetová stránka',
 	'lier_ce_contact' => 'Pripojiť tento kontakt',
 	'lier_cet_auteur' => 'Odkaz',
 	'lier_cette_organisation' => 'Pripojiť túto organizáciu',
