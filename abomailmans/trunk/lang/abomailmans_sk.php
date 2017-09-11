@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'btn_desabonnement' => 'Odhlásiť sa z odoberania',
 
 	// C
+	'champ_titre_label' => 'Nadpis',
 	'choisir_liste' => 'Musíte si vybrať skupinu.',
 	'contenu_date' => 'Novinky z tohto dňa',
 	'creation_droits_insuffisants' => 'Vaše práva sú nedostatočné.',
