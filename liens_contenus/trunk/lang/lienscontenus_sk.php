@@ -10,6 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'alerte_non_publie_mais_lie' => 'Pozor, tento obsah nie je publikovaný, ale iný publikovaný obsah naň odkazuje!',
 	'alerte_publie_contenant' => 'Pozor, tento text je publikovaný, ale sú v ňom odkazy na iný text, ktorý nie je!',
 	'alerte_publie_contenant_ko' => 'Pozor, tento text je publikovaný, ale sú v ňom odkazy na taký, ktorý neexistuje!',
 	'aucun_objets_avec_lien_depuis_courant' => 'V tomto texte nie sú odkazy na iný text.',
