@@ -99,6 +99,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_a_valider' => 'Message à valider : ',
+	'message_fin_label' => 'Message en fin d’email : ',
+	'message_fin_explication' => 'Message qui sera affiché en fin d’email (permettant d’indiquer pourquoi les gens reçoivent ce mail, méthode de désabonnement…)',
 	'message_spam_a_confirmer' => 'SPAM à confirmer : ',
 	'message_voir_configuration' => 'Voir la configuration des notifications',
 	'messagerie_interne' => 'Messagerie interne',

@@ -39,7 +39,7 @@
 							<p class="explication"><:notifications:limiter_rubriques_explication:></p>
 							<input type="text" name="limiter_rubriques" value="[(#ENV{limiter_rubriques}|entites_html)]" id="limiter_rubriques" class="text" />
 						</li>
-						<li class='editer'>
+						<li class='editer editer_diffusion_nouveaute_partielle'>
 							<label><:info_annonce_nouveautes:></label>[
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]<p class="explication"><:notifications:info_diffusion_nouveautes:></p>
@@ -53,6 +53,11 @@
 									[(#ENV{diffusion_nouveaute_partielle}|=={oui}|oui)checked="checked"]
 								/><label for="diffusion_nouveaute_partielle_oui"><:notifications:info_diffusion_nouveaute_partielle_oui:></label>
 							</div>
+						</li>
+						<li class='editer editer_message_fin'>
+							<label for="message_fin"><:notifications:message_fin_label:></label>
+							<p class="explication"><:notifications:message_fin_explication:></p>
+							<textarea name="message_fin" id="message_fin" class="textarea" rows="4" cols="60">[(#ENV{message_fin})]</textarea>
 						</li>
 					</ul>
 				</fieldset>
