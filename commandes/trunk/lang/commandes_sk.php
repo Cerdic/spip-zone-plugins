@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'abbr_hors_taxe' => 'DPH',
 	'abbr_prix_unitaire' => 'JC',
 	'abbr_quantite' => 'Množ.',
+	'abbr_total_ht' => 'Celkom bez DPH',
 	'abbr_toutes_taxes_comprises' => 's DPH',
 	'action_facture' => 'Faktúra',
 	'action_modifier' => 'Zmeniť',
@@ -25,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commande_client' => 'Zákazník',
 	'commande_date' => 'Dátum',
 	'commande_date_paiement' => 'Dátum platby',
+	'commande_echeances_type_mois' => 'Mesačná platba',
 	'commande_editer' => 'Upraviť objednávku',
 	'commande_modifier' => 'Zmeniť objednávku:',
 	'commande_montant' => 'Množstvo',
@@ -50,20 +52,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_paiement_label' => 'Dátum platby',
 	'date_paiement_label_court' => 'Platba',
 	'designation' => 'Označenie',
-	'detail_champ_prix_unitaire_ht_label' => 'Jednotková cena', # MODIF
+	'detail_ajouter' => 'Pridať údaj objednávky',
+	'detail_champ_descriptif_label' => 'Opis',
+	'detail_champ_prix_unitaire_ht_label' => 'Jednotková cena bez DPH',
 	'detail_champ_quantite_label' => 'Množstvo',
 	'detail_champ_taxe_label' => 'Daň',
+	'detail_titre' => 'Údaj objednávky',
 	'details_commande' => 'Podrobnosti objednávky:',
+	'details_titre' => 'Podrobnosti objednávky',
 
 	// E
 	'etat' => 'Stav',
-	'explications_notifications_statuts' => 'Oznamy pri zmene stavu', # MODIF
-	'explications_notifications_statuts_aucune' => 'Žiaden oznam pri zmene stavu', # MODIF
+	'explications_notifications_statuts' => 'Posielanie oznamov:',
+	'explications_notifications_statuts_aucune' => 'Oznamy sú deaktivované',
 
 	// F
 	'facture_date' => 'Dátum: <span>@date@</span>',
-	'facture_num' => 'Faktúra č. <span>@num@</span>', # MODIF
+	'facture_num' => 'Faktúra č. <span>@num@</span>',
 	'facture_titre' => 'Faktúra',
+	'facture_voir' => 'Zobraziť faktúru',
 
 	// I
 	'info_1_commande' => '1 objednávka',
@@ -73,6 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_commande_statut_paye' => '1 objednávka bola zaplatená',
 	'info_1_commande_statut_retour' => '1 vrátená objednávka',
 	'info_1_commande_statut_retour_partiel' => '1 objednávka vrátená čiastočne ',
+	'info_1_detail' => '1 údaj objednávky',
 	'info_aucun_commande' => 'Žiadna objednávka',
 	'info_commandes' => 'Objednávky',
 	'info_date_envoi_vide' => 'neodoslaná objednávka',
@@ -92,22 +100,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_commande_dates' => 'Dátumy',
+	'label_dont_taxe' => 's daňou',
 	'label_filtre_clients' => 'Zákazníci',
 	'label_filtre_dates' => 'Dátumy',
 	'label_filtre_etats' => 'Stavy',
+	'label_filtre_tous' => 'Všetko',
 	'label_filtre_tous_clients' => 'Všetci zákazníci',
 	'label_filtre_tous_statuts' => 'Všetky stavy',
 	'label_filtre_toutes_dates' => 'Všetky dátumy',
 	'label_infos' => 'Informácie',
-	'label_objet' => 'Objekt', # MODIF
-	'label_objets' => 'Objekty', # MODIF
+	'label_montant_ttc' => 'Cena s DPH',
+	'label_objet' => 'Súvisiaci obsah',
+	'label_objets' => 'Podobné objekty',
 	'label_passee_le' => 'objednané',
 	'label_payee_le' => 'zaplatené',
-	'label_prix_unitaire' => 'Jednotková cena', # MODIF
+	'label_prix' => 'Cena',
+	'label_prix_unitaire' => 'Jednotková cena bez DPH',
 	'label_quantite' => 'Množstvo',
 	'label_recherche' => 'Vyhľadávať',
 	'label_statuts_actifs' => 'Štádiá spracovania',
 	'label_taxe' => 'Daň',
+	'label_total_ht' => 'Celkom bez DPH',
 
 	// M
 	'merci_de_votre_commande' => 'Vašu objednávku sme zaregistrovali a ceníme si Vašu dôveru.',
@@ -165,6 +178,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_label' => 'Stav:',
 	'statut_partiel' => 'Čiastočne zaplatená',
 	'statut_paye' => 'Zaplatená',
+	'statut_poubelle' => 'Kôš',
 	'statut_retour' => 'Vrátená',
 	'statut_retour_partiel' => 'Čiastočne vrátiť',
 	'supprimer' => 'Odstrániť',
