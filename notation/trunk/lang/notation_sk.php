@@ -61,6 +61,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_id' => 'jedno hodnotenie na používateľa',
 	'item_ide' => 'zaregistrovaným ľuďom',
 	'item_ip' => 'jeden hlas/IP',
+	'item_methode_id_cookie' => 'Podľa cookie',
+	'item_methode_id_ip' => 'Podľa adresy IP',
 
 	// J
 	'jaidonnemonavis' => 'Svoj názor som povedal(a)!',
