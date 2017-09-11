@@ -216,7 +216,7 @@ function notifications_notifications_destinataires($flux){
 				"spip_forum AS F LEFT JOIN spip_auteurs AS A ON F.id_auteur=A.id_auteur",
 				"notification=1 AND id_thread=" . intval($t['id_thread']) . " AND (email_auteur != '' OR notification_email != '' OR A.email IS NOT NULL) AND F.statut NOT IN ('off','spam')") ;
             // Eventuellement tout ceux qui ont répondu à cet article
-            if ($GLOBALS['notifications']['forum_article']){
+            if (!empty($GLOBALS['notifications']['forum_article'])) {
                 $s = sql_select("F.email_auteur, F.notification_email, A.email",
 				"spip_forum AS F LEFT JOIN spip_auteurs AS A ON F.id_auteur=A.id_auteur",
 				"notification=1 AND objet=".sql_quote($t['objet'])." AND id_objet=" . intval($t['id_objet']) . " AND (email_auteur != '' OR notification_email != '' OR A.email IS NOT NULL) AND F.statut NOT IN ('off','spam')");                

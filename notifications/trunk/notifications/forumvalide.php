@@ -70,7 +70,7 @@ function notifications_forumvalide_dist($quoi, $id_forum, $options) {
 // Prevenir les admins restreints de la rubrique et des parentes  lors de messages de forum d'article ou de rubrique
 // c'est ici because dans notifications_pipelines la fonction de dédoublonnage le fait sauter (?)
 
-	if ($GLOBALS['notifications']['forums_admins_restreints']) {
+	if (!empty($GLOBALS['notifications']['forums_admins_restreints'])) {
 		if ($t['objet'] == 'rubrique') {
 			$id_rubrique = $t['id_objet'];
 		}
@@ -79,7 +79,7 @@ function notifications_forumvalide_dist($quoi, $id_forum, $options) {
 			$t = sql_fetsel("id_rubrique", "spip_articles", "id_article=" . intval($t['id_objet']));
 			$id_rubrique = $t['id_rubrique'];
 		}
-		if ($GLOBALS['notifications']['forums_limiter_rubriques']) {
+		if (!empty($GLOBALS['notifications']['forums_limiter_rubriques'])) {
 			$limites = $GLOBALS['notifications']['forums_limiter_rubriques'];
 			$forums_limiter_rubriques = explode(",", $limites);
 		} else {
@@ -131,7 +131,7 @@ function notifications_forumvalide_dist($quoi, $id_forum, $options) {
 	}
 
 // une liste d'adresses renseignées dans config possiblement liste de diffusion
-	if ($GLOBALS['notifications']['forums_liste']) {
+	if (!empty($GLOBALS['notifications']['forums_liste'])) {
 
 		//construction du mail  pour envoyer_mail
 		$titre = "$t[titre]";
