@@ -11,6 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_activer_javascript' => 'Prosím, prosím aktivujte si Javascript.',
+	'cfg_afterorappend' => 'Umiestnenie:',
+	'cfg_afterorappend_exp' => 'Umiestniť po bloku s oddeľovačom (predvolené) alebo do bloku s oddeľovačom?',
 	'cfg_badge_fb' => 'Odznak/Widget pre Facebook',
 	'cfg_badge_fb_existe' => 'Ak máte odznak Facebooku (<a href="http://www.facebook.com/facebook-widgets/" class="spip_out">pomoc na stránke FB</a>), uveďte jeho obsah v JS alebo v HTML.',
 	'cfg_badge_html' => 'Odznak HTML',
@@ -25,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_insertion' => 'Vloženie medzi stránky:',
 	'cfg_liste_site' => 'Zoznam sociálnych stránok',
 	'cfg_plusone' => 'Google plus one',
-	'cfg_plusone_existe' => 'Na aktivovanie Google+1 inštalovať zásuvný modul (<a href="http://contrib.spip.net/Google-1" class="spip_out">pomoc pre spip-contrib.</a>)', # MODIF
+	'cfg_plusone_existe' => 'Na aktiváciu Google+1 si nainštalujte zásuvný modul (<a href="http://contrib.spip.net/Google-1" class="spip_out">pomoc pre spip-contrib.</a>)',
 	'cfg_referer' => 'Zobraziť len odznak a tlačidlá pre návštevníkov týchto stránok.',
 	'cfg_selector' => 'Oddeľovač:',
 	'cfg_sous_bloc' => 'Pod blokom názvu stránok "článok"',
@@ -41,6 +43,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_noisette_badge_facebook' => 'Zobrazí odznak Facebooku definovaný na stránke s nastaveniami',
 	'description_noisette_facebook_like' => 'Zobrazí tlačidlo <b>Páči sa mi to</b> alebo <b>Odporučiť</b> a prípadne <b>Poslať</b>',
 	'description_noisette_facebook_like_box' => 'Zobrazí tlačidlo Facebooku <b>Páči sa mi to.</b> Zobrazí oznam o počte fanúšikov na stránke na Facebooku.',
+
+	// I
+	'item_after' => 'Dovnútra',
+	'item_append' => 'Po',
 
 	// N
 	'noisette_action_like' => 'Páči sa mi to',
