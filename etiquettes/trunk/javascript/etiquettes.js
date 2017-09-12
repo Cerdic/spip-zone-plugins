@@ -1,12 +1,12 @@
-//#---------------------------------------------------#
-//#  Plugin  : Étiquettes                             #
-//#  Auteur  : RastaPopoulos                          #
-//#  Licence : GPL                                    #
-//#------------------------------------------------------------------------------------------------------#
-//#  Documentation : https://contrib.spip.net/Plugin-Etiquettes                                       #
-//#                                                                                                      #
-//#  Javascript commun du plugin                                                                         #
-//#------------------------------------------------------------------------------------------------------#
+//#--------------------------------------------------------------#
+//#  Plugin  : Étiquettes                                        #
+//#  Auteur  : RastaPopoulos                                     #
+//#  Licence : GPL                                               #
+//#--------------------------------------------------------------#
+//#  Documentation : https://contrib.spip.net/Plugin-Etiquettes  #
+//#                                                              #
+//#  Javascript commun du plugin                                 #
+//#--------------------------------------------------------------#
 
 
 
@@ -109,29 +109,32 @@ function appliquer_etiquettes_aide_nuage(input, nuage){
 
 // Nouvelle méthode pour les tableaux
 // Retourne la première occurence correspondant, sinon false
-Array.prototype.contains = function (ele) {
-	for (var i = 0; i < this.length; i++) {
-		if (this[i] == ele) {
-			return true;
-		}
-	}
-	return false;
-};
+Object.defineProperty(Array.prototype, 'contains', {
+		value: function (ele) {
+			for (var i = 0; i < this.length; i++) {
+				if (this[i] == ele) {
+					return true;
+				}
+			}
+			return false;
+		},
+});
 
-// Nouvelle méthode pour les tableaux
-// Supprime un élément d'un talbeau
+// Supprime un élément d'un tableau
 // qu'il y soit une ou plusieurs fois
-Array.prototype.remove = function (ele) {
-	var arr = new Array();
-	var count = 0;
-	for (var i = 0; i < this.length; i++) {
-		if (this[i] != ele) {
-			arr[count] = this[i];
-			count++;
-		}
-	}
-	return arr;
-};
+Object.defineProperty(Array.prototype, 'remove', {
+		value: function (ele) {
+			var arr = new Array();
+			var count = 0;
+			for (var i = 0; i < this.length; i++) {
+				if (this[i] != ele) {
+					arr[count] = this[i];
+					count++;
+				}
+			}
+			return arr;
+		},
+});
 
 // Découpe une chaîne en un tableau de mots
 function splittags(txt) {
