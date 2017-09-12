@@ -9,6 +9,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'alt_logo_conf' => 'Logo du plugin Notifications',
+
+	// 0
+	'0' => '--------------',
+
+	// A
 	'article_prive' => 'Publication d’articles',
 	'article_prive_admins_restreints' => '<strong>Administrateurs restreints</strong> : Les administrateurs restreints reçoivent les notifications lors de proposition d’articles dans leur rubrique. Pour les administrateurs généralistes, voir <a href="?exec=configurer_interactions#suivi_edito_non">l’outil par défaut de SPIP</a>.',
 	'article_prive_auteurs' => '<strong>Auteurs</strong> : les auteurs reçoivent les notifications lors de la proposition, publication ou suppression de leur(s) article(s).',
@@ -99,8 +104,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_a_valider' => 'Message à valider : ',
-	'message_fin_label' => 'Message en fin d’email : ',
 	'message_fin_explication' => 'Message qui sera affiché en fin d’email (permettant d’indiquer pourquoi les gens reçoivent ce mail, méthode de désabonnement…)',
+	'message_fin_label' => 'Message en fin d’email : ',
 	'message_spam_a_confirmer' => 'SPAM à confirmer : ',
 	'message_voir_configuration' => 'Voir la configuration des notifications',
 	'messagerie_interne' => 'Messagerie interne',
@@ -125,11 +130,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'suivis_perso_url_suivis' => '<strong>Ajouter une URL de suivi personnalisé</strong> dans chacun des emails de notification. À partir de cette URL, l’utilisateur pourra configurer ses préférences individuelles de notification.',
 	'suivis_public_article_thread' => 'TODO : case à cocher sur chaque article/thread',
 	'suivis_public_changer_email' => 'TODO : changer d’email',
-
-	// 0
-	'0' => '--------------',
-
-	// S
 	'suivis_public_description' => 'Vous pourrez (quand ce sera fonctionnel...) y retrouver tous vos messages de forum, obtenir un fil RSS des réponses qui y seront apportées, choisir votre mode de notification, etc.',
 	'suivis_public_notif_desactiver' => 'TODO : case à cocher pour ne plus recevoir de notifications',
 	'suivis_public_vos_forums' => 'Vos forums',
