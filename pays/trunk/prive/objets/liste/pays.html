@@ -15,7 +15,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_pays(PAYS){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num nom},#GET{defaut_tri}}{par nom}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_pays(PAYS){id_pays?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num nom},#GET{defaut_tri}}{par nom}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{pays-16.png}|balise_img)]</td>
 			<td class='nom principale'>[(#LOGO_PAYS|image_reduire{20,26})]<a href="[(#ID_PAYS|generer_url_entite{pays})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PAYS">[(#RANG). ]#NOM</a></td>
