@@ -41,13 +41,15 @@ function findPos(obj) {
 jQuery(document).ready(function() {
 	if (configCrayons.cfg.yellow_fade) {
 		// Activer le Yellow Fade pour les elements editables
-		jQuery("div.crayon").hover(function(){doBGFade(this,[255,255,180],[255,255,255],'transparent',40,20,4);}, function(){});
+		jQuery(document).on('mouseenter', '.crayon-autorise', function(){
+			doBGFade(this,[255,255,180],[255,255,255],'transparent',40,20,4);
+		});
 	}
 
 	if (configCrayons.cfg.filet) {
 		// on rajoute une div supplémentaire qui se cale avec la div courante 
 		// C'est elle qui va s'afficher lors du hover
-		
+
 		// esthetique
 		jQuery('.crayon-icones img',this).css({
 			'padding':'2px',
@@ -55,9 +57,9 @@ jQuery(document).ready(function() {
 			'border-left':'0',
 			'background-color':'#FFF'
 		});
-			
+
 		var test=0;
-		
+
 		jQuery('.crayon-autorise').each(
 			function(){
 				var contenu = jQuery(this).html();
