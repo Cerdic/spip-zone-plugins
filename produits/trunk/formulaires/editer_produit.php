@@ -69,7 +69,7 @@ function formulaires_editer_produit_saisies_dist($id_produit = 'new', $id_rubriq
 					'produits:produit_champ_taxe_explication',
 					array('taxe' => $taxe_defaut.'&nbsp;&#37;')
 				),
-				'inserer_fin' => '<span>&nbsp;&#37;</span>'
+				'inserer_fin' => '<span class="pourcent">&nbsp;&#37;</span>'
 			),
 			'verifier' => array(
 				'type' => 'decimal'
