@@ -20,6 +20,7 @@
 	<necessite nom="saisies" compatibilite="[2.0.3;]" />
 	<necessite nom="spip_bonux" compatibilite="[3.2.0;]" />
 	<necessite nom="cvtupload" compatibilite="[1.11.2;]" />
+	<utilise nom="bonux_logo" compatibilite="[1.0.0;]" />
 
 	<pipeline nom="jquery_plugins" inclure="uploadhtml5_pipelines.php" />
 	<pipeline nom="insert_head_css" inclure="uploadhtml5_pipelines.php" />
