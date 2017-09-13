@@ -300,8 +300,9 @@ function nospam_pre_edition($flux) {
 		// sauf si le posteur a de toute facon le pouvoir de moderer et de se publier
 		include_spip('inc/autoriser');
 		if (
-			in_array($flux['data']['statut'], array('prop', 'publie'))
-			AND (!isset($GLOBALS['visiteur_session']['statut']) OR !autoriser('modererforum'))
+			!empty($flux['data']['statut'])
+			and in_array($flux['data']['statut'], array('prop', 'publie'))
+			and (!isset($GLOBALS['visiteur_session']['statut']) OR !autoriser('modererforum'))
 		) {
 			// verifier le status de cette IP
 			nospam_check_ip_status($GLOBALS['ip']);
