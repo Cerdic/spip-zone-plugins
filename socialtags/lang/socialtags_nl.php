@@ -11,6 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_activer_javascript' => 'Activeer Javascript.',
+	'cfg_afterorappend' => 'Plaatsing:',
+	'cfg_afterorappend_exp' => 'Invoegen na het selectieblok (standaardwaarde) of erin?',
 	'cfg_badge_fb' => 'Facebook Badge/Widget',
 	'cfg_badge_fb_existe' => 'Wanneer je een Facebook Badge hebt (<a href="http://www.facebook.com/facebook-widgets/" class="spip_out">kijk op de Facebook site</a>), geef dan hieronder de inhoud, in JS of in HTML.',
 	'cfg_badge_html' => 'HTML Badge',
@@ -41,6 +43,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_noisette_badge_facebook' => 'Toon de gedefinieerde Facebook badge op de configuratiebladzijde',
 	'description_noisette_facebook_like' => 'Toon de Facebook <b>Like</b> of <b>Aanbeveel</b> knop en eventueel de <b>Verzend</b> knop',
 	'description_noisette_facebook_like_box' => 'Toon de Facebook <b>Like</b> box. Ze toont het aantal fans voor pagina',
+
+	// I
+	'item_after' => 'In het blok',
+	'item_append' => 'Erna',
 
 	// N
 	'noisette_action_like' => 'Like',
