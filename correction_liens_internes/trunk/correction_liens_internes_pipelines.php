@@ -91,6 +91,13 @@ function correction_liens_internes_correction($texte){
 		}
 		else{
 			list ($objet, $id_objet,$ancre) = correction_liens_internes_correction_url_public($mauvaise_url_reelle,$composants_url);
+			spip_log($mauvaise_url_reelle, 'test.'._LOG_ERREUR);
+			spip_log($objet, $id_objet,$ancre, 'test.'._LOG_ERREUR);
+		}
+		if (!$objet && !$id_objet && strpos($mauvaise_url_reelle, str_replace(_DIR_RACINE, '', _DIR_IMG)) != false) {
+			$url_doc = str_replace(array(url_de_base(), str_replace(_DIR_RACINE, '', _DIR_IMG)), '', $mauvaise_url_reelle);
+			$id_objet = sql_getfetsel('id_document', 'spip_documents', 'fichier='.sql_quote($url_doc));
+			$objet = 'document';
 		}
 		if($objet && $id_objet){
 			if(isset($racc[$objet])){
