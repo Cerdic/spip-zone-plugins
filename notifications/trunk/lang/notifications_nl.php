@@ -11,6 +11,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'alt_logo_conf' => 'Logo van plugin Notifications',
+
+	// 0
+	'0' => '--------------',
+
+	// A
 	'article_prive' => 'Publicatie van artikelen',
 	'article_prive_admins_restreints' => '<strong>Beperkte beheerders</strong>: Beperkte beheerders ontvangen notificaties bij voorstellen voor publicatie in hun rubriek. Voor algehele beheerders kijk je bij <a href="?exec=configurer_interactions#suivi_edito_non">  de standaard tool van SPIP</a>.',
 	'article_prive_auteurs' => '<strong>Auteurs</strong>: Auteurs ontvangen notificaties bij het voorstellen, publiceren of verwijderen van hun artikel(en).',
@@ -99,6 +104,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_a_valider' => 'Te valideren bericht: ',
+	'message_fin_explication' => 'Boodschap aan het eind van de email (om bijvoorbeeld aan te geven waarom deze email werd verzonden, of hoe je kunt uitschrijven, enz.)',
+	'message_fin_label' => 'Boodschap aan het eind van de email: ',
 	'message_spam_a_confirmer' => 'Aan te duiden als SPAM: ',
 	'message_voir_configuration' => 'Bekijk de configuratie van de notificaties',
 	'messagerie_interne' => 'Intern berichtensysteem',
@@ -123,11 +130,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'suivis_perso_url_suivis' => '<strong>Zet een aangepaste URL</strong> in de notificatie-emails. Aan de hand van deze URL kan de gebruiker zijn persoonlijke notificatie-instellingen aanpassen.',
 	'suivis_public_article_thread' => 'TODO: keuze op ieder artikel/draad',
 	'suivis_public_changer_email' => 'TODO: email veranderen',
-
-	// 0
-	'0' => '--------------',
-
-	// S
 	'suivis_public_description' => 'Je kunt hier (zodra dit werkt...) al je forumberichten terugvinden, een RSS-feed krijgen van alle reacties, jouw wijze van notificatie kiezen, enz.',
 	'suivis_public_notif_desactiver' => 'TODO: aankruisen om geen notificaties meer te ontvangen',
 	'suivis_public_vos_forums' => 'Je forums',
