@@ -148,6 +148,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_valeur_oui_explication' => 'Geposte waarde wanneer de checkbox is geselecteerd',
 	'option_valeur_oui_label' => 'Waarde oui',
 
+	// P
+	'plugin_yaml_inactif' => 'Plugin YAML is inactief. Je moet hem activeren om deze pagina te kunnen laten functioneren.',
+
 	// S
 	'saisie_auteurs_explication' => 'Laat je een of meer auteurs kiezen',
 	'saisie_auteurs_titre' => 'Auteurs',
@@ -196,6 +199,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_textarea_titre' => 'Textarea',
 
 	// T
+	'titre_page_saisies_doc' => 'Documentatie van saisies',
 	'tous_visiteurs' => 'Alle bezoekers (ook niet-geregistreerde)',
 	'tout_selectionner' => 'Alles/niets selecteren',
 
