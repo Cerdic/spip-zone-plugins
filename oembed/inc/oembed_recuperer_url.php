@@ -78,6 +78,8 @@ function inc_oembed_recuperer_url($oembed_url, $url, $format) {
 	if ($data) {
 		if ($format == 'json') {
 			$data = json_decode($data, true);
+			$data['oembed_url_source'] = $url;
+			$data['oembed_url'] = $oembed_url;
 		}
 		// TODO : format xml
 		//if ($format == 'xml')

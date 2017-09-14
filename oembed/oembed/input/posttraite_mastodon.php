@@ -38,13 +38,10 @@ function oembed_input_posttraite_mastodon_dist($data) {
 		$iframe_cor = vider_attribut($iframe, 'height');
 		$iframe_cor = vider_attribut($iframe_cor, 'scrolling');
 		$iframe_cor = vider_attribut($iframe_cor, 'style');
-
 		$data['html'] = str_replace($data['html'], $iframe, $iframe_cor);
-		$src = extraire_attribut($iframe_cor, 'src');
-
 
 		$oembed_recuperer_url = charger_fonction('oembed_recuperer_url', 'inc');
-		$url = preg_replace(',/embed$,','', $src);
+		$url = parametre_url($data['oembed_url'],'url');
 		$src_atom = $url.'.atom';
 		if ($xml = $oembed_recuperer_url($src_atom, $src_atom, 'xml')) {
 
@@ -59,7 +56,7 @@ function oembed_input_posttraite_mastodon_dist($data) {
 			$screen_name = emojify($data['author_name'], $need_emoji);
 
 			$contexte = array(
-				'url' => $url,
+				'url' => $data['oembed_url_source'],
 				'width' => $data['width'],
 				'height' => $data['height'],
 				'author_screen_name' => $screen_name,
