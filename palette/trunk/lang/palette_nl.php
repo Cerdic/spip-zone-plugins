@@ -13,8 +13,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_desc' => '<strong>Palette</strong> laadt automatisch
 		een kleurselectie toe aan een invoerveld
 		door hem eenvoudig de CSS class « palette » te geven',
-	'config_exemple' => 'Voorbeeld:', # MODIF
+	'config_exemple' => 'Voorbeelden van het oproepen van het palet',
+	'config_exemple_code_source' => 'Broncode van de voorbeelden',
+	'config_exemple_couleur' => 'Normale kleur',
+	'config_exemple_couleur_alpha' => 'Kleur met transparantie',
+	'config_exemples_couleurs_vides' => 'Zonder standaardwaarde op het veld',
 	'config_lien_doc' => '<a href="https://contrib.spip.net/Palette" class="spip_out">Zie documentatie</a>',
+	'config_titre' => 'Configureer de palet kleurenkeuze.',
 
 	// F
 	'fermer' => 'Sluit het palet',
