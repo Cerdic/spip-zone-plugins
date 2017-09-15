@@ -46,7 +46,10 @@ function notifications_forumvalide_dist($quoi, $id_forum, $options) {
 	// Qui va-t-on prevenir ?
 	$tous = array();
 	// Ne pas ecrire au posteur du message, ni au moderateur qui valide le forum,
-	$pasmoi = array($t['email_auteur'], $GLOBALS['visiteur_session']['email']);
+	$pasmoi = array($t['email_auteur']);
+	if (!empty($GLOBALS['visiteur_session']['email'])) {
+		$pasmoi[] = $GLOBALS['visiteur_session']['email'];
+	}
 
 	// 1. Les auteurs de l'objet lie au forum
 	// seulement ceux qui n'ont
