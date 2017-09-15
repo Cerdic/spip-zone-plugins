@@ -7,6 +7,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// D
+	'data_choix' => 'Choix possibles :',
+
 	// E
 	'erreur_code_postal' => 'Ce code postal est incorrect.',
 	'erreur_comparaison_egal' => 'La valeur doit être égale au champ "@nom_champ@".',
@@ -127,7 +130,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_url_type_protocole_web' => 'Protocoles web : http ou https',
 	'option_url_type_protocole_webcal' => 'Protocoles webcal: webcal, http ou https',
 
+	// P
+	'par_defaut' => 'Par défaut :',
+
 	// T
+	'titre_page_verifier_doc' => 'Documentation de l\'API de vérification',
 	'type_code_postal' => 'Code postal',
 	'type_code_postal_description' => 'Vérifie que la valeur est un code postal valide.',
 	'type_comparaison_champ' => 'Comparaison',
@@ -161,5 +168,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_telephone' => 'Numéro de téléphone',
 	'type_telephone_description' => 'Vérifie que le numéro de téléphone correspond à un schéma reconnu.',
 	'type_url' => 'URL',
-	'type_url_description' => 'Vérifie que l’url correspond à un schéma reconnu.'
+	'type_url_description' => 'Vérifie que l’url correspond à un schéma reconnu.',
+
+	// V
+	'verification_a_faire' => 'Vérification à effectuer :',
 );

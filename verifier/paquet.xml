@@ -1,7 +1,7 @@
 <paquet
 	prefix="verifier"
 	categorie="outil"
-	version="1.6.8"
+	version="1.6.9"
 	etat="stable"
 	compatibilite="[2.0.10;3.2.*]"
 	logo="images/verifier-128.png"
@@ -18,6 +18,8 @@
 	<traduire module="verifier" reference="fr" gestionnaire="salvatore" />
 
 	<pipeline nom="verifier" action="" />
+
+	<menu nom="verifier_doc" titre="verifier:titre_page_verifier_doc" parent="menu_developpement"  icone="images/verifier-16.png" />
 
 	<necessite nom="saisies" compatibilite="[1.40.0;]" />
 	<utilise nom="yaml" compatibilite="[1.5.0;]" />

@@ -1,0 +1,9 @@
+<B_verifier>
+	<div class="navigation">
+		<ul class="liste_items sous_navigation">
+		<BOUCLE_verifier (DATA) {source table, #VAL{verifier}|verifier_lister_disponibles} {si #VAL{_DIR_PLUGIN_YAML}|defined}>
+				<li class="item"><a href="#[verifier_(#CLE)]" class="bando2_verifier_[(#CLE)]">[(#TITRE)] [((#CLE))]</a></li>
+		</BOUCLE_verifier>
+		</ul>
+	</div>
+</B_verifier>
