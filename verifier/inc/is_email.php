@@ -179,6 +179,7 @@ if (!defined('ISEMAIL_VALID')) {
  * 					NB Note the difference between $errorlevel = false and
  * 					$errorlevel = 0
  * @param array		$parsedata	If passed, returns the parsed address components
+ * @return bool|int
  */
 /*.mixed.*/ function is_email($email, $checkDNS = false, $errorlevel = false, &$parsedata = array()) {
 	// Check that $email is a valid address. Read the following RFCs to understand the constraints:

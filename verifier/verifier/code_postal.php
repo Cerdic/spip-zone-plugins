@@ -53,7 +53,6 @@ function verifier_code_postal_dist($valeur, $options = array()) {
 		case 'MX':// Mexique
 		case 'ME':// Montenegro
 		case 'LK':// Sri lanka
-		case 'MX':// Mexique
 		case 'UA':// Ukraine
 			// 5 chiffres
 			if (!preg_match(',^[0-9]{5}$,', $valeur)) {

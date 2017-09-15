@@ -17,6 +17,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function inc_verifier_dist($valeur, $type, $options = null, &$valeur_normalisee = null) {
 
+	$erreur = array();
 	// On vérifie que les options sont bien un tableau
 	if (!is_array($options)) {
 		$options = array();

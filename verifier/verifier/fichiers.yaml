@@ -1,6 +1,6 @@
 
 titre: '<:verifier:type_fichiers:>'
-description: '<:verifier:type_fichiers_descriptions>:'
+description: '<:verifier:type_fichiers_description:>'
 options:
   -
     saisie: 'radio'

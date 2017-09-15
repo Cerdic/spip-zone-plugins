@@ -24,7 +24,8 @@
 		<action></action>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.10;3.2.99]" />
-	<utilise id="yaml" />
+	<necessite id="saisies" version="[1.40.0;]" />
+	<utilise id="yaml" version="[1.5.0;]" />
 	<categorie>outil</categorie>
 	<traduire gestionnaire="salvatore" module="verifier" reference="fr" />
 </plugin>
