@@ -76,7 +76,7 @@ function formulaires_langonet_traduire_traiter() {
 
                    // cible
                    if (_request('champ-' . $item_cle) && $nouvelle_traduction) {
-                        $cible = _request('champ-' . $item_cle );
+                        $cible = trim(_request('champ-' . $item_cle ));
                    } else if (isset($resultats_cible['items'][$item_cle]['traduction'])) {
                         $cible = $resultats_cible['items'][$item_cle]['traduction'];
                    } else {
@@ -87,7 +87,7 @@ function formulaires_langonet_traduire_traiter() {
                                             'source' => $source,
                                             'etat' => 'ok'
                    );
-                   $items_simples[$item_cle] = _request('champ-' . $item_cle );
+                   $items_simples[$item_cle] = trim(_request('champ-' . $item_cle ));
         }
 
         // Etape éditions ?

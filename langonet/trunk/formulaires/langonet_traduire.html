@@ -36,13 +36,9 @@
 					<div class="langonet-champ"><strong>:: #CLE ::</strong></div>
 					[(#SET{source,[(#VALEUR**|table_valeur{source}|entites_html)]})]
 					[(#SET{cible,[(#VALEUR**|table_valeur{traduction}|entites_html)]})]
-					<textarea name="source-#CLE" class="langonet-champ-source">
-						[(#GET{source})]
-					</textarea>
-					[(#GET{cible}|=={""}|oui)  [(#SET{cible,#GET{source}})]  ]
-					<textarea name="champ-#CLE" class="langonet-champ-edit [(#GET{cible}|=={#GET{source}}|?{langonet-champ-identique,langonet-champ-ok})]">
-						[(#GET{cible})]
-					</textarea>
+					<textarea name="source-#CLE" class="langonet-champ-source">[(#GET{source})]</textarea>
+					[(#GET{cible}|=={""}|oui)[(#SET{cible,#GET{source}})]]
+					<textarea name="champ-#CLE" class="langonet-champ-edit [(#GET{cible}|=={#GET{source}}|?{langonet-champ-identique,langonet-champ-ok})]">[(#GET{cible})]</textarea>
 				</td>
 			</tr>
 	</BOUCLE_items>
