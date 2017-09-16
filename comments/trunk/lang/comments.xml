@@ -43,8 +43,9 @@
 	</langue>
 	<langue code="pt" url="https://trad.spip.net/tradlang_module/comments?lang_cible=pt" total="37" traduits="20" relire="0" modifs="1" nouveaux="16" pourcent="54.05">
 	</langue>
-	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/comments?lang_cible=pt_br" total="37" traduits="36" relire="0" modifs="1" nouveaux="0" pourcent="97.30">
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/comments?lang_cible=pt_br" total="37" traduits="37" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="BrainDamage" lien="https://trad.spip.net/auteur/braindamage" />
+		<traducteur nom="filipaun" lien="https://trad.spip.net/auteur/filipaun" />
 		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
 	<langue code="ru" url="https://trad.spip.net/tradlang_module/comments?lang_cible=ru" total="37" traduits="35" relire="0" modifs="1" nouveaux="1" pourcent="94.59">
