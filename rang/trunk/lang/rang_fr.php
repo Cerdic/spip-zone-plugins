@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_parametrages' => 'Paramétrages',
 
 	// I
-	'info_id' => 'Id',
+	'info_id' => 'ID',
 	'info_rang' => 'N<sup>o</sup>.',
 	'info_rang_abbr' => 'N<sup>o</sup>',
 	
