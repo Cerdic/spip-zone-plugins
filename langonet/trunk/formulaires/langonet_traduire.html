@@ -33,7 +33,7 @@
 	<BOUCLE_items(DATA){source tableau,#GET{items}}>
 			<tr>
 				<td>
-					<div class="langonet-champ"><strong>:: #CLE ::</strong></div>
+					<div class="langonet-champ"><strong>::&nbsp;#CLE&nbsp;::</strong></div>
 					[(#SET{source,[(#VALEUR**|table_valeur{source}|entites_html)]})]
 					[(#SET{cible,[(#VALEUR**|table_valeur{traduction}|entites_html)]})]
 					<textarea name="source-#CLE" class="langonet-champ-source">[(#GET{source})]</textarea>

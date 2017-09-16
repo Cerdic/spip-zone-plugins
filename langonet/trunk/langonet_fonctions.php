@@ -2,6 +2,22 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+if (!defined('_LANGONET_DOSSIERS_EXCLUS')) {
+	/**
+	 * Permet de définir les arborescences à exclure du scna des fichiers de langue.
+	 * Les arborescences sont exprimées par une chaine simple (ecrire, plugins_dist, plugins...).
+	 * Le délimiteur est le ':'.
+	 * Les valeurs sont :
+	 * - ecrire
+	 * - prive
+	 * - squelettes_dist
+	 * - plugins
+	 * - plugins_dist
+	 * - plugins_suppl
+	 * - squelettes
+	 */
+	define('_LANGONET_DOSSIERS_EXCLUS', '');
+}
 
 /**
  * Creation de la liste des fichiers de langue generes
@@ -27,13 +43,14 @@ function langonet_lister_fichiers_lang($operation='generation') {
  *
  * @param string $fichier
  * @param string $type
- * @return array
+ * @param string $action
+ * @return string
  */
 
 function langonet_creer_bulle_fichier($fichier, $type='lang', $action='telecharger') {
 
 	// Date du fichier formatee
-	$date = affdate_heure(date('Y-m-d H:i:s', filemtime($fichier)), 'Y-m-d H:i:s');
+	$date = affdate_heure(date('Y-m-d H:i:s', filemtime($fichier)));
 	// Bulle d'information suivant le type de fichier (log ou langue)
 	$bulle = _T('langonet:bulle_' . $action . '_fichier_' . $type, array('date' => $date));
 
@@ -117,23 +134,43 @@ function langonet_cadrer_expression($expression, $colonne, $ligne, $fichier, $ca
 function creer_selects($sel_l='0',$sel_d=array(), $exclure_paquet=true, $multiple=true) {
 	include_spip('inc/outiller');
 
+	// On récupère la liste des dossiers exclus du scan.
+	$rep_exclus = explode(':', _LANGONET_DOSSIERS_EXCLUS);
+
 	// Recuperation des repertoires des plugins par défaut
-	$rep_plugins = lister_dossiers_plugins();
+	$rep_plugins = !in_array('plugins', $rep_exclus)
+		? lister_dossiers_plugins()
+		: array();
 	// Recuperation des repertoires des extensions : _DIR_PLUGINS_DIST à partir de SPIP 3
-	$rep_extensions = lister_dossiers_plugins(_DIR_PLUGINS_DIST);
+	$rep_extensions = !in_array('plugins_dist', $rep_exclus)
+		? lister_dossiers_plugins(_DIR_PLUGINS_DIST)
+		: array();
 	// Recuperation des repertoires des plugins supplémentaires en mutualisation : _DIR_PLUGINS_SUPPL
-	$rep_suppl = defined('_DIR_PLUGINS_SUPPL') ? lister_dossiers_plugins(_DIR_PLUGINS_SUPPL) : array();
+	$rep_suppl = (!in_array('plugins_suppl', $rep_exclus) and defined('_DIR_PLUGINS_SUPPL'))
+		? lister_dossiers_plugins(_DIR_PLUGINS_SUPPL)
+		: array();
 	// Recuperation des repertoires squelettes perso
 	$rep_perso = array();
-	$perso = strlen($GLOBALS['dossier_squelettes']) ? explode(':', $GLOBALS['dossier_squelettes']) : array('squelettes');
-	foreach($perso as $_rep) {
-		if (is_dir(_DIR_RACINE . $_rep))
-			$rep_perso[] = $_rep;
+	$perso = !in_array('squelettes', $rep_exclus)
+		? (strlen($GLOBALS['dossier_squelettes']) ? explode(':', $GLOBALS['dossier_squelettes']) : array('squelettes'))
+		: array();
+	if ($perso) {
+		foreach($perso as $_rep) {
+			if (is_dir(_DIR_RACINE . $_rep))
+				$rep_perso[] = $_rep;
+		}
 	}
 	// Recuperation des repertoires SPIP
-	$rep_spip[] = rtrim(_DIR_RESTREINT_ABS, '/');
-	$rep_spip[] = 'prive';
-	$rep_spip[] = 'squelettes-dist';
+	$rep_spip = array();
+	if (!in_array('ecrire', $rep_exclus)) {
+		$rep_spip[] = rtrim(_DIR_RESTREINT_ABS, '/');
+	}
+	if (!in_array('prive', $rep_exclus)) {
+		$rep_spip[] = 'prive';
+	}
+	if (!in_array('squelettes_dist', $rep_exclus)) {
+		$rep_spip[] = 'squelettes-dist';
+	}
 	$rep_scan = array_merge($rep_perso, $rep_plugins, $rep_suppl, $rep_extensions, $rep_spip);
 
 	// construction des <select>

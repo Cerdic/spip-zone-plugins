@@ -6,7 +6,7 @@
 
     #SET{items,''}
     [(#ENV*{message_ok}|table_valeur{items}|oui)
-                [(#SET{items,#ENV*{message_ok}|table_valeur{items}})]
+		[(#SET{items,#ENV*{message_ok}|table_valeur{items}})]
     ]
 
 	<form method='post' action='#ENV{action}'><div>
