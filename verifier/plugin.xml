@@ -9,7 +9,7 @@
 	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
 	<icon>images/verifier-128.png</icon>
 	<licence>GPL v3</licence>
-	<version>1.6.9</version>
+	<version>1.6.10</version>
 	<etat>stable</etat>
 	<description>
 		<multi>
@@ -24,7 +24,6 @@
 		<action></action>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.10;3.2.99]" />
-	<necessite id="saisies" version="[1.40.0;]" />
 	<utilise id="yaml" version="[1.5.0;]" />
 	<categorie>outil</categorie>
 	<traduire gestionnaire="salvatore" module="verifier" reference="fr" />
