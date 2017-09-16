@@ -131,10 +131,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_url_type_protocole_webcal' => 'Protocoles webcal: webcal, http ou https',
 
 	// P
-	'par_defaut' => 'Par défaut :',
+	'par_defaut' => 'Par défaut :',
 
 	// T
-	'titre_page_verifier_doc' => 'Documentation de l\'API de vérification',
+	'titre_page_verifier_doc' => 'Documentation de l’API de vérification',
 	'type_code_postal' => 'Code postal',
 	'type_code_postal_description' => 'Vérifie que la valeur est un code postal valide.',
 	'type_comparaison_champ' => 'Comparaison',
@@ -171,5 +171,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_url_description' => 'Vérifie que l’url correspond à un schéma reconnu.',
 
 	// V
-	'verification_a_faire' => 'Vérification à effectuer :',
+	'verification_a_faire' => 'Vérification à effectuer :'
 );
