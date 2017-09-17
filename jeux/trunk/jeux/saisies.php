@@ -183,7 +183,7 @@ function jeux_saisies($texte, $indexJeux, $form=true) {
 	$id_jeu = _request('id_jeu');
 
 	// parcours des [separateurs]
-	$tableau = jeux_split_texte('jeux_saisies', $texte);
+	$tableau = jeux_split_texte('saisies', $texte);
 	foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
 	  elseif ($valeur==_JEUX_TEXTE && strlen($tableau[$i+1])) $html .= '<div class="jeux_saisies_texte">'.$tableau[$i+1].'</div>';
