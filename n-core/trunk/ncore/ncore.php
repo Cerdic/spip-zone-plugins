@@ -267,8 +267,16 @@ function ncore_noisette_stocker($plugin, $action, $description, $stockage = '') 
 			// -- les informations identifiant sont toujours fournies, à savoir, l'id, le squelette et le rang.
 			// -- on utilise le squelette et le rang pour se positionner sur la noisette concernée.
 			// -- pour un changement de rang il faut mettre à jour toute la description.
+			//    -> Il faut traiter le cas où la fonction de déplacement stocke temporairement la noisette déplacée
+			//       au rang 0 qui n'est jamais utilisé autrement. Si l'index 0 n'est pas utilisé c'est la sauvegarde
+			//       si l'index est déjà utilisé il faut le supprimer
 			if (!isset($noisettes[$description['squelette']][$description['rang']])) {
+				// Cas cas est forcément un changement de rang.
 				$noisettes[$description['squelette']][$description['rang']] = $description;
+				// On regarde si la valeur temporaire rang=0 est présente, alors on la supprime.
+				if ($description['rang'] and isset($noisettes[$description['squelette']][0])) {
+					unset($noisettes[$description['squelette']][0]);
+				}
 			} else {
 				$noisettes[$description['squelette']][$description['rang']] = array_merge(
 					$noisettes[$description['squelette']][$description['rang']],
@@ -286,6 +294,13 @@ function ncore_noisette_stocker($plugin, $action, $description, $stockage = '') 
 	return $noisette;
 }
 
+/**
+ * @param        $plugin
+ * @param        $description
+ * @param string $stockage
+ *
+ * @return bool
+ */
 function ncore_noisette_destocker($plugin, $description, $stockage = '') {
 
 	// Initialisation de la sortie.
