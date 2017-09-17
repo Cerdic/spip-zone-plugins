@@ -9,7 +9,9 @@
  * @package    SPIP\Rang\Fonctions
  */
 
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * réordonner les rangs de la liste suite à un nouveau classement

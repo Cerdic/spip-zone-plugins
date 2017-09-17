@@ -9,8 +9,9 @@
  * @package    SPIP\Rang\Pipelines
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Declaration du champ Rang sur les objets sélectionnés
@@ -18,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param array $tables
  * @return array
  */
-function rang_declarer_tables_objets_sql($tables){
+function rang_declarer_tables_objets_sql($tables) {
 	include_spip('inc/config');
 
 	$rang_objets = rtrim(lire_config('rang/rang_objets'), ',');
@@ -36,7 +37,7 @@ function rang_declarer_tables_objets_sql($tables){
  * @param array $flux
  * @return array
  */
-function rang_recuperer_fond($flux){
+function rang_recuperer_fond($flux) {
 
 	$exec 		= _request('exec');
 
@@ -133,7 +134,7 @@ function rang_get_sources() {
  * @param array $flux
  * @return array
  */
-function rang_pre_edition($flux){
+function rang_pre_edition($flux) {
 
 	if($flux['args']['action']=='instituer' && $flux['data']['statut']=='publie' && lire_config('rang/rang_max')) {
 		

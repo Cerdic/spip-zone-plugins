@@ -4,9 +4,10 @@ TODO
 - au moment du choix d'un objet dans la config du plugin,  affecter automatiquement un rang
 - corrolaire : si un objet à des "num titre", traiter.
 - gérer les rubriques;
-- gérer les mots-clés;
+- gérer les objets qui ont un parent différent de rubrique. Ex. les mots-clés dont le parent est groupe de mot-clés. Le pré-requis est la résolution du ticket "Gérer la parenté dans la déclaration d'un objet éditorial" voir https://core.spip.net/issues/3844.
 - gérer le rang des liaisons (objets liés à un autre objet)(ex. : pouvoir ordonner la liste des mots clés d'un article)(Roland)
 - gérer les objets éditoriaux historiques de SPIP : brèves + sites ;
+-*<strike>Pourvoir gérer les documents</strike> : géré par Ordoc
 - que se passe t-il si on déplace un article d’une rubrique à une autre via Plan ?
 - Gestion du plugin Pages uniques ;
 - API (?) pour les plugins (Albums, Menus, Bank, etc.) ;

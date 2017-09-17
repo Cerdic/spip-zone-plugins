@@ -9,7 +9,9 @@
  * @package    SPIP\Rang\Fonctions
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * chercher les tables SPIP qui gèrent ou non des rubriques
@@ -53,7 +55,7 @@ function rang_objets_gere_rubrique($quoi) {
  * @return array
  *     note : sans ce return (a priori inutile, la fonction plante (???)
 **/
-function rang_objet_select($id_mot, $id_objet, $objet){
+function rang_objet_select($id_mot, $id_objet, $objet) {
 	$id_mot = intval($id_mot);
 	$id_objet = intval($id_objet);
 	$res = sql_countsel('spip_mots_liens', array("id_mot=$id_mot", "id_objet=$id_objet", "objet=$objet"));
