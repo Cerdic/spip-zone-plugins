@@ -216,7 +216,7 @@ function emplois_post_edition($flux) {
 			// récupérer le mail de l'internaute à qui envoyer la notification
 			$email_deposant = sql_getfetsel('email', $table, $id_table.'='.intval($id));
 
-			if ($email_deposant) {
+			if ($email_deposant AND in_array($flux['data']['statut'], array('publie', 'refuse'))) {
 				if ($flux['data']['statut'] == 'publie') {
 					$message = "Votre $type_sujet a été validé.";
 				}
@@ -232,7 +232,6 @@ function emplois_post_edition($flux) {
 
 				//zou, on envoi
 				$envoyer_mail($email_to,$sujet,$message,$email_from);
-
     		}
 
     }
