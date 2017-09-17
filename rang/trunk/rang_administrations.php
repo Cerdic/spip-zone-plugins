@@ -9,7 +9,9 @@
  * @package    SPIP\Rang\Installation
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -49,8 +51,7 @@ function rang_vider_tables($nom_meta_base_version) {
 		}
 	}
 
-	// Effacer les métas
-	effacer_meta('rang/rang_objets');
-	effacer_meta('rang/rang_max');
+	// Effacer les metas
+	effacer_meta('rang');
 	effacer_meta($nom_meta_base_version);
 }
