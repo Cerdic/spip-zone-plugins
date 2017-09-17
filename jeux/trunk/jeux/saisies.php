@@ -6,14 +6,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 #---------------------------------------------------#
 #  Plugin  : jeux                                   #
 #  Auteur  : Patrice Vanneufville, 2006             #
-#  Contact : patrice�.!vanneufville�@!laposte�.!net #
+#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
 #  Licence : GPL                                    #
 #--------------------------------------------------------------------------#
-#  Documentation : https://contrib.spip.net/Des-jeux-dans-vos-articles  #
+#  Documentation : https://contrib.spip.net/Des-jeux-dans-vos-articles     #
 #--------------------------------------------------------------------------#
 /*
 
-Insere �l�ment de formulaire dans vos articles !
+Insere élément de formulaire dans vos articles !
 ------------------------------------------------
 
 separateurs obligatoires : [texte], [saisie]
