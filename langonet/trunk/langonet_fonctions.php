@@ -11,7 +11,7 @@ if (!defined('_LANGONET_DOSSIERS_EXCLUS')) {
 	 * - ecrire
 	 * - prive
 	 * - squelettes_dist
-	 * - plugins
+	 * - plugins ou auto (pour plugins/auto uniquement)
 	 * - plugins_dist
 	 * - plugins_suppl
 	 * - squelettes
@@ -138,9 +138,18 @@ function creer_selects($sel_l='0',$sel_d=array(), $exclure_paquet=true, $multipl
 	$rep_exclus = explode(':', _LANGONET_DOSSIERS_EXCLUS);
 
 	// Recuperation des repertoires des plugins par défaut
-	$rep_plugins = !in_array('plugins', $rep_exclus)
-		? lister_dossiers_plugins()
-		: array();
+	if(in_array('auto', $rep_exclus)){
+		$rep_plugins = lister_dossiers_plugins();
+		foreach ($rep_plugins as $key => $rep_plugin) {
+			$rep_plugins[$key] = str_replace('auto/','',$rep_plugin);
+		}
+		$rep_auto = lister_dossiers_plugins(_DIR_PLUGINS_AUTO);
+		$rep_plugins = array_diff_assoc($rep_plugins, $rep_auto);
+	} else {
+		$rep_plugins = !in_array('plugins', $rep_exclus)
+			? lister_dossiers_plugins()
+			: array();
+	}
 	// Recuperation des repertoires des extensions : _DIR_PLUGINS_DIST à partir de SPIP 3
 	$rep_extensions = !in_array('plugins_dist', $rep_exclus)
 		? lister_dossiers_plugins(_DIR_PLUGINS_DIST)
