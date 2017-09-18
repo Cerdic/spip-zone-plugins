@@ -59,7 +59,10 @@ function incarner_renouveler_cle() {
 		$maj = array();
 	}
 
-	$nouvelle_cle = urlencode(bin2hex(openssl_random_pseudo_bytes(16)));
+	// Support de la fonction random_bytes pour PHP < 7.0
+	include_spip('lib/random_compat-2.0.10/lib/random');
+
+	$nouvelle_cle = urlencode(bin2hex(random_bytes(16)));
 
 	/* première incarnation */
 	if (! incarner_cle_valide($cle_actuelle)) {
