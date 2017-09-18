@@ -26,14 +26,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * intertitre_enrichis. Les images sont extraites du document .odt et sont prêtes
  * à être insérées dans le futur article SPIP.
  *
- * @param int $id_auteur Utilisateur courant
  * @param string $rep_dezip Répertoire où est dezippé le fichier odt
- * @return Array
+ * @param string $fichier_source Chemin du fichier source (permet d’affecter un titre si le document n’en a pas trouvé)
+ * @return array Couples (nom de champ d’article => valeur)
+ * @throws \Exception
  */
-function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip) {
+function inc_odt2spip_generer_sortie($rep_dezip, $fichier_source = '') {
 	// variables en dur pour xml en entree et xslt utilisee
-	// $xml_entre = $rep_dezip . 'content.xml';  // chemin du fichier xml a lire
-	$xml_entre = _DIR_TMP . 'odt2spip/' . $id_auteur . '/content.xml';  // chemin du fichier xml a lire
+	$xml_entre = $rep_dezip . 'content.xml';  // chemin du fichier xml a lire
 	$xslt_texte = _DIR_PLUGIN_ODT2SPIP . 'inc/odt2spip.xsl'; // chemin de la xslt a utiliser pour le texte
 
 	// determiner si le plugin enluminure_typo ou intertitres_enrichis est present & actif
@@ -67,7 +67,7 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip) {
 	// on est php5: utiliser les fonctions de la classe XSLTProcessor
 	// verifier que l'extension xslt est active
 	if (!class_exists('XSLTProcessor')) {
-		die(_T('odtspip:err_extension_xslt'));
+		throw new \Exception(_T('odtspip:err_extension_xslt'));
 	}
 	$proc = new XSLTProcessor();
 
@@ -82,7 +82,7 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip) {
 
 	// lancer le parseur
 	if (!$xml_sortie = $proc->transformToXml($xml)) {
-		die(_T('odtspip:err_transformation_xslt'));
+		throw new \Exception(_T('odtspip:err_transformation_xslt'));
 	}
 
 	// construire l'array des parametres de l'article
@@ -133,7 +133,7 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip) {
 
 	// si malgré toutes les magouille xslt la balise  <titre> est vide, mettre le nom du fichier odt
 	if ($Tarticle['titre'] == '') {
-		$Tarticle['titre'] = str_replace(array('_', '-', '.odt'), array(' ', ' ', ''), $fichier_zip);
+		$Tarticle['titre'] = str_replace(array('_', '-', '.odt'), array(' ', ' ', ''), basename($fichier_source));
 	}
 
 	// traiter les images: dans tous les cas il faut les integrer dans la table documents

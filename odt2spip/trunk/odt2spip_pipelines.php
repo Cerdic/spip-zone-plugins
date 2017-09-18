@@ -28,18 +28,46 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function odt2spip_affiche_gauche($flux) {
 	if (
-		$flux['args']['exec']=='rubrique'
+		$flux['args']['exec'] == 'rubrique'
 		and $id_rubrique = $flux['args']['id_rubrique']
 		and autoriser('ecrire')
 	) {
-		$out = recuperer_fond('formulaires/odt2spip', array('id_rubrique' => $id_rubrique, 'exec' => 'rubrique'));
+		$out = recuperer_fond(
+			'prive/squelettes/inclure/odt2spip',
+			array(
+				'objet' => 'rubrique',
+				'id_objet' => $id_rubrique,
+				'creer_objet' => 'article'
+			)
+		);
+		/*$out .= recuperer_fond(
+			'prive/squelettes/inclure/document2spip',
+			array(
+				'objet' => 'rubrique',
+				'id_objet' => $id_rubrique,
+				'creer_objet' => 'article'
+			)
+		);*/
 		$flux['data'] .= $out;
 	} elseif (
-		$flux['args']['exec']=='article'
+		$flux['args']['exec'] == 'article'
 		and $id_article = $flux['args']['id_article']
 		and autoriser('modifier', 'article', $id_article)
 	) {
-		$out = recuperer_fond('formulaires/odt2spip', array('id_article' => $id_article, 'exec' => 'article'));
+		$out = recuperer_fond(
+			'prive/squelettes/inclure/odt2spip',
+			array(
+				'objet' => 'article',
+				'id_objet' => $id_article
+			)
+		);
+		/*$out .= recuperer_fond(
+			'prive/squelettes/inclure/document2spip',
+			array(
+				'objet' => 'article',
+				'id_objet' => $id_article
+			)
+		);*/
 		$flux['data'] .= $out;
 	}
 	return $flux;
