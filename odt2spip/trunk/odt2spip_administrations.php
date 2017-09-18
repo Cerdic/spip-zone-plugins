@@ -1,11 +1,13 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction d'installation du plugin
  */
-function odt2spip_upgrade($nom_meta_base_version,$version_cible) {
+function odt2spip_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 	// Déclaration des valeurs par défaut de chaque variable de config
@@ -46,4 +48,3 @@ function odt2spip_vider_tables($nom_meta_base_version) {
 	effacer_meta('odt2spip');
 	effacer_meta($nom_meta_base_version);
 }
-?>

@@ -13,7 +13,9 @@
  * @version $Id$
  *
  */
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Création de l'article et redirection vers celui-ci
@@ -32,18 +34,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * content.xml : ce fichier est transformé par XSLT afin de générer un texte
  * utilisant les balises SPIP pour sa mise en forme.
  * }}
- * 
+ *
  */
 function action_odt2spip_importe() {
 	global $visiteur_session;
 
 	$id_auteur = $visiteur_session['id_auteur'];
 	$arg = _request('arg');
-	$args = explode(":", $arg);
+	$args = explode(':', $arg);
 
 	// le 1er élément de _request('arg') est id_rubrique=XXX ou id_article=YYY
 	$id_article = $id_rubrique = false;
-	$Targs = explode("=", $args[0]);
+	$Targs = explode('=', $args[0]);
 	$objet = $Targs[0];
 	$id_objet = intval($Targs[1]);
 	$objet == 'id_rubrique' ? $id_rubrique = $id_objet : $id_article = $id_objet;
@@ -51,52 +53,55 @@ function action_odt2spip_importe() {
 	$hash = _request('hash');
 
 	$redirect = _request('redirect');
-	if ($redirect == NULL) {
-		$redirect = "";
+	if ($redirect == null) {
+		$redirect = '';
 	}
 
-	include_spip("inc/securiser_action");
+	include_spip('inc/securiser_action');
 
-	if (
-		($id_rubrique AND !autoriser('creerarticledans', 'rubrique', $id_rubrique))
-		OR
-		($id_article AND !autoriser('modifier', 'article', $id_article))
-	)
+	if (($id_rubrique and !autoriser('creerarticledans', 'rubrique', $id_rubrique))
+		or
+		($id_article and !autoriser('modifier', 'article', $id_article))
+	) {
 		die(_T('avis_non_acces_page'));
+	}
 		
 	// ss-rep temporaire specifique de l'auteur en cours: tmp/odt2spip/id_auteur/
 	// => le créer s'il n'existe pas
-	$base_dezip = _DIR_TMP . "odt2spip/";	  // avec / final
-	if (!is_dir($base_dezip) AND !sous_repertoire(_DIR_TMP, 'odt2spip')) {
-		die (_T('odtspip:err_repertoire_tmp'));
+	$base_dezip = _DIR_TMP . 'odt2spip/';	  // avec / final
+	if (!is_dir($base_dezip) and !sous_repertoire(_DIR_TMP, 'odt2spip')) {
+		die(_T('odtspip:err_repertoire_tmp'));
 	}
 	$rep_dezip = $base_dezip . $id_auteur . '/';
-	if (!is_dir($rep_dezip) AND !sous_repertoire($base_dezip, $id_auteur)) {
-		die (_T('odtspip:err_repertoire_tmp'));
+	if (!is_dir($rep_dezip) and !sous_repertoire($base_dezip, $id_auteur)) {
+		die(_T('odtspip:err_repertoire_tmp'));
 	}
-    $rep_pictures = $rep_dezip."Pictures/";
-    
-	// paramètres de conversion de taille des images : cm -> px (en 96 dpi puisque c'est ce que semble utiliser Writer)
+	$rep_pictures = $rep_dezip.'Pictures/';
+
+	// paramètres de conversion de taille des images : cm -> px
+	// (en 96 dpi puisque c'est ce que semble utiliser Writer)
 	$conversion_image = 96/2.54;
-    
+
 	// traitement d'un fichier odt envoye par $_POST
 	$fichier_zip = addslashes($_FILES['fichier_odt']['name']);
-	if ($_FILES['fichier_odt']['name'] == '' 
-	    OR $_FILES['fichier_odt']['error'] != 0
-	    OR !move_uploaded_file($_FILES['fichier_odt']['tmp_name'], $rep_dezip . $fichier_zip)) {
+	if ($_FILES['fichier_odt']['name'] == ''
+		or $_FILES['fichier_odt']['error'] != 0
+		or !move_uploaded_file($_FILES['fichier_odt']['tmp_name'], $rep_dezip . $fichier_zip)) {
 		die(_T('odtspip:err_telechargement_fichier'));
 	}
 
 	// dezipper le fichier odt a la mode SPIP
-	include_spip("inc/pclzip");
+	include_spip('inc/pclzip');
 	$zip = new PclZip($rep_dezip . $fichier_zip);
 	$ok = $zip->extract(
-			PCLZIP_OPT_PATH, $rep_dezip,
-			PCLZIP_OPT_SET_CHMOD, _SPIP_CHMOD,
-			PCLZIP_OPT_REPLACE_NEWER
+		PCLZIP_OPT_PATH,
+		$rep_dezip,
+		PCLZIP_OPT_SET_CHMOD,
+		_SPIP_CHMOD,
+		PCLZIP_OPT_REPLACE_NEWER
 	);
 	if ($zip->error_code < 0) {
-		spip_log('charger_decompresser erreur zip ' . 
+		spip_log('charger_decompresser erreur zip ' .
 				$zip->error_code . ' pour fichier ' . $rep_dezip . $fichier_zip);
 		die($zip->errorName(true));	 //$zip->error_code
 	}
@@ -108,15 +113,16 @@ function action_odt2spip_importe() {
 
 	// si necessaire créer l'article
 	include_spip('action/editer_article');
-	if (!$id_article)
+	if (!$id_article) {
 		$id_article = article_inserer($id_rubrique);
+	}
 	
 	// le remplir
 	article_modifier($id_article, $Tarticle);
 
 	// si necessaire recup les id_doc des images associées et les lier à l'article
-	if (isset($Tarticle['Timages']) AND count($Tarticle['Timages']) > 0){
-		foreach($Tarticle['Timages'] as $id_img) {
+	if (isset($Tarticle['Timages']) and count($Tarticle['Timages']) > 0) {
+		foreach ($Tarticle['Timages'] as $id_img) {
 			$champs = array(
 				'parents' => array("article|$id_article"),
 				'statut' => 'publie'
@@ -132,17 +138,32 @@ function action_odt2spip_importe() {
 		if (!isset($ajouter_documents)) {
 			$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 		}
-		if ($id_document = $ajouter_documents('new',
-			array(array('tmp_name' =>  $rep_dezip . $fichier_zip, 'name' => $fichier_zip, 'titrer' => 0, 'distant' => 0, 'type' => 'document')),
-			'article', $id_article, 'document')
-			AND $id_doc_odt = intval($id_document[0])
-			AND $id_doc_odt == $id_document[0]) {
-				$c = array(
-					'titre' => $titre,
-					'descriptif' => _T('odtspip:cet_article_version_odt'),
-					'statut' => 'publie'
-					);
-				document_modifier($id_doc_odt, $c);
+		$id_document = $ajouter_documents(
+			'new',
+			array(
+				array(
+					'tmp_name' =>  $rep_dezip . $fichier_zip,
+					'name' => $fichier_zip,
+					'titrer' => 0,
+					'distant' => 0,
+					'type' => 'document'
+				),
+			),
+			'article',
+			$id_article,
+			'document'
+		);
+		if (
+			$id_document
+			and $id_doc_odt = intval($id_document[0])
+			and $id_doc_odt == $id_document[0]
+		) {
+			$c = array(
+				'titre' => $titre,
+				'descriptif' => _T('odtspip:cet_article_version_odt'),
+				'statut' => 'publie'
+			);
+			document_modifier($id_doc_odt, $c);
 		}
 	}
 
@@ -154,11 +175,11 @@ function action_odt2spip_importe() {
 	
 	// aller sur la page de l'article qui vient d'être créée
 	redirige_par_entete(
-			parametre_url(
-					str_replace("&amp;", "&", urldecode($redirect)),
-					'id_article', $id_article, '&'
-			)
+		parametre_url(
+			str_replace('&amp;', '&', urldecode($redirect)),
+			'id_article',
+			$id_article,
+			'&'
+		)
 	);
 }
-
-?>

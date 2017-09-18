@@ -11,7 +11,9 @@
  *
  *
  */
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Ajout une boite de creation d'un article à partir d'un fichier odt
@@ -24,20 +26,21 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param Array $flux Le code de la colonne gauche
  * @return Array Le code modifié
  */
-function odt2spip_affiche_gauche($flux){
-	if ($flux['args']['exec']=='rubrique'
-	  AND $id_rubrique = $flux['args']['id_rubrique']
-	  AND autoriser('ecrire')){
+function odt2spip_affiche_gauche($flux) {
+	if (
+		$flux['args']['exec']=='rubrique'
+		and $id_rubrique = $flux['args']['id_rubrique']
+		and autoriser('ecrire')
+	) {
 		$out = recuperer_fond('formulaires/odt2spip', array('id_rubrique' => $id_rubrique, 'exec' => 'rubrique'));
 		$flux['data'] .= $out;
-	}
-	elseif ($flux['args']['exec']=='article' 
-		AND $id_article = $flux['args']['id_article']
-		AND autoriser('modifier', 'article', $id_article)){
+	} elseif (
+		$flux['args']['exec']=='article'
+		and $id_article = $flux['args']['id_article']
+		and autoriser('modifier', 'article', $id_article)
+	) {
 		$out = recuperer_fond('formulaires/odt2spip', array('id_article' => $id_article, 'exec' => 'article'));
 		$flux['data'] .= $out;
 	}
 	return $flux;
 }
-
-?>
