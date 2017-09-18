@@ -1,0 +1,26 @@
+<div class="formulaire_spip formulaire_config formulaire_config_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:odtspip:defaut_attacher:></legend>
+			<ul>
+				<li class="editer_defaut_attacher">
+					<label><:odtspip:label_defaut_attacher:>:</label>
+					<div class="choix">
+						 <input type="radio" name="defaut_attacher" id="defaut_attacher_oui" value="oui"[(#ENV{defaut_attacher}|=={oui}|oui)checked="checked"] />
+						 <label for="defaut_attacher_oui"><:odtspip:oui:></label>
+					</div>
+					<div class="choix">
+						 <input type="radio" name="defaut_attacher" id="defaut_attacher_non" value="non"[(#ENV{defaut_attacher}|=={non}|oui)checked="checked"] />
+						 <label for="defaut_attacher_non"><:odtspip:non:></label>
+					</div>
+				</li>
+			</ul>
+		</fieldset>		
+
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_valider:>" /></p>
+	</div></form>
+</div>
