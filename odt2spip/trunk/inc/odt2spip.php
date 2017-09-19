@@ -5,11 +5,98 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
+ * Indique si la commande 'libreoffice' est disponible sur ce serveur
+ * @return bool
+ */
+function odt2spip_commande_libreoffice_disponible() {
+	static $est_disponible = null;
+	if (is_null($est_disponible)) {
+		if (defined('_LIBREOFFICE_PATH') and _LIBREOFFICE_PATH) {
+			$est_disponible = true;
+		} else {
+			$est_disponible = (bool)odt2spip_obtenir_commande_serveur('libreoffice');
+		}
+	}
+	return $est_disponible;
+}
+
+/**
+ * Obtient le chemin d'un executable sur le serveur.
+ *
+ * @param string $command
+ *     Nom de la commande
+ * @return string
+ *     Chemin de la commande
+ **/
+function odt2spip_obtenir_commande_serveur($command) {
+	static $commands = array();
+
+	if (array_key_exists($command, $commands)) {
+		return $commands[$command];
+	}
+
+	exec("which $command", $output, $err);
+	if (!$err and count($output) and $cmd = trim($output[0])) {
+		spip_log("Commande '$command' trouvée dans $cmd", 'odtspip.' . _LOG_DEBUG);
+		return $commands[$command] = $cmd;
+	}
+
+	spip_log("Commande '$command' introuvable sur ce serveur…", 'odtspip.' . _LOG_DEBUG);
+	return $commands[$command] = '';
+}
+
+
+/**
+ * Indique si une clé est autorisée à utiliser ce site comme
+ * serveur de conversion
+ */
+function odt2spip_cle_autorisee($key) {
+	include_spip('inc/config');
+	// récupérer la liste des clés
+	$keys = lire_config('odt2spip/authorized_keys');
+	$keys = explode("\n", trim($keys));
+	$keys = array_map('trim', $keys);
+	$liste = array();
+	foreach ($keys as $line) {
+		$line = explode(':', $line);
+		$k = trim(array_pop($line));
+		$nom = trim(implode(':', $line));
+		$liste[$k] = $nom;
+	}
+	// tester si la clé est correcte
+	$ok = in_array($key, array_keys($liste));
+	if ($ok) {
+		spip_log('Cle autorisée du site : ' . $liste[$key], 'odtspip.' . _LOG_INFO);
+	} else {
+		spip_log('Cle invalide utilisée : ' . $key, 'odtspip.' . _LOG_INFO);
+	}
+	// maintenir un temps fixe d’exécution, si possible
+	if (function_exists('hash_equals')) {
+		hash_equals($key, $key);
+	}
+	return $ok;
+}
+
+/**
  * Indique si un convertisseur de document est disponible
+ *
+ * C’est disponible si
+ * - la commande libreoffice est disponible
+ * - OU un serveur de conversion est indiqué
+ *
  * @return bool
  */
 function odt2spip_convertisseur_disponible() {
-	return false; // TODO: Test de configuration
+	static $est_disponible = null;
+	if (is_null($est_disponible)) {
+		if (odt2spip_commande_libreoffice_disponible()) {
+			$est_disponible = true;
+		} else {
+			// TODO: Test de configuration
+			$est_disponible = false;
+		}
+	}
+	return $est_disponible;
 }
 
 /**
@@ -102,7 +189,7 @@ function odt2spip_deziper_fichier($fichier) {
 	);
 
 	if ($zip->error_code < 0) {
-		spip_log('charger_decompresser erreur zip ' . $zip->error_code . ' pour fichier ' . $fichier, 'odt2spip.' . _LOG_ERREUR);
+		spip_log('charger_decompresser erreur zip ' . $zip->error_code . ' pour fichier ' . $fichier, 'odtspip.' . _LOG_ERREUR);
 		throw new \Exception($zip->errorName(true));
 	}
 
@@ -175,7 +262,7 @@ function odt2spip_analyser_fichier($fichier) {
 	try {
 		$champs = $odt2spip_generer_sortie($rep_dezip, $fichier);
 	} catch (\Exception $e) {
-		spip_log($e->getMessage(), 'odt2spip.' . _LOG_ERREUR);
+		spip_log($e->getMessage(), 'odtspip.' . _LOG_ERREUR);
 		return array(false, _L('Erreur lors de l’analyse du fichier ODT.'));
 	}
 
@@ -276,6 +363,11 @@ function odt2spip_objet_lier_fichier($fichier, $objet, $id_objet, $titre) {
 function odt2spip_convertir_fichier($fichier_source) {
 	if (!odt2spip_convertisseur_disponible()) {
 		return false;
+	}
+	if (odt2spip_commande_libreoffice_disponible()) {
+		include_spip('inc/convertir_avec_libreoffice');
+		$fichier = convertir_avec_libreoffice($fichier_source, 'odt');
+		return $fichier;
 	}
 	// TODO: Appel à une API en postant le fichier source...
 	return false;

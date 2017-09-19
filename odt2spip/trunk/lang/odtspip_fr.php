@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'defaut_attacher' => 'Choix par défaut pour l’attachement du fichier ODT',
+	'defaut_attacher_fichier_source' => 'Choix par défaut pour l’attachement du fichier source',
 
     // E
 	'err_enregistrement_fichier_sortie' => 'Erreur lors de l’enregistrement du fichier de snippet ',

@@ -111,7 +111,7 @@ function formulaires_document2spip_traiter_dist($objet, $id_objet, $creer_objet 
 				return $res;
 			}
 		} catch (\Exception $e) {
-			spip_log($e->getMessage(), 'odt2spip.' . _LOG_ERREUR);
+			spip_log($e->getMessage(), 'odtspip.' . _LOG_ERREUR);
 			$res['message_erreur'] = _L('Une erreur est survenue lors de la conversion du fichier');
 			return $res;
 		}
