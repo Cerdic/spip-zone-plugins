@@ -34,7 +34,9 @@
 				datas=#ARRAY{image,<:odtspip:mode_image:>,document,<:odtspip:mode_document:>},
 			})]
 
-			[(#SAISIE{selecteur_langue, lang_publi, label=<:odtspip:langue_publication:>})]
+			[(#ENV{_selecteur_langue}|oui)
+				[(#SAISIE{selecteur_langue, lang_publi, label=<:odtspip:langue_publication:>})]
+			]
 		</div>
 
 		<p class="boutons">

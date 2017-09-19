@@ -40,6 +40,7 @@ function formulaires_document2spip_charger_dist($objet, $id_objet, $creer_objet 
 		'_conversion_disponible' => odt2spip_convertisseur_disponible(),
 		'_bigup_rechercher_fichiers' => true,
 		'_accept' => odt2spip_liste_extensions_acceptees(true),
+		'_selecteur_langue' => (bool)lire_config('langues_multilingue'),
 	);
 
 	return $valeurs;

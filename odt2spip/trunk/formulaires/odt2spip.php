@@ -33,6 +33,7 @@ function formulaires_odt2spip_charger_dist($objet, $id_objet, $creer_objet = nul
 		// interne.
 		'_bigup_rechercher_fichiers' => true,
 		'_accept' => '.odt',
+		'_selecteur_langue' => (bool)lire_config('langues_multilingue'),
 	);
 
 	return $valeurs;
