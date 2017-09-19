@@ -68,6 +68,8 @@ class LibreOffice {
 			$this->addError('Erreur dans l’exécution de la commande de conversion de document');
 		}
 
+		spip_log($output, 'odtspip.' . _LOG_DEBUG);
+
 		return $this;
 	}
 
@@ -90,7 +92,7 @@ class LibreOffice {
 		if ($params) {
 			$command .= ' ' . $params;
 		}
-		$command .= ' ' . $this->fichier;
+		$command .= ' ' . str_replace(' ', '\ ', $this->fichier);
 
 		// il doit pouvoir écrire quelque part
 		#$home =  $this->outputDir ? $this->outputDir : dirname($this->fichier);

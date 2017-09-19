@@ -72,7 +72,7 @@ function formulaires_document2spip_verifier_dist($objet, $id_objet, $creer_objet
 	} elseif ($_FILES['fichier']['error'] != 0) {
 		$erreurs['fichier'] = _L('Un problème est survenu pour récupérer le fichier');
 	} elseif (!in_array(strtolower(pathinfo($_FILES['fichier']['name'], PATHINFO_EXTENSION)), $extensions_acceptees)) {
-		$erreurs['fichier'] = _L('Le fichier doit être au format : ', implode(', ', $extensions_acceptees));
+		$erreurs['fichier'] = _L('Le fichier doit être au format : ' . implode(', ', $extensions_acceptees));
 	}
 
 	return $erreurs;

@@ -22,6 +22,7 @@ function convertir_avec_libreoffice($fichier, $format_destination = 'odt') {
 	if (!file_exists($fichier) or !is_readable($fichier)) {
 		return false;
 	}
+
 	include_spip('inc/libreoffice');
 	$destination = odt2spip_get_repertoire_temporaire();
 

@@ -87,10 +87,16 @@ function odt2spip_cle_autorisee($key) {
 function odt2spip_convertisseur_disponible() {
 	static $est_disponible = null;
 	if (is_null($est_disponible)) {
+		include_spip('inc/config');
 		if (odt2spip_commande_libreoffice_disponible()) {
 			$est_disponible = true;
+		} elseif (
+			function_exists('curl_file_create') // php 5.5+
+			and lire_config('odt2spip/serveur_api_url')
+			and lire_config('odt2spip/serveur_api_cle')
+		) {
+			$est_disponible = true;
 		} else {
-			// TODO: Test de configuration
 			$est_disponible = false;
 		}
 	}
@@ -130,7 +136,7 @@ function odt2spip_get_repertoire_temporaire() {
 	}
 
 	include_spip('inc/session');
-	$id_auteur = session_get('id_auteur');
+	$id_auteur = (int)session_get('id_auteur');
 	$rep_dezip = $base_dezip . $id_auteur . '/';
 
 	if (!is_dir($rep_dezip) and !sous_repertoire($base_dezip, $id_auteur)) {
@@ -353,7 +359,7 @@ function odt2spip_objet_lier_fichier($fichier, $objet, $id_objet, $titre) {
 
 /**
  * Convertir un fichier vers le format odt en utilisant
- * un appel à une api de conversion.
+ * un outil de conversion, local ou distant
  *
  * @param string $fichier_source
  * @return string|bool
@@ -367,6 +373,54 @@ function odt2spip_convertir_fichier($fichier_source) {
 		$fichier = convertir_avec_libreoffice($fichier_source, 'odt');
 		return $fichier;
 	}
-	// TODO: Appel à une API en postant le fichier source...
+	if ($fichier = odt2spip_convertir_fichier_par_api($fichier_source)) {
+		return $fichier;
+	}
+	return false;
+}
+
+/**
+ * Convertir un fichier vers le format odt en utilisant
+ * un serveur distant de conversion
+ *
+ * @param string $fichier_source
+ * @return string|bool
+ */
+function odt2spip_convertir_fichier_par_api($fichier_source, $format = 'odt') {
+	include_spip('inc/config');
+	$api_url = lire_config('odt2spip/serveur_api_url');
+	$api_key = lire_config('odt2spip/serveur_api_cle');
+	if (!$api_url or !$api_key) {
+		return false;
+	}
+	$api_url = rtrim($api_url, '/') . '/convert_to.api/' . $format;
+
+	$post = array(
+		'api_key' => $api_key,
+		'file'=> curl_file_create(realpath($fichier_source))
+	);
+
+	// Poster la requête et récupérer le contenu du fichier
+	// FIXME: idéalement il faudrait streamer le fichier retourné… mais comment ?
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $api_url);
+	curl_setopt($ch, CURLOPT_POST, 1);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+	$content = curl_exec($ch);
+	curl_close($ch);
+
+	// Écrire le nouveau fichier localement
+	if ($content) {
+		$fichier = dirname($fichier_source) . pathinfo($fichier_source, PATHINFO_FILENAME) . '.' . $format;
+		if (file_put_contents($fichier, $content)) {
+			spip_log('Fichier converti dans : ' . $fichier, 'odtspip.' . _LOG_DEBUG);
+			return $fichier;
+		}
+	}
+
 	return false;
 }
