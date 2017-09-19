@@ -33,7 +33,7 @@ function formulaires_configurer_odt2spip_traiter_dist() {
 
 	if (_request('generer_cle')) {
 		$cle = md5(uniqid(rand(), true));
-		$set['authorized_keys'] = trim($set['authorized_keys'] . "\n" . 'Nouveau site : ' . $cle);
+		$set['authorized_keys'] = trim($set['authorized_keys'] . "\n" . $cle . ' : Nouveau site' );
 		set_request('authorized_keys', $set['authorized_keys']);
 	}
 

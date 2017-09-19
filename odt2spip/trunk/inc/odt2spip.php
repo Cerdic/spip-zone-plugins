@@ -55,13 +55,11 @@ function odt2spip_cle_autorisee($key) {
 	// récupérer la liste des clés
 	$keys = lire_config('odt2spip/authorized_keys');
 	$keys = explode("\n", trim($keys));
-	$keys = array_map('trim', $keys);
+	$keys = array_filter(array_map('trim', $keys));
 	$liste = array();
 	foreach ($keys as $line) {
-		$line = explode(':', $line);
-		$k = trim(array_pop($line));
-		$nom = trim(implode(':', $line));
-		$liste[$k] = $nom;
+		list($k, $nom) = explode(':', $line, 2);
+		$liste[trim($k)] = trim($nom);
 	}
 	// tester si la clé est correcte
 	$ok = in_array($key, array_keys($liste));
