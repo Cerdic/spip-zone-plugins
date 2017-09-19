@@ -223,6 +223,12 @@ function autoriser_infositesinstituer_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_infositesassocier_dist($faire, $type, $id, $qui, $opt) {
+	if (is_array($opt) and isset($opt['projet'])) {
+		$confirm = confirmer_roles_auteurs_projets($qui, $opt['projet']);
+
+		return $confirm;
+	}
+
 	return in_array($qui['statut'], array(
 		'0minirezo',
 		'1comite',
@@ -485,6 +491,21 @@ function autoriser_projet_creer($faire, $type, $id, $qui, $opt) {
 }
 
 /**
+ * Surcharge d'autorisation de modifier (projet)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_projet_modifier($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositesmodifier', 'projet', $id, $qui, $opt);
+}
+
+/**
  * Autorisation de créer (projet)
  *
  * @param  string $faire Action demandée
@@ -529,10 +550,12 @@ function autoriser_projet_infositesvoir_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_projet_infositesmodifier_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array(
-		'0minirezo',
-		'1comite',
-	));
+
+	if (in_array($qui['statut'], array('0minirezo',))) {
+		return true;
+	}
+
+	return confirmer_roles_auteurs_projets($qui, $id);
 }
 
 /**
@@ -1164,7 +1187,9 @@ function confirmer_roles_auteurs_projets($qui, $id_projet = 0, $role_creation = 
 		// Si on passe un string en 3ème paramètre le rôle tel que 'developpeur', on le reformate en tableau.
 		// Pas de séparateur/serialize prévu pour le moment.
 		$role_creation = array($role_creation);
-	} elseif (is_array($role_creation) and count($role_creation) == 0) {
+	}
+	// On revoit le contenu du tableau $role_creation par sécu
+	if (is_array($role_creation) and count($role_creation) == 0) {
 		// par défaut
 		$role_creation = array(
 			'dir_projets',
@@ -1175,6 +1200,10 @@ function confirmer_roles_auteurs_projets($qui, $id_projet = 0, $role_creation = 
 			'developpeur',
 		);
 	}
+	// Si on est administrateur, pas de soucis.
+	if (in_array($qui['statut'], array('0minirezo'))) {
+		return true;
+	}
 	$roles_autorises = array_intersect($roles, $role_creation);
 	// roles_autorises est toujours un array et s'il est vide,
 	// c'est que l'auteur n'a pas le rôle adéquate.
@@ -1183,8 +1212,5 @@ function confirmer_roles_auteurs_projets($qui, $id_projet = 0, $role_creation = 
 	}
 
 	// On prend les statuts par défaut
-	return in_array($qui['statut'], array(
-		'0minirezo',
-		'1comite',
-	));
+	return false;
 }
