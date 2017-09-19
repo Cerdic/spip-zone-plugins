@@ -132,6 +132,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'par_defaut' => 'Par défaut :',
+	'plugin_yaml_inactif' => 'Le plugin YAML est désactivé. Pour voir correctement cette page, merci de l\'activer.',
 
 	// T
 	'titre_page_verifier_doc' => 'Documentation de l’API de vérification',

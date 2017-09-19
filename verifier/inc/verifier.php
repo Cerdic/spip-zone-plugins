@@ -59,7 +59,7 @@ function inc_verifier_dist($valeur, $type, $options = null, &$valeur_normalisee 
  * @param string $repertoire
  * 		Dans quel repertoire chercher les yaml.
  *
- * @return Retourne un tableau listant les vérifications et leurs options
+ * @return array Retourne un tableau listant les vérifications et leurs options
  */
 function verifier_lister_disponibles($repertoire = 'verifier') {
 	static $verifications = array();
