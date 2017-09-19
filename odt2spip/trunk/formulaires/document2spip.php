@@ -4,8 +4,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+
 /**
- * Charger le contenu d’un document ODT dans un objet SPIP.
+ * Charger le contenu d’un document dans un objet SPIP.
+ *
+ * Le document est transformé en document ODT (si possible),
+ * puis la transformation odt2spip est appliquée.
  *
  * @param string $objet
  * @param int $id_objet
@@ -15,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string $retour
  * @return array|false
  */
-function formulaires_odt2spip_charger_dist($objet, $id_objet, $creer_objet = null, $retour = '') {
+function formulaires_document2spip_charger_dist($objet, $id_objet, $creer_objet = null, $retour = '') {
 	include_spip('inc/config');
 
 	if ($creer_objet and !autoriser('creer' . objet_type($creer_objet) . 'dans', $objet, $id_objet)) {
@@ -24,20 +28,22 @@ function formulaires_odt2spip_charger_dist($objet, $id_objet, $creer_objet = nul
 		return false;
 	}
 
+	include_spip('inc/odt2spip');
 	$valeurs = array(
 		'objet' => $objet,
 		'id_objet' => $id_objet,
 		'creer_objet' => $creer_objet,
 		'attacher_fichier' => lire_config('odt2spip/defaut_attacher'),
+		'attacher_fichier_odt' => lire_config('odt2spip/defaut_attacher_odt_genere'),
 		'mode_image' => 'image',
 		// interne.
+		'_conversion_disponible' => odt2spip_convertisseur_disponible(),
 		'_bigup_rechercher_fichiers' => true,
-		'_accept' => '.odt',
+		'_accept' => odt2spip_liste_extensions_acceptees(true),
 	);
 
 	return $valeurs;
 }
-
 
 /**
  * Vérifier
@@ -50,24 +56,26 @@ function formulaires_odt2spip_charger_dist($objet, $id_objet, $creer_objet = nul
  * @param string $retour
  * @return array
  */
-function formulaires_odt2spip_verifier_dist($objet, $id_objet, $creer_objet = null, $retour = '') {
+function formulaires_document2spip_verifier_dist($objet, $id_objet, $creer_objet = null, $retour = '') {
 	$erreurs = array();
 
 	if (!in_array(_request('mode_image'), array('image', 'document'))) {
 		$erreurs['mode_image'] = _T('info_obligatoire');
 	}
 
+	include_spip('inc/odt2spip');
+	$extensions_acceptees = odt2spip_liste_extensions_acceptees();
+
 	if (empty($_FILES['fichier']['name'])) {
 		$erreurs['fichier'] = _T('info_obligatoire');
 	} elseif ($_FILES['fichier']['error'] != 0) {
 		$erreurs['fichier'] = _L('Un problème est survenu pour récupérer le fichier');
-	} elseif (pathinfo($_FILES['fichier']['name'], PATHINFO_EXTENSION) !== 'odt') {
-		$erreurs['fichier'] = _L('Le fichier doit être au format .odt');
+	} elseif (!in_array(strtolower(pathinfo($_FILES['fichier']['name'], PATHINFO_EXTENSION)), $extensions_acceptees)) {
+		$erreurs['fichier'] = _L('Le fichier doit être au format : ', implode(', ', $extensions_acceptees));
 	}
 
 	return $erreurs;
 }
-
 
 /**
  * Traiter
@@ -80,17 +88,35 @@ function formulaires_odt2spip_verifier_dist($objet, $id_objet, $creer_objet = nu
  * @param string $retour
  * @return array
  */
-function formulaires_odt2spip_traiter_dist($objet, $id_objet, $creer_objet = null, $retour = '') {
+function formulaires_document2spip_traiter_dist($objet, $id_objet, $creer_objet = null, $retour = '') {
 	$res = array(
 		'editable' => true,
 	);
 
 	include_spip('inc/odt2spip');
 	try {
-		$fichier = odt2spip_deplacer_fichier_upload('fichier');
+		$fichier_source = odt2spip_deplacer_fichier_upload('fichier');
 	} catch (\Exception $e) {
 		$res['message_erreur'] = $e->getMessage();
 		return $res;
+	}
+
+	// Si le fichier n’est pas un document odt, le traduire.
+	$extension = strtolower(pathinfo($fichier_source, PATHINFO_EXTENSION));
+	if ($extension !== 'odt') {
+		try {
+			$fichier = odt2spip_convertir_fichier($fichier_source);
+			if (!$fichier) {
+				$res['message_erreur'] = _L('Une erreur est survenue lors de la conversion du fichier');
+				return $res;
+			}
+		} catch (\Exception $e) {
+			spip_log($e->getMessage(), 'odt2spip.' . _LOG_ERREUR);
+			$res['message_erreur'] = _L('Une erreur est survenue lors de la conversion du fichier');
+			return $res;
+		}
+	} else {
+		$fichier = $fichier_source;
 	}
 
 	list($id, $erreurs) = odt2spip_integrer_fichier(
@@ -100,7 +126,8 @@ function formulaires_odt2spip_traiter_dist($objet, $id_objet, $creer_objet = nul
 		$creer_objet,
 		array(
 			'attacher_fichier' => _request('attacher_fichier'),
-			'fichier_source' => $fichier,
+			'fichier_source' => $fichier_source,
+			'attacher_fichier_odt' => _request('attacher_fichier_odt'),
 		)
 	);
 

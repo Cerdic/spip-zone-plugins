@@ -5,6 +5,33 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
+ * Indique si un convertisseur de document est disponible
+ * @return bool
+ */
+function odt2spip_convertisseur_disponible() {
+	return false; // TODO: Test de configuration
+}
+
+/**
+ * Retourne la liste des extensions de documents acceptées
+ * @param bool $accept True pour retourner au format 'accept' d’html5
+ * @return string|string[]
+ */
+function odt2spip_liste_extensions_acceptees($accept = false) {
+	if (odt2spip_convertisseur_disponible()) {
+		// TODO: vérifier la liste des extensions possibles
+		$liste = array('odt', 'doc', 'docx', 'html', 'pdf');
+	} else {
+		$liste = array('odt');
+	}
+	if ($accept) {
+		return '.' . implode(',.', $liste);
+	}
+	return $liste;
+}
+
+
+/**
  * Retourne le répertoire de stockage des documents à traiter
  * @return string
  * @throws \Exception
@@ -184,39 +211,72 @@ function odt2spip_objet_modifier($fichier, $objet, $id_objet, $set, $options = a
 		}
 	}
 
-	// si nécessaire attacher le fichier odt à l'article
-	// et lui mettre un titre signifiant
-	if (!empty($options['attacher_fichier'])) {
-		$titre = $set['titre'];
-		$ajouter_documents = charger_fonction('ajouter_documents', 'action');
-		$id_document = $ajouter_documents(
-			'new',
-			array(
-				array(
-					'tmp_name' =>  $fichier,
-					'name' => basename($fichier),
-					'titrer' => 0,
-					'distant' => 0,
-					'type' => 'document'
-				),
-			),
-			$objet,
-			$id_objet,
-			'document'
-		);
-		if (
-			$id_document
-			and $id_doc_odt = intval($id_document[0])
-			and $id_doc_odt == $id_document[0]
-		) {
-			$c = array(
-				'titre' => $titre,
-				'descriptif' => _T('odtspip:cet_article_version_odt'),
-				'statut' => 'publie'
-			);
-			document_modifier($id_doc_odt, $c);
-		}
+	// si nécessaire attacher le fichier source à l'article
+	if (!empty($options['attacher_fichier']) and !empty($options['fichier_source'])) {
+		odt2spip_objet_lier_fichier($options['fichier_source'], $objet, $id_objet, $set['titre']);
+	}
+
+	// si nécessaire attacher le fichier odt généré à l'article
+	if (
+		!empty($options['attacher_fichier_odt']) and !empty($options['fichier_source'])
+		and ($fichier != $options['fichier_source'] or !empty($options['attacher_fichier']))
+	) {
+		odt2spip_objet_lier_fichier($fichier, $objet, $id_objet, $set['titre']);
 	}
 
 	return true;
+}
+
+/**
+ * Lie un fichier en tant que document d’un objet.
+ *
+ * @param string $fichier
+ * @param string $objet
+ * @param int $id_objet
+ * @param string $titre
+ */
+function odt2spip_objet_lier_fichier($fichier, $objet, $id_objet, $titre) {
+	$ajouter_documents = charger_fonction('ajouter_documents', 'action');
+	$id_document = $ajouter_documents(
+		'new',
+		array(
+			array(
+				'tmp_name' =>  $fichier,
+				'name' => basename($fichier),
+				'titrer' => 0,
+				'distant' => 0,
+				'type' => 'document'
+			),
+		),
+		$objet,
+		$id_objet,
+		'document'
+	);
+	if (
+		$id_document
+		and $id_doc_odt = intval($id_document[0])
+		and $id_doc_odt == $id_document[0]
+	) {
+		$c = array(
+			'titre' => $titre,
+			'descriptif' => _T('odtspip:cet_article_version_odt'),
+			'statut' => 'publie'
+		);
+		document_modifier($id_doc_odt, $c);
+	}
+}
+
+/**
+ * Convertir un fichier vers le format odt en utilisant
+ * un appel à une api de conversion.
+ *
+ * @param string $fichier_source
+ * @return string|bool
+ */
+function odt2spip_convertir_fichier($fichier_source) {
+	if (!odt2spip_convertisseur_disponible()) {
+		return false;
+	}
+	// TODO: Appel à une API en postant le fichier source...
+	return false;
 }
