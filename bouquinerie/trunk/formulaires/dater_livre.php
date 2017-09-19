@@ -351,7 +351,10 @@ function dater_livre_recuperer_date_saisie($post, $quoi = "date") {
  */
 function dater_livre_recuperer_heure_saisie($post) {
 	if (!preg_match('#([0-9]{1,2})(?:[h:](?:([0-9]{1,2}))?)?#', $post, $regs)) {
-		return '';
+		// ici gros hack : on force l'heure à 1mn du matin. 
+		// Ainsi, avec le critère {age>=0} le livre sera publié tôt le matin, pas à minuit
+		// à améliorer
+		return array(0, 01);
 	}
 
 	return array($regs[1], $regs[2]);
