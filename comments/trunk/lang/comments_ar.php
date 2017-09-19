@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_label_apparence_permalien_diese' => 'الرقم (#)',
 	'cfg_label_apparence_permalien_picto' => 'رمز',
 	'cfg_label_email_obligatoire' => 'جعل إدخال العنوان الإلكتروني إجبارياً',
+	'cfg_label_nom_obligatoire' => 'فرض ادخال اسم او لقب',
 	'cfg_label_presentation_fil' => 'عرض خيط النقاش',
 	'cfg_label_presentation_fil_liste' => 'لائحة تعليقات (مسطحة)',
 	'cfg_label_presentation_fil_thread' => 'انتظام التعليقات (حسب الخيط)',
@@ -55,7 +56,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_comment_ok' => 'شكراً للتعليق',
 
 	// S
-	'saisie_texte_info' => 'تدعم هذه الاستمارة اختصارات SPIP <code>[-&gt;عنوان] {{أسود}} {مائل} &lt;اقتباس&gt; &lt;برمجة&gt;</code> وعلامات HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. لإنشاء فقرات أترك اسطر فارغة.', # MODIF
+	'saisie_texte_info' => 'تدعم هذا الحقل اختصارات سبيب
+<code>{{أسود}}</code> <code>{مائل}</code> <code>-*لائحة</code> <code>[نص-&gt;عنوان]</code> <code>&lt; اقتباس&gt;</code> <code>&lt; برمجة&gt;</code> وعلامات HTML <code>&lt;q&gt;</code> <code>&lt;del&gt;</code> <code>&lt;ins&gt;</code>. لإنشاء فقرات أترك اسطر فارغة.',
 	'saisie_texte_legend' => 'إضافة تعليق هنا',
 	'submit1' => 'معاينة',
 	'submit2' => 'تأكيد الإرسال',
