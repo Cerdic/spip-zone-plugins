@@ -112,7 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redacteur_modifie_article' => '<strong>المحرر يعدّل المقالات المعروضة</strong>: كل محرر يمكنه تعديل مقال معروض للنشر، حتى إذا لم يكن مؤلفه.',
 	'refus_1' => '<p>مشرفو الموقع فقط',
 	'refus_2' => 'مخولون تعديل هذه الإعدادات.</p>
-<p>للمزيد من المعلومات، انظر <a href="http://contrib.spip.net/Autorite">التعليمات</a>.</p>', # MODIF
+<p>للمزيد من المعلومات، انظر <a href="https://contrib.spip.net/Autorite">التعليمات</a>.</p>',
 	'reglage_autorisations' => 'إعداد الأذونات',
 
 	// S
