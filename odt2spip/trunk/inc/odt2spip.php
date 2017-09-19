@@ -111,7 +111,7 @@ function odt2spip_convertisseur_disponible() {
 function odt2spip_liste_extensions_acceptees($accept = false) {
 	if (odt2spip_convertisseur_disponible()) {
 		// TODO: vérifier la liste des extensions possibles
-		$liste = array('odt', 'doc', 'docx', 'html', 'pdf');
+		$liste = array('odt', 'doc', 'docx', 'html');
 	} else {
 		$liste = array('odt');
 	}
@@ -415,7 +415,7 @@ function odt2spip_convertir_fichier_par_api($fichier_source, $format = 'odt') {
 
 	// Écrire le nouveau fichier localement
 	if ($content) {
-		$fichier = dirname($fichier_source) . pathinfo($fichier_source, PATHINFO_FILENAME) . '.' . $format;
+		$fichier = dirname($fichier_source) . DIRECTORY_SEPARATOR . pathinfo($fichier_source, PATHINFO_FILENAME) . '.' . $format;
 		if (file_put_contents($fichier, $content)) {
 			spip_log('Fichier converti dans : ' . $fichier, 'odtspip.' . _LOG_DEBUG);
 			return $fichier;
