@@ -1,6 +1,6 @@
 #SET{id_objet,#ENV{id_objet}}
 <BOUCLE_si_art(CONDITION){si #ENV{type_objet}|=={article}|et{#ENV{trad}|=={trad}}}>
-<BOUCLE_art_orig(ARTICLES){id_article=#ENV{id_objet}}{origine_traduction}>
+<BOUCLE_art_orig(ARTICLES){id_article=#INFO_ID_TRAD{article,#ENV{id_objet}}}{origine_traduction}>
 <BOUCLE_art_lang(ARTICLES){traduction}{lang=#ENV{lang}}>
 #SET{id_objet,#ID_ARTICLE}
 </BOUCLE_art_lang>
