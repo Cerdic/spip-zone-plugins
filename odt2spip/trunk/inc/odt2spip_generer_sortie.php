@@ -159,8 +159,8 @@ function inc_odt2spip_generer_sortie($rep_dezip, $fichier_source = '') {
 				$Tarticle['texte'] = str_replace($ch, '', $Tarticle['texte']);
 			} elseif (file_exists($rep_pictures . $img)) {
 				// retailler l'image en fct des parametres ;;;largeur;;;hauteur;;;
-				$largeur = round($Tdims[1] * $conversion_image);
-				$hauteur = round($Tdims[2] * $conversion_image);
+				$largeur = round(floatval($Tdims[1]) * $conversion_image);
+				$hauteur = round(floatval($Tdims[2]) * $conversion_image);
 				$odt2spip_retailler_img($rep_pictures . $img, $largeur, $hauteur);
 				$id_document = $ajouter_documents(
 					'new',

@@ -53,7 +53,11 @@ function inc_odt2spip_retailler_img($img_ini, $l = 0, $h = 400) {
 	// calculer le ratio a appliquer aux dimensions initiales
 	$l_ini = $param_img[0];
 	$h_ini = $param_img[1];
-	$ratio = ($l != 0 ? (abs($l_ini - $l) >= abs($h_ini - $h) ? $l / $l_ini : $h / $h_ini) : $h / $h_ini);
+	if ($l == 0 and $h == 0) {
+		$ratio = 1;
+	} else {
+		$ratio = ($l != 0 ? (abs($l_ini - $l) >= abs($h_ini - $h) ? $l / $l_ini : $h / $h_ini) : $h / $h_ini);
+	}
 	$img_nv = imagecreatetruecolor($l_ini * $ratio, $h_ini * $ratio);
 	$img_acopier = $fct_creation_ext($img_ini);
 
