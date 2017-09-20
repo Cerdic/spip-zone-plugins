@@ -123,21 +123,8 @@ function crayons_store($options = array()) {
 							}
 						}
 
-						// Aiguillage pour verification de la saisie
-						// Pour traitement ulterieur les fonctions de verifications doivent renvoyer $invalides :
-						// $invalides[wid_champ]['msg'] -> message de saisie invalide
-						// $invalides[wid_champ]['retour'] -> caracteres invalides
-						$f = 'verifier_'.$type.'_'.$modele;
-						if (function_exists($f)) {
-							$_invalides = $f($modifs);
-							if ($_invalides and is_array($invalides)) {
-								$invalides = array_merge($invalides, $_invalides);
-							}
-						}
-
-						// Fonctionnement plus simple, en retournant presque comme le pipeline formulaire_verifier
+						// Vérifications, en retournant presque comme le pipeline formulaire_verifier
 						// On permet aussi de modifier la valeur soumise, si une valeur est retournée dans normaliser.
-
 						$data = pipeline(
 							'crayons_verifier',
 							array(
@@ -166,6 +153,20 @@ function crayons_store($options = array()) {
 						}
 
 						$modifs[] = array($type, $modele, $id, $content, $wid);
+
+						// Anciennes méthodes de vérifications.
+						// Aiguillage pour verification de la saisie
+						// Pour traitement ulterieur les fonctions de verifications doivent renvoyer $invalides :
+						// $invalides[wid_champ]['msg'] -> message de saisie invalide
+						// $invalides[wid_champ]['retour'] -> caracteres invalides
+						$f = 'verifier_'.$type.'_'.$modele;
+						if (function_exists($f)) {
+							$_invalides = $f($modifs);
+							if ($_invalides and is_array($invalides)) {
+								$invalides = array_merge($invalides, $_invalides);
+							}
+						}
+
 					}
 				}
 			}
