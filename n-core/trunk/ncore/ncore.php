@@ -227,14 +227,13 @@ function ncore_type_noisette_lister($plugin, $information = '', $stockage = '') 
  *
  * @package SPIP\NCORE\SERVICE\NOISETTE
  *
- * @param        $plugin
- * @param        $action
- * @param        $description
+ * @param string $plugin
+ * @param array  $description
  * @param string $stockage
  *
  * @return string
  */
-function ncore_noisette_stocker($plugin, $action, $description, $stockage = '') {
+function ncore_noisette_stocker($plugin, $description, $stockage = '') {
 
 	// On cherche le service de stockage à utiliser selon la logique suivante :
 	// - si le service de stockage est non vide on l'utilise en considérant que la fonction existe forcément;
@@ -243,7 +242,7 @@ function ncore_noisette_stocker($plugin, $action, $description, $stockage = '') 
 	include_spip('inc/ncore_utils');
 	if ($stocker = ncore_chercher_service($plugin, 'noisette_stocker', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
-		$noisette = $stocker($plugin, $action, $description);
+		$noisette = $stocker($plugin, $description);
 	} else {
 		// Le plugin ne propose pas de fonction propre ou le stockage N-Core est explicitement demandé.
 		// -- N-Core stocke les noisettes dans une meta propre au plugin appelant contenant un tableau au format
@@ -256,7 +255,7 @@ function ncore_noisette_stocker($plugin, $action, $description, $stockage = '') 
 		// Le tableau est au format [squelette][rang] = description.
 		$noisettes = lire_config("${plugin}_noisettes", array());
 
-		if ($action == 'creation') {
+		if (empty($description['id_noisette'])) {
 			// Ajout de la noisette :
 			// -- la description est complète à l'exception de l'id unique qui est créé à la volée
 			// -- et on range la noisette avec les noisettes affectées au même squelette en fonction de son rang.
@@ -266,18 +265,9 @@ function ncore_noisette_stocker($plugin, $action, $description, $stockage = '') 
 			// Modification de la noisette :
 			// -- les informations identifiant sont toujours fournies, à savoir, l'id, le squelette et le rang.
 			// -- on utilise le squelette et le rang pour se positionner sur la noisette concernée.
-			// -- pour un changement de rang il faut mettre à jour toute la description.
-			//    -> Il faut traiter le cas où la fonction de déplacement stocke temporairement la noisette déplacée
-			//       au rang 0 qui n'est jamais utilisé autrement. Si l'index 0 n'est pas utilisé c'est la sauvegarde
-			//       si l'index est déjà utilisé il faut le supprimer
-			if (!isset($noisettes[$description['squelette']][$description['rang']])) {
-				// Cas cas est forcément un changement de rang.
-				$noisettes[$description['squelette']][$description['rang']] = $description;
-				// On regarde si la valeur temporaire rang=0 est présente, alors on la supprime.
-				if ($description['rang'] and isset($noisettes[$description['squelette']][0])) {
-					unset($noisettes[$description['squelette']][0]);
-				}
-			} else {
+			// -- Les modifications ne concernent que les paramètres d'affichage, cette fonction n'est jamais utilisée
+			//    pour le changement de rang.
+			if (isset($noisettes[$description['squelette']][$description['rang']])) {
 				$noisettes[$description['squelette']][$description['rang']] = array_merge(
 					$noisettes[$description['squelette']][$description['rang']],
 					$description);
@@ -292,6 +282,65 @@ function ncore_noisette_stocker($plugin, $action, $description, $stockage = '') 
 	}
 
 	return $noisette;
+}
+
+
+/**
+ *
+ * @package SPIP\NCORE\SERVICE\NOISETTE
+ *
+ * @param        $plugin
+ * @param        $action
+ * @param        $description
+ * @param string $stockage
+ *
+ * @return string
+ */
+function ncore_noisette_ranger($plugin, $description, $rang, $stockage = '') {
+
+	// Initialisation de la sortie.
+	$retour = false;
+
+	// On cherche le service de stockage à utiliser selon la logique suivante :
+	// - si le service de stockage est non vide on l'utilise en considérant que la fonction existe forcément;
+	// - sinon, on utilise la fonction du plugin appelant si elle existe;
+	// - et sinon, on utilise la fonction de N-Core.
+	include_spip('inc/ncore_utils');
+	if ($ranger = ncore_chercher_service($plugin, 'noisette_ranger', $stockage)) {
+		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
+		$retour = $ranger($plugin, $description, $rang);
+	} else {
+		// Le plugin ne propose pas de fonction propre ou le stockage N-Core est explicitement demandé.
+		// -- N-Core stocke les noisettes dans une meta propre au plugin appelant contenant un tableau au format
+		//    [squelette][rang] = description
+		//    N-Core calcule un identifiant unique pour la noisette qui sera stocké à l'index 'id_noisette' et qui
+		//    vaudra uniqid() avec comme préfixe le plugin appelant.
+		include_spip('inc/config');
+
+		// On lit la meta de stockage des noisettes pour le plugin appelant.
+		// Le tableau est au format [squelette][rang] = description.
+		$noisettes = lire_config("${plugin}_noisettes", array());
+
+		// Modification de la noisette :
+		// La description est complète et comprends donc l'identifiant de la noisette et le rang actuellement
+		// occupé.
+		if (!isset($noisettes[$description['squelette']][$description['rang']])) {
+			// On supprime la noisette du rang qu'elle occupe.
+			unset($noisettes[$description['squelette']]['rang']);
+
+			// On ajoute la noisette au rang choisi
+			if (!isset($noisettes[$description['squelette']][$rang])) {
+				$description['rang'] = $rang;
+				$noisettes[$description['squelette']][$rang] = $description;
+
+				// On met à jour la meta
+				ecrire_config("${plugin}_noisettes", $noisettes);
+				$retour = true;
+			}
+		}
+	}
+
+	return $retour;
 }
 
 /**

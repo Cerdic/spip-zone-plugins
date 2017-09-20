@@ -17,6 +17,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @uses type_noisette_lire()
  * @uses ncore_noisette_lister()
  * @uses ncore_noisette_stocker()
+ * @uses ncore_noisette_ranger()
  *
  * @param string	$plugin
  *      Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -90,15 +91,14 @@ function noisette_ajouter($plugin, $type_noisette, $squelette, $rang = 0, $stock
 			if ($rang <= $rang_max) {
 				foreach ($noisettes as $_id_noisette => $_description) {
 					if ($_description['rang'] >= $rang) {
-						$_description['rang'] += 1;
- 						ncore_noisette_stocker($plugin, 'modification', $_description, $stockage);
+						ncore_noisette_ranger($plugin, $_description, $_description['rang'] + 1, $stockage);
 					}
 				}
 			}
 		}
 
 		// La description de la nouvelle noisette est prête à être stockée.
-		$noisette_ajoutee = ncore_noisette_stocker($plugin,'creation', $description, $stockage);
+		$noisette_ajoutee = ncore_noisette_stocker($plugin, $description, $stockage);
 	}
 
 	return $noisette_ajoutee;
@@ -112,7 +112,7 @@ function noisette_ajouter($plugin, $type_noisette, $squelette, $rang = 0, $stock
  * @uses ncore_noisette_decrire()
  * @uses ncore_noisette_destocker()
  * @uses ncore_noisette_lister()
- * @uses ncore_noisette_stocker()
+ * @uses ncore_noisette_ranger()
  *
  * @param string	$plugin
  *      Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -156,8 +156,7 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
 		if ($autres_noisettes) {
 			foreach ($autres_noisettes as $_id_noisette => $_autre_description) {
 				if ($_autre_description['rang'] > $description['rang']) {
-					$_autre_description['rang'] -= 1;
-						ncore_noisette_stocker($plugin, 'modification', $_autre_description, $stockage);
+					ncore_noisette_ranger($plugin, $_autre_description, $_autre_description['rang'] - 1, $stockage);
 				}
 			}
 		}
@@ -257,9 +256,8 @@ function noisette_lire($plugin, $noisette, $information = '', $traiter_typo = fa
  *
  * @api
  * @uses ncore_noisette_decrire()
- * @uses ncore_noisette_destocker()
  * @uses ncore_noisette_lister()
- * @uses ncore_noisette_stocker()
+ * @uses ncore_noisette_ranger()
  *
  * @param string	$plugin
  *      Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -295,8 +293,7 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
 		// Si les rangs origine et destination sont identiques on ne fait rien !
 		if ($rang_destination != $rang_origine) {
 			// On efface le rang de la noisette à déplacer pour permettre son affectation à une autre noisette.
-			$description['rang'] = 0;
-			ncore_noisette_stocker($plugin, 'modification', $description, $stockage);
+			ncore_noisette_ranger($plugin, $description, 0, $stockage);
 
 			// On récupère les noisettes affectées au même squelette sous la forme d'un tableau indexé par l'identifiant
 			// de la noisette stocké dans l'index 'id_noisette' et on déplace les noisettes impactées.
@@ -308,21 +305,18 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
 				if ($rang_destination < $rang_origine) {
 					// On "descend" les noisettes du rang destination au rang origine non compris.
 					if (($_description['rang'] >= $rang_destination) and ($_description['rang'] < $rang_origine)) {
-						$_description['rang'] += 1;
-							ncore_noisette_stocker($plugin, 'modification', $_description, $stockage);
+						ncore_noisette_ranger($plugin, $_description, $_description['rang'] + 1, $stockage);
 					}
 				} else {
 					// On "remonte" les noisettes du rang destination au rang origine non compris.
 					if (($_description['rang'] <= $rang_destination) and ($_description['rang'] > $rang_origine)) {
-						$_description['rang'] -= 1;
-							ncore_noisette_stocker($plugin, 'modification', $_description, $stockage);
+						ncore_noisette_ranger($plugin, $_description, $_description['rang'] - 1, $stockage);
 					}
 				}
 			}
 
 			// On positionne le rang de la noisette à déplacer au rang destination.
-			$description['rang'] = $rang_destination;
-			ncore_noisette_stocker($plugin, 'modification', $description, $stockage);
+			ncore_noisette_ranger($plugin, $description, $rang_destination, $stockage);
 		}
 	}
 
