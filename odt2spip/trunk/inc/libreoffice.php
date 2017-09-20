@@ -95,10 +95,12 @@ class LibreOffice {
 		$command .= ' ' . str_replace(' ', '\ ', $this->fichier);
 
 		// il doit pouvoir écrire quelque part
-		#$home =  $this->outputDir ? $this->outputDir : dirname($this->fichier);
-		#@chmod($home, 0777);
+		if (defined('_LIBREOFFICE_HOME') and _LIBREOFFICE_HOME) {
+			$home = _LIBREOFFICE_HOME;
+		} else {
+			$home = $this->outputDir ? $this->outputDir : dirname($this->fichier);
+		}
 
-		$home='/tmp'; // hum ?
 		$command = 'export HOME=' . realpath($home) . '; ' . $command;
 
 		return $command;

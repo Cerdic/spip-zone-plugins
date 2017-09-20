@@ -1,7 +1,7 @@
 <paquet
 	prefix="odt2spip"
 	categorie="edition"
-	version="3.0.0-dev"
+	version="3.0.0-alpha1"
 	schema="201406091738"
 	etat="dev"
 	compatibilite="[3.1.0;3.2.*]"
@@ -20,4 +20,6 @@
 
 	<necessite nom="saisies" compatibilite="[2.18.0;]" />
 	<utilise nom="bigup" compatibilite="[1.0.0-dev;]" />
+
+	<genie nom="nettoyer_repertoire_upload" periode="3600" />
 </paquet>
