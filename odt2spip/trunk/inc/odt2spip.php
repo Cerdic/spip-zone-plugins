@@ -234,7 +234,7 @@ function odt2spip_integrer_fichier($fichier, $objet, $id_objet, $objet_dest = ''
 
 	// vider le contenu du rep de dezippage
 	include_spip('inc/getdocument');
-	effacer_repertoire_temporaire(odtspip_get_repertoire_temporaire());
+	effacer_repertoire_temporaire(odt2spip_get_repertoire_temporaire());
 
 	// identifiant d’objet créé éventuellement.
 	return array($id_objet, null);

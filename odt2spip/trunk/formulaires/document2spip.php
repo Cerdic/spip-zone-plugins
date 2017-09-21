@@ -120,7 +120,7 @@ function formulaires_document2spip_traiter_dist($objet, $id_objet, $creer_objet 
 		$fichier = $fichier_source;
 	}
 
-	list($id, $erreurs) = odtspip_integrer_fichier(
+	list($id, $erreurs) = odt2spip_integrer_fichier(
 		$fichier,
 		$objet,
 		$id_objet,
