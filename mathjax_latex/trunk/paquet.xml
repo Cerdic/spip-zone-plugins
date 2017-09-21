@@ -1,7 +1,7 @@
 <paquet
 	prefix="mathjax_latex"
 	categorie="outil"
-	version="1.0.2"
+	version="1.0.3"
 	etat="test"
 	logo="prive/themes/spip/images/mathjax_latex-32.png"
 	documentation="https://contrib.spip.net/4827"
@@ -12,7 +12,7 @@
 	<!-- Afficher des expressions mathematiques -->
 
 	<auteur lien="https://www.mathjax.org/">MathJax</auteur>
-	<auteur lien="http://www.erational.org">erational</auteur>
+	<auteur lien="https://www.erational.org">erational</auteur>
 	<auteur lien="https://contrib.spip.net/yohannp">Yohann</auteur>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 

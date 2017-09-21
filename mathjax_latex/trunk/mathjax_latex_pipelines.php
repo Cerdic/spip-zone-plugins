@@ -28,7 +28,7 @@ function mathjax_latex_flux(){
 	if (find_in_path('js/MathJax.js')) {
 		$js_lib = find_in_path('js/MathJax.js');
 	} else {
-		$js_lib = "https://cdn.mathjax.org/mathjax/latest/MathJax.js";
+		$js_lib = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js";
 	}
 
 	$flux .= '<script type="text/javascript" async  src="'.$js_lib.'?config=TeX-MML-AM_CHTML"></script>';
