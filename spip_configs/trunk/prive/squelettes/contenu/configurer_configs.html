@@ -1,0 +1,33 @@
+[(#AUTORISER{configurer,_configs}|sinon_interdire_acces)]
+
+<h1 class="grostitre"><:configs:titre_page_configurer_configs:></h1>
+
+<div class="">
+	<table class="table">
+		<caption>Valeurs par défaut</caption>
+		<thead>
+			<tr>
+				<th class="">Nom</th>
+				<th class="">Commentaire</th>
+				<th class="">Prefixe</th>
+				<th class="">Nom de la valeur</th>
+				<th class="">Valeur par defaut</th>
+				<th class="">Valeur</th>
+				<th class="">Rang</th>
+			</tr>
+		</thead>
+		<tbody>
+			<BOUCLE_conf(CONFIGS){par prefixe,rang}>
+				<tr class="">
+					<td class="#EDIT{nom}">#NOM</td>
+					<td class="#EDIT{COMMENTAIRE}">#COMMENTAIRE</td>
+					<td class="#EDIT{prefixe}">#PREFIXE</td>
+					<td class="#EDIT{nom_valeur}">#NOM_VALEUR</td>
+					<td class="#EDIT{defaut}">#DEFAUT</td>
+					<td class="#EDIT{valeur}">#VALEUR</td>
+					<td class="#EDIT{rang}">#RANG</td>
+				</tr>
+			</BOUCLE_conf>
+		</tbody>
+	</table>
+</div>
