@@ -61,9 +61,9 @@ function formulaires_odt2spip_verifier_dist($objet, $id_objet, $creer_objet = nu
 	if (empty($_FILES['fichier']['name'])) {
 		$erreurs['fichier'] = _T('info_obligatoire');
 	} elseif ($_FILES['fichier']['error'] != 0) {
-		$erreurs['fichier'] = _L('Un problème est survenu pour récupérer le fichier');
+		$erreurs['fichier'] = _T('odt2spip:err_recuperer_fichier');
 	} elseif (pathinfo($_FILES['fichier']['name'], PATHINFO_EXTENSION) !== 'odt') {
-		$erreurs['fichier'] = _L('Le fichier doit être au format .odt');
+		$erreurs['fichier'] = _T('odt2spip:err_extension_fichier', array('extension' => 'odt'));
 	}
 
 	return $erreurs;
@@ -111,6 +111,6 @@ function formulaires_odt2spip_traiter_dist($objet, $id_objet, $creer_objet = nul
 	}
 
 	$res['redirect'] = generer_url_entite($id, $creer_objet ? $creer_objet : $objet);
-	$res['message_ok'] = _L('Fichier pris en compte');
+	$res['message_ok'] = _T('odt2spip:fichier_traiter_ok');
 	return $res;
 }

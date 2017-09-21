@@ -70,9 +70,9 @@ function formulaires_document2spip_verifier_dist($objet, $id_objet, $creer_objet
 	if (empty($_FILES['fichier']['name'])) {
 		$erreurs['fichier'] = _T('info_obligatoire');
 	} elseif ($_FILES['fichier']['error'] != 0) {
-		$erreurs['fichier'] = _L('Un problème est survenu pour récupérer le fichier');
+		$erreurs['fichier'] = _T('odt2spip:err_recuperer_fichier');
 	} elseif (!in_array(strtolower(pathinfo($_FILES['fichier']['name'], PATHINFO_EXTENSION)), $extensions_acceptees)) {
-		$erreurs['fichier'] = _L('Le fichier doit être au format : ' . implode(', ', $extensions_acceptees));
+		$erreurs['fichier'] = _T('odt2spip:err_extension_fichier', array('extension' => $extensions_acceptees));
 	}
 
 	return $erreurs;
@@ -108,12 +108,12 @@ function formulaires_document2spip_traiter_dist($objet, $id_objet, $creer_objet 
 		try {
 			$fichier = odt2spip_convertir_fichier($fichier_source);
 			if (!$fichier) {
-				$res['message_erreur'] = _L('Une erreur est survenue lors de la conversion du fichier');
+				$res['message_erreur'] = _T('odt2spip:err_convertir_fichier');
 				return $res;
 			}
 		} catch (\Exception $e) {
 			spip_log($e->getMessage(), 'odtspip.' . _LOG_ERREUR);
-			$res['message_erreur'] = _L('Une erreur est survenue lors de la conversion du fichier');
+			$res['message_erreur'] = _T('odt2spip:err_convertir_fichier');
 			return $res;
 		}
 	} else {
@@ -138,6 +138,6 @@ function formulaires_document2spip_traiter_dist($objet, $id_objet, $creer_objet 
 	}
 
 	$res['redirect'] = generer_url_entite($id, $creer_objet ? $creer_objet : $objet);
-	$res['message_ok'] = _L('Fichier pris en compte');
+	$res['message_ok'] = _T('odt2spip:fichier_traiter_ok');
 	return $res;
 }

@@ -226,7 +226,7 @@ function odt2spip_integrer_fichier($fichier, $objet, $id_objet, $objet_dest = ''
 		$id_objet = objet_inserer($objet_dest, $id_objet);
 		$objet = $objet_dest;
 		if (!$id_objet) {
-			return array(false, _L('Impossible de créer le nouvel objet'));
+			return array(false, _T('odt2spip:err_creer_nouvel_objet'));
 		}
 	}
 
@@ -248,16 +248,16 @@ function odt2spip_integrer_fichier($fichier, $objet, $id_objet, $objet_dest = ''
 function odt2spip_analyser_fichier($fichier) {
 	try {
 		if (!odt2spip_deziper_fichier($fichier)) {
-			return array(false, _L('Impossible de décompresser le fichier'));
+			return array(false, _T('odt2spip:err_decompresser_fichier'));
 		}
 	} catch (\Exception $e) {
-		return array(false, _L('Impossible de décompresser le fichier'));
+		return array(false, _T('odt2spip:err_decompresser_fichier'));
 	}
 
 	try {
 		$rep_dezip = odt2spip_get_repertoire_temporaire();
 	} catch (\Exception $e) {
-		return array(false, _L('Impossible d’attribuer un répertoire temporaire'));
+		return array(false, _T('odt2spip:err_repertoire_temporaire'));
 	}
 
 	// Création de l'array avec les parametres de l'article:
@@ -267,7 +267,7 @@ function odt2spip_analyser_fichier($fichier) {
 		$champs = $odt2spip_generer_sortie($rep_dezip, $fichier);
 	} catch (\Exception $e) {
 		spip_log($e->getMessage(), 'odtspip.' . _LOG_ERREUR);
-		return array(false, _L('Erreur lors de l’analyse du fichier ODT.'));
+		return array(false, _T('odt2spip:err_analyse_odt'));
 	}
 
 	return array($champs, null);
