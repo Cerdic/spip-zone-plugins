@@ -2,11 +2,12 @@
 
 if (window.jQuery) {
 	function rang(){
+		[(#SPIP_VERSION|spip_version_compare{3.2-dev,<}|oui)
 		$.getScript("#CHEMIN{prive/javascript/ui/core.js}", function(){
 		$.getScript("#CHEMIN{prive/javascript/ui/widget.js}", function(){
 		$.getScript("#CHEMIN{prive/javascript/ui/mouse.js}", function(){
 		$.getScript("#CHEMIN{prive/javascript/ui/sortable.js}", function(){
-
+		]
 			//(".spip.liste").parent().parent().addClass('johnson');
 			// gestion déplacement / réordonnement
 			$(".spip.liste tbody" ).sortable({
@@ -34,7 +35,10 @@ if (window.jQuery) {
 			});
 
 			$( ".spip.liste tbody" ).disableSelection();
+
+		[(#SPIP_VERSION|spip_version_compare{3.2-dev,<}|oui)
 		})})})})
+		]
 	}
 
 	/* ---------------- ECOUTEURS -------------- */
