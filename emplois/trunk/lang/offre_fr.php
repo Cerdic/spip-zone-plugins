@@ -36,6 +36,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_offres_auteur' => 'Les offres de cet auteur',
 	'info_texte_offre' => 'Texte de l\'offre',
 
+	// L
+	'legende_deposant' => 'Déposant',
+	'legende_description_offre' => 'Description de l‘offre',
+
 	// R
 	'retirer_lien_offre' => 'Retirer cette offre',
 	'retirer_tous_liens_offres' => 'Retirer toutes les offres',

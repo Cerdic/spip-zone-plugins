@@ -12,13 +12,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_offre' => 'Add this job',
 
 	// C
-	'champ_date_fin_label' => 'Date de clôture de l\'offre',
-	'champ_texte_offre_label' => 'Texte de l\'offre',
+	'champ_date_fin_label' => 'Job‘s closing date',
+	'champ_texte_offre_label' => 'Job‘s offer text',
 	'champ_email_label' => 'Email',
-	'champ_emetteur_label' => 'Émetteur',
-	'champ_id_document_offre_label' => 'id_document_offre',
+	'champ_emetteur_label' => 'Applicant',
+	'champ_id_document_offre_label' => 'id_document_job',
 	'champ_nom_label' => 'Name',
-	'champ_signature_label' => 'First and Name',
+	'champ_signature_label' => 'First name and Name',
 	'champ_telephone_label' => 'Phone',
 	'champ_telephone_label_cours' => 'Phone: ',
 	'champ_titre_label' => 'Titre',
@@ -34,7 +34,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_offres' => '@nb@ jobs offer',
 	'info_nom' => 'Applicant name',
 	'info_offres_auteur' => 'This author job‘s offer',
-	'info_texte_offre' => 'Texte de l\'offre',
+	'info_texte_offre' => 'Job‘s offer text',
+
+	// L
+	'legende_deposant' => 'Applicant',
+	'legende_description_offre' => 'Job‘s offer description',
 
 	// R
 	'retirer_lien_offre' => 'Remove this job offer',
@@ -48,8 +52,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_changer_statut_offre' => 'This job is:',
 	'texte_creer_associer_offre' => 'Create and associate a job',
 	'texte_definir_comme_traduction_offre' => 'This job is a translation of job number :',
-	'titre_langue_offre' => 'Job language',
-	'titre_logo_offre' => 'Job logo',
+	'titre_langue_offre' => 'Job‘s language',
+	'titre_logo_offre' => 'Job‘s logo',
 	'titre_offre' => 'Job offer',
 	'titre_offres' => 'Jobs offer',
 	'titre_offres_rubrique' => 'Section job‘s offer',

@@ -9,7 +9,7 @@
 		<input type="hidden" name="id_document_offre" value="#ENV{id_document_offre}" />
 
 		<fieldset id="offre_deposant" [(#CONFIG{emplois/affichage_public/class_fieldset_deposant}|!={''}|oui) class="#CONFIG{emplois/affichage_public/class_fieldset_deposant}"]>
-		<legend>Déposant</legend>
+		<legend><:offre:legende_deposant:></legend>
 			<div class="editer-groupe">
 	 
 				<div class="editer nom obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
@@ -42,7 +42,7 @@
  		</fieldset>
 
  		<fieldset id="offre_description" [(#CONFIG{emplois/affichage_public/class_fieldset_description}|!={''}|oui)class="#CONFIG{emplois/affichage_public/class_fieldset_description}"]>
-			<legend>Description de l'offre</legend>
+			<legend><:offre:legende_description_offre:></legend>
 			<div class="editer-groupe">
 
 				<div class="editer titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
