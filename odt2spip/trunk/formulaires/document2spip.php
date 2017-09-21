@@ -70,9 +70,9 @@ function formulaires_document2spip_verifier_dist($objet, $id_objet, $creer_objet
 	if (empty($_FILES['fichier']['name'])) {
 		$erreurs['fichier'] = _T('info_obligatoire');
 	} elseif ($_FILES['fichier']['error'] != 0) {
-		$erreurs['fichier'] = _T('odt2spip:err_recuperer_fichier');
+		$erreurs['fichier'] = _T('odtspip:err_recuperer_fichier');
 	} elseif (!in_array(strtolower(pathinfo($_FILES['fichier']['name'], PATHINFO_EXTENSION)), $extensions_acceptees)) {
-		$erreurs['fichier'] = _T('odt2spip:err_extension_fichier', array('extension' => $extensions_acceptees));
+		$erreurs['fichier'] = _T('odtspip:err_extension_fichier', array('extension' => $extensions_acceptees));
 	}
 
 	return $erreurs;
@@ -108,19 +108,19 @@ function formulaires_document2spip_traiter_dist($objet, $id_objet, $creer_objet 
 		try {
 			$fichier = odt2spip_convertir_fichier($fichier_source);
 			if (!$fichier) {
-				$res['message_erreur'] = _T('odt2spip:err_convertir_fichier');
+				$res['message_erreur'] = _T('odtspip:err_convertir_fichier');
 				return $res;
 			}
 		} catch (\Exception $e) {
 			spip_log($e->getMessage(), 'odtspip.' . _LOG_ERREUR);
-			$res['message_erreur'] = _T('odt2spip:err_convertir_fichier');
+			$res['message_erreur'] = _T('odtspip:err_convertir_fichier');
 			return $res;
 		}
 	} else {
 		$fichier = $fichier_source;
 	}
 
-	list($id, $erreurs) = odt2spip_integrer_fichier(
+	list($id, $erreurs) = odtspip_integrer_fichier(
 		$fichier,
 		$objet,
 		$id_objet,
@@ -138,6 +138,6 @@ function formulaires_document2spip_traiter_dist($objet, $id_objet, $creer_objet 
 	}
 
 	$res['redirect'] = generer_url_entite($id, $creer_objet ? $creer_objet : $objet);
-	$res['message_ok'] = _T('odt2spip:fichier_traiter_ok');
+	$res['message_ok'] = _T('odtspip:fichier_traiter_ok');
 	return $res;
 }

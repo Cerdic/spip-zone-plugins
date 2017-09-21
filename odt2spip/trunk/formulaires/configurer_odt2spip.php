@@ -45,7 +45,7 @@ function formulaires_configurer_odt2spip_traiter_dist() {
 	);
 
 	if (_request('generer_cle')) {
-		$res['message_ok'] .= '<br />' . _T('odt2spip:nouvelle_cle_api_generee');
+		$res['message_ok'] .= '<br />' . _T('odtspip:nouvelle_cle_api_generee');
 	}
 
 	return $res;
