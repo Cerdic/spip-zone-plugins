@@ -1,9 +1,9 @@
 <paquet
 	prefix="pp_blocs"
 	categorie="edition"
-	version="1.0.1"
+	version="1.0.2"
 	etat="test"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="images/porte_plume_blocs-64.png"
 	documentation=""
 >
