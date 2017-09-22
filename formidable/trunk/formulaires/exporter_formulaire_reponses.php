@@ -139,6 +139,9 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 		}
 		unset($_reponses_valeurs);
 
+		// Ensuite tous les champs
+		$tenter_unserialize = charger_fonction('tenter_unserialize', 'filtre/');
+
 		// On parcourt chaque réponse
 		foreach ($reponses as $i => $reponse) {
 			// Est-ce qu'il y a un auteur avec un nom
@@ -158,27 +161,28 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 				$reponse_complete[] = statut_texte_instituer('formulaires_reponse', $reponse['statut']);
 			}
 
-			// Ensuite tous les champs
-			$tenter_unserialize = charger_fonction('tenter_unserialize', 'filtre/');
-
 			// Liste de toutes les valeurs
 			$valeurs = $reponses_valeurs[$reponse['id_formulaires_reponse']];
 
 			foreach ($saisies as $nom => $saisie) {
 				if ($saisie['saisie'] != 'explication') {
-					$valeur = $tenter_unserialize($valeurs[$nom]);
 
 					// Saisie de type fichier ?
-					if ($saisie['saisie'] == 'fichiers' and is_array($valeur)) {//tester s'il y a des saisies parmi les fichiers
-						$chemin = _DIR_FICHIERS_FORMIDABLE . 'formulaire_' . $id_formulaire . '/reponse_' . $reponse['id_formulaires_reponse'];
-						foreach ($valeur as $v) {
-							$chemin_fichier = $chemin . '/' . $saisie['options']['nom'] . '/' . $v['nom'];
-							if (file_exists($chemin_fichier)) {
-								$saisies_fichiers[] = $chemin_fichier;
+					if ($saisie['saisie'] == 'fichiers') {
+						$_valeurs = $tenter_unserialize($valeurs[$nom]);
+						//tester s'il y a des saisies parmi les fichiers
+						if (is_array($_valeurs) and $_valeurs) {
+							$chemin = _DIR_FICHIERS_FORMIDABLE . 'formulaire_' . $id_formulaire . '/reponse_' . $reponse['id_formulaires_reponse'];
+							foreach ($_valeurs as $v) {
+								$chemin_fichier = $chemin . '/' . $saisie['options']['nom'] . '/' . $v['nom'];
+								if (file_exists($chemin_fichier)) {
+									$saisies_fichiers[] = $chemin_fichier;
+								}
 							}
 						}
 					}
 
+					$valeur = isset($valeurs[$nom]) ? $valeurs[$nom] : '';
 					$reponse_complete[] = formidable_generer_valeur_texte_saisie($valeur, $saisie);
 				}
 			}
@@ -235,10 +239,15 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
  */
 function formidable_generer_valeur_texte_saisie($valeur, $saisie) {
 	static $resultats = [];
+	static $tenter_unserialize = null;
+	if (is_null($tenter_unserialize)) {
+		$tenter_unserialize = charger_fonction('tenter_unserialize', 'filtre/');
+	}
 
 	$hash = md5($saisie['saisie'] . ':'  . serialize($saisie['options']) . ':' . $valeur);
 
 	if (!isset($resultats[$hash])) {
+		$valeur = $tenter_unserialize($valeur);
 		// Il faut éviter de passer par là… ça prend du temps…
 		$resultats[$hash] = facteur_mail_html2text(
 			recuperer_fond(
