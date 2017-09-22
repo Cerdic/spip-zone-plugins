@@ -68,6 +68,7 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 			. (strlen($date_debut) > 0 ? ' and date >= "'. $date_debut. '"' : '')
 			. (strlen($date_fin) > 0 ? ' and date <= "'.$date_fin.'"' : '')
 		)) {
+
 		include_spip('inc/saisies');
 		include_spip('facteur_fonctions');
 		include_spip('inc/filtres');
@@ -96,9 +97,10 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 				);
 			}
 		}
+		$saisies_noms = array_keys($saisies);
 
 		// On passe la ligne des titres de colonnes dans un pipeline
-		$titres               = pipeline(
+		$titres = pipeline(
 			'formidable_exporter_formulaire_reponses_titres',
 			array(
 				'args' => array('id_formulaire' => $id_formulaire, 'formulaire' => $formulaire),
@@ -106,17 +108,19 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 			)
 		);
 		$reponses_completes[] = $titres;
-		$saisies_fichiers     = array();
+		$saisies_fichiers = array();
+
+		// sélectionner tous les auteurs d’un coup. Évite N requetes SQL…
+		$ids_auteurs = array_filter(array_map('intval', array_column($reponses, 'id_auteur')));
+		$auteurs = sql_allfetsel('id_auteur, nom', 'spip_auteurs', sql_in('id_auteur', $ids_auteurs));
+		$auteurs = array_column($auteurs, 'nom', 'id_auteur');
 
 		// On parcourt chaque réponse
-		foreach ($reponses as $reponse) {
+		foreach ($reponses as $i => $reponse) {
 			// Est-ce qu'il y a un auteur avec un nom
 			$nom_auteur = '';
 			if ($id_auteur = intval($reponse['id_auteur'])) {
-				$nom_auteur = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur = ' . $id_auteur);
-			}
-			if (!$nom_auteur) {
-				$nom_auteur = '';
+				$nom_auteur = !empty($auteurs[$id_auteur]) ? $auteurs[$id_auteur] : '';
 			}
 
 			// Le début de la réponse avec les infos (date, auteur, etc)
@@ -132,18 +136,25 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 
 			// Ensuite tous les champs
 			$tenter_unserialize = charger_fonction('tenter_unserialize', 'filtre/');
+
+			// Liste de toutes les valeurs de cette réponse (en 1 seule requête).
+			$valeurs = sql_allfetsel(
+				'nom, valeur',
+				'spip_formulaires_reponses_champs',
+				array(
+					'id_formulaires_reponse = ' . intval($reponse['id_formulaires_reponse']),
+					sql_in('nom', $saisies_noms)
+				)
+			);
+			$valeurs = array_column($valeurs, 'valeur', 'nom');
+
 			foreach ($saisies as $nom => $saisie) {
 				if ($saisie['saisie'] != 'explication') {
-					$valeur = sql_getfetsel(
-						'valeur',
-						'spip_formulaires_reponses_champs',
-						'id_formulaires_reponse = ' . intval($reponse['id_formulaires_reponse']) . ' and nom = ' . sql_quote($nom)
-					);
-					$valeur = $tenter_unserialize($valeur);
+					$valeur = $tenter_unserialize($valeurs[$nom]);
 
 					// Saisie de type fichier ?
-					if ($saisie['saisie'] == 'fichiers' && is_array($valeur)) {//tester s'il y a des saisies parmi les fichiers
-						$chemin         = _DIR_FICHIERS_FORMIDABLE . 'formulaire_' . $id_formulaire . '/reponse_' . $reponse['id_formulaires_reponse'];
+					if ($saisie['saisie'] == 'fichiers' and is_array($valeur)) {//tester s'il y a des saisies parmi les fichiers
+						$chemin = _DIR_FICHIERS_FORMIDABLE . 'formulaire_' . $id_formulaire . '/reponse_' . $reponse['id_formulaires_reponse'];
 						foreach ($valeur as $v) {
 							$chemin_fichier = $chemin . '/' . $saisie['options']['nom'] . '/' . $v['nom'];
 							if (file_exists($chemin_fichier)) {
@@ -152,19 +163,7 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 						}
 					}
 
-					$reponse_complete[] = facteur_mail_html2text(
-						recuperer_fond(
-							'saisies-vues/_base',
-							array_merge(
-								array(
-									'valeur_uniquement' => 'oui',
-									'type_saisie'       => $saisie['saisie'],
-									'valeur'            => $valeur,
-								),
-								$saisie['options']
-							)
-						)
-					);
+					$reponse_complete[] = formidable_generer_valeur_texte_saisie($valeur, $saisie);
 				}
 			}
 
@@ -206,4 +205,40 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 	} else {
 		return false;
 	}
+}
+
+/**
+ * Cette fonction retourne le texte d’une réponse pour un type de saisie donnée.
+ *
+ * On limite les calculs lorsque 2 valeurs/types de saisies sont identiques
+ * de fois de suite.
+ *
+ * @param string $valeur
+ * @param array $saisie
+ * @return string
+ */
+function formidable_generer_valeur_texte_saisie($valeur, $saisie) {
+	static $resultats = [];
+
+	$hash = md5($saisie['saisie'] . ':'  . serialize($saisie['options']) . ':' . $valeur);
+
+	if (!isset($resultats[$hash])) {
+		// Il faut éviter de passer par là… ça prend du temps…
+		$resultats[$hash] = facteur_mail_html2text(
+			recuperer_fond(
+				'saisies-vues/_base',
+				array_merge(
+					array(
+						'valeur_uniquement' => 'oui',
+						'type_saisie'       => $saisie['saisie'],
+						'valeur'            => $valeur,
+					),
+					$saisie['options']
+				)
+			)
+		);
+
+	}
+
+	return $resultats[$hash];
 }
