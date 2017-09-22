@@ -2,7 +2,7 @@
 
 if (window.jQuery) {
 	function rang(){
-		[(#SPIP_VERSION|spip_version_compare{3.2-dev,<}|oui)
+		[(#SPIP_VERSION|version_compare{3.2, <}|oui)
 		$.getScript("#CHEMIN{prive/javascript/ui/core.js}", function(){
 		$.getScript("#CHEMIN{prive/javascript/ui/widget.js}", function(){
 		$.getScript("#CHEMIN{prive/javascript/ui/mouse.js}", function(){
@@ -36,7 +36,7 @@ if (window.jQuery) {
 
 			$( ".spip.liste tbody" ).disableSelection();
 
-		[(#SPIP_VERSION|spip_version_compare{3.2-dev,<}|oui)
+		[(#SPIP_VERSION|version_compare{3.2, <}|oui)
 		})})})})
 		]
 	}
