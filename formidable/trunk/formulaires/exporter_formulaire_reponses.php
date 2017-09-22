@@ -84,6 +84,7 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 		if ($statut_reponses != 'publie') {
 			$titres[] = _T('formidable:reponse_statut');
 		}
+
 		$saisies = saisies_lister_par_nom(unserialize($formulaire['saisies']), false);
 		foreach ($saisies as $nom => $saisie) {
 			if ($saisie['saisie'] != 'explication') {    // on exporte tous les champs sauf explications
@@ -97,7 +98,6 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 				);
 			}
 		}
-		$saisies_noms = array_keys($saisies);
 
 		// On passe la ligne des titres de colonnes dans un pipeline
 		$titres = pipeline(
@@ -107,6 +107,7 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 				'data' => $titres,
 			)
 		);
+
 		$reponses_completes[] = $titres;
 		$saisies_fichiers = array();
 
@@ -114,6 +115,29 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 		$ids_auteurs = array_filter(array_map('intval', array_column($reponses, 'id_auteur')));
 		$auteurs = sql_allfetsel('id_auteur, nom', 'spip_auteurs', sql_in('id_auteur', $ids_auteurs));
 		$auteurs = array_column($auteurs, 'nom', 'id_auteur');
+
+		// Sélectionner toutes valeurs des réponses d’un coup. Éviten N requetes SQL...
+		$ids_reponses = array_column($reponses, 'id_formulaires_reponse');
+		$_reponses_valeurs = sql_allfetsel(
+			'id_formulaires_reponse, nom, valeur',
+			'spip_formulaires_reponses_champs',
+			array(
+				sql_in('id_formulaires_reponse', $ids_reponses),
+				//sql_in('nom', array_keys($saisies)) // ralentit la requête, et inutile
+			),
+			'',
+			'id_formulaires_reponse ASC'
+		);
+
+		// grouper par identifiant de réponse
+		$reponses_valeurs = array();
+		foreach ($_reponses_valeurs as $r) {
+			if (empty($reponses_valeurs[$r['id_formulaires_reponse']])) {
+				$reponses_valeurs[$r['id_formulaires_reponse']] = array();
+			}
+			$reponses_valeurs[$r['id_formulaires_reponse']][$r['nom']] = $r['valeur'];
+		}
+		unset($_reponses_valeurs);
 
 		// On parcourt chaque réponse
 		foreach ($reponses as $i => $reponse) {
@@ -137,16 +161,8 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 			// Ensuite tous les champs
 			$tenter_unserialize = charger_fonction('tenter_unserialize', 'filtre/');
 
-			// Liste de toutes les valeurs de cette réponse (en 1 seule requête).
-			$valeurs = sql_allfetsel(
-				'nom, valeur',
-				'spip_formulaires_reponses_champs',
-				array(
-					'id_formulaires_reponse = ' . intval($reponse['id_formulaires_reponse']),
-					sql_in('nom', $saisies_noms)
-				)
-			);
-			$valeurs = array_column($valeurs, 'valeur', 'nom');
+			// Liste de toutes les valeurs
+			$valeurs = $reponses_valeurs[$reponse['id_formulaires_reponse']];
 
 			foreach ($saisies as $nom => $saisie) {
 				if ($saisie['saisie'] != 'explication') {
