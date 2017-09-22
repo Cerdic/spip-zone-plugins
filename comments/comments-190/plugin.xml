@@ -4,7 +4,7 @@
 	<icon>icon.png</icon>
 	<auteur>[Tetue->http://spip.tetue.net]</auteur>
 	<licence>GPL - (c) 2009</licence>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<etat>stable</etat>
 	<description>Remplace le traditionnel <code>#FORMULAIRE_FORUM</code> de SPIP par un formulaire de commentaires simplifi&#233;.</description>
 	<lien>https://contrib.spip.net/?article3362</lien>
