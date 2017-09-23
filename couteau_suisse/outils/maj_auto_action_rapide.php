@@ -347,8 +347,8 @@ function plugin_get_infos_maj($p, $timeout=false, $DIR_PLUGINS=_DIR_PLUGINS) {
 		// prise en compte du recent demenagement de la Zone...
 		$url_origine = preg_replace(',/_plugins_/_(?:stable|dev|test)_/,','/_plugins_/', $url_origine);
 	}
-	// URL http:// inattendu
-	if(strncmp($url_origine, 'http://', 7)!==0) $url_origine='';
+	// URL https:// inattendu
+	if(strncmp($url_origine, 'https://', 8)!==0) $url_origine='';
 	$infos['id_paquet'] = 0; // SVP
 	$infos['url_origine'] = strlen($url_origine)?$url_origine._MAJ_LOG_FIN:'';
 	$infos['rev_local'] = abs($rev_local);
