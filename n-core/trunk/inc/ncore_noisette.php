@@ -73,10 +73,10 @@ function noisette_ajouter($plugin, $type_noisette, $squelette, $rang = 0, $stock
 
 		// On récupère les noisettes déjà affectées au squelette sous la forme d'un tableau indexé par l'identifiant
 		// de la noisette stocké dans l'index 'id_noisette'.
-		$noisettes = ncore_noisette_lister($plugin, $squelette, '', $stockage);
+		$noisettes = ncore_noisette_lister($plugin, $squelette, '', 'rang',  $stockage);
 
 		// On calcule le rang max déjà utilisé.
-		$rang_max = $noisettes ? max(array_column($noisettes, 'rang')) : 0;
+		$rang_max = $noisettes ? max(array_keys($noisettes)) : 0;
 
 		if (!$rang or ($rang and ($rang > $rang_max))) {
 			// Si, le rang est nul ou si il est strictement supérieur au rang_max, on positionne la noisette
@@ -89,9 +89,10 @@ function noisette_ajouter($plugin, $type_noisette, $squelette, $rang = 0, $stock
 			// Si le rang est non nul c'est qu'on insère la noisette dans la liste existante.
 			// Il faut décaler les noisettes de rang supérieur ou égal si elle existent.
 			if ($rang <= $rang_max) {
-				foreach ($noisettes as $_id_noisette => $_description) {
-					if ($_description['rang'] >= $rang) {
-						ncore_noisette_ranger($plugin, $_description, $_description['rang'] + 1, $stockage);
+				krsort($noisettes);
+				foreach ($noisettes as $_rang => $_description) {
+					if ($_rang >= $rang) {
+						ncore_noisette_ranger($plugin, $_description, $_rang + 1, $stockage);
 					}
 				}
 			}
@@ -150,12 +151,13 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
 
 		// On récupère les noisettes restant affectées au squelette sous la forme d'un tableau indexé par l'identifiant
 		// de la noisette stocké dans l'index 'id_noisette' mais toujours trié de façon à ce que les rangs soient croissants.
-		$autres_noisettes = ncore_noisette_lister($plugin, $description['squelette'], '', $stockage);
+		$autres_noisettes = ncore_noisette_lister($plugin, $description['squelette'], '', 'rang', $stockage);
 
 		// Si il reste des noisettes, on tasse d'un rang les noisettes qui suivaient la noisette supprimée.
 		if ($autres_noisettes) {
-			foreach ($autres_noisettes as $_id_noisette => $_autre_description) {
-				if ($_autre_description['rang'] > $description['rang']) {
+			ksort($autres_noisettes);
+			foreach ($autres_noisettes as $_rang => $_autre_description) {
+				if ($_rang > $description['rang']) {
 					ncore_noisette_ranger($plugin, $_autre_description, $_autre_description['rang'] - 1, $stockage);
 				}
 			}
@@ -292,25 +294,35 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
 
 		// Si les rangs origine et destination sont identiques on ne fait rien !
 		if ($rang_destination != $rang_origine) {
-			// On efface le rang de la noisette à déplacer pour permettre son affectation à une autre noisette.
-			ncore_noisette_ranger($plugin, $description, 0, $stockage);
+			// On récupère les noisettes affectées au même squelette sous la forme d'un tableau indexé par le rang
+			// et on déplace les noisettes impactées.
+			$noisettes = ncore_noisette_lister($plugin, $description['squelette'], '', 'rang', $stockage);
 
-			// On récupère les noisettes affectées au même squelette sous la forme d'un tableau indexé par l'identifiant
-			// de la noisette stocké dans l'index 'id_noisette' et on déplace les noisettes impactées.
-			$noisettes = ncore_noisette_lister($plugin, $description['squelette'], '', $stockage);
+			// On vérifie que le rang destination soit bien compris entre 1 et le rang max, sinon on le force à une
+			// des bornes.
+			$rang_destination = max(1, $rang_destination);
+			$rang_max = $noisettes ? max(array_keys($noisettes)) : 0;
+			$rang_destination = min($rang_max, $rang_destination);
 
-			// Suivant la position d'origine et de destination de la noisette déplacée on renumérote les noisettes
+			// Suivant la position d'origine et de destination de la noisette déplacée on trie les noisettes
 			// du squelette.
-			foreach ($noisettes as $_id_noisette => $_description) {
+			if ($rang_destination < $rang_origine) {
+				krsort($noisettes);
+			} else {
+				ksort($noisettes);
+			}
+
+			// On déplace les noisettes impactées.
+			foreach ($noisettes as $_rang => $_description) {
 				if ($rang_destination < $rang_origine) {
 					// On "descend" les noisettes du rang destination au rang origine non compris.
-					if (($_description['rang'] >= $rang_destination) and ($_description['rang'] < $rang_origine)) {
-						ncore_noisette_ranger($plugin, $_description, $_description['rang'] + 1, $stockage);
+					if (($_rang >= $rang_destination) and ($_rang < $rang_origine)) {
+						ncore_noisette_ranger($plugin, $_description, $_rang + 1, $stockage);
 					}
 				} else {
 					// On "remonte" les noisettes du rang destination au rang origine non compris.
-					if (($_description['rang'] <= $rang_destination) and ($_description['rang'] > $rang_origine)) {
-						ncore_noisette_ranger($plugin, $_description, $_description['rang'] - 1, $stockage);
+					if (($_rang <= $rang_destination) and ($_rang > $rang_origine)) {
+						ncore_noisette_ranger($plugin, $_description, $_rang - 1, $stockage);
 					}
 				}
 			}

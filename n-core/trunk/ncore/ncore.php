@@ -321,23 +321,15 @@ function ncore_noisette_ranger($plugin, $description, $rang, $stockage = '') {
 		// Le tableau est au format [squelette][rang] = description.
 		$noisettes = lire_config("${plugin}_noisettes", array());
 
-		// Modification de la noisette :
-		// La description est complète et comprends donc l'identifiant de la noisette et le rang actuellement
-		// occupé.
-		if (!isset($noisettes[$description['squelette']][$description['rang']])) {
-			// On supprime la noisette du rang qu'elle occupe.
-			unset($noisettes[$description['squelette']]['rang']);
+		// On ajoute la noisette au rang choisi même si on doit écraser un index existant.
+		// Il est donc nécessaire de gérer la collision en amont de cette fonction.
+		// De même, l'ancien rang de la noisette n'est pas supprimé, cela est aussi à gérer en amont.
+		$description['rang'] = $rang;
+		$noisettes[$description['squelette']][$rang] = $description;
 
-			// On ajoute la noisette au rang choisi
-			if (!isset($noisettes[$description['squelette']][$rang])) {
-				$description['rang'] = $rang;
-				$noisettes[$description['squelette']][$rang] = $description;
-
-				// On met à jour la meta
-				ecrire_config("${plugin}_noisettes", $noisettes);
-				$retour = true;
-			}
-		}
+		// On met à jour la meta
+		ecrire_config("${plugin}_noisettes", $noisettes);
+		$retour = true;
 	}
 
 	return $retour;
@@ -392,7 +384,7 @@ function ncore_noisette_destocker($plugin, $description, $stockage = '') {
  *
  * @return array|mixed
  */
-function ncore_noisette_lister($plugin, $squelette = '', $information = '', $stockage = '') {
+function ncore_noisette_lister($plugin, $squelette = '', $information = '', $cle = 'rang', $stockage = '') {
 
 	// Initialisation du tableau de sortie.
 	$noisettes = array();
@@ -404,7 +396,7 @@ function ncore_noisette_lister($plugin, $squelette = '', $information = '', $sto
 	include_spip('inc/ncore_utils');
 	if ($lister = ncore_chercher_service($plugin, 'noisette_lister', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
-		$noisettes = $lister($plugin, $squelette, $information);
+		$noisettes = $lister($plugin, $squelette, $information, $cle);
 	} else {
 		// Le plugin ne propose pas de fonction propre ou le stockage N-Core est explicitement demandé.
 		// -- N-Core stocke les noisettes dans une meta propre au plugin appelant contenant un tableau au format
@@ -416,15 +408,19 @@ function ncore_noisette_lister($plugin, $squelette = '', $information = '', $sto
 			if (!empty($meta_noisettes[$squelette])) {
 				$noisettes = $meta_noisettes[$squelette];
 				$noisettes = $information
-					? array_column($noisettes, $information, 'id_noisette')
-					: array_column($noisettes, null, 'id_noisette');
+					? array_column($noisettes, $information, $cle)
+					: array_column($noisettes, null, $cle);
 			}
 		} elseif ($meta_noisettes) {
-			foreach ($meta_noisettes as $_squelette => $_descriptions) {
-				$noisettes_squelette = $information
-					? array_column($_descriptions, $information, 'id_noisette')
-					: array_column($_descriptions, null, 'id_noisette');
-				$noisettes = array_merge($noisettes, $noisettes_squelette);
+			if ($cle == 'rang') {
+				$noisettes = $meta_noisettes;
+			} else {
+				foreach ($meta_noisettes as $_squelette => $_descriptions) {
+					$noisettes_squelette = $information
+						? array_column($_descriptions, $information, $cle)
+						: array_column($_descriptions, null, $cle);
+					$noisettes = array_merge($noisettes, $noisettes_squelette);
+				}
 			}
 		}
 	}
