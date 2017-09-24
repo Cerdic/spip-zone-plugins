@@ -89,29 +89,21 @@ function noizetier_type_noisette_lister($plugin, $information = '') {
 	return $info_noisettes;
 }
 
-function noizetier_noisette_lister($plugin, $squelette = '', $information = '') {
 
-	$where = array('plugin=' . sql_quote($plugin));
-	if ($squelette) {
-		$where[] = 'squelette=' . sql_quote($squelette);
-	}
-	$select = $information ? array_merge(array('squelette', 'rang', 'id_noisette'), array($information)) : '*';
 
-	if ($noisettes = sql_allfetsel($select, 'spip_noizetier', $where)) {
-		$noisettes = $information
-			? array_column($noisettes, $information, 'id_noisette')
-			: array_column($noisettes, null, 'id_noisette');
-	}
-
-	return $noisettes;
-}
-
-function noizetier_noisette_stocker($plugin, $action, $description) {
-
-	$id_noisette = 0;
+/**
+ *
+ * @package SPIP\NOIZETIER\SERVICE\NOISETTE
+ *
+ * @param string $plugin
+ * @param array  $description
+ *
+ * @return int
+ */
+function noizetier_noisette_stocker($plugin, $description) {
 
 	// Mise à jour en base de données.
-	if ($action == 'creation') {
+	if (empty($description['id_noisette'])) {
 		// Compléter la description fournie avec les champs propres au noizetier, à savoir, ceux identifiant
 		// la page/composition ou l'objet et le bloc.
 		// On parse le squelette pour identifier les données manquantes.
@@ -123,7 +115,7 @@ function noizetier_noisette_stocker($plugin, $action, $description) {
 			include_spip('inc/invalideur');
 			suivre_invalideur("id='noisette/$id_noisette'");
 		}
-	} elseif ($action == 'modification') {
+	} else {
 		// On sauvegarde l'id de la noisette et on le retire de la description pour éviter une erreur à l'update.
 		$id_noisette = intval($description['id_noisette']);
 		unset($description['id_noisette']);
@@ -137,6 +129,119 @@ function noizetier_noisette_stocker($plugin, $action, $description) {
 
 	return $id_noisette;
 }
+
+/**
+ *
+ * @package SPIP\NOIZETIER\SERVICE\NOISETTE
+ *
+ * @param string $plugin
+ * @param array  $description
+ * @param int    $rang_destination
+ *
+ * @return bool
+ */
+function ncore_noisette_ranger($plugin, $description, $rang_destination) {
+
+	// Initialisation de la sortie.
+	$retour = true;
+
+	$where = array('id_noisette=' . intval($description['id_noisette']));
+	$update = array('rang' => $rang_destination);
+	if (!sql_updateq('spip_noizetier', $update, $where)) {
+		$retour = false;
+	}
+
+	return $retour;
+}
+
+/**
+ *
+ * @package SPIP\NCORE\SERVICE\NOISETTE
+ *
+ * @param        $plugin
+ * @param        $description
+ *
+ * @return bool
+ */
+function ncore_noisette_destocker($plugin, $description) {
+
+	// Initialisation de la sortie.
+	$retour = true;
+
+	$where = array('id_noisette=' . intval($description['id_noisette']));
+	if (!sql_delete('spip_noizetier', $where)) {
+		$retour = false;
+	}
+
+	return $retour;
+}
+
+
+
+function noizetier_noisette_lister($plugin, $squelette = '', $information = '', $cle = 'rang') {
+
+	// Initialisation du tableau de sortie.
+	$noisettes = array();
+
+	$where = array('plugin=' . sql_quote($plugin));
+	if ($squelette) {
+		$where[] = 'squelette=' . sql_quote($squelette);
+	}
+	$select = $information ? array_merge(array('squelette', 'rang', 'id_noisette'), array($information)) : '*';
+	$order_by = $cle == 'rang' ? array('squelette', 'rang') : array('id_noisette');
+
+	if ($table_noisettes = sql_allfetsel($select, 'spip_noizetier', $where, '', $order_by)) {
+		if ($cle = 'rang') {
+			// On demande un rangement par rang.
+			// Il faut tenir compte du fait que la liste est réduite à un squelette ou pas.
+			foreach ($table_noisettes as $_noisette) {
+				if ($squelette) {
+					$noisettes[$_noisette['rang']] = $information
+						? array($information => $_noisette[$information])
+						: $_noisette;
+				} else {
+					$noisettes[$_noisette['squelette']][$_noisette['rang']] = $information
+						? array($information => $_noisette[$information])
+						: $_noisette;
+				}
+			}
+		} else {
+			// On demande un rangement par id_noisette
+			$noisettes = $information
+				? array_column($table_noisettes, $information, 'id_noisette')
+				: array_column($table_noisettes, null, 'id_noisette');
+		}
+	}
+
+	return $noisettes;
+}
+
+
+function ncore_noisette_decrire($plugin, $noisette) {
+
+	$description = array();
+	$where = array();
+
+	if (!is_array($noisette)) {
+		// L'identifiant est l'id unique de la noisette. Il faut donc parcourir le tableau pour trouver la
+		// noisette désirée
+		// => C'est la méthode optimale pour le stockage noiZetier.
+		$where = array('id_noisette=' . intval($noisette));
+	} elseif (isset($noisette['squelette']) and isset($noisette['rang']) and !empty($meta_noisettes[$noisette['squelette']][$noisette['rang']])) {
+		// L'identifiant est un tableau associatif fournissant le squelette et le rang.
+		// Comme la meta de N-Core est structurée ainsi c'est la méthode la plus adaptée pour adresser
+		// le stockage de N-Core.
+		$where = array('squelette=' . sql_quote($noisette['squelette']), 'rang=' . intval($noisette['rang']));
+	}
+
+	if ($where) {
+		$description = sql_fetsel('*', 'spip_noizetier', $where);
+	}
+
+	return $description;
+}
+
+
 
 function noizetier_noisette_config_ajax() {
 
