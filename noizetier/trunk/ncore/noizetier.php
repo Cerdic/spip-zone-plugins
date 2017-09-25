@@ -140,7 +140,7 @@ function noizetier_noisette_stocker($plugin, $description) {
  *
  * @return bool
  */
-function ncore_noisette_ranger($plugin, $description, $rang_destination) {
+function noizetier_noisette_ranger($plugin, $description, $rang_destination) {
 
 	// Initialisation de la sortie.
 	$retour = true;
@@ -163,7 +163,7 @@ function ncore_noisette_ranger($plugin, $description, $rang_destination) {
  *
  * @return bool
  */
-function ncore_noisette_destocker($plugin, $description) {
+function noizetier_noisette_destocker($plugin, $description) {
 
 	// Initialisation de la sortie.
 	$retour = true;
@@ -217,7 +217,7 @@ function noizetier_noisette_lister($plugin, $squelette = '', $information = '', 
 }
 
 
-function ncore_noisette_decrire($plugin, $noisette) {
+function noizetier_noisette_decrire($plugin, $noisette) {
 
 	$description = array();
 	$where = array();
