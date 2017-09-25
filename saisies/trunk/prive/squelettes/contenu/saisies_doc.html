@@ -12,13 +12,13 @@
 					<B_saisies_options>
 						<ul class="spip">
 							<BOUCLE_saisies_options (DATA) {source table, #SAISIES}>
-								<li><strong>[(#VALEUR{options/label}|sinon{#VALEUR{options/label_case}}|saisies_label)] [((#VALEUR{saisie}))]</strong>[(#VALEUR{options/label}|oui|et{#VALEUR{options/label_case}|oui})[(#VALEUR{options/label_case}|saisies_label)]]
+								<li><strong>[(#VALEUR{options/label}|sinon{#VALEUR{options/label_case}}|saisies_label)] [((#VALEUR{options/nom}))]</strong>[(#VALEUR{options/label}|oui|et{#VALEUR{options/label_case}|oui})[(#VALEUR{options/label_case}|saisies_label)]]
 									[(#VALEUR{options/explication}|oui)<br/>[(#VALEUR{options/explication}|saisies_label)]]
 									[(#VALEUR{options/defaut}|oui)<br/>[Par défaut : (#VALEUR{options/defaut}|saisies_label)]]
 									<B_saisies_datas>
 										<br/>Choix possibles :
 										<ul class="spip"><BOUCLE_saisies_datas (DATA) {source table, #VALEUR{options/datas}}>
-											<li class="item data_[(#CLE)]">[(#VALEUR|saisies_label)]</li>
+											<li class="item data_[(#CLE)]">[(#VALEUR|saisies_label)][ ((#CLE))]</li>
 									</BOUCLE_saisies_datas></ul>
 									</B_saisies_datas>
 								</li>
