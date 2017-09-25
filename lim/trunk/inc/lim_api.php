@@ -9,7 +9,9 @@
  * @package    SPIP\Lim\Inc
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Vérifier si il existe déjà des logos de téléchargés pour un type d'objet
@@ -105,13 +107,16 @@ function lim_verifier_presence_objets($id_rubrique, $objet) {
 
 
 /**
- * chercher les tables SPIP qui ne gèrent pas de rubrique, et donc non pertinentes dans la restriction par rubrique
- * gestion des tables historiques également : annuaire de site et brèves activés ?
+ * Construire la liste des objets à exclure
+ * les objets SPIP qui ne sont jamais listés dans rubrique, et donc non pertinents dans la restriction par rubrique.
+ *
+ * exception : pour les brèves et les sites, on vérifie qu'elles ont été activées
+ * exception : les documents si ceux-ci ont été activés dans les rubriques (menu Configuration -> Contenu du site -> paragraphe Documents joints)
  * 
  * @return array
  *	tableau des nom de tables SPIP à exclure (ex : spip_auteurs, spip_mots, etc.)
  */
-function lim_objets_sans_rubrique() {
+function lim_objets_a_exclure() {
 	$exclus = array();
 	$tables = lister_tables_objets_sql();
 	foreach ($tables as $key => $value) {
@@ -121,15 +126,21 @@ function lim_objets_sans_rubrique() {
 	
 	// Exception pour les objets breves et sites : sont-ils activés
 	if (lire_config('activer_breves') == 'non')
-		array_push($exclus,'spip_breves');
+		array_push($exclus, 'spip_breves');
 	if (lire_config('activer_sites') == 'non')
-		array_push($exclus,'spip_syndic');
+		array_push($exclus, 'spip_syndic');
 
+	// Exception pour les documents (si ils ont été activés pour les rubriques)
+	$document_objet = lire_config('documents_objets');
+	if (strpos($document_objet, 'spip_rubriques')) {
+		$key = array_search('spip_documents', $exclus);
+		unset($exclus[$key]);
+	}
 	return $exclus;
 }
 
 /**
- * récupérer le tableau des rubriques dans lesquelles il est possible d'editer un objet
+ * Récupérer la liste des rubriques dans lesquelles il est possible de créer l'objet demandé
  * 
  * @param string $type
  * @return array
@@ -139,13 +150,13 @@ function lim_publierdansrubriques($type) {
 	$rubriques_choisies = array();
 	$tab_rubrique_objet = lire_config("lim_rubriques/$type");
 
-	// si aucune restriction on sort.
-	if (is_null($tab_rubrique_objet)) return $rubriques_choisies;
+	// si l'objet n'est pas dans la config, on sort
+	if (is_null($tab_rubrique_objet)) {
+		return $rubriques_choisies;
+	} 
 
 	$res = sql_allfetsel('id_rubrique', 'spip_rubriques');
-	foreach ($res as $key => $value) {
-		$tab_rubriques[] = $value['id_rubrique'];
-	}
+	$tab_rubriques = array_column($res, 'id_rubrique');
 	$rubriques_choisies = array_diff($tab_rubriques,$tab_rubrique_objet);
 	return $rubriques_choisies;
 }
@@ -157,25 +168,18 @@ function lim_publierdansrubriques($type) {
  * @return array
  */
 function lim_type($tableau) {
-	if (!is_array($tableau))
+	if (!is_array($tableau)) {
 		return '';
+	}
 
 	array_walk($tableau, 'lim_get_type');
 	return $tableau;
 }
 
 /**
+ * fonction callback pour lim_type
  * Changer les valeurs du tableau spip_articles -> article
  */
 function lim_get_type(&$value, $key) {
 	$value = objet_type(table_objet($key));
 }
-
-/**
- * renvoyer le nombre de rubrique auxquelles est 
- */
-function lim_nombre_rubrique($objet) {
-	$value = objet_type(table_objet($key));
-}
-
-?>
