@@ -9,7 +9,9 @@
  * @package    SPIP\Lim\Pipelines
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/lim_api');
 include_spip('inc/config');
@@ -41,7 +43,7 @@ function lim_afficher_config_objet($flux){
 }
 
 /**
- * gestion des contenus par rubrique : rediriger la creation d'un objet vers la bonne rubrique si celle-ci est pris en compte par LIM
+ * Gestion des contenus par rubrique : si pour un objet A la conf dans LIM ne laisse qu'un seule rubrique dans laquelle cet objet peut être éditer, rediriger l'enregistrement vers cette rubrique en renvoyant l'id_parent
  * ce traitement est rendu nécessaire par 
  * -> l'action de la fonction inc/lim_api.php -> inc_chercher_rubrique qui supprime l'affichage du sélecteur de rubrique si une seule rubrique
  * -> le cas 2 (voir ci-dessous)
@@ -60,9 +62,10 @@ function lim_formulaire_charger($flux){
 	$form	= $flux['args']['form'];
 	$valid 	= strpos($form, 'editer');
 	// si ce n'est pas un formulaire d'édition 
-	//ou si la restriction par rubrique n'a pas été activée, on sort
-	if ($valid === false OR is_null(lire_config('lim_objets'))) return $flux;
-
+	// ou si la restriction par rubrique n'a pas été activée, on sort
+	if ($valid === false OR is_null(lire_config('lim_objets'))) {
+		return $flux;
+	}
 
 	$type				= substr($form, 7); // 'editer_objet' devient 'objet'
 	$nom_table			= table_objet_sql($type);
@@ -82,7 +85,7 @@ function lim_formulaire_charger($flux){
 }
 
 /**
- * gestion des contenus par rubrique : vérifier si on à le droit de publier l'objet dans cette rubrique
+ * Gestion des contenus par rubrique : vérifier si on a le droit de publier l'objet dans cette rubrique
  * en fonction des rubriques décochées dans la page exec=configurer_lim_rubriques
  *
  * @param array $flux
@@ -125,7 +128,6 @@ function lim_formulaire_verifier($flux){
 			$opt = null;
 			$msg_error = _T('lim:info_creer_dans_rubrique_non_autorise');
 		}
-
 		// mise en berne car il faudrait pourvoir gérer les cas suivants :
 		// 1- cas de la création : voir #122 (juste au dessus)
 		// 2- en l'état avec SPIP, impossible de surcharger deux fois une autorisation. Du coup devient compliqué de gérer aussi le cas des rédacteurs
@@ -153,5 +155,3 @@ function lim_recuperer_fond($flux){
 	}
 	return $flux;
 }
-
-?>
