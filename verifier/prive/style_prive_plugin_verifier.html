@@ -15,8 +15,10 @@
 body.verifier_doc {
 	background-color: #efefef;
 }
-<B_verifier>
-<BOUCLE_verifier (DATA) {source table, #VAL{verifier}|appliquer_filtre{verifier_lister_disponibles}}>
-.navigation_avec_icones .bando2_verifier_[(#CLE)] { [background-image: url((#ICONE|image_reduire{16}|extraire_attribut{src}));] }
-</BOUCLE_verifier>
-</B_verifier>
+<BOUCLE_plugin_yaml (CONDITION) {si #VAL{_DIR_PLUGIN_YAML}|defined}>
+	<BOUCLE_verifier (DATA) {source table, #VAL{verifier}|appliquer_filtre{verifier_lister_disponibles}}>
+	.navigation_avec_icones .bando2_verifier_[(#CLE)] { [background-image: url((#ICONE|image_reduire{16}|extraire_attribut{src}));] }
+	</BOUCLE_verifier>
+</BOUCLE_plugin_yaml>
+<:verifier:plugin_yaml_inactif:>
+<//B_plugin_yaml>
