@@ -126,7 +126,7 @@ function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_t
 // Balise placée dans une boucle DOCUMENTS et appelée dans un modèle <media>
 function balise_MEDIA_AFFICHER_LEGENDE_dist($p) {
 	$conteneur = interprete_argument_balise(1,$p);
-	$p->code = "!empty(\$Pile[0]['legende']) || !empty(\$Pile[0]['titre']) || !empty(\$Pile[0]['descriptif']) || !empty(\$Pile[0]['credits']) || !empty(\$Pile[0]['args']['type']) || !empty(\$Pile[0]['poids']) ? ' ' : ''";
+	$p->code = "\$Pile[0]['legende'] || \$Pile[0]['titre'] || \$Pile[0]['descriptif'] || \$Pile[0]['credits'] || \$Pile[0]['args']['type'] || \$Pile[0]['poids'] ? ' ' : ''";
 	return $p;
 }
 
@@ -253,30 +253,32 @@ function balise_MEDIA_LIEN_dist($p) {
 	if (isset($p->boucles[$p->id_boucle]))
 		$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 	$connect = _q($connect);
-	$p->code = "calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$url_document,\$Pile[0]['args'],!empty(\$Pile[0]['lien']),!empty(\$Pile[0]['lang']),$connect)";
+	$p->code = "calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$url_document,\$Pile[0]['args'],\$Pile[0]['lien'],\$Pile[0]['lang'],$connect)";
 	return $p;
 }
 
 function calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$url_document,$args,$lien,$lang,$connect='') {
 	$titre_lien = isset($args['titre_lien']) ? $args['titre_lien'] : '0';
 	$titre = isset($args['titre']) ? $args['titre'] : '0';
-	
+
 	// A-t-on demandé un lien
 	if (!$lien && !$forcer_lien)
 		return $objet;
 	// Si lien non spécifique, on pointe sur le document (en se basant sur $url_document pour ne pas pointer sur spip.php?page=document)
-	if ($lien=='lien' || !$lien) {
+	if ($lien == 'lien' || !$lien) {
 		$lien = 'doc'.$id_document;
 		// Si on pointe sur le document, que titre_lien n'est pas spécifié mais qu'on a spécifié un titre au document, on prend le titre spécifique
-		if (!$titre_lien && $titre && $titre!='titre')
+		if (!$titre_lien && $titre && $titre != 'titre')
 			$titre_lien = $titre;
 		$l = calculer_url($lien, $titre_lien, 'tout', $connect);
 		$l['url'] = $url_document;
+	} else {
+		$l = calculer_url($lien, $titre_lien, 'tout', $connect);
 	}
-	else $l = calculer_url($lien, $titre_lien, 'tout', $connect);
-	
-	if (!$l['url']) 
+
+	if (!$l['url']) {
 		return $objet;
+	}
 	$a = '<a href="'.$l['url'].'"';
 	$a .= $l['class'] ? ' class="'.$l['class'].'"' : '';
 	$a .= $l['titre'] ? ' title="'.attribut_html(typo($l['titre'])).'"' : '';
