@@ -51,8 +51,8 @@ function configs_declarer_tables_objets_sql($tables) {
 			'commentaire'        => 'tinytext NOT NULL DEFAULT ""',
 			'prefixe'            => 'tinytext NOT NULL DEFAULT ""',
 			'nom_valeur'         => 'tinytext NOT NULL DEFAULT ""',
-			'defaut'             => 'tinytext NOT NULL DEFAULT ""',
-			'valeur'             => 'tinytext NOT NULL DEFAULT ""',
+			'defaut'             => "text DEFAULT '' NOT NULL",
+			'valeur'             => "text DEFAULT '' NOT NULL",
 			'rang'               => 'bigint(21) NOT NULL',
 			'maj'                => 'TIMESTAMP'
 		),
