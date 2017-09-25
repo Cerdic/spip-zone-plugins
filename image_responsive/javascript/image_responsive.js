@@ -32,7 +32,7 @@ function charger_url_image_responsive(this_img) {
 				//console.log(value + " " + dim + " " + changer_w);
 				if (changer_w == 1) w_max = value;
 				if (value >= dim) changer_w = 0;
-				numdim[w_max] = i;
+				//numdim[w_max] = i;
 
 			});			
 			 //console.log ("Wmax: "+w_max);
