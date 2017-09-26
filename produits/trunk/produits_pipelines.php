@@ -85,4 +85,19 @@ function produits_pre_boucle($boucle){
 	return $boucle;
 }
 
-?>
+/**
+ * Optimiser la base de données
+ * Supprime les liens orphelins de l'objet vers quelqu'un et de quelqu'un vers l'objet.
+ * Supprime les objets à la poubelle.
+ *
+ * @pipeline optimiser_base_disparus
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function produits_optimiser_base_disparus($flux) {
+	include_spip('action/editer_liens');
+	$flux['data'] += objet_optimiser_liens(array('produit'=>'*'), '*');
+	sql_delete('spip_produits', "statut='poubelle' AND maj < " . $flux['args']['date']);
+
+	return $flux;
+}
