@@ -1,0 +1,34 @@
+[(#REM)
+
+	Galerie de documents : filtrage supplémentaire par mot-clé.
+
+	Squelette inséré via le pipeline récupérer_fond si les documents sont activés dans la config des mots-clés
+
+]
+<B_mots_documents>
+<div class="select-mots-documents">
+	<label for="mots_documents"><:mots:titre_page_mots_tous:></label>
+	<select id="mots_documents" name="id_mot" class="chosen">
+		<option value=""[ (#ENV{id_mot}|non)selected="selected"]>Tous</option>
+		<BOUCLE_mots_documents(MOTS mots_liens){objet=document}>
+		<option value="#ID_MOT"[ (#ENV{id_mot}|=={#ID_MOT}|oui)selected="selected"]>#TITRE</option>
+		</BOUCLE_mots_documents>
+	</select>
+</div>
+</B_mots_documents>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$('#mots_documents').on('change', function(){
+		var id_mot = $(this).val();
+		options = {
+			args: {
+				id_mot: id_mot
+			}
+		}
+		jQuery(this).ajaxReload(options); // on recharge le bloc ajax conteneur
+	});
+
+});
+</script>
