@@ -46,18 +46,21 @@ function indexerdoc_indexer_document($flux) {
 		}
 	}
 	
-	if (_INDEXERDOC_OBJETS_LIES and $flux['args']['objet'] != 'document')// si on a demandé à indexer le documents dans l'objet lié
-	{
+	// si on a demandé à indexer le documents dans l'objet lié
+	if (_INDEXERDOC_OBJETS_LIES and $flux['args']['objet'] != 'document') {
 		if (defined('_DIR_PLUGIN_EXTRAIREDOC')) {
 			include_spip('inc/extraire_document');
 		}
 		$id_objet = $flux['args']['id_objet'];
 		$objet = $flux['args']['objet'];
+		// récuperer tous les documents liés
 		$documents_lies = objet_trouver_liens(
 			array('document'=>'*'),
 			array($objet=>$id_objet)
-		);// récuperer tous les documents liés
-		foreach ($documents_lies as $document){// les parcourir tous
+		);
+		
+		// les parcourir tous
+		foreach ($documents_lies as $document){
 			$id_document = $document['id_document'];
 			$tableau_doc = array('id_document'=>$id_document);
 			$extraire = inc_extraire_document($tableau_doc); // on refait l'extrait plutot que de prendre dans ce qui existe en sphinx, parce qu'on ne sait pas quand le document a été indexé par rapport à l'objet (et en plus la requete sphinx, je sais pas la faire en php)
@@ -75,10 +78,11 @@ function indexerdoc_indexer_document($flux) {
  * @return Retourne le flux d'origine mais possiblement modifié
  */
 function indexerdoc_post_edition_lien($flux){
-	if ($flux['args']['objet_source']=="document"){ // si on modifie la liaison d'un document
+	if ($flux['args']['objet_source'] == "document"){ // si on modifie la liaison d'un document
 		$objet = $flux['args']['objet'];
 		$id_objet = $flux['args']['id_objet'];
-		indexer_redindex_objet($objet,$id_objet);
+		indexer_redindex_objet($objet, $id_objet);
 	}
+	
 	return $flux;
 }
