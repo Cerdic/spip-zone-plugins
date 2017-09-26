@@ -110,11 +110,7 @@ function noizetier_noisette_stocker($plugin, $description) {
 		$complement = squelette_phraser($description['squelette']);
 		$description = array_merge($description, $complement);
 
-		if ($id_noisette = sql_insertq('spip_noizetier', $description)) {
-			// On invalide le cache
-			include_spip('inc/invalideur');
-			suivre_invalideur("id='noisette/$id_noisette'");
-		}
+		$id_noisette = sql_insertq('spip_noizetier', $description);
 	} else {
 		// On sauvegarde l'id de la noisette et on le retire de la description pour éviter une erreur à l'update.
 		$id_noisette = intval($description['id_noisette']);
@@ -125,6 +121,12 @@ function noizetier_noisette_stocker($plugin, $description) {
 		if (!sql_updateq('spip_noizetier', $description, $where)) {
 			$id_noisette = 0;
 		}
+	}
+
+	if ($id_noisette) {
+		// On invalide le cache si le stockage a fonctionné.
+		include_spip('inc/invalideur');
+		suivre_invalideur("id='noisette/$id_noisette'");
 	}
 
 	return $id_noisette;
@@ -168,7 +170,17 @@ function noizetier_noisette_destocker($plugin, $description) {
 	// Initialisation de la sortie.
 	$retour = true;
 
-	$where = array('id_noisette=' . intval($description['id_noisette']));
+	// Calcul de la clause where en distinguant la suppression d'une noisette et de toutes les noisettes
+	// d'une squelette.
+	// De fait, $description est soit le tableau descriptif de la noisette, soit une chaine représentant le nom du
+	// squelette et dans ce cas.
+	if (is_array($description)) {
+		$where = array('id_noisette=' . intval($description['id_noisette']));
+	} else {
+		$where = array('squelette=' . sql_quote($description));
+	}
+
+	// Suppression.
 	if (!sql_delete('spip_noizetier', $where)) {
 		$retour = false;
 	}
