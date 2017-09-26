@@ -1,6 +1,6 @@
 <?php
 /**
- * Ce fichier contient l'API N-Core de gestion des noisette, c'est-à-dire les instances paramétrées
+ * Ce fichier contient l'API N-Core de gestion des noisettes, c'est-à-dire les instances paramétrées
  * de types de noisette affectées à un squelette.
  *
  * @package SPIP\NCORE\API\NOISETTE
@@ -330,6 +330,43 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
 			// On positionne le rang de la noisette à déplacer au rang destination.
 			ncore_noisette_ranger($plugin, $description, $rang_destination, $stockage);
 		}
+	}
+
+	return $retour;
+}
+
+
+/**
+ * Supprime toutes les noisettes d’un squelette.
+ *
+ * @api
+ * @uses ncore_noisette_destocker()
+ *
+ * @param string	$plugin
+ *      Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param mixed		$squelette
+ * 		Chemin relatif du squelette où ajouter la noisette.
+ * @param string	$stockage
+ *      Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
+ *      ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
+ * 		fournissant le service de stockage souhaité.
+ *
+ * @return bool
+ */
+function noisette_vider_squelette($plugin, $squelette, $stockage = '') {
+
+	// Initialisation du retour
+	$retour = false;
+
+	// On charge l'API de N-Core.
+	// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
+	include_spip("ncore/ncore");
+
+	if ($squelette) {
+		// Suppression de la noisette. On passe la description complète ce qui permet à la fonction de
+		// destockage de choisir la méthode pour identifier la noisette.
+		$retour = ncore_noisette_destocker($plugin, $squelette, $stockage);
 	}
 
 	return $retour;

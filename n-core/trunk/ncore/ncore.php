@@ -242,7 +242,7 @@ function ncore_noisette_stocker($plugin, $description, $stockage = '') {
 	include_spip('inc/ncore_utils');
 	if ($stocker = ncore_chercher_service($plugin, 'noisette_stocker', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
-		$noisette = $stocker($plugin, $description);
+		$id_noisette = $stocker($plugin, $description);
 	} else {
 		// Le plugin ne propose pas de fonction propre ou le stockage N-Core est explicitement demandé.
 		// -- N-Core stocke les noisettes dans une meta propre au plugin appelant contenant un tableau au format
@@ -278,10 +278,10 @@ function ncore_noisette_stocker($plugin, $description, $stockage = '') {
 		ecrire_config("${plugin}_noisettes", $noisettes);
 
 		// On renvoie l'id de la noisette ajoutée ou modifiée.
-		$noisette = $description['id_noisette'];
+		$id_noisette = $description['id_noisette'];
 	}
 
-	return $noisette;
+	return $id_noisette;
 }
 
 
@@ -289,14 +289,14 @@ function ncore_noisette_stocker($plugin, $description, $stockage = '') {
  *
  * @package SPIP\NCORE\SERVICE\NOISETTE
  *
- * @param        $plugin
- * @param        $action
- * @param        $description
+ * @param string $plugin
+ * @param array  $description
+ * @param int    $rang_destination
  * @param string $stockage
  *
- * @return string
+ * @return bool
  */
-function ncore_noisette_ranger($plugin, $description, $rang, $stockage = '') {
+function ncore_noisette_ranger($plugin, $description, $rang_destination, $stockage = '') {
 
 	// Initialisation de la sortie.
 	$retour = false;
@@ -308,7 +308,7 @@ function ncore_noisette_ranger($plugin, $description, $rang, $stockage = '') {
 	include_spip('inc/ncore_utils');
 	if ($ranger = ncore_chercher_service($plugin, 'noisette_ranger', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
-		$retour = $ranger($plugin, $description, $rang);
+		$retour = $ranger($plugin, $description, $rang_destination);
 	} else {
 		// Le plugin ne propose pas de fonction propre ou le stockage N-Core est explicitement demandé.
 		// -- N-Core stocke les noisettes dans une meta propre au plugin appelant contenant un tableau au format
@@ -324,8 +324,8 @@ function ncore_noisette_ranger($plugin, $description, $rang, $stockage = '') {
 		// On ajoute la noisette au rang choisi même si on doit écraser un index existant.
 		// Il est donc nécessaire de gérer la collision en amont de cette fonction.
 		// De même, l'ancien rang de la noisette n'est pas supprimé, cela est aussi à gérer en amont.
-		$description['rang'] = $rang;
-		$noisettes[$description['squelette']][$rang] = $description;
+		$description['rang'] = $rang_destination;
+		$noisettes[$description['squelette']][$rang_destination] = $description;
 
 		// On met à jour la meta
 		ecrire_config("${plugin}_noisettes", $noisettes);
@@ -336,9 +336,12 @@ function ncore_noisette_ranger($plugin, $description, $rang, $stockage = '') {
 }
 
 /**
- * @param        $plugin
- * @param        $description
- * @param string $stockage
+ *
+ * @package SPIP\NCORE\SERVICE\NOISETTE
+ *
+ * @param string        $plugin
+ * @param array|string  $description
+ * @param string        $stockage
  *
  * @return bool
  */
@@ -359,14 +362,20 @@ function ncore_noisette_destocker($plugin, $description, $stockage = '') {
 		// Le plugin ne propose pas de fonction propre ou le stockage N-Core est explicitement demandé.
 		// -- N-Core stocke les noisettes dans une meta propre au plugin appelant contenant un tableau au format
 		//    [squelette][rang] = description
+		// -- $description est soit le tableau descriptif de la noisette, soit une chaine représentant le nom du
+		//    squelette et dans ce cas, il faut supprimer toutes les noisettes du squelette.
 		include_spip('inc/config');
 		$meta_noisettes = lire_config("${plugin}_noisettes", array());
 
-		if (isset($meta_noisettes[$description['squelette']][$description['rang']])) {
+		if (is_array($description) and isset($meta_noisettes[$description['squelette']][$description['rang']])) {
 			unset($meta_noisettes[$description['squelette']][$description['rang']]);
 			ecrire_config("${plugin}_noisettes", $meta_noisettes);
 			$retour = true;
-		}
+		} else if (is_string($description) and isset($meta_noisettes[$description['squelette']])) {
+			unset($meta_noisettes[$description['squelette']]);
+			ecrire_config("${plugin}_noisettes", $meta_noisettes);
+			$retour = true;
+		}	
 	}
 
 	return $retour;
