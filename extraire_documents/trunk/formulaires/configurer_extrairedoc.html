@@ -1,7 +1,4 @@
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
-
-	<h3 class="titrem"><:extrairedoc:cfg_titre_parametrages:></h3>
-
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
@@ -10,10 +7,12 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type="hidden" name="_meta_casier" value="extrairedoc_config" />	
 		<fieldset>
-			<legend>Url serveur</legend>
+			<legend>Tika Server</legend>
+			[(#SAISIE{input,url_serveur,
+				label=<:extrairedoc:configurer_tika_host_label:>})]
 			
-			[(#SAISIE{input,url_serveur,label=URL du serveur Tika,obligatoire=oui,explication="saisir sous la forme urlduserveur.tld sans http://"})]
-			[(#SAISIE{input,port,label=port du serveur Tika,obligatoire=oui,explication="saisir sous la forme 9200"})]
+			[(#SAISIE{input,port,
+				label=<:extrairedoc:configurer_tika_port_label:>})]
 		</fieldset>
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>
