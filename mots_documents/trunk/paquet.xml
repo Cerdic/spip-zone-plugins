@@ -1,0 +1,19 @@
+<paquet
+	prefix="mots_documents"
+	categorie="divers"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/mots_documents-32.png"
+>
+
+	<nom>Mots documents</nom>
+	<auteur>tcharlss</auteur>
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="medias" compatibilite="[2.7.66;]" />
+	<necessite nom="mots" compatibilite="[2.4.16;]" />
+
+	<pipeline nom="recuperer_fond" inclure="mots_documents_pipelines.php" />
+
+</paquet>

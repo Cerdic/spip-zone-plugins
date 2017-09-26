@@ -1,0 +1,20 @@
+[(#REM)
+
+	Galerie de documents : barre d'onglets supplémentaire pour filtrer par mot-clé.
+
+	Squelette inséré via le pipeline récupérer_fond si les documents sont activés dans la config des mots-clés
+
+]
+<B_mots_documents>
+#ANCRE_PAGINATION
+<div class="onglets_simple second mots-documents clearfix">
+	<ul>
+		<li><strong class="label"><:mots:titre_page_mots_tous:> :</strong></li>
+		[<li>(#SELF|parametre_url{id_mot,''}|lien_ou_expose{Tous,#ENV{id_mot}|=={''},ajax})</li>]
+		<BOUCLE_mots_documents(MOTS mots_liens){objet=document}{pagination 10}>
+		[<li>(#SELF|parametre_url{id_mot,#ID_MOT}|lien_ou_expose{#TITRE,#ENV{id_mot}|=={#ID_MOT},ajax})</li>]
+		</BOUCLE_mots_documents>
+	</ul>
+	<div class="pagination">#PAGINATION</div>
+</div>
+</B_mots_documents>
