@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_label_class_fieldset_description' => 'Class CSS pour le fieldset Description',
 	'cfg_label_placeholder' => 'Afficher le placeholder',
 	'cfg_label_activer_cvs' => 'Activer les CVs ?',
-	'cfg_label_activer_offres' => 'Activer les Offres d\'emplois ?',
+	'cfg_label_activer_offres' => 'Activer les Offres d‘emplois ?',
 	'champ_joindre_pdf_label' => 'Joindre un PDF',
 
 	// E
@@ -22,20 +22,31 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_prenom_nom' => 'Votre prénom et nom',
 	'entree_prenom_nom_2' => 'Prénom + Nom',
 
+	// L
+	'label_offre' => 'offre',
+	'label_format_pdf' => 'format PDF',
+
 	// O
 	'onglet_offres' => 'Offres',
 	'onglet_cvs' => 'CVs',
 	'onglet_affichage_public' => 'Affichage espace public',
 
+	// S
+	'supprimer' => 'Supprimer',
+
 	// T
 	'texte_statut_a_valider' => 'À valider',
 	'titre_page_configurer_emplois' => 'Emplois',
-	'cfg_titre_configurer_affichage_public' => 'Affichage des formulaires dans l\'espace public',
-	'cfg_titre_configurer_offres_contenus' => 'Contenu des offres d\'emploi',
+	'cfg_titre_configurer_affichage_public' => 'Affichage des formulaires dans l‘espace public',
+	'cfg_titre_configurer_offres_contenus' => 'Contenu des offres d‘emploi',
 	'cfg_titre_configurer_cvs_contenus' => 'Contenu des CVs',
 	'cfg_titre_configurer_cvs' => 'LES CVs',
-	'cfg_titre_configurer_offres' => 'LES OFFRES D\'EMPLOIS',
+	'cfg_titre_configurer_offres' => 'LES OFFRES D‘EMPLOIS',
 	'cfg_legend_contenu_offre_deposant' => 'Déposant',
-	'cfg_legend_contenu_offre_description_offre' => 'Description de l\'offre',
-	'cfg_legend_joindre_pdf' => 'Autoriser l\'ajout d\'un fichier PDF',
+	'cfg_legend_contenu_offre_description_offre' => 'Description de l‘offre',
+	'cfg_legend_joindre_pdf' => 'Autoriser l‘ajout d‘un fichier PDF',
+
+	// V
+	'votre' => 'Votre',
+	
 );

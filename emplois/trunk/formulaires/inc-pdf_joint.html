@@ -10,7 +10,7 @@
 			</h4>
 		</div>
 		<div class="media-right" style="vertical-align:middle;">
-			<a class='btn btn-bleu suppr_doc' href="#URL_ACTION_AUTEUR{supprimer_pdf,#ID_DOCUMENT-#TYPE_OBJET-#ID}">Supprimer</a>
+			<a class='btn btn-bleu suppr_doc' href="#URL_ACTION_AUTEUR{supprimer_pdf,#ID_DOCUMENT-#TYPE_OBJET-#ID}"><:emplois:supprimer:></a>
 		</div>
 	</div>
 </BOUCLE_pdf_joint>
@@ -18,9 +18,8 @@
 </B_pdf_joint>
 	#SET{name,#ENV{nom_input}}
 	#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-	#SET{obli,'obligatoire'}
 	<div class="editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
-		<label for="#GET{name}">Votre [(#ENV{type_objet}) ] (format PDF)</label>
+		<label for="#GET{name}"><:emplois:votre:>[ (#VAL{emplois:#ENV{type_objet}}|_T) ](<:emplois:format_pdf:>)</label>
 		[<span class="erreur_message">(#GET{erreurs})</span>]
 		<input type="file" class="file" name="#GET{name}" id="#GET{name}" size="40" accept="application/pdf" />
 	</div>
