@@ -1,8 +1,8 @@
 <paquet
 	prefix="mots_documents"
 	categorie="divers"
-	version="0.1.2"
-	etat="dev"
+	version="0.1.3"
+	etat="test"
 	compatibilite="[3.0.21;3.2.*]"
 	logo="prive/themes/spip/images/mots_documents-32.png"
 >

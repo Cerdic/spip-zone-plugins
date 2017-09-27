@@ -20,28 +20,14 @@
 #SET{left,   #ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,  #ENV{ltr}|choixsiegal{left,right,left}}
 
-.onglets_simple.mots-documents ul {
-	float: #GET{left};
-}
-.onglets_simple.mots-documents .pagination {
-	float: #GET{right};
-}
-.onglets_simple.mots-documents .label {
-	background: transparent;
-	border-color: transparent;
-}
-.onglets_simple.mots-documents .pagination {
-	margin-top: 0;
-}
-.popin-choisir_document .onglets_simple.mots-documents.second {
-	display: block;
-}
-
-/* variante select */
-.onglets_simple ul + .select-mots-documents{
+.onglets_simple .mots-documents{
 	display: inline-block;
 	margin-left: 30px;
 }
-.onglets_simple ul + .select-mots-documents label{
-	padding: 4px 7px;
+.onglets_simple .mots-documents label{
+	padding: 4px 0;
+	font-weight: bold;
+}
+.onglets_simple .mots-documents .chosen-container li{
+	float: none;
 }
