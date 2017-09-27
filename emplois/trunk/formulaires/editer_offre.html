@@ -13,7 +13,7 @@
 			<div class="editer-groupe">
 	 
 				<div class="editer nom obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
-					<label for="nom"><:offre:champ_signature_label:><span class="obligatoire">  (obligatoire)</span></label>[
+					<label for="nom"><:offre:champ_signature_label:><span class="obligatoire"> <:required:></span></label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span>
 					]<input type='text' class='text' name='nom' id='nom'[ lang='(#LANGUE)']
 					[(#VAL{placeholder}|emplois_afficher_public|oui) placeholder="<:offre:champ_signature_label:>"]
@@ -22,7 +22,7 @@
 
 	 			[(#CONFIG{emplois/offres/email}|=={oui}|oui)
 	 			<div class="editer email obligatoire[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
-					<label for="email"><:offre:champ_email_label:><span class="obligatoire">  (obligatoire)</span></label>[
+					<label for="email"><:offre:champ_email_label:><span class="obligatoire"> <:required:></span></label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>
 					]<input type='text' class='text' name='email' id='email'[ lang='(#LANGUE)']
 					[(#VAL{placeholder}|emplois_afficher_public|oui) placeholder="<:offre:champ_email_label:>"]
@@ -31,7 +31,7 @@
 	 
 	 			[(#CONFIG{emplois/offres/telephone}|=={oui}|oui)
 	 			<div class="editer telephone obligatoire[ (#ENV**{erreurs}|table_valeur{telephone}|oui)erreur]">
-					<label for="telephone"><:offre:champ_telephone_label:><span class="obligatoire">  (obligatoire)</span></label>[
+					<label for="telephone"><:offre:champ_telephone_label:><span class="obligatoire"> <:required:></span></label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{telephone})</span>
 					]<input type='text' class='text' name='telephone' id='telephone'[ lang='(#LANGUE)']
 					[(#VAL{placeholder}|emplois_afficher_public|oui) placeholder="<:offre:champ_telephone_label:>"]
@@ -46,7 +46,7 @@
 			<div class="editer-groupe">
 
 				<div class="editer titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
-					<label for="titre"><:offre:champ_titre_label:><span class="obligatoire">  (obligatoire)</span></label>[
+					<label for="titre"><:offre:champ_titre_label:><span class="obligatoire"> <:required:></span></label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
 					]<input type='text' class='text' name='titre' id='titre'[ lang='(#LANGUE)']
 					[(#VAL{placeholder}|emplois_afficher_public|oui) placeholder="<:offre:champ_titre_label:>"]
@@ -62,7 +62,7 @@
 
 				[(#CONFIG{emplois/offres/emetteur}|=={oui}|oui)
 	 			<div class="editer emetteur obligatoire[ (#ENV**{erreurs}|table_valeur{emetteur}|oui)erreur]">
-					<label for="emetteur"><:offre:champ_emetteur_label:><span class="obligatoire">  (obligatoire)</span></label>[
+					<label for="emetteur"><:offre:champ_emetteur_label:><span class="obligatoire"> <:required:></span></label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{emetteur})</span>
 					]<input type='text' class='text' name='emetteur' id='emetteur'[ lang='(#LANGUE)']
 					[(#VAL{placeholder}|emplois_afficher_public|oui) placeholder="<:offre:champ_emetteur_label:>"]
