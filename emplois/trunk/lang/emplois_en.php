@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_prenom_nom_2' => 'First + Last name',
 
 	// L
-	'label_offre' => 'job‘s offre',
+	'label_offre' => 'job‘s offer',
 	'label_format_pdf' => 'PDF file only',
 
 	// O
