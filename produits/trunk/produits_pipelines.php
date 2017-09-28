@@ -101,3 +101,18 @@ function produits_optimiser_base_disparus($flux) {
 
 	return $flux;
 }
+
+/**
+ * Pipeline de la corbeille, permet de définir les objets à supprimer
+ *
+ * @param array $param Tableau d'objets
+ *
+ * @return array Tableau d'objets complété
+ */
+function produit_corbeille_table_infos($param){
+	$param['produits'] = array(
+		'statut' => 'poubelle',
+		'tableliee'=> array('spip_produits'),
+	);
+	return $param;
+}
