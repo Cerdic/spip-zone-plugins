@@ -56,4 +56,3 @@ function twitter_vider_tables($nom_meta_base_version) {
 }
 
 
-?>

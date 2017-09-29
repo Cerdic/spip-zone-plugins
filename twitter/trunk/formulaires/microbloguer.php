@@ -77,4 +77,4 @@ function formulaires_microbloguer_traiter_dist(){
 		$res;
 }
 
-?>
+

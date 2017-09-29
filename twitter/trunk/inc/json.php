@@ -34,4 +34,3 @@ if ( !function_exists('json_encode') ){
 
 include_once _DIR_RESTREINT.'inc/json.php';
 
-?>

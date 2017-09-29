@@ -91,4 +91,4 @@ function formulaires_editer_microblog_traiter_dist($objet,$id_objet){
 	return $res;
 }
 
-?>
+
