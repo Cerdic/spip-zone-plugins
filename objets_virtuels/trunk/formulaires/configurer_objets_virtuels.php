@@ -57,6 +57,8 @@ function formulaires_configurer_objets_virtuels_traiter_dist() {
 	ecrire_config('objets_virtuels', implode(',', $tables));
 	if (!in_array('spip_articles', $tables)) {
 		ecrire_config('articles_redirection', 'non');
+	} else {
+		ecrire_config('articles_redirection', 'oui');
 	}
 
 	if ($err) {
