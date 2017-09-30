@@ -120,13 +120,18 @@ function verifier_trier_par_titre($array1,$array2) {
  * @return array Un tableau contenant le YAML décodé
  */
 function verifier_charger_infos($type_verif, $repertoire = 'verifier') {
-	include_spip('inc/yaml');
-	$fichier = find_in_path("$repertoire/$type_verif.yaml");
-	$verif = yaml_decode_file($fichier);
-	if (is_array($verif)) {
-		$verif['titre']       = (isset($verif['titre'])       and $verif['titre'])       ? _T_ou_typo($verif['titre']) : $type_verif;
-		$verif['description'] = (isset($verif['description']) and $verif['description']) ? _T_ou_typo($verif['description']) : '';
-		$verif['icone']       = (isset($verif['icone'])       and $verif['icone'])       ? _T_ou_typo($verif['icone']) : '';
+	$verif = array();	
+
+	if (defined(_DIR_PLUGIN_YAML)) {
+		include_spip('inc/yaml');
+		$fichier = find_in_path("$repertoire/$type_verif.yaml");
+
+		$verif = yaml_decode_file($fichier);
+		if (is_array($verif)) {
+			$verif['titre']       = (isset($verif['titre'])       and $verif['titre'])       ? _T_ou_typo($verif['titre']) : $type_verif;
+			$verif['description'] = (isset($verif['description']) and $verif['description']) ? _T_ou_typo($verif['description']) : '';
+			$verif['icone']       = (isset($verif['icone'])       and $verif['icone'])       ? _T_ou_typo($verif['icone']) : '';
+		}
 	}
 	return $verif;
 }
