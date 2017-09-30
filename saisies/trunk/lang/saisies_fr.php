@@ -145,9 +145,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_label' => 'Type du champ',
 	'option_type_password' => 'Texte masqué lors de la saisie (ex : mot de passe)',
 	'option_type_text' => 'Normal',
-	'option_valeur_non_explication' => 'Valeur postée si le checkbox n’est pas sélectionné. Attention, il s\'agit d\'une valeur technique et non d\'une valeur affichée.',
+	'option_valeur_non_explication' => 'Valeur postée si la case n’est pas cochée. Attention, il s\'agit d\'une valeur technique et non d\'une valeur affichée.',
 	'option_valeur_non_label' => 'Valeur non',
-	'option_valeur_oui_explication' => 'Valeur postée si le checkbox est sélectionné. Attention, il s\'agit d\'une valeur technique et non d\'une valeur affichée.',
+	'option_valeur_oui_explication' => 'Valeur postée si la case est cochée. Attention, il s\'agit d\'une valeur technique et non d\'une valeur affichée.',
 	'option_valeur_oui_label' => 'Valeur oui',
 
 	// P
