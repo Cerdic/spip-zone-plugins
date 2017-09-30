@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 /**
- * Ajoute à un squelette, à un rang donné ou en dernier rang, une noisette d'un type donné.
+ * Ajoute à un squelette contextualisé, à un rang donné ou en dernier rang, une noisette d'un type donné.
  *
  * @api
  * @uses type_noisette_lire()
@@ -26,6 +26,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * 		Identifiant du type de noisette à ajouter au squelette.
  * @param string	$squelette
  * 		Chemin relatif du squelette où ajouter la noisette.
+ * @param array     $contexte
+ * 		Tableau éventuellement vide matérialisant le contexte d'utilisation du squelette.
  * @param int		$rang
  * 		Rang dans le squelette où insérer la noisette. Si l'argument n'est pas fourni ou est égal à 0 on insère la
  *      noisette en fin de bloc.
@@ -37,7 +39,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return mixed
  * 		Retourne l'identifiant de la nouvelle instance de noisette créée ou `false` en cas d'erreur.
  **/
-function noisette_ajouter($plugin, $type_noisette, $squelette, $rang = 0, $stockage = '') {
+function noisette_ajouter($plugin, $type_noisette, $squelette, $contexte, $rang = 0, $stockage = '') {
 
 	// Initialisation de la valeur de sortie.
 	$noisette_ajoutee = false;
@@ -61,6 +63,7 @@ function noisette_ajouter($plugin, $type_noisette, $squelette, $rang = 0, $stock
 			'plugin'     => $plugin,
 			'noisette'   => $type_noisette,
 			'squelette'  => $squelette,
+			'contexte'   => serialize($contexte),
 			'rang'       => intval($rang),
 			'parametres' => serialize($parametres),
 			'balise'     => 'defaut',
@@ -71,9 +74,9 @@ function noisette_ajouter($plugin, $type_noisette, $squelette, $rang = 0, $stock
 		// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
 		include_spip("ncore/ncore");
 
-		// On récupère les noisettes déjà affectées au squelette sous la forme d'un tableau indexé par l'identifiant
-		// de la noisette stocké dans l'index 'id_noisette'.
-		$noisettes = ncore_noisette_lister($plugin, $squelette, '', 'rang',  $stockage);
+		// On récupère les noisettes déjà affectées au squelette contextualisé sous la forme d'un tableau indexé
+		// par le rang de chaque noisette.
+		$noisettes = ncore_noisette_lister($plugin, $squelette, $contexte, '', 'rang',  $stockage);
 
 		// On calcule le rang max déjà utilisé.
 		$rang_max = $noisettes ? max(array_keys($noisettes)) : 0;
@@ -106,7 +109,7 @@ function noisette_ajouter($plugin, $type_noisette, $squelette, $rang = 0, $stock
 }
 
 /**
- * Supprime un noisette donnée d’un squelette.
+ * Supprime une noisette donnée du squelette contextualisé auquel elle est associée.
  * La fonction met à jour les rangs des autres noisettes si nécessaire.
  *
  * @api
@@ -120,7 +123,7 @@ function noisette_ajouter($plugin, $type_noisette, $squelette, $rang = 0, $stock
  *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param mixed		$noisette
  *        Identifiant de la noisette qui peut prendre soit la forme d'un entier ou d'une chaine unique, soit la forme
- *        d'un couple (squelette, rang).
+ *        d'un triplet (squelette, contexte, rang).
  * @param string	$stockage
  *      Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
  *      ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
@@ -151,7 +154,7 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
 
 		// On récupère les noisettes restant affectées au squelette sous la forme d'un tableau indexé par l'identifiant
 		// de la noisette stocké dans l'index 'id_noisette' mais toujours trié de façon à ce que les rangs soient croissants.
-		$autres_noisettes = ncore_noisette_lister($plugin, $description['squelette'], '', 'rang', $stockage);
+		$autres_noisettes = ncore_noisette_lister($plugin, $description['squelette'], $description['contexte'], '', 'rang', $stockage);
 
 		// Si il reste des noisettes, on tasse d'un rang les noisettes qui suivaient la noisette supprimée.
 		if ($autres_noisettes) {
@@ -253,7 +256,7 @@ function noisette_lire($plugin, $noisette, $information = '', $traiter_typo = fa
 }
 
 /**
- * Supprime un noisette donnée d’un squelette.
+ * Déplace une noisette donnée au sein d’un squelette contextualisé.
  * La fonction met à jour les rangs des autres noisettes si nécessaire.
  *
  * @api
@@ -296,7 +299,7 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
 		if ($rang_destination != $rang_origine) {
 			// On récupère les noisettes affectées au même squelette sous la forme d'un tableau indexé par le rang
 			// et on déplace les noisettes impactées.
-			$noisettes = ncore_noisette_lister($plugin, $description['squelette'], '', 'rang', $stockage);
+			$noisettes = ncore_noisette_lister($plugin, $description['squelette'], $description['contexte'], '', 'rang', $stockage);
 
 			// On vérifie que le rang destination soit bien compris entre 1 et le rang max, sinon on le force à une
 			// des bornes.
@@ -337,7 +340,7 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
 
 
 /**
- * Supprime toutes les noisettes d’un squelette.
+ * Supprime toutes les noisettes d’un squelette contextualisé.
  *
  * @api
  * @uses ncore_noisette_destocker()
@@ -354,7 +357,7 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
  *
  * @return bool
  */
-function noisette_vider_squelette($plugin, $squelette, $stockage = '') {
+function noisette_vider($plugin, $squelette, $contexte, $stockage = '') {
 
 	// Initialisation du retour
 	$retour = false;
@@ -364,9 +367,9 @@ function noisette_vider_squelette($plugin, $squelette, $stockage = '') {
 	include_spip("ncore/ncore");
 
 	if ($squelette) {
-		// Suppression de la noisette. On passe la description complète ce qui permet à la fonction de
-		// destockage de choisir la méthode pour identifier la noisette.
-		$retour = ncore_noisette_destocker($plugin, $squelette, $stockage);
+		// On construit un tableau avec le squelette et son contexte et on le passe à la fonction.
+		$description = array('squelette' => $squelette, 'contexte' => $contexte);
+		$retour = ncore_noisette_destocker($plugin, $description, $stockage);
 	}
 
 	return $retour;
