@@ -154,7 +154,13 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
 
 		// On récupère les noisettes restant affectées au squelette sous la forme d'un tableau indexé par l'identifiant
 		// de la noisette stocké dans l'index 'id_noisette' mais toujours trié de façon à ce que les rangs soient croissants.
-		$autres_noisettes = ncore_noisette_lister($plugin, $description['squelette'], $description['contexte'], '', 'rang', $stockage);
+		$autres_noisettes = ncore_noisette_lister(
+			$plugin,
+			$description['squelette'],
+			unserialize($description['contexte']),
+			'',
+			'rang',
+			$stockage);
 
 		// Si il reste des noisettes, on tasse d'un rang les noisettes qui suivaient la noisette supprimée.
 		if ($autres_noisettes) {
@@ -315,7 +321,13 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
 		if ($rang_destination != $rang_origine) {
 			// On récupère les noisettes affectées au même squelette sous la forme d'un tableau indexé par le rang
 			// et on déplace les noisettes impactées.
-			$noisettes = ncore_noisette_lister($plugin, $description['squelette'], $description['contexte'], '', 'rang', $stockage);
+			$noisettes = ncore_noisette_lister(
+				$plugin,
+				$description['squelette'],
+				unserialize($description['contexte']),
+				'',
+				'rang',
+				$stockage);
 
 			// On vérifie que le rang destination soit bien compris entre 1 et le rang max, sinon on le force à une
 			// des bornes.
