@@ -143,9 +143,9 @@ Você pode indicar o início de um subgrupo, no formato "*Título do subgrupo". 
 	'option_type_label' => 'Tipo do campo',
 	'option_type_password' => 'Texto mascarado durante o preenchimento (ex: senha).',
 	'option_type_text' => 'Normal',
-	'option_valeur_non_explication' => 'Valor postado se o checkbox não estiver selecionado',
+	'option_valeur_non_explication' => 'Valor postado se o checkbox não estiver selecionado', # MODIF
 	'option_valeur_non_label' => 'Valor não',
-	'option_valeur_oui_explication' => 'VAlor postado se o checkbox estiver selecionado',
+	'option_valeur_oui_explication' => 'VAlor postado se o checkbox estiver selecionado', # MODIF
 	'option_valeur_oui_label' => 'Valor sim',
 
 	// S

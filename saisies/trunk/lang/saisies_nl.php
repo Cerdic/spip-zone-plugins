@@ -143,9 +143,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_label' => 'Veldtype',
 	'option_type_password' => 'Verborgen tekst tijdens invoer (bv: wachtwoord)',
 	'option_type_text' => 'Normaal',
-	'option_valeur_non_explication' => 'Geposte waarde wanneer de checkbox niet wordt geselecteerd',
+	'option_valeur_non_explication' => 'Geposte waarde wanneer de checkbox niet wordt geselecteerd', # MODIF
 	'option_valeur_non_label' => 'Waarde non',
-	'option_valeur_oui_explication' => 'Geposte waarde wanneer de checkbox is geselecteerd',
+	'option_valeur_oui_explication' => 'Geposte waarde wanneer de checkbox is geselecteerd', # MODIF
 	'option_valeur_oui_label' => 'Waarde oui',
 
 	// P

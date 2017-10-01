@@ -141,9 +141,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_label' => 'Field type',
 	'option_type_password' => 'Text, hidden during input (eg. password)',
 	'option_type_text' => 'Normal',
-	'option_valeur_non_explication' => 'Posted value if the checkbox is not selected',
+	'option_valeur_non_explication' => 'Posted value if the checkbox is not selected', # MODIF
 	'option_valeur_non_label' => 'Value No',
-	'option_valeur_oui_explication' => 'Posted value if the checkbox is selected',
+	'option_valeur_oui_explication' => 'Posted value if the checkbox is selected', # MODIF
 	'option_valeur_oui_label' => 'Value Yes',
 
 	// S
