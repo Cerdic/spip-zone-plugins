@@ -314,8 +314,10 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
 	// - ou par un tableau à deux entrées fournissant le squelette et le rang (qui est unique pour un squelette donné).
 	if (!empty($noisette) and (is_string($noisette) or is_numeric($noisette) or is_array($noisette))) {
 		// Avant de deplacer la noisette on sauvegarde sa description et son rang origine.
+		// On met le rang à zéro pour indiquer que la noisette est sortie temporairement du rangement.
 		$description = ncore_noisette_decrire($plugin, $noisette, $stockage);
 		$rang_origine = $description['rang'];
+		$description['rang'] = 0;
 
 		// Si les rangs origine et destination sont identiques on ne fait rien !
 		if ($rang_destination != $rang_origine) {

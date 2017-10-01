@@ -338,9 +338,14 @@ function ncore_noisette_ranger($plugin, $description, $rang_destination, $stocka
 
 		// On ajoute la noisette au rang choisi même si on doit écraser un index existant.
 		// Il est donc nécessaire de gérer la collision en amont de cette fonction.
-		// De même, l'ancien rang de la noisette n'est pas supprimé, cela est aussi à gérer en amont.
+		// De plus, l'ancien rang de la noisette est pas supprimé sauf si celui-ci est à zéro pour indiquer
+		// que la noisette a été temporairement sortie.
+		$rang_source = $description['rang'];
 		$description['rang'] = $rang_destination;
 		$noisettes[$squelette_contextualise][$rang_destination] = $description;
+		if ($rang_source != 0) {
+			unset($noisettes[$squelette_contextualise][$rang_source]);
+		}
 
 		// On met à jour la meta
 		ecrire_config("${plugin}_noisettes", $noisettes);
