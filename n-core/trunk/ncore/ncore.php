@@ -392,6 +392,10 @@ function ncore_noisette_destocker($plugin, $description, $stockage = '') {
 		if (!empty($description['id_noisette']) and isset($meta_noisettes[$squelette_contextualise][$description['rang']])) {
 			// On supprime une noisette donnée.
 			unset($meta_noisettes[$squelette_contextualise][$description['rang']]);
+			// Si c'était la dernière noisette il faut aussi supprimer l'index correspondant au squelette contextualisé.
+			if (!$meta_noisettes[$squelette_contextualise]) {
+				unset($meta_noisettes[$squelette_contextualise]);
+			}
 			ecrire_config("${plugin}_noisettes", $meta_noisettes);
 			$retour = true;
 		} elseif (isset($meta_noisettes[$squelette_contextualise])) {
@@ -541,7 +545,7 @@ function ncore_noisette_decrire($plugin, $noisette, $stockage = '') {
 					$squelette_contextualise = ncore_squelette_identifier(
 						$plugin,
 						$noisette['squelette'],
-						unserialize($noisette['contexte']),
+						$noisette['contexte'],
 						$stockage);
 					if (!empty($meta_noisettes[$squelette_contextualise][$noisette['rang']])) {
 					// L'identifiant est un tableau associatif fournissant le squelette contextualisé et le rang.
