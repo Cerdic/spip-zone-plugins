@@ -366,6 +366,8 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
  *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param mixed		$squelette
  * 		Chemin relatif du squelette où ajouter la noisette.
+ * @param array     $contexte
+ * 		Tableau éventuellement vide matérialisant le contexte d'utilisation du squelette.
  * @param string	$stockage
  *      Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
  *      ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
@@ -384,7 +386,7 @@ function noisette_vider($plugin, $squelette, $contexte, $stockage = '') {
 
 	if ($squelette) {
 		// On construit un tableau avec le squelette et son contexte et on le passe à la fonction.
-		$description = array('squelette' => $squelette, 'contexte' => $contexte);
+		$description = array('squelette' => $squelette, 'contexte' => serialize($contexte));
 		$retour = ncore_noisette_destocker($plugin, $description, $stockage);
 	}
 

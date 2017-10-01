@@ -259,7 +259,7 @@ function ncore_noisette_stocker($plugin, $description, $stockage = '') {
 		$squelette_contextualise = ncore_squelette_identifier(
 			$plugin,
 			$description['squelette'],
-			$description['contexte'],
+			unserialize($description['contexte']),
 			$stockage);
 
 		if (empty($description['id_noisette'])) {
@@ -333,7 +333,7 @@ function ncore_noisette_ranger($plugin, $description, $rang_destination, $stocka
 		$squelette_contextualise = ncore_squelette_identifier(
 			$plugin,
 			$description['squelette'],
-			$description['contexte'],
+			unserialize($description['contexte']),
 			$stockage);
 
 		// On ajoute la noisette au rang choisi même si on doit écraser un index existant.
@@ -386,7 +386,7 @@ function ncore_noisette_destocker($plugin, $description, $stockage = '') {
 		$squelette_contextualise = ncore_squelette_identifier(
 			$plugin,
 			$description['squelette'],
-			$description['contexte'],
+			unserialize($description['contexte']),
 			$stockage);
 
 		if (!empty($description['id_noisette']) and isset($meta_noisettes[$squelette_contextualise][$description['rang']])) {
@@ -541,7 +541,7 @@ function ncore_noisette_decrire($plugin, $noisette, $stockage = '') {
 					$squelette_contextualise = ncore_squelette_identifier(
 						$plugin,
 						$noisette['squelette'],
-						$noisette['contexte'],
+						unserialize($noisette['contexte']),
 						$stockage);
 					if (!empty($meta_noisettes[$squelette_contextualise][$noisette['rang']])) {
 					// L'identifiant est un tableau associatif fournissant le squelette contextualisé et le rang.
@@ -576,7 +576,7 @@ function ncore_noisette_decrire($plugin, $noisette, $stockage = '') {
  *      ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
  * 		fournissant le service de stockage souhaité.
  *
- * @return array|mixed
+ * @return string
  */
 function ncore_squelette_identifier($plugin, $squelette, $contexte, $stockage) {
 
