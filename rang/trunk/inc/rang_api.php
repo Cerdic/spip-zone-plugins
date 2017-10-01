@@ -160,6 +160,69 @@ function rang_creer_champs ($objets) {
 	}
 }
 
+
+/**
+ * construction des chemins de sources vers les listes des objets sélectionnés
+ * ce tableau sera ensuite comparé à la valeur $flux['data']['source'] fourni par le pipeline recuperer_fond()
+ *
+ * @return array
+ *     les chemins sources vers les listes où activer Rang
+ **/
+
+function rang_get_sources() {
+	include_spip('inc/config');
+	// mettre en cache le tableau calculé
+	static $sources;
+	if(is_array($sources)){
+		return $sources;
+	}
+	
+	$sources = array();
+	$objets_selectionnes = lire_config('rang/rang_objets');
+	$objets=explode(',',$objets_selectionnes);
+
+	foreach ($objets as $value) {
+		$objet = table_objet($value);
+		if (!empty($value)) {
+			$source = find_in_path('prive/objets/liste/'.$objet.'.html');
+			$sources[] = $source;
+		}
+
+		// cas objets historiques
+		if($objet == 'mots') {
+			$source = find_in_path('prive/objets/liste/mots-admin.html');
+			$sources[] = $source;
+		}
+	}
+	return $sources;
+}
+
+/**
+ * Classer l'objet à la fin de la liste quand on le publie 
+ * @param string $table
+ * @param int $id_objet
+ * @return int
+ */
+ function rang_classer_dernier($table, $id_objet) {
+
+ 	// quel objet pour quel parent ?
+	$definition_table	= lister_tables_objets_sql($table);
+	$id_table_objet		= id_table_objet($table);
+	$objet_parent 		= $definition_table['parent']['type'];
+	$id_objet_parent	= id_table_objet($objet_parent);
+	$objet_parent_cle	= $definition_table['parent']['champ'];
+
+	// et hop, on place le nouvel objet publié à la fin
+	$id_parent = sql_getfetsel($id_objet_parent, $table, $id_objet.' = '.$id_objet);
+	$rang = sql_getfetsel('max(rang)', $table, $id_objet_parent.' = '.$id_parent );
+	// todo : on classe l'article à la fin (rang max) mais on pourrait vouloir le classer au début
+	// il faudrait donc une configuration pour ça, et dans ce cas reclasser tous les autres à un rang++
+	$dernier = $rang+1;
+
+	return $dernier;
+ }
+
 function rang_tester_presence_numero($table) {
 	return false;
 }
+

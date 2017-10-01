@@ -34,21 +34,23 @@ function action_trier_items_dist() {
 	$tab		= _request('trier');
 	$page 		= _request('debut_liste');
 	$objet		= _request('objet');
-	$id_rubrique = _request('id_rubrique');
+	$id_parent	= _request('id_parent');
 
-
-	$table = table_objet_sql($objet);
-	$id_objet = id_table_objet($objet);
+	$table		= table_objet_sql($objet);
+	$definition_table = lister_tables_objets_sql($table);
+	$id_objet_parent = $definition_table['parent']['champ'];
+	$id_objet	= id_table_objet($objet);
+	
 
 	// reclassement !
 	foreach ($tab as $key => $value) {
-		$rang	= $page + $key + 1; //le classement commence à 1, pas à 0
+		$rang	= $page + $key + 1; // le classement commence à 1, pas à 0
 		$id		= intval(substr($value, 3));
-		if ($id_rubrique == 'rien') {
+		if ($id_parent == 'rien') {
 			$where = "$id_objet=$id";
 		}
 		else {
-			$where = "$id_objet=$id AND id_rubrique=$id_rubrique";
+			$where = "$id_objet=$id AND $id_objet_parent=$id_parent";
 		}
 		sql_updateq($table, array('rang' => $rang), $where);
 	}

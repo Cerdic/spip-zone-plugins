@@ -13,8 +13,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+include_spip('inc/rang_api');
+
 /**
  * Declaration du champ Rang sur les objets sélectionnés
+ * + Definir la relation a l‘objet parent dans la declaration de l‘objet (en attendant https://core.spip.net/issues/3844)
  *
  * @param array $tables
  * @return array
@@ -22,12 +25,24 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function rang_declarer_tables_objets_sql($tables) {
 	include_spip('inc/config');
 
+	/* Declaration du champ Rang sur les objets sélectionnés */
 	$rang_objets = rtrim(lire_config('rang/rang_objets'), ',');
 	$liste_objets = explode(',', $rang_objets);
 
 	foreach ($liste_objets as  $table) {
 		$tables[$table]['field']['rang'] = "SMALLINT NOT NULL";
 	}
+	
+	/* Definir la relation a l‘objet parent dans la declaration de l‘objet (en attendant https://core.spip.net/issues/3844) */
+	// pour les articles
+	$tables['spip_articles']['parent'] = array('type' => 'rubrique', 'champ' => 'id_rubrique');
+
+	// pour les rubriques
+	$tables['spip_rubriques']['parent'] = array('type' => 'rubrique', 'champ' => 'id_rubrique');
+
+	//pour les mots-clés
+	$tables['spip_mots']['parent'] = array('type' => 'groupe_mot', 'champ' => 'id_groupe');
+
 	return $tables;
 }
 
@@ -40,11 +55,10 @@ function rang_declarer_tables_objets_sql($tables) {
 function rang_recuperer_fond($flux) {
 
 	$exec 		= _request('exec');
-
 	
 	// Gestion du contexte i.e. page ?exec=xxxx 
-	// Par défaut, on peut toujours trier dans une rubrique.
-	$contextes	= array(0 => 'rubrique'); 
+	// Par défaut, on peut toujours trier dans une rubrique où dans un groupe de mot
+	$contextes	= array(0 => 'rubrique', 1 => 'groupe_mots'); 
 
 	// Ajouter automatiquement un contexte
 	// pour les objets sans rubrique, on ajoute le contexte ?exec=objet
@@ -64,69 +78,43 @@ function rang_recuperer_fond($flux) {
 	// -> mots-clefs, 
 	// -> contextes spécifiques à certains plugins (ex : pages uniques, Albums, etc.)
 
+
+
 	// faire archi gaffe à prendre le bon flux....pfiou compliqué :)
 	$sources	= rang_get_sources();
+
 	if ( in_array($exec, $contextes) AND 
 		 in_array($flux['data']['source'], $sources) AND 
 		 strpos($flux['data']['texte'], 'pagination_liste')) {
-			
 
 			// récupérer le type de l'objet, quelle que soit le contexte
 			preg_match('/pagination_liste_([A-Za-z]+)/', $flux['data']['texte'], $result);
 			$objet = $result[1];
 			$suffixe_pagination = table_objet($objet);
 
+			$id_parent = $flux['args']['contexte']['id_rubrique'];
 
 			// particularité des objets historiques
-			if ($objet == 'art') {
+			switch ($objet) {
+				case 'art':
 					$objet = 'articles';
 					$suffixe_pagination = 'art';
+					break;
+				case 'mots':
+					$objet = 'mots';
+					$suffixe_pagination = 'mot';
+					$id_parent = $flux['args']['contexte']['id_groupe'];
+					break;
+				default:
+					$id_parent = $flux['args']['contexte']['id_rubrique'];
+					break;
 			}
-
-			$id_rubrique = $flux['args']['contexte']['id_rubrique'];
-
-			// Debug
-			// echo 'objet : '.$objet.'<br>';
-			// echo 'fond : '.$flux['args']['fond'].'<br>';
-			// echo 'source : '.$flux['data']['source'].'<br>&nbsp;<br>';
-			//echo bel_env($flux);
 			
-			$ajout_script = recuperer_fond('prive/squelettes/inclure/rang', array('suffixe_pagination' => $suffixe_pagination, 'objet' => $objet, 'id_rubrique' => $id_rubrique ));
+			$ajout_script = recuperer_fond('prive/squelettes/inclure/rang', array('suffixe_pagination' => $suffixe_pagination, 'objet' => $objet, 'id_parent' => $id_parent ));
 			$flux['data']['texte'] = str_replace('</table>', '</table>'. $ajout_script, $flux['data']['texte']);
 		
 	}
-
 	return $flux;
-}
-
-/**
- * construction des chemins de sources vers les listes des objets sélectionnés
- * ce tableau sera ensuite comparé à la valeur $flux['data']['source'] fourni par le pipeline recuperer_fond()
- *
- * @return array
- *     les chemins sources vers les listes où activer Rang
- **/
-
-function rang_get_sources() {
-	include_spip('inc/config');
-	// mettre en cache le tableau calculé
-	static $sources;
-	if(is_array($sources)){
-		return $sources;
-	}
-	
-	$sources = array();
-	$objets_selectionnes = lire_config('rang/rang_objets');
-	$objets=explode(',',$objets_selectionnes);
-
-	foreach ($objets as $value) {
-		$objet = table_objet($value);
-		if (!empty($value)) {
-			$source = find_in_path('prive/objets/liste/'.$objet.'.html');
-			$sources[] = $source;
-		}
-	}
-	return $sources;
 }
 
 /**
@@ -136,32 +124,24 @@ function rang_get_sources() {
  */
 function rang_pre_edition($flux) {
 
-	if($flux['args']['action']=='instituer' && $flux['data']['statut']=='publie' && lire_config('rang/rang_max')) {
-		
-		$rang_objets  = rtrim(lire_config('rang/rang_objets'), ',');
-		$liste_objets = explode(',', $rang_objets);
-		$table        = $flux['args']['table'];
+	if ($flux['args']['action']=='instituer' && lire_config('rang/rang_max')) {
+		$rang_objets	= rtrim(lire_config('rang/rang_objets'), ',');
+		$liste_objets	= explode(',', $rang_objets);
+		$table			= $flux['args']['table'];
 
+		// cas des objets avec statut
 		if (in_array($table, $liste_objets)) {
-			// ici, on aurait bien besoin de objet_parent et id_parent
-			// dans la définition des tables, pour automatiser
-			switch($table) {
-				case 'spip_articles' :
-					$id_rubrique = sql_getfetsel('id_rubrique','spip_articles','id_article = '.$flux['args']['id_objet']);
-					$rang = sql_getfetsel('max(rang)','spip_articles','id_rubrique = '.$id_rubrique);
-					// todo : on classe l'article à la fin (rang max) mais on pourrait vouloir le classer au début
-					// il faudrait donc une configuration pour ça, et dans ce cas reclasser tous les autres à un rang++
-					$flux['data']['rang'] = $rang+1;
-					break;
-				case 'spip_mots' :
-				case 'spip_rubriques' :
-				case '...etc...' :
-					// todo : traiter les autres cas
-					break;
-				
+			$id_objet	= $flux['args']['id_objet'];
+			
+			// cas des objets avec statut
+			if (isset($flux['data']['statut']) && $flux['data']['statut']=='publie') {
+				$flux['data']['rang'] = rang_classer_dernier($table, $id_objet);
+			}
+			// cas des mots clés
+			if ($table == 'spip_mots') {
+				$flux['data']['rang'] = rang_classer_dernier($table, $id_objet);
 			}
 		}
 	}
-	
 	return $flux;
 }
