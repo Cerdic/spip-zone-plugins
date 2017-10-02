@@ -1,7 +1,7 @@
 <paquet
 	prefix="rang"
 	categorie="navigation"
-	version="0.7.1"
+	version="0.7.2"
 	etat="experimental"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="prive/themes/spip/images/rang-64.png"
@@ -16,6 +16,7 @@
 	<licence>GNU/GPL</licence>
 
 	<necessite nom="saisies" compatibilite="[2.18.21;]" /> 
+	<utilise nom="mots" compatibilite="[2.7.8;]" /> 
 
 	<pipeline nom="autoriser" inclure="rang_autorisations.php" />
 	<pipeline nom="recuperer_fond" inclure="rang_pipelines.php" />
