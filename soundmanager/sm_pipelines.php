@@ -15,65 +15,24 @@ function sm_affichage_final($page) {
 			
 			$page = substr_replace($page, $script, strpos($page, '</head>'), 0);
 		}
-
+		
 		if(strpos($page, 'class="ui360')  OR strpos($page, "class='ui360") AND $GLOBALS['html']){					
 			$script .= "<link rel='stylesheet' href='" . find_in_path('360-player/360player.css') . "' type='text/css' />"."\n";
 			$script .= "<link rel='stylesheet' href='" . find_in_path('360-player/360player-visualization.css') . "' type='text/css' />"."\n";
-
+			
 			$script .= "\n"."<script type=\"text/javascript\" src=\"" . find_in_path('360-player/script/berniecode-animator.js') . "\"></script>"."\n";
 			$script .= "\n"."<script type=\"text/javascript\" src=\"" . find_in_path('script/soundmanager2.js') . "\"></script>"."\n";
 			
 			$script .= "\n". "<!-- special IE-only canvas fix -->" . "\n". "<!--[if IE]><script type=\"text/javascript\" src=\"" . find_in_path('360-player/script/excanvas.js') . "\"></script><![endif]-->"."\n";
 			$script .= "\n"."<script type=\"text/javascript\" src=\"" . find_in_path('360-player/script/360player.js') . "\"></script>"."\n";
-		
 			
-$str = <<<EOD
-<script type="text/javascript">
-
-soundManager.setup({
-	  url: '/plugins/soundmanager/swf/',
-	  flashVersion: 9, // optional: shiny features (default = 8)
-	  useFlashBlock: false, // optionally, enable when you're ready to dive in
-	  debugMode: false
-});
-
-threeSixtyPlayer.config.scaleFont = (navigator.userAgent.match(/msie/i)?false:true);
-threeSixtyPlayer.config.showHMSTime = true;
-
-// enable some spectrum stuffs
-
-threeSixtyPlayer.config.useWaveformData = true;
-threeSixtyPlayer.config.useEQData = true;
-
-// enable this in SM2 as well, as needed
-
-if (threeSixtyPlayer.config.useWaveformData) {
-  soundManager.flash9Options.useWaveformData = true;
-}
-if (threeSixtyPlayer.config.useEQData) {
-  soundManager.flash9Options.useEQData = true;
-}
-if (threeSixtyPlayer.config.usePeakData) {
-  soundManager.flash9Options.usePeakData = true;
-}
-
-if (threeSixtyPlayer.config.useWaveformData || threeSixtyPlayer.flash9Options.useEQData || threeSixtyPlayer.flash9Options.usePeakData) {
-  // even if HTML5 supports MP3, prefer flash so the visualization features can be used.
-  soundManager.preferFlash = true;
-}
-
-</script>
-EOD;
-
-			$script .= "\n" . $str ."\n";
+			$script .= "<script type=\"text/javascript\" src=\"" . generer_url_public('player360.js') . "\"></script>"."\n";
 			
 			$page = substr_replace($page, $script, strpos($page, '</head>'), 0);
 		}
-
 	}
 	return $page;
 }
-
 
  /**
  * Ajout d'un rel="enclosure" sur les liens mp3.

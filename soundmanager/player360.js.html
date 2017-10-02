@@ -1,0 +1,93 @@
+#HTTP_HEADER{Content-Type: text/javascript}
+#CACHE{24*3600,cache-client}
+
+soundManager.setup({
+	url: '[(#CHEMIN{swf/soundmanager2.swf}|url_absolue|dirname)/]',
+	flashVersion: 9, // optional: shiny features (default = 8)
+	useFlashBlock: false, // optionally, enable when you're ready to dive in
+	debugMode: false
+});
+
+threeSixtyPlayer.config.scaleFont = (navigator.userAgent.match(/msie/i)?false:true);
+threeSixtyPlayer.config.showHMSTime = true;
+
+// enable some spectrum stuffs
+
+threeSixtyPlayer.config.useWaveformData = true;
+threeSixtyPlayer.config.useEQData = true;
+
+// enable this in SM2 as well, as needed
+
+if (threeSixtyPlayer.config.useWaveformData) {
+  soundManager.flash9Options.useWaveformData = true;
+}
+if (threeSixtyPlayer.config.useEQData) {
+  soundManager.flash9Options.useEQData = true;
+}
+if (threeSixtyPlayer.config.usePeakData) {
+  soundManager.flash9Options.usePeakData = true;
+}
+
+if (threeSixtyPlayer.config.useWaveformData || threeSixtyPlayer.flash9Options.useEQData || threeSixtyPlayer.flash9Options.usePeakData) {
+  // even if HTML5 supports MP3, prefer flash so the visualization features can be used.
+  soundManager.preferFlash = true;
+}
+
+
+
+$(document).ready(function(){
+
+	function maj_bouton_play_pause(){
+		if($("button.play_pause").text() === "pause"){
+			$("button.play_pause").html("play") ;
+		}else{
+			$("button.play_pause").html("pause") ;
+		}
+	}
+	
+	// surcharge des events play/pause/finish : https://stackoverflow.com/questions/10127009/soundmanager2-onplay-event-configuration-does-not-work
+	var onplay360 = threeSixtyPlayer.events.play;
+	var myOnplay = function(){
+		//console.log("play");
+		maj_bouton_play_pause();
+		onplay360.apply(this); // forces the scope to 'this' = the sound object
+	};
+	threeSixtyPlayer.events.play = myOnplay;
+	
+	var onpause360 = threeSixtyPlayer.events.pause;
+	var myOnpause = function(){
+		//console.log("pause");
+		maj_bouton_play_pause();
+		onpause360.apply(this); // forces the scope to 'this' = the sound object
+	};
+	threeSixtyPlayer.events.pause = myOnpause;
+	
+	var onresume360 = threeSixtyPlayer.events.resume;
+	var myOnresume = function(){
+		//console.log("resume");
+		maj_bouton_play_pause();
+		onresume360.apply(this); // forces the scope to 'this' = the sound object
+	};
+	threeSixtyPlayer.events.resume = myOnresume;
+	
+	var onfinish360 = threeSixtyPlayer.events.finish;
+	var myOnfinish = function(){
+		//console.log("finish");
+		maj_bouton_play_pause();
+		onfinish360.apply(this); // forces the scope to 'this' = the sound object
+	};
+	threeSixtyPlayer.events.finish = myOnfinish;
+
+	// y'a t'il un son ?
+	if($(".ui360").size() > 0){
+		$("button.play_pause").click(function(){
+			// son déjà chargé ?
+			if(typeof soundManager.getSoundById("ui360Sound0") == "undefined"){
+				$(".sm2-360btn").eq(0).click();
+			}else{
+				soundManager.togglePause("ui360Sound0");
+			}
+		});
+	}
+
+});
