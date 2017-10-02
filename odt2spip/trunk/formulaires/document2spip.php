@@ -72,7 +72,7 @@ function formulaires_document2spip_verifier_dist($objet, $id_objet, $creer_objet
 	} elseif ($_FILES['fichier']['error'] != 0) {
 		$erreurs['fichier'] = _T('odtspip:err_recuperer_fichier');
 	} elseif (!in_array(strtolower(pathinfo($_FILES['fichier']['name'], PATHINFO_EXTENSION)), $extensions_acceptees)) {
-		$erreurs['fichier'] = _T('odtspip:err_extension_fichier', array('extension' => $extensions_acceptees));
+		$erreurs['fichier'] = _T('odtspip:err_extension_fichier', array('extension' => implode(', ', $extensions_acceptees)));
 	}
 
 	return $erreurs;
