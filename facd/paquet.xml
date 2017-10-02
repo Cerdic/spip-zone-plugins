@@ -1,7 +1,7 @@
 <paquet
 	prefix="facd"
 	categorie="outil"
-	version="0.4.3"
+	version="0.4.4"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	schema="0.0.1"
@@ -24,5 +24,5 @@
 
 	<menu nom="facd" titre="facd:titre_page_file_menu" parent="menu_administration" icone="images/facd-16.png" />
 	
-	<lib nom="flot" lien="http://flot.googlecode.com/files/flot-0.7.zip" />
+	<lib nom="flot" lien="http://www.flotcharts.org/downloads/flot-0.7.zip" />
 </paquet>
