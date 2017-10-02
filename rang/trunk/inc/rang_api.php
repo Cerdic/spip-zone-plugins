@@ -14,33 +14,26 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
- * chercher les tables SPIP qui gèrent ou non des rubriques
- * gestion des tables historiques également : annuaire de site et brèves activés ?
+ * Construire la liste des objets à exclure
  * 
- * @param string $quoi
- *	oui : les tables qui gèrent des rubriques
- *	non : les tables qui ne gèrent pas de rubriques
  * @return array
- *	tableau des nom de tables SPIP à exclure (ex : spip_auteurs, spip_mots, etc.) ou à inclure 
+ *	tableau des tables SPIP à exclure (ex : spip_auteurs, spip_mots, etc.)
  */
-function rang_objets_gere_rubrique($quoi) {
-	$tables = array();
-	$liste = lister_tables_objets_sql();
+function rang_objets_a_exclure() {
+	$exclus = array();
 
-	foreach ($liste as $key => $value) {
-		if ($quoi == 'oui' AND $value['editable'] == 'oui' AND isset($value['field']['id_rubrique']))
-			array_push($tables,$key);
-		if ($quoi == 'non' AND $value['editable'] == 'oui' AND !isset($value['field']['id_rubrique']))
-			array_push($tables,$key);
-	}
+	// on exclu toujours les objets suivants
+	$liste_toujours_exclus = array('spip_auteurs', 'spip_documents', 'spip_groupes_mots', 'spip_messages');
+	$exclus = array_merge($exclus, $liste_toujours_exclus);
 	
-	// Pour le moment, on ne gère pas ces objets à rubrique
-	$liste_gere_rub_exclus = array(0=>'spip_rubriques', 1 => 'spip_breves', 2 => 'spip_syndic');
-	if ($quoi == 'non') {
-		$tables = array_merge($tables, $liste_gere_rub_exclus);
-	}
+	// Pour le moment, on ne gère pas les rubriques elles-memes
+	array_push($exclus, 'spip_rubriques');
 
-	return $tables;
+	// et on ne gère pas les breves et sites
+	array_push($exclus, 'spip_syndic');
+	array_push($exclus, 'spip_breves');
+
+	return $exclus;
 }
 
 /**
@@ -209,8 +202,7 @@ function rang_get_sources() {
 	$definition_table	= lister_tables_objets_sql($table);
 	$id_table_objet		= id_table_objet($table);
 	$objet_parent 		= $definition_table['parent']['type'];
-	$id_objet_parent	= id_table_objet($objet_parent);
-	$objet_parent_cle	= $definition_table['parent']['champ'];
+	$id_objet_parent	= $definition_table['parent']['champ'];
 
 	// et hop, on place le nouvel objet publié à la fin
 	$id_parent = sql_getfetsel($id_objet_parent, $table, $id_objet.' = '.$id_objet);

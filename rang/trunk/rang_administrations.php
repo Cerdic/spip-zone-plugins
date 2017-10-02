@@ -43,11 +43,13 @@ function rang_vider_tables($nom_meta_base_version) {
 	include_spip('inc/rang_api');
 
 	// supprimer les champs 'rang'
-	$tables_a_nettoyer = rang_objets_gere_rubrique('oui');
-	foreach ($tables_a_nettoyer as $table) {
-		$champs_table = sql_showtable($table);
+	// note : ici que faire si un objet a ete selectionne, puis deselectionne dans la config ?
+	$objets_selectionnes = lire_config('rang/rang_objets');
+	$objets = explode(',', $objets_selectionnes);
+	foreach ($objets as $value) {
+		$champs_table = sql_showtable($value);
 		if (isset($champs_table['field']['rang'])) {
-			sql_alter("TABLE $table DROP rang");
+			sql_alter("TABLE $value DROP rang");
 		}
 	}
 

@@ -26,5 +26,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_trier_rang' => 'Trier par rang',
 
 	// T
-	'titre_page_configurer_rang' => 'Rang',
+	'titre_page_configurer_rang' => 'Configurer Rang',
 );

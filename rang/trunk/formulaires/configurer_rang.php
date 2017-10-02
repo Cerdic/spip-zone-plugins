@@ -25,11 +25,11 @@ include_spip('inc/rang_api');
  **/
 function formulaires_configurer_rang_charger_dist() {
 	$objets = lire_config('rang/rang_objets');
-	$valeurs      = array(
-		'rang_objets' => explode(',', $objets),
-		'rang_max'    => lire_config('rang/rang_max'),
-	);
-
+	if ($objets) {
+		$valeurs['rang_objets'] = explode(',', $objets);
+	}
+	$valeurs['rang_max'] = lire_config('rang/rang_max');
+	
 	return $valeurs;
 }
 
