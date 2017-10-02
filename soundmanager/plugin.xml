@@ -7,7 +7,6 @@
 	</nom>
 	<auteur>BoOz</auteur>
 	<version>1.0.3</version>
-	<version_base>0.1.0</version_base>
 	<etat>stable</etat>
 	<prefix>sm</prefix>
 	<icon>skins/soundmanager.png</icon>
