@@ -8,7 +8,6 @@ if (window.jQuery) {
 		jQuery(".oembed", this)
 			.find(".oe-play-button button:not([onclick])")
 			.not('.relinked').each(function() {
-				console.log(this);
 				var href = jQuery(this).closest(".spip_documents").find(".oe-title").attr("href");
 				if (href) {
 					jQuery(this)
