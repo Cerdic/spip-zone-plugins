@@ -406,7 +406,7 @@ function noisette_vider($plugin, $squelette, $contexte, $stockage = '') {
 	// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
 	include_spip("ncore/ncore");
 
-	if ($squelette) {
+	if ($squelette or $contexte) {
 		// On construit un tableau avec le squelette et son contexte et on le passe à la fonction.
 		$description = array('squelette' => $squelette, 'contexte' => serialize($contexte));
 		$retour = ncore_noisette_destocker($plugin, $description, $stockage);

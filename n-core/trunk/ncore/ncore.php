@@ -459,7 +459,7 @@ function ncore_noisette_lister($plugin, $squelette = '', $contexte = array(), $i
 		include_spip('inc/config');
 		$meta_noisettes = lire_config("${plugin}_noisettes", array());
 
-		if ($squelette) {
+		if ($squelette or $contexte) {
 			// Détermination de l'identifiant du squelette contextualisé.
 			$squelette_contextualise = ncore_squelette_identifier($plugin, $squelette, $contexte, $stockage);
 			if (!empty($meta_noisettes[$squelette_contextualise])) {
@@ -600,8 +600,8 @@ function ncore_squelette_identifier($plugin, $squelette, $contexte, $stockage) {
 	// Il est donc indispensable que le plugin qui nécessite l'utilisation d'un contexte propose la
 	// fonction de calcul associée sinon le contexte ne sera pas pris en compte et seul l'identifiant
 	// du squelette sera retourné.
-	$squelette_contextualise = $squelette;
-	if ($contexte) {
+	$squelette_contextualise = '';
+	if ($squelette or $contexte) {
 		if ($identifier = ncore_chercher_service($plugin, 'squelette_identifier', $stockage)) {
 			// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 			$squelette_contextualise = $identifier($plugin, $squelette, $contexte);
