@@ -4,7 +4,7 @@
 
 [(#SET{tab_avt, #LINKCHECK_CHIFFRE})]
 [(#GET{tab_avt}|table_valeur{nb_lien}|=={0}|oui)
-	[(#BOITE_OUVRIR{<:linkcheck:info_aucun_lien:>,'simple','bam'})]
+	[(#BOITE_OUVRIR{<:linkcheck:info_aucun_lien:>,'simple','section'})]
 	<:linkcheck:pas_encore_de_liens:>
 	#BOITE_PIED
 	[(#BOUTON_ACTION{<:linkcheck:commencer_parcours:>,#URL_ACTION_AUTEUR{linkcheck_parcours,'',#URL_ECRIRE{linkchecks}}})]
