@@ -21,6 +21,17 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 
 ## Versions 1.4.x
 
+### Version 1.4.8 (2017-10-03)
+
+* Sur la boite des liens recensés, changer la classe `bam` par `section` pour pouvoir lire le titre
+* Sur les liens dans le tableau en colonne sur les objets, on ajoute `word-wrap:break-word` pour conserver l'ensemble du lien visible
+* Accepter les liens avec des points virgule : cf [ce commentaire](https://contrib.spip.net/LinkCheck-verificateur-de-liens#forum493607)
+* Enlever le lien d'export CSV en bas, on a beaucoup mieux maintenant dans les tableaux
+
+### Version 1.4.7 (2017-09-08)
+
+* Des parenthèses en trop dans la requète générée, MySQL passait outre, MariaDB pas (@nicod_)
+
 ### Version 1.4.6 (2017-07-19)
 
 - Eviter de vérifier les certificats pour éviter de considérer des pages comme mortes lorsque le certificat est pourri ou mal configuré

@@ -49,7 +49,8 @@ function linkcheck_upgrade($nom_meta_base_version, $version_cible) {
 	 * Relancer la première récupération de liens
 	 */
 	$maj['1.4.4'] = array(
-		array('linkcheck_maj_autoinc')
+		array('linkcheck_maj_autoinc'),
+		array('linkcheck_init')
 	);
 
 	include_spip('base/upgrade');
@@ -59,9 +60,13 @@ function linkcheck_upgrade($nom_meta_base_version, $version_cible) {
 
 function linkcheck_maj_autoinc() {
 	sql_alter('TABLE spip_linkchecks MODIFY COLUMN id_linkcheck bigint(21) AUTO_INCREMENT');
+}
+
+function linkcheck_init() {
 	$reinit = charger_fonction('linkcheck_reinit', 'action');
 	$reinit();
 }
+
 /**
  * Fonction de désinstallation du plugin.
  * Vous devez :
