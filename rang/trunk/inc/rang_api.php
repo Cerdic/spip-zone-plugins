@@ -205,8 +205,8 @@ function rang_get_sources() {
 	$id_objet_parent	= $definition_table['parent']['champ'];
 
 	// et hop, on place le nouvel objet publié à la fin
-	$id_parent = sql_getfetsel($id_objet_parent, $table, $id_objet.' = '.$id_objet);
-	$rang = sql_getfetsel('max(rang)', $table, $id_objet_parent.' = '.$id_parent );
+	$id_parent = sql_getfetsel($id_objet_parent, $table, "$id_table_objet = $id_objet");
+	$rang = sql_getfetsel('max(rang)', $table, "$id_objet_parent = $id_parent");
 	// todo : on classe l'article à la fin (rang max) mais on pourrait vouloir le classer au début
 	// il faudrait donc une configuration pour ça, et dans ce cas reclasser tous les autres à un rang++
 	$dernier = $rang+1;
