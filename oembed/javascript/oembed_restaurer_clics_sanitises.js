@@ -4,10 +4,19 @@
  * de forum par exemple.
  */
 if (window.jQuery) {
-	jQuery(function($) {
-		$(".oembed .oe-play-button button:not([onclick])").each(function() {
-			var link = $(this).closest(".spip_documents").find(".oe-title").attr("href");
-			$(this).wrap("<a href=\"" + link + "\" target=\"_blank\" style=\"display:block; position:absolute; top:0; left:0; right:0; bottom:0; background:transparent\"></a>")
-		})
-	})
+	function relink_oembed(){
+		jQuery(".oembed", this)
+			.find(".oe-play-button button:not([onclick])")
+			.not('.relinked').each(function() {
+				console.log(this);
+				var href = jQuery(this).closest(".spip_documents").find(".oe-title").attr("href");
+				if (href) {
+					jQuery(this)
+						.addClass('relinked')
+						.wrap("<a href=\"" + href + "\" target=\"_blank\" rel=\"noopener\" style=\"display:block; position:absolute; top:0; left:0; right:0; bottom:0; background:transparent;overflow:hidden\"></a>")
+				}
+			});
+	}
+	jQuery(relink_oembed);
+	onAjaxLoad(relink_oembed);
 }
