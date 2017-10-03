@@ -1,0 +1,29 @@
+<div class="orbit" role="region" aria-label="Favorite Text Ever" data-orbit data-animate="[(#ENV{data-animate})]">
+	<ul class="orbit-container">
+		 <B_articles>
+			 #SET{total_art,#TOTAL_BOUCLE}
+			 [(#ENV{button}|!={non}|et{#GET{total_doc}|>={2}}|oui)
+			 <button class="orbit-previous"><span class="show-for-sr"><:foundation_6:suivant:></span>&#9664;&#xFE0E;</button>
+			 <button class="orbit-next"><span class="show-for-sr"><:foundation_6:precedent:></span>&#9654;&#xFE0E;</button>
+			]
+		<BOUCLE_articles(ARTICLES){id_rubrique?}{titre_mot?}>
+		<li class="orbit-slide">
+			<div>
+				<h3>#TITRE</h3>
+				#TEXTE
+			</div>
+		</li>
+		</BOUCLE_articles>
+	</ul>
+	<B_articles1>
+	<nav class="orbit-bullets">
+		<BOUCLE_articles1(ARTICLES){si #ENV{bullets}|!={non}|et{#GET{total_art}|>={2}}}{id_rubrique?}{titre_mot?}>
+			<button[(#COMPTEUR_BOUCLE|=={1}|oui)class="is-active"] data-slide="[(#COMPTEUR_BOUCLE|moins{1})]">
+				<span class="show-for-sr">#TITRE</span>
+				[(#COMPTEUR_BOUCLE|=={1}|oui)
+				<span class="show-for-sr"><:zoundation:slide_affiche:></span>]
+			</button>
+		</BOUCLE_articles1>
+	</nav>
+	</B_articles1>
+</div>
