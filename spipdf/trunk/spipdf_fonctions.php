@@ -228,6 +228,7 @@ function traite_balise_page($html){
 
 //On sort cette fonction de la fonction traite_balise_page
 function getBalise($matches){
+	$matches = array_pad($matches, 3, null);
 	$matches[2] = str_replace('mm', '', $matches[2]);
 	$GLOBALS['valeurs_page'][trim($matches[1])] = trim($matches[2]);
 }
