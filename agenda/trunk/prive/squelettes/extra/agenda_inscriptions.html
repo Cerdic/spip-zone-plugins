@@ -8,9 +8,9 @@
 </BOUCLE_evt>
 <div class="label"><:agenda:info_reponses_inscriptions:></div>
 <ul class="liste-items">
-    <li class="item">[(#GET{rep_oui}) ]<:agenda:info_reponse_inscription_oui:></li>
-    <li class="item">[(#GET{rep_non}) ]<:agenda:info_reponse_inscription_non:></li>
-    <li class="item">[(#GET{rep_nsp}) ]<:agenda:info_reponse_inscription_nsp:></li>
+    <li class="item">[(#GET{rep_oui}) ]<abbr title="<:agenda:label_reponse_jyparticipe|attribut_html:>"><:agenda:info_reponse_inscription_oui:></abbr></li>
+    <li class="item">[(#GET{rep_non}) ]<abbr title="<:agenda:label_reponse_jyparticipe_pas|attribut_html:>"><:agenda:info_reponse_inscription_non:></abbr></li>
+    <li class="item">[(#GET{rep_nsp}) ]<abbr title="<:agenda:label_reponse_jyparticipe_peutetre|attribut_html:>"><:agenda:info_reponse_inscription_nsp:></abbr></li>
 </ul>
 #SET{args,#ARRAY{id_evenement,#ID_EVENEMENT}}
 <h3><:agenda:telecharger:></h3>
