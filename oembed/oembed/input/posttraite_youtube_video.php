@@ -33,7 +33,7 @@ function oembed_input_posttraite_youtube_video_dist($data, $url_orig) {
 	if (defined('_OEMBED_VIDEO_DURATION') and _OEMBED_VIDEO_DURATION
 		and $v = parametre_url($url_orig, 'v')){
 		$oembed_recuperer_url = charger_fonction('oembed_recuperer_url', 'inc');
-		if ($infos = $oembed_recuperer_url("http://www.youtube.com/get_video_info?html5=1&video_id=".$v)){
+		if ($infos = $oembed_recuperer_url("http://www.youtube.com/get_video_info?html5=1&video_id=".$v,'','')){
 			$infos = explode('length_seconds=',$infos);
 			if ($duree = intval(end($infos))){
 				$data['duration'] = $duree;
