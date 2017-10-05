@@ -1,9 +1,9 @@
 <paquet
 	prefix="simplecal"
 	categorie="date"
-	version="2.2.3"
+	version="2.2.4"
 	etat="stable"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/evenement-32.png"
 	schema="2.1.5"
 	documentation="https://contrib.spip.net/Simple-Calendrier-v2"
@@ -16,23 +16,23 @@
 	<licence>GPL</licence>
 	<credit lien="http://jqueryui.com/themeroller/">Themes CSS (datepicker)</credit>
 
-	<pipeline nom="declarer_tables_interfaces" inclure="base/simplecal.php" /> <!-- OK SPIP3 -->
-	<pipeline nom="declarer_tables_objets_sql" inclure="base/simplecal.php" /> <!-- OK SPIP3 -->
-	<pipeline nom="configurer_liste_metas" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
-	<pipeline nom="autoriser" inclure="simplecal_autoriser.php" /> <!-- OK SPIP3 -->
+	<pipeline nom="declarer_tables_interfaces" inclure="base/simplecal.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/simplecal.php" />
+	<pipeline nom="configurer_liste_metas" inclure="simplecal_pipelines.php" />
+	<pipeline nom="autoriser" inclure="simplecal_autoriser.php" />
 	<pipeline nom="header_prive" inclure="simplecal_pipelines.php" />
-	<pipeline nom="insert_head_css" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
-	<pipeline nom="boite_infos" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
-	<pipeline nom="affiche_milieu" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
-	<pipeline nom="affiche_gauche" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
-	<pipeline nom="affiche_auteurs_interventions" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
-	<pipeline nom="rubrique_encours" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
-	<pipeline nom="affiche_enfants" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
+	<pipeline nom="insert_head_css" inclure="simplecal_pipelines.php" />
+	<pipeline nom="boite_infos" inclure="simplecal_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="simplecal_pipelines.php" />
+	<pipeline nom="affiche_gauche" inclure="simplecal_pipelines.php" />
+	<pipeline nom="affiche_auteurs_interventions" inclure="simplecal_pipelines.php" />
+	<pipeline nom="rubrique_encours" inclure="simplecal_pipelines.php" />
+	<pipeline nom="affiche_enfants" inclure="simplecal_pipelines.php" />
 	<pipeline nom="objet_compte_enfants" inclure="simplecal_pipelines.php" />
-	<pipeline nom="accueil_encours" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
-	<pipeline nom="accueil_informations" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
-	<pipeline nom="compter_contributions_auteur" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
-	<pipeline nom="optimiser_base_disparus" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
+	<pipeline nom="accueil_encours" inclure="simplecal_pipelines.php" />
+	<pipeline nom="accueil_informations" inclure="simplecal_pipelines.php" />
+	<pipeline nom="compter_contributions_auteur" inclure="simplecal_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="simplecal_pipelines.php" />
 	<pipeline nom="propres_creer_chaine_url" inclure="simplecal_pipelines.php" />
 	<pipeline nom="corbeille_table_infos" inclure="simplecal_pipelines.php" />
 	<pipeline nom="jqueryui_plugins" inclure="simplecal_pipelines.php" />
