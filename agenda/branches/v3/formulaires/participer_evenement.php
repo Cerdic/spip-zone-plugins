@@ -110,16 +110,27 @@ function formulaires_participer_evenement_traiter_dist($id_evenement) {
 	$nom = _request('nom');
 	$email = _request('email');
 
+	// 1) Visiteur connecté
 	if (isset($GLOBALS['visiteur_session']['id_auteur'])) {
 		$editable = true;
-		if (sql_fetsel('reponse', 'spip_evenements_participants', 'id_evenement='.intval($id_evenement).' AND id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']))) {
-			sql_updateq('spip_evenements_participants', array('reponse' => $reponse, 'date' => 'NOW()'), 'id_evenement='.intval($id_evenement).' AND id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']));
+		// mise à jour d'une réponse existante
+		if ($id_evenement_participant = sql_getfetsel(
+			'id_evenement_participant',
+			'spip_evenements_participants',
+			array(
+				'id_evenement='.intval($id_evenement),
+				'id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur'])
+			)
+		)) {
+			sql_updateq('spip_evenements_participants', array('reponse' => $reponse, 'date' => 'NOW()'), 'id_evenement_participant='.intval($id_evenement_participant));
+		// nouvelle réponse
 		} else {
-			sql_insertq('spip_evenements_participants', array('id_evenement' => $id_evenement, 'id_auteur' => $GLOBALS['visiteur_session']['id_auteur'], 'reponse' => $reponse, 'date'=>'NOW()'));
+			$id_evenement_participant = sql_insertq('spip_evenements_participants', array('id_evenement' => $id_evenement, 'id_auteur' => $GLOBALS['visiteur_session']['id_auteur'], 'reponse' => $reponse, 'date'=>'NOW()'));
 		}
+	// 2) Visiteur anonyme : nouvelle réponse
 	} else {
 			$editable = false;
-			sql_insertq('spip_evenements_participants', array('id_evenement' => $id_evenement, 'nom' => $nom, 'email' => $email,'reponse' => $reponse, 'date' => 'NOW()'));
+			$id_evenement_participant = sql_insertq('spip_evenements_participants', array('id_evenement' => $id_evenement, 'nom' => $nom, 'email' => $email,'reponse' => $reponse, 'date' => 'NOW()'));
 	}
 	if ($reponse == 'oui') {
 		$message = _T('agenda:participation_prise_en_compte');
@@ -132,5 +143,5 @@ function formulaires_participer_evenement_traiter_dist($id_evenement) {
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='evenement/$id_evenement'");
 
-	return array('message_ok'=>$message,'editable'=>$editable);
+	return array('message_ok'=>$message,'editable'=>$editable, 'id_evenement_participant'=>$id_evenement_participant);
 }
