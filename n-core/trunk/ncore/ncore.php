@@ -602,6 +602,7 @@ function ncore_squelette_identifier($plugin, $squelette, $contexte, $stockage) {
 	// du squelette sera retourné.
 	$squelette_contextualise = '';
 	if ($squelette or $contexte) {
+		include_spip('inc/ncore_utils');
 		if ($identifier = ncore_chercher_service($plugin, 'squelette_identifier', $stockage)) {
 			// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 			$squelette_contextualise = $identifier($plugin, $squelette, $contexte);
