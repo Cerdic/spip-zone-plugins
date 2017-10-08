@@ -61,14 +61,14 @@ if (!defined('_NCORE_NOMCACHE_NOISETTE_CONTEXTE')) {
  * @api
  * @uses lire_fichier_securise()
  *
- * @param string	$plugin
- *      Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
- *      ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param string	$nom_cache
- * 		Nom et extension du fichier cache.
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param string $nom_cache
+ *        Nom et extension du fichier cache.
  *
  * @return array
- * 		Contenu du fichier sous la forme d'un tableau éventuellement vide.
+ *        Contenu du fichier sous la forme d'un tableau éventuellement vide.
  */
 function cache_lire($plugin, $nom_cache) {
 
@@ -93,13 +93,13 @@ function cache_lire($plugin, $nom_cache) {
  * @api
  * @uses ecrire_fichier_securise()
  *
- * @param string	$plugin
- *      Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
- *      ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param string	$nom_cache
- * 		Nom et extension du fichier cache.
- * @param array     $contenu_cache
- * 		Contenu sous forme de tableau à stocker dans un fichier cache après sérialisation.
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param string $nom_cache
+ *        Nom et extension du fichier cache.
+ * @param array  $contenu_cache
+ *        Contenu sous forme de tableau à stocker dans un fichier cache après sérialisation.
  *
  * @return void
  */
@@ -129,11 +129,11 @@ function cache_ecrire($plugin, $nom_cache, $contenu_cache) {
  * @api
  * @uses supprimer_fichier()
  *
- * @param string	$plugin
- *      Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
- *      ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param string	$nom_cache
- * 		Nom et extension du fichier cache.
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param string $nom_cache
+ *        Nom et extension du fichier cache.
  *
  * @return void
  */

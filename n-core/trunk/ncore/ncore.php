@@ -28,8 +28,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @package SPIP\NCORE\SERVICE\TYPE_NOISETTE
  *
- * @uses    cache_lire()
- * @uses    cache_ecrire()
+ * @uses cache_lire()
+ * @uses cache_ecrire()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -121,7 +121,7 @@ function ncore_type_noisette_stocker($plugin, $types_noisette, $recharger, $stoc
  *
  * @package SPIP\NCORE\SERVICE\TYPE_NOISETTE
  *
- * @uses    cache_lire()
+ * @uses cache_lire()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -168,7 +168,7 @@ function ncore_type_noisette_decrire($plugin, $type_noisette, $stockage = '') {
  *
  * @package SPIP\NCORE\SERVICE\TYPE_NOISETTE
  *
- * @uses    cache_lire()
+ * @uses cache_lire()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -227,8 +227,8 @@ function ncore_type_noisette_lister($plugin, $information = '', $stockage = '') 
  *
  * @package SPIP\NCORE\SERVICE\NOISETTE
  *
- * @uses    ncore_chercher_service()
- * @uses    ncore_squelette_identifier()
+ * @uses ncore_chercher_service()
+ * @uses ncore_squelette_identifier()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -311,8 +311,8 @@ function ncore_noisette_stocker($plugin, $description, $stockage = '') {
  *
  * @package SPIP\NCORE\SERVICE\NOISETTE
  *
- * @uses    ncore_chercher_service()
- * @uses    ncore_squelette_identifier()
+ * @uses ncore_chercher_service()
+ * @uses ncore_squelette_identifier()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -383,15 +383,15 @@ function ncore_noisette_ranger($plugin, $description, $rang_destination, $stocka
  *
  * @package SPIP\NCORE\SERVICE\NOISETTE
  *
- * @uses    ncore_chercher_service()
- * @uses    ncore_squelette_identifier()
+ * @uses ncore_chercher_service()
+ * @uses ncore_squelette_identifier()
  *
- * @param string $plugin
+ * @param string       $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param array|string  $description
+ * @param array|string $description
  *        Description complète de la noisette ou identifiant du squelette contextualisé.
- * @param string $stockage
+ * @param string       $stockage
  *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin ni celui de N-Core
  *        ne seront utilisés. En général, cet identifiant est le préfixe du plugin fournissant le stockage.
  *
@@ -456,21 +456,23 @@ function ncore_noisette_destocker($plugin, $description, $stockage = '') {
  *
  * @package SPIP\NCORE\SERVICE\NOISETTE
  *
- * @uses    ncore_chercher_service()
- * @uses    ncore_squelette_identifier()
+ * @uses ncore_chercher_service()
+ * @uses ncore_squelette_identifier()
  *
- * @param string	$plugin
- *      Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
- *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param string	$squelette
- * 		Chemin relatif du squelette où ajouter la noisette.
- * @param array     $contexte
- * 		Tableau éventuellement vide matérialisant le contexte d'utilisation du squelette.
- * @param string    $information
- *      Champ précis de la description d'une noisette ou vide pour toute la description.
- * @param string    $cle
- *      Champ de la description d'une noisette servant d'index du tableau. En général on utilisera soit `id_noisette`
- *      soit `rang`.
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param string $squelette
+ * 		  Chemin relatif du squelette où ajouter la noisette.
+ * @param array  $contexte
+ * 		  Tableau éventuellement vide matérialisant le contexte d'utilisation du squelette.
+ * @param string $information
+ *        Identifiant d'un champ de la description d'une type de noisette.
+ *        Si l'argument est vide, la fonction renvoie les descriptions complètes et si l'argument est
+ *        un champ invalide la fonction renvoie un tableau vide.
+ * @param string $cle
+ *        Champ de la description d'une noisette servant d'index du tableau. En général on utilisera soit `id_noisette`
+ *        soit `rang`.
  * @param string $stockage
  *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin ni celui de N-Core
  *        ne seront utilisés. En général, cet identifiant est le préfixe du plugin fournissant le stockage.
@@ -531,8 +533,8 @@ function ncore_noisette_lister($plugin, $squelette = '', $contexte = array(), $i
  *
  * @package SPIP\NCORE\SERVICE\NOISETTE
  *
- * @uses    ncore_chercher_service()
- * @uses    ncore_squelette_identifier()
+ * @uses ncore_chercher_service()
+ * @uses ncore_squelette_identifier()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -616,15 +618,15 @@ function ncore_noisette_decrire($plugin, $noisette, $stockage = '') {
  *
  * @package SPIP\NCORE\SERVICE\NOISETTE
  *
- * @uses    ncore_chercher_service()
+ * @uses ncore_chercher_service()
  *
- * @param string	$plugin
- *      Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
- *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param string	$squelette
- * 		Chemin relatif du squelette où ajouter la noisette.
- * @param array     $contexte
- * 		Tableau éventuellement vide matérialisant le contexte d'utilisation du squelette.
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param string $squelette
+ * 		  Chemin relatif du squelette où ajouter la noisette.
+ * @param array  $contexte
+ * 		  Tableau éventuellement vide matérialisant le contexte d'utilisation du squelette.
  * @param string $stockage
  *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin ni celui de N-Core
  *        ne seront utilisés. En général, cet identifiant est le préfixe du plugin fournissant le stockage.
