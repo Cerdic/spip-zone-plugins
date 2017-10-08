@@ -11,4 +11,4 @@ function formulaires_selection_langue_cible_charger_dist(){
 		'langue' => _request('langue'),
 	);
 }
-?>
+

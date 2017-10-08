@@ -55,5 +55,3 @@ function action_synchroniser_mots_traductions_dist() {
 		}
 	}
 }
-
-?>

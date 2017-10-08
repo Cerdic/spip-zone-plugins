@@ -22,13 +22,11 @@
 
 </div>
 <script type='text/javascript'>
-;(function($) {
-$(document).ready(function(){
+jQuery(function($){
 	trad = $('.formulaire_#FORM');
 	trad.find('p.boutons').hide();
 	trad.find('form').change(function(){
 		trad.find('p.boutons').show('normal');
 	});
 });
-})(jQuery);
 </script>

@@ -22,5 +22,3 @@ function autoriser_synchronisermots_dist($faire, $type='', $id=0, $qui = NULL, $
 	return false;
 }
 
-
-?>

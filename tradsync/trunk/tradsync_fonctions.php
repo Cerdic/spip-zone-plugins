@@ -171,5 +171,3 @@ function critere_polyglotte_dist($idb, &$boucles, $crit) {
 }
 
 
-
-?>

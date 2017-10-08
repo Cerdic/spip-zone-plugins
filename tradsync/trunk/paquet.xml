@@ -1,9 +1,9 @@
 <paquet
 	prefix="tradsync"
 	categorie="edition"
-	version="2.0.0"
+	version="2.0.1"
 	etat="test"
-	compatibilite="[3.0.0-beta2;3.0.*]"
+	compatibilite="[3.0.0-beta2;3.2.*]"
 	logo="prive/themes/spip/images/tradsync-32.png"
 >
 
