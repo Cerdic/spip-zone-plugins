@@ -30,7 +30,10 @@ function filtre_emogrifier($html, $fichier_css = _EMOGRIFIER_CSS) {
   if (!_EMOGRIFIER_LIBXML_ERROR) {
 	  libxml_use_internal_errors(true);
   }
+  
   $htmldoc = new \Pelago\Emogrifier($html, $css);
-
+  if (_EMOGRIFIER_DISABLE_STYLE_BLOCKS_PARSING) {
+	$htmldoc->disableStyleBlocksParsing();
+  }
   return $htmldoc->emogrify();
 }
