@@ -1,9 +1,9 @@
 <paquet
 	prefix="boussole"
 	categorie="navigation"
-	version="2.7.1"
+	version="2.7.2"
 	etat="stable"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="boussole_logo-64.png"
 	schema="0.5"
 	documentation="https://contrib.spip.net/Boussole-v2-nouveau-fonctionnement-client-serveur"
