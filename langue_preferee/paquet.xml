@@ -1,7 +1,7 @@
 <paquet
 	prefix="languepreferee"
 	categorie="navigation"
-	version="0.4.6"
+	version="0.4.7"
 	etat="stable"
 	compatibilite="[1.9.2;3.2.*]"
 	logo="langue-preferee.png"
