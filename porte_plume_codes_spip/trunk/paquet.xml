@@ -11,9 +11,8 @@
 	<auteur>Matthieu Marcillaud</auteur>
 	<licence>GNU/GPL</licence>
 
-
 	<pipeline nom="porte_plume_barre_pre_charger" inclure="pp_codes_spip_pipelines.php" />
 	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="pp_codes_spip_pipelines.php" />
 
-	<necessite nom="porte_plume" compatibilite="[1.10.1;]" />
+	<necessite nom="porte_plume" compatibilite="[1.11.5;]" />
 </paquet>
