@@ -1,9 +1,9 @@
 <paquet
 	prefix="tickets"
 	categorie="divers"
-	version="4.1.1"
+	version="4.1.2"
 	etat="stable"
-	compatibilite="[3.0.15;3.1.*]"
+	compatibilite="[3.0.15;3.2.*]"
 	logo="imgs/logo-bugs.png"
 	schema="2.0.0"
 	documentation="https://contrib.spip.net/?article3959"
