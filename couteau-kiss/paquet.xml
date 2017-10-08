@@ -1,9 +1,9 @@
 <paquet
 	prefix="ck"
 	categorie="maintenance"
-	version="1.2.1"
+	version="1.2.2"
 	etat="stable"
-	compatibilite="[2.0.0;3.1.*]"
+	compatibilite="[2.0.0;3.2.*]"
 	logo="images/pocket-knife-32.png"
 	documentation="https://contrib.spip.net/Couteau-KISS"
 >
