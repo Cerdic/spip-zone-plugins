@@ -3,7 +3,7 @@
 	categorie="date"
 	version="4.0.5-dev"
 	etat="dev"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/evenement-32.png"
 	schema="0.27.0"
 	documentation="https://contrib.spip.net/article2858"
