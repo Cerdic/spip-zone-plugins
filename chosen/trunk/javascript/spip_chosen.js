@@ -1,5 +1,4 @@
-;(function ($) {
-jQuery(document).ready(function(){
+;jQuery(function($){
 	/* Remet le title sur les chosen s'il en existait un sur le select */
 	spip_chosen_title = function() {
 		$('.chosen-container').each(function () {
@@ -60,4 +59,3 @@ jQuery(document).ready(function(){
 	spip_chosen();
 	onAjaxLoad(spip_chosen);
 });
-})(jQuery);
