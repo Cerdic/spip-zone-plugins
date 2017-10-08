@@ -8,7 +8,6 @@ if (!defined('CODES_SPIP_BRANCHE')) {
 	define(CODES_SPIP_BRANCHE, 'dev');
 }
 
-
 function glossaire_core($chemin, $ligne=0) {
 	// gestion des aiguillages automatiques
 	// vers core_plugins lorsque le chemin indique un fichier qui y pointe.
