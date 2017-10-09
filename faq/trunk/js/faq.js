@@ -1,4 +1,4 @@
-$(document).ready(function(){
+jQuery(function($){
 	$('dl.faq > dt').addClass("close").click(function(){
 		$(this).toggleClass("close").next().toggle('fast');
 		return false;
