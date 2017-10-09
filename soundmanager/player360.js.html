@@ -39,9 +39,9 @@ $(document).ready(function(){
 
 	function maj_bouton_play_pause(){
 		if($("button.play_pause").text() === "pause"){
-			$("button.play_pause").html("play") ;
+			$("button.play_pause").removeClass("bouton_playing").html("play") ;
 		}else{
-			$("button.play_pause").html("pause") ;
+			$("button.play_pause").addClass("bouton_playing").html("pause") ;
 		}
 	}
 	
