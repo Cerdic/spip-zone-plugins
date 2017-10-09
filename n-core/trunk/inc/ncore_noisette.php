@@ -25,10 +25,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param string $type_noisette
  *        Identifiant du type de noisette à ajouter au squelette.
- * @param string $squelette
- *        Chemin relatif du squelette auquel associer la noisette.
- * @param array  $contexte
- *        Tableau éventuellement vide matérialisant le contexte d'utilisation du squelette.
+ * @param array  $conteneur
+ *        Tableau associatif descriptif du conteneur accueillant la noisette. Un conteneur peut-être un squelette seul
+ *        ou associé à un contexte d'utilisation et dans ce cas il possède un index `squelette` ou un objet quelconque
+ *        sans lien avec un squelette. Dans tous les cas, les index, à l'exception de `squelette`, sont spécifiques
+ *        à l'utilisation qui en est faite par le plugin.
  * @param int    $rang
  *        Rang dans le squelette contextualisé où insérer la noisette. Si l'argument n'est pas fourni ou est égal à 0
  *        on insère la noisette en fin de bloc.
@@ -40,7 +41,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return int|string|bool
  *        Retourne l'identifiant de la nouvelle instance de noisette créée ou `false` en cas d'erreur.
  **/
-function noisette_ajouter($plugin, $type_noisette, $squelette, $contexte, $rang = 0, $stockage = '') {
+function noisette_ajouter($plugin, $type_noisette, $conteneur, $rang = 0, $stockage = '') {
 
 	// Initialisation de la valeur de sortie.
 	$noisette_ajoutee = false;
@@ -64,8 +65,7 @@ function noisette_ajouter($plugin, $type_noisette, $squelette, $contexte, $rang 
 		$description = array(
 			'plugin'     => $plugin,
 			'noisette'   => $type_noisette,
-			'squelette'  => $squelette,
-			'contexte'   => serialize($contexte),
+			'conteneur'  => serialize($conteneur),
 			'rang'       => intval($rang),
 			'parametres' => serialize($parametres),
 			'balise'     => 'defaut',
@@ -78,7 +78,7 @@ function noisette_ajouter($plugin, $type_noisette, $squelette, $contexte, $rang 
 
 		// On récupère les noisettes déjà affectées au squelette contextualisé sous la forme d'un tableau indexé
 		// par le rang de chaque noisette.
-		$noisettes = ncore_noisette_lister($plugin, $squelette, $contexte, '', 'rang', $stockage);
+		$noisettes = ncore_noisette_lister($plugin, $conteneur, '', 'rang', $stockage);
 
 		// On calcule le rang max déjà utilisé.
 		$rang_max = $noisettes ? max(array_keys($noisettes)) : 0;
@@ -126,7 +126,7 @@ function noisette_ajouter($plugin, $type_noisette, $squelette, $contexte, $rang 
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param mixed  $noisette
  *        Identifiant de la noisette qui peut prendre soit la forme d'un entier ou d'une chaine unique, soit la forme
- *        d'un triplet (squelette, contexte, rang).
+ *        d'un couple (conteneur, rang).
  * @param string $stockage
  *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
  *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
@@ -161,8 +161,7 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
 		// On récupère les noisettes restant affectées au squelette contextualisé sous la forme d'un tableau indexé par rang.
 		$autres_noisettes = ncore_noisette_lister(
 			$plugin,
-			$description['squelette'],
-			unserialize($description['contexte']),
+			unserialize($description['conteneur']),
 			'',
 			'rang',
 			$stockage
@@ -196,7 +195,7 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param mixed   $noisette
  *        Identifiant de la noisette qui peut prendre soit la forme d'un entier ou d'une chaine unique, soit la forme
- *        d'un triplet (squelette, contexte, rang).
+ *        d'un couple (contneur, rang).
  * @param string  $information
  *        Information spécifique à retourner ou vide pour retourner toute la description.
  * @param boolean $traiter_typo
@@ -231,13 +230,8 @@ function noisette_lire($plugin, $noisette, $information = '', $traiter_typo = fa
 		if (!is_array($noisette)) {
 			$description_existe = isset($description_noisette_par_id[$plugin][$noisette]) ? true : false;
 		} else {
-			if (isset($noisette['squelette'], $noisette['contexte'], $noisette['rang'])) {
-				$squelette_contextualise = ncore_squelette_identifier(
-					$plugin,
-					$noisette['squelette'],
-					$noisette['contexte'],
-					$stockage
-				);
+			if (isset($noisette['conteneur'], $noisette['rang'])) {
+				$squelette_contextualise = ncore_squelette_identifier($plugin, $noisette['conteneur'], $stockage);
 				$description_existe = isset($description_noisette_par_rang[$plugin][$squelette_contextualise][$noisette['rang']])
 					? true
 					: false;
@@ -253,8 +247,8 @@ function noisette_lire($plugin, $noisette, $information = '', $traiter_typo = fa
 				if (is_string($description['parametres'])) {
 					$description['parametres'] = unserialize($description['parametres']);
 				}
-				if (is_string($description['contexte'])) {
-					$description['contexte'] = unserialize($description['contexte']);
+				if (is_string($description['conteneur'])) {
+					$description['conteneur'] = unserialize($description['conteneur']);
 				}
 			}
 
@@ -300,7 +294,7 @@ function noisette_lire($plugin, $noisette, $information = '', $traiter_typo = fa
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param mixed  $noisette
  *        Identifiant de la noisette qui peut prendre soit la forme d'un entier ou d'une chaine unique, soit la forme
- *        d'un triplet (squelette, contexte, rang).
+ *        d'un couple (conteneur, rang).
  * @param int    $rang_destination
  *        Entier représentant le rang où repositionner la noisette dans le squelette contextualisé.
  * @param string $stockage
@@ -334,8 +328,7 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
 			// On récupère les noisettes affectées au même squelette sous la forme d'un tableau indexé par le rang.
 			$noisettes = ncore_noisette_lister(
 				$plugin,
-				$description['squelette'],
-				unserialize($description['contexte']),
+				unserialize($description['conteneur']),
 				'',
 				'rang',
 				$stockage
@@ -392,10 +385,11 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param mixed  $squelette
- *        Chemin relatif du squelette où ajouter la noisette.
- * @param array  $contexte
- *        Tableau éventuellement vide matérialisant le contexte d'utilisation du squelette.
+ * @param array  $conteneur
+ *        Tableau associatif descriptif du conteneur accueillant la noisette. Un conteneur peut-être un squelette seul
+ *        ou associé à un contexte d'utilisation et dans ce cas il possède un index `squelette` ou un objet quelconque
+ *        sans lien avec un squelette. Dans tous les cas, les index, à l'exception de `squelette`, sont spécifiques
+ *        à l'utilisation qui en est faite par le plugin.
  * @param string $stockage
  *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
  *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
@@ -403,7 +397,7 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
  *
  * @return bool
  */
-function noisette_vider($plugin, $squelette, $contexte, $stockage = '') {
+function noisette_vider($plugin, $conteneur, $stockage = '') {
 
 	// Initialisation du retour
 	$retour = false;
@@ -412,10 +406,8 @@ function noisette_vider($plugin, $squelette, $contexte, $stockage = '') {
 	// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
 	include_spip('ncore/ncore');
 
-	if ($squelette or $contexte) {
-		// On construit un tableau avec le squelette et son contexte et on le passe à la fonction.
-		$description = array('squelette' => $squelette, 'contexte' => serialize($contexte));
-		$retour = ncore_noisette_destocker($plugin, $description, $stockage);
+	if ($conteneur) {
+		$retour = ncore_noisette_destocker($plugin, $conteneur, $stockage);
 	}
 
 	return $retour;

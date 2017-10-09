@@ -269,8 +269,7 @@ function ncore_noisette_stocker($plugin, $description, $stockage = '') {
 		// la description, le contexte est lui sérialisé.
 		$squelette_contextualise = ncore_squelette_identifier(
 			$plugin,
-			$description['squelette'],
-			unserialize($description['contexte']),
+			unserialize($description['conteneur']),
 			$stockage
 		);
 
@@ -354,8 +353,7 @@ function ncore_noisette_ranger($plugin, $description, $rang_destination, $stocka
 		// la description, le contexte est lui sérialisé.
 		$squelette_contextualise = ncore_squelette_identifier(
 			$plugin,
-			$description['squelette'],
-			unserialize($description['contexte']),
+			unserialize($description['conteneur']),
 			$stockage
 		);
 
@@ -424,8 +422,7 @@ function ncore_noisette_destocker($plugin, $description, $stockage = '') {
 		// la description, le contexte est lui sérialisé.
 		$squelette_contextualise = ncore_squelette_identifier(
 			$plugin,
-			$description['squelette'],
-			unserialize($description['contexte']),
+			unserialize($description['conteneur']),
 			$stockage
 		);
 
@@ -462,10 +459,11 @@ function ncore_noisette_destocker($plugin, $description, $stockage = '') {
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param string $squelette
- * 		  Chemin relatif du squelette où ajouter la noisette.
- * @param array  $contexte
- * 		  Tableau éventuellement vide matérialisant le contexte d'utilisation du squelette.
+ * @param array  $conteneur
+ *        Tableau associatif descriptif du conteneur accueillant la noisette. Un conteneur peut-être un squelette seul
+ *        ou associé à un contexte d'utilisation et dans ce cas il possède un index `squelette` ou un objet quelconque
+ *        sans lien avec un squelette. Dans tous les cas, les index, à l'exception de `squelette`, sont spécifiques
+ *        à l'utilisation qui en est faite par le plugin.
  * @param string $information
  *        Identifiant d'un champ de la description d'une type de noisette.
  *        Si l'argument est vide, la fonction renvoie les descriptions complètes et si l'argument est
@@ -480,7 +478,7 @@ function ncore_noisette_destocker($plugin, $description, $stockage = '') {
  * @return array
  *        Tableau de la liste des informations demandées indexé par identifiant de noisette ou par rang.
  */
-function ncore_noisette_lister($plugin, $squelette = '', $contexte = array(), $information = '', $cle = 'rang', $stockage = '') {
+function ncore_noisette_lister($plugin, $conteneur = array(), $information = '', $cle = 'rang', $stockage = '') {
 
 	// Initialisation du tableau de sortie.
 	$noisettes = array();
@@ -500,9 +498,9 @@ function ncore_noisette_lister($plugin, $squelette = '', $contexte = array(), $i
 		include_spip('inc/config');
 		$meta_noisettes = lire_config("${plugin}_noisettes", array());
 
-		if ($squelette or $contexte) {
+		if ($conteneur) {
 			// Détermination de l'identifiant du squelette contextualisé.
-			$squelette_contextualise = ncore_squelette_identifier($plugin, $squelette, $contexte, $stockage);
+			$squelette_contextualise = ncore_squelette_identifier($plugin, $conteneur, $stockage);
 			if (!empty($meta_noisettes[$squelette_contextualise])) {
 				$noisettes = $meta_noisettes[$squelette_contextualise];
 				$noisettes = $information
@@ -541,7 +539,7 @@ function ncore_noisette_lister($plugin, $squelette = '', $contexte = array(), $i
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param mixed  $noisette
  *        Identifiant de la noisette qui peut prendre soit la forme d'un entier ou d'une chaine unique, soit la forme
- *        d'un triplet (squelette, contexte, rang).
+ *        d'un couple (conteneur, rang).
  * @param string $stockage
  *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin ni celui de N-Core
  *        ne seront utilisés. En général, cet identifiant est le préfixe du plugin fournissant le stockage.
@@ -593,8 +591,7 @@ function ncore_noisette_decrire($plugin, $noisette, $stockage = '') {
 					// Détermination de l'identifiant du squelette contextualisé.
 					$squelette_contextualise = ncore_squelette_identifier(
 						$plugin,
-						$noisette['squelette'],
-						$noisette['contexte'],
+						$noisette['conteneur'],
 						$stockage
 					);
 					if (!empty($meta_noisettes[$squelette_contextualise][$noisette['rang']])) {
@@ -623,10 +620,11 @@ function ncore_noisette_decrire($plugin, $noisette, $stockage = '') {
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param string $squelette
- * 		  Chemin relatif du squelette où ajouter la noisette.
- * @param array  $contexte
- * 		  Tableau éventuellement vide matérialisant le contexte d'utilisation du squelette.
+ * @param array  $conteneur
+ *        Tableau associatif descriptif du conteneur accueillant la noisette. Un conteneur peut-être un squelette seul
+ *        ou associé à un contexte d'utilisation et dans ce cas il possède un index `squelette` ou un objet quelconque
+ *        sans lien avec un squelette. Dans tous les cas, les index, à l'exception de `squelette`, sont spécifiques
+ *        à l'utilisation qui en est faite par le plugin.
  * @param string $stockage
  *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin ni celui de N-Core
  *        ne seront utilisés. En général, cet identifiant est le préfixe du plugin fournissant le stockage.
@@ -634,7 +632,7 @@ function ncore_noisette_decrire($plugin, $noisette, $stockage = '') {
  * @return string
  *        Identifiant du squelette contextualisé.
  */
-function ncore_squelette_identifier($plugin, $squelette, $contexte, $stockage) {
+function ncore_squelette_identifier($plugin, $conteneur, $stockage) {
 
 	// Il faut calculer l'identifiant du squelette contextualisé pour accéder à la bonne liste
 	// de noisettes. N-Core ne propose pas de fonction par défaut car l'élaboration de l'identifiant
@@ -643,11 +641,11 @@ function ncore_squelette_identifier($plugin, $squelette, $contexte, $stockage) {
 	// fonction de calcul associée sinon le contexte ne sera pas pris en compte et seul l'identifiant
 	// du squelette sera retourné.
 	$squelette_contextualise = '';
-	if ($squelette or $contexte) {
+	if ($conteneur) {
 		include_spip('inc/ncore_utils');
 		if ($identifier = ncore_chercher_service($plugin, 'squelette_identifier', $stockage)) {
 			// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
-			$squelette_contextualise = $identifier($plugin, $squelette, $contexte);
+			$squelette_contextualise = $identifier($plugin, $conteneur);
 		}
 	}
 
