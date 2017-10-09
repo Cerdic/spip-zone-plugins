@@ -48,7 +48,7 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres){
 	// initialisation du mode généré : tout le formulaire ou que le champ
 	// si on met rien ou n'importe quoi, ça donne false
 	// donc le formulaire complet
-	$uniquement_champ = (strtolower($uniquement_champ)=="true");
+	$uniquement_champ = isset($uniquement_champ) ? (strtolower($uniquement_champ)=="true") : false;
 
 	// initialisation de la petite explication
 	if (!isset($explication))
@@ -167,15 +167,15 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres){
 	// initialisation du mode d'ajout des mots-clés
 	// si on met rien ou n'importe quoi ça donne true
 	// donc en mode "remplacer"
-	$remplacer = !(strtolower($remplacer)=="false");
+	$remplacer = isset($remplacer) ? !(strtolower($remplacer)=="false") : true;
 
 	// initialisation de la proposition de login en cas de mauvaise autorisation
 	// si on met rien ou n'importe quoi, ça donne false
 	// donc renvoie du vide si pas autorisé
-	$proposer_login = (strtolower($proposer_login)=="true");
+	$proposer_login =  isset($proposer_login) ? (strtolower($proposer_login)=="true") : true;
 
 	// initialisation du type d'aide
-	$aide = strtolower($aide);
+	$aide = isset($aide) ? strtolower($aide) : '';
 	if (!strlen($aide) OR !in_array($aide, array("nuage", "autocompletion", "liste", "aucun", "aucune", "rien"))){
 		$aide_nuage = true;
 		$aide_autocompletion = true;
@@ -195,8 +195,12 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres){
 	// sinon on peut le choisir (sinon c'est aussi automatique)
 	if (!$uniquement_champ or !isset($name)) $name = 'etiquettes_' . etiquettes_produire_id($groupe, $type_objet, $id_objet);
 
-	return array($groupe, $id_groupe, $name, $aide_nuage, $aide_autocompletion, $aide_liste, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login, $uniquement_champ, $explication, $squelette_nuage, $label);
+	return array(
+		$groupe, $id_groupe, $name, $aide_nuage,
+		$aide_autocompletion, $aide_liste, $remplacer,
+		$type_objet, $cle_objet, $id_objet, $proposer_login,
+		$uniquement_champ, $explication, $squelette_nuage,
+		(isset($label) ? $label : '')
+	);
 
 }
-
-?>

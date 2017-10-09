@@ -15,6 +15,8 @@ function formulaires_etiquettes_charger_dist($groupe, $id_groupe, $name, $aide_n
 
 	$valeurs = compact("groupe", "name", "aide_nuage", "aide_autocompletion", "aide_liste", "remplacer", "type_objet", "cle_objet", "id_objet", "proposer_login", "uniquement_champ", "explication", "squelette_nuage", "label");
 
+	$valeurs['proposer_login'] = boolval($valeurs['proposer_login']);
+
 	// Les paramètres ont tous déjà été testés
 	// Maintenant on teste si la personne a le droit d'ajouter des mots-clés au groupe choisi
 	// ET si elle a le droit de modifier l'objet choisi
@@ -121,5 +123,3 @@ function formulaires_etiquettes_traiter_dist($groupe, $id_groupe, $name, $aide_n
 	}
 
 }
-
-?>

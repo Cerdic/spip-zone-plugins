@@ -119,7 +119,7 @@ class Tag {
 	var $id_groupe;
 	
 	// Constructeur
-	function Tag($titre, $type='', $id_groupe='') {
+	function __construct($titre, $type='', $id_groupe='') {
 		$this->titre = $titre;
 		$this->id_groupe = $id_groupe;
 		$this->type = $type;
@@ -351,7 +351,7 @@ class ListeTags {
 	var $id_table_objet; // clé primaire de l'objet auquel on veut lier la liste
 	
 	// Constructeur
-	function ListeTags($liste_tags,	$groupe_defaut='', $id_groupe='') { // public
+	function __construct($liste_tags,	$groupe_defaut='', $id_groupe='') { // public
 		
 		if(!$groupe_defaut && !$id_groupe)
 			$groupe_defaut = $this->creer_groupe_defaut();

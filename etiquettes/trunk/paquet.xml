@@ -1,14 +1,14 @@
 <paquet
 	prefix="etiquettes"
 	categorie="navigation"
-	version="2.2.4"
+	version="2.2.5"
 	etat="test"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="images/etiquettes.png"
 	documentation="https://contrib.spip.net/Etiquettes,2656"
 >
 
-	<nom>&#201;tiquettes</nom>
+	<nom>Étiquettes</nom>
 	<!-- Ajouter facilement des mots-clés à tout et n'importe quoi -->
 
 	<auteur>RastaPopoulos</auteur>
