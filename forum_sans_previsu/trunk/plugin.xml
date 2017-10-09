@@ -3,7 +3,7 @@
 
 	<categorie>communication</categorie>
 	<auteur>Communauté SPIP</auteur>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<icon>forum_sans_previsu.png</icon>
 	<prefix>forum_sans_previsu</prefix>
 	<etat>stable</etat>
