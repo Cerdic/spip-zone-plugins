@@ -172,7 +172,7 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres){
 	// initialisation de la proposition de login en cas de mauvaise autorisation
 	// si on met rien ou n'importe quoi, ça donne false
 	// donc renvoie du vide si pas autorisé
-	$proposer_login =  isset($proposer_login) ? (strtolower($proposer_login)=="true") : true;
+	$proposer_login =  isset($proposer_login) ? (strtolower($proposer_login)=="true") : false;
 
 	// initialisation du type d'aide
 	$aide = isset($aide) ? strtolower($aide) : '';
