@@ -1,9 +1,9 @@
 <paquet
 	prefix="couleurs_spip"
 	categorie="edition"
-	version="3.1.2"
+	version="3.1.3"
 	etat="test"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="couleurs_spip.png"
 	documentation="https://contrib.spip.net/?article3180"
 >
