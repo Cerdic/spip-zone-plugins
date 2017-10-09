@@ -3,7 +3,7 @@
 	categorie="communication"
 	version="1.0.10"
 	etat="stable"
-	compatibilite="[2.0.12;3.1.*]"
+	compatibilite="[2.0.12;3.2.*]"
 	logo="images/recommander_logo.png"
 	documentation="https://contrib.spip.net/Recommander"
 >	
