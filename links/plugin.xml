@@ -10,11 +10,11 @@
 	<lien>https://contrib.spip.net/?article3706</lien>
 	<auteur>[Tetue->http://spip.tetue.net], C&#233;dric Morin et Gael Chareyre</auteur>
 	<licence>GPL 2011-2016</licence>
-	<version>2.3.18</version>
+	<version>2.3.19</version>
 	<etat>stable</etat>
 	<prefix>links</prefix>
 	<fonctions>links_fonctions.php</fonctions>
-	<necessite id='SPIP' version='[2.0.0;3.2.*]' />
+	<necessite id='SPIP' version='[2.0.0;3.2.99]' />
 	<necessite id="spip_bonux" version="[2.2.18;]" />
 	<pipeline>
 		<nom>insert_head_css</nom>
