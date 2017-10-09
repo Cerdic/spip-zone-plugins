@@ -1,9 +1,14 @@
 .menu-incarner {
-    z-index: 100;
+    z-index: 10000;
     position: fixed;
     left: 0;
     top: 0;
     white-space: nowrap;
+}
+
+.menu-incarner.prive {
+    width: 100%;
+    text-align: center;
 }
 
 a.bouton-incarner {

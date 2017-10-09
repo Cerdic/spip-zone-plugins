@@ -73,7 +73,7 @@ function incarner_affichage_final($html) {
 
 	include_spip('incarner_fonctions');
 	if ((! incarner_cle_valide($cle_actuelle))
-			or (session_get('id_auteur') === $id_auteur)) {
+			or (intval(session_get('id_auteur')) === $id_auteur)) {
 		return $html;
 	}
 
@@ -96,7 +96,7 @@ function incarner_affichage_final($html) {
 		'logout=oui&redirect=' . $self
 	);
 
-	$lien = '<div class="menu-incarner">';
+	$lien = '<div class="menu-incarner' . (test_espace_prive() ? " prive" : "") . '">';
 	$lien .= '<a class="bouton-incarner" href="' . $url_logout . '">';
 	$lien .= _T('incarner:logout_definitif');
 	$lien .= '</a>';
@@ -111,6 +111,12 @@ function incarner_affichage_final($html) {
 	return $html;
 }
 
+
+function incarner_affichage_final_prive($html) {
+
+	return incarner_affichage_final($html);
+}
+
 /**
  * Ajoute une feuille de styles à l'espace public
  *
@@ -123,6 +129,11 @@ function incarner_insert_head($flux) {
 	$flux .= '<link rel="stylesheet" type="text/css" href="' . find_in_path('css/incarner.css'). '" />';
 
 	return $flux;
+}
+
+function incarner_header_prive($flux) {
+
+	return incarner_insert_head($flux);
 }
 
 /**
