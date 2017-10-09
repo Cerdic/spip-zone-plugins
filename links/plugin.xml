@@ -14,7 +14,7 @@
 	<etat>stable</etat>
 	<prefix>links</prefix>
 	<fonctions>links_fonctions.php</fonctions>
-	<necessite id='SPIP' version='[2.0.0;3.1.99]' />
+	<necessite id='SPIP' version='[2.0.0;3.2.*]' />
 	<necessite id="spip_bonux" version="[2.2.18;]" />
 	<pipeline>
 		<nom>insert_head_css</nom>
