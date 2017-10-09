@@ -24,7 +24,7 @@
 
 	<necessite nom="saisies" compatibilite="[2.2.3;[" />
 	<necessite nom="verifier" compatibilite="[1.0.0;[" />
-	<necessite nom="yaml" compatibilite="[1.2.0;[" />
+	<necessite nom="yaml" compatibilite="[1.5.3;[" />
 
 	<menu nom="ieconfigexport" titre="ieconfig:titre_export" parent="menu_administration" icone="images/config-export-16.png" action="ieconfig_export" />
 	<menu nom="ieconfigimport" titre="ieconfig:titre_import" parent="menu_administration" icone="images/config-import-16.png" action="ieconfig_import" />
