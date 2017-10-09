@@ -58,7 +58,7 @@ var blocs_js_cookie = '$js_cookie';
 // }
 
 function blocsdepliables_callback($matches) {
-	list($titre, $corps) = preg_split(',(\n\n|\r\n\r\n|\r\r),', trim($matches[3]), 2);
+	list($titre, $corps) = array_pad(preg_split(',(\n\n|\r\n\r\n|\r\r),', trim($matches[3]), 2), 2, null);
 	// pas de corps !
 	if (!strlen($corps = trim($corps))) {
 		$corps = $titre;

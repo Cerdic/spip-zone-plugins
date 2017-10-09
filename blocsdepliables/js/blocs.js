@@ -141,7 +141,7 @@ function cs_blocs_cookie() {
 	jQuery.cookie(blocs_cookie_name, null);
 	if(deplies)
 		jQuery(deplies).blocs_replie_tout().blocs_toggle();
-	jQuery(window).bind('unload', function() {
+	jQuery(window).on('unload', function() {
 		jQuery.cookie(blocs_cookie_name, blocs_deplies());
 	});
 }
@@ -186,9 +186,9 @@ var blocs_pagination = blocs_get_pagination(window.location.hash);
 /*
 // Si un bloc contient une pagination inseree dans un bloc,
 // code JS a inserer dans le header de votre squelette APRES les appels du Couteau Suisse :
-jQuery(document).ready(function() {
+jQuery(function($) {
 	if(blocs_pagination!==false) {
-		jQuery('div.cs_bloc' + blocs_pagination + ' .blocs_titre').eq(0).click();
+		$('div.cs_bloc' + blocs_pagination + ' .blocs_titre').eq(0).click();
 		window.location.hash = '#pagination' + blocs_pagination;
 	}
 });
@@ -207,10 +207,10 @@ jQuery(document).ready(function() {
 //	</BOUCLE_art>
 //	le clic sur un point de suite cliquable de la balise #INTRODUCTION produit l'ouverture du bloc.
 //	code JS a inserer dans le header de votre squelette APRES les appels du Couteau Suisse :
-jQuery(document).ready(function(){
-	jQuery('.blocs_resume>a.pts_suite')
+jQuery(function($){
+	$('.blocs_resume>a.pts_suite')
 	  .click( function(){
-		jQuery(this).parents('.cs_blocs:first').children('.blocs_titre')
+		$(this).parents('.cs_blocs:first').children('.blocs_titre')
 			.blocs_replie_tout().blocs_toggle();
 		// annulation du clic
 		return false;
@@ -223,18 +223,18 @@ jQuery.fn.cs_todo=function(){
 	return this.not('.cs_done').addClass('cs_done');
 };
 var cs_sel_jQuery='';
-jQuery(function(){
-blocs_init.apply(document);
-if(typeof onAjaxLoad=='function') onAjaxLoad(blocs_init);
-if(blocs_js_cookie && jQuery('div.cs_blocs').length) jQuery.getScript(blocs_js_cookie, cs_blocs_cookie);
-/* Quand on pointe vers une ancre qui est à l'intérieur d'un bloc, on
-   déplie le bloc */
-var ancre = location.hash.substring(1);
-if (ancre) {
-    $('.cs_blocs').has('[name="' + ancre + '"]')
-        .find('.blocs_titre.blocs_replie').blocs_toggle();
-    $('.cs_blocs').has('#' + ancre)
-        .find('.blocs_titre.blocs_replie').blocs_toggle();
-    location = location;
-}
+jQuery(function($){
+	blocs_init.apply(document);
+	if(typeof onAjaxLoad=='function') onAjaxLoad(blocs_init);
+	if(blocs_js_cookie && $('div.cs_blocs').length) $.getScript(blocs_js_cookie, cs_blocs_cookie);
+	/* Quand on pointe vers une ancre qui est à l'intérieur d'un bloc, on
+	   déplie le bloc */
+	var ancre = location.hash.substring(1);
+	if (ancre) {
+	    $('.cs_blocs').has('[name="' + ancre + '"]')
+	        .find('.blocs_titre.blocs_replie').blocs_toggle();
+	    $('.cs_blocs').has('#' + ancre)
+	        .find('.blocs_titre.blocs_replie').blocs_toggle();
+	    location = location;
+	}
 });
