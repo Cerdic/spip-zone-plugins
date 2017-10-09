@@ -122,7 +122,7 @@ function verifier_trier_par_titre($array1,$array2) {
 function verifier_charger_infos($type_verif, $repertoire = 'verifier') {
 	$verif = array();	
 
-	if (defined(_DIR_PLUGIN_YAML)) {
+	if (defined('_DIR_PLUGIN_YAML')) {
 		include_spip('inc/yaml');
 		$fichier = find_in_path("$repertoire/$type_verif.yaml");
 
