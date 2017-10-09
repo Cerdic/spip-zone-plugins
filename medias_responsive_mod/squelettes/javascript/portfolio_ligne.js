@@ -30,7 +30,10 @@ function calculer_portfolio_ligne () {
 			.css("margin-bottom", portfolio_ligne_marge+"px")
 			.css("clear", "");
 		
-		var l_max = $(this).width();
+		// Eviter les problèmes d'arrondi…
+		$(this).width("auto");
+		var l_max = Math.floor($(this).width());
+		$(this).width(l_max);
 		var taille_max = portfolio_ligne_taille;
 		
 		if (l_max > 1400) taille_max *= 1.2;
