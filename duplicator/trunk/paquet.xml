@@ -1,7 +1,7 @@
 <paquet
 	prefix="duplicator"
 	categorie="edition"
-	version="1.5.8"
+	version="1.5.9"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/duplicator.png"
