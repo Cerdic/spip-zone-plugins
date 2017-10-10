@@ -57,6 +57,7 @@ function exec_mutualisation_dist() {
             <td>Plugins<br />
                 <input type='button' name='pluginsupgrade' id='pluginsupgrade' value='Upgrader tout' onclick='plugins_upgrade();' /></td>
             <td>Compression</td>
+            <td title=\"Configurations particulières\">Config</td>
             <td>Date</td>
         </tr>
     </thead>
@@ -145,6 +146,14 @@ function exec_mutualisation_dist() {
 			if ($compression == '') {
 				$compression = _L('Activer');
 			}
+			if (isset($GLOBALS['mutualisation_afficher_config'])) {
+				$configs = explode(",", $GLOBALS['mutualisation_afficher_config']);
+				$configsparticulieres = '';
+				foreach($configs as $config) {
+					
+					$configsparticulieres .= '<em><small>' . $config . ':</small></em> ' . lire_config_distante($config, $meta) . "<br />\n";
+				}
+			}
 		}
 		$page .= '<script type="text/javascript">
         //<![CDATA[
@@ -165,6 +174,7 @@ function exec_mutualisation_dist() {
             <td class='text-right'><a href='" . $url . "$url_stats'>${stats}</a></td>\n
             <td>$adminplugin<div class='liste-plugins'><a href='" . $url . "$url_admin_plugin'>${cntplugins}</a> <small>${plugins}</small></div></td>\n
             <td><a href='" . $url . "$url_compresseur'>$compression</a></td>\n
+            <td>$configsparticulieres</td>\n
             <td class='text-right'>" . date_creation_repertoire_site($v) . "</td>\n
             </tr>\n";
 		++$nsite;
@@ -555,4 +565,32 @@ function processConfig(&$cfg, &$lsplugs, $path) {
 	}
 
 	return false;
+}
+
+function lire_config_distante($cfg = '', $meta) {
+	$def = null;
+	$unserialize = true;
+	// lire le stockage sous la forme valeur
+	// ou casier/valeur
+
+	// traiter en priorite le cas simple et frequent
+	// de lecture direct $meta['truc'], si $cfg ne contient pas "/"
+	if ($cfg and strpbrk($cfg, '/') === false) {
+		$r = isset($meta[$cfg]) ?
+			((!$unserialize
+				// ne pas essayer de deserialiser autre chose qu'une chaine
+				or !is_string($meta[$cfg])
+				// ne pas essayer de deserialiser si ce n'est visiblement pas une chaine serializee
+				or strpos($meta[$cfg], ':') === false
+				or ($t = @unserialize($meta[$cfg])) === false) ? $meta[$cfg] : $t)
+			: $def;
+
+		return $r;
+	} else {
+		$cfg = explode('/', $cfg);
+		$r = @unserialize($meta[$cfg[0]]);
+		$r = $r[$cfg[1]];
+
+		return $r;
+	}
 }
