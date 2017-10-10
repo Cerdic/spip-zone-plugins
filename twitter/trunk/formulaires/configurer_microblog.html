@@ -1,5 +1,7 @@
 <!-- nom=microblog -->
 #CACHE{0}
+#SET{api_ok,''}
+#SET{api_erreur,''}
 <div class="formulaire_spip formulaire_editer formulaire_cfg">
 	<h3 class="titrem"><:twitter:titre_configurer_twitter_app:></h3>
 	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
@@ -56,7 +58,7 @@
 	#SET{api_erreur,' '}
 	]
 	<form method="post" action="#ENV{action}"><div>
-		#ACTION_FORMULAIRE{SELF}
+		#ACTION_FORMULAIRE
 		[(#GET{api_ok}|et{#GET{api_erreur}|non}|oui)
 		<a href="#" onclick="jQuery(this).hide().closest('form').find('fieldset.api').show('fast');return false;">Modifier la configuration de l'Application Twitter</a>
 		]
@@ -173,7 +175,7 @@
 		else
 			jQuery("#evt_publierarticles_options").hide('fast');
 	}
-	jQuery(document).ready(function(){
-		jQuery("#evt_publierarticles").click(affiche_bloc_synchro);
+	jQuery(function($){
+		$("#evt_publierarticles").click(affiche_bloc_synchro);
 	});
 </script>
