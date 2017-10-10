@@ -1,24 +1,24 @@
 <plugin>
-	<nom>Ic&#244;nes p&#233;dagogiques</nom>
-	<slogan>Des ic&#244;nes p&#233;dagogiques pour le Porte Plume</slogan>
+	<nom>Icônes pédagogiques</nom>
+	<slogan>Des icônes pédagogiques pour le Porte Plume</slogan>
 	<auteur>Olivier Gautier, Michel Fraisse</auteur>
-	<licence>&#169; 2009 GNU/GPL</licence>
-	<version>0.1.1</version>
+	<licence>© 2009 GNU/GPL</licence>
+	<version>0.1.2</version>
 	<etat>stable</etat>
 	<description>
-Ajoute des boutons au porte-plume afin d'ins&#233;rer des ic&ocirc;nes &agrave; orientation p&#233;dagogique ou des smileys.
+Ajoute des boutons au porte-plume afin d'insérer des icônes à orientation pédagogique ou des smileys.
 
-Les images disponibles sont regroup&#233;es par onglet.
+Les images disponibles sont regroupées par onglet.
 -* Liste des onglets :
 -* Consignes
--* Mat&#233;riel
--* Num&#233;ration : dominos
--* Num&#233;ration : mains
+-* Matériel
+-* Numération : dominos
+-* Numération : mains
 -* Conscience phonologique
--* Supports d'&#233;criture
+-* Supports d'écriture
 -* Binettes
 
-Un simple clic sur une ic&#244;ne propos&#233;e permet d'ajouter dans le texte de l'article un morceau de code qui sera ensuite interpr&#233;t&#233; par SPIP pour afficher l'image correspondante.
+Un simple clic sur une icône proposée permet d'ajouter dans le texte de l'article un morceau de code qui sera ensuite interprété par SPIP pour afficher l'image correspondante.
 	</description>
 	<prefix>iconespedago</prefix>
 	<icon>img_pack/iconespedago.png</icon>
@@ -36,6 +36,6 @@ Un simple clic sur une ic&#244;ne propos&#233;e permet d'ajouter dans le texte d
 		<inclure>iconespedago.php</inclure>
 	</pipeline>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.0.3;3.1.99]" />
+	<necessite id="SPIP" version="[2.0.3;3.2.99]" />
 	<necessite id="porte_plume" version="[1.2.2;]" />
 </plugin>
