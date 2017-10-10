@@ -70,6 +70,34 @@ Puis elle est optimisée au maximum.
 
 ## CHANGELOG
 
+### Versions 0.8.x
+
+#### Version 0.8.0 (2017-10-10)
+
+Inclure inc/config lorsque l'on en a besoin
+
+Lorsque l'on transforme un png en jpg car plus adéquat (opération très lourde car double compression etc...), on conserve le png quand même quitte à avoir double cache.
+
+Ainsi au recalcul, alors que l'image ne doit pas être recréée normalement, on en dispose toujours.
+
+On vérifie dans ce cas là si une version jpg existe, si oui, c'est celle ci à utiliser.
+
+### Versions 0.7.x
+
+#### Version 0.7.1 (2017-08-06)
+
+Notices PHP en moins
+
+Changement de lien de documentation
+
+#### Version 0.7.0 (2017-01-16)
+
+Par défaut utiliser la valeur de SPIP de _IMG_QUALITE
+
+Si j'ai bien compris, il faut, pour que ce soit gardé en cache retourner toujours _image_ecrire_tag et un fichier de destination différent de la source
+
+Amélioration de la comparaison de tailles
+
 ### Versions 0.6.x
 
 #### Version 0.6.5 (2016-11-28)
