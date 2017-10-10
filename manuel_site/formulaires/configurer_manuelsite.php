@@ -8,10 +8,22 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function formulaires_configurer_manuelsite_saisies_dist(){
-	if(!function_exists('lire_config'))
+	if (!function_exists('lire_config')) {
 		include_spip('inc/config');
-	$config = lire_config('manuelsite',array('id_article'=>null,'cacher_public'=>'','intro'=>'','email'=>'','afficher_bord_gauche'=>'','largeur'=>'300','background_color'=>''));
-	
+	}
+
+	$config = lire_config('manuelsite', array());
+	$config += array(
+		'id_article' => null,
+		'cacher_public' => '',
+		'intro' => '',
+		'email' => '',
+		'afficher_bord_gauche' => '',
+		'largeur' => '300',
+		'background_color' => '',
+		'formu' => '',
+	);
+
 	return array(
 		array(
 			'saisie' => 'fieldset',

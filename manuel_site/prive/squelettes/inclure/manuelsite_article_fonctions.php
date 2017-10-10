@@ -12,7 +12,7 @@ function construire_lien($t){
 		if (version_compare($GLOBALS['spip_version_branche'], '3.O', '>=')){
 			$table = table_objet_sql($t);
 			$trouver_table = charger_fonction('trouver_table', 'base');
-			$desc = $trouver_table($table);		
+			$desc = $trouver_table($table);
 		} else {
 			$desc['url_edit'] = concat($t,'_edit');
 		}
@@ -22,5 +22,3 @@ function construire_lien($t){
 	}
 	return $url;
 }
-
-?>
