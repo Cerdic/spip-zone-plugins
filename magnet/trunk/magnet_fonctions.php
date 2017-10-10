@@ -217,13 +217,16 @@ function magnet_html_boutons_admin($objet, $id_objet, $class="", $pile=''){
  * @return mixed
  */
 function magnet_formulaire_admin($flux){
-	if (  $objet = $flux['args']['contexte']['objet']
-	  AND magnet_actif_sur_objet($objet)
-	  AND $id_objet = intval($flux['args']['contexte']['id_objet'])
-	  AND isset($GLOBALS['visiteur_session']['statut'])
+	if (
+		isset( $flux['args']['contexte']['objet'])
+		AND $objet = $flux['args']['contexte']['objet']
+		AND magnet_actif_sur_objet($objet)
+		AND $id_objet = intval($flux['args']['contexte']['id_objet'])
+		AND isset($GLOBALS['visiteur_session']['statut'])
 		AND $GLOBALS['visiteur_session']['statut']=='0minirezo'
-	  AND include_spip('inc/autoriser')
-	  AND autoriser('administrermagnet',$objet,$id_objet)){
+		AND include_spip('inc/autoriser')
+		AND autoriser('administrermagnet',$objet,$id_objet))
+	{
 		$boutons = magnet_html_boutons_admin($objet, $id_objet,"spip-admin-boutons admin-magnet admin-magnet-$objet") . " ";
 		$p = strpos($flux['data'],"<a");
 		$flux['data'] = substr_replace($flux['data'],$boutons,$p,0);

@@ -1,9 +1,9 @@
 <paquet
 	prefix="magnet"
 	categorie="outil"
-	version="0.7.2"
+	version="0.7.3"
 	etat="test"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="magnet-32.png"
 	documentation="https://contrib.spip.net/magnet"
 >
