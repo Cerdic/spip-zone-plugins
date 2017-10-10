@@ -37,6 +37,8 @@
 	<pipeline nom="corbeille_table_infos" inclure="simplecal_pipelines.php" />
 	<pipeline nom="jqueryui_plugins" inclure="simplecal_pipelines.php" />
 
+	<utilise nom="gis" compatibilite="[4.44.2;]" />
+
 	<!-- Prendre en compte la table des evenements dans les recherches -->
 	<pipeline nom="rechercher_liste_des_champs" inclure="simplecal_pipelines.php" />
 
