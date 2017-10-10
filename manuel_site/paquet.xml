@@ -25,7 +25,7 @@
 	<pipeline nom="ieconfig_metas" inclure="manuelsite_ieconfig_metas.php" />
 
 	<necessite nom="saisies" compatibilite="[1.9.0;[" />
-	<necessite nom="yaml" compatibilite="[1.1;[" />
+	<necessite nom="yaml" compatibilite="[1.5.3;[" />
 
 	<utilise nom="palette" compatibilite="[1.2.2;[" />
 	<utilise nom="pages" compatibilite="[0.3.5;[" />
