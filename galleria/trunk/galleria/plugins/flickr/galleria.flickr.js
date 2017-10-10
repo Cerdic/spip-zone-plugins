@@ -1,9 +1,10 @@
 /**
- * Galleria Flickr Plugin 2012-09-04
+ * Galleria Flickr Plugin 2016-09-03
  * http://galleria.io
  *
+ * Copyright (c) 2010 - 2017 worse is better UG
  * Licensed under the MIT license
- * https://raw.github.com/aino/galleria/master/LICENSE
+ * https://raw.github.com/worseisbetter/galleria/master/LICENSE
  *
  */
 
@@ -23,7 +24,7 @@ var PATH = Galleria.utils.getScriptPath();
 
     @example var flickr = new Galleria.Flickr();
 
-    @author http://aino.se
+    @author http://galleria.io
 
     @requires jQuery
     @requires Galleria
@@ -190,7 +191,7 @@ Galleria.Flickr.prototype = {
 
     _call: function( params, callback ) {
 
-        var url = 'http://api.flickr.com/services/rest/?';
+        var url = 'https://api.flickr.com/services/rest/?';
 
         var scope = this;
 
@@ -223,7 +224,7 @@ Galleria.Flickr.prototype = {
             return photo.url_l;
         } else if ( parseInt( photo.width_o, 10 ) > 1280 ) {
 
-            return 'http://farm'+photo.farm + '.static.flickr.com/'+photo.server +
+            return 'https://farm'+photo.farm + '.static.flickr.com/'+photo.server +
                 '/' + photo.id + '_' + photo.secret + '_b.jpg';
         }
 
@@ -293,7 +294,7 @@ Galleria.Flickr.prototype = {
                     big: this._getBig( photo ),
                     title: photos[i].title,
                     description: this.options.description && photos[i].description ? photos[i].description._content : '',
-                    link: this.options.backlink ? 'http://flickr.com/photos/' + photo.owner + '/' + photo.id : ''
+                    link: this.options.backlink ? 'https://flickr.com/photos/' + photo.owner + '/' + photo.id : ''
                 });
             }
             callback.call( this, gallery );
