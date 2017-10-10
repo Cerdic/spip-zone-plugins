@@ -73,13 +73,11 @@ function formulaires_envoi_malettre_traiter_dist(){
             $path_url_archive = $path_url."/IMG";
           
             $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__file__))));
-            define('_DIR_PLUGIN_MALETTRE',(_DIR_PLUGINS.end($p)));
-            $path_plugin = dirname(__file__)."/../";
+
   
-  
-  		      //
-	          // envoi de la lettre
-	          //
+  		    //
+	        // envoi de la lettre
+	        //
             
             // lang
             $lang = _request('lang_select');
