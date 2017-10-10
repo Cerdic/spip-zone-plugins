@@ -1,10 +1,10 @@
 <paquet
 	prefix="menuder"
 	categorie="navigation"
-	version="2.3.2"
+	version="2.4.0"
 	schema="0.1.0"
 	etat="test"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="images/icon.png"
 	documentation="https://contrib.spip.net/?article3804"
 >

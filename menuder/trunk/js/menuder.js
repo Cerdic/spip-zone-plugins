@@ -6,16 +6,16 @@
  *
  */
 if (jQuery.browser.msie) {
-$(document).ready(function(){
-	$('.menuder li').hover(
-		function(){$(this).addClass('hover')},
-		function(){$(this).removeClass('hover')}
-	);
-});
+	jQuery(function($){
+		$('.menuder li').hover(
+			function(){$(this).addClass('hover')},
+			function(){$(this).removeClass('hover')}
+		);
+	});
 }
 
 /* dans tous les cas marquer un focus clavier */
-$(document).ready(function(){
+jQuery(function($){
 	$('.menuder ul')
 		.focusin(function(){
 			$(this).parent().addClass('hover') })
