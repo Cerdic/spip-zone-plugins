@@ -37,7 +37,7 @@ class phpExifWriter extends phpExifReader {
     /**
     *  Constructor
     */
-    function phpExifWriter($image) {
+    function __construct($image) {
          $this->phpExifReader($image);
          $this->processFile();
     }

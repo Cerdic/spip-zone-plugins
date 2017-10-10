@@ -73,7 +73,7 @@ DESCRIPTION DES PARAMETRES :
 FIN INFOS SUR LA FONCTION */ 
 
 
-function class_IPTC($cheminImg) 
+function __construct($cheminImg)
 { 
 
 // Inititalisations 
@@ -120,7 +120,7 @@ $this -> h_cheminImg = $cheminImg;
 // On extrait les données encodées de l'iptc 
 // getimagesize($this -> h_cheminImg, &$info); //avant,marche pas sinon
 getimagesize($this -> h_cheminImg, $info); //marche sans le & 
-$this -> h_iptcData = $info["APP13"]; 
+$this -> h_iptcData = isset($info["APP13"]) ? $info["APP13"] : null;
 
 } 
 
@@ -170,8 +170,11 @@ function fct_lireIPTC()
 		} 
 	} 
 	
-	if(is_array($lesIptc)) return $lesIptc; 
-	else return false; 
+	if (isset($lesIptc) and is_array($lesIptc)) {
+		return $lesIptc;
+	} else {
+		return false;
+	}
 } 
 
 /* FIN FONCTION fct_lireIPTC(); 

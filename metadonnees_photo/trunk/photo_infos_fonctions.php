@@ -9,7 +9,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function photo_infos_afficher_metas_document($flux){
 	if ($id_document = $flux['args']['id_document']){
-		$flux["data"] .= recuperer_fond("prive/squelettes/inclure/image_pave_exif",array('id_document' => $id_document,'quoi'=>$flux['args']['quoi']));
+		$flux["data"] .= recuperer_fond("prive/squelettes/inclure/image_pave_exif",array(
+			'id_document' => $id_document,
+			'quoi'=>$flux['args']['quoi']
+		));
 	}
 	return $flux;
 }
@@ -80,10 +83,10 @@ function extraire_exif($fichier) {
 
 		// Si Latitude deja fixee, la traiter
 		// Si la ref n'est ni N ni S, c'est une erreur (j'en trouve sur Flickr)
-		if (!($exif_direc["GPSLatitudeRef"] == "N" || $exif_direc["GPSLatitudeRef"] == "S")) {
+		if (empty($exif_direc["GPSLatitudeRef"]) or !($exif_direc["GPSLatitudeRef"] == "N" || $exif_direc["GPSLatitudeRef"] == "S")) {
 			unset($mem_exif[$fichier]["GPSLatitude"]);
 		}
-		if ($mem_exif[$fichier]["GPSLatitude"]) {
+		if (!empty($mem_exif[$fichier]["GPSLatitude"])) {
 			$exif_direc["GPSLatitude"][0] = $mem_exif[$fichier]["GPSLatitude"]["Degrees"];
 			$exif_direc["GPSLatitude"][1] = ($mem_exif[$fichier]["GPSLatitude"]["Minutes"] * 100 + round($mem_exif[$fichier]["GPSLatitude"]["Seconds"] / 60 * 100)) . "/100";
 
@@ -114,16 +117,16 @@ function extraire_exif($fichier) {
 			$mem_exif[$fichier]["GPSLatitude"] = $deg."°&nbsp;$minutes"."’"."&nbsp;$secondes"."”&nbsp;$N_S";
 
 			// Retourne aussi une valeur entiere pour Google Maps
-			$GPSLatitudeInt = $deg + ($min / 6000) ;
+			$GPSLatitudeInt = floatval($deg) + (floatval($min) / 6000) ;
 			if ($N_S == "S") $GPSLatitudeInt = -1 * $GPSLatitudeInt;
 			$mem_exif[$fichier]["GPSLatitudeInt"] = $GPSLatitudeInt ;
 		}
 
 		// Verifier que la precedente ref est E/W, sinon ne pas traiter
-		if (!($exif_direc["GPSLongitudeRef"] == "E" || $exif_direc["GPSLongitudeRef"] == "W")) {
+		if (empty($exif_direc["GPSLongitudeRef"]) or !($exif_direc["GPSLongitudeRef"] == "E" || $exif_direc["GPSLongitudeRef"] == "W")) {
 			unset($mem_exif[$fichier]["GPSLongitude"]);
 		}
-		if ($mem_exif[$fichier]["GPSLongitude"]) {
+		if (!empty($mem_exif[$fichier]["GPSLongitude"])) {
 			$exif_direc["GPSLongitude"][0] = $mem_exif[$fichier]["GPSLongitude"]["Degrees"];
 			$exif_direc["GPSLongitude"][1] = ($mem_exif[$fichier]["GPSLongitude"]["Minutes"] * 100 + round($mem_exif[$fichier]["GPSLongitude"]["Seconds"] / 60 * 100)) . "/100";
 
@@ -151,7 +154,7 @@ function extraire_exif($fichier) {
 			$mem_exif[$fichier]["GPSLongitude"] =  $deg."°&nbsp;$minutes"."’"."&nbsp;$secondes"."”&nbsp;$W_E";
 
 			// Retourne aussi une valeur entiere pour Google Maps
-			$GPSLongitudeInt = $deg + ($min / 6000) ;
+			$GPSLongitudeInt = floatval($deg) + (floatval($min) / 6000) ;
 			if ($W_E == "W") $GPSLongitudeInt = -1 * $GPSLongitudeInt;
 			$mem_exif[$fichier]["GPSLongitudeInt"] = $GPSLongitudeInt ;
 		}
@@ -170,20 +173,21 @@ function extraire_exif($fichier) {
  * @return array
  */
 function lire_exif($fichier, $type=null) {
-	
 	$exif = extraire_exif($fichier);
-
-	if (!$type)
+	if (!$type) {
 		return $exif;
-	else
-		return $exif["$type"];
+	} else {
+		return isset($exif[$type]) ? $exif[$type] : null;
+	}
 }
 
 
 function extraire_iptc($fichier) {
 	global $pb_iptc;
 	
-	if ($pb_iptc["$fichier"]) return $pb_iptc["$fichier"];
+	if (!empty($pb_iptc["$fichier"])) {
+		return $pb_iptc["$fichier"];
+	}
 
 
 	if (!file_exists($fichier)) return;
@@ -221,13 +225,16 @@ function lire_iptc ($fichier, $type=false) {
 	if (!function_exists('iptcparse')) return;
 
 	$iptc = extraire_iptc($fichier);
-	
 
-	if ($iptc["copyright"]) $iptc["copyright"] = mb_eregi_replace("\(c\)", "©", $iptc["copyright"]);
-	
-	if ($type) return $iptc["$type"];
-	else return $iptc;
-	
+	if ($iptc["copyright"]) {
+		$iptc["copyright"] = mb_eregi_replace("\(c\)", "©", $iptc["copyright"]);
+	}
+
+	if ($type) {
+		return isset($iptc[$type]) ? $iptc[$type] : null;
+	} else {
+		return $iptc;
+	}
 }
 
 /**
@@ -255,22 +262,21 @@ function test_traiter_image($fichier, $largeur, $hauteur) {
  * @return string
  */
 function image_histogramme($im) {
-	include_spip("inc/filtres_images");
-	
+	include_spip("inc/filtres_images_lib_mini");
+
 	$fonction = array('image_histo', func_get_args());
-	$image = image_valeurs_trans($im, "histo","png",$fonction);
+	$image = _image_valeurs_trans($im, "histo","png",$fonction);
 
 	if (!$image) return("");
-	
+
 	$x_i = $image["largeur"];
 	$y_i = $image["hauteur"];
 	$surface = $x_i * $y_i;
 
 	if (!test_traiter_image($image["fichier"], $x_i, $y_i) ) return;
-	
-	
+
 	$im = $image["fichier"];
-	
+
 	$dest = $image["fichier_dest"];
 	$creer = $image["creer"];
 
@@ -296,12 +302,24 @@ function image_histogramme($im) {
 
 				$a = (127-$a) / 127;
 				$a=1;
-				
+
 				$gris = round($a*($r+$g+$b) / 3);
 				$r = round($a*$r);
 				$g = round($a*$g);
 				$b = round($a*$b);
-				
+
+				if (!isset($val_gris[$gris])) {
+					$val_gris[$gris] = 0;
+				}
+				if (!isset($val_r[$r])) {
+					$val_r[$r] = 0;
+				}
+				if (!isset($val_g[$g])) {
+					$val_g[$g] = 0;
+				}
+				if (!isset($val_b[$b])) {
+					$val_b[$b] = 0;
+				}
 				$val_gris[$gris] ++;
 				$val_r[$r] ++;
 				$val_g[$g] ++;
@@ -318,12 +336,18 @@ function image_histogramme($im) {
 		$gris_50 = imagecolorallocate($im_, 170,170,170);
 		$gris_70 = imagecolorallocate($im_, 60,60,60);
 		for ($i = 0; $i < 256; $i++) {
+			if (!isset($val_gris[$i])) {
+				$val_gris[$i] = 0;
+			}
 			$val = 127 - round(max(0,$val_gris[$i]) * $rapport);
 			imageline ($im_, $i+1, 128, $i+1, $val+1, $gris_50);
 			imagesetpixel ($im_, $i+1, $val+1, $gris_70);
 		}
 		$bleu = imagecolorallocate($im_, 0, 0, 255);
 		for ($i = 0; $i < 256; $i++) {
+			if (!isset($val_b[$i])) {
+				$val_b[$i] = 0;
+			}
 			$val = 127 - round(max(0,$val_b[$i]) * $rapport);
 			if ($i==0) imagesetpixel ($im_, $i+1, $val+1, $bleu);
 			else imageline($im_, $i, $val_old+1, $i+1, $val+1, $bleu);
@@ -332,6 +356,9 @@ function image_histogramme($im) {
 		}
 		$green = imagecolorallocate($im_, 0, 255, 0);
 		for ($i = 0; $i < 256; $i++) {
+			if (!isset($val_g[$i])) {
+				$val_g[$i] = 0;
+			}
 			$val = 127 - round(max(0,$val_g[$i]) * $rapport);
 			if ($i==0) imagesetpixel ($im_, $i+1, $val+1, $green);
 			else imageline($im_, $i, $val_old+1, $i+1, $val+1, $green);
@@ -339,6 +366,9 @@ function image_histogramme($im) {
 		}
 		$rouge = imagecolorallocate($im_, 255, 0, 0);
 		for ($i = 0; $i < 256; $i++) {
+			if (!isset($val_r[$i])) {
+				$val_r[$i] = 0;
+			}
 			$val = 127 - round(max(0,$val_r[$i]) * $rapport);
 			if ($i==0) imagesetpixel ($im_, $i+1, $val+1, $rouge);
 			else imageline($im_, $i, $val_old+1, $i+1, $val+1, $rouge);
