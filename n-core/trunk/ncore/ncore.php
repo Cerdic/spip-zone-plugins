@@ -228,7 +228,7 @@ function ncore_type_noisette_lister($plugin, $information = '', $stockage = '') 
  * @package SPIP\NCORE\SERVICE\NOISETTE
  *
  * @uses ncore_chercher_service()
- * @uses ncore_squelette_identifier()
+ * @uses ncore_conteneur_identifier()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -267,7 +267,7 @@ function ncore_noisette_stocker($plugin, $description, $stockage = '') {
 
 		// Détermination de l'identifiant du squelette contextualisé. Le squelette et le contexte font partie de
 		// la description, le contexte est lui sérialisé.
-		$squelette_contextualise = ncore_squelette_identifier(
+		$id_conteneur = ncore_conteneur_identifier(
 			$plugin,
 			unserialize($description['conteneur']),
 			$stockage
@@ -279,16 +279,16 @@ function ncore_noisette_stocker($plugin, $description, $stockage = '') {
 			// -- et on range la noisette avec les noisettes affectées au même squelette contextualisé
 			//    en fonction de son rang.
 			$description['id_noisette'] = uniqid("${plugin}_");
-			$noisettes[$squelette_contextualise][$description['rang']] = $description;
+			$noisettes[$id_conteneur][$description['rang']] = $description;
 		} else {
 			// Modification de la noisette :
 			// -- les informations identifiant sont toujours fournies, à savoir, l'id, le squelette, le contexte et le rang.
 			// -- on utilise le squelette contextualisé et le rang pour se positionner sur la noisette concernée.
 			// -- Les modifications ne concernent que les paramètres d'affichage, cette fonction n'est jamais utilisée
 			//    pour le changement de rang.
-			if (isset($noisettes[$squelette_contextualise][$description['rang']])) {
-				$noisettes[$squelette_contextualise][$description['rang']] = array_merge(
-					$noisettes[$squelette_contextualise][$description['rang']],
+			if (isset($noisettes[$id_conteneur][$description['rang']])) {
+				$noisettes[$id_conteneur][$description['rang']] = array_merge(
+					$noisettes[$id_conteneur][$description['rang']],
 					$description
 				);
 			}
@@ -311,7 +311,7 @@ function ncore_noisette_stocker($plugin, $description, $stockage = '') {
  * @package SPIP\NCORE\SERVICE\NOISETTE
  *
  * @uses ncore_chercher_service()
- * @uses ncore_squelette_identifier()
+ * @uses ncore_conteneur_identifier()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -351,7 +351,7 @@ function ncore_noisette_ranger($plugin, $description, $rang_destination, $stocka
 
 		// Détermination de l'identifiant du squelette contextualisé. Le squelette et le contexte font partie de
 		// la description, le contexte est lui sérialisé.
-		$squelette_contextualise = ncore_squelette_identifier(
+		$id_conteneur = ncore_conteneur_identifier(
 			$plugin,
 			unserialize($description['conteneur']),
 			$stockage
@@ -362,9 +362,9 @@ function ncore_noisette_ranger($plugin, $description, $rang_destination, $stocka
 		// Par contre, l'ancien rang de la noisette est supprimé sauf si celui-ci est à zéro.
 		$rang_source = $description['rang'];
 		$description['rang'] = $rang_destination;
-		$noisettes[$squelette_contextualise][$rang_destination] = $description;
+		$noisettes[$id_conteneur][$rang_destination] = $description;
 		if ($rang_source != 0) {
-			unset($noisettes[$squelette_contextualise][$rang_source]);
+			unset($noisettes[$id_conteneur][$rang_source]);
 		}
 
 		// On met à jour la meta
@@ -382,7 +382,7 @@ function ncore_noisette_ranger($plugin, $description, $rang_destination, $stocka
  * @package SPIP\NCORE\SERVICE\NOISETTE
  *
  * @uses ncore_chercher_service()
- * @uses ncore_squelette_identifier()
+ * @uses ncore_conteneur_identifier()
  *
  * @param string       $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -420,23 +420,23 @@ function ncore_noisette_destocker($plugin, $description, $stockage = '') {
 
 		// Détermination de l'identifiant du squelette contextualisé. Le squelette et le contexte font partie de
 		// la description, le contexte est lui sérialisé.
-		$squelette_contextualise = ncore_squelette_identifier(
+		$id_conteneur = ncore_conteneur_identifier(
 			$plugin,
 			unserialize($description['conteneur']),
 			$stockage
 		);
 
-		if (!empty($description['id_noisette']) and isset($meta_noisettes[$squelette_contextualise][$description['rang']])) {
+		if (!empty($description['id_noisette']) and isset($meta_noisettes[$id_conteneur][$description['rang']])) {
 			// On supprime une noisette donnée.
-			unset($meta_noisettes[$squelette_contextualise][$description['rang']]);
+			unset($meta_noisettes[$id_conteneur][$description['rang']]);
 			// Si c'était la dernière noisette il faut aussi supprimer l'index correspondant au squelette contextualisé.
-			if (!$meta_noisettes[$squelette_contextualise]) {
-				unset($meta_noisettes[$squelette_contextualise]);
+			if (!$meta_noisettes[$id_conteneur]) {
+				unset($meta_noisettes[$id_conteneur]);
 			}
 			ecrire_config("${plugin}_noisettes", $meta_noisettes);
 			$retour = true;
-		} elseif (isset($meta_noisettes[$squelette_contextualise])) {
-			unset($meta_noisettes[$squelette_contextualise]);
+		} elseif (isset($meta_noisettes[$id_conteneur])) {
+			unset($meta_noisettes[$id_conteneur]);
 			ecrire_config("${plugin}_noisettes", $meta_noisettes);
 			$retour = true;
 		}
@@ -454,7 +454,7 @@ function ncore_noisette_destocker($plugin, $description, $stockage = '') {
  * @package SPIP\NCORE\SERVICE\NOISETTE
  *
  * @uses ncore_chercher_service()
- * @uses ncore_squelette_identifier()
+ * @uses ncore_conteneur_identifier()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -490,7 +490,7 @@ function ncore_noisette_lister($plugin, $conteneur = array(), $information = '',
 	include_spip('inc/ncore_utils');
 	if ($lister = ncore_chercher_service($plugin, 'noisette_lister', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
-		$noisettes = $lister($plugin, $squelette, $contexte, $information, $cle);
+		$noisettes = $lister($plugin, $conteneur, $information, $cle);
 	} else {
 		// Le plugin ne propose pas de fonction propre ou le stockage N-Core est explicitement demandé.
 		// -- N-Core stocke les noisettes dans une meta propre au plugin appelant contenant un tableau au format
@@ -500,9 +500,9 @@ function ncore_noisette_lister($plugin, $conteneur = array(), $information = '',
 
 		if ($conteneur) {
 			// Détermination de l'identifiant du squelette contextualisé.
-			$squelette_contextualise = ncore_squelette_identifier($plugin, $conteneur, $stockage);
-			if (!empty($meta_noisettes[$squelette_contextualise])) {
-				$noisettes = $meta_noisettes[$squelette_contextualise];
+			$id_conteneur = ncore_conteneur_identifier($plugin, $conteneur, $stockage);
+			if (!empty($meta_noisettes[$id_conteneur])) {
+				$noisettes = $meta_noisettes[$id_conteneur];
 				$noisettes = $information
 					? array_column($noisettes, $information, $cle)
 					: array_column($noisettes, null, $cle);
@@ -532,7 +532,7 @@ function ncore_noisette_lister($plugin, $conteneur = array(), $information = '',
  * @package SPIP\NCORE\SERVICE\NOISETTE
  *
  * @uses ncore_chercher_service()
- * @uses ncore_squelette_identifier()
+ * @uses ncore_conteneur_identifier()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -589,16 +589,16 @@ function ncore_noisette_decrire($plugin, $noisette, $stockage = '') {
 			} else {
 				if (isset($noisette['squelette'], $noisette['contexte'], $noisette['rang'])) {
 					// Détermination de l'identifiant du squelette contextualisé.
-					$squelette_contextualise = ncore_squelette_identifier(
+					$id_conteneur = ncore_conteneur_identifier(
 						$plugin,
 						$noisette['conteneur'],
 						$stockage
 					);
-					if (!empty($meta_noisettes[$squelette_contextualise][$noisette['rang']])) {
+					if (!empty($meta_noisettes[$id_conteneur][$noisette['rang']])) {
 					// L'identifiant est un tableau associatif fournissant le squelette contextualisé et le rang.
 					// Comme la meta de N-Core est structurée ainsi c'est la méthode la plus adaptée pour adresser
 					// le stockage de N-Core.
-					$description = $meta_noisettes[$squelette_contextualise][$noisette['rang']];
+					$description = $meta_noisettes[$id_conteneur][$noisette['rang']];
 					}
 				}
 			}
@@ -632,7 +632,7 @@ function ncore_noisette_decrire($plugin, $noisette, $stockage = '') {
  * @return string
  *        Identifiant du squelette contextualisé.
  */
-function ncore_squelette_identifier($plugin, $conteneur, $stockage) {
+function ncore_conteneur_identifier($plugin, $conteneur, $stockage) {
 
 	// Il faut calculer l'identifiant du squelette contextualisé pour accéder à la bonne liste
 	// de noisettes. N-Core ne propose pas de fonction par défaut car l'élaboration de l'identifiant
@@ -640,14 +640,14 @@ function ncore_squelette_identifier($plugin, $conteneur, $stockage) {
 	// Il est donc indispensable que le plugin qui nécessite l'utilisation d'un contexte propose la
 	// fonction de calcul associée sinon le contexte ne sera pas pris en compte et seul l'identifiant
 	// du squelette sera retourné.
-	$squelette_contextualise = '';
+	$id_conteneur = '';
 	if ($conteneur) {
 		include_spip('inc/ncore_utils');
 		if ($identifier = ncore_chercher_service($plugin, 'squelette_identifier', $stockage)) {
 			// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
-			$squelette_contextualise = $identifier($plugin, $conteneur);
+			$id_conteneur = $identifier($plugin, $conteneur);
 		}
 	}
 
-	return $squelette_contextualise;
+	return $id_conteneur;
 }

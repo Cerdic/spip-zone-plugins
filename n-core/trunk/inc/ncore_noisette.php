@@ -195,7 +195,7 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param mixed   $noisette
  *        Identifiant de la noisette qui peut prendre soit la forme d'un entier ou d'une chaine unique, soit la forme
- *        d'un couple (contneur, rang).
+ *        d'un couple (conteneur, rang).
  * @param string  $information
  *        Information spécifique à retourner ou vide pour retourner toute la description.
  * @param boolean $traiter_typo
@@ -231,8 +231,8 @@ function noisette_lire($plugin, $noisette, $information = '', $traiter_typo = fa
 			$description_existe = isset($description_noisette_par_id[$plugin][$noisette]) ? true : false;
 		} else {
 			if (isset($noisette['conteneur'], $noisette['rang'])) {
-				$squelette_contextualise = ncore_squelette_identifier($plugin, $noisette['conteneur'], $stockage);
-				$description_existe = isset($description_noisette_par_rang[$plugin][$squelette_contextualise][$noisette['rang']])
+				$id_conteneur = ncore_conteneur_identifier($plugin, $noisette['conteneur'], $stockage);
+				$description_existe = isset($description_noisette_par_rang[$plugin][$id_conteneur][$noisette['rang']])
 					? true
 					: false;
 			}
@@ -254,7 +254,7 @@ function noisette_lire($plugin, $noisette, $information = '', $traiter_typo = fa
 
 			// Sauvegarde de la description de la page pour une consultation ultérieure dans le même hit.
 			if (is_array($noisette)) {
-				$description_noisette_par_rang[$plugin][$squelette_contextualise][$noisette['rang']] = $description;
+				$description_noisette_par_rang[$plugin][$id_conteneur][$noisette['rang']] = $description;
 			} else {
 				$description_noisette_par_id[$plugin][$noisette] = $description;
 			}
@@ -263,16 +263,16 @@ function noisette_lire($plugin, $noisette, $information = '', $traiter_typo = fa
 		if ($information) {
 			if ((!is_array($noisette) and isset($description_noisette_par_id[$plugin][$noisette][$information]))
 				or (is_array($noisette)
-					and isset($description_noisette_par_rang[$plugin][$squelette_contextualise][$noisette['rang']][$information]))) {
+					and isset($description_noisette_par_rang[$plugin][$id_conteneur][$noisette['rang']][$information]))) {
 				$retour = is_array($noisette)
-					? $description_noisette_par_rang[$plugin][$squelette_contextualise][$noisette['rang']][$information]
+					? $description_noisette_par_rang[$plugin][$id_conteneur][$noisette['rang']][$information]
 					: $description_noisette_par_id[$plugin][$noisette][$information];
 			} else {
 				$retour = '';
 			}
 		} else {
 			$retour = is_array($noisette)
-				? $description_noisette_par_rang[$plugin][$squelette_contextualise][$noisette['rang']]
+				? $description_noisette_par_rang[$plugin][$id_conteneur][$noisette['rang']]
 				: $description_noisette_par_id[$plugin][$noisette];
 		}
 	}
