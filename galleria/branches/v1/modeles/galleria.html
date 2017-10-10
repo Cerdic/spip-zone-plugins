@@ -1,0 +1,67 @@
+<B_galleria>
+#ANCRE_PAGINATION
+#SET{artUID,#UID}
+[<p class="pagination">(#PAGINATION)</p>]
+<div id="galleria#GET{artUID}">
+<BOUCLE_galleria (DOCUMENTS){id_article=#ENV{id}}{extension==jpg|gif|png} {pagination #ENV{pagesize,30}} {mode=#ENV{mode,image}} {par ?#ENV{tri}} {inverse ?#ENV{senstri}}>
+  <a href="#FICHIER"><img src="#FICHIER" [title="(#TITRE|textebrut)" ][alt="(#DESCRIPTIF|textebrut)" ]/></a>
+</BOUCLE_galleria>
+</div>
+[<p class="pagination">(#PAGINATION)</p>]
+<script>/*<![CDATA[*/
+  Galleria.loadTheme('[(#CHEMIN{galleria/themes/[(#ENV{theme, "classic"})]/galleria.[(#ENV{theme, "classic"})].min.js})]');
+	jQuery(function(){
+		jQuery("#galleria[(#GET{artUID})]").galleria({[
+    autoplay: (#ENV{autoplay}),][
+    carousel: (#ENV{carousel}),][
+    carouselFollow: (#ENV{carouselFollow}),][
+    carouselSpeed: (#ENV{carouselSpeed}),][
+    carouselSteps: '(#ENV{carouselSteps})',][
+    clicknext: (#ENV{clicknext}),][
+    debug: (#ENV{debug}),][
+    dummy: '(#ENV{dummy})',][
+    easing: '(#ENV{easing})',][
+    fullscreenCrop: '(#ENV{fullscreenCrop})',][
+    fullscreenDoubleTap: (#ENV{fullscreenDoubleTap}),][
+    fullscreenTransition: '(#ENV{fullscreenTransition})',][
+    idleMode: (#ENV{idleMode}),][
+    idleTime: (#ENV{idleTime}),][
+    idleSpeed: (#ENV{idleSpeed}),][
+    imageCrop: '(#ENV{imageCrop})',][
+    imageMargin: (#ENV{imageMargin}),][
+    imagePan: (#ENV{imagePan}),][
+    imagePanSmoothness: (#ENV{imagePanSmoothness}),][
+    imagePosition: '(#ENV{imagePosition})',][
+    initialTransition: '(#ENV{initialTransition})',][
+    keepSource: (#ENV{keepSource}),][
+    layerFollow: (#ENV{layerFollow}),][
+    lightbox: (#ENV{lightbox}),][
+    lightboxFadeSpeed: (#ENV{lightboxFadeSpeed}),][
+    lightboxTransitionSpeed: (#ENV{lightboxTransitionSpeed}),][
+    maxScaleRatio: (#ENV{maxScaleRatio}),][
+    minScaleRatio: (#ENV{minScaleRatio}),][
+    overlayOpacity: (#ENV{overlayOpacity}),][
+    overlayBackground: '(#ENV{overlayBackground})',][
+    pauseOnInteraction: (#ENV{pauseOnInteraction}),][
+    popupLinks: (#ENV{popupLinks}),][
+    preload: '(#ENV{preload})',][
+    queue: (#ENV{queue}),]
+    responsive: [(#ENV{responsive, false})],[
+    show: (#ENV{show}),][
+    showInfo: (#ENV{showInfo}),][
+    showCounter: (#ENV{showCounter}),][
+    showImagenav: (#ENV{showImagenav}),][
+    swipe: (#ENV{swipe}),][
+    thumbCrop: '(#ENV{thumbCrop})',][
+    thumbFit: (#ENV{thumbFit}),][
+    thumbMargin: (#ENV{thumbMargin}),][
+    thumbQuality: '(#ENV{thumbQuality})',][
+    thumbnails: '(#ENV{thumbnails})',][
+    transition: '(#ENV{transition})',][
+    transitionSpeed: (#ENV{transitionSpeed}),][(#ENV{responsive, false}|!={true}|oui)[
+    width: (#ENV{width, "750"}),]]
+    height: [(#ENV{height, "500"})]
+  	});
+	});
+/*]]>*/</script>
+</B_galleria>
