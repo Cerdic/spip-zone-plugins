@@ -64,7 +64,7 @@ function newsletters_optimiser_base_disparus($flux){
 function newsletters_taches_generales_cron($taches_generales){
 
 	// ne pas generer une erreur SQL si on est pas encore installe
-	if ($GLOBALS['meta']['newsletters_base_version']){
+	if (!empty($GLOBALS['meta']['newsletters_base_version'])) {
 		// date de la prochaine newsletter programmee
 		$next = sql_getfetsel('date','spip_newsletters','statut='.sql_quote('prog')." AND date>".sql_quote("1000-01-01"),"","date","0,1");
 		if ($next){
@@ -78,4 +78,3 @@ function newsletters_taches_generales_cron($taches_generales){
 
 	return $taches_generales;
 }
-?>
