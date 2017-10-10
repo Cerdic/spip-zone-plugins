@@ -1,32 +1,32 @@
 <plugin>
 	<nom>
 		<multi>
-		[fr]Ic&#244;nes s&#233;mantiques
+		[fr]Icônes sémantiques
 		[en]Semantic Icons
 		</multi>
 	</nom>
 	<slogan>
 		<multi>
-		[fr]Des ic&#244;nes s&#233;mantiques pour le Porte plume
+		[fr]Des icônes sémantiques pour le Porte plume
 		[en]Semantic Icons for the Quill
 		</multi>
 	</slogan>
 	<icon>images/icones_semantiques_logo-32.png</icon>
 	<auteur>Bertrand Marne</auteur>
-	<licence>&#169; 2010 GPL v3</licence>
-	<version>0.1.2</version>
+	<licence>© 2010 GPL v3</licence>
+	<version>0.1.3</version>
 	<etat>stable</etat>
-	<description>Permet au porte plume d'ajouter des raccourcis s&#233;mantiques plut&#244;t que typographiques:
+	<description>Permet au porte plume d'ajouter des raccourcis sémantiques plutôt que typographiques:
 
--* modifie des ic&#244;nes et les bulles de survol de la barre typographique
--* configure Spip pour qu'il utilise des raccourcis s&#233;mantiques plut&#244;t que typographiques :
--** <code>{</code>accolades simples<code>}</code> sont remplac&#233;es par <code><em></em></code> au lieu de <code><i></i></code>
--** <code>{{</code>accolades doubles<code>}}</code> sont remplac&#233;es par <code><strong></strong></code> au lieu de <code><b></b></code>
+-* modifie des icônes et les bulles de survol de la barre typographique
+-* configure Spip pour qu'il utilise des raccourcis sémantiques plutôt que typographiques :
+-** <code>{</code>accolades simples<code>}</code> sont remplacées par <code><em></em></code> au lieu de <code><i></i></code>
+-** <code>{{</code>accolades doubles<code>}}</code> sont remplacées par <code><strong></strong></code> au lieu de <code><b></b></code>
 	</description>
 	<lien>https://contrib.spip.net/Icones-semantiques-pour-le-Porte-plume</lien>
 	<prefix>icones_semantiques</prefix>
 	<options>icones_semantiques_options.php</options>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.0.2;3.1.99]" />
+	<necessite id="SPIP" version="[2.0.2;3.2.99]" />
 	<necessite id="porte_plume" version="[0.5.4;]" />
 </plugin>
