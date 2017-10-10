@@ -29,7 +29,8 @@
 	<pipeline nom="affiche_enfants" inclure="produits_pipelines.php" />
 	<pipeline nom="objet_compte_enfants" inclure="produits_pipelines.php" />
 	<pipeline nom="corbeille_table_infos" inclure="produits_pipelines.php" />
-	
+	<pipeline nom="compositions_declarer_heritage" inclure="produits_pipelines.php" />
+
 	<menu nom="produits" titre="produit:titre_produits" parent="menu_edition" icone="images/produit-16.png" action="produits" />
 	<menu nom="produit_creer" titre="produit:icone_creer_produit" parent="outils_rapides" icone="images/produit-new-16.png" action="produit_edit" parametres="new=oui" />
 </paquet>

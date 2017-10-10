@@ -116,3 +116,15 @@ function produit_corbeille_table_infos($param){
 	);
 	return $param;
 }
+
+/**
+ * Déclarer l'héritage pour compositions
+ * 
+ * @param $heritages
+ *
+ * @return mixed
+ */
+function produits_compositions_declarer_heritage($heritages){
+	$heritages['produit'] = 'rubrique';
+	return $heritages;
+}
