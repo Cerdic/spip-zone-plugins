@@ -16,7 +16,7 @@ A faire :
 - F&T : pb de doublon avec forms_lang.js
 - Integration avec Porte-Plume : quand on change de langue, la previsu "Voir" ne bascule pas
 
-- Suggestion de RastaPopoulos : J'avais une id�e suppl�mentaire pour que ce soit extensible : activer �galement ce syst�me sur tous les champs ayant une classe "multilang". Fait, a tester avec class "multilang"
+- Suggestion de RastaPopoulos : J'avais une idée supplémentaire pour que ce soit extensible : activer également ce système sur tous les champs ayant une classe "multilang". Fait, a tester avec class "multilang"
 
 Trucs a regler :
 1.-------------
@@ -68,4 +68,4 @@ En fait faut pas passer 2 fois dans la fonction d'init. Ce n'est pas prevu pour.
 	});
 
 Bon donc ca marche toujours avec ou sans mediatheque... Reste plus qu'a tester avec un plugin qui veut du multilang
-	
+
