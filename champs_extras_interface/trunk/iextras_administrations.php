@@ -97,7 +97,7 @@ function iextras_upgrade_to_saisies() {
 		}
 
 		// regroupement par table sql.
-		$table = $te['_table_sql'] ? $te['_table_sql'] : table_objet_sql($te['table']);
+		$table = isset($te['_table_sql']) ? $te['_table_sql'] : table_objet_sql($te['table']);
 		if (!isset($extras[$table]) OR !is_array($extras[$table])) {
 			$extras[$table] = array();
 		}
