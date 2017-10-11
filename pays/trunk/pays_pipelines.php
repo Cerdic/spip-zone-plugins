@@ -10,8 +10,6 @@
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
-	
-
 
 /**
  * Ajout de contenu sur certaines pages,

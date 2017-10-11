@@ -48,7 +48,7 @@ a mis a jour la valeur avec la page reelle]
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
 			<td class='nom'>[(#LOGO_PAYS|image_reduire{20,20})]<a href="[(#ID_PAYS|generer_url_entite{pays})]">#NOM</a></td>
 			<td class='action'>
-				<button class="button link add" name="ajouter_lien\[pays-#ID_PAYS-#OBJET-#ID_OBJET\]" value="+"><:pays:ajouter_lien_pays:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
+				<button type="submit" class="button link add" name="ajouter_lien\[pays-#ID_PAYS-#OBJET-#ID_OBJET\]" value="+"><:pays:ajouter_lien_pays:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
 			</td>
 		</tr>
 	</BOUCLE_liste_pays>

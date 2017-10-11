@@ -43,7 +43,7 @@ a mis a jour la valeur avec la page reelle]
 
 			<td class='action'>
 				[(#ENV{editable}|oui)
-					<button class="button link delete" name="supprimer_lien\[pays-#ID_PAYS-#OBJET-#ID_OBJET\]" value="X"><:pays:retirer_lien_pays:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+					<button type="submit" class="button link delete" name="supprimer_lien\[pays-#ID_PAYS-#OBJET-#ID_OBJET\]" value="X"><:pays:retirer_lien_pays:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
 				]
 			</td>
 		</tr>
@@ -51,7 +51,7 @@ a mis a jour la valeur avec la page reelle]
 	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
-[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien\[pays-*-#OBJET-#ID_OBJET\]" value="X"><:pays:retirer_tous_liens_pays:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\[pays-*-#OBJET-#ID_OBJET\]" value="X"><:pays:retirer_tous_liens_pays:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
 </div>
 </B_liste_pays>
 <div class="liste-objets liste-objets-lies PAYS caption-wrap">
