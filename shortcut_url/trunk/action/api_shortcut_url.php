@@ -13,7 +13,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param null $arg
  */
 function action_api_shortcut_url($arg = null) {
-
 	if (is_null($arg)) {
 		$arg = _request('arg');
 		$shortcut_url = sql_getfetsel('url', 'spip_shortcut_urls', 'id_shortcut_url=' . intval($arg));
