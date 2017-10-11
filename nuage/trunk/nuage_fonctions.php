@@ -121,4 +121,4 @@ function nuage_insert_head_css($flux) {
 	$flux .= "\n".$css;
 	return $flux;
 }
-?>
+

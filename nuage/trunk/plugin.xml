@@ -1,18 +1,18 @@
 <plugin>
-	<version>4.0.6</version>
+	<version>4.0.7</version>
 	<nom>Nuage</nom>
-	<slogan>Afficher les mots-cl&#233;s en faisant varier la taille de la police</slogan>
+	<slogan>Afficher les mots-clés en faisant varier la taille de la police</slogan>
 	<prefix>nuage</prefix>
-	<auteur>Booz, Fil, James, St&#233;phane et Camille Lafitte</auteur>
+	<auteur>Booz, Fil, James, Stéphane et Camille Lafitte</auteur>
 	<licence>2005 - 2011 GNU/GPL</licence>
 	<etat>stable</etat>
 	<description>
-	Ce plugin permet d’afficher les mots-cl&#233;s en vrac, en faisant varier la taille de la police en fonction du nombre d'articles associ&#233;s au mot-cl&#233;. En d'autres termes, spip permet de cr&#233;er des &#171; tags &#187; !
+	Ce plugin permet d’afficher les mots-clés en vrac, en faisant varier la taille de la police en fonction du nombre d'articles associés au mot-clé. En d'autres termes, spip permet de créer des « tags » !
 
 	Plusieurs mod&#232;les disponibles :
--* article_nuage : affiche les mots-cl&#233;s de l'article la taille variant en fonction de la fr&#233;quence des mots dans les articles du site
--* rubrique_nuage : affiche les mots-cl&#233;s des articles de la branche, la taille variant en fonction de la fr&#233;quence des mots dans les articles de cette branche
--* nuage_popularite : affiche les mots-cl&#233;s du site (ou d'un groupe), la taille variant en fonction de sa popularit&#233; relative (somme des popularit&#233; des articles ayant ce mot)
+-* article_nuage : affiche les mots-clés de l'article la taille variant en fonction de la fréquence des mots dans les articles du site
+-* rubrique_nuage : affiche les mots-clés des articles de la branche, la taille variant en fonction de la fréquence des mots dans les articles de cette branche
+-* nuage_popularite : affiche les mots-clés du site (ou d'un groupe), la taille variant en fonction de sa popularité relative (somme des popularité des articles ayant ce mot)
 	</description>
 	<icon>images/nuage-64.png</icon>
 	<lien>https://contrib.spip.net/Nuage-de-mots-cles</lien>
@@ -26,6 +26,6 @@
 		<inclure>nuage_fonctions.php</inclure>
 	</pipeline>
 	<categorie>navigation</categorie>
-	<necessite id="SPIP" version="[2.0.0;3.1.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.2.99]" />
 	<necessite id="spip_bonux" version="[2.0;]" />
 </plugin>
