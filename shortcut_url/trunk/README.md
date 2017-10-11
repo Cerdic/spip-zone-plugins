@@ -22,6 +22,11 @@ Si vous utilisez mod_security ou mod_security2, il faut désactiver la directive
 
 ### Versions 1.x.x
 
+#### Version 1.3.4 (2017-10-11)
+
+* Bien utilisée l'url en paramètre s'il y en a une dans `$url = parametre_url(_request('url'), 'var_mode', '');`
+* Décoder les `&amp;` dans les URLS
+
 #### Version 1.3.3 (10/02/2017)
 
 * Améliorer la page d'un raccourci d'URL
