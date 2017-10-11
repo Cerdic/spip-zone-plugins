@@ -624,9 +624,9 @@ function multilang_multi_submit(params) {
  */
 function multilang_attach_submit() {
 	if($(this).parents('.ajax').size() && $(this).find('input[name=var_ajax]')){
-		$(this).bind('form-pre-serialize',multilang_multi_submit);
+		$(this).on('form-pre-serialize', multilang_multi_submit);
 	}else if($(this).is('.formulaire_crayon')){
-		cQuery(this).bind('form-pre-serialize',function(){multilang_multi_submit.apply(this);});
+		cQuery(this).on('form-pre-serialize',function(){multilang_multi_submit.apply(this);});
 	}else{
 		var oldsubmit = this.onsubmit;
 		this.onsubmit = "";

@@ -5,28 +5,31 @@
 
 	<form method="post" action="#ENV{action}">
 	<div>
-		#ACTION_FORMULAIRE{#ENV{action}}
+		#ACTION_FORMULAIRE
 
-		<ul>
+		<ul class="editer-groupe">
 			<li class="fieldset">
 				<fieldset>
 					<h3 class="legend"><:multilang:cfg_activer:></h3>
-					<ul>
-						[(#SAISIE{oui_non,siteconfig,
-							label=<:multilang:cfg_lbl_siteconfig:>,
-							defaut=on})]
+					<ul class="editer-groupe">
+						[(#SAISIE{case,siteconfig,
+							label_case=<:multilang:cfg_lbl_siteconfig:>,
+							defaut=on,
+							conteneur_class=pleine_largeur})]
 						#SET{defaut_on,#LISTE{rubrique,auteur,document}}
-						<BOUCLE_objets(DATA){source tableau,#REM|lister_tables_objets_sql}>
-						[(#VALEUR{editable}|=={oui}|oui)
+						<BOUCLE_objets(DATA){source tableau,#REM|lister_tables_objets_sql}{editable=oui}>
 							[(#SET{name,[(#CLE|objet_type)]})]
 							[(#SET{label,[(#VALEUR{texte_objets}|_T)]})]
-							[(#SAISIE{oui_non,#GET{name},
-								label=#GET{label},
-								defaut=''})]
-						]</BOUCLE_objets>
+							[(#SAISIE{case,#GET{name},
+								label_case=#GET{label},
+								defaut='',
+								conteneur_class=pleine_largeur})]
+						</BOUCLE_objets>
+
 						[(#SAISIE{oui_non,multilang_public,
 							label=<:multilang:cfg_lbl_espace_public:>,
 							defaut=''})]
+
 						[(#SAISIE{oui_non,multilang_crayons,
 							label=<:multilang:cfg_lbl_crayons:>,
 							explication=<:multilang:cfg_explication_crayons:>,
@@ -37,6 +40,7 @@
 			<li class="fieldset">
 				<fieldset>
 					<h3 class="legend"><:multilang:cfg_langues:></h3>
+					<ul class="editer-groupe">
 					[(#SET{langues,[(#CONFIG{langues_multilingue}|explode{','}|multilang_nommer_langues)]})]
 					[(#SAISIE{selection_multiple,langues_utilisees,
 						label=<:multilang:label_langues_utilisees:>,
@@ -44,6 +48,7 @@
 						cacher_option_intro=oui,
 						datas=#GET{langues},
 						size=[(#GET{langues}|count|>{10}|?{10,#GET{langues}|count})]})]
+					</ul>
 				</fieldset>
 			</li>
 		</ul>

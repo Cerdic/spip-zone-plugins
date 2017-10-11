@@ -139,7 +139,6 @@ function multilang_affichage_final($flux) {
 				$root[] = 'input[type=hidden][name*=name_][value|=meta-valeur]';
 				unset($config['siteconfig']);
 			}
-
 			foreach ($config as $conf => $val) {
 				if ($conf == 'gis') {
 					// Les points gis sont traités bizarrement dans les crayons qui enlèvent

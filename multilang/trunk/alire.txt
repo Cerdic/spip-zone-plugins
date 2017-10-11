@@ -16,7 +16,7 @@ A faire :
 - F&T : pb de doublon avec forms_lang.js
 - Integration avec Porte-Plume : quand on change de langue, la previsu "Voir" ne bascule pas
 
-- Suggestion de RastaPopoulos : J'avais une idée supplémentaire pour que ce soit extensible : activer également ce système sur tous les champs ayant une classe "multilang". Fait, a tester avec class "multilang"
+- Suggestion de RastaPopoulos : J'avais une idï¿½e supplï¿½mentaire pour que ce soit extensible : activer ï¿½galement ce systï¿½me sur tous les champs ayant une classe "multilang". Fait, a tester avec class "multilang"
 
 Trucs a regler :
 1.-------------
@@ -32,7 +32,7 @@ Premier bug : Dans une page d'edition article ou rubrique, si on modifie le doc 
 Solution : 
 function forms_attach_submit() {
 	if($(this).parents('.ajax').size() && $(this).find('input[name=var_ajax]')){
-		$(this).bind('form-pre-serialize',forms_multi_submit);
+		$(this).on('form-pre-serialize',forms_multi_submit);
 	}else{
 		var oldsubmit = this.onsubmit;
 		this.onsubmit = "";

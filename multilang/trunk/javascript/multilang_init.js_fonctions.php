@@ -26,6 +26,9 @@ function generer_multilang_init() {
 				if ($conf == 'document') {
 					$root[] = 'div#portfolio_portfolio,div#portfolio_documents,div#liste_documents,div.formulaire_editer_document';
 				} else {
+					if ($conf == 'groupe_mots') {
+						$conf = 'groupe_mot'; // le nom du formulaire n’est pas le type !
+					}
 					$root[] .= 'div.formulaire_editer_'.$conf;
 				}
 				unset($config[$conf]);
@@ -58,7 +61,7 @@ function generer_multilang_init() {
 	multilang_avail_langs.unshift(multilang_lang_courante);
 	if(multilang_lang_courante!=multilang_def_lang) multilang_avail_langs.unshift(multilang_def_lang);
 
-	jQuery(document).ready(function(){
+	jQuery(function($){
 		function multilang_init(){
 			var root = "'.implode(',', $root).'";
 			var fields_selector = "textarea:not(textarea#adresses_secondaires,textarea#repetitions),input:text:not(input#new_login,input#email,#titreparent,input.date,input.heure,input#largeur,input#hauteur,.ac_input,#url_syndic,#url_auto,.rechercher_adresse input,#champ_geocoder,#champ_lat,#champ_lon,#champ_zoom,#places,*.nomulti),.multilang";

@@ -2,7 +2,11 @@
 
 Ce fichier sert de changelog, il liste les modifications lors du changement de version.
 
-## Version 1.2.x
+## Version 1.3.0 (2017-10-11)
+
+- Compatible 3.2
+- Correction pour avoir multilang sur les groupes de mots
+- Syntaxe HTML du formulaire de configuration + passage en checkbox
 
 ### Version 1.2.2 (2017-05-23)
 
