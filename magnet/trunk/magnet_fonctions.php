@@ -119,7 +119,7 @@ function balise_BOUTONS_ADMIN_MAGNET_dist($p) {
  * @param $boucle
  * @return mixed
  */
-function magnet_pre_boucle(&$boucle){
+function magnet_pre_boucle($boucle){
 	if (!isset($boucle->modificateur['ignore_magnet'])
 	  AND (!test_espace_prive() OR isset($boucle->modificateur['criteres']['magnet']) OR isset($boucle->modificateur['criteres']['magnet_pile']))){
 		if (magnet_actif_sur_objet($boucle->type_requete)){
