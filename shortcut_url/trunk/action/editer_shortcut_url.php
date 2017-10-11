@@ -83,7 +83,7 @@ function shortcut_url_modifier($id_shortcut_url, $set = null) {
 	include_spip('inc/distant');
 
 	// On supprime ?var_mode=recalcul et autres var_mode
-	$c['url'] = parametre_url($c['url'], 'var_mode', '');
+	$c['url'] = parametre_url(urldecode($c['url']), 'var_mode', '', '&');
 	$recup = recuperer_page($c['url'], true);
 	if (preg_match(',<title[^>]*>(.*),i', $recup, $regs)) {
 		$c['description'] = filtrer_entites(
