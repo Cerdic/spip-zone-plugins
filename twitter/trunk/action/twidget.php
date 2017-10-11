@@ -88,7 +88,7 @@ function twidget_get_cached_url($url,$force=false) {
 	  AND function_exists('job_queue_add')) {
 		job_queue_add ('twidget_get_cached_url', 'Twitter Widget proxy', array($url,true), 'action/twidget',true);
 		if (!defined('_EXPIRES')) define('_EXPIRES',$expires);
-		return twidget_return($c['content'],$callback);
+		return twidget_return(isset($c['content']) ? $c['content'] : '', $callback);
 	}
 
 	spip_log("requete api twitter $url","twitget");
