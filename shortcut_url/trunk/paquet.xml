@@ -1,7 +1,7 @@
 <paquet
 	prefix="shortcut_url"
 	categorie="edition"
-	version="1.3.3"
+	version="1.3.4"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/shortcut_url-24.png"
@@ -15,7 +15,7 @@
 	<auteur lien="http://www.kent1.info">kent1</auteur>
 
 	<licence>GPL &#169;</licence>
-	<copyright>2015</copyright>
+	<copyright>2015-2017</copyright>
 
 	<necessite nom="geoip" compatibilite="[1.0.0;]" />
 	<necessite nom="fulltext" compatibilite="[1.1.12;]" />
