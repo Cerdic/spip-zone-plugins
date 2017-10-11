@@ -1,7 +1,7 @@
 <?php
 /**
  * Ce fichier contient l'API N-Core de gestion des noisettes, c'est-à-dire les instances paramétrées
- * de types de noisette affectées à un squelette.
+ * de types de noisette affectées à un conteneur.
  *
  * @package SPIP\NCORE\API\NOISETTE
  */
@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 /**
- * Ajoute à un squelette contextualisé, à un rang donné ou en dernier rang, une noisette d'un type donné.
+ * Ajoute à un conteneur, à un rang donné ou en dernier rang, une noisette d'un type donné.
  * La fonction met à jour les rangs des autres noisettes si nécessaire.
  *
  * @api
@@ -76,7 +76,7 @@ function noisette_ajouter($plugin, $type_noisette, $conteneur, $rang = 0, $stock
 		// Ce sont ces fonctions qui aiguillent ou pas vers un service spécifique du plugin.
 		include_spip('ncore/ncore');
 
-		// On récupère les noisettes déjà affectées au squelette contextualisé sous la forme d'un tableau indexé
+		// On récupère les noisettes déjà affectées au conteneur sous la forme d'un tableau indexé
 		// par le rang de chaque noisette.
 		$noisettes = ncore_noisette_lister($plugin, $conteneur, '', 'rang', $stockage);
 
@@ -112,7 +112,7 @@ function noisette_ajouter($plugin, $type_noisette, $conteneur, $rang = 0, $stock
 }
 
 /**
- * Supprime une noisette donnée du squelette contextualisé auquel elle est associée.
+ * Supprime une noisette donnée du conteneur auquel elle est associée.
  * La fonction met à jour les rangs des autres noisettes si nécessaire.
  *
  * @api
@@ -146,11 +146,11 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
 	// L'identifiant d'une noisette peut être fourni de deux façons :
 	// - par une valeur unique, celle créée lors de l'ajout et qui peut-être un entier (id d'une table SPIP) ou
 	//   une chaine unique par exemple générée par uniqid().
-	// - ou par un tableau à trois entrées fournissant le squelette, le contexte d'utilisation et le rang
-	//   (qui est unique pour un squelette contextualisé donné).
+	// - ou par un tableau à deux entrées fournissant le conteneur et le rang dans le conteneur
+	//   (qui est unique pour un conteneur donné).
 	if (!empty($noisette) and (is_string($noisette) or is_numeric($noisette) or is_array($noisette))) {
 		// Avant de supprimer la noisette on sauvegarde sa description.
-		// Cela permet de conserver le rang, le squelette et le contexte indépendamment de l'identifiant
+		// Cela permet de conserver le rang et le conteneur indépendamment de l'identifiant
 		// utilisé pour spécifier la noisette.
 		$description = ncore_noisette_decrire($plugin, $noisette, $stockage);
 
@@ -158,7 +158,7 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
 		// destockage de choisir la méthode d'identification la plus adaptée.
 		$retour = ncore_noisette_destocker($plugin, $description, $stockage);
 
-		// On récupère les noisettes restant affectées au squelette contextualisé sous la forme d'un tableau indexé par rang.
+		// On récupère les noisettes restant affectées au conteneur sous la forme d'un tableau indexé par rang.
 		$autres_noisettes = ncore_noisette_lister(
 			$plugin,
 			unserialize($description['conteneur']),
@@ -184,7 +184,7 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
 
 /**
  * Retourne, pour une noisette donnée, la description complète ou seulement un champ précis.
- * Les champs textuels peuvent subir une traitement typo si demandé.
+ * Les champs textuels peuvent subir un traitement typo si demandé.
  *
  * @api
  * @uses ncore_squelette_identifier()
@@ -213,7 +213,8 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
 function noisette_lire($plugin, $noisette, $information = '', $traiter_typo = false, $stockage = '') {
 
 	// On indexe le tableau des descriptions par le plugin appelant en cas d'appel sur le même hit
-	// par deux plugins différents. On gère un tableau par type d'identification (id noisette ou couple squelette/rang).
+	// par deux plugins différents.
+	// En outre, on gère un tableau par type d'identification, id noisette ou couple (conteneur, rang).
 	static $description_noisette_par_id = array();
 	static $description_noisette_par_rang = array();
 
@@ -252,7 +253,8 @@ function noisette_lire($plugin, $noisette, $information = '', $traiter_typo = fa
 				}
 			}
 
-			// Sauvegarde de la description de la page pour une consultation ultérieure dans le même hit.
+			// Sauvegarde de la description de la noisette pour une consultation ultérieure dans le même hit
+			// en suivant le type d'identification.
 			if (is_array($noisette)) {
 				$description_noisette_par_rang[$plugin][$id_conteneur][$noisette['rang']] = $description;
 			} else {
@@ -281,7 +283,7 @@ function noisette_lire($plugin, $noisette, $information = '', $traiter_typo = fa
 }
 
 /**
- * Déplace une noisette donnée au sein d’un squelette contextualisé.
+ * Déplace une noisette donnée au sein d’un conteneur.
  * La fonction met à jour les rangs des autres noisettes si nécessaire.
  *
  * @api
@@ -316,8 +318,8 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
 	// L'identifiant d'une noisette peut être fourni de deux façons :
 	// - par une valeur unique, celle créée lors de l'ajout et qui peut-être un entier (id d'une table SPIP) ou
 	//   une chaine unique par exemple générée par uniqid().
-	// - ou par un tableau à trois entrées fournissant le squelette, le contexte et le rang
-	//   (qui est unique pour un squelette donné).
+	// - ou par un tableau à deux entrées fournissant le conteneur et le rang
+	//   (qui est unique pour un conteneur donné).
 	if (!empty($noisette) and (is_string($noisette) or is_numeric($noisette) or is_array($noisette))) {
 		// Avant de deplacer la noisette on sauvegarde sa description et son rang origine.
 		$description = ncore_noisette_decrire($plugin, $noisette, $stockage);
@@ -325,7 +327,7 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
 
 		// Si les rangs origine et destination sont identiques on ne fait rien !
 		if ($rang_destination != $rang_origine) {
-			// On récupère les noisettes affectées au même squelette sous la forme d'un tableau indexé par le rang.
+			// On récupère les noisettes affectées au même conteneur sous la forme d'un tableau indexé par le rang.
 			$noisettes = ncore_noisette_lister(
 				$plugin,
 				unserialize($description['conteneur']),
@@ -334,14 +336,14 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
 				$stockage
 			);
 
-			// On vérifie que le rang destination soit bien compris entre 1 et le rang max, sinon on le force à une
+			// On vérifie que le rang destination est bien compris entre 1 et le rang max, sinon on le force à l'une
 			// des bornes.
 			$rang_destination = max(1, $rang_destination);
 			$rang_max = $noisettes ? max(array_keys($noisettes)) : 0;
 			$rang_destination = min($rang_max, $rang_destination);
 
 			// Suivant la position d'origine et de destination de la noisette déplacée on trie les noisettes
-			// du squelette contextualisé.
+			// du conteneur.
 			if ($rang_destination < $rang_origine) {
 				krsort($noisettes);
 			} else {
@@ -377,7 +379,7 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
 
 
 /**
- * Supprime toutes les noisettes d’un squelette contextualisé.
+ * Supprime toutes les noisettes d’un conteneur.
  *
  * @api
  * @uses ncore_noisette_destocker()
