@@ -1,9 +1,9 @@
 <paquet
 	prefix="lazysizes"
 	categorie="outil"
-	version="4.0.0.13"
+	version="4.0.0.14"
 	etat="dev"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/lazysizes-32.png"
 	documentation="http://afarkas.github.io/lazysizes/"
 >
@@ -19,7 +19,7 @@
 	<pipeline nom="header_prive" inclure="lazysizes_pipelines.php" />
 	<pipeline nom="ieconfig_metas" inclure="lazysizes_pipelines.php" />
 	
-	<necessite nom="htmlpurifier" compatibilite="[4.9.2.0;[" />
+	<necessite nom="htmlpurifier" compatibilite="[4.9.2.0;]" />
 	<utilise nom="medias" compatibilite="[2.10.38;]" />
 	
 </paquet>

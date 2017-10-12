@@ -24,11 +24,15 @@ function inc_safehtml($t, $allowed = null) {
 	include_spip('lib/HTMLPurifier.standalone');
 	
 	
-
+	// http://htmlpurifier.org/live/configdoc/plain.html
 	$config = HTMLPurifier_Config::createDefault();
 	$config->set('HTML.Doctype', 'HTML 4.01 Transitional');
 	$config->set('CSS.AllowTricky', true);
 	$config->set('HTML.Allowed', $allowed);
+	$config->set('Attr.AllowedFrameTargets', array('_blank'=>true));
+	
+	//$config->set('HTML.TargetBlank', true); 
+	//$config->set('HTML.TargetNoopener', true);
 	$config->set('Cache.SerializerPath', preg_replace(',/$,', '', realpath(_DIR_TMP)));
 	$def = $config->getHTMLDefinition(true);
 	 
@@ -76,6 +80,7 @@ function inc_safehtml($t, $allowed = null) {
 	
 	// http://developers.whatwg.org/text-level-semantics.html
     $def->addElement('s',    'Inline', 'Inline', 'Common');
+	//$def->addElement('b',    'Inline', 'Inline', 'Common');
     $def->addElement('var',  'Inline', 'Inline', 'Common');
     $def->addElement('sub',  'Inline', 'Inline', 'Common');
     $def->addElement('sup',  'Inline', 'Inline', 'Common');
