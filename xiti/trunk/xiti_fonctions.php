@@ -39,13 +39,19 @@ function xiti_nettoyeur($texte) {
 
 function xiti($texte) {
 	$slugify = chercher_filtre('slugify');
+	$texte_xiti = $texte;
 	if ($slugify) {
-		$texte = $slugify($texte);
+		$texte_xiti = $slugify($texte_xiti);
+		if (trim($texte_xiti) == '') {
+			$texte_xiti = strtolower(strtoascii($texte));
+			$texte_xiti = preg_replace('[^a-z0-9_:~\\\/\-]', '_', $texte_xiti);
+		}
 	} else {
-		$texte = strtolower(strtoascii($texte));
-		$texte = preg_replace('[^a-z0-9_:~\\\/\-]', '_', $texte);
+		$texte_xiti = strtolower(strtoascii($texte_xiti));
+		$texte_xiti = preg_replace('[^a-z0-9_:~\\\/\-]', '_', $texte_xiti);
 	}
-	return $texte;
+
+	return $texte_xiti;
 }
 
 /**
