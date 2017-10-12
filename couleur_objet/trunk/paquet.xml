@@ -1,10 +1,10 @@
 <paquet
 	prefix="couleur_objet"
 	categorie="maintenance"
-	version="0.2.5"
+	version="0.2.6"
 	schema="1.0.0"
 	etat="stable"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="img/couleur_objet-64.png"
 	documentation="https://contrib.spip.net/Couleur-d-Objet"
 >	
