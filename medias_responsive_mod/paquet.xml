@@ -1,9 +1,9 @@
 <paquet
 	prefix="medias_responsive_mod"
 	categorie="outil"
-	version="1.9.2"
+	version="1.9.3"
 	etat="stable"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="imgs/medias_responsive.png"
 	documentation="http://www.paris-beyrouth.org/Plugin-SPIP-Insertion-avancee-d-images"
 >
