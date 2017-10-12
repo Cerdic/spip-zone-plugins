@@ -12,7 +12,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function notifications_instituermailsubscription_dist($quoi, $id_mailsubscriber, $options) {
 
 	// ne devrait jamais se produire
-	if ($options['statut'] == $options['statut_ancien']) {
+	if (isset($options['statut'])
+		and ($options['statut'] == $options['statut_ancien'])
+	){
 		spip_log("instituermailsubscription #$id_mailsubscriber : statut inchange", 'notifications'._LOG_INFO_IMPORTANTE);
 		return;
 	}
@@ -30,11 +32,17 @@ function notifications_instituermailsubscription_dist($quoi, $id_mailsubscriber,
 	include_spip('inc/texte');
 
 	$modele = "";
-	if ($options['statut'] == 'valide') {
+	if (isset($options['statut'])
+		and $options['statut'] == 'valide'
+	) {
 		$modele = "notifications/mailsubscriber_subscribe";
-	} elseif ($options['statut_ancien'] == 'valide') {
+	} elseif (isset($options['statut'])
+		and $options['statut_ancien'] == 'valide'
+	) {
 		$modele = "notifications/mailsubscriber_unsubscribe";
-	} elseif ($options['statut'] == 'prop') {
+	} elseif (isset($options['statut'])
+		and $options['statut'] == 'prop'
+	) {
 		if (isset($options['invite_email_from']) AND strlen($options['invite_email_from'])) {
 			$modele = "notifications/mailsubscriber_invite_confirm";
 		} else {
