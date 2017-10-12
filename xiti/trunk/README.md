@@ -34,6 +34,18 @@
 
 ### Version 2.x.x (Passage à smarttag.js)
 
+#### Version 2.2.2 (2017-10-12)
+
+* Eviter de retourner quelque chose de vide avec la fonction `slugify` dans la fonction `xiti()`
+
+#### Version 2.2.1 (2017-08-07)
+
+* Bien avoir une valeur par défaut pour  dans le formulaire de liaison ;
+*  Un peu de style sur la fiche d'un niveau 2 de Xiti pour prendre moins de place en hauteur;
+* Mettre `xiti_id_site` dans le fichier js;
+* Revu de la structure html du formulaire de configuration ;
+* Formulaire de configuration : il manquait un crochet sur les class `editer_**` ;
+
 #### Version 2.2.0 (2017-07-25)
 
 * passer par le pipeline `optimiser_base_disparus` pour supprimer les liens de niveaux 2 sur des objets qui auraient été supprimés définitivement

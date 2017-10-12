@@ -42,6 +42,9 @@ function xiti($texte) {
 	$texte_xiti = $texte;
 	if ($slugify) {
 		$texte_xiti = $slugify($texte_xiti);
+		/**
+		 * On ne doit pas retourner quelquechose de vide, on passe par l'ancienne fonction
+		 */
 		if (trim($texte_xiti) == '') {
 			$texte_xiti = strtolower(strtoascii($texte));
 			$texte_xiti = preg_replace('[^a-z0-9_:~\\\/\-]', '_', $texte_xiti);
