@@ -1,9 +1,9 @@
 <paquet
 	prefix="langonet"
 	categorie="outil"
-	version="1.4.5"
+	version="1.4.6"
 	etat="stable"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="langonet_logo-64.png"
 	documentation="https://contrib.spip.net/langOnet-Presentation-generale"
 >	
