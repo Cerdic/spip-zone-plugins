@@ -91,5 +91,3 @@ function podcast_post_edition($flux){
 	}
 	return $flux;
 }
-
-?>
