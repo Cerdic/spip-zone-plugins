@@ -1,6 +1,7 @@
 <traduction module="multilingue" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/multilingue/trunk/lang/" reference="fr">
-	<langue code="de" url="https://trad.spip.net/tradlang_module/multilingue?lang_cible=de" total="8" traduits="5" relire="0" modifs="0" nouveaux="3" pourcent="62.50">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/multilingue?lang_cible=de" total="8" traduits="8" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="abelass" lien="https://trad.spip.net/auteur/abelass" />
+		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
 	<langue code="en" url="https://trad.spip.net/tradlang_module/multilingue?lang_cible=en" total="8" traduits="8" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="abelass" lien="https://trad.spip.net/auteur/abelass" />

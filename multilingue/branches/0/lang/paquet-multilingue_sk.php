@@ -14,16 +14,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	Zásuvný modul si vynúti inštaláciu viacerých zásuvných modulov
 	
-	- [preklad rubrík,->https://plugins.spip.net/tradrub.html]
-	- [jazyk, ktorý preferuje používateľ,->https://contrib.spip.net/Plugin-Langue-preferee-par-l-internaute]
-	- [preklady iných rubrík,->https://contrib.spip.net/Traductions-de-rubriques-autrement-3]
-	- [preklady iných článkov.->https://contrib.spip.net/Traductions-d-articles-autrement-3]
+	- [preklad rubrík,->http://plugins.spip.net/tradrub.html]
+	- [jazyk, ktorý preferuje používateľ,->http://contrib.spip.net/Plugin-Langue-preferee-par-l-internaute]
+	- [preklady iných rubrík,->http://contrib.spip.net/Traductions-de-rubriques-autrement-3]
+	- [preklady iných článkov.->http://contrib.spip.net/Traductions-d-articles-autrement-3]
 	
-	V Spipe 2 alebo 2.1 sa odporúča nainštalovať ich pred inštaláciou zásuvného modulu [Step->https://contrib.spip.net/STEP-Systeme-de-Telechargements-de-Plugins], potom nainštalujte tento zásuvný modul, ktorý si vynúti aj inštaláciu všetkých potrebných zásuvných modulov.
+	V Spipe 2 alebo 2.1 sa odporúča nainštalovať ich pred inštaláciou zásuvného modulu [Step->http://contrib.spip.net/STEP-Systeme-de-Telechargements-de-Plugins], potom nainštalujte tento zásuvný modul, ktorý si vynúti aj inštaláciu všetkých potrebných zásuvných modulov.
 	
 	Zásuvný modul mení aj niektoré šablóny (rubriky a články) a niekoľko základných orieškov.
 	
-	Keď nainštalujete potrebné zásuvné moduly, jazyky stránky vyberte v menu  "Konfigurácia"->"Viacjazyčnosť/Riadenie jazykov"	a potom bude vaša stránka viacjazyčná',
+	Keď nainštalujete potrebné zásuvné moduly, jazyky stránky vyberte v menu  "Konfigurácia"->"Viacjazyčnosť/Riadenie jazykov"	a potom bude vaša stránka viacjazyčná', # MODIF
 	'multilingue_nom' => 'Jednoduchá viacjazyčná stránka',
 	'multilingue_slogan' => 'Vytvorte jednoduchú viacjazyčnú stránku'
 );
