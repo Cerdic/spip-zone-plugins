@@ -1,0 +1,31 @@
+<B_reservations>
+	<div class="liste corbeille-reservations">
+	[<h3 class="titrem">(#GRAND_TOTAL|singulier_ou_pluriel{reservation:info_1_reservation,reservation:info_nb_reservations})</h3>]
+	[<p class='pagination'>(#PAGINATION)</p>]
+	<ul class='liste-items checkables'>
+		<BOUCLE_reservations(RESERVATIONS){statut}{pagination 5}{!par date}{recherche ?}>
+		<li class='item'>
+			<label for='formulaire-#ID_RESERVATION'><:corbeille:selectionner:></label>
+			<input type='checkbox' name='elements[]' id="reservation-#ID_RESERVATION" value='#ID_RESERVATION'[ (#ID_RESERVATION|in_any{#ENV{elements}}|oui)checked='checked']/>
+			<h4>[##ID_RESERVATION - (#REFERENCE)]
+			<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+				- <a href="#URL_ECRIRE{client,email=#EMAIL}" title="#NOM">#NOM</a>
+			</BOUCLE_auteur>
+				- <a href="#URL_ECRIRE{client,email=#EMAIL}" title="#NOM">#NOM</a>
+			<//B_auteur>
+			</h4>
+			<small>[(#DATE|affdate)][ (#DATE|heures)]:[(#DATE|minutes)]</small>
+			<B_details>
+			<ul>
+			<BOUCLE_details(RESERVATIONS_DETAILS) {id_reservation} {statut}>
+				<li>#INFO_TITRE{evenement,#ID_EVENEMENT}</li>
+			</BOUCLE_details>
+			</ul>
+			</B_details>
+			<p class='actions'><a href='#URL_ECRIRE{reservation,id_reservation=#ID_RESERVATION}'><:corbeille:voir_detail:></a></p>
+		</li>
+		</BOUCLE_reservations>
+	</ul>
+	[<p class='pagination'>(#PAGINATION{prive})</p>]
+	</div>
+</B_reservations>
