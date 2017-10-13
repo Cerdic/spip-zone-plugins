@@ -30,7 +30,7 @@ if (! defined('_ECRIRE_INC_VERSION'))
  */
 function reservation_evenement_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array ();
-	
+
 	if ($version_cible == '1.3.3') {
 		include_spip('inc/config');
 		$config = lire_config('reservation_evenement');
@@ -39,7 +39,7 @@ function reservation_evenement_upgrade($nom_meta_base_version, $version_cible) {
 			unset($config['envoi_separe']);
 		}
 	}
-	
+
 	$maj['create'] = array (
 		array (
 			'maj_tables',
@@ -47,94 +47,99 @@ function reservation_evenement_upgrade($nom_meta_base_version, $version_cible) {
 				'spip_reservations',
 				'spip_reservations_details',
 				'spip_articles',
-				'spip_evenements' 
-			) 
-		) 
+				'spip_evenements'
+			)
+		)
 	);
 	$maj['1.1.0'] = array (
 		array (
 			'sql_alter',
-			'TABLE spip_reservations_details CHANGE prix_unitaire_ht prix_ht float NOT NULL DEFAULT 0' 
+			'TABLE spip_reservations_details CHANGE prix_unitaire_ht prix_ht float NOT NULL DEFAULT 0'
 		),
 		array (
 			'maj_tables',
 			array (
-				'spip_reservations_details' 
-			) 
-		) 
+				'spip_reservations_details'
+			)
+		)
 	);
 	$maj['1.2.0'] = array (
 		array (
 			'maj_tables',
 			array (
-				'spip_reservations_details' 
-			) 
-		) 
+				'spip_reservations_details'
+			)
+		)
 	);
 	$maj['1.3.1'] = array (
 		array (
 			'maj_tables',
 			array (
-				'spip_reservations' 
-			) 
-		) 
+				'spip_reservations'
+			)
+		)
 	);
 	$maj['1.3.3'] = array (
 		array (
 			'ecrire_config',
 			'reservation_evenement',
-			$config 
-		) 
+			$config
+		)
 	);
 	$maj['1.4.1'] = array (
 		array (
 			'maj_tables',
 			array (
 				'spip_articles',
-				'spip_evenements' 
-			) 
-		) 
+				'spip_evenements'
+			)
+		)
 	);
 	include_spip('inc/reservation_evenement_administrations');
 	$maj['1.4.2'] = array (
 		array (
 			'sql_alter',
-			'TABLE spip_reservations_details CHANGE quantite quantite int(11) NOT NULL DEFAULT 1' 
+			'TABLE spip_reservations_details CHANGE quantite quantite int(11) NOT NULL DEFAULT 1'
 		),
 		array (
-			'update_donnees_auteurs' 
-		) 
+			'update_donnees_auteurs'
+		)
 	);
 	$maj['1.5.2'] = array (
 		array (
 			'maj_tables',
 			array (
-				'spip_reservations' 
-			) 
+				'spip_reservations'
+			)
 		),
 		array (
 			'sql_alter',
-			'TABLE spip_reservations ADD INDEX `id_reservation_source` (`id_reservation_source`)' 
-		) 
+			'TABLE spip_reservations ADD INDEX `id_reservation_source` (`id_reservation_source`)'
+		)
 	);
 	$maj['1.6.0'] = array (
 		array (
 			'maj_tables',
 			array (
-				'spip_reservations_details' 
-			) 
-		) 
+				'spip_reservations_details'
+			)
+		)
 	);
-	
+
 	$maj['1.6.1'] = array (
 		array (
 			'maj_tables',
 			array (
-				'spip_reservations' 
-			) 
-		) 
+				'spip_reservations'
+			)
+		)
 	);
-	
+	$maj['1.7.0']  = array(
+		array('sql_alter','TABLE spip_reservations_details CHANGE prix_ht prix_ht decimal(15,2) NOT NULL DEFAULT "0.00"'),
+		array('sql_alter','TABLE spip_reservations_details CHANGE prix prix decimal(15,2) NOT NULL DEFAULT "0.00"'),
+		array('sql_alter','TABLE spip_reservations_details CHANGE taxe taxe decimal(15,2) NOT NULL DEFAULT "0.00"'),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -155,20 +160,20 @@ function reservation_evenement_upgrade($nom_meta_base_version, $version_cible) {
 function reservation_evenement_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_reservations");
 	sql_drop_table("spip_reservations_details");
-	
+
 	// Nettoyer les versionnages et forums
 	sql_delete("spip_versions", sql_in("objet", array (
 		'reservation',
-		'reservations_detail' 
+		'reservations_detail'
 	)));
 	sql_delete("spip_versions_fragments", sql_in("objet", array (
 		'reservation',
-		'reservations_detail' 
+		'reservations_detail'
 	)));
 	sql_delete("spip_forum", sql_in("objet", array (
 		'reservation',
-		'reservations_detail' 
+		'reservations_detail'
 	)));
-	
+
 	effacer_meta($nom_meta_base_version);
 }

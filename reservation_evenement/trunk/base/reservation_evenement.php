@@ -144,10 +144,10 @@ if (! defined ( '_ECRIRE_INC_VERSION' ))
 				"id_evenement" => "bigint(21) NOT NULL DEFAULT '0'",
 				"descriptif" => "text NOT NULL",
 				"quantite" => "int(11) NOT NULL DEFAULT '1'",
-				"prix_ht" => "decimal(15,4) NOT NULL DEFAULT '0.000'",
-				"prix" => "decimal(15,4) NOT NULL DEFAULT '0.000'",
+				"prix_ht" => "decimal(15,2) NOT NULL DEFAULT '0.00'",
+				"prix" => "decimal(15,2) NOT NULL DEFAULT '0.00'",
 				"devise" => "varchar(3)  DEFAULT '' NOT NULL",
-				"taxe" => "decimal(15,4) NOT NULL DEFAULT '0.000'",
+				"taxe" => "decimal(15,2) NOT NULL DEFAULT '0.00'",
 				"statut" => "varchar(20)  DEFAULT '0' NOT NULL",
 				"maj" => "TIMESTAMP"
 			),
