@@ -40,6 +40,9 @@ function reservation_bank_upgrade($nom_meta_base_version, $version_cible) {
 			'TABLE spip_transactions ADD INDEX `id_reservation` (`id_reservation`)'
 		)
 	);
+	$maj['1.1.0']  = array(
+		array('sql_alter','TABLE spip_reservations_details CHANGE montant_paye montant_paye decimal(15,2) NOT NULL DEFAULT "0.00"'),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
