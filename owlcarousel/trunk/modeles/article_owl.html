@@ -1,0 +1,88 @@
+[(#REM)<!-- # OwlCarousel - Portfolio Articles
+
+Gallerie portfolio avec Owl Carousel
+
+@param : id_article
+@param : id-carousel : id unique du carousel
+@param : caption : oui : Affiche la description de l'image.
+@param : docs : 1,2,3 : selectionne individuellement les documents
+@param : dots : true par defaut : affiche les points de navigation
+@param : navigation : true par defaut : affiche les boutons précédents suivants
+@param : caption_css : ajouter des css sur la description (par exemple : invisible).
+@param : autoplay : true (false par défaut) : le carousel démarre automatiquement.
+@param : autoplayHoverPause : true (false par défaut) : pause sur le rollHover en mode autoplay
+@param : lazyLoad : true (false par défaut) : ne charge que les images visibles pour optimiser le chargement.
+
+-->]
+<style>
+    [#(#ENV{id-carousel,demo})] .owl-slide > .caption{
+        z-index: 100;
+        position: absolute;
+        left:55%;
+        width: 40%;
+        bottom:5%;
+    }
+    [#(#ENV{id-carousel,demo})] .owl-slide > .caption > .title{
+        background: #000;
+        color : #FFF;
+        padding: 5px;
+        width: auto;
+    }
+    [#(#ENV{id-carousel,demo})] .owl-slide > .caption > p {
+        background-color: rgba(88, 88, 88, 0.75) ;
+        /*float: right;*/
+        color: #FFF;
+        padding: 5px;
+    }
+    [#(#ENV{id-carousel,demo})] .owl-slide {
+        
+    }
+    [#(#ENV{id-carousel,demo})] .owl-slide img{
+        display: block;
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+    }    
+</style>
+[(#REM) <!-- Diaporama -->]
+<div id="#ENV{id-carousel,demo}" class="owl-carousel owl-theme">
+            <BOUCLE_listDocs(DOCUMENTS){id_article?}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{mode=document}{extension==jpg|png|gif}>
+            <div class="owl-slide" data-hash="#ID_DOCUMENT">
+                [(#ENV{caption,oui}|=={oui}|oui)
+                <div class="caption[ (#ENV{caption_css})]">[
+                    <h3 class="title">(#TITRE)</h3>][
+                    <p class="hidden-phone">(#DESCRIPTIF|textebrut)</p>]</div>]
+                    <a href="#FICHIER" class="js-colorbox" rel="diaporama">
+                        <img [(#ENV{lazyLoad}|=={true}|oui)class="owl-lazy" data-]src="[(#FICHIER|image_reduire{650,450}|extraire_attribut{src})]" alt="[(#TITRE|textebrut)]">
+                    </a>
+            </div>
+            </BOUCLE_listDocs>
+</div>
+
+<script type="text/javascript">
+jQuery(function($){
+    $("[#(#ENV{id-carousel,demo})]").owlCarousel({
+        loop:true,
+        margin:0,
+        items: 1,[
+        dots:(#ENV{dots, true}),][
+        nav:(#ENV{navigation, false}),][
+        autoplay: (#ENV{autoplay}),][
+        autoplayHoverPause: (#ENV{autoplayHoverPause}),][
+        lazyLoad: (#ENV{lazyLoad}),]
+        responsive:false,
+        URLhashListener:true,
+        startPosition: 'URLHash',
+	responsive:{
+		0:{
+		items:1
+		}
+	}
+    });
+    
+    // Gallerie Colorbox
+    $("a.js-colorbox").colorbox({
+        rel:'diaporama',
+        });
+});
+</script>
