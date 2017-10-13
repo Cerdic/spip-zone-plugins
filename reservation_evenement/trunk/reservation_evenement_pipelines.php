@@ -301,3 +301,20 @@ function reservation_evenement_optimiser_base_disparus($flux){
 
 	return $flux;
 }
+
+/**
+ * Pipeline de la corbeille, permet de définir les objets à supprimer
+ *
+ * @param array $param Tableau d'objets
+ *
+ * @return array Tableau d'objets complété
+ */
+function reservation_evenement_corbeille_table_infos($param){
+	$param['reservations'] = array(
+		'statut' => 'poubelle',
+		'table' => 'reservations',
+		'tableliee' => array('spip_reservations_details')
+	);
+
+	return $param;
+}
