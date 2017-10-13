@@ -92,13 +92,32 @@ function formulaires_configurer_reservation_evenement_saisies_dist() {
 		);
 	}
 
-
 	//Le statuts du plugin, sauf en cours
 	foreach ($liste_objets['spip_reservations']['statut_textes_instituer'] AS $statut => $label) {
 			$statuts[$statut] = _T($label);
 		if (in_array($statut, $quand))
 			$statuts_selectionnees[$statut] = _T($label);
 	}
+
+	if (!test_plugin_actif('corbeille')) {
+		$poubelle_duree = array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'duree_vie_poubelle',
+				'label' => _T('reservation:label_duree_vie_poubelle'),
+				'explication' => _T('reservation:duree_vie_explication',
+						array(
+							'statut_defaut' => $statuts['poubelle']
+						)
+						),
+				'defaut' => $config['duree_vie_poubelle'],
+			)
+		);
+	}
+	else {
+		$poubelle_duree = array();
+	}
+
 
 	$choix_expediteurs = array(
 		'webmaster' => _T('reservation:notifications_expediteur_choix_webmaster'),
@@ -137,12 +156,13 @@ function formulaires_configurer_reservation_evenement_saisies_dist() {
 						'label' => _T('reservation:duree_vie_label'),
 						'explication' => _T('reservation:duree_vie_explication',
 								array(
-									'statut_defaut' => $config['statut_defaut']
+									'statut_defaut' => $statuts[$config['statut_defaut']]
 								)
 							),
 						'defaut' => $config['duree_vie'],
 					)
 				),
+				$poubelle_duree,
 				array(
 					'saisie' => 'oui_non',
 					'options' => array(

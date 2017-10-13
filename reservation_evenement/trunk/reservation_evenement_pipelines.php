@@ -274,9 +274,10 @@ function reservation_evenement_afficher_contenu_objet($flux) {
  */
 function reservation_evenement_optimiser_base_disparus($flux){
 	include_spip('inc/config');
-
 	// les config
 	$config_reservation = lire_config('reservation_evenement');
+
+	// Les réservations en statut par défaut.
 	$heures = isset($config_reservation['duree_vie']) ? $config_reservation['duree_vie'] : 0;
 
 	if ($heures > 0) {
@@ -288,6 +289,28 @@ function reservation_evenement_optimiser_base_disparus($flux){
 				'id_reservation',
 				'spip_reservations',
 				'statut = '.sql_quote($statut_defaut).' and date<'.sql_quote($depuis)
+				);
+
+		// S'il y a bien des réservations à supprimer
+		if ($reservations) {
+			$reservations = array_map('reset', $reservations);
+			include_spip('inc/reservation_evenements');
+			reservations_supprimer($reservations);
+			$flux['data'] += count($reservations);
+		}
+	}
+
+	// Les réservations en statut "poubelles".
+	$heures = isset($config_reservation['duree_vie_poubelle']) ? $config_reservation['duree_vie_poubelle'] : 0;
+
+	if ($heures > 0) {
+		$depuis = date('Y-m-d H:i:s', time() - 3600*intval($heures));
+
+		// On récupère les réservations trop vieilles
+		$reservations = sql_allfetsel(
+				'id_reservation',
+				'spip_reservations',
+				'statut = '.sql_quote('poubelle').' and maj<'.sql_quote($depuis)
 				);
 
 		// S'il y a bien des réservations à supprimer
