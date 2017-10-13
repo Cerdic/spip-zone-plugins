@@ -16,8 +16,8 @@ function prix_objets_declarer_tables_principales($tables_principales){
 		"reference"   => "varchar(255)  DEFAULT '' NOT NULL",
 		'objet' => 'varchar(25) not null default ""',
 		"code_devise" 	=> "varchar(3) NOT NULL",
-		"prix_ht" 		=> "decimal(15,4) NOT NULL DEFAULT '0.000'",
-		"prix"       => "decimal(15,4) NOT NULL DEFAULT '0.000'",
+		"prix_ht" 		=> "decimal(15,2) NOT NULL DEFAULT '0.00'",
+		"prix"       => "decimal(15,2) NOT NULL DEFAULT '0.00'",
 		"taxe"   => "varchar(10)  DEFAULT '' NOT NULL",
 		);
 
@@ -39,7 +39,6 @@ function prix_objets_declarer_tables_principales($tables_principales){
 	);
 
 	return $tables_principales;
-
 	}
 
 

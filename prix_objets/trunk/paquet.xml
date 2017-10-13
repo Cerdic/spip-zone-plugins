@@ -6,7 +6,7 @@
 	compatibilite="[3.0.5;3.2.*]"
 	logo=""
 	documentation=""
-	schema="1.4.1"
+	schema="1.5.0"
 >
 
 	<nom>Prix Objets</nom>
