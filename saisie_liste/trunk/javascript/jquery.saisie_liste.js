@@ -1,4 +1,10 @@
+/* jshint strict: true, undef: true, unused: true, curly: true,
+   eqeqeq: true, freeze: true, funcscope: true, futurehostile: true,
+   nonbsp: true */
+/* globals $ */
+
 $.fn.saisieListe = function( options ) {
+    "use strict";
 
     this.nom = options.nom;
 
@@ -12,7 +18,7 @@ $.fn.saisieListe = function( options ) {
 
                 // si plié on déplie et on ne submit pas
                 if (self.find('> li').last().hasClass('cache')) {
-                    self.find('> li').last().show().removeClass('cache')
+                    self.find('> li').last().show().removeClass('cache');
                     e.preventDefault();
                 }
             });
@@ -50,9 +56,8 @@ $.fn.saisieListe = function( options ) {
     // s'assurer que presser enter dans un des champs de la saisie
     // n'utilise pas un submit de la saisie liste
     this.keypress(function (e) {
-        if ((e.which == 13)
-          // si on a pressé enter sur un submit, on ne change rien
-          && (e.target.type !== 'submit')) {
+        // si on a pressé enter sur un submit, on ne change rien
+        if ((e.which == 13) && (e.target.type !== 'submit')) {
             $(this).parents('form').submit();
             return false;
         }
