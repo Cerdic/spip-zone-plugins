@@ -37,17 +37,8 @@ ________________
 
 1. Installation du plug-in
 
-Comme tous les plugins, en auto via svp si on créé :
-- un dossier plugins/auto/
-- un dossier lib/
+Comme tous les plugins, en auto via svp après avoir créé un dossier plugins/auto/
 
-Le plugin pgn4web sera automatiquement téléchargé dans le dossier lib/.
-
-Le répertoire pgn4web a une taille de 13 Mo.
-Dans le cas de site ayant une place disque réduite,
-on peut éventuellement effacer certaines polices non utilisées 
-parmi alpha, merida, svgchess ou des fichiers de démo.
-Garder les polices uscf/20 et 26.
 ________________
 
 2. Configuration du plugin

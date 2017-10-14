@@ -40,15 +40,8 @@ ________________
 
 1. Setup of the plug-in
 
-As all plugins once you have first created:
-- a folder plugins/auto/
-- a folder lib/
+As all plugins once you have first created a folder plugins/auto/
 
-The pgn4web folder has a size of 13 MB.
-In the case of site having a limited hard disk,
-one can eventually delete certain unused fonts 
-among alpha, merida, svgchess or demo files.
-Keep at least the fonts uscf/20 and 26. 
 ________________
 
 2. Configuration of the plugin
