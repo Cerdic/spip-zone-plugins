@@ -86,6 +86,10 @@ Affiche le logo de l'article en fond et le titre ainsi que #INTRODUCTION
 
 ## TRAVAUX :
 
+Sat Oct 14 08:48:25 2017 :
+
+*   	maj de la lib owl.carousel
+
 
 ## TODO :
 
