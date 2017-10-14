@@ -6,6 +6,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_centre_image_forcer() {
 	$fichier = $_GET["url"];
 
+	// Gérer le plugin mutualisation
+	if (defined('_DIR_SITE')){
+		$fichier = _DIR_SITE.$fichier;
+	}
+
 	include_spip('centre_image_fonctions');
 	$fichier = centre_image_preparer_fichier($fichier);
 	// pas de ../

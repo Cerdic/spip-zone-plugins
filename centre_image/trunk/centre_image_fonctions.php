@@ -18,7 +18,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * @uses centre_image_visage() Si la constante `_SPIP_CENTRE_IMAGE` définie à `visage`
  * @uses centre_image_densite() sinon
- * 
+ *
  * @param string $fichier
  *     Chemin du fichier ou balise `<img>`
  * @return float[]
@@ -27,6 +27,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     - y entre 0 (en haut) et 1 (en bas)
 **/
 function centre_image($fichier) {
+	// Gérer le plugin mutualisation
+	if (defined('_DIR_SITE')){
+		$fichier = _DIR_SITE.$fichier;
+	}
+
 	if (defined('_SPIP_CENTRE_IMAGE') AND _SPIP_CENTRE_IMAGE == "visage") {
 		return centre_image_visage($fichier);
 	} else {
@@ -172,7 +177,7 @@ function centre_image_y($fichier) {
 
 /**
  * Détection du visage (attention: super-lourd)
- * 
+ *
  * Retourne les coordonnées du point d'intérêt de l'image transmise
  * en s'appuyant sur une (lourde) fonction de détection de visage
  *
