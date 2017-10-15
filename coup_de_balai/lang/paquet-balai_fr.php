@@ -4,7 +4,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	'balai_description' => 'Permer de mettre à la poubelle les articles et de supprimer les rubriques qui ne sont pas explicitement protégés du coup de balai.',
+	'balai_description' => 'Permet "nettoyer" un site en supprimant tous les articles et toutes les rubriques à l\'exception de ceux et celles qui auront été explicitement protégés.',
 	'balai_nom' => 'Coup de balai',
 	'balai_slogan' => 'Ménage de printemps',
 );

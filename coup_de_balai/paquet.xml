@@ -4,10 +4,12 @@
 	version="0.2.1"
 	etat="test"
 	logo="prive/themes/spip/images/balai-64.png"
+	documentation="https://contrib.spip.net/4922"
 	compatibilite="[3.0.0;3.2.*]"
 	schema="0.2.0"
 >
 	<nom>Coup de balai</nom>
+	<!-- Permet "nettoyer" un site en supprimant tous les articles et toutes les rubriques à l'exception de ceux et celles qui auront été explicitement protégés. --> 
 
 	<auteur>Romain Krust</auteur>
 	<credit>Oliver Scholtz (and others) pour les icônes</credit>
