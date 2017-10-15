@@ -95,7 +95,7 @@ pre {
   line-height: 1;
   font-size: .8rem;
   font-family: monospace;
-  color: #909f77;
+  color: #999;
   cursor: pointer;
 }
 
@@ -103,7 +103,6 @@ pre {
 .simplec_code .copy-button.copied { 
   display: inline-block;
 }
-.simplec_code .copy-button:hover,
 .simplec_code .copy-button.copied { 
   color: #42DC42 !important; transition: color 250ms ease-out;
 }
