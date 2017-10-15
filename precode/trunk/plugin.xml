@@ -1,0 +1,23 @@
+<plugin>
+	<nom>Simple C</nom>
+	<prefix>simplec</prefix>
+	<icon>icon/simplec.png</icon>
+
+	<version>0.0.1</version>
+	<etat>experimental</etat>
+	<categorie>outil</categorie>
+
+	<slogan>Afficher proprement du code dans SPIP</slogan>
+	<description>
+		ATTENTION : plugin très expérimental et instable !
+		pour afficher proprement du code dans SPIP.
+	</description>
+	<lien>http://romy.tetue.net/plugins/simplec/todo.txt</lien>
+	<auteur>&copy; 2017 [tetue->http://spip.tetue.net]</auteur>
+
+	<options>simplec_options.php</options>
+
+	<utilise id="tinytypo" version="[;]" />
+	<necessite id="SPIP" version="[2.1.0;3.1.99]">
+	<necessite id="spip_bonux" version="[2.2.19;]"/>
+</plugin>
