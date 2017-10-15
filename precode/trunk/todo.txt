@@ -28,8 +28,8 @@ exemple de <code>code</code> inline
 <pre><code>Exemple de
 code en bloc</code></code>
 
-- Fournir une page/skel de test/exemplaire
-= Expliquer à quoi sert <pre> - DOING : http://localhost:8888/romy/spip/?article1198
+- Fournir une page/skel de test/exemplaire ?
+x Expliquer à quoi sert <pre> -> http://romy.tetue.net/a-quoi-sert-la-balise-pre
 
 
 == Copier facilement — JS — TODO
@@ -37,11 +37,12 @@ L’intérêt de <cadre> était de présenter du code facile à copier. Cela peu
 http://a11y-style-guide.com/style-guide/section-media.html
 
 x insérer auto un bouton « copier » à chaque bloc <pre><code>
+- et pourquoi pas à chaque bloc <pre> (qu’il contienne du code ou pas) finalement ?
 x qui a pour action de copier auto le code dans le presse-papier local
 x prévoir feedback confirmant la copie
 x détail luxueux : une seule class .copied à la fois dans la page (pour éviter le feedback multiple, qui ne correspond pas à la réalité de l’action)
 - avec les aria qui vont bien pour l’accessibilité
-- on verra ensuite comment looker toussa
+= on verra ensuite comment looker toussa — DOING
 - pas d’autre gadget : on se contente de couvrir le périmètre fonctionnel existant
 - <cadre> est consécutivement déprécié.
 
@@ -49,8 +50,8 @@ x détail luxueux : une seule class .copied à la fois dans la page (pour évite
 == Partager
 Pour pouvoir le partager dans SPIP, il faut un fichu nom à ce plugin :
 - j’aime bien « code » tout simplement (mais peut-être problématique comme prefix ?)
-- « Simple C » = dans l’idée d’un raccourci simplet unique <c>…
-- « PreCode » ? « CodePre » ?
+- sinon « PreCode » ? « CodePre » ?
+- « Simple C » = dans l’idée d’un raccourci simplet unique <c>… finalement non
 - What’s else ?
 
 
@@ -67,7 +68,7 @@ Améliorer le raccourci <code> pour qu’il génère :
 = avec les attributs qui vont bien : dir='ltr'
 - faut-il maintenir la class='spip_code' ?
 - voir aussi : https://core.spip.net/issues/2504
-- préserver le SUPER-méga-top-génial traitement de SPIP qui encode automatiquement ce qui est dans <c> (anciennement <code>)
+- préserver le SUPER-méga-top-génial traitement de SPIP qui encode automatiquement ce qui est dans <code>
 
 Rétro-compat : l’ancien raccourci <cadre> est déprécié (à ne plus utiliser) mais maintenu pour rétrocmpat :
 = <cadre> fait comme <code> en bloc
