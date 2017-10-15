@@ -46,10 +46,10 @@ x prévoir feedback confirmant la copie
 
 
 == Partager
-Pour partager dans SPIP, il faut un fichu nom à ce plugin :
+Pour pouvoir le partager dans SPIP, il faut un fichu nom à ce plugin :
 - j’aime bien « code » tout simplement (mais peut-être problématique comme prefix ?)
 - « Simple C » = dans l’idée d’un raccourci simplet unique <c>…
-- PreCode ? CodePre ?
+- « PreCode » ? « CodePre » ?
 - What’s else ?
 
 
@@ -63,24 +63,25 @@ Améliorer le raccourci <code> pour qu’il génère :
 - du code en ligne balisé de <code>
 - du code en bloc balisé de <pre><code>
 
-- avec les attributs qui vont bien : dir='ltr'
+= avec les attributs qui vont bien : dir='ltr'
 - faut-il maintenir la class='spip_code' ?
 - voir aussi : https://core.spip.net/issues/2504
 - préserver le SUPER-méga-top-génial traitement de SPIP qui encode automatiquement ce qui est dans <c> (anciennement <code>)
 
 Rétro-compat : l’ancien raccourci <cadre> est déprécié (à ne plus utiliser) mais maintenu pour rétrocmpat :
-- <cadre> fait comme <code> en bloc
+= <cadre> fait comme <code> en bloc
+- supprimer les cols='40' rows='7' résiduels
 
 <pre> n’est pas un raccourci SPIP, mais devrait pouvoir être utilisé sans dommage :
 - empêcher SPIP de traiter les balises et raccourcis contenus dans <pre> (comme pour <code>)
 - sinon, a minima, remplacer automatiquement le <pre> saisi par <html><pre> ?
 - pre respecte les espaces, indentations, retours… => ne pas générer de <br> dans <pre><code>
-- voir aussi : https://core.spip.net/issues/3990
+- voir : https://core.spip.net/issues/3990
 
 
 == Style — CSS — TODO by tetue
 - Supprimer les sélecteurs spip_code et spip_cadre
-- Prévoir feuille minimale, injectée auto, pour s’assurer d’un rendu correct.
+= Prévoir feuille minimale, injectée auto, pour s’assurer d’un rendu correct.
 - Ne pas imposer de look particulier.
 - La coloration syntaxique relève toujours d’autres plugins.
 

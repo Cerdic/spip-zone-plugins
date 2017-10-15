@@ -30,18 +30,18 @@ $texte = str_replace('class=\'spip_code\'', '', $texte);
 // $texte = str_replace('spip_code', '', $texte);
 
 // .spip_cadre
-// = ça marche, mais on appliquera plus tard : quand on sera capable de copier auto via JS
-// $texte = str_replace('<form action=\'\'  method=\'get\'><div>
-// <input type=\'hidden\' name=\'exec\' value=\'\' />
-// <textarea readonly=\'readonly\'', '<pre', $texte);
-// $texte = str_replace('class=\'spip_cadre\' dir=\'ltr\'>', 'class=\'spip_cadre\' dir=\'ltr\'><code>', $texte);
-// $texte = str_replace('</textarea></div></form>', '</code></pre>', $texte);
 $texte = str_replace('<form action=\'\'  method=\'get\'><div>
-<input type=\'hidden\' name=\'exec\' value=\'\' />', '', $texte); // supprimé depuis SPIP 3.0
-$texte = str_replace('</textarea></div></form>', '</textarea>', $texte);
+<input type=\'hidden\' name=\'exec\' value=\'\' />
+<textarea readonly=\'readonly\'', '<pre', $texte);
+$texte = str_replace('class=\'spip_cadre\' dir=\'ltr\'>', 'class=\'spip_cadre\' dir=\'ltr\'><code>', $texte);
+// $texte = str_replace('<form action=\'\'  method=\'get\'><div>
+// <input type=\'hidden\' name=\'exec\' value=\'\' />', '', $texte); // supprimé depuis SPIP 3.0
+// $texte = str_replace('</textarea></div></form>', '</textarea>', $texte);
+$texte = str_replace('</textarea></div></form>', '</code></pre>', $texte);
 
 //
-// $texte = str_replace('class=\'spip_cadre\'', '', $texte);
+$texte = str_replace('class="spip_cadre"', 'class=\'code\'', $texte);
+$texte = str_replace('class=\'spip_cadre\'', 'class=\'code\'', $texte); // class=\'code\'
 // $texte = str_replace('spip_cadre', '', $texte);
 
 // Variantes par langage
