@@ -37,7 +37,7 @@ L’intérêt de <cadre> était de présenter du code facile à copier. Cela peu
 http://a11y-style-guide.com/style-guide/section-media.html
 
 x insérer auto un bouton « copier » à chaque bloc <pre><code>
-- et pourquoi pas à chaque bloc <pre> (qu’il contienne du code ou pas) finalement ?
+- et pourquoi pas plutôt à chaque bloc <pre> (qu’il contienne du code ou pas) finalement ?
 x qui a pour action de copier auto le code dans le presse-papier local
 x prévoir feedback confirmant la copie
 x détail luxueux : une seule class .copied à la fois dans la page (pour éviter le feedback multiple, qui ne correspond pas à la réalité de l’action)
@@ -51,7 +51,7 @@ x détail luxueux : une seule class .copied à la fois dans la page (pour évite
 Pour pouvoir le partager dans SPIP, il faut un fichu nom à ce plugin :
 - j’aime bien « code » tout simplement (mais peut-être problématique comme prefix ?)
 - sinon « PreCode » ? « CodePre » ?
-- « Simple C » = dans l’idée d’un raccourci simplet unique <c>… finalement non
+x « Simple C » = dans l’idée d’un raccourci simplet unique <c>… finalement non
 - What’s else ?
 
 

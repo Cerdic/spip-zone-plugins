@@ -7,7 +7,7 @@ samp,
 var,
 tt {}
 
-/* Text preformaté simple */
+/* Texte preformaté simple */
 pre {
   overflow-x: auto;       /* Ajoute un scroll horizontal en cas de dépassement */
   padding: 12px;
@@ -48,7 +48,7 @@ pre code br { display: none !important; } /* patch pour SPIP qui génère des <b
 /* Variantes par langage */
 
 pre               { border-color: rgba(119, 119, 119, .2); border-left-color: #AAA; }
-pre:before        { color: rgba(119, 119, 119, .5); }
+pre::before        { color: rgba(119, 119, 119, .5); }
 pre.spip,
 pre.spip2         { border-color: rgba(117, 80, 123, .2); border-left-color: #75507B; }
 pre.spip::before,
@@ -71,7 +71,8 @@ pre.xml           { border-color: rgba(229, 184, 3, .2); border-left-color: #E5B
 pre.xml::before   { color: rgba(229, 184, 3, .75); }
 pre.md            { border-color: rgba(121, 195, 210, .2); border-left-color: #79C3D2; }
 pre.md::before    { color: rgba(121, 195, 210, .75); }
-/* http://hex2rgba.devoth.com */
+/* pour trouver la couleur rgba transparente correspondant à l'hexa :
+http://hex2rgba.devoth.com */
 
 /* bouton de copie du code */
 .simplec_code {
@@ -104,21 +105,18 @@ pre.md::before    { color: rgba(121, 195, 210, .75); }
 .simplec_code .copy-button.copied { 
   color: #42DC42 !important; transition: color 250ms ease-out;
 }
-.simplec_code .copy-button.copied span:before { 
+.simplec_code .copy-button.copied span::before { 
   content: '\2713\a0'; 
 }
 
-/* debug */
-/*.spip_code { background: orange !important; }
-.spip_cadre { background: red !important; }*/
-
+/* Autres */
 kbd {
   white-space: nowrap;
   padding: .1em .3em;
   background-color: #eee;
   border: 1px solid #aaa;
   border-radius: 4px;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px #ffffff inset;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px #fff inset;
   color: #333;
 }
 samp {
