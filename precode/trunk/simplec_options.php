@@ -62,4 +62,3 @@ $texte = str_replace('<pre', '<pre dir="ltr" style="text-align: left;"', $texte)
 return $texte;
 }
 
-?>
