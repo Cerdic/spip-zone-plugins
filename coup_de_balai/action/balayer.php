@@ -80,7 +80,7 @@ function action_balayer_dist(){
 
 	//Ouf. Passons à l'action !
 	foreach ($tableau_art_a_supprimer as $a){
-		article_instituer($a, array('statut'=>"'poubelle'"), true);
+		article_instituer($a, array('statut'=>"poubelle"), true);
 	}
 
 	$supprimer_rubrique = charger_fonction('supprimer_rubrique', 'action');
