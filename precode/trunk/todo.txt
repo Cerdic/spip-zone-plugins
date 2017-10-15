@@ -28,7 +28,7 @@ exemple de <code>code</code> inline
 <pre><code>Exemple de
 code en bloc</code></code>
 
-- Fournir une page/skel de test/exemplaire ?
+x Fournir une page-skel de test exemplaire
 x Expliquer à quoi sert <pre> -> http://romy.tetue.net/a-quoi-sert-la-balise-pre
 
 
