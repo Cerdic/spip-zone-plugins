@@ -1,53 +1,78 @@
-/* Code pour SPIP */
+/* Pre et Code
+ * pour SPIP
+ */
 
-pre,
-code,
-kbd,
-samp,
-var,
-tt {}
+/* patch pour SPIP qui génère des <br> intempestifs
+à corriger : https://core.spip.net/issues/2504 */
+pre br,
+pre code br { display: none !important; }
 
-/* Texte pré-formaté */
-pre {
-  border: 1px solid;
-  border-style: solid;
-  border-width: 2px 2px 2px 4px;
-  border-radius: 0 4px 4px 0;
-  line-height: initial;   /* Pour préserver la lisibilité en monoscpace */
+/* Positionner de même le nom du langage et le bouton */
+.precode {
+  position: relative;
+}
+pre[class]::before,
+.btn-copy {
+  position: absolute;
+  top: 5px;
+  text-transform: lowercase;
+  font-family: monospace;
+  line-height: 1;
+  font-size: 0.8rem;
 }
 
 /* scroll pour les contenus longs */
 pre,
 pre code {
   overflow-x: auto;       /* Ajoute un scroll horizontal en cas de dépassement */
-  padding: 12px;
-  padding-bottom: 12px;   /* Préserve l'espace suffisant pour la barre de scroll */
+  padding: 15px 10px;
+  padding-bottom: 15px;   /* Préserve l'espace suffisant pour la barre de scroll */
 }
 
-/* Blocs de code */
+/* texte pré-formaté */
+pre {
+  border: 1px solid;
+  border-style: solid;
+  border-width: 2px 2px 2px 4px;
+  border-radius: 0 4px 4px 0;
+  line-height: initial;   /* Préserve la lisibilité en monoscpace */
+}
+
+/* blocs de code */
 pre[class] {
-  position: relative;
-  overflow: hidden;       /* Annuler le scroll qui est déplacé sur code */
+  overflow: hidden;       /* Annule le scroll qui est déplacé sur code */
   padding: 0;
   background: #F8F8F8;
 }
 pre[class]::before {
   content: attr(class);
-  position: absolute;
-  top: 3px;
   right: 6px;
-  line-height: 1;
-  text-transform: lowercase;
-  font-size: .8rem;
 }
 pre code {
   display: block;
   background: transparent;
 }
-pre br,
-pre code br { display: none !important; } /* patch pour SPIP qui génère des <br> intempestifs, cf.: https://core.spip.net/issues/2504 */
 
-/* Variantes par langage */
+/* bouton de copie */
+.btn-copy {
+  display: none;
+  cursor: pointer;
+  color: #999;
+  right: 4em;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+}
+.precode:hover .btn-copy,
+.precode .btn-copy.copied { display: block; }
+.precode .btn-copy:hover { color: #666; transition: color 250ms ease-out; }
+.precode .btn-copy.copied { color: #42DC42 !important; transition: color 250ms ease-out; }
+.precode .btn-copy.copied span::before { content: '\2713\a0'; }
+
+/* Variantes colorées par langage */
 pre               { border-color: rgba(119, 119, 119, .2); border-left-color: #BBB; }
 pre::before       { color: rgba(119, 119, 119, .5); }
 pre.spip,
@@ -72,41 +97,6 @@ pre.xml           { border-color: rgba(246, 120, 0, .2); border-left-color: #F67
 pre.xml::before   { color: rgba(246, 120, 0, .75); }
 /* pour trouver la couleur rgba transparente correspondant à l'hexa :
 http://hex2rgba.devoth.com */
-
-/* bouton de copie du code */
-.precode {
-  position: relative;
-  margin-bottom: 1.5em;
-}
-.copy-button {
-  display: none;
-  position: absolute;
-  top: 5px;
-  right: 4em;
-  margin: 0;
-  padding: 0;
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  outline: 0;
-  text-transform: lowercase;
-  line-height: 1;
-  font-size: .8rem;
-  font-family: monospace;
-  color: #999;
-  cursor: pointer;
-}
-
-.precode:hover .copy-button,
-.precode .copy-button.copied { 
-  display: inline-block;
-}
-.precode .copy-button.copied { 
-  color: #42DC42 !important; transition: color 250ms ease-out;
-}
-.precode .copy-button.copied span::before { 
-  content: '\2713\a0'; 
-}
 
 /* Autres */
 kbd {
