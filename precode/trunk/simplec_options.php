@@ -8,7 +8,7 @@
  *
  */
 
-$GLOBALS['spip_pipeline']['affichage_final'] .= '|simplec';
+//$GLOBALS['spip_pipeline']['affichage_final'] .= '|simplec';
 
 // Corriger code généré pour le code dans SPIP :
 function simplec($texte) {

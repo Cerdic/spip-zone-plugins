@@ -71,6 +71,16 @@ pre.md            { border-color: rgba(121, 195, 210, .2); border-left-color: #7
 pre.md::before    { color: rgba(121, 195, 210, .75); }
 /* http://hex2rgba.devoth.com */
 
+/* bouton de copie du code */
+p.code_button {
+  text-align: right;
+}
+.copy-button {
+}
+.copy-button.copied span:before {
+  content: '\2713\a0';
+}
+
 /* debug */
 /*.spip_code { background: orange !important; }
 .spip_cadre { background: red !important; }*/

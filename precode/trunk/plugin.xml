@@ -3,7 +3,7 @@
 	<prefix>simplec</prefix>
 	<icon>icon/simplec.png</icon>
 
-	<version>1.0.1</version>
+	<version>1.1.0</version>
 	<etat>experimental</etat>
 	<categorie>outil</categorie>
 
@@ -18,6 +18,7 @@
 	<auteur>Librairie clipboard.js par [Zeno Rocha->https://zenorocha.com]</auteur>
 
 	<options>simplec_options.php</options>
+	<fonctions>simplec_fonctions.php</fonctions>
 
 	<pipeline>
 		<nom>insert_head</nom>
@@ -25,6 +26,6 @@
 	</pipeline>
 
 	<utilise id="tinytypo" version="[;]" />
-	<necessite id="SPIP" version="[2.1.0;3.1.99]">
+	<necessite id="SPIP" version="[2.1.0;3.2.99]" />
 	<necessite id="spip_bonux" version="[2.2.19;]"/>
 </plugin>
