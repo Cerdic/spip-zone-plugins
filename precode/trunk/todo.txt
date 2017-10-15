@@ -14,6 +14,8 @@ ce qui peut se faire via JS auj.
 - Nous avons 2 raccourcis pour 3 effets :
 2 effets et 1 seul raccourci suffisent.
 
+dépôt :
+https://bitbucket.org/tetue/simplec/
 
 
 ==== ==== ==== ==== V1
@@ -27,7 +29,7 @@ exemple de <code>code</code> inline
 code en bloc</code></code>
 
 - Fournir une page/skel de test/exemplaire
-- Expliquer à quoi sert <pre> - DOING : http://localhost:8888/romy/spip/?article1198
+= Expliquer à quoi sert <pre> - DOING : http://localhost:8888/romy/spip/?article1198
 
 
 == Copier facilement — JS — TODO
@@ -47,6 +49,7 @@ http://a11y-style-guide.com/style-guide/section-media.html
 Pour partager dans SPIP, il faut un fichu nom à ce plugin :
 - j’aime bien « code » tout simplement (mais peut-être problématique comme prefix ?)
 - « Simple C » = dans l’idée d’un raccourci simplet unique <c>…
+- PreCode ? CodePre ?
 - What’s else ?
 
 
@@ -72,6 +75,7 @@ Rétro-compat : l’ancien raccourci <cadre> est déprécié (à ne plus utilise
 - empêcher SPIP de traiter les balises et raccourcis contenus dans <pre> (comme pour <code>)
 - sinon, a minima, remplacer automatiquement le <pre> saisi par <html><pre> ?
 - pre respecte les espaces, indentations, retours… => ne pas générer de <br> dans <pre><code>
+- voir aussi : https://core.spip.net/issues/3990
 
 
 == Style — CSS — TODO by tetue
