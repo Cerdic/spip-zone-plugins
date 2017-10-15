@@ -2,7 +2,8 @@
 
 include_spip('inc/plugin');
 
-if (!in_array('COLORATION_CODE', array_keys(liste_plugin_actifs()))) {
+// si le plugin coloration_code est activé, c'est lui qui prend la main sur le balisage
+if (!defined('_DIR_PLUGIN_COLORATION_CODE')) {
 
 	// Surcharge des fonctions de inc/texte_mini pour corriger les <code> générés par SPIP :
 	// on utilise toujours <pre class="langage"><code>...</code></pre>
