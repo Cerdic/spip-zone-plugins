@@ -11,6 +11,12 @@ tt {}
 pre {
   overflow-x: auto;       /* Ajoute un scroll horizontal en cas de dépassement */
   padding: 12px;
+  padding-bottom: 12px;   /* Préserve l'espace suffisant pour la barre de scroll */
+  border: 1px solid;
+  border-style: solid;
+  border-color: #dee0c8;
+  border-width: 2px 2px 2px 4px;
+  border-radius: 0 4px 4px 0;
 }
 
 /* Blocs de code */
@@ -23,10 +29,6 @@ pre {
   padding: 0;
   background: #F8F8F8;
   line-height: 1.5;
-  border-style: solid;
-  border-color: #dee0c8;
-  border-width: 2px 2px 2px 4px;
-  border-radius: 0 4px 4px 0;
 }
 .simplec_code pre[class]::before {
   content: attr(class);
@@ -40,6 +42,7 @@ pre {
 .simplec_code pre code {
   display: block;
   background: transparent;
+  padding-left: 6px;
   padding: 12px;
   overflow: auto;
 }
