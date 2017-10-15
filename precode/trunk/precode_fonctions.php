@@ -10,18 +10,18 @@ if (!defined('_DIR_PLUGIN_COLORATION_CODE')) {
 	// pour les raccourcis SPIP <code class="langage"> et <cadre class="langage">
 
 	function traiter_echap_code($regs) {
-		return simplec_traiter_echap_code($regs);
+		return precode_traiter_echap_code($regs);
 	}
 
 	function traiter_echap_cadre($regs) {
-		return simplec_traiter_echap_cadre($regs);
+		return precode_traiter_echap_cadre($regs);
 	}
 
 }
 
 // Echapper les <code>...</ code>
 // http://code.spip.net/@traiter_echap_code_dist
-function simplec_traiter_echap_code($regs) {
+function precode_traiter_echap_code($regs) {
 	$attributs = $regs[2];
 	$corps     = $regs[3];
 
@@ -32,7 +32,7 @@ function simplec_traiter_echap_code($regs) {
 		// supprimer les sauts de ligne debut/fin
 		// (mais pas les espaces => ascii art).
 		$code = preg_replace("/^[\n\r]+|[\n\r]+$/s", "", $code);
-		$code = simplec_balisage_code($attributs, $code);
+		$code = precode_balisage_code($attributs, $code);
 	} else {
 		$code = "<code$attributs>" . $code . "</code>";
 	}
@@ -45,15 +45,15 @@ function simplec_traiter_echap_code($regs) {
 
 // Echapper les <cadre>...</ cadre> aka <frame>...</ frame>
 // http://code.spip.net/@traiter_echap_cadre_dist
-function simplec_traiter_echap_cadre($regs) {
+function precode_traiter_echap_cadre($regs) {
 	$attributs = $regs[2];
 	$code      = trim(entites_html($regs[3]));
 
-	return simplec_balisage_code($attributs, $code);
+	return precode_balisage_code($attributs, $code);
 }
 
-function simplec_balisage_code($attributs, $code) {
-	return "<div class='simplec_code'>"
+function precode_balisage_code($attributs, $code) {
+	return "<div class='precode'>"
 		. "<pre dir='ltr' style='text-align: left;'$attributs><code>"
 		. $code
 		. "</code></pre>"

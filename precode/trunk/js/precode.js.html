@@ -1,15 +1,15 @@
 
 $(function() {
-	simplecCopyCode.init();
+	precodeCopyCode.init();
 });
 
-var simplecCopyCode = (function() {
+var precodeCopyCode = (function() {
 	var that = {};
 
 	that.init = function() {
 		// ajouter un bouton pour copier le code
 		$('pre:has(code)')
-			.after('<button type="button" class="copy-button" aria-label="<:simplec:bouton_copier_aria_label:>"><span><:simplec:bouton_copier_label:></span></button>');
+			.after('<button type="button" class="copy-button" aria-label="<:precode:bouton_copier_aria_label:>"><span><:precode:bouton_copier_label:></span></button>');
 
 		var clip = new Clipboard('.copy-button', {
 			target: function(trigger) {

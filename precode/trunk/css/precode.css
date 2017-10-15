@@ -74,7 +74,7 @@ pre.xml::before   { color: rgba(246, 120, 0, .75); }
 http://hex2rgba.devoth.com */
 
 /* bouton de copie du code */
-.simplec_code {
+.precode {
   position: relative;
   margin-bottom: 1.5em;
 }
@@ -97,14 +97,14 @@ http://hex2rgba.devoth.com */
   cursor: pointer;
 }
 
-.simplec_code:hover .copy-button,
-.simplec_code .copy-button.copied { 
+.precode:hover .copy-button,
+.precode .copy-button.copied { 
   display: inline-block;
 }
-.simplec_code .copy-button.copied { 
+.precode .copy-button.copied { 
   color: #42DC42 !important; transition: color 250ms ease-out;
 }
-.simplec_code .copy-button.copied span::before { 
+.precode .copy-button.copied span::before { 
   content: '\2713\a0'; 
 }
 

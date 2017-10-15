@@ -49,9 +49,10 @@ x détail luxueux : une seule class .copied à la fois dans la page (pour évite
 
 == Partager
 Pour pouvoir le partager dans SPIP, il faut un fichu nom à ce plugin :
-- j’aime bien « code » tout simplement (mais peut-être problématique comme prefix ?)
-- sinon « PreCode » ? « CodePre » ?
-x « Simple C » = dans l’idée d’un raccourci simplet unique <c>… finalement non
+x « Simple C » = dans l’idée d’un raccourci simple et unique <c>… finalement non
+x j’aime bien « code » tout simplement (mais peut-être problématique comme prefix ?) = mauvaise idée (conflits)
+- sinon « PreCode » ? « CodePre » ?
+- ou « SPIP Code » comme ce que ce plugin vient remplacer ?
 - What’s else ?
 
 
@@ -77,7 +78,7 @@ Rétro-compat : l’ancien raccourci <cadre> est déprécié (à ne plus utilise
 <pre> n’est pas un raccourci SPIP, mais devrait pouvoir être utilisé sans dommage :
 - empêcher SPIP de traiter les balises et raccourcis contenus dans <pre> (comme pour <code>)
 - sinon, a minima, remplacer automatiquement le <pre> saisi par <html><pre> ?
-- pre respecte les espaces, indentations, retours… => ne pas générer de <br> dans <pre><code>
+- pre respecte nativement les espaces, indentations, retours… => ne pas générer de <br> ni de <p> dans <pre> (ni dans <pre><code>)
 - voir : https://core.spip.net/issues/3990
 
 
