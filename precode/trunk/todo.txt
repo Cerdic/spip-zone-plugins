@@ -70,7 +70,7 @@ Rétro-compat : l’ancien raccourci <cadre> est déprécié (à ne plus utilise
 
 <pre> n’est pas un raccourci SPIP, mais devrait pouvoir être utilisé sans dommage :
 - empêcher SPIP de traiter les balises et raccourcis contenus dans <pre> (comme pour <code>)
-- sinon, a minima, remplacer automatiquement le <pre> saisi par <html><pre>
+- sinon, a minima, remplacer automatiquement le <pre> saisi par <html><pre> ?
 - pre respecte les espaces, indentations, retours… => ne pas générer de <br> dans <pre><code>
 
 
@@ -90,7 +90,8 @@ Ce serait super pour les lecteurices, s’ils savaient à quel type de code ils 
 - Un raccourci abrégé, plus rapide à écrire : <c> ?
 - Pouvoir déclarer facilement la nature du code, par exemple : <c|html>, <c|spip>, <c|css>, <c|js>, <c|php>, etc.
 - Qui générerait respectivement <pre class="html" (ou <pre data-lang="HTML"><code> ; vérifier la pertinence de l’attribut data-lang), etc.
-- Afficher consécutivement « code html » en :before juste avant le bloc correspondant (sinon rien)
+x Afficher consécutivement « code html » en :before juste avant le bloc correspondant (sinon rien)
+x Avec le joli style qui va bien
 
 Proposer panneau de conf styles ?
 ( ) wrap, no-wrap

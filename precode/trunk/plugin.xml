@@ -3,7 +3,7 @@
 	<prefix>simplec</prefix>
 	<icon>icon/simplec.png</icon>
 
-	<version>0.0.1</version>
+	<version>0.1.1</version>
 	<etat>experimental</etat>
 	<categorie>outil</categorie>
 
@@ -16,6 +16,11 @@
 	<auteur>&copy; 2017 [tetue->http://spip.tetue.net]</auteur>
 
 	<options>simplec_options.php</options>
+
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>simplec_pipelines.php</inclure>
+	</pipeline>
 
 	<utilise id="tinytypo" version="[;]" />
 	<necessite id="SPIP" version="[2.1.0;3.1.99]">

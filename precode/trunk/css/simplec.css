@@ -1,0 +1,90 @@
+/* Code pour SPIP */
+
+pre,
+code,
+kbd,
+samp,
+var,
+tt {}
+
+/* Text preformaté simple */
+pre {
+  white-space: pre;       /* important => à corriger dans Tiny Typo ! */
+  line-height: initial;   /* Pour préserver lisibilité */
+  overflow-x: auto;       /* Ajoute un scroll horizontal en cas de dépassement */
+  padding-bottom: 12px;   /* Préserve l'espace suffisant pour la barre de scroll */
+}
+
+/* Blocs de code */
+pre[class] {
+  overflow: hidden;
+  position: relative;
+  padding: 0;
+  background: #F8F8F8;
+  border-style: solid;
+  border-color: #dee0c8;
+  border-width: 2px 2px 2px 4px;
+  border-radius: 0 4px 4px 0;
+  line-height: 1.5;
+}
+pre[class]::before {
+  content: attr(class);
+  position: absolute;
+  top: 3px;
+  right: 6px;
+  line-height: 1;
+  text-transform: lowercase;
+  font-size: .8rem;
+}
+pre[class] code {
+  display: block;
+  background: transparent;
+  padding-left: 6px;
+  padding: 12px;
+  overflow: auto;
+}
+pre code br { display: none !important; } /* patch pour SPIP qui génère des <br> intempestifs, cf.: https://core.spip.net/issues/2504 */
+
+/* Variantes par langage */
+
+pre[class]        { border-color: rgba(119, 119, 119, .2); border-left-color: #AAA; }
+pre[class]::before{ color: rgba(119, 119, 119, .5); }
+pre.spip          { border-color: rgba(117, 80, 123, .2); border-left-color: #75507B; }
+pre.spip::before  { color: rgba(117, 80, 123, .75); }
+pre.html          { border-color: rgba(236, 102, 43, .2); border-left-color: #EC662B; }
+pre.html::before  { color: rgba(236, 102, 43, .75); }
+pre.css           { border-color: rgba(133, 202, 21, .2); border-left-color: #85CA15; }
+pre.css::before   { color: rgba(133, 202, 21, .75); }
+pre.less          { border-color: rgba(29, 54, 93, .2); border-left-color: #1d365d; }
+pre.less::before  { color: rgba(29, 54, 93, .75); }
+pre.js            { border-color: rgba(228, 162, 39, .2); border-left-color: #E4A227; }
+pre.js::before    { color: rgba(228, 162, 39, .75); }
+pre.php           { border-color: rgba(98, 129, 184, .2); border-left-color: #6281B8; }
+pre.php::before   { color: rgba(98, 129, 184, .75); }
+pre.xml           { border-color: rgba(229, 184, 3, .2); border-left-color: #E5B803; }
+pre.xml::before   { color: rgba(229, 184, 3, .75); }
+pre.md            { border-color: rgba(121, 195, 210, .2); border-left-color: #79C3D2; }
+pre.md::before    { color: rgba(121, 195, 210, .75); }
+/* http://hex2rgba.devoth.com */
+
+/* debug */
+/*.spip_code { background: orange !important; }
+.spip_cadre { background: red !important; }*/
+
+kbd {
+  white-space: nowrap;
+  padding: .1em .3em;
+  background-color: #eee;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px #ffffff inset;
+  color: #333;
+}
+samp {
+  font-weight: bold;
+}
+var {
+  font-style: italic;
+}
+
+/* end */
