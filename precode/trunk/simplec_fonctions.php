@@ -1,53 +1,75 @@
 <?php
 
-// Surcharge des fonctions de inc/texte_mini pour corriger les <code> générés par SPIP :
-// on utilise toujours <pre class="langage"><code>...</code></pre>
-// pour les raccourcis SPIP <code class="langage"> et <cadre class="langage">
+include_spip('inc/plugin');
+
+if (!in_array('COLORATION_CODE', array_keys(liste_plugin_actifs()))) {
+
+	// Surcharge des fonctions de inc/texte_mini pour corriger les <code> générés par SPIP :
+	// on utilise toujours <pre class="langage"><code>...</code></pre>
+	// pour les raccourcis SPIP <code class="langage"> et <cadre class="langage">
+
+	function traiter_echap_code($regs) {
+		return simplec_traiter_echap_code($regs);
+	}
+
+	function traiter_echap_cadre($regs) {
+		return simplec_traiter_echap_cadre($regs);
+	}
+
+}
 
 // Echapper les <code>...</ code>
 // http://code.spip.net/@traiter_echap_code_dist
-function traiter_echap_code($regs) {
-	$att = $regs[2];
-	$corps = $regs[3];
+function simplec_traiter_echap_code($regs) {
+	$attributs = $regs[2];
+	$corps     = $regs[3];
 
-	$echap = spip_htmlspecialchars($corps); // il ne faut pas passer dans entites_html, ne pas transformer les &#xxx; du code !
+	$code = spip_htmlspecialchars($corps); // il ne faut pas passer dans entites_html, ne pas transformer les &#xxx; du code !
 
 	// ne pas mettre le <div...> s'il n'y a qu'une ligne
-	if (is_int(strpos($echap, "\n"))) {
+	if (is_int(strpos($code, "\n"))) {
 		// supprimer les sauts de ligne debut/fin
 		// (mais pas les espaces => ascii art).
-		$echap = preg_replace("/^[\n\r]+|[\n\r]+$/s", "", $echap);
-		$echap = "<pre dir='ltr' style='text-align: left;'$att><code>" . $echap . "</code></pre>";
+		$code = preg_replace("/^[\n\r]+|[\n\r]+$/s", "", $code);
+		$code = simplec_balisage_code($attributs, $code);
 	} else {
-		$echap = "<code$att>" . $echap . "</code>";
+		$code = "<code$attributs>" . $code . "</code>";
 	}
 
-	$echap = str_replace("\t", "&nbsp; &nbsp; &nbsp; &nbsp; ", $echap);
-	$echap = str_replace("  ", " &nbsp;", $echap);
+	$code = str_replace("\t", "&nbsp; &nbsp; &nbsp; &nbsp; ", $code);
+	$code = str_replace("  ", " &nbsp;", $code);
 
-	return $echap;
+	return $code;
 }
 
 // Echapper les <cadre>...</ cadre> aka <frame>...</ frame>
 // http://code.spip.net/@traiter_echap_cadre_dist
-function traiter_echap_cadre($regs) {
-	$att = $regs[2];
-	$echap = trim(entites_html($regs[3]));
-	$echap = "<pre dir='ltr' style='text-align: left;' $att><code>" . $echap . "</code></pre>";
+function simplec_traiter_echap_cadre($regs) {
+	$attributs = $regs[2];
+	$code      = trim(entites_html($regs[3]));
 
-	return $echap;
+	return simplec_balisage_code($attributs, $code);
+}
+
+function simplec_balisage_code($attributs, $code) {
+	return "<div class='simplec_code'>"
+		. "<pre dir='ltr' style='text-align: left;'$attributs><code>"
+		. $code
+		. "</code></pre>"
+		. "</div>";
 }
 
 // définir spip_htmlspecialchars() pour SPIP 2
 
-if(!function_exists('spip_htmlspecialchars')) {
+if (!function_exists('spip_htmlspecialchars')) {
 	/**
 	 * htmlspecialchars wrapper (PHP >= 5.4 compat issue)
 	 *
 	 * @param string $string
-	 * @param int $flags
+	 * @param int    $flags
 	 * @param string $encoding
-	 * @param bool $double_encode
+	 * @param bool   $double_encode
+	 *
 	 * @return string
 	 */
 	function spip_htmlspecialchars($string, $flags = null, $encoding = 'ISO-8859-1', $double_encode = true) {

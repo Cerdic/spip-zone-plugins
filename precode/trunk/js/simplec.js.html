@@ -9,11 +9,11 @@ var simplecCopyCode = (function() {
 	that.init = function() {
 		// ajouter un bouton pour copier le code
 		$('pre:has(code)')
-			.after('<p class="code_button"><button type="button" class="copy-button" aria-label="<:simplec:bouton_copier_aria_label:>"><span><:simplec:bouton_copier_label:></span></button></p>');
+			.after('<button type="button" class="copy-button" aria-label="<:simplec:bouton_copier_aria_label:>"><span><:simplec:bouton_copier_label:></span></button>');
 
 		var clip = new Clipboard('.copy-button', {
 			target: function(trigger) {
-				var text = trigger.parentNode.previousSibling.children[0];
+				var text = trigger.previousSibling.children[0];
 				return text;
 			}
 		});

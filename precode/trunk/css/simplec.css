@@ -20,14 +20,17 @@ pre {
 }
 
 /* Blocs de code */
-pre[class] {
+.simplec_code {
+  margin-bottom: 1.5em;
+}
+.simplec_code pre {
   overflow: hidden;
   position: relative;
   padding: 0;
   background: #F8F8F8;
   line-height: 1.5;
 }
-pre[class]::before {
+.simplec_code pre[class]::before {
   content: attr(class);
   position: absolute;
   top: 3px;
@@ -36,49 +39,76 @@ pre[class]::before {
   text-transform: lowercase;
   font-size: .8rem;
 }
-pre[class] code {
+.simplec_code pre code {
   display: block;
   background: transparent;
   padding-left: 6px;
   padding: 12px;
   overflow: auto;
 }
-pre code br { display: none !important; } /* patch pour SPIP qui génère des <br> intempestifs, cf.: https://core.spip.net/issues/2504 */
+.simplec_code pre code br { display: none !important; } /* patch pour SPIP qui génère des <br> intempestifs, cf.: https://core.spip.net/issues/2504 */
 
 /* Variantes par langage */
 
-pre[class]        { border-color: rgba(119, 119, 119, .2); border-left-color: #AAA; }
-pre[class]::before{ color: rgba(119, 119, 119, .5); }
-pre.spip          { border-color: rgba(117, 80, 123, .2); border-left-color: #75507B; }
-pre.spip::before  { color: rgba(117, 80, 123, .75); }
-pre.html          { border-color: rgba(236, 102, 43, .2); border-left-color: #EC662B; }
-pre.html::before  { color: rgba(236, 102, 43, .75); }
-pre.css           { border-color: rgba(133, 202, 21, .2); border-left-color: #85CA15; }
-pre.css::before   { color: rgba(133, 202, 21, .75); }
-pre.less          { border-color: rgba(29, 54, 93, .2); border-left-color: #1d365d; }
-pre.less::before  { color: rgba(29, 54, 93, .75); }
-pre.sass,
-pre.scss          { border-color: rgba(207, 100, 154, .2); border-left-color: #CF649A; }
-pre.sass::before,
-pre.scss::before  { color: rgba(207, 100, 154, .75); }
-pre.js            { border-color: rgba(228, 162, 39, .2); border-left-color: #E4A227; }
-pre.js::before    { color: rgba(228, 162, 39, .75); }
-pre.php           { border-color: rgba(98, 129, 184, .2); border-left-color: #6281B8; }
-pre.php::before   { color: rgba(98, 129, 184, .75); }
-pre.xml           { border-color: rgba(229, 184, 3, .2); border-left-color: #E5B803; }
-pre.xml::before   { color: rgba(229, 184, 3, .75); }
-pre.md            { border-color: rgba(121, 195, 210, .2); border-left-color: #79C3D2; }
-pre.md::before    { color: rgba(121, 195, 210, .75); }
+.simplec_code pre               { border-color: rgba(119, 119, 119, .2); border-left-color: #AAA; }
+.simplec_code pre:before        { color: rgba(119, 119, 119, .5); }
+.simplec_code pre.spip,
+.simplec_code pre.spip2         { border-color: rgba(117, 80, 123, .2); border-left-color: #75507B; }
+.simplec_code pre.spip::before,
+.simplec_code pre.spip2::before { color: rgba(117, 80, 123, .75); }
+.simplec_code pre.html          { border-color: rgba(236, 102, 43, .2); border-left-color: #EC662B; }
+.simplec_code pre.html::before  { color: rgba(236, 102, 43, .75); }
+.simplec_code pre.css           { border-color: rgba(133, 202, 21, .2); border-left-color: #85CA15; }
+.simplec_code pre.css::before   { color: rgba(133, 202, 21, .75); }
+.simplec_code pre.less          { border-color: rgba(29, 54, 93, .2); border-left-color: #1d365d; }
+.simplec_code pre.less::before  { color: rgba(29, 54, 93, .75); }
+.simplec_code pre.sass,
+.simplec_code pre.scss          { border-color: rgba(207, 100, 154, .2); border-left-color: #CF649A; }
+.simplec_code pre.sass::before,
+.simplec_code pre.scss::before  { color: rgba(207, 100, 154, .75); }
+.simplec_code pre.js            { border-color: rgba(228, 162, 39, .2); border-left-color: #E4A227; }
+.simplec_code pre.js::before    { color: rgba(228, 162, 39, .75); }
+.simplec_code pre.php           { border-color: rgba(98, 129, 184, .2); border-left-color: #6281B8; }
+.simplec_code pre.php::before   { color: rgba(98, 129, 184, .75); }
+.simplec_code pre.xml           { border-color: rgba(229, 184, 3, .2); border-left-color: #E5B803; }
+.simplec_code pre.xml::before   { color: rgba(229, 184, 3, .75); }
+.simplec_code pre.md            { border-color: rgba(121, 195, 210, .2); border-left-color: #79C3D2; }
+.simplec_code pre.md::before    { color: rgba(121, 195, 210, .75); }
 /* http://hex2rgba.devoth.com */
 
 /* bouton de copie du code */
-p.code_button {
-  text-align: right;
+.simplec_code {
+  position: relative;
 }
-.copy-button {
+.simplec_code .copy-button {
+  display: none;
+  position: absolute;
+  top: 5px;
+  right: 4em;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  text-transform: lowercase;
+  line-height: 1;
+  font-size: .8rem;
+  font-family: monospace;
+  color: #909f77;
+  cursor: pointer;
 }
-.copy-button.copied span:before {
-  content: '\2713\a0';
+
+.simplec_code:hover .copy-button,
+.simplec_code .copy-button.copied { 
+  display: inline-block;
+}
+.simplec_code .copy-button:hover,
+.simplec_code .copy-button.copied { 
+  color: #42DC42 !important; transition: color 250ms ease-out;
+}
+.simplec_code .copy-button.copied span:before { 
+  content: '\2713\a0'; 
 }
 
 /* debug */
