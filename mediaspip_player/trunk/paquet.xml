@@ -1,9 +1,9 @@
 <paquet
 	prefix="mediaspip_player"
 	categorie="multimedia"
-	version="1.6.4"
+	version="1.6.5"
 	etat="stable"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="images/html5_player_logo.png"
 	schema="0.1"
 	documentation="http://player.mediaspip.net/documentation/"
