@@ -1,0 +1,19 @@
+<div class="formulaire_spip formulaire_#FORM">
+
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+
+	<form action="#ENV{action}" method="post"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		#SET{name,statut_balai}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<div class="editer-groupe">
+			<div class="editer editer_statut_balai obligatoire">
+				<select  class="select statut" name="#GET{name}" id="formulaire_#FORM-#ENV{_objet}-#ENV{_id_objet}-#GET{name}">
+					<option value = "protege" [selected(#ENV{statut_balai}|=={protege}|oui)] ><:balai:texte_protege:></option>
+					<option value = "non_protege" [selected(#ENV{statut_balai}|=={non_protege}|oui)]><:balai:texte_non_protege:></option>
+				</select>
+			</div>
+		</div>
+		<p class="boutons"><input type="submit" class="submit" value="changer" /></p>
+	</div></form>
+</div>

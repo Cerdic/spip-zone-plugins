@@ -1,0 +1,125 @@
+
+<!--#navigation-->
+#BOITE_OUVRIR{'INFO', 'info'}
+  <div class="protege"><:balai:texte_items_proteges:></div>
+  <div class="hierarchie_protege"><:balai:texte_items_proteges_par_heritage:></div>
+  <div class="non_protege"><:balai:texte_items_non_proteges:></div>
+  <div class="heritier_protege"><:balai:texte_rubrique_heritier_protege:></div>
+  <div><span class= "expose">&hearts; </span><:balai:texte_pointeur:></div>
+  <p>
+  <div><button id="developper">Tout développer</button></div>
+  <br>
+  <div><button id="fermer">Tout fermer</button></div>
+  </p>
+#BOITE_FERMER
+<!--/#navigation-->
+
+<h1 class="grostitre">Coup de balai</h1>
+
+<ul id="plan_balai">
+<B_rubriques>
+<BOUCLE_rubriques(RUBRIQUES){id_parent}{tout}{par titre}>
+
+    <B_balai>
+        <li class= "protege" id="rubrique_#ID_RUBRIQUE">
+          <span class="reducteur">▶</span>
+          [(#ID_RUBRIC|=={#ID_RUBRIQUE}|oui)<span class= "expose">&hearts;</span>]
+          <a class= "protege" href="#URL_ECRIRE{rubrique, id_rubrique=#ID_RUBRIQUE}">#TITRE </a>
+
+    <BOUCLE_balai(BALAI){objet=rubrique}{id_rubrique}>
+    </BOUCLE_balai>
+    </B_balai>
+        <li class= "non_protege" id="rubrique_#ID_RUBRIQUE">
+          <span class="reducteur">▶</span>
+          [(#ID_RUBRIC|=={#ID_RUBRIQUE}|oui)<span class= "expose">&hearts; </span>]
+          <a class= "non_protege" href="#URL_ECRIRE{rubrique, id_rubrique=#ID_RUBRIQUE}">#TITRE </a>
+
+    <//B_balai>
+
+          <ul>
+            <li>
+              <BOUCLE_rec_rubriques(BOUCLE_rubriques)/>
+            </li>
+        <B_articles>
+
+        <BOUCLE_articles(ARTICLES){id_rubrique}{!statut==poubelle}>
+
+            <B_balai_art>
+                <li class= "protege" id="article_#ID_ARTICLE">
+                    <span class='statut'>[(#STATUT|puce_statut{article,#ID_ARTICLE})]</span>
+                    #EXPOSE{<span class= "expose">&hearts; </span>}
+                    <a class= "protege" href="#URL_ECRIRE{article, id_article=#ID_ARTICLE}">#TITRE</a>
+            <BOUCLE_balai_art(BALAI){objet=article}{id_article}>
+            </BOUCLE_balai_art>
+            </B_balai_art>
+                <li class= "non_protege"  id="article_#ID_ARTICLE">
+                    <span class='statut'>[(#STATUT|puce_statut{article,#ID_ARTICLE})]</span>
+                    #EXPOSE{<span class= "expose">&hearts;</span>}
+                    <a class= "non_protege" href="#URL_ECRIRE{article, id_article=#ID_ARTICLE}">#TITRE </a>
+            <//B_balai_art>
+                </li>
+        </BOUCLE_articles>
+        </B_articles>
+          </ul>
+    </li>
+</BOUCLE_rubriques>
+</B_rubriques>
+</ul>
+
+<script>
+$(document).ready(function() {
+  $('.reducteur ~ ul').css({'display':'none'});
+
+  $('.reducteur').click(function(){
+    $(this).toggleClass('ouvert');
+    $(this).siblings('ul').slideToggle();
+    $(this).text( (($(this).hasClass('ouvert'))? '▼':'▶') );
+  });
+
+  [(#REM)---------------------
+      Bouton "Tout développer"
+    ------------------------]
+
+  $('#developper').click(function(){
+    $(".reducteur").addClass('ouvert');
+    $(".reducteur").siblings('ul').show();
+    $(".reducteur").text('▼');
+  });
+
+  [(#REM)---------------------
+      Bouton "Tout fermer"
+    ------------------------]
+  $('#fermer').click(function(){
+    $(".reducteur").removeClass('ouvert');
+    $(".reducteur").siblings('ul').hide();
+    $(".reducteur").text('▶');
+  });
+
+  [(#REM)-----------------------------------
+      Affecter la classe "heritier_protege" là où il faut
+  -----------------------------------------]
+  $('.plan_balai li').each(function(){
+    var heritier_protege = $(this).find('li.protege');
+    if (heritier_protege.length >0){
+      $(this).addClass('heritier_protege');
+      $(this).children('a').addClass('heritier_protege');
+    };
+  });
+
+    [(#REM)-----------------------------
+    Si un id_article ou un id_rubric est fourni en argument, on développe
+    sa hierarchie :
+    -----------------------------------]
+    [(#ID_ARTICLE|oui)
+      $('#article_#ID_ARTICLE').parentsUntil('#plan_balai', 'li').children('.reducteur').addClass('ouvert');
+      $('#article_#ID_ARTICLE').parentsUntil('#plan_balai', 'ul').show();
+      $('#article_#ID_ARTICLE').parentsUntil('#plan_balai', 'li').children('.reducteur').text('▼');
+    ]
+
+    [(#ID_RUBRIC|oui)
+      $('#rubrique_#ID_RUBRIC').parentsUntil('#plan_balai', 'li').children('.reducteur').addClass('ouvert');
+      $('#rubrique_#ID_RUBRIC').parentsUntil('#plan_balai', 'ul').show();
+      $('#rubrique_#ID_RUBRIC').parentsUntil('#plan_balai', 'li').children('.reducteur').text('▼');
+    ]
+});
+</script>

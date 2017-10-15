@@ -1,0 +1,116 @@
+[(#REM)---------------------------------
+Ce squelette est appelé via le pipeline affiche_gauche
+---------------------------------------]
+
+[(#REM)---------------------------------
+La première boucle BALAI déterminera le statut de l'objet et le placera dans la variable statut_balai
+----------------------------------------]
+#SET{statut_balai, non_protege}
+#SET{qui, ''}
+#SET{quand, ''}
+
+[(#REM)---------------------------------
+Cette boucle RUBRIQUES n'est exécutée que s'il y a un id_rubrique dans l'environnement
+----------------------------------------]
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}{tout}>
+    <BOUCLE_balai_rub(BALAI){id_rubrique}{tout}>
+        #SET{statut_balai, 'protege'}
+        #SET{quand, #DATE|affdate}
+        <BOUCLE_auteur_rub(AUTEURS){id_auteur}{tout}>
+          #SET{qui, #NOM}
+        </BOUCLE_auteur_rub>
+    </BOUCLE_balai_rub>
+
+    [(#REM)-----------------------------------------
+    Recherche d'une rubrique parente, enfant, ou d'un article protégé
+    ------------------------------------------------]
+    #SET{hierarchie_protege, ''}
+    <BOUCLE_hierarchie(HIERARCHIE){id_rubrique}>
+        <BOUCLE_balai_hierarchie(BALAI){id_rubrique}>
+            #SET{hierarchie_protege, ' '}
+        </BOUCLE_balai_hierarchie>
+    </BOUCLE_hierarchie>
+
+    #SET{sous_rub_protegee, ''}
+    <BOUCLE_sous_rub_protegees(RUBRIQUES){id_parent}{tout}>
+        <BOUCLE_rec_sous_rub_protegees(BOUCLE_sous_rub_protegees)/>
+        <BOUCLE_balai_sous_rub(BALAI){id_rubrique}>
+            #SET{sous_rub_protegee, ' '}
+        </BOUCLE_balai_sous_rub>
+    </BOUCLE_sous_rub_protegees>
+
+    #SET{art_protege, ''}
+    <BOUCLE_articles_proteges(ARTICLES){branche}{!statut=poubelle}>
+        <BOUCLE_balai_art(BALAI){id_article}>
+            #SET{art_protege, ' '}
+        </BOUCLE_balai_art>
+    </BOUCLE_articles_proteges>
+
+    [(#REM)---------------------------------------
+    Formulaire de changement de statut
+    -----------------------------------------------]
+    [(#AUTORISER{modifier, rubrique, #ID_RUBRIQUE})
+      #FORMULAIRE_INFO_BALAI{#GET{statut_balai}, rubrique, #ID_RUBRIQUE, #SESSION{id_auteur}}
+    ]
+
+    [(#REM)---------------------------------------
+    Etat de la rubrique
+    -----------------------------------------------]
+    <ul>
+        [(#GET{statut_balai}|=={protege}|oui|?{
+                <li class="protege"><:balai:texte_rubrique_protegee_par:> [(#GET{qui})] ([(#GET{quand})])</li>,
+                [(#GET{hierarchie_protege}|oui|?{
+                    <li class="hierarchie_protege"><:balai:texte_rubrique_protegee:></li>,
+                    [(#GET{sous_rub_protegee}|ou{#GET{art_protege}}|oui|?{
+                        <li class="heritier_protege"><:balai:texte_rubrique_non_protegee:></li>,
+                        <li class="non_protege"><:balai:texte_rubrique_non_protegee:></li>
+                    })]
+                })]
+            })]
+            [<li><:balai:texte_sous_rub_protegee:></li>(#GET{sous_rub_protegee})]
+            [<li><:balai:texte_comporte_art_protege:></li>(#GET{art_protege})]
+    </ul>
+    <p><a href="#URL_ECRIRE{plan_balai, id_rubric=#ID_RUBRIQUE}">Détail</a></p>
+</BOUCLE_rubrique>
+
+
+[(#REM)------------------------------
+Cette boucle n'est exécutée que s'il y a un id_article dans l'environnement
+-------------------------------------]
+
+<BOUCLE_article(ARTICLES){id_article}{!statut=poubelle}>
+    <BOUCLE_balai_article(BALAI){id_article}{tout}>
+        #SET{statut_balai, 'protege'}
+        #SET{quand, #DATE|affdate}
+        <BOUCLE_auteur_art(AUTEURS){id_auteur}{tout}>
+          #SET{qui, #NOM}
+        </BOUCLE_auteur_art>
+    </BOUCLE_balai_article>
+
+
+    [(#REM)----------------------------------------
+    Recherche d'une rubrique parente protégée
+    ----------------------------------------------]
+
+    #SET{hierarchie_protege, ''}
+
+    <BOUCLE_hierarchie_art(HIERARCHIE){id_article}>
+        <BOUCLE_balai_hierarchie_art(BALAI){id_rubrique}>
+            #SET{hierarchie_protege, ' '}
+        </BOUCLE_balai_hierarchie_art>
+    </BOUCLE_hierarchie_art>
+
+    [(#AUTORISER{modifier, article, #ID_ARTICLE})#FORMULAIRE_INFO_BALAI{#GET{statut_balai}, article, #ID_ARTICLE, #SESSION{id_auteur}}]
+
+    <ul>
+        [(#GET{statut_balai}|=={protege}|oui|?{
+                <li class="protege"><:balai:texte_article_protege_par:>[(#GET{qui})] ([(#GET{quand})])</li>,
+                [(#GET{hierarchie_protege}|?{
+                    <li class="hierarchie_protege"><:balai:texte_article_hierarchie_protegee:></li>,
+                    <li class="non_protege"><:balai:texte_article_non_protege:></li>
+                })]
+            })]
+    </ul>
+
+        <p><a href="#URL_ECRIRE{plan_balai, id_article=#ID_ARTICLE}"><:balai:texte_detail:></a></p>
+</BOUCLE_article>

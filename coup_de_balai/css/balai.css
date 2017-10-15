@@ -1,0 +1,40 @@
+.non_protege {
+  color: red;
+}
+
+.heritier_protege {
+  color: orange;
+}
+
+.hierarchie_protege {
+    color: blue;
+}
+
+.protege {
+    color: green;
+}
+
+.protege li.non_protege, .protege a.non_protege {
+  color: blue;
+}
+
+.protege .non_protege {
+  color: blue;
+}
+
+.reducteur:hover {
+  cursor: pointer;}
+
+.reducteur ~ div {
+  display:none; }
+
+.reducteur.ouvert ~ div {
+  display:block; }
+
+.plan_balai li {
+    margin-left: 25px;
+}
+
+.expose {
+  color: black;
+}

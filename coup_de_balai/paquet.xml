@@ -1,0 +1,26 @@
+<paquet
+	prefix="balai"
+	categorie="maintenance"
+	version="0.2.1"
+	etat="test"
+	logo="prive/themes/spip/images/balai-64.png"
+	compatibilite="[3.0.0;3.2.*]"
+	schema="0.2.0"
+>
+	<nom>Coup de balai</nom>
+
+	<auteur>Romain Krust</auteur>
+	<credit>Oliver Scholtz (and others) pour les icônes</credit>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/balai.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/balai.php" />
+	<pipeline nom="affiche_gauche" inclure="balai_pipelines.php" />
+	<pipeline nom="header_prive" inclure="balai_pipelines.php" />
+	<pipeline nom="autoriser" inclure="balai_autorisations.php" />
+	<menu nom= "balai"	titre="balai:icone_plan" action= "plan_balai" parent= "menu_edition"
+		icone="images/balai-16.png"/>
+	<menu nom= "balayer"	titre="balai:icone_balayer" action= "balayer" parent= "menu_administration"
+		icone="images/balai-16.png"/>
+</paquet>
