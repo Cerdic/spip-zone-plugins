@@ -3,7 +3,7 @@
 	<prefix>simplec</prefix>
 	<icon>icon/simplec.png</icon>
 
-	<version>0.1.1</version>
+	<version>1.0.0</version>
 	<etat>experimental</etat>
 	<categorie>outil</categorie>
 
@@ -12,8 +12,9 @@
 		ATTENTION : plugin très expérimental et instable !
 		pour afficher proprement du code dans SPIP.
 	</description>
-	<lien>http://romy.tetue.net/plugins/simplec/todo.txt</lien>
+	<lien>https://bitbucket.org/tetue/simplec/</lien>
 	<auteur>&copy; 2017 [tetue->http://spip.tetue.net]</auteur>
+	<auteur>nicod_</auteur>
 	<auteur>Librairie clipboard.js par [Zeno Rocha->https://zenorocha.com]</auteur>
 
 	<options>simplec_options.php</options>

@@ -36,9 +36,9 @@ code en bloc</code></code>
 L’intérêt de <cadre> était de présenter du code facile à copier. Cela peut se faire de façon automatisée via JS. Exemple sur les extraits de code de cette page :
 http://a11y-style-guide.com/style-guide/section-media.html
 
-- insérer auto un bouton « copier » à chaque bloc <pre><code>
-- qui a pour action de copier auto le code dans le presse-papier local
-- prévoir feedback confirmant la copie
+x insérer auto un bouton « copier » à chaque bloc <pre><code>
+x qui a pour action de copier auto le code dans le presse-papier local
+x prévoir feedback confirmant la copie
 - avec les aria qui vont bien pour l’accessibilité
 - on verra ensuite comment looker toussa
 - pas d’autre gadget : on se contente de couvrir le périmètre fonctionnel existant
@@ -88,7 +88,7 @@ Rétro-compat : l’ancien raccourci <cadre> est déprécié (à ne plus utilise
 
 ==== ==== ==== ==== V3++
 
-== Evol/idées (pour une V2) — STANDBY (mais DOING quand même par Romy)
+== Evol/idées — STANDBY (mais DOING quand même par Romy)
 
 Ce serait super pour les lecteurices, s’ils savaient à quel type de code ils ont affaire, histoire de savoir dans quel format de fichier l’utiliser :
 - Un raccourci abrégé, plus rapide à écrire : <c> ?
