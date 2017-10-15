@@ -39,7 +39,7 @@ http://a11y-style-guide.com/style-guide/section-media.html
 x insérer auto un bouton « copier » à chaque bloc <pre><code>
 x qui a pour action de copier auto le code dans le presse-papier local
 x prévoir feedback confirmant la copie
-- détail luxueux : une seule class .copied à la fois dans la page (pour éviter le feedback multiple, qui ne correspond pas à la réalité de l’action)
+x détail luxueux : une seule class .copied à la fois dans la page (pour éviter le feedback multiple, qui ne correspond pas à la réalité de l’action)
 - avec les aria qui vont bien pour l’accessibilité
 - on verra ensuite comment looker toussa
 - pas d’autre gadget : on se contente de couvrir le périmètre fonctionnel existant
