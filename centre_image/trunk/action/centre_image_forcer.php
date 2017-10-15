@@ -6,8 +6,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_centre_image_forcer() {
 	$fichier = $_GET["url"];
 
-	// Gérer le plugin mutualisation
-	if (defined('_DIR_SITE')){
+	// Gérer le plugin mutualisation si on est pas dans le prive
+	if (defined('_DIR_SITE') and !test_espace_prive() ){
 		$fichier = _DIR_SITE.$fichier;
 	}
 
