@@ -1,0 +1,33 @@
+
+$(function() {
+	simplecCopyCode.init();
+});
+
+var simplecCopyCode = (function() {
+	var that = {};
+
+	that.init = function() {
+		// supprimer les boutons de téléchargement ajoutés par le plugin coloration_code
+		$('p.download').remove();
+		// ajouter un bouton pour copier le code
+		$('pre > code, .coloration_code')
+			.append('<p class="action"><button type="button" class="copy-button" aria-label="<:simplec:bouton_copier_aria_label:>"><:simplec:bouton_copier_label:></button></p>');
+
+		var clip = new Clipboard('.copy-button', {
+			target: function(trigger) {
+				var text = trigger.parentNode.parentNode.children[0];
+				return text;
+			}
+		});
+
+		clip.on('success', function(e) {
+			e.trigger.className = e.trigger.className + ' copied';
+			e.clearSelection();
+		});
+	};
+
+	return that;
+	
+})();
+
+	
