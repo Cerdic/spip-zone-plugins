@@ -7,7 +7,7 @@
 pre br,
 pre code br { display: none !important; }
 
-/* positionner de même le nom du langage et le bouton */
+/* Positionner de même le nom du langage et le bouton */
 .precode {
   position: relative;
 }
@@ -24,7 +24,7 @@ pre[class]::before,
 /* scroll pour les contenus longs */
 pre,
 pre code {
-  overflow-y: auto;       /* Ajoute un scroll horizontal en cas de dépassement */
+  overflow-x: auto;       /* Ajoute un scroll horizontal en cas de dépassement */
   padding: 15px 10px;
   padding-bottom: 15px;   /* Préserve l'espace suffisant pour la barre de scroll */
 }
