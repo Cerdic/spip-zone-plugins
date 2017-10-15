@@ -1,1 +1,0 @@
-Ce plugin a pour vocation de rationaliser l’affichage du code sous SPIP, par l’usage des éléments HTML corrects <code> et <pre>, en préservant les chouettes avantages du traitement du code par SPIP.
