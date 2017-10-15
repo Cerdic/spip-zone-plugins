@@ -57,6 +57,10 @@ pre.css           { border-color: rgba(133, 202, 21, .2); border-left-color: #85
 pre.css::before   { color: rgba(133, 202, 21, .75); }
 pre.less          { border-color: rgba(29, 54, 93, .2); border-left-color: #1d365d; }
 pre.less::before  { color: rgba(29, 54, 93, .75); }
+pre.sass,
+pre.scss          { border-color: rgba(207, 100, 154, .2); border-left-color: #CF649A; }
+pre.sass::before,
+pre.scss::before  { color: rgba(207, 100, 154, .75); }
 pre.js            { border-color: rgba(228, 162, 39, .2); border-left-color: #E4A227; }
 pre.js::before    { color: rgba(228, 162, 39, .75); }
 pre.php           { border-color: rgba(98, 129, 184, .2); border-left-color: #6281B8; }
