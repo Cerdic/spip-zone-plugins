@@ -7,7 +7,7 @@
 	logo="prive/themes/spip/images/spip2spip-32.png"
 	documentation="https://contrib.spip.net/Spip2Spip"
 	schema="1.3.0"
-	>
+>
 
 	<nom>Spip2Spip</nom>
 	<auteur lien='https://www.erational.org'>erational</auteur>
