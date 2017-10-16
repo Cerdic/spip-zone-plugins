@@ -127,6 +127,7 @@ function courtjus_trouver_objet_enfant($id_rubrique, $objets_in_rubrique) {
 	$enfants = courtjus_quete_enfant($id_rubrique);
 
 	// On cherche un éventuel objet dans les premiers enfants
+	$objet = false;
 	while (list($key,$enfant) = each($enfants) and !$objet) {
 		$objets_in_rubrique = courtjus_objets_in_rubrique($enfant);
 
