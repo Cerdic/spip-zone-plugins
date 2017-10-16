@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 function paypal_ieconfig_metas($table){
 	$table['paypal']['titre'] = _T('paypal:configuration_paypal');
@@ -9,4 +11,3 @@ function paypal_ieconfig_metas($table){
 	return $table;
 }
 
-?>

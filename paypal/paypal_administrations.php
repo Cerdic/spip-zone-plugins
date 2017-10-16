@@ -10,7 +10,9 @@
  */
  
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 
 /**
@@ -90,4 +92,3 @@ function paypal_maj_01 (){
 	effacer_config('paypal_api_test');
 }
 
-?>

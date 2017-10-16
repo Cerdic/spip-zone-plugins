@@ -1,7 +1,9 @@
 <?php
 
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 include_spip('inc/config');
 
@@ -78,4 +80,3 @@ function formulaires_configurer_paypal_traiter_dist(){
 	return array('message_ok'=>_T('config_info_enregistree'),'editable'=>true);
 }
 
-?>
