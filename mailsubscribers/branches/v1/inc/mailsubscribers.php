@@ -190,8 +190,14 @@ function mailsubscribers_filtre_liste($liste,$category="newsletter"){
  * (open,close,?)
  *
  * @param array $options
- *   category : filtrer les listes par category (dans ce cas la categorie est enlevee de l'id)
  *   status : filtrer les listes sur le status
+ *            (array|string) tableau ou liste de status séparés par des virgules
+ *            open | close : listes connues en config
+ *            ? : listes en base
+ *   id : filtrer les listes selon leurs identifiants (dans ce cas la categorie est enlevee de l'id)
+ *        (array|string) tableau ou liste d'identifiants séparés par des virgules
+ *   category : filtrer les listes par category (dans ce cas la categorie est enlevee de l'id)
+ *              (string) nom d'une catégorie
  * @return array
  *   array
  *     id : identifiant
@@ -199,11 +205,21 @@ function mailsubscribers_filtre_liste($liste,$category="newsletter"){
  *     status : status de la liste
  */
 function mailsubscribers_listes($options = array()){
-	$filtrer_status = $filtrer_category = false;
-	if (isset($options['status']))
-		$filtrer_status = $options['status'];
-	if (isset($options['category']))
+	// option : filtrer par statut
+	$filtrer_status = array();
+	if (!empty($options['status'])) {
+		$filtrer_status = is_array($options['status']) ? $options['status'] : explode(',', $options['status']);
+	}
+	// option : filtrer par catégorie
+	$filtrer_category = false;
+	if (isset($options['category'])) {
 		$filtrer_category = $options['category'];
+	}
+	// option : filtrer par identifiant
+	$filtrer_id = array();
+	if (!empty($options['id'])) {
+		$filtrer_id = is_array($options['id']) ? $options['id'] : explode(',', $options['id']);
+	}
 
 	$listes = array();
 
@@ -215,33 +231,57 @@ function mailsubscribers_listes($options = array()){
 		AND count($known_lists)){
 
 		foreach ($known_lists as $kl){
+			$status = ($kl['status']=='open'?'open':'close');
+			$status_is_ok = (!$filtrer_status or in_array($status, $filtrer_status));
+			// si on filtre par catégorie ou par id, on enlève le prefixe de catégorie avant l'id
 			$id = $kl['id'];
-			if (!$filtrer_category OR $id=mailsubscribers_filtre_liste($id,$filtrer_category)){
-				$status = ($kl['status']=='open'?'open':'close');
-				if (!$filtrer_status OR $filtrer_status==$status) {
-					$listes[$id] = array(
-						'id' => $id,
-						'titre' => $kl['titre'],
-						'status' => $status
-					);
-				}
+			if ($filtrer_id
+				or $filtrer_category
+			) {
+				$category = ($filtrer_category ? $filtrer_category : 'newsletter');
+				$id = mailsubscribers_filtre_liste($id, $category); // renvoie une chaîne vide si pas ok
+			}
+			$id_is_ok = (!$filtrer_id or in_array($id, $filtrer_id));
+			$category_is_ok = (!$filtrer_category or ($filtrer_category and $id));
+
+			if ($status_is_ok
+				and $id_is_ok
+				and $category_is_ok
+			){
+				$listes[$id] = array(
+					'id' => $id,
+					'titre' => $kl['titre'],
+					'status' => $status
+				);
 			}
 		}
 	}
 
 	// puis trouver toutes les listes qui existent en base et non connues en config
-	// pas la peine si on a demande de filtrer les listes open ou close
-	if ($filtrer_status!=='?') {
+	// sauf si on a demandé des statuts spécifiques, dans ce cas il faut indiquer "?"
+	// (ces listes n'ont pas de status)
+	if (!$filtrer_status
+		or ($filtrer_status and in_array('?', $filtrer_status))
+	) {
 		$rows = sql_allfetsel("DISTINCT listes","spip_mailsubscribers","statut!=".sql_quote('poubelle'));
 		foreach ($rows as $row){
 			$ll = explode(",",$row['listes']);
 			foreach($ll as $l){
-				if ($id=$l
-					AND (
-						!$filtrer_category OR $id=mailsubscribers_filtre_liste($l,$filtrer_category)
-					)){
-					if (!isset($listes[$id]))
-						$listes[$id] = array('id'=>$id,'titre'=>$id,'status'=>'?');
+				// si on filtre par catégorie ou par id, on enlève le prefixe de catégorie avant l'id
+				$id = $l;
+				if ($filtrer_id
+					or $filtrer_category
+				) {
+					$category = ($filtrer_category ? $filtrer_category : 'newsletter');
+					$id = mailsubscribers_filtre_liste($id, $category); // renvoie une chaîne vide si pas ok
+				}
+				$id_is_ok = (!$filtrer_id or in_array($id, $filtrer_id));
+				$category_is_ok = (!$filtrer_category or ($filtrer_category and $id));
+				if ($id_is_ok
+					and $category_is_ok
+					and !isset($listes[$id])
+				) {
+					$listes[$id] = array('id'=>$id,'titre'=>$id,'status'=>'?');
 				}
 			}
 		}

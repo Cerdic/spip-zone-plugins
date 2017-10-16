@@ -34,3 +34,20 @@ function mailsubscriber_url_confirm($email,$jeton,$sep="&amp;"){
 	$url = parametre_url($url,"arg",mailsubscriber_cle_action("confirm",$email,$jeton),$sep);
 	return $url;
 }
+
+/**
+ * Un filtre pour lister les listes de diffusion dans un squelette
+ *
+ * @Note
+ * Les listes sont stockées différement entre la branche 1 et 2
+ *
+ * @uses mailsubscribers_listes
+ * @param array $options
+ *     voir mailsubscribers_listes()
+ * @return array|int
+ */
+function filtre_mailsubscribers_listes_dist($options = array()) {
+	include_spip('inc/mailsubscribers');
+
+	return mailsubscribers_listes($options);
+}
