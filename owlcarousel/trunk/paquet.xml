@@ -1,7 +1,7 @@
 <paquet
 	prefix="owlcarousel"
 	categorie="multimedia"
-	version="1.0.4"
+	version="1.0.5"
 	etat="test"
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/owlcarousel-64.png"

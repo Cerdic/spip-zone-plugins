@@ -34,16 +34,7 @@ Insertion du modele <articleX|owl>
         /*float: right;*/
         color: #FFF;
         padding: 5px;
-    }
-    [#(#ENV{id-carousel,demo})] .owl-slide {
-        
-    }
-    [#(#ENV{id-carousel,demo})] .owl-slide img{
-        display: block;
-        width: 100%;
-        height: auto;
-        margin: 0 auto;
-    }    
+    }  
 </style>
 [(#REM) <!-- Diaporama -->]
 <div id="#ENV{id-carousel,demo}" class="owl-carousel owl-theme">
@@ -64,21 +55,26 @@ Insertion du modele <articleX|owl>
 jQuery(function($){
     $("[#(#ENV{id-carousel,demo})]").owlCarousel({
         loop:true,
-        margin:0,
-        items: 1,[
+        margin:0,[
+        items: (#ENV{items, 1}),][
+        margin:(#ENV{margin}),][
         dots:(#ENV{dots, true}),][
         nav:(#ENV{navigation, false}),][
         autoplay: (#ENV{autoplay}),][
         autoplayHoverPause: (#ENV{autoplayHoverPause}),][
         lazyLoad: (#ENV{lazyLoad}),][
-        autoplayTimeout: (#ENV{autoplayTimeout}),]
+        autoplayTimeout: (#ENV{autoplayTimeout}),][
+        autoHeight: (#ENV{autoHeight}),]
         responsive:false,
         URLhashListener:true,
         startPosition: 'URLHash',
 	responsive:{
 		0:{
 		items:1
-		}
+		}[,
+		640:{
+		items:(#ENV{items})
+		}]
 	}
     });
     
