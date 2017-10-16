@@ -1,0 +1,16 @@
+[(#AUTORISER{voir,mesabonnes}|sinon_interdire_acces)]
+
+
+<h3><:mesabonnes:export_abonnes:></h3>
+
+<BOUCLE_abo(MESABONNES)> </BOUCLE_abo>
+	#SET{args,#ARRAY{}}
+	<ul style="margin:1rem 0">
+		<li><a href='[(#URL_PAGE{transmettre,[(#VAL{mesabonnes}|param_low_sec{#GET{args}, '', 'transmettre'})]})]'><:mesabonnes:export_abonnes_csv:></a></li>
+		<li><a href='[(#URL_PAGE{transmettre,[(#VAL{mesabonnes_maxbulk}|param_low_sec{#GET{args}, '', 'transmettre'})]})]'><:mesabonnes:export_abonnes_csv_bulk:></a></li>
+	</ul>
+
+	<p><:mesabonnes:export_abonnes_compte{compte=#TOTAL_BOUCLE}:></p>
+</B_abo>
+	<p style="color:red"><:mesabonnes:export_abonnes_rien:></p>
+<//B_abo>
