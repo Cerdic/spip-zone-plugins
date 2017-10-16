@@ -446,8 +446,14 @@ function mailsubscribers_filtre_liste($liste, $category = "newsletter") {
  * Renvoi les listes de diffusion disponibles avec leur status
  * (open,close,?)
  *
+ * Les listes à la poubelles sont exclues sauf si on filtre par statut.
+ *
  * @param array $options
  *   status : filtrer les listes sur le status
+ *            (array|string) tableau ou liste de status séparés par des virgules
+ *            ouverte | fermee | poubelle
+ *   id : filtrer les listes selon leurs identifiants
+ *        (array|string) tableau ou liste d'identifiants séparés par des virgules
  *   segments : fournir le detail des segments avec un identifant de la forme xxxx+nn
  * @return array
  *   array
@@ -459,21 +465,34 @@ function mailsubscribers_filtre_liste($liste, $category = "newsletter") {
  *     from_email : nom de l'envoyeur (optionnel)
  */
 function mailsubscribers_listes($options = array()) {
-	$filtrer_status = false;
-	if (isset($options['status'])) {
-		$filtrer_status = $options['status'];
+	// option : filtrer par statut
+	$filtrer_status = array();
+	if (!empty($options['status'])) {
+		$filtrer_status = is_array($options['status']) ? $options['status'] : explode(',', $options['status']);
+		// pour compatibilité descendante
+		foreach ($filtrer_status as $k => $status){
+			if ($status == 'open') {
+				$filtrer_status[$k] = 'ouverte';
+			}
+			if ($status == 'close') {
+				$filtrer_status[$k] = 'fermee';
+			}
+		}
 	}
-	if ($filtrer_status == 'open') {
-		$filtrer_status = 'ouverte';
-	}
-	if ($filtrer_status == 'close') {
-		$filtrer_status = 'fermee';
+	// option : filtrer par identifiant
+	$filtrer_id = array();
+	if (!empty($options['id'])) {
+		$filtrer_id = is_array($options['id']) ? $options['id'] : explode(',', $options['id']);
 	}
 
 	$where = array();
-	$where[] = 'statut!=' . sql_quote('poubelle');
 	if ($filtrer_status) {
-		$where[] = 'statut=' . sql_quote($filtrer_status);
+		$where[] = sql_in('statut', $filtrer_status);
+	} else {
+		$where[] = 'statut != ' . sql_quote('poubelle');
+	}
+	if ($filtrer_id) {
+		$where[] = sql_in('identifiant', $filtrer_id);
 	}
 	$rows = sql_allfetsel('identifiant as id,titre,descriptif,statut as status,adresse_envoi_nom as from_name,adresse_envoi_email as from_email,segments', 'spip_mailsubscribinglists', $where, '',
 		'statut DESC,0+titre,titre');

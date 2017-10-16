@@ -1,0 +1,34 @@
+[(#REM)
+
+  Choix de listes de diffusions sous forme de cases à cocher.
+  Par défaut uniquement celles ouvertes.
+
+  Parametres :
+  - class : classe(s) css ajoutes au select
+  - defaut : valeur par defaut si pas présente dans l'environnement
+      identifiants séparés par des virgules ou sous forme de tableau
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+  - statut : (string|array) filtrer par statut, par défaut "ouverte"
+      statuts séparés par des virgules ou sous forme de tableau
+      ouverte | fermee | poubelle
+  - identifiant : (string|array) filtrer par identifiant
+           identifiants séparés par des virgules ou sous forme de tableau
+
+  Exemples d'appel :
+  [(#SAISIE{listes_diffusion,
+    label=<:newsletter:label_subscribe_lists:>})]
+]
+
+[(#REM) Normaliser les valeurs et récupérer les listes ]
+#SET{defaut,#ENV{defaut}|saisies_chaine2tableau}
+#SET{options,#ARRAY{
+	status, #ENV{statut,open},
+	id,     #ENV{identifiant}
+}}
+#SET{datas,#ARRAY}
+<BOUCLE_datas(DATA){source table, #GET{options}|mailsubscribers_listes}>
+#SET{datas, #GET{datas}|array_merge{#ARRAY{#ID,#TITRE}}}
+</BOUCLE_datas>
+
+[(#REM) On réutilise la saisie checkbox ]
+<INCLURE{fond=saisies/checkbox, datas=#GET{datas}, defaut=#GET{defaut}, env} />

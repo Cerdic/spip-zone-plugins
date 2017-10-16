@@ -33,6 +33,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_adresse_existante' => 'Cette adresse email est déjà dans la liste',
 	'erreur_technique_subscribe' => 'Une erreur technique a empêché votre inscription.',
 	'explication_to_email' => 'Envoyer un email de pré-inscription aux adresses suivantes (plusieurs adresses séparées par une virgule si besoin).',
+	'explication_listes_diffusion_option_defaut' => 'Un ou plusieurs identifiants de listes séparés par des virgules',
+	'explication_listes_diffusion_option_statut' => 'Filtrer les listes selon les statuts',
 
 	// I
 	'icone_creer_mailsubscriber' => 'Ajouter une inscription',
@@ -71,6 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_toutes_les_listes' => 'Toutes',
 	'label_valid_subscribers_1' => 'Valider directement les inscriptions sans demande de confirmation',
 	'label_vider_table_1' => 'Supprimer toutes les adresses en base avant cet import',
+	'label_listes_diffusion_option_statut' => 'Statut',
 
 	// M
 	'mailsubscribers_poubelle' => 'Supprimés',
