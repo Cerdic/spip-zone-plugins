@@ -47,13 +47,13 @@ Insertion du modele <articleX|owl>
 </style>
 [(#REM) <!-- Diaporama -->]
 <div id="#ENV{id-carousel,demo}" class="owl-carousel owl-theme">
-            <BOUCLE_listDocs(DOCUMENTS){id_article?}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{mode=document}{extension==jpg|png|gif}>
-            <div class="owl-slide" data-hash="#ID_DOCUMENT">
+            <BOUCLE_listDocs(DOCUMENTS){id_article?}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{extension==jpg|png|gif}>
+            <div class="owl-slide" data-hash="#ENV{id-carousel,demo}#ID_DOCUMENT">
                 [(#ENV{caption,oui}|=={oui}|oui)
                 <div class="caption[ (#ENV{caption_css})]">[
                     <h3 class="title">(#TITRE)</h3>][
                     <p class="hidden-phone">(#DESCRIPTIF|textebrut)</p>]</div>]
-                    <a href="#FICHIER" class="js-colorbox" rel="diaporama">
+                    <a href="#FICHIER" class="js-colorbox"[ rel="diaporama(#ENV{id-carousel,demo})"]>
                         <img [(#ENV{lazyLoad}|=={true}|oui)class="owl-lazy" data-]src="[(#FICHIER|image_reduire{650,450}|extraire_attribut{src})]" alt="[(#TITRE|textebrut)]">
                     </a>
             </div>
@@ -70,7 +70,8 @@ jQuery(function($){
         nav:(#ENV{navigation, false}),][
         autoplay: (#ENV{autoplay}),][
         autoplayHoverPause: (#ENV{autoplayHoverPause}),][
-        lazyLoad: (#ENV{lazyLoad}),]
+        lazyLoad: (#ENV{lazyLoad}),][
+        autoplayTimeout: (#ENV{autoplayTimeout}),]
         responsive:false,
         URLhashListener:true,
         startPosition: 'URLHash',
@@ -83,7 +84,7 @@ jQuery(function($){
     
     // Gallerie Colorbox
     $("a.js-colorbox").colorbox({
-        rel:'diaporama',
-        });
+        rel:'diaporama#ENV{id-carousel,demo}',
+    });
 });
 </script>
