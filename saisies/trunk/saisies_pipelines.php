@@ -74,7 +74,7 @@ function saisies_affichage_final($flux) {
 				}
 				// compatibilité SPIP 3.2 et jQuery UI 1.12
                 if ($version[0] == 3 and $version[1] > 1) {
-     				$ins_css .= $flux .= "<link rel='stylesheet' type='text/css' media='all' href='" . find_in_path('css/ui/jquery-ui.css') . "' />\n";
+     				$ins_css .= "\n<link rel='stylesheet' type='text/css' media='all' href='" . find_in_path('css/ui/jquery-ui.css') . "' />\n";
 				}
 			}
 		}
