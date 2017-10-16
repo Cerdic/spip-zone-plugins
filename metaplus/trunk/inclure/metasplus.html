@@ -15,17 +15,25 @@
 	- logo				image de la ressource (URL) - image doit faire  au minimum 200x200px et moins d'un 1 Mo
 	- og-type			open graph : type de la ressource : article, website, ....
 
-]
+][(#REM)
 
+	Tester si l'environnement reçoit un logo,
+	sinon prendre le logo du site
+
+
+][(#ENV{logo}|!={''}|?{
+	[(#SET{logo,#ENV*{logo}})]
+,
+	[(#SET{logo,[(#LOGO_SITE_SPIP|extraire_attribut{src})]})]
+})][
+
+	(#REM) Traiter le logo
+
+][(#SET{logo, #GET{logo}
+		|image_reduire{2400,1260}
+		|image_recadre{1.91:1,'-','center'}
+		|extraire_attribut{src}})]
 [(#REM)
-
-	Traiter le logo
-
-]
-[(#SET{logo, #ENV*{logo}
-	|image_reduire{2400,1260}
-	|image_recadre{1.91:1,'-','center'}
-	|extraire_attribut{src}})][(#REM)
 
 	metas Dublin Core
 	http://dublincore.org
