@@ -64,10 +64,17 @@ function saisies_affichage_final($flux) {
 				}
 				array_push($ui_plugins, $theme_css);
 				foreach ($ui_plugins as $ui_plug) {
-					$ui_plug_css = find_in_path("$ui_css_dir/$ui_plug.css");
-					if (strpos($flux, "$ui_css_dir/$ui_plug.css") === false) {// si pas déjà chargé
-						$ins_css .= "\n<link rel='stylesheet' href='$ui_plug_css' type='text/css' media='all' />\n";
-					}
+						// compatibilité pour les versions < SPIP 3.2
+						if ($version[0] < 3 or ($version[0] == 3 and $version[1] < 2)) {
+							$ui_plug_css = find_in_path("$ui_css_dir/$ui_plug.css");
+							if (strpos($flux, "$ui_css_dir/$ui_plug.css") === false) {// si pas déjà chargé
+								$ins_css .= "\n<link rel='stylesheet' href='$ui_plug_css' type='text/css' media='all' />\n";
+							}
+						}
+				}
+				// compatibilité SPIP 3.2 et jQuery UI 1.12
+                if ($version[0] == 3 and $version[1] > 1) {
+     				$ins_css .= $flux .= "<link rel='stylesheet' type='text/css' media='all' href='" . find_in_path('css/ui/jquery-ui.css') . "' />\n";
 				}
 			}
 		}
