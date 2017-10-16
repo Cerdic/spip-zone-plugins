@@ -10,6 +10,7 @@ define('_DIR_LIB_GIS', find_in_path('lib/leaflet/'));
 $GLOBALS['logo_libelles']['id_gis'] = _T('gis:libelle_logo_gis');
 
 $config = @unserialize($GLOBALS['meta']['gis']);
+$api_key_bing = isset($config['api_key_bing']) ? trim($config['api_key_bing']) : '';
 
 $gis_layers = array (
 	'openstreetmap_mapnik' => array(
@@ -46,7 +47,7 @@ $gis_layers = array (
 	),
 	'bing_aerial' => array(
 		'nom' => 'Bing Aerial',
-		'layer' => 'L.BingLayer("'.$config['api_key_bing'].'")'
+		'layer' => 'L.BingLayer("'.$api_key_bing.'")'
 	),
 	'opentopomap' => array(
 		'nom' => 'OpenTopoMap',
