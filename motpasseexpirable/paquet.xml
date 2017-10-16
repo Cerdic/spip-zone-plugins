@@ -1,15 +1,15 @@
 <paquet
 	prefix="motpasseexpirable"
 	categorie="auteur"
-	version="1.1.0"
+	version="1.1.1"
 	etat="stable"
-	compatibilite="[3.0.11;3.1.*]"
+	compatibilite="[3.0.11;3.2.*]"
 	logo="prive/themes/spip/images/motpasseexpirable-64.png"
 	documentation="https://contrib.spip.net/4425"
 	schema="1.0.0" 
 >
 	<nom>Mots de passe expirables</nom>
-	<auteur lien='http://www.erational.org'>erational</auteur>
+	<auteur lien='https://www.erational.org'>erational</auteur>
 	<licence>GNU/GPL</licence>
 
 	<necessite nom="saisies" compatibilite="[2.2.3;]" />
