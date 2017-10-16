@@ -1,4 +1,10 @@
 <?php
+
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
+
 //
 // doc API Flickr: 
 // https://www.flickr.com/services/api/
@@ -185,4 +191,3 @@ function flickr_rand($str,$tags='',$license=5,$align='',$size='Small',$safesearc
 			}
 	}
 }
-?>
