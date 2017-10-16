@@ -1,9 +1,9 @@
 <paquet
 	prefix="pubban"
 	categorie="multimedia"
-	version="1.30.6"
+	version="1.30.7"
 	etat="test"
-	compatibilite="[3.0.10;3.0.*]"
+	compatibilite="[3.0.10;3.1.*]"
 	logo="img/ico-pubban.png"
 	schema="0.9"
 	documentation="https://contrib.spip.net/?article3637"
