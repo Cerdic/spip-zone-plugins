@@ -1,10 +1,10 @@
 <paquet
 	prefix="malettre"
 	categorie="communication"
-	version="3.3.5"
+	version="3.3.6"
 	schema="1.0.0"
 	etat="stable"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="images/malettre.png"
 	documentation="https://contrib.spip.net/2803"
 >
