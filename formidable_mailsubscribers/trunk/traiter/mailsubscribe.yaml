@@ -1,0 +1,31 @@
+titre: '<:formidable_mailsubscribers:traiter_mailsubscribe_titre:>'
+description: '<:formidable_mailsubscribers:traiter_mailsubscribe_description:>'
+options:
+  -
+    saisie: 'champ'
+    options:
+      nom: 'champ_email_mailsubscribe'
+      label: '<:formidable_mailsubscribers:traiter_mailsubscribe_champ_email_label:>'
+      obligatoire: 'oui'
+      env: true
+  -
+    saisie: 'champ'
+    options:
+      nom: 'champ_nom_mailsubscribe'
+      label: '<:formidable_mailsubscribers:traiter_mailsubscribe_champ_nom_label:>'
+      obligatoire: ''
+      env: true
+  -
+    saisie: 'champ'
+    options:
+      nom: 'champ_listes_mailsubscribe'
+      label: '<:formidable_mailsubscribers:traiter_mailsubscribe_champ_listes_label:>'
+      obligatoire: 'oui'
+      env: true
+  -
+    saisie: 'case'
+    options:
+      nom: 'notify'
+      label: '<:formidable_mailsubscribers:traiter_mailsubscribe_champ_notify_label:>'
+      label_case: '<:formidable_mailsubscribers:traiter_mailsubscribe_champ_notify_label_case:>'
+      defaut: 'on'
