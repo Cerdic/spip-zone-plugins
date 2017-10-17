@@ -34,6 +34,10 @@
 
 ### Version 2.x.x (Passage à smarttag.js)
 
+#### Version 2.2.4 (2017-10-17)
+
+- Utiliser les fonctions d'édition de liens afin de bénéficier de l'API (stockage des révisions)
+
 #### Version 2.2.3 (2017-10-17)
 
 * Autorisation à voir les révisions sur les niveaux 2 (problème avec le fait d'être un objet avec un underscore)
