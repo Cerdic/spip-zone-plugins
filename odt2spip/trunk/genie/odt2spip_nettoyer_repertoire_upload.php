@@ -86,15 +86,10 @@ function odt2spip_nettoyer_repertoire_recursif($repertoire, $age_max = 86400) {
  * Enlève les fichiers .. et . ainsi que des fichiers à
  * ne pas considérer comme importants pour tester qu'un
  * répertoire a du contenu.
- * Particulièrement .ok et file.bigup.json
- *
- * @todo
- *     Trouver un mécanisme pour transmettre l'info file.bigup.json
- *     qui ne devrait pas être en dur ici.
  *
  * @param array $fichiers
  * @return array
  */
 function odt2spip_filtrer_fichiers($fichiers) {
-	return array_diff($fichiers, ['..', '.', '.ok']);
+	return array_diff($fichiers, array('..', '.', '.ok'));
 }

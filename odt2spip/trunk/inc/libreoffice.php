@@ -7,10 +7,10 @@ class LibreOffice {
 	protected $fichier;
 
 	/** @var string[] */
-	protected $command = [];
+	protected $command = array();
 
 	/** @var string[] */
-	protected $errors = [];
+	protected $errors = array();
 
 	/** @var string */
 	protected $outputDir = '';
