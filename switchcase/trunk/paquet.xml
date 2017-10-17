@@ -1,7 +1,7 @@
 <paquet
 	prefix="switchcase"
 	categorie="outil"
-	version="0.3.0"
+	version="0.3.1"
 	etat="stable"
 	compatibilite="[2.1.0;3.2.*]"
 	logo="images/switchcase-32.png"
@@ -16,5 +16,5 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 
 	<credit lien="https://thenounproject.com/term/flow-chart/49063/">Inspiration pour l'icone : flowchart by Piotr Kołodziejski, Licence Creative Commons</credit>
- 
+
 </paquet>
