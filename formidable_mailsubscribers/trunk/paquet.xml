@@ -15,7 +15,7 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="formidable" compatibilite="[2.5.11;]" />
+	<necessite nom="formidable" compatibilite="[3.5.3;]" />
 	<necessite nom="mailsubscribers" compatibilite="[1.10.0;]" />
 
 </paquet>
