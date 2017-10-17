@@ -56,6 +56,22 @@ function autoriser_xitiniveau_modifier_dist($faire, $quoi, $id, $qui, $opts) {
 }
 
 /**
+ * Autorisation de voir les révisions d'un Niveau 2
+ *
+ * Identique à celle de création
+ *
+ * @param string $faire
+ * @param string $quoi
+ * @param int $id
+ * @param array $qui
+ * @param array $opts
+ * @return boolean
+ */
+function autoriser_xitiniveau_voirrevisions($faire, $quoi, $id, $qui, $opts) {
+	return autoriser('creer', 'xitiniveau', $id, $qui, $opts);
+}
+
+/**
  * Autorisation de supprimer un Niveau 2
  *
  * Il faut que rien ne soit lié au niveau deux
