@@ -34,6 +34,10 @@
 
 ### Version 2.x.x (Passage à smarttag.js)
 
+#### Version 2.3.0 (2017-10-17)
+
+* Permettre d'utiliser le [marqueur asynchone](https://developers.atinternet-solutions.com/javascript-en/advanced-features-javascript-en/asynchronous-tag-javascript-en/), c'est une checkbox à activer dans la configuration
+
 #### Version 2.2.4 (2017-10-17)
 
 - Utiliser les fonctions d'édition de liens afin de bénéficier de l'API (stockage des révisions)

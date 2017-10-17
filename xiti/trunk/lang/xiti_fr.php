@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_log_explication' => 'Sous-domaine du collecteur AT Internet. À récupérer dans le panneau Marqueurs. Cette information ne doit pas être modifiée.',
 	'item_logssl' => 'Collecteur SSL ATInternet (logSSL)',
 	'item_logssl_explication' => 'Sous-domaine sécurisé du collecteur AT Internet. À récupérer dans le panneau Marqueurs. Cette information ne doit pas être modifiée.',
+	'item_marqueur_async' => 'Utiliser le marqueur asynchrone',
 	'item_niveaux_deux' => 'Activer les niveaux 2',
 	'item_non_utiliser_xiti' => 'Désactiver Xiti',
 	'item_secteur_xiti_home' => 'Considérer ces secteurs comme la home',

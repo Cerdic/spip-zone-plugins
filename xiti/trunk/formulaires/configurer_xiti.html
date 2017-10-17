@@ -27,6 +27,15 @@
 							[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:xiti:item_non_utiliser_xiti:></label>
 						</div>
 					</li>
+					#SET{name,marqueur_async}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					<li class="editer long_label editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur][(#ENV{activer_xiti}|=={oui}|non)style="display:none;"]">
+						<label for="#GET{name}"><:xiti:item_marqueur_async:></label>[
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]<div class="choix">
+							<input type="checkbox" name="#GET{name}" id="#GET{name}" value="on"
+							[(#ENV{#GET{name}}|=={on}|oui)checked="checked"] />
+						</div>
+					</li>
 					<li class="fieldset"[(#ENV{activer_xiti}|=={oui}|non)style="display:none;"]>
 						<fieldset>
 							<legend><:xiti:legend_obligatoire_xiti:></legend>
