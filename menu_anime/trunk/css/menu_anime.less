@@ -1,11 +1,18 @@
-/* Menu anime (v 1.0.9)
+/* Menu anime (v 1.1.0)
    ==========
 	Procédure de modification de la feuille de style 'menu_anime.css'
-	1. Modifier les paramètres souhaités dans le présent fichier (menu_anime.less).
-	2. Compiler le fichier au moyen d'un compilateur 'less' (p.e. http://leafo.net/lessphp/editor.html).
+	1. Modifier la section PARAMETRES de la présente version du fichier (menu_anime_v.x.y.z.less).
+		Y remplacer les valeurs par celles que vous souhaitez.
+	   Le cas échéant, y reporter les valeurs de votre précédente version de ce fichier.
+	2. Compiler le fichier au moyen d'un compilateur 'less' (p.e. https://leafo.net/lessphp/editor.html).
 	3. Mettre le résultat dans un fichier nommé 'menu_anime.css' et le placer dans le répertoire 'squelettes/css/' de SPIP.
+	
 */	
 
+/* ==================================================================================
+/* PARAMETRES
+/* ==========
+/* 
 /* COULEURS */
 /* Valeurs importantes */
 @theme-basic: #5f5f5f; /* couleur moyenne de la barre de menu, correspond ici à rgb(95, 95, 95) */
@@ -29,6 +36,8 @@
 @divider-v-factor1: 0.7; /* ligne de séparation barre de menu */
 @divider-h-factor1: 0.5; /* ligne de séparation boites de menu */
 @shadow-color: #bbb; /* couleur de l'ombrage des menus et boites de sous-menu */
+@box-radius-large: 6px;
+@box-radius-small: 3px;
 
 /* POLICE DE CARACTERES */
 @font-size: 12px;
@@ -48,6 +57,7 @@
 @padding-y2: 2px;
 
 /* Menu pour mobiles */
+@max-mobile-screen-width: 768px; 
 @small-menu-font-size: 12px;
 @small-menu-bar-height: 30px;
 @small-menu-line-height: @small-menu-font-size + 4;
@@ -58,11 +68,14 @@
 @menu-selector: ~".menu_anime";
 @container-selector: ~".menu-conteneur";
 
+/* ==================================================================================
+
 /* Valeurs dérivées */
 @top: @line-height + 2*@padding-y1 + 1;
 @grad2-factor2: 2 - @grad2-factor1;
 @divider-v-factor2: 2 - @divider-v-factor1;
 @divider-h-factor2: 2 - @divider-h-factor1;
+@min-tablet-screen-width: @max-mobile-screen-width + 1;
 
 .font(@size: @font-size) {
 	font-family: @font-family;
@@ -132,7 +145,7 @@
 	border-color: @color * @hborder-light-factor transparent @color * @hborder-dark-factor transparent;
 }	
 
-.border-radius-left(@radius: 3px) {
+.border-radius-left(@radius: @box-radius-small) {
 	-moz-border-top-left-radius: @radius;
 	-webkit-border-top-left-radius: @radius;
 	border-top-left-radius: @radius;
@@ -141,7 +154,7 @@
 	border-bottom-left-radius: @radius;
 }
 
-.border-radius-top(@radius: 3px) {
+.border-radius-top(@radius: @box-radius-small) {
 	-moz-border-top-left-radius: @radius;
 	-webkit-border-top-left-radius: @radius;
 	border-top-left-radius: @radius;
@@ -150,7 +163,7 @@
 	border-top-right-radius: @radius;
 }
 
-.border-radius-bottom(@radius: 3px) {
+.border-radius-bottom(@radius: @box-radius-small) {
 	-moz-border-bottom-left-radius: @radius;
 	-webkit-border-bottom-left-radius: @radius;
 	border-bottom-left-radius: @radius;
@@ -159,7 +172,7 @@
 	border-bottom-right-radius: @radius;
 }
 
-.border-radius(@radius: 3px) {
+.border-radius(@radius: @box-radius-small) {
 	-moz-border-radius: @radius;
 	-webkit-border-radius: @radius;
 	border-radius: @radius;
@@ -205,7 +218,7 @@
 		width: @menu-width;
 		margin: 0px auto;
 		.gradient1(@theme-basic);
-		.border-radius(6px);
+		.border-radius(@box-radius-large);
 		.box-shadow(2px 2px @shadow-color);
 	}
 	
@@ -237,7 +250,7 @@
 		.gradient2(@theme-basic);   
 		.box-shadow(2px 2px @shadow-color);
 		.transition(all .2s ease-in-out);
-		.border-radius(3px);
+		.border-radius(@box-radius-small);
 	}
 
 	@{menu-selector} ul ul {
@@ -309,12 +322,12 @@
 	}
 	
 	@{menu-selector} > li:first-child > a:hover {
-		.border-radius-left(6px);
+		.border-radius-left(@box-radius-large);
 	}
 
 	@{menu-selector} ul li:first-child > a {
 		border-top: 0;
-		.border-radius-top(3px);
+		.border-radius-top(@box-radius-small);
 		&::after { .arrowup(@theme-basic * @grad2-factor1) }
 		&:hover::after { .arrowup(@theme-hover * @grad2-factor1) }
 	}
@@ -326,7 +339,7 @@
 
 	@{menu-selector} ul li:last-child > a {
 		border-bottom: 0;
-		.border-radius-bottom(3px);
+		.border-radius-bottom(@box-radius-small);
 	}
 
 	@{menu-selector} a:focus, @{menu-selector} a:active, @{menu-selector} a:visited {
@@ -350,7 +363,7 @@
 		display: none;
 	}
 
-	@media screen and (max-width: 600px) {
+	@media screen and (max-width: @max-mobile-screen-width) {
 
 		/* menu_conteneur */
 		@{container-selector} {
@@ -375,7 +388,7 @@
 			background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAPCAMAAADeWG8gAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjE2QjAxNjRDOUNEOTExRTE4RTNFRkI1RDQ2MUYxOTQ3IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjE2QjAxNjREOUNEOTExRTE4RTNFRkI1RDQ2MUYxOTQ3Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MTZCMDE2NEE5Q0Q5MTFFMThFM0VGQjVENDYxRjE5NDciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MTZCMDE2NEI5Q0Q5MTFFMThFM0VGQjVENDYxRjE5NDciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz42AEtnAAAABlBMVEX///////9VfPVsAAAAAnRSTlP/AOW3MEoAAAAWSURBVHjaYmAgFzBiACKFho6NAAEGAD07AG1pn932AAAAAElFTkSuQmCC) no-repeat 10px center, -o-linear-gradient(@theme-basic * @grad2-factor1, @theme-basic * @grad2-factor2);
 			background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAPCAMAAADeWG8gAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjE2QjAxNjRDOUNEOTExRTE4RTNFRkI1RDQ2MUYxOTQ3IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjE2QjAxNjREOUNEOTExRTE4RTNFRkI1RDQ2MUYxOTQ3Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MTZCMDE2NEE5Q0Q5MTFFMThFM0VGQjVENDYxRjE5NDciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MTZCMDE2NEI5Q0Q5MTFFMThFM0VGQjVENDYxRjE5NDciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz42AEtnAAAABlBMVEX///////9VfPVsAAAAAnRSTlP/AOW3MEoAAAAWSURBVHjaYmAgFzBiACKFho6NAAEGAD07AG1pn932AAAAAElFTkSuQmCC) no-repeat 10px center, -ms-linear-gradient(@theme-basic * @grad2-factor1, @theme-basic * @grad2-factor2);
 			background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAPCAMAAADeWG8gAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjE2QjAxNjRDOUNEOTExRTE4RTNFRkI1RDQ2MUYxOTQ3IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjE2QjAxNjREOUNEOTExRTE4RTNFRkI1RDQ2MUYxOTQ3Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MTZCMDE2NEE5Q0Q5MTFFMThFM0VGQjVENDYxRjE5NDciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MTZCMDE2NEI5Q0Q5MTFFMThFM0VGQjVENDYxRjE5NDciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz42AEtnAAAABlBMVEX///////9VfPVsAAAAAnRSTlP/AOW3MEoAAAAWSURBVHjaYmAgFzBiACKFho6NAAEGAD07AG1pn932AAAAAElFTkSuQmCC) no-repeat 10px center, linear-gradient(@theme-basic * @grad2-factor1, @theme-basic * @grad2-factor2);
-			.border-radius(6px);
+			.border-radius(@box-radius-large);
 			.box-shadow();
 		}
 		
@@ -440,7 +453,7 @@
 		}			
 	}
 
-	@media screen and (min-width: 600px) {
+	@media screen and (min-width: @min-tablet-screen-width) {
 		@{menu-selector} {
 			display: block !important;
 		}

@@ -3,7 +3,7 @@
  * Utilisations de pipelines par Menu animé
  *
  * @plugin     Menu animé
- * @copyright  2015
+ * @copyright  2015-2017
  * @author     Louis Possoz
  * @licence    GNU/GPL
  * @package    SPIP\Menu_anime\Pipelines
