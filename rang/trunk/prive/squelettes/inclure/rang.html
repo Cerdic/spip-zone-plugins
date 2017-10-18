@@ -8,33 +8,36 @@ if (window.jQuery) {
 		$.getScript("#CHEMIN{prive/javascript/ui/mouse.js}", function(){
 		$.getScript("#CHEMIN{prive/javascript/ui/sortable.js}", function(){
 		]
-			//(".spip.liste").parent().parent().addClass('johnson');
-			// gestion déplacement / réordonnement
-			$(".spip.liste tbody" ).sortable({
-				placeholder: ".ui-state-highlight",
-				cursor: "move",
-				containment: "parent",
-				tolerance: "pointer",
-				update: function( event, ui ) {
-					var url = "[(#VAL{trier_items}|generer_url_action{#ENV{objet}, 1})]";
-					var $me = $(this);
-					var liste = $me.sortable("toArray");
-
-					var page = parseInt(window.location.search.split('&debut_liste_#ENV{suffixe_pagination}=')[1]);
-					if (isNaN(page) === false) {
-						page = (page < 0) ? 0 : page;
-					} else {
-						page = 0;
+			
+		$(".spip.liste tbody").each(function(){
+			if($(this).find('tr').length > 1 && $(this).find('tr').attr('id')) {
+				$(this).sortable({
+					placeholder: ".ui-state-highlight",
+					cursor: "move",
+					containment: "parent",
+					tolerance: "pointer",
+					update: function( event, ui ) {
+						var url = "[(#VAL{trier_items}|generer_url_action{#ENV{objet}, 1})]";
+						var $me = $(this);
+						var liste = $me.sortable("toArray");
+	
+						var page = parseInt(window.location.search.split('&debut_liste_#ENV{suffixe_pagination}=')[1]);
+						if (isNaN(page) === false) {
+							page = (page < 0) ? 0 : page;
+						} else {
+							page = 0;
+						}
+	
+						$.post(url, {objet: "#ENV{objet}", id_parent: "#ENV{id_parent, rien}", debut_liste: page, trier: liste})
+							.done(function(data){
+								$me.ajaxReload();
+							});
 					}
+				});
+			}
+		});
 
-					$.post(url, {objet: "#ENV{objet}", id_parent: "#ENV{id_parent, rien}", debut_liste: page, trier: liste})
-						.done(function(data){
-							$me.ajaxReload();
-						});
-				}
-			});
-
-			$( ".spip.liste tbody" ).disableSelection();
+		$( ".spip.liste tbody" ).disableSelection();
 
 		[(#SPIP_VERSION|version_compare{3.2, <}|oui)
 		})})})})
