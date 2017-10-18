@@ -39,6 +39,17 @@ function tradrub_proposee_formulaire_fond($flux) {
 	return $flux;
 }
 
+/**
+ * Insertion dans le pipeline formulaire_verifier (SPIP)
+ *
+ * Sur les formulaires d'édition de rubriques et articles, afficher une erreur en fonction de la configuration :
+ * - si une traduction est faite dans la même rubrique que l'originale
+ * - si une traduction est faite dans le même secteur que l'originale
+ *
+ * @pipeline formulaire_verifier
+ * @param array $flux
+ * @return array
+ */
 function tradrub_proposee_formulaire_verifier($flux) {
 	if (!isset($flux['data']['id_parent']) && intval(_request('lier_trad')) > 0 and in_array($flux['args']['form'], array('editer_rubrique', 'editer_article'))) {
 		if (!function_exists('lire_config')) {
