@@ -1,0 +1,9 @@
+<B_trads>
+<p class="trads_rubriques">
+<strong><:tradrub_proposee:info_raccourcis:></strong>
+<BOUCLE_trads(DATA){source table, #ENV{traductions}}>
+[(#SET{titre,[\[#VALEUR{lang}\] (#VALEUR{titre}|typo)]})]
+<a class="btn bouton[(#VALEUR{id_rubrique}|=={#ENV{id_parent}}|oui)on]" href="#" onclick="$(this).parents('form').find('input[name=id_parent]').val(#VALEUR{id_rubrique});$(this).parents('form').find('input[name=titreparent]').val('[(#GET{titre})]');$('.trads_rubriques a.btn').removeClass('on');$(this).addClass('on');return false;">[(#GET{titre})]</a>
+</BOUCLE_trads>
+</p>
+</B_trads>
