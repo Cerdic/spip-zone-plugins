@@ -66,7 +66,7 @@ function rang_recuperer_fond($flux) {
 	$objets_selectionnes = lire_config('rang/rang_objets');
 	$liste = lister_tables_objets_sql();
 	foreach ($liste as $key => $value) {
-		if ($value['editable'] == 'oui' AND !isset($value['field']['id_rubrique'])) {
+		if ($value['editable'] == 'oui' /*AND !isset($value['field']['id_rubrique'])*/) {
 			$objet = table_objet($key);
 			if (strpos($objets_selectionnes,$objet)) {
 				$contextes[] = $objet;
