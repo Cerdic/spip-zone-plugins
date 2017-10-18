@@ -4,16 +4,12 @@
 	num titre,1,
 	id_article,1,
 	points,-1
-}|defaut_tri_defined})
-]
-
-[(#REM) 
+}})
+][(#REM) 
 	activer le tri par rang si l'objet 'article' a été sélectionné dans la conf du plugin
 	sauf sur la page d'accueil (derniers articles publiés etc.) : garder le tri par date
-]
-[(#VAL{article}|rang_objet_dans_config|oui|et{#ENV{exec}|=={'accueil'}|non}) [(#VAL{rang}|setenv{par})] #SET{tri,rang} ]
-
-<B_liste_art>
+][(#VAL{article}|rang_objet_dans_config|oui|et{#ENV{exec}|=={'accueil'}|non}) [(#VAL{rang}|setenv{par})] #SET{tri,rang}
+]<B_liste_art>
 #ANCRE_PAGINATION
 <div class="liste-objets articles">
 <table class='spip liste'>
@@ -30,7 +26,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_art(ARTICLES){id_article?}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,date}|defaut_tri_par{#GET{defaut_tri}},#GET{defaut_tri},session_liste_art}{par titre}{pagination #ENV{nb,10}}{!lang_select}>
+	<BOUCLE_liste_art(ARTICLES){id_article?}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}{!lang_select}>
 		[(#LANG|changer_typo)]
 		<tr id="id_#ID_ARTICLE" class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			[(#ENV{id_rubrique}|et{#VAL{article}|rang_objet_dans_config}|oui)<td class="picto">[(#CHEMIN_IMAGE{draggable-16.png}|balise_img)]</td>]
