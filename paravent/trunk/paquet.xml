@@ -1,9 +1,9 @@
 <paquet
 	prefix="paravent"
 	categorie="maintenance"
-	version="1.1.0"
+	version="1.1.1"
 	etat="test"
-	compatibilite="[3.0.5;3.1.*]"
+	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/paravent-64.png"
 	documentation="https://contrib.spip.net/Paravent"
 	schema="1.0.0" 
