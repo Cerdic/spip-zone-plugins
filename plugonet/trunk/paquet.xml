@@ -1,12 +1,12 @@
 <paquet
 	prefix="plugonet"
 	categorie="outil"
-	version="1.1.3"
+	version="1.1.4"
 	etat="stable"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="plugonet-64.png"
 	documentation="http://blog.smellup.net/spip.php?article7"
->	
+>
 
 	<nom>PlugOnet</nom>
 	<!-- Migrer de la DTD plugin à celle de paquet -->

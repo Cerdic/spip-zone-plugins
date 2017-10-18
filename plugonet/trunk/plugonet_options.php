@@ -34,7 +34,7 @@ if (!defined('_PLUGONET_VERSION_SPIP_MIN'))
 	define('_PLUGONET_VERSION_SPIP_MIN', '1.9.0');
 // -- Pour l'instant on ne connait pas la borne sup exacte
 if (!defined('_PLUGONET_VERSION_SPIP_MAX'))
-	define('_PLUGONET_VERSION_SPIP_MAX', '3.1.99');
+	define('_PLUGONET_VERSION_SPIP_MAX', '3.2.99');
 
 // Balises dites techniques contenues dans le fichier plugin.xml
 $GLOBALS['balises_techniques_plugin'] = array(
