@@ -38,3 +38,26 @@ function tradrub_proposee_formulaire_fond($flux) {
 	}
 	return $flux;
 }
+
+function tradrub_proposee_formulaire_verifier($flux) {
+	if (!isset($flux['data']['id_parent']) && intval(_request('lier_trad')) > 0 and in_array($flux['args']['form'], array('editer_rubrique', 'editer_article'))) {
+		if (!function_exists('lire_config')) {
+			include_spip('inc/config');
+		}
+		if ($flux['args']['form'] == 'editer_rubrique') {
+			$infos = sql_fetsel('id_parent, id_secteur', 'spip_rubriques', 'id_rubrique = '._request('lier_trad'));
+		} else {
+			$infos = sql_fetsel('id_rubrique as id_parent, id_secteur', 'spip_articles', 'id_article = '._request('lier_trad'));
+		}
+		if (lire_config('tradrub_proposee/interdit_meme_rubrique') == 'on' 
+			&& (intval(_request('id_parent')) == $infos['id_parent'])) {
+			$flux['data']['id_parent'] = _T('tradrub_proposee:erreur_interdit_meme_rubrique');
+		}
+		if (!isset($flux['data']['id_parent']) 
+			&& lire_config('tradrub_proposee/interdit_meme_secteur') == 'on' 
+			&& (sql_getfetsel('id_secteur', 'spip_rubriques', 'id_rubrique='.intval(_request('id_parent'))) == $infos['id_secteur'])) {
+			$flux['data']['id_parent'] = _T('tradrub_proposee:erreur_interdit_meme_secteur');
+		}
+	}
+	return $flux;
+}

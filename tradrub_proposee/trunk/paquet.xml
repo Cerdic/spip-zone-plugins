@@ -1,7 +1,7 @@
 <paquet
 	prefix="tradrub_proposee"
 	categorie="edition"
-	version="0.1.0"
+	version="0.2.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/tradrub_proposee-32.png"
@@ -14,5 +14,6 @@
 
 	<necessite nom="tradrub" />
 	<pipeline nom="formulaire_fond" inclure="tradrub_proposee_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="tradrub_proposee_pipelines.php" />
 
 </paquet>
