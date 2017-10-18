@@ -185,8 +185,8 @@ function formulaires_editer_produit_identifier_dist($id_produit = 'new', $id_rub
 function formulaires_editer_produit_charger($id_produit = 'new', $id_rubrique = 0, $retour = '') {
 	$config = lire_config('produits') ;
 
-	// Si l'insertion est limitée à une rubrique, on peut déjà la passer par defaut
-	if ($config['limiter_ajout'] && (count($config['limiter_ident_secteur']) == 1)) {
+	// Si pas de rubrique passée et que l'insertion est limitée à une seule rubrique, on peut déjà la passer par defaut
+	if (!$id_rubrique && $config['limiter_ajout'] && (count($config['limiter_ident_secteur']) == 1)) {
 		$id_rubrique = $config['limiter_ident_secteur'][0] ;
 	}
 
