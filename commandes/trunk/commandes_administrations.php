@@ -143,6 +143,10 @@ function commandes_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.7.7'] = array(
 	    array('maj_tables', array('spip_commandes_details')),
 	);
+	// passer en decimal plutôt que float
+	$maj['0.7.8'] = array(
+		array('sql_alter', 'TABLE spip_commandes_details CHANGE prix_unitaire_ht prix_unitaire_ht DECIMAL(20,6) NOT NULL DEFAULT 0'),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

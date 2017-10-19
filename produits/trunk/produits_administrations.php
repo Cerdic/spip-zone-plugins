@@ -38,6 +38,10 @@ function produits_upgrade($nom_meta_base_version, $version_cible) {
 		array('maj_tables', array('spip_produits')),
 		array('sql_alter', 'TABLE spip_produits CHANGE taxe taxe DECIMAL(4,4) NULL DEFAULT NULL')
 	);
+	// passer en decimal plutôt que float
+	$maj['1.1.2'] = array(
+		array('sql_alter', 'TABLE spip_produits CHANGE prix_ht prix_ht DECIMAL(20,6) NOT NULL DEFAULT 0'),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

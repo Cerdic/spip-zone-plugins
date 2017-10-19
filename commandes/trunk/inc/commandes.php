@@ -147,8 +147,8 @@ function commandes_ajouter_detail($id_commande, $emplette, $ajouter=true){
 	}
 
 	// calculer la taxe
-	$prix_ht = $fonction_prix_ht($emplette['objet'], $emplette['id_objet'],3);
-	$prix = $fonction_prix($emplette['objet'], $emplette['id_objet'],3);
+	$prix_ht = $fonction_prix_ht($emplette['objet'], $emplette['id_objet'],6);
+	$prix = $fonction_prix($emplette['objet'], $emplette['id_objet'],6);
 	if($prix_ht > 0)
 		$taxe = round(($prix - $prix_ht) / $prix_ht, 3);
 	else
