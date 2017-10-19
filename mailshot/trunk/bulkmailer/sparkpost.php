@@ -464,8 +464,8 @@ class FacteurSparkpost extends Facteur {
 		  AND $id = $this->send_options['tracking_id']){
 			$this->message['options']['open_tracking'] = true;
 			$this->message['options']['clic_tracking'] = true;
-			// prefixer le tracking par l'url du site pour ne pas melanger les feedbacks
-			$this->message['campaign_id'] = protocole_implicite($GLOBALS['meta']['adresse_site'])."/#".$this->send_options['tracking_id'];
+			// prefixer le tracking par l'url du site (coupée à 45 caractères car campaign_id accepte 64 max) pour ne pas melanger les feedbacks
+			$this->message['campaign_id'] = substr(protocole_implicite($GLOBALS['meta']['adresse_site']), 0, 45)."/#".$this->send_options['tracking_id'];
 		}
 
 		try {
