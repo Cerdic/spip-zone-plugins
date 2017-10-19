@@ -238,7 +238,7 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
  * @return string
  */
 function formidable_generer_valeur_texte_saisie($valeur, $saisie) {
-	static $resultats = [];
+	static $resultats = array();
 	static $tenter_unserialize = null;
 	if (is_null($tenter_unserialize)) {
 		$tenter_unserialize = charger_fonction('tenter_unserialize', 'filtre/');
