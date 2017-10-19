@@ -1,0 +1,12 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			#SAISIE{input,code_coupon,label=Code}
+			<input type="submit" class="submit" value="<:coupons:utiliser_code_reduction:>" />
+		</div>
+	</form>
+</div>
