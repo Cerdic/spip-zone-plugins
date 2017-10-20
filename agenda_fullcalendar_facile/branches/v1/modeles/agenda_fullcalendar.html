@@ -1,0 +1,82 @@
+<script type="text/javascript">/*<![CDATA[*/
+jQuery(document).ready(function($) {
+
+
+	jQuery('#agenda').fullCalendar({
+			editable: false,
+			events: "[(#URL_PAGE{agenda.json})]",
+			header: {
+				left: 'prevYear,prev,next,nextYear today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			firstDay: 1,
+			monthNames:['<:date_mois_1|textebrut:>','<:date_mois_2|textebrut:>','<:date_mois_3|textebrut:>','<:date_mois_4|textebrut:>','<:date_mois_5|textebrut:>','<:date_mois_6|textebrut:>','<:date_mois_7|textebrut:>','<:date_mois_8|textebrut:>','<:date_mois_9|textebrut:>','<:date_mois_10|textebrut:>','<:date_mois_11|textebrut:>','<:date_mois_12|textebrut:>'],
+			monthNamesShort:['<:date_mois_1_abbr|textebrut:>','<:date_mois_2_abbr|textebrut:>','<:date_mois_3_abbr|textebrut:>','<:date_mois_4_abbr|textebrut:>','<:date_mois_5_abbr|textebrut:>','<:date_mois_6_abbr|textebrut:>','<:date_mois_7_abbr|textebrut:>','<:date_mois_8_abbr|textebrut:>','<:date_mois_9_abbr|textebrut:>','<:date_mois_10_abbr|textebrut:>','<:date_mois_11_abbr|textebrut:>','<:date_mois_12_abbr|textebrut:>'],
+			dayNames:['<:date_jour_1|textebrut:>','<:date_jour_2|textebrut:>','<:date_jour_3|textebrut:>','<:date_jour_4|textebrut:>','<:date_jour_5|textebrut:>','<:date_jour_6|textebrut:>','<:date_jour_7|textebrut:>'],
+			dayNamesShort:['<:date_jour_1_abbr|textebrut:>','<:date_jour_2_abbr|textebrut:>','<:date_jour_3_abbr|textebrut:>','<:date_jour_4_abbr|textebrut:>','<:date_jour_5_abbr|textebrut:>','<:date_jour_6_abbr|textebrut:>','<:date_jour_7_abbr|textebrut:>'],
+			buttonText: {
+					today: '<:date_aujourdhui|textebrut:>',
+					month: '<:organiseur:cal_par_mois|textebrut:>',
+					day: '<:organiseur:cal_par_jour|textebrut:>',
+					week: '<:organiseur:cal_par_semaine|textebrut:>'
+			},
+			weekMode : 'liquid',
+			loading: function(bool) {
+				if (bool) $('#calendrier-loading').show();
+				else $('#calendrier-loading').hide();
+			},
+			timeFormat: {
+
+				agenda: "H'h'mm{ - H'h'mm}",
+
+				'': "H'h'(mm)"
+			},
+			axisFormat: "H'h'(mm)",
+			allDayText:'<:organiseur:cal_jour_entier|textebrut:>',
+			columnFormat: {
+				month: 'ddd',
+				week: 'ddd d/M',
+				day: 'dddd d/M'
+			},
+			titleFormat: {
+				month: 'MMMM yyyy',
+				week: "d [ MMM] [ yyyy]{ '&#8212;' d MMM yyyy}",
+				day: 'dddd d MMM yyyy'
+			},
+			dayClick: function(date, allDay, jsEvent, view) {
+				if(view.name=='month'){
+					$('.fc-button-agendaWeek').click();
+					$('#calendrier').fullCalendar( 'gotoDate', date );
+				}
+				else
+					if(view.name=='agendaWeek'){
+						$('.fc-button-agendaDay').click();
+						$('#calendrier').fullCalendar( 'gotoDate', date );
+					}
+			},
+			isRTL : [(#LANG_DIR|=={rtl}|?{true,false})]
+	})
+
+});
+/*]]>*/</script>
+<div id="agenda">
+</div>
+<B_agenda>
+<div id="calendrier-loading">
+<p class="pagination">#PAGINATION</p>
+<BOUCLE_agenda(DATA){source json, #PRODUIRE{fond=agenda.json, start=0,end=2147483647,_=#REM|time}}{pagination 15}>
+    <dl>
+        [<dt><:agenda:evenement_titre:></dt>
+        <dd><a href="#VALEUR{url}">(#VALEUR{title})</a></dd>]
+
+        [<dt><:agenda:evenement_date:></dt>
+        <dd>(#VALEUR{start}|Agenda_affdate_debut_fin{#VALEUR{end},#VALEUR{allDay}|=={true}|?{non,oui}})</dd>]
+
+        [<dt><:agenda:evenement_descriptif:></dt>
+        <dd>(#VALEUR{description})</dd>]
+    </dl>
+</BOUCLE_agenda>
+<p class="pagination">#PAGINATION</p>
+</div>
+</B_agenda>
