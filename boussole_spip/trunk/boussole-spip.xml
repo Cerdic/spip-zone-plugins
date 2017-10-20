@@ -19,9 +19,9 @@
 
 	<!-- Sites d'aide & echanges autour de SPIP -->
 	<groupe type="aide">
-		<site alias="forum" src="http://forum.spip.net/" actif="oui" />
+		<site alias="forum" src="https://forum.spip.net/" actif="oui" />
 		<site alias="user" src="http://listes.rezo.net/mailman/listinfo/spip/" actif="oui" />
-		<site alias="irc" src="http://irc.spip.net/" actif="oui" />
+		<site alias="irc" src="https://irc.spip.net/" actif="oui" />
 		<site alias="party" src="https://party.spip.net/" actif="oui" />
 		<site alias="edgard" src="https://edgard.spip.net/" actif="oui" />
 	</groupe>
