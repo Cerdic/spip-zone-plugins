@@ -21,7 +21,7 @@ function inc_prix_ht_dist($type_objet, $id_objet, $arrondi = 2, $serveur = ''){
 		and $cle_objet = id_table_objet($type_objet,$serveur)
 		and $ligne = sql_fetsel('*', $table_sql, "$cle_objet = $id_objet",'','','','',$serveur)
 	){
-		// Existe-t-il une fonction précise pour le prix HT de ce type d'objet : prix_ht_<objet>() dans prix/<objet>.php
+		// Existe-t-il une fonction précise pour le prix HT de ce type d'objet : prix_<objet>_ht() dans prix/<objet>.php
 		if ($fonction_ht = charger_fonction('ht', "prix/$type_objet", true)){
 			// On passe la ligne SQL en paramètre pour ne pas refaire la requête
 			$prix_ht = $fonction_ht($id_objet, $ligne);
