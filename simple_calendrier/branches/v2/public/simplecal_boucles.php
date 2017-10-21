@@ -24,7 +24,7 @@ function critere_tout_voir_dist($idb, &$boucles, $crit) {
 	$boucle->modificateur['tout_voir'] = true;
 }
 }
-function simplecal_pre_boucle(&$boucle){
+function simplecal_pre_boucle($boucle){
 	if (!isset($boucle->modificateur['tout_voir'])){
 		$securise = false;
 		
