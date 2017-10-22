@@ -187,7 +187,7 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
  * Les champs textuels peuvent subir un traitement typo si demandé.
  *
  * @api
- * @uses ncore_squelette_identifier()
+ * @uses ncore_conteneur_identifier()
  * @uses ncore_noisette_decrire()
  *
  * @param string  $plugin

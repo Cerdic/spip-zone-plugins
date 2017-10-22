@@ -6,8 +6,6 @@
  * ou à un autre service de stockage, soit déroule sa propre implémentation.
  * Ainsi, les plugins externes peuvent, si elle leur convient, utiliser l'implémentation proposée par N-Core
  * sans coder la moindre fonction.
- *
- * @package SPIP\NCORE\SERVICE
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
