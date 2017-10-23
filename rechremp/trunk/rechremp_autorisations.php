@@ -50,4 +50,3 @@ function autoriser_rechremp_configurer_dist($faire, $type, $id, $qui, $opt) {
     return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }
 
-?>

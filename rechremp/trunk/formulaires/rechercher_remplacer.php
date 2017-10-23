@@ -24,6 +24,7 @@ function formulaires_rechercher_remplacer_verifier_dist() {
 		$erreurs['search'] = _T('info_obligatoire');
 	} else {
 		if (!_request('remplacer')) {
+			$erreurs['message_erreur'] = '';
 			// recherche a blanc pour voir/confirmer le remplacement
 			$erreurs['search_results'] =
 				"<input type='hidden' name='replace_check_table[dummy]' value='yes' />"
