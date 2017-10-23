@@ -29,7 +29,7 @@ function action_remplir_panier_dist($arg=null) {
 	}
 
 	// retirer un objet du panier
-	if(isset($negatif)) {
+	if(isset($negatif) && $negatif) {
 		$quantite = $paniers_arrondir_quantite(-1 * $quantite, $objet, $id_objet);
 	}
 		
