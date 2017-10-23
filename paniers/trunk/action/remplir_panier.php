@@ -85,7 +85,7 @@ function action_remplir_panier_dist($arg=null) {
 		}
 		// Sinon on crée le lien
 		else {
-			sql_insertq(
+			$id_panier_lien = sql_insertq(
 				'spip_paniers_liens',
 				array(
 					'id_panier' => $id_panier,
@@ -104,6 +104,24 @@ function action_remplir_panier_dist($arg=null) {
 		);
 	}
 
+	// appel du pipeline remplir_panier pour ajouter des traitements, vérifications
+	$args_pipeline = array(
+		'id_panier' => $id_panier,
+		'objet' => $objet,
+		'id_objet' => $id_objet,
+		'quantite' => $quantite,
+		'negatif' => $negatif,
+	);	
+	if(isset($id_panier_lien)){
+		$args_pipeline['id_panier_lien'] = $id_panier_lien;	
+	}
+	pipeline(
+		'remplir_panier',
+		array(
+			'args' => $args_pipeline
+		)
+	);
+	
 	// On vide le cache de l'objet sur lequel on vient de travailler.
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='$objet/$id_objet'");
