@@ -9,8 +9,10 @@
 <BOUCLE_secteur(HIERARCHIE){tout}{id_rubrique}{racine}{0,1}>
 <div class="menu menu_rubriques">
 	<h2>#TITRE</h2>
-	<B_rubriques_rubrique>
 	<ul>
+		<BOUCLE_article(ARTICLES){id_rubrique}{!par date}{par num titre}>
+		[<li><a href="#URL_ARTICLE" class="article[ (#EXPOSE)]">(#TITRE)</a></li>]
+		</BOUCLE_article>
 		<BOUCLE_rubriques_rubrique(RUBRIQUES) {id_parent} {par num titre, date} >
 		<li>
 		<a href="#URL_RUBRIQUE"[ class="(#EXPOSE)"]>[(#TITRE)]</a>
@@ -29,6 +31,5 @@
 		</li>
 		</BOUCLE_rubriques_rubrique>
 	</ul>
-	</B_rubriques_rubrique>
 </div>
 </BOUCLE_secteur>
