@@ -1,0 +1,41 @@
+<traduction module="noie" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/noie/lang/" reference="fr">
+	<langue code="ar" url="https://trad.spip.net/tradlang_module/noie?lang_cible=ar" total="2" traduits="1" relire="0" modifs="1" nouveaux="0" pourcent="50.00">
+	</langue>
+	<langue code="ast" url="https://trad.spip.net/tradlang_module/noie?lang_cible=ast" total="2" traduits="1" relire="0" modifs="1" nouveaux="0" pourcent="50.00">
+		<traducteur nom="Xuacu" lien="https://trad.spip.net/auteur/xuacu" />
+	</langue>
+	<langue code="ca" url="https://trad.spip.net/tradlang_module/noie?lang_cible=ca" total="2" traduits="1" relire="0" modifs="1" nouveaux="0" pourcent="50.00">
+	</langue>
+	<langue code="de" url="https://trad.spip.net/tradlang_module/noie?lang_cible=de" total="2" traduits="1" relire="0" modifs="1" nouveaux="0" pourcent="50.00">
+	</langue>
+	<langue code="en" url="https://trad.spip.net/tradlang_module/noie?lang_cible=en" total="2" traduits="1" relire="0" modifs="1" nouveaux="0" pourcent="50.00">
+		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
+		<traducteur nom="Mark" lien="https://trad.spip.net/auteur/mark" />
+	</langue>
+	<langue code="es" url="https://trad.spip.net/tradlang_module/noie?lang_cible=es" total="2" traduits="1" relire="0" modifs="1" nouveaux="0" pourcent="50.00">
+		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
+	</langue>
+	<langue code="eu" url="https://trad.spip.net/tradlang_module/noie?lang_cible=eu" total="2" traduits="1" relire="0" modifs="1" nouveaux="0" pourcent="50.00">
+		<traducteur nom="otalazt" lien="https://trad.spip.net/auteur/otalazt" />
+	</langue>
+	<langue code="fa" url="https://trad.spip.net/tradlang_module/noie?lang_cible=fa" total="2" traduits="1" relire="0" modifs="1" nouveaux="0" pourcent="50.00">
+	</langue>
+	<langue code="fi" url="https://trad.spip.net/tradlang_module/noie?lang_cible=fi" total="2" traduits="1" relire="0" modifs="1" nouveaux="0" pourcent="50.00">
+	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/noie?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/noie?lang_cible=fr_tu" total="2" traduits="1" relire="0" modifs="1" nouveaux="0" pourcent="50.00">
+		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
+	</langue>
+	<langue code="it" url="https://trad.spip.net/tradlang_module/noie?lang_cible=it" total="2" traduits="1" relire="0" modifs="1" nouveaux="0" pourcent="50.00">
+	</langue>
+	<langue code="lt" url="https://trad.spip.net/tradlang_module/noie?lang_cible=lt" total="2" traduits="1" relire="0" modifs="1" nouveaux="0" pourcent="50.00">
+	</langue>
+	<langue code="nb" url="https://trad.spip.net/tradlang_module/noie?lang_cible=nb" total="2" traduits="1" relire="0" modifs="1" nouveaux="0" pourcent="50.00">
+	</langue>
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/noie?lang_cible=sk" total="2" traduits="1" relire="0" modifs="1" nouveaux="0" pourcent="50.00">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
+	</langue>
+	<langue code="sv" url="https://trad.spip.net/tradlang_module/noie?lang_cible=sv" total="2" traduits="1" relire="0" modifs="1" nouveaux="0" pourcent="50.00">
+	</langue>
+</traduction>
