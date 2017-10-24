@@ -1,7 +1,7 @@
 <paquet
 	prefix="critere_mots"
 	categorie="navigation"
-	version="4.1.1"
+	version="4.1.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="img_pack/stock_filter-data-by-criteria-24.png"
@@ -13,9 +13,9 @@
 
 	<auteur>Fil</auteur>
 	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
-	<auteur>RealET (Formulaires)</auteur>
+	<auteur lien="https://contrib.spip.net/RealET">RealET (Formulaires)</auteur>
 
-	<copyright>2016</copyright>
+	<copyright>2017</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 </paquet>

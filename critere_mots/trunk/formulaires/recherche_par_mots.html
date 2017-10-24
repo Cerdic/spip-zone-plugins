@@ -24,7 +24,7 @@
 	<//B_PlusieursGroupes>
 	<B_MotsDuGroupe>
 	<select id="recherchemot" name="mots[]" class="searchfield" onchange="if ((this.value != '')[ && (this.value != (#ENV{id_mot}))]) {$('#formulaire_recherche_par_mot').submit();}">
-		<option value="">[(#GET{legroupe}|?{<:mots:titre_mots_tous:>,<:mots:mots_clefs_meme_groupe:>})]</option>
+		<option value="">[(#GET{legroupe}|?{<:mots:titre_mots_tous:>,<:public:mots_clefs_meme_groupe:>})]</option>
 		<BOUCLE_MotsDuGroupe(MOTS){id_groupe=#ENV{le_groupe,#GET{legroupe}}}{par titre}{id_mot !IN #ENV{mots, #ARRAY{}}}>
 		#SET{avecunmotdeplus, #ARRAY{}}
 		[(#SET{avecunmotdeplus,[(#ENV{mots, #ARRAY{}}|push{#ID_MOT})]})]
