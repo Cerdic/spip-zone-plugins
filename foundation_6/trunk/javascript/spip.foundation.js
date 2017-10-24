@@ -26,7 +26,6 @@ function spip_foundation() {
 
 	});
 
-
 	// Restaurer le deeplinking des tab Foundation (pour les version < 6.3.1)
 	// En attendant que la fonction soit de retour officiellement
 	var version = Foundation.version.split('.');
@@ -39,4 +38,8 @@ function spip_foundation() {
 }
 
 spip_foundation();
-onAjaxLoad(spip_foundation);
+onAjaxLoad(function () {
+	spip_foundation();
+	// Restaurer les reveal modal après un chargement ajax
+	$(".reveal").foundation();
+});
