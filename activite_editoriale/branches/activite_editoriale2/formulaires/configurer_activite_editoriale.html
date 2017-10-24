@@ -1,0 +1,20 @@
+<div class="formulaire_spip formulaire_configurer">
+	<form action="#SELF" method="post">
+    #ACTION_FORMULAIRE{#ENV{action}}
+        
+        <ul>
+            <li>
+                <label for="champ"><:activite_editoriale:cfg_champ:></label>
+                <select name="champ" id="champ">
+                    <option value="maj_rubrique" [(#ENV{champ}|=={maj_rubrique}|oui) selected="selected"]><:activite_editoriale:cfg_maj_rubrique:></option>
+                    <option value="date_modif_branche" [(#ENV{champ}|=={date_modif_branche}|oui) selected="selected"]><:activite_editoriale:cfg_date_modif_branche:></option>
+                    <option value="date_modif_rubrique" [(#ENV{champ}|=={date_modif_rubrique}|oui) selected="selected"]><:activite_editoriale:cfg_date_modif_rubrique:></option>
+                    
+                </select>
+            </li>
+    	</ul>
+    <p class="boutons">
+	<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+	</p>
+	</form>
+</div>
