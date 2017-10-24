@@ -640,11 +640,11 @@ function albums_album_boutons_actions($flux) {
 			'autoriser' => autoriser('supprimer', 'album', $id_album),
 			'html'      => bouton_action(
 				_T('album:bouton_supprimer'),
-				generer_action_auteur('supprimer_album', $id_album, self()),
-				'ajax supprimer',
+				generer_action_auteur('supprimer_album', $id_album, _request('exec') == 'album' ? generer_url_ecrire('albums'): self()),
+				_request('exec') == 'album' ? 'supprimer': 'ajax supprimer',
 				_T('album:message_supprimer'),
 				_T('album:bouton_supprimer_explication'),
-				'(function(){jQuery("#album$id_album").animateRemove();return true;})()'
+				_request('exec') == 'album' ? '':'(function(){jQuery("#album$id_album").animateRemove();return true;})()'
 			)
 		),
 		'vider' => array(
