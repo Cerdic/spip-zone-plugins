@@ -1,0 +1,42 @@
+<paquet
+	prefix="vimeo"
+	categorie="multimedia"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.1.6;3.1.*]"
+	logo="prive/themes/spip/images/vimeo-64.png"
+	documentation=""
+	schema="1.0.0"
+>
+	<!--
+		Paquet généré le 2017-10-01 13:16:17
+		(Vous pouvez bien entendu supprimer ces commentaires)
+	-->
+
+	<nom>Vimeo</nom>
+	<!-- Piocher les datas d&#039;une video vimeo et les cacher sur le site. -->
+
+	<auteur lien='http://www.lesmoutonssauvages.com'>Charles Stephan</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<lib nom="vimeo" lien="https://github.com/vimeo/vimeo.php/archive/master.zip" />
+	<necessite nom="saisies" compatibilite="[2.18.23;]" />
+	<necessite nom="yaml" compatibilite="[1.5.3;]" />
+	<necessite nom="multilang" compatibilite="[1.2.2;]" />
+	<necessite nom="saisies" compatibilite="[2.4.0;]" />
+
+	<pipeline nom="autoriser" inclure="vimeo_autorisations.php" />
+
+	<pipeline nom="taches_generales_cron" inclure="vimeo_pipelines.php" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/vimeo.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/vimeo.php" />
+	<pipeline nom="affiche_milieu" inclure="vimeo_pipelines.php" />
+	<pipeline nom="affiche_auteurs_interventions" inclure="vimeo_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="vimeo_pipelines.php" />
+
+	<menu nom="configurer_vimeo" titre="vimeo:configuration_vimeo" parent="menu_configuration" icone="images/vimeo-16.png" />
+	<menu nom="vimeos" titre="vimeo:titre_vimeos" parent="menu_edition" icone="images/vimeo-16.png" action="vimeos" />
+	<menu nom="vimeo_creer" titre="vimeo:icone_creer_vimeo" parent="outils_rapides" icone="images/vimeo-new-16.png" action="vimeo_edit" parametres="new=oui" />
+</paquet>
