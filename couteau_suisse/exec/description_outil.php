@@ -31,6 +31,6 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour() pour afficher la ligne de configuration de l'outil");	
 	include_spip('inc/texte');
 	include_spip('couteau_suisse_fonctions'); // fonctions pour les pipelines
-	ajax_retour(propre($descrip));
+	ajax_retour(cs_propre_sain($descrip));
 }
 ?>
