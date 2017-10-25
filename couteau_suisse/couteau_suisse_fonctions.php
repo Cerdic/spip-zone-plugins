@@ -37,12 +37,19 @@ function cs_javascript($chaine) { return unicode_to_javascript(addslashes(html2u
 
 // Fonction propre() sans echapper_html_suspect() (SPIP >= 3.1)
 function cs_propre_sain($texte) {
-	if (!$texte or !defined('_SPIP30100')
+	if(!$texte or !defined('_SPIP30100')
 		or strpos($texte, '<') === false or strpos($texte, '=') === false) {
 		return propre($texte);
 	}
-	$texte = propre(str_replace('=', '#CSEGAL#', $texte));
-	return str_replace('#CSEGAL#', '=', $texte);
+	$texte = propre(str_replace('=', '@CSEGAL@', $texte));
+	return str_replace('@CSEGAL@', '=', $texte);
+}
+
+// Fonction _T() sans echapper_html_suspect() (SPIP >= 3.1)
+function _T_sain($texte, $args = array(), $options = array()) {
+	if(defined('_SPIP30100')) $options['sanitize'] = FALSE;
+	if(defined('_SPIP20100')) return _T($texte, $args, $options);
+	return _T($texte, $args);
 }
 
 ?>

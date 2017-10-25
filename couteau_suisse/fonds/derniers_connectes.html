@@ -28,7 +28,7 @@ ul.derniers_connectes a.suppr {color:#C00; font-weight:bold; }
 	#SET{nom,#URL_ECRIRE{#GET{auteur},id_auteur=#ID_AUTEUR}|cs_lien{#NOM}|inserer_attribut{title,#GET{title}}}
 	[(#STATUT|=={nouveau}|oui) #SET{icon,#GET{aide}}]
 	<li>
-	    [(#VAL{'couteau:stats_auteur'}|_T{#ARRAY{icon,#GET{icon},nom,#GET{nom},date,#EN_LIGNE|cs_date_long}})]
+	    [(#VAL{'couteau:stats_auteur'}|_T_sain{#ARRAY{icon,#GET{icon},nom,#GET{nom},date,#EN_LIGNE|cs_date_long}})]
     </li>
 </BOUCLE_aut>
 </ul>
@@ -51,7 +51,7 @@ ul.derniers_connectes a.suppr {color:#C00; font-weight:bold; }
     [(#DEFINED{_SPIP30000}|oui)
         <a href="#URL_ACTION_AUTEUR{instituer_objet,auteur-#ID_AUTEUR-5poubelle,#SELF#pagination_aut2}" class="suppr" title="<:texte_statut_poubelle|attribut_html:>">x</a>]
     </div>]
-    [(#VAL{'couteau:stats_auteur'}|_T{#ARRAY{icon,#GET{aide},nom,#GET{nom},date,#MAJ|cs_date_long}})]
+    [(#VAL{'couteau:stats_auteur'}|_T_sain{#ARRAY{icon,#GET{aide},nom,#GET{nom},date,#MAJ|cs_date_long}})]
     </li>
 </BOUCLE_aut2>
 </ul>

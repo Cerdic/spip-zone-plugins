@@ -42,10 +42,10 @@ function cs_introduire($texte) {
 	return $texte;
 }
 
-// Fonction propre() sans paragraphage
+// Fonction propre() sans paragraphage et sans echapper_html_suspect() (SPIP >= 3.1)
 function cs_propre($texte) {
 	include_spip('inc/texte');
-	return trim(PtoBR(propre($texte)));
+	return trim(PtoBR(cs_propre_sain($texte)));
 }
 
 // Filtre creant un lien <a> sur un texte
