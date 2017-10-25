@@ -27,8 +27,10 @@ if (!isset($GLOBALS['spip_pipeline']['porte_plume_cs_pre_charger']))
 // pour les serveurs qui aiment les virgules...
 $GLOBALS['spip_version_code'] = str_replace(',','.',$GLOBALS['spip_version_code']);
 // constantes de compatibilite
-// (pour info : SPIP 2.0 => 12691, SPIP 2.1 => 15133, SPIP 2.2 => ??, , SPIP 3.0 => 17743, SPIP 3.1 => 22159)
-if ($GLOBALS['spip_version_code']>=22159) 
+// (pour info : SPIP 2.0 => 12691, SPIP 2.1 => 15133, SPIP 2.2 => ??, , SPIP 3.0 => 17743, SPIP 3.1 => 22159, SPIP 3.2 => 22653)
+if ($GLOBALS['spip_version_code']>=22653) 
+	{ @define('_SPIP30200', 1); @define('_SPIP30100', 1); @define('_SPIP30000', 1); @define('_SPIP20200', 1); @define('_SPIP20100', 1); @define('_SPIP19300', 1); @define('_SPIP19200', 1); }
+elseif ($GLOBALS['spip_version_code']>=22159) 
 	{ @define('_SPIP30100', 1); @define('_SPIP30000', 1); @define('_SPIP20200', 1); @define('_SPIP20100', 1); @define('_SPIP19300', 1); @define('_SPIP19200', 1); }
 elseif ($GLOBALS['spip_version_code']>=17743) 
 	{ @define('_SPIP30000', 1); @define('_SPIP20200', 1); @define('_SPIP20100', 1); @define('_SPIP19300', 1); @define('_SPIP19200', 1); }

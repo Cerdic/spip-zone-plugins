@@ -475,7 +475,9 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 		unset($temp_jq_init);
 	}
 	$temp_jq = count($temp_jq)?"\njQuery(document).ready(function(){\n\t".join("\n\t", $temp_jq)."\n});":'';
-	$temp_js[] = "if(window.jQuery) {\nvar cs_sel_jQuery=typeof jQuery(document).selector=='undefined'?'@':'';\nvar cs_CookiePlugin=\"<cs_html>#CHEMIN{javascript/jquery.cookie.js}</cs_html>\";$temp_jq\n}";
+	$temp_js[] = "if(window.jQuery) {\nvar cs_sel_jQuery="
+		. (defined('_SPIP30200')?'':"typeof jQuery(document).selector=='undefined'?'@':")
+		. "'';\nvar cs_CookiePlugin=\"<cs_html>#CHEMIN{javascript/jquery.cookie.js}</cs_html>\";$temp_jq\n}";
 	// la fonction prop() remplace attr() sous jQuery 1.6
 	if(!defined('_SPIP30000')) $temp_js[] = "if(typeof jQuery.fn.prop !== 'function') jQuery.fn.prop=function(name, value){
 	if (typeof value === 'undefined') return this.attr(name); else return this.attr(name, value); };";
@@ -727,6 +729,7 @@ function cs_parse_code_js($code) {
 			$rempl = $metas_vars[$matches[1]];
 		} else {
 			// tant que le webmestre n'a pas poste, on prend la valeur (dynamique) par defaut
+
 			$rempl = cs_retire_guillemets(cs_get_defaut($matches[1]));
 		}
 		$code = str_replace($matches[0], $rempl, $code);
