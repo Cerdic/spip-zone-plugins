@@ -476,6 +476,9 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 	}
 	$temp_jq = count($temp_jq)?"\njQuery(document).ready(function(){\n\t".join("\n\t", $temp_jq)."\n});":'';
 	$temp_js[] = "if(window.jQuery) {\nvar cs_sel_jQuery=typeof jQuery(document).selector=='undefined'?'@':'';\nvar cs_CookiePlugin=\"<cs_html>#CHEMIN{javascript/jquery.cookie.js}</cs_html>\";$temp_jq\n}";
+	// la fonction prop() remplace attr() sous jQuery 1.6
+	if(!defined('_SPIP30000')) $temp_js[] = "if(typeof jQuery.fn.prop !== 'function') jQuery.fn.prop=function(name, value){
+	if (typeof value === 'undefined') return this.attr(name); else return this.attr(name, value); };";
 	unset($temp_jq);
 	if(count($temp_js)) {
 		$temp_js = "var cs_prive=window.location.pathname.match(/\\/ecrire\\/\$/)!=null;

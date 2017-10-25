@@ -107,10 +107,10 @@ function boites_privees_pre_boucle($flux) {
 	if(defined('_SPIP30000')) { 
 		if($w[0][0]=="'='" && $w[1][0]=="'='")
 			// SPIP v3 : 2 liens (sur objet et id_objet)
-			$flux->order[] = 'tri_auteurs_sqlfield('.$w[0][2].','.$w[1][2].','._q($L1[0]).','._q($flux->serveur).')';
+			$flux->order[] = 'tri_auteurs_sqlfield('.$w[0][2].','.$w[1][2].','._q($L1[0]).','._q(@$flux->serveur).')';
 	} elseif($w[0][0]=="'='")
 		// SPIP v2.1 : 1 lien (sur id_article)
-		$flux->order[] = 'tri_auteurs_sqlfield('.$w[0][2].',\'article\','._q($L1[0]).','._q($flux->serveur).')';
+		$flux->order[] = 'tri_auteurs_sqlfield('.$w[0][2].',\'article\','._q($L1[0]).','._q(@$flux->serveur).')';
 	return $flux;
 }
 

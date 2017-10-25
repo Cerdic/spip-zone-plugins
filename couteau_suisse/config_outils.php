@@ -250,6 +250,14 @@ add_outil( array(
 }',
 ));
 
+/*
+## valeurs modifiables dans mes_options
+## attention il est tres mal vu de prendre une periode < 20 minutes
+if (!defined('_PERIODE_SYNDICATION'))
+	define('_PERIODE_SYNDICATION', 2*60);
+if (!defined('_PERIODE_SYNDICATION_SUSPENDUE'))
+	define('_PERIODE_SYNDICATION_SUSPENDUE', 24*60);
+*/	
 
 add_variables( array(
 	'nom' => 'logo_Hmax',

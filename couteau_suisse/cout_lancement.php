@@ -294,11 +294,20 @@ function define_IMG_GD_MAX_PIXELS() {
 }
 
 // renvoie _T('couteauprive:'.$texte) puis detruit la chaine du module concerne
-function couteauprive_T($texte, $args=array()) {
-	$res = _T('couteauprive:'.$texte, $args);
-	if(defined('_SPIP19300') && isset($GLOBALS[$tmp='i18n_couteauprive_'.$GLOBALS['spip_lang']][$texte]))
-			unset($GLOBALS[$tmp][$texte]);
-	return $res;
+if(defined('_SPIP30100')) {
+	function couteauprive_T($texte, $args = array()) {
+		$res = _T('couteauprive:'.$texte, $args, array('sanitize' => FALSE));
+		if(isset($GLOBALS[$tmp='i18n_couteauprive_'.$GLOBALS['spip_lang']][$texte]))
+				unset($GLOBALS[$tmp][$texte]);
+		return $res;
+	}
+} else {
+	function couteauprive_T($texte, $args = array()) {
+		$res = _T('couteauprive:'.$texte, $args);
+		if(defined('_SPIP19300') && isset($GLOBALS[$tmp='i18n_couteauprive_'.$GLOBALS['spip_lang']][$texte]))
+				unset($GLOBALS[$tmp][$texte]);
+		return $res;
+	}
 }
 
 ?>

@@ -120,10 +120,13 @@ function description_outil_input2_callback($matches) {
 	return "<fieldset><legend><:label:$matches[3]:></legend><div>$matches[1]</div></fieldset>";
 }
 
+function description_outil_langues_callback($matches) { return _T($matches[1]); }
+	
 function description_outil_liens_callback($matches) {
 	global $outils;
 	$nom = isset($outils[$matches[1]]['nom'])?$outils[$matches[1]]['nom']:couteauprive_T($matches[1].':nom');
-	if(strpos($nom, '<:')!==false) $nom = preg_replace(',<:([:a-z0-9_-]+):>,ie', '_T("$1")', $nom);
+	if(strpos($nom, '<:')!==false) 
+		$nom = preg_replace_callback(',<:([:a-z0-9_-]+):>,i', 'description_outil_langues_callback', $nom);
 	return '<a href="'.generer_url_ecrire('admin_couteau_suisse', 'cmd=descrip&outil='.$matches[1])
 		."\" id=\"href_$matches[1]\" onclick=\"javascript:return cs_href_click(this);\">$nom</a>";
 }
@@ -172,7 +175,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 			));
 		}
 	}
-	if (strpos($descrip, '<:')!==false) {
+	if(strpos($descrip, '<:') !== false) {
 		if(!isset($outil['perso']))
 			// lames natives : reconstitution d'une description eventuellement morcelee
 			// exemple : <:mon_outil:3:> est remplace par couteauprive_T('mon_outil:description3')
@@ -218,7 +221,8 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	if(!$modif) {unset($cs_input_variable); return;}
 
 	// information sur les raccourcis disponibles
-	if($a=cs_aide_raccourci($outil_)) $res .= '<p>@puce@ '.couteauprive_T('detail_raccourcis').'<br /><html>'.$a.'.</html></p>';
+	if($a = cs_aide_raccourci($outil_))
+		$res .= '<p>@puce@ '.couteauprive_T('detail_raccourcis').'<br /><html>'.$a.'.</html></p>';
 	// envoi de la description courante en pipeline
 	include_spip("cout_define");
 	$res = pipeline('pre_description_outil', array('outil'=>$outil_, 'texte'=>$res, 'actif'=>$actif));
@@ -263,7 +267,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 			cs_root_canonicalize(_DIR_PLUGIN_COUTEAU_SUISSE), defined('_SPIP19300')?'':couteauprive_T('detail_jquery3')
 		), $res);
 	// remplacement des constantes qui restent de forme @_CS_XXXX@
-	if(strpos($res,'@_CS')!==false) 
+	if(strpos($res, '@_CS')!==false) 
 		$res = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 
 			create_function('$matches','return defined($matches[1])?constant($matches[1]):(\' (\'.couteauprive_T(\'outil_inactif\').\')\');'), $res);
 	// remplacement des liens vers un autre outil
@@ -271,6 +275,6 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 
 	// envoi de la description finale en pipeline
 #	list(,$res) = pipeline('post_description_outil', array($outil_, $res));
-	return cs_ajax_outil_greffe("description_outil-$index", $res);
+	return cs_ajax_outil_greffe('description_outil-'.$index, $res);
 }
 ?>

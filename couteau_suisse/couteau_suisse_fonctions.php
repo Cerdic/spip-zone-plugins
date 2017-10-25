@@ -35,4 +35,14 @@ function cs_charge_fonctions() {
 // raccourci pour le JavaScript
 function cs_javascript($chaine) { return unicode_to_javascript(addslashes(html2unicode($chaine))); }
 
+// Fonction propre() sans echapper_html_suspect() (SPIP >= 3.1)
+function cs_propre_sain($texte) {
+	if (!$texte or !defined('_SPIP30100')
+		or strpos($texte, '<') === false or strpos($texte, '=') === false) {
+		return propre($texte);
+	}
+	$texte = propre(str_replace('=', '#CSEGAL#', $texte));
+	return str_replace('#CSEGAL#', '=', $texte);
+}
+
 ?>

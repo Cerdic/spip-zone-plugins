@@ -148,7 +148,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 		. _T("couteauprive:outil_{$act}activer_le").'">'._T("couteauprive:outil_{$act}activer")."</a></div>";
 	if(strlen($temp = cs_action_fichiers_distants($outil) . cs_action_rapide($outil_id, $actif))) 
 		$s .= "<div class='cs_action_rapide' id='cs_action_rapide'>$temp</div>";
-	$s .= cs_nettoie(propre($descrip));
+	$s .= cs_nettoie(cs_propre_sain($descrip));
 	$p = '';
 	if($b = cs_balises_traitees($outil_id, '*, #'))
 		$p .=  '<p>' . couteauprive_T('detail_balise_etoilee', array('bal' => $b.'*')) . '</p>';
@@ -162,7 +162,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	if(isset($outil['contrib']) && strlen($outil['contrib']))
 		$p .= '<p>' . couteauprive_T('contrib', array('url'=>'[->'._URL_CONTRIB.$outil['contrib'].']')) . '</p>';
 
-	$p = $s . propre($p) . detail_outil($outil_id) . '</div>';
+	$p = $s . cs_propre_sain($p) . detail_outil($outil_id) . '</div>';
 	// Grrr les retours simples de SPIP 3 ...
 	return (defined('_AUTOBR') && strlen(_AUTOBR))?str_replace(_AUTOBR, ' ', $p):$p;
 
@@ -370,6 +370,7 @@ function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 		. attribut_html(couteauprive_T('outil_actualiser')).']" onclick="javascript:return cs_href_click(\'\', true);" />';
 	$a = '<ul style="margin:0.6em 0 0.6em 4em;"><li>' . join("</li><li style='margin-top:0.4em;'>", $a) . '</li></ul>';
 	$b = ($actif || !$erreur)?'rss_actualiser':($erreur?'distant_charger':false);
+
 	$b = $b?"\n<p class='cs_sobre'><input class='cs_sobre' type='submit' value=\" ["
 			. attribut_html(couteauprive_T(''.$b)).']" />' . $reload . '</p>':'';
 	return ajax_action_auteur('action_rapide', 'fichiers_distants', 'admin_couteau_suisse', "arg=$outil[id]|fichiers_distants&cmd=descrip#cs_action_rapide",
