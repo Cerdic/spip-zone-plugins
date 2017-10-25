@@ -1,11 +1,11 @@
 <paquet
 	prefix="activite_editoriale"
 	categorie="edition"
-	version="2.0.5"
-	etat="stable"
+	version="3.0.0"
+	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
-	logo="activite_editoriale.png"
-	schema="0.1"
+	logo="images/activite_editoriale.png"
+	schema="1.0.0"
 	documentation="https://contrib.spip.net/Activite-editoriale"
 >	
 
@@ -14,6 +14,7 @@
 
 	<auteur lien="http://www.clever-age.com/">Stéphanie Caron de Clever Age</auteur>
 	<auteur lien="http://www.maieul.net">Maïeul ROUQUETTE (amélioration)</auteur>
+	<auteur>Chankalan (évolutions)</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
@@ -22,5 +23,5 @@
 
 	<necessite nom="cextras" compatibilite="[3.4.1;[" />
 
-	<menu nom="activite_editoriale" titre="activite_editoriale:activite_editoriale" parent="menu_configuration" icone="activite_editoriale.png" />
+	<menu nom="activite_editoriale" titre="activite_editoriale:activite_editoriale" parent="menu_activite" icone="images/activite_editoriale-16.png" />
 </paquet>

@@ -1,0 +1,1 @@
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>#SET{delai,#EXTRAS_DELAI}<BOUCLE_articles(ARTICLES){id_rubrique}{age > #GET{delai}}{','}><BOUCLE_auteurs(AUTEURS){id_article}{','}>#EMAIL</BOUCLE_auteurs></BOUCLE_articles></BOUCLE_rubrique>
