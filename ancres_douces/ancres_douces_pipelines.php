@@ -24,7 +24,7 @@ function ancresdouces_insert_head($flux){
 	$flux .= '<script type="text/javascript">/* <![CDATA[ */
 function ancre_douce_init() {
 	if (typeof jQuery.localScroll=="function") {
-		' . $appel_ancres_douces . '.localScroll({hash:true, onAfter:function(anchor, settings){ 
+		' . $appel_ancres_douces . '.localScroll({autoscroll:false, hash:true, onAfter:function(anchor, settings){ 
 			jQuery(anchor).attr(\'tabindex\', -1).on(\'blur focusout\', function () {
 				// when focus leaves this element, 
 				// remove the tabindex attribute
