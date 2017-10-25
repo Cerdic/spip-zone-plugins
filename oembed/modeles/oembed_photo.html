@@ -3,5 +3,8 @@
 		(#ENV{data}|table_valeur{url}|sinon{#ENV{data}|table_valeur{thumbnail_url}}|balise_img{#ENV{data}|table_valeur{title}})
 	</a>
 </span>]
+<figcaption>
 [<div class="spip_doc_titre" style="max-width:#ENV{data/width}px;"><a href="#ENV*{url}" class="oe-title">(#ENV*{data/title})</a>[
 <span class="oe-author_name"><br /><i><:par_auteur:>(#ENV*{data/author_name}|oui)[(#ENV*{data/author_url}|lien_ou_expose{#ENV*{data/author_name},#ENV*{data/author_url}|non})]</i></span>]</div>]
+[<div class="spip_doc_titre oembed-source">(#ENV*{lien}|echappe_retour)</div>]
+</figcaption>
