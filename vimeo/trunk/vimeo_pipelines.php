@@ -36,10 +36,10 @@ function vimeo_affiche_milieu($flux) {
 		));
 
 	}
-	
+
 	if ($flux['args']['exec']==="vimeos") {
-		
-		$texte .= $url.bouton_action(_T('vimeo:recuperer_videos'), generer_url_action("vimeo"),"ajax","","coucou");
+
+		$texte .= $url.bouton_action(_T('vimeo:recuperer_videos'), generer_url_action("vimeo","arg=true"),"ajax","","coucou");
 	}
 
 	if ($texte) {
@@ -96,4 +96,3 @@ function vimeo_taches_generales_cron($taches){
 	$taches['compte_vimeo'] = 3600*24*5;
 	return $taches;
 }
-
