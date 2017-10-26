@@ -1,0 +1,39 @@
+<paquet
+	prefix="swiper"
+	categorie="multimedia"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.2.0;3.2.*]"
+	logo="prive/themes/spip/images/swiper-64.png"
+	documentation=""
+	schema="1.0.0"
+>
+	<!--
+		Paquet généré le 2017-10-25 17:28:23
+	-->
+
+	<nom>Swiper</nom>
+	<!-- Mets-y les doigts -->
+
+	<auteur lien='https://www.lesmoutonssauvages.com'>Charles Stephan</auteur>
+
+	<licence>GNU/GPL</licence>
+	<lib nom="Swiper" lien="https://github.com/nolimits4web/Swiper/archive/master.zip" />
+	<necessite nom="saisies" compatibilite="[2.4.0;]" />
+	<necessite nom="cextras"  compatibilite="[3.4.1;[" />
+
+	<pipeline nom="autoriser" inclure="swiper_autorisations.php" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/swiper.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/swiper.php" />
+
+	<pipeline nom="declarer_champs_extras" inclure="base/swiper.php" />
+
+	<pipeline nom="insert_head" inclure="swiper_pipelines.php" />
+	<pipeline nom="header_prive" inclure="swiper_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="swiper_pipelines.php" />
+
+
+	<menu nom="swipers" titre="swiper:titre_swipers" parent="menu_edition" icone="images/swiper-16.png" action="swipers" />
+	<menu nom="swiper_creer" titre="swiper:icone_creer_swiper" parent="outils_rapides" icone="images/swiper-new-16.png" action="swiper_edit" parametres="new=oui" />
+</paquet>

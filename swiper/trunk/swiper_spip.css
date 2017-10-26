@@ -1,0 +1,56 @@
+.swiper-container {
+  height: 300px;
+}
+
+figure.swiper-slide{
+  background-size: cover;
+  background-position: center;
+}
+
+figure.swiper-slide img{
+  position: absolute;
+  top: -1000%;
+}
+
+figure.swiper-slide figcaption {
+  position: relative;
+  text-align: left;
+  padding:1.5em 2.25em;
+}
+
+figure.swiper-slide figcaption .titre,
+figure.swiper-slide figcaption p,
+figure.swiper-slide figcaption a{
+  background: white;
+  padding: 0 .25em;
+}
+
+figure.swiper-slide figcaption a {
+    padding: .125em .25em;;
+    font-size: .9em;
+}
+
+figure.swiper-slide figcaption a:hover{
+  background: #db1762;
+}
+
+figure.swiper-slide figcaption p,
+figure.swiper-slide figcaption a {
+  display: inline-block;
+}
+
+figure.swiper-slide figcaption .titre{
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+.page_swiper figure.swiper-slide figcaption {
+  top:1em;
+  padding: 2em;
+}
+
+.page_swiper .swiper-container {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}

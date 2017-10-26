@@ -1,0 +1,25 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:swiper:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+			<div class="editer-groupe">
+				[(#SAISIE{oui_non, navigation, defaut=on, label=<:swiper:navigation:>})]
+				[(#SAISIE{oui_non, pagination, defaut=on, label=<:swiper:pagination:>})]
+				[(#SAISIE{oui_non, scrollbar, defaut=on, label=<:swiper:scrollbar:>})]
+				[(#SAISIE{textarea, swiper_options,
+					label=<:swiper:swiper_options:>
+					, rows=16
+				})]
+			</div>
+
+		<input type="hidden" name="_meta_casier" value="swiper" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

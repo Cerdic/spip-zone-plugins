@@ -1,0 +1,16 @@
+<BOUCLE_swiper(SWIPERS){id_swiper=#ENV{id}}>
+<div class="infos">
+[(#SET{texte_objet,<:swiper:titre_swiper:>})]
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_SWIPER</p></div>
+
+	<div class='nb_elements'><!--nb_elements--></div>
+
+	[(#AUTORISER{supprimer, swiper, #ID_SWIPER}|oui)
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{swiper-del-24.png}|balise_img{<:swiper:supprimer_swiper:>}|concat{' ',#VAL{<:swiper:supprimer_swiper:>}|wrap{<b>}}|trim)],
+			#URL_ACTION_AUTEUR{supprimer_swiper, #ID_SWIPER, #URL_ECRIRE{swipers}},
+			icone s24 horizontale danger swiper-del-24, <:swiper:confirmer_supprimer_swiper:>})]
+	]
+
+</div>
+</BOUCLE_swiper>

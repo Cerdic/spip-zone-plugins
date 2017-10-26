@@ -1,0 +1,34 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	id_swiper,1,
+	points,-1
+}})]<B_liste_swipers>
+#ANCRE_PAGINATION
+<div class="liste-objets swipers">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{swiper:info_1_swiper,swiper:info_nb_swipers}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="picto" scope="col"></th>
+			<th class="titre" scope="col">[(#TRI{titre,<:swiper:champ_titre_label:>,ajax})]</th>
+			<th class="id" scope="col">[(#TRI{id_swiper,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_swipers(SWIPERS){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="picto">[(#CHEMIN_IMAGE{swiper-16.png}|balise_img)]</td>
+			<td class="titre principale">[(#LOGO_SWIPER|image_reduire{20,26})]<a href="[(#ID_SWIPER|generer_url_entite{swiper})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SWIPER">[(#RANG). ]#TITRE</a></td>
+			<td class="id">[(#AUTORISER{modifier,swiper,#ID_SWIPER}|?{
+				<a href="[(#URL_ECRIRE{swiper_edit,id_swiper=#ID_SWIPER})]">#ID_SWIPER</a>,
+				#ID_SWIPER
+			})]</td>
+		</tr>
+	</BOUCLE_liste_swipers>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_swipers>[
+<div class="liste-objets swipers caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_swipers>
