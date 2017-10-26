@@ -23,7 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function tradrub_proposee_formulaire_fond($flux) {
 	if (intval(_request('lier_trad')) > 0 and in_array($flux['args']['form'], array('editer_rubrique', 'editer_article'))) {
 		$rub_parente = sql_fetsel('id_trad, id_secteur', 'spip_rubriques', 'id_rubrique='.intval($flux['args']['contexte']['id_parent']));
-		if (intval($rub_parente) > 0) {
+		if (intval($rub_parente['id_trad']) > 0) {
 			$rub_traduites = sql_allfetsel('id_rubrique, id_secteur, titre, lang', 'spip_rubriques', 'id_trad='.intval($rub_parente['id_trad']));
 			if (count($rub_traduites) > 1) {
 				$texte = recuperer_fond('prive/squelettes/inclure/rubriques_traductions', array('traductions' => $rub_traduites, 'id_parent' => $flux['args']['contexte']['id_parent'], 'id_secteur' => $rub_parente['id_secteur']));
