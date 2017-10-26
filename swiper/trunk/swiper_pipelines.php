@@ -40,22 +40,22 @@ function swiper_insert_head($flux) {
 
 function swiper_insert_head_css($flux) {
 
-	$css = find_in_path('lib/Swiper/dist/css/swiper.min.css')						;
-	$flux .='<link rel="stylesheet" type="text/css" href="'.$css.'">'		;
+	$css = find_in_path('lib/Swiper/dist/css/swiper.min.css');
+	$flux .='<link rel="stylesheet" type="text/css" href="'.$css.'">';
 
-	$swiper_spip_css = find_in_path('swiper_spip.css')						;
-	$flux .='<link rel="stylesheet" type="text/css" href="'.$swiper_spip_css.'">'		;
+	$swiper_spip_css = find_in_path('swiper_spip.css');
+	$flux .='<link rel="stylesheet" type="text/css" href="'.$swiper_spip_css.'">';
 
 	return $flux;
 }
 
 function swiper_header_prive($flux) {
 
-	$css = find_in_path('lib/Swiper/dist/css/swiper.min.css')						;
-	$flux .='<link rel="stylesheet" type="text/css" href="'.$css.'">'		;
+	$css = find_in_path('lib/Swiper/dist/css/swiper.min.css');
+	$flux .='<link rel="stylesheet" type="text/css" href="'.$css.'">';
 
-	$swiper_spip_css = find_in_path('swiper_spip.css')															;
-	$flux .='<link rel="stylesheet" type="text/css" href="'.$swiper_spip_css.'">'		;
+	$swiper_spip_css = find_in_path('swiper_spip.css');
+	$flux .='<link rel="stylesheet" type="text/css" href="'.$swiper_spip_css.'">';
 
 	$lib 	= find_in_path('lib/Swiper/dist/js/swiper.min.js');
 	$flux .='<script src="'.$lib.'"	type="text/javascript"></script>';
