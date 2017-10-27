@@ -1,0 +1,43 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+        	<h3 class="titrem">Paramètres</h3>
+		<ul>
+                    [(#SAISIE{radio, type_captcha,
+                        label=Type de captcha,
+                        defaut=copie,
+                        datas=#ARRAY{copie,Copie de 4 caractères,addition,Addition de deux valeurs,multiplication,Multiplication de deux valeurs,recaptcha,Intégration de reCAPTCHA de Google}})]
+                </ul>
+		<input type="hidden" name="_meta_casier" value="fbantispam" />
+                 
+                <div class="fbcaptcha_recaptcha_config_panel" style="margin-top:1em;">
+                    <h3>Configuration pour reCaptcha</h3>
+                    [(#SAISIE{input, cle_site,
+                        label=Clé du site,
+                    })]
+                    [(#SAISIE{input, cle_secrete,
+                        label=Clé secrète,
+                    })]
+                </div>
+                <div>
+                    <p>
+                        <strong>Note</strong> : reCAPTCHA est un service anti-spam proposé par Google.<br />La création des clés se fait à cette adresse :
+                    <a href="https://www.google.com/recaptcha" target="_blank">https://www.google.com/recaptcha</a>
+                    </p>
+                    <p>
+                    Pour des tests, utiliser les valeurs suivantes qui donnent un résultat toujours positif :<br />
+                    Clé site : 6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI<br />
+                    Clé secrète : 6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe<br />
+                    <a href="https://developers.google.com/recaptcha/docs/faq" target="_blank">Voir documentation Google</a>
+                    </p>
+                
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>
