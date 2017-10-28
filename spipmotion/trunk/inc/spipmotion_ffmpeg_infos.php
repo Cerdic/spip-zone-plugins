@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2008-2014 - Distribué sous licence GNU/GPL
+ * 2008-2017 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -111,49 +111,53 @@ function ffmpeg_recuperer_infos_codecs($forcer) {
 			 * Pour chaque format reconnu on retourne un array avec
 			 */
 			if (lire_fichier($chemin_fichier.'_formats', $contenu_formats)) {
-				preg_match_all('/ (DE|D|E) (.*) {1,} (.*)/', $contenu_formats, $formats);
+				$contenu_formats = explode("\n", $contenu_formats);
 				$data['spipmotion_formats'] = array();
-				for ($i=0, $a=count($formats[0]); $i<$a; $i++) {
-					$data['spipmotion_formats'][strtolower(trim($formats[2][$i]))] = array(
-						'encode' 	=> $formats[1][$i] == 'DE' || $formats[1][$i] == 'E',
-						'decode' 	=> $formats[1][$i] == 'DE' || $formats[1][$i] == 'D',
-						'fullname'	=> $formats[3][$i]
+				foreach ($contenu_formats as $contenu_format) {
+					preg_match('/ (DE|D|E) (.*) {1,} (.*)/', $contenu_format, $formats);
+					$data['spipmotion_formats'][strtolower(trim($formats[2]))] = array(
+						'encode' 	=> $formats[1] == 'DE' || $formats[1] == 'E',
+						'decode' 	=> $formats[1] == 'DE' || $formats[1] == 'D',
+						'fullname'	=> $formats[3]
 					);
+					$formats = false;
 				}
 				ecrire_config('/spipmotion_metas/spipmotion_formats', serialize($data['spipmotion_formats']));
 			}
+			$contenu_formats = false;
 
 			/**
 			 * Récupération des codecs disponibles
 			 */
 			if (lire_fichier($chemin_fichier.'_codecs', $contenu_codecs)) {
-				preg_match_all('/ (D| |\.)(E| |\.)(V|A|S|\.)(S| |\.|I)(D|L| |\.)(T|S| ) (.*) {1,} (.*)/', $contenu_codecs, $codecs);
+				$contenu_codecs = explode("\n", $contenu_codecs);
 				$data['spipmotion_codecs'] = array();
 				$data['spipmotion_codecs_audio_decode'] = array();
 				$data['spipmotion_codecs_video_decode'] = array();
 				$data['spipmotion_codecs_audio_encode'] = array();
 				$data['spipmotion_codecs_video_encode'] = array();
-				for ($i=0, $a=count($codecs[0]); $i<$a; $i++) {
-					$data['spipmotion_codecs'][strtolower(trim($codecs[7][$i]))] = array(
-						'decode' 	=> $codecs[1][$i] == 'D',
-						'encode' 	=> $codecs[2][$i] == 'E',
-						'type'	=> $codecs[3][$i],
-						'draw_horiz_band'	=> $codecs[4][$i] == 'S',
-						'direct_rendering'	=> $codecs[5][$i] == 'D',
-						'weird_frame_truncation' => $codecs[6][$i] == 'T',
-						'fullname' => $codecs[8][$i]
+				foreach ($contenu_codecs as $contenu_codec) {
+					preg_match('/ (D| |\.)(E| |\.)(V|A|S|\.)(S| |\.|I)(D|L| |\.)(T|S| ) (.*) {1,} (.*)/', $contenu_codec, $codecs);
+					$data['spipmotion_codecs'][strtolower(trim($codecs[7]))] = array(
+						'decode' 	=> $codecs[1] == 'D',
+						'encode' 	=> $codecs[2] == 'E',
+						'type'	=> $codecs[3],
+						'draw_horiz_band'	=> $codecs[4] == 'S',
+						'direct_rendering'	=> $codecs[5] == 'D',
+						'weird_frame_truncation' => $codecs[6] == 'T',
+						'fullname' => $codecs[8]
 					);
-					if (($codecs[1][$i] == 'D') && ($codecs[3][$i] == 'A')) {
-						$data['spipmotion_codecs_audio_decode'][] = trim($codecs[7][$i]);
+					if (($codecs[1] == 'D') && ($codecs[3] == 'A')) {
+						$data['spipmotion_codecs_audio_decode'][] = trim($codecs[7]);
 					}
-					if (($codecs[1][$i] == 'D') && ($codecs[3][$i] == 'V')) {
-						$data['spipmotion_codecs_video_decode'][] = trim($codecs[7][$i]);
+					if (($codecs[1] == 'D') && ($codecs[3] == 'V')) {
+						$data['spipmotion_codecs_video_decode'][] = trim($codecs[7]);
 					}
-					if (($codecs[2][$i] == 'E') && ($codecs[3][$i] == 'A')) {
-						$data['spipmotion_codecs_audio_encode'][] = trim($codecs[7][$i]);
+					if (($codecs[2] == 'E') && ($codecs[3] == 'A')) {
+						$data['spipmotion_codecs_audio_encode'][] = trim($codecs[7]);
 					}
-					if (($codecs[2][$i] == 'E') && ($codecs[3][$i] == 'V')) {
-						$data['spipmotion_codecs_video_encode'][] = trim($codecs[7][$i]);
+					if (($codecs[2] == 'E') && ($codecs[3] == 'V')) {
+						$data['spipmotion_codecs_video_encode'][] = trim($codecs[7]);
 					}
 				}
 				ecrire_config('/spipmotion_metas/spipmotion_codecs', serialize($data['spipmotion_codecs']));
@@ -255,7 +259,7 @@ function ffmpeg_recuperer_infos_codecs($forcer) {
 			 * Si oui on dit juste qu'il est présent
 			 */
 			$ffprobe = exec('ffprobe --version', $retour_ffprobe, $int_ffprobe);
-			if ($int_mediainfo == 0) {
+			if ($int_ffprobe == 0) {
 				$data['spipmotion_ffprobe']['ffprobe'] = true;
 				$data['spipmotion_ffprobe']['version'] = 'present';
 				ecrire_config('/spipmotion_metas/spipmotion_ffprobe', serialize($data['spipmotion_ffprobe']));
