@@ -6,9 +6,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'courtjus_description' => 'Permet de rediriger certaines rubriques vers un éléments particulier.
+	'courtjus_description' => 'Permet de rediriger certaines rubriques vers un élément particulier.
 
-Clone du plugin \"Court-circuit\" qui fonctionne avec tout les types d\'objet.',
+Clone du plugin \"Court-circuit\" qui fonctionne avec tout type d\'objet.',
 	'courtjus_nom' => 'Court-jus',
 	'courtjus_slogan' => 'Accès direct aux éléments des rubriques',
 );

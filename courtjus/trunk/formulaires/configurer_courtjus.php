@@ -82,7 +82,7 @@ function formulaires_configurer_courtjus_charger_dist() {
 }
 
 function courtjus_rubrique_exclus() {
-	// On va cherché les différent objets intaller sur SPIP
+	// On va chercher les différents objets intallés sur SPIP
 	$objets = lister_tables_objets_sql();
 
 	// On va filtrer pour avoir les objets qui n'ont pas d'id_rubrique
