@@ -1,8 +1,8 @@
 <paquet
 	prefix="mailsubscribers"
 	categorie="communication"
-	version="2.5.1"
-	etat="test"
+	version="2.5.2"
+	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/mailsubscriber-32.png"
 	documentation="https://contrib.spip.net/mailsubscribers"
