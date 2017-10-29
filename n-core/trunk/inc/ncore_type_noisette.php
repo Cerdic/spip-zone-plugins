@@ -132,6 +132,8 @@ function type_noisette_charger($plugin, $dossier = 'noisettes/', $recharger = fa
 					$description['necessite'] = serialize($description['necessite']);
 					$description['contexte'] = serialize($description['contexte']);
 					$description['parametres'] = serialize($description['parametres']);
+					// Complément spécifique au plugin utilisateur si nécessaire
+					$description = ncore_type_noisette_completer($plugin, $description, $stockage);
 
 					if (!$md5_stocke or $recharger) {
 						// Le type de noisette est soit nouveau soit on est en mode rechargement forcé:

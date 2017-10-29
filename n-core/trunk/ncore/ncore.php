@@ -26,6 +26,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @package SPIP\NCORE\SERVICE\TYPE_NOISETTE
  *
+ * @uses ncore_chercher_service()
  * @uses cache_lire()
  * @uses cache_ecrire()
  *
@@ -112,6 +113,45 @@ function ncore_type_noisette_stocker($plugin, $types_noisette, $recharger, $stoc
 }
 
 /**
+ * Complète la description d'un type de noisette issue de la lecture de son fichier YAML.
+ *
+ * Le plugin N-Core ne complète pas les types de noisette.
+ *
+ * @package SPIP\NCORE\SERVICE\TYPE_NOISETTE
+ *
+ * @uses ncore_chercher_service()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array  $description
+ *        Description du type de noisette issue de la lecture du fichier YAML. Suivant le plugin utilisateur elle
+ *        nécessite d'être compléter avant son stockage.
+ * @param string $stockage
+ *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin ni celui de N-Core
+ *        ne seront utilisés. En général, cet identifiant est le préfixe du plugin fournissant le stockage.
+ *
+ * @return array
+ *        Description du type de noisette éventuellement compléter par le plugin utilisateur.
+ */
+function ncore_type_noisette_completer($plugin, $description, $stockage = '') {
+
+	$description_complete = $description;
+
+	// On cherche le service de stockage à utiliser selon la logique suivante :
+	// - si le service de stockage est non vide on l'utilise en considérant que la fonction existe forcément;
+	// - sinon, on utilise la fonction du plugin appelant si elle existe;
+	// - et sinon, on utilise la fonction de N-Core.
+	include_spip('inc/ncore_utils');
+	if ($completer = ncore_chercher_service($plugin, 'type_noisette_completer', $stockage)) {
+		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
+		$description_complete = $completer($plugin, $description);
+	}
+
+	return $description_complete;
+}
+
+/**
  * Renvoie la description brute d'un type de noisette sans traitement typo ni désérialisation des champs de type
  * tableau sérialisé.
  *
@@ -119,6 +159,7 @@ function ncore_type_noisette_stocker($plugin, $types_noisette, $recharger, $stoc
  *
  * @package SPIP\NCORE\SERVICE\TYPE_NOISETTE
  *
+ * @uses ncore_chercher_service()
  * @uses cache_lire()
  *
  * @param string $plugin
@@ -166,6 +207,7 @@ function ncore_type_noisette_decrire($plugin, $type_noisette, $stockage = '') {
  *
  * @package SPIP\NCORE\SERVICE\TYPE_NOISETTE
  *
+ * @uses ncore_chercher_service()
  * @uses cache_lire()
  *
  * @param string $plugin
@@ -609,7 +651,7 @@ function ncore_noisette_decrire($plugin, $noisette, $stockage = '') {
  * Cette fonction est juste un aiguillage vers la fonction éventuelle du plugin utilisateur
  * car N-Core ne fournit pas de calcul par défaut.
  *
- * @package SPIP\NCORE\SERVICE\NOISETTE
+ * @package SPIP\NCORE\SERVICE\CONTENEUR
  *
  * @uses ncore_chercher_service()
  *
