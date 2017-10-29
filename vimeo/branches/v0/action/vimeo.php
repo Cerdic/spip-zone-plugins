@@ -171,7 +171,7 @@
 
 	}
 
-	function vimeo_creer_albums($albums,$album_lier_vimeo) {
+	function vimeo_creer_albums($albums, $album_lier_vimeo) {
 
 		$compte = lire_config('vimeo');
 
@@ -205,17 +205,12 @@
 
 	}
 
-	function action_vimeo_dist($arg=null) {
+	function action_vimeo_dist($arg = null) {
 
-		/*
-
-			TO DO SECURISER CETTE ACTION
-
-		if (is_null($arg)){
+		if (is_null($arg)) {
 			$securiser_action = charger_fonction("securiser_action","inc");
 			$arg = $securiser_action();
 		}
-		*/
 
 		$videos = array();
 		$auteurs_lier_vimeo = array();
@@ -234,7 +229,7 @@
     $user = $lib->request('/users/'.$user_id);
     $id_auteur = "";
 
-    if ($compte['profil'] !== 'rien'){
+    if ($compte['profil'] !== 'rien') {
 			$id_auteur = vimeo_creer_auteur($user);
 		}
 
@@ -286,6 +281,8 @@
 		}
 
 		vimeo_creer_video($videos);
+
+		return 1;
 
 	}
 

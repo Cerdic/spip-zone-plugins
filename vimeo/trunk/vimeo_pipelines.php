@@ -39,7 +39,10 @@ function vimeo_affiche_milieu($flux) {
 
 	if ($flux['args']['exec']==="vimeos") {
 
-		$texte .= $url.bouton_action(_T('vimeo:recuperer_videos'), generer_url_action("vimeo","arg=true"),"ajax","","coucou");
+		$url = generer_action_auteur("vimeo",true);
+		$label = _T('vimeo:recuperer_videos');
+		$texte .= filtre_bouton_action_horizontal_dist($url, $label, "vimeo-24","", "ajax", "", "coucou");
+
 	}
 
 	if ($texte) {
