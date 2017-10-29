@@ -4,6 +4,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+// -----------------------------------------------------------------------
+// ------------------------- TYPES DE NOISETTE ---------------------------
+// -----------------------------------------------------------------------
+
 function noizetier_type_noisette_stocker($plugin, $types_noisettes, $recharger) {
 
 	$retour = true;
@@ -25,18 +29,10 @@ function noizetier_type_noisette_stocker($plugin, $types_noisettes, $recharger) 
 	}
 	// -- Update des pages modifiées
 	if (!empty($types_noisettes['a_changer'])) {
-		// Ajouter le type et la composition compatible pour chaque type de noisette
-		foreach ($types_noisettes['a_changer'] as $_cle => $_description) {
-			$types_noisettes['a_changer'][$_cle] = noizetier_type_noisette_completer($_description);
-		}
 		sql_replace_multi($from, $types_noisettes['a_changer']);
 	}
 	// -- Insertion des nouvelles pages
 	if (!empty($types_noisettes['a_ajouter'])) {
-		// Ajouter le type et la composition compatible pour chaque type de noisette
-		foreach ($types_noisettes['a_ajouter'] as $_cle => $_description) {
-			$types_noisettes['a_ajouter'][$_cle] = noizetier_type_noisette_completer($_description);
-		}
 		sql_insertq_multi($from, $types_noisettes['a_ajouter']);
 	}
 	if (sql_preferer_transaction()) {
@@ -46,7 +42,7 @@ function noizetier_type_noisette_stocker($plugin, $types_noisettes, $recharger) 
 	return $retour;
 }
 
-function noizetier_type_noisette_completer($description) {
+function noizetier_type_noisette_completer($plugin, $description) {
 
 	// Initialiser les composants de l'identifiant du type de noisette:
 	// - type_page-type_noisette si le type de noisette est dédié uniquement à une page
@@ -64,6 +60,7 @@ function noizetier_type_noisette_completer($description) {
 
 	return $description;
 }
+
 function noizetier_type_noisette_decrire($plugin, $noisette) {
 
 	// Chargement de toute la configuration de la noisette en base de données.
@@ -90,6 +87,9 @@ function noizetier_type_noisette_lister($plugin, $information = '') {
 }
 
 
+// -----------------------------------------------------------------------
+// ----------------------------- NOISETTES -------------------------------
+// -----------------------------------------------------------------------
 
 /**
  *
