@@ -18,7 +18,7 @@
 	<auteur lien='https://www.lesmoutonssauvages.com'>Charles Stephan</auteur>
 
 	<licence>GNU/GPL</licence>
-	<lib nom="Swiper" lien="https://github.com/nolimits4web/Swiper/archive/master.zip" />
+	<lib nom="Swiper" lien="https://github.com/nolimits4web/Swiper/archive/v4.0.2.zip" />
 	<necessite nom="saisies" compatibilite="[2.4.0;]" />
 	<necessite nom="cextras"  compatibilite="[3.4.1;[" />
 
