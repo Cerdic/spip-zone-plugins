@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.1.6;3.1.*]"
 	logo="prive/themes/spip/images/vimeo-64.png"
-	documentation=""
+	documentation="https://contrib.spip.net/article4943"
 	schema="1.0.0"
 >
 	<!--
