@@ -42,23 +42,23 @@ function requeteursql_declarer_tables_objets_sql($tables) {
 
 	$tables['spip_sql_requetes'] = array(
 		'type' => 'sql_requete',
-		'principale' => "oui", 
-		'table_objet_surnoms' => array('sqlrequete'), // table_objet('sql_requete') => 'sql_requetes' 
+		'principale' => 'oui',
+		'table_objet_surnoms' => array('sqlrequete'), // table_objet('sql_requete') => 'sql_requetes'
 		'field'=> array(
-			"id_sql_requete"     => "bigint(21) NOT NULL",
-			"titre"              => "varchar(250) NOT NULL DEFAULT ''",
-			"description"        => "text NOT NULL DEFAULT ''",
-			"requetesql"         => "text NOT NULL DEFAULT ''",
-			"maj"                => "TIMESTAMP"
+			'id_sql_requete'     => 'bigint(21) NOT NULL',
+			'titre'              => "varchar(250) NOT NULL DEFAULT ''",
+			'description'        => "text NOT NULL DEFAULT ''",
+			'requetesql'         => "text NOT NULL DEFAULT ''",
+			'maj'                => 'TIMESTAMP'
 		),
 		'key' => array(
-			"PRIMARY KEY"        => "id_sql_requete",
+			'PRIMARY KEY'        => 'id_sql_requete',
 		),
 		'titre' => "titre AS titre, '' AS lang",
 		 #'date' => "",
 		'champs_editables'  => array('titre', 'description', 'requetesql'),
 		'champs_versionnes' => array('titre', 'description', 'requetesql'),
-		'rechercher_champs' => array("titre" => 5, "description" => 4, "requetesql" => 1),
+		'rechercher_champs' => array('titre' => 5, 'description' => 4, 'requetesql' => 1),
 		'tables_jointures'  => array(),
 		
 
@@ -66,7 +66,3 @@ function requeteursql_declarer_tables_objets_sql($tables) {
 
 	return $tables;
 }
-
-
-
-?>

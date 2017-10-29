@@ -32,8 +32,8 @@ function requeteursql_autoriser(){}
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_sqlrequetes_menu_dist($faire, $type, $id, $qui, $opt){
-    return true;
+function autoriser_sqlrequetes_menu_dist($faire, $type, $id, $qui, $opt) {
+	return true;
 }
 
 
@@ -48,7 +48,7 @@ function autoriser_sqlrequetes_menu_dist($faire, $type, $id, $qui, $opt){
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_sqlrequete_creer_dist($faire, $type, $id, $qui, $opt) {
-    return $qui['webmestre'] == 'oui';
+	return $qui['webmestre'] == 'oui';
 }
 
 /**
@@ -62,7 +62,7 @@ function autoriser_sqlrequete_creer_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_sqlrequete_voir_dist($faire, $type, $id, $qui, $opt) {
-    return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+	return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }
 
 /**
@@ -76,7 +76,7 @@ function autoriser_sqlrequete_voir_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_sqlrequete_modifier_dist($faire, $type, $id, $qui, $opt) {
-    return $qui['webmestre'] == 'oui';
+	return $qui['webmestre'] == 'oui';
 }
 
 /**
@@ -90,7 +90,7 @@ function autoriser_sqlrequete_modifier_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_sqlrequete_supprimer_dist($faire, $type, $id, $qui, $opt) {
-    return $qui['webmestre'] == 'oui';
+	return $qui['webmestre'] == 'oui';
 }
 
 /**
@@ -106,5 +106,3 @@ function autoriser_sqlrequete_supprimer_dist($faire, $type, $id, $qui, $opt) {
 function autoriser_sqlrequete_iconifier_dist($faire, $type, $id, $qui, $opt) {
 return false;
 }
-
-?>

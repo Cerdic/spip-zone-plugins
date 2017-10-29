@@ -12,11 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'export_format' 	=> 'Format du fichier :',
 	'export_tabulation' => 'CSV avec tabulations',
 	'exporter' 			=> 'Exporter',
-    'export_sql' 		=> 'Exporter une requête SQL',
+	'export_sql' 		=> 'Exporter une requête SQL',
 
 	// R
 	'requeteursql_titre' => 'Requêteur SQL',
 
 );
-
-?>

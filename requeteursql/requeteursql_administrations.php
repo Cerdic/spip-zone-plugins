@@ -40,14 +40,12 @@ function requeteursql_upgrade($nom_meta_base_version, $version_cible) {
 **/
 function requeteursql_vider_tables($nom_meta_base_version) {
 
-	sql_drop_table("spip_sql_requetes");
+	sql_drop_table('spip_sql_requetes');
 
 	# Nettoyer les versionnages et forums
-	sql_delete("spip_versions",              sql_in("objet", array('sql_requete')));
-	sql_delete("spip_versions_fragments",    sql_in("objet", array('sql_requete')));
-	sql_delete("spip_forum",                 sql_in("objet", array('sql_requete')));
+	sql_delete('spip_versions', sql_in('objet', array('sql_requete')));
+	sql_delete('spip_versions_fragments', sql_in('objet', array('sql_requete')));
+	sql_delete('spip_forum', sql_in('objet', array('sql_requete')));
 
 	effacer_meta($nom_meta_base_version);
 }
-
-?>

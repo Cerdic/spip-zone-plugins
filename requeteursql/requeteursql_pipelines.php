@@ -12,9 +12,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 	
 
-function requeteursql_header_prive($texte){
+function requeteursql_header_prive($texte) {
 	$texte .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('prive/requeteursql.css').'" media="all" />'."\n";
 	return $texte;
 }
-
-?>
