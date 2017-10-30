@@ -1,43 +1,33 @@
-<B_DOCUMENTS>
-
+<B_SWIPER>
 <div class="swiper-container[ swiper_(#ID_SWIPER)]">
-
   <div class="swiper-wrapper">
-
-    <BOUCLE_DOCUMENTS(DOCUMENTS){id_swiper}>
-
-      <figure
-        class="swiper-slide"
-        style="background-image:url(#GET{small,#FICHIER})">
-
-          [(#REM)On laisse le fichier mais on le cache en css pour la SEO]
-          [(#FICHIER
-            |balise_img
-            |inserer_attribut{title,#TITRE}
-            |inserer_attribut{alt,[(#DESCRIPTIF|attribut_html|couper{80})]}
-          )]
-
-        <figcaption>
-          [<span class="titre">(#TITRE)</span>]
-          [<br>(#DESCRIPTIF)]
-          [<br>(#NOM_LIEN|oui)[<a href='(#URL_LIEN)'>[(#NOM_LIEN)]</a>]]
-        </figcaption>
-      </figure>
-
-    </BOUCLE_DOCUMENTS>
-
+    <BOUCLE_SWIPER(DOCUMENTS){id_swiper} {si #ENV{id_swiper}} {extension==jpg|png|gif}>
+      <INCLURE{fond=inclure/inc-swiper-figure, id_document} />
+    </BOUCLE_SWIPER>
   </div>
-
-  [(#TOTAL_BOUCLE|>{1}|oui)
-    [(#CONFIG{swiper/pagination}|oui)
-    <div class="swiper-pagination"></div>]
-    [(#CONFIG{swiper/navigation}|oui)
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>]
-    [(#CONFIG{swiper/scrollbar}|oui)
-    <div class="swiper-scrollbar"></div>]
-  ]
-
+  [(#TOTAL_BOUCLE|>{1}|oui)<INCLURE{fond=inclure/inc-swiper-paginations} />]
 </div>
+</B_SWIPER>
 
-</B_DOCUMENTS>
+<B_SWIPER_ARTICLE>
+<div class="swiper-container[ swiper_article_(#ID_ARTICLE)]">
+  <div class="swiper-wrapper">
+    <BOUCLE_SWIPER_ARTICLE(DOCUMENTS){id_article} {si #ENV{ids}|non} {si #ENV{id_swiper}|non} {extension==jpg|png|gif}>
+      <INCLURE{fond=inclure/inc-swiper-figure, id_document} />
+    </BOUCLE_SWIPER_ARTICLE>
+  </div>
+  [(#TOTAL_BOUCLE|>{1}|oui)<INCLURE{fond=inclure/inc-swiper-paginations} />]
+</div>
+</B_SWIPER_ARTICLE>
+
+[(#SET{multiple,[(#ENV{multiple}|explode{","})]})]
+<B_SWIPER_AU_CHOIX>
+<div class="swiper-container swiper_documents">
+  <div class="swiper-wrapper">
+    <BOUCLE_SWIPER_AU_CHOIX(DOCUMENTS){id_document IN #GET{multiple}}{extension==jpg|png|gif}>
+      <INCLURE{fond=inclure/inc-swiper-figure, id_document} />
+    </BOUCLE_SWIPER_AU_CHOIX>
+  </div>
+  [(#TOTAL_BOUCLE|>{1}|oui)<INCLURE{fond=inclure/inc-swiper-paginations} />]
+</div>
+</B_SWIPER_AU_CHOIX>
