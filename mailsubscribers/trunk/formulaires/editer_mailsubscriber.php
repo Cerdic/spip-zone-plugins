@@ -77,7 +77,13 @@ function formulaires_editer_mailsubscriber_verifier_dist(
 			if (sql_countsel('spip_mailsubscribers',
 					'email=' . sql_quote($email) . ' AND id_mailsubscriber!=' . intval($id_mailsubscriber)) > 0
 			) {
-				$erreurs['email'] = _T('mailsubscriber:erreur_adresse_existante');
+				// si l'email existe, proposer d'éditer le compte
+				if ($id = sql_getfetsel('id_mailsubscriber', 'spip_mailsubscribers', 'email=' . sql_quote($email), '', '', '0,1')) {
+					$url_page_edit = generer_url_ecrire('mailsubscriber_edit', 'id_mailsubscriber=' . intval($id));
+					$erreurs['email'] = _T('mailsubscriber:erreur_adresse_existante_editer', array('url'=>$url_page_edit));
+				} else {
+					$erreurs['email'] = _T('mailsubscriber:erreur_adresse_existante');
+				}
 			}
 		}
 		if (!isset($erreurs['email'])

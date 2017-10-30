@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_adresse_existante' => 'Cette adresse email est déjà dans la liste',
+	'erreur_adresse_existante_editer' => 'Cette adresse email est déjà enregistrée - <a href="@url@">Editer cet utilisateur</a>',
 	'erreur_technique_subscribe' => 'Une erreur technique a empêché votre inscription.',
 	'explication_to_email' => 'Envoyer un email de pré-inscription aux adresses suivantes (plusieurs adresses séparées par une virgule si besoin).',
 	'explication_listes_diffusion_option_defaut' => 'Un ou plusieurs identifiants de listes séparés par des virgules',
