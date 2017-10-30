@@ -1,9 +1,9 @@
 <paquet
 	prefix="agessa"
 	categorie="divers"
-	version="1.2.1"
+	version="1.2.2"
 	etat="stable"
-	compatibilite="[3.0.8;3.1.*]"
+	compatibilite="[3.0.8;3.2.*]"
 	logo="prive/themes/spip/images/agessa-64.png"
 	documentation="https://contrib.spip.net/4783"
 	schema="0.1.0"
@@ -11,7 +11,7 @@
 	<nom>Agessa</nom>
 	<!-- Préremplit les déclarations Agessa -->
 
-	<auteur lien='http://www.erational.org'>erational</auteur>
+	<auteur lien='https://www.erational.org'>erational</auteur>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<menu nom="agessa" titre="agessa:titre_agessa" parent="menu_edition" icone="images/agessa-16.png" action="agessa" />
