@@ -12,7 +12,7 @@
 <B_SWIPER_ARTICLE>
 <div class="swiper-container[ swiper_article_(#ID_ARTICLE)]">
   <div class="swiper-wrapper">
-    <BOUCLE_SWIPER_ARTICLE(DOCUMENTS){id_article} {si #ENV{ids}|non} {si #ENV{id_swiper}|non} {extension==jpg|png|gif}>
+    <BOUCLE_SWIPER_ARTICLE(DOCUMENTS){id_article} {si #ENV{multiple}|non} {si #ENV{id_swiper}|non} {extension==jpg|png|gif}>
       <INCLURE{fond=inclure/inc-swiper-figure, id_document} />
     </BOUCLE_SWIPER_ARTICLE>
   </div>

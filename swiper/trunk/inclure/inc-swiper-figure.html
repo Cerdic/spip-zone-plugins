@@ -1,0 +1,18 @@
+<BOUCLE_FIGURE_DOCUMENT(DOCUMENTS){id_document}>
+<figure
+  class="swiper-slide"
+  id="swiper-slide_#ID_DOCUMENT"
+  style="background-image:url(#GET{small,#FICHIER})">
+    [(#REM)On laisse le fichier mais on le cache en css pour la SEO]
+    [(#FICHIER
+      |balise_img
+      |inserer_attribut{title,#TITRE}
+      |inserer_attribut{alt,[(#DESCRIPTIF|attribut_html|couper{80})]}
+    )]
+  <figcaption>
+    [<span class="titre">(#TITRE)</span>]
+    [<br>(#DESCRIPTIF)]
+    [<br>(#NOM_LIEN|oui)[<a href='(#URL_LIEN)'>[(#NOM_LIEN)]</a>]]
+  </figcaption>
+</figure>
+</BOUCLE_FIGURE_DOCUMENT>
