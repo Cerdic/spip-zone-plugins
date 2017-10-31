@@ -1,0 +1,20 @@
+<BOUCLE_panorama(PANORAMAS){id_panorama=#ENV{id}}>
+<div class="infos">
+[(#SET{texte_objet,<:panorama:titre_panorama:>})]
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_PANORAMA</p></div>
+
+	<div class='nb_elements'><!--nb_elements--></div>
+
+	[(#AUTORISER{supprimer, panorama, #ID_PANORAMA}|oui)
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{panorama-del-24.png}|balise_img{<:panorama:supprimer_panorama:>}|concat{' ',#VAL{<:panorama:supprimer_panorama:>}|wrap{<b>}}|trim)],
+			#URL_ACTION_AUTEUR{supprimer_panorama, #ID_PANORAMA, #URL_ECRIRE{panoramas}},
+			icone s24 horizontale danger panorama-del-24, <:panorama:confirmer_supprimer_panorama:>})]
+	]
+	[(#VAL{redirect}
+		|generer_url_action{type=panorama&id=#ID_PANORAMA}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+
+</div>
+</BOUCLE_panorama>
