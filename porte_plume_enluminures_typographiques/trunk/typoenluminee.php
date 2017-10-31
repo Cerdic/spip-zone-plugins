@@ -163,9 +163,9 @@ function typoenluminee_post_propre($texte) {
 		$cherche1[] = /* 21b */ '/\[\*/S';
 		$cherche1[] = /* 22 */	'/\*\]/S';
 
-		$remplace1[] = /* 15 */ 	'<div class="spip" style="text-align:right;">$1</div>';
-		$remplace1[] = /* 16 */ 	'<div class="spip" style="text-align:left;">$1</div>';
-		$remplace1[] = /* 17 */ 	'<div class="spip" style="text-align:center;">$1</div>';
+		$remplace1[] = /* 15 */ 	'<div class="spip spip-block-right" style="text-align:right;">$1</div>';
+		$remplace1[] = /* 16 */ 	'<div class="spip spip-block-left" style="text-align:left;">$1</div>';
+		$remplace1[] = /* 17 */ 	'<div class="spip spip-block-center" style="text-align:center;">$1</div>';
 		$remplace1[] = /* 19 */ 	'<div class="texteencadre-spip spip">$1</div>';
 		$remplace1[] = /* 21 */ 	'<strong class="caractencadre2-spip spip">';
 		$remplace1[] = /* 21b */ 	'<strong class="caractencadre-spip spip">';
