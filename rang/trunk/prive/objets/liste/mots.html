@@ -16,7 +16,7 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='picto' scope='col'></th>
-			[(#ENV{id_groupe}|et{#VAL{mot}|rang_objet_dans_config}|oui)<th class="picto" scope="col"></th>]
+			[(#ENV{id_groupe}|et{#VAL{mot}|rang_objet_dans_config}|oui)<th class="picto" scope="col">[(#TRI{rang,<span title="<:rang:lien_trier_rang|attribut_html:>"><:rang:info_rang_abbr:></span>,ajax})]</th>]
 			<th class='titre' scope='col' colspan='2'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
 			<th class='type' scope='col'>[(#TRI{type,<:mots:info_dans_groupe:>,ajax})]</th>
 			<th class='id' scope='col'>[(#TRI{id_mot,<:info_numero_abbreviation:>,ajax})]</th>
