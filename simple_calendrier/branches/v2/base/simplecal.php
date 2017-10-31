@@ -65,11 +65,7 @@ function simplecal_declarer_tables_objets_sql($tables){
 	);
 
 	// champs candidats a la jointure
-	$join = array(
-		"id_evenement" => "id_evenement",
-		"id_secteur"   => "id_secteur",
-		"id_rubrique"  => "id_rubrique"
-	);
+	$join = array();
 	
 	// champ 'statut'
 	$statut = array(
@@ -106,10 +102,9 @@ function simplecal_declarer_tables_objets_sql($tables){
 		'titre' => 'titre, lang',
 		'date' => 'date', // indique le nom du field pour le formulaires_dater_charger_dist
 		'champs_editables' => array('titre', 'date_debut', 'date_fin', 'horaire', 'descriptif', 'texte', 'lieu', 'adresse', 'lien_titre', 'lien_url', 'type', 'id_objet'),
-		'champs_versionnes' => array('id_rubrique', 'titre', 'descriptif', 'texte', 'lieu', 'adresse', 'date_debut', 'date_fin', 'lien_titre', 'lien_url', 'jointure_auteurs'),
+		'champs_versionnes' => array('titre', 'descriptif', 'texte', 'lieu', 'adresse', 'lien_titre', 'lien_url'),
 		'rechercher_champs' => array('titre'=>8, 'descriptif'=>4, 'texte'=>2),
-		'rechercher_jointures' => array('document' => array('titre' => 2, 'descriptif' => 1)),
-		'tables_jointures' => array('id_auteur' => 'auteurs_liens'),
+		'tables_jointures' => array(),
 		'statut' =>  array($statut),
 		'statut_textes_instituer' => $statut_textes_instituer,
 		'statut_titres' => $statut_titres,
