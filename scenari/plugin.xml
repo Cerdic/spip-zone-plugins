@@ -2,7 +2,7 @@
 	<nom>Scenari</nom>
 	<auteur>[Gr&#233;gory Pascal->https://contrib.spip.net/ngombe]</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.0.3</version>
+	<version>0.0.4</version>
 	<etat>test</etat>
 	<prefix>scenari</prefix>
    <categorie>edition</categorie>
@@ -16,7 +16,7 @@
 	</multi></description>
 	<icon>images/scenari-32.png</icon>
 	<lien>https://contrib.spip.net/Scenari-pour-SPIP</lien>
-	<necessite id="SPIP" version='[2.1.0;3.1.99]' />
+	<necessite id="SPIP" version='[2.1.0;3.2.99]' />
 	<bouton id='scenari_2' parent='naviguer'>
 		<icone>images/scenari-24.png</icone>
 		<titre>scenari:scenari</titre>
