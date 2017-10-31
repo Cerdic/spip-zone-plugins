@@ -11,8 +11,9 @@
 	<nom>Rang</nom>
 	<!-- Permet de réordonner les tables de SPIP par drag'n'drop -->
 
-	<auteur>Peetdu</auteur>
-	<credit lien="https://www.31mille.net">Logo Rang : Jordan</credit>
+	<auteur>peetdu</auteur>
+	<auteur>nicod_</auteur>
+	<credit lien="https://www.31mille.net">Logo Rang : jordan</credit>
 
 	<licence>GNU/GPL</licence>
 

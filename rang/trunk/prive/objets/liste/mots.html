@@ -1,13 +1,15 @@
-<h1>dskjflkdsjflkdsjflkj</h1>
 [(#SET{defaut_tri,#ARRAY{
 	multi titre,1,
+	rang,1,
 	titre,1,
 	id_mot,1,
 	points,-1
 }})
+][(#REM) 
+	activer le tri par rang si l'objet 'mot' a été sélectionné dans la conf du plugin
+][(#VAL{mot}|rang_objet_dans_config|oui) [(#VAL{rang}|setenv{par})] #SET{tri,rang}
 ]<B_liste_mot>
 #ANCRE_PAGINATION
-[lala : (#CONFIG{rang}|dd)]
 <div class="liste-objets mots">
 <table class='spip liste'>
 [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_mot_cle,info_nb_mots_cles}})</strong></caption>]
