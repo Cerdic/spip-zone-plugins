@@ -1,7 +1,7 @@
 <paquet
 	prefix="rang"
 	categorie="navigation"
-	version="0.7.9"
+	version="0.7.10"
 	etat="experimental"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="prive/themes/spip/images/rang-64.png"
