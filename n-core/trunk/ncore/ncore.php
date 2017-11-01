@@ -646,6 +646,11 @@ function ncore_noisette_decrire($plugin, $noisette, $stockage = '') {
 	return $description;
 }
 
+
+// -----------------------------------------------------------------------
+// ----------------------------- CONTENEURS ------------------------------
+// -----------------------------------------------------------------------
+
 /**
  * Construit un identifiant unique pour le conteneur sous forme de chaine.
  * Cette fonction est juste un aiguillage vers la fonction éventuelle du plugin utilisateur
