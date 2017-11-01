@@ -3,7 +3,7 @@
 	categorie="divers"
 	version="0.4.3"
 	etat="stable"
-	compatibilite="[3.0.5;3.1.*]"
+	compatibilite="[3.0.5;3.2.*]"
 	logo="images/zeroclipboard_logo.png"
 	documentation="https://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/article/copier-coller-facile-zeroclipboard"
 >
