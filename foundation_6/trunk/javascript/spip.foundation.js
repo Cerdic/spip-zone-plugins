@@ -41,5 +41,5 @@ spip_foundation();
 onAjaxLoad(function() {
     spip_foundation();
     // Restaurer les reveal modal après un chargement ajax
-    $(".reveal, .orbit").foundation();
+    $(".reveal, .orbit, .tabs").foundation();
 });
