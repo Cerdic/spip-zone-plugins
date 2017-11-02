@@ -1,3 +1,5 @@
-<BOUCLE_PANORAMA(DOCUMENTS){id_document}{extension==gif|png|jpg|jpeg}>
-	[<div class="panorama-panolens" data-src="(#FICHIER)"></div>]
+<BOUCLE_PANORAMA(DOCUMENTS) {id_document} {extension==gif|png|jpg|jpeg} >
+	<a[ href="(#URL_PAGE{panorama}|parametre_url{id_document,#ID_DOCUMENT})"] class="panorama-panolens" style="background-image:url('#FICHIER')">
+		<button type="button" name="button"><:panolens:demarrer:></button>
+	</a>
 </BOUCLE_PANORAMA>

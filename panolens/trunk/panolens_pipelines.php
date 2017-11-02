@@ -58,9 +58,13 @@ function panolens_instantiation(){
 
 	$js .=  '$(document).ready(function(){';
 	$js .=  '$(".panorama-panolens").each(function(index,el){';
-	$js .=	'	panolens_options.container=el;console.log(panolens_options);';
-	$js .=  ' var image = $(el).data("src"), panorama = new PANOLENS.ImagePanorama(image), viewer = new PANOLENS.Viewer(panolens_options);';
+	$js .=	'	panolens_options.container=el; console.log(panolens_options);';
+	$js .=  ' var image = $(el).data("src"); if (!image) return true;';
+	$js .=  ' var panorama = new PANOLENS.ImagePanorama(image), viewer = new PANOLENS.Viewer(panolens_options);';
 	$js .=  ' viewer.add(panorama);';
+	$js .=  '	if (PANOLENS.Utils.checkTouchSupported()){';
+	$js .=  '		viewer.enableControl(1);';
+	$js .=  '	}';
 	$js .=  '})';
 	$js .=  '})';
 
