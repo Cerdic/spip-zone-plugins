@@ -43,7 +43,10 @@ figure.swiper-slide figcaption .titre{
   font-size: 2.5em;
   font-weight: bold;
 }
-
+.page_swiper {
+  margin: 0;
+  padding: 0;
+}
 .page_swiper figure.swiper-slide figcaption {
   top:1em;
   padding: 2em;

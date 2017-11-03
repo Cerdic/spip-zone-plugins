@@ -1,7 +1,7 @@
 <B_SWIPER>
 <div class="swiper-container[ swiper_(#ID_SWIPER)]">
   <div class="swiper-wrapper">
-    <BOUCLE_SWIPER(DOCUMENTS){id_swiper} {si #ENV{id_swiper}} {extension==jpg|png|gif}>
+    <BOUCLE_SWIPER(DOCUMENTS) {id_swiper} {par rang_lien, num titre, titre} {si #ENV{id_swiper}} {extension==jpg|png|gif}>
       <INCLURE{fond=inclure/inc-swiper-figure, id_document} />
     </BOUCLE_SWIPER>
   </div>
@@ -12,7 +12,7 @@
 <B_SWIPER_ARTICLE>
 <div class="swiper-container[ swiper_article_(#ID_ARTICLE)]">
   <div class="swiper-wrapper">
-    <BOUCLE_SWIPER_ARTICLE(DOCUMENTS){id_article} {si #ENV{multiple}|non} {si #ENV{id_swiper}|non} {extension==jpg|png|gif}>
+    <BOUCLE_SWIPER_ARTICLE(DOCUMENTS) {id_article} {par rang_lien, num titre, titre} {si #ENV{multiple}|non} {si #ENV{id_swiper}|non} {extension==jpg|png|gif}>
       <INCLURE{fond=inclure/inc-swiper-figure, id_document} />
     </BOUCLE_SWIPER_ARTICLE>
   </div>
