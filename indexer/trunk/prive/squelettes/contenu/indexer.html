@@ -1,21 +1,43 @@
 <h1 class="grostitre">Test de l'indexer</h1>
 
 <BOUCLE_test(SPHINX) {select COUNT(*)} />
-[<div class="[(#TOTAL_BOUCLE|?{success,error})]">Connexion à la base SPHINX: (#TOTAL_BOUCLE|?{OK,échec})</div>]
+[<div class="[(#TOTAL_BOUCLE|?{success,error})]">Connexion
+  à l’index <tt>#EVAL{SPHINX_DEFAULT_INDEX}</tt>
+  via <tt>#EVAL{SPHINX_SERVER_HOST}:#EVAL{SPHINX_SERVER_PORT}</tt>
+  <br>Statut: <strong>(#TOTAL_BOUCLE|?{OK,échec})</strong>
+</div>]
+
 <//B_test>
 
+<style>
+dd { margin-left: 2em; }
+</style>
 <B_compte>
-<h3>Objets indexés</h3>
-<ul class="spip">
+<h3>Contenus indexés</h3>
+<div>
+#SET{f,#SPHINX_FACETS*}
+<BOUCLE_facettes(DATA){source tableau, #GET{f}}>
+<BOUCLE_f1(DATA){source tableau, #VALEUR}>[(#CLE|oui)]</BOUCLE_f1>
+<dt><strong>[(#CLE|ucfirst)]</strong></dt>
+<dd><BOUCLE_f2(DATA){source tableau, #VALEUR}{" &nbsp; &bullet; &nbsp; "}>
+<span>[(#CLE|sinon{n/a}):&nbsp;][(#VALEUR|print)]</span></BOUCLE_f2></dd>
+</B_f1></BOUCLE_facettes>
+</div>
 <BOUCLE_compte(SPHINX)
-{select properties.objet AS objet, COUNT(*) AS nombre}
-{groupby properties.objet}
-{!par nombre}>
-<li>[(#OBJET|sinon{n/a})]: #NOMBRE</li>
-</BOUCLE_compte>
-</ul>
+	{facet objet, properties.objet ORDER BY COUNT(*) DESC}
+	{facet source, properties.source ORDER BY COUNT(*) DESC}
+	{facet lang, properties.lang ORDER BY COUNT(*) DESC}
+	{facet secteur, properties.secteur ORDER BY COUNT(*) DESC}
+	{facet statut, properties.statut ORDER BY COUNT(*) DESC}
+	{facet authors, properties.authors ORDER BY COUNT(*) DESC}
+	{facet tags, properties.tags ORDER BY COUNT(*) DESC}
+	{0,1}
+	{!par date_indexation}
+> </BOUCLE_compte>
+
 </B_compte>
 <div class="error">Base SPHINX vide.</div>
+[<hr>(#SPHINX_META|print)]
 <//B_compte>
 
 [(#SET{last,#CONFIG{indexer_derniere_reindexation}})]
@@ -66,4 +88,14 @@ if (_request('purger')) {
 		echo "</p>\n";
 	}
 }
+
+?>
+
+[(#ENV{continue}|non|et{#ENV{run}|non}|oui)
+[(#CONFIG{indexer/indexing/stats}|oui)
+<h3>Dernière indexation</h3>
+<pre>
+[(#CONFIG{indexer/indexing/stats}|print)]
+</pre>
+]]
 
