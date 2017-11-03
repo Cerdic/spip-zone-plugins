@@ -13,9 +13,9 @@
 	<auteur lien="https://contrib.spip.net/JLuc">JLuc</auteur>
 	<licence lien="http://www.php.net/license/3_01.txt">PHP</licence>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
-	<credit lien="mailto:beckerr@php.net">Ralf Becker</auteur>
-	<credit lien="mailto:rasmus@php.net">Rasmus Lerdorf</auteur>
-	<credit lien="mailto:ilia@prohost.org">Ilia Alshanetsky</auteur>
+	<credit lien="mailto:beckerr@php.net">Ralf Becker</credit>
+	<credit lien="mailto:rasmus@php.net">Rasmus Lerdorf</credit>
+	<credit lien="mailto:ilia@prohost.org">Ilia Alshanetsky</credit>
 	<credit lien="https://thenounproject.com/term/radiology-android/101572/">Inspiration pour l'icone : Radiology Android By Hadi Davodpour, Licence Creative Commons</credit>
 
 	<necessite nom="memoization"/>
