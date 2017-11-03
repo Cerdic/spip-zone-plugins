@@ -24,7 +24,7 @@ function panolens_instantiation(){
 	if (empty($config["controlBar"]))
 		$js .= 'panolens_options.controlBar = false;';
 
-	if (!empty($controlButtons))
+	if (!isset($controlButtons))
 		$js .= 'panolens_options.controlButtons = ['.$controlButtons.'];';
 
 	if (!empty($config["autoHideControlBar"]))
@@ -54,7 +54,8 @@ function panolens_instantiation(){
 	if (!empty($config["indicatorSize"]))
 		$js .= 'panolens_options.indicatorSize = '.$config["indicatorSize"].';';
 
-	$js .= 'panolens_options.output = '.$config["output"].';';
+	if (!empty($config["output"]))
+		$js .= 'panolens_options.output = '.$config["output"].';';
 
 	$js .=  '$(document).ready(function(){';
 	$js .=  '$(".panorama-panolens").each(function(index,el){';
