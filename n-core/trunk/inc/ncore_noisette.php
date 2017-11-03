@@ -76,6 +76,9 @@ function noisette_ajouter($plugin, $type_noisette, $conteneur, $rang = 0, $stock
 		// Ce sont ces fonctions qui aiguillent ou pas vers un service spécifique du plugin.
 		include_spip('ncore/ncore');
 
+		// Complément à la description par défaut, spécifique au plugin utilisateur, si nécessaire.
+		$description = ncore_noisette_completer($plugin, $description, $stockage);
+
 		// On récupère les noisettes déjà affectées au conteneur sous la forme d'un tableau indexé
 		// par le rang de chaque noisette.
 		$noisettes = ncore_noisette_lister($plugin, $conteneur, '', 'rang', $stockage);

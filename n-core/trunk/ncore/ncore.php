@@ -345,6 +345,46 @@ function ncore_noisette_stocker($plugin, $description, $stockage = '') {
 
 
 /**
+ * Complète la description d'une noisette avec des champs spécifiques au plugin utilisateur si besoin.
+ *
+ * Le plugin N-Core ne complète pas les descriptions de noisette.
+ *
+ * @package SPIP\NCORE\SERVICE\NOISETTE
+ *
+ * @uses ncore_chercher_service()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array  $description
+ *        Description de la noisette par défaut. Suivant le plugin utilisateur elle nécessite d'être compléter
+ *        avant son stockage.
+ * @param string $stockage
+ *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin ni celui de N-Core
+ *        ne seront utilisés. En général, cet identifiant est le préfixe du plugin fournissant le stockage.
+ *
+ * @return array
+ *        Description de la noisette éventuellement complétée par le plugin utilisateur.
+ */
+function ncore_noisette_completer($plugin, $description, $stockage = '') {
+
+	$description_complete = $description;
+
+	// On cherche le service de stockage à utiliser selon la logique suivante :
+	// - si le service de stockage est non vide on l'utilise en considérant que la fonction existe forcément;
+	// - sinon, on utilise la fonction du plugin appelant si elle existe;
+	// - et sinon, on utilise la fonction de N-Core.
+	include_spip('inc/ncore_utils');
+	if ($completer = ncore_chercher_service($plugin, 'noisette_completer', $stockage)) {
+		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
+		$description_complete = $completer($plugin, $description);
+	}
+
+	return $description_complete;
+}
+
+
+/**
  * Positionne une noisette à un rang différent que celui qu'elle occupe dans le conteneur.
  *
  * @package SPIP\NCORE\SERVICE\NOISETTE
@@ -487,7 +527,7 @@ function ncore_noisette_destocker($plugin, $description, $stockage = '') {
 
 /**
  * Renvoie un champ ou toute la description des noisettes d'un conteneur ou de tous les conteneurs.
- * Le tableau retourné est indexé soit par identifiant de noisette soit par conteneur et rang.
+ * Le tableau retourné est indexé soit par identifiant de noisette soit par identifiant du conteneur et rang.
  *
  * @package SPIP\NCORE\SERVICE\NOISETTE
  *
