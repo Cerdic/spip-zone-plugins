@@ -1,15 +1,15 @@
 <paquet
 	prefix="partageur"
 	categorie="edition"
-	version="1.1.0"
+	version="1.1.1"
 	etat="stable"
-	compatibilite="[3.0.5;3.1.*]"
+	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/partageur-64.png"
 	documentation="https://contrib.spip.net/Partageur"
 	schema="1.2.0" 
 >
 	<nom>Partageur</nom>
-	<auteur lien='http://www.erational.org'>erational</auteur>
+	<auteur lien='https://www.erational.org'>erational</auteur>
 	<licence>GNU/GPL</licence>
 
 	<necessite nom="saisies" compatibilite="[2.0.3;]" />
