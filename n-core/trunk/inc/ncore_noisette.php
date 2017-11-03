@@ -61,20 +61,22 @@ function noisette_ajouter($plugin, $type_noisette, $conteneur, $rang = 0, $stock
 		include_spip('inc/saisies');
 		$parametres = saisies_lister_valeurs_defaut($champs);
 
-		// On initialise la description de la noisette à ajouter
-		$description = array(
-			'plugin'     => $plugin,
-			'noisette'   => $type_noisette,
-			'conteneur'  => serialize($conteneur),
-			'rang'       => intval($rang),
-			'parametres' => serialize($parametres),
-			'balise'     => 'defaut',
-			'css'        => ''
-		);
-
 		// On charge les services de N-Core.
 		// Ce sont ces fonctions qui aiguillent ou pas vers un service spécifique du plugin.
 		include_spip('ncore/ncore');
+
+		// On initialise la description de la noisette à ajouter et en particulier on stocke l'id du conteneur
+		// pour simplifier les traitements par la suite.
+		$description = array(
+			'plugin'       => $plugin,
+			'noisette'     => $type_noisette,
+			'conteneur'    => serialize($conteneur),
+			'id_conteneur' => ncore_conteneur_identifier($plugin, $conteneur, $stockage),
+			'rang'         => intval($rang),
+			'parametres'   => serialize($parametres),
+			'balise'       => 'defaut',
+			'css'          => ''
+		);
 
 		// Complément à la description par défaut, spécifique au plugin utilisateur, si nécessaire.
 		$description = ncore_noisette_completer($plugin, $description, $stockage);
@@ -129,7 +131,7 @@ function noisette_ajouter($plugin, $type_noisette, $conteneur, $rang = 0, $stock
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param mixed  $noisette
  *        Identifiant de la noisette qui peut prendre soit la forme d'un entier ou d'une chaine unique, soit la forme
- *        d'un couple (conteneur, rang).
+ *        d'un couple (id conteneur, rang).
  * @param string $stockage
  *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
  *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
@@ -153,7 +155,7 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
 	//   (qui est unique pour un conteneur donné).
 	if (!empty($noisette) and (is_string($noisette) or is_numeric($noisette) or is_array($noisette))) {
 		// Avant de supprimer la noisette on sauvegarde sa description.
-		// Cela permet de conserver le rang et le conteneur indépendamment de l'identifiant
+		// Cela permet de conserver le rang et l'id du conteneur indépendamment de l'identifiant
 		// utilisé pour spécifier la noisette.
 		$description = ncore_noisette_decrire($plugin, $noisette, $stockage);
 
@@ -164,7 +166,7 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
 		// On récupère les noisettes restant affectées au conteneur sous la forme d'un tableau indexé par rang.
 		$autres_noisettes = ncore_noisette_lister(
 			$plugin,
-			unserialize($description['conteneur']),
+			$description['id_conteneur'],
 			'',
 			'rang',
 			$stockage
@@ -198,7 +200,7 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param mixed   $noisette
  *        Identifiant de la noisette qui peut prendre soit la forme d'un entier ou d'une chaine unique, soit la forme
- *        d'un couple (conteneur, rang).
+ *        d'un couple (id conteneur, rang).
  * @param string  $information
  *        Information spécifique à retourner ou vide pour retourner toute la description.
  * @param boolean $traiter_typo
@@ -217,7 +219,7 @@ function noisette_lire($plugin, $noisette, $information = '', $traiter_typo = fa
 
 	// On indexe le tableau des descriptions par le plugin appelant en cas d'appel sur le même hit
 	// par deux plugins différents.
-	// En outre, on gère un tableau par type d'identification, id noisette ou couple (conteneur, rang).
+	// En outre, on gère un tableau par type d'identification, id noisette ou couple (id conteneur, rang).
 	static $description_noisette_par_id = array();
 	static $description_noisette_par_rang = array();
 
@@ -229,56 +231,58 @@ function noisette_lire($plugin, $noisette, $information = '', $traiter_typo = fa
 		// Ce sont ces fonctions qui aiguillent ou pas vers un service spécifique du plugin.
 		include_spip('ncore/ncore');
 
-		// On vérifie si la description n'a pas déjà été enregistrée dans le tableau adéquat.
-		$description_existe = isset($description_noisette_par_id[$plugin][$noisette]) ? true : false;
+		// On vérifie si la noisette est valide et si la description n'a pas déjà été enregistrée dans le tableau adéquat.
+		$description_existe = false;
+		$noisette_invalide = false;
 		if (!is_array($noisette)) {
 			$description_existe = isset($description_noisette_par_id[$plugin][$noisette]) ? true : false;
+		} elseif (isset($noisette['id_conteneur'], $noisette['rang'])) {
+			$description_existe = isset($description_noisette_par_rang[$plugin][$noisette['id_conteneur']][$noisette['rang']])
+				? true
+				: false;
 		} else {
-			if (isset($noisette['conteneur'], $noisette['rang'])) {
-				$id_conteneur = ncore_conteneur_identifier($plugin, $noisette['conteneur'], $stockage);
-				$description_existe = isset($description_noisette_par_rang[$plugin][$id_conteneur][$noisette['rang']])
-					? true
-					: false;
-			}
+			$noisette_invalide = true;
 		}
 
-		if (!$description_existe) {
-			// Lecture de toute la configuration de la noisette: les données retournées sont brutes.
-			$description = ncore_noisette_decrire($plugin, $noisette, $stockage);
+		if (!$noisette_invalide) {
+			if (!$description_existe) {
+				// Lecture de toute la configuration de la noisette: les données retournées sont brutes.
+				$description = ncore_noisette_decrire($plugin, $noisette, $stockage);
 
-			// Traitements des champs tableaux sérialisés si nécessaire
-			if ($description) {
-				if (is_string($description['parametres'])) {
-					$description['parametres'] = unserialize($description['parametres']);
+				// Traitements des champs tableaux sérialisés si nécessaire
+				if ($description) {
+					if (isset($description['parametres']) and is_string($description['parametres'])) {
+						$description['parametres'] = unserialize($description['parametres']);
+					}
+					if (isset($description['conteneur']) and is_string($description['conteneur'])) {
+						$description['conteneur'] = unserialize($description['conteneur']);
+					}
 				}
-				if (is_string($description['conteneur'])) {
-					$description['conteneur'] = unserialize($description['conteneur']);
+
+				// Sauvegarde de la description de la noisette pour une consultation ultérieure dans le même hit
+				// en suivant le type d'identification.
+				if (!is_array($noisette)) {
+					$description_noisette_par_id[$plugin][$noisette] = $description;
+				} else {
+					$description_noisette_par_rang[$plugin][$noisette['id_conteneur']][$noisette['rang']] = $description;
 				}
 			}
 
-			// Sauvegarde de la description de la noisette pour une consultation ultérieure dans le même hit
-			// en suivant le type d'identification.
-			if (is_array($noisette)) {
-				$description_noisette_par_rang[$plugin][$id_conteneur][$noisette['rang']] = $description;
+			if ($information) {
+				if ((!is_array($noisette) and isset($description_noisette_par_id[$plugin][$noisette][$information]))
+					or (is_array($noisette)
+						and isset($description_noisette_par_rang[$plugin][$noisette['id_conteneur']][$noisette['rang']][$information]))) {
+					$retour = is_array($noisette)
+						? $description_noisette_par_rang[$plugin][$noisette['id_conteneur']][$noisette['rang']][$information]
+						: $description_noisette_par_id[$plugin][$noisette][$information];
+				} else {
+					$retour = '';
+				}
 			} else {
-				$description_noisette_par_id[$plugin][$noisette] = $description;
-			}
-		}
-
-		if ($information) {
-			if ((!is_array($noisette) and isset($description_noisette_par_id[$plugin][$noisette][$information]))
-				or (is_array($noisette)
-					and isset($description_noisette_par_rang[$plugin][$id_conteneur][$noisette['rang']][$information]))) {
 				$retour = is_array($noisette)
-					? $description_noisette_par_rang[$plugin][$id_conteneur][$noisette['rang']][$information]
-					: $description_noisette_par_id[$plugin][$noisette][$information];
-			} else {
-				$retour = '';
+					? $description_noisette_par_rang[$plugin][$noisette['id_conteneur']][$noisette['rang']]
+					: $description_noisette_par_id[$plugin][$noisette];
 			}
-		} else {
-			$retour = is_array($noisette)
-				? $description_noisette_par_rang[$plugin][$id_conteneur][$noisette['rang']]
-				: $description_noisette_par_id[$plugin][$noisette];
 		}
 	}
 
@@ -299,7 +303,7 @@ function noisette_lire($plugin, $noisette, $information = '', $traiter_typo = fa
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param mixed  $noisette
  *        Identifiant de la noisette qui peut prendre soit la forme d'un entier ou d'une chaine unique, soit la forme
- *        d'un couple (conteneur, rang).
+ *        d'un couple (id conteneur, rang).
  * @param int    $rang_destination
  *        Entier représentant le rang où repositionner la noisette dans le squelette contextualisé.
  * @param string $stockage
@@ -333,7 +337,7 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
 			// On récupère les noisettes affectées au même conteneur sous la forme d'un tableau indexé par le rang.
 			$noisettes = ncore_noisette_lister(
 				$plugin,
-				unserialize($description['conteneur']),
+				$description['id_conteneur'],
 				'',
 				'rang',
 				$stockage
