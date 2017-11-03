@@ -243,7 +243,7 @@ function autoriser_associerlivresauteurs_dist($faire, $type, $id, $qui, $opt) {
 }
 
 /* compatibilité plugin LIM */
-if (!function_exists('autoriser_rubrique_creerlivredans')) {
+if (!function_exists('autoriser_rubrique_creerlivredans') AND test_plugin_actif('lim')) {
 	function autoriser_rubrique_creerlivredans($faire, $type, $id, $qui, $opt) {
 		$quelles_rubriques = lire_config('lim_rubriques/livre');
 		is_null($quelles_rubriques) ? $lim_rub = true : $lim_rub = !in_array($id,$quelles_rubriques);
