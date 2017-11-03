@@ -42,25 +42,27 @@ $(document).ready(function() {
 /*]]>*/</script>
 </BOUCLE_timelineme>
 <style type="text/css">[(#REM) ]
-[#timeline-container { background-color:(#ENV{background,#8DD8DD}); }][(#ENV{orientation}|=={horizontal}|oui)
-#timeline-container.timeline-me-horizontal { padding:10px; }]
+#SET{bkg,#ENV{background,#8DD8DD}}
+[#timeline-container { background-color:(#GET{bkg}); }]
+[(#ENV{orientation}|=={horizontal}|oui)
+	#timeline-container.timeline-me-horizontal { padding:10px; }]
 .timeline-me-rightscroll {
-	background-image: -webkit-gradient(linear, left top, right top, from(rgba(141, 216, 221, 0)), to(#ENV{background,#8DD8DD}));
-	background-image: -webkit-linear-gradient(left, rgba(141, 216, 221, 0), #ENV{background,#8DD8DD});
-	background-image: -moz-linear-gradient(left, rgba(141, 216, 221, 0), #ENV{background,#8DD8DD});
-	background-image: -ms-linear-gradient(left, rgba(141, 216, 221, 0), #ENV{background,#8DD8DD});
-	background-image: -o-linear-gradient(left, rgba(141, 216, 221, 0), #ENV{background,#8DD8DD});
-	background-image: linear-gradient(left, rgba(141, 216, 221, 0), #ENV{background,#8DD8DD});
-	filter: progid:DXImageTransform.Microsoft.gradient(start-colourStr='rgba(141, 216, 221, 0)', end-colourStr='#ENV{background,#8DD8DD}', gradientType='1');
+	background-image: -webkit-gradient(linear, left top, right top, from(rgba(141, 216, 221, 0)), to (#GET{bkg}));
+	background-image: -webkit-linear-gradient(left, rgba(141, 216, 221, 0), #GET{bkg});
+	background-image: -moz-linear-gradient(left, rgba(141, 216, 221, 0), #GET{bkg});
+	background-image: -ms-linear-gradient(left, rgba(141, 216, 221, 0), #GET{bkg});
+	background-image: -o-linear-gradient(left, rgba(141, 216, 221, 0), #GET{bkg});
+	background-image: linear-gradient(left, rgba(141, 216, 221, 0), #GET{bkg});
+	filter: progid:DXImageTransform.Microsoft.gradient(start-colourStr='rgba(141, 216, 221, 0)', end-colourStr='#GET{bkg}', gradientType='1');
 }
 .timeline-me-leftscroll {
-	background-image: -webkit-gradient(linear, left top, right top, from(#ENV{background,#8DD8DD}), to(rgba(141, 216, 221, 0)));
-	background-image: -webkit-linear-gradient(left, #ENV{background,#8DD8DD}, rgba(141, 216, 221, 0));
-	background-image: -moz-linear-gradient(left, #ENV{background,#8DD8DD}, rgba(141, 216, 221, 0));
-	background-image: -ms-linear-gradient(left, #ENV{background,#8DD8DD}, rgba(141, 216, 221, 0));
-	background-image: -o-linear-gradient(left, #ENV{background,#8DD8DD}, rgba(141, 216, 221, 0));
-	background-image: linear-gradient(left, #ENV{background,#8DD8DD}, rgba(141, 216, 221, 0));
-	filter: progid:DXImageTransform.Microsoft.gradient(start-colourStr='#ENV{background,#8DD8DD}', end-colourStr='rgba(141, 216, 221, 0)', gradientType='1');
+	background-image: -webkit-gradient(linear, left top, right top, from (#GET{bkg}), to(rgba(141, 216, 221, 0)));
+	background-image: -webkit-linear-gradient(left, #GET{bkg}, rgba(141, 216, 221, 0));
+	background-image: -moz-linear-gradient(left, #GET{bkg}, rgba(141, 216, 221, 0));
+	background-image: -ms-linear-gradient(left, #GET{bkg}, rgba(141, 216, 221, 0));
+	background-image: -o-linear-gradient(left, #GET{bkg}, rgba(141, 216, 221, 0));
+	background-image: linear-gradient(left, #GET{bkg}, rgba(141, 216, 221, 0));
+	filter: progid:DXImageTransform.Microsoft.gradient(start-colourStr='#GET{bkg}', end-colourStr='rgba(141, 216, 221, 0)', gradientType='1');
 }
 /* arrangements pour les boutons "voir plus" et "voir moins" */
 .timeline-me-showmore, .timeline-me-showless {
