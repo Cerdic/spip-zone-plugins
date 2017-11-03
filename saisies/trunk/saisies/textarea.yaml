@@ -27,7 +27,7 @@ options:
         options:
           nom: 'placeholder'
           label: '<:saisies:option_placeholder_label:>'
-          size: 50
+          rows: 4
       -
         saisie: 'input'
         options:

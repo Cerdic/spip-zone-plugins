@@ -552,8 +552,8 @@ function construire_formulaire_generer_saisie_configurable($saisie, $env) {
 			)
 			.'<'.saisie_balise_structure_formulaire('li').' class="boutons">
 				<input type="hidden" name="enregistrer_saisie" value="'.$nom.'" />
-				<button type="submit" class="submit link" name="enregistrer_saisie" value="">'._T('bouton_annuler').'</button>
-				<input type="submit" class="submit" name="enregistrer" value="'._T('bouton_valider').'" />
+				<button type="submit" class="submit link noscroll" name="enregistrer_saisie" value="">'._T('bouton_annuler').'</button>
+				<input type="submit" class="submit noscroll" name="enregistrer" value="'._T('bouton_valider').'" />
 			</'.saisie_balise_structure_formulaire('li').'>'
 			.'</'.saisie_balise_structure_formulaire('ul').'></div>',
 			'fin'
