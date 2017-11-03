@@ -1,8 +1,11 @@
-<h1>Test de l'indexer</h1>
+<h1>Indexation Sphinx</h1>
 
 <?php
 
 if (_request('run') || _request('continue')) {
+
+	echo "<h2>Indexation en cours</h2>\n";
+
     include_spip('inc/indexer');
     
     // Appeler la fonction qui donne l'indexeur configuré pour ce SPIP
@@ -12,7 +15,6 @@ if (_request('run') || _request('continue')) {
     $sources = indexer_sources();
 
     $SpipSourcesIndexer = new Spip\Indexer\Sources\SpipSourcesIndexer($indexer, $sources);
-    $SpipSourcesIndexer->setTablesLiensAuto();
 
     if (_request('run')) {
         $SpipSourcesIndexer->resetIndexesStats();
@@ -26,3 +28,21 @@ if (_request('run') || _request('continue')) {
         echo "\n<pre>"; print_r($res); echo "</pre>";
     }
 }
+
+
+?>
+
+
+<B_test_sphinx>
+<BOUCLE_test_sphinx(SPHINX)
+	{0,1}
+	{!par date_indexation}
+>[<h2>Dernier contenu indexé</h2>
+(#VALEUR|print)]</BOUCLE_test_sphinx>
+
+</B_test_sphinx>
+
+<p class="error">Base d'indexation vide ou en erreur.</p>
+[(#SPHINX_META|print)]
+
+<//B_test_sphinx>
