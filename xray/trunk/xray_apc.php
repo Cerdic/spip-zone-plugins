@@ -16,6 +16,7 @@
   | Authors: Ralf Becker <beckerr@php.net>                               |
   |          Rasmus Lerdorf <rasmus@php.net>                             |
   |          Ilia Alshanetsky <ilia@prohost.org>                         |
+  |          JLuc http://contrib.spip.net/JLuc                           |
   +----------------------------------------------------------------------+
 
    All other licensing and usage conditions are those of the PHP Group.
@@ -54,7 +55,10 @@ defaults('GRAPH_SIZE',400);					// Image size
 
 //defaults('PROXY', 'tcp://127.0.0.1:8080');
 
-define ('FIELDVALUE_START_TO_STRIP', 'www.ecovillageglobal.fr:80:');
+// _CACHE_NAMESPACE est défini par memoization et préfixe chaque nom de cache SPIP
+// On ne souhaite pas que cette partie du nom s'affiche sur chaque ligne
+define ('XRAY_NEPASAFFICHER_DEBUTNOMCACHE', _CACHE_NAMESPACE);
+
 ////////// END OF DEFAULT CONFIG AREA /////////////////////////////////////////////////////////////
 
 // Strings utils
@@ -1250,8 +1254,8 @@ EOB;
 		$sh=md5($entry["info"]);
 
         $field_value = htmlentities(strip_tags($entry[$fieldname],''), ENT_QUOTES, 'UTF-8');
-        if (defined('FIELDVALUE_START_TO_STRIP'))
-			$field_value = str_replace (FIELDVALUE_START_TO_STRIP, '...', $field_value);
+        if (defined('XRAY_NEPASAFFICHER_DEBUTNOMCACHE'))
+			$field_value = str_replace (XRAY_NEPASAFFICHER_DEBUTNOMCACHE, '...', $field_value);
         echo
           '<tr id="key-'. $sh .'" class=tr-',$i%2,'>',
           "<td class=td-0>
