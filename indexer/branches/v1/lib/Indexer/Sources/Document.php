@@ -8,10 +8,12 @@ class Document {
 	public $summary = '';
 	public $content = '';
 	public $date = 0;
+	public $date_indexation = 0;
 	public $uri = '';
 	public $properties = array();
 
 	public function __construct($data) {
+		$this->date_indexation = time();
 		$this->setAll($data);
 	}
 
