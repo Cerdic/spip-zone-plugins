@@ -77,8 +77,10 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 	$configurer_saisie = $enregistrer_saisie = '';
 
 	// Pas d'erreur si l'on ne demande rien
-	if (!($nom_ou_id = $configurer_saisie  = _request('configurer_saisie')
-		or $nom_ou_id = $enregistrer_saisie = _request('enregistrer_saisie'))) {
+	if (
+		!($nom_ou_id = $configurer_saisie  = _request('configurer_saisie')
+		or $nom_ou_id = $enregistrer_saisie = _request('enregistrer_saisie'))
+	) {
 		return $erreurs;
 	}
 
@@ -91,7 +93,8 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 	if ($nom_ou_id[0] == '@') {
 		$saisies_actuelles = saisies_lister_par_identifiant($formulaire_actuel);
 		$nom = $saisies_actuelles[$nom_ou_id]['options']['nom'];
-	} else {
+	}
+	else {
 		$saisies_actuelles = saisies_lister_par_nom($formulaire_actuel);
 		$nom = $nom_ou_id;
 	}
@@ -127,8 +130,10 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 	}
 
 	// S'il y a l'option adéquat, on ajoute le champ pour modifier le nom
-	if (isset($options['modifier_nom']) and $options['modifier_nom']
-		and $chemin_nom = saisies_chercher($formulaire_config, "saisie_modifiee_${nom}[options][description]", true)) {
+	if (
+		isset($options['modifier_nom']) and $options['modifier_nom']
+		and $chemin_nom = saisies_chercher($formulaire_config, "saisie_modifiee_${nom}[options][description]", true)
+	) {
 		$chemin_nom[] = 'saisies';
 		$chemin_nom[] = '0';
 
@@ -161,6 +166,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 	if ($chemin_validation = saisies_chercher($formulaire_config, "saisie_modifiee_${nom}[options][validation]", true)) {
 		include_spip('inc/verifier');
 		$liste_verifications = verifier_lister_disponibles();
+		
 		// La vérification fichiers ne sert que pour la saisie fichiers, et réciproquement, cette saisies n'utilise que cette vérification
 		if ($saisie['saisie'] == 'fichiers') {
 			$liste_verifications = array('fichiers'=>$liste_verifications['fichiers']);
@@ -212,8 +218,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 		}
 		$verif_options = array_merge(array($saisie_liste_verif), $verif_options);
 	}
-
-
+	
 	// Permettre d'intégrer des saisies et fieldset au formulaire de configuration.
 	// Si des vérifications sont à faire, elles seront prises en compte
 	// lors des tests de vérifications à l'enregistrement.
@@ -233,6 +238,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 		$saisie_modifiee = _request("saisie_modifiee_${nom}");
 		// On cherche les erreurs de la configuration
 		$vraies_erreurs = saisies_verifier($formulaire_config);
+		
 		// Si on autorise à modifier le nom ET qu'il doit être unique : on vérifie
 		if (isset($options['modifier_nom']) and $options['modifier_nom']
 			and isset($options['nom_unique']) and $options['nom_unique']) {
@@ -241,6 +247,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 				$vraies_erreurs["saisie_modifiee_${nom}[options][nom]"] = _T('saisies:erreur_option_nom_unique');
 			}
 		}
+		
 		// On regarde s'il a été demandé un type de vérif
 		if (isset($saisie_modifiee['verifier']['type'])
 			and (($type_verif = $saisie_modifiee['verifier']['type']) != '')
@@ -335,6 +342,7 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 			}
 			$saisie = array_replace_recursive($saisie, $defaut);
 		}
+		
 		$formulaire_actuel = saisies_inserer($formulaire_actuel, $saisie);
 	}
 
@@ -410,6 +418,7 @@ function construire_formulaire_transformer_nom(&$valeur, $cle, $transformation) 
 		$valeur = str_replace('@valeur@', $valeur, $transformation);
 	}
 }
+
 // À utiliser avec un array_walk_recursive()
 // Applique une transformation à la valeur de tous les champs "afficher_si" d'un formulaire, y compris loin dans l'arbo
 function construire_formulaire_transformer_afficher_si(&$valeur, $cle, $transformation) {
@@ -425,6 +434,7 @@ function construire_formulaire_generer_saisie_configurable($saisie, $env) {
 	$identifiant = isset($saisie['identifiant']) ? $saisie['identifiant'] : '';
 	// On cherche si ya un formulaire de config
 	$formulaire_config = isset($env['erreurs']['configurer_'.$nom]) ? $env['erreurs']['configurer_'.$nom] : '';
+	
 	// On ajoute une classe
 	if (!isset($saisie['options']['conteneur_class'])) {
 		$saisie['options']['conteneur_class'] = ''; // initialisation
@@ -557,8 +567,10 @@ function construire_formulaire_generer_saisie_configurable($saisie, $env) {
 			'fin'
 		);
 	}
+	
 	// On génère le HTML de la saisie
 	$html = saisies_generer_html($saisie, $env);
+	
 	return $html;
 }
 
@@ -583,27 +595,28 @@ function saisie_option_contenu_vide($var) {
 function saisies_groupe_inserer($formulaire_actuel, $saisie) {
 	include_spip('inclure/configurer_saisie_fonctions');
 
-		//le groupe de saisies
-		$saisies_charger_infos = saisies_charger_infos($saisie, $saisies_repertoire = 'saisies/groupes');
+	//le groupe de saisies
+	$saisies_charger_infos = saisies_charger_infos($saisie, $saisies_repertoire = 'saisies/groupes');
 
-		//le tableau est-il en options ou en saisies ?
-		$classique_yaml=count($saisies_charger_infos['options']);
-		$formidable_yaml=count($saisies_charger_infos['saisies']);
-		if ($classique_yaml>0) {
-			$champ_options = 'options';
-		}
-		if ($formidable_yaml>0) {
-			$champ_options = 'saisies';
-		}
+	//le tableau est-il en options ou en saisies ?
+	$classique_yaml=count($saisies_charger_infos['options']);
+	$formidable_yaml=count($saisies_charger_infos['saisies']);
+	if ($classique_yaml>0) {
+		$champ_options = 'options';
+	}
+	if ($formidable_yaml>0) {
+		$champ_options = 'saisies';
+	}
 
-		//les champs du groupe
-		foreach ($saisies_charger_infos[$champ_options] as $info_saisie) {
-			unset($info_saisie['identifiant']);
-			$saisies_disponibles = saisies_lister_disponibles();
-			$construire_nom = $info_saisie[$champ_options]['nom'] ? $info_saisie[$champ_options]['nom'] : $info_saisie['saisie'];
-			$nom = $info_saisie[$champ_options]['nom'] = saisies_generer_nom($formulaire_actuel, $construire_nom);
+	//les champs du groupe
+	foreach ($saisies_charger_infos[$champ_options] as $info_saisie) {
+		unset($info_saisie['identifiant']);
+		$saisies_disponibles = saisies_lister_disponibles();
+		$construire_nom = $info_saisie[$champ_options]['nom'] ? $info_saisie[$champ_options]['nom'] : $info_saisie['saisie'];
+		$nom = $info_saisie[$champ_options]['nom'] = saisies_generer_nom($formulaire_actuel, $construire_nom);
 
-			$formulaire_actuel = saisies_inserer($formulaire_actuel, $info_saisie);
-		}
-		return $formulaire_actuel;
+		$formulaire_actuel = saisies_inserer($formulaire_actuel, $info_saisie);
+	}
+	
+	return $formulaire_actuel;
 }
