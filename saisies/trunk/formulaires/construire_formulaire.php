@@ -257,7 +257,6 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 		}
 	}
 	$erreurs['configurer_'.$nom] = $formulaire_config;
-	$erreurs['positionner'] = '#configurer_'.$nom;
 
 	if ($enregistrer_saisie) {
 		if ($vraies_erreurs) {
@@ -525,7 +524,6 @@ function construire_formulaire_generer_saisie_configurable($saisie, $env) {
 		// Un test pour savoir si on prend le _request ou bien
 		$erreurs_test = $env['erreurs'];
 		unset($erreurs_test['configurer_'.$nom]);
-		unset($erreurs_test['positionner']);
 		unset($erreurs_test['message_erreur']);
 
 		if ($erreurs_test) {
