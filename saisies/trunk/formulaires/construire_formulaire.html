@@ -8,7 +8,7 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<input style="display:none;" type="submit" class="submit noscroll" name="enregistrer" value="<:bouton_enregistrer:>" />
+		<input type="submit" class="submit noscroll invisible" name="enregistrer" value="<:bouton_enregistrer:>" />
 
 		<[(#DIV|sinon{ul})] class="editer-groupe" id="deplacable">
 			
