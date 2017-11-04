@@ -395,10 +395,7 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param array  $conteneur
- *        Tableau associatif descriptif du conteneur accueillant la noisette. Un conteneur peut-être un squelette seul
- *        ou associé à un contexte d'utilisation et dans ce cas il possède un index `squelette` ou un objet quelconque
- *        sans lien avec un squelette. Dans tous les cas, les index, à l'exception de `squelette`, sont spécifiques
- *        à l'utilisation qui en est faite par le plugin.
+ *        Tableau descriptif du conteneur ou identifiant du conteneur.
  * @param string $stockage
  *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
  *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
@@ -416,7 +413,7 @@ function noisette_vider($plugin, $conteneur, $stockage = '') {
 	include_spip('ncore/ncore');
 
 	if ($conteneur) {
-		$retour = ncore_noisette_destocker($plugin, $conteneur, $stockage);
+		$retour = ncore_conteneur_destocker($plugin, $conteneur, $stockage);
 	}
 
 	return $retour;
