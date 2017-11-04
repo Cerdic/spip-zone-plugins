@@ -37,22 +37,25 @@ function formulaires_ajouter_noisette_traiter_dist($page, $bloc, $redirect = '')
 
 	$retour = array();
 
-	// Détermination de l'identifiant de la page ou de l'objet concerné
+	// Détermination de l'identifiant de la page ou de l'objet concerné et construction du conteneur de la
+	// noisette
+	$conteneur = array();
 	if (is_array($page)) {
 		$identifiant['objet'] = $page['objet'];
 		$identifiant['id_objet'] = $page['id_objet'];
-		$squelette = "${bloc}/{$identifiant['objet']}{$identifiant['id_objet']}";
+		$conteneur['squelette'] = "${bloc}";
+		$conteneur = array_merge($conteneur, $identifiant);
 	}
 	else {
 		$identifiant['page'] = $page;
-		$squelette = "${bloc}/${page}";
+		$conteneur['squelette'] = "${bloc}/${page}";
 	}
 
 	if (autoriser('configurerpage', 'noizetier', 0, '', $identifiant)) {
 		if ($noisette = _request('noisette')) {
 			include_spip('inc/ncore_noisette');
 			// Ajout de la noisette en fin de liste pour le squelette concerné.
-			if ($id_noisette = noisette_ajouter('noizetier', $noisette, $squelette)) {
+			if ($id_noisette = noisette_ajouter('noizetier', $noisette, $conteneur)) {
 				$retour['message_ok'] = _T('info_modification_enregistree');
 				if ($redirect) {
 					// Note : $redirect indique la page à charger en cas d'ajout

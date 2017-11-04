@@ -123,7 +123,7 @@ function maj_060($config_defaut) {
 	// -- Ajout de la colonne 'plugin' qui vaut 'noizetier' pour ce plugin.
 	// -- Ajout de la colonne 'squelette'.
 	sql_alter("TABLE spip_noisettes ADD plugin varchar(30) DEFAULT '' NOT NULL AFTER id_noisette");
-	sql_alter("TABLE spip_noisettes ADD squelette varchar(255) DEFAULT '' NOT NULL AFTER plugin");
+	sql_alter("TABLE spip_noisettes ADD id_conteneur varchar(255) DEFAULT '' NOT NULL AFTER plugin");
 	sql_alter("TABLE spip_noisettes ADD balise varchar(6) DEFAULT 'defaut' NOT NULL AFTER parametres");
 //	sql_alter("TABLE spip_noisettes ADD maj timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL");
 	// -- Suppression des index pour des colonnes dont on va modifier la taille ou le type
@@ -140,12 +140,13 @@ function maj_060($config_defaut) {
 	sql_alter("TABLE spip_noisettes MODIFY balise varchar(25) NOT NULL");
 	// -- Mise à jour de la valeur par défaut du rang
 	sql_alter("TABLE spip_noisettes MODIFY rang smallint DEFAULT 1 NOT NULL");
-	// -- Création des index détruits précédemment et du nouvel index plugin
+	// -- Création des index détruits précédemment et des nouveaux index plugin et conteneur
 	sql_alter("TABLE spip_noisettes ADD INDEX type (type)");
 	sql_alter("TABLE spip_noisettes ADD INDEX composition (composition)");
 	sql_alter("TABLE spip_noisettes ADD INDEX bloc (bloc)");
 	sql_alter("TABLE spip_noisettes ADD INDEX noisette (noisette)");
 	sql_alter("TABLE spip_noisettes ADD INDEX plugin (plugin)");
+	sql_alter("TABLE spip_noisettes ADD INDEX id_conteneur (id_conteneur)");
 	// -- Renommage de la table
 	sql_alter("TABLE spip_noisettes RENAME spip_noizetier");
 	// -- Remplissage de la nouvelle colonne plugin avec la valeur 'noizetier'.

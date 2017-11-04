@@ -128,7 +128,7 @@ function noizetier_declarer_tables_principales($tables_principales) {
 	$noizetier = array(
 		'id_noisette' => 'bigint(21) NOT NULL',
 		'plugin'      => "varchar(30) DEFAULT '' NOT NULL",
-		'squelette'   => "varchar(255) DEFAULT '' NOT NULL",
+		'id_conteneur'=> "varchar(255) DEFAULT '' NOT NULL",
 		'rang'        => "smallint DEFAULT 1 NOT NULL",
 		'type'        => "varchar(127) DEFAULT '' NOT NULL",
 		'composition' => "varchar(127) DEFAULT '' NOT NULL",
@@ -144,7 +144,7 @@ function noizetier_declarer_tables_principales($tables_principales) {
 	$noizetier_cles = array(
 		'PRIMARY KEY'     => 'id_noisette',
 		'KEY plugin'      => 'plugin',
-		'KEY squelette'   => 'squelette',
+		'KEY id_conteneur'=> 'id_conteneur',
 		'KEY type'        => 'type',
 		'KEY composition' => 'composition',
 		'KEY bloc'        => 'bloc',
