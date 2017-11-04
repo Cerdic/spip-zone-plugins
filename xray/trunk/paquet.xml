@@ -1,8 +1,8 @@
 <paquet
 	prefix="xray"
 	categorie="outil"
-	version="0.2.1"
-	etat="stable"
+	version="0.3.0"
+	etat="test"
 	compatibilite="[2.1.0;3.2.*]"
 	logo="images/xray-32.png"
 	documentation="https://contrib.spip.net/4946"
@@ -18,5 +18,6 @@
 	<credit lien="mailto:ilia@prohost.org">Ilia Alshanetsky</credit>
 	<credit lien="https://thenounproject.com/term/radiology-android/101572/">Inspiration pour l'icone : Radiology Android By Hadi Davodpour, Licence Creative Commons</credit>
 
+	<menu nom="xray" titre="XRay" parent="menu_squelette" icone="images/prive-xray-16.jpg" action="xray" />
 	<necessite nom="memoization"/>
 </paquet>
