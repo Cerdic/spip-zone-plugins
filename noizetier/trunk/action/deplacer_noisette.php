@@ -1,4 +1,10 @@
 <?php
+/**
+ * Ce fichier contient l'action `deplacer_noisette` lancée par un utilisateur pour
+ * déplacer d'un rang vers le haut ou vers le bas de façon sécurisée une noisette donnée.
+ *
+ * @package SPIP\NOIZETIER\ACTION
+ */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -9,24 +15,23 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * vers le bas, de façon sécurisée.
  *
  * Cette action est réservée aux utilisateurs autorisés à modifier la configuration de la page
- * à laquelle est rattachée la noisette. Elle nécessite des arguments dont la liste dépend
- * du contexte.
+ * à laquelle est rattachée la noisette. Elle nécessite des arguments dont le sens et l'id de la noisette.
  *
- * @uses supprimer_noisettes()
+ * @uses noisette_deplacer()
  *
  * @return void
  */
 function action_deplacer_noisette_dist() {
 
 	// Les arguments attendus dépendent du contexte et la chaine peut prendre les formes suivantes:
-	// - bas:id_noisette, pour déplacer la noisette d'un rang vers le bas.
-	// - haut:id_noisette, pour déplacer la noisette d'un rang vers le haut.
+	// - bas:id_noisette:nb_noisettes_du_conteneur, pour déplacer la noisette d'un rang vers le bas.
+	// - haut:id_noisette:nb_noisettes_du_conteneur, pour déplacer la noisette d'un rang vers le haut.
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arguments = $securiser_action();
 
 	if ($arguments) {
 		// Identification des arguments
-		list($sens, $id_noisette) = explode(':', $arguments);
+		list($sens, $id_noisette, $nb_noisettes) = explode(':', $arguments);
 
 		// Recherche des informations sur la noisette.
 		if (in_array($sens, array('bas', 'haut')) and ($id_noisette = intval($id_noisette))) {
@@ -50,9 +55,30 @@ function action_deplacer_noisette_dist() {
 				exit();
 			}
 
+			// Détermination du rang de destination de la noisette. Les rangs des noisettes dans un conteneur
+			// sont toujours compris entre 1 et le nombre de noisettes du conteneur.
+			if ($sens == 'bas') {
+				if ($noisette['rang'] < $nb_noisettes) {
+					// La noisette peut être échangée avec la suivante
+					$rang_destination = $noisette['rang'] + 1;
+				} else {
+					// La noisette passe en début de liste
+					$rang_destination = 1;
+				}
+			} else {
+				if ($noisette['rang'] > 1) {
+					// La noisette peut être échangée avec la précédente
+					$rang_destination = $noisette['rang'] - 1;
+				} else {
+					// La noisette passe en fin de liste
+					$rang_destination = $nb_noisettes;
+				}
+			}
+
+
 			// Déplacement de la noisette par modification de son rang en base de données.
-			include_spip('noizetier_fonctions');
-			noizetier_noisette_deplacer($id_noisette, $sens, $noisette);
+			include_spip('inc/ncore_noisette');
+			noisette_deplacer('noizetier', $id_noisette, $rang_destination);
 		}
 	}
 }

@@ -194,7 +194,7 @@ function noizetier_noisette_ajouter($noisette, $page, $bloc, $rang = 0) {
  *
  * @return bool
  */
-function noizetier_noisette_ranger($ordre, $index_initial = 0) {
+function noizetier_noisette_ordonner($ordre, $index_initial = 0) {
 
 	if ($index_initial < count($ordre)) {
 		if (sql_preferer_transaction()) {
@@ -277,7 +277,7 @@ function noizetier_noisette_deplacer($id_noisette, $sens, $noisette) {
 			}
 
 			// On appelle la fonction de mise à jour du nouvel ordre
-			noizetier_noisette_ranger($ordre);
+			noizetier_noisette_ordonner($ordre);
 
 			// On invalide le cache
 			include_spip('inc/invalideur');

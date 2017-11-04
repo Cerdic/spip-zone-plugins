@@ -30,15 +30,17 @@
 						</div>
 					</div>
 					<div class="edition">
-						[<a href="(#URL_ACTION_AUTEUR{deplacer_noisette, [haut:(#ID_NOISETTE)], #GET{self}})"
+					[(#TOTAL_BOUCLE|>{1}|oui)
+						[<a href="(#URL_ACTION_AUTEUR{deplacer_noisette, [haut:(#ID_NOISETTE):#TOTAL_BOUCLE], #GET{self}})"
 							title="<:noizetier:formulaire_deplacer_haut:>">
 							[<img height="24" width="24" src="(#CHEMIN_IMAGE{noisette-up-24.png})" alt="" />]
 						</a>]
-						[<a href="(#URL_ACTION_AUTEUR{deplacer_noisette, [bas:(#ID_NOISETTE)], #GET{self}})"
+						[<a href="(#URL_ACTION_AUTEUR{deplacer_noisette, [bas:(#ID_NOISETTE):#TOTAL_BOUCLE], #GET{self}})"
 							title="<:noizetier:formulaire_deplacer_bas:>">
 							[<img height="24" width="24" src="(#CHEMIN_IMAGE{noisette-down-24.png})" alt="" />]
 						</a>]
-						[<a href="(#URL_ACTION_AUTEUR{supprimer_noisettes, [noisette:(#ID_NOISETTE)], #GET{self}#bloc-#ENV{bloc}})"
+					]
+						[<a href="(#URL_ACTION_AUTEUR{supprimer_noisette, [(#ID_NOISETTE)], #GET{self}#bloc-#ENV{bloc}})"
 							title="<:noizetier:formulaire_supprimer_noisette:>">
 							[<img height="24" width="24" src="(#CHEMIN_IMAGE{noisette-del-24.png})" alt="" />]
 						</a>]

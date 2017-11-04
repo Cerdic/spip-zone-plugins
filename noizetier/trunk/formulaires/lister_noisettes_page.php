@@ -39,7 +39,7 @@ function formulaires_lister_noisettes_page_traiter_dist($page, $bloc) {
 			// On met à jour le tableau donnant l'ordre des noisettes avec l'id de la noisette
 			// et on demande le rangement des noisettes qui suivent la noisette ajoutée.
 			$ordre[$index] = "${id_noisette}";
-			if (noizetier_noisette_ranger($ordre, $index + 1)) {
+			if (noizetier_noisette_ordonner($ordre, $index + 1)) {
 				$retour['message_ok'] = _T('info_modification_enregistree');
 			} else {
 				$retour['message_erreur'] = _T('noizetier:erreur_mise_a_jour');
@@ -49,7 +49,7 @@ function formulaires_lister_noisettes_page_traiter_dist($page, $bloc) {
 		}
 	} else {
 		// On vient juste de changer l'ordre des noisettes, on réordonne toute la liste.
-		if (noizetier_noisette_ranger($ordre)) {
+		if (noizetier_noisette_ordonner($ordre)) {
 			$retour['message_ok'] = _T('info_modification_enregistree');
 		} else {
 			$retour['message_erreur'] = _T('noizetier:erreur_mise_a_jour');
