@@ -1,47 +1,46 @@
 <div class="formulaire_spip formulaire_bouton_objet ajax" id="formulaire_bouton_objet[_(#ENV{lang,no_lang})]">
-        <form action="#ENV{action}" method="post"><div>
-            #ACTION_FORMULAIRE{#ENV{action}}
-        <ul>
-            [(#SAISIE{input,objet_sel,
-                    label=#ENV{label_objet}})]
-           [(#ENV{types_lien}|count|>{0}|oui)      
-            [(#SAISIE{selection,type_lien,
-                    label=#ENV{label_lien},
-                    datas=#ENV{types_lien}})]
-                ]
-        </ul>
-        <p class="boutons">
-         <input type="submit" name="ok" class="submit" value="ok"  />
-        </p>       
-        </div>
-        </form>
-  
+	<form action="#ENV{action}" method="post"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		[(#SAISIE{input,objet_sel,label=#ENV{label_objet}})]
+		[(#ENV{types_lien}|count|>{0}|oui)
+			[(#SAISIE{selection,type_lien,
+				label=#ENV{label_lien},
+				datas=#ENV{types_lien}})]
+		]
+	</ul>
+	<p class="boutons">
+	<input type="submit" name="ok" class="submit" value="ok"  />
+	</p>
+	</div>
+	</form>
+
 [(#REM)autocomplete recherche]
 
 </div>
 
 <script type="text/javascript" >
-    $(function() {
-        $("#formulaire_bouton_objet[_(#ENV{lang,no_lang}) ] #champ_objet_sel" ).autocomplete({
-                source: "[(#ENV{url_recherche}|replace{&amp;,&})]",
-                dataType: 'json',
-                minLength: 2,
-                autoFocus: true,
-                select: function(event, ui) {
-                    //assign value back to the form element
-                    if(ui.item){
-                      $(event.target).val(ui.item.value);
-                    }
-                    //submit the form
-                    $(event.target.form).submit();
-                }
-          });
-        });
-    jQuery(document).ready(function(){
-    $('#formulaire_bouton_objet[_(#ENV{lang,no_lang})] #champ_objet_sel').val('');
-     #SET{id,selection_objets_#ENV{lang,no_lang}}
-    [(#ENV{message_ok}|oui)
-       $('#[(#GET{id})]').load('[(#URL_ACTION_AUTEUR{ranger,nouvel_ordre-[(#ENV{lang})]-0-0-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]}|parametre_url{load,prive/objets/liste/inc-selection_interface}|parametre_url{id,#GET{id}}|replace{&amp;,&})]');
-        ]         
-        });
-  </script>
+	$(function() {
+		$("#formulaire_bouton_objet[_(#ENV{lang,no_lang}) ] #champ_objet_sel" ).autocomplete({
+			source: "[(#ENV{url_recherche}|replace{&amp;,&})]",
+			dataType: 'json',
+			minLength: 2,
+			autoFocus: true,
+			select: function(event, ui) {
+				//assign value back to the form element
+				if(ui.item){
+					$(event.target).val(ui.item.value);
+				}
+				//submit the form
+					$(event.target.form).submit();
+			}
+		});
+	});
+	$(document).ready(function(){
+	$('#formulaire_bouton_objet[_(#ENV{lang,no_lang})] #champ_objet_sel').val('');
+	#SET{id,selection_objets_#ENV{lang,no_lang}}
+	[(#ENV{message_ok}|oui)
+		$('#[(#GET{id})]').load('[(#URL_ACTION_AUTEUR{ranger,nouvel_ordre-[(#ENV{lang})]-0-0-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]}|parametre_url{load,prive/objets/liste/inc-selection_interface}|parametre_url{id,#GET{id}}|replace{&amp;,&})]');
+			]
+	});
+	</script>
