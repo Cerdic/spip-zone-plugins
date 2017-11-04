@@ -710,7 +710,7 @@ function ncore_conteneur_identifier($plugin, $conteneur, $stockage) {
 	$id_conteneur = '';
 	if ($conteneur) {
 		include_spip('inc/ncore_utils');
-		if ($identifier = ncore_chercher_service($plugin, 'squelette_identifier', $stockage)) {
+		if ($identifier = ncore_chercher_service($plugin, 'conteneur_identifier', $stockage)) {
 			// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 			$id_conteneur = $identifier($plugin, $conteneur);
 		}
@@ -749,7 +749,7 @@ function ncore_conteneur_destocker($plugin, $conteneur, $stockage = '') {
 	// - sinon, on utilise la fonction du plugin appelant si elle existe;
 	// - et sinon, on utilise la fonction de N-Core.
 	include_spip('inc/ncore_utils');
-	if ($destocker = ncore_chercher_service($plugin, 'noisette_destocker', $stockage)) {
+	if ($destocker = ncore_chercher_service($plugin, 'conteneur_destocker', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$retour = $destocker($plugin, $conteneur);
 	} else {
