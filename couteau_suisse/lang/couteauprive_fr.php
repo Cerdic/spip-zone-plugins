@@ -121,6 +121,7 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 	'balise_set:nom' => 'Balise #SET étendue',
 	'barres_typo_edition' => 'Edition des contenus',
 	'barres_typo_forum' => 'Messages de Forum',
+	'barres_typo_vide' => 'Barre vide',
 	'barres_typo_intro' => 'Le plugin «Porte-Plume» a été détecté. Veuillez choisir ici les barres typographiques où certains boutons seront insérés.',
 	'basique' => 'Basique',
 	'blocs:aide' => 'Blocs Dépliables : <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias : <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) et <b>&lt;visible&gt;&lt;/visible&gt;</b>',

@@ -169,7 +169,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 			$descrip .= ($i?'[[->':'[[')."%$nom%]]";
 			add_variable( array(
 				'nom' => $nom,
-				'check' => ($b=='edition' || $b=='forum')?'couteauprive:barres_typo_'.$b:$f,
+				'check' => ($b=='edition' || $b=='forum' || $b=='vide')?'couteauprive:barres_typo_'.$b:$f,
 				'defaut' => 1, // par defaut les boutons seront toujours inseres
 				'label' => $i++?NULL:'@_CS_CHOIX@',
 			));
