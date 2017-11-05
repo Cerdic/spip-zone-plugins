@@ -3,7 +3,7 @@
 #  Plugin  : Couteau Suisse - Licence : GPL           #
 #  Auteur  : Patrice Vanneufville, 2007               #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
-#  Infos : https://contrib.spip.net/?article2166       #
+#  Infos : https://contrib.spip.net/?article2166      #
 #-----------------------------------------------------#
 #  Fichier contenant les fonctions concernant la      #
 #  description des outils.                            #
@@ -29,9 +29,8 @@ function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 	if(!isset($outil['init_ok'])) {
 		$outil['init_ok'] = 1;
 		if(!isset($outil['categorie'])) $outil['categorie'] = 'divers';
-		if(!isset($outil['nom'])) $outil['nom'] = couteauprive_T($outil['id'].':nom');
-		if(strpos($outil['nom'], '<:')!==false)
-			$outil['nom'] = preg_replace_callback(',<:([:a-z0-9_-]+):>,i', create_function('$m','return _T($m[1]);'), $outil['nom']);
+		$outil['pas_de_nom'] = !isset($outil['nom']);
+		$outil['nom'] = cs_nom_outil($outil);
 		// $outil['surcharge'] n'est pas encore renseigne si la fonction d'installation est surchargee
 		if(isset($outil['surcharge']) || (function_exists($outil_.'_installe') && $outil['surcharge']=1))
 			$outil['nom'] = $outil['nom'].' *';
@@ -371,8 +370,10 @@ function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 	$a = '<ul style="margin:0.6em 0 0.6em 4em;"><li>' . join("</li><li style='margin-top:0.4em;'>", $a) . '</li></ul>';
 	$b = ($actif || !$erreur)?'rss_actualiser':($erreur?'distant_charger':false);
 
+
 	$b = $b?"\n<p class='cs_sobre'><input class='cs_sobre' type='submit' value=\" ["
 			. attribut_html(couteauprive_T(''.$b)).']" />' . $reload . '</p>':'';
+
 	return ajax_action_auteur('action_rapide', 'fichiers_distants', 'admin_couteau_suisse', "arg=$outil[id]|fichiers_distants&cmd=descrip#cs_action_rapide",
 			'<p>' . couteauprive_T('distant_aide') . '</p>'
 			. '<p style="margin-top:1em"><strong>' . definir_puce() . '&nbsp;' . couteauprive_T('detail_fichiers_distant') . '</strong></p>'

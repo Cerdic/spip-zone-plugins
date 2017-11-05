@@ -1,5 +1,13 @@
 <?php
-
+#-----------------------------------------------------#
+#  Plugin  : Couteau Suisse - Licence : GPL           #
+#  Auteur  : Patrice Vanneufville, 2007               #
+#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
+#  Infos : https://contrib.spip.net/?article2166      #
+#-----------------------------------------------------#
+#  Fichier contenant les fonctions relatives aux      #
+#  pipelines appeles par SPIP.                        #
+#-----------------------------------------------------#
 if(!defined("_ECRIRE_INC_VERSION")) return;
 
 // attention, ici il se peut que le plugin ne soit pas initialise (cas des .js/.css par exemple)
@@ -148,6 +156,11 @@ function couteau_suisse_taches_generales_cron($flux){
 function couteau_suisse_creer_chaine_url($flux){
 	return eval_metas_pipelines($flux, 'creer_chaine_url');
 }
+// pipelines SPIP>=2.0
+function couteau_suisse_declarer_tables_interfaces($flux){
+	if(function_exists('cs_table_des_traitements')) cs_table_des_traitements($flux['table_des_traitements']);
+	return eval_metas_pipelines($flux, 'declarer_tables_interfaces');
+}
 // pipelines SPIP>=2.1
 function couteau_suisse_arbo_creer_chaine_url($flux){
 	return eval_metas_pipelines($flux, 'arbo_creer_chaine_url');
@@ -155,13 +168,12 @@ function couteau_suisse_arbo_creer_chaine_url($flux){
 function couteau_suisse_propres_creer_chaine_url($flux){
 	return eval_metas_pipelines($flux, 'propres_creer_chaine_url');
 }
-// pipelines SPIP>=2.0
-function couteau_suisse_declarer_tables_interfaces($flux){
-	if(function_exists('cs_table_des_traitements')) cs_table_des_traitements($flux['table_des_traitements']);
-	return eval_metas_pipelines($flux, 'declarer_tables_interfaces');
+// pipelines SPIP>=3.0
+function couteau_suisse_ajouter_menus($flux){
+	return eval_metas_pipelines($flux, 'ajouter_menus');
 }
 
-// eux fonctions obsoletes, conservees pour SPIP<3.0 :
+// deux fonctions obsoletes, conservees pour SPIP<3.0 :
 // le contenu du sous-menu est gere par les lames elles-memes
 function couteau_suisse_bt_toolbox($params) {
 	global $cs_metas_pipelines;
@@ -306,6 +318,10 @@ function cs_recuperer_code(&$code) {//, $contexte=array(), $options = array(), $
 	return $f['texte'];
 }
 
+//	renvoie un bouton permettant d'acceder directement a un outil
+function cs_ajouter_menus($id, $titre) {
+	return new Bouton(chemin_image(cs_icone(16)), $titre, generer_url_ecrire('admin_couteau_suisse', "cmd=descrip&outil=$id#cs_infos"));
+}
 
 /*
 if(defined('_LOG_CS')) cs_log("INIT : cout_pipelines, lgr=" . strlen($cs_metas_pipelines['pipelines']));

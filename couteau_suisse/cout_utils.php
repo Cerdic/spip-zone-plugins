@@ -3,7 +3,7 @@
 #  Plugin  : Couteau Suisse - Licence : GPL           #
 #  Auteur  : Patrice Vanneufville, 2006               #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
-#  Infos : https://contrib.spip.net/?article2166       #
+#  Infos : https://contrib.spip.net/?article2166      #
 #-----------------------------------------------------#
 #  Fichier contenant les fonctions utilisees pendant  #
 #  la configuration du plugin                         #
@@ -355,6 +355,20 @@ function cs_autorisation_alias(&$tab, $autoriser) {
 	}
 }
 
+function cs_nom_outil(&$outil, $traduit=true) {
+	if($outil['pas_de_nom']) {
+		// outil classique
+		$nom = 'couteauprive:'.$outil['id'].':nom'; $nom_traduit = _T($nom);
+	} else {
+		// outil au nom defini et traduit
+		$nom = ''; $nom_traduit = $outil['nom'];
+	}
+	// si on trouve une chaine de langue dans le nom traduit, le resultat sera forcement traduit
+	if(strpos($nom_traduit, '<:')!==false)
+		return preg_replace_callback(',<:([:a-z0-9_-]+):>,i', create_function('$m','return _T($m[1]);'), $nom_traduit);
+	return (!$traduit && strlen($nom))?$nom:$nom_traduit;
+}
+
 // cree les tableaux $infos_pipelines et $infos_fichiers, puis initialise $cs_metas_pipelines
 function cs_initialise_includes($count_metas_outils) {
 	global $outils, $cs_metas_pipelines;
@@ -407,6 +421,12 @@ function cs_initialise_includes($count_metas_outils) {
 					// rien a faire : $traitements_utilises est rempli par is_traitements_outil()
 				}
 			}
+			// SPIP>=3.1 : en l'absence du pipeline "ajouter_menus" defini dans l'outil, 
+			// ajouter d'office le bouton de menu "developpement" si l'outil est de categorie "devel"
+			if(defined('_SPIP30100') && $outil['categorie']=='devel' && !isset($outil['pipeline:ajouter_menus']) && !isset($outil['pipelinecode:ajouter_menus'])) {
+				$infos_pipelines['ajouter_menus']['inline'][] = "if(autoriser('configurer','$inc')) // cs_ajouter_menus('$inc', '$inc:nom', '');
+	\$flux['menu_developpement']->sousmenu['cs_$inc'] = cs_ajouter_menus($inc, '".attribut_html(cs_nom_outil($outil, false))."');";
+			}	
 			// recherche des fichiers .css, .css.html, .js et .js.html eventuellement present dans outils/
 			foreach(array('css', 'js') as $f) {
 				if($file=find_in_path("outils/$inc.$f")) { lire_fichier($file, $ff); ${'temp_'.$f}[] = $ff; }
@@ -729,6 +749,7 @@ function cs_parse_code_js($code) {
 			$rempl = $metas_vars[$matches[1]];
 		} else {
 			// tant que le webmestre n'a pas poste, on prend la valeur (dynamique) par defaut
+
 
 			$rempl = cs_retire_guillemets(cs_get_defaut($matches[1]));
 		}
