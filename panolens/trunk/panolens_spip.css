@@ -1,18 +1,16 @@
+.page_panorama {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 .panorama-panolens {
   height:360px;
-  background-position: center;
-  background-size:cover;
-  display: flex;
-  text-decoration: none !important;
-}
-
-.panorama-panolens button{
-  margin: auto;
-}
-
-.page_panorama {
-  margin: 0;
-  padding: 0;
+  position: relative;
+  margin-bottom: 1em;
+  overflow: hidden;
 }
 
 .page_panorama .panorama-panolens {
@@ -20,6 +18,5 @@
   height: 100%;
   position: absolute;
   width: 100%;
-  overflow: hidden;
   display: block;
 }

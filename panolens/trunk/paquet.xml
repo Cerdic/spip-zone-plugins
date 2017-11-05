@@ -1,16 +1,13 @@
 <paquet
 	prefix="panolens"
 	categorie="multimedia"
-	version="1.0.0"
+	version="1.0.1"
 	etat="test"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/panolens-64.png"
 	documentation="https://www.lesmoutonssauvages.com/article39"
 	schema="1.0.0"
 >
-	<!--
-		Paquet généré le 2017-10-31 10:17:23
-	-->
 
 	<nom>Panolens</nom>
 	<!-- Un panorama d&#039;images anamorphosées -->

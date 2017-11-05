@@ -17,7 +17,7 @@ function panolens_instantiation(){
 
 	$config = lire_config("panolens");
 
-	$js = 'var panolens_options = {};';
+	$js = 'var panolens_options = {video:{}};';
 
 	$controlButtons = "'".implode("','",$config["controlButtons"])."'";
 
@@ -57,17 +57,11 @@ function panolens_instantiation(){
 	if (!empty($config["output"]))
 		$js .= 'panolens_options.output = '.$config["output"].';';
 
-	$js .=  '$(document).ready(function(){';
-	$js .=  '$(".panorama-panolens").each(function(index,el){';
-	$js .=	'	panolens_options.container=el; console.log(panolens_options);';
-	$js .=  ' var image = $(el).data("src"); if (!image) return true;';
-	$js .=  ' var panorama = new PANOLENS.ImagePanorama(image), viewer = new PANOLENS.Viewer(panolens_options);';
-	$js .=  ' viewer.add(panorama);';
-	$js .=  '	if (PANOLENS.Utils.checkTouchSupported()){';
-	$js .=  '		viewer.enableControl(1);';
-	$js .=  '	}';
-	$js .=  '})';
-	$js .=  '})';
+	if (!empty($config["video_autoplay"]))
+		$js .= 'panolens_options.video.autoplay = true;';
+
+	if (!empty($config["video_muted"]))
+		$js .= 'panolens_options.video.muted = true;';
 
 	return $js;
 
@@ -78,10 +72,11 @@ function panolens_insert_head($flux) {
 
 	$panolens = find_in_path('lib/Panolens/build/panolens.min.js');
 	$three = find_in_path('lib/three.min.js');
+	$js = find_in_path('panolens_spip.js');
 	$flux .='<script src="'.$three.'"	type="text/javascript"></script>';
 	$flux .='<script src="'.$panolens.'"	type="text/javascript"></script>';
-
 	$flux .='<script type="text/javascript">'.panolens_instantiation().'</script>';
+	$flux .='<script src="'.$js.'"	type="text/javascript"></script>';
 
 	return $flux;
 
@@ -99,10 +94,11 @@ function panolens_header_prive($flux) {
 
 	$panolens = find_in_path('lib/Panolens/build/panolens.min.js');
 	$three = find_in_path('lib/three.min.js');
+	$js = find_in_path('panolens_spip.js');
 	$flux .='<script src="'.$three.'"	type="text/javascript"></script>';
 	$flux .='<script src="'.$panolens.'"	type="text/javascript"></script>';
-
 	$flux .='<script type="text/javascript">'.panolens_instantiation().'</script>';
+	$flux .='<script src="'.$js.'"	type="text/javascript"></script>';
 
 	$panolens_spip_css = find_in_path('panolens_spip.css');
 	$flux .='<link rel="stylesheet" type="text/css" href="'.$panolens_spip_css.'">';
