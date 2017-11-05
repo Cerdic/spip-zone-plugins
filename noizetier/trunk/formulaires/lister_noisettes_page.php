@@ -23,37 +23,50 @@ function formulaires_lister_noisettes_page_traiter_dist($page, $bloc) {
 
 	$retour = array();
 
+	// Récupération des inputs
 	$ordre = _request('ordre');
 	$nb_noisettes = intval(_request('nb_noisettes'));
 
-	include_spip('noizetier_fonctions');
-	if (count($ordre) > $nb_noisettes) {
-		// On vient d'ajouter par glisser-déposer une nouvelle noisette, on la rajoute d'abord en fin
-		// de liste avant d'appeler la fonction de rangement pour les noisettes qui suivent.
-		// -- Identifier la noisette qui vient d'être glissée dans le bloc et retenir son rang : c'est la seule
-		//    valeur de type chaine qui n'est pas un id de noisette.
-		$index = array_search(0, array_map('intval', $ordre));
-		$noisette = $ordre[$index];
-		$rang = $index + 1;
-		if ($id_noisette = noizetier_noisette_ajouter($noisette, $page, $bloc, $rang)) {
-			// On met à jour le tableau donnant l'ordre des noisettes avec l'id de la noisette
-			// et on demande le rangement des noisettes qui suivent la noisette ajoutée.
-			$ordre[$index] = "${id_noisette}";
-			if (noizetier_noisette_ordonner($ordre, $index + 1)) {
+	// Détermination de l'identifiant de la page ou de l'objet concerné et construction du conteneur de la
+	// noisette
+	$conteneur = array();
+	if (is_array($page)) {
+		$identifiant['objet'] = $page['objet'];
+		$identifiant['id_objet'] = $page['id_objet'];
+		$conteneur['squelette'] = "${bloc}";
+		$conteneur = array_merge($conteneur, $identifiant);
+	}
+	else {
+		$identifiant['page'] = $page;
+		$conteneur['squelette'] = "${bloc}/${page}";
+	}
+
+	if (autoriser('configurerpage', 'noizetier', 0, '', $identifiant)) {
+		if (count($ordre) > $nb_noisettes) {
+			// On vient d'ajouter par glisser-déposer une nouvelle noisette, on la rajoute au rang choisi.
+			// -- Identifier la noisette qui vient d'être glissée dans le bloc et retenir son rang : c'est la seule
+			//    valeur de type chaine qui n'est pas un id de noisette.
+			$index = array_search(0, array_map('intval', $ordre));
+			$type_noisette = $ordre[$index];
+			$rang = $index + 1;
+
+			include_spip('inc/ncore_noisette');
+			if ($id_noisette = noisette_ajouter('noizetier', $type_noisette, $conteneur, $rang)) {
 				$retour['message_ok'] = _T('info_modification_enregistree');
 			} else {
 				$retour['message_erreur'] = _T('noizetier:erreur_mise_a_jour');
 			}
 		} else {
-			$retour['message_erreur'] = _T('noizetier:erreur_mise_a_jour');
+			// On vient juste de changer l'ordre des noisettes, on réordonne toute la liste.
+			include_spip('noizetier_fonctions');
+			if (noizetier_noisette_ordonner($ordre)) {
+				$retour['message_ok'] = _T('info_modification_enregistree');
+			} else {
+				$retour['message_erreur'] = _T('noizetier:erreur_mise_a_jour');
+			}
 		}
 	} else {
-		// On vient juste de changer l'ordre des noisettes, on réordonne toute la liste.
-		if (noizetier_noisette_ordonner($ordre)) {
-			$retour['message_ok'] = _T('info_modification_enregistree');
-		} else {
-			$retour['message_erreur'] = _T('noizetier:erreur_mise_a_jour');
-		}
+		$retour['message_erreur'] = _T('noizetier:probleme_droits');
 	}
 
 	return $retour;

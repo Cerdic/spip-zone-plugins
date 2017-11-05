@@ -17,6 +17,7 @@
 	<a name="bloc-#ENV{bloc}"></a>
 	[(#BOITE_OUVRIR{#GET{infos_bloc/nom}, simple, titrem})]
 		[<p>(#GET{infos_bloc/description})</p>]
+		<B_noisettes>
 		<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-bloc">
 		<BOUCLE_noisettes(NOIZETIER noizetier_noisettes){plugin=noizetier}{objet?}{id_objet?}{type=#ENV{page}|noizetier_page_type}{composition=#ENV{page}|noizetier_page_composition}{bloc=#ENV{bloc}}{par rang}>
 			<li class="editer item noisette" id="noisette-#ID_NOISETTE">
@@ -55,23 +56,25 @@
 			</li>
 		</BOUCLE_noisettes>
 			<input type="hidden" name="nb_noisettes" value="#TOTAL_BOUCLE" />
-		</B_noisettes>
-			<li class="editer item">#BOITE_OUVRIR{'','notice'}<:noizetier:bloc_sans_noisette:>#BOITE_FERMER</li>
-			<input type="hidden" name="nb_noisettes" value="0" />
-		<//B_noisettes>
 		</ul>
-		[(#ENV{page}|?{
-			#SET{url_add,#URL_ECRIRE{noisette_add,page=#ENV{page}&bloc=#ENV{bloc}}},
-			#SET{url_add,#URL_ECRIRE{noisette_add,objet=#ENV{objet}&id_objet=#ENV{id_objet}&bloc=#ENV{bloc}}}
-		})]
-		[(#GET{url_add}
-			|icone_verticale{<:noizetier:formulaire_ajouter_noisette:>,noisette, add, right preload})]
 		[(#ENV{page}|?{
 			#SET{$arg_page,page:#ENV{page}},
 			#SET{$arg_page,objet:#ENV{id_objet}:#ENV{objet}}
 		})]
 		[(#URL_ACTION_AUTEUR{supprimer_noisettes,[#GET{$arg_page}/bloc:(#ENV{bloc})],#GET{self}}
 			|icone_verticale{<:noizetier:formulaire_supprimer_noisettes_bloc:>,noizetier-24,'del',#LANG_LEFT})]
+		</B_noisettes>
+		<ul>
+			<li class="editer item">#BOITE_OUVRIR{'','notice'}<:noizetier:bloc_sans_noisette:>#BOITE_FERMER</li>
+			<input type="hidden" name="nb_noisettes" value="0" />
+		</ul>
+		<//B_noisettes>
+		[(#ENV{page}|?{
+			#SET{url_add,#URL_ECRIRE{noisette_add,page=#ENV{page}&bloc=#ENV{bloc}}},
+			#SET{url_add,#URL_ECRIRE{noisette_add,objet=#ENV{objet}&id_objet=#ENV{id_objet}&bloc=#ENV{bloc}}}
+		})]
+		[(#GET{url_add}
+			|icone_verticale{<:noizetier:formulaire_ajouter_noisette:>,noisette, add, right preload})]
 	#BOITE_FERMER
 
 	[(#REM) <!-- ajouter les saisies supplementaires : extra et autre, a cet endroit -->]
