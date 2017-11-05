@@ -7,7 +7,9 @@
  * cf. paquet.xml pour plus d'infos.
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 
 function simplecal_declarer_tables_interfaces($interfaces) {
@@ -27,7 +29,7 @@ function simplecal_declarer_tables_interfaces($interfaces) {
 }
 
 
-function simplecal_declarer_tables_objets_sql($tables){
+function simplecal_declarer_tables_objets_sql($tables) {
 	
 	// Champs de la table spip_evenements
 	$fields = array(
@@ -63,9 +65,6 @@ function simplecal_declarer_tables_objets_sql($tables){
 		"KEY id_trad"     => "id_trad",
 		"KEY lang"        => "lang"
 	);
-
-	// champs candidats a la jointure
-	$join = array();
 	
 	// champ 'statut'
 	$statut = array(
@@ -98,13 +97,12 @@ function simplecal_declarer_tables_objets_sql($tables){
 		'principale' => 'oui',
 		'field'=> $fields,
 		'key' => $key,
-		'join' => $join,
 		'titre' => 'titre, lang',
 		'date' => 'date', // indique le nom du field pour le formulaires_dater_charger_dist
 		'champs_editables' => array('titre', 'date_debut', 'date_fin', 'horaire', 'descriptif', 'texte', 'lieu', 'adresse', 'lien_titre', 'lien_url', 'type', 'id_objet'),
 		'champs_versionnes' => array('titre', 'descriptif', 'texte', 'lieu', 'adresse', 'lien_titre', 'lien_url'),
 		'rechercher_champs' => array('titre'=>8, 'descriptif'=>4, 'texte'=>2),
-		'tables_jointures' => array(),
+		'tables_jointures'  => array(),
 		'statut' =>  array($statut),
 		'statut_textes_instituer' => $statut_textes_instituer,
 		'statut_titres' => $statut_titres,
@@ -123,5 +121,3 @@ function simplecal_declarer_tables_objets_sql($tables){
 	
 	return $tables;
 }
-
-?>
