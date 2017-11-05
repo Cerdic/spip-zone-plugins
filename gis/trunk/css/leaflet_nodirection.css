@@ -17,3 +17,9 @@
 	top: 0;
 	right:auto;
 	}
+	
+.leaflet-tooltip {
+	max-width:30em;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}

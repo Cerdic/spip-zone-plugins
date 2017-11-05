@@ -40,6 +40,7 @@ Parametres possibles :
 - objets = gis                     type d'objets à afficher (fichier json/gis_xx qui génère la source de donnees)
 - limit|limite = 500               nombre max de marqueurs à afficher, 500 par defaut
 - langue = null                    langue des objets à récupérer (utile pour les multis notamment)
+- tooltip = oui					  affiche un tooltip sur les points
 - kml = 12                         kml à superposer à la carte (id_document ou url ou liste d'url)
 - gpx = 12                         gpx à superposer à la carte (id_document ou url ou liste d'url)
 - geojson = 12                     geojson à superposer à la carte (id_document ou url ou liste d'url)
@@ -134,6 +135,7 @@ var jQgisloader;
 						description: (#ENV{description}|?{#ENV{description},''}|trim|json_encode)][,
 						icone: (#ENV{icone}|?{#ENV{icone},''}|trim|json_encode)]
 					},
+					tooltip: [(#ENV{tooltip}|=={oui}|?{true,false})],
 					cluster: [(#ENV{cluster}|=={oui}|?{true,false})],
 					clusterOptions: {
 						disableClusteringAtZoom: [(#ENV{clusterMaxZoom,0})],

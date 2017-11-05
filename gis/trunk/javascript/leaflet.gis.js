@@ -19,6 +19,7 @@ L.Map.Gis = L.Map.extend({
 		layersControl: false,
 		layersControlOptions: {},
 		noControl: false,
+		tooltip: false,
 		cluster: false,
 		clusterOptions: {
 			disableClusteringAtZoom: 0,
@@ -169,24 +170,33 @@ L.Map.Gis = L.Map.extend({
 				(this.options.langue && (feature.properties['title_'+this.options.langue] || feature.properties['description_'+this.options.langue])))) {
 			var popupContent = '',
 				popupOptions = '',
+				tooltipContent = false,
 				description_ok = false;
 			if (this.options.langue) {
 				langue = this.options.langue;
 				if (feature.properties['title_'+langue]) {
+					tooltipContent = feature.properties['title_'+langue];
 					popupContent = '<strong class="title">' + feature.properties['title_'+langue] + '</strong>';
-				} else if (feature.properties.title)
+				} else if (feature.properties.title) {
+					tooltipContent = feature.properties.title;
 					popupContent = '<strong class="title">' + feature.properties.title + '</strong>';
+				}
 				if (feature.properties['description_'+langue]) {
 					popupContent = popupContent + feature.properties['description_'+langue];
 					description_ok = true;
 				}
-			} else if(feature.properties.title)
+			} else if(feature.properties.title) {
+				tooltipContent = feature.properties.title;
 				popupContent = '<strong class="title">' + feature.properties.title + '</strong>';
+			}
 			if (!description_ok && feature.properties.description)
 				popupContent = popupContent + feature.properties.description;
 			if (feature.properties.popup_options)
 				popupOptions = feature.properties.popup_options;
 			layer.bindPopup(popupContent,popupOptions);
+			if (this.options.tooltip && tooltipContent) {
+				layer.bindTooltip(tooltipContent).openTooltip();
+			}
 		}
 	},
 

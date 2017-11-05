@@ -230,6 +230,14 @@ parametres:
       -
         saisie: 'case'
         options:
+          nom: 'tooltip'
+          label_case: <:gis:label_inserer_modele_tooltip:>
+          defaut: ''
+          valeur_oui: 'oui'
+          valeur_non: ''
+      -
+        saisie: 'case'
+        options:
           nom: 'localize_visitor'
           label_case: <:gis:label_inserer_modele_localiser_visiteur:>
           defaut: ''
