@@ -82,9 +82,11 @@ function spipsafe_unserialize($str) {
 	$unser = unserialize($str);
 	if (is_array($unser) and isset ($unser['texte'])
 		and isset($_GET['ZOOM']) and ($_GET['ZOOM']=='TEXTECOURT')) {
-		$unser['texte-bref'] = substr(trim($unser['texte']), 0, 80);
-		$unser['texte-bref'] = preg_replace ('/\s+/', ' ', $unser['texte']).'...';
-		unset ($unser['texte']);
+		$unser['texte'] = trim(preg_replace ('/\s+/', ' ', $unser['texte']));
+		if (mb_strlen($unser['texte'])>80)
+			$unser['texte'] = mb_substr($unser['texte'], 0, 80).'...';
+		elseif (!$unser['texte'])
+			$unser['texte']='(vide)';
 	}
 	return "Unserialized : ".print_r($unser,1);
 }
@@ -238,7 +240,7 @@ $vardom=array(
 	'OB'	=> '/^\d+$/',			// operational mode switch
 	'CC'	=> '/^[01]$/',			// clear cache requested
 	'DU'	=> '/^.*$/',			// Delete User Key
-	'SH'	=> '/^[a-z0-9]+$/',		// shared object description
+	'SH'	=> '/^[a-z0-9]*$/',		// shared object description
 
 	'IMG'	=> '/^[123]$/',			// image to generate
 	'LO'	=> '/^1$/',				// login requested
@@ -298,12 +300,14 @@ global $MY_SELF;														// fix apcu
 global $MY_SELF_WO_SORT;												// fix apcu
 $MY_SELF_WO_SORT=
 	"$PHP_SELF"
-	."?exec=".$MYREQUEST['exec']
-	."&SCOPE=".$MYREQUEST['SCOPE']
+	."?SCOPE=".$MYREQUEST['SCOPE']
 	."&COUNT=".$MYREQUEST['COUNT']
 	."&SEARCH=".$MYREQUEST['SEARCH']
 	."&TYPECACHE=".$MYREQUEST['TYPECACHE']
+	."&ZOOM=".$MYREQUEST['ZOOM']
 	."&EXTRA=".$MYREQUEST['EXTRA']
+	."&exec=".$MYREQUEST['exec']
+	."&OB=".$MYREQUEST['OB']
 	;
 $MY_SELF=$MY_SELF_WO_SORT
 	."&S_KEY=".$MYREQUEST['S_KEY']
@@ -639,13 +643,13 @@ global $MY_SELF_WO_SORT;	// fix apcu : il faut global ici aussi
 
 // create menu entry
 function menu_entry($ob,$title) {
-	global $MYREQUEST,$MY_SELF;
+	global $MYREQUEST; global $MY_SELF;	// fix apcu
 	if ($MYREQUEST['OB']!=$ob) {
-		return "<li><a href=\"$MY_SELF&OB=$ob\">$title</a></li>";
+		return "<li><a href='".parametre_url($MY_SELF,'OB', $ob)."'>$title</a></li>";
 	} else if (empty($MYREQUEST['SH'])) {
 		return "<li><span class=active>$title</span></li>";
 	} else {
-		return "<li><a class=\"child_active\" href=\"$MY_SELF&OB=$ob\">$title</a></li>";
+		return "<li><a class=\"child_active\" href='$MY_SELF'>$title</a></li>";
 	}
 }
 
@@ -667,7 +671,7 @@ EOB;
 EOB;
 	} else{
 		print <<<EOB
-			<a href="$MY_SELF&LO=1&OB={$MYREQUEST['OB']}">$s</a>
+			<a href="$MY_SELF&LO=1">$s</a>
 EOB;
 	}
 }
@@ -900,7 +904,7 @@ input {
 // Display main Menu
 echo <<<EOB
 	<ol class=menu>
-	<li><a href="$MY_SELF&OB={$MYREQUEST['OB']}&SH={$MYREQUEST['SH']}">Refresh Data</a></li>
+	<li><a href="$MY_SELF&SH={$MYREQUEST['SH']}">Refresh Data</a></li>
 EOB;
 echo
 	menu_entry(OB_HOST_STATS,'View Host Stats'),
@@ -909,7 +913,7 @@ echo
 
 if ($AUTHENTICATED) {
 	echo <<<EOB
-		<li><a class="aright" href="$MY_SELF&CC=1&OB={$MYREQUEST['OB']}" onClick="javascript:return confirm('Are you sure?');">Clear Cache</a></li>
+		<li><a class="aright" href="$MY_SELF&CC=1" onClick="javascript:return confirm('Are you sure?');">Clear Cache</a></li>
 EOB;
 }
 echo <<<EOB
@@ -942,6 +946,13 @@ case OB_HOST_STATS:
 	$number_vars = $cache['num_entries'];
     $size_vars = bsize($cache['mem_size']);
 	$i=0;
+	$_namespace = _CACHE_NAMESPACE;
+	echo <<< EOB
+		<div class="info div1"><h2>Mémoization SPIP</h2>
+		<table cellspacing=0><tbody>
+		<tr class=tr-0><td class=td-0>_CACHE_NAMESPACE</td><td>$_namespace</td></tr>
+		</table></div>
+EOB;
 	echo <<< EOB
 		<div class="info div1"><h2>General Cache Information</h2>
 		<table cellspacing=0><tbody>
@@ -1181,18 +1192,18 @@ EOB;
   echo
 		'<div class="info"><table cellspacing=0><tbody>',
 		'<tr>',
-		'<th>',sortheader('S',$fieldheading,  "&OB=".$MYREQUEST['OB']),'</th>',
-		'<th>',sortheader('H','Hits',         "&OB=".$MYREQUEST['OB']),'</th>',
-		'<th>',sortheader('Z','Size',         "&OB=".$MYREQUEST['OB']),'</th>',
-		'<th>',sortheader('A','Last accessed',"&OB=".$MYREQUEST['OB']),'</th>',
-		'<th>',sortheader('M','Last modified',"&OB=".$MYREQUEST['OB']),'</th>',
-		'<th>',sortheader('C','Created at',   "&OB=".$MYREQUEST['OB']),'</th>';
+		'<th>',sortheader('S',$fieldheading),'</th>',
+		'<th>',sortheader('H','Hits'),'</th>',
+		'<th>',sortheader('Z','Size'),'</th>',
+		'<th>',sortheader('A','Last accessed'),'</th>',
+		'<th>',sortheader('M','Last modified'),'</th>',
+		'<th>',sortheader('C','Created at'),'</th>';
 
 	if($fieldname=='info') {
 		$cols+=2;
-		 echo '<th>',sortheader('T','Timeout',"&OB=".$MYREQUEST['OB']),'</th>';
+		 echo '<th>',sortheader('T','Timeout'),'</th>';
 	}
-	echo '<th>',sortheader('D','Deleted at',"&OB=".$MYREQUEST['OB']),'</th></tr>';
+	echo '<th>',sortheader('D','Deleted at'),'</th></tr>';
 
 	// builds list with alpha numeric sortable keys
 	//
@@ -1259,9 +1270,13 @@ EOB;
         echo
           '<tr id="key-'. $sh .'" class=tr-',$i%2,'>',
           "<td class=td-0>
-			<a href=\"$MY_SELF&OB={$MYREQUEST['OB']}&SH={$sh}&TYPECACHE={$TYPECACHE}&ZOOM={$MYREQUEST['ZOOM']}&EXTRA={$MYREQUEST['EXTRA']}#key-{$sh}\">",
-				$field_value,
-			'</a>';
+			<a href='$MY_SELF&SH={$sh}#key-{$sh}'>$field_value</a>";
+
+		if ($p=preg_match('/_([0-9a-f]{8})$/i', $field_value, $match)
+			and $MYREQUEST['SEARCH'] != "/{$match[1]}/i") {
+			$url_session = parametre_url($MY_SELF, 'SEARCH', $match[1]);
+			echo "<a href='$url_session' style='float: right'>[session]</a>";
+		}
 			if ($MYREQUEST['EXTRA'] 
 					and ($sh != $MYREQUEST["SH"]) // sinon yaura un zoom après et c'est inutile de répéter ici
 					and apcu_exists($entry['info'])
@@ -1331,7 +1346,7 @@ EOB;
         } else if ($MYREQUEST['OB'] == OB_USER_CACHE) {
 
           echo '<td class="td-last center">';
-          echo '[<a href="', $MY_SELF, '&OB=', $MYREQUEST['OB'], '&DU=', urlencode($entry[$fieldkey]), '">Delete Now</a>]';
+          echo '[<a href="', $MY_SELF, '&DU=', urlencode($entry[$fieldkey]), '">Delete Now</a>]';
           echo '</td>';
         } else {
           echo '<td class="td-last center"> &nbsp; </td>';
@@ -1382,7 +1397,7 @@ EOB;
 EOB;
 
 	if ($list && $i < count($list)) {
-		echo "<a href=\"$MY_SELF&OB=",$MYREQUEST['OB'],"&COUNT=0\"><i>",count($list)-$i,' more available...</i></a>';
+		echo "<a href=\"$MY_SELF","&COUNT=0\"><i>",count($list)-$i,' more available...</i></a>';
 	}
 
 	echo <<< EOB
