@@ -24,7 +24,7 @@ function panolens_instantiation(){
 	if (empty($config["controlBar"]))
 		$js .= 'panolens_options.controlBar = false;';
 
-	if (!isset($controlButtons))
+	if (isset($config["controlButtons"]))
 		$js .= 'panolens_options.controlButtons = ['.$controlButtons.'];';
 
 	if (!empty($config["autoHideControlBar"]))
