@@ -90,127 +90,30 @@ function spipsafe_unserialize($str) {
 	}
 	return "Unserialized : ".print_r($unser,1);
 }
-function print_array_content($extra, $tostring) {
+function print_contexte($extra, $tostring) {
 	$print = print_r($extra, 1);
-	if (stripos($print, 'Array') === 0)  {
-		$print = ltrim (substr($print, 5), " (\n\r\t");
-		$print = rtrim ($print, ") \n\r\t");
-	}
+	if (stripos($print, 'Array') === 0) {
+		$print = trim (substr($print, 5), " (\n\r\t");
+		$print = preg_replace_callback(
+			"/\[id_([a-z\-_]+)\]\s*=>\s*(\d+)$/im", 
+			function ($match) { return $match[0].'</xmp>'.bouton_objet ($match[1], $match[2]).'<xmp>'; },
+			$print);
+	};
 	if ($tostring)
 		return $print;
 	echo $print;
 };
 
-/**
- * Prend une URL et lui ajoute/retire un paramètre
- *
- * @filtre
- * @link http://www.spip.net/4255
- * @example
- *     ```
- *     [(#SELF|parametre_url{suite,18})] (ajout)
- *     [(#SELF|parametre_url{suite,''})] (supprime)
- *     [(#SELF|parametre_url{suite[],1})] (tableaux valeurs multiples)
- *     ```
- *
- * @param string $url URL
- * @param string $c Nom du paramètre
- * @param string|array|null $v Valeur du paramètre
- * @param string $sep Séparateur entre les paramètres
- * @return string URL
- */
-if (!function_exists('parametre_url')) {
-function parametre_url($url, $c, $v = null, $sep = '&amp;') {
-	// requete erronnee : plusieurs variable dans $c et aucun $v
-	if (strpos($c, "|") !== false and is_null($v)) {
-		return null;
-	}
-
-	// lever l'#ancre
-	if (preg_match(',^([^#]*)(#.*)$,', $url, $r)) {
-		$url = $r[1];
-		$ancre = $r[2];
-	} else {
-		$ancre = '';
-	}
-
-	// eclater
-	$url = preg_split(',[?]|&amp;|&,', $url);
-
-	// recuperer la base
-	$a = array_shift($url);
-	if (!$a) {
-		$a = './';
-	}
-
-	$regexp = ',^(' . str_replace('[]', '\[\]', $c) . '[[]?[]]?)(=.*)?$,';
-	$ajouts = array_flip(explode('|', $c));
-	$u = is_array($v) ? $v : rawurlencode($v);
-	$testv = (is_array($v) ? count($v) : strlen($v));
-	$v_read = null;
-	// lire les variables et agir
-	foreach ($url as $n => $val) {
-		if (preg_match($regexp, urldecode($val), $r)) {
-			$r = array_pad($r, 3, null);
-			if ($v === null) {
-				// c'est un tableau, on memorise les valeurs
-				if (substr($r[1], -2) == "[]") {
-					if (!$v_read) {
-						$v_read = array();
-					}
-					$v_read[] = $r[2] ? substr($r[2], 1) : '';
-				} // c'est un scalaire, on retourne direct
-				else {
-					return $r[2] ? substr($r[2], 1) : '';
-				}
-			} // suppression
-			elseif (!$testv) {
-				unset($url[$n]);
-			}
-			// Ajout. Pour une variable, remplacer au meme endroit,
-			// pour un tableau ce sera fait dans la prochaine boucle
-			elseif (substr($r[1], -2) != '[]') {
-				$url[$n] = $r[1] . '=' . $u;
-				unset($ajouts[$r[1]]);
-			}
-			// Pour les tableaux on laisse tomber les valeurs de
-			// départ, on remplira à l'étape suivante
-			else {
-				unset($url[$n]);
-			}
-		}
-	}
-
-	// traiter les parametres pas encore trouves
-	if ($v === null
-		and $args = func_get_args()
-		and count($args) == 2
-	) {
-		return $v_read; // rien trouve ou un tableau
-	} elseif ($testv) {
-		foreach ($ajouts as $k => $n) {
-			if (!is_array($v)) {
-				$url[] = $k . '=' . $u;
-			} else {
-				$id = (substr($k, -2) == '[]') ? $k : ($k . "[]");
-				foreach ($v as $w) {
-					$url[] = $id . '=' . (is_array($w) ? 'Array' : $w);
-				}
-			}
-		}
-	}
-
-	// eliminer les vides
-	$url = array_filter($url);
-
-	// recomposer l'adresse
-	if ($url) {
-		$a .= '?' . join($sep, $url);
-	}
-
-	return $a . $ancre;
-} // function
-} // !function_exists
+function bouton_objet($objet, $id_objet) {
+	$objet_visible=$objet;
+	if ($objet=='secteur')
+		$objet='rubrique';
+	else 
+		$objet=$objet;
+	return "<a href='/ecrire/?exec=$objet&id_$objet=$id_objet' target='blank' 
+			style='position:absolute; right:0px'
+			title=".attribut_html(generer_info_entite($id_objet, $objet, 'titre', 'etoile')).">[voir $objet_visible]</a>";
+}
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -878,6 +781,9 @@ input {
 	margin-right:1em;
 	padding:0.1em 0.5em 0.1em 0.5em;
 	}
+
+xmp { display: inline }
+
 //-->
 </style>
 </head>
@@ -1269,7 +1175,7 @@ EOB;
 			$field_value = str_replace (XRAY_NEPASAFFICHER_DEBUTNOMCACHE, '...', $field_value);
         echo
           '<tr id="key-'. $sh .'" class=tr-',$i%2,'>',
-          "<td class=td-0>
+          "<td class='td-0' style='position: relative'>
 			<a href='$MY_SELF&SH={$sh}#key-{$sh}'>$field_value</a>";
 
 		if ($p=preg_match('/_([0-9a-f]{8})$/i', $field_value, $match)
@@ -1292,7 +1198,7 @@ EOB;
 						if (isset($data['contexte']))
 							$extra = $data['contexte'];
 						else 
-							$extra = 'undefined';
+							$extra = '(non défini)';
 						break;
 					case 'CONTEXTES_SPECIAUX' :
 						if (isset($data['contexte'])) {
@@ -1301,15 +1207,13 @@ EOB;
 								unset($extra[$ki]);
 						}
 						else 
-							$extra = 'undefined';
+							$extra = '(non défini)';
 						break;
 					case 'INFO_AUTEUR' :
 						if (isset($data['contexte'])) {
 							foreach (array('id_auteur', 'email', 'nom', 'statut', 'login') as $ki)
 								if (isset ($data['contexte'][$ki]))
 									$extra[$ki] = $extra[$ki] = $data['contexte'][$ki];
-							if (isset ($data['contexte']['id_auteur']))
-								$liens .= " [<a href='/ecrire/?exec=auteur&id_auteur=18891' target='blank'>voir auteur</a>] ";
 						};
 						break;
 					case 'INVALIDEURS' :
@@ -1324,8 +1228,8 @@ EOB;
 				}
 				if ($extra == 'undefined')
 					$extra = array ('contexte non défini' => 'vrai');
-				if ($extra = print_array_content($extra, 1))
-					echo "<br><xmp style='display:inline'>    $extra</xmp> <small style='float:right'>$liens</small>";
+				if ($extra = print_contexte($extra, 1))
+					echo "<br><xmp>    $extra</xmp> <small style='float:right'>$liens</small>";
 			};
           echo '</td>',
           '<td class="td-n center">',$entry['num_hits'],'</td>',
