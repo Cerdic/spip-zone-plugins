@@ -51,16 +51,20 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres){
 	$uniquement_champ = isset($uniquement_champ) ? (strtolower($uniquement_champ)=="true") : false;
 
 	// initialisation de la petite explication
-	if (!isset($explication))
+	if (!isset($explication)) {
 		$explication = _T('etiquettes:explication');
-	elseif ($explication=='false')
+	} elseif ($explication=='false') {
 		$explication = false;
+	}
 
 	// initialisation du squelette d'aide pour le nuage
-	if (!isset($nuage))
+	if (!isset($nuage)) {
 		$squelette_nuage = 'etiquettes_aide_nuage';
-	else
+	} else {
 		$squelette_nuage = 'etiquettes_aide_nuage_' . $nuage;
+	}
+
+	$cle_objet = '';
 
 	// initialisation de l'objet à lier
 	if (isset($objet)){

@@ -72,7 +72,7 @@ function formulaires_etiquettes_charger_dist($groupe, $id_groupe, $name, $aide_n
 		}
 
 		// Si c'est un champ inclu dans un autre formulaire, il faut aller chercher à la main le POST
-		if ($uniquement_champ and $_POST[$name]){
+		if ($uniquement_champ and !empty($_POST[$name])) {
 			$etiquettes = $_POST[$name];
 		}
 
