@@ -51,6 +51,14 @@ function embed_url($url) {
 			$img = $json->{'url'};
 			if ($img) $code_ae = "<div class='oembed-container oembed-img'><a href='$url'><img src='$img' alt='Flickr' style='max-width: ".$max_i."px; max-height: ".$max_i."px;'/></a></div>";	
 		}
+		else if (preg_match(",^https?\://(www\.)?instagram\.com/p/([a-z0-9]*)/,i", $url, $r)) {
+			if ($page = @join("",file($r[0]))) {
+				if (preg_match(',<meta property="og:image" content="(.*)" />,', $page, $i1)) {
+					$img = $i1[1];
+					$code_ae = "<div class='oembed-container oembed-img'><a href='$url'><img src='$img' alt='Instagram' style='max-width: ".$max_w."px; max-height: ".$max_i."px;'/></a></div>";
+				}
+			}
+		}
 		else if (preg_match("/^http\:\/\/(www\.)?pastebin\.com\/(.*)/i", $url, $regs)) {
 			$val = $regs[2];
 
