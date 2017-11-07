@@ -154,7 +154,7 @@ $vardom=array(
 	'SORT'	=> '/^[DA]$/',			// second sort key
 	'AGGR'	=> '/^\d+$/',			// aggregation by dir level
 	'SEARCH'	=> '~^[a-zA-Z0-9/_.\-\$\^]*$~',			// aggregation by dir level
-	'TYPECACHE' => '/^(ALL|SESSIONS|SESSIONS_AUTH|SESSIONS_NONAUTH|FORMULAIRES)$/',	//
+	'TYPECACHE' => '/^(|ALL|SESSIONS|SESSIONS_AUTH|SESSIONS_NONAUTH|FORMULAIRES)$/',	//
 	'ZOOM' => '/^(|TEXTECOURT|TEXTELONG)$/',	//
 	'EXTRA' => '/^(|CONTEXTE|CONTEXTES_SPECIAUX|INFO_AUTEUR|INVALIDEURS|INVALIDEURS_SPECIAUX)$/',	//
 );
@@ -929,8 +929,8 @@ EOB;
 	echo
 		graphics_avail() ?
 			  '<tr>'.
-			  "<td class=td-0>src='{$IMG_BASE}&IMG=1&$time'<img alt='' $size src='{$IMG_BASE}&IMG=1&$time'></td>".
-			  "<td class=td-1>src='{$IMG_BASE}&IMG=2&$time'<img alt='' $size src='{$IMG_BASE}&IMG=2&$time'></td></tr>\n"
+			  "<td class=td-0><img alt='' $size src='{$IMG_BASE}&IMG=1&$time'></td>".
+			  "<td class=td-1><img alt='' $size src='{$IMG_BASE}&IMG=2&$time'></td></tr>\n"
 			: "",
 		'<tr>',
 		'<td class=td-0><span class="green box">&nbsp;</span>Free: ',bsize($mem_avail).sprintf(" (%.1f%%)",$mem_avail*100/$mem_size),"</td>\n",
