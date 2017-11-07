@@ -1,11 +1,11 @@
 <B_objets_cibles>
 [(#BOITE_OUVRIR{
-    [(#CHEMIN_IMAGE{objet-24.png}|balise_img{selection_objet,cadre-icone})]
-    <h3  class="titrem"><:selection_objet:selection_objet:></h3>
-    ,'simple personnel infos'})]
-    <div class="formulaire_spip">
+	[(#CHEMIN_IMAGE{objet-24.png}|balise_img{selection_objet,cadre-icone})]
+	<h3  class="titrem"><:selection_objet:selection_objet:></h3>
+	,'simple personnel infos'})]
+	<div class="formulaire_spip">
 <BOUCLE_objets_cibles(POUR){tableau #ENV{objets_cibles}}>
-    [(#FORMULAIRE_BOUTON_OBJET{#ENV{id_objet},#ENV{objet},#ENV{langue},#ENV{lang},#VALEUR})]
+	[(#FORMULAIRE_BOUTON_OBJET{#ENV{id_objet},#ENV{objet},#ENV{langue},#ENV{lang},#VALEUR})]
 </BOUCLE_objets_cibles>
 </div>
 #BOITE_FERMER
