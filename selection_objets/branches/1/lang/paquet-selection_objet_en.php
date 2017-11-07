@@ -10,8 +10,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
-	'selection_objet_description' => 'Plugin inspired by the plugin  article selection.
-Selects spip objects, store them and customize their display depending on the selected section', # MODIF
-	'selection_objet_nom' => 'Objects selection', # MODIF
-	'selection_objet_slogan' => 'List your spip objects' # MODIF
+	'selection_objet_description' => 'Plugin inspired by the plugin article selection.
+Selects spip objects, store them and customize their display depending on the selected section',
+	'selection_objet_nom' => 'Objects selection',
+	'selection_objet_slogan' => 'List your spip objects'
 );
