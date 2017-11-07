@@ -12,9 +12,6 @@ function selection_objet_affiche_gauche($flux) {
 	include_spip('inc/config');
 	$exec = $flux["args"]["exec"];
 
-	/*Desactivé car il y a u problème  avec les cadres et block_depliables dans l'inclure
-	 * //Exception pour les documents
-	 if($objet=='document_edit')$objet='document' ;    */
 	$args = $flux['args'];
 
 	$objets_selection = lire_config('selection_objet/selection_rubrique_objet', array());
@@ -32,9 +29,9 @@ function selection_objet_affiche_gauche($flux) {
 		$contexte['objet'] = $objet;
 		$objets_cibles = lire_config('selection_objet/objets_cible', array());
 
+		$contexte['langue'] = array($args['lang']);
 		if ($objet == 'rubrique' OR $objet == 'article') {
 			$contexte['langue'] = sql_getfetsel('lang', $table, $id_table_objet . '=' . $contexte['id_objet']);
-			//$contexte['lang'] = $contexte['langue'];
 		}
 		if ($objet == 'rubrique') {
 			if (!$trad_rub = test_plugin_actif('tradrub'))
@@ -81,29 +78,40 @@ function selection_objet_affiche_milieu($flux = "") {
 			'article',
 			'rubrique'
 		);
-		if (in_array($objet, $special))
+		if (in_array($objet, $special)) {
 			$choisies = picker_selected(lire_config('selection_objet/selection_' . $objet . '_dest', array()), $objet);
-		else
+		}
+		else {
 			$choisies = lire_config('selection_objet/selection_' . $objet . '_dest', array());
-
+		}
 		if (in_array($id_objet, $choisies) OR !$choisies) {
 			$contexte = array(
 				'id_objet_dest' => $id_objet,
 				'objet_dest' => $objet
 			);
 
-			if ($tables[$table]['field']['lang'])
+			$contexte['langue'] = array($args['lang']);
+
+			if ($tables[$table]['field']['lang']) {
 				$contexte['langue'] = array(sql_getfetsel('lang', $table, 'id_' . $objet . '=' . $id_objet));
-			elseif ($objet != 'document')
-				$contexte['langue'] = array($args['lang']);
-			else
-				$contexte['langue'] = array();
-			if ($objet == 'rubrique') {
-				if (!$trad_rub = test_plugin_actif('tradrub'))
-					$contexte['langue'] = explode(',', lire_config('langues_multilingue'));
 			}
-			if ($objet == 'auteur')
+			elseif ($objet == 'document') {
+				$contexte['langue'] = array();
+			}
+			if ($objet == 'rubrique') {
+				if (!$trad_rub = test_plugin_actif('tradrub')) {
+					if ($langues_multilingue = lire_config('langues_multilingue')) {
+						$contexte['langue'] = explode(',', lire_config('langues_multilingue'));
+					}
+					else {
+						$contexte['langue'] = array($args['lang']);
+					}
+				}
+			}
+			if ($objet == 'auteur') {
 				$contexte['langue'] = '';
+			}
+
 			$flux["data"] .= recuperer_fond('prive/objets/liste/selection_interface', $contexte);
 		}
 	}
