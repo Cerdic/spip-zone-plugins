@@ -1,5 +1,4 @@
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
-
 	<h3 class="titrem">
 		<:rubriqueur:rubriqueur_titre:>
 	</h3>
@@ -10,40 +9,37 @@
 	[(#EDITABLE)
 	<form method="post" action="#ENV{action}#confirmation">
 		<[(#DIV|sinon{ul})] class="editer-groupe">
-		
-		#ACTION_FORMULAIRE{#ENV{action}}
-		
-		[(#SAISIE{selecteur_rubrique, rubrique_racine, 
-			label=<:rubriqueur:rubrique_racine:>, 
-			explication=<:rubriqueur:rubrique_racine_explications:>})]
-		
-		[(#SAISIE{textarea, rubriques, obligatoire=oui, 
-			label=<:rubriqueur:rubriques:>, 
-			explication=<:rubriqueur:rubriques_explications:>})]
-					
-		#SET{intitule_bouton,#EVAL{_T('previsualiser')}}
-		<a name="confirmation"></a>
-					
-		[
-		#SET{intitule_bouton,#EVAL{_T('rubriqueur:bouton_creer')}}
-		<[(#DIV|sinon{li})] class="editer rubriqueur_previsu">
-			(#ENV**{erreurs}|table_valeur{previsu}|propre)
-		</[(#DIV|sinon{li})]>
-		[(#SAISIE{oui_non, confirmer, label=<:rubriqueur:confirmer_import:>})]
-		]
-		
-		[
-		<[(#DIV|sinon{li})] class="editer">
-			(#ENV**{erreurs}|table_valeur{erreur_analyse}|propre)
-		</[(#DIV|sinon{li})]>
-		]		
-								
+			#ACTION_FORMULAIRE{#ENV{action}}
+			
+			[(#SAISIE{selecteur_rubrique, rubrique_racine, 
+				label=<:rubriqueur:rubrique_racine:>, 
+				explication=<:rubriqueur:rubrique_racine_explications:>})]
+
+			[(#SAISIE{textarea, rubriques, obligatoire=oui, 
+				label=<:rubriqueur:rubriques:>, 
+				explication=<:rubriqueur:rubriques_explications:>})]
+
+			#SET{intitule_bouton,#EVAL{_T('previsualiser')}}
+			<a name="confirmation"></a>
+
+			[
+			#SET{intitule_bouton,#EVAL{_T('rubriqueur:bouton_creer')}}
+			<[(#DIV|sinon{li})] class="editer rubriqueur_previsu">
+				(#ENV**{erreurs}|table_valeur{previsu}|propre)
+			</[(#DIV|sinon{li})]>
+			[(#SAISIE{oui_non, confirmer, label=<:rubriqueur:confirmer_import:>})]
+			]
+
+			[
+			<[(#DIV|sinon{li})] class="editer">
+				(#ENV**{erreurs}|table_valeur{erreur_analyse}|propre)
+			</[(#DIV|sinon{li})]>
+			]
 		</[(#DIV|sinon{ul})]>
-							
+
 		<p class="boutons">
 			<span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="#GET{intitule_bouton}"/>
 		</p>
 	</form>
 	]
-	
 </div>
