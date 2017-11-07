@@ -3,7 +3,9 @@
 //
 // Formulaires : Structure
 //
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 function pb_selection_declarer_tables_principales($tables_principales){
 	
@@ -26,4 +28,3 @@ function pb_selection_declarer_tables_principales($tables_principales){
 	}
 
 
-?>

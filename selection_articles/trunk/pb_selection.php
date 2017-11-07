@@ -1,6 +1,7 @@
 <?php
-
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 
 function pb_selection_interface ( $vars="" ) {
@@ -45,4 +46,3 @@ function pb_selection_jqueryui_plugins($plugins) {
 	return $plugins;
 }
 
-?>

@@ -1,5 +1,7 @@
 <?php
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 function pb_selection_install ($action,$prefix,$version_cible) {
 		global $tables_principales;
@@ -14,4 +16,3 @@ function pb_selection_install ($action,$prefix,$version_cible) {
 		return true;
 }
 
-?>

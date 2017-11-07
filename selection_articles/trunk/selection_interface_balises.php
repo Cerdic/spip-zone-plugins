@@ -1,5 +1,7 @@
 <?php
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 function lister_articles_selectionnes($id_rubrique,$ordre='ASC'){
 	return sql_allfetsel('id_article','spip_pb_selection','id_rubrique=' . sql_quote($id_rubrique),'',"ordre $ordre");
