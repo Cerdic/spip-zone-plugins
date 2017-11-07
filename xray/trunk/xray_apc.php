@@ -1146,7 +1146,7 @@ EOB;
 		$TYPECACHE=(isset($MYREQUEST['TYPECACHE'])?$MYREQUEST['TYPECACHE']:'ALL');
 		switch ($TYPECACHE) {
 			case 'ALL':
-				$pattern_typecache = '//';
+				$pattern_typecache = '';
 				break;
 			case 'SESSIONS' :
 				$pattern_typecache = '/_([a-f0-9]{8}|)$/i';
@@ -1167,7 +1167,7 @@ EOB;
 		foreach($list as $k => $entry) {
 
       if ((!$MYREQUEST['SEARCH'] || preg_match($MYREQUEST['SEARCH'], $entry[$fieldname]))
-		and preg_match($pattern_typecache, $entry[$fieldname])) {
+		and (!$pattern_typecache or preg_match($pattern_typecache, $entry[$fieldname]))) {
 		$sh=md5($entry["info"]);
 
         $field_value = htmlentities(strip_tags($entry[$fieldname],''), ENT_QUOTES, 'UTF-8');
