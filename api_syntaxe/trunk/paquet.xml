@@ -1,9 +1,9 @@
 <paquet
 	prefix="api_syntaxe"
 	categorie="outil"
-	version="1.0.0"
+	version="1.0.1"
 	etat="test"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo=""
 >
 	<nom>API pour accéder à la syntaxe de SPIP</nom>
