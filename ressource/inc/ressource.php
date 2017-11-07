@@ -220,6 +220,18 @@ function ressource_meta($res) {
 				unset($meta['title']); // title utilise par l'embed
 			}
 		}
+		
+		// recuperer un blocks.org/blockbuilder *en iframe*
+		// (le cas normal est géré par autoembed)
+		else if (preg_match("/^https?\:\/\/(bl\.ocks|blockbuilder)\.org\/(\w+\/\w+)(\/\w+)?/i", $src, $regs)
+		AND $meta['iframe'] == 'iframe') {
+			$meta['embed'] = "<iframe>";
+			$meta['embed'] = inserer_attribut($meta['embed'], 'src', "https://cdn.rawgit.com/" . $regs[2] . "/raw" . $regs[3] . "/");
+			$meta['embed'] = inserer_attribut($meta['embed'], 'style', "width:100%;height:70vw;border:0;" . $meta['style']);
+			if ($meta['class']) $meta['embed'] = inserer_attribut($meta['embed'], 'class', $meta['class']);
+			$meta['embed'] .=  sinon($meta['embed'], $src) . "</iframe>";
+		}
+
 
 		$meta = pipeline('ressource_meta',
 			array(
