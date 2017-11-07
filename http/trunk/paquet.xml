@@ -1,9 +1,9 @@
 <paquet
 	prefix="http"
 	categorie="outil"
-	version="1.2.8"
+	version="1.2.9"
 	etat="stable"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="http.png"
 	documentation="https://contrib.spip.net/Serveur-HTTP-abstrait"
 >
