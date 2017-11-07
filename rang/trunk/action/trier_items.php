@@ -30,7 +30,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function action_trier_items_dist() {
 
 	include_spip('base/objets');
-	
+
 	$tab		= _request('trier');
 	$page 		= _request('debut_liste');
 	$objet		= _request('objet');
@@ -40,7 +40,7 @@ function action_trier_items_dist() {
 	$definition_table = lister_tables_objets_sql($table);
 	$id_objet_parent = $definition_table['parent']['champ'];
 	$id_objet	= id_table_objet($objet);
-	
+
 
 	// reclassement !
 	foreach ($tab as $key => $value) {
@@ -55,6 +55,9 @@ function action_trier_items_dist() {
 		sql_updateq($table, array('rang' => $rang), $where);
 	}
 	$msg = 'ok';
+
+	include_spip('inc/invalideur');
+	suivre_invalideur("rang");
 
 	return $msg;
 }
