@@ -1,6 +1,7 @@
 <?php
-
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 function action_selection_interface() {
 	$id_rubrique = _request("id_rubrique");
