@@ -101,8 +101,6 @@ function spipsafe_unserialize($str)
 	return "Unserialized : " . print_r($unser, 1);
 }
 
-// uniquement valable pendant print_contexte
-global $extra_print_contexte;
 function print_contexte($extra, $tostring)
 {
 	global $extra_print_contexte;
@@ -113,9 +111,9 @@ function print_contexte($extra, $tostring)
 		// On enlève 'Array( ' au début et ')' à la fin
 		$print = trim(substr($print, 5), " (\n\r\t");
 		$print = substr ($print, 0, -1);
-		$print = preg_replace_callback("/\[id_([a-z\-_]+)\]\s*=>\s*(\d+)$/im", function($match) 
+		$print = preg_replace_callback("/\[id_([a-z\-_]+)\]\s*=>\s*(\d+)$/im", function($match) use ($extra)
 		{
-			return $match[0] . '</xmp>' . bouton_objet($match[1], $match[2]) . '<xmp>';
+			return $match[0] . '</xmp>' . bouton_objet($match[1], $match[2], $extra) . '<xmp>';
 		}, $print);
 	}
 	if ($tostring)
@@ -123,15 +121,14 @@ function print_contexte($extra, $tostring)
 	echo $print;
 }
 
-function bouton_objet($objet, $id_objet)
+function bouton_objet($objet, $id_objet, $extra)
 {
 	$objet_visible = $objet;
 	if ($objet == 'secteur')
 		$objet = 'rubrique';
-	elseif (($objet == 'objet')
-		) {
-		global $extra_print_contexte;
-		$objet_visible = $objet = $extra_print_contexte['objet'];
+	elseif (($objet == 'objet')	and isset ($extra['objet']))
+	{
+		$objet_visible = $objet = $extra['objet'];
 	};
 	return "<a href='/ecrire/?exec=$objet&id_$objet=$id_objet' target='blank' 
 			style='position:absolute; right:1em'
