@@ -262,6 +262,13 @@ L.Map.Gis = L.Map.extend({
 					}
 					// Déclarer le contenu de la popup s'il y en a
 					map.setGeoJsonFeaturePopup(feature, layer);
+				},
+				pointToLayer: function(feature, latlng) {
+					var alt = 'Marker';
+					if (feature.properties.title) {
+						alt = feature.properties.title;
+					}
+				    return L.marker(latlng,{alt: alt});
 				}
 			}).addData(data).addTo(map);
 
