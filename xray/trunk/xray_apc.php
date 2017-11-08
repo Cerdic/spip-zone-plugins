@@ -103,9 +103,6 @@ function spipsafe_unserialize($str)
 
 function print_contexte($extra, $tostring)
 {
-	global $extra_print_contexte;
-	$extra_print_contexte = $extra;
-
 	$print = print_r($extra, 1);
 	if (stripos($print, 'Array') === 0) {
 		// On enlève 'Array( ' au début et ')' à la fin
