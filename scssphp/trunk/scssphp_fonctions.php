@@ -34,6 +34,7 @@ function scss_compile($style, $contexte = array()) {
 		if (function_exists('produire_fond_statique')) {
 			if ($f = find_in_path($path . '.scss.html')) {
 				$f = produire_fond_statique($path . '.scss', array('format' => 'scss'));
+				$f = supprimer_timestamp($f);
 				return $f;
 			}
 		}
