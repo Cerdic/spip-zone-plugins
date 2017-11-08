@@ -39,8 +39,9 @@ function tweet($status, $tokens = null){
 		return false;
 	
 	// Preparer le message (utf8 < 280 caracteres)
+	//$status = trim(preg_replace(',\s+,', ' ', $status));
+	$status = trim($status);
 	include_spip('inc/charsets');
-	$status = trim(preg_replace(',\s+,', ' ', $status));
 	$status = unicode2charset(charset2unicode($status), 'utf-8');
 	$status = substr($status, 0, 280);
 

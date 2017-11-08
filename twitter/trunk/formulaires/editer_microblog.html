@@ -17,10 +17,10 @@
 		<input type='submit' class='submit' name="enregistrer" value='<:bouton_enregistrer:>' style="display:none;"/>
 		<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 			#ACTION_FORMULAIRE{#ENV{action}}
-			<ul>
+			<ul class="editer-groupe">
 				#SET{fl,twitter}
 				#SET{name,microblog}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,'obligatoire'}
-				<li class="editer_[(#GET{name})] pleine_largeur[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+				<li class="editer editer_[(#GET{name})] pleine_largeur[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<label for="#GET{name}"><em>[(#VAL{280}|moins{#ENV*{#GET{name}}|strlen})]</em>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
 					<textarea name="#GET{name}" id="#GET{name}" rows="3" cols="25">#ENV*{#GET{name}}</textarea>
@@ -31,7 +31,7 @@
 			<p class='boutons'>
 				<span class='image_loading'></span>
 				<input type='submit' class='submit' name="envoyer" value='<:twitter:bouton_envoyer_maintenant:>' />
-				<input type="submit" name="annuler_microblog" value="<:twitter:bouton_ne_pas_bloguer:>" />
+				<input type="submit" class='submit' name="annuler_microblog" value="<:twitter:bouton_ne_pas_bloguer:>" />
 				<input type='submit' class='submit' name="enregistrer" value='<:bouton_enregistrer:>' />
 			</p>
 		</div></form>
