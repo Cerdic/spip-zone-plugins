@@ -36,7 +36,7 @@ Enter the provided data and save the configuration (<a href="https://contrib.spi
 
 	// L
 	'label_associer_compte_twitter' => 'Link your twitter account to this site',
-	'label_aucun_compte_twitter' => 'Aucun compte Twitter enregistré.',
+	'label_aucun_compte_twitter' => 'Aucun compte Twitter enregistrï¿½.',
 	'label_dissocier_compte_twitter' => 'Delete this account',
 	'label_status' => 'What\'s new ?',
 	'label_twitter_consumer_key' => 'API key of the Twitter API',
@@ -46,7 +46,7 @@ Enter the provided data and save the configuration (<a href="https://contrib.spi
 	'legend_api_twitter' => 'Twitter Application',
 	'legend_comptes_twitter' => 'Twitter Accounts',
 	'lien_documentation' => 'View documentation',
-	'longueur_maxi_status' => 'Your message can\'t be longer than 140 chars',
+	'longueur_maxi_status' => 'Your message can\'t be longer than 280 chars',
 
 	// M
 	'message_envoye'=> 'Tweet:',

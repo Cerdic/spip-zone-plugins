@@ -38,11 +38,11 @@ function tweet($status, $tokens = null){
 	if (!$oAuthConnection)
 		return false;
 	
-	// Preparer le message (utf8 < 140 caracteres)
+	// Preparer le message (utf8 < 280 caracteres)
 	include_spip('inc/charsets');
 	$status = trim(preg_replace(',\s+,', ' ', $status));
 	$status = unicode2charset(charset2unicode($status), 'utf-8');
-	$status = substr($status, 0, 140);
+	$status = substr($status, 0, 280);
 
 	if (!strlen($status)) {
 		spip_log('Rien a bloguer','twitter');

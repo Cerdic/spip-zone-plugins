@@ -343,7 +343,7 @@ window.twttr || (window.twttr = {});
 	var x = [h(65534), h(65279), h(65535), h(8234), h(8235), h(8236), h(8237), h(8238)];
 	twttr.txt.isInvalidTweet = function (b){
 		if (!b)return"empty";
-		if (b.length>140)return"too_long";
+		if (b.length>280)return"too_long";
 		for (var a = 0; a<x.length; a++)if (b.indexOf(x[a])>=0)return"invalid_characters";
 		return false
 	};

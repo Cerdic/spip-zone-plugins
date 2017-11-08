@@ -22,7 +22,7 @@
 				#SET{name,microblog}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,'obligatoire'}
 				<li class="editer_[(#GET{name})] pleine_largeur[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<label for="#GET{name}"><em>[(#VAL{140}|moins{#ENV*{#GET{name}}|strlen})]</em>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+					]<label for="#GET{name}"><em>[(#VAL{280}|moins{#ENV*{#GET{name}}|strlen})]</em>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
 					<textarea name="#GET{name}" id="#GET{name}" rows="3" cols="25">#ENV*{#GET{name}}</textarea>
 				</li>
 			</ul>
@@ -43,7 +43,7 @@
 <script type="text/javascript">/*<![CDATA[*/
 if (window.jQuery){
 	function status_length_update(me){
-		var maxlen = 140;
+		var maxlen = 280;
 		var l = jQuery(me).val();
 		l = maxlen-l.length;
 		jQuery(me).parent().find('label>em').html(l).removeClass(l>=0?'nok':'ok').addClass(l>=0?'ok':'nok');

@@ -46,7 +46,7 @@ Entrez ci-dessous les clés d\'identification et enregistrez (<a href="https://c
 	'legend_api_twitter' => 'Application Twitter',
 	'legend_comptes_twitter' => 'Comptes Twitter',
 	'lien_documentation' => 'Cf. documentation',
-	'longueur_maxi_status' => 'Le message doit comporter au maximum 140 caract&egrave;res',
+	'longueur_maxi_status' => 'Le message doit comporter au maximum 280 caract&egrave;res',
 
 	// M
 	'message_envoye'=> 'Tweet&nbsp;:',

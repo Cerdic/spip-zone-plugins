@@ -19,7 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return array
  */
 function twitter_declarer_tables_objets_sql($tables) {
-	$tables['spip_articles']['field']['microblog'] = "VARCHAR(140) DEFAULT '' NOT NULL";
+	$tables['spip_articles']['field']['microblog'] = "VARCHAR(280) DEFAULT '' NOT NULL";
 	
 	return $tables;
 }
@@ -34,11 +34,14 @@ function twitter_upgrade($nom_meta_base_version,$version_cible){
 
 	$maj = array();
 	$maj['create'] = array(
-		array('sql_alter',"TABLE spip_articles ADD microblog VARCHAR(140) DEFAULT '' NOT NULL"),
+		array('sql_alter',"TABLE spip_articles ADD microblog VARCHAR(280) DEFAULT '' NOT NULL"),
 	);
 
 	$maj['0.1.1'] = array(
-		array('sql_alter',"TABLE spip_articles ADD microblog VARCHAR(140) DEFAULT '' NOT NULL"),
+		array('sql_alter',"TABLE spip_articles ADD microblog VARCHAR(280) DEFAULT '' NOT NULL"),
+	);
+	$maj['0.2.0'] = array(
+		array('sql_alter',"TABLE spip_articles CHANGE microblog microblog TEXT DEFAULT '' NOT NULL"),
 	);
 
 	include_spip('base/upgrade');

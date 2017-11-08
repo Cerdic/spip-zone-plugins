@@ -38,7 +38,7 @@ function formulaires_microbloguer_verifier_dist(){
 	if (!$status = _request('status')){
 		$erreurs['status'] = _T('info_obligatoire');
 	}
-	elseif (spip_strlen($status)>140){
+	elseif (spip_strlen($status)>280){
 		$erreurs['status'] = _T('twitter:longueur_maxi_status');
 	}
 
