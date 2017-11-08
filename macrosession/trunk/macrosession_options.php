@@ -89,9 +89,8 @@ define (V_FERME_PHP, ' ?' . "'.'>'");
 // $champ est entre quotes ''
 // le code renvoyé sera inséré à l'intérieur d'un '...'
 function compile_appel_macro_session ($p, $champ,$n=2) {
-	debug_log ("compile_appel_macro_session avec n=$n et champ=".print_r($champ,1), "_macrosession");
 	$get_champ = "pipelined_session_get('.\"$champ\".')";
-	
+
 	// champ sans application de filtre
 	if (!existe_argument_balise($n, $p)) 
 		return $get_champ;
@@ -154,6 +153,7 @@ function compile_appel_macro_session ($p, $champ,$n=2) {
  * #_SESSION rend l'id_auteur si l'internaute est connecté
  * #_SESSION(champ) rend la valeur du champ de session étendue de l'internaute connecté
  * #_SESSION(champ, filtre[, arg1[, arg2]]) applique le filtre au champ de session étendue, avec 0, 1 ou 2 arguments supplémentaires et rend la valeur résultat
+ * 
  */
 function balise__SESSION_dist($p) {
 	$champ = interprete_argument_balise(1, $p);
@@ -166,14 +166,18 @@ function balise__SESSION_dist($p) {
 }
 
 /*
+ * #_SESSION_SI teste si l'internaute est authentifié
  * #_SESSION_SI(champ) teste si le champ de session est non vide
- * #_SESSION_SI(champ, val) teste si le champ de session est égal à la valeur spécifiée
- * #_SESSION_SI(champ, val, operateur) teste si le champ de session se compare positivement à la valeur spécifiée
+ * #_SESSION_SI(champ, val) teste si le champ de session est égal à val
+ * 		C'est un raccourci pour #_SESSION_SI{champ,==,val}
+ * #_SESSION_SI(champ, operateur, val) teste si le champ de session se compare positivement à la valeur spécifiée
  * 	selon l'opérateur spécifié, qui peut etre 
  * - soit un comparateur : ==, <, >, >=, <= 
- * - soit un filtre (nom de fonction) recevant 2 arguments : la valeur du champ et val. C'est le retour qui est alors testé.
+ * - soit un opérateur unaire : ! ou non
+ * - soit un filtre (nom de fonction) recevant 2 arguments : la valeur du champ et val. 
+ * 		C'est alors le retour qui est testé.
  * Produit par exemple le code suivant :
- * '<'.'?php  echo pipelined_session_get('."'nom'".');  ?'.'>'
+ * 	'<'.'?php  if (pipelined_session_get('."'nom'".')) {  ?'.'>'
 */
 function balise__SESSION_SI_dist($p) {
 	$champ = interprete_argument_balise(1, $p);
@@ -184,7 +188,6 @@ function balise__SESSION_SI_dist($p) {
 
 	// Appelé uniquement au recalcul
 	$p->code = V_OUVRE_PHP . 'if ('.compile_appel_macro_session($p, $champ).') { ' . V_FERME_PHP;
-	// echo "On insèrera l'évaluation du code suivant : <pre>".$p->code."</pre>\n\n";
 	return $p;
 }
 
