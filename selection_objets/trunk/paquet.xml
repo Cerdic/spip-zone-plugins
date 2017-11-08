@@ -1,7 +1,7 @@
 <paquet
 	prefix="selection_objet"
 	categorie="edition"
-	version="1.11.2"
+	version="1.11.3"
 	etat="stable"
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/selection_objet-64.png"

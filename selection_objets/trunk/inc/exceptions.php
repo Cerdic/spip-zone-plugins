@@ -21,4 +21,3 @@ function inc_exceptions_dist($filtrer = '') {
 		$retour = $exceptions[$filtrer];
 	return $retour;
 }
-?>

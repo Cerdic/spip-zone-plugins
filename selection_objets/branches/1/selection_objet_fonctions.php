@@ -68,8 +68,11 @@ function titre_objet_sel($objet, $contexte) {
 }
 
 /* Fournit les champs désirés d'un objet donné */
-function info_objet($objet, $id_objet = '', $champs = '*', $where = array()) {
+function info_objet($objet, $id_objet = '', $champ = '*', $where = array()) {
 	include_spip('inc/filtres');
+	$exceptions = charger_fonction('exceptions', 'inc');
+	$exception_objet = $exceptions();
+	$exception_titre = $exceptions('titre');
 
 	//Les tables non conforme
 	if ($objet) {
@@ -89,15 +92,21 @@ function info_objet($objet, $id_objet = '', $champs = '*', $where = array()) {
 		if ($id_objet) {
 			if (!$where)
 				$where = array($id_table_objet . '=' . $id_objet);
-			if ($champs == '*')
-				$data = sql_fetsel($champs, $table, $where);
-			else
-				$data = sql_getfetsel($champs, $table, $where);
+			if ($champ == '*') {
+				$data = sql_fetsel($champ, $table, $where);
+			}
+			else {
+				if (isset($exception_titre[$objet])) {
+					$champ = $exception_titre[$objet];
+				}
+				$data = sql_getfetsel($champ, $table, $where);
+			}
+
 			$data = filtrer_champ($data);
 		}
 		else {
 			$data = array();
-			$sql = sql_select($champs, $table, $where);
+			$sql = sql_select($champ, $table, $where);
 			while ($d = sql_fetch($sql)) {
 
 				if ($d)
@@ -247,4 +256,3 @@ function nom_type($type, $objet) {
 
 	return $nom;
 }
-?>

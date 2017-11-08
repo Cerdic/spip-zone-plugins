@@ -1,19 +1,19 @@
 [(#SET{defaut_tri,#ARRAY{
-	titre,1, 
-	date,-1, 
+	titre,1,
+	date,-1,
 	id_objet,1,
 	points,-1
 }})]<B_liste_selection_objets>
 #ANCRE_PAGINATION
 <div class="liste-objets selection_objets">
 <table class='spip liste'>
-	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{objet:info_1_objet,objet:info_nb_selection_objets}})</strong></caption>]
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{selection_objet:info_1_selection_objet,selection_objet:info_nb_selection_objets}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
 			<th class='picto' scope='col'></th>
-			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
 			<th class='titre' scope='col'>[(#TRI{titre,<:selection_objet:label_titre:>,ajax})]</th>
-			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
 			<th class='id' scope='col'>[(#TRI{id_objet,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
@@ -21,9 +21,14 @@
 	<BOUCLE_liste_selection_objets(SELECTION_OBJETS){id_selection_objet?}{id_objet_dest?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{objet-16.png}|balise_img)]</td>
-			<td class='statut'>[(#STATUT|puce_statut{selection_objet,#ID_SELECTION_OBJET})]</td> 
-			<td class='titre principale'>[(#LOGO_SELECTION_OBJET|image_reduire{20,26})]<a href="[(#ID_OBJET|generer_url_entite{objet})]" title="<:info_numero_abbreviation|attribut_html:> #ID_OBJET">[(#RANG). ][(#TITRE|sinon{#OBJET|info_objet{#ID_OBJET,titre}})] </a>[((#TYPE_LIEN|nom_type{#OBJET_DEST}))]</td>
-			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
+			<td class='statut'>[(#STATUT|puce_statut{selection_objet,#ID_SELECTION_OBJET})]</td>
+			<td class='titre principale'>
+				[(#LOGO_SELECTION_OBJET|image_reduire{20,26})]
+				<a href="[(#URL_ECRIRE{selection_objet,id_selection_objet=#ID_SELECTION_OBJET})]" title="<:info_numero_abbreviation|attribut_html:> #ID_OBJET">
+					[(#RANG). ][(#TITRE|sinon{#OBJET|info_objet{#ID_OBJET,titre}})]
+				</a>[((#TYPE_LIEN|nom_type{#OBJET_DEST}))]
+			</td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='id'>[(#AUTORISER{modifier,objet,#ID_OBJET}|?{
 				<a href="[(#URL_ECRIRE{selection_objet_edit,id_objet=#ID_SELECTION_OBJET})]">#ID_SELECTION_OBJET</a>,
 				#ID_OBJET
