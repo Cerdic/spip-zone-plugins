@@ -36,7 +36,7 @@ Enter the provided data and save the configuration (<a href="https://contrib.spi
 
 	// L
 	'label_associer_compte_twitter' => 'Link your twitter account to this site',
-	'label_aucun_compte_twitter' => 'Aucun compte Twitter enregistr�.',
+	'label_aucun_compte_twitter' => 'Aucun compte Twitter enregistré.',
 	'label_dissocier_compte_twitter' => 'Delete this account',
 	'label_status' => 'What\'s new ?',
 	'label_twitter_consumer_key' => 'API key of the Twitter API',
