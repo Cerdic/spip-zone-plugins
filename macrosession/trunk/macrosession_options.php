@@ -17,6 +17,8 @@
 include_spip('inc/session');
 include_spip ('inc/filtres'); 
 
+// on utilise nobreak quand il n'y a pas de break entre 2 cases d'un switch,
+// pour témoigner du fait que cette omission est intentionnelle
 if (!defined('nobreak'))
 	define('nobreak', '');
 
