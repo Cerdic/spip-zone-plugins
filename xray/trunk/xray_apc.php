@@ -100,12 +100,20 @@ function spipsafe_unserialize($str)
 	}
 	return "Unserialized : " . print_r($unser, 1);
 }
+
+// uniquement valable pendant print_contexte
+global $extra_print_contexte;
 function print_contexte($extra, $tostring)
 {
+	global $extra_print_contexte;
+	$extra_print_contexte = $extra;
+
 	$print = print_r($extra, 1);
 	if (stripos($print, 'Array') === 0) {
+		// On enlève 'Array( ' au début et ')' à la fin
 		$print = trim(substr($print, 5), " (\n\r\t");
-		$print = preg_replace_callback("/\[id_([a-z\-_]+)\]\s*=>\s*(\d+)$/im", function($match)
+		$print = substr ($print, 0, -1);
+		$print = preg_replace_callback("/\[id_([a-z\-_]+)\]\s*=>\s*(\d+)$/im", function($match) 
 		{
 			return $match[0] . '</xmp>' . bouton_objet($match[1], $match[2]) . '<xmp>';
 		}, $print);
@@ -120,11 +128,14 @@ function bouton_objet($objet, $id_objet)
 	$objet_visible = $objet;
 	if ($objet == 'secteur')
 		$objet = 'rubrique';
-	else
-		$objet = $objet;
+	elseif (($objet == 'objet')
+		) {
+		global $extra_print_contexte;
+		$objet_visible = $objet = $extra_print_contexte['objet'];
+	};
 	return "<a href='/ecrire/?exec=$objet&id_$objet=$id_objet' target='blank' 
-			style='position:absolute; right:0px'
-			title=" . attribut_html(generer_info_entite($id_objet, $objet, 'titre', 'etoile')) . ">[voir $objet_visible]</a>";
+			style='position:absolute; right:1em'
+			title=\"" . attribut_html(generer_info_entite($id_objet, $objet, 'titre', 'etoile')) . "\">[voir $objet_visible]</a>";
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -172,7 +183,7 @@ $vardom = array(
 	'SEARCH' => '~^[a-zA-Z0-9/_.\-\$\^]*$~', // aggregation by dir level
 	'TYPECACHE' => '/^(|ALL|SESSIONS|SESSIONS_AUTH|SESSIONS_NONAUTH|FORMULAIRES)$/', //
 	'ZOOM' => '/^(|TEXTECOURT|TEXTELONG)$/', //
-	'EXTRA' => '/^(|CONTEXTE|CONTEXTES_SPECIAUX|INFO_AUTEUR|INVALIDEURS|INVALIDEURS_SPECIAUX)$/' //
+	'EXTRA' => '/^(|CONTEXTE|CONTEXTES_SPECIAUX|INFO_AUTEUR|INVALIDEURS|INVALIDEURS_SPECIAUX|INCLUSIONS)$/' //
 );
 
 // cache scope
@@ -1057,12 +1068,64 @@ EOB;
 		<input type=hidden name=exec value={$MYREQUEST['exec']}>
 		<select name=SCOPE  onChange="form.submit()">
 EOB;
-		echo "<option value=A", $MYREQUEST['SCOPE'] == 'A' ? " selected" : "", ">Active</option>", "<option value=D", $MYREQUEST['SCOPE'] == 'D' ? " selected" : "", ">Deleted</option>", "</select>", ' Sorting:<select name=S_KEY  onChange="form.submit()">', "<option value=H", $MYREQUEST['S_KEY'] == 'H' ? " selected" : "", ">Hits</option>", "<option value=Z", $MYREQUEST['S_KEY'] == 'Z' ? " selected" : "", ">Size</option>", "<option value=S", $MYREQUEST['S_KEY'] == 'S' ? " selected" : "", ">$fieldheading</option>", "<option value=A", $MYREQUEST['S_KEY'] == 'A' ? " selected" : "", ">Last accessed</option>", "<option value=M", $MYREQUEST['S_KEY'] == 'M' ? " selected" : "", ">Last modified</option>", "<option value=C", $MYREQUEST['S_KEY'] == 'C' ? " selected" : "", ">Created at</option>", "<option value=D", $MYREQUEST['S_KEY'] == 'D' ? " selected" : "", ">Deleted at</option>";
+		echo '<option value=A', $MYREQUEST['SCOPE'] == 'A' ? ' selected' : '', '>Active</option>
+			<option value=D', $MYREQUEST['SCOPE'] == 'D' ? ' selected' : '', '>Deleted</option>
+		</select>
+		 Sorting:
+		<select name=S_KEY  onChange="form.submit()">
+			<option value=H', $MYREQUEST['S_KEY'] == 'H' ? ' selected' : '', '>Hits</option>
+			<option value=Z', $MYREQUEST['S_KEY'] == 'Z' ? ' selected' : '', '>Size</option>
+			<option value=S', $MYREQUEST['S_KEY'] == 'S' ? ' selected' : '', '>$fieldheading</option>
+			<option value=A', $MYREQUEST['S_KEY'] == 'A' ? ' selected' : '', '>Last accessed</option>
+			<option value=M', $MYREQUEST['S_KEY'] == 'M' ? ' selected' : '', '>Last modified</option>
+			<option value=C', $MYREQUEST['S_KEY'] == 'C' ? ' selected' : '', '>Created at</option>
+			<option value=D', $MYREQUEST['S_KEY'] == 'D' ? ' selected' : '', '>Deleted at</option>';
 		if ($fieldname == 'info')
-			echo "<option value=D", $MYREQUEST['S_KEY'] == 'T' ? " selected" : "", ">Timeout</option>";
-		echo '</select>', '<select name=SORT  onChange="form.submit()">', '<option value=D', $MYREQUEST['SORT'] == 'D' ? ' selected' : '', '>DESC</option>', '<option value=A', $MYREQUEST['SORT'] == 'A' ? ' selected' : '', '>ASC</option>', '</select>', '&nbsp;&nbsp;<b>HTML:</b> ', '<select name=ZOOM  onChange="form.submit()">', '<option value=TEXTECOURT', $MYREQUEST['ZOOM'] == 'TEXTECOURT' ? ' selected' : '', '>Courts</option>', '<option value=TEXTELONG', $MYREQUEST['ZOOM'] == 'TEXTELONG' ? ' selected' : '', '>Entiers</option>', '</select>', '&nbsp;&nbsp;<b>Affichage extra:</b> ', '<select name=EXTRA  onChange="form.submit()">', '<option value="" ', $MYREQUEST['EXTRA'] == '' ? ' selected' : '', '></option>', '<option value=CONTEXTE ', $MYREQUEST['EXTRA'] == 'CONTEXTE' ? ' selected' : '', '>Contexte</option>', '<option value=CONTEXTES_SPECIAUX ', $MYREQUEST['EXTRA'] == 'CONTEXTES_SPECIAUX' ? ' selected' : '', '>Contextes spécifiques</option>', '<option value=INFO_AUTEUR ', $MYREQUEST['EXTRA'] == 'INFO_AUTEUR' ? ' selected' : '', '>Infos auteur</option>', '<option value=INVALIDEURS ', $MYREQUEST['EXTRA'] == 'INVALIDEURS' ? ' selected' : '', '>Invalideurs</option>', '<option value=INVALIDEURS_SPECIAUX ', $MYREQUEST['EXTRA'] == 'INVALIDEURS_SPECIAUX' ? ' selected' : '', '>Invalideurs spécifiques</option>', '</select>
-		</p>', '<p><b>Types cache:</b> ', '<select name=TYPECACHE  onChange="form.submit()">', '<option value=ALL', $MYREQUEST['TYPECACHE'] == 'ALL' ? ' selected' : '', '>Tous</option>', '<option value=SESSIONS', $MYREQUEST['TYPECACHE'] == 'SESSIONS' ? ' selected' : '', '>Sessionnés</option>', '<option value=SESSIONS_AUTH', $MYREQUEST['TYPECACHE'] == 'SESSIONS_AUTH' ? ' selected' : '', '>Sessionnés identifiés</option>', '<option value=SESSIONS_NONAUTH', $MYREQUEST['TYPECACHE'] == 'SESSIONS_NONAUTH' ? ' selected' : '', '>Sessionnés non identifiés</option>', '<option value=FORMULAIRES', $MYREQUEST['TYPECACHE'] == 'FORMULAIRES' ? ' selected' : '', '>Formulaires</option>', '</select>', '<select name=COUNT onChange="form.submit()">', '<option value=10 ', $MYREQUEST['COUNT'] == '10' ? ' selected' : '', '>Top 10</option>', '<option value=20 ', $MYREQUEST['COUNT'] == '20' ? ' selected' : '', '>Top 20</option>', '<option value=50 ', $MYREQUEST['COUNT'] == '50' ? ' selected' : '', '>Top 50</option>', '<option value=100', $MYREQUEST['COUNT'] == '100' ? ' selected' : '', '>Top 100</option>', '<option value=150', $MYREQUEST['COUNT'] == '150' ? ' selected' : '', '>Top 150</option>', '<option value=200', $MYREQUEST['COUNT'] == '200' ? ' selected' : '', '>Top 200</option>', '<option value=500', $MYREQUEST['COUNT'] == '500' ? ' selected' : '', '>Top 500</option>', '<option value=0  ', $MYREQUEST['COUNT'] == '0' ? ' selected' : '', '>All</option>', '</select>', '&nbsp;&nbsp;&nbsp;Search: <input name=SEARCH value="', $MYREQUEST['SEARCH'], '" type=text size=25/>', '&nbsp;<input type=submit value="GO!">
-		</p>', '</form></div>';
+			echo '<option value=D', $MYREQUEST['S_KEY'] == 'T' ? ' selected' : '', '>Timeout</option>';
+		
+		echo '</select>
+		<select name=SORT  onChange="form.submit()">', 
+			'<option value=D', $MYREQUEST['SORT'] == 'D' ? ' selected' : '', '>DESC</option>', 
+			'<option value=A', $MYREQUEST['SORT'] == 'A' ? ' selected' : '', '>ASC</option>', 
+		'</select>
+		&nbsp;&nbsp;<b>HTML:</b>
+		<select name=ZOOM  onChange="form.submit()">
+			<option value=TEXTECOURT', $MYREQUEST['ZOOM'] == 'TEXTECOURT' ? ' selected' : '', '>Courts</option>
+			<option value=TEXTELONG', $MYREQUEST['ZOOM'] == 'TEXTELONG' ? ' selected' : '', '>Entiers</option> 
+		</select>
+		&nbsp;&nbsp;<b>Affichage extra:</b> 
+		<select name=EXTRA  onChange="form.submit()">
+			<option value="" ', $MYREQUEST['EXTRA'] == '' ? ' selected' : '', '></option> 
+			<option value=CONTEXTE ', $MYREQUEST['EXTRA'] == 'CONTEXTE' ? ' selected' : '', '>Contexte</option>
+			<option value=CONTEXTES_SPECIAUX ', $MYREQUEST['EXTRA'] == 'CONTEXTES_SPECIAUX' ? ' selected' : '', '>Contextes spécifiques</option>
+			<option value=INFO_AUTEUR ', $MYREQUEST['EXTRA'] == 'INFO_AUTEUR' ? ' selected' : '', '>Infos auteur</option>
+			<option value=INVALIDEURS ', $MYREQUEST['EXTRA'] == 'INVALIDEURS' ? ' selected' : '', '>Invalideurs</option>
+			<option value=INVALIDEURS_SPECIAUX ', $MYREQUEST['EXTRA'] == 'INVALIDEURS_SPECIAUX' ? ' selected' : '', '>Invalideurs spécifiques</option>
+			<option value=INCLUSIONS ', $MYREQUEST['EXTRA'] == 'INCLUSIONS' ? ' selected' : '', '>&LT;INCLURE&GT;</option>
+		</select>
+		<p><b>Types cache:</b> 
+		<select name=TYPECACHE  onChange="form.submit()">
+			<option value=ALL', $MYREQUEST['TYPECACHE'] == 'ALL' ? ' selected' : '', '>Tous</option>
+			<option value=SESSIONS', $MYREQUEST['TYPECACHE'] == 'SESSIONS' ? ' selected' : '', '>Sessionnés</option>
+			<option value=SESSIONS_AUTH', $MYREQUEST['TYPECACHE'] == 'SESSIONS_AUTH' ? ' selected' : '', '>Sessionnés identifiés</option>
+			<option value=SESSIONS_NONAUTH', $MYREQUEST['TYPECACHE'] == 'SESSIONS_NONAUTH' ? ' selected' : '', '>Sessionnés non identifiés</option>
+			<option value=FORMULAIRES', $MYREQUEST['TYPECACHE'] == 'FORMULAIRES' ? ' selected' : '', '>Formulaires</option>
+		</select>
+		<select name=COUNT onChange="form.submit()">
+			<option value=10 ', $MYREQUEST['COUNT'] == '10' ? ' selected' : '', '>Top 10</option>
+			<option value=20 ', $MYREQUEST['COUNT'] == '20' ? ' selected' : '', '>Top 20</option>
+			<option value=50 ', $MYREQUEST['COUNT'] == '50' ? ' selected' : '', '>Top 50</option>
+			<option value=100', $MYREQUEST['COUNT'] == '100' ? ' selected' : '', '>Top 100</option>
+			<option value=150', $MYREQUEST['COUNT'] == '150' ? ' selected' : '', '>Top 150</option>
+			<option value=200', $MYREQUEST['COUNT'] == '200' ? ' selected' : '', '>Top 200</option>
+			<option value=500', $MYREQUEST['COUNT'] == '500' ? ' selected' : '', '>Top 500</option>
+			<option value=0  ', $MYREQUEST['COUNT'] == '0' ? ' selected' : '', '>All</option>
+		</select>
+		&nbsp;&nbsp;&nbsp;
+		Search: <input name=SEARCH value="', $MYREQUEST['SEARCH'], '" type=text size=25/>
+		&nbsp;
+		<input type=submit value="GO!">
+		</p></form></div>';
 		
 		if (isset($MYREQUEST['SEARCH'])) {
 			// Don't use preg_quote because we want the user to be able to specify a
@@ -1178,60 +1241,74 @@ EOB;
 						$liens = '';
 						if (is_array($data)) {
 							switch ($MYREQUEST['EXTRA']) {
-								case 'CONTEXTE':
-									if (isset($data['contexte']))
-										$extra = $data['contexte'];
-									else
-										$extra = '(non défini)';
-									break;
-								case 'CONTEXTES_SPECIAUX':
-									if (isset($data['contexte'])) {
-										$extra = $data['contexte'];
-										foreach (array(
-											'lang',
-											'date',
-											'date_default',
-											'date_redac',
-											'date_redac_default'
-										) as $ki)
-											unset($extra[$ki]);
-									} else
-										$extra = '(non défini)';
-									break;
-								case 'INFO_AUTEUR':
-									if (isset($data['contexte'])) {
-										foreach (array(
-											'id_auteur',
-											'email',
-											'nom',
-											'statut',
-											'login'
-										) as $ki)
-											if (isset($data['contexte'][$ki]))
-												$extra[$ki] = $extra[$ki] = $data['contexte'][$ki];
-									};
-									break;
-								case 'INVALIDEURS':
+							case 'CONTEXTE':
+								if (isset($data['contexte']))
+									$extra = $data['contexte'];
+								else
+									$extra = '(non défini)';
+								break;
+							case 'CONTEXTES_SPECIAUX':
+								if (isset($data['contexte'])) {
+									$extra = $data['contexte'];
+									foreach (array(
+										'lang',
+										'date',
+										'date_default',
+										'date_redac',
+										'date_redac_default'
+									) as $ki)
+										unset($extra[$ki]);
+								} else
+									$extra = '(non défini)';
+								break;
+							case 'INFO_AUTEUR':
+								if (isset($data['contexte'])) {
+									foreach (array(
+										'id_auteur',
+										'email',
+										'nom',
+										'statut',
+										'login'
+									) as $ki)
+										if (isset($data['contexte'][$ki]))
+											$extra[$ki] = $extra[$ki] = $data['contexte'][$ki];
+								};
+								break;
+							case 'INVALIDEURS':
+								if (isset ($data['invalideurs']))
 									$extra = $data['invalideurs'];
-									break;
-								case 'INVALIDEURS_SPECIAUX':
+								break;
+							case 'INVALIDEURS_SPECIAUX': 
+								if (isset ($data['invalideurs'])) {
 									$extra = $data['invalideurs'];
 									foreach (array(
 										'cache',
 										'session'
 									) as $ki)
 										unset($extra[$ki]);
-									break;
+								}
+								break;
+							case 'INCLUSIONS' :
+								if (!isset ($data['texte']))
+									$extra = '(html non défini)';
+								elseif (preg_match_all("/<\?php\s+echo\s+recuperer_fond\s*\(\s*'([a-z0-9_\-\.\/]+)'/", $data['texte'], $matches))
+									$extra = $matches[1];
+								else
+									$extra = '(aucune inclusion)';
+								break;
 							}
 						}
-						if ($extra == 'undefined')
-							$extra = array(
-								'contexte non défini' => 'vrai'
-							);
 						if ($extra = print_contexte($extra, 1))
-							echo "<br><xmp>    $extra</xmp> <small style='float:right'>$liens</small>";
+							echo "<br><xmp>    $extra</xmp>";
+						if ($liens)	// inutilisé désormais en fait
+							echo "<small style='float:right'>$liens</small>";
 					}
-					echo '</td>', '<td class="td-n center">', $entry['num_hits'], '</td>', '<td class="td-n right">', $entry['mem_size'], '</td>', '<td class="td-n center">', date(DATE_FORMAT, $entry['access_time']), '</td>', '<td class="td-n center">', date(DATE_FORMAT, $entry['mtime']), '</td>', '<td class="td-n center">', date(DATE_FORMAT, $entry['creation_time']), '</td>';
+					echo '</td>
+					<td class="td-n center">', $entry['num_hits'], '</td>
+					<td class="td-n right">', $entry['mem_size'], '</td>
+					<td class="td-n center">', date(DATE_FORMAT, $entry['access_time']), '</td>
+					<td class="td-n center">', date(DATE_FORMAT, $entry['mtime']), '</td>
+					<td class="td-n center">', date(DATE_FORMAT, $entry['creation_time']), '</td>';
 					
 					if ($fieldname == 'info') {
 						if ($entry['ttl'])
