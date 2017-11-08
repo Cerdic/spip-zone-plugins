@@ -37,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_layer_defaut' => 'Couche par défaut',
 	'cfg_lbl_layers' => 'Couches proposées',
 	'cfg_lbl_maptype' => 'Fond cartographique',
+    'cfg_lbl_plugins_desactives' => 'Désactiver certains plugins',
 	'cfg_lbl_styles' => 'Afficher les champs de styles',
 	'cfg_titre_gis' => 'Configuration de GIS',
 
@@ -55,6 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_layer_forcee' => 'La couche est imposée par un autre plugin ou un squelette.',
 	'explication_maptype_force' => 'Le fond cartographique est imposé par un autre plugin ou squelette.',
 	'explication_opacity' => 'Opacité du trait de 0 à 1 (valeur par défaut : 0.5)',
+    'explication_plugins_desactives' => 'Attention, certaines fonctionnalités fournies par ces plugins ne seront plus opérationnelles.',
 	'explication_weight' => 'Épaisseur du trait (valeur par défaut : 5)',
 
 	// F

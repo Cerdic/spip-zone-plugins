@@ -94,6 +94,20 @@
 			label=<:gis:cfg_lbl_activer_objets:>,
 			exclus=spip_gis})]
 
+		[(#SAISIE{selection_multiple,plugins_desactives,
+			cacher_option_intro=oui,
+			label=<:gis:cfg_lbl_plugins_desactives:>,
+			explication=<:gis:explication_plugins_desactives:>,
+			multiple=oui,
+			size=6,
+			datas=#ARRAY{
+				'KML.js','KML.js',
+				'GPX.js','GPX.js',
+				'TOPOJSON.js','TOPOJSON.js',
+				'Control.FullScreen.js','Control.FullScreen.js',
+				'Control.MiniMap.js','Control.MiniMap.js',
+				'leaflet.markercluster-src.js','leaflet.markercluster-src.js'
+			}})]
 	</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 
 
