@@ -34,8 +34,8 @@
 					    #SET{valider,' '}
 
               <div class="mediatheque">
-                <input class="" name="document_mediatheque_[(#CLE)]_#ENV{objet}_#ENV{id_objet}" type="text" value=""/>
-                <input class="" name="choisir_document_mediatheque_[(#CLE)]_#ENV{objet}_#ENV{id_objet}"
+                <input class="hidden" name="document_mediatheque_[(#CLE)]_#ENV{objet}_#ENV{id_objet}" type="hidden" value=""/>
+                <input class="invisible" name="choisir_document_mediatheque_[(#CLE)]_#ENV{objet}_#ENV{id_objet}"
                        type="submit" value="<:logos_roles:valider:>"/>
 
                 <a href="#" id="choisir_document_[(#CLE)]_#ENV{objet}_#ENV{id_objet}">
