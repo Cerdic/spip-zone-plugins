@@ -17,6 +17,9 @@
 include_spip('inc/session');
 include_spip ('inc/filtres'); 
 
+if (!defined('nobreak'))
+	define('nobreak', '');
+
 //
 // FIXME : appeler appliquer_filtre dans le code compilé est une somptuosité superfétatoire
 // Au lieu de cela, appeler chercher_filtre à la compilation pour savoir quelle est la fonction appelée par le filtre et insérer dans le code compilé un appel direct à cette fonction 
@@ -86,6 +89,7 @@ define (V_FERME_PHP, ' ?' . "'.'>'");
 // $champ est entre quotes ''
 // le code renvoyé sera inséré à l'intérieur d'un '...'
 function compile_appel_macro_session ($p, $champ,$n=2) {
+	debug_log ("compile_appel_macro_session avec n=$n et champ=".print_r($champ,1), "_macrosession");
 	$get_champ = "pipelined_session_get('.\"$champ\".')";
 	
 	// champ sans application de filtre
@@ -109,13 +113,24 @@ function compile_appel_macro_session ($p, $champ,$n=2) {
 	// le filtre est il en fait un opérateur de comparaison ?
 	if (in_array ($filtre, array ("'=='", "'!='", "'<'", "'<='", "'>'", "'>='"))) {
 		$comparateur = trim ($filtre, "'");
-										
-		$r = "($get_champ $comparateur '.\"$arg_un\".')";
+
+		return "($get_champ $comparateur '.\"$arg_un\".')";
 		// #_SESSION{nom,==,JLuc} donnera 
 		// '<'.'?php  echo (pipelined_session_get('."'nom'".') == '."'JLuc'".');  ?'.'>'
-		return $r;
 	}
-	
+
+	// le filtre est il en fait un opérateur unaire ?
+	if (in_array ($filtre, array ("'!'", "'non'"))) {
+		$unaire = trim ($filtre, "'");
+		switch ($unaire) {
+		case '!':
+			nobreak;
+		case 'non' :
+			return "(!$get_champ $comparateur)";
+			break;
+		}
+	}
+
 	if (existe_argument_balise($n+2, $p)) {
 		$arg_deux = interprete_argument_balise($n+2, $p);
 		$virgule_arg_deux = ".', '.\"$arg_deux\"";
