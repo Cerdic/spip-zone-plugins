@@ -37,6 +37,13 @@ function supprimer_rubrique($liste_id) {
 		supprimer_les_logos("rubrique", $value);
 		spip_log("Suppression de la rubrique : $value.", 'vider_rubrique');
 	}
+	include_spip('inc/rubriques');
+	// Dissocier les documents des rubriques.
+	sql_delete('spip_documents_liens', "objet='rubrique' AND id_objet IN ($liste_id)");
+	// Refuser les sites syndiqués
+	// TODO : Il faudrait voir si ces sites ne doivent pas être aussi supprimé.
+	sql_updateq('spip_syndic', array('statut' => 'refuse'), "id_rubrique IN ($liste_id)");
+	calculer_rubriques();
 
 	return true;
 }
@@ -51,7 +58,7 @@ function supprimer_logo($type, $id_objet, $logo_type = 'on') {
 	include_spip('inc/flock');
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	$le_logo = $chercher_logo($id_objet, 'id_' . $type, $logo_type);
-	$le_logo = $le_logo[0];
+	$le_logo = (isset($le_logo[0]) ? $le_logo[0] : 'empty');
 	if (!file_exists($le_logo)) {
 		return false;
 	} else {

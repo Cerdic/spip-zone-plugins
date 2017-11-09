@@ -1,7 +1,7 @@
 <paquet
 	prefix="vider_rubrique"
 	categorie="edition"
-	version="0.2.2"
+	version="0.3.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="theme/spip/images/vider_rubrique-128.png"
@@ -20,5 +20,7 @@
 
 	<pipeline nom="boite_infos" inclure="vider_rubrique_pipelines.php" />
 	<pipeline nom="jqueryui_plugins" inclure="vider_rubrique_pipelines.php" />
+
+	<necessite nom="spip_bonux" compatibilite="[3.0.3;]" />
 
 </paquet>
