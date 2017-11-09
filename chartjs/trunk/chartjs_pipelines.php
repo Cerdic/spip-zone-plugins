@@ -24,6 +24,8 @@ function chartjs_insert_head_css($flux){
  * @return mixed
  */
 function chartjs_insert_head($flux){
+	# Todo: moment.js est nécessaire pour gérer correctement les graphiques avec des dates.
+	#$flux .=  "<script type='text/javascript' src='" . find_in_path('lib/moment/moment-with-locales.min.js') . "'></script>";
 	$flux .=  "<script type='text/javascript' src='" . find_in_path('lib/chartjs/Chart.js') . "'></script>";
 	return $flux;
 }

@@ -20,7 +20,7 @@
 
 	<!-- Données et textes -->
 	- **type :        Type de graphique (string)
-	                  pie (défaut) | line | bar | radar | doughnut | polarArea | bubble | scatter | area | mixed
+	                  pie (défaut) | line | bar | horizontalBar | radar | doughnut | polarArea | bubble | scatter | area | mixed
 	- **data :        Jeux de données (string|array)
 	                  - a) soit des séries de nombres séparés par des virgules et le séparateur 'next'
                       Ex. : "10,20,30 next 5,10,15"
@@ -103,7 +103,7 @@
 ]
 [(#REM) Base ]
 #SET{type,         #ENV{type,pie}|trim|strtolower}
-#SET{alias,        #ARRAY{polararea,polarArea}}
+#SET{alias,        #ARRAY{polararea,polarArea,horizontalbar,horizontalBar}}
 #SET{type,         #GET{alias/#GET{type}}|sinon{#GET{type}}}
 #SET{id,           #VAL{spipchart_}|concat{#ENV{id,chart}|replace{' '}}}
 #SET{donnees,      #ENV{data,#ENV{datasets}}}
