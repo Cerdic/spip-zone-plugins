@@ -4,7 +4,7 @@
 	version="0.2.2"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
-	logo="theme/img/poubelle.png"
+	logo="theme/spip/images/vider_rubrique-128.png"
 	documentation="https://contrib.spip.net/?article4297"
 >	
 
@@ -13,7 +13,7 @@
 
 	<auteur lien="http://demo.apsulis.com">XDjuj</auteur>
 	<licence>GNU/GPL</licence>
-	<copyright>2012-2014</copyright>
+	<copyright>2012-2018</copyright>
 	<credit lien="http://icomoon.io/app/">Icomoon (Logo, icones)</credit>
 
 	<traduire gestionnaire="salvatore" module="vider_rubrique" reference="fr" />
@@ -21,5 +21,4 @@
 	<pipeline nom="boite_infos" inclure="vider_rubrique_pipelines.php" />
 	<pipeline nom="jqueryui_plugins" inclure="vider_rubrique_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[1.21.0;]" />
 </paquet>

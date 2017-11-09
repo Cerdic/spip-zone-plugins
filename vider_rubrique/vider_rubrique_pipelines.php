@@ -1,8 +1,8 @@
 <?php
 
 /***************************************************************************\
- * Plugin Vider Rubrique pour Spip 3.0
- * Licence GPL (c) 2012 - Apsulis
+ * Plugin Vider Rubrique
+ * Licence GPL (c) 2012-2018 - Apsulis
  * Suppression de tout le contenu d'une rubrique
  *
  * \***************************************************************************/
@@ -13,6 +13,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 function vider_rubrique_boite_infos($flux) {
 	include_spip('inc/config');
+	include_spip('inc/autoriser');
+	include_spip('inc/utils');
 	$actif = lire_config('vider_rubrique/config/activer');
 	$roles = lire_config('vider_rubrique/config/auteurs_autorises');
 	$restreindre = lire_config('vider_rubrique/config/restreindre');
@@ -41,6 +43,7 @@ function vider_rubrique_boite_infos($flux) {
 }
 
 function vider_rubrique_jqueryui_plugins($plugins) {
+	include_spip('inc/utils');
 	if (test_espace_prive()) {
 		$plugins[] = "jquery.ui.dialog";
 	}

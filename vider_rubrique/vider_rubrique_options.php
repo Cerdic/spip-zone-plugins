@@ -1,7 +1,7 @@
 <?php
 /***************************************************************************\
- * Plugin Vider Rubrique pour Spip 3.0
- * Licence GPL (c) 2012 - Apsulis
+ * Plugin Vider Rubrique
+ * Licence GPL (c) 2012-2018 - Apsulis
  * Suppression de tout le contenu d'une rubrique
  *
  * \***************************************************************************/
@@ -14,6 +14,7 @@ function vider_rubrique_objet_poubelle($objet, $id_objet, $statut) {
 	$c = array('statut' => $statut);
 
 	include_spip('action/editer_objet');
+	include_spip('inc/config');
 	if ($err = objet_instituer($objet, $id_objet, $c)) {
 		$res = array('message_erreur' => $err, 'objet' => $objet);
 	} else {
@@ -27,6 +28,7 @@ function vider_rubrique_objet_poubelle($objet, $id_objet, $statut) {
 }
 
 function supprimer_rubrique($liste_id) {
+	include_spip('inc/utils');
 	$supprimer_rubrique = charger_fonction('supprimer_rubrique', 'action');
 	/* On efface les rubriques les plus profondes en premier, sinon on ne pourra pas supprimer ses parents */
 	$les_id = array_reverse(explode(",", $liste_id));
@@ -45,13 +47,16 @@ function supprimer_les_logos($type, $id_objet) {
 }
 
 function supprimer_logo($type, $id_objet, $logo_type = 'on') {
+	include_spip('inc/utils');
+	include_spip('inc/flock');
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	$le_logo = $chercher_logo($id_objet, 'id_' . $type, $logo_type);
 	$le_logo = $le_logo[0];
-	spip_log("Suppression du logo : $le_logo", 'vider_rubrique');
 	if (!file_exists($le_logo)) {
 		return false;
 	} else {
+		// Un message de log que si le logo existe et donc, qu'il peut être supprimé.
+		spip_log("Suppression du logo : $le_logo", 'vider_rubrique');
 		spip_unlink($le_logo);
 	}
 }

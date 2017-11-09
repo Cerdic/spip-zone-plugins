@@ -13,7 +13,7 @@
 	<form method="post" action="#ENV{action}">
 		<div>
 			#ACTION_FORMULAIRE{#ENV{action}}
-			<ul>
+			<ul class="editer-groupe">
 
 				#SET{name,activer}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				[(#SET{valeur,[(#ENV{#GET{name}}|sinon{non})]})]
