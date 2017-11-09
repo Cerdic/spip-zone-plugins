@@ -29,6 +29,8 @@ function vider_rubrique_objet_poubelle($objet, $id_objet, $statut) {
 
 function supprimer_rubrique($liste_id) {
 	include_spip('inc/utils');
+	include_spip('base/abstract_sql');
+	spip_log(print_r($liste_id, true), 'vider_rubrique');
 	$supprimer_rubrique = charger_fonction('supprimer_rubrique', 'action');
 	/* On efface les rubriques les plus profondes en premier, sinon on ne pourra pas supprimer ses parents */
 	$les_id = array_reverse(explode(",", $liste_id));
@@ -38,11 +40,6 @@ function supprimer_rubrique($liste_id) {
 		spip_log("Suppression de la rubrique : $value.", 'vider_rubrique');
 	}
 	include_spip('inc/rubriques');
-	// Dissocier les documents des rubriques.
-	sql_delete('spip_documents_liens', "objet='rubrique' AND id_objet IN ($liste_id)");
-	// Refuser les sites syndiqués
-	// TODO : Il faudrait voir si ces sites ne doivent pas être aussi supprimé.
-	sql_updateq('spip_syndic', array('statut' => 'refuse'), "id_rubrique IN ($liste_id)");
 	calculer_rubriques();
 
 	return true;
@@ -66,4 +63,17 @@ function supprimer_logo($type, $id_objet, $logo_type = 'on') {
 		spip_log("Suppression du logo : $le_logo", 'vider_rubrique');
 		spip_unlink($le_logo);
 	}
+}
+
+function vider_rubrique_dissocier_document($liste_id) {
+	if (empty($liste_id) or is_null($liste_id)) {
+		return false;
+	}
+	include_spip('base/abstract_sql');
+
+	// Dissocier les documents des rubriques.
+	sql_delete('spip_documents_liens', "objet='rubrique' AND id_objet IN ($liste_id)");
+	spip_log("Suppression des liens de la rubrique #$liste_id avec les documents.", 'vider_rubrique');
+
+
 }

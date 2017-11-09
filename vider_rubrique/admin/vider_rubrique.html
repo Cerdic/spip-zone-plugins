@@ -2,34 +2,46 @@
 #SET{arbo_complete,non}
 	[(#ENV{vider_arbo}|=={vider_arbo}|oui) #SET{arbo_complete,oui} ]
 
-<BOUCLE_principale(RUBRIQUES){id_rubrique=#GET{rubrique_source}}{tout}>
+<BOUCLE_principale (RUBRIQUES) {id_rubrique=#GET{rubrique_source}} {tout}>
 
 	[(#REM)
 		- Lister tous les articles et brèves
 		- Les dépublier (pour l'instant sans effacer les logos)
 	]
-	<BOUCLE_articles(ARTICLES){id_rubrique}{statut IN publie,prop,prepa}>
+	<BOUCLE_articles (ARTICLES) {id_rubrique} {statut==.*}>
 		[(#VAL{article}|vider_rubrique_objet_poubelle{#ID_ARTICLE,"poubelle"})]
 	</BOUCLE_articles>
-	<BOUCLE_breves(BREVES){id_rubrique}{statut IN publie,prop,prepa}>
+	<BOUCLE_breves (BREVES) {id_rubrique} {statut==.*}>
 		[(#VAL{breve}|vider_rubrique_objet_poubelle{#ID_BREVE,"poubelle"})]
 	</BOUCLE_breves>
 
-	<BOUCLE_si_arbo_complete(CONDITION){si #GET{arbo_complete}|=={oui}}>
-		<BOUCLE_articlesBranche(ARTICLES){branche}{statut IN publie,prop,prepa}>
+	<BOUCLE_sites (SITES) {id_rubrique} {statut==.*}>
+		[(#VAL{syndic}|vider_rubrique_objet_poubelle{#ID_SYNDIC,"refuse"})]
+	</BOUCLE_sites>
+
+	[(#ID_RUBRIQUE|vider_rubrique_dissocier_document)]
+
+	<BOUCLE_si_arbo_complete (CONDITION) {si #GET{arbo_complete}|=={oui}}>
+		<BOUCLE_articlesBranche (ARTICLES) {branche} {statut==.*}>
 			[(#VAL{article}|vider_rubrique_objet_poubelle{#ID_ARTICLE,"poubelle"})]
 		</BOUCLE_articlesBranche>
-		<BOUCLE_brevesBranche(BREVES){branche}{statut IN publie,prop,prepa}>
+		<BOUCLE_brevesBranche (BREVES) {branche} {statut==.*}>
 			[(#VAL{breve}|vider_rubrique_objet_poubelle{#ID_BREVE,"poubelle"})]
 		</BOUCLE_brevesBranche>
+		<BOUCLE_sitesBranche (SITES) {branche} {statut==.*}>
+			[(#VAL{syndic}|vider_rubrique_objet_poubelle{#ID_SYNDIC,"refuse"})]
+		</BOUCLE_sitesBranche>
 
 		[(#REM) Lister toutes les sous rub ]
-		<BOUCLE_sousRub(RUBRIQUES){branche}{tout}{!id_rubrique=#GET{rubrique_source}}{tout}>
+		[(#SET{lesRub,''})]
+		<BOUCLE_sousRub (RUBRIQUES) {branche} {!id_rubrique=#GET{rubrique_source}} {tout}>
 			[(#SET_PUSH{lesRub,#ID_RUBRIQUE})]
 		</BOUCLE_sousRub>
 		[(#REM) Puis les supprimer ]
+		[(#GET{lesRub}|var_dump})]
 		[(#SET{lesRub,[(#GET{lesRub}|implode{','})]})]
 		[(#GET{lesRub}|supprimer_rubrique)]
+		</B_sousRub>
 	</BOUCLE_si_arbo_complete>
 
 </BOUCLE_principale>
