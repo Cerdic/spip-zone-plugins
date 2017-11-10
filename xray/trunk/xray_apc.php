@@ -82,6 +82,18 @@ function get_serial_class($serial)
 	$parts = explode(':', $serial, 4);
 	return isset($types[$parts[0]]) ? $types[$parts[0]] : trim($parts[2], '"');
 }
+
+function get_apc_data($info, &$success) {
+	if (apcu_exists($info)
+		and ($data = apcu_fetch($info, $success)) 
+		and $success 
+		and is_array($data) and (count($data) == 1) 
+		and is_serialized($data[0]))
+		return unserialize($data[0]);
+	$success = false;
+	return null;
+}
+
 function spipsafe_unserialize($str)
 {
 	if (strpos($str, "SPIPTextWheelRuleset") !== false) {
@@ -98,7 +110,7 @@ function spipsafe_unserialize($str)
 		elseif (!$unser['texte'])
 			$unser['texte'] = '(vide)';
 	}
-	return "Unserialized : " . print_r($unser, 1);
+	return print_contexte($unser, 1);
 }
 
 function print_contexte($extra, $tostring)
@@ -113,6 +125,7 @@ function print_contexte($extra, $tostring)
 			return $match[0] . '</xmp>' . bouton_objet($match[1], $match[2], $extra) . '<xmp>';
 		}, $print);
 	}
+	$print=preg_replace('/^    /m', '', $print);
 	if ($tostring)
 		return $print;
 	echo $print;
@@ -174,9 +187,10 @@ $vardom = array(
 	'S_KEY' => '/^[AHSMCDTZ]$/', // first sort key
 	'SORT' => '/^[DA]$/', // second sort key
 	'AGGR' => '/^\d+$/', // aggregation by dir level
-	'SEARCH' => '~^[a-zA-Z0-9/_.\-\$\^]*$~', // aggregation by dir level
+	'SEARCH' => '~.*~',
 	'TYPECACHE' => '/^(|ALL|SESSIONS|SESSIONS_AUTH|SESSIONS_NONAUTH|FORMULAIRES)$/', //
 	'ZOOM' => '/^(|TEXTECOURT|TEXTELONG)$/', //
+	'WHERE' => '/^(|ALL|HTML|META)$/', // recherche dans le contenu
 	'EXTRA' => '/^(|CONTEXTE|CONTEXTES_SPECIAUX|INFO_AUTEUR|INVALIDEURS|INVALIDEURS_SPECIAUX|INCLUSIONS)$/' //
 );
 
@@ -228,7 +242,7 @@ if (!isset($scope_list[$MYREQUEST['SCOPE']]))
 
 global $MY_SELF; // fix apcu
 global $MY_SELF_WO_SORT; // fix apcu
-$MY_SELF_WO_SORT = "$PHP_SELF" . "?SCOPE=" . $MYREQUEST['SCOPE'] . "&COUNT=" . $MYREQUEST['COUNT'] . "&SEARCH=" . $MYREQUEST['SEARCH'] . "&TYPECACHE=" . $MYREQUEST['TYPECACHE'] . "&ZOOM=" . $MYREQUEST['ZOOM'] . "&EXTRA=" . $MYREQUEST['EXTRA'] . "&exec=" . $MYREQUEST['exec'] . "&OB=" . $MYREQUEST['OB'];
+$MY_SELF_WO_SORT = "$PHP_SELF" . "?SCOPE=" . $MYREQUEST['SCOPE'] . "&COUNT=" . $MYREQUEST['COUNT'] . "&SEARCH=" . $MYREQUEST['SEARCH'] . "&TYPECACHE=" . $MYREQUEST['TYPECACHE'] . "&ZOOM=" . $MYREQUEST['ZOOM'] . "&EXTRA=" . $MYREQUEST['EXTRA'] . "&WHERE=" . $MYREQUEST['WHERE'] . "&exec=" . $MYREQUEST['exec'] . "&OB=" . $MYREQUEST['OB'];
 $MY_SELF         = $MY_SELF_WO_SORT . "&S_KEY=" . $MYREQUEST['S_KEY'] . "&SORT=" . $MYREQUEST['SORT'];
 $self            = "http" . (!empty($_SERVER['HTTPS']) ? "s" : "") . "://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 
@@ -833,7 +847,13 @@ input {
 	padding:0.1em 0.5em 0.1em 0.5em;
 	}
 
+/* xray styles */
 xmp { display: inline }
+.menuzoom {
+	border :  1px solid grey;
+	border-radius: 3px;
+	padding : 0px 5px 0px 5px;
+}
 
 //-->
 </style>
@@ -844,7 +864,7 @@ xmp { display: inline }
 		<div class="logo"><span class="logo"><a href="http://pecl.php.net/package/APCu">APCu</a></span></div>
 		<div class="nameinfo" style="display: inline">
 			User Cache
-			<a href='contrib.spip.net/4946'>
+			<a href='https://contrib.spip.net/4946'>
 			<img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAEwAAABMBDsgnAwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAARiSURBVFiFxVdNSBtbFP5m8pqpRmw2EhAU/6JtQAStG5VEiC5cCkLBhcQuXIi2i0ppSZ+laGmxghJFwU1cZCe6cFFXKlYENybSQqMENa1SGLUEQ6iZ5CXfW/S9YEwm0YLtgUuY852f7557z5mJIAjCmSiKIgABPyXplyTS6a9rp4YLABLInxDxtyQRRQwMDKCioiItzpteDoeDiqKwpKQkHY74TSavra0lSb569UrNJjMBm83Guro6VVyj0fDt27fUarVp8cnJSX779o2SJKXF/8p0dgCg0+mwtLSEhoYGaLVa1NXVQa/Xw+12w+Px4N27d+jo6MCLFy/S+peXl2NzcxOKoqjmyFiBwsJCqkksFiNJjo2Nqfp//vyZQ0NDqrgoCAIySWtrKwDgx48fF3sZABAOhwEA9+/fV/XPz89HQUGBKp61De/duwcAePjwISorK7G7uwtFUdDU1ASLxQIAKC0tVfX3+Xyq7QcAEAQh4xHcvXuXiqLw69evXFtb4/n5OePxOBcXF/np0yeS5JMnT1T9p6eneXBwoN4p2QgA4PDwsOo9WF9fpyiKqr6PHj1iLBbj7du3VQnELipycnJSjCRJYktLC3t6eri/v0+SHB8fp81mY2FhYYr9xRj19fUkSYvFkp2ATqej3+9nW1sbATA/P58GgyFpbWxskCStVmsKJggCAdDr9bKrq+vnLRdFBgIBvnz5MjsBg8FAknz8+DGLiop4dnamWvp08vz5cwIgSb558yaRZGFhgaurq9cbRIeHh+ju7kZ9fX2SvrOzE8XFxXA6nZBlOaEPBAJwOp1pYy0vL2N0dBSSJKUOJFEU01YAAO12+5V3v7e3lxjHlytQVVVFkjSbzdcbxVNTUzg6OkJZWRm0Wq1qBQ4PD+F2uxGJRNLG2d3dxdHREZqbm/Hhw4erVwAArVZr1t3Pz88n7epyBQBwdnaWKysrmSsQDAaxvb0Nj8eT0K2srKC9vR2SJAEABgcHYTKZ8OzZM/j9fgDA5uZmyo53dnaSdMvLy5iZmUm9B6Io/nORUaahAoCrq6skyZqaGlWbvLy8FJ3JZCJJlpeXJ2OXCVxeBoOB79+/pyzL/P79O6PRKEkyGAwyEAjw4OCAnZ2dGUkDYFNTE0mmDq5sBPr6+rLegY8fP1Kv17O3t5d37txJG+fBgweMRCLMzc29HgGj0UhZllWTx+Nx9vf3U6fTcW9vjycnJ+zv7+etW7cSMfR6Pb1eLxcXF1NzaDSajAT+vxfhcJgTExOJsVtdXU2S7OvrS3pnPH36lMFgkF++fKHD4eDr16/p8Xjo9/tpNBpTY+MKEo/HQRKhUAiyLEOWZRwfHwMAotFowk5RFIyMjMBoNMLlcqG6uhpmsxlbW1tobGyEz+dLiZ31m/BXRJZl2O32K9n+lj8mmUQjiuLfZPajCIfDmJubw+npKYCf34iCIMDlciEUCv0yAUGj0URjsdiNHMVV5I8fgQDgHID03/PFFvktz/8C/6xwoasnBYAAAAAASUVORK5CYII=' >
 			XRay pour SPIP
 			</a>
@@ -1095,7 +1115,7 @@ EOB;
 			<option value=INFO_AUTEUR ', $MYREQUEST['EXTRA'] == 'INFO_AUTEUR' ? ' selected' : '', '>Infos auteur</option>
 			<option value=INVALIDEURS ', $MYREQUEST['EXTRA'] == 'INVALIDEURS' ? ' selected' : '', '>Invalideurs</option>
 			<option value=INVALIDEURS_SPECIAUX ', $MYREQUEST['EXTRA'] == 'INVALIDEURS_SPECIAUX' ? ' selected' : '', '>Invalideurs spécifiques</option>
-			<option value=INCLUSIONS ', $MYREQUEST['EXTRA'] == 'INCLUSIONS' ? ' selected' : '', '>&LT;INCLURE&GT;</option>
+			<option value=INCLUSIONS ', $MYREQUEST['EXTRA'] == 'INCLUSIONS' ? ' selected' : '', '>&lt;INCLURE&gt;</option>
 		</select>
 		<p><b>Types cache:</b> 
 		<select name=TYPECACHE  onChange="form.submit()">
@@ -1116,8 +1136,15 @@ EOB;
 			<option value=0  ', $MYREQUEST['COUNT'] == '0' ? ' selected' : '', '>All</option>
 		</select>
 		&nbsp;&nbsp;&nbsp;
-		Search: <input name=SEARCH value="', $MYREQUEST['SEARCH'], '" type=text size=25/>
-		&nbsp;
+		Chercher: <input name=SEARCH value="', $MYREQUEST['SEARCH'], '" type=text size=25/>
+		<label>Dans:</label>
+		<select name=WHERE onChange="form.submit()">
+			<option value="" ', $MYREQUEST['WHERE'] == '' ? ' selected' : '', '>Noms des caches</option>
+			<option value="ALL" ', $MYREQUEST['WHERE'] == 'ALL' ? ' selected' : '', '>Tout le contenu</option>
+			<option value="HTML" ', $MYREQUEST['WHERE'] == 'HTML' ? ' selected' : '', '>HTML</option>
+			<option value="META" ', $MYREQUEST['WHERE'] == 'META' ? ' selected' : '', '>Métadonnées</option>
+		</select>
+		&nbsp;&nbsp;&nbsp;
 		<input type=submit value="GO!">
 		</p></form></div>';
 		
@@ -1214,8 +1241,34 @@ EOB;
 			// output list
 			$i = 0;
 			foreach ($list as $k => $entry) {
-				
-				if ((!$MYREQUEST['SEARCH'] || preg_match($MYREQUEST['SEARCH'], $entry[$fieldname])) and (!$pattern_typecache or preg_match($pattern_typecache, $entry[$fieldname]))) {
+				$data=$searched=null;
+				$success = false;
+				$tried_get_apc_data = false;
+				if ($MYREQUEST['SEARCH'] and $MYREQUEST['WHERE']) {
+					$searched = $data = get_apc_data($entry['info'], $success);
+					$tried_get_apc_data = true;
+					switch ($MYREQUEST['WHERE']) {
+					case 'ALL' :
+						break;
+					case 'HTML' :
+						if (is_array($searched)) // !textwheel
+							$searched = $data['texte'];
+						break;
+					case 'META' :
+						if (is_array($searched)) // !textwheel
+							unset($searched['texte']);
+						break;
+					default :
+						die("Mauvaise valeur pour where : " . $MYREQUEST['WHERE']);
+					}
+				};
+
+				if ((!$pattern_typecache or preg_match($pattern_typecache, $entry[$fieldname]))
+					and (!$MYREQUEST['SEARCH']
+						or (!$MYREQUEST['WHERE']
+							and preg_match($MYREQUEST['SEARCH'], $entry[$fieldname]))
+						or ($MYREQUEST['WHERE']
+							and preg_match($MYREQUEST['SEARCH'].'m', print_r($searched,1))))) { 
 					$sh = md5($entry["info"]);
 					
 					$field_value = htmlentities(strip_tags($entry[$fieldname], ''), ENT_QUOTES, 'UTF-8');
@@ -1224,13 +1277,15 @@ EOB;
 					echo '<tr id="key-' . $sh . '" class=tr-', $i % 2, '>', "<td class='td-0' style='position: relative'>
 			<a href='$MY_SELF&SH={$sh}#key-{$sh}'>$field_value</a>";
 					
-					if ($p = preg_match('/_([0-9a-f]{8})$/i', $field_value, $match) and $MYREQUEST['SEARCH'] != "/{$match[1]}/i") {
+					if ($p = preg_match('/_([0-9a-f]{8})$/i', $field_value, $match) 
+						and $MYREQUEST['SEARCH'] != "/{$match[1]}/i") {
 						$url_session = parametre_url($MY_SELF, 'SEARCH', $match[1]);
 						echo "<a href='$url_session' style='float: right'>[session]</a>";
 					}
 					if ($MYREQUEST['EXTRA'] and ($sh != $MYREQUEST["SH"]) // sinon yaura un zoom après et c'est inutile de répéter ici
-						and apcu_exists($entry['info']) and ($data = apcu_fetch($entry['info'], $success)) and $success and is_array($data) and (count($data) == 1) and is_serialized($data[0])) {
-						$data  = unserialize($data[0]);
+						and (($tried_get_apc_data and $success)
+							or (!$tried_get_apc_data 
+								and ($data = get_apc_data($entry['info'], $success))))) {
 						$extra = null;
 						$liens = '';
 						if (is_array($data)) {
@@ -1293,7 +1348,7 @@ EOB;
 							}
 						}
 						if ($extra = print_contexte($extra, 1))
-							echo "<br><xmp>    $extra</xmp>";
+							echo "<br><xmp>$extra</xmp>";
 						if ($liens)	// inutilisé désormais en fait
 							echo "<small style='float:right'>$liens</small>";
 					}
@@ -1324,22 +1379,22 @@ EOB;
 					echo '</tr>';
 					if ($sh == $MYREQUEST["SH"]) { // Le ZOOM sur une entrée
 						echo '<tr>';
-						echo '<td colspan="7"><pre>';
+						echo '<td colspan="7">';
 						
 						if (isset($_GET['ZOOM']) and ($_GET['ZOOM'] == 'TEXTECOURT')) {
 							$url      = parametre_url($self, 'ZOOM', 'TEXTELONG') . "#key-$sh";
-							$menuzoom = "<a href='$url'>[Voir tout le texte]</a> ";
+							$menuzoom = "<a href='$url' class='menuzoom'>Voir tout le texte</a> ";
 						} else {
 							$url      = parametre_url($self, 'ZOOM', 'TEXTECOURT') . "#key-$sh";
-							$menuzoom = "<a href='$url'>[Voir texte abbrégé]</a> ";
+							$menuzoom = "<a href='$url' class='menuzoom'>Voir texte abbrégé</a> ";
 						}
 						$url = parametre_url($self, 'SH', '') . "#key-$sh";
-						$menuzoom .= "<a href='$url'>[Replier]</a>";
+						$menuzoom .= "<a href='$url' class='menuzoom'>Replier</a>";
 						
 						if (apcu_exists($entry['info'])) {
 							$d = apcu_fetch($entry['info'], $success);
 							if ($success) {
-								echo $menuzoom . "<br>";
+								echo "<p>$menuzoom</p>";
 								if (is_array($d) and (count($d) == 1) and is_serialized($d[0]))
 									echo "<xmp>" . spipsafe_unserialize($d[0]) . "</xmp>";
 								else
@@ -1348,7 +1403,7 @@ EOB;
 								echo "fetch failed";
 						} else
 							echo '(doesnt exist)';
-						echo '</pre></td>';
+						echo '</td>';
 						echo '</tr>';
 					}
 					$i++;
@@ -1440,14 +1495,11 @@ EOB;
 		
 }
 
-echo <<< EOB
-	</div>
-EOB;
-
 ?>
 
-<!-- <?php
-echo "\nBased on APCGUI By R.Becker\n$VERSION\n";
-?> -->
+	</div>
+<!--
+Based on APCGUI By R.Becker\n$VERSION
+-->
 </body>
 </html>
