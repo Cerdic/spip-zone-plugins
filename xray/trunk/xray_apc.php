@@ -145,6 +145,13 @@ function bouton_objet($objet, $id_objet, $extra)
 			title=\"" . attribut_html(generer_info_entite($id_objet, $objet, 'titre', 'etoile')) . "\">[voir $objet_visible]</a>";
 }
 
+if (!function_exists('plugin_est_actif')) {
+	function plugin_est_actif($prefixe) {
+		$f = chercher_filtre('info_plugin');
+		return $f($prefixe, 'est_actif');
+	}
+}
+
 ////////////////////////////////////////////////////////////////////////
 
 // "define if not defined"
@@ -191,7 +198,9 @@ $vardom = array(
 	'TYPECACHE' => '/^(|ALL|SESSIONS|SESSIONS_AUTH|SESSIONS_NONAUTH|FORMULAIRES)$/', //
 	'ZOOM' => '/^(|TEXTECOURT|TEXTELONG)$/', //
 	'WHERE' => '/^(|ALL|HTML|META)$/', // recherche dans le contenu
-	'EXTRA' => '/^(|CONTEXTE|CONTEXTES_SPECIAUX|INFO_AUTEUR|INVALIDEURS|INVALIDEURS_SPECIAUX|INCLUSIONS)$/' //
+	'EXTRA' => '/^(|CONTEXTE|CONTEXTES_SPECIAUX|INFO_AUTEUR|INVALIDEURS|INVALIDEURS_SPECIAUX|INCLUSIONS'
+		.(plugin_est_actif('macrosession') ? '|MACROSESSIONS' : '')
+		.')$/'		// Affichage pour chaque élément de la liste
 );
 
 // cache scope
@@ -1116,6 +1125,7 @@ EOB;
 			<option value=INVALIDEURS ', $MYREQUEST['EXTRA'] == 'INVALIDEURS' ? ' selected' : '', '>Invalideurs</option>
 			<option value=INVALIDEURS_SPECIAUX ', $MYREQUEST['EXTRA'] == 'INVALIDEURS_SPECIAUX' ? ' selected' : '', '>Invalideurs spécifiques</option>
 			<option value=INCLUSIONS ', $MYREQUEST['EXTRA'] == 'INCLUSIONS' ? ' selected' : '', '>&lt;INCLURE&gt;</option>
+			<option value=MACROSESSIONS ', $MYREQUEST['EXTRA'] == 'MACROSESSIONS' ? ' selected' : '', '>#_SESSION</option>
 		</select>
 		<p><b>Types cache:</b> 
 		<select name=TYPECACHE  onChange="form.submit()">
@@ -1137,7 +1147,7 @@ EOB;
 		</select>
 		&nbsp;&nbsp;&nbsp;
 		Chercher: <input name=SEARCH value="', $MYREQUEST['SEARCH'], '" type=text size=25/>
-		<label>Dans:</label>
+		<b>Dans:</b>
 		<select name=WHERE onChange="form.submit()">
 			<option value="" ', $MYREQUEST['WHERE'] == '' ? ' selected' : '', '>Noms des caches</option>
 			<option value="ALL" ', $MYREQUEST['WHERE'] == 'ALL' ? ' selected' : '', '>Tout le contenu</option>
@@ -1344,6 +1354,14 @@ EOB;
 									$extra = $matches[1];
 								else
 									$extra = '(aucune inclusion)';
+								break;
+							case 'MACROSESSIONS' :
+								if (!isset ($data['texte']))
+									$extra = '(html non défini)';
+								elseif (preg_match_all("/pipelined_session_get\((['\"a-z0-9\s_\-\.\/,]+)\)/", $data['texte'], $matches))
+									$extra = $matches[1];
+								else
+									$extra = '(aucune macrosession)';
 								break;
 							}
 						}
