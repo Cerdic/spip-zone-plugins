@@ -31,17 +31,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_select_licence' => 'Choisissez une licence',
-	'lien_art_libre' => 'http://artlibre.org/licence/lal',
-	'lien_cc0' => 'http://creativecommons.org/publicdomain/zero/1.0/deed.fr',
-	'lien_cc_by' => 'http://creativecommons.org/licenses/by/3.0/deed.fr',
-	'lien_cc_by_nc' => 'http://creativecommons.org/licenses/by-nc/3.0/deed.fr',
-	'lien_cc_by_nc_nd' => 'http://creativecommons.org/licenses/by-nc-nd/3.0/deed.fr',
-	'lien_cc_by_nc_sa' => 'http://creativecommons.org/licenses/by-nc-sa/3.0/deed.fr',
-	'lien_cc_by_nd' => 'http://creativecommons.org/licenses/by-nd/3.0/deed.fr',
-	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/3.0/deed.fr',
-	'lien_gfdl' => 'http://www.gnu.org/licenses/fdl.html',
-	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html',
-	'lien_publicdomain' => 'http://creativecommons.org/publicdomain/mark/1.0/deed.fr',
+	'lien_art_libre' => 'http://artlibre.org',
+	'lien_cc0' => 'https://creativecommons.org/publicdomain/zero/1.0/deed.fr',
+	'lien_cc_by' => 'https://creativecommons.org/licenses/by/3.0/deed.fr',
+	'lien_cc_by_nc' => 'https://creativecommons.org/licenses/by-nc/3.0/deed.fr',
+	'lien_cc_by_nc_nd' => 'https://creativecommons.org/licenses/by-nc-nd/3.0/deed.fr',
+	'lien_cc_by_nc_sa' => 'https://creativecommons.org/licenses/by-nc-sa/3.0/deed.fr',
+	'lien_cc_by_nd' => 'https://creativecommons.org/licenses/by-nd/3.0/deed.fr',
+	'lien_cc_by_sa' => 'https://creativecommons.org/licenses/by-sa/3.0/deed.fr',
+	'lien_gfdl' => 'https://www.gnu.org/licenses/fdl.html',
+	'lien_gpl' => 'https://www.gnu.org/copyleft/gpl.html',
+	'lien_publicdomain' => 'https://creativecommons.org/publicdomain/mark/1.0/deed.fr',
 	'lien_whfpl' => 'http://sam.zoy.org/lprab/',
 
 	// N
