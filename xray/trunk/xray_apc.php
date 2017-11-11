@@ -135,12 +135,12 @@ function print_contexte($extra, $tostring)
 					$title = "Squelette compilé : cache intermédiaire en php";
 					break;
 				case 'source' :
-					$source = $match[2];
+					$source = '../'.$match[2];
 					$title = "Source du squelette SPIP, avec boucles, balises etc";
 					break;
 				}
 				return "[{$match[1]}] => </xmp><a title='{$title}' 
-							href='".generer_url_ecrire('xray', "SOURCE=../$source")."' 
+							href='".generer_url_ecrire('xray', "SOURCE=$source")."' 
 							target='blank'><xmp>{$match[2]}</xmp></a><xmp>";
 			}, $print);
 	}
@@ -604,6 +604,7 @@ if (isset($MYREQUEST['IMG'])) {
 }
 
 if (isset($MYREQUEST['SOURCE']) and $MYREQUEST['SOURCE']) {
+	echo "<pre>".substr($MYREQUEST['SOURCE'], 3)."</pre><hr><br>";
 	echo "<xmp>".file_get_contents ($MYREQUEST['SOURCE'])."</xmp>";
 	exit;
 }
