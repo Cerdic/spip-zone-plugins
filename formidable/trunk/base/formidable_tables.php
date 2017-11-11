@@ -98,7 +98,7 @@ function formidable_declarer_tables_objets_sql($tables) {
 		),
 		'texte_changer_statut' => 'formidable:changer_statut',
 		'rechercher_champs' => array(
-		  'titre' => 5, 'descriptif' => 3
+		  'titre' => 5, 'descriptif' => 3, 'identifiant' => 3,
 		),
 		'statut_titres' => array(
 			'prop'=>'info_article_propose',
