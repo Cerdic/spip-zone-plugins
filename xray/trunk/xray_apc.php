@@ -121,9 +121,28 @@ function print_contexte($extra, $tostring)
 		$print = trim(substr($print, 5), " (\n\r\t");
 		$print = substr ($print, 0, -1);
 		$print = preg_replace_callback("/\[id_([a-z\-_]+)\]\s*=>\s*(\d+)$/im", function($match) use ($extra)
-		{
-			return $match[0] . '</xmp>' . bouton_objet($match[1], $match[2], $extra) . '<xmp>';
-		}, $print);
+			{
+				return $match[0] . '</xmp>' . bouton_objet($match[1], $match[2], $extra) . '<xmp>';
+			}, $print);
+		// [squelette] => html_5731a2e40776724746309c16569cac40
+		$print = preg_replace_callback("/\[(squelette|source)\]\s*=>\s*(html_[a-f0-9]+|[a-z0-9_\.\/\-]+\.html)$/im", function($match)
+			{
+				if (!defined('_SPIP_ECRIRE_SCRIPT'))
+					spip_initialisation_suite();
+				switch ($match[1]) {
+				case 'squelette' : // cache squelette intermédiaire, en php
+					$source = trim(_DIR_CACHE, '/').'/skel/'.$match[2].'.php';
+					$title = "Squelette compilé : cache intermédiaire en php";
+					break;
+				case 'source' :
+					$source = $match[2];
+					$title = "Source du squelette SPIP, avec boucles, balises etc";
+					break;
+				}
+				return "[{$match[1]}] => </xmp><a title='{$title}' 
+							href='".generer_url_ecrire('xray', "SOURCE=../$source")."' 
+							target='blank'><xmp>{$match[2]}</xmp></a><xmp>";
+			}, $print);
 	}
 	$print=preg_replace('/^    /m', '', $print);
 	if ($tostring)
@@ -164,6 +183,7 @@ function defaults($d, $v)
 // rewrite $PHP_SELF to block XSS attacks
 //
 $PHP_SELF = isset($_SERVER['PHP_SELF']) ? htmlentities(strip_tags($_SERVER['PHP_SELF'], ''), ENT_QUOTES, 'UTF-8') : '';
+
 $time     = time();
 $host     = php_uname('n');
 if ($host) {
@@ -187,6 +207,7 @@ $vardom = array(
 	'SH' => '/^[a-z0-9]*$/', // shared object description
 	
 	'IMG' => '/^[123]$/', // image to generate
+	'SOURCE' => '/^[a-z0-9\-_\/\.]+$/', // file source to display
 	'LO' => '/^1$/', // login requested
 	
 	'COUNT' => '/^\d+$/', // number of line displayed in list
@@ -579,6 +600,11 @@ if (isset($MYREQUEST['IMG'])) {
 	
 	header("Content-type: image/png");
 	imagepng($image);
+	exit;
+}
+
+if (isset($MYREQUEST['SOURCE']) and $MYREQUEST['SOURCE']) {
+	echo "<xmp>".file_get_contents ($MYREQUEST['SOURCE'])."</xmp>";
 	exit;
 }
 
