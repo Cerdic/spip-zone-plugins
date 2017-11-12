@@ -1,6 +1,6 @@
 <?php
 /**
- * Utilisations de pipelines par foundation-4-spip
+ * Utilisations de pipelines
  *
  * @plugin     foundation_6
  * @copyright  2013
