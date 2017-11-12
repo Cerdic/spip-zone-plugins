@@ -70,6 +70,9 @@
 ][(#ENV{og-type}|sinon{article}|=={article}|oui)[<meta property="article:published_time" content="(#ENV{date}|affdate{Y-m-d})" />]
 [<meta property="article:author" content="(#ENV{author, #ENV{auteur}}|attribut_html)" />
 ]][<meta property="og:image" content="(#GET{logo}|url_absolue)">
+[(#REM) Optionnel, mais quand même cool ]
+[<meta property="og:image:width" content="(#GET{logo}|largeur)">]
+[<meta property="og:image:height" content="(#GET{logo}|hauteur)">]
 ][<meta property="og:site_name" content="(#NOM_SITE_SPIP|attribut_html)" />][(#REM)
 
 	Prise en charge du plugin facebook : s'il est présent, on envoie la méta fb:app_id
