@@ -96,6 +96,7 @@ function type_noisette_charger($plugin, $dossier = 'noisettes/', $recharger = fa
 				include_spip('inc/yaml');
 				$description = yaml_charger_inclusions(yaml_decode_file($_chemin));
 
+				// TODO : ne faudrait-il pas "valider" le fichier YAML ici ou alors lors du stockage ?
 				// Traitements des champs pouvant être soit une chaine soit un tableau
 				if (!empty($description['necessite']) and is_string($description['necessite'])) {
 					$description['necessite'] = array($description['necessite']);

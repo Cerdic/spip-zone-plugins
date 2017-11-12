@@ -389,7 +389,7 @@ function ncore_noisette_completer($plugin, $description, $stockage = '') {
 
 
 /**
- * Positionne une noisette à un rang différent que celui qu'elle occupe dans le conteneur.
+ * Positionne une noisette à un rang différent de celui qu'elle occupe dans le conteneur.
  *
  * @package SPIP\NCORE\SERVICE\NOISETTE
  *
