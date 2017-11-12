@@ -39,11 +39,7 @@ function foundation_6_insert_head_css($flux) {
 function foundation_6_affichage_final($flux) {
 	include_spip('inc/config');
 	if (lire_config('foundation_6/javascript')) {
-		if (_FOUNDATION_SASS) {
-			$js = recuperer_fond('inclure/js-foundation-app');
-		} else {
-			$js = recuperer_fond('inclure/js-foundation');
-		}
+		$js = '<script async src="'.minifier(produire_fond_statique('javascript/spip.foundation.js'), 'js').'" type="text/javascript"></script>';
 		$pos_body = strpos($flux, '</body>');
 
 		if ($pos_body) {
