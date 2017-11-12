@@ -74,6 +74,18 @@ $GLOBALS['formulaires']['editer_formulaire'] = array(
 			'explication' => '<:formidable:editer_redirige_url_explication:>',
 			'obligatoire' => 'non'
 		)
+	),
+	array(
+		'saisie' => 'radio',
+		'options' => array(
+			'nom' => 'anonymat',
+			'label' => '<:formidable:editer_anonymat:>',
+			'explication' => '<:formidable:editer_anonymat_explication:>',
+			'datas' => array(
+				'oui' => '<:item_oui:>',
+				'' => '<:item_non:>'
+			)		
+		)
 	)
 );
 

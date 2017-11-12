@@ -59,6 +59,14 @@ function formidable_upgrade($nom_meta_version_base, $version_cible){
 			echo "Mise à jour du plugin formidable en version 0.5.2<br/>";
 			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 		}
+		// Ajout de l'anonymat des réponses
+		if (version_compare($version_actuelle,$version_cible='0.5.3','<')){	
+			include_spip('base/create');
+			maj_tables('spip_formulaires');
+			
+			echo "Mise à jour du plugin formidable en version 0.5.3<br/>";
+			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
+		}
 	}
 	
 }

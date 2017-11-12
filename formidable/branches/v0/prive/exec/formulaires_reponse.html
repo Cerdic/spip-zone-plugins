@@ -33,7 +33,10 @@
 	[(#SET{formulaire,<a href="[(#URL_ECRIRE{formulaires_voir,id_formulaire=#ID_FORMULAIRE})]">[(#INFO_TITRE{formulaire,#ID_FORMULAIRE})]</a>})]
 	[(#SET{date,#DATE|affdate_jourcourt|concat{#DATE|affdate{", H:i"}}})]
 	<h1>
-		<:formidable:reponse_intro{auteur=#GET{auteur}, formulaire=#GET{formulaire}}:>
+		<BOUCLE_Anonymat(FORMULAIRES){id_formulaire}>
+		#SET{lauteur,(#ANONYMAT|?{'Anonyme',#GET{auteur}})}
+		<:formidable:reponse_intro{auteur=#GET{lauteur}, formulaire=#GET{formulaire}}:>
+		</BOUCLE_Anonymat>
 	</h1>
 	<strong>#GET{date}</strong>
 	<div class="nettoyeur"></div>

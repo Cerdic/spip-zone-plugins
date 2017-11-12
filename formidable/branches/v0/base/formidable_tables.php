@@ -33,7 +33,8 @@ function formidable_declarer_tables_principales($tables_principales){
 		"statut" => "varchar(10) NOT NULL default ''",
 		"maj" => "timestamp",
 		"apres" => "varchar(12) NOT NULL default ''",
-		"url_redirect" => "varchar(255)"
+		"url_redirect" => "varchar(255)",
+		"anonymat" => "varchar(3) NOT NULL default ''"
 	);
 	$formulaires_cles = array(
 		"PRIMARY KEY" => "id_formulaire"
