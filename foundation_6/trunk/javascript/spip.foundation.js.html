@@ -79,4 +79,5 @@ onAjaxLoad(function() {
 });
 
 [(#CHEMIN{javascript/foundation_perso.js.html}|oui)
-#PRODUIRE{fond=javascript/foundation_perso.js}]
+[(#PRODUIRE{fond=javascript/foundation_perso.js}|supprimer_timestamp|file_get_contents)]
+]
