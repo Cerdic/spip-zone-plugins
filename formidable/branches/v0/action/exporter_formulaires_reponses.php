@@ -39,10 +39,7 @@ function action_exporter_formulaires_reponses_dist($arg=null) {
 		foreach ($reponses as $reponse){
 			// Est-ce qu'il y a un auteur avec un nom
 			$nom_auteur = '';
-			if ($formulaire['anonymat']) {
-				$nom_auteur = 'Anonyme';
-				$reponse['ip'] = 'Anonyme';
-			} else if ($id_auteur = intval($reponse['id_auteur'])){
+			if ($id_auteur = intval($reponse['id_auteur'])){
 				$nom_auteur = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur = '.$id_auteur);
 			}
 			if (!$nom_auteur) $nom_auteur = '';
