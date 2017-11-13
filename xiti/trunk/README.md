@@ -34,6 +34,10 @@
 
 ### Version 2.x.x (Passage à smarttag.js)
 
+#### Version 2.3.1 (2017-11-13)
+
+- Compatibilité SPIP 3.2.x
+
 #### Version 2.3.0 (2017-10-17)
 
 * Permettre d'utiliser le [marqueur asynchone](https://developers.atinternet-solutions.com/javascript-en/advanced-features-javascript-en/asynchronous-tag-javascript-en/), c'est une checkbox à activer dans la configuration

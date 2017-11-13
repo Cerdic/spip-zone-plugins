@@ -1,10 +1,10 @@
 <paquet
 	prefix="xiti"
 	categorie="statistique"
-	version="2.3.0"
+	version="2.3.1"
 	schema="2.0.0"
 	etat="stable"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/xiti-32.png"
 	documentation="https://contrib.spip.net/XiTi-pour-SPIP-2"
 >
