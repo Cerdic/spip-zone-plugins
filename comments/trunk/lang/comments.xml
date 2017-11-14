@@ -7,10 +7,11 @@
 	</langue>
 	<langue code="ca" url="https://trad.spip.net/tradlang_module/comments?lang_cible=ca" total="37" traduits="20" relire="0" modifs="1" nouveaux="16" pourcent="54.05">
 	</langue>
-	<langue code="de" url="https://trad.spip.net/tradlang_module/comments?lang_cible=de" total="37" traduits="35" relire="0" modifs="1" nouveaux="1" pourcent="94.59">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/comments?lang_cible=de" total="37" traduits="37" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
 	<langue code="en" url="https://trad.spip.net/tradlang_module/comments?lang_cible=en" total="37" traduits="37" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="Gilles" lien="https://trad.spip.net/auteur/gilles" />
