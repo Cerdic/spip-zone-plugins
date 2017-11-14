@@ -32,8 +32,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende_supprimer_ok' => 'Nota excluída',
 
 	// M
-	'msg_yadesnotes' => '@nb@ notas estão vinculadas à imagem. Passe o mouose sobre a imagem para exibir as notas.',
-	'msg_yaunenote' => 'Uma nota está vinculada à imagem. Passe o mouose sobre a imagem para exibir a nota.',
+	'msg_yadesnotes' => '@nb@ notas estão vinculadas à imagem. Passe o mouse sobre a imagem para exibir as notas.',
+	'msg_yaunenote' => 'Uma nota está vinculada à imagem. Passe o mouse sobre a imagem para exibir a nota.',
 
 	// T
 	'texte_legende' => 'Texto da nota'
