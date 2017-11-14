@@ -33,7 +33,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_adresse_existante' => 'Dit e-mailadres staat al in de lijst',
+	'erreur_adresse_existante_editer' => 'Dit adres is al geregistreerd - <a href="@url@"> Pas deze gebruiker aan</a>',
 	'erreur_technique_subscribe' => 'Een technische fout maakt inschrijving niet mogelijk.',
+	'explication_listes_diffusion_option_defaut' => 'Een of meer lijstidentificaties gescheiden door een komma',
+	'explication_listes_diffusion_option_statut' => 'De lijsten filteren op status',
 	'explication_to_email' => 'Een voor-inschrijvingsbericht emailen naar de volgende adressen (meerdere adressen, gescheiden door een komma).',
 
 	// I
@@ -63,6 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_inscription' => 'Inschrijving',
 	'label_lang' => 'Taal',
 	'label_listes' => 'Lijsten',
+	'label_listes_diffusion_option_statut' => 'Status',
 	'label_listes_import_subscribers' => 'In de lijsten inschrijven',
 	'label_mailsubscriber_optin' => 'Ik wil de nieuwsbrief ontvangen',
 	'label_message_invite_email_subscribe' => 'Begeleidende tekst van de verzonden email',
