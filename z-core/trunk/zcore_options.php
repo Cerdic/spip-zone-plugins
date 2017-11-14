@@ -78,6 +78,9 @@ function responsive_logo($logo) {
 		return $logo;
 	}
 	list($h, $w) = taille_image($img);
+	if (!$h or !$w) {
+		return $logo;
+	}
 	$src = extraire_attribut($img, "src");
 	$class = extraire_attribut($img, "class");
 
