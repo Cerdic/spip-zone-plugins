@@ -1,7 +1,7 @@
 <paquet
 	prefix="emogrifier"
 	categorie="outil"
-	version="1.0.8"
+	version="1.0.9"
 	etat="test"
 	compatibilite="[3.0.5;3.2.*]"
 	documentation="https://github.com/bystrano/emogrifier"
@@ -16,5 +16,7 @@
 	<auteur lien='http://vertige.org'>Vertige ASBL</auteur>
 
 	<licence>GNU/GPL</licence>
+	
+	<necessite nom="php" compatibilite="[5.5;]" />
 
 </paquet>
