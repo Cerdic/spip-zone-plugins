@@ -1,5 +1,5 @@
 <traduction module="facteur" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/facteur/trunk/lang/" reference="fr">
-	<langue code="de" url="https://trad.spip.net/tradlang_module/facteur?lang_cible=de" total="55" traduits="54" relire="1" modifs="0" nouveaux="0" pourcent="98.18">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/facteur?lang_cible=de" total="55" traduits="55" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
