@@ -1,4 +1,7 @@
 <traduction module="memoization" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/memoization/trunk/lang/" reference="fr">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/memoization?lang_cible=de" total="42" traduits="42" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
+	</langue>
 	<langue code="en" url="https://trad.spip.net/tradlang_module/memoization?lang_cible=en" total="42" traduits="25" relire="0" modifs="0" nouveaux="17" pourcent="59.52">
 		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
