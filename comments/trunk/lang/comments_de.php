@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_label_apparence_permalien_diese' => 'Hashtag (#)',
 	'cfg_label_apparence_permalien_picto' => 'Piktogramm',
 	'cfg_label_email_obligatoire' => 'Angabe einer Mailadresse vorschreiben',
+	'cfg_label_nom_obligatoire' => 'Eingabe eines Namens oder Pseudonyms erzwingen',
 	'cfg_label_presentation_fil' => 'Darstellung des Diskussionsstrangs',
 	'cfg_label_presentation_fil_liste' => 'Flache Kommentarliste',
 	'cfg_label_presentation_fil_thread' => 'Kommentare als Diskussionsstränge anzeigen (Threads)',
@@ -55,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_comment_ok' => 'Vielen Dank für Ihren Kommentar!',
 
 	// S
-	'saisie_texte_info' => 'Dieses Feld akzeptiert SPIP-Abkürzungen <code>[-&gt;urls] {{bold}} {italics} &lt;quotes&gt; &lt;code&gt;</code> und HTML-Codes <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>.', # MODIF
+	'saisie_texte_info' => 'Dieses Feld akzeptiert SPIP-Abkürzungen <code>{{gras}}</code> <code>{italique}</code> <code>-*liste</code> <code>[texte-&gt;url]</code> <code>&lt;quote&gt;</code> <code>&lt;code&gt;</code> et le code HTML <code>&lt;q&gt;</code> <code>&lt;del&gt;</code> <code>&lt;ins&gt;</code>.  Absätze anlegen mit Leerzeilen.',
 	'saisie_texte_legend' => 'Hinterlassen Sie Ihren Kommentar hier.',
 	'submit1' => 'Vorschau',
 	'submit2' => 'Abschicken',
