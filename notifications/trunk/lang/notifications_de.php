@@ -9,11 +9,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// A
+	'alt_logo_conf' => 'Logo des Plugins Benachrichtigungen',
+
 	// 0
 	'0' => '--------------',
 
 	// A
-	'alt_logo_conf' => 'Logo des Plugins Benachrichtigungen',
 	'article_prive' => 'Artikel veröffentlichen',
 	'article_prive_admins_restreints' => '<strong>Rubrikadmins</strong> : Rubrikadmins erhalten eine Nachricht wenn Artikel in den von ihnen verwalteten Rubriken vorgeschlagen werden. Die Einstellung für Haupt-Admins werden im <a href="?exec=configurer_interactions#suivi_edito_non">SPIP-eigenen Konfigurationsmodul</a> gemacht.',
 	'article_prive_auteurs' => '<strong>Autoren</strong> : Autoren werden benachrichtigt, wenn ihre Artikel vorgeschlagen oder gelöscht werden.',
@@ -75,6 +77,9 @@ Sie hat folgende Adresse :',
 	'forums_public_thread' => '<strong>Diskussionsstrang</strong> (Thread): Teilnehmer eines Diskussionsstrangs erhalten Benachrichtigungen aus öffentlichen Foren. Gelöschte und als SPAM markierte Beiträge werden nicht berücksichtigt',
 
 	// I
+	'info_diffusion_nouveaute_partielle_non' => 'Vollständigen Inhalt senden',
+	'info_diffusion_nouveaute_partielle_oui' => 'Nur einen Auszug senden',
+	'info_diffusion_nouveautes' => 'Inhalt der Mails zu neuen Inhalten der Website',
 	'info_lien_publier_commentaire' => 'Beitrag veröffentlichen',
 	'info_lien_signaler_spam_commentaire' => 'Als SPAM markieren',
 	'info_lien_supprimer_commentaire' => 'Beitrag löschen',
@@ -94,12 +99,14 @@ Sie hat folgende Adresse :',
 	'inscription_statut_webmestres' => 'Webmaster',
 
 	// L
-	'lien_documentation' => '<a href="http://contrib.spip.net/Notifications" class="spip_out">siehe Dokumentation</a>', # MODIF
+	'lien_documentation' => '<a href="https://contrib.spip.net/Notifications" class="spip_out">siehe Dokumentation</a>',
 	'limiter_rubriques_explication' => 'Geben Sie hier die IDs der Rubriken an, für die Benachrichtigungen aktiviert werden. Trennen Sie mehrer Angaben mit Komma : "11,26"',
 	'limiter_rubriques_label' => 'Auf diese Rubriken beschränken :',
 
 	// M
 	'message_a_valider' => 'Nachricht bestätigen : ',
+	'message_fin_explication' => 'Nachricht am Ende der Email (Mit ihr wird den Empfängern erläutert, warum sie die Mail erhalten, wie sie abbestellen können …)',
+	'message_fin_label' => 'Nachsatz der Email: ',
 	'message_spam_a_confirmer' => 'SPAM bestätigen : ',
 	'message_voir_configuration' => 'Konfiguration der Benachrichtigungen anzeigen',
 	'messagerie_interne' => 'Internes Nachrichtensystem',
