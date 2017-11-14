@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'afficher_tickets' => 'عرض التذاكر',
+	'ajout_deux_points' => '@texte@: ',
 	'assignation_attribuee_a' => 'تم تكليف @nom@ بالتذكرة.',
 	'assignation_attribuee_a_personne' => 'لم يتم إحالة التذكرة الى أحد.',
 	'assignation_mail_titre' => 'تغيير التكليف بالتذكرة',
@@ -23,11 +24,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'autres_tickets_ouverts' => 'التذاكر المفتوحة الأخرى',
 
 	// C
+	'cfg_bouton_radio_aucune_colonne' => 'بدون أعمدة',
 	'cfg_bouton_radio_desactiver_forum_public' => 'إبطال استخدام المنتديات العامة.',
+	'cfg_bouton_radio_une_colonne_par_groupe' => 'عمود لكل مجموعة مفاتيح',
+	'cfg_bouton_radio_une_colonne_par_groupe_important' => 'عمود لكل مجموعة مفاتيح مهمة',
+	'cfg_bouton_radio_une_colonne_pour_tous_les_groupes' => 'عمود واحد يحتوي على كل مجموعات المفاتيح',
 	'cfg_bouton_tickets' => 'التذاكر',
 	'cfg_explication_formats_documents_ticket' => 'فصل التنسيقات بفاصلة',
 	'cfg_form_tickets_autorisations' => 'الأذون',
 	'cfg_form_tickets_general' => 'الإعدادات العامة',
+	'cfg_form_tickets_typologie' => 'تبويب',
+	'cfg_groupe_versions_aucun' => 'بدون',
 	'cfg_lbl_autorisation_auteurs' => 'السماح حسب لائحة المؤلفين',
 	'cfg_lbl_autorisation_statuts' => 'الماح حسب وضعية المؤلفين',
 	'cfg_lbl_autorisation_webmestre' => 'السماح للمشرفين على الموقع فقط',
@@ -70,7 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_maj' => 'تحديث:',
 	'champ_maj_long' => 'تاريخ التحديث',
 	'champ_maj_th' => 'تحديث',
-	'champ_navigateur' => 'المتصفح:', # MODIF
+	'champ_navigateur' => 'المتصفح',
 	'champ_nouveau_commentaire' => 'تعليق جديد',
 	'champ_projet_th' => 'المشروع',
 	'champ_recherche' => 'بحث:',
@@ -168,7 +175,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ticket' => 'التذكرة',
 	'ticket_enregistre' => 'حفظت التذكرة ',
 	'tickets' => 'التذاكر',
-	'tickets_autorisations' => 'الأذون', # MODIF
+	'tickets_autorisations' => 'الأذونات',
 	'tickets_derniers_commentaires' => 'أحدث التعليقات',
 	'tickets_sticked' => 'التذاكر اللاصقة',
 	'tickets_traites' => 'كل التذاكر المعالجة',
