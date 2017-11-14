@@ -29,13 +29,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_select_licence' => 'Escolliu una llicència',
 	'lien_art_libre' => 'http://artlibre.org/', # MODIF
-	'lien_cc_by' => 'http://creativecommons.org/licenses/by/3.0/deed.ca',
-	'lien_cc_by_nc' => 'http://creativecommons.org/licenses/by-nc/3.0/deed.ca',
-	'lien_cc_by_nc_nd' => 'http://creativecommons.org/licenses/by-nc-nd/3.0/deed.ca',
-	'lien_cc_by_nc_sa' => 'http://creativecommons.org/licenses/by-nc-sa/3.0/deed.ca',
-	'lien_cc_by_nd' => 'http://creativecommons.org/licenses/by-nd/3.0/deed.ca',
-	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/3.0/deed.ca',
-	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html',
+	'lien_cc_by' => 'http://creativecommons.org/licenses/by/3.0/deed.ca', # MODIF
+	'lien_cc_by_nc' => 'http://creativecommons.org/licenses/by-nc/3.0/deed.ca', # MODIF
+	'lien_cc_by_nc_nd' => 'http://creativecommons.org/licenses/by-nc-nd/3.0/deed.ca', # MODIF
+	'lien_cc_by_nc_sa' => 'http://creativecommons.org/licenses/by-nc-sa/3.0/deed.ca', # MODIF
+	'lien_cc_by_nd' => 'http://creativecommons.org/licenses/by-nd/3.0/deed.ca', # MODIF
+	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/3.0/deed.ca', # MODIF
+	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html', # MODIF
 
 	// S
 	'sans_licence' => 'Sense llicència', # MODIF

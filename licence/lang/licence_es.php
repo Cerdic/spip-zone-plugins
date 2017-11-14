@@ -32,16 +32,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_select_licence' => 'Escoja una licencia',
-	'lien_art_libre' => 'http://artlibre.org/licence/lal/es',
-	'lien_cc0' => 'http://creativecommons.org/publicdomain/zero/1.0/deed.es_ES',
-	'lien_cc_by' => 'http://creativecommons.org/licenses/by/3.0/deed.es',
-	'lien_cc_by_nc' => 'http://creativecommons.org/licenses/by-nc/3.0/deed.es',
-	'lien_cc_by_nc_nd' => 'http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es',
-	'lien_cc_by_nc_sa' => 'http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es',
-	'lien_cc_by_nd' => 'http://creativecommons.org/licenses/by-nd/3.0/deed.es',
-	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/3.0/deed.es',
-	'lien_gfdl' => 'http://www.gnu.org/licenses/fdl.html',
-	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html',
+	'lien_art_libre' => 'http://artlibre.org/licence/lal/es', # MODIF
+	'lien_cc0' => 'http://creativecommons.org/publicdomain/zero/1.0/deed.es_ES', # MODIF
+	'lien_cc_by' => 'http://creativecommons.org/licenses/by/3.0/deed.es', # MODIF
+	'lien_cc_by_nc' => 'http://creativecommons.org/licenses/by-nc/3.0/deed.es', # MODIF
+	'lien_cc_by_nc_nd' => 'http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es', # MODIF
+	'lien_cc_by_nc_sa' => 'http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es', # MODIF
+	'lien_cc_by_nd' => 'http://creativecommons.org/licenses/by-nd/3.0/deed.es', # MODIF
+	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/3.0/deed.es', # MODIF
+	'lien_gfdl' => 'http://www.gnu.org/licenses/fdl.html', # MODIF
+	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html', # MODIF
 	'lien_whfpl' => '[0:09:50] Quentin Drouet: http://www.wtfpl.net/',
 
 	// N
