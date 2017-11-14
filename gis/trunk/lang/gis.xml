@@ -1,33 +1,33 @@
 <traduction module="gis" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/gis/trunk/lang/" reference="fr">
-	<langue code="de" url="https://trad.spip.net/tradlang_module/gis?lang_cible=de" total="157" traduits="154" relire="0" modifs="1" nouveaux="2" pourcent="98.09">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/gis?lang_cible=de" total="160" traduits="154" relire="0" modifs="1" nouveaux="5" pourcent="96.25">
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/gis?lang_cible=en" total="157" traduits="150" relire="0" modifs="1" nouveaux="6" pourcent="95.54">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/gis?lang_cible=en" total="160" traduits="150" relire="0" modifs="1" nouveaux="9" pourcent="93.75">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="https://trad.spip.net/tradlang_module/gis?lang_cible=es" total="157" traduits="143" relire="5" modifs="3" nouveaux="6" pourcent="91.08">
+	<langue code="es" url="https://trad.spip.net/tradlang_module/gis?lang_cible=es" total="160" traduits="143" relire="5" modifs="3" nouveaux="9" pourcent="89.38">
 		<traducteur nom="alf" lien="https://trad.spip.net/auteur/alf" />
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="danielquisbert" lien="https://trad.spip.net/auteur/danielquisbert" />
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/gis?lang_cible=fr" total="157" traduits="157" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/gis?lang_cible=fr" total="160" traduits="160" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="nl" url="https://trad.spip.net/tradlang_module/gis?lang_cible=nl" total="157" traduits="157" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/gis?lang_cible=nl" total="160" traduits="157" relire="0" modifs="0" nouveaux="3" pourcent="98.13">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
-	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/gis?lang_cible=pt_br" total="157" traduits="154" relire="0" modifs="1" nouveaux="2" pourcent="98.09">
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/gis?lang_cible=pt_br" total="160" traduits="154" relire="0" modifs="1" nouveaux="5" pourcent="96.25">
 		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
-	<langue code="ru" url="https://trad.spip.net/tradlang_module/gis?lang_cible=ru" total="157" traduits="106" relire="0" modifs="3" nouveaux="48" pourcent="67.52">
+	<langue code="ru" url="https://trad.spip.net/tradlang_module/gis?lang_cible=ru" total="160" traduits="106" relire="0" modifs="3" nouveaux="51" pourcent="66.25">
 		<traducteur nom="Serge Markitanenko" lien="https://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
-	<langue code="sk" url="https://trad.spip.net/tradlang_module/gis?lang_cible=sk" total="157" traduits="121" relire="0" modifs="4" nouveaux="32" pourcent="77.07">
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/gis?lang_cible=sk" total="160" traduits="121" relire="0" modifs="4" nouveaux="35" pourcent="75.63">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 	</langue>
