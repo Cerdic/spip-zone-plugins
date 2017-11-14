@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_entrees_masquees_explication' => 'Wählen sie die Eingabefelder, die sie beim Anlegen eines Menus <strong>nicht</strong> anzeigen wollen.',
 	'configurer_titre' => 'Konfiguration der Eingabefelder des Plugins Menus',
 	'confirmer_supprimer_entree' => 'Wollen sie diesen Eintrag wirklich löschen?',
+	'confirmer_supprimer_sous_menu' => 'Wollen Sie dieses Untermenü wirklich löschen ?',
 
 	// D
 	'description_menu_accueil' => 'Link zur Startseite.',
@@ -23,9 +24,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_lien' => 'Fügt eine beliebigen Link hinzu, der entweder intern (rekative URL)oder extern (http://...) sein kann.',
 	'description_menu_mapage' => 'Wenn der Besucher angemeldet ist, füge einen Link zu seiner persönlichen Seite hinzu.',
 	'description_menu_mots' => 'Zeigt automatisch ein Menü, das die Artikel zum Schlagwort anzeigt.',
-	'description_menu_objet' => 'Link zu einem SPIP-Objekt anlegen: Artikel, Rubrik, usw. In der Grundeinstellung trägt der Eintrag den Namen des Objekts.', # MODIF
+	'description_menu_objet' => 'Link zu einem SPIP-Objekt anlegen: Artikel, Rubrik, usw. In der Grundeinstellung trägt der Eintrag den Namen des Objekts. Nur veröffentlichte Objekte werden angezeigt.',
 	'description_menu_page_speciale' => 'Fügt einen URL zu einer Skelettseite im Format  <code>spip.php?page=nom&param1=xx&param2=yyy...</code> hinzu. Diese Skelette werden von Plugins bereitgestellt',
-	'description_menu_page_speciale_zajax' => 'Fügt einen Link zu einem Block auf einer Seite hinzu, die über einen URL mit der Syntax <code>spip.php?page=nom¶m1=xx¶m2=yyy...</code> erreichbar ist. Dazu sind ein Skelett des Typs Z und das Plugin <a href="http://contrib.spip.net/MediaBox">médiabox</a> Voraussetzung.', # MODIF
+	'description_menu_page_speciale_zajax' => 'Fügt einen Link zu einem Block auf einer Seite hinzu, die über einen URL mit der Syntax <code>spip.php ?page=nom&param1=xx&param2=yyy...</code> erreichbar ist. Dazu sind ein Skelett des Typs Z und das Plugin <a href="https://contrib.spip.net/MediaBox">médiabox</a> Voraussetzung.',
 	'description_menu_rubriques_articles' => 'Zeigt einen Liste der Rubriken und auf Wunsch der Unterrubriken und Artikel als Hierarchie an. In der Grundeinstellung werden alle Rubriken von der obersten Ebene an dargestellt. Sie werden nach Titeln (zuerst numerisch und dann alphabetisch) sortiert. Artikel werden immer hinter den Rubriken angezeigt.',
 	'description_menu_rubriques_completes' => 'Zeigt eine Liste der Rubriken und, wenn gewünscht, der Unterrubriken auf mehreren Ebenen an. Die Standardeinstellung zeigt alle Rubriken sortiert nach Titel an (mit Ordnungszahl nummerierte zuerst).',
 	'description_menu_secteurlangue' => 'Dieser Eintrag bezieht sich aud die Sites, welche pro Sprache ein Hauptrubrik verwenden. Er zeigt ein Menü mit allen Rubriken des Sektors, die mit der Sprache übereinstimmen, wenn erfordelich auf über mehrere Niveaus. In der Grundeinstelung werden alle Rubriken ab der obersten Ebene nach Titel (numerisch und anschließend alphanumerisch) sortiert angezeigt.',
@@ -57,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_rubriques_exclues' => 'Nummern der auszuschließenden Rubriken, getrennt durch Semikolons.',
 	'entree_id_secteur_exclus' => 'Nummern der auszuschließenden Sektoren, getrennt mit Kommata',
 	'entree_infini' => 'Unendlich',
+	'entree_lien_direct_articles_uniques' => 'Wenn "ja" und wenn alleinstehende Artikel maskiert sind, einen Link zu diesem Artikel erzeugen ? (dazu "oui" eintragen)',
 	'entree_mapage' => 'Meine eigene Seite',
 	'entree_masquer_articles_uniques' => 'Wenn ja und falls die Rubrik nur einen Artikel enthält wird dieser maskiert ("oui" eintragen wenn gewünscht).',
 	'entree_niveau' => 'Tiefe der Unterrubriken',
@@ -166,5 +168,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'tous_les_articles' => '... alle Artikel',
-	'toutes_les_rubriques' => '... alle Rubriken'
+	'toutes_les_rubriques' => '... alle Rubriken',
+
+	// U
+	'utiles_explication' => 'Folgende Menüs können für Seiten-Skelette verwendet werden.',
+	'utiles_generer_menu' => 'Menü <strong>@titre@ (<em>@identifiant@</em>)</strong> anlegen',
+	'utiles_generer_menus' => '<strong>Alle</strong> praktischen Menüs anlegen',
+	'utiles_titre' => 'Praktische Menüs'
 );
