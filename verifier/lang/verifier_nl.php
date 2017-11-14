@@ -9,6 +9,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// D
+	'data_choix' => 'Mogelijke keuzes:',
+
 	// E
 	'erreur_code_postal' => 'Deze postcode is ongeldig.',
 	'erreur_comparaison_egal' => 'De waarde moet gelijk zijn aan het veld "@nom_champ@"',
@@ -129,7 +132,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_url_type_protocole_web' => 'Web protocols: HTTP of HTTPS',
 	'option_url_type_protocole_webcal' => 'Webcal protocols: webcal, http of https',
 
+	// P
+	'par_defaut' => 'Standaard:',
+	'plugin_yaml_inactif' => 'Plugin YAML is niet aanwezig en/of actief. Deze is benodigd om deze bladzijde van de documentatie te tonen.',
+
 	// T
+	'titre_page_verifier_doc' => 'Documentatie van de verificatie-API',
 	'type_code_postal' => 'Postcode',
 	'type_code_postal_description' => 'Controleer of de waarde een geldige postcode is.',
 	'type_comparaison_champ' => 'Vergelijking',
@@ -163,5 +171,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_telephone' => 'Telefoonnumber',
 	'type_telephone_description' => 'Controleer of het telefoonnummer met een herkend formaat overeen komt.',
 	'type_url' => 'URL',
-	'type_url_description' => 'Controleer of de URL een herkend formaat heeft.'
+	'type_url_description' => 'Controleer of de URL een herkend formaat heeft.',
+
+	// V
+	'verification_a_faire' => 'Uit te voeren verificatie:'
 );
