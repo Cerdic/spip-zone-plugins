@@ -109,6 +109,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_label_case_label' => 'Label staat naast de checkbox',
 	'option_label_explication' => 'De titel die zal worden weergegeven.',
 	'option_label_label' => 'Label',
+	'option_label_non_explication' => 'Zal bij weergave van de resultaten zichtbaar zijn.',
+	'option_label_non_label' => 'Label wanneer de checkbox niet is geselecteerd',
+	'option_label_oui_explication' => 'Zal bij weergave van de resultaten zichtbaar zijn.',
+	'option_label_oui_label' => 'Label wanneer de checkbox is geselecteerd',
 	'option_limite_branche_explication' => 'Beperk de keuze tot een specifieke tak van de site',
 	'option_limite_branche_label' => 'Tot één tak (hoofdrubriek) beperken',
 	'option_maxlength_explication' => 'De gebruikers kan niet meer tekens invoeren dan dit aantal.',
@@ -143,9 +147,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_label' => 'Veldtype',
 	'option_type_password' => 'Verborgen tekst tijdens invoer (bv: wachtwoord)',
 	'option_type_text' => 'Normaal',
-	'option_valeur_non_explication' => 'Geposte waarde wanneer de checkbox niet wordt geselecteerd', # MODIF
+	'option_valeur_non_explication' => 'Geposte waarde wanneer de checkbox niet wordt geselecteerd. Let op: het gaat om een technische waarde, niet om een weergegeven waarde.',
 	'option_valeur_non_label' => 'Waarde non',
-	'option_valeur_oui_explication' => 'Geposte waarde wanneer de checkbox is geselecteerd', # MODIF
+	'option_valeur_oui_explication' => 'Geposte waarde wanneer de checkbox is geselecteerd. Let op: het gaat om een technische waarde, niet om een weergegeven waarde.',
 	'option_valeur_oui_label' => 'Waarde oui',
 
 	// P
