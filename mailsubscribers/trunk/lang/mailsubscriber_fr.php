@@ -33,9 +33,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_adresse_existante' => 'Cette adresse email est déjà dans la liste',
 	'erreur_adresse_existante_editer' => 'Cette adresse email est déjà enregistrée - <a href="@url@">Editer cet utilisateur</a>',
 	'erreur_technique_subscribe' => 'Une erreur technique a empêché votre inscription.',
-	'explication_to_email' => 'Envoyer un email de pré-inscription aux adresses suivantes (plusieurs adresses séparées par une virgule si besoin).',
 	'explication_listes_diffusion_option_defaut' => 'Un ou plusieurs identifiants de listes séparés par des virgules',
 	'explication_listes_diffusion_option_statut' => 'Filtrer les listes selon les statuts',
+	'explication_to_email' => 'Envoyer un email de pré-inscription aux adresses suivantes (plusieurs adresses séparées par une virgule si besoin).',
 
 	// I
 	'icone_creer_mailsubscriber' => 'Ajouter une inscription',
@@ -64,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_inscription' => 'Inscription',
 	'label_lang' => 'Langue',
 	'label_listes' => 'Listes',
+	'label_listes_diffusion_option_statut' => 'Statut',
 	'label_listes_import_subscribers' => 'Inscrire aux listes',
 	'label_mailsubscriber_optin' => 'Je veux recevoir la Newsletter',
 	'label_message_invite_email_subscribe' => 'Message d’accompagnement de l’email envoyé',
@@ -74,7 +75,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_toutes_les_listes' => 'Toutes',
 	'label_valid_subscribers_1' => 'Valider directement les inscriptions sans demande de confirmation',
 	'label_vider_table_1' => 'Supprimer toutes les adresses en base avant cet import',
-	'label_listes_diffusion_option_statut' => 'Statut',
 
 	// M
 	'mailsubscribers_poubelle' => 'Supprimés',

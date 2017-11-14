@@ -63,6 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_inscription' => 'Inscrição',
 	'label_lang' => 'Idioma',
 	'label_listes' => 'Listas',
+	'label_listes_diffusion_option_statut' => 'Estado',
 	'label_listes_import_subscribers' => 'Cadastrar às listas',
 	'label_mailsubscriber_optin' => 'Gostaria de receber a newsletter',
 	'label_message_invite_email_subscribe' => 'Mensagem de convite personalizada ao e-mail de cadastro',

@@ -45,6 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_file_import' => 'Импортировать файл',
 	'label_lang' => 'Язык',
 	'label_listes' => 'Доступные базы',
+	'label_listes_diffusion_option_statut' => 'Статус',
 	'label_mailsubscriber_optin' => 'Хочу получать рассылку',
 	'label_nom' => 'Имя',
 	'label_optin' => 'Opt-in',
