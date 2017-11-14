@@ -12,5 +12,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// G
 	'grappes_description' => 'Neue Objekte (Trauben) künnen aus SPIP-Objekten zusammengestellt werden,
 		wenn diese ein Interface haben.',
-	'grappes_nom' => 'Trauben'
+	'grappes_nom' => 'Trauben',
+	'grappes_slogan' => 'SPIP-Objekte in einer gemeinsamen Umgebung gruppieren'
 );
