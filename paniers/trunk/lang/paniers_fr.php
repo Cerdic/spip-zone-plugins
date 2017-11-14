@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'action_ajouter' => 'Ajouter au panier',
 	'action_supprimer' => 'Supprimer du panier',
+
 	// C
 	'configurer_titre' => 'Configurer le plugin Paniers',
 

@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'action_ajouter' => 'Add to cart',
+	'action_supprimer' => 'Remove from cart',
 
 	// C
 	'configurer_titre' => 'Configure the cart plugin',
