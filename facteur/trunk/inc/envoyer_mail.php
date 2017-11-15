@@ -25,6 +25,7 @@ include_once _DIR_RESTREINT."inc/envoyer_mail.php";
  *     string cc : destinataires en copie conforme
  *     string bcc : destinataires en copie conforme cachee
  *     string|array repondre_a : une ou plusieurs adresses à qui répondre
+ *     string nom_repondre_a : le nom d'envoyeur pour compléter l'email repondre_a
  *     string adresse_erreur : addresse de retour en cas d'erreur d'envoi
  *     array pieces_jointes : listes de pieces a embarquer dans l'email, chacune au format array :
  *       string chemin : chemin file system pour trouver le fichier a embarquer
@@ -54,6 +55,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		$cc   = isset($corps['cc']) ? $corps['cc'] : "";
 		$bcc  = isset($corps['bcc']) ? $corps['bcc'] : "";
 		$repondre_a = isset($corps['repondre_a']) ? $corps['repondre_a'] : "";
+		$nom_repondre_a = isset($corps['nom_repondre_a']) ? $corps['nom_repondre_a'] : '';
 		$adresse_erreur = isset($corps['adresse_erreur']) ? $corps['adresse_erreur'] : "";
 		$headers = isset($corps['headers']) ? $corps['headers'] : $headers;
 		if (is_string($headers)){
@@ -233,8 +235,11 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		if (is_array($repondre_a))
 			foreach ($repondre_a as $courriel)
 				$facteur->AddReplyTo($courriel);
-		else
+		} elseif ($nom_repondre_a) {
+			$facteur->AddReplyTo($repondre_a, $nom_repondre_a);
+		} else {
 			$facteur->AddReplyTo($repondre_a);
+		}
 	}
 
 	// S'il y a des pièces jointes on les ajoute proprement
