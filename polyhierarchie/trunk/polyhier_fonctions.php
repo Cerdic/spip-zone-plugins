@@ -249,7 +249,10 @@ function critere_branche($idb, &$boucles, $crit, $tous='elargie') {
 	}
 	
 	// Si c'est tout ou que indirects, on ajoute le critère de branche secondaire, avec la table de liens
-	if ($tous !== 'directs') {
+	if (
+		$tous !== 'directs'
+		and in_array(table_objet_sql($boucle->type_requete), array_keys(lister_tables_objets_sql()))
+	) {
 		// S'il y a une jointure, on cherche toujours les liaisons avec celle-ci
 		if (isset($type_jointure)) {
 			$sous_jointure = "sql_get_select('rl.id_objet','spip_rubriques_liens as rl',sql_in('rl.id_parent',\$in_rub" . ($not ? ", 'NOT'" : '') . ").' AND rl.objet=\'$type_jointure\'')";
