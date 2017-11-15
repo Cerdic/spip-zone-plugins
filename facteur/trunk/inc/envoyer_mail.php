@@ -24,7 +24,10 @@ include_once _DIR_RESTREINT."inc/envoyer_mail.php";
  *     string nom_envoyeur : un nom d'envoyeur pour completer l'email from
  *     string cc : destinataires en copie conforme
  *     string bcc : destinataires en copie conforme cachee
- *     string|array repondre_a : une ou plusieurs adresses à qui répondre
+ *     string|array repondre_a : une ou plusieurs adresses à qui répondre.
+ *       On peut aussi donner une liste de tableaux du type :
+ *         array('email' => 'test@exemple.com', 'nom' => 'Adresse de test')
+ *       pour spécifier un nom d'envoyeur pour chaque adresse.
  *     string nom_repondre_a : le nom d'envoyeur pour compléter l'email repondre_a
  *     string adresse_erreur : addresse de retour en cas d'erreur d'envoi
  *     array pieces_jointes : listes de pieces a embarquer dans l'email, chacune au format array :
@@ -231,10 +234,15 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	}
 
 	// S'il y a une adresse de reply-to
-	if ($repondre_a){
-		if (is_array($repondre_a))
-			foreach ($repondre_a as $courriel)
-				$facteur->AddReplyTo($courriel);
+	if ($repondre_a) {
+		if (is_array($repondre_a)) {
+			foreach ($repondre_a as $courriel) {
+				if (is_array($courriel)) {
+					$facteur->AddReplyTo($courriel['email'], $courriel['nom']);
+				} else {
+					$facteur->AddReplyTo($courriel);
+				}
+			}
 		} elseif ($nom_repondre_a) {
 			$facteur->AddReplyTo($repondre_a, $nom_repondre_a);
 		} else {
