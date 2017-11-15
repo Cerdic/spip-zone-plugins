@@ -1,7 +1,7 @@
 <paquet
 	prefix="polyhier"
 	categorie="navigation"
-	version="3.6.7"
+	version="3.6.8"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/polyhier-32.png"
