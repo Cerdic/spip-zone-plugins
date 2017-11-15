@@ -205,12 +205,6 @@ function critere_branche($idb, &$boucles, $crit, $tous='elargie') {
 				$boucle->where[] = array("'='", _q($cle.".".reset($decompose)), '"'.sql_quote(end($decompose)).'"');
 			}
 		}
-		// si le champ id_rubrique est recuperer par jointure, c'est le type et la primary de la table jointe
-		// qu'il faut chercher dans la table spip_rubriques_liens (ie cas des evenements)
-		if ($cle AND $desc) {
-			$type = objet_type($boucle->from[$cle]);
-			$primary = $cle . "." . id_table_objet($boucle->from[$cle]);
-		}
 	}
 	else $cle = $boucle->id_table;
 
