@@ -8,17 +8,17 @@ function notifavancees_notifications($flux){
 	$quoi = $flux['args']['quoi'];
 	$id = intval($flux['args']['id']);
 	$options = $flux['args']['options'];
-	
+
 	// On cherche d'abord les destinataires vu que s'il n'y en a pas, on ne fait rien :)
 	$destinataires = notifications_destinataires($quoi, $id, $options);
-	
+
 	// Youpiiii la liste des destinataires est terminée
 	// On ne continue que s'il en reste
 	if ($destinataires){
 		include_spip('inc/filtres');
 		// On récupère les abonnés explicites pour connaître les éventuelles préférences d'envoi
 		$preferences = notifications_abonnes($quoi, $id);
-		
+
 		// On programme les envois pour chaque destinataire un par un
 		foreach ($destinataires as $cle=>$destinataire){
 			// Si c'est un tableau avec déjà toutes les infos
@@ -48,7 +48,7 @@ function notifavancees_notifications($flux){
 
 /*
  * Retourne la liste des destinataires pour une notification précise.
- * 
+ *
  * La liste est un tableau pouvant être composé de trois choses :
  * - Un identifiant d'auteur
  * - Une adresse de courriel
@@ -67,11 +67,11 @@ function notifavancees_notifications($flux){
 function notifications_destinataires($quoi, $id=0, $options=array()){
 	// On retourne toujours un tableau
 	$destinataires = array();
-	
+
 	// En premier les destinataires choisis par la notification
 	if ($fonction_destinataires = charger_fonction('destinataires', "notifications/$quoi", true))
 		$destinataires = $fonction_destinataires($id, $options);
-	
+
 	// Ensuite, ceux qui sont abonnés explicitement
 	// Pour les préférences, la notification peut définir une fonction notifications_truc_preferences()
 	$abonnes = notifications_abonnes($quoi, $id);
@@ -90,7 +90,7 @@ function notifications_destinataires($quoi, $id=0, $options=array()){
 			}
 		}
 	}
-	
+
 	// Ensuite on passe dans le pipeline
 	$destinataires = pipeline(
 		'notifications_destinataires',
@@ -99,15 +99,15 @@ function notifications_destinataires($quoi, $id=0, $options=array()){
 			'data' => $destinataires
 		)
 	);
-	
+
 	// On supprime les doublons
 	if (is_array($destinataires))
 		$destinataires = array_unique($destinataires);
-	
+
 	// Enfin on retire ceux qui se sont blacklistés explicitement
 	if ($blacklist = notifications_abonnes($quoi, $id, true))
 		$destinataires = notifications_exclure_destinataires($destinataires, $blacklist);
-	
+
 	return $destinataires;
 }
 
@@ -134,7 +134,7 @@ function notifications_exclure_destinataires($destinataires, $blacklist){
 			}
 		}
 	}
-	
+
 	return $destinataires;
 }
 
@@ -153,33 +153,33 @@ function notifications_exclure_destinataires($destinataires, $blacklist){
 function notifications_abonnes($quoi, $id=0, $blacklist=false){
 	static $abonnes = array();
 	static $blacklistes = array();
-	
+
 	// On normalise l'id
 	if (!($id = intval($id)) or !($id > 0))
 		$id = 0;
-	
+
 	// On ne fait la requête que si on a pas déjà les valeurs
 	if (
 		(!$blacklist and !isset($abonnes[$quoi][$id]))
 		or ($blacklist and !isset($blacklistes[$quoi][$id]))
 	){
 		include_spip('base/abtract_sql');
-		
+
 		$where = array(
 			'quoi = '.sql_quote($quoi)
 		);
-	
+
 		// S'il y a un id pertinent on le rajoute à la requête
 		if ($id > 0)
 			$where[] = 'id = '.$id;
-		
+
 		// On va chercher tous les gens liés à cette notification
 		$requete = sql_allfetsel(
 			'id_auteur, contact, preferences, modes, actif',
 			'spip_notifications_abonnements',
 			$where
 		);
-		
+
 		$abonnes[$quoi][$id] = $blacklistes[$quoi][$id] = array();
 		foreach ($requete as $ligne){
 			// On ne fait quelque chose que si l'abonnement est actif !
@@ -206,7 +206,7 @@ function notifications_abonnes($quoi, $id=0, $blacklist=false){
 			}
 		}
 	}
-	
+
 	// On retourne
 	if (!$blacklist)
 		return $abonnes[$quoi][$id];
@@ -221,11 +221,11 @@ function notifications_abonnes($quoi, $id=0, $blacklist=false){
  */
 function notifications_lister_disponibles(){
 	static $notifications = null;
-	
+
 	if (is_null($notifications)){
 		$notifications = array();
 		$liste = find_all_in_path('notifications/', '.+[.]yaml$');
-		
+
 		if (count($liste)){
 			foreach ($liste as $fichier=>$chemin){
 				$type_notification = preg_replace(',[.]yaml$,i', '', $fichier);
@@ -236,7 +236,7 @@ function notifications_lister_disponibles(){
 			}
 		}
 	}
-	
+
 	return $notifications;
 }
 
@@ -306,11 +306,11 @@ function notifications_charger_infos($type_notification){
  */
 function notifications_modes_lister_disponibles(){
 	static $modes = null;
-	
+
 	if (is_null($modes)){
 		$modes = array();
 		$liste = find_all_in_path('notifications/modes/', '.+[.]yaml$');
-		
+
 		if (count($liste)){
 			foreach ($liste as $fichier=>$chemin){
 				$type_mode = preg_replace(',[.]yaml$,i', '', $fichier);
@@ -326,7 +326,7 @@ function notifications_modes_lister_disponibles(){
 			}
 		}
 	}
-	
+
 	return $modes;
 }
 
@@ -378,7 +378,7 @@ function notifications_envoyer($destinataire, $mode, $quoi, $id=0, $options=arra
 			elseif (is_string($contenu_tmp))
 				$contenu['texte'] = $contenu_tmp;
 		}
-		
+
 		// On construit le contexte utile
 		$contexte = array(
 			'quoi' => $quoi,
@@ -388,7 +388,7 @@ function notifications_envoyer($destinataire, $mode, $quoi, $id=0, $options=arra
 			'contact' => $contact,
 			'mode' => $mode
 		);
-		
+
 		// Pour ajouter des informations utiles on cherche un objet dans le nom de la notif
 		$type_objet = notifications_trouver_objet($quoi);
 
@@ -405,11 +405,11 @@ function notifications_envoyer($destinataire, $mode, $quoi, $id=0, $options=arra
 		//Si un expéditeur est défini on l'utilise
 		if ($options['from'])
 			$contenu['from'] = $options['from'];
-		
+
 		//si un nom d'expéditeur est défini
 		if ($options['nom_envoyeur'])
 			$contenu['nom_envoyeur'] = $options['nom_envoyeur'];
-		
+
 		// Le contenu de base est le contenu texte
 		// S'il n'existe pas on cherche le squelette directement
 		if (!$contenu['texte'] and find_in_path("notifications/${quoi}.html")){
@@ -418,7 +418,7 @@ function notifications_envoyer($destinataire, $mode, $quoi, $id=0, $options=arra
 				$contexte
 			));
 		}
-		
+
 		// On ne continue que si on a bien un texte de base
 		if ($contenu['texte']){
 			// Existe-t-il une version HTML ? Sinon le squelette
@@ -428,7 +428,7 @@ function notifications_envoyer($destinataire, $mode, $quoi, $id=0, $options=arra
 					$contexte
 				));
 			}
-			
+
 			// Existe-t-il une version courte ?
 			if (!$contenu['court']){
 				// Sinon le squelette
@@ -452,12 +452,12 @@ function notifications_envoyer($destinataire, $mode, $quoi, $id=0, $options=arra
 					$contenu['court'] = couper($contenu['court'], 130);
 				}
 			}
-			
+
 			// Maintenant qu'on a tout on appelle le mode d'envoi
 			return $mode_envoyer($contact, $contenu);
 		}
 	}
-	
+
 	return false;
 }
 
@@ -525,7 +525,7 @@ function notifavancees_affiche_droite($flux){
 		);
 		$flux['data'] .= $boite;
 	}
-	
+
 	return $flux;
 }
 
