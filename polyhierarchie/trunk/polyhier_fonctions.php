@@ -217,6 +217,12 @@ function critere_branche($idb, &$boucles, $crit, $tous='elargie') {
 				$boucle->where[] = array("'='", _q($cle.".".reset($decompose)), '"'.sql_quote(end($decompose)).'"');
 			}
 		}
+		// si le champ id_rubrique est recuperer par jointure, c'est le type et la primary de la table jointe
+		// qu'il faut chercher dans la table spip_rubriques_liens (ie cas des evenements)
+		if ($cle AND $desc) {
+			$type_jointure = objet_type($boucle->from[$cle]);
+			$primary_jointure = $cle . "." . id_table_objet($boucle->from[$cle]);
+		}
 	}
 	else {
 		$cle = $boucle->id_table;
@@ -244,9 +250,34 @@ function critere_branche($idb, &$boucles, $crit, $tous='elargie') {
 	
 	// Si c'est tout ou que indirects, on ajoute le critère de branche secondaire, avec la table de liens
 	if ($tous !== 'directs') {
+		// S'il y a une jointure, on cherche toujours les liaisons avec celle-ci
+		if (isset($type_jointure)) {
+			$sous_jointure = "sql_get_select('rl.id_objet','spip_rubriques_liens as rl',sql_in('rl.id_parent',\$in_rub" . ($not ? ", 'NOT'" : '') . ").' AND rl.objet=\'$type_jointure\'')";
+			$where_jointure = "array('IN', '$primary_jointure', '(SELECT * FROM('.$sous_jointure.') AS subquery)')";
+		}
 		
-		$sous = "sql_get_select('rl.id_objet','spip_rubriques_liens as rl',sql_in('rl.id_parent',\$in_rub" . ($not ? ", 'NOT'" : '') . ").' AND rl.objet=\'$type\'')";
-		$where[] = "array('IN', '$primary', '(SELECT * FROM('.$sous.') AS subquery)')";
+		// S'il n'y a pas de jointure (cas par défaut) ou que l'objet est explicitement configuré pour être classé avec polyhier
+		// on cherche les liaisons sur l'objet
+		if (
+			!isset($type_jointure)
+			or (include_spip('inc/config') and in_array(table_objet_sql($type), lire_config('polyhier/lier_objets', array())))
+		) {
+			$sous_objet = "sql_get_select('rl.id_objet','spip_rubriques_liens as rl',sql_in('rl.id_parent',\$in_rub" . ($not ? ", 'NOT'" : '') . ").' AND rl.objet=\'$type\'')";
+			$where_objet = "array('IN', '$primary', '(SELECT * FROM('.$sous_objet.') AS subquery)')";
+		}
+		
+		// S'il y a les deux, on fait un OR
+		if (isset($where_jointure) and isset($where_objet)) {
+			$where[] = "array('OR', $where_jointure, $where_objet)";
+		}
+		// Sinon s'il n'y a que jointure
+		elseif (isset($where_jointure)) {
+			$where[] = $where_jointure;
+		}
+		// Sinon que sur l'objet
+		else {
+			$where[] = $where_objet;
+		}
 	}
 	
 	// S'il y a les deux critères, c'est l'un ou l'autre
