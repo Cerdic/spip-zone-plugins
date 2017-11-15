@@ -454,7 +454,7 @@ function notifications_envoyer($destinataire, $mode, $quoi, $id=0, $options=arra
 			}
 
 			// Maintenant qu'on a tout on appelle le mode d'envoi
-			return $mode_envoyer($contact, $contenu);
+			return $mode_envoyer($contact, $contenu, $options);
 		}
 	}
 

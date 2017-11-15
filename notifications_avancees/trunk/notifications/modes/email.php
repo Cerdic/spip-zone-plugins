@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 // Envoi le contenu par email
-function notifications_modes_email_envoyer_dist($contact, $contenu) {
+function notifications_modes_email_envoyer_dist($contact, $contenu, $options) {
 	// S'il y a le plugin Facteur, on peut faire un truc plus propre
 	if (defined('_DIR_PLUGIN_FACTEUR')) {
 		$corps = array(
@@ -23,6 +23,13 @@ function notifications_modes_email_envoyer_dist($contact, $contenu) {
 		//si un nom d'expéditeur est défini
 		if ($contenu['nom_envoyeur']) {
 			$corps['nom_envoyeur'] = $contenu['nom_envoyeur'];
+		}
+		// S'il y a un Reply-to
+		if ($options['repondre_a']) {
+			$corps['repondre_a'] = $options['repondre_a'];
+			if ($options['nom_repondre_a']) {
+				$corps['nom_repondre_a'] = $options['nom_repondre_a'];
+			}
 		}
 	} // Sinon c'est juste le texte
 	else {
