@@ -1,9 +1,9 @@
 <paquet
 	prefix="masquer"
 	categorie="navigation"
-	version="0.5.2"
+	version="0.5.3"
 	etat="stable"
-	compatibilite="[2.0.0;3.1.*]"
+	compatibilite="[2.0.0;3.2.*]"
 	logo="masquer.png"
 	documentation="https://contrib.spip.net/Plugin-masquer"
 >
