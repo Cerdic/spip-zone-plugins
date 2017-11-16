@@ -1,0 +1,21 @@
+<paquet
+	prefix="htmlminifier"
+	categorie="performance"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="prive/themes/spip/images/htmlminifier-64.png"
+	documentation=""
+>
+
+	<nom>HTML Minifier</nom>
+	
+	<auteur>ladnet</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="saisies" compatibilite="[2.18.0;]" />
+
+	<pipeline nom="affichage_final" inclure="htmlminifier_pipelines.php" />
+
+</paquet>
