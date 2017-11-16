@@ -24,4 +24,6 @@
 	<pipeline nom="indexer_indexer" action="" />
 	<pipeline nom="indexer_sources" action="" />
 	<pipeline nom="indexer_document" action="" />
+
+	<menu nom="indexer" titre="Configurer l’indexation" parent="menu_configuration" position="-1" icone="images/indexer-16.png" />
 </paquet>
