@@ -242,9 +242,9 @@ function format_inclure_html_geshi ($file, $args, $prof)
 {
 	if (strpos($file, '#')===false)
 	 	$t = $file ? (
-			  format_geshi_spip("(", 'inclure')
+			  format_geshi_spip("{", 'inclure')
 			. format_geshi_spip($file, 'inclure_fichier')
-			. format_geshi_spip(")", 'inclure')) : "" ;
+			. format_geshi_spip("}", 'inclure')) : "" ;
 	else {
 		$t = _format_parametre_html_geshi("fond=" . $file);
 	}
