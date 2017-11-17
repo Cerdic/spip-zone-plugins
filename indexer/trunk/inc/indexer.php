@@ -61,7 +61,7 @@ function indexer_indexer(){
 /**
  * Renvoyer les sources de données disponibles dans le site
  * 
- * Un pipeline "indexer_sources" est appelée avec la liste par défaut, permettant de retirer ou d'ajouter des sources.
+ * Un pipeline "indexer_sources" est appelé avec la liste par défaut, permettant de retirer ou d'ajouter des sources.
  *
  * @pipeline_appel indexer_sources
  * @return Sources Retourne un objet Sources listant les sources enregistrées avec la méthode register()
