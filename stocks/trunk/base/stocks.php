@@ -1,7 +1,9 @@
 <?php
 
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 function stocks_declarer_tables_interfaces($interface){
 	// 'spip_' dans l'index de $tables_principales
