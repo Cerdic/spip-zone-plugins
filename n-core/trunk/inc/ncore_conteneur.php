@@ -18,7 +18,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param array  $conteneur
+ * @param array|string $conteneur
  *        Tableau descriptif du conteneur ou identifiant du conteneur.
  * @param string $stockage
  *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
