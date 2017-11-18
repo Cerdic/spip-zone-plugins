@@ -58,8 +58,7 @@ function stocks_formulaire_traiter($flux) {
  */
 
 function stocks_afficher_fiche_objet($flux) {
-	
-	
+
 	if($flux['args']['type'] == 'produit'){
 
 		$objet = $flux['args']['type'];
@@ -72,7 +71,6 @@ function stocks_afficher_fiche_objet($flux) {
 				'id_objet'=>$id_objet
 			)
 		);
-		
 				
 		if ($p = strpos($flux['data'], '<!--afficher_fiche_objet-->')) {
 			$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
