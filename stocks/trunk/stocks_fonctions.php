@@ -1,5 +1,7 @@
 <?php
 
+
+
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
@@ -24,10 +26,13 @@ function balise_QUANTITE_dist($p) {
 
 function quantite_champ_ou_stock($quantite,$objet,$id_objet) {
     include_spip('inc/stocks');
-    if (is_null($quantite))
+    if (is_null($quantite)){
         return get_quantite($objet,$id_objet);
-    else 
+    }
+    else {
+		spip_log($quantite,'stocks');
         return $quantite;
+    }
+	
 }
 
-?>
