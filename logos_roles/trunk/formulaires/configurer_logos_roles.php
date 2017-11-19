@@ -46,7 +46,7 @@ function formulaires_configurer_logos_roles_traiter_dist() {
 					}
 
 					if ($resultat =  logo_modifier_document($objet, $id_objet, 'logo', $id_document)) {
-						spip_log($resultat, _LOG_IMPORT_LOGO);
+						spip_log($resultat, 'logos_roles.' . _LOG_ERREUR);
 					} else {
 						spip_unlink($logo_actuel[0]);
 					}
@@ -65,7 +65,7 @@ function formulaires_configurer_logos_roles_traiter_dist() {
 					}
 
 					if ($resultat =  logo_modifier_document($objet, $id_objet, 'logo_survol', $id_document)) {
-						spip_log($resultat, _LOG_IMPORT_LOGO);
+						spip_log($resultat, 'logos_roles.' . _LOG_ERREUR);
 					} else {
 						spip_unlink($logo_actuel[0]);
 					}
