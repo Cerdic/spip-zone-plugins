@@ -33,8 +33,8 @@ function googleanalytics_insert_head($flux) {
 function googleanalytics_snippet(){
 	include_spip('inc/config');
 	$id_google = lire_config('googleanalytics/idGoogle');
-	$cookiebar = $_COOKIE["cb-enabled"];
-	if ($_COOKIE["displayCookieConsent"] != '') {
+	if (isset($_COOKIE["cb-enabled"])) $cookiebar = $_COOKIE["cb-enabled"];
+	if (isset($_COOKIE["displayCookieConsent"])) {
 		$displayCookieConsent = $_COOKIE["displayCookieConsent"];
 	} else {
 		$displayCookieConsent = 'y';
