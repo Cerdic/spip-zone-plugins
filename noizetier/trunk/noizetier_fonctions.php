@@ -10,10 +10,17 @@ define('_CACHE_CONTEXTE_NOISETTES', _DIR_CACHE . 'noisettes_contextes.php');
 define('_CACHE_INCLUSIONS_NOISETTES', _DIR_CACHE . 'noisettes_inclusions.php');
 
 
-// -------------------------------------------------------------------
-// --------------------- API TYPES DE NOISETTE -----------------------
-// -------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+// --------------------- API TYPES DE NOISETTE : COMPLEMENT -----------------------
+// --------------------------------------------------------------------------------
 
+/**
+ * @filtre
+ *
+ * @param $page
+ *
+ * @return array
+ */
 function noizetier_type_noisette_compter($page) {
 
 	// Initialisation des compteurs par bloc
@@ -65,9 +72,9 @@ function noizetier_type_noisette_compter($page) {
 }
 
 
-// -------------------------------------------------------------------
-// ------------------------- API NOISETTES ---------------------------
-// -------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+// ------------------------- API NOISETTES : COMPLEMENT ---------------------------
+// --------------------------------------------------------------------------------
 
 /**
  * Retourne les elements du contexte uniquement
@@ -204,7 +211,6 @@ function noizetier_icone_repertorier($taille = 24) {
  *
  * @package SPIP\NOIZETIER\API\BLOC
  * @api
- * @filtre
  *
  * @return array
  */
@@ -234,7 +240,6 @@ function noizetier_bloc_defaut() {
  *
  * @package SPIP\NOIZETIER\API\BLOC
  * @api
- * @filtre
  *
  * @return array|string
  */
@@ -353,6 +358,11 @@ function noizetier_bloc_compter_noisettes($identifiant) {
 // ---------------------------- API PAGES ----------------------------
 // -------------------------------------------------------------------
 
+/**
+ * @param bool $recharger
+ *
+ * @return bool
+ */
 function noizetier_page_charger($recharger = false) {
 
 	// Retour de la fonction
@@ -487,6 +497,12 @@ function noizetier_page_charger($recharger = false) {
 	return $retour;
 }
 
+/**
+ * @param       $page
+ * @param array $blocs_exclus
+ *
+ * @return array
+ */
 function noizetier_page_lister_blocs($page, $blocs_exclus = array()) {
 
 	// Initialisation des blocs avec la liste des blocs par défaut
@@ -904,6 +920,12 @@ function noizetier_objet_type_active($type_objet) {
  * 		`true` si la configuration a été modifiée, `false` sinon.
  */
  // TODO : a voir si cette fonction n'est pas utilisée pour les noisettes on la renommera en noizetier_page_modifiee()
+/**
+ * @param string $entite
+ * @param string $identifiant
+ *
+ * @return bool
+ */
 function noizetier_configuration_est_modifiee($entite, $identifiant) {
 
 	$est_modifiee = true;
