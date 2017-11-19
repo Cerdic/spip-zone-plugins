@@ -248,25 +248,27 @@ function noizetier_noisette_completer($plugin, $description) {
 
 		if (!empty($conteneur['squelette'])) {
 			$squelette = strtolower($conteneur['squelette']);
-			$page = basename($squelette);
-			$identifiants_page = explode('-', $page, 2);
-			if (!empty($identifiants_page[1])) {
-				// Forcément une composition
-				$complement['type'] = $identifiants_page[0];
-				$complement['composition'] = $identifiants_page[1];
+
+			if (!empty($conteneur['objet']) and !empty($conteneur['id_objet']) and ($id = intval($conteneur['id_objet']))) {
+				// Objet
+				$complement['objet'] = $conteneur['objet'];
+				$complement['id_objet'] = $id;
+				$complement['bloc'] = $conteneur['squelette'];
 			} else {
-				// Page ou objet
-				if (preg_match(',([a-z_]+)(\d+)$,s', $identifiants_page[0], $identifiants_objet)) {
-					$complement['objet'] = $identifiants_objet[1];
-					$complement['id_objet'] = $identifiants_objet[2];
+				$page = basename($squelette);
+				$identifiants_page = explode('-', $page, 2);
+				if (!empty($identifiants_page[1])) {
+					// Forcément une composition
+					$complement['type'] = $identifiants_page[0];
+					$complement['composition'] = $identifiants_page[1];
 				} else {
+					// Page simple
 					$complement['type'] = $identifiants_page[0];
 				}
-			}
-
-			$bloc = dirname($squelette);
-			if ($bloc != '.') {
-				$complement['bloc'] = basename($bloc);
+				$bloc = dirname($squelette);
+				if ($bloc != '.') {
+					$complement['bloc'] = basename($bloc);
+				}
 			}
 			$description = array_merge($description, $complement);
 
@@ -494,7 +496,7 @@ function noizetier_conteneur_identifier($plugin, $conteneur) {
 		}
 
 		// L'objet et son id si on est en présence d'un objet.
-		if (!empty($conteneur['objet'])	and !empty($conteneur['id_objet']) and ($id = intval($conteneur['id_objet']))) {
+		if (!empty($conteneur['objet'])	and !empty($conteneur['id_objet']) and intval($conteneur['id_objet'])) {
 			$identifiant .= ($identifiant ? '|' : '') . "{$conteneur['objet']}|{$conteneur['id_objet']}";
 		}
 	}

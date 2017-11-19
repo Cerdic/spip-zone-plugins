@@ -54,8 +54,10 @@
 		});
 	/*\]\]>*/</script>
 
-	[(#EVAL{_AJAX}|oui)
-		<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
+	[(#CONST{_AJAX}|oui)
+		<script type="text/javascript">/*<!\[CDATA\[*/
+			reloadExecPage('#ENV{exec}','#navigation,#chemin');
+		/*\]\]>*/</script>
 	]
 </BOUCLE_page_contenu>
 	[(#ENV**{exec}|=={noisette_edit}|oui)#INCLURE{fond=prive/squelettes/contenu/noisette_edit,redirect='',env,retourajax=oui}]

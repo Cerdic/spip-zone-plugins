@@ -696,80 +696,121 @@ function noizetier_page_repertoire() {
  * 		Type d'objet ou chaine vide.
  * @param string $id_objet
  * 		Id de l'objet ou 0.
+ * @param string $information
+ * 		Champ précis à renvoyer ou chaine vide pour renvoyer toutes les champs de l'objet.
  *
  * @return array|string
  * 		Si le type et l'id du contenu sont fournis, on renvoie la description de la page de ce contenu.
  * 		Sinon, on renvoie le tableau des descriptions des pages de tous les contenus indexés par [type_objet][id_objet].
  */
-function noizetier_objet_informer($type_objet = '', $id_objet = 0, $information = '') {
+function noizetier_objet_lire($type_objet, $id_objet, $information = '') {
 
-	static $objets = null;
 	static $description_objet = array();
 
-	if ((!$type_objet and !$id_objet and is_null($objets))
-	or ($type_objet and $id_objet and !isset($description_objet[$type_objet][$id_objet]))) {
+	if ($type_objet and intval($id_objet) and !isset($description_objet[$type_objet][$id_objet])) {
+		include_spip('inc/quete');
+		include_spip('base/objets');
+		$description = array();
+
+		// On calcule le titre de l'objet à partir de la fonction idoine
+		$description['titre'] = generer_info_entite($id_objet, $type_objet, 'titre');
+
+		// On recherche le logo de l'objet si il existe sinon on stocke le logo du type d'objet
+		// (le chemin complet)
+		$description['logo'] = '';
+		if ($type_objet != 'document') {
+			$logo_infos = quete_logo(id_table_objet($type_objet), 'on', $id_objet, 0, false);
+			$description['logo'] = isset($logo_infos['src']) ? $logo_infos['src'] : '';
+		}
+		if (!$description['logo']) {
+			$description['logo'] = noizetier_icone_chemin("${type_objet}.png");
+		}
+
+		// On récupère le nombre de noisette déjà configurées dans l'objet.
+		$description['noisettes'] = 0;
+		$from = array('spip_noizetier');
+		$where = array('objet=' . sql_quote($type_objet), 'id_objet=' . intval($id_objet));
+		if ($noisettes = sql_countsel($from, $where)) {
+			$description['noisettes'] = $noisettes;
+		}
+
+		// On rajoute les blocs du type de page dont l'objet est une instance
+		$description['blocs'] = noizetier_page_lister_blocs($type_objet);
+
+		// On sauvegarde finalement la description complète.
+		$description_objet[$type_objet][$id_objet] = $description;
+	}
+
+	// On retourne les informations sur l'objet demandé.
+	if (!$information) {
+		$retour = isset($description_objet[$type_objet][$id_objet])
+			? $description_objet[$type_objet][$id_objet]
+			: array();
+	} else {
+		$retour = isset($description_objet[$type_objet][$id_objet][$information])
+			? $description_objet[$type_objet][$id_objet][$information]
+			: '';
+	}
+
+	return $retour;
+}
+
+
+
+/**
+ * Lister les contenus ayant des noisettes spécifiquement configurées pour leur page.
+ *
+ * @package SPIP\NOIZETIER\API\OBJET
+ * @api
+ * @filtre
+ *
+ * @param string $objet
+ * 		Type d'objet ou chaine vide.
+ * @param string $id_objet
+ * 		Id de l'objet ou 0.
+ *
+ * @return array|string
+ * 		Si le type et l'id du contenu sont fournis, on renvoie la description de la page de ce contenu.
+ * 		Sinon, on renvoie le tableau des descriptions des pages de tous les contenus indexés par [type_objet][id_objet].
+ */
+function noizetier_objet_repertorier($filtres = array()) {
+
+	static $objets = null;
+
+	if (is_null($objets)) {
 		// On récupère le ou les objets ayant des noisettes dans la table spip_noizetier.
 		$from = array('spip_noizetier');
 		$select = array('objet', 'id_objet', "count(noisette) as 'noisettes'");
 		$where = array('id_objet>0');
-		if ($type_objet and $id_objet) {
-			$where = array('objet=' . sql_quote($type_objet), 'id_objet=' . intval($id_objet));
-		}
 		$group = array('objet', 'id_objet');
 		$objets_configures = sql_allfetsel($select, $from, $where, $group);
 		if ($objets_configures) {
-			include_spip('inc/quete');
-			include_spip('base/objets');
 			foreach ($objets_configures as $_objet) {
-				$description = array();
-				// On calcule le titre de l'objet à partir de la fonction idoine
-				$description['titre'] = generer_info_entite($_objet['id_objet'], $_objet['objet'], 'titre');
-				// On recherche le logo de l'objet si il existe sinon on stocke le logo du type d'objet
-				// (le chemin complet)
-				$description['logo'] = '';
-				if ($_objet['objet'] != 'document') {
-					$logo_infos = quete_logo(id_table_objet($_objet['objet']), 'on', $_objet['id_objet'], 0, false);
-					$description['logo'] = isset($logo_infos['src']) ? $logo_infos['src'] : '';
-				}
-				if (!$description['logo']) {
-					$description['logo'] = noizetier_icone_chemin("{$_objet['objet']}.png");
-				}
-				$description['noisettes'] = $_objet['noisettes'];
-
-				// On rajoute les blocs du type de page dont l'objet est une instance et on sauvegarde
-				// la description complète.
-				if ($type_objet and $id_objet) {
-					$description['blocs'] = noizetier_page_lister_blocs($type_objet);
-					$description_objet[$type_objet][$id_objet] = $description;
-				} else {
-					$description['blocs'] = noizetier_page_lister_blocs($_objet['objet']);
-					$objets[$_objet['objet']][$_objet['id_objet']] = $description;
+				// On ne retient que les objets dont le type est activé dans la configuration du plugin.
+				if (noizetier_objet_type_active($_objet['objet'])) {
+					$description = noizetier_objet_lire($_objet['objet'], $_objet['id_objet']);
+					if ($description) {
+						// Si un filtre existe on teste le contenu de l'objet récupéré avant de le garder
+						// sinon on le sauvegarde immédiatement.
+						$objet_a_retenir = true;
+						if ($filtres) {
+							foreach ($filtres as $_critere => $_valeur) {
+								if (isset($description[$_critere]) and ($description[$_critere] == $_valeur)) {
+									$objet_a_retenir = false;
+									break;
+								}
+							}
+						}
+						if ($objet_a_retenir) {
+							$objets[$_objet['objet']][$_objet['id_objet']] = $description;
+						}
+					}
 				}
 			}
 		}
 	}
 
-	if ($type_objet and $id_objet) {
-		if (!$information) {
-			return isset($description_objet[$type_objet][$id_objet])
-				? $description_objet[$type_objet][$id_objet]
-				: array();
-		} else {
-			return isset($description_objet[$type_objet][$id_objet][$information])
-				? $description_objet[$type_objet][$id_objet][$information]
-				: '';
-		}
-	} else {
-		// Filtrage des objets répertoriés:
-		// - de façon systématique, on ne retient que les objets dont le type est activé dans la configuration du plugin.
-		$objets_repertories = $objets;
-		foreach ($objets_repertories as $_type_objet => $_objets) {
-			if (!noizetier_objet_type_active($_type_objet)) {
-				unset($objets_repertories[$_type_objet]);
-			}
-		}
-		return $objets_repertories;
-	}
+	return $objets;
 }
 
 

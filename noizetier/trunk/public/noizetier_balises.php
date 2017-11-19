@@ -13,9 +13,9 @@ function balise_NOIZETIER_OBJET_INFOS_dist($p) {
 		$id_objet = isset($id_objet) ? $id_objet : '0';
 		$information = interprete_argument_balise(3, $p);
 		$information = isset($information) ? str_replace('\'', '"', $information) : '""';
-		$p->code = "noizetier_objet_informer($objet, $id_objet, $information)";
+		$p->code = "noizetier_objet_lire($objet, $id_objet, $information)";
 	} else {
-		$p->code = "noizetier_objet_informer()";
+		$p->code = "noizetier_objet_repertorier()";
 	}
 
 	return $p;

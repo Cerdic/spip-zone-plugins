@@ -33,6 +33,9 @@ function formulaires_lister_noisettes_page_traiter_dist($page, $bloc) {
 	if (is_array($page)) {
 		$identifiant['objet'] = $page['objet'];
 		$identifiant['id_objet'] = $page['id_objet'];
+		// Pour le squelette on ne retient que le bloc car il est inutile de répéter le type d'objet comme nom de page.
+		// Cette information est de toute façon sans intérêt pour un objet, l'objectif de la structure du conteneur
+		// est juste de permette le calcul de l'id unique du dit conteneur.
 		$conteneur['squelette'] = "${bloc}";
 		$conteneur = array_merge($conteneur, $identifiant);
 	}
