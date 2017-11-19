@@ -1,14 +1,13 @@
-<!-- nom=stocks -->
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
 	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	
-	<p class="explication"><:stocks:stocks:></p>
+	<p class="explication"><:stocks:cfg_titre:></p>
 	<form method="post" action="#ENV{action}">
 		<div>
 			#ACTION_FORMULAIRE{#ENV{action}}
 			<fieldset>
-				<h3 class="legend"><:stocks:cfg_legend:></h3>
+				<h3 class="legend"><:stocks:cfg_fieldset_legend:></h3>
 				<div class="editer-groupe">
 					<div class="editer">
 						<p class="explication"><:stocks:cfg_quantite_default_explication:></p>

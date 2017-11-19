@@ -5,6 +5,12 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 	return;
 }
 
+/**
+ * get_quantite()
+ *
+ * @param $objet
+ * @param $id_objet
+*/
 function get_quantite($objet,$id_objet) {
 
     $table_stocks = table_objet_sql('stocks');
@@ -19,24 +25,28 @@ function get_quantite($objet,$id_objet) {
     );
 }
 
+/**
+ * set_quantite()
+ *
+ * @param $objet
+ * @param $id_objet
+ * @param $quantite
+*/
 function set_quantite($objet,$id_objet,$quantite) {
 
-
-    $table_stocks = table_objet_sql('stocks');
+	$table_stocks = table_objet_sql('stocks');
     $quantite = intval($quantite);
         
-    $insert = sql_insertq(
-        $table_stocks,
-        array(
-            "objet" => $objet,
-            "id_objet" => intval($id_objet),
-            "quantite" => $quantite
-        )
-    );
-
-
-    if (!$insert) {
-        $update = sql_update(
+	$insert = sql_insertq(
+				$table_stocks,
+				array(
+					"objet" => $objet,
+					"id_objet" => intval($id_objet),
+					"quantite" => $quantite
+				)
+			);
+	if(!$insert){		
+		$update = sql_update(
             $table_stocks,
             array(
                 "quantite" => intval($quantite)
@@ -45,8 +55,9 @@ function set_quantite($objet,$id_objet,$quantite) {
                 "objet = ".sql_quote($objet),
                 "id_objet = ".intval($id_objet)
             )
-        );
-    }
+        );		
+	}
+    
 
     if ($insert || $update)
         return $quantite;
