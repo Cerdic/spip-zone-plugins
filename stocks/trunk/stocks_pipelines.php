@@ -10,6 +10,7 @@ function stocks_formulaire_charger($flux) {
     $form = $flux['args']['form'];
 
     if ($form == "editer_produit")  {
+		$stock_default = lire_config('stocks/quantite_default');
         include_spip('inc/stocks');
         $id_produit = intval($flux['args']['args'][0]);
         $quantite = get_quantite("produit",$id_produit);
@@ -27,7 +28,7 @@ function stocks_formulaire_charger($flux) {
                         'options' => array(
                             'nom' => 'quantite_produit',
                             'label' => '<:stocks:quantite_produit:>',
-                            'defaut' => isset($quantite) ? $quantite : 0
+                            'defaut' => isset($quantite) ? $quantite : $stock_default
                         )
                 )
             )       
