@@ -1,10 +1,10 @@
 <paquet
 	prefix="SpipClear"
 	categorie="squelette"
-	version="0.2.4"
+	version="0.2.5"
 	etat="stable"
 	logo="images/spipclear-128.png"
-	compatibilite="[2.0.6;3.1.*]"
+	compatibilite="[2.0.6;3.2.*]"
 	documentation="https://contrib.spip.net/SpipClear-2-1"
 >
 
