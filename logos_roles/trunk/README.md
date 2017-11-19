@@ -12,10 +12,10 @@ On peut alors détourner les logos de survol, mais c'est vite limité.
 Parce que ça n'offre qu'un seul logo alternatif par objet éditorial, mais aussi parce que les rédacteurs ne voient pas le logo dans le bon format dans l'espace privé, ce qui oblige à des allers-retours.
 
 En utilisant ce plugin, on peut définir autant de types de logos qu'on le souhaite, qui peuvent alors être gérés indépendamment par les rédacteurs.
-On pourra alors utiliser une image différente pour la page d'accueil et pour les listes.
+On pourra alors utiliser des images différentes pour la page d'accueil et pour les listes.
 
 Le plugin [Massicot](https://contrib.spip.net/Massicot) complète très bien ce plugin, et permet alors de définir des recadrages différents pour les différents types de logos.
-On peut aussi utiliser les formats prédéfinis pour le recadrage.
+On peut aussi utiliser des formats prédéfinis pour le recadrage.
 
 
 Fonctionnement
@@ -82,6 +82,14 @@ D'autres paramètres sont optionnels :
 Pour des raisons de rétro-compatibilité, les boucles `DOCUMENTS` ne montrent pas les logos.
 Les logos n'apparaissent que si l'on utilise le critère `{role}` dans la boucle.
 
+### Migration des logos existants ###
+
+Comme les logos enregistrés avec l'ancienne API fonctionnent toujours avec la nouvelle, il n'y pas d'urgence à migrer, la cohabitation se fait bien.
+
+On peut passer un logo enregistré à la racine d'IMG à la nouvelle API en le ré-uploadant dans le formulaire d'édition des logos.
+
+Le formulaire de configuration du plugin propose également de migrer les logos en masse.
+
 
 Surcharges du core
 ------------------
@@ -110,15 +118,6 @@ Ici aussi, on essaie de garder une totale rétro-compatibilité, mais en permett
 
 Les logos enregistrés avec l'ancienne API sont convertis à la nouvelle automatiquement.
 
+### Surcharge de la balise `{logo}`
 
-Reste à faire
--------------
-
-### Migration des logos existants ###
-
-Comme les logos enregistrés avec l'ancienne API fonctionnent toujours avec la nouvelle, il n'y pas d'urgence à migrer, la cohabitation se fait bien.
-En l'état actuel, on peut passer un logo enregistré avec l'ancienne API à la nouvelle API en le ré-uploadant dans le formulaire d'édition des logos.
-Mais à terme il serait bien de migrer les logos historiques vers le système de rôles (?).
-
-Comme ça représente potentiellement beaucoup de logos, il faut être prudent.
-On pourrait se servir d'un cron qui le ferait petit à petit, et/ou une commande spip-cli ?
+On surcharge cette balise pour qu'elle se serve de l'API chercher_logo pour trouver quels objets ont des logos, au lieu de chercher dans le dossier IMG/.
