@@ -1,0 +1,19 @@
+<div class="ajax formulaire_spip formulaire_logos_roles">
+	<h3 class="titrem">Conversion</h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+
+	<p>Vous pouvez convertir les logos au format SPIP original en Logo Role (déplacement des logos de la racine de IMG vers les type documents</p>
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class="editer-groupe">
+			<div class="editer">
+				#INCLURE{fond=formulaires/inc-choisir-objets,name=liste_objet}
+			</div>
+		</div>
+	</ul>
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bouton_valider:>' /></p>
+
+	</div></form>
+</div>
