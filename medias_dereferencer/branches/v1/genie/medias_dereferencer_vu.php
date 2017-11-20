@@ -5,7 +5,7 @@
  *
  * @plugin     Déréférencer les médias
  *
- * @copyright  2015-2016
+ * @copyright  2015-2017
  * @author     Teddy Payet
  * @licence    GNU/GPL
  */

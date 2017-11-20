@@ -3,7 +3,7 @@
  * Options du plugin Déréférencer les médiasau chargement
  *
  * @plugin     Déréférencer les médias
- * @copyright  2015-2016
+ * @copyright  2015-2017
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\Medias_dereferencer\Options

@@ -3,7 +3,7 @@
  * Définit les autorisations du plugin Déréférencer les médias
  *
  * @plugin     Déréférencer les médias
- * @copyright  2015-2016
+ * @copyright  2015-2017
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\Medias_dereferencer\Autorisations
