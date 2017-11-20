@@ -5,7 +5,7 @@
  *
  * @plugin     Nettoyer la médiathèque
  *
- * @copyright  2014-2015
+ * @copyright  2014-2017
  * @author     Teddy Payet
  * @licence    GNU/GPL
  */
