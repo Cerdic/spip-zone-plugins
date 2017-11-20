@@ -3,4 +3,7 @@
 	</langue>
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/archive?lang_cible=fr" total="19" traduits="19" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
+	<langue code="it" url="https://trad.spip.net/tradlang_module/archive?lang_cible=it" total="19" traduits="19" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Alberto" lien="https://trad.spip.net/auteur/alberto" />
+	</langue>
 </traduction>
