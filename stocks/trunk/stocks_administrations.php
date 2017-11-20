@@ -8,10 +8,9 @@
  */
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-
 
 /**
  * Fonction d'installation et de mise à jour du plugin stocks.
@@ -34,10 +33,7 @@ function stocks_upgrade($nom_meta_base_version, $version_cible) {
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
-
 }
-
-
 
 /**
  * Fonction de désinstallation du plugin stocks.
