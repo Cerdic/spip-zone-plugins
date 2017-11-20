@@ -34,9 +34,9 @@ function action_mailsubscribers_export_dist($arg = null) {
 	$where = array();
 	// '' ou 'all' pour tout exporter (sauf poubelle)
 	if (in_array($statut, array('', 'all'))) {
-		$where[] = "M.statut<>" . sql_quote('poubelle');
+		$where[] = 'M.statut<>' . sql_quote('poubelle');
 	} else {
-		$where[] = "M.statut=" . sql_quote($statut);
+		$where[] = 'M.statut=' . sql_quote($statut);
 	}
 
 	$entetes = array(
@@ -48,7 +48,7 @@ function action_mailsubscribers_export_dist($arg = null) {
 		'listes',
 	);
 
-	$exporter_csv = charger_fonction("exporter_csv", "inc");
+	$exporter_csv = charger_fonction('exporter_csv', 'inc');
 	$listes = sql_get_select('group_concat(L.identifiant)','spip_mailsubscriptions as S JOIN spip_mailsubscribinglists as L ON L.id_mailsubscribinglist=S.id_mailsubscribinglist','S.id_segment=0 AND S.id_mailsubscriber=M.id_mailsubscriber');
 	// si un id_liste est present, restreindre l'export à cette liste
 	if ($id_liste) {
@@ -61,7 +61,7 @@ function action_mailsubscribers_export_dist($arg = null) {
 			$where
 		);
 	} else {
-    	$titre = _T('mailsubscriber:titre_mailsubscribers') . "-" . $GLOBALS['meta']['nom_site'] . "-" . date('Y-m-d');
+		$titre = _T('mailsubscriber:titre_mailsubscribers') . "-" . $GLOBALS['meta']['nom_site'] . "-" . date('Y-m-d');
 		$res = sql_select(
 			"M.email,M.nom,M.lang,M.date,M.statut,($listes) as listes",
 			"spip_mailsubscribers AS M",
