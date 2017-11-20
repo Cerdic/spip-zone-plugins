@@ -1,20 +1,19 @@
 <?php
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function stocks_declarer_tables_interfaces($interface){
+function stocks_declarer_tables_interfaces($interface) {
 	// 'spip_' dans l'index de $tables_principales
 	$interface['table_des_tables']['stocks'] = 'stocks';
-    $interface['tables_jointures']['spip_produits'][] = 'stocks';
+	$interface['tables_jointures']['spip_produits'][] = 'stocks';
 
 	return $interface;
 }
 
-function stocks_declarer_tables_principales($tables_principales){
-	//-- Table stocks -----------------------------------------------------------
+function stocks_declarer_tables_principales($tables_principales) {
 	$stocks = array(
 		'id_stock' => 'bigint(21) not null',
 		'id_objet' => 'bigint(21) not null default 0',
@@ -22,12 +21,12 @@ function stocks_declarer_tables_principales($tables_principales){
 		'quantite' => 'bigint(21) not null',
 		'maj' => 'timestamp not null',
 	);
-	
+
 	$stocks_cles = array(
 		'PRIMARY KEY' => 'id_stock, id_objet, objet',
-        'KEY id_objet' => 'id_objet, objet'
+		'KEY id_objet' => 'id_objet, objet'
 	);
-	
+
 	$tables_principales['spip_stocks'] = array(
 		'field' => &$stocks,
 		'key' => &$stocks_cles,
@@ -35,5 +34,3 @@ function stocks_declarer_tables_principales($tables_principales){
 
 	return $tables_principales;
 }
-
-?>
