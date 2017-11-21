@@ -6,18 +6,19 @@
 	compatibilite="[3.0.1;3.2.*]"
 	logo=""
 	documentation=""
-	schema="0.1.1"
+	schema="1.0.0"
 >
 	<nom>Gérer des quantités et stocks</nom>
 	<auteur lien="http://www.webelys.com">Webelys</auteur>
 
 	<licence>GPLv3</licence>
 
-	<pipeline nom="declarer_tables_principales" inclure="base/stocks.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/stocks.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/stocks.php" />
 	<pipeline nom="formulaire_charger" inclure="stocks_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="stocks_pipelines.php" />
 	<pipeline nom="afficher_fiche_objet" inclure="stocks_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="stocks_pipelines.php" />
 
 	<necessite nom="produits" compatibilite="[1.1.25;["/>
 	<necessite nom="saisies" compatibilite="[2.19.1;["/>

@@ -13,24 +13,25 @@ function stocks_declarer_tables_interfaces($interface) {
 	return $interface;
 }
 
-function stocks_declarer_tables_principales($tables_principales) {
-	$stocks = array(
-		'id_stock' => 'bigint(21) not null',
-		'id_objet' => 'bigint(21) not null default 0',
-		'objet' => 'varchar(255) not null default ""',
-		'quantite' => 'bigint(21) not null',
-		'maj' => 'timestamp not null',
+function stocks_declarer_tables_objets_sql($tables) {
+
+	$tables['spip_stocks'] = array(
+		'type' => 'stock',
+		'principale' => 'oui',
+		'field' => array(
+			'id_stock' => 'bigint(21) NOT NULL',
+			'id_objet' => 'bigint(21) NOT NULL DEFAULT 0',
+			'objet' => 'varchar(255) NOT NULL DEFAULT ""',
+			'quantite' => 'bigint(21) NOT NULL',
+			'maj' => 'TIMESTAMP'
+		),
+		'key' => array(
+			'PRIMARY KEY' => 'id_stock',
+			'KEY id_objet' => 'id_objet, objet'
+		),
+		'champs_editables' => array('quantite', 'objet', 'id_objet'),
+		'champs_versionnes' => array('quantite', 'objet', 'id_objet')
 	);
 
-	$stocks_cles = array(
-		'PRIMARY KEY' => 'id_stock, id_objet, objet',
-		'KEY id_objet' => 'id_objet, objet'
-	);
-
-	$tables_principales['spip_stocks'] = array(
-		'field' => &$stocks,
-		'key' => &$stocks_cles,
-	);
-
-	return $tables_principales;
+	return $tables;
 }

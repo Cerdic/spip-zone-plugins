@@ -58,7 +58,6 @@ function stocks_formulaire_traiter($flux) {
  * function stocks_afficher_contenu_objet
  * @param $flux
  */
-
 function stocks_afficher_fiche_objet($flux) {
 
 	if ($flux['args']['type'] == 'produit') {
@@ -82,6 +81,22 @@ function stocks_afficher_fiche_objet($flux) {
 	return $flux;
 }
 
+function stocks_affiche_milieu($flux) {
+
+	if ($flux['args']['exec'] == 'produit') {
+		$texte = recuperer_fond(
+			'prive/squelettes/inclure/afficher_stock',
+			$flux['args'] // On passe le contexte au squelette
+		);
+	}
+
+	if ($p = strpos($flux['data'], '<!--affiche_milieu-->')) {
+		$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
+	} else {
+		$flux['data'] .= $texte;
+	}
+	return $flux;
+}
 
 function stocks_pre_boucle($boucle) {
 	//Connaitre la table en cours
