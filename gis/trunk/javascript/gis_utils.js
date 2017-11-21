@@ -5,8 +5,9 @@ function gis_focus_marker (id, map) {
 		if (L.MarkerClusterGroup && carte._layers[i] instanceof L.MarkerClusterGroup) {
 			carte._layers[i].eachLayer(function(layer) {
 				if (layer.id && layer.id == id) {
-					carte._layers[i].zoomToShowLayer(layer);
-					layer.openPopup();
+					carte._layers[i].zoomToShowLayer(layer, function(){
+						layer.openPopup();
+					});
 					count++;
 				}
 			});
