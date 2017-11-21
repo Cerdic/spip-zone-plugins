@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
-	'spip_bonux_description' => 'Der Plug-in, der SPIPer wäscht als SPIP, mit tollen Geschenken drin!
-	Tabellen, Zähler, usw.',
-	'spip_bonux_slogan' => 'Der Plug-in, der SPIPer wäscht als SPIP.'
+	'spip_bonux_description' => 'Das Plug-in, das SPIPer wäscht als SPIP, mit tollen Extras!
+Tabellen, Zähler, usw.',
+	'spip_bonux_slogan' => 'Das Plug-in, das SPIPer wäscht als SPIP.'
 );
