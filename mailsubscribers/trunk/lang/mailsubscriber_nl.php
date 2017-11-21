@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_importer' => 'importeren',
-	'bouton_invitation' => 'Uitnodigen om voor de nieuwsbrief in te schrijven',
+	'bouton_invitation' => 'Uitnodigen om je op de nieuwsbrief in te schrijven',
 	'bouton_previsu_importer' => 'Voorbeeld',
 
 	// C
@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_desactiver_notif_1' => 'De kennisgeving van inschrijvingen voor deze import annuleren',
 	'label_email' => 'E-mail',
 	'label_file_import' => 'Bestand om te importeren',
-	'label_from_email' => 'Email die uitnodigt',
+	'label_from_email' => 'Uitnodiging per email',
 	'label_informations_liees' => 'Te segmenteren informatie',
 	'label_inscription' => 'Inschrijving',
 	'label_lang' => 'Taal',
@@ -84,7 +84,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mailsubscribers_prop' => 'Te bevestigen',
 	'mailsubscribers_refuse' => 'Afgemeld',
 	'mailsubscribers_tous' => 'Alle',
-	'mailsubscribers_valide' => 'Actieve',
+	'mailsubscribers_valide' => 'Actief',
 
 	// S
 	'subscribe_deja_texte' => 'Het e-mailadres @email@ staat al in onze mailinglist',
@@ -105,7 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_en_attente_confirmation' => 'in afwachting van bevestiging',
 	'texte_statut_pas_encore_inscrit' => 'niet geregistreerd',
 	'texte_statut_refuse' => 'opgeschort',
-	'texte_statut_valide' => 'actieve',
+	'texte_statut_valide' => 'actief',
 	'titre_bonjour' => 'Hallo',
 	'titre_export_mailsubscribers' => 'Inschrijvingen exporteren',
 	'titre_export_mailsubscribers_all' => 'Exporteer alle adressen',
