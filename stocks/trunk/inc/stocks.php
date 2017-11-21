@@ -33,37 +33,22 @@ function get_quantite($objet, $id_objet) {
  * @param $quantite
 */
 function set_quantite($objet, $id_objet, $quantite) {
-
-	$table_stocks = table_objet_sql('stocks');
 	$quantite = intval($quantite);
 
-	$insert = sql_insertq(
-		$table_stocks,
-		array(
-			'objet' => $objet,
-			'id_objet' => intval($id_objet),
-			'quantite' => $quantite
-		)
+	// On cherche l'id_stock de l'objet
+	$id_stock = sql_getfetsel(
+		'id_stock',
+		'spip_stocks',
+		array('objet='.sql_quote($objet), 'id_objet='.intval($id_objet))
 	);
 
-	if (!$insert) {
-		$update = sql_update(
-			$table_stocks,
-			array(
-				'quantite' => intval($quantite)
-			),
-			array(
-				'objet = '.sql_quote($objet),
-				'id_objet = '.intval($id_objet)
-			)
-		);
+	include_spip('action/editer_objet');
+	if (!$id_stock) {
+		objet_inserer('stock', null, null);
 	}
+	$err = objet_modifier('stocks', $id_stock, array('quantite' => $quantite));
 
-	if ($insert || $update) {
-		return $quantite;
-	} else {
-		return false;
-	}
+	return ($err) ? $err : $quantite;
 }
 
 /**
