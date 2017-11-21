@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'quantite_produit' => 'Quantité pour le produit : ',
 	// S
 	'stocks'	=> 'Stocks',
-
+	'stock_gestion' => 'Gestion du stock'
 );
 
 
