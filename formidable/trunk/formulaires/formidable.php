@@ -424,6 +424,9 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 			}
 		}
 	}
+	if (isset($retours['id_formulaires_reponse']) AND isset($retours['redirect'])) {
+		$retours['redirect'] = parametre_url($retours['redirect'], 'id_formulaires_reponse', $retours['id_formulaires_reponse'], '&');
+	}
 	// lorsqu'on affichera à nouveau le html,
 	// dire à cvt-upload de ne pas générer le html pour les résultats des saisies fichiers
 	if ($formulaire['apres']=='formulaire' and isset($retours['fichiers'])) {
