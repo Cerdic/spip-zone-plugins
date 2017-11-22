@@ -424,6 +424,9 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 			}
 		}
 	}
+	// Si on fait une redirection
+	// Et que l'on a enregistré le résultat
+	// Alors, passer l'id de la réponse à la page
 	if (isset($retours['id_formulaires_reponse']) AND isset($retours['redirect'])) {
 		$retours['redirect'] = parametre_url($retours['redirect'], 'id_formulaires_reponse', $retours['id_formulaires_reponse'], '&');
 	}
