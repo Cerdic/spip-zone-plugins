@@ -9,15 +9,15 @@
 
 	1. D'abord rassembler les informations et les formater
 
-]
-[(#SET{titre, #TITRE|supprimer_tags|textebrut})]
-[(#SET{lang, #LANG})]
-[(#SET{desc,[(#CHAPO|sinon{#INTRODUCTION}|sinon{#TITRE}|supprimer_tags|textebrut)]})]
-[(#SET{author,#LESAUTEURS|supprimer_tags|textebrut})]
-[(#SET{date,#DATE})]
-[(#SET{url,#URL_ARTICLE})]
-[(#SET{logo,''})]
-[(#LOGO_ARTICLE|oui)
+][
+(#SET{titre, #TITRE|supprimer_tags|textebrut})][
+(#SET{lang, #LANG})][
+(#SET{desc,[(#CHAPO|sinon{#INTRODUCTION}|sinon{#TITRE}|supprimer_tags|textebrut)]})][
+(#SET{author,#LESAUTEURS|supprimer_tags|textebrut})][
+(#SET{date,#DATE})][
+(#SET{url,#URL_ARTICLE})][
+(#SET{logo,''})][
+(#LOGO_ARTICLE|oui)
 	[(#SET{logo, #LOGO_ARTICLE})]
 ]
 <BOUCLE_illus(DOCUMENTS){id_article}{extension IN jpg,gif,png}
@@ -25,14 +25,11 @@
 						{si #LOGO_ARTICLE|non}>
 	[(#SET{logo,[(#FICHIER)]})]
 </BOUCLE_illus>
-
-
 [(#REM)
 
 	2. Passer les données au modèle général
 
-]
-<INCLURE{fond=inclure/metasplus,
+]<INCLURE{fond=inclure/metasplus,
 	titre=#GET{titre},
 	lang=#GET{lang},
 	desc=#GET{desc},
