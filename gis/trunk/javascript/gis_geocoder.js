@@ -120,8 +120,7 @@ L.Geocoder = L.Class.extend({
 					}
 					if (place.properties.street) {
 						street_components.push(place.properties.street);
-					}
-					else if (place.properties.road) {
+					} else if (place.properties.road) {
 						street_components.push(place.properties.road);
 					} else if (place.properties.pedestrian) {
 						street_components.push(place.properties.pedestrian);
