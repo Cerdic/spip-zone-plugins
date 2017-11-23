@@ -47,7 +47,8 @@ L.Geocoder = L.Class.extend({
 			{
 				format: 'json',
 				lat: latlng.lat,
-				lon: latlng.lng
+				lon: latlng.lng,
+				'accept-language': this.options.acceptLanguage
 			}
 		);
 	},
@@ -57,17 +58,7 @@ L.Geocoder = L.Class.extend({
 			cache: true,
 			context: this,
 			data: data,
-			dataType: 'jsonp',
-			jsonp: 'json_callback',
 			success: this._callback,
-			error: function (e) {
-				/**
-				 * Photon me renvoie une erreur à chaque fois
-				 */
-				if (e.statusText == 'OK' && e.status == '200') {
-					this._callback(e.responseText,e.status,e);
-				}
-			},
 			url: url
 		});
 	},
@@ -78,9 +69,8 @@ L.Geocoder = L.Class.extend({
 		if (this.options.search) {
 			return_location.search = this.options.search;
 		}
-		if (typeof response === 'string') {
+		if (response.type === 'FeatureCollection') {
 			geocoder_server = 'photon';
-			response = JSON.parse(response);
 		}
 		if (((response instanceof Array) && (!response.length)) || ((response instanceof Object) && (response.error))) {
 			return_location.error = 'not found';

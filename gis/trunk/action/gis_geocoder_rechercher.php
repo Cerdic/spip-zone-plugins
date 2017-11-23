@@ -23,7 +23,7 @@ function action_gis_geocoder_rechercher_dist() {
 	}
 
 	/* On filtre les arguments à renvoyer à Nomatim (liste blanche) */
-	$arguments = collecter_requests(array('json_callback', 'format', 'q', 'limit', 'addressdetails', 'accept-language', 'lat', 'lon'), array());
+	$arguments = collecter_requests(array('format', 'q', 'limit', 'addressdetails', 'accept-language', 'lat', 'lon'), array());
 
 	$geocoder = defined('_GIS_GEOCODER') ? _GIS_GEOCODER : 'photon';
 
