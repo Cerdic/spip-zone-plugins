@@ -50,36 +50,40 @@ var geocoder;]
 			var f = geocoder.geocode(data);
 		}]
 		var zoom = map.getZoom();
-		if(data.lng <= -180) data.lng = data.lng+360
-		else if(data.lng > 180) data.lng = data.lng-360;
+		if (data.lng <= -180) {
+			data.lng = data.lng+360;
+		} else if (data.lng > 180) {
+			data.lng = data.lng-360;
+		}
 		$('#champ_#ENV{champ_zoom,zoom}').val(zoom);
-		if(action == 'click'){
+		if (action == 'click') {
 			$('#champ_#ENV{champ_lat,lat}').val(data.lat);
 			$('#champ_#ENV{champ_lon,lon}').val(data.lng);
 			annuler_geocoder = 1;
 			form_map.panTo(data);
 			marker.setLatLng(data);
 		}
-		else if(annuler_geocoder != 1){
-			if(data.point == 'undefined'){
+		else if (annuler_geocoder != 1) {
+			if (data.point == 'undefined') {
 				$('#champ_#ENV{champ_lat,lat}').val(data.lat);
 				$('#champ_#ENV{champ_lon,lon}').val(data.lng);
 				form_map.panTo(data);
 				marker.setLatLng(data);
-			}else{
+			} else {
 				$('#champ_#ENV{champ_lat,lat}').val(data.point.lat);
 				$('#champ_#ENV{champ_lon,lon}').val(data.point.lng);
 				form_map.panTo(data.point);
 				marker.setLatLng(data.point);
 			}
 		}
-		if (!marker._map)
+		if (!marker._map) {
 			form_map.addLayer(marker);
+		}
 	}
 
 	[(#GET{geocoder}|oui)
 	function geocode(query) {
-		if(! query.error){
+		if (! query.error) {
 			$('#champ_#ENV{champ_adresse,adresse}').val(query.street).change();
 			$('#champ_#ENV{champ_code_postal,code_postal}').val(query.postcode).change();
 			$('#champ_#ENV{champ_ville,ville}').val(query.locality).change();
@@ -88,7 +92,7 @@ var geocoder;]
 			$('#champ_#ENV{champ_pays,pays}').val(query.country).change();
 			$('#champ_#ENV{champ_code_pays,code_pays}').val(query.country_code).change();
 			maj_inputs(form_map,query,'geocoding');
-		}else{
+		} else {
 			alert('<:gis:erreur_geocoder:> '+query.search);
 		}
 	}]
@@ -194,7 +198,7 @@ var geocoder;]
 			maj_inputs(form_map,e.latlng,'click');
 		});
 
-		marker.on('dragend', function(e){
+		marker.on('dragend', function(e) {
 			maj_inputs(form_map,e.target._latlng,'click');
 		});
 
