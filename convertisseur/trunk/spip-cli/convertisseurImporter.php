@@ -35,7 +35,7 @@ class fichiersImporter extends Command {
 				'dest',
 				'd',
 				InputOption::VALUE_OPTIONAL,
-				'id_rubrique de la rubrique où importer les numéros et leurs articles',
+				'id_rubrique de la rubrique où importer la hierarchie de rurbriques et les articles défini dans les fichiers txt (en général l\'id_secteur ou on veut importer)',
 				'0'
 			)
 			->addOption(
@@ -57,7 +57,7 @@ class fichiersImporter extends Command {
 		
 		$source = $input->getOption('source') ;
 		$id_parent = $input->getOption('dest') ;
-		$racine_documents = $input->getOption('racine_documents') ;	
+		$racine_documents = $input->getOption('racine_documents') ;
 		
 		// Répertoire source
 		if(!is_dir($source)){
@@ -121,8 +121,8 @@ class fichiersImporter extends Command {
 					unlink("liens_corriges.txt");
 				
 				foreach($fichiers as $f){
-					
-					$fichier = 	basename($f) ;
+					// date d'apres le nom du fichier
+					$fichier = basename($f);
 					preg_match("/^(\d{4})-\d{2}/", $fichier, $m);
 					$mois = $m[0];
 					$annee = $m[1] ;
@@ -137,7 +137,6 @@ class fichiersImporter extends Command {
 					
 					$texte = preg_replace("/@@COLLECTION.*/", "", $texte);
 					$texte = preg_replace("/@@SOURCE.*/", "", $texte);
-					
 					
 					// Si des <ins> correspondent à des champs metadonnees connus, on les ajoute.
 					$champs_metadonnees = array("mots_cles", "auteurs", "hierarchie", "documents");
@@ -161,6 +160,7 @@ class fichiersImporter extends Command {
 							$id_source = $z[1] ;
 					
 					// dans quelle rubrique importer ?
+					// La hierarchie est-elle précisée dans le fichier ? (en principe oui)
 					if($hierarchie){
 						$titre_parent = $hierarchie[0] ;
 						$titre_rubrique = $hierarchie[1] ;
@@ -168,7 +168,7 @@ class fichiersImporter extends Command {
 						// hack perso diplo 2006/02 => 02 ou 2006-02 => 02
 						$titre_rubrique = preg_replace(",^(\d{4})(?:/|-)(\d{2})$,", "\\2", $titre_rubrique); 
 					
-					}else{
+					}else{ // sinon on genere des rubriques annees / mois
 						$titre_parent = $annee ;
 						$titre_rubrique = "$annee-$mois" ;
 					}
@@ -221,10 +221,10 @@ class fichiersImporter extends Command {
 									$auteur_m = substr("Création de l'auteur " . $auteur, 0, 100) ;
 									$progress->setMessage($auteur_m, 'auteur');
 								}
-							
+								
 								if($spip_version_branche > "3"){
 									if(!sql_getfetsel("id_auteur", "spip_auteurs_liens", "id_auteur=$id_auteur and id_objet=$id_article and objet='article'"))
-   										sql_insertq("spip_auteurs_liens", array(
+										sql_insertq("spip_auteurs_liens", array(
 											"id_auteur" => $id_auteur,
 											"id_objet" => $id_article,
 											"objet" => "article"
@@ -238,7 +238,7 @@ class fichiersImporter extends Command {
 								
 							}
 						}
-				
+						
 						// Créer des mots clés ?
 						if($mots_cles){
 							foreach($mots_cles as $mot){
@@ -248,7 +248,7 @@ class fichiersImporter extends Command {
 								
 								$id_groupe_mot = sql_getfetsel("id_groupe", "spip_groupes_mots", "titre=" . sql_quote($type_mot));
 								if(!$id_groupe_mot)
-									$id_groupe_mot = sql_insertq("spip_groupes_mots", array("titre" => $type_mot));								
+									$id_groupe_mot = sql_insertq("spip_groupes_mots", array("titre" => $type_mot));
 								
 								$id_mot = sql_getfetsel("id_mot", "spip_mots", "titre=" . sql_quote($titre_mot));
 								if(!$id_mot AND $titre_mot !=""){
@@ -258,7 +258,7 @@ class fichiersImporter extends Command {
 										"id_groupe" => $id_groupe_mot
 									));
 									$mot_m = substr("Création du mot " . $titre_mot . " (" . $type_mot .")", 0, 100) ;
-   									$progress->setMessage($mot_m, 'mot');
+									$progress->setMessage($mot_m, 'mot');
 								}
 								
 								if($spip_version_branche > "3"){
@@ -294,9 +294,9 @@ class fichiersImporter extends Command {
 								
 								// insertion du doc
 								$id_document = sql_getfetsel("id_document", "spip_documents", "fichier=" . sql_quote($d['fichier']));
-								if(!$id_document){									
+								if(!$id_document){
 									$id_document = sql_insertq("spip_documents", $document_a_inserer);
-   									$progress->setMessage("Création du document " . $d['titre'] . " (" . $d['fichier'] .")", 'docs');
+									$progress->setMessage("Création du document " . $d['titre'] . " (" . $d['fichier'] .")", 'docs');
 								}
 								
 								if($id_document AND !sql_getfetsel("id_document", "spip_documents_liens", "id_document=$id_document and id_objet=$id_article and objet='article'"))
@@ -346,7 +346,7 @@ class fichiersImporter extends Command {
 						include_spip("inc/lien");
 						if(preg_match_all(_RACCOURCI_LIEN, $texte, $liens, PREG_SET_ORDER)){
 							foreach($liens as $l){
-								if(preg_match("/^[0-9]+$/", $l[4])){	
+								if(preg_match("/^[0-9]+$/", $l[4])){
 									// trouver l'article dont l'id_source est $l[4] dans le secteur
 									if($id_dest = sql_getfetsel("id_article", "spip_articles", "id_source=" . trim($l[4]) . " and id_secteur=$id_parent")){
 										$lien_actuel = $l[0] ;
@@ -362,7 +362,7 @@ class fichiersImporter extends Command {
 									}else{
 										$commande = escapeshellarg("Dans $id_article (source $id_source)" . $l[0] . " : lien vers " . $l[4] . " non trouvé") ;
 										passthru("echo $commande >> liens_non_corriges.txt");
-									}	
+									}
 									
 								}
 							}
