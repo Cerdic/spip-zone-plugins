@@ -9,7 +9,6 @@ Les raccourcis de liens [xxx->12345] sont gérés
 
 */
 
-
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -48,39 +47,38 @@ class fichiersImporter extends Command {
 			)
 		;
 	}
-
+	
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		global $spip_racine;
 		global $spip_loaded;
-		global $spip_version_branche ;		
-	
+		global $spip_version_branche ;
+		
 		include_spip("iterateur/data");
 		
 		$source = $input->getOption('source') ;
 		$id_parent = $input->getOption('dest') ;
 		$racine_documents = $input->getOption('racine_documents') ;	
-				
+		
 		// Répertoire source
 		if(!is_dir($source)){
 			$output->writeln("<error>Préciser le répertoire avec les fichiers à importer. spip import -s repertoire </error>\n");
 			exit ;
-		}	
-
+		}
+		
 		if($id_parent == 0){
 			$output->writeln("<error>Préciser dans quelle rubrique importer les articles. spip import -d `id_rubrique` </error>\n");
 			exit ;
-		}	
-
+		}
 		
 		if ($spip_loaded) {
 			chdir($spip_racine);
-
+			
 			if (!function_exists('passthru')){
 				$output->writeln("<error>Votre installation de PHP doit pouvoir exécuter des commandes externes avec la fonction passthru().</error>");
 			}
 			// Si c'est bon on continue
 			else{
-
+				
 				// Champs d'un article
 				include_spip("base/abstract_sql");
 				$show = sql_showtable("spip_articles");
@@ -106,7 +104,7 @@ class fichiersImporter extends Command {
 				}
 				// on prend tous les fichiers txt dans la source, sauf si metadata.txt a la fin.
 				$fichiers = preg_files($source . "/", "(?:(?<!\.metadata\.)txt$)", 100000);
-
+				
 				// start and displays the progress bar
 				$progress = new ProgressBar($output, sizeof($fichiers));
 				$progress->setBarWidth(100);
@@ -114,16 +112,16 @@ class fichiersImporter extends Command {
 				$progress->setMessage(" Import de $source/*.txt en cours dans la rubrique $id_parent ... ", 'message'); /**/  
 				$progress->setMessage("", 'inforub');
 				$progress->start();
-
+				
 				if(is_file("liens_a_corriger.txt"))
 					unlink("liens_a_corriger.txt");
 				if(is_file("liens_non_corriges.txt"))
 					unlink("liens_non_corriges.txt");
 				if(is_file("liens_corriges.txt"))
 					unlink("liens_corriges.txt");
-
+				
 				foreach($fichiers as $f){
-
+					
 					$fichier = 	basename($f) ;
 					preg_match("/^(\d{4})-\d{2}/", $fichier, $m);
 					$mois = $m[0];
@@ -147,7 +145,7 @@ class fichiersImporter extends Command {
 					$auteurs = "" ;
 					$mots_cles = "" ;
 					$documents = "" ;
-
+					
 					if (preg_match_all(",<ins[^>]+class='(.*?)'[^>]*?>(.*?)</ins>,ims", $texte, $z, PREG_SET_ORDER)){ 
 						foreach($z as $d){ 
 							if(in_array($d[1], $champs_metadonnees)){ 
@@ -155,8 +153,8 @@ class fichiersImporter extends Command {
 								$$d[1] = split("@@", $d[2]); 
 								// virer du texte 
 								$texte = substr_replace($texte, '', strpos($texte, $d[0]), strlen($d[0])); 
-							} 
-						} 
+							}
+						}
 					}
 					
 					if (preg_match(",<ins class='id_article'>(.*?)</ins>,ims", $texte, $z))
@@ -169,7 +167,7 @@ class fichiersImporter extends Command {
 						
 						// hack perso diplo 2006/02 => 02 ou 2006-02 => 02
 						$titre_rubrique = preg_replace(",^(\d{4})(?:/|-)(\d{2})$,", "\\2", $titre_rubrique); 
-
+					
 					}else{
 						$titre_parent = $annee ;
 						$titre_rubrique = "$annee-$mois" ;
@@ -188,17 +186,17 @@ class fichiersImporter extends Command {
 					
 					// inserer l'article
 					include_spip("inc/convertisseur");
-
+					
 					// auteur par défaut (admin)
 					$id_admin = sql_getfetsel("id_auteur", "spip_auteurs", "id_auteur=1");
 					$id_admin = ($id_admin)? $id_admin : 12166 ;
-
+					
 					$GLOBALS['auteur_session']['id_auteur'] = $id_admin ;
-			
+					
 					if($id_article = inserer_conversion($texte, $id_rubrique, $f)){
 						// Créer l'auteur ?
 						if($auteurs){
-
+							
 							foreach($auteurs as $auteur){
 								
 								list($nom_auteur,$bio_auteur) = explode("::", $auteur);
@@ -210,33 +208,33 @@ class fichiersImporter extends Command {
 								
 								if($id_auteur = sql_getfetsel("id_auteur", "spip_auteurs", "nom=" . sql_quote($prenom_nom))){
 									
-								}else	
+								}else
 									$id_auteur = sql_getfetsel("id_auteur", "spip_auteurs", "nom=" . sql_quote($nom_auteur));
 								
 								if(!$id_auteur){
 									$id_auteur = sql_insertq("spip_auteurs", array(
-    										"nom" => $nom_auteur,
-    										"statut" => "1comite",
-    										"bio" => $bio_auteur
-    								));
-    								
-    								$auteur_m = substr("Création de l'auteur " . $auteur, 0, 100) ;
-    								$progress->setMessage($auteur_m, 'auteur');
+											"nom" => $nom_auteur,
+											"statut" => "1comite",
+											"bio" => $bio_auteur
+									));
+									
+									$auteur_m = substr("Création de l'auteur " . $auteur, 0, 100) ;
+									$progress->setMessage($auteur_m, 'auteur');
 								}
 							
 								if($spip_version_branche > "3"){
 									if(!sql_getfetsel("id_auteur", "spip_auteurs_liens", "id_auteur=$id_auteur and id_objet=$id_article and objet='article'"))
    										sql_insertq("spip_auteurs_liens", array(
-	    									"id_auteur" => $id_auteur,
-	    									"id_objet" => $id_article,
-	    									"objet" => "article"
-	    								));
-	    						}else // spip 2
+											"id_auteur" => $id_auteur,
+											"id_objet" => $id_article,
+											"objet" => "article"
+										));
+								}else // spip 2
 									if(!sql_getfetsel("id_auteur", "spip_auteurs_articles", "id_auteur=$id_auteur and id_article=$id_article"))
 										sql_insertq("spip_auteurs_articles", array(
-    										"id_auteur" => $id_auteur,
-    										"id_article" => $id_article
-    									));
+											"id_auteur" => $id_auteur,
+											"id_article" => $id_article
+										));
 								
 							}
 						}
@@ -247,38 +245,38 @@ class fichiersImporter extends Command {
 								// groupe mot-clé
 								list($type_mot,$titre_mot) = explode("::", $mot);
 								$type_mot = ($type_mot)? $type_mot : "Mots importés" ;
-
+								
 								$id_groupe_mot = sql_getfetsel("id_groupe", "spip_groupes_mots", "titre=" . sql_quote($type_mot));
 								if(!$id_groupe_mot)
 									$id_groupe_mot = sql_insertq("spip_groupes_mots", array("titre" => $type_mot));								
-
+								
 								$id_mot = sql_getfetsel("id_mot", "spip_mots", "titre=" . sql_quote($titre_mot));
 								if(!$id_mot AND $titre_mot !=""){
 									$id_mot = sql_insertq("spip_mots", array(
-    									"titre" => $titre_mot,
-    									"type" => $type_mot,
-    									"id_groupe" => $id_groupe_mot
-    								));
-    								$mot_m = substr("Création du mot " . $titre_mot . " (" . $type_mot .")", 0, 100) ;
+										"titre" => $titre_mot,
+										"type" => $type_mot,
+										"id_groupe" => $id_groupe_mot
+									));
+									$mot_m = substr("Création du mot " . $titre_mot . " (" . $type_mot .")", 0, 100) ;
    									$progress->setMessage($mot_m, 'mot');
 								}
-
+								
 								if($spip_version_branche > "3"){
 									if(!sql_getfetsel("id_mot", "spip_mots_liens", "id_mot=$id_mot and id_objet=$id_article and objet='article'"))
 										sql_insertq("spip_mots_liens", array(
-	    									"id_mot" => $id_mot,
-	    									"id_objet" => $id_article,
-	    									"objet" => "article"
-	    								));
+											"id_mot" => $id_mot,
+											"id_objet" => $id_article,
+											"objet" => "article"
+										));
 								}else // spip 2
 									if(!sql_getfetsel("id_mot", "spip_mots_articles", "id_mot=$id_mot and id_article=$id_article"))
 										sql_insertq("spip_mots_articles", array(
-    										"id_mot" => $id_mot,
-    										"id_article" => $id_article
-    									));
+											"id_mot" => $id_mot,
+											"id_article" => $id_article
+										));
 							}
 						}
-
+						
 						// Créer des documents ?
 						if($documents){
 							foreach($documents as $doc){
@@ -303,18 +301,18 @@ class fichiersImporter extends Command {
 								
 								if($id_document AND !sql_getfetsel("id_document", "spip_documents_liens", "id_document=$id_document and id_objet=$id_article and objet='article'"))
 									sql_insertq("spip_documents_liens", array(
-	    									"id_document" => $id_document,
-	    									"id_objet" => $id_article,
-	    									"objet" => "article"
-	    						));
-	    						
-	    						// modifier le texte qui appelle peut etre un <doc123>
-	    						if($id_document){
-	    							// ressortir le texte propre...
-	    							$texte = sql_getfetsel("texte", "spip_articles", "id_article=$id_article");
-	    							$texte = preg_replace("/(<(doc|img|emb))". $id_doc . "/i", "\${1}" . $id_document, $texte);
+											"id_document" => $id_document,
+											"id_objet" => $id_article,
+											"objet" => "article"
+								));
+								
+								// modifier le texte qui appelle peut etre un <doc123>
+								if($id_document){
+									// ressortir le texte propre...
+									$texte = sql_getfetsel("texte", "spip_articles", "id_article=$id_article");
+									$texte = preg_replace("/(<(doc|img|emb))". $id_doc . "/i", "\${1}" . $id_document, $texte);
 									sql_update("spip_articles", array("texte" => sql_quote($texte)), "id_article=$id_article");
-	    						}
+								}
 							}
 						}
 						
@@ -322,18 +320,18 @@ class fichiersImporter extends Command {
 						include_spip("inc/lien");
 						if(preg_match(_RACCOURCI_LIEN, $texte))
 							passthru("echo '$id_article	$id_source' >> liens_a_corriger.txt");
-
+						
 						// Si tout s'est bien passé, on avance la barre
 						$progress->setMessage($f, 'filename');
 						$progress->setFormat("<fg=white;bg=blue>%message%</>\n" . "<fg=white;bg=red>%inforub% %auteur% %mot%</>\n" . '%current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%' . "\n  %filename%\n%docs%\n\n");
 						$progress->advance();
-											
+						
 					}else{
 						$output->writeln("<error>échec de l'import de $f</error>");
 						exit ;
 					}
-				}	
-
+				}
+				
 				// ensure that the progress bar is at 100%
 				$progress->finish();
 				
