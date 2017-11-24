@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'base' => 'Source site',
-	'base_desc' => 'The database of the  source site must be <a href="http:///../ecrire/?exec=admin_tech">declared as an external database</a>.<br/>
+	'base_desc' => 'The database of the  source site must be <a href="/ecrire/?exec=admin_tech">declared as an external database</a>.<br/>
 	
 The database of the source site must be in the same version as the one of the host site',
 	'bouton_importer' => 'Start to merge',
