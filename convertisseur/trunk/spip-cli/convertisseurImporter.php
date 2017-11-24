@@ -206,15 +206,14 @@ class fichiersImporter extends Command {
 						// doit-on conserver l'id_article (option) ?
 						// sql_update spip_articles id_article=$id_source
 						if($conserver_id_article == "oui" and $id_source > 0){
-							// var_dump($id_article . " est " . $id_source);
 							sql_update("spip_articles", array("id_article" => $id_source), "id_article=$id_article") ;
-							// s'ajouter en auteur en spip 2 ou 3
+							// maj le lien auteur admin
 							if($spip_version_branche > "3")
 								sql_update('spip_auteurs_liens',
 									array(
 									'id_objet' => $id_source
 									),
-									"id_objet='article' and id_objet=$id_source"
+									"objet='article' and id_objet=$id_article"
 								);
 							else
 								sql_update('spip_auteurs_articles',
@@ -225,7 +224,6 @@ class fichiersImporter extends Command {
 								);
 							$id_article = $id_source ;
 						}
-						
 						// Créer l'auteur ?
 						if($auteurs){
 							
@@ -351,7 +349,7 @@ class fichiersImporter extends Command {
 						// recaler des liens [->123456] ?
 						// si on ne conserve pas le meme id_article
 						include_spip("inc/lien");
-						if(preg_match(_RACCOURCI_LIEN, $texte))
+						if(preg_match(_RACCOURCI_LIEN, $texte) and $conserver_id_article == "")
 							passthru("echo '$id_article	$id_source' >> liens_a_corriger.txt");
 						
 						// Si tout s'est bien passé, on avance la barre
