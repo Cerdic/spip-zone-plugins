@@ -10,11 +10,11 @@ function nettoyer_format($t) {
 
 	// Lettrine avec ital ex : //«~J{e ne suis pas // «C{’est comme la	
 	$t = preg_replace("/^([« ~]*\w)\{/Um","{\\1", $t);
-
+	
 	// supprimer les insecables sauf dans les nombres,
 	// parce que ca prend le chou (?)
 	$t = preg_replace(",(\D)~(\D),", '\1 \2', $t);
-
+	
 	// resserrer les {}
 	$t = preg_replace('/{([.,]+)/', '\1{', $t);
 	$t = preg_replace('/}([.,]+)/', '\1}', $t);
@@ -27,7 +27,7 @@ function nettoyer_format($t) {
 	$t = preg_replace(", +~,", '~', $t);
 	$t = preg_replace(",~ +,", '~', $t);
 	$t = preg_replace("/{([?!., ]?)}/", '\1', $t);
-
+	
 	$t = preg_replace(",^ +,m", '', $t);
 
 #$a = '«';
@@ -45,7 +45,6 @@ function nettoyer_format($t) {
 
 	return $t;
 }
-
 
 	// -----------------------------------------------------------------------
 	// Definition des regex pour les Conversions 
@@ -517,29 +516,29 @@ function accepte_fichier_upload2($f) {
 function inserer_conversion($texte, $id_rubrique, $f=null) {
 	global $log;
 	global $spip_version_branche ;
-
+	
 	$id_rubrique = intval($id_rubrique);
 	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
-
+	
 	// Verifier que la rubrique existe et qu'on a le droit d'y ecrire
 	if (!$t = sql_fetsel('id_rubrique', 'spip_rubriques', 'id_rubrique='.$id_rubrique)) {
 		$log = "erreur la rubrique n'existe pas";
 		return false;
 	}
-
+	
 	// Champs d'un article
 	include_spip("base/abstract_sql");
 	$show = sql_showtable("spip_articles");
 	$champs_article = array_keys($show['field']);
-
+	
 	// Si $f (chargement zip), on cherche un article du meme $f
 	// (valeur stockée dans un champ fichier_source ou à défaut dans le PS)
 	// dans la meme rubrique,
 	// avec le statut prepa, qui nous appartient, et... on l'ecrase
-
+	
 	$champ_source = (in_array("fichier_source", $champs_article)) ? "fichier_source" : "ps" ;
 	$source = 'Conversion depuis '.basename($f) ;
-
+	
 	// spip 3
 	if($spip_version_branche > "3")
 		$s = spip_query("SELECT a.id_article
@@ -561,7 +560,7 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 			AND aut.id_article=a.id_article
 			AND aut.id_auteur=".$id_auteur
 			);
-	
+		
 	if ($t = spip_fetch_array($s)) {
 		$id_article = $t['id_article'];
 	} else {
@@ -569,7 +568,7 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 		$q = sql_fetsel('id_secteur,lang', 'spip_rubriques',
 			'id_rubrique='.intval($id_rubrique)
 		);
-
+		
 		$champs = array(
 			'titre' => $source,
 			'statut' => 'prepa',
@@ -578,7 +577,7 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 			'lang' => $q['lang'],
 			$champ_source => $source
 			);
-
+		
 		// Envoyer aux plugins
 		$champs = pipeline('pre_insertion',
 			array(
@@ -588,9 +587,9 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 				'data' => $champs
 			)
 		);
-
+		
 		$id_article = sql_insertq('spip_articles', $champs);
-
+		
 		pipeline('post_insertion',
 			array(
 				'args' => array(
@@ -600,11 +599,10 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 				'data' => $champs
 			)
 		);
-
 		
 		if ($id_article>0
 		AND $id_auteur>0) {
-
+			
 			// s'ajouter en auteur en spip 2 ou 3
 			if($spip_version_branche > "3")
 				sql_insertq('spip_auteurs_liens',
@@ -623,14 +621,14 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 				);
 		}
 	}
-
+	
 	// En cas d'echec de l'insertion
 	
 	if (!$id_article) {
 		$log = "erreur insertion d'article";
 		return;
 	}
-
+	
 	// Si on a repere des <ins class='titre'> etc, les inserer
 	// dans les bons champs ; note : on choisi <ins> pour eviter les erreurs
 	// avec <div> qui est plus courant
@@ -647,15 +645,15 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 			$c['texte'] = substr_replace($c['texte'], '', strpos($c['texte'], $r[0]), strlen($r[0]));
 		}
 	}
-
-	// stocker l'id_article en id_source pour permettre le ré-examen des liens [->123] 
+	
+	// stocker l'id_article recu dans le fichier txt en id_source pour permettre le ré-examen des liens [->123] 
 	$id_source = $c["id_article"] ;
-
-	// attention les conflits		
+	
+	// attention les conflits
 	unset($c["id_article"]);
 	unset($c["id_secteur"]);
 	unset($c["id_rubrique"]);
-
+	
 	// Si des <ins> qui ne correspondent pas à des champs connus sont toujours là on les ajoute dans le champs metadonnees ou a défaut ostensiblement en haut du texte.
 	if (preg_match_all(",<ins[^>]+class='(.*?)'>(.*?)</ins>,ims", $c['texte'], $z, PREG_SET_ORDER)){
 		foreach($z as $d){
@@ -673,18 +671,15 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 	
 	if(in_array("id_source", $champs_article))
 		$c['id_source'] = $id_source ;
-
+	
 	$r = array();
 	foreach ($c as $var => $val)
 		$r[$var] = trim($val);
-
+	
 	//var_dump($r,$id_article);
 	//exit ;
-
+	
 	sql_updateq("spip_articles", $r, "id_article=" . $id_article);
 	
 	return $id_article;
 }
-
-
-?>

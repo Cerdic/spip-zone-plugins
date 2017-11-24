@@ -45,6 +45,13 @@ class fichiersImporter extends Command {
 				'path ajouté devant le `fichier` des documents joints importés',
 				''
 			)
+			->addOption(
+				'conserver_id_article',
+				'c',
+				InputOption::VALUE_OPTIONAL,
+				'option -c oui pour conserver les id_article',
+				''
+			)
 		;
 	}
 	
@@ -58,6 +65,7 @@ class fichiersImporter extends Command {
 		$source = $input->getOption('source') ;
 		$id_parent = $input->getOption('dest') ;
 		$racine_documents = $input->getOption('racine_documents') ;
+		$conserver_id_article = $input->getOption('conserver_id_article') ;
 		
 		// Répertoire source
 		if(!is_dir($source)){
@@ -157,7 +165,7 @@ class fichiersImporter extends Command {
 					}
 					
 					if (preg_match(",<ins class='id_article'>(.*?)</ins>,ims", $texte, $z))
-							$id_source = $z[1] ;
+						$id_source = $z[1];
 					
 					// dans quelle rubrique importer ?
 					// La hierarchie est-elle précisée dans le fichier ? (en principe oui)
@@ -194,6 +202,30 @@ class fichiersImporter extends Command {
 					$GLOBALS['auteur_session']['id_auteur'] = $id_admin ;
 					
 					if($id_article = inserer_conversion($texte, $id_rubrique, $f)){
+						
+						// doit-on conserver l'id_article (option) ?
+						// sql_update spip_articles id_article=$id_source
+						if($conserver_id_article == "oui" and $id_source > 0){
+							// var_dump($id_article . " est " . $id_source);
+							sql_update("spip_articles", array("id_article" => $id_source), "id_article=$id_article") ;
+							// s'ajouter en auteur en spip 2 ou 3
+							if($spip_version_branche > "3")
+								sql_update('spip_auteurs_liens',
+									array(
+									'id_objet' => $id_source
+									),
+									"id_objet='article' and id_objet=$id_source"
+								);
+							else
+								sql_update('spip_auteurs_articles',
+									array(
+									'id_article' => $id_source
+									),
+									"id_article=$id_article"
+								);
+							$id_article = $id_source ;
+						}
+						
 						// Créer l'auteur ?
 						if($auteurs){
 							
@@ -317,6 +349,7 @@ class fichiersImporter extends Command {
 						}
 						
 						// recaler des liens [->123456] ?
+						// si on ne conserve pas le meme id_article
 						include_spip("inc/lien");
 						if(preg_match(_RACCOURCI_LIEN, $texte))
 							passthru("echo '$id_article	$id_source' >> liens_a_corriger.txt");
@@ -338,37 +371,39 @@ class fichiersImporter extends Command {
 				// remapper les liens [->12345]
 				lire_fichier("liens_a_corriger.txt", $articles);
 				$corrections_liens = inc_file_to_array_dist($articles);
-				foreach($corrections_liens as $k => $v){
-					if($v){
-						list($id_article, $id_source) = explode("\t", $v);
-						$texte = sql_getfetsel("texte", "spip_articles", "id_article=$id_article") ;
-						// recaler des liens [->123456] ?
-						include_spip("inc/lien");
-						if(preg_match_all(_RACCOURCI_LIEN, $texte, $liens, PREG_SET_ORDER)){
-							foreach($liens as $l){
-								if(preg_match("/^[0-9]+$/", $l[4])){
-									// trouver l'article dont l'id_source est $l[4] dans le secteur
-									if($id_dest = sql_getfetsel("id_article", "spip_articles", "id_source=" . trim($l[4]) . " and id_secteur=$id_parent")){
-										$lien_actuel = $l[0] ;
-										$lien_corrige = str_replace($l[4], $id_dest, $l[0]) ;
+				
+				if(is_array($corrections_liens))
+					foreach($corrections_liens as $k => $v){
+						if($v){
+							list($id_article, $id_source) = explode("\t", $v);
+							$texte = sql_getfetsel("texte", "spip_articles", "id_article=$id_article") ;
+							// recaler des liens [->123456] ?
+							include_spip("inc/lien");
+							if(preg_match_all(_RACCOURCI_LIEN, $texte, $liens, PREG_SET_ORDER)){
+								foreach($liens as $l){
+									if(preg_match("/^[0-9]+$/", $l[4])){
+										// trouver l'article dont l'id_source est $l[4] dans le secteur
+										if($id_dest = sql_getfetsel("id_article", "spip_articles", "id_source=" . trim($l[4]) . " and id_secteur=$id_parent")){
+											$lien_actuel = $l[0] ;
+											$lien_corrige = str_replace($l[4], $id_dest, $l[0]) ;
+											
+											$lien = escapeshellarg("$id_article : $lien_actuel => $lien_corrige");
+											passthru("echo $lien >> liens_corriges.txt");
+											// maj le texte
+											$texte_corrige = str_replace($lien_actuel, $lien_corrige, $texte);
+											sql_update("spip_articles", array("texte" => sql_quote($texte_corrige)), "id_article=$id_article");
+											// attention s'il y a plusieurs liens
+											$texte = $texte_corrige ;
+										}else{
+											$commande = escapeshellarg("Dans $id_article (source $id_source)" . $l[0] . " : lien vers " . $l[4] . " non trouvé") ;
+											passthru("echo $commande >> liens_non_corriges.txt");
+										}
 										
-										$lien = escapeshellarg("$id_article : $lien_actuel => $lien_corrige");
-										passthru("echo $lien >> liens_corriges.txt");
-										// maj le texte
-										$texte_corrige = str_replace($lien_actuel, $lien_corrige, $texte);
-										sql_update("spip_articles", array("texte" => sql_quote($texte_corrige)), "id_article=$id_article");
-										// attention s'il y a plusieurs liens
-										$texte = $texte_corrige ;
-									}else{
-										$commande = escapeshellarg("Dans $id_article (source $id_source)" . $l[0] . " : lien vers " . $l[4] . " non trouvé") ;
-										passthru("echo $commande >> liens_non_corriges.txt");
 									}
-									
 								}
 							}
 						}
 					}
-				}
 				
 				$output->writeln("");
 				if(is_file("liens_a_corriger.txt"))
