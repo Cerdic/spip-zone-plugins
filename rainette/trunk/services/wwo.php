@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 if (!defined('_RAINETTE_WWO_URL_BASE')) {
-	define('_RAINETTE_WWO_URL_BASE', 'http://api.worldweatheronline.com/free/v2/weather.ashx');
+	define('_RAINETTE_WWO_URL_BASE', 'http://api.worldweatheronline.com/premium/v1/weather.ashx');
 }
 
 
