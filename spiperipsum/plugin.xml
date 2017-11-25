@@ -19,5 +19,5 @@ Essayez la page de d&#233;mo {demo/spiperipsum.html} pour des exemples d'utilisa
 	<fonctions>spiperipsum_fonctions.php</fonctions>
 	<options>spiperipsum_options.php</options>
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[1.9.0;3.1.99]" />
+	<necessite id="SPIP" version="[1.9.0;3.2.99]" />
 </plugin>
