@@ -1,9 +1,9 @@
 <paquet
 	prefix="icalendar"
 	categorie="date"
-	version="0.4.4"
-	etat="dev"
-	compatibilite="[2.1.0;3.1.*]"
+	version="0.4.5"
+	etat="test"
+	compatibilite="[2.1.0;3.2.*]"
 	logo="icalendar.png"
 	documentation="https://contrib.spip.net/Plugin-iCalendar"
 >	
