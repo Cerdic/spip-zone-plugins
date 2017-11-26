@@ -64,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_afficher_si_remplissage_label' => 'Conditional display when being filled',
 	'option_attention_explication' => 'A message more important than the explanation.',
 	'option_attention_label' => 'Warning',
+	'option_attribut_title_label' => 'Put a title attribute in the label, containing the value of the field. Use with moderation.',
 	'option_autocomplete_defaut' => 'Leave the default',
 	'option_autocomplete_explication' => 'At page load, your browser may pre-fill the field based on its history',
 	'option_autocomplete_label' => 'Pre-fill the field',
@@ -108,6 +109,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_label_case_label' => 'Label located beside the check box',
 	'option_label_explication' => 'The title that will be displayed.',
 	'option_label_label' => 'Label',
+	'option_label_non_explication' => 'Will be visible when displaying the results.',
+	'option_label_non_label' => 'Label if the box is not checked',
+	'option_label_oui_explication' => 'Will be visible when displaying the results.',
+	'option_label_oui_label' => 'Label if the box is checked',
 	'option_limite_branche_explication' => 'Limit the choice to one specific branch of the site',
 	'option_limite_branche_label' => 'Limit to one branch',
 	'option_maxlength_explication' => 'The user can not type more characters than this number.',
@@ -133,6 +138,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_rows_label' => 'Lines number',
 	'option_size_explication' => 'Field width in characters. This option is not always applied/used because the CSS styles of your site can cancel it.',
 	'option_size_label' => 'Field size',
+	'option_statut_label' => 'Specific status',
 	'option_type_choix_plusieurs' => 'Allow the user to choose <strong>several</ strong> message recipients.',
 	'option_type_choix_tous' => 'Make <strong>all</ strong> these authors as recipients. The user will not have choice.',
 	'option_type_choix_un' => 'Allow the user to choose <strong>only one</strong> message recipient (as a dropdown list).',
@@ -141,10 +147,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_label' => 'Field type',
 	'option_type_password' => 'Text, hidden during input (eg. password)',
 	'option_type_text' => 'Normal',
-	'option_valeur_non_explication' => 'Posted value if the checkbox is not selected', # MODIF
+	'option_valeur_non_explication' => 'Posted value if the checkbox is not selected. Attention, this is a technical value and not a displayed value.',
 	'option_valeur_non_label' => 'Value No',
-	'option_valeur_oui_explication' => 'Posted value if the checkbox is selected', # MODIF
+	'option_valeur_oui_explication' => 'Posted value if the checkbox is selected. Attention, this is a technical value and not a displayed value.',
 	'option_valeur_oui_label' => 'Value Yes',
+
+	// P
+	'plugin_yaml_inactif' => 'The YAML plugin is inactive. You must enable it for this page to be functional.',
 
 	// S
 	'saisie_auteurs_explication' => 'Allows you to select one or more authors',
@@ -157,6 +166,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_date_titre' => 'Date',
 	'saisie_destinataires_explication' => 'Used to select one or more recipients from among the pre-selected authors.',
 	'saisie_destinataires_titre' => 'Recipients',
+	'saisie_email_explication' => 'Allows to have an email type field in HTML5.',
+	'saisie_email_titre' => 'E-mail adress',
 	'saisie_explication_explication' => 'A general explanatory description.',
 	'saisie_explication_titre' => 'Explanation',
 	'saisie_fieldset_explication' => 'A frame which may include several fields.',
@@ -192,8 +203,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_textarea_titre' => 'Textarea',
 
 	// T
+	'titre_page_saisies_doc' => 'Documentation of input fields',
 	'tous_visiteurs' => 'All visitors (even if not registered)',
-	'tout_selectionner' => 'Select all', # MODIF
+	'tout_selectionner' => '(Un)select all',
 
 	// V
 	'vue_sans_reponse' => '<i>(no data entered)</i>',
