@@ -11,13 +11,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'base' => 'Source site',
-	'base_desc' => 'The database of the  source site must be <a href="http:///../ecrire/?exec=admin_tech">declared as an external database</a>.<br/>
-	
-The database of the source site must be in the same version as the one of the host site', # MODIF
+	'base_desc' => 'The source site database must be<a href=""/ecrire/?exec=admin_tech">declared as an external database</a>.<br/>
+	The base of the source site must be in the same version as the host site',
 	'bouton_importer' => 'Start to merge',
 	'bouton_supprimer' => 'Delete the merge',
 
 	// C
+	'confirme_traduire_documents_doublons' => 'Translate duplicate documents using <multi> tags.',
 	'confirme_warning' => 'Confirm the merge of the databases?',
 
 	// D
@@ -25,6 +25,8 @@ The database of the source site must be in the same version as the one of the ho
 	'dossier_pas_lisible' => 'The directory @dossier@ cannot be read',
 
 	// E
+	'erreur_img_accessible' => 'Your IMG directory is not accessible. It is impossible either to write a file to the root, or to create a subdirectory.',
+	'erreur_traduction_document' => 'Your databases are in different languages, ticking the following box, you can translate the contents of duplicate documents using <multi> tags.',
 	'erreur_versions' => 'The host site and the source site are not in the same database version:
 		<br/>- host is in version @vhote@
 		<br/>- source is in version @vsource@',
