@@ -44,6 +44,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *            - `wwo` pour World Weather Online
  *            - `wunderground` pour Wunderground
  *            - `owm` pour Open Weather Map
+ *            - `apixu` pour APIXU
  *
  * @return string
  *        Le nom du fichier cache correspondant à la demande.
@@ -198,6 +199,7 @@ function inc_charger_meteo_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 
 						// 3- Compléments standard communs à tous les services mais fonction du mode
 						if ($mode == 'conditions') {
+							// Vérifier que l'indice uv si celui-ci est fourni
 							// Calcul du risque uv à partir de l'indice uv si celui-ci est fourni
 							include_spip('inc/rainette_convertir');
 							$donnees['risque_uv'] = is_int($donnees['indice_uv'])

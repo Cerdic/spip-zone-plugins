@@ -170,7 +170,7 @@ $GLOBALS['rainette_owm_config']['previsions'] = array(
 /**
  * @param string $mode
  *
- * @return string
+ * @return array
  */
 function owm_service2configuration($mode) {
 	// On merge la configuration propre au mode et la configuration du service proprement dit

@@ -194,7 +194,7 @@ function rainette_afficher_direction($direction) {
  * @param string $tendance_en
  * 		Texte anglais représentant la tendance et récupérée par le service.
  * @param string $methode
- * 		Methode d'affichage de la tendancequi prend les valeurs:
+ * 		Methode d'affichage de la tendance qui prend les valeurs:
  * 		- `texte`   : pour afficher un texte en clair décrivant la tendance (méthode par défaut).
  * 		- `symbole` : pour afficher un symbole de flèche (1 caractère) décrivant la tendance.
  * 		- `icone`   : pour afficher un icone spécifique décrivant la tendance avec une infobulle

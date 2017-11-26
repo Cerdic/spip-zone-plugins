@@ -35,7 +35,7 @@ $GLOBALS['rainette_wunderground_config']['service'] = array(
 	),
 	'credits' => array(
 		'titre'       => null,
-		'logo'        => 'wunderground-126.png',
+		'logo'        => 'wunderground.png',
 		'lien'        => 'http://www.wunderground.com/',
 	),
 	'langues' => array(
@@ -229,7 +229,7 @@ $GLOBALS['rainette_wunderground_config']['previsions'] = array(
 /**
  * @param string $mode
  *
- * @return string
+ * @return array
  */
 function wunderground_service2configuration($mode) {
 	// On merge la configuration propre au mode et la configuration du service proprement dit

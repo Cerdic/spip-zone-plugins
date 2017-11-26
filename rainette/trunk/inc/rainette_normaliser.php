@@ -356,7 +356,13 @@ function service2donnees($config_service, $mode, $flux, $periode) {
 							: table_valeur($flux, implode('/', $cle_service), '');
 						if ($valeur_service !== '') {
 							$typer = donnee2typage($mode, $_donnee);
-							$donnee = $typer($valeur_service);
+							$valeur_typee = $typer($valeur_service);
+
+							// Vérification de la donnée en cours de traitement si une fonction idoine existe
+							$verifier = "verifier_${_donnee}";
+							if (!function_exists($verifier) or (function_exists($verifier) and $verifier($valeur_typee))) {
+								$donnee = $valeur_typee;
+							}
 						}
 					} else {
 						// La donnée météo n'est jamais fournie par le service. On la positionne à null pour
@@ -461,6 +467,16 @@ function donnee2heure($donnee) {
 	}
 
 	return $heure;
+}
+
+function verifier_indice_uv($valeur) {
+
+	$est_valide = true;
+	if (($valeur < 0) or ($valeur > 16)) {
+		$est_valide = false;
+	}
+
+	return $est_valide;
 }
 
 /**

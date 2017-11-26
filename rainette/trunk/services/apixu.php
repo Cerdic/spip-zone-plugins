@@ -1,34 +1,34 @@
 <?php
 /**
- * Ce fichier contient la configuration et l'ensemble des fonctions implémentant le service World Weather Online (wwo).
+ * Ce fichier contient la configuration et l'ensemble des fonctions implémentant le service APIXU (apixu).
  * Ce service est capable de fournir des données au format XML ou JSON. Néanmoins, l'API actuelle du plugin utilise
  * uniquemement le format JSON.
  *
- * @package SPIP\RAINETTE\SERVICES\WWO
+ * @package SPIP\RAINETTE\SERVICES\APIXU
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-if (!defined('_RAINETTE_WWO_URL_BASE')) {
-	define('_RAINETTE_WWO_URL_BASE', 'http://api.worldweatheronline.com/premium/v1/weather.ashx');
+if (!defined('_RAINETTE_APIXU_URL_BASE')) {
+	define('_RAINETTE_APIXU_URL_BASE', 'https://api.apixu.com/v1');
 }
 
 
 // Configuration des valeurs par défaut des éléments de la configuration dynamique.
 // Ces valeurs sont applicables à tous les modes.
-$GLOBALS['rainette_wwo_config']['service'] = array(
-	'alias'   => 'wwo',
+$GLOBALS['rainette_apixu_config']['service'] = array(
+	'alias'   => 'apixu',
 	'defauts' => array(
 		'inscription' => '',
 		'unite'       => 'm',
-		'condition'   => 'wwo',
+		'condition'   => 'apixu',
 		'theme'       => '',
 	),
 	'credits' => array(
-		'titre'       => 'Free local weather content provider',
-		'logo'        => null,
-		'lien'        => 'http://www.worldweatheronline.com/',
+		'titre'       => 'APIXU',
+		'logo'        => 'apixu.png',
+		'lien'        => 'https://www.apixu.com/',
 	),
 	'langues' => array(
 		'disponibles' => array(
@@ -74,104 +74,101 @@ $GLOBALS['rainette_wwo_config']['service'] = array(
 	)
 );
 
-// Configuration des données fournies par le service wwo pour le mode 'infos' en format JSON.
+// Configuration des données fournies par le service apixu pour le mode 'infos' en format JSON.
 // -- Seules les données non calculées sont configurées.
-$GLOBALS['rainette_wwo_config']['infos'] = array(
+$GLOBALS['rainette_apixu_config']['infos'] = array(
 	'periode_maj' => 86400,
 	'format_flux' => 'json',
-	'cle_base'    => array('data', 'nearest_area', 0),
+	'cle_base'    => array('location'),
 	'donnees'     => array(
 		// Lieu
-		'ville'     => array('cle' => array('areaName', 0, 'value')),
-		'pays'      => array('cle' => array('country', 0, 'value')),
+		'ville'     => array('cle' => array('name')),
+		'pays'      => array('cle' => array('country')),
 		'pays_iso2' => array('cle' => array()),
-		'region'    => array('cle' => array('region', 0, 'value')),
+		'region'    => array('cle' => array('region')),
 		// Coordonnées
-		'longitude' => array('cle' => array('longitude')),
-		'latitude'  => array('cle' => array('latitude')),
+		'longitude' => array('cle' => array('lon')),
+		'latitude'  => array('cle' => array('lat')),
 		// Informations complémentaires : aucune configuration car ce sont des données calculées
 	),
 );
 
-// Configuration des données fournies par le service wwo pour le mode 'conditions'.
+// Configuration des données fournies par le service apixu pour le mode 'conditions'.
 // -- Seules les données non calculées sont configurées.
-$GLOBALS['rainette_wwo_config']['conditions'] = array(
+$GLOBALS['rainette_apixu_config']['conditions'] = array(
 	'periode_maj' => 10800,
 	'format_flux' => 'json',
-	'cle_base'    => array('data', 'current_condition', 0),
+	'cle_base'    => array('current'),
 	'donnees'     => array(
 		// Données d'observation
-		'derniere_maj'          => array('cle' => array('localObsDateTime')),
+		'derniere_maj'          => array('cle' => array('last_updated')),
 		'station'               => array('cle' => array()),
 		// Températures
-		'temperature_reelle'    => array('cle' => array('temp_'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'C', 's' => 'F')),
-		'temperature_ressentie' => array('cle' => array('FeelsLike'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'C', 's' => 'F')),
+		'temperature_reelle'    => array('cle' => array('temp_'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'c', 's' => 'f')),
+		'temperature_ressentie' => array('cle' => array('feelslike_'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'c', 's' => 'f')),
 		// Données anémométriques
-		'vitesse_vent'          => array('cle' => array('windspeed'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'Kmph', 's' => 'Miles')),
-		'angle_vent'            => array('cle' => array('winddirDegree')),
-		'direction_vent'        => array('cle' => array('winddir16Point')),
+		'vitesse_vent'          => array('cle' => array('wind_'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'kph', 's' => 'mph')),
+		'angle_vent'            => array('cle' => array('wind_degree')),
+		'direction_vent'        => array('cle' => array('wind_dir')),
 		// Données atmosphériques : risque_uv est calculé
-		'precipitation'         => array('cle' => array('precipMM')),
+		'precipitation'         => array('cle' => array('precip_'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'mm', 's' => 'in')),
 		'humidite'              => array('cle' => array('humidity')),
 		'point_rosee'           => array('cle' => array()),
-		'pression'              => array('cle' => array('pressure')),
+		'pression'              => array('cle' => array('pressure_'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'mb', 's' => 'in')),
 		'tendance_pression'     => array('cle' => array()),
-		'visibilite'            => array('cle' => array('visibility')),
+		'visibilite'            => array('cle' => array('vis_'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'km', 's' => 'miles')),
 		'indice_uv'             => array('cle' => array()),
 		// Etats météorologiques natifs
-		'code_meteo'            => array('cle' => array('weatherCode')),
-		'icon_meteo'            => array('cle' => array('weatherIconUrl', 0, 'value')),
-		'desc_meteo'            => array('cle' => array('weatherDesc', 0, 'value')),
-		'trad_meteo'            => array('cle' => array('lang_', 0, 'value'), 'suffixe_langue' => array('id_cle' => 0)),
+		'code_meteo'            => array('cle' => array('condition', 'code')),
+		'icon_meteo'            => array('cle' => array('condition', 'icon')),
+		'desc_meteo'            => array('cle' => array('condition', 'text')),
+		'trad_meteo'            => array('cle' => array()),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
 );
 
-// Configuration des données fournies par le service wwo pour le mode 'conditions'.
-// -- L'API Premium fournit 15 jours de prévisions.
+// Configuration des données fournies par le service apixu pour le mode 'conditions'.
+// -- L'API fournit 10 jours de prévisions avec une périodicité systématique de 1h.
 // -- Seules les données non calculées sont configurées.
-$GLOBALS['rainette_wwo_config']['previsions'] = array(
+$GLOBALS['rainette_apixu_config']['previsions'] = array(
 	'periodicites'       => array(
-		24 => array('max_jours' => 15),
-		12 => array('max_jours' => 15),
-		6  => array('max_jours' => 15),
-		3  => array('max_jours' => 15),
-		1  => array('max_jours' => 15)
+		24 => array('max_jours' => 10),
+//		1 => array('max_jours' => 10)
 	),
 	'periodicite_defaut' => 24,
 	'periode_maj'        => 14400,
 	'format_flux'        => 'json',
-	'cle_base'           => array('data', 'weather'),
-	'cle_heure'          => array('hourly'),
-	'structure_heure'    => true,
+	'cle_base'           => array('forecast', 'forecastday'),
+	'cle_heure'          => array(),
+	'structure_heure'    => false,
 	'donnees'            => array(
 		// Données d'observation
 		'date'                 => array('cle' => array('date')),
 		'heure'                => array('cle' => array('time')),
 		// Données astronomiques
-		'lever_soleil'         => array('cle' => array('astronomy', 0, 'sunrise')),
-		'coucher_soleil'       => array('cle' => array('astronomy', 0, 'sunset')),
+		'lever_soleil'         => array('cle' => array('astro', 'sunrise')),
+		'coucher_soleil'       => array('cle' => array('astro', 'sunset')),
 		// Températures
-		'temperature'          => array('cle' => array('temp'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'C', 's' => 'F')),
-		'temperature_max'      => array('cle' => array('maxtemp'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'C', 's' => 'F')),
-		'temperature_min'      => array('cle' => array('mintemp'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'C', 's' => 'F')),
+		'temperature'          => array('cle' => array('day', 'avgtemp_'), 'suffixe_unite' => array('id_cle' => 1, 'm' => 'c', 's' => 'f')),
+		'temperature_max'      => array('cle' => array('day', 'maxtemp_'), 'suffixe_unite' => array('id_cle' => 1, 'm' => 'c', 's' => 'f')),
+		'temperature_min'      => array('cle' => array('day', 'mintemp_'), 'suffixe_unite' => array('id_cle' => 1, 'm' => 'c', 's' => 'f')),
 		// Données anémométriques
-		'vitesse_vent'         => array('cle' => array('windspeed'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'Kmph', 's' => 'Miles')),
-		'angle_vent'           => array('cle' => array('winddirDegree')),
-		'direction_vent'       => array('cle' => array('winddir16Point')),
+		'vitesse_vent'         => array('cle' => array('day', 'maxwind_'), 'suffixe_unite' => array('id_cle' => 1, 'm' => 'kph', 's' => 'mph')),
+		'angle_vent'           => array('cle' => array()),
+		'direction_vent'       => array('cle' => array()),
 		// Données atmosphériques : risque_uv est calculé
-		'risque_precipitation' => array('cle' => array('chanceofrain')),
-		'precipitation'        => array('cle' => array('precipMM')),
-		'humidite'             => array('cle' => array('humidity')),
-		'point_rosee'          => array('cle' => array('DewPoint'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'C', 's' => 'F')),
-		'pression'             => array('cle' => array('pressure')),
-		'visibilite'           => array('cle' => array('visibility')),
-		'indice_uv'            => array('cle' => array('uvIndex')),
+		'risque_precipitation' => array('cle' => array()),
+		'precipitation'        => array('cle' => array('day', 'totalprecip_'), 'suffixe_unite' => array('id_cle' => 1, 'm' => 'mm', 's' => 'in')),
+		'humidite'             => array('cle' => array('day', 'avghumidity')),
+		'point_rosee'          => array('cle' => array()),
+		'pression'             => array('cle' => array()),
+		'visibilite'           => array('cle' => array('day', 'avgvis_'), 'suffixe_unite' => array('id_cle' => 1, 'm' => 'km', 's' => 'miles')),
+		'indice_uv'            => array('cle' => array('day', 'uv')),
 		// Etats météorologiques natifs
-		'code_meteo'           => array('cle' => array('weatherCode')),
-		'icon_meteo'           => array('cle' => array('weatherIconUrl', 0, 'value')),
-		'desc_meteo'           => array('cle' => array('weatherDesc', 0, 'value')),
-		'trad_meteo'           => array('cle' => array('lang_', 0, 'value'), 'suffixe_langue' => array('id_cle' => 0)),
+		'code_meteo'           => array('cle' => array('day', 'condition', 'code')),
+		'icon_meteo'           => array('cle' => array('day', 'condition', 'icon')),
+		'desc_meteo'           => array('cle' => array('day', 'condition', 'text')),
+		'trad_meteo'           => array('cle' => array()),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
 );
@@ -194,10 +191,10 @@ $GLOBALS['rainette_wwo_config']['previsions'] = array(
  * @return array
  *        Le tableau des données de configuration communes au service et propres au type de données demandé.
  */
-function wwo_service2configuration($mode) {
+function apixu_service2configuration($mode) {
 	// On merge la configuration propre au mode et la configuration du service proprement dite
 	// composée des valeurs par défaut de la configuration utilisateur et de paramètres généraux.
-	$config = array_merge($GLOBALS['rainette_wwo_config'][$mode], $GLOBALS['rainette_wwo_config']['service']);
+	$config = array_merge($GLOBALS['rainette_apixu_config'][$mode], $GLOBALS['rainette_apixu_config']['service']);
 
 	return $config;
 }
@@ -208,7 +205,7 @@ function wwo_service2configuration($mode) {
  * du service (par exemple, le code d'inscription, le format des résultats...).
  *
  * @api
- * @uses langue2code_wwo()
+ * @uses langue2code_apixu()
  *
  * @param string $lieu
  *        Lieu pour lequel on acquiert les données météorologiques.
@@ -224,7 +221,7 @@ function wwo_service2configuration($mode) {
  * @return string
  *        URL complète de la requête.
  */
-function wwo_service2url($lieu, $mode, $periodicite, $configuration) {
+function apixu_service2url($lieu, $mode, $periodicite, $configuration) {
 
 	// Identification de la langue du resume.
 	include_spip('inc/rainette_normaliser');
@@ -235,21 +232,20 @@ function wwo_service2url($lieu, $mode, $periodicite, $configuration) {
 	// Néanmoins, la query a toujours la même forme; il n'est donc pas nécessaire de gérer le format.
 	list($lieu_normalise,) = normaliser_lieu($lieu);
 
-	$url = _RAINETTE_WWO_URL_BASE
-		   . '?key=' . $configuration['inscription']
-		   . '&format=' . $configuration['format_flux']
-		   . '&extra=localObsTime'
-		   . '&lang=' . $code_langue
-		   . '&q=' . $lieu_normalise;
+	$url = _RAINETTE_APIXU_URL_BASE;
 
-	if ($mode == 'infos') {
-		$url .= '&includeLocation=yes&cc=no&fx=no';
-	} elseif ($mode == 'conditions') {
-		$url .= '&cc=yes&fx=no';
+	if ($mode == 'previsions') {
+		$url .= "/forecast.{$configuration['format_flux']}";
 	} else {
-		$url .= '&cc=no&fx=yes'
-				. '&num_of_days=' . $configuration['periodicites'][$periodicite]['max_jours']
-				. '&tp=' . strval($periodicite);
+		$url .= "/current.{$configuration['format_flux']}";
+	}
+
+	$url .= '?key=' . $configuration['inscription']
+			. '&lang=' . $code_langue
+			. '&q=' . $lieu_normalise;
+
+	if ($mode == 'previsions') {
+		$url .= '&days=' . $configuration['periodicites'][$periodicite]['max_jours'];
 	}
 
 	return $url;
@@ -272,17 +268,11 @@ function wwo_service2url($lieu, $mode, $periodicite, $configuration) {
  *        Tableau standardisé des conditions météorologiques complété par les données spécifiques
  *        du service.
  */
-function wwo_complement2conditions($tableau, $configuration) {
+function apixu_complement2conditions($tableau, $configuration) {
 
 	if ($tableau) {
-		// Convertir les informations exprimées en système métrique dans le systeme US si la
-		// configuration le demande
-		if ($configuration['unite'] == 's') {
-			metrique2imperial_wwo($tableau);
-		}
-
 		// Compléter le tableau standard avec les états météorologiques calculés
-		etat2resume_wwo($tableau, $configuration);
+		etat2resume_apixu($tableau, $configuration);
 	}
 
 	return $tableau;
@@ -307,17 +297,17 @@ function wwo_complement2conditions($tableau, $configuration) {
  *        Tableau standardisé des conditions météorologiques complété par les données spécifiques
  *        du service.
  */
-function wwo_complement2previsions($tableau, $configuration, $index_periode) {
+function apixu_complement2previsions($tableau, $configuration, $index_periode) {
 
 	if (($tableau) and ($index_periode > -1)) {
 		// Convertir les informations exprimées en système métrique dans le systeme US si la
 		// configuration le demande
 		if ($configuration['unite'] == 's') {
-			metrique2imperial_wwo($tableau);
+			metrique2imperial_apixu($tableau);
 		}
 
 		// Compléter le tableau standard avec les états météorologiques calculés
-		etat2resume_wwo($tableau, $configuration);
+		etat2resume_apixu($tableau, $configuration);
 	}
 
 	return $tableau;
@@ -327,7 +317,7 @@ function wwo_complement2previsions($tableau, $configuration, $index_periode) {
 // ---------------------------------------------------------------------------------------------
 // Les fonctions qui suivent sont des utilitaires utilisés uniquement appelées par les fonctions
 // de l'API.
-// PACKAGE SPIP\RAINETTE\WWO\OUTILS
+// PACKAGE SPIP\RAINETTE\APIXU\OUTILS
 // ---------------------------------------------------------------------------------------------
 
 /**
@@ -335,7 +325,7 @@ function wwo_complement2previsions($tableau, $configuration, $index_periode) {
  *
  * @return void
  */
-function metrique2imperial_wwo(&$tableau) {
+function metrique2imperial_apixu(&$tableau) {
 	include_spip('inc/rainette_convertir');
 
 	// Seules la température, la température ressentie et la vitesse du vent sont fournies dans
@@ -354,14 +344,14 @@ function metrique2imperial_wwo(&$tableau) {
 }
 
 
-function etat2resume_wwo(&$tableau, $configuration) {
+function etat2resume_apixu(&$tableau, $configuration) {
 
 	if ($tableau['code_meteo'] and $tableau['icon_meteo']) {
 		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
 		// Pour ce service aucun indicateur n'est disponible
 		// -> on utilise le nom de l'icone qui contient l'indication "night" pour la nuit
 		$icone = basename($tableau['icon_meteo']);
-		if (strpos($icone, '_night') === false) {
+		if (strpos($icone, '/night/') === false) {
 			// C'est le jour
 			$tableau['periode'] = 0;
 		} else {
@@ -372,14 +362,14 @@ function etat2resume_wwo(&$tableau, $configuration) {
 		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
 		if ($configuration['condition'] == $configuration['alias']) {
 			// On affiche les conditions natives fournies par le service.
-			// Pour le resume, wwo fournit la traduction dans un item différent que pour les autres services.
+			// Pour le resume, apixu fournit la traduction dans un item différent que pour les autres services.
 			// Cet item est stocké dans trad_meteo.
 			$tableau['icone']['code'] = $tableau['code_meteo'];
 			$tableau['icone']['url'] = copie_locale($tableau['icon_meteo']);
-			$tableau['resume'] = ucfirst($tableau['trad_meteo']);
+			$tableau['resume'] = ucfirst($tableau['desc_meteo']);
 		} else {
 			// On affiche les conditions traduites dans le systeme weather.com
-			$meteo = meteo_wwo2weather($tableau['code_meteo'], $tableau['periode']);
+			$meteo = meteo_apixu2weather($tableau['code_meteo'], $tableau['periode']);
 			$tableau['icone'] = $meteo;
 			$tableau['resume'] = $meteo;
 		}
@@ -398,8 +388,8 @@ function etat2resume_wwo(&$tableau, $configuration) {
  *
  * @return string
  */
-function meteo_wwo2weather($meteo, $periode = 0) {
-	static $wwo2weather = array(
+function meteo_apixu2weather($meteo, $periode = 0) {
+	static $apixu2weather = array(
 		395 => array(41, 46),
 		392 => array(41, 46),
 		389 => array(38, 47),
@@ -451,8 +441,8 @@ function meteo_wwo2weather($meteo, $periode = 0) {
 	);
 
 	$icone = 'na';
-	if (array_key_exists($meteo, $wwo2weather)) {
-		$icone = strval($wwo2weather[$meteo][$periode]);
+	if (array_key_exists($meteo, $apixu2weather)) {
+		$icone = strval($apixu2weather[$meteo][$periode]);
 	}
 
 	return $icone;
