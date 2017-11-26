@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'actualiser' => 'Refresh the list',
 
 	// C
-	'clic_rafraichir' => 'Refresh the file', # MODIF
+	'clic_rafraichir' => 'Refresh the file',
 	'colonne_date' => 'Date',
 	'colonne_gravite' => 'Severity',
 	'colonne_hit' => 'Hit',
@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'fichier' => 'File "@fichier@"',
+	'filtre_gravite_aucun' => 'All severities',
 
 	// I
 	'info_hit_pri' => 'Private',
@@ -40,6 +41,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_fichier_choisir' => 'Choose a file to analyze.',
+	'message_fichier_filtre_vide' => 'The file contains no severity record "@gravite@".',
+	'message_fichier_non_log' => 'The file "@fichier@" is not a log or is no longer available.',
+	'message_fichier_suppression' => 'Are you sure you want to delete the log file.',
+	'message_fichier_vide' => 'The file is empty.',
 
 	// T
 	'tri_croissant' => 'Ascending sort',

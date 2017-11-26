@@ -2,8 +2,9 @@
 	<langue code="de" url="https://trad.spip.net/tradlang_module/simplog?lang_cible=de" total="25" traduits="8" relire="17" modifs="0" nouveaux="0" pourcent="32.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/simplog?lang_cible=en" total="25" traduits="19" relire="0" modifs="1" nouveaux="5" pourcent="76.00">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/simplog?lang_cible=en" total="25" traduits="25" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Eric Lupinacci" lien="https://trad.spip.net/auteur/_eric_" />
+		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="es" url="https://trad.spip.net/tradlang_module/simplog?lang_cible=es" total="25" traduits="19" relire="0" modifs="1" nouveaux="5" pourcent="76.00">
