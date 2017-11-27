@@ -4,7 +4,7 @@
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 			[(#CONFIG{collections/type_collection_defaut}|strlen|>{1}|oui)
 			#SAISIE{hidden,type_collection,defaut=#CONFIG{collections/type_collection_defaut}}]
 			[(#CONFIG{collections/genre_defaut}|strlen|>{1}|oui)
@@ -13,7 +13,7 @@
 				input,
 				titre,
 				label=<:collection:label_titre_creer_rapide:>,obligatoire=oui})]
-		</ul>
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class='boutons'><input type='submit' class='submit' value='<:bouton_valider|attribut_html:>' /></p>
