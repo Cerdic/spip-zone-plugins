@@ -60,3 +60,11 @@ function formulaires_saisies_cvt_saisies_dist() {
 	
 	return $saisies;
 }
+
+function formulaires_saisies_cvt_charger() {
+	$contexte = array(
+		'saisies_texte_submit' => 'Caca !',
+	);
+	
+	return $contexte;
+}

@@ -17,7 +17,7 @@
 		
 		<p class="boutons">
 			<span class="image_loading"></span>
-			<input type="submit" class="submit" value="[(#ENV{saisies_texte_submit}|sinon{<:bouton_enregistrer:>})]" />
+			<input type="submit" class="submit" value="[(#ENV{_saisies/options/texte_submit, #ENV{saisies_texte_submit, <:bouton_enregistrer:>}})]" />
 		</p>
 	</div></form>
 	]
