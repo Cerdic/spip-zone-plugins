@@ -51,6 +51,13 @@ class fichiersExporter extends Command {
 				'0'
 			)
 			->addOption(
+				'statuts',
+				't',
+				InputOption::VALUE_OPTIONAL,
+				'statuts des articles a exporter (séparé par une virgule)',
+				'prop,prepa,publie'
+			)
+			->addOption(
 				'modif',
 				'm',
 				InputOption::VALUE_OPTIONAL,
@@ -71,6 +78,9 @@ class fichiersExporter extends Command {
 		$dest = $input->getOption('dest') ;
 		$branche = $input->getOption('branche') ;
 		$date_modif = $input->getOption('modif') ;
+		$statuts = explode(',', $input->getOption('statuts'));
+		foreach($statuts as $s)
+			$statuts_exportes[]= _q($s);
 		
 		// Secteur ou rubrique à exporter.
 		if(!$branche OR !intval($branche)){
@@ -89,6 +99,8 @@ class fichiersExporter extends Command {
 		if($date_modif)
 			$critere_date_modif = "and date_modif > '$date_modif'" ;
 		
+		$critere_statut = "and statut in(". implode(",", $statuts_exportes) .")" ;
+		
 		// Répertoire dest, ou arrivent les fichiers txt.
 		if(!is_dir($dest)){
 			$output->writeln("<error>Préciser le répertoire où exporter les fichiers de $source au format txt. spip export -d `repertoire` </error>");
@@ -103,9 +115,8 @@ class fichiersExporter extends Command {
 			}
 			// Si c'est bon on continue
 			else{
-				
 				// chopper les articles en sql.
-				$query = sql_query("select * from spip_articles $critere_export $critere_date_modif order by date_redac asc"); 
+				$query = sql_query("select * from spip_articles $critere_export $critere_date_modif $critere_statut order by date_redac asc"); 
 				
 				// start and displays the progress bar
 				$progress = new ProgressBar($output, sql_count($query));
