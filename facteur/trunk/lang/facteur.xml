@@ -4,9 +4,10 @@
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/facteur?lang_cible=en" total="55" traduits="43" relire="0" modifs="7" nouveaux="5" pourcent="78.18">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/facteur?lang_cible=en" total="55" traduits="55" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
+		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
 		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
