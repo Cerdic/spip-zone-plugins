@@ -5,10 +5,11 @@
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/verifier?lang_cible=en" total="153" traduits="135" relire="0" modifs="4" nouveaux="14" pourcent="88.24">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/verifier?lang_cible=en" total="153" traduits="153" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
+		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Mark" lien="https://trad.spip.net/auteur/mark" />
 		<traducteur nom="RastaPopoulos" lien="https://trad.spip.net/auteur/rastapopoulos" />

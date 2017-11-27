@@ -9,6 +9,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// D
+	'data_choix' => 'Possible choices:',
+
 	// E
 	'erreur_code_postal' => 'This postcode is invalid.',
 	'erreur_comparaison_egal' => 'The value must be equal to the field "@nom_champ@"',
@@ -43,6 +46,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_isbn_segment_lettre' => 'the segment "@segment@" must not have any letter.',
 	'erreur_numerique' => 'The number format is invalid.',
 	'erreur_objet' => 'This object is not valid.',
+	'erreur_php_file_1' => 'The file size "@name@" exceeds that allowed by the server',
+	'erreur_php_file_2' => 'The file size "@name@" exceeds that allowed by the form',
+	'erreur_php_file_3' => 'The file "@name@" was only partially downloaded',
+	'erreur_php_file_6' => 'A server error prevented sending the file "@name@"',
+	'erreur_php_file_7' => 'A server error prevented sending the file "@name@"',
+	'erreur_php_file_88' => 'A server error prevented sending the file "@name@"',
 	'erreur_regex' => 'The regex string is incorrectly formatted.',
 	'erreur_siren' => 'The SIREN number is invalid.',
 	'erreur_siret' => 'The SIRET number is invalid.',
@@ -82,6 +91,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_couleur_type_hexa' => 'Color code in hexadecimal format',
 	'option_couleur_type_label' => 'Checking type to be made',
 	'option_decimal_nb_decimales_label' => 'Number of decimal places',
+	'option_decimal_separateur_explication' => 'The dot will be accepted in all cases.',
+	'option_decimal_separateur_label' => 'Decimal separator',
 	'option_email_disponible_label' => 'Available address',
 	'option_email_disponible_label_case' => 'Check that the address has not already be used by another user',
 	'option_email_mode_5322' => 'Check against the strictest standards available',
@@ -94,10 +105,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_fichiers_dimension_autoriser_rotation_label_case' => 'Click to invert maximum length and height',
 	'option_fichiers_hauteur_max_label' => 'Maximum image height (in px)',
 	'option_fichiers_largeur_max_label' => 'Maximum image width (in px)',
-	'option_fichiers_mime_image_web_label' => 'Web image (gif, jpg, png)', # MODIF
-	'option_fichiers_mime_label' => 'Mime type', # MODIF
-	'option_fichiers_mime_specifique_label' => 'Un type Mime précisé ci-dessous', # MODIF
-	'option_fichiers_mime_tout_mime_label' => 'All Mime types allowed by SPIP', # MODIF
+	'option_fichiers_mime_image_web_label' => 'Allow only web images (gif, jpg, png)',
+	'option_fichiers_mime_label' => 'Mime type and extension',
+	'option_fichiers_mime_pas_de_verification_label' => 'Allow all types and extensions (not recommended)',
+	'option_fichiers_mime_specifique_label' => 'Allow only the types and extensions checked below',
+	'option_fichiers_mime_tout_mime_label' => 'Allow all Mime types and known extensions of SPIP',
 	'option_fichiers_taille_max_label' => 'Maximum image weight (in kB)',
 	'option_fichiers_type_mime_label' => 'Select the allowed MIME types',
 	'option_id_objet_objet_label' => 'Object name (singular)',
@@ -120,7 +132,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_url_type_protocole_web' => 'Web protocols: HTTP or HTTPS',
 	'option_url_type_protocole_webcal' => 'Webcal protocols: webcal, http ou https',
 
+	// P
+	'par_defaut' => 'By default:',
+	'plugin_yaml_inactif' => 'The YAML plugin is not present and/or activated. It is necessary to see this page of documentation.',
+
 	// T
+	'titre_page_verifier_doc' => 'Documentation of the Verification API',
 	'type_code_postal' => 'Postal code',
 	'type_code_postal_description' => 'Check that the value is a valid postal code.',
 	'type_comparaison_champ' => 'Comparison',
@@ -154,5 +171,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_telephone' => 'Telephone number',
 	'type_telephone_description' => 'Check that the telephone number matches a recognised telephone number format.',
 	'type_url' => 'URL',
-	'type_url_description' => 'Verify that the URL matches a recognised format.'
+	'type_url_description' => 'Verify that the URL matches a recognised format.',
+
+	// V
+	'verification_a_faire' => 'Verification to perform:'
 );
