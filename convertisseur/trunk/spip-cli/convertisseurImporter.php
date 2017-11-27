@@ -147,11 +147,12 @@ class fichiersImporter extends Command {
 					$texte = preg_replace("/@@SOURCE.*/", "", $texte);
 					
 					// Si des <ins> correspondent à des champs metadonnees connus, on les ajoute.
-					$champs_metadonnees = array("mots_cles", "auteurs", "hierarchie", "documents");
+					$champs_metadonnees = array("mots_cles", "auteurs", "hierarchie", "documents", "descriptif_rubrique");
 					$hierarchie = "" ;
 					$auteurs = "" ;
 					$mots_cles = "" ;
 					$documents = "" ;
+					$descriptif_rubrique = "" ;
 					
 					if (preg_match_all(",<ins[^>]+class='(.*?)'[^>]*?>(.*?)</ins>,ims", $texte, $z, PREG_SET_ORDER)){ 
 						foreach($z as $d){ 
@@ -163,6 +164,8 @@ class fichiersImporter extends Command {
 							}
 						}
 					}
+					
+					$descriptif_rubrique = $descriptif_rubrique[0] ;
 					
 					if (preg_match(",<ins class='id_article'>(.*?)</ins>,ims", $texte, $z))
 						$id_source = $z[1];
@@ -183,7 +186,7 @@ class fichiersImporter extends Command {
 					
 					include_spip("inc/rubriques");
 					$id_rubrique = creer_rubrique_nommee("$titre_parent/$titre_rubrique", $id_parent);
-					$up = sql_updateq('spip_rubriques', array('statut' => 'publie'), "id_rubrique=$id_rubrique");
+					$up = sql_updateq('spip_rubriques', array('statut' => 'publie', 'descriptif' => $descriptif_rubrique), "id_rubrique=$id_rubrique");
 					
 					if($up)
 						$progress->setMessage(" Rubrique $titre_parent/$titre_rubrique => $id_rubrique ", 'inforub');
