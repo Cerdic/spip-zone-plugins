@@ -50,6 +50,13 @@ class fichiersExporter extends Command {
 				'branche à exporter (id_secteur ou id_rubrique)',
 				'0'
 			)
+			->addOption(
+				'modif',
+				'm',
+				InputOption::VALUE_OPTIONAL,
+				'date_modif après laquelle exporter',
+				''
+			)
 		;
 	}
 	
@@ -63,6 +70,7 @@ class fichiersExporter extends Command {
 		$source = $input->getOption('source') ;
 		$dest = $input->getOption('dest') ;
 		$branche = $input->getOption('branche') ;
+		$date_modif = $input->getOption('modif') ;
 		
 		// Secteur ou rubrique à exporter.
 		if(!$branche OR !intval($branche)){
@@ -77,6 +85,9 @@ class fichiersExporter extends Command {
 			$critere_export = "where id_secteur=" . intval($branche) ;
 		else
 			$critere_export = "where id_rubrique=" . intval($branche) ;
+		
+		if($date_modif)
+			$critere_date_modif = "and date_modif > '$date_modif'" ;
 		
 		// Répertoire dest, ou arrivent les fichiers txt.
 		if(!is_dir($dest)){
@@ -94,7 +105,7 @@ class fichiersExporter extends Command {
 			else{
 				
 				// chopper les articles en sql.
-				$query = sql_query("select * from spip_articles $critere_export order by date_redac asc"); 
+				$query = sql_query("select * from spip_articles $critere_export $critere_date_modif order by date_redac asc"); 
 				
 				// start and displays the progress bar
 				$progress = new ProgressBar($output, sql_count($query));
