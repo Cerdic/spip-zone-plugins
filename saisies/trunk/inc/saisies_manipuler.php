@@ -24,6 +24,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *               Tableau modifié décrivant les saisies
  */
 function saisies_supprimer($saisies, $id_ou_nom_ou_chemin) {
+	// On enlève la config avant de manipuler
+	if (isset($saisies['config'])) {
+		$config = $saisies['config'];
+		unset($saisies['config']);
+	}
+	
 	// Si la saisie n'existe pas, on ne fait rien
 	if ($chemin = saisies_chercher($saisies, $id_ou_nom_ou_chemin, true)) {
 		// La position finale de la saisie
@@ -38,6 +44,11 @@ function saisies_supprimer($saisies, $id_ou_nom_ou_chemin) {
 		// On supprime et réordonne
 		unset($parent[$position]);
 		$parent = array_values($parent);
+	}
+	
+	// On remet la config après avoir manipulé
+	if (isset($config)) {
+		$saisies['config'] = $config;
 	}
 
 	return $saisies;
@@ -56,6 +67,12 @@ function saisies_supprimer($saisies, $id_ou_nom_ou_chemin) {
  *     Tableau des saisies complété de la saisie insérée
  */
 function saisies_inserer($saisies, $saisie, $chemin = array()) {
+	// On enlève la config avant de manipuler
+	if (isset($saisies['config'])) {
+		$config = $saisies['config'];
+		unset($saisies['config']);
+	}
+	
 	// On vérifie quand même que ce qu'on veut insérer est correct
 	if ($saisie['saisie'] and $saisie['options']['nom']) {
 		// ajouter un identifiant
@@ -85,7 +102,12 @@ function saisies_inserer($saisies, $saisie, $chemin = array()) {
 		// Et enfin on insère
 		array_splice($parent, $position, 0, array($saisie));
 	}
-
+	
+	// On remet la config après avoir manipulé
+	if (isset($config)) {
+		$saisies['config'] = $config;
+	}
+	
 	return $saisies;
 }
 

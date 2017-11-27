@@ -6,7 +6,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function formulaires_saisies_cvt_saisies_dist() {
-	return array(
+	include_spip('inc/saisies');
+	
+	$saisies = array(
+		'config' => array(
+			'texte_submit' => 'Prout !',
+			'activer_etapes' => true,
+		),
 		array(
 			'saisie' => 'input',
 			'options' => array(
@@ -26,6 +32,13 @@ function formulaires_saisies_cvt_saisies_dist() {
 			)
 		),
 		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'a_supprimer',
+				'label' => 'Un champ à supprimer'
+			)
+		),
+		array(
 			'saisie' => 'textarea',
 			'options' => array(
 				'nom' => 'message',
@@ -38,4 +51,12 @@ function formulaires_saisies_cvt_saisies_dist() {
 			)
 		)
 	);
+	
+	$chemin = saisies_chercher($saisies, 'a_supprimer', true);
+	$saisies = saisies_supprimer($saisies, $chemin);
+	$saisies = saisies_dupliquer($saisies, 'message');
+	$saisies = saisies_deplacer($saisies, 'email', 'nom');
+	var_dump($saisies);
+	
+	return $saisies;
 }
