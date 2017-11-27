@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_entrees_masquees_explication' => 'Indicate the entries that you want to <strong>hide</strong> during the creation of a menu.',
 	'configurer_titre' => 'Configure the entries of the Menus plugin',
 	'confirmer_supprimer_entree' => 'Do you really want delete this entry?',
+	'confirmer_supprimer_sous_menu' => 'Are you sure you want to delete this submenu?',
 
 	// D
 	'description_menu_accueil' => 'Link to website’s home page.',
@@ -23,9 +24,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_lien' => 'Adds an individually specified link, either an internal one (relative URL), or an external one (http://...).',
 	'description_menu_mapage' => 'If visitors are connected, add a link to their author page.',
 	'description_menu_mots' => 'Automatically shows a menu listing the articles linked to a keyword.',
-	'description_menu_objet' => 'Creates a link to s SPIP object: article, section or other. By default, the entry will bear the the title of the object.', # MODIF
+	'description_menu_objet' => 'Creates a link to a SPIP object: article, section or other. By default, the entry will have the title of the object. The entry will only be visible if the object is published.',
 	'description_menu_page_speciale' => 'Adds a link to a page template using a URL of the form <code>spip.php?page=name&param1=xx&param2=yyy...</code> Such pages are often used by plugins.',
-	'description_menu_page_speciale_zajax' => 'Add a link to a block in a page accessible by a URL of the type <code>spip.php?page=name&param1=xx&param2=yyy...</code> This requires a Z type template and the <a href="http://contrib.spip.net/MediaBox">médiabox</a> plugin.', # MODIF
+	'description_menu_page_speciale_zajax' => 'Add a link to a block in a page accessible by a URL of the type <code>spip.php?page=name&param1=xx&param2=yyy...</code> This requires a Z type template and the <a href="https://contrib.spip.net/MediaBox">médiabox</a> plugin.',
 	'description_menu_rubriques_articles' => 'Display a list of sections, optionally including sub-sections and articles nested to several levels. By default, all sections will be displayed starting from the site root and sorted by title (numerically then alphabetically).Articles in a given section will always be listed after any sub-sections.',
 	'description_menu_rubriques_completes' => 'Displays a list of topics and, if you want, sub-sections on many levels. By default, displays all entries from the root, sorted by title (alphabetically and numerically).',
 	'description_menu_secteurlangue' => 'This entry can be used by sites which have one language per sector. It displays a menu which lists the sections of the sector corresponding to the language of the page, and if desired the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
@@ -57,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_rubriques_exclues' => 'Numbers of the sections to be excluded, separated by commas',
 	'entree_id_secteur_exclus' => 'Numbers of the sectors to be excluded, separated by commas',
 	'entree_infini' => 'To infinity',
+	'entree_lien_direct_articles_uniques' => 'If yes, and if unique articles are hidden, when a topic contains only one article, link to the article? (put "yes" for that)',
 	'entree_mapage' => 'My page',
 	'entree_masquer_articles_uniques' => 'If so and if a section contains a only one article, hide it? (put "oui" for this)',
 	'entree_niveau' => 'Sub-sections level',
@@ -166,5 +168,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'tous_les_articles' => '... All articles',
-	'toutes_les_rubriques' => '... All sections'
+	'toutes_les_rubriques' => '... All sections',
+
+	// U
+	'utiles_explication' => 'The current template of the site can use the following menus.',
+	'utiles_generer_menu' => 'Create the menu <strong>@titre@ (<em>@identifiant@</em>)</strong>',
+	'utiles_generer_menus' => 'Create <strong>all</strong> useful menus',
+	'utiles_titre' => 'Useful menus'
 );
