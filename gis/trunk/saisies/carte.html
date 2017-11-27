@@ -229,7 +229,7 @@ var geocoder;]
 	};
 
 	$(function(){
-		jQuery.getScript('[(#PRODUIRE{fond=javascript/gis.js}|compacte)]',function(){
+		jQuery.getScript('[(#PRODUIRE{fond=javascript/gis.js})]',function(){
 			if (typeof(callback_form_map) === "function") {
 				init_map(callback_form_map);
 			} else {
