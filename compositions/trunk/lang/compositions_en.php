@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'composition' => 'Composition',
 	'composition_defaut' => 'default composition',
 	'composition_heritee' => 'inherited',
-	'composition_utilisee' => 'Used :',
+	'composition_utilisee' => 'Used:',
 	'composition_verrouillee' => 'This composition is locked by the webmaster',
 	'compositions' => 'Compositions',
 
