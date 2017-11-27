@@ -14,14 +14,13 @@
 	<nom>Webfonts 2</nom>
 
 	<auteur lien='http://www.yterium.net'>Cédric Morin</auteur>
-    <auteur lien='http://www.mister-graphx.com'>Arnaud B. (Mist. GraphX)</auteur>
-    
+	<auteur lien='http://www.mister-graphx.com'>Arnaud B. (Mist. GraphX)</auteur>
+
 	<licence>GNU/GPL</licence>
 
-	<pipeline nom="autoriser" inclure="webfonts2_autorisations.php" /> 
-    <pipeline nom="insert_head_css" inclure="webfonts2_pipelines.php" /> 
-    
-    
-    <menu nom="webfonts" titre="webfonts2:webfonts2_titre" parent="menu_squelette" icone="images/webfonts2-16.png" action="webfonts" />
+	<pipeline nom="autoriser" inclure="webfonts2_autorisations.php" />
+	<pipeline nom="insert_head_css" inclure="webfonts2_pipelines.php" />
+
+	<menu nom="webfonts" titre="webfonts2:webfonts2_titre" parent="menu_squelette" icone="images/webfonts2-16.png" action="webfonts" />
 
 </paquet>
