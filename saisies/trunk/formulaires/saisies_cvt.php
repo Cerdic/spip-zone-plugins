@@ -9,7 +9,7 @@ function formulaires_saisies_cvt_saisies_dist() {
 	include_spip('inc/saisies');
 	
 	$saisies = array(
-		'config' => array(
+		'options' => array(
 			'texte_submit' => 'Prout !',
 			'activer_etapes' => true,
 		),

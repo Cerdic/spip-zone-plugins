@@ -24,10 +24,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *               Tableau modifié décrivant les saisies
  */
 function saisies_supprimer($saisies, $id_ou_nom_ou_chemin) {
-	// On enlève la config avant de manipuler
-	if (isset($saisies['config'])) {
-		$config = $saisies['config'];
-		unset($saisies['config']);
+	// On enlève les options générales avant de manipuler
+	if (isset($saisies['options'])) {
+		$options_generales = $saisies['options'];
+		unset($saisies['options']);
 	}
 	
 	// Si la saisie n'existe pas, on ne fait rien
@@ -46,9 +46,9 @@ function saisies_supprimer($saisies, $id_ou_nom_ou_chemin) {
 		$parent = array_values($parent);
 	}
 	
-	// On remet la config après avoir manipulé
-	if (isset($config)) {
-		$saisies['config'] = $config;
+	// On remet les options générales après avoir manipulé
+	if (isset($options_generales)) {
+		$saisies['options'] = $options_generales;
 	}
 
 	return $saisies;
@@ -67,10 +67,10 @@ function saisies_supprimer($saisies, $id_ou_nom_ou_chemin) {
  *     Tableau des saisies complété de la saisie insérée
  */
 function saisies_inserer($saisies, $saisie, $chemin = array()) {
-	// On enlève la config avant de manipuler
-	if (isset($saisies['config'])) {
-		$config = $saisies['config'];
-		unset($saisies['config']);
+	// On enlève les options générales avant de manipuler
+	if (isset($saisies['options'])) {
+		$options_generales = $saisies['options'];
+		unset($saisies['options']);
 	}
 	
 	// On vérifie quand même que ce qu'on veut insérer est correct
@@ -103,9 +103,9 @@ function saisies_inserer($saisies, $saisie, $chemin = array()) {
 		array_splice($parent, $position, 0, array($saisie));
 	}
 	
-	// On remet la config après avoir manipulé
-	if (isset($config)) {
-		$saisies['config'] = $config;
+	// On remet les options générales après avoir manipulé
+	if (isset($options_generales)) {
+		$saisies['options'] = $options_generales;
 	}
 	
 	return $saisies;
