@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'courtcircuit' => 'Short circuit',
 
 	// E
+	'explication_compositions_exclure' => 'List of compositions to ignore in redirection processing (separated by commas).',
 	'explication_liens_rubriques' => 'Change the URL of redirected sections directly into the skeletons?',
 	'explication_regles' => 'The different rules below are tested in that order. If no rule defines a redirection, then the section will be displayed normally.',
 	'explication_restreindre_langue' => 'When this option is enabled, only the sections of the active language will be taken into account for the calculation of the redirection. This option is useful if your sections contain articles in different languages. Do not use if your site is organized into language sections or if you use multi fields.',
@@ -32,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_article_accueil' => 'Home article of the section',
 	'label_composition_rubrique' => 'Section with composition',
+	'label_compositions_exclure' => 'Compositions to exclude',
 	'label_exceptions' => 'Exceptions',
 	'label_liens' => 'URL of sections',
 	'label_liens_rubriques' => 'Act on the #URL_RUBRIQUE tag?',
