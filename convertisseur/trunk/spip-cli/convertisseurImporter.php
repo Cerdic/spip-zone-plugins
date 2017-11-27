@@ -177,7 +177,7 @@ class fichiersImporter extends Command {
 						$titre_rubrique = $hierarchie[1] ;
 						
 						// hack perso diplo 2006/02 => 02 ou 2006-02 => 02
-						$titre_rubrique = preg_replace(",^(\d{4})(?:/|-)(\d{2})$,", "\\2", $titre_rubrique); 
+						$titre_rubrique = preg_replace(",^(\d{4})(?:/|-)(\d{2}).*$,", "\\2", $titre_rubrique); 
 					
 					}else{ // sinon on genere des rubriques annees / mois
 						$titre_parent = $annee ;
