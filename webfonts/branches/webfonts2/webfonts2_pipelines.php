@@ -20,7 +20,7 @@ function webfonts2_insert_head_css($flux){
 		$fonts = array_map('urlencode',$fonts);
 		$fonts = implode('|',$fonts);
 		if (strlen($fonts)) {
-			$code = '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family='.$fonts.'" id="webfonts" />';
+			$code = '<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family='.$fonts.'" id="webfonts" />';
 			// le placer avant les autres CSS du flux
 			if (($p = strpos($flux,"<link"))!==false)
 				$flux = substr_replace($flux,$code,$p,0);
