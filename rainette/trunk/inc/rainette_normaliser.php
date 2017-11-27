@@ -612,7 +612,7 @@ function trouver_langue_service($config_service) {
 function normaliser_cache($service, $lieu, $mode, $periodicite, $code_langue) {
 
 	// Création et/ou détermination du dossier de destination du cache en fonction du service
-	$dossier_cache = sous_repertoire(_DIR_CACHE, 'rainette');
+	$dossier_cache = sous_repertoire(_DIR_VAR, 'cache-rainette');
 	$dossier_cache = sous_repertoire($dossier_cache, $service);
 
 	// Le nom du fichier cache est composé comme suit, chaque élement étant séparé par un underscore :
