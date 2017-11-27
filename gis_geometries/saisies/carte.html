@@ -584,7 +584,7 @@ var geocoder;]
 	};
 
 	$(function () {
-		$.getScript('[(#PRODUIRE{fond=javascript/gis.js}|compacte)]', function () {
+		$.getScript('[(#PRODUIRE{fond=javascript/gis.js})]', function () {
 			if (typeof (callback_form_map_[(#ENV{nom})]) === "function") {
 				init_map(callback_form_map_[(#ENV{nom})]);
 			} else if (typeof (callback_form_map) === "function") {
