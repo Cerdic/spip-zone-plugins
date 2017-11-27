@@ -52,30 +52,29 @@ class fichiersExporter extends Command {
 			)
 		;
 	}
-
+	
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		global $spip_racine;
 		global $spip_loaded;
-		global $spip_version_branche ;		
-	
+		global $spip_version_branche ;
+		
 		include_spip("iterateur/data");
 		
 		$source = $input->getOption('source') ;
-		$dest = $input->getOption('dest') ;	
+		$dest = $input->getOption('dest') ;
 		$branche = $input->getOption('branche') ;
-
+		
 		// Secteur ou rubrique à exporter.
 		if(!$branche OR !intval($branche)){
 			$output->writeln("<error>Préciser l'id du secteur ou de la rubrique à exporter. spip export -b 123 </error>");
 			exit();
-		}	
-
+		}
 		
 		// demande t'on un secteur ou une rubrique ?
 		$parent = sql_getfetsel("id_parent", "spip_rubriques", "id_rubrique=$branche");
 		
 		if($parent == 0)
-			$critere_export = "where id_secteur=" . intval($branche) ;		
+			$critere_export = "where id_secteur=" . intval($branche) ;
 		else
 			$critere_export = "where id_rubrique=" . intval($branche) ;
 		
@@ -83,33 +82,32 @@ class fichiersExporter extends Command {
 		if(!is_dir($dest)){
 			$output->writeln("<error>Préciser le répertoire où exporter les fichiers de $source au format txt. spip export -d `repertoire` </error>");
 			exit();
-		}	
-
+		}
 		
 		if ($spip_loaded) {
 			chdir($spip_racine);
-
+			
 			if (!function_exists('passthru')){
 				$output->writeln("<error>Votre installation de PHP doit pouvoir exécuter des commandes externes avec la fonction passthru().</error>");
 			}
 			// Si c'est bon on continue
 			else{
-
+				
 				// chopper les articles en sql.
 				$query = sql_query("select * from spip_articles $critere_export order by date_redac asc"); 
-
+				
 				// start and displays the progress bar
 				$progress = new ProgressBar($output, sql_count($query));
 				$progress->setBarWidth(100);
 				$progress->setRedrawFrequency(1);
 				$progress->setMessage(" Export de `spip_articles` en cours dans $dest ... ", 'message');
 				$progress->start();
-
+				
 				while($f = sql_fetch($query)){
 					
 					$id_article = $f['id_article'] ;
 					$id_rubrique = $f['id_rubrique'] ;
-				
+					
 					// Exporter les champs spip_articles
 					$fichier = "" ;
 					$ins_auteurs = array();
@@ -118,20 +116,25 @@ class fichiersExporter extends Command {
 					$progress->setMessage('', 'motscles');
 					$progress->setMessage('', 'docs');
 					$progress->setMessage('', 'auteurs');
-
-
+					
+					// mettre les champs dans un fichiers texte balisé avec des <ins class="champ">.
 					foreach($f as $k => $v){
 						if($k == "texte" or $v == "" or $v == "0" or $v == "non" or $v == "0000-00-00 00:00:00")
 							continue ;
 						$fichier .= "<ins class='$k'>" . trim($v) ."</ins>\n" ;
 					}
 					$fichier .= "\n\n" . $f['texte'] . "\n\n" ;
-
-					// métadonnées (hierarchie, auteurs, mots-clés...)
-
+					
+					// Ajouter des métadonnées (hierarchie, auteurs, mots-clés...)
+					
 					// hierarchie
-					$titre_rubrique = sql_getfetsel("titre", "spip_rubriques", "id_rubrique=$id_rubrique");
-					$id_parent = sql_getfetsel("id_parent", "spip_rubriques", "id_rubrique=$id_rubrique");
+					$rubrique = sql_fetsel("titre, descriptif, id_parent", "spip_rubriques", "id_rubrique=$id_rubrique");
+					$titre_rubrique = $rubrique['titre'];
+					$id_parent = $rubrique['id_parent'];
+					$descriptif_parent = $rubrique['titre'];
+					if($descriptif_rubrique = $rubrique['descriptif'])
+							$descriptif_rubrique = "<ins class='descriptif_rubrique'>$descriptif_rubrique</ins>\n" ;
+					
 					if($id_parent)
 						$titre_parent = sql_getfetsel("titre", "spip_rubriques", "id_rubrique=$id_parent");
 					
@@ -144,18 +147,17 @@ class fichiersExporter extends Command {
 					foreach($auteurs as $a)
 						if($a['nom'])
 							$ins_auteurs[] = $a ;
-				
+					
 					$auteurs = "" ;
 					foreach($ins_auteurs as $k => $a){
-							if($k == 0)
-								$sep = "" ;
-							else
-								$sep = "@@" ;
-							$bio = ($a['bio'] != "") ? "::" . $a['bio'] : "" ;
-								
-							$auteurs .= $sep . $a['nom'] . $bio ;
-					}					
-										
+						if($k == 0)
+							$sep = "" ;
+						else
+							$sep = "@@" ;
+						$bio = ($a['bio'] != "") ? "::" . $a['bio'] : "" ;
+						$auteurs .= $sep . $a['nom'] . $bio ;
+					}
+					
 					$auteurs_m = substr($auteurs, 0, 100) ;
 					$progress->setMessage($auteurs_m, 'auteurs');
 					
@@ -168,13 +170,13 @@ class fichiersExporter extends Command {
 					foreach($motscles as $mc){
 						if($mc['titre'])
 							$ins_mc[] = $mc['type'] . "::" . $mc['titre'] ;
-					}	
+					}
 					if(is_array($ins_mc)){
 						$motscles = join("@@", $ins_mc) ;
 						$motscles_m = substr($motscles, 0, 100) ;
 						$progress->setMessage($motscles_m, 'motscles');
 					}
-
+					
 					// documents joints
 					$documents = sql_allfetsel("*", "spip_documents d, spip_documents_liens dl", "dl.id_objet=$id_article and dl.objet='article' and dl.id_document=d.id_document");
 					foreach($documents as $doc)
@@ -184,23 +186,25 @@ class fichiersExporter extends Command {
 						$docs_m = substr($documents, 0, 100) ;
 						$progress->setMessage($docs_m, 'docs');
 					}
-
+					
 					// Ajouter les métadonnées
 					if($auteurs)
-						$fichier = "<ins class='auteurs'>$auteurs</ins>\n" . $fichier ;				
+						$fichier = "<ins class='auteurs'>$auteurs</ins>\n" . $fichier ;
 					if($motscles)
 						$fichier = "<ins class='mots_cles'>$motscles</ins>\n" . $fichier ;
 					if($documents)
 						$fichier = "<ins class='documents'>$documents</ins>\n" . $fichier ;
-					if($titre_parent && $titre_rubrique)
-						$fichier = "<ins class='hierarchie'>$titre_parent@@$titre_rubrique</ins>\n" . $fichier ;
-				
+					if($titre_parent && $titre_rubrique){
+						$fichier = "<ins class='hierarchie'>$titre_parent@@$titre_rubrique</ins>\n" .
+						$descriptif_rubrique .
+						$fichier ;
+					}
 					// Créer un fichier txt
 					$date = ($f['date_redac'] != "0000-00-00 00:00:00")? $f['date_redac'] : $f['date'] ;
 					preg_match("/^(\d\d\d\d)-(\d\d)/", $date, $m);
 					$annee = $m[1] ;
 					$mois = $m[2] ;
-
+					
 					include_spip("inc/charset");
 					$nom_fichier = translitteration($f['titre']) ;
 					$nom_fichier = preg_replace("/[^a-zA-Z0-9]/i", "-", $nom_fichier);
@@ -209,7 +213,7 @@ class fichiersExporter extends Command {
 					$nom_fichier = preg_replace("/-$/i", "", $nom_fichier);
 					
 					$nom_fichier = "$dest/$annee/$annee-$mois/$annee-$mois"."_$nom_fichier.txt" ;
-
+					
 					// Créer les répertoires
 					if(!is_dir("$dest/$annee"))
 						mkdir("$dest/$annee");
@@ -223,16 +227,16 @@ class fichiersExporter extends Command {
 						$progress->setFormat("<fg=white;bg=blue>%message%</>\n" . '%current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%' . "\n %auteurs% %motscles% \n %filename% \n\n");
 						$progress->advance();
 					
-					}	
+					}
 					else{
 						$output->writeln("<error>échec de l'export de $nom_fichier</error>");
 						exit ;
-					}			
+					}
 				}
 				
 				// ensure that the progress bar is at 100%
 				$progress->finish();
-
+				
 			}
 			$output->writeln("\n");
 		}
@@ -241,5 +245,3 @@ class fichiersExporter extends Command {
 		}
 	}
 }
-
-	
