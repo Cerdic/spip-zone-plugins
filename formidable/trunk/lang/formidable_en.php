@@ -37,12 +37,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_analyse_classe_explication' => 'You can specify CSS classes that will be added on the container of each graph, such as 
 <code>gray</code>,<code>blue</code>,
-		<code>orange</code>, <code>green</code> or whatever you like!', # MODIF
+		<code>orange</code>, <code>green</code> or whatever you like!',
 	'cfg_analyse_classe_label' => 'CSS class of the progress bar',
+	'cfg_objets_explication' => 'Choose the content to which the forms can be linked.',
+	'cfg_objets_label' => 'Link forms to content',
 	'cfg_titre_page_configurer_formidable' => 'Configure Formidable',
 	'cfg_titre_parametrages_analyse' => 'Settings in the answers analysis',
 	'champs' => 'Fields',
 	'changer_statut' => 'This form is:',
+	'creer_dossier_formulaire_erreur_impossible_creer' => 'Impossible to create @dossier@ folder, needed to store files. Check access rights.',
+	'creer_dossier_formulaire_erreur_impossible_ecrire' => 'Impossible to create @dossier@ folder, needed to store files. Check access rights.',
+	'creer_dossier_formulaire_erreur_possible_lire_exterieur' => 'It is possible to remotely read the contents of the folder @dossier@. This is problematic in terms of data confidentiality.',
 
 	// E
 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
@@ -55,10 +60,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_apres_choix_valeurs' => 'The entered values',
 	'editer_apres_explication' => 'After validation, display instead of the form:',
 	'editer_apres_label' => 'Display then',
+	'editer_css' => 'CSS Classes ',
 	'editer_descriptif' => 'Description',
 	'editer_descriptif_explication' => 'An explanation of the form for the private area.',
 	'editer_identifiant' => 'Login',
-	'editer_identifiant_explication' => 'Give a single textual identifier that allows you to call the form more easily.', # MODIF
+	'editer_identifiant_explication' => 'Give a single textual identifier that allows you to call the form more easily. The identifier can only contain digits, Latin letters not accented and the character "_"',
 	'editer_menu_auteurs' => 'Configure authors',
 	'editer_menu_champs' => 'Configure the fields',
 	'editer_menu_formulaire' => 'Configure the form',
@@ -79,14 +85,20 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'editer_unicite_label' => 'Verify that this field is unique',
 	'erreur_autorisation' => 'You do not have the right to edit the website forms',
 	'erreur_base' => 'An error occurred as the data was being saved.',
+	'erreur_deplacement_fichier' => 'The file "@nom@" could not be stored correctly by the system. Contact the webmaster.',
+	'erreur_fichier_expire' => 'The link to download the file is too old.',
+	'erreur_fichier_introuvable' => 'The requested file was not found.',
 	'erreur_generique' => 'There are errors in the fields below. Please check.',
 	'erreur_identifiant' => 'This login is already used.',
-	'erreur_identifiant_format' => 'The ID can only contain numbers, letters and "_" character', # MODIF
+	'erreur_identifiant_format' => 'The identifier can only contain digits, Latin letters not accented and the character "_"',
 	'erreur_importer_forms' => 'Error while importing the Forms&Tables form',
 	'erreur_importer_wcs' => 'Error while importing the W.C.S form',
 	'erreur_importer_yaml' => 'Error while importing the YAML file',
 	'erreur_inexistant' => 'This form doesn’t exist.',
 	'erreur_unicite' => 'This value is already in use',
+	'exporter_formulaire_date_debut_label' => 'From',
+	'exporter_formulaire_date_erreur' => 'The start date must be before the end date',
+	'exporter_formulaire_date_fin_label' => 'Until',
 	'exporter_formulaire_format_label' => 'File format',
 	'exporter_formulaire_statut_label' => 'Answers',
 
@@ -94,15 +106,23 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'formulaire_anonyme_explication' => 'This form is anonymous; meaning that the user’s identity won’t be recorded.',
 	'formulaires_aucun' => 'There is no form for now',
 	'formulaires_aucun_champ' => 'There is currently no entry field for this form.',
+	'formulaires_corbeille_tous' => '@nb@ forms in the trash',
+	'formulaires_corbeille_un' => 'One form in the trash',
 	'formulaires_dupliquer' => 'Duplicate the form',
 	'formulaires_dupliquer_copie' => '(copy)',
 	'formulaires_introduction' => 'Create and configure forms on your site here.',
 	'formulaires_nouveau' => 'Create a new form',
+	'formulaires_reponses_corbeille_tous' => '@nb@ form responses in the trash',
+	'formulaires_reponses_corbeille_un' => 'A form response in the trash',
 	'formulaires_supprimer' => 'Delete the form',
 	'formulaires_supprimer_confirmation' => 'Beware, it will also remove all the results. Are you sure you want to delete this form?',
 	'formulaires_tous' => 'All forms',
 
+	// H
+	'heures_minutes_secondes' => '@h@h @m@min @s@s',
+
 	// I
+	'id_formulaires_reponse' => 'Answer identifier',
 	'identification_par_cookie' => 'By cookie',
 	'identification_par_id_auteur' => 'By login (id_auteur) of the authenticated person',
 	'importer_formulaire' => 'Import a form',
@@ -120,13 +140,27 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'info_reponse_proposees' => 'To moderate',
 	'info_reponse_publiee' => 'Validated',
 	'info_reponse_publiees' => 'Validated',
-	'info_reponse_supprimee' => 'Deleted', # MODIF
-	'info_reponse_supprimees' => 'Deleted', # MODIF
+	'info_reponse_refusee' => 'Rejected',
+	'info_reponse_refusees' => 'Rejected',
+	'info_reponse_supprimee' => 'Deleted',
+	'info_reponse_supprimees' => 'Deleted',
 	'info_reponse_toutes' => 'All',
 	'info_utilise_1_formulaire' => 'Form used:',
 	'info_utilise_nb_formulaires' => 'Forms used:',
 
+	// J
+	'jours_heures_minutes_secondes' => '@j@j @h@h @m@min @s@s',
+
+	// L
+	'lien_expire' => 'Link expiring in @delai@',
+	'liens_ajouter' => 'Add a form',
+	'liens_ajouter_lien' => 'Add this form',
+	'liens_creer_associer' => 'Create and associate a form',
+	'liens_retirer_lien_formulaire' => 'Remove this form',
+	'liens_retirer_tous_liens_formulaires' => 'Remove all forms',
+
 	// M
+	'minutes_secondes' => '@m@min @s@s',
 	'modele_label_formulaire_formidable' => 'Which form ?',
 	'modele_nom_formulaire' => 'one form',
 
@@ -135,9 +169,13 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'noisette_label_identifiant' => 'Form to display :',
 	'noisette_nom_noisette_formulaire' => 'Form',
 
+	// P
+	'pas_analyse_fichiers' => 'Formidable does not offer (yet) scan of sent files',
+
 	// R
 	'reponse_aucune' => 'No answer',
 	'reponse_intro' => '@auteur@ answered to the form @formulaire@',
+	'reponse_maj' => 'Last update',
 	'reponse_numero' => 'Answer number :',
 	'reponse_statut' => 'This answer is :',
 	'reponse_supprimer' => 'Delete this reply',
@@ -157,19 +195,21 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'reponses_liste_prop' => 'Answers pending for validation',
 	'reponses_liste_publie' => 'All validated answers',
 	'reponses_nb' => '@nb@ answers',
-	'reponses_supprimer' => 'Delete all the answers to this form', # MODIF
+	'reponses_supprimer' => 'Delete all answers ',
 	'reponses_supprimer_confirmation' => 'Are you sure you want to delete all answers to this form?',
 	'reponses_voir_detail' => 'See the answer',
 	'retour_aucun_traitement' => 'Your reply was accepted. But as the function of the form has not yet been configured, nothing was done with your data!',
 
 	// S
 	'sans_reponses' => 'Unanswered',
+	'secondes' => '@s@s',
 
 	// T
-	'texte_statut_poubelle' => 'deleted', # MODIF
+	'texte_statut_poubelle' => 'deleted',
 	'texte_statut_propose_evaluation' => 'proposed',
 	'texte_statut_publie' => 'validated',
 	'texte_statut_refuse' => 'archived',
+	'texte_statut_refusee' => 'rejected',
 	'titre_cadre_raccourcis' => 'Shortcuts',
 	'titre_formulaires_archives' => 'Archives',
 	'titre_reponses' => 'Answers',
@@ -178,11 +218,12 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'traitements_avertissement_creation' => 'Changes to the form fields have been successfully saved. You can now define which treatments will be performed when using the form.',
 	'traitements_avertissement_modification' => 'Changes to the form fields have been successfully saved. <strong>Some treatments may need to be reconfigured accordingly.</ strong>',
 	'traitements_champ_aucun' => 'None',
-	'traiter_email_description' => 'Post the form results by email to a list of recipients.', # MODIF
+	'traiter_email_description' => 'Post by email the result of the form to a list of recipients.',
 	'traiter_email_horodatage' => 'Form "@formulaire@" sent on @date@ at @heure@.',
 	'traiter_email_message_erreur' => 'An error occurred when sending the email.',
 	'traiter_email_message_ok' => 'Your message has been successfully sent by email.',
 	'traiter_email_option_activer_accuse_label_case' => 'Also send an email to the sender with a confirmation message.',
+	'traiter_email_option_activer_ip_label_case' => 'Send the IP address of the sender to the recipients.',
 	'traiter_email_option_courriel_envoyeur_accuse_explication' => 'Specify the email used to send the acknowledgment. Otherwise, the recipient will be the sender.',
 	'traiter_email_option_courriel_envoyeur_accuse_label' => 'Email of the acknowledgement of receipt',
 	'traiter_email_option_destinataires_champ_form_explication' => 'If one of the fields is an email address and you want to send the form to this address, select the field.',
@@ -191,12 +232,20 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'traiter_email_option_destinataires_label' => 'Recipients',
 	'traiter_email_option_destinataires_plus_explication' => 'A list of addresses separated by commas.',
 	'traiter_email_option_destinataires_plus_label' => 'Extra recipients',
+	'traiter_email_option_destinataires_selon_champ_explication' => 'Allows you to specify one or more recipients based on the value of a field.
+Indicate the field, its value, and the concerned email (s) (separated by a comma) according to this format, such as: "@selection_1@/choix1 : mail@example.tld". You can specify multiple tests, returning to line between each test.',
+	'traiter_email_option_destinataires_selon_champ_label' => 'Recipients according to a field',
 	'traiter_email_option_envoyeur_courriel_explication' => 'Select the field that will contain the email address of the sender.',
 	'traiter_email_option_envoyeur_courriel_label' => 'Sender Email',
 	'traiter_email_option_envoyeur_nom_explication' => 'Build this name using the @raccourcis@ (see the notes). If you enter nothing, it will be the name of the site.',
 	'traiter_email_option_envoyeur_nom_label' => 'Name of sender',
+	'traiter_email_option_exclure_champs_email_explication' => 'If you do not want certain fields to appear in sent emails (for example hidden fields), just define them here, separated by a comma.',
+	'traiter_email_option_exclure_champs_email_label' => 'Fields to exclude from the message content',
+	'traiter_email_option_masquer_liens_label_case' => 'Hide administration links in the email.',
 	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Specify the name of the sender used to send the acknowledgment. Otherwise, the recipient will be the sender.',
 	'traiter_email_option_nom_envoyeur_accuse_label' => 'Name of the sender of the acknowledgment',
+	'traiter_email_option_pj_explication' => 'If the documents posted weigh less than _FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL Mio (constant modifiable by the webmaster).',
+	'traiter_email_option_pj_label' => 'Join the files in the email',
 	'traiter_email_option_sujet_accuse_label' => 'Subject of the acknowledgement of receipt',
 	'traiter_email_option_sujet_explication' => 'Build topic using @raccourcis@. If you enter nothing, the subject will be built automatically.',
 	'traiter_email_option_sujet_label' => 'Message subject',
@@ -206,12 +255,13 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'traiter_email_sujet' => '@nom@ has written to you.',
 	'traiter_email_sujet_accuse' => 'Thank you for you reply.',
 	'traiter_email_titre' => 'Send by email',
-	'traiter_email_url_enregistrement' => 'You can manage the answers <a href="@url@">on this page</a>.', # MODIF
-	'traiter_enregistrement_description' => 'Saves the form results in the database', # MODIF
+	'traiter_email_url_enregistrement' => 'You can manage all the answers <a href="@url@">on this page</a>.',
+	'traiter_email_url_enregistrement_precis' => 'You can see this answer <a href="@url@"> on this page</a>.',
+	'traiter_enregistrement_description' => 'Save the form results in the database',
 	'traiter_enregistrement_erreur_base' => 'An error occurred while writing to the database',
 	'traiter_enregistrement_erreur_deja_repondu' => 'You have already filled in this form.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'The answer to edit can not be found.',
-	'traiter_enregistrement_message_ok' => 'Thanks. Your answers have been correctly saved', # MODIF
+	'traiter_enregistrement_message_ok' => 'Thanks. Your answers have been correctly saved.',
 	'traiter_enregistrement_option_anonymiser_explication' => 'Results anonymous (don’t keep any tracks of user who have answered).',
 	'traiter_enregistrement_option_anonymiser_label' => 'Anonymize form',
 	'traiter_enregistrement_option_anonymiser_variable_explication' => 'What system variable used to calculate a single value for each author without revealing his identity.',
@@ -219,6 +269,8 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'traiter_enregistrement_option_auteur' => 'Link authors to the forms',
 	'traiter_enregistrement_option_auteur_explication' => 'Bind one or more authors to a form. If activated, this option prevents anyone except the author(s) to access form’s configuration or results.',
 	'traiter_enregistrement_option_choix_select_label' => 'Select a variable from the available',
+	'traiter_enregistrement_option_effacement_delai_label' => 'Number of days before deletion',
+	'traiter_enregistrement_option_effacement_label' => 'Regularly clear  the oldest results',
 	'traiter_enregistrement_option_identification_explication' => 'If the answers can be changed, which method is used first to know the answer to modify ?',
 	'traiter_enregistrement_option_identification_label' => 'Identification',
 	'traiter_enregistrement_option_ip_label' => 'Record IPs (hidden after a period of retention)',
