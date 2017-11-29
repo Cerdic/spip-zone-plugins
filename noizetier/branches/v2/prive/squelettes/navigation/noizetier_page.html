@@ -12,6 +12,19 @@
 			revert: "invalid",
 			cursor: 'move'
 		});
+		// Position fixe lors du scroll
+		noisettes_dispos_sticky = function(){
+			var container = $(".noisettes_disponibles");
+			var limite = container.offset().top;
+			var largeur = container.width()+'px';
+			$(window).scroll(function() {
+				if($(this).scrollTop() > limite)
+					container.addClass('is-stuck').css({'width': largeur});
+				if($(this).scrollTop() < limite)
+					container.removeClass('is-stuck').css({'width': 'auto'});	
+			});
+		}
+		noisettes_dispos_sticky();
 	/*\]\]>*/</script>
 ]
 [(#ENV{exec}|=={noisette_edit}|oui)<INCLURE{fond=prive/squelettes/navigation/noisette_edit,env}>]
