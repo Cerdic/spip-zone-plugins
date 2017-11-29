@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_code_postal' => 'Ungültige Postleitzahl',
-	'erreur_date' => 'Fromat des Datums ungültig',
+	'erreur_date' => 'Format des Datums ungültig',
 	'erreur_date_format' => 'Dieses Datumsformat wird nicht akzeptiert',
 	'erreur_decimal' => 'Der Wert muß einen Dezimalzahl sein',
 	'erreur_decimal_nb_decimales' => 'Die Zahl darf nicht mehr als @nb_decimales@ Nachkommastellen haben.',
