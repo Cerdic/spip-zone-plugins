@@ -1,9 +1,11 @@
 #CACHE{0}
 
-[(#AUTORISER{configurer,illegal}|oui)]
-
+<h1>Articles illégaux</h1>
 
 <p>Cette page liste les articles dont le champ "illegal" n'est pas vide, et permet de les modifier; le plugin nécessite de créer un champ : <code>alter table spip_articles add illegal longtext default null;</code></p>
+
+
+[(#AUTORISER{configurer,illegal}|oui)]
 
 
 <!-- icone=images/illegal-24.png -->
@@ -12,7 +14,6 @@
 
 #SET{id_article,#VAL{id_article}|_request}
 
-<h1>Articles illégaux</h1>
 
 <B_ls>
 [<p class="pagination">(#PAGINATION)</p>]
@@ -35,6 +36,8 @@
 <form action="index.php" method="post" enctype="multipart/form-data">
 <input type="hidden" name="action" value="crayons" />
 <input type="hidden" name="redirect" value="#SELF" />
+
+<hr>
 
 <h2>Article n&#176;&#160;#ID_ARTICLE: #TITRE</h2>
 
