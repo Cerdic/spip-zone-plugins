@@ -1,8 +1,11 @@
 #CACHE{0}
 
-<!-- autoriser=webmestre -->
-<!-- titre=Articles illégaux -->
-<!-- descriptif=Cette page liste les articles dont le champ "illegal" n'est pas vide, et permet de les modifier; le plugin nécessite de créer un champ : <code>alter table spip_articles add illegal longtext default null;</code> -->
+[(#AUTORISER{configurer,illegal}|oui)]
+
+
+<p>Cette page liste les articles dont le champ "illegal" n'est pas vide, et permet de les modifier; le plugin nécessite de créer un champ : <code>alter table spip_articles add illegal longtext default null;</code></p>
+
+
 <!-- icone=images/illegal-24.png -->
 <!-- logo=images/illegal-24.png -->
 
@@ -18,6 +21,8 @@
 <li><a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]">#ID_ARTICLE</a> #TITRE[, par (#LESAUTEURS)]</li>
 
 </BOUCLE_ls>
+
+<hr>
 
 <p>Pour créer un article illégal, indiquer son id_article :
 <form action="#SELF" method="GET">

@@ -1,8 +1,8 @@
 <plugin>
 	<nom>Ill&#233;gal</nom>
 	<auteur>Fil</auteur>
-	<version>0.2</version>
-	<etat>dev</etat>
+	<version>1.0.0</version>
+	<etat>stable</etat>
 	<licence>GPL 3</licence>
 	<description>
 	Ajoute un champ ill&#233;gal aux articles, pour signaler ceux qui ont un probl&#232;me d'ordre juridique.
@@ -12,6 +12,8 @@
 	<lien>https://contrib.spip.net/Illegal</lien>
 
 	<icone>images/illegal-24.png</icone><!-- by Rachel Fu - http://www.iconfinder.com/icondetails/13487/24/cancel_delete_forbidden_icon -->
-	<necessite id="cfg" />
 	<categorie>outil</categorie>
+	<necessite id="crayons" version="[1.13.0;]" />
+	<necessite id="SPIP" version="[2.0.0;]" />
+
 </plugin>
