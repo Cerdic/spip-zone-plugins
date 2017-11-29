@@ -34,7 +34,7 @@
 		<input type="hidden" name="ordre[]" value="bloc-#CLE" />
 		<ul class="editer-groupe liste-items liste-noisettes bloc">
 		<BOUCLE_noisettes(NOISETTES){objet?}{id_objet?}{type=#ENV{page}|noizetier_page_type}{composition=#ENV{page}|noizetier_page_composition}{bloc=#CLE}{par rang}>
-			<li class="editer item noisette" id="noisette-#ID_NOISETTE"[ style="background-image: url((#NOIZETIER_INFO_NOISETTE{#NOISETTE}|table_valeur{icon}|sinon{noisette-24.png}|noizetier_chemin_icone));"]>
+			<li class="editer item noisette noisette-#NOISETTE" id="noisette-#ID_NOISETTE"[ style="background-image: url((#NOIZETIER_INFO_NOISETTE{#NOISETTE}|table_valeur{icon}|sinon{noisette-24.png}|noizetier_chemin_icone));"]>
 				[<strong>(#NOIZETIER_INFO_NOISETTE{#NOISETTE}|table_valeur{nom}|sinon{#NOISETTE})</strong>]
 				[(#AUTORISER{configurer,noizetier}|oui)
 					[(#URL_ECRIRE{noisette_edit,id_noisette=#ID_NOISETTE}|icone_verticale{<:noizetier:formulaire_modifier_noisette:>,noisette,edit,right ajax preload})]
