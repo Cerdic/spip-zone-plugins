@@ -30,21 +30,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_pas_evenement' => 'There is currently no event open for booking', # MODIF
 	'evenement_cloture' => 'Closed Event',
 	'evenement_ferme_inscription' => 'Registration closed</br> Click on "registration" to view the current offer.',
+	'explication_enregistrement_inscrit' => 'Register as an author spip',
 	'explication_envoi_separe' => 'The modification of the status of a booking item towards
     <div><strong>"@statuts@"</strong></div> will trigger the sending of an alert.', # MODIF
 	'explication_envoi_separe_detail' => 'The status modification towards <div><strong>"@statuts@"</strong></div> will trigger the sending of a confirmation email!',
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Please log in</a> if you are already registered on this site',
 
+	// F
+	'formulaire_public' => 'Public form',
+
 	// I
 	'icone_cacher' => 'Hide',
 	'icone_creer_reservation' => 'Create a booking',
+	'icone_modifier_client' => 'Modify this client',
 	'icone_modifier_reservation' => 'Modify this booking',
 	'info_1_client' => 'One client',
 	'info_1_reservation' => 'One booking',
+	'info_1_reservation_liee' => 'A linked reservation',
 	'info_aucun_client' => 'No client',
 	'info_aucun_reservation' => 'No booking',
 	'info_nb_clients' => '@nb@ clients',
 	'info_nb_reservations' => '@nb@ bookings',
+	'info_nb_reservations_liees' => '@nb@ linked bookings',
 	'info_reservations_auteur' => 'This authors bookings',
 	'info_voir_reservations_poubelle' => 'View the Bookings in the dustbin',
 	'inscription' => 'Subscription',
@@ -73,10 +80,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_statut_defaut' => 'Default Status:',
 	'label_statuts_complet' => 'The "complete" status(es):',
 	'label_type_paiement' => 'Payment type:',
+	'legend_infos_generales' => 'Booking information',
 
 	// M
 	'merci_de_votre_reservation' => 'Thank you, your booking has been registered.',
 	'message_erreur' => 'Your input has errors!',
+	'message_evenement_cloture_vendeur' => 'The event @titre@ just ended. <br />The system has sent a closing message to @client@ - @email@.',
 	'montant' => 'Amount',
 
 	// N
@@ -126,6 +135,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reservation_reference_numero' => 'Reference Nr ',
 
 	// S
+	'simple' => 'Simple',
 	'statuts_complet_explication' => 'The status codes in the reservation details that are taken into consideration an event as complete.',
 	'sujet_une_reservation_accepte' => 'Confirmation of a booking on @nom@',
 	'sujet_une_reservation_accepte_part' => 'Booking partially confirmed on @nom@',
@@ -139,6 +149,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_changer_statut_reservation' => 'This booking is:',
 	'texte_exporter' => 'export',
 	'texte_statut_accepte' => 'accepted',
+	'texte_statut_accepte_part' => 'partially accepted',
 	'texte_statut_attente' => 'in waiting list',
 	'texte_statut_attente_paiement' => 'waiting for payment',
 	'texte_statut_cloture' => 'closed',
