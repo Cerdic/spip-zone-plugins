@@ -1,0 +1,35 @@
+
+
+<h1 class="grostitre">Gestion du stock</h1>
+
+
+
+
+<table>
+	<tr>
+		<th>Titre</th>
+		<th>Ref.</th>
+		<th>Stock</th>
+	</tr>
+<B_listProduits>
+	
+<BOUCLE_listProduits(PRODUITS)>
+	<tr>
+	<td>#TITRE</td>
+	<td>#REFERENCE</td>
+
+		<td>
+			<div class="ajax">
+				#FORMULAIRE_EDITER_STOCK{'produit', #ID_PRODUIT}
+			</div>
+				
+		</td>
+
+		</tr>
+</BOUCLE_listProduits>
+
+</B_listProduits>
+<//B_listProduits>
+
+</table>
+
