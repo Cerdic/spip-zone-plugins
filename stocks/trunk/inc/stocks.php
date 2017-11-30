@@ -44,11 +44,13 @@ function set_quantite($objet, $id_objet, $quantite) {
 
 	include_spip('action/editer_objet');
 	if (!$id_stock) {
-		objet_inserer('stock', null, null);
+		$id_stock = objet_inserer('stock');
 	}
-	$err = objet_modifier('stocks', $id_stock, array('quantite' => $quantite));
+	$res = objet_modifier('stocks', $id_stock, array('objet'=> $objet,
+													 'id_objet'=>$id_objet,
+													 'quantite' => $quantite));
 
-	return ($err) ? $err : $quantite;
+	return ($res) ? $res : $quantite;
 }
 
 /**
