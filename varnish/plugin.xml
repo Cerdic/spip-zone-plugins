@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Varnish</nom>
 	<auteur>Fil</auteur>
-	<version>0.3.1</version>
+	<version>0.3.2</version>
 	<etat>
 	test
 	</etat>
@@ -22,7 +22,7 @@
 	</pipeline>
 	<categorie>outil</categorie>
 
-	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.2.99]" />
 	<utilise id="statsjs" version="[0.1.0;]" />
 
 	<chemin dir='' />
