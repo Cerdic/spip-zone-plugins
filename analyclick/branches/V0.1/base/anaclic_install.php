@@ -9,8 +9,11 @@
 *
 **/
 
-function anaclic_install($action)
-{
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
+
+function anaclic_install($action)  {
 	switch ($action)
 	{	case 'test':
 			// Table existe ?

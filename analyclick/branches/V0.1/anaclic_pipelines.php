@@ -8,6 +8,10 @@
  * @licence    GNU/GPL
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
+
 /**
  * Ajouter un lien vers les stats sur chaque document
  *

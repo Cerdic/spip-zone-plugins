@@ -10,7 +10,9 @@
 * Fonction comptage + renvoie du document
 *
 **/
-if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 include_spip("base/anaclic");
 
 function action_telecharger() 

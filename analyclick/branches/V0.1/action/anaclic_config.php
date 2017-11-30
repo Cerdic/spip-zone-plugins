@@ -9,7 +9,9 @@
 *
 **/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 function action_anaclic_config_dist() 
 {	$securiser_action = charger_fonction('securiser_action', 'inc');

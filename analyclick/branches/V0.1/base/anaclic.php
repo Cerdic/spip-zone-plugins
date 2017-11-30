@@ -9,6 +9,11 @@
 *
 **/
 
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
+
+
 include_spip('base/serial'); // pour eviter une reinit posterieure des tables modifiees
 
 global $tables_principales, $tables_auxiliaires, $table_des_tables;
