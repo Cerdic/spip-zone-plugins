@@ -18,7 +18,7 @@
 	<pipeline nom="formulaire_charger" inclure="stocks_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="stocks_pipelines.php" />
 	<pipeline nom="afficher_fiche_objet" inclure="stocks_pipelines.php" />
-	<pipeline nom="affiche_milieu" inclure="stocks_pipelines.php" />
+	<!--<pipeline nom="affiche_milieu" inclure="stocks_pipelines.php" />-->
 
 	<necessite nom="produits" compatibilite="[1.1.25;["/>
 	<necessite nom="saisies" compatibilite="[2.19.1;["/>
