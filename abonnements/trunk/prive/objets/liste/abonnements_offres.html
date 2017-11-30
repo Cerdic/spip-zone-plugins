@@ -29,6 +29,7 @@
 		{statut?}
 		{recherche?}
 		{tri #ENV{par,num titre},#GET{defaut_tri}}
+		{par titre}
 		{pagination #ENV{nb,10}}
 	>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
