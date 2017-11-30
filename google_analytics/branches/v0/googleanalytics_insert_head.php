@@ -33,15 +33,11 @@ function googleanalytics_insert_head($flux) {
 function googleanalytics_snippet(){
 	include_spip('inc/config');
 	$id_google = lire_config('googleanalytics/idGoogle');
-	$cookiebar = $_COOKIE["cb-enabled"];
-	if ($_COOKIE["displayCookieConsent"] != '') {
-		$displayCookieConsent = $_COOKIE["displayCookieConsent"];
-	} else {
-		$displayCookieConsent = 'y';
-	}
+	$cookiebar = (isset($_COOKIE["cb-enabled"]) ? $_COOKIE["cb-enabled"] : '');
+	$displayCookieConsent = (isset($_COOKIE["displayCookieConsent"]) ? $_COOKIE["displayCookieConsent"] : 'y');
 	if ($id_google
 	  AND $id_google !== '_'
-	  AND (strncmp($id_google,"UA-xxx",6)!=0)
+	  AND (strncmp($id_google,"UA-xxx",6) != '0')
 	  AND $cookiebar !== 'declined'
 	  AND $displayCookieConsent === 'y') {
 	    if (lire_config('googleanalytics/ga_universal')) {
