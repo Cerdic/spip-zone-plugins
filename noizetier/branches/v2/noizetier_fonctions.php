@@ -393,7 +393,7 @@ function noizetier_charger_infos_page($dossier, $page, $info = '') {
 	$infos_page = array();
 	
 	// S'il existe un fichier xml de configuration (s'il s'agit d'une composition on utilise l'info de la composition)
-	if (file_exists($fichier) and $xml = spip_xml_load($fichier, false) and count($xml['page'])) {
+	if (file_exists($fichier) and $xml = spip_xml_load($fichier, false) and !empty($xml['page'])) {
 		$xml = reset($xml['page']);
 	} elseif (file_exists($fichier) and $xml = spip_xml_load($fichier, false) and count($xml['composition'])) {
 		$xml = reset($xml['composition']);
