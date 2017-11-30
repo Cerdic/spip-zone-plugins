@@ -8,6 +8,7 @@
 		jQuery('.noisettes_disponibles').show();
 		jQuery('ul.liste-noisettes-disponibles li.noisette').draggable({
 			connectToSortable: "ul.bloc",
+			containment: "ul.bloc",
 			helper: "clone",
 			revert: "invalid",
 			cursor: 'move'
