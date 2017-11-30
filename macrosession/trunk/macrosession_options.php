@@ -88,17 +88,38 @@ define (V_OUVRE_PHP, "'<'.'" . '?php ');
 define (V_FERME_PHP, ' ?' . "'.'>'");
 
 // Appelé uniquement au recalcul pour la compilation
-// $champ est entre quotes ''
 // le code renvoyé sera inséré à l'intérieur d'un '...'
-function compile_appel_macro_session ($p, $champ,$n=2) {
+function compile_appel_macro_session ($p) {
+	$champ = interprete_argument_balise(1, $p);
+	// $champ est entre quotes ''
+	if (!$champ)
+		$champ = "'id_auteur'";
+
+	if (erreur_argument_macro ('#_SESSION', 'champ', $champ, $p))
+		return "''";
+			
 	$get_champ = "pipelined_session_get('.\"$champ\".')";
 
 	// champ sans application de filtre
-	if (!existe_argument_balise($n, $p)) 
+	if (!existe_argument_balise(2, $p)) 
 		return $get_champ;
 	
 	// Application d'un filtre, récupéré entre quotes ''
 	$filtre = trim_quote(interprete_argument_balise (2, $p));
+	if (erreur_argument_macro ('#_SESSION', 'filtre', $filtre, $p))
+		return "''";
+
+	// le filtre est il en fait un opérateur unaire ?
+	if (in_array ($filtre, array ("'!'", "'non'"))) {
+		$unaire = trim ($filtre, "'");
+		switch ($unaire) {
+		case '!':
+			nobreak;
+		case 'non' :
+			return "(!$get_champ)";
+			break;
+		}
+	}
 
 	if ($filtre=="'?'")
 		$filtre = "'choix_selon'";
@@ -106,10 +127,13 @@ function compile_appel_macro_session ($p, $champ,$n=2) {
 	// le filtre peut être appelé avec 0, un ou 2 arguments
 	$arg_un = $arg_deux = $virgule_arg_un = $virgule_arg_deux = '';
 	
-	if (existe_argument_balise($n+1, $p)) {
-		$arg_un = interprete_argument_balise($n+1, $p); 
+	if (existe_argument_balise(3, $p)) {
+		$arg_un = interprete_argument_balise(3, $p);
 		$virgule_arg_un = ".', '.\"$arg_un\"";
 	};
+
+	if (erreur_argument_macro ('#_SESSION', 'arg_un', $arg_un, $p))
+		return "''";
 
 	// le filtre est il en fait un opérateur de comparaison ?
 	if (in_array ($filtre, array ("'=='", "'!='", "'<'", "'<='", "'>'", "'>='"))) {
@@ -120,22 +144,13 @@ function compile_appel_macro_session ($p, $champ,$n=2) {
 		// '<'.'?php  echo (pipelined_session_get('."'nom'".') == '."'JLuc'".');  ?'.'>'
 	}
 
-	// le filtre est il en fait un opérateur unaire ?
-	if (in_array ($filtre, array ("'!'", "'non'"))) {
-		$unaire = trim ($filtre, "'");
-		switch ($unaire) {
-		case '!':
-			nobreak;
-		case 'non' :
-			return "(!$get_champ $comparateur)";
-			break;
-		}
-	}
-
-	if (existe_argument_balise($n+2, $p)) {
-		$arg_deux = interprete_argument_balise($n+2, $p);
+	if (existe_argument_balise(4, $p)) {
+		$arg_deux = interprete_argument_balise(4, $p);
 		$virgule_arg_deux = ".', '.\"$arg_deux\"";
 	};
+
+	if (erreur_argument_macro ('#_SESSION', 'arg_deux', $arg_deux, $p))
+		return "''";
 
 // produira par exemple ensuite :
 // '<'.'?php  echo appliquer_filtre(pipelined_session_get('."'nom'".'), '."'strlen'".');  ?'.'>'
@@ -158,10 +173,7 @@ function compile_appel_macro_session ($p, $champ,$n=2) {
  * 
  */
 function balise__SESSION_dist($p) {
-	$champ = interprete_argument_balise(1, $p);
-	if (!$champ)
-		$champ = "'id_auteur'";
-	$p->code = V_OUVRE_PHP . ' echo '. compile_appel_macro_session($p, $champ). '; ' . V_FERME_PHP;
+	$p->code = V_OUVRE_PHP . ' echo '. compile_appel_macro_session($p). '; ' . V_FERME_PHP;
 	$p->interdire_scripts = false;
 	// echo "On insèrera l'évaluation du code suivant : <pre>".$p->code."</pre>\n\n"; 
 	return $p;
@@ -182,26 +194,83 @@ function balise__SESSION_dist($p) {
  * 	'<'.'?php  if (pipelined_session_get('."'nom'".')) {  ?'.'>'
 */
 function balise__SESSION_SI_dist($p) {
-	$champ = interprete_argument_balise(1, $p);
-	if (!$champ)
-		$champ = "'id_auteur'";
-
-	$p->interdire_scripts = false;
-
 	// Appelé uniquement au recalcul
 	$p->code = V_OUVRE_PHP . 'if ('.compile_appel_macro_session($p, $champ).') { ' . V_FERME_PHP;
+	$p->interdire_scripts = false;
 	return $p;
 }
 
 function balise__SESSION_SINON_dist($p) {
-	$p->code="'<'.'" . '?php } else { ?' . "'.'>'";
+	$p->code = V_OUVRE_PHP.' } else { '.V_FERME_PHP;
 	$p->interdire_scripts = false;
 	return $p;
 }
 
 function balise__SESSION_FIN_dist($p) {
-	$p->code="'<'.'" . '?php }; ?' . "'.'>'";
+	$p->code = V_OUVRE_PHP.' } '.V_FERME_PHP;
 	$p->interdire_scripts = false;
 	return $p;
 }
+
+function compile_appel_macro_autoriser ($p) {
+	$autorisation = interprete_argument_balise(1, $p);
+
+	if (erreur_argument_macro ('#_AUTORISER_SI', 'autorisation', $autorisation, $p))
+		return "''";
+
+	// l'autorisation peut être appelé avec 0, un ou 2 arguments
+	if (!existe_argument_balise(2, $p)) 
+		return "autoriser('.\"$autorisation\".')";
+
+	$type = trim_quote(interprete_argument_balise (2, $p));
+	if (erreur_argument_macro ('#_AUTORISER_SI', 'type', $type, $p))
+		return "''";
+
+	if (!existe_argument_balise(3, $p)) 
+		return "autoriser('.\"$autorisation\".', '.\"$type\".')";
+
+	$id = trim_quote(interprete_argument_balise (3, $p));
+	if (erreur_argument_macro ('#_AUTORISER_SI', 'id', $id, $p))
+		return "''";
+
+	if (!existe_argument_balise(4, $p)) 
+		return "autoriser('.\"$autorisation\".', '.\"$type\".', '.\"$id\".')";
+
+	// Les appels à #_AUTORISER_SI avec arguments $qui et $opt n'ont été testés
+	// De toute façon c'est impossible de les appeler avec un #ARRAY
+	$qui = trim_quote(interprete_argument_balise (4, $p));
+	if (erreur_argument_macro ('#_AUTORISER_SI', 'qui', $qui, $p))
+		return "''";
+	if (!existe_argument_balise(5, $p)) 
+		return "autoriser('.\"$autorisation\".', '.\"$type\".', '.\"$id\".')";
+
+	$opt = trim_quote(interprete_argument_balise (5, $p));
+	if (erreur_argument_macro ('#_AUTORISER_SI', 'opt', $opt, $p))
+		return "''";
+	return "autoriser('.\"$autorisation\".', '.\"$type\".', '.\"$id\".', '.\"$opt\".')";
+}
+
+function balise__AUTORISER_SI_dist($p) {
+	$p->interdire_scripts = false;
+
+	// Appelé uniquement au recalcul
+	$p->code = V_OUVRE_PHP . 'if ('.compile_appel_macro_autoriser ($p).') { ' . V_FERME_PHP;
+	return $p;
+}
+
+function balise__AUTORISER_SINON_dist($p) {
+	return balise__SESSION_SINON_dist($p);
+}
+
+function balise__AUTORISER_FIN_dist($p) {
+	return balise__SESSION_FIN_dist($p);
+}
  
+
+function erreur_argument_macro ($macro, $argument, $val, $p) {
+	if (substr($val, 0, 1) != "'") {
+		erreur_squelette ("L'argument '$argument' de la macro '$macro' ne doit pas être une valeur calculée (".$val.")", $p);
+		return true;
+	};
+	return false;
+}
