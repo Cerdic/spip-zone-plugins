@@ -14,12 +14,12 @@
             <input type="hidden" name="id_objet" value="#ENV{id_objet}" />
             <input type="hidden" name="is_stock" value="#ENV{is_stock}" />
             [(#ENV{is_stock}|oui)
-                <label for="_quantite">Stock</label>
-                <input type="text" name="_quantite" id="_quantite" value="#ENV{_quantite}" class="text" />
+                <label for="quantite[-(#GET{uid})]">Stock</label>
+                <input type="text" name="_quantite" id="quantite[-(#GET{uid})]" value="#ENV{_quantite}" class="text" />
             ]
             [(#ENV{is_stock}|non)
-                <label for="_quantite">Créer le Stock</label>
-                <input type="text" name="_quantite" id="_quantite" value="#ENV{_quantite}" class="text" />
+                <label for="quantite[-(#GET{uid})]">Créer le Stock</label>
+                <input type="text" name="_quantite" id="quantite[-(#GET{uid})]" value="#ENV{_quantite}" class="text" />
             ]			
             <input type="submit" class="submit" value="<:pass_ok:>" />
 	</div>
