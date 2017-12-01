@@ -41,14 +41,16 @@ function set_quantite($objet, $id_objet, $quantite) {
 		'spip_stocks',
 		array('objet='.sql_quote($objet), 'id_objet='.intval($id_objet))
 	);
-
+//spip_log("STOCK : $id_stock",'stocks');
+//spip_log("OBJET : $objet - $id_objet",'stocks');
 	include_spip('action/editer_objet');
 	if (!$id_stock) {
-		$id_stock = objet_inserer('stock');
+		$id_stock = objet_inserer('stock', null, null);
 	}
 	$res = objet_modifier('stocks', $id_stock, array('objet'=> $objet,
 													 'id_objet'=>$id_objet,
 													 'quantite' => $quantite));
+	//spip_log("inssertion  : $res",'stocks');
 
 	return ($res) ? $res : $quantite;
 }
