@@ -1128,7 +1128,6 @@ EOB;
 			<option value=Z', $MYREQUEST['S_KEY'] == 'Z' ? ' selected' : '', '>Size</option>
 			<option value=S', $MYREQUEST['S_KEY'] == 'S' ? ' selected' : '', '>$fieldheading</option>
 			<option value=A', $MYREQUEST['S_KEY'] == 'A' ? ' selected' : '', '>Last accessed</option>
-			<option value=M', $MYREQUEST['S_KEY'] == 'M' ? ' selected' : '', '>Last modified</option>
 			<option value=C', $MYREQUEST['S_KEY'] == 'C' ? ' selected' : '', '>Created at</option>
 			<option value=D', $MYREQUEST['S_KEY'] == 'D' ? ' selected' : '', '>Deleted at</option>';
 		if ($fieldname == 'info')
@@ -1196,7 +1195,7 @@ EOB;
 				break;
 			}
 		}
-		echo '<div class="info"><table cellspacing=0><tbody>', '<tr>', '<th>', sortheader('S', $fieldheading), '</th>', '<th>', sortheader('H', 'Hits'), '</th>', '<th>', sortheader('Z', 'Size'), '</th>', '<th>', sortheader('A', 'Last accessed'), '</th>', '<th>', sortheader('M', 'Last modified'), '</th>', '<th>', sortheader('C', 'Created at'), '</th>';
+		echo '<div class="info"><table cellspacing=0><tbody>', '<tr>', '<th>', sortheader('S', $fieldheading), '</th>', '<th>', sortheader('H', 'Hits'), '</th>', '<th>', sortheader('Z', 'Size'), '</th>', '<th>', sortheader('A', 'Last accessed'), '</th>', '<th>', sortheader('C', 'Created at'), '</th>';
 		
 		if ($fieldname == 'info') {
 			$cols += 2;
@@ -1207,7 +1206,7 @@ EOB;
 		// builds list with alpha numeric sortable keys
 		//
 		$list = array();
-		
+
 		foreach ($cache[$scope_list[$MYREQUEST['SCOPE']]] as $i => $entry) {
 			switch ($MYREQUEST['S_KEY']) {
 				case 'A':
@@ -1218,9 +1217,6 @@ EOB;
 					break;
 				case 'Z':
 					$k = sprintf('%015d-', $entry['mem_size']);
-					break;
-				case 'M':
-					$k = sprintf('%015d-', $entry['mtime']);
 					break;
 				case 'C':
 					$k = sprintf('%015d-', $entry['creation_time']);
@@ -1411,7 +1407,6 @@ EOB;
 					<td class="td-n center">', $entry['num_hits'], '</td>
 					<td class="td-n right">', $entry['mem_size'], '</td>
 					<td class="td-n center">', date(DATE_FORMAT, $entry['access_time']), '</td>
-					<td class="td-n center">', date(DATE_FORMAT, $entry['mtime']), '</td>
 					<td class="td-n center">', date(DATE_FORMAT, $entry['creation_time']), '</td>';
 					
 					if ($fieldname == 'info') {
