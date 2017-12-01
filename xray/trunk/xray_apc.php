@@ -221,7 +221,7 @@ $vardom = array(
 	'ZOOM' => '/^(|TEXTECOURT|TEXTELONG)$/', //
 	'WHERE' => '/^(|ALL|HTML|META)$/', // recherche dans le contenu
 	'EXTRA' => '/^(|CONTEXTE|CONTEXTES_SPECIAUX|INFO_AUTEUR|INVALIDEURS|INVALIDEURS_SPECIAUX|INCLUSIONS'
-		.(plugin_est_actif('macrosession') ? '|MACROSESSIONS' : '')
+		.(plugin_est_actif('macrosession') ? '|MACROSESSIONS|MACROAUTORISER' : '')
 		.')$/'		// Affichage pour chaque élément de la liste
 );
 
@@ -1154,6 +1154,7 @@ EOB;
 			<option value=INVALIDEURS_SPECIAUX ', $MYREQUEST['EXTRA'] == 'INVALIDEURS_SPECIAUX' ? ' selected' : '', '>Invalideurs spécifiques</option>
 			<option value=INCLUSIONS ', $MYREQUEST['EXTRA'] == 'INCLUSIONS' ? ' selected' : '', '>&lt;INCLURE&gt;</option>
 			<option value=MACROSESSIONS ', $MYREQUEST['EXTRA'] == 'MACROSESSIONS' ? ' selected' : '', '>#_SESSION</option>
+			<option value=MACROAUTORISER ', $MYREQUEST['EXTRA'] == 'MACROAUTORISER' ? ' selected' : '', '>#_AUTORISER_SI</option>
 		</select>
 		<p><b>Types cache:</b> 
 		<select name=TYPECACHE  onChange="form.submit()">
@@ -1381,15 +1382,23 @@ EOB;
 								elseif (preg_match_all("/<\?php\s+echo\s+recuperer_fond\s*\(\s*'([a-z0-9_\-\.\/]+)'/", $data['texte'], $matches))
 									$extra = $matches[1];
 								else
-									$extra = '(aucune inclusion)';
+									$extra = '(aucune <INCLUSION>)';
 								break;
 							case 'MACROSESSIONS' :
 								if (!isset ($data['texte']))
 									$extra = '(html non défini)';
-								elseif (preg_match_all("/pipelined_session_get\((['\"a-z0-9\s_\-\.\/,]+)\)/", $data['texte'], $matches))
+								elseif (preg_match_all("/\bpipelined_session_get\s*\((['\"a-z0-9\s_\-\.\/,]+)\)/", $data['texte'], $matches))
 									$extra = $matches[1];
 								else
-									$extra = '(aucune macrosession)';
+									$extra = '(aucune balise #_SESSION ou #_SESSION_SI)';
+								break;
+							case 'MACROAUTORISER' :
+								if (!isset ($data['texte']))
+									$extra = '(html non défini)';
+								elseif (preg_match_all("/if\s+\(autoriser\s*\((['\"a-z0-9\s_\-\.\/,]+)\)/", $data['texte'], $matches))
+									$extra = $matches[1];
+								else
+									$extra = '(aucune balise #_AUTORISER_SI)';
 								break;
 							}
 						}
