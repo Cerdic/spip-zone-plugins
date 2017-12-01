@@ -1,0 +1,33 @@
+#SET{uid,#ENV{objet}_#ENV{id_objet}}
+<div  id="#GET{uid}" class="formulaire_#FORM">
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">
+            (#ENV**{message_erreur})
+           [<br> (#ENV**{erreurs}|table_valeur{_quantite})]
+    </p>]
+[(#ENV{editable})
+<form name="formulaire_#FORM" action="#ENV{action}" method="post">  
+<div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+    <div class="[(#ENV{is_stock}|?{'edit','new'})]">	
+            <input type="hidden" name="objet" value="#ENV{objet}" />
+            <input type="hidden" name="id_objet" value="#ENV{id_objet}" />
+            <input type="hidden" name="is_stock" value="#ENV{is_stock}" />
+            [(#ENV{is_stock}|oui)
+                <label for="_quantite">Stock</label>
+                <input type="text" name="_quantite" id="_quantite" value="#ENV{_quantite}" class="text" />
+            ]
+            [(#ENV{is_stock}|non)
+                <label for="_quantite">Créer le Stock</label>
+                <input type="text" name="_quantite" id="_quantite" value="#ENV{_quantite}" class="text" />
+            ]			
+            <input type="submit" class="submit" value="<:pass_ok:>" />
+	</div>
+</div>
+</form>]
+</div>
+<script>
+jQuery(function($){
+    $('[#(#GET{uid})] .reponse_formulaire').fadeIn('slow').delay(2000).fadeOut('slow');
+});
+</script>
