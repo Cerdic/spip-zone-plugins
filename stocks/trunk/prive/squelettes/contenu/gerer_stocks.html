@@ -20,11 +20,11 @@ td.actions {
 	z-index: 5000;
 	box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2)
 }
-.formulaire_changer_quantite {
+.formulaire_gerer_stock {
 	padding-bottom: 8px; 
 }
 
-.formulaire_changer_quantite .reponse_formulaire {
+.formulaire_gerer_stock .reponse_formulaire {
 	position: absolute;
     display: block;
     z-index: 100;
@@ -35,15 +35,15 @@ td.actions {
 	text-align: center;
 }
 
-.formulaire_changer_quantite .reponse_formulaire_ok {
+.formulaire_gerer_stock .reponse_formulaire_ok {
 	border-color: #22ff5d;
 	background-color: rgba(156, 237, 149, 0.4);
 }
-.formulaire_changer_quantite .reponse_formulaire_erreur {
+.formulaire_gerer_stock .reponse_formulaire_erreur {
 	border-color: #fc2729;
 	background-color: rgba(255, 15, 17, 0.4);
 }
-.formulaire_changer_quantite label {
+.formulaire_gerer_stock label {
 	display: block;
 	width: 100%;	
 }
@@ -80,7 +80,7 @@ td.actions {
 		<td>#REFERENCE</td>
 		<td class="txt-right actions">
 			<div class="ajax">
-				#FORMULAIRE_CHANGER_QUANTITE{'produit', #ID_PRODUIT}
+				#FORMULAIRE_GERER_STOCK{'produit', #ID_PRODUIT}
 			</div>	
 		</td>
 	</tr>

@@ -8,13 +8,13 @@
  * 
  *
  */
-if (!defined('_ECRIRE_INC_VERSION')) {
+if (!defined("_ECRIRE_INC_VERSION")) {
 	return;
 }
 
 
 
-function formulaires_changer_quantite_charger_dist($objet, $id_objet, $retour = ''){
+function formulaires_gerer_stock_charger_dist($objet, $id_objet, $retour = ''){
 include_spip('inc/stocks');
 	$quantite = get_quantite($objet,$id_objet);
 	$stock_default = lire_config('stocks/quantite_default');
@@ -29,7 +29,7 @@ include_spip('inc/stocks');
 	return $valeurs;
 }
 
-function formulaires_changer_quantite_verifier_dist($objet,$id_objet,$retour = ''){
+function formulaires_gerer_stock_verifier_dist($objet,$id_objet,$retour = ''){
 	$erreurs = array();
 	foreach(array('_quantite') as $champ) {
 		if (!_request($champ)) {
@@ -45,7 +45,7 @@ function formulaires_changer_quantite_verifier_dist($objet,$id_objet,$retour = '
 	return $erreurs;
 }
 
-function formulaires_changer_quantite_traiter_dist($objet,$id_objet,$retour = ''){
+function formulaires_gerer_stock_traiter_dist($objet,$id_objet,$retour = ''){
 include_spip('inc/stocks');
 	$quantite = _request('_quantite');
 	set_quantite($objet,$id_objet,$quantite);
