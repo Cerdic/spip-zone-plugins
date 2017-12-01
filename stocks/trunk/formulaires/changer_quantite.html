@@ -14,7 +14,7 @@
             <input type="hidden" name="id_objet" value="#ENV{id_objet}" />
             <input type="hidden" name="is_stock" value="#ENV{is_stock}" />
             [(#ENV{is_stock}|oui)
-                <label for="quantite[-(#GET{uid})]">Stock</label>
+                <label for="quantite[-(#GET{uid})]">En stock</label>
                 <input type="text" name="_quantite" id="quantite[-(#GET{uid})]" value="#ENV{_quantite}" class="text" />
             ]
             [(#ENV{is_stock}|non)
