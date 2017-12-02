@@ -79,7 +79,7 @@ Sie hat folgende Adresse :',
 	// I
 	'info_diffusion_nouveaute_partielle_non' => 'Vollständigen Inhalt senden',
 	'info_diffusion_nouveaute_partielle_oui' => 'Nur einen Auszug senden',
-	'info_diffusion_nouveautes' => 'Inhalt der Mails zu neuen Inhalten der Website',
+	'info_diffusion_nouveautes' => 'Inhalt der Mails zu neuen Inhalten der Website', # MODIF
 	'info_lien_publier_commentaire' => 'Beitrag veröffentlichen',
 	'info_lien_signaler_spam_commentaire' => 'Als SPAM markieren',
 	'info_lien_supprimer_commentaire' => 'Beitrag löschen',
