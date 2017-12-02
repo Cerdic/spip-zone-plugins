@@ -12,17 +12,25 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
+/**
+ * Obtient les champs extras auteur et rçeservation
+
+ *
+ * @return array
+ * 					Les définitions des champs.
+ */
 function champs_extras_reservation() {
 	//les champs extras auteur
 	include_spip('cextras_pipelines');
 
-	if (function_exists('champs_extras_objet')) {
-		//Charger les définitions pour la création des formulaires
-		$champs_extras_auteurs = champs_extras_objet(table_objet_sql('auteur'));
+	$champs_extras = array();
 
+	if (function_exists('champs_extras_objet')) {
+		$champs_extras['auteur'] = champs_extras_objet(table_objet_sql('auteur'));
+		$champs_extras['reservation'] = champs_extras_objet(table_objet_sql('reservation'));
 	}
 
-	return $champs_extras_auteurs;
+	return $champs_extras;
 }
 
 function nom_statuts($statuts) {

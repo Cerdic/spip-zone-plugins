@@ -1,6 +1,13 @@
-#SET{extras,#VAL|champs_extras_reservation} #SET{champs_extras,#ARRAY}
+#SET{extras,#VAL|champs_extras_reservation}
+#SET{extras_plat,#ARRAY}
+#SET{champs_extras_auteur,#ARRAY}
 <BOUCLE_extras (DATA){source tableau, #GET{extras}}>
-	#SET{champs_extras,#GET{champs_extras}|push{#VALEUR{options/nom}}
+	#SET{champs_extras_#CLE,#ARRAY}
+	#SET{objet,#CLE}
+	<BOUCLE_extras_objet (DATA){source tableau, #VALEUR}>
+		#SET{champs_extras_#GET{objet},#GET{champs_extras_#GET{objet}}|push{#VALEUR}}
+		#SET{extras_plat,#GET{extras_plat}|push{#VALEUR{options/label}}}
+	</BOUCLE_extras_objet>
 </BOUCLE_extras>
 
 #SET{id_evenement,#ARRAY}
@@ -20,8 +27,8 @@
 			<th><:reservation:label_date:></th>
 			<th><:reservation:label_nom:></th>
 			<th><:reservation:label_email:></th>
-			<BOUCLE_champs_extras (DATA){source tableau,#GET{champs_extras}}>
-			<th>[(#VALEUR|chercher_label{#GET{extras}}|extraire_multi)]</th>
+			<BOUCLE_champs_extras (DATA){source tableau,#GET{extras_plat}}>
+			<th>[(#VALEUR|chercher_label{#GET{extras_plat}}|extraire_multi)]</th>
 			</BOUCLE_champs_extras>
 			<th><:reservations_detail:label_quantite:></th>
 		</tr>
@@ -34,12 +41,12 @@
 				#SET{date,#DATE}
 			<BOUCLE_participants(AUTEURS){id_auteur}{id_auteur!=0}{tout}>
 				#SET{nom,#NOM} #SET{email,#EMAIL**}
-				<BOUCLE_aut_ext (DATA){source tableau, #GET{champs_extras}}>
-					#SET{valeurs_extras,#GET{valeurs_extras}|push{#ID_AUTEUR|generer_info_entite{auteur,#VALEUR}|sinon{-}}}
+				<BOUCLE_aut_ext (DATA){source tableau, #GET{champs_extras_auteur}}>
+					#SET{valeurs_extras,#GET{valeurs_extras}|push{#ID_AUTEUR|generer_info_entite{auteur,#VALEUR{options/nom}}|sinon{-}}}
 				</BOUCLE_aut_ext>
 			</BOUCLE_participants>
-				<BOUCLE_aut_ext2 (DATA){source tableau, #GET{champs_extras}}>
-					#SET{valeurs_extras,#GET{valeurs_extras}|push{#DONNEES_AUTEUR|unserialize|table_valeur{#VALEUR}|sinon{-}}}
+				<BOUCLE_aut_ext2 (DATA){source tableau, #GET{champs_extras_auteur}}>
+					#SET{valeurs_extras,#GET{valeurs_extras}|push{#DONNEES_AUTEUR|unserialize|table_valeur{#VALEUR{options/nom}}|sinon{-}}}
 				</BOUCLE_aut_ext2>
 			<//B_participants>
 		<tr>
@@ -53,6 +60,9 @@
 		<BOUCLE_champs_extras2 (DATA){source tableau,#GET{valeurs_extras}}>
 		<td>[(#VALEUR)]</td>
 		</BOUCLE_champs_extras2>
+		<BOUCLE_extras_reservation (DATA){source tableau, #GET{champs_extras_reservation}}>
+		<td>[(#ID_RESERVATION|generer_info_entite{reservation,#VALEUR{options/nom}}|sinon{-})]</td>
+		</BOUCLE_extras_reservation>
 		<td>#QUANTITE</td>
 		</tr>
 		</BOUCLE_evt>
