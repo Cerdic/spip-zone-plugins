@@ -26,8 +26,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'effacer' => 'Erase',
 	'effacer_tout' => 'Erase all',
-	'element_supprime' => '@ids@ was removed from the trash', # MODIF
-	'elements_supprimes' => '@ids@ were removed from the trash', # MODIF
+	'element_supprime' => '@objet@ @ids@ was removed from the trash',
+	'elements_supprimes' => '@objet@ @ids@ were removed from the trash',
 
 	// F
 	'forums_prives_corbeille_tous' => '@nb@ private forum messages in the trash',
@@ -46,5 +46,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sites_corbeille_un' => '1 website in the trash',
 
 	// V
-	'voir_detail' => 'see details' # MODIF
+	'voir_detail' => 'See details'
 );
