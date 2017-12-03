@@ -32,7 +32,14 @@ function logo_auto_quete_logo_objet($flux) {
 			'', //group
 			'0+titre, d.id_document'
 		)) {
-			$chemin_complet = _DIR_IMG . $image['fichier'];
+			// Si c'est un URL on retourne le chemin directement
+			if (filter_var($image['fichier'], FILTER_VALIDATE_URL)) {
+				$chemin_complet = $image['fichier'];
+			}
+			// Sinon on va le chercher dans IMG
+			else {
+				$chemin_complet = _DIR_IMG . $image['fichier'];
+			}
 			
 			$flux['data'] = array(
 				'chemin' => $chemin_complet,
@@ -54,7 +61,14 @@ function logo_auto_quete_logo_objet($flux) {
 			'', //group
 			'0+d.titre, d.id_document'
 		)) {
-			$chemin_complet = _DIR_IMG . $vignette['fichier'];
+			// Si c'est un URL on retourne le chemin directement
+			if (filter_var($vignette['fichier'], FILTER_VALIDATE_URL)) {
+				$chemin_complet = $vignette['fichier'];
+			}
+			// Sinon on va le chercher dans IMG
+			else {
+				$chemin_complet = _DIR_IMG . $vignette['fichier'];
+			}
 			
 			$flux['data'] = array(
 				'chemin' => $chemin_complet,
