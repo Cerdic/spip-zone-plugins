@@ -1,0 +1,13 @@
+[(#ENV{multiple}|oui)
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+]
+<select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"]>
+	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
+		<option value="">[(#ENV{option_intro})]</option>]
+	<BOUCLE_selection_objets(SELECTION_OBJETS){par num titre, titre}{statut?}{id_objet?}{id_objet_dest?}{recherche?}{tout}>
+		[(#ENV{multiple}|oui)
+		<option value="#ID_OBJET"[(#ID_OBJET|in_array{#ENV{valeur_forcee,#GET{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>#TITRE 1</option>]
+		[(#ENV{multiple}|non)
+		<option value="#ID_OBJET"[(#ID_OBJET|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>#TITRE</option>]
+	</BOUCLE_selection_objets>
+</select>
