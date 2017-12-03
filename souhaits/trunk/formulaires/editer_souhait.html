@@ -6,17 +6,17 @@
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_souhait' value='#ENV{id_souhait}' />
-		<ul>
-
+		
+		<div class="editer-groupe">
 			[(#SAISIE{input, titre, obligatoire=oui,
 				label=<:souhait:label_titre:>})]
 
-			[<li class="editer editer_rubrique[ (#ENV**{erreurs/id_parent}|oui)erreur]">
+			[<div class="editer editer_rubrique[ (#ENV**{erreurs/id_parent}|oui)erreur]">
 					<label for="id_parent"><:titre_cadre_interieur_rubrique:></label>[
 					<span class="erreur_message">(#ENV**{erreurs/id_parent})</span>
 					]
 					(#VAL|chercher_rubrique{#ENV{id_souhait},#ENV{id_parent},'souhait',#ENV{id_secteur},'',0,form_simple})
-			</li>]
+			</div>]
 
 			[(#SAISIE{textarea, descriptif,
 				label=<:souhait:label_descriptif:>,
@@ -27,25 +27,23 @@
 				label=<:souhait:label_prix:>,
 				explication=<:souhait:explication_prix:> })]
 			
-			<li class="editer editer_liens_sites fieldset">
-				<fieldset>
-					<h3 class="legend"><:entree_liens_sites:></h3>
-					<ul>
-					<li class="editer editer_nom_site[ (#ENV**{erreurs/nom_site}|oui)erreur]">
+			<fieldset>
+				<legend class="legend"><:entree_liens_sites:></legend>
+				
+				<div class="editer-groupe">
+					<div class="editer editer_nom_site[ (#ENV**{erreurs/nom_site}|oui)erreur]">
 						<label for="nom_site"><:info_titre:></label>[
 						<span class='erreur_message'>(#ENV**{erreurs/nom_site})</span>
 						]<input type='text' class='text' name='nom_site' id='nom_site'[ lang='(#LANGUE)'] value="[(#ENV**{nom_site})]" />
-					</li>
-					<li class="editer editer_url_site[ (#ENV**{erreurs/url_site}|oui)erreur]">
+					</div>
+					<div class="editer editer_url_site[ (#ENV**{erreurs/url_site}|oui)erreur]">
 						<label for="url_site"><:info_url:></label>[
 						<span class='erreur_message'>(#ENV**{erreurs/url_site})</span>
 						]<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV**{url_site})]" />
-					</li>
-					</ul>
-				</fieldset>
-			</li>
-
-		</ul>
+					</div>
+				</div>
+			</fieldset>
+		</div>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
