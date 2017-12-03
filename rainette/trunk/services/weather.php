@@ -32,7 +32,8 @@ $GLOBALS['rainette_weather_config']['service'] = array(
 	'langues' => array(
 		'disponibles' => array(),
 		'defaut'      => 'en'
-	)
+	),
+	'requetes' => array()
 );
 
 // Configuration des données fournies par le service wunderground pour le mode 'infos'.
@@ -132,6 +133,17 @@ $GLOBALS['rainette_weather_config']['previsions'] = array(
 	),
 );
 
+// Configuration des données fournies par le service weather en cas d'erreur.
+// -- Seules les données non calculées sont configurées.
+$GLOBALS['rainette_weather_config']['erreurs'] = array(
+	'cle_base'    => array('children', 'err', 0,),
+	'donnees'     => array(
+		// Erreur
+		'code'     => array('cle' => array()),
+		'message'  => array('cle' => array('text')),
+	),
+);
+
 
 /**
  * @param string $mode
@@ -177,6 +189,25 @@ function weather_service2url($lieu, $mode, $periodicite, $configuration) {
 	}
 
 	return $url;
+}
+
+
+/**
+ * @param array $erreur
+ *
+ * @return bool
+ */
+function weather_erreur_verifier($erreur) {
+
+	// Initialisation
+	$est_erreur = false;
+
+	// Une erreur est uniquement décrite par un texte (message).
+	if (!empty($erreur['message'])) {
+		$est_erreur = true;
+	}
+
+	return $est_erreur;
 }
 
 

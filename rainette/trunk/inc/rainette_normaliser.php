@@ -23,6 +23,11 @@ if (!defined('_RAINETTE_REGEXP_LIEU_WEATHER_ID')) {
 	define('_RAINETTE_REGEXP_LIEU_WEATHER_ID', '#[a-zA-Z]{4}\d{4}#i');
 }
 
+$GLOBALS['rainette_config']['erreurs'] = array(
+	'code'    => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_erreur'),
+	'message' => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_erreur'),
+);
+
 $GLOBALS['rainette_config']['infos'] = array(
 	// Lieu
 	'ville'     => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_lieu'),
@@ -366,7 +371,7 @@ function service2donnees($config_service, $mode, $flux, $periode) {
 						}
 					} else {
 						// La donnée météo n'est jamais fournie par le service. On la positionne à null pour
-						// la distinguer avec une donnée vide car indisponible temporairement.
+						// la distinguer avec une donnée vide qui indinque une indisponibilité temporaire.
 						$donnee = null;
 					}
 				} else {
@@ -662,15 +667,77 @@ function normaliser_lieu($lieu) {
 }
 
 
-function normaliser_config_donnees($mode, $config_service) {
+function normaliser_configuration_donnees($mode, $configuration_donnees) {
 
-	$config_donnees = array();
+	$configuration_normalisee = array();
 
-	foreach ($GLOBALS['rainette_config'][$mode] as $_donnee => $_config) {
-		if ($_config['origine'] == 'service') {
-			$config_donnees[$_donnee] = !empty($config_service['donnees'][$_donnee]['cle']) ? true : false;
+	foreach ($GLOBALS['rainette_config'][$mode] as $_donnee => $_configuration) {
+		if ($_configuration['origine'] == 'service') {
+			$configuration_normalisee[$_donnee] = !empty($configuration_donnees[$_donnee]['cle']) ? true : false;
 		}
 	}
 
-	return $config_donnees;
+	return $configuration_normalisee;
+}
+
+function normaliser_configuration_utilisateur($service, $configuration_defaut) {
+
+	// On récupère la configuration utilisateur
+	include_spip('inc/config');
+	$configuration_utilisateur = lire_config("rainette/${service}", array());
+
+	// On complète la configuration avec des valeurs par défaut si nécessaire.
+	foreach ($configuration_defaut as $_cle => $_valeur) {
+		if (!isset($configuration_utilisateur[$_cle])) {
+			$configuration_utilisateur[$_cle] = $_valeur;
+		}
+	}
+
+	return $configuration_utilisateur;
+}
+
+function normaliser_texte_erreur($erreur, $lieu, $mode, $modele, $service) {
+
+	$texte = array('principal' => '', 'conseil' => '', 'service' => '');
+	$titre_service = _T("rainette:titre_service_${service}");
+
+	$type_erreur = $erreur['type'];
+	switch ($type_erreur) {
+		// Cas d'erreur lors du traitement de la requête par le plugin
+		case 'url_indisponible':
+		case 'analyse_xml':
+		case 'analyse_json':
+		// Cas d'erreur où le service renvoie aucune donnée sans pour autant monter une erreur.
+		case 'aucune_donnee':
+			$texte['principal'] .= _T("rainette:erreur_${type_erreur}", array('service' => $titre_service));
+			$texte['conseil'] .= _T('rainette:erreur_conseil_equipe');
+			break;
+		// Cas d'erreur renvoyé par le service lui-même
+		case 'reponse_service':
+			if (!empty($erreur['service']['code'])) {
+				$texte['service'] .= $erreur['service']['code'];
+			}
+			if (!empty($erreur['service']['message'])) {
+				$texte['service'] .= ($texte['service'] ? ' - ' : '') . $erreur['service']['message'];
+			}
+			$texte['principal'] .= _T("rainette:erreur_${type_erreur}_${mode}", array('service' => $titre_service, 'lieu' => $lieu));
+			$texte['conseil'] .= _T('rainette:erreur_conseil_service');
+			break;
+		// Cas d'erreur du à une mauvause utilisation des modèles
+		case 'modele_periodicite':
+			$texte['principal'] .= _T("rainette:erreur_${type_erreur}", array('modele' => $modele));
+			$texte['conseil'] .= _T('rainette:erreur_conseil_periodicite');
+			break;
+		case 'modele_service':
+			$texte['principal'] .= _T("rainette:erreur_${type_erreur}", array('modele' => $modele, 'service' => $titre_service));
+			$texte['conseil'] .= _T('rainette:erreur_conseil_modele_changer');
+			break;
+		case 'modele_inutilisable':
+			$texte['principal'] .= _T("rainette:erreur_${type_erreur}", array('modele' => $modele));
+			$texte['conseil'] .= _T('rainette:erreur_conseil_modele_expliciter');
+			break;
+	}
+
+
+	return $texte;
 }

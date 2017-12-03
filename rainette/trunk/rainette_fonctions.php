@@ -379,6 +379,7 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 
 	// Initialisation du tableau des données météorologiques
 	$tableau = array();
+	include_spip('inc/rainette_normaliser');
 
 	// Détermination de la périodicité en fonction du mode et du modèle demandés
 	$periodicite = 0;
@@ -389,7 +390,6 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 			$type_modele = intval($match[1]);
 
 			// On verifie que la périodicité demandée explicitement dans l'appel du modèle est ok
-			include_spip('inc/rainette_normaliser');
 			if (isset($options['periodicite'])) {
 				$periodicite_explicite = intval($options['periodicite']);
 				if (periodicite_compatible($type_modele, $periodicite_explicite)) {
@@ -417,12 +417,28 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 	}
 
 	if ($erreur) {
-		// On prépare un contexte extras minimal pour traiter les erreurs du modèle de façon standard
-		$extras['erreur'] = $erreur;
+		// Acquérir la configuration statique du service (periode, format, données...)
+		$configurer = "${service}_service2configuration";
+		$configuration = $configurer($mode);
+
+		// On prépare un contexte extras pour traiter les erreurs du modèle de façon standard comme celles
+		// renvoyée par le chargement des données.
+		$extras['credits'] = $configuration['credits'];
+		$extras['config'] = array_merge(
+			normaliser_configuration_utilisateur($service, $configuration['defaut']),
+			array('source' => normaliser_configuration_donnees($mode, $configuration['donnees']))
+		);
 		$extras['lieu'] = $lieu;
 		$extras['mode'] = $mode;
 		$extras['periodicite_cache'] = $periodicite;
 		$extras['service'] = $service;
+		$extras['erreur'] = array(
+			'type' => $erreur,
+			'service' => array(
+				'code' => '',
+				'message' => ''
+			)
+		);
 	} else {
 		// Récupération du tableau des données météo
 		$charger = charger_fonction('charger_meteo', 'inc');
@@ -432,7 +448,7 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 
 		// Séparation des données communes liées au service et au mode et des données météorologiques
 		$extras = $tableau['extras'];
-		$erreur = $extras['erreur'];
+		$erreur = $extras['erreur']['type'];
 
 		if (!$erreur and ($mode == 'previsions')) {
 			// Adaptation des données en fonction de la demande et de la périodicité modèle-cache
@@ -459,6 +475,7 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 
 	// Affichage du message d'erreur ou des données
 	if ($erreur) {
+		$extras['erreur']['texte'] = normaliser_texte_erreur($extras['erreur'], $lieu, $mode, $modele, $service);
 		$texte = recuperer_fond('modeles/erreur', $extras);
 	} else {
 		// Appel du modèle avec le contexte complet

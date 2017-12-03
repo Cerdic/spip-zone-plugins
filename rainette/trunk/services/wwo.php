@@ -71,6 +71,9 @@ $GLOBALS['rainette_wwo_config']['service'] = array(
 			'zu'    => 'zu',
 		),
 		'defaut'      => 'en'
+	),
+	'requetes' => array(
+		'jour'        => 500
 	)
 );
 
@@ -176,6 +179,17 @@ $GLOBALS['rainette_wwo_config']['previsions'] = array(
 	),
 );
 
+// Configuration des données fournies par le service WWO en cas d'erreur.
+// -- Seules les données non calculées sont configurées.
+$GLOBALS['rainette_wwo_config']['erreurs'] = array(
+	'cle_base'    => array('data', 'error', 0),
+	'donnees'     => array(
+		// Erreur
+		'code'     => array('cle' => array()),
+		'message'  => array('cle' => array('msg')),
+	),
+);
+
 
 // ------------------------------------------------------------------------------------------------
 // Les fonctions qui suivent définissent l'API standard du service et sont appelées par la fonction
@@ -253,6 +267,25 @@ function wwo_service2url($lieu, $mode, $periodicite, $configuration) {
 	}
 
 	return $url;
+}
+
+
+/**
+ * @param array $erreur
+ *
+ * @return bool
+ */
+function wwo_erreur_verifier($erreur) {
+
+	// Initialisation
+	$est_erreur = false;
+
+	// Une erreur est uniquement décrite par un message.
+	if (!empty($erreur['message'])) {
+		$est_erreur = true;
+	}
+
+	return $est_erreur;
 }
 
 

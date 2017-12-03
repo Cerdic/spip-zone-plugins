@@ -71,6 +71,9 @@ $GLOBALS['rainette_apixu_config']['service'] = array(
 			'zu'    => 'zu',
 		),
 		'defaut'      => 'en'
+	),
+	'requetes' => array(
+		'mois'        => 5000
 	)
 );
 
@@ -173,6 +176,17 @@ $GLOBALS['rainette_apixu_config']['previsions'] = array(
 	),
 );
 
+// Configuration des données fournies par le service APIXU en cas d'erreur.
+// -- Seules les données non calculées sont configurées.
+$GLOBALS['rainette_apixu_config']['erreurs'] = array(
+	'cle_base'    => array('error'),
+	'donnees'     => array(
+		// Erreur
+		'code'     => array('cle' => array('code')),
+		'message'  => array('cle' => array('message')),
+	),
+);
+
 
 // ------------------------------------------------------------------------------------------------
 // Les fonctions qui suivent définissent l'API standard du service et sont appelées par la fonction
@@ -249,6 +263,25 @@ function apixu_service2url($lieu, $mode, $periodicite, $configuration) {
 	}
 
 	return $url;
+}
+
+
+/**
+ * @param array $erreur
+ *
+ * @return bool
+ */
+function apixu_erreur_verifier($erreur) {
+
+	// Initialisation
+	$est_erreur = false;
+
+	// Une erreur est toujours décrite par un code et un message.
+	if (!empty($erreur['code']) and !empty($erreur['message'])) {
+		$est_erreur = true;
+	}
+
+	return $est_erreur;
 }
 
 

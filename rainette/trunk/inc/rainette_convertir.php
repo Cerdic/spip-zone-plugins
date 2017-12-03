@@ -152,3 +152,16 @@ function temperature2ressenti($temperature, $vitesse_vent) {
 
 	return $ressenti;
 }
+
+/**
+ * Conversion en kilomètres d'une valeur en mètres.
+ *
+ * @param  int $metre
+ *        La valeur entière en mètres
+ *
+ * @return float
+ *        La valeur correspondante convertie en kilomètres.
+ */
+function metre2kilometre($metre) {
+	return $metre / 1000;
+}

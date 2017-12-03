@@ -116,6 +116,10 @@ $GLOBALS['rainette_wunderground_config']['service'] = array(
 			'TW' => 'zh_tw',
 		),
 		'defaut'      => 'EN'
+	),
+	'requetes' => array(
+		'jour'        => 500,
+		'1minute'     => 10
 	)
 );
 
@@ -217,6 +221,17 @@ $GLOBALS['rainette_wunderground_config']['previsions'] = array(
 	),
 );
 
+// Configuration des données fournies par le service Wunderground en cas d'erreur.
+// -- Seules les données non calculées sont configurées.
+$GLOBALS['rainette_wunderground_config']['erreurs'] = array(
+	'cle_base'    => array('response', 'error'),
+	'donnees'     => array(
+		// Erreur
+		'code'     => array('cle' => array('type')),
+		'message'  => array('cle' => array('description')),
+	),
+);
+
 
 /**
  * ------------------------------------------------------------------------------------------------
@@ -308,6 +323,25 @@ function wunderground_service2url($lieu, $mode, $periodicite, $configuration) {
 		   . '/' . $query . '.' . $configuration['format_flux'];
 
 	return $url;
+}
+
+
+/**
+ * @param array $erreur
+ *
+ * @return bool
+ */
+function wunderground_erreur_verifier($erreur) {
+
+	// Initialisation
+	$est_erreur = false;
+
+	// Une erreur est toujours décrite par un type (code) et un message.
+	if (!empty($erreur['code']) and !empty($erreur['message'])) {
+		$est_erreur = true;
+	}
+
+	return $est_erreur;
 }
 
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * Ce fichier contient l'ensemble des constantes et fonctions implémentant le service Open Weather Map (owm).
- * Ce service fournit des données au format XML ou JSON.
+ * Ce service fournit des données au format XML ou JSON mais Rainette utilise uniquement le JSON.
  *
  * @package SPIP\RAINETTE\SERVICES\OWM
  */
@@ -55,13 +55,16 @@ $GLOBALS['rainette_owm_config']['service'] = array(
 			'zh_tw' => 'zh_tw',
 		),
 		'defaut'      => 'en'
+	),
+	'requetes' => array(
+		'minute'     => 60
 	)
 );
 
-// Configuration des données fournies par le service wunderground pour le mode 'infos'.
+// Configuration des données fournies par le service owm pour le mode 'infos'.
 // -- Seules les données non calculées sont configurées.
 $GLOBALS['rainette_owm_config']['infos'] = array(
-	'periode_maj' => 86400,
+	'periode_maj' => 3600*24*30,
 	'format_flux' => 'json',
 	'cle_base'    => array(),
 	'donnees'     => array(
@@ -79,34 +82,33 @@ $GLOBALS['rainette_owm_config']['infos'] = array(
 
 // Configuration des données fournies par le service owm pour le mode 'conditions'.
 // -- Seules les données non calculées sont configurées.
-// -- On utilise le mode XML et non JSON car la date de dernière mise à jour n'est pas disponible en JSON
 $GLOBALS['rainette_owm_config']['conditions'] = array(
-	'periode_maj' => 7200,
-	'format_flux' => 'xml',
-	'cle_base'    => array('children'),
+	'periode_maj' => 3600*2,
+	'format_flux' => 'json',
+	'cle_base'    => array(),
 	'donnees'     => array(
 		// Données d'observation
-		'derniere_maj'          => array('cle' => array('lastupdate', 0, 'attributes', 'value')),
+		'derniere_maj'          => array('cle' => array('dt')),
 		'station'               => array('cle' => array()),
 		// Températures
-		'temperature_reelle'    => array('cle' => array('temperature', 0, 'attributes', 'value')),
+		'temperature_reelle'    => array('cle' => array('main', 'temp')),
 		'temperature_ressentie' => array('cle' => array()),
 		// Données anémométriques
-		'vitesse_vent'          => array('cle' => array('wind', 0, 'children', 'speed', 0, 'attributes', 'value')),
-		'angle_vent'            => array('cle' => array('wind', 0, 'children', 'direction', 0, 'attributes', 'value')),
-		'direction_vent'        => array('cle' => array('wind', 0, 'children', 'direction', 0, 'attributes', 'code')),
+		'vitesse_vent'          => array('cle' => array('wind', 'speed')),
+		'angle_vent'            => array('cle' => array('wind', 'deg')),
+		'direction_vent'        => array('cle' => array()),
 		// Données atmosphériques : risque_uv est calculé
 		'precipitation'         => array('cle' => array()),
-		'humidite'              => array('cle' => array('humidity', 0, 'attributes', 'value')),
+		'humidite'              => array('cle' => array('main', 'humidity')),
 		'point_rosee'           => array('cle' => array()),
-		'pression'              => array('cle' => array('pressure', 0, 'attributes', 'value')),
+		'pression'              => array('cle' => array('main', 'pressure')),
 		'tendance_pression'     => array('cle' => array()),
-		'visibilite'            => array('cle' => array('visibility', 0, 'attributes', 'value')),
+		'visibilite'            => array('cle' => array('visibility')),
 		'indice_uv'             => array('cle' => array()),
 		// Etats météorologiques natifs
-		'code_meteo'            => array('cle' => array('weather', 0, 'attributes', 'number')),
-		'icon_meteo'            => array('cle' => array('weather', 0, 'attributes', 'icon')),
-		'desc_meteo'            => array('cle' => array('weather', 0, 'attributes', 'value')),
+		'code_meteo'            => array('cle' => array('weather', 0, 'id')),
+		'icon_meteo'            => array('cle' => array('weather', 0, 'icon')),
+		'desc_meteo'            => array('cle' => array('weather', 0, 'description')),
 		'trad_meteo'            => array('cle' => array()),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
@@ -114,50 +116,60 @@ $GLOBALS['rainette_owm_config']['conditions'] = array(
 
 // Configuration des données fournies par le service owm pour le mode 'conditions'.
 // -- Seules les données non calculées sont configurées.
-// -- On utilise le mode XML et non JSON car la date de dernière mise à jour et la précipitation ne sont
-//    pas disponibles en JSON
 $GLOBALS['rainette_owm_config']['previsions'] = array(
 	'periodicites'       => array(
 		24                     => array('max_jours' => 16),
 //		3                      => array('max_jours' => 5)
 	),
 	'periodicite_defaut' => 24,
-	'periode_maj'        => 7200,
-	'format_flux'        => 'xml',
-	'cle_base'           => array('children', 'forecast', 0, 'children', 'time'),
+	'periode_maj'        => 3600*2,
+	'format_flux'        => 'json',
+	'cle_base'           => array('list'),
 	'cle_heure'          => array(),
 	'structure_heure'    => false,
 	'donnees'            => array(
 		// Données d'observation
-		'date'                 => array('cle' => array('attributes', 'day')),
+		'date'                 => array('cle' => array('dt')),
 		'heure'                => array('cle' => array()),
 		// Données astronomiques
 		'lever_soleil'         => array('cle' => array()),
 		'coucher_soleil'       => array('cle' => array()),
 		// Températures
 		'temperature'          => array('cle' => array()),
-		'temperature_max'      => array('cle' => array('children', 'temperature', 0, 'attributes', 'max')),
-		'temperature_min'      => array('cle' => array('children', 'temperature', 0, 'attributes', 'min')),
+		'temperature_max'      => array('cle' => array('temp', 'max')),
+		'temperature_min'      => array('cle' => array('temp', 'min')),
 		// Données anémométriques
-		'vitesse_vent'         => array('cle' => array('children', 'windspeed', 0, 'attributes', 'mps')),
-		'angle_vent'           => array('cle' => array('children', 'winddirection', 0, 'attributes', 'deg')),
-		'direction_vent'       => array('cle' => array('children', 'winddirection', 0, 'attributes', 'code')),
+		'vitesse_vent'         => array('cle' => array('speed')),
+		'angle_vent'           => array('cle' => array('deg')),
+		'direction_vent'       => array('cle' => array()),
 		// Données atmosphériques : risque_uv est calculé
 		'risque_precipitation' => array('cle' => array()),
-		'precipitation'        => array('cle' => array('children', 'precipitation', 0, 'attributes', 'value')),
-		'humidite'             => array('cle' => array('children', 'humidity', 0, 'attributes', 'value')),
+		'precipitation'        => array('cle' => array('rain')),
+		'humidite'             => array('cle' => array('humidity')),
 		'point_rosee'          => array('cle' => array()),
-		'pression'             => array('cle' => array('children', 'pressure', 0, 'attributes', 'value')),
+		'pression'             => array('cle' => array('pressure')),
 		'visibilite'           => array('cle' => array()),
 		'indice_uv'            => array('cle' => array()),
 		// Etats météorologiques natifs
-		'code_meteo'           => array('cle' => array('children', 'symbol', 0, 'attributes', 'number')),
-		'icon_meteo'           => array('cle' => array('children', 'symbol', 0, 'attributes', 'var')),
-		'desc_meteo'           => array('cle' => array('children', 'symbol', 0, 'attributes', 'name')),
+		'code_meteo'           => array('cle' => array('weather', 0, 'id')),
+		'icon_meteo'           => array('cle' => array('weather', 0, 'icon')),
+		'desc_meteo'           => array('cle' => array('weather', 0, 'description')),
 		'trad_meteo'           => array('cle' => array()),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
 );
+
+// Configuration des données fournies par le service owm en cas d'erreur.
+// -- Seules les données non calculées sont configurées.
+$GLOBALS['rainette_owm_config']['erreurs'] = array(
+	'cle_base'    => array(),
+	'donnees'     => array(
+		// Erreur
+		'code'     => array('cle' => array('cod')),
+		'message'  => array('cle' => array('message')),
+	),
+);
+
 
 /**
  * ------------------------------------------------------------------------------------------------
@@ -230,6 +242,27 @@ function owm_service2url($lieu, $mode, $periodicite, $configuration) {
 
 
 /**
+ * @param array $erreur
+ *
+ * @return bool
+ */
+function owm_erreur_verifier($erreur) {
+
+	// Initialisation
+	$est_erreur = false;
+
+	// Pour OWM une erreur possède deux attributs, le code et le message.
+	// Néanmoins, le code 200 est aussi renvoyé pour dire ok sans message.
+	// => il faut donc écarter ce cas d'une erreur.
+	if (!empty($erreur['code']) and !empty($erreur['message']) and ($erreur['code'] != '200')) {
+		$est_erreur = true;
+	}
+
+	return $est_erreur;
+}
+
+
+/**
  * @param array $tableau
  * @param       $configuration
  *
@@ -266,6 +299,8 @@ function owm_complement2conditions($tableau, $configuration) {
 		include_spip('inc/rainette_convertir');
 		$tableau['temperature_ressentie'] = temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']);
 		$tableau['direction_vent'] = angle2direction($tableau['angle_vent']);
+		// On convertit aussi la visibilité en km car elle est fournie en mètres.
+		$tableau['visibilite'] = metre2kilometre($tableau['visibilite']);
 
 		// Compléter le tableau standard avec les états météorologiques calculés
 		etat2resume_owm($tableau, $configuration);
@@ -296,6 +331,12 @@ function owm_complement2conditions($tableau, $configuration) {
 function owm_complement2previsions($tableau, $configuration, $index_periode) {
 
 	if (($tableau) and ($index_periode > -1)) {
+		// Vérifier les précipitations. Pour les prévisions, OWM renvoie le champ rain uniquement si il est
+		// différent de zéro. Il faut donc rétablir la valeur zéro dans ce cas pour éviter d'avoir N/D lors de
+		// l'affichage.
+		if ($tableau['precipitation'] === '') {
+			$tableau['precipitation'] = 0;
+		}
 
 		// Compléter le tableau standard avec les états météorologiques calculés
 		etat2resume_owm($tableau, $configuration);
