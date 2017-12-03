@@ -89,10 +89,6 @@ function selection_objet_upgrade($nom_meta_base_version, $version_cible) {
  * - supprimer les tables et les champs créés par le plugin.
  **/
 function selection_objet_vider_tables($nom_meta_base_version) {
-	# quelques exemples
-	# (que vous pouvez supprimer !)
-	# sql_drop_table("spip_xx");
-	# sql_drop_table("spip_xx_liens");
 
 	sql_drop_table("spip_selection_objets");
 
