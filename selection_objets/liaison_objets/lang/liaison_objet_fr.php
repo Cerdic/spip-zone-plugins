@@ -59,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liaison_objets_pour' => 'Liaison d\'objets pour',
 	'liaison_selection_objet' => 'Objets qui peuvent être liés',
 	'liaison_type_lien' => 'Type de lien',
-	'liaison_type_liens' => 'Définition des types de liens',
+	'liaison_type_liens' => 'Définition des types de lien',
 
 	// T
 	'texte_ajouter_objet' => 'Lier un objet',
