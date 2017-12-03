@@ -1,0 +1,98 @@
+#SET{objets,#ARRAY}
+#SET{objets_saisies,#LISTE{article,rubrique}}
+<BOUCLE_objets_liste(DATA){source tableau,#VAL|lister_tables_objets_sql}{par cle}{editable = oui}>
+    [(#VALEUR{principale}|oui)
+        [(#SET{objets,#GET{objets}|array_merge{#ARRAY{#VALEUR{type},#VALEUR{texte_objets}|_T}}})]
+    ]
+</BOUCLE_objets_liste>
+
+<div class="formulaire_spip formulaire_#FORM">
+
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+
+	<form action="#ENV{action}" method="post"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+		    <li class="fieldset">
+		      <fieldset>
+		          <legend><strong><:selection_objet:objets_cible:></strong></legend>
+		          <p><:selection_objet:explication_selection_objets_cible:></p>
+        		    <ul>
+        		    [(#SAISIE{checkbox,objets_cible,
+                        datas=#GET{objets},
+                        label=<:selection_objet:selection_objet_cible_titre:>}
+                        )]
+                    [(#SAISIE{textarea,type_liens,
+                        label=<:selection_objet:selection_type_liens:> (<:selection_objet:type_liens_defaut:>),
+                        rows=5,
+                        cols=5,
+                        explication=<:selection_objet:explication_selection_type_liens:>,
+                        }
+                        )]
+                    [(#SAISIE{oui_non,choix_illimite,
+                        label=<:selection_objet:selection_choix_illimite:>,
+                        explication=<:selection_objet:explication_selection_choix_illimite:>,
+                        }
+                        )]                        
+                    <B_objets_dest>
+                    
+                    [(#REM)Configuration spécifiques pour chaque objet cible sélectionné]
+        		    <BOUCLE_objets_dest(DATA){source tableau, #CONFIG{selection_objet/objets_cible}}>
+        		    <li class="fieldset">
+                        <fieldset>
+                            <legend>[(#GET{objets}|table_valeur{#VALEUR})]</legend>
+        		      <ul>
+        		        [(#REM)Définir des objets spécifiques]  
+            		    [(#VALEUR|in_array{#GET{objets_saisies}}|oui)
+                		    [(#SAISIE{selecteur_#VALEUR,selection_[(#VALEUR)]_dest,
+                                multiple=oui,
+                                label=<:selection_objet:selection_cible:> [(#GET{objets}|table_valeur{#VALEUR})],
+                                explication=<:selection_objet:explication_selection_cible:>}
+                            )] 
+                            ]
+                        [(#VALEUR|in_array{#GET{objets_saisies}}|non)
+                            [(#VALEUR|oui)#SET{datas,#VALEUR|tableau_objet{'',*,'',#LISTE{titre},''}}
+                            [(#SAISIE{selection_multiple,selection_[(#VALEUR)]_dest,
+                                label=<:selection_objet:selection_cible:> [(#GET{objets}|table_valeur{#VALEUR})],
+                                datas=#GET{datas},
+                                explication=<:selection_objet:explication_choix_multi:><br/><:selection_objet:explication_selection_cible:>, 
+                                                           
+                                })]
+                                    ]
+                            ]
+                        [(#REM)Définir des types liens par objet]       
+                        [(#SAISIE{textarea,type_liens_[(#VALEUR)],
+                        label=<:selection_objet:selection_type_liens:>  (<:selection_objet:type_liens_surcharge:>),
+                        rows=5,
+                        cols=5,
+                        explication=<:selection_objet:explication_selection_type_liens:>,
+                        }
+                        )]
+                      
+                        </ul>
+                     </fieldset>
+                    </li>
+		            </BOUCLE_objets_dest>
+		            </B_objets_dest>
+
+            <li class="fieldset">
+              <fieldset>
+                  <legend><strong><:selection_objet:objets_selection:></strong></legend>
+                  <ul>
+            [(#SAISIE{checkbox,selection_rubrique_objet,
+                datas=#GET{objets},
+                label=<:selection_objet:selection_rubrique_objet:>}
+                )]
+            </ul>   
+            </fieldset>
+             
+            </li>         
+		</ul>
+		
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+		
+	</div></form>
+</div>

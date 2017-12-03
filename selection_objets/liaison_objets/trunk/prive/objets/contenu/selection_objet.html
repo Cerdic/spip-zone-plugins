@@ -1,0 +1,62 @@
+[(#VAL|include_spip{inc/pipelines_ecrire}|oui)]
+#SET{exception_page,#ARRAY{
+                        document,#ARRAY{
+                            type,document_edit,
+                            id_table_objet,id_document}
+                            }
+                        }
+<BOUCLE_objet(SELECTION_OBJETS){id_selection_objet}{statut?}>
+[(#GET{exception_page}|table_valeur{#OBJET}?{
+    #SET{e_objet,#GET{exception_page}|table_valeur{#OBJET}|table_valeur{type}}
+    #SET{e_id_objet,#GET{exception_page}|table_valeur{#OBJET}|table_valeur{id_table_objet}}    ,
+    #SET{e,#OBJET|trouver_objet_exec}
+    #SET{e_objet,#GET{e}|table_valeur{type}}
+    #SET{e_id_objet,#GET{e}|table_valeur{id_table_objet}}        
+})]
+    
+[(#GET{exception_page}|table_valeur{#OBJET_DEST}?{
+    #SET{e_objet_dest,#GET{exception_page}|table_valeur{#OBJET_DEST}|table_valeur{type}}
+    #SET{e_id_objet_dest,#GET{exception_page}|table_valeur{#OBJET_DEST}|table_valeur{id_table_objet}}    ,
+    #SET{e_dest,#OBJET_DEST|trouver_objet_exec}
+    #SET{e_objet_dest,#GET{e_dest}|table_valeur{type}}
+    #SET{e_id_objet_dest,#GET{e_dest}|table_valeur{id_table_objet}}        
+})]
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:selection_objet:label_titre:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{titre} titre'>(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<label><:selection_objet:label_descriptif:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF)</span>
+</div>]
+
+[<div class="champ contenu_url[ (#URL*|strlen|?{'',vide})]">
+	<label><:selection_objet:label_url:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{url} url'>(#URL)</span>
+</div>]
+
+[<div class="champ contenu_id_objet[ (#ID_OBJET*|strlen|?{'',vide})]">
+	<label><:selection_objet:objet_lie_a:> : </label>
+	<a href="[(#URL_ECRIRE{#GET{e_objet},[(#GET{e_id_objet}|concat{=#ID_OBJET})]})]">(#OBJET|titre_objet_sel{#OBJET|info_objet{#ID_OBJET}}|supprimer_tags)
+	    </a>
+</div>]
+[<div class="champ contenu_id_objet[ (#ID_OBJET_DEST*|strlen|?{'',vide})]">
+    <label><:selection_objet:label_objet_dest:> : </label>
+    <a href="[(#URL_ECRIRE{#GET{e_objet_dest},[(#GET{e_id_objet_dest}|concat{=#ID_OBJET_DEST})]})]">
+        (#OBJET_DEST|titre_objet_sel{#OBJET_DEST|info_objet{#ID_OBJET_DEST}}|supprimer_tags)
+        </a>
+</div>]
+
+
+[<div class="champ contenu_ordre[ (#ORDRE*|strlen|?{'',vide})]">
+	<label><:selection_objet:label_ordre:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{ordre} ordre'>(#ORDRE)</span>
+</div>]
+
+[<div class="champ contenu_type_lien[ (#TYPE_LIEN*|strlen|?{'',vide})]">
+	<label><:selection_objet:selection_type_lien:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{type_lien} ordre'>(#TYPE_LIEN|nom_type{#OBJET_DEST})</span>
+</div>]
+</BOUCLE_objet>

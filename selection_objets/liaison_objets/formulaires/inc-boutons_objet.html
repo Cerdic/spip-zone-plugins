@@ -1,0 +1,11 @@
+<B_objets>
+    <li>
+       <label><:selection_objet:affichage_section:></label>
+       <select name="id_objet_dest">
+           <option value="#CLE" >[(#TITRE)]</option>
+      <BOUCLE_objets(DATA){source tableau, #ENV{objets_choisies}|array_diff_key{#ENV{exclure}|array_flip}}{par titre}>
+            <option value="#CLE" >[(#TITRE)]</option>
+      </BOUCLE_objets>  
+       </select>
+    </li>   
+</B_objets>
