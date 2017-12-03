@@ -1,12 +1,12 @@
 <paquet
-	prefix="selection_objet"
+	prefix="liaison_objet"
 	categorie="edition"
-	version="1.11.3"
+	version="2.0.0"
 	etat="stable"
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/liaison_objet-64.png"
 	documentation="https://contrib.spip.net/"
-	schema="0.5.1"
+	schema="1.0.0"
 >
 
 	<nom>Liaison d'objets</nom>
