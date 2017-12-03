@@ -19,7 +19,15 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_souhaits(SOUHAITS){id_rubrique?}{id_secteur?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_souhaits(SOUHAITS)
+		{id_rubrique?}{id_secteur?}
+		{id_mot?}{id_auteur?}
+		{where?}
+		{statut?}
+		{recherche?}
+		{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}
+		{pagination #ENV{nb,10}}
+	>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='statut'>[(#STATUT|puce_statut{souhait,#ID_SOUHAIT,#ID_RUBRIQUE})]</td> 
 			<td class='titre principale'>[(#LOGO_SOUHAIT|image_reduire{20,26})]<a href="[(#ID_SOUHAIT|generer_url_entite{souhait})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SOUHAIT">[(#RANG). ]#TITRE</a></td>
