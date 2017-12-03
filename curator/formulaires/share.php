@@ -40,6 +40,7 @@ function formulaires_share_traiter_dist() {
 	$ps           = _request('ps');
 	$ajouter_logo = _request('ajouter_logo') == 'on' ? true : false;
 	$logo         = _request('logo');
+	$logo 		  = explode('?', $logo)[0];
 	
 	// créer un article dans la bonne rubrique
 	include_spip('action/editer_objet');
