@@ -2,7 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_instituer_objet_selectionne_dist($arg=null){
+function action_instituer_objet_lie_dist($arg=null){
     
    if (is_null($arg)){
         $securiser_action = charger_fonction('securiser_action', 'inc');
@@ -51,7 +51,7 @@ function action_instituer_objet_selectionne_dist($arg=null){
                     'type_lien'=>$type_lien
                     );
                     
-                $id_selection_objet=sql_insertq("spip_selection_objets",$vals);
+                $id_liaison_objet=sql_insertq("spip_liaison_objets",$vals);
                 }
 
             }
@@ -62,7 +62,7 @@ function action_instituer_objet_selectionne_dist($arg=null){
                 'objet_dest='.sql_quote($objet_dest),
                 'lang='.sql_quote($langue[0]),  
                 );
-            // on vérifie l'ordre des objets déjà enregistrés et on corrige si beselection_objetin
+            // on vérifie l'ordre des objets déjà enregistrés et on corrige si beliaison_objetin
             
             $ordre=$verifier_ordre($where);
                 
@@ -80,10 +80,10 @@ function action_instituer_objet_selectionne_dist($arg=null){
                 'type_lien'=>$type_lien
                 );
                     
-            $id_selection_objet=sql_insertq("spip_selection_objets",$vals);
+            $id_liaison_objet=sql_insertq("spip_liaison_objets",$vals);
         
             }
-return $id_selection_objet;
+return $id_liaison_objet;
 }
 
 ?>

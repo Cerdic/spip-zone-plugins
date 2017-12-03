@@ -1,27 +1,27 @@
 <div id="[(#ENV{id})]">
-<B_selection>
+<B_liaison>
 <table class='spip liste'>
-	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{selection_objet:info_1_selection_objet,selection_objet:info_nb_selection_objets}})
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{liaison_objet:info_1_liaison_objet,liaison_objet:info_nb_liaison_objets}})
 		[(#GET{langues}|count|>{1}|oui)
 			[(#VALEUR)]
 		]</strong>
 		</caption>]
-	<BOUCLE_selection(SELECTION_OBJETS){par ordre,lang}{lang ?=#ENV{l}}{statut ?}{id_objet_dest ?} {objet_dest ?}>
-	[<tr class="tr_liste" id='#ID_SELECTION_OBJET'>(#ID_OBJET|generer_modele{#OBJET,modeles_so/selection_interface_tr,#ARRAY{
+	<BOUCLE_liaison(LIAISON_OBJETS){par ordre,lang}{lang ?=#ENV{l}}{statut ?}{id_objet_dest ?} {objet_dest ?}>
+	[<tr class="tr_liste" id='#ID_LIAISON_OBJET'>(#ID_OBJET|generer_modele{#OBJET,modeles_so/liaison_interface_tr,#ARRAY{
 		ordre,#ORDRE,
-		id_selection_objet,#ID_SELECTION_OBJET,
+		id_liaison_objet,#ID_LIAISON_OBJET,
 		langue,#ENV{l},
 		objet_dest,#OBJET_DEST,
 		id_objet_dest,#ID_OBJET_DEST,
 		total_boucle,#TOTAL_BOUCLE,
-		id_selection_objet,#ID_SELECTION_OBJET,
+		id_liaison_objet,#ID_LIAISON_OBJET,
 		titre,#TITRE,
 		compteur_boucle,#COMPTEUR_BOUCLE,
 		date,#DATE,
 		type_lien,#TYPE_LIEN,
 		tables,#ENV{tables}
 		}})</tr>]
-	</BOUCLE_selection>
+	</BOUCLE_liaison>
 	</table>
 <script type="text/javascript">
 	$(function() {
@@ -32,5 +32,5 @@
 		});
 	});
 </script>
-</B_selection>
+</B_liaison>
 </div>

@@ -9,8 +9,8 @@ function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang=''
      
     //Les objets destinataires choisies
      $special=array('article','rubrique');
-     if(in_array($objet_dest,$special)) $choisies= picker_selected(lire_config('selection_objet/selection_'.$objet_dest.'_dest',array()),$objet_dest);
-     else $choisies=lire_config('selection_objet/selection_'.$objet_dest.'_dest',array());
+     if(in_array($objet_dest,$special)) $choisies= picker_selected(lire_config('liaison_objet/liaison_'.$objet_dest.'_dest',array()),$objet_dest);
+     else $choisies=lire_config('liaison_objet/liaison_'.$objet_dest.'_dest',array());
     
     $lang=$langue?explode(',',$langue):'';
 
@@ -40,7 +40,7 @@ function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang=''
     $objets_choisies=tableau_objet($objet_dest_original,'','*',$where);
     
     //Les types liens pour l'objet concerné
-    if(!$types=lire_config('selection_objet/type_liens_'.$objet_dest_original,array()))$types=lire_config('selection_objet/type_liens',array());
+    if(!$types=lire_config('liaison_objet/type_liens_'.$objet_dest_original,array()))$types=lire_config('liaison_objet/type_liens',array());
     
     $types_lien=array();
     foreach($types as $cle => $valeur){
@@ -72,14 +72,14 @@ function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang=''
 function formulaires_bouton_objet_traiter_dist($id_objet,$objet,$langue,$lang='',$objet_dest='rubrique'){
     $valeurs=array();
     $id_objet_dest=_request('id_objet_dest');
-    $instituer_objet=charger_fonction('instituer_objet_selectionne','action/');
+    $instituer_objet=charger_fonction('instituer_objet_lie','action/');
     $objet_dest=_request('objet_dest');
     $type_lien=_request('type_lien');
 
 
-    $id_selection_objet=$instituer_objet($id_objet.'-'.$objet.'-'.$langue.'-'.$lang.'-'.$objet_dest.'-'.$id_objet_dest.'-'.$type_lien);
+    $id_liaison_objet=$instituer_objet($id_objet.'-'.$objet.'-'.$langue.'-'.$lang.'-'.$objet_dest.'-'.$id_objet_dest.'-'.$type_lien);
 
-	if($id_selection_objet)$valeurs['message_ok']='ok';
+	if($id_liaison_objet)$valeurs['message_ok']='ok';
 
 return $valeurs;
 	

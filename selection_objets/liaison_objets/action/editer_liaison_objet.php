@@ -4,36 +4,36 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('action/editer_objet');
 
 
-// https://code.spip.net/@action_editer_selection_objet_dist
-function action_editer_selection_objet_dist($arg=null) {
+// https://code.spip.net/@action_editer_liaison_objet_dist
+function action_editer_liaison_objet_dist($arg=null) {
 
     if (is_null($arg)){
         $securiser_action = charger_fonction('securiser_action', 'inc');
         $arg = $securiser_action();
     }
 
-    // Envoi depuis le formulaire d'edition d'une selection_objet
-    if (!$id_selection_objet = intval($arg)) {
-        $id_selection_objet = selection_objet_inserer(_request('id_objet'),_request('objet'));
+    // Envoi depuis le formulaire d'edition d'une liaison_objet
+    if (!$id_liaison_objet = intval($arg)) {
+        $id_liaison_objet = liaison_objet_inserer(_request('id_objet'),_request('objet'));
     }
 
-    if (!$id_selection_objet)
+    if (!$id_liaison_objet)
         return array(0,''); // erreur
 
-    $err = selection_objet_modifier($id_selection_objet);
+    $err = liaison_objet_modifier($id_liaison_objet);
 
-    return array($id_selection_objet,$err);
+    return array($id_liaison_objet,$err);
 }
 
 
-function selection_objet_inserer($id_objet,$objet) {
+function liaison_objet_inserer($id_objet,$objet) {
 
    $objet_dest=_request('objet_dest');
    $id_objet_dest=_request('id_objet_dest');  
    $objet_table=$objet; 
    if(!$id_objet){
       $objet_table=$objet_dest;
-      $objet='selection_objet';
+      $objet='liaison_objet';
       $id_objet==$id_objet_dest;
     }
     if(!$lang=_request('lang')){
@@ -73,36 +73,36 @@ function selection_objet_inserer($id_objet,$objet) {
     $champs = pipeline('pre_insertion',
         array(
             'args' => array(
-                'table' => 'spip_selection_objets',
+                'table' => 'spip_liaison_objets',
             ),
             'data' => $champs
         )
     );
-    $id_selection_objet = sql_insertq("spip_selection_objets", $champs);
+    $id_liaison_objet = sql_insertq("spip_liaison_objets", $champs);
     pipeline('post_insertion',
         array(
             'args' => array(
-                'table' => 'spip_selection_objets',
-                'id_objet' => $id_selection_objet
+                'table' => 'spip_liaison_objets',
+                'id_objet' => $id_liaison_objet
             ),
             'data' => $champs
         )
     );
-    return $id_selection_objet;
+    return $id_liaison_objet;
 }
 
 
 /**
- * Modifier une selection_objet en base
+ * Modifier une liaison_objet en base
  * $c est un contenu (par defaut on prend le contenu via _request())
  *
- * https://code.spip.net/@revisions_selection_objets
+ * https://code.spip.net/@revisions_liaison_objets
  *
- * @param int $id_selection_objet
+ * @param int $id_liaison_objet
  * @param array $set
  * @return string|bool
  */
-function selection_objet_modifier ($id_selection_objet, $set=null) {
+function liaison_objet_modifier ($id_liaison_objet, $set=null) {
 
     include_spip('inc/modifier');
     
@@ -117,16 +117,16 @@ function selection_objet_modifier ($id_selection_objet, $set=null) {
         $set
     );
 
-    // Si la selection_objet est publiee, invalider les caches et demander sa reindexation
-    $t = sql_fetsel("statut,lang,id_objet_dest,objet_dest,ordre", "spip_selection_objets", "id_selection_objet=$id_selection_objet");
+    // Si la liaison_objet est publiee, invalider les caches et demander sa reindexation
+    $t = sql_fetsel("statut,lang,id_objet_dest,objet_dest,ordre", "spip_liaison_objets", "id_liaison_objet=$id_liaison_objet");
     if ($t['statut'] == 'publie') {
-        $invalideur = "id='selection_objet/$id_selection_objet'";
+        $invalideur = "id='liaison_objet/$id_liaison_objet'";
         $indexation = true;
     }
     
 
 
-    if ($err = objet_modifier_champs('selection_objet', $id_selection_objet,
+    if ($err = objet_modifier_champs('liaison_objet', $id_liaison_objet,
         array(
             'nonvide' => array(
          
@@ -140,22 +140,22 @@ function selection_objet_modifier ($id_selection_objet, $set=null) {
         
 
     $c = collecter_requests(array('statut'),array(),$set);
-    $err = selection_objet_instituer($id_selection_objet, $c);
+    $err = liaison_objet_instituer($id_liaison_objet, $c);
     return $err;
 }
 
 /**
- * Instituer une selection_objet : modifier son statut ou son parent
+ * Instituer une liaison_objet : modifier son statut ou son parent
  *
- * @param int $id_selection_objet
+ * @param int $id_liaison_objet
  * @param array $c
  * @return string
  */
-function selection_objet_instituer($id_selection_objet, $c) {
+function liaison_objet_instituer($id_liaison_objet, $c) {
     $champs = array();
 
-    // Changer le statut de la selection_objet ?
-    $statut= sql_getfetsel("statut", "spip_selection_objets", "id_selection_objet=".intval($id_selection_objet));
+    // Changer le statut de la liaison_objet ?
+    $statut= sql_getfetsel("statut", "spip_liaison_objets", "id_liaison_objet=".intval($id_liaison_objet));
 
 
     $statut_ancien = $statut;
@@ -171,8 +171,8 @@ function selection_objet_instituer($id_selection_objet, $c) {
     $champs = pipeline('pre_edition',
         array(
             'args' => array(
-                'table' => 'spip_selection_objets',
-                'id_objet' => $id_selection_objet,
+                'table' => 'spip_liaison_objets',
+                'id_objet' => $id_liaison_objet,
                 'action'=>'instituer',
                 'statut_ancien' => $statut_ancien,
             ),
@@ -182,7 +182,7 @@ function selection_objet_instituer($id_selection_objet, $c) {
 
     if (!$champs) return;
 
-    sql_updateq('spip_selection_objets', $champs, "id_selection_objet=".intval($id_selection_objet));
+    sql_updateq('spip_liaison_objets', $champs, "id_liaison_objet=".intval($id_liaison_objet));
 
     //
     // Post-modifications
@@ -190,7 +190,7 @@ function selection_objet_instituer($id_selection_objet, $c) {
 
     // Invalider les caches
     include_spip('inc/invalideur');
-    suivre_invalideur("id='selection_objet/$id_selection_objet'");
+    suivre_invalideur("id='liaison_objet/$id_liaison_objet'");
 
 
 
@@ -198,8 +198,8 @@ function selection_objet_instituer($id_selection_objet, $c) {
     pipeline('post_edition',
         array(
             'args' => array(
-                'table' => 'spip_selection_objets',
-                'id_objet' => $id_selection_objet,
+                'table' => 'spip_liaison_objets',
+                'id_objet' => $id_liaison_objet,
                 'action'=>'instituer',
                 'statut_ancien' => $statut_ancien,
             ),

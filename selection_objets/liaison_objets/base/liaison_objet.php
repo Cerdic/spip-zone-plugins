@@ -11,9 +11,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Déclaration des alias de tables et filtres automatiques de champs
  */
-function selection_objet_declarer_tables_interfaces($interfaces) {
+function liaison_objet_declarer_tables_interfaces($interfaces) {
 
-	$interfaces['table_des_tables']['selection_objets'] = 'selection_objets';
+	$interfaces['table_des_tables']['liaison_objets'] = 'liaison_objets';
 
 	return $interfaces;
 }
@@ -22,14 +22,14 @@ function selection_objet_declarer_tables_interfaces($interfaces) {
 /**
  * Déclaration des objets éditoriaux
  */
-function selection_objet_declarer_tables_objets_sql($tables) {
+function liaison_objet_declarer_tables_objets_sql($tables) {
 
-	$tables['spip_selection_objets'] = array(
-		'type' => 'selection_objet',
+	$tables['spip_liaison_objets'] = array(
+		'type' => 'liaison_objet',
 		'principale' => "oui", 
-		'table_objet_surnoms' => array('selectionobjet'), // table_objet('selection_objet') => 'selection_objets' 
+		'table_objet_surnoms' => array('liaisonobjet'), 
 		'field'=> array(
-			"id_selection_objet" => "bigint(21) NOT NULL",
+			"id_liaison_objet"   => "bigint(21) NOT NULL",
 			"titre"              => "varchar(255) NOT NULL DEFAULT ''",
 			"descriptif"         => "text NOT NULL DEFAULT ''",
 			"url"                => "varchar(255) NOT NULL DEFAULT ''",
@@ -47,7 +47,7 @@ function selection_objet_declarer_tables_objets_sql($tables) {
 			"maj"                => "TIMESTAMP"
 		),
 		'key' => array(
-			"PRIMARY KEY"        => "id_selection_objet",	
+			"PRIMARY KEY"        => "id_liaison_objet",	
             "KEY id_objet"       => "id_objet",
             "KEY id_objet_dest"  => "id_objet_dest",             
             "KEY objet"          => "objet",             
@@ -76,7 +76,7 @@ function selection_objet_declarer_tables_objets_sql($tables) {
 				'exception' => array('statut','tout')
 			)
 		),
-		'texte_changer_statut' => 'selection_objet:texte_changer_statut_objet', 
+		'texte_changer_statut' => 'liaison_objet:texte_changer_statut_objet', 
 		
 
 	);

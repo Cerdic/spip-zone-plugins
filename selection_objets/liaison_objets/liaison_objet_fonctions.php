@@ -58,8 +58,8 @@ function titre_objet_sel($objet, $contexte) {
 			$titre_objet = _T($tables[$table_sql]['texte_objet']);
 			if (isset($contexte['id_objet']))
 				$id = $contexte['id_objet'];
-			if ($objet = 'selection_objet' AND isset($contexte['id_selection_objet']))
-				$id = $contexte['id_selection_objet'];
+			if ($objet = 'liaison_objet' AND isset($contexte['id_liaison_objet']))
+				$id = $contexte['id_liaison_objet'];
 			$titre = $titre_objet . ' ' . $id;
 		}
 
@@ -124,7 +124,7 @@ function info_objet($objet, $id_objet = '', $champ = '*', $where = array()) {
 function url_objet($id_objet, $objet, $titre = '', $url = '') {
 
 	if (!$titre AND !$url) {
-		$objet_sel = sql_fetsel('titre,url', 'spip_selection_objets', 'id_objet=' . $id_objet . ' AND objet=' . sql_quote($objet));
+		$objet_sel = sql_fetsel('titre,url', 'spip_liaison_objets', 'id_objet=' . $id_objet . ' AND objet=' . sql_quote($objet));
 		$url = $objet_sel['url'];
 		$titre = $objet_sel['titre'];
 	}
@@ -174,7 +174,7 @@ function tableau_objet($objet, $id_objet = '', $champs = '*', $where = array(), 
 }
 
 /* Assemble les données entre un objet sélectioné et son objet d'origine pour injection dans un modele choisit*/
-function generer_modele($id_objet, $objet = 'article', $fichier = 'modeles_selection_objet/defaut', $env = array(), $where = '') {
+function generer_modele($id_objet, $objet = 'article', $fichier = 'modeles_liaison_objet/defaut', $env = array(), $where = '') {
 	include_spip('inc/pipelines_ecrire');
 	include_spip('inc/utils');
 
@@ -232,7 +232,7 @@ function generer_modele($id_objet, $objet = 'article', $fichier = 'modeles_selec
 	//Chercher le logo correpsondant
 	//Si il y a un logo Selection Objet
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
-	$logo = $chercher_logo($contexte['id_selection_objet'], 'id_selection_objet', 'on');
+	$logo = $chercher_logo($contexte['id_liaison_objet'], 'id_liaison_objet', 'on');
 	$contexte['logo_objet'] = $logo[0];
 	//sinon le logo de l'objet sélectionné
 	if (!$contexte['logo_objet']) {
@@ -248,8 +248,8 @@ function generer_modele($id_objet, $objet = 'article', $fichier = 'modeles_selec
 //donnele nom du type de lien
 function nom_type($type, $objet) {
 	include_spip('inc/config');
-	if (!$types = lire_config('selection_objet/type_liens_' . $objet, array()))
-		$types = lire_config('selection_objet/type_liens', array());
+	if (!$types = lire_config('liaison_objet/type_liens_' . $objet, array()))
+		$types = lire_config('liaison_objet/type_liens', array());
 
 	if (!$nom = _T($types[$type]))
 		$nom = $type;

@@ -3,20 +3,20 @@
 if (!defined("_ECRIRE_INC_VERSION"))
 	return;
 
-function selection_objet_header_prive($flux) {
-	$flux .= '<link rel="stylesheet" href="' . _DIR_PLUGIN_SELECTION_OBJET . 'css/so_admin.css" type="text/css" media="all" />';
+function liaison_objet_header_prive($flux) {
+	$flux .= '<link rel="stylesheet" href="' . find_in_path('css/lo_admin.css').' type="text/css" media="all" />';
 	return $flux;
 }
 
-function selection_objet_affiche_gauche($flux) {
+function liaison_objet_affiche_gauche($flux) {
 	include_spip('inc/config');
 	$exec = $flux["args"]["exec"];
 
 	$args = $flux['args'];
 
-	$objets_selection = lire_config('selection_objet/selection_rubrique_objet', array());
+	$objets_liaison = lire_config('liaison_objet/liaison_rubrique_objet', array());
 
-	if (in_array($exec, $objets_selection)) {
+	if (in_array($exec, $objets_liaison)) {
 		$e = trouver_objet_exec($exec);
 		$objet = $e['type'];
 		$id_table_objet = $e['id_table_objet'];
@@ -27,7 +27,7 @@ function selection_objet_affiche_gauche($flux) {
 		$table = table_objet_sql($objet);
 		$contexte['id_objet'] = $flux["args"][$id_table_objet] ? $flux["args"][$id_table_objet] : _request($id_table_objet);
 		$contexte['objet'] = $objet;
-		$objets_cibles = lire_config('selection_objet/objets_cible', array());
+		$objets_cibles = lire_config('liaison_objet/objets_cible', array());
 
 		$contexte['langue'] = array($args['lang']);
 		if ($objet == 'rubrique' OR $objet == 'article') {
@@ -48,13 +48,13 @@ function selection_objet_affiche_gauche($flux) {
 	return $flux;
 }
 
-function selection_objet_affiche_milieu($flux = "") {
+function liaison_objet_affiche_milieu($flux = "") {
 	include_spip('inc/config');
 	$exec = $flux["args"]["exec"];
 	//Exception pour les documents
 	if ($exec == 'document_edit')
 		$exec = 'document';
-	$objets_cibles = lire_config('selection_objet/objets_cible', array());
+	$objets_cibles = lire_config('liaison_objet/objets_cible', array());
 
 	if (in_array($exec, $objets_cibles)) {
 		$e = trouver_objet_exec($exec);
@@ -79,10 +79,10 @@ function selection_objet_affiche_milieu($flux = "") {
 			'rubrique'
 		);
 		if (in_array($objet, $special)) {
-			$choisies = picker_selected(lire_config('selection_objet/selection_' . $objet . '_dest', array()), $objet);
+			$choisies = picker_selected(lire_config('liaison_objet/liaison_' . $objet . '_dest', array()), $objet);
 		}
 		else {
-			$choisies = lire_config('selection_objet/selection_' . $objet . '_dest', array());
+			$choisies = lire_config('liaison_objet/liaison_' . $objet . '_dest', array());
 		}
 		if (in_array($id_objet, $choisies) OR !$choisies) {
 			$contexte = array(
@@ -112,19 +112,19 @@ function selection_objet_affiche_milieu($flux = "") {
 				$contexte['langue'] = '';
 			}
 
-			$flux["data"] .= recuperer_fond('prive/objets/liste/selection_interface', $contexte);
+			$flux["data"] .= recuperer_fond('prive/objets/liste/liaison_interface', $contexte);
 		}
 	}
 	return $flux;
 }
 
-function selection_objet_formulaire_charger($flux) {
+function liaison_objet_formulaire_charger($flux) {
 	$form = $flux['args']['form'];
-	if ($form == 'configurer_selection_objet') {
+	if ($form == 'configurer_liaison_objet') {
 		//emprunté de a2a  preparé les type_liens pour le formulaire
 		include_spip('inc/config');
 		if (!$cfg['type_liens'] = _request('type_liens')) {
-			$types_lien = lire_config('selection_objet/type_liens', array());
+			$types_lien = lire_config('liaison_objet/type_liens', array());
 			$flux['data']['type_liens'] = '';
 			foreach ($types_lien as $key => $value) {
 				if ($key)
@@ -135,10 +135,10 @@ function selection_objet_formulaire_charger($flux) {
 
 		//également les  type_liens_OBJET
 
-		$objets_cibles = lire_config('selection_objet/objets_cible', array());
+		$objets_cibles = lire_config('liaison_objet/objets_cible', array());
 
 		foreach ($objets_cibles as $objet) {
-			if ($types_lien = lire_config('selection_objet/type_liens_' . $objet)) {
+			if ($types_lien = lire_config('liaison_objet/type_liens_' . $objet)) {
 				$flux['data']['type_liens_' . $objet] = '';
 				foreach ($types_lien as $key => $value) {
 					if ($key)
@@ -151,12 +151,12 @@ function selection_objet_formulaire_charger($flux) {
 	return $flux;
 }
 
-function selection_objet_formulaire_traiter($flux) {
+function liaison_objet_formulaire_traiter($flux) {
 	// intervenir sur la configuration du plugin
 	$form = $flux['args']['form'];
-	if ($form == 'configurer_selection_objet') {
+	if ($form == 'configurer_liaison_objet') {
 		include_spip('inc/config');
-		$cfg = lire_config('selection_objet');
+		$cfg = lire_config('liaison_objet');
 		$cfg['type_liens'] = types_liaisons2array(_request('type_liens'));
 
 		if (!$objets_cibles = $cfg['objets_cible'])
@@ -167,12 +167,12 @@ function selection_objet_formulaire_traiter($flux) {
 				$cfg['type_liens_' . $objet] = types_liaisons2array(_request('type_liens_' . $objet));
 		}
 
-		ecrire_config('selection_objet', $cfg);
+		ecrire_config('liaison_objet', $cfg);
 	}
 	return $flux;
 }
 
-function selection_objet_jqueryui_plugins($scripts) {
+function liaison_objet_jqueryui_plugins($scripts) {
 	$scripts[] = 'jquery.ui.autocomplete';
 	$scripts[] = "jquery.ui.widget";
 	$scripts[] = "jquery.ui.mouse";

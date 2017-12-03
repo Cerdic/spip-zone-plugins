@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de https://trad.spip.net/tradlang_module/paquet-selection_objet?lang_cible=en
+// extrait automatiquement de https://trad.spip.net/tradlang_module/paquet-liaison_objet?lang_cible=en
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -10,8 +10,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
-	'selection_objet_description' => 'Plugin inspired by the plugin article selection.
+	'liaison_objet_description' => 'Plugin inspired by the plugin article liaison.
 Selects spip objects, store them and customize their display depending on the selected section',
-	'selection_objet_nom' => 'Objects selection',
-	'selection_objet_slogan' => 'List your spip objects'
+	'liaison_objet_nom' => 'Objects liaison',
+	'liaison_objet_slogan' => 'List your spip objects'
 );

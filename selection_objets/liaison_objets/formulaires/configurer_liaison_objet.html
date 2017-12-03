@@ -16,57 +16,57 @@
 		<ul>
 		    <li class="fieldset">
 		      <fieldset>
-		          <legend><strong><:selection_objet:objets_cible:></strong></legend>
-		          <p><:selection_objet:explication_selection_objets_cible:></p>
+		          <legend><strong><:liaison_objet:objets_cible:></strong></legend>
+		          <p><:liaison_objet:explication_liaison_objets_cible:></p>
         		    <ul>
         		    [(#SAISIE{checkbox,objets_cible,
                         datas=#GET{objets},
-                        label=<:selection_objet:selection_objet_cible_titre:>}
+                        label=<:liaison_objet:liaison_objet_cible_titre:>}
                         )]
                     [(#SAISIE{textarea,type_liens,
-                        label=<:selection_objet:selection_type_liens:> (<:selection_objet:type_liens_defaut:>),
+                        label=<:liaison_objet:liaison_type_liens:> (<:liaison_objet:type_liens_defaut:>),
                         rows=5,
                         cols=5,
-                        explication=<:selection_objet:explication_selection_type_liens:>,
+                        explication=<:liaison_objet:explication_liaison_type_liens:>,
                         }
                         )]
                     [(#SAISIE{oui_non,choix_illimite,
-                        label=<:selection_objet:selection_choix_illimite:>,
-                        explication=<:selection_objet:explication_selection_choix_illimite:>,
+                        label=<:liaison_objet:liaison_choix_illimite:>,
+                        explication=<:liaison_objet:explication_liaison_choix_illimite:>,
                         }
                         )]                        
                     <B_objets_dest>
                     
                     [(#REM)Configuration spécifiques pour chaque objet cible sélectionné]
-        		    <BOUCLE_objets_dest(DATA){source tableau, #CONFIG{selection_objet/objets_cible}}>
+        		    <BOUCLE_objets_dest(DATA){source tableau, #CONFIG{liaison_objet/objets_cible}}>
         		    <li class="fieldset">
                         <fieldset>
                             <legend>[(#GET{objets}|table_valeur{#VALEUR})]</legend>
         		      <ul>
         		        [(#REM)Définir des objets spécifiques]  
             		    [(#VALEUR|in_array{#GET{objets_saisies}}|oui)
-                		    [(#SAISIE{selecteur_#VALEUR,selection_[(#VALEUR)]_dest,
+                		    [(#SAISIE{selecteur_#VALEUR,liaison_[(#VALEUR)]_dest,
                                 multiple=oui,
-                                label=<:selection_objet:selection_cible:> [(#GET{objets}|table_valeur{#VALEUR})],
-                                explication=<:selection_objet:explication_selection_cible:>}
+                                label=<:liaison_objet:liaison_cible:> [(#GET{objets}|table_valeur{#VALEUR})],
+                                explication=<:liaison_objet:explication_liaison_cible:>}
                             )] 
                             ]
                         [(#VALEUR|in_array{#GET{objets_saisies}}|non)
                             [(#VALEUR|oui)#SET{datas,#VALEUR|tableau_objet{'',*,'',#LISTE{titre},''}}
-                            [(#SAISIE{selection_multiple,selection_[(#VALEUR)]_dest,
-                                label=<:selection_objet:selection_cible:> [(#GET{objets}|table_valeur{#VALEUR})],
+                            [(#SAISIE{liaison_multiple,liaison_[(#VALEUR)]_dest,
+                                label=<:liaison_objet:liaison_cible:> [(#GET{objets}|table_valeur{#VALEUR})],
                                 datas=#GET{datas},
-                                explication=<:selection_objet:explication_choix_multi:><br/><:selection_objet:explication_selection_cible:>, 
+                                explication=<:liaison_objet:explication_choix_multi:><br/><:liaison_objet:explication_liaison_cible:>, 
                                                            
                                 })]
                                     ]
                             ]
                         [(#REM)Définir des types liens par objet]       
                         [(#SAISIE{textarea,type_liens_[(#VALEUR)],
-                        label=<:selection_objet:selection_type_liens:>  (<:selection_objet:type_liens_surcharge:>),
+                        label=<:liaison_objet:liaison_type_liens:>  (<:liaison_objet:type_liens_surcharge:>),
                         rows=5,
                         cols=5,
-                        explication=<:selection_objet:explication_selection_type_liens:>,
+                        explication=<:liaison_objet:explication_liaison_type_liens:>,
                         }
                         )]
                       
@@ -78,11 +78,11 @@
 
             <li class="fieldset">
               <fieldset>
-                  <legend><strong><:selection_objet:objets_selection:></strong></legend>
+                  <legend><strong><:liaison_objet:objets_liaison:></strong></legend>
                   <ul>
-            [(#SAISIE{checkbox,selection_rubrique_objet,
+            [(#SAISIE{checkbox,liaison_rubrique_objet,
                 datas=#GET{objets},
-                label=<:selection_objet:selection_rubrique_objet:>}
+                label=<:liaison_objet:liaison_rubrique_objet:>}
                 )]
             </ul>   
             </fieldset>

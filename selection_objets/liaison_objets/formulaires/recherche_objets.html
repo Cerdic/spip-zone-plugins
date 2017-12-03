@@ -4,7 +4,7 @@
 	<ul>
 		[(#SAISIE{input,objet_sel,label=#ENV{label_objet}})]
 		[(#ENV{types_lien}|count|>{0}|oui)
-			[(#SAISIE{selection,type_lien,
+			[(#SAISIE{liaison,type_lien,
 				label=#ENV{label_lien},
 				datas=#ENV{types_lien}})]
 		]
@@ -38,9 +38,9 @@
 	});
 	$(document).ready(function(){
 	$('#formulaire_bouton_objet[_(#ENV{lang,no_lang})] #champ_objet_sel').val('');
-	#SET{id,selection_objets_#ENV{lang,no_lang}}
+	#SET{id,liaison_objets_#ENV{lang,no_lang}}
 	[(#ENV{message_ok}|oui)
-		$('#[(#GET{id})]').load('[(#URL_ACTION_AUTEUR{ranger,nouvel_ordre-[(#ENV{lang})]-0-0-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]}|parametre_url{load,prive/objets/liste/inc-selection_interface}|parametre_url{id,#GET{id}}|replace{&amp;,&})]');
+		$('#[(#GET{id})]').load('[(#URL_ACTION_AUTEUR{ranger,nouvel_ordre-[(#ENV{lang})]-0-0-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]}|parametre_url{load,prive/objets/liste/inc-liaison_interface}|parametre_url{id,#GET{id}}|replace{&amp;,&})]');
 			]
 	});
 	</script>
