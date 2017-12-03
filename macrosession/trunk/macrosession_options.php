@@ -97,13 +97,13 @@ function compile_appel_macro_session ($p) {
 
 	if (erreur_argument_macro ('#_SESSION', 'champ', $champ, $p))
 		return "''";
-			
+
 	$get_champ = "pipelined_session_get('.\"$champ\".')";
 
 	// champ sans application de filtre
 	if (!existe_argument_balise(2, $p)) 
 		return $get_champ;
-	
+
 	// Application d'un filtre, récupéré entre quotes ''
 	$filtre = trim_quote(interprete_argument_balise (2, $p));
 	if (erreur_argument_macro ('#_SESSION', 'filtre', $filtre, $p))
@@ -128,12 +128,11 @@ function compile_appel_macro_session ($p) {
 	$arg_un = $arg_deux = $virgule_arg_un = $virgule_arg_deux = '';
 	
 	if (existe_argument_balise(3, $p)) {
-		$arg_un = interprete_argument_balise(3, $p);
+		$arg_un = trim_quote(interprete_argument_balise(3, $p));
+		if ($arg_un and erreur_argument_macro ('#_SESSION', 'arg_un', $arg_un, $p))
+			return "''";
 		$virgule_arg_un = ".', '.\"$arg_un\"";
 	};
-
-	if (erreur_argument_macro ('#_SESSION', 'arg_un', $arg_un, $p))
-		return "''";
 
 	// le filtre est il en fait un opérateur de comparaison ?
 	if (in_array ($filtre, array ("'=='", "'!='", "'<'", "'<='", "'>'", "'>='"))) {
@@ -145,12 +144,11 @@ function compile_appel_macro_session ($p) {
 	}
 
 	if (existe_argument_balise(4, $p)) {
-		$arg_deux = interprete_argument_balise(4, $p);
+		$arg_deux = trim_quote(interprete_argument_balise(4, $p));
+		if ($arg_deux and erreur_argument_macro ('#_SESSION', 'arg_deux', $arg_deux, $p))
+			return "''";
 		$virgule_arg_deux = ".', '.\"$arg_deux\"";
 	};
-
-	if (erreur_argument_macro ('#_SESSION', 'arg_deux', $arg_deux, $p))
-		return "''";
 
 // produira par exemple ensuite :
 // '<'.'?php  echo appliquer_filtre(pipelined_session_get('."'nom'".'), '."'strlen'".');  ?'.'>'
@@ -237,7 +235,6 @@ function compile_appel_macro_autoriser ($p) {
 		return "autoriser('.\"$autorisation\".', '.\"$type\".', '.\"$id\".')";
 
 	// Les appels à #_AUTORISER_SI avec arguments $qui et $opt n'ont été testés
-	// De toute façon c'est impossible de les appeler avec un #ARRAY
 	$qui = trim_quote(interprete_argument_balise (4, $p));
 	if (erreur_argument_macro ('#_AUTORISER_SI', 'qui', $qui, $p))
 		return "''";
