@@ -197,7 +197,14 @@ function roles_documents_quete_logo_objet($flux) {
 			'', //group
 			'0+titre, titre'
 		)) {
-			$chemin_complet = _DIR_IMG . $image['fichier'];
+			// Si c'est un URL on retourne le chemin directement
+			if (filter_var($image['fichier'], FILTER_VALIDATE_URL)) {
+				$chemin_complet = $image['fichier'];
+			}
+			// Sinon on va le chercher dans IMG
+			else {
+				$chemin_complet = _DIR_IMG . $image['fichier'];
+			}
 
 			$flux['data'] = array(
 				'chemin' => $chemin_complet,
