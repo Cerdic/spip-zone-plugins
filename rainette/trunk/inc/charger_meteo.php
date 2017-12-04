@@ -74,6 +74,7 @@ function inc_charger_meteo_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 	// le formulaire et stockée en BDD dans la table spip_meta) et la merger avec la configuration statique.
 	// Cependant, celle-ci pouvant être incomplète on la complète par les valeurs par défaut quand
 	// cela est nécessaire.
+	include_spip('inc/rainette_normaliser');
 	$configuration_utilisateur = normaliser_configuration_utilisateur($service, $configuration['defauts']);
 
 	// Concaténer l'ensemble des configurations.
@@ -86,7 +87,6 @@ function inc_charger_meteo_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 	}
 
 	// Construire le nom du fichier cache
-	include_spip('inc/rainette_normaliser');
 	$cache = service2cache($lieu, $mode, $periodicite, $configuration);
 
 	// Déterminer le système d'unité utilisé dans le cache et celui requis par la configuration.
