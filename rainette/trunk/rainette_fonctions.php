@@ -418,6 +418,7 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 
 	if ($erreur) {
 		// Acquérir la configuration statique du service (periode, format, données...)
+		include_spip("services/${service}");
 		$configurer = "${service}_service2configuration";
 		$configuration = $configurer($mode);
 
