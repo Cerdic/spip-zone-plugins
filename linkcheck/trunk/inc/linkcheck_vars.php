@@ -12,7 +12,7 @@ function linkcheck_champs_a_traiter($table) {
 	$tab_champs = array();
 	if (isset($table['field']) && is_array($table['field'])) {
 		foreach ($table['field'] as $nom_champ => $type_champ) {
-			if (preg_match(',^(tiny|long|medium)?text\s,i', $type_champ)) {
+			if (preg_match(',^(tiny|long|medium)?text\s?,i', $type_champ)) {
 				if (preg_match('/url/', $nom_champ)) {
 					$tab_champs[$nom_champ] = 0;
 				} else {
