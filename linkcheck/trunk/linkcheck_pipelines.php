@@ -105,7 +105,7 @@ function linkcheck_post_edition($flux) {
 			}
 			return $flux;
 		}
-		if (is_array($champs_a_traiter)) {
+		if (is_array($champs_a_traiter) && count($champs_a_traiter)) {
 			$tab_value = sql_fetsel(array_keys($champs_a_traiter), $table_sql, $id_table_objet.'='.intval($id_objet));
 			foreach (array_keys($champs_a_traiter) as $ct) {
 				if (isset($flux['data'][$ct])) {
