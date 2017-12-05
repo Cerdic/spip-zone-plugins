@@ -10,7 +10,7 @@
 	1. D'abord rassembler les informations et les formater
 
 ][
-(#SET{titre, #NOM_SITE_SPIP|concat{&nbsp;- #SLOGAN_SITE_SPIP}|supprimer_tags|textebrut})][
+(#SET{titre, #NOM_SITE_SPIP|concat{" - ",#SLOGAN_SITE_SPIP}|supprimer_tags|textebrut})][
 (#SET{lang, #LANG})][
 (#SET{desc,[(#DESCRIPTIF_SITE_SPIP|sinon{#SLOGAN_SITE_SPIP}|supprimer_tags|textebrut)]})][
 (#SET{date,#DATE})][
