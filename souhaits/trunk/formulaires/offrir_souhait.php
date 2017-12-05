@@ -97,7 +97,7 @@ function formulaires_offrir_souhait_charger_dist($id_souhait, $retour=''){
 		return false;
 	}
 	
-	$contexte['saisies_texte_submit'] = _T('icone_envoyer_message');
+	$contexte['saisies_texte_submit'] = _T('organiseur:bouton_envoyer_message');
 	
 	return $contexte;
 }
