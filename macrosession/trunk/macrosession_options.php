@@ -84,8 +84,8 @@ function choix_selon ($test, $sioui, $sinon) {
 	return $test ? $sioui : $sinon;
 }
 
-define (V_OUVRE_PHP, "'<'.'" . '?php ');
-define (V_FERME_PHP, ' ?' . "'.'>'");
+define ('V_OUVRE_PHP', "'<'.'" . '?php ');
+define ('V_FERME_PHP', ' ?' . "'.'>'");
 
 // Appelé uniquement au recalcul pour la compilation
 // le code renvoyé sera inséré à l'intérieur d'un '...'

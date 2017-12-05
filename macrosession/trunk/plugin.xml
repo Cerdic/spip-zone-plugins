@@ -4,7 +4,7 @@
 	<icon></icon>
 	<auteur>JLuc</auteur>
 	<licence>GPL</licence>
-	<version>0.8.1</version>
+	<version>0.8.2</version>
 	<etat>test</etat>
 	<description>
 	Macros SPIP #_SESSION, #_SESSION_SI, #_AUTORISER_SI, etc
