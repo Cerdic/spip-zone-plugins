@@ -58,7 +58,7 @@
 		[(#REM) Gestion du portfolio et des documents ]
 		[(#INCLURE{fond=inclure/documents,objet=souhait,id_objet=#ID_SOUHAIT,doublons})]
 		
-		<div class="clear alert #STATUT[ (#LISTE{libre,cagnotte,propose,achete,poubelle}|str_replace{#LISTE{alert-success,'',alert-error,alert-error,alert-info},#STATUT})]">
+		<div class="clear alert #STATUT[ (#LISTE{libre,cagnotte,propose,achete,poubelle}|str_replace{#LISTE{alert-success,alert-warning,alert-danger,alert-danger,alert-info},#STATUT})]">
 		<h2>[(#VAL{souhait:statut_}|concat{#STATUT,_label}|_T|ucfirst)]</h2>
 		[(#VAL{souhait:statut_}|concat{#STATUT,_explication}|_T)]
 		</div>
