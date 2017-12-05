@@ -35,6 +35,7 @@ function abonnements_declarer_tables_objets_sql($tables) {
 			"periode" => "varchar(25) NOT NULL DEFAULT ''",
 			'prix_ht' => 'float(10,2) not null default 0',
 			"taxe" => "decimal(4,4) default 0",
+			'immateriel' => 'varchar(3) default "on"',
 			"statut" => "varchar(20)  DEFAULT '0' NOT NULL",
 			"maj" => "TIMESTAMP"
 		),
@@ -44,8 +45,8 @@ function abonnements_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "titre AS titre, '' AS lang",
 		#'date' => "",
-		'champs_editables' => array('titre', 'descriptif', 'duree', 'periode', 'prix_ht', 'taxe'),
-		'champs_versionnes' => array('titre', 'descriptif', 'duree', 'periode', 'prix_ht', 'taxe'),
+		'champs_editables' => array('titre', 'descriptif', 'duree', 'periode', 'prix_ht', 'taxe', 'immateriel'),
+		'champs_versionnes' => array('titre', 'descriptif', 'duree', 'periode', 'prix_ht', 'taxe', 'immateriel'),
 		'rechercher_champs' => array("titre" => 10, "descriptif" => 5),
 		'tables_jointures' => array('spip_abonnements_offres_liens'),
 		'statut_textes_instituer' => array(

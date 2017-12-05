@@ -95,6 +95,14 @@ function formulaires_editer_abonnements_offre_saisies_dist($id_abonnements_offre
 				),
 			),
 		),
+		array(
+			'saisie' => 'case',
+			'options' => array(
+				'nom' => 'immateriel',
+				'label' => _T('abonnementsoffre:champ_immateriel_label'),
+				'label_case' => _T('abonnementsoffre:champ_immateriel_label_case'),
+			),
+		),
 	);
 }
 

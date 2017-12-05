@@ -55,6 +55,11 @@ function abonnements_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['2.2.6'] = array(
 		array('sql_alter',"TABLE spip_abonnements_offres_notifications CHANGE `quand` `quand` ENUM('avant','apres','pendant') DEFAULT 'avant' NOT NULL")
 	);
+	
+	// Ajout d'une valeur possible au champ `quand` 
+	$maj['2.3.0'] = array(
+		array('maj_tables', array('spip_abonnements_offres')),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -64,7 +69,6 @@ function abonnements_upgrade($nom_meta_base_version, $version_cible) {
  * Fonction de désinstallation du plugin.
  * */
 function abonnements_vider_tables($nom_meta_base_version) {
-
 	sql_drop_table("spip_abonnements_offres");
 	sql_drop_table("spip_abonnements_offres_liens");
 	sql_drop_table("spip_abonnements");
@@ -77,5 +81,3 @@ function abonnements_vider_tables($nom_meta_base_version) {
 
 	effacer_meta($nom_meta_base_version);
 }
-
-?>
