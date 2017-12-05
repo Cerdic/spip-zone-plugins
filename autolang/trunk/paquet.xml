@@ -1,11 +1,11 @@
 <paquet
 	prefix="autolang"
 	categorie="navigation"
-	version="1.0.3"
+	version="1.0.4"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/autolang-64.png"
-	documentation=""
+	documentation="https://contrib.spip.net/4951"
 >
 
 	<nom>AutoLang</nom>
