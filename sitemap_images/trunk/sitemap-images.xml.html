@@ -11,6 +11,9 @@
 	Exemple tres simple de sitemap.xml accessible via URL_SITE_SPIP/sitemap.xml
 	(copier htaccess.txt en .htaccess pour en beneficier)
 
+	Parametre
+	- annee (facultatif)  permet de lister les items par annee
+
 	(On pose un cache a zero pour echapper au test _IS_BOT)
 
 
@@ -28,7 +31,7 @@
 </url>
 
 [(#REM) Rubriques]
-<BOUCLE_r(RUBRIQUES){!par date}{0,1000}>
+<BOUCLE_r(RUBRIQUES){si #ENV{annee}|non}{!par date}{0,1000}>
 <url>
 	[<loc>(#URL_RUBRIQUE|url_absolue)</loc>]
 	[<image:image>
@@ -39,7 +42,7 @@
 </BOUCLE_r>
 
 [(#REM) Articles]
-<BOUCLE_a(ARTICLES){!par date_modif}{!par date}{0,2000}>
+<BOUCLE_a(ARTICLES){annee?}{!par date_modif}{!par date}{0,2000}>
 <url>
 	<loc>[(#URL_ARTICLE|url_absolue)]</loc>
 	<lastmod>[(#DATE_MODIF|date_iso)]</lastmod>
@@ -58,11 +61,11 @@
 </BOUCLE_a>
 
 [(#REM) Breves]
-<BOUCLE_b(BREVES){!par date}{0,1000}>[
+<BOUCLE_b(BREVES){annee?}{!par date}{0,1000}>[
 <url><loc>(#URL_BREVE|url_absolue)</loc></url>]</BOUCLE_b>
 
 [(#REM) Extensions de sitemap par des plugins ]
-<BOUCLE_objets(DATA){source table,#REM|lister_tables_objets_sql}>
+<BOUCLE_objets(DATA){source table,#REM|lister_tables_objets_sql}{si #ENV{annee}|non}>
 	#SET{fond,#VAL{sitemap-}|concat{#VALEUR{table_objet}}}
 	[(#GET{fond}|trouver_fond|oui)#INCLURE*{fond=#GET{fond}}]
 </BOUCLE_objets>
