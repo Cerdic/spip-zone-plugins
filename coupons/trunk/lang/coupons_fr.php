@@ -8,12 +8,19 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bon_cadeau'              => 'Bon cadeau',
-	
+	'bon_cadeau'                 => 'Bon cadeau',
+
 	// C
-	'code_invalide'           => 'Ce code de réduction n\'est pas valide.',
-	'coupons_titre'           => 'Coupons de réduction',
+	'code_invalide'              => 'Ce code de réduction n\'est pas valide.',
+	'coupons_titre'              => 'Coupons de réduction',
+	'creation_coupon'            => 'Création d\'un coupon',
+
+	// E
+	'explication_emails_notifications' => 'Séparés par une virgule',
+
+	// L
+	'label_emails_notifications' => 'Emails à notifier de la création d\'un coupon',
 
 	// U
-	'utiliser_code_reduction' => 'Utiliser ce code de réduction',
+	'utiliser_code_reduction'    => 'Utiliser ce code de réduction',
 );
