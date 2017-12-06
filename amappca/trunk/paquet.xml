@@ -27,6 +27,7 @@
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/amappca.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/amappca.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="amappca_pipelines.php" />
+	<pipeline nom="pre_styliser" inclure="amappca_pipelines.php" />
 
 	<menu nom="amap_periodes" titre="amap_periode:titre_amap_periodes" parent="menu_edition" icone="images/amap_periode-16.png" action="amap_periodes" /> 
 	<menu nom="amap_periode_creer" titre="amap_periode:icone_creer_amap_periode" parent="outils_rapides" icone="images/amap_periode-new-16.png" action="amap_periode_edit" parametres="new=oui" /> 

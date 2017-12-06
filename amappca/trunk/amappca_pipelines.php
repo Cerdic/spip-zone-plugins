@@ -24,8 +24,17 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return array       Données du pipeline
  */
 function amappca_optimiser_base_disparus($flux){
-
 	sql_delete("spip_amap_periodes", "statut='poubelle' AND maj < " . $flux['args']['date']);
+	
+	return $flux;
+}
 
+function amappca_pre_styliser($flux) {
+	var_dump($flux);
+	if (preg_match(';^amap.*$;', $flux['args']['fond'])) {
+		_chemin(_DIR_PLUGIN_AMAPPCA . 'squelettes/');
+		$GLOBALS['marqueur'] .= ':amap';
+	}
+	
 	return $flux;
 }
