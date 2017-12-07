@@ -10,7 +10,7 @@ function _getComputedTranslateX(obj)
 
 
 function calculer_portfolio_slide() {
-	var ratio_ecran = $( document ).height() / $( document ).width() * 100;
+	var ratio_ecran = $( window ).height() / $( window ).width() * 100;
 	$(".portfolio_slide").each(function() {
 			var ratio_max = 0;
 			$(this).find(".spip_img").each(function(){
