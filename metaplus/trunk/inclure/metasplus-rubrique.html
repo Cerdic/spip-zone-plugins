@@ -12,7 +12,7 @@
 ][
 (#SET{titre, #TITRE|concat{" - ",#NOM_SITE_SPIP}|supprimer_tags|textebrut})][
 (#SET{lang, #LANG})][
-(#SET{desc,[(#TEXTE|sinon{#DESCRIPTIF_SITE_SPIP}|sinon{#TITRE}|supprimer_tags|textebrut)]})][
+(#SET{desc,[(#TEXTE|sinon{#DESCRIPTIF}|sinon{#DESCRIPTIF_SITE_SPIP}|sinon{#TITRE}|supprimer_tags|textebrut)]})][
 (#SET{date,#DATE})][
 (#SET{url,#URL_RUBRIQUE})][
 (#SET{logo,''})][
