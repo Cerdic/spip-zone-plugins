@@ -9,6 +9,20 @@ function _getComputedTranslateX(obj)
 }
 
 
+function calculer_portfolio_slide() {
+	var ratio_ecran = $( document ).height() / $( document ).width() * 100;
+	$(".portfolio_slide").each(function() {
+			var ratio_max = ratio_ecran;
+			$(this).find(".spip_img").each(function(){
+				if ($(this).attr("data-italien-l")) {
+					var ratio = $(this).attr("data-italien-h") / $(this).attr("data-italien-l") * 100;
+					ratio_max = Math.min(ratio, ratio_max);
+				}
+			});
+			$(this).find(".spip_img").css("padding-bottom", ratio_max+"%");
+	});
+}
+
 function activer_porfolio_slide() {
 
 	$(".portfolio_slide").on("touchstart MSPointerDown pointerdown", function(e) {
@@ -58,3 +72,5 @@ function activer_porfolio_slide() {
 
 
 $(document).ready( activer_porfolio_slide );
+$(document).ready( calculer_portfolio_slide );
+$(window).on("resize", calculer_portfolio_slide );
