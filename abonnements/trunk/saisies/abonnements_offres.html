@@ -15,5 +15,8 @@
 #INCLURE{fond=saisies/checkbox, env, datas=#GET{data}}
 ]
 [(#ENV{multiple}|non)
-#INCLURE{fond=saisies/radio, env, datas=#GET{data}}
+	[(#ENV{select}|?{
+		#INCLURE{fond=saisies/selection, env, datas=#GET{data}},
+		#INCLURE{fond=saisies/radio, env, datas=#GET{data}}
+	})]
 ]
