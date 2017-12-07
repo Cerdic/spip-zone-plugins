@@ -15,13 +15,13 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 
 
 function formulaires_gerer_stock_charger_dist($objet, $id_objet, $retour = ''){
-include_spip('inc/stocks');
+	include_spip('inc/stocks');
 	$quantite = get_quantite($objet,$id_objet);
 	$stock_default = lire_config('stocks/quantite_default');
 	$valeurs = array(
 		'objet' => $objet,
 		'id_objet' => $id_objet,
-		'is_stock' => ($quantite) ? true : false ,
+		'is_stock' => isset($quantite) ? true : false ,
 		'_quantite' => isset($quantite) ? $quantite : $stock_default
 	);
 	
@@ -31,11 +31,11 @@ include_spip('inc/stocks');
 
 function formulaires_gerer_stock_verifier_dist($objet,$id_objet,$retour = ''){
 	$erreurs = array();
-	foreach(array('_quantite') as $champ) {
-		if (!_request($champ)) {
-			$erreurs[$champ] = "Cette information est obligatoire !";
-		}
-	}
+	//foreach(array('_quantite') as $champ) {
+	//	if (!_request($champ)) {
+	//		$erreurs[$champ] = "Cette information est obligatoire !";
+	//	}
+	//}
 	if (!is_numeric(_request('_quantite'))) {
 		$erreurs['_quantite'] = "Doit être un nombre";
 	}
@@ -46,7 +46,7 @@ function formulaires_gerer_stock_verifier_dist($objet,$id_objet,$retour = ''){
 }
 
 function formulaires_gerer_stock_traiter_dist($objet,$id_objet,$retour = ''){
-include_spip('inc/stocks');
+	include_spip('inc/stocks');
 	$quantite = _request('_quantite');
 	set_quantite($objet,$id_objet,$quantite);
 	set_request('is_stock', true);
