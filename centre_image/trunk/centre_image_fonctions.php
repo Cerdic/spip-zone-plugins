@@ -21,16 +21,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * @param string $fichier
  *     Chemin du fichier ou balise `<img>`
- * @param string $prive
- *     test si on est dans l'espace prive
  * @return float[]
  *     Tableau (x, y) des coordonnées du point d'intéret ;
  *     - x entre 0 (à gauche) et 1 (à droite)
  *     - y entre 0 (en haut) et 1 (en bas)
 **/
-function centre_image($fichier, $prive = false) {
+function centre_image($fichier) {
 	// Gérer le plugin mutualisation si on est pas dans le prive
-	if (!$prive and defined('_DIR_SITE')){
+
+	if (defined('_DIR_SITE') and (false === strpos($fichier, _DIR_SITE))){
 		$fichier = _DIR_SITE.$fichier;
 	}
 

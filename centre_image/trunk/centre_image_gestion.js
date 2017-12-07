@@ -51,12 +51,7 @@ jQuery.fn.centre_images = function() {
 			$(this).attr("data-href", url);
 		}
 
-		var prive = "oui";
-		if (location.href.indexOf('ecrire/?exec') === -1){
-			prive = "";
-		}
-
-		$.getJSON("../index.php?page=centre_image_json&url=" + url + "&prive=" + prive,
+		$.getJSON("../index.php?page=centre_image_json&url=" + url,
 			function (data) {
 				var el = $("a[data-href='" + url + "']");
 				el.data('x', data.x);
