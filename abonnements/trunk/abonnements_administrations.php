@@ -56,9 +56,14 @@ function abonnements_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter',"TABLE spip_abonnements_offres_notifications CHANGE `quand` `quand` ENUM('avant','apres','pendant') DEFAULT 'avant' NOT NULL")
 	);
 	
-	// Ajout d'une valeur possible au champ `quand` 
+	// Ajout d'un champ immatériel pour savoir si c'est un service virtuel ou matériel
 	$maj['2.3.0'] = array(
 		array('maj_tables', array('spip_abonnements_offres')),
+	);
+	
+	// Passage en décimal
+	$maj['2.3.1'] = array(
+		array('sql_alter', 'TABLE spip_abonnements_offres CHANGE prix_ht prix_ht DECIMAL(20,6) NOT NULL DEFAULT 0'), 
 	);
 
 	include_spip('base/upgrade');

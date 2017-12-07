@@ -33,7 +33,7 @@ function abonnements_declarer_tables_objets_sql($tables) {
 			"descriptif" => "text NOT NULL DEFAULT ''",
 			"duree" => "int(11) NOT NULL DEFAULT 0",
 			"periode" => "varchar(25) NOT NULL DEFAULT ''",
-			'prix_ht' => 'float(10,2) not null default 0',
+			'prix_ht' => 'decimal(20,6) not null default 0',
 			"taxe" => "decimal(4,4) default 0",
 			'immateriel' => 'varchar(3) default "on"',
 			"statut" => "varchar(20)  DEFAULT '0' NOT NULL",
