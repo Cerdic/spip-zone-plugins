@@ -10,8 +10,9 @@
  * @package    SPIP\Commandes\Installation
  */
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION'))
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
+}
 
 /**
  * Fonction d'installation et de mise à jour du plugin Commandes.
@@ -147,7 +148,11 @@ function commandes_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.7.8'] = array(
 		array('sql_alter', 'TABLE spip_commandes_details CHANGE prix_unitaire_ht prix_unitaire_ht DECIMAL(20,6) NOT NULL DEFAULT 0'),
 	);
-
+	// refaire la même màj car celleux qui avaient installé à neuf depuis avaient toujours float
+	$maj['0.7.9'] = array(
+		array('sql_alter', 'TABLE spip_commandes_details CHANGE prix_unitaire_ht prix_unitaire_ht DECIMAL(20,6) NOT NULL DEFAULT 0'),
+	);
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
