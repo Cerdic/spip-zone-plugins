@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 #define('_ADMINER_VERROUILLER_DB',true);
 
 // aiguiller sur adminer si les bonnes conditions
-if (strpos($_SERVER['REQUEST_URI'],"prive.php")!==false AND !_DIR_RESTREINT){
+if (isset($_SERVER['REQUEST_URI']) AND strpos($_SERVER['REQUEST_URI'],"prive.php")!==false AND !_DIR_RESTREINT){
 	if (
 	(  ($f=_request('file') AND in_array($f,array('default.css','functions.js','favicon.ico','jush.js')) AND _request('version'))
 	  OR (isset($_COOKIE['spip_adminer']) AND $_COOKIE['spip_adminer'])
