@@ -1,10 +1,10 @@
 <paquet
 	prefix="sitemap_news"
 	categorie="maintenance"
-	version="1.0.1"
+	version="1.0.2"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
-	logo=""
+	logo="prive/themes/spip/images/sitemap_news-64.png"
 	documentation="https://contrib.spip.net/4340"
 >
 
@@ -13,7 +13,7 @@
 
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
 	<auteur lien="http://www.latribunedelart.com">La Tribune de l’Art</auteur>
-	<copyright>2013</copyright>
+	<copyright>2017</copyright>
 	<licence>GPL v3</licence>
 
 	<traduire module="paquet-sitemap_news" reference="fr" gestionnaire="salvatore" />

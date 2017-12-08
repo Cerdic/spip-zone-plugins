@@ -16,7 +16,7 @@
 			<news:genres>OpEd</news:genres>
 			<news:publication_date>[(#DATE|affdate{Y-m-d})]</news:publication_date>
 			<news:title>[(#TITRE|texte_backend)]</news:title>
-			<B_mots><news:keywords><BOUCLE_mots(MOTS?){id_article}{","}>[(#TITRE|texte_backend)]</BOUCLE_mots></news:keywords></B_mots>
+			<B_mots><news:keywords><BOUCLE_mots(MOTS?){id_article}{", "}>[(#TITRE|texte_backend)]</BOUCLE_mots></news:keywords></B_mots>
 		</news:news>
 	</url>
 	</BOUCLE_derniers_articles>
