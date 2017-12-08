@@ -1,6 +1,6 @@
 <paquet
 	prefix="couleur_objet"
-	categorie="maintenance"
+	categorie="outil"
 	version="0.3.0"
 	schema="1.0.0"
 	etat="stable"
