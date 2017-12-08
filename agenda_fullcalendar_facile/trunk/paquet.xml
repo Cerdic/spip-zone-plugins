@@ -1,7 +1,7 @@
 <paquet
 	prefix="fullcalendar_facile"
 	categorie="date"
-	version="2.0.0"
+	version="2.1.0"
 	etat="stable"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/fullcalendarfacile-32.png"
@@ -15,6 +15,7 @@
 
 	<necessite nom="agenda" compatibilite="[3.18.4;]" />
 	<necessite nom="organiseur" compatibilite="[1.2.2;]" />
+	<utilise nom="couleur_objet" compatibilite="[0.3.0;]" />
 
 	<script source="lib/moment/moment-with-locales.min.js" />
 	<script source="lib/fullcalendar/fullcalendar.min.js" />

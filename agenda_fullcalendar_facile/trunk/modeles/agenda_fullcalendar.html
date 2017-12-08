@@ -6,7 +6,7 @@ jQuery(function($) {
 			editable: false,
 			navLinks: true,
 			eventLimit: true,
-			events: "[(#URL_PAGE{agenda.json})]",
+			events: "[(#URL_PAGE{agenda.json}|parametre_url{couleur,#ENV{couleur},&})]",
 			header: { 
 				left: [(#LANG_DIR|=={ltr}|?{"'prevYear,prev,next,nextYear today'","'listMonth,month,agendaWeek,agendaDay'"})], 
 				center: 'title', 
