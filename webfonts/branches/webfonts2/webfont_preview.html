@@ -2,6 +2,12 @@
 #SET{webfonts, #ENV{font-family}|replace{' ','+'}}
 #SET{font-weight, #ENV{font-variant}|match{\d+?}}
 #SET{font-style, #ENV{font-variant}|match{(\D+?)}}
+
+#SET{settings_default,#ARRAY{
+    font-family
+  }
+}
+#SET_MERGE{conf,#GET{settings_default},#ENV{settings}}
 <html>
   <head>
     <link rel="stylesheet" type="text/css"

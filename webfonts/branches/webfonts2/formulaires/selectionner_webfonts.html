@@ -1,0 +1,116 @@
+[(#REM)<!--
+
+  Squelette 
+  (c) 2016 
+  Distribue sous licence GPL
+
+-->]
+
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+    
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+		<!-- http://contrib.spip.net/SPIP-Bonux -->
+<BOUCLE_test(CONDITION){si #ENV{editable}|oui}>
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'>
+        <div>
+		[(#REM)<!-- declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action -->]
+		#ACTION_FORMULAIRE{#ENV{action},#FORM}
+		
+
+        <input name="font_list" type="hidden" value="#ENV{font_list}">
+		#SET{preview_list,#ENV{font_list}}
+        <div>
+            <label for="font_search">Rechercher une typo</label>
+            <input name="font_search" type="text" value="#ENV{font_search}">
+			#SET{font_search,#ENV{font_search}}
+        </div>
+        
+        <label for="sort">Trier par</label>
+            <select name="sort" id="sort">
+              <option value="popularity"[(#ENV{sort}|=={popularity}|?{' selected="selected"',''})]>Popularité</option>
+              <option value="alpha"[(#ENV{sort}|=={alpha}|?{' selected="selected"',''})]>Alphabétique</option>
+            </select>
+            
+        <label for="preview_text">Texte pour la preview</label>
+        <input type="text" name="preview_text" value='#ENV{preview_text, Grumpy wizards make toxic brew for the evil Queen and Jack.}'>
+        #SET{preview_text,#ENV{preview_text}}    
+        <label for="category">Catégories</label>
+        <select name="category" id="category">
+            <option value=""> Choisissez une catégorie</option>
+            <option value="serif"[(#ENV{category}|=={serif}|?{'selected="selected"',''})]>Sérif</option>
+            <option value="sans-serif"[(#ENV{category}|=={sans-serif}|?{'selected="selected"',''})]>Sans sérif</option>
+            <option value="display"[(#ENV{category}|=={display}|?{'selected="selected"',''})]>Display</option>
+            <option value="handwriting"[(#ENV{category}|=={handwriting}|?{'selected="selected"',''})]>Handwritting</option>
+            <option value="monospace"[(#ENV{category}|=={monospace}|?{'selected="selected"',''})]>Monospace</option>
+        </select>
+        
+        
+	  [(#REM)<!-- ajouter les saisies supplementaires : extra et autre, a cet endroit -->]
+	  <!--extra-->
+	  <p class='boutons'>
+        <input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+      </p>
+</BOUCLE_test><//B_test>  
+	</div>
+    </form>
+</div>
+
+[(#REM)<!--
+
+kind: webfonts#webfont
+family: ABeeZee
+category: sans-serif
+variants: regular, italic
+subsets: latin
+version: v11
+lastModified: 2017-10-10
+files: 
+ regular: http://fonts.gstatic.com/s/abeezee/v11/mE5BOuZKGln_Ex0uYKpIaw.ttf
+ italic: http://fonts.gstatic.com/s/abeezee/v11/kpplLynmYgP0YtlJA3atRw.ttf 
+
+-->]
+<BOUCLE_listResults(DATA){source table, #ENV{font_list/items}}{family LIKE %(#GET{font_search,''})%}{0,10}>
+<table>
+	<thead>
+		<tr>
+			<th>Famille</th>
+			<th>Catégorie</th>
+			<th>Subsets</th>
+			<th>Variantes</th>
+			<th>Version</th>
+			<th>Fichiers</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<a href="https://fonts.google.com/specimen/#VALEUR{family}" title="Voir le spécimen de #VALEUR{family} sur GoogleFont" target="_blank" rel="noreferrer noopener">
+					#VALEUR{family}
+				</a>
+			</td>
+			<td>#VALEUR{category}</td>
+			<td>[(#VALEUR{subsets}|foreach)]</td>
+			<td>[(#VALEUR{variants}|foreach)]</td>
+			<td>#VALEUR{version}</td>
+			<td>[(#VALEUR{files}|foreach)]</td>
+		</tr>
+	</tbody>
+</table>
+#SET{family,#VALEUR{family}}
+<!-- http://contrib.spip.net/SPIP-Bonux -->
+<BOUCLE_loop(POUR){tableau #VALEUR{variants}}>
+<iframe src="[(#URL_PAGE{webfont_preview}|parametre_url{font-family,#GET{family}}
+											|parametre_url{font-variant,#VALEUR}
+											|parametre_url{preview_text,#GET{preview_text}})]"
+		frameborder="0"
+		class="webfont_preview"></iframe>
+</BOUCLE_loop>
+
+
+
+</BOUCLE_listResults>
+
+
+
