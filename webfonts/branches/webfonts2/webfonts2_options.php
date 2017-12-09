@@ -9,4 +9,9 @@ if(!defined('_GOOGLE_API_KEY')) {
 	define('_GOOGLE_API_KEY','');
 }
 
+if(!defined('_WEBFONTS')) {
+	define('_WEBFONTS','');
+}
+
+
 ?>
