@@ -10,12 +10,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 
-function googlefont_request($webfonts){
+function googlefont_request($webfonts,$subsets=''){
+	$subset = '&subset=' ;
+	(strlen($subsets)) ? $subset .= $subsets : $subset = '';
 	foreach($webfonts as $font){
 		$variants = implode(',',$font['variants']);
 		$fonts[] = urlencode($font['family']).':'.$variants;	
 	}	
 	$fonts = implode('|',$fonts);
-	$request = "https://fonts.googleapis.com/css?family=$fonts";
+	$request = "https://fonts.googleapis.com/css?family=$fonts".$subset;
 	return $request;
 }

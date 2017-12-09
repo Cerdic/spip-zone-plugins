@@ -8,10 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 if(!defined('_GOOGLE_API_KEY')) {
 	define('_GOOGLE_API_KEY','');
 }
-
-if(!defined('_WEBFONTS')) {
-	define('_WEBFONTS','');
+// Définir les subsets appliqués globalements au font request
+// sous la forme 'greek, '
+if(!defined('_FONTS_SUBSETS')) {
+	define('_FONTS_SUBSETS','');
 }
-
-
-?>

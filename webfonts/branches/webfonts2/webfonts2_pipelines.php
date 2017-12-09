@@ -25,8 +25,8 @@ function webfonts2_insert_head_css($flux){
 		$webfonts = lister_webfonts();
 
 		if(is_array($webfonts)){
-			$font_request = googlefont_request($webfonts);
-			
+			(defined('_FONTS_SUBSETS')) ? $subsets= _FONTS_SUBSETS : $subsets='' ;
+			$font_request = googlefont_request($webfonts,$subsets);
 			if (strlen($font_request)) {
 				$code = '<link rel="stylesheet" type="text/css" href="'.$font_request.'" id="webfonts" />';
 				// le placer avant les autres CSS du flux
@@ -36,7 +36,6 @@ function webfonts2_insert_head_css($flux){
 				else
 					$flux .= $code;
 			}
-		
 		}
 		$done = true;	
 	}
@@ -46,7 +45,6 @@ function webfonts2_insert_head_css($flux){
 
 
 function lister_webfonts(){
-	
 	$fonts = pipeline('fonts_list',array(
 		'args'=>array(),
 		'data'=>$fonts
