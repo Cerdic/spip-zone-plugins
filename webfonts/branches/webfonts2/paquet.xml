@@ -17,6 +17,7 @@
 
 	<pipeline nom="autoriser" inclure="webfonts2_autorisations.php" />
 	<pipeline nom="insert_head_css" inclure="webfonts2_pipelines.php" />
+	<pipeline nom="fonts_list" inclure="webfonts2_pipelines.php" />
 
 	<menu nom="webfonts" titre="webfonts2:webfonts2_titre" parent="menu_squelette" icone="images/webfonts2-16.png" action="webfonts" />
 
