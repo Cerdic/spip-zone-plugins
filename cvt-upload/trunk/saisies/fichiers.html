@@ -9,6 +9,6 @@
 	[(#ENV{label_fichiers_individuels}|!={non}|oui|et{#ENV{nb_fichiers,1}|>{1}|oui})
 	<label for="#ENV{nom}_[(#VALEUR|moins{1})]"><:cvtupload:saisie_fichiers_plusieur_label{nb=#VALEUR}:></label>
 	]
-	<input type="file" class="file[ (#ENV{class})]" name="#ENV{nom}\[[(#VALEUR|moins{1})]\]" id="#ENV{nom}_[(#VALEUR|moins{1})]" size="40"[(#HTML5|oui)[ accept="(#GET{mime})"]]/>
+	<input type="file" class="file[ (#ENV{class})]" name="#ENV{nom}\[[(#VALEUR|moins{1})]\]" id="#ENV{nom}_[(#VALEUR|moins{1})]" size="40"[ accept="(#GET{mime})"] />
 </div>
 </BOUCLE_input>
