@@ -76,9 +76,17 @@ files:
  italic: http://fonts.gstatic.com/s/abeezee/v11/kpplLynmYgP0YtlJA3atRw.ttf 
 
 -->]
-<BOUCLE_listResults(DATA){source table, #ENV{font_list/items}}{category ?= #GET{category,'serif'}}{family ?LIKE %(#GET{font_search,''})%}{0,10}>
+#SET{preview,#ENV{preview, non}}
+#SET{font-infos,#ENV{font-infos, non}}
+<BOUCLE_listResults(DATA){source table, #ENV{font_list/items}}
+						{category ?= #GET{category}}
+						{family LIKE %(#GET{font_search})%}
+						{0,10}>
 
+<h2>#VALEUR{family}</h2>
 
+<!-- http://contrib.spip.net/SPIP-Bonux -->
+<BOUCLE_fontInfosCond(CONDITION){si #ENV{font-infos}|=={oui}}>
 <table>
 	<thead>
 		<tr>
@@ -105,8 +113,11 @@ files:
 		</tr>
 	</tbody>
 </table>
+</BOUCLE_fontInfosCond><//B_fontInfosCond>
 #SET{family,#VALEUR{family}}
 <!-- http://contrib.spip.net/SPIP-Bonux -->
+<BOUCLE_previewCond(CONDITION){si #ENV{preview}|=={oui}}>
+
 <BOUCLE_loop(POUR){tableau #VALEUR{variants}}>
 <iframe src="[(#URL_PAGE{webfont_preview}|parametre_url{font-family,#GET{family}}
 											|parametre_url{font-variant,#VALEUR}
@@ -115,6 +126,7 @@ files:
 		class="webfont_preview"></iframe>
 </BOUCLE_loop>
 
+</BOUCLE_previewCond><//B_previewCond>
 
 
 </BOUCLE_listResults>
