@@ -36,9 +36,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_id_objet_dest' => 'Id objet dest',
 	'label_objet' => 'Objet',
 	'label_objet_dest' => 'Objet cible',
+	'label_objets_liaison' => 'Objets qui peuvent être liés',
 	'label_ordre' => 'Ordre',
 	'label_titre' => 'Titre',
 	'label_url' => 'Url',
+	'liaison_choix_illimite' => 'Désactiver la limite de liaison par objet cibles',
+	'liaison_cible' => 'Liaison des cibles pour',
+	'liaison_objet' => 'Liaison',
+	'liaison_objet_cible_titre' => 'Objets cibles',
+	'liaison_objets_pour' => 'Liaison d\'objets pour',
+	'liaison_type_lien' => 'Type de lien',
+	'liaison_type_liens' => 'Définition des types de lien',
+
 
 	// O
 	'objet_destination_choisis' => 'Destination(s) choisie(s) :',
@@ -50,16 +59,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'racine' => 'Racine',
 	'retirer_lien_objet' => 'Retirer le lien à cet objet',
 	'retirer_tous_liens_liaison_objets' => 'Retirer toutes les liaisons d’objet',
-
-	// S
-	'liaison_choix_illimite' => 'Désactiver la limite de liaison par objet cibles',
-	'liaison_cible' => 'Liaison des cibles pour',
-	'liaison_objet' => 'Liaison',
-	'liaison_objet_cible_titre' => 'Objets cibles',
-	'liaison_objets_pour' => 'Liaison d\'objets pour',
-	'liaison_selection_objet' => 'Objets qui peuvent être liés',
-	'liaison_type_lien' => 'Type de lien',
-	'liaison_type_liens' => 'Définition des types de lien',
 
 	// T
 	'texte_ajouter_objet' => 'Lier un objet',

@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Signaler des abus
+ * Plugin Liaison d'objets
  * (c) 2012 My Chacra
  * Licence GNU/GPL
  */
@@ -54,25 +54,39 @@ function liaison_objet_vider_tables($nom_meta_base_version) {
 	*
  **/
 function selection2liaison() {
-	// D'abord, tester si on avait apparavent le plugin selection d'objet, et si oui, vérifier que c'était la version la plus récente. 
+	// D'abord, tester si on avait apparavent le plugin selection d'objet, et si oui, vérifier que c'était la version la plus récente.
 	$base_selection = lire_config("selection_objet_base_version");
 	if (!$base_selection){
 		return;
 	}
-	
+
 	if ($base_selection != "0.5.1") {
 		$message = "La migration depuis selection d'objet n'a pas fonctionné (base version != 0.5.1)";
 		spip_log ($message, "selection_objet"._LOG_ERREUR);
 		return $message;
 	}
 
-	// Idéalement il faudrait pouvoir désactiver l'ancien plugin automatiquement, mais je ne sais pas comment faire. Je n'arrive pas à comprendre s'il est possible de se servir de l'actionnaire de svp 
+	// Idéalement il faudrait pouvoir désactiver l'ancien plugin automatiquement, mais je ne sais pas comment faire. Je n'arrive pas à comprendre s'il est possible de se servir de l'actionnaire de svp
 	// Du coup pour le moment il faut un plugin désactivé, et puis ensuite on supprime le meta de l'ancien
 	effacer_config("selection_objet_base_version");
 
 	// On déplacer l'ancienne config
 	$cfg = lire_config('selection_objet');
-	ecrire_config("liaison_objet",$spip);
+
+	// Les cas spécifiques.
+	foreach (array('article', 'rubrique') AS $objet) {
+		if (isset($cfg['selection_' . $objet . '_dest'])) {
+			$cfg['liaison_' . $objet . '_dest'] = $cfg['selection_' . $objet . '_dest'];
+			unset($cfg['selection_' . $objet . '_dest']);
+		}
+	}
+
+	if (isset($cfg['selection_rubrique_objet'])) {
+		$cfg['objets_liaison'] = $cfg['selection_rubrique_objet'];
+		unset($cfg['selection_rubrique_objet']);
+	}
+
+	ecrire_config("liaison_objet", $cfg);
 	effacer_config("selection_objet");
 
 	// Supprimer la table qui vient tout juste d'être créer pour ce nouveau plugin
@@ -80,5 +94,6 @@ function selection2liaison() {
 	// Renommer la table de l'ancien plugin
 	sql_alter("TABLE `spip_selection_objets` RENAME  `spip_liaison_objets`");
 	//Modifier l'ancienne table
-	sql_alter("TABLE `spip_liaison_objets` CHANGE COLUMN `id_selection_objet` `id_liaison_objet` bigint(21)");
-}	
+	sql_alter("TABLE `spip_liaison_objets` CHANGE COLUMN `id_selection_objet` `id_liaison_objet` bigint(21) NOT NULL AUTO_INCREMENT");
+
+}

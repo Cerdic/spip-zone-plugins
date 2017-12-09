@@ -1,17 +1,17 @@
 <div class="formulaire_spip formulaire_bouton_objet ajax" id="formulaire_bouton_objet[_(#ENV{lang,no_lang})]">
 	<form action="#ENV{action}" method="post"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-	<ul>
-		[(#SAISIE{input,objet_sel,label=#ENV{label_objet}})]
-		[(#ENV{types_lien}|count|>{0}|oui)
-			[(#SAISIE{liaison,type_lien,
-				label=#ENV{label_lien},
-				datas=#ENV{types_lien}})]
-		]
-	</ul>
-	<p class="boutons">
-	<input type="submit" name="ok" class="submit" value="ok"  />
-	</p>
+		<ul>
+			[(#SAISIE{input,objet_sel,label=#ENV{label_objet}})]
+			[(#ENV{types_lien}|count|>{0}|oui)
+				[(#SAISIE{selection,type_lien,
+					label=#ENV{label_lien},
+					datas=#ENV{types_lien}})]
+			]
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="ok" class="submit" value="ok"  />
+		</p>
 	</div>
 	</form>
 
@@ -37,10 +37,10 @@
 		});
 	});
 	$(document).ready(function(){
-	$('#formulaire_bouton_objet[_(#ENV{lang,no_lang})] #champ_objet_sel').val('');
-	#SET{id,liaison_objets_#ENV{lang,no_lang}}
-	[(#ENV{message_ok}|oui)
-		$('#[(#GET{id})]').load('[(#URL_ACTION_AUTEUR{ranger,nouvel_ordre-[(#ENV{lang})]-0-0-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]}|parametre_url{load,prive/objets/liste/inc-liaison_interface}|parametre_url{id,#GET{id}}|replace{&amp;,&})]');
-			]
+		$('#formulaire_bouton_objet[_(#ENV{lang,no_lang})] #champ_objet_sel').val('');
+		#SET{id,liaison_objets_#ENV{lang,no_lang}}
+		[(#ENV{message_ok}|oui)
+			$('#[(#GET{id})]').load('[(#URL_ACTION_AUTEUR{ranger,nouvel_ordre-[(#ENV{lang})]-0-0-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]}|parametre_url{load,prive/objets/liste/inc-liaison_interface}|parametre_url{id,#GET{id}}|replace{&amp;,&})]');
+		]
 	});
 	</script>

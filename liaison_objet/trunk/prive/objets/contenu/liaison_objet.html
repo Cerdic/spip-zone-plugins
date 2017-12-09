@@ -1,25 +1,25 @@
 [(#VAL|include_spip{inc/pipelines_ecrire}|oui)]
 #SET{exception_page,#ARRAY{
-                        document,#ARRAY{
-                            type,document_edit,
-                            id_table_objet,id_document}
-                            }
-                        }
+			document,#ARRAY{
+					type,document_edit,
+					id_table_objet,id_document}
+					}
+			}
 <BOUCLE_objet(LIAISON_OBJETS){id_liaison_objet}{statut?}>
 [(#GET{exception_page}|table_valeur{#OBJET}?{
-    #SET{e_objet,#GET{exception_page}|table_valeur{#OBJET}|table_valeur{type}}
-    #SET{e_id_objet,#GET{exception_page}|table_valeur{#OBJET}|table_valeur{id_table_objet}}    ,
-    #SET{e,#OBJET|trouver_objet_exec}
-    #SET{e_objet,#GET{e}|table_valeur{type}}
-    #SET{e_id_objet,#GET{e}|table_valeur{id_table_objet}}        
+		#SET{e_objet,#GET{exception_page}|table_valeur{#OBJET}|table_valeur{type}}
+		#SET{e_id_objet,#GET{exception_page}|table_valeur{#OBJET}|table_valeur{id_table_objet}}    ,
+		#SET{e,#OBJET|trouver_objet_exec}
+		#SET{e_objet,#GET{e}|table_valeur{type}}
+		#SET{e_id_objet,#GET{e}|table_valeur{id_table_objet}}
 })]
-    
+
 [(#GET{exception_page}|table_valeur{#OBJET_DEST}?{
-    #SET{e_objet_dest,#GET{exception_page}|table_valeur{#OBJET_DEST}|table_valeur{type}}
-    #SET{e_id_objet_dest,#GET{exception_page}|table_valeur{#OBJET_DEST}|table_valeur{id_table_objet}}    ,
-    #SET{e_dest,#OBJET_DEST|trouver_objet_exec}
-    #SET{e_objet_dest,#GET{e_dest}|table_valeur{type}}
-    #SET{e_id_objet_dest,#GET{e_dest}|table_valeur{id_table_objet}}        
+		#SET{e_objet_dest,#GET{exception_page}|table_valeur{#OBJET_DEST}|table_valeur{type}}
+		#SET{e_id_objet_dest,#GET{exception_page}|table_valeur{#OBJET_DEST}|table_valeur{id_table_objet}}    ,
+		#SET{e_dest,#OBJET_DEST|trouver_objet_exec}
+		#SET{e_objet_dest,#GET{e_dest}|table_valeur{type}}
+		#SET{e_id_objet_dest,#GET{e_dest}|table_valeur{id_table_objet}}
 })]
 
 [<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
@@ -40,13 +40,13 @@
 [<div class="champ contenu_id_objet[ (#ID_OBJET*|strlen|?{'',vide})]">
 	<label><:liaison_objet:objet_lie_a:> : </label>
 	<a href="[(#URL_ECRIRE{#GET{e_objet},[(#GET{e_id_objet}|concat{=#ID_OBJET})]})]">(#OBJET|titre_objet_sel{#OBJET|info_objet{#ID_OBJET}}|supprimer_tags)
-	    </a>
+			</a>
 </div>]
 [<div class="champ contenu_id_objet[ (#ID_OBJET_DEST*|strlen|?{'',vide})]">
-    <label><:liaison_objet:label_objet_dest:> : </label>
-    <a href="[(#URL_ECRIRE{#GET{e_objet_dest},[(#GET{e_id_objet_dest}|concat{=#ID_OBJET_DEST})]})]">
-        (#OBJET_DEST|titre_objet_sel{#OBJET_DEST|info_objet{#ID_OBJET_DEST}}|supprimer_tags)
-        </a>
+		<label><:liaison_objet:label_objet_dest:> : </label>
+		<a href="[(#URL_ECRIRE{#GET{e_objet_dest},[(#GET{e_id_objet_dest}|concat{=#ID_OBJET_DEST})]})]">
+				(#OBJET_DEST|titre_objet_sel{#OBJET_DEST|info_objet{#ID_OBJET_DEST}}|supprimer_tags)
+				</a>
 </div>]
 
 
