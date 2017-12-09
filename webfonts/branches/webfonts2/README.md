@@ -6,6 +6,8 @@ L'utilisation du webfontloader,
 permet de mieux gérer le fallback utilisé lors du chargement
 ou de l'échec du chargement. wia des class `.wf-active`
 
+
+
 ## Configuration:
 
 Pour pouvoir afficher les fonts via l'api GoogleFont, il est nécessaire d'avoir
@@ -20,7 +22,42 @@ define('_GOOGLE_API_KEY', 'votre_clef_google_api');
 
 ou via la configuration du plugin.
 
+## Utilisation
 
+### Depuis un plugin
+
+Utilisation de la pipeline `fonts_list()`.
+
+Ajouter au `paquet.xml`
+
+```xml
+<pipeline nom="fonts_list" inclure="prefix_plugin_pipelines.php" />
+```
+
+
+```php
+
+function prefix_plugin_fonts_list($fonts){
+	$fonts = array(
+		'0'=> array(
+			'family'=> 'Open Sans',
+			'variants'=> array('300','300italic','regular','italic','600'),
+			'subsets'=>array()
+		),
+		'1'=> array(
+			'family'=> 'Roboto Condensed',
+			'variants'=> array('700','800'),
+			'subsets'=>array()
+		)
+	);
+	
+	return $fonts;
+}
+```
+
+
+
+----
 
 
 - GogleAPIKey : pour le listage et l'accès a la typthèque
@@ -33,9 +70,19 @@ https://github.com/typekit/webfontloader
 
 ## Sources & Docs
 
+https://developers.google.com/fonts/docs/developer_api
+
 Article sur l'implémentation du webfont loader
 Présentation par cssTricks du webfontLoader :
 https://css-tricks.com/loading-web-fonts-with-the-web-font-loader/
+
+Google font : webfont loader https://github.com/typekit/webfontloader
+
+ZACH LEATHERMAN (Filament Group):
+webfont loading strategies : https://www.zachleat.com/web/comprehensive-webfonts/
+
+Etapes du chargement d'une font dans le navigateur :
+https://font-display.glitch.me/
 
 
 ## ToDo
