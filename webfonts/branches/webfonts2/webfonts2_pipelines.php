@@ -5,6 +5,16 @@
  * Distribue sous licence GPL
  *
  */
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
+/**
+
+*/
+function webfonts2_fonts_list($fonts){
+	return $fonts;
+}
 
  /**
   * webfonts_insert_head_css
@@ -12,41 +22,47 @@
 function webfonts2_insert_head_css($flux){
 	static $done = false;
 	if (!$done){
-		$fonts = $GLOBALS['meta']['googlefonts_api'];
-		$fonts = array_map('trim',explode("\n",$fonts));
-		$fonts = array_map('urldecode',$fonts); // passer les + en ' '
-
-		// version directe google font api
-		$fonts = array_map('urlencode',$fonts);
-		$fonts = implode('|',$fonts);
-		if (strlen($fonts)) {
-			$code = '<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family='.$fonts.'" id="webfonts" />';
-			// le placer avant les autres CSS du flux
-			if (($p = strpos($flux,"<link"))!==false)
-				$flux = substr_replace($flux,$code,$p,0);
-			// sinon a la fin
-			else
-				$flux .= $code;
+		
+		
+		
+		$webfonts = lister_webfonts();
+		
+		//var_dump($webfonts);
+		if(is_array($webfonts)){
+			foreach($webfonts as $font){
+				$variants = implode(',',$font['variants']);
+				$subsets = '&subset=';
+				(isset($font['subsets'])) ? $subsets .= implode(',',$font['subsets']) : $subsets = '';
+				$fonts[] = urlencode($font['family']).':'.$variants.$subsets;	
+			}
+			
+			$fonts = implode('|',$fonts);
+			if (strlen($fonts)) {
+				$code = '<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family='.$fonts.'" id="webfonts" />';
+				// le placer avant les autres CSS du flux
+				if (($p = strpos($flux,"<link"))!==false)
+					$flux = substr_replace($flux,$code,$p,0);
+				// sinon a la fin
+				else
+					$flux .= $code;
+			}
+		
 		}
-
-		// version loader js, mais qui genere une requete google api...
-		/*
-		$fonts = array_map('addslashes',$fonts);
-		$fonts = implode("', '",$fonts);
-		if (strlen($fonts)) {
-			$fonts = "'$fonts'";
-			$code = '<script src="'.find_in_path('javascript/webfont.js').'" id="webfonts"></script>'
-			."<script>WebFont.load({
-  google: {
-    families: [$fonts]
-  }
-});</script>";
-			$flux = $code.$flux; // on le place en premier !
-		}*/
 		$done = true;
+	
 	}
 	return $flux;
 }
 
+
+
+function lister_webfonts(){
+	
+	$fonts = pipeline('fonts_list',array(
+		'args'=>array(),
+		'data'=>$fonts
+	));
+	return $fonts;
+}
 
 ?>
