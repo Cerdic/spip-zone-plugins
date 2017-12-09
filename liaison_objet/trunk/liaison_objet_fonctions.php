@@ -230,7 +230,7 @@ function generer_modele($id_objet, $objet = 'article', $fichier = 'modeles_liais
 	}
 
 	//Chercher le logo correpsondant
-	//Si il y a un logo Selection Objet
+	//Si il y a un logo Liaison Objet
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	$logo = $chercher_logo($contexte['id_liaison_objet'], 'id_liaison_objet', 'on');
 	$contexte['logo_objet'] = $logo[0];
@@ -240,6 +240,12 @@ function generer_modele($id_objet, $objet = 'article', $fichier = 'modeles_liais
 		$logo = $chercher_logo($id_objet, $_id_objet, 'on');
 		$contexte['logo_objet'] = $logo[0];
 	}
+
+	// Url Liaison Objet ou original.
+	if (!$contexte['url']) {
+		$contexte['url'] = generer_url_entite($id_objet, $objet);
+	}
+
 	$fond = recuperer_fond($fichier, $contexte);
 
 	return $fond;
