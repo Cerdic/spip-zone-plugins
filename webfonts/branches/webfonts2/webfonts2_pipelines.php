@@ -22,23 +22,13 @@ function webfonts2_fonts_list($fonts){
 function webfonts2_insert_head_css($flux){
 	static $done = false;
 	if (!$done){
-		
-		
-		
 		$webfonts = lister_webfonts();
-		
-		//var_dump($webfonts);
+
 		if(is_array($webfonts)){
-			foreach($webfonts as $font){
-				$variants = implode(',',$font['variants']);
-				$subsets = '&subset=';
-				(isset($font['subsets'])) ? $subsets .= implode(',',$font['subsets']) : $subsets = '';
-				$fonts[] = urlencode($font['family']).':'.$variants.$subsets;	
-			}
+			$font_request = googlefont_request($webfonts);
 			
-			$fonts = implode('|',$fonts);
-			if (strlen($fonts)) {
-				$code = '<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family='.$fonts.'" id="webfonts" />';
+			if (strlen($font_request)) {
+				$code = '<link rel="stylesheet" type="text/css" href="'.$font_request.'" id="webfonts" />';
 				// le placer avant les autres CSS du flux
 				if (($p = strpos($flux,"<link"))!==false)
 					$flux = substr_replace($flux,$code,$p,0);
@@ -48,8 +38,7 @@ function webfonts2_insert_head_css($flux){
 			}
 		
 		}
-		$done = true;
-	
+		$done = true;	
 	}
 	return $flux;
 }
