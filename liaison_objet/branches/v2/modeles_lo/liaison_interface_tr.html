@@ -1,0 +1,39 @@
+#CACHE{0}
+#SET{tables,#ENV{tables,#VAL|lister_tables_objets_sql}}
+<td>
+[(#ENV{compteur_boucle}|!={1}|oui)
+<div>
+		<a class="select" href="[(#URL_ACTION_AUTEUR{ranger,remonter_ordre-[(#ENV{langue})]-[(#ID_LIAISON_OBJET)]-#ORDRE-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]}|parametre_url{load,prive/objets/liste/inc-liaison_interface})]#liaison_objets"><img src="#CHEMIN{prive/themes/spip/images/fleche-haut.gif}" /></a>
+	</div>
+]
+[(#ENV{compteur_boucle}|!={#ENV{total_boucle}}|oui)
+	<div>
+		<a class="select" href="[(#URL_ACTION_AUTEUR{ranger,descendre_ordre-[(#ENV{langue})]-[(#ID_LIAISON_OBJET)]-#ORDRE-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]}|parametre_url{load,prive/objets/liste/inc-liaison_interface})]#liaison_objets"><img src="#CHEMIN{prive/themes/spip/images/fleche-bas.gif}" /></a>
+	</div>
+]
+</td>
+<td class='statut'>[(#STATUT|puce_statut{liaison_objet,#ID_LIAISON_OBJET})]</td>
+<td class="titre"> #SET{objet,#OBJET}
+[(#OBJET|=={document}|oui)#SET{objet,document_edit}]
+[(#SET{id,id_#OBJET})]
+[(#OBJET|=={site}|oui)
+	#SET{id,id_syndic}
+]
+	[<a class="select"  href="[(#URL_ECRIRE{#GET{objet}}|parametre_url{#GET{id},#ID_OBJET})]">(#ENV{logo_objet}|image_reduire{25}|sinon{#ENV{logo_objet}|image_reduire{25}|inserer_attribut{class,spip_logos}}) </a>] <a href="[(#URL_ECRIRE{#GET{objet}}|parametre_url{#GET{id},#ID_OBJET})]">[(#TITRE|sinon{#OBJET|info_objet{#ID_OBJET,#ENV{champ_titre}}})]</a> #SET{table,#OBJET|table_objet_sql}
+[
+	<div>
+		((#GET{tables}|table_valeur{#GET{table}}|table_valeur{texte_objet}|_T))
+	</div>]
+</td>
+<td class="type_lien">[(#TYPE_LIEN|nom_type{#OBJET_DEST})]</td>
+<td class="date">[(#DATE|affdate)]</td>
+<td class="id_objet"><b style="white-space: nowrap;">N°[(#ID_OBJET|>{0}|?{#ID_OBJET,#ID_LIAISON_OBJET})]</b></td>
+<td>
+[(#AUTORISER{modifier,liaison_objet,#ID_LIAISON_OBJET})
+	[(#ID_LIAISON_OBJET|afficher_qui_edite{liaison_objet}|non)
+		[(#URL_ECRIRE{liaison_objet_edit,id_liaison_objet=#ID_LIAISON_OBJET}|icone_verticale{<:liaison_objet:icone_modifier_liaison_objet:>,objet})]
+	]
+]
+</td>
+<td><a href="[(#URL_ACTION_AUTEUR{ranger,supprimer_ordre-[(#ENV{langue})]-[(#ID_LIAISON_OBJET)]-#ORDRE-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]}|parametre_url{load,prive/objets/liste/inc-liaison_interface})]#liaison_objets" class="select"><img src="#CHEMIN{prive/themes/spip/images/item-remove.png}" alt="X" /></a>
+</td>

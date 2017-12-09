@@ -1,0 +1,26 @@
+<paquet
+	prefix="liaison_objet"
+	categorie="edition"
+	version="2.0.0"
+	etat="stable"
+	compatibilite="[3.0.5;3.2.*]"
+	logo="prive/themes/spip/images/liaison_objet-64.png"
+	documentation="https://contrib.spip.net/"
+	schema="1.0.0"
+>
+
+	<nom>Liaison d'objets</nom>
+	<auteur lien='http://websimple.be'>Rainer Müller</auteur>
+	<licence>GNU/GPL</licence>
+	<necessite nom="saisies" compatibilite="[2.0.3;]" />
+	<pipeline nom="autoriser" inclure="liaison_objet_autorisations.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/liaison_objet.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/liaison_objet.php" />
+	<pipeline nom="affiche_milieu" inclure="liaison_objet_pipelines.php" />
+	<pipeline nom="affiche_gauche" inclure="liaison_objet_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="liaison_objet_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="liaison_objet_pipelines.php" />
+	<pipeline nom="jqueryui_plugins" inclure="liaison_objet_pipelines.php" />
+	<pipeline nom="header_prive" inclure="liaison_objet_pipelines.php" />
+
+</paquet>
