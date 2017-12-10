@@ -1,9 +1,9 @@
 <paquet
 	prefix="import_ics"
 	categorie="date"
-	version="4.4.0"
+	version="4.4.1"
 	etat="stable"
-	compatibilite="[3.0.7;3.1.*]"
+	compatibilite="[3.0.7;3.2.*]"
 	logo="prive/themes/spip/images/import_ics-64.png"
 	documentation="https://contrib.spip.net/4816"
 	schema="1.0.10"
