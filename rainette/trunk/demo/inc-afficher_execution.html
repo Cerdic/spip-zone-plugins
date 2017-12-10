@@ -1,0 +1,30 @@
+[(#REM) <!--
+	Afficher les données d'execution des services, à savoir, les compteurs d'appels de chaque service.
+	Arguments :
+	- aucun
+-->]
+
+<B_service>
+<table class="spip">
+	<caption><strong>Ex&eacute;cution des services</strong></caption>
+	<thead>
+		<tr>
+			<th>Services</th>
+		<BOUCLE_head(DATA) {source table, #LISTE{'dernier_appel', year, month, day, hour, minute}}>
+			<th>#VALEUR</th>
+		</BOUCLE_head>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_service(DATA) {source table, #ENV{execution}}>
+		<tr>
+			<td>[(#CLE)]</td>
+		<BOUCLE_execution(DATA) {source table, #VALEUR}>
+			<td>[(#VALEUR)]</td>
+		</BOUCLE_execution>
+		</tr>
+</BOUCLE_service>
+	</tbody>
+</table>
+</B_service>
+<//B_service>

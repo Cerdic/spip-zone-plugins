@@ -709,6 +709,7 @@ function normaliser_texte_erreur($erreur, $lieu, $mode, $modele, $service) {
 		case 'analyse_json':
 		// Cas d'erreur où le service renvoie aucune donnée sans pour autant monter une erreur.
 		case 'aucune_donnee':
+		// Cas d'erreur où le nombre de requêtes maximal a été atteint.
 			$texte['principal'] .= _T("rainette:erreur_${type_erreur}", array('service' => $titre_service));
 			$texte['conseil'] .= _T('rainette:erreur_conseil_equipe');
 			break;
@@ -722,6 +723,11 @@ function normaliser_texte_erreur($erreur, $lieu, $mode, $modele, $service) {
 			}
 			$texte['principal'] .= _T("rainette:erreur_${type_erreur}_${mode}", array('service' => $titre_service, 'lieu' => $lieu));
 			$texte['conseil'] .= _T('rainette:erreur_conseil_service');
+			break;
+		// Cas d'erreur où le nombre de requêtes maximal a été atteint.
+		case 'limite_service':
+			$texte['principal'] .= _T("rainette:erreur_${type_erreur}", array('service' => $titre_service));
+			$texte['conseil'] .= _T('rainette:erreur_conseil_limite');
 			break;
 		// Cas d'erreur du à une mauvause utilisation des modèles
 		case 'modele_periodicite':

@@ -72,8 +72,8 @@ $GLOBALS['rainette_apixu_config']['service'] = array(
 		),
 		'defaut'      => 'en'
 	),
-	'requetes' => array(
-		'mois'        => 5000
+	'limites' => array(
+		'month'       => 5000
 	)
 );
 

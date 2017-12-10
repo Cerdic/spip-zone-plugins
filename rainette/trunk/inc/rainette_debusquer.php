@@ -5,9 +5,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 if (!defined('_RAINETTE_DEBUG')) {
+	/**
+	 * Activation ou désactivation des traces de debug.
+	 */
 	define('_RAINETTE_DEBUG', false);
 }
 if (!defined('_RAINETTE_DEBUG_CLES_PREVISIONS')) {
+	/**
+	 * Clé jour par défaut utiliser pour afficher les prévisions : jour suivant.
+	 */
 	define('_RAINETTE_DEBUG_CLES_PREVISIONS', '1');
 }
 
@@ -15,7 +21,6 @@ if (!defined('_RAINETTE_DEBUG_CLES_PREVISIONS')) {
 /**
  * @param string $lieu
  * @param string $mode
- * @param int    $periodicite
  * @param string $service
  *
  * @return string
@@ -63,6 +68,27 @@ function rainette_dbg_afficher_cache($lieu, $mode = 'previsions', $service = 'we
 
 
 /**
+ * @param string $lieu
+ * @param string $mode
+ * @param string $service
+ *
+ * @return string
+ */
+function rainette_dbg_afficher_config() {
+	$debug = '';
+
+	// Recuperation du tableau des conditions courantes
+	if (_RAINETTE_DEBUG and function_exists('bel_env')) {
+		include_spip('inc/config');
+		$execution = lire_config('rainette_execution', array());
+		$debug = bel_env(serialize($execution), true);
+	}
+
+	return $debug;
+}
+
+
+/**
  * @param string $mode
  * @param array  $jeu
  *
@@ -81,12 +107,7 @@ function rainette_dbg_comparer_services($mode = 'conditions', $jeu = array()) {
 
 	if ($config_donnees) {
 		if (!$jeu) {
-			$jeu = array(
-				'weather'      => 'FRXX0076',
-				'owm'          => 'Paris,Fr',
-				'wwo'          => 'Paris,France',
-				'wunderground' => 'Paris,France'
-			);
+			$jeu = rainette_dbg_jeu_defaut();
 		}
 
 		// On boucle sur chaque jeu de demo
@@ -107,7 +128,7 @@ function rainette_dbg_comparer_services($mode = 'conditions', $jeu = array()) {
 			lire_fichier($nom_cache, $contenu_cache);
 			$tableau = unserialize($contenu_cache);
 
-			if (!$tableau['extras']['erreur']) {
+			if (!$tableau['extras']['erreur']['type']) {
 				// Suivant le mode on extrait les données à afficher. Pour le mode prévisions, on choisit le
 				// jour suivant le jour courant et pour les données heures l'index 0 qui existe toujours.
 				// En outre, il faut tenir compte pour les prévisions qu'il existe des données "jour" et
@@ -182,8 +203,69 @@ function rainette_dbg_afficher_donnee($donnee, $valeur, $type_php, $type_unite, 
 	return $texte;
 }
 
+/**
+ * @return array
+ */
+function rainette_dbg_jeu_defaut() {
 
-function trouver_langue_manquante() {
+	$jeu = array();
+
+	include_spip('rainette_fonctions');
+	$services = rainette_lister_services();
+	if ($services) {
+		foreach ($services as $_service) {
+			if (($_service == 'weather') or ($_service == 'wunderground')) {
+				$jeu[$_service] = 'FRXX0076';
+			} else {
+				$jeu[$_service] = 'Paris,France';
+			}
+		}
+	}
+
+	return $jeu;
+}
+
+/**
+ * @return array
+ */
+function rainette_dbg_afficher_execution() {
+
+	$debug = array();
+
+	$services = rainette_lister_services();
+	if ($services) {
+		include_spip('inc/config');
+		$execution = lire_config('rainette_execution', array());
+
+		foreach ($services as $_service) {
+			include_spip("services/${_service}");
+			$configurer = "${_service}_service2configuration";
+			$configuration = $configurer('infos');
+
+			$debug[$_service]['dernier_appel'] = isset($execution[$_service]['dernier_appel'])
+				? $execution[$_service]['dernier_appel']
+				: '--';
+			foreach (array('year', 'month', 'day', 'hour', 'minute') as $_periode) {
+				if (isset($configuration['limites'][$_periode])) {
+					$compteur = isset($execution[$_service]['compteurs'][$_periode])
+						? $execution[$_service]['compteurs'][$_periode]
+						: '--';
+					$debug[$_service][$_periode] = "${compteur} / {$configuration['limites'][$_periode]}";
+				} else {
+					$debug[$_service][$_periode] = '';
+				}
+			}
+		}
+	}
+
+	return $debug;
+}
+
+/**
+ * Fonction permettant de vérifier si la liste des langues de SPIP a changé et qu'il faut modifier la config rainette.
+ *
+ */
+function rainette_dbg_verifier_langue_manquante() {
 	include_spip('inc/lang_liste');
 	include_spip('inc/rainette_normaliser');
 	foreach ($GLOBALS['codes_langues'] as $code => $langue) {

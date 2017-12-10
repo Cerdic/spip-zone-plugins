@@ -10,12 +10,7 @@
 
 #SET{service, #ENV{service, weather}}
 #SET{mode, #ENV{mode, conditions}}
-#SET{jeu, #ARRAY{
-			'weather', 'FRXX0076',
-			'owm', 'Paris,Fr',
-			'wwo', 'Paris,France',
-			'apixu', 'Paris,France',
-			'wunderground', 'FRXX0076'}}
+#SET{jeu, #VAL|rainette_dbg_jeu_defaut}
 #SET{lieu, #ENV{ville, #GET{jeu/#GET{service}}}}
 
 <body>
@@ -102,11 +97,27 @@
 			</p>
 			<div class="clearfix">
 				<br />
-				#SET{donnees, #GET{mode}|rainette_dbg_comparer_services{#GET{jeu}, 0}}
+				#SET{donnees, #GET{mode}|rainette_dbg_comparer_services{#GET{jeu}}}
 				#INCLURE{fond=demo/inc-comparer_services,
 					jeu=#GET{jeu},
 					donnees=#GET{donnees},
 					mode=#GET{mode}}
+			</div>
+
+
+			<h2 class="h2">3 - ETAT D'EXECUTION DES SERVICES</h2>
+			<a name="execution" href="#"></a>
+			<div class="clearfix">
+				#SET{execution, #VAL|rainette_dbg_afficher_execution}
+				#INCLURE{fond=demo/inc-afficher_execution, execution=#GET{execution}}
+				[<div class="clearfix"><br />(#VAL|rainette_dbg_afficher_config)</div>]
+			</div>
+
+
+			<h2 class="h2">4. - LANGUES SPIP NON INTEGREES</h2>
+			<a name="langues" href="#"></a>
+			<div class="clearfix">
+				[(#VAL|rainette_dbg_verifier_langue_manquante|sinon{'Aucune langue SPIP manque'})]
 			</div>
 		</div>
 	</div>

@@ -117,9 +117,9 @@ $GLOBALS['rainette_wunderground_config']['service'] = array(
 		),
 		'defaut'      => 'EN'
 	),
-	'requetes' => array(
-		'jour'        => 500,
-		'1minute'     => 10
+	'limites' => array(
+		'day'         => 500,
+		'minute'      => 10
 	)
 );
 

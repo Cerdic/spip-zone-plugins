@@ -56,8 +56,8 @@ $GLOBALS['rainette_owm_config']['service'] = array(
 		),
 		'defaut'      => 'en'
 	),
-	'requetes' => array(
-		'minute'     => 60
+	'limites' => array(
+		'minute'      => 60
 	)
 );
 

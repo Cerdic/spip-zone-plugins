@@ -33,7 +33,7 @@ $GLOBALS['rainette_weather_config']['service'] = array(
 		'disponibles' => array(),
 		'defaut'      => 'en'
 	),
-	'requetes' => array()
+	'limites' => array()
 );
 
 // Configuration des données fournies par le service wunderground pour le mode 'infos'.

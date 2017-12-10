@@ -72,8 +72,8 @@ $GLOBALS['rainette_wwo_config']['service'] = array(
 		),
 		'defaut'      => 'en'
 	),
-	'requetes' => array(
-		'jour'        => 500
+	'limites' => array(
+		'day'         => 500
 	)
 );
 
