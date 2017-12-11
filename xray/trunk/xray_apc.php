@@ -204,6 +204,7 @@ $vardom = array(
 	'exec' => '/^[a-zA-Z_\-0-9]+$/', // pour #URL_ECRIRE{xray}
 	'OB' => '/^\d+$/', // operational mode switch
 	'CC' => '/^[01]$/', // clear cache requested
+	'PP' => '/^[01]$/', // Purger Précache de compilation des squelettes en plus de vider le cache APC user
 	'DU' => '/^.*$/', // Delete User Key
 	'SH' => '/^[a-z0-9]*$/', // shared object description
 	
@@ -309,6 +310,13 @@ EOB;
 
 // clear cache
 if ($AUTHENTICATED && isset($MYREQUEST['CC']) && $MYREQUEST['CC']) {
+	apcu_clear_cache();
+}
+
+// clear cache
+if ($AUTHENTICATED && isset($MYREQUEST['PP']) && $MYREQUEST['PP']) {
+	include_spip('inc/invalideur');
+	purger_repertoire(_DIR_SKELS);
 	apcu_clear_cache();
 }
 
@@ -850,7 +858,7 @@ div.div3 { position:absolute; left:40em; top:1em; width:580px; }
 
 div.sorting { margin:1.5em 0em 1.5em 2em }
 .center { text-align:center }
-.aright { position:absolute;right:1em }
+.aright { float: right; }
 .right { text-align:right }
 .ok { color:rgb(0,200,0); font-weight:bold}
 .failed { color:rgb(200,0,0); font-weight:bold}
@@ -926,7 +934,13 @@ echo menu_entry(OB_HOST_STATS, 'View Host Stats'), menu_entry(OB_USER_CACHE, 'Us
 
 if ($AUTHENTICATED) {
 	echo <<<EOB
-		<li><a class="aright" href="$MY_SELF&CC=1" onClick="javascript:return confirm('Are you sure?');">Clear Cache</a></li>
+		<li><a class="aright" href="$MY_SELF&CC=1" onClick="javascript:return confirm('Are you sure?');"
+			title="Vider le cache APC user">Vider APC</a></li>
+		<li><a class="aright" href="$MY_SELF&PP=1" 
+				onClick="javascript:return confirm('Êtes-vous certain de vouloir vider le cache APC user et le dossier skel/ des squelettes compilés ?');"
+				title="Vider le cache APC user ET effacer les caches de compilation des squelettes ?">
+				Purger SPIP</a></li>
+		
 EOB;
 }
 echo <<<EOB
