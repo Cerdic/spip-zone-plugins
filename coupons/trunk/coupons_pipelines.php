@@ -88,3 +88,33 @@ function coupons_post_edition($flux) {
 	
 	return $flux;
 }
+
+function coupons_affiche_milieu($flux) {
+	if ($flux['args']['exec'] == 'commande' && $flux['args']['id_commande']) {
+		$details              = sql_allfetsel(
+			'id_commandes_detail',
+			'spip_commandes_details',
+			'id_commande=' . $flux['args']['id_commande']
+		);
+		$id_commandes_details = array();
+		foreach ($details as $detail) {
+			$id_commandes_details[] = $detail['id_commandes_detail'];
+		}
+		if (count($id_commandes_details)) {
+			$texte = recuperer_fond(
+				'prive/objets/liste/coupons',
+				array(
+					'where' => 'id_commandes_detail_origine IN (' . join(',', $id_commandes_details) . ')',
+				)
+			);
+			if (($p = strpos($flux['data'], '<!--afficher_fiche_objet-->')) !== false) {
+				$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
+			} else {
+				$flux['data'] .= $texte;
+			}
+		}
+
+	}
+
+	return $flux;
+}
