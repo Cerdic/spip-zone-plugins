@@ -128,6 +128,12 @@ if (!defined("_ECRIRE_INC_VERSION"))
 			$evenements = array();
 			$articles = array();
 			while ($row = sql_fetch($sql)) {
+				// extraire des multi.
+				$row['titre'] = extraire_multi($row['titre']);
+				$row['descriptif'] = extraire_multi($row['descriptif']);
+				$row['lieu'] = extraire_multi($row['lieu']);
+				$row['adresse'] = extraire_multi($row['adresse']);
+
 				$evenements[$row['id_evenement']] = $row;
 				$articles[] = $row['id_article'];
 			}

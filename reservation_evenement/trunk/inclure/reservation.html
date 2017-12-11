@@ -5,7 +5,7 @@
 	<BOUCLE_reservation_details(RESERVATIONS_DETAILS){id_reservation}{id_reservations_detail ?}{tout}>
 		#SET{details, #GET{details}|push{
 			#ARRAY{
-				descriptif,#QUANTITE|>{1}|?{#QUANTITE&times;}|concat{#DESCRIPTIF*|supprimer_numero},
+				descriptif,#QUANTITE|>{1}|?{#QUANTITE&times;}|concat{#DESCRIPTIF*|extraire_multi|supprimer_numero},
 				quantite, #QUANTITE,
 				prix, #PRIX*,
 				statut,#STATUT
