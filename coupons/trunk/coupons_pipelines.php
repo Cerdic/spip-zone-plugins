@@ -58,7 +58,7 @@ function coupons_post_edition($flux) {
 						'montant'                    => $montant_coupon,
 						'restriction_taxe'           => $bon['taxe'],
 						'id_commandes_detail_origine' => $bon['id_commandes_detail'],
-						'titre'                      => $bon['titre'] . ' ' . html_entity_decode(prix_formater($montant_coupon)),
+						'titre'                      => $bon['titre'] . ' ' . supprimer_tags(prix_formater($montant_coupon)),
 						'code'                       => coupon_generer_code(),
 					);
 					objet_modifier('coupon', $id_coupon, $valeurs_coupon);
