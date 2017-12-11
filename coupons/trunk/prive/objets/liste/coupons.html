@@ -19,7 +19,9 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_coupons(COUPONS){id_commande_origine?}{id_commande?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_coupons(COUPONS)
+		{id_commandes_detail_origine?}{id_mot?}{id_auteur?}{where?}{recherche?}
+		{tri #ENV{par,date},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="picto">[(#CHEMIN_IMAGE{coupon-16.png}|balise_img)]</td>
 			<td class="titre principale">[(#LOGO_COUPON|image_reduire{20,26})]<a href="[(#ID_COUPON|generer_url_entite{coupon})]" title="<:info_numero_abbreviation|attribut_html:> #ID_COUPON">[(#RANG). ]#TITRE</a></td>
