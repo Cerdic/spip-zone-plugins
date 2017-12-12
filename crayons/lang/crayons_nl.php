@@ -22,9 +22,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'donnees_mal_formatees' => 'Slecht geformatteerde gegevens',
 
 	// E
-	'editer' => 'Uitgeven',
-	'editer_@type@_@id@' => '@type@ @id@ in geheel uitgeven',
-	'editer_tout' => 'Alles uitgeven',
+	'editer' => 'Aanpassen',
+	'editer_@type@_@id@' => '@type@ @id@ geheel aanpassen',
+	'editer_tout' => 'Alles aanpassen',
 	'effets' => 'Gevolgen',
 	'explication_exec_autorise' => 'Pagina’s die mogen worden gewijzigd
   (?exec=...) : (, om de exec’s te scheiden - * voor alle).',
@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_activer_barre_typo' => 'De typografische knoppenbalk in De Krijtjes activeren?',
-	'label_activer_crayons_prive' => 'Schakel Krijtjes in voor het private deel.',
+	'label_activer_crayons_prive' => 'Schakel Krijtjes in voor het privé gedeelte.',
 	'label_barre_typo' => 'Typografische knoppenbalk',
 	'label_clickhide' => 'Een klik erbuiten verbergt Krijtjes',
 	'label_effets' => 'Effectenkeuze',
@@ -56,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_controleur_logo_remplacer' => 'Vervang dit logo',
 	'legend_controleur_qui' => 'Wat?',
 	'legend_controleur_vignette' => 'Selecteer een miniatuur :',
-	'legend_controleur_vignette_remplacer' => 'Vervang deze tag',
+	'legend_controleur_vignette_remplacer' => 'Vervang dit miniatuur',
 	'legend_documents' => 'Upload van documenten',
 	'legend_editer_prive' => 'Bewerk het private deel (experimenteel)',
 	'legend_introduction_article' => 'Aanhef van artikel',
@@ -81,7 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_config_crayons' => 'Krijtjes configureren',
-	'titre_crayons' => 'Podloden',
+	'titre_crayons' => 'Krijtjes',
 
 	// U
 	'update_impossible' => 'De update is niet geslaagd.',
