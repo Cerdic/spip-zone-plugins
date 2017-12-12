@@ -1,0 +1,31 @@
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+		<a href="#ENV{retour,#URL_ECRIRE{sympatic_tous}}" class="icone36" style="float:left;">
+			<img width="24" height="24" src="#CHEMIN{images/sympatic-24.png}" />
+			<span><:retour:></span>
+		</a>
+		[(#VAL{id_liste}|_request|?{<:sympatic:titre_modifier_liste:>,<:sympatic:titre_creer_liste:>})]
+		<h1>
+			<BOUCLE_liste(SYMPATIC_LISTES){id_liste}>
+			#TITRE
+			</BOUCLE_liste>
+			[(#ENV{nouveau}|=={oui}|?{<:info_sans_titre:>,#VAL{id_liste}|_request})]
+			<//B_liste>
+		</h1>
+	</div>
+	#FORMULAIRE_SYMPATIC_EDITER_LISTE{#ENV{id_liste},#ENV{retour,#URL_ECRIRE{sympatic_tous}}}
+</div>
+
+<!--#navigation-->
+[(#ENV{id_liste,0}|intval|oui)
+<div class="cadre infos cadre-info">
+	<div class="numero">
+		<:sympatic:info_numero_liste:>
+		<p>[(#ENV{id_liste})]</p>
+	</div>
+</div>
+]
+<!--/#navigation-->
+
+<!--#extra-->
+<!--/#extra-->
