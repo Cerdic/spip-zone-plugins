@@ -12,6 +12,8 @@ function autoriser_sympatic_dist($faire, $type, $id, $qui, $opt) {
 		case 'onglet':
 		case 'configurer':
 		case 'voir':
+		case 'creer':
+		case 'editer':
 		case 'modifier':
 		case 'supprimer':
 			return ($qui['statut'] == '0minirezo');
