@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
 /*
  * abonne/désabonne un auteur d'une liste sympatic
  * 
@@ -21,7 +25,7 @@ function sympatic_traiter_abonnement($id_liste,$id_auteur,$action,$email=''){
 	if ($liste_data['visible'] < $GLOBALS['visiteur_session']['statut'])
 		return true;
 	
-	$sujet=null;
+	$sujet = null;
 	
 	spip_log("traiter abonnement liste : $id_liste | action : $action | id_auteur : $id_auteur","sympatic");
 	
@@ -36,10 +40,10 @@ function sympatic_traiter_abonnement($id_liste,$id_auteur,$action,$email=''){
 	// envoi de mail via facteur et ajout/suppression dans la table sympatic_abonnes
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 	if ($envoyer_mail($liste_data['email_robot'], $sujet, 'hop sympatic')){
-		if ($action=='abonner'){
+		if ($action == 'abonner') {
 			sql_insertq('spip_sympatic_abonnes', array('id_liste' => intval($id_liste), 'id_auteur' => intval($id_auteur)));
 		}
-		if ($action=='desabonner'){
+		if ($action == 'desabonner') {
 			sql_delete('spip_sympatic_abonnes','id_liste='.intval($id_liste).' AND id_auteur='.intval($id_auteur));
 		}
 		return true;
@@ -47,5 +51,3 @@ function sympatic_traiter_abonnement($id_liste,$id_auteur,$action,$email=''){
 	else
 		return false;
 }
-
-?>
