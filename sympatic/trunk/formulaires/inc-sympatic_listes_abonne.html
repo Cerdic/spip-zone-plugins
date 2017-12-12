@@ -1,4 +1,4 @@
-<li class="editer editer_listes saisie_checkbox[(#REM|test_espace_prive|oui)fieldset]">
+<div class="editer editer_listes saisie_checkbox[(#REM|test_espace_prive|oui)fieldset]">
 	<p class="explication"><:sympatic:explication_listes:></p>
 	<BOUCLE_listes(SYMPATIC_LISTES){par num titre, titre}{visible>=#SESSION{statut}}>
 	<div class="choix">
@@ -8,4 +8,4 @@
 		<label for="champ_listes_#COMPTEUR_BOUCLE">[<strong>(#TITRE|supprimer_numero)</strong>][ : (#DESCRIPTIF*)]</label>
 	</div>
 	</BOUCLE_listes>
-</li>
+</div>
