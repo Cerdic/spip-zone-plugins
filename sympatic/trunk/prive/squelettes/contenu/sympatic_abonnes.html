@@ -1,0 +1,5 @@
+<BOUCLE_liste(SYMPATIC_LISTES){id_liste}>
+<h1 class="grostitre"><:sympatic:titre_page_abonnes{titre=#TITRE}:></h1>
+</BOUCLE_liste>
+
+<INCLURE{fond=prive/objets/liste/sympatic_abonnes,nb=#ENV{nb,150},env,ajax,sinon=<:sympatic:abonnes_aucun:>} />

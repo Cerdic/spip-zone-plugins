@@ -11,7 +11,7 @@ function action_supprimer_sympatic_dist(){
 	
 	list($id_liste) = preg_split(',[^0-9],',$arg);
 	include_spip('inc/autoriser');
-	if (intval($id_liste) and autoriser('supprimer','liste',$id_liste,null,null)){
+	if (intval($id_liste) and autoriser('supprimer', 'liste', $id_liste)) {
 		sql_delete("spip_sympatic_listes","id_liste = $id_liste");
 		sql_delete("spip_sympatic_abonnes","id_liste = $id_liste");
 	}

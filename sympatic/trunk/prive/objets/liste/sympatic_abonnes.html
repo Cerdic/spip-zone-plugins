@@ -1,0 +1,33 @@
+[(#SET{defaut_tri,#ARRAY{
+	nom,1,
+	id_auteur,1,
+	email,1
+}})
+]
+<B_abos>
+#ANCRE_PAGINATION
+<div class="liste-objets sympatic_abonnes">
+<table class="spip liste">
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{sympatic:abonnes_un,sympatic:abonnes_nb}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="id" scope="col">[(#TRI{id_auteur,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class="nom principale" scope="col">[(#TRI{nom,<:info_nom:>,ajax})]</th>
+			<th class="email" scope="col">[(#TRI{email,<:email:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+		<BOUCLE_abos(AUTEURS sympatic_abonnes){id_liste}{tri #ENV{par,nom},#GET{defaut_tri}}{pagination #ENV{nb,150}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="id">[(#ID_AUTEUR)]</td>
+			<td class="nom principale">[(#NOM)]</td>
+			<td class="email">[(#EMAIL)]</td>
+		</tr>
+		</BOUCLE_abos>
+	</tbody>
+</table>
+[<div class="pagination">(#PAGINATION)</div>]
+</div>
+</B_abos>[
+<div class="liste-objets articles caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_abos>

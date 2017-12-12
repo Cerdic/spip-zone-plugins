@@ -5,7 +5,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
-	'abonne_0' => '0 abonné',
+	'abonnes' => 'Abonnés',
+	'abonnes_0' => '0 abonné',
+	'abonnes_aucun' => 'Aucun abonné',
 	'abonnes_un' => '1 abonné',
 	'abonnes_nb' => '@nb@ abonnés',
 	
@@ -32,6 +34,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_emails' => 'Adresses email',
 	'legend_listes' => 'Listes de diffusion',
 	'liste_non_existante' => 'Cette liste n\'existe pas.',
+	'listes_0' => '0 liste',
+	'listes_aucune' => 'Aucune liste',
+	'listes_nb' => '@nb@ listes',
+	'listes_un' => '1 liste',
 
 // M
 	'message_abonnement_erreur' => 'Erreur lors de la mise à jour de vos abonnements.',
