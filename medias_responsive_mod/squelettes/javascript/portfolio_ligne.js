@@ -97,14 +97,12 @@ function calculer_portfolio_ligne () {
 			
 			l_total += l_temp;
 			
-			
 			if ($(this).is(":last-child")) {
 				$(this).css(m_right, 0);
 				
 				var rapport = false;
 				if ( l_total + ((num-1)-num_deb)*portfolio_ligne_marge > 0.3*l_max) {
-					rapport = ( l_max -  ((num-1)-num_deb)*portfolio_ligne_marge ) / l_total;
-					
+					rapport = ( l_max -  ((num)-num_deb)*portfolio_ligne_marge ) / l_total;
 					hauteur = taille_max * rapport;
 					hauteur_boite = Math.round(hauteur);
 				}
@@ -112,6 +110,7 @@ function calculer_portfolio_ligne () {
 				var total_ligne  = 0;				
 				for (i = num_deb; i <= num; i++) {
 					var t = $(this).parent("ul").find("li:nth-child("+i+")");
+					
 					if (total_ligne == 0) t.css("clear", "both");
 
 					if (!hauteur_boite) {
@@ -140,7 +139,6 @@ function calculer_portfolio_ligne () {
 					} else {
 						t.css(m_left, "");
 					}
-
 
 					t.width(h);
 		
