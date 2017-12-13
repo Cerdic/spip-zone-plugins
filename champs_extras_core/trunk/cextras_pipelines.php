@@ -459,6 +459,7 @@ function cextras_crayons_controleur($flux) {
 	$id = $flux['args']['id'];
 	$table = table_objet_sql($type);
 
+	include_spip('inc/cextras');
 	// Il n'existe pas de controleur spécifique pour ce champ. Voyons si ce champ est un champs extra
 	$saisies = champs_extras_objet($table);
 	// Restreindre aux vrais champs en bdd
