@@ -20,7 +20,7 @@
 	<pipeline nom="autoriser" inclure="sympatic_autoriser.php" />
 	<pipeline nom="pre_edition" inclure="sympatic_pipelines.php" />
 	<pipeline nom="post_edition" inclure="sympatic_pipelines.php" />
-	<pipeline nom="afficher_contenu_objet" inclure="sympatic_pipelines.php" />
+	<pipeline nom="affiche_auteurs_interventions" inclure="sympatic_pipelines.php" />
 
 	<necessite nom="saisies" compatibilite="[1.1;[" />
 
