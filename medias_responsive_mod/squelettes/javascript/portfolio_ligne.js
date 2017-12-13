@@ -72,6 +72,7 @@ function calculer_portfolio_ligne () {
 				
 				
 					var t = $(this).parent("ul").find("li:nth-child("+i+")");
+					
 
 					if (total_ligne == 0) t.css("clear", "both");
 
@@ -111,7 +112,8 @@ function calculer_portfolio_ligne () {
 				var total_ligne  = 0;				
 				for (i = num_deb; i <= num; i++) {
 					var t = $(this).parent("ul").find("li:nth-child("+i+")");
-					
+					if (total_ligne == 0) t.css("clear", "both");
+
 					if (!hauteur_boite) {
 						if (rapport) {
 							hauteur_boite = taille_max * rapport * 1.3;
