@@ -38,7 +38,7 @@ function sympatic_post_edition($flux){
 }
 
 function sympatic_affiche_auteurs_interventions($flux){
-	if ($id_auteur = $flux['args']['id_auteur']) {
+	if ($id_auteur = $flux['args']['id_auteur'] and autoriser('modifier', 'auteur', $id_auteur)) {
 		$flux['data'] .= recuperer_fond('prive/inclure/sympatic_auteur', array('id_auteur' => $id_auteur));
 	}
 	return $flux;
