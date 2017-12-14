@@ -63,17 +63,17 @@ function smsfactor($message,$destinataire,$arg) {
  * @return boolean
 **/
 function octopush($sms_text,$sms_recipients,$arg) {
-	$user_login = lire_config('sms/login_octopush');
-	$api_key 	= lire_config('sms/cle_api_octopush');
-	$sms_text  	= nettoyer_xml($sms_text);
+	$user_login	= lire_config('sms/login_octopush');
+	$api_key	= lire_config('sms/cle_api_octopush');
+	$sms_text	= nettoyer_xml($sms_text);
 
 	// Variable pour l'envoi
-	$sms_type 	= isset($arg['sms_type']) ? $arg['sms_type'] : 'SMS_STANDARD';
-	$sms_mode 	= isset($arg['sms_mode']) ? $arg['sms_mode'] : 'INSTANTANE';
+	$sms_type	= isset($arg['sms_type']) ? $arg['sms_type'] : 'SMS_STANDARD';
+	$sms_mode	= isset($arg['sms_mode']) ? $arg['sms_mode'] : 'INSTANTANE';
 	$sms_sender	= isset($arg['sms_sender']) ? $arg['sms_sender'] : lire_config('sms/expediteur_octopush');
 	require_once('classes/octopush/sms.inc.php');
 
-	$sms = new SMS();
+	$sms = new SMS_OCTOSPUSH();
 
 	$sms->set_user_login($user_login);
 	$sms->set_api_key($api_key);

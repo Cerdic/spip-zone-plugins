@@ -14,7 +14,7 @@
  */
 include ('config.inc.php');
 
-class SMS
+class SMS_OCTOSPUSH
 {
 
 	public $user_login; // string
@@ -37,7 +37,7 @@ class SMS
 	public $transactional; // int
 	public $msisdn_sender; // int
 	public $request_keys; // int
-	
+
 		// SMS parts
 	public $user_batch_id; // string
 	public $finished; // int
@@ -45,38 +45,38 @@ class SMS
 
 	public function __construct()
 	{
-		$this->user_login	 = '';
-		$this->api_key		 = '';
+		$this->user_login	= '';
+		$this->api_key		= '';
 
-		$this->sms_text = '';
+		$this->sms_text 	= '';
 
-		$this->sms_recipients			 = array();
-		$this->recipients_first_names	 = array();
-		$this->recipients_last_names	 = array();
-		$this->sms_fields_1				 = array();
-		$this->sms_fields_2				 = array();
-		$this->sms_fields_3				 = array();
+		$this->sms_recipients			= array();
+		$this->recipients_first_names	= array();
+		$this->recipients_last_names	= array();
+		$this->sms_fields_1				= array();
+		$this->sms_fields_2				= array();
+		$this->sms_fields_3				= array();
 
-		$this->sms_mode		 = INSTANTANE;
-		$this->sending_date	 = time();
-		$this->sms_d		 = date('d');
-		$this->sms_m		 = date('m');
-		$this->sms_h		 = date('H');
-		$this->sms_i		 = date('i');
-		$this->sms_y		 = date('Y');
+		$this->sms_mode		 	= INSTANTANE;
+		$this->sending_date	 	= time();
+		$this->sms_d		 	= date('d');
+		$this->sms_m		 	= date('m');
+		$this->sms_h		 	= date('H');
+		$this->sms_i		 	= date('i');
+		$this->sms_y		 	= date('Y');
 
-		$this->sms_sender	 = lire_config('sms/expediteur_octopush');
-		$this->sms_type		 = SMS_STANDARD;
-		$this->sms_mode		 = INSTANTANE;
-		$this->request_mode	 = lire_config('sms/mode_octopush');
-		$this->request_id	 = '';
-		$this->with_replies	 = 0;
-		$this->transactional = 0;
-		$this->msisdn_sender = 0;
-		$this->request_keys	 = '';
-		
+		$this->sms_sender	 	= lire_config('sms/expediteur_octopush');
+		$this->sms_type		 	= SMS_STANDARD;
+		$this->sms_mode		 	= INSTANTANE;
+		$this->request_mode	 	= lire_config('sms/mode_octopush');
+		$this->request_id	 	= '';
+		$this->with_replies	 	= 0;
+		$this->transactional 	= 0;
+		$this->msisdn_sender	= 0;
+		$this->request_keys		= '';
+
 		// SMS parts
-		$this->user_batch_id = '';
+		$this->user_batch_id 	= '';
 	}
 
 	public function send()
@@ -86,23 +86,23 @@ class SMS
 		$port	 = PORT;
 
 		$data = array(
-			'user_login'			 => $this->user_login,
-			'api_key'				 => $this->api_key,
-			'sms_text'				 => $this->sms_text,
-			'sms_recipients'		 => implode(',', $this->sms_recipients),
-			'recipients_first_names' => implode(',', $this->recipients_first_names),
-			'recipients_last_names'	 => implode(',', $this->recipients_last_names),
-			'sms_fields_1'			 => implode(',', $this->sms_fields_1),
-			'sms_fields_2'			 => implode(',', $this->sms_fields_2),
-			'sms_fields_3'			 => implode(',', $this->sms_fields_3),
-			'sms_mode'				 => $this->sms_mode,
-			'sms_type'				 => $this->sms_type,
-			'sms_sender'			 => $this->sms_sender,
-			'request_mode'			 => $this->request_mode,
-			'request_id'			 => $this->request_id,
-			'with_replies'			 => $this->with_replies,
-			'transactional'			 => $this->transactional,
-			'msisdn_sender'			 => $this->msisdn_sender
+			'user_login'			=> $this->user_login,
+			'api_key'				=> $this->api_key,
+			'sms_text'				=> $this->sms_text,
+			'sms_recipients'		=> implode(',', $this->sms_recipients),
+			'recipients_first_names'=> implode(',', $this->recipients_first_names),
+			'recipients_last_names'	=> implode(',', $this->recipients_last_names),
+			'sms_fields_1'			=> implode(',', $this->sms_fields_1),
+			'sms_fields_2'			=> implode(',', $this->sms_fields_2),
+			'sms_fields_3'			=> implode(',', $this->sms_fields_3),
+			'sms_mode'				=> $this->sms_mode,
+			'sms_type'				=> $this->sms_type,
+			'sms_sender'			=> $this->sms_sender,
+			'request_mode'			=> $this->request_mode,
+			'request_id'			=> $this->request_id,
+			'with_replies'			=> $this->with_replies,
+			'transactional'			=> $this->transactional,
+			'msisdn_sender'			=> $this->msisdn_sender
 		);
 		if ($this->sms_mode == DIFFERE)
 		{
@@ -113,12 +113,12 @@ class SMS
 		// Si des champs sont définis, on calcule la clé
 		if ($this->request_keys !== '')
 		{
-			$data['request_keys']	 = $this->request_keys;
-			$data['request_sha1']	 = $this->_get_request_sha1_string($this->request_keys, $data);
+			$data['request_keys']	= $this->request_keys;
+			$data['request_sha1']	= $this->_get_request_sha1_string($this->request_keys, $data);
 		}
 		return trim($this->_httpRequest($domain, $path, $port, $data));
 	}
-	
+
 	public function sendSMSParts()
 	{
 		$domain	 = DOMAIN;
@@ -145,13 +145,13 @@ class SMS
 			'user_batch_id'			 => $this->user_batch_id,
 			'finished'				 => $this->finished
 		);
-	
+
 		return trim($this->_httpRequest($domain, $path, $port, $data));
 	}
 
 	/*
 	 * Fonction create_sub_account
-	 * 
+	 *
 	 */
 
 	public function create_sub_account($first_name, $last_name, $raison_sociale, $alert_bound, $alert_sms_type)
@@ -175,9 +175,9 @@ class SMS
 
 	/*
 	 * Fonction credit_sub_account
-	 * 
+	 *
 	 * Make the request = get the token + use the token into a request from server to server to execute the transfer
-	 * 
+	 *
 	 */
 
 	public function credit_sub_account($user_login, $api_key, $sub_account_email, $sms_amount, $sms_type)
@@ -430,7 +430,7 @@ class SMS
 	}
 
 	/*
-	 * Notify Octopush plateform that you want to recieve the answers that your recipients will send back to your sending(s) 
+	 * Notify Octopush plateform that you want to recieve the answers that your recipients will send back to your sending(s)
 	 */
 
 	public function set_option_with_replies($with_replies)
@@ -446,7 +446,7 @@ class SMS
 	}
 
 	/*
-	 * Notify Octopush that you are making a transactional sending. 
+	 * Notify Octopush that you are making a transactional sending.
 	 * With this option, sending marketing SMS is strongly forbidden, and may make your account blocked in case of abuses.
 	 * DO NOT USE this option if you are not sure to understand what a transactional SMS is.
 	 */
@@ -476,7 +476,7 @@ class SMS
 	{
 		$this->request_keys = $request_keys;
 	}
-	
+
 	public function set_user_batch_id($user_batch_id)
 	{
 		$this->user_batch_id = preg_replace('`[^0-9a-zA-Z]*`', '', $user_batch_id);
