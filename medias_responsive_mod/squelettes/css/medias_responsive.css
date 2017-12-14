@@ -188,10 +188,19 @@ ul.portfolio_ligne li .fond {
 	font-weight: bold;
 	font-size: 70%;
 	display: inline-block;
-	transform: translate(0%, -0.25em);
 }
 .label_ligne_precedent:hover span, .label_ligne_suivant:hover span {
 	text-decoration: underline;
+}
+.label_ligne_precedent:before {
+	content: "←︎︎ ";
+	font-family: verdana, arial, sans;
+	font-size: 14px;
+}
+.label_ligne_suivant:after {
+	content: " →";
+	font-family: verdana, arial, sans;
+	font-size: 14px;
 }
 .label_ligne {
 	display: none;

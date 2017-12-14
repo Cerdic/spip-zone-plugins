@@ -10,8 +10,10 @@ function _getComputedTranslateX(obj)
 
 
 function calculer_portfolio_slide() {
-	var ratio_ecran = $( window ).height() / $( window ).width() * 100;
 	$(".portfolio_slide").each(function() {
+			var ratio_ecran = ($( window ).height() - 60) / $( this ).outerWidth() * 100;
+
+
 			var ratio_max = 0;
 			$(this).find(".spip_img").each(function(){
 				if ($(this).attr("data-italien-l")) {
