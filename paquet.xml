@@ -1,0 +1,25 @@
+<paquet
+	prefix="admin_panel"
+	categorie="divers"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.2.0;3.2.*]"
+	logo=""
+	documentation=""
+	schema="1.0.0" 
+>
+	<!--
+		Paquet généré le 2017-12-07 21:06:28
+	-->
+
+	<nom>Espace Privé en Admin Panel Bootstrap</nom>
+	
+
+	<auteur lien='http://www.visioininfo.qc.ca'>VisionInfo</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="autoriser" inclure="admin_panel_autorisations.php" /> 
+	<pipeline nom="header_prive" inclure="admin_panel_pipelines.php" />
+
+</paquet>

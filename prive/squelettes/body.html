@@ -1,0 +1,140 @@
+[(#PIPELINE{body_prive,[(#VAL{<body class="#ENV{type-page,page}[ #ENV{type-page,page}_(#ENV{composition,''})][ statut_(#SESSION{statut})][ webmestre_(#SESSION{webmestre})][ auteur_(#SESSION{id_auteur})] [(#REM|init_body_class)][(#ENV{type-page,page}|match{_edit$}|oui)edition] hold-transition skin-blue sidebar-mini">})]})]
+<div class="wrapper">
+	<INCLURE{fond=prive/squelettes/inclure/body-header-top_menu,lang,recherche,plugins=(#REM|parametres_css_prive)}>
+  	<!-- Left side column. contains the logo and sidebar -->
+  	<INCLURE{fond=prive/squelettes/inclure/body-main-sidebar,lang,recherche,plugins=(#REM|parametres_css_prive),env}>
+
+ 	 <!-- Content Wrapper. Contains page content -->
+  	<div class="content-wrapper page">
+    	<!-- Content Header (Page header) -->
+    	<section id="haut" class="content-header">
+    		<div class="row">
+    			<div class="col-xs-12">
+    				<INCLURE{fond=prive/objets/liste/auteurs_enligne}>
+					[(#SESSION{id_auteur}|alertes_auteur)]
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+			     	<div id="chemin">
+						<INCLURE{fond=prive/squelettes/hierarchie/#ENV{type-page},ajax=hierarchie,env}>
+					</div>
+				</div>
+			</div>
+		</section>
+    	<!-- Main content -->
+    	<section id="conteneur" class="content container-fluid">
+    		#INCLURE{fond=prive/squelettes/top/#ENV{type-page},ajax=top,env}
+			<div class="row">
+				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+					<div id="navigation" class='lat' role='contentinfo'>
+						<INCLURE{fond=prive/squelettes/navigation/#ENV{type-page},ajax=navigation,env}>
+					</div>
+				</div>
+				<div class="col-xs-8 col-sm-9 col-md-9 col-lg-8">
+					<div class="row">
+						<div class="col-xs-12">
+							<div id="extra" class='lat' role='complementary'>
+								<INCLURE{fond=prive/squelettes/extra/#ENV{type-page},ajax=extra,env}>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<INCLURE{fond=prive/squelettes/contenu/#ENV{type-page},ajax=contenu,env}>
+						</div>
+					</div>
+				</div>
+    		</section>
+    		<!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+    <div class="pull-right hidden-xs">
+      Anything you want
+    </div>
+    <!-- Default to the left -->
+    <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Create the tabs -->
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+      <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <!-- Home tab content -->
+      <div class="tab-pane active" id="control-sidebar-home-tab">
+        <h3 class="control-sidebar-heading">Recent Activity</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:;">
+              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+
+                <p>Will be 23 on April 24th</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+        <h3 class="control-sidebar-heading">Tasks Progress</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:;">
+              <h4 class="control-sidebar-subheading">
+                Custom Template Design
+                <span class="pull-right-container">
+                    <span class="label label-danger pull-right">70%</span>
+                  </span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+      </div>
+      <!-- /.tab-pane -->
+      <!-- Stats tab content -->
+      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+      <!-- /.tab-pane -->
+      <!-- Settings tab content -->
+      <div class="tab-pane" id="control-sidebar-settings-tab">
+        <form method="post">
+          <h3 class="control-sidebar-heading">General Settings</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Report panel usage
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Some information about this general settings option
+            </p>
+          </div>
+          <!-- /.form-group -->
+        </form>
+      </div>
+      <!-- /.tab-pane -->
+    </div>
+  </aside>
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+  immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+</body>

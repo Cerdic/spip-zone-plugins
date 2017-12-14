@@ -1,0 +1,16 @@
+#conteneur {
+	width:100% !important;
+}
+
+#haut {
+	margin-top:0px;
+}
+#navigation {
+	float:right;
+	max-width:100%;
+}
+
+a.menu_lang>img {
+	max-height:16px;
+	width:auto;
+}

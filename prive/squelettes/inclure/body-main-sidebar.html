@@ -1,0 +1,82 @@
+#SET{contexte,#EVAL{definir_barre_contexte()}}
+#SET{boutons,#GET{contexte}|definir_barre_boutons{0}|trier_boutons_enfants_par_favoris_alpha}
+<aside class="main-sidebar">
+	<!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+    	<!-- Sidebar user panel (optional) -->
+    	<BOUCLE_auteur_session(AUTEURS){id_auteur=#SESSION{id_auteur}}{tout}>
+	      	<div class="user-panel">
+    	    	<div class="pull-left image">
+					[(#LOGO_AUTEUR
+						|image_reduire{160,160}
+						|image_recadre{160,160,center,transparent}
+						|inserer_attribut{class,img-circle}
+						|inserer_attribut{alt,User Image})]
+					[(#LOGO_AUTEUR|non)
+						[(#CHEMIN{img/default-user-icon-profile.png}
+							|image_reduire{160,160}
+							|image_recadre{160,160,center,transparent}
+							|inserer_attribut{class,img-circle}
+							|inserer_attribut{alt,User Image})]
+					]	
+          		</div>
+        		<div class="pull-left info">
+          			<p>
+          				<a 
+          					href="#URL_ECRIRE{infos_perso}"
+          					title="<:icone_informations_personnelles|attribut_html:> \(<:auteur|attribut_html:> ##SESSION{id_auteur}\)"
+          					>[(#NOM|trim|sinon{#SESSION{login}}|typo|couper{30})]</a>
+          			</p>
+          			 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        		</div>
+      		</div>
+      	</BOUCLE_auteur_session>
+		
+		<!-- search form (Optional) -->
+		#FORMULAIRE_RECHERCHE_ECRIRE
+      	<!-- /.search form -->
+		
+      	<!-- Sidebar Menu -->
+    	<B_boutons>
+			<ul class="sidebar-menu" data-widget="tree">
+				<BOUCLE_boutons(DATA)
+					{source tableau, #GET{boutons}}
+					{cle!=outils_rapides}
+					{cle!=outils_collaboratifs}>
+					[(#REM)
+					permettra d'ajouter une classe sur les entrées non favorites
+					si le menu a des entrées favorites, pour faciliter le stylage CSS
+					][(#SET{has_favoris,0})]
+
+					<B_sous>
+						<li class="treeview[ (#ENV{exec}|array_key_exists{#VALEUR|table_valeur{sousmenu}}|oui)active][ (#ENV{exec}|searchForKey{'url',[(#VALEUR|table_valeur{sousmenu})]}|oui)active]">
+							<a href="#">
+								<span>[(#LIBELLE|_T)]</span>
+								<span class="pull-right-container">
+									<i class="fa fa-angle-left pull-right"></i>
+								</span>
+							</a>
+							<ul class="treeview-menu">
+								<BOUCLE_sous(DATA){source tableau, #SOUSMENU}>
+								[(#FAVORI|oui)#SET{has_favoris,1}]
+								[<li class="[(#FAVORI|?{favori,[(#GET{has_favoris}|?{non_favori})]})][ (#ENV{exec}|=={#CLE}|oui)active][ (#ENV{exec}|=={#VALEUR|table_valeur{url}}|oui)active]">
+								<a href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]">
+									(#LIBELLE|_T)
+								</a>
+								</li>]
+								</BOUCLE_sous>
+							</ul>
+						</B_sous>
+							<li>
+								<a href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]">
+									<span>[(#LIBELLE|_T)]</span>
+								</a>
+							</li>
+						<//B_sous>
+						</li>
+					</BOUCLE_boutons>
+				</ul>
+			</B_boutons>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
