@@ -12,10 +12,13 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 //Utilisation de SMS factor
-if ( lire_config('sms/prestataire') == "smsfactor") {
-
-	function envoyer_sms($message,$destinataire,$arg=array()){
+if (lire_config('sms/prestataire') == "smsfactor") {
+	function envoyer_sms($message,$destinataire,$arg=array()) {
 		return smsfactor($message,$destinataire,$arg);
+	}
+} elseif (lire_config('sms/prestataire') == "octopush") {
+	function envoyer_sms($message,$destinataire,$arg=array()) {
+		return octopush($message,$destinataire,$arg);
 	}
 }
 
@@ -29,7 +32,7 @@ if ( lire_config('sms/prestataire') == "smsfactor") {
  *		utilise pour : $arg['sender']
  * @return boolean
 **/
-function smsfactor($message,$destinataire,$arg){
+function smsfactor($message,$destinataire,$arg) {
 	$username = lire_config('sms/login_smsfactor');
 	$password = lire_config('sms/mdp_smsfactor');
 	$sender   = ($arg['sender']) ? $arg['sender'] : lire_config('sms/expediteur_smsfactor');
@@ -40,14 +43,77 @@ function smsfactor($message,$destinataire,$arg){
 	$retour  = $SENDSMS->SendSMS($username,$password,$sender,$message,$destinataire);
 
 	$reponse = new SimpleXMLElement($retour);
-	if ( $reponse->message == "OK" ){
+	if ( $reponse->message == "OK" ) {
 		return true;
-	}else{
+	} else {
 		return false;
 	}
 }
 
-function nettoyer_xml($texte){
+/**
+ * Envoie le sms en utilisant l'API du prestataire octopush-dm
+ *
+ * @param string $message
+ *		le texte d'envoie doit etre du texte et non du html
+ * @param array $destinataire
+ * @param array $arg
+ *		utilise pour : $arg['sms_sender']
+ *		utilise pour : $arg['sms_mode'] => SMS_STANDARD (par defaut) ou SMS_PREMIUM
+ *		utilise pour : $arg['sms_type'] => INSTANTANE (par defaut) ou DIFFERE (Non prévu pour le moment)
+ * @return boolean
+**/
+function octopush($sms_text,$sms_recipients,$arg) {
+	$user_login = lire_config('sms/login_octopush');
+	$api_key 	= lire_config('sms/cle_api_octopush');
+	$sms_text  	= nettoyer_xml($sms_text);
+
+	// Variable pour l'envoi
+	$sms_type 	= isset($arg['sms_type']) ? $arg['sms_type'] : 'SMS_STANDARD';
+	$sms_mode 	= isset($arg['sms_mode']) ? $arg['sms_mode'] : 'INSTANTANE';
+	$sms_sender	= isset($arg['sms_sender']) ? $arg['sms_sender'] : lire_config('sms/expediteur_octopush');
+	require_once('classes/octopush/sms.inc.php');
+
+	$sms = new SMS();
+
+	$sms->set_user_login($user_login);
+	$sms->set_api_key($api_key);
+	$sms->set_sms_mode($sms_mode);
+	$sms->set_sms_text($sms_text);
+	$sms->set_sms_recipients($sms_recipients);
+	$sms->set_sms_type($sms_type);
+	$sms->set_sms_sender($sms_sender);
+	$sms->set_sms_request_id(uniqid());
+	$sms->set_option_with_replies(0);
+	$sms->set_option_transactional(1);
+	$sms->set_sender_is_msisdn(0);
+	//$sms->set_date(2016, 4, 17, 10, 19); // En cas d'envoi différé.
+	$sms->set_request_keys('TRS');
+	$xml = $sms->send();
+	$xml = simplexml_load_string($xml);
+	spip_log($xml, 'test');
+	return $xml;
+}
+function filtre_balance($type) {
+	$username = lire_config('sms/login_octopush');
+	$password = lire_config('sms/cle_api_octopush');
+
+	require_once('classes/octopush/sms.inc.php');
+	$sms = new SMS();
+
+	$sms->set_user_login($username);
+	$sms->set_api_key($password);
+
+	$xml = $sms->getBalance();
+	$xml = simplexml_load_string($xml);
+	$balance = $xml->balance;
+	$standard = $balance['0'];
+	$premium = $balance['1'];
+	$balance = array('standard' => $standard, 'premium' => $premium);
+	$valeurs = intval($balance[$type]);
+	return $valeurs;
+}
+
+function nettoyer_xml($texte) {
 	$texte = str_replace('&', '&amp;',  $texte);
 	$texte = str_replace('<', '&lt;',   $texte);
 	$texte = str_replace('>', '&gt;',   $texte);

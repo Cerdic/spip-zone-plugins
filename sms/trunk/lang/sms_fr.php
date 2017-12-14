@@ -15,20 +15,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_exemple_explication' => 'Explication de cet exemple',
 	'cfg_titre_parametrages' => 'Paramétrages',
 	'choix_prestataire' => 'Choix du prestataire',
+	'cle_api' => 'Clé API',
 
 	// E
 	'expediteur' => 'Expéditeur',
-	'explication_expediteur' => 'Personnalisation de l’expéditeur avec du texte (11 caractères Max.)
-	N° de Téléphone non pris en charge en France.',
+	'explication_expediteur' => 'Personnalisation de l’expéditeur avec du texte (11 caractères Max.) N° de Téléphone non pris en charge en France.',
+	'explication_mode_octopush' => 'Souhaitez-vous envoyer en réel ou en simulation ?',
+	'explication_octopush' => 'Identifiants API (Votre solde : SMS Standard @standard@ ou SMS premium @premium@)',
 	'explication_smsfactor' => 'Identifiant de votre compte en ligne',
 
 	// L
 	'login' => 'Login',
 
 	// M
+	'mode_octopush' => 'Mode d\'envoi des sms',
 	'mot_de_passe' => 'Mot de passe',
 
+	// R
+	'reel' => 'Réel',
+
 	// S
+	'simulation' => 'Simulation',
 	'sms_titre' => 'SMS SPIP',
 
 	// T
