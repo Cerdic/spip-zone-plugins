@@ -26,7 +26,7 @@ define('_CKE_PREFERED_VERSION', '3.6.5') ;
 define('_CKE_RACINE_REGEX', '#^'.preg_quote(_DIR_RACINE, '#').'#') ;
 define('_CKE_FONTKIT', _DIR_IMG."FontKits") ;
 define('_CKE_DIR_SMILEYS', url_absolue(find_in_path("img/smileys/"))) ;
-define('_CKE_GOOGLE_WEBFONT', 'http://fonts.googleapis.com/css?family=' ) ;
+define('_CKE_GOOGLE_WEBFONT', 'https://fonts.googleapis.com/css?family=' ) ;
 define('_CKE_DOUBLE_PONCTUATION', ';:!?' ) ;
 define('_CKE_DIR_UPLOAD_DEF', _DIR_IMG.'UserFiles' ) ;
 define('_CKE_IMAGES_UPLOAD_DEF', 'Images' ) ;
