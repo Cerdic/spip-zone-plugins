@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'expediteur' => 'Remitente',
 	'explication_expediteur' => 'Personalización del remitente del texto (11 caracteres como máximo)
-N° de teléfono sin caraga para Francia.',
+N° de teléfono sin caraga para Francia.', # MODIF
 
 	// M
 	'mot_de_passe' => 'Contraseña',
