@@ -312,14 +312,14 @@ $GLOBALS['rainette_config']['langues_alternatives'] = array(
 
 
 /**
- * @param $config_service
+ * @param $configuration_service
  * @param $mode
  * @param $flux
  * @param $periode
  *
  * @return array
  */
-function service2donnees($config_service, $mode, $flux, $periode) {
+function meteo_normaliser($configuration_service, $mode, $flux, $periode) {
 	$tableau = array();
 
 	include_spip('inc/filtres');
@@ -338,17 +338,17 @@ function service2donnees($config_service, $mode, $flux, $periode) {
 				if ($GLOBALS['rainette_config'][$mode][$_donnee]['origine'] == 'service') {
 					// La donnée est fournie par le service. Elle n'est jamais calculée par le plugin
 					// Néanmoins, elle peut-être indisponible temporairement
-					if ($cle_service = $config_service['donnees'][$_donnee]['cle']) {
+					if ($cle_service = $configuration_service['donnees'][$_donnee]['cle']) {
 						// La donnée est normalement fournie par le service car elle possède une configuration de clé
 						// On traite le cas où le nom de la clé varie suivant le système d'unité choisi ou la langue.
 						// La clé de base peut être vide, le suffixe contenant dès lors toute la clé.
-						if (!empty($config_service['donnees'][$_donnee]['suffixe_unite'])) {
-							$systeme_unite = $config_service['unite'];
-							$id_suffixee = $config_service['donnees'][$_donnee]['suffixe_unite']['id_cle'];
-							$cle_service[$id_suffixee] .= $config_service['donnees'][$_donnee]['suffixe_unite'][$systeme_unite];
-						} elseif (!empty($config_service['donnees'][$_donnee]['suffixe_langue'])) {
-							$langue = trouver_langue_service($config_service);
-							$id_suffixee = $config_service['donnees'][$_donnee]['suffixe_langue']['id_cle'];
+						if (!empty($configuration_service['donnees'][$_donnee]['suffixe_unite'])) {
+							$systeme_unite = $configuration_service['unite'];
+							$id_suffixee = $configuration_service['donnees'][$_donnee]['suffixe_unite']['id_cle'];
+							$cle_service[$id_suffixee] .= $configuration_service['donnees'][$_donnee]['suffixe_unite'][$systeme_unite];
+						} elseif (!empty($configuration_service['donnees'][$_donnee]['suffixe_langue'])) {
+							$langue = langue_determiner($configuration_service);
+							$id_suffixee = $configuration_service['donnees'][$_donnee]['suffixe_langue']['id_cle'];
 							$cle_service[$id_suffixee] .= $langue;
 						}
 
@@ -360,18 +360,18 @@ function service2donnees($config_service, $mode, $flux, $periode) {
 							? $flux
 							: table_valeur($flux, implode('/', $cle_service), '');
 						if ($valeur_service !== '') {
-							$typer = donnee2typage($mode, $_donnee);
+							$typer = donnee_typer($mode, $_donnee);
 							$valeur_typee = $typer($valeur_service);
 
 							// Vérification de la donnée en cours de traitement si une fonction idoine existe
-							$verifier = "verifier_${_donnee}";
+							$verifier = "donnee_verifier_${_donnee}";
 							if (!function_exists($verifier) or (function_exists($verifier) and $verifier($valeur_typee))) {
 								$donnee = $valeur_typee;
 							}
 						}
 					} else {
 						// La donnée météo n'est jamais fournie par le service. On la positionne à null pour
-						// la distinguer avec une donnée vide qui indinque une indisponibilité temporaire.
+						// la distinguer avec une donnée vide qui indique une indisponibilité temporaire.
 						$donnee = null;
 					}
 				} else {
@@ -395,7 +395,7 @@ function service2donnees($config_service, $mode, $flux, $periode) {
  *
  * @return string
  */
-function donnee2typage($mode, $donnee) {
+function donnee_typer($mode, $donnee) {
 	$fonction = '';
 
 	$type_php = isset($GLOBALS['rainette_config'][$mode][$donnee]['type_php'])
@@ -413,10 +413,10 @@ function donnee2typage($mode, $donnee) {
 				$fonction = 'strval';
 				break;
 			case 'date':
-				$fonction = 'donnee2date';
+				$fonction = 'donnee_formater_date';
 				break;
 			case 'heure':
-				$fonction = 'donnee2heure';
+				$fonction = 'donnee_formater_heure';
 				break;
 			default:
 				$fonction = '';
@@ -432,7 +432,7 @@ function donnee2typage($mode, $donnee) {
  *
  * @return string
  */
-function donnee2date($donnee) {
+function donnee_formater_date($donnee) {
 	if (is_numeric($donnee)) {
 		$date = date('Y-m-d H:i:s', $donnee);
 	} else {
@@ -454,7 +454,7 @@ function donnee2date($donnee) {
  *
  * @return string
  */
-function donnee2heure($donnee) {
+function donnee_formater_heure($donnee) {
 	if (is_numeric($donnee)) {
 		$taille = strlen($donnee);
 		if ($taille < 3) {
@@ -474,7 +474,12 @@ function donnee2heure($donnee) {
 	return $heure;
 }
 
-function verifier_indice_uv($valeur) {
+/**
+ * @param $valeur
+ *
+ * @return bool
+ */
+function donnee_verifier_indice_uv($valeur) {
 
 	$est_valide = true;
 	if (($valeur < 0) or ($valeur > 16)) {
@@ -485,218 +490,15 @@ function verifier_indice_uv($valeur) {
 }
 
 /**
- * @param $type_modele
- * @param $service
- *
- * @return int
- */
-function trouver_periodicite($type_modele, $service) {
-
-	// Périodicité initialisée à "non trouvée"
-	$periodicite = 0;
-
-	if (isset($GLOBALS['rainette_config']['periodicite'][$type_modele])) {
-		// Acquérir la configuration statique du service pour connaitre les périodicités horaires supportées
-		// pour le mode prévisions
-		include_spip("services/${service}");
-		$configurer = "${service}_service2configuration";
-		$configuration = $configurer('previsions');
-		$periodicites_service = array_keys($configuration['periodicites']);
-
-		$periodicites_modele = $GLOBALS['rainette_config']['periodicite'][$type_modele];
-		foreach ($periodicites_modele as $_periodicite_modele) {
-			if (in_array($_periodicite_modele, $periodicites_service)) {
-				$periodicite = $_periodicite_modele;
-				break;
-			}
-		}
-	}
-
-	return $periodicite;
-}
-
-
-/**
- * @param $type_modele
- * @param $periodicite
- *
- * @return bool
- */
-function periodicite_compatible($type_modele, $periodicite) {
-
-	// Périodicité initialisée à "non trouvée"
-	$compatible = false;
-
-	if (isset($GLOBALS['rainette_config']['periodicite'][$type_modele])
-		and in_array($periodicite, $GLOBALS['rainette_config']['periodicite'][$type_modele])
-	) {
-		$compatible = true;
-	}
-
-	return $compatible;
-}
-
-
-/**
- * Construit le nom du cache en fonction du servide, du lieu, du type de données et de la langue utilisée par le site.
- *
- * @param string $lieu
- *        Lieu pour lequel on requiert le nom du cache.
- * @param string $mode
- *        Type de données météorologiques. Les valeurs possibles sont `infos`, `conditions` ou `previsions`.
- * @param int    $periodicite
- *        La périodicité horaire des prévisions :
- *        - `24`, `12`, `6`, `3` ou `1`, pour le mode `previsions`
- *        - `0`, pour les modes `conditions` et `infos`
- * @param array  $config_service
- *        Configuration complète du service, statique et utilisateur.
- *
- * @return string
- *        Chemin complet du fichier cache.
- */
-function service2cache($lieu, $mode, $periodicite, $config_service) {
-
-	// Identification de la langue du resume.
-	$code_langue = trouver_langue_service($config_service);
-
-	// Construction du chemin du fichier cache
-	$fichier_cache = normaliser_cache($config_service['alias'], $lieu, $mode, $periodicite, $code_langue);
-
-	return $fichier_cache;
-}
-
-
-/**
- * @param $config_service
- *
- * @return mixed
- */
-function trouver_langue_service($config_service) {
-
-	if ($config_service['condition'] == $config_service['alias']) {
-		// Langue SPIP : soit celle de la page soit celle en cours pour l'affichage
-		// TODO : cela a-t-il du sens ?
-		$langue_spip = $GLOBALS['lang'] ? $GLOBALS['lang'] : $GLOBALS['spip_lang'];
-
-		// On cherche si le service fournit la langue utilisée par le site.
-		// -- Pour cela on utilise la configuration du service qui fournit un tableau des langues disponibles
-		//    sous le format [code de langue du service] = code de langue spip.
-		$langue_service = array_search($langue_spip, $config_service['langues']['disponibles']);
-		if ($langue_service === false) {
-			// La langue utilisée par SPIP n'est pas supportée par le service.
-			// -- On cherche si il existe une langue SPIP utilisable meilleure que la langue par défaut du service.
-			// -- Pour ce faire on a défini pour chaque code de langue spip, un ou deux codes de langue SPIP à utiliser
-			//    en cas d'absence de la langue concernée dans un ordre de priorité (index 0, puis index 1).
-			$langue_service = $config_service['langues']['defaut'];
-			if ($GLOBALS['rainette_config']['langues_alternatives'][$langue_spip]) {
-				foreach ($GLOBALS['rainette_config']['langues_alternatives'][$langue_spip] as $_langue_alternative) {
-					$langue_service = array_search($_langue_alternative, $config_service['langues']['disponibles']);
-					if ($langue_service !== false) {
-						break;
-					}
-				}
-			}
-		}
-	} else {
-		$langue_service = $config_service['langues']['defaut'];
-	}
-
-	return $langue_service;
-}
-
-
-/**
- * @param $service
+ * @param $erreur
  * @param $lieu
  * @param $mode
- * @param $periodicite
- * @param $code_langue
- *
- * @return string
- */
-function normaliser_cache($service, $lieu, $mode, $periodicite, $code_langue) {
-
-	// Création et/ou détermination du dossier de destination du cache en fonction du service
-	$dossier_cache = sous_repertoire(_DIR_VAR, 'cache-rainette');
-	$dossier_cache = sous_repertoire($dossier_cache, $service);
-
-	// Le nom du fichier cache est composé comme suit, chaque élement étant séparé par un underscore :
-	// -- le nom du lieu normalisé (sans espace et dont tous les caractères non alphanumériques sont remplacés par un tiret
-	// -- le nom du mode (infos, conditions ou previsions) accolé à la périodicité du cache pour les prévisions uniquement
-	// -- la langue du résumé si il existe ou rien si aucune traduction n'est fournie par le service
-	list($lieu_normalise,) = normaliser_lieu($lieu);
-	$fichier_cache = $dossier_cache
-					 . str_replace(array(' ', ',', '+', '.', '/'), '-', $lieu_normalise)
-					 . '_' . $mode
-					 . ($periodicite ? strval($periodicite) : '')
-					 . ($code_langue ? '_' . strtolower($code_langue) : '')
-					 . '.txt';
-
-	return $fichier_cache;
-}
-
-
-/**
- * @param $lieu
+ * @param $modele
+ * @param $service
  *
  * @return array
  */
-function normaliser_lieu($lieu) {
-
-	$lieu_normalise = trim($lieu);
-
-	if (preg_match(_RAINETTE_REGEXP_LIEU_WEATHER_ID, $lieu_normalise, $match)) {
-		$format_lieu = 'weather_id';
-		$lieu_normalise = $match[0];
-	} elseif (preg_match(_RAINETTE_REGEXP_LIEU_COORDONNEES, $lieu_normalise, $match)) {
-		$format_lieu = 'latitude_longitude';
-		$lieu_normalise = "{$match[1]},{$match[2]}";
-	} elseif (preg_match(_RAINETTE_REGEXP_LIEU_IP, $lieu_normalise, $match)) {
-		$format_lieu = 'adresse_ip';
-		$lieu_normalise = $match[0];
-	} else {
-		$format_lieu = 'ville_pays';
-		// On détermine la ville et éventuellement le pays (ville[,pays])
-		// et on élimine les espaces par un seul +
-		$elements = explode(',', $lieu_normalise);
-		$lieu_normalise = trim($elements[0]) . (!empty($elements[1]) ? ',' . trim($elements[1]) : '');
-		$lieu_normalise = preg_replace('#\s{1,}#', '+', $lieu_normalise);
-	}
-
-	return array($lieu_normalise, $format_lieu);
-}
-
-
-function normaliser_configuration_donnees($mode, $configuration_donnees) {
-
-	$configuration_normalisee = array();
-
-	foreach ($GLOBALS['rainette_config'][$mode] as $_donnee => $_configuration) {
-		if ($_configuration['origine'] == 'service') {
-			$configuration_normalisee[$_donnee] = !empty($configuration_donnees[$_donnee]['cle']) ? true : false;
-		}
-	}
-
-	return $configuration_normalisee;
-}
-
-function normaliser_configuration_utilisateur($service, $configuration_defaut) {
-
-	// On récupère la configuration utilisateur
-	include_spip('inc/config');
-	$configuration_utilisateur = lire_config("rainette/${service}", array());
-
-	// On complète la configuration avec des valeurs par défaut si nécessaire.
-	foreach ($configuration_defaut as $_cle => $_valeur) {
-		if (!isset($configuration_utilisateur[$_cle])) {
-			$configuration_utilisateur[$_cle] = $_valeur;
-		}
-	}
-
-	return $configuration_utilisateur;
-}
-
-function normaliser_texte_erreur($erreur, $lieu, $mode, $modele, $service) {
+function erreur_formater_texte($erreur, $lieu, $mode, $modele, $service) {
 
 	$texte = array('principal' => '', 'conseil' => '', 'service' => '');
 	$titre_service = _T("rainette:titre_service_${service}");
@@ -746,4 +548,216 @@ function normaliser_texte_erreur($erreur, $lieu, $mode, $modele, $service) {
 
 
 	return $texte;
+}
+
+/**
+ * @param $type_modele
+ * @param $service
+ *
+ * @return int
+ */
+function periodicite_determiner($type_modele, $service) {
+
+	// Périodicité initialisée à "non trouvée"
+	$periodicite = 0;
+
+	if (isset($GLOBALS['rainette_config']['periodicite'][$type_modele])) {
+		// Acquérir la configuration statique du service pour connaitre les périodicités horaires supportées
+		// pour le mode prévisions
+		include_spip("services/${service}");
+		$configurer = "${service}_service2configuration";
+		$configuration = $configurer('previsions');
+		$periodicites_service = array_keys($configuration['periodicites']);
+
+		$periodicites_modele = $GLOBALS['rainette_config']['periodicite'][$type_modele];
+		foreach ($periodicites_modele as $_periodicite_modele) {
+			if (in_array($_periodicite_modele, $periodicites_service)) {
+				$periodicite = $_periodicite_modele;
+				break;
+			}
+		}
+	}
+
+	return $periodicite;
+}
+
+
+/**
+ * @param $type_modele
+ * @param $periodicite
+ *
+ * @return bool
+ */
+function periodicite_est_compatible($type_modele, $periodicite) {
+
+	// Périodicité initialisée à "non trouvée"
+	$compatible = false;
+
+	if (isset($GLOBALS['rainette_config']['periodicite'][$type_modele])
+		and in_array($periodicite, $GLOBALS['rainette_config']['periodicite'][$type_modele])
+	) {
+		$compatible = true;
+	}
+
+	return $compatible;
+}
+
+
+/**
+ * Construit le nom du cache en fonction du servide, du lieu, du type de données et de la langue utilisée par le site.
+ *
+ * @param string $lieu
+ *        Lieu pour lequel on requiert le nom du cache.
+ * @param string $mode
+ *        Type de données météorologiques. Les valeurs possibles sont `infos`, `conditions` ou `previsions`.
+ * @param int    $periodicite
+ *        La périodicité horaire des prévisions :
+ *        - `24`, `12`, `6`, `3` ou `1`, pour le mode `previsions`
+ *        - `0`, pour les modes `conditions` et `infos`
+ * @param array  $configuration_service
+ *        Configuration complète du service, statique et utilisateur.
+ *
+ * @return string
+ *        Chemin complet du fichier cache.
+ */
+function cache_nommer($lieu, $mode, $periodicite, $configuration_service) {
+
+	// Identification de la langue du resume.
+	$code_langue = langue_determiner($configuration_service);
+
+	// Construction du chemin du fichier cache
+	// Création et/ou détermination du dossier de destination du cache en fonction du service
+	$dossier_cache = sous_repertoire(_DIR_VAR, 'cache-rainette');
+	$dossier_cache = sous_repertoire($dossier_cache, $configuration_service['alias']);
+
+	// Le nom du fichier cache est composé comme suit, chaque élement étant séparé par un underscore :
+	// -- le nom du lieu normalisé (sans espace et dont tous les caractères non alphanumériques sont remplacés par un tiret
+	// -- le nom du mode (infos, conditions ou previsions) accolé à la périodicité du cache pour les prévisions uniquement
+	// -- la langue du résumé si il existe ou rien si aucune traduction n'est fournie par le service
+	list($lieu_normalise,) = lieu_normaliser($lieu);
+	$fichier_cache = $dossier_cache
+					 . str_replace(array(' ', ',', '+', '.', '/'), '-', $lieu_normalise)
+					 . '_' . $mode
+					 . ($periodicite ? strval($periodicite) : '')
+					 . ($code_langue ? '_' . strtolower($code_langue) : '')
+					 . '.txt';
+
+	return $fichier_cache;
+}
+
+
+/**
+ * @param $lieu
+ *
+ * @return array
+ */
+function lieu_normaliser($lieu) {
+
+	$lieu_normalise = trim($lieu);
+
+	if (preg_match(_RAINETTE_REGEXP_LIEU_WEATHER_ID, $lieu_normalise, $match)) {
+		$format_lieu = 'weather_id';
+		$lieu_normalise = $match[0];
+	} elseif (preg_match(_RAINETTE_REGEXP_LIEU_COORDONNEES, $lieu_normalise, $match)) {
+		$format_lieu = 'latitude_longitude';
+		$lieu_normalise = "{$match[1]},{$match[2]}";
+	} elseif (preg_match(_RAINETTE_REGEXP_LIEU_IP, $lieu_normalise, $match)) {
+		$format_lieu = 'adresse_ip';
+		$lieu_normalise = $match[0];
+	} else {
+		$format_lieu = 'ville_pays';
+		// On détermine la ville et éventuellement le pays (ville[,pays])
+		// et on élimine les espaces par un seul +
+		$elements = explode(',', $lieu_normalise);
+		$lieu_normalise = trim($elements[0]) . (!empty($elements[1]) ? ',' . trim($elements[1]) : '');
+		$lieu_normalise = preg_replace('#\s{1,}#', '+', $lieu_normalise);
+	}
+
+	return array($lieu_normalise, $format_lieu);
+}
+
+
+/**
+ * @param $configuration_service
+ *
+ * @return mixed
+ */
+function langue_determiner($configuration_service) {
+
+	if ($configuration_service['condition'] == $configuration_service['alias']) {
+		// Rainette est configurée pour utiliser le résumé renvoyé par le service pour l'affichage :
+		// il est donc nécessaire de demander ce résumé dans la bonne langue si elle existe.
+
+		// On détermine la "bonne langue" : on choisit soit celle de la page en cours
+		// soit celle en cours pour l'affichage.
+		$langue_spip = $GLOBALS['lang'] ? $GLOBALS['lang'] : $GLOBALS['spip_lang'];
+
+		// On cherche si le service fournit la langue utilisée par le site.
+		// -- Pour cela on utilise la configuration du service qui fournit un tableau des langues disponibles
+		//    sous le format [code de langue du service] = code de langue spip.
+		$langue_service = array_search($langue_spip, $configuration_service['langues']['disponibles']);
+		if ($langue_service === false) {
+			// La langue utilisée par SPIP n'est pas supportée par le service.
+			// -- On cherche si il existe une langue SPIP utilisable meilleure que la langue par défaut du service.
+			// -- Pour ce faire on a défini pour chaque code de langue spip, un ou deux codes de langue SPIP à utiliser
+			//    en cas d'absence de la langue concernée dans un ordre de priorité (index 0, puis index 1).
+			$langue_service = $configuration_service['langues']['defaut'];
+			if ($GLOBALS['rainette_config']['langues_alternatives'][$langue_spip]) {
+				foreach ($GLOBALS['rainette_config']['langues_alternatives'][$langue_spip] as $_langue_alternative) {
+					$langue_service = array_search($_langue_alternative, $configuration_service['langues']['disponibles']);
+					if ($langue_service !== false) {
+						break;
+					}
+				}
+			}
+		}
+	} else {
+		// Rainette est configurée pour afficher le résumé Weather.com après transcodage. La langue de la requête
+		// importe peu, on choisit donc la langue configurée par défaut.
+		$langue_service = $configuration_service['langues']['defaut'];
+	}
+
+	return $langue_service;
+}
+
+
+/**
+ * @param $mode
+ * @param $configuration
+ *
+ * @return array
+ */
+function normaliser_configuration_donnees($mode, $configuration) {
+
+	$configuration_normalisee = array();
+
+	foreach ($GLOBALS['rainette_config'][$mode] as $_donnee => $_configuration) {
+		if ($_configuration['origine'] == 'service') {
+			$configuration_normalisee[$_donnee] = !empty($configuration[$_donnee]['cle']) ? true : false;
+		}
+	}
+
+	return $configuration_normalisee;
+}
+
+/**
+ * @param $service
+ * @param $configuration_defaut
+ *
+ * @return mixed
+ */
+function normaliser_configuration_utilisateur($service, $configuration_defaut) {
+
+	// On récupère la configuration utilisateur
+	include_spip('inc/config');
+	$configuration_utilisateur = lire_config("rainette/${service}", array());
+
+	// On complète la configuration avec des valeurs par défaut si nécessaire.
+	foreach ($configuration_defaut as $_cle => $_valeur) {
+		if (!isset($configuration_utilisateur[$_cle])) {
+			$configuration_utilisateur[$_cle] = $_valeur;
+		}
+	}
+
+	return $configuration_utilisateur;
 }

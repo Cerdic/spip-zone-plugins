@@ -174,7 +174,7 @@ $GLOBALS['rainette_owm_config']['erreurs'] = array(
 /**
  * ------------------------------------------------------------------------------------------------
  * Les fonctions qui suivent définissent l'API standard du service et sont appelées par la fonction
- * unique de chargement des données météorologiques `charger_meteo()`.
+ * unique de chargement des données météorologiques `meteo_charger()`.
  * PACKAGE SPIP\RAINETTE\OWM\API
  * ------------------------------------------------------------------------------------------------
  */
@@ -213,11 +213,11 @@ function owm_service2url($lieu, $mode, $periodicite, $configuration) {
 	// Le choix de la langue n'a d'interet que si on utilise le resume natif du service. Si ce n'est pas le cas
 	// on ne la precise pas et on laisse l'API renvoyer la langue par defaut
 	include_spip('inc/rainette_normaliser');
-	$code_langue = trouver_langue_service($configuration);
+	$code_langue = langue_determiner($configuration);
 
 	// On normalise le lieu et on récupère son format.
 	// Le service accepte la format ville,pays et le format latitude,longitude
-	list($lieu_normalise, $format_lieu) = normaliser_lieu($lieu);
+	list($lieu_normalise, $format_lieu) = lieu_normaliser($lieu);
 	if ($format_lieu == 'latitude_longitude') {
 		list($latitude, $longitude) = explode(',', $lieu_normalise);
 		$query = "lat=${latitude}&lon=${longitude}";

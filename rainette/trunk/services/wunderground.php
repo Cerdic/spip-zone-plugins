@@ -236,7 +236,7 @@ $GLOBALS['rainette_wunderground_config']['erreurs'] = array(
 /**
  * ------------------------------------------------------------------------------------------------
  * Les fonctions qui suivent définissent l'API standard du service et sont appelées par la fonction
- * unique de chargement des données météorologiques `charger_meteo()`.
+ * unique de chargement des données météorologiques `meteo_charger()`.
  * PACKAGE SPIP\RAINETTE\WUNDERGROUND\API
  * ------------------------------------------------------------------------------------------------
  */
@@ -294,7 +294,7 @@ function wunderground_service2url($lieu, $mode, $periodicite, $configuration) {
 	// Le service accepte la format ville,pays, le format latitude,longitude, le format adresse IP
 	// et le format weather ID (comme FRXX0076 pour Paris).
 	include_spip('inc/rainette_normaliser');
-	list($lieu_normalise, $format_lieu) = normaliser_lieu($lieu);
+	list($lieu_normalise, $format_lieu) = lieu_normaliser($lieu);
 	if ($format_lieu == 'weather_id') {
 		$query = "locid:${lieu_normalise}";
 	} elseif ($format_lieu == 'adresse_ip') {
@@ -313,7 +313,7 @@ function wunderground_service2url($lieu, $mode, $periodicite, $configuration) {
 	// Identification de la langue du resume.
 	// Le choix de la langue n'a d'interet que si on utilise le resume natif du service. Si ce n'est pas
 	// le cas on demande à l'API de renvoyer la langue par defaut
-	$code_langue = trouver_langue_service($configuration);
+	$code_langue = langue_determiner($configuration);
 
 	$url = _RAINETTE_WUNDERGROUND_URL_BASE_REQUETE
 		   . '/' . $configuration['inscription']

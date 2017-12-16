@@ -40,7 +40,7 @@ function rainette_dbg_afficher_cache($lieu, $mode = 'previsions', $service = 'we
 			$periodicite = $configuration['periodicite_defaut'];
 		}
 		// Chargement du cache
-		$charger = charger_fonction('charger_meteo', 'inc');
+		$charger = charger_fonction('meteo_charger', 'inc');
 		$nom_cache = $charger($lieu, $mode, $periodicite, $service);
 		if ($nom_cache) {
 			$contenu = '';
@@ -123,7 +123,7 @@ function rainette_dbg_comparer_services($mode = 'conditions', $jeu = array()) {
 			}
 
 			// Chargement des données
-			$charger = charger_fonction('charger_meteo', 'inc');
+			$charger = charger_fonction('meteo_charger', 'inc');
 			$nom_cache = $charger($_lieu, $mode, $periodicite, $_service);
 			lire_fichier($nom_cache, $contenu_cache);
 			$tableau = unserialize($contenu_cache);

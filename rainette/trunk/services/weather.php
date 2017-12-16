@@ -175,7 +175,7 @@ function weather_service2url($lieu, $mode, $periodicite, $configuration) {
 	// Le service accepte la format ville,pays, le format latitude,longitude et le format adresse IP.
 	// Néanmoins, la query a toujours la même forme; il n'est donc pas nécessaire de gérer le format.
 	include_spip('inc/rainette_normaliser');
-	list($lieu_normalise,) = normaliser_lieu($lieu);
+	list($lieu_normalise,) = lieu_normaliser($lieu);
 
 	$url = _RAINETTE_WEATHER_URL_BASE
 	   . $lieu_normalise

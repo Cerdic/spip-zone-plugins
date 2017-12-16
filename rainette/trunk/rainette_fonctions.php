@@ -54,7 +54,7 @@ function calculer_infos($lieu, $type, $service) {
 		}
 
 		// Récupération des informations sur le lieu
-		$charger = charger_fonction('charger_meteo', 'inc');
+		$charger = charger_fonction('meteo_charger', 'inc');
 		$nom_cache = $charger($lieu, 'infos', 0, $service);
 		lire_fichier($nom_cache, $contenu_cache);
 		if (!isset($type) or !$type) {
@@ -392,14 +392,14 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 			// On verifie que la périodicité demandée explicitement dans l'appel du modèle est ok
 			if (isset($options['periodicite'])) {
 				$periodicite_explicite = intval($options['periodicite']);
-				if (periodicite_compatible($type_modele, $periodicite_explicite)) {
+				if (periodicite_est_compatible($type_modele, $periodicite_explicite)) {
 					$periodicite = $periodicite_explicite;
 				} else {
 					$erreur = 'modele_periodicite';
 				}
 			} else {
 				// Dans ce cas, il faut choisir une périodicité en fonction du type du modèle et du service.
-				$periodicite = trouver_periodicite($type_modele, $service);
+				$periodicite = periodicite_determiner($type_modele, $service);
 				if (!$periodicite) {
 					$erreur = 'modele_service';
 				}
@@ -442,7 +442,7 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 		);
 	} else {
 		// Récupération du tableau des données météo
-		$charger = charger_fonction('charger_meteo', 'inc');
+		$charger = charger_fonction('meteo_charger', 'inc');
 		$nom_cache = $charger($lieu, $mode, $periodicite, $service);
 		lire_fichier($nom_cache, $contenu_cache);
 		$tableau = unserialize($contenu_cache);
@@ -476,7 +476,7 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 
 	// Affichage du message d'erreur ou des données
 	if ($erreur) {
-		$extras['erreur']['texte'] = normaliser_texte_erreur($extras['erreur'], $lieu, $mode, $modele, $service);
+		$extras['erreur']['texte'] = erreur_formater_texte($extras['erreur'], $lieu, $mode, $modele, $service);
 		$texte = recuperer_fond('modeles/erreur', $extras);
 	} else {
 		// Appel du modèle avec le contexte complet

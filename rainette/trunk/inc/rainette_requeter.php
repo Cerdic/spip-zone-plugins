@@ -6,12 +6,20 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 /**
+ * Fait appel au service spécifié en utilisant l'URL fournie et retourne le flux brut JSON ou XML transcodé dans un tableau.
+ * Chaque appel est comptabilisé et logé dans une meta.
  *
  * @param string $url
+ * 		URL complète de la requête formatée en fonction de la demande et du service.
  * @param array  $configuration
+ * 		Configuration statique et utilisateur du service nécessaire pour identifier les seuils de requêtes
+ *      par période propres au service et le format du flux pour le transcodage.
  * @param string $service
+ *      Alias du service.
  *
  * @return array
+ *      Tableau des données météorologiques retournées par le service ou tableau limité à l'index `erreur` en cas
+ *      d'erreur de transcodage.
  */
 function requeter($url, $configuration, $service) {
 
@@ -50,7 +58,7 @@ function requeter($url, $configuration, $service) {
 			// Pouvoir attraper les erreurs de simplexml_load_string().
 			// http://stackoverflow.com/questions/17009045/how-do-i-handle-warning-simplexmlelement-construct/17012247#17012247
 			set_error_handler(
-				function($erreur_id, $erreur_message, $erreur_fichier, $erreur_ligne) {
+				function ($erreur_id, $erreur_message, $erreur_fichier, $erreur_ligne) {
 					throw new Exception($erreur_message, $erreur_id);
 				}
 			);
@@ -81,10 +89,17 @@ function requeter($url, $configuration, $service) {
 
 
 /**
+ * Vérifie si la requête prévue peut être adressée au service sans excéder les limites d'utilisation fixées dans
+ * les conditions d'utilisation du service.
+ * Si une période est échue, la fonction remet à zéro le compteur associé.
+ *
  * @param array  $limites
+ *      Tableau des seuils de requêtes par période (année, mois,..., minute).
  * @param string $service
+ *      Alias du service.
  *
  * @return bool
+ *      `true` si la requête est autorisée, `false`sinon.
  */
 function requete_autorisee($limites, $service) {
 
@@ -100,13 +115,13 @@ function requete_autorisee($limites, $service) {
 		$date_courante = date_parse(date('Y-m-d H:i:s'));
 
 		if ($limites) {
-			$periode_a_change = false;
+			$nouvelle_periode = false;
 			foreach ($limites as $_periode => $_max) {
 				// La date courante est un tableau indexé par la période de l'année (year) à la minute (minute) et plus.
 				// La stratégie est de vérifier - de l'année à la période configurée pour le service - si un élément a changé
 				// ou pas : si un élément a changé alors on est forcément ok, sinon on vérifie le nombre d'appels comparé
 				// à la valeur max configurée.
-				if ($periode_a_change) {
+				if ($nouvelle_periode) {
 					// Toutes les autres périodes inférieures ont donc changé aussi, on remet donc leur compteur
 					// à zéro.
 					$execution[$service]['compteurs'][$_periode] = 0;
@@ -119,7 +134,7 @@ function requete_autorisee($limites, $service) {
 							// Il faut remettre le compteur de la période à zéro.
 							$execution[$service]['compteurs'][$_periode] = 0;
 							ecrire_config('rainette_execution', $execution);
-							$periode_a_change = true;
+							$nouvelle_periode = true;
 							break;
 						} elseif ($_cle == $_periode) {
 							// On est arrivé à la période configurée pour le service et la valeur est la même :

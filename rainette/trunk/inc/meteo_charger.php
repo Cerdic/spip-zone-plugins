@@ -18,8 +18,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * et stocké les données collectées et transcodées dans un tableau standardisé. L'appelant doit s'assurer que la
  * périodicité est compatible avec le service; cette fonction ne retourne donc que des erreurs de chargement.
  *
- * @uses service2cache()
- * @uses service2donnees()
+ * @uses cache_nommer()
+ * @uses meteo_normaliser()
  * @uses indice2risque_uv()
  *
  * @param string $lieu
@@ -49,7 +49,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return string
  *        Le nom du fichier cache correspondant à la demande.
  */
-function inc_charger_meteo_dist($lieu, $mode = 'conditions', $periodicite = 0, $service = 'weather') {
+function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $service = 'weather') {
 
 	// Traitement des cas ou les arguments sont vides (ce qui est différent de non passés à l'appel)
 	// On considère à ce stade que la cohérence entre le mode, la périodicité et le service (qui selon ne supporte
@@ -87,7 +87,7 @@ function inc_charger_meteo_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 	}
 
 	// Construire le nom du fichier cache
-	$cache = service2cache($lieu, $mode, $periodicite, $configuration);
+	$cache = cache_nommer($lieu, $mode, $periodicite, $configuration);
 
 	// Déterminer le système d'unité utilisé dans le cache et celui requis par la configuration.
 	// Si ces systèmes d'unité diffèrent il faut renouveler le cache sinon on affichera des données
@@ -150,7 +150,7 @@ function inc_charger_meteo_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 				}
 
 				// On normalise le flux en utilisant le mode d'erreur pour vérifier si on obtient bien une erreur.
-				$erreur_service = service2donnees($configuration_erreur,'erreurs', $flux_erreur, -1);
+				$erreur_service = meteo_normaliser($configuration_erreur,'erreurs', $flux_erreur, -1);
 				$verifier = "${service}_erreur_verifier";
 				if ($verifier($erreur_service)) {
 					// Une erreur est renvoyée par le service, on formate l'erreur correctement.
@@ -213,7 +213,7 @@ function inc_charger_meteo_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 								$flux_a_normaliser = $_periode == -1
 									? $_flux_jour
 									: ($configuration['structure_heure'] ? $flux_heure[$_periode] : $flux_heure);
-								$donnees = service2donnees(
+								$donnees = meteo_normaliser(
 									$configuration,
 									$mode,
 									$flux_a_normaliser,

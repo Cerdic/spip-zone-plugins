@@ -193,7 +193,7 @@ $GLOBALS['rainette_wwo_config']['erreurs'] = array(
 
 // ------------------------------------------------------------------------------------------------
 // Les fonctions qui suivent définissent l'API standard du service et sont appelées par la fonction
-// unique de chargement des données météorologiques `charger_meteo()`.
+// unique de chargement des données météorologiques `meteo_charger()`.
 // ------------------------------------------------------------------------------------------------
 
 /**
@@ -242,12 +242,12 @@ function wwo_service2url($lieu, $mode, $periodicite, $configuration) {
 
 	// Identification de la langue du resume.
 	include_spip('inc/rainette_normaliser');
-	$code_langue = trouver_langue_service($configuration);
+	$code_langue = langue_determiner($configuration);
 
 	// On normalise le lieu et on récupère son format.
 	// Le service accepte la format ville,pays, le format latitude,longitude et le format adresse IP.
 	// Néanmoins, la query a toujours la même forme; il n'est donc pas nécessaire de gérer le format.
-	list($lieu_normalise,) = normaliser_lieu($lieu);
+	list($lieu_normalise,) = lieu_normaliser($lieu);
 
 	$url = _RAINETTE_WWO_URL_BASE
 		   . '?key=' . $configuration['inscription']
