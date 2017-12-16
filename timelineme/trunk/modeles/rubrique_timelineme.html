@@ -25,7 +25,7 @@ $(document).ready(function() {
 		scrollZones: (#ENV{scrollZones}),]
 		items: [
 		// Put your timeline items here
-		<BOUCLE_items(ARTICLES){id_rubrique}{par date, num titre}>
+		<BOUCLE_items(ARTICLES){id_rubrique}{!par num titre, date}>
 		{
 			type: 'smallItem'[,
 			label: '(#TITRE|html2unicode)'][,
