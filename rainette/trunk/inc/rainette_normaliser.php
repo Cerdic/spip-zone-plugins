@@ -6,19 +6,19 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 if (!defined('_RAINETTE_REGEXP_LIEU_IP')) {
 	/**
-	 * Regexp permettant de reconnaitre un lieu au format adresse IP
+	 * Regexp permettant de reconnaître un lieu au format adresse IP
 	 */
 	define('_RAINETTE_REGEXP_LIEU_IP', '#(?:\d{1,3}\.){3}\d{1,3}#');
 }
 if (!defined('_RAINETTE_REGEXP_LIEU_COORDONNEES')) {
 	/**
-	 * Regexp permettant de reconnaitre un lieu au format coordonnées géographiques latitude,longitude
+	 * Regexp permettant de reconnaître un lieu au format coordonnées géographiques latitude,longitude
 	 */
 	define('_RAINETTE_REGEXP_LIEU_COORDONNEES', '#([\-\+]?\d+(?:\.\d+)?)\s*,\s*([\-\+]?\d+(?:\.\d+)?)#');
 }
 if (!defined('_RAINETTE_REGEXP_LIEU_WEATHER_ID')) {
 	/**
-	 * Regexp permettant de reconnaitre un lieu au format Weather ID
+	 * Regexp permettant de reconnaître un lieu au format Weather ID
 	 */
 	define('_RAINETTE_REGEXP_LIEU_WEATHER_ID', '#[a-zA-Z]{4}\d{4}#i');
 }
@@ -312,12 +312,24 @@ $GLOBALS['rainette_config']['langues_alternatives'] = array(
 
 
 /**
- * @param $configuration_service
- * @param $mode
- * @param $flux
- * @param $periode
+ * Normalise les données issues du service dans un tableau standard aux index prédéfinis pour chaque mode.
+ *
+ * @param array  $configuration_service
+ *        Configuration statique et utilisateur du service ayant retourné le flux de données.
+ * @param string $mode
+ *        Le type de données météorologiques demandé :
+ *        - `conditions`, la valeur par défaut
+ *        - `previsions`
+ *        - `infos`
+ * @param array  $flux
+ *        Le tableau brut des données météorologiques issu de l'appel au service.
+ * @param int    $periode
+ *        Valeur de 0 à n pour indiquer qu'on traite les données de prévisions d'une période horaire donnée
+ *        ou -1 pour indiquer que l'on traite les données jour. La valeur maximale n dépend de la périodicité
+ *        des prévisions, par exemple, elle vaut 0 pour une périodicité de 24h, 1 pour 12h...
  *
  * @return array
+ *        Le tableau standardisés des données météorologiques du service pour la période spécifiée.
  */
 function meteo_normaliser($configuration_service, $mode, $flux, $periode) {
 	$tableau = array();
@@ -390,10 +402,18 @@ function meteo_normaliser($configuration_service, $mode, $flux, $periode) {
 
 
 /**
- * @param $mode
- * @param $donnee
+ * Détermine, en fonction du type PHP configuré, la fonction à appliquer à la valeur d'une donnée.
+ *
+ * @param string $mode
+ *        Le type de données météorologiques demandé :
+ *        - `conditions`, la valeur par défaut
+ *        - `previsions`
+ *        - `infos`
+ * @param string $donnee
+ *        Correspond à l'index du tableau associatif standardisé comme `temperature`, `humidite`, `precipitation`...
  *
  * @return string
+ *        La fonction PHP (floatval, intval...) ou spécifique à appliquer à la valeur de la donnée.
  */
 function donnee_typer($mode, $donnee) {
 	$fonction = '';
@@ -428,9 +448,13 @@ function donnee_typer($mode, $donnee) {
 
 
 /**
- * @param $donnee
+ * Formate une date numérique ou sous une autre forme en une date au format `Y-m-d H:i:s`.
+ *
+ * @param string $donnee
+ *        Correspond à un index du tableau associatif standardisé à formater en date standard.
  *
  * @return string
+ *        Date au format `Y-m-d H:i:s`.
  */
 function donnee_formater_date($donnee) {
 	if (is_numeric($donnee)) {
@@ -450,9 +474,13 @@ function donnee_formater_date($donnee) {
 }
 
 /**
- * @param $donnee
+ * Formate une heure numérique ou sous une autre forme en une heure au format `H:i`.
+ *
+ * @param string $donnee
+ *        Correspond à un index du tableau associatif standardisé à formater en heure standard.
  *
  * @return string
+ *        Heure au format `H:i`.
  */
 function donnee_formater_heure($donnee) {
 	if (is_numeric($donnee)) {
@@ -475,9 +503,13 @@ function donnee_formater_heure($donnee) {
 }
 
 /**
- * @param $valeur
+ * Vérifie que la valeur de l'indice UV est acceptable.
+ *
+ * @param int $valeur
+ *        Valeur de l'indice UV à vérifier. Un indice UV est toujours compris entre 0 et 16, bornes comprises.
  *
  * @return bool
+ *        `true` si la valeur est acceptable, `false` sinon.
  */
 function donnee_verifier_indice_uv($valeur) {
 
@@ -509,9 +541,9 @@ function erreur_formater_texte($erreur, $lieu, $mode, $modele, $service) {
 		case 'url_indisponible':
 		case 'analyse_xml':
 		case 'analyse_json':
-		// Cas d'erreur où le service renvoie aucune donnée sans pour autant monter une erreur.
+			// Cas d'erreur où le service renvoie aucune donnée sans pour autant monter une erreur.
 		case 'aucune_donnee':
-		// Cas d'erreur où le nombre de requêtes maximal a été atteint.
+			// Cas d'erreur où le nombre de requêtes maximal a été atteint.
 			$texte['principal'] .= _T("rainette:erreur_${type_erreur}", array('service' => $titre_service));
 			$texte['conseil'] .= _T('rainette:erreur_conseil_equipe');
 			break;
@@ -634,7 +666,7 @@ function cache_nommer($lieu, $mode, $periodicite, $configuration_service) {
 	// -- le nom du lieu normalisé (sans espace et dont tous les caractères non alphanumériques sont remplacés par un tiret
 	// -- le nom du mode (infos, conditions ou previsions) accolé à la périodicité du cache pour les prévisions uniquement
 	// -- la langue du résumé si il existe ou rien si aucune traduction n'est fournie par le service
-	list($lieu_normalise,) = lieu_normaliser($lieu);
+	list($lieu_normalise, ) = lieu_normaliser($lieu);
 	$fichier_cache = $dossier_cache
 					 . str_replace(array(' ', ',', '+', '.', '/'), '-', $lieu_normalise)
 					 . '_' . $mode

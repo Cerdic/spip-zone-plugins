@@ -28,7 +28,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *        Le type de données météorologiques demandé :
  *            - `conditions`, la valeur par défaut
  *            - `previsions`
- *            - `conditions`
  *            - `infos`
  * @param int $periodicite
  *        La périodicité horaire des prévisions :
@@ -186,7 +185,7 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 							// Par contre, pour les prévisions on distingue 2 type de données :
 							// - celles du jour indépendamment de la période horaire
 							// - celles correspondant à une période horaire choisie (24, 12, 6, 3, 1)
-							//   Ces donnnées sont stockées à un index horaire de 0 à n qui représente la période horaire.
+							//   Ces données sont stockées à un index horaire de 0 à n qui représente la période horaire.
 							// Pour avoir un traitement identique pour les deux types de données on considère que l'index horaire
 							// des données jour est égal à -1.
 							// On crée donc le tableau des index correspondant au mode choisi et on boucle dessus.
@@ -204,7 +203,7 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 								$flux_heure = table_valeur($_flux_jour, implode('/', $configuration['cle_heure']), null);
 							}
 
-							// On boucle sur chaque periode horaire pour remplir le tableau complet.
+							// On boucle sur chaque période horaire pour remplir le tableau complet.
 							foreach ($periodes_horaires as $_periode) {
 								// 1- Initialiser le tableau normalisé des informations à partir des données brutes
 								//    fournies par le service.

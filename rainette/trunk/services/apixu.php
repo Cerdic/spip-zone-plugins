@@ -2,7 +2,7 @@
 /**
  * Ce fichier contient la configuration et l'ensemble des fonctions implémentant le service APIXU (apixu).
  * Ce service est capable de fournir des données au format XML ou JSON. Néanmoins, l'API actuelle du plugin utilise
- * uniquemement le format JSON.
+ * uniquement le format JSON.
  *
  * @package SPIP\RAINETTE\SERVICES\APIXU
  */
@@ -26,9 +26,9 @@ $GLOBALS['rainette_apixu_config']['service'] = array(
 		'theme'       => '',
 	),
 	'credits' => array(
-		'titre'       => 'APIXU',
-		'logo'        => 'apixu.png',
-		'lien'        => 'https://www.apixu.com/',
+		'titre' => 'APIXU',
+		'logo'  => 'apixu.png',
+		'lien'  => 'https://www.apixu.com/',
 	),
 	'langues' => array(
 		'disponibles' => array(
@@ -73,7 +73,7 @@ $GLOBALS['rainette_apixu_config']['service'] = array(
 		'defaut'      => 'en'
 	),
 	'limites' => array(
-		'month'       => 5000
+		'month' => 5000
 	)
 );
 
@@ -136,7 +136,7 @@ $GLOBALS['rainette_apixu_config']['conditions'] = array(
 $GLOBALS['rainette_apixu_config']['previsions'] = array(
 	'periodicites'       => array(
 		24 => array('max_jours' => 10),
-//		1 => array('max_jours' => 10)
+		//		1 => array('max_jours' => 10)
 	),
 	'periodicite_defaut' => 24,
 	'periode_maj'        => 14400,
@@ -179,11 +179,11 @@ $GLOBALS['rainette_apixu_config']['previsions'] = array(
 // Configuration des données fournies par le service APIXU en cas d'erreur.
 // -- Seules les données non calculées sont configurées.
 $GLOBALS['rainette_apixu_config']['erreurs'] = array(
-	'cle_base'    => array('error'),
-	'donnees'     => array(
+	'cle_base' => array('error'),
+	'donnees'  => array(
 		// Erreur
-		'code'     => array('cle' => array('code')),
-		'message'  => array('cle' => array('message')),
+		'code'    => array('cle' => array('code')),
+		'message' => array('cle' => array('message')),
 	),
 );
 
@@ -396,12 +396,12 @@ function etat2resume_apixu(&$tableau, $configuration) {
 		if ($configuration['condition'] == $configuration['alias']) {
 			// On affiche les conditions natives fournies par le service.
 			// Pour le resume, apixu fournit la traduction dans un item différent que pour les autres services.
-			// Cet item est stocké dans trad_meteo.
+			// Cet item est stocké dans 'trad_meteo'.
 			$tableau['icone']['code'] = $tableau['code_meteo'];
 			$tableau['icone']['url'] = copie_locale($tableau['icon_meteo']);
 			$tableau['resume'] = ucfirst($tableau['desc_meteo']);
 		} else {
-			// On affiche les conditions traduites dans le systeme weather.com
+			// On affiche les conditions traduites dans le système weather.com
 			$meteo = meteo_apixu2weather($tableau['code_meteo'], $tableau['periode']);
 			$tableau['icone'] = $meteo;
 			$tableau['resume'] = $meteo;
