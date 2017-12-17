@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
-	'facteur_description' => 'Der Briefträger befördert Emails im HTML-Format, im Nur-Text-Format oder in beiden, egal ob per SMTP oder nicht.',
-	'facteur_nom' => 'Briefräger',
+	'facteur_description' => 'Der Postbote befördert Emails im HTML-Format, im Nur-Text-Format oder in beiden, egal ob per SMTP oder nicht.',
+	'facteur_nom' => 'Postbote',
 	'facteur_slogan' => 'Er befördert ihre Emails'
 );
