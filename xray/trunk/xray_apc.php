@@ -974,12 +974,106 @@ switch ($MYREQUEST['OB']) {
 		$size_vars        = bsize($cache['mem_size']);
 		$i                = 0;
 		$_namespace       = _CACHE_NAMESPACE;
-		echo <<< EOB
-		<div class="info div1"><h2>Mémoization SPIP</h2>
-		<table cellspacing=0><tbody>
-		<tr class=tr-0><td class=td-0>_CACHE_NAMESPACE</td><td>$_namespace</td></tr>
-		</table></div>
-EOB;
+		
+		$list = array();
+		foreach($cache['cache_list'] as $i => $entry) {
+			$k = 'a_'.sprintf('%015d', $entry['creation_time']).$entry['info'];
+			$entry ['date_crea'] = date(DATE_FORMAT, $entry['creation_time']);
+			$entry ['info_exists'] = apcu_exists ($entry['info']);
+			$list[$k] = $entry;
+		}
+		// tri à l'envers pour ne pas réindexer le tableaux numériquement avec array_shift
+		krsort($list, SORT_STRING); 
+				echo "<div class='info div1'><h2>Mémoization SPIP</h2>
+				<table cellspacing=0><tbody>
+				<tr class=tr-0><td class=td-0>_CACHE_NAMESPACE</td><td>"._CACHE_NAMESPACE."</td></tr>";
+		$nb_fantomes = $nb_existe = $nb_hits = $nb_requetes = $taille = $mem_hits = $mem_requetes = 0;
+		while (count($list)) {
+			$d = array_pop($list);
+			if ($d and apcu_exists($d['info'])) {
+				$nb_existe++;
+				$taille += $d['mem_size'];
+				if (!$naissance) 
+					$naissance = date(DATE_FORMAT,$d['creation_time']);
+				$nb_hits += $d['num_hits'];
+				$nb_requetes += $d['num_hits'] + 1;
+				$mem_hits += $d['mem_size']*$d['num_hits'];
+				$mem_requetes += $d['mem_size']*($d['num_hits'] + 1);
+				if (preg_match(_PATTERN_STATS_SPECIALES, $d['info'])) {
+					$nb_speciales++;
+					$taille_speciales += $d['mem_size'];
+					$nb_hits_speciales += $d['num_hits'];
+					$nb_requetes_speciales += $d['num_hits'] + 1;
+					$mem_hits_speciales += $d['mem_size']*$d['num_hits'];
+					$mem_requetes_speciales += $d['mem_size']*($d['num_hits'] + 1);
+				}
+				else {
+					$nb_sans_speciales++;
+					$taille_sans_speciales += $d['mem_size'];
+					$nb_hits_sans_speciales += $d['num_hits'];
+					$nb_requetes_sans_speciales += $d['num_hits'] + 1;
+					$mem_hits_sans_speciales += $d['mem_size']*$d['num_hits'];
+					$mem_requetes_sans_speciales += $d['mem_size']*($d['num_hits'] + 1);
+				}
+			}
+			else {
+				$nb_fantomes++;
+				$taille_fantomes += $d['mem_size'];
+				$nb_hits_fantomes += $d['num_hits'];
+				$nb_requetes_fantomes += $d['num_hits'] + 1;
+				$mem_hits_fantomes += $d['mem_size']*$d['num_hits'];
+				$mem_requetes_fantomes += $d['mem_size']*($d['num_hits'] + 1);
+			}
+		};
+	
+	echo
+		"<tr class=tr-0><td class=td-0>Nb caches</td><td>".count($cache['cache_list'])."</td></tr>
+		<tr class=tr-0><td class=td-0>Nb caches valides</td><td>$nb_existe</td></tr>";
+	if ($nb_existe)
+		echo "
+		<tr class=tr-0><td class=td-0>Plus vieux cache valide</td><td>$naissance</td></tr>
+		<tr class=tr-0><td class=td-0>Taille totale</td><td>".taille_en_octets($taille)."</td></tr>
+		<tr class=tr-0><td class=td-0>Nb requetes</td><td>$nb_requetes</td></tr>";
+	if ($nb_requetes)
+		echo "
+		<tr class=tr-0><td class=td-0>Nb hits</td><td>$nb_hits soit ".round(100*$nb_hits/$nb_requetes,1)."%</td></tr>
+		<tr class=tr-0><td class=td-0 title='Service par le cache pondéré par la taille'>Performance</td><td>".round(100*$mem_hits/$mem_requetes,1)."%</td></tr>"; 
+
+	if ($nb_speciales)
+		echo "
+		<tr><td colspan=2><b>"._LABEL_STATS_SPECIALES."</b></td></tr>
+		<tr class=tr-0><td class=td-0>Nb caches</td><td>$nb_speciales</td></tr>
+		<tr class=tr-0><td class=td-0>Taille totale</td><td>".taille_en_octets($taille_speciales)."</td></tr>
+		<tr class=tr-0><td class=td-0>Nb requetes</td><td>$nb_requetes_speciales</td></tr>
+		<tr class=tr-0><td class=td-0>Nb hits</td><td>$nb_hits_speciales soit ".round(100*$nb_hits_speciales/$nb_requetes_speciales,1)."%</td></tr>
+		<tr class=tr-0><td class=td-0 title='Service par le cache pondéré par la taille'>Performance</td><td>".round(100*$mem_hits_speciales/$mem_requetes_speciales,1)."%</td></tr>";
+	else
+		echo "<tr><td colspan=2>"._LABEL_STATS_SPECIALES." : aucun cache</td></tr>";
+		
+	if ($nb_sans_speciales)
+		echo "
+		<tr><td colspan=2><b>"._LABEL_STATS_SPECIALES_EXCLUES."</b></td></tr>
+		<tr class=tr-0><td class=td-0>Nb caches</td><td>$nb_sans_speciales</td></tr>
+		<tr class=tr-0><td class=td-0>Taille totale</td><td>".taille_en_octets($taille_sans_speciales)."</td></tr>
+		<tr class=tr-0><td class=td-0>Nb requetes</td><td>$nb_requetes_sans_speciales</td></tr>
+		<tr class=tr-0><td class=td-0>Nb hits</td><td>$nb_hits_sans_speciales soit ".round(100*$nb_hits_sans_speciales/$nb_requetes_sans_speciales,1)."%</td></tr>
+		<tr class=tr-0><td class=td-0 title='Service par le cache pondéré par la taille'>Performance</td><td>".round(100*$mem_hits_sans_speciales/$mem_requetes_sans_speciales,1)."%</td></tr>";
+	else
+		echo "<tr><td  colspan=2>"._LABEL_STATS_SPECIALES_EXCLUES." : aucun cache</td></tr>";
+		
+	if ($nb_fantomes)
+		echo "
+		<tr><td colspan=2><b>Caches périmés</b></td></tr>
+		<tr class=tr-0><td class=td-0>Nb caches</td><td>$nb_fantomes</td></tr>
+		<tr class=tr-0><td class=td-0>Total taille</td><td>".taille_en_octets($taille_fantomes)."</td></tr>
+		<tr class=tr-0><td class=td-0>Nb anciennes requetes</td><td>$nb_requetes_fantomes</td></tr>
+		<tr class=tr-0><td class=td-0>Nb anciens hits</td><td>$nb_hits_fantomes soit ".round(100*$nb_hits_fantomes/$nb_requetes_fantomes,1)."%</td></tr>
+		<tr class=tr-0><td class=td-0 title='Service par le cache pondéré par la taille'>Performance</td><td>".round(100*$mem_hits_fantomes/$mem_requetes_fantomes,1)."%</td></tr>";
+	else
+		echo "<tr><td colspan=2>Aucun cache n'est périmé</td></tr>";
+
+	echo "</table></div>";
+
 		echo <<< EOB
 		<div class="info div1"><h2>General Cache Information</h2>
 		<table cellspacing=0><tbody>
