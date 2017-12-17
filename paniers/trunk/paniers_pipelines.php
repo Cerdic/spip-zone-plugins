@@ -64,7 +64,7 @@ function paniers_insert_head_css($flux) {
 function paniers_post_edition($flux) {
 
 	// Si on est dans le cas d'une commande qui passe de attente/en cours=>paye/livre/erreur
-	if ($flux['args']['table'] == 'spip_commandes'
+	if (isset($flux['args']['table']) and $flux['args']['table'] == 'spip_commandes'
 		AND $id_commande = $flux['args']['id_objet']
 		AND $flux['args']['action'] == 'instituer'
 		AND isset($flux['data']['statut'])
