@@ -1,13 +1,13 @@
 <div class="formulaire_spip liste ajax">
 
 
-    <h3 class="titrem"><:shop:ajouter_prix:></h3>
+		<h3 class="titrem"><:shop:ajouter_prix:></h3>
 	<form id="form_prix" name="form_prix" action="#ENV{action}#form_prix" method="post"><div>
-    		#ACTION_FORMULAIRE{#ENV{action}}
-    	<div class="obligatoire[ (#ENV**{erreurs}|table_valeur{prix_ht}) erreur]">
-            [<div class='erreur_message'>(#ENV**{erreurs}|table_valeur{prix_ht})</div>]
+				#ACTION_FORMULAIRE{#ENV{action}}
+			<div class="obligatoire[ (#ENV**{erreurs}|table_valeur{prix_ht}) erreur]">
+						[<div class='erreur_message'>(#ENV**{erreurs}|table_valeur{prix_ht})</div>]
 			<label><:shop:choix_prix:></label>
-		  <input type="text" name="prix_ht" value="#ENV{prix_ht}"/>
+			<input type="text" name="prix_ht" value="#ENV{prix_ht}"/>
 
 				<BOUCLE_test(CONDITION){si #ENV{devises}|count|<{2}}>
 				[(#ENV{devises}|table_valeur{0}|traduire_devise)]
@@ -21,12 +21,11 @@
 						<option value="#VALEUR">[(#VALEUR|traduire_devise)]</option>
 						</BOUCLE_selection>
 					</select>
-				</B_selection>					
+				</B_selection>
 				<//B_test>
-			</span>	
-      </div>
-     <div>
-
+			</span>
+			</div>
+		<div>
 
 		<p><input type="submit"  class="submit" value="<:texte_ajouter:>" /></p></div>
 	</form>
