@@ -1,0 +1,11 @@
+<BOUCLE_items(ARTICLES){id_article}>
+{
+	type: 'smallItem'[,
+	label: '(#TITRE|html2unicode)'][,
+	picto: '<img src="(#LOGO_ARTICLE|image_reduire{40,40}|extraire_attribut{src})" alt="#TITRE" />'][,
+	shortContent: '(#CHAPO|attribut_html)'][,
+	fullContent: '(#TEXTE|attribut_html)',
+	showMore: '<:timelineme:voir_plus:>',
+	showLess: '<:timelineme:voir_moins:>']
+},
+</BOUCLE_items>

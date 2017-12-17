@@ -12,7 +12,7 @@ parametres d'appel du modèle
 	|scrollZones=true (false par défaut)
 	
 ]<div id="timeline-container"></div>
-<BOUCLE_timelineme(RUBRIQUES){id_rubrique}>
+
 [<link rel="stylesheet" type="text/css" href="(#CHEMIN{src/jquery.timelineMe.css})" media="all" />]
 [<script src="(#CHEMIN{src/jquery.timelineMe.js})" type="text/javascript"></script>]
 <script type="text/javascript">/*<![CDATA[*/
@@ -25,22 +25,14 @@ $(document).ready(function() {
 		scrollZones: (#ENV{scrollZones}),]
 		items: [
 		// Put your timeline items here
-		<BOUCLE_items(ARTICLES){id_rubrique}{!par num titre, date}>
-		{
-			type: 'smallItem'[,
-			label: '(#TITRE|html2unicode)'][,
-			shortContent: '(#CHAPO|attribut_html)'][,
-			fullContent: '(#TEXTE|attribut_html)',
-			showMore: '<:timelineme:voir_plus:>',
-			showLess: '<:timelineme:voir_moins:>']
-		},
-		</BOUCLE_items>
+		[(#ENV{sens}|=={inverse}|non)<INCLURE{fond=inclure/timelineme,id_rubrique} />]
+		[(#ENV{sens}|=={inverse}|oui)<INCLURE{fond=inclure/timelineme_sens_inverse,id_rubrique} />]
 		]
 	});
 
 });
 /*]]>*/</script>
-</BOUCLE_timelineme>
+
 <style type="text/css">[(#REM) ]
 #SET{bkg,#ENV{background,#8DD8DD}}
 [#timeline-container { background-color:(#GET{bkg}); }]
