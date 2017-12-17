@@ -426,7 +426,7 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 		// renvoyée par le chargement des données.
 		$extras['credits'] = $configuration['credits'];
 		$extras['config'] = array_merge(
-			normaliser_configuration_utilisateur($service, $configuration['defaut']),
+			parametrage_normaliser($service, $configuration['defaut']),
 			array('source' => normaliser_configuration_donnees($mode, $configuration['donnees']))
 		);
 		$extras['lieu'] = $lieu;

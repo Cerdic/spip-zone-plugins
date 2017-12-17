@@ -74,7 +74,7 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 	// Cependant, celle-ci pouvant être incomplète on la complète par les valeurs par défaut quand
 	// cela est nécessaire.
 	include_spip('inc/rainette_normaliser');
-	$configuration_utilisateur = normaliser_configuration_utilisateur($service, $configuration['defauts']);
+	$configuration_utilisateur = parametrage_normaliser($service, $configuration['defauts']);
 
 	// Concaténer l'ensemble des configurations.
 	$configuration = array_merge($configuration, $configuration_utilisateur);

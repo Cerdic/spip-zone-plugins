@@ -10,7 +10,7 @@
 
 #SET{service, #ENV{service, weather}}
 #SET{mode, #ENV{mode, conditions}}
-#SET{jeu, #VAL|rainette_dbg_jeu_defaut}
+#SET{jeu, #VAL|rainette_debug_jeu_defaut}
 #SET{lieu, #ENV{ville, #GET{jeu/#GET{service}}}}
 
 <body>
@@ -33,7 +33,7 @@
 					[<div class="clearfix">
 						<br />
 						<h3 class="h3">Affichage debug du tableau des informations</h3>
-						(#GET{lieu}|rainette_dbg_afficher_cache{infos, #GET{service}})
+						(#GET{lieu}|rainette_debug_afficher_cache{infos, #GET{service}})
 					</div>]
 				</div>
 				<div class="clearfix">
@@ -56,7 +56,7 @@
 				[<div class="clearfix">
 					<br />
 					<h3 class="h3">Affichage debug du tableau des conditions</h3>
-					(#GET{lieu}|rainette_dbg_afficher_cache{conditions, #GET{service}})
+					(#GET{lieu}|rainette_debug_afficher_cache{conditions, #GET{service}})
 				</div>]
 			</div>
 
@@ -79,7 +79,7 @@
 					<h3 class="h3">Affichage debug du tableau des pr&eacute;visions</h3>
 					<p>Seul le jour suivant le jour courant est affich&eacute; \(index \[1\] du sous-tableau \[donnees\]\). La p&eacute;riodicit&eacute; utilis&eacute;e est celle par d&eacute;faut pour le service concern&eacute;.</p>
 					<br />
-					(#GET{lieu}|rainette_dbg_afficher_cache{previsions, #GET{service}})
+					(#GET{lieu}|rainette_debug_afficher_cache{previsions, #GET{service}})
 				</div>]
 			</div>
 
@@ -97,7 +97,7 @@
 			</p>
 			<div class="clearfix">
 				<br />
-				#SET{donnees, #GET{mode}|rainette_dbg_comparer_services{#GET{jeu}}}
+				#SET{donnees, #GET{mode}|rainette_debug_comparer_services{#GET{jeu}}}
 				#INCLURE{fond=demo/inc-comparer_services,
 					jeu=#GET{jeu},
 					donnees=#GET{donnees},
@@ -108,16 +108,16 @@
 			<h2 class="h2">3 - ETAT D'EXECUTION DES SERVICES</h2>
 			<a name="execution" href="#"></a>
 			<div class="clearfix">
-				#SET{execution, #VAL|rainette_dbg_afficher_execution}
+				#SET{execution, #VAL|rainette_debug_afficher_execution}
 				#INCLURE{fond=demo/inc-afficher_execution, execution=#GET{execution}}
-				[<div class="clearfix"><br />(#VAL|rainette_dbg_afficher_config)</div>]
+				[<div class="clearfix"><br />(#VAL|rainette_debug_afficher_config)</div>]
 			</div>
 
 
 			<h2 class="h2">4. - LANGUES SPIP NON INTEGREES</h2>
 			<a name="langues" href="#"></a>
 			<div class="clearfix">
-				[(#VAL|rainette_dbg_verifier_langue_manquante|sinon{'Aucune langue SPIP manque'})]
+				[(#VAL|rainette_debug_verifier_langue_manquante|sinon{'Aucune langue SPIP manque'})]
 			</div>
 		</div>
 	</div>

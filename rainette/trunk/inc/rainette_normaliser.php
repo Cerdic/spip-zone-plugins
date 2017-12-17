@@ -1,4 +1,9 @@
 <?php
+/**
+ * Ce fichier contient les fonctions internes destinées à standardiser les données météorologiques.
+ *
+ * @package SPIP\RAINETTE\MASHUP
+ */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -755,6 +760,29 @@ function langue_determiner($configuration_service) {
 
 
 /**
+ * @param $service
+ * @param $configuration_defaut
+ *
+ * @return mixed
+ */
+function parametrage_normaliser($service, $configuration_defaut) {
+
+	// On récupère la configuration utilisateur
+	include_spip('inc/config');
+	$configuration_utilisateur = lire_config("rainette/${service}", array());
+
+	// On complète la configuration avec des valeurs par défaut si nécessaire.
+	foreach ($configuration_defaut as $_cle => $_valeur) {
+		if (!isset($configuration_utilisateur[$_cle])) {
+			$configuration_utilisateur[$_cle] = $_valeur;
+		}
+	}
+
+	return $configuration_utilisateur;
+}
+
+
+/**
  * @param $mode
  * @param $configuration
  *
@@ -771,26 +799,4 @@ function normaliser_configuration_donnees($mode, $configuration) {
 	}
 
 	return $configuration_normalisee;
-}
-
-/**
- * @param $service
- * @param $configuration_defaut
- *
- * @return mixed
- */
-function normaliser_configuration_utilisateur($service, $configuration_defaut) {
-
-	// On récupère la configuration utilisateur
-	include_spip('inc/config');
-	$configuration_utilisateur = lire_config("rainette/${service}", array());
-
-	// On complète la configuration avec des valeurs par défaut si nécessaire.
-	foreach ($configuration_defaut as $_cle => $_valeur) {
-		if (!isset($configuration_utilisateur[$_cle])) {
-			$configuration_utilisateur[$_cle] = $_valeur;
-		}
-	}
-
-	return $configuration_utilisateur;
 }

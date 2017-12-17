@@ -25,7 +25,7 @@ if (!defined('_RAINETTE_DEBUG_CLES_PREVISIONS')) {
  *
  * @return string
  */
-function rainette_dbg_afficher_cache($lieu, $mode = 'previsions', $service = 'weather') {
+function rainette_debug_afficher_cache($lieu, $mode = 'previsions', $service = 'weather') {
 	static $cles_previsions = array();
 	$debug = '';
 
@@ -74,7 +74,7 @@ function rainette_dbg_afficher_cache($lieu, $mode = 'previsions', $service = 'we
  *
  * @return string
  */
-function rainette_dbg_afficher_config() {
+function rainette_debug_afficher_config() {
 	$debug = '';
 
 	// Recuperation du tableau des conditions courantes
@@ -94,7 +94,7 @@ function rainette_dbg_afficher_config() {
  *
  * @return array
  */
-function rainette_dbg_comparer_services($mode = 'conditions', $jeu = array()) {
+function rainette_debug_comparer_services($mode = 'conditions', $jeu = array()) {
 	$debug = array();
 
 	if (!$mode) {
@@ -107,7 +107,7 @@ function rainette_dbg_comparer_services($mode = 'conditions', $jeu = array()) {
 
 	if ($config_donnees) {
 		if (!$jeu) {
-			$jeu = rainette_dbg_jeu_defaut();
+			$jeu = rainette_debug_jeu_defaut();
 		}
 
 		// On boucle sur chaque jeu de demo
@@ -179,7 +179,7 @@ function rainette_dbg_comparer_services($mode = 'conditions', $jeu = array()) {
  *
  * @return string
  */
-function rainette_dbg_afficher_donnee($donnee, $valeur, $type_php, $type_unite, $service = 'weather') {
+function rainette_debug_afficher_donnee($donnee, $valeur, $type_php, $type_unite, $service = 'weather') {
 	$texte = '';
 
 	if ($type_php === 'NULL') {
@@ -206,7 +206,7 @@ function rainette_dbg_afficher_donnee($donnee, $valeur, $type_php, $type_unite, 
 /**
  * @return array
  */
-function rainette_dbg_jeu_defaut() {
+function rainette_debug_jeu_defaut() {
 
 	$jeu = array();
 
@@ -228,7 +228,7 @@ function rainette_dbg_jeu_defaut() {
 /**
  * @return array
  */
-function rainette_dbg_afficher_execution() {
+function rainette_debug_afficher_execution() {
 
 	$debug = array();
 
@@ -265,7 +265,7 @@ function rainette_dbg_afficher_execution() {
  * Fonction permettant de vérifier si la liste des langues de SPIP a changé et qu'il faut modifier la config rainette.
  *
  */
-function rainette_dbg_verifier_langue_manquante() {
+function rainette_debug_verifier_langue_manquante() {
 	include_spip('inc/lang_liste');
 	include_spip('inc/rainette_normaliser');
 	foreach ($GLOBALS['codes_langues'] as $code => $langue) {
