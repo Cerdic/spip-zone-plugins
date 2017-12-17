@@ -1,4 +1,9 @@
 <?php
+/**
+ * Ce fichier contient les fonctions internes de gestion des requêtes vers les services météorologiques.
+ *
+ * @package SPIP\RAINETTE\REQUETE
+ */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -51,7 +56,7 @@ function requeter($url, $configuration, $service) {
 		spip_log("URL indiponible : ${url}", 'rainette');
 		$reponse['erreur'] = 'url_indisponible';
 	} else {
-		// Tranformation de la chaine xml reçue en tableau associatif
+		// Transformation de la chaîne xml reçue en tableau associatif
 		if ($configuration['format_flux'] == 'xml') {
 			$convertir = charger_fonction('simplexml_to_array', 'inc');
 
@@ -74,7 +79,7 @@ function requeter($url, $configuration, $service) {
 
 			restore_error_handler();
 		} else {
-			// Tranformation de la chaine json reçue en tableau associatif
+			// Transformation de la chaîne json reçue en tableau associatif
 			try {
 				$reponse = json_decode($flux['page'], true);
 			} catch (Exception $erreur) {

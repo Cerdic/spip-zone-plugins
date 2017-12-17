@@ -33,7 +33,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *        La périodicité horaire des prévisions :
  *            - `24`, les prévisions de la journée
  *            - `12`, les prévisions du jour et de la nuit
- *            - `6`, les prévisions de la journée par période de 4h
+ *            - `6`, les prévisions de la journée par période de 6h
  *            - `3`, les prévisions de la journée par période de 3h
  *            - `1`, les prévisions de la journée pour chaque heure
  *            - `0`, pour les modes `conditions` et `infos`

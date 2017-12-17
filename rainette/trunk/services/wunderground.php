@@ -294,7 +294,7 @@ function wunderground_service2url($lieu, $mode, $periodicite, $configuration) {
 	// Le service accepte la format ville,pays, le format latitude,longitude, le format adresse IP
 	// et le format weather ID (comme FRXX0076 pour Paris).
 	include_spip('inc/rainette_normaliser');
-	list($lieu_normalise, $format_lieu) = lieu_normaliser($lieu);
+	$lieu_normalise = lieu_normaliser($lieu, $format_lieu);
 	if ($format_lieu == 'weather_id') {
 		$query = "locid:${lieu_normalise}";
 	} elseif ($format_lieu == 'adresse_ip') {
@@ -312,7 +312,7 @@ function wunderground_service2url($lieu, $mode, $periodicite, $configuration) {
 
 	// Identification de la langue du resume.
 	// Le choix de la langue n'a d'interet que si on utilise le resume natif du service. Si ce n'est pas
-	// le cas on demande à l'API de renvoyer la langue par defaut
+	// le cas on demande à l'API de renvoyer la langue par défaut
 	$code_langue = langue_determiner($configuration);
 
 	$url = _RAINETTE_WUNDERGROUND_URL_BASE_REQUETE
@@ -452,7 +452,7 @@ function etat2resume_wunderground(&$tableau, $configuration) {
 
 	if ($tableau['code_meteo'] and $tableau['icon_meteo']) {
 		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
-		// Pour ce service (cas actuel) le nom du fichier icone commence par "nt_" pour la nuit.
+		// Pour ce service (cas actuel) le nom du fichier icône commence par "nt_" pour la nuit.
 		$icone = basename($tableau['icon_meteo']);
 		if (strpos($icone, 'nt_') === false) {
 			// C'est le jour
@@ -465,7 +465,7 @@ function etat2resume_wunderground(&$tableau, $configuration) {
 		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
 		if ($configuration['condition'] == $configuration['alias']) {
 			// On affiche les conditions natives fournies par le service.
-			// Celles-ci etant deja traduites dans la bonne langue on stocke le texte exact retourne par l'API
+			// Celles-ci étant déjà traduites dans la bonne langue on stocke le texte exact retourné par l'API.
 			$tableau['icone']['code'] = $tableau['code_meteo'];
 			$url = _RAINETTE_WUNDERGROUND_URL_BASE_ICONE . '/'
 				   . $configuration['theme'] . '/'
@@ -473,8 +473,8 @@ function etat2resume_wunderground(&$tableau, $configuration) {
 			$tableau['icone']['url'] = copie_locale($url);
 			$tableau['resume'] = ucfirst($tableau['desc_meteo']);
 		} else {
-			// On affiche les conditions traduites dans le systeme weather.com
-			// Pour le resume on stocke le code et non la traduction pour eviter de generer
+			// On affiche les conditions traduites dans le système weather.com
+			// Pour le resume on stocke le code et non la traduction pour éviter de générer
 			// un cache par langue comme pour le mode natif. La traduction est faite via les fichiers de langue
 			$meteo = meteo_wunderground2weather($tableau['code_meteo'], $tableau['periode']);
 			$tableau['icone'] = $meteo;

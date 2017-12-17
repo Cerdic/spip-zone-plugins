@@ -217,7 +217,7 @@ function owm_service2url($lieu, $mode, $periodicite, $configuration) {
 
 	// On normalise le lieu et on récupère son format.
 	// Le service accepte la format ville,pays et le format latitude,longitude
-	list($lieu_normalise, $format_lieu) = lieu_normaliser($lieu);
+	$lieu_normalise = lieu_normaliser($lieu, $format_lieu);
 	if ($format_lieu == 'latitude_longitude') {
 		list($latitude, $longitude) = explode(',', $lieu_normalise);
 		$query = "lat=${latitude}&lon=${longitude}";

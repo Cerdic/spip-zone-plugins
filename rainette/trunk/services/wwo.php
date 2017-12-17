@@ -247,7 +247,7 @@ function wwo_service2url($lieu, $mode, $periodicite, $configuration) {
 	// On normalise le lieu et on récupère son format.
 	// Le service accepte la format ville,pays, le format latitude,longitude et le format adresse IP.
 	// Néanmoins, la query a toujours la même forme; il n'est donc pas nécessaire de gérer le format.
-	list($lieu_normalise,) = lieu_normaliser($lieu);
+	$lieu_normalise = lieu_normaliser($lieu);
 
 	$url = _RAINETTE_WWO_URL_BASE
 		   . '?key=' . $configuration['inscription']

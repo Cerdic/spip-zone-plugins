@@ -329,7 +329,7 @@ $GLOBALS['rainette_config']['langues_alternatives'] = array(
  *        des prévisions, par exemple, elle vaut 0 pour une périodicité de 24h, 1 pour 12h...
  *
  * @return array
- *        Le tableau standardisés des données météorologiques du service pour la période spécifiée.
+ *        Le tableau standardisé des données météorologiques du service pour la période spécifiée.
  */
 function meteo_normaliser($configuration_service, $mode, $flux, $periode) {
 	$tableau = array();
@@ -563,7 +563,7 @@ function erreur_formater_texte($erreur, $lieu, $mode, $modele, $service) {
 			$texte['principal'] .= _T("rainette:erreur_${type_erreur}", array('service' => $titre_service));
 			$texte['conseil'] .= _T('rainette:erreur_conseil_limite');
 			break;
-		// Cas d'erreur du à une mauvause utilisation des modèles
+		// Cas d'erreur du à une mauvaise utilisation des modèles
 		case 'modele_periodicite':
 			$texte['principal'] .= _T("rainette:erreur_${type_erreur}", array('modele' => $modele));
 			$texte['conseil'] .= _T('rainette:erreur_conseil_periodicite');
@@ -594,8 +594,8 @@ function periodicite_determiner($type_modele, $service) {
 	$periodicite = 0;
 
 	if (isset($GLOBALS['rainette_config']['periodicite'][$type_modele])) {
-		// Acquérir la configuration statique du service pour connaitre les périodicités horaires supportées
-		// pour le mode prévisions
+		// Acquérir la configuration statique du service pour connaître les périodicités horaires supportées
+		// pour le mode prévisions.
 		include_spip("services/${service}");
 		$configurer = "${service}_service2configuration";
 		$configuration = $configurer('previsions');
@@ -622,7 +622,7 @@ function periodicite_determiner($type_modele, $service) {
  */
 function periodicite_est_compatible($type_modele, $periodicite) {
 
-	// Périodicité initialisée à "non trouvée"
+	// Initialisation de la compatibilité à "non compatible".
 	$compatible = false;
 
 	if (isset($GLOBALS['rainette_config']['periodicite'][$type_modele])
@@ -662,11 +662,11 @@ function cache_nommer($lieu, $mode, $periodicite, $configuration_service) {
 	$dossier_cache = sous_repertoire(_DIR_VAR, 'cache-rainette');
 	$dossier_cache = sous_repertoire($dossier_cache, $configuration_service['alias']);
 
-	// Le nom du fichier cache est composé comme suit, chaque élement étant séparé par un underscore :
+	// Le nom du fichier cache est composé comme suit, chaque élément étant séparé par un underscore :
 	// -- le nom du lieu normalisé (sans espace et dont tous les caractères non alphanumériques sont remplacés par un tiret
 	// -- le nom du mode (infos, conditions ou previsions) accolé à la périodicité du cache pour les prévisions uniquement
 	// -- la langue du résumé si il existe ou rien si aucune traduction n'est fournie par le service
-	list($lieu_normalise, ) = lieu_normaliser($lieu);
+	$lieu_normalise = lieu_normaliser($lieu);
 	$fichier_cache = $dossier_cache
 					 . str_replace(array(' ', ',', '+', '.', '/'), '-', $lieu_normalise)
 					 . '_' . $mode
@@ -679,11 +679,12 @@ function cache_nommer($lieu, $mode, $periodicite, $configuration_service) {
 
 
 /**
- * @param $lieu
+ * @param string $lieu
+ * @param string $format_lieu
  *
- * @return array
+ * @return string
  */
-function lieu_normaliser($lieu) {
+function lieu_normaliser($lieu, &$format_lieu = '') {
 
 	$lieu_normalise = trim($lieu);
 
@@ -699,13 +700,13 @@ function lieu_normaliser($lieu) {
 	} else {
 		$format_lieu = 'ville_pays';
 		// On détermine la ville et éventuellement le pays (ville[,pays])
-		// et on élimine les espaces par un seul +
+		// et on élimine les espaces par un seul "+".
 		$elements = explode(',', $lieu_normalise);
 		$lieu_normalise = trim($elements[0]) . (!empty($elements[1]) ? ',' . trim($elements[1]) : '');
 		$lieu_normalise = preg_replace('#\s{1,}#', '+', $lieu_normalise);
 	}
 
-	return array($lieu_normalise, $format_lieu);
+	return $lieu_normalise;
 }
 
 
