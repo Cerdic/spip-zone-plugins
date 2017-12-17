@@ -8,7 +8,7 @@
  * @licence    GNU/GPL
  * @package    SPIP\Promotions\Pipelines
  */
-if (! defined ( '_ECRIRE_INC_VERSION' ))
+if (! defined('_ECRIRE_INC_VERSION'))
 	return;
 
 /**
@@ -20,9 +20,9 @@ if (! defined ( '_ECRIRE_INC_VERSION' ))
  *        	Déclarations d'interface pour le compilateur
  * @return array Déclarations d'interface pour le compilateur
  */
-function reservation_evenement_declarer_tables_interfaces($interfaces) {
-	$interfaces ['table_des_tables'] ['reservations'] = 'reservations';
-	$interfaces ['table_des_tables'] ['reservations_details'] = 'reservations_details';
+function reservation_evenement_declarer_tables_interfaces ($interfaces) {
+	$interfaces['table_des_tables']['reservations'] = 'reservations';
+	$interfaces['table_des_tables']['reservations_details'] = 'reservations_details';
 
 	return $interfaces;
 }
@@ -36,11 +36,11 @@ function reservation_evenement_declarer_tables_interfaces($interfaces) {
  *        	Description des tables
  * @return array Description complétée des tables
  */
-function reservation_evenement_declarer_tables_objets_sql($tables) {
-	$tables ['spip_reservations'] = array (
+function reservation_evenement_declarer_tables_objets_sql ($tables) {
+	$tables['spip_reservations'] = array(
 		'type' => 'reservation',
 		'principale' => "oui",
-		'field' => array (
+		'field' => array(
 			"id_reservation" => "bigint(21) NOT NULL",
 			"id_reservation_source" => "bigint(21) NOT NULL",
 			"id_auteur" => "bigint(21) NOT NULL DEFAULT '0'",
@@ -56,16 +56,16 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
 			"date" => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
 			"statut" => "varchar(20)  DEFAULT '0' NOT NULL",
 			"lang" => "varchar(10)  DEFAULT '' NOT NULL",
-			"langue_choisie" =>  "varchar(3) NOT NULL DEFAULT ''",
+			"langue_choisie" => "varchar(3) NOT NULL DEFAULT ''",
 			"maj" => "TIMESTAMP"
 		),
-		'key' => array (
+		'key' => array(
 			"PRIMARY KEY" => "id_reservation",
 			"KEY statut" => "statut,id_auteur,lang,id_reservation_source"
 		),
 		'titre' => "reference AS titre, '' AS lang",
 		'date' => "date",
-		'champs_editables' => array (
+		'champs_editables' => array(
 			'id_reservation_source',
 			'id_auteur',
 			'date_paiement',
@@ -77,7 +77,7 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
 			'reference',
 			'lang'
 		),
-		'champs_versionnes' => array (
+		'champs_versionnes' => array(
 			'id_auteur',
 			'date_paiement',
 			'nom',
@@ -85,19 +85,19 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
 			'donnees_auteur',
 			'reference'
 		),
-		'rechercher_champs' => array (
+		'rechercher_champs' => array(
 			"reference" => 8,
 			"id_reservation" => 8,
 			"email" => 8,
 			"nom" => 8
 		),
-		'tables_jointures' => array (
-			'spip_auteurs',
+		'tables_jointures' => array(
+			'spip_auteurs'
 		),
-		'join' => array (
-			'id_auteur' => 'id_auteur',
+		'join' => array(
+			'id_auteur' => 'id_auteur'
 		),
-		'statut_textes_instituer' => array (
+		'statut_textes_instituer' => array(
 			'attente' => 'reservation:texte_statut_attente',
 			'attente_paiement' => 'reservation:texte_statut_attente_paiement',
 			'accepte_part' => 'reservation:texte_statut_accepte_part',
@@ -107,7 +107,7 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
 			'refuse' => 'reservation:texte_statut_refuse',
 			'poubelle' => 'reservation:texte_statut_poubelle'
 		),
-		'statut_images' => array (
+		'statut_images' => array(
 			'attente' => 'puce-reservation-attente-16.png',
 			'attente_paiement' => 'puce-reservation-attente_paiement-16.png',
 			'accepte' => 'puce-reservation-accepte-16.png',
@@ -117,13 +117,13 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
 			'refuse' => 'puce-reservation-refuse-16.png',
 			'poubelle' => 'puce-reservation-poubelle-16.png'
 		),
-		'statut' => array (
-			array (
+		'statut' => array(
+			array(
 				'champ' => 'statut',
 				'publie' => 'accepte,cloture,accepte_part',
 				'previsu' => 'accepte,attente,attente_paiement,accepte_part',
 				'post_date' => 'date',
-				'exception' => array (
+				'exception' => array(
 					'statut',
 					'tout'
 				)
@@ -132,13 +132,13 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
 		'texte_changer_statut' => 'reservation:texte_changer_statut_reservation'
 	);
 
-	$tables ['spip_reservations_details'] = array (
+	$tables['spip_reservations_details'] = array(
 		'type' => 'reservations_detail',
 		'principale' => "oui",
-		'table_objet_surnoms' => array (
+		'table_objet_surnoms' => array(
 			'reservationsdetail'
 		), // table_objet('reservations_detail') => 'reservations_details'
-		'field' => array (
+		'field' => array(
 			"id_reservations_detail" => "bigint(21) NOT NULL",
 			"id_reservation" => "bigint(21) NOT NULL DEFAULT '0'",
 			"id_evenement" => "bigint(21) NOT NULL DEFAULT '0'",
@@ -151,13 +151,13 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
 			"statut" => "varchar(20)  DEFAULT '0' NOT NULL",
 			"maj" => "TIMESTAMP"
 		),
-		'key' => array (
+		'key' => array(
 			"PRIMARY KEY" => "id_reservations_detail",
 			"KEY statut" => "statut,id_reservation,id_evenement"
 		),
 		'titre' => "descriptif AS titre, '' AS lang",
 		// 'date' => "",
-		'champs_editables' => array (
+		'champs_editables' => array(
 			'id_reservation',
 			'id_evenement',
 			'descriptif',
@@ -168,7 +168,7 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
 			'devise',
 			'id_prix_objet'
 		),
-		'champs_versionnes' => array (
+		'champs_versionnes' => array(
 			'descriptif',
 			'quantite',
 			'prix_ht',
@@ -177,18 +177,18 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
 			'devise',
 			'id_prix_objet'
 		),
-		'rechercher_champs' => array (
+		'rechercher_champs' => array(
 			"descriptif" => 8
 		),
-		'tables_jointures' => array (
+		'tables_jointures' => array(
 			'spip_evenements',
 			'spip_reservations'
 		),
-		'join' => array (
+		'join' => array(
 			'id_evenement' => 'id_evenement',
-			'id_reservation' =>'id_reservation',
+			'id_reservation' => 'id_reservation'
 		),
-		'statut_textes_instituer' => array (
+		'statut_textes_instituer' => array(
 			'attente' => 'reservation:texte_statut_attente',
 			'attente_paiement' => 'reservation:texte_statut_attente_paiement',
 			'accepte_part' => 'reservation:texte_statut_accepte_part',
@@ -198,7 +198,7 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
 			'refuse' => 'reservation:texte_statut_refuse',
 			'poubelle' => 'reservation:texte_statut_poubelle'
 		),
-		'statut_images' => array (
+		'statut_images' => array(
 			'attente' => 'puce-reservation-attente-16.png',
 			'attente_paiement' => 'puce-reservation-attente_paiement-16.png',
 			'accepte_part' => 'puce-reservation-accepte_part-16.png',
@@ -208,13 +208,13 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
 			'refuse' => 'puce-reservation-refuse-16.png',
 			'poubelle' => 'puce-reservation-poubelle-16.png'
 		),
-		'statut' => array (
-			array (
+		'statut' => array(
+			array(
 				'champ' => 'statut',
 				'publie' => 'accepte,cloture,accepte_part',
 				'previsu' => 'accepte,attente,attente_paiement,accepte_part',
 				'post_date' => 'date',
-				'exception' => array (
+				'exception' => array(
 					'statut',
 					'tout'
 				)
@@ -225,15 +225,15 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
 
 	// Ajouter le champ action_cloture dans le tables articles et evenements
 
-	$tables ['spip_articles'] ['champs_editable'] [] = "action_cloture";
-	$tables ['spip_evenements'] ['champs_editable'] [] = "action_cloture";
+	$tables['spip_articles']['champs_editable'][] = "action_cloture";
+	$tables['spip_evenements']['champs_editable'][] = "action_cloture";
 
 	return $tables;
 }
 
-function reservation_evenement_declarer_tables_principales($tables_principales) {
-		$tables_principales ['spip_articles'] ['field'] ['action_cloture'] = "tinyint(1) NOT NULL";
-		$tables_principales ['spip_evenements'] ['field'] ['action_cloture'] = "tinyint(1) NOT NULL";
+function reservation_evenement_declarer_tables_principales ($tables_principales) {
+	$tables_principales['spip_articles']['field']['action_cloture'] = "tinyint(1) NOT NULL";
+	$tables_principales['spip_evenements']['field']['action_cloture'] = "tinyint(1) NOT NULL";
 
-		return $tables_principales;
-	}
+	return $tables_principales;
+}
