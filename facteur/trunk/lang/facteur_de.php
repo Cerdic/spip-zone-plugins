@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'config_info_enregistree' => 'Die Konfiguration des Briefträgers wurde gespeichert.',
 	'configuration_adresse_envoi' => 'Standard-Absenderadresse',
-	'configuration_facteur' => 'Briefträger',
+	'configuration_facteur' => 'Postbote',
 	'configuration_facteur_smtp_tls_allow_self_signed' => 'Validierung des SSL-Zertifikats',
 	'configuration_mailer' => 'Versandart',
 	'configuration_smtp' => 'Auswahl der Versandmethode',
@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_facteur_forcer_from' => 'Diese Versandadresse anzeigen wenn  die Domain im Feld <tt>From</tt> nicht identisch ist',
 
 	// M
-	'message_identite_email' => 'Die Konfiguration des Plugins Briefträger (facteur) überschreibt diese Adresse für den Mailversand.',
+	'message_identite_email' => 'Die Konfiguration des Plugins Postbote (facteur) überschreibt diese Adresse für den Mailversand.',
 
 	// N
 	'note_test_configuration' => 'Eine Mail wird an diese Adresse geschickt.',
