@@ -52,7 +52,7 @@ function produits_accueil_encours($flux) {
 
 // Insérer les listes de produits et le bouton de création dans les pages rubriques
 function produits_affiche_enfants($flux) {
-	if ($flux['args']['id_rubrique'] > 0) {
+	if (isset($flux['args']['id_rubrique']) and $flux['args']['id_rubrique'] > 0) {
 		$flux['data'] .= recuperer_fond(
 			'prive/objets/liste/produits',
 			array('id_rubrique' => $flux['args']['id_rubrique']),
