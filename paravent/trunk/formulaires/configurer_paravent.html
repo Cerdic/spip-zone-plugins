@@ -14,8 +14,7 @@
 				rows=4,
 				label=<:paravent:cfg_head:>,
 				explication=<:paravent:cfg_head_explication:>
-				})]
-			
+				})]			
 			[(#SAISIE{textarea, body,
 				label=<:paravent:cfg_body:>,
 				explication=<:paravent:cfg_body_explication:>
@@ -23,7 +22,11 @@
 			[(#SAISIE{checkbox,visiteurs,
 				datas=true|<:paravent:visiteurs_autoriser:>,
 				label=<:info_visiteurs:>,
-				defaut=unchecked})]			
+				defaut=unchecked})]
+			[(#SAISIE{checkbox,disponible,
+				datas=true|<:paravent:service_disponible:>,
+				label=<:paravent:info_service_disponible:>,
+				defaut=unchecked})]
 		</ul>
 
 		<input type="hidden" name="_meta_casier" value="paravent" />
