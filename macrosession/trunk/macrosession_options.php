@@ -26,7 +26,6 @@ if (!defined('nobreak'))
 // FIXME : appeler appliquer_filtre dans le code compilé est une somptuosité superfétatoire
 // Au lieu de cela, appeler chercher_filtre à la compilation pour savoir quelle est la fonction appelée par le filtre et insérer dans le code compilé un appel direct à cette fonction 
 // Comme ça plus besoin d'inclure inc/filtres dans mes_options
-//
 
 //
 // Accés étendu aux données de session des visiteurs
@@ -210,6 +209,11 @@ function balise__SESSION_FIN_dist($p) {
 	return $p;
 }
 
+function macrosession_pipe($q) {
+//	echo "exec macrosession_pipe($q)<br>";
+	return $q;
+}
+
 function compile_appel_macro_autoriser ($p) {
 	$autorisation = interprete_argument_balise(1, $p);
 
@@ -221,22 +225,60 @@ function compile_appel_macro_autoriser ($p) {
 		return "autoriser('.\"$autorisation\".')";
 
 	$type = trim_quote(interprete_argument_balise (2, $p));
-	if (erreur_argument_macro ('#_AUTORISER_SI', 'type', $type, $p))
+	if (erreur_argument_macro ("#_AUTORISER_SI{ $autorisation,...}", 'type', $type, $p))
 		return "''";
 
 	if (!existe_argument_balise(3, $p)) 
 		return "autoriser('.\"$autorisation\".', '.\"$type\".')";
 
 	$id = trim_quote(interprete_argument_balise (3, $p));
-	if (erreur_argument_macro ('#_AUTORISER_SI', 'id', $id, $p))
+	//
+	// 4 possibilités de passer des id calculées à #_AUTORISER_SI :
+	// - Appels directs de #BALISE ou #GET{variable} (non recommandé)
+	// - Passer 'env' et 'url' pour chercher l'id_ associé au type dans l'env ou dans l'url
+	// Ex : #_AUTORISER{modifier,article,env} ou #_AUTORISER{modifier,article,url} 
+	//
+
+	// Hacks : décompiler pour reconnaître et gérer #BALISE et #GET{variable}
+	//
+	// 1) Balises genre #ID_ARTICLE
+	// Comme leur source php est inséré dans une chaine il faut l'enchasser entre accolades, et enlever le @
+	// TODO : assurer une évaluation hors chaine
+	if ((substr ($id,0,11) == '@$Pile[0][\'')
+		and preg_match("/[a-z_]+'\]\$/iu", substr ($id, 11))) {
+		$id = 'macrosession_pipe({'.substr($id, 1).'})';
+	}
+	// 2) #GET{variable}
+	// cad : table_valeur($Pile["vars"], (string)'variable', null)
+	// Pour simplifier la réécriture, on ne passe pas par table_valeur
+	elseif (preg_match("/^table_valeur\(\\\$Pile\[\"vars\"\], \(string\)'([a-z_]+)', null\)\s*\$/iu",$id,$matches)) {
+		$id = 'macrosession_pipe({$Pile["vars"]["'.$matches[1].'"]})';
+	}
+	elseif (erreur_argument_macro ("#_AUTORISER_SI{ $autorisation, $type, ...}", 'id', $id, $p, 'contexte_ok'))
 		return "''";
 
-	if (!existe_argument_balise(4, $p)) 
-		return "autoriser('.\"$autorisation\".', '.\"$type\".', '.\"$id\".')";
+	if (!existe_argument_balise(4, $p)) {
+		$id_type = "'id_".substr($type,1);	// 	TODO : utiliser API spip
+		switch($id) {	
+			// TODO : gérer ces cas dans la continuité des 1) et 2) plus haut, en affectant $id. Ainsi ce sera compatible avec arguments qui et opt
+			// 3)
+			case "'env'" :
+				$ret = "autoriser('.\"$autorisation\".', '.\"$type\".', '.\"macrosession_pipe({\$Pile[0][$id_type]})\".')";
+				return $ret;
 
-	// Les appels à #_AUTORISER_SI avec arguments $qui et $opt n'ont été testés
+			// 4)
+			case "'url'" :
+				$ret = "autoriser('.\"$autorisation\".', '.\"$type\".', '.\"macrosession_pipe(_request($id_type))\".')";
+				return $ret;
+
+			default :
+				return "autoriser('.\"$autorisation\".', '.\"$type\".', '.\"$id\".')";
+		};
+	};
+
+	// ATTENTION : Les appels à #_AUTORISER_SI avec arguments $qui et $opt n'ont pas été testés
 	$qui = trim_quote(interprete_argument_balise (4, $p));
-	if (erreur_argument_macro ('#_AUTORISER_SI', 'qui', $qui, $p))
+	if (erreur_argument_macro ("#_AUTORISER_SI{ $autorisation, $type, $id, ...}", 'qui', $qui, $p))
 		return "''";
 	if (!existe_argument_balise(5, $p)) 
 		return "autoriser('.\"$autorisation\".', '.\"$type\".', '.\"$id\".')";
@@ -264,9 +306,11 @@ function balise__AUTORISER_FIN_dist($p) {
 }
  
 
-function erreur_argument_macro ($macro, $argument, $val, $p) {
+function erreur_argument_macro ($macro, $argument, $val, $p, $contexte_ok='') {
 	if (substr($val, 0, 1) != "'") {
-		erreur_squelette ("L'argument '$argument' de la macro '$macro' ne doit pas être une valeur calculée (".$val.")", $p);
+		if ($contexte_ok)
+			$contexte_ok = "Pour chercher dans les variables d'environnement ou d'url, vous pouvez aussi utiliser 'env' et 'url'";
+		erreur_squelette ("L'argument '$argument' de la macro '$macro' ne doit pas être une valeur calculée (".$val."). $contexte_ok", $p);
 		return true;
 	};
 	return false;
