@@ -5,6 +5,7 @@
 figure.swiper-slide{
   background-size: cover;
   background-position: center;
+  margin: 0;
 }
 
 figure.swiper-slide img{

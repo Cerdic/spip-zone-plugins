@@ -1,8 +1,9 @@
+[(#SET{rand,#VAL{1}|rand{400000}})]
 <B_SWIPER>
 <div class="swiper-container[ swiper_(#ID_SWIPER)]">
   <div class="swiper-wrapper">
     <BOUCLE_SWIPER(DOCUMENTS) {id_swiper} {par rang_lien, num titre, titre} {si #ENV{id_swiper}} {extension==jpg|png|gif}>
-      <INCLURE{fond=inclure/inc-swiper-figure, id_document} />
+      <INCLURE{fond=inclure/inc-swiper-figure, id_document,rel=#GET{rand}} />
     </BOUCLE_SWIPER>
   </div>
   [(#TOTAL_BOUCLE|>{1}|oui)<INCLURE{fond=inclure/inc-swiper-paginations} />]
@@ -13,7 +14,7 @@
 <div class="swiper-container[ swiper_article_(#ID_ARTICLE)]">
   <div class="swiper-wrapper">
     <BOUCLE_SWIPER_ARTICLE(DOCUMENTS) {id_article} {par rang_lien, num titre, titre} {si #ENV{multiple}|non} {si #ENV{id_swiper}|non} {extension==jpg|png|gif}>
-      <INCLURE{fond=inclure/inc-swiper-figure, id_document} />
+      <INCLURE{fond=inclure/inc-swiper-figure, id_document,rel=#GET{rand}} />
     </BOUCLE_SWIPER_ARTICLE>
   </div>
   [(#TOTAL_BOUCLE|>{1}|oui)<INCLURE{fond=inclure/inc-swiper-paginations} />]
@@ -25,7 +26,7 @@
 <div class="swiper-container swiper_documents">
   <div class="swiper-wrapper">
     <BOUCLE_SWIPER_AU_CHOIX(DOCUMENTS){id_document IN #GET{multiple}}{extension==jpg|png|gif}>
-      <INCLURE{fond=inclure/inc-swiper-figure, id_document} />
+      <INCLURE{fond=inclure/inc-swiper-figure, id_document,rel=#GET{rand}} />
     </BOUCLE_SWIPER_AU_CHOIX>
   </div>
   [(#TOTAL_BOUCLE|>{1}|oui)<INCLURE{fond=inclure/inc-swiper-paginations} />]
