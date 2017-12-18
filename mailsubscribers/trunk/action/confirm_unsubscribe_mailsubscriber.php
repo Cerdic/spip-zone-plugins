@@ -25,7 +25,7 @@ function action_confirm_unsubscribe_mailsubscriber_dist($email = null, $identifi
 		$arg = explode(':', $arg);
 		$timestamp = array_pop($arg);
 		$identifiant = array_pop($arg);
-		$email = implode(":", $email);
+		$email = implode(":", $arg);
 	}
 
 	// si l'URL de confirmation contient un timestamp trop recent c'est que le clic a ete vraiment super rapide
