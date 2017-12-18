@@ -104,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_pas_encore_inscrit' => 'pas inscrit',
 	'texte_statut_refuse' => 'suspendue',
 	'texte_statut_valide' => 'active',
+	'texte_vous_avez_clique_vraiment_tres_vite' => 'Vous avez cliqué vraiment très vite sur le bouton de confirmation. Êtes-vous réellement humain ?',
 	'titre_bonjour' => 'Bonjour',
 	'titre_export_mailsubscribers' => 'Exporter les inscrits',
 	'titre_export_mailsubscribers_all' => 'Exporter toutes les adresses',

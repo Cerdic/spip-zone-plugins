@@ -64,7 +64,7 @@ function action_unsubscribe_mailsubscriber_dist($email = null, $identifiant = nu
 			}
 			$titre .= "<br /><br />" . bouton_action(_T('newsletter:bouton_unsubscribe'),
 					generer_action_auteur('confirm_unsubscribe_mailsubscriber',
-						mailsubscriber_base64url_encode($email) . "-$identifiant"));
+						mailsubscriber_base64url_encode($email . ":$identifiant:".time())));
 		}
 		else {
 			$options['force'] = true;

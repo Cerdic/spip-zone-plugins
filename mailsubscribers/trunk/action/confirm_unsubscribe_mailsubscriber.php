@@ -17,12 +17,27 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function action_confirm_unsubscribe_mailsubscriber_dist($email = null, $identifiant = null) {
 	include_spip('mailsubscribers_fonctions');
+	$timestamp = null;
 	if (is_null($email)) {
 		$securiser_action = charger_fonction("securiser_action", "inc");
-		$email = $securiser_action();
-		$email = explode("-", $email);
-		$identifiant = array_pop($email);
-		$email = mailsubscriber_base64url_decode(implode("-", $email));
+		$arg = $securiser_action();
+		$arg = mailsubscriber_base64url_decode($arg);
+		$arg = explode(':', $arg);
+		$timestamp = array_pop($arg);
+		$identifiant = array_pop($arg);
+		$email = implode(":", $email);
+	}
+
+	// si l'URL de confirmation contient un timestamp trop recent c'est que le clic a ete vraiment super rapide
+	// on suspecte donc que c'est un bot
+	// si c'est un humain il n'a qua recharger la page pour que ca passe
+	if ($timestamp and $timestamp >= $_SERVER['REQUEST_TIME'] - 1) {
+
+		$titre = _T('mailsubscriber:texte_vous_avez_clique_vraiment_tres_vite');
+		// Dans tous les cas on finit sur un minipres qui dit si ok ou echec
+		include_spip('inc/minipres');
+		echo minipres($titre, "<style>h1{font-weight: normal}</style>", "", true);
+		exit;
 	}
 
 	// il suffit de rejouer unsubscribe en forcant le simple-optin
