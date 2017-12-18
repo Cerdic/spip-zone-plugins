@@ -1,15 +1,16 @@
 <paquet
 	prefix="timelineme"
-	categorie="squelette"
+	categorie="edition"
 	version="0.2.0"
 	etat="test"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/timelineme-32.png"
-	documentation=""
+	documentation="https://contrib.spip.net?article4958"
+	logo="prive/themes/spip/images/timelineme-32.png"
 >
 
 	<nom>Timeline Me</nom>
-	<!--  Une frise des temps pour les articles d'une rubrique - SPIP  -->
+	<!--  Les articles d'une rubrique sur une frise des temps -->
 
 	<auteur>chankalan</auteur>
 	<credit lien="http://mickaelr.github.io/jquery-timelineMe/">TimelineMe</credit>
