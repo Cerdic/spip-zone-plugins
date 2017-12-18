@@ -3,7 +3,7 @@
 <body>
 <div class="header">
 	<BOUCLE_titreliste(MAILSUBSCRIBINGLISTS){id_mailsubscribinglist}>
-	<p><:mailsubscriber:subscribe_titre_email_liste{titre_liste=#TITRE}:></p>
+	<p><:mailsubscriber:subscribe_titre_email_liste{titre_liste=##ID_MAILSUBSCRIBINGLIST}:></p>
 	</BOUCLE_titreliste>
 	<p><:mailsubscriber:subscribe_titre_email:></p>
 	<//B_titreliste>
@@ -12,7 +12,7 @@
 
 [(#SET{email,<b>#EMAIL</b>})]
 <BOUCLE_titreliste2(MAILSUBSCRIBINGLISTS){id_mailsubscribinglist}>
-<p><:mailsubscriber:subscribe_texte_email_liste_1{email=#GET{email},nom_site_spip=#GET{nom_site_spip},titre_liste=#TITRE}:></p>
+<p><:mailsubscriber:subscribe_texte_email_liste_1{email=#GET{email},nom_site_spip=#GET{nom_site_spip},titre_liste=##ID_MAILSUBSCRIBINGLIST}:></p>
 </BOUCLE_titreliste2>
 <p><:mailsubscriber:subscribe_texte_email_1{email=#GET{email}}:></p>
 <//B_titreliste2>

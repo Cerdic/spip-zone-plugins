@@ -3,7 +3,7 @@
 <body>
 <div class="header">
 	<BOUCLE_titreliste(MAILSUBSCRIBINGLISTS){id_mailsubscribinglist}>
-	<p><:mailsubscriber:unsubscribe_titre_email_liste{titre_liste=#TITRE}:></p>
+	<p><:mailsubscriber:unsubscribe_titre_email_liste{titre_liste=##ID_MAILSUBSCRIBINGLIST}:></p>
 	</BOUCLE_titreliste>
 	<p><:mailsubscriber:unsubscribe_titre_email:></p>
 	<//B_titreliste>
