@@ -205,6 +205,8 @@ function mailsubscribers_compte_inscrits($liste, $statut = 'valide', $id_segment
 			}
 			$count[''][$row['statut']][0] += $row['n'];
 		}
+		// sauf pour statut en attente : on compte tous les subscribers qui ont une inscription en attente
+		$count['']['prop'][0] = sql_getfetsel('count(DISTINCT id_mailsubscriber)','spip_mailsubscriptions', 'statut='.sql_quote('prop').' AND id_segment=0');
 
 	}
 
