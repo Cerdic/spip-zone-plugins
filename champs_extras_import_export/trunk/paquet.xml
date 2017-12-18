@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="1.0.2"
 	etat="experimental"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="images/ieextras-64.png"
 	documentation="https://contrib.spip.net/Importer-Exporter-des-descriptions-de-champs-extras"
 >
