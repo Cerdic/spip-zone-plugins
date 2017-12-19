@@ -69,11 +69,49 @@ function produits_affiche_enfants($flux) {
 	return $flux;
 }
 
+/**
+ * Afficher le nombre d'éléments dans les parents
+ *
+ * @pipeline boite_infos
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ **/
+function produits_boite_infos($flux) {
+	if (isset($flux['args']['type']) and isset($flux['args']['id']) and $id = intval($flux['args']['id'])) {
+		$texte = '';
+		if ($flux['args']['type'] == 'rubrique' and $nb = sql_countsel('spip_produits', array("statut='publie'", 'id_rubrique=' . $id))) {
+			$texte .= '<div>' . singulier_ou_pluriel($nb, 'produit:info_1_produit', 'produit:info_nb_produits') . "</div>\n";
+		}
+		if ($texte and $p = strpos($flux['data'], '<!--nb_elements-->')) {
+			$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
+		}
+	}
+	return $flux;
+}
+
 // Compter les produits comme des enfants de rubriques
 function produits_objet_compte_enfants($flux) {
 	if ($flux['args']['objet'] == 'rubrique' and ($id_rubrique = intval($flux['args']['id_objet'])) > 0) {
 		$statut = $flux['args']['statut'] ? ' and statut='.sql_quote($flux['args']['statut']) : '';
 		$flux['data']['produits'] = sql_countsel('spip_produits', 'id_rubrique='.$id_rubrique.$statut);
+	}
+	return $flux;
+}
+
+
+/**
+ * Publier et dater les rubriques qui ont un produit publie
+ *
+ * @param array $flux
+ * @return array
+ */
+function produits_calculer_rubriques($flux){
+	include_spip('inc/config');
+	if (lire_config('produits/publier_rubriques')) {
+		$r = sql_select("R.id_rubrique AS id, max(A.date) AS date_h", "spip_rubriques AS R, spip_produits AS A", "R.id_rubrique = A.id_rubrique AND R.date_tmp <= A.date AND A.statut='publie' ", "R.id_rubrique");
+		while ($row = sql_fetch($r)) {
+			sql_updateq('spip_rubriques', array('statut_tmp' => 'publie', 'date_tmp' => $row['date_h']), "id_rubrique=" . $row['id']);
+		}
 	}
 	return $flux;
 }

@@ -62,7 +62,15 @@ function formulaires_configurer_produits_saisies_dist(){
 				'afficher_si' => '@limiter_ajout@ == "on"' 
 			)
 		),
+		array(
+			'saisie' => 'case',
+			'options' => array(
+				'nom' => 'publier_rubriques',
+				'label' => _T('produits:publier_rubriques_label'),
+				'label_case' => _T('produits:publier_rubriques_label_case'),
+				'explication' => _T('produits:publier_rubriques_explication'),
+				'defaut' => $config['publier_rubriques'],
+			)
+		),
 	);
 }
-
-?>
