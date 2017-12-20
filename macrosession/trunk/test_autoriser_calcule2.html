@@ -1,0 +1,59 @@
+<h1># _AUTORISER_SI avec valeurs calculées d'id - DANS UNE BOUCLE</h1>
+
+Environnement reçu  # ID_ARTICLE=#ID_ARTICLE<br>
+Pour tester ce squelette il faut debug=oui dans l'url<br>
+et avoir activé le debug dans macrosession_options.php<br>
+<br>
+<BOUCLE_ar(ARTICLES){id_article=1}>
+	Dans la boucle # ID_ARTICLE=#ID_ARTICLE
+	<br>
+	<br>
+	Avec env :
+	#_AUTORISER_SI{modifier,article,env} OUI
+	#_AUTORISER_SINON NON
+	#_AUTORISER_FIN
+	<br>
+	Avec boucle :
+	#_AUTORISER_SI{modifier,article,boucle} OUI
+	#_AUTORISER_SINON NON
+	#_AUTORISER_FIN
+	<br>
+	Avec debug :
+	#_AUTORISER_SI{modifier,article,debug} OUI
+	#_AUTORISER_SINON NON
+	#_AUTORISER_FIN
+	<br>
+</BOUCLE_ar>
+
+
+<H3>Dans une boucle ARTICLES avec env</H3>
+
+<BOUCLE_b(ARTICLES){0,10}>
+	#_AUTORISER_SI{modifier,article,env}
+		Autorisation accordée pour article #ID_ARTICLE
+	#_AUTORISER_FIN
+</BOUCLE_b>
+
+<H3>Dans une boucle DOCUMENTS avec env</H3>
+
+<BOUCLE_bb(DOCUMENTS){0,10}>
+	#_AUTORISER_SI{modifier,document,env}
+		Autorisation accordée pour DOCUMENT #ID_DOCUMENT
+	#_AUTORISER_FIN
+</BOUCLE_bb>
+
+<H3>Dans une boucle ARTICLES avec boucle</H3>
+
+<BOUCLE_bou(ARTICLES){0,10}>
+	#_AUTORISER_SI{modifier,article,boucle}
+		Autorisation accordée pour article #ID_ARTICLE
+	#_AUTORISER_FIN
+</BOUCLE_bou>
+
+<H3>Dans une boucle DOCUMENTS avec boucle</H3>
+
+<BOUCLE_bbou(DOCUMENTS){0,10}>
+	#_AUTORISER_SI{modifier,document,boucle}
+		Autorisation accordée pour DOCUMENT #ID_DOCUMENT
+	#_AUTORISER_FIN
+</BOUCLE_bbou>
