@@ -48,7 +48,7 @@ if (!function_exists('lister_tables_objets')) {
 	 *                    Sinon, on envoie un false.
 	 */
 	function lister_tables_objets() {
-		include_spip('bas/objets');
+		include_spip('base/objets');
 		/* récupérer les tables principales */
 		$tables_principales = lister_tables_principales();
 		/* Ne garder que les noms de tables */
@@ -615,8 +615,10 @@ function last_branch_release($logiciel = 'spip', $version = '') {
 			if ($releases = releases($logiciel) and $releases != false and is_array($releases)) {
 				$branches = preg_grep(",^" . version2branche($version) . ",", $releases);
 				$branches = array_values($branches);
+
 				return end($branches);
 			}
+
 			return false;
 		}
 	}
@@ -649,5 +651,68 @@ function calcul_branches_dist($logiciel) {
 	} else {
 		return false;
 	}
+
+}
+
+function info_sites_lister_projets($champ = 'nom') {
+	if (empty($champ) or strlen($champ) == 0) {
+		$champ = 'nom';
+	}
+	$results = array();
+	include_spip('base/objets');
+	/* récupérer les tables principales */
+	$tables_principales = lister_tables_principales();
+	$projets_tables = $tables_principales['spip_projets'];
+	$projets_champs = array_keys($projets_tables['field']);
+
+	if (!in_array($champ, $projets_champs)) {
+		return $results;
+	}
+
+	include_spip('base/abstract_sql');
+
+	$all_projects = sql_allfetsel('DISTINCT(' . $champ . ')', 'spip_projets');
+	if (is_array($all_projects) and count($all_projects) > 0) {
+		foreach ($all_projects as $projet) {
+			$results[] = trim($projet[$champ]);
+		}
+	}
+	$results = array_unique($results);
+	$results = array_filter($results);
+	natsort($results);
+
+	return $results;
+
+}
+
+
+function info_sites_lister_organisations($champ = 'nom') {
+	if (empty($champ) or strlen($champ) == 0) {
+		$champ = 'nom';
+	}
+	$results = array();
+	include_spip('base/objets');
+	/* récupérer les tables principales */
+	$tables_principales = lister_tables_principales();
+	$organisations_tables = $tables_principales['spip_organisations'];
+	$organisations_champs = array_keys($organisations_tables['field']);
+
+	if (!in_array($champ, $organisations_champs)) {
+		return $results;
+	}
+
+	include_spip('base/abstract_sql');
+
+	$all_organisations = sql_allfetsel('DISTINCT(' . $champ . ')', 'spip_organisations');
+	if (is_array($all_organisations) and count($all_organisations) > 0) {
+		foreach ($all_organisations as $organisation) {
+			$results[] = trim($organisation[$champ]);
+		}
+	}
+	$results = array_unique($results);
+	$results = array_filter($results);
+	natsort($results);
+
+	return $results;
 
 }

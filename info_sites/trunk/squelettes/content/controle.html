@@ -1,6 +1,6 @@
 <h1>Contrôle</h1>
 [(#SET{contacts_liens,#ARRAY})]
-<BOUCLE_contacts_liens (spip_organisations_contacts) {tout} {fusion id_contact}>[(#SET{contacts_liens,[(#GET{contacts_liens}|push{#ID_CONTACT})]})] </BOUCLE_contacts_liens>
+<BOUCLE_contacts_liens (spip_organisations_liens) {objet="contact"} {fusion id_objet}>[(#SET{contacts_liens,[(#GET{contacts_liens}|push{#ID_OBJET})]})] </BOUCLE_contacts_liens>
 <B_contacts>
 	<div class="liste-objets contacts">
 		<h3><:info_sites:controle_contacts_orphelins:></h3>

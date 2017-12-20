@@ -6,12 +6,12 @@
 //== Colors
 //
 //## Gray and brand colors for use across Bootstrap.
-
-@gray-darker:           lighten(#000, 13.5%); // #222
-@gray-dark:             lighten(#000, 20%);   // #333
-@gray:                  lighten(#000, 33.5%); // #555
-@gray-light:            lighten(#000, 46.7%); // #777
-@gray-lighter:          lighten(#000, 93.5%); // #eee
+@gray-base: 						#000;
+@gray-darker:           lighten(@gray-base, 13.5%); // #222
+@gray-dark:             lighten(@gray-base, 20%);   // #333
+@gray:                  lighten(@gray-base, 33.5%); // #555
+@gray-light:            lighten(@gray-base, 46.7%); // #777
+@gray-lighter:          lighten(@gray-base, 93.5%); // #eee
 
 @gray-second:           #a8a8a8;
 @gray-third:            #efefef;
@@ -29,17 +29,17 @@
 @brand-warning:         #f0ad4e;
 @brand-danger:          #d9534f;
 
-@bg-primary:            #906021;
-@bg-primary-light:      #449dd5;
-@bg-success:            #49A8DD;
-@bg-info:               #2ec1cc;
-@bg-warning:            #ffb61c;
-@bg-danger:             #e94b3b;
+@bg-primary:            @brand-primary;
+@bg-primary-light:      lighten(@bg-primary, 13.5%);
+@bg-success:            @brand-success;
+@bg-info:               @brand-info;
+@bg-warning:            @brand-warning;
+@bg-danger:             @brand-danger;
 @bg-orange:             #f98e33;
 @bg-violet:             #4A5171;
 @bg-dark:               #666666;
 @bg-bright:             #fafafa;
-@bg-reverse:            white;
+@bg-reverse:            @white;
 @bg-site:               #F0F0F0;
 
 

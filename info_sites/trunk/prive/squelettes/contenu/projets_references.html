@@ -1,0 +1,11 @@
+[(#AUTORISER{voir,projetsreferences}|sinon_interdire_acces)]
+<h1><:projets_reference:titre_projets_references:></h1>
+<div class="nettoyeur"></div>
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/projets_references, env, ajax, sinon=<:projets_reference:info_aucun_projets_reference:>}>
+
+[(#AUTORISER{creer,projets_reference})
+	[(#URL_ECRIRE{projets_reference_edit,new=oui}|icone_verticale{<:projets_reference:icone_creer_projets_reference:>,projets_reference,new,right})]
+]

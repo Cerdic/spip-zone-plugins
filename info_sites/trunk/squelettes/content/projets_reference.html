@@ -1,0 +1,27 @@
+<BOUCLE_projets_reference (PROJETS_REFERENCES) {id_projets_reference} {tout}>
+[(#AUTORISER{infositesvoir,projetssite,#ID_PROJETS_REFERENCE}|sinon_interdire_acces{'',401,<:info_sites:zone_restreinte:>})]
+[(#BOITE_OUVRIR{[
+	<h1 class="titre">[(#RANG). ](#NOM|sinon{<:info_sans_titre:>})</h1>
+],simple fiche_objet})]
+
+[(#LOGO_PROJETS_REFERENCE|image_reduire{150,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height}|inserer_attribut{'class','img-responsive'})
+<div class="clearfix"></div>]
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/projets_reference,id=#ID_PROJETS_REFERENCE,id_projets_reference=#ID_PROJETS_REFERENCE,ajax=wysiwyg} />
+</div>
+<div class="clearfix"></div>
+
+	#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,projets_reference,id,#ID_PROJETS_REFERENCE},data,'<div class="nettoyeur"></div>'}}
+	[(#SET{exec,#ARRAY{exec,projets_reference}})]
+	[(#SET{contexte,#GET{exec}|array_merge{#ENV**|unserialize}})]
+	#PIPELINE{afficher_fiche_objet,#ARRAY{args,#ARRAY{type,projets_reference,id,#ID_PROJETS_REFERENCE,contexte,#GET{contexte}},data,'<div class="nettoyeur"></div>'}}
+
+	#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{type-page}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</BOUCLE_projets_reference>
+[(#ENV**{type-page}|=={projets_reference_edit}|?{#INCLURE{fond=prive/squelettes/contenu/projets_reference_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_projets_reference>
+

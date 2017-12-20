@@ -1214,3 +1214,97 @@ function confirmer_roles_auteurs_projets($qui, $id_projet = 0, $role_creation = 
 	// On prend les statuts par défaut
 	return false;
 }
+
+
+// -----------------
+// Objet projets_references
+
+/**
+ * Autorisation de créer (projetsreference)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_projetsreference_creer_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositescreer', 'projetsreference', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de voir (projetsreference)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_projetsreference_voir_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositesvoir', 'projetsreference', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de modifier (projetsreference)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_projetsreference_modifier_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositesmodifier', 'projetsreference', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de supprimer (projetsreference)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_projetsreference_supprimer_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositessupprimer', 'projetsreference', $id, $qui, $opt);
+}
+
+
+
+/**
+ * Autorisation de lier/délier l'élément (projetsreferences)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_associerprojetsreferences_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositesassocier', 'projetsreferences', $id, $qui, $opt);
+
+}
+
+
+/**
+ * Autorisation d'iconifier un auteur (mettre un logo)
+ *
+ * Il faut un administrateur ou que l'auteur soit celui qui demande l'autorisation
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type Type d'objet sur lequel appliquer l'action
+ * @param  int $id Identifiant de l'objet
+ * @param  array $qui Description de l'auteur demandant l'autorisation
+ * @param  array $opt Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_projetsreference_iconifier_dist($faire, $type, $id, $qui, $opt) {
+	return false;
+}
