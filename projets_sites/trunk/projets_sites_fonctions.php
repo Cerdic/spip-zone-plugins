@@ -123,10 +123,9 @@ function sp_lister_type_sites($from = 'bdd') {
 		$types_sites = sql_allfetsel("DISTINCT(type_site)", 'spip_projets_sites');
 		if (is_array($types_sites) and count($types_sites) > 0) {
 			foreach ($types_sites as $type_site) {
-				$liste_types_sites[] = $type_site['type_site'];
+				$liste_types_sites[$type_site['type_site']] = _T('projets_site:type_site_' . $type_site['type_site'] . '_court');
 			}
 			$liste_types_sites = array_filter($liste_types_sites); // On enlève les valeurs vides
-			$liste_types_sites = array_values($liste_types_sites); // On réindexe le tableau pour éviter des surprises
 		}
 	}
 
