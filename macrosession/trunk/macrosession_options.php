@@ -9,7 +9,7 @@
  *
  * @copyright	2016, 2017
  * @author 		JLuc
- * @author		Marcimat
+ * @credit		Marcimat
  * @licence		GPL
  * 
  */
@@ -223,6 +223,10 @@ function macrosession_print($a) {
 }
 
 function compile_appel_macro_autoriser ($p) {
+	if (!existe_argument_balise(1, $p)) {
+		erreur_squelette ("Il faut au moins un argument à la balise #_AUTORISER", $p);
+		return "''";
+	};
 	$autorisation = interprete_argument_balise(1, $p);
 
 	if (erreur_argument_macro ('#_AUTORISER_SI', 'autorisation', $autorisation, $p))
