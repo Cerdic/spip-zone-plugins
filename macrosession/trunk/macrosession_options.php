@@ -17,6 +17,8 @@
 include_spip('inc/session');
 include_spip ('inc/filtres'); 
 
+unset($_GET['debug']); // commenter pour permettre l'analyse et debug
+
 // on utilise nobreak quand il n'y a pas de break entre 2 cases d'un switch,
 // pour témoigner du fait que cette omission est intentionnelle
 if (!defined('nobreak'))
@@ -209,9 +211,15 @@ function balise__SESSION_FIN_dist($p) {
 	return $p;
 }
 
-function macrosession_pipe($q) {
-//	echo "exec macrosession_pipe($q)<br>";
+function macrosession_pipe($q="!!! non défini !!!") {
+	if (isset($_GET['debug']))
+		echo "exec macrosession_pipe($q)<br>";
 	return $q;
+}
+function macrosession_print($a) {
+	if (isset($_GET['debug']))
+		echo '<pre>'.print_r($a, 1).'</pre>';
+	return "''";
 }
 
 function compile_appel_macro_autoriser ($p) {
@@ -235,8 +243,8 @@ function compile_appel_macro_autoriser ($p) {
 	//
 	// 4 possibilités de passer des id calculées à #_AUTORISER_SI :
 	// - Appels directs de #BALISE ou #GET{variable} (non recommandé)
-	// - Passer 'env' et 'url' pour chercher l'id_ associé au type dans l'env ou dans l'url
-	// Ex : #_AUTORISER{modifier,article,env} ou #_AUTORISER{modifier,article,url} 
+	// - Passer 'env', 'boucle' et 'url' pour chercher l'id_ associé au type dans l'env reçu, dans la boucle immédiatement englobante ou dans l'url
+	// Ex : #_AUTORISER{modifier,article,env} ou #_AUTORISER{modifier,article,boucle} ou #_AUTORISER{modifier,article,url} 
 	//
 
 	// Hacks : décompiler pour reconnaître et gérer #BALISE et #GET{variable}
@@ -263,11 +271,30 @@ function compile_appel_macro_autoriser ($p) {
 			// TODO : gérer ces cas dans la continuité des 1) et 2) plus haut, en affectant $id. Ainsi ce sera compatible avec arguments qui et opt
 			// 3)
 			case "'env'" :
+				if (isset($_GET['debug']))
+					echo "Avec 'env' : compile appel autoriser($autorisation, $type, \$Pile[0][$id_type])<br>";
 				$ret = "autoriser('.\"$autorisation\".', '.\"$type\".', '.\"macrosession_pipe({\$Pile[0][$id_type]})\".')";
+				return $ret;
+
+			case "'boucle'" :
+				if (isset($_GET['debug']))
+					echo "Avec 'boucle' : compile appel autoriser($autorisation, $type, \$Pile[\$SP][$id_type])<br>";
+				$ret = "autoriser('.\"$autorisation\".', '.\"$type\".', '.\"macrosession_pipe({\$Pile[\$SP][$id_type]})\".')";
+				
+				return $ret;
+
+			case "'debug'" :
+				$ret = 'time()';
+				if (isset($_GET['debug'])) {
+					echo "Avec 'debug' : macrosession_print(get_defined_vars())<br>";
+					$ret = "macrosession_print(get_defined_vars())";
+				}
 				return $ret;
 
 			// 4)
 			case "'url'" :
+				if (isset($_GET['debug']))
+					echo "Avec 'url' : compile appel autoriser($autorisation, $type, _request($id_type)<br>";
 				$ret = "autoriser('.\"$autorisation\".', '.\"$type\".', '.\"macrosession_pipe(_request($id_type))\".')";
 				return $ret;
 
@@ -309,7 +336,7 @@ function balise__AUTORISER_FIN_dist($p) {
 function erreur_argument_macro ($macro, $argument, $val, $p, $contexte_ok='') {
 	if (substr($val, 0, 1) != "'") {
 		if ($contexte_ok)
-			$contexte_ok = "Pour chercher dans les variables d'environnement ou d'url, vous pouvez aussi utiliser 'env' et 'url'";
+			$contexte_ok = "Pour chercher dans les variables d'environnement ou d'url, vous pouvez utiliser 'env', 'boucle', 'url' et aussi '#BALISE' pour les balises reçues par le squelette, mais pas pour les champs de la boucle immédiatement englobante";
 		erreur_squelette ("L'argument '$argument' de la macro '$macro' ne doit pas être une valeur calculée (".$val."). $contexte_ok", $p);
 		return true;
 	};
