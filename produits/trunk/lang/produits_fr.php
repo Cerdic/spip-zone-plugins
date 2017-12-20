@@ -52,9 +52,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'produit_reference' => 'Référence "@reference@"',
 	'produit_statut' => 'Modifier le statut :',
 	'produits_titre' => 'Produits',
+	'publier_rubriques_explication' => 'Publier les rubriques qui contiennent des produits publiés ?',
 	'publier_rubriques_label' => 'Publier les rubriques ?',
 	'publier_rubriques_label_case' => 'Publier les rubriques',
-	'publier_rubriques_explication' => 'Publier les rubriques qui contiennent des produits publiés ?',
 
 	// S
 	'secteurs_autorises' => 'Choisir une rubrique dans un des secteurs autorisés : @secteurs@',
