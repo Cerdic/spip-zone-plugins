@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_sous_projet' => 'Créer un sous-projet',
 	'icone_creer_projet' => 'Créer un projet',
 	'icone_modifier_projet' => 'Modifier ce projet',
+	'icone_voir_projet' => 'Voir ce projet',
 	'info_1_projet' => 'Un projet',
 	'info_aucun_projet' => 'Aucun projet',
 	'info_nb_projets' => '@nb@ projets',
