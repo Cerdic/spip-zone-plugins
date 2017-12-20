@@ -10,12 +10,7 @@
 
 #SET{service, #ENV{service, weather}}
 #SET{mode, #ENV{mode, conditions}}
-#SET{jeu, #ARRAY{
-			'weather', 'FRXX0076',
-			'owm', 'Paris,Fr',
-			'wwo', 'Paris,France',
-			'apixu', 'Paris,France',
-			'wunderground', 'FRXX0076'}}
+#SET{jeu, #VAL|rainette_debug_jeu_defaut}
 #SET{lieu, #ENV{ville, #GET{jeu/#GET{service}}}}
 
 <body>

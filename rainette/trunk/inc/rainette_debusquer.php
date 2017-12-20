@@ -12,7 +12,7 @@ if (!defined('_RAINETTE_DEBUG')) {
 }
 if (!defined('_RAINETTE_DEBUG_CLES_PREVISIONS')) {
 	/**
-	 * Clé jour par défaut utiliser pour afficher les prévisions : jour suivant.
+	 * Clé jour par défaut utilisée pour afficher les prévisions : jour suivant.
 	 */
 	define('_RAINETTE_DEBUG_CLES_PREVISIONS', '1');
 }

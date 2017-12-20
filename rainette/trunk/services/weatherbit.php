@@ -1,94 +1,99 @@
 <?php
 /**
- * Ce fichier contient la configuration et l'ensemble des fonctions implémentant le service APIXU (apixu).
- * Ce service est capable de fournir des données au format XML ou JSON. Néanmoins, l'API actuelle du plugin utilise
- * uniquement le format JSON.
+ * Ce fichier contient la configuration et l'ensemble des fonctions implémentant le service Weatherbit.io (weatherbit).
+ * Ce service est capable de fournir des données au format JSON.
  *
- * @package SPIP\RAINETTE\SERVICES\APIXU
+ * @package SPIP\RAINETTE\SERVICES\WEATHERBIT
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-if (!defined('_RAINETTE_APIXU_URL_BASE')) {
-	define('_RAINETTE_APIXU_URL_BASE', 'https://api.apixu.com/v1');
+if (!defined('_RAINETTE_WEATHERBIT_URL_BASE')) {
+	/**
+	 * URL de base (endpoint) des requêtes au service Weatherbit.io.
+	 */
+	define('_RAINETTE_WEATHERBIT_URL_BASE', 'https://api.weatherbit.io/v2.0/');
+}
+if (!defined('_RAINETTE_WEATHERBIT_URL_BASE_ICONE')) {
+	/**
+	 * URL de base des icônes fournis par le service Weatherbit.io.
+	 */
+	define('_RAINETTE_WEATHERBIT_URL_BASE_ICONE', 'https://www.weatherbit.io/static/img/icons/');
 }
 
 
 // Configuration des valeurs par défaut des éléments de la configuration dynamique.
 // Ces valeurs sont applicables à tous les modes.
-$GLOBALS['rainette_apixu_config']['service'] = array(
-	'alias'   => 'apixu',
+$GLOBALS['rainette_weatherbit_config']['service'] = array(
+	'alias'   => 'weatherbit',
 	'defauts' => array(
 		'inscription' => '',
 		'unite'       => 'm',
-		'condition'   => 'apixu',
+		'condition'   => 'weatherbit',
 		'theme'       => '',
 	),
 	'credits' => array(
-		'titre' => 'APIXU',
-		'logo'  => 'apixu.png',
-		'lien'  => 'https://www.apixu.com/',
+		'titre' => 'Weatherbit API',
+		'logo'  => '',
+		'lien'  => 'https://www.weatherbit.io/',
 	),
 	'langues' => array(
 		'disponibles' => array(
 			'ar'    => 'ar',
+			'az'    => 'az',
+			'be'    => 'be',
 			'bg'    => 'bg',
-			'bn'    => 'bn',
-			'cs'    => 'cs',
+			'bs'    => 'bs',
+			'ca'    => 'ca',
+			'cz'    => 'cs',
 			'da'    => 'da',
 			'de'    => 'de',
 			'el'    => 'el',
 			'en'    => 'en',
-			'es'    => 'es',
+			'et'    => 'et',
 			'fi'    => 'fi',
 			'fr'    => 'fr',
-			'hi'    => 'hi',
+			'hr'    => 'hr',
 			'hu'    => 'hu',
+			'id'    => 'id',
+			'is'    => 'is',
 			'it'    => 'it',
-			'ja'    => 'ja',
-			'jv'    => 'jv',
-			'ko'    => 'ko',
-			'mr'    => 'mr',
+			'kw'    => '',
+			'lt'    => 'lt',
+			'nb'    => 'nb',
 			'nl'    => 'nl',
-			'pa'    => 'pa',
 			'pl'    => 'pl',
 			'pt'    => 'pt',
 			'ro'    => 'ro',
 			'ru'    => 'ru',
-			'si'    => 'si',
 			'sk'    => 'sk',
+			'sl'    => 'sl',
 			'sr'    => 'sr',
 			'sv'    => 'sv',
-			'ta'    => 'ta',
-			'te'    => 'te',
 			'tr'    => 'tr',
-			'uk'    => 'uk',
-			'ur'    => 'ur',
-			'vi'    => 'vi',
 			'zh'    => 'zh',
 			'zh_tw' => 'zh_tw',
-			'zu'    => 'zu',
 		),
 		'defaut'      => 'en'
 	),
 	'limites' => array(
-		'month' => 5000
+		'hour' => 75
 	)
 );
 
-// Configuration des données fournies par le service apixu pour le mode 'infos' en format JSON.
+// Configuration des données fournies par le service weatherbit pour le mode 'infos' en format JSON.
 // -- Seules les données non calculées sont configurées.
-$GLOBALS['rainette_apixu_config']['infos'] = array(
+$GLOBALS['rainette_weatherbit_config']['infos'] = array(
 	'periode_maj' => 86400,
 	'format_flux' => 'json',
-	'cle_base'    => array('location'),
+	'cle_base'    => array('data', 0),
 	'donnees'     => array(
 		// Lieu
-		'ville'     => array('cle' => array('name')),
-		'pays'      => array('cle' => array('country')),
-		'pays_iso2' => array('cle' => array()),
-		'region'    => array('cle' => array('region')),
+		'ville'     => array('cle' => array('city_name')),
+		'pays'      => array('cle' => array('')),
+		'pays_iso2' => array('cle' => array('country_code')),
+		'region'    => array('cle' => array('')),
 		// Coordonnées
 		'longitude' => array('cle' => array('lon')),
 		'latitude'  => array('cle' => array('lat')),
@@ -96,94 +101,97 @@ $GLOBALS['rainette_apixu_config']['infos'] = array(
 	),
 );
 
-// Configuration des données fournies par le service apixu pour le mode 'conditions'.
+// Configuration des données fournies par le service weatherbit pour le mode 'conditions'.
 // -- Seules les données non calculées sont configurées.
-$GLOBALS['rainette_apixu_config']['conditions'] = array(
+$GLOBALS['rainette_weatherbit_config']['conditions'] = array(
 	'periode_maj' => 10800,
 	'format_flux' => 'json',
-	'cle_base'    => array('current'),
+	'cle_base'    => array('data', 0),
 	'donnees'     => array(
 		// Données d'observation
-		'derniere_maj'          => array('cle' => array('last_updated')),
+		'derniere_maj'          => array('cle' => array('ob_time')),
 		'station'               => array('cle' => array()),
 		// Températures
-		'temperature_reelle'    => array('cle' => array('temp_'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'c', 's' => 'f')),
-		'temperature_ressentie' => array('cle' => array('feelslike_'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'c', 's' => 'f')),
+		'temperature_reelle'    => array('cle' => array('temp')),
+		'temperature_ressentie' => array('cle' => array('app_temp')),
 		// Données anémométriques
-		'vitesse_vent'          => array('cle' => array('wind_'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'kph', 's' => 'mph')),
-		'angle_vent'            => array('cle' => array('wind_degree')),
-		'direction_vent'        => array('cle' => array('wind_dir')),
+		'vitesse_vent'          => array('cle' => array('wind_spd')),
+		'angle_vent'            => array('cle' => array('wind_dir')),
+		'direction_vent'        => array('cle' => array('wind_cdir')),
 		// Données atmosphériques : risque_uv est calculé
-		'precipitation'         => array('cle' => array('precip_'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'mm', 's' => 'in')),
-		'humidite'              => array('cle' => array('humidity')),
-		'point_rosee'           => array('cle' => array()),
-		'pression'              => array('cle' => array('pressure_'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'mb', 's' => 'in')),
+		'precipitation'         => array('cle' => array('precip')),
+		'humidite'              => array('cle' => array('rh')),
+		'point_rosee'           => array('cle' => array('dewpt')),
+		'pression'              => array('cle' => array('pres')),
 		'tendance_pression'     => array('cle' => array()),
-		'visibilite'            => array('cle' => array('vis_'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'km', 's' => 'miles')),
-		'indice_uv'             => array('cle' => array()),
+		'visibilite'            => array('cle' => array('vis')),
+		'indice_uv'             => array('cle' => array('uv')),
 		// Etats météorologiques natifs
-		'code_meteo'            => array('cle' => array('condition', 'code')),
-		'icon_meteo'            => array('cle' => array('condition', 'icon')),
-		'desc_meteo'            => array('cle' => array('condition', 'text')),
+		'code_meteo'            => array('cle' => array('weather', 'code')),
+		'icon_meteo'            => array('cle' => array('weather', 'icon')),
+		'desc_meteo'            => array('cle' => array('weather', 'description')),
 		'trad_meteo'            => array('cle' => array()),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
+		// TODO : il existe l'indicateur jour/nuit directement renvoyé par le service (pod).
 	),
 );
 
-// Configuration des données fournies par le service apixu pour le mode 'conditions'.
-// -- L'API fournit 10 jours de prévisions avec une périodicité systématique de 1h.
+// Configuration des données fournies par le service weatherbit pour le mode 'previsions'.
+// -- L'API fournit 16 jours de prévisions avec une périodicité systématique de 24h.
 // -- Seules les données non calculées sont configurées.
-$GLOBALS['rainette_apixu_config']['previsions'] = array(
+$GLOBALS['rainette_weatherbit_config']['previsions'] = array(
 	'periodicites'       => array(
-		24 => array('max_jours' => 10),
-		//		1 => array('max_jours' => 10)
+		24 => array('max_jours' => 16),
+		1 => array('max_jours' => 2),
+		3 => array('max_jours' => 5)
 	),
 	'periodicite_defaut' => 24,
 	'periode_maj'        => 14400,
 	'format_flux'        => 'json',
-	'cle_base'           => array('forecast', 'forecastday'),
+	'cle_base'           => array('data'),
 	'cle_heure'          => array(),
 	'structure_heure'    => false,
 	'donnees'            => array(
 		// Données d'observation
-		'date'                 => array('cle' => array('date')),
-		'heure'                => array('cle' => array('time')),
+		'date'                 => array('cle' => array('datetime')),
+		'heure'                => array('cle' => array()),
 		// Données astronomiques
-		'lever_soleil'         => array('cle' => array('astro', 'sunrise')),
-		'coucher_soleil'       => array('cle' => array('astro', 'sunset')),
+		'lever_soleil'         => array('cle' => array()),
+		'coucher_soleil'       => array('cle' => array()),
 		// Températures
-		'temperature'          => array('cle' => array('day', 'avgtemp_'), 'suffixe_unite' => array('id_cle' => 1, 'm' => 'c', 's' => 'f')),
-		'temperature_max'      => array('cle' => array('day', 'maxtemp_'), 'suffixe_unite' => array('id_cle' => 1, 'm' => 'c', 's' => 'f')),
-		'temperature_min'      => array('cle' => array('day', 'mintemp_'), 'suffixe_unite' => array('id_cle' => 1, 'm' => 'c', 's' => 'f')),
+		'temperature'          => array('cle' => array('temp')),
+		'temperature_max'      => array('cle' => array('max_temp')),
+		'temperature_min'      => array('cle' => array('min_temp')),
 		// Données anémométriques
-		'vitesse_vent'         => array('cle' => array('day', 'maxwind_'), 'suffixe_unite' => array('id_cle' => 1, 'm' => 'kph', 's' => 'mph')),
-		'angle_vent'           => array('cle' => array()),
-		'direction_vent'       => array('cle' => array()),
+		'vitesse_vent'         => array('cle' => array('wind_spd')),
+		'angle_vent'           => array('cle' => array('wind_dir')),
+		'direction_vent'       => array('cle' => array('wind_cdir')),
 		// Données atmosphériques : risque_uv est calculé
-		'risque_precipitation' => array('cle' => array()),
-		'precipitation'        => array('cle' => array('day', 'totalprecip_'), 'suffixe_unite' => array('id_cle' => 1, 'm' => 'mm', 's' => 'in')),
-		'humidite'             => array('cle' => array('day', 'avghumidity')),
-		'point_rosee'          => array('cle' => array()),
-		'pression'             => array('cle' => array()),
-		'visibilite'           => array('cle' => array('day', 'avgvis_'), 'suffixe_unite' => array('id_cle' => 1, 'm' => 'km', 's' => 'miles')),
-		'indice_uv'            => array('cle' => array('day', 'uv')),
+		'risque_precipitation' => array('cle' => array('pop')),
+		'precipitation'        => array('cle' => array('precip')),
+		'humidite'             => array('cle' => array('rh')),
+		'point_rosee'          => array('cle' => array('dewpt')),
+		'pression'             => array('cle' => array('pres')),
+		'visibilite'           => array('cle' => array('vis')),
+		'indice_uv'            => array('cle' => array('uv')),
 		// Etats météorologiques natifs
-		'code_meteo'           => array('cle' => array('day', 'condition', 'code')),
-		'icon_meteo'           => array('cle' => array('day', 'condition', 'icon')),
-		'desc_meteo'           => array('cle' => array('day', 'condition', 'text')),
+		'code_meteo'           => array('cle' => array('weather', 'code')),
+		'icon_meteo'           => array('cle' => array('weather', 'icon')),
+		'desc_meteo'           => array('cle' => array('weather', 'description')),
 		'trad_meteo'           => array('cle' => array()),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
+		// TODO : il existe l'indicateur jour/nuit directement renvoyé par le service (pod).
 	),
 );
 
-// Configuration des données fournies par le service APIXU en cas d'erreur.
+// Configuration des données fournies par le service WEATHERBIT en cas d'erreur.
 // -- Seules les données non calculées sont configurées.
-$GLOBALS['rainette_apixu_config']['erreurs'] = array(
-	'cle_base' => array('error'),
+$GLOBALS['rainette_weatherbit_config']['erreurs'] = array(
+	'cle_base' => array(),
 	'donnees'  => array(
 		// Erreur
-		'code'    => array('cle' => array('code')),
-		'message' => array('cle' => array('message')),
+		'code'    => array('cle' => array()),
+		'message' => array('cle' => array('error')),
 	),
 );
 
@@ -205,10 +213,10 @@ $GLOBALS['rainette_apixu_config']['erreurs'] = array(
  * @return array
  *        Le tableau des données de configuration communes au service et propres au type de données demandé.
  */
-function apixu_service2configuration($mode) {
+function weatherbit_service2configuration($mode) {
 	// On merge la configuration propre au mode et la configuration du service proprement dite
 	// composée des valeurs par défaut de la configuration utilisateur et de paramètres généraux.
-	$config = array_merge($GLOBALS['rainette_apixu_config'][$mode], $GLOBALS['rainette_apixu_config']['service']);
+	$config = array_merge($GLOBALS['rainette_weatherbit_config'][$mode], $GLOBALS['rainette_weatherbit_config']['service']);
 
 	return $config;
 }
@@ -219,7 +227,7 @@ function apixu_service2configuration($mode) {
  * du service (par exemple, le code d'inscription, le format des résultats...).
  *
  * @api
- * @uses langue2code_apixu()
+ * @uses langue2code_weatherbit()
  *
  * @param string $lieu
  *        Lieu pour lequel on acquiert les données météorologiques.
@@ -235,32 +243,50 @@ function apixu_service2configuration($mode) {
  * @return string
  *        URL complète de la requête.
  */
-function apixu_service2url($lieu, $mode, $periodicite, $configuration) {
+function weatherbit_service2url($lieu, $mode, $periodicite, $configuration) {
+
+	// On normalise le lieu et on récupère son format.
+	// Le service accepte la format ville,pays, le format latitude,longitude et le format adresse IP.
+	$lieu_normalise = lieu_normaliser($lieu, $format_lieu);
+	if ($format_lieu == 'adresse_ip') {
+		$localisation = "ip=${lieu_normalise}";
+	} elseif ($format_lieu == 'latitude_longitude') {
+		list($latitude, $longitude) = explode(',', $lieu_normalise);
+		$localisation = "lat=${latitude}&lon=${longitude}";
+	} else { // Format ville,pays
+		$elements = explode(',', $lieu_normalise);
+		$localisation = "city={$elements[0]}";
+		if (count($elements) == 2) {
+			// Le pays est précisé, il faut l'inclure dans un attribut paramètre spécifique 'country'.
+			$localisation .= "&country={$elements[1]}";
+		}
+	}
+
+	// Détermination du paramètre constitutif de la demande
+	if ($mode == 'previsions') {
+		$demande = 'forecast/';
+		if ($periodicite == 24) {
+			$demande .= 'daily';
+		} elseif ($periodicite == 1) {
+			$demande .= 'hourly';
+		} else {
+			// Forcément 3 heures
+			$demande .= '3hourly';
+		}
+	} else {
+		$demande = 'current';
+	}
 
 	// Identification de la langue du resume.
 	include_spip('inc/rainette_normaliser');
 	$code_langue = langue_determiner($configuration);
 
-	// On normalise le lieu et on récupère son format.
-	// Le service accepte la format ville,pays, le format latitude,longitude et le format adresse IP.
-	// Néanmoins, la query a toujours la même forme; il n'est donc pas nécessaire de gérer le format.
-	$lieu_normalise = lieu_normaliser($lieu);
-
-	$url = _RAINETTE_APIXU_URL_BASE;
-
-	if ($mode == 'previsions') {
-		$url .= "/forecast.{$configuration['format_flux']}";
-	} else {
-		$url .= "/current.{$configuration['format_flux']}";
-	}
-
-	$url .= '?key=' . $configuration['inscription']
-			. '&lang=' . $code_langue
-			. '&q=' . $lieu_normalise;
-
-	if ($mode == 'previsions') {
-		$url .= '&days=' . $configuration['periodicites'][$periodicite]['max_jours'];
-	}
+	$url = _RAINETTE_WEATHERBIT_URL_BASE
+		. $demande . '?'
+		. $localisation
+		. '&lang=' . $code_langue
+		. '&units=' . ($configuration['unite'] == 'm' ? 'M' : 'I')
+		. '&key=' . $configuration['inscription'];
 
 	return $url;
 }
@@ -271,13 +297,13 @@ function apixu_service2url($lieu, $mode, $periodicite, $configuration) {
  *
  * @return bool
  */
-function apixu_erreur_verifier($erreur) {
+function weatherbit_erreur_verifier($erreur) {
 
 	// Initialisation
 	$est_erreur = false;
 
-	// Une erreur est toujours décrite par un code et un message.
-	if (!empty($erreur['code']) and !empty($erreur['message'])) {
+	// Une erreur est toujours décrite par un unique message.
+	if (!empty($erreur['message'])) {
 		$est_erreur = true;
 	}
 
@@ -301,11 +327,11 @@ function apixu_erreur_verifier($erreur) {
  *        Tableau standardisé des conditions météorologiques complété par les données spécifiques
  *        du service.
  */
-function apixu_complement2conditions($tableau, $configuration) {
+function weatherbit_complement2conditions($tableau, $configuration) {
 
 	if ($tableau) {
 		// Compléter le tableau standard avec les états météorologiques calculés
-		etat2resume_apixu($tableau, $configuration);
+		etat2resume_weatherbit($tableau, $configuration);
 	}
 
 	return $tableau;
@@ -330,17 +356,11 @@ function apixu_complement2conditions($tableau, $configuration) {
  *        Tableau standardisé des conditions météorologiques complété par les données spécifiques
  *        du service.
  */
-function apixu_complement2previsions($tableau, $configuration, $index_periode) {
+function weatherbit_complement2previsions($tableau, $configuration, $index_periode) {
 
 	if (($tableau) and ($index_periode > -1)) {
-		// Convertir les informations exprimées en système métrique dans le systeme US si la
-		// configuration le demande
-		if ($configuration['unite'] == 's') {
-			metrique2imperial_apixu($tableau);
-		}
-
 		// Compléter le tableau standard avec les états météorologiques calculés
-		etat2resume_apixu($tableau, $configuration);
+		etat2resume_weatherbit($tableau, $configuration);
 	}
 
 	return $tableau;
@@ -350,41 +370,16 @@ function apixu_complement2previsions($tableau, $configuration, $index_periode) {
 // ---------------------------------------------------------------------------------------------
 // Les fonctions qui suivent sont des utilitaires utilisés uniquement appelées par les fonctions
 // de l'API.
-// PACKAGE SPIP\RAINETTE\APIXU\OUTILS
+// PACKAGE SPIP\RAINETTE\WEATHERBIT\OUTILS
 // ---------------------------------------------------------------------------------------------
 
-/**
- * @param array $tableau
- *
- * @return void
- */
-function metrique2imperial_apixu(&$tableau) {
-	include_spip('inc/rainette_convertir');
-
-	// Seules la température, la température ressentie et la vitesse du vent sont fournies dans
-	// les deux systèmes.
-	// Etant donnée que les tableaux sont normalisés, ils contiennent toujours les index de chaque
-	// donnée météo, il est donc inutile de tester leur existence.
-	$tableau['visibilite'] = ($tableau['visibilite'])
-		? kilometre2mile($tableau['visibilite'])
-		: '';
-	$tableau['pression'] = ($tableau['pression'])
-		? millibar2inch($tableau['pression'])
-		: '';
-	$tableau['precipitation'] = ($tableau['precipitation'])
-		? millimetre2inch($tableau['precipitation'])
-		: '';
-}
-
-
-function etat2resume_apixu(&$tableau, $configuration) {
+function etat2resume_weatherbit(&$tableau, $configuration) {
 
 	if ($tableau['code_meteo'] and $tableau['icon_meteo']) {
-		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
-		// Pour ce service aucun indicateur n'est disponible
-		// -> on utilise le nom de l'icone qui contient l'indication "night" pour la nuit
+		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icône.
+		// TODO : Pour ce service il existe un indicateur qu'il faudra utiliser
 		$icone = basename($tableau['icon_meteo']);
-		if (strpos($icone, '/night/') === false) {
+		if (substr($icone, -1) == 'd') {
 			// C'est le jour
 			$tableau['periode'] = 0;
 		} else {
@@ -395,14 +390,16 @@ function etat2resume_apixu(&$tableau, $configuration) {
 		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
 		if ($configuration['condition'] == $configuration['alias']) {
 			// On affiche les conditions natives fournies par le service.
-			// Pour le resume, apixu fournit la traduction dans un item différent que pour les autres services.
-			// Cet item est stocké dans 'trad_meteo'.
+			// L'icône est un png pour lequel il est nécessaire de construire l'url car elle n'est pas directement
+			// fournie par le service.
+			// TODO : Weatherbit conseille d'utiliser des images stockées en local.
 			$tableau['icone']['code'] = $tableau['code_meteo'];
-			$tableau['icone']['url'] = copie_locale($tableau['icon_meteo']);
+			$url = _RAINETTE_WEATHERBIT_URL_BASE_ICONE . '/' . $tableau['icon_meteo'] . '.png';
+			$tableau['icone']['url'] = copie_locale($url);
 			$tableau['resume'] = ucfirst($tableau['desc_meteo']);
 		} else {
 			// On affiche les conditions traduites dans le système weather.com
-			$meteo = meteo_apixu2weather($tableau['code_meteo'], $tableau['periode']);
+			$meteo = meteo_weatherbit2weather($tableau['code_meteo'], $tableau['periode']);
 			$tableau['icone'] = $meteo;
 			$tableau['resume'] = $meteo;
 		}
@@ -421,8 +418,8 @@ function etat2resume_apixu(&$tableau, $configuration) {
  *
  * @return string
  */
- function meteo_apixu2weather($meteo, $periode = 0) {
-	static $apixu2weather = array(
+ function meteo_weatherbit2weather($meteo, $periode = 0) {
+	static $weatherbit2weather = array(
 		395 => array(41, 46),
 		392 => array(41, 46),
 		389 => array(38, 47),
@@ -474,8 +471,8 @@ function etat2resume_apixu(&$tableau, $configuration) {
 	);
 
 	$icone = 'na';
-	if (array_key_exists($meteo, $apixu2weather)) {
-		$icone = strval($apixu2weather[$meteo][$periode]);
+	if (array_key_exists($meteo, $weatherbit2weather)) {
+		$icone = strval($weatherbit2weather[$meteo][$periode]);
 	}
 
 	return $icone;

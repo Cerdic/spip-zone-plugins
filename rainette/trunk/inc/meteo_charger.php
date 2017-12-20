@@ -23,7 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @uses indice2risque_uv()
  *
  * @param string $lieu
- *        Le lieu concerné par la méteo exprimé selon les critères requis par le service
+ *        Le lieu concerné par la méteo exprimé selon les critères requis par le service.
  * @param string $mode
  *        Le type de données météorologiques demandé :
  *            - `conditions`, la valeur par défaut
