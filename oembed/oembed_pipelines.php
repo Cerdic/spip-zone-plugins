@@ -100,7 +100,7 @@ function oembed_renseigner_document_distant($flux) {
 	include_spip('inc/config');
 	include_spip('inc/oembed');
 	// on tente de récupérer les données oembed
-	if ($data = oembed_recuperer_data($flux['source'])) {
+	if ($data = oembed_recuperer_data($flux['source'], null, null, 'json', 'non', true)) {
 		// si on a recupere une URL c'est direct un doc distant
 		if (isset($data['url'])
 			and $data['type'] !== 'rich'

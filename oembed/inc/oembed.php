@@ -114,9 +114,10 @@ function oembed_lister_providers() {
  *   '' : pas de valeur max
  * @param string $format format à utiliser pour la requete oembed (json ou xml)
  * @param string $detecter_lien tenter la détection automatique de lien oembed dans la page indiquée
+ * @param bool $force_reload forcer le rechargement de l'oembed depuis la source sans utiliser le cache local
  * @return bool|array false si aucun retour ou erreur ; tableau des éléménents de la réponse oembed
  */
-function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $format = 'json', $detecter_lien = 'non') {
+function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $format = 'json', $detecter_lien = 'non', $force_reload = false) {
 	static $cache = array();
 	$provider = false;
 
@@ -181,7 +182,7 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 
 	$oembed_cache = sous_repertoire(_DIR_CACHE, 'oembed').md5($data_url). '.'.$format;
 	// si cache oembed dispo et pas de recalcul demande, l'utiliser (perf issue)
-	if (file_exists($oembed_cache) and _VAR_MODE !== 'recalcul') {
+	if (!$force_reload and file_exists($oembed_cache) and _VAR_MODE !== 'recalcul') {
 		lire_fichier($oembed_cache, $cache[$data_url]);
 		$cache[$data_url]=unserialize($cache[$data_url]);
 		return $cache[$data_url];
