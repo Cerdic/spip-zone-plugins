@@ -93,8 +93,17 @@ class fichiersExporter extends Command {
 		
 		if($parent == 0)
 			$critere_export = "where id_secteur=" . intval($branche) ;
-		else
-			$critere_export = "where id_rubrique=" . intval($branche) ;
+		else{
+			// y'a t'il des sous rubriques ?
+			$sous_rubriques = sql_allfetsel("id_rubrique", "spip_rubriques", "id_parent=$branche");
+			if($sous_rubriques AND sizeof($sous_rubriques) > 0){
+				foreach($sous_rubriques as $k => $v)
+					$ex[] = _q($v['id_rubrique']) ;
+				$critere_export = "where id_rubrique in (" . implode(",", $ex) . ")" ;
+			}
+			else
+				$critere_export = "where id_rubrique=" . intval($branche) ;
+		}
 		
 		if($date_modif)
 			$critere_date_modif = "and date_modif > '$date_modif'" ;

@@ -229,6 +229,11 @@ class fichiersImporter extends Command {
 						}
 						// Créer l'auteur ?
 						if($auteurs){
+							// on efface les auteurs, puis on remet les nouveaux
+							if($spip_version_branche > "3")
+								sql_delete('spip_auteurs_liens', 'id_objet = ' . intval($id_article) . ' and objet="article" and id_auteur !=' . $id_admin);
+							else // spip2
+								sql_delete('spip_auteurs_articles', 'id_article = ' . intval($id_article) . 'and id_auteur !=' . $id_admin);
 							
 							foreach($auteurs as $auteur){
 								
@@ -274,6 +279,12 @@ class fichiersImporter extends Command {
 						
 						// Créer des mots clés ?
 						if($mots_cles){
+							// on commence par effacer les mots déjà sur l'article, puis on remet les mots.
+							if($spip_version_branche > "3")
+								sql_delete('spip_mots_liens', 'id_objet = ' . intval($id_article) . ' and objet="article"');
+							else // spip2
+								sql_delete('spip_mots_articles', 'id_article = ' . intval($id_article));
+							
 							foreach($mots_cles as $mot){
 								// groupe mot-clé
 								list($type_mot,$titre_mot) = explode("::", $mot);
