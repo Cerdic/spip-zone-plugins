@@ -83,6 +83,24 @@ function inc_chercher_logo_dist($id, $_id_objet, $mode = 'on') {
 		return inc_chercher_logo_dist($id, $_id_objet, 'on');
 	}
 
+	/* Si le plugin « multilingue » est actif, et qu'on a toujours rien trouvé,
+	 * on va chercher le logo d'une éventuelle version originale. */
+	if (test_plugin_actif('multilingue')) {
+		include_spip('base/objets');
+		include_spip('base/abstract_sql');
+
+		$tables = lister_tables_objets_sql();
+		$table = table_objet_sql($_id_objet);
+
+		if (isset($tables[$table]['field']['id_trad'])) {
+			$id_trad = sql_getfetsel('id_trad', $table, $_id_objet . '=' . intval($id));
+			if ($id_trad and _request('exec') !== $objet) {
+				$chercher_logo = charger_fonction('chercher_logo', 'inc/');
+				return $chercher_logo($id_trad, $_id_objet, $mode);
+			}
+		}
+	}
+
 	# coherence de type pour servir comme filtre (formulaire_login)
 	return array();
 }
