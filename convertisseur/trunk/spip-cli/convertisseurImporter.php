@@ -323,6 +323,9 @@ class fichiersImporter extends Command {
 						
 						// Créer des documents ?
 						if($documents){
+							// on commence par effacer les docs déjà sur l'article, puis on remet les mots.
+							sql_delete('spip_documents_liens', 'id_objet = ' . intval($id_article) . ' and objet="article"');
+							
 							foreach($documents as $doc){
 								$d = json_decode($doc, true);
 								$id_doc = $d['id_document'] ;
