@@ -1,7 +1,7 @@
 <paquet
 	prefix="webfonts2"
 	categorie="maintenance"
-	version="0.2.1"
+	version="0.2.2"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/webfonts2-64.png"
@@ -18,7 +18,9 @@
 	<pipeline nom="autoriser" inclure="webfonts2_autorisations.php" />
 	<pipeline nom="insert_head_css" inclure="webfonts2_pipelines.php" />
 	<pipeline nom="fonts_list" inclure="webfonts2_pipelines.php" />
-
+	
+	<necessite nom="php:curl" />
+	
 	<menu nom="webfonts" titre="webfonts2:webfonts2_titre" parent="menu_squelette" icone="images/webfonts2-16.png" action="webfonts" />
 
 </paquet>
