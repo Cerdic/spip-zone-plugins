@@ -44,12 +44,6 @@ function webfonts2_insert_head_css($flux){
 
 
 
-function lister_webfonts(){
-	$fonts = pipeline('fonts_list',array(
-		'args'=>array(),
-		'data'=>$fonts
-	));
-	return $fonts;
-}
+
 
 ?>
