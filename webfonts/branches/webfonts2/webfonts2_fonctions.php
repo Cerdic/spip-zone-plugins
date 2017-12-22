@@ -8,8 +8,16 @@
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-
-
+/**
+ * googlefont_request
+ *
+ * prepare l'url sans passer par l'api , utilisé pour l'insertion dans le head
+ *
+ * @param $webfonts {array} font=>variantes
+ * @param $subsets  si besoin une liste de subsets pour la forme mais inutile
+ * @return $request url de requète 
+ * 
+*/
 function googlefont_request($webfonts,$subsets=''){
 	$subset = '&subset=' ;
 	(strlen($subsets)) ? $subset .= $subsets : $subset = '';
@@ -22,18 +30,19 @@ function googlefont_request($webfonts,$subsets=''){
 	return $request;
 }
 
-
+/**
+ * google_font_search
+ *
+ * $fonts la liste des fonts récupérées via l'API
+ * $search le motif de recherche sur item/family
+*/
 function google_font_search($fonts, $search){
 	$res = array();
 	foreach($fonts['items'] as $item){
 		( preg_match('/' . trim($search) . '/i', $item['family']) ) ? $res[] = $item : false;
-	}
-	
+	}	
 	return $res;
 }
-
-
-
 
 function lister_webfonts(){
 	$fonts = pipeline('fonts_list',array(
@@ -43,6 +52,13 @@ function lister_webfonts(){
 	return $fonts;
 }
 
+/**
+ * googlefont_api_get
+ *
+ * retourne l'index complet de la typothèque via l'API
+ *
+ * @todo à stocker en copie locale ou dans /tmp ? 
+*/
 function googlefont_api_get($api_key,$sort=false,$category=false){
 	// Requète en GET sur //https://www.googleapis.com/webfonts/v1/webfonts?key=_GOOGLE_API_KEY
 	$url = 'https://www.googleapis.com/webfonts/v1/webfonts?key='.$api_key;
