@@ -11,11 +11,7 @@
  */
 
 function formulaires_selectionner_webfonts_charger_dist(){
-	//tester si la google api_key est definie
-	//sinon config
-	$valeurs['googlefonts_api'] = _GOOGLE_API_KEY ;
-
-    $valeurs = array(
+	$valeurs = array(
 		'font_list'=>_request('font_list'),
 		'font_search'=>_request('font_search'),
 		'sort'=>_request('sort'),
@@ -26,7 +22,12 @@ function formulaires_selectionner_webfonts_charger_dist(){
 }
 
 function formulaires_selectionner_webfonts_verifier_dist(){
+	
 	$erreurs = array();
+	if(!defined('_GOOGLE_API_KEY')) {
+		
+		$erreurs['message_erreur'] = "Pas de API KEY definie";
+	}
 	
 	if (count($erreurs)) {
 		$erreurs['message_erreur'] = "Une erreur est présente dans votre saisie";
@@ -36,41 +37,30 @@ function formulaires_selectionner_webfonts_verifier_dist(){
 
 function formulaires_selectionner_webfonts_traiter_dist(){
 	
-    // Requète en GET sur //https://www.googleapis.com/webfonts/v1/webfonts?key=_GOOGLE_API_KEY
-	$url = 'https://www.googleapis.com/webfonts/v1/webfonts?key='._GOOGLE_API_KEY;
-	if($sort = _request('sort'))
-		$url .= '&sort='.$sort;
-	if($category= _request('category'))
-		$url .= '&category='.$category;
-	//if($preview_text=_request('preview_text'))
-	//	$url .= '&text='.$preview_text;
+    ($sort = _request('sort')) ? $sort = _request('sort') : $sort = false;
+	($category = _request('category')) ? $category = _request('category') : $category ;
+	
+	if(defined('_GOOGLE_API_KEY') && _GOOGLE_API_KEY != false) {
 		
+		$googlefonts = googlefont_api_get(_GOOGLE_API_KEY,$sort,$category);
 		
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-	curl_setopt($ch, CURLOPT_HEADER, false);
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_REFERER, $url);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-	$result = curl_exec($ch);
-	curl_close($ch);
-	$googlefonts = json_decode($result, true);
-	//if($font_search=_request('font_search')){
-	//	
-	//	foreach($googlefonts['items'] as $item){
-	//		var_dump(strstr($item['family'], $font_search));
-	//		//var_dump(array_filter($item, function($k,$v) {
-	//		//		if($family = stristr($v['family'],$font_search) )
-	//		//			return  $v['family'] ;
-	//		//}, ARRAY_FILTER_USE_BOTH));
-	//	}
-	//
-	//}
-	set_request('font_list', $googlefonts);
-	set_request('font_search',_request('font_search'));
+		if($font_search = _request('font_search')){
+			$result = google_font_search($googlefonts, _request('font_search'));
+		}else{
+			$result = $googlefonts['items'];
+		}
+		
+		//var_dump([$sort,$category,$googlefonts]);
+		set_request('font_list', $result);
+		//var_dump($result);
+	
+	
+		$res = array('message_ok'=>_T('config_info_enregistree'),'editable'=>true);
+	}else{
+		$res = array('message_erreur'=>'Pas de API KEY definie');
+	}
 
-	$res = array('message_ok'=>_T('config_info_enregistree'),'editable'=>true);
+	
 	
 	return $res;
 }

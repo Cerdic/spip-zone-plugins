@@ -78,9 +78,10 @@ files:
 -->]
 #SET{preview,#ENV{preview, non}}
 #SET{font-infos,#ENV{font-infos, non}}
-<BOUCLE_listResults(DATA){source table, #ENV{font_list/items}}
+
+
+<BOUCLE_listResults(DATA){source table, #ENV{font_list}}
 						{category ?= #GET{category}}
-						{family LIKE %(#GET{font_search})%}
 						{0,10}>
 
 <h2>#VALEUR{family}</h2>
