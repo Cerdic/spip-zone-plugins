@@ -1,7 +1,7 @@
 <?php
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-define ('_PATTERN_STATS_SPECIALES', '/\.(js|css)/ui');
+define ('_PATTERN_STATS_SPECIALES', '/\.(js|css)(\s|_|$)/ui');
 define ('_LABEL_STATS_SPECIALES', 'Javascript et css');
 define ('_LABEL_STATS_SPECIALES_EXCLUES', 'Sans les javascript et css');
 
