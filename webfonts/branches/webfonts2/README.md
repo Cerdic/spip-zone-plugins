@@ -24,6 +24,15 @@ ou via la configuration du plugin.
 
 ## Utilisation
 
+Description d'une font dans la font list :
+
+* family : Nom de la famille de police
+* variants : italic,bold
+* subsets : les subsets sont nécessaires uniquement pour les navigateurs ne supportant pas la proprité unicode-range,
+pour les autres les subsets sont ignorés, et le navigateur choisira ce qui est necessaire dans le DOM.
+Explication sur les subsets : https://developers.google.com/fonts/docs/getting_started#Subsets
+Navigateurs supportant `unicode-range : https://caniuse.com/#feat=font-unicode-range
+
 ### Depuis un plugin
 
 Utilisation de la pipeline `fonts_list()`.
