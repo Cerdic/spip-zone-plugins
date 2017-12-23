@@ -42,6 +42,10 @@ function produits_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['1.1.2'] = array(
 		array('sql_alter', 'TABLE spip_produits CHANGE prix_ht prix_ht DECIMAL(20,6) NOT NULL DEFAULT 0'),
 	);
+	// refaire la même màj car celleux qui avaient installé à neuf depuis avaient toujours float
+	$maj['1.1.3'] = array(
+		array('sql_alter', 'TABLE spip_produits CHANGE prix_ht prix_ht DECIMAL(20,6) NOT NULL DEFAULT 0'),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
