@@ -9,7 +9,7 @@ if (!defined('XRAY_PATTERN_STATS_SPECIALES')) {
 }
 
 if (!defined('XRAY_OBJET_SPECIAL')) {
-	define ('XRAY_OBJET_SPECIAL', 'annonce');
+	define ('XRAY_OBJET_SPECIAL', 'article');
 }
 
 define (JOLI_DATE_FORMAT, 'd/m/Y H:i:s');
