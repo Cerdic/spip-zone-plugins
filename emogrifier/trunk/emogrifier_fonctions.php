@@ -22,8 +22,15 @@ function filtre_emogrifier($html, $fichier_css = _EMOGRIFIER_CSS) {
   include_spip('lib/emogrifier/Classes/Emogrifier');
 
   $fichiers = explode(',', $fichier_css);
+
   foreach ($fichiers as $fichier) {
-	  $css .= file_get_contents(find_in_path(trim($fichier)));
+
+	if (find_in_path($fichier . '.html')) {
+		$_css = produire_fond_statique($fichier, array('format' => 'css'));	
+		$css .= file_get_contents(find_in_path(supprimer_timestamp($_css)));
+	}else{
+		$css .= file_get_contents(find_in_path(trim($fichier)));
+	}
   }
 
   // Pouvoir dire à DOMDocument.loadHTML de râler en silence sur le html mal formé
