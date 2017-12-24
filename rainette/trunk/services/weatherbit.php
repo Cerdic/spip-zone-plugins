@@ -27,16 +27,27 @@ if (!defined('_RAINETTE_WEATHERBIT_URL_BASE_ICONE')) {
 // Ces valeurs sont applicables à tous les modes.
 $GLOBALS['rainette_weatherbit_config']['service'] = array(
 	'alias'   => 'weatherbit',
-	'defauts' => array(
-		'inscription' => '',
-		'unite'       => 'm',
-		'condition'   => 'weatherbit',
-		'theme'       => '',
-	),
+	'nom'     => 'Weatherbit.io',
 	'credits' => array(
 		'titre' => 'Weatherbit API',
 		'logo'  => '',
 		'lien'  => 'https://www.weatherbit.io/',
+	),
+	'termes'         => array(
+		'titre' => 'Terms and Conditions',
+		'lien' => 'https://www.weatherbit.io/terms'
+	),
+	'enregistrement' => array(
+		'titre' => 'Sign up for the Weatherbit API!',
+		'lien' => 'https://www.weatherbit.io/account/create',
+		'taille_cle' => 32
+	),
+	'offres'         => array(
+		'titre' => 'Affordable Weather API plans',
+		'lien' => 'https://www.weatherbit.io/pricing',
+		'limites' => array(
+			'hour' => 75
+		),
 	),
 	'langues' => array(
 		'disponibles' => array(
@@ -77,8 +88,11 @@ $GLOBALS['rainette_weatherbit_config']['service'] = array(
 		),
 		'defaut'      => 'en'
 	),
-	'limites' => array(
-		'hour' => 75
+	'defauts' => array(
+		'inscription' => '',
+		'unite'       => 'm',
+		'condition'   => 'weatherbit',
+		'theme'       => '',
 	)
 );
 

@@ -18,22 +18,27 @@ if (!defined('_RAINETTE_WEATHER_URL_BASE')) {
 // Ces valeurs sont applicables à tous les modes.
 $GLOBALS['rainette_weather_config']['service'] = array(
 	'alias'   => 'weather',
-	'defauts'        => array(
-		'inscription' => '',
-		'unite'       => 'm',
-		'condition'   => 'weather',
-		'theme'       => '',
-	),
+	'nom'     => 'weather.com&reg;',
 	'credits'        => array(
-		'titre' => null,
+		'titre' => 'weather.com&reg;',
 		'logo'  => null,
 		'lien'  => 'http://www.weather.com/',
+	),
+	'termes'         => array(),
+	'enregistrement' => array(),
+	'offres'         => array(
+		'limites' => array()
 	),
 	'langues' => array(
 		'disponibles' => array(),
 		'defaut'      => 'en'
 	),
-	'limites' => array()
+	'defauts'        => array(
+		'inscription' => '',
+		'unite'       => 'm',
+		'condition'   => 'weather',
+		'theme'       => '',
+	)
 );
 
 // Configuration des données fournies par le service wunderground pour le mode 'infos'.

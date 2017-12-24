@@ -41,8 +41,8 @@ function requeter($url, $configuration, $service) {
 		$execution[$service]['compteurs'] = array();
 	}
 	// On met à jour tous les compteurs
-	if ($configuration['limites']) {
-		foreach ($configuration['limites'] as $_periode => $_seuil) {
+	if ($configuration['offres']['limites']) {
+		foreach ($configuration['offres']['limites'] as $_periode => $_seuil) {
 			$execution[$service]['compteurs'][$_periode] = isset($execution[$service]['compteurs'][$_periode])
 				? $execution[$service]['compteurs'][$_periode] + 1
 				: 1;

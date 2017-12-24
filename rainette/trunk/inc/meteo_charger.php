@@ -128,7 +128,7 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 				'message' => ''
 			)
 		);
-		if (!requete_autorisee($configuration['limites'], $service)) {
+		if (!requete_autorisee($configuration['offres']['limites'], $service)) {
 			// La requête n'est pas autorisée parce qu'elle excède les limitations d'utilisation du service.
 			// On renvoie une erreur pour prévenir les utilisateurs.
 			$erreur['type'] = 'limite_service';

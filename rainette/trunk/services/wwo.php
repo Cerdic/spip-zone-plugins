@@ -19,16 +19,27 @@ if (!defined('_RAINETTE_WWO_URL_BASE')) {
 // Ces valeurs sont applicables à tous les modes.
 $GLOBALS['rainette_wwo_config']['service'] = array(
 	'alias'   => 'wwo',
-	'defauts' => array(
-		'inscription' => '',
-		'unite'       => 'm',
-		'condition'   => 'wwo',
-		'theme'       => '',
-	),
+	'nom'     => 'World Weather Online',
 	'credits' => array(
 		'titre'       => 'Free local weather content provider',
 		'logo'        => null,
 		'lien'        => 'http://www.worldweatheronline.com/',
+	),
+	'termes'         => array(
+		'titre' => 'API Terms and Conditions',
+		'lien' => 'https://developer.worldweatheronline.com/api/api-t-and-c.aspx'
+	),
+	'enregistrement' => array(
+		'titre' => 'Signup',
+		'lien' => 'https://developer.worldweatheronline.com/signup.aspx',
+		'taille_cle' => 32
+	),
+	'offres'         => array(
+		'titre' => 'Premimum API Pricing',
+		'lien' => 'https://developer.worldweatheronline.com/api/pricing.aspx',
+		'limites' => array(
+			'day'         => 500
+		),
 	),
 	'langues' => array(
 		'disponibles' => array(
@@ -72,8 +83,11 @@ $GLOBALS['rainette_wwo_config']['service'] = array(
 		),
 		'defaut'      => 'en'
 	),
-	'limites' => array(
-		'day'         => 500
+	'defauts' => array(
+		'inscription' => '',
+		'unite'       => 'm',
+		'condition'   => 'wwo',
+		'theme'       => '',
 	)
 );
 

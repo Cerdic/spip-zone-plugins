@@ -367,6 +367,31 @@ function rainette_lister_modeles($mode = 'conditions', $periodicite = 24) {
 
 
 /**
+ * @param string	$mode
+ * @param int		$periodicite
+ *
+ * @return array
+ */
+function rainette_lister_themes($service) {
+
+	$themes = array();
+
+	// Certains services proposent des thèmes d'icones accessibles via l'API.
+	// C'est le cas de wunderground.
+	if ($service == 'wunderground') {
+		$cles = array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k');
+		foreach ($cles as $_cle) {
+			$themes[$_cle] = _T("rainette:label_theme_wunderground_${_cle}");
+		}
+	}
+
+	// TODO : gérer ici aussi les thèmes d'icones locaux.
+
+	return $themes;
+}
+
+
+/**
  * @param string $lieu
  * @param string $mode
  * @param string $modele
@@ -426,7 +451,7 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 		// renvoyée par le chargement des données.
 		$extras['credits'] = $configuration['credits'];
 		$extras['config'] = array_merge(
-			parametrage_normaliser($service, $configuration['defaut']),
+			parametrage_normaliser($service, $configuration['defauts']),
 			array('source' => normaliser_configuration_donnees($mode, $configuration['donnees']))
 		);
 		$extras['lieu'] = $lieu;

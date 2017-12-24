@@ -19,16 +19,27 @@ if (!defined('_RAINETTE_APIXU_URL_BASE')) {
 // Ces valeurs sont applicables à tous les modes.
 $GLOBALS['rainette_apixu_config']['service'] = array(
 	'alias'   => 'apixu',
-	'defauts' => array(
-		'inscription' => '',
-		'unite'       => 'm',
-		'condition'   => 'apixu',
-		'theme'       => '',
-	),
+	'nom'     => 'APIXU',
 	'credits' => array(
 		'titre' => 'APIXU',
 		'logo'  => 'apixu.png',
 		'lien'  => 'https://www.apixu.com/',
+	),
+	'termes'         => array(
+		'titre' => 'Terms and Conditions',
+		'lien' => 'https://www.apixu.com/terms.aspx'
+	),
+	'enregistrement' => array(
+		'titre' => 'Signup',
+		'lien' => 'https://www.apixu.com/signup.aspx',
+		'taille_cle' => 32
+	),
+	'offres'         => array(
+		'titre' => 'Pricing',
+		'lien' => 'https://www.apixu.com/pricing.aspx',
+		'limites' => array(
+			'month' => 5000
+		),
 	),
 	'langues' => array(
 		'disponibles' => array(
@@ -72,8 +83,11 @@ $GLOBALS['rainette_apixu_config']['service'] = array(
 		),
 		'defaut'      => 'en'
 	),
-	'limites' => array(
-		'month' => 5000
+	'defauts' => array(
+		'inscription' => '',
+		'unite'       => 'm',
+		'condition'   => 'apixu',
+		'theme'       => '',
 	)
 );
 

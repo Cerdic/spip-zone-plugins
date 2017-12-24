@@ -246,11 +246,11 @@ function rainette_debug_afficher_execution() {
 				? $execution[$_service]['dernier_appel']
 				: '--';
 			foreach (array('year', 'month', 'day', 'hour', 'minute') as $_periode) {
-				if (isset($configuration['limites'][$_periode])) {
+				if (isset($configuration['offres']['limites'][$_periode])) {
 					$compteur = isset($execution[$_service]['compteurs'][$_periode])
 						? $execution[$_service]['compteurs'][$_periode]
 						: '--';
-					$debug[$_service][$_periode] = "${compteur} / {$configuration['limites'][$_periode]}";
+					$debug[$_service][$_periode] = "${compteur} / {$configuration['offres']['limites'][$_periode]}";
 				} else {
 					$debug[$_service][$_periode] = '';
 				}

@@ -27,16 +27,28 @@ if (!defined('_RAINETTE_WUNDERGROUND_URL_BASE_ICONE')) {
 // Ces valeurs sont applicables à tous les modes.
 $GLOBALS['rainette_wunderground_config']['service'] = array(
 	'alias'   => 'wunderground',
-	'defauts' => array(
-		'inscription' => '',
-		'unite'       => 'm',
-		'condition'   => 'wundergound',
-		'theme'       => 'a',
-	),
+	'nom'     => 'Weather Underground',
 	'credits' => array(
-		'titre'       => null,
+		'titre'       => 'Weather Underground',
 		'logo'        => 'wunderground.png',
 		'lien'        => 'http://www.wunderground.com/',
+	),
+	'termes'         => array(
+		'titre' => 'Terms and Conditions of use',
+		'lien' => 'https://www.wunderground.com/weather/api/d/terms.html'
+	),
+	'enregistrement' => array(
+		'titre' => 'Join Weather Underground',
+		'lien' => 'https://www.wunderground.com/signup?mode=api_signup',
+		'taille_cle' => 16
+	),
+	'offres'         => array(
+		'titre' => 'Pricing',
+		'lien' => 'https://www.wunderground.com/weather/api/d/pricing.html',
+		'limites' => array(
+			'day'         => 500,
+			'minute'      => 10
+		)
 	),
 	'langues' => array(
 		'disponibles' => array(
@@ -117,9 +129,11 @@ $GLOBALS['rainette_wunderground_config']['service'] = array(
 		),
 		'defaut'      => 'EN'
 	),
-	'limites' => array(
-		'day'         => 500,
-		'minute'      => 10
+	'defauts' => array(
+		'inscription' => '',
+		'unite'       => 'm',
+		'condition'   => 'wundergound',
+		'theme'       => 'a',
 	)
 );
 

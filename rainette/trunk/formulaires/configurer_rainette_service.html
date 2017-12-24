@@ -1,0 +1,116 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	<h3 class="titrem">[(#ENV{nom}|filtrer_entites)]</h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:rainette:legende_configurer_inscription:></legend>
+			[(#REM) <!-- Configuration de la clé d'inscription si requise --> ]
+			[(#ENV{service}|=={weather}|oui)
+				<p><:rainette:explication_configurer_cle_aucune:></p>
+			]
+			[(#ENV{service}|=={weather}|non)
+			<div class="editer-groupe">
+				#SET{type_cle, obligatoire}
+				[(#SET{url, [<a class="spip_out"[ href="(#ENV{configuration/enregistrement/lien})"] target="_blank">(#ENV{configuration/enregistrement/titre})</a>]})]
+				[(#SET{explication, #VAL{rainette:explication_configurer_cle_}
+					|concat{#GET{type_cle}}
+					|_T{#ARRAY{url,#GET{url}}}})]
+				[(#SAISIE{input, inscription,
+					explication=#GET{explication},
+					label=<:rainette:label_cle:>,
+					obligatoire=oui,
+					size=#ENV{configuration/enregistrement/taille_cle},
+					maxlength=#ENV{configuration/enregistrement/taille_cle}
+				})]
+			</div>
+			]
+		</fieldset>
+
+		<fieldset>
+			<legend><:rainette:legende_configurer_affichage:></legend>
+			<div class="editer-groupe">
+				[(#REM) <!-- Configuration du système d'unité à utiliser pour les données météo --> ]
+				[(#SAISIE{radio, unite,
+					datas=#ARRAY{m, <:rainette:label_unite_metrique:>, s, <:rainette:label_unite_standard:>},
+					explication=<:rainette:explication_configurer_unite:>,
+					label=<:rainette:label_unite:>,
+				})]
+
+			[(#ENV{service}|=={weather}|non)
+				[(#REM) <!-- Configuration du système d'icônes à utiliser (sauf pour weather) --> ]
+				[(#SAISIE{radio, condition,
+					datas=#ARRAY{#ENV{service}, <:rainette:label_condition_native:>, weather, <:rainette:label_condition_weather:>},
+					explication=<:rainette:explication_configurer_condition:>,
+					label=<:rainette:label_condition:>,
+				})]
+			]
+
+				[(#REM) <!-- Configuration du thème d'icônes à utiliser (wunderground) --> ]
+				#SET{themes, #ENV{service}|rainette_lister_themes}
+			[(#GET{themes}|oui)
+				[(#SAISIE{radio, theme,
+					datas=#GET{themes},
+					explication=<:rainette:explication_configurer_theme:>,
+					label=<:rainette:label_theme:>,
+				})]
+			]
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<legend><:rainette:legende_configurer_utilisation:></legend>
+			[(#SET{url, [<a class="spip_out"[ href="(#ENV{configuration/offres/lien})"] target="_blank">(#ENV{configuration/offres/titre})</a>]})]
+			[<p>(#VAL{rainette:explication_utilisation_}|concat{#ENV{service}}|_T{#ARRAY{url, #GET{url}}})</p>]
+			[(#ENV{configuration/offres/limites}|oui)<p><:rainette:explication_utilisation_rainette:></p>]
+			<table>
+				<tbody>
+					<tr>
+						<td><:rainette:label_dernier_appel:></td>
+						<td>[(#ENV{utilisation/dernier_appel})]</td>
+					</tr>
+				<BOUCLE_compteurs(DATA) {source table, #ENV{utilisation/compteurs}}>
+					<tr>
+						<td>[(#VAL{rainette:label_compteur_}|concat{#CLE}|_T)]</td>
+						<td>[[<strong>(#VALEUR)</strong>] / (#ENV{configuration/offres/limites/#CLE})]</td>
+					</tr>
+				</BOUCLE_compteurs>
+				</tbody>
+			</table>
+		</fieldset>
+
+		<fieldset>
+			<legend><:rainette:legende_configurer_credit:></legend>
+			[(#SET{url, [<a class="spip_out"[ href="(#ENV{configuration/termes/lien})"] target="_blank">(#ENV{configuration/termes/titre})</a>]})]
+			[<p>(#VAL{rainette:explication_credit_}|concat{#ENV{service}}|_T{#ARRAY{url, #GET{url}}})</p>]
+			<p><:rainette:explication_credit_rainette:></p>
+		</fieldset>
+
+		<input type="hidden" name="_meta_casier" value="rainette/#ENV{service}" />
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div></form>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{condition, weather}|=={weather}|oui)
+			jQuery(".editer_theme").hide();
+		]
+		jQuery("input[name='condition']").change(function() {
+			if (jQuery("input[name='condition']:checked").val() == 'wunderground') {
+				jQuery(".editer_theme").show();
+			}
+			else {
+				jQuery(".editer_theme").hide();
+			}
+			jQuery(this).blur();
+		});
+	});
+//]]>
+</script>

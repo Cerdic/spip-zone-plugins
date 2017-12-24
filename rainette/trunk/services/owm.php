@@ -21,16 +21,27 @@ if (!defined('_RAINETTE_OWM_URL_BASE_ICONE')) {
 // Ces valeurs sont applicables à tous les modes.
 $GLOBALS['rainette_owm_config']['service'] = array(
 	'alias'   => 'owm',
-	'defauts' => array(
-		'inscription' => '',
-		'unite'       => 'm',
-		'condition'   => 'owm',
-		'theme'       => '',
-	),
+	'nom'     => 'OpenWeatherMap',
 	'credits' => array(
 		'titre'       => null,
 		'logo'        => null,
 		'lien'        => 'http://openweathermap.org/',
+	),
+	'termes'         => array(
+		'titre' => 'Terms of service',
+		'lien' => 'http://openweathermap.org/terms'
+	),
+	'enregistrement' => array(
+		'titre' => 'Members',
+		'lien' => 'https://home.openweathermap.org/users/sign_up',
+		'taille_cle' => 32
+	),
+	'offres'         => array(
+		'titre' => 'Price',
+		'lien' => 'https://openweathermap.org/price',
+		'limites' => array(
+			'minute'      => 60
+		),
 	),
 	'langues' => array(
 		'disponibles' => array(
@@ -56,8 +67,11 @@ $GLOBALS['rainette_owm_config']['service'] = array(
 		),
 		'defaut'      => 'en'
 	),
-	'limites' => array(
-		'minute'      => 60
+	'defauts' => array(
+		'inscription' => '',
+		'unite'       => 'm',
+		'condition'   => 'owm',
+		'theme'       => '',
 	)
 );
 
