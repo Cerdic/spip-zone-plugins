@@ -35,7 +35,7 @@ $GLOBALS['rainette_wwo_config']['service'] = array(
 		'taille_cle' => 32
 	),
 	'offres'         => array(
-		'titre' => 'Premimum API Pricing',
+		'titre' => 'Premium API Pricing',
 		'lien' => 'https://developer.worldweatheronline.com/api/pricing.aspx',
 		'limites' => array(
 			'day'         => 500
