@@ -510,7 +510,7 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 
 	// Affichage du message d'erreur ou des données
 	if ($erreur) {
-		$extras['erreur']['texte'] = erreur_formater_texte($extras['erreur'], $lieu, $mode, $modele, $service);
+		$extras['erreur']['texte'] = erreur_formater_texte($extras['erreur'], $lieu, $mode, $modele, $service, $tableau['extras']['config']['nom_service']);
 		$texte = recuperer_fond('modeles/erreur', $extras);
 	} else {
 		// Appel du modèle avec le contexte complet

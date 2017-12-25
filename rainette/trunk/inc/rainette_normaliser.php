@@ -535,10 +535,9 @@ function donnee_verifier_indice_uv($valeur) {
  *
  * @return array
  */
-function erreur_formater_texte($erreur, $lieu, $mode, $modele, $service) {
+function erreur_formater_texte($erreur, $lieu, $mode, $modele, $service, $nom_service) {
 
 	$texte = array('principal' => '', 'conseil' => '', 'service' => '');
-	$titre_service = _T("rainette:titre_service_${service}");
 
 	$type_erreur = $erreur['type'];
 	switch ($type_erreur) {
@@ -549,7 +548,7 @@ function erreur_formater_texte($erreur, $lieu, $mode, $modele, $service) {
 			// Cas d'erreur où le service renvoie aucune donnée sans pour autant monter une erreur.
 		case 'aucune_donnee':
 			// Cas d'erreur où le nombre de requêtes maximal a été atteint.
-			$texte['principal'] .= _T("rainette:erreur_${type_erreur}", array('service' => $titre_service));
+			$texte['principal'] .= _T("rainette:erreur_${type_erreur}", array('service' => $nom_service));
 			$texte['conseil'] .= _T('rainette:erreur_conseil_equipe');
 			break;
 		// Cas d'erreur renvoyé par le service lui-même
@@ -560,12 +559,12 @@ function erreur_formater_texte($erreur, $lieu, $mode, $modele, $service) {
 			if (!empty($erreur['service']['message'])) {
 				$texte['service'] .= ($texte['service'] ? ' - ' : '') . $erreur['service']['message'];
 			}
-			$texte['principal'] .= _T("rainette:erreur_${type_erreur}_${mode}", array('service' => $titre_service, 'lieu' => $lieu));
+			$texte['principal'] .= _T("rainette:erreur_${type_erreur}_${mode}", array('service' => $nom_service, 'lieu' => $lieu));
 			$texte['conseil'] .= _T('rainette:erreur_conseil_service');
 			break;
 		// Cas d'erreur où le nombre de requêtes maximal a été atteint.
 		case 'limite_service':
-			$texte['principal'] .= _T("rainette:erreur_${type_erreur}", array('service' => $titre_service));
+			$texte['principal'] .= _T("rainette:erreur_${type_erreur}", array('service' => $nom_service));
 			$texte['conseil'] .= _T('rainette:erreur_conseil_limite');
 			break;
 		// Cas d'erreur du à une mauvaise utilisation des modèles
@@ -574,7 +573,7 @@ function erreur_formater_texte($erreur, $lieu, $mode, $modele, $service) {
 			$texte['conseil'] .= _T('rainette:erreur_conseil_periodicite');
 			break;
 		case 'modele_service':
-			$texte['principal'] .= _T("rainette:erreur_${type_erreur}", array('modele' => $modele, 'service' => $titre_service));
+			$texte['principal'] .= _T("rainette:erreur_${type_erreur}", array('modele' => $modele, 'service' => $nom_service));
 			$texte['conseil'] .= _T('rainette:erreur_conseil_modele_changer');
 			break;
 		case 'modele_inutilisable':
