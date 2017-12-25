@@ -257,7 +257,8 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 		$extras['credits'] = $configuration['credits'];
 		$extras['config'] = array_merge(
 			$configuration_utilisateur,
-			array('source' => normaliser_configuration_donnees($mode, $configuration['donnees']))
+			array('source' => normaliser_configuration_donnees($mode, $configuration['donnees'])),
+			array('nom_service' => $configuration['nom'])
 		);
 		$extras['lieu'] = $lieu;
 		$extras['mode'] = $mode;

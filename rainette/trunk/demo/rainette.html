@@ -130,11 +130,11 @@
 			<h2 class="h2">M&eacute;t&eacute;o d'un service</h2>
 			<p>Choisissez un service pour afficher les mod&egrave;les informations, conditions et pr&eacute;visions (1.1, 1.2, 1.3)</p>
 			<ul class="menu-items">
-			<BOUCLE_services(DATA) {source table, #GET{jeu}}>
+			<BOUCLE_services(DATA) {source table, #VAL{tableau}|rainette_lister_services}>
 				[<li class="item">
 				(#SELF|parametre_url{service, #CLE}
 					|lien_ou_expose{
-						[(#VAL{rainette:titre_service_}|concat{#CLE}|_T)],
+						[(#VALEUR)],
 						[(#GET{service}|=={#CLE})]})
 				</li>]
 			</BOUCLE_services>
@@ -160,11 +160,11 @@
 			<h2 class="h2">Configuration des services</h2>
 			<p>Choisissez un service pour vous rendre sur sa page de configuration</p>
 			<ul class="menu-items">
-			<BOUCLE_configurations(DATA) {source table, #GET{jeu}}>
+			<BOUCLE_configurations(DATA) {source table, #VAL{tableau}|rainette_lister_services}>
 				[<li class="item">
 				(#URL_ECRIRE{configurer_rainette}|parametre_url{service, #CLE}
 					|lien_ou_expose{
-						[(#VAL{rainette:titre_service_}|concat{#CLE}|_T)]})
+						[(#VALEUR)]})
 				</li>]
 			</BOUCLE_configurations>
 			</ul>

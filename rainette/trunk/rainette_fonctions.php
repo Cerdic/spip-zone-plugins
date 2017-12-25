@@ -317,19 +317,27 @@ function rainette_lister_services($mode = 'tableau') {
 
 	$services = array();
 
-	// On lit les fichiers php dans répertoire services du plugin sachant ce répertoire
+	// On lit les fichiers php dans répertoire services/ du plugin sachant ce répertoire
 	// contient exclusivement les api de chaque service dans un fichier unique appelé
-	// nom_du_service.php
+	// alias_du_service.php
 	if ($fichiers_api = glob(_DIR_PLUGIN_RAINETTE . '/services/*.php')) {
 		foreach ($fichiers_api as $_fichier) {
-			$services[] = strtolower(basename($_fichier, '.php'));
+			// On détermine l'alias du service
+			$service = strtolower(basename($_fichier, '.php'));
+
+			// Acquérir la configuration statique du service.
+			include_spip("services/${service}");
+			$configurer = "${service}_service2configuration";
+			$configuration = $configurer('service');
+
+			$services[$service] = $configuration['nom'];
 		}
 	}
 
 	// Par défaut la liste est fournie comme un tableau.
-	// Si le mode demandé est 'liste' on renvoie une chaine énumérée séparée par des virgules.
+	// Si le mode demandé est 'liste' on renvoie une chaîne énumérée des alias de service séparée par des virgules.
 	if ($mode == 'liste') {
-		$services = implode(',', $services);
+		$services = implode(',', array_keys($services));
 	}
 
 	return $services;
@@ -452,7 +460,8 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 		$extras['credits'] = $configuration['credits'];
 		$extras['config'] = array_merge(
 			parametrage_normaliser($service, $configuration['defauts']),
-			array('source' => normaliser_configuration_donnees($mode, $configuration['donnees']))
+			array('source' => normaliser_configuration_donnees($mode, $configuration['donnees'])),
+			array('nom_service' => $configuration['nom'])
 		);
 		$extras['lieu'] = $lieu;
 		$extras['mode'] = $mode;

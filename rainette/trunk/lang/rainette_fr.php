@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'coucher_soleil' => 'coucher du soleil',
+	'credits' => 'Données fournies par @service@',
 
 	// D
 	'demain' => 'demain',
@@ -84,9 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'humidite' => 'humidité',
 
 	// I
-	'info_credits' => 'Données fournies par @service@',
 	'info_page_configurer' => 'Rainette propose une configuration pour chacun des services de météorologie intégré au plugin. Néanmoins, seuls les services utilisés dans votre site nécessitent d\'être configurés.',
-	'info_utilisation_sans_limite' => 'Aucune limitation du nombre de requêtes',
 
 	// I
 	'indice_uv' => 'Indice UV',
@@ -281,12 +280,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tendance_texte_rising' => 'en hausse',
 	'tendance_texte_steady' => 'stable',
 	'titre_page_configurer' => 'Configuration du plugin Rainette',
-	'titre_service_apixu' => 'APIXU',
-	'titre_service_owm' => 'Open Weather Map',
-	'titre_service_weather' => 'weather.com&reg;',
-	'titre_service_weatherbit' => 'Weatherbit.io',
-	'titre_service_wunderground' => 'Weather Underground',
-	'titre_service_wwo' => 'World Weather Online',
 
 	// U
 	'unite_angle_metrique' => '°',
@@ -309,8 +302,4 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'valeur_indeterminee' => 'N/D',
 	'vent' => 'vent',
 	'visibilite' => 'visibilité',
-
-	// Z
 );
-
-?>

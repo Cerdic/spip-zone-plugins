@@ -213,7 +213,7 @@ function rainette_debug_jeu_defaut() {
 	include_spip('rainette_fonctions');
 	$services = rainette_lister_services();
 	if ($services) {
-		foreach ($services as $_service) {
+		foreach ($services as $_service => $_nom) {
 			if (($_service == 'weather') or ($_service == 'wunderground')) {
 				$jeu[$_service] = 'FRXX0076';
 			} else {
@@ -237,7 +237,7 @@ function rainette_debug_afficher_execution() {
 		include_spip('inc/config');
 		$execution = lire_config('rainette_execution', array());
 
-		foreach ($services as $_service) {
+		foreach ($services as $_service => $_nom) {
 			include_spip("services/${_service}");
 			$configurer = "${_service}_service2configuration";
 			$configuration = $configurer('infos');
