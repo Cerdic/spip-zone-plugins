@@ -20,54 +20,54 @@ if (!defined('_RAINETTE_OWM_URL_BASE_ICONE')) {
 // Configuration des valeurs par défaut des éléments de la configuration dynamique.
 // Ces valeurs sont applicables à tous les modes.
 $GLOBALS['rainette_owm_config']['service'] = array(
-	'alias'   => 'owm',
-	'nom'     => 'OpenWeatherMap',
-	'credits' => array(
-		'titre'       => null,
-		'logo'        => null,
-		'lien'        => 'http://openweathermap.org/',
+	'alias'          => 'owm',
+	'nom'            => 'OpenWeatherMap',
+	'credits'        => array(
+		'titre' => null,
+		'logo'  => null,
+		'lien'  => 'http://openweathermap.org/',
 	),
 	'termes'         => array(
 		'titre' => 'Terms of service',
-		'lien' => 'http://openweathermap.org/terms'
+		'lien'  => 'http://openweathermap.org/terms'
 	),
 	'enregistrement' => array(
-		'titre' => 'Members',
-		'lien' => 'https://home.openweathermap.org/users/sign_up',
+		'titre'      => 'Members',
+		'lien'       => 'https://home.openweathermap.org/users/sign_up',
 		'taille_cle' => 32
 	),
 	'offres'         => array(
-		'titre' => 'Price',
-		'lien' => 'https://openweathermap.org/price',
+		'titre'   => 'Price',
+		'lien'    => 'https://openweathermap.org/price',
 		'limites' => array(
-			'minute'      => 60
+			'minute' => 60
 		),
 	),
-	'langues' => array(
+	'langues'        => array(
 		'disponibles' => array(
-			'bg' => 'bg',
-			'ca' => 'ca',
-			'de' => 'de',
-			'en' => 'en',
-			'es' => 'es',
-			'fi' => 'fi',
-			'fr' => 'fr',
-			'hr' => 'hr',
-			'it' => 'it',
-			'nl' => 'nl',
-			'pl' => 'pl',
-			'pt' => 'pt',
-			'ro' => 'ro',
-			'ru' => 'ru',
-			'sv' => 'sv',
-			'tr' => 'tr',
-			'uk' => 'uk',
-			'zh' => 'zh',
+			'bg'    => 'bg',
+			'ca'    => 'ca',
+			'de'    => 'de',
+			'en'    => 'en',
+			'es'    => 'es',
+			'fi'    => 'fi',
+			'fr'    => 'fr',
+			'hr'    => 'hr',
+			'it'    => 'it',
+			'nl'    => 'nl',
+			'pl'    => 'pl',
+			'pt'    => 'pt',
+			'ro'    => 'ro',
+			'ru'    => 'ru',
+			'sv'    => 'sv',
+			'tr'    => 'tr',
+			'uk'    => 'uk',
+			'zh'    => 'zh',
 			'zh_tw' => 'zh_tw',
 		),
 		'defaut'      => 'en'
 	),
-	'defauts' => array(
+	'defauts'        => array(
 		'inscription' => '',
 		'unite'       => 'm',
 		'condition'   => 'owm',
@@ -78,7 +78,7 @@ $GLOBALS['rainette_owm_config']['service'] = array(
 // Configuration des données fournies par le service owm pour le mode 'infos'.
 // -- Seules les données non calculées sont configurées.
 $GLOBALS['rainette_owm_config']['infos'] = array(
-	'periode_maj' => 3600*24*30,
+	'periode_maj' => 3600 * 24 * 30,
 	'format_flux' => 'json',
 	'cle_base'    => array(),
 	'donnees'     => array(
@@ -97,7 +97,7 @@ $GLOBALS['rainette_owm_config']['infos'] = array(
 // Configuration des données fournies par le service owm pour le mode 'conditions'.
 // -- Seules les données non calculées sont configurées.
 $GLOBALS['rainette_owm_config']['conditions'] = array(
-	'periode_maj' => 3600*2,
+	'periode_maj' => 3600 * 2,
 	'format_flux' => 'json',
 	'cle_base'    => array(),
 	'donnees'     => array(
@@ -132,11 +132,11 @@ $GLOBALS['rainette_owm_config']['conditions'] = array(
 // -- Seules les données non calculées sont configurées.
 $GLOBALS['rainette_owm_config']['previsions'] = array(
 	'periodicites'       => array(
-		24                     => array('max_jours' => 16),
-//		3                      => array('max_jours' => 5)
+		24 => array('max_jours' => 16),
+		//		3                      => array('max_jours' => 5)
 	),
 	'periodicite_defaut' => 24,
-	'periode_maj'        => 3600*2,
+	'periode_maj'        => 3600 * 2,
 	'format_flux'        => 'json',
 	'cle_base'           => array('list'),
 	'cle_heure'          => array(),
@@ -176,11 +176,11 @@ $GLOBALS['rainette_owm_config']['previsions'] = array(
 // Configuration des données fournies par le service owm en cas d'erreur.
 // -- Seules les données non calculées sont configurées.
 $GLOBALS['rainette_owm_config']['erreurs'] = array(
-	'cle_base'    => array(),
-	'donnees'     => array(
+	'cle_base' => array(),
+	'donnees'  => array(
 		// Erreur
-		'code'     => array('cle' => array('cod')),
-		'message'  => array('cle' => array('message')),
+		'code'    => array('cle' => array('cod')),
+		'message' => array('cle' => array('message')),
 	),
 );
 
@@ -191,6 +191,8 @@ $GLOBALS['rainette_owm_config']['erreurs'] = array(
  * unique de chargement des données météorologiques `meteo_charger()`.
  * PACKAGE SPIP\RAINETTE\OWM\API
  * ------------------------------------------------------------------------------------------------
+ *
+ * @param mixed $mode
  */
 
 /**
@@ -366,6 +368,8 @@ function owm_complement2previsions($tableau, $configuration, $index_periode) {
  * de l'API.
  * PACKAGE SPIP\RAINETTE\OWM\OUTILS
  * ---------------------------------------------------------------------------------------------
+ *
+ * @param mixed $configuration
  */
 
 /**
@@ -419,29 +423,79 @@ function etat2resume_owm(&$tableau, $configuration) {
 // TODO : mettre au point le transcodage omw vers weather
 function meteo_owm2weather($meteo, $periode = 0) {
 	static $owm2weather = array(
-		'chanceflurries'  => array(41, 46),
-		'chancerain'      => array(39, 45),
-		'chancesleet'     => array(39, 45),
-		'chancesnow'      => array(41, 46),
-		'chancetstorms'   => array(38, 47),
-		'clear'           => array(32, 31),
-		'cloudy'          => array(26, 26),
-		'flurries'        => array(15, 15),
-		'fog'             => array(20, 20),
-		'hazy'            => array(21, 21),
-		'mostlycloudy'    => array(28, 27),
-		'mostlysunny'     => array(34, 33),
-		'partlycloudy'    => array(30, 29),
-		'partlysunny'     => array(28, 27),
-		'sleet'           => array(5, 5),
-		'rain'            => array(11, 11),
-		'snow'            => array(16, 16),
-		'sunny'           => array(32, 31),
-		'tstorms'         => array(4, 4),
-		'thunderstorms'   => array(4, 4),
-		'unknown'         => array(4, 4),
-		'scatteredclouds' => array(30, 29),
-		'overcast'        => array(26, 26)
+		'200' => array(41, 46),
+		'201' => array(39, 45),
+		'202' => array(39, 45),
+		'210' => array(41, 46),
+		'211' => array(38, 47),
+		'212' => array(32, 31),
+		'221' => array(26, 26),
+		'230' => array(15, 15),
+		'231' => array(20, 20),
+		'232' => array(21, 21),
+		'300' => array(28, 27),
+		'301' => array(34, 33),
+		'302' => array(30, 29),
+		'310' => array(28, 27),
+		'311' => array(5, 5),
+		'312' => array(11, 11),
+		'313' => array(16, 16),
+		'314' => array(32, 31),
+		'321' => array(4, 4),
+		'500' => array(4, 4),
+		'501' => array(4, 4),
+		'502' => array(30, 29),
+		'503' => array(26, 26),
+		'504' => array(26, 26),
+		'511' => array(26, 26),
+		'520' => array(26, 26),
+		'521' => array(26, 26),
+		'522' => array(26, 26),
+		'531' => array(26, 26),
+		'600' => array(26, 26),
+		'601' => array(26, 26),
+		'602' => array(26, 26),
+		'611' => array(26, 26),
+		'612' => array(26, 26),
+		'615' => array(26, 26),
+		'616' => array(26, 26),
+		'620' => array(26, 26),
+		'621' => array(26, 26),
+		'622' => array(26, 26),
+		'701' => array(26, 26),
+		'711' => array(26, 26),
+		'721' => array(26, 26),
+		'731' => array(26, 26),
+		'741' => array(26, 26),
+		'751' => array(26, 26),
+		'761' => array(26, 26),
+		'762' => array(26, 26),
+		'771' => array(26, 26),
+		'781' => array(26, 26),
+		'800' => array(26, 26),
+		'801' => array(26, 26),
+		'802' => array(26, 26),
+		'803' => array(26, 26),
+		'804' => array(26, 26),
+		'900' => array(0, 0),
+		'901' => array(26, 26),
+		'902' => array(26, 26),
+		'903' => array(26, 26),
+		'904' => array(26, 26),
+		'905' => array(26, 26),
+		'906' => array(26, 26),
+		'951' => array(26, 26),
+		'952' => array(26, 26),
+		'953' => array(26, 26),
+		'954' => array(26, 26),
+		'955' => array(26, 26),
+		'956' => array(26, 26),
+		'957' => array(26, 26),
+		'958' => array(26, 26),
+		'959' => array(26, 26),
+		'960' => array(26, 26),
+		'961' => array(26, 26),
+		'962' => array(26, 26)
 	);
 
 	$icone = 'na';

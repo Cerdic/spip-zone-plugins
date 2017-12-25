@@ -376,7 +376,8 @@ function wunderground_erreur_verifier($erreur) {
  *        du service.
  */
 function wunderground_complement2conditions($tableau, $configuration) {
-	static $tendances = array('0' => 'steady', '+' => 'rising', '-' => 'falling');
+	// TODO : vérifier sur le site si le cas '' vers steady a un sens ou pas ?
+	static $tendances = array('0' => 'steady', '+' => 'rising', '-' => 'falling', '' => '');
 
 	if ($tableau) {
 		// Traiter le cas où l'indice uv n'est pas fourni: wunderground renvoie une valeur négative.
@@ -385,7 +386,7 @@ function wunderground_complement2conditions($tableau, $configuration) {
 			$tableau['indice_uv'] = '';
 		}
 
-		// Convertir la valeur de tendance dans le standard du plugin
+		// Convertir la valeur de tendance dans le standard du plugin.
 		// La documentation indique que les directions uniques sont fournies sous forme de texte comme North
 		// alors que les autres sont des acronymes. En outre, la valeur semble être traduite
 		// --> Le mieux est donc de convertir à partir de l'angle
@@ -481,9 +482,7 @@ function etat2resume_wunderground(&$tableau, $configuration) {
 			// On affiche les conditions natives fournies par le service.
 			// Celles-ci étant déjà traduites dans la bonne langue on stocke le texte exact retourné par l'API.
 			$tableau['icone']['code'] = $tableau['code_meteo'];
-			$url = _RAINETTE_WUNDERGROUND_URL_BASE_ICONE . '/'
-				   . $configuration['theme'] . '/'
-				   . basename($tableau['code_meteo']);
+			$url = _RAINETTE_WUNDERGROUND_URL_BASE_ICONE . '/' . $configuration['theme'] . '/' . $icone;
 			$tableau['icone']['url'] = copie_locale($url);
 			$tableau['resume'] = ucfirst($tableau['desc_meteo']);
 		} else {
