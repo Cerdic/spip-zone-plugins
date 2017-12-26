@@ -43,9 +43,10 @@
 			[(#ENV{service}|=={weather}|non)
 				[(#REM) <!-- Configuration du système d'icônes à utiliser (sauf pour weather) --> ]
 				[(#SAISIE{radio, condition,
-					datas=#ARRAY{#ENV{service}, <:rainette:label_condition_native:>, weather, <:rainette:label_condition_weather:>},
-					explication=<:rainette:explication_configurer_condition:>,
-					label=<:rainette:label_condition:>,
+					datas=#ARRAY{#ENV{service}, <:rainette:label_icone_natif:>, weather, <:rainette:label_icone_weather:>},
+					disable=#ARRAY{#ENV{service}, 0, weather, #ENV{service}|in_array{#LISTE{wunderground, weatherbit, apixu, owm}}},
+					explication=<:rainette:explication_configurer_icone:>,
+					label=<:rainette:label_icone:>,
 				})]
 			]
 

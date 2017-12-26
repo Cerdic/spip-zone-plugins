@@ -50,6 +50,5 @@ function formulaires_configurer_rainette_service_charger($service) {
 	// fonctionner avec un hidden dont la valeur est dynamique (utilisation d'une variable d'environnement #ENV).
 	$valeurs['_meta_casier'] = "rainette/${service}";
 
-
 	return $valeurs;
 }

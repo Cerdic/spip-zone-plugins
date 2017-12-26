@@ -721,36 +721,36 @@ function lieu_normaliser($lieu, &$format_lieu = '') {
  */
 function langue_determiner($configuration_service) {
 
-	if ($configuration_service['condition'] == $configuration_service['alias']) {
-		// Rainette est configurée pour utiliser le résumé renvoyé par le service pour l'affichage :
-		// il est donc nécessaire de demander ce résumé dans la bonne langue si elle existe.
+	// Les services de Rainette sauf weather.com peuvent renvoyer la traduction du résumé dans plusieurs langues.
+	// il est donc nécessaire de demander ce résumé dans la bonne langue si elle existe.
 
-		// On détermine la "bonne langue" : on choisit soit celle de la page en cours
-		// soit celle en cours pour l'affichage.
-		$langue_spip = $GLOBALS['lang'] ? $GLOBALS['lang'] : $GLOBALS['spip_lang'];
+	// On détermine la "bonne langue" : on choisit soit celle de la page en cours
+	// soit celle en cours pour l'affichage.
+	$langue_spip = $GLOBALS['lang'] ? $GLOBALS['lang'] : $GLOBALS['spip_lang'];
 
-		// On cherche si le service fournit la langue utilisée par le site.
-		// -- Pour cela on utilise la configuration du service qui fournit un tableau des langues disponibles
-		//    sous le format [code de langue du service] = code de langue spip.
-		$langue_service = array_search($langue_spip, $configuration_service['langues']['disponibles']);
-		if ($langue_service === false) {
-			// La langue utilisée par SPIP n'est pas supportée par le service.
-			// -- On cherche si il existe une langue SPIP utilisable meilleure que la langue par défaut du service.
-			// -- Pour ce faire on a défini pour chaque code de langue spip, un ou deux codes de langue SPIP à utiliser
-			//    en cas d'absence de la langue concernée dans un ordre de priorité (index 0, puis index 1).
-			$langue_service = $configuration_service['langues']['defaut'];
-			if ($GLOBALS['rainette_config']['langues_alternatives'][$langue_spip]) {
-				foreach ($GLOBALS['rainette_config']['langues_alternatives'][$langue_spip] as $_langue_alternative) {
-					$langue_service = array_search($_langue_alternative, $configuration_service['langues']['disponibles']);
-					if ($langue_service !== false) {
-						break;
-					}
+	// On cherche d'abord si le service fournit la langue utilisée par le site.
+	// -- Pour cela on utilise la configuration du service qui fournit un tableau des langues disponibles
+	//    sous le format [code de langue du service] = code de langue spip.
+	$langue_service = array_search($langue_spip, $configuration_service['langues']['disponibles']);
+
+	if ($langue_service === false) {
+		// La langue utilisée par SPIP n'est pas supportée par le service.
+		// -- On cherche si il existe une langue SPIP utilisable meilleure que la langue par défaut du service.
+		// -- Pour ce faire on a défini pour chaque code de langue spip, un ou deux codes de langue SPIP à utiliser
+		//    en cas d'absence de la langue concernée dans un ordre de priorité (index 0, puis index 1).
+		$langue_service = $configuration_service['langues']['defaut'];
+		if ($GLOBALS['rainette_config']['langues_alternatives'][$langue_spip]) {
+			foreach ($GLOBALS['rainette_config']['langues_alternatives'][$langue_spip] as $_langue_alternative) {
+				$langue_service = array_search($_langue_alternative, $configuration_service['langues']['disponibles']);
+				if ($langue_service !== false) {
+					break;
 				}
 			}
 		}
-	} else {
-		// Rainette est configurée pour afficher le résumé Weather.com après transcodage. La langue de la requête
-		// importe peu, on choisit donc la langue configurée par défaut.
+	}
+
+	// Aucune langue ne correspond véritablement, on choisit donc la langue configurée par défaut.
+	if ($langue_service === false) {
 		$langue_service = $configuration_service['langues']['defaut'];
 	}
 

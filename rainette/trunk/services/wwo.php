@@ -416,19 +416,23 @@ function etat2resume_wwo(&$tableau, $configuration) {
 			$tableau['periode'] = 1;
 		}
 
-		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
+		// Détermination du résumé à afficher.
+		// Depuis la 3.4.6 on affiche plus que le résumé natif de chaque service car les autres services
+		// que weather.com possèdent de nombreuses traductions qu'il convient d'utiliser.
+		// Pour éviter de modifier la structure de données, on conserve donc desc_meteo et resume même si
+		// maintenant ces deux données coincident toujours.
+		// Pour wwo, la description est dans trad_meteo et non dans desc_meteo.
+		$tableau['resume'] = ucfirst($tableau['trad_meteo']);
+
+		// Determination de l'icone qui sera affiché.
 		if ($configuration['condition'] == $configuration['alias']) {
-			// On affiche les conditions natives fournies par le service.
-			// Pour le resume, wwo fournit la traduction dans un item différent que pour les autres services.
-			// Cet item est stocké dans trad_meteo.
+			// On affiche l'icône natif fourni par le service.
 			$tableau['icone']['code'] = $tableau['code_meteo'];
 			$tableau['icone']['url'] = copie_locale($tableau['icon_meteo']);
-			$tableau['resume'] = ucfirst($tableau['trad_meteo']);
 		} else {
-			// On affiche les conditions traduites dans le systeme weather.com
+			// On affiche l'icône correspondant au code météo transcodé dans le système weather.com.
 			$meteo = meteo_wwo2weather($tableau['code_meteo'], $tableau['periode']);
 			$tableau['icone'] = $meteo;
-			$tableau['resume'] = $meteo;
 		}
 	}
 }

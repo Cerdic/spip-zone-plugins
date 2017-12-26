@@ -153,7 +153,7 @@ $GLOBALS['rainette_weather_config']['erreurs'] = array(
 /**
  * @param string $mode
  *
- * @return string
+ * @return array
  */
 function weather_service2configuration($mode) {
 	global $rainette_weather_config;

@@ -477,21 +477,23 @@ function etat2resume_wunderground(&$tableau, $configuration) {
 			$tableau['periode'] = 1;
 		}
 
-		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
+		// Détermination du résumé à afficher.
+		// Depuis la 3.4.6 on affiche plus que le résumé natif de chaque service car les autres services
+		// que weather.com possèdent de nombreuses traductions qu'il convient d'utiliser.
+		// Pour éviter de modifier la structure de données, on conserve donc desc_meteo et resume même si
+		// maintenant ces deux données coincident toujours.
+		$tableau['resume'] = ucfirst($tableau['desc_meteo']);
+
+		// Determination de l'icone qui sera affiché.
 		if ($configuration['condition'] == $configuration['alias']) {
-			// On affiche les conditions natives fournies par le service.
-			// Celles-ci étant déjà traduites dans la bonne langue on stocke le texte exact retourné par l'API.
+			// On affiche l'icône natif fourni par le service.
 			$tableau['icone']['code'] = $tableau['code_meteo'];
 			$url = _RAINETTE_WUNDERGROUND_URL_BASE_ICONE . '/' . $configuration['theme'] . '/' . $icone;
 			$tableau['icone']['url'] = copie_locale($url);
-			$tableau['resume'] = ucfirst($tableau['desc_meteo']);
 		} else {
-			// On affiche les conditions traduites dans le système weather.com
-			// Pour le resume on stocke le code et non la traduction pour éviter de générer
-			// un cache par langue comme pour le mode natif. La traduction est faite via les fichiers de langue
+			// On affiche l'icône correspondant au code météo transcodé dans le système weather.com.
 			$meteo = meteo_wunderground2weather($tableau['code_meteo'], $tableau['periode']);
 			$tableau['icone'] = $meteo;
-			$tableau['resume'] = $meteo;
 		}
 	}
 }
