@@ -8,7 +8,7 @@
 	documentation="https://contrib.spip.net/4946"
 >
 	<nom>XRay</nom>
-	<!-- Explorer les caches APC des squelettes SPIP pour les optimiser -->
+	<!-- Explorer les caches APC des squelettes SPIP pour les comprendre et les optimiser -->
 
 	<auteur lien="https://contrib.spip.net/JLuc">JLuc</auteur>
 	<licence lien="http://www.php.net/license/3_01.txt">PHP</licence>

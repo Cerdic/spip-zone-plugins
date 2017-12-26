@@ -11,7 +11,7 @@
 	<version>0.12.0</version>
 	<etat>test</etat>
 	<description>
-	Explorer les caches APC des squelettes SPIP avec memoization pour les optimiser
+	Explorer les caches des squelettes SPIP avec memoization APC pour les comprendre et les optimiser
 	</description>
 	<lien>http://contrib.spip.net/4946</lien>
 	<prefix>xray</prefix>
