@@ -376,7 +376,7 @@ function wunderground_erreur_verifier($erreur) {
  *        du service.
  */
 function wunderground_complement2conditions($tableau, $configuration) {
-	// TODO : vérifier sur le site si le cas '' vers steady a un sens ou pas ?
+	// TODO : vérifier sur le site si le cas '' vers '' a un sens ou pas ?
 	static $tendances = array('0' => 'steady', '+' => 'rising', '-' => 'falling', '' => '');
 
 	if ($tableau) {

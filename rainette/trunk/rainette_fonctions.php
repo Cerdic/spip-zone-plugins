@@ -109,17 +109,13 @@ function rainette_afficher_icone($meteo, $taille = 'petit', $chemin = '', $exten
 	// On retaille si nécessaire l'image pour qu'elle soit toujours de la même taille (grande ou petite)
 	list($largeur, $hauteur) = @getimagesize($source);
 	include_spip('filtres/images_transforme');
-	if (($largeur < $taille_defaut)
-		or ($hauteur < $taille_defaut)
-	) {
+	if (($largeur < $taille_defaut)	or ($hauteur < $taille_defaut)) {
 		// Image plus petite que celle par défaut :
 		// --> Il faut insérer et recadrer l'image dans une image plus grande à la taille par défaut
 		$source = extraire_attribut(image_recadre($source, $taille_defaut, $taille_defaut, 'center', 'transparent'), 'src');
-	} elseif (($largeur > $taille_defaut)
-			  or ($hauteur > $taille_defaut)
-	) {
+	} elseif (($largeur > $taille_defaut) or ($hauteur > $taille_defaut)) {
 		// Image plus grande que celle par défaut :
-		// --> Il faut reduire l'image à la taille par défaut
+		// --> Il faut réduire l'image à la taille par défaut
 		$source = extraire_attribut(image_reduire($source, $taille_defaut), 'src');
 	}
 

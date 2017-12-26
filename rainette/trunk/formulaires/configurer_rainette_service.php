@@ -46,5 +46,10 @@ function formulaires_configurer_rainette_service_charger($service) {
 		? $execution['compteurs']
 		: array();
 
+	// On positionne le meta casier car la fonction de recensement automatique n'est plus appelée ni ne pourrait
+	// fonctionner avec un hidden dont la valeur est dynamique (utilisation d'une variable d'environnement #ENV).
+	$valeurs['_meta_casier'] = "rainette/${service}";
+
+
 	return $valeurs;
 }
