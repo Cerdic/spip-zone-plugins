@@ -9,11 +9,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// A
+	'alt_logo_conf' => 'Notifications plugin logo',
+
 	// 0
 	'0' => '--------------',
 
 	// A
-	'alt_logo_conf' => 'Notifications plugin logo',
 	'article_prive' => 'Articles publishing',
 	'article_prive_admins_restreints' => '<strong>Restricted Administrators</strong>: Restricted Administrators get notified when article(s) is(are) proposed in their section.
 For General Administrators see
@@ -77,6 +79,9 @@ Restricted administrators get notified when new posts are published in the secto
 	'forums_public_thread' => '<strong>Forum thread</strong>: Posters to the same thread get notified when a new comment is posted to the (public) thread. Posts tagged as deleted or spam are excluded.',
 
 	// I
+	'info_diffusion_nouveaute_partielle_non' => 'Distribute full content',
+	'info_diffusion_nouveaute_partielle_oui' => 'Distribute just an abstract',
+	'info_diffusion_nouveautes' => 'Content of mails announcing site news',
 	'info_lien_publier_commentaire' => 'Publish this comment online',
 	'info_lien_signaler_spam_commentaire' => 'Report as SPAM',
 	'info_lien_supprimer_commentaire' => 'Delete this comment',
@@ -96,12 +101,14 @@ Restricted administrators get notified when new posts are published in the secto
 	'inscription_statut_webmestres' => 'Webmaster',
 
 	// L
-	'lien_documentation' => '<a href="http://contrib.spip.net/Notifications" class="spip_out">View documentation</a>', # MODIF
+	'lien_documentation' => '<a href="https://contrib.spip.net/Notifications" class="spip_out">View documentation</a>',
 	'limiter_rubriques_explication' => 'Specify the identifiers of each section where you want to activate the notifications, separated with a comma. example: "11,26"',
 	'limiter_rubriques_label' => 'Limit to these sections:',
 
 	// M
 	'message_a_valider' => 'Message to confirm:',
+	'message_fin_explication' => 'Message that will be displayed at the end of the email (allowing to indicate why people receive this mail, unsubscribe method...)',
+	'message_fin_label' => 'Message at the end of the email: ',
 	'message_spam_a_confirmer' => 'SPAM to confirm:',
 	'message_voir_configuration' => 'Look at the notification setup',
 	'messagerie_interne' => 'Private messages',
