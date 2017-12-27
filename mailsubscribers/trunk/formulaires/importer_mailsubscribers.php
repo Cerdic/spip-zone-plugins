@@ -111,7 +111,7 @@ function formulaires_importer_mailsubscribers_traiter_dist() {
 
 	$filename = session_get('importer_mailsubscribers::tmpfilename');
 	// creer une liste de diffusion correspondant a cet import (automatique) sauf si on indique dans config
-    include_spip('inc/config');
+	include_spip('inc/config');
 	if (lire_config('mailsubscribers/importer_creer_liste', '') == '') {
 		$set = array(
 			'titre' => basename(session_get('importer_mailsubscribers::filename')),
