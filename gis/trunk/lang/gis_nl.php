@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_layer_defaut' => 'Standaard layer',
 	'cfg_lbl_layers' => 'Voorgestelde layers',
 	'cfg_lbl_maptype' => 'Basiskaart',
+	'cfg_lbl_plugins_desactives' => 'Deactiveer bepaalde plugins',
 	'cfg_lbl_styles' => 'Toon de stijlvelden',
 	'cfg_titre_gis' => 'Configuratie van GIS',
 
@@ -57,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_layer_forcee' => 'De layer is vereist door een andere plugin of een ander model.',
 	'explication_maptype_force' => 'De basiskaart is vereist door een andere plugin of een ander model.',
 	'explication_opacity' => 'Opaciteit van de streep tussen 0 en 1 (standaardwaarde: 0.5)',
+	'explication_plugins_desactives' => 'Let op, bepaalde door deze plugins geleverde functionaliteit is niet operationeel.',
 	'explication_weight' => 'Streepdikte (standaardwaarde: 5)',
 
 	// F
@@ -125,6 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_inserer_modele_rubriques' => 'gekoppeld aan rubrieken',
 	'label_inserer_modele_sites' => 'gekoppeld aan websites',
 	'label_inserer_modele_titre_carte' => 'Kaarttitel',
+	'label_inserer_modele_tooltip' => 'Toon een tooltip wanneer over de punten wordt bewogen',
 	'label_opacity' => 'Opaciteit',
 	'label_pays' => 'Land',
 	'label_rechercher_address' => 'Zoek een adres',
