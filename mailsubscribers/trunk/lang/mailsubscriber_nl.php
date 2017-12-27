@@ -106,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_pas_encore_inscrit' => 'niet geregistreerd',
 	'texte_statut_refuse' => 'opgeschort',
 	'texte_statut_valide' => 'actief',
+	'texte_vous_avez_clique_vraiment_tres_vite' => 'Je hebt wel heel erg snel op de bevestigingsknop geklikt. Ben je wel een mens?',
 	'titre_bonjour' => 'Hallo',
 	'titre_export_mailsubscribers' => 'Inschrijvingen exporteren',
 	'titre_export_mailsubscribers_all' => 'Exporteer alle adressen',
