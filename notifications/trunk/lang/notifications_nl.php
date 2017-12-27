@@ -78,7 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_diffusion_nouveaute_partielle_non' => 'Volledige inhoud verspreiden',
 	'info_diffusion_nouveaute_partielle_oui' => 'Slechts een extract verspreiden',
-	'info_diffusion_nouveautes' => 'Inhoud van mails die nieuws over de site aankondigen', # MODIF
+	'info_diffusion_nouveautes' => 'Inhoud van mails die nieuws over de site aankondigen',
 	'info_lien_publier_commentaire' => 'Dit commentaar plaatsen',
 	'info_lien_signaler_spam_commentaire' => 'Als SPAM aanmerken',
 	'info_lien_supprimer_commentaire' => 'Dit commentaar verwijderen',
