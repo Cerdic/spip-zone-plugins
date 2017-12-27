@@ -1,11 +1,13 @@
 <?php
 /**
  * Plugin mailsubscribers
- * (c) 2012 C�dric Morin
+ * (c) 2012-2017 Cédric Morin
  * Licence GNU/GPL v3
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/session');
 include_spip('inc/mailsubscribers');
@@ -86,7 +88,7 @@ function formulaires_importer_mailsubscribers_verifier_dist() {
  * Traiter les champs postes
  */
 function formulaires_importer_mailsubscribers_traiter_dist() {
-	refuser_traiter_formulaire_ajax();// pour recharger toute la page
+	refuser_traiter_formulaire_ajax(); // pour recharger toute la page
 
 	if (_request('vider_table') AND autoriser('detruire')) {
 		include_spip('base/abstract_sql');
@@ -108,16 +110,19 @@ function formulaires_importer_mailsubscribers_traiter_dist() {
 	}
 
 	$filename = session_get('importer_mailsubscribers::tmpfilename');
-	// creer une liste de diffusion correspondant a cet import (automatique)
-	$set = array(
-		'titre' => basename(session_get('importer_mailsubscribers::filename')),
-		'identifiant' => 'import_'.substr(md5(session_get('importer_mailsubscribers::filename').$filename.date('Y-m-d H:i:s')),0,7).'_'.date('Ymd'),
-	);
-	include_spip('action/editer_objet');
-	$id_mailsubscribinglist = objet_inserer('mailsubscribinglist');
-	objet_modifier('mailsubscribinglist', $id_mailsubscribinglist, $set);
-	// et inscrire les emails a cette liste
-	$options['listes'][] = $set['identifiant'];
+	// creer une liste de diffusion correspondant a cet import (automatique) sauf si on indique dans config
+    include_spip('inc/config');
+	if (lire_config('mailsubscribers/importer_creer_liste', '') == '') {
+		$set = array(
+			'titre' => basename(session_get('importer_mailsubscribers::filename')),
+			'identifiant' => 'import_'.substr(md5(session_get('importer_mailsubscribers::filename').$filename.date('Y-m-d H:i:s')),0,7).'_'.date('Ymd'),
+		);
+		include_spip('action/editer_objet');
+		$id_mailsubscribinglist = objet_inserer('mailsubscribinglist');
+		objet_modifier('mailsubscribinglist', $id_mailsubscribinglist, $set);
+		// et inscrire les emails a cette liste
+		$options['listes'][] = $set['identifiant'];
+	}
 
 	$r = importer_mailsubscribers_importe($filename, $options);
 
