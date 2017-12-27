@@ -7,7 +7,12 @@
  */
 
 function formulaires_configurer_webfonts2_charger_dist(){
-	$valeurs['googlefonts_api'] = $GLOBALS['meta']['googlefonts_api'];
+	if(!defined('_GOOGLE_API_KEY') OR _GOOGLE_API_KEY == false){
+		$valeurs['googlefonts_api_key'] = lire_config('webfonts2/googlefonts_api_key');
+	}else{
+		$valeurs['googlefonts_api_key'] = _GOOGLE_API_KEY;
+	}
+	
 	return $valeurs;
 }
 
