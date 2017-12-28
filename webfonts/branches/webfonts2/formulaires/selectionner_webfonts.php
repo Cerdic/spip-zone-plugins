@@ -16,7 +16,10 @@ function formulaires_selectionner_webfonts_charger_dist(){
 		'font_search'=>_request('font_search'),
 		'sort'=>_request('sort'),
 		'preview_text'=>_request('preview_text'),
-		'category'=>_request('category')
+		'category'=>_request('category'),
+		'preview'=>_request('preview'),
+		'preview_font_size'=>_request('preview_font_size'),
+		'infos'=>_request('infos')
     );
 	return $valeurs;
 }
@@ -50,11 +53,12 @@ function formulaires_selectionner_webfonts_traiter_dist(){
 			$result = $googlefonts['items'];
 		}
 		
-		//var_dump([$sort,$category,$googlefonts]);
-		set_request('font_list', $result);
-		//var_dump($result);
-	
-	
+		include_spip('flock','inc');
+		
+		
+		
+		$jsonfile = ecrire_fichier(_DIR_TMP.'/googlefont_list.json',json_encode($result));
+		
 		$res = array('message_ok'=>_T('config_info_enregistree'),'editable'=>true);
 	}else{
 		$res = array('message_erreur'=>'Pas de API KEY definie');
