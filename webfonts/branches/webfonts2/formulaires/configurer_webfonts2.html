@@ -5,32 +5,35 @@ Squelette #FORMULAIRE_CONFIGURER_WEBFONTS
 Distribue sous licence GPL
 
 -->]
-
-
-
 <div class="formulaire_spip formulaire_editer formulaire_#FORM">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'>
 		<div>
-			[(#REM) declarer les hidden qui declencheront le service du formulaire
-			parametre : url d'action ]
+			[(#REM) <!--declarer les hidden qui declencheront le service du formulaire
+			parametre : url d'action -->]
 			#ACTION_FORMULAIRE{#ENV{action},#FORM}
 			<fieldset>
 				<legend></legend>
 				<div class="editer-groupe">
 					  <div class="editer googlefonts_api_key obligatoire[ (#ENV**{erreurs}|table_valeur{googlefonts_api}|oui)erreur]">
-						  <label for="nom"><:webfonts:label_googlefonts_api:></label>[
+						  <label for="nom"><:webfonts2:label_googlefonts_api:></label>[
 						  <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{googlefonts_api})</span>
-						  ]<p class="explication"><:webfonts:explication_googlefonts_api:></p>
+						  ]<p class="explication"><:webfonts2:explication_googlefonts_api:></p>
 						  <input type="text" name='googlefonts_api_key' id='googlefonts_api_key' value="#ENV{googlefonts_api_key}" />
+					  </div>
+					  [(#REM)<!-- méthodes d'insertion standard (balise link ) | @import (balise style) -->]
+					  <div class="editer methode_insert">
+						<label for="methode_insert"><:webfonts2:label_methode_insert:></label>
+						<select name="methode_insert" id="methode_insert">
+							<option value=""> Choisissez une méthode d'insertion</option>
+							<option value="standard"[(#ENV{methode_insert}|=={standard}|?{'selected="selected"',''})]>Standard</option>
+							<option value="at_import"[(#ENV{methode_insert}|=={at_import}|?{'selected="selected"',''})]>@import</option>
+						</select>
 					  </div>
 				</div>
 			</fieldset>
-			
-
-			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 			<!--extra-->
 			<input type="hidden" name="_meta_casier" value="webfonts2"/>
 			<p class='boutons'>

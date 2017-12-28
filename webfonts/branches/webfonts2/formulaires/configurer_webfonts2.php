@@ -7,6 +7,9 @@
  */
 
 function formulaires_configurer_webfonts2_charger_dist(){
+	$valeurs = array(
+		'methode_insert'=> lire_config('webfonts2/methode_insert')
+	);
 	if(!defined('_GOOGLE_API_KEY') OR _GOOGLE_API_KEY == false){
 		$valeurs['googlefonts_api_key'] = lire_config('webfonts2/googlefonts_api_key');
 	}else{
@@ -16,14 +19,6 @@ function formulaires_configurer_webfonts2_charger_dist(){
 	return $valeurs;
 }
 
-function formulaires_configurer_webfonts2_traiter_dist(){
-	include_spip('inc/meta');
-	if ($f = _request('googlefonts_api'))
-		ecrire_meta('googlefonts_api',$f);
-	else
-		effacer_meta('googlefonts_api');
-	
-	return array('message_ok'=>_T('config_info_enregistree'),'editable'=>true);
-}
+
 
 ?>
