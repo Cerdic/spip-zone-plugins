@@ -12,7 +12,6 @@
 
 function formulaires_selectionner_webfonts_charger_dist(){
 	$valeurs = array(
-		'font_list'=>_request('font_list'),
 		'font_search'=>_request('font_search'),
 		'sort'=>_request('sort'),
 		'preview_text'=>_request('preview_text'),
@@ -54,9 +53,6 @@ function formulaires_selectionner_webfonts_traiter_dist(){
 		}
 		
 		include_spip('flock','inc');
-		
-		
-		
 		$jsonfile = ecrire_fichier(_DIR_TMP.'/googlefont_list.json',json_encode($result));
 		
 		$res = array('message_ok'=>_T('config_info_enregistree'),'editable'=>true);
