@@ -20,6 +20,7 @@
 	<pipeline nom="fonts_list" inclure="webfonts2_pipelines.php" />
 	
 	<necessite nom="php:curl" />
+	<necessite nom="spip_bonux" compatibilite="[3.4.4;["/>
 	
 	<menu nom="webfonts" titre="webfonts2:webfonts2_titre" parent="menu_squelette" icone="images/webfonts2-16.png" action="webfonts" />
 
