@@ -38,7 +38,7 @@ function responsive($matches) {
 }
 
 /**
- * Cette fonction va créer la class foundation de la balise #COLONNE
+ * Cette fonction va créer la class foundation de la balise #COLONNES
  *
  * @param  int|array $nombre_colonnes Nombre de colonne désiré
  * @param  string $type Foundation 4/5, type de colonne (large, medium, small)
