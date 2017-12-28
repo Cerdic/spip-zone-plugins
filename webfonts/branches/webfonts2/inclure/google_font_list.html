@@ -3,7 +3,7 @@
 
 <B_listResults>
 #ANCRE_PAGINATION
-<BOUCLE_listResults(DATA){source table, #FONT_INDEX|json_decode }
+<BOUCLE_listResults(DATA){source table, #FONT_INDEX}
 						{category ?= #ENV{category}}
 						{pagination 10}>
 
@@ -32,14 +32,11 @@
 			<td>#VALEUR{category}</td>
 			<td>[(#VALEUR{subsets}|foreach)]</td>
 			<td>
-			#SET{font_variants,#ARRAY{}}
-			<BOUCLE_variantes(POUR){tableau #VALEUR{variants}}>
-				#SET{font_variants,#GET{font_variants}|push{#VALEUR}}
-			</BOUCLE_variantes>
 			<BOUCLE_downloads(POUR){tableau #VALEUR{files}}>
-				[(#SET{file_name, #VAL{#GET{family}_#GET{font_variants/#COMPTEUR_BOUCLE}}|slugify})]
-				<b>#GET{family}</b> - #GET{font_variants/#COMPTEUR_BOUCLE} <br>
-				[<a href="(#URL_PAGE{download_font}|parametre_url{filename,#GET{file_name}}|parametre_url{src,#VALEUR})" title="#VALEUR">Télécharger</a><br>]
+				[(#SET{file_name, #VAL{#GET{family}_#CLE}|slugify})]
+				<b>#GET{family}</b> - #CLE <br>
+				[<a href="(#URL_PAGE{download_font}|parametre_url{filename,#GET{file_name}}|parametre_url{src,#VALEUR})"
+				title="#VALEUR">Télécharger</a><br>]
 			</BOUCLE_downloads>
 			</td>
 		</tr>
@@ -64,7 +61,5 @@
 
 </BOUCLE_listResults>
 
-[<p class="pagination">
-(#PAGINATION{prive})
-</p>]
+[<p class="pagination">(#PAGINATION{prive})</p>]
 </B_listResults><//B_listResults>
