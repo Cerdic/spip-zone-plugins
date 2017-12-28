@@ -24,23 +24,6 @@ https://developers.google.com/fonts/docs/getting_started#specifying_font_familie
 }
 </style>
 
-[(#FORMULAIRE_SELECTIONNER_WEBFONTS)]
+[<div class="ajax">(#FORMULAIRE_SELECTIONNER_WEBFONTS)</div>]
 
 
-<INCLURE{fond=inclure/google_font_list}{ajax=fonts}/>
-
-
-<script>
-jQuery(function($){
-	$('.formulaire_selectionner_webfonts form').on('submit', function(){
-			ajaxReload('fonts', 
-				args:{
-					category: '#ENV{category}',
-					infos: '#ENV{infos, non}',
-					preview: '#ENV{preview, non}'
-				},
-				history:false
-			});
-	});	
-});
-</script>
