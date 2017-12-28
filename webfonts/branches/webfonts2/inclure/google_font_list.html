@@ -45,13 +45,15 @@
 </BOUCLE_fontInfosCond><//B_fontInfosCond>
 
 #SET{family,#VALEUR{family}}
+#SET{font-category,#VALEUR{category}}
 <BOUCLE_previewCond(CONDITION){si #ENV{preview}|=={oui}}>
 
 <BOUCLE_loop(POUR){tableau #VALEUR{variants}}>
 <iframe src="[(#URL_PAGE{webfont_preview}|parametre_url{font-family,#GET{family}}
+											|parametre_url{font-category,#GET{font-category}}
 											|parametre_url{font-variant,#VALEUR}
 											|parametre_url{preview_font_size,#ENV{preview_font_size,16}}
-											|parametre_url{preview_text,#GET{preview_text}})]"
+											|parametre_url{preview_text,#ENV{preview_text}})]"
 		frameborder="0"
 		class="webfont_preview"></iframe>
 </BOUCLE_loop>
