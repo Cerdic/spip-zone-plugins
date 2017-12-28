@@ -63,7 +63,7 @@ function balise_FONT_INDEX_dist($p){
 
 function get_font_index(){
 	lire_fichier(_DIR_TMP.'/googlefont_list.json',$respons);
-	return $respons;
+	return json_decode($respons, true);
 }
 
 /**
