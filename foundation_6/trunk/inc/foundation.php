@@ -5,7 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
- * Fonction de callback utiliser par le filtre |iframe_responsive
+ * Fonction de callback utilisé par le filtre |iframe_responsive
  * A chaque iFrame, on encadre de div.responsive-embed.
  *
  * On détecte aussi le ratio de l'iFrame (via les attributs html) pour ajouter
@@ -41,8 +41,8 @@ function responsive($matches) {
  * Cette fonction va créer la class foundation de la balise #COLONNES
  *
  * @param  int|array $nombre_colonnes Nombre de colonne désiré
- * @param  string $type Foundation 4/5, type de colonne (large, medium, small)
- * @return string class foundation applicable directement.
+ * @param  string $type type de colonne: large, medium ou small
+ * @return string $class foundation applicable directement.
  */
 function class_grid_foundation($nombre_colonnes, $type) {
 
@@ -62,9 +62,9 @@ function class_grid_foundation($nombre_colonnes, $type) {
 }
 
 /**
- * Utiliser jQl pour charger les scripts de foundation
+ * Utiliser jQl pour charger les scripts de Foundation
  *
- * @param array $files les fichiers à envoyée dans jQl
+ * @param array $files les fichiers à envoyer dans jQl
  * @access public
  */
 function jQlfoundation($files) {
