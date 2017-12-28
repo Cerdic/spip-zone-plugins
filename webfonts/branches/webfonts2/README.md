@@ -1,10 +1,48 @@
 # WebFonts 2
 
-## Bénéfices
+Le chargement de webfonts peut impacter sur le rendu des pages, sur l'accessibilité au contenus, sur les performances de votre page.
+Il conviens donc d'en être conscient et de les utiliser en connaissance de cause.
 
-L'utilisation du webfontloader,
-permet de mieux gérer le fallback utilisé lors du chargement
-ou de l'échec du chargement. wia des class `.wf-active`
+Outre les considérations d'ordre esthétique et typographique, il est recommandé de ne pas utiliser plus de deux ou trois variantes de fonts, afin de ne pas détériorer les performances de chargement de vos pages.
+
+`@font-face`
+https://developer.mozilla.org/fr/docs/Web/CSS/@font-face
+
+```css
+/* latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Open Sans Italic'), local('OpenSans-Italic'), url(https://fonts.gstatic.com/s/opensans/v15/xjAJXh38I15wypJXxuGMBogp9Q8gbYrhqGlRav_IXfk.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
+}
+```
+## Techniques de chargement de fonts :
+
+Les stratégies de chargement de font comparées par 
+https://www.zachleat.com/web/comprehensive-webfonts/
+
+
+### Google webfont :
+
+utilisation du service google web font, via une requète
+
+
+### Depuis les css :
+
+
+
+## Fonctionalitées
+
+* Proposer plusieurs techniques d'intégration chargement de webfont
+* Ajoute une pipeline pour que les plugins theme puisse activer leur insertions
+
+En cours :
+- Proposer un formulaire de recherche de typos et leurs selection pour utilisation
+avec gestion des variantes
+
+
 
 
 
@@ -92,6 +130,23 @@ webfont loading strategies : https://www.zachleat.com/web/comprehensive-webfonts
 
 Etapes du chargement d'une font dans le navigateur :
 https://font-display.glitch.me/
+
+### Des plugins spip ou techniques d'intégration d'utilisation de font/polices
+
+Plugin spip permettant d'utiliser les images typographiques via un modèle
+https://contrib.spip.net/Choix-Police-Typo
+
+Le filtre image_typo :
+
+https://www.spip.net/fr_article3325.html
+
+
+
+### Typothèques
+
+https://fontlibrary.org/
+https://www.fontsquirrel.com/tools/webfont-generator
+
 
 
 ## ToDo
