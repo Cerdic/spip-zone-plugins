@@ -11,13 +11,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 if (!defined('_RAINETTE_WUNDERGROUND_URL_BASE_REQUETE')) {
 	/**
-	 * URL de base (endpoint) des requêtes au service Wunderground
+	 * URL de base (endpoint) des requêtes au service Wunderground.
 	 */
 	define('_RAINETTE_WUNDERGROUND_URL_BASE_REQUETE', 'http://api.wunderground.com/api');
 }
 if (!defined('_RAINETTE_WUNDERGROUND_URL_BASE_ICONE')) {
 	/**
-	 * URL de base des icônes fournis par le service Wunderground
+	 * URL de base des icônes fournis par le service Wunderground.
 	 */
 	define('_RAINETTE_WUNDERGROUND_URL_BASE_ICONE', 'http://icons.wxug.com/i/c');
 }
@@ -130,10 +130,38 @@ $GLOBALS['rainette_wunderground_config']['service'] = array(
 		'defaut'      => 'EN'
 	),
 	'defauts' => array(
-		'inscription' => '',
-		'unite'       => 'm',
-		'condition'   => 'wundergound',
-		'theme'       => 'a',
+		'inscription'   => '',
+		'unite'         => 'm',
+		'condition'     => 'wundergound',
+		'theme'         => 'a',
+		'theme_local'   => 'observation',
+		'theme_weather' => 'sticker',
+	),
+	// TODO : tout à revoir
+	'transcodage_weather' => array(
+		'chanceflurries'  => array(41, 46),
+		'chancerain'      => array(39, 45),
+		'chancesleet'     => array(39, 45),
+		'chancesnow'      => array(41, 46),
+		'chancetstorms'   => array(38, 47),
+		'clear'           => array(32, 31),
+		'cloudy'          => array(26, 26),
+		'flurries'        => array(15, 15),
+		'fog'             => array(20, 20),
+		'hazy'            => array(21, 21),
+		'mostlycloudy'    => array(28, 27),
+		'mostlysunny'     => array(34, 33),
+		'partlycloudy'    => array(30, 29),
+		'partlysunny'     => array(28, 27),
+		'sleet'           => array(5, 5),
+		'rain'            => array(11, 11),
+		'snow'            => array(16, 16),
+		'sunny'           => array(32, 31),
+		'tstorms'         => array(4, 4),
+		'thunderstorms'   => array(4, 4),
+		'unknown'         => array(4, 4),
+		'scatteredclouds' => array(30, 29),
+		'overcast'        => array(26, 26)
 	)
 );
 
@@ -444,9 +472,7 @@ function wunderground_complement2previsions($tableau, $configuration, $index_per
 
 /**
  * ---------------------------------------------------------------------------------------------
- * Les fonctions qui suivent sont des utilitaires utilisés uniquement appelées par les fonctions
- * de l'API.
- * PACKAGE SPIP\RAINETTE\WUNDERGROUND\OUTILS
+ * Les fonctions qui suivent sont des utilitaires uniquement appelées par les fonctions de l'API
  * ---------------------------------------------------------------------------------------------
  */
 
@@ -485,64 +511,33 @@ function etat2resume_wunderground(&$tableau, $configuration) {
 		$tableau['resume'] = ucfirst($tableau['desc_meteo']);
 
 		// Determination de l'icone qui sera affiché.
+		// -- on stocke le code afin de le fournir en alt dans la balise img
+		$tableau['icone']['code'] = $tableau['code_meteo'];
+		// -- on calcule le chemin complet de l'icone.
 		if ($configuration['condition'] == $configuration['alias']) {
-			// On affiche l'icône natif fourni par le service.
-			$tableau['icone']['code'] = $tableau['code_meteo'];
+			// On affiche l'icône natif fourni par le service et désigné par son url
+			// en faisant une copie locale dans IMG/.
+			include_spip('inc/distant');
 			$url = _RAINETTE_WUNDERGROUND_URL_BASE_ICONE . '/' . $configuration['theme'] . '/' . $icone;
-			$tableau['icone']['url'] = copie_locale($url);
+			$tableau['icone']['source'] = copie_locale($url);
 		} else {
-			// On affiche l'icône correspondant au code météo transcodé dans le système weather.com.
-			$meteo = meteo_wunderground2weather($tableau['code_meteo'], $tableau['periode']);
-			$tableau['icone'] = $meteo;
+			include_spip('inc/rainette_normaliser');
+			if ($configuration['condition'] == "{$configuration['alias']}_local") {
+				// On affiche un icône d'un thème local compatible avec Wunderground.
+				$chemin = icone_local_normaliser(
+					"{$tableau['icon_meteo']}.png",
+					$configuration['alias'],
+					$configuration['theme_local']);
+			} else {
+				// On affiche l'icône correspondant au code météo transcodé dans le système weather.com.
+				$chemin = icone_weather_normaliser(
+					$tableau['code_meteo'],
+					$configuration['theme_weather'],
+					$configuration['transcodage_weather'],
+					$tableau['periode']);
+			}
+			include_spip('inc/utils');
+			$tableau['icone']['source'] = find_in_path($chemin);
 		}
 	}
-}
-
-
-/**
- * @internal
- *
- * @link http://plugins.trac.wordpress.org/browser/weather-and-weather-forecast-widget/trunk/gg_funx_.php
- * Transcodage issu du plugin Wordpress weather forecast.
- *
- * @param string $meteo
- * @param int    $periode
- *
- * @return string
- */
-function meteo_wunderground2weather($meteo, $periode = 0) {
-	static $wunderground2weather = array(
-		'chanceflurries'  => array(41, 46),
-		'chancerain'      => array(39, 45),
-		'chancesleet'     => array(39, 45),
-//		'chancesleet'     => array(41, 46),
-		'chancesnow'      => array(41, 46),
-		'chancetstorms'   => array(38, 47),
-		'clear'           => array(32, 31),
-		'cloudy'          => array(26, 26),
-		'flurries'        => array(15, 15),
-		'fog'             => array(20, 20),
-		'hazy'            => array(21, 21),
-		'mostlycloudy'    => array(28, 27),
-		'mostlysunny'     => array(34, 33),
-		'partlycloudy'    => array(30, 29),
-		'partlysunny'     => array(28, 27),
-		'sleet'           => array(5, 5),
-		'rain'            => array(11, 11),
-		'snow'            => array(16, 16),
-		'sunny'           => array(32, 31),
-		'tstorms'         => array(4, 4),
-		'thunderstorms'   => array(4, 4),
-		'unknown'         => array(4, 4),
-		'scatteredclouds' => array(30, 29),
-		'overcast'        => array(26, 26)
-	);
-
-	$icone = 'na';
-	$meteo = strtolower($meteo);
-	if (array_key_exists($meteo, $wunderground2weather)) {
-		$icone = strval($wunderground2weather[$meteo][$periode]);
-	}
-
-	return $icone;
 }

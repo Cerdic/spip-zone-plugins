@@ -89,10 +89,15 @@ $GLOBALS['rainette_weatherbit_config']['service'] = array(
 		'defaut'      => 'en'
 	),
 	'defauts' => array(
-		'inscription' => '',
-		'unite'       => 'm',
-		'condition'   => 'weatherbit',
-		'theme'       => '',
+		'inscription'   => '',
+		'unite'         => 'm',
+		'condition'     => 'weatherbit',
+		'theme'         => '',
+		'theme_local'   => 'original',
+		'theme_weather' => 'sticker',
+	),
+	// TODO : tout à revoir
+	'transcodage_weather' => array(
 	)
 );
 
@@ -381,19 +386,31 @@ function weatherbit_complement2previsions($tableau, $configuration, $index_perio
 }
 
 
-// ---------------------------------------------------------------------------------------------
-// Les fonctions qui suivent sont des utilitaires utilisés uniquement appelées par les fonctions
-// de l'API.
-// PACKAGE SPIP\RAINETTE\WEATHERBIT\OUTILS
-// ---------------------------------------------------------------------------------------------
+/**
+ * ---------------------------------------------------------------------------------------------
+ * Les fonctions qui suivent sont des utilitaires uniquement appelées par les fonctions de l'API
+ * ---------------------------------------------------------------------------------------------
+ */
 
+/**
+ * Calcule les états en fonction des états météorologiques natifs fournis par le service.
+ *
+ * @internal
+ *
+ * @param array $tableau
+ *        Tableau standardisé des conditions contenant uniquement les données fournies sans traitement
+ *        par le service. Le tableau est mis à jour et renvoyé à l'appelant.
+ * @param array $configuration
+ *        Configuration complète du service, statique et utilisateur.
+ *
+ * @return void
+ */
 function etat2resume_weatherbit(&$tableau, $configuration) {
 
 	if ($tableau['code_meteo'] and $tableau['icon_meteo']) {
 		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icône.
 		// TODO : Pour ce service il existe un indicateur qu'il faudra utiliser
-		$icone = basename($tableau['icon_meteo']);
-		if (substr($icone, -1) == 'd') {
+		if (substr($tableau['icon_meteo'], -1) == 'd') {
 			// C'est le jour
 			$tableau['periode'] = 0;
 		} else {
@@ -409,88 +426,33 @@ function etat2resume_weatherbit(&$tableau, $configuration) {
 		$tableau['resume'] = ucfirst($tableau['desc_meteo']);
 
 		// Determination de l'icone qui sera affiché.
+		// -- on stocke le code afin de le fournir en alt dans la balise img
+		$tableau['icone']['code'] = $tableau['code_meteo'];
+		// -- on calcule le chemin complet de l'icone.
 		if ($configuration['condition'] == $configuration['alias']) {
-			// On affiche l'icône natif fourni par le service.
-			// TODO : Weatherbit conseille d'utiliser des images stockées en local.
-			$tableau['icone']['code'] = $tableau['code_meteo'];
+			// On affiche l'icône natif fourni par le service et désigné par son url
+			// en faisant une copie locale dans IMG/.
+			include_spip('inc/distant');
 			$url = _RAINETTE_WEATHERBIT_URL_BASE_ICONE . '/' . $tableau['icon_meteo'] . '.png';
-			$tableau['icone']['url'] = copie_locale($url);
+			$tableau['icone']['source'] = copie_locale($url);
 		} else {
-			// On affiche l'icône correspondant au code météo transcodé dans le système weather.com.
-			$meteo = meteo_weatherbit2weather($tableau['code_meteo'], $tableau['periode']);
-			$tableau['icone'] = $meteo;
+			include_spip('inc/rainette_normaliser');
+			if ($configuration['condition'] == "{$configuration['alias']}_local") {
+				// On affiche un icône d'un thème local compatible avec Weatherbit.
+				$chemin = icone_local_normaliser(
+					"{$tableau['icon_meteo']}.png",
+					$configuration['alias'],
+					$configuration['theme_local']);
+			} else {
+				// On affiche l'icône correspondant au code météo transcodé dans le système weather.com.
+				$chemin = icone_weather_normaliser(
+					$tableau['code_meteo'],
+					$configuration['theme_weather'],
+					$configuration['transcodage_weather'],
+					$tableau['periode']);
+			}
+			include_spip('inc/utils');
+			$tableau['icone']['source'] = find_in_path($chemin);
 		}
 	}
-}
-
-// TODO : à revoir complètement
-/**
- * @internal
- *
- * @link http://plugins.trac.wordpress.org/browser/weather-and-weather-forecast-widget/trunk/gg_funx_.php
- * Transcodage issu du plugin Wordpress weather forecast.
- *
- * @param string $meteo
- * @param int    $periode
- *
- * @return string
- */
- function meteo_weatherbit2weather($meteo, $periode = 0) {
-	static $weatherbit2weather = array(
-		395 => array(41, 46),
-		392 => array(41, 46),
-		389 => array(38, 47),
-		386 => array(37, 47),
-		377 => array(6, 6),
-		374 => array(6, 6),
-		371 => array(14, 14),
-		368 => array(13, 13),
-		365 => array(6, 6),
-		362 => array(6, 6),
-		359 => array(11, 11),
-		356 => array(11, 11),
-		353 => array(9, 9),
-		350 => array(18, 18),
-		338 => array(16, 16),
-		335 => array(16, 16),
-		332 => array(14, 14),
-		329 => array(14, 14),
-		326 => array(13, 13),
-		323 => array(13, 13),
-		320 => array(18, 18),
-		317 => array(18, 18),
-		314 => array(8, 8),
-		311 => array(8, 8),
-		308 => array(40, 40),
-		305 => array(39, 45),
-		302 => array(11, 11),
-		299 => array(39, 45),
-		296 => array(9, 9),
-		293 => array(9, 9),
-		284 => array(10, 10),
-		281 => array(9, 9),
-		266 => array(9, 9),
-		263 => array(9, 9),
-		260 => array(20, 20),
-		248 => array(20, 20),
-		230 => array(16, 16),
-		227 => array(15, 15),
-		200 => array(38, 47),
-		185 => array(10, 10),
-		182 => array(18, 18),
-		179 => array(16, 16),
-		176 => array(40, 49),
-		143 => array(20, 20),
-		122 => array(26, 26),
-		119 => array(28, 27),
-		116 => array(30, 29),
-		113 => array(32, 31)
-	);
-
-	$icone = 'na';
-	if (array_key_exists($meteo, $weatherbit2weather)) {
-		$icone = strval($weatherbit2weather[$meteo][$periode]);
-	}
-
-	return $icone;
 }

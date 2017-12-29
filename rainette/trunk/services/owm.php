@@ -10,9 +10,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 if (!defined('_RAINETTE_OWM_URL_BASE_REQUETE')) {
+	/**
+	 * URL de base (endpoint) des requêtes au service OpenWeatherMap.
+	 */
 	define('_RAINETTE_OWM_URL_BASE_REQUETE', 'http://api.openweathermap.org/data/2.5/');
 }
 if (!defined('_RAINETTE_OWM_URL_BASE_ICONE')) {
+	/**
+	 * URL de base des icônes fournis par le service OpenWeatherMap.
+	 */
 	define('_RAINETTE_OWM_URL_BASE_ICONE', 'http://openweathermap.org/img/w');
 }
 
@@ -68,10 +74,88 @@ $GLOBALS['rainette_owm_config']['service'] = array(
 		'defaut'      => 'en'
 	),
 	'defauts'        => array(
-		'inscription' => '',
-		'unite'       => 'm',
-		'condition'   => 'owm',
-		'theme'       => '',
+		'inscription'   => '',
+		'unite'         => 'm',
+		'condition'     => 'owm',
+		'theme'         => '',
+		'theme_local'   => '',
+		'theme_weather' => 'sticker',
+	),
+	// TODO : a revoir, liste des codes owm ok
+	'transcodage_weather' => array(
+		'200' => array(41, 46),
+		'201' => array(39, 45),
+		'202' => array(39, 45),
+		'210' => array(41, 46),
+		'211' => array(38, 47),
+		'212' => array(32, 31),
+		'221' => array(26, 26),
+		'230' => array(15, 15),
+		'231' => array(20, 20),
+		'232' => array(21, 21),
+		'300' => array(28, 27),
+		'301' => array(34, 33),
+		'302' => array(30, 29),
+		'310' => array(28, 27),
+		'311' => array(5, 5),
+		'312' => array(11, 11),
+		'313' => array(16, 16),
+		'314' => array(32, 31),
+		'321' => array(4, 4),
+		'500' => array(4, 4),
+		'501' => array(4, 4),
+		'502' => array(30, 29),
+		'503' => array(26, 26),
+		'504' => array(26, 26),
+		'511' => array(26, 26),
+		'520' => array(26, 26),
+		'521' => array(26, 26),
+		'522' => array(26, 26),
+		'531' => array(26, 26),
+		'600' => array(26, 26),
+		'601' => array(26, 26),
+		'602' => array(26, 26),
+		'611' => array(26, 26),
+		'612' => array(26, 26),
+		'615' => array(26, 26),
+		'616' => array(26, 26),
+		'620' => array(26, 26),
+		'621' => array(26, 26),
+		'622' => array(26, 26),
+		'701' => array(26, 26),
+		'711' => array(26, 26),
+		'721' => array(26, 26),
+		'731' => array(26, 26),
+		'741' => array(26, 26),
+		'751' => array(26, 26),
+		'761' => array(26, 26),
+		'762' => array(26, 26),
+		'771' => array(26, 26),
+		'781' => array(26, 26),
+		'800' => array(26, 26),
+		'801' => array(26, 26),
+		'802' => array(26, 26),
+		'803' => array(26, 26),
+		'804' => array(26, 26),
+		'900' => array(0, 0),
+		'901' => array(26, 26),
+		'902' => array(26, 26),
+		'903' => array(26, 26),
+		'904' => array(26, 26),
+		'905' => array(26, 26),
+		'906' => array(26, 26),
+		'951' => array(26, 26),
+		'952' => array(26, 26),
+		'953' => array(26, 26),
+		'954' => array(26, 26),
+		'955' => array(26, 26),
+		'956' => array(26, 26),
+		'957' => array(26, 26),
+		'958' => array(26, 26),
+		'959' => array(26, 26),
+		'960' => array(26, 26),
+		'961' => array(26, 26),
+		'962' => array(26, 26)
 	)
 );
 
@@ -279,19 +363,6 @@ function owm_erreur_verifier($erreur) {
 
 
 /**
- * @param array $tableau
- * @param       $configuration
- *
- * @return array
- */
-function owm_complement2infos($tableau, $configuration) {
-	// Aucune donnée à rajouter en complément au tableau initialisé
-	// TODO : remplir le nom du pays à partir du code ISO 3166-1 alpha 2.
-	return $tableau;
-}
-
-
-/**
  * Complète par des données spécifiques au service le tableau des conditions issu
  * uniquement de la lecture du flux.
  *
@@ -364,12 +435,8 @@ function owm_complement2previsions($tableau, $configuration, $index_periode) {
 
 /**
  * ---------------------------------------------------------------------------------------------
- * Les fonctions qui suivent sont des utilitaires utilisés uniquement appelées par les fonctions
- * de l'API.
- * PACKAGE SPIP\RAINETTE\OWM\OUTILS
+ * Les fonctions qui suivent sont des utilitaires uniquement appelées par les fonctions de l'API
  * ---------------------------------------------------------------------------------------------
- *
- * @param mixed $configuration
  */
 
 /**
@@ -391,8 +458,7 @@ function etat2resume_owm(&$tableau, $configuration) {
 		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
 		// Pour ce service le nom du fichier icone finit par "d" pour le jour et
 		// par "n" pour la nuit.
-		$icone = $tableau['icon_meteo'];
-		if (strpos($icone, 'n') === false) {
+		if (strpos($tableau['icon_meteo'], 'n') === false) {
 			// C'est le jour
 			$tableau['periode'] = 0;
 		} else {
@@ -408,102 +474,35 @@ function etat2resume_owm(&$tableau, $configuration) {
 		$tableau['resume'] = ucfirst($tableau['desc_meteo']);
 
 		// Determination de l'icone qui sera affiché.
+		// -- on stocke le code afin de le fournir en alt dans la balise img
+		$tableau['icone']['code'] = $tableau['code_meteo'];
+		// -- on calcule le chemin complet de l'icone.
 		if ($configuration['condition'] == $configuration['alias']) {
-			// On affiche l'icône natif fourni par le service.
-			$tableau['icone']['code'] = $tableau['code_meteo'];
+			// On affiche l'icône natif fourni par le service et désigné par son url
+			// en faisant une copie locale dans IMG/.
+			include_spip('inc/distant');
 			$url = _RAINETTE_OWM_URL_BASE_ICONE . '/' . $tableau['icon_meteo'] . '.png';
-			$tableau['icone']['url'] = copie_locale($url);
+			$tableau['icone']['source'] = copie_locale($url);
 		} else {
-			// On affiche l'icône correspondant au code météo transcodé dans le système weather.com.
-			$meteo = meteo_owm2weather($tableau['code_meteo'], $tableau['periode']);
-			$tableau['icone'] = $meteo;
+			include_spip('inc/rainette_normaliser');
+			if ($configuration['condition'] == "{$configuration['alias']}_local") {
+				// On affiche un icône d'un thème local compatible avec OWM.
+				// TODO : à vérifier car aucun thème n'est pour l'instant disponible
+				$chemin = icone_local_normaliser(
+					"{$tableau['icon_meteo']}.png",
+					$configuration['alias'],
+					$configuration['theme_local'],
+					$tableau['periode'] == 0 ? 'day' : 'night');
+			} else {
+				// On affiche l'icône correspondant au code météo transcodé dans le système weather.com.
+				$chemin = icone_weather_normaliser(
+					$tableau['code_meteo'],
+					$configuration['theme_weather'],
+					$configuration['transcodage_weather'],
+					$tableau['periode']);
+			}
+			include_spip('inc/utils');
+			$tableau['icone']['source'] = find_in_path($chemin);
 		}
 	}
-}
-
-
-// TODO : mettre au point le transcodage omw vers weather
-function meteo_owm2weather($meteo, $periode = 0) {
-	static $owm2weather = array(
-		'200' => array(41, 46),
-		'201' => array(39, 45),
-		'202' => array(39, 45),
-		'210' => array(41, 46),
-		'211' => array(38, 47),
-		'212' => array(32, 31),
-		'221' => array(26, 26),
-		'230' => array(15, 15),
-		'231' => array(20, 20),
-		'232' => array(21, 21),
-		'300' => array(28, 27),
-		'301' => array(34, 33),
-		'302' => array(30, 29),
-		'310' => array(28, 27),
-		'311' => array(5, 5),
-		'312' => array(11, 11),
-		'313' => array(16, 16),
-		'314' => array(32, 31),
-		'321' => array(4, 4),
-		'500' => array(4, 4),
-		'501' => array(4, 4),
-		'502' => array(30, 29),
-		'503' => array(26, 26),
-		'504' => array(26, 26),
-		'511' => array(26, 26),
-		'520' => array(26, 26),
-		'521' => array(26, 26),
-		'522' => array(26, 26),
-		'531' => array(26, 26),
-		'600' => array(26, 26),
-		'601' => array(26, 26),
-		'602' => array(26, 26),
-		'611' => array(26, 26),
-		'612' => array(26, 26),
-		'615' => array(26, 26),
-		'616' => array(26, 26),
-		'620' => array(26, 26),
-		'621' => array(26, 26),
-		'622' => array(26, 26),
-		'701' => array(26, 26),
-		'711' => array(26, 26),
-		'721' => array(26, 26),
-		'731' => array(26, 26),
-		'741' => array(26, 26),
-		'751' => array(26, 26),
-		'761' => array(26, 26),
-		'762' => array(26, 26),
-		'771' => array(26, 26),
-		'781' => array(26, 26),
-		'800' => array(26, 26),
-		'801' => array(26, 26),
-		'802' => array(26, 26),
-		'803' => array(26, 26),
-		'804' => array(26, 26),
-		'900' => array(0, 0),
-		'901' => array(26, 26),
-		'902' => array(26, 26),
-		'903' => array(26, 26),
-		'904' => array(26, 26),
-		'905' => array(26, 26),
-		'906' => array(26, 26),
-		'951' => array(26, 26),
-		'952' => array(26, 26),
-		'953' => array(26, 26),
-		'954' => array(26, 26),
-		'955' => array(26, 26),
-		'956' => array(26, 26),
-		'957' => array(26, 26),
-		'958' => array(26, 26),
-		'959' => array(26, 26),
-		'960' => array(26, 26),
-		'961' => array(26, 26),
-		'962' => array(26, 26)
-	);
-
-	$icone = 'na';
-	if (array_key_exists($meteo, $owm2weather)) {
-		$icone = strval($owm2weather[$meteo][$periode]);
-	}
-
-	return $icone;
 }

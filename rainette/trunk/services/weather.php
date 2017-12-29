@@ -10,6 +10,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 if (!defined('_RAINETTE_WEATHER_URL_BASE')) {
+	/**
+	 * URL de base (endpoint) des requêtes au service weather.com.
+	 */
 	define('_RAINETTE_WEATHER_URL_BASE', 'http://wxdata.weather.com/wxdata/weather/local/');
 }
 
@@ -34,11 +37,15 @@ $GLOBALS['rainette_weather_config']['service'] = array(
 		'defaut'      => 'en'
 	),
 	'defauts'        => array(
-		'inscription' => '',
-		'unite'       => 'm',
-		'condition'   => 'weather',
-		'theme'       => '',
-	)
+		'inscription'   => '',
+		'unite'         => 'm',
+		'condition'     => 'weather_local',
+		'theme'         => '',
+		'theme_local'   => 'sticker',
+		'theme_weather' => '',
+	),
+	// Aucun transcodage puisqu'on est sur le service qui fournit les icônes.
+	'transcodage_weather' => array()
 );
 
 // Configuration des données fournies par le service wunderground pour le mode 'infos'.
@@ -216,6 +223,12 @@ function weather_erreur_verifier($erreur) {
 }
 
 
+/**
+ * @param $tableau
+ * @param $configuration
+ *
+ * @return mixed
+ */
 function weather_complement2infos($tableau, $configuration) {
 
 	// Le nom de la ville retournée par le service est sous la forme 'Ville,Région[,Pays]' (Région désigne
@@ -231,6 +244,12 @@ function weather_complement2infos($tableau, $configuration) {
 }
 
 
+/**
+ * @param $tableau
+ * @param $configuration
+ *
+ * @return mixed
+ */
 function weather_complement2conditions($tableau, $configuration) {
 
 	if ($tableau) {
@@ -274,7 +293,25 @@ function weather_complement2previsions($tableau, $configuration, $index_periode)
 	return $tableau;
 }
 
+/**
+ * ---------------------------------------------------------------------------------------------
+ * Les fonctions qui suivent sont des utilitaires uniquement appelées par les fonctions de l'API
+ * ---------------------------------------------------------------------------------------------
+ */
 
+/**
+ * Calcule les états en fonction des états météorologiques natifs fournis par le service.
+ *
+ * @internal
+ *
+ * @param array $tableau
+ *        Tableau standardisé des conditions contenant uniquement les données fournies sans traitement
+ *        par le service. Le tableau est mis à jour et renvoyé à l'appelant.
+ * @param array $configuration
+ *        Configuration complète du service, statique et utilisateur.
+ *
+ * @return void
+ */
 function etat2resume_weather(&$tableau, $configuration) {
 
 	if ($tableau['code_meteo']) {
@@ -282,7 +319,19 @@ function etat2resume_weather(&$tableau, $configuration) {
 		// Cette donnée n'est pas utile pour les conditions de ce service, on la positionne à null : TODO
 		$tableau['periode'] = 0;
 
-		$tableau['icone'] = $tableau['code_meteo'];
+		// Détermination du résumé à afficher.
 		$tableau['resume'] = $tableau['code_meteo'];
+
+		// Determination de l'icone qui sera affiché.
+		// -- on stocke le code afin de le fournir en alt dans la balise img
+		$tableau['icone']['code'] = $tableau['code_meteo'];
+		// -- on calcule le chemin complet de l'icone.
+		include_spip('inc/rainette_normaliser');
+		$chemin = icone_weather_normaliser(
+			$tableau['code_meteo'],
+			$configuration['theme_local']);
+
+		include_spip('inc/utils');
+		$tableau['icone']['source'] = find_in_path($chemin);
 	}
 }

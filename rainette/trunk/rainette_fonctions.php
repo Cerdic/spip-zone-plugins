@@ -4,9 +4,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-if (!defined('_RAINETTE_ICONES_PATH')) {
-	define('_RAINETTE_ICONES_PATH', 'rainette/');
-}
 if (!defined('_RAINETTE_ICONES_GRANDE_TAILLE')) {
 	define('_RAINETTE_ICONES_GRANDE_TAILLE', 110);
 }
@@ -36,11 +33,11 @@ function balise_RAINETTE_INFOS($p) {
 }
 
 /**
- * @param $lieu
- * @param $type
- * @param $service
+ * @param string $lieu
+ * @param string $type
+ * @param string $service
  *
- * @return mixed|string
+ * @return mixed
  */
 function calculer_infos($lieu, $type, $service) {
 
@@ -71,44 +68,25 @@ function calculer_infos($lieu, $type, $service) {
 }
 
 /**
+ * Affiche l'icône correspondant au code météo fourni.
  *
- * @package    RAINETTE/AFFICHAGE
  * @api
  * @filtre
  *
- * @param        $meteo
+ * @param array  $icone
  * @param string $taille
- * @param string $chemin
- * @param string $extension
  *
  * @return string
  */
-function rainette_afficher_icone($meteo, $taille = 'petit', $chemin = '', $extension = 'png') {
-	$taille_defaut = ($taille == 'petit') ? _RAINETTE_ICONES_PETITE_TAILLE : _RAINETTE_ICONES_GRANDE_TAILLE;
+function rainette_afficher_icone($icone, $taille = 'petit') {
 
-	if (is_array($meteo)) {
-		// Utilisation des icones natifs des services autres que weather.com
-		$resume = attribut_html(rainette_afficher_resume($meteo['code']));
-		$source = $meteo['url'];
-	} else {
-		// Utilisation des icones weather.com
-		$resume = rainette_afficher_resume($meteo);
+	// Initialisation de la source de la balise img avec le fichier icone.
+	$source = $icone['source'];
 
-		$meteo = ($meteo and (($meteo >= 0) and ($meteo < 48))) ? strval($meteo) : 'na';
-		$chemin = (!$chemin) ? _RAINETTE_ICONES_PATH . $taille . '/' : rtrim($chemin, '/') . '/';
-		$fichier = $meteo . '.' . $extension;
-		// Le dossier personnalise ou le dossier passe en argument
-		// a-t-il bien l'icone requise ?
-		$source = find_in_path($fichier, $chemin);
-		if (!$source) {
-			// Non, il faut donc prendre l'icone par defaut dans le repertoire img_meteo qui existe toujours
-			$source = find_in_path($fichier, "img_meteo/$taille/");
-		}
-	}
-
-	// On retaille si nécessaire l'image pour qu'elle soit toujours de la même taille (grande ou petite)
+	// On retaille si nécessaire l'image pour qu'elle soit toujours de la même taille (grande ou petite).
 	list($largeur, $hauteur) = @getimagesize($source);
 	include_spip('filtres/images_transforme');
+	$taille_defaut = ($taille == 'petit') ? _RAINETTE_ICONES_PETITE_TAILLE : _RAINETTE_ICONES_GRANDE_TAILLE;
 	if (($largeur < $taille_defaut)	or ($hauteur < $taille_defaut)) {
 		// Image plus petite que celle par défaut :
 		// --> Il faut insérer et recadrer l'image dans une image plus grande à la taille par défaut
@@ -120,7 +98,7 @@ function rainette_afficher_icone($meteo, $taille = 'petit', $chemin = '', $exten
 	}
 
 	// On construit la balise img
-	$texte = attribut_html($resume);
+	$texte = attribut_html(rainette_afficher_resume($icone['code']));
 	$balise_img = "<img src=\"${source}\" alt=\"${texte}\" title=\"${texte}\" width=\"${taille_defaut}\" height=\"${taille_defaut}\" />";
 
 	return $balise_img;
@@ -132,23 +110,23 @@ function rainette_afficher_icone($meteo, $taille = 'petit', $chemin = '', $exten
  * @api
  * @filtre
  *
- * @param $meteo
+ * @param string|int $resume
  *
  * @return string
  */
-function rainette_afficher_resume($meteo) {
+function rainette_afficher_resume($resume) {
 
-	if (is_numeric($meteo)) {
+	if (is_numeric($resume)) {
 		// On utilise l'option de _T permettant de savoir si un item existe ou pas
-		$resume = _T('rainette:meteo_' . $meteo, array(), array('force' => false));
-		if (!$resume) {
-			$resume = _T('rainette:meteo_na') . " ($meteo)";
+		$texte = _T('rainette:meteo_' . $resume, array(), array('force' => false));
+		if (!$texte) {
+			$texte = _T('rainette:meteo_na') . " ($resume)";
 		}
 	} else {
-		$resume = $meteo ? $meteo : _T('rainette:meteo_na');
+		$texte = $resume ? $resume : _T('rainette:meteo_na');
 	}
 
-	return ucfirst($resume);
+	return ucfirst($texte);
 }
 
 /**
@@ -170,13 +148,15 @@ function rainette_afficher_resume($meteo) {
 function rainette_afficher_direction($direction) {
 
 	include_spip('inc/rainette_convertir');
-	$direction = angle2direction($direction);
+	$direction_abregee = angle2direction($direction);
 
-	if ($direction) {
-		return _T("rainette:direction_$direction");
+	if ($direction_abregee) {
+		$direction_texte = _T("rainette:direction_${direction_abregee}");
 	} else {
-		return _T('rainette:valeur_indeterminee');
+		$direction_texte = _T('rainette:valeur_indeterminee');
 	}
+
+	return $direction_texte;
 }
 
 /**
@@ -193,16 +173,10 @@ function rainette_afficher_direction($direction) {
  * 		Methode d'affichage de la tendance qui prend les valeurs:
  * 		- `texte`   : pour afficher un texte en clair décrivant la tendance (méthode par défaut).
  * 		- `symbole` : pour afficher un symbole de flèche (1 caractère) décrivant la tendance.
- * 		- `icone`   : pour afficher un icone spécifique décrivant la tendance avec une infobulle
- *                    fournissant le texte en clair.
- * @param string $chemin
- * 		Chemin pour rechercher les icones.
- * @param string $extension
- * 		Extension du fichier de l'icone.
  *
  * @return string
  */
-function rainette_afficher_tendance($tendance_en, $methode = 'texte', $chemin = '', $extension = 'png') {
+function rainette_afficher_tendance($tendance_en, $methode = 'texte') {
 
 	$tendance = '';
 
@@ -213,21 +187,8 @@ function rainette_afficher_tendance($tendance_en, $methode = 'texte', $chemin = 
 	if (($tendance_en) and ($texte = _T("rainette:tendance_texte_$tendance_en", array(), array('force' => false)))) {
 		if ($methode == 'texte') {
 			$tendance = $texte;
-		} elseif ($methode == 'symbole') {
+		} else {
 			$tendance = _T("rainette:tendance_symbole_$tendance_en");
-		} elseif ($methode == 'icone') {
-			$chemin = (!$chemin) ? _RAINETTE_ICONES_PATH : rtrim($chemin, '/') . '/';
-			$fichier = $tendance_en . '.' . $extension;
-			// Le dossier personnalise ou le dossier passe en argument
-			// a-t-il bien l'icone requise ?
-			$source = find_in_path($fichier, $chemin);
-			if (!$source) {
-				// Non, il faut donc prendre l'icone par defaut dans le repertoire img_meteo qui existe toujours
-				$source = find_in_path($fichier, 'img_meteo/');
-			}
-
-			list($largeur, $hauteur) = @getimagesize($source);
-			$tendance = "<img src=\"${source}\" alt=\"${texte}\" title=\"${texte}\" width=\"${largeur}\" height=\"${hauteur}\" />";
 		}
 	}
 
@@ -341,8 +302,8 @@ function rainette_lister_services($mode = 'tableau') {
 
 
 /**
- * @param string	$mode
- * @param int		$periodicite
+ * @param string $mode
+ * @param int    $periodicite
  *
  * @return array
  */
@@ -371,25 +332,45 @@ function rainette_lister_modeles($mode = 'conditions', $periodicite = 24) {
 
 
 /**
- * @param string	$mode
- * @param int		$periodicite
+ * @param string $service
+ * @param string $source
  *
  * @return array
  */
-function rainette_lister_themes($service) {
+function rainette_lister_themes($service, $source = 'local') {
 
 	$themes = array();
 
 	// Certains services proposent des thèmes d'icones accessibles via l'API.
 	// C'est le cas de wunderground.
-	if ($service == 'wunderground') {
-		$cles = array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k');
-		foreach ($cles as $_cle) {
-			$themes[$_cle] = _T("rainette:label_theme_wunderground_${_cle}");
+	if (strtolower($source) == 'api') {
+		if ($service == 'wunderground') {
+			$cles = array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k');
+			foreach ($cles as $_cle) {
+				$themes[$_cle] = _T("rainette:label_theme_wunderground_${_cle}");
+			}
 		}
-	}
+	} else {
+		// Les thèmes de Rainette sont toujours stockés dans l'arborescence themes/$service.
+		// Chaque thème a un alias qui correspond à son dossier et un titre pour l'affichage.
+		// On recherche les sous-dossiers themes/$service présents dans le path.
+		include_spip('inc/utils');
+		foreach (creer_chemin() as $_chemin) {
+			$dossier_service = $_chemin . icone_local_normaliser('', $service);
+			if (@is_dir($dossier_service)) {
+				if ($dossiers_theme = glob($dossier_service . '/*', GLOB_ONLYDIR)) {
+					foreach ($dossiers_theme as $_theme) {
+						$theme = strtolower(basename($_theme));
+						// On ne garde que le premier dossier de même nom.
+						if (!isset($themes[$theme])) {
+							$themes[$theme] = $theme;
+						}
+					}
+				}
+			}
+		}
 
-	// TODO : gérer ici aussi les thèmes d'icones locaux.
+	}
 
 	return $themes;
 }
@@ -456,7 +437,7 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 		$extras['credits'] = $configuration['credits'];
 		$extras['config'] = array_merge(
 			parametrage_normaliser($service, $configuration['defauts']),
-			array('source' => normaliser_configuration_donnees($mode, $configuration['donnees'])),
+			array('source' => configuration_donnees_normaliser($mode, $configuration['donnees'])),
 			array('nom_service' => $configuration['nom'])
 		);
 		$extras['lieu'] = $lieu;

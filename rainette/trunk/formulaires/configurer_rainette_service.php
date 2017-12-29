@@ -32,18 +32,25 @@ function formulaires_configurer_rainette_service_charger($service) {
 	// Ajout du service et des éléments utiles de la configuration statique
 	$valeurs['service'] = $service;
 	$valeurs['nom'] = $configuration['nom'];
-	$valeurs['configuration']['termes'] = $configuration['termes'];
-	$valeurs['configuration']['enregistrement'] = $configuration['enregistrement'];
-	$valeurs['configuration']['offres'] = $configuration['offres'];
+	$valeurs['_configuration']['termes'] = $configuration['termes'];
+	$valeurs['_configuration']['enregistrement'] = $configuration['enregistrement'];
+	$valeurs['_configuration']['offres'] = $configuration['offres'];
 
 	// Ajout des informations d'utilisation du service
 	include_spip('inc/config');
 	$execution = lire_config("rainette_execution/${service}", array());
-	$valeurs['utilisation']['dernier_appel'] = isset($execution['dernier_appel'])
+	$valeurs['_utilisation']['dernier_appel'] = isset($execution['dernier_appel'])
 		? $execution['dernier_appel']
 		: '';
-	$valeurs['utilisation']['compteurs'] = isset($execution['compteurs'])
+	$valeurs['_utilisation']['compteurs'] = isset($execution['compteurs'])
 		? $execution['compteurs']
+		: array();
+
+	// Gestion des thèmes locaux et distants.
+	$valeurs['_themes']['distants'] = rainette_lister_themes($service, 'api');
+	$valeurs['_themes']['locaux'] = rainette_lister_themes($service, 'local');
+	$valeurs['_themes']['weather'] = !in_array($service, array('weather', 'owm', 'weatherbit'))
+		? rainette_lister_themes('weather', 'local')
 		: array();
 
 	// On positionne le meta casier car la fonction de recensement automatique n'est plus appelée ni ne pourrait

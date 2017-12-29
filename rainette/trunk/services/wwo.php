@@ -2,7 +2,7 @@
 /**
  * Ce fichier contient la configuration et l'ensemble des fonctions implémentant le service World Weather Online (wwo).
  * Ce service est capable de fournir des données au format XML ou JSON. Néanmoins, l'API actuelle du plugin utilise
- * uniquemement le format JSON.
+ * uniquement le format JSON.
  *
  * @package SPIP\RAINETTE\SERVICES\WWO
  */
@@ -11,6 +11,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 if (!defined('_RAINETTE_WWO_URL_BASE')) {
+	/**
+	 * URL de base (endpoint) des requêtes au service World Weather Online.
+	 */
 	define('_RAINETTE_WWO_URL_BASE', 'http://api.worldweatheronline.com/premium/v1/weather.ashx');
 }
 
@@ -84,10 +87,65 @@ $GLOBALS['rainette_wwo_config']['service'] = array(
 		'defaut'      => 'en'
 	),
 	'defauts' => array(
-		'inscription' => '',
-		'unite'       => 'm',
-		'condition'   => 'wwo',
-		'theme'       => '',
+		'inscription'   => '',
+		'unite'         => 'm',
+		'condition'     => 'wwo',
+		'theme'         => '',
+		'theme_local'   => 'original',
+		'theme_weather' => 'sticker',
+	),
+	// @link http://plugins.trac.wordpress.org/browser/weather-and-weather-forecast-widget/trunk/gg_funx_.php
+	// Transcodage issu du plugin Wordpress weather forecast.
+	// TODO : a revoir, index ok, idem apixu
+	'transcodage_weather' => array(
+		113 => array(32, 31),
+		116 => array(30, 29),
+		119 => array(28, 27),
+		122 => array(26, 26),
+		143 => array(20, 20),
+		176 => array(40, 49),
+		179 => array(16, 16),
+		182 => array(18, 18),
+		185 => array(10, 10),
+		200 => array(38, 47),
+		227 => array(15, 15),
+		230 => array(16, 16),
+		248 => array(20, 20),
+		260 => array(20, 20),
+		263 => array(9, 9),
+		266 => array(9, 9),
+		281 => array(9, 9),
+		284 => array(10, 10),
+		293 => array(9, 9),
+		296 => array(9, 9),
+		299 => array(39, 45),
+		302 => array(11, 11),
+		305 => array(39, 45),
+		308 => array(40, 40),
+		311 => array(8, 8),
+		314 => array(8, 8),
+		317 => array(18, 18),
+		320 => array(18, 18),
+		323 => array(13, 13),
+		326 => array(13, 13),
+		329 => array(14, 14),
+		332 => array(14, 14),
+		335 => array(16, 16),
+		338 => array(16, 16),
+		350 => array(18, 18),
+		353 => array(9, 9),
+		356 => array(11, 11),
+		359 => array(11, 11),
+		362 => array(6, 6),
+		365 => array(6, 6),
+		368 => array(13, 13),
+		371 => array(14, 14),
+		374 => array(6, 6),
+		377 => array(6, 6),
+		386 => array(37, 47),
+		389 => array(38, 47),
+		392 => array(41, 46),
+		395 => array(41, 46)
 	)
 );
 
@@ -371,11 +429,11 @@ function wwo_complement2previsions($tableau, $configuration, $index_periode) {
 }
 
 
-// ---------------------------------------------------------------------------------------------
-// Les fonctions qui suivent sont des utilitaires utilisés uniquement appelées par les fonctions
-// de l'API.
-// PACKAGE SPIP\RAINETTE\WWO\OUTILS
-// ---------------------------------------------------------------------------------------------
+/**
+ * ---------------------------------------------------------------------------------------------
+ * Les fonctions qui suivent sont des utilitaires uniquement appelées par les fonctions de l'API
+ * ---------------------------------------------------------------------------------------------
+ */
 
 /**
  * @param array $tableau
@@ -401,6 +459,19 @@ function metrique2imperial_wwo(&$tableau) {
 }
 
 
+/**
+ * Calcule les états en fonction des états météorologiques natifs fournis par le service.
+ *
+ * @internal
+ *
+ * @param array $tableau
+ *        Tableau standardisé des conditions contenant uniquement les données fournies sans traitement
+ *        par le service. Le tableau est mis à jour et renvoyé à l'appelant.
+ * @param array $configuration
+ *        Configuration complète du service, statique et utilisateur.
+ *
+ * @return void
+ */
 function etat2resume_wwo(&$tableau, $configuration) {
 
 	if ($tableau['code_meteo'] and $tableau['icon_meteo']) {
@@ -425,86 +496,33 @@ function etat2resume_wwo(&$tableau, $configuration) {
 		$tableau['resume'] = ucfirst($tableau['trad_meteo']);
 
 		// Determination de l'icone qui sera affiché.
+		// -- on stocke le code afin de le fournir en alt dans la balise img
+		$tableau['icone']['code'] = $tableau['code_meteo'];
+		// -- on calcule le chemin complet de l'icone.
 		if ($configuration['condition'] == $configuration['alias']) {
-			// On affiche l'icône natif fourni par le service.
-			$tableau['icone']['code'] = $tableau['code_meteo'];
-			$tableau['icone']['url'] = copie_locale($tableau['icon_meteo']);
+			// On affiche l'icône natif fourni par le service et désigné par son url
+			// en faisant une copie locale dans IMG/.
+			include_spip('inc/distant');
+			$tableau['icone']['source'] = copie_locale($tableau['icon_meteo']);
 		} else {
-			// On affiche l'icône correspondant au code météo transcodé dans le système weather.com.
-			$meteo = meteo_wwo2weather($tableau['code_meteo'], $tableau['periode']);
-			$tableau['icone'] = $meteo;
+			include_spip('inc/rainette_normaliser');
+			if ($configuration['condition'] == "{$configuration['alias']}_local") {
+				// On affiche un icône d'un thème local compatible avec WWO.
+				$chemin = icone_local_normaliser(
+					"{$tableau['code_meteo']}.png",
+					$configuration['alias'],
+					$configuration['theme_local'],
+					$tableau['periode'] == 0 ? 'day' : 'night');
+			} else {
+				// On affiche l'icône correspondant au code météo transcodé dans le système weather.com.
+				$chemin = icone_weather_normaliser(
+					$tableau['code_meteo'],
+					$configuration['theme_weather'],
+					$configuration['transcodage_weather'],
+					$tableau['periode']);
+			}
+			include_spip('inc/utils');
+			$tableau['icone']['source'] = find_in_path($chemin);
 		}
 	}
-}
-
-
-/**
- * @internal
- *
- * @link http://plugins.trac.wordpress.org/browser/weather-and-weather-forecast-widget/trunk/gg_funx_.php
- * Transcodage issu du plugin Wordpress weather forecast.
- *
- * @param string $meteo
- * @param int    $periode
- *
- * @return string
- */
-function meteo_wwo2weather($meteo, $periode = 0) {
-	static $wwo2weather = array(
-		395 => array(41, 46),
-		392 => array(41, 46),
-		389 => array(38, 47),
-		386 => array(37, 47),
-		377 => array(6, 6),
-		374 => array(6, 6),
-		371 => array(14, 14),
-		368 => array(13, 13),
-		365 => array(6, 6),
-		362 => array(6, 6),
-		359 => array(11, 11),
-		356 => array(11, 11),
-		353 => array(9, 9),
-		350 => array(18, 18),
-		338 => array(16, 16),
-		335 => array(16, 16),
-		332 => array(14, 14),
-		329 => array(14, 14),
-		326 => array(13, 13),
-		323 => array(13, 13),
-		320 => array(18, 18),
-		317 => array(18, 18),
-		314 => array(8, 8),
-		311 => array(8, 8),
-		308 => array(40, 40),
-		305 => array(39, 45),
-		302 => array(11, 11),
-		299 => array(39, 45),
-		296 => array(9, 9),
-		293 => array(9, 9),
-		284 => array(10, 10),
-		281 => array(9, 9),
-		266 => array(9, 9),
-		263 => array(9, 9),
-		260 => array(20, 20),
-		248 => array(20, 20),
-		230 => array(16, 16),
-		227 => array(15, 15),
-		200 => array(38, 47),
-		185 => array(10, 10),
-		182 => array(18, 18),
-		179 => array(16, 16),
-		176 => array(40, 49),
-		143 => array(20, 20),
-		122 => array(26, 26),
-		119 => array(28, 27),
-		116 => array(30, 29),
-		113 => array(32, 31)
-	);
-
-	$icone = 'na';
-	if (array_key_exists($meteo, $wwo2weather)) {
-		$icone = strval($wwo2weather[$meteo][$periode]);
-	}
-
-	return $icone;
 }

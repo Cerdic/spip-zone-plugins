@@ -757,6 +757,24 @@ function langue_determiner($configuration_service) {
 	return $langue_service;
 }
 
+/**
+ * @param $mode
+ * @param $configuration
+ *
+ * @return array
+ */
+function configuration_donnees_normaliser($mode, $configuration) {
+
+	$configuration_normalisee = array();
+
+	foreach ($GLOBALS['rainette_config'][$mode] as $_donnee => $_configuration) {
+		if ($_configuration['origine'] == 'service') {
+			$configuration_normalisee[$_donnee] = !empty($configuration[$_donnee]['cle']) ? true : false;
+		}
+	}
+
+	return $configuration_normalisee;
+}
 
 /**
  * @param $service
@@ -780,22 +798,63 @@ function parametrage_normaliser($service, $configuration_defaut) {
 	return $configuration_utilisateur;
 }
 
-
 /**
- * @param $mode
- * @param $configuration
+ * @param int|string $code_meteo
+ * @param string     $theme
+ * @param array      $transcodage
+ * @param int        $periode
  *
- * @return array
+ * @return string
  */
-function normaliser_configuration_donnees($mode, $configuration) {
+function icone_weather_normaliser($code_meteo, $theme, $transcodage = array(), $periode = 0) {
 
-	$configuration_normalisee = array();
+	// Si le transcodage échoue ou que le code weather est erroné on renvoie toujours N/A.
+	$icone = 'na';
 
-	foreach ($GLOBALS['rainette_config'][$mode] as $_donnee => $_configuration) {
-		if ($_configuration['origine'] == 'service') {
-			$configuration_normalisee[$_donnee] = !empty($configuration[$_donnee]['cle']) ? true : false;
+	// Transcodage en code weather.com.
+	$code = is_string($code_meteo) ? strtolower($code_meteo) : intval($code_meteo);
+	if ($transcodage) {
+		// Service différent de weather.com
+		if (array_key_exists($code, $transcodage) and isset($transcodage[$code][$periode])) {
+			$icone = strval($transcodage[$code][$periode]);
+		}
+	} else {
+		// Service weather.com
+		if (($code >= 0) and ($code < 48)) {
+			$icone = strval($code);
 		}
 	}
 
-	return $configuration_normalisee;
+	// Construction du chemin complet de l'icone.
+	$chemin = icone_local_normaliser("${icone}.png",'weather', $theme);
+
+	return $chemin;
+}
+
+/**
+ * @param string $icone
+ * @param string $service
+ * @param string $theme
+ * @param string $periode
+ *
+ * @return string
+ */
+function icone_local_normaliser($icone, $service, $theme = '', $periode = '') {
+
+	// On initialise le dossier de l'icone pour le service demandé.
+	$chemin = "themes/${service}";
+	// Si on demande un thème il faut créer le sous-dossier.
+	if ($theme) {
+		$chemin .= "/${theme}";
+	}
+	// Si le service gère des icones suivant le jour ou la nuit il faut ajouter le sous-dossier concerné.
+	if ($periode) {
+		$chemin .= "/${periode}";
+	}
+	// On finalise le chemin complet avec le nom de l'icone sauf si on ne veut que le dossier.
+	if ($icone) {
+		$chemin .= "/${icone}";
+	}
+
+	return $chemin;
 }
