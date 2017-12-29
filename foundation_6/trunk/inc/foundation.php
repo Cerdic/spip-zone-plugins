@@ -40,24 +40,50 @@ function responsive($matches) {
 /**
  * Cette fonction va créer la class foundation de la balise #COLONNES
  *
- * @param  int|array $nombre_colonnes Nombre de colonne désiré
+ * @param int|array|string $nombre_colonnes Nombre de colonne désiré. Un étoile
+ * (ex: 4*) activera les colonnes calculée
  * @param  string $type type de colonne: large, medium ou small
  * @return string $class foundation applicable directement.
  */
-function class_grid_foundation($nombre_colonnes, $type) {
-
+function class_grid_foundation($nombre_colonnes, $type, $total_boucle = null) {
 	// Si la première variable est un tableau, on va le convertir en class
 	if (is_array($nombre_colonnes)) {
 		$class= '';
 		foreach ($nombre_colonnes as $key => $value) {
+			// On va traiter le nombre de colonne avant de créer la class css
+			if (strpos($value, '*')) {
+				$calculer_colonnes = true; // L'étoile est détectée, on active les colonnes calculée
+				$value = str_replace('*', '', $value); // Supprimer l'étoile
+			}
+
 			// Utiliser un tableau large => 4
 			if (is_numeric($value)) {
+				if (!is_null($total_boucle) and $calculer_colonnes) {
+					$value = calculer_colonnes($value, $total_boucle);
+				}
+
 				$class .= $key.'-'.$value.' ';
 			}
 		}
 		return $class;
 	} else {
 		return $type.'-'.$nombre_colonnes.' ';
+	}
+}
+
+/**
+ * Cette fonction va calculer le nombre de colonne et les limiter à $max
+ *
+ * @param int $max nombre maximum de colonne
+ * @param int $total_boucle nombre d'élément dans la boucle
+ * @access public
+ * @return int
+ */
+function calculer_colonnes($max, $total_boucle) {
+	if ($total_boucle >= $max) {
+		return $max;
+	} else {
+		return 12/$total_boucle;
 	}
 }
 
@@ -82,7 +108,7 @@ function jQlfoundation($files) {
 			include_spip('inc/compresseur_concatener');
 			include_spip('inc/compresseur_minifier');
 
-			// traitement des fichiers, on concatène et minifie le tout
+		// traitement des fichiers, on concatène et minifie le tout
 			$foundation_js = concatener_fichiers($files);
 			$foundation_js = minifier($foundation_js[0]);
 

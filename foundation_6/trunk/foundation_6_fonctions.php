@@ -63,13 +63,23 @@ function balise_COLONNES_dist($p) {
 	$nombre_colonnes = interprete_argument_balise(1, $p);
 	$type = interprete_argument_balise(2, $p);
 
+	// Dans le cas ou on ce trouve dans une boucle SPIP, on va passer le total
+	// de la boucle à la fonction class_grid_foundation.
+	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
+	if ($b !== '') {
+		$total_boucle = "\$Numrows['$b']['total']";
+		$p->boucles[$b]->numrows = true;
+	} else {
+		$total_boucle = 'null';
+	}
+
 	// On met une valeur par défaut à type.
 	if (!$type) {
 		$type = "'large'";
 	}
 
 	// On calcule la class
-	$p->code = "class_grid_foundation($nombre_colonnes, $type).'columns'";
+	$p->code = "class_grid_foundation($nombre_colonnes, $type, $total_boucle).'columns'";
 	$p->interdire_scripts = false;
 
 	return $p;
@@ -185,4 +195,24 @@ if (!function_exists('balise_LIRE_CONSTANTE_dist')) {
 
 		return $p;
 	}
+}
+
+function balise_CALCULER_COLONNES($p) {
+	// Nombre maximum de colonne
+	$max = interprete_argument_balise(1, $p);
+
+	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
+	if ($b === '' || !isset($p->boucles[$b])) {
+		$msg = array(
+			'zbug_champ_hors_boucle',
+			array('champ' => "#$b" . 'CALCULER_COLONNES')
+		);
+		erreur_squelette($msg, $p);
+	} else {
+		$p->code = "calculer_colonnes($max, \$Numrows['$b']['total'])";
+		$p->boucles[$b]->numrows = true;
+		$p->interdire_scripts = false;
+	}
+
+	return $p;
 }
