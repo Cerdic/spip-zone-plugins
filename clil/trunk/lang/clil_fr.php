@@ -11,6 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_exemple_explication' => 'Explication de cet exemple',
 	'cfg_titre_parametrages' => 'Choisir les thèmes CLIL correspondant à votre catalogue',
 
+	// E
+	'explication_interface_clil' => 'Cocher les thèmes CLIL qui seront affichés dans le sélecteur <i>Thème CLIL</i> de vos livres.',
+
 	//O
 	'onglet_clil' => 'Choisir thèmes CLIL',
 	'onglet_clil_libelle' => 'Modifier libellés',

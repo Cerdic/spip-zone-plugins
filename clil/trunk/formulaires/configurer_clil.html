@@ -9,7 +9,7 @@
 		<div>
 			#ACTION_FORMULAIRE{#ENV{action}}
 			[(#ENV{recherche}|is_null|non) <div id="recherche_en_cours"></div>]
-			<p class='explication'>Cocher les thèmes CLIL qui seront affichés dans le selecteur <i>Thème CLIL</i> de vos articles.</p>
+			<p class='explication'><:clil:explication_interface_clil:></p>
 			<ul class='hierarchie'>
 			<BOUCLE_themes_clil(CLIL_THEMES){par libelle}{racine}>
 				<li class='li_long [(#VAL{#ID_CLIL_THEME}|clil_themes_nombre_sous_themes{#ENV{recherche}}|?{'casier', 'casier_vide'})]'>
