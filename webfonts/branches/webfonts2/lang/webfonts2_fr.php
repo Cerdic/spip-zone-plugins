@@ -10,6 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_titre_configurer_webfonts2'	=> 'Configuration des webfonts',
+	// D
+	'default_preview_text'	=> 'Grumpy wizards make toxic brew for the evil Queen and Jack.',
 
 	
 	// E

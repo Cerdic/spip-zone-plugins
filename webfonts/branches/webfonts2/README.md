@@ -8,11 +8,20 @@ Outre les considérations d'ordre esthétique et typographique,
 il est recommandé de ne pas utiliser plus de deux ou trois variantes de fonts,
 afin de ne pas détériorer les performances de chargement de vos pages.
 
-Le plugin inssert dans le head et en tête des autres fichiers css
-les balise link ou style nécessaires. La requète vers google font ne necessite pas
-d'accès a l'api.
+Le plugin insert dans le head et en tête des autres styles
+les balise link ou style nécessaires. La requête vers google font pour l'insertion des polices ne nécessite pas d'accès a l'api, cependant pour pouvoir utiliser la recherche dans l'index GoogleFont, utiliser le sélecteur générique, un accès a l'API est nécessaire.
+
+## Techniques de chargement de fonts :
+
+Les stratégies de chargement de font comparées par 
+https://www.zachleat.com/web/comprehensive-webfonts/
 
 
+### Google webfont :
+
+Utilisation du service google web font, via une requête.
+
+### Css
 
 La rêgle css `@font-face` : 
 https://developer.mozilla.org/fr/docs/Web/CSS/@font-face
@@ -30,55 +39,28 @@ https://developer.mozilla.org/fr/docs/Web/CSS/@font-face
 ```
 
 
-## Techniques de chargement de fonts :
 
-Les stratégies de chargement de font comparées par 
-https://www.zachleat.com/web/comprehensive-webfonts/
+## Fonctionalités
 
-
-### Google webfont :
-
-utilisation du service google web font, via une requète
-
-
-### Depuis les css :
-
-
-
-## Fonctionalitées
-
-* insertion auto 
-
-## 
-
-* Ajoute une pipeline pour que les plugins theme puisse activer leur insertions
-
-
-
-En cours :
-- Proposer un formulaire de recherche de typos et leurs selection pour utilisation
-avec gestion des variantes
-
-
-
-
+* insertion auto des polices ajoutées a la pipeline font_list ou depuis la configuration
+* Ajoute une pipeline pour que les plugins theme puisse activer leurs polices
+* Propose un sélecteur générique permettant de parcourir l'index GoogleFont (nécessite l'API key, selecteur_generique)
+* Propose une page permettant de parcourir la typothèque googleFont, avec filtrage, recherche, prévisualisation (nécessite l'API key).
 
 ## Configuration:
 
 ### GoogleFonts API Key
 
 Pour pouvoir afficher les fonts via l'api GoogleFont, il est nécessaire d'avoir
-préalablement récupéré une clef d'accès aux API Google et sélectionné GoogleFont dans
-le APIs intérrogeables.
+préalablement récupéré une clef d'accès aux API Google et sélectionné GoogleFont dans les APIs interrogeables.
 
-Cette clef, peut être définie depuis un squelette ou un plugin
+Cette clef, peut être définie depuis un squelette ou un plugin, via un define.
 
 ```
 define('_GOOGLE_API_KEY', 'votre_clef_google_api');
 ```
 
 ou via la configuration du plugin.
-
 
 ### Méthode d'insertion
 
@@ -87,17 +69,27 @@ Propose plusieurs techniques d'intégration/chargement de webfont
 * insertion standard via la balise `<link>`
 * insertion @import via une balise `<style>`
 
+### Sélection des webfonts
 
-## Utilisation
+Un sélecteur générique permet de proposer les webfonts disponibles depuis le fichier index google_font
+la liste de webfont est généré sous la forme `family:variant,family2:variant3`,
+les fonts configurées sont ajoutées à la pipeline `font_list`.
+
+### Liste des webfonts chargées
+
+La liste des webfonts chargées via la pipeline, avec possibilité de prévisualiser
+
+
+## Pipeline font_list
 
 Description d'une font dans la font list :
 
 * family : Nom de la famille de police
 * variants : italic,bold
-* subsets : les subsets sont nécessaires uniquement pour les navigateurs ne supportant pas la proprité unicode-range,
-pour les autres les subsets sont ignorés, et le navigateur choisira ce qui est necessaire dans le DOM.
+* subsets : les subsets sont nécessaires uniquement pour les navigateurs ne supportant pas la propriété unicode-range,
+pour les autres les subsets sont ignorés, et le navigateur choisira ce qui est nécessaire dans le DOM.
 Explication sur les subsets : https://developers.google.com/fonts/docs/getting_started#Subsets
-Navigateurs supportant `unicode-range : https://caniuse.com/#feat=font-unicode-range
+Navigateurs supportant `unicode-range` : https://caniuse.com/#feat=font-unicode-range
 
 
 ### Depuis un squelette
@@ -159,12 +151,6 @@ function prefix_plugin_fonts_list($fonts){
 ----
 
 
-- GogleAPIKey : pour le listage et l'accès a la typthèque
-- TypeKit,… pour les autres fournisseurs de typo
-- Jeux de typo a charger et formats (woff, woff2), on génère la requète  
-depuis le html directement dans l'entête du site, pour éviter de maintenir un fichier css
-- Ajout du webfont loader développé par Google/TypeKit  
-https://github.com/typekit/webfontloader
 
 
 ## Sources & Docs
@@ -200,9 +186,19 @@ https://fontlibrary.org/
 https://www.fontsquirrel.com/tools/webfont-generator
 
 
-
 ## ToDo
 
-- [] améliorer l'interface de selection : formulaire de fltrages des typos, affichage des résultats
-- [] selection des typos et des subsets utilisables
+- GogleAPIKey : pour le listage et l'accès a la typthèque
+- TypeKit,… pour les autres fournisseurs de typo
+- Jeux de typo a charger et formats (woff, woff2), on génère la requète  
+depuis le html directement dans l'entête du site, pour éviter de maintenir un fichier css
+- Ajout du webfont loader développé par Google/TypeKit  
+https://github.com/typekit/webfontloader
+
+## Changelogs
+
+v0.2.4 :
+
+- [X] améliorer l'interface de selection : formulaire de fltrages des typos, affichage des résultats
+- [X] selection des typos et des subsets utilisables
 - [] si la Google api key n'est pas définie, proposer dans la config
