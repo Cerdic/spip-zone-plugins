@@ -1,7 +1,67 @@
 [(#AUTORISER{configurer,_webfonts2}|sinon_interdire_acces)]
 
-<h1 class="grostitre"><:webfonts2:titre_page_configurer_webfonts2:></h1>
+<h1 class="grostitre"><:webfonts2:cfg_titre_configurer_webfonts2:></h1>
 
 <div class="ajax">
 	#FORMULAIRE_CONFIGURER_WEBFONTS2
 </div>
+
+
+<h2>Liste des webfonts inssérées via la pipeline</h2>
+
+<form action="#SELF" class="formulaires_spip preview_params">
+	<div class="editer-group">
+		<div class="editer">
+				<label for="preview_text">Texte pour la preview</label>
+				<input type="text" id="preview_text" name="preview_text" value='#ENV{preview_text, Grumpy wizards make toxic brew for the evil Queen and Jack.}'>
+
+			</div>
+		<div class="editer">
+			<label for="preview_font_size">preview_font_size</label>
+			<p class="explication">Une valeur en pixel, em, rem</p>
+			<input type="text" name="preview_font_size" id="preview_font_size"
+				   value="#ENV{preview_font_size,16px}"/>
+						
+		</div>
+	</div>
+	<div class="editer-group">
+			<div class="editer">
+				<div class="choix">
+					<input type='checkbox' class="checkbox" name='preview' value='oui' id='preview' />
+					<label for='preview'>Afficher la preview</label>
+				</div>
+				<div class="choix">
+					<input type='checkbox' class="checkbox" name='infos' value='oui' id='infos'/>
+					<label for='infos'>Afficher les infos</label>
+				</div>
+			</div>
+		</div>
+	<p class='boutons'>
+        <input type='submit' class='submit' value='Recharger' />
+    </p>
+</form>
+<INCLURE{fond=inclure/font_list,ajax=fonts,env} />
+<script>
+jQuery(function($){
+	$('form.preview_params').on('submit', function(e){
+		var previewTxt = $('#preview_text').val();
+		var previewFontSize = $('#preview_font_size').val();
+		var preview = $('.preview_params #preview');
+		var infos = $('.preview_params #infos');
+		
+		//console.log(infos[0].checked);
+		
+			ajaxReload('fonts', {
+				args:{
+					preview_text: previewTxt,
+					preview_font_size: previewFontSize,
+					infos: (infos[0].checked ? 'oui' : 'non'),
+					preview: (preview[0].checked ? 'oui' : 'non')
+				},
+				history:false
+			});
+		e.preventDefault();
+	});
+	
+});
+</script>

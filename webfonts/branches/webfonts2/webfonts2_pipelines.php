@@ -13,20 +13,24 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 */
 function webfonts2_fonts_list($fonts){
-	$fonts = array(
-		'0'=> array(
-			'family'=> 'Open Sans',
-			'variants'=> array('300','300italic','regular','italic','600')
-		),
-		'1'=> array(
-			'family'=> 'Roboto Condensed',
-			'variants'=> array('700','800')
-		)
-	);
+	$webfonts = lire_config('webfonts2/webfonts');
+	// enlever la dernière virgule
+	$webfonts = explode(',',rtrim($webfonts,', '));
+	
+	foreach($webfonts as $font){
+		$set =  explode(':',$font);
+		$fonts[] = ['family'=> trim($set[0]),'variants'=> [ $set[1] ]];
+	}
 	
 	return $fonts;
 }
 
+function webfonts2_header_prive($flux){
+	
+    $flux .= '<script src="'._DIR_PLUGIN_WEBFONTS2.'javascript/webfonts2.js'.'" type="text/javascript"></script>';
+    return $flux;
+
+}
  /**
   * webfonts_insert_head_css
  */
@@ -35,10 +39,10 @@ function webfonts2_insert_head_css($flux){
 	if (!$done){
 		$webfonts = lister_webfonts();		
 		if(is_array($webfonts)){
-			(defined('_FONTS_SUBSETS')) ? $subsets= _FONTS_SUBSETS : $subsets='' ;
+			(defined('_FONTS_SUBSETS')) ? $subsets = _FONTS_SUBSETS : $subsets='' ;
 			$font_request = googlefont_request($webfonts,$subsets);
 			if (strlen($font_request)) {
-				$methode = lire_config('webfonts2/methode_insert');
+				$methode = lire_config('webfonts2');
 				if($methode == 'at_import'){
 					$code = "<style>@import url('$font_request');</style>";
 				}else{

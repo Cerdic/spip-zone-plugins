@@ -1,10 +1,15 @@
 [(#REM)<!--
 
-Squelette #FORMULAIRE_CONFIGURER_WEBFONTS
-(c) 2010 Cedric Morin
-Distribue sous licence GPL
+
 
 -->]
+<style>
+input#webfonts,
+input#googlefonts_api_key{
+	width: 100%;
+	font-size: 1em;
+}
+</style>
 <div class="formulaire_spip formulaire_editer formulaire_#FORM">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -15,8 +20,8 @@ Distribue sous licence GPL
 			parametre : url d'action -->]
 			#ACTION_FORMULAIRE{#ENV{action},#FORM}
 			<fieldset>
-				<legend></legend>
-				<div class="editer-groupe">
+				<legend>Configuration</legend>
+				<div class="editer-group">
 					  <div class="editer googlefonts_api_key obligatoire[ (#ENV**{erreurs}|table_valeur{googlefonts_api}|oui)erreur]">
 						  <label for="nom"><:webfonts2:label_googlefonts_api:></label>[
 						  <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{googlefonts_api})</span>
@@ -34,6 +39,19 @@ Distribue sous licence GPL
 					  </div>
 				</div>
 			</fieldset>
+			<fieldset>
+				<legend>Webfonts</legend>
+				<div class="editer-group">
+					<div class="editer">
+						<label for="webfonts">webfonts</label>
+						<input name="webfonts"
+							   data-selecteur="webfonts"
+							   multiple="multiple"
+							   id="webfonts"
+							   type="text" value="#ENV{webfonts}"/>
+					</div>
+				</div>
+			</fieldset>
 			<!--extra-->
 			<input type="hidden" name="_meta_casier" value="webfonts2"/>
 			<p class='boutons'>
@@ -42,3 +60,28 @@ Distribue sous licence GPL
 		</div>
 	</form>]
 </div>
+
+<script>
+function split( val ) {
+ return val.split( /,\s*/ );
+}
+
+jQuery(function($){
+	var input = $('#webfonts');
+	$(input).autocomplete({
+		select: function(event,ui){
+			var terms = split( this.value );
+			// remove the current input
+			terms.pop();
+			// add the selected item
+			terms.push( ui.item.value );
+			// add placeholder to get the comma-and-space at the end
+			terms.push( "" );
+			this.value = terms.join( ", " );
+			return false;
+		}
+	});
+});
+
+
+</script>

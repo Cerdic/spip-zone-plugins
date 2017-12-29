@@ -8,6 +8,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
+
 /**
  * googlefont_request
  *

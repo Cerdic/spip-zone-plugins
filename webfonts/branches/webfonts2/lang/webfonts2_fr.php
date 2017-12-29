@@ -9,9 +9,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'webfonts2_titre' => 'Webfonts 2',
 
 	// C
-	'cfg_exemple' => 'Exemple',
-	'cfg_exemple_explication' => 'Explication de cet exemple',
-	'cfg_titre_parametrages' => 'Paramétrages',
+	'cfg_titre_configurer_webfonts2'	=> 'Configuration des webfonts',
+
+	
+	// E
+	'explication_googlefonts_api'	=> 'N\'est nécessaire que si vous souhaitez utiliser le formulaire de recherche',
+
+	// L
+	'label_googlefonts_api'	=> 'Google Font API Key',
+	'label_methode_insert'	=> 'Méthode d\'insertion des polices',
+
 
 	// T
 	'titre_page_configurer_webfonts2' => 'configurer_webfonts',

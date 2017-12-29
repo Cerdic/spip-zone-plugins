@@ -1,12 +1,22 @@
 # WebFonts 2
 
-Le chargement de webfonts peut impacter sur le rendu des pages, sur l'accessibilité au contenus, sur les performances de votre page.
+Le chargement de webfonts peut impacter sur le rendu des pages,
+sur l'accessibilité au contenus, sur les performances de votre page.
 Il conviens donc d'en être conscient et de les utiliser en connaissance de cause.
 
-Outre les considérations d'ordre esthétique et typographique, il est recommandé de ne pas utiliser plus de deux ou trois variantes de fonts, afin de ne pas détériorer les performances de chargement de vos pages.
+Outre les considérations d'ordre esthétique et typographique,
+il est recommandé de ne pas utiliser plus de deux ou trois variantes de fonts,
+afin de ne pas détériorer les performances de chargement de vos pages.
 
-`@font-face`
+Le plugin inssert dans le head et en tête des autres fichiers css
+les balise link ou style nécessaires. La requète vers google font ne necessite pas
+d'accès a l'api.
+
+
+
+La rêgle css `@font-face` : 
 https://developer.mozilla.org/fr/docs/Web/CSS/@font-face
+
 
 ```css
 /* latin */
@@ -18,6 +28,8 @@ https://developer.mozilla.org/fr/docs/Web/CSS/@font-face
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
 }
 ```
+
+
 ## Techniques de chargement de fonts :
 
 Les stratégies de chargement de font comparées par 
@@ -35,8 +47,13 @@ utilisation du service google web font, via une requète
 
 ## Fonctionalitées
 
-* Proposer plusieurs techniques d'intégration chargement de webfont
+* insertion auto 
+
+## 
+
 * Ajoute une pipeline pour que les plugins theme puisse activer leur insertions
+
+
 
 En cours :
 - Proposer un formulaire de recherche de typos et leurs selection pour utilisation
@@ -47,6 +64,8 @@ avec gestion des variantes
 
 
 ## Configuration:
+
+### GoogleFonts API Key
 
 Pour pouvoir afficher les fonts via l'api GoogleFont, il est nécessaire d'avoir
 préalablement récupéré une clef d'accès aux API Google et sélectionné GoogleFont dans
@@ -60,6 +79,15 @@ define('_GOOGLE_API_KEY', 'votre_clef_google_api');
 
 ou via la configuration du plugin.
 
+
+### Méthode d'insertion
+
+Propose plusieurs techniques d'intégration/chargement de webfont
+
+* insertion standard via la balise `<link>`
+* insertion @import via une balise `<style>`
+
+
 ## Utilisation
 
 Description d'une font dans la font list :
@@ -70,6 +98,30 @@ Description d'une font dans la font list :
 pour les autres les subsets sont ignorés, et le navigateur choisira ce qui est necessaire dans le DOM.
 Explication sur les subsets : https://developers.google.com/fonts/docs/getting_started#Subsets
 Navigateurs supportant `unicode-range : https://caniuse.com/#feat=font-unicode-range
+
+
+### Depuis un squelette
+
+via le fichier `mes_options.php`
+
+```php
+// Exemple d'ajout dans le pipeline "fonts_list" :
+$GLOBALS['spip_pipeline']['fonts_list'] .= "|skel_webfonts";
+ 
+function skel_webfonts($fonts) {
+	$fonts = array(
+		'0'=> array(
+			'family'=> 'Open Sans',
+			'variants'=> array('300','300italic','regular','italic','600')
+		),
+		'1'=> array(
+			'family'=> 'Montserrat',
+			'variants'=> array('regular','800')
+		)
+	);
+    return $fonts;
+}
+```
 
 ### Depuis un plugin
 
