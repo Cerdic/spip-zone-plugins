@@ -47,5 +47,3 @@ function clil_themes_checked($id_secteur) {
 		return $res;
 	else return false; 
 }
-
-?>

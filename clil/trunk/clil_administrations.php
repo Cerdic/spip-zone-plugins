@@ -28,9 +28,12 @@ function clil_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['create'] = array(
 							array('maj_tables', array('spip_clil_themes')),
 							array('remplir_table_clil_themes', array()),
-							array('sql_alter',"TABLE `spip_articles` ADD `code_clil` int(11) NOT NULL DEFAULT '0' AFTER `url_site`" ),
+							array('sql_alter',"TABLE `spip_livres` ADD `code_clil` int(11) NOT NULL DEFAULT '0'" ),
 							);
-	$maj['1.0.1'] = array(array('sql_alter',"TABLE `spip_livres` ADD `code_clil` int(11) NOT NULL DEFAULT '0' AFTER `hauteur`" ));
+	$maj['1.0.1'] = array(array('sql_alter',"TABLE `spip_livres` ADD `code_clil` int(11) NOT NULL DEFAULT '0'" ));
+
+	// refaire la même màj car celleux qui avaient installé à neuf depuis n'avaient toujours rien
+	$maj['1.0.2'] = array(array('sql_alter',"TABLE `spip_livres` ADD `code_clil` int(11) NOT NULL DEFAULT '0'" ));
 	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
