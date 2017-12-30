@@ -5,10 +5,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// W
-	'webfonts2_titre' => 'Webfonts 2',
+	
 
 	// C
+	'cfg_titre'	=> 'Configuration',
+
 	'cfg_titre_configurer_webfonts2'	=> 'Configuration des webfonts',
 	// D
 	'default_preview_text'	=> 'Grumpy wizards make toxic brew for the evil Queen and Jack.',
@@ -23,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 	// T
+	'titre' => 'Webfonts 2',
 	'titre_page_configurer_webfonts2' => 'configurer_webfonts',
 );
 

@@ -7,7 +7,6 @@
 	logo="prive/themes/spip/images/webfonts2-64.png"
 	documentation=""
 >
-
 	<nom>Webfonts 2</nom>
 
 	<auteur lien='http://www.yterium.net'>Cédric Morin</auteur>
@@ -23,6 +22,7 @@
 	
 	<necessite nom="php:curl" />
 	<necessite nom="spip_bonux" compatibilite="[3.4.4;["/>
+	
 	<utilise nom="selecteurgenerique" compatibilite="[1.1.0;]" />
 	
 	<menu nom="webfonts" titre="webfonts2:webfonts2_titre" parent="menu_squelette" icone="images/webfonts2-16.png" action="webfonts" />
