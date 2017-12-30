@@ -11,7 +11,7 @@ if (!defined('_RAINETTE_ICONES_PETITE_TAILLE')) {
 	define('_RAINETTE_ICONES_PETITE_TAILLE', 28);
 }
 
-// Balises du plugin utilisables dans les squelettes et modeles
+// Balises du plugin utilisables dans les squelettes et modèles
 /**
  * @param $p
  *
@@ -98,7 +98,7 @@ function rainette_afficher_icone($icone, $taille = 'petit') {
 	}
 
 	// On construit la balise img
-	$texte = attribut_html(rainette_afficher_resume($icone['code']));
+	$texte = $icone['code'];
 	$balise_img = "<img src=\"${source}\" alt=\"${texte}\" title=\"${texte}\" width=\"${taille_defaut}\" height=\"${taille_defaut}\" />";
 
 	return $balise_img;
@@ -355,6 +355,7 @@ function rainette_lister_themes($service, $source = 'local') {
 		// Chaque thème a un alias qui correspond à son dossier et un titre pour l'affichage.
 		// On recherche les sous-dossiers themes/$service présents dans le path.
 		include_spip('inc/utils');
+		include_spip('inc/rainette_normaliser');
 		foreach (creer_chemin() as $_chemin) {
 			$dossier_service = $_chemin . icone_local_normaliser('', $service);
 			if (@is_dir($dossier_service)) {

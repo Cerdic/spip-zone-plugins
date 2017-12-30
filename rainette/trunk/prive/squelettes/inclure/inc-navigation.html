@@ -1,0 +1,21 @@
+<ul class="liste-items sous_navigation">
+[(#REM) <!-- Navigation dans les pages de configuration --> ]
+<BOUCLE_navigation_cfg(DATA){source table, #VAL{tableau}|rainette_lister_services}{par cle}>
+	[<li class="item">
+	(#URL_ECRIRE{configurer_rainette}|parametre_url{service, #CLE}
+		|lien_ou_expose{
+			[(#VALEUR)],
+			[(#ENV{service, weather}|=={#CLE}|et{#ENV{exec}|=={configurer_rainette}})]})
+	</li>]
+</BOUCLE_navigation_cfg>
+
+[(#REM) <!-- Navigation dans la page de visualisation des thèmes d'icônes --> ]
+[(#PLUGIN{RAINETHEME}|oui)
+	[<li class="item">
+	(#URL_ECRIRE{themer_rainette}
+		|lien_ou_expose{
+			<:rainette:titre_page_themer:>,
+			[(#ENV{exec}|=={themer_rainette})]})
+	</li>]
+]
+</ul>
