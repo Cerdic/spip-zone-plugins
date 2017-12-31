@@ -4,7 +4,7 @@
 
 -->]
 <style>
-input#webfonts,
+input#webfonts_selector,
 input#googlefonts_api_key{
 	width: 100%;
 	font-size: 1em;
@@ -47,7 +47,7 @@ input#googlefonts_api_key{
 						<input name="webfonts"
 							   data-selecteur="webfonts"
 							   multiple="multiple"
-							   id="webfonts"
+							   id="webfonts_selector"
 							   type="text" value="#ENV{webfonts}"/>
 					</div>
 				</div>
@@ -66,9 +66,7 @@ input#googlefonts_api_key{
 	Pour ne pas faire une requète a l'api par action sur les pages de gestion des typo, on génère in fichier index qui peut être utilisé ensuite
 	
 </p>
-[(#BOUTON_ACTION{'Mettre a jour',
-	#URL_ACTION_AUTEUR{webfonts_index,#ID_AUTEUR}
-	,''})]
+[(#BOUTON_ACTION{'Mettre a jour',#URL_ACTION_AUTEUR{webfonts_index,#ID_AUTEUR},''})]
 						
 					
 <script>
@@ -77,7 +75,7 @@ function split( val ) {
 }
 
 jQuery(function($){
-	var input = $('#webfonts');
+	var input = $('#webfonts_selector');
 	$(input).autocomplete({
 		select: function(event,ui){
 			var terms = split( this.value );
