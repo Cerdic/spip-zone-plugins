@@ -69,12 +69,6 @@ function clil_declarer_tables_objets_sql($tables) {
 
 	);
 
-	$tables['spip_livres'] = array(
-		'field' => array(
-			"code_clil"	=> "int(11) NOT NULL DEFAULT '0'"
-		)
-	);
-
 	return $tables;
 }
 
