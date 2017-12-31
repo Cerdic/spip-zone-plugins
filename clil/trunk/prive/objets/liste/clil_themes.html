@@ -15,7 +15,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_clil_themes(CLIL_THEMES){id_secteur}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num },#GET{defaut_tri}}{par }{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_clil_themes(CLIL_THEMES){id_clil_theme?}{id_secteur?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,libelle},#GET{defaut_tri}}{par libelle}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='libelle'><a href="[(#URL_ECRIRE{clil_theme,id_clil_theme=#ID_CLIL_THEME})]">#LIBELLE</a></td>
 			<td class='tag'>#TAG</td>
