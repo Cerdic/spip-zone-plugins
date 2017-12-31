@@ -10,6 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
+ * Insertion dans la pipeline des polices configurées
 
 */
 function webfonts2_fonts_list($fonts){
