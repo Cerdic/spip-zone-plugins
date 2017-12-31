@@ -73,33 +73,49 @@ function calculer_infos($lieu, $type, $service) {
  * @api
  * @filtre
  *
- * @param array  $icone
- * @param string $taille
+ * @param array      $icone
+ * @param string|int $taille
+ * @param array      $options
  *
  * @return string
  */
-function rainette_afficher_icone($icone, $taille = 'petit') {
+function rainette_afficher_icone($icone, $taille = 'petit', $options = array()) {
 
-	// Initialisation de la source de la balise img avec le fichier icone.
-	$source = $icone['source'];
+	// Initialisation de la balise img afin de ne rien renvoyé si l'icone est vide.
+	$balise_img = '';
 
-	// On retaille si nécessaire l'image pour qu'elle soit toujours de la même taille (grande ou petite).
-	list($largeur, $hauteur) = @getimagesize($source);
-	include_spip('filtres/images_transforme');
-	$taille_defaut = ($taille == 'petit') ? _RAINETTE_ICONES_PETITE_TAILLE : _RAINETTE_ICONES_GRANDE_TAILLE;
-	if (($largeur < $taille_defaut)	or ($hauteur < $taille_defaut)) {
-		// Image plus petite que celle par défaut :
-		// --> Il faut insérer et recadrer l'image dans une image plus grande à la taille par défaut
-		$source = extraire_attribut(image_recadre($source, $taille_defaut, $taille_defaut, 'center', 'transparent'), 'src');
-	} elseif (($largeur > $taille_defaut) or ($hauteur > $taille_defaut)) {
-		// Image plus grande que celle par défaut :
-		// --> Il faut réduire l'image à la taille par défaut
-		$source = extraire_attribut(image_reduire($source, $taille_defaut), 'src');
+	if ($icone) {
+		// Initialisation de la source de la balise img avec le fichier icone.
+		$source = $icone['source'];
+
+		// On retaille si nécessaire l'image pour qu'elle soit toujours de la même taille (grande ou petite).
+		list($largeur, $hauteur) = @getimagesize($source);
+		include_spip('filtres/images_transforme');
+
+		// Calcul de la taille maximale de l'icone
+		if ($taille == 'petit') {
+			$taille_max =_RAINETTE_ICONES_PETITE_TAILLE;
+		} elseif ($taille == 'grand') {
+			$taille_max =_RAINETTE_ICONES_GRANDE_TAILLE;
+		} else {
+			$taille_max = intval($taille);
+		}
+
+		if (($largeur < $taille_max)	or ($hauteur < $taille_max)) {
+			// Image plus petite que celle par défaut :
+			// --> Il faut insérer et recadrer l'image dans une image plus grande à la taille par défaut
+			$source = extraire_attribut(image_recadre($source, $taille_max, $taille_max, 'center', 'transparent'), 'src');
+		} elseif (($largeur > $taille_max) or ($hauteur > $taille_max)) {
+			// Image plus grande que celle par défaut :
+			// --> Il faut réduire l'image à la taille par défaut
+			$source = extraire_attribut(image_reduire($source, $taille_max), 'src');
+		}
+
+		// On construit la balise img
+		$texte = $icone['code'];
+		$classe = !empty($options['classe']) ? 'class="' . $options['classe'] . '" ' : '';
+		$balise_img = "<img src=\"${source}\" alt=\"${texte}\" title=\"${texte}\" width=\"${taille_max}\" height=\"${taille_max}\" ${classe}/>";
 	}
-
-	// On construit la balise img
-	$texte = $icone['code'];
-	$balise_img = "<img src=\"${source}\" alt=\"${texte}\" title=\"${texte}\" width=\"${taille_defaut}\" height=\"${taille_defaut}\" />";
 
 	return $balise_img;
 }
@@ -272,32 +288,32 @@ function rainette_afficher_unite($valeur, $type_donnee = '', $precision = -1, $s
  */
 function rainette_lister_services($mode = 'tableau') {
 
-	$services = array();
+	static $services = array();
 
-	// On lit les fichiers php dans répertoire services/ du plugin sachant ce répertoire
-	// contient exclusivement les api de chaque service dans un fichier unique appelé
-	// alias_du_service.php
-	if ($fichiers_api = glob(_DIR_PLUGIN_RAINETTE . '/services/*.php')) {
-		foreach ($fichiers_api as $_fichier) {
-			// On détermine l'alias du service
-			$service = strtolower(basename($_fichier, '.php'));
+	if (!isset($service[$mode])) {
+		// On lit les fichiers php dans répertoire services/ du plugin sachant ce répertoire
+		// contient exclusivement les api de chaque service dans un fichier unique appelé
+		// alias_du_service.php
+		if ($fichiers_api = glob(_DIR_PLUGIN_RAINETTE . '/services/*.php')) {
+			foreach ($fichiers_api as $_fichier) {
+				// On détermine l'alias du service
+				$service = strtolower(basename($_fichier, '.php'));
 
-			// Acquérir la configuration statique du service.
-			include_spip("services/${service}");
-			$configurer = "${service}_service2configuration";
-			$configuration = $configurer('service');
+				// Acquérir la configuration statique du service.
+				include_spip("services/${service}");
+				$configurer = "${service}_service2configuration";
+				$configuration = $configurer('service');
 
-			$services[$service] = $configuration['nom'];
+				$liste[$service] = $configuration['nom'];
+			}
 		}
+
+		// Par défaut la liste est fournie comme un tableau.
+		// Si le mode demandé est 'liste' on renvoie une chaîne énumérée des alias de service séparée par des virgules.
+		$services[$mode] = ($mode == 'tableau') ? $liste : implode(',', array_keys($liste));
 	}
 
-	// Par défaut la liste est fournie comme un tableau.
-	// Si le mode demandé est 'liste' on renvoie une chaîne énumérée des alias de service séparée par des virgules.
-	if ($mode == 'liste') {
-		$services = implode(',', array_keys($services));
-	}
-
-	return $services;
+	return $services[$mode];
 }
 
 
@@ -339,41 +355,46 @@ function rainette_lister_modeles($mode = 'conditions', $periodicite = 24) {
  */
 function rainette_lister_themes($service, $source = 'local') {
 
-	$themes = array();
+	static $themes = array();
 
-	// Certains services proposent des thèmes d'icones accessibles via l'API.
-	// C'est le cas de wunderground.
-	if (strtolower($source) == 'api') {
-		if ($service == 'wunderground') {
-			$cles = array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k');
-			foreach ($cles as $_cle) {
-				$themes[$_cle] = _T("rainette:label_theme_wunderground_${_cle}");
+	if (!isset($themes[$service][$source])) {
+		// La liste des thèmes n'a pas encore été enregistrée, il faut la recalculer.
+		// On l'initialise à vide car il faut toujours avoir une liste.
+		$themes[$service][$source] = array();
+
+		if (strtolower($source) == 'api') {
+			// Certains services proposent des thèmes d'icones accessibles via l'API.
+			// C'est le cas de wunderground.
+			if ($service == 'wunderground') {
+				$cles = array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k');
+				foreach ($cles as $_cle) {
+					$themes[$service][$source][$_cle] = _T("rainette:label_theme_wunderground_${_cle}");
+				}
 			}
-		}
-	} else {
-		// Les thèmes de Rainette sont toujours stockés dans l'arborescence themes/$service.
-		// Chaque thème a un alias qui correspond à son dossier et un titre pour l'affichage.
-		// On recherche les sous-dossiers themes/$service présents dans le path.
-		include_spip('inc/utils');
-		include_spip('inc/rainette_normaliser');
-		foreach (creer_chemin() as $_chemin) {
-			$dossier_service = $_chemin . icone_local_normaliser('', $service);
-			if (@is_dir($dossier_service)) {
-				if ($dossiers_theme = glob($dossier_service . '/*', GLOB_ONLYDIR)) {
-					foreach ($dossiers_theme as $_theme) {
-						$theme = strtolower(basename($_theme));
-						// On ne garde que le premier dossier de même nom.
-						if (!isset($themes[$theme])) {
-							$themes[$theme] = $theme;
+		} else {
+			// Les thèmes de Rainette sont toujours stockés dans l'arborescence themes/$service.
+			// Chaque thème a un alias qui correspond à son dossier et un titre pour l'affichage.
+			// On recherche les sous-dossiers themes/$service présents dans le path.
+			include_spip('inc/utils');
+			include_spip('inc/rainette_normaliser');
+			foreach (creer_chemin() as $_chemin) {
+				$dossier_service = $_chemin . icone_local_normaliser('', $service);
+				if (@is_dir($dossier_service)) {
+					if ($dossiers_theme = glob($dossier_service . '/*', GLOB_ONLYDIR)) {
+						foreach ($dossiers_theme as $_theme) {
+							$theme = strtolower(basename($_theme));
+							// On ne garde que le premier dossier de même nom.
+							if (!isset($themes[$theme])) {
+								$themes[$service][$source][$theme] = $theme;
+							}
 						}
 					}
 				}
 			}
 		}
-
 	}
 
-	return $themes;
+	return $themes[$service][$source];
 }
 
 
