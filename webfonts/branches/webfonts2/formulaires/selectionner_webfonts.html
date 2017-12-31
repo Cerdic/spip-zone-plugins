@@ -21,25 +21,22 @@ font
 		[(#REM)<!-- declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action -->]
 		#ACTION_FORMULAIRE{#ENV{action},#FORM}
-
-        <input name="font_list" type="hidden" value="#ENV{font_list}">
-		#SET{preview_list,#ENV{font_list}}
-        <div class="editer-group">
+        
+		<div class="editer-group">
 			<div class="editer">
 				<label for="font_search">Rechercher une typo</label>
 				<input name="font_search" type="text" value="#ENV{font_search}">
 			</div>
-			#SET{font_search,#ENV{font_search}}
         </div>
         
 		<div class="editer-group">
-			<div class="editer">
+			<!--<div class="editer">
 				<label for="sort">Trier par</label>
 				<select name="sort" id="sort">
 				  <option value="popularity"[(#ENV{sort}|=={popularity}|?{' selected="selected"',''})]>Popularité</option>
 				  <option value="alpha"[(#ENV{sort}|=={alpha}|?{' selected="selected"',''})]>Alphabétique</option>
 				</select>
-			</div>
+			</div>-->
 			<div class="editer">
 				<label for="category">Catégories</label>
 				<select name="category" id="category">
@@ -50,12 +47,10 @@ font
 					<option value="handwriting"[(#ENV{category}|=={handwriting}|?{'selected="selected"',''})]>Handwritting</option>
 					<option value="monospace"[(#ENV{category}|=={monospace}|?{'selected="selected"',''})]>Monospace</option>
 				</select>
-				#SET{category,#ENV{category}}
 			</div>
 			<div class="editer">
 				<label for="preview_text">Texte pour la preview</label>
-				<input type="text" name="preview_text" value='#ENV{preview_text, Grumpy wizards make toxic brew for the evil Queen and Jack.}'>
-				#SET{preview_text,#ENV{preview_text}} 
+				<input type="text" name="preview_text" value='#ENV{preview_text, '<:webfonts2:default_preview_text:>'}'>
 			</div>
 			<div class="editer">
 				<label for="preview_font_size">preview_font_size</label>
@@ -80,7 +75,7 @@ font
       [(#REM)<!-- ajouter les saisies supplementaires : extra et autre, a cet endroit -->]
 	  <!--extra-->
 	  <p class='boutons'>
-        <input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+        <input type='submit' class='submit' value='Rechercher' />
       </p>
 	</div>
 </form>
@@ -98,6 +93,7 @@ jQuery(function($){
 			ajaxReload('fonts', {
 				args:{
 					category: '#ENV{category}',
+					search: '#ENV{font_search}',
 					infos: '#ENV{infos, non}',
 					preview: '#ENV{preview, non}'
 				},

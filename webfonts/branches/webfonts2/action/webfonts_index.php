@@ -18,6 +18,5 @@ function action_webfonts_index_dist(){
 		spip_log('API Key non definie','webfonts');
 		return false;
 	}
-	
-	
+
 }

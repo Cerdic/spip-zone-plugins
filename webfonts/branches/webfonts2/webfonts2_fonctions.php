@@ -39,7 +39,7 @@ function googlefont_request($webfonts,$subsets=''){
 */
 function google_font_search($fonts, $search){
 	$res = array();
-	foreach($fonts['items'] as $item){
+	foreach($fonts as $item){
 		( preg_match('/' . trim($search) . '/i', $item['family']) ) ? $res[] = $item : false;
 	}	
 	return $res;

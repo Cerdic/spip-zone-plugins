@@ -1,9 +1,8 @@
-<h2>Resultats</h2>
-
 
 <B_listResults>
+<h2>Resultats</h2>
 #ANCRE_PAGINATION
-<BOUCLE_listResults(DATA){source table, #FONT_INDEX}
+<BOUCLE_listResults(DATA){source table, #FONT_INDEX|google_font_search{#ENV{font_search}}}
 						{category ?= #ENV{category}}
 						{pagination 10}>
 
