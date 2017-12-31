@@ -9,9 +9,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+function webfonts2_ieconfig_metas($table){
+	$table['webfonts2']['titre'] = _T('webfonts2:titre');
+    $table['webfonts2']['icone'] = 'prive/themes/spip/images/webfonts2-16.png';
+    $table['webfonts2']['metas_serialize'] = 'webfonts2';
+	return $table;
+}
+
 /**
  * Insertion dans la pipeline des polices configurées
-
+ * 
 */
 function webfonts2_fonts_list($fonts){
 	$webfonts = lire_config('webfonts2/webfonts');
