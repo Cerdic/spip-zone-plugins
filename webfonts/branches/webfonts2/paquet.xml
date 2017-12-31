@@ -17,6 +17,7 @@
 	<pipeline nom="autoriser" inclure="webfonts2_autorisations.php" />
 	<pipeline nom="insert_head_css" inclure="webfonts2_pipelines.php" />
 	<pipeline nom="header_prive" inclure="webfonts2_pipelines.php" />
+	<pipeline nom="ieconfig_metas" inclure="webfonts2_pipelines.php" />
 	
 	<pipeline nom="fonts_list" inclure="webfonts2_pipelines.php" />
 	
