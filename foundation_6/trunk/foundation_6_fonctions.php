@@ -15,8 +15,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('inc/foundation');
 
 /**
- * Rendre les iframes responsives via un filtre et
- * la classe responsive-embed de Foundation.
+ * Rendre les iframes responsives via un filtre et la classe responsive-embed de
+ * Foundation.
  *
  * @param string $texte HTML dans lequel chercher des iframes
  * @access public
@@ -27,7 +27,6 @@ function filtre_responsive_embed_dist($texte) {
 	// On détecte toute les iFrames et on les rends responsives.
 	return preg_replace_callback('%<iframe(.*)></iframe>%m', 'responsive', $texte);
 }
-
 
 /**
  * Assurer la rétro-compatibilité avec l'ancien nom de ce filtre
@@ -45,14 +44,20 @@ function filtre_iframe_responsive($texte) {
 }
 
 /**
- * Cette balise va permettre de rendre le squelette compatible
- * avec toutes les versions de Foundation.
+ * Cette balise va permettre de rendre le squelette compatible avec toutes les
+ * versions de Foundation.
+ *
  * La syntaxe est la suivante:
  *
- * #COLONNES{nombre,type}
- * nombre: le nombre de colonne foundation
- * (optionnel) type: Dans le cas des version utilisant une
- * syntaxe avec prefix, on lui passe le type (défaut: large)
+ * ```
+ * [(#COLONNES{#ARRAY{large, 4, medium, 3, small, 3}})]
+ * ```
+ *
+ * Pour activer le calcule automatique en fonction du total d'une boucle :
+ *
+ * ```
+ * [(#COLONNES{#ARRAY{large, 4*, medium, 3*, small, 3*}})]
+ * ```
  *
  * @param mixed $p
  * @access public
@@ -86,7 +91,11 @@ function balise_COLONNES_dist($p) {
 }
 
 /**
- * Generer un bouton d'action qui accepte les class de foundation
+ * Générer un bouton d'action qui accepte les class de Foundation.
+ *
+ * @param mixed $p
+ * @access public
+ * @return mixed
  */
 function balise_BOUTON_ACTION($p) {
 
@@ -111,9 +120,18 @@ function balise_BOUTON_ACTION($p) {
 }
 
 /**
- * On surcharge le filtre bouton_action pour ajouter $class
- * sur la balise <button> au lieu de pour assurer la
- * compatibilité avec les class button de foundation
+ * On surcharge le filtre bouton_action pour ajouter $class sur la balise
+ * <button> au lieu de pour assurer la compatibilité avec les class button de
+ * foundation
+ *
+ * @param string $libelle
+ * @param string $url
+ * @param string $class
+ * @param string $confirm
+ * @param string $title
+ * @param string $callback
+ * @access public
+ * @return string
  */
 function filtre_bouton_action($libelle, $url, $class = '', $confirm = '', $title = '', $callback = '') {
 	if ($confirm) {
@@ -131,16 +149,15 @@ function filtre_bouton_action($libelle, $url, $class = '', $confirm = '', $title
 		return "<form class='bouton_action_post $class' method='post' action='$url'><div>".form_hidden($url)
 		 ."<button type='submit' class='submit'$title$onclick>$libelle</button></div></form>";
 	} else {
-
-		// Détection de la class ajax
+		// Détection de la class ajax :
 		// Code reprit (et modifié) du plugin bootstrap:
 		// https://zone.spip.org/trac/spip-zone/browser/_plugins_/bootstrap/trunk/bootstrap3_fonctions.php#L109
 		$array_class = explode(' ', $class);
 		$ajax_index = array_search('ajax', $array_class);
 		if ($ajax_index !== false) {
 			$ajax = ' ajax';
-			// On a plus besoin de la class ajax dans la liste des class,
-			// ça pourrait créer des problèmes
+			// On a plus besoin de la class ajax dans la liste des class, ça
+			// pourrait créer des problèmes
 			unset($array_class[$ajax_index]);
 			$class = implode(' ', $array_class);
 		} else {
@@ -153,8 +170,7 @@ function filtre_bouton_action($libelle, $url, $class = '', $confirm = '', $title
 }
 
 /**
- * Filtre pour afficher des étoiles à la suite via les
- * icone foundation.
+ * Filtre pour afficher des étoiles à la suite via les icônes Foundation.
  *
  * @param int $nombre
  * @access public
@@ -176,7 +192,6 @@ function filtre_etoile_foundation_dist($nombre) {
 
 	return $etoile;
 }
-
 
 if (!function_exists('balise_LIRE_CONSTANTE_dist')) {
 	/**

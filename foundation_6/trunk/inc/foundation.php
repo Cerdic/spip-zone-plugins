@@ -5,7 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
- * Fonction de callback utilisé par le filtre |iframe_responsive
+ * Fonction de callback utilisé par le filtre `|responsive_embed`.
  * A chaque iFrame, on encadre de div.responsive-embed.
  *
  * On détecte aussi le ratio de l'iFrame (via les attributs html) pour ajouter
@@ -45,7 +45,7 @@ function responsive($matches) {
  * @param  string $type type de colonne: large, medium ou small
  * @return string $class foundation applicable directement.
  */
-function class_grid_foundation($nombre_colonnes, $type, $total_boucle = null) {
+function class_grid_foundation($nombre_colonnes, $type = '', $total_boucle = null) {
 	// Si la première variable est un tableau, on va le convertir en class
 	if (is_array($nombre_colonnes)) {
 		$class= '';
