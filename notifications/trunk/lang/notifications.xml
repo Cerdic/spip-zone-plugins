@@ -1,5 +1,5 @@
 <traduction module="notifications" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/notifications/trunk/lang/" reference="fr">
-	<langue code="de" url="https://trad.spip.net/tradlang_module/notifications?lang_cible=de" total="97" traduits="96" relire="0" modifs="1" nouveaux="0" pourcent="98.97">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/notifications?lang_cible=de" total="97" traduits="97" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
 	<langue code="en" url="https://trad.spip.net/tradlang_module/notifications?lang_cible=en" total="97" traduits="97" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
