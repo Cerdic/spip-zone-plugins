@@ -10,12 +10,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_titre_minibando' => 'Parameter', # RELIRE
+	'cfg_titre_minibando' => 'Parameter',
 
 	// L
-	'label_disposition' => 'Anordnung', # RELIRE
-	'label_disposition_horizontale' => 'Horizontale',
-	'label_disposition_verticale' => 'Vertikale',
+	'label_disposition' => 'Anordnung',
+	'label_disposition_horizontale' => 'Horizontal',
+	'label_disposition_verticale' => 'Vertikal',
+	'label_limite' => 'Begrenzen',
+	'label_limite_webmestre' => 'Minibando nur den Webmastern anzeigen',
 
 	// M
 	'mode_css' => 'CSS Modus',
@@ -26,5 +28,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_debug' => 'Debug',
-	'titre_outils_rapides' => 'Neu'
+	'titre_outils_rapides' => 'Neu',
+	'titre_page_configurer_minibando' => 'Minibando Einstellungen'
 );
