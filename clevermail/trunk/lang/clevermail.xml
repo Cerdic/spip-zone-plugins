@@ -1,6 +1,7 @@
 <traduction module="clevermail" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/clevermail/trunk/lang/" reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/clevermail?lang_cible=de" total="222" traduits="118" relire="0" modifs="0" nouveaux="104" pourcent="53.15">
 		<traducteur nom="kennethkeen" lien="https://trad.spip.net/auteur/kennethkeen" />
+		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
 	</langue>
 	<langue code="en" url="https://trad.spip.net/tradlang_module/clevermail?lang_cible=en" total="222" traduits="222" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
