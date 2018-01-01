@@ -1,0 +1,98 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM_#ENV{_etape}">
+	<h3 class="titrem"><:rainette:info_etape{etape=#ENV{_etape}, etapes=#ENV{_etapes}}:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		[(#SAISIE{input, operation_choisie,
+			defaut=#ENV{_operations/#ENV{operation}},
+			disable=oui,
+			label=<:rainette:label_operation:>
+		})]
+
+		[(#SAISIE{input, service_choisi,
+			defaut=#ENV{_services/#ENV{service}},
+			disable=oui,
+			label=<:rainette:label_service:>
+		})]
+
+		[(#ENV{operation}|=={afficher_theme}|oui)
+			[(#SET{explication, <:rainette:explication_themer_theme:>})]
+			[(#SET{label, <:rainette:label_theme:>})]
+		]
+		[(#ENV{operation}|=={transcoder_weather}|oui)
+			[(#SET{explication, <:rainette:explication_transcoder_theme:>})]
+			[(#SET{label, <:rainette:label_theme_1:>})]
+		]
+		[(#ENV{operation}|=={comparer_theme}|oui)
+			[(#SET{explication, ''})]
+			[(#SET{label, <:rainette:label_theme_1:>})]
+		]
+		[(#ENV{operation}|=={comparer_icone}|non)
+			[(#SAISIE{selection, theme,
+				datas=#ENV{_themes},
+				cacher_option_intro=oui,
+				explication=#GET{explication},
+				label=#GET{label}
+			})]
+		]
+
+		[(#ENV{operation}|=={transcoder_weather}|oui)
+			[(#SAISIE{selection, theme_2,
+				datas=#ENV{_themes_weather},
+				cacher_option_intro=oui,
+				explication=<:rainette:explication_transcoder_weather:>,
+				label=<:rainette:label_theme_weather:>,
+			})]
+		]
+
+		[(#ENV{operation}|=={comparer_theme}|oui)
+			[(#SAISIE{selection, theme_2,
+				datas=#ENV{_themes},
+				cacher_option_intro=oui,
+				explication=<:rainette:explication_themer_theme_2:>,
+				label=<:rainette:label_theme_2:>,
+			})]
+		]
+
+		[(#ENV{operation}|=={comparer_icone}|oui)
+			[(#SAISIE{selection, icone,
+				datas=#ENV{_icones},
+				cacher_option_intro=oui,
+				explication=<:rainette:explication_themer_icone:>,
+				label=<:rainette:label_icone:>,
+			})]
+		]
+
+		[(#ENV{service}|=={weather}|oui)
+			[(#SAISIE{input, periode_choisie,
+				defaut=<:rainette:info_periode_weather:>,
+				disable=oui,
+				label=<:rainette:label_periode:>
+			})]
+			<input type="hidden" name="periode" value="0" />
+		]
+		[(#ENV{service}|=={weather}|non)
+			[(#SAISIE{radio, periode,
+				datas=#LISTE{<:rainette:label_icone_jour:>, <:rainette:label_icone_nuit:>},
+				defaut=0,
+				label=<:rainette:label_periode:>,
+			})]
+		]
+
+		<p class="boutons">
+			<input type="submit" class="submit" name="_retour_etape_1" value="<:rainette:bouton_retourner:>" />
+			<input type="submit" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div></form>
+</div>
+
+[(#REM) <!-- Affichage des resultats --> ]
+[(#ENV*{message_ok}|oui)
+	<INCLURE{fond=formulaires/inc-#ENV{message_ok/inclusion},
+		operation=#ENV{operation},
+		icones=#ENV*{message_ok/icones},
+		env} />
+]

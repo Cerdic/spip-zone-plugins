@@ -1,0 +1,23 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+
+/* Styles de la liste des icones de la page rainette_themer */
+.themer_rainette .icones .item { display: inline-block; width: 49%; margin: 0 auto; text-align: center; }
+.themer_rainette .icones .item h3 { margin: 0 0 1em; font-size: 90%; min-height: 2.5em; }
+.themer_rainette .icones .item img { display: block; margin: 0 auto 1.2em; border-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+.themer_rainette .icones .item a { text-decoration: none; }

@@ -1,0 +1,44 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM_#ENV{_etape}">
+	<h3 class="titrem"><:rainette:info_etape{etape=#ENV{_etape}, etapes=#ENV{_etapes}}:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		[(#SAISIE{radio, operation,
+			datas=#ENV{_operations},
+			defaut=afficher_theme,
+			label=<:rainette:label_operation:>,
+		})]
+
+		[(#SAISIE{radio, service,
+			datas=#ENV{_services},
+			defaut=#ENV{_service_defaut},
+			explication=<:rainette:explication_themer_service:>,
+			label=<:rainette:label_service:>,
+		})]
+
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:rainette:bouton_continuer:>" />
+		</p>
+	</div></form>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{operation}|=={transcoder_weather}|oui)
+			jQuery(".choix_weather").hide();
+		]
+		jQuery("input[name='operation']").change(function() {
+			if (jQuery("input[name='operation']:checked").val() == 'transcoder_weather') {
+				jQuery(".choix_weather").hide();
+			} else {
+				jQuery(".choix_weather").show();
+			}
+			jQuery(this).blur();
+		});
+	});
+//]]>
+</script>

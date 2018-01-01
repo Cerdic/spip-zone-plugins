@@ -1,0 +1,14 @@
+<div class="liste[ (#ENV{operation}] icones">
+	<B_affichage_theme>
+	<ul class="liste-items">
+	<BOUCLE_affichage_theme(DATA) {source table, #ENV{icones}}>
+		<li class="item">
+			<h3 class="h3">
+				[(#VALEUR{resume})]
+			</h3>
+			[(#VALEUR{icone}|rainette_afficher_icone{grand})]
+		</li>
+	</BOUCLE_affichage_theme>
+	</ul>
+	</B_affichage_theme>
+</div>
