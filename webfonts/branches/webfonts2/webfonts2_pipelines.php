@@ -22,12 +22,14 @@ function webfonts2_ieconfig_metas($table){
 */
 function webfonts2_fonts_list($fonts){
 	$webfonts = lire_config('webfonts2/webfonts');
-	// enlever la dernière virgule
-	$webfonts = explode(',',rtrim($webfonts,', '));
-	
-	foreach($webfonts as $font){
-		$set =  explode(':',$font);
-		$fonts[] = ['family'=> trim($set[0]),'variants'=> [ $set[1] ]];
+	if(strlen($webfonts)){
+		// enlever la dernière virgule
+		$webfonts = explode(',',rtrim($webfonts,', '));
+		
+		foreach($webfonts as $font){
+			$set =  explode(':',$font);
+			$fonts[] = ['family'=> trim($set[0]),'variants'=> [ $set[1] ]];
+		}
 	}
 	
 	return $fonts;
