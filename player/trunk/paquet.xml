@@ -1,9 +1,9 @@
 <paquet
 	prefix="player"
 	categorie="multimedia"
-	version="2.8.4"
-	etat="stable"
-	compatibilite="[3.0.0;3.2.*]"
+	version="3.0.0"
+	etat="dev"
+	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/player-32.png"
 	documentation="https://contrib.spip.net/Lecteur-Multimedia"
 	schema="0.2.4"
@@ -26,6 +26,6 @@
 
 	<menu nom="configurer_player" titre="player:player_nom" parent="menu_squelette" icone="images/player-16.png" />
 
-	<utilise nom="medias" compatibilite="[2.7.27;]" />
+	<utilise nom="medias" compatibilite="[2.20.0;]" />
 
 </paquet>
