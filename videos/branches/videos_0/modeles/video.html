@@ -65,14 +65,14 @@
 ]
 	[(#EXTENSION|=={dist_daily}|oui)
 		#SET{videosLiees,#ENV{videosLiees,#CONFIG{videos/videosLiees,'0'}}}
-		<iframe frameborder="0" width="#GET{largeur}" height="#GET{hauteur}" src="http://www.dailymotion.com/embed/video/#GET{fichier}?width=#GET{largeur}&amp;theme=none&amp;foreground=%23F7FFFD&amp;highlight=%23FFC300&amp;background=%23171D1B&amp;start=[&amp;animatedTitle=(#TITRE|urlencode)]&amp;iframe=1&amp;additionalInfos=0&amp;autoPlay=0&amp;hideInfos=0&amp;wmode=#GET{wmode}"></iframe>
+		<iframe frameborder="0" width="#GET{largeur}" height="#GET{hauteur}" src="//www.dailymotion.com/embed/video/#GET{fichier}?width=#GET{largeur}&amp;theme=none&amp;foreground=%23F7FFFD&amp;highlight=%23FFC300&amp;background=%23171D1B&amp;start=[&amp;animatedTitle=(#TITRE|urlencode)]&amp;iframe=1&amp;additionalInfos=0&amp;autoPlay=0&amp;hideInfos=0&amp;wmode=#GET{wmode}"></iframe>
 	]
 [(#REM)
 /** Traiter Vimeo **/
 	http://vimeo.com/api
 ]
 	[(#EXTENSION|=={dist_vimeo}|oui)
-	<iframe src="http://player.vimeo.com/video/#GET{fichier}?byline=0" width="#GET{largeur}" height="#GET{hauteur}" frameborder="0"></iframe>
+	<iframe src="//player.vimeo.com/video/#GET{fichier}?byline=0" width="#GET{largeur}" height="#GET{hauteur}" frameborder="0"></iframe>
 	]
 	
 
@@ -102,7 +102,7 @@
 	- cc_load_policy	|| Values: 1. Default is based on user preference. Setting to 1 will cause closed captions to be shown by default, even if the user has turned captions off.
 ]
 	[(#EXTENSION|=={dist_youtu}|oui)
-	<iframe width="#GET{largeur}" height="#GET{hauteur}" src="http://www.youtube.com/embed/#GET{fichier}?hd=1&amp;wmode=#GET{wmode}" frameborder="0" allowfullscreen class="youtube-player"></iframe>
+	<iframe width="#GET{largeur}" height="#GET{hauteur}" src="//www.youtube.com/embed/#GET{fichier}?hd=1&amp;wmode=#GET{wmode}" frameborder="0" allowfullscreen class="youtube-player"></iframe>
 	]
 
 
