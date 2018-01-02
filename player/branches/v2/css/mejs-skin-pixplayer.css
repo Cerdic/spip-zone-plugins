@@ -1,0 +1,159 @@
+/* Dewplayer */
+.mejs-container.mejs-pixplayer {
+	background: none;
+	height:24px !important;
+}
+
+.mejs-pixplayer .mejs-controls {
+	background: #e5e5e5;
+	border-radius: 4px;
+	height:24px;
+	width: 100%;
+	-webkit-transition: width 0.2s linear;
+    -moz-transition: width 0.2s linear;
+      -o-transition: width 0.2s linear;
+         transition: width 0.2s linear;
+}
+.mejs-pixplayer .paused .mejs-controls {
+	width: 81px;
+	overflow: hidden;
+}
+
+.mejs-pixplayer .mejs-controls .mejs-playpause-button {
+	position: absolute;
+	top:0;
+	left:100%;
+	width: 42px;
+	height:24px;
+	z-index:3;
+	margin-left: -42px;
+}
+
+.mejs-pixplayer .mejs-controls .mejs-playpause-button button {
+	position:relative;
+	background: url(img/controls-pixplayer.png) no-repeat left 0;
+	width: 42px;
+	height:24px;
+	margin: 0;
+}
+.mejs-pixplayer .mejs-controls .mejs-play button:hover {
+	background-position: left -32px;
+}
+.mejs-pixplayer .mejs-controls .mejs-pause button {
+	background-position: left -64px;
+}
+.mejs-pixplayer .mejs-controls .mejs-pause button:hover {
+	background-position: left -96px;
+}
+
+
+.mejs-pixplayer .mejs-controls .mejs-time {
+	position: absolute;
+	top:6px;
+	padding-top:0;
+}
+.mejs-pixplayer .mejs-controls .mejs-time span {
+	color:#333;
+	font-weight: normal;
+}
+
+.mejs-pixplayer .mejs-controls .mejs-currenttime-container {
+	left:50px;
+	z-index: 2;
+}
+.mejs-pixplayer .mejs-controls .mejs-duration-container {
+	right: 45px;
+	z-index: 2;
+}
+.mejs-pixplayer .mejs-controls .mejs-duration-container span {
+}
+
+.mejs-pixplayer .mejs-controls .mejs-time-rail {
+	padding:0 4px;
+	height: 24px;
+	width:67% !important;
+	position:absolute;
+	left:45px;
+	top:0;
+}
+.mejs-pixplayer .mejs-controls .mejs-time-rail span {
+	height:14px;
+	border-radius: 0;
+}
+
+.mejs-pixplayer .mejs-controls .mejs-time-rail .mejs-time-total {
+	margin:4px 0;
+	border:1px solid #CCCCCC;
+	background: #f2f2f2;
+	width:96% !important;
+}
+
+.mejs-pixplayer .mejs-controls .mejs-time-rail .mejs-time-loaded {
+	background: #eee;
+	max-width:100%;
+}
+.mejs-pixplayer .mejs-controls .mejs-time-rail .mejs-time-current {
+	background: #fff;
+	max-width:100%;
+}
+
+.mejs-pixplayer .mejs-controls .mejs-currenttime-container {
+}
+.mejs-pixplayer .mejs-controls .mejs-duration-container {
+}
+.mejs-pixplayer .mejs-controls .mejs-volume-button {
+	display: none;
+}
+.mejs-pixplayer .mejs-controls div.mejs-horizontal-volume-slider {
+	position:relative;
+	background: url(img/controls-pixplayer.png) no-repeat left -160px;
+	width: 46px;
+	height:24px;
+	margin: 0;
+	z-index:3;
+}
+.mejs-pixplayer .mejs-controls div.mejs-horizontal-volume-slider:after{
+	content:"";
+	display:block;
+	position: absolute;
+	top:0;
+	opacity:0;
+	left:2px;
+	width: 13px;
+	height: 20px;
+	background: url(img/controls-pixplayer.png) no-repeat left -192px;
+	z-index: 4;
+	-webkit-transition: left 0.2s linear,opacity 0.2s linear;
+    -moz-transition: left 0.2s linear,opacity 0.2s linear;
+      -o-transition: left 0.2s linear,opacity 0.2s linear;
+         transition: left 0.2s linear,opacity 0.2s linear;
+}
+.mejs-pixplayer .paused .mejs-controls div.mejs-horizontal-volume-slider:after{
+	left:13px;
+	opacity:1;
+}
+.mejs-pixplayer .mejs-controls div.mejs-horizontal-volume-slider .mejs-horizontal-volume-total {
+	width: 34px;
+	height: 17px;
+	position: absolute;
+	background: #f2f2f2 url(img/controls-pixplayer.png) no-repeat left -128px;
+	left:5px;
+	top:4px;
+	border-radius:0;
+}
+.mejs-pixplayer .mejs-controls div.mejs-horizontal-volume-slider .mejs-horizontal-volume-current {
+	height: 17px;
+	position: absolute;
+	background: #666666 url(img/controls-pixplayer.png) no-repeat left -128px;
+	left:5px;
+	top:4px;
+	border-radius:0;
+}
+.mejs-pixplayer .paused .mejs-controls div.mejs-horizontal-volume-slider .mejs-horizontal-volume-total,
+.mejs-pixplayer .paused .mejs-controls div.mejs-horizontal-volume-slider .mejs-horizontal-volume-current {
+	opacity: 0;
+	-webkit-transition: opacity 0.2s linear;
+    -moz-transition: opacity 0.2s linear;
+      -o-transition: opacity 0.2s linear;
+         transition: opacity 0.2s linear;
+}

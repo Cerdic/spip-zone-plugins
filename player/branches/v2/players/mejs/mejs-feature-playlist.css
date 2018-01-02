@@ -1,0 +1,114 @@
+/*
+    Document        : mep-feature-playlist.css
+    Author          : Andrew Berezovsky <andrew.berezovsky@gmail.com>
+    Original Author : Junaid Qadir Baloch <shekhanzai.baloch@gmail.com>
+    https://github.com/duozersk/mep-feature-playlist
+*/
+
+/* Start: Show/Hide Playlist*/
+.mejs-controls .mejs-show-playlist button {
+  background: transparent url(controls-playlist.png) no-repeat;
+  background-position: -16px -16px;
+}
+.mejs-controls .mejs-hide-playlist button {
+  background: transparent url(controls-playlist.png) no-repeat;
+  background-position: -16px 0;
+}
+/* End: Show/Hide Playlist */
+
+/* Start: Previous */
+.mejs-controls .mejs-prevtrack button {
+  background: transparent url(controls-playlist.png) no-repeat;
+  background-position: 0 -16px;
+}
+/* End: Previous */
+
+/* Start: Next */
+.mejs-controls .mejs-nexttrack button {
+  background: transparent url(controls-playlist.png) no-repeat;
+}
+/* End: Next */
+
+/* Start: Shuffle */
+.mejs-controls .mejs-shuffle-on button {
+  background: transparent url(controls-playlist.png) no-repeat;
+  background-position: -32px 0;
+}
+.mejs-controls .mejs-shuffle-off button {
+  background: transparent url(controls-playlist.png) no-repeat;
+  background-position: -32px -16px;
+}
+/* End: Shuffle */
+
+/*Start: Playlist*/
+dd.mejs-playlist {
+	margin: 0;
+	text-align: left;
+	padding: 10px;
+	background: #ddd;
+}
+.mejs-playlist ul {
+	margin:0;
+}
+.mejs-playlist .track,
+.mejs-playlist .short.track {
+	cursor: pointer;
+	position: relative;
+	padding-left: 26px;
+}
+.mejs-playlist .track .entry {
+	display: block;padding-left: 34px;
+}
+.mejs-playlist .track .publication {display: none}
+.mejs-playlist .track .entry-content {display: block;margin-bottom: 0}
+.mejs-playlist .track .entry-content :last-child {margin-bottom: 0}
+
+.mejs-playlist .track:hover {
+  background: #eee;
+}
+.mejs-playlist .track.current {
+	background: #fff;
+}
+.mejs-playlist .track.current .entry-title {
+  font-weight: bold;
+}
+.track .mejs-button {
+	float:left;
+	margin-right: 10px;
+	width: 24px;
+	height: 24px;
+	position: relative;
+	z-index: 2;
+}
+.track .mejs-button button {
+	margin: 4px;
+}
+.track .mejs-button button:before {
+	content:"";
+	display: block;
+	position: absolute;
+	top:-4px;
+	left: -4px;
+	background: #666;
+	border-radius:50%;
+	width: 24px;
+	height: 24px;
+	z-index: -1;
+}
+.track:hover .mejs-button button:before,
+.track .mejs-button button:focus:before {
+	background: #333;
+}
+
+.current .mejs-button button:before,
+.current .mejs-button button:focus:before {
+	background: #000;
+}
+.track .mejs-button.mejs-play button {
+	margin-left:5px;
+}
+.track .mejs-button.mejs-play button:before {
+	left:-5px;
+}
+
+/*End: Playlist*/
