@@ -91,6 +91,53 @@ function balise_COLONNES_dist($p) {
 }
 
 /**
+ * Cette balise va permettre de rendre le squelette compatible avec toutes les
+ * versions de Foundation.
+ *
+ * La syntaxe est la suivante:
+ *
+ * ```
+ * [(#BLOCKGRID{#ARRAY{large-up, 4, medium-up, 3, small-up, 3}})]
+ * ```
+ *
+ * Pour activer le calcule automatique en fonction du total d'une boucle :
+ *
+ * ```
+ * [(#BLOCKGRID{#ARRAY{large-up, 4*, medium-up, 3*, small-up, 3*}})]
+ * ```
+ *
+ * @param mixed $p
+ * @access public
+ * @return mixed
+ */
+function balise_BLOCKGRID_dist($p) {
+	// On récupère les paramètres de la balise.
+	$nombre_colonnes = interprete_argument_balise(1, $p);
+	$type = interprete_argument_balise(2, $p);
+
+	// Dans le cas ou on ce trouve dans une boucle SPIP, on va passer le total
+	// de la boucle à la fonction class_grid_foundation.
+	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
+	if ($b !== '') {
+		$total_boucle = "\$Numrows['$b']['total']";
+		$p->boucles[$b]->numrows = true;
+	} else {
+		$total_boucle = 'null';
+	}
+
+	// On met une valeur par défaut à type.
+	if (!$type) {
+		$type = "'large-up'";
+	}
+
+	// On calcule la class
+	$p->code = "class_blocs_foundation($nombre_colonnes, $type, $total_boucle).'columns'";
+	$p->interdire_scripts = false;
+
+	return $p;
+}
+
+/**
  * Générer un bouton d'action qui accepte les class de Foundation.
  *
  * @param mixed $p
@@ -212,7 +259,7 @@ if (!function_exists('balise_LIRE_CONSTANTE_dist')) {
 	}
 }
 
-function balise_CALCULER_COLONNES($p) {
+function balise_CALCULER_COLONNES_dist($p) {
 	// Nombre maximum de colonne
 	$max = interprete_argument_balise(1, $p);
 

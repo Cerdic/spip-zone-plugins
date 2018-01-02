@@ -88,6 +88,56 @@ function calculer_colonnes($max, $total_boucle) {
 }
 
 /**
+ * Cette fonction va créer la class Foundation de la balise #BLOCKGRID
+ *
+ * @param int|array|string $nombre_colonnes Nombre de colonne désiré. Un étoile
+ * (ex: 4*) activera les colonnes calculée
+ * @param  string $type type de colonne: large-up, medium-up ou small-up
+ * @return string $class Foundation applicable directement.
+ */
+function class_blocs_foundation($nombre_colonnes, $type = '', $total_boucle = null) {
+	// Si la première variable est un tableau, on va le convertir en class
+	if (is_array($nombre_colonnes)) {
+		$class= '';
+		foreach ($nombre_colonnes as $key => $value) {
+			// On va traiter le nombre de colonne avant de créer la class css
+			if (strpos($value, '*')) {
+				$calculer_colonnes = true; // L'étoile est détectée, on active les colonnes calculée
+				$value = str_replace('*', '', $value); // Supprimer l'étoile
+			}
+
+			// Utiliser un tableau large => 4
+			if (is_numeric($value)) {
+				if (!is_null($total_boucle) and $calculer_colonnes) {
+					$value = calculer_bloc($value, $total_boucle);
+				}
+
+				$class .= $key.'-'.$value.' ';
+			}
+		}
+		return $class;
+	} else {
+		return $type.'-'.$nombre_colonnes.' ';
+	}
+}
+
+/**
+ * Cette fonction va calculer le nombre de colonne d'une blockgrid et les limiter à $max
+ *
+ * @param int $max nombre maximum de colonne
+ * @param int $total_boucle nombre d'élément dans la boucle
+ * @access public
+ * @return int
+ */
+function calculer_bloc($max, $total_boucle) {
+	if ($total_boucle >= $max) {
+		return $max;
+	} else {
+		return $total_boucle;
+	}
+}
+
+/**
  * Utiliser jQl pour charger les scripts de Foundation
  *
  * @param array $files les fichiers à envoyer dans jQl
