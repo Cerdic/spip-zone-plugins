@@ -278,11 +278,8 @@ function retrouve_document($type, $fulltag, $innerTag, $shorttag) {
 		if (substr($src, 0, strlen(_DIR_IMG)) == _DIR_IMG) {
 			$src = str_replace(_DIR_RACINE, '', $src);
 		}
-		$src = addslashes($src); // soyons prudent tout de meme ...
-		$query = "SELECT id_document FROM spip_documents WHERE fichier='$src'";
-		$res = spip_query($query);
-		if ($row = spip_fetch_array($res)) {
-			$id_document = $row['id_document'];
+		$id_document = sql_getfetsel('id_document', 'spip_documents', 'fichier=' . sql_quote($src));
+		if ($id_document) {
 			$align = '';
 			if (isset($attributs['class'])) {
 				preg_match_all(',spip_documents_([a-zA-Z_]*),ims', $attributs['class'], $classMatches, PREG_SET_ORDER);
