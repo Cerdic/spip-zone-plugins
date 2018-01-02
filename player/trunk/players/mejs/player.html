@@ -3,7 +3,7 @@
 #SET{largeur,#ENV{largeur, #GET{largeur}|?{#GET{largeur},400}}|max{120}}
 <dt class='spip_doc_titre player #ENV{player}'>
 	<div class="mejs-audio-wrapper audio-wrapper"[ style='width:(#GET{largeur})px;max-width:100%;margin:0 auto;']>
-		<audio class="mejs mejs__player[ mejs-(#GET{id_document})][ mejs-(#ENV{skin})][(#ENV{playlist}|oui)mejs-playlist]"
+		<audio class="mejs mejs__player[ mejs-(#GET{id_document})][ mejs__(#ENV{skin})][(#ENV{playlist}|oui)mejs__playlist]"
 		       data-id="[(#VAL{mejs-#GET{id_document}}|concat{'-',#GET{url},'-',#ENV{skin},}|md5)]"
 		       src="#GET{url}"
 		       type="#MIME_TYPE"
