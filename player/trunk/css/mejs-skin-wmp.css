@@ -1,40 +1,53 @@
 /* WMP player */
-.mejs-container.mejs-wmp {
+.mejs__container.mejs__wmp {
 	height: 65px !important;
 	background: none;
 }
-.mejs-wmp .mejs-controls {
+.mejs__wmp .mejs__controls {
 	background: transparent url(img/controls-wmp-bg.png) center 16px no-repeat;
 	height: 65px;
 }
 
-.mejs-wmp .mejs-button,
-.mejs-wmp .mejs-time {
+.mejs__wmp .mejs__button,
+.mejs__wmp .mejs__time {
 	position: absolute;
 	background: transparent;
 }
-.mejs-wmp .mejs-controls .mejs-time-rail .mejs-time-total {
+.mejs__wmp .mejs__time {
+	padding: 10px 4px 0;
+}
+
+.mejs__wmp .mejs__controls .mejs__time-rail {
+	height: 20px;
+	padding-top: 5px;
+}
+
+.mejs__wmp .mejs__controls .mejs__time-rail .mejs__time-total {
 	background-color: transparent;
 	border: solid 1px #ccc;
 	height: 3px;
 }
-.mejs-wmp .mejs-controls .mejs-time-rail .mejs-time-buffering {
+.mejs__wmp .mejs__controls .mejs__time-rail .mejs__time-buffering {
 	height: 3px;
 }
-.mejs-wmp .mejs-controls .mejs-time-rail .mejs-time-loaded {
+.mejs__wmp .mejs__controls .mejs__time-rail .mejs__time-loaded {
 	background-color: rgba(255,255,255,0.3);
 	width: 0;
 	height: 3px;
 }
-.mejs-wmp .mejs-controls .mejs-time-rail .mejs-time-current {
-	width: 0;
+
+.mejs__wmp .mejs__controls .mejs__time-rail .mejs__time-hovered {
+	height: 3px;
+}
+
+.mejs__wmp .mejs__controls .mejs__time-rail .mejs__time-current {
 	height: 1px;
 	background-color: #014CB6;
 	border: solid 1px #7FC9FA;
 	border-width: 1px 0;
 	border-color: #7FC9FA #fff #619FF2 #fff;
 }
-.mejs-wmp .mejs-controls .mejs-time-rail .mejs-time-handle  {
+.mejs__wmp .mejs__controls .mejs__time-rail .mejs__time-handle  {
 	display: block;
 	margin: 0;
 	width: 16px;
@@ -43,10 +56,16 @@
 	border: 0;
 	background: url(img/controls-wmp.png) no-repeat 0 -80px;
 }
-.mejs-wmp .mejs-controls .mejs-time-rail .mejs-time-float {	
+.mejs__wmp .mejs__controls .mejs__time-rail .mejs__time-handle .mejs__time-handle-content {
+	left: 0;
 	display: none;
 }
-.mejs-wmp .mejs-controls .mejs-playpause-button  {
+
+
+.mejs__wmp .mejs__controls .mejs__time-rail .mejs__time-float {	
+	display: none;
+}
+.mejs__wmp .mejs__controls .mejs__playpause-button  {
 	top: 10px;
 	left: 50%;
 	margin: 10px 0 0 -20px;	
@@ -54,24 +73,24 @@
 	height: 40px;
 	
 }
-.mejs-wmp .mejs-controls .mejs-playpause-button  button {
+.mejs__wmp .mejs__controls .mejs__playpause-button  button {
 	width: 40px;
 	height: 40px;
 	background: url(img/controls-wmp.png) no-repeat 0 0;
 	margin: 0;
 	padding: 0;
 }
-.mejs-wmp .mejs-controls .mejs-pause button  {
+.mejs__wmp .mejs__controls .mejs__pause button  {
 	background-position: 0 -40px;
 }
 
-.mejs-wmp .mejs-controls .mejs-currenttime-container  {
+.mejs__wmp .mejs__controls .mejs__currenttime-container  {
 	position: absolute;
 	top: 25px;
 	left: 50%;
 	margin-left: -93px;
 }
-.mejs-wmp .mejs-controls .mejs-duration-container  {
+.mejs__wmp .mejs__controls .mejs__duration-container  {
 	position: absolute;
 	top: 25px;
 	left: 50%;
@@ -79,46 +98,50 @@
 }
 
 
-.mejs-wmp .mejs-controls .mejs-volume-button  {
+.mejs__wmp .mejs__controls .mejs__volume-button  {
 	top: 32px;
 	right: 50%;
 	margin-right: -55px;
 	width: 20px;
 	height: 15px;
 }
-.mejs-wmp .mejs-controls .mejs-volume-button button {
+.mejs__wmp .mejs__controls .mejs__volume-button button {
 	margin: 0;
 	padding: 0;
 	background: url(img/controls-wmp.png) no-repeat -42px -17px;
 	width: 20px;
 	height: 15px;
 }
-.mejs-wmp .mejs-controls .mejs-unmute button {
+.mejs__wmp .mejs__controls .mejs__unmute button {
 	margin: 0;
 	padding: 0;
 	background: url(img/controls-wmp.png) no-repeat -42px 0;
 	width: 20px;
 	height: 15px;
 }
-.mejs-wmp .mejs-controls .mejs-volume-button .mejs-volume-slider {
+.mejs__wmp .mejs__controls .mejs__volume-button .mejs__volume-slider {
 	background: rgba(102,102,102,0.6);
 }
 
-.mejs-wmp .mejs-controls .mejs-fullscreen-button  {
+.mejs__wmp .mejs__controls .mejs__horizontal-volume-total {
+	top:8px;
+}
+
+.mejs__wmp .mejs__controls .mejs__fullscreen-button  {
 	top: 32px;
 	right: 50%;
 	margin-right: -82px;
 	width: 15px;
 	height: 14px;
 }
-.mejs-wmp .mejs-controls .mejs-fullscreen-button  button {
+.mejs__wmp .mejs__controls .mejs__fullscreen-button  button {
 	margin: 0;
 	padding: 0;
 	background: url(img/controls-wmp.png) no-repeat -63px 0;
 	width: 15px;
 	height: 14px;
 }
-.mejs-wmp .mejs-controls .mejs-captions-button {
+.mejs__wmp .mejs__controls .mejs__captions-button {
 	display: none;
 }
 /* END: WMP player */
