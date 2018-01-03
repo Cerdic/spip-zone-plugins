@@ -1,56 +1,64 @@
 /* Dewplayer */
-.mejs-container.mejs-dewplayer {
+.mejs__container.mejs__dewplayer {
 	background: none;
 }
-.mejs-dewplayer .mejs-controls {
+.mejs__dewplayer .mejs__controls {
 	background: none;
 }
-.mejs-dewplayer .mejs-controls .mejs-playpause-button  {
+
+.mejs__dewplayer .mejs__controls, .mejs__dewplayer .mejs__button, .mejs__dewplayer .mejs__time, .mejs__dewplayer .mejs__time-rail {
+	height: 30px;
+}
+
+.mejs__dewplayer .mejs__controls .mejs__playpause-button  {
 	width: 42px;
 }
-.mejs-dewplayer .mejs-controls .mejs-playpause-button button {
+.mejs__dewplayer .mejs__controls .mejs__playpause-button button {
 	background: url(img/controls-dewplayer.png) no-repeat left -32px;
 	width: 36px;
 	margin-right: 0;
+	margin-top: 7px;
 }
-.mejs-dewplayer .mejs-controls .mejs-play button:hover {
+.mejs__dewplayer .mejs__controls .mejs__play button:hover {
 	background-position: left 0;
 }
-.mejs-dewplayer .mejs-controls .mejs-pause button {
+.mejs__dewplayer .mejs__controls .mejs__pause button {
 	background-position: left -64px;
 }
-.mejs-dewplayer .mejs-controls .mejs-pause button:hover {
+.mejs__dewplayer .mejs__controls .mejs__pause button:hover {
 	background-position: left -96px;
 }
 
-.mejs-dewplayer .mejs-controls div.mejs-time-rail {
+.mejs__dewplayer .mejs__controls div.mejs__time-rail {
 	padding-top: 2px;
 }
-.mejs-dewplayer .mejs-controls .mejs-time-rail span {
+.mejs__dewplayer .mejs__controls .mejs__time-rail span {
 	height:16px;
 	border-radius: 4px;
 }
-.mejs-dewplayer .mejs-controls .mejs-time {
+.mejs__dewplayer .mejs__controls .mejs__time {
 	padding-top: 5px;
+	height: 25px;
 }
-.mejs-dewplayer .mejs-controls .mejs-time-rail .mejs-time-total {
+.mejs__dewplayer .mejs__controls .mejs__time-rail .mejs__time-total {
 	background: #eaeaea;
 }
-.mejs-dewplayer .mejs-controls .mejs-time-rail .mejs-time-loaded {
+.mejs__dewplayer .mejs__controls .mejs__time-rail .mejs__time-loaded {
 	background: #eaeaea;
 }
-.mejs-dewplayer .mejs-controls .mejs-time-rail .mejs-time-current {
+.mejs__dewplayer .mejs__controls .mejs__time-rail .mejs__time-current {
 	background: #A7DE6B;
 }
-.mejs-dewplayer .mejs-controls .mejs-currenttime-container{
+.mejs__dewplayer .mejs__controls .mejs__currenttime-container{
 	position: absolute;
-	top:4px;
+	top:6px;
 	right:50%;
 	margin-right: -18px;
 	color:#fff;
 	z-index:2;
+	height: 12px;
 }
-.mejs-dewplayer .mejs-controls .mejs-currenttime-container::after {
+.mejs__dewplayer .mejs__controls .mejs__currenttime-container::after {
 	content:"|";
 	display: block;
 	position: absolute;
@@ -61,19 +69,20 @@
 	width:auto;
 	padding:5px 0 0;
 }
-.mejs-dewplayer .mejs-controls .mejs-duration-container {
+.mejs__dewplayer .mejs__controls .mejs__duration-container {
 	position: absolute;
-	top:4px;
+	top:6px;
 	left:50%;
 	margin-left: 18px;
 	color:#fff;
 	z-index:2;
+	height: 12px;
 }
-.mejs-dewplayer .mejs-controls .mejs-volume-button {
+.mejs__dewplayer .mejs__controls .mejs__volume-button {
 	width:1px;
 	visibility:hidden;
 }
-.mejs-dewplayer .mejs-controls div.mejs-horizontal-volume-slider {
+.mejs__dewplayer .mejs__controls .mejs__horizontal-volume-slider {
 	width:1px;
 	visibility:hidden;
 }
