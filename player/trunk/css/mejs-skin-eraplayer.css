@@ -1,42 +1,42 @@
 /* Dewplayer */
-.mejs-container.mejs-eraplayer {
+.mejs__container.mejs__eraplayer {
 	background: none;
 	height:20px !important;
 	width:24px !important;
 	margin: 0 auto;
 }
-.mejs-eraplayer .mejs-controls {
+.mejs__eraplayer .mejs__controls {
 	background: none;
 	height:20px;
 }
-.mejs-eraplayer .mejs-controls .mejs-playpause-button {
+.mejs__eraplayer .mejs__controls .mejs__playpause-button {
 	width: 24px;
 	height:20px;
 }
-.mejs-eraplayer .mejs-controls .mejs-playpause-button button {
+.mejs__eraplayer .mejs__controls .mejs__playpause-button button {
 	position:relative;
 	background: url(img/controls-eraplayer.png) no-repeat center -2px;
 	width: 24px;
 	height:20px;
 	margin: 0;
 }
-.mejs-eraplayer .mejs-controls .mejs-playpause-button button:hover {
+.mejs__eraplayer .mejs__controls .mejs__playpause-button button:hover {
 	background-position: center -26px;
 }
 
 
-.mejs-eraplayer .mejs-controls .mejs-time-rail {
+.mejs__eraplayer .mejs__controls .mejs__time-rail {
 	display: none;
 }
-.mejs-eraplayer .mejs-controls .mejs-currenttime-container {
+.mejs__eraplayer .mejs__controls .mejs__currenttime-container {
 	display: none;
 }
-.mejs-eraplayer .mejs-controls .mejs-duration-container {
+.mejs__eraplayer .mejs__controls .mejs__duration-container {
 	display: none;
 }
-.mejs-eraplayer .mejs-controls .mejs-volume-button {
+.mejs__eraplayer .mejs__controls .mejs__volume-button {
 	display: none;
 }
-.mejs-eraplayer .mejs-controls div.mejs-horizontal-volume-slider {
+.mejs__eraplayer .mejs__controls .mejs__horizontal-volume-slider {
 	display: none;
 }
