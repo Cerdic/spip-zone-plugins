@@ -17,9 +17,8 @@ var mejsloader;
 		L.init = function (){
 			if (!(L.gs===true)) return;
 			(function ($){
-				jQuery("audio.mejs,video.mejs").not('.done').each(function (){
+				jQuery("audio.mejs,video.mejs").not('.done,.mejs__player').each(function (){
 					var me = jQuery(this).addClass('done');
-					//console.log(this);
 					var id;
 					if (!(id = me.attr('id'))){
 						id = "mejs-"+(me.attr('data-id'))+"-"+(L.c++);
@@ -31,16 +30,12 @@ var mejsloader;
 					}
 					function runthisplayer(){
 						var run = true;
-						//console.log(css);
 						for (var c in opt.css){
 							L.cssload(opt.css[c]);
 						}
 						for (var p in opt.plugins){
-							//console.log(p);
-							//console.log(L.plug[p]);
 							// load this plugin
 							if (typeof L.plug[p]=="undefined"){
-								//console.log("Load Plugin "+p);
 								run = false;
 								L.plug[p] = false;
 								jQuery.getScript(opt.plugins[p], function (){
@@ -50,31 +45,33 @@ var mejsloader;
 							}
 							// this plugin is loading
 							else if (L.plug[p]==false){
-								//console.log("Plugin "+p+" loading...");
 								run = false;
-							}
-							else {
-								//console.log("Plugin "+p+" loaded");
 							}
 						}
 						if (run){
-							new MediaElementPlayer('#'+id, jQuery.extend(opt.options, {
-								"success": function (media){
-									function togglePlayingState(){
-										jQuery(media).closest('.mejs-inner').removeClass(media.paused ? 'playing' : 'paused').addClass(media.paused ? 'paused' : 'playing');
+							jQuery('#'+id).mediaelementplayer(jQuery.extend(opt.options, {
+									"success": function (media, node){
+										function togglePlayingState(){
+											var inner = jQuery(media).closest('.mejs__inner');
+											if (!media.paused) {
+												inner.removeClass('paused').removeClass('pausing').addClass('playing');
+											}
+											else {
+												inner.addClass('pausing');
+												setTimeout(function(){inner.filter('.pausing').removeClass('playing').removeClass('pausing').addClass('paused');},100);
+											}
+										}
+										togglePlayingState();
+										media.addEventListener('play', togglePlayingState, false);
+										media.addEventListener('playing', togglePlayingState, false);
+										media.addEventListener('pause', togglePlayingState, false);
+										media.addEventListener('paused', togglePlayingState, false);
+										if (me.attr('autoplay')) media.play();
 									}
-
-									togglePlayingState();
-									media.addEventListener('play', togglePlayingState, false);
-									media.addEventListener('playing', togglePlayingState, false);
-									media.addEventListener('pause', togglePlayingState, false);
-									media.addEventListener('paused', togglePlayingState, false);
-									if (me.attr('autoplay')) media.play();
-								}
-							}));
+								})
+							);
 						}
 					}
-
 					runthisplayer();
 				})
 			})(jQuery);
