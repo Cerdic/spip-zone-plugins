@@ -11,6 +11,11 @@ function precode_insert_head($flux) {
 	return $flux;
 }
 
+function precode_header_prive($flux) {
+	$flux .= '<link rel="stylesheet" href="' . find_in_path('css/precode.css') . '" type="text/css" media="all" />' . "\n";
+
+	return $flux;
+}
 
 if(!function_exists('produire_fond_statique')) {
 	/**
