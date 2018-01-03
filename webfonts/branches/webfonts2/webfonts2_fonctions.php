@@ -40,10 +40,11 @@ function googlefont_request($webfonts,$subsets=''){
 function google_font_search($fonts, $search){
 	$res = array();
 	if (is_array($fonts)) {
-		foreach($fonts as $item){
+		foreach($fonts['items'] as $item){
 			( preg_match('/' . trim($search) . '/i', $item['family']) ) ? $res[] = $item : false;
 		}
 	}
+	var_dump($res);
 	return $res;
 }
 
