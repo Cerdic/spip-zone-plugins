@@ -98,7 +98,7 @@ function filtre_balance($type) {
 	$password = lire_config('sms/cle_api_octopush');
 
 	require_once('classes/octopush/sms.inc.php');
-	$sms = new SMS();
+	$sms = new SMS_OCTOSPUSH();
 
 	$sms->set_user_login($username);
 	$sms->set_api_key($password);
