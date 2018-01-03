@@ -1,0 +1,23 @@
+<paquet
+	prefix="valider_xml"
+	categorie="outil"
+	version="1.0.0"
+	etat="experimental"
+	compatibilite="[3.3.0-dev;3.3.*]"
+	logo="prive/themes/spip/images/valider_xml-64.png"
+	documentation=""
+>
+	<!--
+		Paquet généré le 2018-01-03 10:46:17
+	-->
+
+	<nom>Valider XML</nom>
+	<!-- Visualisation de validations XML -->
+
+	<auteur>Collectif SPIP</auteur>
+
+	<licence>GNU/GPL</licence>
+
+
+
+</paquet>
