@@ -44,8 +44,55 @@ function bouq_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter',"TABLE spip_livres CHANGE  `ISBN` `isbn` VARCHAR(20) NOT NULL DEFAULT ''")
 	);
 
+	/* ajout de deux champs : sommaire et collection */
+	$maj['1.0.4'] = array(
+		array('sql_alter',"TABLE spip_livres ADD  `editeur` TEXT NOT NULL DEFAULT '' AFTER soustitre"),
+		array('sql_alter',"TABLE spip_livres ADD  `collection` TEXT NOT NULL DEFAULT '' AFTER editeur"),
+		array('sql_alter',"TABLE spip_livres ADD  `sommaire` TEXT NOT NULL DEFAULT '' AFTER texte"),
+		array('bouq_init_metas')
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
+}
+
+/**
+ * Avec la version 1.2 du plugin, on rend certains champs déjà existant optionnels.
+ * Par défaut, la méta correspondante n'est pas renseignée, donc considérée comme inactive.
+ * Lors de la mise à jour, on vérifie si le rédacteur du site a déjà renseigné certains de ces champs. Si oui, le champ devient actif.
+ * 
+ * @param string $nom_meta_base_version
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * @return void
+**/
+function bouq_init_metas() {
+	$champs_text = array('soustitre','volume', 'edition', 'traduction', 'texte', 'extrait', 'infos_sup', 'isbn', 'reliure');
+	$champs_num  = array('largeur', 'hauteur', 'poids', 'prix');
+
+	// Livre : traiter les champs textes
+	foreach ($champs_text as $value) {
+		if (sql_countsel('spip_livres', "$value != ''") > 0) {
+			ecrire_config("bouq/livres/$value", 'on');
+		}
+	}
+	// Livre : traiter les champs numeriques
+	foreach ($champs_num as $value) {
+		if (sql_countsel('spip_livres', "$value > 0") > 0) {
+			ecrire_config("bouq/livres/$value", 'on');
+		}
+	}
+	// Livre : spécial pages
+	if (sql_countsel('spip_livres', "pages IS NOT NULL") > 0) {
+		ecrire_config("bouq/livres/pages", 'on');
+	}
+
+	// Auteur de livre
+	if (sql_countsel('spip_livres_auteurs', "biographie != ''") > 0) {
+		ecrire_config("bouq/auteurs/bio", 'on');
+	}
+	if (sql_countsel('spip_livres_auteurs', "lien_titre != ''") > 0) {
+		ecrire_config("bouq/auteurs/site_auteur", 'on');
+	}
 }
 
 

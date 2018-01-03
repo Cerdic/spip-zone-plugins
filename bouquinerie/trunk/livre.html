@@ -23,6 +23,7 @@
 				<header class="cartouche clearfix">
 					<h1 class="#EDIT{titre} surlignable entry-title">[(#LOGO_LIVRE|image_reduire{150,*}) ]#TITRE</h1>
 					[<h2 class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</h2>]
+					[<div class="#EDIT{editeur} editeur">(#EDITEUR)</div>]
 					<time pubdate>[(#DATE_PARUTION|affdate_mois_annee)][ <span class="sep">((#EDITION))</span>]</time>
 					<div class="auteurs">Auteur(s) : <INCLURE{fond=inclure/auteur_signature, id_livre, role=ecrivain, lien=oui}></div>
 					[(#STATUT|=={refuse}|oui)<b class="h4 txt-rouge">Livre épuisé</b>]
@@ -32,10 +33,12 @@
 					<INCLURE{fond=inclure/auteur_signature, id_livre, role=prefacier, lien=oui}>
 
 					Collection : <b>#INFO_TITRE{rubrique, #ID_RUBRIQUE}</b>
+					[<br>Collection : (#COLLECTION)]
 					[<br>Numéro dans la collection : (#VOLUME)]
 				</header>
 				<main>
 					[<div class="#EDIT{texte} texte surlignable clearfix">(#TEXTE|image_reduire{672,*})</div>]
+					[<div class="#EDIT{sommaire} sommaire surlignable clearfix">(#SOMMAIRE|image_reduire{672,*})</div>]
 					[<hr /><quote class="#EDIT{extrait} extrait surlignable">(#EXTRAIT|image_reduire{672,*})</i></quote>]
 				</main>
 				<footer class="clearfix">

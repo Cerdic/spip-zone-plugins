@@ -13,8 +13,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_exemple' => 'Exemple',
 	'cfg_exemple_explication' => 'Explication de cet exemple',
-	'cfg_titre_parametrages' => 'Paramétrages',
+	'cfg_titre_contenu_livres' => 'Contenus des livres',
+	'cfg_titre_contenu_auteurs' => 'Contenus des auteurs de livre',
 
 	// T
-	'titre_page_configurer_bouq' => 'Configurer Auteurs de livres',
+	'titre_page_configurer_bouq' => 'Bouquinerie',
+	'texte_contenus' => 'Selon la maquette adoptée pour votre site, vous pouvez décider que certains éléments des livres ou auteurs de livre ne sont pas utilisés. Utilisez les listes ci-dessous pour indiquer quels éléments sont disponibles.',
 );

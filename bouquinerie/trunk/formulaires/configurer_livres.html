@@ -1,0 +1,59 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:bouq:cfg_titre_contenu_livres:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class="editer-groupe">
+
+			[(#SAISIE{oui_non_ligne, soustitre, label=<:livre:champ_soustitre_label:>, li_class=long_label})]
+			[(#SAISIE{oui_non_ligne, editeur, label=<:livre:champ_editeur_label:>, li_class=long_label})]
+			[(#SAISIE{oui_non_ligne, edition, label=<:livre:champ_edition_label:>, li_class=long_label})]
+			[(#SAISIE{oui_non_ligne, traduction, label=<:livre:champ_traduction_label:>, li_class=long_label})]
+
+			<hr style="background-color:#ccc;">
+
+			[(#SAISIE{oui_non_ligne, collection, label=<:livre:champ_collection_label:>, li_class=long_label})]
+			[(#SAISIE{oui_non_ligne, volume, label=<:livre:champ_volume_label:>, li_class=long_label})]
+
+			<hr style="background-color:#ccc;">
+
+			#SET{name,texte}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<div class="editer long_label editer_presentation[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:livre:champ_texte_label:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="on"
+					[(#ENV{#GET{name}}|=={on}|oui)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
+					&nbsp;&nbsp;
+					<input type="radio" name="#GET{name}" id="#GET{name}_non" value=""
+					[(#ENV{#GET{name}}|=={on}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
+				</div>
+			</div>
+			[(#SAISIE{oui_non_ligne, sommaire, label=<:livre:champ_sommaire_label:>, li_class=long_label})]
+			[(#SAISIE{oui_non_ligne, extrait, label=<:livre:champ_extrait_label:>, li_class=long_label})]
+			[(#SAISIE{oui_non_ligne, infos_sup, label=<:livre:champ_infos_sup_label:>, li_class=long_label})]
+		</div>
+
+		<fieldset>
+			<legend><:livre:caracteristiques:></legend>
+			<div class="editer-groupe">
+				[(#SAISIE{oui_non_ligne, isbn, label=<:livre:champ_isbn_label:>, li_class=long_label})]
+				[(#SAISIE{oui_non_ligne, pages, label=<:livre:champ_pages_label:>, li_class=long_label})]
+				[(#SAISIE{oui_non_ligne, reliure, label=<:livre:champ_reliure_label:>, li_class=long_label})]
+				[(#SAISIE{oui_non_ligne, largeur, label=<:livre:champ_largeur_label:>, li_class=long_label})]
+				[(#SAISIE{oui_non_ligne, hauteur, label=<:livre:champ_hauteur_label:>, li_class=long_label})]
+				[(#SAISIE{oui_non_ligne, poids, label=<:livre:champ_poids_label:>, li_class=long_label})]
+				[(#SAISIE{oui_non_ligne, prix, label=<:livre:champ_prix_label:>, li_class=long_label})]
+			</div>
+		</fieldset>
+
+		<input type="hidden" name="_meta_casier" value="bouq/livres" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

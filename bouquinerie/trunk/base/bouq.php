@@ -30,6 +30,7 @@ function bouq_declarer_tables_interfaces($interfaces) {
 
 	/* Livres */
 	$interfaces['table_des_traitements']['TRADUCTION'][] = _TRAITEMENT_RACCOURCIS;
+	$interfaces['table_des_traitements']['SOMMAIRE'][] = _TRAITEMENT_RACCOURCIS;
 	$interfaces['table_des_traitements']['EXTRAIT'][] = _TRAITEMENT_RACCOURCIS;
 
 	/* Auteurs de livre */
@@ -59,10 +60,13 @@ function bouq_declarer_tables_objets_sql($tables) {
 			'id_secteur'         => 'bigint(21) NOT NULL DEFAULT 0',
 			'titre'              => 'text NOT NULL DEFAULT ""',
 			'soustitre'          => 'text NOT NULL DEFAULT ""',
+			'editeur'          	 => 'text NOT NULL DEFAULT ""',
+			'collection'         => 'text NOT NULL DEFAULT ""',
 			'volume'             => 'text NOT NULL DEFAULT ""',
 			'edition'            => 'text NOT NULL DEFAULT ""',
 			'traduction'         => 'text NOT NULL DEFAULT ""',
 			'texte'              => 'text NOT NULL DEFAULT ""',
+			'sommaire'           => 'text NOT NULL DEFAULT ""',
 			'extrait'            => 'text NOT NULL DEFAULT ""',
 			'infos_sup'          => 'text NOT NULL DEFAULT ""',
 			'isbn'               => 'varchar(13) NOT NULL DEFAULT ""',
@@ -90,9 +94,9 @@ function bouq_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => 'titre AS titre, lang AS lang',
 		'date' => 'date_parution',
-		'champs_editables'  => array('titre', 'soustitre', 'volume', 'edition', 'traduction', 'texte', 'extrait', 'infos_sup', 'isbn', 'pages', 'reliure', 'largeur', 'hauteur', 'poids', 'prix', 'date_parution', 'date_nouvelle_edition', 'id_rubrique', 'id_secteur'),
-		'champs_versionnes' => array('isbn', 'id_rubrique', 'id_secteur'),
-		'rechercher_champs' => array("titre" => 10, "soustitre" => 8),
+		'champs_editables'  => array('titre', 'soustitre', 'editeur', 'collection', 'volume', 'edition', 'traduction', 'texte', 'sommaire', 'extrait', 'infos_sup', 'isbn', 'pages', 'reliure', 'largeur', 'hauteur', 'poids', 'prix'),
+		'champs_versionnes' => array('titre', 'soustitre', 'editeur', 'collection', 'volume', 'edition', 'traduction', 'texte', 'sommaire', 'extrait', 'infos_sup', 'isbn', 'pages', 'reliure', 'largeur', 'hauteur', 'poids', 'prix'),
+		'rechercher_champs' => array("titre" => 10, "soustitre" => 8, "isbn" => 5),
 		'tables_jointures'  => array(),
 		'statut_textes_instituer' => array(
 			'prepa'    => 'texte_statut_en_cours_redaction',
@@ -145,7 +149,7 @@ function bouq_declarer_tables_objets_sql($tables) {
 		'titre' => "CONCAT(prenom,' ',nom) AS titre, '' AS lang",
 		 #'date' => '',
 		'champs_editables'  => array('nom', 'prenom', 'biographie', 'lien_titre', 'lien_url'),
-		'champs_versionnes' => array(),
+		'champs_versionnes' => array('nom', 'prenom', 'biographie', 'lien_titre', 'lien_url'),
 		'rechercher_champs' => array("nom" => 8, "prenom" => 6, "biographie" => 2),
 		'tables_jointures'  => array('livres_auteurs_liens'),
 		'statut_textes_instituer' => array(

@@ -12,9 +12,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_livre' => 'Ajouter ce livre',
 
 	// C
+	'caracteristiques' => 'Caractéristiques',
+	'champ_collection_label' => 'Collection',
 	'champ_date_parution_label' => 'Date de parution',
 	'champ_date_nouvelle_edition_label' => 'Date nouvelle édition',
-	'champ_edition_label' => 'Édition',
+	'champ_editeur_label' => 'Éditeur(s)',
+	'champ_edition_label' => 'Mention nouvelle édition',
 	'champ_extrait_label' => 'Extrait',
 	'champ_hauteur_explication' => 'en cm',
 	'champ_hauteur_label' => 'Hauteur',
@@ -29,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_prix_label' => 'Prix',
 	'champ_reliure_explication' => 'Brochée, collée, etc.',
 	'champ_reliure_label' => 'Reliure',
+	'champ_sommaire_label' => 'Sommaire',
 	'champ_soustitre_label' => 'Soustitre',
 	'champ_texte_label' => 'Présentation',
 	'champ_titre_label' => 'Titre',
