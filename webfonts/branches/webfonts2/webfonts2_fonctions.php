@@ -44,7 +44,6 @@ function google_font_search($fonts, $search){
 			( preg_match('/' . trim($search) . '/i', $item['family']) ) ? $res[] = $item : false;
 		}
 	}
-	var_dump($res);
 	return $res;
 }
 
