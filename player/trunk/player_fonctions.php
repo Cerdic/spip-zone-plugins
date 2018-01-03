@@ -17,8 +17,9 @@ function player_call_js() {
 	lire_fichier(find_in_path("javascript/mejs-enclosure.min.js"),$enclosure);
 	lire_fichier(find_in_path("javascript/mejs-init.min.js"),$init);
 	$mejspath = timestamp(find_in_path("lib/mejs/mediaelement-and-player.min.js"));
+	$mecss = timestamp(find_in_path("lib/mejs/mediaelementplayer.min.css"));
 	$flux = '<script type="text/javascript">/*<![CDATA[*/'
-		. "var mejspath='$mejspath';\n$enclosure\n$init\n"
+		. "var mejspath='$mejspath',mejscss='$mecss';\n$enclosure\n$init\n"
 		. "/*]]>*/</script>\n";
 
 	return $flux;
