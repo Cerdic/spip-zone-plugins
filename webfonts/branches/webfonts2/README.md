@@ -1,199 +1,23 @@
 # WebFonts 2
 
-Le chargement de webfonts peut impacter sur le rendu des pages,
-sur l'accessibilité au contenus, sur les performances de votre page.
-Il conviens donc d'en être conscient et de les utiliser en connaissance de cause.
-
-Outre les considérations d'ordre esthétique et typographique,
-il est recommandé de ne pas utiliser plus de deux ou trois variantes de fonts,
-afin de ne pas détériorer les performances de chargement de vos pages.
-
-Le plugin insert dans le head et en tête des autres styles
-les balise link ou style nécessaires. La requête vers google font pour l'insertion des polices ne nécessite pas d'accès a l'api, cependant pour pouvoir utiliser la recherche dans l'index GoogleFont, utiliser le sélecteur générique, un accès a l'API est nécessaire.
-
-## Techniques de chargement de fonts :
-
-Les stratégies de chargement de font comparées par 
-https://www.zachleat.com/web/comprehensive-webfonts/
-
-
-### Google webfont :
-
-Utilisation du service google web font, via une requête.
-
-### Css
-
-La rêgle css `@font-face` : 
-https://developer.mozilla.org/fr/docs/Web/CSS/@font-face
-
-
-```css
-/* latin */
-@font-face {
-  font-family: 'Open Sans';
-  font-style: italic;
-  font-weight: 400;
-  src: local('Open Sans Italic'), local('OpenSans-Italic'), url(https://fonts.gstatic.com/s/opensans/v15/xjAJXh38I15wypJXxuGMBogp9Q8gbYrhqGlRav_IXfk.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
-}
-```
-
-
-
-## Fonctionalités
-
-* insertion auto des polices ajoutées a la pipeline font_list ou depuis la configuration
-* Ajoute une pipeline pour que les plugins theme puisse activer leurs polices
-* Propose un sélecteur générique permettant de parcourir l'index GoogleFont (nécessite l'API key, selecteur_generique)
-* Propose une page permettant de parcourir la typothèque googleFont, avec filtrage, recherche, prévisualisation (nécessite l'API key).
-
-## Configuration:
-
-### GoogleFonts API Key
-
-Pour pouvoir afficher les fonts via l'api GoogleFont, il est nécessaire d'avoir
-préalablement récupéré une clef d'accès aux API Google et sélectionné GoogleFont dans les APIs interrogeables.
-
-Cette clef, peut être définie depuis un squelette ou un plugin, via un define.
-
-```
-define('_GOOGLE_API_KEY', 'votre_clef_google_api');
-```
-
-ou via la configuration du plugin.
-
-### Méthode d'insertion
-
-Propose plusieurs techniques d'intégration/chargement de webfont
-
-* insertion standard via la balise `<link>`
-* insertion @import via une balise `<style>`
-
-### Sélection des webfonts
-
-Un sélecteur générique permet de proposer les webfonts disponibles depuis le fichier index google_font
-la liste de webfont est généré sous la forme `family:variant,family2:variant3`,
-les fonts configurées sont ajoutées à la pipeline `font_list`.
-
-### Liste des webfonts chargées
-
-La liste des webfonts chargées via la pipeline, avec possibilité de prévisualiser
-
-
-## Pipeline font_list
-
-Description d'une font dans la font list :
-
-* family : Nom de la famille de police
-* variants : italic,bold
-* subsets : les subsets sont nécessaires uniquement pour les navigateurs ne supportant pas la propriété unicode-range,
-pour les autres les subsets sont ignorés, et le navigateur choisira ce qui est nécessaire dans le DOM.
-Explication sur les subsets : https://developers.google.com/fonts/docs/getting_started#Subsets
-Navigateurs supportant `unicode-range` : https://caniuse.com/#feat=font-unicode-range
-
-
-### Depuis un squelette
-
-via le fichier `mes_options.php`
-
-```php
-// Exemple d'ajout dans le pipeline "fonts_list" :
-$GLOBALS['spip_pipeline']['fonts_list'] .= "|skel_webfonts";
- 
-function skel_webfonts($fonts) {
-	$fonts = array(
-		'0'=> array(
-			'family'=> 'Open Sans',
-			'variants'=> array('300','300italic','regular','italic','600')
-		),
-		'1'=> array(
-			'family'=> 'Montserrat',
-			'variants'=> array('regular','800')
-		)
-	);
-    return $fonts;
-}
-```
-
-### Depuis un plugin
-
-Utilisation de la pipeline `fonts_list()`.
-
-Ajouter au `paquet.xml`
-
-```xml
-<pipeline nom="fonts_list" inclure="prefix_plugin_pipelines.php" />
-```
-
-
-```php
-
-function prefix_plugin_fonts_list($fonts){
-	$fonts = array(
-		'0'=> array(
-			'family'=> 'Open Sans',
-			'variants'=> array('300','300italic','regular','italic','600'),
-			'subsets'=>array()
-		),
-		'1'=> array(
-			'family'=> 'Roboto Condensed',
-			'variants'=> array('700','800'),
-			'subsets'=>array()
-		)
-	);
-	
-	return $fonts;
-}
-```
-
-
-
-----
-
-
-
-
-## Sources & Docs
-
-https://developers.google.com/fonts/docs/developer_api
-
-Article sur l'implémentation du webfont loader
-Présentation par cssTricks du webfontLoader :
-https://css-tricks.com/loading-web-fonts-with-the-web-font-loader/
-
-Google font : webfont loader https://github.com/typekit/webfontloader
-
-ZACH LEATHERMAN (Filament Group):
-webfont loading strategies : https://www.zachleat.com/web/comprehensive-webfonts/
-
-Etapes du chargement d'une font dans le navigateur :
-https://font-display.glitch.me/
-
-### Des plugins spip ou techniques d'intégration d'utilisation de font/polices
-
-Plugin spip permettant d'utiliser les images typographiques via un modèle
-https://contrib.spip.net/Choix-Police-Typo
-
-Le filtre image_typo :
-
-https://www.spip.net/fr_article3325.html
-
-
-
-### Typothèques
-
-https://fontlibrary.org/
-https://www.fontsquirrel.com/tools/webfont-generator
+La documentation est cours de rédaction sur le wiki de spip-contrib :
+https://contrib.spip.net/WebFonts-2
 
 
 ## ToDo
 
-- GogleAPIKey : pour le listage et l'accès a la typthèque
-- TypeKit,… pour les autres fournisseurs de typo
-- Jeux de typo a charger et formats (woff, woff2), on génère la requète  
-depuis le html directement dans l'entête du site, pour éviter de maintenir un fichier css
-- Ajout du webfont loader développé par Google/TypeKit  
+- [] La API key n'est pas prise en compte si elle est définie depuis la config
+- [] vérifier que l'on inssère bien une seul fois la font:variant demandée
+entre les polices ajoutées via la config et celles inssérées depuis un plugin
+- [] GogleAPIKey : pour le listage et l'accès a la typthèque : conditionner l'affichage de l'onglet de recherche,
+du bouton de génération de l'index
+- [] Intégration du webfont loader
 https://github.com/typekit/webfontloader
+	- [] TypeKit,… autres fournisseurs de typo
+- [] Gestion des polices locales
+- [] Associations Typos / Font pairing : proposer des associations de typos qui fonctionne bien ensemble
+genre COmic Sans + Times
+
 
 ## Changelogs
 
