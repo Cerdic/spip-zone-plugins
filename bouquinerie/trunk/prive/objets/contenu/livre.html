@@ -55,14 +55,14 @@
 	[(#CONFIG{bouq/livres/largeur}|=={on}|oui)
 		[<div class="champ contenu_largeur[ (#LARGEUR*|strlen|?{'',vide})]">
 			<label><:livre:champ_largeur_label:> : </label>
-			<b dir="#LANG_DIR" class="#EDIT{largeur} largeur">(#LARGEUR) mm</b>
+			<b dir="#LANG_DIR" class="#EDIT{largeur} largeur">(#LARGEUR)</b>
 		</div>]
 	]
 
 	[(#CONFIG{bouq/livres/hauteur}|=={on}|oui)
 		[<div class="champ contenu_hauteur[ (#HAUTEUR*|strlen|?{'',vide})]">
 			<label><:livre:champ_hauteur_label:> : </label>
-			<b dir="#LANG_DIR" class="#EDIT{hauteur} hauteur">(#HAUTEUR) mm</b>
+			<b dir="#LANG_DIR" class="#EDIT{hauteur} hauteur">(#HAUTEUR)</b>
 		</div>]
 	]
 

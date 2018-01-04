@@ -48,11 +48,11 @@
 			]
 			
 			[(#CONFIG{bouq/livres/sommaire}|=={on}|oui)
-				[(#SAISIE{textarea, sommaire, label=<:livre:champ_sommaire_label:>, class=inserer_barre_sommaire inserer_previsualisation, rows=8})]
+				[(#SAISIE{textarea, sommaire, label=<:livre:champ_sommaire_label:>, conteneur_class=pleine_largeur, class=inserer_barre_sommaire inserer_previsualisation, rows=12})]
 			]
 			
 			[(#CONFIG{bouq/livres/extrait}|=={on}|oui)
-				[(#SAISIE{textarea, extrait, label=<:livre:champ_extrait_label:>,   class=inserer_barre_forum inserer_previsualisation, rows=8})]
+				[(#SAISIE{textarea, extrait, label=<:livre:champ_extrait_label:>,   class=inserer_barre_forum inserer_previsualisation, rows=12})]
 			]
 			
 			[(#CONFIG{bouq/livres/infos_sup}|=={on}|oui)
