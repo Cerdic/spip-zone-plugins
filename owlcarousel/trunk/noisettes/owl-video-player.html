@@ -1,0 +1,128 @@
+[(#REM)<!-- # Owl Video player
+
+
+VideoPlayer avec Owl Carousel et oembed
+
+@see - http://owlgraphic.com/owlcarousel/index.html#customizing
+@param : objet
+@param : id_objet
+@param : id-carousel : id unique du carousel
+@param : navigation : true par defaut : affiche les boutons précédents suivants
+@param : lazyLoad : true (false par défaut) : ne charge que les images visibles pour optimiser le chargement.
+@param : afficher_thumbnails - Affichage des miniatures de navigation
+-->]
+<style>
+[#(#ENV{id-carousel,demo})] .owl-stage-outer {
+	/*height: 40rem;*/		
+}
+
+[#(#ENV{id-carousel,demo})] .owl-slide {
+	display: block;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.video_thumbs .owl-slide {
+	padding:.5em;
+	border: 1px solid black;
+	border-radius: 3px;
+	margin-right: .5em;
+}
+.video_thumbs .owl-slide:hover,
+.video_thumbs .owl-slide.active {
+	border: 1px solid silver;
+}
+.video_thumbs .owl-slide > a {
+	display: block;
+}  
+</style>
+[(#REM) <!-- Active item -->]
+<div id="#ENV{id-carousel,demo}" class="owl-carousel owl-theme">
+	<BOUCLE_listDocs(DOCUMENTS spip_documents_liens){mode=document}{objet ?}{id_objet ?}{id_document ?}{media=video}>
+	<div class="owl-slide" data-hash="#ID_DOCUMENT" id="#ID_DOCUMENT">
+			[(#OEMBED|oembed{})]
+	</div>
+	</BOUCLE_listDocs>
+</div>
+[(#REM)<!-- Video thumbnails  -->]
+<B_docs>
+<div class="video_thumbs">
+    <div id="video-thumbnails" class="diapo_thumbnails owl-carousel">
+    <BOUCLE_docs(DOCUMENTS spip_documents_liens){mode=document}{objet ?}{id_objet ?}{media=video}{si #ENV{afficher_thumbnails}|=={oui} }>
+        [<div class="owl-slide">
+            <a class="video_thumbnail[ (#ENV{doc}|=={#ID_DOCUMENT}|oui)active]"
+               href="#[(#ID_DOCUMENT)]"
+               [ title="(#TITRE|couper{80}|texte_backend)"]>
+				(#LOGO_DOCUMENT|image_recadre{16:9,'center','transparent'}|image_reduire{200,0}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})
+            </a>    
+        </div>]
+    </BOUCLE_docs>
+    </div>
+</div>
+</B_docs>
+
+<script>
+jQuery(function($){
+    var mainCarousel = $("[#(#ENV{id-carousel,demo})]");
+    mainCarousel.owlCarousel({
+        loop:true,
+        margin:0,
+        items: 1,
+        dots: true,
+		autoHeight:true,
+		autoplay:false,[
+        nav:(#ENV{navigation, false}),][
+        lazyLoad: (#ENV{lazyLoad}),]
+        responsive:{
+			0:{
+				items:1
+			}
+		},
+        URLhashListener:true,
+        startPosition: 'URLHash'
+    });
+    	
+    
+    $("#video-thumbnails").owlCarousel({
+        loop:true,
+        navigation:false,
+        navigationText : ["<:owlcarousel:prec:>","<:owlcarousel:suiv:>"],
+        pagination:true,
+        paginationNumbers:true,
+        responsive:{
+			0:{
+				items:2,
+				nav:false
+			},
+			600:{
+				items:3,
+				nav:false
+			},
+			1000:{
+				items:5,
+				nav:true,
+				loop:false
+			}
+		}
+    });
+	
+	[(#REM)<!-- 
+	// Arreter le player en cours
+	// quand on clic sur un thumbnail
+	-->]
+	$('.video_thumbnail').each(function(i){
+
+		$(this).on('click', function(){
+			var uid = $(this).attr('href');
+			var activePlayer = $('.owl-item.active');
+			var playButton = '<button onclick="jQuery(this).parent().trigger(\'click\');">Lecture</button>';
+			
+			activePlayer.find('.oembed_video .rwd-video-container')
+						.removeClass('loading')
+						.addClass('oe-play-button')
+						.append(playButton)
+						.find('iframe').remove();		
+		});	
+	});
+});
+</script>
