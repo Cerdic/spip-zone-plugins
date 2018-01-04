@@ -22,6 +22,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$taille = lire_config('thumbsites/websnapr_taille', 'T');
 
 		//retourne l'url de la vignette
-		return "http://images.websnapr.com/?size=${taille}&key=${clef}&url=${url_site}";
+		return "https://images.websnapr.com/?size=${taille}&key=${clef}&url=${url_site}";
 	}
 ?>

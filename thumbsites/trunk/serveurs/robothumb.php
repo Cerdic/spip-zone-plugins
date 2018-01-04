@@ -13,6 +13,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$taille = lire_config('thumbsites/robothumb_taille', '120x90');
 
 		//retourne l'url de la vignette
-		return "http://www.robothumb.com/src/?url=${url_site}&size=${taille}";
+		return "https://www.robothumb.com/src/?url=${url_site}&size=${taille}";
 	}
 ?>

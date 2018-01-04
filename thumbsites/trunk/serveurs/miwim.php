@@ -20,6 +20,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$taille = lire_config('thumbsites/miwim_taille', '120x90');
 
 		//retourne l'url de la vignette
-		return "http://thumbs.miwim.fr/img.php?url=${url_site}&ext=jpg&size=${taille}&remplace=http://www.miwim.fr/templates/miwim/img/no-preview.gif";
+		return "https://thumbs.miwim.fr/img.php?url=${url_site}&ext=jpg&size=${taille}&remplace=http://www.miwim.fr/templates/miwim/img/no-preview.gif";
 	}
 ?>
