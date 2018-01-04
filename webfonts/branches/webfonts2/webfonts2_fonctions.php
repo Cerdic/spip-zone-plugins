@@ -25,8 +25,10 @@ function googlefont_request($webfonts,$subsets=''){
 	foreach($webfonts as $font){
 		$variants = implode(',',$font['variants']);
 		$fonts[] = urlencode($font['family']).':'.$variants;	
-	}	
+	}
+	
 	$fonts = implode('|',$fonts);
+
 	$request = "https://fonts.googleapis.com/css?family=$fonts".$subset;
 	return $request;
 }
@@ -34,13 +36,13 @@ function googlefont_request($webfonts,$subsets=''){
 /**
  * google_font_search
  *
- * $fonts la liste des fonts récupérées via l'API
+ * $fonts la liste des fonts [items] récupérées via l'index
  * $search le motif de recherche sur item/family
 */
 function google_font_search($fonts, $search){
 	$res = array();
 	if (is_array($fonts)) {
-		foreach($fonts['items'] as $item){
+		foreach($fonts as $item){
 			( preg_match('/' . trim($search) . '/i', $item['family']) ) ? $res[] = $item : false;
 		}
 	}
@@ -72,9 +74,8 @@ function get_font_index(){
 /**
  * googlefont_api_get
  *
- * retourne l'index complet de la typothèque via l'API
+ * retourne l'index [items] complet de la typothèque via l'API  
  *
- * @todo index.json à stocker en copie locale ou dans /tmp ? 
 */
 function googlefont_api_get($api_key,$sort=false,$category=false){
 	// Requète en GET sur //https://www.googleapis.com/webfonts/v1/webfonts?key=_GOOGLE_API_KEY
@@ -93,7 +94,7 @@ function googlefont_api_get($api_key,$sort=false,$category=false){
 	curl_close($ch);
 	$googlefonts = json_decode($result, true);
 	
-	return $googlefonts;
+	return $googlefonts['items'];
 }
 
 
