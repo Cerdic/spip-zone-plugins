@@ -13,9 +13,7 @@
 					<label for="serveur"><:thumbsites:cfg_lbl_serveur:></label>
 					<select name="serveur" id="serveur">
 						<option value="apercite"[ (#ENV{serveur, apercite}|=={apercite}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_apercite:></option>
-						<option value="websnapr"[ (#ENV{serveur, apercite}|=={websnapr}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_websnapr:></option>
 						<option value="robothumb"[ (#ENV{serveur, apercite}|=={robothumb}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_robothumb:></option>
-						<option value="miwim"[ (#ENV{serveur, apercite}|=={miwim}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_miwim:></option>
 					</select>
 				</li>
 			</ul>
@@ -47,26 +45,6 @@
 						<option value="640x480" [(#ENV{apercite_taille, 120x90}|=={640x480}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=640x480}:></option>
 						<option value="800x500" [(#ENV{apercite_taille, 120x90}|=={800x500}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=800x500}:></option>
 						<option value="800x600" [(#ENV{apercite_taille, 120x90}|=={800x600}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=800x600}:></option>
-					</select>
-				</li>
-			</ul>
-
-			<ul id="websnapr" class="editer-groupe conf_serveur [(#ENV{serveur, apercite}|=={'websnapr'}|?{'actif'})]">
-				<li class="editer">
-					<label><:thumbsites:cfg_lbl_usage:></label>
-					<p class="explication"><:thumbsites:cfg_inf_websnapr_presentation:></p>
-				</li>
-				<li class="editer">
-					<label for="websnapr_clef"><:thumbsites:cfg_lbl_cle:></label>
-					<input type="text" name="websnapr_clef" id="websnapr_clef" [value="(#ENV{websnapr_clef})"]>
-				</li>
-				<li class="editer">
-					<label for="websnapr_taille"><:thumbsites:cfg_lbl_taille_vignette:></label>
-					<select name="websnapr_taille" id="websnapr_taille">
-						<option value="T" [(#ENV{websnapr_taille, T}|=={T}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=92x70}:></option>
-						<option value="S" [(#ENV{websnapr_taille, T}|=={S}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=202x152}:></option>
-						<option value="M" [(#ENV{websnapr_taille, T}|=={M}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=400x300}:></option>
-						<option value="L" [(#ENV{websnapr_taille, T}|=={L}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=640x480}:></option>
 					</select>
 				</li>
 			</ul>
