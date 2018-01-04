@@ -13,6 +13,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$taille = lire_config('thumbsites/apercite_taille', '120x90');
 
 		//retourne l'url de la vignette
-		return "https://www.apercite.fr/api/apercite/${taille}/oui/oui/${url_site}";
+		return "http://www.apercite.fr/api/apercite/${taille}/oui/oui/${url_site}";
 	}
 ?>
