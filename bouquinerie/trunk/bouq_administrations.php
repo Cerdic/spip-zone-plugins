@@ -52,6 +52,14 @@ function bouq_upgrade($nom_meta_base_version, $version_cible) {
 		array('bouq_init_metas')
 	);
 
+	/* ajout de deux champs : sommaire et collection */
+	$maj['1.0.5'] = array(
+		array('sql_alter',"TABLE spip_livres CHANGE  `hauteur` `hauteur` VARCHAR(10) NOT NULL DEFAULT ''"),
+		array('sql_alter',"TABLE spip_livres CHANGE  `largeur` `largeur` VARCHAR(10) NOT NULL DEFAULT ''"),
+		array('sql_alter',"TABLE spip_livres CHANGE  `prix` `prix` DECIMAL(20,6) NOT NULL DEFAULT 0"),
+		array('bouq_maj_largeur_hauteur')
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -92,6 +100,15 @@ function bouq_init_metas() {
 	}
 	if (sql_countsel('spip_livres_auteurs', "lien_titre != ''") > 0) {
 		ecrire_config("bouq/auteurs/site_auteur", 'on');
+	}
+}
+
+function bouq_maj_largeur_hauteur() {
+	$lignes = sql_select('id_livre, largeur, hauteur', 'spip_livres');
+	while ($res = sql_fetch($lignes)) {
+		if ($res['largeur'] == '0' AND $res['hauteur'] == '0') {
+			sql_update('spip_livres', array('largeur' => "''", 'hauteur' => "''"), 'id_livre = '.$res['id_livre']);
+		}
 	}
 }
 

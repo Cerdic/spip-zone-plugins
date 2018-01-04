@@ -73,6 +73,14 @@ function formulaires_editer_livre_identifier_dist($id_livre = 'new', $id_rubriqu
  */
 function formulaires_editer_livre_charger_dist($id_livre = 'new', $id_rubrique = 0, $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	$valeurs = formulaires_editer_objet_charger('livre', $id_livre, $id_rubrique, $lier_trad, $retour, $config_fonc, $row, $hidden);
+
+	// reformatage du Prix : on enlève tous les '0' inutiles
+	$prix_actif = lire_config('bouq/livres/prix');
+	if ($prix_actif == 'on') {
+		// astuce trouvée sur https://stackoverflow.com/questions/14531679/remove-useless-zero-digits-from-decimals-in-php
+		$valeurs['prix'] = floatval($valeurs['prix']);
+	}
+
 	return $valeurs;
 }
 

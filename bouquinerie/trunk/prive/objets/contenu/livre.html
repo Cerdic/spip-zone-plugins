@@ -76,7 +76,7 @@
 	[(#CONFIG{bouq/livres/prix}|=={on}|oui)
 		[<div class="champ contenu_prix[ (#PRIX*|strlen|?{'',vide})]">
 			<label><:livre:champ_prix_label:> : </label>
-			<b dir="#LANG_DIR" class="#EDIT{prix} prix">(#PRIX) €</b>
+			<b dir="#LANG_DIR" class="#EDIT{prix} prix">(#PRIX|floatval) €</b>
 		</div>]
 	]
 </div>
