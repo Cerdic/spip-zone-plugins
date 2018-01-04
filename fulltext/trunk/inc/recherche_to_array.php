@@ -54,6 +54,16 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 	}
 	$serveur = $options['serveur'];
 
+	/**
+	 * Verifier l'existence d'index fulltext ou sinon on fallback sur la methode de recherche du core
+	 * sans fulltext
+	 */
+	$keys = fulltext_keys($table, 't', $serveur);
+	if (!$keys) {
+		$recherche_to_array_fallback = charger_fonction('recherche_to_array_fallback', 'inc');
+		return $recherche_to_array_fallback($recherche, $options);
+	}
+
 	// s'il n'y a qu'un mot mais <= 3 lettres, il faut le chercher avec une *
 	// ex: RFC => RFC* ; car mysql fulltext n'indexe pas ces mots
 	if (preg_match('/^\w{1,3}$/', $recherche)) {
@@ -99,7 +109,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 	 * Partie spécifique à l'indexation du plugin
 	 */
 	$fulltext = false; # cette table est-elle fulltext?
-	if ($keys = fulltext_keys($table, 't', $serveur)) {
+	if ($keys) {
 		$fulltext = true;
 
 		$r = trim(preg_replace(',\s+,', ' ', $recherche));
