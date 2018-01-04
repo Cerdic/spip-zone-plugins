@@ -30,13 +30,17 @@ font
         </div>
         
 		<div class="editer-group">
-			<!--<div class="editer">
+			[(#REM)<!--
+			Pour le moment on désactive le tri, car il necessite un appel a l'api
+			a chaque validation du form, on utilisera plutot les tri sur la boucle data d'affichage
+			
+			<div class="editer">
 				<label for="sort">Trier par</label>
 				<select name="sort" id="sort">
 				  <option value="popularity"[(#ENV{sort}|=={popularity}|?{' selected="selected"',''})]>Popularité</option>
 				  <option value="alpha"[(#ENV{sort}|=={alpha}|?{' selected="selected"',''})]>Alphabétique</option>
 				</select>
-			</div>-->
+			</div>-->]
 			<div class="editer">
 				<label for="category">Catégories</label>
 				<select name="category" id="category">
