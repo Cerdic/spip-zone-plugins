@@ -3,60 +3,21 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2017                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des recherches
+ *
+ * @package SPIP\Core\Recherche
+ **/
 
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
-}
-
-
-// Donne la liste des champs/tables ou l'on sait chercher/remplacer
-// avec un poids pour le score
-// https://code.spip.net/@liste_des_champs
-function liste_des_champs() {
-	static $liste=null;
-	if (is_null($liste)) {
-		$liste = array();
-		// recuperer les tables_objets_sql declarees
-		include_spip('base/objets');
-		$tables_objets = lister_tables_objets_sql();
-		foreach ($tables_objets as $t => $infos) {
-			if ($infos['rechercher_champs']) {
-				$liste[$infos['type']] = $infos['rechercher_champs'];
-			}
-		}
-		// puis passer dans le pipeline
-		$liste = pipeline('rechercher_liste_des_champs', $liste);
-	}
-	return $liste;
-}
-
-
-// Recherche des auteurs et mots-cles associes
-// en ne regardant que le titre ou le nom
-// https://code.spip.net/@liste_des_jointures
-function liste_des_jointures() {
-	static $liste=null;
-	if (is_null($liste)) {
-		$liste = array();
-		// recuperer les tables_objets_sql declarees
-		include_spip('base/objets');
-		$tables_objets = lister_tables_objets_sql();
-		foreach ($tables_objets as $t => $infos) {
-			if ($infos['rechercher_jointures']) {
-				$liste[$infos['type']] = $infos['rechercher_jointures'];
-			}
-		}
-		// puis passer dans le pipeline
-		$liste = pipeline('rechercher_liste_des_jointures', $liste);
-	}
-	return $liste;
 }
 
 
@@ -78,6 +39,65 @@ function fulltext_keys($table, $prefix = null, $serveur = null) {
 	}
 }
 
+/*
+ * Le reste du fichier est identique au core SPIP 3
+ */
+
+defined('_RECHERCHE_LOCK_KEY') || define('_RECHERCHE_LOCK_KEY', 'fulltext');
+
+/**
+ * Donne la liste des champs/tables où l'on sait chercher / remplacer
+ * avec un poids pour le score
+ *
+ * Utilise l'information `rechercher_champs` sur la déclaration
+ * des objets éditoriaux.
+ *
+ * @pipeline_appel rechercher_liste_des_champs
+ * @uses lister_tables_objets_sql()
+ *
+ * @return array Couples (type d'objet => Couples (champ => score))
+ */
+function liste_des_champs() {
+	static $liste = null;
+	if (is_null($liste)) {
+		$liste = array();
+		// recuperer les tables_objets_sql declarees
+		include_spip('base/objets');
+		$tables_objets = lister_tables_objets_sql();
+		foreach ($tables_objets as $t => $infos) {
+			if ($infos['rechercher_champs']) {
+				$liste[$infos['type']] = $infos['rechercher_champs'];
+			}
+		}
+		// puis passer dans le pipeline
+		$liste = pipeline('rechercher_liste_des_champs', $liste);
+	}
+
+	return $liste;
+}
+
+
+// Recherche des auteurs et mots-cles associes
+// en ne regardant que le titre ou le nom
+// http://code.spip.net/@liste_des_jointures
+function liste_des_jointures() {
+	static $liste = null;
+	if (is_null($liste)) {
+		$liste = array();
+		// recuperer les tables_objets_sql declarees
+		include_spip('base/objets');
+		$tables_objets = lister_tables_objets_sql();
+		foreach ($tables_objets as $t => $infos) {
+			if ($infos['rechercher_jointures']) {
+				$liste[$infos['type']] = $infos['rechercher_jointures'];
+			}
+		}
+		// puis passer dans le pipeline
+		$liste = pipeline('rechercher_liste_des_jointures', $liste);
+	}
+
+	return $liste;
+}
 
 function expression_recherche($recherche, $options) {
 	// ne calculer qu'une seule fois l'expression par hit
@@ -100,73 +120,94 @@ function expression_recherche($recherche, $options) {
 	$recherche = preg_replace(',(\w)\*($|\s),Uims', '$1$2', $recherche);
 
 	$is_preg = false;
-	if (substr($recherche, 0, 1) == '/' and substr($recherche, -1, 1) == '/') {
+	if (substr($recherche, 0, 1) == '/' and substr($recherche, -1, 1) == '/' and strlen($recherche) > 2) {
 		// c'est une preg
 		$recherche_trans = translitteration($recherche);
-		$preg = $recherche_trans.$options['preg_flags'];
+		$preg = $recherche_trans . $options['preg_flags'];
 		$is_preg = true;
 	} else {
-		// s'il y a plusieurs mots il faut les chercher tous : oblige REGEXP
+		// s'il y a plusieurs mots il faut les chercher tous : oblige REGEXP,
 		// sauf ceux de moins de 4 lettres (on supprime ainsi 'le', 'les', 'un',
 		// 'une', 'des' ...)
-		if (preg_match(',\s+,'. $u, $recherche)) {
+
+		// attention : plusieurs mots entre guillemets sont a rechercher tels quels
+		$recherche_trans = $recherche_mod = $recherche;
+
+		// les expressions entre " " sont un mot a chercher tel quel
+		// -> on remplace les espaces par un \x1 et on enleve les guillemets
+		if (preg_match(',["][^"]+["],Uims', $recherche_mod, $matches)) {
+			foreach ($matches as $match) {
+				$word = preg_replace(",\s+,Uims", "\x1", $match);
+				$word = trim($word, '"');
+				$recherche_mod = str_replace($match, $word, $recherche_mod);
+			}
+		}
+
+		if (preg_match(",\s+," . $u, $recherche_mod)) {
 			$is_preg = true;
+
 			$recherche_inter = '|';
-			$recherche_mots = explode(' ', $recherche);
+			$recherche_mots = explode(' ', $recherche_mod);
 			$min_long = defined('_RECHERCHE_MIN_CAR') ? _RECHERCHE_MIN_CAR : 4;
 			foreach ($recherche_mots as $mot) {
 				if (strlen($mot) >= $min_long) {
-					$recherche_inter .= $mot.' ';
+					// echapper les caracteres de regexp qui sont eventuellement dans la recherche
+					$recherche_inter .= preg_quote($mot) . ' ';
 				}
 			}
-			// mais on cherche quand meme l'expression complete, meme si elle
+			$recherche_inter = str_replace("\x1", '\s', $recherche_inter);
+
+			// mais on cherche quand même l'expression complète, même si elle
 			// comporte des mots de moins de quatre lettres
-			$recherche = rtrim($recherche.preg_replace(',\s+,'.$u, '|', $recherche_inter), '|');
+			$recherche = rtrim(preg_quote($recherche) . preg_replace(',\s+,' . $u, '|', $recherche_inter), '|');
+			$recherche_trans = translitteration($recherche);
 		}
 
-		$recherche_trans = translitteration($recherche);
-		$preg = '/'.str_replace('/', '\\/', $recherche_trans).'/' . $options['preg_flags'];
+		$preg = '/' . str_replace('/', '\\/', $recherche_trans) . '/' . $options['preg_flags'];
 	}
 
 	// Si la chaine est inactive, on va utiliser LIKE pour aller plus vite
 	// ou si l'expression reguliere est invalide
 	if (!$is_preg
-	or (@preg_match($preg, '') === false) ) {
+		or (@preg_match($preg, '') === false)
+	) {
 		$methode = 'LIKE';
 		$u = $GLOBALS['meta']['pcre_u'];
-		// eviter les parentheses et autres caracteres qui interferent avec pcre
-		// par la suite (dans le preg_match_all) s'il y a des reponses
-		$recherche = str_replace(
-			array('(',')','?','[', ']', '+', '*', '/'),
-			array('\(','\)','[?]', '\[', '\]', '\+', '\*', '\/'),
-			$recherche
-		);
+
+		// echapper les % et _
+		$q = str_replace(array('%', '_'), array('\%', '\_'), trim($recherche));
+
+		// eviter les parentheses et autres caractères qui interferent avec pcre par la suite (dans le preg_match_all) s'il y a des reponses
+		$recherche = preg_quote($recherche, '/');
 		$recherche_trans = translitteration($recherche);
 		$recherche_mod = $recherche_trans;
 
-		// echapper les % et _
-		$q = str_replace(array('%','_'), array('\%', '\_'), trim($recherche));
 		// les expressions entre " " sont un mot a chercher tel quel
 		// -> on remplace les espaces par un _ et on enleve les guillemets
+		// corriger le like dans le $q
 		if (preg_match(',["][^"]+["],Uims', $q, $matches)) {
 			foreach ($matches as $match) {
-				// corriger le like dans le $q
-				$word = preg_replace(',\s+,Uims', '_', $match);
+				$word = preg_replace(",\s+,Uims", "_", $match);
 				$word = trim($word, '"');
 				$q = str_replace($match, $word, $q);
-				// corriger la regexp
-				$word = preg_replace(',\s+,Uims', '[\s]', $match);
+			}
+		}
+		// corriger la regexp
+		if (preg_match(',["][^"]+["],Uims', $recherche_mod, $matches)) {
+			foreach ($matches as $match) {
+				$word = preg_replace(",\s+,Uims", "[\s]", $match);
 				$word = trim($word, '"');
 				$recherche_mod = str_replace($match, $word, $recherche_mod);
 			}
 		}
 		$q = sql_quote(
-			'%'
-			. preg_replace(',\s+,' . $u, '%', $q)
-			. '%'
+			"%"
+			. preg_replace(",\s+," . $u, "%", $q)
+			. "%"
 		);
 
-		$preg = '/'.preg_replace(',\s+,' . $u, '.+', trim($recherche_mod)).'/' . $options['preg_flags'];
+		$preg = '/' . preg_replace(",\s+," . $u, ".+", trim($recherche_mod)) . '/' . $options['preg_flags'];
+
 	} else {
 		$methode = 'REGEXP';
 		$q = sql_quote(trim($recherche, '/'));
@@ -179,8 +220,9 @@ function expression_recherche($recherche, $options) {
 		$char = spip_substr($q, $i, 1);
 		if (!is_ascii($char)
 			and $char_t = translitteration($char)
-			and $char_t !== $char) {
-			$q_t = str_replace($char, $is_preg ? '.' : '_', $q_t);
+			and $char_t !== $char
+		) {
+			$q_t = str_replace($char, $is_preg ? "." : "_", $q_t);
 		}
 	}
 
@@ -190,8 +232,9 @@ function expression_recherche($recherche, $options) {
 	// les plus frequents qui peuvent etre accentues
 	// (oui c'est tres dicustable...)
 	if (isset($GLOBALS['connexions'][$options['serveur'] ? $options['serveur'] : 0]['type'])
-		and strncmp($GLOBALS['connexions'][$options['serveur'] ? $options['serveur'] : 0]['type'], 'sqlite', 6) == 0) {
-		$q_t = strtr($q, 'aeuioc', $is_preg ? '......' : '______');
+		and strncmp($GLOBALS['connexions'][$options['serveur'] ? $options['serveur'] : 0]['type'], 'sqlite', 6) == 0
+	) {
+		$q_t = strtr($q, "aeuioc", $is_preg ? "......" : "______");
 		// si il reste au moins un char significatif...
 		if (preg_match(",[^'%_.],", $q_t)) {
 			$q = $q_t;
@@ -202,14 +245,28 @@ function expression_recherche($recherche, $options) {
 }
 
 
-// Effectue une recherche sur toutes les tables de la base de donnees
-// options :
-// - toutvoir pour eviter autoriser(voir)
-// - flags pour eviter les flags regexp par defaut (UimsS)
-// - champs pour retourner les champs concernes
-// - score pour retourner un score
-// On peut passer les tables, ou une chaine listant les tables souhaitees
-// https://code.spip.net/@recherche_en_base
+
+/**
+ * Effectue une recherche sur toutes les tables de la base de données
+ *
+ * @uses liste_des_champs()
+ * @uses inc_recherche_to_array_dist()
+ *
+ * @param string $recherche
+ *     Le terme de recherche
+ * @param null|array|string $tables
+ *     - null : toutes les tables acceptant des recherches
+ *     - array : liste des tables souhaitées
+ *     - string : une chaîne listant les tables souhaitées, séparées par des virgules (préférer array cependant)
+ * @param array $options {
+ *     @var $toutvoir pour éviter autoriser(voir)
+ *     @var $flags pour éviter les flags regexp par défaut (UimsS)
+ *     @var $champs pour retourner les champs concernés
+ *     @var $score pour retourner un score
+ * }
+ * @param string $serveur
+ * @return array
+ */
 function recherche_en_base($recherche = '', $tables = null, $options = array(), $serveur = '') {
 	include_spip('base/abstract_sql');
 
@@ -217,7 +274,8 @@ function recherche_en_base($recherche = '', $tables = null, $options = array(), 
 		$liste = liste_des_champs();
 
 		if (is_string($tables)
-			and $tables != '') {
+			and $tables != ''
+		) {
 			$toutes = array();
 			foreach (explode(',', $tables) as $t) {
 				$t = trim($t);
@@ -239,16 +297,15 @@ function recherche_en_base($recherche = '', $tables = null, $options = array(), 
 	include_spip('inc/autoriser');
 
 	// options par defaut
-	$options = array_merge(
-		array(
-			'preg_flags' => 'UimsS',
-			'toutvoir' => false,
-			'champs' => false,
-			'score' => false,
-			'matches' => false,
-			'jointures' => false,
-			'serveur' => $serveur
-		),
+	$options = array_merge(array(
+		'preg_flags' => 'UimsS',
+		'toutvoir' => false,
+		'champs' => false,
+		'score' => false,
+		'matches' => false,
+		'jointures' => false,
+		'serveur' => $serveur
+	),
 		$options
 	);
 
@@ -261,13 +318,12 @@ function recherche_en_base($recherche = '', $tables = null, $options = array(), 
 	//      id2 = { 'score' => x, attrs => { } },
 	// }
 
-	include_spip('inc/memoization');
 	include_spip('inc/recherche_to_array');
 
 	foreach ($tables as $table => $champs) {
 		# lock via memoization, si dispo
 		if (function_exists('cache_lock')) {
-			cache_lock($lock = 'fulltext '.$table.' '.$recherche);
+			cache_lock($lock = _RECHERCHE_LOCK_KEY . ' ' . $table . ' ' . $recherche);
 		}
 
 		spip_timer('rech');
@@ -280,7 +336,8 @@ function recherche_en_base($recherche = '', $tables = null, $options = array(), 
 		##var_dump($results[$table]);
 
 
-		spip_log("recherche $table ($recherche) : " . count($results[$table]) . ' resultats ' . spip_timer('rech'), 'recherche');
+		spip_log("recherche $table ($recherche) : " . count($results[$table]) . " resultats " . spip_timer('rech'),
+			'recherche');
 
 		if (isset($lock)) {
 			cache_unlock($lock);
@@ -292,16 +349,15 @@ function recherche_en_base($recherche = '', $tables = null, $options = array(), 
 
 
 // Effectue une recherche sur toutes les tables de la base de donnees
-// https://code.spip.net/@remplace_en_base
+// http://code.spip.net/@remplace_en_base
 function remplace_en_base($recherche = '', $remplace = null, $tables = null, $options = array()) {
 	include_spip('inc/modifier');
 
 	// options par defaut
-	$options = array_merge(
-		array(
-			'preg_flags' => 'UimsS',
-			'toutmodifier' => false
-		),
+	$options = array_merge(array(
+		'preg_flags' => 'UimsS',
+		'toutmodifier' => false
+	),
 		$options
 	);
 	$options['champs'] = true;
@@ -313,17 +369,18 @@ function remplace_en_base($recherche = '', $remplace = null, $tables = null, $op
 
 	$results = recherche_en_base($recherche, $tables, $options);
 
-	$preg = '/'.str_replace('/', '\\/', $recherche).'/' . $options['preg_flags'];
+	$preg = '/' . str_replace('/', '\\/', $recherche) . '/' . $options['preg_flags'];
 
 	foreach ($results as $table => $r) {
 		$_id_table = id_table_objet($table);
 		foreach ($r as $id => $x) {
 			if ($options['toutmodifier']
-			or autoriser('modifier', $table, $id)) {
+				or autoriser('modifier', $table, $id)
+			) {
 				$modifs = array();
 				foreach ($x['champs'] as $key => $val) {
 					if ($key == $_id_table) {
-						next;
+						continue;
 					}
 					$repl = preg_replace($preg, $remplace, $val);
 					if ($repl <> $val) {
@@ -331,14 +388,11 @@ function remplace_en_base($recherche = '', $remplace = null, $tables = null, $op
 					}
 				}
 				if ($modifs) {
-					objet_modifier_champs(
-						$table,
-						$id,
+					objet_modifier_champs($table, $id,
 						array(
 							'champs' => array_keys($modifs),
 						),
-						$modifs
-					);
+						$modifs);
 				}
 			}
 		}
