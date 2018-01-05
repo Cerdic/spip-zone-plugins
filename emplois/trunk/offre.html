@@ -1,0 +1,71 @@
+<BOUCLE_principale(OFFRES){id_offre}>
+<!DOCTYPE html>
+<html dir="#LANG_DIR" lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js">
+<head>
+	<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+	<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+	[<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />]
+	[<link rel="canonical" href="(#URL_OFFRE|url_absolue)" />]
+	<INCLURE{fond=inclure/head} />
+</head>
+
+<body class="pas_surlignable page_offre">
+<div class="page">
+
+	<INCLURE{fond=inclure/header} />
+	<INCLURE{fond=inclure/nav,env} />
+	
+	<article class="main">
+		<div class="wrapper hfeed">
+			<div class="content hentry" id="content">
+				<p class="arbo"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_titre}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
+		
+				<header class="cartouche clearfix">
+					<h1 class="#EDIT{titre} surlignable entry-title">[(#LOGO_OFFRE|image_reduire{150,*}) ]#TITRE</h1>
+				</header>
+				<main>
+					[<div class="#EDIT{texte} texte surlignable clearfix">(#TEXTE_OFFRE|image_reduire{672,*})</div>]
+				</main>
+				<footer class="clearfix">
+					<div>[(#EMETTEUR) - ]<time pubdate>[(#DATE|affdate)]</time></div>
+					[<div><:offre:champ_date_fin_label:> : <time pubdate>(#DATE_FIN|affdate)</time></div>]
+				</footer>
+				
+				[(#REM) Gestion des documents ]
+				[(#INCLURE{fond=inclure/document_emploi,id_offre, titre=#TITRE, env})]
+				
+				[<div class="notes"><hr />(#NOTES)</div>]
+				
+				[(#REM) Forum de l'offre ]
+				<INCLURE{fond=inclure/forum,id_offre} />
+				[<h2 class="forum-titre"><:forum:form_pet_message_commentaire:></h2>
+				(#FORMULAIRE_FORUM)]
+		
+			</div><!--.content-->
+		</div><!--.wrapper-->
+
+		<div class="aside">
+			<INCLURE{fond=inclure/navsub, id_rubrique} />
+			#FORMULAIRE_RECHERCHE
+	
+			[(#REM) Livres dans la meme rubrique ] 
+			<B_offres_rubrique>
+			<div class="menu">
+				<h2><:meme_rubrique:></h2>
+				<ul>
+					<BOUCLE_offres_rubrique(OFFRES){exclus} {id_rubrique} {!par date} {0,10}>
+					<li><a href="#URL_OFFRE"[ class="(#EXPOSE)"]>#TITRE</a></li>
+					</BOUCLE_offres_rubrique>
+				</ul>
+			</div>
+			</B_offres_rubrique>
+			
+		</div><!--.aside-->
+	</article><!--.main-->
+
+	<INCLURE{fond=inclure/footer,self=#SELF} />
+
+</div><!--.page-->
+</body>
+</html>
+</BOUCLE_principale>
