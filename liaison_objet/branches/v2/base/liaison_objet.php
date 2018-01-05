@@ -1,12 +1,11 @@
 <?php
 /**
- * Plugin Selection d'objets
+ * Plugin Liaison d'objets
  * (c) 2012 Rainer Müller
  * Licence GNU/GPL
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
-
 
 /**
  * Déclaration des alias de tables et filtres automatiques de champs
@@ -17,7 +16,6 @@ function liaison_objet_declarer_tables_interfaces($interfaces) {
 
 	return $interfaces;
 }
-
 
 /**
  * Déclaration des objets éditoriaux
@@ -77,8 +75,6 @@ function liaison_objet_declarer_tables_objets_sql($tables) {
 			)
 		),
 		'texte_changer_statut' => 'liaison_objet:texte_changer_statut_objet',
-
-
 	);
 
 	return $tables;

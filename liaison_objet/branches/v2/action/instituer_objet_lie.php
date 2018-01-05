@@ -1,6 +1,7 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION"))
 	return;
+
 function action_instituer_objet_lie_dist($arg = null) {
 	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -25,7 +26,7 @@ function action_instituer_objet_lie_dist($arg = null) {
 		else
 			$langue = array();
 	}
-	;
+
 	// si l'objet n'est pas définit par langue on l'enregistre pour chaque langue du site
 	if (count($langue) > 1) {
 

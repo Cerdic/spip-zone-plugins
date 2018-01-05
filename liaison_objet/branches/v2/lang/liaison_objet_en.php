@@ -38,9 +38,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_id_objet_dest' => 'Dest Object ID',
 	'label_objet' => 'Object',
 	'label_objet_dest' => 'Target object',
+	'label_objets_liaison' => 'Objects that can be linked to',
 	'label_ordre' => 'Rank',
 	'label_titre' => 'Title',
 	'label_url' => 'Url',
+	'liaison_choix_illimite' => 'Disable limit liaison by Target Object',
+	'liaison_cible' => 'Target liaison for',
+	'liaison_objet' => 'Selection',
+	'liaison_objet_cible_titre' => 'Selection of target objects',
+	'liaison_objets_pour' => 'Object liaison for',
+	'liaison_type_lien' => 'Link type',
+	'liaison_type_liens' => 'Links type definition',
 
 	// O
 	'objet_destination_choisis' => 'Selected destination(s):',
@@ -52,28 +60,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'racine' => 'Root',
 	'retirer_lien_objet' => 'Remove this selected object',
 	'retirer_tous_liens_liaison_objets' => 'Remove all the selected objects',
-	'rubriques_choisis' => 'Selected sections:',
-
-	// S
-	'liaison_choix_illimite' => 'Disable limit liaison by Target Object',
-	'liaison_cible' => 'Target liaison for',
-	'liaison_objet' => 'Selection',
-	'liaison_objet_cible_titre' => 'Selection of target objects', # MODIF
-	'liaison_objets_pour' => 'Object liaison for',
-	'label_objets_liaison' => 'Objects that can be linked to',
-	'liaison_type_lien' => 'Link type',
-	'liaison_type_liens' => 'Links type definition',
-	'liaisone' => 'Selected :',
 
 	// T
 	'texte_ajouter_objet' => 'Select an object',
 	'texte_changer_statut_objet' => 'This Selected Object is:',
 	'texte_creer_asliaison_objetcier_objet' => 'Create and link an object',
 	'titre_langue_objet' => 'Language of this Selected Object',
-	'titre_logo_liaison_objet' => 'Logo of the Selected Object',
 	'titre_liaison_objet' => 'Selected Objects',
 	'titre_liaison_objets' => 'Selected Objects',
-	'titre_liaison_objets_rubrique' => 'Selected Objects of the section',
+	'titre_logo_liaison_objet' => 'Logo of the Selected Object',
 	'type_liens_defaut' => 'link types by default, can be overloaded below',
 	'type_liens_surcharge' => 'overload the default link types'
 );

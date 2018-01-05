@@ -37,9 +37,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_id_objet_dest' => 'Id Objeto Diana',
 	'label_objet' => 'Objeto',
 	'label_objet_dest' => 'Objeto diana',
+	'label_objets_liaison' => 'Objetos que pueden ser vinculados',
 	'label_ordre' => 'Orden',
 	'label_titre' => 'Título',
 	'label_url' => 'Url',
+	'liaison_cible' => 'Selección de objetos diana para',
+	'liaison_objet' => 'Selección',
+	'liaison_objet_cible_titre' => 'Selección de Objetos Diana',
+	'liaison_objets_pour' => 'Selección objetos para:',
+	'liaison_type_lien' => 'Tipo de enlace',
+	'liaison_type_liens' => 'Definición de tipos de enlace',
 
 	// O
 	'objet_destination_choisis' => 'Destinación/ones seleccionada(s):',
@@ -51,27 +58,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'racine' => 'Raíz',
 	'retirer_lien_objet' => 'Eliminar este objeto seleccionado',
 	'retirer_tous_liens_liaison_objets' => 'Eliminar todas las selecciones de objetos',
-	'rubriques_choisis' => 'Secciones seleccionadas:',
-
-	// S
-	'liaison_cible' => 'Selección de objetos diana para',
-	'liaison_objet' => 'Selección',
-	'liaison_objet_cible_titre' => 'Selección de Objetos Diana', # MODIF
-	'liaison_objets_pour' => 'Selección objetos para:',
-	'label_objets_liaison' => 'Objetos que pueden ser vinculados',
-	'liaison_type_lien' => 'Tipo de enlace',
-	'liaison_type_liens' => 'Definición de tipos de enlace',
-	'liaisone' => 'Seleccionado:',
 
 	// T
 	'texte_ajouter_objet' => 'Seleccionar un objeto',
 	'texte_changer_statut_objet' => 'Este Objeto Seleccionado está:',
 	'texte_creer_asliaison_objetcier_objet' => 'Crear y vincular un objet',
 	'titre_langue_objet' => 'Idioma de este Objeto Seleccionado',
-	'titre_logo_liaison_objet' => 'Logo de este Objeto Seleccionado',
 	'titre_liaison_objet' => 'Objeto Seleccionado',
 	'titre_liaison_objets' => 'Objetos Seleccionados',
-	'titre_liaison_objets_rubrique' => 'Objetos Seleccionados de la sección',
+	'titre_logo_liaison_objet' => 'Logo de este Objeto Seleccionado',
 	'type_liens_defaut' => 'tipos de enlace por defecto, pueden ser sobrescritos más abajo',
 	'type_liens_surcharge' => 'sobrescribir los tipos de enlace por defecto'
 );

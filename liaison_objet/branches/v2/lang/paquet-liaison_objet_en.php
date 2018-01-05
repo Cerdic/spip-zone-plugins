@@ -9,7 +9,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// S
+	// L
 	'liaison_objet_description' => 'Plugin inspired by the plugin article liaison.
 Selects spip objects, store them and customize their display depending on the selected section',
 	'liaison_objet_nom' => 'Objects liaison',

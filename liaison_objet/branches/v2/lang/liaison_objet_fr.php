@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/liaison_objets/trunk/lang/
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/liaison_objet/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -44,10 +44,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liaison_cible' => 'Liaison des cibles pour',
 	'liaison_objet' => 'Liaison',
 	'liaison_objet_cible_titre' => 'Objets cibles',
-	'liaison_objets_pour' => 'Liaison d\'objets pour',
+	'liaison_objets_pour' => 'Liaison d’objets pour',
 	'liaison_type_lien' => 'Type de lien',
 	'liaison_type_liens' => 'Définition des types de lien',
-
 
 	// O
 	'objet_destination_choisis' => 'Destination(s) choisie(s) :',
@@ -65,9 +64,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_changer_statut_objet' => 'Cet objet lié est :',
 	'texte_creer_asliaison_objetcier_objet' => 'Créer et associer un objet',
 	'titre_langue_objet' => 'Langue de cet objet lié',
-	'titre_logo_liaison_objet' => 'Logo de cet objet lié',
 	'titre_liaison_objet' => 'Objet lié',
 	'titre_liaison_objets' => 'Objets liés',
+	'titre_logo_liaison_objet' => 'Logo de cet objet lié',
 	'type_liens_defaut' => 'types de lien par défaut, peuvent être surchargés ci-bas',
 	'type_liens_surcharge' => 'surcharger les types de lien par défaut'
 );
