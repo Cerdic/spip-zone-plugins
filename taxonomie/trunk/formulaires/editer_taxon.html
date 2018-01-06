@@ -6,15 +6,14 @@
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_taxon' value='#ENV{id_taxon}' />
-		<ul>
-
+		<div class="editer-groupe">
 			[(#SAISIE{input, nom_commun,
 				label=<:taxon:champ_nom_commun_label:>})]
 
 			[(#SAISIE{textarea, descriptif,
 				label=<:taxon:champ_descriptif_label:>,
                 class=inserer_barre_edition})]
-		</ul>
+		</div>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>

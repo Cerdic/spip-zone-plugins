@@ -8,7 +8,7 @@
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
+		<div class="editer-groupe">
 			[(#SAISIE{radio, action_regne,
 				explication=<:taxonomie:explication_action_regne:>,
 				label=<:taxonomie:label_action_regne:>,
@@ -24,7 +24,7 @@
 				obligatoire=oui,
 				info_obligatoire=''
 			})]
-			<ul id="options_charger">
+			<div id="options_charger">
 				[(#SAISIE{radio, rang_feuille,
 					label=<:taxonomie:label_rang_feuille:>,
 					datas=#ENV{_rangs},
@@ -37,8 +37,8 @@
 					datas=#ENV{_langues_regne},
 					defaut=#ENV{_langues_defaut}
 				})]
-			</ul>
-		</ul>
+			</div>
+		</div>
 
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>
