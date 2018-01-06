@@ -56,7 +56,7 @@ $GLOBALS['wikipedia_language'] = array(
  * @api
  * @uses cache_taxonomie_existe()
  * @uses cache_taxonomie_ecrire()
- * @uses api2url_wikipedia()
+ * @uses wikipedia_build_url()
  * @uses service_requeter_json()
  *
  * @param string   $resource
@@ -68,10 +68,11 @@ $GLOBALS['wikipedia_language'] = array(
  *      existant le TSN existe toujours. Il sert à créer le fichier cache.
  * @param string   $search
  *      Chaine de recherche qui est en généralement le nom scientifique du taxon.
- * @param string   $language
- *      Langue au sens de Wikipedia qui préfixe l'url du endpoint. Vaut `fr`, `en`, `es`...
- * @param int|null $section
- *      Section de page dont le texte est à renvoyer. Entier supérieur ou égal à 0 ou `null` pour tout la page.
+ * @param array    $options
+ *      Tableau d'options qui peut contenir les index suivants :
+ *      - `language` : langue au sens de Wikipedia qui préfixe l'url du endpoint. Vaut `fr`, `en`, `es`...
+ *      - `section`  : section de page dont le texte est à renvoyer. Entier supérieur ou égal à 0 ou `null`
+ *                     pour tout la page.
  *      Cet argument est optionnel.
  *
  * @return string|array
@@ -79,7 +80,7 @@ $GLOBALS['wikipedia_language'] = array(
  *      il est nécessaire d'utiliser le plugin Convertisseur. Néanmoins, le texte même traduit
  *      doit être remanié manuellement.
  */
-function wikipedia_get($resource, $tsn, $search, $options = array()) {
+function wikipedia_get_page($resource, $tsn, $search, $options = array()) {
 
 	// Initialisation du tableau de sortie et du tableau d'options
 	$information = array();
@@ -96,7 +97,7 @@ function wikipedia_get($resource, $tsn, $search, $options = array()) {
 
 		// Construire l'URL de la function de recherche par nom vernaculaire.
 		// L'encodage de la recherche est effectuée dans la fonction.
-		$url = api2url_wikipedia('json', 'query', $resource, $search, $options);
+		$url = wikipedia_build_url('json', 'query', $resource, $search, $options);
 
 		// Acquisition des données spécifiées par l'url
 		$data = service_requeter_json($url);
@@ -120,8 +121,8 @@ function wikipedia_get($resource, $tsn, $search, $options = array()) {
 		cache_taxonomie_ecrire(serialize($information), 'wikipedia', $resource, $tsn, $options);
 	} else {
 		// Lecture et désérialisation du cache
-		lire_fichier($file_cache, $information);
-		$information = unserialize($information);
+		lire_fichier($file_cache, $contenu);
+		$information = unserialize($contenu);
 	}
 
 	return $information;
@@ -145,10 +146,9 @@ function wikipedia_get($resource, $tsn, $search, $options = array()) {
  * @return string
  *        Langue au sens de Wikipedia - `fr`, `en`, `es` - ou chaine vide sinon.
  */
-function wikipedia_spipcode2language($language_code) {
-	global $wikipedia_language;
+function wikipedia_find_language($language_code) {
 
-	if (!$language = array_search($language_code, $wikipedia_language)) {
+	if (!$language = array_search($language_code, $GLOBALS['wikipedia_language'])) {
 		$language = '';
 	}
 
@@ -197,6 +197,8 @@ function wikipedia_credit($id_taxon, $informations) {
 /**
  * Construit l'URL de la requête Wikipedia correspondant à la demande utilisateur.
  *
+ * @internal
+ *
  * @param string   $format
  *        Format du résultat de la requête. Prend les valeurs `json` ou `xml`. Le `json` est recommandé.
  * @param string   $action
@@ -208,15 +210,17 @@ function wikipedia_credit($id_taxon, $informations) {
  * @param string   $search
  *        Clé de recherche qui est essentiellement le nom scientifique dans l'utilisation normale.
  *        Cette clé doit être encodée si besoin par l'appelant.
- * @param string   $language
- *        Langue au sens de Wikipedia en minuscules. Prend les valeurs `fr`, `en`, `es`, etc.
- * @param int|null $section
- *        Section de la page à renvoyer. Valeur entière de 0 à n ou null si on veut toute la page.
+ * @param array    $options
+ *      Tableau d'options qui peut contenir les index suivants :
+ *      - `language` : langue au sens de Wikipedia qui préfixe l'url du endpoint. Vaut `fr`, `en`, `es`...
+ *      - `section`  : section de page dont le texte est à renvoyer. Entier supérieur ou égal à 0 ou `null`
+ *                     pour tout la page.
+ *      Cet argument est optionnel.
  *
  * @return string
  *        L'URL de la requête au service
  */
-function api2url_wikipedia($format, $action, $resource, $search, $options) {
+function wikipedia_build_url($format, $action, $resource, $search, $options) {
 
 	// Construire la partie standard de l'URL de l'api sollicitée
 	$language = !empty($options['language']) ? $options['language'] : 'fr';

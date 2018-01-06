@@ -215,6 +215,7 @@ if (!defined('_TAXONOMIE_CACHE_FORCER')) {
  * @return array
  */
 function service_requeter_json($url, $taille_max = null) {
+
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/distant');
 	$options = array(
@@ -230,7 +231,7 @@ function service_requeter_json($url, $taille_max = null) {
 
 
 /**
- * Extrait de la table `spip_taxons` la liste des taxons d'un règne donné ayant fait l'objet
+ * Extrait, de la table `spip_taxons`, la liste des taxons d'un règne donné ayant fait l'objet
  * d'une modification manuelle.
  *
  * @package SPIP\TAXONOMIE\OBJET
@@ -243,6 +244,7 @@ function service_requeter_json($url, $taille_max = null) {
  *        composé des index `tsn`, `nom_commun`, `descriptif`.
  */
 function taxon_preserver_editions($regne) {
+
 	$select = array('tsn', 'nom_commun', 'descriptif');
 	$where = array('regne=' . sql_quote($regne), 'edite=' . sql_quote('oui'));
 	$taxons = sql_allfetsel($select, 'spip_taxons', $where);
@@ -269,6 +271,7 @@ function taxon_preserver_editions($regne) {
  *        La chaine construite est toujours une balise `<multi>` complète ou une chaine vide sinon.
  */
 function taxon_merger_traductions($multi_prioritaire, $multi_non_prioritaire) {
+
 	$multi_merge = '';
 
 	// On extrait le contenu de la balise <multi> si elle existe.
@@ -332,6 +335,7 @@ function taxon_merger_traductions($multi_prioritaire, $multi_non_prioritaire) {
  *        Traduction du champ dans la langue du site.
  */
 function taxon_traduire_champ($champ) {
+
 	$traduction = '';
 	if ($champ) {
 		$traduction = _T("taxon:champ_${champ}_label");
@@ -359,6 +363,7 @@ function taxon_traduire_champ($champ) {
  *        Toujours à vrai.
  */
 function cache_taxonomie_ecrire($cache, $service, $action, $tsn, $options) {
+
 	// Création du dossier cache si besoin
 	sous_repertoire(_DIR_VAR, trim(_TAXONOMIE_CACHE_NOMDIR, '/'));
 
@@ -384,6 +389,7 @@ function cache_taxonomie_ecrire($cache, $service, $action, $tsn, $options) {
  * @return string
  */
 function cache_taxonomie_nommer($service, $action, $tsn, $options) {
+
 	// Construction du chemin complet d'un fichier cache
 	$fichier_cache = _TAXONOMIE_CACHE_DIR
 					 . $service
@@ -420,6 +426,7 @@ function cache_taxonomie_nommer($service, $action, $tsn, $options) {
  *        Chemin du fichier cache si il existe ou chaine vide sinon.
  */
 function cache_taxonomie_existe($service, $action, $tsn, $options = array()) {
+
 	// Contruire le nom du fichier cache
 	$fichier_cache = cache_taxonomie_nommer($service, $action, $tsn, $options);
 
@@ -447,6 +454,7 @@ function cache_taxonomie_existe($service, $action, $tsn, $options = array()) {
  *        Toujours à `true`.
  */
 function cache_taxonomie_supprimer($caches = array()) {
+
 	include_spip('inc/flock');
 
 	if ($caches) {

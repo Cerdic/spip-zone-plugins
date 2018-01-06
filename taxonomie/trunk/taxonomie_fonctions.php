@@ -19,9 +19,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @filtre
  * @uses taxonomie_regne_existe()
  * @uses taxon_preserver_editions()
- * @uses taxonomie_vider_regne()
+ * @uses taxonomie_regne_vider()
  * @uses itis_read_hierarchy()
- * @uses itis_spipcode2language()
+ * @uses itis_find_language()
  * @uses itis_read_vernaculars()
  *
  * @param string $regne
@@ -35,7 +35,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return bool
  *        `true` si le chargement a réussi, `false` sinon
  */
-function taxonomie_charger_regne($regne, $rang, $codes_langue = array()) {
+function taxonomie_regne_charger($regne, $rang, $codes_langue = array()) {
+
 	$retour = false;
 	$taxons_edites = array();
 
@@ -47,7 +48,7 @@ function taxonomie_charger_regne($regne, $rang, $codes_langue = array()) {
 		$taxons_edites = taxon_preserver_editions($regne);
 
 		// Vider le règne avant de le recharger
-		taxonomie_vider_regne($regne);
+		taxonomie_regne_vider($regne);
 	}
 
 	// Lecture de la hiérarchie des taxons à partir du fichier texte extrait de la base ITIS
@@ -60,7 +61,7 @@ function taxonomie_charger_regne($regne, $rang, $codes_langue = array()) {
 		$meta_regne['compteur'] = count($taxons);
 		$traductions = array();
 		foreach ($codes_langue as $_code_langue) {
-			$langue = itis_spipcode2language($_code_langue);
+			$langue = itis_find_language($_code_langue);
 			if ($langue) {
 				$noms = itis_read_vernaculars($langue, $sha_langue);
 				if ($noms) {
@@ -137,7 +138,8 @@ function taxonomie_charger_regne($regne, $rang, $codes_langue = array()) {
  * @return bool
  *        `true` si le vidage a réussi, `false` sinon
  */
-function taxonomie_vider_regne($regne) {
+function taxonomie_regne_vider($regne) {
+
 	$retour = sql_delete('spip_taxons', 'regne=' . sql_quote($regne));
 	if ($retour !== false) {
 		// Supprimer la meta propre au règne.
@@ -166,6 +168,7 @@ function taxonomie_vider_regne($regne) {
  *        `true` si le règne existe, `false` sinon.
  */
 function taxonomie_regne_existe($regne, &$meta_regne) {
+
 	$meta_regne = array();
 	$existe = false;
 
@@ -203,15 +206,14 @@ function taxonomie_regne_existe($regne, &$meta_regne) {
  * @return array
  *        Liste des rangs demandée.
  */
-function taxonomie_lister_rangs($regne = _TAXONOMIE_REGNE_ANIMAL, $liste_base, $exclusions = array()) {
+function taxonomie_regne_lister_rangs($regne = _TAXONOMIE_REGNE_ANIMAL, $liste_base, $exclusions = array()) {
+
 	include_spip('inc/taxonomer');
 
 	$rangs = explode(':', $liste_base);
 	$rangs = array_diff($rangs, $exclusions);
 
-	if (($regne == _TAXONOMIE_REGNE_FONGIQUE)
-		or ($regne == _TAXONOMIE_REGNE_VEGETAL)
-	) {
+	if (($regne == _TAXONOMIE_REGNE_FONGIQUE) or ($regne == _TAXONOMIE_REGNE_VEGETAL)) {
 		if ($index_cherche = array_search(_TAXONOMIE_RANG_PHYLUM, $rangs)) {
 			$rangs[$index_cherche] = _TAXONOMIE_RANG_DIVISION;
 		}
@@ -239,7 +241,8 @@ function taxonomie_lister_rangs($regne = _TAXONOMIE_REGNE_ANIMAL, $liste_base, $
  *        Liste des taxons ascendants. Chaque taxon est un tableau associatif contenant les informations
  *        suivantes : `id_taxon`, `tsn_parent`, `nom_scientifique`, `nom_commun`, `rang`.
  */
-function taxonomie_informer_ascendance($id_taxon, $tsn_parent = null, $ordre = 'descendant') {
+function taxonomie_taxon_informer_ascendance($id_taxon, $tsn_parent = null, $ordre = 'descendant') {
+
 	$ascendance = array();
 
 	// Si on ne passe pas le tsn du parent correspondant au taxon pour lequel on cherche l'ascendance
@@ -288,7 +291,8 @@ function taxonomie_informer_ascendance($id_taxon, $tsn_parent = null, $ordre = '
  * @return array
  *        Tableau des phrases de crédits indexées par source.
  */
-function taxonomie_informer_credits($id_taxon, $sources_specifiques = null) {
+function taxonomie_taxon_crediter($id_taxon, $sources_specifiques = null) {
+
 	$sources = array();
 
 	// Si on ne passe pas les sources du taxon concerné alors on le cherche en base de données.

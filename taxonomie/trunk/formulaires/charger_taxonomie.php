@@ -12,7 +12,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * à partir des serveurs que le site client a déclaré.
  *
  * @uses taxonomie_regne_existe()
- * @uses taxonomie_lister_rangs()
+ * @uses taxonomie_regne_lister_rangs()
  *
  * @return array
  * 		Tableau des données à charger par le formulaire (affichage). Aucune donnée chargée n'est un
@@ -53,7 +53,7 @@ function formulaires_charger_taxonomie_charger() {
 	}
 
 	// Acquérir la liste des rangs taxonomiques exception faite du règne et de l'espèce
-	$rangs = taxonomie_lister_rangs(
+	$rangs = taxonomie_regne_lister_rangs(
 		_TAXONOMIE_REGNE_ANIMAL,
 		_TAXONOMIE_RANGS_PARENTS_ESPECE,
 		array(_TAXONOMIE_RANG_REGNE));
@@ -97,8 +97,8 @@ function formulaires_charger_taxonomie_verifier() {
  * choisi en y intégrant les traductions des noms communs sélectionnées.
  *
  * @uses taxonomie_regne_existe()
- * @uses taxonomie_vider_regne()
- * @uses taxonomie_charger_regne()
+ * @uses taxonomie_regne_vider()
+ * @uses taxonomie_regne_charger()
  *
  * @return array
  * 		Tableau retourné par le formulaire contenant toujours un message de bonne exécution ou
@@ -115,7 +115,7 @@ function formulaires_charger_taxonomie_traiter() {
 	$item = '';
 	if ($action == 'vider') {
 		if ($regne_existe) {
-			$ok = taxonomie_vider_regne($regne);
+			$ok = taxonomie_regne_vider($regne);
 			$item = $ok ? 'taxonomie:succes_vider_regne' : 'taxonomie:erreur_vider_regne';
 		}
 		else {
@@ -130,7 +130,7 @@ function formulaires_charger_taxonomie_traiter() {
 		// restituer les modifications manuelles des taxons
 		$langues = _request('langues_regne');
 		$rang_feuille = _request('rang_feuille');
-		$ok = taxonomie_charger_regne($regne, $rang_feuille, $langues);
+		$ok = taxonomie_regne_charger($regne, $rang_feuille, $langues);
 		$item = $ok ? 'taxonomie:succes_charger_regne' : 'taxonomie:erreur_charger_regne';
 	}
 

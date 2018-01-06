@@ -18,8 +18,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * le champ de taxon concerné par l'insertion et la section de page Wikipedia à insérer ou `*`
  * si toute la page est requise.
  *
- * @uses wikipedia_spipcode2language()
- * @uses wikipedia_get()
+ * @uses wikipedia_find_language()
+ * @uses wikipedia_get_page()
  * @uses taxon_merger_traductions()
  *
  * @return void
@@ -52,9 +52,9 @@ function action_taxonomie_get_wikipedia_dist() {
 
 			// Appel du service query de Wikipedia
 			include_spip('services/wikipedia/wikipedia_api');
-			$langue = wikipedia_spipcode2language($spip_langue); // TODO : attention à gérer la langue en amont
+			$langue = wikipedia_find_language($spip_langue); // TODO : attention à gérer la langue en amont
 			$options = array('language' => $langue, 'section' => $section);
-			$information = wikipedia_get('text', $taxon['tsn'], $nom_scientifique, $options);
+			$information = wikipedia_get_page('text', $taxon['tsn'], $nom_scientifique, $options);
 			if ($information['text']) {
 				// Si le plugin Convertisseur est actif, conversion du texte mediawiki vers SPIP.
 				// Mise en format multi systématique.

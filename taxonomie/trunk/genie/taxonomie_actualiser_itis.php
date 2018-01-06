@@ -19,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @uses itis_review_sha()
  * @uses taxonomie_regne_existe()
- * @uses taxonomie_charger_regne()
+ * @uses taxonomie_regne_charger()
  *
  * @param int $last
  *        Timestamp de la date de dernier appel de la tâche.
@@ -53,7 +53,7 @@ function genie_taxonomie_actualiser_itis_dist($last) {
 			}
 			if ($regne_a_recharger) {
 				$langues = array_keys($meta_regne['traductions']['itis']);
-				taxonomie_charger_regne($_regne, $meta_regne['rang'], $langues);
+				taxonomie_regne_charger($_regne, $meta_regne['rang'], $langues);
 			}
 		}
 	}
