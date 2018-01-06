@@ -385,6 +385,7 @@ var geocoder;]
 				}],
 				marker: [(#ENV{boutons}|table_valeur{marker}|=={non}|?{false,true})],
 				circle: false,
+				circlemarker: false,
 				rectangle: [(#ENV{boutons}|table_valeur{rectangle}|=={non}|?{false,''})][
 				(#ENV{boutons}|table_valeur{rectangle}|=={non}|non){
 					shapeOptions: { color: '#0033ff' }
