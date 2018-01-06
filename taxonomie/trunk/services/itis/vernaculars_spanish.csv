@@ -80,6 +80,7 @@
 23833,cocuyo
 23842,caimitillo verde
 23874,palo de jazmin
+28093,cañamón purgante
 29054,garbancillo
 30216,palo amargo
 30467,marron bacoba
@@ -222,6 +223,11 @@
 43753,Jacquiniella globosa
 43755,Jacquiniella carnosa
 43777,Orquídea áfila
+69495,abulón japonés
+69497,abulón rojo
+69498,abulón negro
+69499,abulón amarillo
+69500,abulón azul
 82708,arácnidos
 82732,arañas
 95625,camarón tigre marrón
@@ -2561,6 +2567,7 @@
 172980,suelas soles
 172982,suela tortilla
 172983,acedía reticulada
+172983,suela garabato
 172986,acedía rayada
 172986,suela listada
 172989,tepalcate
@@ -2599,6 +2606,7 @@
 173170,sobaco lija
 173174,cochito negro
 173174,negrito
+173175,cochito cola rosada
 173179,lija de clavo
 173179,sobaco común
 173180,lija reticulada
@@ -2642,6 +2650,7 @@
 173320,tamborín narizón
 173382,peces erizo
 173385,guanábana manchada
+173385,pez erizo de riendas
 173386,guanábana antillana
 173386,guanábana caribeña
 173391,pez erizo pecoso
@@ -4008,6 +4017,8 @@
 502326,Epidendrum de estróbilo
 502446,Biznaga-Escobar de espinas gruesas
 502447,Biznaga-Escobar de Emskoetter
+502548,flor de pascua
+502548,nochebuena
 502593,Biznaga-barril cilíndrica
 502594,Biznaga-barril de Emory
 502595,Biznaga-barril de Nuevo México
@@ -4849,7 +4860,7 @@
 585729,Anolis rojo
 585730,Anolis de Macrinus
 585731,Anolis de Matuda
-585732,Anolis escamas grandes
+585732,Anolis de escamas grandes
 585733,Anolis guerrerense
 585734,Anolis de Miller
 585735,Anolis de Hidalgo
@@ -4884,6 +4895,7 @@
 585766,Nauyaca-de árbol bicolor
 585767,Nauyaca-de árbol de Rowley
 585769,Nauyaca-terciopelo real
+585769,Terciopelo
 585770,Celesto huasteco
 585771,Celesto vientre verde
 585772,Nauyaca-de montaña guerrerense
@@ -5264,6 +5276,9 @@
 586165,Xenosaurio mayor
 586166,Xenosaurio de Newman
 586167,Xenosaurio cabeza plana
+586172,Garrobo yucateco
+586173,Garrobo del Balsas
+586174,Garrobo oaxaqueño
 586223,Culebra-imita coral común
 586228,Culebra-de agua vientre negro
 586237,Salamandra cabeza chata
@@ -5635,6 +5650,8 @@
 630996,abrojo tres rayas
 630997,abrojo dos rayas
 630999,viruela panza negra
+634854,Barba Amarilla
+634876,Jararaca Pintada
 635411,morena pecosa
 635412,morena rubicunda
 635414,congrio de jardín
@@ -6484,3 +6501,17 @@
 990183,estrella de mar lisa
 997724,Zacatonero de artemisa
 998123,Chinchinero común
+1007828,lenguado intermedio
+1055753,Lagartija de Garín
+1055907,Lagarto del Rio Las Damas
+1055950,Lagarto leopardo de Ubaghs
+1056131,Anolis tehuano
+1056957,Anolis liso
+1056965,Turipache de Montaña
+1057276,Lagartija-escamosa de desierto-mexicano
+1057602,Serpiente-marina pelágica
+1058381,Murciélago de Charreteras de Adriana
+1058382,Murciélago de Charreteras de Caripe
+1058428,Nauyaca-de montaña guerrerense
+1058435,Nauyaca-nariz de cerdo cornuda
+1058445,Víbora-cascabel pigmea-mexicana

@@ -56,6 +56,7 @@
 19040,micocoulier occidental
 19059,orme liège
 19102,bois d'arc
+19250,noyer cendré
 19276,chêne
 19290,chêne blanc
 19300,chêne bicolore
@@ -1619,26 +1620,61 @@
 172702,poissons plats
 172713,scophthalmidés
 172714,turbots
+172716,limande sordide
+172717,limande tachetée
+172719,plie du gulf stream
+172735,cardeau d'été
+172739,cardeau à quatre ocelles
 172746,turbot de sable
+172761,plie oculée
+172789,cardeau des profondeurs
+172792,fausse limande pâté
 172859,plies
+172862,plie à grande bouche
+172866,plie de profondeur
+172868,plie de Californie
+172871,plie mince
 172873,plie grise
+172875,plie à tête plate
+172876,plie de Béring
 172877,plie canadienne
+172887,limande-sole
+172893,flet étoilé
 172904,plie rouge
 172905,plie rouge
+172907,limande à nageoires jaunes
 172908,limande à queue jaune
 172909,limande à queue jaune
+172911,limande carline
+172912,plie arctique
+172913,plie arctique
 172914,plie lisse
+172915,plie lisse
+172917,fausse limande du Pacifique
+172919,plie à écailles régulières
+172921,carlottin anglais
+172923,plie vaseuse
+172924,plie à nageoires frisées
+172928,sole de sable
 172930,flétan du Groenland
+172932,flétan du Pacifique
 172933,flétan atlantique
+172978,plie royale
 172980,soles
 173060,soles-langues
 173112,balistes
 173112,poissons-coffres
 173112,poissons-globes
 173128,balistes
+173138,baliste capri
+173139,baliste royal
+173179,lime frangée
 173235,coffres
 173282,tétrodons
 173283,sphéroïdes
+173286,orbe étoilé
+173290,sphéroïde du nord
+173298,sphéroïde trogne
 173382,poissons porcs-épics
 173412,poissons-lune
 173414,môle
@@ -2743,6 +2779,7 @@
 505587,troscart de la Gaspésie
 505879,aloès arborescent
 505880,aloès du Cap
+506444,Euphorbe à résine
 506500,abaca
 506728,coco de mer
 506848,botryche pâle
@@ -2964,6 +3001,10 @@
 615814,anchois bombra
 615903,opahs
 615935,plies à grands yeux
+616392,limande du nord
+616484,sole de Kriete
+616607,sole californien
+616664,sole tachetée
 620919,salicoque voilée
 621022,requins-carpettes
 621052,requin-chabot birman
