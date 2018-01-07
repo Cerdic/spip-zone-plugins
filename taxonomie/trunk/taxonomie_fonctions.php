@@ -2,7 +2,6 @@
 /**
  * Ce fichier contient l'ensemble des fonctions implémentant l'API du plugin Taxonomie.
  *
- * @package SPIP\TAXONOMIE\API
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -15,8 +14,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Les nom communs anglais, français ou espagnols peuvent aussi être chargés en complément mais
  * ne couvrent pas l'ensemble des taxons.
  *
+ * @package SPIP\TAXONOMIE\REGNE
+ *
  * @api
  * @filtre
+ *
  * @uses taxonomie_regne_existe()
  * @uses taxon_preserver_editions()
  * @uses taxonomie_regne_vider()
@@ -96,9 +98,7 @@ function taxonomie_regne_charger($regne, $rang, $codes_langue = array()) {
 		// -- edite: oui, on conserve bien sur l'indicateur d'édition
 		if ($taxons_edites) {
 			foreach ($taxons_edites as $_taxon_edite) {
-				if (($tsn = $_taxon_edite['tsn'])
-					and (array_key_exists($tsn, $taxons))
-				) {
+				if (($tsn = $_taxon_edite['tsn']) and (array_key_exists($tsn, $taxons))) {
 					$taxons[$tsn]['descriptif'] = $_taxon_edite['descriptif'];
 					$taxons[$tsn]['nom_commun'] = taxon_merger_traductions(
 						$_taxon_edite['nom_commun'],
@@ -129,6 +129,8 @@ function taxonomie_regne_charger($regne, $rang, $codes_langue = array()) {
  * Les modifications manuelles effectuées sur les taxons du règne sont perdues, elles
  * doivent donc être préservées au préalable.
  *
+ * @package SPIP\TAXONOMIE\REGNE
+ *
  * @api
  * @filtre
  *
@@ -154,6 +156,8 @@ function taxonomie_regne_vider($regne) {
 /**
  * Retourne l'existence ou pas d'un règne en base de données.
  * La fonction scrute la table `spip_taxons` et non la meta propre au règne.
+ *
+ * @package SPIP\TAXONOMIE\REGNE
  *
  * @api
  * @filtre
@@ -189,6 +193,8 @@ function taxonomie_regne_existe($regne, &$meta_regne) {
  * Les règnes et les rangs sont exprimés en anglais et écrits en lettres minuscules.
  * La fonction permet d'exclure certains rangs de la liste.
  *
+ * @package SPIP\TAXONOMIE\REGNE
+ *
  * @api
  * @filtre
  *
@@ -206,7 +212,7 @@ function taxonomie_regne_existe($regne, &$meta_regne) {
  * @return array
  *        Liste des rangs demandée.
  */
-function taxonomie_regne_lister_rangs($regne = _TAXONOMIE_REGNE_ANIMAL, $liste_base, $exclusions = array()) {
+function taxonomie_regne_lister_rangs($regne, $liste_base, $exclusions = array()) {
 
 	include_spip('inc/taxonomer');
 
@@ -225,6 +231,8 @@ function taxonomie_regne_lister_rangs($regne = _TAXONOMIE_REGNE_ANIMAL, $liste_b
 
 /**
  * Fournit l'ascendance taxonomique d'un taxon donné par consultation en base de données.
+ *
+ * @package SPIP\TAXONOMIE\TAXON
  *
  * @api
  * @filtre
@@ -276,6 +284,8 @@ function taxonomie_taxon_informer_ascendance($id_taxon, $tsn_parent = null, $ord
  * Fournit les phrases de crédits des sources d'information ayant permis de compléter le taxon.
  * La référence ITIS n'est pas répétée dans le champ `sources` de chaque taxon car elle est
  * à la base de chaque règne. Elle est donc insérée par la fonction.
+ *
+ * @package SPIP\TAXONOMIE\TAXON
  *
  * @api
  * @filtre

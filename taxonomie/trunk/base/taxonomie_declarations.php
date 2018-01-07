@@ -2,7 +2,7 @@
 /**
  * Déclarations relatives à la base de données.
  *
- * @package SPIP\TAXONOMIE\ADMINISTRATION
+ * @package SPIP\TAXONOMIE\CONFIGURATION
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;

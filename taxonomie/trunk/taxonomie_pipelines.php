@@ -2,7 +2,7 @@
 /**
  * Ce fichier contient les cas d'utilisation de certains pipelines par le plugin Taxonomie.
  *
- * @package SPIP\TAXONOMIE
+ * @package SPIP\TAXONOMIE\TAXON
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -29,10 +29,8 @@ function taxonomie_pre_edition($flux) {
 	$id = intval($flux['args']['id_objet']);
 	$action = $flux['args']['action'];
 
-	// Traitements particuliers de l'objet taxon quand celui-ci est modfifié manuellement
-	if (($table == 'spip_taxons')
-	AND ($id)) {
-
+	// Traitements particuliers de l'objet taxon quand celui-ci est modifié manuellement
+	if (($table == 'spip_taxons') and $id) {
 		// Modification d'un des champs éditables du taxon
 		if ($action == 'modifier') {
 			// -- On positionne l'indicateur d'édition à oui, ce qui permettra d'éviter lors

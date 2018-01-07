@@ -2,7 +2,7 @@
 /**
  * Définit les autorisations du plugin Taxonomie
  *
- * @package    SPIP\TAXONOMIE\AUTORISATIONS
+ * @package    SPIP\TAXONOMIE\TAXON
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;

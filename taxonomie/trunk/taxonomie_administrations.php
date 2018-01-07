@@ -2,7 +2,7 @@
 /**
  * Fichier gérant l'installation et la désinstallation du plugin Taxonomie
  *
- * @package    SPIP\TAXONOMIE\ADMINISTRATION
+ * @package    SPIP\TAXONOMIE\CONFIGURATION
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;

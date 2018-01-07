@@ -2,7 +2,7 @@
 /**
  * Gestion du formulaire d'édition de l'objet taxon
  *
- * @package SPIP\TAXONOMIE\OBJET
+ * @package SPIP\TAXONOMIE\TAXON
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;

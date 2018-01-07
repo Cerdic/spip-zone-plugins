@@ -2,7 +2,7 @@
 /**
  * Gestion du formulaire de configuration du plugin
  *
- * @package SPIP\TAXONOMIE\ADMINISTRATION
+ * @package SPIP\TAXONOMIE\CONFIGURATION
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;

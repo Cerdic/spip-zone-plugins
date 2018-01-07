@@ -39,6 +39,8 @@ if (!defined('_TAXONOMIE_REGNES')) {
 		)));
 }
 
+
+
 if (!defined('_TAXONOMIE_RANG_REGNE')) {
 	/**
 	 * Nom anglais du rang `règne`.
@@ -234,7 +236,7 @@ function service_requeter_json($url, $taille_max = null) {
  * Extrait, de la table `spip_taxons`, la liste des taxons d'un règne donné ayant fait l'objet
  * d'une modification manuelle.
  *
- * @package SPIP\TAXONOMIE\OBJET
+ * @package SPIP\TAXONOMIE\TAXON
  *
  * @param string $regne
  *        Nom scientifique du règne en lettres minuscules : `animalia`, `plantae`, `fungi`.
@@ -260,7 +262,7 @@ function taxon_preserver_editions($regne) {
  * Si on ne trouve pas de balise `<multi>` dans l'un ou l'autre des paramètres, on considère que
  * le texte est tout même formaté de la façon suivante : texte0[langue1]texte1[langue2]texte2...
  *
- * @package SPIP\TAXONOMIE\OBJET
+ * @package SPIP\TAXONOMIE\TAXON
  *
  * @param string $multi_prioritaire
  *        Balise multi considérée comme prioritaire en cas de conflit sur une langue.
@@ -326,7 +328,7 @@ function taxon_merger_traductions($multi_prioritaire, $multi_non_prioritaire) {
 /**
  * Traduit un champ de la table `spip_taxons` dans la langue du site.
  *
- * @package SPIP\TAXONOMIE\OBJET
+ * @package SPIP\TAXONOMIE\TAXON
  *
  * @param $champ
  *        Nom du champ dans la base de données.
