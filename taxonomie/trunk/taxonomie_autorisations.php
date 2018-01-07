@@ -173,5 +173,3 @@ function autoriser_taxons_menu_dist($faire, $type='', $id=0, $qui = NULL, $opt =
 	return
 		autoriser('voir', '_taxons', $id, $qui, $opt);
 }
-
-?>

@@ -2,7 +2,6 @@
 /**
  * Ce fichier contient les cas d'utilisation de certains pipelines par le plugin Taxonomie.
  *
- * @package SPIP\TAXONOMIE\TAXON
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -14,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * rechargement du règne.
  *
  * @pipeline pre_edition
- * @package SPIP\TAXONOMIE\OBJET
+ * @package SPIP\TAXONOMIE\TAXON
  *
  * @param array		$flux
  * 		Données du pipeline fournie en entrée (chaque pipeline possède une structure de donnée propre).
@@ -41,6 +40,3 @@ function taxonomie_pre_edition($flux) {
 
 	return $flux;
 }
-
-
-?>
