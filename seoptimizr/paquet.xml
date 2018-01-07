@@ -1,18 +1,20 @@
 <paquet
 	prefix="seoptimizr"
 	categorie="statistique"
-	version="0.2.0"
+	version="0.2.1"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/seoptimizr-32.png"
 	documentation=""
-	schema="1.0"
+	schema="1.0.0"
 >
 
 	<nom>SEOptimiz'R pour SPIP</nom>
 	<auteur lien="https://contrib.spip.net/Loiseau2nuit">Loiseau2nuit</auteur>
 
-	<pipeline nom="declarer_champs_extras" inclure="base/seoptimizr_cextras.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/seoptimizr.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/seoptimizr.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/seoptimizr.php" />
 
 	<pipeline nom="recuperer_fond" action="recuperer_fond" inclure="seoptimizr_pipelines.php" />
 	<pipeline nom="affichage_final" action="affichage_final" inclure="seoptimizr_pipelines.php" />
