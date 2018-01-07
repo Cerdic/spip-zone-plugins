@@ -10,25 +10,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'actions_on_objects' => 'Actions',
 	'all_articles' => 'Tous les articles du site',
+	'all_articles' => 'Tous les articles du site',
+
+	// C
 
 	// D
-	'dir_bot_default_index_follow' => 'Directives aux robots d\'indexation. Comportement par défaut : index, follow',
+	
 
 	// E
 	'edit_object' => 'Editer l\'objet dans l\'espace privé de SPIP',
-	'empty_field' => 'Non renseigné',
+	'edit_template' => 'Nécéssite la modification de vos squelettes',
 	
-	// O
-	'onpage_empty_field' => 'Info On Page non renseignée',
-	'onpage_and_offpage_data' => 'Infos On page (contenu affiché à l\'écran) et Off page (infos moteurs &amp; directives robots)',
-	'onpage_data' => 'Infos On page',
+	// F
+	'field_empty' => 'Non renseigné',
+	'field_editable' => 'Double clic pour éditer',
 
-	// P*
+	// P
 	'parent_object' => 'Objet parent',
 	'parent_object_detail' => 'si applicable (ex: rubrique &gt; article)',
 	
 	// S
-	'set_301_to_url' => 'Redir. HTTP/301 vers URL',
-	'set_metas' => 'Balises metas'
-
+	'seoptimizr_explication' => 'Paramètres de référencement et d\'indexation. <b>Soyez sûr de ce que vous faites!</b>',
+	'seoptimizr_label' => 'SEOptimiz\'R',
+	'set_logo_alt_explication' => 'Pour le référencement Google Images du logo de la page. Par défaut spip utilisera le titre ou le nom du site',
+	'set_logo_alt_label' => 'Attribut ALT du logo',
+	'set_meta_robots_explication' => 'Directives aux robots d\'indexation. Par défaut: \'index, follow\'',
+	'set_meta_robots_label' => 'Meta \'robots\''
+	'set_url_301_explication' => 'Effectue une redirection HTTP/301 vers l\'URL de type http://... ',
+	'set_url_301_label' => 'Rediriger vers URL'
 );
