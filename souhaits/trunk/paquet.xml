@@ -1,7 +1,7 @@
 <paquet
 	prefix="souhaits"
 	categorie="divers"
-	version="1.4.6"
+	version="1.4.7"
 	etat="stable"
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/souhaits-64.png"
@@ -30,6 +30,7 @@
 	<pipeline nom="objet_compte_enfants" inclure="souhaits_pipelines.php" />
 	<pipeline nom="post_edition" inclure="souhaits_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="souhaits_pipelines.php" />
+	<pipeline nom="nospam_lister_formulaires" inclure="souhaits_pipelines.php" />
 	
 	<menu nom="souhaits" titre="souhait:titre_souhaits" parent="menu_edition" icone="images/souhait-16.png" action="souhaits" /> 
 	<menu nom="souhait_creer" titre="souhait:icone_creer_souhait" parent="outils_rapides" icone="images/souhait-new-16.png" action="souhait_edit" parametres="new=oui" /> 

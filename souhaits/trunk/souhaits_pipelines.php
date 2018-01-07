@@ -159,4 +159,14 @@ function souhaits_optimiser_base_disparus($flux){
 	return $flux;
 }
 
-?>
+/**
+ * Ajouter le formulaire à NoSPAM
+ *
+ * @param array $flux
+ * @return array
+ */
+function souhaits_nospam_lister_formulaires($flux) {
+	$flux[] = 'offrir_souhait';
+	
+	return $flux;
+}
