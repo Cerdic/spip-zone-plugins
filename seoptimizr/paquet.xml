@@ -13,13 +13,13 @@
 	<auteur lien="https://contrib.spip.net/Loiseau2nuit">Loiseau2nuit</auteur>
 
 	<pipeline nom="declarer_champs_extras" inclure="base/seoptimizr_cextras.php" />
-	
-<!-- 	<pipeline nom="recuperer_fond" action="recuperer_fond" inclure="seo_pipelines.php" />
-	<pipeline nom="affichage_final" action="affichage_final" inclure="seo_pipelines.php" />
-	<pipeline nom="autoriser" inclure="seo_pipelines.php" /> -->
 
-	<onglet nom="seoptimizr" titre="seoptimizr:seoptimiz_it" parent="menu_publication" icone="images/seoptimizr-24.png" action="seoptimizr"/>
-	<menu nom="seoptimizr" titre="seoptimizr:seoptimiz_it" parent="menu_publication" icone="images/seoptimizr-16.png" action="seoptimizr"/>
+	<pipeline nom="recuperer_fond" action="recuperer_fond" inclure="seoptimizr_pipelines.php" />
+	<pipeline nom="affichage_final" action="affichage_final" inclure="seoptimizr_pipelines.php" />
+	<pipeline nom="autoriser" inclure="seoptimizr_pipelines.php" /> 
+
+	<onglet nom="seoptimizr" titre="seoptimizr:seoptimizr" parent="menu_configuration" icone="images/seoptimizr-24.png" action="seoptimizr"/>
+	<menu nom="seoptimizr" titre="seoptimizr:seoptimizr" parent="menu_configuration" icone="images/seoptimizr-16.png" action="seoptimizr"/>
 
 	<chemin path="squelettes" />
 

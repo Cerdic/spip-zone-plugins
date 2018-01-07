@@ -1,0 +1,36 @@
+<div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	<h3 class="titrem"><:seoptimizr:configuration_seoptimizr:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_seobjet' value='#ENV{id_seobjet}' />
+		<ul class="editer-groupe">
+			<li class="editer editer_url_redir[ (#ENV**{erreurs}|table_valeur{url_redir}|oui)erreur]">
+				<label for="url_redir"><:seoptimizr:set_url_redir_label:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_redir})</span>
+				]<p class="explication"><:seoptimizr:set_url_redir_explication:></p>
+				<input type='text' class='text' maxlength="255" name='url_redir' id='url_redir' value="[(#ENV**{url_redir})]" />
+			</li>
+			<li class="editer editer_meta_robots[ (#ENV**{erreurs}|table_valeur{meta_robots}|oui)erreur]">
+				<label for="meta_robots"><:seoptimizr:set_meta_robots_label:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{meta_robots})</span>
+				]<p class="explication"><:seoptimizr:set_meta_robots_explication:></p>
+				<input type='text' class='text' maxlength="255" name='meta_robots' id='meta_robots' value="[(#ENV**{meta_robots})]" />
+			</li>
+			<li class="editer editer_logo_alt[ (#ENV**{erreurs}|table_valeur{logo_alt}|oui)erreur]">
+				<label for="logo_alt"><:seoptimizr:set_logo_alt_label:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_alt})</span>
+				]<p class="explication"><:seoptimizr:set_logo_alt_explication:></p>
+				<input type='text' class='text' name='logo_alt' id='logo_alt' value="[(#ENV**{logo_alt})]" />
+			</li>
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

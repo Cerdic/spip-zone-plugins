@@ -1,0 +1,34 @@
+<B_principal>
+	<div class="meta afficher_complement_objet objet #ENV{objet}">
+		<h2><:metas:configuration_metas:></h2>
+	<BOUCLE_principal (METAS) {id_meta}>
+		[<div class="champ contenu_id_meta[ (#ID_META*|strlen|?{'',vide})] hidden invisible">
+			<div class="label visible"><:metas:id_meta:> : </div>
+			<div dir='#LANG_DIR' class='span #EDIT{id_meta} id_meta'>(#ID_META)</div>
+		</div>]
+
+		[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+			<div class="label visible"><:metas:title:> : </div>
+			<div dir='#LANG_DIR' class='span #EDIT{titre} titre'>(#TITRE)</div>
+		</div>]
+
+		[<div class="champ contenu_description[ (#DESCRIPTION*|strlen|?{'',vide})]">
+			<div class="label visible"><:metas:meta_description:> : </div>
+			<div dir='#LANG_DIR' class='span #EDIT{description} description'>(#DESCRIPTION)</div>
+		</div>]
+
+		[<div class="champ contenu_keywords[ (#KEYWORDS*|strlen|?{'',vide})]">
+			<div class="label visible"><:metas:meta_keywords:> : </div>
+			<div dir='#LANG_DIR' class='span #EDIT{keywords} keywords'>(#KEYWORDS)</div>
+		</div>]
+
+		[<div class="champ contenu_canonical[ (#CANONICAL*|strlen|?{'',vide})]">
+			<div class="label visible"><:metas:meta_canonical:> : </div>
+			<div dir='#LANG_DIR' class='span #EDIT{canonical} canonical'>(#CANONICAL)</div>
+		</div>]
+
+	</BOUCLE_principal>
+	</div>
+	<div class="nettoyeur"> </div>
+
+</B_principal>

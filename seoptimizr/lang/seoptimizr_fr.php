@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'actions_on_objects' => 'Actions',
 	'all_articles' => 'Tous les articles du site',
-	'all_articles' => 'Tous les articles du site',
+	'all_sections' => 'Toutes les rubriques du site',
 
 	// C
 
@@ -30,12 +30,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'parent_object_detail' => 'si applicable (ex: rubrique &gt; article)',
 	
 	// S
+	'seoptimizr' => 'SEOptimiz\'R',
 	'seoptimizr_explication' => 'Paramètres de référencement et d\'indexation. <b>Soyez sûr de ce que vous faites!</b>',
-	'seoptimizr_label' => 'SEOptimiz\'R',
-	'set_logo_alt_explication' => 'Pour le référencement Google Images du logo de la page. Par défaut spip utilisera le titre ou le nom du site',
+	'set_logo_alt_explication' => 'Pour le référencement Google Images du logo de la page ou du document. Par défaut spip utilisera le titre ou le nom du site',
 	'set_logo_alt_label' => 'Attribut ALT du logo',
 	'set_meta_robots_explication' => 'Directives aux robots d\'indexation. Par défaut: \'index, follow\'',
 	'set_meta_robots_label' => 'Meta \'robots\''
-	'set_url_301_explication' => 'Effectue une redirection HTTP/301 vers l\'URL de type http://... ',
-	'set_url_301_label' => 'Rediriger vers URL'
+	'set_url_redir_explication' => 'Effectue une redirection HTTP/301 vers l\'URL de type http://... ',
+	'set_url_redir_label' => 'Rediriger vers URL'
 );
