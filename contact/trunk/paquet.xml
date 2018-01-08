@@ -1,7 +1,7 @@
 <paquet
 	prefix="contact"
 	categorie="communication"
-	version="0.16.3"
+	version="0.16.4"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/contact-32.png"

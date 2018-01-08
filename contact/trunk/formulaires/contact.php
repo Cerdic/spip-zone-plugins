@@ -191,9 +191,9 @@ function formulaires_contact_verifier_dist($id_auteur = '', $tracer = '', $optio
 			}
 		}
 	}
-
-	if (!(strlen(_request('sujet')) > 2)) {
-		$erreurs['sujet'] = _T('forum:forum_attention_trois_caracteres');
+	
+	if (!_request('sujet')) {
+		$erreurs['sujet'] = _T('spip:form_prop_indiquer_sujet').' '._T('ecrire:info_plus_trois_car');
 	}
 
 	$texte_min = !defined('_TEXTE_MIN')?10:_TEXTE_MIN;
