@@ -107,7 +107,7 @@
 								<label><:cookiebar:label_policy_txt_current:>&nbsp;:</label>
 								<div class="explication" style="display: inline-block;"><:cookiebar:message_policytext:></div>
 							</li>
-							#SET{name,policy_button}#SET{obli,''}#SET{defaut,true}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							#SET{name,policy_button}#SET{obli,''}#SET{defaut,false}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 								<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 								<span class='erreur_message'>(#GET{erreurs})</span>
@@ -122,13 +122,12 @@
 									<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 								</div>
 							</li>
-
 							<!-- policy url -->
-							#SET{name,policy_url}#SET{obli,''}[(#SET{defaut,http://})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							#SET{name,policy_url}#SET{obli,''}[(#SET{defaut,https://})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 								<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 								<span class='erreur_message'>(#GET{erreurs})</span>
-								]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+								]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" placeholder="#GET{defaut}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 							</li>
 
 							<!-- policy txt -->
