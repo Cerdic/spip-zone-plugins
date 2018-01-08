@@ -86,7 +86,7 @@ function octopush($sms_text,$sms_recipients,$arg) {
 	$sms->set_option_with_replies(0);
 	$sms->set_option_transactional(1);
 	$sms->set_sender_is_msisdn(0);
-	$sms->set_date(2016, 4, 17, 10, 19); // En cas d'envoi différé.
+	//$sms->set_date(2016, 4, 17, 10, 19); // En cas d'envoi différé.
 	$sms->set_request_keys('TRS');
 	$xml = $sms->send();
 	$xml = simplexml_load_string($xml);
