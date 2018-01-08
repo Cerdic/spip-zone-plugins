@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // On déclare ici la config du core
 function compositions_ieconfig_metas($table){
@@ -10,5 +12,3 @@ function compositions_ieconfig_metas($table){
 	
 	return $table;
 }
-
-?>

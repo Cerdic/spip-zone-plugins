@@ -1,12 +1,14 @@
 <?php
-/*
+/**
  * Plugin Compositions
  * (c) 2007-2009 Cedric Morin
  * Distribue sous licence GPL
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Declaration des champs sur les objets
@@ -143,5 +145,3 @@ function compositions_compositions_declarer_heritage($heritages){
 	return $heritages;
 }
 
-
-?>

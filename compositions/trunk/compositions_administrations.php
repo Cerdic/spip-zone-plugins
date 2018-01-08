@@ -1,12 +1,14 @@
 <?php
-/*
+/**
  * Plugin Compositions
  * (c) 2007-2009 Cedric Morin
  * Distribue sous licence GPL
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -77,4 +79,3 @@ function compositions_vider_tables($nom_meta_base_version) {
 	effacer_meta('compositions');
 	effacer_meta($nom_meta_base_version);
 }
-?>

@@ -1,12 +1,14 @@
 <?php
-/*
+/**
  * Plugin Compositions
  * (c) 2007-2009 Cedric Morin
  * Distribue sous licence GPL
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('compositions_fonctions');
 
@@ -102,4 +104,3 @@ function compositions_cacher($liste=null){
 	spip_log('compositions: maj des compositions_types ['.$GLOBALS['meta']['compositions_types'].']');
 }
 
-?>
