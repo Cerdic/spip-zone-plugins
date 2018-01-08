@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Compositions
- * (c) 2007-2009 Cedric Morin
+ * (c) Cedric Morin
  * Distribue sous licence GPL
  *
  */

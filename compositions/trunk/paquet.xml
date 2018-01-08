@@ -1,7 +1,7 @@
 <paquet
 	prefix="compositions"
 	categorie="outil"
-	version="3.7.0"
+	version="3.7.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/composition-32.png"
@@ -14,7 +14,7 @@
 
 	<auteur lien="http://www.yterium.com">Cedric Morin</auteur>
 
-	<copyright>2007-2013</copyright>
+	<copyright>2007-2018</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 

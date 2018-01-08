@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Compositions
- * (c) 2007-2013 Cedric Morin
+ * (c) Cedric Morin
  * Distribue sous licence GPL
  *
  * @package SPIP\Compositions\Fonctions
