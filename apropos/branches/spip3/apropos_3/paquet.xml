@@ -1,18 +1,32 @@
 <paquet
 	prefix="apropos"
 	categorie="divers"
+<<<<<<< .mine
+	version="1.0.7"
+||||||| .r87134
+	version="1.0.4"
+=======
 	version="1.0.5"
+>>>>>>> .r108414
 	etat="dev"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.3.*]"
 	logo="apropos.png"
+<<<<<<< .mine
+	documentation="https://contrib.spip.net/A-propos-des-plugins-actifs"
+	demonstration="https://www.jp.guihard.net/spip.php?article92"
+||||||| .r87134
+	documentation="http://contrib.spip.net/A-propos-des-plugins-actifs"
+	demonstration="http://www.jp.guihard.net/spip.php?article92"
+=======
 	documentation="https://contrib.spip.net/A-propos-des-plugins-actifs"
 	demonstration="http://www.jp.guihard.net/spip.php?article92"
+>>>>>>> .r108414
 >	
 
 	<nom>&#192; propos des Plugins actifs</nom>
 	<!-- Liste les plugins actifs et affiche une description sommaire -->
 
-	<auteur lien="http://www.jp.guihard.net/">Jean-Philippe Guihard</auteur>
+	<auteur lien="https://www.jp.guihard.net/">Jean-Philippe Guihard</auteur>
 
 	<pipeline nom="insert_head_css" inclure="apropos_pipeline.php" />
 	<pipeline nom="insert_head" action="insert_head" inclure="apropos_pipeline.php" />
