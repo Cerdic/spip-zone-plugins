@@ -32,7 +32,7 @@
 		<site alias="herbier" src="http://herbier.spip.net/" actif="oui" />
 		<site alias="video" src="https://medias.spip.net/" actif="oui" />
 		<site alias="demo" src="https://demo.spip.net/" actif="oui" />
-		<site alias="test" src="https://grml.eu/" actif="oui" />
+		<site alias="test" src="http://grml.eu/" actif="oui" />
 		<site alias="syntaxe" src="https://syntaxe.spip.net/" actif="oui" />
 	</groupe>
 
