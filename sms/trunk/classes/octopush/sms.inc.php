@@ -57,7 +57,6 @@ class SMS_OCTOSPUSH
 		$this->sms_fields_2				= array();
 		$this->sms_fields_3				= array();
 
-		$this->sms_mode		 	= INSTANTANE;
 		$this->sending_date	 	= time();
 		$this->sms_d		 	= date('d');
 		$this->sms_m		 	= date('m');
@@ -86,35 +85,77 @@ class SMS_OCTOSPUSH
 		$port	 = PORT;
 
 		$data = array(
-			'user_login'			=> $this->user_login,
-			'api_key'				=> $this->api_key,
-			'sms_text'				=> $this->sms_text,
-			'sms_recipients'		=> implode(',', $this->sms_recipients),
-			'recipients_first_names'=> implode(',', $this->recipients_first_names),
-			'recipients_last_names'	=> implode(',', $this->recipients_last_names),
-			'sms_fields_1'			=> implode(',', $this->sms_fields_1),
-			'sms_fields_2'			=> implode(',', $this->sms_fields_2),
-			'sms_fields_3'			=> implode(',', $this->sms_fields_3),
-			'sms_mode'				=> $this->sms_mode,
-			'sms_type'				=> $this->sms_type,
-			'sms_sender'			=> $this->sms_sender,
-			'request_mode'			=> $this->request_mode,
-			'request_id'			=> $this->request_id,
-			'with_replies'			=> $this->with_replies,
-			'transactional'			=> $this->transactional,
-			'msisdn_sender'			=> $this->msisdn_sender
+			'user_login'		=> $this->user_login,
+			'api_key'			=> $this->api_key,
+			'sms_text'			=> $this->sms_text,
+			'sms_recipients'	=> implode(',', $this->sms_recipients),
+			'sms_type'		 	=> $this->sms_type,
+			'sms_sender'		=> $this->sms_sender,
 		);
+
+		if($this->request_mode === SIMULATION)
+		{
+			$data['request_mode'] = $this->request_mode;
+		}
+
+		if($this->request_id !== '')
+		{
+			$data['request_id']	= $this->request_id;
+		}
+
+		if($this->with_replies == 1)
+		{
+			$data['with_replies'] = 1;
+		}
+
+		if($this->transactional == 1)
+		{
+			$data['transactional'] = 1;
+		}
+
+		if($this->msisdn_sender == 1)
+		{
+			$data['msisdn_sender'] = 1;
+		}
+
+		if($this->recipients_first_names !== '')
+		{
+			$data['recipients_first_names']	= implode(',', $this->recipients_first_names);
+		}
+
+		if($this->recipients_last_names !== '')
+		{
+			$data['recipients_last_names'] = implode(',', $this->recipients_last_names);
+		}
+
+		if($this->sms_fields_1 !== '')
+		{
+			$data['sms_fields_1'] = implode(',', $this->sms_fields_1);
+		}
+
+		if($this->sms_fields_2 !== '')
+		{
+			$data['sms_fields_2'] = implode(',', $this->sms_fields_2);
+		}
+
+		if($this->sms_fields_3 !== '')
+		{
+			$data['sms_fields_3'] = implode(',', $this->sms_fields_3);
+		}
+
+
 		if ($this->sms_mode == DIFFERE)
 		{
 			// GMT + 1 (Europe/Paris)
+			$data['sms_mode'] = DIFFERE;
 			$data['sending_date'] = $this->sending_date;
 		}
 
 		// Si des champs sont définis, on calcule la clé
 		if ($this->request_keys !== '')
 		{
-			$data['request_keys']	= $this->request_keys;
-			$data['request_sha1']	= $this->_get_request_sha1_string($this->request_keys, $data);
+			$data['request_keys'] = $this->request_keys;
+			$data['request_sha1'] = $this->_get_request_sha1_string($this->request_keys, $data);
 		}
 		return trim($this->_httpRequest($domain, $path, $port, $data));
 	}
@@ -198,7 +239,7 @@ class SMS_OCTOSPUSH
 		  <token>F76C90C4F269289575363AE34BF6E399</token>
 		  </octopush>'; */
 		libxml_use_internal_errors(true);
-		if (($xml		 = simplexml_load_string($xml_return)) !== false)
+		if (($xml = simplexml_load_string($xml_return)) !== false)
 		{
 			$res = (array) $xml->xpath('/octopush');
 			$tt	 = ((array) $res[0]);
@@ -250,8 +291,7 @@ class SMS_OCTOSPUSH
 			'api_key'	 => $this->api_key
 		);
 
-		$xml_return = trim($this->_httpRequest($domain, $path, $port, $data));
-		return $xml_return;
+		return trim($this->_httpRequest($domain, $path, $port, $data));
 	}
 
 	private function _get_request_sha1_string($request_keys, $data)
@@ -296,6 +336,7 @@ class SMS_OCTOSPUSH
 		}
 
 		$request = join('&', $qs);
+
 		if (function_exists('curl_init') AND $ch = curl_init(substr($domain, _CUT_) . $path))
 		{
 			curl_setopt($ch, CURLOPT_POST, true);

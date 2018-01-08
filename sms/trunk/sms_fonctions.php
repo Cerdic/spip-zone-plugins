@@ -58,7 +58,7 @@ function smsfactor($message,$destinataire,$arg) {
  * @param array $destinataire
  * @param array $arg
  *		utilise pour : $arg['sms_sender']
- *		utilise pour : $arg['sms_mode'] => SMS_STANDARD (par defaut) ou SMS_PREMIUM
+ *		utilise pour : $arg['sms_mode'] => XXX = LowCost; FR = Premium; WWW = Monde
  *		utilise pour : $arg['sms_type'] => INSTANTANE (par defaut) ou DIFFERE (Non prévu pour le moment)
  * @return boolean
 **/
@@ -68,7 +68,7 @@ function octopush($sms_text,$sms_recipients,$arg) {
 	$sms_text	= nettoyer_xml($sms_text);
 
 	// Variable pour l'envoi
-	$sms_type	= isset($arg['sms_type']) ? $arg['sms_type'] : 'SMS_STANDARD';
+	$sms_type	= isset($arg['sms_type']) ? $arg['sms_type'] : 'XXX';
 	$sms_mode	= isset($arg['sms_mode']) ? $arg['sms_mode'] : 'INSTANTANE';
 	$sms_sender	= isset($arg['sms_sender']) ? $arg['sms_sender'] : lire_config('sms/expediteur_octopush');
 	require_once('classes/octopush/sms.inc.php');
@@ -86,11 +86,10 @@ function octopush($sms_text,$sms_recipients,$arg) {
 	$sms->set_option_with_replies(0);
 	$sms->set_option_transactional(1);
 	$sms->set_sender_is_msisdn(0);
-	//$sms->set_date(2016, 4, 17, 10, 19); // En cas d'envoi différé.
+	$sms->set_date(2016, 4, 17, 10, 19); // En cas d'envoi différé.
 	$sms->set_request_keys('TRS');
 	$xml = $sms->send();
 	$xml = simplexml_load_string($xml);
-	spip_log($xml, 'test');
 	return $xml;
 }
 function filtre_balance($type) {
@@ -106,8 +105,8 @@ function filtre_balance($type) {
 	$xml = $sms->getBalance();
 	$xml = simplexml_load_string($xml);
 	$balance = $xml->balance;
-	$standard = $balance['0'];
-	$premium = $balance['1'];
+	$standard = $balance['1'];
+	$premium = $balance['0'];
 	$balance = array('standard' => $standard, 'premium' => $premium);
 	$valeurs = intval($balance[$type]);
 	return $valeurs;
