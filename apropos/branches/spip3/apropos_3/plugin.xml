@@ -1,18 +1,8 @@
 <plugin>
     <nom>&#192; propos des Plugins actifs</nom>
-<<<<<<< .mine
-    <auteur>[Jean-Philippe Guihard|Se rendre sur le site de Jean-Philippe Guihard->https://www.jp.guihard.net/]</auteur>
-    <version>1.0.7</version>
-    <etat>Dev</etat>
-||||||| .r87134
-    <auteur>[Jean-Philippe Guihard|Se rendre sur le site de Jean-Philippe Guihard->http://www.jp.guihard.net/]</auteur>
-    <version>1.0.4</version>
-    <etat>Dev</etat>
-=======
     <auteur>[Jean-Philippe Guihard|Se rendre sur le site de Jean-Philippe Guihard->http://www.jp.guihard.net/]</auteur>
     <version>1.0.5</version>
     <etat>dev</etat>
->>>>>>> .r108414
 	<slogan>Liste les plugins actifs et affiche une description sommaire</slogan>
     <description>
     <multi>
@@ -60,12 +50,6 @@
 		<action>insert_head</action>
 		<inclure>apropos_pipeline.php</inclure>
 	</pipeline>
-<<<<<<< .mine
-	<necessite id="SPIP" version="[3.0.0;3.3.*]" />
-||||||| .r87134
-	<necessite id="SPIP" version="[3.0.0;3.1.*]" />
-=======
 	<necessite id="SPIP" version="[3.0.0;3.1.99]" />
->>>>>>> .r108414
 	<categorie>divers</categorie> 
 </plugin>
