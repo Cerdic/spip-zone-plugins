@@ -296,9 +296,14 @@ function formulaires_contact_verifier_dist($id_auteur = '', $tracer = '', $optio
 		$pj_fichiers = $pj_fichiers + $infos_pj;
 		ksort($pj_fichiers);
 		set_request('pj_fichiers', $pj_fichiers);
-		$erreurs['infos_pj'] = $infos_pj;
+		/**
+		 * N'envoyer cela que si on passe à la confirmation, sinon on ajoute une erreur en trop
+		 */
+		if (isset($erreurs['previsu'])) {
+			$erreurs['infos_pj'] = $infos_pj;
+		}
 	}
-
+	
 	return $erreurs;
 }
 
