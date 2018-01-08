@@ -145,3 +145,36 @@ function compositions_compositions_declarer_heritage($heritages){
 	return $heritages;
 }
 
+/**
+ * Insertion dans le pipeline pre_edition (SPIP)
+ * 
+ * Lors de la création d'une traduction d'objet, récupérer les infos de composition
+ * 
+ * @param array $flux
+ * @return array
+ */
+function compositions_pre_edition($flux) {
+	if ($flux['args']['action'] == 'completer_traduction') {
+		$champs = array('composition', 'composition_lock');
+		if ($flux['args']['type'] == 'rubrique') {
+			$champs[] = 'composition_branche_lock';
+		}
+		/**
+		 * S'assurer que les champs sont bien là pour éviter les erreurs SQL
+		 */
+		$trouver_table = charger_fonction('trouver_table','base');
+		$desc = $trouver_table(table_objet_sql($flux['args']['type']));
+		foreach ($champs as $champ) {
+			if (empty($desc['field'][$champ])) {
+				unset($champs[$champ]);
+			}
+		}
+		if (count($champs) > 0) {
+			$_id_table = id_table_objet($flux['args']['type']);
+			$id_trad = sql_getfetsel('id_trad', $flux['args']['table'], $_id_table .'='. intval($flux['args']['id_objet']));
+			$set = sql_fetsel($champs, $flux['args']['table'], $_id_table . '=' . intval($id_trad));
+			$flux['data'] = array_merge($flux['data'], $set);
+		}
+	}
+	return $flux;
+}
