@@ -20,7 +20,7 @@
 					#SET{prix,#VALEUR|table_valeur{prix}}
 					#SET{taxes,<:prix_objets:prix_ttc:>}
 			})]
-				<span>[(#VALEUR{titre})]</span> <span>[(#GET{prix})][(#VALEUR{code_devise}|traduire_devise)][ ((#GET{taxes}) [ - <:prix_objets:taxes:> (#VALEUR{taxe}|sinon{#TAXES})%])]</span>&nbsp;<span></span><a class="ajax" href="[(#URL_ACTION_AUTEUR{eliminer_prix,[(#VALEUR|table_valeur{id_prix_objet})],[(#SELF|parametre_url{retour_action,oui})]})]#prix"> <img src="#CHEMIN_IMAGE{supprimer-12.png}" /></a>
+				<span>[(#VALEUR{titre})]</span> <span>[(#GET{prix}|filtres_prix_formater{#VALEUR{code_devise}})][ ((#GET{taxes}) [ - <:prix_objets:taxes:> (#VALEUR{taxe}|sinon{#TAXES})%])]</span>&nbsp;<span></span><a class="ajax" href="[(#URL_ACTION_AUTEUR{eliminer_prix,[(#VALEUR|table_valeur{id_prix_objet})],[(#SELF|parametre_url{retour_action,oui})]})]#prix"> <img src="#CHEMIN_IMAGE{supprimer-12.png}" /></a>
 			</li>
 		</BOUCLE_prix>
 		</ul>

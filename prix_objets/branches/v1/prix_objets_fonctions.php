@@ -5,6 +5,12 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 include_spip('base/abstract_sql');
+
+/**
+ * Un tableau des devises dispoibles.
+ *
+ * @return array
+ */
 function devises() {
 	$devises = array(
 
@@ -144,7 +150,12 @@ function devises() {
 	return $devises;
 }
 
-// traduit le nom de la devise
+/**
+ * Affiche le symbole de la devise si disponible
+ *
+ * @param string $code_devise
+ * @return string
+ */
 function traduire_devise($code_devise) {
 	include_spip('inc/devises');
 
@@ -153,6 +164,7 @@ function traduire_devise($code_devise) {
 
 	return $trad;
 }
+
 function prix_defaut($id_objet, $objet = 'article') {
 	if ($_COOKIE['spip_devise']) {
 		$devise_defaut = $_COOKIE['spip_devise'];
@@ -200,6 +212,7 @@ function devise_defaut_prix($prix = '', $traduire = true) {
 
 	return $devise_defaut;
 }
+
 function devise_defaut_objet($id_objet, $objet = 'article') {
 	include_spip('inc/config');
 	$config = lire_config('prix_objets');
@@ -229,6 +242,7 @@ function devise_defaut_objet($id_objet, $objet = 'article') {
 
 	return $defaut;
 }
+
 function traduire_code_devise($code_devise, $id_objet, $objet = 'article', $option = "") {
 	$prix = sql_getfetsel('prix', 'spip_prix_objets', 'id_objet=' . $id_objet . ' AND objet=' . sql_quote($objet) . ' AND code_devise =' . sql_quote($code_devise));
 
@@ -238,6 +252,7 @@ function traduire_code_devise($code_devise, $id_objet, $objet = 'article', $opti
 
 	return $prix;
 }
+
 function rubrique_prix($id = '', $objet = 'article', $sousrubriques = false) {
 	include_spip('inc/config');
 	include_spip('prive/formulaires/selecteur/generique_fonctions');
@@ -268,6 +283,7 @@ function rubrique_prix($id = '', $objet = 'article', $sousrubriques = false) {
 
 	return $retour;
 }
+
 function rubriques_enfant($id_parent, $rubriques = array()) {
 	$id_p = '';
 
@@ -292,24 +308,35 @@ function rubriques_enfant($id_parent, $rubriques = array()) {
 	return $rubriques;
 }
 
-// Surcharge de la fonction filtres_prix_formater_dist du plugin prix
-function filtres_prix_formater($prix) {
+/**
+ * Surcharge de la fonction filtres_prix_formater_dist du plugin prix.
+ * Formate le prix en y ajoutant la devise.
+ *
+ * @param string $prix
+ * @param string $devise
+ * @return string
+ */
+function filtres_prix_formater($prix, $devise = '') {
 	include_spip('inc/config');
 	include_spip('inc/cookie');
 
 	$config = lire_config('prix_objets');
-	$devises = isset($config['devises']) ? $config['devises'] : array();
 
-	// Si il y a un cookie 'devise_selectionnee' et qu'il figure parmis les devises disponibles on le prend
-	if (isset($_COOKIE['devise_selectionnee'])
-			and in_array($_COOKIE['devise_selectionnee'], $devises)) {
-		$devise = $_COOKIE['devise_selectionnee'];
-		$GLOBALS['devise_defaut'] = $devise;
+	if (!$devise) {
+		$devises = isset($config['devises']) ? $config['devises'] : array();
+
+		// Si il y a un cookie 'devise_selectionnee' et qu'il figure parmis les devises disponibles on le prend
+		if (isset($_COOKIE['devise_selectionnee'])
+				and in_array($_COOKIE['devise_selectionnee'], $devises)) {
+					$devise = $_COOKIE['devise_selectionnee'];
+					$GLOBALS['devise_defaut'] = $devise;
+				}
+			// Sinon on regarde si il ya une devise defaut valable
+		else {
+			$devise = prix_objets_devise_defaut($config);
+		}
 	}
-	// Sinon on regarde si il ya une devise defaut valable
-	else {
-		$devise = prix_objets_devise_defaut($config);
-	}
+
 
 	// On met le cookie
 	spip_setcookie('devise_selectionnee', $devise, time() + 3660 * 24 * 365, '/');
