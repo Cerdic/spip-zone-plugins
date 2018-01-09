@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'declinaisons_description' => 'Gère les différentes déclinaisons d’un produit',
-	'declinaisons_nom' => 'Déclinaisons Produit',
-	'declinaisons_slogan' => 'Gérer des déclinaisons d’un produit'
+	'declinaisons_description' => 'Gestion de déclinaisons de prix.',
+	'declinaisons_nom' => 'Déclinaisons Prix',
+	'declinaisons_slogan' => 'Gérer des déclinaisons de prix'
 );
