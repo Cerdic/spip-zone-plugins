@@ -77,3 +77,16 @@ function prix_objets_reservation_evenement_objets_configuration($flux) {
 
 	return $flux;
 }
+
+/**
+ * Ajouter des contenus dans la partie <head> des pages de l’espace privé.
+ *
+ * @pipeline header_prive
+ *
+ * @param array $flux
+ * @return array
+ */
+function prix_objets_header_prive($flux){
+	$flux .= '<link rel="stylesheet" href="' . _DIR_PLUGIN_PRIX_OBJETS .'css/prix_objets_admin.css" type="text/css" media="all" />';
+	return $flux;
+}

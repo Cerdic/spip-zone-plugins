@@ -1,7 +1,7 @@
 <paquet
 	prefix="prix_objets"
 	categorie="edition"
-	version="1.7.9"
+	version="1.7.10"
 	etat="stable"
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/prix_objets-64.png"
@@ -25,4 +25,6 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/prix_objets.php" />
 	<pipeline nom="affiche_milieu" inclure="prix_objets_pipelines.php" />
 	<pipeline nom="shop_objets" inclure="prix_objets_pipelines.php" />
-	<pipeline nom="reservation_evenement_objets_configuration" inclure="prix_objets_pipelines.php" /></paquet>
+	<pipeline nom="header_prive" inclure="prix_objets_pipelines.php" />
+	<pipeline nom="reservation_evenement_objets_configuration" inclure="prix_objets_pipelines.php" />
+</paquet>
