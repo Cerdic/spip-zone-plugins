@@ -1,0 +1,13 @@
+<li>
+<label><:declinaison:choisir_declinaison:></label>
+
+            <select name="id_objet_titre" id="id_objet_titre"  class="id_objet_titre" size="1">
+                <option value="0"><:declinaison:info_aucun_declinaison:></option>
+            <BOUCLE_declinaisons(DECLINAISONS){par num titre, titre}{id_declinaison !IN #ENV{declinaisons_choisis}}>
+                <option value="#ID_DECLINAISON"[(#ID_DECLINAISON|=={#ENV{id_objet_titre}}|oui) selected="selected"]>#TITRE</option>
+            </BOUCLE_declinaisons>
+        </select>
+        [(#SET{redirect,#SELF|parametre_url{retour_action,oui}})]
+      [(#AUTORISER{creer,declinaison})[(#URL_ECRIRE{declinaison_edit,new=oui}|parametre_url{redirect,#GET{redirect}#edition_prix}|icone_verticale{<:declinaison:icone_creer_declinaison:>,declinaison,new,right})]
+    ] 
+</li>

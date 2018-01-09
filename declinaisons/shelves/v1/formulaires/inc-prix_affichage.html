@@ -1,0 +1,41 @@
+<B_prix>
+
+    <table class='spip liste'>    
+        [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{declinaison:info_1_prix,declinaison:info_nb_prix}})</strong></caption>]
+         <thead>
+            <tr class='first_row'>
+                <th class='prix' scope='col'><:prix_objets:info_prix:></th>
+                <th class='statut' scope='col'><:prix_objets:devises_choisis:></th> 
+                <th class='taxes' scope='col'><:prix_objets:taxes:></th> 
+                <th class='titre' scope='col'><:declinaison:label_titre:></th>
+                <th class='titre' scope='col'><:prix_objets:supprimer:></th>
+            </tr>
+        </thead>
+     <tbody>
+        <BOUCLE_prix(POUR){tableau #ENV{prix_choisis}}>
+        [(#VALEUR|table_valeur{prix_ht}|!={0.00}|?{
+                #SET{prix,#VALEUR|table_valeur{prix_ht}}
+                #SET{taxes,<:prix_objets:prix_ht:>}
+                ,
+                #SET{prix,#VALEUR|table_valeur{prix}}
+                #SET{taxes,<:prix_objets:prix_ttc:>}
+            })]
+            <tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+                <td>#GET{prix}</td>
+                <td>[(#VALEUR|table_valeur{code_devise}|traduire_devise)]</td>
+                <td>#GET{taxes}</td>
+                <td>
+                   
+                        #VALEUR{titre}
+                  
+            </td>
+            <td>
+                <a class="ajax" href="[(#URL_ACTION_AUTEUR{eliminer_prix,[(#VALEUR|table_valeur{id_prix_objet})],[(#SELF|parametre_url{retour_action,oui})]})]#edition_prix" title="<:prix_objets:supprimer:>"> <img src="#CHEMIN_IMAGE{supprimer-12.png}" /></a>
+                </td>
+
+            </tr>
+        </BOUCLE_prix>
+    </tbody>
+</table>
+
+</B_prix>
