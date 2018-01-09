@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_attributs_html_interdits' => 'Il n’est pas permis d’insérer des images ni d’utiliser les attributs html <tt>class</tt> ou <tt>style</tt>',
 	'erreur_blacklist' => 'Tu as été mis sur liste noire, tu ne peux plus poster de message.',
-	'erreur_jeton' => 'Impossible de prendre en compte votre message. Merci de le soumettre à nouveau !',
+	'erreur_jeton' => 'Impossible de prendre en compte ton message. Merci de le soumettre à nouveau !',
 	'erreur_spam' => 'Impossible de prendre en compte ton message !',
 	'erreur_spam_doublon' => 'Un message identique existe déjà !',
 	'erreur_spam_ip' => 'Trop de commentaires nuit à la qualité !',
