@@ -197,6 +197,7 @@ function prix_defaut($id_objet, $objet = 'article') {
 
 	return $defaut;
 }
+
 function devise_defaut_prix($prix = '', $traduire = true) {
 	if ($_COOKIE['spip_devise']) {
 		$devise_defaut = $_COOKIE['spip_devise'];
