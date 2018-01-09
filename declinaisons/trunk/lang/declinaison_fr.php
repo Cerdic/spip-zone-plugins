@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix_produit' => 'Choisissez un produit',
 
 	// D
-	'declinaisons_titre' => 'Déclinaisons Produit',
+	'declinaisons_titre' => 'Déclinaisons Prix',
 
 	// I
 	'icone_creer_declinaison' => 'Créer une déclinaison',
@@ -32,9 +32,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_descriptif' => 'Descriptif',
 	'label_id_parent' => 'Déclinaison parente',
 	'label_titre' => 'Titre',
-
-	// P
-	'produits' => 'Produits',
 
 	// R
 	'retirer_lien_declinaison' => 'Retirer cette déclinaison',
