@@ -332,18 +332,24 @@ function gis_xmlrpc_server_class($flux) {
  *
  * Purger le répertoire js si on a une carte google dans les layers pour recalculer le js statique
  * Peut être à améliorer
+ * Invalider le cache lors de l'ajout ou dissociation d'un point à un objet, "Voir en ligne" ne suffit pas
+ * car le json est sur un autre hit
  *
  * @param array $flux
  * 		Le contexte du pipeline
  * @return array $flux
  */
 function gis_formulaire_traiter($flux) {
-	if ($flux['args']['form'] == 'configurer_gis') {
-		if (count(array_intersect(array('google_roadmap', 'google_satellite', 'google_terrain'), _request('layers'))) > 0) {
-			include_spip('inc/invalideur');
-			purger_repertoire(_DIR_VAR . 'cache-js');
-			suivre_invalideur(1);
-		}
+	if ($flux['args']['form'] == 'configurer_gis'
+		and count(array_intersect(array('google_roadmap', 'google_satellite', 'google_terrain'), _request('layers'))) > 0) {
+		include_spip('inc/invalideur');
+		purger_repertoire(_DIR_VAR . 'cache-js');
+		suivre_invalideur(1);
+	} else if ($flux['args']['form'] == 'editer_liens'
+		and isset($flux['args']['args'][0])
+		and $flux['args']['args'][0] == 'gis') {
+		include_spip('inc/invalideur');
+		suivre_invalideur(1);
 	}
 	return $flux;
 }
