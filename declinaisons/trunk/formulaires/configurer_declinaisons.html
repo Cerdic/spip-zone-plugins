@@ -1,0 +1,23 @@
+<div class="formulaire_spip formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	<form action="#ENV{action}" method="post"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class="editer-groupe">
+			<div class="fieldset fieldset_fieldset_parametres saisie_fieldset">
+				<fieldset><legend><declinaison:legende_formulaire_panier:></legend>
+						<div class="editer-groupe">
+							[(#SAISIE{oui_non,formulaire_titre_complet,
+								defaut=on,
+								label=<:declinaison:label_formulaire_titre_complet:>,
+								explication=<:declinaison:explication_formulaire_titre_complet:>}
+							)]
+					</div>
+				</fieldset>
+			</div>
+		</div>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+	</div></form>
+</div>

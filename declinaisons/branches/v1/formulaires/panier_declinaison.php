@@ -1,8 +1,19 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION"))
 	return;
-function formulaires_panier_declinaison_charger_dist($id_objet_produit, $objet_produit = 'article') {
+	function formulaires_panier_declinaison_charger_dist($id_objet_produit, $objet_produit = 'article', $titre = '') {
 	include_spip('inc/session');
+	include_spip('inc/config');
+
+	$config = lire_config('declinaisons', array());
+	$formulaire_titre_complet = isset($config['formulaire_titre_complet']) ? $config['formulaire_titre_complet'] : 'on';
+
+	if ($titre == 'court') {
+		$formulaire_titre_complet = '';
+	}
+	elseif ($titre == 'complet') {
+		$formulaire_titre_complet = 'on';
+	}
 
 	if (is_array($id_objet_produit))
 		$id_objet_produit = implode(',', $id_objet_produit);
@@ -19,6 +30,10 @@ function formulaires_panier_declinaison_charger_dist($id_objet_produit, $objet_p
 	}
 
 	while ($data = sql_fetch($sql)) {
+		if (!$formulaire_titre_complet) {
+			$titre = explode(' - ', $data['titre']);
+			$data['titre'] = $titre[1];
+		}
 		if ($data['prix_ht'] != 0.00) {
 			$data['prix'] = $data['prix_ht'];
 			$data['taxe'] = _T('shop:prix_ht');
