@@ -170,6 +170,7 @@ class fichiersImporter extends Command {
 						if (preg_match(",<ins class='id_article'>(.*?)</ins>,ims", $texte, $z))
 							$id_source = $z[1];
 						
+						
 						// dans quelle rubrique importer ?
 						// La hierarchie est-elle précisée dans le fichier ? (en principe oui)
 						if($hierarchie){
@@ -180,6 +181,7 @@ class fichiersImporter extends Command {
 						
 						include_spip("inc/rubriques");
 						$id_rubrique = creer_rubrique_nommee("$hierarchie", $id_parent);
+						
 						
 						if($descriptif_rubrique)
 							$up = sql_updateq('spip_rubriques', array('statut' => 'publie', 'descriptif' => $descriptif_rubrique), "id_rubrique=$id_rubrique");
