@@ -4,6 +4,8 @@
 
 Convertir des fichiers par lots.
 
+Formats de conversion : docx, quark, html, quark_xml, indesign_xml, xml_ocr, xml_de.
+
 Mettre les fichiers dans le repertoire /conversion_source/%COLLECTION%/%NUMERO%/[fichiers] du SPIP par défaut, ou dans un autre répertoire.
 
 Lancer la commande spip-cli : spip conversion
@@ -11,7 +13,6 @@ Lancer la commande spip-cli : spip conversion
 Les fichiers convertis sont placés dans le repertoire /conversion_spip/%COLLECTION%/%NUMERO% du SPIP
 
 Si un repertoire git est trouvé dans /dest alors on prend le repertoire */ // /*.git/*/collections comme répertoire dest (ce qui permet de faire un suivi de révision du contenu). 
-
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -57,7 +58,7 @@ class Convert extends Command {
 			)
 		;
 	}
-
+	
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		global $spip_racine;
 		global $spip_loaded;
@@ -70,9 +71,9 @@ class Convert extends Command {
 		include_spip("iterateur/data");
 		include_spip("inc/utils");
 		include_spip(_DIR_PLUGIN_CONVERTISSEUR . "convertisseur_fonctions");
-
+		
 		$extracteurs_dispos = join(", ",$GLOBALS['extracteurs_disponibles']);
-
+		
 		if($extracteur == "" || !in_array($extracteur, $GLOBALS['extracteurs_disponibles'])){
 			$output->writeln("<error>Définir un extracteur `spip conversion -e %extracteur%`. Extracteurs disponibles : $extracteurs_dispos</error>");
 			exit ;
@@ -80,7 +81,7 @@ class Convert extends Command {
 		
 		if ($spip_loaded) {
 			chdir($spip_racine);
-
+			
 			if (!function_exists('passthru')){
 				$output->writeln("<error>Votre installation de PHP doit pouvoir exécuter des commandes externes avec la fonction passthru().</error>");
 			}
@@ -90,7 +91,7 @@ class Convert extends Command {
 				$output->writeln("<error>Préciser où sont les fichiers à convertir `spip conversion -s %repertoire%` ou créer un repertoire conversion_source/</error>");
 				exit ;
 			}
-	
+			
 			// Repertoire source
 			if($dest != "" AND !is_dir($dest))
 				mkdir($dest);
@@ -103,20 +104,20 @@ class Convert extends Command {
 			// Si c'est bon on continue
 			else{
 				$output->writeln("<info>C'est parti pour la conversion `$extracteur` des fichiers de $source/ dans $dest/ !</info>");
-
+				
 				// trouve t'on un repertoire trunk/collections dans $dest ?
 				if($ls_depot = inc_ls_to_array_dist($dest ."/trunk/collections")){
 					$dest = $ls_depot[0]['dirname'] . "/" .  $ls_depot[0]['basename'] ;
 					$output->writeln("<info>GIT : dest = $dest</info>");
 				}
-								
+				
 				// plugin convertisseur
-				include_spip("extract/$extracteur");				
+				include_spip("extract/$extracteur");
 				$fonction_extraction = $GLOBALS['extracteur'][$extracteur] ;
 				
 				// chopper des fichiers xml mais pas xxx_metatada.xml
 				$fichiers = preg_files($source ."/", "(?:(?<!_metadata\.)xml$)");
-									
+				
 				// ou a défaut n'importe quel fichier trouvé
 				if(sizeof($fichiers) == 0)
 					$fichiers = preg_files($source, ".*");
@@ -126,7 +127,7 @@ class Convert extends Command {
 					//var_dump($f);
 					
 					$fn = str_replace("$source/","", $f);
-				
+					
 					// Déterminer l'organisation des fichiers
 					$classement = explode("/", $fn);
 					// Répertoires publication et numero ?
@@ -146,7 +147,7 @@ class Convert extends Command {
 					}
 					
 					$article = basename($f);
-
+					
 					// pour le chemin des documents.
 					set_request('fichier', $collection . $numero . "fichier.xml");
 					
@@ -154,10 +155,10 @@ class Convert extends Command {
 					
 					include_spip("inc/convertisseur");
 					$contenu = nettoyer_format($contenu);
-
+					
 					// Générer des noms de fichiers valides
 					include_spip("inc/charsets");
-					$article = translitteration($article);					
+					$article = translitteration($article);
 					$article = preg_replace(',[^\w-]+,', '_', $article);
 					$article = preg_replace(',_xml$,', '.txt', $article);
 					
@@ -198,7 +199,7 @@ class Convert extends Command {
 					ecrire_fichier($c["fichier_dest"], $c["contenu"]);
 					
 					$output->writeln("Nouvelle conversion : " . $c["fichier_dest"]);
-
+				
 				}
 				
 			}

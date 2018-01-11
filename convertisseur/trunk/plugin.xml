@@ -12,13 +12,13 @@
 	<etat>test</etat>
 	<slogan>
 		<multi>
-		[fr]Convertir les textes wiki, phpBB et quark xpress en SPIP 
+		[fr]Importer, exporter. Convertir les textes et images (formats xml, wiki, phpBB, Quark Xpress, jpeg...
 		[en]Convert wiki, phpBB and quark xpress texts into SPIP
 		</multi>
 	</slogan>
 	<description>
 		<multi>
-		[fr]Convertit les formats de type wiki, phpBB, quark xpress tags en format SPIP et vice versa ; int&#232;gre au besoin les textes convertis dans des articles ; on peut uploader plusieurs textes en un seul coup en les zippant au pr&#233;alable
+		[fr]Convertit les formats de type wiki, phpBB, quark xpress tags en format SPIP et vice versa ; int&#232;gre au besoin les textes convertis dans des articles ; on peut uploader plusieurs textes en un seul coup en les zippant au pr&#233;alable. Formats de conversion : docx, quark, html, quark_xml, indesign_xml, xml_ocr, xml_de
 		[en]Converts various formats (wiki, phpBB) into SPIP format
 		</multi>
 	</description>
