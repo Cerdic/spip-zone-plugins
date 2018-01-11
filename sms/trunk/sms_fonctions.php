@@ -12,6 +12,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 //Utilisation de SMS factor
+include_spip('inc/config');
 if (lire_config('sms/prestataire') == "smsfactor") {
 	function envoyer_sms($message,$destinataire,$arg=array()) {
 		return smsfactor($message,$destinataire,$arg);
