@@ -560,7 +560,7 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 			AND aut.id_article=a.id_article
 			AND aut.id_auteur=".$id_auteur
 			);
-		
+	
 	if ($t = spip_fetch_array($s)) {
 		$id_article = $t['id_article'];
 	} else {

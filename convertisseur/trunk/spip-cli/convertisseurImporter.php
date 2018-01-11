@@ -112,321 +112,316 @@ class fichiersImporter extends Command {
 				}
 				// on prend tous les fichiers txt dans la source, sauf si metadata.txt a la fin.
 				$fichiers = preg_files($source . "/", "(?:(?<!\.metadata\.)txt$)", 100000);
-				
-				// start and displays the progress bar
-				$progress = new ProgressBar($output, sizeof($fichiers));
-				$progress->setBarWidth(100);
-				$progress->setRedrawFrequency(1);
-				$progress->setMessage(" Import de $source/*.txt en cours dans la rubrique $id_parent ... ", 'message'); /**/  
-				$progress->setMessage("", 'inforub');
-				$progress->start();
-				
-				if(is_file("liens_a_corriger.txt"))
-					unlink("liens_a_corriger.txt");
-				if(is_file("liens_non_corriges.txt"))
-					unlink("liens_non_corriges.txt");
-				if(is_file("liens_corriges.txt"))
-					unlink("liens_corriges.txt");
-				
-				foreach($fichiers as $f){
-					// date d'apres le nom du fichier
-					$fichier = basename($f);
-					preg_match("/^(\d{4})-\d{2}/", $fichier, $m);
-					$mois = $m[0];
-					$annee = $m[1] ;
+				if(sizeof($fichiers)>0){
+					// start and displays the progress bar
+					$progress = new ProgressBar($output, sizeof($fichiers));
+					$progress->setBarWidth(100);
+					$progress->setRedrawFrequency(1);
+					$progress->setMessage(" Import de $source/*.txt en cours dans la rubrique $id_parent ... ", 'message'); /**/  
+					$progress->setMessage("", 'inforub');
+					$progress->start();
 					
-					// chopper l'id_parent dans le fichier ?
-					include_spip("inc/flock");
-					lire_fichier($f, $texte);
+					if(is_file("liens_a_corriger.txt"))
+						unlink("liens_a_corriger.txt");
+					if(is_file("liens_non_corriges.txt"))
+						unlink("liens_non_corriges.txt");
+					if(is_file("liens_corriges.txt"))
+						unlink("liens_corriges.txt");
 					
-					// menage
-					//@@COLLECTION:esRetour ligne automatique
-					//@@SOURCE:article914237.html
-					
-					$texte = preg_replace("/@@COLLECTION.*/", "", $texte);
-					$texte = preg_replace("/@@SOURCE.*/", "", $texte);
-					
-					// Si des <ins> correspondent à des champs metadonnees connus, on les ajoute.
-					$champs_metadonnees = array("mots_cles", "auteurs", "hierarchie", "documents", "descriptif_rubrique");
-					$hierarchie = "" ;
-					$auteurs = "" ;
-					$mots_cles = "" ;
-					$documents = "" ;
-					$descriptif_rubrique = "" ;
-					
-					if (preg_match_all(",<ins[^>]+class='(.*?)'[^>]*?>(.*?)</ins>,ims", $texte, $z, PREG_SET_ORDER)){ 
-						foreach($z as $d){ 
-							if(in_array($d[1], $champs_metadonnees)){ 
-								// class="truc" => $truc 
-								$$d[1] = split("@@", $d[2]); 
-								// virer du texte 
-								$texte = substr_replace($texte, '', strpos($texte, $d[0]), strlen($d[0])); 
+					foreach($fichiers as $f){
+						// date d'apres le nom du fichier
+						$fichier = basename($f);
+						preg_match("/^(\d{4})-\d{2}/", $fichier, $m);
+						$mois = $m[0];
+						$annee = $m[1] ;
+						
+						// chopper l'id_parent dans le fichier ?
+						include_spip("inc/flock");
+						lire_fichier($f, $texte);
+						
+						// menage
+						//@@COLLECTION:esRetour ligne automatique
+						//@@SOURCE:article914237.html
+						
+						$texte = preg_replace("/@@COLLECTION.*/", "", $texte);
+						$texte = preg_replace("/@@SOURCE.*/", "", $texte);
+						
+						// Si des <ins> correspondent à des champs metadonnees connus, on les ajoute.
+						$champs_metadonnees = array("mots_cles", "auteurs", "hierarchie", "documents", "descriptif_rubrique");
+						$hierarchie = "" ;
+						$auteurs = "" ;
+						$mots_cles = "" ;
+						$documents = "" ;
+						$descriptif_rubrique = "" ;
+						
+						if (preg_match_all(",<ins[^>]+class='(.*?)'[^>]*?>(.*?)</ins>,ims", $texte, $z, PREG_SET_ORDER)){ 
+							foreach($z as $d){ 
+								if(in_array($d[1], $champs_metadonnees)){ 
+									// class="truc" => $truc 
+									$$d[1] = split("@@", $d[2]); 
+									// virer du texte 
+									$texte = substr_replace($texte, '', strpos($texte, $d[0]), strlen($d[0])); 
+								}
 							}
 						}
-					}
-					
-					$descriptif_rubrique = $descriptif_rubrique[0] ;
-					
-					if (preg_match(",<ins class='id_article'>(.*?)</ins>,ims", $texte, $z))
-						$id_source = $z[1];
-					
-					// dans quelle rubrique importer ?
-					// La hierarchie est-elle précisée dans le fichier ? (en principe oui)
-					if($hierarchie){
-						$titre_parent = $hierarchie[0] ;
-						$titre_rubrique = $hierarchie[1] ;
 						
-						// hack perso diplo 2006/02 => 02 ou 2006-02 => 02
-						$titre_rubrique = preg_replace(",^(\d{4})(?:/|-)(\d{2}).*$,", "\\2", $titre_rubrique); 
-					
-					}else{ // sinon on genere des rubriques annees / mois
-						$titre_parent = $annee ;
-						$titre_rubrique = "$annee-$mois" ;
-					}
-					
-					include_spip("inc/rubriques");
-					$id_rubrique = creer_rubrique_nommee("$titre_parent/$titre_rubrique", $id_parent);
-					
-					if($descriptif_rubrique)
-						$up = sql_updateq('spip_rubriques', array('statut' => 'publie', 'descriptif' => $descriptif_rubrique), "id_rubrique=$id_rubrique");
-					else
-						$up = sql_updateq('spip_rubriques', array('statut' => 'publie'), "id_rubrique=$id_rubrique");
-					
-					if($up)
-						$progress->setMessage(" Rubrique $titre_parent/$titre_rubrique => $id_rubrique ", 'inforub');
-					
-					$progress->setMessage("", 'docs');
-					$progress->setMessage("", 'mot');
-					$progress->setMessage("", 'auteur');
-					
-					// inserer l'article
-					include_spip("inc/convertisseur");
-					
-					// auteur par défaut (admin)
-					$id_admin = sql_getfetsel("id_auteur", "spip_auteurs", "id_auteur=1");
-					$id_admin = ($id_admin)? $id_admin : 12166 ;
-					
-					$GLOBALS['auteur_session']['id_auteur'] = $id_admin ;
-					
-					if($id_article = inserer_conversion($texte, $id_rubrique, $f)){
+						$descriptif_rubrique = $descriptif_rubrique[0] ;
 						
-						// doit-on conserver l'id_article (option) ?
-						// sql_update spip_articles id_article=$id_source
-						if($conserver_id_article == "oui" and $id_source > 0){
-							sql_update("spip_articles", array("id_article" => $id_source), "id_article=$id_article") ;
-							// maj le lien auteur admin
-							if($spip_version_branche > "3")
-								sql_update('spip_auteurs_liens',
-									array(
-									'id_objet' => $id_source
-									),
-									"objet='article' and id_objet=$id_article"
-								);
-							else
-								sql_update('spip_auteurs_articles',
-									array(
-									'id_article' => $id_source
-									),
-									"id_article=$id_article"
-								);
-							$id_article = $id_source ;
+						if (preg_match(",<ins class='id_article'>(.*?)</ins>,ims", $texte, $z))
+							$id_source = $z[1];
+						
+						// dans quelle rubrique importer ?
+						// La hierarchie est-elle précisée dans le fichier ? (en principe oui)
+						if($hierarchie){
+							$hierarchie = implode("/", $hierarchie);
+						}else{ // sinon on genere des rubriques annees / mois
+							$hierarchie = "$annee/$annee-$mois";
 						}
-						// Créer l'auteur ?
-						if($auteurs){
-							// on efface les auteurs, puis on remet les nouveaux
-							if($spip_version_branche > "3")
-								sql_delete('spip_auteurs_liens', 'id_objet = ' . intval($id_article) . ' and objet="article" and id_auteur !=' . $id_admin);
-							else // spip2
-								sql_delete('spip_auteurs_articles', 'id_article = ' . intval($id_article) . 'and id_auteur !=' . $id_admin);
+						
+						include_spip("inc/rubriques");
+						$id_rubrique = creer_rubrique_nommee("$hierarchie", $id_parent);
+						
+						if($descriptif_rubrique)
+							$up = sql_updateq('spip_rubriques', array('statut' => 'publie', 'descriptif' => $descriptif_rubrique), "id_rubrique=$id_rubrique");
+						else
+							$up = sql_updateq('spip_rubriques', array('statut' => 'publie'), "id_rubrique=$id_rubrique");
+						
+						if($up)
+							$progress->setMessage(" Rubrique $hierarchie => $id_rubrique ", 'inforub');
+						
+						$progress->setMessage("", 'docs');
+						$progress->setMessage("", 'mot');
+						$progress->setMessage("", 'auteur');
+						
+						// inserer l'article
+						include_spip("inc/convertisseur");
+						
+						// auteur par défaut (admin)
+						$id_admin = sql_getfetsel("id_auteur", "spip_auteurs", "id_auteur=1");
+						$id_admin = ($id_admin)? $id_admin : 12166 ;
+						
+						$GLOBALS['auteur_session']['id_auteur'] = $id_admin ;
+						
+						if($id_article = inserer_conversion($texte, $id_rubrique, $f)){
 							
-							foreach($auteurs as $auteur){
+							// doit-on conserver l'id_article (option) ?
+							// sql_update spip_articles id_article=$id_source
+							if($conserver_id_article == "oui" and $id_source > 0){
+								sql_update("spip_articles", array("id_article" => $id_source), "id_article=$id_article") ;
+								// maj le lien auteur admin
+								if($spip_version_branche > "3")
+									sql_update('spip_auteurs_liens',
+										array(
+										'id_objet' => $id_source
+										),
+										"objet='article' and id_objet=$id_article"
+									);
+								else
+									sql_update('spip_auteurs_articles',
+										array(
+										'id_article' => $id_source
+										),
+										"id_article=$id_article"
+									);
+								$id_article = $id_source ;
+							}
+							// Créer l'auteur ?
+							if($auteurs){
+								// on efface les auteurs, puis on remet les nouveaux
+								if($spip_version_branche > "3")
+									sql_delete('spip_auteurs_liens', 'id_objet = ' . intval($id_article) . ' and objet="article" and id_auteur !=' . $id_admin);
+								else // spip2
+									sql_delete('spip_auteurs_articles', 'id_article = ' . intval($id_article) . 'and id_auteur !=' . $id_admin);
 								
-								list($nom_auteur,$bio_auteur) = explode("::", $auteur);
-								// On essaie de trouver un nom*prénom dans les auteurs
-								$a_nom = explode(" ", $nom_auteur);
-								$prenom_nom = array_pop($a_nom) . "*" . join(" ", $a_nom);
-								
-								// echo "\n$prenom_nom\n" ;
-								
-								if($id_auteur = sql_getfetsel("id_auteur", "spip_auteurs", "nom=" . sql_quote($prenom_nom))){
+								foreach($auteurs as $auteur){
 									
-								}else
-									$id_auteur = sql_getfetsel("id_auteur", "spip_auteurs", "nom=" . sql_quote($nom_auteur));
-								
-								if(!$id_auteur){
-									$id_auteur = sql_insertq("spip_auteurs", array(
-											"nom" => $nom_auteur,
-											"statut" => "1comite",
-											"bio" => $bio_auteur
-									));
+									list($nom_auteur,$bio_auteur) = explode("::", $auteur);
+									// On essaie de trouver un nom*prénom dans les auteurs
+									$a_nom = explode(" ", $nom_auteur);
+									$prenom_nom = array_pop($a_nom) . "*" . join(" ", $a_nom);
 									
-									$auteur_m = substr("Création de l'auteur " . $auteur, 0, 100) ;
-									$progress->setMessage($auteur_m, 'auteur');
-								}
-								
-								if($spip_version_branche > "3"){
-									if(!sql_getfetsel("id_auteur", "spip_auteurs_liens", "id_auteur=$id_auteur and id_objet=$id_article and objet='article'"))
-										sql_insertq("spip_auteurs_liens", array(
-											"id_auteur" => $id_auteur,
-											"id_objet" => $id_article,
-											"objet" => "article"
-										));
-								}else // spip 2
-									if(!sql_getfetsel("id_auteur", "spip_auteurs_articles", "id_auteur=$id_auteur and id_article=$id_article"))
-										sql_insertq("spip_auteurs_articles", array(
-											"id_auteur" => $id_auteur,
-											"id_article" => $id_article
-										));
-								
-							}
-						}
-						
-						// Créer des mots clés ?
-						if($mots_cles){
-							// on commence par effacer les mots déjà sur l'article, puis on remet les mots.
-							if($spip_version_branche > "3")
-								sql_delete('spip_mots_liens', 'id_objet = ' . intval($id_article) . ' and objet="article"');
-							else // spip2
-								sql_delete('spip_mots_articles', 'id_article = ' . intval($id_article));
-							
-							foreach($mots_cles as $mot){
-								// groupe mot-clé
-								list($type_mot,$titre_mot) = explode("::", $mot);
-								$type_mot = ($type_mot)? $type_mot : "Mots importés" ;
-								
-								$id_groupe_mot = sql_getfetsel("id_groupe", "spip_groupes_mots", "titre=" . sql_quote($type_mot));
-								if(!$id_groupe_mot)
-									$id_groupe_mot = sql_insertq("spip_groupes_mots", array("titre" => $type_mot));
-								
-								$id_mot = sql_getfetsel("id_mot", "spip_mots", "titre=" . sql_quote($titre_mot));
-								if(!$id_mot AND $titre_mot !=""){
-									$id_mot = sql_insertq("spip_mots", array(
-										"titre" => $titre_mot,
-										"type" => $type_mot,
-										"id_groupe" => $id_groupe_mot
-									));
-									$mot_m = substr("Création du mot " . $titre_mot . " (" . $type_mot .")", 0, 100) ;
-									$progress->setMessage($mot_m, 'mot');
-								}
-								
-								if($spip_version_branche > "3"){
-									if(!sql_getfetsel("id_mot", "spip_mots_liens", "id_mot=$id_mot and id_objet=$id_article and objet='article'"))
-										sql_insertq("spip_mots_liens", array(
-											"id_mot" => $id_mot,
-											"id_objet" => $id_article,
-											"objet" => "article"
-										));
-								}else // spip 2
-									if(!sql_getfetsel("id_mot", "spip_mots_articles", "id_mot=$id_mot and id_article=$id_article"))
-										sql_insertq("spip_mots_articles", array(
-											"id_mot" => $id_mot,
-											"id_article" => $id_article
-										));
-							}
-						}
-						
-						// Créer des documents ?
-						if($documents){
-							// on commence par effacer les docs déjà sur l'article, puis on remet les mots.
-							sql_delete('spip_documents_liens', 'id_objet = ' . intval($id_article) . ' and objet="article"');
-							
-							foreach($documents as $doc){
-								$d = json_decode($doc, true);
-								$id_doc = $d['id_document'] ;
-								unset($d['id_document']);
-								if(strlen($racine_documents) > 0 AND !preg_match(",/$,",$racine_documents))
-									$racine_documents = $racine_documents . "/" ;
-								$d['fichier'] = $racine_documents . $d['fichier'] ;
-								
-								// champs ok dans les documents ?
-								foreach($d as $k => $v)
-									if(in_array($k, $champs_documents))
-										$document_a_inserer[$k] = $v ;
-								
-								// insertion du doc
-								$id_document = sql_getfetsel("id_document", "spip_documents", "fichier=" . sql_quote($d['fichier']));
-								if(!$id_document){
-									$id_document = sql_insertq("spip_documents", $document_a_inserer);
-									$progress->setMessage("Création du document " . $d['titre'] . " (" . $d['fichier'] .")", 'docs');
-								}
-								
-								if($id_document AND !sql_getfetsel("id_document", "spip_documents_liens", "id_document=$id_document and id_objet=$id_article and objet='article'"))
-									sql_insertq("spip_documents_liens", array(
-											"id_document" => $id_document,
-											"id_objet" => $id_article,
-											"objet" => "article"
-								));
-								
-								// modifier le texte qui appelle peut etre un <doc123>
-								if($id_document){
-									// ressortir le texte propre...
-									$texte = sql_getfetsel("texte", "spip_articles", "id_article=$id_article");
-									$texte = preg_replace("/(<(doc|img|emb))". $id_doc . "/i", "\${1}" . $id_document, $texte);
-									sql_update("spip_articles", array("texte" => sql_quote($texte)), "id_article=$id_article");
-								}
-							}
-						}
-						
-						// recaler des liens [->123456] ?
-						// si on ne conserve pas le meme id_article
-						include_spip("inc/lien");
-						if(preg_match(_RACCOURCI_LIEN, $texte) and $conserver_id_article == "")
-							passthru("echo '$id_article	$id_source' >> liens_a_corriger.txt");
-						
-						// Si tout s'est bien passé, on avance la barre
-						$progress->setMessage($f, 'filename');
-						$progress->setFormat("<fg=white;bg=blue>%message%</>\n" . "<fg=white;bg=red>%inforub% %auteur% %mot%</>\n" . '%current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%' . "\n  %filename%\n%docs%\n\n");
-						$progress->advance();
-						
-					}else{
-						$output->writeln("<error>échec de l'import de $f</error>");
-						exit ;
-					}
-				}
-				
-				// ensure that the progress bar is at 100%
-				$progress->finish();
-				
-				// remapper les liens [->12345]
-				lire_fichier("liens_a_corriger.txt", $articles);
-				$corrections_liens = inc_file_to_array_dist($articles);
-				
-				if(is_array($corrections_liens))
-					foreach($corrections_liens as $k => $v){
-						if($v){
-							list($id_article, $id_source) = explode("\t", $v);
-							$texte = sql_getfetsel("texte", "spip_articles", "id_article=$id_article") ;
-							// recaler des liens [->123456] ?
-							include_spip("inc/lien");
-							if(preg_match_all(_RACCOURCI_LIEN, $texte, $liens, PREG_SET_ORDER)){
-								foreach($liens as $l){
-									if(preg_match("/^[0-9]+$/", $l[4])){
-										// trouver l'article dont l'id_source est $l[4] dans le secteur
-										if($id_dest = sql_getfetsel("id_article", "spip_articles", "id_source=" . trim($l[4]) . " and id_secteur=$id_parent")){
-											$lien_actuel = $l[0] ;
-											$lien_corrige = str_replace($l[4], $id_dest, $l[0]) ;
-											
-											$lien = escapeshellarg("$id_article : $lien_actuel => $lien_corrige");
-											passthru("echo $lien >> liens_corriges.txt");
-											// maj le texte
-											$texte_corrige = str_replace($lien_actuel, $lien_corrige, $texte);
-											sql_update("spip_articles", array("texte" => sql_quote($texte_corrige)), "id_article=$id_article");
-											// attention s'il y a plusieurs liens
-											$texte = $texte_corrige ;
-										}else{
-											$commande = escapeshellarg("Dans $id_article (source $id_source)" . $l[0] . " : lien vers " . $l[4] . " non trouvé") ;
-											passthru("echo $commande >> liens_non_corriges.txt");
-										}
+									// echo "\n$prenom_nom\n" ;
+									
+									if($id_auteur = sql_getfetsel("id_auteur", "spip_auteurs", "nom=" . sql_quote($prenom_nom))){
 										
+									}else
+										$id_auteur = sql_getfetsel("id_auteur", "spip_auteurs", "nom=" . sql_quote($nom_auteur));
+									
+									if(!$id_auteur){
+										$id_auteur = sql_insertq("spip_auteurs", array(
+												"nom" => $nom_auteur,
+												"statut" => "1comite",
+												"bio" => $bio_auteur
+										));
+										
+										$auteur_m = substr("Création de l'auteur " . $auteur, 0, 100) ;
+										$progress->setMessage($auteur_m, 'auteur');
+									}
+									
+									if($spip_version_branche > "3"){
+										if(!sql_getfetsel("id_auteur", "spip_auteurs_liens", "id_auteur=$id_auteur and id_objet=$id_article and objet='article'"))
+											sql_insertq("spip_auteurs_liens", array(
+												"id_auteur" => $id_auteur,
+												"id_objet" => $id_article,
+												"objet" => "article"
+											));
+									}else // spip 2
+										if(!sql_getfetsel("id_auteur", "spip_auteurs_articles", "id_auteur=$id_auteur and id_article=$id_article"))
+											sql_insertq("spip_auteurs_articles", array(
+												"id_auteur" => $id_auteur,
+												"id_article" => $id_article
+											));
+									
+								}
+							}
+							
+							// Créer des mots clés ?
+							if($mots_cles){
+								// on commence par effacer les mots déjà sur l'article, puis on remet les mots.
+								if($spip_version_branche > "3")
+									sql_delete('spip_mots_liens', 'id_objet = ' . intval($id_article) . ' and objet="article"');
+								else // spip2
+									sql_delete('spip_mots_articles', 'id_article = ' . intval($id_article));
+								
+								foreach($mots_cles as $mot){
+									// groupe mot-clé
+									list($type_mot,$titre_mot) = explode("::", $mot);
+									$type_mot = ($type_mot)? $type_mot : "Mots importés" ;
+									
+									$id_groupe_mot = sql_getfetsel("id_groupe", "spip_groupes_mots", "titre=" . sql_quote($type_mot));
+									if(!$id_groupe_mot)
+										$id_groupe_mot = sql_insertq("spip_groupes_mots", array("titre" => $type_mot));
+									
+									$id_mot = sql_getfetsel("id_mot", "spip_mots", "titre=" . sql_quote($titre_mot));
+									if(!$id_mot AND $titre_mot !=""){
+										$id_mot = sql_insertq("spip_mots", array(
+											"titre" => $titre_mot,
+											"type" => $type_mot,
+											"id_groupe" => $id_groupe_mot
+										));
+										$mot_m = substr("Création du mot " . $titre_mot . " (" . $type_mot .")", 0, 100) ;
+										$progress->setMessage($mot_m, 'mot');
+									}
+									
+									if($spip_version_branche > "3"){
+										if(!sql_getfetsel("id_mot", "spip_mots_liens", "id_mot=$id_mot and id_objet=$id_article and objet='article'"))
+											sql_insertq("spip_mots_liens", array(
+												"id_mot" => $id_mot,
+												"id_objet" => $id_article,
+												"objet" => "article"
+											));
+									}else // spip 2
+										if(!sql_getfetsel("id_mot", "spip_mots_articles", "id_mot=$id_mot and id_article=$id_article"))
+											sql_insertq("spip_mots_articles", array(
+												"id_mot" => $id_mot,
+												"id_article" => $id_article
+											));
+								}
+							}
+							
+							// Créer des documents ?
+							if($documents){
+								// on commence par effacer les docs déjà sur l'article, puis on remet les mots.
+								sql_delete('spip_documents_liens', 'id_objet = ' . intval($id_article) . ' and objet="article"');
+								
+								foreach($documents as $doc){
+									$d = json_decode($doc, true);
+									$id_doc = $d['id_document'] ;
+									unset($d['id_document']);
+									if(strlen($racine_documents) > 0 AND !preg_match(",/$,",$racine_documents))
+										$racine_documents = $racine_documents . "/" ;
+									$d['fichier'] = $racine_documents . $d['fichier'] ;
+									
+									// champs ok dans les documents ?
+									foreach($d as $k => $v)
+										if(in_array($k, $champs_documents))
+											$document_a_inserer[$k] = $v ;
+									
+									// insertion du doc
+									$id_document = sql_getfetsel("id_document", "spip_documents", "fichier=" . sql_quote($d['fichier']));
+									if(!$id_document){
+										$id_document = sql_insertq("spip_documents", $document_a_inserer);
+										$progress->setMessage("Création du document " . $d['titre'] . " (" . $d['fichier'] .")", 'docs');
+									}
+									
+									if($id_document AND !sql_getfetsel("id_document", "spip_documents_liens", "id_document=$id_document and id_objet=$id_article and objet='article'"))
+										sql_insertq("spip_documents_liens", array(
+												"id_document" => $id_document,
+												"id_objet" => $id_article,
+												"objet" => "article"
+									));
+									
+									// modifier le texte qui appelle peut etre un <doc123>
+									if($id_document){
+										// ressortir le texte propre...
+										$texte = sql_getfetsel("texte", "spip_articles", "id_article=$id_article");
+										$texte = preg_replace("/(<(doc|img|emb))". $id_doc . "/i", "\${1}" . $id_document, $texte);
+										sql_update("spip_articles", array("texte" => sql_quote($texte)), "id_article=$id_article");
+									}
+								}
+							}
+							
+							// recaler des liens [->123456] ?
+							// si on ne conserve pas le meme id_article
+							include_spip("inc/lien");
+							if(preg_match(_RACCOURCI_LIEN, $texte) and $conserver_id_article == "")
+								passthru("echo '$id_article	$id_source' >> liens_a_corriger.txt");
+							
+							// Si tout s'est bien passé, on avance la barre
+							$progress->setMessage($f, 'filename');
+							$progress->setFormat("<fg=white;bg=blue>%message%</>\n" . "<fg=white;bg=red>%inforub% %auteur% %mot%</>\n" . '%current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%' . "\n  %filename%\n%docs%\n\n");
+							$progress->advance();
+							
+						}else{
+							$output->writeln("<error>échec de l'import de $f</error>");
+							exit ;
+						}
+					}
+					
+					// ensure that the progress bar is at 100%
+					$progress->finish();
+					
+					// remapper les liens [->12345]
+					lire_fichier("liens_a_corriger.txt", $articles);
+					$corrections_liens = inc_file_to_array_dist($articles);
+					
+					if(is_array($corrections_liens))
+						foreach($corrections_liens as $k => $v){
+							if($v){
+								list($id_article, $id_source) = explode("\t", $v);
+								$texte = sql_getfetsel("texte", "spip_articles", "id_article=$id_article") ;
+								// recaler des liens [->123456] ?
+								include_spip("inc/lien");
+								if(preg_match_all(_RACCOURCI_LIEN, $texte, $liens, PREG_SET_ORDER)){
+									foreach($liens as $l){
+										if(preg_match("/^[0-9]+$/", $l[4])){
+											// trouver l'article dont l'id_source est $l[4] dans le secteur
+											if($id_dest = sql_getfetsel("id_article", "spip_articles", "id_source=" . trim($l[4]) . " and id_secteur=$id_parent")){
+												$lien_actuel = $l[0] ;
+												$lien_corrige = str_replace($l[4], $id_dest, $l[0]) ;
+												
+												$lien = escapeshellarg("$id_article : $lien_actuel => $lien_corrige");
+												passthru("echo $lien >> liens_corriges.txt");
+												// maj le texte
+												$texte_corrige = str_replace($lien_actuel, $lien_corrige, $texte);
+												sql_update("spip_articles", array("texte" => sql_quote($texte_corrige)), "id_article=$id_article");
+												// attention s'il y a plusieurs liens
+												$texte = $texte_corrige ;
+											}else{
+												$commande = escapeshellarg("Dans $id_article (source $id_source)" . $l[0] . " : lien vers " . $l[4] . " non trouvé") ;
+												passthru("echo $commande >> liens_non_corriges.txt");
+											}
+											
+										}
 									}
 								}
 							}
 						}
-					}
-				
-				$output->writeln("");
-				if(is_file("liens_a_corriger.txt"))
-					unlink("liens_a_corriger.txt");
+					
+					$output->writeln("");
+					if(is_file("liens_a_corriger.txt"))
+						unlink("liens_a_corriger.txt");
+				}
 			}
 		}
 		else{
