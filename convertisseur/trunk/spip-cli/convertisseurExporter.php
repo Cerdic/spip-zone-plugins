@@ -162,7 +162,8 @@ class fichiersExporter extends Command {
 						// hierarchie
 						$hierarchie = array();
 						include_spip("inc/rubriques");
-						$ariane = str_replace("0,","", calcul_hierarchie_in($id_rubrique));
+						$ariane = preg_replace("/^0,/","", calcul_hierarchie_in($id_rubrique));
+						
 						$ariane = sql_allfetsel("titre","spip_rubriques","id_rubrique in($ariane)");
 						foreach($ariane as $a)
 							$hierarchie[] = str_replace("/","",$a['titre']) ; // on ne veut pas de / car creer_rubrique_nommee pourrait se tromper à l'import.
