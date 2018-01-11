@@ -132,9 +132,8 @@ class fichiersExporter extends Command {
 					$progress = new ProgressBar($output, sql_count($query));
 					$progress->setBarWidth(100);
 					$progress->setRedrawFrequency(1);
-					$progress->setMessage(" Export de `spip_articles` en cours dans $dest ... ", 'message');
+					$progress->setMessage(" Export de `spip_articles` branche $branche en cours dans $dest ... ", 'message');
 					$progress->start();
-				
 					
 					while($f = sql_fetch($query)){
 						
@@ -150,7 +149,7 @@ class fichiersExporter extends Command {
 						$progress->setMessage('', 'docs');
 						$progress->setMessage('', 'auteurs');
 						
-						// mettre les champs dans un fichiers texte balisé avec des <ins class="champ">.
+						// mettre les champs dans un fichier texte balisé avec des <ins class="champ">.
 						foreach($f as $k => $v){
 							if($k == "texte" or $v == "" or $v == "0" or $v == "non" or $v == "0000-00-00 00:00:00")
 								continue ;
@@ -161,15 +160,19 @@ class fichiersExporter extends Command {
 						// Ajouter des métadonnées (hierarchie, auteurs, mots-clés...)
 						
 						// hierarchie
-						$rubrique = sql_fetsel("titre, descriptif, id_parent", "spip_rubriques", "id_rubrique=$id_rubrique");
-						$titre_rubrique = $rubrique['titre'];
-						$id_parent = $rubrique['id_parent'];
-						$descriptif_parent = $rubrique['titre'];
-						if($descriptif_rubrique = $rubrique['descriptif'])
-								$descriptif_rubrique = "<ins class='descriptif_rubrique'>$descriptif_rubrique</ins>\n" ;
+						$hierarchie = array();
+						include_spip("inc/rubriques");
+						$ariane = str_replace("0,","", calcul_hierarchie_in($id_rubrique));
+						$ariane = sql_allfetsel("titre","spip_rubriques","id_rubrique in($ariane)");
+						foreach($ariane as $a)
+							$hierarchie[] = str_replace("/","",$a['titre']) ; // on ne veut pas de / car creer_rubrique_nommee pourrait se tromper à l'import.
 						
-						if($id_parent)
-							$titre_parent = sql_getfetsel("titre", "spip_rubriques", "id_rubrique=$id_parent");
+						$hierarchie = implode("@@", $hierarchie);
+						
+						$rubrique = sql_fetsel("descriptif", "spip_rubriques", "id_rubrique=$id_rubrique");
+						
+						if($descriptif_rubrique = $rubrique['descriptif'])
+							$descriptif_rubrique = "<ins class='descriptif_rubrique'>$descriptif_rubrique</ins>\n" ;
 						
 						// auteurs spip 3
 						if($spip_version_branche > "3")
@@ -227,11 +230,12 @@ class fichiersExporter extends Command {
 							$fichier = "<ins class='mots_cles'>$motscles</ins>\n" . $fichier ;
 						if($documents)
 							$fichier = "<ins class='documents'>$documents</ins>\n" . $fichier ;
-						if($titre_parent && $titre_rubrique){
-							$fichier = "<ins class='hierarchie'>$titre_parent@@$titre_rubrique</ins>\n" .
+						if($hierarchie){
+							$fichier = "<ins class='hierarchie'>$hierarchie</ins>\n" .
 							$descriptif_rubrique .
 							$fichier ;
 						}
+						
 						// Créer un fichier txt
 						$date = ($f['date_redac'] != "0000-00-00 00:00:00")? $f['date_redac'] : $f['date'] ;
 						preg_match("/^(\d\d\d\d)-(\d\d)/", $date, $m);
@@ -270,6 +274,8 @@ class fichiersExporter extends Command {
 					// ensure that the progress bar is at 100%
 					$progress->finish();
 					
+				}else{
+					$output->writeln("<error>Rien à exporter dans la branche $branche depuis $date_modif</error>");
 				}
 			}
 			$output->writeln("\n");
