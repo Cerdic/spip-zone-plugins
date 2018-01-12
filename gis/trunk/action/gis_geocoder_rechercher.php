@@ -26,6 +26,11 @@ function action_gis_geocoder_rechercher_dist() {
 	$arguments = collecter_requests(array('format', 'q', 'limit', 'addressdetails', 'accept-language', 'lat', 'lon'), array());
 
 	$geocoder = defined('_GIS_GEOCODER') ? _GIS_GEOCODER : 'photon';
+	
+	if ($geocoder == 'photon') {
+		unset($arguments['format']);
+		unset($arguments['addressdetails']);
+	}
 
 	if (!empty($arguments) && in_array($geocoder, array('photon','nominatim'))) {
 		header('Content-Type: application/json; charset=UTF-8');
