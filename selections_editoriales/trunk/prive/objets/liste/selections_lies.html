@@ -28,7 +28,7 @@
 				#ID_SELECTION
 			})]</td>
 			<td class='action'>
-				[(#ENV{editable}|oui)[(#AUTORISER{dissocierselection,#OBJET,#ID_OBJET}|et{#VU|=={non}}|oui)
+				[(#ENV{editable}|oui)[(#AUTORISER{dissocierselections,#OBJET,#ID_OBJET}|et{#VU|=={non}}|oui)
 				<button type="submit" class="button link delete" name="supprimer_lien\[selection-#ID_SELECTION-#ENV{objet}-#ENV{id_objet}\]" value="X"><:selection:retirer_lien_selection:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>]]
 			</td>
 		</tr>
