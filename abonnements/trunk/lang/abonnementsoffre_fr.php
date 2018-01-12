@@ -74,6 +74,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'retirer_lien_abonnementsoffre' => 'Retirer cette offre d’abonnement',
 	'retirer_tous_liens_abonnementsoffres' => 'Retirer toutes les offres d’abonnement',
+	
+	// S
+	'statut_prive' => 'privée',
+	'statut_publie' => 'publiée en ligne',
 
 	// T
 	'texte_ajouter_abonnementsoffre' => 'Ajouter une offre d’abonnement',

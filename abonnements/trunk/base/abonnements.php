@@ -51,8 +51,15 @@ function abonnements_declarer_tables_objets_sql($tables) {
 		'tables_jointures' => array('spip_abonnements_offres_liens'),
 		'statut_textes_instituer' => array(
 			'prepa' => 'texte_statut_en_cours_redaction',
-			'publie' => 'texte_statut_publie',
+			'prive' => 'abonnementsoffre:statut_prive',
+			'publie' => 'abonnementsoffre:statut_publie',
 			'poubelle' => 'texte_statut_poubelle',
+		),
+		'statut_images' => array(
+			'prepa' => 'puce-preparer-8.png',
+			'prive' => 'puce-refuser-8.png',
+			'publie' => 'puce-publier-8.png',
+			'poubelle' => 'puce-supprimer-8.png',
 		),
 		'statut' => array(
 			array(
