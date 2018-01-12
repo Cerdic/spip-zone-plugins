@@ -52,8 +52,8 @@ function date_creation_afficher_contenu_objet($flux) {
 	) {
 		$id_table_objet = id_table_objet($flux['args']['type']);
 		$date_creation  = sql_getfetsel('date_creation', $table, $id_table_objet . '=' . intval($id_objet));
-		$date_creation  = intval($date_creation) ? affdate_heure($date_creation) : _T('date_creation:non_renseignee');
-		$flux['data']   .= '<div><strong>' . propre(_T('date_creation:date_creation') . " :</strong> " . $date_creation) . '</div>';
+		$date_creation  = intval($date_creation) ? '<span class="affiche">'.affdate_heure($date_creation).'</span>' : _T('date_creation:non_renseignee');
+		$flux['data']   = '<div class="date_creation"><strong>' . _T('date_creation:date_creation') . " :</strong> " . $date_creation . '</div>'.$flux['data'];
 	}
 
 	return $flux;
