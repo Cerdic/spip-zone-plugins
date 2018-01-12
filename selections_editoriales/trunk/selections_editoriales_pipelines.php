@@ -166,8 +166,11 @@ function selections_editoriales_afficher_complement_objet($flux) {
 		$exec !== false // page d'un objet éditorial
 		and $exec['edition'] === false // pas en mode édition
 		and $type = $exec['type']
-		and autoriser('associerselections', $type, $id)
-		and autoriser('creer', 'selection')
+		and (
+			autoriser('associerselections', $type, $id)
+			or autoriser('creer', 'selection')
+			or autoriser('modifier', 'selection')
+		)
 	 ) {
 		$flux['data'] .= recuperer_fond(
 			'prive/squelettes/inclure/selections_objet',
