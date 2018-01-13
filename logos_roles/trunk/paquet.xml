@@ -18,7 +18,7 @@
 	<necessite nom="roles_documents" compatibilite="[1.1.0;[" />
 
 	<utilise nom="massicot" compatibilite="[0.7.4;[" />
-  <utilise nom="multilingue" compatibilite="[1.0.9;[" />
+	<utilise nom="multilingue" compatibilite="[1.0.9;[" />
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/logos_roles.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/logos_roles.php" />
