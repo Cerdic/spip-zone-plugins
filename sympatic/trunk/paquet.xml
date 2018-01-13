@@ -7,7 +7,7 @@
 	logo="images/sympatic.png"
 	schema="0.3.0"
 	documentation="https://contrib.spip.net/4074"
->	
+>
 
 	<nom>Sympatic</nom>
 	<!-- Gestion des abonnements à des listes sympa depuis SPIP -->
@@ -22,7 +22,7 @@
 	<pipeline nom="post_edition" inclure="sympatic_pipelines.php" />
 	<pipeline nom="affiche_auteurs_interventions" inclure="sympatic_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[1.1;[" />
+	<necessite nom="saisies" compatibilite="[2.19.8;[" />
 
 	<menu nom="sympatic_tous" titre="sympatic:icone_sympatic_tous" parent="menu_edition" icone="images/sympatic-16.png" />
 </paquet>
