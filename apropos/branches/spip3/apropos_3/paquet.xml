@@ -1,13 +1,13 @@
 <paquet
 	prefix="apropos"
 	categorie="divers"
-	version="1.0.7"
+	version="1.0.8"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="apropos.png"
 	documentation="https://contrib.spip.net/A-propos-des-plugins-actifs"
 	demonstration="https://www.jp.guihard.net/spip.php?article92"
->	
+>
 
 	<nom>&#192; propos des Plugins actifs</nom>
 	<!-- Liste les plugins actifs et affiche une description sommaire -->
