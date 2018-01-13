@@ -2,7 +2,7 @@
 	<nom><multi>[fr]Redirections HTTPS[es]Redireciones HTTPS</multi></nom>
 	<auteur>Severo</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 	<etat>test</etat>
 	<prefix>redirhttps</prefix>
 	<categorie>performance</categorie>
@@ -18,5 +18,5 @@
 
 	<options>redirhttps_options.php</options>
 
-	<necessite id="SPIP" version="[2.1.11;3.1.99]" />
+	<necessite id="SPIP" version="[2.1.11;3.2.99]" />
 </plugin>
