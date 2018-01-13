@@ -211,9 +211,8 @@ function taxonomie_regne_existe($regne, &$meta_regne) {
  *        Cet argument permet de remplacer le rang `phylum` par `division` qui est son synonyme
  *        pour les règnes fongique et végétal.
  * @param string $liste_base
- *        Liste de base contenant les rangs par défaut à renvoyer. Il existe deux listes de base, à savoir :
- *        - du règne au genre (`_TAXONOMIE_RANGS_PARENTS_ESPECE`)
- *        - de l'espèce à la sous-forme (`_TAXONOMIE_RANGS_ESPECE_ET_FILS`)
+ *        Liste de base contenant les rangs par défaut à renvoyer. La liste est au format chaine, chaque
+ *        rang étant séparé par le caractère `:`.
  * @param array  $exclusions
  *        Liste des rangs à exclure de la liste fournie dans l'argument `$liste_base`
  *

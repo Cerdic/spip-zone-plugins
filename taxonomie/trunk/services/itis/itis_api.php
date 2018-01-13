@@ -599,10 +599,6 @@ function itis_read_ranks($kingdom, &$sha_file) {
 		if ($content) {
 			$itis_ranks = json_decode($content, true);
 			if ($itis_ranks) {
-				// On acquiert la configuration du plugin
-				include_spip('inc/config');
-				$configuration = lire_config('taxonomie', array());
-
 				// Le fichier est toujours classé du règne au rang fils le plus bas dans l'arborescence.
 				// On peut donc être assuré que le parent d'un rang donné a toujours été préalablement
 				// traité sauf le premier, le règne.
@@ -625,9 +621,9 @@ function itis_read_ranks($kingdom, &$sha_file) {
 						);
 					}
 					// -- Détermination du type de rang
-					if (in_array($rank_name, $configuration['rangs_principaux'])) {
+					if (strpos($rank_name, _TAXONOMIE_RANGS_PRINCIPAUX) !== false) {
 						$ranks[$rank_name]['type'] = _TAXONOMIE_RANG_TYPE_PRINCIPAL;
-					} elseif (in_array($rank_name, $configuration['rangs_secondaires'])) {
+					} elseif (strpos($rank_name, _TAXONOMIE_RANGS_SECONDAIRES) !== false) {
 						$ranks[$rank_name]['type'] = _TAXONOMIE_RANG_TYPE_SECONDAIRE;
 					} else{
 						$ranks[$rank_name]['type'] = _TAXONOMIE_RANG_TYPE_INTERCALAIRE;

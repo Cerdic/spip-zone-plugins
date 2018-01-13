@@ -55,8 +55,8 @@ function formulaires_charger_taxonomie_charger() {
 	// Acquérir la liste des rangs taxonomiques exception faite du règne et de l'espèce
 	$rangs = taxonomie_regne_lister_rangs(
 		_TAXONOMIE_REGNE_ANIMAL,
-		_TAXONOMIE_RANGS_PARENTS_ESPECE,
-		array(_TAXONOMIE_RANG_REGNE));
+		_TAXONOMIE_RANGS_PRINCIPAUX,
+		array(_TAXONOMIE_RANG_REGNE, _TAXONOMIE_RANG_ESPECE));
 	foreach ($rangs as $_rang) {
 		$valeurs['_rangs'][$_rang] = ucfirst(_T("taxonomie:rang_${_rang}"));
 	}

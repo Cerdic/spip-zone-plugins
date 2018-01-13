@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+
 if (!defined('_TAXONOMIE_REGNE_ANIMAL')) {
 	/**
 	 * Nom latin du règne animal (animaux).
@@ -26,7 +27,6 @@ if (!defined('_TAXONOMIE_REGNE_FONGIQUE')) {
 	 */
 	define('_TAXONOMIE_REGNE_FONGIQUE', 'fungi');
 }
-
 if (!defined('_TAXONOMIE_REGNES')) {
 	/**
 	 * Liste des règnes supportés par le plugin (concanétation des noms séparés par le signe deux-points).
@@ -37,7 +37,6 @@ if (!defined('_TAXONOMIE_REGNES')) {
 		_TAXONOMIE_REGNE_FONGIQUE
 	);
 }
-
 
 
 if (!defined('_TAXONOMIE_RANG_REGNE')) {
@@ -98,23 +97,45 @@ if (!defined('_TAXONOMIE_RANG_SOUS_ESPECE')) {
 	 */
 	define('_TAXONOMIE_RANG_SOUS_ESPECE', 'subspecies');
 }
+if (!defined('_TAXONOMIE_RANGS_PRINCIPAUX')) {
+	/**
+	 * Liste des rangs principaux de la taxonomie.
+	 */
+	define('_TAXONOMIE_RANGS_PRINCIPAUX',
+		_TAXONOMIE_RANG_REGNE . ':' .
+		_TAXONOMIE_RANG_PHYLUM . ':' .
+		_TAXONOMIE_RANG_CLASSE . ':' .
+		_TAXONOMIE_RANG_ORDRE . ':' .
+		_TAXONOMIE_RANG_FAMILLE . ':' .
+		_TAXONOMIE_RANG_GENRE . ':' .
+		_TAXONOMIE_RANG_ESPECE
+	);
+}
+
+
+if (!defined('_TAXONOMIE_RANG_TRIBU')) {
+	/**
+	 * Nom anglais du rang `tribu`.
+	 */
+	define('_TAXONOMIE_RANG_TRIBU', 'tribe');
+}
+if (!defined('_TAXONOMIE_RANG_SECTION')) {
+	/**
+	 * Nom anglais du rang `section`.
+	 */
+	define('_TAXONOMIE_RANG_SECTION', 'section');
+}
+if (!defined('_TAXONOMIE_RANG_SERIE')) {
+	/**
+	 * Nom anglais du rang `serie`.
+	 */
+	define('_TAXONOMIE_RANG_SERIE', 'series');
+}
 if (!defined('_TAXONOMIE_RANG_VARIETE')) {
 	/**
 	 * Nom anglais du rang `variété`.
 	 */
 	define('_TAXONOMIE_RANG_VARIETE', 'variety');
-}
-if (!defined('_TAXONOMIE_RANG_SOUS_VARIETE')) {
-	/**
-	 * Nom anglais du rang intercalaire `sous-variété`.
-	 */
-	define('_TAXONOMIE_RANG_SOUS_VARIETE', 'subvariety');
-}
-if (!defined('_TAXONOMIE_RANG_RACE')) {
-	/**
-	 * Nom anglais du rang `race`.
-	 */
-	define('_TAXONOMIE_RANG_RACE', 'race');
 }
 if (!defined('_TAXONOMIE_RANG_FORME')) {
 	/**
@@ -122,54 +143,20 @@ if (!defined('_TAXONOMIE_RANG_FORME')) {
 	 */
 	define('_TAXONOMIE_RANG_FORME', 'forma');
 }
-if (!defined('_TAXONOMIE_RANG_SOUS_FORME')) {
+if (!defined('_TAXONOMIE_RANGS_SECONDAIRES')) {
 	/**
-	 * Nom anglais du rang intercalaire `sous-règne`.
+	 * Liste des rangs secondaires de la taxonomie.
 	 */
-	define('_TAXONOMIE_RANG_SOUS_FORME', 'subforma');
+	define('_TAXONOMIE_RANGS_SECONDAIRES',
+		_TAXONOMIE_RANG_TRIBU . ':' .
+		_TAXONOMIE_RANG_SECTION . ':' .
+		_TAXONOMIE_RANG_SERIE . ':' .
+		_TAXONOMIE_RANG_VARIETE . ':' .
+		_TAXONOMIE_RANG_FORME
+	);
 }
 
-if (!defined('_TAXONOMIE_RANGS_PARENTS_ESPECE')) {
-	/**
-	 * Liste des rangs utilisés du règne au genre compris (concanétation des noms séparés par le signe deux-points).
-	 * On utilise par défaut au niveau 2 le terme phylum du règne animal (division pour les autres règnes)
-	 */
-	define('_TAXONOMIE_RANGS_PARENTS_ESPECE',
-		implode(':', array(
-			_TAXONOMIE_RANG_REGNE,
-			_TAXONOMIE_RANG_PHYLUM,
-			_TAXONOMIE_RANG_CLASSE,
-			_TAXONOMIE_RANG_ORDRE,
-			_TAXONOMIE_RANG_FAMILLE,
-			_TAXONOMIE_RANG_GENRE
-			)
-		)
-	);
-}
-if (!defined('_TAXONOMIE_RANGS_ESPECE_ET_FILS')) {
-	/**
-	 * Liste des rangs utilisés de l'espèce à la sous-forme (concanétation des noms séparés par le signe deux-points).
-	 */
-	define('_TAXONOMIE_RANGS_ESPECE_ET_FILS',
-		implode(':', array(
-			_TAXONOMIE_RANG_ESPECE,
-			_TAXONOMIE_RANG_SOUS_ESPECE,
-			_TAXONOMIE_RANG_VARIETE,
-			_TAXONOMIE_RANG_SOUS_VARIETE,
-			_TAXONOMIE_RANG_RACE,
-			_TAXONOMIE_RANG_FORME,
-			_TAXONOMIE_RANG_SOUS_FORME
-			)
-		)
-	);
-}
-if (!defined('_TAXONOMIE_RANGS')) {
-	/**
-	 * Liste complète des rangs utilisés par le plugin (concanétation des noms séparés par le signe deux-points).
-	 */
-	define('_TAXONOMIE_RANGS',
-		_TAXONOMIE_RANGS_PARENTS_ESPECE . ':' . _TAXONOMIE_RANGS_ESPECE_ET_FILS);
-}
+
 if (!defined('_TAXONOMIE_RANG_TYPE_PRINCIPAL')) {
 	/**
 	 * Type de rang selon la nomenclature taxonomique.
