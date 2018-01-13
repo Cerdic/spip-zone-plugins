@@ -2,7 +2,7 @@
 /**
  * Ce fichier contient l'ensemble des constantes et des utilitaires nécessaires au fonctionnement du plugin.
  *
- * @package SPIP\TAXONOMIE
+ * @package SPIP\TAXONOMIE\TAXON
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -32,11 +32,10 @@ if (!defined('_TAXONOMIE_REGNES')) {
 	 * Liste des règnes supportés par le plugin (concanétation des noms séparés par le signe deux-points).
 	 */
 	define('_TAXONOMIE_REGNES',
-		implode(':', array(
-			_TAXONOMIE_REGNE_ANIMAL,
-			_TAXONOMIE_REGNE_VEGETAL,
-			_TAXONOMIE_REGNE_FONGIQUE
-		)));
+		_TAXONOMIE_REGNE_ANIMAL . ':' .
+		_TAXONOMIE_REGNE_VEGETAL . ':' .
+		_TAXONOMIE_REGNE_FONGIQUE
+	);
 }
 
 
@@ -171,72 +170,29 @@ if (!defined('_TAXONOMIE_RANGS')) {
 	define('_TAXONOMIE_RANGS',
 		_TAXONOMIE_RANGS_PARENTS_ESPECE . ':' . _TAXONOMIE_RANGS_ESPECE_ET_FILS);
 }
-
-if (!defined('_TAXONOMIE_CACHE_NOMDIR')) {
+if (!defined('_TAXONOMIE_RANG_TYPE_PRINCIPAL')) {
 	/**
-	 * Nom du dossier contenant les fichiers caches des éléments de taxonomie
-	 *
-	 * @package SPIP\TAXONOMIE\CACHE
+	 * Type de rang selon la nomenclature taxonomique.
 	 */
-	define('_TAXONOMIE_CACHE_NOMDIR', 'cache-taxonomie/');
+	define('_TAXONOMIE_RANG_TYPE_PRINCIPAL', 'principal');
 }
-if (!defined('_TAXONOMIE_CACHE_DIR')) {
+if (!defined('_TAXONOMIE_RANG_TYPE_SECONDAIRE')) {
 	/**
-	 * Chemin du dossier contenant les fichiers caches des boussoles
-	 *
-	 * @package SPIP\TAXONOMIE\CACHE
+	 * Type de rang selon la nomenclature taxonomique.
 	 */
-	define('_TAXONOMIE_CACHE_DIR', _DIR_VAR . _TAXONOMIE_CACHE_NOMDIR);
+	define('_TAXONOMIE_RANG_TYPE_SECONDAIRE', 'secondaire');
 }
-if (!defined('_TAXONOMIE_CACHE_FORCER')) {
+if (!defined('_TAXONOMIE_RANG_TYPE_INTERCALAIRE')) {
 	/**
-	 * Indicateur permettant de focer le recalcul du cache systématiquement.
-	 * A n'utiliser que temporairement en mode debug par exemple.
-	 *
-	 * @package SPIP\TAXONOMIE\CACHE
+	 * Type de rang selon la nomenclature taxonomique.
 	 */
-	define('_TAXONOMIE_CACHE_FORCER', false);
-}
-
-
-/**
- * Renvoie, à partir de l'url du service, le tableau des données demandées.
- * Le service utilise dans ce cas une chaine JSON qui est décodée pour fournir
- * le tableau de sortie. Le flux retourné par le service est systématiquement
- * transcodé dans le charset du site avant d'être décodé.
- *
- * @package SPIP\TAXONOMIE\SERVICES
- * @uses recuperer_url()
- *
- * @param string   $url
- *        URL complète de la requête au service web concerné.
- * @param int|null $taille_max
- *        Taille maximale du flux récupéré suite à la requête.
- *        `null` désigne la taille par défaut.
- *
- * @return array
- */
-function service_requeter_json($url, $taille_max = null) {
-
-	// Acquisition des données spécifiées par l'url
-	include_spip('inc/distant');
-	$options = array(
-		'transcoder' => true,
-		'taille_max' => $taille_max);
-	$flux = recuperer_url($url, $options);
-
-	// Tranformation de la chaine json reçue en tableau associatif
-	$data = json_decode($flux['page'], true);
-
-	return $data;
+	define('_TAXONOMIE_RANG_TYPE_INTERCALAIRE', 'intercalaire');
 }
 
 
 /**
  * Extrait, de la table `spip_taxons`, la liste des taxons d'un règne donné ayant fait l'objet
  * d'une modification manuelle.
- *
- * @package SPIP\TAXONOMIE\TAXON
  *
  * @param string $regne
  *        Nom scientifique du règne en lettres minuscules : `animalia`, `plantae`, `fungi`.
@@ -261,8 +217,6 @@ function taxon_preserver_editions($regne) {
  * langue est présente dans les deux balises.
  * Si on ne trouve pas de balise `<multi>` dans l'un ou l'autre des paramètres, on considère que
  * le texte est tout même formaté de la façon suivante : texte0[langue1]texte1[langue2]texte2...
- *
- * @package SPIP\TAXONOMIE\TAXON
  *
  * @param string $multi_prioritaire
  *        Balise multi considérée comme prioritaire en cas de conflit sur une langue.
@@ -328,8 +282,6 @@ function taxon_merger_traductions($multi_prioritaire, $multi_non_prioritaire) {
 /**
  * Traduit un champ de la table `spip_taxons` dans la langue du site.
  *
- * @package SPIP\TAXONOMIE\TAXON
- *
  * @param $champ
  *        Nom du champ dans la base de données.
  *
@@ -344,132 +296,4 @@ function taxon_traduire_champ($champ) {
 	}
 
 	return $traduction;
-}
-
-
-/**
- * Ecrit le contenu issu d'un service taxonomique dans un fichier texte afin d'optimiser le nombre
- * de requêtes adressées au service.
- *
- * @package SPIP\TAXONOMIE\CACHE
- *
- * @param string $cache
- *        Contenu du fichier cache. Si le service appelant manipule un tableau il doit le sérialiser avant
- *        d'appeler cette fonction.
- * @param string $service
- * @param string $action
- * @param int    $tsn
- * @param array  $options
- *
- * @return boolean
- *        Toujours à vrai.
- */
-function cache_taxonomie_ecrire($cache, $service, $action, $tsn, $options) {
-
-	// Création du dossier cache si besoin
-	sous_repertoire(_DIR_VAR, trim(_TAXONOMIE_CACHE_NOMDIR, '/'));
-
-	// Ecriture du fichier cache
-	$fichier_cache = cache_taxonomie_nommer($service, $tsn, $action, $options);
-	ecrire_fichier($fichier_cache, $cache);
-
-	return true;
-}
-
-
-/**
- * Construit le nom du fichier cache en fonction du service, de l'action, du taxon concernés et
- * d'autres critères optionnels.
- *
- * @package SPIP\TAXONOMIE\CACHE
- *
- * @param string $service
- * @param string $action
- * @param int    $tsn
- * @param array  $options
- *
- * @return string
- */
-function cache_taxonomie_nommer($service, $action, $tsn, $options) {
-
-	// Construction du chemin complet d'un fichier cache
-	$fichier_cache = _TAXONOMIE_CACHE_DIR
-					 . $service
-					 . ($action ? '_' . $action : '')
-					 . '_' . $tsn;
-
-	// On complète le nom avec les options éventuelles
-	if ($options) {
-		foreach ($options as $_option => $_valeur) {
-			if ($_valeur) {
-				$fichier_cache .= '_' . $_valeur;
-			}
-		}
-	}
-
-	// On rajoute l'extension texte
-	$fichier_cache .= '.txt';
-
-	return $fichier_cache;
-}
-
-/**
- * Vérifie l'existence du fichier cache pour un taxon, un service et une actions donnés.
- * Si le fichier existe la fonction retourne son chemin complet.
- *
- * @package SPIP\TAXONOMIE\CACHE
- *
- * @param string $service
- * @param string $action
- * @param int    $tsn
- * @param array  $options
- *
- * @return string
- *        Chemin du fichier cache si il existe ou chaine vide sinon.
- */
-function cache_taxonomie_existe($service, $action, $tsn, $options = array()) {
-
-	// Contruire le nom du fichier cache
-	$fichier_cache = cache_taxonomie_nommer($service, $action, $tsn, $options);
-
-	// Vérification de l'existence du fichier:
-	// - chaine vide si le fichier n'existe pas
-	// - chemin complet du fichier si il existe
-	if (!file_exists($fichier_cache)) {
-		$fichier_cache = '';
-	}
-
-	return $fichier_cache;
-}
-
-
-/**
- * Supprime tout ou partie des fichiers cache taxonomiques.
- *
- * @package SPIP\TAXONOMIE\CACHE
- *
- * @param array|string $caches
- *        Liste des fichiers à supprimer ou vide si tous les fichiers cache doivent être supprimés.
- *        Il est possible de passer un seul fichier comme une chaine.
- *
- * @return boolean
- *        Toujours à `true`.
- */
-function cache_taxonomie_supprimer($caches = array()) {
-
-	include_spip('inc/flock');
-
-	if ($caches) {
-		$fichiers_cache = is_string($caches) ? array($caches) : $caches;
-	} else {
-		$fichiers_cache = glob(_TAXONOMIE_CACHE_DIR . '*.*');
-	}
-
-	if ($fichiers_cache) {
-		foreach ($fichiers_cache as $_fichier) {
-			supprimer_fichier($_fichier);
-		}
-	}
-
-	return true;
 }

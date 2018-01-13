@@ -87,7 +87,7 @@ function wikipedia_get_page($resource, $tsn, $search, $options = array()) {
 
 	// Si le cache est absent ou invalide on le recrée en utilisant le service web Wikipedia
 	// sinon on le lit et on renvoie le tableau du contenu désérialisé.
-	include_spip('inc/taxonomer');
+	include_spip('inc/taxonomie_cacher');
 	if (!$file_cache = cache_taxonomie_existe('wikipedia', $resource, $tsn, $options)
 	or !filemtime($file_cache)
 	or (time() - filemtime($file_cache) > _TAXONOMIE_WIKIPEDIA_CACHE_TIMEOUT)
@@ -100,7 +100,8 @@ function wikipedia_get_page($resource, $tsn, $search, $options = array()) {
 		$url = wikipedia_build_url('json', 'query', $resource, $search, $options);
 
 		// Acquisition des données spécifiées par l'url
-		$data = service_requeter_json($url);
+		$requeter = charger_fonction('taxonomie_requeter', 'inc');
+		$data = $requeter($url);
 
 		// Récupération de la section demandée.
 		if (isset($data['batchcomplete'])

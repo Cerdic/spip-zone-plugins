@@ -74,6 +74,8 @@ function configurer_taxonomie() {
 	$config = array(
 		'langues_possibles' => array('fr', 'en', 'es'),
 		'langues_utilisees' => array('fr'),
+		'rangs_principaux'  => array('kingdom', 'phylum', 'class', 'order', 'family', 'genus', 'species'),
+		'rangs_secondaires' => array('tribe', 'section', 'series', 'variety', 'form'),
 	);
 
 	return $config;

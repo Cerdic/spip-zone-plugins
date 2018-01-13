@@ -203,8 +203,8 @@ function itis_search_tsn($action, $search, $strict = true) {
 	$url = itis_build_url('json', 'search', $action, rawurlencode($search));
 
 	// Acquisition des données spécifiées par l'url
-	include_spip('inc/taxonomer');
-	$data = service_requeter_json($url);
+	$requeter = charger_fonction('taxonomie_requeter', 'inc');
+	$data = $requeter($url);
 
 	// Récupération du TSN du taxon recherché
 	$api = $GLOBALS['itis_webservice']['search'][$action];
@@ -217,9 +217,7 @@ function itis_search_tsn($action, $search, $strict = true) {
 		$search_key = key($api['find']);
 		foreach ($data[$api['list']] as $_data) {
 			if ($_data) {
-				if (!$strict
-					or ($strict and (strcasecmp($_data[$search_key], $search) == 0))
-				) {
+				if (!$strict or ($strict and (strcasecmp($_data[$search_key], $search) == 0))) {
 					$tsn[] = array(
 						$tsn_destination    => intval($_data[$tsn_key]),
 						$search_destination => $_data[$search_key]
@@ -264,8 +262,8 @@ function itis_get_record($tsn) {
 	$url = itis_build_url('json', 'getfull', 'record', strval($tsn));
 
 	// Acquisition des données spécifiées par l'url
-	include_spip('inc/taxonomer');
-	$data = service_requeter_json($url);
+	$requeter = charger_fonction('taxonomie_requeter', 'inc');
+	$data = $requeter($url);
 
 	// Récupération des informations choisies parmi l'enregistrement reçu à partir de la configuration
 	// de l'action.
@@ -281,9 +279,7 @@ function itis_get_record($tsn) {
 
 	// On réorganise le sous-tableau des noms communs
 	$noms = array();
-	if (is_array($record['nom_commun'])
-		and $record['nom_commun']
-	) {
+	if (is_array($record['nom_commun'])	and $record['nom_commun']) {
 		foreach ($record['nom_commun'] as $_nom) {
 			$noms[strtolower($_nom['language'])] = trim($_nom['commonName']);
 		}
@@ -327,8 +323,8 @@ function itis_get_information($action, $tsn) {
 	$url = itis_build_url('json', 'get', $action, strval($tsn));
 
 	// Acquisition des données spécifiées par l'url
-	include_spip('inc/taxonomer');
-	$data = service_requeter_json($url);
+	$requeter = charger_fonction('taxonomie_requeter', 'inc');
+	$data = $requeter($url);
 
 	// On vérifie que le tableau est complet sinon on retourne un tableau vide
 	$api = $GLOBALS['itis_webservice']['get'][$action];
@@ -396,9 +392,9 @@ function itis_list_vernaculars($language) {
 	$url = itis_build_url('json', 'vernacular', 'vernacularlanguage', $language);
 
 	// Acquisition des données spécifiées par l'url
-	include_spip('inc/taxonomer');
 	include_spip('inc/distant');
-	$data = service_requeter_json($url, _INC_DISTANT_MAX_SIZE * 7);
+	$requeter = charger_fonction('taxonomie_requeter', 'inc');
+	$data = $requeter($url, _INC_DISTANT_MAX_SIZE * 7);
 
 	$api = $GLOBALS['itis_webservice']['vernacular']['vernacularlanguage'];
 	if (!empty($data[$api['list']])) {
@@ -555,9 +551,7 @@ function itis_read_vernaculars($language, &$sha_file) {
 
 	// Ouvrir le fichier de nom communs correspondant au code de langue spécifié
 	$file = find_in_path("services/itis/vernaculars_${language}.csv");
-	if (file_exists($file)
-		and ($sha_file = sha1_file($file))
-	) {
+	if (file_exists($file) and ($sha_file = sha1_file($file))) {
 		// Lecture du fichier csv comme un fichier texte sachant que :
 		// - le délimiteur de colonne est une virgule
 		// - le caractère d'encadrement d'un texte est le double-quotes
@@ -573,6 +567,80 @@ function itis_read_vernaculars($language, &$sha_file) {
 	}
 
 	return $vernaculars;
+}
+
+
+/**
+ * Lit le fichier des rangs d'un règne donné et construit la hiérarchie de ces mêmes rangs.
+ *
+ * @api
+ *
+ * @param string $kingdom
+ *        Nom scientifique du règne en lettres minuscules : `animalia`, `plantae`, `fungi`.
+ * @param int    $sha_file
+ *        Sha calculé à partir du fichier de taxons correspondant au règne choisi. Le sha est retourné
+ *        par la fonction afin d'être stocké par le plugin.
+ *
+ * @return array
+ *        Tableau des rangs identifiés par leur nom scientifique en anglais et organisé comme une hiérarchie
+ *        du règne au rang de plus bas niveau.
+ */
+function itis_read_ranks($kingdom, &$sha_file) {
+
+	$ranks = array();
+	$sha_file = false;
+
+	// Ouvrir le fichier des rangs du règne spécifié.
+	$file = find_in_path("services/itis/${kingdom}_ranks.json");
+	if (file_exists($file) and ($sha_file = sha1_file($file))) {
+		// Lecture du fichier json et décodage en tableau.
+		include_spip('inc/flock');
+		lire_fichier($file, $content);
+		if ($content) {
+			$itis_ranks = json_decode($content, true);
+			if ($itis_ranks) {
+				// On acquiert la configuration du plugin
+				include_spip('inc/config');
+				$configuration = lire_config('taxonomie', array());
+
+				// Le fichier est toujours classé du règne au rang fils le plus bas dans l'arborescence.
+				// On peut donc être assuré que le parent d'un rang donné a toujours été préalablement
+				// traité sauf le premier, le règne.
+				include_spip('inc/taxonomer');
+				$rank_ids = array();
+				foreach ($itis_ranks as $_rank) {
+					$rank_name = strtolower($_rank['rank_name']);
+					// -- Détermination des parents
+					if (isset($rank_ids[$_rank['dir_parent_rank_id']]) and isset($rank_ids[$_rank['req_parent_rank_id']])) {
+						// Cas des rangs enfant du règne.
+						$ranks[$rank_name] = array(
+							'parent' => $rank_ids[$_rank['dir_parent_rank_id']],
+							'parent_principal' => $rank_ids[$_rank['req_parent_rank_id']]
+						);
+					} else {
+						// Cas du règne qui n'a pas de parent.
+						$ranks[$rank_name] = array(
+							'parent' => '',
+							'parent_principal' => ''
+						);
+					}
+					// -- Détermination du type de rang
+					if (in_array($rank_name, $configuration['rangs_principaux'])) {
+						$ranks[$rank_name]['type'] = _TAXONOMIE_RANG_TYPE_PRINCIPAL;
+					} elseif (in_array($rank_name, $configuration['rangs_secondaires'])) {
+						$ranks[$rank_name]['type'] = _TAXONOMIE_RANG_TYPE_SECONDAIRE;
+					} else{
+						$ranks[$rank_name]['type'] = _TAXONOMIE_RANG_TYPE_INTERCALAIRE;
+					}
+
+					// -- Sauvegarde de l'id ITIS du rang traité pour les descendants.
+					$rank_ids[$_rank['rank_id']] = $rank_name;
+				}
+			}
+		}
+	}
+
+	return $ranks;
 }
 
 
@@ -655,18 +723,14 @@ function itis_review_sha() {
 
 	foreach ($kingdoms as $_kingdom) {
 		$file = find_in_path('services/itis/' . ucfirst($_kingdom) . '_Genus.txt');
-		if (file_exists($file)
-			and ($sha_file = sha1_file($file))
-		) {
+		if (file_exists($file) and ($sha_file = sha1_file($file))) {
 			$shas['taxons'][$_kingdom] = $sha_file;
 		}
 	}
 
 	foreach (array_keys($GLOBALS['itis_language']) as $_language) {
 		$file = find_in_path("services/itis/vernaculars_${_language}.csv");
-		if (file_exists($file)
-			and ($sha_file = sha1_file($file))
-		) {
+		if (file_exists($file) and ($sha_file = sha1_file($file))) {
 			$shas['traductions'][$GLOBALS['itis_language'][$_language]] = $sha_file;
 		}
 	}

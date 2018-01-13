@@ -115,7 +115,15 @@ function taxonomie_regne_charger($regne, $rang, $codes_langue = array()) {
 			// Ca permettra de tester l'utilité ou pas d'un rechargement du règne
 			$meta_regne['rang'] = $rang;
 			$meta_regne['maj'] = date('Y-m-d H:i:s');
-			ecrire_meta("taxonomie_$regne", serialize($meta_regne));
+
+			// Lire le fichier json fournissant la hiérarchie des rangs du règne en cours de chargement.
+			$rangs = itis_read_ranks($regne, $sha_rangs);
+			$meta_regne['rangs']['hierarchie'] = $rangs;
+			$meta_regne['rangs']['sha'] = $sha_rangs;
+
+			// Mise à jour de la meta du règne.
+			include_spip('inc/config');
+			ecrire_config("taxonomie_$regne", $meta_regne);
 		}
 	}
 
