@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Macro session étendue</nom>
 	<slogan>webperf de l'accés aux données de sesssions et sessions étendues</slogan>
-	<icon></icon>
+	<icon>images/macrosession-128.png</icon>
 	<auteur>JLuc</auteur>
 	<licence>GPL</licence>
 	<version>0.9.1</version>
@@ -18,5 +18,5 @@
 	<categorie>outil</categorie>
 	<lien>http://contrib.spip.net/4823</lien> 
 	<options>macrosession_options.php</options>
-	<icon>images/macrosession-128.png</icon>
+
 </plugin>
