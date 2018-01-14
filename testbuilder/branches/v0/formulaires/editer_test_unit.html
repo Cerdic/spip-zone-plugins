@@ -1,0 +1,58 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 testbuilder
+  Distribue sous licence GPL
+
+]
+<div class='formulaire_spip formulaire_editer formulaire_#FORM'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <ul>
+			<BOUCLE_args(POUR){tableau #ENV{_args}}>
+	    <li class="editer_arg editer_arg_#CLE [ (#ENV**{erreurs}|table_valeur{args_#CLE}|oui)erreur]">
+				<label for="arg_#CLE"><tt>#VALEUR</tt>
+				<br />
+				<a href="#" onclick="jQuery('#arg_#CLE').attr('id','zzz').after('<textarea name=\'args[]\' id=\'arg_#CLE\'></textarea>');jQuery('#arg_#CLE').val(jQuery('#zzz').attr('value'));jQuery('#zzz').remove();jQuery(this).hide();return false;">textarea</a>
+				</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{args_#CLE})</span>]
+				[(#ENV**{args}|table_valeur{#CLE}|match{\n}|?{
+				<textarea name='args&#91;&#93;' class='text' id='arg_#CLE'>[(#ENV**{args}|table_valeur{#CLE})]</textarea>
+				,
+				<input type="text" name='args&#91;&#93;' class='text' id='arg_#CLE' value='[(#ENV**{args}|table_valeur{#CLE})]' />}
+				)]
+	    </li>
+			</BOUCLE_args>
+	    <li class="editer_resultat [ (#ENV**{erreurs}|table_valeur{resultat}|oui)erreur]">
+				<label for="resultat"><:tb:label_resultat_essai:>
+				<br />
+				<a href="#" onclick="jQuery('#resultat').attr('id','zzz').after('<textarea name=\'resultat\' id=\'resultat\'></textarea>');jQuery('#resultat').val(jQuery('#zzz').attr('value'));jQuery('#zzz').remove();jQuery(this).hide();return false;">textarea</a>
+				</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{resultat})</span>]
+				
+				[(#ENV**{resultat}|match{\n}|?{
+				<textarea name='resultat' class='text' id='resultat'>[(#ENV**{resultat})]</textarea>
+				,
+				<input type="text" name='resultat' class='text' id='resultat' value='[(#ENV**{resultat})]' />
+				})]
+	    </li>
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class="boutons">
+			<input type='submit' class='submit' name="tester" value='<:tb:bouton_tester:>' />
+			<input type='submit' class='submit' name="combi" value='<:tb:bouton_combinatoire:>' />
+			<input type='submit' class='submit' name="enregistrer" value='[(#ENV{_modif_essai,-1}|>{-1}|?{<:bouton_modifier:>,<:bouton_ajouter:>})]' /></p>
+		<div class="essais" style="padding:10px;border-bottom:1px solid #eee;">
+		[<div style="float:right">(#ENV{_filetest,''}|tb_url_test{<tt>[(#ENV{_filetest,''}|basename)]</tt>})</div>]
+		[<input type='submit' class='submit' name="supprimer_tous" value='<:tb:bouton_supprimer_tous:>' />
+		<input type='submit' class='submit' name="recalculer_tous" value='<:tb:bouton_recalculer_tous:>' />
+			(#ENV{_essais}|tb_affiche_essais{#ENV{_funcname},#ENV{_modif_essai}})]
+		<br class="nettoyeur" />
+		</div>
+	</div></form>
+</div>
