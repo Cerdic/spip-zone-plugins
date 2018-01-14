@@ -46,6 +46,10 @@
 .spip_documents_shape.spip_documents_left {
 	float: none;
 }
+.spip_documents_shape.spip_documents_left .spip_doc_intitules_shape {
+	float: left; 
+	position: relative !important;
+}
 .spip_documents_shape .fond {
 	-webkit-shape-margin: 2em;
 	shape-margin: 2em;
@@ -56,6 +60,10 @@
 }
 .spip_documents_shape.spip_documents_right {
 	float: none;
+}
+.spip_documents_shape.spip_documents_right .spip_doc_intitules_shape {
+	float: right; 
+	position: relative !important;
 }
 .spip_documents_shape.spip_documents_right .fond {	
 	float: right;

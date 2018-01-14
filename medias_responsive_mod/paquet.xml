@@ -1,7 +1,7 @@
 <paquet
 	prefix="medias_responsive_mod"
 	categorie="outil"
-	version="1.10.8"
+	version="1.10.10"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="imgs/medias_responsive.png"
