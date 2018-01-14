@@ -13,6 +13,10 @@ jQuery(function($) {
 				right: [(#LANG_DIR|=={ltr}|?{"'agendaDay,agendaWeek,month,listMonth'","'today nextYear,next,prev,prevYear'"})] 
 				}, 
 			fixedWeekCount: false,
+			eventRender: function( event, element, view ) {
+				var title = element.find('.fc-title, .fc-list-item-title');          
+				title.html(title.text());
+			},
 			allDayHtml:'<:organiseur:cal_jour_entier|textebrut:>',
 			loading: function(bool) {
 				if (bool) $('#calendrier-loading').show();
