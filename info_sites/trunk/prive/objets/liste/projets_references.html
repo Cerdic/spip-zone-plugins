@@ -1,5 +1,7 @@
 [(#SET{defaut_tri,#ARRAY{
 	nom,1,
+	url_site,1,
+	organisation,1,
 	id_projets_reference,1,
 	points,-1
 }})]<B_liste_projets_references>
@@ -11,6 +13,8 @@
 		<tr class="first_row">
 			<th class="picto" scope="col"></th>
 			<th class="nom" scope="col">[(#TRI{nom,<:projets_reference:champ_nom_label:>,ajax})]</th>
+			<th class="url_site" scope="col">[(#TRI{url_site,<:projets_reference:champ_url_site_label:>,ajax})]</th>
+			<th class="organisation" scope="col">[(#TRI{organisation,<:projets_reference:champ_organisation_label:>,ajax})]</th>
 			<th class="id" scope="col">[(#TRI{id_projets_reference,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
@@ -19,6 +23,8 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="picto">[(#CHEMIN_IMAGE{projets_reference-16.png}|balise_img)]</td>
 			<td class="nom principale">[(#LOGO_PROJETS_REFERENCE|image_reduire{20,26})]<a href="[(#ID_PROJETS_REFERENCE|generer_url_entite{projets_reference})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROJETS_REFERENCE">[(#RANG). ]#NOM</a></td>
+			<td class="url_site secondaire"><a href="[(#URL_SITE)]" title="<:voir_en_ligne:>">[(#URL_SITE)]</a></td>
+			<td class="organisation secondaire">[(#ORGANISATION)]</td>
 			<td class="id">[(#AUTORISER{modifier,projets_reference,#ID_PROJETS_REFERENCE}|?{
 				<a href="[(#URL_ECRIRE{projets_reference_edit,id_projets_reference=#ID_PROJETS_REFERENCE})]">#ID_PROJETS_REFERENCE</a>,
 				#ID_PROJETS_REFERENCE

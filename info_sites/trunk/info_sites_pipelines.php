@@ -28,7 +28,7 @@ function info_sites_affiche_milieu($flux) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
 			'table_source' => 'projets_references',
 			'objet' => $e['type'],
-			'id_objet' => $flux['args'][$e['id_table_objet']]
+			'id_objet' => $flux['args'][$e['id_table_objet']],
 		));
 	}
 
@@ -112,13 +112,15 @@ function info_sites_compiler_branches_logiciel($flux) {
  * Supprime les liens orphelins de l'objet vers quelqu'un et de quelqu'un vers l'objet.
  *
  * @pipeline optimiser_base_disparus
+ *
  * @param  array $flux Données du pipeline
+ *
  * @return array       Données du pipeline
  */
 function info_sites_optimiser_base_disparus($flux) {
 
 	include_spip('action/editer_liens');
-	$flux['data'] += objet_optimiser_liens(array('projets_reference'=>'*'), '*');
+	$flux['data'] += objet_optimiser_liens(array('projets_reference' => '*'), '*');
 
 	return $flux;
 }

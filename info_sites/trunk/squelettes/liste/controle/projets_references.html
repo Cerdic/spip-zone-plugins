@@ -28,7 +28,8 @@
 				<td class="organisation" scope="col">[(#ORGANISATION)] [(#ORGANISATION|in_array{#GET{nom_organisations}}|?{<span class="text-success"><i class="fa fa-check-circle"> </i></span>,<span class="text-danger"><i class="fa fa-times-circle"> </i></span>})]</td>
 				<td class="action" scope="col">
 					<div class="btn-group">
-						<a href="[(#GET{redirect}|parametre_url{id_projets_reference,#ID_PROJETS_REFERENCE})]" class="btn btn-default btn-sm" data-toggle="tooltip" title="<:projets_reference:icone_modifier_projets_reference:>"><i class="fa fa-1x fa-pencil-square"></i> </a>
+						<a href="[(#GET{redirect}|parametre_url{id_projets_reference,#ID_PROJETS_REFERENCE})]" class="btn btn-default btn-sm" data-toggle="tooltip" title="<:projets_reference:icone_modifier_projets_reference:>"><i class="fa fa-1x fa-pencil-square"></i> </a>[(#AUTORISER{supprimer,projets_reference,#ID_PROJETS_REFERENCE}|oui)
+						<a href="[(#URL_ACTION_AUTEUR{supprimer_projets_reference,#ID_PROJETS_REFERENCE}|parametre_url{redirect,#GET{redirect}})]" class="btn btn-default btn-sm" data-toggle="tooltip" title="<:projets_reference:supprimer_projets_reference:>" onclick="return confirm('<:projets_reference:confirmer_supprimer_projets_reference:>')"><i class="fa fa-1x fa-trash"></i> </a>]
 						<BOUCLE_projets (PROJETS) {tout} {url_site}>[(#AUTORISER{voir,projet,#ID_PROJET}|oui)<a href="[(#URL_PROJET)]" class="btn btn-default btn-sm" data-toggle="tooltip" title="<:projet:icone_voir_projet:>"><i class="fa fa-1x fa-eye"></i> </a>]</BOUCLE_projets>
 						</B_projets>[(#AUTORISER{creer,projet}|oui)
 						<a href="[(#URL_ACTION_AUTEUR{creer_fiche_projet,#ID_PROJETS_REFERENCE}|parametre_url{redirect,#GET{redirect}})]" class="btn btn-default btn-sm" data-toggle="tooltip" title="<:projet:icone_creer_projet:>"><i class="fa fa-1x fa-plus-square"></i> </a>] <//B_projets>
