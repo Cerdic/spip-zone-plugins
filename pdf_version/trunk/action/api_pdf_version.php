@@ -53,6 +53,11 @@ function action_api_pdf_version_dist($arg=null, $embed=true) {
 	}
 
 	// delivrer le PDF
+	// Vider tous les tampons pour ne pas provoquer de Fatal memory exhausted
+	$level = @ob_get_level();
+	while ($level--) {
+		@ob_end_clean();
+	}
 
 	// toujours envoyer un content type
 	header("Content-Type: application/pdf");
