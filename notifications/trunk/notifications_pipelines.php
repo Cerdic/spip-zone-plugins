@@ -203,7 +203,11 @@ function notifications_notifications_destinataires($flux){
 	if (($quoi=='forumprive' AND $GLOBALS['notifications']['thread_forum_prive'])
 		OR ($quoi=='forumvalide' AND ($GLOBALS['notifications']['thread_forum'] OR $GLOBALS['notifications']['forum'] OR $GLOBALS['notifications']['forum_article']))
 	){
-
+		// Quand le forum est prive, il ne faut pas ecrire aux participant du forum public
+		$exclurepublic = '';
+		if ($quoi=='forumprive') {
+			$exclurepublic=",'publie'";
+		}
 		$id_forum = $flux['args']['id'];
 		if ($t = $options['forum']
 			OR $t = sql_fetsel("*", "spip_forum", "id_forum=" . intval($id_forum))
@@ -214,12 +218,12 @@ function notifications_notifications_destinataires($flux){
 			// note : on exclut les forums refusé, proposé ou marqué comme spam
 			$s = sql_select("F.email_auteur, F.notification_email, A.email",
 				"spip_forum AS F LEFT JOIN spip_auteurs AS A ON F.id_auteur=A.id_auteur",
-				"notification=1 AND id_thread=" . intval($t['id_thread']) . " AND (email_auteur != '' OR notification_email != '' OR A.email IS NOT NULL) AND F.statut NOT IN ('off','spam','prop')") ;
+				"notification=1 AND id_thread=" . intval($t['id_thread']) . " AND (email_auteur != '' OR notification_email != '' OR A.email IS NOT NULL) AND F.statut NOT IN ('off','spam','prop". $exclurepublic ."')") ;
             // Eventuellement tout ceux qui ont répondu à cet article
             if (!empty($GLOBALS['notifications']['forum_article'])) {
                 $s = sql_select("F.email_auteur, F.notification_email, A.email",
 				"spip_forum AS F LEFT JOIN spip_auteurs AS A ON F.id_auteur=A.id_auteur",
-				"notification=1 AND objet=".sql_quote($t['objet'])." AND id_objet=" . intval($t['id_objet']) . " AND (email_auteur != '' OR notification_email != '' OR A.email IS NOT NULL) AND F.statut NOT IN ('off','spam','prop')");                
+				"notification=1 AND objet=".sql_quote($t['objet'])." AND id_objet=" . intval($t['id_objet']) . " AND (email_auteur != '' OR notification_email != '' OR A.email IS NOT NULL) AND F.statut NOT IN ('off','spam','prop". $exclurepublic ."')");                
                 }
 			while ($r = sql_fetch($s)){
 				if ($r['notification_email'])
