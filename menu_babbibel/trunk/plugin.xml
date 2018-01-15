@@ -12,7 +12,7 @@
 		</multi>
 	</slogan>
 
-	<version>3.0.2</version>
+	<version>3.0.3</version>
 	<prefix>babbi</prefix>
 	<auteur>babbibel</auteur>
 	<licence>(c) 2009 GNU/GPL</licence>
@@ -52,5 +52,5 @@
 	</pipeline>
 
 	<categorie>navigation</categorie>
-	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.2.99]" />
 </plugin>
