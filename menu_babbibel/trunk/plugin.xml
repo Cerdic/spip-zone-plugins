@@ -1,14 +1,14 @@
 <plugin>
 	<nom>
 		<multi>
-			[fr]Menu Babbibel
-			[en]Babbibel Menu
+		[fr]Menu Babbibel
+		[en]Babbibel Menu
 		</multi>
 	</nom>
 	<slogan>
 		<multi>
-			[fr]Menu d&#233;roulant horizontal en jQuery
-			[en]Horizontal dropdown menu with jQuery
+		[fr]Menu d&#233;roulant horizontal en jQuery
+		[en]Horizontal dropdown menu with jQuery
 		</multi>
 	</slogan>
 
@@ -27,15 +27,15 @@
 	<lien>https://contrib.spip.net/?article3055</lien>
 
 	<bouton id='babbi' parent='configuration'>
-			<icone>prive/themes/spip/images/logo_menu-27-24.png</icone>
-			  <titre>babbi:titre_menu_babbibel</titre>
-			  <url>configurer_babbi</url>
-  </bouton>
+		<icone>prive/themes/spip/images/logo_menu-27-24.png</icone>
+		<titre>babbi:titre_menu_babbibel</titre>
+		<url>configurer_babbi</url>
+	</bouton>
 	<bouton id='babbi2' parent='bando_squelette'>
-		   <icone>prive/themes/spip/images/logo_menu-27-24.png</icone>
-		   <titre>babbi:titre_menu_babbibel</titre>
-		   <url>configurer_babbi</url>
-  </bouton>
+		<icone>prive/themes/spip/images/logo_menu-27-24.png</icone>
+		<titre>babbi:titre_menu_babbibel</titre>
+		<url>configurer_babbi</url>
+	</bouton>
 
 	<fonctions>fonctions_menu.php</fonctions>
 
