@@ -1,0 +1,21 @@
+<paquet
+	prefix="commandes_abonnements"
+	categorie="divers"
+	version="1.0.0"
+	schema="1.0.0"
+	etat="dev"
+	compatibilite="[3.2.0;3.2.*]"
+	logo="commandes_abonnements.png"
+>
+	<nom>Commandes d’abonnements</nom>
+
+	<auteur lien="https://ldd.fr">Les Développements Durables</auteur>
+	<licence>GPL v3</licence>
+	
+	<pipeline nom="declarer_tables_objets_sql" inclure="commandes_abonnements_pipelines.php" />
+	<pipeline nom="formulaire_saisies" inclure="commandes_abonnements_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="commandes_abonnements_pipelines.php" />
+	
+	<necessite nom="commandes" compatibilite="[1.15.3;]" />
+	<necessite nom="abonnements" compatibilite="[3.3.0;]" />
+</paquet>

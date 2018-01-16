@@ -1,0 +1,161 @@
+<style type="text/css">
+.formulaire_spip .choix label {
+	display: inline;
+	width: auto;
+}
+.formulaire_spip .erreur {
+	display: block;
+	color: red;
+}
+.button {
+	background-color: #c85000;
+	border: 1px solid #c85000;
+	color: white;
+	border-radius: 0.2em;
+	padding: 0.375em 1em;
+	display: inline-block;
+	font-size: 0.9em;
+}
+button.button:hover, button.button:focus, a.button[href]:hover, a.button[href]:focus {
+	background-color: #993D00 !important;
+	color: white !important;
+}
+.formulaire_commander_abonnement .liste_offres {
+	display:flex;
+	flex-flow: row wrap;
+	-ms-flex-flow: row wrap;
+	-webkit-flex-flow: row wrap;
+	justify-content: space-around;
+}
+.formulaire_commander_abonnement form {
+	flex-basis: 100%;
+	-ms-flex-basis: 100%;
+	-webkit-flex-basis: 100%;
+	display: flex;
+}
+.formulaire_commander_abonnement .offre {
+	display: flex;
+	flex-flow: column nowrap;
+	-ms-lex-flow: column nowrap;
+	-webkit-flex-flow: column nowrap;
+	padding: 0.75em;
+	margin-bottom: 1.5em;
+	box-shadow: 1px 1px 2px 0px grey;
+	text-align: center;
+}
+.formulaire_commander_abonnement .offre__titre {
+	margin: 0;
+}
+.formulaire_commander_abonnement .offre__prix {
+	background-color: #666;
+	color: white;
+	margin: 0.625em -0.625em;
+	font-size: 1.2em;
+}
+.formulaire_commander_abonnement .offre__alternative {
+	margin-bottom: 1.5em;
+}
+.formulaire_commander_abonnement .offre__alternative .button[href] {
+	background-color: white;
+	color: #c85000;
+}
+.formulaire_commander_abonnement .offre__descriptif {
+	flex: 2;
+	-ms-flex: 2;
+	-webkit-flex: 2;
+	text-align: left;
+}
+.formulaire_commander_abonnement .offre__perso {
+	font-size: 0.8em;
+}
+.formulaire_commander_abonnement .offre__perso label {
+	display: inline;
+	width: auto;
+}
+.formulaire_commander_abonnement .offre__perso input[type="text"] {
+	width: auto;
+	height: auto;
+}
+.formulaire_commander_abonnement .offre__descriptif ul {
+	margin:0;
+}
+.formulaire_commander_abonnement .offre__descriptif li {
+	margin-bottom: 0.75em;
+	padding-bottom: 0.75em;
+	border-bottom: 1px solid #ddd;
+}
+.formulaire_commander_abonnement .offre__descriptif li:last-child {
+	border-bottom: 0;
+}
+.formulaire_commander_abonnement .offre__paiement {
+	text-align: center;
+	font-size: 0.8em;
+	font-style: italic;
+	color: grey;
+}
+.formulaire_commander_abonnement .offre__choix {
+	text-align: center;
+}
+/* Moyen */
+@media (min-width: 40em) {
+	.formulaire_commander_abonnement form {
+		flex-basis: calc((100% - 3em) / 3);
+		-ms-flex-basis: calc((100% - 3em) / 3);
+		-webkit-flex-basis: calc((100% - 3em) / 3);
+	}
+}
+</style>
+<link rel="stylesheet" href="#CHEMIN{css/ui/jquery-ui.min.css}" type="text/css" />
+<script type="text/javascript" src="#CHEMIN{prive/javascript/ui/jquery-ui.min.js}"></script>
+<div class="formulaire_spip formulaire_#ENV{form}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+	
+	<BOUCLE_editable (CONDITION) {si #ENV{editable}}>
+	<B_offres>
+	<div class="liste_offres">
+		<BOUCLE_offres (ABONNEMENTS_OFFRES) {par num titre, titre}>
+		<INCLURE{fond=formulaires/inc-card_offre,env,
+			id_abonnements_offre=#ID_ABONNEMENTS_OFFRE,
+			titre=#TITRE,
+			descriptif=#DESCRIPTIF,
+			montant=#PRIX**,
+			periode=#PERIODE,
+			duree=#DUREE,
+			renouvellement_auto=#RENOUVELLEMENT_AUTO,
+			montant_perso=#MONTANT_PERSO,
+			montant_minimum=#MONTANT_MINIMUM}/>
+		</BOUCLE_offres>
+	</div>
+	</B_offres>
+		
+	<script type="text/javascript">
+	/*<![CDATA[*/
+	;(function($){
+		function commander_abonnement() {
+			// Gestion des montants persos
+			$('.offre__perso').find('input[type=radio]').checkboxradio({icon: false}).on('focus', function() {
+				$(this).closest('.offre__perso').find('input[type=text]').removeClass('ui-state-active').val('');
+			});
+			$('.offre__perso input[type=text]')
+				.on('focus', function() {
+					$(this).addClass('ui-state-active').closest('.offre__perso').find('input:checked').prop('checked', false).checkboxradio('refresh');
+				})
+				.on('blur', function() {
+					var val = $(this).val().trim();
+					if (!val.match(/^\d+$/)) {
+						$(this).val('').removeClass('ui-state-active').closest('.offre__perso').find('input[type=radio]').first().prop('checked', true).checkboxradio('refresh');
+					}
+				});
+		}
+		
+		$(function(){
+			commander_abonnement();
+			onAjaxLoad(commander_abonnement);
+		});
+	})(jQuery);
+	/*]]>*/
+	</script>
+	</BOUCLE_editable>
+</div>
+
