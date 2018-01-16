@@ -98,7 +98,7 @@ function commandes_abonnements_formulaire_saisies($flux) {
  * @return array
  * 		Retourne le flux possiblement modifié
  **/
-function commandes_abonnements_formulaire_saisies($flux) {
+function commandes_abonnements_formulaire_traiter($flux) {
 	if (
 		$flux['args']['form'] == 'editer_auteur'
 		and $id_auteur = $flux['data']['id_auteur']
