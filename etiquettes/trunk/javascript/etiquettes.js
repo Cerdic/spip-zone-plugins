@@ -179,6 +179,6 @@ function jointags(a) {
 		a[i] = tag;
 	}
 
-	return a.join(' ');  // ici mettre ' ' si on ne veut pas de virgule et ', ' dans le cas contraire
+	return a.join(', ');  // ici mettre ' ' si on ne veut pas de virgule et ', ' dans le cas contraire
 }
 

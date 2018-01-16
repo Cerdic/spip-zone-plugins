@@ -1,7 +1,7 @@
 <paquet
 	prefix="etiquettes"
 	categorie="navigation"
-	version="2.2.6"
+	version="2.2.7"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/etiquettes.png"
