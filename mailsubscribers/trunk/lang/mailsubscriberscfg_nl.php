@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_double_optin' => 'Validatie van inschrijvingen',
 	'label_double_optin_0' => 'Eenvoudige Opt-in',
 	'label_double_optin_1' => 'Dubbele Opt-in (bevestigingsmail met link om inschrijving te valideren)',
+	'label_importer_creer_liste_1' => 'Bij het importeren van e-mailadressen niet automatisch een aanvullende distributielijst met deze adressen aanmaken.',
 	'label_list_id' => 'Identificatie',
 	'label_list_status' => 'Status',
 	'label_list_titre' => 'Naam van de lijst',
