@@ -1,7 +1,9 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -9,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_parametrages' => 'Paramètres de la déclaration Agessa',
 	'cfg_taux' => 'Taux en vigueur',
 	'cfg_taux_explication' => 'Indiquer les taux en vigueur (exemple 0.011 = 1.1 %)',
-	'cfg_taux_maladie' => 'Cotisation maladie',
+	'cfg_taux_precompte' => 'Cotisations / contributions sociales et formation professionnelle',
 	'cfg_taux_csg' => 'Cotisation Sociale Généralisée',
 	'cfg_taux_rds' => 'Cotisation au Remboursement de la Dette Sociale',
 	'cfg_taux_formation' => 'Cotisation auteur formation professionnelle',
@@ -26,7 +28,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_pays' => 'Pays',
 	'cfg_activite' => 'Nature de l\'activité de l\'auteur',
 	'cfg_taux_diffuseur' => 'Contributeur diffuseur',
-	'cfg_taux_diffuseur_formation' => 'Contributeur diffuseur à la formation professionnelle des auteurs',
 
 	// E
 	'erreur_montant_da' => 'Montant incorrect', 
@@ -39,5 +40,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'montant_da' => 'Montant brut HT des droits d\'auteur',
 
 	// P
-	'pdf_cree' => 'Votre pdf a été généré avec succès<br /><a href="@pdf_path@" target="_blank">Télécharger le pdf @pdf_nom@</a>',
+	'pdf_cree' => 'Votre pdf a été générée avec succès<br /><a href="@pdf_path@" target="_blank">Télécharger le pdf @pdf_nom@</a>',
 );
