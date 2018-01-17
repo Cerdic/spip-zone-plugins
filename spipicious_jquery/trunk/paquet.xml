@@ -1,7 +1,7 @@
 <paquet
 	prefix="spipicious"
 	categorie="communication"
-	version="1.2.5"
+	version="1.2.6"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/spipicious-128.png"

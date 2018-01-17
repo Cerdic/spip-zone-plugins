@@ -76,7 +76,7 @@ function formulaires_spipicious_ajax_traiter($id_objet,$type,$retour='') {
 
 	if ($retour) {
 		include_spip('inc/headers');
-		$message .= redirige_formulaire($retour);
+		return array('redirect' => $retour);
 	}
 	
 	return array('editable'=>true,'message'=>$message);
