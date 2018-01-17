@@ -38,7 +38,7 @@ function formulaires_spipicious_ajax_charger($id_objet,$type='article',$retour='
 	if(!function_exists('lire_config'))
 		include_spip('inc/config');
 	$id_groupe = lire_config('spipicious/groupe_mot');
-	$valeurs = array('type'=>$type,'type'=>$type,'id_objet'=>$id_objet,'spipicious_groupe'=>$id_groupe);
+	$valeurs = array('type'=>$type,'id_objet'=>$id_objet,'spipicious_groupe'=>$id_groupe);
 	return $valeurs;
 }
 
