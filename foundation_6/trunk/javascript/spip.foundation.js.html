@@ -82,4 +82,5 @@ onAjaxLoad(function() {
 [(#PRODUIRE{fond=javascript/foundation_perso.js}|supprimer_timestamp|file_get_contents)]
 ]
 
-#FILTRE{minifier_js}
+[(#PLUGIN{crayons}|non)
+#FILTRE{minifier_js}]
