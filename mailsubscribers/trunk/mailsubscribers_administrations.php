@@ -5,7 +5,9 @@
  * Licence GNU/GPL v3
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction d'installation du plugin et de mise à jour.
@@ -458,7 +460,7 @@ function mailsubscriber_import_one($email, $set) {
  * @param array $listes
  * @return array
  */
-function mailsubscribers_importer_listes($listes){
+function mailsubscribers_importer_listes($listes) {
 	$correspondances = array();
 	foreach ($listes as $liste) {
 		$statut = 'fermee';

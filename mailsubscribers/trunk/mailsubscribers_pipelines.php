@@ -5,7 +5,9 @@
  * Licence GNU/GPL v3
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function mailsubscribers_taches_generales_cron($taches) {
 	// a peu pres tous les jours mais en se decalant un peu
@@ -172,26 +174,26 @@ function mailsubscribers_post_edition($flux) {
 
 
 /**
- * Optimiser la base de donnee en supprimant inscriptions non confirmees
- * ainsi que les inscriptions a la poubelle
+ * Optimiser la base de donnee en supprimant :
+ * -> les inscriptions non confirmees
+ * -> les inscriptions et les listes a la poubelle
  *
  * @param array $flux
  * @return array
  */
 function mailsubscribers_optimiser_base_disparus($flux) {
 	$n = &$flux['data'];
-	$mydate = $flux['args']['date'];
-
 
 	# passer en poubelle les inscriptions en attente jamais confirmees (ce sont des bots)
 	sql_updateq("spip_mailsubscribers", array("statut" => "poubelle", 'date' => date('Y-m-d H:i:s')),
-		"statut=" . sql_quote('prepa') . " AND date < " . sql_quote($mydate));
+		"statut='prepa' AND date < " . $flux['args']['date']);
 
 	# supprimer les inscrits a la poubelle
-	sql_delete("spip_mailsubscribers", "statut=" . sql_quote('poubelle') . " AND date < " . sql_quote($mydate));
+	sql_delete('spip_mailsubscribers', "statut='poubelle' AND maj < " . $flux['args']['date']);
 
 	# supprimer les listes a la poubelle
-	sql_delete("spip_mailsubscribinglists", "statut=" . sql_quote('poubelle') . " AND date < " . sql_quote($mydate). " AND maj < " . sql_quote($mydate));
+	sql_delete('spip_mailsubscribinglists', "statut='poubelle' AND maj < " . $flux['args']['date']);
+
 
 	# supprimer les inscriptions dont le subscriber n'existe plus
 	$res = sql_select("S.id_mailsubscriber AS id",
