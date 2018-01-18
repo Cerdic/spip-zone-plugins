@@ -15,6 +15,9 @@ li.saisie_liste,
   .formulaire_spip div.saisie_liste label {
     float: none;
     margin-left: 0; }
+  li.saisie_liste fieldset,
+  .formulaire_spip div.saisie_liste fieldset {
+    padding: 0; }
 
 .saisie-liste {
   border: none; }
@@ -36,13 +39,17 @@ li.saisie_liste,
   .saisie-liste > li, .saisie-liste > div {
     padding: 3px; }
 
+/* blocs */
+.saisie-liste > li,
+.saisie-liste > div {
+  border: 1px solid #D0D0D0;
+  background-color: #F4F4F4;
+  margin: 5px 0; }
+
 /* effets pour jqueryui.sortable */
 .saisie-liste.ui-sortable > li,
 .saisie-liste.ui-sortable > div {
-  cursor: move;
-  border: 1px solid #D0D0D0;
-  background-color: #F4F4F4;
-  margin: 5px; }
+  cursor: move; }
   .saisie-liste.ui-sortable > li:hover,
   .saisie-liste.ui-sortable > div:hover {
     background-color: #EBE7E7;
