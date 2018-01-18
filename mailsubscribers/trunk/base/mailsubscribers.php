@@ -103,6 +103,7 @@ function mailsubscribers_declarer_tables_objets_sql($tables) {
 			"identifiant" => "varchar(255) NOT NULL DEFAULT ''",
 			"titre" => "text NOT NULL DEFAULT ''",
 			"descriptif" => "text DEFAULT '' NOT NULL",
+			"anonyme" => "varchar(3) NOT NULL DEFAULT 'non'",
 			"adresse_envoi_nom" => "text DEFAULT '' NOT NULL",
 			"adresse_envoi_email" => "text DEFAULT '' NOT NULL",
 			"date" => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
@@ -117,8 +118,8 @@ function mailsubscribers_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "titre",
 		'date' => "date",
-		'champs_editables' => array('identifiant', 'titre', 'descriptif', 'date', 'statut', 'adresse_envoi_nom', 'adresse_envoi_email'),
-		'champs_versionnes' => array('identifiant', 'titre', 'descriptif', 'adresse_envoi_nom', 'adresse_envoi_email'),
+		'champs_editables' => array('identifiant', 'titre', 'descriptif', 'anonyme', 'date', 'statut', 'adresse_envoi_nom', 'adresse_envoi_email'),
+		'champs_versionnes' => array('identifiant', 'titre', 'descriptif', 'anonyme', 'adresse_envoi_nom', 'adresse_envoi_email'),
 		'rechercher_champs' => array('identifiant' => 1, 'titre' => 2, 'descriptif' => 1),
 		'tables_jointures' => array(
 			'mailsubscriptions',

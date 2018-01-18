@@ -3,7 +3,8 @@
 <body>
 <div class="header">
 	<BOUCLE_titreliste(MAILSUBSCRIBINGLISTS){id_mailsubscribinglist}>
-	<p><:mailsubscriber:confirmsubscribe_titre_email_liste{titre_liste=##ID_MAILSUBSCRIBINGLIST}:></p>
+	[(#ANONYME|=={non}|?{#SET{titre_liste, #TITRE}, #SET{titre_liste, ##ID_MAILSUBSCRIBINGLIST}})]
+	<p><:mailsubscriber:confirmsubscribe_titre_email_liste{titre_liste=#GET{titre_liste}}:></p>
 	</BOUCLE_titreliste>
 	<p><:mailsubscriber:confirmsubscribe_titre_email:></p>
 	<//B_titreliste>
@@ -13,7 +14,7 @@
 [(#SET{email,<b>#EMAIL</b>})]
 [(#SET{nom_site_spip,[<a href="[(#URL_SITE_SPIP|url_absolue)]">(#NOM_SITE_SPIP)</a>]})]
 <BOUCLE_titreliste2(MAILSUBSCRIBINGLISTS){id_mailsubscribinglist}>
-<p><:mailsubscriber:confirmsubscribe_texte_email_liste_1{email=#GET{email},nom_site_spip=#GET{nom_site_spip},titre_liste=##ID_MAILSUBSCRIBINGLIST}:></p>
+<p><:mailsubscriber:confirmsubscribe_texte_email_liste_1{email=#GET{email},nom_site_spip=#GET{nom_site_spip},titre_liste=#GET{titre_liste}}:></p>
 </BOUCLE_titreliste2>
 <p><:mailsubscriber:confirmsubscribe_texte_email_1{email=#GET{email},nom_site_spip=#GET{nom_site_spip}}:></p>
 <//B_titreliste2>

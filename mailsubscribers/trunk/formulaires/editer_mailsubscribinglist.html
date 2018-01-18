@@ -28,6 +28,19 @@
 				]<textarea name="#GET{name}" id="#GET{name}" class="textarea" rows="5">
 #ENV*{#GET{name},#GET{defaut}}</textarea>
 			</li>
+			#SET{name,anonyme}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:mailsubscriberscfg:label_anonymiser:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<p class="explication"><:mailsubscriberscfg:texte_config_anonymiser:></p>
+				<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+					[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
+					&nbsp;&nbsp;
+					<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+					[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
+				</div>
+			</div>
 			<li class="fieldset">
 				<fieldset>
 					<legend><:mailsubscribinglist:legend_configuration_adresse_envoi:> <:newsletter:info_optionnel:></legend>

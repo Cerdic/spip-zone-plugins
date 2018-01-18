@@ -9,6 +9,11 @@
 	<div class='label'><:mailsubscribinglist:label_identifiant:> : </div>
 	<span dir='#LANG_DIR' class='#EDIT{identifiant} identifiant'><tt>(#IDENTIFIANT)</tt></span>
 </div>]
+
+[<div class="champ contenu_anonyme">
+	(#ANONYME|=={oui}|oui)<div><:mailsubscribinglist:label_anonyme:></div>
+</div>]
+
 <div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
 <div class='label'><:info_descriptif:></div>
 <div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>[(#DESCRIPTIF|image_reduire{500,0})]</div>
