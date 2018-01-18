@@ -65,13 +65,13 @@
 </fieldset>
 
 <script type="text/javascript">
-  [(#REM) s'il y a un fichier javascripts/saisie_NOM_DE_LA_SAISIE, on le
+  [(#REM) s'il y a un fichier javascript/saisie_NOM_DE_LA_SAISIE, on le
           prend. ]
-  [(#CHEMIN{javascript/saisie_#ENV{nom}.js}|oui)
-    #INCLURE{fond=javascript/saisies_#ENV{nom}.js, nom=#ENV{nom}, env}
+  [(#CHEMIN{javascript/saisie_#ENV{nom}.js.html}|oui)
+    #INCLURE{fond=javascript/saisie_#ENV{nom}.js, nom=#ENV{nom}, env}
   ]
   [(#REM) sinon on prend le squelette par défaut.]
-  [(#CHEMIN{javascript/saisie_#ENV{nom}}|non)
+  [(#CHEMIN{javascript/saisie_#ENV{nom}.js.html}|non)
     #INCLURE{fond=javascript/saisie_liste.js, nom=#ENV{nom}, env}
   ]
 </script>
