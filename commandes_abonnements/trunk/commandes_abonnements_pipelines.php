@@ -103,15 +103,12 @@ function commandes_abonnements_formulaire_traiter($flux) {
 		$flux['args']['form'] == 'editer_auteur'
 		and $id_auteur = $flux['data']['id_auteur']
 	) {
-		$retours = commandes_abonnements_generer_commande($id_auteur);
-		
+		$flux['data'] += commandes_abonnements_generer_commande($id_auteur);
 		// On ajoute les infos
 		if (
 			isset($flux['data']['redirect'])
-			and $id_transaction = $retours['id_transaction']
-			and $transaction_hash = $retours['transaction_hash']
 		) {
-			$flux['data']['redirect'] = parametre_url(parametre_url($flux['data']['redirect'], 'id_transaction', $id_transaction), 'transaction_hash', $transaction_hash);
+			$flux['data']['redirect'] = parametre_url($flux['data']['redirect'], 'reference', $flux['data']['reference']);
 		}
 	}
 	
@@ -189,28 +186,15 @@ function commandes_abonnements_generer_commande($id_auteur) {
 				'prix_unitaire_ht' => $montant_ht,
 				'taxe' => $taxe,
 			))) {
+				// On retourne la référence et l'id
 				$retours['id_commande'] = $id_commande;
-				
-				// On crée la première transaction pour le premier paiement
-				$inserer_transaction = charger_fonction('inserer_transaction', 'bank');
-				$options_transaction = array(
-					'auteur' => $auteur['email'],
-					'id_auteur' => $id_auteur,
-					'montant_ht' => $montant_ht,
-					'champs' => array(
-						'id_commande' => $id_commande,
-					),
+				$retours['reference'] = sql_getfetsel(
+					'reference',
+					'spip_commandes',
+					'id_commande=' . intval($id_commande)
 				);
-				if (
-					$id_transaction = intval($inserer_transaction($montant, $options_transaction))
-					and $transaction_hash = sql_getfetsel('transaction_hash', 'spip_transactions', 'id_transaction='.$id_transaction)
-				) {
-					$retours['id_transaction'] = $id_transaction;
-					$retours['transaction_hash'] = $transaction_hash;
-					
-					// Et on supprime la session
-					session_set('commande_abonnement', null);
-				}
+				// Et on supprime la session
+				session_set('commande_abonnement', null);
 			}
 		}
 	}
