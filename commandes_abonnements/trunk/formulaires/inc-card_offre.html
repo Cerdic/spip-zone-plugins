@@ -60,7 +60,7 @@
 	</fieldset>
 	</BOUCLE_test_perso>
 	
-	<div class="offre__paiement">
+	<div class="offre__paiement[ offre__paiement--(#ENV{renouvellement_auto}|?{renouvellable,unique})]">
 		[(#ENV{renouvellement_auto}|?{
 			Prélèvement SEPA,
 			Paiement unique		
