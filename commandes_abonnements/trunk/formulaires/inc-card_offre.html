@@ -13,10 +13,10 @@
 	method="post" action="#ENV{action}" enctype="multipart/form-data"
 	id="offre#ID_ABONNEMENTS_OFFRE"
 	class="editer editer_abonnements_offre offre [(#ENV{alternative/quel}|!={principal}|?{alternative})]"
->
-[(#REM) declarer les hidden qui declencheront le service du formulaire 
-parametre : url d'action ]
-#ACTION_FORMULAIRE{#ENV{action}}
+><div class="offre__wrapper">
+	[(#REM) declarer les hidden qui declencheront le service du formulaire 
+	parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}
 	<h3 class="offre__titre">#ENV{titre}</h3>
 	
 	<div class="offre__prix">
@@ -70,4 +70,4 @@ parametre : url d'action ]
 	<div class="offre__choix">
 		<button type="submit" name="id_abonnements_offre" value="#ENV{id_abonnements_offre}">Choisir cette offre</button>
 	</div>
-</form>
+</div></form>
