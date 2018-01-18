@@ -30,6 +30,7 @@
 				<span class="erreur_message">(#ENV**{erreurs}|table_valeur{password})</span>
 				]<input type='password' class='text password form-control' name='password' id='password' value="" placeholder="<:login_pass2|attribut_html:>"  size='40' autocapitalize="off" autocorrect="off" />
 				<p class='details'><a href="[(#URL_PAGE{spip_pass}|parametre_url{lang,#LANG})]" id='spip_pass'><:login_motpasseoublie:></a></p>
+				[(#AUTORISER{inscrireauteur,6forum}|oui)<p class="details"><a href="[(#URL_PAGE{inscription}|parametre_url{lang,#LANG})]"><:pass_vousinscrire:></a> </p>]
 			</div>
 			[(#ENV{rester_connecte})
 			<div class="editer editer_session"><div class='choix checkbox'>

@@ -1,0 +1,3 @@
+[(#SET{url, [(#ENV{url}|?{#ENV{url},#SELF})]})]
+<INCLURE{fond=structure,env,type-page=inscription,composition=inscription,url=#GET{url}} />
+[(#FILTRE{trim})]
