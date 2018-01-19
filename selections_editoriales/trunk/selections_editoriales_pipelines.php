@@ -168,8 +168,10 @@ function selections_editoriales_afficher_complement_objet($flux) {
 		and $type = $exec['type']
 		and (
 			autoriser('associerselections', $type, $id)
-			or autoriser('creer', 'selection')
-			or autoriser('modifier', 'selection')
+			and (
+				autoriser('creer', 'selection')
+				or autoriser('modifier', 'selection')
+			)
 		)
 	 ) {
 		$flux['data'] .= recuperer_fond(
