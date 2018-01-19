@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nouvelle_liste' => 'Nouvelle liste',
 
 	// L
-	'label_anonymiser' => 'Anonymiser la liste ?',
+	'label_anonymiser' => 'Anonymiser la liste ?',
 	'label_double_optin' => 'Validation des inscriptions',
 	'label_double_optin_0' => 'Simple Opt-in',
 	'label_double_optin_1' => 'Double Opt-in (mail de confirmation avec lien de validation de l’inscription)',
@@ -34,6 +34,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_listes_diffusion' => 'Listes de diffusion',
 
 	// T
-	'titre_page_configurer_mailsubscriber' => 'Inscriptions à la Newsletter',
-	'texte_config_anonymiser' => 'Dans les mails de confirmation, remplacer le titre de la liste par son numéro.'
+	'texte_config_anonymiser' => 'Dans les mails de confirmation, remplacer le titre de la liste par son numéro.',
+	'titre_page_configurer_mailsubscriber' => 'Inscriptions à la Newsletter'
 );
