@@ -25,6 +25,9 @@ if ($z = _request('var_zajax') AND !preg_match(",[^\w-],", $z)) {
 	set_request('var_zajax', '');
 }
 
+if (!isset($GLOBALS['spip_pipeline']['recuperer_fond'])) $GLOBALS['spip_pipeline']['recuperer_fond'] = '';
+$GLOBALS['spip_pipeline']['recuperer_fond'] .= '||zcore_recuperer_fond';
+
 /**
  * Passe un chemin en URL absolue uniquement si non vide
  * utilise pour l'insertion d'URL conditionnee a l'existence d'un fichier (favicon.ico par exemple)
