@@ -60,10 +60,14 @@
 	</fieldset>
 	</BOUCLE_test_perso>
 	
+	<div class="offre__duree">
+		[(#ENV{duree}|singulier_ou_pluriel{abonnementsoffre:champ_periode_nb_#PERIODE,abonnementsoffre:champ_periode_nb_#PERIODE})]
+	</div>
+
 	<div class="offre__paiement[ offre__paiement--(#ENV{renouvellement_auto}|?{renouvellable,unique})]">
 		[(#ENV{renouvellement_auto}|?{
-			Prélèvement SEPA,
-			Paiement unique		
+			<:abonnementsoffre:info_paiement_renouvelable:>,
+			<:abonnementsoffre:info_paiement_unique:>
 		})]
 	</div>
 	
