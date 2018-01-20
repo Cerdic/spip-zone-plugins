@@ -43,7 +43,7 @@ $AutoEmbed_stubs = array(
     'embed-width' => '480',
     'embed-height' => '270',
     'image-src' => 'https://img.youtube.com/vi/$2/0.jpg',
-    'iframe-player' => 'https://www.youtube.com/embed/$2?rel=0&amp;autoplay=1',
+    'iframe-player' => 'https://www.youtube.com/embed/$2',
   ),
   array(
     'title' => 'YouTube',
@@ -53,7 +53,7 @@ $AutoEmbed_stubs = array(
     'embed-width' => '480',
     'embed-height' => '270',
     'image-src' => 'http://img.youtube.com/vi/$2/0.jpg',
-    'iframe-player' => 'http://www.youtube.com/embed/$2?rel=0&amp;autoplay=1',
+    'iframe-player' => 'https://www.youtube.com/embed/$2',
   ),
   array(
     'title' => 'YouTube (Playlists)',
@@ -61,7 +61,7 @@ $AutoEmbed_stubs = array(
     'url-match' => 'http://(?:(?:www|au|br|ca|es|fr|de|hk|ie|in|il|it|jp|kr|mx|nl|nz|pl|ru|tw|uk)\.)?youtube\.com(?:[^"]*?)?(?:&|&amp;|/|\?|;)(?:id=|p=|p/)([0-9a-f]{16})',
     'embed-src' => 'https://www.youtube.com/p/$2&rel=0&fs=1',
     'embed-width' => '480',
-    'embed-height' => '270',
+    'embed-height' => '385',
   ),
   array(
     'title' => 'Dailymotion',
@@ -77,7 +77,7 @@ $AutoEmbed_stubs = array(
     'website' => 'http://video.google.com',
     'url-match' => 'http://video\.google\.(com|com\.au|co\.uk|de|es|fr|it|nl|pl|ca|cn)/(?:videoplay|url|googleplayer\.swf)\?(?:[^"]*?)?docid=([0-9a-z-_]{1,20})',
     'embed-src' => 'http://video.google.$2/googleplayer.swf?docId=$3',
-    'embed-width' => 480,
+    'embed-width' => '480',
     'embed-height' => '270',
   ),
   array(
@@ -85,8 +85,8 @@ $AutoEmbed_stubs = array(
     'website' => 'http://www.megavideo.com',
     'url-match' => 'http://(?:www\.)?megavideo\.com/(?:\?(?:[^"]*?)?v=|v/)([0-9a-z]{8})',
     'embed-src' => 'http://www.megavideo.com/v/$2.0.0',
-    'embed-width' => '440',
-    'embed-height' => '359',
+    'embed-width' => '480',
+    'embed-height' => '270',
   ),
   array(
     'title' => 'MetaCafe',
@@ -355,15 +355,15 @@ $AutoEmbed_stubs = array(
     'url-match' => 'http://(?:www\.)?thedailyshow\.com/(?:watch|full\-episodes)',    
     'fetch-match' => '<meta property="og:video" content="([^\"]*)"/>',
     'iframe-player' => '$2',
-    'embed-width' => '480',
-    'embed-height' => '270',
+    'embed-width' => '360',
+    'embed-height' => '205',
   ),
   array(
     'title' => 'ColbertNation',
     'website' => 'http://www.colbertnation.com',
     'url-match' => 'http:\/\/(?:www\.)?colbertnation\.com\/the-colbert-report-videos\/([0-9]*)\/',
     'embed-src' => 'http://media.mtvnservices.com/mgid:cms:item:comedycentral.com:$2',
-    'embed-width' => '480',
+    'embed-width' => '360',
     'embed-height' => '270',
   ),
   array(
