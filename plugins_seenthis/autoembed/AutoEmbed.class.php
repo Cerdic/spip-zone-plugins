@@ -279,10 +279,12 @@ class AutoEmbed {
     
     $width = $this->_object_attribs['width'];
     $height = $this->_object_attribs['height'];
-
+    $prop = ($height/$width)*100;
     $source = preg_replace(',^http:,', 'https:', $source);
 
-    return sprintf('<iframe type="text/html" width="%s" height="%s" src="%s" frameborder="0" allowFullScreen></iframe>', $width, $height, $source);
+    return sprintf('<div style="position: relative; width:100%%; height:0; padding-bottom:%s%%"><iframe type="text/html" style="width:100%%;height:100%%;position: absolute;top:0; left:0;" src="%s" frameborder="0" allowFullScreen></iframe>', $prop, $source);
+
+	//	    return sprintf('<iframe type="text/html" width="%s" height="%s" src="%s" frameborder="0" allowFullScreen></iframe>', $width, $height, $source);
   }
 
   /**
