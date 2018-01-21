@@ -21,8 +21,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 		- `_actions_disable`	: (affichage) liste des actions désactivées (`vider` si le règne n`est pas chargé)
  * 		- `_action_defaut`		: (affichage) action sélectionnée par défaut, `charger`
  * 		- `_regnes`				: (affichage) noms scientifiques et libellés des règnes supportés par le plugin
- * 		- `_rangs`				: (affichage) noms anglais et libellés des rangs du `phylum` au `genus`
- * 		- `_rang_defaut`		: (affichage) nom anglais du rang sélectionné par défaut, `genus`
+ * 		- `_types_rang`			: (affichage) type de rang à charger parmi principal, secondaire et intercalaire
+ * 		- `_type_rang_defaut`	: (affichage) type de rang par défaut, à savoir `principal`
  * 		- `_langues_regne`		: (affichage) codes de langue SPIP et libellés des langues utilisées (configuration)
  * 		- `_langue_defaut`		: (affichage) la première langue de la liste des langues utilisées
  */
@@ -52,15 +52,16 @@ function formulaires_charger_taxonomie_charger() {
 		$valeurs['_action_defaut'] = 'charger';
 	}
 
-	// Acquérir la liste des rangs taxonomiques exception faite du règne et de l'espèce
-	$rangs = taxonomie_regne_lister_rangs(
-		_TAXONOMIE_REGNE_ANIMAL,
-		_TAXONOMIE_RANGS_PRINCIPAUX,
-		array(_TAXONOMIE_RANG_REGNE, _TAXONOMIE_RANG_ESPECE));
-	foreach ($rangs as $_rang) {
-		$valeurs['_rangs'][$_rang] = ucfirst(_T("taxonomie:rang_${_rang}"));
+	// Construire la typologie des rangs afin de choisir les types
+	$types_rang = array(
+		_TAXONOMIE_RANG_TYPE_PRINCIPAL,
+		_TAXONOMIE_RANG_TYPE_SECONDAIRE,
+		_TAXONOMIE_RANG_TYPE_INTERCALAIRE
+	);
+	foreach ($types_rang as $_type) {
+		$valeurs['_types_rang'][$_type] = ucfirst(_T("taxonomie:label_type_rang_${_type}"));
 	}
-	$valeurs['_rang_defaut'] = _TAXONOMIE_RANG_GENRE;
+	$valeurs['_type_rang_defaut'] = _TAXONOMIE_RANG_TYPE_PRINCIPAL;
 
 	// Acquérir la liste des langues utilisables par le plugin et stockées dans la configuration.
 	$langues_utilisees = lire_config('taxonomie/langues_utilisees');
@@ -111,8 +112,6 @@ function formulaires_charger_taxonomie_traiter() {
 	$regne = _request('regne');
 	$regne_existe = taxonomie_regne_existe($regne, $meta_regne);
 
-	$ok = true;
-	$item = '';
 	if ($action == 'vider') {
 		if ($regne_existe) {
 			$ok = taxonomie_regne_vider($regne);
@@ -129,8 +128,8 @@ function formulaires_charger_taxonomie_traiter() {
 		// demandé est déjà chargé. Un mécanisme de sauvegarde interne permet aussi de
 		// restituer les modifications manuelles des taxons
 		$langues = _request('langues_regne');
-		$rang_feuille = _request('rang_feuille');
-		$ok = taxonomie_regne_charger($regne, $rang_feuille, $langues);
+		$type_rang = _request('type_rang');
+		$ok = taxonomie_regne_charger($regne, $type_rang, $langues);
 		$item = $ok ? 'taxonomie:succes_charger_regne' : 'taxonomie:erreur_charger_regne';
 	}
 
@@ -140,5 +139,3 @@ function formulaires_charger_taxonomie_traiter() {
 
 	return $retour;
 }
-
-?>

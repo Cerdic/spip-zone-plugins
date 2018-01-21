@@ -28,35 +28,54 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @param string $regne
  *        Nom scientifique du règne en lettres minuscules : `animalia`, `plantae`, `fungi`.
- * @param string $rang
- *        Rang taxonomique minimal jusqu'où charger le règne. Ce rang est fourni en anglais, en minuscules et
- *        correspond à : `phylum`, `class`, `order`, `family`, `genus`.
+ * @param string $type_rang
+ *        Type de rang taxonomique maximal jusqu'où charger le règne et qui correspond à : `principal`,
+ *        `secondaire` ou `intercalaire`:
+ *        - `principal`   : uniquement les rangs principaux seront chargés (règne, phylum, ordre..., genre).
+ *        - `secondaire`  : les rangs principaux et secondaires seront chargés ce qui ajoute seulement le rang tribu.
+ *        - `intercalaire`: tous les rangs jusqu'au genre seront chargés.
  * @param array  $codes_langue
  *        Tableau des codes (au sens SPIP) des langues à charger pour les noms communs des taxons.
  *
  * @return bool
  *        `true` si le chargement a réussi, `false` sinon
  */
-function taxonomie_regne_charger($regne, $rang, $codes_langue = array()) {
+function taxonomie_regne_charger($regne, $type_rang, $codes_langue = array()) {
 
 	$retour = false;
 	$taxons_edites = array();
 
 	// Vérifie si le règne existe bien dans la table spip_taxons
 	$regne_existe = taxonomie_regne_existe($regne, $meta_regne);
+	include_spip('inc/taxonomer');
 	if ($regne_existe) {
 		// Sauvegarde des taxons ayant été modifiés manuellement suite à leur création automatique.
-		include_spip('inc/taxonomer');
 		$taxons_edites = taxon_preserver_editions($regne);
 
 		// Vider le règne avant de le recharger
 		taxonomie_regne_vider($regne);
 	}
 
-	// Lecture de la hiérarchie des taxons à partir du fichier texte extrait de la base ITIS
+	// Lire le fichier json fournissant la hiérarchie des rangs du règne en cours de chargement.
 	$meta_regne = array();
 	include_spip('services/itis/itis_api');
-	$taxons = itis_read_hierarchy($regne, $rang, $meta_regne['sha']);
+	$meta_regne['rangs']['hierarchie'] = itis_read_ranks($regne, $meta_regne['rangs']['sha']);
+
+	// Extraire la liste des seuls rangs à charger des types de rangs choisis.
+	// On limite les rangs au genre.
+	$id_genre = $meta_regne['rangs']['hierarchie'][_TAXONOMIE_RANG_GENRE]['id'];
+	foreach ($meta_regne['rangs']['hierarchie'] as $_rang => $_description) {
+		if ($_description['id'] <= $id_genre) {
+			if ((($type_rang == _TAXONOMIE_RANG_TYPE_PRINCIPAL) and ($_description['type'] == _TAXONOMIE_RANG_TYPE_PRINCIPAL))
+			or (($type_rang == _TAXONOMIE_RANG_TYPE_SECONDAIRE) and ($_description['type'] != _TAXONOMIE_RANG_TYPE_INTERCALAIRE))
+			or (($type_rang == _TAXONOMIE_RANG_TYPE_INTERCALAIRE))) {
+				$meta_regne['rangs']['utiles'][$_rang] = $_description['id'];
+			}
+		}
+	}
+
+	// Lecture de la hiérarchie des taxons à partir du fichier texte extrait de la base ITIS
+	$taxons = itis_read_hierarchy($regne, $meta_regne['rangs']['utiles'], $meta_regne['sha']);
 
 	// Ajout des noms communs extraits de la base ITIS dans la langue demandée
 	if ($taxons) {
@@ -92,7 +111,7 @@ function taxonomie_regne_charger($regne, $rang, $codes_langue = array()) {
 			}
 		}
 
-		// Réinjection des taxons modifiés manuellement
+		// Ré-injection des taxons modifiés manuellement
 		// -- descriptif: remplacement
 		// -- nom commun: merge en considérant que la mise à jour manuelle est prioritaire
 		// -- edite: oui, on conserve bien sur l'indicateur d'édition
@@ -111,15 +130,10 @@ function taxonomie_regne_charger($regne, $rang, $codes_langue = array()) {
 		// Insertion dans la base de données
 		$retour = sql_insertq_multi('spip_taxons', array_values($taxons));
 		if ($retour) {
-			// Insérer les sha dans une meta propre au règne.
+			// Insérer les informations de chargement dans une meta propre au règne.
 			// Ca permettra de tester l'utilité ou pas d'un rechargement du règne
-			$meta_regne['rang'] = $rang;
+			$meta_regne['type_rang'] = $type_rang;
 			$meta_regne['maj'] = date('Y-m-d H:i:s');
-
-			// Lire le fichier json fournissant la hiérarchie des rangs du règne en cours de chargement.
-			$rangs = itis_read_ranks($regne, $sha_rangs);
-			$meta_regne['rangs']['hierarchie'] = $rangs;
-			$meta_regne['rangs']['sha'] = $sha_rangs;
 
 			// Mise à jour de la meta du règne.
 			include_spip('inc/config');
@@ -277,9 +291,7 @@ function taxonomie_taxon_informer_ascendance($id_taxon, $tsn_parent = null, $ord
 		}
 	}
 
-	if ($ascendance
-		and ($ordre == 'descendant')
-	) {
+	if ($ascendance	and ($ordre == 'descendant')) {
 		$ascendance = array_reverse($ascendance);
 	}
 

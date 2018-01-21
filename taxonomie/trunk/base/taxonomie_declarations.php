@@ -69,6 +69,7 @@ function taxonomie_declarer_tables_objets_sql($tables) {
 			'descriptif'       => "text DEFAULT '' NOT NULL",
 			'tsn'              => 'bigint(21) NOT NULL',
 			'tsn_parent'       => 'bigint(21) NOT NULL',
+			'indicateur'       => "varchar(32) DEFAULT '' NOT NULL",
 			'sources'          => "text DEFAULT '' NOT NULL",
 			'edite'            => "varchar(3) DEFAULT 'non' NOT NULL",
 			'maj'              => 'TIMESTAMP'

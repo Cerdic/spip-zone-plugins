@@ -41,7 +41,7 @@ if (!defined('_TAXONOMIE_REGNES')) {
 
 if (!defined('_TAXONOMIE_RANG_REGNE')) {
 	/**
-	 * Nom anglais du rang `règne`.
+	 * Nom anglais du rang principal `règne`.
 	 */
 	define('_TAXONOMIE_RANG_REGNE', 'kingdom');
 }
@@ -49,53 +49,47 @@ if (!defined('_TAXONOMIE_RANG_REGNE')) {
 // Néanmoins, le terme phylum est souvent accepté pour l'ensemble des règnes
 if (!defined('_TAXONOMIE_RANG_PHYLUM')) {
 	/**
-	 * Nom anglais du rang `phylum` ou `embranchement`.
+	 * Nom anglais du rang principal `phylum` ou `embranchement`.
 	 * Ce nom est utilisé pour le règne `animalia`
 	 */
 	define('_TAXONOMIE_RANG_PHYLUM', 'phylum');
 }
 if (!defined('_TAXONOMIE_RANG_DIVISION')) {
 	/**
-	 * Nom anglais du rang `division`.
+	 * Nom anglais du rang principal `division`.
 	 * Ce nom est utilisé pour le règne `fungi` ou `plantae` et correspond au `phylum` pour le règne animal.
 	 */
 	define('_TAXONOMIE_RANG_DIVISION', 'division');
 }
 if (!defined('_TAXONOMIE_RANG_CLASSE')) {
 	/**
-	 * Nom anglais du rang `classe`.
+	 * Nom anglais du rang principal `classe`.
 	 */
 	define('_TAXONOMIE_RANG_CLASSE', 'class');
 }
 if (!defined('_TAXONOMIE_RANG_ORDRE')) {
 	/**
-	 * Nom anglais du rang `ordre`.
+	 * Nom anglais du rang principal `ordre`.
 	 */
 	define('_TAXONOMIE_RANG_ORDRE', 'order');
 }
 if (!defined('_TAXONOMIE_RANG_FAMILLE')) {
 	/**
-	 * Nom anglais du rang `famille`.
+	 * Nom anglais du rang principal `famille`.
 	 */
 	define('_TAXONOMIE_RANG_FAMILLE', 'family');
 }
 if (!defined('_TAXONOMIE_RANG_GENRE')) {
 	/**
-	 * Nom anglais du rang `genre`.
+	 * Nom anglais du rang principal `genre`.
 	 */
 	define('_TAXONOMIE_RANG_GENRE', 'genus');
 }
 if (!defined('_TAXONOMIE_RANG_ESPECE')) {
 	/**
-	 * Nom anglais du rang `espèce`.
+	 * Nom anglais du rang principal `espèce`.
 	 */
 	define('_TAXONOMIE_RANG_ESPECE', 'species');
-}
-if (!defined('_TAXONOMIE_RANG_SOUS_ESPECE')) {
-	/**
-	 * Nom anglais du rang intercalaire `sous-espèce`.
-	 */
-	define('_TAXONOMIE_RANG_SOUS_ESPECE', 'subspecies');
 }
 if (!defined('_TAXONOMIE_RANGS_PRINCIPAUX')) {
 	/**
@@ -115,31 +109,31 @@ if (!defined('_TAXONOMIE_RANGS_PRINCIPAUX')) {
 
 if (!defined('_TAXONOMIE_RANG_TRIBU')) {
 	/**
-	 * Nom anglais du rang `tribu`.
+	 * Nom anglais du rang secondaire `tribu`.
 	 */
 	define('_TAXONOMIE_RANG_TRIBU', 'tribe');
 }
 if (!defined('_TAXONOMIE_RANG_SECTION')) {
 	/**
-	 * Nom anglais du rang `section`.
+	 * Nom anglais du rang secondaire `section`.
 	 */
 	define('_TAXONOMIE_RANG_SECTION', 'section');
 }
 if (!defined('_TAXONOMIE_RANG_SERIE')) {
 	/**
-	 * Nom anglais du rang `serie`.
+	 * Nom anglais du rang secondaire `serie`.
 	 */
 	define('_TAXONOMIE_RANG_SERIE', 'series');
 }
 if (!defined('_TAXONOMIE_RANG_VARIETE')) {
 	/**
-	 * Nom anglais du rang `variété`.
+	 * Nom anglais du rang secondaire `variété`.
 	 */
 	define('_TAXONOMIE_RANG_VARIETE', 'variety');
 }
 if (!defined('_TAXONOMIE_RANG_FORME')) {
 	/**
-	 * Nom anglais du rang `forme`.
+	 * Nom anglais du rang secondaire `forme`.
 	 */
 	define('_TAXONOMIE_RANG_FORME', 'forma');
 }

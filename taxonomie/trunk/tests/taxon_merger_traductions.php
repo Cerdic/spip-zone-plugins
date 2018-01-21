@@ -7,33 +7,33 @@
  * le 2015-11-22 22:06
  */
 
-	$test = 'taxon_merger_traductions';
-	$remonte = "../";
-	while (!is_dir($remonte."ecrire"))
-		$remonte = "../$remonte";
-	require $remonte.'tests/test.inc';
-	find_in_path("../plugins/taxonomie/inc/taxonomer.php",'',true);
+$test = 'taxon_merger_traductions';
+$remonte = "../";
+while (!is_dir($remonte."ecrire"))
+	$remonte = "../$remonte";
+require $remonte.'tests/test.inc';
+find_in_path("../plugins/taxonomie/inc/taxonomer.php",'',true);
 
-	// chercher la fonction si elle n'existe pas
-	if (!function_exists($f='taxon_merger_traductions')){
-		find_in_path("inc/filtres.php",'',true);
-		$f = chercher_filtre($f);
-	}
+// chercher la fonction si elle n'existe pas
+if (!function_exists($f='taxon_merger_traductions')){
+	find_in_path("inc/filtres.php",'',true);
+	$f = chercher_filtre($f);
+}
 
-	//
-	// hop ! on y va
-	//
-	$err = tester_fun($f, essais_taxon_merger_traductions());
-	
-	// si le tableau $err est pas vide ca va pas
-	if ($err) {
-		die ('<dl>' . join('', $err) . '</dl>');
-	}
+//
+// hop ! on y va
+//
+$err = tester_fun($f, essais_taxon_merger_traductions());
 
-	echo "OK";
-	
+// si le tableau $err est pas vide ca va pas
+if ($err) {
+	die ('<dl>' . join('', $err) . '</dl>');
+}
 
-	function essais_taxon_merger_traductions(){
+echo "OK";
+
+
+function essais_taxon_merger_traductions(){
 		$essais = array (
   0 => 
   array (
@@ -125,20 +125,3 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>

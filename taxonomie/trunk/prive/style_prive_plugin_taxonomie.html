@@ -38,13 +38,9 @@
 }
 /* Décaler chaque rang taxonomique de l'ascendance */
 .taxon .fiche_objet #wysiwyg .contenu_ascendance ul { padding-top: 0.5em; }
-.taxon .fiche_objet #wysiwyg .contenu_ascendance .kingdom { padding-left: 10px; }
-.taxon .fiche_objet #wysiwyg .contenu_ascendance .phylum,
-.taxon .fiche_objet #wysiwyg .contenu_ascendance .division { padding-left: 20px; }
-.taxon .fiche_objet #wysiwyg .contenu_ascendance .class { padding-left: 30px; }
-.taxon .fiche_objet #wysiwyg .contenu_ascendance .order { padding-left: 40px; }
-.taxon .fiche_objet #wysiwyg .contenu_ascendance .family { padding-left: 50px; }
-.taxon .fiche_objet #wysiwyg .contenu_ascendance .genus { padding-left: 60px; }
+<BOUCLE_ascendance(DATA) {liste 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}>
+	.taxon .fiche_objet #wysiwyg .contenu_ascendance[ .rang(#VALEUR)] {[ padding-left: (#VALEUR|mult{7})px; ]}
+</BOUCLE_ascendance>
 /* Mettre en valeur chaque sources du titre */
 .taxon .fiche_objet #wysiwyg .contenu_ps { padding-bottom: 1em; }
 .taxon .fiche_objet #wysiwyg .contenu_ps .sources { padding-left: 10px; font-size: 0.90em; }

@@ -16,7 +16,7 @@
 	<label><:taxonomie:label_ascendance:> : </label>
 	<ul>
 <BOUCLE_ascendance(DATA) {source table, #GET{ascendance}}>
-		[<li[ class="(#VALEUR|table_valeur{rang})"]>
+		[<li[ class="rang(#CLE|plus{1})"]>
 			<span dir="#LANG_DIR">
 				(#VAL{taxonomie:rang_}|concat{#VALEUR|table_valeur{rang}}|_T|ucfirst) :
 				[<a[ href="(#VALEUR|table_valeur{id_taxon}|generer_url_entite{taxon})"]>

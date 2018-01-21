@@ -40,9 +40,9 @@ Les parametres d'environnement specifiques sont :
 				<td class="titre" scope="col">[(#NOM_COMMUN|extraire_multi{#LANG, #ARRAY{lang_defaut, aucune}})]</td>
 				<td class="descriptif">
 					#SET{meta_regne, #CONFIG{taxonomie_#NOM_SCIENTIFIQUE}}
-					[(#SET{rang_mini, [(#VAL{taxonomie:rang_}|concat{#GET{meta_regne/rang}}|_T)]})]
+					[(#SET{type_rang, [(#VAL{taxonomie:label_type_rang_}|concat{#GET{meta_regne/type_rang}}|_T)]})]
 					<ul>
-						<li>[(#VAL{taxonomie:info_regne_compteur_taxons}|_T{#ARRAY{nb, #GET{meta_regne/compteur}, rang, #GET{rang_mini}}})]</li>
+						<li>[(#VAL{taxonomie:info_regne_compteur_taxons}|_T{#ARRAY{nb, #GET{meta_regne/compteur}, type_rang, #GET{type_rang}}})]</li>
 					<BOUCLE_traductions(DATA) {source table, #GET{meta_regne/traductions/itis}}>
 						#SET{nb, #VALEUR|table_valeur{compteur}}
 						<li><:taxonomie:info_regne_compteur_traductions{nb=#GET{nb}, langue=#CLE}:></li>

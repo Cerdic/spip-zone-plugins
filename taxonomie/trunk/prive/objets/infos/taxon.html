@@ -19,5 +19,8 @@
 	[<div class="numero">
 		(#VAL{taxonomie:rang_}|concat{#RANG}|_T)
 	</div>]
+	[<div class="statut">
+		(#INDICATEUR|oui)[(#VAL{taxonomie:info_indicateur_}|concat{#INDICATEUR}|_T)]
+	</div>]
 </div>
 </BOUCLE_taxon>

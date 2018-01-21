@@ -38,7 +38,7 @@ if (!defined('_TAXONOMIE_ITIS_REGEXP_RANKNAME')) {
 	 * Il est indispensable de respecter les majuscules des noms de groupe pour éviter de matcher
 	 * les suborder, infrakingdom...
 	 */
-	define('_TAXONOMIE_ITIS_REGEXP_RANKNAME', '#(%groups_list%):\s*(\w+)\s*\[([^\]]*)\]\s*\[(\d+)\]#');
+	define('_TAXONOMIE_ITIS_REGEXP_RANKNAME', '#(%rank_list%):\s*(([A-Z]\s+)?[\w-]+)\s*(.+)\s*\[(\d+)\]\s*$#');
 }
 
 
@@ -425,14 +425,11 @@ function itis_list_vernaculars($language) {
  *
  * @param string $kingdom
  *        Nom scientifique du règne en lettres minuscules : `animalia`, `plantae`, `fungi`.
- * @param string $upto
- *        Rang taxonomique minimal jusqu'où charger le règne. Ce rang est fourni en anglais et en minuscules.
- *        Il prend les valeurs :
- *        - `phylum` (pour le règne Animalia) ou `division` (pour les règnes Fungi et Plantae),
- *        - `class`,
- *        - `order`,
- *        - `family`,
- *        - `genus`.
+ * @param array  $ranks
+ *        Liste des rangs à charger à partir du fichier des taxons. Cette liste contient soit les rangs
+ *        principaux du règne, soit les rangs principaux et secondaires, soit tous les rangs y compris
+ *        les rangs intercalaires.
+ *        Le tableau est de la forme [nom anglais du rang en minuscules] = id ITIS du rang
  * @param int    $sha_file
  *        Sha calculé à partir du fichier de taxons correspondant au règne choisi. Le sha est retourné
  *        par la fonction afin d'être stocké par le plugin.
@@ -442,65 +439,66 @@ function itis_list_vernaculars($language) {
  *        index correspond à un champ de la table `spip_taxons`. Le tableau est ainsi prêt pour une
  *        insertion en base de données.
  */
-function itis_read_hierarchy($kingdom, $upto, &$sha_file) {
+function itis_read_hierarchy($kingdom, $ranks, &$sha_file) {
 
 	$hierarchy = array();
 	$sha_file = false;
 
-	include_spip('inc/taxonomer');
-	static $group_ids = array(
-		'kingdom' => 1,
-		'class'   => 3,
-		'order'   => 4,
-		'family'  => 5,
-		'genus'   => 6,
-		'specie'  => 7
-	);
-	$rang_phylum = $kingdom == _TAXONOMIE_REGNE_ANIMAL ? 'phylum' : 'division';
-	$group_ids[$rang_phylum] = 2;
-	asort($group_ids);
+	if ($ranks) {
+		// Classer la liste des rangs de manière à aller du règne au genre.
+		asort($ranks);
 
-	if (array_key_exists($upto, $group_ids)) {
-		include_spip('inc/charsets');
 		// Construire la regexp qui permet de limiter la hiérarchie comme demandée
-		$groups_list = implode('|', array_map('ucfirst', array_slice(array_flip($group_ids), 0, $group_ids[$upto])));
-		$regexp = str_replace('%groups_list%', $groups_list, _TAXONOMIE_ITIS_REGEXP_RANKNAME);
+		include_spip('inc/taxonomer');
+		$rank_list = implode('|', array_map('ucfirst', array_keys($ranks)));
+		$regexp = str_replace('%rank_list%', $rank_list, _TAXONOMIE_ITIS_REGEXP_RANKNAME);
 
 		$file = find_in_path('services/itis/' . ucfirst($kingdom) . '_Genus.txt');
-		if (file_exists($file)
-			and ($sha_file = sha1_file($file))
-		) {
+		if (file_exists($file) and ($sha_file = sha1_file($file))) {
 			$lines = file($file);
 			if ($lines) {
-				$groups = array();
-				for ($i = 1; $i <= array_search($upto, $group_ids); $i++) {
-					$groups[$i] = 0;
+				$parents = array();
+				$rank_position = 0;
+				foreach ($ranks as $_rank_name => $_rank_id) {
+					$parents[$_rank_id] = 0;
+					$rank_position++;
+					$ranks[$_rank_name] = $rank_position;
 				}
+				$max_rank_position = $rank_position;
 				// Scan du fichier ligne par ligne
+				include_spip('inc/charsets');
 				foreach ($lines as $_line) {
 					$taxon = array(
 						'regne'      => $kingdom,
 						'nom_commun' => '',
 						'descriptif' => '',
+						'indicateur' => '',
 						'edite'      => 'non'
 					);
 					if (preg_match($regexp, $_line, $match)) {
 						// Initialisation du taxon
 						$taxon['rang'] = strtolower($match[1]);
 						$taxon['nom_scientifique'] = strtolower($match[2]);
-						$taxon['auteur'] = importer_charset(trim($match[3]), 'iso-8859-1');
-						$tsn = intval($match[4]);
+						$taxon['auteur'] = trim(importer_charset(trim($match[4]), 'iso-8859-1'), '[]');
+						$tsn = intval($match[5]);
 						$taxon['tsn'] = $tsn;
 
+						// Vérifier si il existe un indicateur spécial dans le nom scientifique comme
+						// un X pour indiquer un taxon hybride.
+						if (strtolower(trim($match[3])) == 'x') {
+							$taxon['indicateur'] = 'hybride';
+						}
+
 						// Recherche du parent
-						$taxon_group_id = $group_ids[$taxon['rang']];
-						if ($taxon_group_id == 1) {
+						$taxon_rank_position = $ranks[$taxon['rang']];
+						if ($taxon_rank_position == $ranks[_TAXONOMIE_RANG_REGNE]) {
 							// On traite à part le cas du règne qui ne se rencontre qu'une fois en début de fichier
 							$taxon['tsn_parent'] = 0;
 						} else {
-							for ($i = $taxon_group_id - 1; $i >= 1; $i--) {
-								if ($groups[$i]) {
-									$taxon['tsn_parent'] = $groups[$i];
+							// On recherche le premier parent donc la position n'est pas 0.
+							for ($i = $taxon_rank_position - 1; $i >= 1; $i--) {
+								if ($parents[$i]) {
+									$taxon['tsn_parent'] = $parents[$i];
 									break;
 								}
 							}
@@ -509,12 +507,15 @@ function itis_read_hierarchy($kingdom, $upto, &$sha_file) {
 						// Insertion du taxon dans la hiérarchie
 						$hierarchy[$tsn] = $taxon;
 
-						// Stockage du groupe venant d'être inséré
-						$groups[$taxon_group_id] = $tsn;
-						// On vide les groupes d'après
-						for ($i = $taxon_group_id + 1; $i <= 5; $i++) {
-							$groups[$i] = 0;
+						// Stockage du TSN du rang venant d'être inséré
+						$parents[$taxon_rank_position] = $tsn;
+						// On vide les position de rangs d'après
+						for ($i = $taxon_rank_position + 1; $i <= $max_rank_position; $i++) {
+							$parents[$i] = 0;
 						}
+					} else {
+						// On trace la ligne qui n'est pas détectée comme une ligne de taxon.
+						spip_log("Ligne non phrasée: ${_line}", 'taxonomie');
 					}
 				}
 			}
@@ -606,24 +607,23 @@ function itis_read_ranks($kingdom, &$sha_file) {
 				$rank_ids = array();
 				foreach ($itis_ranks as $_rank) {
 					$rank_name = strtolower($_rank['rank_name']);
+					// -- Sauvegarde de l'id qui servira lors de la lecture du fichier hiérarchique des taxons.
+					$ranks[$rank_name]['id'] = $_rank['rank_id'];
 					// -- Détermination des parents
 					if (isset($rank_ids[$_rank['dir_parent_rank_id']]) and isset($rank_ids[$_rank['req_parent_rank_id']])) {
 						// Cas des rangs enfant du règne.
-						$ranks[$rank_name] = array(
-							'parent' => $rank_ids[$_rank['dir_parent_rank_id']],
-							'parent_principal' => $rank_ids[$_rank['req_parent_rank_id']]
-						);
+						$ranks[$rank_name]['parent'] = $rank_ids[$_rank['dir_parent_rank_id']];
+						$ranks[$rank_name]['parent_principal'] = $rank_ids[$_rank['req_parent_rank_id']];
 					} else {
 						// Cas du règne qui n'a pas de parent.
-						$ranks[$rank_name] = array(
-							'parent' => '',
-							'parent_principal' => ''
-						);
+						$ranks[$rank_name]['parent'] = '';
+						$ranks[$rank_name]['parent_principal'] = '';
 					}
 					// -- Détermination du type de rang
-					if (strpos($rank_name, _TAXONOMIE_RANGS_PRINCIPAUX) !== false) {
+					if ((strpos(_TAXONOMIE_RANGS_PRINCIPAUX, $rank_name) !== false)
+					or ($rank_name == _TAXONOMIE_RANG_DIVISION)) {
 						$ranks[$rank_name]['type'] = _TAXONOMIE_RANG_TYPE_PRINCIPAL;
-					} elseif (strpos($rank_name, _TAXONOMIE_RANGS_SECONDAIRES) !== false) {
+					} elseif (strpos(_TAXONOMIE_RANGS_SECONDAIRES, $rank_name) !== false) {
 						$ranks[$rank_name]['type'] = _TAXONOMIE_RANG_TYPE_SECONDAIRE;
 					} else{
 						$ranks[$rank_name]['type'] = _TAXONOMIE_RANG_TYPE_INTERCALAIRE;

@@ -25,10 +25,11 @@
 				info_obligatoire=''
 			})]
 			<div id="options_charger">
-				[(#SAISIE{radio, rang_feuille,
-					label=<:taxonomie:label_rang_feuille:>,
-					datas=#ENV{_rangs},
-					defaut=#ENV{_rang_defaut}
+				[(#SAISIE{radio, type_rang,
+					explication=<:taxonomie:explication_type_rang:>,
+					label=<:taxonomie:label_type_rang:>,
+					datas=#ENV{_types_rang},
+					defaut=#ENV{_type_rang_defaut}
 				})]
 
 				[(#SAISIE{checkbox, langues_regne,
