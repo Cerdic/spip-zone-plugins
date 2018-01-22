@@ -289,7 +289,7 @@ class fichiersExporter extends Command {
 
 
 // compat spip 2
-if(!function_exists("calcul_hierarchie_in")){
+if($spip_version_branche < 3){
 	function calcul_hierarchie_in($id, $tout = true) {
 		
 		static $b = array();
