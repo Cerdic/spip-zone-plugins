@@ -771,12 +771,16 @@ class IterateurSPHINX implements Iterator {
 	
 	/**
 	 * Revenir au depart
-	 * @return void
+	 * @return bool
 	 */
 	public function rewind() {
-		if (!is_array($this->result['docs'])) return false;
+		if (!isset($this->result['docs']) or !is_array($this->result['docs'])) {
+			return false;
+		}
 		reset($this->result['docs']);
-		list($this->cle, $this->valeur) = each($this->result['docs']);
+		$this->cle = key($this->result['docs']);
+		$this->valeur = current($this->result['docs']);
+		return true;
 	}
 
 	/**
@@ -789,7 +793,7 @@ class IterateurSPHINX implements Iterator {
 
 	/**
 	 * Retourner la valeur
-	 * @return null
+	 * @return mixed
 	 */
 	public function current() {
 		return $this->valeur;
@@ -797,7 +801,7 @@ class IterateurSPHINX implements Iterator {
 
 	/**
 	 * Retourner la cle
-	 * @return null
+	 * @return int
 	 */
 	public function key() {
 		return $this->cle;
@@ -809,7 +813,8 @@ class IterateurSPHINX implements Iterator {
 	 */
 	public function next(){
 		if ($this->valid()) {
-			list($this->cle, $this->valeur) = each($this->result['docs']);
+			$this->cle = key($this->result['docs']);
+			$this->valeur = current($this->result['docs']);
 		}
 	}
 
@@ -818,9 +823,10 @@ class IterateurSPHINX implements Iterator {
 	 * @return int
 	 */
 	public function count() {
-		if (is_null($this->total))
+		if (is_null($this->total)) {
 			$this->total = count($this->result['docs']);
-	  return $this->total;
+		}
+		return $this->total;
 	}
 
 }
