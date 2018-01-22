@@ -243,7 +243,7 @@ class fichiersExporter extends Command {
 						$annee = $m[1] ;
 						$mois = $m[2] ;
 						
-						include_spip("inc/charset");
+						include_spip("inc/charsets");
 						$nom_fichier = translitteration($f['titre']) ;
 						$nom_fichier = preg_replace("/[^a-zA-Z0-9]/i", "-", $nom_fichier);
 						$nom_fichier = preg_replace("/-{2,}/i", "-", $nom_fichier);
