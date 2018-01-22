@@ -5,7 +5,8 @@ namespace Sphinx\SphinxQL;
 class SphinxQL {
 	private $host;
 	private $port;
-	private $sql; // objet MySQLi
+	/** @var \MySQLi */
+	private $sql;
 
 	public function __construct($host = '127.0.0.1', $port = 9306) {
 		$this->host = $host;
@@ -53,7 +54,7 @@ class SphinxQL {
 	 * Échappe une chaîne
 	**/
 	public function escape_string($string) {
-		if (!$this->sql || $this->connect_errno) {
+		if (!$this->sql || $this->sql->connect_errno) {
 			return false;
 		}
 		
