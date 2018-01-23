@@ -98,8 +98,8 @@ class IterateurSPHINX implements Iterator {
 	protected $valeur = null;
 
 	/**
-	 * Limite d'une pagination
-	 * @var int
+	 * Limite d'une pagination (debut, nombre)
+	 * @var [int, int]
 	**/
 	protected $pagination_limit;
 
@@ -253,15 +253,16 @@ class IterateurSPHINX implements Iterator {
 		}
 
 		// resultat vide et plusieurs mots dont certains ont 0 hit ?
-		if (is_array($result['query']['docs'])
-		AND count($result['query']['docs']) == 0
-		AND !preg_match('/["\/&|)(]/u', $q)
+		if (
+			is_array($result['query']['docs'])
+			AND count($result['query']['docs']) == 0
+			AND !preg_match('/["\/&|)(]/u', $q)
 		) {
 			$q2 = $msg = array();
 			if (isset($result['query']['meta']['keywords'])){
 				foreach($result['query']['meta']['keywords'] as $w) {
 					$mot = $this->keyword2word($w['keyword'], $q);
-					if($w['docs'] == 0) {
+					if ($w['docs'] == 0) {
 						$msg[] = "<del>".htmlspecialchars($mot)."</del>";
 					} else {
 						$msg[] = htmlspecialchars($mot);
@@ -270,8 +271,10 @@ class IterateurSPHINX implements Iterator {
 				}
 			}
 
-			if (count($q2) >0
-			AND count($q2) < count($result['query']['meta']['keywords'])) {
+			if (
+				count($q2) >0
+				AND count($q2) < count($result['query']['meta']['keywords'])
+			) {
 				$q2 = trim(join(' ',$q2));
 				$GLOBALS['sphinxReplace'][$q] = trim(preg_replace('/\W+/u', ' ', $q2));
 				$this->queryApi->match($GLOBALS['sphinxReplace'][$q]);
@@ -323,8 +326,10 @@ class IterateurSPHINX implements Iterator {
 		}
 
 		// decaler les docs en fonction de la pagination demandee
-		if (is_array($result['query']['docs'])
-		AND $pagination = $this->getPaginationLimit()) { 
+		if (
+			is_array($result['query']['docs'])
+			AND $pagination = $this->getPaginationLimit()
+		) {
 
 			list($debut) = array_map('intval', $pagination); 
 
@@ -340,8 +345,8 @@ class IterateurSPHINX implements Iterator {
 		}
 		$result['query']['facets'] = $facets;
 
-
 		$this->result = $result['query'];
+
 		unset($result['query']['docs']);
 		$this->saveAll($result['query']);
 
@@ -466,8 +471,7 @@ class IterateurSPHINX implements Iterator {
 	/** 
 	* Retourne les limites de pagination précédemment sauvées 
 	* 
-	* @param int Début 
-	* @param int Nombre de résultats 
+	* @return array
 	**/ 
 	public function getPaginationLimit() { 
 		return $this->pagination_limit; 
@@ -780,6 +784,7 @@ class IterateurSPHINX implements Iterator {
 		reset($this->result['docs']);
 		$this->cle = key($this->result['docs']);
 		$this->valeur = current($this->result['docs']);
+		next($this->result['docs']);
 		return true;
 	}
 
@@ -815,6 +820,7 @@ class IterateurSPHINX implements Iterator {
 		if ($this->valid()) {
 			$this->cle = key($this->result['docs']);
 			$this->valeur = current($this->result['docs']);
+			next($this->result['docs']);
 		}
 	}
 

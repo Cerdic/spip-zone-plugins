@@ -15,11 +15,12 @@ function inc_sphinxql_to_array_dist($u, $debut=''){
 	$sphinx = \Sphinx\SphinxQL\SphinxQLSingleton::getInstance(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
 
 	$all = $sphinx->allfetsel($u);
-
 	$total = intval($all['query']['meta']['total']);
 
 	// pagination : rajouter $debut elements vides
-	if ($debut) $all['query']['docs'] = array_pad($all['query']['docs'], -$debut - count($all['query']['docs']), 0);
+	if ($debut) {
+		$all['query']['docs'] = array_pad($all['query']['docs'], -$debut - count($all['query']['docs']), 0);
+	}
 
 	if ($total > count($all['query']['docs'])) {
 		$all['query']['docs'] = array_pad($all['query']['docs'], $total, 0);

@@ -97,7 +97,10 @@ class SphinxQL {
 			$reponses = array();
 			do {
 				if ($result = $this->sql->store_result()) {
-					$a = array(); while ($row = $result->fetch_assoc()) $a[] = $row;
+					$a = array();
+					while ($row = $result->fetch_assoc()) {
+						$a[] = $row;
+					}
 					$reponses[] = $a;
 					$result->free();
 				}
