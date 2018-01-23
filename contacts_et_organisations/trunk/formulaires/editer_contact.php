@@ -9,10 +9,11 @@
  * @package SPIP\Contacts\Formulaires
 **/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/editer');
-
 
 /**
  * Chargement du formulaire d'édition d'un contact
@@ -31,9 +32,11 @@ include_spip('inc/editer');
 **/
 function formulaires_editer_contact_charger_dist($id_contact = 'new', $id_organisation = 0, $redirect = '', $associer_objet = '') {
 	$contexte = formulaires_editer_objet_charger('contact', $id_contact, $id_organisation, 0, $redirect, '');
-	if (!intval($id_contact) and $id_annuaire = _request('id_annuaire')){
+	
+	if (!intval($id_contact) and $id_annuaire = _request('id_annuaire')) {
 		$contexte['id_annuaire'] = $id_annuaire;
 	}
+	
 	return $contexte;
 }
 
@@ -55,9 +58,11 @@ function formulaires_editer_contact_charger_dist($id_contact = 'new', $id_organi
 **/
 function formulaires_editer_contact_verifier_dist($id_contact = 'new', $id_organisation = 0, $redirect = '', $associer_objet = '') {
 	$erreurs = formulaires_editer_objet_verifier('contact', $id_contact);
+	
 	if ($editer_contact_verifier = charger_fonction('editer_contact_verifier', 'inc', true)){
 		$erreurs = array_merge($erreurs, $editer_contact_verifier($id_contact, $id_organisation));
 	}
+	
 	return $erreurs;
 }
 
@@ -83,23 +88,26 @@ function formulaires_editer_contact_traiter_dist($id_contact = 'new', $id_organi
 	$res = formulaires_editer_objet_traiter('contact', $id_contact, $id_organisation, 0, $redirect);
 
 	include_spip('inc/config');
-	if (!intval($id_contact)
+	if (
+		!intval($id_contact)
 		and lire_config('contacts_et_organisations/associer_aux_auteurs','') == 'obli'
-		and $id_contact = $res['id_contact']){
+		and $id_contact = $res['id_contact']
+	) {
 		$creer_auteur_lie = charger_fonction('creer_auteur_lie', 'action');
 		$id_auteur = $creer_auteur_lie("contact/$id_contact");
 	}
 
 	// Un lien organisation ou autre a prendre en compte ?
-	if ($associer_objet and $id_contact = $res['id_contact']){
+	if ($associer_objet and $id_contact = $res['id_contact']) {
 		$objet = '';
-		if (intval($associer_objet)){
+		if (intval($associer_objet)) {
 			$objet = 'organisation';
 			$id_objet = intval($associer_objet);
 		}
-		elseif(preg_match(',^\w+\|[0-9]+$,', $associer_objet)){
+		elseif(preg_match(',^\w+\|[0-9]+$,', $associer_objet)) {
 			list($objet, $id_objet) = explode('|', $associer_objet);
 		}
+		
 		if ($objet and $id_objet and autoriser('modifier', $objet, $id_objet)) {
 			include_spip('action/editer_liens');
 			// organisation sur spip_organisations_liens
