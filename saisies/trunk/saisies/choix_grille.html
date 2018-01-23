@@ -27,8 +27,7 @@
 #SET{defaut, #ENV{defaut}|saisies_chaine2tableau}
 
 [(#REM) valeur doit être un tableau ! ]
-#SET{valeur, #ENV{valeur}|saisies_valeur2tableau}
-
+#SET{valeur, #ENV{valeur_forcee, #ENV{valeur}}|saisies_valeur2tableau}
 
 [(#REM) lorsque qu'on donne un 'disabled' qui est une chaine,
 	il faut la transformer en tableau. Ce tableau est vide si la chaine valait ''
@@ -38,12 +37,6 @@
 [(#GET{disabled}|is_string|oui)
 	[(#GET{disabled}|strlen|non) #SET{disabled,#ARRAY} ]
 	[(#GET{disabled}|oui) #SET{disabled,#ARRAY|push{#GET{disabled}}} ]
-]
-[(#ENV{tout_selectionner}|oui)
-	<div class="[(#ENV{choix,choix})][ (#ENV{choix,choix})_tout_selectionner ][ (#ENV{class}) ]none-nojs">
-		<input type="checkbox" name="#ENV{nom}_tout" class="checkbox" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_tout" value="on" onChange="if (jQuery(this).prop('checked')==true) jQuery(this).parent('div').parent().find('input').prop('checked',true); else jQuery(this).parent('div').parent().find('input').prop('checked',false);"/>
-		<label for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_tout"[ class="(#ENV{label_class})"]><:saisies:tout_selectionner:></label>
-	</div>
 ]
 
 <B_lignes>
@@ -66,11 +59,13 @@
 			<td>
 				#SET{type, radio}
 				#SET{name, #ENV{nom}\[#_lignes:CLE\]}
+				#SET{coche, #CLE|=={#GET{valeur/#_lignes:CLE}}}
 				[(#ENV{multiple}|et{#ENV{multiple}|!={non}}|oui)
 					#SET{type, checkbox}
 					#SET{name, #GET{name}\[\]}
+					#SET{coche, #CLE|in_array{#GET{valeur/#_lignes:CLE}}}
 				]
-				<input type="#GET{type}" name="#GET{name}" value="#CLE" />
+				<input type="#GET{type}" name="#GET{name}" value="#CLE"[ (#GET{coche}|oui)checked="checked"] />
 			</td>
 			</BOUCLE_colonnes>
 		</tr>
