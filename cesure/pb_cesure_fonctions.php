@@ -158,7 +158,13 @@
 			
 				
 				if (preg_match("/<p[^>]*>/",$text)) {
-					$text = preg_replace("/<p([^>]*)>(.*)<\/p>/miseU", "'<p\\1>'.stripslashes(pb_effectuer_cesure('\\2',$lang)).'</p>'", $text);
+					$text = preg_replace_callback(
+						"/<p([^>]*)>(.*)<\/p>/misU",
+						function ($matches) use ($lang) {
+							return "<p".$matches[1].">".stripslashes(pb_effectuer_cesure($matches[2],$lang))."</p>";
+						},
+						$text
+					);
 				} else {
 					$text = pb_effectuer_cesure($text, $lang);
 				}
