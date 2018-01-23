@@ -5,7 +5,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('indexer_fonctions');
 
-function indexer_jointure_mots_dist($objet, $id_objet, $infos) {
+/**
+ * Ajoute les informations de mots clés liés
+ *
+ * @param string $objet
+ * @param int $id_objet
+ * @param \Indexer\Sources\Document $doc
+ * @return \Indexer\Sources\Document
+ */
+function indexer_jointure_mots_dist($objet, $id_objet, $doc) {
 	$where = array('l.objet='.sql_quote($objet), 'l.id_objet='.intval($id_objet));
 	
 	// On cherche s'il y a des groupes à ignorer
@@ -22,9 +30,9 @@ function indexer_jointure_mots_dist($objet, $id_objet, $infos) {
 		'spip_mots as m join spip_mots_liens as l on m.id_mot=l.id_mot',
 		$where
 	)) {
-		$infos['properties']['mots']['ids_hierarchie'] = array();
-		$infos['properties']['mots']['titres_hierarchie'] = array();
-		$infos['properties']['tagsbygroups'] = array();
+		$doc->properties['mots']['ids_hierarchie'] = array();
+		$doc->properties['mots']['titres_hierarchie'] = array();
+		$doc->properties['tagsbygroups'] = array();
 
 		foreach ($mots as $mot) {
 			$id_groupe = $mot['id_groupe'];
@@ -33,20 +41,20 @@ function indexer_jointure_mots_dist($objet, $id_objet, $infos) {
 			// ajouter le mot à la propriété tagsbygroups.ID_GROUPE
 			// et tagsbytype.NOMDUGROUPE
 			// créer le tableau de groupe le cas échéant
-			if (!array_key_exists($id_groupe,$infos['properties']['tagsbygroups'])){
-				$infos['properties']['tagsbygroups'][$id_groupe] = array();
-				$infos['properties']['tagsbytype'][$type] = array();
+			if (!array_key_exists($id_groupe,$doc->properties['tagsbygroups'])){
+				$doc->properties['tagsbygroups'][$id_groupe] = array();
+				$doc->properties['tagsbytype'][$type] = array();
 			}
-			$infos['properties']['tagsbygroups'][$id_groupe][] = trim(supprimer_numero($mot['titre'])); 
-			$infos['properties']['tagsbytype'][$type][] = trim(supprimer_numero($mot['titre'])); 
+			$doc->properties['tagsbygroups'][$id_groupe][] = trim(supprimer_numero($mot['titre'])); 
+			$doc->properties['tagsbytype'][$type][] = trim(supprimer_numero($mot['titre'])); 
 
 			$id_mot = intval($mot['id_mot']);
-			$infos['properties']['mots']['titres'][$id_mot] = trim(supprimer_numero($mot['titre']));
-			$infos['properties']['mots']['ids'][] = $id_mot;
+			$doc->properties['mots']['titres'][$id_mot] = trim(supprimer_numero($mot['titre']));
+			$doc->properties['mots']['ids'][] = $id_mot;
 			
 			// On s'occupe de la hiérarchie de chaque mot
 			$id_parent = $mot['id_groupe'];
-			$titres = array($infos['properties']['mots']['titres'][$id_mot]);
+			$titres = array($doc->properties['mots']['titres'][$id_mot]);
 			$ids_hierarchie = array();
 			$titres_hierarchie = array();
 			
@@ -81,14 +89,20 @@ function indexer_jointure_mots_dist($objet, $id_objet, $infos) {
 				$titres_hierarchie[$id_hierarchie] = $titre;
 			}
 			// Maintenant on peut ajouter cette hiérarchie au truc complet
-			$infos['properties']['mots']['ids_hierarchie'] = array_merge($infos['properties']['mots']['ids_hierarchie'], $ids_hierarchie);
-			$infos['properties']['mots']['titres_hierarchie'] = array_merge($infos['properties']['mots']['titres_hierarchie'], $titres_hierarchie);
+			$doc->properties['mots']['ids_hierarchie'] = array_merge(
+				$doc->properties['mots']['ids_hierarchie'],
+				$ids_hierarchie
+			);
+			$doc->properties['mots']['titres_hierarchie'] = array_merge(
+				$doc->properties['mots']['titres_hierarchie'],
+				$titres_hierarchie
+			);
 		}
 		// et on garde la property tags
-		$infos['properties']['tags'] = array_values($infos['properties']['mots']['titres']);
+		$doc->properties['tags'] = array_values($doc->properties['mots']['titres']);
 		
 		// On ajoute le nom des mots en fulltext à la fin
-		$infos['content'] .= "\n\n".join(' / ', array_map('extraire_multi', $infos['properties']['mots']['titres']));
+		$doc->content .= "\n\n".join(' / ', array_map('extraire_multi', $doc->properties['mots']['titres']));
 	}
-	return $infos;
+	return $doc;
 }

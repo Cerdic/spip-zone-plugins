@@ -6,7 +6,7 @@ use Indexer\Storage\StorageInterface;
 use Indexer\Sources\Document;
 
 class Indexer {
-	/** @var Indexer\StorageEngineInterface|null */
+	/** @var StorageInterface|null */
 	private $storage = null;
 
 	function __construct() {}

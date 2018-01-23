@@ -5,25 +5,33 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/filtres');
 
-function indexer_jointure_rubriques_dist($objet, $id_objet, $infos) {
+/**
+ * Ajoute les informations de polyhiérarchies
+ *
+ * @param string $objet
+ * @param int $id_objet
+ * @param \Indexer\Sources\Document $doc
+ * @return \Indexer\Sources\Document
+ */
+function indexer_jointure_rubriques_dist($objet, $id_objet, $doc) {
 	// On va chercher tous les rubriques de cet objet
 	if (defined('_DIR_PLUGIN_POLYHIER') and $rubriques = sql_allfetsel(
 		'r.id_rubrique, titre',
 		'spip_rubriques as r join spip_rubriques_liens as l on r.id_rubrique=l.id_parent',
 		array('l.objet='.sql_quote($objet), 'l.id_objet='.intval($id_objet))
 	)) {
-		$infos['properties']['rubriques']['ids'] = array();
-		$infos['properties']['rubriques']['titres'] = array();
-		$infos['properties']['rubriques']['ids_hierarchie'] = array();
-		$infos['properties']['rubriques']['titres_hierarchie'] = array();
-		
+		$doc->properties['rubriques']['ids'] = array();
+		$doc->properties['rubriques']['titres'] = array();
+		$doc->properties['rubriques']['ids_hierarchie'] = array();
+		$doc->properties['rubriques']['titres_hierarchie'] = array();
+
 		foreach ($rubriques as $rubrique) {
 			$id_rubrique_enfant = intval($rubrique['id_rubrique']);
 			$ids_de_cette_branche = array();
 			$titres_de_cette_branche = array();
 			$ids_hierarchie_de_cette_branche = array();
 			$titres_hierarchie_de_cette_branche = array();
-			
+
 			while ($f = sql_fetsel(
 				'id_parent, titre',
 				'spip_rubriques',
@@ -31,7 +39,7 @@ function indexer_jointure_rubriques_dist($objet, $id_objet, $infos) {
 			)){
 				$titre_actuel = trim(supprimer_numero($f['titre']));
 				$id_parent = intval($f['id_parent']);
-				
+
 				// On ajoute ce parent suivant au début du tableau
 				array_unshift($ids_de_cette_branche, $id_rubrique_enfant);
 				$titres_de_cette_branche = array_merge(array($id_rubrique_enfant=>$titre_actuel), $titres_de_cette_branche);
@@ -47,15 +55,27 @@ function indexer_jointure_rubriques_dist($objet, $id_objet, $infos) {
 			}
 			
 			// On ajoute la branche dans le fulltext
-			$infos['content'] .= "\n\n".join(' / ', $titres_de_cette_branche);
-			
+			$doc->content .= "\n\n".join(' / ', $titres_de_cette_branche);
+
 			// On ajoute cette branche dans les infos
-			$infos['properties']['rubriques']['ids'] = array_values(array_unique(array_merge($infos['properties']['rubriques']['ids'], $ids_de_cette_branche)));
-			$infos['properties']['rubriques']['titres'] = array_merge($infos['properties']['rubriques']['titres'], $titres_de_cette_branche);
-			$infos['properties']['rubriques']['ids_hierarchie'] = array_values(array_unique(array_merge($infos['properties']['rubriques']['ids_hierarchie'], $ids_hierarchie_de_cette_branche)));
-			$infos['properties']['rubriques']['titres_hierarchie'] = array_merge($infos['properties']['rubriques']['titres_hierarchie'], $titres_hierarchie_de_cette_branche);
+			$doc->properties['rubriques']['ids'] = array_values(array_unique(array_merge(
+				$doc->properties['rubriques']['ids'],
+				$ids_de_cette_branche
+			)));
+			$doc->properties['rubriques']['titres'] = array_merge(
+				$doc->properties['rubriques']['titres'],
+				$titres_de_cette_branche
+			);
+			$doc->properties['rubriques']['ids_hierarchie'] = array_values(array_unique(array_merge(
+				$doc->properties['rubriques']['ids_hierarchie'],
+				$ids_hierarchie_de_cette_branche
+			)));
+			$doc->properties['rubriques']['titres_hierarchie'] = array_merge(
+				$doc->properties['rubriques']['titres_hierarchie'],
+				$titres_hierarchie_de_cette_branche
+			);
 		}
 	}
-	
-	return $infos;
+
+	return $doc;
 }
