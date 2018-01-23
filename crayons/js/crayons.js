@@ -423,6 +423,7 @@ $.fn.activatecrayon = function(percent) {
 					e.shiftKey && (e.keyCode == 13) /* shift-return */
 				)
 				) {
+                    e.preventDefault(); // Lorsque l'on utilise ctrl+s, on n'ouvre pas la fenêtre de sauvegarde
 					crayon
 					.find("form.formulaire_crayon")
 					.submit();
