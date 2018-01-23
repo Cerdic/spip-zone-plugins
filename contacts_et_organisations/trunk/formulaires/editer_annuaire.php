@@ -9,10 +9,54 @@
  * @package SPIP\annuaires\Formulaires
 **/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/editer');
 
+/**
+ * Saisies d'un annuaire
+ *
+ * @param int|string $id_annuaire
+ *     Identifiant du annuaire. 'new' pour un nouveau annuaire.
+ * @param string $redirect
+ *     URL de redirection après le traitement
+ * @return array
+ *     Environnement du formulaire
+**/
+function formulaires_editer_annuaire_saisies_dist($id_annuaire = 'new', $redirect = '') {
+	$saisies = array(
+		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'titre',
+				'label' => _T('contacts:annuaire_champ_titre_label'),
+				'obligatoire' => 'oui',
+			),
+		),
+		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'identifiant',
+				'label' => _T('contacts:annuaire_champ_identifiant_label'),
+				'explication' => _T('contacts:annuaire_champ_identifiant_explication'),
+				'obligatoire' => 'oui',
+			),
+		),
+		array(
+			'saisie' => 'textarea',
+			'options' => array(
+				'nom' => 'descriptif',
+				'label' => _T('contacts:annuaire_champ_descriptif_label'),
+				'rows' => 5,
+				'inserer_barre' => 'edition',
+			),
+		),
+	);
+	
+	return $saisies;
+}
 
 /**
  * Chargement du formulaire d'édition d'un annuaire
@@ -26,6 +70,7 @@ include_spip('inc/editer');
 **/
 function formulaires_editer_annuaire_charger_dist($id_annuaire = 'new', $redirect = '') {
 	$contexte = formulaires_editer_objet_charger('annuaire', $id_annuaire, $rien, 0, $redirect, '');
+	
 	return $contexte;
 }
 
@@ -42,13 +87,15 @@ function formulaires_editer_annuaire_charger_dist($id_annuaire = 'new', $redirec
 **/
 function formulaires_editer_annuaire_verifier_dist($id_annuaire = 'new', $redirect = '') {
 	$erreurs = formulaires_editer_objet_verifier('annuaire', $id_annuaire, array('titre', 'identifiant'));
+	
 	// Pour une création, on teste l'identifiant
-	if (!intval($id_annuaire)
-		and $identifiant = _request('identifiant')
-		and sql_getfetsel('id_annuaire', 'spip_annuaires', 'identifiant = '.sql_quote($identifiant))
-	){
+	if (
+		$identifiant = _request('identifiant')
+		and sql_getfetsel('id_annuaire', 'spip_annuaires', array('identifiant = '.sql_quote($identifiant), 'id_annuaire != '.intval($id_annuaire)))
+	) {
 		$erreurs['identifiant'] = _T('contacts:erreur_annuaire_identifiant_existant');
 	}
+	
 	return $erreurs;
 }
 

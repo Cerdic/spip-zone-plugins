@@ -299,22 +299,68 @@ function contacts_optimiser_base_disparus($flux) {
 function contacts_formulaire_fond($flux) {
 	if ($flux['args']['form'] == 'editer_auteur') {
 		if (isset($flux['args']['contexte']['id_contact'])) {
+			include_spip('inc/saisies');
+			$saisies = saisies_chercher_formulaire('editer_contact', array($flux['args']['contexte']['id_contact']));
+			$saisies = saisies_transformer_noms($saisies, '/^.*$/', 'contact_$0');
+			$saisies = array(
+				array(
+					'saisie' => 'fieldset',
+					'options' => array(
+						'nom' => 'contact',
+						'label' => _T('contacts:contact'),
+						'conteneur_class' => 'editer_contact',
+					),
+					'saisies' => array(
+						array(
+							'saisie' => 'hidden',
+							'options' => array(
+								'nom' => 'id_contact',
+								'defaut' => $flux['args']['contexte']['id_contact'],
+							)
+						)
+					) + $saisies // on concatène le hidden avec les saisies des orgas
+				)
+			);
+			
 			$contexte = $flux['args']['contexte'];
-			$contexte['prefixe'] = 'contact_';
+			$contexte['saisies'] = $saisies;
+			
 			if (preg_match(",<(li|div)[^>]*editer_bio[^>]*>,Uims", $flux['data'], $m)) {
-				$contexte['tag'] = $m[1];
 				$p = strpos($flux['data'], $m[0]);
-				$ins = recuperer_fond('formulaires/editer_auteur_contact', $contexte);
+				$ins = recuperer_fond('inclure/generer_saisies', $contexte);
 				$flux['data'] = substr_replace($flux['data'], $ins, $p, 0);
 			}
 		}
 		if (isset($flux['args']['contexte']['id_organisation'])) {
+			include_spip('inc/saisies');
+			$saisies = saisies_chercher_formulaire('editer_organisation', array($flux['args']['contexte']['id_organisation']));
+			$saisies = saisies_transformer_noms($saisies, '/^.*$/', 'organisation_$0');
+			$saisies = array(
+				array(
+					'saisie' => 'fieldset',
+					'options' => array(
+						'nom' => 'organisation',
+						'label' => _T('contacts:organisation'),
+						'conteneur_class' => 'editer_organisation',
+					),
+					'saisies' => array(
+						array(
+							'saisie' => 'hidden',
+							'options' => array(
+								'nom' => 'id_organisation',
+								'defaut' => $flux['args']['contexte']['id_organisation'],
+							)
+						)
+					) + $saisies // on concatène le hidden avec les saisies des orgas
+				)
+			);
+			
 			$contexte = $flux['args']['contexte'];
-			$contexte['prefixe'] = 'organisation_';
+			$contexte['saisies'] = $saisies;
+			
 			if (preg_match(",<(li|div)[^>]*editer_bio[^>]*>,Uims", $flux['data'], $m)) {
-				$contexte['tag'] = $m[1];
 				$p = strpos($flux['data'], $m[0]);
-				$ins = recuperer_fond('formulaires/editer_auteur_organisation', $contexte);
+				$ins = recuperer_fond('inclure/generer_saisies', $contexte);
 				$flux['data'] = substr_replace($flux['data'], $ins, $p, 0);
 			}
 		}

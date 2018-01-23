@@ -14,6 +14,154 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 include_spip('inc/editer');
+include_spip('inc/config');
+include_spip('inc/abstract_sql');
+
+/**
+ * Saisies d'une organisation
+ *
+ * @param int|string $id_organisation
+ *     Identifiant de l'organisation. 'new' pour une nouvelle organisation.
+ * @param int $id_parent
+ *     Identifiant de l'organisation parente, ou 0.
+ * @param string $redirect
+ *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel 'objet|x' indiquant de lier l'organisation à cet objet,
+ *     tel que 'article|3'   
+ * @return array
+ *     Environnement du formulaire
+**/
+function formulaires_editer_organisation_saisies_dist($id_organisation = 'new', $id_parent = 0, $redirect = '', $associer_objet = '') {
+	$saisies = array();
+	
+	// Champ de quel annuaire si on a activé les annaires
+	if (lire_config('contacts_et_organisations/utiliser_annuaires')) {
+		$saisies[] = array(
+			'saisie' => 'annuaires',
+			'options' => array(
+				'nom' => 'id_annuaire',
+				'label' => _T('contacts:annuaire'),
+				'option_intro' => _T('contacts:annuaire_aucun'),
+			),
+		);
+	}
+	
+	// Champ nom de l’orga
+	$saisies[] = array(
+		'saisie' => 'input',
+		'options' => array(
+			'nom' => 'nom',
+			'label' => _T('contacts:label_nom'),
+		),
+	);
+	
+	// Champ de l'orga parente si on a activté
+	if (lire_config('contacts_et_organisations/utiliser_organisations_arborescentes')) {
+		$saisies[] = array(
+			'saisie' => 'organisations',
+			'options' => array(
+				'nom' => 'id_parent',
+				'label' => _T('contacts:label_organisation_parente'),
+			),
+		);
+	}
+	
+	// Champ statut juridique
+	$saisies[] = array(
+		'saisie' => 'input',
+		'options' => array(
+			'nom' => 'statut_juridique',
+			'label' => _T('contacts:label_statut_juridique'),
+			'explication' => _T('contacts:explication_statut_juridique'),
+		),
+	);
+	
+	// Champ identification
+	$saisies[] = array(
+		'saisie' => 'input',
+		'options' => array(
+			'nom' => 'identification',
+			'label' => _T('contacts:label_identification'),
+			'explication' => _T('contacts:explication_identification'),
+		),
+	);
+	
+	// Champ activité avec une map des valeurs déjà remplies
+	if ($activites = sql_allfetsel('activite', 'spip_organisations', '', 'activite', 'activite asc')) {
+		$activites = array_map('reset', $activites);
+	}
+	else {
+		$activites = array();
+	}
+	$saisies[] = array(
+		'saisie' => 'input',
+		'options' => array(
+			'nom' => 'activite',
+			'label' => _T('contacts:label_activite'),
+			'explication' => _T('contacts:explication_activite'),
+			'data' => $activites,
+		),
+	);
+	
+	// Champ URL de l’orga
+	$saisies[] = array(
+		'saisie' => 'input',
+		'options' => array(
+			'nom' => 'url_site',
+			'label' => _T('contacts:label_url_site'),
+			'placeholder' => 'https://…',
+		),
+	);
+	
+	// Champ date de création
+	$saisies[] = array(
+		'saisie' => 'date_jour_mois_annee',
+		'options' => array(
+			'nom' => 'date_creation',
+			'label' => _T('contacts:label_date_creation'),
+		),
+	);
+	
+	// Champ descriptif
+	$saisies[] = array(
+		'saisie' => 'textarea',
+		'options' => array(
+			'nom' => 'descriptif',
+			'label' => _T('contacts:label_descriptif'),
+			'rows' => 10,
+			'conteneur_class' => 'pleine_largeur',
+			'class' => 'inserer_barre_edition inserer_previsualisation',
+		),
+	);
+	
+	// Champ des horaires d'ouverture
+	$saisies[] = array(
+		'saisie' => 'textarea',
+		'options' => array(
+			'nom' => 'ouvertures',
+			'label' => _T('contacts:label_ouvertures'),
+			'explication' => _T('contacts:explication_ouvertures'),
+			'rows' => 5,
+			'conteneur_class' => 'pleine_largeur',
+			'class' => 'inserer_barre_edition inserer_previsualisation',
+		),
+	);
+	
+	// Champ des tarifs
+	$saisies[] = array(
+		'saisie' => 'textarea',
+		'options' => array(
+			'nom' => 'tarifs',
+			'label' => _T('contacts:label_tarifs'),
+			'rows' => 5,
+			'conteneur_class' => 'pleine_largeur',
+			'class' => 'inserer_barre_edition inserer_previsualisation',
+		),
+	);
+	
+	return $saisies;
+}
 
 /**
  * Chargement du formulaire d'édition d'une organisation

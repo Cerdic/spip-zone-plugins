@@ -16,6 +16,95 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('inc/editer');
 
 /**
+ * Saisies d'un contact
+ *
+ * @param int|string $id_contact
+ *     Identifiant du contact. 'new' pour un nouveau contact.
+ * @param int $id_organisation
+ *     Identifiant de l'organisation parente, ou 0.
+ * @param string $redirect
+ *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel 'objet|x' indiquant de lier le contact à cet objet,
+ *     tel que 'article|3'
+ * @return array
+ *     Environnement du formulaire
+**/
+function formulaires_editer_contact_saisies_dist($id_contact = 'new', $id_organisation = 0, $redirect = '', $associer_objet = '') {
+	$saisies = array();
+	
+	// Champ de quel annuaire si on a activé les annaires
+	if (lire_config('contacts_et_organisations/utiliser_annuaires')) {
+		$saisies[] = array(
+			'saisie' => 'annuaires',
+			'options' => array(
+				'nom' => 'id_annuaire',
+				'label' => _T('contacts:annuaire'),
+				'option_intro' => _T('contacts:annuaire_aucun'),
+			),
+		);
+	}
+	
+	// Champ civilité
+	$saisies[] = array(
+		'saisie' => 'input',
+		'options' => array(
+			'nom' => 'civilite',
+			'label' => _T('contacts:label_civilite'),
+		),
+	);
+	
+	// Champ prénom
+	$saisies[] = array(
+		'saisie' => 'input',
+		'options' => array(
+			'nom' => 'prenom',
+			'label' => _T('contacts:label_prenom'),
+		),
+	);
+	
+	// Champ nom
+	$saisies[] = array(
+		'saisie' => 'input',
+		'options' => array(
+			'nom' => 'nom',
+			'label' => _T('contacts:label_nom'),
+		),
+	);
+	
+	// Champ fonction
+	$saisies[] = array(
+		'saisie' => 'input',
+		'options' => array(
+			'nom' => 'fonction',
+			'label' => _T('contacts:label_fonction'),
+		),
+	);
+	
+	// Champ date de naissance
+	$saisies[] = array(
+		'saisie' => 'date_jour_mois_annee',
+		'options' => array(
+			'nom' => 'date_naissance',
+			'label' => _T('contacts:label_date_naissance'),
+		),
+	);
+	
+	// Champ descriptif
+	$saisies[] = array(
+		'saisie' => 'textarea',
+		'options' => array(
+			'nom' => 'descriptif',
+			'label' => _T('contacts:label_descriptif'),
+			'conteneur_class' => 'haut',
+			'class' => 'inserer_barre_edition inserer_previsualisation',
+		),
+	);
+	
+	return $saisies;
+}
+
+/**
  * Chargement du formulaire d'édition d'un contact
  *
  * @param int|string $id_contact
