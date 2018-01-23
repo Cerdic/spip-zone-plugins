@@ -13,7 +13,7 @@ if (!defined('_TAXONOMIE_WIKIPEDIA_ENDPOINT_BASE_URL')) {
 	/**
 	 * Préfixe des URL du service web de WIKIPEDIA.
 	 */
-	define('_TAXONOMIE_WIKIPEDIA_ENDPOINT_BASE_URL', 'http://%langue%.wikipedia.org/w/api.php');
+	define('_TAXONOMIE_WIKIPEDIA_ENDPOINT_BASE_URL', 'https://%langue%.wikipedia.org/w/api.php');
 }
 
 if (!defined('_TAXONOMIE_WIKIPEDIA_PAGE_BASE_URL')) {
@@ -115,11 +115,11 @@ function wikipedia_get_page($resource, $tsn, $search, $options = array()) {
 				} elseif (($resource == 'languages')) {
 					$information[$resource] = $page['revisions'][0]['langlinks'];
 				}
+
+				// Mise en cache
+				cache_taxonomie_ecrire(serialize($information), 'wikipedia', $resource, $tsn, $options);
 			}
 		}
-
-		// Mise en cache
-		cache_taxonomie_ecrire(serialize($information), 'wikipedia', $resource, $tsn, $options);
 	} else {
 		// Lecture et désérialisation du cache
 		lire_fichier($file_cache, $contenu);
