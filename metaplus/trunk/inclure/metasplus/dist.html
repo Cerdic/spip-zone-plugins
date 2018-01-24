@@ -1,0 +1,171 @@
+[(#REM)
+
+	Metas plus: génère les métas pour Dublin Core, Open Graph et Twitter.
+
+	Ce squelette est inclus automatiquement dans le <head>.
+	Il tente de récupèrer automatiquement les informations des pages.
+
+	Pour des variantes plus complètes spécifiques à certaines pages, créer un fichier inclure/metasplus/{page}.html
+	Les variantes peuvent inclure le présent squelette en renseignant certains paramètres.
+	Les paramètres doivent être en format simple texte - HTML sans tags |supprimer_tags|textebrut
+
+	Format des images :
+	- Twitter  : minimum 280 x 150px, max 1 Mo.
+	- Facebook : minimum 600 x 315px, recommandé > 1200 x 630px, max 5 Mo.
+	             ratio 1.91:1 au max, plusieurs images possibles.
+
+	Paramètres:
+	** obligatoires
+	* conseillés
+
+	- objet
+	- id_objet
+	- titre :      titre
+	- lang :       langue en format iso. ex fr
+	- territoire : permet de renseigner le duet langue_territoire, ex. UK
+		             si rien n'est renseigné, on tente un lang_LANG
+	- desc :       description
+	- auteur :     les auteurs
+	- date :       la date en format Y-m-d
+	- url :        URL de la ressource
+	- logo :       image de la ressource (URL) - doit faire au minimum 200x200px et moins d'un 1 Mo
+	- og-type :    (open graph) type de la ressource : article, website, profile, book....
+
+]
+
+[(#REM)
+
+	=============================
+	1. Récupérer les informations
+	=============================
+
+]
+
+[(#REM) Cas 1 : Page d'un objet éditorial ]
+<BOUCLE_objet(CONDITION){si #ENV{objet}|et{#ENV{id_objet}}}>
+#SET{og-type, article}
+#SET{titre,   #INFO_TITRE{#ENV{objet}, #ENV{id_objet}}}
+#SET{desc,    #INFO_INTRODUCTION{#ENV{objet}, #ENV{id_objet}}}
+#SET{url,     #INFO_URL{#ENV{objet}, #ENV{id_objet}}}
+#SET{date,    #INFO_DATE{#ENV{objet}, #ENV{id_objet}}}
+#SET{lang,    #INFO_LANG{#ENV{objet}, #ENV{id_objet}}}
+#SET{logo,    #ENV{id_objet}|quete_logo_objet{#ENV{objet},on}|table_valeur{chemin}}
+#SET{auteurs, #ARRAY}
+<BOUCLE_auteurs(AUTEURS){objet}{id_objet}>
+#SET{auteurs, #GET{auteurs}|push{#NOM}}
+</BOUCLE_auteurs>
+</BOUCLE_objet>
+
+[(#REM) Cas 2 : Page lambda ]
+#SET{og-type, website}
+#SET{titre,   #NOM_SITE_SPIP}
+#SET{desc,    #SLOGAN_SITE_SPIP}
+#SET{url,     #URL_PAGE{#ENV{type-page, #ENV{page}}}}
+#SET{date,    #ENV{date}}
+#SET{lang,    #LANG}
+#SET{logo,    #LOGO_SITE_SPIP**}
+#SET{auteurs, #ARRAY}
+<//B_objet>
+
+
+[(#REM)
+
+	=========================
+	2. Normaliser les valeurs
+	=========================
+	On prend les valeurs de l'env en priorité
+
+]
+
+#SET{titre,   #ENV{titre, #GET{titre}}|supprimer_tags|textebrut}
+#SET{desc,    #ENV{desc, #GET{desc}}|supprimer_tags|textebrut}
+#SET{url,     #ENV{url, #GET{url}}}
+#SET{date,    #ENV{date, #GET{date}}}
+#SET{lang,    #ENV{lang, #GET{lang}}}
+#SET{locale,  #GET{lang}|concat{
+	_,
+	#VAL{#ENV{territoire}|=={en}|?{uk,#ENV{territoire,#GET{lang}}}|strtoupper}
+}}
+#SET{logo,    #ENV{logo, #GET{logo}}
+	|image_reduire{2400, 1260}
+	|image_recadre{1.91:1, '-', 'focus'}
+	|extraire_attribut{src}}
+#SET{auteur,  #ENV{auteur, #ENV{author, #GET{auteurs}|join{', '}}}|supprimer_tags|textebrut}
+#SET{og-type, #ENV{og-type, #GET{og-type}}}
+
+
+[(#REM)
+
+	====================
+	2. Insérer les metas
+	====================
+
+]
+
+[(#REM)
+
+
+	Dublin Core
+	http://dublincore.org
+
+
+][(#CONFIG{metasplus/dublincore}|non)
+<!-- Dublin Core -->
+<link rel="schema.DC" href="https://purl.org/dc/elements/1.1/" />
+<link rel="schema.DCTERMS" href="https://purl.org/dc/terms/" />
+<meta name="DC.Format" content="text/html" />
+<meta name="dc.Type" content="text" />
+[<meta name="dc.Title" lang="#GET{lang}" content="(#GET{titre}|attribut_html)" />]
+[<meta name="dc.Language" scheme="rfc1766" content="(#GET{lang})" />]
+[<meta name="dc.Description" lang="#GET{lang}" content="(#GET{desc}|couper{200,'…'}|attribut_html)" />]
+[<meta name="dc.Creator" content="(#GET{auteur}|attribut_html)" />]
+[<meta name="dc.Date" scheme="DCTERMS.W3CDTF" content="(#GET{date}|affdate{Y-m-d})" />]
+[<meta name="DC.Identifier" scheme="URI" content="(#GET{url}|url_absolue)" />]
+[<meta name="dc.Publisher" content="(#NOM_SITE_SPIP|attribut_html)" />]
+]
+[(#REM)
+
+
+	Open Graph
+	http://ogp.me
+	https://developers.facebook.com/docs/sharing/opengraph/object-properties
+	https://developers.facebook.com/tools/debug/
+
+
+][(#CONFIG{metasplus/opengraph}|non)
+<!-- Open Graph -->
+[<meta property="og:type" content="(#GET{og-type}|attribut_html)" />]
+[<meta property="og:title" content="(#GET{titre}|attribut_html)" />]
+[<meta property="og:locale" content="(#GET{locale})" />]
+[<meta property="og:url" content="(#GET{url}|url_absolue)" />]
+[<meta property="og:description" content="(#GET{desc}|couper{200,'…'}|attribut_html)" />]
+[<meta property="og:image" content="(#GET{logo}|url_absolue)" />]
+[<meta property="og:image:width" content="(#GET{logo}|largeur)" />]
+[<meta property="og:image:height" content="(#GET{logo}|hauteur)" />]
+[<meta property="og:site_name" content="(#NOM_SITE_SPIP|attribut_html)" />]
+[(#GET{og-type}|=={article}|oui)
+[<meta property="article:published_time" content="(#GET{date}|affdate{Y-m-d})" />]
+[<meta property="article:author" content="(#GET{auteur}|attribut_html)" />]
+]
+[(#REM) Si plugin facebook, on envoie la méta fb:app_id ]
+[<meta property="fb:app_id" content="(#CONFIG{facebook/cle})" />]
+][(#REM)
+
+
+	Twitter Card
+	https://dev.twitter.com/cards/types/summary
+	https://dev.twitter.com/cards/types/summary-large-image
+	https://cards-dev.twitter.com/validator
+
+
+][(#CONFIG{metasplus/twitter}|non)
+<!-- Twitter Card -->
+<meta name="twitter:card" content="[(#GET{logo}|?{summary_large_image,summary})]" />
+[<meta name="twitter:title" content="(#GET{titre}|attribut_html)" />]
+[<meta name="twitter:description" content="(#GET{desc}|couper{200,'…'}|attribut_html)" />]
+[<meta name="twitter:image" content="(#GET{logo}|url_absolue)" />]
+<meta name="twitter:dnt" content="on" />
+[<meta name="twitter:url" content="(#GET{url}|url_absolue)" />]
+]
+
+#FILTRE{trim}
