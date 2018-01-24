@@ -1,0 +1,40 @@
+[(#REM)
+	Metas plus: site spip
+
+	Parametres:
+	- (aucun)
+
+]
+[(#REM)
+
+	1. D'abord rassembler les informations et les formater
+
+][
+(#SET{titre, #NOM_SITE_SPIP|concat{" - ",#SLOGAN_SITE_SPIP}|supprimer_tags|textebrut})][
+(#SET{lang, #LANG})][
+(#SET{desc,[(#DESCRIPTIF_SITE_SPIP|sinon{#SLOGAN_SITE_SPIP}|supprimer_tags|textebrut)]})][
+(#SET{date,#DATE})][
+(#SET{url,#URL_SITE_SPIP})][
+(#SET{logo,''})][
+(#LOGO_SITE_SPIP|oui)
+	[(#SET{logo, #LOGO_SITE_SPIP})]
+]
+<BOUCLE_illus(DOCUMENTS){extension IN jpg,gif,png}
+						{largeur>=200}{hauteur>=200}{!par date}{0,1}
+						{si #LOGO_SITE_SPIP|non}>
+	[(#SET{logo,[(#FICHIER)]})]
+</BOUCLE_illus>
+[(#REM)
+
+	2. Passer les données au modèle général
+
+]<INCLURE{fond=inclure/metasplus,
+	titre=#GET{titre},
+	lang=#GET{lang},
+	desc=#GET{desc},
+	date=#GET{date},
+	url=#GET{url},
+	logo=#GET{logo},
+	og-type=article} />
+
+#FILTRE{trim}

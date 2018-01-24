@@ -1,0 +1,40 @@
+[(#REM)
+	Metas plus: rubrique
+
+	Parametres:
+	- id_rubrique (obligatoire)
+
+]<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+[(#REM)
+
+	1. D'abord rassembler les informations et les formater
+
+][
+(#SET{titre, #TITRE|concat{" - ",#NOM_SITE_SPIP}|supprimer_tags|textebrut})][
+(#SET{lang, #LANG})][
+(#SET{desc,[(#TEXTE|sinon{#DESCRIPTIF}|sinon{#DESCRIPTIF_SITE_SPIP}|sinon{#TITRE}|supprimer_tags|textebrut)]})][
+(#SET{date,#DATE})][
+(#SET{url,#URL_RUBRIQUE})][
+(#SET{logo,''})][
+(#LOGO_RUBRIQUE|oui)
+	[(#SET{logo, #LOGO_RUBRIQUE})]
+]
+<BOUCLE_illus(DOCUMENTS){id_rubrique}{extension IN jpg,gif,png}
+						{largeur>=200}{hauteur>=200}{!par date}{0,1}
+						{si #LOGO_RUBRIQUE|non}>
+	[(#SET{logo,[(#FICHIER)]})]
+</BOUCLE_illus>
+[(#REM)
+
+	2. Passer les données au modèle général
+
+]<INCLURE{fond=inclure/metasplus,
+	titre=#GET{titre},
+	lang=#GET{lang},
+	desc=#GET{desc},
+	date=#GET{date},
+	url=#GET{url},
+	logo=#GET{logo},
+	og-type=article} />
+</BOUCLE_rubrique>
+#FILTRE{trim}

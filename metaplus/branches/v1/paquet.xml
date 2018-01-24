@@ -2,7 +2,7 @@
 	prefix="metasplus"
 	categorie="divers"
 	version="1.2.5"
-	etat="dev"
+	etat="stable"
 	compatibilite="[2.1.0;3.2.*]"
 	logo="opengraph.png"
 	documentation="https://contrib.spip.net/4845"
