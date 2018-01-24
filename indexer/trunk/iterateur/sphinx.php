@@ -1152,11 +1152,10 @@ function critere_SPHINX_par_dist($idb, &$boucles, $crit) {
  * Tris `{inverse}`
  *
  * @param string $idb
- * @param object $boucles
+ * @param array $boucles
  * @param object $crit
  */
 function critere_SPHINX_inverse_dist($idb, &$boucles, $crit) {
-	$boucle = &$boucles[$idb];
 	if ($crit->not) {
 		critere_SPHINX_parinverse($idb, $boucles, $crit);
 	} else {
@@ -1175,8 +1174,9 @@ function critere_SPHINX_inverse_dist($idb, &$boucles, $crit) {
  *     pour les champs de type json `properties.truc`
  *
  * @param string $idb
- * @param object $boucles
+ * @param array $boucles
  * @param object $crit
+ * @param string $sens
 **/
 function critere_SPHINX_parinverse($idb, $boucles, $crit, $sens = '') {
 	$boucle = &$boucles[$idb];
@@ -1185,8 +1185,6 @@ function critere_SPHINX_parinverse($idb, $boucles, $crit, $sens = '') {
 	}
 
 	foreach ($crit->param as $tri){
-		$order = "";
-
 		// tris specifies dynamiquement
 		if ($tri[0]->type!='texte'){
 			// calculer le order dynamique qui verifie les champs
@@ -1196,7 +1194,6 @@ function critere_SPHINX_parinverse($idb, $boucles, $crit, $sens = '') {
 			$par = $par->texte;
 			$order = "'$par'";
 		}
-
 
 		$t = $order.$sens;
 		$boucle->order[] = $t;

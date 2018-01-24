@@ -197,12 +197,14 @@ class QueryApi extends Query {
 	 *     'index' => ['visites', 'autre']
 	 *     ```
 	 *
-	 * @param array $api Tableau de description
+	 * @param string|string[] $index Index à utiliser
 	 * @return bool True si index présent.
 	**/
 	public function setApiIndex($index) {
-		if (!$index){ return false; }
-		
+		if (!$index){
+			return false;
+		}
+
 		// Always work with an array of values
 		if (!is_array($index)) {
 			$index = array($index);
@@ -223,12 +225,14 @@ class QueryApi extends Query {
 	 *     'select' => array('date', 'properties', '*', 'etc'),
 	 *     ```
 	 *
-	 * @param array $api Tableau de description
+	 * @param array $select Tableau de description
 	 * @return bool True si select présent.
 	**/
 	public function setApiSelect($select) {
-		if (!$select){ return false; }
-		
+		if (!$select){
+			return false;
+		}
+
 		// Always work with an array of values
 		if (!is_array($select)){
 			$select = array($select);
@@ -236,7 +240,7 @@ class QueryApi extends Query {
 		foreach ($select as $s){
 			$this->select($s);
 		}
-		
+
 		return true;
 	}
 
@@ -249,12 +253,14 @@ class QueryApi extends Query {
 	 *     'fulltext' => 'ma recherche',
 	 *     ```
 	 *
-	 * @param array $api Tableau de description
+	 * @param string $fulltext Texte recherché
 	 * @return bool True si fulltext présent.
 	**/
 	public function setApiFulltext($fulltext) {
-		if (!is_string($fulltext)) { return false; }
-		
+		if (!is_string($fulltext)) {
+			return false;
+		}
+
 		// Add the condition in where
 		$this->where('MATCH(' . $this->quote($fulltext) . ')');
 		// Add the score
@@ -284,7 +290,7 @@ class QueryApi extends Query {
 	 *     ),
 	 *     ```
 	 *
-	 * @param array $api Tableau de description
+	 * @param array $snippet Tableau de description
 	 * @return bool True si snippet ajouté, false sinon.
 	**/
 	public function setApiSnippet($snippet) {
@@ -348,12 +354,14 @@ class QueryApi extends Query {
 	 *     ),
 	 *     ```
 	 *
-	 * @param array $api Tableau de description
+	 * @param array $filters Tableau de description
 	 * @return bool True si filtres ajouté, false sinon.
 	**/
 	public function setApiFilters($filters) {
-		if (!is_array($filters)) { return false; }
-		
+		if (!is_array($filters)) {
+			return false;
+		}
+
 		$ok = true;
 
 		// For each type of filter, call the right method
@@ -509,24 +517,21 @@ class QueryApi extends Query {
 		){
 			return false;
 		}
-		
-		// Force type
-		$distance = intval($filter['distance']);
-		
+
 		// Default comparison : =
 		if (!isset($filter['comparison'])){
 			$filter['comparison'] = '<=';
 		}
-		
+
 		// Default "as"
 		if (!isset($filter['as'])){
 			$filter['as'] = 'distance_' . $as_count;
 			$as_count++;
 		}
-		
+
 		$this->select('geodist(double(' . $filter['point1']['lat'] . '), double(' . $filter['point1']['lon'] . '), double(' . $filter['point2']['lat'] . '), double(' . $filter['point2']['lon'] . '), {in=deg}) as ' . $filter['as']);
 		$this->where($filter['as'] . ' ' . $filter['comparison'] . ' ' . $this->quote($filter['distance']));
-		
+
 		return true;
 	}
 }

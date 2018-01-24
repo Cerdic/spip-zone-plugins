@@ -336,6 +336,7 @@ class SpipDocuments implements SourceInterface {
 	public function decrire_document_dates($doc, $contenu) {
 		$this->decrire_document_date($doc, $contenu);
 		$this->decrire_document_date_maj($doc, $contenu);
+		$this->decrire_document_date_intervalle($doc, $contenu);
 	}
 
 	/**
@@ -384,6 +385,39 @@ class SpipDocuments implements SourceInterface {
 		} else {
 			$doc->properties['maj'] = '0000-00-00 00:00:00';
 		}
+	}
+
+	/**
+	 * Ajoute les champs de date début et date de fin, si présents
+	 **
+	 * @param \Indexer\Sources\Document $doc
+	 * @param array $contenu
+	 */
+	public function decrire_document_date_intervalle($doc, $contenu) {
+		if (isset($contenu['date_debut']) and substr($contenu['date_debut'],0,4) != '0000') {
+			$doc->properties['date_debut'] = $this->preparer_date($contenu['date_debut']);
+		}
+		if (isset($contenu['date_fin']) and substr($contenu['date_fin'],0,4) != '0000') {
+			$doc->properties['date_fin'] = $this->preparer_date($contenu['date_fin']);
+		}
+	}
+
+	/**
+	 * Prépare une date selon différents formats
+	 *
+	 * @param string $date
+	 * @return array
+	 */
+	public static function preparer_date($date) {
+		// recalculer dateu pour les dates floues: 2000-00-00 => 2000-01-01
+		$dateu = strtotime(str_replace("-00", "-01", $date));
+		return array(
+			'year' => intval(date('Y', $dateu)),
+			'yearmonth' => intval(date('Ym', $dateu)),
+			'yearmonthday' => intval(date('Ymd', $dateu)),
+			'u' => $dateu,
+			'datetime' => $date
+		);
 	}
 
 	/**
@@ -436,11 +470,11 @@ class SpipDocuments implements SourceInterface {
 	}
 
 	/**
- * Ajoute le statut à indexer au document.
- *
- * @param \Indexer\Sources\Document $doc
- * @param array $contenu
- */
+	 * Ajoute le statut à indexer au document.
+	 *
+	 * @param \Indexer\Sources\Document $doc
+	 * @param array $contenu
+	 */
 	public function decrire_document_statut($doc, $contenu) {
 		// S'il y a un statut
 		if (isset($contenu['statut'])) {
