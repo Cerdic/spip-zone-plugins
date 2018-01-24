@@ -188,6 +188,28 @@ function saisies_lister_champs($contenu, $avec_conteneur = true) {
 }
 
 /**
+ * Prend la description complète du contenu d'un formulaire et retourne
+ * une liste des labels humains des vrais champs du formulaire (par nom)
+ *
+ * @param array $contenu        Le contenu d'un formulaire
+ * @param bool  $avec_conteneur Indique si on renvoie aussi les saisies ayant des enfants, comme les fieldset
+ * 
+ * @return array Un tableau listant les labels humains des champs
+ */
+function saisies_lister_labels($contenu, $avec_conteneur = false) {
+	$saisies = saisies_lister_par_nom($contenu, $avec_conteneur);
+	
+	$labels = array();
+	foreach ($saisies as $nom => $saisie) {
+		if (isset($saisie['options']['label'])) {
+			$labels[$nom] = $saisie['options']['label'];
+		}
+	}
+	
+	return $labels;
+}
+
+/**
  * A utiliser dans une fonction charger d'un formulaire CVT,
  * cette fonction renvoie le tableau de contexte correspondant
  * de la forme $contexte['nom_champ'] = ''.
