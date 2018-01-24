@@ -148,7 +148,7 @@
 [<(#HTML5|?{figure,div}) class="album vignettes figure[ (#ENV{align})][ (#ENV{classe})][ (#GET{class_album})]">]
 	#ANCRE_PAGINATION[
 	(#GET{position_legende}|=={top}|oui)[(#GET{caption})]]
-	<ul[ class="(#GET{class})"']>
+	<ul[ class="(#GET{class})"]>
 		<BOUCLE_documents_album(DOCUMENTS){id_document IN #GET{ids_documents}}{tout}{pagination #GET{pagination} #VAL{album}|concat{#ENV{id_album,x}}}>[
 		(#SET{titre_doc,      #TITRE|sinon{#FICHIER|basename}})][
 		(#SET{titre_doc_long, #EVAL{_ALBUMS_TITRE_COURT}|?{#GET{titre_doc},#GET{titre_doc}|concat{' - ',#TYPE_DOCUMENT,' - ',#VAL{#TAILLE|taille_en_octets},#MEDIA|=={image}|?{#VAL{' - '}|concat{#LARGEUR,'&times;',#HAUTEUR,' px'}}}}})][
