@@ -131,15 +131,21 @@
 
 [(#REM) gestion de la class de la liste <ul> de l'album ]
 [(#PLUGIN{bootstrap}|oui)
-#SET{class, thumbnails}]
+#SET{class, thumbnails}
+#SET{class_album, album-bootstrap}
+]
 
 [(#CONFIG{foundation/variante}|intval|>={4}|?{
 	#SET{class, small-block-grid-2 medium-block-grid-3 large-block-grid-4},
 	#SET{class, block-grid 4-up mobile-two-up}
  })]
 
+[(#PLUGIN{foundation}|oui|ou{#PLUGIN{foundation_6}|oui})
+#SET{class_album, album-foundation}
+]
+
 <B_documents_album>
-[<(#HTML5|?{figure,div}) class="album vignettes figure[ (#ENV{align})][ (#ENV{classe})][ (#PLUGIN{bootstrap}|oui)album-bootstrap][ (#PLUGIN{foundation}|oui)album-foundation]">]
+[<(#HTML5|?{figure,div}) class="album vignettes figure[ (#ENV{align})][ (#ENV{classe})][ (#GET{class_album})]">]
 	#ANCRE_PAGINATION[
 	(#GET{position_legende}|=={top}|oui)[(#GET{caption})]]
 	<ul[ class="(#GET{class})"']>
