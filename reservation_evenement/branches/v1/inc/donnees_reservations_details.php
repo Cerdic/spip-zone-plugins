@@ -4,7 +4,8 @@ if (!defined('_ECRIRE_INC_VERSION'))
 function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 	if (count($set) > 0) {
 		include_spip('inc/filtres');
-		$reservations_details = sql_fetsel('*', 'spip_reservations_details', 'id_reservations_detail=' . $id_reservations_detail);
+		$reservations_details = sql_fetsel('*', 'spip_reservations_details',
+				'id_reservations_detail=' . $id_reservations_detail);
 
 		$id_evenement = isset($set['id_evenement']) ? $set['id_evenement'] : $reservations_details['id_evenement'];
 		// Les données de l'évènenement
@@ -32,20 +33,24 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 		}
 
 		// Les descriptif
-		$set['descriptif'] = supprimer_numero($evenement['titre']) . '  (' . $date . ')';
+		$set['descriptif'] = extraire_multi(
+				supprimer_numero(
+						$evenement['titre'])) . '  (' . $date . ')';
 		if (intval($evenement['places']))
 			$set['places'] = $evenement['places'];
 
 		$set['quantite'] = _request('quantite') ? _request('quantite') : 1;
 		if (is_array($set['quantite']) and isset($set['quantite'][$id_evenement]))
-			$set['quantite'] = ($set['quantite'][$id_evenement] > 0) ? $set['quantite'][$id_evenement] : 1;
+			$set['quantite'] = ($set['quantite'][$id_evenement] > 0) ? 
+				$set['quantite'][$id_evenement] : 
+				1;
 
 		$quantite = $set['quantite'];
 
 		// Si le prix n'est pas fournit, on essaye de le trouver
 		if (!isset($set['prix']) and !isset($set['prix_ht'])) {
 
-			/* Existence d'un prix via le plugin Prix Objets https://plugins.spip.net/prix_objets.html */
+			//Existence d'un prix via le plugin Prix Objets https://plugins.spip.net/prix_objets.html
 			if ($prix_objets = test_plugin_actif('prix_objets')) {
 				$fonction_prix = charger_fonction('prix', 'inc/');
 				$fonction_prix_ht = charger_fonction('ht', 'inc/prix');
@@ -53,14 +58,26 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 				// si le plugin déclinaison produit (https://plugins.spip.net/declinaisons.html)
 				// est active il peut y avoir plusieurs prix par évenement
 				if (test_plugin_actif('declinaisons')) {
-					$id_prix = isset($set['id_prix_objet']) ? $set['id_prix_objet'] : $reservations_details['id_prix_objet'];
-					$p = sql_fetsel('prix_ht,id_prix_objet,id_declinaison,code_devise,taxe', 'spip_prix_objets', 'id_prix_objet=' . $id_prix);
+					$id_prix = isset($set['id_prix_objet']) ? 
+						$set['id_prix_objet'] : 
+						$reservations_details['id_prix_objet'];
+					$p = sql_fetsel(
+							'prix_ht,id_prix_objet,id_declinaison,code_devise,taxe',
+							'spip_prix_objets', 'id_prix_objet=' . $id_prix);
 					if ($p['id_declinaison'] > 0)
-						$set['descriptif'] .= ' - ' . supprimer_numero(sql_getfetsel('titre', 'spip_declinaisons', 'id_declinaison=' . $p['id_declinaison']));
+						$titre = extraire_multi(
+								supprimer_numero(
+										sql_getfetsel(
+												'titre',
+												'spip_declinaisons',
+												'id_declinaison=' . $p['id_declinaison'])));
+						$set['descriptif'] .= ' - ' . $titre;
 				}
 				// Sinon on cherche d'abord le prix attaché
 				else {
-					$p = prix_attache($id_evenement, $evenement['id_article'], $evenement['id_evenement_source']);
+					$p = prix_attache($id_evenement,
+							$evenement['id_article'],
+							$evenement['id_evenement_source']);
 				}
 
 				if (isset($p)) {

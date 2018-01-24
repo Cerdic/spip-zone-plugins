@@ -2,11 +2,12 @@
 /**
  * Le Formulaire réservation
  *
- * @plugin     Réservation Événements
- * @copyright  2013
- * @author     Rainer Müller
- * @licence    GNU/GPL
- * @package    SPIP\Reservation_evenement\Formulaires
+ * @plugin Réservation Événements
+ *
+ * @copyright 2013
+ * @author Rainer Müller
+ *         @licence GNU/GPL
+ * @package SPIP\Reservation_evenement\Formulaires
  */
 if (!defined("_ECRIRE_INC_VERSION"))
 	return;
@@ -18,20 +19,19 @@ if (!defined("_ECRIRE_INC_VERSION"))
 	 * Chargement du formulaire réservation
 	 *
 	 * @param array|int|string $id
-	 *         Identifiant de l'événement, soit tableau, soit liste séparé par virgule, soit un numéro.
+	 *        	Identifiant de l'événement, soit tableau, soit liste séparé par virgule, soit un numéro.
 	 * @param array|int|string $id_article
-	 *         Identifiant de l'article, soit tableau, soit liste séparé par virgule, soit un numéro.
+	 *        	Identifiant de l'article, soit tableau, soit liste séparé par virgule, soit un numéro.
 	 * @param string $retour
-	 *         Url de retour.
+	 *        	Url de retour.
 	 * @param array|string $options
-	 *         Les options :
-	 *         id_evenement_source : Grouper les événements répétés (défault) ou les aficher séparément.
-	 *                               Valeurs: 0, '' ou string afficher séparément les événement répétés
-	 *                                        une integer supérieur 'a 0 groupe les événements avec le id_evenement_source indiqué.
+	 *        	Les options :
+	 *        	id_evenement_source : Grouper les événements répétés (défault) ou les aficher séparément.
+	 *        	Valeurs: 0, '' ou string afficher séparément les événement répétés
+	 *        	une integer supérieur 'a 0 groupe les événements avec le id_evenement_source indiqué.
 	 * @return array Environnement du formulaire.
 	 */
 	function formulaires_reservation_charger_dist($id = array(), $id_article = '', $retour = '', $options = array()) {
-
 		include_spip('inc/config');
 		include_spip('formulaires/selecteur/generique_fonctions');
 
@@ -41,20 +41,20 @@ if (!defined("_ECRIRE_INC_VERSION"))
 		$valeurs = array();
 
 		// On obtient les options.
-		if(!is_array($options)) {
+		if (!is_array($options)) {
 			$options = explode(',', $options);
-			foreach($options AS $option) {
+			foreach ($options as $option) {
 				list($variable, $valeur) = explode(':', $option);
 				$$variable = $valeurs[$variable] = $valeur;
 			}
 		}
 		else {
-			foreach ($options AS $variable => $valeur) {
+			foreach ($options as $variable => $valeur) {
 				$$variable = $valeurs[$variable] = $valeur;
 			}
 		}
 
-		if(isset($id_evenement_source)) {
+		if (isset($id_evenement_source)) {
 			if ($id_evenement_source == 0) {
 				$id_evenement_source = false;
 			}
@@ -62,7 +62,6 @@ if (!defined("_ECRIRE_INC_VERSION"))
 		else {
 			$id_evenement_source = 0;
 		}
-
 
 		if (intval($GLOBALS['visiteur_session'])) {
 			$session = $GLOBALS['visiteur_session'];
@@ -95,13 +94,11 @@ if (!defined("_ECRIRE_INC_VERSION"))
 
 			// Si filtré par événement/s
 			if ($id) {
-				if (is_array($id)){
+				if (is_array($id)) {
 					$id = implode(',', $id);
 				}
 				if ($id_evenement_source) {
-					$sql = sql_select('id_evenement_source,id_evenement',
-							'spip_evenements',
-							'id_evenement IN (' . $id . ')');
+					$sql = sql_select('id_evenement_source,id_evenement', 'spip_evenements', 'id_evenement IN (' . $id . ')');
 
 					$id = array();
 					while ($row = sql_fetch($sql)) {
@@ -150,7 +147,6 @@ if (!defined("_ECRIRE_INC_VERSION"))
 		$valeurs['id_evenement'] = $id;
 		$valeurs['id_evenement_source'] = $id_evenement_source;
 
-
 		$valeurs['id_objet_prix'] = _request('id_objet_prix') ? (is_array(_request('id_objet_prix')) ? _request('id_objet_prix') : array(
 			_request('id_objet_prix')
 		)) : array();
@@ -173,8 +169,12 @@ if (!defined("_ECRIRE_INC_VERSION"))
 			// Auteurs
 			$valeurs['champs_extras_auteurs'] = champs_extras_objet(table_objet_sql('auteur'));
 			foreach ($valeurs['champs_extras_auteurs'] as $key => $value) {
-				$valeurs[$value['options']['nom']] = $session[$value['options']['nom']];
-				$valeurs['champs_extras_auteurs'][$key]['options']['label'] = extraire_multi($value['options']['label']);
+				if (!$session[$value['options']['nom']] &&
+						$value['options']['obligatoire'] == 'on') {
+							$valeurs['modifier_donnees_auteur'] = array('1');
+						}
+						$valeurs[$value['options']['nom']] = $session[$value['options']['nom']];
+						$valeurs['champs_extras_auteurs'][$key]['options']['label'] = extraire_multi($value['options']['label']);
 			}
 
 			// Réservations
@@ -182,6 +182,7 @@ if (!defined("_ECRIRE_INC_VERSION"))
 			foreach ($valeurs['champs_extras_reservations'] as $key => $value) {
 				$valeurs[$value['options']['nom']] = $session[$value['options']['nom']];
 				$valeurs['champs_extras_reservations'][$key]['options']['label'] = extraire_multi($value['options']['label']);
+
 			}
 		}
 
@@ -190,6 +191,7 @@ if (!defined("_ECRIRE_INC_VERSION"))
 		if ($id_auteur) {
 			$valeurs['_hidden'] .= '<input type="hidden" name="id_auteur" value="' . $valeurs['id_auteur'] . '"/>';
 		}
+
 		if ($enregistrement_inscrit_obligatoire)
 			$valeurs['_hidden'] .= '<input type="hidden" name="enregistrer[]" value="1"/>';
 			return $valeurs;
@@ -199,16 +201,16 @@ if (!defined("_ECRIRE_INC_VERSION"))
 	 * Vérifications du formulaire réservation
 	 *
 	 * @param array|int|string $id
-	 *         Identifiant de l'événement, soit tableau, soit liste séparé par virgule, soit un numéro.
+	 *        	Identifiant de l'événement, soit tableau, soit liste séparé par virgule, soit un numéro.
 	 * @param array|int|string $id_article
-	 *         Identifiant de l'article, soit tableau, soit liste séparé par virgule, soit un numéro
+	 *        	Identifiant de l'article, soit tableau, soit liste séparé par virgule, soit un numéro
 	 * @param string $retour
-	 *         Url de retour.
+	 *        	Url de retour.
 	 * @param array|string $options
-	 *         Les options :
-	 *         id_evenement_source : Grouper les événements répétés (défault) ou les aficher séparément.
-	 *                               Valeurs: 0, '' ou string afficher séparément les événement répétés
-	 *                                        une integer supérieur 'a 0 groupe les événements avec le id_evenement_source indiqué.
+	 *        	Les options :
+	 *        	id_evenement_source : Grouper les événements répétés (défault) ou les aficher séparément.
+	 *        	Valeurs: 0, '' ou string afficher séparément les événement répétés
+	 *        	une integer supérieur 'a 0 groupe les événements avec le id_evenement_source indiqué.
 	 * @return array Tableau des erreurs.
 	 */
 	function formulaires_reservation_verifier_dist($id = '', $id_article = '', $retour = '', $options = array()) {
@@ -300,16 +302,16 @@ if (!defined("_ECRIRE_INC_VERSION"))
 	 * Traitement du formulaire de réservation.
 	 *
 	 * @param array|int|string $id
-	 *         Identifiant de l'événement, soit tableau, soit liste séparé par virgule, soit un numéro.
+	 *        	Identifiant de l'événement, soit tableau, soit liste séparé par virgule, soit un numéro.
 	 * @param array|int|string $id_article
-	 *         Identifiant de l'article, soit tableau, soit liste séparé par virgule, soit un numéro
+	 *        	Identifiant de l'article, soit tableau, soit liste séparé par virgule, soit un numéro
 	 * @param string $retour
-	 *         Url de retour.
+	 *        	Url de retour.
 	 * @param array|string $options
-	 *         Les options :
-	 *         id_evenement_source : Grouper les événements répétés (défault) ou les aficher séparément.
-	 *                               Valeurs: 0, '' ou string afficher séparément les événement répétés
-	 *                                        une integer supérieur 'a 0 groupe les événements avec le id_evenement_source indiqué.
+	 *        	Les options :
+	 *        	id_evenement_source : Grouper les événements répétés (défault) ou les aficher séparément.
+	 *        	Valeurs: 0, '' ou string afficher séparément les événement répétés
+	 *        	une integer supérieur 'a 0 groupe les événements avec le id_evenement_source indiqué.
 	 * @return array Retours des traitements.
 	 */
 	function formulaires_reservation_traiter_dist($id = '', $id_article = '', $retour = '', $options = array()) {
