@@ -8,36 +8,36 @@
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		
-		[(#SAISIE{choisir_objets,objets,
-			label=<:formidable:cfg_objets_label:>,
-			explication=<:formidable:cfg_objets_explication:>
-			})]
-		[(#SAISIE{case,auteur,
-			li_class='pleine_largeur',
-			label_case=<:formidable:traiter_enregistrement_option_auteur:>,
-			explication=<:formidable:traiter_enregistrement_option_auteur_explication:>
-			})]
-		[(#SAISIE{case,admin_reponses_auteur,
-			li_class='pleine_largeur',
-			label_case=<:formidable:admin_reponses_auteur:>,
-			explication=<:formidable:admin_reponses_auteur_explication:>
-			})]
-		[(#SAISIE{case,activer_pages,
-			li_class='pleine_largeur',
-			label_case=<:formidable:activer_pages_label:>,
-			explication=<:formidable:activer_pages_explication:>
-			})]
-		[(#SAISIE{case,autoriser_admin_restreint,
-			li_class='pleine_largeur',
-			label_case=<:formidable:autoriser_admin_restreint:>,
-			explication=<:formidable:autoriser_admin_restreint_explication:>
-			})]
-		[(#SAISIE{input,classe,
-			label=<:formidable:cfg_analyse_classe_label:>,
-			explication=<:formidable:cfg_analyse_classe_explication:>
-			})]
-
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+			[(#SAISIE{choisir_objets,objets,
+				label=<:formidable:cfg_objets_label:>,
+				explication=<:formidable:cfg_objets_explication:>
+				})]
+			[(#SAISIE{case,auteur,
+				li_class='pleine_largeur',
+				label_case=<:formidable:traiter_enregistrement_option_auteur:>,
+				explication=<:formidable:traiter_enregistrement_option_auteur_explication:>
+				})]
+			[(#SAISIE{case,admin_reponses_auteur,
+				li_class='pleine_largeur',
+				label_case=<:formidable:admin_reponses_auteur:>,
+				explication=<:formidable:admin_reponses_auteur_explication:>
+				})]
+			[(#SAISIE{case,activer_pages,
+				li_class='pleine_largeur',
+				label_case=<:formidable:activer_pages_label:>,
+				explication=<:formidable:activer_pages_explication:>
+				})]
+			[(#SAISIE{case,autoriser_admin_restreint,
+				li_class='pleine_largeur',
+				label_case=<:formidable:autoriser_admin_restreint:>,
+				explication=<:formidable:autoriser_admin_restreint_explication:>
+				})]
+			[(#SAISIE{input,classe,
+				label=<:formidable:cfg_analyse_classe_label:>,
+				explication=<:formidable:cfg_analyse_classe_explication:>
+				})]
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		<input type="hidden" name="_meta_casier" value="formidable/analyse" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>
