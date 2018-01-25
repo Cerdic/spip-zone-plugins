@@ -1,97 +1,156 @@
 [(#REM)
 
-	Metas plus: génère les métas pour Dublin Core, Open Graph et Twitter.
+	Metas plus : ce squelette génère les métas pour Dublin Core, Open Graph et Twitter.
 
-	Ce squelette est inclus automatiquement dans le <head>.
-	Il tente de récupèrer automatiquement les informations des pages.
+	Il est inclus automatiquement dans le <head>,
+	et récupère au mieux les informations des pages.
 
-	Pour des variantes plus complètes spécifiques à certaines pages, créer un fichier inclure/metasplus/{page}.html
-	Les variantes peuvent inclure le présent squelette en renseignant certains paramètres.
-	Les paramètres doivent être en format simple texte - HTML sans tags |supprimer_tags|textebrut
+	Si certaines pages nécessitent des infos plus pertinentes que celles générées par défaut, créer une variante inclure/metasplus/{page}.html
+	Les variantes peuvent éventuellement inclure le présent squelette en transmettant les paramètres à modifier.
 
-	Format des images :
-	- Twitter  : minimum 280 x 150px, max 1 Mo.
-	- Facebook : minimum 600 x 315px, recommandé > 1200 x 630px, max 5 Mo.
-	             ratio 1.91:1 au max, plusieurs images possibles.
+	Précisions :
+		- Sur une page d'objet, on met og-type = article par défaut
+		- Sur une page lambda, on omet volontairement le titre et la description puisqu'on ne les connait pas, twitter et facebook se rabattent sur les metas <title> et <description>.
 
-	Paramètres:
-	** obligatoires
-	* conseillés
+	Format des images : https://goo.gl/L4StmD
+		- Twitter  : taille min 440 x 220
+		             taille recommandée 506 x 253
+		             taille max 1024 x 512
+		             poids max 5 Mo
+		             ratio 2:1
+		- Facebook : pas de taille min
+		             taille recommandée > 600 x 315 ou 1200 x 630 (hidpi)
+		             poids max 8 Mo
+		             ratio 1.91:1
 
-	- objet
-	- id_objet
-	- titre :      titre
-	- lang :       langue en format iso. ex fr
-	- territoire : permet de renseigner le duet langue_territoire, ex. UK
-		             si rien n'est renseigné, on tente un lang_LANG
-	- desc :       description
-	- auteur :     les auteurs
-	- date :       la date en format Y-m-d
-	- url :        URL de la ressource
-	- logo :       image de la ressource (URL) - doit faire au minimum 200x200px et moins d'un 1 Mo
-	- og-type :    (open graph) type de la ressource : article, website, profile, book....
+	Paramètres :
+		- titre :      Titre
+		- lang :       Langue au format iso. ex. fr
+		- territoire : Permet de renseigner le duet langue_territoire, ex. UK
+			             Si rien n'est renseigné, on tente un lang_LANG
+		- desc :       Description
+		- auteurs :    Un ou plusieurs auteurs séparés par des virgules
+		- date :       Date de publication au format Y-m-d
+		- maj :        Date de mise à jour au format Y-m-d
+		- url :        URL de la ressource
+		- logo :       URL de l'image principale de la ressource
+		- og-type :    (open graph) Type de la ressource : article, profile, book, etc.
+
+]
+
+
+[(#REM)
+
+	=====================
+	0. Variables diverses
+	=====================
+
+]
+#SET{dimensions, #ARRAY{
+	opengraph, #ARRAY{
+		largeur, 1200,
+		hauteur, 630,
+	},
+	twitter, #ARRAY{
+		largeur, 506,
+		hauteur, 253,
+	}
+}}
+
+
+
+[(#REM)
+
+	========================================
+	1. Récupérer automatiquement les valeurs
+	========================================
 
 ]
 
 [(#REM)
 
-	=============================
-	1. Récupérer les informations
-	=============================
+	Cas 1 : Page d'un objet éditorial
 
 ]
-
-[(#REM) Cas 1 : Page d'un objet éditorial ]
-<BOUCLE_objet(CONDITION){si #ENV{objet}|et{#ENV{id_objet}}}>
+<BOUCLE_objet(CONDITION) {si #ENV{objet}|et{#ENV{id_objet}}}>
 #SET{og-type, article}
-#SET{titre,   #INFO_TITRE{#ENV{objet}, #ENV{id_objet}}}
+#SET{titre,   #INFO_TITRE{#ENV{objet}, #ENV{id_objet}}|concat{" – ",#NOM_SITE_SPIP}}
 #SET{desc,    #INFO_INTRODUCTION{#ENV{objet}, #ENV{id_objet}}}
 #SET{url,     #INFO_URL{#ENV{objet}, #ENV{id_objet}}}
 #SET{date,    #INFO_DATE{#ENV{objet}, #ENV{id_objet}}}
+#SET{maj,     #INFO_MAJ{#ENV{objet}, #ENV{id_objet}}}
 #SET{lang,    #INFO_LANG{#ENV{objet}, #ENV{id_objet}}}
-#SET{logo,    #ENV{id_objet}|quete_logo_objet{#ENV{objet},on}|table_valeur{chemin}}
 #SET{auteurs, #ARRAY}
-<BOUCLE_auteurs(AUTEURS){objet}{id_objet}>
+<BOUCLE_set_auteurs(AUTEURS) {objet} {id_objet} {par nom} {si #ENV{auteurs}|non}>
 #SET{auteurs, #GET{auteurs}|push{#NOM}}
-</BOUCLE_auteurs>
+</BOUCLE_set_auteurs>
+#SET{mots, #ARRAY}
+<BOUCLE_set_mots(MOTS) {objet} {id_objet} {par titre}>
+#SET{mots, #GET{mots}|push{#TITRE}|supprimer_tags|textebrut}
+</BOUCLE_set_mots>
+[(#REM) Tableau des images avec le logo en premier ]
+#SET{logo,    #ENV{logo}|extraire_attribut{src}|sinon{#ENV{id_objet}|quete_logo_objet{#ENV{objet}, on}|table_valeur{chemin}}}
+#SET{images,  #LISTE{#ARRAY{
+	src, #GET{logo},
+	alt, '',
+	type, #VAL{#GET{logo}|mime_content_type},
+}}}
+<BOUCLE_set_images(DOCUMENTS)
+	{objet} {id_objet}
+	{media = image}
+	{fichier != #GET{images/0/src}|replace{#VAL{_NOM_PERMANENTS_ACCESSIBLES}|constant}}
+	{!par largeur}
+	{0,#GET{logo}|?{2,3}}
+>
+#SET{images,#GET{images}|push{#ARRAY{
+	src,  #FICHIER,
+	alt,  #VAL{#TITRE|sinon{#DESCRIPTIF}|supprimer_tags|textebrut},
+	type, #MIME_TYPE,
+}}}
+</BOUCLE_set_images>
 </BOUCLE_objet>
 
-[(#REM) Cas 2 : Page lambda ]
+[(#REM)
+
+	Cas 2 : Page lambda
+
+]
 #SET{og-type, website}
-#SET{titre,   #NOM_SITE_SPIP}
-#SET{desc,    #SLOGAN_SITE_SPIP}
+#SET{titre,   ''}
+#SET{desc,    ''}
 #SET{url,     #URL_PAGE{#ENV{type-page, #ENV{page}}}}
 #SET{date,    #ENV{date}}
 #SET{lang,    #LANG}
-#SET{logo,    #LOGO_SITE_SPIP**}
 #SET{auteurs, #ARRAY}
+#SET{logo,    #ENV{logo}|extraire_attribut{src}|sinon{#LOGO_SITE_SPIP**}}
+#SET{images,  #LISTE{#ARRAY{
+	src, #GET{logo},
+	alt, '',
+	type, #VAL{#GET{logo}|mime_content_type},
+}}}
 <//B_objet>
 
 
 [(#REM)
 
-	=========================
-	2. Normaliser les valeurs
-	=========================
-	On prend les valeurs de l'env en priorité
+	===============================
+	2. Normaliser certaines valeurs
+	===============================
+	On prend en priorité les valeurs transmises dans l'env
+	(pour le logo, obligé de procéder en amont)
 
 ]
 
-#SET{titre,   #ENV{titre, #GET{titre}}|supprimer_tags|textebrut}
-#SET{desc,    #ENV{desc, #GET{desc}}|supprimer_tags|textebrut}
-#SET{url,     #ENV{url, #GET{url}}}
-#SET{date,    #ENV{date, #GET{date}}}
-#SET{lang,    #ENV{lang, #GET{lang}}}
-#SET{locale,  #GET{lang}|concat{
-	_,
-	#VAL{#ENV{territoire}|=={en}|?{uk,#ENV{territoire,#GET{lang}}}|strtoupper}
-}}
-#SET{logo,    #ENV{logo, #GET{logo}}
-	|image_reduire{2400, 1260}
-	|image_recadre{1.91:1, '-', 'focus'}
-	|extraire_attribut{src}}
-#SET{auteur,  #ENV{auteur, #ENV{author, #GET{auteurs}|join{', '}}}|supprimer_tags|textebrut}
-#SET{og-type, #ENV{og-type, #GET{og-type}}}
+#SET{titre,      #ENV{titre, #GET{titre}}|supprimer_tags|textebrut}
+#SET{desc,       #ENV{desc, #GET{desc}}|supprimer_tags|textebrut}
+#SET{url,        #ENV{url, #GET{url}}}
+#SET{date,       #ENV{date, #GET{date}}}
+#SET{maj,        #ENV{maj, #GET{maj}}}
+#SET{lang,       #ENV{lang, #GET{lang}}}
+#SET{territoire, #ENV{territoire}|=={en}|?{uk,#ENV{territoire,#GET{lang}}}|strtoupper}
+#SET{locale,     #GET{lang}|concat{_,#GET{territoire}}}
+#SET{og-type,    #ENV{og-type, #GET{og-type}}}
+#SET{auteurs,    #ENV{auteurs}|?{#ENV{auteurs}|supprimer_tags|textebrut|explode{','},#GET{auteurs}}}
 
 
 [(#REM)
@@ -106,66 +165,98 @@
 
 
 	Dublin Core
+
 	http://dublincore.org
 
 
-][(#CONFIG{metasplus/dublincore}|non)
+]
+<BOUCLE_dublincore(CONDITION) {si #CONFIG{metasplus/dublincore}|non}>
 <!-- Dublin Core -->
 <link rel="schema.DC" href="https://purl.org/dc/elements/1.1/" />
 <link rel="schema.DCTERMS" href="https://purl.org/dc/terms/" />
 <meta name="DC.Format" content="text/html" />
 <meta name="dc.Type" content="text" />
-[<meta name="dc.Title" lang="#GET{lang}" content="(#GET{titre}|attribut_html)" />]
 [<meta name="dc.Language" scheme="rfc1766" content="(#GET{lang})" />]
+[<meta name="dc.Title" lang="#GET{lang}" content="(#GET{titre}|attribut_html)" />]
 [<meta name="dc.Description" lang="#GET{lang}" content="(#GET{desc}|couper{200,'…'}|attribut_html)" />]
-[<meta name="dc.Creator" content="(#GET{auteur}|attribut_html)" />]
+[<meta name="dc.Creator" content="(#GET{auteurs}|join{', '}|attribut_html)" />]
 [<meta name="dc.Date" scheme="DCTERMS.W3CDTF" content="(#GET{date}|affdate{Y-m-d})" />]
 [<meta name="DC.Identifier" scheme="URI" content="(#GET{url}|url_absolue)" />]
 [<meta name="dc.Publisher" content="(#NOM_SITE_SPIP|attribut_html)" />]
-]
+</BOUCLE_dublincore>
 [(#REM)
 
 
 	Open Graph
+
 	http://ogp.me
 	https://developers.facebook.com/docs/sharing/opengraph/object-properties
+	https://developers.facebook.com/docs/sharing/best-practices#images
 	https://developers.facebook.com/tools/debug/
 
 
-][(#CONFIG{metasplus/opengraph}|non)
+]
+<BOUCLE_opengraph(CONDITION) {si #CONFIG{metasplus/opengraph}|non}>
 <!-- Open Graph -->
+<meta property="og:rich_attachment" content="true" />
+[<meta property="og:site_name" content="(#NOM_SITE_SPIP|attribut_html)" />]
 [<meta property="og:type" content="(#GET{og-type}|attribut_html)" />]
 [<meta property="og:title" content="(#GET{titre}|attribut_html)" />]
 [<meta property="og:locale" content="(#GET{locale})" />]
 [<meta property="og:url" content="(#GET{url}|url_absolue)" />]
 [<meta property="og:description" content="(#GET{desc}|couper{200,'…'}|attribut_html)" />]
-[<meta property="og:image" content="(#GET{logo}|url_absolue)" />]
-[<meta property="og:image:width" content="(#GET{logo}|largeur)" />]
-[<meta property="og:image:height" content="(#GET{logo}|hauteur)" />]
-[<meta property="og:site_name" content="(#NOM_SITE_SPIP|attribut_html)" />]
-[(#GET{og-type}|=={article}|oui)
+<BOUCLE_images_opengraph(DATA) {source table, #GET{images}}>
+#SET{ratio, #GET{dimensions/opengraph/largeur}|div{#GET{dimensions/opengraph/hauteur}}|concat{:1}}
+#SET{src, #VALEUR{src}
+	|image_recadre{#GET{ratio},-,focus}
+	|image_reduire{#GET{dimensions/opengraph/largeur},#GET{dimensions/opengraph/hauteur}}
+	|extraire_attribut{src}}
+[<meta property="og:image" content="(#GET{src}|url_absolue)" />]
+[<meta property="og:image:width" content="(#GET{src}|largeur|intval)" />]
+[<meta property="og:image:height" content="(#GET{src}|hauteur|intval)" />]
+[<meta property="og:image:type" content="(#VALEUR{type})" />]
+[<meta property="og:image:alt" content="(#VALEUR{alt}|attribut_html)" />]
+</BOUCLE_images_opengraph>
+<BOUCLE_article_opengraph(CONDITION) {si #GET{og-type}|=={article}}>
 [<meta property="article:published_time" content="(#GET{date}|affdate{Y-m-d})" />]
-[<meta property="article:author" content="(#GET{auteur}|attribut_html)" />]
-]
+[<meta property="article:modified_time" content="(#GET{maj}|affdate{Y-m-d})" />]
+<BOUCLE_auteurs_opengraph(DATA){source table, #GET{auteurs}}>
+[<meta property="article:author" content="(#VALEUR|attribut_html)" />]
+</BOUCLE_auteurs_opengraph>
+<BOUCLE_mots_opengraph(DATA) {source table, #GET{mots}}>
+[<meta property="article:tag" content="(#VALEUR|attribut_html)" />]
+</BOUCLE_mots_opengraph>
+</BOUCLE_article_opengraph>
 [(#REM) Si plugin facebook, on envoie la méta fb:app_id ]
 [<meta property="fb:app_id" content="(#CONFIG{facebook/cle})" />]
-][(#REM)
+</BOUCLE_opengraph>
+[(#REM)
 
 
 	Twitter Card
+
 	https://dev.twitter.com/cards/types/summary
 	https://dev.twitter.com/cards/types/summary-large-image
 	https://cards-dev.twitter.com/validator
 
 
-][(#CONFIG{metasplus/twitter}|non)
+]
+<BOUCLE_twitter(CONDITION) {si #CONFIG{metasplus/twitter}|non}>
 <!-- Twitter Card -->
 <meta name="twitter:card" content="[(#GET{logo}|?{summary_large_image,summary})]" />
 [<meta name="twitter:title" content="(#GET{titre}|attribut_html)" />]
 [<meta name="twitter:description" content="(#GET{desc}|couper{200,'…'}|attribut_html)" />]
-[<meta name="twitter:image" content="(#GET{logo}|url_absolue)" />]
 <meta name="twitter:dnt" content="on" />
 [<meta name="twitter:url" content="(#GET{url}|url_absolue)" />]
-]
+<BOUCLE_images_twitter(DATA) {source table, #GET{images}} {0,1}>
+#SET{ratio, #GET{dimensions/twitter/largeur}|div{#GET{dimensions/twitter/hauteur}}|concat{:1}}
+#SET{src, #VALEUR{src}
+	|image_recadre{#GET{ratio},-,focus}
+	|image_reduire{#GET{dimensions/twitter/largeur},#GET{dimensions/twitter/hauteur}}
+	|extraire_attribut{src}}
+[<meta name="twitter:image" content="(#GET{src}|url_absolue)" />]
+[<meta property="twitter:image:alt" content="(#VALEUR{alt}|attribut_html)" />]
+</BOUCLE_images_twitter>
+</BOUCLE_twitter>
 
 #FILTRE{trim}

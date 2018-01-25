@@ -45,6 +45,7 @@ function metasplus_generer_head() {
 	// Les pages à exclure éventuelles
 	$pages_exclues = (defined('_METASPLUS_PAGES_EXCLUES') and _METASPLUS_PAGES_EXCLUES) ? explode(',', _METASPLUS_PAGES_EXCLUES) : array();
 	$page_ok = !in_array($page, $pages_exclues);
+
 	// Go go go
 	if ($config_ok // au moins un protocole est activé
 		and $page_ok // la page n'est pas exclue
