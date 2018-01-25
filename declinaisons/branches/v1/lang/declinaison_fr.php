@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'declinaisons_titre' => 'Déclinaisons Prix',
 
 	// E
-	'explication_formulaire_titre_complet' => 'Le titre complet contient le titre de l\'objet suivit du titre de la déclinaions. Si désactive, seul le titre de la déclinaison es montré',
+	'explication_formulaire_titre_complet' => 'Le titre complet contient le titre de l’objet suivit du titre de la déclinaions. Si désactive, seul le titre de la déclinaison es montré',
 
 	// I
 	'icone_creer_declinaison' => 'Créer une déclinaison',
