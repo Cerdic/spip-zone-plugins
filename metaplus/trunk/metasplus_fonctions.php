@@ -25,15 +25,24 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function metasplus_generer_head() {
 
-	// Récupérer le contexte pour connaître la page et l'objet
+	// Retrouver la page et l'objet courant d'après le contexte
+	// Snif, on n'a pas la certitude d'avoir toujours la clé 'page', ça dépend du type d'url configuré :(
 	$contexte = $GLOBALS['contexte'];
-	$page = (isset($contexte['type-page']) ? $contexte['type-page'] : (isset($contexte['page']) ? $contexte['page'] : 'sommaire'));
-	// Si c'est un objet éditorial, il y a id_patate dans le contexte
-	include_spip('base/objets');
-	$id_table_objet = id_table_objet($page);
-	if (isset($contexte[$id_table_objet])) {
-		$objet    = $page;
-		$id_objet = intval($contexte[$id_table_objet]);
+	// On a direct la page : super
+	if (!empty($contexte['page'])) {
+		$page = $contexte['page'];
+	// sinon type-page (z-core) : re-super
+	} elseif (!empty($contexte['type-page'])) {
+		$page = $contexte['type-page'];
+	// sinon un id_patate : on bricole comme on peut
+	} elseif ($match = preg_grep('/^id_(\w+)/', array_keys($contexte))) {
+		include_spip('base/objets');
+		$page = $objet = objet_type(end($match)); // S'il y a plusieurs id_patate, on suppose que le dernier est celui de l'objet de la page... mouais
+		$id_objet = $contexte[end($match)];
+		$contexte['objet'] = $objet;
+		$contexte['id_objet'] = $id_objet;
+	} else {
+		$page = '';
 	}
 
 	// Les protocoles à ne pas insérer éventuellement
@@ -58,8 +67,6 @@ function metasplus_generer_head() {
 			$fond = $fond_variante;
 		} elseif (find_in_path($fond_defaut.'.html')) {
 			$fond = $fond_defaut;
-			$contexte['objet'] = $objet;
-			$contexte['id_objet'] = $id_objet;
 		}
 
 		// Si le squelette n'est pas vide : go go go
