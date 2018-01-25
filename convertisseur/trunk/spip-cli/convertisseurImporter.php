@@ -344,6 +344,9 @@ class fichiersImporter extends Command {
 									if(!$id_document){
 										$id_document = sql_insertq("spip_documents", $document_a_inserer);
 										$progress->setMessage("Création du document " . $d['titre'] . " (" . $d['fichier'] .")", 'docs');
+									}else{
+										unset($document_a_inserer["id_document"]);
+										sql_updateq("spip_documents", $document_a_inserer, "id_document=$id_document") ;
 									}
 									
 									if($id_document AND !sql_getfetsel("id_document", "spip_documents_liens", "id_document=$id_document and id_objet=$id_article and objet='article'"))

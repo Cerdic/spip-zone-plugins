@@ -681,5 +681,16 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 	
 	sql_updateq("spip_articles", $r, "id_article=" . $id_article);
 	
+	// prevenir les plugins.
+	pipeline('post_edition',
+		array(
+			'args' => array(
+				'table' => 'spip_articles',
+				'id_objet' => $id_article
+			),
+			'data' => $r
+		)
+	);
+	
 	return $id_article;
 }
