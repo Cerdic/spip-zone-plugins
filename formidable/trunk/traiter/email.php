@@ -95,7 +95,10 @@ function traiter_email_dist($args, $retours) {
 
 		// On parcourt les champs pour générer le tableau des valeurs
 		$valeurs = array();
+		$valeurs_libellees = array();
 		$saisies_fichiers = saisies_lister_avec_type($saisies, 'fichiers');
+		$saisies_par_nom = saisies_lister_par_nom($saisies);
+
 		// On utilise pas formulaires_formidable_fichiers,
 		// car celui-ci retourne les saisies fichiers du formulaire dans la base… or, on sait-jamais,
 		// il peut y avoir eu une modification entre le moment où l'utilisateur a vu le formulaire et maintenant
@@ -112,6 +115,12 @@ function traiter_email_dist($args, $retours) {
 				);
 			} else {
 				$valeurs[$champ] = _request($champ);
+				if(isset($saisies_par_nom[$champ]['options']['datas'])) {
+					$valeurs_champ = saisies_chaine2tableau($saisies_par_nom[$champ]['options']['datas']);
+					$valeurs_libellees[$champ] = $valeurs_champ[_request($champ)];
+				} else {
+					$valeurs_libellees[$champ] = _request($champ);
+				}
 			}
 		}
 
@@ -124,7 +133,7 @@ function traiter_email_dist($args, $retours) {
 					$a_remplacer[$cle] = trim($val, '@');
 				}
 				$a_remplacer = array_flip($a_remplacer);
-				$a_remplacer = array_intersect_key($valeurs, $a_remplacer);
+				$a_remplacer = array_intersect_key($valeurs_libellees, $a_remplacer);
 				$a_remplacer = array_merge($a_remplacer, array('nom_site_spip' => $nom_site_spip));
 			}
 			$nom_envoyeur = trim(_L($options['champ_nom'], $a_remplacer));
@@ -142,7 +151,7 @@ function traiter_email_dist($args, $retours) {
 					$a_remplacer[$cle] = trim($val, '@');
 				}
 				$a_remplacer = array_flip($a_remplacer);
-				$a_remplacer = array_intersect_key($valeurs, $a_remplacer);
+				$a_remplacer = array_intersect_key($valeurs_libellees, $a_remplacer);
 				$a_remplacer = array_merge($a_remplacer, array('nom_site_spip' => $nom_site_spip));
 			}
 			$sujet = trim(_L($options['champ_sujet'], $a_remplacer));
@@ -228,7 +237,7 @@ function traiter_email_dist($args, $retours) {
 						$a_remplacer[$cle] = trim($val, '@');
 					}
 					$a_remplacer = array_flip($a_remplacer);
-					$a_remplacer = array_intersect_key($valeurs, $a_remplacer);
+					$a_remplacer = array_intersect_key($valeurs_libellees, $a_remplacer);
 					$a_remplacer = array_merge($a_remplacer, array('nom_site_spip' => $nom_site_spip));
 				}
 				$sujet_accuse = trim(_L($options['sujet_accuse'], $a_remplacer));
