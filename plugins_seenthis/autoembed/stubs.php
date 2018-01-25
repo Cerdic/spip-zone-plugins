@@ -1485,9 +1485,10 @@ $AutoEmbed_stubs = array(
     'title' => 'MixCloud',
     'website' => 'http://www.mixcloud.com',
     'url-match' => '(http:\/\/www\.mixcloud\.com\/.*)',
-    'embed-width' => '200',
-    'embed-height' => '200',
+    'embed-width' => '100%',
+    'embed-height' => '60',
     'embed-src' => 'http://www.mixcloud.com/media/swf/player/mixcloudLoader.swf?feed=$2',
+    'iframe-player' => 'https://www.mixcloud.com/widget/iframe/?hide_cover=1&mini=1&feed=$2'
   ),
  array(
     'title' => 'TrailerSpy',
