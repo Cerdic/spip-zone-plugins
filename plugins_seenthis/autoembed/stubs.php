@@ -35,7 +35,7 @@
   ),
 */
 $AutoEmbed_stubs = array(
-  array(
+ array(
     'title' => 'YouTube',
     'website' => 'https://www.youtube.com',
     'url-match' => 'http://(?:video\.google\.(?:com|com\.au|co\.uk|de|es|fr|it|nl|pl|ca|cn)/(?:[^"]*?))?(?:(?:www|au|br|ca|es|fr|de|hk|ie|in|il|it|jp|kr|mx|nl|nz|pl|ru|tw|uk)\.)?youtube\.com(?:[^"]*?)?(?:&|&amp;|/|\?|;|\%3F|\%2F)(?:video_id=|v(?:/|=|\%3D|\%2F))([0-9a-z-_]{11})',
@@ -67,17 +67,17 @@ $AutoEmbed_stubs = array(
     'title' => 'Dailymotion',
     'website' => 'http://www.dailymotion.com',
     'url-match' => 'http://(?:www\.)?dailymotion\.(?:com|alice\.it)/(?:(?:[^"]*?)?video|swf)/([a-z0-9]{1,18})',
-    'embed-src' => 'http://www.dailymotion.com/swf/$2&related=0',
+    'embed-src' => 'https://www.dailymotion.com/swf/$2&related=0',
     'embed-width' => '480',
     'embed-height' => '270',
-//    'image-src' => 'http://www.dailymotion.com/thumbnail/160x120/video/$2',
+    'iframe-player' => 'https://www.dailymotion.com/embed/video/$2',
   ),
   array(
     'title' => 'Google Video',
     'website' => 'http://video.google.com',
     'url-match' => 'http://video\.google\.(com|com\.au|co\.uk|de|es|fr|it|nl|pl|ca|cn)/(?:videoplay|url|googleplayer\.swf)\?(?:[^"]*?)?docid=([0-9a-z-_]{1,20})',
     'embed-src' => 'http://video.google.$2/googleplayer.swf?docId=$3',
-    'embed-width' => '480',
+    'embed-width' => 480,
     'embed-height' => '270',
   ),
   array(
@@ -85,8 +85,8 @@ $AutoEmbed_stubs = array(
     'website' => 'http://www.megavideo.com',
     'url-match' => 'http://(?:www\.)?megavideo\.com/(?:\?(?:[^"]*?)?v=|v/)([0-9a-z]{8})',
     'embed-src' => 'http://www.megavideo.com/v/$2.0.0',
-    'embed-width' => '480',
-    'embed-height' => '270',
+    'embed-width' => '440',
+    'embed-height' => '359',
   ),
   array(
     'title' => 'MetaCafe',
@@ -111,7 +111,7 @@ $AutoEmbed_stubs = array(
     'embed-src' => 'http://vimeo.com/moogaloop.swf?clip_id=$2&server=vimeo.com&fullscreen=1&show_title=1&show_byline=1&show_portrait=0&color=01AAEA',
     'embed-width' => '480',
     'embed-height' => '270',
-    'iframe-player' => 'http://player.vimeo.com/video/$2',
+    'iframe-player' => 'https://player.vimeo.com/video/$2',
   ),
   array(
     'title' => 'Official.fm',
@@ -355,15 +355,15 @@ $AutoEmbed_stubs = array(
     'url-match' => 'http://(?:www\.)?thedailyshow\.com/(?:watch|full\-episodes)',    
     'fetch-match' => '<meta property="og:video" content="([^\"]*)"/>',
     'iframe-player' => '$2',
-    'embed-width' => '360',
-    'embed-height' => '205',
+    'embed-width' => '480',
+    'embed-height' => '270',
   ),
   array(
     'title' => 'ColbertNation',
     'website' => 'http://www.colbertnation.com',
     'url-match' => 'http:\/\/(?:www\.)?colbertnation\.com\/the-colbert-report-videos\/([0-9]*)\/',
     'embed-src' => 'http://media.mtvnservices.com/mgid:cms:item:comedycentral.com:$2',
-    'embed-width' => '360',
+    'embed-width' => '480',
     'embed-height' => '270',
   ),
   array(
