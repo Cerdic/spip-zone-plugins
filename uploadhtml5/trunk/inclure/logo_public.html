@@ -7,7 +7,7 @@ id_objet = l'id de l'objet du logo
 
 Exemple d'inclusion : 
 ```
-<INCLURE{fond=inclure/logo_public, objet=produit, id_objet=#ID_PRODUIT, ajax=logo_public} />
+<INCLURE{fond=inclure/logo_public, objet=produit, titre=Logo de l'article, id_objet=#ID_PRODUIT, ajax=logo_public} />
 ```
 ]
 
@@ -18,7 +18,7 @@ Exemple d'inclusion :
 	#FORMULAIRE_UPLOADHTML5{#ENV{objet},#ENV{id_objet}, auto, logo_public, #ARRAY{logo, oui}}
 </div>]
 
-[<h3>Affiche actuelle</h3>
+[<h3>#ENV{titre, Affiche actuelle}</h3>
 <a href="[(#GET{logo}|extraire_attribut{src})]" class="mediabox">
 	(#GET{logo}|image_reduire{450}|inserer_attribut{class, thumbnail})
 </a>
