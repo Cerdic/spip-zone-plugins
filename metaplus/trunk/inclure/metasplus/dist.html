@@ -1,6 +1,6 @@
 [(#REM)
 
-	Metas plus : ce squelette génère les métas pour Dublin Core, Open Graph et Twitter.
+	Métas+ : ce squelette génère les métas pour Dublin Core, Open Graph et Twitter.
 
 	Il est inclus automatiquement dans le <head>,
 	et récupère au mieux les informations des pages.
@@ -35,6 +35,7 @@
 		- url :        URL de la ressource
 		- logo :       URL de l'image principale de la ressource
 		- og-type :    (open graph) Type de la ressource : article, profile, book, etc.
+		- dc-type :    (dublin core) Type de la ressource : Text, Event, PhysicalObject, etc.
 
 ]
 
@@ -75,6 +76,7 @@
 ]
 <BOUCLE_objet(CONDITION) {si #ENV{objet}|et{#ENV{id_objet}}}>
 #SET{og-type, article}
+#SET{dc-type, Text}
 #SET{titre,   #INFO_TITRE{#ENV{objet}, #ENV{id_objet}}|concat{" – ",#NOM_SITE_SPIP}}
 #SET{desc,    #INFO_INTRODUCTION{#ENV{objet}, #ENV{id_objet}}|sinon{#INFO_DESCRIPTIF{#ENV{objet}, #ENV{id_objet}}}}
 #SET{url,     #INFO_URL{#ENV{objet}, #ENV{id_objet}}}
@@ -117,13 +119,14 @@
 
 ]
 #SET{og-type, website}
+#SET{dc-type, Text}
 #SET{titre,   ''}
 #SET{desc,    ''}
 #SET{url,     #URL_PAGE{#ENV{type-page, #ENV{page}}}}
 #SET{date,    #ENV{date}}
 #SET{lang,    #LANG}
 #SET{auteurs, #ARRAY}
-#SET{logo,    #ENV{logo}|extraire_attribut{src}|sinon{#LOGO_SITE_SPIP**}}
+#SET{logo,    #ENV{logo}|sinon{#LOGO_SITE_SPIP}|extraire_attribut{src}|supprimer_timestamp}
 #SET{images,  #LISTE{#ARRAY{
 	src, #GET{logo},
 	alt, '',
@@ -151,6 +154,7 @@
 #SET{territoire, #ENV{territoire}|=={en}|?{uk,#ENV{territoire,#GET{lang}}}|strtoupper}
 #SET{locale,     #GET{lang}|concat{_,#GET{territoire}}}
 #SET{og-type,    #ENV{og-type, #GET{og-type}}}
+#SET{dc-type,    #ENV{dc-type, #GET{dc-type}}}
 #SET{auteurs,    #ENV{auteurs}|?{#ENV{auteurs}|supprimer_tags|textebrut|explode{','},#GET{auteurs}}}
 
 
@@ -176,14 +180,21 @@
 <link rel="schema.DC" href="https://purl.org/dc/elements/1.1/" />
 <link rel="schema.DCTERMS" href="https://purl.org/dc/terms/" />
 <meta name="DC.Format" content="text/html" />
-<meta name="dc.Type" content="text" />
-[<meta name="dc.Language" scheme="rfc1766" content="(#GET{lang})" />]
-[<meta name="dc.Title" lang="#GET{lang}" content="(#GET{titre}|attribut_html)" />]
-[<meta name="dc.Description" lang="#GET{lang}" content="(#GET{desc}|couper{#GET{couper},'…'}|attribut_html)" />]
-[<meta name="dc.Creator" content="(#GET{auteurs}|join{', '}|attribut_html)" />]
-[<meta name="dc.Date" scheme="DCTERMS.W3CDTF" content="(#GET{date}|affdate{Y-m-d})" />]
+[<meta name="DC.Type" content="(#GET{dc-type})" />]
+[<meta name="DC.Language" scheme="rfc1766" content="(#GET{lang})" />]
+[<meta name="DC.Title" lang="#GET{lang}" content="(#GET{titre}|attribut_html)" />]
+[<meta name="DC.Description.Abstract" lang="#GET{lang}" content="(#GET{desc}|couper{#GET{couper},'…'}|attribut_html)" />]
+[<meta name="DC.Date" scheme="DCTERMS.W3CDTF" content="(#GET{date}|affdate{Y-m-d})" />]
+[<meta name="DC.Date.Modified" scheme="DCTERMS.W3CDTF" content="(#GET{maj}|affdate{Y-m-d})" />]
 [<meta name="DC.Identifier" scheme="URI" content="(#GET{url}|url_absolue)" />]
-[<meta name="dc.Publisher" content="(#NOM_SITE_SPIP|attribut_html)" />]
+[<meta name="DC.Publisher" content="(#NOM_SITE_SPIP|attribut_html)" />]
+[<meta name="DC.Source" scheme="URI" content="(#URL_SITE_SPIP)" />]
+<BOUCLE_auteurs_dublincore(DATA){source table, #GET{auteurs}}>
+[<meta name="DC.Creator" content="(#VALEUR|attribut_html)" />]
+</BOUCLE_auteurs_dublincore>
+<BOUCLE_mots_dublincore(DATA) {source table, #GET{mots}}>
+[<meta name="DC.Subject" content="(#VALEUR|attribut_html)" />]
+</BOUCLE_mots_dublincore>
 </BOUCLE_dublincore>
 [(#REM)
 
