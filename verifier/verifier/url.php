@@ -139,7 +139,7 @@ function verifier_url_complet($url, $type_protocole, $protocole) {
 	// PATH (optional)
 	$urlregex .= '(\/([a-z0-9+\$_%,-]\.?)+)*\/?';
 	// GET Query (optional)
-	$urlregex .= '(\?[a-z+&\$_.-][a-z0-9;:@\&%=+\$_.-]*)?';
+	$urlregex .= '(\?[a-z+&\$_.-][a-z0-9;:@\&%=+\$\|_.-]*)?';
 	// ANCHOR (optional)
 	$urlregex .= '(\#[a-z_.-][a-z0-9+\$_.-]*)?\$# i';
 
