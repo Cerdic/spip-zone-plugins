@@ -14,6 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+
 /**
  * Générer le contenu ajouté dans le <head> public
  *
@@ -25,35 +26,18 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function metasplus_generer_head() {
 
-	// Retrouver la page et l'objet courant d'après le contexte
-	// Snif, on n'a pas la certitude d'avoir toujours la clé 'page', ça dépend du type d'url configuré :(
-	$contexte = $GLOBALS['contexte'];
-	// On a direct la page : super
-	if (!empty($contexte['page'])) {
-		$page = $contexte['page'];
-	// sinon type-page (z-core) : re-super
-	} elseif (!empty($contexte['type-page'])) {
-		$page = $contexte['type-page'];
-	// sinon un id_patate : on bricole comme on peut
-	} elseif ($match = preg_grep('/^id_(\w+)/', array_keys($contexte))) {
-		include_spip('base/objets');
-		$page = $objet = objet_type(end($match)); // S'il y a plusieurs id_patate, on suppose que le dernier est celui de l'objet de la page... mouais
-		$id_objet = $contexte[end($match)];
-		$contexte['objet'] = $objet;
-		$contexte['id_objet'] = $id_objet;
-	} else {
-		$page = '';
-	}
+	// Identifier la page actuelle
+	$page = metasplus_identifier_page($contexte, $page_erreur);
 
-	// Les protocoles à ne pas insérer éventuellement
-	// On n'a pas de façon programmatique pour lister les protocoles possibles, donc on met leur nombre total en dur (3)
+	// Vérifier que tous les protocoles ne sont pas désactivés en config
+	// (dans ce cas là, autant désactiver le plugin, mais on ne sait jamais)
 	include_spip('inc/config');
 	$config = lire_config('metasplus');
 	$config_ok = (!$config or count($config) < 3);
 
 	// Les pages à exclure éventuelles
 	$pages_exclues = (defined('_METASPLUS_PAGES_EXCLUES') and _METASPLUS_PAGES_EXCLUES) ? explode(',', _METASPLUS_PAGES_EXCLUES) : array();
-	$page_ok = !in_array($page, $pages_exclues);
+	$page_ok = (!in_array($page, $pages_exclues) and !$page_erreur);
 
 	// Go go go
 	if ($config_ok // au moins un protocole est activé
@@ -75,5 +59,48 @@ function metasplus_generer_head() {
 		}
 
 	}
+}
 
+/**
+ * Identifier la page
+ * 
+ * On retourne 2 choses par référence :
+ * - un contexte (objet et id_objet si c'est la page d'un objet)
+ * - s'il s'agit d'une page d'erreur
+ * 
+ * Il n'est pas recommandé d'utiliser $GLOBALS['contexte], donc on utilise la fonction qui décode l'URL et retourne les bonnes infos :
+ * [0]            => page (le fond)
+ * [1][id_patate] => id si page d'un objet
+ * [1][erreur]    => erreur éventuelle (404)
+ *
+ * @return string la page
+ */
+function metasplus_identifier_page (&$contexte, &$page_erreur) {
+
+	$contexte = array();
+	$decoder_url = charger_fonction('decoder_url', 'urls');
+	$url = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; // [FIXME] The client can set HTTP_HOST and REQUEST_URI to any arbitrary value it wants.
+	$decodage = $decoder_url($url);
+	$page = $decodage[0];
+	$page_erreur = isset($decodage[1]['erreur']) ? true : false;
+
+	// 1) Page retrouvée et pas en erreur
+	if ($page
+		and !$page_erreur
+	) {
+		include_spip('base/objets');
+		$id_table_objet = id_table_objet($page);
+		$id_objet = isset($decodage[1][$id_table_objet]) ? $decodage[1][$id_table_objet] : null;
+		if ($id_objet) {
+			$contexte['objet'] = $page;
+			$contexte['id_objet'] = $id_objet;
+			$contexte[$id_table_objet] = $id_objet; // ça peut servir
+		}
+
+	// 2) Sinon page lambda avec 'page' en query string
+	} elseif (!$page) {
+		$page = _request('page');
+	}
+
+	return $page;
 }
