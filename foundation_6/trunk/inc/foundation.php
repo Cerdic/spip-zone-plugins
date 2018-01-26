@@ -102,7 +102,7 @@ function class_blocs_foundation($nombre_colonnes, $type = '', $total_boucle = nu
 		$class= '';
 		foreach ($nombre_colonnes as $key => $value) {
 			// On va traiter le nombre de colonne avant de créer la class css
-			$calculer_colonnes = true; // Par défaut les colonnes calculée sont désactivées
+			$calculer_colonnes = false;
 			if (strpos($value, '*')) {
 				$calculer_colonnes = true; // L'étoile est détectée, on active les colonnes calculée
 				$value = str_replace('*', '', $value); // Supprimer l'étoile
