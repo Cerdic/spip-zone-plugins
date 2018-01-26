@@ -1,12 +1,12 @@
 <?php
 /**
- * Fonctions utiles au plugin Métas+
+ * Options du plugin Métas+
  *
  * @plugin     Métas+
  * @copyright  2018
  * @author     Tetue, Erational, Tcharlss
  * @licence    GNU/GPL
- * @package    SPIP\Metas+\Pipelines
+ * @package    SPIP\Metas+\Options
  */
 
 // Sécurité
