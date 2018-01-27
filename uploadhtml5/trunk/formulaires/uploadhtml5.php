@@ -23,6 +23,8 @@ function formulaires_uploadhtml5_fichiers($objet, $id_objet, $mode = 'auto', $aj
  *		  maxFiles => Nombre maximum de fichier envoyé (supplante la configuration global)
  *		  _header => placer du texte ou du header dans le haut du formulaire
  *		  _footer => placer du texte ou du header dans le bas du formulaire
+ *		  resizeWidth => forcer le redimentionnement en largeur des images à la demande
+ *		  resizeHeight => forcer le redimentionnement en hauteur des images à la demande
  *
  * @access public
  * @return array
