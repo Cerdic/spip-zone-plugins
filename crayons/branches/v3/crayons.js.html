@@ -13,21 +13,21 @@
 
 /* cQuery est jQuery, renommee pour eviter tout conflit */
 
-[(#CHEMIN{js/jquery.js}|pack_cQuery)]
+[(#CHEMIN{js/jquery.js})]
 
-cQuery.noConflict();
+[(#CHEMIN{js/jquery.form.js}]
 
-[(#CHEMIN{js/jquery.form.js}|pack_cQuery)]
+[(#CHEMIN{js/crayons.js})]
 
-[(#CHEMIN{js/crayons.js}|pack_cQuery)]
+[(#CHEMIN{js/resizehandle.js})]
 
-[(#CHEMIN{js/resizehandle.js}|pack_cQuery)]
-
-[(#CHEMIN{js/jquery.html5uploader.js}|pack_cQuery)]
+[(#CHEMIN{js/jquery.html5uploader.js})]
 
 [(#CONFIG{crayons}|match{s:11:"yellow_fade";s:2:"on";}|?{' ',''})
-	[(#CHEMIN{js/crayons-fade.js}|pack_cQuery)]
+	[(#CHEMIN{js/crayons-fade.js})]
 ]
 
 [(#REM) Appeler la callback si demandee ]
 [(#ENV{callback})();]
+
+#FILTRE{minifier_js}
