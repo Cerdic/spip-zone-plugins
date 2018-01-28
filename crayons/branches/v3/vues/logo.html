@@ -1,0 +1,37 @@
+[(#REM)
+
+	Vue du logo qu'on vient d'uploader
+
+	On doit hacker l'url du logo avec sa date pour eviter le cache du navigateur
+
+]
+
+[(#REM) En fonction de du contexte, choisir un logo ]
+
+[(#SET{image,[(#ID_ARTICLE|?{#LOGO_ARTICLE_NORMAL}
+	|sinon{[(#ID_AUTEUR|?{#LOGO_AUTEUR_NORMAL})]}
+	|sinon{[(#ID_BREVE|?{#LOGO_BREVE_NORMAL})]}
+	|sinon{[(#ID_RUBRIQUE|?{#LOGO_RUBRIQUE_NORMAL})]}
+	|sinon{[(#ID_SYNDIC_ARTICLE|?{#LOGO_SYNDIC_ARTICLE_NORMAL})]}
+	|sinon{[(#ID_SYNDIC|?{#LOGO_SITE_NORMAL})]}
+	|sinon{[(#ID_MOT|?{#LOGO_MOT_NORMAL})]})]})]
+
+
+[(#REM) Si la class contient resize-XXX, on appliquera ce filtre au logo ]
+
+[(#SET{resize,[(#ENV{class}|match{\bresize-\d+\b}|replace{resize-})]})]
+
+
+[(#GET{image}|?{
+
+	[(#SET{logo,[(#GET{image}
+		|image_reduire{#GET{resize,0},#GET{resize,120}})]})]
+	[(#SET{url,[(#GET{logo}|extraire_attribut{src}|replace{\?.*$})]})]
+	[(#SET{url,[(#GET{url}|parametre_url{s,#EVAL{time()}})]})]
+	[(#SET{width,[(#GET{logo}|extraire_attribut{width})]})]
+
+	[(#GET{logo}|inserer_attribut{src,#GET{url}})]
+
+,
+	'<small><abbr title="logo">?</abbr></small>'
+})]
