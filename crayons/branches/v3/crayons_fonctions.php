@@ -52,40 +52,6 @@ function test_exec_crayonnable($exec) {
 }
 
 /**
- * Ajouter la gestion des crayons dans l'espace privé
- *
- * @pipeline header_prive
- * @uses Crayons_preparer_page()
- *
- * @param string $head
- *     Contenu du header
- * @return string
- *     Contenu du header
-**/
-function Crayons_insert_head($head) {
-	// verifie la presence d'une meta crayons, si c'est vide
-	// on ne cherche meme pas a traiter l'espace prive
-	$config_espace_prive = @unserialize($GLOBALS['meta']['crayons']);
-	if (empty($config_espace_prive)) {
-		return $head;
-	}
-
-	// verifie que l'edition de l'espace prive est autorisee
-	if (isset($config_espace_prive['espaceprive'])
-	and $config_espace_prive['espaceprive'] == 'on') {
-		// determine les pages (exec) crayonnables
-		if (test_exec_crayonnable(_request('exec'))) {
-			// Calcul des droits
-			include_spip('inc/crayons');
-			$head = Crayons_preparer_page($head, '*', wdgcfg(), 'head');
-		}
-	}
-
-	// retourne l'entete modifiee
-	return $head;
-}
-
-/**
  * Ajouter la gestion des crayons dans l'espace public
  *
  * @pipeline affichage_final
