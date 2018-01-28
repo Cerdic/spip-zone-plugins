@@ -1,0 +1,12 @@
+<BOUCLE_profil(PROFILS){id_profil}{statut?}>
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:profil:champ_titre_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{titre} titre">(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_identifiant[ (#IDENTIFIANT*|strlen|?{'',vide})]">
+	<label><:profil:champ_identifiant_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{identifiant} identifiant">(#IDENTIFIANT)</span>
+</div>]
+
+</BOUCLE_profil>
