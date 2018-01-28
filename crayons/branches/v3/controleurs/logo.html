@@ -41,7 +41,7 @@
 		<li class="editer_logo">
 			<div class="choix">
 				<input class="crayon-active file" name="#ENV{name_logo}" type="file"
-					onchange="if (this.value && !this.value.match(/\.(png|jpeg|jpg|gif)$/i)) { alert('<:crayons:message_image_obligatoire:>'); this.value=''; }; var q=cQuery('##ENV{name_logo}_supprimer').parent(); this.value ? q.hide() : q.show();" size="1" />
+					onchange="if (this.value && !this.value.match(/\.(png|jpeg|jpg|gif)$/i)) { alert('<:crayons:message_image_obligatoire:>'); this.value=''; }; var q=jQuery('##ENV{name_logo}_supprimer').parent(); this.value ? q.hide() : q.show();" size="1" />
 			</div>
 			#GET{supprimer}
 		</li>

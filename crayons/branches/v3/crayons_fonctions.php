@@ -215,7 +215,7 @@ function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode = 'pag
 		and $f = chercher_filtre('info_plugin')
 		and $f('PORTE_PLUME','est_actif')) {
 			$pp = <<<EOF
-cQuery(function() {
+$(function() {
 	if (typeof onAjaxLoad == 'function') {
 		function barrebouilles_crayons() {
 			$('.formulaire_crayon textarea.crayon-active')
@@ -234,8 +234,8 @@ EOF;
 <script type="text/javascript">/* <![CDATA[ */
 var configCrayons;
 function startCrayons() {
-	configCrayons = new cQuery.prototype.cfgCrayons({$config});
-	cQuery.fn.crayonsstart();
+	configCrayons = new jQuery.prototype.cfgCrayons({$config});
+	jQuery.fn.crayonsstart();
 {$pp}
 }
 var cr = document.createElement('script');

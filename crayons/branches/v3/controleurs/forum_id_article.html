@@ -18,7 +18,7 @@
 <fieldset style="#ENV{style}">
 Associer ce forum &#224; l'article :
 <select class="crayon-active" name="#ENV{name_id_article}"
-	onchange="cQuery(this).parents('form.formulaire_spip').submit();">
+	onchange="jQuery(this).parents('form.formulaire_spip').submit();">
 <option value="0"[
 	(#ID_ARTICLE|?{'',selected})]>&gt;&gt;</option>
 <BOUCLE_a(ARTICLES)>
