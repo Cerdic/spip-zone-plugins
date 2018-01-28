@@ -21,6 +21,8 @@ if (!defined('_DEBUG_CRAYONS')) {
 	define('_DEBUG_CRAYONS', false);
 }
 
+include_spip('inc/config');
+
 /**
  * Dire rapidement si ca vaut le coup de chercher des droits
  *
