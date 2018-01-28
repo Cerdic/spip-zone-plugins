@@ -223,12 +223,7 @@ EOH;
 		return $page;
 	}
 
-	// js inline avant la premiere css, ou sinon avant la fin du head
-	$pos_link = strpos($page, '<link ');
-	if (!$pos_link) {
-		$pos_link = $pos_head;
-	}
-	$page = substr_replace($page, $incJS, $pos_link, 0);
+	$page = substr_replace($page, $incJS, $pos_head, 0);
 
 	// css avant la fin du head
 	$pos_head = strpos($page, '</head>');
