@@ -51,6 +51,22 @@ function test_exec_crayonnable($exec) {
 	return false;
 }
 
+function crayons_affichage_final_prive($page) {
+	// verifie la presence d'une meta crayons, si c'est vide
+	// on ne cherche meme pas a traiter l'espace prive
+	$config_espace_prive = lire_config('crayons/espaceprive');
+	if ($config_espace_prive == 'on') {
+		// determine les pages (exec) crayonnables
+		if (test_exec_crayonnable(_request('exec'))) {
+			// Calcul des droits
+			include_spip('inc/crayons');
+			$page = Crayons_preparer_page($page, '*', wdgcfg());
+		}
+	}
+
+	return $page;
+}
+
 /**
  * Ajouter la gestion des crayons dans l'espace public
  *
