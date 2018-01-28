@@ -11,20 +11,16 @@
 	#CACHE{7*24*3600,cache-client}
 })]
 
-/* cQuery est jQuery, renommee pour eviter tout conflit */
+[(#INCLURE{js/jquery.form.js})]
 
-[(#CHEMIN{js/jquery.js})]
+[(#INCLURE{js/crayons.js})]
 
-[(#CHEMIN{js/jquery.form.js}]
+[(#INCLURE{js/resizehandle.js})]
 
-[(#CHEMIN{js/crayons.js})]
-
-[(#CHEMIN{js/resizehandle.js})]
-
-[(#CHEMIN{js/jquery.html5uploader.js})]
+[(#INCLURE{js/jquery.html5uploader.js})]
 
 [(#CONFIG{crayons}|match{s:11:"yellow_fade";s:2:"on";}|?{' ',''})
-	[(#CHEMIN{js/crayons-fade.js})]
+	[(#INCLURE{js/crayons-fade.js})]
 ]
 
 [(#REM) Appeler la callback si demandee ]
