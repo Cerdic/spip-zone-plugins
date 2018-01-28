@@ -81,8 +81,7 @@ function crayons_affichage_final_prive($page) {
  * @return string
  *     Contenu de la page à envoyer au navigateur
 **/
-function Crayons_affichage_final($page) {
-
+function crayons_affichage_final($page) {
 	// ne pas se fatiguer si le visiteur n'a aucun droit
 	if (!(function_exists('analyse_droits_rapide')?analyse_droits_rapide():analyse_droits_rapide_dist())) {
 		return $page;
@@ -118,6 +117,7 @@ function Crayons_affichage_final($page) {
 			$droits_accordes ++;
 		}
 	}
+
 
 	// et les signaler dans la page
 	if ($droits_accordes == count($regs)) { // tous les droits
