@@ -306,6 +306,8 @@ function nettoyer_xml_quark($xml){
 	$texte = preg_replace(",&(amp;)?ndash;,", "—", $texte);
 	$texte = preg_replace(",&(amp;)?softReturn;,", " ", $texte); // ou bien par "" ? commence-&softReturn;t-on
 
+	$texte = str_replace(" &amp; ", " & ", $texte);
+
 	// espaces en gras.
 	$texte = str_replace(" }}","}} ",$texte);
 	$texte = str_replace("{{ "," {{",$texte);
