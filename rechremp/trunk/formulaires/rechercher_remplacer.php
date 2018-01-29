@@ -159,9 +159,17 @@ function rechremp_search_and_replace_table($table, $champs, $search, $replace = 
 	$out .= ' '.objet_afficher_nb(count($founds), $objet);
 	$out = "<label><strong>$out</strong></label><ul class='spip'>";
 
+	// dans un fichier d'options on peut personnaliser l'affichage de chaque ligne de résultats 
+	// via la constante RECHREMP_INFO_RESULTAT_A_GENERER et en spécifiant un autre champ que le titre
+	// ou avec une 'info' calculée par une fonction generer_${info}_${type_objet}($id, $objet)
+	// et/ou generer_$info_entite($id,$type,$objet)
+
+	if (!defined('RECHREMP_INFO_RESULTAT_A_GENERER'))
+		define ('RECHREMP_INFO_RESULTAT_A_GENERER', 'titre');
+
 	foreach ($founds as $id_objet => $nb) {
 		$l = singulier_ou_pluriel($nb, 'rechremp:1_occurence_dans', 'rechremp:nb_occurences_dans');
-		$l .= ' <a href="'.generer_url_entite($id_objet, $objet).'">'.generer_info_entite($id_objet, $objet, 'titre').'</a>';
+		$l .= ' <a href="'.generer_url_entite($id_objet, $objet).'">'.generer_info_entite($id_objet, $objet, RECHREMP_INFO_RESULTAT_A_GENERER).'</a>';
 		$out .= "<li>$l</li>\n";
 	}
 
