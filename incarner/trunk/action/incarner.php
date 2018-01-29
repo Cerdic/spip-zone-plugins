@@ -3,6 +3,7 @@
 function action_incarner_dist() {
 
 	include_spip('inc/headers');
+	include_spip('incarner_fonctions');
 
 	if (! autoriser('incarner')) {
 		http_status(403);

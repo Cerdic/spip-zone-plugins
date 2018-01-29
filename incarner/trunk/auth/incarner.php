@@ -12,10 +12,13 @@ function auth_incarner_dist($login, $password, $serveur = '', $phpauth = false) 
 	}
 
 	include_spip('inc/autoriser');
-	if (! autoriser('incarner')) {
+	if (!autoriser('incarner')) {
 		return array();
 	}
 
+	if (!function_exists('incarner_renouveler_cle')) {
+		include_spip('incarner_fonctions');
+	}
 	incarner_renouveler_cle();
 
 	$row = sql_fetsel(
