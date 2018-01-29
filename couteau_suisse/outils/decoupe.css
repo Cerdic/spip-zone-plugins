@@ -52,6 +52,7 @@ div.onglets_bloc h2.onglets_titre {
 	top:-1px;
 	display:inline;
 	float:left;
+    clear:none;
 	overflow:hidden;
 	cursor:pointer;
 	margin:1px -1px 1px 0px;

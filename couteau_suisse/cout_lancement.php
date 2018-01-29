@@ -144,7 +144,7 @@ define('_BALISES_BLOCS',
 */
 function cs_block($texte) {
 	return preg_match(',(\n\n|\r\n\r\n|\r\r),', $texte)
-		|| preg_match(',</?(p|'._BALISES_BLOCS.')[>[:space:]],iS', $texte);
+		|| preg_match(',(\n|^)-[*]* a|</?(p|'._BALISES_BLOCS.')[>[:space:]],iS', $texte);
 }
 
 // fonction callback pour cs_echappe_balises
