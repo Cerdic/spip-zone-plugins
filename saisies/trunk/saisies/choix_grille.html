@@ -65,7 +65,7 @@
 				[(#ENV{multiple}|et{#ENV{multiple}|!={non}}|oui)
 					#SET{type, checkbox}
 					#SET{name, #GET{name}\[\]}
-					#SET{coche, #CLE|in_array{#GET{valeur/#_lignes:CLE}}}
+					#SET{coche, #CLE|in_array{#GET{valeur/#_lignes:CLE, #ARRAY}}}
 				]
 				<input type="#GET{type}" name="#GET{name}" value="#CLE"[ (#GET{coche}|oui)checked="checked"] />
 			</td>
