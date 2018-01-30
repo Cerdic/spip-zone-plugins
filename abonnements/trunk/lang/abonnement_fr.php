@@ -57,13 +57,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		Nous vous invitons donc à le renouveler avant son expiration.</p>
 		<p>Merci de votre confiance, et n’hésitez pas à nous contacter pour toute information complémentaire.</p>',
 	'notification_echeance_corps_apres' => '<p>Vous recevez ce courriel car vous étiez abonné.e au site @nom_site_spip@ avec l’offre « @offre@ ».</p>
-	<p>Votre abonnement est arrivé à échéance il y a : <strong>@echeance@</strong>.<br/>
+	<p>Cet abonnement est arrivé à échéance il y a : <strong>@echeance@</strong>.<br/>
 	Nous vous invitons donc à le renouveler.</p>',
 	'notification_echeance_corps_avant' => '<p>Vous recevez ce courriel car vous êtes abonné.e au site @nom_site_spip@ avec l’offre « @offre@ ».</p>
-	<p>Votre abonnement arrive à échéance dans : <strong>@echeance@</strong>.<br/>
+	<p>Cet abonnement arrive à échéance dans : <strong>@echeance@</strong>.<br/>
 	Nous vous invitons donc à le renouveler avant son expiration.</p>',
 	'notification_echeance_corps_pendant' => '<p>Vous recevez ce courriel car vous êtes abonné.e au site @nom_site_spip@ avec l’offre « @offre@ ».</p>
-	<p>Votre abonnement arrive à échéance aujourd’hui.<br/>
+	<p>Cet abonnement arrive à échéance aujourd’hui.<br/>
 	Nous vous invitons donc à le renouveler avant son expiration.</p>',
 	'notification_echeance_signature' => '<p>Merci de votre confiance, et n’hésitez pas à nous contacter pour toute information complémentaire.</p>',
 	'notification_echeance_sujet_jours_apres' => 'Votre abonnement est terminé depuis @duree@ jour(s) !',
