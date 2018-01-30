@@ -43,12 +43,14 @@
 <table>
 	<caption>#ENV{caption}</caption>
 	<B_colonnes_entete>
-	<tr>
-		<td></td>
-		<BOUCLE_colonnes_entete (DATA) {source table,#GET{data_cols}}>
-		<th scope="col">#VALEUR</th>
-		</BOUCLE_colonnes_entete>
-	</tr>
+	<thead>
+		<tr>
+			<td></td>
+			<BOUCLE_colonnes_entete (DATA) {source table,#GET{data_cols}}>
+			<th scope="col">#VALEUR</th>
+			</BOUCLE_colonnes_entete>
+		</tr>
+	</thead>
 	</B_colonnes_entete>
 	<tbody>
 		<BOUCLE_lignes (DATA) {source table,#GET{data_rows}}>
