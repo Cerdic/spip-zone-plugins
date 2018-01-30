@@ -2,7 +2,7 @@
 #SET{heure_max_debut,24}
 [(#SET{tds_supprimer,#ARRAY})]
 
-<BOUCLE_donnees(EVENEMENTS){par date_debut}{id_article}>
+<BOUCLE_donnees(EVENEMENTS?){par date_debut}{id_article}>
 
 [(#REM) <!-- heure max de début --->]
 [(#DATE_DEBUT|affdate{H:i}|<{#GET{heure_max_debut}}|oui) 

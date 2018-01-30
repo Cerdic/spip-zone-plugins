@@ -1,4 +1,4 @@
-<BOUCLE_vevent(EVENEMENTS){id_article}{tout}{date_debut=#ENV{date_evalue}}{0,2}>
+<BOUCLE_vevent(EVENEMENTS?){id_article}{tout}{date_debut=#ENV{date_evalue}}{0,2}>
 
   [(#REM) <!-- la duree -->]
   [(#SET{duree,[(#DATE_DEBUT|duree{#DATE_FIN,minutes})]})] 
