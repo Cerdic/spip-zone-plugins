@@ -31,7 +31,7 @@ function inc_oembed_recuperer_url($oembed_url, $url, $format) {
 		curl_setopt($c, CURLOPT_FOLLOWLOCATION, true);
 		curl_setopt($c, CURLOPT_SSL_VERIFYHOST, false);
 		curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
-		$browser = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.16 (KHTML, like Gecko) \Chrome/24.0.1304.0 Safari/537.16';
+		$browser = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0';
 		curl_setopt($c, CURLOPT_USERAGENT, $browser);
 		//curl_setopt($c, CURLOPT_SSLVERSION, 1);
 
