@@ -10,15 +10,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_fieldset_legend'	=> 'Paramètres',
 	'cfg_titre'	=> 'Configuration des Stocks',
 
-    // Q
+	// G
+	'gerer_stocks_titre' => 'Stocks',
+  // Q
 	'quantite_produit' => 'Quantité pour le produit : ',
-	
+
 	// R
 	'reponse_ok' => 'le stock à été mis a jour',
 	// S
 	'stocks'	=> 'Stocks',
 	'stock_gestion' => 'Gestion du stock'
 );
-
-
-?>
