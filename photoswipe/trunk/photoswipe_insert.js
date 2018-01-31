@@ -11,13 +11,28 @@ function photoshow() {
         g = [];
     var a = photoshow_identify(this),
         index = 0;
-
+	
     if (!a) return;
+    
+    //On regarde si c'est une galerie indépendante
+    var galerie = $(this).parents( photoswipe.conteneur );
+    
+    if(galerie.length){
+		//Si oui, on prend uniquement les éléments qui en font partie
+		elsgalerie=galerie.find(photoswipe.selector);
+	} else {
+		//Sinon, on prends tous les éléments de galerie définis dans les paramètres du plugin, mais pas ceux faisant partie d'une galerie indépendante
+		elsgalerie=$(photoswipe.selector).filter(function(){return $(this).parents(photoswipe.conteneur).length ? false : true;});
+	}
+    
+    //Si on a aucun élément à afficher, on échappe    
+    if(elsgalerie.length===0){return false;}
     
     // gallery
     var idx = 0;
     if (photoswipe.gallery) {
-        $(photoswipe.selector)
+		//On sélectionne uniquement les éléments présents dans la galerie demandée
+		elsgalerie
             .each(function (i, e) {
                 var b = photoshow_identify(e);
                 if (b) {
@@ -35,8 +50,9 @@ function photoshow() {
     if (photoswipe.debug) {
         console.log(JSON.stringify(imgs));
     }
-
-    photoshow_gallery(imgs, index);
+    
+    //Si on veut une galerie particulière, on envoie son numéro
+    photoshow_gallery(imgs, index, galerie.data( "pswp-uid"));
     return false; // interdire l'action d'un <a> englobant
 }
 
@@ -103,7 +119,7 @@ function photoshow_identify(me) {
     }
 }
 
-function photoshow_gallery(items, index) {
+function photoshow_gallery(items, index, galerie=1) {
     var pswpElement = document.querySelectorAll('.pswp')[0];
 
     // define options (if needed)
@@ -114,6 +130,7 @@ function photoshow_gallery(items, index) {
         shareEl: false, // no "share on pinterest!"
         fullscreenEl: false,
         loop: false,
+        galleryUID: galerie, //Si pas de galerie particulière, on demande la galerie 1
         addCaptionHTMLFn: function (item, captionEl, isFake) {
             // item      - slide object
             // captionEl - caption DOM element
@@ -157,7 +174,6 @@ function photoshow_gallery(items, index) {
 
 
 function photoswipe_init() {
-
     $.ajaxSetup({ cache: true });
     $('<div>')
         .html('<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"> <div class="pswp__bg"></div> <div class="pswp__scroll-wrap"> <div class="pswp__container"> <div class="pswp__item"></div> <div class="pswp__item"></div> <div class="pswp__item"></div> </div> <div class="pswp__ui pswp__ui--hidden"> <div class="pswp__top-bar"> <div class="pswp__counter"></div> <button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button> <div class="pswp__preloader"> <div class="pswp__preloader__icn"> <div class="pswp__preloader__cut"> <div class="pswp__preloader__donut"></div> </div> </div> </div> </div> <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"> <div class="pswp__share-tooltip"></div> </div> <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"> </button> <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"> </button> <div class="pswp__caption"> <div class="pswp__caption__center"></div> </div> </div> </div></div>')
@@ -166,6 +182,12 @@ function photoswipe_init() {
 
 $(function() {
     photoswipe_init();
+    // loop through all gallery elements and bind events
+	var galleryElements = document.querySelectorAll( photoswipe.conteneur );
+    for(var i = 0, l = galleryElements.length; i < l; i++) {
+        galleryElements[i].setAttribute('data-pswp-uid', i+2); //Le numéro de la galerie doit être toujours 2 au-dessus
+    }
+    
     if (!!$.fn.on) {
       $(document).on("mouseover", photoswipe.selector, photoshow_hover);
       $(document).on("click", photoswipe.selector, photoshow);

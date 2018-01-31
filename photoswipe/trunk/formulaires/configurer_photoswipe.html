@@ -12,6 +12,13 @@
 				]
 				<input type="text" name="#GET{name}" value="[(#CONFIG{photoswipe/selecteur}|sinon{'img\[data-photo\], a\[type\]'}|attribut_html)]" class="text" />
 			</li>
+			#SET{name,conteneur}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label>Classe du conteneur des galeries automomes</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				<input type="text" name="#GET{name}" value="[(#CONFIG{photoswipe/conteneur}|sinon{'.photoswipe-cont'}|attribut_html)]" class="text" />
+			</li>
 		</ul>
 		<p class='boutons'><input class='submit' type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" /></p>
 	</div></form>
