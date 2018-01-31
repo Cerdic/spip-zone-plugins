@@ -3,7 +3,7 @@
  * Utilisations de pipelines par le plugin Métas+
  *
  * @plugin     Métas+
- * @copyright  2018
+ * @copyright  2016-2018
  * @author     Tetue, Erational, Tcharlss
  * @licence    GNU/GPL
  * @package    SPIP\Metas+\Pipelines

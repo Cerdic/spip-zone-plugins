@@ -2,17 +2,20 @@
 
 	Métas+ : ce squelette génère les métas pour Dublin Core, Open Graph et Twitter.
 
-	Il est inclus automatiquement dans le <head>,
-	et récupère au mieux les informations des pages.
+	Il s'agit du squelette par défaut inclus automatiquement dans le <head>, il tente de générer au mieux les informations des pages.
 
-	Si certaines pages nécessitent des infos plus pertinentes que celles générées par défaut, créer une variante inclure/metasplus/{page}.html
-	Les variantes peuvent éventuellement inclure le présent squelette en transmettant les paramètres à modifier.
+	Il est possible de créer des variantes pour des pages précises : inclure/metasplus/{page}.html
+	Plusieurs possibilités pour le contenu des variantes :
+	- vide = pas de métas (voir aussi la constante _METASPLUS_PAGES_EXCLUES)
+	- inclure ce squelette en ne transmettant *que* les paramètres à modifier
+	- inclure inc-dist.html en transmettant *tous* les paramètres
+	- tout faire à la main
 
 	Précisions :
 		- Sur une page d'objet, on met og-type = article par défaut
 		- Sur une page lambda, on omet volontairement le titre et la description puisqu'on ne les connait pas, twitter et facebook se rabattent sur les metas <title> et <description>.
 
-	Format des images : https://goo.gl/L4StmD
+	Format des logos : https://goo.gl/L4StmD
 		- Twitter  : taille min 440 x 220
 		             taille recommandée 506 x 253
 		             taille max 1024 x 512
@@ -24,48 +27,27 @@
 		             ratio 1.91:1
 
 	Paramètres :
-		- titre :      Titre
-		- lang :       Langue au format iso. ex. fr
-		- territoire : Permet de renseigner le duet langue_territoire, ex. UK
-			             Si rien n'est renseigné, on tente un lang_LANG
+		- titre :      Titre de la ressource
 		- desc :       Description
-		- auteurs :    Un ou plusieurs auteurs séparés par des virgules
+		- lang :       Langue au format iso. ex. fr
+		- territoire : Complète la langue pour former le duet langue_territoire, ex. UK
+			             Si rien n'est renseigné, on tente un lang_LANG
 		- date :       Date de publication au format Y-m-d
 		- maj :        Date de mise à jour au format Y-m-d
 		- url :        URL de la ressource
-		- logo :       URL de l'image principale de la ressource
+		- auteurs :    Un ou plusieurs auteurs séparés par des virgules
+		- logos :      Une ou plusieurs URLs d'images séparées par des virgules
+		- mots :       Un ou plusieurs mots-clés séparés par des virgules
 		- og-type :    (open graph) Type de la ressource : article, profile, book, etc.
 		- dc-type :    (dublin core) Type de la ressource : Text, Event, PhysicalObject, etc.
 
 ]
 
-
 [(#REM)
 
-	=====================
-	0. Variables diverses
-	=====================
-
-]
-#SET{dimensions, #ARRAY{
-	opengraph, #ARRAY{
-		largeur, 1200,
-		hauteur, 630,
-	},
-	twitter, #ARRAY{
-		largeur, 506,
-		hauteur, 253,
-	}
-}}
-#SET{couper,200}
-
-
-
-[(#REM)
-
-	========================================
-	1. Récupérer automatiquement les valeurs
-	========================================
+	=======================================
+	1. Récupération automatique des valeurs
+	=======================================
 
 ]
 
@@ -75,44 +57,46 @@
 
 ]
 <BOUCLE_objet(CONDITION) {si #ENV{objet}|et{#ENV{id_objet}}}>
-#SET{og-type, article}
-#SET{dc-type, Text}
-#SET{titre,   #INFO_TITRE{#ENV{objet}, #ENV{id_objet}}|concat{" – ",#NOM_SITE_SPIP}}
-#SET{desc,    #INFO_INTRODUCTION{#ENV{objet}, #ENV{id_objet}}
-	|sinon{#INFO_DESCRIPTIF{#ENV{objet}, #ENV{id_objet}}}
-	|sinon{#INFO_TEXTE{#ENV{objet}, #ENV{id_objet}}}}
-#SET{url,     #INFO_URL{#ENV{objet}, #ENV{id_objet}}}
-#SET{date,    #INFO_DATE{#ENV{objet}, #ENV{id_objet}}}
-#SET{maj,     #INFO_MAJ{#ENV{objet}, #ENV{id_objet}}}
-#SET{lang,    #INFO_LANG{#ENV{objet}, #ENV{id_objet}}|sinon{#LANG}}
-#SET{auteurs, #ARRAY}
-<BOUCLE_set_auteurs(AUTEURS) {objet} {id_objet} {par nom} {si #ENV{auteurs}|non}>
-#SET{auteurs, #GET{auteurs}|push{#NOM}}
-</BOUCLE_set_auteurs>
-#SET{mots, #ARRAY}
-<BOUCLE_set_mots(MOTS) {objet} {id_objet} {par titre}>
-#SET{mots, #GET{mots}|push{#TITRE}|supprimer_tags|textebrut}
-</BOUCLE_set_mots>
-[(#REM) Tableau des images avec le logo en premier ]
-#SET{logo,    #ENV{logo}|extraire_attribut{src}|sinon{#ENV{id_objet}|quete_logo_objet{#ENV{objet}, on}|table_valeur{chemin}}}
-#SET{images,  #LISTE{#GET{logo}|?{#ARRAY{
-	src, #GET{logo},
-	alt, '',
-	type, #VAL{#GET{logo}|mime_content_type},
-}}}}
-<BOUCLE_set_images(DOCUMENTS)
-	{objet} {id_objet}
-	{media = image}
-	{fichier != #GET{images/0/src}|replace{#VAL{_NOM_PERMANENTS_ACCESSIBLES}|constant}}
-	{!par largeur}
-	{0,#GET{logo}|?{2,3}}
+#SET{og-type_auto,    article}
+#SET{dc-type_auto,    Text}
+#SET{titre_auto,      #INFO_TITRE{#ENV{objet},#ENV{id_objet}}|concat{" – ",#NOM_SITE_SPIP}}
+#SET{desc_auto,       #INFO_INTRODUCTION{#ENV{objet},#ENV{id_objet}}
+	|sinon{#INFO_DESCRIPTIF{#ENV{objet},#ENV{id_objet}}}
+	|sinon{#INFO_TEXTE{#ENV{objet},#ENV{id_objet}}}}
+#SET{url_auto,        #INFO_URL{#ENV{objet},#ENV{id_objet}}}
+#SET{date_auto,       #INFO_DATE{#ENV{objet},#ENV{id_objet}}}
+#SET{maj_auto,        #INFO_MAJ{#ENV{objet},#ENV{id_objet}}}
+#SET{lang_auto,       #INFO_LANG{#ENV{objet},#ENV{id_objet}}|sinon{#LANG}}
+#SET{territoire_auto, ''}
+[(#REM) Les auteurs ]
+<BOUCLE_auteurs_objet(AUTEURS)
+	{objet}
+	{id_objet}
+	{par nom}
+	{si #ENV{auteurs}|non}
 >
-#SET{images,#GET{images}|push{#ARRAY{
-	src,  #FICHIER,
-	alt,  #VAL{#TITRE|sinon{#DESCRIPTIF}|supprimer_tags|textebrut},
-	type, #MIME_TYPE,
-}}}
-</BOUCLE_set_images>
+#SET{auteurs_auto, #GET{auteurs_auto}|concat{#GET{auteurs_auto}|?{','},#NOM}}
+</BOUCLE_auteurs_objet>
+[(#REM) Les mots-clés ]
+<BOUCLE_mots_objet(MOTS)
+	{objet}
+	{id_objet}
+	{par titre}
+>
+#SET{mots_auto, #GET{mots_auto}|concat{#GET{mots_auto}|?{','},#TITRE}}
+</BOUCLE_mots_objet>
+[(#REM) Le logo de l'objet et les images jointes si nécessaires ]
+#SET{logos_auto, #ENV{logos}|extraire_attribut{src}|sinon{#ENV{id_objet}|quete_logo_objet{#ENV{objet},on}|table_valeur{chemin}}}
+<BOUCLE_logos_objet(DOCUMENTS)
+	{objet}
+	{id_objet}
+	{media = image}
+	{fichier != #GET{logos_auto}|replace{#VAL{_NOM_PERMANENTS_ACCESSIBLES}|constant}}
+	{!par largeur}
+	{0,#GET{logos_auto}|?{2,3}}
+>
+#SET{logos_auto, #GET{logos_auto}|concat{#GET{logos_auto}|?{','},#FICHIER}}
+</BOUCLE_logos_objet>
 </BOUCLE_objet>
 
 [(#REM)
@@ -120,157 +104,41 @@
 	Cas 2 : Page lambda
 
 ]
-#SET{og-type, website}
-#SET{dc-type, Text}
-#SET{titre,   ''}
-#SET{desc,    ''}
-#SET{url,     #URL_PAGE{#ENV{type-page, #ENV{page}}}}
-#SET{date,    #ENV{date}}
-#SET{lang,    #LANG}
-#SET{auteurs, #ARRAY}
-#SET{logo,    #ENV{logo}|sinon{#LOGO_SITE_SPIP}|extraire_attribut{src}|supprimer_timestamp}
-#SET{images,  #LISTE{#ARRAY{
-	src, #GET{logo},
-	alt, '',
-	type, #VAL{#GET{logo}|mime_content_type},
-}}}
+#SET{og-type_auto,    website}
+#SET{dc-type_auto,    Text}
+#SET{titre_auto,      ''}
+#SET{desc_auto,       ''}
+#SET{url_auto,        #URL_PAGE{#ENV{type-page}}}
+#SET{date_auto,       #DATE}
+#SET{maj_auto,        ''}
+#SET{lang_auto,       #LANG}
+#SET{territoire_auto, ''}
+#SET{logos_auto,      #LOGO_SITE_SPIP|extraire_attribut{src}|supprimer_timestamp}
+#SET{auteurs_auto,    ''}
+#SET{mots_auto,       ''}
 <//B_objet>
 
 
 [(#REM)
 
-	===============================
-	2. Normaliser certaines valeurs
-	===============================
-	On prend en priorité les valeurs transmises dans l'env
-	(pour le logo, obligé de procéder en amont)
-
-]
-
-#SET{titre,      #ENV{titre, #GET{titre}}|supprimer_tags|textebrut}
-#SET{desc,       #ENV{desc, #GET{desc}}|supprimer_tags|textebrut}
-#SET{url,        #ENV{url, #GET{url}}}
-#SET{date,       #ENV{date, #GET{date}}}
-#SET{maj,        #ENV{maj, #GET{maj}}}
-#SET{lang,       #ENV{lang, #GET{lang}}}
-#SET{territoire, #ENV{territoire}|=={en}|?{uk,#ENV{territoire,#GET{lang}}}|strtoupper}
-#SET{locale,     #GET{lang}|concat{_,#GET{territoire}}}
-#SET{og-type,    #ENV{og-type, #GET{og-type}}}
-#SET{dc-type,    #ENV{dc-type, #GET{dc-type}}}
-#SET{auteurs,    #ENV{auteurs}|?{#ENV{auteurs}|supprimer_tags|textebrut|explode{','},#GET{auteurs}}}
-
-
-[(#REM)
-
 	====================
-	2. Insérer les metas
+	2. Code des metas
 	====================
 
 ]
-
-[(#REM)
-
-
-	Dublin Core
-
-	http://dublincore.org
-
-
-]
-<BOUCLE_dublincore(CONDITION) {si #CONFIG{metasplus/dublincore}|non}>
-<!-- Dublin Core -->
-<link rel="schema.DC" href="https://purl.org/dc/elements/1.1/" />
-<link rel="schema.DCTERMS" href="https://purl.org/dc/terms/" />
-<meta name="DC.Format" content="text/html" />
-[<meta name="DC.Type" content="(#GET{dc-type})" />]
-[<meta name="DC.Language" scheme="rfc1766" content="(#GET{lang})" />]
-[<meta name="DC.Title" lang="#GET{lang}" content="(#GET{titre}|attribut_html)" />]
-[<meta name="DC.Description.Abstract" lang="#GET{lang}" content="(#GET{desc}|couper{#GET{couper},'…'}|attribut_html)" />]
-[<meta name="DC.Date" scheme="DCTERMS.W3CDTF" content="(#GET{date}|affdate{Y-m-d})" />]
-[<meta name="DC.Date.Modified" scheme="DCTERMS.W3CDTF" content="(#GET{maj}|affdate{Y-m-d})" />]
-[<meta name="DC.Identifier" scheme="URI" content="(#GET{url}|url_absolue)" />]
-[<meta name="DC.Publisher" content="(#NOM_SITE_SPIP|attribut_html)" />]
-[<meta name="DC.Source" scheme="URI" content="(#URL_SITE_SPIP)" />]
-<BOUCLE_auteurs_dublincore(DATA){source table, #GET{auteurs}}>
-[<meta name="DC.Creator" content="(#VALEUR|attribut_html)" />]
-</BOUCLE_auteurs_dublincore>
-<BOUCLE_mots_dublincore(DATA) {source table, #GET{mots}}>
-[<meta name="DC.Subject" content="(#VALEUR|attribut_html)" />]
-</BOUCLE_mots_dublincore>
-</BOUCLE_dublincore>
-[(#REM)
-
-
-	Open Graph
-
-	http://ogp.me
-	https://developers.facebook.com/docs/sharing/opengraph/object-properties
-	https://developers.facebook.com/docs/sharing/best-practices#images
-	https://developers.facebook.com/tools/debug/
-
-
-]
-<BOUCLE_opengraph(CONDITION) {si #CONFIG{metasplus/opengraph}|non}>
-<!-- Open Graph -->
-<meta property="og:rich_attachment" content="true" />
-[<meta property="og:site_name" content="(#NOM_SITE_SPIP|attribut_html)" />]
-[<meta property="og:type" content="(#GET{og-type}|attribut_html)" />]
-[<meta property="og:title" content="(#GET{titre}|attribut_html)" />]
-[<meta property="og:locale" content="(#GET{locale})" />]
-[<meta property="og:url" content="(#GET{url}|url_absolue)" />]
-[<meta property="og:description" content="(#GET{desc}|couper{#GET{couper},'…'}|attribut_html)" />]
-<BOUCLE_images_opengraph(DATA) {source table, #GET{images}}>
-#SET{ratio, #GET{dimensions/opengraph/largeur}|div{#GET{dimensions/opengraph/hauteur}}|concat{:1}}
-#SET{src, #VALEUR{src}
-	|image_recadre{#GET{ratio},-,focus}
-	|image_reduire{#GET{dimensions/opengraph/largeur},#GET{dimensions/opengraph/hauteur}}
-	|extraire_attribut{src}}
-[<meta property="og:image" content="(#GET{src}|url_absolue)" />]
-[<meta property="og:image:width" content="(#GET{src}|largeur)" />]
-[<meta property="og:image:height" content="(#GET{src}|hauteur)" />]
-[<meta property="og:image:type" content="(#VALEUR{type})" />]
-[<meta property="og:image:alt" content="(#VALEUR{alt}|attribut_html)" />]
-</BOUCLE_images_opengraph>
-<BOUCLE_article_opengraph(CONDITION) {si #GET{og-type}|=={article}}>
-[<meta property="article:published_time" content="(#GET{date}|affdate{Y-m-d})" />]
-[<meta property="article:modified_time" content="(#GET{maj}|affdate{Y-m-d})" />]
-<BOUCLE_auteurs_opengraph(DATA){source table, #GET{auteurs}}>
-[<meta property="article:author" content="(#VALEUR|attribut_html)" />]
-</BOUCLE_auteurs_opengraph>
-<BOUCLE_mots_opengraph(DATA) {source table, #GET{mots}}>
-[<meta property="article:tag" content="(#VALEUR|attribut_html)" />]
-</BOUCLE_mots_opengraph>
-</BOUCLE_article_opengraph>
-[(#REM) Si plugin facebook, on envoie la méta fb:app_id ]
-[<meta property="fb:app_id" content="(#CONFIG{facebook/cle})" />]
-</BOUCLE_opengraph>
-[(#REM)
-
-
-	Twitter Card
-
-	https://dev.twitter.com/cards/types/summary
-	https://dev.twitter.com/cards/types/summary-large-image
-	https://cards-dev.twitter.com/validator
-
-
-]
-<BOUCLE_twitter(CONDITION) {si #CONFIG{metasplus/twitter}|non}>
-<!-- Twitter Card -->
-<meta name="twitter:card" content="[(#GET{logo}|?{summary_large_image,summary})]" />
-[<meta name="twitter:title" content="(#GET{titre}|attribut_html)" />]
-[<meta name="twitter:description" content="(#GET{desc}|couper{#GET{couper},'…'}|attribut_html)" />]
-<meta name="twitter:dnt" content="on" />
-[<meta name="twitter:url" content="(#GET{url}|url_absolue)" />]
-<BOUCLE_images_twitter(DATA) {source table, #GET{images}} {0,1}>
-#SET{ratio, #GET{dimensions/twitter/largeur}|div{#GET{dimensions/twitter/hauteur}}|concat{:1}}
-#SET{src, #VALEUR{src}
-	|image_recadre{#GET{ratio},-,focus}
-	|image_reduire{#GET{dimensions/twitter/largeur},#GET{dimensions/twitter/hauteur}}
-	|extraire_attribut{src}}
-[<meta name="twitter:image" content="(#GET{src}|url_absolue)" />]
-[<meta property="twitter:image:alt" content="(#VALEUR{alt}|attribut_html)" />]
-</BOUCLE_images_twitter>
-</BOUCLE_twitter>
+<INCLURE{fond=inclure/metasplus/inc-dist,
+	titre=#ENV{titre,#GET{titre_auto}},
+	desc=#ENV{desc,#GET{desc_auto}},
+	url=#ENV{url,#GET{url_auto}},
+	date=#ENV{date,#GET{date_auto}},
+	maj=#ENV{maj,#GET{maj_auto}},
+	lang=#ENV{lang,#GET{lang_auto}},
+	territoire=#ENV{territoire,#GET{territoire_auto}},
+	og-type=#ENV{og-type,#GET{og-type_auto}},
+	dc-type=#ENV{dc-type,#GET{dc-type_auto}},
+	logos=#ENV{logos,#ENV{logo,#GET{logos_auto}}},
+	auteurs=#ENV{auteurs,#ENV{auteur,#GET{auteurs_auto}}},
+	mots=#ENV{mots,#GET{mots_auto}}
+}/>
 
 #FILTRE{trim}

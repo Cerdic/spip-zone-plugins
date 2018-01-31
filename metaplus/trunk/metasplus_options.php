@@ -3,7 +3,7 @@
  * Options du plugin Métas+
  *
  * @plugin     Métas+
- * @copyright  2018
+ * @copyright  2016-2018
  * @author     Tetue, Erational, Tcharlss
  * @licence    GNU/GPL
  * @package    SPIP\Metas+\Options
@@ -91,6 +91,7 @@ function metasplus_identifier_page (&$contexte, &$page_erreur) {
 		include_spip('base/objets');
 		$id_table_objet = id_table_objet($page);
 		$id_objet = isset($decodage[1][$id_table_objet]) ? $decodage[1][$id_table_objet] : null;
+		// Ajouter l'objet au contexte
 		if ($id_objet) {
 			$contexte['objet'] = $page;
 			$contexte['id_objet'] = $id_objet;
@@ -101,6 +102,9 @@ function metasplus_identifier_page (&$contexte, &$page_erreur) {
 	} elseif (!$page) {
 		$page = _request('page');
 	}
+
+	// Ajouter le type de page au contexte
+	$contexte['type-page'] = $page;
 
 	return $page;
 }
