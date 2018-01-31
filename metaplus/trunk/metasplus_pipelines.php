@@ -15,17 +15,58 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
- * Inserer des contenus dans le <head> public
+ * Effectuer des traitements juste avant l'envoi des pages publiques.
  *
- * Ajout des metas open graph, dublin core et twitter.
- * On ajoute directement du php pour éviter le cache commun, cf. https://contrib.spip.net/Dublin-Core#forum493303
+ * Ajout des metas open graph, dublin core et twitter dans le <head> public.
+ * 
+ * @Note : on retrouve les informations du contexte au moyen d'un squelette pour pour bénéficier de la mise en cache. Capillotracté mais ça fontionne.
  *
  * @param $flux
  * @return mixed
  */
-function metasplus_insert_head($flux) {
+function metasplus_affichage_final($flux) {
 
-	$flux .= '<' . '?php if (function_exists("metasplus_generer_head")) { metasplus_generer_head(); } ?' . '>';
+	include_spip('inc/config');
+
+	// Tests préliminaires avant d'inclure éventuellement les métas
+	if (!test_espace_prive()
+		// Les protocoles ne sont pas tous désactivés (improbable mais possible)
+		and (
+			!lire_config('metasplus')
+			or count(lire_config('metasplus')) < 3
+		)
+		// Le contexte est retrouvé
+		and $contexte = recuperer_fond('metasplus_trouver_contexte')
+		and is_array($contexte = unserialize($contexte))
+		// La page n'est pas en erreur
+		and empty($contexte['erreur'])
+		// La page n'est pas exclue
+		and is_array($pages_exclues = (
+			(defined('_METASPLUS_PAGES_EXCLUES') and _METASPLUS_PAGES_EXCLUES) ?
+				explode(',', _METASPLUS_PAGES_EXCLUES) :
+				array()
+		))
+		and (!in_array($contexte['type-page'], $pages_exclues))
+	) {
+
+		// Trouver le squelette à utiliser : variante de la page si elle existe, sinon le squelette par défaut (dist.hmtl)
+		$fond_defaut   = 'inclure/metasplus/dist';
+		$fond_variante = 'inclure/metasplus/' . $contexte['type-page'];
+		if (find_in_path($fond_variante.'.html')) {
+			$fond = $fond_variante;
+		} elseif (find_in_path($fond_defaut.'.html')) {
+			$fond = $fond_defaut;
+		}
+
+		// Si le squelette n'est pas vide, on ajoute son contenu à la fin du head
+		if ($fond
+			and $metas = recuperer_fond($fond, $contexte)
+		) {
+			$metas = "<!-- Plugin Métas + -->\n$metas\n";
+			$pos_head = strpos($flux, '</head>');
+			$flux = substr_replace($flux, $metas, $pos_head, 0);
+		}
+	}
 
 	return $flux;
 }

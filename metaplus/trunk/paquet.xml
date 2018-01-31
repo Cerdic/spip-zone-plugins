@@ -15,5 +15,5 @@
 	<auteur lien="https://www.erational.org">erational</auteur>
 	<auteur lien="https://www.bravecassine.com">tcharlss</auteur>
 
-	<pipeline nom="insert_head" inclure="metasplus_pipelines.php" />
+	<pipeline nom="affichage_final" inclure="metasplus_pipelines.php" />
 </paquet>
