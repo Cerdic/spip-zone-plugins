@@ -24,6 +24,7 @@ function lister_socicon() {
 
 	preg_match_all("/\.socicon-(.+):before/", $style_socicon, $socicon);
 	if (isset($socicon[1]) and is_array($socicon[1]) and count($socicon[1])) {
+    natsort($socicon[1]);
 		return $socicon[1];
 	}
 
