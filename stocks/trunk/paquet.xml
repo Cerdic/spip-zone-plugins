@@ -1,15 +1,16 @@
 <paquet
 	prefix="stocks"
 	categorie="divers"
-	version="0.1.5"
+	version="0.1.6"
 	etat="dev"
 	compatibilite="[3.0.1;3.2.*]"
-	logo=""
+	logo="prive/themes/spip/images/stocks-32.png"
 	documentation=""
 	schema="1.0.0"
 >
-	<nom>Gérer des quantités et stocks</nom>
+	<nom>Stocks</nom>
 	<auteur lien="http://www.webelys.com">Webelys</auteur>
+	<auteur lien="https://www.mister-graphx.com">Arnaud B. (Mist. GraphX)</auteur>
 
 	<licence>GPLv3</licence>
 
@@ -19,8 +20,8 @@
 	<pipeline nom="formulaire_traiter" inclure="stocks_pipelines.php" />
 	<pipeline nom="afficher_fiche_objet" inclure="stocks_pipelines.php" />
 
-
 	<necessite nom="produits" compatibilite="[1.1.25;["/>
 	<necessite nom="saisies" compatibilite="[2.19.1;["/>
+
 	<menu nom="gerer_stocks" titre="stocks:gerer_stocks_titre" parent="menu_edition" icone="prive/themes/spip/images/stocks-16.png" />
 </paquet>
