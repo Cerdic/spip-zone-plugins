@@ -3,7 +3,7 @@
  * Utilisations de pipelines par Réservation Événement Cloture
  *
  * @plugin     Réservation Événement Cloture
- * @copyright  2014
+ * @copyright  2013 - 2018
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Reservation_evenement_cloture\Genie

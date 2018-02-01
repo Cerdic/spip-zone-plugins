@@ -3,7 +3,7 @@
  * Gestion du formulaire de d'édition de reservations_detail
  *
  * @plugin     Reservations_detail
- * @copyright  2013-2014
+ * @copyright  2013-2018
  * @author     Rainer
  * @licence    GNU/GPL
  * @package    SPIP\Res\Formulaires

@@ -4,7 +4,7 @@
  *
  * @plugin Réservation Événements
  *
- * @copyright 2013
+ * @copyright 2013 - 2018
  * @author Rainer Müller
  *         @licence GNU/GPL
  * @package SPIP\Reservation_evenement\Formulaires
@@ -163,14 +163,18 @@ function formulaires_reservation_charger_dist($id = array(), $id_article = '', $
 	$valeurs['enregistrement_inscrit'] = $enregistrement_inscrit;
 	$valeurs['enregistrement_inscrit_obligatoire'] = $enregistrement_inscrit_obligatoire;
 
+	// Si les champs auteurs obligatoires manquent, mode édition.
+	if (!$session['nom'] | !$session['email']) {
+		$valeurs['modifier_donnees_auteur'] = array('1');
+	}
+
 	// les champs extras
 	include_spip('cextras_pipelines');
 	if (function_exists('champs_extras_objet')) {
 		// Auteurs
 		$valeurs['champs_extras_auteurs'] = champs_extras_objet(table_objet_sql('auteur'));
 		foreach ($valeurs['champs_extras_auteurs'] as $key => $value) {
-			if (!$session[$value['options']['nom']] &&
-					$value['options']['obligatoire'] == 'on') {
+			if (!$session[$value['options']['nom']] && $value['options']['obligatoire']) {
 				$valeurs['modifier_donnees_auteur'] = array('1');
 			}
 			$valeurs[$value['options']['nom']] = $session[$value['options']['nom']];
@@ -182,7 +186,6 @@ function formulaires_reservation_charger_dist($id = array(), $id_article = '', $
 		foreach ($valeurs['champs_extras_reservations'] as $key => $value) {
 			$valeurs[$value['options']['nom']] = $session[$value['options']['nom']];
 			$valeurs['champs_extras_reservations'][$key]['options']['label'] = extraire_multi($value['options']['label']);
-
 		}
 	}
 
@@ -217,7 +220,10 @@ function formulaires_reservation_verifier_dist($id = '', $id_article = '', $reto
 	$erreurs = array();
 	$email = _request('email');
 	$id_auteur = _request('id_auteur');
-	$obligatoires = array();
+	$obligatoires = array(
+		'nom',
+		'email'
+	);
 
 	if (isset($GLOBALS['visiteur_session']['id_auteur']) and $GLOBALS['visiteur_session']['id_auteur'] > 0) {
 		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
@@ -226,16 +232,11 @@ function formulaires_reservation_verifier_dist($id = '', $id_article = '', $reto
 	// Si l'enregistrement est choisi
 	if (_request('enregistrer')) {
 		include_spip('inc/auth');
-		$obligatoires = array(
-			'nom',
-			'email',
+		$obligatoires = array_merge($obligatoires, array(
 			'new_pass',
 			'new_login'
-		);
-		foreach ($obligatoires as $champ) {
-			if (!_request($champ))
-				$erreurs[$champ] = _T("info_obligatoire");
-		}
+		));
+
 		// Vérifier le login
 		if ($err = auth_verifier_login($auth_methode, _request('new_login'), $id_auteur)) {
 			$erreurs['new_login'] = $err;
@@ -262,10 +263,12 @@ function formulaires_reservation_verifier_dist($id = '', $id_article = '', $reto
 		);
 	}
 
-	if (test_plugin_actif('declinaisons'))
+	if (test_plugin_actif('declinaisons')) {
 		array_push($obligatoires, 'id_objet_prix');
-	else
+	}
+	else {
 		array_push($obligatoires, 'id_evenement');
+	}
 
 	foreach ($obligatoires as $champ) {
 		if (!_request($champ))

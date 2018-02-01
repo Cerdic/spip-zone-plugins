@@ -35,7 +35,9 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 		// Les descriptif
 		$set['descriptif'] = extraire_multi(
 				supprimer_numero(
-						$evenement['titre'])) . '  (' . $date . ')';
+						$evenement['titre']
+					)
+				) . '  (' . $date . ')';
 		if (intval($evenement['places']))
 			$set['places'] = $evenement['places'];
 
