@@ -190,14 +190,11 @@ function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode = 'pag
 		'cfg' => $wdgcfg
 	));
 
-	
 	// Est-ce que PortePlume est la ?
-	$meta_crayon = isset($GLOBALS['meta']['crayons']) ? unserialize($GLOBALS['meta']['crayons']): array();
 	$pp = '';
-	if (isset($meta_crayon['barretypo']) && $meta_crayon['barretypo']) {
-		include_spip('inc/utils');
-		if (test_plugin_actif('porte_plume')) {
-			$pp = <<<EOF
+	include_spip('inc/utils');
+	if (lire_config('crayons/barretypo') == 'on' and test_plugin_actif('porte_plume')) {
+		$pp = <<<EOF
 $(function() {
 	if (typeof onAjaxLoad == 'function') {
 		function barrebouilles_crayons() {
@@ -208,7 +205,6 @@ $(function() {
 	}
 });
 EOF;
-		}
 	}
 
 
