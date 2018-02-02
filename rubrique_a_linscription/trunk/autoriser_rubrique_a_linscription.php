@@ -91,4 +91,3 @@ function remonter_hierarchie_rubriques($rubriques){
 	}
 	return $toutes_rubriques;
 }
-?>

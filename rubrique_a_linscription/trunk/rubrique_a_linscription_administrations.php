@@ -42,4 +42,3 @@ function rubrique_a_linscription_vider_tables($nom_meta_base_version){
 	ecrire_metas();	
 }
 
-?>
