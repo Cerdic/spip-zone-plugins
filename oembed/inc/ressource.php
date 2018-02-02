@@ -6,7 +6,7 @@
  *
  */
 
-define('_EXTRAIRE_RESSOURCES', ',' . '<"?(https?://|[\w -]+\.[\w -]+).*>'.',UimsS');
+define('_EXTRAIRE_RESSOURCES', ',' . '<"?(https?://|[\w][\w -]*\.[\w -]+).*>'.',UimsS');
 
 function traiter_ressources($r) {
 	if ($ressource = charger_fonction('ressource', 'inc', true)) {
@@ -37,8 +37,8 @@ function tw_traiter_ressources($r) {
 			$html = PtoBR(propre("<span class='ressource spip_in'>&lt;[->" . $url . ']&gt;</span>'));
 		} # <fichier.rtf>
 		else {
-			preg_match(',\.([^.]+)$,', $url, $regs);
-			if (file_exists($f = _DIR_IMG . $regs[1] . '/' . $url)) {
+			if (preg_match(',\.([^.]+)$,', $url, $regs)
+			  and file_exists($f = _DIR_IMG . $regs[1] . '/' . $url)) {
 				$html = PtoBR(propre("<span class='ressource spip_in'>&lt;[" . $url . '->' . $f . ']&gt;</span>'));
 			} else {
 				$html = PtoBR(propre("<span class='ressource'>&lt;" . $url . '&gt;</span>'));
