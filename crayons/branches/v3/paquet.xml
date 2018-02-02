@@ -3,7 +3,7 @@
 	categorie="edition"
 	version="3.0.0"
 	etat="test"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.2.0;3.2.*]"
 	logo="images/crayon-32.png"
 	documentation="https://contrib.spip.net/Les-Crayons"
 >
