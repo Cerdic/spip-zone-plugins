@@ -16,11 +16,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	SPIP-Skelette einfügen.',
 
 	// E
-	'explication_longueur' => 'Legt die maximale Zeichenzahl für jeden Anker fest.', # MODIF
+	'explication_longueur' => 'Legt die maximale Zeichenzahl für jeden Anker fest.',
 	'explication_min' => 'Legit die Mindestanzahl der Zwischentitel fest, ab der ein Inhaltsverzeichnis eingeblendet wird.',
 	'explication_separateur' => 'Legt das Zeichen fest, daß anstelle von Leerzeichen zwischen Worte eigefügt wird.',
+	'explication_tdm_flottante' => 'Wenn das Inhaltsverzeichnis durch Verschieben des sichtbaren Teils der Seite verdeckt würde, positioniert es sich am obenen Rand der Seite, um jedezeit eichtbar zu sein..',
 
 	// L
+	'label_tdm_flottante' => 'Schwebendes Inhaltsverzeichnis',
 	'longueur' => 'Länge:',
 
 	// M
