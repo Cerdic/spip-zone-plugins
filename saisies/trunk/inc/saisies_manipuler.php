@@ -210,39 +210,40 @@ function saisies_deplacer($saisies, $id_ou_nom_ou_chemin, $ou) {
  * @return Retourne le tableau décrivant les saisies, mais modifié
  */
 function saisies_modifier($saisies, $id_ou_nom_ou_chemin, $modifs) {
-	$chemin = saisies_chercher($saisies, $id_ou_nom_ou_chemin, true);
-	$position = array_pop($chemin);
-	$parent = &$saisies;
-	foreach ($chemin as $cle) {
-		$parent = &$parent[$cle];
-	}
+	if ($chemin = saisies_chercher($saisies, $id_ou_nom_ou_chemin, true)) {
+		$position = array_pop($chemin);
+		$parent = &$saisies;
+		foreach ($chemin as $cle) {
+			$parent = &$parent[$cle];
+		}
 
-	// On récupère le type tel quel
-	$modifs['saisie'] = $parent[$position]['saisie'];
-	// On récupère le nom s'il n'y est pas
-	if (!isset($modifs['options']['nom'])) {
-		$modifs['options']['nom'] = $parent[$position]['options']['nom'];
-	}
-	// On récupère les enfants tels quels s'il n'y a pas des enfants dans la modif
-	if (!isset($modifs['saisies'])
-		and isset($parent[$position]['saisies'])
-		and is_array($parent[$position]['saisies'])
-	) {
-		$modifs['saisies'] = $parent[$position]['saisies'];
-	}
+		// On récupère le type tel quel
+		$modifs['saisie'] = $parent[$position]['saisie'];
+		// On récupère le nom s'il n'y est pas
+		if (!isset($modifs['options']['nom'])) {
+			$modifs['options']['nom'] = $parent[$position]['options']['nom'];
+		}
+		// On récupère les enfants tels quels s'il n'y a pas des enfants dans la modif
+		if (!isset($modifs['saisies'])
+			and isset($parent[$position]['saisies'])
+			and is_array($parent[$position]['saisies'])
+		) {
+			$modifs['saisies'] = $parent[$position]['saisies'];
+		}
 
-	// Si une option 'nouveau_type_saisie' est donnee, c'est que l'on souhaite
-	// peut être changer le type de saisie !
-	if (isset($modifs['options']['nouveau_type_saisie']) and $type = $modifs['options']['nouveau_type_saisie']) {
-		$modifs['saisie'] = $type;
-		unset($modifs['options']['nouveau_type_saisie']);
+		// Si une option 'nouveau_type_saisie' est donnee, c'est que l'on souhaite
+		// peut être changer le type de saisie !
+		if (isset($modifs['options']['nouveau_type_saisie']) and $type = $modifs['options']['nouveau_type_saisie']) {
+			$modifs['saisie'] = $type;
+			unset($modifs['options']['nouveau_type_saisie']);
+		}
+
+		// On remplace tout
+		$parent[$position] = $modifs;
+
+		// Cette méthode ne marche pas trop
+		//$parent[$position] = array_replace_recursive($parent[$position], $modifs);
 	}
-
-	// On remplace tout
-	$parent[$position] = $modifs;
-
-	// Cette méthode ne marche pas trop
-	//$parent[$position] = array_replace_recursive($parent[$position], $modifs);
 
 	return $saisies;
 }
