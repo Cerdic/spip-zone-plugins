@@ -80,14 +80,4 @@ function crayons_json_encode($v) {
 // https://code.spip.net/@json_export
 function crayons_json_export($var) {
 	return crayons_json_encode($var);
-
-/// Il semble que ce hack n'ait plus lieu d'etre avec jquery 1.5
-/*
-	// flag indiquant qu'on est en iframe et qu'il faut proteger nos
-	// donnees dans un <textarea> ; attention $_FILES a ete vide par array_pop
-	if (defined('FILE_UPLOAD'))
-		return "<textarea>".htmlspecialchars($var)."</textarea>";
-	else
-		return $var;
-*/
 }
