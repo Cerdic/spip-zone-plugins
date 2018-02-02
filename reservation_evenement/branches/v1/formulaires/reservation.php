@@ -291,10 +291,27 @@ function formulaires_reservation_verifier_dist($id = '', $id_article = '', $reto
 	include_spip('cextras_pipelines');
 
 	if (function_exists('champs_extras_objet')) {
+
 		include_spip('inc/saisies');
 		// Charger les définitions
 		$champs_extras_auteurs = champs_extras_objet(table_objet_sql('auteur'));
-		$erreurs = array_merge($erreurs, saisies_verifier($champs_extras_auteurs));
+
+		// restreindre les vérifications aux saisies enregistrables
+		$champs_extras_auteurs = champs_extras_saisies_lister_avec_sql($champs_extras_auteurs);
+
+		foreach ($champs_extras_auteurs as $saisie) {
+			$nom = $saisie['options']['nom'];
+			$normaliser = null;
+			$erreur = cextras_verifier_saisie($saisie, _request($nom), $normaliser);
+			if ($erreur) {
+				$erreurs[$nom] = $erreur;
+			} elseif (!is_null($normaliser)) {
+				set_request($nom, $normaliser);
+			}
+		}
+
+		//$erreurs = array_merge($erreurs, cextras_verifier_saisie($champs_extras_auteurs, _request()));
+
 	}
 	if (count($erreurs) and !isset($erreurs['message_erreur']))
 		$erreurs['message_erreur'] = _T('reservation:message_erreur');
