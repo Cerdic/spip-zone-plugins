@@ -314,6 +314,8 @@ function balise_EDIT($p) {
 		$type = $distant.'__'.$type;
 	}
 
+	$primary = $p->boucles[$i_boucle]->primary;
+
 	// On rajoute ici un debug dans le cas où aucune clé primaire n'est trouvée.
 	// Cela peut se présenter par exemple si on utilise #EDIT{monchamp} directement
 	// dans une boucle CONDITION sans faire référence au nom de la boucle d'au dessus.
