@@ -310,8 +310,6 @@ function formulaires_reservation_verifier_dist($id = '', $id_article = '', $reto
 			}
 		}
 
-		//$erreurs = array_merge($erreurs, cextras_verifier_saisie($champs_extras_auteurs, _request()));
-
 	}
 	if (count($erreurs) and !isset($erreurs['message_erreur']))
 		$erreurs['message_erreur'] = _T('reservation:message_erreur');
