@@ -406,7 +406,7 @@ function albums_optimiser_base_disparus($flux) {
 	// optimiser les liens morts entre documents et albums
 	include_spip('action/editer_liens');
 	$flux['data'] += objet_optimiser_liens(array('document'=>'*'), array('album'=>'*'));
-
+	$flux['data'] += objet_optimiser_liens(array('album' => '*'), '*');
 	return $flux;
 }
 
