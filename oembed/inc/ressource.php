@@ -15,7 +15,7 @@ function traiter_ressources($r) {
 		$html = htmlspecialchars($r[0]);
 	}
 
-	return '<html>'.$html.'</html>';
+	return $html;
 }
 
 function inc_ressource_dist($html) {
