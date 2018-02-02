@@ -1,0 +1,13 @@
+[(#SET{options,''})]
+[(#SET{leFichier,''})]
+<BOUCLE_document (DOCUMENTS) {si #ENV{imgFond}|oui} {id_document=#ENV{imgFond}}>
+  [(#SET{leFichier,[(#FICHIER)]})]
+  [(#SET{options, background-repeat:no-repeat;  background-size:cover;
+                      [background-position:(#ENV{imgFondPos});]
+                      min-height:250px;}
+                      )]
+</BOUCLE_document>
+<div [(#ENV{principal}|oui)class="row"]>
+[(#SET{divOpen,<div class="span[(#ENV{id}) ]spip-bs-conteneur[ (#ENV{principale}|oui)marginsLR][ (#ENV{justifierV}|oui)justifierVert][ (#ENV{centrer}|oui)centrerHor][ (#ENV{class})]"[ (#GET{leFichier}|background_responsive{120/240/480/600/960})]> })]
+[(#GET{divOpen}|inserer_attribut{style,[(#GET{options})]})]
+<div class="row[-fluid(#ENV{fluide}|=={"oui"}|oui)] spip-bs-conteneur-row">

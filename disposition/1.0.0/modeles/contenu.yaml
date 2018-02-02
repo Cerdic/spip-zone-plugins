@@ -1,0 +1,101 @@
+nom: 'Contenu de Disposition (Bootstrap)'
+logo: 'images/disposition-48.jpg'
+icone_barre: 'disposition-contenu.png'
+parametres:
+  -
+   saisie: 'hidden'
+   options:
+     nom: 'modele'
+     defaut: 'contenu'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'id_modele'
+      label: 'Nombre de colonnes (1-12)'
+      defaut: '12'
+      obligatoire: 'oui'
+      datas:
+        '12' : '12'
+        '11' : '11'
+        '10' : '10'
+        '9 ' : '9'
+        '8 ' : '8'
+        '7 ' : '7'
+        '6 ' : '6'
+        '5 ' : '5'
+        '4 ' : '4'
+        '3 ' : '3'
+        '2 ' : '2'
+        '1 ' : '1'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'variante'
+      label: 'Ouvrir ou fermer'
+      obligatoire: 'oui'
+      cacher_option_intro: 'oui'
+      defaut: 'debut'
+      datas:
+        debut: 'Ouverture du conteneur'
+        fin: 'Fermeture du conteneur'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'centrer'
+      label: 'Centrer les enfants horizontalement'
+      cacher_option_intro: 'oui'
+      defaut: 'non'
+      datas:
+        '' : 'non'
+        oui: 'oui'
+      afficher_si: '@variante@=="debut"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'class'
+      label: 'Classe(s) CSS (séparées par un espace)'
+      defaut: ''     
+      afficher_si: '@variante@=="debut"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'url'
+      label: 'Lien (url) si click'
+      defaut: ''     
+      afficher_si: '@variante@=="debut"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'marge'
+      label: 'Marge interne. Exemple : h2d3 pour 2 pixels en haut et 3 pixels à droite'
+      defaut: ''     
+      afficher_si: '@variante@=="debut"'
+  -
+    saisie: 'selecteur_document'
+    options:
+      nom: 'imgFond'
+      label: 'Image de fond'
+      defaut: ''
+      env: 'oui'
+      afficher_si: '@variante@=="debut"'
+    verifier:
+      type: 'id_document'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'imgFondPos'
+      label: 'Position image de Fond (H-V)'
+      cacher_option_intro: 'oui'
+      defaut: ''     
+      datas:
+        '' : 'non renseigné'
+        'left top' : 'à gauche - en haut'
+        'left center' : 'à gauche - centré'
+        'left bottom' : 'à gauche - en bas'
+        'right top' : 'à droite - en haut'
+        'right center' : 'à droite - centré'
+        'right bottom' : 'à droite - en bas'
+        'center top' : 'centré - en haut'
+        'center center' : 'centré - centré'
+        'center bottom' : 'centré - en bas'
+      afficher_si: '@variante@=="debut"'

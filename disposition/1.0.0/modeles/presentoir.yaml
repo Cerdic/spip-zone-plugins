@@ -1,0 +1,106 @@
+nom: 'Presentoir de Disposition (Bootstrap)'
+logo: 'images/disposition-48.jpg'
+icone_barre: 'disposition-presentoir.png'
+parametres:
+  -
+   saisie: 'hidden'
+   options:
+     nom: 'modele'
+     defaut: 'presentoir'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'variante'
+      label: 'Configuration Horizontale ou Verticale'
+      defaut: ''
+      obligatoire: 'oui'
+      datas:
+        horizontal: 'Horizontal'
+        vertical: 'Vertical'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'dans'
+      label: 'Dans un contenu de (1-12) colonnes'
+      defaut: '12'
+      obligatoire: 'oui'
+      datas:
+        'contenu12' : '12'
+        'contenu11' : '11'
+        'contenu10' : '10'
+        'contenu9 ' : '9'
+        'contenu8 ' : '8'
+        'contenu7 ' : '7'
+        'contenu6 ' : '6'
+        'contenu5 ' : '5'
+        'contenu4 ' : '4'
+        'contenu3 ' : '3'
+        'contenu2 ' : '2'
+        'contenu1 ' : '1'
+  -
+    saisie: 'input'
+    options:
+      nom: 'texte'
+      label: "Texte affiché par le présentoir"
+      defaut: ''     
+  -
+    saisie: 'input'
+    options:
+      nom: 'titre'
+      label: "Titre du présentoir"
+      defaut: ''     
+  -
+    saisie: 'selecteur_document'
+    options:
+      nom: 'img'
+      label: 'Image affichée dans le présentoir'
+      defaut: ''
+      env: 'oui'
+    verifier:
+      type: 'id_document'
+  -
+    saisie: 'input'
+    options:
+      nom: 'imgProportion'
+      label: "Proportion de l'image. Par exemple 16:9"
+      defaut: ''     
+      afficher_si: '@img@!=""'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'imgPos'
+      label: 'Position image de Fond (H-V)'
+      cacher_option_intro: 'oui'
+      defaut: ''     
+      datas:
+        '' : 'non renseigné'
+        'left top' : 'à gauche - en haut'
+        'left center' : 'à gauche - centré'
+        'left bottom' : 'à gauche - en bas'
+        'right top' : 'à droite - en haut'
+        'right center' : 'à droite - centré'
+        'right bottom' : 'à droite - en bas'
+        'center top' : 'centré - en haut'
+        'center center' : 'centré - centré'
+        'center bottom' : 'centré - en bas'
+      afficher_si: '@variante@=="horizontal"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'url'
+      label: 'Lien (url) si click'
+      defaut: ''     
+      afficher_si: '@variante@=="debut"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'picto'
+      label: "Pictogramme de FontAwesome (nécessite le plug-in 'Picto')"
+      defaut: ''     
+  -
+    saisie: 'input'
+    options:
+      nom: 'class'
+      label: "Classe(s) CSS (séparées par un espace)"
+      defaut: ''     
+ 

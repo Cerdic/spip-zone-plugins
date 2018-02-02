@@ -1,0 +1,96 @@
+nom: 'Image de Disposition (Bootstrap)'
+logo: 'images/disposition-48.jpg'
+icone_barre: 'disposition-img_deco.png'
+parametres:
+  -
+   saisie: 'hidden'
+   options:
+     nom: 'modele'
+     defaut: 'img'
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'variante'
+      defaut: 'deco'
+  -
+    saisie: 'selecteur_document'
+    options:
+      nom: 'id_modele'
+      label: 'Image'
+      defaut: ''
+      obligatoire: 'oui'
+      env: 'oui'
+    verifier:
+      type: 'id_document'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'dans'
+      label: 'Dans un contenu de (1-12) colonnes'
+      defaut: '12'
+      obligatoire: 'oui'
+      datas:
+        'contenu12' : '12'
+        'contenu11' : '11'
+        'contenu10' : '10'
+        'contenu9 ' : '9'
+        'contenu8 ' : '8'
+        'contenu7 ' : '7'
+        'contenu6 ' : '6'
+        'contenu5 ' : '5'
+        'contenu4 ' : '4'
+        'contenu3 ' : '3'
+        'contenu2 ' : '2'
+        'contenu1 ' : '1'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'commeFond'
+      label: 'Comme image de Fond (oui) ou image standard (non)'
+      defaut: ''
+      obligatoire: 'oui'
+      datas:
+        '' : 'non'
+        'oui' : 'oui'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'imgFondPos'
+      label: 'Position image de Fond (H-V)'
+      cacher_option_intro: 'oui'
+      defaut: ''     
+      datas:
+        '' : 'non renseigné'
+        'left top' : 'à gauche - en haut'
+        'left center' : 'à gauche - centré'
+        'left bottom' : 'à gauche - en bas'
+        'right top' : 'à droite - en haut'
+        'right center' : 'à droite - centré'
+        'right bottom' : 'à droite - en bas'
+        'center top' : 'centré - en haut'
+        'center center' : 'centré - centré'
+        'center bottom' : 'centré - en bas'
+      afficher_si: '@commeFond@=="oui"'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'dansContenuPropre'
+      label: 'Respecte les marges (dans une sous-div distincte)'
+      defaut: ''
+      datas:
+        '' : 'non'
+        'oui' : 'oui'
+      afficher_si: '@commeFond@=="oui"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'imgClass'
+      label: "Classe(s) CSS (séparées par un espace) pour l'image"
+      defaut: ''     
+  -
+    saisie: 'input'
+    options:
+      nom: 'class'
+      label: 'Classe(s) CSS (séparées par un espace) pour le contenu'
+      defaut: ''     
+      afficher_si: '@dans@!=""'

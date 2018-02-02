@@ -1,0 +1,66 @@
+nom: 'Transparents (slides) de Disposition (Bootstrap)'
+logo: 'images/disposition-48.jpg'
+icone_barre: 'disposition-transparents.png'
+parametres:
+  -
+   saisie: 'hidden'
+   options:
+     nom: 'modele'
+     defaut: 'transparents'
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'variante'
+      defaut: 'responsive'
+      obligatoire: 'oui'
+  -
+    saisie: 'input'
+    options:
+      nom: 'description'
+      label: "Décrit les slides. Du type cite+131+133/logo+188+185+185/cite+141+143 (voir la doc)"
+      defaut: ''     
+  -
+    saisie: 'selection'
+    options:
+      nom: 'maxSpanLogo'
+      label: "Largeur maximale d'un logo dans un slide"
+      defaut: ''
+      datas:
+        '12' : '12'
+        '11' : '11'
+        '10' : '10'
+        '9 ' : '9'
+        '8 ' : '8'
+        '7 ' : '7'
+        '6 ' : '6'
+        '5 ' : '5'
+        '4 ' : '4'
+        '3 ' : '3'
+        '2 ' : '2'
+        '1 ' : '1'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'maxSpanCite'
+      label: "Largeur maximale d'une citation dans un slide"
+      defaut: ''
+      datas:
+        '12' : '12'
+        '11' : '11'
+        '10' : '10'
+        '9 ' : '9'
+        '8 ' : '8'
+        '7 ' : '7'
+        '6 ' : '6'
+        '5 ' : '5'
+        '4 ' : '4'
+        '3 ' : '3'
+        '2 ' : '2'
+        '1 ' : '1'
+  -
+    saisie: 'input'
+    options:
+      nom: 'carouselClass'
+      label: "Classe(s) CSS (séparées par un espace)"
+      defaut: ''     
+ 

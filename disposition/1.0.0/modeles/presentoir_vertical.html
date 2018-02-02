@@ -1,0 +1,30 @@
+#SET{titre,''}  #SET{image,''}  #SET{url,''}
+
+<BOUCLE_art(ARTICLES){si #ENV{article}|oui}{id_article=#ENV{article}}>
+#SET{titre,#TITRE}
+#SET{image,#LOGO_ARTICLE_RUBRIQUE|extraire_attribut{src}}
+#SET{url,#URL_ARTICLE}
+</BOUCLE_art>
+
+<BOUCLE_rub(RUBRIQUES){si #ENV{rubrique}|oui}{id_rubrique=#ENV{rubrique}}>
+#SET{titre,#TITRE}
+#SET{image,#LOGO_RUBRIQUE|extraire_attribut{src}}
+#SET{url,#URL_RUBRIQUE}
+</BOUCLE_rub>
+<BOUCLE_doc(DOCUMENTS){si #ENV{img}|oui}{id_document=#ENV{img}}>
+#SET{image,#FICHIER}
+</BOUCLE_doc>
+
+[(#ENV{url}|oui)#SET{url,#ENV{url}}]
+[(#ENV{titre}|oui)#SET{titre,#ENV{titre}}]
+
+[(#INCLURE{fond=inclure/conteneur-auto-debut,env,dans=#ENV{dans},url=[(#GET{url})],class=presentoir animated animateAppear[(#GET{url}|oui) animateHover][ (#ENV{class})]})]
+<div class="imgTopic">
+  [(#GET{image}|image_recadre{[(#ENV{imgProportion}|?{#ENV{imgProportion},16:9})],'-','center top'}|image_responsive{0/50/100/200/480/800/1280/1920})]
+</div>
+  [(#ENV{picto}|oui)#MODELE{picto,taille=2,nom=#ENV{picto},theme=cerclePlein,class=picto-presentoirVert}]
+  <div class="textTopic">
+        [<h3 class="titleTopic">(#GET{titre})</h3>]
+        [(#ENV*{texte}|propre)]
+  </div>
+  [(#INCLURE{fond=inclure/conteneur-auto-fin,dans=#ENV{dans}})]

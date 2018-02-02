@@ -1,0 +1,27 @@
+<BOUCLE_document (DOCUMENTS) {si #ENV{commeFond}|oui} {id_document=#ENV{id}}>
+	#SET{leFichier,#FICHIER}
+	[(#SET{options,background-repeat:no-repeat;background-size:cover;
+[background-position:(#ENV{commeFond});]min-height:[(#ENV{hauteur,250})]px;height:100% })]
+</BOUCLE_document>
+
+[(#ENV{dans}|estUnContenu)
+	[(#ENV{commeFond}|non)
+		[(#INCLURE{fond=inclure/conteneur-auto-debut}{dans=#ENV{dans}}{env})]
+		[(#MODELE{imgB}{env,class=[(#ENV{imgClass})]})]
+	  [(#INCLURE{fond=inclure/conteneur-auto-fin}{dans=#ENV{dans}})]
+	]
+
+	[(#ENV{commeFond}|oui)
+		[(#ENV{dansContenuPropre,non}|=={non}|oui)
+			[(#INCLURE{fond=inclure/conteneur-auto-debut,env,dans=#ENV{dans},imgFond=[(#ENV{id})],imgFondPos=[(#ENV{commeFond})]})]
+		  [(#INCLURE{fond=inclure/conteneur-auto-fin,dans=#ENV{dans}})]
+		]
+		[(#ENV{dansContenuPropre,non}|=={oui}|oui)
+			[(#INCLURE{fond=inclure/conteneur-auto-debut,env,dans=#ENV{dans}})]
+			  [(#SET{divOpen,<div [(#GET{leFichier}|background_responsive{120/240/480/600/960})]> })]
+				[(#GET{divOpen}|inserer_attribut{style, [(#GET{options})]})]
+					</div>
+			[(#INCLURE{fond=inclure/conteneur-auto-fin,dans=#ENV{dans}})]
+		]
+	]
+]

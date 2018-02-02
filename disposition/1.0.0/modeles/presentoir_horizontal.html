@@ -1,0 +1,14 @@
+[(#MODELE{conteneur_debut}{id=[(#ENV{dans}|valeurContenu)],fluide=oui,class=justifierVert presentoirHor animated animateAppear[(#ENV{url}|oui) animateHover][ (#ENV{class})]})]
+
+[(#MODELE{img_deco}{id=[(#ENV{img})],dans=contenu4,commeFond=#ENV{imgPos}})]
+
+[(#MODELE{contenu_debut}{id=8})]
+[(#ENV{picto}|oui)[(#MODELE{picto}{nom=#ENV{picto},taille=1,theme=cerclePlein,class=picto-presentoirHor,titre=[(#ENV{titre})],classTitre=titleTopicHor})] ]
+<div class="textTopic">
+[(#ENV{picto}|non)[<h3 class="titleTopic">(#ENV{titre})</h3>] ]
+[(#ENV*{texte}|propre)]
+</div>
+
+[(#MODELE{contenu_fin}{id=8})]
+
+[(#MODELE{conteneur_fin}{id=[(#ENV{dans}|valeurContenu)]})]

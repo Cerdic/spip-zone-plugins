@@ -1,0 +1,36 @@
+[(#ENV{img}|non)<a href="#" [(#ENV{bouton}|?{role="button" class="btn" })] data-toggle="modal" onclick="#MODALE_APPARAIT{#ENV{id}}" >[(#ENV{bouton})][(#ENV{texte})]</a>]
+<BOUCLE_modeImg(CONDITION){si #ENV{img}|oui}>
+[(#ENV{dans}|estUnContenu|oui)  [(#MODELE{contenu_debut}{env,id=[(#ENV{dans}|valeurContenu)],class=#ENV{class} imageModale})] ]
+<div style="text-align: center;">
+  <BOUCLE_document (DOCUMENTS) {si #ENV{img}|oui} {id_document=#ENV{img}}>
+    #SET{toggle,data-toggle=modal}
+    [(#MODELE{imgB,env,lien_class=[(#ENV{lienclass}|concat{" ajax"})],class=#ENV{classImg},autoZoom=non,lien=#,lien_extra=onclick=#MODALE_APPARAIT{#ENV{id}} })]
+  </BOUCLE_document>
+[(#ENV{img}|non)</a>]
+<BOUCLE_art(ARTICLES){id_article=#ENV{article}}>
+[(#ENV{img}|oui)
+[<p class="modalIconTitle">(#TITRE)</p>]
+[<p class="modalIconSubtitle">(#SOUSTITRE)</p>]
+]
+</BOUCLE_art>
+</div>
+[(#ENV{dans}|estUnContenu|oui) [(#MODELE{contenu_fin})] ]
+</BOUCLE_modeImg>
+<BOUCLE_svg(CONDITION){si #ENV{SVGDoc}|oui } >
+<script type="text/javascript">
+// SVG case
+var spipDocNode = document.getElementsByClassName("spip_document_[(#ENV{SVGDoc})]")[0]
+if(spipDocNode) {
+var objectNode = spipDocNode.getElementsByTagName("object")[0]
+objectNode.addEventListener("load",function(){
+                var svgDoc = objectNode.contentDocument;
+                var delta = svgDoc.getElementById("#ENV{SVGId}");
+                delta.addEventListener("mousedown",function(){
+                    #MODALE_APPARAIT{#ENV{id}}
+                    //$('#myModalContainer#ENV{id}').ajaxReload({args:{'modale':[(#ENV{id})]}});
+                    //   $('#myModal[(#ENV{id})]').modal('show');
+                }, false);
+            }, false);
+          }
+ </script>
+</BOUCLE_svg>

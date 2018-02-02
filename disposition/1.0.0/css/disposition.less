@@ -1,0 +1,307 @@
+@fondPrincipal_couleur: white; // définit la couleur d'arriere plan du coin des post-it
+                               // sera normalement redéfini par variables.less (normal pour un theme spipr)
+
+@import "css/variables.less";
+//### [ Passer en mode Flex
+
+.spip-bs-conteneur-row {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.spip-bs-conteneur,
+.spip-bs-contenu {
+  align-self: flex-start;
+  position:relative;
+}
+
+.spip-bs-contenu p {
+  max-width:100%;
+}
+
+@media (max-width: @navbarCollapseWidth)
+{ // helps mobile phone safari bug (bad flex support)
+.spip-bs-conteneur-row {
+      display:block !important;
+      float:none;
+  }
+}
+
+@media (min-width: @navbarCollapseDesktopWidth)
+{
+.spip-bs-conteneur-row::before { // helps a lot about awful safari bugs with flex
+  content:none;
+}
+
+}
+//### Fin "Passer en mode Flex" ]
+
+//### [ Mises en page type utilisant flex
+.spip-bs-conteneur.justifierVert > div > div {
+    align-self: stretch;
+}
+.spip-bs-conteneur.centrerVert > div > div {
+    align-self: center;
+}
+.spip-bs-conteneur.alignHaut > div > div {
+    align-self: flex-start;
+}
+.spip-bs-conteneur.alignBas > div > div {
+    align-self: flex-end;
+}
+.spip-bs-conteneur.centrerHor > div {
+  justify-content: center;
+}
+.spip-bs-conteneur.repartirEntreHor > div {
+  justify-content: space-between;
+}
+.spip-bs-conteneur.repartirAutourHor > div {
+  justify-content: space-around;
+}
+.spip-bs-conteneur.alignGauche > div {
+  justify-content: flex-start;
+}
+.spip-bs-conteneur.alignDroite > div {
+  justify-content: flex-end;
+}
+
+//### Fin "Mises en page type utilisant flex" ]
+
+//### [ patch images_responsive
+  div:not(.spip-bs-interieur) .conteneur_image_responsive_h
+  {  height: auto !important;
+     padding-bottom:0px !important;
+  }
+//### fin patch images_responsive ]
+
+//### [ Mises en page type des contenus
+.spip-bs-contenu > div{
+  height:100%;
+  box-sizing: border-box;
+}
+.spip-bs-contenu.modeFlex > div {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  flex-wrap: wrap;
+}
+.spip-bs-contenu.centrerVert > div > * {
+  align-self:center;
+}
+
+
+@media (max-width: @navbarCollapseWidth){
+  .spip-bs-contenu {
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+  .row-fluid [class*="span"]:last-child {
+    float:none;
+  }
+}
+//### Fin "Mises en page type des contenus"]
+
+
+//### quelques habillages
+.ombreNote {
+   box-shadow: 0 1px 4px 0px rgba(0,0,0,0.3);
+}
+.bsTexte .spip-bs-interieur {
+  padding:10px;
+}
+.bsTexte .spip-bs-interieur p {
+  max-width: 100%;
+}
+.bsNote {
+&:extend(.ombreNote all);
+border-radius: 2px;
+background:white;
+margin-bottom:20px;
+}
+
+.bsNoteCoinsRonds {
+  &:extend(.bsNote all);
+  border-radius: 5px 5px 5px 5px;
+}
+
+.bsNoteTexte {
+  &:extend(.bsNote all,.bsTexte all);
+}
+.bsNoteTexteCoinsRonds {
+  &:extend(.bsNoteCoinsRonds all,.bsTexte all);
+}
+
+.bsNotePostIt  {
+  &:extend(.bsNoteCoinsRonds all);
+  box-shadow: none;
+}
+
+.bsNotePostIt > div::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-style: solid;
+  background: #ddd;
+  display: block; width: 0;
+  border-width: 8px;
+  border-color: @fondPrincipal_couleur @fondPrincipal_couleur transparent transparent;
+  -moz-border-radius: 0 0 0 5px;
+  border-radius: 0 0 0 5px;
+}
+
+.bsNotePostIt::after {
+  content:"";
+position:absolute;
+top:16px;
+bottom:0px;
+left:0px;
+right:0px;
+&:extend(.ombreNote all);
+border-radius: 5px 5px 5px 5px;
+z-index:-1;
+}
+
+.bsNotePostItTexte {
+  &:extend(.bsNotePostIt all,.bsTexte all);
+
+}
+
+.spip-bs-conteneur.bsNoteTexte .spip-bs-interieur,
+.spip-bs-conteneur.bsNotePostItTexte .spip-bs-interieur  {
+  &:extend(.bsTexte all);
+
+}
+
+.spip-bs-conteneur .ombre3 > div > *,
+figure.ombre3 picture
+{
+  position:relative;
+  box-shadow: 0 1px 3px 0px rgba(0,0,0,1);
+}
+.spip-bs-conteneur .ombre1 > div > *,
+figure.ombre1 picture
+{
+ position:relative;
+  box-shadow: 0 1px 3px 0px rgba(0,0,0,0.3);
+}
+
+//### [animations
+.animateAppear {
+  animation-name: fadeIn;
+  -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.animateAppear.delay-300ms {
+  animation-delay: 0.3s;
+}
+.animateAppear.delay-600ms {
+  animation-delay: 0.6s;
+}
+.animateAppear.delay-900ms {
+  animation-delay: 0.9s;
+}
+.animateAppear.delay-1200ms {
+  animation-delay: 1.2s;
+}
+.animateHover:hover {
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+  box-shadow: 3px 3px 6px 0px rgba(0,0,0,0.6);
+}
+//### fin "animations" ]
+//### [ Boites modales
+.modal {
+  width: 800px;
+  margin-left: -400px;
+}
+.imageModale p.modalIconTitle {
+//  font-family:@sansCondensedFontFamily;
+//    font-weight: 700;
+    text-align: center;
+    font-size: 16px;
+    line-height: 18px;
+    margin-top:0px;
+    margin-bottom:5px;
+}
+
+.imageModale p.modalIconSubtitle{
+//  font-family:@sansCondensedFontFamily;
+font-size:16px;
+line-height: 18px;
+//font-weight: 400;
+text-align:center;
+margin-bottom:0px;
+}
+.modal-backdrop, .modal-backdrop.fade.in {
+  //  opacity: 0.8 !important;
+  //  background:black !important;
+}
+//### fin Boites Modales ]
+
+
+
+//### [ Modele "presentoir"
+.presentoir  {
+  &:extend(.bsNote all);
+  text-align:center;
+}
+.presentoir > div  {
+height:100%;
+}
+.presentoirHor {
+  &:extend(.bsNoteTexte all);
+}
+.presentoirHor > div {
+  height:100%;
+}
+
+div.textTopic {
+  padding:10px;
+}
+
+
+div.textTopic p {
+  margin-bottom:1px;
+  color:black;
+  text-align:left;
+   hyphens: auto;
+}
+h3.titleTopic {
+    margin-bottom: 0.4em;
+    font-weight:300;
+    font-size:24px;
+    text-align:center;
+}
+
+.picto-presentoirVert {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-top: -1em;
+}
+
+.picto-presentoirHor {
+  &:extend(.picto-centrerVert all);
+}
+.titleTopicHor {
+  &:extend(.titleTopic all);
+  padding-top:15px;
+  font-size:30px !important;
+  text-align:left !important;
+}
+
+
+@media (max-width: @navbarCollapseWidth)
+{
+  .presentoir  {
+  max-width:400px;
+  }
+}
+//### fin Modele "presentoir" ]

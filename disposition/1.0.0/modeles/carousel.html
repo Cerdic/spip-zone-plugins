@@ -1,0 +1,74 @@
+#SET{icones,#CONFIG{disposition/policeCarousel,bootstrap}}
+[(#REM) listing des images]
+#SET{stockIdDoc,#ARRAY}
+#SET{stockVerbatim,#ARRAY}
+
+
+
+<BOUCLE_par_document(CONDITION){si #ENV{docs}|is_null|non}>
+#SET{stockIdDoc,(#ENV{docs}|explode{/})}
+</BOUCLE_par_document>
+
+
+<BOUCLE_par_article(CONDITION){si #ENV{article}}>
+         <BOUCLE_images_article(DOCUMENTS){id_article=#ENV{article}}{extension IN jpg,gif,png}>
+           		#SET{stockIdDoc,(#GET{stockIdDoc}|push{#ID_DOCUMENT})}
+         </BOUCLE_images_article>
+</BOUCLE_par_article>
+
+<BOUCLE_par_verbatim(CONDITION){si #ENV{verbatim}}>
+  #SET{stockVerbatim,(#ENV{verbatim}|explode{/})}
+</BOUCLE_par_verbatim>
+
+<div id="myCarousel#ENV{id}" class="carousel slide #ENV{carouselClass}" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <BOUCLE_indicators(DOCUMENTS){id_document IN #GET{stockIdDoc}}{par num titre}>
+          <li data-target="#myCarousel#ENV{id}" data-slide-to="[(#COMPTEUR_BOUCLE|moins{1})]" [class="(#COMPTEUR_BOUCLE|=={1}|oui) active"]></li>
+      </BOUCLE_indicators>
+      <BOUCLE_indicators_verbatim(ARTICLES){id_article IN #GET{stockVerbatim}}>
+          <li data-target="#myCarousel#ENV{id}" data-slide-to="[(#COMPTEUR_BOUCLE|moins{1})]" [class="(#COMPTEUR_BOUCLE|=={1}|oui) active"]></li>
+      </BOUCLE_indicators_verbatim>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <BOUCLE_inner(DOCUMENTS){id_document IN #GET{stockIdDoc}}{par num titre}>
+        <div class="item item[(#COMPTEUR_BOUCLE|moins{1})] item_doc_id_#ID_DOCUMENT [(#COMPTEUR_BOUCLE|=={1}|oui)active]" >
+         [<a href="(#CREDITS)">]
+         [(#FICHIER|balise_img|vider_attribut{height})]
+         #DESCRIPTIF
+         [(#CREDITS|oui)</a>]
+        </div>
+    </BOUCLE_inner>
+      <BOUCLE_inner_quote(ARTICLES){id_article IN #GET{stockVerbatim}}>
+        <div class="item item_verbatim[(#COMPTEUR_BOUCLE|moins{1})] item_verbatim_id_#ID_ARTICLE [(#COMPTEUR_BOUCLE|=={1}|oui)active]" >
+        <blockquote>
+        <br>#TEXTE  <span class="signature_citation"><p class="auteur_citation"> #TITRE</p>  <br><p class="fonction_auteur_citation"> (#SOUSTITRE)</p></span>
+        </blockquote>
+        </div>
+    </BOUCLE_inner_quote>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel#ENV{id}" data-slide="prev">
+      [(#GET{icones}|=={bootstrap}|oui)<span class="glyphicon glyphicon-chevron-left"></span>]
+      [(#GET{icones}|=={awesome}|oui) [(#MODELE{awesomeicon}{nom=angle-left})] ]
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel#ENV{id}" data-slide="next">
+      [(#GET{icones}|=={bootstrap}|oui)<span class="glyphicon glyphicon-chevron-right"></span>]
+      [(#GET{icones}|=={awesome}|oui) [(#MODELE{awesomeicon}{nom=angle-right})] ]
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+
+  <script type="text/javascript">
+    var $ = jQuery.noConflict();
+    $(document).ready(function() {
+        $('#myCarousel#ENV{id}').carousel({ interval: [(#ENV{delai}|?{#ENV{delai},5000})], cycle: true });
+    });
+
+
+  </script>

@@ -1,0 +1,2 @@
+[(#ENV{dans}|estUnConteneur|oui) #SET{dans,contenu#CONFIG{disposition/defCols,6}} [(#MODELE{conteneur_debut}{id=[(#ENV{dans}|valeurConteneur)]}{principal,class=centrerHor})] ]
+[(#GET{dans,#ENV{dans}}|estUnContenu|oui)  [(#MODELE{contenu_debut}{id=[(#GET{dans,#ENV{dans}}|valeurContenu)]}{class=[(#ENV{class})]}{env})] ]

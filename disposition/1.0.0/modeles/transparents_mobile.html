@@ -1,0 +1,97 @@
+#SET{icones,#CONFIG{disposition/policeCarousel,bootstrap}}
+#SET{maxCol,12}
+
+[(#REM) calcul du nombre de "slides"]
+#SET{stockCommands,(#ENV{description}|explode{/})}
+#SET{stockLogo,(#GET{stockCommands}|listeLogo)}
+#SET{stockCite,(#GET{stockCommands}|listeCite)}
+#SET{stockTypes,(#GET{stockLogo}|listeTypes{#GET{stockCite}})}
+#SET{stockID,(#GET{stockLogo}|listeID{#GET{stockCite}})}
+
+
+<div id="myTransparentsMob#ENV{id}" class="carousel carousel-transparentsMob slide #ENV{carouselClass}" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <BOUCLE_compte_slides(DATA){source tableau,#GET{stockTypes}}>
+          <li data-target="#myTransparentsMob#ENV{id}" data-slide-to="[(#COMPTEUR_BOUCLE|moins{1})]" [class="(#COMPTEUR_BOUCLE|=={1}|oui) active"]></li>
+        </BOUCLE_compte_slides>
+    </ol>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <BOUCLE_slides(DATA){source tableau,#GET{stockTypes}}>
+             <div class="item item[(#CLE)]  [(#CLE|=={0}|oui)active]" >
+                    <BOUCLE_cite(CONDITION){si  #VALEUR|=={"cite"}}>
+                            [(#MODELE{contenu_debut}{id=12})]
+                            <BOUCLE_citations(ARTICLES){id_article=(#GET{stockID}|table_valeur{#CLE})}>
+                                <blockquote>
+                                    <br>#TEXTE  <div class="signature_citation"><p class="auteur_citation"> #TITRE</p>  <br><p class="fonction_auteur_citation"> (#SOUSTITRE)</p></div>
+                                </blockquote>
+                            </BOUCLE_citations>
+                            [(#MODELE{contenu_fin}{id=12})]
+                   </BOUCLE_cite>
+                   <BOUCLE_logo(CONDITION){si #VALEUR|=={"logo"}}>
+                   #SET{leFichier,''}  #SET{lesCredits,''} #SET{leDescriptif,''}
+                   <BOUCLE_logos(DOCUMENTS){id_document=(#GET{stockID}|table_valeur{#CLE})}>
+                   #SET{leFichier,#FICHIER}  #SET{lesCredits,#CREDITS} #SET{leDescriptif,#DESCRIPTIF}
+                   </BOUCLE_logos>
+                      [(#MODELE{contenu_debut}{id=12,url=#GET{lesCredits,''}})]
+                          [(#GET{leFichier}|balise_img|inserer_attribut{width,100%}|vider_attribut{height})]
+                          [<p>(#GET{leDescriptif})</p>]
+                      [(#MODELE{contenu_fin}{id=12})]
+                   </BOUCLE_logo>
+             </div>
+        </BOUCLE_slides>
+    </div>
+        <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myTransparentsMob#ENV{id}" data-slide="prev">
+      [(#GET{icones}|=={bootstrap}|oui)<span class="glyphicon glyphicon-chevron-left"></span>]
+      [(#GET{icones}|=={awesome}|oui) [(#MODELE{awesomeicon}{nom=angle-left})] ]
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myTransparentsMob#ENV{id}" data-slide="next">
+      [(#GET{icones}|=={bootstrap}|oui)<span class="glyphicon glyphicon-chevron-right"></span>]
+      [(#GET{icones}|=={awesome}|oui) [(#MODELE{awesomeicon}{nom=angle-right})] ]
+      <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<script type="text/javascript">
+  var $ = jQuery.noConflict();
+  $(document).ready(function() {
+      $('#myTransparentsMob#ENV{id}').carousel({ interval: [(#ENV{delai}|?{#ENV{delai},5000})], cycle: true });
+  });
+  $(window).load(function () {
+      function normalizeHeights() {
+        var items  = $('#myTransparentsMob#ENV{id} > .carousel-inner > .item'), //grab all slides
+            heights = [], //create empty array to store height values
+            active = -1,
+            tallest; //create variable to make note of the tallest slide
+          items.each(function(index) { //add heights to array
+            if($(this).hasClass("active"))
+              {active=index;
+               $(this).removeClass("active")
+              }
+              heights.push($(this).height());
+          });
+          tallest = Math.max.apply(null, heights); //cache largest value
+          if (active<0) {active = 0;}
+          items.each(function(index) {
+              $(this).css('min-height',tallest + 'px');
+              if(active==index) {
+              $(this).addClass("active");
+              }
+          });
+      };
+      normalizeHeights();
+      $(window).on('resize orientationchange', function () {
+        var items  = $('#myTransparentsMob#ENV{id} > .carousel-inner > .item'), //grab all slides
+            heights = [], //create empty array to store height values
+            tallest; //create variable to make note of the tallest slide
+          tallest = 0, heights.length = 0; //reset vars
+          items.each(function() {
+              $(this).css('min-height','0'); //reset min-height
+          });
+          normalizeHeights(); //run it again
+      });
+    });
+</script>

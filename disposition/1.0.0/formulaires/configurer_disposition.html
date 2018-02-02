@@ -1,0 +1,22 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+<form action="#ENV{action}" method="post"><div>
+    #ACTION_FORMULAIRE{#ENV{action}}
+    <ul class="editer-groupe">
+        <li class="editer editer_defCols obligatoire">
+            <p><strong>Nombre de colonnes bootstrap pour les "contenu" par défaut (1 à 12)</strong></p>
+            <input type='text' name='defCols' id='defCols' value="[(#ENV{defCols,6})]" class="text" />
+        </li>
+        <li class="editer">
+    <p><strong>Police de caractères pour les flèches gauche et droite du carousel :</strong></p>
+      <select name="policeCarousel" id="idselect">
+        <option value="bootstrap"[(#ENV{policeCarousel}|=={bootstrap}|?{' selected="selected"',''})]>Police Bootstrap</option>
+        <option value="awesome"[(#ENV{policeCarousel}|=={awesome}|?{' selected="selected"',''})]>Police FontAwesome (si plug-in "Picto" installé)</option>
+      </select>
+    </li>
+          </ul>
+    <p class="boutons"><input type="submit" class="submit" value="<:pass_ok:>" /></p>
+</div></form>
+
+
+</div>
