@@ -214,7 +214,7 @@ EOF;
 var configCrayons;
 function startCrayons() {
 	configCrayons = new $.prototype.cfgCrayons({$config});
-	jQuery.fn.crayonsstart();
+	$.fn.crayonsstart();
 {$pp}
 }
 
