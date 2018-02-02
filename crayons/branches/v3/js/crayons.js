@@ -589,7 +589,7 @@
         id_crayon = 0; // global
         // sortie, demander pour sauvegarde si oubli
         if (configCrayons.txt.sauvegarder) {
-            $(window).unload(function(e) {
+            $(window).on("unload", function(e) {
                 var chg = $(".crayon-changed");
                 if (chg.length && uniConfirm(configCrayons.txt.sauvegarder)) {
                     chg
