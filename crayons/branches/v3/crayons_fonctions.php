@@ -207,7 +207,7 @@ $(function() {
 EOF;
 	}
 
-
+	$jquery_path = find_in_path('javascript/jquery.js');
 	$incCSS = "<link rel=\"stylesheet\" href=\"{$cssFile}\" type=\"text/css\" media=\"all\" />";
 	$incJS = <<<EOH
 <script type="text/javascript">/* <![CDATA[ */
@@ -217,11 +217,26 @@ function startCrayons() {
 	jQuery.fn.crayonsstart();
 {$pp}
 }
+
+function chargerCrayons() {
 var cr = document.createElement('script');
-cr.type = 'text/javascript'; cr.async = true;
+cr.type = 'text/javascript';
+cr.async = true;
 cr.src = '{$jsFile}\x26callback=startCrayons';
 var s = document.getElementsByTagName('script')[0];
 s.parentNode.insertBefore(cr, s);
+}
+
+if (typeof window.jQuery == "undefined") {
+	var crj = document.createElement('script');
+	crj.type = 'text/javascript';
+	crj.src = '{$jquery_path}';
+	var sj = document.getElementsByTagName('script')[0];
+	crj.onload = chargerCrayons;
+	sj.parentNode.insertBefore(crj, sj);
+} else {
+	chargerCrayons();
+}
 /* ]]> */</script>
 
 EOH;
