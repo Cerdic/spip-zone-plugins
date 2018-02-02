@@ -2,7 +2,7 @@
 	<nom>Disposition responsive avec Bootstrap</nom>
 	<auteur>Mikha</auteur>
 	<licence>GPL v3</licence>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<etat>test</etat>
 	<slogan>Rend possible la mise en page d'un article avec des blocs responsive dans l'espace de rédaction via Bootstrap. Complément idéal pour SPIP-R</slogan>
 	<description>Ajoute de nouveaux modèles exploitant certaines fonctionnatliés de bootstrap : blocs responsive avec styles CSS, carousel, boutons, objets visuels</description>
@@ -11,7 +11,6 @@
 	<lien>https://contrib.spip.net/disposition</lien>
 
 	<prefix>disposition</prefix>
-
 
 	<pipeline>
 		<nom>insert_head_css</nom>
@@ -24,7 +23,7 @@
 
 	<fonctions>disposition_fonctions.php</fonctions>
 
-	<necessite id="SPIP" version="[3.1;]" />
+	<necessite id="SPIP" version="[3.1.0;3.2.*]" />
 	<necessite id="bootstrap" version="[2.1.10;]" />
 	<necessite id="image_responsive" version="[7.5.5;]" />
 	<necessite id="medias_responsive_mod" version="[1.10.10;]" />

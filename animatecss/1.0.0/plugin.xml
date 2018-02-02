@@ -2,7 +2,7 @@
 	<nom>Animate CSS pour SPIP</nom>
 	<auteur>Mikha</auteur>
 	<licence>GPL v3</licence>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<etat>test</etat>
 	<slogan>Permet d'utiliser Animate CSS sous SPIP</slogan>
 	<description></description>
@@ -12,16 +12,11 @@
 
 	<prefix>animatecss</prefix>
 
-
 	<pipeline>
 		<nom>insert_head_css</nom>
 		<inclure>animatecss_pipelines.php</inclure>
 	</pipeline>
 
-
-
-
-	<necessite id="SPIP" version="[3.1;]" />
-
+	<necessite id="SPIP" version="[3.1.0;3.2.*]" />
 
 </plugin>

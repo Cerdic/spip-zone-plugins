@@ -12,18 +12,14 @@
 
 	<prefix>picto</prefix>
 
-
 	<pipeline>
 		<nom>insert_head_css</nom>
 		<inclure>picto_pipelines.php</inclure>
 	</pipeline>
 
 	<fonctions>picto_fonctions.php</fonctions>
-  <options>  picto_options.php </options>
+	<options>  picto_options.php </options>
 
-
-
-	<necessite id="SPIP" version="[3.1;]" />
-
+	<necessite id="SPIP" version="[3.1.0;3.2.*]" />
 
 </plugin>
