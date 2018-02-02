@@ -81,6 +81,22 @@ function inc_xml_de_to_array_dist($u){
 	return activer_iterateur('xml_de', $u) ;
 }
 
+// Iterateur pour l'extracteur pmg
+function inc_pmg_to_array_dist($u){
+	// le format PMG est une liste d'articles <artikel-liste> qui contient des <artikel>.
+	// https://www.pressemonitor.de/app/uploads/2016/11/PMG-Lieferantenhandbuch.pdf
+	// Préparation pour extraire_balises car - est dans \b mais pas _
+	// Donc <artikel-liste> => <artikel_liste>
+	include_spip("inc/filtres");
+	$u = preg_replace(",(artikel|seite|autor|quelle|titel|box)-,Uims","\\1_",$u);
+	$articles = extraire_balises($u, "artikel");
+	foreach($articles as $a){
+		$r = activer_iterateur('pmg', $a) ;
+		$m[] = $r[0] ;
+	}
+	return $m ;
+}
+
 function activer_iterateur($extracteur, $u){
 	
 	$item = array();

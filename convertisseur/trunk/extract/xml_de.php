@@ -37,7 +37,7 @@ function convertir_xml_de($u) {
 	
 		
 	$m['date'] = extraire_attribut($metas, 'Edat');
-	$m["url"] = "http://monde-diplomatique.de/artikel/!".  extraire_attribut($metas, 'DatNr') ;
+	$m["url"] = extraire_attribut($metas, 'DatNr') ;
 
 	// pas de puces	
 	$u = preg_replace(',&kenkel;\s*,','',$u);
@@ -304,6 +304,7 @@ function convertir_xml_de($u) {
 	$u = preg_replace('~<Hoch>\s*</Hoch>~Uum',"",$u);
 	$u = preg_replace('~<Hoch>\s*\.\s*</Hoch>~Uum',". ",$u);
 	$u = preg_replace('~<Hoch>\s*,\s*</Hoch>~Uum',", ",$u);
+	$u = preg_replace('~<Hoch>\s*:\s*</Hoch>~Uum',": ",$u);
 	$u = preg_replace('~<Hoch>\s*:\s*</Hoch>~Uum',": ",$u);
 	//var_dump("<textarea>$u</textarea>");
 

@@ -113,7 +113,8 @@ class Convert extends Command {
 				
 				// plugin convertisseur
 				include_spip("extract/$extracteur");
-				$fonction_extraction = $GLOBALS['extracteur'][$extracteur] ;
+				include_spip("convertisseur_fonctions");
+				$fonction_extraction = "inc_${extracteur}_to_array_dist" ;
 				
 				// chopper des fichiers xml mais pas xxx_metatada.xml
 				$fichiers = preg_files($source ."/", "(?:(?<!_metadata\.)xml$)");
@@ -146,59 +147,72 @@ class Convert extends Command {
 						// var_dump($m, $collection, $numero);
 					}
 					
-					$article = basename($f);
+					$file = basename($f);
 					
 					// pour le chemin des documents.
 					set_request('fichier', $collection . $numero . "fichier.xml");
 					
-					$contenu = $fonction_extraction($f,$charset);
+					lire_fichier($f,$c);
+					$articles = $fonction_extraction($c);
 					
-					include_spip("inc/convertisseur");
-					$contenu = nettoyer_format($contenu);
+					$nb_articles = sizeof($articles) ;
 					
-					// Générer des noms de fichiers valides
 					include_spip("inc/charsets");
-					$article = translitteration($article);
-					$article = preg_replace(',[^\w-]+,', '_', $article);
-					$article = preg_replace(',_xml$,', '.txt', $article);
-					
-					// recaler les notes avec le plugin revision nbsp si dispo
-					if(_DIR_PLUGIN_REVISIONNBSP AND $corriger_notes == "oui"){
-						include_spip('revision_nbsp');
-						if($c = notes_automatiques($contenu))
-							$contenu = $c ;
-						//global $nb_notes;
-						//echo "***** $f : $nb_notes notes ******\n\n" ;
+					foreach($articles as $contenu){
+						
+						// Générer des noms de fichiers valides
+						if($nb_article == 1){
+							// si un seul article, on grade le nom de fichier original
+							$file = translitteration($file);
+							$file = preg_replace(',[^\w-]+,', '_', $file);
+							$file = preg_replace(',_xml$,', '.txt', $file);
+						}else{
+							// plusieurs articles, il faut creer des noms de fichiers
+							$file = trim(annee($contenu['date']) . "-" . mois($contenu['date']) . "-" .translitteration($contenu['titre'])) ;
+							$file = preg_replace(',[^\w-]+,', '_', $file) . ".txt" ;
+							//var_dump($file);
+						}
+						
+						// recaler les notes avec le plugin revision nbsp si dispo
+						if(_DIR_PLUGIN_REVISIONNBSP AND $corriger_notes == "oui"){
+							include_spip('revision_nbsp');
+							if($n = notes_automatiques($contenu['insertion']))
+								$contenu['insertion'] = $n ;
+							//global $nb_notes;
+							//echo "***** $f : $nb_notes notes ******\n\n" ;
+						}
+						
+						$c = array(
+							"fichier_source" => $f,
+							"dest" => $dest,
+							"collection" => $collection,
+							"numero" => $numero,
+							"contenu" => $contenu,
+							"basename" => $file ,
+							"fichier_dest" => $dest . "/" . $collection . $numero . $file
+						);
+						
+						// traitements persos en pipeline maison sur $c avant d'écrire le fichier converti
+						if(find_in_path('convertisseur_perso.php'))
+							include_spip("convertisseur_perso");
+						if (function_exists('nettoyer_conversion_cli')){
+							$c = nettoyer_conversion_cli($c);
+						}
+						
+						if(!is_dir($c["dest"] . "/" .  $c["collection"])){
+							mkdir($c["dest"]  . "/" . $c["collection"]) ;
+						}
+						if(!is_dir($c["dest"]  . "/" . $c["collection"] . $c["numero"])){
+							mkdir($c["dest"]  . "/" . $c["collection"] . $c["numero"]) ;
+						}
+						
+						// var_dump($c["contenu"]["insertion"]);
+						
+						include_spip("inc/flock");
+						ecrire_fichier($c["fichier_dest"], $c["contenu"]["insertion"]);
+						
+						$output->writeln("Nouvelle conversion : " . $c["fichier_dest"]);
 					}
-					
-					$c = array(
-						"fichier_source" => $f,
-						"dest" => $dest,
-						"collection" => $collection,
-						"numero" => $numero,
-						"contenu" => $contenu,
-						"basename" => $article ,
-						"fichier_dest" => $dest . "/" . $collection . $numero . $article
-					);
-					
-					// traitements persos sur $c avant d'écrire le fichier converti
-					if(find_in_path('convertisseur_perso.php'))
-						include_spip("convertisseur_perso");
-					if (function_exists('nettoyer_conversion_cli')){
-						$c = nettoyer_conversion_cli($c);
-					}
-					
-					if(!is_dir($c["dest"] . "/" .  $c["collection"])){
-						mkdir($c["dest"]  . "/" . $c["collection"]) ;
-					}
-					if(!is_dir($c["dest"]  . "/" . $c["collection"] . $c["numero"])){
-						mkdir($c["dest"]  . "/" . $c["collection"] . $c["numero"]) ;
-					}
-					
-					include_spip("inc/flock");
-					ecrire_fichier($c["fichier_dest"], $c["contenu"]);
-					
-					$output->writeln("Nouvelle conversion : " . $c["fichier_dest"]);
 				
 				}
 				

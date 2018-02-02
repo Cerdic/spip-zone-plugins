@@ -330,6 +330,7 @@ function nettoyer_format($t) {
   $conv_formats['Indesign_SPIP'] = 'indesign_xml'; // function extract/
   $conv_formats['XMLOCR_SPIP'] = 'xml_ocr'; // function extract/
   $conv_formats['XMLDE_SPIP'] = 'xml_de'; // function extract/
+  $conv_formats['PMG_SPIP'] = 'pmg'; // function extract/
 
   //
   //  Les conversions SPIP vers qqchose ....
@@ -438,18 +439,18 @@ function conversion_format($conv_in, $format) {
 			foreach($conv_functions_pre[$format] as $key=>$pattern)
 				$conv_out = $pattern($conv_out);
 		}
-
-
+		
+		
 		// on convertit (en avant les regex!)
 		foreach($conv_formats[$format]['pattern'] as $key=>$pattern) {
 			$replacement = $conv_formats[$format]['replacement'][$key];
 			$conv_out = preg_replace($pattern, $replacement, $conv_out);
 		}
 	}
-
+	
 	// fonction HTML2SPIP - http://ftp.espci.fr/pub/html2spip/
 	else if ($format=="html_SPIP") { 	
-          if (file_exists(find_in_path('lib/html2spip-0.6/misc_tools.php'))) {                  
+          if (file_exists(find_in_path('lib/html2spip-0.6/misc_tools.php'))) {
                 require_once(find_in_path('lib/html2spip-0.6/misc_tools.php'));
                 require_once(find_in_path('lib/html2spip-0.6/HTMLEngine.class'));
                 require_once(find_in_path('lib/html2spip-0.6/HTML2SPIPEngine.class'));
@@ -479,7 +480,7 @@ function conversion_format($conv_in, $format) {
 				#include_spip('inc/charsets');
 				#$conv_out = importer_charset($conv_out, $charset);
 			}
-
+			
 			if ($cv AND !$conv_out)
 				$log = "<span style='color:red'>"
 					._T("convertisseur:erreur_extracteur")
@@ -490,7 +491,7 @@ function conversion_format($conv_in, $format) {
 					._T("convertisseur:unknown_format")
 					."</span>";
 		}
-
+		
 	return $conv_out;
 }
 
