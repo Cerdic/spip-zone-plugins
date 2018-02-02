@@ -10,7 +10,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return array
  */
 function inscriptionmotdepasse_formulaire_charger($flux){
-	if ($flux['args']['form'] == 'inscription'){
+	// Seulement si le formulaire d'origine n'a pas renvoyé un vrai "false"
+	if ($flux['args']['form'] == 'inscription' and $flux['data'] !== false) {
 		$flux['data']['password'] = '';
 		$flux['data']['password_confirmation'] = '';
 	}
