@@ -12,11 +12,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 define('_PREG_CRAYON', ',crayon\b[^<>\'"]+?\b((\w+)-(\w+)-(\w+(?:-\w+)*))\b,');
 
-// Compatibilite pour 1.92 : on a besoin de sql_fetch et table_objet_sql
-if ($GLOBALS['spip_version_code'] < '1.93' and $f = charger_fonction('compat_crayons', 'inc')) {
-	$f();
-}
-
 // Autoriser les crayons sur les tables non SPIP ?
 // Par defaut : oui (pour les admins complets, si autoriser_defaut_dist()) ;
 // mettre a false en cas de mutualisation par prefixe de table,
