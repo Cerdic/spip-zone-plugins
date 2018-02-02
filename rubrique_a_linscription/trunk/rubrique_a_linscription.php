@@ -62,11 +62,12 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 
 
 		// Utilise comme rubrique mere celle qui est passé explicitement au formulaire ou celle de la config ?
-
-		$reqtest = sql_select('id_rubrique','spip_rubriques',"id_rubrique=".$flux["args"]["args"][0]);
-		if ($reqtest){
-			$id_parent =  $flux["args"]["args"][0];
-		}		
+		if  (isset ($flux["args"]["args"][0])) {
+			$reqtest = sql_select('id_rubrique','spip_rubriques',"id_rubrique=".$flux["args"]["args"][0]);
+			if ($reqtest){
+				$id_parent =  $flux["args"]["args"][0];
+			}		
+		}
 		// Création de la rubrique
 		include_spip('inc/rubriques');
 		$titre_rubrique = _T('rubrique_a_linscription:titre_rubrique',array('nom'=>$nom_inscription));
