@@ -438,15 +438,17 @@ function balise_CRAYON($p) {
  *   Classes CSS (à ajouter dans le HTML à destination du javascript de Crayons)
 **/
 function classe_boucle_crayon($type, $champ, $id) {
-	// $type = objet_type($type);
-	$type = $type[strlen($type) - 1] == 's' ?
-		substr($type, 0, -1) :
-		str_replace(
-			array('hierarchie','syndication'),
-			array('rubrique','site'),
-			$type
-		);
 
+	// Certain objets SPIP porte mal leur nom
+	if ($type == 'hierarchie') {
+		$type = 'rubrique';
+	} elseif ($type == 'syndication') {
+		$type = 'site';
+	}
+	// On récupère objet_type
+	$type = objet_type($type);
+
+	// ??
 	$plus = (substr($champ, -1) == '+' and $champ = substr($champ, 0, -1))
 		? " $type--$id"
 		: '';
