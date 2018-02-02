@@ -213,7 +213,7 @@ EOF;
 <script type="text/javascript">/* <![CDATA[ */
 var configCrayons;
 function startCrayons() {
-	configCrayons = new jQuery.prototype.cfgCrayons({$config});
+	configCrayons = new $.prototype.cfgCrayons({$config});
 	jQuery.fn.crayonsstart();
 {$pp}
 }
