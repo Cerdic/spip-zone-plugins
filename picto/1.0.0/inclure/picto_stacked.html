@@ -1,0 +1,5 @@
+<span class="fa-stack [ fa-(#ENV{taille}|taille_picto)][ (#ENV{class})]">
+  [(#ENV{iconeDessous}|oui)[(#INCLURE{fond=inclure/picto_base,nom=#ENV{iconeDessous},class=fa-stack-2x,taille=0})] ]
+  [(#INCLURE{fond=inclure/picto_base,env,nom=[(#ENV{nom})],class=fa-stack-1x,taille=0})]
+  [(#ENV{iconeDessus}|oui)[(#INCLURE{fond=inclure/picto_base,nom=#ENV{iconeDessus},class=fa-stack-2x,taille=0})] ]
+</span>

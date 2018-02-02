@@ -1,0 +1,12 @@
+.picto-danger .fa-stack-2x{
+  color:red;
+}
+.picto-lettrine {
+  float:left;
+  margin-right:10px;margin-bottom:5px;
+}
+.picto-centrerVert {
+  display:inline-block;
+  vertical-align:middle;
+  float:none;
+}

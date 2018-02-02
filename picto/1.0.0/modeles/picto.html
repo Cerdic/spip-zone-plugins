@@ -1,0 +1,8 @@
+[(#ENV{titre}|oui)<h3 class="[(#ENV{classTitre})]">]
+[(#ENV{theme}|non)[(#INCLURE{fond=inclure/picto_base, env})] ]
+[(#ENV{theme}|=={carreVide}|oui) [(#INCLURE{fond=inclure/picto_stacked, env,taille=[(#ENV{taille,1.3})],iconeDessous=square-o})] ]
+[(#ENV{theme}|=={carrePlein}|oui) [(#INCLURE{fond=inclure/picto_stacked, env,taille=[(#ENV{taille,1.3})],iconeDessous=square,negatif=oui})] ]
+[(#ENV{theme}|=={cercleVide}|oui) [(#INCLURE{fond=inclure/picto_stacked, env,taille=[(#ENV{taille,1.3})],iconeDessous=circle-o})] ]
+[(#ENV{theme}|=={cerclePlein}|oui) [(#INCLURE{fond=inclure/picto_stacked, env,taille=[(#ENV{taille,1.3})],iconeDessous=circle,negatif=oui})] ]
+[(#ENV{theme}|=={danger}|oui) [(#INCLURE{fond=inclure/picto_stacked, env,taille=[(#ENV{taille,1.3})],iconeDessus=ban,class=picto-danger})] ]
+[(#ENV{titre})</h3>]

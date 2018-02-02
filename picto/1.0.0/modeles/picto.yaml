@@ -1,0 +1,138 @@
+nom: 'un Pictogramme FontAwesome'
+logo: 'images/picto-48.jpg'
+icone_barre: 'picto.png'
+parametres:
+  -
+   saisie: 'hidden'
+   options:
+     nom: 'modele'
+     defaut: 'picto'
+  -
+    saisie: 'input'
+    options:
+      nom: 'nom'
+      label: 'Nom du picto (voir le site de FontAwesome)'
+      defaut: ''     
+  -
+    saisie: 'selection'
+    options:
+      nom: 'theme'
+      label: 'Thème du picto'
+      cacher_option_intro: 'oui'
+      defaut: 'cercleVide'
+      datas:
+        '': 'Aucun'
+        cercleVide: 'Contour Circulaire'
+        cerclePlein: 'Cercle Plein'
+        carreVide: 'Contour Carré'
+        carrePlein: 'Carré Plein'
+        danger: 'Danger'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'taille'
+      label: 'Taille'
+      cacher_option_intro: 'oui'
+      datas:
+        '': '1x'
+        '1.3': '1.3x'
+        '2 ': '2x'
+        '3 ' : '3x'
+        '4 ' : '4x'
+        '5 ' : '5x'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'largeurFixe'
+      label: 'Largeur Fixe'
+      cacher_option_intro: 'oui'
+      defaut: ''
+      datas:
+        '' : 'non'
+        oui: 'oui'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'negatif'
+      label: 'Négatif'
+      cacher_option_intro: 'oui'
+      defaut: ''
+      datas:
+        '' : 'non'
+        oui: 'oui'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'bordure'
+      label: 'Encadrement'
+      cacher_option_intro: 'oui'
+      defaut: ''
+      datas:
+        '' : 'non'
+        oui: 'oui'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'aligner'
+      label: 'Alignement'
+      cacher_option_intro: 'oui'
+      defaut: ''
+      datas:
+        '' : 'Aucun'
+        gauche: 'A gauche'
+        droite: 'A Droite'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'rotation'
+      label: 'Rotation'
+      cacher_option_intro: 'oui'
+      defaut: ''
+      datas:
+        '': 'Aucune'
+        gauche: 'Gauche'
+        droite: 'Droite'
+        bas: 'Bas'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'symetrie'
+      label: 'Symetrie'
+      cacher_option_intro: 'oui'
+      defaut: ''
+      datas:
+        '': 'Aucune'
+        H: 'horizontale'
+        V: 'verticale'
+
+  -
+    saisie: 'selection'
+    options:
+      nom: 'animation'
+      label: 'Animation'
+      cacher_option_intro: 'oui'
+      defaut: ''
+      datas:
+        '': 'Aucune'
+        continu: 'Fluide'
+        etapes: 'Sur 8 étapes'
+  -
+    saisie: 'input'
+    options:
+      nom: 'class'
+      label: 'classe CSS'
+      defaut: ''
+  -
+    saisie: 'input'
+    options:
+      nom: 'titre'
+      label: 'Titre'
+      defaut: ''
+
+      defaut: ''
+  -
+    saisie: 'input'
+    options:
+      nom: 'classTitre'
+      label: 'classe CSS du Titre'
+      defaut: ''

@@ -1,0 +1,29 @@
+<plugin>
+	<nom>Picto avec AwesomeIcon</nom>
+	<auteur>Mikha</auteur>
+	<licence>GPL v3</licence>
+	<version>1.0.0</version>
+	<etat>test</etat>
+	<slogan>Permet d'utiliser les AwesomeIcon sous SPIP</slogan>
+	<description></description>
+	<categorie>edition</categorie>
+	<icon>images/picto-48.jpg</icon>
+	<lien>https://contrib.spip.net/picto</lien>
+
+	<prefix>picto</prefix>
+
+
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>picto_pipelines.php</inclure>
+	</pipeline>
+
+	<fonctions>picto_fonctions.php</fonctions>
+  <options>  picto_options.php </options>
+
+
+
+	<necessite id="SPIP" version="[3.1;]" />
+
+
+</plugin>
