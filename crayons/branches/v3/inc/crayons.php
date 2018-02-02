@@ -65,24 +65,6 @@ if (!function_exists('autoriser_message_modifier_dist')) {
 		return false;
 	}
 }
-//compat 192 documents
-if ($GLOBALS['spip_version_code'] < '1.93') {
-	if (!function_exists('get_spip_doc')) {
-		function get_spip_doc($fichier) {
-			// fichier distant
-			if (preg_match(',^\w+://,', $fichier)) {
-				return $fichier;
-			}
-			// gestion d'erreurs, fichier=''
-			if (!strlen($fichier)) {
-				return false;
-			}
-
-			// fichier normal
-			return (strpos($fichier, _DIR_IMG) === false) ? _DIR_IMG . $fichier : $fichier;
-		}
-	}
-}
 
 // Autoriser l'usage des crayons ?
 function autoriser_crayonner_dist($faire, $type, $id, $qui, $opt) {
@@ -262,10 +244,6 @@ function document_fichier_revision($id, $data, $type, $ref) {
 			// $actifs contient l'id_document nouvellement cree
 			// on recopie les donnees interessantes dans l'ancien
 			 $extension = ', extension ';
-			//compat 192
-			if ($GLOBALS['spip_version_code'] < '1.93') {
-				$extension = '';
-			}
 
 			if ($id_new = array_pop($actifs)
 				and $s = spip_query("SELECT fichier, taille, largeur, hauteur $extension, distant FROM spip_documents
@@ -679,22 +657,6 @@ function &crayons_get_table($type, &$nom_table) {
 					$noms[$table] = $nom;
 					$return[$table] = $q;
 					break;
-				}
-			}
-		}
-
-		// seconde, une heuristique 1.9.2
-		if (!isset($return[$table])) {
-			include_spip('base/serial');
-			include_spip('base/auxiliaires');
-			include_spip('public/parametrer');
-			foreach (array('tables_principales', 'tables_auxiliaires') as $categ) {
-				foreach ($try as $nom) {
-					if (isset($GLOBALS[$categ][$nom])) {
-						$noms[$table] = $nom;
-						$return[$table] = & $GLOBALS[$categ][$nom];
-						break 2;
-					}
 				}
 			}
 		}
