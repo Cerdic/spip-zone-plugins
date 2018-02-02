@@ -256,7 +256,7 @@ EOH;
 
 	// css avant la fin du head
 	$pos_head = strpos($page, '</head>');
-		$page = substr_replace($page, $incCSS, $pos_head, 0);
+	$page = substr_replace($page, $incCSS, $pos_head, 0);
 
 	return $page;
 }
