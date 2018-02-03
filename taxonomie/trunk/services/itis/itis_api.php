@@ -689,7 +689,7 @@ function itis_credit($id_taxon, $informations = array()) {
 
 	// On crée l'url du taxon sur le site ITIS
 	$url_taxon = _TAXONOMIE_ITIS_TAXON_BASE_URL . $taxon['tsn'];
-	$link_taxon = '<a href="' . $url_taxon . '" rel="noreferrer"><em>' . ucfirst($taxon['nom_scientifique']) . '</em></a>';
+	$link_taxon = '<a class="nom_scientifique" href="' . $url_taxon . '" rel="noreferrer">' . ucfirst($taxon['nom_scientifique']) . '</a>';
 	$link_site = '<a href="' . _TAXONOMIE_ITIS_SITE_URL . '" rel="noreferrer">' . _TAXONOMIE_ITIS_SITE_URL . '</a>';
 
 	// On établit la citation

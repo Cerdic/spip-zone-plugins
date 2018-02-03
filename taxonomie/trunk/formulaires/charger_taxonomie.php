@@ -2,7 +2,7 @@
 /**
  * Gestion du formulaire de chargement des taxons d'un règne.
  *
- * @package    SPIP\TAXONOMIE\OBJET
+ * @package    SPIP\TAXONOMIE\TAXON
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;

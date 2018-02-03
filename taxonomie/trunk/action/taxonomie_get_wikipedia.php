@@ -53,8 +53,9 @@ function action_taxonomie_get_wikipedia_dist() {
 			// Appel du service query de Wikipedia
 			include_spip('services/wikipedia/wikipedia_api');
 			$langue = wikipedia_find_language($spip_langue); // TODO : attention à gérer la langue en amont
-			$options = array('language' => $langue, 'section' => $section);
-			$information = wikipedia_get_page('text', $taxon['tsn'], $nom_scientifique, $options);
+			$recherche = array('name' => $nom_scientifique, 'tsn' => $taxon['tsn']);
+			$options = array('section' => $section);
+			$information = wikipedia_get_page($recherche, $langue, $options);
 			if (!empty($information['text'])) {
 				// Si le plugin Convertisseur est actif, conversion du texte mediawiki vers SPIP.
 				// Mise en format multi systématique.

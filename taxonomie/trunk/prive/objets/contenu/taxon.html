@@ -19,10 +19,10 @@
 		[<li[ class="rang(#CLE|plus{1})"]>
 			<span dir="#LANG_DIR">
 				(#VAL{taxonomie:rang_}|concat{#VALEUR|table_valeur{rang}}|_T|ucfirst) :
-				[<a[ href="(#VALEUR|table_valeur{id_taxon}|generer_url_entite{taxon})"]>
+				[<a class="nom_scientifique"[ href="(#VALEUR|table_valeur{id_taxon}|generer_url_entite{taxon})"]>
 					(#VALEUR|table_valeur{nom_scientifique}|ucfirst)
 				</a>]
-				[ \((#VALEUR|table_valeur{nom_commun}|extraire_multi{#LANG, #ARRAY{lang_defaut, aucune}}|ucfirst)\)]
+				[<span class="nom_commun">&nbsp;\((#VALEUR|table_valeur{nom_commun}|extraire_multi{#LANG, #ARRAY{lang_defaut, aucune}}|ucfirst)\)</span>]
 			</span>
 		</li>]
 </BOUCLE_ascendance>
@@ -34,7 +34,7 @@
 
 [(#SET{sources, [(#ID_TAXON|taxonomie_taxon_crediter{#SOURCES})]})]
 <B_sources>
-<div class="champ contenu_ps">
+<div class="champ contenu_descriptif">
 	<label><:taxon:champ_sources_label:> : </label>
 	<ul>
 <BOUCLE_sources(DATA) {source table, #GET{sources}}>
