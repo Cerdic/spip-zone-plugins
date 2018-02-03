@@ -5,13 +5,13 @@
 		<span dir='#LANG_DIR' class='#EDIT{email} email'>(#EMAIL)</span>
 	</div>]
 		#SET{extras,#VAL|champs_extras_reservation}#SET{champs_extras,#ARRAY}
-		<BOUCLE_extras (DATA){sourcetableau, #GET{extras}}>
+		<BOUCLE_extras (DATA){source tableau, #GET{extras}|table_valeur{auteur}}>
 		[<div class="champ contenu_#VALEUR{options/nom}">
 			<label>[(#VALEUR{options/label}|chercher_label{#GET{extras}}|extraire_multi|_T)]</label>
 			<span dir="#LANG_DIR" class="#CLE">(#ID_AUTEUR|generer_info_entite{auteur,#VALEUR{options/nom}})</span>
 		</div>]
 		</BOUCLE_extras>
-	</BOUCLE_auteur> 
+	</BOUCLE_auteur>
 		[<div class="champ contenu_email[ (#EMAIL*|strlen|?{'',vide})]">
 			<label><:reservation:label_email:></label>
 			<span dir='#LANG_DIR' class='#EDIT{email} email'>(#EMAIL)</span>

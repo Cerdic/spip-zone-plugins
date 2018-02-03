@@ -11,16 +11,24 @@
 #SET{nom_client,#NOM}
 #SET{extras,#DONNEES_AUTEUR|unserialize}
 #SET{email,#EMAIL}
+#SET{extras,#VAL|champs_extras_reservation}
+
 <BOUCLE_contact(AUTEURS){id_auteur=#ID_AUTEUR}{si #ID_AUTEUR|!={0}|oui}{tout}>
 	#SET{nom_client,#NOM}
 	#SET{valeurs_extras,#ARRAY}
 	#SET{email,#EMAIL}
-	#SET{extras,#VAL|champs_extras_reservation}
-	<BOUCLE_extras(DATA){source tableau, #GET{extras}}>
-		#SET{valeurs_extras,#GET{valeurs_extras}|array_merge{#ARRAY{#VALEUR{options/label},#ID_AUTEUR|generer_info_entite{auteur,#VALEUR{options/nom}}}}}
+	<BOUCLE_extras(DATA){source tableau, #GET{extras}|table_valeur{auteur}}>
+		#SET{valeurs_extras,
+			#GET{valeurs_extras}|
+				array_merge{
+					#ARRAY{
+						#VALEUR{options/label},
+						#ID_AUTEUR|generer_info_entite{auteur,#VALEUR{options/nom}}}
+						}
+					}
 	</BOUCLE_extras>
 </BOUCLE_contact>
-#SET{extras,#GET{valeurs_extras}}
+
 </B_contact>
 <BOUCLE_test_statut(CONDITION) {si #ENV{statut}|!={cloture}|oui}>
 [(#ENV{qui}|=={client}|oui)
@@ -37,10 +45,18 @@
 	<p><:reservation:reservation_numero:>#REFERENCE</p>
 	<p><:reservation:reservation_date:>#DATE</p>
 	<p><:reservation:label_email:> #GET{email}</p>
-	<BOUCLE_champs_extras(DATA){source tableau, #GET{extras}}>
 
+	<BOUCLE_champs_extras(DATA){source tableau, #GET{valeurs_extras}}>
 		<p>[(#CLE|chercher_label|extraire_multi)] : #VALEUR</p>
 	</BOUCLE_champs_extras>
+	<BOUCLE_champs_extras_reservation(DATA){source tableau, #GET{extras}|table_valeur{reservation}}>
+		<p>
+			[(#VALEUR{options/label}
+				|chercher_label{#GET{extras}
+				|table_valeur{reservation}}
+				|extraire_multi|_T)] : [(#ID_RESERVATION|generer_info_entite{reservation,#VALEUR{options/nom}})]
+		</p>
+	</BOUCLE_champs_extras_reservation>
 
 	<p><:reservation:details_reservation:></p>
 	<INCLURE{fond=inclure/reservation,id_reservation,env,statut=#GET{statut}}/>
