@@ -71,6 +71,9 @@ function formulaires_editer_profil_saisies_dist($id_profil = 'new', $retour = ''
 	$saisies_auteur = profils_chercher_saisies_objet('auteur');
 	$data_rows_auteur = saisies_lister_labels($saisies_auteur);
 	
+	// Récupérer les types de coordonnées
+	$coordonnees_types_numeros = coordonnees_lister_types_coordonnees('numero');
+	
 	$saisies = array(
 		array(
 			'saisie' => 'input',
@@ -88,35 +91,49 @@ function formulaires_editer_profil_saisies_dist($id_profil = 'new', $retour = ''
 				'obligatoire' => 'oui',
 			),
 		),
-		array(
-			'saisie' => 'fieldset',
-			'options' => array(
-				'nom' => 'groupe_auteur',
-				'label' => _T('profil:champ_groupe_auteur_label'),
-			),
-			'saisies' => array(
-				array(
-					'saisie' => 'choix_grille',
-					'options' => array(
-						'nom' => 'config[auteur]',
-						'caption' => _T('profil:champ_config_auteur_caption'),
-						'conteneur_class' => 'pleine_largeur',
-						'multiple' => 'oui',
-						'data_cols' => $data_cols,
-						'data_rows' => $data_rows_auteur,
-						//~ 'data_rows' => array(
-							//~ 'nom' => _T('auteur:champ_nom_label'),
-							//~ 'email' => _T('auteur:champ_email_label'),
-							//~ 'bio' => _T('auteur:champ_bio_label'),
-							//~ 'pgp' => _T('auteur:champ_pgp_label'),
-							//~ 'nom_site' => _T('auteur:champ_nom_site_label'),
-							//~ 'url_site' => _T('auteur:champ_url_site_label'),
-						//~ ) + $data_rows_auteurs_extra, // On ajoute les champs extras des auteurs
-					),
+	);
+	$groupe_auteur = array(
+		'saisie' => 'fieldset',
+		'options' => array(
+			'nom' => 'groupe_auteur',
+			'label' => _T('profil:champ_groupe_auteur_label'),
+		),
+		'saisies' => array(
+			array(
+				'saisie' => 'choix_grille',
+				'options' => array(
+					'nom' => 'config[auteur]',
+					'caption' => _T('profil:champ_config_auteur_caption'),
+					'conteneur_class' => 'pleine_largeur',
+					'multiple' => 'oui',
+					'data_cols' => $data_cols,
+					'data_rows' => $data_rows_auteur,
 				),
 			),
 		),
 	);
+	// Coordoonnées pour l'auteur si plugin idoine
+	if (defined('_DIR_PLUGIN_COORDONNEES')) {
+		$groupe_auteur['saisies'][] = array(
+			'saisie' => 'case',
+			'options' => array(
+				'nom' => 'config[activer_coordonnees_auteur]',
+				'label_case' => _T('profil:champ_config_activer_coordonnees_auteur_label_case'),
+				'conteneur_class' => 'pleine_largeur',
+			),
+		);
+		$groupe_auteur['saisies'][] = array(
+			'saisie' => 'profil_coordonnees',
+			'options' => array(
+				'nom' => 'config[coordonnees][auteur]',
+				'conteneur_class' => 'pleine_largeur',
+				'caption' => _T('profil:champ_config_coordonnees_auteur_caption'),
+				'afficher_si' => '@config[activer_coordonnees_auteur]@ == "on"',
+			),
+		);
+	}
+	// On ajoute le groupe au formulaire
+	$saisies[] = $groupe_auteur;
 	
 	// Si le plugin C&O est là
 	if (defined('_DIR_PLUGIN_CONTACTS')) {
@@ -129,12 +146,23 @@ function formulaires_editer_profil_saisies_dist($id_profil = 'new', $retour = ''
 			),
 			'saisies' => array(),
 		);
+		// La case pour activer l’organisation
 		$groupe_organisation['saisies'][] = array(
 			'saisie' => 'case',
 			'options' => array(
 				'nom' => 'config[activer_organisation]',
 				'conteneur_class' => 'pleine_largeur',
-				'label_case' => _T('profil:champ_activer_organisation_label_case'),
+				'label_case' => _T('profil:champ_config_activer_organisation_label_case'),
+			),
+		);
+		// Le champ libre pour donner une légende de groupe de champs
+		$groupe_organisation['saisies'][] = array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'config[activer_groupe_organisation]',
+				'label' => _T('profil:champ_config_activer_groupe_organisation_label'),
+				'explicaiton' => _T('profil:champ_config_activer_groupe_explication'),
+				'afficher_si' => '@config[activer_organisation]@ == "on"',
 			),
 		);
 		// On récupère les champs d'orga, que les noms
@@ -152,6 +180,27 @@ function formulaires_editer_profil_saisies_dist($id_profil = 'new', $retour = ''
 				'afficher_si' => '@config[activer_organisation]@ == "on"',
 			),
 		);
+		// Coordoonnées pour l'organisation si plugin idoine
+		if (defined('_DIR_PLUGIN_COORDONNEES')) {
+			$groupe_organisation['saisies'][] = array(
+				'saisie' => 'case',
+				'options' => array(
+					'nom' => 'config[activer_coordonnees_organisation]',
+					'label_case' => _T('profil:champ_config_activer_coordonnees_organisation_label_case'),
+					'conteneur_class' => 'pleine_largeur',
+					'afficher_si' => '@config[activer_organisation]@ == "on"',
+				),
+			);
+			$groupe_organisation['saisies'][] = array(
+				'saisie' => 'profil_coordonnees',
+				'options' => array(
+					'nom' => 'config[coordonnees][organisation]',
+					'conteneur_class' => 'pleine_largeur',
+					'caption' => _T('profil:champ_config_coordonnees_organisation_caption'),
+					'afficher_si' => '@config[activer_coordonnees_organisation]@ == "on"',
+				),
+			);
+		}
 		// On ajoute le groupe au formulaire
 		$saisies[] = $groupe_organisation;
 		
@@ -164,20 +213,31 @@ function formulaires_editer_profil_saisies_dist($id_profil = 'new', $retour = ''
 			),
 			'saisies' => array(),
 		);
+		// La case pour activer le contact
 		$groupe_contact['saisies'][] = array(
 			'saisie' => 'case',
 			'options' => array(
 				'nom' => 'config[activer_contact]',
 				'conteneur_class' => 'pleine_largeur',
-				'label_case' => _T('profil:champ_activer_contact_label_case'),
+				'label_case' => _T('profil:champ_config_activer_contact_label_case'),
 			),
 		);
 		$groupe_contact['saisies'][] = array(
 			'saisie' => 'explication',
 			'options' => array(
-				'nom' => 'activer_contact_explication',
-				'texte' => _T('profil:champ_activer_contact_explication_texte'),
+				'nom' => 'config[activer_contact_explication]',
+				'texte' => _T('profil:champ_config_activer_contact_explication_texte'),
 				'afficher_si' => '@config[activer_organisation]@ == "on"',
+			),
+		);
+		// Le champ libre pour donner une légende de groupe de champs
+		$groupe_contact['saisies'][] = array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'config[activer_groupe_contact]',
+				'label' => _T('profil:champ_config_activer_groupe_contact_label'),
+				'explicaiton' => _T('profil:champ_config_activer_groupe_explication'),
+				'afficher_si' => '@config[activer_contact]@ == "on"',
 			),
 		);
 		// On récupère les champs de contact, que les noms
@@ -195,6 +255,27 @@ function formulaires_editer_profil_saisies_dist($id_profil = 'new', $retour = ''
 				'afficher_si' => '@config[activer_contact]@ == "on"',
 			),
 		);
+		// Coordoonnées pour le contact si plugin idoine
+		if (defined('_DIR_PLUGIN_COORDONNEES')) {
+			$groupe_contact['saisies'][] = array(
+				'saisie' => 'case',
+				'options' => array(
+					'nom' => 'config[activer_coordonnees_contact]',
+					'label_case' => _T('profil:champ_config_activer_coordonnees_contact_label_case'),
+					'conteneur_class' => 'pleine_largeur',
+					'afficher_si' => '@config[activer_contact]@ == "on"',
+				),
+			);
+			$groupe_contact['saisies'][] = array(
+				'saisie' => 'profil_coordonnees',
+				'options' => array(
+					'nom' => 'config[coordonnees][contact]',
+					'conteneur_class' => 'pleine_largeur',
+					'caption' => _T('profil:champ_config_coordonnees_contact_caption'),
+					'afficher_si' => '@config[activer_coordonnees_contact]@ == "on"',
+				),
+			);
+		}
 		// On ajoute le groupe au formulaire
 		$saisies[] = $groupe_contact;
 	}
@@ -264,6 +345,10 @@ function formulaires_editer_profil_verifier_dist($id_profil = 'new', $retour = '
 		$erreurs['identifiant'] = _T('profil:erreur_identifiant_existant');
 	}
 	
+	// On normalise certaines choses dans les coordonnées
+	$config = formulaires_editer_profil_traiter_coordonnees(_request('config'));
+	set_request('config', $config);
+	
 	return $erreurs;
 }
 
@@ -295,4 +380,27 @@ function formulaires_editer_profil_traiter_dist($id_profil = 'new', $retour = ''
 	$retours = formulaires_editer_objet_traiter('profil', $id_profil, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 	
 	return $retours;
+}
+
+function formulaires_editer_profil_traiter_coordonnees($config) {
+	foreach (array('auteur', 'organisation', 'contact') as $objet) {
+		if (!isset($config["activer_coordonnees_$objet"]) or !$config["activer_coordonnees_$objet"]) {
+			unset($config['coordonnees'][$objet]);
+		}
+		else {
+			foreach($config['coordonnees'][$objet] as $coordonnee => $champs) {
+				// Pour chacun des champs
+				foreach ($champs as $cle => $champ) {
+					// S'il n'y a ni inscription, ni édition, on supprime le champ de la liste
+					if (!isset($champ['inscription']) and !isset($champ['edition'])) {
+						unset($config['coordonnees'][$objet][$coordonnee][$cle]);
+					}
+				}
+				// On refait l'ordre
+				$config['coordonnees'][$objet][$coordonnee] = array_values($config['coordonnees'][$objet][$coordonnee]);
+			}
+		}
+	}
+	
+	return $config;
 }

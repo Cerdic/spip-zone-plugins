@@ -13,6 +13,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+include_spip('base/objets');
+include_spip('base/abstract_sql');
+
 /**
  * Cherche le profil suivant un id SQL ou un identifiant textuel
  * 
@@ -61,6 +64,7 @@ function profils_chercher_profil($id_ou_identifiant_profil) {
  */
 function profils_chercher_saisies_objet($objet) {
 	static $saisies = array();
+	$objet = objet_type($objet);
 	
 	if (isset($saisies[$objet])) {
 		return $saisies[$objet];
@@ -70,7 +74,7 @@ function profils_chercher_saisies_objet($objet) {
 		
 		// Les saisies de base
 		if ($saisies_objet = saisies_chercher_formulaire("editer_$objet", array())) {
-			$saisies[$objet] += $saisies_objet;
+			$saisies[$objet] = array_merge($saisies[$objet], $saisies_objet);
 		}
 		
 		// Les saisies des champs extras
@@ -78,7 +82,7 @@ function profils_chercher_saisies_objet($objet) {
 			include_spip('cextras_pipelines');
 			
 			if ($saisies_extra = champs_extras_objet(table_objet_sql($objet))) {
-				$saisies[$objet] += $saisies_extra;
+				$saisies[$objet] = array_merge($saisies[$objet], $saisies_extra);
 			}
 		}
 	}
