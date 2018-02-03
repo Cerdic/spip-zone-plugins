@@ -685,8 +685,7 @@ function noizetier_page_repertoire() {
 
 	if (defined('_NOIZETIER_REPERTOIRE_PAGES')) {
 		$repertoire_pages = _NOIZETIER_REPERTOIRE_PAGES;
-	}
-	elseif (isset($GLOBALS['z_blocs'])) {
+	} elseif (isset($GLOBALS['z_blocs'])) {
 		$premier_bloc = reset($GLOBALS['z_blocs']);
 		$repertoire_pages = "$premier_bloc/";
 	} else {
