@@ -566,8 +566,23 @@
             );
         };
         var timeme;
+        var prevent = false;
         this.addClass("crayon-autorise")
-            .dblclick(editme)
+            .click(function(e) {
+                e.preventDefault();
+                var me = this;
+                timeme = setTimeout(function() {
+                    if (!prevent && me.href) {
+                        window.location = me.href;
+                    }
+                    return false;
+                }, 200);
+            })
+            .dblclick(function(e) {
+                editme.apply(this, [e]);
+                prevent = true;
+                clearTimeout(timeme);
+            })
             .bind("touchstart", function(e) {
                 var me = this;
                 timeme = setTimeout(function() {
