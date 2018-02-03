@@ -16,8 +16,15 @@
 	#SET{valeurs_extras,#ARRAY}
 	#SET{email,#EMAIL}
 	#SET{extras,#VAL|champs_extras_reservation}
-	<BOUCLE_extras(DATA){source tableau, #GET{extras}}>
-		#SET{valeurs_extras,#GET{valeurs_extras}|array_merge{#ARRAY{#VALEUR{options/label},#ID_AUTEUR|generer_info_entite{auteur,#VALEUR{options/nom}}}}}
+	<BOUCLE_extras(DATA){source tableau, #GET{extras}|table_valeur{auteur}}>
+		#SET{valeurs_extras,
+			#GET{valeurs_extras}|
+				array_merge{
+					#ARRAY{
+						#VALEUR{options/label},
+						#ID_AUTEUR|generer_info_entite{auteur,#VALEUR{options/nom}}}
+						}
+					}
 	</BOUCLE_extras>
 </BOUCLE_contact>
 #SET{extras,#GET{valeurs_extras}}
