@@ -84,6 +84,10 @@ function formulaires_profil_saisies_dist($id_auteur = 'new', $id_ou_identifiant_
 					foreach ($coordonnees as $coordonnee => $champs) {
 						// Pour chaque champ ajouté
 						foreach ($champs as $cle => $champ) {
+							// Attention, si pas de type, on transforme ici en ZÉRO
+							if (!$champ['type']) {
+								$champ['type'] = 0;
+							}
 							// On va chercher les saisies de ce type de coordonnées
 							$saisies_coordonnee = profils_chercher_saisies_objet($coordonnee);
 							// On vire le titre libre
@@ -92,7 +96,7 @@ function formulaires_profil_saisies_dist($id_auteur = 'new', $id_ou_identifiant_
 							$saisies_coordonnee =  saisies_transformer_noms(
 								$saisies_coordonnee,
 								'/^\w+$/',
-								"coordonnees[$objet][$coordonnee][$cle][\$0]"
+								"coordonnees[$objet][$coordonnee][${champ['type']}][\$0]"
 							);
 							// On reconstitue le label
 							$label = $champ['label'] ? $champ['label'] : _T(objet_info(table_objet_sql($coordonnee), 'texte_objet'));
@@ -103,7 +107,7 @@ function formulaires_profil_saisies_dist($id_auteur = 'new', $id_ou_identifiant_
 							if (in_array($coordonnee, array('numeros', 'emails'))) {
 								$saisies_coordonnee = saisies_modifier(
 									$saisies_coordonnee,
-									"coordonnees[$objet][$coordonnee][$cle][" . objet_type($coordonnee) . ']',
+									"coordonnees[$objet][$coordonnee][${champ['type']}][" . objet_type($coordonnee) . ']',
 									array(
 										'options' => array(
 											'label' => $label,
@@ -190,6 +194,7 @@ function formulaires_profil_charger_dist($id_auteur = 'new', $id_ou_identifiant_
 	// On remplit le contexte avec ces informations (et un préfixe pour le contact)
 	$contexte = array_merge($contexte, $infos);
 	
+	//var_dump($contexte);
 	return $contexte;
 }
 

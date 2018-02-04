@@ -15,6 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 include_spip('base/objets');
 include_spip('base/abstract_sql');
+include_spip('action/editer_liens');
 
 /**
  * Cherche le profil suivant un id SQL ou un identifiant textuel
@@ -101,7 +102,7 @@ function profils_chercher_saisies_objet($objet) {
 function profils_chercher_ids_profil($id_auteur=0, $id_ou_identifiant_profil='') {
 	$ids = array();
 	$ids['id_auteur'] = intval($id_auteur);
-	$coordonnes = array();
+	$coordonnees_liees = array();
 	
 	// Cherchons un utilisateur
 	if (!$ids['id_auteur'] and !$ids['id_auteur'] = intval(session_get('id_auteur'))) {
@@ -146,37 +147,42 @@ function profils_chercher_ids_profil($id_auteur=0, $id_ou_identifiant_profil='')
 				}
 			}
 		}
+		
+		// Si on doit chercher des coordonnées
+		if (defined('_DIR_PLUGIN_COORDONNEES')) {
+			foreach (array('auteur', 'organisation', 'contact') as $objet) {
+				// S'il y a des coordonnées activées pour cet objet
+				if ($config["activer_coordonnees_$objet"] and $coordonnees = $config['coordonnees'][$objet]) {
+					$cle_objet = id_table_objet($objet);
+					
+					foreach ($coordonnees as $coordonnee => $champs) {
+						$cle_coordonnee = id_table_objet($coordonnee);
+						
+						foreach ($champs as $cle => $champ) {
+							// On cherche s'il y a une liaison sinon new
+							if (
+								!$id_objet = $ids[$cle_objet]
+								or !$liens = objet_trouver_liens(
+									array(objet_type($coordonnee) => '*'),
+									array($objet => $id_objet),
+									array('type = '.sql_quote($champ['type']))
+								)
+								or !$liaison = $liens[0]
+								or !$coordonnees_liees[$objet][$coordonnee][$champ['type']] = $liaison[$cle_coordonnee]
+							) {
+								$coordonnees_liees[$objet][$coordonnee][$champ['type']] = 'new';
+							}
+						}
+					}
+				}
+			}
+			
+			// S'il y a des coordonnées on ajoute
+			if ($coordonnees_liees) {
+				$ids['coordonnees'] = $coordonnees_liees;
+			}
+		}
 	}
-	
-	//~ // Cherchons une adresse liée à l'organisation
-	//~ if (
-		//~ !intval($id_organisation)
-		//~ or !$liens = objet_trouver_liens(array('adresse'=>'*'), array('organisation'=>$id_organisation))
-		//~ or !$adresse = $liens[0]
-		//~ or !$id_adresse = intval($adresse['id_adresse'])
-	//~ ) {
-		//~ $id_adresse = 'new';
-	//~ }
-	
-	//~ // Cherchons un email lié au contact
-	//~ if (
-		//~ !intval($id_contact)
-		//~ or !$liens = objet_trouver_liens(array('email'=>'*'), array('contact'=>$id_contact))
-		//~ or !$email = $liens[0]
-		//~ or !$id_email = intval($email['id_email'])
-	//~ ) {
-		//~ $id_email = 'new';
-	//~ }
-	
-	//~ // On cherche un numéro lié au contact
-	//~ if (
-		//~ !intval($id_contact)
-		//~ or !$liens = objet_trouver_liens(array('numero'=>'*'), array('contact'=>$id_contact))
-		//~ or !$numero = $liens[0]
-		//~ or !$id_numero = intval($numero['id_numero'])
-	//~ ) {
-		//~ $id_numero = 'new';
-	//~ }
 	
 	return $ids;
 }
@@ -205,19 +211,25 @@ function profils_recuperer_infos($id_auteur=0, $id_ou_identifiant_profil='') {
 		unset($infos['organisation']['_pipeline']);
 	}
 	
-	// On charge les infos du contact avec un préfixe "contact_"
+	// On charge les infos du contact
 	if ($id_contact) {
 		$infos['contact'] = formulaires_editer_objet_charger('contact', $id_contact, intval($id_organisation), 0, $retour, '');
 	}
 	
-	//~ // On charge les infos de l'adresse
-	//~ $infos['adresse'] = formulaires_editer_objet_charger('adresse', $id_adresse, 0, 0, $retour, '');
-	
-	//~ // On charge les infos du numéro
-	//~ $infos['numero'] = formulaires_editer_objet_charger('numero', $id_numero, 0, 0, $retour, '');
-	
-	//~ // On charge les infos de l'email
-	//~ $infos['email'] = formulaires_editer_objet_charger('email', $id_email, 0, 0, $retour, '');
+	// S'il y a des coordonnées
+	if ($coordonnees and is_array($coordonnees)) {
+		foreach ($coordonnees as $objet => $coordonnees_objet) {
+			foreach ($coordonnees_objet as $coordonnee => $champs) {
+				foreach ($champs as $type => $id) {
+					// Attention, si pas de type, on transforme ici en ZÉRO
+					if (!$type) {
+						$type = 0;
+					}
+					$infos['coordonnees'][$objet][$coordonnee][$type] = formulaires_editer_objet_charger(objet_type($coordonnee), $id, 0, 0, $retour, '');
+				}
+			}
+		}
+	}
 	
 	return $infos;
 }
