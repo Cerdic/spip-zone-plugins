@@ -131,7 +131,7 @@ function balise_BLOCKGRID_dist($p) {
 	}
 
 	// On calcule la class
-	$p->code = "class_blocs_foundation($nombre_colonnes, $type, $total_boucle).'columns'";
+	$p->code = "class_blocs_foundation($nombre_colonnes, $type, $total_boucle).'row'";
 	$p->interdire_scripts = false;
 
 	return $p;
