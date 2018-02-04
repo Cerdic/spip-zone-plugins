@@ -5,6 +5,11 @@ function rubrique_a_linscription_formulaire_charger($flux){
 	$statut = lire_config('rubrique_a_linscription/statut');
 	$prive_voir = lire_config('rubrique_a_linscription/espace_prive_voir');
 
+	// Ne pas modifier le flux si on avait un vrai false, c'est à dire que le formulaire ne doit pas être affiché
+	if ($flux['data'] === false) {
+		return $flux;
+	}
+
 	if (
 			($flux['args']['form'] == 'inscription' 
 			or $flux['args']['form'] == 'inscription_avec_rubrique') 
