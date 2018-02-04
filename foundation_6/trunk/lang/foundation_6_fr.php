@@ -27,5 +27,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_js' => "L'utilisation du squelette @squelette@ requière l'activation du javascript de foundation",
 	'suivant' => 'Suivant',
 	'precedent' => 'Précédent',
-	'slide_affiche' => 'Slide affiché'
+	'slide_affiche' => 'Slide affiché',
+	'grille' => 'Grille',
+	'grille_element' => 'Element de grille',
+	'grille_contenu' => "Contenu de l'élement",
+	'grille_large_up' => 'Grille large (desktop)',
+	'grille_medium_up' => 'Grille medium (Tablette)',
+	'grille_small_up' => 'Grille small (Smartphone)'
 );
