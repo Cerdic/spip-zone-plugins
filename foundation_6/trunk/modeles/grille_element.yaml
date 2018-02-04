@@ -1,0 +1,16 @@
+nom: '<:foundation_6:grille_element:>'
+logo: 'icones_barre/fi-database.png'
+icone_barre: 'fi-database.png'
+traiter: 'modele_grille_element_foundation'
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'grille_element'
+  -
+    saisie: 'textarea'
+    options:
+      nom: 'contenu'
+      label: '<:foundation_6:grille_contenu:>'
+      defaut: ''
