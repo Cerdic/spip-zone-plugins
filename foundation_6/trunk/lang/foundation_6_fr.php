@@ -33,5 +33,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'grille_contenu' => "Contenu de l'élement",
 	'grille_large_up' => 'Grille large (desktop)',
 	'grille_medium_up' => 'Grille medium (Tablette)',
-	'grille_small_up' => 'Grille small (Smartphone)'
+	'grille_small_up' => 'Grille small (Smartphone)',
+	'modele_grille_class' => 'Class css'
 );

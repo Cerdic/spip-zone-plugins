@@ -26,3 +26,9 @@ parametres:
       nom: 'small-up'
       label: '<:foundation_6:grille_small_up:>'
       defaut: '2'
+  -
+    saisie: 'input'
+    options:
+      nom: 'class'
+      label: '<:foundation_6:modele_grille_class:>'
+      defaut: ''
