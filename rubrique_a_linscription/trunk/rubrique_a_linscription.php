@@ -46,7 +46,6 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 	$groupe_mots = lire_config('rubrique_a_linscription/groupe_mots');
 	$mail_public = lire_config('rubrique_a_linscription/mail_public');
 	$mail_prive = lire_config('rubrique_a_linscription/mail_prive');
-
 	if (
 			($flux['args']['form'] == 'inscription' 
 			or $flux['args']['form'] == 'inscription_avec_rubrique') 
@@ -95,7 +94,7 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 		
 				//Création du mot clef associé
 				if($groupe_mots) {
-					$type   = sql_getfetsel('titre','spip_groupes_mots','id_groupe='.$meta['groupe_mots']);
+					$type = sql_getfetsel('titre','spip_groupes_mots','id_groupe='.$groupe_mots);
 					if ($type) {
 						$id_mot = sql_insertq('spip_mots',array(
 							'id_groupe' => $groupe_mots,
