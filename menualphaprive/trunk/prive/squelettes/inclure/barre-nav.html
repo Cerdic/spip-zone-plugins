@@ -50,7 +50,7 @@
 					si le menu a des entrées favorites, pour faciliter le stylage CSS
 				][(#SET{has_favoris,0})]
 				<B_sous>
-				<ul [(#TOTAL_BOUCLE|>{20}|oui)class="menu-2col"]>
+				<ul[(#TOTAL_BOUCLE|>{20}|et{#TOTAL_BOUCLE|<={30}}) class="menu-2col"][(#TOTAL_BOUCLE|>{30}|oui) class="menu-3col"]>
 					<BOUCLE_sous(DATA){source tableau, #SOUSMENU}>
 					[(#FAVORI|oui)#SET{has_favoris,1}]
 					[<li[ class="(#FAVORI|?{favori,[(#GET{has_favoris}|?{non_favori})]})"]>
