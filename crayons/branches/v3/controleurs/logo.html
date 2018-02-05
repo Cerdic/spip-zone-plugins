@@ -1,0 +1,49 @@
+[(#REM)
+
+	Controleur pour le crayon 'logo'
+
+]
+#CACHE{0}
+
+[(#REM) En fonction de du contexte, choisir un logo ]
+[(#SET{image,[(#ID_ARTICLE|?{#LOGO_ARTICLE_NORMAL}
+	|sinon{[(#ID_AUTEUR|?{#LOGO_AUTEUR_NORMAL})]}
+	|sinon{[(#ID_BREVE|?{#LOGO_BREVE_NORMAL})]}
+	|sinon{[(#ID_RUBRIQUE|?{[(#LOGO_RUBRIQUE_NORMAL|extraire_attribut{src}|match{[(#EVAL{_DIR_IMG})]rubon0\.}|?{'',#LOGO_RUBRIQUE_NORMAL})]})]}
+	|sinon{[(#ID_SYNDIC_ARTICLE|?{#LOGO_SYNDIC_ARTICLE})]}
+	|sinon{[(#ID_SYNDIC|?{#LOGO_SITE_NORMAL})]}
+	|sinon{[(#ID_MOT|?{#LOGO_MOT_NORMAL})]})]})]
+[(#GET{image}|?{
+	[(#SET{logo,[(#GET{image}|image_reduire{64})]})]
+	[(#REM) hacke l'url pour eviter le cache du navigateur ]
+	[(#SET{url,[(#GET{logo}|extraire_attribut{src}
+		|parametre_url{s,#EVAL{time()}})]})]
+	[(#SET{legend,
+		<:crayons:legend_controleur_logo_remplacer:>
+		[((#GET{image}
+		|extraire_attribut{width})&times;[(#GET{image}
+		|extraire_attribut{height})]px)]&nbsp;:
+	})]
+	[(#SET{supprimer,
+		[<div class="choix">
+			<input type="checkbox" name="(#ENV{name_logo})_supprimer" id="#ENV{name_logo}_supprimer" /><label for="#ENV{name_logo}_supprimer"> <:crayons:bouton_supprimer:></label>
+		<div>]
+	})]
+})]
+
+<fieldset [ style="(#ENV{style}); border:none;"]>
+	<h3 class="legend">
+		[(#GET{legend}|sinon{<:crayons:legend_controleur_logo:>})]
+		[<div style="float:#LANG_RIGHT">(#GET{logo}|inserer_attribut{src,#GET{url}}
+			|inserer_attribut{style,vertical-align:middle;})</div>]
+	</h3>
+	<ul class="editer-groupe">
+		<li class="editer_logo">
+			<div class="choix">
+				<input class="crayon-active file" name="#ENV{name_logo}" type="file"
+					onchange="if (this.value && !this.value.match(/\.(png|jpeg|jpg|gif)$/i)) { alert('<:crayons:message_image_obligatoire:>'); this.value=''; }; var q=cQuery('##ENV{name_logo}_supprimer').parent(); this.value ? q.hide() : q.show();" size="1" />
+			</div>
+			#GET{supprimer}
+		</li>
+	</ul>
+</fieldset>
