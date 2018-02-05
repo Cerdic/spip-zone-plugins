@@ -108,15 +108,16 @@ function convertir_pmg($u) {
 	$m['traducteur'] = textebrut($trad[0]);
 	//var_dump($trad);
 	
+	// recaler l'auteur au debut
+	// <absatz>von <strong>Nabil Mouline</strong></absatz>
+	$u = preg_replace('~<absatz>von <strong>(.*)</strong></absatz>~Uu',"",$u);
+	// variante
+	$u = preg_replace('~<absatz>\R*\s*<strong>von (.*)</strong>\R*\s*</absatz>~Uums',"",$u);
+	
 	// recaler la bio
 	preg_match('~<absatz>'.$auteurs[0].'.*</absatz>~Uu',$u,$bio);
 	$u = str_replace($bio[0],"",$u);
 	$m['signature'] = textebrut($bio[0]);
-	
-	
-	// recaler l'auteur au debut
-	// <absatz>von <strong>Nabil Mouline</strong></absatz>
-	$u = preg_replace('~<absatz>von <strong>(.*)</absatz>~Uu',"",$u);
 	
 	// recaler les notes
 	// <absatz><sup>1</sup> Siehe Nabil Mouline, „Traditionalismus und Herrschaft“, <i>Le Monde diplomatiqu</i>e, April 2015.</absatz>
