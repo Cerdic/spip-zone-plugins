@@ -86,6 +86,7 @@
 #SET{largeur,#GET{dimensions/opengraph}|explode{:}|table_valeur{0}}
 #SET{hauteur,#GET{dimensions/opengraph}|explode{:}|table_valeur{1}}
 <BOUCLE_logos_opengraph(DATA) {source table, #GET{logos}}>
+[(#CHEMIN{#VALEUR}|oui)
 #SET{src, #VALEUR|image_recadre{#GET{dimensions/opengraph},-,focus}
 	|image_reduire{#GET{largeur},#GET{hauteur}}
 	|extraire_attribut{src}
@@ -95,6 +96,7 @@
 [<meta property="og:image:height" content="(#GET{src}|hauteur)" />]
 [<meta property="og:image:type" content="(#GET{src}|mime_content_type)" />]
 [<meta property="og:image:alt" content="(#GET{titre}|couper{80}|attribut_html)" />]
+]
 </BOUCLE_logos_opengraph>
 <BOUCLE_article_opengraph(CONDITION) {si #GET{og-type}|=={article}}>
 [<meta property="article:published_time" content="(#GET{date}|affdate{Y-m-d})" />]
@@ -130,12 +132,14 @@
 #SET{largeur,#GET{dimensions/twitter}|explode{:}|table_valeur{0}}
 #SET{hauteur,#GET{dimensions/twitter}|explode{:}|table_valeur{1}}
 <BOUCLE_images_twitter(DATA) {source table, #GET{logos}} {0,1}>
+[(#CHEMIN{#VALEUR}|oui)
 #SET{src, #VALEUR|image_recadre{#GET{dimensions/twitter},-,focus}
 	|image_reduire{#GET{largeur},#GET{hauteur}}
 	|extraire_attribut{src}
 	|supprimer_timestamp}
 [<meta name="twitter:image" content="(#GET{src}|url_absolue)" />]
 [<meta property="twitter:image:alt" content="(#GET{titre}|couper{80}|attribut_html)" />]
+]
 </BOUCLE_images_twitter>
 </BOUCLE_twitter>
 
