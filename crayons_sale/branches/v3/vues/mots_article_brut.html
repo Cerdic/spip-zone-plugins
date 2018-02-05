@@ -1,0 +1,17 @@
+[(#REM)
+
+	Vue pour le crayon 'mots_article_brut'
+
+]
+#CACHE{0}
+<BOUCLE_a(ARTICLES){id_article}{lang}{statut==.}>
+<B_moex>
+<ul class="mots_article"><p>Mots-clé pour #TITRE (#ID_ARTICLE)</p>
+<BOUCLE_moex(MOTS){id_article}{doublons}>
+	<li class="#EDIT{id_mot} mots_article">#ID_GROUPE:#ID_MOT : [(#TITRE|entites_html)] </li>
+</BOUCLE_moex>
+</ul>
+</B_moex>
+<p>Pas de mot-clé existant</p>
+<//B_moex>
+</BOUCLE_a>

@@ -1,0 +1,67 @@
+<plugin>
+	<nom>
+		<multi>
+			Crayons
+			[ar]&#1575;&#1604;&#1602;&#1604;&#1605;
+			[it]Pennarelli
+			[de]Der Stift
+			[en]Pencils
+			[ru]Карандаш
+		</multi>
+	</nom>
+	<auteur>
+		Fil, toggg
+	</auteur>
+	<licence>
+		&#169; 2006-2013 - GNU/GPL
+	</licence>
+	<version>
+		1.26.15
+	</version>
+	<etat>
+		stable
+	</etat>
+	<description>
+		<multi>
+			&#201;dition rapide depuis les pages publiques du site.
+			[it] Modifica rapida dalle pagine pubbliche del sito.
+			[ar]&#1607;&#1584;&#1575; &#1575;&#1604;&#1605;&#1604;&#1581;&#1602;&#1548; {{&#1575;&#1604;&#1605;&#1578;&#1608;&#1575;&#1601;&#1585; &#1604;&#1604;&#1575;&#1589;&#1583;&#1575;&#1585; &#1633;.&#1641;.&#1634; &#1601;&#1602;&#1591;}} &#1610;&#1602;&#1583;&#1605; &#1608;&#1592;&#1575;&#1574;&#1601; &#1578;&#1581;&#1585;&#1610;&#1585; &#1587;&#1585;&#1610;&#1593;&#1577; &#1605;&#1606; &#1601;&#1610; &#1589;&#1601;&#1581;&#1575;&#1578; &#1575;&#1604;&#1605;&#1608;&#1602;&#1593; &#1575;&#1604;&#1593;&#1605;&#1608;&#1605;&#1610;. &#1604;&#1604;&#1575;&#1587;&#1578;&#1601;&#1575;&#1583;&#1577; &#1605;&#1606;&#1607; &#1610;&#1580;&#1576; &#1575;&#1606;&#1588;&#1575;&#1569; &#1589;&#1601;&#1581;&#1575;&#1578; &#1606;&#1605;&#1608;&#1584;&#1580;&#1610;&#1577; &#1605;&#1578;&#1608;&#1575;&#1601;&#1602;&#1577; &#1605;&#1593;&#1607;.
+
+			&#1603;&#1605;&#1575; &#1601;&#1610; &#1589;&#1601;&#1581;&#1575;&#1578; &#1575;&#1604;&#1575;&#1589;&#1583;&#1575;&#1585; 1.9.2 &#1575;&#1604;&#1606;&#1605;&#1608;&#1584;&#1580;&#1610;&#1577; &#1610;&#1603;&#1601;&#1610; &#1575;&#1583;&#1582;&#1575;&#1604; &#1593;&#1604;&#1575;&#1605;&#1577; {#EDIT} &#1601;&#1610; &#1603;&#1604; &#1605;&#1603;&#1575;&#1606; &#1606;&#1585;&#1610;&#1583; &#1578;&#1581;&#1585;&#1610;&#1585;&#1607;. &#1605;&#1579;&#1604;&#1575;&#1611;&#1548; &#1604;&#1610;&#1589;&#1576;&#1581; &#1575;&#1604;&#1593;&#1606;&#1608;&#1575;&#1606; &#1602;&#1575;&#1576;&#1604; &#1604;&#1604;&#1578;&#1581;&#1585;&#1610;&#1585;:
+			_ <code><h1 class="#EDIT{titre} &#1593;&#1604;&#1575;&#1605;&#1575;&#1578; &#1575;&#1582;&#1585;&#1609;">#TITRE</h1></code>.
+			[de]&#196;nderungen in &#246;ffentlichen Seiten direkt erledigen, Vorausetzung f&#252;r Wikis mit SPIP
+			[en]Quick editing from the public pages of the site.
+			[ru]Позволяет редактировать информацию прямо на сайте, не заходя в административную часть.
+		</multi>
+	</description>
+	<lien>https://contrib.spip.net/Les-Crayons</lien>
+	<prefix>
+		crayons
+	</prefix>
+	<icon>
+		images/crayon-128.png
+	</icon>
+	<fonctions>crayons_fonctions.php</fonctions>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>crayons_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
+		<inclure>crayons_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>crayons_controleur</nom>
+		<action></action>
+	</pipeline>
+	<pipeline>
+		<nom>crayons_verifier</nom>
+		<action></action>
+	</pipeline>
+	<chemin dir='' />
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[1.9.0;3.2.99]" />
+	<!-- utilise id="cfg" version="[1.14.1;]" / -->
+	<traduire gestionnaire="salvatore" module="crayons" reference="fr" />
+</plugin>
