@@ -611,6 +611,9 @@ function fusion_spip_import_documents_dist($img_dir, $connect, $options = array(
 		'motoff' => 'mot',
 		'rubon' => 'rubrique',
 		'ruboff' => 'rubrique',
+		'gison' => 'gis',
+		'gisoff' => 'gis',
+		'selections_contenuon' => 'selections_contenu'
 	);
 
 	// lire tous les fichiers qui peuvent être des logos
