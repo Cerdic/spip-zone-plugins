@@ -35,12 +35,15 @@ function profils_chercher_profil($id_ou_identifiant_profil) {
 	}
 	// Sinon on cherche
 	else {
+		// Si pas d'id on va chercher le premier
 		if (!$id_ou_identifiant_profil) {
-			return $profil;
+			$profil = sql_fetsel('*', 'spip_profils', '', '', 'id_profil asc', '0,1');
 		}
+		// Si c'est un identifiant numérique
 		elseif ($id_ou_identifiant_profil === intval($id_ou_identifiant_profil)) {
 			$profil = sql_fetsel('*', 'spip_profils', 'id_profil = '.intval($id_ou_identifiant_profil));
 		}
+		// Si c'est un identifiant textuel
 		else {
 			$profil = sql_fetsel('*', 'spip_profils', 'identifiant = '.sql_quote($id_ou_identifiant_profil));
 		}

@@ -22,6 +22,9 @@
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/profils.php" /> 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/profils.php" /> 
 	<pipeline nom="optimiser_base_disparus" inclure="profils_pipelines.php" /> 
+	<pipeline nom="formulaire_saisies" inclure="profils_pipelines.php" />
+	<pipeline nom="formulaire_fond" inclure="profils_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="profils_pipelines.php" />
 
 	<menu nom="profils" titre="profil:titre_profils" parent="menu_configuration" icone="images/profil-16.png" action="profils" /> 
 </paquet>
