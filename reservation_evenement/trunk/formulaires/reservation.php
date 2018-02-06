@@ -220,22 +220,20 @@ function formulaires_reservation_verifier_dist($id = '', $id_article = '', $reto
 	$erreurs = array();
 	$email = _request('email');
 	$id_auteur = _request('id_auteur');
-	$obligatoires = array(
-		'nom',
-		'email'
-	);
 
 	if (isset($GLOBALS['visiteur_session']['id_auteur']) and $GLOBALS['visiteur_session']['id_auteur'] > 0) {
 		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
 	}
 
 	// Si l'enregistrement est choisi
-	if (_request('enregistrer')) {
+	if (_request('enregistrer') && !$id_auteur) {
 		include_spip('inc/auth');
-		$obligatoires = array_merge($obligatoires, array(
+		$obligatoires = array(
+			'nom',
+			'email',
 			'new_pass',
-			'new_login'
-		));
+			'new_login',
+		);
 
 		// Vérifier le login
 		if ($err = auth_verifier_login($auth_methode, _request('new_login'), $id_auteur)) {
