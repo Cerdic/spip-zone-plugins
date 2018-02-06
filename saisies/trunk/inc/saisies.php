@@ -28,25 +28,28 @@ include_spip('inc/saisies_afficher');
  * @return array Retourne les saisies du formulaire sinon false
  */
 function saisies_chercher_formulaire($form, $args) {
-	if (
-		$fonction_saisies = charger_fonction('saisies', 'formulaires/'.$form, true)
-		and $saisies = call_user_func_array($fonction_saisies, $args)
-		and is_array($saisies)
-		// On passe les saisies dans un pipeline normé comme pour CVT
-		and $saisies = pipeline(
+	$saisies = array();
+	
+	if ($fonction_saisies = charger_fonction('saisies', 'formulaires/'.$form, true)) {
+		$saisies = call_user_func_array($fonction_saisies, $args);
+	}
+	
+	// Si on a toujours un tableau, on passe les saisies dans un pipeline normé comme pour CVT
+	if (is_array($saisies)) {
+		$saisies = pipeline(
 			'formulaire_saisies',
 			array(
 				'args' => array('form' => $form, 'args' => $args),
 				'data' => $saisies
 			)
-		)
-		// Si c'est toujours un tableau après le pipeline
-		and is_array($saisies)
-	) {
-		return $saisies;
-	} else {
-		return false;
+		);
 	}
+	
+	if (!is_array($saisies)) {
+		$saisies = false;
+	}
+	
+	return $saisies;
 }
 
 /**
