@@ -33,3 +33,21 @@ function rezosocios_affiche_milieu($flux) {
 	}
 	return $flux;
 }
+
+/**
+ * Optimiser la base de donnée en supprimant les liens orphelins
+ *
+ * On supprime :
+ * - les liens obsolètes
+ *
+ * @pipeline optimiser_base_disparus
+ *
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function rezosocios_optimiser_base_disparus($flux) {
+	// optimiser les liens morts entre rezosocios et autres objets
+	include_spip('action/editer_liens');
+	$flux['data'] += objet_optimiser_liens(array('rezosocio' => '*'), '*');
+	return $flux;
+}
