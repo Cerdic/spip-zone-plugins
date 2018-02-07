@@ -43,7 +43,7 @@ function tweet($status, $tokens = null){
 	$status = trim($status);
 	include_spip('inc/charsets');
 	$status = unicode2charset(charset2unicode($status), 'utf-8');
-	$status = substr($status, 0, 280);
+	$status = spip_substr($status, 0, 280);
 
 	if (!strlen($status)) {
 		spip_log('Rien a bloguer','twitter');
