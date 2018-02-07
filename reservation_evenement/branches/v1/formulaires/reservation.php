@@ -220,45 +220,47 @@ function formulaires_reservation_verifier_dist($id = '', $id_article = '', $reto
 	$erreurs = array();
 	$email = _request('email');
 	$id_auteur = _request('id_auteur');
+	$obligatoires = array(
+		'nom',
+		'email',
+		);
 
 	if (isset($GLOBALS['visiteur_session']['id_auteur']) and $GLOBALS['visiteur_session']['id_auteur'] > 0) {
 		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
 	}
+	else {
+		// Si l'enregistrement est choisi
+		if (_request('enregistrer')) {
+			include_spip('inc/auth');
+			$obligatoires = array_merge(
+					$obligatoires,
+					array(
+						'new_pass',
+						'new_login',
+					)
+				);
 
-	// Si l'enregistrement est choisi
-	if (_request('enregistrer') && !$id_auteur) {
-		include_spip('inc/auth');
-		$obligatoires = array(
-			'nom',
-			'email',
-			'new_pass',
-			'new_login',
-		);
-
-		// Vérifier le login
-		if ($err = auth_verifier_login($auth_methode, _request('new_login'), $id_auteur)) {
-			$erreurs['new_login'] = $err;
-			$erreurs['message_erreur'] .= $err;
-		}
-
-		// Vérifier les mp
-		if ($p = _request('new_pass')) {
-			if ($p != _request('new_pass2')) {
-				$erreurs['new_pass'] = _T('info_passes_identiques');
-				$erreurs['message_erreur'] .= _T('info_passes_identiques');
+			// Vérifier le login
+			if ($err = auth_verifier_login($auth_methode, _request('new_login'), $id_auteur)) {
+				$erreurs['new_login'] = $err;
+				$erreurs['message_erreur'] .= $err;
 			}
-			elseif ($err = auth_verifier_pass($auth_methode, _request('new_login'), $p, $id_auteur)) {
-				$erreurs['new_pass'] = $err;
+
+			// Vérifier les mp
+			if ($p = _request('new_pass')) {
+				if ($p != _request('new_pass2')) {
+					$erreurs['new_pass'] = _T('info_passes_identiques');
+					$erreurs['message_erreur'] .= _T('info_passes_identiques');
+				}
+				elseif ($err = auth_verifier_pass($auth_methode, _request('new_login'), $p, $id_auteur)) {
+					$erreurs['new_pass'] = $err;
+				}
 			}
 		}
-	}
-	elseif (!$id_auteur) {
-		include_spip('inc/config');
-		$email_reutilisable = lire_config('reservation_evenement/email_reutilisable', '');
-		$obligatoires = array(
-			'nom',
-			'email'
-		);
+		else {
+			include_spip('inc/config');
+			$email_reutilisable = lire_config('reservation_evenement/email_reutilisable', '');
+		}
 	}
 
 	if (test_plugin_actif('declinaisons')) {
@@ -269,8 +271,9 @@ function formulaires_reservation_verifier_dist($id = '', $id_article = '', $reto
 	}
 
 	foreach ($obligatoires as $champ) {
-		if (!_request($champ))
+		if (!_request($champ)) {
 			$erreurs[$champ] = _T("info_obligatoire");
+		}
 	}
 
 	if ($email) {
