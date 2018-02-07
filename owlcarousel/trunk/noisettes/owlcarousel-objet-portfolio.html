@@ -16,14 +16,14 @@ Gallerie portfolio avec Owl Carousel
 
 -->]
 <style>
-    [#(#ENV{id-carousel,demo})] .owl-slide > .caption{
+    [#(#ENV{id-carousel,demo})] .owl-slide > .caption {
         z-index: 100;
         position: absolute;
         left:55%;
         width: 40%;
         bottom:5%;
     }
-    [#(#ENV{id-carousel,demo})] .owl-slide > .caption > .title{
+    [#(#ENV{id-carousel,demo})] .owl-slide > .caption > .title {
         background: #000;
         color : #FFF;
         padding: 5px;
@@ -35,14 +35,14 @@ Gallerie portfolio avec Owl Carousel
         color: #FFF;
         padding: 5px;
     }
-    
-    [#(#ENV{id-carousel,demo})] .owl-slide img{
+
+    [#(#ENV{id-carousel,demo})] .owl-slide img {
         display: block;
         width: 100%;
         height: auto;
         margin: 0 auto;
     }
-    
+
     .diapo_vignettes .owl-slide {
         padding:.5em;
         border: 1px solid silver;
@@ -57,7 +57,7 @@ Gallerie portfolio avec Owl Carousel
     .diapo_vignettes .owl-slide > a {
         display: block;
     }
-    
+
 </style>
 
 
@@ -74,7 +74,7 @@ Gallerie portfolio avec Owl Carousel
         </BOUCLE_listDocs>
 </div>
 
-[(#REM) <!-- Vignettes --> ]
+[(#REM)<!-- Vignettes -->]
 <B_docs>
 <div class="diapo_vignettes">
     <ul id="list-thumbnails" class="diapo_thumbnails owl-carousel">
@@ -84,7 +84,7 @@ Gallerie portfolio avec Owl Carousel
                href="#[(#ID_DOCUMENT)]"
                [ title="(#TITRE|couper{80}|texte_backend)"]>
             (#LOGO_DOCUMENT||image_reduire{100,100}|image_recadre{100,100,'center','transparent'}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})
-            </a>    
+            </a>
         </li>]
     </BOUCLE_docs>
     </ul>
@@ -94,7 +94,8 @@ Gallerie portfolio avec Owl Carousel
 
 <script>
 jQuery(function($){
-    $("[#(#ENV{id-carousel,demo})]").owlCarousel({
+    var mainCarousel = $("[#(#ENV{id-carousel,demo})]");
+    mainCarousel.owlCarousel({
         loop:true,
         margin:0,
         items: 1,
@@ -107,19 +108,23 @@ jQuery(function($){
         URLhashListener:true,
         startPosition: 'URLHash'
     });
-    
+
+    mainCarousel.on('changed.owl.carousel', function(event) {
+        //console.log(event.target);
+    });
+
     $("#list-thumbnails").owlCarousel({
         items: 6,
         navigation:false,
-        navigationText : ["<:owlcarousel:prec:>","<:owlcarousel:suiv:>"],
+        navText : ["<:owlcarousel:prec:>","<:owlcarousel:suiv:>"],
         pagination:true,
         paginationNumbers:true,
         responsive: #ENV*{thumbnails_responsive, false}
     });
-    
+
     // Gallerie Colorbox
     $("a.js-colorbox").colorbox({
         rel:'diaporama',
-        });
+    });
 });
 </script>

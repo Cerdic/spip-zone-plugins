@@ -34,7 +34,7 @@ Insertion du modele <articleX|owl>
         /*float: right;*/
         color: #FFF;
         padding: 5px;
-    }  
+    }
 </style>
 [(#REM) <!-- Diaporama -->]
 <div id="#ENV{id-carousel,demo}" class="owl-carousel owl-theme">
@@ -67,16 +67,16 @@ jQuery(function($){
         responsive:false,
         URLhashListener:true,
         startPosition: 'URLHash',
-	responsive:{
-		0:{
-		items:1
-		}[,
-		640:{
-		items:(#ENV{items})
-		}]
-	}
+      	responsive:{
+      		0:{
+      		 items:1
+      		}[,
+      		  640:{
+      		   items:(#ENV{items})
+      		}]
+      	}
     });
-    
+
     // Gallerie Colorbox
     $("a.js-colorbox").colorbox({
         rel:'diaporama#ENV{id-carousel,demo}',
