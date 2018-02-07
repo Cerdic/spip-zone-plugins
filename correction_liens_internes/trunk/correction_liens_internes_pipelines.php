@@ -35,7 +35,7 @@ function correction_liens_internes_correction_url_public($mauvaise_url, $composa
 	// Pour le cas où on a copié-collé une URL depuis espace public.
 	$ancre = isset($composants_url['fragment']) ? '#' . $composants_url['fragment'] : '';
 
-	list($fond, $contexte) = urls_decoder_url($mauvaise_url);
+	list($fond, $contexte) = urls_decoder_url(str_replace($ancre, '', $mauvaise_url));
 
 	if(
 			($objet = isset($contexte['type']) ? $contexte['type'] : $fond) &&
@@ -86,7 +86,7 @@ function correction_liens_internes_correction($texte){
 		$mauvaise_url_reelle = str_replace($domaines_origine, url_de_base(), $mauvaise_url);
 		$composants_url = parse_url($mauvaise_url_reelle);
 		// Url copiée depuis le privé ou depuis le public?
-		if (strrpos($composants_url['path'],_DIR_RESTREINT_ABS)!=False){
+		if (strrpos($composants_url['path'],_DIR_RESTREINT_ABS)!=false){
 			list ($objet, $id_objet,$ancre) = correction_liens_internes_correction_url_prive($mauvaise_url,$composants_url);
 		}
 		else{
