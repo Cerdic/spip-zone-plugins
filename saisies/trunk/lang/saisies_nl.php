@@ -60,8 +60,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_rub_interface_label' => 'Meertalige display',
 	'option_afficher_si_explication' => 'Geef de voorwaarde op voor het vertonen van het veld in functie van de waarde van andere velden. De identificatie van de andere velden moet tussen <code>@</code> worden geplaatst. <br />Bijvoorbeeld <code>@selection_1@=="Toto"</code> geeft de voorwaarde aan dat het veld moet worden getoond wanneer veld <code>selection_1</code> de waarde <code>Toto</code> heeft.',
 	'option_afficher_si_label' => 'Tonen onder voorwaarde',
-	'option_afficher_si_remplissage_explication' => 'In tegenstelling met de vorige optie verschijnt deze wanneer het formulier wordt getoond en niet wanneer de resultaten worden getoond. De syntax is dezelfde.',
-	'option_afficher_si_remplissage_label' => 'Tonen indien ingevuld',
 	'option_attention_explication' => 'Een boodschap die belangrijker is dan de uitleg.',
 	'option_attention_label' => 'Waarschuwing',
 	'option_attribut_title_label' => 'Zet een title attribuut op het label, dat de waarde van het veld bevat. Gebruiken met voorbehoud.',

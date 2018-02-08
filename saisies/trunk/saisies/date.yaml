@@ -92,12 +92,11 @@ options:
           explication: '<:saisies:option_afficher_si_explication:>'
           rows: 5
       -
-        saisie: 'textarea'
+        saisie: 'case'
         options:
-          nom: 'afficher_si_remplissage'
-          label: '<:saisies:option_afficher_si_remplissage_label:>'
-          explication: '<:saisies:option_afficher_si_remplissage_explication:>'
-          rows: 5
+          nom: 'afficher_si_remplissage_uniquement'
+          label: '<:saisies:option_afficher_si_remplissage_uniquement_label:>'
+          explication: '<:saisies:option_afficher_si_remplissage_uniquement_explication:>'
       -
         saisie: 'input'
         options:

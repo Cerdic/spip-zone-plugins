@@ -309,7 +309,7 @@ function saisies_generer_vue($saisie, $env = array(), $env_obligatoire = array()
 
 /**
  * Génère, à partir d'un tableau de saisie le code javascript ajouté à la fin de #GENERER_SAISIES
- * pour produire un affichage conditionnel des saisies ayant une option afficher_si ou afficher_si_remplissage.
+ * pour produire un affichage conditionnel des saisies ayant une option afficher_si
  *
  * @param array  $saisies
  *                        Tableau de descriptions des saisies
@@ -330,7 +330,7 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 		// on utilise comme selecteur l'identifiant de saisie en priorite s'il est connu
 		// parce que conteneur_class = 'tableau[nom][option]' ne fonctionne evidement pas
 		// lorsque le name est un tableau
-		if (isset($saisie['options']['afficher_si']) or isset($saisie['options']['afficher_si_remplissage'])) {
+		if (isset($saisie['options']['afficher_si'])) {
 			++$i;
 			// retrouver la classe css probable
 			switch ($saisie['saisie']) {
@@ -348,10 +348,7 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 						'_'
 					);
 			}
-			$afficher_si = isset($saisie['options']['afficher_si']) ? $saisie['options']['afficher_si'] : '';
-			$afficher_si_remplissage = isset($saisie['options']['afficher_si_remplissage']) ?
-				$saisie['options']['afficher_si_remplissage'] : '';
-			$condition = implode("\n", array_filter(array($afficher_si, $afficher_si_remplissage)));
+			$condition = isset($saisie['options']['afficher_si']) ? $saisie['options']['afficher_si'] : '';
 			// retrouver l'identifiant
 			$identifiant = '';
 			if (isset($saisie['identifiant']) and $saisie['identifiant']) {
@@ -492,14 +489,17 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 		return array();
 	}
 	foreach ($saisies as $cle => $saisie) {
-		if (isset($saisie['options']['afficher_si']) or isset($saisie['options']['afficher_si_remplissage'])) {
-			$condition = '';
-			if (isset($saisie['options']['afficher_si_remplissage'])) {
-				$condition .= $saisie['options']['afficher_si_remplissage'];
+		if (isset($saisie['options']['afficher_si'])) {
+			$condition = $saisie['options']['afficher_si'];
+
+			// Est-ce uniquement au remplissage?
+			if (isset($saisie['options']['afficher_si_remplissage_uniquement'])
+				and $saisie['options']['afficher_si_remplissage_uniquement']=='on'){
+				$remplissage_uniquement = true;
+			} else {
+				$remplissage_uniquement = false;
 			}
-			if (isset($saisie['options']['afficher_si'])) {
-				$condition .= $saisie['options']['afficher_si'];
-			}
+
 			// On gère le cas @plugin:non_plugin@
 			preg_match_all('#@plugin:(.+)@#U', $condition, $matches);
 			foreach ($matches[1] as $plug) {
@@ -548,7 +548,9 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 				eval('$ok = '.$condition.';');
 			}
 			if (!$ok) {
-				unset($saisies[$cle]);
+				if ($remplissage_uniquement == false or is_null($env)) {
+					unset($saisies[$cle]);
+				}
 				if (is_null($env)) {
 					set_request($saisie['options']['nom'], null);
 				}

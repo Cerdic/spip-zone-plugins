@@ -61,8 +61,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_afficher_si_explication' => 'Informe as condições para exibir o campo, em função do valor de outros campos. O identificador dos outros campos deve ser inserido entre <code>@</code>.<br />
 Exemplo: code>@selection_1@=="Toto"</code> condiciona a exibição do campo a que o campo  <code>selection_1</code> tenha o valor <code>Toto</code>.',
 	'option_afficher_si_label' => 'Exibição condicional',
-	'option_afficher_si_remplissage_explication' => 'Ao contrário da opção anterior,  esta só condiciona a exibição enquanto o formulário está sendo respondido e não quando o resultado é exibido. Sua sintaxe é a mesma.',
-	'option_afficher_si_remplissage_label' => 'Exibição condicional durante o preenchimento',
 	'option_attention_explication' => 'Uma mensagem mais importante que a explicação.',
 	'option_attention_label' => 'Aviso',
 	'option_autocomplete_defaut' => 'Deixar por padrão',
