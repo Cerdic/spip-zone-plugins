@@ -44,7 +44,7 @@
 [(#ENV{autoZoom}|=={non}|oui) [(#SET{a,span})] ]
 <figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align}|sinon{center})][ spip_documents_(#GET{flip})][ spip_documents_(#ENV{shape})][(#ENV{rond}|oui)rond][(#ENV{large}|oui)large][(#GET{max}|oui)large max][(#ENV{kenburns}|oui)kenburns][ (#ENV{class})] spip_lien_ok'
  style="[max-width:(#ENV{largeur}|sinon{#FICHIER|largeur})px;][-webkit-shape-outside: content-box (#GET{polygon});][shape-outside: content-box (#GET{polygon});]"[ data-w="(#ENV{largeur}|sinon{#FICHIER|largeur})"][ data-zoom-responsive="(#GET{kenburns})"]>
-[<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"][ (#ENV{lien_extra})]>]
+[<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"][ (#ENV*{lien_extra})]>]
 [(#ENV{lien}|non)
 <[(#GET{a})][(#GET{a}|=={a}|oui) href="#FICHIER"[ title="(#TITRE|supprimer_numero|texte_backend)"] class="fond mediabox" type="#MIME_TYPE" data-photo-w="#LARGEUR" data-photo-h="#HAUTEUR"] >
 ]

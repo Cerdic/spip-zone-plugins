@@ -42,8 +42,16 @@ return "0";
 
 function balise_MODALE_APPARAIT($p) {
 	$id = interprete_argument_balise (1, $p);
+	$enrobage = interprete_argument_balise (2, $p);
+
 	if(!$id) return $p;
 		$str ="'$(\'.ajax-id-myModalContainer'.$id.'\').ajaxReload({args:{modale:\'voir\'}});return false;'";
+
+if($enrobage) 
+ {  
+$str="$enrobage.'=\"'.$str.'\"'";
+ }
+	
 	
   $p->code = $str;
   return $p;
