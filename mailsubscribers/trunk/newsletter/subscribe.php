@@ -211,9 +211,9 @@ function newsletter_subscribe_dist($email, $options = array()) {
 		$notifications = charger_fonction('notifications','inc');
 		foreach ($notify as $option){
 			if (isset($options['invite_email_from']) AND strlen($options['invite_email_from'])) {
-				$option = $options['invite_email_from'];
+				$option['invite_email_from'] = $options['invite_email_from'];
 				if (isset($options['invite_email_text'])){
-					$option = $options['invite_email_text'];
+					$option['invite_email_text'] = $options['invite_email_text'];
 				}
 			}
 			$notifications('instituermailsubscription',$row['id_mailsubscriber'],$option);
