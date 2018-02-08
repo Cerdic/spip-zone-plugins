@@ -42,7 +42,7 @@ parametres:
     saisie: 'selection'
     options:
       nom: 'principal'
-      label: 'Compenser les marges'
+      label: 'Conteneur Principal'
       cacher_option_intro: 'oui'
       defaut: 'non'
       datas:
@@ -72,11 +72,22 @@ parametres:
         oui: 'oui'
       afficher_si: '@variante@=="debut"'
   -
+    saisie: 'selection'
+    options:
+      nom: 'fluide'
+      label: 'Mode Fluide'
+      cacher_option_intro: 'oui'
+      defaut: 'non'
+      datas:
+        '' : 'non'
+        oui: 'oui'
+      afficher_si: '@variante@=="debut"'
+  -
     saisie: 'input'
     options:
       nom: 'class'
       label: 'Classe(s) CSS (séparées par un espace)'
-      defaut: ''     
+      defaut: ''
       afficher_si: '@variante@=="debut"'
   -
     saisie: 'selecteur_document'
@@ -94,7 +105,7 @@ parametres:
       nom: 'imgFondPos'
       label: 'Position image de Fond (H-V)'
       cacher_option_intro: 'oui'
-      defaut: ''     
+      defaut: ''
       datas:
         '' : 'non renseigné'
         'left top' : 'à gauche - en haut'
