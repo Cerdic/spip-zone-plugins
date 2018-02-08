@@ -81,6 +81,10 @@ function formidable_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.7.0'] = array(
 		array('maj_tables', array('spip_formulaires')),
 	);
+	// Migrer afficher_si_remplissage vers la checkboc
+	$maj['0.8.0'] = array(
+		array('formidable_migrer_formulaires_afficher_si_remplissage')
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -174,6 +178,32 @@ function formidable_transferer_reponses_champs() {
 		}
 	} while ($rows = sql_allfetsel('DISTINCT id_formulaires_reponse', 'spip_formulaires_reponses_champs_bad', '', 'id_formulaires_reponse', '', '0,100'));
 }
+
+/**
+ * Cherche tous les formulaires et migre les conditions afficher_si_remplissage
+ * vers le champ afficher_si + afficher_si_remplissage_uniquement coché
+ *
+ * @return void
+ */
+function formidable_migrer_formulaires_afficher_si_remplissage(){
+	// selection
+	include_spip('inc/saisies_migrer_afficher_si_remplissage');
+	if ($resultats = sql_select(array('id_formulaire','saisies'), 'spip_formulaires')) {
+			// boucler sur les resultats
+			while ($res = sql_fetch($resultats)) {
+				$id_formulaire = $res["id_formulaire"];
+				$saisies = unserialize($res['saisies']);
+				$saisies = saisies_migrer_afficher_si_remplissage($saisies);
+				$saisies = serialize($saisies);
+				sql_updateq(
+					'spip_formulaires', 
+					array('saisies'=>$saisies),
+					"id_formulaire=$id_formulaire" 
+				);
+			}
+	}
+}
+
 
 
 /**
