@@ -1,4 +1,5 @@
 <?php
+
 /*
 +----------------------------------------------------------------------+
 | APC                                                                  |
@@ -200,6 +201,7 @@ if (isset($_SERVER['SERVER_ADDR'])) {
 define('OB_HOST_STATS', 1);
 define('OB_USER_CACHE', 2);
 define('OB_VERSION_CHECK', 3);
+define('OB_CACHELAB', 4);
 
 // check validity of input variables
 $vardom = array(
@@ -320,6 +322,7 @@ if ($AUTHENTICATED && isset($MYREQUEST['PP']) && $MYREQUEST['PP']) {
 	include_spip('inc/invalideur');
 	purger_repertoire(_DIR_SKELS);
 	apcu_clear_cache();
+	ecrire_meta('cache_mark', time());
 }
 
 if ($AUTHENTICATED && !empty($MYREQUEST['DU'])) {
@@ -932,7 +935,7 @@ echo <<<EOB
 	<ol class=menu>
 	<li><a href="$MY_SELF&SH={$MYREQUEST['SH']}">Refresh Data</a></li>
 EOB;
-echo menu_entry(OB_HOST_STATS, 'View Host Stats'), menu_entry(OB_USER_CACHE, 'User Cache Entries'), menu_entry(OB_VERSION_CHECK, 'Version Check');
+echo menu_entry(OB_HOST_STATS, 'View Host Stats'), menu_entry(OB_USER_CACHE, 'User Cache Entries'), menu_entry(OB_VERSION_CHECK, 'Version Check'), menu_entry(OB_CACHELAB, 'SPIP Cache Lab');
 
 if ($AUTHENTICATED) {
 	echo <<<EOB
@@ -985,7 +988,7 @@ switch ($MYREQUEST['OB']) {
 			$list[$k] = $entry;
 		}
 		// tri à l'envers pour ne pas réindexer le tableaux numériquement avec array_shift
-		krsort($list, SORT_STRING); 
+		krsort($list, SORT_STRING);
 		echo "<div class='info div1'><h2>Mémoization SPIP - Le ".date(JOLI_DATE_FORMAT,time())."</h2>
 			<table cellspacing=0><tbody>
 			<tr class=tr-0><td class=td-0>_CACHE_NAMESPACE</td><td>"._CACHE_NAMESPACE."</td></tr>";
@@ -1088,9 +1091,12 @@ switch ($MYREQUEST['OB']) {
 		<tr class=tr-0><td class=td-0 title='Service par le cache pondéré par la taille'>Rendement</td><td>".round(100*$mem_hits_invalides_spip/$mem_requetes_invalides_spip,1)."%</td></tr>";
 	else
 		echo "<tr><td  colspan=2>+ Invalidés par SPIP : aucun cache</td></tr>";
-	echo "<tr class=tr-0><td class=td-0 title='meta spip'>Dernière invalidation</td><td>".date(JOLI_DATE_FORMAT, $meta_derniere_modif)."</td></tr>
+	echo "
+		<tr class=tr-0><td class=td-0 title='meta SPIP : derniere_modif'>Dernière invalidation</td><td>".date(JOLI_DATE_FORMAT, $meta_derniere_modif)."</td></tr>
 		<tr class=tr-0><td class=td-0 title='meta spip'>Invalidation de '".XRAY_OBJET_SPECIAL."'</td><td>".date(JOLI_DATE_FORMAT, lire_meta('derniere_modif_'.XRAY_OBJET_SPECIAL))."</td></tr>
-		<tr class=tr-0><td class=td-0>Plus vieux cache</td><td>$naissance</td></tr>";
+		<tr class=tr-0><td class=td-0 title='meta SPIP : cache_mark'>Dernière purge</td><td>".date(JOLI_DATE_FORMAT, $GLOBALS['meta']['cache_mark'])."</td></tr>
+		<tr class=tr-0><td class=td-0>Plus vieux cache</td><td>$naissance</td></tr>
+		";
 
 		
 	if ($nb_fantomes_apc)
@@ -1690,9 +1696,12 @@ EOB;
 		</div>
 EOB;
 		break;
-		
-}
 
+	case OB_CACHELAB :
+		include_once('cachelab.php');
+		break;
+
+}
 ?>
 
 	</div>
