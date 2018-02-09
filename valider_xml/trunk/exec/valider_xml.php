@@ -124,15 +124,20 @@ function valider_xml_ok($url, $req_ext, $limit, $rec, $process = true) {
 					$ext = 'html';
 				}
 			}
-			if ($files) {
-				$res = valider_dir($files, $ext, $url);
-				list($err, $res) = valider_resultats($res, $ext === 'html');
-				$err = ' (' . $err . '/' . count($files) . ')';
-			} else {
-				$res = _T('texte_vide');
-				$err = '';
+			if ($process) {
+				if ($files) {
+					$res = valider_dir($files, $ext, $url);
+					list($err, $res) = valider_resultats($res, $ext === 'html');
+					$err = ' (' . $err . '/' . count($files) . ')';
+				} else {
+					$res = _T('texte_vide');
+					$err = '';
+				}
+				$bandeau = $dir . '*' . $ext . $err;
 			}
-			$bandeau = $dir . '*' . $ext . $err;
+			else {
+				$url_aff = entites_html($url);
+			}
 		} else {
 			if (preg_match('@^((?:[.]/)?[^?]*)[?]([0-9a-z_]+)=([^&]*)(.*)$@', $url, $r)) {
 				list(, $server, $dir, $script, $args) = $r;
