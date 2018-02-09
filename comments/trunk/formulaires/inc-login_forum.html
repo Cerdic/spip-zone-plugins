@@ -9,7 +9,7 @@
 <fieldset class="qui[ (#SESSION{auth}|?{session_qui,saisie_qui})]">
 	<legend><:comments:forum_qui_etes_vous:></legend>
 [(#SESSION{statut}|oui)
-	[<p><:comments:label_nom:> <strong>(#SESSION{nom}|typo)</strong> <span class="details">&#91;<a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a>&#93;</span></p>]
+	[<p class="explication"><span class="label"><:comments:label_nom:></span> <strong class="session_nom">(#SESSION{nom}|typo)</strong> <span class="details">&#91;<a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a>&#93;</span></p>]
 ]
 [(#SESSION{statut}|non)
 	<ul>
