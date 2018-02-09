@@ -1,7 +1,7 @@
 <paquet
 	prefix="scssphp"
 	categorie="outil"
-	version="1.4.2"
+	version="1.4.3"
 	etat="test"
 	compatibilite="[2.1.0;3.2.*]"
 	logo="scssphp.png"
@@ -16,4 +16,5 @@
 
 	<pipeline nom="insert_head" action="insert_head" />
 	<pipeline nom="formulaire_admin"  inclure="scssphp_pipelines.php" />
+
 </paquet>
