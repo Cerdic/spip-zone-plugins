@@ -12,9 +12,8 @@ if (!defined('XRAY_OBJET_SPECIAL')) {
 	define ('XRAY_OBJET_SPECIAL', 'article');
 }
 
-if (!defined('XRAY_ID_OBJET_SPECIAL')) {
+if (!defined('XRAY_ID_OBJET_SPECIAL'))
 	define ('XRAY_ID_OBJET_SPECIAL', 14533);
-}
 
 define (JOLI_DATE_FORMAT, 'd/m/Y H:i:s');
 date_default_timezone_set ('Europe/Paris');

@@ -1602,7 +1602,7 @@ EOB;
 								if (is_array($d) and (count($d) == 1) and is_serialized($d[0]))
 									echo "<xmp>" . spipsafe_unserialize($d[0]) . "</xmp>";
 								else
-									echo "fetch ok<br><xmp>" . print_r($d, 1) . "</xmp>";
+									echo "fetch ok, val non sérialisée :<br><xmp>" . print_r($d, 1) . "</xmp>";
 							} else
 								echo "fetch failed";
 						} else
