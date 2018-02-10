@@ -94,7 +94,8 @@ static $len_prefix;
 	}
 }
 
-// $chemin : une regexp (hors délimiteurs et modificateurs)
+// $chemin : liste de chaines à tester dans le chemin du squelette, séparées par |
+// 	OU une regexp (hors délimiteurs et modificateurs) si la méthode est 'regexp'
 function cachelab_filtre ($action, $cle_objet, $id_objet, $chemin='', $opt='invalide') {
 	include_spip ('lib/microtime.inc');
 	microtime_do ('begin');
