@@ -39,7 +39,7 @@ Insertion du modele <articleX|owl>
 [(#REM) <!-- Diaporama -->]
 <div id="#ENV{id-carousel,demo}" class="owl-carousel owl-theme">
             <BOUCLE_listDocs(DOCUMENTS){id_article?}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{extension==jpg|png|gif}>
-            <div class="owl-slide" data-hash="#ENV{id-carousel,demo}#ID_DOCUMENT">
+            <div class="owl-slide"[ (#ENV{URLhashListener}|=={true}|oui)data-hash="#ENV{id-carousel,demo}#ID_DOCUMENT"]>
                 [(#ENV{caption,oui}|=={oui}|oui)
                 <div class="caption[ (#ENV{caption_css})]">[
                     <h3 class="title">(#TITRE)</h3>][
@@ -63,10 +63,9 @@ jQuery(function($){
         autoplayHoverPause: (#ENV{autoplayHoverPause}),][
         lazyLoad: (#ENV{lazyLoad}),][
         autoplayTimeout: (#ENV{autoplayTimeout}),][
-        autoHeight: (#ENV{autoHeight}),]
-        responsive:false,
-        URLhashListener:true,
-        startPosition: 'URLHash',
+        autoHeight: (#ENV{autoHeight}),][
+        URLhashListener:(#ENV{URLhashListener}),
+        startPosition: 'URLHash',]
       	responsive:{
       		0:{
       		 items:1
