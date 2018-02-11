@@ -92,10 +92,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'madame' => 'السيدة',
 	'mademoiselle' => 'انسة',
+	'modele_label_auteur' => 'اختيار مسبق لمؤلف (اختياري)؟',
+	'modele_nom_formulaire' => 'استمارة الاتصال المطورة',
 	'monsieur' => 'السيد',
 	'msg_messagerie' => 'بريد الاتصال',
 
+	// N
+	'noisette_label_afficher_titre_noisette' => 'عرض عنوان؟',
+	'noisette_label_niveau_titre' => 'اختيار مستوى العنوان',
+	'noisette_label_titre_noisette' => 'العنوان:',
+	'noisette_label_titre_noisette_perso' => 'في حال عنوان شخصي:',
+	'noisette_titre_perso' => 'عنوان شخصي',
+
 	// P
+	'par_qui' => 'من:',
 	'preselection' => 'قم بإلغاء كافة العناصر الموجودة في قائمة المستلمين',
 
 	// S
