@@ -1,0 +1,14 @@
+<!-- hierarchie -->
+#SET{objet, taxon}
+<a	href="[(#URL_ECRIRE{taxons})]">[(#GET{objet}|objet_info{texte_objets}|_T)]</a> &gt;
+
+<BOUCLE_taxon(TAXONS) {id_taxon}>
+	[(#LANG|changer_typo)]
+	<a href="[(#URL_ECRIRE{taxon}|parametre_url{id_taxon, #ENV{id_taxon}})]" class="nom_scientifique">
+		[(#NOM_SCIENTIFIQUE)]
+	</a> &gt;
+	<strong class="on">
+		<:taxonomie:titre_page_decrire_wikipedia{taxon=#NOM_SCIENTIFIQUE}:>
+	</strong>
+	[(#REM|changer_typo)]
+</BOUCLE_taxon>

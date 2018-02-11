@@ -1,0 +1,36 @@
+<div class="formulaire_spip formulaire_charger formulaire_#FORM">
+	<h3 class="titrem"><:taxonomie:info_etape{etape=#ENV{_etape}, etapes=#ENV{_etapes}}:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class="editer-groupe">
+			[(#SAISIE{input, langue_choisie,
+				defaut=#ENV{_langues/#ENV{langue}},
+				disable=oui,
+				label=<:taxonomie:label_langue_descriptif:>
+			})]
+
+			[(#SAISIE{textarea, _descriptif,
+				explication=<:taxonomie:explication_wikipedia_descriptif:>,
+				label=<:taxonomie:label_wikipedia_descriptif:>,
+				disable=oui
+			})]
+
+			[(#SAISIE{radio, choix_descriptif,
+				explication=<:taxonomie:explication_wikipedia_lien:>,
+				label=<:taxonomie:label_wikipedia_lien:>,
+				datas=#ENV{_liens},
+				defaut=#ENV{_lien_defaut}
+			})]
+		</div>
+
+		<p class="boutons">
+			<input type="submit" class="submit" name="_retour_etape_1" value="<:taxonomie:bouton_retourner:>" />
+			<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+	</div>
+	</form>
+</div>

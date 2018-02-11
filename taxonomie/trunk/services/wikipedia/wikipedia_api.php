@@ -66,11 +66,11 @@ $GLOBALS['wikipedia_language'] = array(
  *                   existant le TSN existe toujours. Il sert à créer le fichier cache.
  * @param string $spip_language
  *        Code de langue SPIP dans lequel on souhaite récupérer la page Wikipedia.
+ * @param int    $section
+ *        Section de page dont le texte est à renvoyer. Entier supérieur ou égal à 0 ou `null` pour tout la page.
  * @param array  $options
  *        Tableau d'options qui peut contenir les index suivants :
- *        - `section` : section de page dont le texte est à renvoyer. Entier supérieur ou égal à 0 ou `null`
- *                      pour tout la page.
- *        - `url`     : url complète de la recherche à utiliser directement.
+ *        - `reload`  : force le recalcul du cache.
  *        Cet argument est optionnel.
  *
  * @return array
@@ -78,7 +78,7 @@ $GLOBALS['wikipedia_language'] = array(
  *        il est nécessaire d'utiliser le plugin Convertisseur. Néanmoins, le texte même traduit
  *        doit être remanié manuellement.
  */
-function wikipedia_get_page($search, $spip_language, $options = array()) {
+function wikipedia_get_page($search, $spip_language, $section = null, $options = array()) {
 
 	// Initialisation du tableau de sortie et du tableau d'options
 	$information = array();
@@ -91,12 +91,12 @@ function wikipedia_get_page($search, $spip_language, $options = array()) {
 
 		// Construction des options permettant de nommer le fichier cache.
 		include_spip('inc/taxonomie_cacher');
-		$options_cache = array('language' => $language);
-		if (!empty($options['section'])) {
-			$options_cache['section'] = $options['section'];
+		$options_cache = array('language' => $spip_language);
+		if ($section !== null) {
+			$options_cache['section'] = $section;
 		}
 
-		if (!empty($options['url'])
+		if (!empty($options['reload'])
 		or !$file_cache = cache_taxonomie_existe('wikipedia', '', $search['tsn'], $options_cache)
 		or !filemtime($file_cache)
 		or (time() - filemtime($file_cache) > _TAXONOMIE_WIKIPEDIA_CACHE_TIMEOUT)
@@ -104,15 +104,8 @@ function wikipedia_get_page($search, $spip_language, $options = array()) {
 			// Normaliser la recherche: trim et mise en lettres minuscules
 			$title = strtolower(trim($search['name']));
 
-			if (empty($options['url'])) {
-				// Construire l'URL de la function de recherche par nom vernaculaire.
-				// L'encodage de la recherche est effectuée dans la fonction.
-				// Quelque que soit la demande on effectue une recherche complète afin d'avoir l'ensemble des
-				// informations en cache.
-				$url = wikipedia_build_url($title, $language, $options);
-			} else {
-				$url = $options['url'];
-			}
+			// Calcul de l'url de la requête: on supprime
+			$url = wikipedia_build_url($title, $language, $section);
 
 			// Acquisition des données spécifiées par l'url
 			$requeter = charger_fonction('taxonomie_requeter', 'inc');
@@ -159,16 +152,16 @@ function wikipedia_get_page($search, $spip_language, $options = array()) {
  *
  * @api
  *
- * @param string $language_code
+ * @param string $spip_language
  *        Code de langue de SPIP. Prend les valeurs `fr`, `en`, `es`, etc.
  *        La variable globale `$wikipedia_language` définit le transcodage langue Wikipedia vers code SPIP.
  *
  * @return string
  *        Langue au sens de Wikipedia - `fr`, `en`, `es` - ou chaine vide sinon.
  */
-function wikipedia_find_language($language_code) {
+function wikipedia_find_language($spip_language) {
 
-	if (!$language = array_search($language_code, $GLOBALS['wikipedia_language'])) {
+	if (!$language = array_search($spip_language, $GLOBALS['wikipedia_language'])) {
 		$language = 'fr';
 	}
 

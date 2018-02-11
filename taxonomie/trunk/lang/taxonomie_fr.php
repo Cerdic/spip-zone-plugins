@@ -5,6 +5,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_continuer' => 'Passer à l\'étape 2',
+	'bouton_retourner' => 'Retourner à l\'étape 1',
 	'bouton_taxonomie' => 'Taxons',
 	'bouton_wikipedia_descriptif' => 'Remplir le descriptif avec Wikipedia',
 
@@ -18,15 +20,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_vider_regne' => 'Erreur lors du vidage du règne @regne@ en base de données.',
 	'erreur_charger_regne' => 'Erreur lors du chargement du règne @regne@ en base de données.',
+	'erreur_wikipedia_descriptif' => 'Aucun descriptif n\'a pas être récupéré de Wikipedia.',
 	'explication_action_regne' => 'Si le règne est déjà présent en base de données, tous les taxons qui le composent seront supprimés avant le chargement.',
 	'explication_langues_regne' => 'Les taxons sont chargés par défaut avec leur nom scientifique. Cette option permet de compléter certains taxons avec leur nom commun dans la ou les langues précisées.',
 	'explication_langues_utilisees' => 'Le plugin supporte quelques langues comme le français, l\'anglais et l\'espagnol. Cela permet de charger voire de saisir manuellement les noms communs et descriptifs dans ces langues.
 	Néanmoins, en fonction de votre besoin vous pouvez limiter l\'utilisation de ces langues mais une langue est au moins requise.',
 	'explication_type_rang' => 'Le chargement de tous les taxons incluant les rangs intercalaires peut augmenter significativement le temps de traitement.',
+	'explication_wikipedia_langue' => 'Si vous utilisez plusieurs langues pour traduire vos taxons, choisissez la langue à utiliser pour récupérer le descriptif.',
+	'explication_wikipedia_descriptif' => 'Vérifier si ce descriptif est bien celui qui décrit le mieux le taxon. Si non, choisissez une page alternative parmi celle éventuellement proposée dans la liste ci-dessous.',
+	'explication_wikipedia_lien' => 'Choisissez la page Wikipedia que vous souhaitez intégrer comme descriptif du taxon.',
 
 	// I
 	'info_boite_taxonomie_gestion' => 'Cette page permet aux webmestres de consulter, charger, mettre à jour ou vider les règnes animal, végétal et fongique gérés par le plugin.',
 	'info_boite_taxonomie_navigation' => 'Cette page permet aux utilisateurs de consulter la liste des taxons chargés en base de données et de naviguer de taxon en taxon.',
+	'info_etape' => 'Etape @etape@ / @etapes@',
 	'info_indicateur_hybride' => 'Ce taxon est un hydribe',
 	'info_regne_charge' => 'déjà chargé',
 	'info_regne_compteur_taxons' => '@nb@ taxons chargés du règne au genre (@type_rang@)',
@@ -41,11 +48,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_colonne_statistiques' => 'Statistiques',
 	'label_type_rang' => 'Types de rangs à charger jusqu\'au genre',
 	'label_regne' => 'Règne sur lequel appliquer l\'action',
+	'label_langue_descriptif' => 'Langue du descriptif',
 	'label_langues_regne' => 'Langues des noms communs',
 	'label_langues_utilisees' => 'Langues à utiliser',
 	'label_type_rang_intercalaire' => 'rangs principaux, secondaires et intercalaires',
 	'label_type_rang_principal' => 'rangs principaux',
 	'label_type_rang_secondaire' => 'rangs principaux et secondaires',
+	'label_wikipedia_alternative_defaut' => 'Utiliser le descriptif proposé par défaut',
+	'label_wikipedia_alternative' => 'Utiliser la page « @alternative@ »',
+	'label_wikipedia_descriptif' => 'Descriptif Wikipedia fourni par défaut',
+	'label_wikipedia_langue' => 'Langue à utiliser par Wikipedia',
+	'label_wikipedia_lien' => 'Page Wikipedia à utiliser',
 
 	// N
 	'notice_vider_regne_inexistant' => 'Le règne @regne@ n\'a pas été trouvé en base de données.',
@@ -97,6 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_form_gestion_regne' => 'Gestion des règnes',
 	'titre_liste_regnes' => 'Liste des règnes chargés en base de données',
 	'titre_liste_fils_taxon' => 'Liste des descendants directs du taxon',
+	'titre_page_decrire_wikipedia' => 'Descriptif Wikipedia du taxon @taxon@',
 	'titre_page_taxonomie' => 'Taxonomie',
 );
 

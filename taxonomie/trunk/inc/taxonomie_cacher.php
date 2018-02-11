@@ -27,7 +27,7 @@ if (!defined('_TAXONOMIE_CACHE_DIR')) {
 }
 if (!defined('_TAXONOMIE_CACHE_FORCER')) {
 	/**
-	 * Indicateur permettant de focer le recalcul du cache systématiquement.
+	 * Indicateur permettant de forcer le recalcul du cache systématiquement.
 	 * A n'utiliser que temporairement en mode debug par exemple.
 	 *
 	 * @package SPIP\TAXONOMIE\CACHE
@@ -59,7 +59,7 @@ function cache_taxonomie_ecrire($cache, $service, $action, $tsn, $options) {
 	sous_repertoire(_DIR_VAR, trim(_TAXONOMIE_CACHE_NOMDIR, '/'));
 
 	// Ecriture du fichier cache
-	$fichier_cache = cache_taxonomie_nommer($service, $tsn, $action, $options);
+	$fichier_cache = cache_taxonomie_nommer($service, $action, $tsn, $options);
 	ecrire_fichier($fichier_cache, $cache);
 
 	return true;
