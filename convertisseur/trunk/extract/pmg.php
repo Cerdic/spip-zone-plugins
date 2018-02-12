@@ -99,7 +99,7 @@ function convertir_pmg($u) {
 	$auteurs = extraire_balises($u, "autor_name") ;
 	foreach($auteurs as &$a)
 		$a = textebrut($a);
-	$m['auteurs'] = $auteurs ;
+	$m['auteurs'] = implode("@@",$auteurs) ;
 	
 	// recaler le traducteur
 	// <absatz>Aus dem Französischen von Claudia Steinitz<i/></absatz>
