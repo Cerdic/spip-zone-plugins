@@ -90,6 +90,7 @@ function selections_editoriales_declarer_tables_objets_sql($tables) {
 		),
 		'key' => array(
 			'PRIMARY KEY'        => 'id_selections_contenu',
+			'KEY id_selection'        => 'id_selection',
 		),
 		'titre' => "titre AS titre, '' AS lang",
 		 #'date' => "",

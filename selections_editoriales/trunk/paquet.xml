@@ -1,12 +1,12 @@
 <paquet
 	prefix="selections_editoriales"
 	categorie="navigation"
-	version="1.7.9"
+	version="1.7.10"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/selections_editoriales-64.png"
 	documentation="https://contrib.spip.net/4647"
-	schema="1.5.1"
+	schema="1.7.10"
 >
 	<nom>Sélections éditoriales</nom>
 

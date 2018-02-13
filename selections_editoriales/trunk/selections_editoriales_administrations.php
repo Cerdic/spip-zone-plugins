@@ -52,6 +52,11 @@ function selections_editoriales_upgrade($nom_meta_base_version, $version_cible) 
 		array('maj_tables', array('spip_selections')),
 	);
 
+	// Ajouter un index sur le champ id_selection de la table spip_selections_contenus
+	$maj['1.7.10'] = array(
+		array('maj_tables', array('spip_selections_contenus'))
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
