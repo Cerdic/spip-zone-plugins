@@ -47,6 +47,8 @@ function metasplus_affichage_final($flux) {
 				array()
 		))
 		and (!in_array($contexte['type-page'], $pages_exclues))
+		// Ce n'est pas une page d'un pseudo fichier (ex. robots.txt)
+		and !strpos($contexte['type-page'], '.')
 	) {
 
 		// Trouver le squelette à utiliser : variante de la page si elle existe, sinon le squelette par défaut (dist.hmtl)
