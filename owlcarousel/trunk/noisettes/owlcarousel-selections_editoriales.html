@@ -1,10 +1,25 @@
 [(#REM) <!-- OwlCarousel : Selection editoriale
 
+Un composant de type slider, a utiliser plutot en sommaire
+
+
+Usage:
+```html
+  <INCLURE{fond=noisettes/owlcarousel-selections_editoriales,
+          objet=article,
+          id_objet=28,
+          animateOut=fadeOut, env, ajax }/>
+```
+
+
 @param identifiant - identifiant textuel de la selection a afficher
 @param link_title {bool} - le lien est placé sur le titre, sinon on affiche un bouton/lien en fin de contenu
 @param link_txt         - personaliser le texte du lien quand il n'est pas placé sur le titre
 @param link_class       - class css supplémentaire pour le lien ex: btn btn-primary
 @param selection_tri    - hasard, titre, num, rang
+@param animateIn - une animation css3 , `fadeOut` est la seul fournie par owl, sinon ajouter animate.css
+@param animateOut - une animation css3 , `fadeOut` est la seul fournie par owl, sinon ajouter animate.css
+
 -->]
 [(#SET{identifiant, #ENV{identifiant, sommaire_hero}})]
 [(#SET{link_title, #ENV{link_title}})]
@@ -46,7 +61,9 @@ jQuery(function($){
         nav:(#ENV{navigation, false}),][
         autoplay: (#ENV{autoplay}),][
         autoplayHoverPause: (#ENV{autoplayHoverPause}),][
-        lazyLoad: (#ENV{lazyLoad}),]
+        lazyLoad: (#ENV{lazyLoad}),][
+        animateIn:'(#ENV{animateIn})',][
+        animateOut:'(#ENV{animateOut})',]
         responsive:false
     });
 });

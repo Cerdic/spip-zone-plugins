@@ -91,7 +91,7 @@ Usage:
             <a class="diapo_thumbnail[ (#ENV{doc}|=={#ID_DOCUMENT}|oui)active]"
                href="[#(#GET{id-carousel})]_[(#ID_DOCUMENT)]"
                [ title="(#TITRE|couper{80}|texte_backend)"]>
-            (#LOGO_DOCUMENT||image_reduire{100,100}|image_recadre{100,100,'center','transparent'}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})
+            (#LOGO_DOCUMENT||image_recadre{100,100,'center','transparent'}|image_reduire{100,100}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})
             </a>
         </li>]
     </BOUCLE_docs>
