@@ -1,42 +1,53 @@
-[(#REM)<!-- # OwlCarousel - Portfolio Produits
+[(#REM)<!-- # OwlCarousel - Portfolio Objet
 
 
 Gallerie portfolio avec Owl Carousel
 @see - http://owlgraphic.com/owlcarousel/index.html#customizing
 
+Usage:
+```html
+  <INCLURE{fond=noisettes/owlcarousel-objet-portfolio,
+          objet=article,
+          id_objet=28,
+          animateOut=fadeOut, env, ajax }/>
+```
 
-@param : id-carousel : id unique du carousel
-@param : nb_thumbnails : nombre de vignettes
-@param : caption : oui : Affiche la description de l'image.
-@param : navigation : true par defaut : affiche les boutons précédents suivants
-@param : caption_css : ajouter des css sur la description (par exemple : invisible).
-@param : autoPlay : true (false par défaut) : le carousel démarre automatiquement.
-@param : stopOnHover : true (false par défaut) : pause sur le rollHover
-@param : lazyLoad : true (false par défaut) : ne charge que les images visibles pour optimiser le chargement.
+@param id-carousel - id unique du carousel, si on en utilise plusieurs dans la page
+@param nb_thumbnails - nombre de vignettes
+@param caption (oui !) - Affiche la description de l'image.
+@param navigation (true !) - affiche les boutons précédents suivants
+@param caption_css (false !) - ajouter des css sur la description (par exemple : invisible).
+@param autoPlay (false !) - le carousel démarre automatiquement.
+@param stopOnHover (false !)- pause sur le rollHover
+@param lazyLoad (false !) - ne charge que les images visibles pour optimiser le chargement.
+@param animateIn - une animation css3 , `fadeOut` est la seul fournie par owl, sinon ajouter animate.css
+@param animateOut - une animation css3 , `fadeOut` est la seul fournie par owl, sinon ajouter animate.css
+
 
 -->]
+#SET{id-carousel, #ENV{id-carousel, owl-objet-portfolio}}
 <style>
-    [#(#ENV{id-carousel,demo})] .owl-slide > .caption {
+    [#(#GET{id-carousel})] .owl-slide > .caption {
         z-index: 100;
         position: absolute;
         left:55%;
         width: 40%;
         bottom:5%;
     }
-    [#(#ENV{id-carousel,demo})] .owl-slide > .caption > .title {
+    [#(#GET{id-carousel})] .owl-slide > .caption > .title {
         background: #000;
         color : #FFF;
         padding: 5px;
         width: auto;
     }
-    [#(#ENV{id-carousel,demo})] .owl-slide > .caption > p {
+    [#(#GET{id-carousel})] .owl-slide > .caption > p {
         background-color: rgba(88, 88, 88, 0.75) ;
         /*float: right;*/
         color: #FFF;
         padding: 5px;
     }
 
-    [#(#ENV{id-carousel,demo})] .owl-slide img {
+    [#(#GET{id-carousel})] .owl-slide img {
         display: block;
         width: 100%;
         height: auto;
@@ -59,21 +70,18 @@ Gallerie portfolio avec Owl Carousel
     }
 
 </style>
-
-
-[(#REM) <!-- Visuel Grand -->]
-<div id="#ENV{id-carousel,demo}" class="owl-carousel owl-theme">
-        <BOUCLE_listDocs(DOCUMENTS spip_documents_liens){objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{mode=document}{extension==jpg|png|gif}>
-        <div class="owl-slide" data-hash="#ID_DOCUMENT">
-            [(#ENV{caption,oui}|=={oui}|oui)
-            <div class="caption[ (#ENV{caption_css})]">[<h3 class="title">(#TITRE)</h3>][<p class="hidden-phone">(#DESCRIPTIF|textebrut)</p>]</div>]
-                <a href="#FICHIER" class="js-colorbox" rel="diaporama">
-                    <img [(#ENV{lazyLoad}|=={true}|oui)class="owl-lazy" data-]src="[(#FICHIER|image_reduire{600,400}|extraire_attribut{src})]" alt="[(#TITRE|textebrut)]">
-                </a>
-        </div>
-        </BOUCLE_listDocs>
+[(#REM)<!-- Visuel Grand -->]
+<div id="[(#GET{id-carousel})]" class="owl-carousel owl-theme">
+    <BOUCLE_listDocs(DOCUMENTS spip_documents_liens){objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{mode=document}{extension==jpg|png|gif}>
+    <div class="owl-slide" data-hash="[(#GET{id-carousel})]_#ID_DOCUMENT">
+        [(#ENV{caption,oui}|=={oui}|oui)
+        <div class="caption[ (#ENV{caption_css})]">[<h3 class="title">(#TITRE)</h3>][<p class="hidden-phone">(#DESCRIPTIF|textebrut)</p>]</div>]
+            <a href="#FICHIER" class="js-colorbox" rel="diaporama">
+                <img [(#ENV{lazyLoad}|=={true}|oui)class="owl-lazy" data-]src="[(#FICHIER|image_reduire{600,400}|extraire_attribut{src})]" alt="[(#TITRE|textebrut)]">
+            </a>
+    </div>
+    </BOUCLE_listDocs>
 </div>
-
 [(#REM)<!-- Vignettes -->]
 <B_docs>
 <div class="diapo_vignettes">
@@ -81,7 +89,7 @@ Gallerie portfolio avec Owl Carousel
     <BOUCLE_docs(DOCUMENTS spip_documents_liens){objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{mode=document}{extension==jpg|png|gif}>
         [<li class="owl-slide">
             <a class="diapo_thumbnail[ (#ENV{doc}|=={#ID_DOCUMENT}|oui)active]"
-               href="#[(#ID_DOCUMENT)]"
+               href="[#(#GET{id-carousel})]_[(#ID_DOCUMENT)]"
                [ title="(#TITRE|couper{80}|texte_backend)"]>
             (#LOGO_DOCUMENT||image_reduire{100,100}|image_recadre{100,100,'center','transparent'}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})
             </a>
@@ -91,10 +99,9 @@ Gallerie portfolio avec Owl Carousel
 </div>
 </B_docs>
 
-
 <script>
 jQuery(function($){
-    var mainCarousel = $("[#(#ENV{id-carousel,demo})]");
+    var mainCarousel = $("[#(#GET{id-carousel})]");
     mainCarousel.owlCarousel({
         loop:true,
         margin:0,
@@ -103,7 +110,9 @@ jQuery(function($){
         nav:(#ENV{navigation, false}),][
         autoplay: (#ENV{autoplay}),][
         autoplayHoverPause: (#ENV{autoplayHoverPause}),][
-        lazyLoad: (#ENV{lazyLoad}),]
+        lazyLoad: (#ENV{lazyLoad}),][
+        animateIn:'(#ENV{animateIn})',][
+        animateOut:'(#ENV{animateOut})',]
         responsive:false,
         URLhashListener:true,
         startPosition: 'URLHash'
