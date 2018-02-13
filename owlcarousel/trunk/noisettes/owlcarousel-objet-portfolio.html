@@ -113,7 +113,11 @@ jQuery(function($){
         lazyLoad: (#ENV{lazyLoad}),][
         animateIn:'(#ENV{animateIn})',][
         animateOut:'(#ENV{animateOut})',]
-        responsive:false,
+        responsive:{
+					0:{
+						items:1
+					}
+				},
         URLhashListener:true,
         startPosition: 'URLHash'
     });
