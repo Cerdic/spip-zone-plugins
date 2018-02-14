@@ -63,8 +63,13 @@ function do_stats() {
 	// 1. Chercher s'il existe deja une session pour ce numero IP.
 	$content = array();
 	$fichier = sous_repertoire(_DIR_TMP, 'visites') . $client_id;
-	if (lire_fichier($fichier, $content))
+	if (lire_fichier($fichier, $content)) {
 		$content = @unserialize($content);
+	}
+	// fichier absent probablement (ou problème unserialize)
+	if (!is_array($content)) {
+		$content = array();
+	}
 
 	// 2. Plafonner le nombre de hits pris en compte pour un IP (robots etc.)
 	// et ecrire la session
