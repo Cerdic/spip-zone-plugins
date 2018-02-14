@@ -2,7 +2,7 @@
 	prefix="incarner"
 	categorie="outil"
 	version="1.3.2"
-	etat="test"
+	etat="stable"
 	compatibilite="[3.0.11;3.2.*]"
 	logo="images/logo_incarner_48.png"
 	documentation="https://contrib.spip.net/Incarner"
@@ -14,7 +14,7 @@
 
 	<licence>GNU/GPL</licence>
 
-	<pipeline nom="autoriser" inclure="incarner_autorisations.php" /> 
+	<pipeline nom="autoriser" inclure="incarner_autorisations.php" />
 
 	<pipeline nom="boite_infos" inclure="incarner_pipelines.php" />
 	<pipeline nom="affichage_final" inclure="incarner_pipelines.php" />

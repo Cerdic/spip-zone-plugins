@@ -96,7 +96,7 @@ function incarner_affichage_final($html) {
 		'logout=oui&redirect=' . $self
 	);
 
-	$lien = '<div class="menu-incarner' . (test_espace_prive() ? " prive" : "") . '">';
+	$lien = '<div class="menu-incarner' . (test_espace_prive() ? ' prive' : '') . '">';
 	$lien .= '<a class="bouton-incarner" href="' . $url_logout . '">';
 	$lien .= _T('incarner:logout_definitif');
 	$lien .= '</a>';
@@ -137,7 +137,7 @@ function incarner_header_prive($flux) {
 }
 
 /**
- * Donner un cookie d'incarnation aux webmestre dès le login
+ * Donner un cookie d'incarnation aux webmestres dès le login
  *
  * @pipeline formulaire_traiter
  * @param  array $flux Données du pipeline

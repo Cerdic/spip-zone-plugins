@@ -80,6 +80,11 @@ function incarner_renouveler_cle() {
 	spip_setcookie('spip_cle_incarner', $nouvelle_cle);
 }
 
+/**
+ * Invalider la clé de l'auteur et effacer son cookie
+ *
+ * @return null
+ */
 function incarner_invalider_cle() {
 
 	include_spip('inc/config');
