@@ -2,10 +2,10 @@
 	<nom>StatsJS</nom>
 	<slogan>Compter les visites via un mouchard javascript</slogan>
 	<auteur>Fil</auteur>
-	<version>0.1.2</version>
+	<version>0.1.3</version>
 	<etat>dev</etat>
 	<description>
-Ce plugin sert &#224; compter les visites &#224; partir d&#8217;un mouchard javascript, au lieu du mouchard PHP classique. 
+Ce plugin sert &#224; compter les visites &#224; partir d&#8217;un mouchard javascript, au lieu du mouchard PHP classique.
 Quel int&#233;r&#234;t ?
 -* homog&#233;n&#233;it&#233; : en utilisant un mouchard javascript au lieu de regarder les hits sur les pages HTML, StatsJS permet de compter les visites de la m&#234;me fa&#231;on que les autres syst&#232;mes de statistiques, comme piwik ou google analytics.
 
