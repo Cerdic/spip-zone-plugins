@@ -1,4 +1,4 @@
-[(#ENV{img}|non)<a href="#" [(#ENV{bouton}|?{role="button" class="btn" })] data-toggle="modal" #MODALE_APPARAIT{#ENV{id},onclick} >[(#ENV{bouton})][(#ENV{texte})]</a>]
+ [(#ENV{img}|non)<a href="#" [(#ENV{bouton}|?{role="button" class="btn" })] data-toggle="modal" #MODALE_APPARAIT{#ENV{id},onclick} >[(#ENV{bouton})][(#ENV{texte})]</a>]
 <BOUCLE_modeImg(CONDITION){si #ENV{img}|oui}>
 [(#ENV{dans}|estUnContenu|oui)  [(#MODELE{contenu_debut}{env,id=[(#ENV{dans}|valeurContenu)],class=#ENV{class} imageModale})] ]
 <div style="text-align: center;">
@@ -7,7 +7,7 @@
     [(#MODELE{imgB,env,lien_class=[(#ENV{lienclass})],class=#ENV{classImg},autoZoom=non,lien=#,lien_extra=#GET{lienExtra}})]
   </BOUCLE_document>
 [(#ENV{img}|non)</a>]
-<BOUCLE_art(ARTICLES){id_article=#ENV{article}}>
+<BOUCLE_art(ARTICLES){id_article=#ENV{article}}{tout_voir}>
 [(#ENV{img}|oui)
 [<p class="modalIconTitle">(#TITRE)</p>]
 [<p class="modalIconSubtitle">(#SOUSTITRE)</p>]

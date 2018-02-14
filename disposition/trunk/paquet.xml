@@ -1,7 +1,7 @@
 <paquet
 	prefix="disposition"
 	categorie="edition"
-	version="1.0.4"
+	version="1.0.5"
 	etat="test"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="images/disposition-48.jpg"
@@ -17,5 +17,6 @@
 	<necessite nom="medias_responsive_mod" compatibilite="[1.10.10;]" />
 	<utilise   nom="animatecss" compatibilite="[1.0.0;]" />
 	<utilise   nom="picto" compatibilite="[1.0.0;]" />
+	<utilise   nom="masquer" compatibilite="[0.5.3;]" />
 
 </paquet>

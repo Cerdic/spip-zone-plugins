@@ -22,7 +22,7 @@
              <div class="item item[(#CLE)]  [(#CLE|=={0}|oui)active]" >
                     <BOUCLE_cite(CONDITION){si  #VALEUR|=={"cite"}}>
                             [(#MODELE{contenu_debut}{id=12})]
-                            <BOUCLE_citations(ARTICLES){id_article=(#GET{stockID}|table_valeur{#CLE})}>
+                            <BOUCLE_citations(ARTICLES){id_article=(#GET{stockID}|table_valeur{#CLE})}{tout_voir}>
                                 <blockquote>
                                     <br>#TEXTE  <div class="signature_citation"><p class="auteur_citation"> #TITRE</p>  <br><p class="fonction_auteur_citation"> (#SOUSTITRE)</p></div>
                                 </blockquote>

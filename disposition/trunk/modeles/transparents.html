@@ -24,7 +24,7 @@
                #SET{offset,(#GET{tailleSpan}|calculeOffset{'avant',#CLE,#GET{nbParams},#GET{maxCol}})}
                   [(#GET{offset}|!={0}|oui) [(#MODELE{contenu_debut}{id=[(#GET{offset})]})][(#MODELE{contenu_fin}{id=[(#GET{offset})]})] ]
                   [(#MODELE{contenu_debut}{id=[(#GET{tailleSpan})]})]
-                <BOUCLE_citations(ARTICLES){id_article=#VALEUR}>
+                <BOUCLE_citations(ARTICLES){id_article=#VALEUR}{tout_voir}>
                   <blockquote>
                    <br>#TEXTE  <div class="signature_citation"><p class="auteur_citation"> #TITRE</p>  <br><p class="fonction_auteur_citation"> (#SOUSTITRE)</p></div>
                   </blockquote>
