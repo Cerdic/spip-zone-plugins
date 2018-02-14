@@ -36,6 +36,4 @@ function googleplus1_insert_head($flux){
 
 	$flux .= "<script src='$jsFile' type='text/javascript'></script>\n";
 	return $flux;
-	return $flux;
 }
-?>

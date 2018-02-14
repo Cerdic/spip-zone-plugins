@@ -5,12 +5,12 @@
 
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
+		<ul class="editer-groupe">
 			<li class="fieldset" id="googleplus1_taille">
 				<fieldset>
 					<legend><:googleplus1:cfg_taille:></legend>
-					<ul>
-						<li class="editer_googleplus1_taille">
+					<ul class="editer-groupe">
+						<li class="editer editer_googleplus1_taille">
 							<select name="googleplus1_taille" id="googleplus1_taille">
 								<option value="small"[(#ENV{googleplus1_taille}|=={small}|oui)selected="selected"]><:googleplus1:cfg_taillepetit:></option>
 								<option value="medium"[(#ENV{googleplus1_taille}|=={medium}|oui)selected="selected"]><:googleplus1:cfg_taillemoyen:></option>
@@ -23,8 +23,8 @@
 			</li>
 			<li class="fieldset" id="googleplus1_insertion">
 				<fieldset><legend><:googleplus1:cfg_insertion:></legend>
-					<ul>
-						<li class="editer_jsselector">
+					<ul class="editer-groupe">
+						<li class="editer editer_jsselector">
 							<label for="jsselector"><:googleplus1:cfg_selector:></label>
 							<p class="explication"><:googleplus1:cfg_inserer:></p>
 							<input type="text" name="jsselector" class="text" id="jsselector" value="[(#ENV{jsselector}|sinon{'#contenu'})]" size="50" />
