@@ -188,18 +188,19 @@ function formidable_transferer_reponses_champs() {
 function formidable_migrer_formulaires_afficher_si_remplissage(){
 	// selection
 	include_spip('inc/saisies_migrer_afficher_si_remplissage');
-	if ($resultats = sql_select(array('id_formulaire','saisies'), 'spip_formulaires')) {
+	if ($res = sql_select(array('id_formulaire','saisies'), 'spip_formulaires')) {
 			// boucler sur les resultats
-			while ($res = sql_fetch($resultats)) {
-				$id_formulaire = $res["id_formulaire"];
-				$saisies = unserialize($res['saisies']);
-				$saisies = saisies_migrer_afficher_si_remplissage($saisies);
-				$saisies = serialize($saisies);
-				sql_updateq(
-					'spip_formulaires', 
-					array('saisies'=>$saisies),
-					"id_formulaire=$id_formulaire" 
-				);
+			while ($row = sql_fetch($res)) {
+				$id_formulaire = $row["id_formulaire"];
+				if ($saisies = unserialize($row['saisies'])) {
+					$saisies = saisies_migrer_afficher_si_remplissage($saisies);
+					$saisies = serialize($saisies);
+					sql_updateq(
+						'spip_formulaires',
+						array('saisies'=>$saisies),
+						"id_formulaire=".intval($id_formulaire)
+					);
+				}
 			}
 	}
 }
