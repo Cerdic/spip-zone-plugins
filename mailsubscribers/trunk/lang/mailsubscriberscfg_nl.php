@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nouvelle_liste' => 'Nieuwe lijst',
 
 	// L
+	'label_anonymiser' => 'Lijst anoniem maken?',
 	'label_double_optin' => 'Validatie van inschrijvingen',
 	'label_double_optin_0' => 'Eenvoudige Opt-in',
 	'label_double_optin_1' => 'Dubbele Opt-in (bevestigingsmail met link om inschrijving te valideren)',
@@ -35,5 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_listes_diffusion' => 'Distributielijsten',
 
 	// T
+	'texte_config_anonymiser' => 'Vervang de titel van de lijst door zijn nummer in bevestigings-email.',
 	'titre_page_configurer_mailsubscriber' => 'Inschrijving op de nieuwsbrief'
 );
