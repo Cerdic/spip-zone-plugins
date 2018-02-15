@@ -60,6 +60,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_rub_interface_label' => 'Multilingual display',
 	'option_afficher_si_explication' => 'Indicate the display conditions of this field in function of the value of other fields. The identifier of the other fields has to be entered between <code>@</code>. <br />Example <code>@selection_1@=="Toto"</code> conditions the display of the field only when field <code>selection_1</code> has a value of <code>Toto</code>.',
 	'option_afficher_si_label' => 'Conditional display',
+	'option_afficher_si_remplissage_uniquement_explication' => 'By checking this box, the conditional display will only apply when filling in the form, not when displaying the results.',
+	'option_afficher_si_remplissage_uniquement_label' => 'Only when filling the form',
 	'option_attention_explication' => 'A message more important than the explanation.',
 	'option_attention_label' => 'Warning',
 	'option_attribut_title_label' => 'Put a title attribute in the label, containing the value of the field. Use with moderation.',
