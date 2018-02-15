@@ -15,6 +15,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'explication_memcache_servers' => 'indicate a server line, as <kbd>host:port</kbd>',
+	'explication_redis_dbindex' => 'change the selected database',
+	'explication_redis_serializer' => '(de)serialization method. ATTENTION empty the cache in case of a change in method',
+	'explication_redis_serveur' => 'format <kbd>host:port</kbd>',
+	'explication_redis_sock' => 'access path to a Unix domain socket',
+	'explications_redis_auth' => 'Authenticate the connection by providing a password',
 
 	// I
 	'info_taille_cache_inconnue' => '@methode@ method doesn’t allow to know the size of the cache.',
@@ -27,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_cache_methode' => 'Memoization method',
 	'legend_cache_pages' => 'Page cache',
 	'legend_memcache' => 'Memcache settings',
+	'legend_redis' => 'Redis parameters',
 	'lien_administration_memcache' => 'Manage memcache',
 
 	// M
@@ -43,7 +49,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_methode_filecache' => 'Files (filecache)',
 	'option_methode_memcache' => 'Memcache',
 	'option_methode_nocache' => 'Disabled (nocache)',
+	'option_methode_redis' => 'Redis',
 	'option_methode_xcache' => 'XCache',
+
+	// R
+	'redis_auth' => 'Password:',
+	'redis_dbindex' => 'Database:',
+	'redis_erreur_connexion' => 'Connection error to Redis server',
+	'redis_erreur_database' => 'Impossible to select the requested database',
+	'redis_erreur_password' => 'The password is incorrect',
+	'redis_serializer' => 'Serialization:',
+	'redis_serveur' => 'Server:',
+	'redis_sock' => 'Unix socket:',
+	'redis_type_serveur' => 'Server',
+	'redis_type_sock' => 'Unix Socket',
 
 	// T
 	'taille_tototale_indisponible' => 'Total size not available'
