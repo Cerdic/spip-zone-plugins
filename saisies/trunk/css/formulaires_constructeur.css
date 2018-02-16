@@ -78,7 +78,6 @@
 .formulaire_construire_formulaire .editer-groupe>.configurable {padding-top:30px; position:relative;}
 .formulaire_construire_formulaire .editer.saisie_explication > .explication { position:initial; }
 .formulaire_construire_formulaire .editer.pleine_largeur .formulaire_configurer { margin-left: 0px; }
-.formulaire_construire_formulaire .editer.pleine_largeur .formulaire_configurer > .formulaire_configurer-contenus { margin-left: -138px; }
 .formulaire_construire_formulaire .formulaire_configurer .fieldset {padding-top:0px;}
 .formulaire_construire_formulaire .formulaire_configurer fieldset fieldset>.editer-groupe>.editer:first-child {padding-top:0px;}
 
