@@ -31,6 +31,15 @@ function rubrique_a_linscription_upgrade($nom_meta_base_version,$version_cible){
 		 	ecrire_meta($nom_meta_base_version,$current_version='0.4','non');
 		 	ecrire_metas();
 		 }
+
+		 if (version_compare($current_version,'0.5','<=')){
+		 	spip_log('Mise à jour 0.5','rubrique_a_linscription');
+			$id_parent = lire_config("rubrique_a_linscription/id_parent");
+			ecrire_config('rubrique_a_linscription/rubrique_mere',array("rubrique|$id_parent"));
+			effacer_config('rubrique_a_linscription/id_parent');
+		 	ecrire_meta($nom_meta_base_version,$current_version='0.5','non');
+		 	ecrire_metas();
+		 }
 				
 	}	
 	ecrire_metas();

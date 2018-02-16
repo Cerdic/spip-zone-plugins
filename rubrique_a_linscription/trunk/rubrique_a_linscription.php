@@ -47,10 +47,14 @@ function rubrique_a_linscription_formulaire_verifier($flux){
 function rubrique_a_linscription_formulaire_traiter($flux){
 	$explicite = lire_config('rubrique_a_linscription/formulaire_explicite');
 	$statut = lire_config('rubrique_a_linscription/statut');
-	$id_parent = lire_config('rubrique_a_linscription/id_parent');
 	$groupe_mots = lire_config('rubrique_a_linscription/groupe_mots');
 	$mail_public = lire_config('rubrique_a_linscription/mail_public');
 	$mail_prive = lire_config('rubrique_a_linscription/mail_prive');
+
+	//pour l'id_parent, c'est spécial car on utilise un picker
+	$id_parent = picker_selected(lire_config('rubrique_a_linscription/rubrique_mere'),'rubrique');
+	$id_parent = $id_parent[0];
+
 	if (
 			($flux['args']['form'] == 'inscription' 
 			or $flux['args']['form'] == 'inscription_avec_rubrique') 
