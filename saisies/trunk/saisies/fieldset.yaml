@@ -43,6 +43,13 @@ options:
           label: '<:saisies:option_afficher_si_remplissage_uniquement_label:>'
           explication: '<:saisies:option_afficher_si_remplissage_uniquement_explication:>'
       -
+        saisie: 'input'
+        options:
+          nom: 'attention'
+          label: '<:saisies:option_attention_label:>'
+          explication: '<:saisies:option_attention_explication:>'
+          size: 50
+      -
         saisie: 'case'
         options:
           nom: 'pliable'

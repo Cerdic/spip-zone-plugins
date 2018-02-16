@@ -23,6 +23,7 @@
 
 		[<span class='erreur_message'>(#GET{erreur_ici})</span>]
 		[<p class='explication'>(#ENV*{explication})</p>]
+		[<em class='attention'>(#ENV*{attention})</em>]
 		[(#ENV{saisies}|is_array|oui)
 		<[(#ENV{saisies_base_conteneur,#DIV|sinon{ul}})] class="editer-groupe">
 			#INCLURE{fond=#ENV{fond_generer,"inclure/generer_saisies"}, env, saisies=#ENV{saisies}, from_fieldset='on'}
