@@ -14,12 +14,14 @@ VideoPlayer avec Owl Carousel et oembed
 @param afficher_thumbnails {str} (oui|non) - Affichage des miniatures de navigation
 @param thumbs_loop {str} (oui|non) - Rotation infinie des miniatures
 -->]
+
+#SET{id-carousel, #ENV{id-carousel,owlvideoplayer} }
 <style>
-[#(#ENV{id-carousel,owlvideoplayer})] .owl-stage-outer {
+[#(#GET{id-carousel})] .owl-stage-outer {
 	/*height: 40rem;*/
 }
 
-[#(#ENV{id-carousel,owlvideoplayer})] .owl-slide {
+[#(#GET{id-carousel})] .owl-slide {
 	display: block;
 	width: 100%;
 	margin: 0 auto;
@@ -40,9 +42,9 @@ VideoPlayer avec Owl Carousel et oembed
 }
 </style>
 [(#REM) <!-- Active item -->]
-<div id="#ENV{id-carousel,owlvideoplayer}" class="owl-carousel owl-theme">
+<div id="#GET{id-carousel}" class="owl-carousel owl-theme">
 	<BOUCLE_listDocs(DOCUMENTS spip_documents_liens){mode=document}{objet ?}{id_objet ?}{id_document ?}{media=video}>
-	<div class="owl-slide" data-hash="#ID_DOCUMENT" id="#ID_DOCUMENT">
+	<div class="owl-slide" data-hash="#GET{id-carousel}_#ID_DOCUMENT" id="#GET{id-carousel}_#ID_DOCUMENT">
 			[(#OEMBED|oembed{})]
 	</div>
 	</BOUCLE_listDocs>
@@ -50,13 +52,13 @@ VideoPlayer avec Owl Carousel et oembed
 [(#REM)<!-- Video thumbnails  -->]
 <B_docs>
 <div class="video_thumbs">
-    <div id="video-thumbnails" class="diapo_thumbnails owl-carousel">
+    <div id="[(#GET{id-carousel})_video-thumbnails]" class="diapo_thumbnails owl-carousel">
     <BOUCLE_docs(DOCUMENTS spip_documents_liens){objet ?}{id_objet ?}
 																					{id_document ?}
 																					{si #ENV{afficher_thumbnails}|=={oui} }{mode=document}{media=video}>
         [<div class="owl-slide">
-            <a class="video_thumbnail[ (#ENV{doc}|=={#ID_DOCUMENT}|oui)active]"
-               href="#[(#ID_DOCUMENT)]"
+            <a class="video_thumbnail[ (#ENV{doc}|=={#GET{id-carousel}_#ID_DOCUMENT}|oui)active]"
+               href="#[(#GET{id-carousel})_#ID_DOCUMENT]"
                [ title="(#TITRE|couper{80}|texte_backend)"]>
 				(#LOGO_DOCUMENT|image_recadre{16:9,'center','transparent'}|image_reduire{200,0}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})
             </a>
@@ -68,7 +70,7 @@ VideoPlayer avec Owl Carousel et oembed
 
 <script>
 jQuery(function($){
-    var mainCarousel = $("[#(#ENV{id-carousel,owlvideoplayer})]");
+    var mainCarousel = $("[#(#GET{id-carousel})]");
     mainCarousel.owlCarousel({
         loop:true,
         margin:0,
@@ -88,7 +90,7 @@ jQuery(function($){
     });
 
 
-    $("#video-thumbnails").owlCarousel({[
+    $("#[(#GET{id-carousel})_video-thumbnails]").owlCarousel({[
         loop:(#ENV{thumbs_loop,true}|=={oui}|?{true,}),]
         navigation:false,
         navText: ["<:owlcarousel:prec:>","<:owlcarousel:suiv:>"],
