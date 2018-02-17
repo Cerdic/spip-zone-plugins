@@ -17,14 +17,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return array
  * 		Tableau des données à charger par le formulaire (affichage). Aucune donnée chargée n'est un
  * 		champ de saisie, celle-ci sont systématiquement remises à zéro.
- * 		- `_actions_regnes`		: (affichage) alias et libellés des actions possibles sur un règne, `charger` et `vider`
- * 		- `_actions_disable`	: (affichage) liste des actions désactivées (`vider` si le règne n`est pas chargé)
- * 		- `_action_defaut`		: (affichage) action sélectionnée par défaut, `charger`
- * 		- `_regnes`				: (affichage) noms scientifiques et libellés des règnes supportés par le plugin
- * 		- `_types_rang`			: (affichage) type de rang à charger parmi principal, secondaire et intercalaire
- * 		- `_type_rang_defaut`	: (affichage) type de rang par défaut, à savoir `principal`
- * 		- `_langues_regne`		: (affichage) codes de langue SPIP et libellés des langues utilisées (configuration)
- * 		- `_langue_defaut`		: (affichage) la première langue de la liste des langues utilisées
+ * 		- `langues`        : tableau des noms de langue utilisables indexé par le code de langue SPIP (étape 1).
+ * 		- `_langue_defaut` : code de langue SPIP par défaut (étape 1).
+ * 		- `langue`         : code de langue SPIP choisi lors de l'étape 1
+ * 		- `_liens`         : liste des liens possibles pour la recherche (étape 2)
+ * 		- `_lien_defaut`   : lien par défaut (étape 2)
+ * 		- `_descriptif`    : texte de la page trouvée ou choisie par l'utilisateur (étape 2)
+ * 		- `_etapes`        : nombre d'étapes du formaulaire, à savoir, 2.
  */
 function formulaires_decrire_taxon_charger($id_taxon) {
 	$valeurs = array();
@@ -71,17 +70,19 @@ function formulaires_decrire_taxon_charger($id_taxon) {
 			include_spip('inc/filtres');
 			$convertir = chercher_filtre('convertisseur_texte_spip');
 			$valeurs['_descriptif'] = $convertir ? $convertir($information['text'], 'MediaWiki_SPIP') : $information['text'];
-		}
 
-		// On prépare la liste des choix possibles si le texte récupéré n'est pas le bon.
-		$valeurs['_liens'] = array();
-		if ($information['links']) {
+			// On prépare la liste des choix possibles si le texte récupéré n'est pas le bon.
+			$valeurs['_liens'] = array();
 			$valeurs['_liens'][$taxon['nom_scientifique']] = _T('taxonomie:label_wikipedia_alternative_defaut');
-			foreach ($information['links'] as $_liens) {
-				$valeurs['_liens'][$_liens['title']] = _T('taxonomie:label_wikipedia_alternative', array('alternative' => $_liens['title']));
+			if (!empty($information['links'])) {
+				foreach ($information['links'] as $_liens) {
+					$valeurs['_liens'][$_liens['title']] = _T('taxonomie:label_wikipedia_alternative', array('alternative' => $_liens['title']));
+				}
 			}
+			$valeurs['_lien_defaut'] = $taxon['nom_scientifique'];
+		} else {
+			$valeurs['_erreur_descriptif'] = _T('taxonomie:erreur_wikipedia_descriptif');
 		}
-		$valeurs['_lien_defaut'] = $taxon['nom_scientifique'];
 	}
 
 	// Préciser le nombre d'étapes du formulaire
@@ -161,8 +162,6 @@ function formulaires_decrire_taxon_traiter($id_taxon) {
 	} else {
 		$retour['message_erreur'] = _T('taxonomie:erreur_wikipedia_descriptif');
 	}
-
-	$retour['editable'] = true;
 
 	return $retour;
 }

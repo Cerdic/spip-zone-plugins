@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_vider_regne' => 'Erreur lors du vidage du règne @regne@ en base de données.',
 	'erreur_charger_regne' => 'Erreur lors du chargement du règne @regne@ en base de données.',
-	'erreur_wikipedia_descriptif' => 'Aucun descriptif n\'a pas être récupéré de Wikipedia.',
+	'erreur_wikipedia_descriptif' => 'Aucun descriptif dans la langue choisie n\'a pu être récupéré de Wikipedia.',
 	'explication_action_regne' => 'Si le règne est déjà présent en base de données, tous les taxons qui le composent seront supprimés avant le chargement.',
 	'explication_langues_regne' => 'Les taxons sont chargés par défaut avec leur nom scientifique. Cette option permet de compléter certains taxons avec leur nom commun dans la ou les langues précisées.',
 	'explication_langues_utilisees' => 'Le plugin supporte quelques langues comme le français, l\'anglais et l\'espagnol. Cela permet de charger voire de saisir manuellement les noms communs et descriptifs dans ces langues.
@@ -110,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_form_gestion_regne' => 'Gestion des règnes',
 	'titre_liste_regnes' => 'Liste des règnes chargés en base de données',
 	'titre_liste_fils_taxon' => 'Liste des descendants directs du taxon',
-	'titre_page_decrire_wikipedia' => 'Descriptif Wikipedia du taxon @taxon@',
+	'titre_page_decrire_wikipedia' => 'Descriptif Wikipedia du taxon <span class="nom_scientifique">@taxon@</span>',
 	'titre_page_taxonomie' => 'Taxonomie',
 );
 

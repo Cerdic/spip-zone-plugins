@@ -2,7 +2,9 @@
 	<h3 class="titrem"><:taxonomie:info_etape{etape=#ENV{_etape}, etapes=#ENV{_etapes}}:></h3>
 
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-
+	[(#ENV*{message_erreur}|non)
+		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{_erreur_descriptif})</p>]
+	]
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
@@ -13,6 +15,7 @@
 				label=<:taxonomie:label_langue_descriptif:>
 			})]
 
+		[(#ENV{_descriptif}|oui)
 			[(#SAISIE{textarea, _descriptif,
 				explication=<:taxonomie:explication_wikipedia_descriptif:>,
 				label=<:taxonomie:label_wikipedia_descriptif:>,
@@ -25,11 +28,14 @@
 				datas=#ENV{_liens},
 				defaut=#ENV{_lien_defaut}
 			})]
+		]
 		</div>
 
 		<p class="boutons">
 			<input type="submit" class="submit" name="_retour_etape_1" value="<:taxonomie:bouton_retourner:>" />
+		[(#ENV{_descriptif}|oui)
 			<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+		]
 		</p>
 	</div>
 	</form>
