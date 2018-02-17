@@ -166,7 +166,7 @@ class Facteur extends PHPMailer {
 				$this->SMTPSecure = 'tls';
 			}
 
-			if ( $options['smtp_secure'] == 'tls' && $options['smtp_tls_allow_self_signed'] == 'oui' ) {
+			if ($options['smtp_tls_allow_self_signed'] == 'oui') {
 				$this->SMTPOptions = array(
 					'ssl' => array('allow_self_signed' => true)
 				);
