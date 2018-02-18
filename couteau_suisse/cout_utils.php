@@ -270,7 +270,11 @@ function cs_aide_raccourci($id) {
 	}
 	return '';
 }
-	
+
+function cs_aide_raccourcis_callback($matches) {
+	return defined($matches[1])?constant($matches[1]):"";
+}
+
 // retourne la liste des raccourcis disponibles
 function cs_aide_raccourcis() {
 	global $outils;
@@ -279,8 +283,7 @@ function cs_aide_raccourcis() {
 		if($a = cs_aide_raccourci($outil['id'])) $aide[] = '<li style="margin: 0.7em 0 0 0;">&bull; ' . $a . '</li>';
 	if(!count($aide)) return '';
 	// remplacement des constantes de forme @_CS_XXXX@
-	$aide = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 
-		create_function('$matches','return defined($matches[1])?constant($matches[1]):"";'), join("\n", $aide));
+	$aide = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 'cs_aide_raccourcis_callback', join("\n", $aide));
 	return '<p><b>' . couteauprive_T('raccourcis') . '</b></p><ul class="cs_raccourcis">' . $aide . '</ul>';
 }
 
@@ -355,6 +358,10 @@ function cs_autorisation_alias(&$tab, $autoriser) {
 	}
 }
 
+function cs_nom_outil_callback($m) {
+	return _T($m[1]);
+}
+
 function cs_nom_outil(&$outil, $traduit=true) {
 	if($outil['pas_de_nom']) {
 		// outil classique
@@ -365,7 +372,7 @@ function cs_nom_outil(&$outil, $traduit=true) {
 	}
 	// si on trouve une chaine de langue dans le nom traduit, le resultat sera forcement traduit
 	if(strpos($nom_traduit, '<:')!==false)
-		return preg_replace_callback(',<:([:a-z0-9_-]+):>,i', create_function('$m','return _T($m[1]);'), $nom_traduit);
+		return preg_replace_callback(',<:([:a-z0-9_-]+):>,i', 'cs_nom_outil_callback', $nom_traduit);
 	return (!$traduit && strlen($nom))?$nom:$nom_traduit;
 }
 

@@ -148,6 +148,16 @@ function description_outil_liens($res) {
 		:preg_replace_callback(',\[\.->([a-zA-Z_][a-zA-Z0-9_-]*)\],', 'description_outil_liens_callback', $res);
 }
 
+function description_outil_callback1($m) {
+	return couteauprive_T($m[1].":description".$m[2]);
+}
+function description_outil_callback2($m) {
+	return _T($m[1]);
+}
+function description_outil_callback3($m) {
+	return defined($m[1])?constant($m[1]):(' ('.couteauprive_T('outil_inactif').')');
+}
+
 // renvoie la description de $outil_ : toutes les %variables% ont ete remplacees par le code adequat
 function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	global $outils, $cs_variables, $metas_vars;
@@ -179,10 +189,9 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 		if(!isset($outil['perso']))
 			// lames natives : reconstitution d'une description eventuellement morcelee
 			// exemple : <:mon_outil:3:> est remplace par couteauprive_T('mon_outil:description3')
-			$descrip = preg_replace_callback(',<:([a-z_][a-z0-9_-]*):([0-9]*):>,i', 
-				create_function('$m','return couteauprive_T($m[1].":description".$m[2]);'), $descrip);
+			$descrip = preg_replace_callback(',<:([a-z_][a-z0-9_-]*):([0-9]*):>,i', 'description_outil_callback1', $descrip);
 		// chaines de langue personnalisees
-		$descrip = preg_replace_callback(',<:([:a-z0-9_-]+):>,i', create_function('$m','return _T($m[1]);'), $descrip);
+		$descrip = preg_replace_callback(',<:([:a-z0-9_-]+):>,i', 'description_outil_callback2', $descrip);
 	}
 	// envoi de la description en pipeline
 #	list(,$descrip) = pipeline('init_description_outil', array($outil_, $descrip));
@@ -268,8 +277,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 		), $res);
 	// remplacement des constantes qui restent de forme @_CS_XXXX@
 	if(strpos($res, '@_CS')!==false) 
-		$res = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 
-			create_function('$matches','return defined($matches[1])?constant($matches[1]):(\' (\'.couteauprive_T(\'outil_inactif\').\')\');'), $res);
+		$res = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 'description_outil_callback3', $res);
 	// remplacement des liens vers un autre outil
 	$res = description_outil_liens($res);
 
