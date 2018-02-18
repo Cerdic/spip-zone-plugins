@@ -15,8 +15,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'credit_cinfo' => 'Commission internationale des noms français des oiseaux (CINFO), @url@.',
 	'credit_wikipedia' => 'Wikipedia (@champs@). Voir aussi la page du taxon @url_taxon@.',
 
-	// D
-
 	// E
 	'erreur_vider_regne' => 'Erreur lors du vidage du règne @regne@ en base de données.',
 	'erreur_charger_regne' => 'Erreur lors du chargement du règne @regne@ en base de données.',
@@ -29,6 +27,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_wikipedia_langue' => 'Si vous utilisez plusieurs langues pour traduire vos taxons, choisissez la langue à utiliser pour récupérer le descriptif.',
 	'explication_wikipedia_descriptif' => 'Vérifier si ce descriptif est bien celui qui décrit le mieux le taxon. Si non, choisissez une page alternative parmi celle éventuellement proposée dans la liste ci-dessous.',
 	'explication_wikipedia_lien' => 'Choisissez la page Wikipedia que vous souhaitez intégrer comme descriptif du taxon.',
+
+	// F
+	'filtre_edite_oui' => 'Taxons édités',
+	'filtre_edite_non' => 'Taxons non édités',
+	'filtre_edite_tout' => 'Tous les taxons',
+	'filtre_regnes_tout' => 'Tous les règnes',
 
 	// I
 	'info_boite_taxonomie_gestion' => 'Cette page permet aux webmestres de consulter, charger, mettre à jour ou vider les règnes animal, végétal et fongique gérés par le plugin.',

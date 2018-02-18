@@ -1,10 +1,54 @@
 [(#AUTORISER{voir, _taxons}|sinon_interdire_acces)]
 <h1 class="grostitre"><:taxonomie:titre_page_taxonomie:></h1>
 
+[(#REM) Onglets de premier niveau pour le filtrage par règne ]
+<div class="onglets_simple">
+	<B_regnes>
+	<ul class="regnes">
+		[<li>
+			(#SELF
+				|parametre_url{regne, ''}
+				|lien_ou_expose{<:taxonomie:filtre_regnes_tout:>, #ENV{regne, ''}|=={''}, ajax})
+		</li>]
+	<BOUCLE_regnes(TAXONS) {rang=kingdom}>
+		[<li>
+			(#SELF
+				|parametre_url{regne, #REGNE}
+				|lien_ou_expose{[(#VAL{taxonomie:regne_}|concat{#REGNE}|_T|ucfirst)], #ENV{regne}|=={#REGNE}, ajax})
+		</li>]
+	</BOUCLE_regnes>
+	</ul>
+	<div class="nettoyeur"></div>
+	</B_regnes>
+</div>
+
+[(#REM) Onglets de second niveau pour le filtrage par indicateur d'édition ]
+<div class="onglets_simple second clearfix">
+	<ul class="edition">
+		[<li class="first">
+			(#SELF
+				|parametre_url{edite, ''}
+				|lien_ou_expose{<:taxonomie:filtre_edite_tout:>, #ENV{edite, ''}|=={''}, ajax})
+		</li>]
+		[<li>
+			(#SELF
+				|parametre_url{edite, oui}
+				|lien_ou_expose{<:taxonomie:filtre_edite_oui:>, #ENV{edite, ''}|=={oui}, ajax})
+		</li>]
+		[<li>
+			(#SELF
+				|parametre_url{edite, non}
+				|lien_ou_expose{<:taxonomie:filtre_edite_non:>, #ENV{edite, ''}|=={non}, ajax})
+		</li>]
+	</ul>
+	<div class="nettoyeur"></div>
+</div>
+
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 <div class="nettoyeur"></div>
 
 <INCLURE{fond=prive/objets/liste/taxons,
 	par=nom_scientifique,
+	regne=#ENV{regne},
 	sinon=<:taxon:info_aucun_taxon:>,
 	env, ajax} />
