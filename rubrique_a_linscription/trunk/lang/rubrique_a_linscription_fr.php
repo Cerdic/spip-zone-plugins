@@ -12,6 +12,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur_bascule' => 'Les auteurs @id_auteurs@ ont bien été basculés',
 
 	// C
+	'cfg_duplicator_arbo_label' => 'Que dupliquer', 
+	'cfg_duplicator_pb_explication' => 'Le plugin avait été configuré pour fonctionner de concert avec le plugin «&nbsp;Duplicator&nbsp;», mais celui-ci a été désactivé. «&nbsp;Rubrique à l\'inscription&nbsp;» n\'aura donc pas le comportement attendu.', 
+	'cfg_duplicator_label' => 'Duplication de rubrique',
+	'cfg_duplicator_explication' => 'À la place de créer une rubrique, indiquez une rubrique à dupliquer avec le plugin  «&nbsp;Duplicator&nbsp;». Les réglages de «&nbsp;Duplicator&nbsp;» s\'appliqueront.', 
 	'cfg_espace_prive' => 'Lien avec l’espace privé',
 	'cfg_espace_prive_creer_explication' => 'Ne pas autoriser les auteurs ainsi créés à proposer des articles en dehors de leur rubrique',
 	'cfg_espace_prive_creer_label' => 'Création restreinte',

@@ -128,5 +128,50 @@ function formulaires_configurer_rubrique_a_linscription_saisies() {
 		)
 
 	);
+
+	// Si duplicator est activé > proposer de choisir une rubrique.
+	// Si une rubrique pour duplicator a été choisie mais que duplicator n'est pas activé > mettre un message
+	if (test_plugin_actif('duplicator')) {
+		$duplicator = array( 
+			array (
+				'saisie' => 'selecteur_rubrique',
+				'options' => array (
+					'nom' => 'duplicator', // rubrique mere, et pas id_parent car id_parent est filtré par l'écran de sec pour n'accepter que des int
+					'explication' => _T('rubrique_a_linscription:cfg_duplicator_explication'), 
+					'label' => _T('rubrique_a_linscription:cfg_duplicator_label'), 
+					'defaut' => lire_config('rubrique_a_linscription/duplicator')
+				)
+			),
+			array (
+				'saisie' => 'radio',
+				'options' => array (
+					'nom' => 'duplicator_arbo', // rubrique mere, et pas id_parent car id_parent est filtré par l'écran de sec pour n'accepter que des int
+					'label' => _T('rubrique_a_linscription:cfg_duplicator_arbo_label'), 
+					'defaut' => lire_config('rubrique_a_linscription/duplicator'), 
+					'obligatoire' => 'on', 
+					'data' => array (
+						'rub' => _T('duplicator:bouton_confirmer_rub'), 
+						'arbo' => _T('duplicator:bouton_confirmer_arbo')
+					),
+					'defaut' => 'rub' 
+				)
+			)
+		);
+	} elseif (lire_config('rubrique_a_linscription/duplicator')) {
+		$duplicator = array(
+			array(
+				'saisie' => 'explication',
+				'options' => array(
+					'nom' => 'cfg_duplicator_pb',
+					'conteneur_class' => 'erreur', 
+					'texte' => _T('rubrique_a_linscription:cfg_duplicator_pb_explication')
+				)
+			)
+		);
+	}
+
+	if (isset($duplicator)) {
+		$saisies[1]['saisies'] = array_merge($saisies[1]['saisies'], $duplicator);
+	}
 	return $saisies;
 }
