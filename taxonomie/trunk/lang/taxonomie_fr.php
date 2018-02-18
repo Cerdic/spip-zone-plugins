@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_boite_taxonomie_gestion' => 'Cette page permet aux webmestres de consulter, charger, mettre à jour ou vider les règnes animal, végétal et fongique gérés par le plugin.',
 	'info_boite_taxonomie_navigation' => 'Cette page permet aux utilisateurs de consulter la liste des taxons chargés en base de données et de naviguer de taxon en taxon.',
+	'info_descriptif_existe' => 'non vide',
 	'info_etape' => 'Etape @etape@ / @etapes@',
 	'info_indicateur_hybride' => 'Ce taxon est un hydribe',
 	'info_regne_charge' => 'déjà chargé',

@@ -23,7 +23,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_taxons(TAXONS){regne?}{rang?}{where?}{recherche?}{tri #ENV{par,nom_scientifique},#GET{defaut_tri}}{pagination #ENV{nb,100}}>
+	<BOUCLE_liste_taxons(TAXONS){regne?}{rang?}{edite?}{where?}{recherche?}{tri #ENV{par,nom_scientifique},#GET{defaut_tri}}{pagination #ENV{nb,100}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="picto">[(#CHEMIN_IMAGE{taxon-16.png}|balise_img)]</td>
 			<td class="titre principale nom_scientifique">[(#LOGO_TAXON|image_reduire{20,26})]<a href="[(#ID_TAXON|generer_url_entite{taxon})]" title="<:info_numero_abbreviation|attribut_html:> #ID_TAXON">[(#NOM_SCIENTIFIQUE)]</a></td>

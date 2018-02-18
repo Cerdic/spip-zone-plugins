@@ -26,16 +26,32 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 		- `_etapes`        : nombre d'étapes du formaulaire, à savoir, 2.
  */
 function formulaires_decrire_taxon_charger($id_taxon) {
+
+	// Initialisation du chargement.
 	$valeurs = array();
 
-	// Initialisation des paramètres du formulaire.
+	// Langue choisie pour la page wikipedia.
 	$valeurs['langue'] = _request('langue');
 
-	// Liste des langues utilisées
+	// Déterminer si un descriptif existe pour une langue donnée.
+	include_spip('inc/filtres');
+	$traductions = array();
+	if ($descriptif = sql_getfetsel('descriptif', 'spip_taxons', array('id_taxon=' . sql_quote($id_taxon)))) {
+		$descriptif = trim($descriptif);
+		if (preg_match(_EXTRAIRE_MULTI, $descriptif, $match)) {
+			$descriptif = trim($match[1]);
+		}
+		$traductions = extraire_trads($descriptif);
+	}
+
+	// Liste des langues utilisées par le plugin.
 	include_spip('inc/config');
 	$langues_utilisees = lire_config('taxonomie/langues_utilisees');
 	foreach ($langues_utilisees as $_code_langue) {
 		$valeurs['_langues'][$_code_langue] = traduire_nom_langue($_code_langue);
+		if ($traductions and array_key_exists($_code_langue, $traductions)) {
+			$valeurs['_langues'][$_code_langue] .= ' (' . _T('taxonomie:info_descriptif_existe') .')';
+		}
 	}
 
 	// Langue par défaut: soit la langue en cours si elle existe dans la liste des langues utilisées, soit la
@@ -48,19 +64,52 @@ function formulaires_decrire_taxon_charger($id_taxon) {
 		$valeurs['_langue_defaut'] = key($valeurs['_langues']);
 	}
 
-	// Récupération des informations de base du taxon
-	$select = array('tsn', 'nom_scientifique');
-	$from = array('id_taxon=' . sql_quote($id_taxon));
-	$taxon = sql_fetsel($select, 'spip_taxons', $from);
+	// Initialisation des paramètres du formulaire utilisés en étape 2 et mis à jour dans la vérification
+	// de l'étape 1.
+	$valeurs['_descriptif'] = _request('_descriptif');
+	$valeurs['_liens'] = _request('_liens');
+	$valeurs['_lien_defaut'] = _request('_lien_defaut');
+
+	// Préciser le nombre d'étapes du formulaire
+	$valeurs['_etapes'] = 2;
+
+	return $valeurs;
+}
+
+/**
+ * Vérification de l'étape 1 du formulaire : si une langue est choisie, on charge la page recherchée et les liens
+ * vers les autres pages éventuelles. Si aucun page n'est disponible on renvoie un message d'erreur.
+ *
+ * @uses wikipedia_get_page()
+ * @uses convertisseur_texte_spip()
+ *
+ * @return array
+ * 		Message d'erreur si aucune page n'est disponible ou chargement des champs utiles à l'étape 2 sinon.
+ *      Ces champs sont :
+ * 		- `_liens`         : liste des liens possibles pour la recherche (étape 2)
+ * 		- `_lien_defaut`   : lien par défaut (étape 2)
+ * 		- `_descriptif`    : texte de la page trouvée ou choisie par l'utilisateur (étape 2)
+ */
+function formulaires_decrire_taxon_verifier_1($id_taxon) {
+
+	// Initialisation des erreurs de vérification.
+	$erreurs = array();
 
 	// Si on a déjà choisi une langue, on peut accéder à Wikipedia avec le nom scientifique et retourner
 	// les pages trouvées (étape 2).
-	if ($valeurs['langue']) {
+	if ($langue = _request('langue')) {
+		$valeurs = array();
+
+		// Récupération des informations de base du taxon
+		$select = array('tsn', 'nom_scientifique');
+		$where = array('id_taxon=' . sql_quote($id_taxon));
+		$taxon = sql_fetsel($select, 'spip_taxons', $where);
+
 		// Récupération d'une page wikipedia matchant avec le nom scientifique du taxon.
 		// L'API renvoie aussi d'autres pages qui peuvent potentiellement être plus pertinentes.
 		include_spip('services/wikipedia/wikipedia_api');
 		$recherche = array('name' => $taxon['nom_scientifique'], 'tsn' => $taxon['tsn']);
-		$information = wikipedia_get_page($recherche, $valeurs['langue']);
+		$information = wikipedia_get_page($recherche, $langue);
 
 		// On convertit le descriptif afin de visualiser un texte plus clair.
 		$valeurs['_descriptif'] = '';
@@ -80,15 +129,17 @@ function formulaires_decrire_taxon_charger($id_taxon) {
 				}
 			}
 			$valeurs['_lien_defaut'] = $taxon['nom_scientifique'];
+
+			// On fournit ces informations au formulaire pour l'étape 2.
+			foreach ($valeurs as $_champ => $_valeur) {
+				set_request($_champ, $_valeur);
+			}
 		} else {
-			$valeurs['message_erreur'] = _T('taxonomie:erreur_wikipedia_descriptif');
+			$erreurs['message_erreur'] = _T('taxonomie:erreur_wikipedia_descriptif');
 		}
 	}
 
-	// Préciser le nombre d'étapes du formulaire
-	$valeurs['_etapes'] = 2;
-
-	return $valeurs;
+	return $erreurs;
 }
 
 
@@ -96,9 +147,9 @@ function formulaires_decrire_taxon_charger($id_taxon) {
  * Exécution du formulaire : si une page est choisie et existe le descriptif est inséré dans le taxon concerné
  * et le formulaire renvoie sur la page d'édition du taxon.
  *
- * @uses taxonomie_regne_existe()
- * @uses taxonomie_regne_vider()
- * @uses taxonomie_regne_charger()
+ * @uses wikipedia_get_page()
+ * @uses convertisseur_texte_spip()
+ * @uses taxon_merger_traductions()
  *
  * @return array
  * 		Tableau retourné par le formulaire contenant toujours un message de bonne exécution ou
@@ -113,8 +164,8 @@ function formulaires_decrire_taxon_traiter($id_taxon) {
 
 	// Récupération des informations de base du taxon
 	$select = array('tsn', 'nom_scientifique', 'edite', 'descriptif', 'sources');
-	$from = array('id_taxon=' . sql_quote($id_taxon));
-	$taxon = sql_fetsel($select, 'spip_taxons', $from);
+	$where = array('id_taxon=' . sql_quote($id_taxon));
+	$taxon = sql_fetsel($select, 'spip_taxons', $where);
 
 	// Récupération de la page wikipedia choisie:
 	include_spip('services/wikipedia/wikipedia_api');
