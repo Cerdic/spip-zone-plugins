@@ -9,7 +9,7 @@
 >
 	<nom>Commandes d’abonnements</nom>
 
-	<auteur lien="https://ldd.fr">Les Développements Durables</auteur>
+	<auteur lien="https://www.ldd.fr">Les Développements Durables</auteur>
 	<licence>GPL v3</licence>
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="commandes_abonnements_pipelines.php" />

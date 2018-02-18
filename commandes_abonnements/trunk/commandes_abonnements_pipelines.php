@@ -100,11 +100,12 @@ function commandes_abonnements_formulaire_saisies($flux) {
  **/
 function commandes_abonnements_formulaire_traiter($flux) {
 	if (
-		$flux['args']['form'] == 'editer_auteur'
+		// TODO : pipeline pour cette liste ?
+		in_array($flux['args']['form'], array('editer_auteur', 'inscription', 'profil'))
 		and $id_auteur = $flux['data']['id_auteur']
 	) {
 		$flux['data'] += commandes_abonnements_generer_commande($id_auteur);
-		// On ajoute les infos
+		// On ajoute le référence de la commande créé si on part sur une autre page
 		if (
 			isset($flux['data']['redirect'])
 		) {
