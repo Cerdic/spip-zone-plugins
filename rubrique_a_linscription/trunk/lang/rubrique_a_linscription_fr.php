@@ -55,5 +55,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_mail_adresse_rubrique' => 'Votre rubrique reservée',
-	'titre_rubrique' => 'Rubrique de @nom@'
+	'titre_rubrique' => 'Rubrique de @nom@', 
+	'titre_rubrique_duplicator' => ' de @nom@'
 );
