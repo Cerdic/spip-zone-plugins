@@ -18,6 +18,25 @@ include_spip('base/abstract_sql');
 include_spip('action/editer_liens');
 
 /**
+ * Trouver quel profil utiliser suivant s'il y a un auteur ou pas et s'il a déjà un profil
+ * 
+ * @param int|string $id_ou_identifiant_profil 
+ * @param int $id_auteur 
+ * @return int|string
+ * 		Retourne un identifiant entier ou texte d'un profil
+ */
+function profils_selectionner_profil($id_ou_identifiant_profil='', $id_auteur=0) {
+	$id_auteur = intval($id_auteur);
+	
+	// S'il y a un utilisateur et qu'il a déjà un profil sélectionné, c'est prioritaire !
+	if ($id_auteur > 0 and $id_profil = sql_getfetsel('id_profil', 'spip_auteurs', 'id_auteur = '.intval($id_auteur))) {
+		$id_ou_identifiant_profil = $id_profil;
+	}
+	
+	return $id_ou_identifiant_profil;
+}
+
+/**
  * Cherche le profil suivant un id SQL ou un identifiant textuel
  * 
  * @param int|string $id_ou_identifiant_profil
@@ -25,7 +44,7 @@ include_spip('action/editer_liens');
  * @return array|bool
  * 		Retourne le profil demandé ou false
  */
-function profils_chercher_profil($id_ou_identifiant_profil) {
+function profils_recuperer_profil($id_ou_identifiant_profil) {
 	static $profils = array();
 	$profil = false;
 	
@@ -55,6 +74,52 @@ function profils_chercher_profil($id_ou_identifiant_profil) {
 	
 	$profils[$id_ou_identifiant_profil] = $profil;
 	return $profil;
+}
+
+
+/**
+ * Cherche dans une config s'il y a bien un champ email obligatoire et si oui lequel
+ * 
+ * La fonction cherche l'email obligatoire *le plus proche* du compte utilisateur
+ * 
+ * @param array $config
+ * 		Le tableau de configuration d'un profil
+ * @return
+ * 		Retourne le champ d'email principal
+ */
+function profils_chercher_champ_email_principal($config) {
+	$champ = false;
+	
+	foreach (array('auteur', 'organisation', 'contact') as $objet) {
+		if ($objet == 'auteur' or (defined('_DIR_PLUGIN_CONTACTS') and $config["activer_$objet"])) {
+			// On cherche dans les champs de l'objet
+			if (
+				!$champ
+				and $config[$objet]['email'] 
+				and in_array('inscription', $config[$objet]['email'])
+				and in_array('obligatoire', $config[$objet]['email'])
+			) {
+				$champ = array($objet, 'email');
+			}
+			// Sinon on cherche dans les coordonnées emails
+			elseif (
+				!$champ
+				and defined('_DIR_PLUGIN_COORDONNEES')
+				and $config["activer_coordonnees_$objet"]
+				and $config['coordonnees'][$objet]['emails']
+			) {
+				// On parcourt les emails configurés
+				foreach ($config['coordonnees'][$objet]['emails'] as $champ_email) {
+					if ($champ_email['inscription'] and $champ_email['obligatoire']) {
+						$type = $champ_email['type'] ? $champ_email['type'] : 0;
+						$champ = array('coordonnees', $objet, 'emails', $type, 'email');
+					}
+				}
+			}
+		}
+	}
+	
+	return $champ;
 }
 
 /**
@@ -95,7 +160,7 @@ function profils_chercher_saisies_objet($objet) {
 }
 
 /**
- * Cherche les saisies configurées pour un profil pour tel formulaire (inscription ou édition du profil)
+ * Cherche les saisies configurées pour un profil et pour tel formulaire (inscription ou édition)
  * 
  * @param string $form
  * 		Quel formulaire : "inscription" ou "edition" 
@@ -106,16 +171,14 @@ function profils_chercher_saisies_objet($objet) {
  * @return array
  * 		Retourne le tableau des saisies du profil
  */
-function profils_chercher_saisies_profil($form, $id_auteur='', $id_ou_identifiant_profil='') {
+function profils_chercher_saisies_profil($form, $id_auteur=0, $id_ou_identifiant_profil='') {
 	$saisies = array();
 	
-	// S'il y a un id_auteur on cherche s'il a un profil
-	if (intval($id_auteur) > 0 and $id_profil = sql_getfetsel('id_profil', 'spip_auteurs', 'id_auteur = '.intval($id_auteur))) {
-		$id_ou_identifiant_profil = $id_profil;
-	}
+	// On cherche le bon profil
+	$id_ou_identifiant_profil = profils_selectionner_profil($id_ou_identifiant_profil, $id_auteur);
 	
 	// On ne continue que si on a un profil sous la main
-	if ($profil = profils_chercher_profil($id_ou_identifiant_profil) and $config = $profil['config']) {
+	if ($profil = profils_recuperer_profil($id_ou_identifiant_profil) and $config = $profil['config']) {
 		foreach (array('auteur', 'organisation', 'contact') as $objet) {
 			// Si c'est autre chose que l'utilisateur, faut le plugin qui va avec et que ce soit activé
 			if ($objet == 'auteur' or (defined('_DIR_PLUGIN_CONTACTS') and $config["activer_$objet"])) {
@@ -124,15 +187,17 @@ function profils_chercher_saisies_profil($form, $id_auteur='', $id_ou_identifian
 				$saisies_a_utiliser = array();
 				
 				// Pour chaque chaque champ vraiment configuré
-				foreach ($config[$objet] as $champ => $config_champ) {
-					// On cherche la saisie pour ce champ SI c'est pour le form demandé
-					if (in_array($form, $config_champ) and $saisie = saisies_chercher($saisies_objet, $champ)) {
-						// On modifie son nom
-						$saisie['options']['nom'] = $objet . '[' . $saisie['options']['nom'] . ']';
-						// On modifie son obligatoire suivant la config
-						$saisie['options']['obligatoire'] = in_array('obligatoire', $config_champ) ? 'oui' : false;
-						// On ajoute la saisie
-						$saisies_a_utiliser[] = $saisie;
+				if ($config[$objet]) {
+					foreach ($config[$objet] as $champ => $config_champ) {
+						// On cherche la saisie pour ce champ SI c'est pour le form demandé
+						if (in_array($form, $config_champ) and $saisie = saisies_chercher($saisies_objet, $champ)) {
+							// On modifie son nom
+							$saisie['options']['nom'] = $objet . '[' . $saisie['options']['nom'] . ']';
+							// On modifie son obligatoire suivant la config
+							$saisie['options']['obligatoire'] = in_array('obligatoire', $config_champ) ? 'oui' : false;
+							// On ajoute la saisie
+							$saisies_a_utiliser[] = $saisie;
+						}
 					}
 				}
 				
@@ -221,7 +286,7 @@ function profils_chercher_saisies_profil($form, $id_auteur='', $id_ou_identifian
 }
 
 /**
- * Récupérer tous les identifiants des objets liés à un profil
+ * Récupérer tous les identifiants des objets liés au profil d'un compte utilisateur
  *
  * @param int $id_auteur=0
  * 		Identifiant d'un auteur précis, sinon visiteur en cours
@@ -233,17 +298,16 @@ function profils_chercher_ids_profil($id_auteur=0, $id_ou_identifiant_profil='')
 	$ids['id_auteur'] = intval($id_auteur);
 	$coordonnees_liees = array();
 	
-	// Cherchons un utilisateur
-	if (!$ids['id_auteur'] and !$ids['id_auteur'] = intval(session_get('id_auteur'))) {
+	// On cherche le bon profil
+	$id_ou_identifiant_profil = profils_selectionner_profil($id_ou_identifiant_profil, $ids['id_auteur']);
+	
+	// Si pas d'utilisateur, il faut en créer un
+	if (!$ids['id_auteur']) {
 		$ids['id_auteur'] = 'new';
-	}
-	// Si on a un utilisateur et qu'il n'y a pas de profil déjà fourni
-	elseif (!$id_ou_identifiant_profil) {
-		$id_ou_identifiant_profil = sql_getfetsel('id_profil', 'spip_auteurs', 'id_auteur = '.$ids['id_auteur']);
 	}
 	
 	// Maintenant on ne continue que si on a trouvé un profil
-	if ($profil = profils_chercher_profil($id_ou_identifiant_profil) and $config = $profil['config']) {
+	if ($profil = profils_recuperer_profil($id_ou_identifiant_profil) and $config = $profil['config']) {
 		// Si le plugin est toujours là
 		if (defined('_DIR_PLUGIN_CONTACTS')) {
 			// Est-ce qu'il y a une orga en fiche principale ?
@@ -361,4 +425,14 @@ function profils_recuperer_infos($id_auteur=0, $id_ou_identifiant_profil='') {
 	}
 	
 	return $infos;
+}
+
+/**
+ * @brief 
+ * @param $id_auteur 
+ * @param $id_ou_identifiant_profil 
+ * @returns 
+ */
+function profils_enregistrer_profil($id_auteur, $id_ou_identifiant_profil='') {
+	
 }

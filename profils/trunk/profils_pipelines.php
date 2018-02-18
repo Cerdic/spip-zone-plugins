@@ -67,8 +67,8 @@ function profils_formulaire_fond($flux) {
 		
 		// On insère
 		$flux['data'] = preg_replace(
-			"/(<(li|div) [^>]*class=[\"']editer saisie_mail_inscription.*<\/(li|div)>)/Uims",
-			"\\1" . $champs,
+			"|</fieldset>|Uims",
+			"\\0" . $champs,
 			$flux['data'],
 			1
 		);

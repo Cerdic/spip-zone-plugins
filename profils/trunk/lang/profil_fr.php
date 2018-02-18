@@ -41,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_supprimer_profil' => 'Confirmez-vous la suppression de cet profil ?',
 	
 	// E
+	'erreur_email_obligatoire' => 'Il doit y avoir un email obligatoire dans les champs ou dans les coordonnées.',
 	'errreur_identifiant_existant' => 'Cet identifiant est déjà utilisé',
 	// I
 	'icone_creer_profil' => 'Créer un profil',

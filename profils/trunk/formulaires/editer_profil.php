@@ -78,6 +78,13 @@ function formulaires_editer_profil_saisies_dist($id_profil = 'new', $retour = ''
 		array(
 			'saisie' => 'input',
 			'options' => array(
+				'nom' => 'id_profil',
+				'type' => 'hidden',
+			),
+		),
+		array(
+			'saisie' => 'input',
+			'options' => array(
 				'nom' => 'titre',
 				'label' => _T('profil:champ_titre_label'),
 				'obligatoire' => 'oui',
@@ -336,6 +343,7 @@ function formulaires_editer_profil_charger_dist($id_profil = 'new', $retour = ''
  */
 function formulaires_editer_profil_verifier_dist($id_profil = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	$erreurs = array();
+	$config = _request('config');
 	
 	// On teste l'identifiant, ne doit pas exister
 	if (
@@ -345,8 +353,13 @@ function formulaires_editer_profil_verifier_dist($id_profil = 'new', $retour = '
 		$erreurs['identifiant'] = _T('profil:erreur_identifiant_existant');
 	}
 	
+	// On teste si on a bien un email obligatoire
+	if (!profils_chercher_champ_email_principal($config)) {
+		$erreurs['message_erreur'] = _T('profil:erreur_email_obligatoire');
+	}
+	
 	// On normalise certaines choses dans les coordonnées
-	$config = formulaires_editer_profil_traiter_coordonnees(_request('config'));
+	$config = formulaires_editer_profil_traiter_coordonnees($config);
 	set_request('config', $config);
 	
 	return $erreurs;
@@ -382,6 +395,14 @@ function formulaires_editer_profil_traiter_dist($id_profil = 'new', $retour = ''
 	return $retours;
 }
 
+/**
+ * Nettoie les coordonnées non utilisées dans le tableau de config du profil
+ * 
+ * @param array $config 
+ * 		Tableau de configuration d'un profil
+ * @return array
+ * 		Retourne le tableau de config nettoyé
+ */
 function formulaires_editer_profil_traiter_coordonnees($config) {
 	foreach (array('auteur', 'organisation', 'contact') as $objet) {
 		if (!isset($config["activer_coordonnees_$objet"]) or !$config["activer_coordonnees_$objet"]) {
