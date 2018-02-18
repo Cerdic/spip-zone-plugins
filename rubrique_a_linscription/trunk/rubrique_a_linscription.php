@@ -55,6 +55,18 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 	$id_parent = picker_selected(lire_config('rubrique_a_linscription/rubrique_mere'),'rubrique');
 	$id_parent = $id_parent[0];
 
+	// cas particulier si duplicator
+	if (test_plugin_actif('duplicator')) {
+		$duplicator =  picker_selected(lire_config('rubrique_a_linscription/duplicator'),'rubrique');
+		$duplicator = $duplicator[0];
+		$duplicator_arbo = lire_config('rubrique_a_linscription/duplicator_arbo');
+		if ($duplicator_arbo == 'arbo') {
+			$duplicator_arbo = false;
+		} else {
+			$duplicator_arbo = true;
+		}	
+	}
+
 	if (
 			($flux['args']['form'] == 'inscription' 
 			or $flux['args']['form'] == 'inscription_avec_rubrique') 
@@ -86,8 +98,16 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 				// Création de la rubrique
 				include_spip('inc/rubriques');
 				$titre_rubrique = _T('rubrique_a_linscription:titre_rubrique',array('nom'=>$nom_inscription));
-				$id_rubrique = creer_rubrique_nommee($titre_rubrique, $id_parent);
-		
+
+				if ($duplicator) {
+					include_spip('inc/duplicator');
+					dupliquer_rubrique($duplicator,$id_parent,$titre_rubrique,$duplicator_arbo);
+
+				} else { // pas de duplicator : on se contente de créer la rubrique
+					
+					$id_rubrique = creer_rubrique_nommee($titre_rubrique, $id_parent);
+	
+				}
 		
 				sql_insertq('spip_auteurs_liens', array(
 					'id_auteur' => $id_auteur,
@@ -100,7 +120,7 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 		
 				//On ajoute la rubrique chez l'auteur
 				sql_update('spip_auteurs',array('rubrique_a_linscription'=>$id_rubrique),"id_auteur=$id_auteur");
-		
+
 				//Création du mot clef associé
 				if($groupe_mots) {
 					$type = sql_getfetsel('titre','spip_groupes_mots','id_groupe='.$groupe_mots);
