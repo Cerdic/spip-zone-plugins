@@ -123,7 +123,7 @@ function typo_exposants($texte){
 	// prudence : on protege les balises <a> et <img>
 	if (strpos($texte, '<')!==false)
 		$texte = preg_replace_callback('/(<(a|img) [^>]+>)/Ums', 'typo_exposants_echappe_balises_callback', $texte);
-	$texte = cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'typo_exposants_rempl', $texte);
+	$texte = cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|math', 'typo_exposants_rempl', $texte);
 	return echappe_retour($texte, 'EXPO');
 }
 ?>

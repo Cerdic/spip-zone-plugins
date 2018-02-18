@@ -138,6 +138,10 @@ function sommaire_id_ancre_ex($index, &$titre, $hn) {
 	return strlen($a)>2?$a:"sommaire_$index";
 }
 
+function sommaire_echappe_balises_callback($matches) {
+	return cs_code_echappement($matches[0], 'SOMM');
+}
+
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite|onglets|table
 // $sommaire_seul = true ou 1 : retour du sommaire seul, fond complet
 // $sommaire_seul = 2 : retour du sommaire seul sous forme de liste <li></li>
@@ -157,7 +161,7 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	// on masque les onglets s'il y en a
 	if(defined('_onglets_FIN'))
 		$texte = preg_replace_callback(',<div class="onglets_bloc_initial.*'._onglets_FIN.',Ums',
-			create_function('$matches','return cs_code_echappement($matches[0], \'SOMM\');'), $texte);
+			'sommaire_echappe_balises_callback', $texte);
 	// et la, on y va...
 	$sommaire = ''; $i = 1; $nbh3 = 0;
 	// reinitialisation de l'index interne de la fonction
