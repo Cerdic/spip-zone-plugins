@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return array
  * 		Tableau des données à charger par le formulaire (affichage). Aucune donnée chargée n'est un
  * 		champ de saisie, celle-ci sont systématiquement remises à zéro.
- * 		- `langues`        : tableau des noms de langue utilisables indexé par le code de langue SPIP (étape 1).
+ * 		- `_langues`        : tableau des noms de langue utilisables indexé par le code de langue SPIP (étape 1).
  * 		- `_langue_defaut` : code de langue SPIP par défaut (étape 1).
  * 		- `langue`         : code de langue SPIP choisi lors de l'étape 1
  * 		- `_liens`         : liste des liens possibles pour la recherche (étape 2)
@@ -81,7 +81,7 @@ function formulaires_decrire_taxon_charger($id_taxon) {
 			}
 			$valeurs['_lien_defaut'] = $taxon['nom_scientifique'];
 		} else {
-			$valeurs['_erreur_descriptif'] = _T('taxonomie:erreur_wikipedia_descriptif');
+			$valeurs['message_erreur'] = _T('taxonomie:erreur_wikipedia_descriptif');
 		}
 	}
 
@@ -93,8 +93,8 @@ function formulaires_decrire_taxon_charger($id_taxon) {
 
 
 /**
- * Exécution du formulaire : le règne choisi est soit vidé, soit chargé jusqu'au rang minimal
- * choisi en y intégrant les traductions des noms communs sélectionnées.
+ * Exécution du formulaire : si une page est choisie et existe le descriptif est inséré dans le taxon concerné
+ * et le formulaire renvoie sur la page d'édition du taxon.
  *
  * @uses taxonomie_regne_existe()
  * @uses taxonomie_regne_vider()
@@ -131,14 +131,17 @@ function formulaires_decrire_taxon_traiter($id_taxon) {
 	// On convertit le descriptif afin de proposer un texte plus clair.
 	if (!empty($information['text'])) {
 		// Si le plugin Convertisseur est actif, conversion du texte mediawiki vers SPIP.
-		// Mise en format multi systématique et limitation de la chaine à 20000 caractères.
-		// TODO : revoir le calcul des 20000
 		include_spip('inc/filtres');
 		$convertir = chercher_filtre('convertisseur_texte_spip');
 		$texte_converti = $convertir ? $convertir($information['text'], 'MediaWiki_SPIP') : $information['text'];
+
+		// Mise en format multi systématique et limitation de la chaîne en fonction du nombre de langues utilisées.
+		include_spip('inc/config');
+		$langues_utilisees = lire_config('taxonomie/langues_utilisees');
+		$limite_texte = floor(65535 / (count($langues_utilisees) + 1));
 		$texte_converti = '<multi>'
 						  . '[' . $langue . ']'
-						  . substr($texte_converti, 0, 20000)
+						  . substr($texte_converti, 0, $limite_texte)
 						  . '</multi>';
 		// Mise à jour pour le taxon du descriptif et des champs connexes en base de données
 		$maj = array();
@@ -148,7 +151,7 @@ function formulaires_decrire_taxon_traiter($id_taxon) {
 		$maj['descriptif'] = taxon_merger_traductions($texte_converti, $taxon['descriptif']);
 		// - l'indicateur d'édition est positionné à oui
 		$maj['edite'] = 'oui';
-		// - la source wikipédia est ajoutée (ou écrasée si elle existe déjà)
+		// - la source wikipedia est ajoutée (ou écrasée si elle existe déjà)
 		$maj['sources'] = array('wikipedia' => array('champs' => array('descriptif')));
 		if ($sources = unserialize($taxon['sources'])) {
 			$maj['sources'] = array_merge($maj['sources'], $sources);

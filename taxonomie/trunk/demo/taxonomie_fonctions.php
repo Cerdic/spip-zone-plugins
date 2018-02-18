@@ -70,5 +70,3 @@ function tester_extraire_multi() {
 
 	return $html;
 }
-
-?>

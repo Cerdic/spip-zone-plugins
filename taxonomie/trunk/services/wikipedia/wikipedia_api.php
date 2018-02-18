@@ -112,7 +112,6 @@ function wikipedia_get_page($search, $spip_language, $section = null, $options =
 			$data = $requeter($url);
 
 			// Récupération de la section demandée.
-			$page_existe = false;
 			if (isset($data['batchcomplete'])
 			and isset($data['query']['pages'])) {
 				$reponses = $data['query']['pages'];
@@ -122,18 +121,15 @@ function wikipedia_get_page($search, $spip_language, $section = null, $options =
 					$information['text'] = isset($page['revisions'][0]['*']) ? $page['revisions'][0]['*'] : '';
 					$information['links'] = isset($page['links']) ? $page['links'] : array();
 					$information['languages'] = isset($page['langlinks']) ? $page['langlinks'] : array();
-					$page_existe = true;
 				}
 
-				// Mise en cache
-				// -- si la page n'existe pas mais qu'on l'a choisi (reload) alors on sauvegarde le fait qu'il n'y
-				//    a pas de page disponible.
-					cache_taxonomie_ecrire(
-						serialize($information),
-						'wikipedia',
-						'',
-						$search['tsn'],
-						$options_cache);
+				// Mise en cache systématique pour gérer le cas où la page cherchée n'existe pas.
+				cache_taxonomie_ecrire(
+					serialize($information),
+					'wikipedia',
+					'',
+					$search['tsn'],
+					$options_cache);
 			}
 		} else {
 			// Lecture et désérialisation du cache
