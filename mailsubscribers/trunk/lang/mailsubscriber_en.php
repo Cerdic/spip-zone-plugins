@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_adresse_existante' => 'This email address is already in the list',
+	'erreur_adresse_existante_editer' => 'This e-mail address is already registered - <a href="@url@">Edit this user</a>',
 	'erreur_technique_subscribe' => 'A technical error made impossible to record your subscription.',
 	'explication_listes_diffusion_option_defaut' => 'One or more list identifiers separated by a comma',
 	'explication_listes_diffusion_option_statut' => 'Filter the lists by status',
@@ -105,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_pas_encore_inscrit' => 'not registered',
 	'texte_statut_refuse' => 'suspended',
 	'texte_statut_valide' => 'active',
+	'texte_vous_avez_clique_vraiment_tres_vite' => 'You clicked the confirmation button really fast. Are you sure you are human?',
 	'titre_bonjour' => 'Hi',
 	'titre_export_mailsubscribers' => 'Export subcribers',
 	'titre_export_mailsubscribers_all' => 'Export all emails',
