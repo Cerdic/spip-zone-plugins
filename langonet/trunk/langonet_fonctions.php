@@ -4,7 +4,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 if (!defined('_LANGONET_DOSSIERS_EXCLUS')) {
 	/**
-	 * Permet de définir les arborescences à exclure du scna des fichiers de langue.
+	 * Permet de définir les arborescences à exclure du scan des fichiers de langue.
 	 * Les arborescences sont exprimées par une chaine simple (ecrire, plugins_dist, plugins...).
 	 * Le délimiteur est le ':'.
 	 * Les valeurs sont :
@@ -286,4 +286,3 @@ function lister_dossiers_plugins($racine_arborescence=null) {
 	}
 	return $dossiers;
 }
-
