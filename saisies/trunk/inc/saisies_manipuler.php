@@ -224,11 +224,20 @@ function saisies_modifier($saisies, $id_ou_nom_ou_chemin, $modifs) {
 			$modifs['options']['nom'] = $parent[$position]['options']['nom'];
 		}
 		// On récupère les enfants tels quels s'il n'y a pas des enfants dans la modif
-		if (!isset($modifs['saisies'])
+		if (
+			!isset($modifs['saisies'])
 			and isset($parent[$position]['saisies'])
 			and is_array($parent[$position]['saisies'])
 		) {
 			$modifs['saisies'] = $parent[$position]['saisies'];
+		}
+		// Pareil pour les vérifications
+		if (
+			!isset($modifs['verifier'])
+			and isset($parent[$position]['verifier'])
+			and is_array($parent[$position]['verifier'])
+		) {
+			$modifs['verifier'] = $parent[$position]['verifier'];
 		}
 
 		// Si une option 'nouveau_type_saisie' est donnee, c'est que l'on souhaite
