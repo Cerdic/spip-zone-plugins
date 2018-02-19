@@ -35,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_telephone' => 'الهاتف',
 	'champ_texte' => 'النص',
 	'champ_ville' => 'المدينة',
+	'configuration_barre_forum' => 'عرض شريط تنسيق المنتديات',
 	'configuration_barre_impossible' => 'هناك ملحق آخر يمنع استخدام الريشة في الموقع العمومي. ستبقى الاعدادات أدناه دون اي مفعول.',
 	'configuration_barre_oui' => 'عرض شريط كامل للتصحيح المطبعي.',
 	'configuration_champs_message' => 'إعدادات حاملة الريشة.',
@@ -60,12 +61,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_pj_facteur_absent' => 'لاستخدام هذه الميزة ، يجب تثبيت البرنامج المساعد Facteur.',
 	'configuration_pj_nb_max' => 'الحد الأقصى لعدد المرفقات',
 	'configuration_regle_liste_explication' => 'اختيار طريقة حساب قائمة المستلمين المحتملين وطريقة الاختيار المقترحة للزائر.',
+	'configuration_texteinfolettre' => 'نص النشرة الاخبارية',
+	'configuration_texteinfolettre_explication' => 'يمكن تغيير النص المرتبط بخانة إشارة النشرة الاخبارية.',
 	'consulter_memoire' => 'يتم تسجيل هذه الرسالة على موقعك :',
 	'courriel_de' => 'من',
 
 	// D
 	'deplacement_possible' => 'الحركة العمودية بواسطة السحب والإسقاط',
 	'description_menu_contact' => 'عنصر القائمة إلى صفحة إستمارة الاتصال',
+	'description_page-contact' => 'هذه الصفحة الاختيارية التي يمكن الوصول اليها من <i>spip.php ?page=contact</i>، توفر استمارة اتصال (يستحسن إضافة رابط مناسب في قوائم الموقع).',
 
 	// F
 	'form_destinataire' => 'اختيار المستلم',
@@ -92,6 +96,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'madame' => 'السيدة',
 	'mademoiselle' => 'انسة',
+	'message_erreur_robot' => 'أنت لست إنساناً. تباً لك!',
+	'message_erreur_transmission' => 'حصل خطأ إرسال الرجاء إعادة تجديد الطلب.',
+	'message_redemander_pass' => 'تم تسجيل العنوان «@email@» سابقاً نتيجة رسالة اتصال. لتثبيت هذا الحساب، الرجاء طلب <a href="@url_pass@"> تغيير كلمة السر</a> ثم الدخول لأول مرة. ',
 	'modele_label_auteur' => 'اختيار مسبق لمؤلف (اختياري)؟',
 	'modele_nom_formulaire' => 'استمارة الاتصال المطورة',
 	'monsieur' => 'السيد',
