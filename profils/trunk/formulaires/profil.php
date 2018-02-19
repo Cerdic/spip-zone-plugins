@@ -89,7 +89,6 @@ function formulaires_profil_charger_dist($id_auteur = 'new', $id_ou_identifiant_
 	// On remplit le contexte avec ces informations (et un préfixe pour le contact)
 	$contexte = array_merge($contexte, $infos);
 	
-	//var_dump($contexte);
 	return $contexte;
 }
 

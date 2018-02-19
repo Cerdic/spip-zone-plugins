@@ -59,6 +59,13 @@ function profils_formulaire_fond($flux) {
 		$flux['args']['form'] == 'inscription'
 		and $saisies = $flux['args']['contexte']['_saisies']
 	) {
+		// On commence par virer les champs de départ car on va faire à notre sauce
+		$flux['data'] = preg_replace(
+			"%<div[^>]*saisie_(nom|mail)_inscription[^>]*>.*?</div>%ims",
+			'',
+			$flux['data']
+		);
+		
 		// On génère le HTML des champs
 		$contexte = $flux['args']['contexte'];
 		$contexte['saisies'] = $contexte['_saisies'];

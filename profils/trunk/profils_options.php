@@ -35,7 +35,6 @@ function formulaires_editer_auteur_saisies_dist(
 				'nom' => 'nom',
 				'label' => _T('entree_nom_pseudo_2'),
 				'obligatoire' => 'oui',
-				'placeholder' => attribut_html(_T('ecrire:item_nouvel_auteur')),
 			),
 		),
 		array(
