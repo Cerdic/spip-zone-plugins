@@ -62,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_date_fin' => 'End Date sending',
 	'label_date_start' => 'Date of dispatch',
 	'label_envoi' => 'Sending',
+	'label_from' => 'Sender',
 	'label_html' => 'HTML Version',
 	'label_listes' => 'Lists',
 	'label_mailer_defaut' => 'Use the same shipping service as other mails',
