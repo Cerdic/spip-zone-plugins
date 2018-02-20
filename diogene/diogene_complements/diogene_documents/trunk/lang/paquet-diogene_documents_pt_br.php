@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'diogene_documents_description' => 'Adicionar a possibilidade de incluir documentos em uma matéria a partir do seu próprio formulário.',
+	'diogene_documents_description' => 'Inclui a possibilidade de vincular documentos a uma matéria a partir do seu próprio formulário.',
 	'diogene_documents_nom' => 'Diogenes - Documentos',
 	'diogene_documents_slogan' => 'Complemento documentos para o "Diogenes"'
 );
