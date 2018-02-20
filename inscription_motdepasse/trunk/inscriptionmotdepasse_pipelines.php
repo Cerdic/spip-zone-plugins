@@ -53,7 +53,7 @@ function inscriptionmotdepasse_formulaire_verifier($flux){
 		}
 		
 		if ( strlen(_request('password')) < _PASS_LONGUEUR_MINI ){
-			$flux['data']['password'] = _T('info_passe_trop_court_car_pluriel',                              array('nb' => _PASS_LONGUEUR_MINI));
+			$flux['data']['password'] = _T('info_passe_trop_court_car_pluriel', array('nb' => _PASS_LONGUEUR_MINI));
 		}
 		
 		// Mais si l'un des deux champs n'est pas rempli, cette erreur prend le dessus
@@ -65,12 +65,13 @@ function inscriptionmotdepasse_formulaire_verifier($flux){
 		}
 	}
 	
-    if ($flux['args']['form'] == 'login'){
-        $statut = sql_getfetsel('statut', 'spip_auteurs', 'login='.sql_quote(_request('var_login')).' OR email=' .sql_quote(_request('var_login')) );
-        if ( $statut == 'nouveau'){
-            $flux['data']['message_erreur'] = _T('inscriptionmotdepasse:erreur_email_non_confirme');        
-        }        
-        
-    }
+	if ($flux['args']['form'] == 'login'){
+		$statut = sql_getfetsel('statut', 'spip_auteurs', 'login='.sql_quote(_request('var_login')).' OR email=' .sql_quote(_request('var_login')) );
+		
+		if ($statut == 'nouveau'){
+			$flux['data']['message_erreur'] = _T('inscriptionmotdepasse:erreur_email_non_confirme');        
+		}        
+	}
+	
 	return $flux;
 }
