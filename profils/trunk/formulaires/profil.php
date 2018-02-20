@@ -263,14 +263,3 @@ function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_
 	
 	return $retours;
 }
-
-function profils_traiter_peupler_request($form, $champs_objet, $config_objet) {
-	if (is_array($champs_objet) and $config_objet) {
-		foreach ($champs_objet as $champ => $valeur) {
-			// Si ce champ faisait vraiment partie des choses à envoyer
-			if ($config_objet[$champ] and in_array($form, $config_objet[$champ])) {
-				set_request($champ, $valeur);
-			}
-		}
-	}
-}
