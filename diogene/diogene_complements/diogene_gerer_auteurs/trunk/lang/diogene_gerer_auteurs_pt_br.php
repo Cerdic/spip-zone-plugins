@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'explication_cfg_ajout_auteurs' => 'Incluir a possibilidade de adicionar / excluir os autores nas matérias criadas (usando o plugin "Diogenes - Autores")',
+	'explication_cfg_ajout_auteurs' => 'Incluir a possibilidade de incluir / excluir os autores nas matérias criadas (usando o plugin "Diogenes - Autores")',
 	'explication_diogene_gerer_auteurs' => 'Para incluir uma outra pessoa como autor, ela deve ser membro do site.',
 
 	// F
