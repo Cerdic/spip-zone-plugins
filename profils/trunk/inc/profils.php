@@ -59,7 +59,7 @@ function profils_recuperer_profil($id_ou_identifiant_profil) {
 			$profil = sql_fetsel('*', 'spip_profils', '', '', 'id_profil asc', '0,1');
 		}
 		// Si c'est un identifiant numérique
-		elseif ($id_ou_identifiant_profil === intval($id_ou_identifiant_profil)) {
+		elseif (is_numeric($id_ou_identifiant_profil)) {
 			$profil = sql_fetsel('*', 'spip_profils', 'id_profil = '.intval($id_ou_identifiant_profil));
 		}
 		// Si c'est un identifiant textuel
@@ -308,7 +308,6 @@ function profils_chercher_ids_profil($id_auteur=0, $id_ou_identifiant_profil='')
 	
 	// Maintenant on ne continue que si on a trouvé un profil
 	if ($profil = profils_recuperer_profil($id_ou_identifiant_profil) and $config = $profil['config']) {
-		var_dump($profil);
 		// Si le plugin est toujours là
 		if (defined('_DIR_PLUGIN_CONTACTS')) {
 			// Est-ce qu'il y a une orga en fiche principale ?

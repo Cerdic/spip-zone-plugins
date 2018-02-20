@@ -120,8 +120,6 @@ function profils_formulaire_verifier($flux) {
 		
 		// On cherche le bon profil
 		if ($profil = profils_recuperer_profil($id_ou_identifiant_profil) and $config = $profil['config']) {
-			// Récupérer les objets liés au profil utilisateur
-			extract(profils_chercher_ids_profil($id_auteur, $profil['id_profil']));
 			// Préparer certaines valeurs magiquement suivant la configuration
 			
 			// Email principal
