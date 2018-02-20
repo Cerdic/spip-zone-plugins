@@ -33,8 +33,8 @@ function blocs_callback($matches) {
 	// un resume facultatif
 	if(preg_match(',<resume>(.*)</resume>\s?(.*)$,ms', $corps, $res))
 		{ $corps = $res[2]; $res = $res[1]; } else $res = '';
-	// types de blocs : bloc|invisible|visible
-	if ($matches[1]=='visible' || defined('_CS_PRINT')) {
+	// types de blocs : bloc#?|invisible#?|visible#?
+	if (strncmp($matches[1], 'visible', 7)===0 || defined('_CS_PRINT')) {
 		$h = $d = '';
 		$r = ' blocs_invisible blocs_slide';
 	} else {

@@ -20,7 +20,11 @@ jQuery.fn.blocs_set_title = function( selector ) {
 
 // fonction de de/re-pliement
 jQuery.fn.blocs_toggle = function() {
-	if (!this.length) return this;
+	if(!this.length) return this;
+	if(this.length>1) {
+		this.each(function() { $(this).eq(0).blocs_toggle(); }); 
+		return this; 
+	}
 	// applique-t-on la fonction sur cs_blocs ou sur blocs_titre ?
 	var cible = this.is('.cs_blocs')? this.children('.blocs_titre').eq(0) : this;
 	// on replie/deplie la cible...
@@ -131,15 +135,18 @@ function blocs_init() {
 // un JS actif replie les blocs invisibles
 document.write('<style type="text/css">div.blocs_invisible{display:none;}</style>');
 
-// Sauve l'etat des blocs numerotes dans un cookie si on quitte la page
+// Sauve l'etat des blocs numerotes ET deplies dans un cookie si on quitte la page
 function cs_blocs_cookie() {
 	if(typeof jQuery.cookie!='function') return;
 	var blocs_cookie_name = 'blocs' + window.location.pathname + window.location.search
 	blocs_cookie_name = blocs_cookie_name.replace(/[ ;,=]/,'_');
 	var deplies = jQuery.cookie(blocs_cookie_name);
-	jQuery.cookie(blocs_cookie_name, null);
-	if(deplies)
-		jQuery(deplies).blocs_replie_tout().blocs_toggle();
+	//var pourInfo = blocs_deplies();
+	if(deplies) {
+		// on replie tous les blocs numerotes et on deplie les blocs du cookie
+		jQuery(".cs_blocs[id^='deplier_num'] .blocs_titre").not('.blocs_replie').blocs_toggle();
+		jQuery(deplies).blocs_toggle();
+	}
 	jQuery(window).bind('unload', function() {
 		jQuery.cookie(blocs_cookie_name, blocs_deplies());
 	});
