@@ -39,7 +39,15 @@ function profils_formulaire_saisies($flux) {
 	if ($flux['args']['form'] == 'inscription') {
 		include_spip('inc/profils');
 		
-		if ($saisies = profils_chercher_saisies_profil('inscription', 'new')) {
+		// Si on a une info lors de l'appel
+		if (isset($flux['args']['args'][1]['profil'])) {
+			$id_ou_identifiant_profil = $flux['args']['args'][1]['profil'];
+		}
+		else {
+			$id_ou_identifiant_profil = '';
+		}
+		
+		if ($saisies = profils_chercher_saisies_profil('inscription', 'new', $id_ou_identifiant_profil)) {
 			$flux['data'] = $saisies;
 		}
 	}
@@ -112,6 +120,8 @@ function profils_formulaire_verifier($flux) {
 		
 		// On cherche le bon profil
 		if ($profil = profils_recuperer_profil($id_ou_identifiant_profil) and $config = $profil['config']) {
+			// Récupérer les objets liés au profil utilisateur
+			extract(profils_chercher_ids_profil($id_auteur, $profil['id_profil']));
 			// Préparer certaines valeurs magiquement suivant la configuration
 			
 			// Email principal
@@ -145,6 +155,7 @@ function profils_formulaire_verifier($flux) {
 		}
 	}
 	
+	$flux['data']['caca'] = 'prout';
 	return $flux;
 }
 
@@ -224,7 +235,7 @@ function profils_formulaire_traiter($flux) {
 				foreach ($coordonnees as $objet => $coordonnees_types) {
 					$cle_objet = id_table_objet($objet);
 					
-					if (${$cle_objet}) {
+					if (intval(${$cle_objet})) {
 						set_request('objet', $objet);
 						set_request('id_objet', ${$cle_objet});
 						

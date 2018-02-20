@@ -231,7 +231,7 @@ function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_
 				foreach ($coordonnees as $objet => $coordonnees_types) {
 					$cle_objet = id_table_objet($objet);
 					
-					if (${$cle_objet}) {
+					if (intval(${$cle_objet})) {
 						set_request('objet', $objet);
 						set_request('id_objet', ${$cle_objet});
 						
