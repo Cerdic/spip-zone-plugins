@@ -246,13 +246,13 @@ function itis_search_tsn($action, $search, $strict = true) {
  *
  * @return array
  *        Si le taxon est trouvé, le tableau renvoyé possède les index associatifs suivants:
- *        - `nom_scientique`    : le nom scientifique du taxon en minuscules
- *        - `rang`            : le nom anglais du rang taxonomique du taxon
- *        - `regne`            : le nom scientifque du règne du taxon en minuscules
- *        - `tsn_parent`        : le TSN du parent du taxon ou 0 si le taxon est un règne
- *        - `auteur`            : la citation d’auteurs et la date de publication
- *        - `nom_commun`        : un tableau indexé par langue (au sens d'ITIS en minuscules, `english`, `french`,
- *        `spanish`) fournissant le nom commun dans chacune des langues
+ *        - `nom_scientique` : le nom scientifique du taxon en minuscules
+ *        - `rang`           : le nom anglais du rang taxonomique du taxon
+ *        - `regne`          : le nom scientifque du règne du taxon en minuscules
+ *        - `tsn_parent`     : le TSN du parent du taxon ou 0 si le taxon est un règne
+ *        - `auteur`         : la citation d’auteurs et la date de publication
+ *        - `nom_commun`     : un tableau indexé par langue (au sens d'ITIS en minuscules, `english`, `french`,
+ *                             `spanish`...) fournissant le nom commun dans chacune des langues
  */
 function itis_get_record($tsn) {
 

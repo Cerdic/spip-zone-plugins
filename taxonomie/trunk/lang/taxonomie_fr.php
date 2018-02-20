@@ -5,8 +5,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_continuer' => 'Passer à l\'étape 2',
-	'bouton_retourner' => 'Retourner à l\'étape 1',
+	'bouton_continuer' => 'Passer à l\'étape suivante',
+	'bouton_retourner' => 'Retourner à l\'étape @etape@',
 	'bouton_taxonomie' => 'Taxons',
 	'bouton_wikipedia_descriptif' => 'Remplir le descriptif avec Wikipedia',
 
