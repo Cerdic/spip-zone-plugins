@@ -17,9 +17,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nouvelle_liste' => 'Nova lista',
 
 	// L
+	'label_anonymiser' => 'Anonimizar a lista?',
 	'label_double_optin' => 'Validação dos cadastramentos',
 	'label_double_optin_0' => 'Opt-in simples',
 	'label_double_optin_1' => 'Opt-in duplo (e-mail de confirmação com link de validação do cadastro)',
+	'label_importer_creer_liste_1' => 'Ao importar os endereços de e-mail, não criar automaticamente uma lista de difusão suplementar contendo esses e-mails.',
 	'label_list_id' => 'Login',
 	'label_list_status' => 'Status',
 	'label_list_titre' => 'Nome da lista',
@@ -34,5 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_listes_diffusion' => 'Listas de difusão',
 
 	// T
+	'texte_config_anonymiser' => 'Nos e-mails de confirmação, substituir o titulo da lista pelo seu número.',
 	'titre_page_configurer_mailsubscriber' => 'Cadastramentos na newsletter'
 );
