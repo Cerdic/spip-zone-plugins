@@ -173,6 +173,8 @@ function profils_formulaire_traiter($flux) {
 		}
 		
 		if ($profil and $config = $profil['config']) {
+			include_spip('inc/editer');
+			
 			// Récupérer les objets liés au profil utilisateur
 			extract(profils_chercher_ids_profil($id_auteur, $profil['id_profil']));
 			
