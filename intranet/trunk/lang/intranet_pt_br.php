@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_intranet' => 'Intranet/Extranet',
 
 	// E
+	'explications_hosts' => 'Nomes de servidores, separados por vírgulas, autorizados a se conectar.',
 	'explications_message' => 'Mensagem personalizada para exibir no formulário de identificação.',
 	'explications_pages_intranet' => 'Incluir páginas do SPIP específicas acessíveis sem se estar conectado (separadas por vírgulas ",").',
 	'explications_plageip' => 'IP ou gama de IPs autorizados a consultar o site sem que se esteja conectado. Exemplo: <code>10.5.0.1-10.5.22.13,10.6.134.132</code> ',
@@ -22,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_intranet_texte' => 'Este site é acessível apenas a pessoas identificadas.',
 
 	// L
+	'label_hosts' => 'Servidores autorizados',
 	'label_intranet_ouverts' => 'Permite liberar os objetos editoriais um a um da intranet.',
 	'label_message' => 'Personalização da mensagem',
 	'label_pages_intranet' => 'Paginas acessíveis',
