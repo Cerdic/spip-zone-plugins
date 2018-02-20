@@ -21,7 +21,7 @@
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
-	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/gis?lang_cible=pt_br" total="160" traduits="154" relire="0" modifs="1" nouveaux="5" pourcent="96.25">
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/gis?lang_cible=pt_br" total="160" traduits="160" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
 	<langue code="ru" url="https://trad.spip.net/tradlang_module/gis?lang_cible=ru" total="160" traduits="106" relire="0" modifs="3" nouveaux="51" pourcent="66.25">

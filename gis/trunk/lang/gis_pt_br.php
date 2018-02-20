@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_lien' => 'Excluir este vínculo',
 
 	// C
-	'cfg_descr_gis' => 'Sistema de Informações Geográficas.<br /><a href="http://contrib.spip.net/4189" class="spip_out">Acessar a documentação</a>.', # MODIF
+	'cfg_descr_gis' => 'Sistema de Informações Geográficas.<br /><a href="http://contrib.spip.net/4189" class="spip_out">Acessar a documentação</a>.',
 	'cfg_inf_adresse' => 'Exibir os campos suplementares de localização (país, cidade, região, endereço...)',
 	'cfg_inf_bing' => 'A camada Bing Aerial precisa de uma chave a ser criada no <a href=\'@url@\' class="spip_out">site do Bing</a>.',
 	'cfg_inf_geocoder' => 'Ativar as funcões do geocoder (busca a partir de um endereço, recperação do endereço a partir das coordenadas).',
@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_layer_defaut' => 'Camada padrão',
 	'cfg_lbl_layers' => 'Camadas propostas',
 	'cfg_lbl_maptype' => 'Fundo cartográfico',
+	'cfg_lbl_plugins_desactives' => 'Desativar alguns plugins',
 	'cfg_lbl_styles' => 'Exibir os campos de estilos',
 	'cfg_titre_gis' => 'Configuração de GIS',
 
@@ -57,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_layer_forcee' => 'A camada é imposta por um outro plugin ou gabarito.',
 	'explication_maptype_force' => 'O fundo cartográfico é imposto por um outro plugin ou gabarito.',
 	'explication_opacity' => 'Opacidade do traço de 0 à 1 (valor padrão: 0.5)',
+	'explication_plugins_desactives' => 'Atenção, algumas funcionalidades fornecidas por estes plugins ficarão inoperacionais.',
 	'explication_weight' => 'Espessura do traço (valor padrão: 5)',
 
 	// F
@@ -125,6 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_inserer_modele_rubriques' => 'vinculados às seções',
 	'label_inserer_modele_sites' => 'vinculados aos sites',
 	'label_inserer_modele_titre_carte' => 'Título do mapa',
+	'label_inserer_modele_tooltip' => 'Exibir uma dica ao sobrepor o cursor sobre os pontos',
 	'label_opacity' => 'Opacidade',
 	'label_pays' => 'País',
 	'label_rechercher_address' => 'Buscar um endereço',
@@ -175,6 +178,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'toolbar_edit_handlers_edit_tooltip_subtext' => 'Clique em Cancelar para suprimir as modificações',
 	'toolbar_edit_handlers_edit_tooltip_text' => 'Desloque as pegas ou o marcador para alterar o objeto.',
 	'toolbar_edit_handlers_remove_tooltip_text' => 'Clique num objeto para o excluir',
+	'toolbar_finish_text' => 'Terminar',
+	'toolbar_finish_title' => 'Terminar o traçado',
 	'toolbar_handlers_marker_tooltip_start' => 'Clique para posicionar o marcador',
 	'toolbar_handlers_polygon_tooltip_cont' => 'Clique para continuar a traçar o polígono',
 	'toolbar_handlers_polygon_tooltip_end' => 'Clique sobre o primeiro ponto para fechar o polígnono',
