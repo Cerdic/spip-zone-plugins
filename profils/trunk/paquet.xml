@@ -13,7 +13,7 @@
 	<auteur lien='https://www.ldd.fr'>Les Développements Durables</auteur>
 	<licence>GNU/GPL</licence>
 	
-	<necessite nom="saisies" compatibilite="[2.21.0;]" />
+	<necessite nom="saisies" compatibilite="[2.23.3;]" />
 	<utilise nom="contacts" compatibilite="[3.1.0;]" />
 	<utilise nom="coordonnees" compatibilite="[2.3.28;]" />
 	<utilise nom="cextras" compatibilite="[3.11.4;]" />
@@ -25,6 +25,7 @@
 	<pipeline nom="optimiser_base_disparus" inclure="profils_pipelines.php" /> 
 	<pipeline nom="formulaire_saisies" inclure="profils_pipelines.php" />
 	<pipeline nom="formulaire_fond" inclure="profils_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="profils_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="profils_pipelines.php" />
 
 	<menu nom="profils" titre="profil:titre_profils" parent="menu_configuration" icone="images/profil-16.png" action="profils" /> 

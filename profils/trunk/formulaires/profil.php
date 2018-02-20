@@ -142,7 +142,7 @@ function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_
 	extract(profils_chercher_ids_profil($id_auteur, $id_ou_identifiant_profil));
 	
 	// On cherche le bon profil
-	$id_ou_identifiant_profil = profils_selectionner_profil($id_ou_identifiant_profil, $ids['id_auteur']);
+	$id_ou_identifiant_profil = profils_selectionner_profil($id_ou_identifiant_profil, $id_auteur);
 	if ($profil = profils_recuperer_profil($id_ou_identifiant_profil) and $config = $profil['config']) {
 		// Préparer certaines valeurs magiquement suivant la configuration
 		
