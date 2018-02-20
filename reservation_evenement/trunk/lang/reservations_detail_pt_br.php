@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajouter_lien_reservations_detail' => 'Adicionar o detalhe da reserva',
+	'ajouter_lien_reservations_detail' => 'Incluir o detalhe da reserva',
 
 	// C
 	'choisir_prix' => 'Escolher um preço',
@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_taxe' => 'Taxa:',
 
 	// T
-	'texte_ajouter_reservations_detail' => 'Adicionar um detalhe da reserva',
+	'texte_ajouter_reservations_detail' => 'Incluir um detalhe da reserva',
 	'texte_changer_statut_reservations_detail' => 'Esse detalhe da reserva está:',
 	'texte_creer_associer_reservations_detail' => 'Criar e associar um detalhe das reservas',
 	'titre_reservations_detail' => 'Detalhe da reserva',
