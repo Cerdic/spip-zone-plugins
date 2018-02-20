@@ -27,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_label_afficher_commandes' => 'Comandos do player',
 	'cfg_label_afficher_suggestions' => 'Sugestões de vídeos',
 	'cfg_label_afficher_titres_et_actions' => 'Título do vídeo e ações do player',
+	'cfg_label_enablejsapi' => 'Permite o controle do vídeo com "enablejsapi"',
 	'cfg_label_hauteur' => 'Altura padrão',
 	'cfg_label_largeur' => 'Largura padrão',
 	'cfg_label_liste_definition' => 'Lista de definição HTML',
