@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_creation_rezosocio' => 'Criar um link de rede social',
 	'icone_rezosocios' => 'Redes sociais',
+	'icone_supprimer_rezosocio' => 'Excluir esta rede social',
 	'info_langue' => 'Idioma do perfil',
 	'info_modifier_rezosocio' => 'Alterar o link de rede social',
 	'info_nom_compte' => 'Nome da conta',
@@ -49,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_objets_lies_rezosocio' => 'Objetos vinculados a esta rede social',
 	'titre_page_rezosocios_page' => 'Os links  de redes sociais',
 	'titre_tweetsde' => 'Tweets de @@name@',
+	'twitter_hashtag' => 'Twitter (hashtag)',
 
 	// Y
 	'youtube_channel' => 'Youtube (canal)',
