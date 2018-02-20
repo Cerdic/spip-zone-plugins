@@ -212,7 +212,7 @@ function profils_formulaire_traiter($flux) {
 			}
 			// Sinon si la fiche principale est un contact
 			elseif ($config['activer_contact'] and $id_contact) {
-				profils_traiter_peupler_request('edition', $champs_contact, $config['contact']);
+				profils_traiter_peupler_request('inscription', $champs_contact, $config['contact']);
 				$retours_contact = formulaires_editer_objet_traiter('contact', $id_contact, 0, 0, $retour, '');
 				$retours = array_merge($retours, $retours_contact);
 				$id_contact = $retours['id_contact'];
