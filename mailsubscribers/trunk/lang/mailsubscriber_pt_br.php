@@ -33,11 +33,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_adresse_existante' => 'Esse email já está na lista',
+	'erreur_adresse_existante_editer' => 'Este endereço de e-mail já está cadastrado - <a href="@url@">Editar este usuário</a>',
 	'erreur_technique_subscribe' => 'Seu cadastro não pode ser gravado em razão de um problema técnico.',
+	'explication_listes_diffusion_option_defaut' => 'Um ou mais identificadores de listas separados por vírgula',
+	'explication_listes_diffusion_option_statut' => 'Filtrar as listas de acordo com o status',
 	'explication_to_email' => 'Enviar um email de proposta de pré inscrição aos seguintes endereços (varios endereços separados por uma vírgula si presica).',
 
 	// I
-	'icone_creer_mailsubscriber' => 'Adicionar uma inscrição ',
+	'icone_creer_mailsubscriber' => 'Incluir uma inscrição ',
 	'icone_modifier_mailsubscriber' => 'Alterar essa inscrição',
 	'info_1_adresse_a_importer' => '1 email para a importação',
 	'info_1_mailsubscriber' => '1 inscrito para envio',
@@ -95,13 +98,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'subscribe_titre_email_liste' => 'Inscrição na lista «<b>@titre_liste@</b>»',
 
 	// T
-	'texte_ajouter_mailsubscriber' => 'Adicionar uma inscrição na newsletter',
+	'texte_ajouter_mailsubscriber' => 'Incluir uma inscrição na newsletter',
 	'texte_avertissement_import' => 'Uma coluna <tt>estado</tt> é fornecida : os dados serão importados dessa forma, e substituirão os outros dados que poderiam existir em alguns endereços.',
 	'texte_changer_statut_mailsubscriber' => 'Essa inscrição é :',
+	'texte_import_export_bonux' => 'Para importar ou exportar a lista de incritos, instale o plugin <a href="https://plugins.spip.net/spip_bonux">SPIP-Bonux</a>',
 	'texte_statut_en_attente_confirmation' => 'pendente de confirmação',
 	'texte_statut_pas_encore_inscrit' => 'não registrada',
 	'texte_statut_refuse' => 'excluida',
 	'texte_statut_valide' => 'ativa',
+	'texte_vous_avez_clique_vraiment_tres_vite' => 'Você clicou muito rápido no botão de confirmação. Você é realmente humano?',
 	'titre_bonjour' => 'Oi',
 	'titre_export_mailsubscribers' => 'Exportar as inscrições',
 	'titre_export_mailsubscribers_all' => 'Exportar todos os endereços',
