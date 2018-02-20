@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'diogene_agenda_description' => 'Adicionar a possibilidade de incluir um evento a uma matéria a partir do seu próprio formulário.',
+	'diogene_agenda_description' => 'Inclui a possibilidade de vincular um evento a uma matéria a partir do seu próprio formulário.',
 	'diogene_agenda_nom' => 'Diogenes - Agenda',
 	'diogene_agenda_slogan' => 'Complemento agenda para o "Diogenes"'
 );
