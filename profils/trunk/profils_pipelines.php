@@ -153,7 +153,6 @@ function profils_formulaire_verifier($flux) {
 		}
 	}
 	
-	$flux['data']['caca'] = 'prout';
 	return $flux;
 }
 
