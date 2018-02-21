@@ -6,15 +6,16 @@ VideoPlayer avec Owl Carousel et oembed
 @see - http://owlgraphic.com/owlcarousel/index.html#customizing
 @param objet -
 @param id_objet -  lister les medias vidéos associés a un objet/id_objet
-@param id_document {array} - un tableau de documents
+@param id_document {array} - peut être un tableau de documents
 @param id-carousel - selecteur id unique du carousel
 @param navigation {str} (oui|non) - affiche les boutons précédents suivants
 @param dots {str} (oui|non) - affiche les point de navigation
 @param : lazyLoad : true (false par défaut) : ne charge que les images visibles pour optimiser le chargement.
 @param afficher_thumbnails {str} (oui|non) - Affichage des miniatures de navigation
 @param thumbs_loop {str} (oui|non) - Rotation infinie des miniatures
+@param animateIn - une animation css3 , `fadeOut` est la seul fournie par owl, sinon ajouter animate.css
+@param animateOut - une animation css3 , `fadeOut` est la seul fournie par owl, sinon ajouter animate.css
 -->]
-
 #SET{id-carousel, #ENV{id-carousel,owlvideoplayer} }
 <style>
 [#(#GET{id-carousel})] .owl-stage-outer {
@@ -79,7 +80,9 @@ jQuery(function($){
 				autoplay:false,[
         dots:(#ENV{dots,true}|=={oui}|?{true,false}),][
         nav:(#ENV{navigation, false}),][
-        lazyLoad: (#ENV{lazyLoad}),]
+        lazyLoad: (#ENV{lazyLoad}),][
+        animateIn:'(#ENV{animateIn})',][
+        animateOut:'(#ENV{animateOut})',]
         responsive:{
 					0:{
 						items:1
