@@ -11,7 +11,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // https://code.spip.net/@action_instituer_forum_dist
 function action_instituer_forum_paremail_dist() {
 
-	$force = false;
+	$force = true;
+	// si on a active la protection antibot la moderation se fera en differe
+	if (lire_config('notifications/moderation_email_protection_antibot','') == 'on') {
+		$force = false;
+	}
 	// verification manuelle de la signature : cas particulier de cette action signee par email
 	$arg = _request('arg');
 	$hash = _request('hash');

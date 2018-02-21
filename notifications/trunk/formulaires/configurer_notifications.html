@@ -103,6 +103,12 @@
 							<p class="explication"><:notifications:forums_limiter_rubriques_explication:></p>
 							<input type="text" name="forums_limiter_rubriques" value="[(#ENV{forums_limiter_rubriques}|entites_html)]" id="forums_limiter_rubriques" class="text" />
 						</li>
+						<li class="editer editer_moderation_email_protection_antibot">
+							<div class="choix">
+								<input type="checkbox" name="moderation_email_protection_antibot"[(#ENV{moderation_email_protection_antibot}|=={on}|oui)checked="checked"] id="moderation_email_protection_antibot" class="checkbox" />
+								<label for="moderation_email_protection_antibot"><:notifications:moderation_email_protection_antibot:></label>
+							</div>
+						</li>
 						<li class="editer editer_forums_public_liste">
 							<div class="choix">
 							<label for="forums_public_liste"><:notifications:forums_public_liste:></label>
