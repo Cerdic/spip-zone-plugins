@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/roles_documents-48.png"
-	documentation=""
+	documentation="https://contrib.spip.net/article4975"
 	schema="1.0.1"
 >
 
