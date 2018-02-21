@@ -13,6 +13,7 @@ function action_instituer_forum_paremail_dist() {
 
 	$force = true;
 	// si on a active la protection antibot la moderation se fera en differe
+	include_spip('inc/config');
 	if (lire_config('notifications/moderation_email_protection_antibot','') == 'on') {
 		$force = false;
 	}
