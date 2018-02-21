@@ -1,9 +1,9 @@
 <paquet
 	prefix="roles_documents"
 	categorie="edition"
-	version="0.2.3"
-	etat="dev"
-	compatibilite="[3.0.0;3.1.*]"
+	version="0.2.4"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/roles_documents-48.png"
 	documentation=""
 	schema="1.0.1"
