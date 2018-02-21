@@ -1,6 +1,8 @@
 <?php
 
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function medias_responsive_mod_insert_head_css($flux) {
 	$flux = "\n<link rel='stylesheet' type='text/css' media='all' href='".direction_css(find_in_path("css/medias_responsive.css"))."'>\n".$flux;

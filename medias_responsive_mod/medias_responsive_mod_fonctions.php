@@ -1,6 +1,8 @@
 <?php
 
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 if (!function_exists('centre_image_x')) {
 	function centre_image_x($img) { return 0.5; }
@@ -10,8 +12,7 @@ if (!function_exists('centre_image_x')) {
 
 // Fabrique une image avec couche alpha
 // en fonction du détourage de l'image
-function image_detourer_alpha($im)
-{
+function image_detourer_alpha($im) {
 	include_spip("inc/filtres_images");
 
 	$fonction = array('image_alpha', func_get_args());
@@ -65,8 +66,7 @@ function image_detourer_alpha($im)
 
 // Fabrique une image avec couche alpha
 // en fonction du détourage de l'image
-function image_detourer_polygon($im)
-{
+function image_detourer_polygon($im) {
 	include_spip("inc/filtres_images");
 
 	$fonction = array('image_detourer_polygon', func_get_args());
