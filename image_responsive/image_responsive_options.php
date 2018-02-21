@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
 if (!defined("_IMAGE_RESPONSIVE_CALCULER")) define("_IMAGE_RESPONSIVE_CALCULER", false);
 if (!defined("_SPIP_LIER_RESSOURCES")) define("_SPIP_LIER_RESSOURCES", false);
 

@@ -1,13 +1,14 @@
 <paquet
 	prefix="image_responsive"
 	categorie="outil"
-	version="7.5.5"
+	version="7.5.6"
 	etat="stable"
+	logo="prive/themes/spip/images/image_responsive.png"
 	compatibilite="[3.0.0;3.2.*]"
 	documentation="http://www.paris-beyrouth.org/Plugin-SPIP-Image-responsive"	
 >
 
-	<nom>Filtre image_responsive</nom>
+	<nom>Image responsive</nom>
 
 	<auteur>ARNO*</auteur>
 	<licence lien="http://www.gnu.org/licenses/gpl-2.0.html">GPL</licence>

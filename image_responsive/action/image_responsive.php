@@ -1,5 +1,8 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function action_image_responsive() {
 	$img = _request("img");

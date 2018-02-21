@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
 function image_responsive_insert_head_css($flux) {
 	$flux .= "\n<link rel='stylesheet' type='text/css' media='all' href='" . find_in_path("image_responsive.css") . "'>\n";
 	return $flux;
