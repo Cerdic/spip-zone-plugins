@@ -193,6 +193,7 @@ function notifications_moderation_execute($id_forum, $statut, $email, $force = f
 			// dans 10secondes on valide cette moderation si on en a pas recue d'autre entre temps
 			job_queue_add('notifications_moderation_valide',"Valider la moderation forum $id_forum statut=$statut", array($id_forum), 'action/instituer_forum_paremail', false, $_SERVER['REQUEST_TIME'] + 10);
 		}
+		return $erreur;
 	}
 }
 
