@@ -1,4 +1,12 @@
 <?php
+/**
+ * API de vérification : vérification de la validité d'une valeur selon une expression régulière
+ *
+ * @plugin     verifier
+ * @copyright  2018
+ * @author     Les Développements Durables
+ * @licence    GNU/GPL
+ */
 
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -7,6 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Vérifié une valeur suivant une expression régulière.
+ *
  * Options :
  * - modele : chaine représentant l'expression
  *

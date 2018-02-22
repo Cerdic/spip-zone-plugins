@@ -1,4 +1,12 @@
 <?php
+/**
+ * API de vérification : vérification de la validité d'un mot de passe
+ *
+ * @plugin     verifier
+ * @copyright  2018
+ * @author     Les Développements Durables
+ * @licence    GNU/GPL
+ */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -6,6 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Vérifie les passwords
+ *
  * Options :
  *
  * - match : Nom du champ avec lequel le password dois correspondre

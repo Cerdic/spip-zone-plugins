@@ -1,4 +1,12 @@
 <?php
+/**
+ * API de vérification : Comparaison de champs
+ *
+ * @plugin     verifier
+ * @copyright  2018
+ * @author     Les Développements Durables
+ * @licence    GNU/GPL
+ */
 
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) {

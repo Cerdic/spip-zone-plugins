@@ -1,4 +1,12 @@
 <?php
+/**
+ * API de vérification : vérification d'un upload d'image
+ *
+ * @plugin     verifier
+ * @copyright  2018
+ * @author     Les Développements Durables
+ * @licence    GNU/GPL
+ */
 
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) {
@@ -9,7 +17,10 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  * Vérifier un upload d'image unique ou multiple
  * 
  * Cette fonction n'est conservée que pour compatibilité ascendant. 
- * Lui préferer la vérification 'fichiers', qui possède plus d'options, et qui est d'ailleurs appeler ici. 
+ * Lui préferer la vérification 'fichiers', qui possède plus d'options, et qui est d'ailleurs appelée ici.
+ *
+ * @deprecated
+ * @see verifier/fichiers.php
  *
  * @param array $valeur
  *   Le sous tableau de $_FILES à vérifier

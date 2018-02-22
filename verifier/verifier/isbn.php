@@ -1,4 +1,12 @@
 <?php
+/**
+ * API de vérification : vérification de la validité d'un numéro ISBN
+ *
+ * @plugin     verifier
+ * @copyright  2018
+ * @author     Les Développements Durables
+ * @licence    GNU/GPL
+ */
 
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -6,9 +14,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
- * Validation d'un numero ISBN
+ * Validation d'un numéro ISBN
  *
- * d apres https://fr.wikipedia.org/wiki/Numéro_ISBN
+ * d'après https://fr.wikipedia.org/wiki/Numéro_ISBN
  * ISBN-13 : longeur totale 13 caracteres divises en 5 segments de la forme G - A - B - C - K
  *           G:  3 caracteres (978 ou 979)
  *           A:  de 1 a 5 caracteres (code de la zone geographique)
@@ -21,9 +29,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *           K:  1 caractere entre 0 et 9, ou X (cle de controle calculee d apres les autres chiffres)
  *           ex: 2-1234-5680-X
  *
- * Avec un numero ISBN comportant des tirets, on pourrait utiliser une regex
- * pour verifier que chaque segment comporte le nombre adequat de caracteres.
- * Cependant ca ne permet pas d indiquer precisement la nature de l erreur.
+ * Avec un numéro ISBN comportant des tirets, on pourrait utiliser une regex
+ * pour vérifier que chaque segment comporte le nombre adequat de caractères.
+ * Cependant ça ne permet pas d'indiquer précisement la nature de l'erreur.
  * La regex au cas ou : "/^(97[89][- ]){0,1}[0-9]{1,5}[- ][0-9]{1,7}[- ][0-9]{1,6}[- ][0-9X]$/"
  *
  *

@@ -1,4 +1,12 @@
 <?php
+/**
+ * API de vérification : vérification de la validité d'un nombre décimal
+ *
+ * @plugin     verifier
+ * @copyright  2018
+ * @author     Les Développements Durables
+ * @licence    GNU/GPL
+ */
 
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -6,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
- * Vérifie qu'un entier cohérent peut être extrait de la valeur
+ * Vérifie qu'un nombre décimal cohérent peut être extrait de la valeur
  * Options :
  * - min : valeur minimale acceptée
  * - max : valeur maximale acceptée

@@ -1,4 +1,12 @@
 <?php
+/**
+ * Fonctions de l'API de vérification
+ *
+ * @plugin     verifier
+ * @copyright  2018
+ * @author     Les Développements Durables
+ * @licence    GNU/GPL
+ */
 
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -7,6 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Fonction de base de l'API de vérification.
+ *
  * @param mixed $valeur La valeur a verifier.
  * @param string $type Le type de verification a appliquer.
  * @param array $options Un eventuel tableau d'options suivant le type.

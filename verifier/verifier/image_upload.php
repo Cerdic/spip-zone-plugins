@@ -1,4 +1,12 @@
 <?php
+/**
+ * API de vérification : vérification d'un upload d'image
+ *
+ * @plugin     verifier
+ * @copyright  2018
+ * @author     Les Développements Durables
+ * @licence    GNU/GPL
+ */
 
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) {
@@ -7,7 +15,12 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 
 /**
  * Vérifier un upload d'image unique
- * Cette fonction est depréciée, on utilisera de préférence la vérification 'fichiers', plus souple, et à laquelle la présente fonction renvoie. 
+ *
+ * Cette fonction est depréciée, on utilisera de préférence la vérification 'fichiers', plus souple, et à laquelle la présente fonction renvoie.
+ * 
+ * @deprecated
+ * @see verifier/fichiers.php
+ * 
  * @param array $valeur
  *   Le sous tableau de $_FILES à vérifier, $_FILES['logo'] par exemple
  *   Doit être un champ avec un seul upload

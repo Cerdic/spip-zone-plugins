@@ -1,4 +1,12 @@
 <?php
+/**
+ * API de vérification : vérification de la taille (nb de caractères) d'une valeur
+ *
+ * @plugin     verifier
+ * @copyright  2018
+ * @author     Les Développements Durables
+ * @licence    GNU/GPL
+ */
 
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) {

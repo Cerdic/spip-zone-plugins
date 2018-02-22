@@ -1,4 +1,12 @@
 <?php
+/**
+ * API de vérification : vérification de la validité d'un identifiant de document
+ *
+ * @plugin     verifier
+ * @copyright  2018
+ * @author     Les Développements Durables
+ * @licence    GNU/GPL
+ */
 
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -6,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
- * Vérifie que la valeur correspond à un id_dcoument valide
+ * Vérifie que la valeur correspond à un id_document valide
  *
  * @param string $valeur
  *   La valeur à vérifier.
