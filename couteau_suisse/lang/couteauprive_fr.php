@@ -804,7 +804,7 @@ _ Exemple~:~{<html>"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/"</html>}.</q1>
 	'spam_ip' => 'Blocage IP de @ip@ :',
 	'spam_test_ko' => 'Ce message serait bloqué par le filtre anti-SPAM !',
 	'spam_test_ok' => 'Ce message serait accepté par le filtre anti-SPAM.',
-	'spam_tester_bd' => 'Testez également votre votre base de données et listez les messages qui auraient été bloqués par la configuration actuelle de l\'outil.',
+	'spam_tester_bd' => 'Testez également votre votre base de données et listez les messages anciens qui auraient pu être bloqués par la configuration actuelle de l\'outil.',
 	'spam_tester_label' => 'Afin de tester votre liste de séquences interdites ou d\'adresses IP, utilisez le cadre suivant :',
 	'spip_cache:description' => '@puce@ Le cache occupe un certain espace disque et SPIP peut en limiter l\'importance. Une valeur vide ou égale à 0 signifie qu\'aucun quota ne s\'applique.[[%quota_cache% Mo]]
 
