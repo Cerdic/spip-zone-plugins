@@ -420,9 +420,6 @@ class QueryApi extends Query {
 		$comparisons = array();
 		foreach ($filter['values'] as $value){
 			$comparison = $filter['field'] . $filter['comparison'] . $this->quote($value, $filter['type']);
-			if (isset($filter['not']) and $filter['not']){
-				$comparison = "!($comparison)";
-			}
 			$comparisons[] = $comparison;
 		}
 		if ($comparisons){

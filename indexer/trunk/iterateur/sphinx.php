@@ -1024,6 +1024,7 @@ function critere_SPHINX_filtermono_dist($idb, &$boucles, $crit) {
 		. (isset($crit->param[2]) ? "\t\t\t'values'      => $values,\n" : '')
 		. (isset($crit->param[3]) ? "\t\t\t'comparison'  => $comparison,\n" : '')
 		. (isset($crit->param[4]) ? "\t\t\t'type'        => $type,\n" : '')
+		. ($crit->not ? "\t\t\t'not'                     => 'true',\n" : '')
 		. "\t\t);\n";
 	
 	// Fin de test
