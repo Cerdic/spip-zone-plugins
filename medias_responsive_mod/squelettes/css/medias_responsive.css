@@ -46,6 +46,9 @@
 	margin-left: auto;
 	margin-right: auto;
 }
+.spip_documents .spip_doc_intitules {
+	margin-top: 0.5em;
+}
 .spip_documents_shape.spip_documents_left {
 	float: none;
 }
