@@ -10,6 +10,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_modifier_roles' => 'Modifier',
 
+	// M
+	'media_logos' => 'Logos',
+
 	// R
 	'role_logo' => 'Logo',
 	'role_logo_survol' => 'Logo de survol',
