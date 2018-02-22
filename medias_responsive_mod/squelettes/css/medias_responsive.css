@@ -35,7 +35,7 @@
 .spip_documents_center_forcer .spip_doc_intitules_shape:after{
 	clear: both;
 }
-.spip_documents a {
+.spip_documents > a {
 	display: block;
 }
 .spip_documents .logo_document {
