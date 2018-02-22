@@ -38,6 +38,9 @@
 .spip_documents > a {
 	display: block;
 }
+.spip_documents picture {
+	display: block;
+}
 .spip_documents .logo_document {
 	display: block;
 	margin-left: auto;
