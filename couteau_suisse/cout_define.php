@@ -5,7 +5,8 @@
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
 #  Infos : https://contrib.spip.net/?article2166      #
 #-----------------------------------------------------#
-if(!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION"))
+	return;
 
 // Ici se definissent les constantes du Couteau Suisse
 
@@ -16,13 +17,13 @@ if(!defined("_ECRIRE_INC_VERSION")) return;
 // Revisions du CS
 @define('_URL_CS_PLUGIN_XML', 'https://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau_suisse/plugin.xml?format=txt');
 // On met a jour le flux rss toutes les 2 heures
-define('_CS_RSS_UPDATE', 2*3600);
+define('_CS_RSS_UPDATE', 2 * 3600);
 define('_CS_RSS_COUNT', 15);
 // Fichier 
-define('_CS_TMP_RSS', _DIR_TMP.'rss_couteau_suisse.html');
+define('_CS_TMP_RSS', _DIR_TMP . 'rss_couteau_suisse.html');
 // Traductions des modules
 define('_CS_TRAD_ACCUEIL', 'https://trad.spip.net/');
-define('_CS_TRAD_MODULE', _CS_TRAD_ACCUEIL.'tradlang_module/');
+define('_CS_TRAD_MODULE', _CS_TRAD_ACCUEIL . 'tradlang_module/');
 
 
 // Qui sont les webmestres et les administrateurs ?
@@ -30,18 +31,19 @@ function get_liste_administrateurs() {
 	include_spip('inc/autoriser');
 	include_spip('inc/texte');
 	$admins = $webmestres = array();
-	$s = spip_query("SELECT * FROM spip_auteurs WHERE statut='0minirezo'");
-	$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array'; // compatibilite SPIP 1.92
+	$s      = spip_query("SELECT * FROM spip_auteurs WHERE statut='0minirezo'");
+	$fetch  = function_exists('sql_fetch') ? 'sql_fetch' : 'spip_fetch_array'; // compatibilite SPIP 1.92
 	while ($qui = $fetch($s)) {
-		$nom = '<a href="'
-			. generer_url_ecrire(defined('_SPIP30000')?'auteur':'auteur_infos',"id_auteur=$qui[id_auteur]")
-			. '">' . typo($qui['nom'])."</a> (id_auteur=$qui[id_auteur])";
-		if(autoriser('webmestre','','',$qui)) $webmestres[$qui['id_auteur']] = $nom;
-		else if(autoriser('configurer','plugins','',$qui)) $admins[$qui['id_auteur']] = $nom;
+		$nom = '<a href="' . generer_url_ecrire(defined('_SPIP30000') ? 'auteur' : 'auteur_infos', "id_auteur=$qui[id_auteur]") . '">' . typo($qui['nom']) . "</a> (id_auteur=$qui[id_auteur])";
+		if (autoriser('webmestre', '', '', $qui))
+			$webmestres[$qui['id_auteur']] = $nom;
+		elseif (autoriser('configurer', 'plugins', '', $qui))
+			$admins[$qui['id_auteur']] = $nom;
 	}
 	return array(
-		count($webmestres)?join(', ', $webmestres):_T('couteauprive:variable_vide'), 
-		count($admins)?join(', ', $admins):_T('couteauprive:variable_vide'));
+		count($webmestres) ? join(', ', $webmestres) : _T('couteauprive:variable_vide'),
+		count($admins) ? join(', ', $admins) : _T('couteauprive:variable_vide')
+	);
 }
 
 // Polices disponibles
