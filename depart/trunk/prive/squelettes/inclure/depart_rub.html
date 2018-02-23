@@ -1,5 +1,5 @@
 <BOUCLE_principal (RUBRIQUES) {id_rubrique} {tout}>
-[(#AUTORISER{publierdans,rubrique,#ID_RUBRIQUE}|sinon_interdire_acces)]
+[(#AUTORISER{publierdans,rubrique,#ID_RUBRIQUE}|oui)
 
 <div class="box raccourcis depart-bloc">
 	<div class="inner">
@@ -11,5 +11,5 @@
 		[(#FORMULAIRE_DEPART_RUB{#ID_RUBRIQUE})]
 	</div>
 </div>
-
+]
 </BOUCLE_principal>
