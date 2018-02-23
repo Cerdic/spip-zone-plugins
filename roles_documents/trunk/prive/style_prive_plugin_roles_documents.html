@@ -26,9 +26,18 @@
 	/*font-weight: bold;*/
 }
 /* Exposer le logo */
-.roles-documents .role-logo {
+.role-logo {
 	font-weight: bold;
-	color: #GET{foncee};
+	/*color: #GET{foncee};*/
+}
+.role-logo:before {
+	content: "";
+	display: inline-block;
+	background: url(#CHEMIN_IMAGE{media-logo-16});
+	width: 16px;
+	height: 16px;
+	margin-right: 0.2em;
+	vertical-align: middle;
 }
 /* fix pour s'assurer que le dropdown soit visible */
 .liste_items.documents .item {
