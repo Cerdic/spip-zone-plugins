@@ -1,0 +1,23 @@
+<div class="formulaire_spip formulaire_#FORM">
+[<p class="reponse_formulaire reponse_formulaire_erreur">
+    (#ENV*{message_erreur})
+</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">
+    (#ENV*{message_ok})
+</p>]
+[(#EDITABLE|oui)
+    <form action="#ENV{action}" method="post"><div>
+    	#ACTION_FORMULAIRE{#ENV{action}}
+	    <[(#DIV|sinon{ul})] class="editer-groupe">
+
+		    [(#SAISIE{selecteur_rubrique, rubrique_dest, obligatoire=oui,
+			    label=<:depart:champ_rubrique_dest_label:>,
+			    explication=<:depart:champ_rubrique_dest_explication:> })]
+
+	    </[(#DIV|sinon{ul})]>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+]
+</div>
