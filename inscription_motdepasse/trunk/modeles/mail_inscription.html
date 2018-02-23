@@ -11,9 +11,9 @@
 [(#SET{nom,[<strong>(#ENV{nom})</strong>]})]
 <p><:form_forum_bonjour{nom=#GET{nom}}:></p>
 
-
+[(#SET{url_confirm, [(#ENV{url_confirm}|parametre_url{redirect,#ENV{redirect}})]})]
 <div>
-[<br><center>(#INCLURE{fond=emails/inc-button,url=[(#ENV{url_confirm}|url_absolue)],label=<:form_auteur_confirmation:>,width=250px})</center><br>]
+[<br><center>(#INCLURE{fond=emails/inc-button,url=[(#GET{url_confirm}|url_absolue)],label=<:form_auteur_confirmation:>,width=250px})</center><br>]
 </div>
 
 #SET{url_site,#URL_SITE_SPIP/}
