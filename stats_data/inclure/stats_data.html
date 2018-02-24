@@ -24,9 +24,6 @@
 				3 => http://www.google.de/
 ]
 <style type="text/css">
-#conteneur_stats{
-
-}
 #data_stats{
 	margin:40px 0;
 }
@@ -170,7 +167,7 @@
 	]
 	
 	</BOUCLE_visites_jour>
-		
+	
 	[(#REM)
 		<hr>
 		[(#GET{req})]
@@ -184,7 +181,7 @@
 		
 		#SET{nb_visites,#GET{articles_lus}|table_valeur{c#ID_ARTICLE}|table_valeur{visites}|plus{#VISITES}}
 		#SET{valeurs_actuelles,#GET{valeurs_actuelles}|array_merge{#ARRAY{visites,#GET{nb_visites}}}}
-	
+		
 		#SET{ajout,#ARRAY{c#ID_ARTICLE,#GET{valeurs_actuelles}}}
 		#SET{articles_lus,#GET{articles_lus}|array_merge{#GET{ajout}}}
 		
@@ -236,7 +233,7 @@
 		]
 		<li class="prem">
 			<div class="stats_valeur" title="[(#GET{stat})] visites">[(#GET{stat_court})]</div>
-			<p><strong>visite[(#GET{stat}|>{0}|?{s})] [(#ENV{jour}|non) en cours]</strong></p>
+			<p><strong>visite[(#GET{stat}|>{1}|?{s})] [(#ENV{jour}|non) en cours]</strong></p>
 		</li>
 		
 		#SET{stat,#GET{articles_lus}|sizeof||number_format{0,""," "}}
@@ -251,7 +248,7 @@
 		<li>
 			<div>
 				<div class="stats_valeur" title="[(#GET{stat})] articles lus">[(#GET{stat_court})]</div>
-				<p><strong>articles lu[(#GET{stat}|>{0}|?{s})]</strong></p>
+				<p><strong>articles lu[(#GET{stat}|>{1}|?{s})]</strong></p>
 				<B_articles>
 				#ANCRE_PAGINATION
 				<ul>
@@ -286,7 +283,7 @@
 			]
 			<div style="padding-left:40px">
 				<div class="stats_valeur" title="[(#GET{stat})] visites">[(#GET{stat_court})]</div>
-				<p><strong>visite[(#GET{stat}|>{0}|?{s})] par [(#GRAND_TOTAL|number_format{0," "," "})] domaine[(#GRAND_TOTAL|>{0}|?{s})] affluent[(#GRAND_TOTAL|>{0}|?{s})]</strong></p>
+				<p><strong>visite[(#GET{stat}|>{1}|?{s})] par [(#GRAND_TOTAL|number_format{0," "," "})] domaine[(#GRAND_TOTAL|>{1}|?{s})] affluent[(#GRAND_TOTAL|>{0}|?{s})]</strong></p>
 				#ANCRE_PAGINATION
 				<ul style="margin-top:10px">
 					<BOUCLE_affluents(DATA){source table,#GET{sites_affluents}}{!par visites}{pagination 10}>
