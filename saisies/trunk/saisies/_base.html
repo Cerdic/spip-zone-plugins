@@ -41,7 +41,8 @@
 		[(#INCLURE{fond=saisies/#ENV{type_saisie},env,obligatoire=#GET{obligatoire},disable=#GET{disable},readonly=#GET{readonly}})]
 	]
 	[(#ENV{type_saisie}|in_array{#GET{saisies_autonomes}}|non)
-		#SET{erreurs,#ENV**{erreurs/#ENV{nom}}}
+    [(#SET{nom_slash, #ENV{nom}|replace{\[\\[\\]\]+?, '/'}|rtrim{/}})]
+		#SET{erreurs,#ENV**{erreurs/#GET{nom_slash}}}
 		#SET{conteneur_class,#ENV{type_saisie}|substr{0,9}|=={selecteur}|?{selecteur_item,''}}
 		<!--!inserer_saisie_editer-->
 		<[(#ENV{saisies_base_conteneur,#DIV|sinon{li}})] class="editer editer_[(#ENV{nom}|saisie_nom2classe)][ (#GET{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#GET{conteneur_class})][ (#ENV{conteneur_class,#ENV{li_class}})][ saisie_(#ENV{type_saisie})]"[ data-id="(#ENV{id_saisie})"][ data-afficher_si="(#ENV{afficher_si})"]>
