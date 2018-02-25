@@ -8,7 +8,10 @@
   </span>]
 </label>]
 
-[<span class='erreur_message'>(#ENV{erreurs})</span>]
+
+[(#ENV{erreurs}|is_array|non)
+  [<span class='erreur_message'>(#ENV{erreurs})</span>]
+]
 
 [<p class="explication" id="[explication_(#ENV{nom}|saisie_nom2name)]">
   (#ENV*{explication})
