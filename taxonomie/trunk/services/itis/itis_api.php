@@ -67,15 +67,23 @@ $GLOBALS['itis_webservice'] = array(
 			'function' => 'searchByCommonName',
 			'argument' => 'srchKey',
 			'list'     => 'commonNames',
-			'index'    => array('tsn' => 'tsn'),
-			'find'     => array('nom_commun' => 'commonName')
+			'index'    => array(
+				'tsn'              => 'tsn',
+				'nom_scientifique' => 'combinedName',
+				'regne'            => 'kingdom'
+			),
+			'compare'  => 'commonName'
 		),
 		'scientificname' => array(
 			'function' => 'searchByScientificName',
 			'argument' => 'srchKey',
 			'list'     => 'scientificNames',
-			'index'    => array('tsn' => 'tsn'),
-			'find'     => array('nom_scientifique' => 'combinedName')
+			'index'    => array(
+				'tsn'              => 'tsn',
+				'nom_scientifique' => 'combinedName',
+				'regne'            => 'kingdom'
+			),
+			'compare'  => 'combinedName'
 		)
 	),
 	'vernacular' => array(
@@ -204,7 +212,7 @@ $GLOBALS['itis_webservice'] = array(
  */
 function itis_search_tsn($action, $search, $strict = true) {
 
-	$tsn = array();
+	$tsns = array();
 
 	// Normaliser la recherche: trim et mise en lettres minuscules
 	$search = strtolower(trim($search));
@@ -221,17 +229,14 @@ function itis_search_tsn($action, $search, $strict = true) {
 	if (!empty($data[$api['list']])) {
 		// La recherche peut renvoyer plusieurs taxons. Suivant le critère de correspondance de la recherche
 		// on renvoie le "bon" taxon ou tous les taxons trouvés.
-		$tsn_destination = reset($api['index']);
-		$tsn_key = key($api['index']);
-		$search_destination = reset($api['find']);
-		$search_key = key($api['find']);
 		foreach ($data[$api['list']] as $_data) {
 			if ($_data) {
-				if (!$strict or ($strict and (strcasecmp($_data[$search_key], $search) == 0))) {
-					$tsn[] = array(
-						$tsn_destination    => intval($_data[$tsn_key]),
-						$search_destination => $_data[$search_key]
-					);
+				if (!$strict or ($strict and (strcasecmp($_data[$api['compare']], $search) === 0))) {
+					$tsn = array();
+					foreach ($api['index'] as $_key => $_destination) {
+						$tsn[$_key] = $_data[$_destination];
+					}
+					$tsns[] = $tsn;
 					if ($strict) {
 						break;
 					}
@@ -240,7 +245,7 @@ function itis_search_tsn($action, $search, $strict = true) {
 		}
 	}
 
-	return $tsn;
+	return $tsns;
 }
 
 

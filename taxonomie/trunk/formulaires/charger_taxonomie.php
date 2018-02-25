@@ -41,7 +41,7 @@ function formulaires_charger_taxonomie_charger() {
 	$aucun_regne_charge = true;
 	$regnes = explode(':', _TAXONOMIE_REGNES);
 	foreach ($regnes as $_regne) {
-		$valeurs['_regnes'][$_regne] = '<span class="nom_scientifique">' . $_regne . '</span>, ' . _T("taxonomie:regne_$_regne");
+		$valeurs['_regnes'][$_regne] = '<span class="nom_scientifique">' . $_regne . '</span>, ' . _T("taxonomie:regne_${_regne}");
 		if (taxonomie_regne_existe($_regne, $meta_regne)) {
 			$valeurs['_regnes'][$_regne] .= ' [' . _T("taxonomie:info_regne_charge") . ']';
 			$aucun_regne_charge = false;
