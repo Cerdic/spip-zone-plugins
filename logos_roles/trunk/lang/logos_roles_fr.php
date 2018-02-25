@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Sélectionnez les types d'objets éditoriaux dont vous voulez migrer les logos puis cliquez sur « Convertir les logos ».",
 
 	// L
+	'label_saisie_objets_role' => 'Les objets éditoriaux pour lesquels ce type de logos sera proposé :',
 	'label_saisie_slug_role' => 'Identifiant du rôle',
 	'label_saisie_titre_role' => 'Titre du rôle',
 	'logos_roles_titre' => 'Logos par rôle',

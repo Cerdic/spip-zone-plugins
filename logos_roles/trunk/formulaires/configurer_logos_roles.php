@@ -8,6 +8,11 @@
  */
 function formulaires_configurer_logos_roles_saisies_dist() {
 
+	$datas_objets = array();
+	foreach (lister_tables_objets_sql() as $table => $def) {
+		$datas_objets[table_objet($table)] = _T($def['texte_objets']);
+	}
+
 	$saisies = array(
 		array(
 			'saisie' => 'liste',
@@ -31,6 +36,14 @@ function formulaires_configurer_logos_roles_saisies_dist() {
 						'nom' => 'titre',
 						'label' => _T('logos_roles:label_saisie_titre_role'),
 						'explication' => _T('logos_roles:explication_saisie_titre_role'),
+					),
+				),
+				array(
+					'saisie' => 'checkbox',
+					'options' => array(
+						'nom' => 'objets',
+						'label' => _T('logos_roles:label_saisie_objets_role'),
+						'datas' => $datas_objets,
 					),
 				),
 			),

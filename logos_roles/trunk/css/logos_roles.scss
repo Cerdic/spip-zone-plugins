@@ -43,3 +43,29 @@
         margin-left: 0;
     }
 }
+
+@supports(display: grid) {
+    .formulaire_configurer_logos_roles {
+        .saisie_checkbox {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            label {
+                grid-column-start: 1;
+                grid-column-end: 5;
+                width: auto;
+            }
+            .choix {
+                border: none;
+                padding: 0;
+                display: grid;
+                grid-template-columns: 30px 1fr;
+                align-items: center;
+                &> * {
+                    grid-area: 1;
+                    margin: 0;
+                    padding: 3px;
+                }
+            }
+        }
+    }
+}

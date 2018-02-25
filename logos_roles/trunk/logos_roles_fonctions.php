@@ -63,7 +63,7 @@ function lister_roles_logos($objet = null, $role = null) {
 	foreach (lire_config('logos_roles/roles_logos') as $r) {
 		$roles_logos['logo_' . $r['slug']] = array(
 			'label' => $r['titre'] ?: $r['slug'],
-			'objets' => $tous_les_objets,
+			'objets' => $r['objets'],
 		);
 	}
 
