@@ -72,7 +72,6 @@ function taxonomie_vider_tables($nom_meta_base_version) {
  */
 function configurer_taxonomie() {
 	$config = array(
-		'langues_possibles' => array('fr', 'en', 'es', 'pt', 'de', 'it'),
 		'langues_utilisees' => array('fr'),
 	);
 

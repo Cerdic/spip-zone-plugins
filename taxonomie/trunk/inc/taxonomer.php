@@ -38,7 +38,6 @@ if (!defined('_TAXONOMIE_REGNES')) {
 	);
 }
 
-
 if (!defined('_TAXONOMIE_RANG_REGNE')) {
 	/**
 	 * Nom anglais du rang principal `règne`.
@@ -106,7 +105,6 @@ if (!defined('_TAXONOMIE_RANGS_PRINCIPAUX')) {
 	);
 }
 
-
 if (!defined('_TAXONOMIE_RANG_TRIBU')) {
 	/**
 	 * Nom anglais du rang secondaire `tribu`.
@@ -150,7 +148,6 @@ if (!defined('_TAXONOMIE_RANGS_SECONDAIRES')) {
 	);
 }
 
-
 if (!defined('_TAXONOMIE_RANG_TYPE_PRINCIPAL')) {
 	/**
 	 * Type de rang selon la nomenclature taxonomique.
@@ -168,6 +165,13 @@ if (!defined('_TAXONOMIE_RANG_TYPE_INTERCALAIRE')) {
 	 * Type de rang selon la nomenclature taxonomique.
 	 */
 	define('_TAXONOMIE_RANG_TYPE_INTERCALAIRE', 'intercalaire');
+}
+
+if (!defined('_TAXONOMIE_LANGUES_POSSIBLES')) {
+	/**
+	 * Type de rang selon la nomenclature taxonomique.
+	 */
+	define('_TAXONOMIE_LANGUES_POSSIBLES', 'fr:en:es:pt:de:it');
 }
 
 
