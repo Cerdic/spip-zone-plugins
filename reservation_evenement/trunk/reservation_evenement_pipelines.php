@@ -175,7 +175,7 @@ function reservation_evenement_formulaire_traiter($flux) {
 }
 
 /**
- * permet de compléter ou modifier le résultat de la compilation d’un squelette donné.
+ * Permet de compléter ou modifier le résultat de la compilation d’un squelette donné.
  *
  * @pipeline recuperer_fond
  *
