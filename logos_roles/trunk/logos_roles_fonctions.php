@@ -43,17 +43,19 @@ function lister_roles_logos($objet = null, $role = null) {
 		$role = 'logo_survol';
 	}
 
+	$tous_les_objets = array_map('table_objet', array_keys(lister_tables_objets_sql()));
+
 	// Logos par défaut
 	$roles_logos = pipeline(
 		'roles_logos',
 		array(
 			'logo' => array(
 				'label' => 'Logo',
-				'objets' => array_map('table_objet', array_keys(lister_tables_objets_sql())),
+				'objets' => $tous_les_objets,
 			),
 			'logo_survol' => array(
 				'label' => 'Logo survol',
-				'objets' => array_map('table_objet', array_keys(lister_tables_objets_sql())),
+				'objets' => $tous_les_objets,
 			),
 		)
 	);

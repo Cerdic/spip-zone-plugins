@@ -20,7 +20,7 @@ function formulaires_configurer_logos_roles_saisies_dist() {
 				array(
 					'saisie' => 'input',
 					'options' => array(
-						'nom' => 'slug_role',
+						'nom' => 'slug',
 						'label' => _T('logos_roles:label_saisie_slug_role'),
 						'explication' => _T('logos_roles:explication_saisie_slug_role'),
 					),
@@ -28,7 +28,7 @@ function formulaires_configurer_logos_roles_saisies_dist() {
 				array(
 					'saisie' => 'input',
 					'options' => array(
-						'nom' => 'titre_role',
+						'nom' => 'titre',
 						'label' => _T('logos_roles:label_saisie_titre_role'),
 						'explication' => _T('logos_roles:explication_saisie_titre_role'),
 					),
@@ -79,10 +79,10 @@ function formulaires_configurer_logos_roles_verifier_dist() {
 	$roles = _request('roles_logos');
 
 	foreach ($roles as $i => $role) {
-		if ((! isset($role['slug_role']) or (! $role['slug_role']))) {
-			$erreurs['roles_logos'][$i]['slug_role'] = _T('info_obligatoire');
-		} elseif (! preg_match('/^[a-z_]+$/', $role['slug_role'])) {
-			$erreurs['roles_logos'][$i]['slug_role'] = _T('logos_roles:erreur_slug_invalide');
+		if ((! isset($role['slug']) or (! $role['slug']))) {
+			$erreurs['roles_logos'][$i]['slug'] = _T('info_obligatoire');
+		} elseif (! preg_match('/^[a-z_]+$/', $role['slug'])) {
+			$erreurs['roles_logos'][$i]['slug'] = _T('logos_roles:erreur_slug_invalide');
 		}
 	}
 
