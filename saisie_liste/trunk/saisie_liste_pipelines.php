@@ -20,3 +20,10 @@ function saisie_liste_header_prive($flux) {
 
 	return saisie_liste_insert_head($flux);
 }
+
+function saisie_liste_saisies_autonomes($flux) {
+
+	$flux[] = 'liste';
+
+	return $flux;
+}
