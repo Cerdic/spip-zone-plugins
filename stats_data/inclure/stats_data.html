@@ -147,7 +147,7 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 	
 	[(#REM)
 		Cas alternatif avec période précisée : on regarde non pas dans les fichiers de session mais dans la BDD.
-		A refaire avec la boucle date stats_referers_to_array du plugin statistiques ?.
+		A refaire avec la boucle date stats_referers_to_array du plugin statistiques ?
 	]
 
 	[(#REM) Aujourd'hui / hier = boucle data sql pour obtenir les infos à la date demandée. ]
@@ -161,8 +161,10 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 	[(#SET{req,select * from spip_visites_articles where date=[(#DATE|affdate{Y-m-d}|_q)] order by visites desc})]
 	
 	#SET{demain,#VAL{Y-m-d}|date{#VAL{+1 day}|strtotime{#DATE|strtotime}}
+	[(#SET{select,[(#VAL{"select visites_JOUR visites, referer"}|replace{JOUR,[(#ENV{jour})]})]})]
+	[(#SET{periode,[(#VAL{"visites_JOUR"}|replace{JOUR,[(#ENV{jour})]})]})]
 	
-	[(#SET{req_affluents,select * from spip_referers where maj > [(#DATE|affdate{Y-m-d}|_q)] and maj < [(#GET{demain}|_q)] [ and visites_jour > 0 (#ENV{jour}|=={jour}|oui) order by visites_jour desc] [ and visites_veille > 0 (#ENV{jour}|=={veille}|oui) order by visites_veille desc] })]
+	[(#SET{req_affluents,[(#GET{select})] from spip_referers where [(#GET{periode})] > 0 order by [(#GET{periode})] desc })]
 	
 	#SET{demain,#VAL{Y-m-d}|date{#VAL{+1 day}|strtotime{#MAJ|strtotime}}}
 	
@@ -173,7 +175,6 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 	
 	</BOUCLE_visites_jour>
 	
-	
 	[(#REM)
 		<hr>
 		[(#GET{req})]
@@ -181,7 +182,6 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 		[(#GET{req_affluents})]
 		<hr>
 	]
-	
 	<BOUCLE_articles_jour(DATA){source sql,#GET{req}}>
 		
 		#SET{valeurs_actuelles,#GET{articles_lus}|table_valeur{a#ID_ARTICLE}|sinon{#ARRAY}}
@@ -200,8 +200,7 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 		#SET{domaine,#REFERER|match{#GET{reg_domaine},"i",3}}
 		
 		#SET{valeurs_actuelles,#GET{sites_affluents}|table_valeur{#GET{domaine}}|sinon{#ARRAY}}
-		
-		#SET{nb_visites,#GET{sites_affluents}|table_valeur{#GET{domaine}}|table_valeur{visites}|plus{1}}
+		#SET{nb_visites,#GET{sites_affluents}|table_valeur{#GET{domaine}}|table_valeur{visites}|plus{#VISITES}}
 		#SET{valeurs_actuelles,#GET{valeurs_actuelles}|array_merge{#ARRAY{visites,#GET{nb_visites}}}}
 		
 		#SET{ajout,#ARRAY{#GET{domaine},#GET{valeurs_actuelles}|push{#REFERER}}}
@@ -219,10 +218,9 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 
 [(#REM) Afficher les tableaux ]
 
-
 [(#REM)
+[<pre><code>(#GET{articles_lus}|print_r{1})</code></pre>]
 [<pre style="height:300px;overflow:auto"><code>(#GET{sites_affluents}|print_r{1})</code></pre>]
-[<pre><code>(#GET{sites_affluents}|print_r{1})</code></pre>]
 ]
 
 <div id="conteneur_stats">
