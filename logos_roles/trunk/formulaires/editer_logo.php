@@ -211,7 +211,7 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
 			$res['message_ok'] = ''; // pas besoin de message : la validation est visuelle
 			set_request('logo_up', ' ');
 		// remplacer par un autre document si demandé
-		} elseif ($id_document = _request('document_mediatheque_' . $role . '_' . $objet . '_' . $id_objet)) {
+		} elseif ($id_document = _request('document_mediatheque_' . $role)) {
 			logo_modifier_document($objet, $id_objet, $role, intval($id_document));
 			$res['message_ok'] = ''; // pas besoin de message : la validation est visuelle
 		}
