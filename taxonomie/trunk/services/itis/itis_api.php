@@ -41,10 +41,17 @@ if (!defined('_TAXONOMIE_ITIS_REGEXP_RANKNAME')) {
 	define('_TAXONOMIE_ITIS_REGEXP_RANKNAME', '#(%rank_list%):\s*(([A-Z]\s+)?[\w-]+)\s*(.+)\s*\[(\d+)\]\s*$#');
 }
 
+if (!defined('_TAXONOMIE_ITIS_CACHE_TIMEOUT')) {
+	/**
+	 * Période de renouvellement du cache de Wikipedia (365 jours)
+	 */
+	define('_TAXONOMIE_ITIS_CACHE_TIMEOUT', 86400 * 365);
+}
+
 
 $GLOBALS['itis_language'] = array(
 	/**
-	 * Variable globale de configuration de la correspondance entre langue Wikipedia
+	 * Variable globale de configuration de la correspondance entre langue ITIS
 	 * et code de langue SPIP. La langue du service est l'index, le code SPIP est la valeur.
 	 */
 	'french'  => 'fr',
@@ -85,12 +92,15 @@ $GLOBALS['itis_webservice'] = array(
 			'argument' => 'tsn',
 			'list'     => '',
 			'index'    => array(
-				'nom_scientifique' => 'scientificName/combinedName',
-				'rang'             => 'taxRank/rankName',
-				'regne'            => 'kingdom/kingdomName',
-				'tsn_parent'       => 'parentTSN/parentTsn',
-				'auteur'           => 'taxonAuthor/authorship',
-				'nom_commun'       => 'commonNameList/commonNames',
+				'nom_scientifique'  => 'scientificName/combinedName',
+				'rang'              => 'taxRank/rankName',
+				'regne'             => 'kingdom/kingdomName',
+				'tsn_parent'        => 'parentTSN/parentTsn',
+				'auteur'            => 'taxonAuthor/authorship',
+				'nom_commun'        => 'commonNameList/commonNames',
+				'credibilite'       => 'credibilityRating/credRating',
+				'usage'             => 'usage/taxonUsageRating',
+				'zone_geographique' => 'geographicDivisionList/geoDivisions'
 			)
 		)
 	),
@@ -248,7 +258,7 @@ function itis_search_tsn($action, $search, $strict = true) {
  *        Si le taxon est trouvé, le tableau renvoyé possède les index associatifs suivants:
  *        - `nom_scientique` : le nom scientifique du taxon en minuscules
  *        - `rang`           : le nom anglais du rang taxonomique du taxon
- *        - `regne`          : le nom scientifque du règne du taxon en minuscules
+ *        - `regne`          : le nom scientifique du règne du taxon en minuscules
  *        - `tsn_parent`     : le TSN du parent du taxon ou 0 si le taxon est un règne
  *        - `auteur`         : la citation d’auteurs et la date de publication
  *        - `nom_commun`     : un tableau indexé par langue (au sens d'ITIS en minuscules, `english`, `french`,
@@ -258,34 +268,63 @@ function itis_get_record($tsn) {
 
 	$record = array();
 
-	// Construire l'URL de l'api sollicitée
-	$url = itis_build_url('json', 'getfull', 'record', strval($tsn));
+	if (intval($tsn)) {
+		// Construction des options permettant de nommer le fichier cache.
+		include_spip('inc/taxonomie_cacher');
+		$options_cache = array();
 
-	// Acquisition des données spécifiées par l'url
-	$requeter = charger_fonction('taxonomie_requeter', 'inc');
-	$data = $requeter($url);
+		if (!$file_cache = cache_taxonomie_existe('itis', 'record', $tsn, $options_cache)
+		or !filemtime($file_cache)
+		or (time() - filemtime($file_cache) > _TAXONOMIE_ITIS_CACHE_TIMEOUT)
+		or (_TAXONOMIE_CACHE_FORCER)) {
+			// Construire l'URL de l'api sollicitée
+			$url = itis_build_url('json', 'getfull', 'record', strval($tsn));
 
-	// Récupération des informations choisies parmi l'enregistrement reçu à partir de la configuration
-	// de l'action.
-	$api = $GLOBALS['itis_webservice']['getfull']['record'];
-	include_spip('inc/filtres');
-	$data = $api['list'] ? table_valeur($data, $api['list'], null) : $data;
-	if (!empty($data)) {
-		foreach ($api['index'] as $_destination => $_keys) {
-			$element = $_keys ? table_valeur($data, $_keys, null) : $data;
-			$record[$_destination] = is_string($element) ? trim($element) : $element;
+			// Acquisition des données spécifiées par l'url
+			$requeter = charger_fonction('taxonomie_requeter', 'inc');
+			$data = $requeter($url);
+
+			// Récupération des informations choisies parmi l'enregistrement reçu à partir de la configuration
+			// de l'action.
+			$api = $GLOBALS['itis_webservice']['getfull']['record'];
+			include_spip('inc/filtres');
+			$data = $api['list'] ? table_valeur($data, $api['list'], null) : $data;
+			if (!empty($data)) {
+				foreach ($api['index'] as $_destination => $_keys) {
+					$element = $_keys ? table_valeur($data, $_keys, null) : $data;
+					$record[$_destination] = is_string($element) ? trim($element) : $element;
+				}
+			}
+
+			// On réorganise le sous-tableau des noms communs
+			$noms = array();
+			if (!empty($record['nom_commun']) and is_array($record['nom_commun'])) {
+				foreach ($record['nom_commun'] as $_nom) {
+					$noms[strtolower($_nom['language'])] = trim($_nom['commonName']);
+				}
+			}
+			// Et on modifie l'index des noms communs avec le tableau venant d'être construit.
+			$record['nom_commun'] = $noms;
+
+			// On réorganise le sous-tableau des zones géographiques.
+			$zones = array();
+			if (!empty($record['zone_geographique']) and is_array($record['zone_geographique'])) {
+				foreach ($record['zone_geographique'] as $_zone) {
+					$zones[] = trim($_zone['geographicValue']);
+				}
+			}
+			// Et on modifie l'index des zones géographiques avec le tableau venant d'être construit
+			// en positionnant celles-ci sous un idne 'english' car les zones sont libellées en anglais.
+			$record['zone_geographique']['english'] = $zones;
+
+			// Mise en cache systématique pour gérer le cas où la page cherchée n'existe pas.
+			cache_taxonomie_ecrire(serialize($record), 'itis', 'record', $tsn, $options_cache);
+		} else {
+			// Lecture et désérialisation du cache
+			lire_fichier($file_cache, $contenu);
+			$record = unserialize($contenu);
 		}
 	}
-
-	// On réorganise le sous-tableau des noms communs
-	$noms = array();
-	if (is_array($record['nom_commun'])	and $record['nom_commun']) {
-		foreach ($record['nom_commun'] as $_nom) {
-			$noms[strtolower($_nom['language'])] = trim($_nom['commonName']);
-		}
-	}
-	// Et on modifie l'index des noms communs avec le tableau venant d'être construit.
-	$record['nom_commun'] = $noms;
 
 	return $record;
 }
