@@ -2,15 +2,14 @@
 	prefix="stats_data"
 	categorie="statistique"
 	version="1.1.8"
-	etat="stable"
+	etat="test"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/statistique-32.png"
 	schema="1.0.1"
 >
-
-	<nom>Statistiques en boucle data</nom>
-	<!-- Gestion des statistiques dans SPIP -->
+	<nom>Visites SPIP</nom>
+	<!-- Modification des statistiques dans SPIP (ajout visites en cours etc...) -->
 
 	<auteur>BoOz</auteur>
-
+	<pipeline nom="header_prive" inclure="stats_data-pipelines.php" />
 </paquet>

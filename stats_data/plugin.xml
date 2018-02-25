@@ -1,6 +1,6 @@
 <plugin>
 	<nom>
-	stats data
+	Visites SPIP
 	</nom>
 	<auteur>
 	BoOz
@@ -12,16 +12,20 @@
 	1.0.0
 	</version>
 	<etat>
-	stable
+	test
 	</etat>
 	<description>
-	stats
+	Ajouter les vistes en cours aux stats etc...
 	</description>
 	<lien></lien>
 	<prefix>
 	stats_data
 	</prefix>
 	<chemin dir='' />
-	<categorie>squelettes</categorie>
+	<categorie>statistiques</categorie>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>stats_data-pipelines.php</inclure>
+	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;3.5.0]" />
 </plugin>

@@ -1,0 +1,5 @@
+/*
+Ne tient pas comptes des stats > 1M
+.stats_referers .liste-items.referers li.referer span.visites {float:left;text-align:#GET{right};width:140px;margin-left:-150px;}
+*/
+.stats_referers .liste-items.referers li.referer span.visites {float:left;text-align:right;width:140px;margin-left:-130px;}
