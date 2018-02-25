@@ -5,7 +5,7 @@
  * @return array
  */
 
-function formulaires_configurer_logos_roles_traiter_dist() {
+function formulaires_migrer_logos_roles_traiter_dist() {
 
 	// on récupère la liste des objets pour lesquels il faut migrer les logos
 	$liste_objets_a_traiter = array_filter(_request('liste_objet'));
