@@ -187,7 +187,7 @@ $GLOBALS['itis_webservice'] = array(
  *
  * @api
  * @uses itis_build_url()
- * @uses service_requeter_json()
+ * @uses inc_taxonomie_requeter_dist()
  *
  * @param string $action
  *        Recherche par nom commun ou par nom scientifique. Prend les valeurs `commonname` ou `scientificname`
@@ -248,21 +248,27 @@ function itis_search_tsn($action, $search, $strict = true) {
  * Renvoie l'ensemble des informations sur un taxon désigné par son identifiant unique TSN.
  *
  * @api
+ * @uses cache_taxonomie_existe()
  * @uses itis_build_url()
- * @uses service_requeter_json()
+ * @uses inc_taxonomie_requeter_dist()
+ * @uses cache_taxonomie_ecrire()
  *
  * @param int $tsn
  *        Identifiant unique du taxon dans la base ITIS, le TSN
  *
  * @return array
  *        Si le taxon est trouvé, le tableau renvoyé possède les index associatifs suivants:
- *        - `nom_scientique` : le nom scientifique du taxon en minuscules
- *        - `rang`           : le nom anglais du rang taxonomique du taxon
- *        - `regne`          : le nom scientifique du règne du taxon en minuscules
- *        - `tsn_parent`     : le TSN du parent du taxon ou 0 si le taxon est un règne
- *        - `auteur`         : la citation d’auteurs et la date de publication
- *        - `nom_commun`     : un tableau indexé par langue (au sens d'ITIS en minuscules, `english`, `french`,
- *                             `spanish`...) fournissant le nom commun dans chacune des langues
+ *        - `nom_scientique`    : le nom scientifique du taxon en minuscules
+ *        - `rang`              : le nom anglais du rang taxonomique du taxon
+ *        - `regne`             : le nom scientifique du règne du taxon en minuscules
+ *        - `tsn_parent`        : le TSN du parent du taxon ou 0 si le taxon est un règne
+ *        - `auteur`            : la citation d’auteurs et la date de publication
+ *        - `nom_commun`        : un tableau indexé par langue (au sens d'ITIS en minuscules, `english`, `french`,
+ *                                `spanish`...) fournissant le nom commun dans chacune des langues
+ *        - `credibilite`       : Information sur la crédibilité des informations du taxon
+ *        - `usage`             : Indication dur la validité de l'utilisation du taxon
+ *        - `zone_geographique` : un tableau indexé par langue unique `english` des zones géographiques où le taxon
+ *                                est localisé. Les zones sont libellées en anglais.
  */
 function itis_get_record($tsn) {
 
@@ -335,7 +341,7 @@ function itis_get_record($tsn) {
  *
  * @api
  * @uses itis_build_url()
- * @uses service_requeter_json()
+ * @uses inc_taxonomie_requeter_dist()
  *
  * @param string $action
  *        Type d'information demandé. Prend les valeurs
@@ -412,7 +418,7 @@ function itis_get_information($action, $tsn) {
  *
  * @api
  * @uses itis_build_url()
- * @uses service_requeter_json()
+ * @uses inc_taxonomie_requeter_dist()
  *
  * @param $language
  *        Langue au sens d'ITIS écrite en minuscules. Vaut `french`, `english`, `spanish`...
