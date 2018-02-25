@@ -1,27 +1,27 @@
 #CACHE{0}
 [(#REM)
-	Afficher des stats (actuellement, aujourd'hui,hier), avec des boucles data :
-	- le nombre de visites sur la période (en ce moment ou un jour donné (aujourd'hui ou hier))
-	- les articles lus sur la période, ordonnés par nombre de visites
-		Array
-			c2192 => Array
-				visites => 1557
-		
-			c58360 => Array
-				visites => 787
-		
-	- les domaines affluents (d'un article) et leurs liens entrant, ordonnés par leur nombre de visites.
-		Array
-			monsite => Array
-				visites => 1
-				0 => http://www.monsite.net/Organisations.html
-		
-			google => Array
-				visites => 168
-				0 => http://www.google.ca/
-				1 => http://www.google.ht/
-				2 => http://www.google.co.in/
-				3 => http://www.google.de/
+Afficher des stats en plus dans l'admin avec des boucles data :
+- Le nombre de visites sur la période (en ce moment | aujourd'hui | hier )
+- Les articles lus sur la période, ordonnés par nombre de visites
+	Array
+		a2192 => Array
+			visites => 1557
+	
+		a58360 => Array
+			visites => 787
+	
+- Les domaines affluents (éventuellement d'un article) et leurs liens entrant, ordonnés par leur nombre de visites.
+	Array
+		monsite => Array
+			visites => 1
+			0 => http://www.monsite.net/Organisations.html
+	
+		google => Array
+			visites => 4
+			0 => http://www.google.ca/
+			1 => http://www.google.ht/
+			2 => http://www.google.co.in/
+			3 => http://www.google.de/
 ]
 <style type="text/css">
 #data_stats{
@@ -97,20 +97,20 @@
 [(#GET{type}|=={article}|oui)
 	
 	[(#ENV{id_article}|non)
-		#SET{valeurs_actuelles,#GET{articles_lus}|table_valeur{c#GET{id}}|sinon{#ARRAY}}
-		#SET{nb_visites,#GET{articles_lus}|table_valeur{c#GET{id}}|table_valeur{visites}|plus{1}}
+		#SET{valeurs_actuelles,#GET{articles_lus}|table_valeur{a#GET{id}}|sinon{#ARRAY}}
+		#SET{nb_visites,#GET{articles_lus}|table_valeur{a#GET{id}}|table_valeur{visites}|plus{1}}
 		#SET{valeurs_actuelles,#GET{valeurs_actuelles}|array_merge{#ARRAY{visites,#GET{nb_visites}}}}
 		
-		#SET{ajout,#ARRAY{c#GET{id},#GET{valeurs_actuelles}}}
+		#SET{ajout,#ARRAY{a#GET{id},#GET{valeurs_actuelles}}}
 		#SET{articles_lus,#GET{articles_lus}|array_merge{#GET{ajout}}}
 	]
 	[(#ENV{id_article}|oui)
 		[(#ENV{id_article}|=={#GET{id}}|oui)
-			#SET{valeurs_actuelles,#GET{articles_lus}|table_valeur{c#GET{id}}|sinon{#ARRAY}}
-			#SET{nb_visites,#GET{articles_lus}|table_valeur{c#GET{id}}|table_valeur{visites}|plus{1}}
+			#SET{valeurs_actuelles,#GET{articles_lus}|table_valeur{a#GET{id}}|sinon{#ARRAY}}
+			#SET{nb_visites,#GET{articles_lus}|table_valeur{a#GET{id}}|table_valeur{visites}|plus{1}}
 			#SET{valeurs_actuelles,#GET{valeurs_actuelles}|array_merge{#ARRAY{visites,#GET{nb_visites}}}}
 			
-			#SET{ajout,#ARRAY{c#GET{id},#GET{valeurs_actuelles}}}
+			#SET{ajout,#ARRAY{a#GET{id},#GET{valeurs_actuelles}}}
 			#SET{articles_lus,#GET{articles_lus}|array_merge{#GET{ajout}}}
 		]
 	]
@@ -145,6 +145,11 @@
 #SET{visites,#TOTAL_BOUCLE}
 </B_visites>
 	
+	[(#REM)
+		Cas alternatif avec période précisée : on regarde non pas dans les fichiers de session mais dans la BDD.
+		A refaire avec la boucle date stats_referers_to_array du plugin statistiques ?.
+	]
+
 	[(#REM) Aujourd'hui / hier = boucle data sql pour obtenir les infos à la date demandée. ]
 	
 	#SET{reqd,#VAL{"select * from spip_visites where date='LADATE' order by maj desc limit 0,1"}|replace{LADATE,#GET{date}}}
@@ -157,7 +162,7 @@
 	
 	#SET{demain,#VAL{Y-m-d}|date{#VAL{+1 day}|strtotime{#DATE|strtotime}}
 	
-	[(#SET{req_affluents,select * from spip_referers where maj > [(#DATE|affdate{Y-m-d}|_q)] and maj < [(#GET{demain}|_q)] [ and visites_jour > 0 (#ENV{jour}|=={jour}|oui) order by visites_jour desc] [ and visites_veille > 0 (#ENV{jour}|=={veille}|oui) order by visites_jour desc] })]
+	[(#SET{req_affluents,select * from spip_referers where maj > [(#DATE|affdate{Y-m-d}|_q)] and maj < [(#GET{demain}|_q)] [ and visites_jour > 0 (#ENV{jour}|=={jour}|oui) order by visites_jour desc] [ and visites_veille > 0 (#ENV{jour}|=={veille}|oui) order by visites_veille desc] })]
 	
 	#SET{demain,#VAL{Y-m-d}|date{#VAL{+1 day}|strtotime{#MAJ|strtotime}}}
 	
@@ -168,6 +173,7 @@
 	
 	</BOUCLE_visites_jour>
 	
+	
 	[(#REM)
 		<hr>
 		[(#GET{req})]
@@ -175,14 +181,15 @@
 		[(#GET{req_affluents})]
 		<hr>
 	]
+	
 	<BOUCLE_articles_jour(DATA){source sql,#GET{req}}>
 		
-		#SET{valeurs_actuelles,#GET{articles_lus}|table_valeur{c#ID_ARTICLE}|sinon{#ARRAY}}
+		#SET{valeurs_actuelles,#GET{articles_lus}|table_valeur{a#ID_ARTICLE}|sinon{#ARRAY}}
 		
-		#SET{nb_visites,#GET{articles_lus}|table_valeur{c#ID_ARTICLE}|table_valeur{visites}|plus{#VISITES}}
+		#SET{nb_visites,#GET{articles_lus}|table_valeur{a#ID_ARTICLE}|table_valeur{visites}|plus{#VISITES}}
 		#SET{valeurs_actuelles,#GET{valeurs_actuelles}|array_merge{#ARRAY{visites,#GET{nb_visites}}}}
 		
-		#SET{ajout,#ARRAY{c#ID_ARTICLE,#GET{valeurs_actuelles}}}
+		#SET{ajout,#ARRAY{a#ID_ARTICLE,#GET{valeurs_actuelles}}}
 		#SET{articles_lus,#GET{articles_lus}|array_merge{#GET{ajout}}}
 		
 	</BOUCLE_articles_jour>
@@ -205,10 +212,16 @@
 
 [(#ENV{id_article}|oui) #SET{visites,#GET{articles_lus}|table_valeur{c#ENV{id_article}}|table_valeur{visites}} ]
 
-[(#REM) Afficher les tableaux ]
 
 [(#REM)
-[<pre><code>(#GET{articles_lus}|print_r{1})</code></pre>]
+	Affichage final des données enregistrées dans les tableaux.
+]
+
+[(#REM) Afficher les tableaux ]
+
+
+[(#REM)
+[<pre style="height:300px;overflow:auto"><code>(#GET{sites_affluents}|print_r{1})</code></pre>]
 [<pre><code>(#GET{sites_affluents}|print_r{1})</code></pre>]
 ]
 
@@ -255,7 +268,7 @@
 					<BOUCLE_articles(DATA){source table,#GET{articles_lus}}{!par visites}{pagination 50}>
 					<li>
 					<small>[(#VISITES)] personnes</small>
-					<BOUCLE_article(ARTICLES){id_article=#CLE|replace{^c}}>
+					<BOUCLE_article(ARTICLES){id_article=#CLE|replace{^a}}>
 						 - <a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]">#TITRE</a>
 					</BOUCLE_article>
 					</li>
