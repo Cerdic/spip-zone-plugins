@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function bible_insert_head($flux){
 	if (lire_config("bible/police_hbo")){
 		return $flux.'<link rel="stylesheet" href="'.timestamp(produire_fond_statique('bible.css')).'" type="text/css" media="all" />';

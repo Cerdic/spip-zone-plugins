@@ -1,5 +1,8 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/bible_tableau');
+
 function bible_generer_doc(){
      $langs = bible_tableau('langues');
      $original = bible_tableau('original');

@@ -1,8 +1,6 @@
 <?php
-/*
-Maïeul Rouquette Licence GPL 3
-Spip-Bible
-*/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/bible_tableau');
 
 

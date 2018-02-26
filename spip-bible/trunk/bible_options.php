@@ -1,5 +1,9 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/bible_tableau');
+
 function balise_INFO_BIBLE_TRADUCTION($p){
 	$trad = interprete_argument_balise(1,$p);
 	$info = interprete_argument_balise(2,$p);
