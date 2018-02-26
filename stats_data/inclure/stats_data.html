@@ -171,7 +171,7 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 	
 <//B_visites>
 
-[(#ENV{id_article}|oui) #SET{visites,#GET{articles_lus}|table_valeur{c#ENV{id_article}}|table_valeur{visites}} ]
+[(#ENV{id_article}|oui) #SET{visites,#GET{articles_lus}|table_valeur{a#ENV{id_article}}|table_valeur{visites}} ]
 
 
 [(#REM)
@@ -200,6 +200,7 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 	margin-top: 0.3em;
 	font-size:3.8em;
 	font-weight:bold;
+	line-height: 1em;
 }
 .stats_visites #data_stats > li{
 	height:250px;
@@ -279,8 +280,8 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 				<ul class="valeur">
 					<BOUCLE_articles(DATA){source table,#GET{articles_lus}}{!par visites}{pagination 50}>
 					<li>
-					<small><a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]">[(#VISITES)] visites</a></small>
 					<BOUCLE_article(ARTICLES){id_article=#CLE|replace{^a}}>
+					<small><a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]">[(#VISITES)] visites</a></small>
 						 - <a href="[(#URL_ARTICLE)]">#TITRE</a>
 					</BOUCLE_article>
 					</li>
