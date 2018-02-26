@@ -2,24 +2,23 @@
 <h1 class="grostitre"><:taxonomie:titre_page_taxonomie:></h1>
 
 [(#REM) Onglets de premier niveau pour le filtrage par règne ]
+<B_regnes>
 <div class="onglets_simple">
-	<B_regnes>
 	<ul class="regnes">
 		[<li>
 			(#SELF
 				|parametre_url{regne, ''}
 				|lien_ou_expose{<:taxonomie:filtre_regnes_tout:>, #ENV{regne, ''}|=={''}, ajax})
 		</li>]
-	<BOUCLE_regnes(TAXONS) {rang=kingdom}>
+<BOUCLE_regnes(TAXONS) {rang=kingdom}>
 		[<li>
 			(#SELF
 				|parametre_url{regne, #REGNE}
 				|lien_ou_expose{[(#VAL{taxonomie:regne_}|concat{#REGNE}|_T|ucfirst)], #ENV{regne}|=={#REGNE}, ajax})
 		</li>]
-	</BOUCLE_regnes>
+</BOUCLE_regnes>
 	</ul>
 	<div class="nettoyeur"></div>
-	</B_regnes>
 </div>
 
 [(#REM) Onglets de second niveau pour le filtrage par indicateur d'édition ]
@@ -43,6 +42,7 @@
 	</ul>
 	<div class="nettoyeur"></div>
 </div>
+</B_regnes>
 
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 <div class="nettoyeur"></div>

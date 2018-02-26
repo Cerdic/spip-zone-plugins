@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_especes_selectionnes>
+	<ul>
+	<BOUCLE_especes_selectionnes(ESPECES){id_espece IN #GET*{valeur}}
+		{par num nom_scientifique, nom_scientifique}{statut?}{tout}>
+		<li class="choix">#NOM_SCIENTIFIQUE (#ID_ESPECE)</li>
+	</BOUCLE_especes_selectionnes>
+	</ul>
+	</B_especes_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_especes_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_espece_selectionne(ESPECES){id_espece=#ENV{valeur}}
+		{par num nom_scientifique, nom_scientifique}{statut?}{tout}>
+	  	<p>#NOM_SCIENTIFIQUE (#ID_ESPECE)</p>
+	</BOUCLE_espece_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_espece_selectionne>
+<//B_test_multiple>

@@ -1,7 +1,7 @@
 <paquet
 	prefix="taxonomie"
 	categorie="divers"
-	version="0.1.5"
+	version="0.2.0"
 	etat="dev"
 	compatibilite="[3.0.17;3.2.*]"
 	logo="taxonomie_logo-64.png"
@@ -9,7 +9,7 @@
 	schema="1"
 >
 	<nom>Taxonomie</nom>
-	<!--Créer une base taxonomique-->
+	<!--Créer une base du monde vivant-->
 
 	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
 	<licence>GNU/GPL</licence>
@@ -25,4 +25,6 @@
 	<genie nom="actualiser_itis" periode="86400" />
 
 	<menu nom="taxonomie" titre="taxonomie:bouton_taxonomie" parent="menu_edition" icone="images/taxon-16.png" action="taxons" />
+	<menu nom="especes" titre="espece:titre_especes" parent="menu_edition" icone="images/espece-16.png" action="especes" />
+	<menu nom="espece_creer" titre="espece:icone_creer_espece" parent="outils_rapides" icone="images/espece-new-16.png" action="espece_creer" />
 </paquet>

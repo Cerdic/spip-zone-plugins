@@ -23,6 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function taxonomie_declarer_tables_interfaces($interfaces) {
 
 	$interfaces['table_des_tables']['taxons'] = 'taxons';
+	$interfaces['table_des_tables']['especes'] = 'especes';
 
 	return $interfaces;
 }
@@ -30,7 +31,7 @@ function taxonomie_declarer_tables_interfaces($interfaces) {
 
 /**
  * Déclaration des objets éditoriaux du plugin. Le plugin ajoute l'objet taxon au travers de la
- * seule table `spip_taxons`.
+ * seule table `spip_taxons` et l'objet espèce avec la table `spip_especes`.
  *
  * L'objet taxon est défini comme une arborescence de taxons du règne au genre.
  * Les taxons à partir de l'espèce ne font pas partie de cette table. Les champs principaux sont les
@@ -84,6 +85,55 @@ function taxonomie_declarer_tables_objets_sql($tables) {
 		'champs_versionnes' => array('nom_commun', 'descriptif'),
 		'rechercher_champs' => array('nom_scientifique' => 10, 'nom_commun' => 10, 'descriptif' => 5),
 		'tables_jointures'  => array(),
+	);
+
+	$tables['spip_especes'] = array(
+		'type' => 'espece',
+		'principale' => "oui",
+		'field'=> array(
+            "id_espece"			=> "bigint(21) NOT NULL",
+            "nom_scientifique"	=> "varchar(35) DEFAULT '' NOT NULL",
+            "rang"				=> "varchar(15) DEFAULT '' NOT NULL",
+            "regne"				=> "varchar(10) DEFAULT '' NOT NULL",
+            "nom_commun"		=> "text DEFAULT '' NOT NULL",
+            "auteur"			=> "varchar(100) DEFAULT '' NOT NULL",
+            "descriptif"		=> "text DEFAULT '' NOT NULL",
+            "texte"             => "longtext DEFAULT '' NOT NULL",
+            "tsn"				=> "bigint(21) NOT NULL",
+            "tsn_parent"		=> "bigint(21) NOT NULL",
+            "tsn_genre"		    => "bigint(21) NOT NULL",
+            "sources"           => "text NOT NULL",
+            "statut"            => "varchar(10) DEFAULT '0' NOT NULL",
+            "maj"				=> "TIMESTAMP"
+    ),
+		'key' => array(
+			'PRIMARY KEY'       => 'id_espece',
+            'KEY tsn'			=> 'tsn',
+            'KEY statut'        => 'statut',
+		),
+        'titre' => "nom_scientifique AS titre, '' AS lang",
+
+        'champs_editables'  => array('nom_scientifique', 'nom_commun', 'auteur', 'descriptif', 'texte', 'sources'),
+        'champs_versionnes' => array('nom_scientifique', 'nom_commun', 'auteur', 'descriptif', 'texte', 'sources'),
+        'rechercher_champs' => array('nom_scientifique' => 10, 'nom_commun' => 10, 'auteur' => 2, 'descriptif' => 5, 'texte' => 5),
+        'tables_jointures'  => array(),
+        'statut_textes_instituer' => array(
+            'prepa'    => 'texte_statut_en_cours_redaction',
+            'prop'     => 'texte_statut_propose_evaluation',
+            'publie'   => 'texte_statut_publie',
+            'refuse'   => 'texte_statut_refuse',
+            'poubelle' => 'texte_statut_poubelle',
+        ),
+        'statut'=> array(
+            array(
+                'champ'     => 'statut',
+                'publie'    => 'publie',
+                'previsu'   => 'publie,prop,prepa',
+                'post_date' => 'date',
+                'exception' => array('statut','tout')
+            )
+        ),
+        'texte_changer_statut' => 'espece:texte_changer_statut_espece',
 	);
 
 	return $tables;

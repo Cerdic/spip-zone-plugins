@@ -25,7 +25,7 @@ function taxonomie_upgrade($nom_meta_base_version, $version_cible) {
 	$config_defaut = configurer_taxonomie();
 
 	$maj['create'] = array(
-		array('maj_tables', array('spip_taxons')),
+		array('maj_tables', array('spip_taxons', 'spip_especes')),
 		array('ecrire_config', 'taxonomie', $config_defaut)
 	);
 
@@ -46,10 +46,11 @@ function taxonomie_vider_tables($nom_meta_base_version) {
 
 	// Supprimer la table des taxons créées par le plugin
 	sql_drop_table("spip_taxons");
+	sql_drop_table("spip_especes");
 
 	// Nettoyer les versionnages
-	sql_delete("spip_versions",              sql_in("objet", array('taxon')));
-	sql_delete("spip_versions_fragments",    sql_in("objet", array('taxon')));
+	sql_delete("spip_versions",              sql_in("objet", array('taxon', 'espece')));
+	sql_delete("spip_versions_fragments",    sql_in("objet", array('taxon', 'espece')));
 
 	// Effacer la meta de chaque règne chargé. On boucle sur tous les règnes
 	include_spip('inc/taxonomer');

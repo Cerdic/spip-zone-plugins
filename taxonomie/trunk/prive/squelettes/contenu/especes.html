@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF, ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/especes, par=nom_scientifique, env, ajax, sinon=<:espece:info_aucun_espece:>}>
+
+[(#AUTORISER{creer,espece})
+	[(#URL_ECRIRE{espece_creer}|icone_verticale{<:espece:icone_creer_espece:>, espece, new, right})]
+]

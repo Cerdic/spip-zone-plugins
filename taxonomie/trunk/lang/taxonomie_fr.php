@@ -19,6 +19,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_vider_regne' => 'Erreur lors du vidage du règne @regne@ en base de données.',
 	'erreur_charger_regne' => 'Erreur lors du chargement du règne @regne@ en base de données.',
 	'erreur_wikipedia_descriptif' => 'Aucun descriptif dans la langue choisie n\'a pu être récupéré de Wikipedia.',
+	'erreur_recherche_nom_scientifique' => 'Le nom scientifique d\'une espèce ou d\'un taxon de rang inférieur est toujours constitué d\'au moins deux mots.',
+	'erreur_recherche_aucun_taxon' => 'La recherche de «&nbsp;@texte@&nbsp;» est infructueuse pour le règne «&nbsp;@regne@&nbsp;».',
+	'explication_type_recherche' => 'Vous pouvez choisir de rechercher une espèce par son nom scientifique ou son nom commun. ITIS fournissant peu de noms communs il est conseillé d\'utiliser le nom scientifique.',
+	'explication_recherche_taxon' => 'Le taxon recherché doit correspondre à une espèce ou à un taxon de rang inférieur.',
+	'explication_recherche_stricte' => 'Cette option permet de rechercher soit le taxon correspondant exactement au texte de la recherche soit les taxons contenant le texte de recherche. Il conseillé d\'utiliser une recherche stricte pour éviter d\'obtenir une liste de taxons trop importante (limitée à 25 taxons).',
+	'explication_regne_recherche' => 'Les règnes proposés sont uniquement ceux qui ont déjà été chargés dans la base de données de taxonomie.',
 	'explication_action_regne' => 'Si le règne est déjà présent en base de données, tous les taxons qui le composent seront supprimés avant le chargement.',
 	'explication_langues_regne' => 'Les taxons sont chargés par défaut avec leur nom scientifique. Cette option permet de compléter certains taxons avec leur nom commun dans la ou les langues précisées.',
 	'explication_langues_utilisees' => 'Le plugin supporte quelques langues comme le français, l\'anglais et l\'espagnol. Cela permet de charger voire de saisir manuellement les noms communs et descriptifs dans ces langues.
@@ -64,6 +70,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_wikipedia_descriptif' => 'Descriptif Wikipedia fourni par défaut',
 	'label_wikipedia_langue' => 'Langue à utiliser par Wikipedia',
 	'label_wikipedia_lien' => 'Page Wikipedia à utiliser',
+	'label_type_recherche' => 'Type de recherche',
+	'label_recherche_taxon' => 'Texte de la recherche',
+	'label_recherche_stricte' => 'Rechercher exactement le texte',
+	'label_regne_recherche' => 'Limiter la recherche à un règne',
 
 	// N
 	'notice_vider_regne_inexistant' => 'Le règne @regne@ n\'a pas été trouvé en base de données.',
@@ -97,6 +107,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rang_tribe' => 'tribu',
 	'rang_subtribe' => 'sous-tribu',
 	'rang_genus' => 'genre',
+	'rang_subgenus' => 'sous-genre',
+    'rang_species' => 'espèce',
+    'rang_subspecies' => 'sous-espèce',
+    'rang_variety' => 'variété',
+    'rang_subvariety' => 'sous-variété',
+    'rang_race' => 'race',
+    'rang_forma' => 'forme',
+    'rang_subforma' => 'sous-forme',
 	'regne_animalia' => 'règne animal',
 	'regne_fungi' => 'règne fongique',
 	'regne_plantae' => 'règne végétal',
@@ -117,6 +135,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_liste_fils_taxon' => 'Liste des descendants directs du taxon',
 	'titre_page_decrire_wikipedia' => 'Descriptif Wikipedia du taxon <span class="nom_scientifique">@taxon@</span>',
 	'titre_page_taxonomie' => 'Taxonomie',
+	'titre_page_creer_espece' => 'Créer une espèce ou un taxon de rang inférieur',
 );
 
 ?>
