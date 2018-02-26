@@ -23,22 +23,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function roles_documents_declarer_tables_objets_sql($tables) {
 
-	include_spip('inc/config');
-
 	// Le rôle par défaut est 'document', ça revient à dire que le document lié n'a aucun rôle particulier.
 	$roles_documents = array(
-		'document'     => 'roles_documents:role_document',
+		'document'    => 'roles_documents:role_document',
+		'logo'        => 'roles_documents:role_logo',
+		'logo_survol' => 'roles_documents:role_logo_survol',
 	);
-	// Si les logos sont activés, on les propose en rôles supplémentaires
-	$config_logos = array(
-		'logo' => lire_config('activer_logos'),
-		'logo_survol' => lire_config('activer_logos_survol'),
-	);
-	foreach ($config_logos as $role => $config) {
-		if ($config == 'oui') {
-			$roles_documents[$role] = "roles_documents:role_$role";
-		}
-	}
 	$choix = array_keys($roles_documents);
 
 	array_set_merge($tables, 'spip_documents', array(
