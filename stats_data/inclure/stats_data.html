@@ -23,44 +23,6 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 			2 => http://www.google.co.in/
 			3 => http://www.google.de/
 ]
-<style type="text/css">
-#data_stats{
-	margin:40px 0;
-}
-#data_stats li > p{
-	margin-left:10px;
-}
-#data_stats > li {
-	float:left;
-	width:33%;
-	list-style-type:none;
-}
-#data_stats ul{
-	margin:0;
-	padding:0;
-	list-style-type:none;
-}
-.stats_valeur{
-	margin-top: 0.3em;
-	font-size:5em;
-	font-weight:bold;
-	height:0.8em;
-}
-.stats_visites #data_stats > li{
-	height:250px;
-	overflow:auto;
-}
-</style>
-
-[(#REM) Menu date ]
-
-<div class="onglets_simple clearfix">
-	<ul>
-		<li>[(#SELF|parametre_url{jour,''}|lien_ou_expose{En ce moment,[(#ENV{jour,''}|non)],ajax})]</li>
-		<li>[(#SELF|parametre_url{jour,jour}|lien_ou_expose{<:date_aujourdhui|ucfirst:>,#ENV{jour,''}|=={jour},ajax})]</li>
-		<li>[(#SELF|parametre_url{jour,veille}|lien_ou_expose{<:date_hier|ucfirst:>,#ENV{jour,''}|=={veille},ajax})]</li>
-	</ul>
-</div>
 
 [(#REM) Régler la date (actuellement, aujourd'hui, hier) ]
 
@@ -216,6 +178,56 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 	Affichage final des données enregistrées dans les tableaux.
 ]
 
+<style type="text/css">
+#data_stats{
+	margin:0 0 40px 0;
+}
+#data_stats li > p{
+	margin-left:10px;
+}
+#data_stats > li {
+	float:left;
+	width:33%;
+	list-style-type:none;
+	text-align:center;
+}
+#data_stats ul{
+	margin:0;
+	padding:0;
+	list-style-type:none;
+}
+.stats_valeur{
+	margin-top: 0.3em;
+	font-size:3.8em;
+	font-weight:bold;
+}
+.stats_visites #data_stats > li{
+	height:250px;
+	overflow:auto;
+}
+.onglets_simple ul li{
+	display:inline;
+}
+.valeur{
+	max-height:500px;
+	overflow:auto;
+	text-align:left;
+}
+.stats_contenu p{
+	margin:0 0 20px 0;
+}
+</style>
+
+[(#REM) Menu date ]
+
+<div class="onglets_simple clearfix">
+	<ul>
+		<li>[(#SELF|parametre_url{jour,''}|lien_ou_expose{En ce moment,[(#ENV{jour,''}|non)],ajax})]</li>
+		<li>[(#SELF|parametre_url{jour,jour}|lien_ou_expose{<:date_aujourdhui|ucfirst:>,#ENV{jour,''}|=={jour},ajax})]</li>
+		<li>[(#SELF|parametre_url{jour,veille}|lien_ou_expose{<:date_hier|ucfirst:>,#ENV{jour,''}|=={veille},ajax})]</li>
+	</ul>
+</div>
+
 [(#REM) Afficher les tableaux ]
 
 [(#REM)
@@ -242,9 +254,11 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 		[(#GET{milliers}|non)
 			#SET{stat_court,#GET{stat}}
 		]
-		<li class="prem">
-			<div class="stats_valeur" title="[(#GET{stat})] visites">[(#GET{stat_court})]</div>
-			<p><strong>visite[(#GET{stat}|>{1}|?{s})] [(#ENV{jour}|non) en cours]</strong></p>
+		<li>
+			<div class="stats_contenu" style="padding-right:20px;">
+				<div class="stats_valeur" title="[(#GET{stat})] visites">[(#GET{stat_court})]</div>
+				<p><strong>visite[(#GET{stat}|>{1}|?{s})] [(#ENV{jour}|non)<br><small>en&nbsp;cours</small>]</strong></p>
+			</div>
 		</li>
 		
 		#SET{stat,#GET{articles_lus}|sizeof||number_format{0,""," "}}
@@ -257,22 +271,22 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 			#SET{stat_court,#GET{stat}}
 		]
 		<li>
-			<div>
+			<div class="stats_contenu" style="padding-right:20px;">
 				<div class="stats_valeur" title="[(#GET{stat})] articles lus">[(#GET{stat_court})]</div>
 				<p><strong>articles lu[(#GET{stat}|>{1}|?{s})]</strong></p>
 				<B_articles>
 				#ANCRE_PAGINATION
-				<ul>
+				<ul class="valeur">
 					<BOUCLE_articles(DATA){source table,#GET{articles_lus}}{!par visites}{pagination 50}>
 					<li>
-					<small>[(#VISITES)] personnes</small>
+					<small><a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]">[(#VISITES)] visites</a></small>
 					<BOUCLE_article(ARTICLES){id_article=#CLE|replace{^a}}>
-						 - <a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]">#TITRE</a>
+						 - <a href="[(#URL_ARTICLE)]">#TITRE</a>
 					</BOUCLE_article>
 					</li>
 					</BOUCLE_articles>
 				</ul>
-				<p>#PAGINATION</p>
+				<p style="margin:10px">#PAGINATION</p>
 				</B_articles>
 			</div>
 		</li>
@@ -292,11 +306,11 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 			[(#GET{milliers}|non)
 				#SET{stat_court,#GET{stat}}
 			]
-			<div style="padding-left:40px">
+			<div class="stats_contenu">
 				<div class="stats_valeur" title="[(#GET{stat})] visites">[(#GET{stat_court})]</div>
-				<p><strong>visite[(#GET{stat}|>{1}|?{s})] par [(#GRAND_TOTAL|number_format{0," "," "})] domaine[(#GRAND_TOTAL|>{1}|?{s})] affluent[(#GRAND_TOTAL|>{0}|?{s})]</strong></p>
+				<p style="margin-bottom:0;"><strong>visite[(#GET{stat}|>{1}|?{s})]<br><small>par&nbsp;[(#GRAND_TOTAL|number_format{0," "," "})]&nbsp;domaine[(#GRAND_TOTAL|>{1}|?{s})] affluent[(#GRAND_TOTAL|>{0}|?{s})]</small></strong></p>
 				#ANCRE_PAGINATION
-				<ul style="margin-top:10px">
+				<ul class="valeur">
 					<BOUCLE_affluents(DATA){source table,#GET{sites_affluents}}{!par visites}{pagination 10}>
 					<li>
 						<h3>[(#CLE|ucfirst)] <small>([(#VISITES) visite[(#VISITES|>{1}|?{s})]])</small></h3>
@@ -311,12 +325,11 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 					</li>
 					</BOUCLE_affluents>
 				</ul>
-				<p>#PAGINATION</p>
+				<p style="margin:10px">#PAGINATION</p>
 			</div>
 		</li>
 		</B_affluents>
 	</ul>
 	
 </div>
-<p style="text-align:center">...</p>
-<hr>
+<p style="text-align:center;clear:both;">...</p>

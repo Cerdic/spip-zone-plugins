@@ -12,4 +12,5 @@
 
 	<auteur>BoOz</auteur>
 	<pipeline nom="header_prive" inclure="stats_data-pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="stats_data-pipelines.php" />
 </paquet>
