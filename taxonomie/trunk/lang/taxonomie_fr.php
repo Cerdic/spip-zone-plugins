@@ -41,8 +41,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'filtre_regnes_tout' => 'Tous les règnes',
 
 	// I
-	'info_boite_taxonomie_gestion' => 'Cette page permet aux webmestres de consulter, charger, mettre à jour ou vider les règnes animal, végétal et fongique gérés par le plugin.',
-	'info_boite_taxonomie_navigation' => 'Cette page permet aux utilisateurs de consulter la liste des taxons chargés en base de données et de naviguer de taxon en taxon.',
+	'info_boite_taxonomie_configuration' => 'Cette page permet de configurer les paramètres de base du plugin comme la liste des langues utilisables pour nommer ou décrire les taxons.',
+	'info_boite_taxonomie_gestion' => 'Cette page permet de consulter, charger, mettre à jour ou vider les taxons du règne au genre des règnes animal, végétal et fongique.',
+	'info_boite_taxonomie_navigation' => 'Cette page permet aux utilisateurs de consulter la liste des taxons de règne au genre chargés en base de données et de naviguer de taxon en taxon.',
 	'info_descriptif_existe' => 'non vide',
 	'info_etape' => 'Etape @etape@ / @etapes@',
 	'info_indicateur_hybride' => 'Ce taxon est un hydribe',
