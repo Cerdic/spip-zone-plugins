@@ -1,0 +1,20 @@
+[(#REM)
+
+	Sélection d'un role à attribuer à un document
+
+]
+<div class="selecteur-role">
+
+	[(#REM) Plusieurs roles : select ]
+	<B_select_roles>
+	<label for="role"><:roles_documents:champ_role_logo_label:>&nbsp;:</label>
+	#SET{readonly, #TOTAL_BOUCLE|=={1}|?{readonly}}
+	<select name="role" id="role" class="select"[ readonly="(#GET{readonly})"]>
+		<BOUCLE_select_roles(DATA){source table, #ENV{roles}}>
+		#SET{selected, #VALEUR|=={#ENV{role}}|?{selected}}
+		<option value="#VALEUR"[ selected="(#GET{selected})"]>[(#VALEUR|role{document})]</option>
+		</BOUCLE_select_roles>
+	</select>
+	</B_select_roles>
+
+</div>

@@ -214,3 +214,163 @@ function roles_documents_quete_logo_objet($flux) {
 	}
 	return $flux;
 }
+
+
+/**
+ * Empêcher les logos de sortir dans les boucles DOCUMENTS standards.
+ *
+ * C'est nécessaire pour la rétro-compatibilité avec les squelettes existants.
+ * Pour voir les logos dans les boucles DOCUMENTS, il faut utiliser
+ * explicitement le critère {tout} ou {role=logo}
+ *
+ * @pipeline pre_boucle
+ * @param  array $boucle Données du pipeline
+ * @return array       Données du pipeline
+ */
+function roles_documents_pre_boucle($boucle) {
+
+	// Boucle DOCUMENTS
+	if ($boucle->type_requete === 'documents') {
+
+		// Vérifier la présence du critère {role}
+		// [FIXME] vérifier sa valeur (=logo)
+		$utilise_critere_logo = false;
+		foreach ($boucle->criteres as $critere) {
+			if ($critere->type === 'critere') {
+				if (($critere->param[0][0]->texte === 'role') or
+					($critere->op === 'role')) {
+					$utilise_critere_logo = true;
+				}
+			}
+		}
+
+		// Gros hack : on évite le traitement pour certains squelettes,
+		// afin  d'éviter de les surcharger
+		$bypass = false;
+		$squelettes_bypass = array(
+			array(
+				'sourcefile' => 'document_desc.html',
+				'id_boucle'  => '_docslies',
+			)
+		);
+		foreach($squelettes_bypass as $squelette) {
+			if (substr($boucle->descr['sourcefile'], -strlen($squelette['sourcefile'])) == $squelette['sourcefile']
+				and $boucle->id_boucle == $squelette['id_boucle']
+			) {
+				$bypass = true;
+			}
+		}
+
+		// Go go go
+		if (!$utilise_critere_logo
+			and $boucle->modificateur['tout'] == false
+			and !$bypass
+		) {
+			$table_liens = 'spip_documents_liens';
+			$abbrev_table_lien = array_search($table_liens, $boucle->from);
+
+			if ($abbrev_table_lien) {
+				$boucle->where[] = array(
+					"'!='",
+					"'SUBSTR($abbrev_table_lien.role, 1, 4)'",
+					"'\'logo\''"
+				);
+			}
+		}
+	}
+
+	return $boucle;
+}
+
+
+/**
+ * Modifier le tableau retourné par la fonction charger d'un formulaire
+ *
+ * Ajout du champ 'role' sur le formulaire d'ajout de document
+ *
+ * @pipeline formulaire_charger
+ *
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function roles_documents_formulaire_charger($flux) {
+
+	// Formulaire d'ajout de document
+	if ($flux['args']['form'] == 'joindre_document') {
+		$flux['data']['role'] = '';
+	}
+
+	return $flux;
+}
+
+
+/**
+ * Complèter le tableau de réponse ou faire des traitements supplémentaires pour un formulaire
+ *
+ * Qualifier le lien crée avec le rôle choisi
+ *
+ * @pipeline formulaire_traiter
+ *
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function roles_documents_formulaire_traiter($flux) {
+
+	// Formulaire d'ajout de document
+	if ($flux['args']['form'] == 'joindre_document') {
+		// TODO
+	}
+
+	return $flux;
+}
+
+
+
+/**
+ * Modifier le résultat du calcul d’un squelette donné.
+ *
+ * Ajout du sélecteur de rôle sur un inclure du formulaire d'ajout de document.
+ *
+ * @pipeline recuperer_fond
+ *
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function roles_documents_recuperer_fond($flux) {
+
+	// Ajout de document
+	if ($flux['args']['fond'] == 'formulaires/inc-upload_document'
+		and !empty($flux['args']['contexte']['objet'])
+		and !empty($flux['args']['contexte']['id_objet'])
+	) {
+
+		// Est-ce qu'il s'agit d'un ajout de logo ?
+		$logo = !empty($flux['args']['contexte']['editer_logo']);
+
+		// Retrouver les rôles restant à associer
+		$objet = $flux['args']['contexte']['objet'];
+		$id_objet = $flux['args']['contexte']['id_objet'];
+		//
+		$roles_possibles = roles_presents('document', $objet); // Les rôles possibles pour cet objet
+		$roles_possibles = isset($roles_possibles['roles']['choix']) ? $roles_possibles['roles']['choix'] : array();
+		$roles_possibles_logos = filtrer_roles_logos($roles_possibles, $logo); // Les rôles de logos possibles pour cet objet
+		$roles_presents_objet = roles_presents_sur_document($objet, $id_objet); // Les rôles attribués pour cet objet
+		$roles_presents_objet_logos = filtrer_roles_logos($roles_presents_objet, $logo);
+		// Les rôles restants
+		if ($logo) {
+			$roles_restants = array_diff($roles_possibles_logos, $roles_presents_objet_logos);
+		} else {
+			$roles_restants = $roles_possibles_logos;
+		}
+		//
+		$contexte = array(
+			'role' => $flux['args']['contexte']['role'],
+			'roles' => $roles_restants,
+		);
+
+		$selecteur_roles = recuperer_fond('formulaires/inc-selecteur_role', $contexte);
+		$flux['data']['texte'] = $selecteur_roles . $flux['data']['texte'];
+	}
+
+	return $flux;
+}
