@@ -131,7 +131,7 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 	#SET{demain,#VAL{Y-m-d}|date{#VAL{+1 day}|strtotime{#MAJ|strtotime}}}
 	
 	[(#ENV{id_article}|oui)
-		[(#SET{req,select * from spip_visites_articles where date=[(#DATE|affdate{Y-m-d}|_q)] and id_article=[(#ENV{id_article})] order by visites desc})]
+		[(#SET{req,select * from spip_visites_articles where date=[(#GET{date}|affdate{Y-m-d}|_q)] and id_article=[(#ENV{id_article})] order by visites desc})]
 		[(#SET{req_affluents,select * from spip_referers_articles where maj > [(#MAJ|affdate{Y-m-d}|_q)] and maj < [(#GET{demain}|_q)] and id_article=[(#ENV{id_article})]})]
 	]
 	
@@ -249,6 +249,7 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 		#SET{stat,#GET{visites}|number_format{0,""," "}}
 		#SET{milliers,#GET{stat}|match{(\d+ )(\d)\d\d,u,1}}
 		#SET{centaines,#GET{stat}|match{(\d+) (\d)\d\d,u,2}}
+		
 		[(#GET{milliers}|oui)
 			#SET{stat_court,#GET{milliers}|trim|concat{","}|concat{#GET{centaines}&nbsp;K}|replace{",0"}}
 		]
@@ -265,12 +266,15 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 		#SET{stat,#GET{articles_lus}|sizeof||number_format{0,""," "}}
 		#SET{milliers,#GET{stat}|match{(\d+ )(\d)\d\d,u,1}}
 		#SET{centaines,#GET{stat}|match{(\d+) (\d)\d\d,u,2}}
+		
 		[(#GET{milliers}|oui)
 			#SET{stat_court,#GET{milliers}|trim|concat{","}|concat{#GET{centaines}&nbsp;K}|replace{",0"}}
 		]
+		
 		[(#GET{milliers}|non)
 			#SET{stat_court,#GET{stat}}
 		]
+		
 		<li>
 			<div class="stats_contenu" style="padding-right:20px;">
 				<div class="stats_valeur" title="[(#GET{stat})] articles lus">[(#GET{stat_court})]</div>
@@ -281,7 +285,7 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 					<BOUCLE_articles(DATA){source table,#GET{articles_lus}}{!par visites}{pagination 50}>
 					<li>
 					<BOUCLE_article(ARTICLES){id_article=#CLE|replace{^a}}>
-					<small><a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]">[(#VISITES)] visites</a></small>
+					<small><a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]">[(#_articles:VISITES)] visites</a></small>
 						 - <a href="[(#URL_ARTICLE)]">#TITRE</a>
 					</BOUCLE_article>
 					</li>
