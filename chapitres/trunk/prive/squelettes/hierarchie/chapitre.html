@@ -1,0 +1,33 @@
+[(#REM) On commence par chercher l'objet conteneur ]
+<BOUCLE_chapitre (CHAPITRES) {id_chapitre=#ENV{id_chapitre, #ENV{id_parent}}}{tout}>
+#SET{objet, #OBJET}
+#SET{id_objet, #ID_OBJET}
+</BOUCLE_chapitre>
+#SET{objet, #ENV{objet}}
+#SET{id_objet, #ENV{id_objet}}
+<//B_chapitre>
+
+[(#REM) S'il y a un objet conteneur]
+[(#GET{objet}|et{#GET{id_objet}}|oui)
+	#SET{url_parent, #GET{id_objet}|generer_url_entite{#GET{objet}}}
+	#SET{lien_parent, #VAL{'<a href="'}|concat{#GET{url_parent}, '">'}}
+	[(#GET{objet}|trouver_fond{prive/squelettes/hierarchie/}|oui)
+		[(#GET{id_objet}|setenv{#GET{objet}|id_table_objet})]
+		[(#INCLURE{fond=prive/squelettes/hierarchie/#GET{objet}, env}|replace{</strong>, </a>, is}|replace{<strong\[^>\]*>, #GET{lien_parent}, i})]
+	]
+	[(#GET{objet}|trouver_fond{prive/squelettes/hierarchie/}|non)
+		#SET{id_parent,#GET{objet}|=={rubrique}|?{#ENV{id_parent,#INFO_ID_PARENT{#GET{objet},#GET{id_objet}}},#ENV{id_rubrique,#INFO_ID_RUBRIQUE{#GET{objet},#GET{id_objet}}}}}
+		[(#GET{id_parent}|ou{#GET{objet}|=={rubrique}}|oui)
+			[(#INCLURE{fond=prive/echafaudage/hierarchie/objet, objet=#GET{objet}, id_objet=#GET{id_objet}, id_parent=#GET{id_parent}}|replace{</strong>, </a>, is}|replace{<strong\[^>\]*>, #GET{lien_parent}, i})]
+		]
+		[(#GET{id_parent}|ou{#GET{objet}|=={rubrique}}|non)
+			[(#INCLURE{fond=prive/echafaudage/hierarchie/objet.sans_rubrique, objet=#GET{objet}, id_objet=#GET{id_objet}}|replace{</strong>, </a>, is}|replace{<strong\[^>\]*>, #GET{lien_parent}, i})]
+		]
+	]
+]
+
+[(#REM) Ensuite on ajoute la hiérarchie du chapitre en cours ]
+<BOUCLE_ariane(HIERARCHIE_CHAPITRES){statut==.*}{id_chapitre=#ENV{id_chapitre, #ENV{id_parent}}}> &gt;
+[(#ID_CHAPITRE|generer_url_entite{chapitre}|lien_ou_expose{#TITRE|couper{80}|sinon{<:ecrire:info_sans_titre:>},#ID_CHAPITRE|=={#ENV{id_chapitre}}})]
+</BOUCLE_ariane>
+[ &gt; <strong class="on">(#INFO_TITRE{chapitre, #ENV{id_chapitre, #ENV{id_parent}}}|couper{80}|sinon{<:ecrire:info_sans_titre:>})</strong>]

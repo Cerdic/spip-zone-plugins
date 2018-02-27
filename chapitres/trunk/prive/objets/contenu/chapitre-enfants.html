@@ -1,0 +1,17 @@
+[(#OBJET|=={chapitre}|non)
+	#SET{objet, #OBJET}
+	#SET{id_objet, #ID_OBJET}
+	#SET{id_parent, ''}
+]
+[(#OBJET|=={chapitre}|oui)
+	#SET{objet, ''}
+	#SET{id_objet, ''}
+	#SET{id_parent, #ID_OBJET}
+]
+<INCLURE{fond=prive/objets/liste/chapitres,sinon=<:chapitre:info_aucun_chapitre:>,objet=#GET{objet},id_objet=#GET{id_objet},id_parent=#GET{id_parent},id_chapitre="",ajax,env} />
+
+[(#AUTORISER{creerchapitredans, #GET{objet,chapitre}, #GET{id_objet, #GET{id_parent}}}|oui)
+	#SET{url_parent, #GET{id_objet}|generer_url_entite{#GET{objet}}|sinon{#GET{id_parent}|generer_url_entite{chapitre}}}
+	[(#URL_ECRIRE{chapitre_edit, new=oui}|parametre_url{objet, #GET{objet}}|parametre_url{id_objet, #GET{id_objet}}|parametre_url{id_parent, #GET{id_parent}}|parametre_url{redirect, #GET{url_parent}}|icone_verticale{<:chapitre:icone_creer_chapitre:>,chapitre,new,right})]
+]
+<div class="nettoyeur"></div>

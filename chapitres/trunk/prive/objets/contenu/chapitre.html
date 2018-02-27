@@ -1,0 +1,17 @@
+<BOUCLE_chapitre(CHAPITRES){id_chapitre}{statut?}>
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:chapitre:champ_titre_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{titre} titre">(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_chapo[ (#CHAPO*|strlen|?{'',vide})]">
+	<label class="label"><:chapitre:champ_chapo_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{500,0})</span>
+</div>]
+
+[<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+	<label class="label"><:chapitre:champ_texte_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{texte} texte">(#TEXTE|image_reduire{500,0})</span>
+</div>]
+
+</BOUCLE_chapitre>

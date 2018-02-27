@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_chapitres_selectionnes>
+	<ul>
+	<BOUCLE_chapitres_selectionnes(CHAPITRES){id_chapitre IN #GET*{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+		<li class="choix">#TITRE (#ID_CHAPITRE)</li>
+	</BOUCLE_chapitres_selectionnes>
+	</ul>
+	</B_chapitres_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_chapitres_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_chapitre_selectionne(CHAPITRES){id_chapitre=#ENV{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+	  	<p>#TITRE (#ID_CHAPITRE)</p>
+	</BOUCLE_chapitre_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_chapitre_selectionne>
+<//B_test_multiple>
