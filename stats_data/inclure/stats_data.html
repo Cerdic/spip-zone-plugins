@@ -42,10 +42,11 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 
 #SET{articles_lus,#ARRAY}
 #SET{sites_affluents,#ARRAY}
+#SET{referers_articles,#ARRAY}
 
 #SET{reg_domaine,"^[a-zA-Z_-]+://([a-zA-Z]+\.)?([a-zA-Z]+\.)?((?!com|co)[a-zA-Z0-9-_]+)\.((?:com|co)\.)?([a-zA-Z]{2,3})"}
-	
-[(#REM) Actuellement : Parcourir les fichiers dans tmp/visites et récuperer les données dans deux tableaux (articles lus et sites affluents) ]
+
+[(#REM) Si la préiode n'est pas précisée on parcourir les fichiers de visites en cours dans tmp/visites et on enregistre les données dans des tableaux (articles lus, sites affluents, et nombre de visites sur les articles) ]
 
 <BOUCLE_visites(DATA){source ls,#CHEMIN{tmp/visites}/*}{si #ENV{jour}|non}><BOUCLE_visite(DATA){source file,#FILE}><BOUCLE_pages_vues(DATA){source table,#VALEUR|unserialize}>
 
@@ -57,22 +58,16 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 	Récupérer les articles lus ordonnés par nombre de visites
 ]
 [(#GET{type}|=={article}|oui)
+	#SET{valeurs_actuelles,#GET{articles_lus}|table_valeur{a#GET{id}}|sinon{#ARRAY}}
+	#SET{nb_visites,#GET{articles_lus}|table_valeur{a#GET{id}}|table_valeur{visites}|plus{1}}
+	#SET{valeurs_actuelles,#GET{valeurs_actuelles}|array_merge{#ARRAY{visites,#GET{nb_visites}}}}
+	#SET{ajout,#ARRAY{a#GET{id},#GET{valeurs_actuelles}}}
 	
 	[(#ENV{id_article}|non)
-		#SET{valeurs_actuelles,#GET{articles_lus}|table_valeur{a#GET{id}}|sinon{#ARRAY}}
-		#SET{nb_visites,#GET{articles_lus}|table_valeur{a#GET{id}}|table_valeur{visites}|plus{1}}
-		#SET{valeurs_actuelles,#GET{valeurs_actuelles}|array_merge{#ARRAY{visites,#GET{nb_visites}}}}
-		
-		#SET{ajout,#ARRAY{a#GET{id},#GET{valeurs_actuelles}}}
 		#SET{articles_lus,#GET{articles_lus}|array_merge{#GET{ajout}}}
 	]
 	[(#ENV{id_article}|oui)
 		[(#ENV{id_article}|=={#GET{id}}|oui)
-			#SET{valeurs_actuelles,#GET{articles_lus}|table_valeur{a#GET{id}}|sinon{#ARRAY}}
-			#SET{nb_visites,#GET{articles_lus}|table_valeur{a#GET{id}}|table_valeur{visites}|plus{1}}
-			#SET{valeurs_actuelles,#GET{valeurs_actuelles}|array_merge{#ARRAY{visites,#GET{nb_visites}}}}
-			
-			#SET{ajout,#ARRAY{a#GET{id},#GET{valeurs_actuelles}}}
 			#SET{articles_lus,#GET{articles_lus}|array_merge{#GET{ajout}}}
 		]
 	]
@@ -83,23 +78,15 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 ]
 [(#GET{referrer}|oui)
 	#SET{domaine,#GET{referrer}|match{#GET{reg_domaine},"i",3}}
+	#SET{valeurs_actuelles,#GET{sites_affluents}|table_valeur{#GET{domaine}}|sinon{#ARRAY}}
+	#SET{nb_visites,#GET{sites_affluents}|table_valeur{#GET{domaine}}|table_valeur{visites}|plus{1}}
+	#SET{valeurs_actuelles,#GET{valeurs_actuelles}|array_merge{#ARRAY{visites,#GET{nb_visites}}}}
+	#SET{ajout,#ARRAY{#GET{domaine},#GET{valeurs_actuelles}|push{#GET{referrer}}}}
 	
 	[(#ENV{id_article}|non)
-		#SET{valeurs_actuelles,#GET{sites_affluents}|table_valeur{#GET{domaine}}|sinon{#ARRAY}}
-		
-		#SET{nb_visites,#GET{sites_affluents}|table_valeur{#GET{domaine}}|table_valeur{visites}|plus{1}}
-		#SET{valeurs_actuelles,#GET{valeurs_actuelles}|array_merge{#ARRAY{visites,#GET{nb_visites}}}}
-	
-		#SET{ajout,#ARRAY{#GET{domaine},#GET{valeurs_actuelles}|push{#GET{referrer}}}}
 		#SET{sites_affluents,#GET{sites_affluents}|array_merge{#GET{ajout}}}
 	]
 	[(#ENV{id_article}|=={#GET{id}}|oui)
-		#SET{valeurs_actuelles,#GET{sites_affluents}|table_valeur{#GET{domaine}}|sinon{#ARRAY}}
-		
-		#SET{nb_visites,#GET{sites_affluents}|table_valeur{#GET{domaine}}|table_valeur{visites}|plus{1}}
-		#SET{valeurs_actuelles,#GET{valeurs_actuelles}|array_merge{#ARRAY{visites,#GET{nb_visites}}}}
-		
-		#SET{ajout,#ARRAY{#GET{domaine},#GET{valeurs_actuelles}|push{#GET{referrer}}}}
 		#SET{sites_affluents,#GET{sites_affluents}|array_merge{#GET{ajout}}}
 	]
 ]
@@ -111,7 +98,7 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 		Cas alternatif avec période précisée : on regarde non pas dans les fichiers de session mais dans la BDD.
 		A refaire avec la boucle date stats_referers_to_array du plugin statistiques ?
 	]
-
+	
 	[(#REM) Aujourd'hui / hier = boucle data sql pour obtenir les infos à la date demandée. ]
 	
 	#SET{reqd,#VAL{"select * from spip_visites where date='LADATE' order by maj desc limit 0,1"}|replace{LADATE,#GET{date}}}
@@ -128,13 +115,12 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 	
 	[(#SET{req_affluents,[(#GET{select})] from spip_referers where [(#GET{periode})] > 0 order by [(#GET{periode})] desc })]
 	
-	#SET{demain,#VAL{Y-m-d}|date{#VAL{+1 day}|strtotime{#MAJ|strtotime}}}
-	
+	[(#REM) si article dans le contexte on précise ]
+	#SET{lendemain,#VAL{Y-m-d}|date{#VAL{+1 day}|strtotime{#GET{date}|strtotime}}}
 	[(#ENV{id_article}|oui)
 		[(#SET{req,select * from spip_visites_articles where date=[(#GET{date}|affdate{Y-m-d}|_q)] and id_article=[(#ENV{id_article})] order by visites desc})]
-		[(#SET{req_affluents,select * from spip_referers_articles where maj > [(#MAJ|affdate{Y-m-d}|_q)] and maj < [(#GET{demain}|_q)] and id_article=[(#ENV{id_article})]})]
+		[(#SET{req_affluents,select * from spip_referers_articles where maj > [(#GET{date}|affdate{Y-m-d}|_q)] and maj < [(#GET{lendemain}|_q)] and id_article=[(#ENV{id_article})]})]
 	]
-	
 	</BOUCLE_visites_jour>
 	
 	[(#REM)
@@ -158,17 +144,21 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 	
 	#SET{domaines,#ARRAY}
 	#SET{valeurs_actuelles,#ARRAY}
+	[(#REM) Referers qui ont envoyé des visites dans la période ]
 	<BOUCLE_affluents_jour_(DATA){source sql,#GET{req_affluents}}>
-		#SET{domaine,#REFERER|match{#GET{reg_domaine},"i",3}}
 		
+		#SET{domaine,#REFERER|match{#GET{reg_domaine},"i",3}}
 		#SET{valeurs_actuelles,#GET{sites_affluents}|table_valeur{#GET{domaine}}|sinon{#ARRAY}}
 		#SET{nb_visites,#GET{sites_affluents}|table_valeur{#GET{domaine}}|table_valeur{visites}|plus{#VISITES}}
 		#SET{valeurs_actuelles,#GET{valeurs_actuelles}|array_merge{#ARRAY{visites,#GET{nb_visites}}}}
 		
 		#SET{ajout,#ARRAY{#GET{domaine},#GET{valeurs_actuelles}|push{#REFERER}}}
 		#SET{sites_affluents,#GET{sites_affluents}|array_merge{#GET{ajout}}}
+		
+		[(#REM) Quelles visites sur les articles depuis ces referers sur la période (jour/veille) ?
+			Pour le savoir il faudrait ajouter visites_jours et  visites_veille sur spip_referes_articles.
+		]
 	</BOUCLE_affluents_jour_>
-	
 <//B_visites>
 
 [(#ENV{id_article}|oui) #SET{visites,#GET{articles_lus}|table_valeur{a#ENV{id_article}}|table_valeur{visites}} ]
@@ -202,10 +192,6 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 	font-weight:bold;
 	line-height: 1em;
 }
-.stats_visites #data_stats > li{
-	height:250px;
-	overflow:auto;
-}
 .onglets_simple ul li{
 	display:inline;
 }
@@ -213,6 +199,9 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 	max-height:500px;
 	overflow:auto;
 	text-align:left;
+}
+.stats_visites .valeur{
+	max-height:250px;
 }
 .stats_contenu p{
 	margin:0 0 20px 0;
@@ -240,7 +229,7 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 	
 	[(#REM) Afficher la date ]
 	
-	[<h2><a href="[(#SELF|parametre_url{id_article,''})]">(#GET{date}|affdate)</a><small title="Dernière mise à jour le [(#GET{maj}|affdate)] [ (#GET{maj}|affdate{H\hi s})s]"> — [ (#GET{maj}|affdate{H\hi})</small>]</h2>]
+	[<h2><a href="[(#SELF|parametre_url{id_article,''})]" class="ajax">(#GET{date}|affdate)</a><small title="Dernière mise à jour le [(#GET{maj}|affdate)] [ (#GET{maj}|affdate{H\hi s})s]"> — [ (#GET{maj}|affdate{H\hi})</small>]</h2>]
 	
 	[(#REM) Afficher les données du tableau ]
 	
@@ -276,17 +265,26 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 		]
 		
 		<li>
+			<BOUCLE_compte_articles(DATA){source table,#GET{articles_lus}} /> #SET{nb_articles_lus,#TOTAL_BOUCLE}<//B_compte_articles>
 			<div class="stats_contenu" style="padding-right:20px;">
+				[(#GET{nb_articles_lus}|>{1}|oui)
 				<div class="stats_valeur" title="[(#GET{stat})] articles lus">[(#GET{stat_court})]</div>
-				<p><strong>articles lu[(#GET{stat}|>{1}|?{s})]</strong></p>
+				<p style="margin-bottom:40px;"><strong>articles lu[(#GET{stat}|>{1}|?{s})]</strong></p>
+				]
 				<B_articles>
 				#ANCRE_PAGINATION
 				<ul class="valeur">
 					<BOUCLE_articles(DATA){source table,#GET{articles_lus}}{!par visites}{pagination 50}>
 					<li>
 					<BOUCLE_article(ARTICLES){id_article=#CLE|replace{^a}}>
-					<small><a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]">[(#_articles:VISITES)] visites</a></small>
-						 - <a href="[(#URL_ARTICLE)]">#TITRE</a>
+						[(#GET{nb_articles_lus}|>{1}|oui)
+						<small>
+							[(#ENV{jour}|non)<a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]" class="ajax">]
+								[(#_articles:VISITES|number_format{0,"","&nbsp;"})] visites
+							[(#ENV{jour}|non)</a>]
+						</small> - 
+						]
+						<a href="[(#URL_ARTICLE)]">#TITRE</a>
 					</BOUCLE_article>
 					</li>
 					</BOUCLE_articles>
@@ -300,9 +298,8 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 			#SET{total,#GET{total}|plus{#VISITES}}
 		</BOUCLE_total_visites_domaine>
 		
-		<B_affluents>
 		<li>
-			#SET{stat,#GET{total}|number_format{0,""," "}}
+			#SET{stat,#GET{total}|number_format{0,"","&nbsp;"}}
 			#SET{milliers,#GET{stat}|match{(\d+ )(\d)\d\d,u,1}}
 			#SET{centaines,#GET{stat}|match{(\d+) (\d)\d\d,u,2}}
 			[(#GET{milliers}|oui)
@@ -311,13 +308,14 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 			[(#GET{milliers}|non)
 				#SET{stat_court,#GET{stat}}
 			]
+			<B_affluents>
 			<div class="stats_contenu">
 				<div class="stats_valeur" title="[(#GET{stat})] visites">[(#GET{stat_court})]</div>
-				<p style="margin-bottom:0;"><strong>visite[(#GET{stat}|>{1}|?{s})]<br><small>par&nbsp;[(#GRAND_TOTAL|number_format{0," "," "})]&nbsp;domaine[(#GRAND_TOTAL|>{1}|?{s})] affluent[(#GRAND_TOTAL|>{0}|?{s})]</small></strong></p>
+				<p><strong>visite[(#GET{stat}|>{1}|?{s})]<br><small>par&nbsp;[(#GRAND_TOTAL|number_format{0,"","&nbsp;"})]&nbsp;domaine[(#GRAND_TOTAL|>{1}|?{s})] affluent[(#GRAND_TOTAL|>{0}|?{s})]</small></strong></p>
 				#ANCRE_PAGINATION
 				<ul class="valeur">
-					<BOUCLE_affluents(DATA){source table,#GET{sites_affluents}}{!par visites}{pagination 10}>
-					<li>
+					<BOUCLE_affluents(DATA){source table,#GET{sites_affluents}}{!par visites}{pagination 10}{si #ENV{jour}|et{#ENV{id_article}}|non}>
+					<li style="width:80%">
 						<h3>[(#CLE|ucfirst)] <small>([(#VISITES) visite[(#VISITES|>{1}|?{s})]])</small></h3>
 						
 						<B_referers_>
@@ -332,8 +330,8 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 				</ul>
 				<p style="margin:10px">#PAGINATION</p>
 			</div>
+			</B_affluents>
 		</li>
-		</B_affluents>
 	</ul>
 	
 </div>
