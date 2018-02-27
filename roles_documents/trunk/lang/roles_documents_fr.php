@@ -20,6 +20,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'role_logo' => 'Logo',
 	'role_logo_survol' => 'Logo de survol',
 	'role_document' => 'Document',
+	'mode_on' => 'Logo',
+	'mode_off' => 'Logo de survol',
 
 	// T
 	'titre_ajouter_logo' => 'Ajouter un logo',

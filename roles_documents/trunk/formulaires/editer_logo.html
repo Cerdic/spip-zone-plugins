@@ -12,17 +12,30 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
 
-	[(#REM) Aperçu des logos présents ]
+	[(#REM)
+		Aperçu des logos présents
+		Si on trouve un id_document (clé 5), c'est un doc avec rôles,
+		sinon c'est un vieux logo
+	]
 	<B_logos>
 	<div class="apercu liste_items documents">
 		<BOUCLE_logos(DATA){source table, #ENV{logos}}>
-		<legend><:roles_documents:champ_role_logo_label:>&nbsp;: [(#CLE|role{document})]</legend>
-		<INCLURE{
-			fond=modeles/document_desc,
-			id_document=#VALEUR,
-			objet,
-			id_objet,
-		}/>
+		#SET{type, #VALEUR{5}|intval|?{document,logo}}
+		[(#GET{type}|=={document}|oui)
+			<legend><:roles_documents:champ_role_logo_label:>&nbsp;: [(#VALEUR{6}|role{document})]</legend>
+			<INCLURE{
+				fond=modeles/document_desc,
+				id_document=#VALEUR{5},
+				objet,
+				id_objet,
+			}/>
+		][(#GET{type}|=={logo}|oui)
+			<legend>[(#VAL{roles_documents:mode_#VALEUR{6}}|_T)]</legend>
+			<INCLURE{
+				fond=modeles/logo_desc,
+				logo=#VALEUR,
+			}/>
+		]
 		</BOUCLE_logos>
 	</div>
 	</B_logos>
@@ -36,6 +49,7 @@
 
 		<div class="editer-groupe">
 			<div class="editer editer_logo joindre_document">
+				<legend><:roles_documents:titre_ajouter_logo:></legend>
 				<INCLURE{
 					fond=formulaires/inc-upload_document,
 					mediatheque=#ENV{objet}|et{#ENV{id_objet}}|et{#ENV{proposer_media}},

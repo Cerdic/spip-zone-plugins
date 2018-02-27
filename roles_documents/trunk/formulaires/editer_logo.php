@@ -42,9 +42,10 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 
 	// Pas dans une boucle ? formulaire pour le logo du site
 	if (!$objet) {
-		$objet = 'site_spip';
+		$objet = 'site';
 	}
 	$objet = objet_type($objet);
+	$id_table_objet = id_table_objet($objet);
 
 	// Options
 	if (!is_array($options)) {
@@ -80,52 +81,46 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 		$options['titre'] = $img . $libelle;
 	}
 
-	// Retrouver les rôles et les documents associés
-	$roles = roles_presents('document', $objet); // Les rôles pour cet objet
-	$roles_possibles = isset($roles['roles']['choix']) ? $roles['roles']['choix'] : array();
-	$roles_possibles = filtrer_roles_logos($roles_possibles); // Les rôles de logos possibles pour cet objet
-	$roles_attribues = roles_presents_sur_document($objet, $id_objet, true); // Les rôles de logos attribués pour cet objet
-	$logos = array(); // Les documents logos utilisés avec leur rôle
+	// Chercher les logos
+	$logos = array();
 	$config_logos = array(
 		'logo'        => lire_config('activer_logos'),
+		'on'          => lire_config('activer_logos'),
 		'logo_survol' => lire_config('activer_logos_survol'),
+		'off'         => lire_config('activer_logos_survol'),
 	);
-	foreach ($roles_attribues as $role) {
+	$chercher_logo = charger_fonction('chercher_logo', 'inc');
+
+	// 1) Cherchons d'abord les logos historiques
+	$modes = array('on', 'off');
+	foreach($modes as $mode) {
+		if ($config_logos[$mode] == 'oui'
+			and $logo = $chercher_logo($id_objet, $id_table_objet, $mode)
+		) {
+			$logos[] = $logo;
+		}
+	}
+
+	// 1) Cherchons ensuite les documents avec des rôles de logos
+	$roles = roles_presents('document', $objet); // Tous les rôles pour cet objet
+	$roles_logos_possibles = isset($roles['roles']['choix']) ? $roles['roles']['choix'] : array();
+	$roles_logos_possibles = filtrer_roles_logos($roles_logos_possibles); // Tous les rôles de logos possibles pour cet objet
+	$roles_logos_attribues = roles_presents_sur_document($objet, $id_objet, true); // Les rôles de logos attribués pour cet objet
+	foreach ($roles_logos_attribues as $role) {
 		// Vérifier la config de certains rôles connus
 		if (!in_array($role, array_keys($config_logos))
 			or (
 				in_array($role, array_keys($config_logos))
 				and $config_logos[$role] == 'oui'
 			)
+			and $logo = $chercher_logo($id_objet, $id_table_objet, $role)
 		) {
-			$logos[$role] = sql_getfetsel(
-				'id_document',
-				'spip_documents_liens',
-				array(
-					'objet='    . sql_quote($objet),
-					'id_objet=' . intval($id_objet),
-					'role='     . sql_quote($role),
-				)
-			);
+			$logos[] = $logo;
 		}
 	}
 
-	// Retrouver les vieux logos
-	/*
-	$chercher_logo = charger_fonction('chercher_logo', 'inc');
-	$vieux_logos = array();
-	$_id_objet = id_table_objet($objet);
-	foreach($config_logos as $role => $config) {
-		$etat = ($role == 'logo' ? 'on' : 'off');
-		if ($config == 'oui'
-			and $logo = $chercher_logo($id_objet, $_id_objet, $etat)
-		) {
-			$vieux_logos[$etat] = $logo;
-		}
-	}*/
-
-	// S'il y a moins de documents présents que de rôles possibles, on peut en ajouter
-	$joindre_documents = count($roles_possibles) > count($logos);
+	// S'il y a moins de rôles attribués que de rôles possibles, on peut en ajouter
+	$joindre_documents = count($roles_logos_possibles) > count($roles_logos_attribues);
 
 	// Autorisation
 	if (!isset($options['editable'])) {
@@ -147,7 +142,6 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 		'role'        => '', // le rôle qui sera sélectionné
 		'_options'    => $options,
 		'editer_logo' => true, // Un flag pour identifier le contexte
-		'vieux_logos' => $vieux_logos,
 	);
 
 	// Valeurs du formulaire d'ajout de document
@@ -230,7 +224,7 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
 
 	// Pas dans une boucle ? formulaire pour le logo du site
 	if (!$objet) {
-		$objet = 'site_spip';
+		$objet = 'site';
 	}
 
 	// Redirection

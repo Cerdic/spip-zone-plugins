@@ -45,9 +45,13 @@ function roles_documents_declarer_tables_objets_sql($tables) {
 		'roles_objets' => array(
 			'*' => array(
 				'choix' => $choix,
-				'defaut' => 'document'
+				'defaut' => 'document',
+				'principaux' => array(
+					'logo',
+					'logo_survol'
+				),
 			)
-		)
+		),
 	));
 
 	return $tables;
