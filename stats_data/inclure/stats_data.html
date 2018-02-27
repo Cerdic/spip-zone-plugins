@@ -46,7 +46,7 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 
 #SET{reg_domaine,"^[a-zA-Z_-]+://([a-zA-Z]+\.)?([a-zA-Z]+\.)?((?!com|co)[a-zA-Z0-9-_]+)\.((?:com|co)\.)?([a-zA-Z]{2,3})"}
 
-[(#REM) Si la préiode n'est pas précisée on parcourir les fichiers de visites en cours dans tmp/visites et on enregistre les données dans des tableaux (articles lus, sites affluents, et nombre de visites sur les articles) ]
+[(#REM) Si la préiode n'est pas précisée parcourir les fichiers de visites en cours dans tmp/visites et enregistrer les données dans des tableaux (articles lus, sites affluents, et nombre de visites sur les articles) ]
 
 <BOUCLE_visites(DATA){source ls,#CHEMIN{tmp/visites}/*}{si #ENV{jour}|non}><BOUCLE_visite(DATA){source file,#FILE}><BOUCLE_pages_vues(DATA){source table,#VALEUR|unserialize}>
 
@@ -299,7 +299,7 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 		</BOUCLE_total_visites_domaine>
 		
 		<li>
-			#SET{stat,#GET{total}|number_format{0,"","&nbsp;"}}
+			#SET{stat,#GET{total}|number_format{0,""," "}}
 			#SET{milliers,#GET{stat}|match{(\d+ )(\d)\d\d,u,1}}
 			#SET{centaines,#GET{stat}|match{(\d+) (\d)\d\d,u,2}}
 			[(#GET{milliers}|oui)
