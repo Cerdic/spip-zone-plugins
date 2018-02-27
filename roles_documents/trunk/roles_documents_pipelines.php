@@ -185,6 +185,13 @@ function roles_documents_quete_logo_objet($flux) {
 			$role = $flux['args']['mode'];
 		}
 
+		// Hack : le logo du site à un id négatif
+		if ($flux['args']['objet'] == 'site'
+			and intval($flux['args']['id_objet']) === 0
+		) {
+			$flux['args']['id_objet'] = -1;
+		}
+
 		if ($image = sql_fetsel(
 			'fichier, extension',
 			'spip_documents as d inner join spip_documents_liens as l on d.id_document = l.id_document',

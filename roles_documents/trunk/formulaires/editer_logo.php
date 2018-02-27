@@ -102,6 +102,9 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 	}
 
 	// 1) Cherchons ensuite les documents avec des rôles de logos
+	if ($objet == 'site') {
+		$id_objet = -1; // gros hack
+	}
 	$roles = roles_presents('document', $objet); // Tous les rôles pour cet objet
 	$roles_logos_possibles = isset($roles['roles']['choix']) ? $roles['roles']['choix'] : array();
 	$roles_logos_possibles = filtrer_roles_logos($roles_logos_possibles); // Tous les rôles de logos possibles pour cet objet
@@ -225,6 +228,9 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
 	// Pas dans une boucle ? formulaire pour le logo du site
 	if (!$objet) {
 		$objet = 'site';
+	}
+	if ($objet == 'site') {
+		$id_objet = -1; // gros hack
 	}
 
 	// Redirection
