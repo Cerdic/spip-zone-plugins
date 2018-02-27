@@ -1,9 +1,12 @@
 [(#REM)
 
-	Aperçu d'un logo pour le formulaire de logo
+	Aperçu d'un logo pour le formulaire de logo.
+
+	Surcharge : on se base sur modeles/document_desc.html
 
 	Paramètres :
 	** obligatoire
+	* conseillés
 
 	- logo** : Tableau linéaire d'infos renvoyées par chercher_logo()
 	           0: chemin complet
@@ -12,7 +15,9 @@
 	           3: extension
 	           4: date
 	           5: ''
-	           6: mode
+						 6: mode
+	- objet**
+	- id_objet**
 
 ]
 #SET{largeur, #ENV{logo/0}|largeur}
@@ -71,9 +76,19 @@
 		</div>
 	</div>
 
+	[(#AUTORISER{iconifier,#ENV{objet},#ENV{id_objet}}|oui)
 	<div class="actions">
-		Migrer | supprimer
+		[(#BOUTON_ACTION{
+			<:lien_supprimer:>,
+			#URL_ACTION_AUTEUR{
+				supprimer_logo,
+				#ENV{objet}-#ENV{id_objet}-#ENV{logo/6},
+				#SELF
+			},
+			'ajax supprimer',
+		})]
 	</div>
+	]
 
 	<div class="nettoyeur"></div>
 </div>

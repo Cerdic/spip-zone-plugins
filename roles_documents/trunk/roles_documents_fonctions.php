@@ -73,10 +73,10 @@ function roles_presents_sur_document($objet, $id_objet, $logos = null) {
 
 
 /**
- * Filtrer une liste de rôles de documents pour inclure ou exclure les logos
+ * Filtrer une liste de rôles de documents pour inclure ou exclure les rôles de logos
  *
  * @param array $roles
- *     Tableau associatif [$role => titre]
+ *     Tableau linéaire de rôles
  * @param boolean $logo
  *     true (défaut) :  uniquement les rôles de logos
  *     false (défaut) : uniquement les rôles non logos

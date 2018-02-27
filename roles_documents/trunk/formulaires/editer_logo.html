@@ -32,8 +32,10 @@
 		][(#GET{type}|=={logo}|oui)
 			<legend>[(#VAL{roles_documents:mode_#VALEUR{6}}|_T)]</legend>
 			<INCLURE{
-				fond=modeles/logo_desc,
+				fond=formulaires/inc-apercu-logo,
 				logo=#VALEUR,
+				objet,
+				id_objet,
 			}/>
 		]
 		</BOUCLE_logos>
