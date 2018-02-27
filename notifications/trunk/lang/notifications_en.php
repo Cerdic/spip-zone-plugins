@@ -114,6 +114,7 @@ Restricted administrators get notified when new posts are published in the secto
 	'messagerie_interne' => 'Private messages',
 	'messagerie_interne_signaler' => '<strong>Notify new private messages</strong>: activate this to get redactors notified when they haven’t seen a Private Message had been sent to them. Redactors get notified 20 minutes after the Private Message is sent, in order to avoid spam, when the redactor is connected to the private area.',
 	'moderateur' => '<strong>Moderator</strong>',
+	'moderation_email_protection_antibot' => '<b>Protect email moderation against bots</b> that click on the links in the emails',
 
 	// N
 	'notifications' => 'Notifications',
