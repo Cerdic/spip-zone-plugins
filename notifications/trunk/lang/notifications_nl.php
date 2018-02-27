@@ -111,6 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'messagerie_interne' => 'Intern berichtensysteem',
 	'messagerie_interne_signaler' => '<strong>Nieuwe privé-berichten signaleren</strong>: activeer deze optie zodat de site een notificatie stuurt wanneer een redacteur een nieuw bericht niet heeft gezien. Het systeem wacht 20 minuten alvorens de notificatie naar de redacteur wordt gestuurd, om op deze manier een redacteur die in het privé-gedeelte online is niet met emails te bekogelen.',
 	'moderateur' => '<strong>Moderateur</strong>',
+	'moderation_email_protection_antibot' => '<b>Bescherm moderatie per email tegen bots</b> die op de links in de mails klikken',
 
 	// N
 	'notifications' => 'Notificaties',
