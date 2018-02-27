@@ -19,6 +19,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 /**
  * Cherche le logo d'un contenu
  *
+ * @note
+ * Pour le logo du site, $id_table_objet vaut soit id_site_spip (#FORMULAIRE_LOGO), soit id_syndic (#LOGO_SITE_SPIP)
+ * 
  * @global formats_logos Extensions possibles des logos
  * @uses type_du_logo()
  *
@@ -29,21 +32,26 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Nom de la clé primaire de l'objet
  *     Pour le logo du site : 'site'
  * @param string $role
- *     - Rôle pour les documents : 'logo' | 'logo_survol' | logo_xxx...
+ *     - Rôle pour les documents : 'logo' | 'logo_survol' | 'logo_xxx'...
  *     - Mode de survol pour les logos historiques : 'on' | 'off'
  * @return array
  *     - Liste (chemin complet du fichier, répertoire de logos, nom du logo, extension du logo, date de modification, id_document, role)
- *     - array vide aucun logo trouvé.
+ *     - array vide si aucun logo trouvé.
  */
-function inc_chercher_logo($id, $id_table_objet, $role = 'logo') {
+function inc_chercher_logo($id_objet, $id_table_objet, $role = 'logo') {
 
 	$logo = array();
 	$objet = objet_type($id_table_objet);
 
 	// On commence par chercher les logos historiques
-	// Attention au cas $id = '0' pour LOGO_SITE_SPIP : utiliser intval()
+	// Hack : logo du site
+	if (in_array($id_table_objet, array('id_site_spip','id_syndic'))
+		and !intval($id_objet)
+	) {
+		$objet = 'site';
+	}
 	$type_logo = type_du_logo($id_table_objet);
-	$nom = $type_logo . $role . intval($id);
+	$nom = $type_logo . $role . intval($id_objet);
 	foreach ($GLOBALS['formats_logos'] as $format) {
 		if (@file_exists($d = (_DIR_LOGOS . $nom . '.' . $format))) {
 			$logo = array(
@@ -59,7 +67,20 @@ function inc_chercher_logo($id, $id_table_objet, $role = 'logo') {
 		}
 	}
 
-	// Ensuite cherchons un document avec le rôle demandé
+	// Sinon, cherchons un document avec le rôle demandé
+	// Hack : logo du site
+	if (in_array($id_table_objet, array('id_site_spip','id_syndic'))
+		and !intval($id_objet)
+	) {
+		$objet = 'site_spip';
+		if ($id_table_objet == 'id_syndic') {
+			if ($role == 'on') {
+				$role = 'logo';
+			} elseif ($role == 'off') {
+				$role = 'logo_survol';
+			}
+		}
+	}
 	if (!$logo
 		and $document = sql_allfetsel(
 		'fichier, extension, titre, maj, l.id_document, l.role',
@@ -68,15 +89,16 @@ function inc_chercher_logo($id, $id_table_objet, $role = 'logo') {
 			' ON l.id_document = docs.id_document',
 		array(
 			'objet = ' . sql_quote($objet),
-			'id_objet = ' . intval($id),
+			'id_objet = ' . intval($id_objet),
 			'role = ' . sql_quote($role),
 			'SUBSTR(role, 1, 4) = ' . sql_quote('logo'), // s'assurer qu'il s'agit d'un role de logo
 		)
 	)) {
 		$document = array_shift($document);
-		$dossier = _DIR_PERMANENTS_ACCESSIBLES . substr($document['fichier'], strrpos($document['fichier'], '/'));
+		$chemin = _NOM_PERMANENTS_ACCESSIBLES . $document['fichier'];
+		$dossier = _NOM_PERMANENTS_ACCESSIBLES . substr($document['fichier'], 0, strrpos($document['fichier'], '/'));
 		$logo = array(
-			$document['fichier'],
+			$chemin,
 			$dossier,
 			$document['titre'],
 			$document['extension'],
@@ -85,7 +107,7 @@ function inc_chercher_logo($id, $id_table_objet, $role = 'logo') {
 			$document['role'],
 		);
 	}
-
+	
 	return $logo;
 }
 

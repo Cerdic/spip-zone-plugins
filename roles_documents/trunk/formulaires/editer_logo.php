@@ -6,7 +6,7 @@
  *
  * Ce formulaire ajoute, modifie ou supprime des logos sur les objets de SPIP.
  *
- * - En dehors d'une boucle, ce formulaire modifie le logo du site.
+ * - En dehors d'une boucle, ce formulaire modifie le logo du site (lié à un pseudo-objet 'site_spip').
  * - Dans une boucle, il modifie le logo de la table selectionnée.
  *
  * - il est possible de lui passer les paramètres objet et id : `#FORMULAIRE_EDITER_LOGO{article,1}`
@@ -22,7 +22,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 global $logo_libelles;
 // utilise pour le logo du site, donc doit rester ici
-$logo_libelles['site'] = _T('logo_site');
+$logo_libelles['site_spip'] = _T('logo_site');
 $logo_libelles['racine'] = _T('logo_standard_rubrique');
 
 
@@ -41,8 +41,13 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 	include_spip('inc/roles');
 
 	// Pas dans une boucle ? formulaire pour le logo du site
-	if (!$objet) {
-		$objet = 'site';
+	if (!$objet
+		or (
+			$objet == 'site'
+			and !intval($id_objet)
+		)
+	) {
+		$objet = 'site_spip';
 	}
 	$objet = objet_type($objet);
 	$id_table_objet = id_table_objet($objet);
@@ -83,7 +88,7 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 
 	// Chercher les logos
 	$logos = array();
-	$config_logos = array(
+	$config = array(
 		'logo'        => lire_config('activer_logos'),
 		'on'          => lire_config('activer_logos'),
 		'logo_survol' => lire_config('activer_logos_survol'),
@@ -92,30 +97,24 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 
 	// 1) Cherchons d'abord les logos historiques
-	$modes = array('on', 'off');
-	foreach($modes as $mode) {
-		if ($config_logos[$mode] == 'oui'
-			and $logo = $chercher_logo($id_objet, $id_table_objet, $mode)
+	$etats = array('on', 'off');
+	foreach($etats as $etat) {
+		if ($config[$etat] == 'oui'
+			and $logo = $chercher_logo($id_objet, $id_table_objet, $etat)
 		) {
 			$logos[] = $logo;
 		}
 	}
 
 	// 1) Cherchons ensuite les documents avec des rôles de logos
-	if ($objet == 'site') {
-		$id_objet = -1; // gros hack
-	}
 	$roles = roles_presents('document', $objet); // Tous les rôles pour cet objet
 	$roles_logos_possibles = isset($roles['roles']['choix']) ? $roles['roles']['choix'] : array();
 	$roles_logos_possibles = filtrer_roles_logos($roles_logos_possibles); // Tous les rôles de logos possibles pour cet objet
 	$roles_logos_attribues = roles_presents_sur_document($objet, $id_objet, true); // Les rôles de logos attribués pour cet objet
 	foreach ($roles_logos_attribues as $role) {
 		// Vérifier la config de certains rôles connus
-		if (!in_array($role, array_keys($config_logos))
-			or (
-				in_array($role, array_keys($config_logos))
-				and $config_logos[$role] == 'oui'
-			)
+		$config_actif = (!in_array($role, array_keys($config)) or (in_array($role, array_keys($config)) and $config[$role] == 'oui'));
+		if ($config_actif
 			and $logo = $chercher_logo($id_objet, $id_table_objet, $role)
 		) {
 			$logos[] = $logo;
@@ -226,11 +225,13 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
 	$res = array('editable' => true);
 
 	// Pas dans une boucle ? formulaire pour le logo du site
-	if (!$objet) {
-		$objet = 'site';
-	}
-	if ($objet == 'site') {
-		$id_objet = -1; // gros hack
+	if (!$objet
+		or (
+			$objet == 'site'
+			and !intval($id_objet)
+		)
+	) {
+		$objet = 'site_spip';
 	}
 
 	// Redirection
@@ -246,7 +247,7 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
 	if (isset($res_joindre_document['message_ok'])) {
 
 		// En présence d'un role sélectionne, on requalifie le lien créé
-			if ($role = _request('role')
+		if ($role = _request('role')
 			and !empty($res_joindre_document['ids'])
 		) {
 			// On ne prend qu'un seul document

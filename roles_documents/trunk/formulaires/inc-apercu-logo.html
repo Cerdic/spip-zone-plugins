@@ -63,7 +63,7 @@
 						</tr>
 						<tr>
 							<th><:date:></th>
-							<td>[(#ENV{logo/4}|affdate)]</td>
+							<td>[(#VAL{Y/m/d h:i:s}|date{#ENV{logo/4}}|affdate)]</td>
 						</tr>
 						</tr>
 						<tr>

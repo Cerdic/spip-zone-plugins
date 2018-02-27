@@ -186,7 +186,7 @@ function roles_documents_quete_logo_objet($flux) {
 		}
 
 		// Hack : le logo du site à un id négatif
-		if ($flux['args']['objet'] == 'site'
+		if ($flux['args']['objet'] == 'site_spip'
 			and intval($flux['args']['id_objet']) === 0
 		) {
 			$flux['args']['id_objet'] = -1;
