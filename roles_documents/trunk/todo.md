@@ -1,15 +1,32 @@
 # Rôles de documents : choses à faire
 
-## Boucles
+## Évolutions et bugs
 
-Les boucles DOCUMENTS devraient peut-être ne pas retourner les documents avec le rôle de logo par défaut, sauf si critères {tout} ou {role=logo}.
+### Identification des rôles de logo
 
-## Interface
+Pour l'instant on se base sur le nom du rôle : si ça commence par logo, c'est un rôle de logo.
+Il faut rendre ça plus souple en se basant sur la déclaration des rôles : c'est la-dedans qu'on dit : pour tel objet, tel rôle correspond à un rôle de logo.
 
-Surcharger le formulaire d'édition d'un logo : utiliser le formulaire d'ajout de document à la place, en forçant le rôle "logo".
+### balise `#LOGO_SITE_SPIP`
 
-## Bugs/limitations
+S'occuper de `#LOGO_SITE_SPIP`. En principe le formulaire crée un document lié à l'objet 'site' avec l'identifiant 0.
 
-- Chaque rôle donné à un document crée une nouvelle ligne dans la table `spip_documents_liens`, donc si on boucle sur cette table pour afficher les documents liés à un objet, le même document ressortira autant de fois qu'il a de rôles (cf. `documents_colonne.html` du plugins Médias).
-- Le critère `{vu}` est inopérant puisqu'un même document peut se retrouver à la fois vu et non vu après plusieurs manoeuvres. Pistes pour résoudre ça : une seul ligne par document lié, avec plusieurs rôles séparés par des virgules ? Ou alors par défaut faire en sorte que la boucle documents ne retourne qu'une seule fois un doc lié ayant plusieurs rôles ?
-- l'API des rôles ne permet pas de limiter les rôles attribuables à un objet. En conséquence, le rôle de logo peut être attribué plusieurs fois.
+### Bouton « détacher » dans les listes de documents :
+
+* Si c´est depuis le portfolio, il faut dissocier tous les documents SAUF ceux avec un rôle éventuel de logo
+* Si c'est depuis le formulaire de logo, il ne faut dissocier QUE le document avec ce rôle précis.
+
+### Bouton « utiliser comme logo »
+
+Ajouter un bouton d'action pour utiliser un document comme logo. Enfin un mini formulaire plutôt, car il faut choisir le rôle de logo souhaité s'il y en a plusieurs de disponibles.
+Ça doit créer un nouveau lien, pas modifier le lien existant.
+
+### Ajout d'un logo déjà associé à l'objet
+
+Quand on ajoute un document en logo, mais que celui-ci est déjà associé à l'objet, ça modifie le lien présent au lieu d'en créer un nouveau.
+
+## Limitations
+
+### Unicité
+
+L´interface s'assure qu'on ne peut attribuer un rôle de logo qu´une seule fois, mais techniquement c´est toujours possible de créer plusieurs liens avec le même rôle. Est-ce qu'il faut vérifier l'unicité à chaque création de lien ?
