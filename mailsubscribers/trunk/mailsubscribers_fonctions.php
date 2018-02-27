@@ -301,3 +301,26 @@ function filtre_mailsubscribers_listes_dist($options = array()) {
 
 	return mailsubscribers_listes($options);
 }
+
+/**
+ * Titrer un segment
+ * @param string $identifiant
+ * @param int $id_segment
+ * @return string
+ */
+function mailsubscribers_titre_segment($identifiant, $id_segment) {
+	static $listes;
+	if (is_null($listes)) {
+		include_spip('inc/mailsubscribers');
+		$listes = mailsubscribers_listes(array('segments' => true));
+	}
+
+	$id = $identifiant;
+	if ($id_segment) {
+		$id = "$id+$id_segment";
+	}
+	if (isset($listes[$id])) {
+		return $listes[$id]['titre'];
+	}
+	return $id;
+}

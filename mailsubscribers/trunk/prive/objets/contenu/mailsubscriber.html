@@ -21,16 +21,16 @@
 	<thead>
 	<tr>
 		<th><:mailsubscriber:label_listes:></th>
-		<th><:mailsubscriber:label_inscription:></th>
 		<th></th>
+		<th><:mailsubscriber:label_inscription:></th>
 	</tr>
 	</thead>
 	<tbody>
-<BOUCLE_sub(mailsubscriptions){id_mailsubscriber}>
+<BOUCLE_sub(mailsubscriptions){id_mailsubscriber}{par id_mailsubscribinglist,id_segment}>
 	<tr>
-		<td><a href="[(#ID_MAILSUBSCRIBINGLIST|generer_url_entite{mailsubscribinglist})]">#INFO_TITRE{mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}</a>[ \(<tt>(#INFO_IDENTIFIANT{mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST})</tt>\)]</td>
-		<td>[(#STATUT|puce_statut{mailsubscriber}) ][(#VAL{mailsubscriber}|statut_titre{#STATUT})]</td>
+		<td><a href="[(#ID_MAILSUBSCRIBINGLIST|generer_url_entite{mailsubscribinglist})]">[(#INFO_IDENTIFIANT{mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}|mailsubscribers_titre_segment{#ID_SEGMENT})]</a>[ \(<tt>(#ID_SEGMENT|non|?{#INFO_IDENTIFIANT{mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}})</tt>\)]</td>
 		<td></td>
+		<td>[(#STATUT|puce_statut{mailsubscriber}) ][(#VAL{mailsubscriber}|statut_titre{#STATUT})]</td>
 	</tr>
 </BOUCLE_sub>
 	</tbody>
