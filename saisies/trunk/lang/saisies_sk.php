@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_langue_label' => 'Zobraziť jazyk',
 	'option_aff_rub_interface_explication' => 'Zobraziť len rubriky v jazyku používateľa',
 	'option_aff_rub_interface_label' => 'Viacjazyčné zobrazenie',
-	'option_afficher_si_explication' => 'Uveďte podmienky zobrazenia poľa podľa hodnoty iných polí. Čísla iných polí musia byť medzi <code>@</code>. <br />Príklad <code>@selection_1@=="Toto"</code> prikazuje zobraziť pole, ktoré <code>selection_1</code> má hodnotu <code>Toto</code>.',
+	'option_afficher_si_explication' => 'Uveďte podmienky zobrazenia poľa podľa hodnoty iných polí. Čísla iných polí musia byť medzi <code>@</code>. <br />Príklad <code>@selection_1@=="Toto"</code> prikazuje zobraziť pole, ktoré <code>selection_1</code> má hodnotu <code>Toto</code>.', # MODIF
 	'option_afficher_si_label' => 'Podmienené zobrazenie',
 	'option_attention_explication' => 'Správa je dôležitejšia ako vysvetlivka.',
 	'option_attention_label' => 'Varovanie',

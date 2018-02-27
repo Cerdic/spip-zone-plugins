@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_langue_label' => 'Sprache anzeigen',
 	'option_aff_rub_interface_explication' => 'Ausschließlich Rubriken in der Sprache des Nutzers anzeigen',
 	'option_aff_rub_interface_label' => 'Mehrsprachige Anzeige',
-	'option_afficher_si_explication' => 'Bestimmt die Bedingungen zur Anzeige des Feldes in Abhängigkeit vom Wert eines anderen Feldes. Die Kennung des anderen Feldes steht zwischen <code>@</code>. <br />Beispiel <code>@selection_1@=="Toto"</code> das Feld wird angezeigt, wenn das Feld <code>selection_1</code> den Wert <code>Toto</code> hat.',
+	'option_afficher_si_explication' => 'Bestimmt die Bedingungen zur Anzeige des Feldes in Abhängigkeit vom Wert eines anderen Feldes. Die Kennung des anderen Feldes steht zwischen <code>@</code>. <br />Beispiel <code>@selection_1@=="Toto"</code> das Feld wird angezeigt, wenn das Feld <code>selection_1</code> den Wert <code>Toto</code> hat.', # MODIF
 	'option_afficher_si_label' => 'Bedingte Anzeige',
 	'option_attention_explication' => 'Nachricht wichtiger als Meldung',
 	'option_attention_label' => 'Achtung',

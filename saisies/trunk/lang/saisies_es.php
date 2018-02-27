@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_langue_label' => 'Mostrar el idioma',
 	'option_aff_rub_interface_explication' => 'Mostrar sólo las secciones en el idioma del usuario',
 	'option_aff_rub_interface_label' => 'Apariencia multilingüe',
-	'option_afficher_si_explication' => 'Indique las condiciones para mostrar el campo en función del valor de los otros campos. El identificador de los otros campos debe ser indicarse entre <code>@</code>. <br />Ejemplo <code>@selection_1@=="Toto"</code> condiciona la visualización del campo a que el campo <code>selection_1</code> tenga por valor <code>Toto</code>.',
+	'option_afficher_si_explication' => 'Indique las condiciones para mostrar el campo en función del valor de los otros campos. El identificador de los otros campos debe ser indicarse entre <code>@</code>. <br />Ejemplo <code>@selection_1@=="Toto"</code> condiciona la visualización del campo a que el campo <code>selection_1</code> tenga por valor <code>Toto</code>.', # MODIF
 	'option_afficher_si_label' => 'Visualización condicional',
 	'option_attention_explication' => 'Un mensaje más importante que la explicación.',
 	'option_attention_label' => 'Aviso',

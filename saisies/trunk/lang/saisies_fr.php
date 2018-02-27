@@ -57,7 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_rub_interface_explication' => 'Afficher uniquement les rubriques de la langue de l’utilisateur',
 	'option_aff_rub_interface_label' => 'Affichage multilingue',
 	'option_afficher_si_explication' => 'Indiquez les conditions pour afficher le champ en fonction de la valeur des autres champs. L’identifiant des autres champs doit être mis entre <code>@</code>. <br />Exemple <code>@selection_1@=="Toto"</code> conditionne l’affichage du champ à ce que le champ <code>selection_1</code> ait pour valeur <code>Toto</code>. <br />
-Il est possible d\'utiliser les opérateurs booléens <code>||</code> (ou) et  <code>&&</code> (et)',
+Il est possible d’utiliser les opérateurs booléens <code>||</code> (ou) et  <code>&&</code> (et)',
 	'option_afficher_si_label' => 'Affichage conditionnel',
 	'option_afficher_si_remplissage_uniquement_explication' => 'En cochant cette case, l’affichage conditionnel s’appliquera uniquement lors du remplissage du formulaire, pas lors de l’affichage des résultats.',
 	'option_afficher_si_remplissage_uniquement_label' => 'Uniquement lors du remplissage',
