@@ -79,6 +79,15 @@
 	[(#AUTORISER{iconifier,#ENV{objet},#ENV{id_objet}}|oui)
 	<div class="actions">
 		[(#BOUTON_ACTION{
+			<:roles_documents:bouton_iconifier_logo:>,
+			#URL_ACTION_AUTEUR{
+				iconifier_logo,
+				#ENV{objet}-#ENV{id_objet}-#ENV{logo/6},
+				#SELF
+			},
+			'ajax',
+		})]
+		[(#BOUTON_ACTION{
 			<:lien_supprimer:>,
 			#URL_ACTION_AUTEUR{
 				supprimer_logo,

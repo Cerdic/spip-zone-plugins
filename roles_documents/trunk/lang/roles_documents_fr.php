@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_modifier_roles' => 'Modifier',
+	'bouton_iconifier_logo' => 'Convertir en document',
 
 	// C
 	'champ_role_logo_label' => 'Rôle',
