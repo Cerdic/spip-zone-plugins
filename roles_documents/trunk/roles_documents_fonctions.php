@@ -16,9 +16,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 /**
- * Lister les rôles de documents attribués à un objet
+ * Lister les rôles de documents distincts pour un objet : ceux possibles, ceux attribués et non attribués
  * 
  * @note
+ * Vaguement basé sur la fonction roles_presents_sur_id() de l'API, sauf qu'on retourne des rôles uniques,
+ * et on fait le détail entre ceux atribués et non attribués.
+ * 
  * l'API des rôles permet de lister les rôles attribués pour un document précis,
  * mais pas pour TOUS les documents liés à l'objet.
  * Ex. pas possible : roles_presents_sur_id('*', 'document', $objet, $id_objet, 'document')
@@ -31,70 +34,64 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Type d'objet lié
  * @param integer $id_objet
  *     Identifiant de l'objet lié
- * @param mixed $logos
- *     true pour filtrer les rôles de logos
- *     false pour filtrer les rôles hors logos
+ * @param mixed $principaux
+ *     true : ne renvoyer que les rôles principaux (logos)
+ *     false : exclure les rôles principaux (logos)
  * @return array
- *     Tableau linéaire avec les rôles
+ *     Tableau associatif avec 3 clés
+ *     - possibles : tous les rôles possibles
+ *     - attribués : ceux attribués
+ *     - non_attribues : ceux non attribues
  */
-function roles_presents_sur_document($objet, $id_objet, $logos = null) {
+function roles_presents_sur_document($objet, $id_objet, $principaux = null) {
 	static $done = array();
 
 	// Stocker le résultat
-	$hash = "$objet-$id_objet";
+	$hash = "$objet-$id_objet-$principaux";
 	if (isset($done[$hash])) {
 		return $done[$hash];
 	}
 
-	// Pas de rôles sur ces objets, on sort
-	$roles = roles_presents('document', $objet);
-	if (!$roles) {
+	// Liste de tous les rôles possibles
+	// Si pas de rôles sur ces objets, on sort
+	$infos_roles = roles_presents('document', $objet);
+	if (!$infos_roles) {
 		return $done['hash'] = false;
 	}
+	$roles_possibles = $infos_roles['roles']['choix'];
 
-	// On récupère les rôles
+	// Liste des rôles attribués
 	$res = sql_allfetsel(
-		"distinct(role)",
+		'distinct(role)',
 		'spip_documents_liens',
 		array(
 			'objet=' . sql_quote($objet),
 			'id_objet=' . intval($id_objet),
+			"role!=''",
 		)
 	);
-	$roles_presents = array_column($res, 'role');
+	$roles_attribues = array_column($res, 'role');
 
-	// On filtre éventuellement les rôles de logos
-	if (is_bool($logos)) {
-		$roles_presents = filtrer_roles_logos($roles_presents, $logos);
+	// Liste des rôles non attribués
+	$roles_non_attribues = array_diff($roles_possibles, $roles_attribues);
+
+	// On filtre éventuellement les rôles principaux (=logos)
+	if (!is_null($principaux)
+		and !empty($infos_roles['roles']['principaux'])
+		and $roles_principaux = $infos_roles['roles']['principaux']
+	){
+		$filtrer = ($principaux ? 'array_intersect' : 'array_diff');
+		$roles_possibles = $filtrer($roles_possibles, $roles_principaux);
+		$roles_attribues = $filtrer($roles_attribues, $roles_principaux);
+		$roles_non_attribues = $filtrer($roles_non_attribues, $roles_principaux);
 	}
 
-	return $done[$hash] = $roles_presents;
-}
+	// On renvoie le détail
+	$roles = array(
+		'possibles'     => $roles_possibles,
+		'attribues'     => $roles_attribues,
+		'non_attribues' => $roles_non_attribues,
+	);
 
-
-/**
- * Filtrer une liste de rôles de documents pour inclure ou exclure les rôles de logos
- *
- * @param array $roles
- *     Tableau linéaire de rôles
- * @param boolean $logo
- *     true (défaut) :  uniquement les rôles de logos
- *     false (défaut) : uniquement les rôles non logos
- * @return array Tableau associatif rôle => titre
- */
-function filtrer_roles_logos($roles, $logos = true) {
-
-	// Uniquement les logos
-	$roles_logos = array_filter($roles, function($v){
-		return substr($v, 0, 4) === 'logo';
-	});
-
-	// On filtre
-	if ($logos) {
-		$roles = $roles_logos;
-	} else {
-		$roles = array_diff($roles, $roles_logos);
-	}
-
-	return $roles;
+	return $done[$hash] = $roles;
 }

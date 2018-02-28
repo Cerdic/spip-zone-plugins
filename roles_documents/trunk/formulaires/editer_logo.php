@@ -107,11 +107,8 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 	}
 
 	// 1) Cherchons ensuite les documents avec des rôles de logos
-	$roles = roles_presents('document', $objet); // Tous les rôles pour cet objet
-	$roles_logos_possibles = isset($roles['roles']['choix']) ? $roles['roles']['choix'] : array();
-	$roles_logos_possibles = filtrer_roles_logos($roles_logos_possibles); // Tous les rôles de logos possibles pour cet objet
-	$roles_logos_attribues = roles_presents_sur_document($objet, $id_objet, true); // Les rôles de logos attribués pour cet objet
-	foreach ($roles_logos_attribues as $role) {
+	$roles_logos = roles_presents_sur_document($objet, $id_objet, true); // Tableau des rôles attribués ou non
+	foreach ($roles_logos['attribues'] as $role) {
 		// Vérifier la config de certains rôles connus
 		$config_actif = (!in_array($role, array_keys($config)) or (in_array($role, array_keys($config)) and $config[$role] == 'oui'));
 		if ($config_actif
@@ -122,7 +119,7 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 	}
 
 	// S'il y a moins de rôles attribués que de rôles possibles, on peut en ajouter
-	$joindre_documents = count($roles_logos_possibles) > count($roles_logos_attribues);
+	$joindre_documents = count($roles_logos['possibles']) > count($roles_logos['attribues']);
 
 	// Autorisation
 	if (!isset($options['editable'])) {

@@ -48,7 +48,7 @@ function roles_documents_declarer_tables_objets_sql($tables) {
 				'defaut' => 'document',
 				'principaux' => array(
 					'logo',
-					'logo_survol'
+					'logo_survol',
 				),
 			)
 		),

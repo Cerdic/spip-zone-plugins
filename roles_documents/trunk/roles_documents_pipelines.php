@@ -324,8 +324,26 @@ function roles_documents_formulaire_charger($flux) {
 function roles_documents_formulaire_traiter($flux) {
 
 	// Formulaire d'ajout de document
-	if ($flux['args']['form'] == 'joindre_document') {
-		// TODO
+	// En présence d'un role sélectionne, on requalifie le lien créé
+	if ($flux['args']['form'] == 'joindre_document'
+		and $role = _request('role')
+		and $role != 'document'
+		and $objet = $flux['args']['args'][2]
+		and $id_objet = $flux['args']['args'][1]
+		and !empty($flux['data']['ids'])
+	) {
+		foreach ($flux['data']['ids'] as $id_document) {
+			$update = sql_updateq(
+				'spip_documents_liens',
+				array('role' => $role),
+				array(
+					'id_document=' . intval($id_document),
+					'objet='       . sql_quote($objet),
+					'id_objet='    . intval($id_objet),
+					'role='        . sql_quote('document'),
+				)
+			);
+		}
 	}
 
 	return $flux;
@@ -350,29 +368,18 @@ function roles_documents_recuperer_fond($flux) {
 		and !empty($flux['args']['contexte']['objet'])
 		and !empty($flux['args']['contexte']['id_objet'])
 	) {
-
+	
 		// Est-ce qu'il s'agit d'un ajout de logo ?
-		$logo = !empty($flux['args']['contexte']['editer_logo']);
+		$editer_logo = !empty($flux['args']['contexte']['editer_logo']);
+		$principaux = $editer_logo ? true : false;
 
 		// Retrouver les rôles restant à associer
 		$objet = $flux['args']['contexte']['objet'];
 		$id_objet = $flux['args']['contexte']['id_objet'];
-		//
-		$roles_possibles = roles_presents('document', $objet); // Les rôles possibles pour cet objet
-		$roles_possibles = isset($roles_possibles['roles']['choix']) ? $roles_possibles['roles']['choix'] : array();
-		$roles_possibles_logos = filtrer_roles_logos($roles_possibles, $logo); // Les rôles de logos possibles pour cet objet
-		$roles_presents_objet = roles_presents_sur_document($objet, $id_objet); // Les rôles attribués pour cet objet
-		$roles_presents_objet_logos = filtrer_roles_logos($roles_presents_objet, $logo);
-		// Les rôles restants
-		if ($logo) {
-			$roles_restants = array_diff($roles_possibles_logos, $roles_presents_objet_logos);
-		} else {
-			$roles_restants = $roles_possibles_logos;
-		}
-		//
+		$roles = roles_presents_sur_document($objet, $id_objet, $principaux);
 		$contexte = array(
 			'role' => $flux['args']['contexte']['role'],
-			'roles' => $roles_restants,
+			'roles' => $editer_logo ? $roles['non_attribues'] : $roles['possibles'],
 		);
 
 		$selecteur_roles = recuperer_fond('formulaires/inc-selecteur_role', $contexte);
