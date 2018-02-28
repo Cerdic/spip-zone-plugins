@@ -43,5 +43,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_taxons' => 'Taxons',
 	'titre_taxons_rubrique' => 'Taxons de la rubrique',
 );
-
-?>

@@ -144,5 +144,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_taxonomie' => 'Taxonomie',
 	'titre_page_creer_espece' => 'Créer une espèce ou un taxon de rang inférieur',
 );
-
-?>
