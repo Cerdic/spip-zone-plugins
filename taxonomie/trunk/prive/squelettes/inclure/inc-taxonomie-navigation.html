@@ -2,6 +2,12 @@
  --> ]
 <ul class="liste-items sous_navigation">
 	[<li class="item">
+		(#URL_ECRIRE{especes}
+			|lien_ou_expose{
+				<:taxonomie:onglet_espece:>,
+				[(#ENV{exec}|=={especes})]})
+	</li>]
+	[<li class="item">
 		(#URL_ECRIRE{taxons}
 			|lien_ou_expose{
 				<:taxonomie:onglet_navigation:>,
@@ -19,5 +25,4 @@
 				<:taxonomie:onglet_configuration:>,
 				[(#ENV{exec}|=={configurer_taxonomie})]})
 	</li>]
-
 </ul>

@@ -41,9 +41,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'filtre_regnes_tout' => 'Tous les règnes',
 
 	// I
+	'info_1_espece' => 'Une espèce ou taxon de rang inférieur',
+	'info_1_taxon' => 'Un taxon du règne au genre',
+	'info_nb_especes' => '@nb@ espèces et taxons de rang inférieur',
+	'info_nb_taxons' => '@nb@ taxons du règne au genre',
 	'info_boite_taxonomie_configuration' => 'Cette page permet de configurer les paramètres de base du plugin comme la liste des langues utilisables pour nommer ou décrire les taxons.',
-	'info_boite_taxonomie_gestion' => 'Cette page permet de consulter, charger, mettre à jour ou vider les taxons du règne au genre des règnes animal, végétal et fongique.',
-	'info_boite_taxonomie_navigation' => 'Cette page permet aux utilisateurs de consulter la liste des taxons de règne au genre chargés en base de données et de naviguer de taxon en taxon.',
+	'info_boite_regnes' => 'Cette page permet de consulter, charger, mettre à jour ou vider les taxons du règne au genre des règnes animal, végétal et fongique.',
+	'info_boite_taxons' => 'Cette page permet aux utilisateurs de consulter la liste des taxons du règne au genre chargés en base de données et de naviguer de taxon en taxon.',
+	'info_boite_especes' => 'Cette page permet de consulter la liste des espèces et des taxons de rang inférieur créés par les utilisateurs.',
 	'info_descriptif_existe' => 'non vide',
 	'info_etape' => 'Etape @etape@ / @etapes@',
 	'info_indicateur_hybride' => 'Ce taxon est un hydribe',
@@ -121,9 +126,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'regne_plantae' => 'règne végétal',
 
 	// O
+	'onglet_espece' => 'Espèces et rangs inférieurs',
 	'onglet_gestion' => 'Gestion des règnes',
 	'onglet_configuration' => 'Configuration du plugin',
-	'onglet_navigation' => 'Navigation du règne au genre',
+	'onglet_navigation' => 'Taxons du règne au genre',
 
 	// S
 	'succes_vider_regne' => 'Le règne @regne@ a bien été supprimé de la base de données.',

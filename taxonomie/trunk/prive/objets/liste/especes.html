@@ -1,27 +1,45 @@
 [(#SET{defaut_tri,#ARRAY{
-	nom_scientifique,1, 
+	nom_scientifique, 1,
 	id_espece,1,
+	rang,1,
+	nom_commun,1,
+	regne,1,
+	tsn,1,
 	points,-1
 }})]<B_liste_especes>
 #ANCRE_PAGINATION
 <div class="liste-objets especes">
-<table class='spip liste'>
-	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{espece:info_1_espece,espece:info_nb_especes}})</strong></caption>]
+<table class="spip liste">
+	[(#SET{un, #ENV*{info_1, taxon:info_1_espece}})]
+	[(#SET{nb, #ENV*{info_nb, taxon:info_nb_especes}})]
+	[<caption>
+		<strong class="caption">
+			(#ENV*{titre, #GRAND_TOTAL|singulier_ou_pluriel{#GET{un}, #GET{nb}}})
+		</strong>
+	</caption>]
 	<thead>
-		<tr class='first_row'>
-			<th class='picto' scope='col'></th>
-			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
-			<th class='nom_scientifique' scope='col'>[(#TRI{nom_scientifique,<:espece:champ_nom_scientifique_label:>,ajax})]</th>
-			<th class='id' scope='col'>[(#TRI{id_espece,<:info_numero_abbreviation:>,ajax})]</th>
+		<tr class="first_row">
+			<th class="picto" scope="col"></th>
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class="titre principale" scope="col">[(#TRI{nom_scientifique,<:espece:champ_nom_scientifique_label:>,ajax})]</th>
+			<th class="nom" scope="col">[(#TRI{nom_commun,<:taxon:champ_nom_commun_label:>,ajax})]</th>
+			<th class="rang" scope="col">[(#TRI{rang,<:taxon:champ_rang_label:>,ajax})]</th>
+			<th class="regne" scope="col">[(#TRI{regne,<:taxon:champ_regne_label:>,ajax})]</th>
+			<th class="tsn" scope="col">[(#TRI{tsn,<:taxon:champ_tsn_label:>,ajax})]</th>
+			<th class="id" scope="col">[(#TRI{id_espece,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_especes(ESPECES){id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num nom_scientifique},#GET{defaut_tri}}{par nom_scientifique}{pagination #ENV{nb,10}}>
-		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
-			<td class='picto'>[(#CHEMIN_IMAGE{espece-16.png}|balise_img)]</td>
-			<td class='statut'>[(#STATUT|puce_statut{espece,#ID_ESPECE})]</td> 
-			<td class='nom_scientifique principale'>[(#LOGO_ESPECE|image_reduire{20,26})]<a href="[(#ID_ESPECE|generer_url_entite{espece})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ESPECE">[(#RANG). ]#NOM_SCIENTIFIQUE</a></td>
-			<td class='id'>[(#AUTORISER{modifier,espece,#ID_ESPECE}|?{
+	<BOUCLE_liste_especes(ESPECES){regne?}{rang?}{statut?}{where?}{recherche?}{tri #ENV{par, nom_scientifique},#GET{defaut_tri}}{par nom_scientifique}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="picto">[(#CHEMIN_IMAGE{espece-16.png}|balise_img)]</td>
+			<td class="statut">[(#STATUT|puce_statut{espece,#ID_ESPECE})]</td>
+			<td class="titre principale nom_scientifique">[(#LOGO_ESPECE|image_reduire{20,26})]<a href="[(#ID_ESPECE|generer_url_entite{espece})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ESPECE">[(#RANG). ]#NOM_SCIENTIFIQUE</a></td>
+			<td class="nom">[(#NOM_COMMUN|extraire_multi{#LANG, #ARRAY{lang_defaut, aucune}})]</td>
+			<td class="rang">[(#VAL{taxonomie:rang_}|concat{#RANG}|_T)]</td>
+			<td class="regne nom_scientifique">[(#REGNE)]</td>
+			<td class="numero">[(#TSN)]</td>
+			<td class="id">[(#AUTORISER{modifier,espece,#ID_ESPECE}|?{
 				<a href="[(#URL_ECRIRE{espece_edit,id_espece=#ID_ESPECE})]">#ID_ESPECE</a>,
 				#ID_ESPECE
 			})]</td>
@@ -29,7 +47,7 @@
 	</BOUCLE_liste_especes>
 	</tbody>
 </table>
-[<p class='pagination'>(#PAGINATION{prive})</p>]
+[<p class="pagination">(#PAGINATION{prive})</p>]
 </div>
 </B_liste_especes>[
 <div class="liste-objets especes caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>

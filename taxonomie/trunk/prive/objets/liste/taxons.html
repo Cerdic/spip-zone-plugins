@@ -1,7 +1,7 @@
 [(#SET{defaut_tri,#ARRAY{
+	nom_scientifique, 1,
 	id_taxon,1,
 	rang,1,
-	nom_scientifique, 1,
 	nom_commun,1,
 	regne,1,
 	tsn,1,
@@ -10,7 +10,13 @@
 #ANCRE_PAGINATION
 <div class="liste-objets taxons[ (#ENV{classe})]">
 <table class="spip liste">
-	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{taxon:info_1_taxon,taxon:info_nb_taxons}})</strong></caption>]
+	[(#SET{un, #ENV*{info_1, taxon:info_1_taxon}})]
+	[(#SET{nb, #ENV*{info_nb, taxon:info_nb_taxons}})]
+	[<caption>
+		<strong class="caption">
+			(#ENV*{titre, #GRAND_TOTAL|singulier_ou_pluriel{#GET{un}, #GET{nb}}})
+		</strong>
+	</caption>]
 	<thead>
 		<tr class="first_row">
 			<th class="picto" scope="col"></th>
@@ -23,7 +29,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_taxons(TAXONS){regne?}{rang?}{edite?}{where?}{recherche?}{tri #ENV{par,nom_scientifique},#GET{defaut_tri}}{pagination #ENV{nb,100}}>
+	<BOUCLE_liste_taxons(TAXONS){regne?}{rang?}{edite?}{where?}{recherche?}{tri #ENV{par,nom_scientifique}, #GET{defaut_tri}}{pagination #ENV{nb,100}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="picto">[(#CHEMIN_IMAGE{taxon-16.png}|balise_img)]</td>
 			<td class="titre principale nom_scientifique">[(#LOGO_TAXON|image_reduire{20,26})]<a href="[(#ID_TAXON|generer_url_entite{taxon})]" title="<:info_numero_abbreviation|attribut_html:> #ID_TAXON">[(#NOM_SCIENTIFIQUE)]</a></td>

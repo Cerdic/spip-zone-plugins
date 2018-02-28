@@ -26,7 +26,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 		- `_langues_regne`		: (affichage) codes de langue SPIP et libellés des langues utilisées (configuration)
  * 		- `_langue_defaut`		: (affichage) la première langue de la liste des langues utilisées
  */
-function formulaires_charger_taxonomie_charger() {
+function formulaires_charger_regne_charger() {
 	$valeurs = array();
 	include_spip('inc/taxonomer');
 
@@ -81,7 +81,7 @@ function formulaires_charger_taxonomie_charger() {
  * @return array
  * 		Tableau des erreurs sur l'action et/ou le règne ou tableau vide si aucune erreur.
  */
-function formulaires_charger_taxonomie_verifier() {
+function formulaires_charger_regne_verifier() {
 	$erreurs = array();
 
 	$obligatoires = array('action_regne', 'regne');
@@ -105,7 +105,7 @@ function formulaires_charger_taxonomie_verifier() {
  * 		Tableau retourné par le formulaire contenant toujours un message de bonne exécution ou
  * 		d'erreur. L'indicateur editable est toujours à vrai.
  */
-function formulaires_charger_taxonomie_traiter() {
+function formulaires_charger_regne_traiter() {
 	$retour = array();
 
 	$action = _request('action_regne');
