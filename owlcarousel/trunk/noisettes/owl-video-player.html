@@ -15,6 +15,7 @@ VideoPlayer avec Owl Carousel et oembed
 @param thumbs_loop {str} (oui|non) - Rotation infinie des miniatures
 @param animateIn - une animation css3 , `fadeOut` est la seul fournie par owl, sinon ajouter animate.css
 @param animateOut - une animation css3 , `fadeOut` est la seul fournie par owl, sinon ajouter animate.css
+@todo - Corriger : en mode touch/drag le player vidéo n'est pas détruit du coup plusieurs vidéos peuvent jouer en mm temps
 -->]
 #SET{id-carousel, #ENV{id-carousel,owlvideoplayer} }
 <style>
@@ -45,8 +46,11 @@ VideoPlayer avec Owl Carousel et oembed
 </style>
 [(#REM) <!-- Active item -->]
 <div id="#GET{id-carousel}" class="owl-carousel owl-theme">
-	<BOUCLE_listDocs(DOCUMENTS spip_documents_liens){mode=document}{objet ?}{id_objet ?}{id_document ?}{media=video}>
-	<div class="owl-slide" data-hash="#GET{id-carousel}_#ID_DOCUMENT" id="#GET{id-carousel}_#ID_DOCUMENT">
+	<BOUCLE_listDocs(DOCUMENTS spip_documents_liens){objet ?}{id_objet ?}{id_document ?}
+																				{media=video}
+																				{mode=document}
+																				{par rang_lien,num titre, date}>
+	<div class="owl-slide" data-hash="#GET{id-carousel}_#ID_DOCUMENT">
 			[(#OEMBED|oembed{})]
 	</div>
 	</BOUCLE_listDocs>
@@ -57,7 +61,9 @@ VideoPlayer avec Owl Carousel et oembed
     <div id="[(#GET{id-carousel})_video-thumbnails]" class="diapo_thumbnails owl-carousel">
     <BOUCLE_docs(DOCUMENTS spip_documents_liens){objet ?}{id_objet ?}
 																					{id_document ?}
-																					{si #ENV{afficher_thumbnails}|=={oui} }{mode=document}{media=video}>
+																					{si #ENV{afficher_thumbnails}|=={oui} }
+																					{mode=document}{media=video}
+																					{par rang_lien,num titre, date}>
         [<div class="owl-slide">
             <a class="video_thumbnail[ (#ENV{doc}|=={#GET{id-carousel}_#ID_DOCUMENT}|oui)active]"
                href="#[(#GET{id-carousel})_#ID_DOCUMENT]"
@@ -124,6 +130,7 @@ jQuery(function($){
 	$('.video_thumbnail').each(function(){
 
 		$(this).on('click', function(){
+
 			var uid = $(this).attr('href');
 			var activePlayer = $('.owl-item.active');
 			var playButton = '<button onclick="jQuery(this).parent().trigger(\'click\');">Lecture</button>';
