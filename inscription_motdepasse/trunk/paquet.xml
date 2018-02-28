@@ -1,7 +1,7 @@
 <paquet
 	prefix="inscriptionmotdepasse"
 	categorie="auteur"
-	version="1.0.12"
+	version="1.0.13"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="inscriptionmotdepasse.png"
@@ -13,6 +13,8 @@
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
 	<credit>Aha-Soft pour l'icône</credit>
 	<licence>GPL v3</licence>
+
+	<necessite nom="notifications" compatibilite="[3.0.0;[" />
 
 	<necessite nom="facteur" compatibilite="[3.4.7;]" />
 	<necessite nom="saisies" compatibilite="[2.6.1;]"/>
