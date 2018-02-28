@@ -25,7 +25,7 @@ function http_atom_get_collection_dist($collection){
 	// Le squelette prend en contexte les paramètres du GET uniquement
 	if ($flux = recuperer_fond("http/atom/$collection", $_GET)){
 		header('Status: 200 OK');
-		header("Content-type: application/atom+xml; charset=utf-8");
+#		header("Content-type: application/atom+xml; charset=utf-8");
 		echo $flux;
 		exit;
 	}
