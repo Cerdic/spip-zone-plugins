@@ -67,40 +67,28 @@ function action_iconifier_logo_dist($arg = null) {
 				);
 				$role = $etats_roles[$etat];
 
-				// Créer ou mettre à jour le lien existant
-				// Si un lien existe déjà, on change l'id_document
-				if (sql_countsel(
+				// Si un logo avec le même rôle existe déjà, on le retire
+				$delete = sql_delete(
 					'spip_documents_liens',
 					array(
 						'objet=' . sql_quote($objet),
 						'id_objet=' . intval($id_objet),
-						'role=' . sql_quote($role),
+						'role=' . sql_quote($role)
 					)
-				)) {
-					$update = sql_updateq(
-						'spip_documents_liens',
-						array(
-							'id_document' => intval($id_document),
-						),
-						array(
-							'objet=' . sql_quote($objet),
-							'id_objet=' . intval($id_objet),
-							'role=' . sql_quote($role)
-						)
-					);
+				);
 
-				// Sinon on crée un nouveau lien
-				} else {
-					$insert = sql_insertq(
-						'spip_documents_liens',
-						array(
-							'id_document' => intval($id_document),
-							'objet'       => $objet,
-							'id_objet'    => intval($id_objet),
-							'role'        => $role,
-						)
-					);
-				}
+				// On requalifie le lien créé avec le rôle
+				$update = sql_updateq(
+					'spip_documents_liens',
+					array(
+						'role' => $role,
+					),
+					array(
+						'objet=' . sql_quote($objet),
+						'id_objet=' . intval($id_objet),
+						'id_document=' . intval($id_document),
+					)
+				);
 
 				// On supprime l'ancien logo
 				include_spip('action/editer_logo');
