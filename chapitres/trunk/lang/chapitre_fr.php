@@ -40,8 +40,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_definir_comme_traduction_chapitre' => 'Ce chapitre est une traduction du chapitre numéro :',
 	'titre_chapitre' => 'Chapitre',
 	'titre_chapitres' => 'Chapitres',
+	'titre_chapitres_sous' => 'Sous-chapitres',
 	'titre_chapitres_rubrique' => 'Chapitres de la rubrique',
 	'titre_langue_chapitre' => 'Langue de ce chapitre',
 	'titre_logo_chapitre' => 'Logo de ce chapitre',
 	'titre_objets_lies_chapitre' => 'Liés à ce chapitre',
+	'titre_plan' => 'Plan',
 );

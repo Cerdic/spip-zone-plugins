@@ -1,14 +1,16 @@
 [(#OBJET|=={chapitre}|non)
 	#SET{objet, #OBJET}
 	#SET{id_objet, #ID_OBJET}
-	#SET{id_parent, ''}
+	#SET{id_parent, 0}
+	#SET{arbo, oui}
 ]
 [(#OBJET|=={chapitre}|oui)
 	#SET{objet, ''}
 	#SET{id_objet, ''}
 	#SET{id_parent, #ID_OBJET}
+	#SET{arbo, non}
 ]
-<INCLURE{fond=prive/objets/liste/chapitres,sinon=<:chapitre:info_aucun_chapitre:>,objet=#GET{objet},id_objet=#GET{id_objet},id_parent=#GET{id_parent},id_chapitre="",ajax,env} />
+<INCLURE{fond=prive/objets/liste/chapitres,arbo=#GET{arbo},sinon=<:chapitre:info_aucun_chapitre:>,objet=#GET{objet},id_objet=#GET{id_objet},id_parent=#GET{id_parent},id_chapitre="",ajax,env} />
 
 [(#AUTORISER{creerchapitredans, #GET{objet,chapitre}, #GET{id_objet, #GET{id_parent}}}|oui)
 	#SET{url_parent, #GET{id_objet}|generer_url_entite{#GET{objet}}|sinon{#GET{id_parent}|generer_url_entite{chapitre}}}

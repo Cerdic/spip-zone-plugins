@@ -151,6 +151,9 @@ function formulaires_editer_chapitre_charger_dist($id_chapitre = 'new', $objet='
 			$valeurs = formulaires_editer_objet_charger('chapitre', $id_chapitre, $id_parent, $lier_trad, $retour, $config_fonc, $row, $hidden);
 		}
 	}
+	else {
+		$valeurs = formulaires_editer_objet_charger('chapitre', $id_chapitre, $id_parent, $lier_trad, $retour, $config_fonc, $row, $hidden);
+	}
 	
 	return $valeurs;
 }

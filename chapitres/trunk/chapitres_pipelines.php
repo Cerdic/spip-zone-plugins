@@ -82,9 +82,38 @@ function chapitres_affiche_enfants($flux) {
 }
 
 /**
+ * Ajout du plan des chapitres
+ *
+ * @pipeline affiche_gauche
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function chapitres_afficher_config_objet($flux) {
+	if ($flux['args']['type'] == 'chapitre' and $id_chapitre = intval($flux['args']['id'])) {
+		$chapitre = sql_fetsel('objet, id_objet', 'spip_chapitres', 'id_chapitre = '.$id_chapitre);
+		
+		$plan = recuperer_fond(
+			'prive/objets/liste/chapitres',
+			array(
+				'objet' => $chapitre['objet'],
+				'id_objet' => $chapitre['id_objet'],
+				'id_parent' => 0,
+				'arbo' => 'oui',
+				'simple' => 'oui',
+				'titre' => _T('chapitre:titre_plan'),
+			)
+		);
+		
+		$flux['data'] .= $plan;
+	}
+	
+	return $flux;
+}
+
+/**
  * Ajout de contenu sous la fiche d'un objet
  *
- * @pipeline affiche_enfants
+ * @pipeline pre_insertion
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
  */
