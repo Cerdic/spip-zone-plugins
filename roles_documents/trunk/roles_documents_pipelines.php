@@ -376,7 +376,7 @@ function roles_documents_recuperer_fond($flux) {
 		// Retrouver les rôles restant à associer
 		$objet = $flux['args']['contexte']['objet'];
 		$id_objet = $flux['args']['contexte']['id_objet'];
-		$roles = roles_presents_sur_document($objet, $id_objet, $principaux);
+		$roles = roles_documents_presents_sur_objet($objet, $id_objet, 0, $principaux);
 		$contexte = array(
 			'role' => $flux['args']['contexte']['role'],
 			'roles' => $editer_logo ? $roles['non_attribues'] : $roles['possibles'],

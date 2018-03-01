@@ -107,7 +107,7 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 	}
 
 	// 1) Cherchons ensuite les documents avec des rôles de logos
-	$roles_logos = roles_presents_sur_document($objet, $id_objet, true); // Tableau des rôles attribués ou non
+	$roles_logos = roles_documents_presents_sur_objet($objet, $id_objet, 0, true); // Tableau des rôles attribués ou non
 	foreach ($roles_logos['attribues'] as $role) {
 		// Vérifier la config de certains rôles connus
 		$config_actif = (!in_array($role, array_keys($config)) or (in_array($role, array_keys($config)) and $config[$role] == 'oui'));

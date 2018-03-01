@@ -3,6 +3,9 @@
 /**
  * Gestion du formulaire d'édition des rôles des liens d'un document
  *
+ * `#FORMULAIRE_EDITER_ROLES_DOCUMENT{2,article,3}`
+ * pour editer les roles du document 2 lié à l'article 3
+ * 
  * @package SPIP\Formulaires
  **/
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -11,9 +14,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Chargement du formulaire d'édition des rôles des liens d'un document
- *
- * `#FORMULAIRE_EDITER_ROLES_DOCUMENT{2,article,3}`
- * pour editer les roles du document 2 lié à l'article 3
  *
  * @param int $id_document
  *     Identifiant du document
