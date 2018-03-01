@@ -1,6 +1,6 @@
 
-titre: '<:saisie_evenements:saisie_evenement_titre:>'
-description: '<:saisies:saisie_evenement_explication:>'
+titre: '<:saisie_evenements:saisie_evenements_titre:>'
+description: '<:saisies:saisie_evenements_explication:>'
 icone: 'images/saisies_date.png'
 options:
   -
