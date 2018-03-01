@@ -21,6 +21,7 @@
 	[(#SAISIE{pays, pays,
 		label=<:plugin:info_pays:>})]
 ]<select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple"[ size="(#ENV{size})"]][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ (#ENV*{attributs})]>
+	#SET{selected,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
 	<option value="">[(#ENV{option_intro})]</option>]
 	<BOUCLE_pays(PAYS){id_pays ?IN #ENV{id_pays}}{par multi nom}>[
@@ -41,8 +42,23 @@
 	(#SET{pays,#GET{mapping_champs/#GET{champ_pays}/valeur}})][
 	(#SET{label,#GET{mapping_champs/#GET{champ_pays}/label}})
 	][(#ENV{multiple}|oui)
-		<option value="#GET{pays}"[(#GET{pays}|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>[(#GET{label})]</option>]
+		<option value="#GET{pays}"[(#GET{pays}|in_array{#GET{selected}|is_array|?{#GET{selected},#GET{selected}|explode{','}}}|oui) selected="selected"]>[(#GET{label})]</option>]
 		[(#ENV{multiple}|non)
-		<option value="#GET{pays}"[(#GET{pays}|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>[(#GET{label})]</option>]
+		<option value="#GET{pays}"[(#GET{pays}|=={#GET{selected}}|oui) selected="selected"]>[(#GET{label})]</option>]
 	</BOUCLE_pays>
 </select>
+[(#ENV{multiple}|oui)
+<div class="explication liste-selection"></div>
+<script type="text/javascript">
+(function(){
+	var id = 'champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]';
+	function actualise_liste_selection(){
+		var selected = \[\];
+		jQuery('#'+id).find(':selected').each(function(){selected.push(jQuery(this).html())});
+		jQuery('#'+id+' + .liste-selection').html(selected.join(', '));
+	}
+	jQuery(actualise_liste_selection);
+	jQuery('#'+id).on('change', actualise_liste_selection);
+})();
+</script>
+]
