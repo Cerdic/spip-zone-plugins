@@ -12,7 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_iconifier_logo' => 'Convertir en document',
 
 	// C
-	'champ_role_logo_label' => 'Rôle',
+	'champ_role_label' => 'Rôle',
+	'champ_roles_label' => 'Rôles',
 
 	// M
 	'media_logos' => 'Logos',

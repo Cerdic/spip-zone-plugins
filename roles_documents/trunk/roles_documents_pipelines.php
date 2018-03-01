@@ -304,7 +304,7 @@ function roles_documents_formulaire_charger($flux) {
 
 	// Formulaire d'ajout de document
 	if ($flux['args']['form'] == 'joindre_document') {
-		$flux['data']['role'] = '';
+		$flux['data']['roles'] = '';
 	}
 
 	return $flux;
@@ -325,24 +325,31 @@ function roles_documents_formulaire_traiter($flux) {
 
 	// Formulaire d'ajout de document
 	// En présence d'un role sélectionne, on requalifie le lien créé
+	// sauf si c'est le rôle par défaut
 	if ($flux['args']['form'] == 'joindre_document'
-		and $role = _request('role')
-		and $role != 'document'
+		and $roles = _request('roles')
 		and $objet = $flux['args']['args'][2]
 		and $id_objet = $flux['args']['args'][1]
 		and !empty($flux['data']['ids'])
 	) {
 		foreach ($flux['data']['ids'] as $id_document) {
-			$update = sql_updateq(
-				'spip_documents_liens',
-				array('role' => $role),
-				array(
-					'id_document=' . intval($id_document),
-					'objet='       . sql_quote($objet),
-					'id_objet='    . intval($id_objet),
-					'role='        . sql_quote('document'),
-				)
-			);
+			if (!is_array($roles)) {
+				$roles = array($roles);
+			}
+			foreach ($roles as $role) {
+				if ($role != 'document') {
+					$update = sql_updateq(
+						'spip_documents_liens',
+						array('role' => $role),
+						array(
+							'id_document=' . intval($id_document),
+							'objet='       . sql_quote($objet),
+							'id_objet='    . intval($id_objet),
+							'role='        . sql_quote('document'),
+						)
+					);
+				}
+			}
 		}
 	}
 
@@ -377,9 +384,17 @@ function roles_documents_recuperer_fond($flux) {
 		$objet = $flux['args']['contexte']['objet'];
 		$id_objet = $flux['args']['contexte']['id_objet'];
 		$roles = roles_documents_presents_sur_objet($objet, $id_objet, 0, $principaux);
+		$roles_attribuables = isset($flux['args']['contexte']['roles_attribuables']) ?
+			$flux['args']['contexte']['roles_attribuables'] :
+			($editer_logo ?
+				$roles['attribuables'] :
+				$roles['possibles']
+			);
+		$multiple = !empty($flux['args']['contexte']['editer_logo']) ? false : true;
 		$contexte = array(
-			'role' => $flux['args']['contexte']['role'],
-			'roles' => $editer_logo ? $roles['non_attribues'] : $roles['possibles'],
+			'roles'              => $flux['args']['contexte']['roles'],
+			'roles_attribuables' => $roles_attribuables,
+			'multiple'           => $multiple,
 		);
 
 		$selecteur_roles = recuperer_fond('formulaires/inc-selecteur_role', $contexte);

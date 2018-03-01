@@ -2,18 +2,31 @@
 
 	Sélection d'un role à attribuer à un document
 
+	Paramètres :
+	**obligatoire
+	*conseillé
+
+		- roles : rôle(s) sélectionné(s)
+		- **roles_attribuables : liste des rôles pour peupler le select
+		- multiple : 'oui' pour permettre une sélection de plusieurs rôles
+		- readonly : 'oui' pour interdire l'édition
 ]
+<B_selecteur_roles>
+#SET{multiple, #ENV{multiple}|?{multiple}}
+#SET{readonly, #ENV{readonly}|?{readonly}}
+
 <div class="selecteur-role">
 
-	<B_select_roles>
-	<label for="role"><:roles_documents:champ_role_logo_label:>&nbsp;:</label>
-	#SET{readonly, #TOTAL_BOUCLE|=={1}|?{readonly}}
-	<select name="role" id="role" class="select"[ readonly="(#GET{readonly})"]>
-		<BOUCLE_select_roles(DATA){source table, #ENV{roles}}>
+	<label for="roles">[(#GET{multiple}|?{<:roles_documents:champ_roles_label:>,<:roles_documents:champ_role_label:>})]&nbsp;:</label>
+	
+	<select name="[(#GET{multiple}|?{roles\[\],roles})]" id="roles" class="select[(#GET{multiple}|oui) chosen]"[ readonly="(#GET{readonly})"][ multiple="(#GET{multiple})"]>
+
+		<BOUCLE_selecteur_roles(DATA){source table, #ENV{roles_attribuables}}>
 		#SET{selected, #VALEUR|=={#ENV{role}}|?{selected}}
 		<option value="#VALEUR"[ selected="(#GET{selected})"]>[(#VALEUR|role{document})]</option>
-		</BOUCLE_select_roles>
+		</BOUCLE_selecteur_roles>
+
 	</select>
-	</B_select_roles>
 
 </div>
+</B_selecteur_roles>

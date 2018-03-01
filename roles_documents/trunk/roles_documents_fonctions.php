@@ -41,7 +41,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Tableau associatif avec 3 clés
  *     - possibles : tous les rôles possibles
  *     - attribués : ceux attribués
- *     - non_attribues : ceux non attribues
+ *     - attribuables : ceux non attribues
  */
 function roles_documents_presents_sur_objet($objet, $id_objet, $id_document=0, $principaux = null) {
 	static $done = array();
@@ -75,7 +75,7 @@ function roles_documents_presents_sur_objet($objet, $id_objet, $id_document=0, $
 	$roles_attribues = array_column($res, 'role');
 
 	// Liste des rôles non attribués
-	$roles_non_attribues = array_diff($roles_possibles, $roles_attribues);
+	$roles_attribuables = array_diff($roles_possibles, $roles_attribues);
 
 	// On filtre éventuellement les rôles principaux (=logos)
 	if (!is_null($principaux)
@@ -85,14 +85,14 @@ function roles_documents_presents_sur_objet($objet, $id_objet, $id_document=0, $
 		$filtrer = ($principaux ? 'array_intersect' : 'array_diff');
 		$roles_possibles = $filtrer($roles_possibles, $roles_principaux);
 		$roles_attribues = $filtrer($roles_attribues, $roles_principaux);
-		$roles_non_attribues = $filtrer($roles_non_attribues, $roles_principaux);
+		$roles_attribuables = $filtrer($roles_attribuables, $roles_principaux);
 	}
 
 	// On retourne le détail
 	$roles = array(
 		'possibles'     => $roles_possibles,
 		'attribues'     => $roles_attribues,
-		'non_attribues' => $roles_non_attribues,
+		'attribuables' => $roles_attribuables,
 	);
 
 	return $done[$hash] = $roles;

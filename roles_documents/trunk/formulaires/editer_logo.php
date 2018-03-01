@@ -90,24 +90,31 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 	$logos = array();
 	$config = array(
 		'logo'        => lire_config('activer_logos'),
-		'on'          => lire_config('activer_logos'),
 		'logo_survol' => lire_config('activer_logos_survol'),
-		'off'         => lire_config('activer_logos_survol'),
 	);
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 
 	// 1) Cherchons d'abord les logos historiques
-	$etats = array('on', 'off');
-	foreach($etats as $etat) {
-		if ($config[$etat] == 'oui'
+	$etats_vers_roles = array(
+		'on'  => 'logo',
+		'off' => 'logo_survol',
+	);
+	$etats_attribues = array();
+	foreach(array_keys($etats_vers_roles) as $etat) {
+		$role = $etats_vers_roles[$etat];
+		if ($config[$role] == 'oui'
 			and $logo = $chercher_logo($id_objet, $id_table_objet, $etat)
 		) {
 			$logos[] = $logo;
+			$etats_attribues[] = $role;
 		}
 	}
 
-	// 1) Cherchons ensuite les documents avec des rôles de logos
-	$roles_logos = roles_documents_presents_sur_objet($objet, $id_objet, 0, true); // Tableau des rôles attribués ou non
+	// 2) Cherchons ensuite les documents avec des rôles de logos
+	$roles_logos = roles_documents_presents_sur_objet($objet, $id_objet, 0, true);
+	// On ajuste la liste avec les vieux logos et leurs états
+	$roles_logos['attribues'] = array_merge($roles_logos['attribues'], $etats_attribues);
+	$roles_logos['attribuables'] = array_diff($roles_logos['attribuables'], $etats_attribues);
 	foreach ($roles_logos['attribues'] as $role) {
 		// Vérifier la config de certains rôles connus
 		$config_actif = (!in_array($role, array_keys($config)) or (in_array($role, array_keys($config)) and $config[$role] == 'oui'));
@@ -134,13 +141,14 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 
 	// Valeurs initiales
 	$valeurs = array(
-		'editable'    => $editable,
-		'logos'       => $logos,
-		'objet'       => $objet,
-		'id_objet'    => $id_objet,
-		'role'        => '', // le rôle qui sera sélectionné
-		'_options'    => $options,
-		'editer_logo' => true, // Un flag pour identifier le contexte
+		'editable'           => $editable,
+		'logos'              => $logos,
+		'objet'              => $objet,
+		'id_objet'           => $id_objet,
+		'roles'              => '', // le rôle qui sera sélectionné
+		'roles_attribuables' => $roles_logos['attribuables'], // rôles attribuables
+		'_options'           => $options,
+		'editer_logo'        => true, // Un flag pour identifier le contexte
 	);
 
 	// Valeurs du formulaire d'ajout de document

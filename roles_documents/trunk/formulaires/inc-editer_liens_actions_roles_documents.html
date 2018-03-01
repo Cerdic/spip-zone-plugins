@@ -24,7 +24,7 @@
 #SET{cle, document-#ENV{id_document}-#ENV{objet}-#ENV{id_objet}}
 #SET{roles, #ENV{objet}|roles_documents_presents_sur_objet{#ENV{id_objet}, #ENV{id_document}, #ENV{principaux}}}
 #SET{role_unique, #GET{roles/attribues}|count|=={1}}
-#SET{no_dropdown, #GET{role_unique}|et{#GET{roles/non_attribues}|non}}
+#SET{no_dropdown, #GET{role_unique}|et{#GET{roles/attribuables}|non}}
 
 <BOUCLE_dropdown(CONDITION){si #GET{no_dropdown}|non}>
 <div class="btn-group">
@@ -45,19 +45,19 @@
 			</button>
 		</li>
 		</BOUCLE_roles_attribues>
-		[(#GET{roles/non_attribues}|oui)<li class="divider"></li>]
+		[(#GET{roles/attribuables}|oui)<li class="divider"></li>]
 		</B_roles_attribues>
 
 		[(#REM) Les rôles non attribués ]
-		<B_roles_non_attribues>
+		<B_roles_attribuables>
 		<li class='dropdown-header'><:roles:ajouter_role:></li>
-		<BOUCLE_roles_non_attribues(DATA){source table,#GET{roles/non_attribues}}>
+		<BOUCLE_roles_attribuables(DATA){source table,#GET{roles/attribuables}}>
 		<li>
 			<button type="submit" name="ajouter_lien\[#GET{cle}-#VALEUR\]" class="link btn btn-mini delete">
 			[(#CHEMIN_IMAGE{inserer-8.png}|balise_img{'+'})] [(#VALEUR|role{document})]
 			</button>
 		</li>
-		</BOUCLE_roles_non_attribues>
+		</BOUCLE_roles_attribuables>
 
 	</ul>
 
