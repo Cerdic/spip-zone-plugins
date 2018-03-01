@@ -1,21 +1,20 @@
 <plugin>
-	<nom>
-	Visites SPIP
-	</nom>
-	<auteur>
-	BoOz
-	</auteur>
+	<nom>Visites SPIP</nom>
+	<auteur>BoOz</auteur>
 	<licence>
 		&#169; 2014 - GNU/GPL
 	</licence>
 	<version>
 	1.0.0
 	</version>
+	<version_base>
+	1.0.0
+	</version_base>
 	<etat>
 	test
 	</etat>
 	<description>
-	Ajouter les vistes en cours aux stats etc...
+		Ajouter les vistes en cours aux stats etc...
 	</description>
 	<lien></lien>
 	<prefix>
@@ -25,11 +24,13 @@
 	<categorie>statistiques</categorie>
 	<pipeline>
 		<nom>header_prive</nom>
-		<inclure>stats_data-pipelines.php</inclure>
+		<inclure>stats_data_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>affiche_milieu</nom>
-		<inclure>stats_data-pipelines.php</inclure>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/stats_data.php</inclure>
 	</pipeline>
+	<fonctions>stats_data_fonctions.php</fonctions>
+	<install>stats_data_administrations.php</install> 
 	<necessite id="SPIP" version="[1.9.0;3.5.0]" />
 </plugin>

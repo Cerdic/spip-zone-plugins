@@ -49,7 +49,6 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 [(#REM) Si la préiode n'est pas précisée parcourir les fichiers de visites en cours dans tmp/visites et enregistrer les données dans des tableaux (articles lus, sites affluents, et nombre de visites sur les articles) ]
 
 <BOUCLE_visites(DATA){source ls,#CHEMIN{tmp/visites}/*}{si #ENV{jour}|non}><BOUCLE_visite(DATA){source file,#FILE}><BOUCLE_pages_vues(DATA){source table,#VALEUR|unserialize}>
-
 #SET{type,#CLE|explode{"	"}|table_valeur{0}}
 #SET{id,#CLE|explode{"	"}|table_valeur{1}}
 #SET{referrer,#CLE|explode{"	"}|table_valeur{2}}
@@ -119,7 +118,7 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 	#SET{lendemain,#VAL{Y-m-d}|date{#VAL{+1 day}|strtotime{#GET{date}|strtotime}}}
 	[(#ENV{id_article}|oui)
 		[(#SET{req,select * from spip_visites_articles where date=[(#GET{date}|affdate{Y-m-d}|_q)] and id_article=[(#ENV{id_article})] order by visites desc})]
-		[(#SET{req_affluents,select * from spip_referers_articles where maj > [(#GET{date}|affdate{Y-m-d}|_q)] and maj < [(#GET{lendemain}|_q)] and id_article=[(#ENV{id_article})]})]
+		[(#SET{req_affluents,[(#GET{select})] from spip_referers_articles where [(#GET{periode})] > 0 and id_article=[(#ENV{id_article})] order by [(#GET{periode})] desc })]
 	]
 	</BOUCLE_visites_jour>
 	
@@ -279,9 +278,7 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 					<BOUCLE_article(ARTICLES){id_article=#CLE|replace{^a}}>
 						[(#GET{nb_articles_lus}|>{1}|oui)
 						<small>
-							[(#ENV{jour}|non)<a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]" class="ajax">]
-								[(#_articles:VISITES|number_format{0,"","&nbsp;"})] visites
-							[(#ENV{jour}|non)</a>]
+							<a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]" class="ajax">[(#_articles:VISITES|number_format{0,"","&nbsp;"})] visite[(#_articles:VISITES|>{1}|?{s})]</a>
 						</small> - 
 						]
 						<a href="[(#URL_ARTICLE)]">#TITRE</a>
@@ -314,7 +311,7 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 				<p><strong>visite[(#GET{stat}|>{1}|?{s})]<br><small>par&nbsp;[(#GRAND_TOTAL|number_format{0,"","&nbsp;"})]&nbsp;domaine[(#GRAND_TOTAL|>{1}|?{s})] affluent[(#GRAND_TOTAL|>{0}|?{s})]</small></strong></p>
 				#ANCRE_PAGINATION
 				<ul class="valeur">
-					<BOUCLE_affluents(DATA){source table,#GET{sites_affluents}}{!par visites}{pagination 10}{si #ENV{jour}|et{#ENV{id_article}}|non}>
+					<BOUCLE_affluents(DATA){source table,#GET{sites_affluents}}{!par visites}{pagination 10}>
 					<li style="width:80%">
 						<h3>[(#CLE|ucfirst)] <small>([(#VISITES) visite[(#VISITES|>{1}|?{s})]])</small></h3>
 						
