@@ -68,9 +68,9 @@ $GLOBALS['itis_webservice'] = array(
 			'argument' => 'srchKey',
 			'list'     => 'commonNames',
 			'index'    => array(
-				'tsn'              => 'tsn',
-				'nom_scientifique' => 'combinedName',
-				'regne'            => 'kingdom'
+				'tsn'        => 'tsn',
+				'nom_commun' => 'commonName',
+				'langage'    => 'language'
 			),
 			'compare'  => 'commonName'
 		),
@@ -234,7 +234,11 @@ function itis_search_tsn($action, $search, $strict = true) {
 				if (!$strict or ($strict and (strcasecmp($_data[$api['compare']], $search) === 0))) {
 					$tsn = array();
 					foreach ($api['index'] as $_key => $_destination) {
-						$tsn[$_key] = $_data[$_destination];
+						if ($_key == 'langage') {
+							$tsn[$_key] = $GLOBALS['itis_language'][strtolower($_data[$_destination])];
+						} else {
+							$tsn[$_key] = $_data[$_destination];
+						}
 					}
 					$tsns[] = $tsn;
 					if ($strict) {
@@ -315,7 +319,8 @@ function itis_get_record($tsn) {
 			$noms = array();
 			if (!empty($record['nom_commun']) and is_array($record['nom_commun'])) {
 				foreach ($record['nom_commun'] as $_nom) {
-					$noms[strtolower($_nom['language'])] = trim($_nom['commonName']);
+					$langue_spip = $GLOBALS['itis_language'][strtolower($_nom['language'])];
+					$noms[$langue_spip] = trim($_nom['commonName']);
 				}
 			}
 			// Et on modifie l'index des noms communs avec le tableau venant d'être construit.
@@ -330,7 +335,8 @@ function itis_get_record($tsn) {
 			}
 			// Et on modifie l'index des zones géographiques avec le tableau venant d'être construit
 			// en positionnant celles-ci sous un idne 'english' car les zones sont libellées en anglais.
-			$record['zone_geographique']['english'] = $zones;
+			unset($record['zone_geographique']);
+			$record['zone_geographique'][$GLOBALS['itis_language']['english']] = $zones;
 
 			// Mise en cache systématique pour gérer le cas où la page cherchée n'existe pas.
 			cache_taxonomie_ecrire(serialize($record), 'itis', 'record', $tsn, $options_cache);
