@@ -4,8 +4,7 @@
  *
  * @package    SPIP\TAXONOMIE\ESPECE
  */
-
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 };
 
@@ -65,6 +64,7 @@ function formulaires_creer_espece_charger() {
 	// de l'étape 1.
 	$valeurs['_taxons'] = _request('_taxons');
 	$valeurs['_taxon_defaut'] = _request('_taxon_defaut');
+	$valeurs['_resume'] = _request('_resume');
 
 	// Préciser le nombre d'étapes du formulaire
 	$valeurs['_etapes'] = 3;
@@ -126,23 +126,67 @@ function formulaires_creer_espece_verifier_1() {
 			include_spip('services/itis/itis_api');
 			$taxons = itis_search_tsn($type_recherche, $recherche, $recherche_stricte);
 			if ($taxons) {
-				// On construit le tableau des taxons trouvés en supprimant les taxons qui n'appartiennent pas
+				// Construire le résumé des saisies de l'étape 1
+				$valeurs['_resume'] = '<p>' . _T('taxonomie:info_espece_recherche_intro') . '</p>';
+				$item_quoi = 'taxonomie:info_espece_recherche_'
+					. $type_recherche
+					. ($recherche_stricte ? '_exact' : '');
+				$recherche_decoree = "<strong>$recherche</strong>";
+				$recherche_decoree = $type_recherche == 'scientificname'
+					? '<span class="nom_scientifique">' . $recherche_decoree . '</span>'
+					: $recherche_decoree;
+				$valeurs['_resume'] .= '<ul class="spip">'
+					. '<li>'
+					. _T(
+					    $item_quoi,
+						array('recherche' => $recherche_decoree)
+					)
+					. '</li>'
+					. '<li>'
+					. _T(
+					    'taxonomie:info_espece_recherche_regne',
+						array('regne' => '<span class="nom_scientifique">' . $regne . '</span>')
+					)
+					. '</li>'
+					.'</ul>'
+					.'<p>' . _T('taxonomie:info_espece_recherche_fin') . '</p>';
+
+				// Construire le tableau des taxons trouvés en supprimant les taxons qui n'appartiennent pas
 				// au règne concerné.
+				$valeurs['_taxon_defaut'] = 0;
 				foreach ($taxons as $_taxon) {
 					if (strcasecmp($_taxon['regne'], $regne) === 0) {
-						$valeurs['_taxons'][$_taxon['tsn']] = $_taxon['nom_scientifique'];
+						// On recherche le rang de chaque taxon pour l'afficher avec le nom scientifique mais
+						// aussi pour vérifier que ce rang est compatible avec une espèce si on cherche par nom commun.
+//						$record = itis_get_record($_taxon['tsn']);
+						$rang = itis_get_information('rankname', $_taxon['tsn']);
+						if ($type_recherche == 'scientificname') {
+							$valeurs['_taxons'][$_taxon['tsn']] = '<span class="nom_scientifique">'
+								. $_taxon['nom_scientifique']
+								. '</span>'
+								. ' - '
+								. _T('taxonomie:rang_' . $rang);
+							if (strcasecmp($recherche, $_taxon['nom_scientifique']) === 0) {
+								$valeurs['_taxon_defaut'] = $_taxon['tsn'];
+							}
+
+						}
 					}
 				}
-				reset($valeurs['_taxons']);
-				$valeurs['_taxon_defaut'] = key($valeurs['_taxons']);
+				if (!$valeurs['_taxon_defaut']) {
+					reset($valeurs['_taxons']);
+					$valeurs['_taxon_defaut'] = key($valeurs['_taxons']);
+				}
 
 				// On fournit ces informations au formulaire pour l'étape 2.
 				foreach ($valeurs as $_champ => $_valeur) {
 					set_request($_champ, $_valeur);
 				}
 			} else {
-				$erreurs['message_erreur'] = _T('taxonomie:erreur_recherche_aucun_taxon',
-					array('texte' => $recherche, 'regne' => '<span class="nom_scientifique">' . $regne . '</span>'));
+				$erreurs['message_erreur'] = _T(
+				    'taxonomie:erreur_recherche_aucun_taxon',
+					array('texte' => $recherche, 'regne' => '<span class="nom_scientifique">' . $regne . '</span>')
+				);
 			}
 		} else {
 			$erreurs['recherche'] = _T('taxonomie:erreur_recherche_nom_scientifique');

@@ -3,41 +3,17 @@
 
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
+	[<div>(#ENV*{_resume})</div>]
+
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<div class="editer-groupe">
-			[(#SAISIE{input, type_recherche_choisi,
-				defaut=#ENV{_types_recherche/#ENV{type_recherche}},
-				disable=oui,
-				label=<:taxonomie:label_type_recherche:>
-			})]
-
-			[(#SAISIE{input, recherche_choisie,
-				defaut=#ENV{recherche},
-				disable=oui,
-				label=<:taxonomie:label_recherche_taxon:>
-			})]
-
-			[(#SAISIE{input, recherche_stricte_choisie,
-				defaut=#ENV{_types_recherche/#ENV{recherche_stricte}},
-				disable=oui,
-				label=<:taxonomie:label_recherche_stricte:>
-			})]
-
-			[(#SAISIE{input, regne_choisi,
-				defaut=#ENV{regne},
-				disable=oui,
-				label=<:taxonomie:label_regne_recherche:>,
-				class=nom_scientifique
-			})]
-
 			[(#SAISIE{radio, taxon,
 				label=<:taxonomie:label_taxon_trouve:>,
 				explication=<:taxonomie:explication_taxon_trouve:>,
 				datas=#ENV{_taxons},
 				defaut=#ENV{_taxon_defaut},
-				class=nom_scientifique
 			})]
 		</div>
 
@@ -49,4 +25,3 @@
 	</div>
 	</form>
 </div>
-[(#ENV**|unserialize|bel_env)]
