@@ -1,6 +1,6 @@
 <?php
 /**
- * Gestion du formulaire de chargement du descriptif d'un taxon à partir de Wikipedia.
+ * Gestion du formulaire de création d'une espèce.
  *
  * @package    SPIP\TAXONOMIE\ESPECE
  */
@@ -11,27 +11,31 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 
 
 /**
- * Chargement des données : le formulaire récupère une page wikipedia pour le descriptif du taxon.
- * Le formulaire propose ce descriptif mais aussi une liste d'autres pages qui matchent avec le taxon.
+ * Chargement des données :
  *
  * @uses taxonomie_regne_existe()
  *
  * @return array
- * 		Tableau des données à charger par le formulaire (affichage). Aucune donnée chargée n'est un
- * 		champ de saisie, celle-ci sont systématiquement remises à zéro.
- * 		- `_types_recherche`       : recherche par nom scientifique ou par nom commun.
- * 		- `_type_recherche_defaut` : le type de recherche par défaut est toujours `nom_scientifique`.
- * 		- `_regnes`                : liste des règnes déjà chargés dans la base de taxonomie.
- * 		- `_regne_defaut`          : le règne par défaut qui est toujours le premier de la liste.
- * 		- `_etapes`                : nombre d'étapes du formaulaire, à savoir, 3.
+ * 		Tableau des données à charger par le formulaire.
+ * 		- `recherche`              : Texte de la recherche.
+ * 		- `_types_recherche`       : (affichage) recherche par nom scientifique ou par nom commun.
+ * 		- `_type_recherche_defaut` : (affichage) le type de recherche par défaut est toujours `nom_scientifique`.
+ * 		- `_regnes`                : (affichage) liste des règnes déjà chargés dans la base de taxonomie.
+ * 		- `_regne_defaut`          : (affichage) le règne par défaut qui est toujours le premier de la liste.
+ * 		- `_etapes`                : (affichage) nombre d'étapes du formulaire, à savoir, 3.
  */
 function formulaires_creer_espece_charger() {
 
 	// Initialisation du chargement.
 	$valeurs = array();
 
-	// Texte de la recherche (qui peut-être non vide si on affiche une erreur dans la vérification 1).
+	// Paramètres de saisie de l'étape 1
+	// Type et nature de la recherche, texte de la recherche (qui peut-être non vide si on affiche une erreur
+	// dans la vérification 1) et règne.
+	$valeurs['type_recherche'] = _request('type_recherche');
 	$valeurs['recherche'] = _request('recherche');
+	$valeurs['recherche_stricte'] = _request('recherche_stricte');
+	$valeurs['regne'] = _request('regne');
 
 	// Types de recherche et défaut.
 	$types = array(
@@ -59,7 +63,8 @@ function formulaires_creer_espece_charger() {
 
 	// Initialisation des paramètres du formulaire utilisés en étape 2 et mis à jour dans la vérification
 	// de l'étape 1.
-	$valeurs['taxons'] = array();
+	$valeurs['_taxons'] = _request('_taxons');
+	$valeurs['_taxon_defaut'] = _request('_taxon_defaut');
 
 	// Préciser le nombre d'étapes du formulaire
 	$valeurs['_etapes'] = 3;
@@ -68,8 +73,7 @@ function formulaires_creer_espece_charger() {
 }
 
 /**
- * Vérification de l'étape 1 du formulaire : si une langue est choisie, on charge la page recherchée et les liens
- * vers les autres pages éventuelles. Si aucun page n'est disponible on renvoie un message d'erreur.
+ * Vérification de l'étape 1 du formulaire :
  *
  * @uses wikipedia_get_page()
  * @uses convertisseur_texte_spip()
@@ -126,8 +130,15 @@ function formulaires_creer_espece_verifier_1() {
 				// au règne concerné.
 				foreach ($taxons as $_taxon) {
 					if (strcasecmp($_taxon['regne'], $regne) === 0) {
-						$valeur['_taxons'][$_taxon['tsn']] = $_taxon['nom_scientifique'];
+						$valeurs['_taxons'][$_taxon['tsn']] = $_taxon['nom_scientifique'];
 					}
+				}
+				reset($valeurs['_taxons']);
+				$valeurs['_taxon_defaut'] = key($valeurs['_taxons']);
+
+				// On fournit ces informations au formulaire pour l'étape 2.
+				foreach ($valeurs as $_champ => $_valeur) {
+					set_request($_champ, $_valeur);
 				}
 			} else {
 				$erreurs['message_erreur'] = _T('taxonomie:erreur_recherche_aucun_taxon',

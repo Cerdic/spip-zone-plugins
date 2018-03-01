@@ -128,9 +128,9 @@ function taxonomie_declarer_tables_objets_sql($tables) {
             array(
                 'champ'     => 'statut',
                 'publie'    => 'publie',
-                'previsu'   => 'publie,prop,prepa',
+                'previsu'   => 'publie, prop, prepa',
                 'post_date' => 'date',
-                'exception' => array('statut','tout')
+                'exception' => array('statut', 'tout')
             )
         ),
         'texte_changer_statut' => 'espece:texte_changer_statut_espece',

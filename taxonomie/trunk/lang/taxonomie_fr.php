@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_wikipedia_descriptif' => 'Aucun descriptif dans la langue choisie n\'a pu être récupéré de Wikipedia.',
 	'erreur_recherche_nom_scientifique' => 'Le nom scientifique d\'une espèce ou d\'un taxon de rang inférieur est toujours constitué d\'au moins deux mots.',
 	'erreur_recherche_aucun_taxon' => 'La recherche de «&nbsp;@texte@&nbsp;» est infructueuse pour le règne «&nbsp;@regne@&nbsp;».',
+	'explication_taxon_trouve' => 'Choisissez le taxon qui correspond à votre recherche. Chaque taxon est désigné par son nom scientifique et son rang.',
 	'explication_type_recherche' => 'Vous pouvez choisir de rechercher une espèce par son nom scientifique ou son nom commun. ITIS fournissant peu de noms communs il est conseillé d\'utiliser le nom scientifique.',
 	'explication_recherche_taxon' => 'Le taxon recherché doit correspondre à une espèce ou à un taxon de rang inférieur.',
 	'explication_recherche_stricte' => 'Cette option permet de rechercher soit le taxon correspondant exactement au texte de la recherche soit les taxons contenant le texte de recherche. Il conseillé d\'utiliser une recherche stricte pour éviter d\'obtenir une liste de taxons trop importante (limitée à 25 taxons).',
@@ -71,6 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_type_rang_intercalaire' => 'rangs principaux, secondaires et intercalaires',
 	'label_type_rang_principal' => 'rangs principaux',
 	'label_type_rang_secondaire' => 'rangs principaux et secondaires',
+	'label_taxon_trouve' => 'Taxons correspondant à la recherche',
 	'label_wikipedia_alternative_defaut' => 'Utiliser le descriptif proposé par défaut',
 	'label_wikipedia_alternative' => 'Utiliser la page « @alternative@ »',
 	'label_wikipedia_descriptif' => 'Descriptif Wikipedia fourni par défaut',
@@ -78,7 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_wikipedia_lien' => 'Page Wikipedia à utiliser',
 	'label_type_recherche' => 'Type de recherche',
 	'label_recherche_taxon' => 'Texte de la recherche',
-	'label_recherche_stricte' => 'Rechercher exactement le texte',
+	'label_recherche_stricte' => 'Rechercher le texte exact',
 	'label_regne_recherche' => 'Limiter la recherche à un règne',
 
 	// N

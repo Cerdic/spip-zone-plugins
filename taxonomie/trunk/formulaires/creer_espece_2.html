@@ -7,33 +7,44 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<div class="editer-groupe">
-			[(#SAISIE{input, langue_choisie,
-				defaut=#ENV{_langues/#ENV{langue}},
+			[(#SAISIE{input, type_recherche_choisi,
+				defaut=#ENV{_types_recherche/#ENV{type_recherche}},
 				disable=oui,
-				label=<:taxonomie:label_langue_descriptif:>
+				label=<:taxonomie:label_type_recherche:>
 			})]
 
-		[(#ENV{_descriptif}|oui)
-			[(#SAISIE{textarea, _descriptif,
-				explication=<:taxonomie:explication_wikipedia_descriptif:>,
-				label=<:taxonomie:label_wikipedia_descriptif:>,
-				disable=oui
+			[(#SAISIE{input, recherche_choisie,
+				defaut=#ENV{recherche},
+				disable=oui,
+				label=<:taxonomie:label_recherche_taxon:>
 			})]
 
-			[(#SAISIE{radio, choix_descriptif,
-				explication=<:taxonomie:explication_wikipedia_lien:>,
-				label=<:taxonomie:label_wikipedia_lien:>,
-				datas=#ENV{_liens},
-				defaut=#ENV{_lien_defaut}
+			[(#SAISIE{input, recherche_stricte_choisie,
+				defaut=#ENV{_types_recherche/#ENV{recherche_stricte}},
+				disable=oui,
+				label=<:taxonomie:label_recherche_stricte:>
 			})]
-		]
+
+			[(#SAISIE{input, regne_choisi,
+				defaut=#ENV{regne},
+				disable=oui,
+				label=<:taxonomie:label_regne_recherche:>,
+				class=nom_scientifique
+			})]
+
+			[(#SAISIE{radio, taxon,
+				label=<:taxonomie:label_taxon_trouve:>,
+				explication=<:taxonomie:explication_taxon_trouve:>,
+				datas=#ENV{_taxons},
+				defaut=#ENV{_taxon_defaut},
+				class=nom_scientifique
+			})]
 		</div>
 
 		<p class="boutons">
-			<input type="submit" class="submit" name="_retour_etape_1" value="<:taxonomie:bouton_retourner:>" />
-		[(#ENV{_descriptif}|oui)
-			<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
-		]
+			#SET{etape_precedente, #ENV{_etape}|moins{1}}
+			<input type="submit" class="submit" name="_retour_etape_1" value="<:taxonomie:bouton_retourner{etape=#GET{etape_precedente}}:>" />
+			<input type="submit" class="submit" value="<:taxonomie:bouton_continuer:>" />
 		</p>
 	</div>
 	</form>
