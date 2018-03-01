@@ -1,0 +1,22 @@
+<paquet
+	prefix="deplace_art"
+	categorie="edition"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/deplace_art-64.png"
+	documentation=""
+>
+
+	<nom>Déplacer des articles par lot</nom>
+
+	<auteur>Teddy Payet</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="saisies" compatibilite="[2.4.0;]" />
+
+	<pipeline nom="autoriser" inclure="deplace_art_autorisations.php" />
+	<pipeline nom="affiche_droite" inclure="deplace_art_pipelines.php" />
+
+	<menu nom="deplace_art" parent="menu_publication" icone="images/deplace_art-16.png" action="deplace_art" titre="deplace_art:titre_page_deplace_art" />
+</paquet>

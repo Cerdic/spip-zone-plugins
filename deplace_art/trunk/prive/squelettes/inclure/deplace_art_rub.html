@@ -1,14 +1,14 @@
 <BOUCLE_principal (RUBRIQUES) {id_rubrique} {tout}>
 [(#AUTORISER{publierdans,rubrique,#ID_RUBRIQUE}|oui)
 
-<div class="box raccourcis depart-bloc">
+<div class="box raccourcis deplace_art-bloc">
 	<div class="inner">
 		<div class="clearfix hd section">
-			<h3>[(#CHEMIN_IMAGE{article-24.png}|balise_img{'',cadre-icone}|concat{<:depart:titre_depart_rub:>})]</h3>
+			<h3>[(#CHEMIN_IMAGE{article-24.png}|balise_img{'',cadre-icone}|concat{<:deplace_art:titre_deplace_art_rub:>})]</h3>
 		</div>
 	</div>
 	<div class="ajax">
-		[(#FORMULAIRE_DEPART_RUB{#ID_RUBRIQUE})]
+		[(#FORMULAIRE_DEPLACE_ART_RUB{#ID_RUBRIQUE})]
 	</div>
 </div>
 ]

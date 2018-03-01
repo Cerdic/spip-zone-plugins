@@ -6,7 +6,7 @@
  * @copyright  2018
  * @author     Teddy Payet
  * @licence    GNU/GPL
- * @package    SPIP\Depart\Autorisations
+ * @package    SPIP\deplace_art\Autorisations
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -19,5 +19,5 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @pipeline autoriser
  */
-function depart_autoriser() {
+function deplace_art_autoriser() {
 }

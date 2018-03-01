@@ -6,19 +6,19 @@
  * @copyright  © 2018
  * @author     Teddy Payet
  * @licence    GNU/GPL
- * @package    SPIP/Form/Depart
+ * @package    SPIP/Form/deplace_art
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function formulaires_depart_charger_dist() {
+function formulaires_deplace_art_charger_dist() {
 	// Contexte du formulaire.
 	$contexte = array();
 
-	$contexte['articles'] = (_request('articles')) ? _request('articles') : null ;
-	$contexte['rubrique_dest'] = (_request('rubrique_dest')) ? _request('rubrique_dest') : null ;
+	$contexte['articles'] = (_request('articles')) ? _request('articles') : null;
+	$contexte['rubrique_dest'] = (_request('rubrique_dest')) ? _request('rubrique_dest') : null;
 
 	return $contexte;
 }
@@ -32,7 +32,7 @@ function formulaires_depart_charger_dist() {
 *   }
 *   Pensez à utiliser _T('info_obligatoire'); pour les éléments obligatoire.
 */
-function formulaires_depart_verifier_dist() {
+function formulaires_deplace_art_verifier_dist() {
 	include_spip('inc/utils');
 	$erreurs = array();
 
@@ -63,7 +63,7 @@ function formulaires_depart_verifier_dist() {
 		// Si on a identifié des articles que l'auteur ne peut modifier, on les affiche dans l'erreur
 		$articles_interdit = trim($articles_interdit);
 		if (!empty($articles_interdit)) {
-			$erreurs['articles'] = _T('depart:articles_interdits');
+			$erreurs['articles'] = _T('deplace_art:articles_interdits');
 			$erreurs['articles'] .= '<ul class="spip">';
 			$erreurs['articles'] .= $articles_interdit;
 			$erreurs['articles'] .= '</ul>';
@@ -78,13 +78,13 @@ function formulaires_depart_verifier_dist() {
 	$autoriser = autoriser('modifier', 'rubrique', $rubrique_dest);
 
 	if ($autoriser == false) {
-		$erreurs['rubrique_dest'] = _T('depart:rubrique_dest_interdite');
+		$erreurs['rubrique_dest'] = _T('deplace_art:rubrique_dest_interdite');
 	}
 
 	return $erreurs;
 }
 
-function formulaires_depart_traiter_dist() {
+function formulaires_deplace_art_traiter_dist() {
 	include_spip('inc/utils');
 	include_spip('base/abstract_sql');
 
@@ -107,7 +107,7 @@ function formulaires_depart_traiter_dist() {
 	}
 	$resultat = sql_updateq('spip_articles', array(
 		'id_secteur' => $_rubrique_info['id_secteur'],
-		'id_rubrique' => $rubrique_dest
+		'id_rubrique' => $rubrique_dest,
 	), 'id_article IN (' . join(',', $articles_sql) . ')');
 
 	// On met à jour les rubriques.
@@ -116,7 +116,10 @@ function formulaires_depart_traiter_dist() {
 
 	if ($resultat) {
 		include_spip('inc/urls');
-		$retour['message_ok'] = _T('depart:deplacement_art_reussi', array('titre' => $_rubrique_info['titre'], 'url' => generer_url_ecrire('rubrique', "id_rubrique=" . $rubrique_dest)));
+		$retour['message_ok'] = _T('deplace_art:deplacement_art_reussi', array(
+			'titre' => $_rubrique_info['titre'],
+			'url' => generer_url_ecrire('rubrique', "id_rubrique=" . $rubrique_dest),
+		));
 	} else {
 		$retour['message_ko'] = _T('erreur_technique_ajaxform');
 	}
