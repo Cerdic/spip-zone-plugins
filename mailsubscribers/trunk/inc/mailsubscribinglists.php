@@ -137,14 +137,31 @@ function mailsubscribers_teste_segment($id_mailsubscriber, $segment){
 			if (!isset($infos[$filtre_k])){
 				return false;
 			}
-			if (is_array($infos[$filtre_k])){
-				if (!in_array($v,$infos[$filtre_k])){
-					return false;
+			// si le filtre contient plusieurs valeurs, il suffit qu'on en ait une pour etre dans le segment (c'est un OU)
+			if (strpos($v,',') !== false){
+				$v = explode(',', $v);
+				if (is_array($infos[$filtre_k])){
+					if (!array_intersect($v,$infos[$filtre_k])){
+						return false;
+					}
+				}
+				else {
+					if (!in_array($infos[$filtre_k],$v)){
+						return false;
+					}
 				}
 			}
+			// si le filtre contient 1 valeur, il faut qu'elle soit dans les infos du subscriber
 			else {
-				if ($infos[$filtre_k]!=$v){
-					return false;
+				if (is_array($infos[$filtre_k])){
+					if (!in_array($v,$infos[$filtre_k])){
+						return false;
+					}
+				}
+				else {
+					if ($infos[$filtre_k]!=$v){
+						return false;
+					}
 				}
 			}
 		}

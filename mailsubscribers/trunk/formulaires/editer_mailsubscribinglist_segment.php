@@ -48,6 +48,9 @@ function formulaires_editer_mailsubscribinglist_segment_charger_dist($id_mailsub
 			$valeurs['filtre_'.$k] = '';
 			if (intval($id_segment) and isset($segments[$id_segment]['filtre_'.$k])) {
 				$valeurs['filtre_'.$k] = $segments[$id_segment]['filtre_'.$k];
+				if (isset($d['options']['multiple']) and $d['options']['multiple']) {
+					$valeurs['filtre_'.$k] = explode(',', $valeurs['filtre_'.$k]);
+				}
 			}
 
 			$saisie = array(
@@ -102,7 +105,13 @@ function formulaires_editer_mailsubscribinglist_segment_traiter_dist($id_mailsub
 	$declaration = mailsubscriber_declarer_informations_liees();
 	foreach ($declaration as $k=>$d) {
 		if (isset($d['saisie']) and !isset($segment['filtre_'.$k])) {
-			$segment['filtre_'.$k] = trim(_request('filtre_'.$k));
+			$v = _request('filtre_'.$k);
+			if (is_array($v)) {
+				$v = array_map('trim', $v);
+				$v = array_filter($v);
+				$v = implode(',', $v);
+			}
+			$segment['filtre_'.$k] = trim($v);
 		}
 	}
 	$segments[$id_segment] = $segment;

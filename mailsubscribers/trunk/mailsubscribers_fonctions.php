@@ -227,6 +227,9 @@ function mailsubscribers_afficher_valeur_informations_liees($k, $v, $declaration
 	if (isset($declaration[$k]['titre'])){
 		$titre = typo(supprimer_numero($declaration[$k]['titre']));
 	}
+	if (strpos($v,',') !== false){
+		$v = explode(',', $v);
+	}
 	if (test_plugin_actif('saisies')) {
 		if (isset($declaration[$k]['saisie'])){
 			$saisie = array(
