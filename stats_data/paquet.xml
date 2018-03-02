@@ -9,7 +9,7 @@
 >
 	<nom>Visites SPIP</nom>
 	<!-- Modification des statistiques dans SPIP (ajout visites en cours etc...) -->
-
+	
 	<auteur>BoOz</auteur>
 	<pipeline nom="header_prive" inclure="stats_data_pipelines.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/stats_data.php" />
