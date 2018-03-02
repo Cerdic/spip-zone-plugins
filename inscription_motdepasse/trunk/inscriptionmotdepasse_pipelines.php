@@ -30,7 +30,7 @@ function inscriptionmotdepasse_formulaire_fond($flux){
 		$champs_password = recuperer_fond('formulaires/inc-inscriptionmotdepasse', $flux['args']['contexte']);
 		
 		$flux['data'] = preg_replace(
-			'%<(li|div)[^>]*saisie_mail_inscription[^>]*>.*?</\1>%is',
+			'%<(li|div)[^>]*[saisie|editer]_mail_inscription[^>]*>.*?</\1>%is',
 			"$0$champs_password",
 			$flux['data']
 		);
