@@ -23,7 +23,6 @@
 	<pipeline nom="document_desc_actions" inclure="roles_documents_pipelines.php" />
 	<pipeline nom="post_edition_lien" inclure="roles_documents_pipelines.php" />
 	<pipeline nom="post_edition" inclure="roles_documents_pipelines.php" />
-	<pipeline nom="quete_logo_objet" inclure="roles_documents_pipelines.php" />
 	<pipeline nom="pre_boucle" inclure="roles_documents_pipelines.php" />
 	<pipeline nom="formulaire_charger" inclure="roles_documents_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="roles_documents_pipelines.php" />

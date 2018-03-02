@@ -161,69 +161,6 @@ function roles_documents_post_edition($flux) {
 
 
 /**
- * Chercher le logo d'un ojet
- *
- * S'il n'y a pas de logo, on prend la 1ère image avec le rôle "logo"
- *
- * @pipeline quete_logo_objet
- *
- * @param  array $flux Données du pipeline
- * @return array       Données du pipeline
- */
-function roles_documents_quete_logo_objet($flux) {
-	// Si personne n'a trouvé de logo avant
-	if (empty($flux['data'])) {
-		// On cherche la première image avec un rôle "logo"
-		include_spip('base/abstract_sql');
-
-		// Quel rôle va-t-on chercher ?
-		if ($flux['args']['mode'] === 'on') {
-			$role = 'logo';
-		} elseif ($flux['args']['mode'] === 'off') {
-			$role = 'logo_survol';
-		} else {
-			$role = $flux['args']['mode'];
-		}
-
-		// Hack : le logo du site à un id négatif
-		if ($flux['args']['objet'] == 'site_spip'
-			and intval($flux['args']['id_objet']) === 0
-		) {
-			$flux['args']['id_objet'] = -1;
-		}
-
-		if ($image = sql_fetsel(
-			'fichier, extension',
-			'spip_documents as d inner join spip_documents_liens as l on d.id_document = l.id_document',
-			array(
-				'l.objet = '.sql_quote($flux['args']['objet']),
-				'l.id_objet = '.intval($flux['args']['id_objet']),
-				sql_in('extension', array('png', 'jpg', 'gif')),
-				'l.role='.sql_quote($role),
-			),
-			'', //group
-			'0+titre, titre'
-		)) {
-			// Si c'est un URL on retourne le chemin directement
-			if (filter_var($image['fichier'], FILTER_VALIDATE_URL)) {
-				$chemin_complet = $image['fichier'];
-			}
-			// Sinon on va le chercher dans IMG
-			else {
-				$chemin_complet = _DIR_IMG . $image['fichier'];
-			}
-
-			$flux['data'] = array(
-				'chemin' => $chemin_complet,
-				'timestamp' => @filemtime($chemin_complet),
-			);
-		}
-	}
-	return $flux;
-}
-
-
-/**
  * Empêcher les logos de sortir dans les boucles DOCUMENTS standards.
  *
  * C'est nécessaire pour la rétro-compatibilité avec les squelettes existants.
