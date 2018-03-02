@@ -309,10 +309,10 @@ function roles_documents_recuperer_fond($flux) {
 
 	// Ajout de document
 	if ($flux['args']['fond'] == 'formulaires/inc-upload_document'
-		and !empty($flux['args']['contexte']['objet'])
-		and !empty($flux['args']['contexte']['id_objet'])
+		and isset($flux['args']['contexte']['objet'])
+		and isset($flux['args']['contexte']['id_objet'])
 	) {
-	
+
 		// Est-ce qu'il s'agit d'un ajout de logo ?
 		$editer_logo = !empty($flux['args']['contexte']['editer_logo']);
 		$principaux = $editer_logo ? true : false;

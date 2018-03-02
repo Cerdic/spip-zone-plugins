@@ -44,10 +44,11 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 	if (!$objet
 		or (
 			$objet == 'site'
-			and !intval($id_objet)
+			and intval($id_objet) <= 0
 		)
 	) {
 		$objet = 'site_spip';
+		$id_objet = -1;
 	}
 	$objet = objet_type($objet);
 	$id_table_objet = id_table_objet($objet);
@@ -89,41 +90,48 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 	// Chercher les logos
 	$logos = array();
 	$config = array(
-		'logo'        => lire_config('activer_logos'),
-		'logo_survol' => lire_config('activer_logos_survol'),
+		lire_config('activer_logos'),
+		lire_config('activer_logos_survol'),
 	);
+
+	// =====================================
+	// 1) Cherchons en pririté les documents
+	// =====================================
+	// Rôles principaux de l'objet (= rôles de logos)
+	$infos_roles = roles_presents('document', $objet);
+	$roles_principaux = isset($infos_roles['choix']['principaux']) ? $infos_roles['choix']['principaux'] : array('logo', 'logo_survol');
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
-
-	// 1) Cherchons d'abord les logos historiques
-	$etats_vers_roles = array(
-		'on'  => 'logo',
-		'off' => 'logo_survol',
-	);
-	$etats_attribues = array();
-	foreach(array_keys($etats_vers_roles) as $etat) {
-		$role = $etats_vers_roles[$etat];
-		if ($config[$role] == 'oui'
-			and $logo = $chercher_logo($id_objet, $id_table_objet, $etat)
-		) {
-			$logos[] = $logo;
-			$etats_attribues[] = $role;
-		}
-	}
-
-	// 2) Cherchons ensuite les documents avec des rôles de logos
+	// Rôles principaux attribués...
 	$roles_logos = roles_documents_presents_sur_objet($objet, $id_objet, 0, true);
-	// On ajuste la liste avec les vieux logos et leurs états
-	$roles_logos['attribues'] = array_merge($roles_logos['attribues'], $etats_attribues);
-	$roles_logos['attribuables'] = array_diff($roles_logos['attribuables'], $etats_attribues);
+	// Cherchons le document pour chaque rôle attribué
 	foreach ($roles_logos['attribues'] as $role) {
-		// Vérifier la config de certains rôles connus
-		$config_actif = (!in_array($role, array_keys($config)) or (in_array($role, array_keys($config)) and $config[$role] == 'oui'));
+		// Vérifier la config : si le rôle est dans la liste des rôles principaux, on regarde à quelle position il se trouve et on prend la config correspondante, sinon on ignore.
+		$position = array_search($role, $roles_principaux);
+		$config_actif = isset($config[$position]) ? $config[$position] == 'oui' : true;
 		if ($config_actif
 			and $logo = $chercher_logo($id_objet, $id_table_objet, $role)
 		) {
 			$logos[] = $logo;
 		}
 	}
+
+	// ====================================
+	// 2) Cherchons ensuite les vieux logos
+	// ====================================
+	$etats = array('on', 'off');
+	foreach($etats as $k => $etat) {
+		if ($config[$k] == 'oui'
+			and $logo = $chercher_logo($id_objet, $id_table_objet, $etat, true)
+		) {
+			$logos[] = $logo;
+			// On ajuste les rôles attribués (en faisant correspondre avec les rôles principaux)
+			if (isset($roles_principaux[$k])) {
+				array_push($roles_logos['attribues'], $roles_principaux[$k]);
+				unset($roles_logos['attribuables'], $roles_principaux[$k]);
+			}
+		}
+	}
+	$roles_logos['attribues'] = array_unique($roles_logos['attribues']);
 
 	// S'il y a moins de rôles attribués que de rôles possibles, on peut en ajouter
 	$joindre_documents = count($roles_logos['possibles']) > count($roles_logos['attribues']);
@@ -233,10 +241,11 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
 	if (!$objet
 		or (
 			$objet == 'site'
-			and !intval($id_objet)
+			and intval($id_objet) <= 0
 		)
 	) {
 		$objet = 'site_spip';
+		$id_objet = -1;
 	}
 
 	// Redirection
@@ -252,16 +261,20 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
 	if (isset($res_joindre_document['message_ok'])) {
 
 		// En présence d'un role sélectionne, on requalifie le lien créé
-		if ($role = _request('role')
+		if ($roles = _request('roles')
 			and !empty($res_joindre_document['ids'])
 		) {
+			// le role est unique mais on ne sait jamais
+			if (is_array($roles)) {
+				$roles = array_shift($roles);
+			}
 			// On ne prend qu'un seul document
-			if ($id_logo = intval(array_shift($res_joindre_document['ids']))) {
+			if ($id_document = intval(array_shift($res_joindre_document['ids']))) {
 				$update = sql_updateq(
 					'spip_documents_liens',
-					array('role' => $role),
+					array('role' => $roles),
 					array(
-						'id_document=' . intval($id_logo),
+						'id_document=' . intval($id_document),
 						'objet='       . sql_quote($objet),
 						'id_objet='    . intval($id_objet),
 						'role='        . sql_quote('document'),
