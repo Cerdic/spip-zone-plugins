@@ -53,6 +53,7 @@ function autolang_utiliser_langue_visiteur() {
 }
 
 function autolang_aiguiller(){
+	if (_request('lang')) return;
 	$langue = (isset($_COOKIE['spip_lang']) ? $_COOKIE['spip_lang'] : '');
 	if (!$langue) {
 		include_spip('inc/lang');
@@ -60,7 +61,7 @@ function autolang_aiguiller(){
 		include_spip('inc/cookie');
 		spip_setcookie('spip_lang', $langue);
 		include_spip('inc/headers');
-		redirige_par_entete(self());
+		redirige_par_entete(parametre_url(self(), 'lang', $langue));
 	}
 }
 
