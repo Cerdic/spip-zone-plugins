@@ -78,14 +78,15 @@ function roles_documents_presents_sur_objet($objet, $id_objet, $id_document=0, $
 	$roles_attribuables = array_diff($roles_possibles, $roles_attribues);
 
 	// On filtre éventuellement les rôles principaux (=logos)
+	// Note : array_values pour remettre les bonnes clés
 	if (!is_null($principaux)
 		and !empty($infos_roles['roles']['principaux'])
 		and $roles_principaux = $infos_roles['roles']['principaux']
 	){
 		$filtrer = ($principaux ? 'array_intersect' : 'array_diff');
-		$roles_possibles = $filtrer($roles_possibles, $roles_principaux);
-		$roles_attribues = $filtrer($roles_attribues, $roles_principaux);
-		$roles_attribuables = $filtrer($roles_attribuables, $roles_principaux);
+		$roles_possibles = array_values($filtrer($roles_possibles, $roles_principaux));
+		$roles_attribues = array_values($filtrer($roles_attribues, $roles_principaux));
+		$roles_attribuables = array_values($filtrer($roles_attribuables, $roles_principaux));
 	}
 
 	// On retourne le détail

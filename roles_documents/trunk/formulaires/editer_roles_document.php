@@ -59,8 +59,10 @@ function formulaires_editer_roles_document_charger_dist($id_document, $objet, $i
 function formulaires_editer_roles_document_traiter_dist($id_document, $objet, $id_objet, $options = array()) {
 
 	include_spip('inc/editer_liens'); // inclus également les rôles
+	include_spip('base/objets');
 	$res = array();
-	$done = false;
+	$done = false; // flag pour savoir si on fait les traitements génériques de editer_liens
+	$id_table_objet = id_table_objet($objet);
 
 	// Récupérer les rôles principaux (=logos) de l'objet
 	$roles = roles_documents_presents_sur_objet($objet, $id_objet, 0, true);
@@ -69,7 +71,7 @@ function formulaires_editer_roles_document_traiter_dist($id_document, $objet, $i
 	$ajouter = _request('ajouter_lien');
 	$supprimer = _request('supprimer_lien');
 
-	// Ajouter
+	// Ajouter : vérification de l'unicité du rôle
 	if ($ajouter) {
 		$role = retrouver_action_role_document($ajouter);
 		// Si c'est rôle principal (=logo) déjà attribué, on met à jour le lien existant
@@ -90,9 +92,21 @@ function formulaires_editer_roles_document_traiter_dist($id_document, $objet, $i
 			);
 			$done = true;
 		}
+		// S'il existe un vieux logo avec le même rôle, on le supprime
+		// On fait la correspondance 'on' = role principal 1, 'off' = rôle principal 2
+		$chercher_logo = charger_fonction('chercher_logo', 'inc');
+		$etats = array('on', 'off');
+		$numero_role = array_search($role, $roles['possibles']);
+		$etat = isset($etats[$numero_role]) ? $etats[$numero_role] : false;
+		if ($etat
+			and $vieux_logo = $chercher_logo($id_objet, $id_table_objet, $etat, true)
+		) {
+			include_spip('action/editer_logo');
+			logo_supprimer($objet, $id_objet, $etat);
+		}
 	}
 
-	// Si on a fait les traitements nous-même
+	// Si on a fini nos traitements
 	if ($done) {
 		$res['editable'] = true;
 
