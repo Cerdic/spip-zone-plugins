@@ -39,12 +39,14 @@ function action_iconifier_logo_dist($arg = null) {
 	include_spip('inc/autoriser');
 	if (autoriser('iconifier', $objet, $id_objet)) {
 
+		include_spip('inc/roles');
 		include_spip('base/objets');
+		include_spip('action/editer_logo');
 
 		// Chercher le logo : la fonction renvoie en priorité les vieux logos
 		$id_table_objet = id_table_objet($objet);
 		$chercher_logo = charger_fonction('chercher_logo', 'inc');
-		if ($logo = $chercher_logo($id_objet, $id_table_objet, $etat)) {
+		if ($logo = $chercher_logo($id_objet, $id_table_objet, $etat, true)) {
 
 			// Ajouter le logo en tant que document
 			$_files = array(
@@ -61,9 +63,12 @@ function action_iconifier_logo_dist($arg = null) {
 			) {
 
 				// Retrouver le rôle de logo à attribuer
+				// On fait une correspondance on = 1er rôle principal, off = 2ème
+				$roles = roles_presents('document', $objet);
+				$roles_principaux = isset($roles['roles']['principaux']) ? $roles['roles']['principaux'] : array('logo', 'logo_survol');
 				$etats_roles = array(
-					'on'  => 'logo',
-					'off' => 'logo_survol',
+					'on'  => $roles_principaux[0],
+					'off' => isset($roles_principaux[1]) ? $roles_principaux[1] : $roles_principaux[0],
 				);
 				$role = $etats_roles[$etat];
 
@@ -91,7 +96,6 @@ function action_iconifier_logo_dist($arg = null) {
 				);
 
 				// On supprime l'ancien logo
-				include_spip('action/editer_logo');
 				logo_supprimer($objet, $id_objet, $etat);
 
 			}

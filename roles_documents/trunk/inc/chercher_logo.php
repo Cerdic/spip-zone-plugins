@@ -56,6 +56,8 @@ function inc_chercher_logo($id_objet, $id_table_objet, $role = 'on', $historique
 	// ===================================
 	if (!$historique) {
 
+		include_spip('inc/roles');
+
 		// Retrouver les rôles principaux pour cet objet
 		$roles = roles_presents('document', $objet);
 		$roles_principaux = !empty($roles['choix']['principaux']) ? $roles['choix']['principaux'] : array('logo', 'logo_survol');
