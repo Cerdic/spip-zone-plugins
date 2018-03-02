@@ -78,9 +78,15 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 [(#GET{referrer}|oui)
 	#SET{domaine,#GET{referrer}|match{#GET{reg_domaine},"i",3}}
 	#SET{valeurs_actuelles,#GET{sites_affluents}|table_valeur{#GET{domaine}}|sinon{#ARRAY}}
-	#SET{nb_visites,#GET{sites_affluents}|table_valeur{#GET{domaine}}|table_valeur{visites}|plus{1}}
+	
+	#SET{nb_visites,#GET{valeurs_actuelles}|table_valeur{visites}|plus{1}}
 	#SET{valeurs_actuelles,#GET{valeurs_actuelles}|array_merge{#ARRAY{visites,#GET{nb_visites}}}}
-	#SET{ajout,#ARRAY{#GET{domaine},#GET{valeurs_actuelles}|push{#GET{referrer}}}}
+	
+	#SET{referers_actuels,#GET{valeurs_actuelles}|table_valeur{referers}|sinon{#ARRAY}}
+	#SET{referers,#GET{referers_actuels}|push{#GET{referrer}}}
+	#SET{valeurs_actuelles,#GET{valeurs_actuelles}|array_merge{#ARRAY{referers,#GET{referers}}}}
+	
+	#SET{ajout,#ARRAY{#GET{domaine},#GET{valeurs_actuelles}}}
 	
 	[(#ENV{id_article}|non)
 		#SET{sites_affluents,#GET{sites_affluents}|array_merge{#GET{ajout}}}
@@ -148,20 +154,22 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 		
 		#SET{domaine,#REFERER|match{#GET{reg_domaine},"i",3}}
 		#SET{valeurs_actuelles,#GET{sites_affluents}|table_valeur{#GET{domaine}}|sinon{#ARRAY}}
-		#SET{nb_visites,#GET{sites_affluents}|table_valeur{#GET{domaine}}|table_valeur{visites}|plus{#VISITES}}
+		
+		#SET{nb_visites,#GET{valeurs_actuelles}|table_valeur{visites}|plus{1}}
 		#SET{valeurs_actuelles,#GET{valeurs_actuelles}|array_merge{#ARRAY{visites,#GET{nb_visites}}}}
 		
-		#SET{ajout,#ARRAY{#GET{domaine},#GET{valeurs_actuelles}|push{#REFERER}}}
+		#SET{referers_actuels,#GET{valeurs_actuelles}|table_valeur{referers}|sinon{#ARRAY}}
+		#SET{referers,#GET{referers_actuels}|push{#REFERER}}
+		#SET{valeurs_actuelles,#GET{valeurs_actuelles}|array_merge{#ARRAY{referers,#GET{referers}}}}
+		
+		#SET{ajout,#ARRAY{#GET{domaine},#GET{valeurs_actuelles}}}
+		
 		#SET{sites_affluents,#GET{sites_affluents}|array_merge{#GET{ajout}}}
 		
-		[(#REM) Quelles visites sur les articles depuis ces referers sur la période (jour/veille) ?
-			Pour le savoir il faudrait ajouter visites_jours et  visites_veille sur spip_referes_articles.
-		]
 	</BOUCLE_affluents_jour_>
 <//B_visites>
 
 [(#ENV{id_article}|oui) #SET{visites,#GET{articles_lus}|table_valeur{a#ENV{id_article}}|table_valeur{visites}} ]
-
 
 [(#REM)
 	Affichage final des données enregistrées dans les tableaux.
@@ -317,7 +325,7 @@ Afficher des stats en plus dans l'admin avec des boucles data :
 						
 						<B_referers_>
 						<ul style="margin-bottom:10px;height:4em;overflow:auto;">
-						<BOUCLE_referers_(DATA){source table, #VALEUR|array_unique}{cle!=visites}{par valeur}>
+						<BOUCLE_referers_(DATA){source table, #VALEUR{referers}}{par valeur}>
 							[<li><a href="(#VALEUR)">[(#VALEUR|replace{^https?://}|replace{"\?.*$"}|couper{30})]</a></li>]
 						</BOUCLE_referers_>
 						</ul>
