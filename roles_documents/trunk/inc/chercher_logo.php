@@ -51,6 +51,13 @@ function inc_chercher_logo($id_objet, $id_table_objet, $role = 'on', $historique
 	$etats = array('on', 'off'); // vieux états
 	$etat = $role; // pour les vieux logos
 
+	// Hack vilain : supprimer_logo cherche les vieux logos
+	if ($backtrace = debug_backtrace(2, 2)
+		and $backtrace[1]['function'] == 'logo_supprimer'
+	) {
+		$historique = true;
+	}
+
 	// ===================================
 	// Cherchons en priorité les documents
 	// ===================================

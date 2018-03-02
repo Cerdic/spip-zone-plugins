@@ -23,9 +23,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Arguments séparés par un tiret
  *     sous la forme `$objet-$id_objet-$etat`
  *
- *     - objet     : type d'objet
- *     - id_objet  : identifiant de l'objet
- *     - etat      : on ou off
+ *     - objet    : type d'objet
+ *     - id_objet : identifiant de l'objet
+ *     - etat     : on ou off
  * @return void
  */
 function action_supprimer_logo_dist($arg = null) {
@@ -34,6 +34,7 @@ function action_supprimer_logo_dist($arg = null) {
 	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
+		//$arg = $_REQUEST['arg']; // temporaire pour dev
 	}
 	list($objet, $id_objet, $etat) = explode('-', $arg);
 
