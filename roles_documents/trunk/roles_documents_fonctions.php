@@ -90,8 +90,8 @@ function roles_documents_presents_sur_objet($objet, $id_objet, $id_document=0, $
 
 	// On retourne le détail
 	$roles = array(
-		'possibles'     => $roles_possibles,
-		'attribues'     => $roles_attribues,
+		'possibles'    => $roles_possibles,
+		'attribues'    => $roles_attribues,
 		'attribuables' => $roles_attribuables,
 	);
 

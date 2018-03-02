@@ -40,7 +40,7 @@ function roles_documents_document_desc_actions($flux) {
 		and $id_objet
 	) {
 		// bloc à recharger
-		$ajaxreload = !empty($flux['args']['ajaxreload']) ? $flux['args']['ajaxreload'] : '#documents';
+		$ajaxreload = !empty($flux['args']['ajaxreload']) ? $flux['args']['ajaxreload'] : '.liste_items.documents';
 		// mini-formulaire
 		$form = recuperer_fond(
 			'prive/squelettes/inclure/editer_roles_document',
