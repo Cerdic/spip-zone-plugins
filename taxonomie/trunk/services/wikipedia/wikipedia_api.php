@@ -190,7 +190,7 @@ function wikipedia_credit($id_taxon, $informations) {
 	// On crée l'url du taxon sur le site de Wikipedia
 	$url = str_replace('%langue%', 'fr', _TAXONOMIE_WIKIPEDIA_PAGE_BASE_URL)
 		   . rawurlencode($taxon['nom_scientifique']);
-	$link = '<a class="nom_scientifique" href="' . $url . '" rel="noreferrer">' . ucfirst($taxon['nom_scientifique']) . '</a>';
+	$link = '<a class="nom_scientifique_inline" href="' . $url . '" rel="noreferrer">' . ucfirst($taxon['nom_scientifique']) . '</a>';
 
 	// La liste des champs concernés (a priori le descriptif)
 	include_spip('inc/taxonomer');

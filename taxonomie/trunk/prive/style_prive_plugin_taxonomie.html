@@ -21,9 +21,10 @@
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
 /* Le nom scientifique d'un taxon est toujours affiché en italique avec une majuscule */
+.nom_scientifique_inline { display: inline-block; font-style: italic; text-transform: lowercase; }
+.nom_scientifique_inline:first-letter { text-transform: uppercase; }
+.nom_scientifique { font-style: italic; text-transform: lowercase; }
 .nom_scientifique:first-letter { text-transform: uppercase; }
-.nom_scientifique { font-style: italic; text-transform: capitalize; }
-
 /* Espacer un peu les blocs numero de la boite d'infos */
 #navigation .infos .numero { margin-bottom: 10px; }
 

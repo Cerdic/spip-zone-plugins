@@ -8,8 +8,8 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<div class="editer-groupe">
 			[(#SAISIE{radio, type_recherche,
-				explication=<:taxonomie:explication_type_recherche:>,
-				label=<:taxonomie:label_type_recherche:>,
+				explication=<:taxonomie:explication_recherche_type:>,
+				label=<:taxonomie:label_recherche_type:>,
 				datas=#ENV{_types_recherche},
 				defaut=#ENV{_type_recherche_defaut}
 			})]
@@ -20,15 +20,16 @@
 				obligatoire=oui
 			})]
 
-			[(#SAISIE{oui_non, recherche_stricte,
-				explication=<:taxonomie:explication_recherche_stricte:>,
-				label=<:taxonomie:label_recherche_stricte:>,
-				defaut=on
+			[(#SAISIE{radio, correspondance,
+				explication=<:taxonomie:explication_recherche_correspondance:>,
+				label=<:taxonomie:label_recherche_correspondance:>,
+				datas=#ENV{_correspondances},
+				defaut=#ENV{_correspondance_defaut}
 			})]
 
 			[(#SAISIE{radio, regne,
-				label=<:taxonomie:label_regne_recherche:>,
-				explication=<:taxonomie:explication_regne_recherche:>,
+				label=<:taxonomie:label_recherche_regne:>,
+				explication=<:taxonomie:explication_recherche_regne:>,
 				datas=#ENV{_regnes},
 				defaut=#ENV{_regne_defaut}
 			})]
@@ -40,3 +41,23 @@
 	</div>
 	</form>
 </div>
+
+<script type="text/javascript">/*<![CDATA[*/
+	jQuery(document).ready(function() {
+	[(#ENV{type_recherche, scientificname}|=={scientificname}|oui)
+		jQuery(".choix_debut").hide('fast');
+		jQuery(".choix_fin").hide('fast');
+	]
+		jQuery("input[name='type_recherche']").change(function() {
+			if (jQuery("input[name='type_recherche']:checked").val() == 'commonname') {
+				jQuery(".choix_debut").show('fast');
+				jQuery(".choix_fin").show('fast');
+			}
+			else {
+				jQuery(".choix_debut").hide('fast');
+				jQuery(".choix_fin").hide('fast');
+			}
+			jQuery(this).blur();
+		});
+	});
+/*]]>*/</script>

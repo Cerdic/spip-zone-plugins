@@ -19,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *      - `type_recherche`         : (saisie) type de la recherche par nom scientifique (`scientificname`)
  *                                   ou nom commun (`commonname`).
  * 		- `recherche`              : (saisie) texte de la recherche.
- * 		- `recherche_stricte`      : (saisie) indique si on doit rechercher le texte exact ou pas.
+ * 		- `correspondance`         : (saisie) indique si on doit rechercher le texte exact ou pas.
  * 		- `regne`                  : (saisie) règne d'appartenance de l'espèce pour limiter le scope de recherche.
  * 		- `_types_recherche`       : (affichage) recherche par nom scientifique ou par nom commun.
  * 		- `_type_recherche_defaut` : (affichage) le type de recherche par défaut est toujours `nom_scientifique`.
@@ -37,7 +37,7 @@ function formulaires_creer_espece_charger() {
 	// dans la vérification 1) et règne.
 	$valeurs['type_recherche'] = _request('type_recherche');
 	$valeurs['recherche'] = _request('recherche');
-	$valeurs['recherche_stricte'] = _request('recherche_stricte');
+	$valeurs['correspondance'] = _request('correspondance');
 	$valeurs['regne'] = _request('regne');
 
 	// Types de recherche et défaut.
@@ -50,6 +50,13 @@ function formulaires_creer_espece_charger() {
 	}
 	$valeurs['_type_recherche_defaut'] = 'scientificname';
 
+	// Types de correspondance et défaut.
+	$correspondances = array('exact', 'contenu', 'debut', 'fin');
+	foreach ($correspondances as $_correspondance) {
+		$valeurs['_correspondances'][$_correspondance] = _T("taxonomie:label_recherche_correspondance_${_correspondance}");
+	}
+	$valeurs['_correspondance_defaut'] = 'exact';
+
 	// Acquérir la liste des règnes déjà chargés. Si un règne n'est pas chargé il n'apparait pas dans la liste
 	// car il ne sera alors pas possible de créer correctement l'espèce avec sa hiérarchie de taxons.
 	include_spip('inc/taxonomer');
@@ -57,18 +64,23 @@ function formulaires_creer_espece_charger() {
 	$regnes = explode(':', _TAXONOMIE_REGNES);
 	foreach ($regnes as $_regne) {
 		if (taxonomie_regne_existe($_regne, $meta_regne)) {
-			$valeurs['_regnes'][$_regne] = '<span class="nom_scientifique">' . $_regne . '</span>, ' . _T("taxonomie:regne_${_regne}");
+			$valeurs['_regnes'][$_regne] = ucfirst(_T("taxonomie:regne_${_regne}"));
 		}
 	}
 	// On force toujours un règne, le premier de la liste.
 	reset($valeurs['_regnes']);
 	$valeurs['_regne_defaut'] = key($valeurs['_regnes']);
 
-	// Initialisation des paramètres du formulaire utilisés en étape 2 et mis à jour dans la vérification
+	// Initialisation des paramètres du formulaire utilisés en étape 2 et 3 et mis à jour dans la vérification
 	// de l'étape 1.
+	// -- Etape 2
 	$valeurs['_taxons'] = _request('_taxons');
 	$valeurs['_taxon_defaut'] = _request('_taxon_defaut');
 	$valeurs['_resume'] = _request('_resume');
+	// -- Etape 3
+	$valeurs['tsn'] = _request('tsn');
+	$valeurs['_espece'] = _request('_espece');
+	$valeurs['_parent'] = _request('_parent');
 
 	// Préciser le nombre d'étapes du formulaire
 	$valeurs['_etapes'] = 3;
@@ -81,14 +93,14 @@ function formulaires_creer_espece_charger() {
  *
  * @uses itis_search_tsn()
  * @uses itis_get_information()
+ * @uses itis_get_record()
  *
  * @return array
  *        Message d'erreur si aucun taxon disponible ou si il existe une erreur dans les saisies ou
  *        chargement (set_request) des champs utiles à l'étape 2 sinon. Ces champs sont :
- * 		- `_taxons`       : (affichage) liste des taxons correspondant à la recherche (tsn, nom scientifique et rang).
- * 		- `_taxon_defaut` : (affichage) tsn du taxon choisi par défaut.
- * 		- `_resume`       : (affichage) texte résumant les saisies de l'étape 1 dont le texte de la recherche.
- */
+ * 	      - `_taxons`       : (affichage) liste des taxons correspondant à la recherche (tsn, nom scientifique et rang).
+ * 	      - `_taxon_defaut` : (affichage) tsn du taxon choisi par défaut.
+  */
 function formulaires_creer_espece_verifier_1() {
 
 	// Initialisation des erreurs de vérification.
@@ -121,41 +133,25 @@ function formulaires_creer_espece_verifier_1() {
 		if ($recherche_conforme) {
 			// On recherche le ou les taxons correspondant au texte saisi.
 			// -- récupération des autres variables
-			$recherche_stricte = _request('recherche_stricte') == 'on';
+			$correspondance = _request('correspondance');
+			$recherche_exacte = ($correspondance == 'exact');
 			$regne =  _request('regne');
 			// -- suppression des espaces en trop dans la chaîne de recherche pour permettre la comparaison
-			//    avec le combinedName d'ITIS
+			//    avec le combinedName ou le commonName d'ITIS.
 			$recherche = preg_replace('#\s{2,}#', ' ', $recherche);
 
+			// Appel de l'API de recherche d'ITIS en fonction du type et de la correspondance de recherche
 			include_spip('services/itis/itis_api');
-			$taxons = itis_search_tsn($type_recherche, $recherche, $recherche_stricte);
-			if ($taxons) {
-				// Construire le résumé des saisies de l'étape 1
-				$valeurs['_resume'] = '<p>' . _T('taxonomie:info_espece_recherche_intro') . '</p>';
-				$item_quoi = 'taxonomie:info_espece_recherche_'
-					. $type_recherche
-					. ($recherche_stricte ? '_exact' : '');
-				$recherche_decoree = "<strong>$recherche</strong>";
-				$recherche_decoree = $type_recherche == 'scientificname'
-					? '<span class="nom_scientifique">' . $recherche_decoree . '</span>'
-					: $recherche_decoree;
-				$valeurs['_resume'] .= '<ul class="spip">'
-					. '<li>'
-					. _T(
-					    $item_quoi,
-						array('recherche' => $recherche_decoree)
-					)
-					. '</li>'
-					. '<li>'
-					. _T(
-					    'taxonomie:info_espece_recherche_regne',
-						array('regne' => '<span class="nom_scientifique">' . $regne . '</span>')
-					)
-					. '</li>'
-					.'</ul>'
-					.'<p>' . _T('taxonomie:info_espece_recherche_fin') . '</p>';
+			$action = $type_recherche;
+			if (($type_recherche == 'commonname') and ($correspondance == 'debut')) {
+				$action = 'commonnamebegin';
+			} elseif (($type_recherche == 'commonname') and ($correspondance == 'fin')) {
+				$action = 'commonnameend';
+			}
+			$taxons = itis_search_tsn($action, $recherche, $recherche_exacte);
 
-				// Construire le tableau des taxons trouvés en supprimant les taxons qui n'appartiennent pas
+			if ($taxons) {
+			// Construire le tableau des taxons trouvés en supprimant les taxons qui n'appartiennent pas
 				// au règne concerné ou qui n'ont pas un rang compatible (uniquement pour la recherche par nom commun).
 				$valeurs['_taxon_defaut'] = 0;
 				foreach ($taxons as $_taxon) {
@@ -164,7 +160,7 @@ function formulaires_creer_espece_verifier_1() {
 							// On recherche le rang de chaque taxon pour l'afficher avec le nom scientifique mais
 							// aussi pour vérifier que ce rang est compatible avec une espèce si on cherche par nom commun.
 							$rang = itis_get_information('rankname', $_taxon['tsn']);
-							$valeurs['_taxons'][$_taxon['tsn']] = '<span class="nom_scientifique">'
+							$valeurs['_taxons'][$_taxon['tsn']] = '<span class="nom_scientifique_inline">'
 								. $_taxon['nom_scientifique']
 								. '</span>'
 								. ' - '
@@ -196,10 +192,7 @@ function formulaires_creer_espece_verifier_1() {
 					set_request($_champ, $_valeur);
 				}
 			} else {
-				$erreurs['message_erreur'] = _T(
-				    'taxonomie:erreur_recherche_aucun_taxon',
-					array('texte' => $recherche, 'regne' => '<span class="nom_scientifique">' . $regne . '</span>')
-				);
+				$erreurs['message_erreur'] = _T('taxonomie:erreur_recherche_aucun_taxon');
 			}
 		} else {
 			$erreurs['recherche'] = _T('taxonomie:erreur_recherche_nom_scientifique');
@@ -214,7 +207,62 @@ function formulaires_creer_espece_verifier_1() {
 
 /**
  * Vérification de l'étape 2 du formulaire : on présente les informations principales du taxon choisi avant
- * que le 'utilisateur ne valide définitivement son choix.
+ * que l'utilisateur ne valide définitivement son choix.
+ *
+ * @uses itis_get_record()
+ *
+ * @return array
+ *        Message d'erreur si le service ITIS ne renvoie pas les informations demandées (a priori jamais) ou
+ *        chargement (set_request) des champs utiles à l'étape 3 sinon. Ces champs sont :
+ * 		- `_espece` : (affichage) toutes les informations ITIS sur l'espèce.
+ * 		- `_parent` : (affichage) toutes les informations ITIS sur le parent direct de l'espèce.
+ */
+function formulaires_creer_espece_verifier_2() {
+
+	// Initialisation des erreurs de vérification.
+	$erreurs = array();
+
+	if ($tsn = intval(_request('tsn'))) {
+		// On récupère les informations de base du taxon afin de les présenter à l'utilisateur pour validation
+		// finale.
+		include_spip('services/itis/itis_api');
+		$espece = itis_get_record($tsn);
+		if ($espece) {
+			// On passe la description de l'espèce après avoir construit la liste des noms communs utiles.
+			$nom_commun = '';
+			if ($espece['nom_commun']) {
+				include_spip('inc/config');
+				$langues_utilisees = lire_config('taxonomie/langues_utilisees');
+				foreach ($espece['nom_commun'] as $_langue => $_nom) {
+					if (in_array($_langue, $langues_utilisees)) {
+						$nom_commun .= ($nom_commun ? '<br />': '') . '[' . $_langue .'] ' . $_nom;
+					}
+				}
+			}
+			$espece['nom_commun_utilise'] = $nom_commun;
+			set_request('_espece', $espece);
+
+			// Détermination du parent : on récupère son record complet
+			$parent = itis_get_record($espece['tsn_parent']);
+			if ($parent) {
+				set_request('_parent', $parent);
+			} else {
+				$erreurs['message_erreur'] = _T('taxonomie:erreur_acces_taxon');
+			}
+		} else {
+			$erreurs['message_erreur'] = _T('taxonomie:erreur_acces_taxon');
+		}
+	} else {
+		$erreurs['message_erreur'] = _T('taxonomie:erreur_acces_taxon');
+	}
+
+	return $erreurs;
+}
+
+
+/**
+ * Vérification de l'étape 3 du formulaire : on vérifie que l'espèce n'existe pas déjà dans la base de données
+ * taxonomique.
  *
  * @uses wikipedia_get_page()
  * @uses convertisseur_texte_spip()
@@ -226,27 +274,23 @@ function formulaires_creer_espece_verifier_1() {
  * 		- `_lien_defaut`   : lien par défaut (étape 2)
  * 		- `_descriptif`    : texte de la page trouvée ou choisie par l'utilisateur (étape 2)
  */
-function formulaires_creer_espece_verifier_2() {
+function formulaires_creer_espece_verifier_3() {
 
 	// Initialisation des erreurs de vérification.
 	$erreurs = array();
 
-	if ($tsn = intval(_request('taxon'))) {
-		// On récupère les informations de base du taxon afin de les présenter à l'utilisateur pour validation
-		// finale.
-		include_spip('services/itis/itis_api');
-		$record = itis_get_record($tsn);
-		if ($record) {
-			// Préparer la visualisation finale.
-		} else {
-			$erreurs['message_erreur'] = _T('taxonomie:erreur_taxon_inconnu');
+	if ($tsn = intval(_request('tsn'))) {
+		// On vérifie que l'espèce n'a pas déjà été créée et possède un statut autre que refusé ou poubelle.
+		if (sql_countsel('spip_especes', array('tsn=' . $tsn))) {
+			$erreurs['message_erreur'] = _T('taxonomie:erreur_espece_deja_creee');
 		}
 	} else {
-		$erreurs['message_erreur'] = _T('taxonomie:erreur_taxon_inconnu');
+		$erreurs['message_erreur'] = _T('taxonomie:erreur_acces_taxon');
 	}
 
 	return $erreurs;
 }
+
 
 /**
  * Exécution du formulaire : si une page est choisie et existe le descriptif est inséré dans le taxon concerné
@@ -263,63 +307,23 @@ function formulaires_creer_espece_verifier_2() {
 function formulaires_creer_espece_traiter() {
 	$retour = array();
 
-	// Initialisation des saisies.
-	$langue = _request('langue');
-	$choix_descriptif = _request('choix_descriptif');
+	if ($tsn = intval(_request('tsn'))) {
+		// Vérification de l'existence du parent.
+		// Si le parent n'existe pas en base c'est soit une erreur si le rang supérieur ou égal au genre soit
+		// normal si le rang est un sous-genre. En effet, les sous-genres sont uniquement créés au coups par coups
+		// quand on crée les espèces.
 
-	// Récupération des informations de base du taxon
-	$select = array('tsn', 'nom_scientifique', 'edite', 'descriptif', 'sources');
-	$where = array('id_taxon=' . sql_quote($id_taxon));
-	$taxon = sql_fetsel($select, 'spip_taxons', $where);
+		// Ajout de l'espèce en base
+		// Si le rang est bien espèce alors on ajoute que ce taxon. Sinon il faut ajouter toute l'arborecence jusqu'au
+		// taxon d'espèce.
 
-	// Récupération de la page wikipedia choisie:
-	include_spip('services/wikipedia/wikipedia_api');
-	if ($choix_descriptif == $taxon['nom_scientifique']) {
-		// Le descriptif déjà fourni par défaut est le bon. On ne met pas à jour le cache.
-		$recherche = array('name' => $taxon['nom_scientifique'], 'tsn' => $taxon['tsn']);
-		$information = wikipedia_get_page($recherche, $langue);
-	} else {
-		// On a choisit une autre page que celle par défaut : on recharge le cache avec la nouvelle recherche.
-		$recherche = array('name' => $choix_descriptif, 'tsn' => $taxon['tsn']);
-		$information = wikipedia_get_page($recherche, $langue, null, array('reload' => true));
-	}
-
-	// On convertit le descriptif afin de proposer un texte plus clair.
-	if (!empty($information['text'])) {
-		// Si le plugin Convertisseur est actif, conversion du texte mediawiki vers SPIP.
-		include_spip('inc/filtres');
-		$convertir = chercher_filtre('convertisseur_texte_spip');
-		$texte_converti = $convertir ? $convertir($information['text'], 'MediaWiki_SPIP') : $information['text'];
-
-		// Mise en format multi systématique et limitation de la chaîne en fonction du nombre de langues utilisées.
-		include_spip('inc/config');
-		$langues_utilisees = lire_config('taxonomie/langues_utilisees');
-		$limite_texte = floor(65535 / (count($langues_utilisees) + 1));
-		$texte_converti = '<multi>'
-						  . '[' . $langue . ']'
-						  . substr($texte_converti, 0, $limite_texte)
-						  . '</multi>';
-		// Mise à jour pour le taxon du descriptif et des champs connexes en base de données
-		$maj = array();
-		// - le texte du descriptif est inséré dans la langue choisie en mergeant avec l'existant
-		//   si besoin. On limite la taille du descriptif pour éviter un problème lors de l'update
-		include_spip('inc/taxonomer');
-		$maj['descriptif'] = taxon_merger_traductions($texte_converti, $taxon['descriptif']);
-		// - l'indicateur d'édition est positionné à oui
-		$maj['edite'] = 'oui';
-		// - la source wikipedia est ajoutée (ou écrasée si elle existe déjà)
-		$maj['sources'] = array('wikipedia' => array('champs' => array('descriptif')));
-		if ($sources = unserialize($taxon['sources'])) {
-			$maj['sources'] = array_merge($maj['sources'], $sources);
-		}
-		$maj['sources'] = serialize($maj['sources']);
-		// - Mise à jour
-		sql_updateq('spip_taxons', $maj, 'id_taxon=' . sql_quote($id_taxon));
+		// Ajout du parent si nécessaire.
 
 		// Redirection vers la page d'édition du taxon
-		$retour['redirect'] = parametre_url(generer_url_ecrire('taxon_edit'), 'id_taxon', $id_taxon);
+		$id_espece = 0;
+		$retour['redirect'] = parametre_url(generer_url_ecrire('espece_edit'), 'id_espece', $id_espece);
 	} else {
-		$retour['message_erreur'] = _T('taxonomie:erreur_wikipedia_descriptif');
+		$retour['message_erreur'] = _T('taxonomie:erreur_inconnue');
 	}
 
 	return $retour;

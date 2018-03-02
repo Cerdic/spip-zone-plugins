@@ -19,8 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_sources_label' => 'Sources',
 	'champ_texte_label' => 'Texte explicatif sur l\'espèce',
 	'champ_tsn_genre_label' => 'TSN du parent de l\'espèce',
-	'champ_tsn_label' => 'Tsn',
-	'champ_tsn_parent_label' => 'Tsn parent',
+	'champ_tsn_label' => 'TSN',
+	'champ_tsn_parent_label' => 'TSN parent',
 
 	// I
 	'icone_creer_espece' => 'Créer une espèce',
@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_ajouter_espece' => 'Ajouter une espèce',
 	'texte_changer_statut_espece' => 'Cette espèce est :',
 	'texte_creer_associer_espece' => 'Créer et associer une espèce',
-	'texte_definir_comme_traduction_espece' => 'Cette espèce est une traduction de la espèce numéro :',
+	'texte_definir_comme_traduction_espece' => 'Cette espèce est une traduction de l\'espèce numéro :',
 	'titre_espece' => 'Espèce',
 	'titre_especes' => 'Espèces',
 	'titre_especes_rubrique' => 'Espèces de la rubrique',

@@ -74,6 +74,28 @@ $GLOBALS['itis_webservice'] = array(
 			),
 			'compare'  => 'commonName'
 		),
+		'commonnamebegin' => array(
+			'function' => 'searchByCommonNameBeginsWith',
+			'argument' => 'srchKey',
+			'list'     => 'commonNames',
+			'index'    => array(
+				'tsn'        => 'tsn',
+				'nom_commun' => 'commonName',
+				'langage'    => 'language'
+			),
+			'compare'  => 'commonName'
+		),
+		'commonnameend' => array(
+			'function' => 'searchByCommonNameEndsWith',
+			'argument' => 'srchKey',
+			'list'     => 'commonNames',
+			'index'    => array(
+				'tsn'        => 'tsn',
+				'nom_commun' => 'commonName',
+				'langage'    => 'language'
+			),
+			'compare'  => 'commonName'
+		),
 		'scientificname' => array(
 			'function' => 'searchByScientificName',
 			'argument' => 'srchKey',
@@ -198,7 +220,8 @@ $GLOBALS['itis_webservice'] = array(
  * @uses inc_taxonomie_requeter_dist()
  *
  * @param string $action
- *        Recherche par nom commun ou par nom scientifique. Prend les valeurs `commonname` ou `scientificname`
+ *        Recherche par nom commun ou par nom scientifique. Prend les valeurs `commonname`, `scientificname`
+ *        ou `commonnamebegin`.
  * @param string $search
  *        Nom à rechercher précisément. Seul le taxon dont le nom coincidera exactement sera retourné.
  * @param bool   $strict
@@ -231,7 +254,9 @@ function itis_search_tsn($action, $search, $strict = true) {
 		// on renvoie le "bon" taxon ou tous les taxons trouvés.
 		foreach ($data[$api['list']] as $_data) {
 			if ($_data) {
-				if (!$strict or ($strict and (strcasecmp($_data[$api['compare']], $search) === 0))) {
+				if (($action == 'commonnamebegin')
+				or !$strict
+				or ($strict and (strcasecmp($_data[$api['compare']], $search) === 0))) {
 					$tsn = array();
 					foreach ($api['index'] as $_key => $_destination) {
 						if ($_key == 'langage') {
@@ -310,6 +335,9 @@ function itis_get_record($tsn) {
 					$record[$_destination] = is_string($element) ? trim($element) : $element;
 				}
 			}
+
+			// Insérer de base le tsn.
+			$record['tsn'] = intval($tsn);
 
 			// Passer en minuscules le rang et le règne exprimé en anglais.
 			$record['rang'] = strtolower($record['rang']);
@@ -769,7 +797,7 @@ function itis_credit($id_taxon, $informations = array()) {
 
 	// On crée l'url du taxon sur le site ITIS
 	$url_taxon = _TAXONOMIE_ITIS_TAXON_BASE_URL . $taxon['tsn'];
-	$link_taxon = '<a class="nom_scientifique" href="' . $url_taxon . '" rel="noreferrer">' . ucfirst($taxon['nom_scientifique']) . '</a>';
+	$link_taxon = '<a class="nom_scientifique_inline" href="' . $url_taxon . '" rel="noreferrer">' . ucfirst($taxon['nom_scientifique']) . '</a>';
 	$link_site = '<a href="' . _TAXONOMIE_ITIS_SITE_URL . '" rel="noreferrer">' . _TAXONOMIE_ITIS_SITE_URL . '</a>';
 
 	// On établit la citation
