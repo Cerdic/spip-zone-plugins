@@ -223,7 +223,7 @@ function notifications_notifications_destinataires($flux){
             if (!empty($GLOBALS['notifications']['forum_article'])) {
                 $s = sql_select("F.email_auteur, F.notification_email, A.email",
 				"spip_forum AS F LEFT JOIN spip_auteurs AS A ON F.id_auteur=A.id_auteur",
-				"notification=1 AND objet=".sql_quote($t['objet'])." AND id_objet=" . intval($t['id_objet']) . " AND (email_auteur != '' OR notification_email != '' OR A.email IS NOT NULL) AND F.statut NOT IN ('off','spam','prop". $exclurepublic ."')");                
+				"notification=1 AND objet=".sql_quote($t['objet'])." AND id_objet=" . intval($t['id_objet']) . " AND (email_auteur != '' OR notification_email != '' OR A.email IS NOT NULL) AND F.statut NOT IN ('off','spam','prop'". $exclurepublic .")");                
                 }
 			while ($r = sql_fetch($s)){
 				if ($r['notification_email'])
