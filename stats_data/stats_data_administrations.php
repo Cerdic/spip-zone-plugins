@@ -15,8 +15,8 @@ function stats_data_upgrade($nom_meta_base_version,$version_cible){
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 			if (version_compare($current_version,'0.1','<')){
 				include_spip('base/abstract_sql');
-				sql_alter("TABLE spip_referers_articles ADD visites_jour int UNSIGNED NOT NULL");
-				sql_alter("TABLE spip_referers_articles ADD visites_veille int UNSIGNED NOT NULL");
+				sql_alter("TABLE spip_referers_articles ADD visites_jour INT DEFAULT 0");
+				sql_alter("TABLE spip_referers_articles ADD visites_veille INT DEFAULT 0");
 				ecrire_meta($nom_meta_base_version,$current_version="0.1");
 		}
 	}
