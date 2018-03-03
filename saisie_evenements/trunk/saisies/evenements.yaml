@@ -24,10 +24,7 @@ options:
           explication: '<:saisies:option_explication_explication:>'
           size: 50
       -
-        saisie: 'oui_non'
         options:
-          nom: 'defaut'
-          label: '<:saisies:option_defaut_label:>'
   -
     saisie: 'fieldset'
     options:
