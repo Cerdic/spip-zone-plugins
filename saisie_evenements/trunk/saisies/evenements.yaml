@@ -26,6 +26,16 @@ options:
       -
         saisie: 'radio'
         options:
+          nom: 'type_affichage'
+          label: '<:saisie_evenements:option_type_affichage_label:>'
+          data:
+            titre_date:  '<:saisie_evenements:option_type_affichage_titre_date:>'
+            titre:  '<:saisie_evenements:option_type_affichage_titre:>'
+            date:  '<:saisie_evenements:option_type_affichage_date:>'
+          defaut: 'titre_date'
+      -
+        saisie: 'radio'
+        options:
           nom: 'type_choix'
           label: '<:saisie_evenements:option_type_choix_label:>'
           data:

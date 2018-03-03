@@ -6,6 +6,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	'option_type_affichage_label' => 'Présentation des événements', 
+	'option_type_affichage_titre' => 'Uniquement le titre de l\'événement',
+	'option_type_affichage_date' => 'Uniquement la date de l\'événement',
+	'option_type_affichage_titre_date' => 'Le titre et la date de l\'événement',
+	
 	'option_type_choix_label' => 'Type de choix', 
 	'option_type_choix_radio' => 'Choix unique (boutons radios)',
 	'option_type_choix_checkbox' => 'Choix multiples (case à cocher)',
