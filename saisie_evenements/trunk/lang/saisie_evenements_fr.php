@@ -8,6 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
-	'saisie_evenements_titre' => 'Sélecteur d’événements'
+	'saisie_evenements_titre' => 'Sélecteur d’événements', 
 	'saisie_evenements_explication' => 'Un choix d’un ou plusieurs événements',
 );
