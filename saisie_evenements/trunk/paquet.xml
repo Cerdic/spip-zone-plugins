@@ -1,5 +1,5 @@
 <paquet
-	prefix="saisie_evenement"
+	prefix="saisie_evenements"
 	categorie="outil"
 	version="0.1.0"
 	etat="dev"
