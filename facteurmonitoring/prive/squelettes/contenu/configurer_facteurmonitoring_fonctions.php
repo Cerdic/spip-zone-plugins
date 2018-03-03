@@ -1,5 +1,7 @@
 <?php
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 //
 // tester la fonction imap_open est dispo
@@ -51,4 +53,3 @@ function facteurmonitoring_test_imap($time) {
 
 
 
-?>

@@ -3,13 +3,15 @@
  * Utilisations de pipelines par Monitoring du Facteur
  *
  * @plugin     Monitoring du Facteur
- * @copyright  2015
+ * @copyright  2018
  * @author     erational
  * @licence    GNU/GPL
  * @package    SPIP\Facteurmonitoring
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 //
@@ -95,4 +97,3 @@ function genie_facteurmonitoring_dist() {
 
 	return 1;
 }
-?>

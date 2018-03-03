@@ -3,13 +3,15 @@
  * Utilisations de pipelines par Monitoring du Facteur
  *
  * @plugin     Monitoring du Facteur
- * @copyright  2015
+ * @copyright  2018
  * @author     erational
  * @licence    GNU/GPL
  * @package    SPIP\Facteurmonitoring\Pipelines
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 function facteurmonitoring_taches_generales_cron($taches_generales){
@@ -49,4 +51,3 @@ function facteurmonitoring_accueil_informations($texte){
 }
 
 
-?>
