@@ -22,7 +22,7 @@
 	<select name="[(#GET{multiple}|?{roles\[\],roles})]" id="roles" class="select[(#GET{multiple}|oui) chosen]"[ readonly="(#GET{readonly})"][ multiple="(#GET{multiple})"]>
 
 		<BOUCLE_selecteur_roles(DATA){source table, #ENV{roles_attribuables}}>
-		#SET{selected, #VALEUR|=={#ENV{role}}|?{selected}}
+		#SET{selected, #VALEUR|=={#ENV{role}}|ou{#ENV{role}|non|et{#COMPTEUR_BOUCLE|=={1}}}|?{selected}}
 		<option value="#VALEUR"[ selected="(#GET{selected})"]>[(#VALEUR|role{document})]</option>
 		</BOUCLE_selecteur_roles>
 

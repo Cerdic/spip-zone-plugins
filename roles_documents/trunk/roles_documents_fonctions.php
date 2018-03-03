@@ -43,7 +43,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     - attribués : ceux attribués
  *     - attribuables : ceux non attribues
  */
-function roles_documents_presents_sur_objet($objet, $id_objet, $id_document=0, $principaux = null) {
+function roles_documents_presents_sur_objet($objet, $id_objet, $id_document = 0, $principaux = null) {
 	static $done = array();
 
 	// Stocker le résultat
