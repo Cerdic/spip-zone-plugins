@@ -1,0 +1,46 @@
+.formulaire_editer_logo h3 {
+  margin-bottom: 2px; }
+.formulaire_editer_logo h4 {
+  margin-bottom: 10px;
+  border: solid 1px #e1e1e1;
+  border-radius: 3px;
+  padding: 1px 5px;
+  background-color: white; }
+.formulaire_editer_logo .editer-groupe .editer {
+  padding-top: 8px;
+  padding-bottom: 8px; }
+.formulaire_editer_logo .apercu label {
+  margin-top: 1px;
+  margin-bottom: 3px;
+  text-align: center; }
+.formulaire_editer_logo .apercu .boutons {
+  border-radius: 0; }
+.formulaire_editer_logo .apercu input.file {
+  margin-top: 5px; }
+.formulaire_editer_logo .apercu input.submit {
+  margin-top: 5px; }
+
+.formulaire_editer_logo_site .apercu label {
+  float: none;
+  margin-left: 0; }
+
+@supports (display: grid) {
+  .formulaire_configurer_logos_roles .saisie_checkbox {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); }
+    .formulaire_configurer_logos_roles .saisie_checkbox label {
+      grid-column-start: 1;
+      grid-column-end: 5;
+      width: auto; }
+    .formulaire_configurer_logos_roles .saisie_checkbox .choix {
+      border: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      align-items: center; }
+      .formulaire_configurer_logos_roles .saisie_checkbox .choix > * {
+        grid-area: 1;
+        margin: 0;
+        padding: 3px; } }
+
+/*# sourceMappingURL=logos_roles.css.map */
