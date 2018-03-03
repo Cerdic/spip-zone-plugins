@@ -99,7 +99,7 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 	// =====================================
 	// Rôles principaux de l'objet (= rôles de logos)
 	$infos_roles = roles_presents('document', $objet);
-	$roles_principaux = isset($infos_roles['choix']['principaux']) ? $infos_roles['choix']['principaux'] : array('logo', 'logo_survol');
+	$roles_principaux = isset($infos_roles['roles']['principaux']) ? $infos_roles['roles']['principaux'] : array('logo', 'logo_survol');
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	// Rôles principaux attribués...
 	$roles_logos = roles_documents_presents_sur_objet($objet, $id_objet, 0, true);

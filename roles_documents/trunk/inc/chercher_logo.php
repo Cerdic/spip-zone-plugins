@@ -68,7 +68,7 @@ function inc_chercher_logo($id_objet, $id_table_objet, $role = 'on', $historique
 
 		// Retrouver les rôles principaux pour cet objet
 		$roles = roles_presents('document', $objet);
-		$roles_principaux = !empty($roles['choix']['principaux']) ? $roles['choix']['principaux'] : array('logo', 'logo_survol');
+		$roles_principaux = !empty($roles['roles']['principaux']) ? $roles['roles']['principaux'] : array('logo', 'logo_survol');
 
 		// Correspondance vieux états / rôles principaux (voir @note)
 		if ($role == $etats[0]) {
