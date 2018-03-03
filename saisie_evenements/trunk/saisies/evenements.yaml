@@ -77,6 +77,39 @@ options:
           nom: 'ids_mot'
           label: '<:saisie_evenements:ids_mot_label:>'
           explication: '<:saisie_evenements:ids_mot_explication:>'
+      -
+        saisie: 'explication'
+        options:
+          nom: 'saisie_evenements_chronologie'
+          texte: '<:saisie_evenements:saisie_evenements_chronologie_texte:>'
+      -
+        saisie: 'date'
+        options:
+          nom: 'date_debut_min_fixe'
+          label: '<:saisie_evenements:date_debut_min_fixe_label:>'
+          explication: '<:saisie_evenements:date_debut_min_fixe_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'date_debut_min_mobile'
+          label: '<:saisie_evenements:date_debut_min_mobile_label:>'
+          explication: '<:saisie_evenements:date_debut_min_mobile_explication:>'
+        verifier:
+          type: 'entier'
+      -
+        saisie: 'date'
+        options:
+          nom: 'date_debut_max_fixe'
+          label: '<:saisie_evenements:date_debut_max_fixe_label:>'
+          explication: '<:saisie_evenements:date_debut_max_fixe_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'date_debut_max_mobile'
+          label: '<:saisie_evenements:date_debut_max_mobile_label:>'
+          explication: '<:saisie_evenements:date_debut_max_mobile_explication:>'
+        verifier:
+          type: 'entier'
   -
     saisie: 'fieldset'
     options:
