@@ -105,13 +105,6 @@ Ce formulaire se comporte plus ou moins comme l'ancien, avec quelques améliorat
 - Permet d'éditer le document correspondant.
 - Ajoute un pipeline qui permet d'ajouter des liens d'actions en-dessous des aperçus de logo : `logo_desc_actions`.
 
-### Modification de `inc/chercher_logo.php` ###
-
-La façon habituelle d'appeler cette fonction donne les résultats habituels, on garde une totale rétro-compatibilité.
-Mais l'on peut aussi passer un rôle au paramètre `$mode`, et dans ce cas la fonction trouve un éventuel document associé à l'objet avec ce rôle.
-
-S'il existe un logo enregistré avec l'ancienne API, on le retourne en priorité.
-
 ### Modification de `action/editer_logo.php` ###
 
 Ici aussi, on essaie de garder une totale rétro-compatibilité, mais en permettant d'utiliser un rôle dans le troisième paramètre.
