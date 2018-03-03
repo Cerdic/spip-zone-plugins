@@ -64,6 +64,7 @@ function inc_chercher_logo($id_objet, $id_table_objet, $role = 'on', $historique
 	if (!$historique) {
 
 		include_spip('inc/roles');
+		include_spip('inc/utils');
 
 		// Retrouver les rôles principaux pour cet objet
 		$roles = roles_presents('document', $objet);
@@ -97,8 +98,8 @@ function inc_chercher_logo($id_objet, $id_table_objet, $role = 'on', $historique
 			)
 		)) {
 			$document = array_shift($document);
-			$chemin = _NOM_PERMANENTS_ACCESSIBLES . $document['fichier'];
-			$dossier = _NOM_PERMANENTS_ACCESSIBLES . substr($document['fichier'], 0, strrpos($document['fichier'], '/'));
+			$chemin = find_in_path(_NOM_PERMANENTS_ACCESSIBLES . $document['fichier']);
+			$dossier = find_in_path(_NOM_PERMANENTS_ACCESSIBLES . substr($document['fichier'], 0, strrpos($document['fichier'], '/')));
 			$logo = array(
 				$chemin,
 				$dossier,
