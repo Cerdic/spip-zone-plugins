@@ -77,11 +77,6 @@ D'autres paramètres sont optionnels :
 - __dimensions :__ Ce paramètre permet de forcer les dimensions d'un logo, la balise `#LOGO_` correspondante recadre alors automatiquement le logo. Doit être un tableau avec les clés `largeur` et `hauteur`. Cette fonction est particulièrement utile quand on utilise le plugin massicot, qui propose alors directement le bon format pour chaque type de logo.
 - __defaut :__ Permet de spécifier un logo qui sera affiché par défaut, qu'on ira alors chercher dans le chemin de SPIP.
 
-### Modification des boucles `DOCUMENTS` ###
-
-Pour des raisons de rétro-compatibilité, les boucles `DOCUMENTS` ne montrent pas les logos.
-Les logos n'apparaissent que si l'on utilise le critère `{role}` dans la boucle.
-
 ### Migration des logos existants ###
 
 Comme les logos enregistrés avec l'ancienne API fonctionnent toujours avec la nouvelle, il n'y pas d'urgence à migrer, la cohabitation se fait bien.

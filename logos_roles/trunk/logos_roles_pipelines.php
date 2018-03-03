@@ -9,60 +9,6 @@
  */
 
 /**
- * Empêcher les logos de sortir dans les boucles DOCUMENTS standard. C'est
- * nécessaire pour la rétro-compatibilité avec les squelettes existants. Pour
- * Pour voir les logos dans les boucles DOCUMENTS, il faut utiliser
- * explicitement le critère {role}
- *
- * @pipeline pre_boucle
- * @param  array $boucle Données du pipeline
- * @return array       Données du pipeline
- */
-function logos_roles_pre_boucle($boucle) {
-
-	// Gros hack, on vient ajouter un critère {tout} à la boucle qui va bien
-	// pour afficher les logos dans la médiathèque.
-	if (($boucle->id_boucle === '_galerie')
-			and (in_array(
-				substr($boucle->descr['sourcefile'], -49),
-				array(
-					'prive/squelettes/inclure/mediatheque-galerie.html',
-					'prive/squelettes/inclure/mediatheque-choisir.html',
-				)
-			))) {
-		$boucle->modificateur['tout'] = true;
-	}
-
-	if ($boucle->type_requete === 'documents') {
-		$utilise_critere_logo = false;
-		foreach ($boucle->criteres as $critere) {
-			if ($critere->type === 'critere') {
-				if (($critere->param[0][0]->texte === 'role') or
-					($critere->op === 'role')) {
-					$utilise_critere_logo = true;
-				}
-			}
-		}
-
-		if (! $utilise_critere_logo) {
-			include_spip('inc/objets');
-			$table_liens = table_objet_sql('documents') . '_liens';
-			$abbrev_table_lien = array_search($table_liens, $boucle->from);
-
-			if ($abbrev_table_lien and (! $boucle->modificateur['tout'])) {
-				$boucle->where[] = array(
-					"'NOT REGEXP'",
-					"'$abbrev_table_lien.role'",
-					"'\'^logo\''"
-				);
-			}
-		}
-	}
-
-	return $boucle;
-}
-
-/**
  * Insérer du js dans le head de l'espace privé
  *
  * @pipeline jquery_plugins
