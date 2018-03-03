@@ -24,7 +24,40 @@ options:
           explication: '<:saisies:option_explication_explication:>'
           size: 50
       -
+        saisie: 'explication'
         options:
+          nom: 'saisie_evenements_ids'
+          texte: '<:saisie_evenements:saisie_evenements_ids_texte:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'ids_evenement'
+          label: '<:saisie_evenements:ids_evenement_label:>'
+          explication: '<:saisie_evenements:ids_evenement_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'ids_article'
+          label: '<:saisie_evenements:ids_article_label:>'
+          explication: '<:saisie_evenements:ids_article_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'ids_rubrique'
+          label: '<:saisie_evenements:ids_rubrique_label:>'
+          explication: '<:saisie_evenements:ids_rubrique_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'ids_branche'
+          label: '<:saisie_evenements:ids_branche_label:>'
+          explication: '<:saisie_evenements:ids_branche_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'ids_mot'
+          label: '<:saisie_evenements:ids_mot_label:>'
+          explication: '<:saisie_evenements:ids_mot_explication:>'
   -
     saisie: 'fieldset'
     options:
