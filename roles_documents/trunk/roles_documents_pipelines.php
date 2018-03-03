@@ -34,6 +34,7 @@ function roles_documents_document_desc_actions($flux) {
 	if (
 		$exec !== false // page d'un objet éditorial
 		and $exec['edition'] === false // pas en mode édition
+		and $flux['args']['variante'] != 'editer_logo'
 		and $id_document = intval($flux['args']['id_document'])
 		and autoriser('modifier', 'document', $id_document)
 		and $objet
