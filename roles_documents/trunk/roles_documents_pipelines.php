@@ -295,7 +295,6 @@ function roles_documents_formulaire_traiter($flux) {
 }
 
 
-
 /**
  * Modifier le résultat du calcul d’un squelette donné.
  *
@@ -337,6 +336,30 @@ function roles_documents_recuperer_fond($flux) {
 
 		$selecteur_roles = recuperer_fond('formulaires/inc-selecteur_role', $contexte);
 		$flux['data']['texte'] = $selecteur_roles . $flux['data']['texte'];
+	}
+
+	return $flux;
+}
+
+
+/**
+ * Modifier le résultat du calcul d’un squelette de formulaire.
+ *
+ * - Formulaire d'édition de logo : on a besoin de bénéficier des éventuelles modifications effectuées auu formulaire joindre_document.
+ *   Pour se faire on appelle le même pipeline à nouveau en se faisant passer pour ce dernier.
+ *
+ * @param array $flux
+ * @return array
+ **/
+function roles_documents_formulaire_fond($flux) {
+
+	if ($flux['args']['form'] == 'editer_logo'
+		//and !empty($flux['args']['contexte']['_bigup_rechercher_fichiers'])
+	) {
+		$flux_joindre_document = $flux;
+		$flux_joindre_document['args']['form'] = 'joindre_document';
+		$data = pipeline('formulaire_fond', $flux_joindre_document);
+		$flux['data'] = $data;
 	}
 
 	return $flux;

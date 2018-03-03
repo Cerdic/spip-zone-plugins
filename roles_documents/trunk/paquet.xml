@@ -27,4 +27,5 @@
 	<pipeline nom="formulaire_charger" inclure="roles_documents_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="roles_documents_pipelines.php" />
 	<pipeline nom="recuperer_fond" inclure="roles_documents_pipelines.php" />
+	<pipeline nom="formulaire_fond" inclure="roles_documents_pipelines.php" />
 </paquet>
