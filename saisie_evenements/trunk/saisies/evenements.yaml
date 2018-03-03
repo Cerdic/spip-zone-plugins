@@ -118,4 +118,4 @@ defaut:
   options:
     label: '<:saisie_evenements:saisie_evenement_titre:>'
     # champs extras (definition du champ sql)
-    sql: "varchar(3) DEFAULT '' NOT NULL"
+    sql: "TEXT DEFAULT '' NOT NULL"
