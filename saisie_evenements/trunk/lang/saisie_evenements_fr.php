@@ -20,8 +20,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'id_article_explication' => 'Proposer les événements des articles des articles suivants.',
 	'id_article_label' => 'Articles',
-	'id_branche_explication' => 'Proposer les événements des articles dans les branches suivantes. Une branche correspond à une rubrique et ses sous-rubriques.',
-	'id_branche_label' => 'Branche',
+	'branche_explication' => 'Proposer les événements des articles dans les branches suivantes. Une branche correspond à une rubrique et ses sous-rubriques.',
+	'branche_label' => 'Branche',
 	'id_evenement_explication' => 'Proposer les événements suivants.',
 	'id_evenement_label' => 'Événements',
 	'id_mot_explication' => 'Proposer les événements ayant le(s) mot(s) clé suivant.',

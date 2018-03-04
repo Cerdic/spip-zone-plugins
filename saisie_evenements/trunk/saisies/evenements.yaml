@@ -68,9 +68,9 @@ options:
       -
         saisie: 'input'
         options:
-          nom: 'id_branche'
-          label: '<:saisie_evenements:id_branche_label:>'
-          explication: '<:saisie_evenements:id_branche_explication:>'
+          nom: 'branche'
+          label: '<:saisie_evenements:branche_label:>'
+          explication: '<:saisie_evenements:branche_explication:>'
       -
         saisie: 'input'
         options:
