@@ -19,5 +19,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_ok' => 'le stock à été mis a jour',
 	// S
 	'stocks'	=> 'Stocks',
-	'stock_gestion' => 'Gestion du stock'
+	'stock_epuise'=>'Épuisé',
+	'stock_gestion' => 'Gestion du stock',
 );
