@@ -40,7 +40,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return bool
  *        `true` si le chargement a réussi, `false` sinon
  */
-function taxonomie_regne_charger($regne, $type_rang, $codes_langue = array()) {
+function taxonomie_regne_charger($regne, $codes_langue = array()) {
 
 	$retour = false;
 	$taxons_edites = array();
@@ -61,21 +61,8 @@ function taxonomie_regne_charger($regne, $type_rang, $codes_langue = array()) {
 	include_spip('services/itis/itis_api');
 	$meta_regne['rangs']['hierarchie'] = itis_read_ranks($regne, $meta_regne['rangs']['sha']);
 
-	// Extraire la liste des seuls rangs à charger des types de rangs choisis.
-	// On limite les rangs au genre.
-	$id_genre = $meta_regne['rangs']['hierarchie'][_TAXONOMIE_RANG_GENRE]['id'];
-	foreach ($meta_regne['rangs']['hierarchie'] as $_rang => $_description) {
-		if ($_description['id'] <= $id_genre) {
-			if ((($type_rang == _TAXONOMIE_RANG_TYPE_PRINCIPAL) and ($_description['type'] == _TAXONOMIE_RANG_TYPE_PRINCIPAL))
-			or (($type_rang == _TAXONOMIE_RANG_TYPE_SECONDAIRE) and ($_description['type'] != _TAXONOMIE_RANG_TYPE_INTERCALAIRE))
-			or (($type_rang == _TAXONOMIE_RANG_TYPE_INTERCALAIRE))) {
-				$meta_regne['rangs']['utiles'][$_rang] = $_description['id'];
-			}
-		}
-	}
-
 	// Lecture de la hiérarchie des taxons à partir du fichier texte extrait de la base ITIS
-	$taxons = itis_read_hierarchy($regne, $meta_regne['rangs']['utiles'], $meta_regne['sha']);
+	$taxons = itis_read_hierarchy($regne, $meta_regne['rangs']['hierarchie'], $meta_regne['sha']);
 
 	// Ajout des noms communs extraits de la base ITIS dans la langue demandée
 	if ($taxons) {
@@ -132,7 +119,6 @@ function taxonomie_regne_charger($regne, $type_rang, $codes_langue = array()) {
 		if ($retour) {
 			// Insérer les informations de chargement dans une meta propre au règne.
 			// Ca permettra de tester l'utilité ou pas d'un rechargement du règne
-			$meta_regne['type_rang'] = $type_rang;
 			$meta_regne['maj'] = date('Y-m-d H:i:s');
 
 			// Mise à jour de la meta du règne.

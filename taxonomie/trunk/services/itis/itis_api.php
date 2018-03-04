@@ -567,11 +567,10 @@ function itis_list_vernaculars($language) {
  *
  * @param string $kingdom
  *        Nom scientifique du règne en lettres minuscules : `animalia`, `plantae`, `fungi`.
- * @param array  $ranks
- *        Liste des rangs à charger à partir du fichier des taxons. Cette liste contient soit les rangs
- *        principaux du règne, soit les rangs principaux et secondaires, soit tous les rangs y compris
- *        les rangs intercalaires.
- *        Le tableau est de la forme [nom anglais du rang en minuscules] = id ITIS du rang
+ * @param array  $ranks_hierarchy
+ *        Liste des rangs disponibles pour le règne concerné structurée comme une hiérarchie du règne aux rangs
+ *        inférieurs. Cette liste contient tous les rangs principaux, secondaires et intercalaires.
+ *        Le tableau est de la forme [nom anglais du rang en minuscules] = détails du rang
  * @param int    $sha_file
  *        Sha calculé à partir du fichier de taxons correspondant au règne choisi. Le sha est retourné
  *        par la fonction afin d'être stocké par le plugin.
@@ -581,17 +580,25 @@ function itis_list_vernaculars($language) {
  *        index correspond à un champ de la table `spip_taxons`. Le tableau est ainsi prêt pour une
  *        insertion en base de données.
  */
-function itis_read_hierarchy($kingdom, $ranks, &$sha_file) {
+function itis_read_hierarchy($kingdom, $ranks_hierarchy, &$sha_file) {
 
 	$hierarchy = array();
 	$sha_file = false;
 
-	if ($ranks) {
+	if ($ranks_hierarchy) {
+		// Extraire de la liste les rangs du règne au genre, seuls rangs disponibles dans le fichier ITIS.
+		include_spip('inc/taxonomer');
+		$id_genre = $ranks_hierarchy[_TAXONOMIE_RANG_GENRE]['id'];
+		foreach ($ranks_hierarchy as $_rang => $_description) {
+			if ($_description['id'] <= $id_genre) {
+				$ranks[$_rang] = $_description['id'];
+			}
+		}
+
 		// Classer la liste des rangs de manière à aller du règne au genre.
 		asort($ranks);
 
-		// Construire la regexp qui permet de limiter la hiérarchie comme demandée
-		include_spip('inc/taxonomer');
+		// Construire la regexp à partir de la liste des rangs maintenant connue.
 		$rank_list = implode('|', array_map('ucfirst', array_keys($ranks)));
 		$regexp = str_replace('%rank_list%', $rank_list, _TAXONOMIE_ITIS_REGEXP_RANKNAME);
 
