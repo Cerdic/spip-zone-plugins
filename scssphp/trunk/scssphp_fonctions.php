@@ -43,17 +43,16 @@ function scss_compile($style, $contexte = array()) {
 
 	// Inline source maps
 	// http://leafo.github.io/scssphp/docs/#source-maps
-	if (defined('_SCSS_SOURCE_MAP') and '_SCSS_SOURCE_MAP' == true) {
-		$scss->setSourceMap(Compiler::SOURCE_MAP_INLINE);
-	}
+	// if (defined('_SCSS_SOURCE_MAP') and '_SCSS_SOURCE_MAP' == true) {
+	// 	$scss->setSourceMap(Compiler::SOURCE_MAP_INLINE);
+	// }
+
 	// pipeline : scss_variables
 	// Surcharger des variables depuis un plugin ou une configuration
 	// les variables sont un tableau 'variable'=>'scss value'
 	// ex : 'header'=> '(background:pink,color:white)'
 	$scss_vars = pipeline('scss_variables',array());
 	$scss->setVariables($scss_vars);
-
-
 
 	try {
 		$out = $scss->compile($style);
