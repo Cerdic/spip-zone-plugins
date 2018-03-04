@@ -1,1 +1,10 @@
-
+<BOUCLE_evenements(EVENEMENTS)
+	{par date_debut}
+	{id_evenement ?IN #ENV{id_evenement}|explode{","}}
+	{id_article ?IN #ENV{id_article}|explode{","}}
+	{id_rubrique ?IN #ENV{id_rubrique}|explode{","}}
+	{branche ?#ENV{branche}|explode{","}}
+	{id_mot ?IN #ENV{id_mot}} 
+	>
+	#TITRE #ID_EVENEMENT<br />
+</BOUCLE_evenements>
