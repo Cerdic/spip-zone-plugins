@@ -10,5 +10,6 @@ if (_request('var_mode') == 'css') {
 	define('_VAR_MODE', 'calcul');
 }
 
-// Activer les LINE_COMMENTS si besoin
-// define('_SCSS_LINE_COMMENTS', false);
+// Activer les _SCSS_SOURCE_MAP si besoin
+// http://leafo.github.io/scssphp/docs/#source-maps
+// define('_SCSS_SOURCE_MAP', false);
