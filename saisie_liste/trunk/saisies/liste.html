@@ -25,7 +25,7 @@
   <input type="hidden" name="#ENV{nom}\[permutations\]"
          value="[(#ENV{valeur}|count|enumerer|joindre{','})]" />
 
-  <ul id="saisie-liste-#ENV{nom}" class="saisie-liste">
+  <ul id="saisie-liste-#ENV{nom}" class="saisie-liste[ (#VAL{saisie_liste-#ENV{nom}-ajouter}|_request|oui)ajouter]">
     <BOUCLE_liste(DATA) {enum #ENV{interdire_ajout}|?{1,0}, #ENV{valeur}|count}>
       #SET{compteur_objets, #COMPTEUR_BOUCLE|moins{1}}
       <li>

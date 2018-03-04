@@ -10,7 +10,7 @@ $.fn.saisieListe = function( options ) {
 
     var self = this;
 
-    if (options.hide_new === true) {
+    if ((options.hide_new === true) && (! this.hasClass('ajouter'))) {
         this.find('> li').last().hide().addClass('cache');
 
         this.parent().find('input[name="' + options.nom + '\[action\]\[ajouter\]"]')

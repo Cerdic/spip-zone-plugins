@@ -279,6 +279,9 @@ function traitements_liste($nom_saisie, $appelant) {
 
 	if (array_key_exists('action', $valeurs)) {
 		$interrompre_traitements_formulaire[$nom_saisie] = true;
+		if (isset($valeurs['action']['ajouter'])) {
+			set_request("saisie_liste-$nom_saisie-ajouter", 'oui');
+		}
 	}
 
 	$valeurs = executer_actions_liste_objet($valeurs);
