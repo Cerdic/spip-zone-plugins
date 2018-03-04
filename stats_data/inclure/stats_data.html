@@ -144,6 +144,8 @@ Afficher des stats dans l'admin avec des boucles data :
 		
 	</BOUCLE_articles_jour>
 	
+	#GET{req_affluents}
+	
 	#SET{domaines,#ARRAY}
 	#SET{valeurs_actuelles,#ARRAY}
 	[(#REM) Referers qui ont envoyé des visites dans la période ]
@@ -235,7 +237,7 @@ Afficher des stats dans l'admin avec des boucles data :
 		[<h2><a href="[(#SELF|parametre_url{id_article,''})]" class="ajax">(#GET{date}|affdate)</a><small title="Dernière mise à jour le [(#GET{maj}|affdate)] [ (#GET{maj}|affdate{H\hi s})s]"> — [ (#GET{maj}|affdate{H\hi})</small>]</h2>]
 	</div>
 	<div>
-		<h3><BOUCLE_titre(ARTICLES){id_article=#ENV{id_article}}><a href="#URL_ARTICLE">[(#TITRE|couper{25})]</a></BOUCLE_titre>Tous les articles<//B_titre></h3>
+		<h3><BOUCLE_titre(ARTICLES){id_article=#ENV{id_article}}><a href="#URL_ARTICLE">[(#TITRE|couper{25})]</a></BOUCLE_titre>Tous les articles lus<//B_titre></h3>
 	</div>
 </div>
 
@@ -247,8 +249,6 @@ Afficher des stats dans l'admin avec des boucles data :
 ]
 
 <div id="conteneur_stats">
-	
-	
 	
 	[(#REM) Afficher les données du tableau ]
 	
