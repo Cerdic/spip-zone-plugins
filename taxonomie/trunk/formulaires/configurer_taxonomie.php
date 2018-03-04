@@ -21,7 +21,7 @@ function formulaires_configurer_taxonomie_charger() {
 	$valeurs = array();
 
 	// Liste des langues possibles gérées par le plugin
-	include_spip('inc/taxonomer');
+	include_spip('inc/taxonomie');
 	$langues_possibles = explode(':', _TAXONOMIE_LANGUES_POSSIBLES);
 	foreach ($langues_possibles as $_code_langue) {
 		$valeurs['_langues'][$_code_langue] = traduire_nom_langue($_code_langue);

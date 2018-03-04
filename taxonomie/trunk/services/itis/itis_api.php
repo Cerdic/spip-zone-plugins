@@ -587,7 +587,7 @@ function itis_read_hierarchy($kingdom, $ranks_hierarchy, &$sha_file) {
 
 	if ($ranks_hierarchy) {
 		// Extraire de la liste les rangs du règne au genre, seuls rangs disponibles dans le fichier ITIS.
-		include_spip('inc/taxonomer');
+		include_spip('inc/taxonomie');
 		$id_genre = $ranks_hierarchy[_TAXONOMIE_RANG_GENRE]['id'];
 		foreach ($ranks_hierarchy as $_rang => $_description) {
 			if ($_description['id'] <= $id_genre) {
@@ -752,7 +752,7 @@ function itis_read_ranks($kingdom, &$sha_file) {
 				// Le fichier est toujours classé du règne au rang fils le plus bas dans l'arborescence.
 				// On peut donc être assuré que le parent d'un rang donné a toujours été préalablement
 				// traité sauf le premier, le règne.
-				include_spip('inc/taxonomer');
+				include_spip('inc/taxonomie');
 				$rank_ids = array();
 				foreach ($itis_ranks as $_rank) {
 					$rank_name = strtolower($_rank['rank_name']);
@@ -769,14 +769,7 @@ function itis_read_ranks($kingdom, &$sha_file) {
 						$ranks[$rank_name]['parent_principal'] = '';
 					}
 					// -- Détermination du type de rang
-					if ((strpos(_TAXONOMIE_RANGS_PRINCIPAUX, $rank_name) !== false)
-					or ($rank_name == _TAXONOMIE_RANG_DIVISION)) {
-						$ranks[$rank_name]['type'] = _TAXONOMIE_RANG_TYPE_PRINCIPAL;
-					} elseif (strpos(_TAXONOMIE_RANGS_SECONDAIRES, $rank_name) !== false) {
-						$ranks[$rank_name]['type'] = _TAXONOMIE_RANG_TYPE_SECONDAIRE;
-					} else{
-						$ranks[$rank_name]['type'] = _TAXONOMIE_RANG_TYPE_INTERCALAIRE;
-					}
+					$ranks[$rank_name]['type'] = rang_informer_type($rank_name);
 
 					// -- Sauvegarde de l'id ITIS du rang traité pour les descendants.
 					$rank_ids[$_rank['rank_id']] = $rank_name;
@@ -863,8 +856,8 @@ function itis_review_sha() {
 
 	$shas = array();
 
-	include_spip('inc/taxonomer');
-	$kingdoms = explode(':', _TAXONOMIE_REGNES);
+	include_spip('inc/taxonomie');
+	$kingdoms = regne_lister();
 
 	foreach ($kingdoms as $_kingdom) {
 		$file = find_in_path('services/itis/' . ucfirst($_kingdom) . '_Genus.txt');

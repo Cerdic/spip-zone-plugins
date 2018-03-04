@@ -193,7 +193,7 @@ function wikipedia_credit($id_taxon, $informations) {
 	$link = '<a class="nom_scientifique_inline" href="' . $url . '" rel="noreferrer">' . ucfirst($taxon['nom_scientifique']) . '</a>';
 
 	// La liste des champs concernés (a priori le descriptif)
-	include_spip('inc/taxonomer');
+	include_spip('inc/taxonomie');
 	$champs = implode(', ', array_map('taxon_traduire_champ', $informations['champs']));
 
 	// On établit la citation

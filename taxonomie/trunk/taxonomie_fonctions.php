@@ -47,7 +47,7 @@ function taxonomie_regne_charger($regne, $codes_langue = array()) {
 
 	// Vérifie si le règne existe bien dans la table spip_taxons
 	$regne_existe = taxonomie_regne_existe($regne, $meta_regne);
-	include_spip('inc/taxonomer');
+	include_spip('inc/taxonomie');
 	if ($regne_existe) {
 		// Sauvegarde des taxons ayant été modifiés manuellement suite à leur création automatique.
 		$taxons_edites = taxon_preserver_editions($regne);
@@ -193,46 +193,6 @@ function taxonomie_regne_existe($regne, &$meta_regne) {
 	}
 
 	return $existe;
-}
-
-
-/**
- * Liste dans un tableau les rangs taxonomiques supportés par le plugin, suivant certains critères.
- * Les règnes et les rangs sont exprimés en anglais et écrits en lettres minuscules.
- * La fonction permet d'exclure certains rangs de la liste.
- *
- * @package SPIP\TAXONOMIE\REGNE
- *
- * @api
- * @filtre
- *
- * @param string $regne
- *        Nom scientifique du règne pour lequel la liste des rangs est demandée.
- *        Cet argument permet de remplacer le rang `phylum` par `division` qui est son synonyme
- *        pour les règnes fongique et végétal.
- * @param string $liste_base
- *        Liste de base contenant les rangs par défaut à renvoyer. La liste est au format chaine, chaque
- *        rang étant séparé par le caractère `:`.
- * @param array  $exclusions
- *        Liste des rangs à exclure de la liste fournie dans l'argument `$liste_base`
- *
- * @return array
- *        Liste des rangs demandée.
- */
-function taxonomie_regne_lister_rangs($regne, $liste_base, $exclusions = array()) {
-
-	include_spip('inc/taxonomer');
-
-	$rangs = explode(':', $liste_base);
-	$rangs = array_diff($rangs, $exclusions);
-
-	if (($regne == _TAXONOMIE_REGNE_FONGIQUE) or ($regne == _TAXONOMIE_REGNE_VEGETAL)) {
-		if ($index_cherche = array_search(_TAXONOMIE_RANG_PHYLUM, $rangs)) {
-			$rangs[$index_cherche] = _TAXONOMIE_RANG_DIVISION;
-		}
-	}
-
-	return $rangs;
 }
 
 

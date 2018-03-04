@@ -59,9 +59,9 @@ function formulaires_creer_espece_charger() {
 
 	// Acquérir la liste des règnes déjà chargés. Si un règne n'est pas chargé il n'apparait pas dans la liste
 	// car il ne sera alors pas possible de créer correctement l'espèce avec sa hiérarchie de taxons.
-	include_spip('inc/taxonomer');
+	include_spip('inc/taxonomie');
 	include_spip('taxonomie_fonctions');
-	$regnes = explode(':', _TAXONOMIE_REGNES);
+	$regnes = regne_lister();
 	foreach ($regnes as $_regne) {
 		if (taxonomie_regne_existe($_regne, $meta_regne)) {
 			$valeurs['_regnes'][$_regne] = ucfirst(_T("taxonomie:regne_${_regne}"));
@@ -156,7 +156,7 @@ function formulaires_creer_espece_verifier_1() {
 			// - ou qui sont déjà créés.
 			$valeurs['_taxons'] = array();
 			$valeurs['_taxon_defaut'] = 0;
-			include_spip('inc/taxonomer');
+			include_spip('inc/taxonomie');
 			foreach ($taxons as $_taxon) {
 				if (!sql_countsel('spip_especes', array('tsn=' . intval($_taxon['tsn'])))) {
 					$taxon = itis_get_record($_taxon['tsn']);
@@ -172,7 +172,7 @@ function formulaires_creer_espece_verifier_1() {
 							}
 						} else {
 							// Vérifier que ce rang est compatible avec une espèce ou un rang inférieur.
-							if (taxon_rang_espece($taxon['rang'])) {
+							if (rang_est_espece($taxon['rang'])) {
 								$valeurs['_taxons'][$taxon['tsn']] = $taxon['nom_commun']
 									. " [{$taxon['langage']}]"
 									. ' - '
@@ -256,7 +256,7 @@ function formulaires_creer_espece_verifier_2() {
 		krsort($ascendants);
 
 		// Si l'espèce choisie est de rang espèce, alors on ne renvoie que son parent direct
-		include_spip('inc/taxonomer');
+		include_spip('inc/taxonomie');
 		if ($espece['rang'] = _TAXONOMIE_RANG_ESPECE) {
 			// Le parent direct est le premier des ascendants après le tri inverse effectué.
 			set_request('_parent', $ascendants[0]);

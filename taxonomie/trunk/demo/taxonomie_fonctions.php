@@ -7,7 +7,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/taxonomer');
+include_spip('inc/taxonomie');
 include_spip('inc/filtres');
 
 function tester_taxon_merger_traductions() {

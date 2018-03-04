@@ -13,7 +13,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * supportées par le plugin.
  *
  * @uses taxonomie_regne_existe()
- * @uses taxonomie_regne_lister_rangs()
  *
  * @return array
  * 		Tableau des données à charger par le formulaire (affichage). Aucune donnée chargée n'est un
@@ -27,7 +26,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function formulaires_charger_regne_charger() {
 	$valeurs = array();
-	include_spip('inc/taxonomer');
+	include_spip('inc/taxonomie');
 
 	// Lister les actions sur les règnes
 	$valeurs['_actions_regne'] = array(
@@ -38,7 +37,7 @@ function formulaires_charger_regne_charger() {
 	// Acquérir la liste des règnes gérer par le plugin et leur statut de chargement
 	// Désactiver l'action vider si aucun règne n'est chargé
 	$aucun_regne_charge = true;
-	$regnes = explode(':', _TAXONOMIE_REGNES);
+	$regnes = regne_lister();
 	foreach ($regnes as $_regne) {
 		$valeurs['_regnes'][$_regne] = '<span class="nom_scientifique_inline">' . $_regne . '</span>, ' . _T("taxonomie:regne_${_regne}");
 		if (taxonomie_regne_existe($_regne, $meta_regne)) {

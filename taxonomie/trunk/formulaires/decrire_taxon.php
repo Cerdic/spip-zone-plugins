@@ -198,7 +198,7 @@ function formulaires_decrire_taxon_traiter($id_taxon) {
 		$maj = array();
 		// - le texte du descriptif est inséré dans la langue choisie en mergeant avec l'existant
 		//   si besoin. On limite la taille du descriptif pour éviter un problème lors de l'update
-		include_spip('inc/taxonomer');
+		include_spip('inc/taxonomie');
 		$maj['descriptif'] = taxon_merger_traductions($texte_converti, $taxon['descriptif']);
 		// - l'indicateur d'édition est positionné à oui
 		$maj['edite'] = 'oui';

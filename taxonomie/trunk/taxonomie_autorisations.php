@@ -219,11 +219,11 @@ function autoriser_espececreer_menu_dist($faire, $type, $id, $qui, $opt){
 **/
 function autoriser_espece_creer_dist($faire, $type, $id, $qui, $opt) {
 
-	include_spip('inc/taxonomer');
+	include_spip('inc/taxonomie');
 	include_spip('taxonomie_fonctions');
 
 	// On vérifie qu'un règne est bien déjà chargé
-	$regnes = explode(':', _TAXONOMIE_REGNES);
+	$regnes = regne_lister();
 	$regne_existe = false;
 	foreach ($regnes as $_regne) {
 		if (taxonomie_regne_existe($_regne, $meta_regne)) {

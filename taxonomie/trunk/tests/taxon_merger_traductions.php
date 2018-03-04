@@ -1,7 +1,7 @@
 <?php
 /**
  * Test unitaire de la fonction taxon_merger_traductions
- * du fichier ../plugins/taxonomie/inc/taxonomer.php
+ * du fichier ../plugins/taxonomie/inc/taxonomie.php
  *
  * genere automatiquement par TestBuilder
  * le 2015-11-22 22:06
@@ -12,7 +12,7 @@ $remonte = "../";
 while (!is_dir($remonte."ecrire"))
 	$remonte = "../$remonte";
 require $remonte.'tests/test.inc';
-find_in_path("../plugins/taxonomie/inc/taxonomer.php",'',true);
+find_in_path("../plugins/taxonomie/inc/taxonomie.php",'',true);
 
 // chercher la fonction si elle n'existe pas
 if (!function_exists($f='taxon_merger_traductions')){

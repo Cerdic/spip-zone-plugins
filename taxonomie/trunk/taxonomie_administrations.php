@@ -53,8 +53,8 @@ function taxonomie_vider_tables($nom_meta_base_version) {
 	sql_delete("spip_versions_fragments",    sql_in("objet", array('taxon', 'espece')));
 
 	// Effacer la meta de chaque règne chargé. On boucle sur tous les règnes
-	include_spip('inc/taxonomer');
-	foreach (explode(':', _TAXONOMIE_REGNES) as $_regne) {
+	include_spip('inc/taxonomie');
+	foreach (regne_lister() as $_regne) {
 		effacer_meta("taxonomie_${_regne}");
 	}
 
