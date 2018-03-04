@@ -9,16 +9,21 @@
 .formulaire_editer_logo .editer-groupe .editer {
   padding-top: 8px;
   padding-bottom: 8px; }
-.formulaire_editer_logo .apercu label {
-  margin-top: 1px;
-  margin-bottom: 3px;
-  text-align: center; }
-.formulaire_editer_logo .apercu .boutons {
-  border-radius: 0; }
-.formulaire_editer_logo .apercu input.file {
-  margin-top: 5px; }
-.formulaire_editer_logo .apercu input.submit {
-  margin-top: 5px; }
+.formulaire_editer_logo .apercu {
+  text-align: center !important; }
+  .formulaire_editer_logo .apercu label {
+    margin-top: 1px;
+    margin-bottom: 3px;
+    text-align: center; }
+  .formulaire_editer_logo .apercu .boutons {
+    border-radius: 0; }
+  .formulaire_editer_logo .apercu input.file {
+    margin-top: 5px; }
+  .formulaire_editer_logo .apercu a.popin {
+    padding: 1px 5px 2px; }
+  .formulaire_editer_logo .apercu input.submit {
+    margin-top: 5px;
+    padding: 1px 5px 2px; }
 
 .formulaire_editer_logo_site .apercu label {
   float: none;

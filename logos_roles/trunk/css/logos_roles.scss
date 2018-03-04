@@ -17,6 +17,7 @@
     }
 
     .apercu {
+        text-align: center !important;
         label {
             margin-top: 1px;
             margin-bottom: 3px;
@@ -31,8 +32,13 @@
             margin-top: 5px;
         }
 
+        a.popin {
+            padding: 1px 5px 2px;
+        }
+
         input.submit {
             margin-top: 5px;
+            padding: 1px 5px 2px;
         }
     }
 }
