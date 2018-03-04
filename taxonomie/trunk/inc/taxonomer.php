@@ -267,7 +267,7 @@ function taxon_merger_traductions($multi_prioritaire, $multi_non_prioritaire) {
 /**
  * Traduit un champ de la table `spip_taxons` dans la langue du site.
  *
- * @param $champ
+ * @param string $champ
  *        Nom du champ dans la base de données.
  *
  * @return string
@@ -281,4 +281,36 @@ function taxon_traduire_champ($champ) {
 	}
 
 	return $traduction;
+}
+
+
+/**
+ * Détermine si un rang est celui d'une espèce ou d'un taxon de rang inférieur ou pas.
+ *
+ * @param string $rang
+ *        Nom anglais du rang en minuscules.
+ *
+ * @return bool
+ *        `true` si le rang est celui d'une espèce ou d'un taxon de rang inférieur, `false` sinon.
+ */
+function taxon_rang_espece($rang) {
+
+	static $rangs_especes = array(
+		'species',
+		'subspecies',
+		'variety',
+		'subvariety',
+		'form',
+		'subform',
+		'race',
+		'stirp',
+		'morph',
+	);
+
+	$est_espece = false;
+	if (in_array($rang, $rangs_especes)) {
+		$est_espece = true;
+	}
+
+	return $est_espece;
 }

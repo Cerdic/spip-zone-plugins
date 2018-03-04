@@ -9,7 +9,13 @@
     include_spip('inc/filtres');
     include_spip('inc/taxonomer');
 
-    var_dump(itis_get_record(183803));
+    var_dump(itis_get_information('scientificname', 183803));
+    var_dump(itis_get_information('kingdomname', 183803));
+    var_dump(itis_get_information('parent', 183803));
+    var_dump(itis_get_information('rankname', 183803));
+    var_dump(itis_get_information('author', 183803));
+    var_dump(itis_get_information('commonnames', 183803));
+    var_dump(itis_get_information('hierarchyfull', 183803));
 ?>
 
 	<?php die(); ?>

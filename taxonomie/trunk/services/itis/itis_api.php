@@ -54,9 +54,12 @@ $GLOBALS['itis_language'] = array(
 	 * Variable globale de configuration de la correspondance entre langue ITIS
 	 * et code de langue SPIP. La langue du service est l'index, le code SPIP est la valeur.
 	 */
-	'french'  => 'fr',
-	'english' => 'en',
-	'spanish' => 'es'
+	'french'     => 'fr',
+	'english'    => 'en',
+	'spanish'    => 'es',
+	'german'     => 'de',
+	'italian'    => 'it',
+	'portuguese' => 'pt'
 );
 $GLOBALS['itis_webservice'] = array(
 	/**
@@ -129,7 +132,7 @@ $GLOBALS['itis_webservice'] = array(
 				'auteur'            => 'taxonAuthor/authorship',
 				'nom_commun'        => 'commonNameList/commonNames',
 				'credibilite'       => 'credibilityRating/credRating',
-				'usage'             => 'usage/taxonUsageRating',
+				'usage_valide'      => 'usage/taxonUsageRating',
 				'zone_geographique' => 'geographicDivisionList/geoDivisions'
 			)
 		)
@@ -139,67 +142,93 @@ $GLOBALS['itis_webservice'] = array(
 			'function' => 'getScientificNameFromTSN',
 			'argument' => 'tsn',
 			'list'     => '',
-			'index'    => array('string', 'combinedName'),
+			'type'     => 'string',
+			'index'    => 'combinedName',
 		),
 		'kingdomname'    => array(
 			'function' => 'getKingdomNameFromTSN',
 			'argument' => 'tsn',
 			'list'     => '',
-			'index'    => array('string', 'kingdomName'),
+			'type'     => 'string',
+			'index'    => 'kingdomName',
 		),
 		'parent'         => array(
 			'function' => 'getHierarchyUpFromTSN',
 			'argument' => 'tsn',
 			'list'     => '',
-			'index'    => array('string', 'parentTsn'),
+			'type'     => 'string',
+			'index'    => 'parentTsn',
 		),
 		'rankname'       => array(
 			'function' => 'getTaxonomicRankNameFromTSN',
 			'argument' => 'tsn',
 			'list'     => '',
-			'index'    => array('string', 'rankName'),
+			'type'     => 'string',
+			'index'    => 'rankName',
 		),
 		'author'         => array(
 			'function' => 'getTaxonAuthorshipFromTSN',
 			'argument' => 'tsn',
 			'list'     => '',
-			'index'    => array('string', 'authorship'),
+			'type'     => 'string',
+			'index'    => 'authorship',
 		),
 		'coremetadata'   => array(
 			'function' => 'getCoreMetadataFromTSN',
 			'argument' => 'tsn',
 			'list'     => '',
-			'index'    => array('array', ''),
+			'type'     => 'array',
+			'index'    => array(''),
 		),
 		'experts'        => array(
 			'function' => 'getExpertsFromTSN',
 			'argument' => 'tsn',
 			'list'     => 'experts',
-			'index'    => array('array', ''),
+			'type'     => 'array',
+			'index'    => array(''),
 		),
 		'commonnames'    => array(
 			'function' => 'getCommonNamesFromTSN',
 			'argument' => 'tsn',
 			'list'     => 'commonNames',
-			'index'    => array('array', array('language' => 'commonName')),
+			'type'     => 'array',
+			'index'    => array(
+				'langue'     => 'language',
+				'nom_commun' => 'commonName',
+			),
 		),
 		'othersources'   => array(
 			'function' => 'getOtherSourcesFromTSN',
 			'argument' => 'tsn',
 			'list'     => 'otherSources',
-			'index'    => array('array', ''),
+			'type'     => 'array',
+			'index'    => array(''),
 		),
 		'hierarchyfull'  => array(
 			'function' => 'getFullHierarchyFromTSN',
 			'argument' => 'tsn',
 			'list'     => 'hierarchyList',
-			'index'    => array('array', ''),
+			'type'     => 'array',
+			'index'    => array(
+				'rang'             => 'rankName',
+				'tsn'              => 'tsn',
+				'nom_scientifique' => 'taxonName',
+				'tsn_parent'       => 'parentTsn',
+			),
 		),
 		'hierarchydown'  => array(
 			'function' => 'getHierarchyDownFromTSN',
 			'argument' => 'tsn',
 			'list'     => 'hierarchyList',
-			'index'    => array('array', ''),
+			'type'     => 'array',
+			'index'    => array(''),
+		),
+		'hierarchyup'  => array(
+			'function' => 'getHierarchyUpFromTSN',
+			'argument' => 'tsn',
+			'list'     => '',
+			'type'     => 'array',
+			'index'    => array(''),
 		),
 	),
 );
@@ -300,7 +329,7 @@ function itis_search_tsn($action, $search, $strict = true) {
  *        - `nom_commun`        : un tableau indexé par langue (au sens d'ITIS en minuscules, `english`, `french`,
  *                                `spanish`...) fournissant le nom commun dans chacune des langues
  *        - `credibilite`       : Information sur la crédibilité des informations du taxon
- *        - `usage`             : Indication dur la validité de l'utilisation du taxon
+ *        - `usage_valide`      : Indication sur la validité de l'utilisation du taxon
  *        - `zone_geographique` : un tableau indexé par langue unique `english` des zones géographiques où le taxon
  *                                est localisé. Les zones sont libellées en anglais.
  */
@@ -344,15 +373,20 @@ function itis_get_record($tsn) {
 			$record['regne'] = strtolower($record['regne']);
 
 			// On réorganise le sous-tableau des noms communs
-			$noms = array();
+			$names = array();
 			if (!empty($record['nom_commun']) and is_array($record['nom_commun'])) {
-				foreach ($record['nom_commun'] as $_nom) {
-					$langue_spip = $GLOBALS['itis_language'][strtolower($_nom['language'])];
-					$noms[$langue_spip] = trim($_nom['commonName']);
+				foreach ($record['nom_commun'] as $_name) {
+					if (!empty($_name) and isset($GLOBALS['itis_language'][strtolower($_name['language'])])) {
+						$langue_spip = $GLOBALS['itis_language'][strtolower($_name['language'])];
+						$names[$langue_spip] = trim($_name['commonName']);
+					}
 				}
 			}
 			// Et on modifie l'index des noms communs avec le tableau venant d'être construit.
-			$record['nom_commun'] = $noms;
+			$record['nom_commun'] = $names;
+
+			// L'indicateur d'usage est mis à true/false.
+			$record['usage_valide'] = ($record['usage_valide'] == 'valid') or ($record['usage_valide'] == 'accepted');
 
 			// On réorganise le sous-tableau des zones géographiques.
 			$zones = array();
@@ -397,8 +431,8 @@ function itis_get_record($tsn) {
  *        - `experts`        : les experts du taxon
  *        - `commonnames`    : le ou les noms communs
  *        - `othersources`   : les sources d'information sur le taxon
- *        - `hierarchyfull`  : la hiérarchie complète jusqu'au taxon
- *        - `hierarchydown`  : la hiérarchie (à vérifier)
+ *        - `hierarchyfull`  : la hiérarchie complète jusqu'au taxon et ses descendants directs
+ *        - `hierarchyup`    : la hiérarchie limitée au parent direct
  * @param int    $tsn
  *        Identifiant unique du taxon dans la base ITIS (TSN)
  *
@@ -425,9 +459,12 @@ function itis_get_information($action, $tsn) {
 		$api = $GLOBALS['itis_webservice']['get'][$action];
 		include_spip('inc/filtres');
 		$data = $api['list'] ? table_valeur($data, $api['list'], null) : $data;
-		list($type, $index) = $api['index'];
+		$type = $api['type'];
+		$index = $api['index'];
 
 		if ($type == 'string') {
+			// L'information est limitée à une chaine ou un entier unique.
+			// On renvoie la valeur seule.
 			$information = '';
 			if (!empty($data[$index])) {
 				$information = $data[$index];
@@ -438,22 +475,19 @@ function itis_get_information($action, $tsn) {
 				}
 			}
 		} else {
+			// L'information demandée est un tableau.
 			$information = array();
-			if ($data) {
-				$first_value = reset($data);
-				if ($first_value) {
-					if (!$index) {
-						$information = $data;
-						$format = "format_$action";
-						if (function_exists($format)) {
-							$information = $format($information);
+			if (!empty($data)) {
+				$format = "itis_format_$action";
+				if (function_exists($format)) {
+					$information = $format($tsn, $data, $index);
+				} else {
+					foreach ($data as $_data) {
+						$item = array();
+						foreach ($index as $_key_information => $_key_data) {
+							$item[$_key_information] = $_data[$_key_data];
 						}
-					} else {
-						$destination = reset($index);
-						$key = key($index);
-						foreach ($data as $_data) {
-							$information[strtolower($_data[$destination])][] = $_data[$key];
-						}
+						$information[] = $item;
 					}
 				}
 			}
@@ -879,4 +913,41 @@ function itis_build_url($format, $group, $action, $key) {
 		   . $GLOBALS['itis_webservice'][$group][$action]['argument'] . '=' . $key;
 
 	return $url;
+}
+
+function itis_format_hierarchyfull($tsn, $data, $index) {
+
+	$information = array(
+		'ascendants' => array(),
+		'fils'       => array(),
+		'taxon'      => array()
+	);
+
+	if (!empty($data)) {
+		foreach ($data as $_data) {
+			// On constitue le bloc du taxon.
+			$taxon = array();
+			foreach ($index as $_key_information => $_key_data) {
+				if ($_key_information == 'rang') {
+					$taxon[$_key_information] = strtolower($_data[$_key_data]);
+				} elseif (($_key_information == 'tsn') or ($_key_information == 'tsn_parent')) {
+					$taxon[$_key_information] = $_data[$_key_data] ? intval($_data[$_key_data]) : 0;
+				} else {
+					$taxon[$_key_information] = $_data[$_key_data];
+				}
+			}
+
+			// On affecte ce bloc soit dans la liste des parents, soit dans la liste des enfants, soit dans
+			// l'index du taxon lui-même.
+			if ($tsn == $taxon['tsn']) {
+				$information['taxon'] = $taxon;
+			} elseif ($tsn == $taxon['tsn_parent']) {
+				$information['fils'][] = $taxon;
+			} else {
+				$information['ascendants'][] = $taxon;
+			}
+		}
+	}
+
+	return $information;
 }

@@ -76,7 +76,6 @@ function formulaires_creer_espece_charger() {
 	// -- Etape 2
 	$valeurs['_taxons'] = _request('_taxons');
 	$valeurs['_taxon_defaut'] = _request('_taxon_defaut');
-	$valeurs['_resume'] = _request('_resume');
 	// -- Etape 3
 	$valeurs['tsn'] = _request('tsn');
 	$valeurs['_espece'] = _request('_espece');
@@ -150,43 +149,49 @@ function formulaires_creer_espece_verifier_1() {
 			}
 			$taxons = itis_search_tsn($action, $recherche, $recherche_exacte);
 
-			if ($taxons) {
-			// Construire le tableau des taxons trouvés en supprimant les taxons qui n'appartiennent pas
-				// au règne concerné ou qui n'ont pas un rang compatible (uniquement pour la recherche par nom commun).
-				$valeurs['_taxon_defaut'] = 0;
-				foreach ($taxons as $_taxon) {
-					if ($type_recherche == 'scientificname') {
-						if (strcasecmp($_taxon['regne'], $regne) === 0) {
-							// On recherche le rang de chaque taxon pour l'afficher avec le nom scientifique mais
-							// aussi pour vérifier que ce rang est compatible avec une espèce si on cherche par nom commun.
-							$rang = itis_get_information('rankname', $_taxon['tsn']);
-							$valeurs['_taxons'][$_taxon['tsn']] = '<span class="nom_scientifique_inline">'
+			// Construire le tableau des taxons trouvés en supprimant:
+			// - les taxons qui n'appartiennent pas au règne concerné
+			// - ou qui n'ont pas un rang compatible (uniquement pour la recherche par nom commun)
+			// - ou qui ne sont pas des appellations valides
+			// - ou qui sont déjà créés.
+			$valeurs['_taxons'] = array();
+			$valeurs['_taxon_defaut'] = 0;
+			include_spip('inc/taxonomer');
+			foreach ($taxons as $_taxon) {
+				if (!sql_countsel('spip_especes', array('tsn=' . intval($_taxon['tsn'])))) {
+					$taxon = itis_get_record($_taxon['tsn']);
+					if (($taxon['usage_valide']) and (strcasecmp($taxon['regne'], $regne) === 0)) {
+						if ($type_recherche == 'scientificname') {
+							$valeurs['_taxons'][$taxon['tsn']] = '<span class="nom_scientifique_inline">'
 								. $_taxon['nom_scientifique']
 								. '</span>'
 								. ' - '
-								. _T('taxonomie:rang_' . $rang);
-							if (strcasecmp($recherche, $_taxon['nom_scientifique']) === 0) {
-								$valeurs['_taxon_defaut'] = $_taxon['tsn'];
+								. _T('taxonomie:rang_' . $taxon['rang']);
+							if (strcasecmp($recherche, $taxon['nom_scientifique']) === 0) {
+								$valeurs['_taxon_defaut'] = $taxon['tsn'];
 							}
-						}
-					} else {
-						$record = itis_get_record($_taxon['tsn']);
-						if (strcasecmp($record['regne'], $regne) === 0) {
-							$valeurs['_taxons'][$_taxon['tsn']] = $_taxon['nom_commun']
-								. " [{$_taxon['langage']}]"
-								. ' - '
-								. _T('taxonomie:rang_' . $record['rang']);
-							if (strcasecmp($recherche, $_taxon['nom_commun']) === 0) {
-								$valeurs['_taxon_defaut'] = $_taxon['tsn'];
+						} else {
+							// Vérifier que ce rang est compatible avec une espèce ou un rang inférieur.
+							if (taxon_rang_espece($taxon['rang'])) {
+								$valeurs['_taxons'][$taxon['tsn']] = $taxon['nom_commun']
+									. " [{$taxon['langage']}]"
+									. ' - '
+									. _T('taxonomie:rang_' . $taxon['rang']);
+								if (strcasecmp($recherche, $taxon['nom_commun']) === 0) {
+									$valeurs['_taxon_defaut'] = $taxon['tsn'];
+								}
 							}
 						}
 					}
 				}
+			}
+
+			if ($valeurs['_taxons']) {
+				// Si aucun taxon par défaut, on prend le premier taxon de la liste.
 				if (!$valeurs['_taxon_defaut']) {
 					reset($valeurs['_taxons']);
 					$valeurs['_taxon_defaut'] = key($valeurs['_taxons']);
 				}
-
 				// On fournit ces informations au formulaire pour l'étape 2.
 				foreach ($valeurs as $_champ => $_valeur) {
 					set_request($_champ, $_valeur);
@@ -207,7 +212,8 @@ function formulaires_creer_espece_verifier_1() {
 
 /**
  * Vérification de l'étape 2 du formulaire : on présente les informations principales du taxon choisi avant
- * que l'utilisateur ne valide définitivement son choix.
+ * que l'utilisateur ne valide définitivement son choix. En particulier, on affiche la hiérarchie du taxon
+ * jusqu'au premier taxon de genre et on identifie les taxons qui seront aussi créés dans cette hiérarchie.
  *
  * @uses itis_get_record()
  *
@@ -224,65 +230,42 @@ function formulaires_creer_espece_verifier_2() {
 
 	if ($tsn = intval(_request('tsn'))) {
 		// On récupère les informations de base du taxon afin de les présenter à l'utilisateur pour validation
-		// finale.
+		// finale. Ces informations existent forcément car elles ont été demandées à l'étape précédentes et son
+		// donc accessibles directement dans un cache.
 		include_spip('services/itis/itis_api');
 		$espece = itis_get_record($tsn);
-		if ($espece) {
-			// On passe la description de l'espèce après avoir construit la liste des noms communs utiles.
-			$nom_commun = '';
-			if ($espece['nom_commun']) {
-				include_spip('inc/config');
-				$langues_utilisees = lire_config('taxonomie/langues_utilisees');
-				foreach ($espece['nom_commun'] as $_langue => $_nom) {
-					if (in_array($_langue, $langues_utilisees)) {
-						$nom_commun .= ($nom_commun ? '<br />': '') . '[' . $_langue .'] ' . $_nom;
-					}
+
+		// On passe au formulaire la description de l'espèce après avoir construit la liste des noms communs utiles.
+		$nom_commun = '';
+		if ($espece['nom_commun']) {
+			include_spip('inc/config');
+			$langues_utilisees = lire_config('taxonomie/langues_utilisees');
+			foreach ($espece['nom_commun'] as $_langue => $_nom) {
+				if (in_array($_langue, $langues_utilisees)) {
+					$nom_commun .= ($nom_commun ? '<br />': '') . '[' . $_langue .'] ' . $_nom;
 				}
 			}
-			$espece['nom_commun_utilise'] = $nom_commun;
-			set_request('_espece', $espece);
-
-			// Détermination du parent : on récupère son record complet
-			$parent = itis_get_record($espece['tsn_parent']);
-			if ($parent) {
-				set_request('_parent', $parent);
-			} else {
-				$erreurs['message_erreur'] = _T('taxonomie:erreur_acces_taxon');
-			}
-		} else {
-			$erreurs['message_erreur'] = _T('taxonomie:erreur_acces_taxon');
 		}
-	} else {
-		$erreurs['message_erreur'] = _T('taxonomie:erreur_acces_taxon');
-	}
+		$espece['nom_commun_affiche'] = $nom_commun;
+		set_request('_espece', $espece);
 
-	return $erreurs;
-}
+		// On passe au formulaire le ou les parents afin de positionner l'espèce dans la hiérarchie et de connaitre
+		// les taxons à créer.
+		$hierarchie = itis_get_information('hierarchyup', $espece['tsn']);
+		$ascendants = $hierarchie['ascendants'];
+		krsort($ascendants);
 
+		// Si l'espèce choisie est de rang espèce, alors on ne renvoie que son parent direct
+		include_spip('inc/taxonomer');
+		if ($espece['rang'] = _TAXONOMIE_RANG_ESPECE) {
+			// Le parent direct est le premier des ascendants après le tri inverse effectué.
+			set_request('_parent', $ascendants[0]);
+		} else {
+			// L'espèce est de rang inférieur à espèce. Elle a donc des ascendants de type "espèce" qu'il faut lister
+			// avant de trouver le premier taxon du règne déjà en base de données.
+			foreach ($ascendants as $_ascendant) {
 
-/**
- * Vérification de l'étape 3 du formulaire : on vérifie que l'espèce n'existe pas déjà dans la base de données
- * taxonomique.
- *
- * @uses wikipedia_get_page()
- * @uses convertisseur_texte_spip()
- *
- * @return array
- * 		Message d'erreur si aucune page n'est disponible ou chargement des champs utiles à l'étape 2 sinon.
- *      Ces champs sont :
- * 		- `_liens`         : liste des liens possibles pour la recherche (étape 2)
- * 		- `_lien_defaut`   : lien par défaut (étape 2)
- * 		- `_descriptif`    : texte de la page trouvée ou choisie par l'utilisateur (étape 2)
- */
-function formulaires_creer_espece_verifier_3() {
-
-	// Initialisation des erreurs de vérification.
-	$erreurs = array();
-
-	if ($tsn = intval(_request('tsn'))) {
-		// On vérifie que l'espèce n'a pas déjà été créée et possède un statut autre que refusé ou poubelle.
-		if (sql_countsel('spip_especes', array('tsn=' . $tsn))) {
-			$erreurs['message_erreur'] = _T('taxonomie:erreur_espece_deja_creee');
+			}
 		}
 	} else {
 		$erreurs['message_erreur'] = _T('taxonomie:erreur_acces_taxon');
@@ -308,10 +291,18 @@ function formulaires_creer_espece_traiter() {
 	$retour = array();
 
 	if ($tsn = intval(_request('tsn'))) {
+		// Récupération des informations ITIS sur l'espèce choisie et son parent.
+		$espece = _request('_espece');
+		$parent = _request('_parent');
+
 		// Vérification de l'existence du parent.
 		// Si le parent n'existe pas en base c'est soit une erreur si le rang supérieur ou égal au genre soit
 		// normal si le rang est un sous-genre. En effet, les sous-genres sont uniquement créés au coups par coups
-		// quand on crée les espèces.
+		// quand on crée les espèces car il ne sont jamais chargés avec le règne.
+		if (sql_countsel('spip_taxons', array('tsn=' . $tsn))) {
+			$erreurs['message_erreur'] = _T('taxonomie:erreur_espece_deja_creee');
+		}
+
 
 		// Ajout de l'espèce en base
 		// Si le rang est bien espèce alors on ajoute que ce taxon. Sinon il faut ajouter toute l'arborecence jusqu'au
