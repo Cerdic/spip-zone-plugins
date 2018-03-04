@@ -79,7 +79,7 @@ function formulaires_creer_espece_charger() {
 	// -- Etape 3
 	$valeurs['tsn'] = _request('tsn');
 	$valeurs['_espece'] = _request('_espece');
-	$valeurs['_parent'] = _request('_parent');
+	$valeurs['_parents'] = _request('_parents');
 
 	// Préciser le nombre d'étapes du formulaire
 	$valeurs['_etapes'] = 3;
@@ -220,8 +220,8 @@ function formulaires_creer_espece_verifier_1() {
  * @return array
  *        Message d'erreur si le service ITIS ne renvoie pas les informations demandées (a priori jamais) ou
  *        chargement (set_request) des champs utiles à l'étape 3 sinon. Ces champs sont :
- * 		- `_espece` : (affichage) toutes les informations ITIS sur l'espèce.
- * 		- `_parent` : (affichage) toutes les informations ITIS sur le parent direct de l'espèce.
+ * 		- `_espece`  : (affichage) toutes les informations ITIS sur l'espèce.
+ * 		- `_parents` : (affichage) toutes les informations ITIS sur l'ascendance de l'espèce jusqu'au genre.
  */
 function formulaires_creer_espece_verifier_2() {
 
@@ -249,24 +249,34 @@ function formulaires_creer_espece_verifier_2() {
 		$espece['nom_commun_affiche'] = $nom_commun;
 		set_request('_espece', $espece);
 
-		// On passe au formulaire le ou les parents afin de positionner l'espèce dans la hiérarchie et de connaitre
-		// les taxons à créer.
-		$hierarchie = itis_get_information('hierarchyup', $espece['tsn']);
+		// On récupère la hiérarchie complète du taxon à partir de la base ITIS.
+		$hierarchie = itis_get_information('hierarchyfull', $espece['tsn']);
 		$ascendants = $hierarchie['ascendants'];
-		krsort($ascendants);
 
-		// Si l'espèce choisie est de rang espèce, alors on ne renvoie que son parent direct
+		// On classe la liste des ascendants du plus proche au plus éloigné.
 		include_spip('inc/taxonomie');
-		if ($espece['rang'] = _TAXONOMIE_RANG_ESPECE) {
-			// Le parent direct est le premier des ascendants après le tri inverse effectué.
-			set_request('_parent', $ascendants[0]);
-		} else {
-			// L'espèce est de rang inférieur à espèce. Elle a donc des ascendants de type "espèce" qu'il faut lister
-			// avant de trouver le premier taxon du règne déjà en base de données.
-			foreach ($ascendants as $_ascendant) {
-
+		krsort($ascendants);
+		foreach ($ascendants as $_ascendant) {
+			// Le premier ascendant est toujours affiché.
+			$parent = $_ascendant;
+			// On détermine si l'ascendant est un taxon d'espèce ou inférieur (table spip_especes)
+			// ou est un taxon de rang supérieur à l'espèce (table spip_taxons).
+			$parent['est_espece'] = rang_est_espece($_ascendant['rang']) ? true : false;
+			// On indique si le parent existe déjà ou pas en base
+			$parent['deja_cree'] = false;
+			$from = rang_est_espece($_ascendant['rang']) ? 'spip_especes' : 'spip_taxons';
+			if (sql_countsel($from, array('tsn=' . intval($_ascendant['tsn'])))) {
+				$parent['deja_cree'] = true;
+			}
+			// On insère l'ascendant dans la liste des parents.
+			$parents[] = $parent;
+			// On sort si on est arrivé au taxon de genre.
+			if ($_ascendant['rang'] == _TAXONOMIE_RANG_GENRE) {
+				break;
 			}
 		}
+		krsort($parents);
+		set_request('_parents', $parents);
 	} else {
 		$erreurs['message_erreur'] = _T('taxonomie:erreur_acces_taxon');
 	}
@@ -293,7 +303,7 @@ function formulaires_creer_espece_traiter() {
 	if ($tsn = intval(_request('tsn'))) {
 		// Récupération des informations ITIS sur l'espèce choisie et son parent.
 		$espece = _request('_espece');
-		$parent = _request('_parent');
+		$parents = _request('_parents');
 
 		// Vérification de l'existence du parent.
 		// Si le parent n'existe pas en base c'est soit une erreur si le rang supérieur ou égal au genre soit

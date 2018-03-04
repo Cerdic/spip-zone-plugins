@@ -8,37 +8,44 @@
 			[(#SET{nom, [<span class="nom_scientifique_inline"><strong>(#ENV{_espece/nom_scientifique})</strong></span>]})]
 			<:taxonomie:info_espece_choisie_intro{taxon=#GET{nom}}:>
 		</p>
-		<table class="spip">
+		<table class="spip liste">
 			<tbody>
-				<tr class="">
-					<td class=""><:espece:champ_tsn_label:></td>
-					<td class="">#ENV{_espece/tsn}</td>
+				<tr>
+					<td><:espece:champ_tsn_label:></td>
+					<td class="principale">#ENV{_espece/tsn}</td>
 				</tr>
-				<tr class="">
-					<td class=""><:espece:champ_nom_scientifique_label:></td>
-					<td class="nom_scientifique">#ENV{_espece/nom_scientifique}</td>
+				<tr>
+					<td><:espece:champ_nom_scientifique_label:></td>
+					<td class="principale nom_scientifique">#ENV{_espece/nom_scientifique}</td>
 				</tr>
-				<tr class="">
-					<td class=""><:espece:champ_auteur_label:></td>
-					<td class="">#ENV{_espece/auteur}</td>
+				<tr>
+					<td><:espece:champ_auteur_label:></td>
+					<td class="principale">#ENV{_espece/auteur}</td>
 				</tr>
-				<tr class="">
-					<td class=""><:espece:champ_nom_commun_label:></td>
-					<td class="">[(#ENV*{_espece/nom_commun_affiche})]</td>
+				<tr>
+					<td><:espece:champ_nom_commun_label:></td>
+					<td class="principale">[(#ENV*{_espece/nom_commun_affiche})]</td>
 				</tr>
-				<tr class="">
-					<td class=""><:espece:champ_rang_label:></td>
-					<td class="">[(#VAL{taxonomie:rang_}|concat{#ENV{_espece/rang}}|_T)]</td>
+				<tr>
+					<td><:espece:champ_rang_label:></td>
+					<td class="principale">[(#VAL{taxonomie:rang_}|concat{#ENV{_espece/rang}}|_T)]</td>
 				</tr>
-				<tr class="">
-					<td class=""><:espece:champ_regne_label:></td>
-					<td class="nom_scientifique">#ENV{_espece/regne}</td>
+				<tr>
+					<td><:espece:champ_regne_label:></td>
+					<td class="principale nom_scientifique">#ENV{_espece/regne}</td>
 				</tr>
-				<tr class="">
-					<td class=""><:taxonomie:label_parent_espece:></td>
-					<td>
-						[<span class="nom_scientifique_inline">(#ENV{_parent/nom_scientifique})</span>
-						\(#ENV{_parent/tsn}\) - [(#VAL{taxonomie:rang_}|concat{#ENV{_parent/rang}}|_T)]]
+				<tr>
+					<td><:taxonomie:label_parents_espece:></td>
+					<td class="principale">
+						<ul class="contenu_ascendance">
+						<BOUCLE_parents(DATA) {source table, #ENV{_parents}}{par cle}>
+							[<li[ class="rang(#CLE|plus{1})"]>
+								(#VAL{taxonomie:rang_}|concat{#VALEUR{rang}}|_T) :
+								[<span class="nom_scientifique_inline">(#VALEUR{nom_scientifique})</span>
+								\(#VALEUR{tsn}\)]
+							</li>]
+						</BOUCLE_parents>
+						</ul>
 					</td>
 				</tr>
 			</tbody>

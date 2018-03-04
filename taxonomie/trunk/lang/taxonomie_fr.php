@@ -95,7 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_recherche_correspondance_debut' => 'Commence par le texte de la recherche',
 	'label_recherche_correspondance_fin' => 'Se termine par le texte de la recherche',
 	'label_recherche_regne' => 'Limiter la recherche à un règne',
-	'label_parent_espece' => 'Parent direct',
+	'label_parents_espece' => 'Ascendance du taxon jusqu\'au genre',
 
 	// N
 	'notice_vider_regne_inexistant' => 'Le règne @regne@ n\'a pas été trouvé en base de données.',
