@@ -45,6 +45,12 @@ function scss_compile($style, $contexte = array()) {
 	if (defined('_SCSS_LINE_COMMENTS') and '_SCSS_LINE_COMMENTS' == true) {
 		$scss->setLineNumberStyle(Compiler::LINE_COMMENTS);
 	}
+	// pipeline : scss_variables
+	// Surcharger des variables depuis un plugin ou une configuration
+	// les variables sont un tableau 'variable'=>'scss value'
+	// ex : 'header'=> '(background:pink,color:white)'
+	$scss_vars = pipeline('scss_variables',array());
+	$scss->setVariables($scss_vars);
 
 	try {
 		$out = $scss->compile($style);
