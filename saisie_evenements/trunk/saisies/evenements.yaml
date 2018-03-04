@@ -45,38 +45,38 @@ options:
       -
         saisie: 'explication'
         options:
-          nom: 'saisie_evenements_ids'
-          texte: '<:saisie_evenements:saisie_evenements_ids_texte:>'
+          nom: 'saisie_evenements_id'
+          texte: '<:saisie_evenements:saisie_evenements_id_texte:>'
       -
         saisie: 'input'
         options:
-          nom: 'ids_evenement'
-          label: '<:saisie_evenements:ids_evenement_label:>'
-          explication: '<:saisie_evenements:ids_evenement_explication:>'
+          nom: 'id_evenement'
+          label: '<:saisie_evenements:id_evenement_label:>'
+          explication: '<:saisie_evenements:id_evenement_explication:>'
       -
         saisie: 'input'
         options:
-          nom: 'ids_article'
-          label: '<:saisie_evenements:ids_article_label:>'
-          explication: '<:saisie_evenements:ids_article_explication:>'
+          nom: 'id_article'
+          label: '<:saisie_evenements:id_article_label:>'
+          explication: '<:saisie_evenements:id_article_explication:>'
       -
         saisie: 'input'
         options:
-          nom: 'ids_rubrique'
-          label: '<:saisie_evenements:ids_rubrique_label:>'
-          explication: '<:saisie_evenements:ids_rubrique_explication:>'
+          nom: 'id_rubrique'
+          label: '<:saisie_evenements:id_rubrique_label:>'
+          explication: '<:saisie_evenements:id_rubrique_explication:>'
       -
         saisie: 'input'
         options:
-          nom: 'ids_branche'
-          label: '<:saisie_evenements:ids_branche_label:>'
-          explication: '<:saisie_evenements:ids_branche_explication:>'
+          nom: 'id_branche'
+          label: '<:saisie_evenements:id_branche_label:>'
+          explication: '<:saisie_evenements:id_branche_explication:>'
       -
         saisie: 'input'
         options:
-          nom: 'ids_mot'
-          label: '<:saisie_evenements:ids_mot_label:>'
-          explication: '<:saisie_evenements:ids_mot_explication:>'
+          nom: 'id_mot'
+          label: '<:saisie_evenements:id_mot_label:>'
+          explication: '<:saisie_evenements:id_mot_explication:>'
       -
         saisie: 'explication'
         options:
