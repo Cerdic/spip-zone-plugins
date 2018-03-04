@@ -198,6 +198,6 @@ options:
           explication: '<:saisies:option_erreur_obligatoire_explication:>'
 defaut:
   options:
-    label: '<:saisie_evenements:saisie_evenement_titre:>'
+    label: '<:saisie_evenements:saisie_evenements_titre:>'
     # champs extras (definition du champ sql)
     sql: "TEXT DEFAULT '' NOT NULL"
