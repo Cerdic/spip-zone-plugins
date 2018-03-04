@@ -20,6 +20,7 @@ function formulaires_configurer_logos_roles_saisies_dist() {
 				'nom' => 'roles_logos',
 				'label' => _T('logos_roles:titre_saisie_roles'),
 				'ordre_fixe' => 'oui',
+				'masquer_nouveaux' => 'oui',
 			),
 			'saisies' => array(
 				array(
