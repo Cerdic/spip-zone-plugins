@@ -1,7 +1,7 @@
 /* jshint strict: true, undef: true, unused: true, curly: true,
-   eqeqeq: true, freeze: true, funcscope: true, futurehostile: true,
+   eqeqeq: true, freeze: true, funcscope: true, futurehostile: false,
    nonbsp: true */
-/* globals $ */
+/* global $ */
 
 $.fn.saisieListe = function( options ) {
     "use strict";

@@ -40,10 +40,10 @@ function joindre($tableau, $liant) {
 function preparer_tableau_saisie($tableau_saisie) {
 
 	if ((! isset($tableau_saisie['saisie'], $tableau_saisie) )
-	    or ((isset($tableau_saisie['saisies']))
-	        and (! is_array($tableau_saisie['saisies']) ))
-	    or ((isset($tableau_saisie['options']))
-	          and ( ! is_array($tableau_saisie['options']) ))) {
+			or ((isset($tableau_saisie['saisies']))
+					and (! is_array($tableau_saisie['saisies']) ))
+			or ((isset($tableau_saisie['options']))
+						and ( ! is_array($tableau_saisie['options']) ))) {
 		erreur_squelette(
 			_T(
 				'erreur_saisie_invalide',
