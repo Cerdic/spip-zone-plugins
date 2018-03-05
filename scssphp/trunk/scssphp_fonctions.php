@@ -25,6 +25,7 @@ function scss_compile($style, $contexte = array()) {
 
 	// le compilateur Leafo\ScssPhp\Compiler compile le contenu
 	$scss = new Compiler();
+
 	// lui transmettre le path qu'il utilise pour les @import
 	$scss->setImportPaths(_chemin());
 
@@ -40,19 +41,36 @@ function scss_compile($style, $contexte = array()) {
 		}
 		return null;
 	});
-
-	// Inline source maps
-	// http://leafo.github.io/scssphp/docs/#source-maps
-	// if (defined('_SCSS_SOURCE_MAP') and '_SCSS_SOURCE_MAP' == true) {
-	// 	$scss->setSourceMap(Compiler::SOURCE_MAP_INLINE);
-	// }
-
 	// pipeline : scss_variables
 	// Surcharger des variables depuis un plugin ou une configuration
 	// les variables sont un tableau 'variable'=>'scss value'
 	// ex : 'header'=> '(background:pink,color:white)'
 	$scss_vars = pipeline('scss_variables',array());
 	$scss->setVariables($scss_vars);
+
+	// Inline source maps
+	// http://leafo.github.io/scssphp/docs/#source-maps
+	// https://github.com/leafo/scssphp/wiki/Source-Maps
+	if (defined('_SCSS_SOURCE_MAP') and '_SCSS_SOURCE_MAP' == true) {
+		$scss->setSourceMap(Compiler::SOURCE_MAP_INLINE);
+		$scss->setSourceMapOptions(array(
+			// This value is prepended to the individual entries in the 'source' field.
+			'sourceRoot' => '',
+			// an optional name of the generated code that this source map is associated with.
+			'sourceMapFilename' => null,
+			// url of the map
+			'sourceMapURL' => null,
+			// absolute path to a file to write the map to
+			'sourceMapWriteTo' => null,
+			// output source contents?
+			'outputSourceFiles' => false,
+			// base path for filename normalization
+			'sourceMapRootpath' => '/',
+			// base path for filename normalization
+			// difference between file & url locations, removed from ALL source files in .map
+			'sourceMapBasepath' => '/local/cache-scss/'
+	  ));
+	}
 
 	try {
 		$out = $scss->compile($style);

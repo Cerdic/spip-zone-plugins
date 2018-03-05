@@ -11,5 +11,6 @@ if (_request('var_mode') == 'css') {
 }
 
 // Activer les _SCSS_SOURCE_MAP si besoin
+// Pour le moment seul les sourcemaps inline sont gérés
 // http://leafo.github.io/scssphp/docs/#source-maps
-// define('_SCSS_SOURCE_MAP', false);
+// define('_SCSS_SOURCE_MAP', true);
