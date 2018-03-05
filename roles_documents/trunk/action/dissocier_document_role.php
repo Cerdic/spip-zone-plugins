@@ -1,6 +1,6 @@
 <?php
 /**
- * Action : Dissocier un document en tenant compte des rôles
+ * Action : Dissocier (et optionnellement supprimer) un document en tenant compte ses rôles
  * 
  * - Si un rôle est précisé, on ne dissocie que ce rôle
  * - Si aucun rôle n'est précisé, on dissocie tous les rôles sauf ceux principaux (=logos)
@@ -23,14 +23,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 /**
- * Dissocier un document en tenant compte de ses rôles
+ * Dissocier (et optionnellement supprimer) un document en tenant compte ses rôles
  *
  * @param string $arg
  *     fournit les arguments de la fonction dissocier_document_roles
  *     sous la forme `$id_objet-$objet-$id_document-$role-suppr-safe`
  *
- *     - 4eme arg : suppr, si true, le document est supprimé si plus lié à aucun objet
- *     - 5eme arg : safe, si true, on vérifie les documents référencés dans le texte de l'objet et on les associe si pas déjà fait
+ *     - 4eme arg : si `suppr`, le document est supprimé si plus lié à aucun objet
+ *     - 5eme arg : si `safe`, on vérifie les documents référencés dans le texte de l'objet et on les associe si pas déjà fait
  *
  * @return void
  */
@@ -40,6 +40,8 @@ function action_dissocier_document_role_dist($arg = null) {
 		$arg = $securiser_action();
 		//$arg = _request('arg'); // temporaire pendant le dev
 	}
+
+	include_spip('inc/autoriser');
 
 	// attention au cas ou id_objet est negatif !
 	if (strncmp($arg, '-', 1) == 0) {
