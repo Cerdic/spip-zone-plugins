@@ -93,11 +93,16 @@ function supprimer_lien_document_role($id_document, $objet, $id_objet, $role, $s
 
 	// D'abord on ne supprime pas, on dissocie
 	include_spip('action/editer_liens');
-	if ($role) {
+	// pas de suppression et rôle : on ne dissocie que ce rôle
+	if (!$supprime and $role) {
 		$condition = array('role' => $role);
-	} else {
+	// pas de suppression et pas de rôle : on dissocie tous les rôles non principaux
+	} elseif(!$supprime and !$role) {
 		$roles = roles_documents_presents_sur_objet($objet, $id_objet, 0, false); // rôles possibles non principaux
 		$condition = array('role' => $roles['possibles']);
+	// suppression : on dissocie tout
+	} else {
+		$condition = array('role' => '*');
 	}
 	objet_dissocier(array('document' => $id_document), array($objet => $id_objet), $condition);
 
@@ -144,6 +149,7 @@ function supprimer_lien_document_role($id_document, $objet, $id_objet, $role, $s
 	// et si demande
 	// ici on ne bloque pas la suppression d'un document rattache a un autre
 	if ($supprime and !sql_countsel('spip_documents_liens', "objet!='document' AND id_document=" . $id_document)) {
+		return;
 		$supprimer_document = charger_fonction('supprimer_document', 'action');
 
 		return $supprimer_document($id_document);
