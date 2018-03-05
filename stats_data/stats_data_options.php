@@ -2,6 +2,7 @@
 
 
 function genie_popularites($t) {
+	
 	include_spip('genie/popularites'); // ?
 	// Si c'est le premier appel, ne pas calculer
 	$t = $GLOBALS['meta']['date_popularites'];
@@ -77,8 +78,6 @@ function genie_visites($t) {
 	//var_dump("hop");
 	//die();
 	
-	spip_log("lol genie visites stats data  " . date("Y-m-d H:i:s", $t) ,"test_genie_calculer_visites.4");
-
 	$encore = calculer_visites2($t);
 	
 	// Si ce n'est pas fini on redonne la meme date au fichier .lock
