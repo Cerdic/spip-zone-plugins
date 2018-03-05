@@ -278,7 +278,7 @@ function formulaires_creer_espece_verifier_2() {
 		krsort($parents);
 		set_request('_parents', $parents);
 	} else {
-		$erreurs['message_erreur'] = _T('taxonomie:erreur_acces_taxon');
+		$erreurs['message_erreur'] = _T('taxonomie:erreur_espece_tsn_invalide');
 	}
 
 	return $erreurs;

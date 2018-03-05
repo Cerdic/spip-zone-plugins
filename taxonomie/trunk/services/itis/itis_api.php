@@ -290,6 +290,8 @@ function itis_search_tsn($action, $search, $strict = true) {
 					foreach ($api['index'] as $_key => $_destination) {
 						if ($_key == 'langage') {
 							$tsn[$_key] = $GLOBALS['itis_language'][strtolower($_data[$_destination])];
+						} elseif ($_key == 'tsn') {
+							$tsn[$_key] = intval($_data[$_destination]);
 						} else {
 							$tsn[$_key] = $_data[$_destination];
 						}
