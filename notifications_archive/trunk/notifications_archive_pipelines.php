@@ -34,12 +34,6 @@ function notifications_archive_taches_generales_cron($taches){
  * @return array Données du pipeline
  */
 function notifications_archive_reservation_evenement_objets_configuration($flux) {
-
-
-
-
-
-
 	$flux['data']['notifications_archive'] = array(
 			'label' => _T('notifications_archive:notifications_archive_titre'),
 	);
