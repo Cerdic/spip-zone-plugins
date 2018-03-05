@@ -110,8 +110,6 @@ function genie_visites($t) {
 function calculer_visites2($t) {
 	include_spip('base/abstract_sql');
 	
-	spip_log("Check des visites de " . date("Y-m-d H:i:s", $t) ,"test_genie_calculer_visites.4");
-	
 	// Initialisations
 	$visites = array(); # visites du site
 	$visites_a = array(); # tableau des visites des articles
@@ -261,9 +259,6 @@ function calculer_visites2($t) {
 				if ($referers_a[$date]) {
 					$ar = array();
 					$insert = array();
-					
-					spip_log("nouveaux Ref art " . date("Y-m-d H:i:s", $t) ,"test_genie_calculer_visites.2");
-					spip_log($referers_a[$date]);
 					
 					// s'assurer d'un slot pour chacun
 					foreach ($referers_a[$date] as $id_article => $referers) {

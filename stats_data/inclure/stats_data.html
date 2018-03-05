@@ -413,15 +413,3 @@ Afficher des stats dans l'admin avec des boucles data :
 	
 </div>
 <p style="text-align:center;clear:both;">...</p>
-Dernière purge : #CONFIG{date_statistiques}
-<?php 
-
-if (strncmp($GLOBALS['connexions'][0]['type'], 'sqlite', 6) == 0) {
-	echo "sqlite" ;
-	//spip_query("UPDATE spip_referers_articles SET visites_veille=visites_jour, visites_jour=0");
-	
-	
-	
-}
-
-?>
