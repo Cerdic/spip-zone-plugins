@@ -1,6 +1,7 @@
 <?php
 /**
- * Ce fichier contient l'ensemble des fonctions implémentant l'API du plugin Taxonomie.
+ * Ce fichier contient l'ensemble des fonctions implémentant l'API du plugin Taxonomie accessible depuis
+ * les squelettes.
  *
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -9,9 +10,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 /**
- * Charge tous les taxons d'un règne donné, du règne lui-même aux taxons de genre au maximum.
- * La fonction permet aussi de choisir un rang taxonomique feuille différent du genre.
- * Les nom communs anglais, français ou espagnols peuvent aussi être chargés en complément mais
+ * Charge tous les taxons d'un règne donné, du règne lui-même jusqu'aux taxons de genre.
+ * Les nom communs anglais, français, espagnols, etc, peuvent aussi être chargés en complément mais
  * ne couvrent pas l'ensemble des taxons.
  *
  * @package SPIP\TAXONOMIE\REGNE
@@ -28,14 +28,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @param string $regne
  *        Nom scientifique du règne en lettres minuscules : `animalia`, `plantae`, `fungi`.
- * @param string $type_rang
- *        Type de rang taxonomique maximal jusqu'où charger le règne et qui correspond à : `principal`,
- *        `secondaire` ou `intercalaire`:
- *        - `principal`   : uniquement les rangs principaux seront chargés (règne, phylum, ordre..., genre).
- *        - `secondaire`  : les rangs principaux et secondaires seront chargés ce qui ajoute seulement le rang tribu.
- *        - `intercalaire`: tous les rangs jusqu'au genre seront chargés.
  * @param array  $codes_langue
- *        Tableau des codes (au sens SPIP) des langues à charger pour les noms communs des taxons.
+ *        Tableau des codes des langues (au sens SPIP) à charger pour les noms communs des taxons.
  *
  * @return bool
  *        `true` si le chargement a réussi, `false` sinon
@@ -74,7 +68,7 @@ function taxonomie_regne_charger($regne, $codes_langue = array()) {
 				$noms = itis_read_vernaculars($langue, $sha_langue);
 				if ($noms) {
 					$meta_regne['traductions']['itis'][$_code_langue]['sha'] = $sha_langue;
-					$nb_traductions = 0;
+					$nb_traductions_langue = 0;
 					foreach ($noms as $_tsn => $_nom) {
 						if (array_key_exists($_tsn, $taxons)) {
 							// On ajoute les traductions qui sont de la forme [xx]texte
@@ -82,11 +76,11 @@ function taxonomie_regne_charger($regne, $codes_langue = array()) {
 							// avec les balises multi et d'optimiser ainsi les traitements
 							// sachant qu'il y a très peu de traductions comparées aux taxons
 							$taxons[$_tsn]['nom_commun'] .= $_nom;
-							$nb_traductions += 1;
+							$nb_traductions_langue += 1;
 							$traductions[$_tsn] = $_tsn;
 						}
 					}
-					$meta_regne['traductions']['itis'][$_code_langue]['compteur'] = $nb_traductions;
+					$meta_regne['traductions']['itis'][$_code_langue]['compteur'] = $nb_traductions_langue;
 				}
 			}
 		}
@@ -197,7 +191,7 @@ function taxonomie_regne_existe($regne, &$meta_regne) {
 
 
 /**
- * Fournit l'ascendance taxonomique d'un taxon donné par consultation en base de données.
+ * Fournit l'ascendance taxonomique d'un taxon donné par consultation dans la base de données.
  *
  * @package SPIP\TAXONOMIE\TAXON
  *
@@ -246,7 +240,7 @@ function taxonomie_taxon_informer_ascendance($id_taxon, $tsn_parent = null, $ord
 
 
 /**
- * Fournit les phrases de crédits des sources d'information ayant permis de compléter le taxon.
+ * Fournit les phrases de crédit des sources d'information ayant permis de compléter le taxon.
  * La référence ITIS n'est pas répétée dans le champ `sources` de chaque taxon car elle est
  * à la base de chaque règne. Elle est donc insérée par la fonction.
  *
@@ -254,7 +248,6 @@ function taxonomie_taxon_informer_ascendance($id_taxon, $tsn_parent = null, $ord
  *
  * @api
  * @filtre
- * @uses ${service}_credit fonction de formatage des crédits propre à chaque service
  *
  * @param int    $id_taxon
  *        Id du taxon pour lequel il faut fournir les crédits
