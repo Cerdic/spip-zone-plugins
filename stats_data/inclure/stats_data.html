@@ -27,7 +27,7 @@ Afficher des stats dans l'admin avec des boucles data :
 #SET{date,#DATE|affdate{Y-m-d}}
 
 [(#REM) Actuellement : date du fichier de visite le plus recemment modifié ]
-<BOUCLE_derniere_visite(DATA){si #ENV{jour}|non}{source ls,#CHEMIN{tmp/visites}/*}{!par mtime}>
+<BOUCLE_derniere_visite(DATA){si #ENV{jour}|non}{source ls,#CHEMIN{tmp/visites}/*}{!par mtime}{0,1}>
 #SET{date,#VAL{Y-m-d H:i:s}|date{#MTIME}}
 #SET{maj,#GET{date}}
 </BOUCLE_derniere_visite>
@@ -217,6 +217,9 @@ Afficher des stats dans l'admin avec des boucles data :
 #conteneur_stats{
 	clear: both;
 }
+.marge{
+	margin:1em 0;
+}
 </style>
 
 [(#REM) Menu date ]
@@ -232,10 +235,14 @@ Afficher des stats dans l'admin avec des boucles data :
 		</div>
 	</div>
 	<div>
-		[<h2><a href="[(#SELF|parametre_url{id_article,''})]" class="ajax">(#GET{date}|affdate)</a><small title="Dernière mise à jour le [(#GET{maj}|affdate)] [ (#GET{maj}|affdate{H\hi s})s]"> — [ (#GET{maj}|affdate{H\hi})</small>]</h2>]
+		<div class="marge">
+			[<h2><a href="[(#SELF|parametre_url{id_article,''})]" class="ajax">(#GET{date}|affdate)</a><small title="Dernière mise à jour le [(#GET{maj}|affdate)] [ (#GET{maj}|affdate{H\hi s})s]"> — [ (#GET{maj}|affdate{H\hi}|sinon{/na})</small>]</h2>]
+		</div>
 	</div>
 	<div>
-		<h3><BOUCLE_titre(ARTICLES){id_article=#ENV{id_article}}><a href="#URL_ARTICLE">[(#TITRE|couper{25})]</a></BOUCLE_titre>Tous les articles lus<//B_titre></h3>
+		<div class="marge">
+			<h3><BOUCLE_titre(ARTICLES){id_article=#ENV{id_article}}><a href="#URL_ARTICLE">[(#TITRE|couper{25})]</a></BOUCLE_titre>Tous les articles lus<//B_titre></h3>
+		</div>
 	</div>
 </div>
 
@@ -267,6 +274,11 @@ Afficher des stats dans l'admin avec des boucles data :
 				<div class="stats_valeur" title="[(#GET{stat})] visites">[(#GET{stat_court})]</div>
 				<p><strong>visite[(#GET{stat}|>{1}|?{s})] [(#ENV{jour}|non)<br><small>en&nbsp;cours</small>]</strong></p>
 			</div>
+			
+			<BOUCLE_plus_vielle_visite_en_cours(DATA){si #ENV{jour}|non}{source ls,#CHEMIN{tmp/visites}/*}{par mtime}{0,1}>
+				<p><small>[Visite vue (#VAL{Y-m-d H:i:s}|date{#MTIME}|date_interface)]</small></p>
+			</BOUCLE_plus_vielle_visite_en_cours>
+			
 		</li>
 		
 		#SET{stat,#GET{articles_lus}|sizeof||number_format{0,""," "}}
