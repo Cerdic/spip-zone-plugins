@@ -1,8 +1,8 @@
 <?php
 
-include_spip('genie/popularites'); // ?
-function genie_popularites($t) {
 
+function genie_popularites($t) {
+	include_spip('genie/popularites'); // ?
 	// Si c'est le premier appel, ne pas calculer
 	$t = $GLOBALS['meta']['date_popularites'];
 	ecrire_meta('date_popularites', time());
@@ -21,7 +21,6 @@ function genie_popularites($t) {
 	$row = sql_fetsel('MAX(popularite) AS max, SUM(popularite) AS tot', "spip_articles");
 	ecrire_meta("popularite_max", $row['max']);
 	ecrire_meta("popularite_total", $row['tot']);
-
 
 	// Une fois par jour purger les referers du jour ; qui deviennent
 	// donc ceux de la veille ; au passage on stocke une date_statistiques
@@ -71,9 +70,15 @@ function genie_popularites($t) {
 }
 
 // surcharge du cron de calcul des visites pour ajoute rles visites_jour et visites_veilles sur les spip_referers_articles
-include_spip('genie/visites'); // ?
 
 function genie_visites($t) {
+	
+	include_spip('genie/visites'); // ?
+	//var_dump("hop");
+	//die();
+	
+	spip_log("lol genie visites stats data  " . date("Y-m-d H:i:s", $t) ,"test_genie_calculer_visites.4");
+
 	$encore = calculer_visites2($t);
 	
 	// Si ce n'est pas fini on redonne la meme date au fichier .lock
@@ -105,7 +110,7 @@ function genie_visites($t) {
 function calculer_visites2($t) {
 	include_spip('base/abstract_sql');
 	
-	spip_log("Check des visites de " . date("Y-m-d H:i:s", $t) ,"test_genie_calculer_visites");
+	spip_log("Check des visites de " . date("Y-m-d H:i:s", $t) ,"test_genie_calculer_visites.4");
 	
 	// Initialisations
 	$visites = array(); # visites du site
@@ -121,6 +126,7 @@ function calculer_visites2($t) {
 
 	$compteur = _CRON_LOT_FICHIERS_VISITE;
 	$date_init = time() - 30 * 60;
+	
 	foreach ($sessions as $item) {
 		if (($d = @filemtime($item)) < $date_init) {
 			if (!$d) {
@@ -255,6 +261,10 @@ function calculer_visites2($t) {
 				if ($referers_a[$date]) {
 					$ar = array();
 					$insert = array();
+					
+					spip_log("nouveaux Ref art " . date("Y-m-d H:i:s", $t) ,"test_genie_calculer_visites.2");
+					spip_log($referers_a[$date]);
+					
 					// s'assurer d'un slot pour chacun
 					foreach ($referers_a[$date] as $id_article => $referers) {
 						foreach ($referers as $referer => $num) {

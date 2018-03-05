@@ -297,9 +297,9 @@ Afficher des stats dans l'admin avec des boucles data :
 			</div>
 			
 			<div class="domaines connus">
+				<B_moteurs_recherche>
 				<h3>Principaux affluents</h3>
 				<dl>
-					<B_moteurs_recherche>
 					<dt>Moteurs de recherche</dt>
 					<BOUCLE_moteurs_recherche(DATA){source table,#GET{sites_affluents}}{cle==#GET{reg_moteurs}}{!par visites}>
 					<dd>[(#CLE|ucfirst)] <small>([(#VISITES) visite[(#VISITES|>{1}|?{s})]])</small></dd>
@@ -314,6 +314,7 @@ Afficher des stats dans l'admin avec des boucles data :
 					</BOUCLE_reseaux_sociaux>
 					
 				</dl>
+				</B_moteurs_recherche>
 				
 				#SET{reg_recherche,#URL_PAGE{recherche}|replace{^https?://}|preg_quote|concat{&(amp;)?recherche=}}
 				<BOUCLE_recherches(DATA){source table,#GET{sites_affluents}}{cle==#GET{reg_site}}{!par visites}>
@@ -412,3 +413,15 @@ Afficher des stats dans l'admin avec des boucles data :
 	
 </div>
 <p style="text-align:center;clear:both;">...</p>
+Dernière purge : #CONFIG{date_statistiques}
+<?php 
+
+if (strncmp($GLOBALS['connexions'][0]['type'], 'sqlite', 6) == 0) {
+	echo "sqlite" ;
+	//spip_query("UPDATE spip_referers_articles SET visites_veille=visites_jour, visites_jour=0");
+	
+	
+	
+}
+
+?>
