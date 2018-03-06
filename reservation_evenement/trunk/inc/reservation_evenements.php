@@ -209,7 +209,7 @@ function re_objets_navigation() {
 				'args' => calculer_contexte(),
 				'data' => $objets
 			)
-			);
+		);
 
 	return $objets;
 }
