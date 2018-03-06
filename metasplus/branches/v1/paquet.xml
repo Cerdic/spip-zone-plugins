@@ -1,7 +1,7 @@
 <paquet
 	prefix="metasplus"
 	categorie="divers"
-	version="1.2.5"
+	version="1.2.6"
 	etat="stable"
 	compatibilite="[2.1.0;3.2.*]"
 	logo="opengraph.png"
