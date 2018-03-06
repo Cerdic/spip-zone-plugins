@@ -116,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_evenement_cloture' => 'L’évènement @titre@ vient de se terminer. <br />Nous aimerions vous remercier pour votre participation.',
 	'message_evenement_cloture_vendeur' => 'L’évènement @titre@ vient de se terminer. <br />Le système vient d’envoyer un message de cloture à @client@ - @email@.',
 	'montant' => 'Montant',
+	'mp_titre_reservation_details' => 'Détails de la réservation',
 
 	// N
 	'nom_reservation_multiples_evenements' => 'Réservation de plusieurs événements',
