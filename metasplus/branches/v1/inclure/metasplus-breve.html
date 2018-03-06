@@ -4,7 +4,7 @@
 	Parametres:
 	- id_breve (obligatoire)
 
-]<BOUCLE_article(BREVES){id_breve}>
+]<BOUCLE_breve(BREVES){id_breve}>
 [(#REM)
 
 	1. D'abord rassembler les informations et les formater
@@ -36,5 +36,5 @@
 	url=#GET{url},
 	logo=#GET{logo},
 	og-type=article} />
-</BOUCLE_article>
+</BOUCLE_breve>
 #FILTRE{trim}
