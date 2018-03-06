@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_suivante' => 'année suivante',
 	'aucun_evenement' => 'aucun événement',
 	'aucun_inscrit' => 'Aucun inscrit',
-	'aucune_rubrique_mode_agenda' => 'Par défaut, toutes les rubriques permettent d’utiliser les événements. Si vous activez le mode agenda sur une ou plusieurs rubriques, la gestion des événements sera limitée a sa branche.',
+	'aucune_rubrique_mode_agenda' => 'Par défaut, toutes les rubriques permettent d’utiliser les événements. Si vous activez le mode agenda sur une ou plusieurs rubriques, la gestion des événements sera limitée à sa branche.',
 
 	// B
 	'bouton_annuler' => 'Annuler',
