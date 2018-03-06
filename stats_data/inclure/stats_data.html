@@ -124,7 +124,6 @@ Afficher des stats dans l'admin avec des boucles data :
 		[(#SET{req_affluents,[(#GET{select})] from spip_referers_articles where [(#GET{periode})] > 0 and id_article=[(#ENV{id_article})] order by [(#GET{periode})] desc })]
 	]
 	</BOUCLE_visites_jour>
-	
 	[(#REM)
 		<hr>
 		[(#GET{req})]
@@ -152,7 +151,7 @@ Afficher des stats dans l'admin avec des boucles data :
 		#SET{domaine,#REFERER|match{#GET{reg_domaine},"i",3}}
 		#SET{valeurs_actuelles,#GET{sites_affluents}|table_valeur{#GET{domaine}}|sinon{#ARRAY}}
 		
-		#SET{nb_visites,#GET{valeurs_actuelles}|table_valeur{visites}|plus{1}}
+		#SET{nb_visites,#GET{valeurs_actuelles}|table_valeur{visites}|plus{#VISITES}}
 		#SET{valeurs_actuelles,#GET{valeurs_actuelles}|array_merge{#ARRAY{visites,#GET{nb_visites}}}}
 		
 		#SET{referers_actuels,#GET{valeurs_actuelles}|table_valeur{referers}|sinon{#ARRAY}}
@@ -183,23 +182,27 @@ Afficher des stats dans l'admin avec des boucles data :
 	float:left;
 	width:33%;
 	list-style-type:none;
-	text-align:center;
 }
 #data_stats ul{
 	margin:0;
 	padding:0;
 	list-style-type:none;
 }
-.stats_valeur{
+.statistique{
+	text-align:center;
+	height:8em;
+}
+.statistique > .valeur{
 	margin-top: 0.3em;
 	font-size:3.8em;
 	font-weight:bold;
 	line-height: 1em;
+	text-align:center;
 }
 .onglets_simple ul li{
 	display:inline;
 }
-.valeur{
+ul.valeur{
 	max-height:500px;
 	overflow:auto;
 	text-align:left;
@@ -223,13 +226,19 @@ Afficher des stats dans l'admin avec des boucles data :
 .domaines.connus{
 	text-align:left;
 }
-.domaines.connus dt{
+.affluents dt{
 	font-weight:bold;
 }
-.domaines.connus dd{
-	
+.affluents dd{
+	height:200px;
+	overflow:auto;
 }
-
+.stats_contenu > h3 {
+	margin-top:20px;
+}
+.stats_contenu > h3.premier {
+	margin-top:0;
+}
 </style>
 
 [(#REM) Menu date ]
@@ -267,7 +276,15 @@ Afficher des stats dans l'admin avec des boucles data :
 #SET{reg_reseaux_sociaux,"Facebook|^t$"}
 #SET{reg_emails,"outlook"}
 #SET{reg_site,#URL_SITE_SPIP|replace{^https?://}|replace{\..*$}}
-[(#SET{domaines_connus,[(#GET{reg_moteurs})]|[(#GET{reg_reseaux_sociaux})]|[(#GET{reg_site})]})]
+[(#SET{reg_domaines_connus,[(#GET{reg_moteurs})]|[(#GET{reg_reseaux_sociaux})]|[(#GET{reg_site})]})]
+
+<BOUCLE_total_visites_domaine(DATA){source table,#GET{sites_affluents}}>
+	#SET{total,#GET{total}|plus{#VISITES}}
+	[(#CLE|match{#GET{reg_moteurs}}|oui) #SET{total_moteurs,#GET{total_moteurs}|plus{#VISITES}} ]
+	[(#CLE|match{#GET{reg_reseaux_sociaux}}|oui) #SET{total_reseaux_sociaux,#GET{total_reseaux_sociaux}|plus{#VISITES}} ]
+	[(#CLE|match{#GET{reg_domaines_connus}}|non) #SET{total_autres_affluents,#GET{total_autres_affluents}|plus{#VISITES}} ]
+</BOUCLE_total_visites_domaine>
+#SET{domaines_connus,#ARRAY{Moteurs de recherche,#GET{total_moteurs},Réseaux sociaux,#GET{total_reseaux_sociaux},Autres affluents,#GET{total_autres_affluents}}}
 
 <div id="conteneur_stats">
 	
@@ -287,35 +304,26 @@ Afficher des stats dans l'admin avec des boucles data :
 		]
 		<li>
 			<div class="stats_contenu" style="padding-right:20px;">
-				<div class="stats_valeur" title="[(#GET{stat})] visites">[(#GET{stat_court})]</div>
-				<p>
-					<strong>visite[(#GET{stat}|>{1}|?{s})]</strong>
-					<BOUCLE_plus_vielle_visite_en_cours(DATA){si #ENV{jour}|non}{source ls,#CHEMIN{tmp/visites}/*}{par mtime}{0,1}>
-						<br><small title="[Visite inactive vue (#VAL{Y-m-d H:i:s}|date{#MTIME}|date_interface)]">en&nbsp;cours</small>
-					</BOUCLE_plus_vielle_visite_en_cours>
-				</p>
-			</div>
-			
-			<div class="domaines connus">
-				<B_moteurs_recherche>
-				<h3>Principaux affluents</h3>
-				<dl>
-					<dt>Moteurs de recherche</dt>
-					<BOUCLE_moteurs_recherche(DATA){source table,#GET{sites_affluents}}{cle==#GET{reg_moteurs}}{!par visites}>
-					<dd>[(#CLE|ucfirst)] <small>([(#VISITES) visite[(#VISITES|>{1}|?{s})]])</small></dd>
-					[(#REM)<dd>[(#VALEUR|print_r{1})]</dd>]
-					</BOUCLE_moteurs_recherche>
-					
-					<B_reseaux_sociaux>
-					<dt>Réseaux sociaux</dt>
-					<BOUCLE_reseaux_sociaux(DATA){source table,#GET{sites_affluents}}{cle==#GET{reg_reseaux_sociaux}}{!par visites}>
-					<dd>[(#CLE|replace{^t$,twitter}|ucfirst)] <small>([(#VISITES) visite[(#VISITES|>{1}|?{s})]])</small></dd>
-					[(#REM)<dd>[(#VALEUR|print_r{1})]</dd>]
-					</BOUCLE_reseaux_sociaux>
-					
-				</dl>
-				</B_moteurs_recherche>
 				
+				<div class="statistique">
+					<div class="valeur" title="[(#GET{stat})] visites">[(#GET{stat_court})]</div>
+					<div class="description">
+						<strong>visite[(#GET{stat}|>{1}|?{s})]</strong>
+						<BOUCLE_plus_vielle_visite_en_cours(DATA){si #ENV{jour}|non}{source ls,#CHEMIN{tmp/visites}/*}{par mtime}{0,1}>
+							<br><small title="[Visite inactive vue (#VAL{Y-m-d H:i:s}|date{#MTIME}|date_interface)]">en&nbsp;cours</small>
+						</BOUCLE_plus_vielle_visite_en_cours>
+					</div>
+				</div>
+				
+				#SET{acces_directs,#GET{visites}|moins{#GET{total}}}
+				
+				<h3 class="premier">Vue d’ensemble</h3>
+				<ul>
+					<li>Accès directs : [(#GET{acces_directs}|number_format{0,""," "})] visites <small>([(#GET{acces_directs}|div{#GET{visites}}|mult{100}|floor)%])</small></li>
+					<BOUCLE_domaines_connus(DATA){source table,#GET{domaines_connus}}{!par valeur}>
+					<li>#CLE : [(#VALEUR|number_format{0,""," "})] visites <small>([(#VALEUR|div{#GET{visites}}|mult{100}|floor)%])</small></li>
+					</BOUCLE_domaines_connus>
+				</ul>
 				#SET{reg_recherche,#URL_PAGE{recherche}|replace{^https?://}|preg_quote|concat{&(amp;)?recherche=}}
 				<BOUCLE_recherches(DATA){source table,#GET{sites_affluents}}{cle==#GET{reg_site}}{!par visites}>
 					<h3>#VISITES terme[(#VISITES|>{1}|?{s})] recherché[(#VISITES|>{1}|?{s})]</h3>
@@ -327,7 +335,6 @@ Afficher des stats dans l'admin avec des boucles data :
 					<p>#PAGINATION</p>
 					</B_recherche>
 				</BOUCLE_recherches>
-				
 			</div>
 		</li>
 		
@@ -347,8 +354,12 @@ Afficher des stats dans l'admin avec des boucles data :
 			<BOUCLE_compte_articles(DATA){source table,#GET{articles_lus}} /> #SET{nb_articles_lus,#TOTAL_BOUCLE}<//B_compte_articles>
 			<div class="stats_contenu" style="padding-right:20px;">
 				[(#GET{nb_articles_lus}|>{1}|oui)
-				<div class="stats_valeur" title="[(#GET{stat})] articles lus">[(#GET{stat_court})]</div>
-				<p style="margin-bottom:40px;"><strong>articles lu[(#GET{stat}|>{1}|?{s})]</strong></p>
+				<div class="statistique">
+					<div class="valeur" title="[(#GET{stat})] articles lus">[(#GET{stat_court})]</div>
+					<div class="description">
+						<strong>articles lu[(#GET{stat}|>{1}|?{s})]</strong>
+					</div>
+				</div>
 				]
 				<B_articles>
 				#ANCRE_PAGINATION
@@ -371,10 +382,6 @@ Afficher des stats dans l'admin avec des boucles data :
 			</div>
 		</li>
 		
-		<BOUCLE_total_visites_domaine(DATA){source table,#GET{sites_affluents}}>
-			#SET{total,#GET{total}|plus{#VISITES}}
-		</BOUCLE_total_visites_domaine>
-		
 		<li>
 			#SET{stat,#GET{total}|number_format{0,""," "}}
 			#SET{milliers,#GET{stat}|match{(\d+ )(\d)\d\d,u,1}}
@@ -387,26 +394,43 @@ Afficher des stats dans l'admin avec des boucles data :
 			]
 			<B_affluents>
 			<div class="stats_contenu">
-				<div class="stats_valeur" title="[(#GET{stat})] visites">[(#GET{stat_court})]</div>
-				<p><strong>visite[(#GET{stat}|>{1}|?{s})]<br><small>par&nbsp;[(#GRAND_TOTAL|number_format{0,"","&nbsp;"})]&nbsp;domaine[(#GRAND_TOTAL|>{1}|?{s})] affluent[(#GRAND_TOTAL|>{0}|?{s})]</small></strong></p>
-				#ANCRE_PAGINATION
+				
+				<div class="statistique">
+					<div class="valeur" title="[(#GET{stat})] visites">[(#GET{stat_court})]</div>
+					<div class="description">
+						<strong>visite[(#GET{stat}|>{1}|?{s})]<br><small>par&nbsp;[(#GRAND_TOTAL|number_format{0,"","&nbsp;"})]&nbsp;domaine[(#GRAND_TOTAL|>{1}|?{s})] affluent[(#GRAND_TOTAL|>{0}|?{s})]</small></strong>
+					</div>
+				</div>
+				
+				<h3 class="premier" title="[(#GET{total_moteurs})] visites">Moteurs de recherche</h3>
+				
 				<ul class="valeur">
-					<BOUCLE_affluents(DATA){source table,#GET{sites_affluents}}{cle !==#GET{domaines_connus}}{!par visites}{pagination 10}>
-					<li style="width:80%">
-						<h3>[(#CLE|ucfirst)] <small>([(#VISITES) visite[(#VISITES|>{1}|?{s})]])</small></h3>
-						
-						<B_referers_>
-						<ul style="margin-bottom:10px;height:4em;overflow:auto;">
-						<BOUCLE_referers_(DATA){source table, #VALEUR{referers}|array_unique}{par valeur}>
-							[<li><a href="(#VALEUR)">[(#VALEUR|replace{^https?://}|replace{"\?.*$"}|couper{30})]</a></li>]
-						</BOUCLE_referers_>
-						</ul>
-						</B_referers_>
-					</li>
-					</BOUCLE_affluents>
+				<BOUCLE_moteurs_recherche(DATA){source table,#GET{sites_affluents}}{cle==#GET{reg_moteurs}}{!par visites}>
+				<li>[(#CLE|ucfirst)] <small>([(#VISITES|number_format{0,""," "}) visite[(#VISITES|>{1}|?{s})]])</small></li>
+				</BOUCLE_moteurs_recherche>
+				</ul>
+				
+				<B_reseaux_sociaux>
+				<h3 title="[(#GET{total_reseaux_sociaux})] visites">Réseaux sociaux</h3>
+				<ul class="valeur">
+				<BOUCLE_reseaux_sociaux(DATA){source table,#GET{sites_affluents}}{cle==#GET{reg_reseaux_sociaux}}{!par visites}>
+				<li>[(#CLE|replace{^t$,twitter}|ucfirst)] <small>([(#VISITES|number_format{0,""," "}) visite[(#VISITES|>{1}|?{s})]])</small></li>
+				</BOUCLE_reseaux_sociaux>
+				</ul>
+				
+				#ANCRE_PAGINATION
+				<h3 title="[(#GET{total_autres_affluents})] visites">
+					Autres affluents
+				</h3>
+				
+				<ul class="valeur">
+				<BOUCLE_affluents(DATA){source table,#GET{sites_affluents}}{cle!==#GET{reg_domaines_connus}}{!par visites}{pagination 50}>
+				<li>[(#CLE|ucfirst)] <small>([(#VISITES|number_format{0,""," "}) visite[(#VISITES|>{1}|?{s})]])</small></li>
+				</BOUCLE_affluents>
 				</ul>
 				<p style="margin:10px">#PAGINATION</p>
 			</div>
+			
 			</B_affluents>
 		</li>
 	</ul>
