@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[2.1.0;3.2.*]"
 	logo="scssphp.png"
-	documentation=""
+	documentation="https://contrib.spip.net/ScssPhp"
 >
 	<nom>SCSS PHP</nom>
 
@@ -19,5 +19,4 @@
 
 	<pipeline nom="insert_head" action="insert_head" />
 	<pipeline nom="formulaire_admin"  inclure="scssphp_pipelines.php" />
-
 </paquet>
