@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 /**
  * Chargement des données :
  *
- * @uses taxonomie_regne_existe()
+ * @uses regne_existe()
  *
  * @return array
  * 		Tableau des données à charger par le formulaire dans l'étape 1.
@@ -63,7 +63,7 @@ function formulaires_creer_espece_charger() {
 	include_spip('taxonomie_fonctions');
 	$regnes = regne_lister();
 	foreach ($regnes as $_regne) {
-		if (taxonomie_regne_existe($_regne, $meta_regne)) {
+		if (regne_existe($_regne, $meta_regne)) {
 			$valeurs['_regnes'][$_regne] = ucfirst(_T("taxonomie:regne_${_regne}"));
 		}
 	}

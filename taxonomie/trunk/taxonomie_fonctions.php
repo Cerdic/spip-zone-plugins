@@ -19,9 +19,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @api
  * @filtre
  *
- * @uses taxonomie_regne_existe()
+ * @uses regne_existe()
  * @uses taxon_preserver_editions()
- * @uses taxonomie_regne_vider()
+ * @uses regne_vider()
  * @uses itis_read_hierarchy()
  * @uses itis_find_language()
  * @uses itis_read_vernaculars()
@@ -34,20 +34,20 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return bool
  *        `true` si le chargement a réussi, `false` sinon
  */
-function taxonomie_regne_charger($regne, $codes_langue = array()) {
+function regne_charger($regne, $codes_langue = array()) {
 
 	$retour = false;
 	$taxons_edites = array();
 
 	// Vérifie si le règne existe bien dans la table spip_taxons
-	$regne_existe = taxonomie_regne_existe($regne, $meta_regne);
+	$regne_existe = regne_existe($regne, $meta_regne);
 	include_spip('inc/taxonomie');
 	if ($regne_existe) {
 		// Sauvegarde des taxons ayant été modifiés manuellement suite à leur création automatique.
 		$taxons_edites = taxon_preserver_editions($regne);
 
 		// Vider le règne avant de le recharger
-		taxonomie_regne_vider($regne);
+		regne_vider($regne);
 	}
 
 	// Lire le fichier json fournissant la hiérarchie des rangs du règne en cours de chargement.
@@ -142,7 +142,7 @@ function taxonomie_regne_charger($regne, $codes_langue = array()) {
  * @return bool
  *        `true` si le vidage a réussi, `false` sinon
  */
-function taxonomie_regne_vider($regne) {
+function regne_vider($regne) {
 
 	$retour = sql_delete('spip_taxons', 'regne=' . sql_quote($regne));
 	if ($retour !== false) {
@@ -173,7 +173,7 @@ function taxonomie_regne_vider($regne) {
  * @return bool
  *        `true` si le règne existe, `false` sinon.
  */
-function taxonomie_regne_existe($regne, &$meta_regne) {
+function regne_existe($regne, &$meta_regne) {
 
 	$meta_regne = array();
 	$existe = false;
@@ -210,7 +210,7 @@ function taxonomie_regne_existe($regne, &$meta_regne) {
  *        Liste des taxons ascendants. Chaque taxon est un tableau associatif contenant les informations
  *        suivantes : `id_taxon`, `tsn_parent`, `nom_scientifique`, `nom_commun`, `rang`.
  */
-function taxonomie_taxon_informer_ascendance($id_taxon, $tsn_parent = null, $ordre = 'descendant') {
+function taxon_informer_ascendance($id_taxon, $tsn_parent = null, $ordre = 'descendant') {
 
 	$ascendance = array();
 
@@ -259,7 +259,7 @@ function taxonomie_taxon_informer_ascendance($id_taxon, $tsn_parent = null, $ord
  * @return array
  *        Tableau des phrases de crédits indexées par source.
  */
-function taxonomie_taxon_crediter($id_taxon, $sources_specifiques = null) {
+function taxon_crediter($id_taxon, $sources_specifiques = null) {
 
 	$sources = array();
 

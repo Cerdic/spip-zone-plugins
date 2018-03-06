@@ -226,7 +226,7 @@ function autoriser_espece_creer_dist($faire, $type, $id, $qui, $opt) {
 	$regnes = regne_lister();
 	$regne_existe = false;
 	foreach ($regnes as $_regne) {
-		if (taxonomie_regne_existe($_regne, $meta_regne)) {
+		if (regne_existe($_regne, $meta_regne)) {
 			$regne_existe = true;
 		}
 	}

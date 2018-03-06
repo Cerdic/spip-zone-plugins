@@ -18,8 +18,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Si un fichier a changé on recharge le ou les règnes concernés.
  *
  * @uses itis_review_sha()
- * @uses taxonomie_regne_existe()
- * @uses taxonomie_regne_charger()
+ * @uses regne_existe()
+ * @uses regne_charger()
  *
  * @param int $last
  *        Timestamp de la date de dernier appel de la tâche.
@@ -38,7 +38,7 @@ function genie_taxonomie_actualiser_itis_dist($last) {
 	include_spip('taxonomie_fonctions');
 	foreach ($regnes as $_regne) {
 		$regne_a_recharger = false;
-		if (taxonomie_regne_existe($_regne, $meta_regne)) {
+		if (regne_existe($_regne, $meta_regne)) {
 			// On compare le sha du fichier des taxons
 			if ($meta_regne['sha'] != $shas['taxons'][$_regne]) {
 				$regne_a_recharger = true;
@@ -53,7 +53,7 @@ function genie_taxonomie_actualiser_itis_dist($last) {
 			}
 			if ($regne_a_recharger) {
 				$langues = array_keys($meta_regne['traductions']['itis']);
-				taxonomie_regne_charger($_regne, $meta_regne['type_rang'], $langues);
+				regne_charger($_regne, $meta_regne['type_rang'], $langues);
 			}
 		}
 	}

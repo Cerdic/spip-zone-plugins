@@ -12,7 +12,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * chargement d'un règne, le formulaire propose de choisir les langues vernaculaires à utiliser parmi celles
  * supportées par le plugin.
  *
- * @uses taxonomie_regne_existe()
+ * @uses regne_existe()
  *
  * @return array
  * 		Tableau des données à charger par le formulaire (affichage). Aucune donnée chargée n'est un
@@ -40,7 +40,7 @@ function formulaires_charger_regne_charger() {
 	$regnes = regne_lister();
 	foreach ($regnes as $_regne) {
 		$valeurs['_regnes'][$_regne] = '<span class="nom_scientifique_inline">' . $_regne . '</span>, ' . _T("taxonomie:regne_${_regne}");
-		if (taxonomie_regne_existe($_regne, $meta_regne)) {
+		if (regne_existe($_regne, $meta_regne)) {
 			$valeurs['_regnes'][$_regne] .= ' [' . _T("taxonomie:info_regne_charge") . ']';
 			$aucun_regne_charge = false;
 		}
@@ -84,9 +84,9 @@ function formulaires_charger_regne_verifier() {
  * Exécution du formulaire : le règne choisi est soit vidé, soit chargé jusqu'au rang minimal
  * choisi en y intégrant les traductions des noms communs sélectionnées.
  *
- * @uses taxonomie_regne_existe()
- * @uses taxonomie_regne_vider()
- * @uses taxonomie_regne_charger()
+ * @uses regne_existe()
+ * @uses regne_vider()
+ * @uses regne_charger()
  *
  * @return array
  * 		Tableau retourné par le formulaire contenant toujours un message de bonne exécution ou
@@ -97,11 +97,11 @@ function formulaires_charger_regne_traiter() {
 
 	$action = _request('action_regne');
 	$regne = _request('regne');
-	$regne_existe = taxonomie_regne_existe($regne, $meta_regne);
+	$regne_existe = regne_existe($regne, $meta_regne);
 
 	if ($action == 'vider') {
 		if ($regne_existe) {
-			$ok = taxonomie_regne_vider($regne);
+			$ok = regne_vider($regne);
 			$item = $ok ? 'taxonomie:succes_vider_regne' : 'taxonomie:erreur_vider_regne';
 		}
 		else {
@@ -115,7 +115,7 @@ function formulaires_charger_regne_traiter() {
 		// demandé est déjà chargé. Un mécanisme de sauvegarde interne permet aussi de
 		// restituer les modifications manuelles des taxons
 		$langues = _request('langues_regne');
-		$ok = taxonomie_regne_charger($regne, $langues);
+		$ok = regne_charger($regne, $langues);
 		$item = $ok ? 'taxonomie:succes_charger_regne' : 'taxonomie:erreur_charger_regne';
 	}
 
