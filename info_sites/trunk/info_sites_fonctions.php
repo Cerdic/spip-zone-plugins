@@ -70,7 +70,7 @@ if (!function_exists('lister_tables_objets')) {
 /**
  * Compter les éléments enregistrés dans une table.
  *
- * @param        $table Le nom de la table à compter.
+ * @param string $table Le nom de la table à compter.
  * @param string $where Cibler des éléments en particulier
  *
  * @return bool|int
@@ -193,7 +193,7 @@ function sites_projets_maj_plugins() {
 			foreach ($liste_sites_projets_plugins as $key => $site_projet) {
 				$liste_plugins[$site_projet['id_projets_site']] = array();
 				$liste_plugins_tmp = formater_tableau($site_projet['logiciel_plugins'], 'plugins');
-				foreach ($liste_plugins_tmp as $key => $plugin) {
+				foreach ($liste_plugins_tmp as $index => $plugin) {
 					$logiciel = strtolower($site_projet['logiciel_nom']);
 					$info_plugin = charger_fonction('plugins_' . $logiciel, 'inc');
 					/**
@@ -206,14 +206,14 @@ function sites_projets_maj_plugins() {
 						 * pas la peine d'aller plus loin
 						 */
 						if ($a_mettre_jour === false) {
-							unset($liste_plugins_tmp[$key]);
+							unset($liste_plugins_tmp[$index]);
 						} else {
 							/**
 							 * Le plugin est à mettre à jour.
 							 * On reprend les infos issues de la fonction info_plugin
 							 * qui contient le numéro de version de la maj
 							 */
-							$liste_plugins_tmp[$key] = $a_mettre_jour;
+							$liste_plugins_tmp[$index] = $a_mettre_jour;
 						}
 					}
 				}
@@ -434,7 +434,7 @@ function info_sites_lister_projets_auteurs_roles($id_projet) {
 		return false;
 	}
 	$projets_roles = array();
-	$projets_base = sql_allfetsel('id_auteur, role', 'spip_auteurs_liens', "objet='projet' AND id_objet=$id_projet");
+	$projets_base = sql_allfetsel('id_auteur, role', 'spip_auteurs_liens', "objet='projet' AND id_objet=$id_projet AND id_auteur NOT IN (SELECT id_auteur FROM spip_auteurs WHERE statut='5poubelle')");
 
 	if (is_array($projets_base) and count($projets_base) > 0) {
 		foreach ($projets_base as $projet) {
@@ -539,7 +539,7 @@ function info_sites_lister_doublons_versioning_rss() {
 	$doublons = sql_allfetsel("COUNT(versioning_rss) as nbr_doublon, versioning_rss", 'spip_projets',
 		"versioning_rss!=''", 'versioning_rss', '', '', "nbr_doublon > 1");
 
-	// var_dump($doublons);
+	return $doublons;
 }
 
 function info_sites_lister_doublons_commits() {
@@ -547,7 +547,7 @@ function info_sites_lister_doublons_commits() {
 	$doublons = sql_allfetsel("COUNT(guid) as nbr_doublon, guid", 'spip_commits', "guid!=''", 'guid', '', '',
 		"nbr_doublon > 1");
 
-	// var_dump($doublons);
+	return $doublons;
 }
 
 
