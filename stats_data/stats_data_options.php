@@ -1,6 +1,5 @@
 <?php
 
-
 function genie_popularites($t) {
 	
 	include_spip('genie/popularites'); // ?
@@ -31,11 +30,11 @@ function genie_popularites($t) {
 
 	$aujourdhui = date("Y-m-d");
 	
-	spip_log("pop de " . $t . " : " . $GLOBALS['meta']['date_statistiques']  . " / " . $aujourdhui, "debug-stats");
+	spip_log("cron pop de " . $t , "debug_stats.4");
 	
 	if (($d = $GLOBALS['meta']['date_statistiques']) != $aujourdhui) {
 		
-		spip_log("Popularite: purger referer depuis $d", "debug-stats");
+		spip_log("Popularite: purger referer depuis $d", "debug_stats.4");
 		ecrire_meta('date_statistiques', $aujourdhui);
 		if (strncmp($GLOBALS['connexions'][0]['type'], 'sqlite', 6) == 0) {
 			spip_query("UPDATE spip_referers SET visites_veille=visites_jour, visites_jour=0");
@@ -51,8 +50,7 @@ function genie_popularites($t) {
 			ADD visites_jour INT(10) UNSIGNED NOT NULL DEFAULT '0'");
 		}
 		
-		
-		spip_log("Popularite: purger referers_articles depuis $d", "debug-stats");
+		spip_log("Popularite: purger referers_articles depuis $d", "debug_stats.4");
 		if (strncmp($GLOBALS['connexions'][0]['type'], 'sqlite', 6) == 0) {
 			spip_query("UPDATE spip_referers_articles SET visites_veille=visites_jour, visites_jour=0");
 		} else
