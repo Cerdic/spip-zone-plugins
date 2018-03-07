@@ -202,6 +202,14 @@ class Mailjet {
 		spip_log("$request $url_log resultat: " . $response,"mailshot"._LOG_DEBUG);
 		if ($response){
 			$this->_response = json_decode($response,true);
+			if ($this->_response == null and intval($this->_response_code/100)!==2 and !$this->_error) {
+				if ($response) {
+					$this->_error = strip_tags($response);
+				}
+				else {
+					$this->_error = "Unknown error";
+				}
+			}
 		}
 		return (intval($this->_response_code/100)==2) ? true : false;
 	}
