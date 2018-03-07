@@ -159,6 +159,8 @@ class Mailjet {
 			elseif(function_exists('curl_init')){
 				$ch = curl_init();
 				$headers = explode("\n",$headers);
+				$headers = array_map('trim', $headers);
+				$headers = array_filter($headers);
 				curl_setopt($ch, CURLOPT_URL, $url);
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 				curl_setopt($ch, CURLOPT_HEADER, FALSE);
