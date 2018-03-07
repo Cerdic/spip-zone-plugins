@@ -31,10 +31,14 @@ class Mailjet {
 
 	// Constructor function
 	public function __construct($apiKey = false, $secretKey = false){
-		if ($apiKey) $this->apiKey = $apiKey;
-		if ($secretKey) $this->secretKey = $secretKey;
+		if ($apiKey){
+			$this->apiKey = $apiKey;
+		}
+		if ($secretKey){
+			$this->secretKey = $secretKey;
+		}
 		$this->apiUrl = (($this->secure) ? 'https' : 'http') . '://'
-		  . ($this->apiKey ? $this->apiKey . ':' . $this->secretKey . '@' : '')
+			. ($this->apiKey ? $this->apiKey . ':' . $this->secretKey . '@' : '')
 			. 'api.mailjet.com/' . $this->apiVersion . '';
 	}
 
@@ -42,8 +46,8 @@ class Mailjet {
 	 * Legacy methods
 	 */
 	public function userSenderadd($params){
-		$data = array('email'=>$params['email']);
-		return $this->sender(array('data'=>$data));
+		$data = array('email' => $params['email']);
+		return $this->sender(array('data' => $data));
 	}
 
 	public function __call($method, $args){
@@ -54,7 +58,7 @@ class Mailjet {
 		$request = 'GET';
 
 		# request method
-		if (isset($params["method"])) {
+		if (isset($params["method"])){
 			$request = $params["method"];
 			unset($params["method"]);
 		}
@@ -66,12 +70,11 @@ class Mailjet {
 		$return = ($result===true) ? $this->_response : false;
 
 		if ($this->_error){
-			$url_log = "api.mailjet.com/".$this->apiVersion.$this->_method;
-			spip_log("$url_log : ".$this->_error,'mailshot'._LOG_ERREUR);
-		}
-		elseif (isset($this->_response['StatusCode'])){
-			$url_log = "api.mailjet.com/".$this->apiVersion.$this->_method;
-			spip_log("$url_log : status ".$this->_response['StatusCode']." - ".$this->_response['ErrorInfo'].", ".$this->_response['ErrorMessage'],'mailshot'._LOG_INFO_IMPORTANTE);
+			$url_log = "api.mailjet.com/" . $this->apiVersion . $this->_method;
+			spip_log("$url_log : " . $this->_error, 'mailshot' . _LOG_ERREUR);
+		} elseif (isset($this->_response['StatusCode'])) {
+			$url_log = "api.mailjet.com/" . $this->apiVersion . $this->_method;
+			spip_log("$url_log : status " . $this->_response['StatusCode'] . " - " . $this->_response['ErrorInfo'] . ", " . $this->_response['ErrorMessage'], 'mailshot' . _LOG_INFO_IMPORTANTE);
 		}
 
 		/*
@@ -99,12 +102,12 @@ class Mailjet {
 		$this->_method = $method;
 		$this->_request = $request;
 		$this->_data = '';
-		$this->_response ='';
-		$this->_error ='';
+		$this->_response = '';
+		$this->_error = '';
 
 		// submethod path ?
 		if (isset($params['path'])){
-			$method .= "/" . ltrim($params['path'],"/");
+			$method .= "/" . ltrim($params['path'], "/");
 			$this->_method = $method;
 		}
 
@@ -131,7 +134,7 @@ class Mailjet {
 		}
 
 		$url = $this->apiUrl . $method;
-		$url_log = "api.mailjet.com/".$this->apiVersion.$method;
+		$url_log = "api.mailjet.com/" . $this->apiVersion . $method;
 
 		// filters is the query string part of request
 		if (isset($params['filters'])){
@@ -145,20 +148,19 @@ class Mailjet {
 
 
 		try {
-			if (function_exists('recuperer_url')) {
+			if (function_exists('recuperer_url')){
 				$options = array(
 					'methode' => $this->_request,
 				);
-				if ($this->_data) {
+				if ($this->_data){
 					$options['datas'] = $this->_data;
 				}
-				$res = recuperer_url($url,$options);
+				$res = recuperer_url($url, $options);
 				$this->_response_code = $res['status'];
 				$response = $res['page'];
-			}
-			elseif(function_exists('curl_init')){
+			} elseif (function_exists('curl_init')) {
 				$ch = curl_init();
-				$headers = explode("\n",$headers);
+				$headers = explode("\n", $headers);
 				$headers = array_map('trim', $headers);
 				$headers = array_filter($headers);
 				curl_setopt($ch, CURLOPT_URL, $url);
@@ -167,7 +169,7 @@ class Mailjet {
 				if ($headers){
 					curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 				}
-				if (in_array($this->_request,array("DELETE","PUT"))){
+				if (in_array($this->_request, array("DELETE", "PUT"))){
 					curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $this->_request);
 				}
 				if ($data){
@@ -175,40 +177,36 @@ class Mailjet {
 					curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 				}
 				$response = curl_exec($ch);
-				$this->_response_code = curl_getinfo($ch,CURLINFO_HTTP_CODE);
+				$this->_response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 				curl_close($ch);
-			}
-			else {
+			} else {
 				// en cas de DELETE on appelle directement recuperer_lapage
 				// en esperant ne pas avoir de 301
-				if (in_array($this->_request,array('DELETE'))){
-					$response = recuperer_lapage($url,false,$this->_request,1048576,$this->_data);
-				}
-				else {
-					$response = recuperer_page($url,false,false,null,$this->_data);
+				if (in_array($this->_request, array('DELETE'))){
+					$response = recuperer_lapage($url, false, $this->_request, 1048576, $this->_data);
+				} else {
+					$response = recuperer_page($url, false, false, null, $this->_data);
 				}
 				if (!$response){
-					$this->_error = 'erreur lors de recuperer_page sur API Mailjet '.$this->apiVersion;
-	        return false;
+					$this->_error = 'erreur lors de recuperer_page sur API Mailjet ' . $this->apiVersion;
+					return false;
 				}
 				$this->_response_code = 200; // on suppose car sinon renvoie false
 			}
 
+		} catch (Exception $e) {
+			$this->_error = "sendRequest $url_log : " . $e->getMessage();
+			spip_log($this->_error, "mailshot" . _LOG_ERREUR);
+			return false;
 		}
-		catch (Exception $e) {
-			$this->_error = "sendRequest $url_log : ".$e->getMessage();
-			spip_log($this->_error,"mailshot"._LOG_ERREUR);
-      return false;
-    }
 
-		spip_log("$request $url_log resultat: " . $response,"mailshot"._LOG_DEBUG);
+		spip_log("$request $url_log resultat: " . $response, "mailshot" . _LOG_DEBUG);
 		if ($response){
-			$this->_response = json_decode($response,true);
-			if ($this->_response == null and intval($this->_response_code/100)!==2 and !$this->_error) {
-				if ($response) {
+			$this->_response = json_decode($response, true);
+			if ($this->_response==null and intval($this->_response_code/100)!==2 and !$this->_error){
+				if ($response){
 					$this->_error = strip_tags($response);
-				}
-				else {
+				} else {
 					$this->_error = "Unknown error";
 				}
 			}
@@ -247,20 +245,23 @@ class Mailjet {
 					echo '<tr><th>Response</th><td><pre>' . utf8_decode(print_r($this->_response, 1)) . '</pre></td></tr>';
 				endif;
 
-				echo '</table>'; elseif ($this->_response_code==304) :
+				echo '</table>';
+			elseif ($this->_response_code==304) :
 
 				echo '<table>';
 				echo '<tr class="Not-modified"><th>Error</th><td></td></tr>';
 				echo '<tr><th>Error no</th><td>' . $this->_response_code . '</td></tr>';
 				echo '<tr><th>Message</th><td>Not Modified</td></tr>';
-				echo '</table>'; else :
+				echo '</table>';
+			else :
 
 				echo '<table>';
 				echo '<tr class="Error"><th>Error</th><td></td></tr>';
 				echo '<tr><th>Error no</th><td>' . $this->_response_code . '</td></tr>';
 				if (isset($this->_response)) :
-					if (is_array($this->_response) OR  is_object($this->_response)):
-						echo '<tr><th>Status</th><td><pre>' . print_r($this->_response, true) . '</pre></td></tr>'; else:
+					if (is_array($this->_response) OR is_object($this->_response)):
+						echo '<tr><th>Status</th><td><pre>' . print_r($this->_response, true) . '</pre></td></tr>';
+					else:
 						echo '<tr><th>Status</th><td><pre>' . $this->_response . '</pre></td></tr>';
 					endif;
 				endif;
