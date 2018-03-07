@@ -87,7 +87,7 @@ function formulaires_newsletter_send_traiter_dist($id_newsletter,$mode_test=fals
 		$dest = $subscriber($email);
 
 		// si abonne inconnu, on simule (pour les tests)
-		if (!$dest)
+		if (!$dest){
 			$dest = array(
 				'email' => $email,
 				'nom' => $GLOBALS['visiteur_session']['nom'],
@@ -95,6 +95,10 @@ function formulaires_newsletter_send_traiter_dist($id_newsletter,$mode_test=fals
 				'status' => 'on',
 				'url_unsubscribe' => url_absolue(_DIR_RACINE . "unsubscribe"),
 			);
+		}
+		elseif($dest['email'] !== $email) {
+			$dest['email'] = $email;
+		}
 
 		// ok, maintenant on prepare un envoi
 		$send = charger_fonction("send","newsletter");
