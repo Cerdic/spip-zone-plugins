@@ -29,7 +29,7 @@
 				#SET{val,2}
 				<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[v(#GET{val})] (in-v#GET{val}.mailjet.com)</option>
 				#SET{val,3}
-				<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[v(#GET{val})] (in-v#GET{val}.mailjet.com)</option>
+				<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[v(#GET{val})] (api.mailjet.com/v3/)</option>
 			</select>
 		</li>
 	</ul>
