@@ -261,5 +261,8 @@ function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_
 		$retours['redirect'] = $retour;
 	}
 	
+	// On peut toujours continuer d'éditer après envoi
+	$retours['editable'] = true;
+	
 	return $retours;
 }
