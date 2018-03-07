@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'date_debut_max_fixe_explication' => 'Proposer uniquement les événements qui commencent AVANT la date suivante (incluse).',
 	'date_debut_max_fixe_label' => 'Date de début maximale',
-	'date_debut_max_mobile_explication' => 'Proposer uniquement les événements qui commencent avant <i>x</i> jours. Pour les événements qui commencent demain au plus tard demain, mettre 1. Pour les événements qui commencent au plus tard hier, mettre -1.',
+	'date_debut_max_mobile_explication' => 'Proposer uniquement les événements qui commencent avant <i>x</i> jours. Pour les événements qui commencent demain au plus tard, mettre 1. Pour les événements qui commencent au plus tard hier, mettre -1.',
 	'date_debut_max_mobile_label' => 'Date de début maximale (mobile)',
 	'date_debut_min_fixe_explication' => 'Proposer uniquement les événements qui commencent APRÈS la date suivante (incluse).',
 	'date_debut_min_fixe_label' => 'Date de début minimale',
