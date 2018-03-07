@@ -342,7 +342,7 @@ function reservation_evenement_mp_data_objet($flux) {
 	$type = $flux['args']['type'];
 
 	// Ajouter les champs extras, stockes dans la table reservation.
-	if ($type == 'test' && isset($flux['data']['reservation_donnees_auteur']) &&
+	if ($type == 'fond_reservation_body' && isset($flux['data']['reservation_donnees_auteur']) &&
 			$reservation_donnees_auteur = unserialize($flux['data']['reservation_donnees_auteur']) and
 			is_array($reservation_donnees_auteur)) {
 		foreach ($reservation_donnees_auteur as $champ => $valeur) {
