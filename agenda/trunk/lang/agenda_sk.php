@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_suivante' => 'budúci rok',
 	'aucun_evenement' => 'žiadna udalosť',
 	'aucun_inscrit' => 'Žiadne prihlásenie',
-	'aucune_rubrique_mode_agenda' => 'Podľa predvolených nastavení vám všetky rubriky umožňujú umožňujú využívať udalosti. Ak kalendár udalostí aktivujete pre jednu rubriku alebo viacero rubrík, riadenie udalostí bude obmedzené na vetvy týchto rubrík.',
+	'aucune_rubrique_mode_agenda' => 'Podľa predvolených nastavení vám všetky rubriky umožňujú umožňujú využívať udalosti. Ak kalendár udalostí aktivujete pre jednu rubriku alebo viacero rubrík, riadenie udalostí bude obmedzené na vetvy týchto rubrík.', # MODIF
 
 	// B
 	'bouton_annuler' => 'Zrušiť',

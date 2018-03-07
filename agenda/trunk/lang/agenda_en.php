@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_suivante' => 'next year',
 	'aucun_evenement' => 'no event',
 	'aucun_inscrit' => 'No registered',
-	'aucune_rubrique_mode_agenda' => 'By default, all sections can use the events. If you activate the agenda mode on one or more sections, event management will be limited in its subtree.',
+	'aucune_rubrique_mode_agenda' => 'By default, all sections can use the events. If you activate the agenda mode on one or more sections, event management will be limited in its subtree.', # MODIF
 
 	// B
 	'bouton_annuler' => 'Cancel',

@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_suivante' => 'volgend jaar',
 	'aucun_evenement' => 'geen gebeurtenissen',
 	'aucun_inscrit' => 'Geen inschrijvingen',
-	'aucune_rubrique_mode_agenda' => 'Standaard kunnen aan elke rubriek gebeurtenissen worden toegevoegd.',
+	'aucune_rubrique_mode_agenda' => 'Standaard kunnen aan elke rubriek gebeurtenissen worden toegevoegd.', # MODIF
 
 	// B
 	'bouton_annuler' => 'Annuleren',
