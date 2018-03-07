@@ -12,7 +12,7 @@
 <form
 	method="post" action="#ENV{action}" enctype="multipart/form-data"
 	id="offre#ID_ABONNEMENTS_OFFRE"
-	class="editer editer_abonnements_offre offre [(#ENV{alternative/quel}|!={principal}|?{alternative})]"
+	class="editer editer_abonnements_offre offre[ (#ENV{alternative/quel}|!={principal}|?{alternative})][ (#ENV{renouvellement_auto}|oui)renouvelable]"
 ><div class="offre__wrapper">
 	[(#REM) declarer les hidden qui declencheront le service du formulaire 
 	parametre : url d'action ]
@@ -61,14 +61,22 @@
 	</BOUCLE_test_perso>
 	
 	<div class="offre__duree">
-		[(#ENV{duree}|singulier_ou_pluriel{abonnementsoffre:champ_periode_nb_#PERIODE,abonnementsoffre:champ_periode_nb_#PERIODE})]
+		[(#ENV{renouvellement_auto}|non)
+			<span class="label"><:abonnementsoffre:info_duree:> :</span>
+			[(#ENV{duree}|singulier_ou_pluriel{abonnementsoffre:champ_periode_nb_#PERIODE,abonnementsoffre:champ_periode_nb_#PERIODE})]
+		]
+		[(#ENV{renouvellement_auto}|oui)
+			<:abonnementsoffre:info_renouvellement_auto:>
+		]
 	</div>
 
-	<div class="offre__paiement[ offre__paiement--(#ENV{renouvellement_auto}|?{renouvellable,unique})]">
-		[(#ENV{renouvellement_auto}|?{
-			<:abonnementsoffre:info_paiement_renouvelable:>,
-			<:abonnementsoffre:info_paiement_unique:>
-		})]
+	<div class="offre__paiement">
+		[(#ENV{renouvellement_auto}|non)
+			<span class="label"><:abonnementsoffre:info_paiement:> :</span> <:abonnementsoffre:info_paiement_unique:>
+		]
+		[(#ENV{renouvellement_auto}|oui)
+		<span class="label"><:abonnementsoffre:info_paiement_auto:> :</span> [(#ENV{duree})][ (#GET{periodicite})]
+		]
 	</div>
 	
 	<div class="offre__choix">

@@ -14,8 +14,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_renouvellement_auto_label_case' => 'Activer le renouvellement automatique',
 
 	// I
-	'info_paiement_unique' => 'Paiement unique',
+	'info_paiement_unique' => 'Unique',
 	'info_paiement_renouvelable' => 'Prélèvement SEPA',
+	'info_renouvellement_auto' => 'Renouvellement automatique',
 	'info_dates_from_to' => 'Du @date_debut@ au @date_fin@',
 	'info_dates_from' => 'À partir du @date_debut@',
+	'info_duree' => 'Durée',
+	'info_paiement' => 'Paiement',
+	'info_paiement_auto' => 'Prélèvement chaque',
 );
