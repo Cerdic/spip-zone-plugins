@@ -315,11 +315,8 @@ ul.valeur{
 					</div>
 				</div>
 				
-				#SET{acces_directs,#GET{visites}|moins{#GET{total}}}
-				
-				<h3 class="premier">Vue d’ensemble</h3>
+				<h3 class="premier">Origine des visites</h3>
 				<ul>
-					<li>Accès directs : [(#GET{acces_directs}|number_format{0,""," "})] visites <small>([(#GET{acces_directs}|div{#GET{visites}}|mult{100}|floor)%])</small></li>
 					<BOUCLE_domaines_connus(DATA){source table,#GET{domaines_connus}}{!par valeur}>
 					<li>#CLE : [(#VALEUR|number_format{0,""," "})] visites <small>([(#VALEUR|div{#GET{visites}}|mult{100}|floor)%])</small></li>
 					</BOUCLE_domaines_connus>
