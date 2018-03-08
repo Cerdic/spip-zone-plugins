@@ -33,7 +33,10 @@ function taxonomie_pre_edition($flux) {
 		// Modification d'un des champs éditables du taxon
 		if ($action == 'modifier') {
 			// -- On positionne l'indicateur d'édition à oui, ce qui permettra d'éviter lors
-			//    d'un rechargement du règne de perdre les modifications manuelles
+			//    d'un rechargement du règne de perdre les modifications manuelles pour les taxons importés
+			//    via le fichier ITIS.
+			//    On met aussi à jour les taxons créés lors d'un ajout d'une espèce et donc non importés,
+			//    même si cet indicateur n'a que peu d'intérêt dans ce cas.
 			$flux['data']['edite'] = 'oui';
 		}
 	}

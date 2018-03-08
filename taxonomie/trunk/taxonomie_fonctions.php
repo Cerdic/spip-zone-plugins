@@ -20,7 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @filtre
  *
  * @uses regne_existe()
- * @uses taxon_preserver_editions()
+ * @uses taxon_preserver()
  * @uses regne_vider()
  * @uses itis_read_hierarchy()
  * @uses itis_find_language()
@@ -37,14 +37,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function regne_charger($regne, $codes_langue = array()) {
 
 	$retour = false;
-	$taxons_edites = array();
+	$taxons_preserves = array();
 
 	// Vérifie si le règne existe bien dans la table spip_taxons
 	$regne_existe = regne_existe($regne, $meta_regne);
 	include_spip('inc/taxonomie');
 	if ($regne_existe) {
 		// Sauvegarde des taxons ayant été modifiés manuellement suite à leur création automatique.
-		$taxons_edites = taxon_preserver_editions($regne);
+		$taxons_preserves = taxon_preserver($regne);
 
 		// Vider le règne avant de le recharger
 		regne_vider($regne);
@@ -92,12 +92,12 @@ function regne_charger($regne, $codes_langue = array()) {
 			}
 		}
 
-		// Ré-injection des taxons modifiés manuellement
+		// Ré-injection des modifications manuelles effectuées sur les taxons importés via le fichier ITIS du règne.
 		// -- descriptif: remplacement
 		// -- nom commun: merge en considérant que la mise à jour manuelle est prioritaire
 		// -- edite: oui, on conserve bien sur l'indicateur d'édition
-		if ($taxons_edites) {
-			foreach ($taxons_edites as $_taxon_edite) {
+		if ($taxons_preserves['edites']) {
+			foreach ($taxons_preserves['edites'] as $_taxon_edite) {
 				if (($tsn = $_taxon_edite['tsn']) and (array_key_exists($tsn, $taxons))) {
 					$taxons[$tsn]['descriptif'] = $_taxon_edite['descriptif'];
 					$taxons[$tsn]['nom_commun'] = taxon_merger_traductions(
@@ -108,8 +108,17 @@ function regne_charger($regne, $codes_langue = array()) {
 			}
 		}
 
+		// On formate le taxon pour l'insertion en BD.
+		$taxons = array_values($taxons);
+
+		// Ré-injection des taxons créés lors de l'ajout d'une espèce et donc jamais importés via le fichier ITIS
+		// du règne.
+		if ($taxons_preserves['crees']) {
+			$taxons = array_merge($taxons, $taxons_preserves['crees']);
+		}
+
 		// Insertion dans la base de données
-		$retour = sql_insertq_multi('spip_taxons', array_values($taxons));
+		$retour = sql_insertq_multi('spip_taxons', $taxons);
 		if ($retour) {
 			// Insérer les informations de chargement dans une meta propre au règne.
 			// Ca permettra de tester l'utilité ou pas d'un rechargement du règne
