@@ -24,6 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_dissocier' => 'Retirer',
 
 	// C
+	'configuration_adresses_champs_superflus_explication' => 'Permet de ne pas utiliser certains champs inutiles pour ce site dans les adresses.',
+	'configuration_adresses_champs_superflus_label' => 'Champs superflus des adresses',
 	'configuration_coordonnees' => 'Configuration des coordonnées',
 	'confirmer_suppression_adresse' => 'Voulez-vous vraiment supprimer cette adresse ?',
 	'confirmer_suppression_email' => 'Voulez-vous vraiment supprimer ce courriel ?',

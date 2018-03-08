@@ -12,6 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/actions');
 include_spip('inc/editer');
+include_spip('inc/config');
 
 /**
  * Definition des saisies du formulaire
@@ -27,6 +28,8 @@ include_spip('inc/editer');
  *     Tableau des saisies
  */
 function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = '', $associer_objet = '') {
+	$champs_superflus = lire_config('coordonnees/adresses_champs_superflus', array());
+	
 	$saisies = array(
 		array(
 			'saisie' => 'input',
@@ -36,29 +39,41 @@ function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = 
 				'placeholder' => _T('coordonnees:placeholder_titre_adresse')
 			)
 		),
-		array(
+	);
+	
+	if (!in_array('voie', $champs_superflus)) {
+		$saisies[] = array(
 			'saisie' => 'input',
 			'options' => array(
 				'nom' => 'voie',
 				'label' => _T('coordonnees:label_voie')
 			)
-		),
-		array(
+		);
+	}
+	
+	if (!in_array('complement', $champs_superflus)) {
+		$saisies[] = array(
 			'saisie' => 'input',
 			'options' => array(
 				'nom' => 'complement',
 				'label' => _T('coordonnees:label_complement'),
 				'placeholder' => _T('coordonnees:placeholder_complement_adresse')
 			)
-		),
-		array(
+		);
+	}
+	
+	if (!in_array('boite_postale', $champs_superflus)) {
+		$saisies[] = array(
 			'saisie' => 'input',
 			'options' => array(
 				'nom' => 'boite_postale',
 				'label' => _T('coordonnees:label_boite_postale'),
 			)
-		),
-		array(
+		);
+	}
+	
+	if (!in_array('code_postal', $champs_superflus)) {
+		$saisies[] = array(
 			'saisie' => 'input',
 			'options' => array(
 				'nom' => 'code_postal',
@@ -69,29 +84,41 @@ function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = 
 			/*'verifier' => array (
 				'type' => 'code_postal'
 			)*/
-		),
-		array(
+		);
+	}
+	
+	if (!in_array('region', $champs_superflus)) {
+		$saisies[] = array(
 			'saisie' => 'input',
 			'options' => array(
 				'nom' => 'region',
 				'label' => _T('coordonnees:label_region')
 			)
-		),
-		array(
+		);
+	}
+	
+	if (!in_array('ville', $champs_superflus)) {
+		$saisies[] = array(
 			'saisie' => 'input',
 			'options' => array(
 				'nom' => 'ville',
 				'label' => _T('coordonnees:label_ville')
 			)
-		),
-		array(
+		);
+	}
+	
+	if (!in_array('etat_federe', $champs_superflus)) {
+		$saisies[] = array(
 			'saisie' => 'input',
 			'options' => array(
 				'nom' => 'etat_federe',
 				'label' => _T('coordonnees:label_etat_federe')
 			)
-		),
-		array(
+		);
+	}
+	
+	if (!in_array('pays', $champs_superflus)) {
+		$saisies[] = array(
 			'saisie' => 'pays',
 			'options' => array(
 				'nom' => 'pays',
@@ -101,8 +128,8 @@ function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = 
 				'defaut' => 'FR',
 				'code_pays' => 'oui'
 			)
-		),
-	);
+		);
+	}
 
 	// si on associe l'adresse à un objet, rajouter la saisie 'type'
 	if($associer_objet) {
