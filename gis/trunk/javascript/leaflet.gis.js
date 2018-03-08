@@ -157,6 +157,8 @@ L.Map.Gis = L.Map.extend({
 				icon_options.shadowUrl = feature.properties.shadow;
 			if (feature.properties.shadow_size)
 				icon_options.shadowSize = [feature.properties.shadow_size[0], feature.properties.shadow_size[1]];
+			if (feature.properties.shadow_anchor)
+				icon_options.shadowAnchor = [feature.properties.shadow_anchor[0], feature.properties.shadow_anchor[1]];
 			layer.setIcon(L.icon(icon_options));
 		}
 	},
