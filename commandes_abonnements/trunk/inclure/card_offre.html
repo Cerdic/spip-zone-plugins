@@ -89,7 +89,7 @@
 
 ]
 <BOUCLE_affichage(CONDITION){si #GET{commande}|et{#GET{offre}}}>
-<div class="offre offre--resume">
+<div class="offre offre--resume[ (#GET{offre/renouvellement_auto}|oui)renouvelable]">
 	<div class="offre__wrapper">
 
 		[<h3 class="offre__titre">
@@ -108,19 +108,25 @@
 			]
 		</div>
 
-		<div class="offre__paiement[ offre__paiement--(#GET{offre/renouvellement_auto}|?{renouvellable,unique})]">
-			[(#GET{offre/renouvellement_auto}|?{
-				<:abonnementsoffre:info_paiement_renouvelable:>,
-				<:abonnementsoffre:info_paiement_unique:>
-			})]
+		<div class="offre__duree">
+			[(#GET{offre/renouvellement_auto}|non)
+			<span class="label"><:abonnementsoffre:info_duree:> :</span>
+				[(#GET{offre/duree}|singulier_ou_pluriel{abonnementsoffre:champ_periode_nb_#GET{offre/periode},abonnementsoffre:champ_periode_nb_#GET{offre/periode}})]
+				[: (#GET{dates})]
+			]
+			[(#GET{offre/renouvellement_auto}|oui)
+				<:abonnementsoffre:info_renouvellement_auto:>
+			]
 		</div>
 
-		[(#GET{offre/renouvellement_auto}|non)
-		<div class="offre__duree">
-			[(#GET{offre/duree}|singulier_ou_pluriel{abonnementsoffre:champ_periode_nb_#GET{offre/periode},abonnementsoffre:champ_periode_nb_#GET{offre/periode}})]
-			[: (#GET{dates})]
+		<div class="offre__paiement">
+			[(#GET{offre/renouvellement_auto}|non)
+				<span class="label"><:abonnementsoffre:info_paiement:> :</span> <:abonnementsoffre:info_paiement_unique:>
+			]
+			[(#GET{offre/renouvellement_auto}|oui)
+			<span class="label"><:abonnementsoffre:info_paiement_auto:> :</span> [(#GET{offre/duree})][ (#GET{offre/periode})]
+			]
 		</div>
-		]
 
 	</div>
 </div>

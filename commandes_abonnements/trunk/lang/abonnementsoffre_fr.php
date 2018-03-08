@@ -21,5 +21,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_dates_from' => 'À partir du @date_debut@',
 	'info_duree' => 'Durée',
 	'info_paiement' => 'Paiement',
-	'info_paiement_auto' => 'Prélèvement chaque',
+	'info_paiement_auto' => 'Périodicité du prélèvement',
 );
