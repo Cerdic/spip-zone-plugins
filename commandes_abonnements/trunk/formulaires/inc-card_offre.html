@@ -45,8 +45,8 @@
 		[<span class="erreur">(#ENV{erreurs/montant_#ID_ABONNEMENTS_OFFRE})</span>]
 		<BOUCLE_montants(DATA){source table, #VAL{#ENV{montant}}|concat{'|', #ENV{montant_minimum}}|explode{'|'}|array_filter}>
 		#SET{montant,#VALEUR|trim}
-		<input type="radio" id="montants_persos_#ID_ABONNEMENTS_OFFRE_#GET{montant}" name="montants_persos\[#ID_ABONNEMENTS_OFFRE\]\[predef\]" value="#GET{montant}" [(#COMPTEUR_BOUCLE|=={1}|oui)checked="checked"] />
-		<label for="montants_persos_#ID_ABONNEMENTS_OFFRE_#GET{montant}">#GET{montant}€</label>
+		<input type="radio" id="montants_persos_[(#ID_ABONNEMENTS_OFFRE)]_#GET{montant}" name="montants_persos\[#ID_ABONNEMENTS_OFFRE\]\[predef\]" value="#GET{montant}" [(#COMPTEUR_BOUCLE|=={1}|oui)checked="checked"] />
+		<label for="montants_persos_[(#ID_ABONNEMENTS_OFFRE)]_#GET{montant}">#GET{montant}€</label>
 		</BOUCLE_montants>
 		<input
 			type="text"
