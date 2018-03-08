@@ -20,6 +20,9 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 * [x] gestion des autoriser() pas très claire (permettre d'ouvrir le plugin aux rédacteurices)
 
 ## Versions 1.4.x
+### Version 1.4.12 (2018-03-07)
+
+* Correction d'un bug: 1 lien inclus dans plusieurs objets, tous non publiés, obtient le statut publié dans la table de centralisation des liens (@eldk)
 
 ### Version 1.4.8 (2017-10-03)
 

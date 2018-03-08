@@ -157,7 +157,7 @@ function linkcheck_ajouter_liens($tab_liens, $objet, $id_objet, $publie = 'non')
 					)
 				);
 				$publie_linkcheck = sql_getfetsel('publie', 'spip_linkchecks', 'id_linkcheck = '.intval($exi['id']));
-				if ($publie_linkcheck != $statut) {
+				if ($publie_linkcheck != $publie) {
 					if ($publie_linkcheck == 'non') {
 						sql_updateq('spip_linkchecks', array('publie' => 'oui'), 'id_linkcheck = '.intval($exi['id']));
 					} else {
