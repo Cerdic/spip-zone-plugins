@@ -572,7 +572,7 @@ function inc_ls_to_array_dist($u) {
 		$b = (array) @stat($v);
 		foreach ($b as $k => $ignore)
 			if (is_numeric($k)) unset($b[$k]);
-		$b['file'] = basename($v);
+		$b['file'] = preg_replace('`/$`','',$v) ;
 		$v = array_merge(
 			pathinfo($v),
 			$b
