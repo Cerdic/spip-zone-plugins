@@ -10,7 +10,7 @@
 ]
 #SET{erreur_ici,#ENV**{erreurs/#ENV{nom}}}
 
-<[(#ENV{saisies_base_conteneur,#DIV|sinon{li}})] class="fieldset[ fieldset_(#ENV{nom})][ (#ENV{conteneur_class,#ENV{li_class}})][ saisie_(#ENV{type_saisie})][ (#GET{pliable})[ (#GET{plie})]]"[ data-id="(#ENV{id_saisie})"]>
+<[(#ENV{saisies_base_conteneur,#DIV|sinon{li}})] class="fieldset[ fieldset_(#ENV{nom}|saisie_nom2classe)][ (#ENV{conteneur_class,#ENV{li_class}})][ saisie_(#ENV{type_saisie})][ (#GET{pliable})[ (#GET{plie})]]"[ data-id="(#ENV{id_saisie})"][ data-afficher_si="(#ENV{afficher_si})"]>
 	#ENV*{inserer_debut}
 	<fieldset>
 
