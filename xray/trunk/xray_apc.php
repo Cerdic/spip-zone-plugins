@@ -29,6 +29,7 @@ All other licensing and usage conditions are those of the PHP Group.
 include_spip ('inc/autoriser');
 if (!autoriser('webmestre'))
 	die("Autorisation non accordée : devenez webmestre d'abord.");
+include_spip('inc/filtres');
 
 $VERSION = '$Id$';
 
