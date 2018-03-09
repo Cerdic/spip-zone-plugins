@@ -66,6 +66,9 @@ function objet_dupliquer($objet, $id_objet, $modifications=array(), $options=arr
 	// On récupère les infos à dupliquer
 	$infos_a_dupliquer = sql_fetsel($champs, table_objet_sql($objet), "$cle_objet = $id_objet");
 	
+	// On applique des modifications s'il y en a
+	$infos_a_dupliquer = array_merge($infos_a_dupliquer, $modifications);
+	
 	// On commence la duplication de l'objet lui-même
 	$id_objet_duplicata = objet_inserer($objet, 0, $infos_a_dupliquer);
 	
