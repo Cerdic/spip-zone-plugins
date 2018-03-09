@@ -185,8 +185,8 @@ class Convert extends Command {
 						$c = array(
 							"fichier_source" => $f,
 							"dest" => $dest,
-							"collection" => $collection,
-							"numero" => $numero,
+							"collection" => ($contenu['collection']) ? $contenu['collection'] : $collection,
+							"numero" => ($contenu['numero']) ? $contenu['numero'] : $numero,
 							"contenu" => $contenu,
 							"basename" => $file ,
 							"fichier_dest" => $dest . "/" . $collection . $numero . $file

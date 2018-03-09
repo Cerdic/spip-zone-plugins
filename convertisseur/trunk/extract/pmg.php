@@ -18,7 +18,7 @@ function convertir_extraction_pmg($c) {
 
 function convertir_pmg($u) {
 	
-	// On recoit deirectement des <artikel>
+	// On recoit directement des <artikel>
 	
 	include_spip('inc/charsets');
 	include_spip('inc/filtres');
@@ -93,7 +93,6 @@ function convertir_pmg($u) {
 	
 	$m['titre'] = $datum = textebrut(extraire_balise($u, "titel")) ;
 	$m['soustitre'] = $datum = textebrut(extraire_balise($u, "untertitel")) ;
-
 	
 	// <autor_name>
 	$auteurs = extraire_balises($u, "autor_name") ;
@@ -172,8 +171,6 @@ function convertir_pmg($u) {
 	if (function_exists('nettoyer_conversion')){
 		$m = nettoyer_conversion($m);
 	}
-	
-	//var_dump($m);
 	
 	return $m ;
 }
