@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_lien_notification' => 'Ajouter cette notifications',
-	
+
 	//E
 	'explication_duree'=>'Pour ne jamais les éliminer, laissez ce champs vide.',
 
@@ -26,17 +26,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_activer'=>'Activer l\'archivage pour la notification @notification@',
-	'label_duree'=>' Nombre de jours après lesquels ces notifications seront éliminées.',		
+	'label_duree'=>' Nombre de jours après lesquels ces notifications seront éliminées.',
 	'label_envoi' => 'Envoi :',
 	'label_id_notification' => 'Id Objet',
 	'label_lie_a' => 'Lié à :',
 	'label_notification' => 'Objet',
 	'label_recipients' => 'Récipients',
-	'label_sujet' => 'Sujet',
 	'label_type' => 'Type',
-	
+
 	// N
-	'notifications_archive_titre' => 'Archive notifications',	
+	'notifications_archive_titre' => 'Archive notifications',
 
 	// R
 	'retirer_lien_notification' => 'Retirer cette notification',
@@ -51,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_notification' => 'Notification',
 	'titre_notifications' => 'Notifications',
 	'titre_notifications_rubrique' => 'Notifications de la rubrique',
-	'titre_page_configurer_notifications_archive' => 'Paramêtres Plugin Archive Notifications',		
+	'titre_page_configurer_notifications_archive' => 'Paramêtres Plugin Archive Notifications',
 
 
 );
