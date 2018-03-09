@@ -33,7 +33,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_notification' => 'Objet',
 	'label_recipients' => 'Récipients',
 	'label_sujet' => 'Sujet',
-	'label_texte' => 'Texte',
 	'label_type' => 'Type',
 	
 	// N
