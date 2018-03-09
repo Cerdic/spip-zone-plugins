@@ -188,10 +188,14 @@ function rang_est_espece($rang) {
  */
 function taxon_preserver($regne) {
 
+	// Récupération de la description de la table spip_taxons afin de connaitre la liste des colonnes.
+	include_spip('base/objets');
+	$description_table = lister_tables_objets_sql('spip_taxons');
+
 	// Récupération de la liste des taxons importés via le fichier ITIS du règne concerné et édités manuellement.
 	// Ces champs éditables (nom_commun, descriptif) seront réinjectés après le chargement du règne via un update.
 	$from = array('spip_taxons');
-	$select = array('tsn', 'nom_commun', 'descriptif');
+	$select = array_merge($description_table['champs_editables'], array('tsn'));
 	$where = array('regne=' . sql_quote($regne), 'edite=' . sql_quote('oui'), 'importe=' . sql_quote('oui'));
 	$taxons['edites'] = sql_allfetsel($select, $from, $where);
 
@@ -200,8 +204,6 @@ function taxon_preserver($regne) {
 	// Ces taxons seront réinjectés après le chargement du règne via un create.
 	// -- on récupère tous les champs du taxons sauf ceux qui seront mis à jour automatique lors de l'insertion de
 	//    l'objet en BD (id_taxon, maj).
-	include_spip('base/objets');
-	$description_table = lister_tables_objets_sql('spip_taxons');
 	$select = array_diff(array_keys($description_table['field']), array('id_taxon', 'maj'));
 	$where = array('regne=' . sql_quote($regne), 'importe=' . sql_quote('non'));
 	$taxons['crees'] = sql_allfetsel($select, $from, $where);
