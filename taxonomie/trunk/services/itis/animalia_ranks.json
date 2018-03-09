@@ -1,0 +1,266 @@
+[
+  {
+    "kingdom_id": 5,
+    "rank_id": 10,
+    "rank_name": "Kingdom",
+    "dir_parent_rank_id": 10,
+    "req_parent_rank_id": 10,
+    "update_date": "1996-06-13"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 20,
+    "rank_name": "Subkingdom",
+    "dir_parent_rank_id": 10,
+    "req_parent_rank_id": 10,
+    "update_date": "1996-06-13"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 25,
+    "rank_name": "Infrakingdom",
+    "dir_parent_rank_id": 20,
+    "req_parent_rank_id": 10,
+    "update_date": "2013-01-29"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 27,
+    "rank_name": "Superphylum",
+    "dir_parent_rank_id": 25,
+    "req_parent_rank_id": 10,
+    "update_date": "2013-01-29"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 30,
+    "rank_name": "Phylum",
+    "dir_parent_rank_id": 27,
+    "req_parent_rank_id": 10,
+    "update_date": "1996-06-13"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 40,
+    "rank_name": "Subphylum",
+    "dir_parent_rank_id": 30,
+    "req_parent_rank_id": 30,
+    "update_date": "1996-06-13"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 45,
+    "rank_name": "Infraphylum",
+    "dir_parent_rank_id": 40,
+    "req_parent_rank_id": 30,
+    "update_date": "2013-02-08"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 50,
+    "rank_name": "Superclass",
+    "dir_parent_rank_id": 45,
+    "req_parent_rank_id": 30,
+    "update_date": "1996-06-13"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 60,
+    "rank_name": "Class",
+    "dir_parent_rank_id": 50,
+    "req_parent_rank_id": 30,
+    "update_date": "1996-06-13"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 70,
+    "rank_name": "Subclass",
+    "dir_parent_rank_id": 60,
+    "req_parent_rank_id": 60,
+    "update_date": "1996-06-13"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 80,
+    "rank_name": "Infraclass",
+    "dir_parent_rank_id": 70,
+    "req_parent_rank_id": 60,
+    "update_date": "1996-06-13"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 90,
+    "rank_name": "Superorder",
+    "dir_parent_rank_id": 80,
+    "req_parent_rank_id": 60,
+    "update_date": "1996-06-13"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 100,
+    "rank_name": "Order",
+    "dir_parent_rank_id": 90,
+    "req_parent_rank_id": 60,
+    "update_date": "1996-06-13"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 110,
+    "rank_name": "Suborder",
+    "dir_parent_rank_id": 100,
+    "req_parent_rank_id": 100,
+    "update_date": "1996-06-13"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 120,
+    "rank_name": "Infraorder",
+    "dir_parent_rank_id": 110,
+    "req_parent_rank_id": 100,
+    "update_date": "1996-06-13"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 124,
+    "rank_name": "Section",
+    "dir_parent_rank_id": 120,
+    "req_parent_rank_id": 100,
+    "update_date": "2012-11-02"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 126,
+    "rank_name": "Subsection",
+    "dir_parent_rank_id": 124,
+    "req_parent_rank_id": 100,
+    "update_date": "2012-11-02"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 130,
+    "rank_name": "Superfamily",
+    "dir_parent_rank_id": 126,
+    "req_parent_rank_id": 100,
+    "update_date": "2012-11-02"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 140,
+    "rank_name": "Family",
+    "dir_parent_rank_id": 130,
+    "req_parent_rank_id": 100,
+    "update_date": "1996-06-13"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 150,
+    "rank_name": "Subfamily",
+    "dir_parent_rank_id": 140,
+    "req_parent_rank_id": 140,
+    "update_date": "1996-06-13"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 160,
+    "rank_name": "Tribe",
+    "dir_parent_rank_id": 150,
+    "req_parent_rank_id": 140,
+    "update_date": "1996-06-13"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 170,
+    "rank_name": "Subtribe",
+    "dir_parent_rank_id": 160,
+    "req_parent_rank_id": 140,
+    "update_date": "1996-06-13"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 180,
+    "rank_name": "Genus",
+    "dir_parent_rank_id": 170,
+    "req_parent_rank_id": 140,
+    "update_date": "1996-06-13"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 190,
+    "rank_name": "Subgenus",
+    "dir_parent_rank_id": 180,
+    "req_parent_rank_id": 180,
+    "update_date": "1996-06-13"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 220,
+    "rank_name": "Species",
+    "dir_parent_rank_id": 190,
+    "req_parent_rank_id": 180,
+    "update_date": "1996-06-13"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 230,
+    "rank_name": "Subspecies",
+    "dir_parent_rank_id": 220,
+    "req_parent_rank_id": 220,
+    "update_date": "1999-10-29"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 240,
+    "rank_name": "Variety",
+    "dir_parent_rank_id": 220,
+    "req_parent_rank_id": 220,
+    "update_date": "2004-06-04"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 245,
+    "rank_name": "Form",
+    "dir_parent_rank_id": 220,
+    "req_parent_rank_id": 220,
+    "update_date": "2004-06-04"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 250,
+    "rank_name": "Race",
+    "dir_parent_rank_id": 220,
+    "req_parent_rank_id": 220,
+    "update_date": "2004-06-04"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 255,
+    "rank_name": "Stirp",
+    "dir_parent_rank_id": 220,
+    "req_parent_rank_id": 220,
+    "update_date": "2004-06-04"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 260,
+    "rank_name": "Morph",
+    "dir_parent_rank_id": 220,
+    "req_parent_rank_id": 220,
+    "update_date": "2004-06-04"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 265,
+    "rank_name": "Aberration",
+    "dir_parent_rank_id": 220,
+    "req_parent_rank_id": 220,
+    "update_date": "2004-06-04"
+  },
+  {
+    "kingdom_id": 5,
+    "rank_id": 300,
+    "rank_name": "Unspecified",
+    "dir_parent_rank_id": 220,
+    "req_parent_rank_id": 220,
+    "update_date": "2004-06-04"
+  }
+]
