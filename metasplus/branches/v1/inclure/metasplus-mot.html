@@ -21,7 +21,7 @@
 ]
 <BOUCLE_illus(DOCUMENTS documents_liens){id_mot}{extension IN jpg,gif,png}
 						{largeur>=200}{hauteur>=200}{!par date}{0,1}
-						{si #LOGO_MOT|non}>titi
+						{si #LOGO_MOT|non}>
 	[(#SET{logo,[(#FICHIER)]})]
 </BOUCLE_illus>
 [(#REM)
