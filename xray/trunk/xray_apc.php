@@ -66,6 +66,8 @@ define('XRAY_NEPASAFFICHER_DEBUTNOMCACHE', _CACHE_NAMESPACE);
 
 ////////// END OF DEFAULT CONFIG AREA /////////////////////////////////////////////////////////////
 
+include_spip ('inc/xray_apc');
+
 // Strings utils
 
 function is_serialized($str)
@@ -979,138 +981,24 @@ switch ($MYREQUEST['OB']) {
 		$size_vars        = bsize($cache['mem_size']);
 		$i                = 0;
 		$_namespace       = _CACHE_NAMESPACE;
-		
-		$list = array();
-		foreach($cache['cache_list'] as $i => $entry) {
-			$k = 'a_'.sprintf('%015d', $entry['creation_time']).$entry['info'];
-			$entry ['date_crea'] = date(DATE_FORMAT, $entry['creation_time']);
-			$entry ['info_exists'] = apcu_exists ($entry['info']);
-			$list[$k] = $entry;
-		}
-		// tri à l'envers pour ne pas réindexer le tableaux numériquement avec array_shift
-		krsort($list, SORT_STRING);
-		echo "<div class='info div1'><h2>Mémoization SPIP - Le ".date(JOLI_DATE_FORMAT,time())."</h2>
-			<table cellspacing=0><tbody>
-			<tr class=tr-0><td class=td-0>_CACHE_NAMESPACE</td><td>"._CACHE_NAMESPACE."</td></tr>";
-
-		$nb_fantomes_apc = $nb_existe = $nb_speciales = $nb_invalides_spip = $nb_hits = $nb_requetes = $taille = $mem_hits = $mem_requetes = $taille = $taille_speciales = $taille_sans_speciales = $taille_invalides_spip = 0; // etc il en manque
-		// FIXME faire classe ou structure de donnée pour collecter et afficher les stats
 
 		$meta_derniere_modif = lire_meta('derniere_modif');
 
-		while (count($list)) {
-			$d = array_pop($list);
-			if ($d and apcu_exists($d['info'])) {
-				$nb_existe++;
-				$taille += $d['mem_size'];
-				if (!$naissance or ($naissance > $d['creation_time']))
-					$naissance = date(JOLI_DATE_FORMAT,$d['creation_time']);
-				$nb_hits += $d['num_hits'];
-				$nb_requetes += $d['num_hits'] + 1;
-				$mem_hits += $d['mem_size']*$d['num_hits'];
-				$mem_requetes += $d['mem_size']*($d['num_hits'] + 1);
-				if ($meta_derniere_modif > $d['creation_time']) {
-					$nb_invalides_spip++;
-					$taille_invalides_spip += $d['mem_size'];
-					$nb_hits_invalides_spip += $d['num_hits'];
-					$nb_requetes_invalides_spip += $d['num_hits'] + 1;
-					$mem_hits_invalides_spip += $d['mem_size']*$d['num_hits'];
-					$mem_requetes_invalides_spip += $d['mem_size']*($d['num_hits'] + 1);
-				}
-				elseif (preg_match(XRAY_PATTERN_STATS_SPECIALES, $d['info'])) {
-					$nb_speciales++;
-					$taille_speciales += $d['mem_size'];
-					$nb_hits_speciales += $d['num_hits'];
-					$nb_requetes_speciales += $d['num_hits'] + 1;
-					$mem_hits_speciales += $d['mem_size']*$d['num_hits'];
-					$mem_requetes_speciales += $d['mem_size']*($d['num_hits'] + 1);
-				}
-				else {
-					$nb_sans_speciales++;
-					$taille_sans_speciales += $d['mem_size'];
-					$nb_hits_sans_speciales += $d['num_hits'];
-					$nb_requetes_sans_speciales += $d['num_hits'] + 1;
-					$mem_hits_sans_speciales += $d['mem_size']*$d['num_hits'];
-					$mem_requetes_sans_speciales += $d['mem_size']*($d['num_hits'] + 1);
-				}
-			}
-			else {
-				$nb_fantomes_apc++;
-				$taille_fantomes_apc += $d['mem_size'];
-				$nb_hits_fantomes_apc += $d['num_hits'];
-				$nb_requetes_fantomes_apc += $d['num_hits'] + 1;
-				$mem_hits_fantomes_apc += $d['mem_size']*$d['num_hits'];
-				$mem_requetes_fantomes_apc += $d['mem_size']*($d['num_hits'] + 1);
-			}
-		};
-	
-	$nb_cache = count($cache['cache_list']);
-	echo
-		"<tr class=tr-0><td class=td-0>Nb caches</td><td>$nb_cache";
-	if ($nb_cache != $nb_existe)
-		echo " (dont ".($nb_cache - $nb_existe)." périmés)";
-	echo "</td></tr>";
-	if ($nb_existe)
-		echo "
-		<tr class=tr-0><td class=td-0>Taille totale</td><td>".taille_en_octets($taille)."</td></tr>
-		<tr class=tr-0><td class=td-0>Nb requetes</td><td>$nb_requetes</td></tr>";
-	if ($nb_requetes)
-		echo "
-		<tr class=tr-0><td class=td-0>Nb hits</td><td>$nb_hits soit ".round(100*$nb_hits/$nb_requetes,1)."%</td></tr>
-		<tr class=tr-0><td class=td-0 title='Service par le cache pondéré par la taille'>Rendement</td><td>".round(100*$mem_hits/$mem_requetes,1)."%</td></tr>"; 
+		echo "<div class='info div1'><h2>Mémoization SPIP - Le ".date(JOLI_DATE_FORMAT,time())."</h2>
+			<table cellspacing=0><tbody>
+			<tr class=tr-0><td class=td-0>_CACHE_NAMESPACE</td><td>"._CACHE_NAMESPACE."</td></tr>";
+		$stats = xray_stats($cache);
+		echo xray_stats_print($stats, 'generaux', 'Valides '.XRAY_LABEL_STATS_SPECIALES_EXCLUES);
+		echo xray_stats_print($stats, 'speciaux', '+ Valides '.XRAY_LABEL_STATS_SPECIALES);
+		echo xray_stats_print($stats, 'invalides', '+ Invalidés par SPIP');
+		echo xray_stats_print($stats, 'existent', '= Total caches APC OK');
+		echo xray_stats_print($stats, 'fantomes', '+ Caches périmés par APC');
+		$nb_cache = count($cache['cache_list']);
+		echo "<tr class=tr-0>
+			<td class=td-0><b>= Nb total caches APC</b></td><td>$nb_cache</td>
+			</tr>";
 
-	if ($nb_speciales)
-		echo "
-		<tr><td colspan=2><b> = ".XRAY_LABEL_STATS_SPECIALES."</b></td></tr>
-		<tr class=tr-0><td class=td-0>Nb caches</td><td>$nb_speciales</td></tr>
-		<tr class=tr-0><td class=td-0>Taille totale</td><td>".taille_en_octets($taille_speciales)."</td></tr>
-		<tr class=tr-0><td class=td-0>Nb requetes</td><td>$nb_requetes_speciales</td></tr>
-		<tr class=tr-0><td class=td-0>Nb hits</td><td>$nb_hits_speciales soit ".round(100*$nb_hits_speciales/$nb_requetes_speciales,1)."%</td></tr>
-		<tr class=tr-0><td class=td-0 title='Service par le cache pondéré par la taille'>Rendement</td><td>".round(100*$mem_hits_speciales/$mem_requetes_speciales,1)."%</td></tr>";
-	else
-		echo "<tr><td colspan=2>= ".XRAY_LABEL_STATS_SPECIALES." : aucun cache</td></tr>";
-
-	if ($nb_sans_speciales)
-		echo "
-		<tr><td colspan=2><b>+ ".XRAY_LABEL_STATS_SPECIALES_EXCLUES."</b></td></tr>
-		<tr class=tr-0><td class=td-0>Nb caches</td><td>$nb_sans_speciales</td></tr>
-		<tr class=tr-0><td class=td-0>Taille totale</td><td>".taille_en_octets($taille_sans_speciales)."</td></tr>
-		<tr class=tr-0><td class=td-0>Nb requetes</td><td>$nb_requetes_sans_speciales</td></tr>
-		<tr class=tr-0><td class=td-0>Nb hits</td><td>$nb_hits_sans_speciales soit ".round(100*$nb_hits_sans_speciales/$nb_requetes_sans_speciales,1)."%</td></tr>
-		<tr class=tr-0><td class=td-0 title='Service par le cache pondéré par la taille'>Rendement</td><td>".round(100*$mem_hits_sans_speciales/$mem_requetes_sans_speciales,1)."%</td></tr>";
-	else
-		echo "<tr><td  colspan=2>+ ".XRAY_LABEL_STATS_SPECIALES_EXCLUES." : aucun cache</td></tr>";
-		
-	if ($nb_invalides_spip)
-		echo "
-		<tr><td colspan=2><b>+ Invalidés par SPIP</b></td></tr>
-		<tr class=tr-0><td class=td-0>Nb caches</td><td>$nb_invalides_spip</td></tr>
-		<tr class=tr-0><td class=td-0>Taille totale</td><td>".taille_en_octets($taille_invalides_spip)."</td></tr>
-		<tr class=tr-0><td class=td-0>Nb requetes</td><td>$nb_requetes_invalides_spip</td></tr>
-		<tr class=tr-0><td class=td-0>Nb hits</td><td>$nb_hits_invalides_spip soit ".round(100*$nb_hits_invalides_spip/$nb_requetes_invalides_spip,1)."%</td></tr>
-		<tr class=tr-0><td class=td-0 title='Service par le cache pondéré par la taille'>Rendement</td><td>".round(100*$mem_hits_invalides_spip/$mem_requetes_invalides_spip,1)."%</td></tr>";
-	else
-		echo "<tr><td  colspan=2>+ Invalidés par SPIP : aucun cache</td></tr>";
-	echo "
-		<tr class=tr-0><td class=td-0 title='meta SPIP : derniere_modif'>Dernière invalidation</td><td>".date(JOLI_DATE_FORMAT, $meta_derniere_modif)."</td></tr>
-		<tr class=tr-0><td class=td-0 title='meta spip'>Invalidation de '".XRAY_OBJET_SPECIAL."'</td><td>".date(JOLI_DATE_FORMAT, lire_meta('derniere_modif_'.XRAY_OBJET_SPECIAL))."</td></tr>
-		<tr class=tr-0><td class=td-0 title='meta SPIP : cache_mark'>Dernière purge</td><td>".date(JOLI_DATE_FORMAT, $GLOBALS['meta']['cache_mark'])."</td></tr>
-		<tr class=tr-0><td class=td-0>Plus vieux cache</td><td>$naissance</td></tr>
-		";
-
-		
-	if ($nb_fantomes_apc)
-		echo "
-		<tr><td colspan=2><b>+ Caches périmés par APC</b></td></tr>
-		<tr class=tr-0><td class=td-0>Nb caches</td><td>$nb_fantomes_apc</td></tr>
-		<tr class=tr-0><td class=td-0>Total taille</td><td>".taille_en_octets($taille_fantomes_apc)."</td></tr>
-		<tr class=tr-0><td class=td-0>Nb anciennes requetes</td><td>$nb_requetes_fantomes_apc</td></tr>
-		<tr class=tr-0><td class=td-0>Nb anciens hits</td><td>$nb_hits_fantomes_apc soit ".round(100*$nb_hits_fantomes_apc/$nb_requetes_fantomes_apc,1)."%</td></tr>
-		<tr class=tr-0><td class=td-0 title='Service par le cache pondéré par la taille'>Rendement</td><td>".round(100*$mem_hits_fantomes_apc/$mem_requetes_fantomes_apc,1)."%</td></tr>";
-	else
-		echo "<tr><td colspan=2>+ Aucun cache n'est inaccessible</td></tr>";
-
-	echo "</table></div>";
+		echo "</table></div>";
 
 		echo <<< EOB
 		<div class="info div1"><h2>General Cache Information</h2>
