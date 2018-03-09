@@ -1,22 +1,15 @@
 <?php
+// fichier d'options SPIP principal du plugin xray
+// 		xray/xray_options.php
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
-if (!isset($_GET['exec']) or ($_GET['exec']!='xray')) return;
 
-if (!defined('XRAY_PATTERN_STATS_SPECIALES')) {
-	define ('XRAY_PATTERN_STATS_SPECIALES', '/\.(js|css)(\s|_|$)/ui');
-	define ('XRAY_LABEL_STATS_SPECIALES', 'Javascript et css');
-	define ('XRAY_LABEL_STATS_SPECIALES_EXCLUES', 'Sans les javascript et css');
-}
+include_spip('inc/xray_options');
+include_spip('inc/xray_options_default');
 
-if (!defined('XRAY_OBJET_SPECIAL')) {
-	define ('XRAY_OBJET_SPECIAL', 'article');
-}
+if (!isset($_GET['exec']) or ($_GET['exec']!='xray')) 
+	return;
 
-if (!defined('XRAY_ID_OBJET_SPECIAL'))
-	define ('XRAY_ID_OBJET_SPECIAL', 14533);
-
-define (JOLI_DATE_FORMAT, 'd/m/Y H:i:s');
-date_default_timezone_set ('Europe/Paris');
 
 global $Memoization;
 $cfg = @unserialize($GLOBALS['meta']['memoization']);

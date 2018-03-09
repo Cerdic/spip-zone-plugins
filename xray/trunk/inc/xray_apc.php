@@ -1,5 +1,13 @@
 <?php
 
+// il faut définir un inc/xray_options.php lorsqu'on include_spip ('inc/xray_apc') dans le code php d'un plugin
+if (!defined('XRAY_PATTERN_STATS_SPECIALES'))
+	include_spip('inc/xray_options');
+if (!defined('XRAY_PATTERN_STATS_SPECIALES'))
+	include_spip ('inc/xray_options_default');
+if (!defined('XRAY_PATTERN_STATS_SPECIALES'))
+	die ("erreur : XRAY_PATTERN_STATS_SPECIALES n'est pas défini");
+
 function xray_stats($cache=null) {
 	if (!$cache)
 		$cache = apcu_cache_info();
