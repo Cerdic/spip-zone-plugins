@@ -5,7 +5,6 @@ function xray_stats($cache=null) {
 		$cache = apcu_cache_info();
 	if (!$cache)
 		return "Pas de cache";
-	
 	// on ordonne par date de création
 	$list = array();
 	foreach($cache['cache_list'] as $i => $entry) {
@@ -53,6 +52,8 @@ function xray_stats($cache=null) {
 				$invalides['nb_requetes'] += $d['num_hits'] + 1;
 				$invalides['mem_hits'] += $d['mem_size']*$d['num_hits'];
 				$invalides['mem_requetes'] += $d['mem_size']*($d['num_hits'] + 1);
+				if (!$invalides['naissance'] or ($invalides['naissance'] > $d['creation_time']))
+					$invalides['naissance'] = date(JOLI_DATE_FORMAT,$d['creation_time']);
 			}
 			elseif (preg_match(XRAY_PATTERN_STATS_SPECIALES, $d['info'])) {
 				$speciaux['nb']++;
@@ -61,6 +62,8 @@ function xray_stats($cache=null) {
 				$speciaux['nb_requetes'] += $d['num_hits'] + 1;
 				$speciaux['mem_hits'] += $d['mem_size']*$d['num_hits'];
 				$speciaux['mem_requetes'] += $d['mem_size']*($d['num_hits'] + 1);
+				if (!$speciaux['naissance'] or ($speciaux['naissance'] > $d['creation_time']))
+					$speciaux['naissance'] = date(JOLI_DATE_FORMAT,$d['creation_time']);
 			}
 			else {
 				$generaux['nb']++;
@@ -69,6 +72,9 @@ function xray_stats($cache=null) {
 				$generaux['nb_requetes'] += $d['num_hits'] + 1;
 				$generaux['mem_hits'] += $d['mem_size']*$d['num_hits'];
 				$generaux['mem_requetes'] += $d['mem_size']*($d['num_hits'] + 1);
+				if (!$generaux['naissance'] or ($generaux['naissance'] > $d['creation_time']))
+					$generaux['naissance'] = date(JOLI_DATE_FORMAT,$d['creation_time']);
+
 			}
 		}
 		else {
@@ -78,6 +84,8 @@ function xray_stats($cache=null) {
 			$fantomes['nb_requetes'] += $d['num_hits'] + 1;
 			$fantomes['mem_hits'] += $d['mem_size']*$d['num_hits'];
 			$fantomes['mem_requetes'] += $d['mem_size']*($d['num_hits'] + 1);
+			if (!$fantomes['naissance'] or ($fantomes['naissance'] > $d['creation_time']))
+					$fantomes['naissance'] = date(JOLI_DATE_FORMAT,$d['creation_time']);
 		}
 	};
 	return $stats;
@@ -92,5 +100,6 @@ function xray_stats_print(&$stats, $what, $label) {
 		<tr class=tr-0><td class=td-0>Taille totale</td><td>".taille_en_octets($stats[$what]['taille'])."</td></tr>
 		<tr class=tr-0><td class=td-0>Nb requetes</td><td>{$stats[$what]['nb_requetes']}</td></tr>
 		<tr class=tr-0><td class=td-0>Nb hits</td><td>{$stats[$what]['nb_hits']} soit ".round(100*$stats[$what]['nb_hits']/$stats[$what]['nb_requetes'],1)."%</td></tr>
-		<tr class=tr-0><td class=td-0 title='Service par le cache pondéré par la taille'>Rendement</td><td>".round(100*$stats[$what]['mem_hits']/$stats[$what]['mem_requetes'],1)."%</td></tr>";
+		<tr class=tr-0><td class=td-0 title='Service par le cache pondéré par la taille'>Rendement</td><td>".round(100*$stats[$what]['mem_hits']/$stats[$what]['mem_requetes'],1)."%</td></tr>
+		<tr class=tr-0><td class=td-0>Plus vieux cache</td><td>{$stats[$what]['naissance']}</td></tr>";
 }

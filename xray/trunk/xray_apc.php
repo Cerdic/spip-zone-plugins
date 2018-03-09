@@ -986,7 +986,11 @@ switch ($MYREQUEST['OB']) {
 
 		echo "<div class='info div1'><h2>Mémoization SPIP - Le ".date(JOLI_DATE_FORMAT,time())."</h2>
 			<table cellspacing=0><tbody>
-			<tr class=tr-0><td class=td-0>_CACHE_NAMESPACE</td><td>"._CACHE_NAMESPACE."</td></tr>";
+			<tr class=tr-0><td class=td-0>_CACHE_NAMESPACE</td><td>"._CACHE_NAMESPACE."</td></tr>
+			<tr class=tr-0><td class=td-0 title='meta SPIP : derniere_modif'>Dernière invalidation</td><td>".date(JOLI_DATE_FORMAT, $meta_derniere_modif)."</td></tr> 
+			<tr class=tr-0><td class=td-0 title='meta spip'>Invalidation de '".XRAY_OBJET_SPECIAL."'</td><td>".date(JOLI_DATE_FORMAT, lire_meta('derniere_modif_'.XRAY_OBJET_SPECIAL))."</td></tr> 
+			<tr class=tr-0><td class=td-0 title='meta SPIP : cache_mark'>Dernière purge</td><td>".date(JOLI_DATE_FORMAT, $GLOBALS['meta']['cache_mark'])."</td></tr> ";
+
 		$stats = xray_stats($cache);
 		echo xray_stats_print($stats, 'generaux', 'Valides '.XRAY_LABEL_STATS_SPECIALES_EXCLUES);
 		echo xray_stats_print($stats, 'speciaux', '+ Valides '.XRAY_LABEL_STATS_SPECIALES);
