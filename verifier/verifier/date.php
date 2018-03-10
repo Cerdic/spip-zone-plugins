@@ -124,7 +124,10 @@ function normaliser_date_datetime_dist($valeur, $options, &$erreur) {
 
 	if (isset($options['heure'])) {
 		$date .= (' ' . $options['heure'] . ':00');
-	} else {
+	} elseif (isset($options['fin_de_journee'])) {
+		$date .= ' 23:59:59'; 
+	}
+	else {
 		$date .= ' 00:00:00';
 	}
 
@@ -134,7 +137,7 @@ function normaliser_date_datetime_dist($valeur, $options, &$erreur) {
 		return false;
 	}
 
-	if (!($date = mktime($date[3], $date[4], 0, (int)$date[1], (int)$date[2], (int)$date[0]))) {
+	if (!($date = mktime($date[3], $date[4], $date[5], (int)$date[1], (int)$date[2], (int)$date[0]))) {
 		// mauvais format de date
 		$erreur = 'Impossible de normaliser la date...';
 		return false;
