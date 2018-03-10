@@ -326,14 +326,26 @@ function commandes_notifier($id_commande=0){
 		if( $config['expediteur'] != "facteur" )
 			$options['expediteur'] = $config['expediteur_'.$config['expediteur']];
 
+        include_spip('inc/utils');
+
 		// Envoyer au vendeur
 		spip_log("traiter_notifications_commande : notification vendeur pour la commande $id_commande",'commandes.' . _LOG_INFO);
-		$notifications('commande_vendeur', $id_commande, $options);
+        if ($notification_statut = trouver_fond('commande_vendeur_'.$statut, 'notifications')) {
+            $notifications('commande_vendeur_'.$statut, $id_commande, $options);
+        } else {
+            $notifications('commande_vendeur', $id_commande, $options);
+        }
 
 		// Envoyer optionnellement au client
 		if($config['client']) {
+   
 			spip_log("traiter_notifications_commande : notification client pour la commande $id_commande",'commandes.' . _LOG_INFO);
-			$notifications('commande_client', $id_commande, $options);
+
+            if ($notification_statut = trouver_fond('notifications/commande_client_'.$statut)) {
+                $notifications('commande_client_'.$statut, $id_commande, $options);
+            } else {
+                $notifications('commande_client', $id_commande, $options);
+            }
 		}
 
 	}
