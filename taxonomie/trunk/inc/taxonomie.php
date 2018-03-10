@@ -236,48 +236,55 @@ function taxon_merger_traductions($multi_prioritaire, $multi_non_prioritaire) {
 	$multi_merge = '';
 
 	// On extrait le contenu de la balise <multi> si elle existe.
-	include_spip('inc/filtres');
 	$multi_prioritaire = trim($multi_prioritaire);
 	$multi_non_prioritaire = trim($multi_non_prioritaire);
-	if (preg_match(_EXTRAIRE_MULTI, $multi_prioritaire, $match)) {
-		$multi_prioritaire = trim($match[1]);
-	}
-	if (preg_match(_EXTRAIRE_MULTI, $multi_non_prioritaire, $match)) {
-		$multi_non_prioritaire = trim($match[1]);
-	}
 
-	if ($multi_prioritaire) {
-		if ($multi_non_prioritaire) {
-			// On extrait les traductions sous forme de tableau langue=>traduction.
-			$traductions_prioritaires = extraire_trads($multi_prioritaire);
-			$traductions_non_prioritaires = extraire_trads($multi_non_prioritaire);
+	// Si les deux balises sont identiques on sort directement avec le multi prioritaire ce qui améliore les
+	// performances.
+	if ($multi_prioritaire == $multi_non_prioritaire) {
+		$multi_merge = $multi_prioritaire;
+	} else {
+		include_spip('inc/filtres');
+		if (preg_match(_EXTRAIRE_MULTI, $multi_prioritaire, $match)) {
+			$multi_prioritaire = trim($match[1]);
+		}
+		if (preg_match(_EXTRAIRE_MULTI, $multi_non_prioritaire, $match)) {
+			$multi_non_prioritaire = trim($match[1]);
+		}
 
-			// On complète les traductions prioritaires avec les traductions non prioritaires dont la langue n'est pas
-			// présente dans les traductions prioritaires.
-			foreach ($traductions_non_prioritaires as $_lang => $_traduction) {
-				if (!array_key_exists($_lang, $traductions_prioritaires)) {
-					$traductions_prioritaires[$_lang] = $_traduction;
+		if ($multi_prioritaire) {
+			if ($multi_non_prioritaire) {
+				// On extrait les traductions sous forme de tableau langue=>traduction.
+				$traductions_prioritaires = extraire_trads($multi_prioritaire);
+				$traductions_non_prioritaires = extraire_trads($multi_non_prioritaire);
+
+				// On complète les traductions prioritaires avec les traductions non prioritaires dont la langue n'est pas
+				// présente dans les traductions prioritaires.
+				foreach ($traductions_non_prioritaires as $_lang => $_traduction) {
+					if (!array_key_exists($_lang, $traductions_prioritaires)) {
+						$traductions_prioritaires[$_lang] = $_traduction;
+					}
 				}
-			}
 
-			// On construit le contenu de la balise <multi> mergé à partir des traductions prioritaires mises à jour.
-			// Les traductions vides sont ignorées.
-			ksort($traductions_prioritaires);
-			foreach ($traductions_prioritaires as $_lang => $_traduction) {
-				if ($_traduction) {
-					$multi_merge .= ($_lang ? '[' . $_lang . ']' : '') . trim($_traduction);
+				// On construit le contenu de la balise <multi> mergé à partir des traductions prioritaires mises à jour.
+				// Les traductions vides sont ignorées.
+				ksort($traductions_prioritaires);
+				foreach ($traductions_prioritaires as $_lang => $_traduction) {
+					if ($_traduction) {
+						$multi_merge .= ($_lang ? '[' . $_lang . ']' : '') . trim($_traduction);
+					}
 				}
+			} else {
+				$multi_merge = $multi_prioritaire;
 			}
 		} else {
-			$multi_merge = $multi_prioritaire;
+			$multi_merge = $multi_non_prioritaire;
 		}
-	} else {
-		$multi_merge = $multi_non_prioritaire;
-	}
 
-	// Si le contenu est non vide on l'insère dans une balise <multi>
-	if ($multi_merge) {
-		$multi_merge = '<multi>' . $multi_merge . '</multi>';
+		// Si le contenu est non vide on l'insère dans une balise <multi>
+		if ($multi_merge) {
+			$multi_merge = '<multi>' . $multi_merge . '</multi>';
+		}
 	}
 
 	return $multi_merge;

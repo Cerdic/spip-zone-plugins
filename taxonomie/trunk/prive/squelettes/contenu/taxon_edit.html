@@ -1,0 +1,29 @@
+[(#AUTORISER{modifier, taxon, #ID_TAXON}|sinon_interdire_acces)]
+#SET{redirect, #ENV{redirect}|sinon{#URL_ECRIRE{taxon, id_taxon=#ID_TAXON}}}
+
+<div class="cadre-formulaire-editer">
+<div class="entete-formulaire">
+	[(#ID_TAXON|oui)
+		[(#GET{redirect}|icone_verticale{[(#VAL{taxon}|objet_info{texte_retour}|_T)], #VAL{taxon}|objet_info{icone_objet},'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#VAL{taxon}|objet_info{texte_modifier}|_T)]
+		<h1 class="nom_scientifique">(#ENV{titre, #INFO_TITRE{taxon, #ID_TAXON}})</h1>
+	]
+</div>
+
+#SET{redirect, #ENV{redirect, #ID_TAXON|generer_url_entite{taxon}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+
+[(#FORMULAIRE_{editer_taxon,
+	#ID_TAXON,
+	#GET{redirect}})]
+
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation, #chemin, #extra');/*\]\]>*/</script>
+]
+</div>
