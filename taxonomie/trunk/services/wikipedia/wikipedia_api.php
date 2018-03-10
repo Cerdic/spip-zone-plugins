@@ -112,8 +112,7 @@ function wikipedia_get_page($search, $spip_language, $section = null, $options =
 			$data = $requeter($url);
 
 			// Récupération de la section demandée.
-			if (isset($data['batchcomplete'])
-			and isset($data['query']['pages'])) {
+			if (isset($data['query']['pages'])) {
 				$reponses = $data['query']['pages'];
 				$page = reset($reponses);
 				$id = key($reponses);
