@@ -1,8 +1,8 @@
 [(#SET{defaut_tri,#ARRAY{
-	date,-1, 
-	sujet,1, 
+	date,-1,
+	sujet,1,
 	type,-1,
-	recipients,-1,	
+	recipients,-1,
 	id_notification,1,
 	points,-1
 }})]<B_liste_notifications>
@@ -13,11 +13,11 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='picto' scope='col'></th>
-			<th class='sujet' scope='col'>[(#TRI{sujet,<:notifications_archive:label_sujet:>,ajax})]</th>
+			<th class='sujet' scope='col'>[(#TRI{sujet,<:spip:form_prop_sujet:>,ajax})]</th>
 			<th class='type' scope='col'>[(#TRI{type,<:notifications_archive:label_type:>,ajax})]</th>
-			<th class='recipients' scope='col'>[(#TRI{recipients,<:notifications_archive:label_recipients:>,ajax})]</th>	
-			<th class='envoi' scope='col'>[(#TRI{envoi,<:notifications_archive:label_envoi:>,ajax})]</th>									
-			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class='recipients' scope='col'>[(#TRI{recipients,<:notifications_archive:label_recipients:>,ajax})]</th>
+			<th class='envoi' scope='col'>[(#TRI{envoi,<:notifications_archive:label_envoi:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
 			<th class='id' scope='col'>[(#TRI{id_notification,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
@@ -26,10 +26,10 @@
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{notification-16.png}|balise_img)]</td>
 			<td class='sujet principale'>[(#LOGO_NOTIFICATION|image_reduire{20,26})]<a href="[(#ID_NOTIFICATION|generer_url_entite{notification})]" title="<:info_numero_abbreviation|attribut_html:> #ID_NOTIFICATION">[(#RANG). ]#SUJET</a></td>
-			<td class='type secondaire'>#TYPE</td> 	 			
+			<td class='type secondaire'>#TYPE</td>
 			<td class='recipients secondaire'>[(#RECIPIENTS|implode{','})]</td>
-            <td class='envoi secondaire'>#ENVOI</td>        			
-				<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
+						<td class='envoi secondaire'>#ENVOI</td>
+				<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='id'>[(#AUTORISER{modifier,notification,#ID_NOTIFICATION}|?{
 				<a href="[(#URL_ECRIRE{notification_edit,id_notification=#ID_NOTIFICATION})]">#ID_NOTIFICATION</a>,
 				#ID_NOTIFICATION
