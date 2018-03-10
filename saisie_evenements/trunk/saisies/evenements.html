@@ -7,8 +7,11 @@
 	{id_mot ?IN #ENV{id_mot}}
 	{age_debut <= #ENV{date_debut_min_mobile,-999999999999}|mult{-1}}
 	{age_debut >= #ENV{date_debut_max_mobile,+999999999999}|mult{-1}}
+	{date_debut >= #ENV{date_debut_min_fixe,0000-01-01 00:00:00}}
+	{date_debut <= #ENV{date_debut_max_fixe,9999-31-12 23:59:59}}
 	>
 	[(#REM) Le mult -1 permet d'avoir une numérotation logique dans le constructeur : nombre négatif pour le passé, positif pour le futur)]
 	#TITRE [(#DATE_DEBUT|affdate)] --- #ID_EVENEMENT<br />
 </BOUCLE_evenements>
-[(#ENV**|unserialize|var_dump)]
+
+	#ENV{date_debut_max_fixe}
