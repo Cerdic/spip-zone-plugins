@@ -88,6 +88,10 @@ options:
           nom: 'date_debut_min_fixe'
           label: '<:saisie_evenements:date_debut_min_fixe_label:>'
           explication: '<:saisie_evenements:date_debut_min_fixe_explication:>'
+        verifier:
+          type: 'date'
+          options:
+            normaliser: 'datetime'
       -
         saisie: 'input'
         options:
@@ -102,6 +106,10 @@ options:
           nom: 'date_debut_max_fixe'
           label: '<:saisie_evenements:date_debut_max_fixe_label:>'
           explication: '<:saisie_evenements:date_debut_max_fixe_explication:>'
+        verifier:
+          type: 'date'
+          options:
+            normaliser: 'datetime'
       -
         saisie: 'input'
         options:
