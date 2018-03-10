@@ -5,7 +5,7 @@
 		&#169; 2014 - GNU/GPL
 	</licence>
 	<version>
-	1.0.0
+	1.0.1
 	</version>
 	<version_base>
 	1.0.0
@@ -32,5 +32,5 @@
 	</pipeline>
 	<options>stats_data_options.php</options>
 	<install>stats_data_administrations.php</install> 
-	<necessite id="SPIP" version="[1.9.0;3.5.0]" />
+	<necessite id="SPIP" version="[2.0.10;3.2.99]" />
 </plugin>

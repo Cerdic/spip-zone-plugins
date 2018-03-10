@@ -1,7 +1,7 @@
 <paquet
 	prefix="stats_data"
 	categorie="statistique"
-	version="1.0.0"
+	version="1.0.1"
 	etat="test"
 	compatibilite="[2.0.10;3.2.*]"
 	logo="prive/themes/spip/images/statistique-32.png"
@@ -9,7 +9,7 @@
 >
 	<nom>Visites SPIP</nom>
 	<!-- Modification des statistiques dans SPIP (ajout visites en cours etc...) -->
-	
+
 	<auteur>BoOz</auteur>
 	<pipeline nom="header_prive" inclure="stats_data_pipelines.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/stats_data.php" />
