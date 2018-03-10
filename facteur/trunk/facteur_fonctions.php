@@ -38,42 +38,44 @@ function facteur_affiche_password_masque($pass){
 function facteur_email_wrap_to_html($texte_ou_html){
 	$texte_ou_html = trim($texte_ou_html);
 	// attention : si pas de contenu on renvoi du vide aussi (mail vide = mail vide)
-	if (!strlen(trim($texte_ou_html)))
-		return $texte_ou_html;
+	if (!strlen(trim($texte_ou_html))) {
+        return $texte_ou_html;
+    }
 
-	$contexte = array("sujet"=>"","texte"=>"","intro"=>"");
+	$contexte = array('sujet' => '', 'texte' => '', 'intro' => '');
 
 	// tester si le mail est en html (simplifie)
-	if (substr($texte_ou_html,0,1)=="<"
-	  AND substr($texte_ou_html,-1,1)==">"
-	  AND stripos($texte_ou_html,"</body>")!==false){
+	if (substr($texte_ou_html, 0, 1) == '<'
+	  and substr($texte_ou_html,-1,1) == '>'
+	  and stripos($texte_ou_html, '</body>') !== false) {
 
 		// dans ce cas on ruse un peu : extraire le sujet du title
-		$sujet = "";
-		if (preg_match(",<title>(.*)</title>,Uims",$texte_ou_html,$m)){
+		$sujet = '';
+		if (preg_match(",<title>(.*)</title>,Uims", $texte_ou_html, $m)) {
 			$contexte['sujet'] = $m[1];
-			$texte_ou_html = preg_replace(",<title>(.*)</title>,Uims","",$texte_ou_html,1);
+			$texte_ou_html = preg_replace(",<title>(.*)</title>,Uims", '', $texte_ou_html, 1);
 			$texte_ou_html = trim($texte_ou_html);
 		}
-		if (preg_match(",<intro>(.*)</intro>,Uims",$texte_ou_html,$m)){
+		if (preg_match(",<intro>(.*)</intro>,Uims", $texte_ou_html, $m)){
 			$contexte['intro'] = $m[1];
-			$texte_ou_html = preg_replace(",<intro>(.*)</intro>,Uims","",$texte_ou_html,1);
+			$texte_ou_html = preg_replace(",<intro>(.*)</intro>,Uims", '', $texte_ou_html, 1);
 			$texte_ou_html = trim($texte_ou_html);
 		}
-		$contexte['html'] = preg_replace(",</?body>,ims","",$texte_ou_html);
+		$contexte['html'] = preg_replace(",</?body>,ims", '', $texte_ou_html);
 	}
 	else {
 		// la premiere ligne est toujours le sujet
-		$texte_ou_html = explode("\n",$texte_ou_html);
+		$texte_ou_html = explode("\n", $texte_ou_html);
 		$contexte['sujet'] = trim(array_shift($texte_ou_html));
-		$contexte['texte'] = trim(implode("\n",$texte_ou_html));
+		$contexte['texte'] = trim(implode("\n", $texte_ou_html));
 	}
 
 	// attention : si pas de contenu on renvoi du vide aussi (mail vide = mail vide)
-	if (!strlen(trim(implode("",$contexte))))
-		return "";
+	if (!strlen(trim(implode('', $contexte)))) {
+        return '';
+    }
 
-	return recuperer_fond("emails/texte",$contexte);
+	return recuperer_fond('emails/texte', $contexte);
 }
 
 	/*
