@@ -273,7 +273,24 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 			}
 			// S'il n'y a pas d'erreur et que la variable de normalisation a été remplie, on l'injecte dans le POST
 			elseif (!is_null($normaliser) and $verifier['type'] != 'fichiers') {
-				set_request($champ, $normaliser);
+			// Si le nom du champ est un tableau indexé, il faut parser !
+				if (preg_match('/([\w]+)((\[[\w]+\])+)/', $champ, $separe)) {
+					$nom_champ_principal = $separe[1];
+					$champ_principal  = _request($nom_champ_principal);
+					$enfant = &$champ_principal;
+					preg_match_all('/\[([\w]+)\]/', $separe[2], $index);
+					// On va chercher au fond du tableau
+					foreach ($index[1] as $cle) {
+						$enfant = &$enfant[$cle];
+					}
+					// Une fois descendu tout en bas, on normalise  
+					$enfant = $normaliser;
+					// Et on reinjecte le tout
+					set_request($nom_champ_principal,$champ_principal);
+				} else {
+					// Sinon la valeur est juste celle du nom
+					set_request($champ, $normaliser);
+				}
 			}
 		}
 	}

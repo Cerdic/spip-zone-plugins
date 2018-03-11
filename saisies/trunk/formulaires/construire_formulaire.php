@@ -265,25 +265,6 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 	}
 	$erreurs['configurer_'.$nom] = $formulaire_config;
 
-
-	// On normalise les paramètres de la saisie si cela est demandé dans le fichier .yaml
-
-	$verifier = charger_fonction("verifier","inc");
-	$options_par_nom = saisies_lister_par_nom($formulaire_config,false);
-	if(isset($saisie_modifiee['options'])) {
-		foreach ($saisie_modifiee['options'] as $option => &$valeur_option) {
-			$description_option = $options_par_nom["saisie_modifiee_${nom}[options][$option]"];//la description de l'option
-			if (isset($description_option["verifier"])) {
-				$verif_option = $description_option["verifier"];
-				$erreur_potentiel = $verifier($valeur_option,
-					$verif_option["type"],
-					$verif_option["options"], 
-					$valeur_option);// on se sert de la fonction de vérification uniquement pour faire la normalisation (soit dit en passant: pourquoi meler verification et normalisation?) puisque la vérif réelle a été faite lorsque l'utilisateur/trice a modifié les config de la saise
-			}
-		}
-		set_request("saisie_modifiee_${nom}",$saisie_modifiee);//et on modifie le request du coup
-	}
-
 	if ($enregistrer_saisie) {
 		if ($vraies_erreurs) {
 			$erreurs = array_merge($erreurs, $vraies_erreurs);
