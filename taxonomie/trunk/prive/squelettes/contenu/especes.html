@@ -1,26 +1,10 @@
 [(#AUTORISER{voir, _especes}|sinon_interdire_acces)]
 <h1 class="grostitre"><:taxonomie:titre_page_taxonomie:></h1>
 
-[(#REM) Onglets de premier niveau pour le filtrage par règne ]
-<B_regnes>
-<div class="onglets_simple">
-	<ul class="regnes">
-		[<li>
-			(#SELF
-				|parametre_url{regne, ''}
-				|lien_ou_expose{<:taxonomie:filtre_regnes_tout:>, #ENV{regne, ''}|=={''}, ajax})
-		</li>]
-<BOUCLE_regnes(TAXONS) {rang=kingdom}>
-		[<li>
-			(#SELF
-				|parametre_url{regne, #REGNE}
-				|lien_ou_expose{[(#VAL{taxonomie:regne_}|concat{#REGNE}|_T|ucfirst)], #ENV{regne}|=={#REGNE}, ajax})
-		</li>]
-</BOUCLE_regnes>
-	</ul>
-	<div class="nettoyeur"></div>
-</div>
-</B_regnes>
+
+[(#REM) Onglets pour le filtrage par règne et par indicateur d'édition ]
+<INCLURE{fond=prive/squelettes/inclure/inc-filtres_listes,
+	env} />
 
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF, ajax}
 <div class="nettoyeur"></div>

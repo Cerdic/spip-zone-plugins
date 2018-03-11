@@ -1,0 +1,44 @@
+[(#REM) Onglets de premier niveau pour le filtrage par règne ]
+<B_regnes>
+<div class="onglets_simple">
+	<ul class="regnes">
+		[<li>
+			(#SELF
+				|parametre_url{regne, ''}
+				|lien_ou_expose{<:taxonomie:filtre_regnes_tout:>, #ENV{regne, ''}|=={''}, ajax})
+		</li>]
+<BOUCLE_regnes(TAXONS) {rang=kingdom}>
+		[<li>
+			(#SELF
+				|parametre_url{regne, #REGNE}
+				|lien_ou_expose{[(#VAL{taxonomie:regne_}|concat{#REGNE}|_T|ucfirst)], #ENV{regne}|=={#REGNE}, ajax})
+		</li>]
+</BOUCLE_regnes>
+	</ul>
+	<div class="nettoyeur"></div>
+</div>
+
+[(#REM) Onglets de second niveau pour le filtrage par indicateur d'édition ]
+[(#ENV{filtres}|oui)<div class="onglets_simple second clearfix">]
+[(#VAL{edition}|in_array{#ENV{filtres, #ARRAY}}|oui)
+	<ul class="edition">
+		[<li class="first">
+			(#SELF
+				|parametre_url{edite, ''}
+				|lien_ou_expose{<:taxonomie:filtre_edite_tout:>, #ENV{edite, ''}|=={''}, ajax})
+		</li>]
+		[<li>
+			(#SELF
+				|parametre_url{edite, oui}
+				|lien_ou_expose{<:taxonomie:filtre_edite_oui:>, #ENV{edite, ''}|=={oui}, ajax})
+		</li>]
+		[<li>
+			(#SELF
+				|parametre_url{edite, non}
+				|lien_ou_expose{<:taxonomie:filtre_edite_non:>, #ENV{edite, ''}|=={non}, ajax})
+		</li>]
+	</ul>
+	<div class="nettoyeur"></div>
+]
+[(#ENV{sous_onglets}|oui)</div>]
+</B_regnes>
