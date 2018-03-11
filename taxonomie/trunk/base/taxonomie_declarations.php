@@ -119,17 +119,15 @@ function taxonomie_declarer_tables_objets_sql($tables) {
         'rechercher_champs' => array('nom_scientifique' => 10, 'nom_commun' => 10, 'auteur' => 2, 'descriptif' => 5, 'texte' => 5),
         'tables_jointures'  => array(),
         'statut_textes_instituer' => array(
-            'prepa'    => 'texte_statut_en_cours_redaction',
             'prop'     => 'texte_statut_propose_evaluation',
             'publie'   => 'texte_statut_publie',
-            'refuse'   => 'texte_statut_refuse',
             'poubelle' => 'texte_statut_poubelle',
         ),
         'statut'=> array(
             array(
                 'champ'     => 'statut',
                 'publie'    => 'publie',
-                'previsu'   => 'publie, prop, prepa',
+                'previsu'   => 'publie, prop',
                 'post_date' => 'date',
                 'exception' => array('statut', 'tout')
             )
