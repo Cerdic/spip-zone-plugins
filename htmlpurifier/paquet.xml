@@ -1,0 +1,17 @@
+<paquet
+	prefix="htmlpurifier"
+	categorie="outil"
+	version="4.10.0.0"
+	etat="stable"
+	compatibilite="[1.9.0;3.2.99]"
+	logo="htmlpurifier.png"
+	documentation="https://contrib.spip.net/HTML-Purifier,3671"
+>	
+
+	<nom>HTML Purifier</nom>
+	<!-- Sécuriser l'affichage de certains textes -->
+
+	<auteur lien="http://htmlpurifier.org/">Edward Z. Yang</auteur>
+	<auteur>Mise en plugin SPIP : RealET</auteur>
+	<auteur>Fil</auteur>
+</paquet>
