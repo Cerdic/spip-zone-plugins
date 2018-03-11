@@ -54,13 +54,26 @@ $GLOBALS['itis_language'] = array(
 	 * Variable globale de configuration de la correspondance entre langue ITIS
 	 * et code de langue SPIP. La langue du service est l'index, le code SPIP est la valeur.
 	 */
-	'french'     => 'fr',
+	'afrikaans'  => 'af',
+	'arabic'     => 'ar',
+	'chinese'    => 'zh',
+	'dutch'      => 'nl',
 	'english'    => 'en',
-	'spanish'    => 'es',
+	'fijan'      => 'fj',
+	'french'     => 'fr',
 	'german'     => 'de',
+	'greek'      => 'el',
+	'hausa'      => 'ha',
+	'hindi'      => 'hi',
+	'icelandic'  => 'is',
+	'japanese'   => 'ja',
+	'korean'     => 'ko',
 	'italian'    => 'it',
-	'portuguese' => 'pt'
+	'malagasy'   => 'mg',
+	'portuguese' => 'pt',
+	'spanish'    => 'es',
 );
+
 $GLOBALS['itis_webservice'] = array(
 	/**
 	 * Variable globale de configuration de l'api des actions du service web ITIS
