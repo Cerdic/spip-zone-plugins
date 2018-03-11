@@ -10,7 +10,8 @@
 		]
 	]
 
-	<h1>(#NOM_SCIENTIFIQUE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{espece-24.png}|balise_img{espece,cadre-icone})]</h1>
+	<h1 class="nom_scientifique">(#NOM_SCIENTIFIQUE|sinon{<:info_sans_titre:>}|ucfirst)[(#CHEMIN_IMAGE{espece-24.png}|balise_img{espece,cadre-icone})]</h1>
+	[<h2 class="soustitre #EDIT{soustitre}">(#NOM_COMMUN|extraire_multi{#LANG, #ARRAY{lang_defaut, aucune}}|ucfirst)</h2>]
 
 ],simple fiche_objet})]
 
@@ -21,7 +22,12 @@
 <!--affiche_milieu-->
 
 <div id="wysiwyg">
-<INCLURE{fond=prive/objets/contenu/espece,id=#ID_ESPECE,id_espece=#ID_ESPECE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+<INCLURE{fond=prive/objets/contenu/espece,
+	id=#ID_ESPECE,
+	id_espece=#ID_ESPECE,
+	virtuel=oui,
+	ajax=wysiwyg,
+	wysiwyg=1} />
 </div>
 
 <div class="nettoyeur"></div>
@@ -36,15 +42,13 @@
 ]
 
 #PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,espece,id,#ID_ESPECE},data,'<div class="nettoyeur"></div>'}}
-
 #BOITE_FERMER
-
 
 #SET{enfants,''}
 [(#VAL{prive/objets/contenu/espece-enfants}|trouver_fond|oui)
-	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/espece-enfants,id_espece,env})]})]
+	[(#SET{enfants, [(#INCLURE{fond=prive/objets/contenu/espece-enfants, id_espece, env})]})]
 ]
-[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,espece,id_espece,#ID_ESPECE,objet,espece,id_objet,#ID_ESPECE},data,#GET{enfants}})]})]
+[(#PIPELINE{affiche_enfants, [(#ARRAY{args, #ARRAY{exec, espece, objet, espece, id_objet, #ID_ESPECE}, data, #GET{enfants}})]})]
 
 [(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>

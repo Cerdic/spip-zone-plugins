@@ -50,5 +50,3 @@ function formulaires_configurer_taxonomie_verifier() {
 
 	return $erreurs;
 }
-
-?>

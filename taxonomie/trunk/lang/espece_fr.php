@@ -18,9 +18,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_regne_label' => 'Regne',
 	'champ_sources_label' => 'Sources',
 	'champ_texte_label' => 'Texte explicatif sur l\'espèce',
-	'champ_tsn_genre_label' => 'TSN du parent de l\'espèce',
-	'champ_tsn_label' => 'TSN',
-	'champ_tsn_parent_label' => 'TSN parent',
+	'champ_objet_genre_label' => 'Type d\'objet du parent de l\'espèce',
+	'champ_tsn_label' => 'Identifiant ITIS',
+	'champ_tsn_parent_label' => 'Taxon parent',
 
 	// I
 	'icone_creer_espece' => 'Créer une espèce',

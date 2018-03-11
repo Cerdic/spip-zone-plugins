@@ -1,0 +1,13 @@
+[(#REM) <!-- Liste des descendants directs de l'espèce --> ]
+<BOUCLE_enfants_espece(ESPECES) {id_espece}>
+	[(#SET{inclusion, [(#VAL{tsn_parent=}|concat{#TSN})]})]
+	[(#INCLURE{fond=prive/objets/liste/especes,
+		titre=<:taxonomie:titre_liste_fils_taxon:>,
+		par=nom_scientifique,
+		nb=10,
+		where=#GET{inclusion},
+		statut=prop,
+		classe=enfants,
+		ajax,
+		env})]
+</BOUCLE_enfants_espece>
