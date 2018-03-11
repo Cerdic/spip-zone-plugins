@@ -169,7 +169,7 @@ function formulaires_decrire_taxon_traiter($id_taxon) {
 
 	// Récupération de la page wikipedia choisie:
 	include_spip('services/wikipedia/wikipedia_api');
-	if ($choix_descriptif == $taxon['nom_scientifique']) {
+	if (strtolower($choix_descriptif) == strtolower($taxon['nom_scientifique'])) {
 		// Le descriptif déjà fourni par défaut est le bon. On ne met pas à jour le cache.
 		$recherche = array('name' => $taxon['nom_scientifique'], 'tsn' => $taxon['tsn']);
 		$information = wikipedia_get_page($recherche, $langue);

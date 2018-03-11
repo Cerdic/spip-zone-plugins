@@ -28,7 +28,7 @@ Les parametres d'environnement specifiques sont :
 	<BOUCLE_liste_regnes(TAXONS) {rang=kingdom}{where?}{tri #ENV{par, nom_scientifique}, #GET{defaut_tri}}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
 				<td class="logo">
-					[(#CHEMIN_IMAGE{[regne_(#NOM_SCIENTIFIQUE)-32.png]}
+					[(#CHEMIN_IMAGE{[regne_(#NOM_SCIENTIFIQUE|strtolower)-32.png]}
 						|image_reduire{20,26}
 						|inserer_attribut{alt, logo})]
 				</td>
@@ -39,11 +39,11 @@ Les parametres d'environnement specifiques sont :
 				</td>
 				<td class="titre" scope="col">[(#NOM_COMMUN|extraire_multi{#LANG, #ARRAY{lang_defaut, aucune}})]</td>
 				<td class="descriptif">
-					#SET{meta_regne, #CONFIG{taxonomie_#NOM_SCIENTIFIQUE}}
+					[(#SET{meta_regne, [(#CONFIG{taxonomie_[(#NOM_SCIENTIFIQUE|strtolower)]})]})]
 					<div>[(#VAL{taxonomie:info_regne_compteur_taxons}|_T{#ARRAY{nb, #GET{meta_regne/compteur}}})]</div>
 					<ul class="spip">
 					<BOUCLE_traductions(DATA) {source table, #GET{meta_regne/traductions/itis}}>
-						#SET{nb, #VALEUR|table_valeur{compteur}}
+						#SET{nb, #VALEUR{compteur}}
 						<li><:taxonomie:info_regne_compteur_traductions{nb=#GET{nb}, langue=#CLE}:></li>
 					</BOUCLE_traductions>
 					</ul>
