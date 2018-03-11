@@ -34,7 +34,7 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="picto">[(#CHEMIN_IMAGE{espece-16.png}|balise_img)]</td>
 			<td class="statut">[(#STATUT|puce_statut{espece,#ID_ESPECE})]</td>
-			<td class="titre principale nom_scientifique">[(#LOGO_ESPECE|image_reduire{20,26})]<a href="[(#ID_ESPECE|generer_url_entite{espece})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ESPECE">[(#RANG). ]#NOM_SCIENTIFIQUE</a></td>
+			<td class="titre principale nom_scientifique">[(#LOGO_ESPECE|image_reduire{20,26})]<a href="[(#ID_ESPECE|generer_url_entite{espece})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ESPECE">#NOM_SCIENTIFIQUE</a></td>
 			<td class="nom">[(#NOM_COMMUN|extraire_multi{#LANG, #ARRAY{lang_defaut, aucune}})]</td>
 			<td class="rang">[(#VAL{taxonomie:rang_}|concat{#RANG}|_T)]</td>
 			<td class="regne nom_scientifique">[(#REGNE)]</td>

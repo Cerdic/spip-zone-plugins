@@ -275,7 +275,7 @@ function formulaires_creer_espece_verifier_2() {
 				break;
 			}
 		}
-		krsort($parents);
+		$parents = array_reverse($parents);
 		set_request('_parents', $parents);
 	} else {
 		$erreurs['message_erreur'] = _T('taxonomie:erreur_espece_tsn_invalide');
@@ -298,31 +298,96 @@ function formulaires_creer_espece_verifier_2() {
  * 		d'erreur. L'indicateur editable est toujours à vrai.
  */
 function formulaires_creer_espece_traiter() {
+
+	// Initialisation du retour de la fonction
 	$retour = array();
 
 	if ($tsn = intval(_request('tsn'))) {
-		// Récupération des informations ITIS sur l'espèce choisie et son parent.
-		$espece = _request('_espece');
-		$parents = _request('_parents');
+		// Récupération de la liste des champs des tables spip_taxons et spip_especes.
+		include_spip('base/objets');
+		$description_table = lister_tables_objets_sql('spip_taxons');
+		$champs['spip_taxons'] = $description_table['field'];
+		$description_table = lister_tables_objets_sql('spip_especes');
+		$champs['spip_especes'] = $description_table['field'];
 
-		// Vérification de l'existence du parent.
-		// Si le parent n'existe pas en base c'est soit une erreur si le rang supérieur ou égal au genre soit
-		// normal si le rang est un sous-genre. En effet, les sous-genres sont uniquement créés au coups par coups
-		// quand on crée les espèces car il ne sont jamais chargés avec le règne.
-		if (sql_countsel('spip_taxons', array('tsn=' . $tsn))) {
-			$erreurs['message_erreur'] = _T('taxonomie:erreur_espece_deja_creee');
+		// On range la liste des taxons de plus haut rang (genre) à celui de plus petit rang et on ajoute le
+		// taxon espèce en fin de liste.
+		$taxons = _request('_parents');
+		$taxons[] = _request('_espece');
+
+		// On boucle d'abord sur les parents si nécessaire et ensuite sur l'espèce.
+		// De cette façon, on évite d'avoir une base incohérente où un taxon de rang inférieur existerait
+		// sans son parent direct.
+		// L'espèce concernée est identifiée car son enregistrement ne contient pas les index deja_cree et est_espece.
+		$erreurs = array();
+		$parents = array();
+		$espece = array();
+		foreach ($taxons as $_index => $_taxon) {
+			if (empty($_taxon['deja_cree'])) {
+				// Le genre est le premier parent de la liste ainsi triée et est forcément déjà créé.
+  				// Les parents non créés sont donc soit des taxons comme les sous-genres etc, soit un taxon de rang
+				// espèce ou inférieur.
+				// -- On récupère le bloc des informations ITIS du taxon à créer et sa table de destination.
+				if (isset($_taxon['deja_cree'])) {
+					// C'est un ascendant de l'espèce
+					$taxon = itis_get_record($_taxon['tsn']);
+					$table = $_taxon['est_espece'] ? 'spip_especes' : 'spip_taxons';
+				} else {
+					// C'est l'espèce
+					$taxon = $_taxon;
+					$table = 'spip_especes';
+				}
+				// -- On ne retient que les index correspondant à des champs de la table concernée.
+				$taxon = array_intersect_key($taxon, $champs[$table]);
+
+				// On formate le nom commun en multi.
+				$nom_multi = '';
+				foreach ($taxon['nom_commun'] as $_langue => $_nom) {
+					$nom_multi .= '[' . $_langue . ']' . trim($_nom);
+				}
+				if ($nom_multi) {
+					$nom_multi = '<multi>' . $nom_multi . '</multi>';
+				}
+				$taxon['nom_commun'] = $nom_multi;
+
+				// Ajout du type d'objet du parent.
+				$taxon['objet_parent'] = $taxons[$_index - 1]['est_espece'] ? 'espece' : 'taxon';
+
+				// Finalisation de l'enregistrement du taxon suivant son rang (ie. sa table).
+				if (isset($_taxon['est_espece']) and !$_taxon['est_espece']) {
+					// Pour les taxons de rang supérieur à une espèce, on positionne les indicateurs d'édition
+					// et d'importation.
+					$taxon['edite'] = 'non';
+					$taxon['importe'] = 'non';
+				} else {
+					// Pour les taxons espèce et de rang inférieur, on positionne le statut à prop (pas de publication
+					// par défaut).
+					$taxon['statut'] = 'prop';
+				}
+
+				// Insertion du taxon dans la table idoine.
+				$id_taxon = sql_insertq($table, $taxon);
+				if ($id_taxon) {
+					if (!isset($_taxon['deja_cree'])) {
+						$id_espece = $id_taxon;
+						$espece = $taxon;
+					} else {
+						$parents[] = $taxon;
+					}
+				} else {
+					// En cas d'erreur on sort de la boucle pour éviter de créer des taxons sans parent.
+					$erreurs[] = $taxon;
+					break;
+				}
+			}
 		}
 
-
-		// Ajout de l'espèce en base
-		// Si le rang est bien espèce alors on ajoute que ce taxon. Sinon il faut ajouter toute l'arborecence jusqu'au
-		// taxon d'espèce.
-
-		// Ajout du parent si nécessaire.
-
-		// Redirection vers la page d'édition du taxon
-		$id_espece = 0;
-		$retour['redirect'] = parametre_url(generer_url_ecrire('espece_edit'), 'id_espece', $id_espece);
+		if ($erreurs) {
+			$retour['message_erreur'] = _T('taxonomie:erreur_inconnue');
+		} else {
+			// Redirection vers la page d'édition du taxon
+			$retour['redirect'] = parametre_url(generer_url_ecrire('espece_edit'), 'id_espece', $id_espece);
+		}
 	} else {
 		$retour['message_erreur'] = _T('taxonomie:erreur_inconnue');
 	}
