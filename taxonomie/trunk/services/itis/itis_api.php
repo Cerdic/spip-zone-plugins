@@ -323,7 +323,7 @@ function itis_search_tsn($action, $search, $strict = true) {
  *
  * @return array
  *        Si le taxon est trouvé, le tableau renvoyé possède les index associatifs suivants:
- *        - `nom_scientique`    : le nom scientifique du taxon en minuscules
+ *        - `nom_scientifique`  : le nom scientifique complet du taxon tel qu'il doit être affiché (avec capitales).
  *        - `rang`              : le nom anglais du rang taxonomique du taxon
  *        - `regne`             : le nom scientifique du règne du taxon en minuscules
  *        - `tsn_parent`        : le TSN du parent du taxon ou 0 si le taxon est un règne
@@ -604,7 +604,7 @@ function itis_read_hierarchy($kingdom, $ranks_hierarchy, &$sha_file) {
 		$rank_list = implode('|', array_map('ucfirst', array_keys($ranks)));
 		$regexp = str_replace('%rank_list%', $rank_list, _TAXONOMIE_ITIS_REGEXP_RANKNAME);
 
-		$file = find_in_path('services/itis/' . ucfirst($kingdom) . '_Genus.txt');
+		$file = find_in_path("services/itis/${kingdom}_genus.txt");
 		if (file_exists($file) and ($sha_file = sha1_file($file))) {
 			$lines = file($file);
 			if ($lines) {
@@ -628,8 +628,10 @@ function itis_read_hierarchy($kingdom, $ranks_hierarchy, &$sha_file) {
 					);
 					if (preg_match($regexp, $_line, $match)) {
 						// Initialisation du taxon
+						// -- rang et nom scientifique en minuscules
 						$taxon['rang'] = strtolower($match[1]);
-						$taxon['nom_scientifique'] = strtolower($match[2]);
+						$taxon['nom_scientifique'] = $match[2];
+						// -- Importer le nom de l'auteur qui est en ISO-8859-1 dans le charset du site
 						$taxon['auteur'] = trim(importer_charset(trim($match[4]), 'iso-8859-1'), '[]');
 						$tsn = intval($match[5]);
 						$taxon['tsn'] = $tsn;
