@@ -1,8 +1,10 @@
 <?php
-// Ceci est un fichier langue de SPIP  --  This is a SPIP language file
+
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 	// A
 	'aide_choix_champs' => 'Liste des noms des champs SQL séparés par des ","<br/><em>Laisser vide pour sélectionner tous les champs principaux.</em>',
 	'action_dupliquer_article' => "Dupliquer cet article",
@@ -15,8 +17,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'autorisations_rubriques' => 'Qui peut dupliquer des rubriques&nbsp;?',
 	'autorisations_webmestre_label' => 'Webmestre uniquement',
 	
-	
-	
 	// B
 	'bouton_confirmer' => 'Confirmer',
 	'bouton_confirmer_rub' => "Tout dupliquer (arborescence+articles)",
@@ -25,8 +25,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'choix_type' => 'Sélectionner le ou les mode(s) de duplication',
 	'choix_champs' => 'Choisir les champs à dupliquer',
-
-	'configuration_duplicator' => 'Configuration de Duplicator',
+	'configurer_champs_label' => 'Champs à dupliquer',
+	'configurer_objets_label' => 'Contenus à dupliquer',
+	'configurer_personnaliser_champs_label' => 'Personnaliser les champs à dupliquer pour ces contenus',
+	'configurer_titre' => 'Configuration de Duplicator',
 
 	// D
 	'dupli_art' => "Duplication sur les articles",
