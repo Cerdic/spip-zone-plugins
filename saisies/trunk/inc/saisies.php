@@ -274,7 +274,7 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 			// S'il n'y a pas d'erreur et que la variable de normalisation a été remplie, on l'injecte dans le POST
 			elseif (!is_null($normaliser) and $verifier['type'] != 'fichiers') {
 			// Si le nom du champ est un tableau indexé, il faut parser !
-				if (preg_match('/([\w]+)((\[[\w]+\])+)/', $champ, $separe)) {
+				if (preg_match('/([\w]+)((\[[\w]+\])+)/', $champ, $separe)) {//même regexp que plus haut, sur mêmes variables. Mais je (Maïeul) préfére faire une duplication car c'est vraiment un code éloigné. Des fois qu'un futur commit changerait la valeur de $separe entre les deux...
 					$nom_champ_principal = $separe[1];
 					$champ_principal  = _request($nom_champ_principal);
 					$enfant = &$champ_principal;
