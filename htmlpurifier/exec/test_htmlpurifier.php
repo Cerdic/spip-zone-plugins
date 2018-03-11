@@ -24,7 +24,7 @@ Certains attributs typographiques ne peuvent s'appliquer qu'à des paragraphes e
 
 Dans la Barre Typographique de SPIP, les attributs de caractères forment le premier groupe sur la gauche, les attributs typographiques de paragraphes le deuxième.[definition_ancre<-]
 
-{2{Paragraphes}2}
+{{{**Paragraphes}}}
 
 Un paragraphe dans SPIP est précédé d'une ligne vide et suivi d'une ligne vide[[Sauf les listes à puce et les tableaux]].
 
@@ -68,7 +68,7 @@ Les retour à la ligne simples aussi !
 
 <quote>C'est en forgeant que l'on devient forgeron.</quote>
 
-{2{Caractères}2}
+{{{**Caractères}}}
 
 Les attributs de caractères {{doivent}} être ouverts et fermés à l'intérieur du même paragraphe (pas question de débuter le gras sur un premier paragraphe et de le terminer sur un deuxième).
 
@@ -95,13 +95,13 @@ _ À noter qu'il est possible de faire des liens à l'intérieur du site SPIP à
 _ Avec bulle d'aide : <code>[?GPL|Définition sur Wikipédia]</code> : [?GPL|Définition sur Wikipédia]
 -* note de bas de page : <code>texte[[note de bas de page]]</code> : crée une note de bas de page avec le texte entre les doubles crochets[[Et la note de bas de page est automatiquement numérotée, rendue clicable, pour la consulter, et pour revenir au texte l'ayant appelée]]
 
-{2{Listes}2}
+{{{**Listes}}}
 
 Les listes sont à utiliser pour tout ce qui à le {{sens}} d'une énumération.
 
 {{Attention}}: il faut entourer un bloc de listes à puces d'une ligne vide avant et après.
 
-{3{Listes à puces}3}
+{{{***Listes à puces}}}
 
 <cadre>
 -* première ligne
@@ -117,7 +117,7 @@ Donnera :
 -** une sous liste à puce
 -* de retour dans le niveau initial
 
-{3{Listes numérotées}3}
+{{{***Listes numérotées}}}
 
 <cadre>
 -# première ligne
@@ -133,7 +133,7 @@ Donnera :
 -## une sous liste numérotée
 -# de retour dans le niveau initial
 
-{2{Tableaux}2}
+{{{**Tableaux}}}
 
 Pour être complètement accessible, un tableau dans SPIP doit avoir un titre et une description.
 
@@ -162,7 +162,7 @@ Notez les doubles <code>||</code> sur la première ligne du tableau !
 -* ne pas avoir le même nombre de | sur une ligne
 -* avoir un espace {{après}} le dernier | de la ligne (un moyen simple de vérifier : la touche fin du clavier amène à la fin de la ligne)
 
-{2{Tableaux avec fusion de cellules}2}
+{{{**Tableaux avec fusion de cellules}}}
 
 <cadre>
 ||Tableau avec fusion|Ce tableau sert d'exemple de mise en forme spip||
@@ -218,21 +218,21 @@ _ Usage {{[*interdit*]}}: pour mettre plus d'espace vertical entre deux élémen
 
 <code>{</code><code>{{</code>Exemples de titraille : Titre principal<code>}}</code><code>}</code>
 
-{2{Titre niveau deux}2}
+{{{**Titre niveau deux}}}
 
-<code>{</code><code>2{</code>Titre niveau deux<code>}2</code><code>}</code>
+<code>{{{**</code>Titre niveau deux<code>}}}</code>
 
-{3{Titre niveau trois}3}
+{{{***Titre niveau trois}}}
 
-<code>{</code><code>3{</code>Titre niveau trois<code>}3</code><code>}</code>
+<code>{{{***</code>Titre niveau trois<code>}}}</code>
 
-{4{Titre niveau quatre}4}
+{{{****Titre niveau quatre}}}
 
-<code>{</code><code>4{</code>Titre niveau quatre<code>}4</code><code>}</code>
+<code>{{{****</code>Titre niveau quatre<code>}}}</code>
 
-{5{Titre niveau cinq}5}
+{{{*****Titre niveau cinq}}}
 
-<code>{</code><code>5{</code>Titre niveau cinq<code>}5</code><code>}</code>";
+<code>{{{*****</code>Titre niveau cinq<code>}}}</code>";
 	$time_start = microtime(true);
 	for ($i = 1; $i <= 1; $i++) {
 		$resultat = safehtml(propre($texte));
