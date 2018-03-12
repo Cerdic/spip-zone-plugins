@@ -63,6 +63,23 @@ function formulaires_configurer_duplicator_saisies_dist() {
 					);
 				}
 				
+				// S'il y a des statuts
+				if (isset($declaration_objet['statut_textes_instituer']) and $statuts = $declaration_objet['statut_textes_instituer']) {
+					foreach ($statuts as $statut=>$lang) {
+						$statuts[$statut] = _T($lang);
+					}
+					$groupe_objet['saisies'][] = array(
+						'saisie' => 'selection',
+						'options' => array(
+							'nom' => "${table_objet}[statut]",
+							'label' => _T('duplicator:configurer_statut_label'),
+							'option_intro' => _T('duplicator:configurer_statut_option_intro'),
+							'data' => $statuts,
+							'defaut' => isset($config[$table_objet]['statut']) ? $config[$table_objet]['statut'] : '',
+						),
+					);
+				}
+				
 				$saisies[] = $groupe_objet;
 			}
 		}

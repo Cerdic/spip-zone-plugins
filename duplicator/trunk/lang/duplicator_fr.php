@@ -29,6 +29,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_objets_label' => 'Contenus à dupliquer',
 	'configurer_personnaliser_champs_label' => 'Personnaliser les champs à dupliquer pour ces contenus',
 	'configurer_titre' => 'Configuration de Duplicator',
+	'configurer_statut_label' => 'Statut après duplication',
+	'configurer_statut_option_intro' => 'Garder le même',
 
 	// D
 	'dupli_art' => "Duplication sur les articles",
