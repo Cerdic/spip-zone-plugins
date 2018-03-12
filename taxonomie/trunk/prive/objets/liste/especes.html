@@ -6,12 +6,13 @@
 	regne,1,
 	tsn,1,
 	points,-1
-}})]<B_liste_especes>
+}})]
+<B_liste_especes>
 #ANCRE_PAGINATION
 <div class="liste-objets especes[ (#ENV{classe})]">
 <table class="spip liste">
-	[(#SET{un, #ENV*{info_1, taxon:info_1_espece}})]
-	[(#SET{nb, #ENV*{info_nb, taxon:info_nb_especes}})]
+	[(#SET{un, #ENV*{info_1, espece:info_1_espece}})]
+	[(#SET{nb, #ENV*{info_nb, espece:info_nb_especes}})]
 	[<caption>
 		<strong class="caption">
 			(#ENV*{titre, #GRAND_TOTAL|singulier_ou_pluriel{#GET{un}, #GET{nb}}})
@@ -30,7 +31,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_especes(ESPECES){regne?}{rang?}{statut?}{where?}{recherche?}{tri #ENV{par, nom_scientifique},#GET{defaut_tri}}{par nom_scientifique}{pagination #ENV{nb,10}}>
+<BOUCLE_liste_especes(ESPECES){regne?}{rang?}{statut?}{where?}{recherche?}{tri #ENV{par, nom_scientifique},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="picto">[(#CHEMIN_IMAGE{espece-16.png}|balise_img)]</td>
 			<td class="statut">[(#STATUT|puce_statut{espece,#ID_ESPECE})]</td>
@@ -40,11 +41,11 @@
 			<td class="regne nom_scientifique">[(#REGNE)]</td>
 			<td class="numero">[(#TSN)]</td>
 			<td class="id">[(#AUTORISER{modifier,espece,#ID_ESPECE}|?{
-				<a href="[(#URL_ECRIRE{espece_edit,id_espece=#ID_ESPECE})]">#ID_ESPECE</a>,
+				<a href="[(#URL_ECRIRE{espece_edit, id_espece=#ID_ESPECE})]">#ID_ESPECE</a>,
 				#ID_ESPECE
 			})]</td>
 		</tr>
-	</BOUCLE_liste_especes>
+</BOUCLE_liste_especes>
 	</tbody>
 </table>
 [<p class="pagination">(#PAGINATION{prive})</p>]
