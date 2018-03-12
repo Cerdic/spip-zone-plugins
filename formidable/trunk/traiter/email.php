@@ -114,12 +114,20 @@ function traiter_email_dist($args, $retours) {
 					vue_fichier_to_tableau_facteur($valeurs[$champ])
 				);
 			} else {
+				// On récupère la valeur postée
 				$valeurs[$champ] = _request($champ);
-				if(isset($saisies_par_nom[$champ]['options']['datas'])) {
-					$valeurs_champ = saisies_aplatir_tableau(saisies_chaine2tableau($saisies_par_nom[$champ]['options']['datas']));
-					$valeurs_libellees[$champ] = $valeurs_champ[_request($champ)];
-				} else {
-					$valeurs_libellees[$champ] = _request($champ);
+				
+				// Si la saisie est une liste de choix avec des clés et labels humains, on cherche le label humain
+				if (
+					isset($saisies_par_nom[$champ]['options']['datas'])
+					and $labels_data = saisies_aplatir_tableau(saisies_chaine2tableau($saisies_par_nom[$champ]['options']['datas']))
+					and isset($labels_data[$valeurs[$champ]])
+				) {
+					$valeurs_libellees[$champ] = $labels_data[$valeurs[$champ]];
+				}
+				// Sinon on utilise directement la valeur postée
+				else {
+					$valeurs_libellees[$champ] = $valeurs[$champ];
 				}
 			}
 		}
