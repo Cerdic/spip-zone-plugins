@@ -58,6 +58,10 @@ function spip_foundation() {
         });
     });
 
+	$(".tabs").on("change.zf.tabs", function () {
+		map1.invalidateSize();
+	});
+
     // Restaurer le deeplinking des tab Foundation (pour les version < 6.3.1)
     // En attendant que la fonction soit de retour officiellement
     var version = Foundation.version.split(".");
@@ -79,7 +83,7 @@ onAjaxLoad(function() {
 });
 
 [(#CHEMIN{javascript/foundation_perso.js.html}|oui)
-[(#PRODUIRE{fond=javascript/foundation_perso.js}|supprimer_timestamp|file_get_contents)]
+[(#PRODUIRE{fond=javascript/foundation_perso.js}|appliquer_filtre{supprimer_timestamp}|file_get_contents)]
 ]
 
 [(#PLUGIN{crayons}|non)
