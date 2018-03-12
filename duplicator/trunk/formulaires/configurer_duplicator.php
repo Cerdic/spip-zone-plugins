@@ -48,7 +48,7 @@ function formulaires_configurer_duplicator_saisies_dist() {
 						'options' => array(
 							'nom' => "${table_objet}[personnaliser_champs]",
 							'label_case' => _T('duplicator:configurer_personnaliser_champs_label'),
-							'defaut' => (isset($config[$table_objet]['champs']) and $config[$table_objet]['champs']) ? 'on' : '',
+							'valeur_forcee' => (isset($config[$table_objet]['champs']) and $config[$table_objet]['champs']) ? 'on' : '',
 						),
 					);
 					$groupe_objet['saisies'][] = array(
