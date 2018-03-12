@@ -121,7 +121,7 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
 	}
 
 	if ($cadre == 'cadre' OR $englobant=="div") {
-	 	$geshi->set_header_type(GESHI_HEADER_PRE);
+	 	$geshi->set_header_type(GESHI_HEADER_DIV);
 		$geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
 	} else {
 		$geshi->set_header_type(GESHI_HEADER_NONE);
