@@ -155,6 +155,7 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
  * @return string $ret
  */
 function cadre_ou_code($regs) {
+
 	// pour l'instant, on oublie $matches[1] et $matches[4] les attributs autour de class="machin"
 	if (preg_match(',^(.*)class=("|\')(.*)\2(.*)$,Uims',$regs[2], $matches)){
 		$englobant = "div";
@@ -162,6 +163,11 @@ function cadre_ou_code($regs) {
 			$englobant = "span";
 		if ($ret = coloration_code_color($regs[3], $matches[3], $regs[1], $englobant))
 			return $ret;
+	} else {
+		// traiter les <cadre> sans class par precode pour ne pas générer de <textarea>
+		if ($regs[1]=="cadre" && defined('_DIR_PLUGIN_PRECODE') && _DIR_PLUGIN_PRECODE) {
+			return precode_balisage_code('class=""', trim($regs[3]));
+		}
 	}
 
 	if ($regs[1] == 'code')
