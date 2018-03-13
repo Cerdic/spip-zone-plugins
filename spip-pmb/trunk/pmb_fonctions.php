@@ -1108,6 +1108,8 @@ function pmb_webservice() {
 		else {
 			include_spip('inc/jsonRPCClient');
 			$ws = new jsonRPCClient(lire_config("spip_pmb/jsonrpc", ""), false);
+			$ws->setAuthenticationType("http");// quelles sont les autres methodes...
+			$ws->setCredentials(lire_config("spip_pmb/jsonrpc_user", ""),lire_config("spip_pmb/jsonrpc_pw", ""));
 		}
 	}
 	catch (Exception $e) {

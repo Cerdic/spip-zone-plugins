@@ -81,6 +81,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// J
 	'jsonrpc' => 'JSON-RPC zerbitzuaren helbidea',
+	'jsonrpc_user' => 'Nom de l’utilisateur JSON-RPC externe',
+	'jsonrpc_pw' => 'Mot de passe',
 
 	// L
 	'lire_la_suite' => 'segida irakurri',

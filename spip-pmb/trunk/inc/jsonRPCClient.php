@@ -78,6 +78,13 @@ class jsonRPCClient {
 	 * @var authentication_password string
 	 */
 	private $authentication_password = '';
+			
+	/**
+	 * Timeout allowed for http request
+	 * 
+	 * @var timeout int
+	 */
+	private $timeout = '';
 	
 	/**
 	 * Takes the connection parameters
@@ -120,6 +127,17 @@ class jsonRPCClient {
 							$this->notification = false
 							:
 							$this->notification = true;
+	}
+	
+	/**
+	 * Sets param timeout
+	 *
+	 * @param boolean $notification
+	 */
+	public function setTimeout($timeout) {
+		if($timeout*1){
+			$this->timeout=$timeout*1;
+		}
 	}
 	
 	/**
@@ -171,6 +189,9 @@ class jsonRPCClient {
 							'header'  => 'Content-type: application/json',
 							'content' => $request
 							));
+							
+		if($this->timeout) $opts['http']['timeout'] = $this->timeout;
+		
 		if ($this->authentication_type == 'http') {
 			$opts['http']['header'] .= sprintf("\r\nAuthorization: Basic %s", base64_encode($this->authentication_user.':'.$this->authentication_password));
 		}
@@ -185,6 +206,7 @@ class jsonRPCClient {
 		} else {
 			throw new Exception('Unable to connect to '.$this->url);
 		}
+		fclose($fp);
 		
 		// debug output
 		if ($this->debug) {
@@ -208,4 +230,3 @@ class jsonRPCClient {
 		}
 	}
 }
-?>
