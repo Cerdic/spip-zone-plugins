@@ -43,6 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_campagne' => 'Aucune publicité',
 	'info_nb_campagnes' => '@nb@ publicités',
 	'info_campagnes_auteur' => 'Les publicités de cet auteur',
+	'info_dates_publication' => 'Publication',
 
 	// R
 	'retirer_lien_campagne' => 'Retirer cette publicité',
@@ -69,5 +70,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_campagnes' => 'Publicités',
 	'titre_campagnes_rubrique' => 'Publicités de la rubrique',
 );
-
-?>

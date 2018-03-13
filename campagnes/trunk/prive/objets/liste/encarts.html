@@ -11,6 +11,7 @@
 		<tr class='first_row'>
 			<th class='titre' scope='col'>[(#TRI{titre,<:encart:champ_titre_label:>,ajax})]</th>
 			<th class='nb' scope='col'><:encart:info_nb_campagnes_total:></th>
+			<th class='apercu' scope='col'>Aperçu</th>
 			<th class='id' scope='col'>[(#TRI{id_encart,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
@@ -18,7 +19,14 @@
 	<BOUCLE_liste_encarts(ENCARTS){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='titre principale'>[(#LOGO_ENCART|image_reduire{20,26})]<a href="[(#ID_ENCART|generer_url_entite{encart})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ENCART (#IDENTIFIANT)">[(#RANG). ]#TITRE</a></td>
-			<td class="nb"><BOUCLE_nbpub(CAMPAGNES){id_encart}/><strong>#TOTAL_BOUCLE</strong><//B_nbpub><BOUCLE_nbpubtotal(CAMPAGNES){id_encart}{tout}/>[ (#TOTAL_BOUCLE|>{0}|oui)\(#TOTAL_BOUCLE\)]<//B_nbpubtotal></td>
+			<td class="nb"><BOUCLE_nbpub(CAMPAGNES){id_encart}/><strong>#TOTAL_BOUCLE</strong><//B_nbpub><BOUCLE_nbpubtotal(CAMPAGNES){id_encart}{tout}/>[ (#TOTAL_BOUCLE|>{0}|oui)/ #TOTAL_BOUCLE]<//B_nbpubtotal></td>
+			<td>
+				<BOUCLE_apercu_campagne(CAMPAGNES){id_encart}{statut=publie}{0,1}{!par date_fin}>
+				<BOUCLE_media(DOCUMENTS){id_campagne}{0,1}{tout}>
+				[(#FICHIER|image_reduire{50})]
+				</BOUCLE_media>
+				</BOUCLE_apercu_campagne>
+			</td>
 			<td class='id'>[(#AUTORISER{modifier,encart,#ID_ENCART}|?{
 				<a href="[(#URL_ECRIRE{encart_edit,id_encart=#ID_ENCART})]">#ID_ENCART</a>,
 				#ID_ENCART
