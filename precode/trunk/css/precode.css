@@ -51,6 +51,8 @@ pre[class]::before {
 pre code {
   display: block;
   background: transparent;
+  -moz-tab-size: 4;
+  tab-size: 4;
 }
 
 /* bouton de copie */
