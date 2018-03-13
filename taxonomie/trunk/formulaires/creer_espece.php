@@ -71,12 +71,12 @@ function formulaires_creer_espece_charger() {
 	reset($valeurs['_regnes']);
 	$valeurs['_regne_defaut'] = key($valeurs['_regnes']);
 
-	// Initialisation des paramètres du formulaire utilisés en étape 2 et 3 et mis à jour dans la vérification
-	// de l'étape 1.
-	// -- Etape 2
+	// Initialisation des paramètres du formulaire utilisés en étape 2 et 3 et mis à jour dans les vérifications
+	// de l'étape 1 et 2.
+	// -- Etape 2 (vérification 1)
 	$valeurs['_taxons'] = _request('_taxons');
 	$valeurs['_taxon_defaut'] = _request('_taxon_defaut');
-	// -- Etape 3
+	// -- Etape 3 (vérification 2)
 	$valeurs['tsn'] = _request('tsn');
 	$valeurs['_espece'] = _request('_espece');
 	$valeurs['_parents'] = _request('_parents');
@@ -108,8 +108,10 @@ function formulaires_creer_espece_verifier_1() {
 	// Si on a déjà choisi une langue, on peut accéder à Wikipedia avec le nom scientifique et retourner
 	// les pages trouvées (étape 2).
 	if ($recherche = trim(_request('recherche'))) {
-		// On récupère le type de recherche.
+		// On récupère le type de recherche et la correspondance.
 		$type_recherche = _request('type_recherche');
+		$correspondance = _request('correspondance');
+		$recherche_exacte = ($correspondance == 'exact');
 
 		// Si la recherche est de type nom common on ne peut rien vérifier sur le texte.
 		// Si la recherche est de type nom scientifique, on vérifie que le texte de recherche :
@@ -119,7 +121,7 @@ function formulaires_creer_espece_verifier_1() {
 		$recherche_conforme = true;
 		if ($type_recherche == 'scientificname') {
 			$nombre_mots = preg_match_all('#\w+#', $recherche, $mots);
-			if ($nombre_mots < 2) {
+			if (($nombre_mots < 2) and ($recherche_exacte)) {
 				$recherche_conforme = false;
 			} elseif ($nombre_mots == 2) {
 				if ((strtolower($mots[0][1]) == 'x')
@@ -131,9 +133,7 @@ function formulaires_creer_espece_verifier_1() {
 
 		if ($recherche_conforme) {
 			// On recherche le ou les taxons correspondant au texte saisi.
-			// -- récupération des autres variables
-			$correspondance = _request('correspondance');
-			$recherche_exacte = ($correspondance == 'exact');
+			// -- récupération du règne
 			$regne =  _request('regne');
 			// -- suppression des espaces en trop dans la chaîne de recherche pour permettre la comparaison
 			//    avec le combinedName ou le commonName d'ITIS.
@@ -160,7 +160,9 @@ function formulaires_creer_espece_verifier_1() {
 			foreach ($taxons as $_taxon) {
 				if (!sql_countsel('spip_especes', array('tsn=' . intval($_taxon['tsn'])))) {
 					$taxon = itis_get_record($_taxon['tsn']);
-					if (($taxon['usage_valide']) and (strcasecmp($taxon['regne'], $regne) === 0)) {
+					if (($taxon['usage_valide'])
+					and (strcasecmp($taxon['regne'], $regne) === 0)
+					and (rang_est_espece($taxon['rang']))) {
 						if ($type_recherche == 'scientificname') {
 							$valeurs['_taxons'][$taxon['tsn']] = '<span class="nom_scientifique_inline">'
 								. $_taxon['nom_scientifique']
@@ -172,14 +174,12 @@ function formulaires_creer_espece_verifier_1() {
 							}
 						} else {
 							// Vérifier que ce rang est compatible avec une espèce ou un rang inférieur.
-							if (rang_est_espece($taxon['rang'])) {
-								$valeurs['_taxons'][$taxon['tsn']] = $taxon['nom_commun']
-									. " [{$taxon['langage']}]"
-									. ' - '
-									. _T('taxonomie:rang_' . $taxon['rang']);
-								if (strcasecmp($recherche, $taxon['nom_commun']) === 0) {
-									$valeurs['_taxon_defaut'] = $taxon['tsn'];
-								}
+							$valeurs['_taxons'][$taxon['tsn']] = $taxon['nom_commun']
+								. " [{$taxon['langage']}]"
+								. ' - '
+								. _T('taxonomie:rang_' . $taxon['rang']);
+							if (strcasecmp($recherche, $taxon['nom_commun']) === 0) {
+								$valeurs['_taxon_defaut'] = $taxon['tsn'];
 							}
 						}
 					}
