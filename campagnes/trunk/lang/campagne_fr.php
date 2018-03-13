@@ -40,10 +40,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_campagne' => 'Créer une publicité',
 	'icone_modifier_campagne' => 'Modifier cette publicité',
 	'info_1_campagne' => 'Une publicité',
+	'info_1_campagne_publie' => 'Une publicité publiée',
+	'info_1_campagne_non_publie' => 'Une publicité non publiée',
 	'info_aucun_campagne' => 'Aucune publicité',
+	'info_aucun_campagne_publie' => 'Aucune publicité publiée',
+	'info_aucun_campagne_non_publie' => 'Aucune publicité non publiée',
 	'info_nb_campagnes' => '@nb@ publicités',
+	'info_nb_campagnes_publies' => '@nb@ publicités publiées',
+	'info_nb_campagnes_non_publies' => '@nb@ publicités non publiées',
 	'info_campagnes_auteur' => 'Les publicités de cet auteur',
-	'info_dates_publication' => 'Publication',
 
 	// R
 	'retirer_lien_campagne' => 'Retirer cette publicité',

@@ -33,7 +33,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_encart' => 'Aucun encart',
 	'info_encarts_auteur' => 'Les encarts de cet auteur',
 	'info_nb_encarts' => '@nb@ encarts',
-	'info_nb_campagnes_total' => 'Publicités publiées (total)',
+	'info_nb_campagnes_total' => 'Publicités publiées / total',
+	'info_apercu' => 'Aperçu',
 
 	// R
 	'retirer_lien_encart' => 'Retirer cet encart',

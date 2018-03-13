@@ -1,4 +1,31 @@
-<INCLURE{fond=prive/objets/liste/campagnes, par=date_fin, env, ajax, sinon=<:campagne:info_aucun_campagne:>, id_encart=#ENV{id_encart}}>
+[(#FORMULAIRE_RECHERCHE_ECRIRE{#SELF})]
+
+<div class="nettoyeur"></div>
+
+[(#REM) Les campagnes publiées ]
+<INCLURE{fond=prive/objets/liste/campagnes,
+	id_encart,
+	statut=publie,
+	par=date_fin,
+	sinon=<:campagne:info_aucun_campagne_publie:>,
+	titre_singulier=campagne:info_1_campagne_publie,
+	titre_pluriel=campagne:info_nb_campagnes_publies,
+	env,
+	ajax}
+>
+
+[(#REM) Les campagnes non publiées ]
+<INCLURE{fond=prive/objets/liste/campagnes,
+	id_encart,
+	statut=#LISTE{prepa,obsolete},
+	par=date_fin,
+	sens_tri=-1,
+	sinon=<:campagne:info_aucun_campagne_non_publie:>,
+	titre_singulier=campagne:info_1_campagne_non_publie,
+	titre_pluriel=campagne:info_nb_campagnes_non_publies,
+	env,
+	ajax}
+>
 
 [(#AUTORISER{creer,campagne})
 	[(#URL_ECRIRE{campagne_edit,new=oui&id_encart=#ENV{id_encart}}|icone_verticale{<:campagne:icone_creer_campagne:>,campagne,new,right})]

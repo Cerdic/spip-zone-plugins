@@ -1,15 +1,16 @@
 [(#SET{defaut_tri,#ARRAY{
-	titre,1, 
-	date,-1, 
-	id_campagne,1,
-	points,-1,
-	statut,-1,
-	date_fin,-1,
+	titre,#ENV{sens_tri,1},
+	id_campagne,#ENV{sens_tri,1},
+	points,#ENV{sens_tri,-1},
+	statut,#ENV{sens_tri,1},
+	date,#ENV{sens_tri,-1},
+	date_debut,#ENV{sens_tri,-1},
+	date_fin,#ENV{sens_tri,1},
 }})]<B_liste_campagnes>
 #ANCRE_PAGINATION
 <div class="liste-objets campagnes">
 <table class='spip liste'>
-	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{campagne:info_1_campagne,campagne:info_nb_campagnes}})</strong></caption>]
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{#ENV{titre_singulier,campagne:info_1_campagne},#ENV{titre_pluriel,campagne:info_nb_campagnes}}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
 			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
@@ -17,12 +18,24 @@
 			<th class="vues" scope="col"><:campagne:statistiques_champ_vues:></th>
 			<th class="clics" scope="col"><:campagne:statistiques_champ_clics:></th>
 			<th class="ratio" scope="col"><:campagne:statistiques_champ_ratio:></th>
-			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class='date_debut' scope='col'>[(#TRI{date_debut,<:campagne:champ_date_debut_label:>,ajax})]</th>
+			<th class='date_fin' scope='col'>[(#TRI{date_fin,<:campagne:champ_date_fin_label:>,ajax})]</th>
 			<th class='id' scope='col'>[(#TRI{id_campagne,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_campagnes(CAMPAGNES){id_encart?}{id_annonceur?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par num titre}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_campagnes(CAMPAGNES)
+		{id_encart?}
+		{id_annonceur?}
+		{id_mot?}
+		{id_auteur?}
+		{where?}
+		{statut?}
+		{recherche?}
+		{tri #ENV{par,date},#GET{defaut_tri}}
+		{par num titre}
+		{pagination #ENV{nb,10}}
+	>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='statut'>[(#STATUT|puce_statut{campagne,#ID_CAMPAGNE})]</td> 
 			<td class='titre principale'>
@@ -40,13 +53,11 @@
 					</div>
 				</a>
 			</td>
-			<td class="vues"><BOUCLE_total_vues(CAMPAGNES_VUES){id_campagne}/>#TOTAL_BOUCLE#SET{vues,#TOTAL_BOUCLE}<//B_total_vues></td>
-			<td class="clics"><BOUCLE_total_clics(CAMPAGNES_CLICS){id_campagne}/>#TOTAL_BOUCLE#SET{clics,#TOTAL_BOUCLE}<//B_total_clics></td>
-			<td class="ratio">[(#GET{clics}|div{#GET{vues}}|mult{100}|round{2})%]</td>
-			<td class='date secondaire'>
-				[<p>(#DATE|affdate_jourcourt)</p>]
-				<small><:campagne:info_dates_publication:> : [(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,non})]</small>
-			</td> 
+			<td class="vues secondaire"><BOUCLE_total_vues(CAMPAGNES_VUES){id_campagne}/>#TOTAL_BOUCLE#SET{vues,#TOTAL_BOUCLE}<//B_total_vues></td>
+			<td class="clics secondaire"><BOUCLE_total_clics(CAMPAGNES_CLICS){id_campagne}/>#TOTAL_BOUCLE#SET{clics,#TOTAL_BOUCLE}<//B_total_clics></td>
+			<td class="ratio secondaire">[(#GET{clics}|div{#GET{vues}}|mult{100}|round{2})%]</td>
+			<td class='date_debut secondaire'>[(#DATE_DEBUT|affdate_jourcourt)]</td>
+			<td class='date_fin secondaire'>[(#DATE_FIN|affdate_jourcourt)]</td> 
 			<td class='id'>[(#AUTORISER{modifier,campagne,#ID_CAMPAGNE}|?{
 				<a href="[(#URL_ECRIRE{campagne_edit,id_campagne=#ID_CAMPAGNE})]">#ID_CAMPAGNE</a>,
 				#ID_CAMPAGNE
