@@ -4,13 +4,12 @@
 	<icon>precode.png</icon>
 
 	<version>1.3.2</version>
-	<etat>experimental</etat>
-	<categorie>outil</categorie>
+	<etat>test</etat>
+	<categorie>edition</categorie>
 
 	<slogan>Afficher proprement du code dans SPIP</slogan>
 	<description>
-		ATTENTION : plugin très expérimental et instable !
-		pour afficher proprement du code dans SPIP.
+		Pour afficher proprement du code dans SPIP.
 	</description>
 	<lien>https://bitbucket.org/tetue/simplec</lien>
 	<auteur>&copy; 2017 [tetue->http://spip.tetue.net]</auteur>
