@@ -169,16 +169,16 @@ function formulaires_creer_espece_verifier_1() {
 								. '</span>'
 								. ' - '
 								. _T('taxonomie:rang_' . $taxon['rang']);
-							if (strcasecmp($recherche, $taxon['nom_scientifique']) === 0) {
+							if (strcasecmp($recherche, $_taxon['nom_scientifique']) === 0) {
 								$valeurs['_taxon_defaut'] = $taxon['tsn'];
 							}
 						} else {
 							// Vérifier que ce rang est compatible avec une espèce ou un rang inférieur.
-							$valeurs['_taxons'][$taxon['tsn']] = $taxon['nom_commun']
-								. " [{$taxon['langage']}]"
+							$valeurs['_taxons'][$taxon['tsn']] = $_taxon['nom_commun']
+								. " [{$_taxon['langage']}]"
 								. ' - '
 								. _T('taxonomie:rang_' . $taxon['rang']);
-							if (strcasecmp($recherche, $taxon['nom_commun']) === 0) {
+							if (strcasecmp($recherche, $_taxon['nom_commun']) === 0) {
 								$valeurs['_taxon_defaut'] = $taxon['tsn'];
 							}
 						}
