@@ -1,0 +1,7 @@
+<h1 class="grostitre"><:encart:titre_encarts:></h1>
+
+<INCLURE{fond=prive/objets/liste/encarts, par=titre, nb=20, env, ajax, sinon=<:encart:info_aucun_encart:>}>
+
+[(#AUTORISER{creer,encart})
+	[(#URL_ECRIRE{encart_edit,new=oui}|icone_verticale{<:encart:icone_creer_encart:>,encart,new,right})]
+]
