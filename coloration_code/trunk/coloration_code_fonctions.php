@@ -132,10 +132,13 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
 	// And echo the result!
 	//
 	if (defined('_DIR_PLUGIN_PRECODE') && _DIR_PLUGIN_PRECODE) {
-		// si le plugin pRECODE est activé, on utilise son balisage moderne
-		$geshi->set_header_type(GESHI_HEADER_NONE);
+		// si le plugin PRECODE est activé, on utilise son balisage moderne
+		// header <pre> pour ne pas générer de <br>
+		$geshi->set_header_type(GESHI_HEADER_PRE);
 		$geshi->enable_line_numbers(GESHI_NO_LINE_NUMBERS);
 		$code_corps = $geshi->parse_code();
+		// supprimer le <pre> englobant, qui sera ajouté par PRECODE
+		$code_corps = trim( preg_replace('!^<pre[^>]*>|</pre>$!', '', $code_corps), "\n\r");
 		$rempl      = precode_balisage_code('class="' . $language . '"', $code_corps);
 	} else {
 		$rempl = $stylecss . '<' . $englobant . ' class="coloration_code ' . $cadre . '"><' . $balise_code . ' class="spip_' . $language . ' ' . $cadre . '"' . $datatext_content . '>' . $geshi->parse_code() . '</' . $balise_code . '>';
