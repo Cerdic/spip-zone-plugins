@@ -119,7 +119,8 @@ function compositions_lister_disponibles($type, $informer = true) {
  */
 function compositions_lister_utilisations($type, $composition) {
 	$table_sql = table_objet_sql($type);
-	if (!in_array($table_sql, sql_alltable())) {
+	$tables_objets_sql = array_keys(lister_tables_objets_sql());
+	if (!in_array($table_sql, $tables_objets_sql)) {
 		return;
 	}
 	$trouver_table = charger_fonction('trouver_table', 'base');
