@@ -2,7 +2,8 @@
 	titre,1, 
 	date,-1, 
 	id_campagne,1,
-	points,-1
+	points,-1,
+	statut,-1,
 }})]<B_liste_campagnes>
 #ANCRE_PAGINATION
 <div class="liste-objets campagnes">
@@ -20,7 +21,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_campagnes(CAMPAGNES){id_encart?}{id_annonceur?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_campagnes(CAMPAGNES){id_encart?}{id_annonceur?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par num titre}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='statut'>[(#STATUT|puce_statut{campagne,#ID_CAMPAGNE})]</td> 
 			<td class='titre principale'>
