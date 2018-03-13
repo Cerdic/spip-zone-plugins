@@ -98,49 +98,49 @@ function inc_pmg_to_array_dist($u){
 }
 
 function activer_iterateur($extracteur, $u){
-	
+
 	$item = array();
-	
+
 	// convertir en tableau
 	include_spip("extract/" . $extracteur);
 	$item = call_user_func('convertir_' . $extracteur, $u);
-	
+
 	include_spip("inc/convertisseur");
 	foreach($item as &$i)
 		$i = nettoyer_format($i);
-	
+
 	$item['insertion'] = extracteur_preparer_insertion($item);
-	
+
 	$m[] = $item ;
 	return $m ;
 }
 
 // Transformer le tableau de valeurs converties par un extracteur en format d'insertion pour spip
-function extracteur_preparer_insertion($item){ 
+function extracteur_preparer_insertion($item){
 
-	$texte = "" ; 
-	$champs_article = array("surtitre", "titre", "chapo"); 
+	$texte = "" ;
+	$champs_article = array("surtitre", "titre", "chapo");
 
-	# Champs articles 
-	# Baliser les champs articles 
+	# Champs articles
+	# Baliser les champs articles
 
 	foreach($item as $k => $v)
-		if(in_array($k, $champs_article)) 
-			$texte .= "<ins class='$k'>" . trim($v) . "</ins>\n" ; 
+		if(in_array($k, $champs_article))
+			$texte .= "<ins class='$k'>" . trim($v) . "</ins>\n" ;
 
 		# autres champs
 		# en plus des champs de données converties, un extracteur peut envoyer des champs techniques (xml, logs, alertes), on ne les insert pas.
-		foreach($item as $k => $v)       
-			if(!in_array($k,array("texte","xml","logs","alertes")) and !in_array($k, $champs_article)) 
-				if(is_array($v)) 
-					$texte .= "<ins class='$k'>" . trim(join(",", $v)) . "</ins>\n"; 
-				else 
+		foreach($item as $k => $v)
+			if(!in_array($k,array("texte","xml","logs","alertes")) and !in_array($k, $champs_article))
+				if(is_array($v))
+					$texte .= "<ins class='$k'>" . trim(join(",", $v)) . "</ins>\n";
+				else
 					$texte .= "<ins class='$k'>" . trim($v) . "</ins>\n" ;
 
-		# texte 
+		# texte
 		$texte .=  "\n" . trim($item['texte']) . "\n" ;
 
-	return $texte ; 
+	return $texte ;
 }
 
 // Définir les extracteur disponibles (pour d'autres plugins ou pour spip-cli)

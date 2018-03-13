@@ -13,7 +13,7 @@ function ligne_xtag($style, $contenu) {
 
 		case preg_match(',\bSOUSTITRE\b,i', $style):
 			return "<ins class='soustitre'>\n$contenu\n</ins>\n\n";
-	
+
 		case preg_match(',\bTITRE\b,i', $style):
 			return "<ins class='titre'>\n$contenu\n</ins>\n\n";
 
@@ -36,7 +36,7 @@ function ligne_xtag($style, $contenu) {
 
 	return "@@$style\n\n$contenu\n\n";
 }
- 
+
 function do_quark($c) {
 
 	// transformer les <0x2014> en &#2014;
