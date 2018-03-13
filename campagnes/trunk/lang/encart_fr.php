@@ -8,7 +8,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_lien_encart' => 'Ajouter cet encart',
-	
+
+	// B
+	'bouton_supprimer_encart' => 'Supprimer cet encart',
+	'bouton_supprimer_encart_confirmer' => 'Cette action est irréversible. Êtes-vous sûr.e ?',
+
 	// C
 	'champ_hauteur_explication' => 'Hauteur en pixels',
 	'champ_hauteur_label' => 'Hauteur',
@@ -45,6 +49,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_encarts_rubrique' => 'Encarts de la rubrique',
 	'titre_langue_encart' => 'Langue de cet encart',
 	'titre_logo_encart' => 'Logo de cet encart',
-);
 
-?>
+);
