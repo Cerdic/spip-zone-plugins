@@ -7,6 +7,6 @@
 ]
 ]
 [(#EVAL{defined('_SAISIES_AFFICHAGE_COMPACT')}|oui)
-[<div class="[(#VALEUR|table_valeur{options/nom})]">[<b>(#VALEUR|table_valeur{options/label}|typo)</b> :] (#VAL{saisie}|array_key_exists{#VALEUR}|?{[(#VALEUR|saisies_generer_vue{#ENV{_env}|sinon{#ENV**|unserialize},#ARRAY{valeur_uniquement,oui,sans_reponse,''}}|ptobr)]})</div>]
+[<div class="[(#VALEUR|table_valeur{options/nom})]">[<b>(#VALEUR|table_valeur{options/label}|typo)</b>[(#VAL{:}|typo)]] (#VAL{saisie}|array_key_exists{#VALEUR}|?{[(#VALEUR|saisies_generer_vue{#ENV{_env}|sinon{#ENV**|unserialize},#ARRAY{valeur_uniquement,oui,sans_reponse,''}}|ptobr)]})</div>]
 ]
 </BOUCLE_saisies>
