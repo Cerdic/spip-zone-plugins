@@ -80,6 +80,22 @@ function formulaires_configurer_duplicator_saisies_dist() {
 					);
 				}
 				
+				// Les autorisations
+				$groupe_objet['saisies'][] = array(
+					'saisie' => 'selection',
+					'options' => array(
+						'nom' => "${table_objet}[autorisation]",
+						'label' => _T('duplicator:configurer_autorisation_label'),
+						'option_intro' => _T('duplicator:configurer_autorisation_option_intro'),
+						'data' => array(
+							'webmestre' => _T('duplicator:configurer_autorisation_choix_webmestre'),
+							'administrateur' => _T('duplicator:configurer_autorisation_choix_administrateur'),
+							'redacteur' => _T('duplicator:configurer_autorisation_choix_redacteur'),
+						),
+						'defaut' => isset($config[$table_objet]['autorisation']) ? $config[$table_objet]['autorisation'] : '',
+					),
+				);
+				
 				$saisies[] = $groupe_objet;
 			}
 		}

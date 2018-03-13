@@ -7,57 +7,32 @@
  *
 \***************************************************************************/
 
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function duplicator_autoriser(){}
 
-/*function autoriser_dupliquer($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return true;
-}*/
-
-function autoriser_rubrique_dupliquer($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-
-	// Si la config permet de dupliquer les rubriques
-	if (strcmp(lire_config('duplicator/config/duplic_rubrique'),'oui') == 0){
-		
-		// Le webmestre peut dupliquer les rubriques
-		if(autoriser("webmestre"))
-			return true;
-			
-		// Administrateur
-		if ( (strcmp($qui['statut'], '0minirezo') == 0) AND 
-				((strcmp(lire_config('duplicator/config/duplic_rubrique_autorisation'),"0minirezo") == 0) OR
-				 (strcmp(lire_config('duplicator/config/duplic_rubrique_autorisation'),"1comite")   == 0)) )
-			return true;
-			
-		// Rédacteur
-		if (( strcmp($qui['statut'], '1comite') == 0) AND (strcmp(lire_config('duplicator/config/duplic_rubrique_autorisation'),'1comite') == 0 ))
-			return true;
-
+function autoriser_dupliquer($faire, $quoi='', $id=0, $qui=null, $options=null) {
+	include_spip('inc/config');
+	
+	// S'il y a une autorisation explicite dans la configuration, on l'utilise
+	if ($autorisation = lire_config("duplication/$quoi/autorisation")) {
+		if ($autorisation == 'webmestre') {
+			return autoriser('webmestre', $quoi, $id, $qui, $options);
+		}
+		elseif ($autorisation == 'administrateur') {
+			return $qui['statut'] <= '0minirezo' and !$qui['restreint'];
+		}
+		elseif ($autorisation == 'redacteur') {
+			return $qui['statut'] <= '1comite';
+		}
 	}
-	return false;
-
-}
-
-function autoriser_article_dupliquer($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-
-	// Si la config permet de dupliquer les articles
-	if (strcmp(lire_config('duplicator/config/duplic_article'),'oui') == 0){
-		
-		// Le webmestre peut dupliquer les articles
-		if(autoriser("webmestre"))
-			return true;
-			
-		// Administrateur
-		if ( (strcmp($qui['statut'], '0minirezo') == 0) AND 
-				((strcmp(lire_config('duplicator/config/duplic_article_autorisation'),"0minirezo") == 0) OR
-				 (strcmp(lire_config('duplicator/config/duplic_article_autorisation'),"1comite")   == 0)) )
-			return true;
-			
-		// Rédacteur
-		if (( strcmp($qui['statut'], '1comite') == 0) AND (strcmp(lire_config('duplicator/config/duplic_article_autorisation'),'1comite') == 0 ))
-			return true;
-
+	// Sinon on cherche une autorisation logique par défaut, de création ou de création dans un parent
+	else {
+		// TODO ici une recherche du parent et appel d'autorisation de "creerpatatedans"
+		return true;
 	}
+	
 	return false;
-
 }

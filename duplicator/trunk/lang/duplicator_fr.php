@@ -12,10 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_dupliquer_rubrique_arbo' => 'Dupliquer l\'arborescence de la rubrique',
 	'autorisations' => 'Autorisations',
 	'autorisations_article' => 'Qui peut dupliquer des articles&nbsp;?',
-	'autorisations_admin_label' => 'Administrateurs',
-	'autorisations_redacteur_label' => 'Administrateurs et rédacteurs',
 	'autorisations_rubriques' => 'Qui peut dupliquer des rubriques&nbsp;?',
-	'autorisations_webmestre_label' => 'Webmestre uniquement',
 	
 	// B
 	'bouton_confirmer' => 'Confirmer',
@@ -24,7 +21,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'choix_type' => 'Sélectionner le ou les mode(s) de duplication',
-	'choix_champs' => 'Choisir les champs à dupliquer',
+	'configurer_autorisation_choix_administrateur' => 'Administrateur',
+	'configurer_autorisation_choix_redacteur' => 'Rédacteur',
+	'configurer_autorisation_choix_webmestre' => 'Webmestre uniquement',
+	'configurer_autorisation_label' => 'Autorisation minimale',
+	'configurer_autorisation_option_intro' => 'Autorisation par défaut',
 	'configurer_champs_label' => 'Champs à dupliquer',
 	'configurer_objets_label' => 'Contenus à dupliquer',
 	'configurer_personnaliser_champs_label' => 'Personnaliser les champs à dupliquer pour ces contenus',
