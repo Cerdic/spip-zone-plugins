@@ -20,6 +20,13 @@
 	<span dir='#LANG_DIR' class='#EDIT{hauteur} hauteur'>(#HAUTEUR)</span>
 </div>]
 
+[(#HAUTEUR|plus{#LARGEUR}|intval|oui)
+	<div class="encart_previsu" style="[width:(#LARGEUR|div{2})px;][height:(#HAUTEUR|div{2})px]">
+		[<span class="dimension-largeur">(#LARGEUR) px</span>]
+		[<span class="dimension-hauteur">(#HAUTEUR) px</span>]
+	</div>
+]
+
 <!--[<div class="champ contenu_type[ (#TYPE*|strlen|?{'',vide})]">-->
 <!--	<label><:encart:champ_type_label:> : </label>-->
 <!--	<span dir='#LANG_DIR' class='#EDIT{type} type'>(#TYPE)</span>-->
