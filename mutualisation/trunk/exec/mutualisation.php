@@ -291,7 +291,7 @@ function exec_mutualisation_dist() {
 
 			// Ici on va prendre les chemins d'extrusion uniquement, sans distinction du fichier xml
 			foreach ($list as $value) {
-				$extract[] = str_replace(['plugin.xml', 'paquet.xml'], '', $value);
+				$extract[] = str_replace(array('plugin.xml', 'paquet.xml'), '', $value)
 			}
 			// On dédoublonne
 			$extract = array_unique($extract);
