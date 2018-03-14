@@ -149,8 +149,8 @@ function exec_mutualisation_dist() {
 			if (isset($GLOBALS['mutualisation_afficher_config'])) {
 				$configs = explode(",", $GLOBALS['mutualisation_afficher_config']);
 				$configsparticulieres = '';
-				foreach($configs as $config) {
-					
+				foreach ($configs as $config) {
+
 					$configsparticulieres .= '<em><small>' . $config . ':</small></em> ' . lire_config_distante($config, $meta) . "<br />\n";
 				}
 			}
@@ -162,7 +162,7 @@ function exec_mutualisation_dist() {
         </script>
         ';
 
-		$page .= "<tr class='tr" . $nsite%2 . "' style='background-image: url(" . $url . "ecrire/index.php?exec=mutualisation&amp;renouvelle_alea=yo)' id='$alias[$v]'>\n
+		$page .= "<tr class='tr" . $nsite % 2 . "' style='background-image: url(" . $url . "ecrire/index.php?exec=mutualisation&amp;renouvelle_alea=yo)' id='$alias[$v]'>\n
             <td class='text-right'><img src='" . $url . "favicon.ico' class='favicon' />$v$erreur$version_installee</td>\n
             <td><a href='" . $url . "'>" . typo($nom_site) . "</a></td>\n
             <td><a href='" . $url . "ecrire/'>ecrire</a><br />
@@ -291,7 +291,7 @@ function exec_mutualisation_dist() {
 
 			// Ici on va prendre les chemins d'extrusion uniquement, sans distinction du fichier xml
 			foreach ($list as $value) {
-				$extract[] = str_replace(array('plugin.xml', 'paquet.xml'), '', $value);
+				$extract[] = str_replace(['plugin.xml', 'paquet.xml'], '', $value);
 			}
 			// On dédoublonne
 			$extract = array_unique($extract);
@@ -347,10 +347,10 @@ function exec_mutualisation_dist() {
         ', $page);
 
 	$uend = memory_get_peak_usage(true);
-	$udiff = $uend-$ustart;
-	$udiff_glob = $uend_glob-$ustart_glob;
+	$udiff = $uend - $ustart;
+	$udiff_glob = $uend_glob - $ustart_glob;
 	$timeend = microtime(true);
-	$time = $timeend-$timestart;
+	$time = $timeend - $timestart;
 	$page_load_time = number_format($time, 3);
 
 	// On génère le contenu de notre toolbar.
@@ -366,11 +366,11 @@ function exec_mutualisation_dist() {
 	$debug_toolbar .= "</div></div>\n";
 
 	$debug_toolbar .= "<div class='toolbar-block'>\n";
-	$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-plugins'></i><span>" . ($nombre_plugins_inutiles+$nombre_plugins) . " plugins</span></div>\n";
+	$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-plugins'></i><span>" . ($nombre_plugins_inutiles + $nombre_plugins) . " plugins</span></div>\n";
 	$debug_toolbar .= "<div class='toolbar-info'>\n";
 	$debug_toolbar .= "<div class='toolbar-info-element'><b>Utilisés</b> <span>" . $nombre_plugins . "</span></div>\n";
 	$debug_toolbar .= "<div class='toolbar-info-element'><b>Inutilisés</b> <span>" . $nombre_plugins_inutiles . "</span></div>\n";
-	$debug_toolbar .= "<div class='toolbar-info-element'><b>Total</b> <span>" . ($nombre_plugins_inutiles+$nombre_plugins) . "</span></div>\n";
+	$debug_toolbar .= "<div class='toolbar-info-element'><b>Total</b> <span>" . ($nombre_plugins_inutiles + $nombre_plugins) . "</span></div>\n";
 	$debug_toolbar .= "</div></div>\n";
 
 	$debug_toolbar .= "<div class='toolbar-block'>\n";
@@ -418,11 +418,19 @@ EOF;
 	}
 }
 
+/**
+ * @param array $meta
+ * @param array $liste_plug_compat
+ * @param array $liste_plug_compat_base
+ *
+ * @return string
+ */
 function adminplugin_site($meta, $liste_plug_compat, $liste_plug_compat_base) {
 	if ($cfg = @unserialize($meta['plugin'])) {
 		$plugins = array_keys($cfg);
 		ksort($plugins);
 		$repertoires_plugins = array('_DIR_PLUGINS', '_DIR_PLUGINS_DIST', '_DIR_RESTREINT');
+		$placeholder = '';
 		foreach ($plugins as $plugin) {
 			$vplugin_base = $nouvelle_version_plugin_base = $info_plugin = '';
 			$vplugin_base = (isset($meta[strtolower($plugin) . '_base_version'])) ? trim($meta[strtolower($plugin) . '_base_version']) : '0.0.0';
@@ -441,9 +449,11 @@ function adminplugin_site($meta, $liste_plug_compat, $liste_plug_compat_base) {
 				)
 			) {
 				$vplugin = $vplugin_base . ' / ' . $cfg[$plugin]['version'] . ' &rarr; ' . $nouvelle_version_plugin_base . ' / ' . $info_plugin['version'];
-
-				return upgrade_placeholder($meta, "$plugin $vplugin");
+				$placeholder .= "$plugin $vplugin <br/>";
 			}
+		}
+		if (!empty($placeholder)) {
+			return upgrade_placeholder($meta, $placeholder);
 		}
 		if (defined('_MUTUALISATION_UPGRADE_FORCE')) {
 			return upgrade_placeholder($meta);
@@ -500,7 +510,8 @@ function mutualisation_lister_sites_dist() {
 /**
  * autre exemple pour ceux qui mettent tous leurs fichiers de connexion
  * dans /config/connect/xx.php
- * fonction a mettre dans mes_options.php ou dans mutualisations/lister_sites.php.
+ * fonction a mettre dans mes_options.php ou dans
+ * mutualisations/lister_sites.php.
  */
 
 /*
@@ -530,12 +541,12 @@ function ancre_site($c) {
 }
 
 function memoryUsage($bytes) {
-	$bytes = (int)$bytes;
+	$bytes = (int) $bytes;
 
-	if ($bytes > 1024*1024) {
-		return round($bytes/1024/1024, 2) . ' MB';
+	if ($bytes > 1024 * 1024) {
+		return round($bytes / 1024 / 1024, 2) . ' MB';
 	} elseif ($bytes > 1024) {
-		return round($bytes/1024, 2) . ' KB';
+		return round($bytes / 1024, 2) . ' KB';
 	}
 
 	return $bytes . ' B';

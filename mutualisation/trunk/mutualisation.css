@@ -39,6 +39,7 @@ td {
 	border-left: 1px solid #ccc;
 	padding: 0.5em 1em;
 }
+
 tr td:nth-child(1), tr td:nth-child(7), tr td:nth-child(10), .text-right {
 	text-align: right;
 }
@@ -56,11 +57,13 @@ body.minipres {
 	padding: 20px 1%;
 	overflow-x: scroll;
 }
+
 img.favicon {
 	float: left;
 	width: 16px;
 	height: 16px;
 }
+
 .logo_mutualisation {
 	text-align: center;
 }
@@ -70,20 +73,25 @@ img.favicon {
 	padding: 0 .5em;
 	display: inline;
 }
+
 form.upgrade {
 	padding: 0.5em 0;
 	margin: 0;
-	display: inline;
+	display: block;
+	width: 100%;
 }
 
 .upgrade div {
 	display: inline;
 }
+
 .upgrade input, .upgrade button[type="submit"] {
 	border: 2px solid red;
 	color: red;
 	background-color: #fff;
 	font-weight: bold;
+	text-align: left;
+	width: 100%;
 }
 
 .erreur {
@@ -102,6 +110,7 @@ form.upgrade {
 .liste-plugins {
 	display: block;
 }
+
 form.upgrade + .liste-plugins {
 	margin-top: 0.5em;
 }

@@ -19,8 +19,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @link        http://aidanlister.com/2004/04/calculating-a-directories-size-in-php/
  *
- * @param       string $directory Path to directory
+ * @param       string $path Path to directory
  *                                integer  $taille_max   Taille_max d'exploration
+ * @param       int $taille_max
+ *
+ * @return      float|int|string
  */
 function dirsize($path, $taille_max = 0) {
 	// Init

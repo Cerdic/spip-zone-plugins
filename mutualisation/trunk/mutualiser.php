@@ -196,9 +196,9 @@ function demarrer_site($site = '', $options = array()) {
 		include $f;
 	} // attention cet include n'est pas en globals
 
-	if (isset($options['avant_initialisation']) && is_callable($options['avant_initialisation'])) { 
-		$options['avant_initialisation'](); 
-	} 
+	if (isset($options['avant_initialisation']) && is_callable($options['avant_initialisation'])) {
+		$options['avant_initialisation']();
+	}
 
 	$init = function_exists('spip_initialisation_core')
 		? 'spip_initialisation_core' // mieux pour la 2.0, mais absente avant...
@@ -328,7 +328,7 @@ function prefixe_mutualisation($site) {
 	static $prefix = array();
 	$max = 12;
 	if (defined('_INSTALL_PREFIX_DB') && strlen(_INSTALL_PREFIX_DB) > 0) {
-		$max = 15-strlen(_INSTALL_PREFIX_DB);
+		$max = 15 - strlen(_INSTALL_PREFIX_DB);
 	}
 	if (!isset($prefix[$site])) {
 		$p = preg_replace(',^www\.|[^a-z0-9],', '', strtolower($site));
@@ -336,7 +336,7 @@ function prefixe_mutualisation($site) {
 		// meme chose si ca contenait un caractere autre que [a-z0-9],
 		// afin d'eviter de se faire chiper c.a.domaine.tld par ca.domaine.tld
 		if (strlen($p) > $max or $p != $site) {
-			$p = substr($p, 0, ($max-4)) . substr(md5($site), -4);
+			$p = substr($p, 0, ($max - 4)) . substr(md5($site), -4);
 		}
 		// si ca commence par un chiffre on ajoute a
 		if (ord($p) < 58) {
