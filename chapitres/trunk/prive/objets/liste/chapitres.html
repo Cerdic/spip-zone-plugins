@@ -57,11 +57,11 @@
 				#ID_CHAPITRE
 			})]</td>
 		</tr>
-		</BOUCLE_liste_chapitres_enfants>
 		
 		#SET{profondeur,#GET{profondeur}|plus{1}}
 		<BOUCLE_liste_chapitres_petits_enfants (BOUCLE_liste_chapitres_enfants) />
 		#SET{profondeur,#GET{profondeur}|moins{1}}
+		</BOUCLE_liste_chapitres_enfants>
 	</BOUCLE_liste_chapitres>
 	</tbody>
 </table>
