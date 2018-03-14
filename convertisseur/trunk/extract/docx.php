@@ -61,11 +61,7 @@ function extracteur_docx($filepath, &$charset) {
 
 	include_spip('inc/sale');
 	return sale($html);
-
 }
 
 // Sait-on extraire ce format ?
 $GLOBALS['extracteur']['docx'] = 'extracteur_docx';
-
-
-?>
