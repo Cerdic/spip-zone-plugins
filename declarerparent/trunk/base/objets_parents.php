@@ -151,6 +151,18 @@ function objet_trouver_parent($objet, $id_objet) {
 		}
 	}
 	
+	// On passe par un pipeline avant de retourner
+	$parent = pipeline(
+		'objet_trouver_parent',
+		array(
+			'args' => array(
+				'objet' => $objet,
+				'id_objet' => $id_objet,
+			),
+			'data' => $parent,
+		)
+	);
+	
 	return $parent;
 }
 
@@ -199,6 +211,18 @@ function objet_trouver_enfants($objet, $id_objet) {
 			}
 		}
 	}
+	
+	// On passe par un pipeline avant de retourner
+	$enfants = pipeline(
+		'objet_trouver_enfants',
+		array(
+			'args' => array(
+				'objet' => $objet,
+				'id_objet' => $id_objet,
+			),
+			'data' => $enfants,
+		)
+	);
 	
 	return $enfants;
 }
