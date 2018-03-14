@@ -66,7 +66,7 @@ function rang_recuperer_fond($flux) {
 			// récupérer le type de parent…
 			$table_objet = table_objet_sql($type_objet);
 			$table = lister_tables_objets_sql($table_objet);
-			$type_parent = $table['parent']['type'];
+			$type_parent = $table['parent']['0']['type'];
 
 			// …puis l'id_parent
 			$id = id_table_objet($type_parent);
