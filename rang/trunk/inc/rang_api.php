@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
- * Construire la liste des objets à exclure
+ * Construire la liste des objets à exclure de la configuration
  * 
  * @return array
  *	tableau des tables SPIP à exclure (ex : spip_auteurs, spip_mots, etc.)
@@ -155,8 +155,8 @@ function rang_creer_champs ($objets) {
 
 
 /**
- * construction des chemins de sources vers les listes des objets sélectionnés
- * ce tableau sera ensuite comparé à la valeur $flux['data']['source'] fourni par le pipeline recuperer_fond()
+ * Construction, a partir des objets selectionnes, des chemins de sources vers les listes correspondantes
+ * Ce tableau sera ensuite comparé à la valeur $flux['data']['source'] fourni par le pipeline recuperer_fond()
  *
  * @return array
  *     les chemins sources vers les listes où activer Rang
@@ -177,16 +177,20 @@ function rang_get_sources() {
 	foreach ($objets as $value) {
 		$objet = table_objet($value);
 		if (!empty($value)) {
-			$source = find_in_path('prive/objets/liste/'.$objet.'.html');
+			$source = 'prive/objets/liste/'.$objet;
 			$sources[] = $source;
 		}
 
 		// cas objets historiques
-		if($objet == 'mots') {
-			$source = find_in_path('prive/objets/liste/mots-admin.html');
+		if ($objet == 'mots') {
+			$source = 'prive/objets/liste/mots-admin';
 			$sources[] = $source;
 		}
 	}
+
+	// tempo : test sur des liaisons
+	$sources[] = 'prive/objets/liste/mots_lies';
+
 	return $sources;
 }
 

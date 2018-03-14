@@ -14,17 +14,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 include_spip('inc/rang_api');
+include_spip('inc/config');
 
 /**
  * Declaration du champ Rang sur les objets sélectionnés
- * + Definir la relation a l‘objet parent dans la declaration de l‘objet (en attendant https://core.spip.net/issues/3844)
  *
  * @param array $tables
  * @return array
  */
 function rang_declarer_tables_objets_sql($tables) {
-	include_spip('inc/config');
-
+	
 	/* Declaration du champ Rang sur les objets sélectionnés */
 	$rang_objets = rtrim(lire_config('rang/rang_objets'), ',');
 	$liste_objets = explode(',', $rang_objets);
@@ -32,95 +31,63 @@ function rang_declarer_tables_objets_sql($tables) {
 	foreach ($liste_objets as  $table) {
 		$tables[$table]['field']['rang'] = "SMALLINT NOT NULL";
 	}
-	
-	/* Definir la relation a l‘objet parent dans la declaration de l‘objet (en attendant https://core.spip.net/issues/3844) */
-	// pour les articles
-	$tables['spip_articles']['parent'] = array('type' => 'rubrique', 'champ' => 'id_rubrique');
-
-	// pour les rubriques
-	$tables['spip_rubriques']['parent'] = array('type' => 'rubrique', 'champ' => 'id_rubrique');
-
-	//pour les mots-clés
-	$tables['spip_mots']['parent'] = array('type' => 'groupe_mot', 'champ' => 'id_groupe');
 
 	return $tables;
 }
 
+
 /**
- * Inserer le JS qui gére le tri par Drag&Drop dans la page ?exec=xxxxx
+ * Calculer et Inserer le JS qui gére le tri par Drag&Drop dans le bon contexte (la page ?exec=xxxxx)
  *
- * @param array $flux
- * @return array
+ * @param	array $flux	Données du pipeline 
+ * @return	array 		Données du pipeline 
  */
 function rang_recuperer_fond($flux) {
-
-	$exec 		= _request('exec');
 	
-	// Gestion du contexte i.e. page ?exec=xxxx 
-	// Par défaut, on peut toujours trier dans une rubrique où dans un groupe de mot
-	$contextes	= array(0 => 'rubrique', 1 => 'groupe_mots'); 
+	$tables_objets_selectionnes = lire_config('rang/rang_objets');
 
-	// Ajouter automatiquement un contexte
-	// pour les objets sans rubrique, on ajoute le contexte ?exec=objet
-	include_spip('inc/config');
-	$objets_selectionnes = lire_config('rang/rang_objets');
-	$liste = lister_tables_objets_sql();
-	foreach ($liste as $key => $value) {
-		if ($value['editable'] == 'oui' /*AND !isset($value['field']['id_rubrique'])*/) {
-			$objet = table_objet($key);
-			if (strpos($objets_selectionnes,$objet)) {
-				$contextes[] = $objet;
-			}
-		}
-	}
+	
+	if (isset($tables_objets_selectionnes) AND !empty($tables_objets_selectionnes)) {
+		/* Gestion du contexte : dans quelle page insérer le JS */
+		$exec 		= _request('exec');
+		$contextes	= pipeline('rang_declarer_contexte', array('rubrique', 'groupe_mots', 'mots'));
+		$sources	= rang_get_sources();
 
-	// dans le futur, on doit pouvoir ajouter d'autres contextes 
-	// -> mots-clefs, 
-	// -> contextes spécifiques à certains plugins (ex : pages uniques, Albums, etc.)
+		if ( in_array($exec, $contextes)
+			AND in_array($flux['args']['fond'], $sources) 
+			AND strpos($flux['data']['texte'], 'liste-objets') // cette derniere condition n'est peut etre pas utile, voire contraignante pour ordonner autre chose qu'une liste d'objet ?
+		) {
+			// recuperer les paramètres pour le calcul du JS correspondant
+			preg_match('/liste-objets\s([A-Za-z]+)/', $flux['data']['texte'], $result);
+			$type_objet = $result[1];
 
+			$nom_objet  = table_objet($type_objet);
 
+			// récupérer le type de parent…
+			$table_objet = table_objet_sql($type_objet);
+			$table = lister_tables_objets_sql($table_objet);
+			$type_parent = $table['parent']['type'];
 
-	// faire archi gaffe à prendre le bon flux....pfiou compliqué :)
-	$sources	= rang_get_sources();
+			// …puis l'id_parent
+			$id = id_table_objet($type_parent);
+			$id_parent = $flux['args']['contexte'][$id];
 
-	if ( in_array($exec, $contextes) AND 
-		 in_array($flux['data']['source'], $sources) AND 
-		 strpos($flux['data']['texte'], 'pagination_liste')) {
+			// Calcul du JS à insérer avec les paramètres
+			$ajout_script = recuperer_fond('prive/squelettes/inclure/rang', array(  'suffixe_pagination' => $nom_objet, 
+																					'objet' => $type_objet, 
+																					'id_parent' => $id_parent ));
 
-			// récupérer le type de l'objet, quelle que soit le contexte
-			preg_match('/pagination_liste_([A-Za-z]+)/', $flux['data']['texte'], $result);
-			$objet = $result[1];
-			$suffixe_pagination = table_objet($objet);
-
-			$id_parent = $flux['args']['contexte']['id_rubrique'];
-
-			// particularité des objets historiques
-			switch ($objet) {
-				case 'art':
-					$objet = 'articles';
-					$suffixe_pagination = 'art';
-					break;
-				case 'mots':
-					$objet = 'mots';
-					$suffixe_pagination = 'mot';
-					$id_parent = $flux['args']['contexte']['id_groupe'];
-					break;
-				default:
-					$id_parent = $flux['args']['contexte']['id_rubrique'];
-					break;
-			}
-			
-			$ajout_script = recuperer_fond('prive/squelettes/inclure/rang', array('suffixe_pagination' => $suffixe_pagination, 'objet' => $objet, 'id_parent' => $id_parent ));
+			// et hop, on insère le JS calculé
 			$flux['data']['texte'] = str_replace('</table>', '</table>'. $ajout_script, $flux['data']['texte']);
-		
+		}
 	}
 	return $flux;
 }
 
 /**
  * Insertion dans le pipeline pre_edition pour le classer l'objet quand on le publie
- * @param array $flux
- * @return array
+ * @param	array $flux	Données du pipeline 
+ * @return	array 		Données du pipeline 
  */
 function rang_pre_edition($flux) {
 
