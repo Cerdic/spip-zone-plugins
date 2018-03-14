@@ -117,10 +117,10 @@ function objet_trouver_parent($objet, $id_objet) {
 		
 		// On teste chacun méthode dans l'ordre, et dès qu'on a trouvé un parent on s'arrête
 		foreach ($parent_methodes as $parent_methode) {
-			$condition = array("$cle_objet = $id_objet");
+			$where = array("$cle_objet = $id_objet");
 			
 			if (isset($parent_methode['condition'])) {
-				$condition[] = $parent_methode['condition'];
+				$where[] = $parent_methode['condition'];
 			}
 			
 			$select = array();
@@ -131,8 +131,8 @@ function objet_trouver_parent($objet, $id_objet) {
 				$select[] = $parent_methode['champ_type'];
 			}
 			
-			// On fait la requête
-			if ($ligne = sql_fetsel($select, $table, $condition)) {
+			// On lance la requête
+			if ($ligne = sql_fetsel($select, $table, $where)) {
 				
 				// Si le type est fixe
 				if (isset($parent_methode['type'])) {
@@ -166,5 +166,39 @@ function objet_trouver_parent($objet, $id_objet) {
  * 
  */
 function objet_trouver_enfants($objet, $id_objet) {
+	$enfants = array();
 	
+	// Si on trouve des types d'enfants et leurs méthodes
+	if ($enfants_methodes = type_objet_info_enfants($objet)) {
+		include_spip('base/abstract_sql');
+		$id_objet = intval($id_objet);
+		
+		// On parcourt tous les types d'enfants trouvés
+		foreach ($enfants_methodes as $objet_enfant => $methode) {
+			$table_enfant = table_objet_sql($objet_enfant);
+			$cle_objet_enfant = id_table_objet($objet_enfant);
+			
+			$where = array();
+			// L'identifiant du parent
+			if (isset($methode['champ'])) {
+				$where[] = $methode['champ'] . ' = ' . $id_objet;
+			}
+			// Si le parent est variable
+			if (isset($methode['champ_type'])) {
+				$where[] = $methode['champ_type'] . ' = ' . sql_quote($objet);
+			}
+			// S'il y a une condition supplémentaire
+			if (isset($methode['condition'])) {
+				$where[] = $methode['condition'];
+			}
+			
+			// On lance la requête
+			if ($ids = sql_allfetsel($cle_objet_enfant, $table_enfant, $where)) {
+				$ids = array_map('reset', $ids);
+				$enfants[$objet_enfant] = $ids;
+			}
+		}
+	}
+	
+	return $enfants;
 }
