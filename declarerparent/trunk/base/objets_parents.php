@@ -106,7 +106,52 @@ function type_objet_info_enfants($objet) {
  * 
  */
 function objet_trouver_parent($objet, $id_objet) {
+	$parent = false;
 	
+	// Si on trouve une ou des méthodes de parent
+	if ($parent_methodes = type_objet_info_parent($objet)) {
+		include_spip('base/abstract_sql');
+		$table = table_objet_sql($objet);
+		$cle_objet = id_table_objet($objet);
+		$id_objet = intval($id_objet);
+		
+		// On teste chacun méthode dans l'ordre, et dès qu'on a trouvé un parent on s'arrête
+		foreach ($parent_methodes as $parent_methode) {
+			$condition = array("$cle_objet = $id_objet");
+			
+			if (isset($parent_methode['condition'])) {
+				$condition[] = $parent_methode['condition'];
+			}
+			
+			$select = array();
+			if (isset($parent_methode['champ'])) {
+				$select[] = $parent_methode['champ'];
+			}
+			if (isset($parent_methode['champ_type'])) {
+				$select[] = $parent_methode['champ_type'];
+			}
+			
+			// On fait la requête
+			if ($ligne = sql_fetsel($select, $table, $condition)) {
+				
+				// Si le type est fixe
+				if (isset($parent_methode['type'])) {
+					return array(
+						'objet' => $parent_methode['type'],
+						'id_objet' => intval($ligne[$parent_methode['champ']])
+					);
+				}
+				elseif (isset($parent_methode['champ_type'])) {
+					return array(
+						'objet' => $ligne[$parent_methode['champ_type']],
+						'id_objet' => intval($ligne[$parent_methode['champ']])
+					);
+				}
+			}
+		}
+	}
+	
+	return $parent;
 }
 
 /**
