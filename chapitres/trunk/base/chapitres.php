@@ -96,6 +96,10 @@ function chapitres_declarer_tables_objets_sql($tables) {
 			)
 		),
 		'texte_changer_statut' => 'chapitre:texte_changer_statut_chapitre',
+		'parent' => array(
+			array('condition' => 'id_parent=0', 'champ_type' => 'objet', 'champ' => 'id_objet', 'exclus' => array('chapitre')),
+			array('condition' => 'id_parent>0', 'type' => 'chapitre', 'champ' => 'id_parent'),
+		),
 	);
 
 	return $tables;
