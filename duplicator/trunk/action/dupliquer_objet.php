@@ -21,7 +21,7 @@ include_spip('action/editer_objet');
  * 		Tableau de champ=>valeur avec les modifications à apporter sur le contenu dupliqué
  * @return array
  */
-function action_dupliquer_objet_dist($objet = null, $id_objet = null, $modifications = array(), $options=array()) {
+function action_dupliquer_objet_dist($objet = null, $id_objet = null) {
 	// appel direct depuis une url avec arg = "objet/id/enfants"
 	if (is_null($id_objet) or is_null($objet)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -30,12 +30,21 @@ function action_dupliquer_objet_dist($objet = null, $id_objet = null, $modificat
 	}
 	
 	if ($objet and $id_objet) {
+		include_spip('inc/config');
+		$options = array();
+		
+		// S'il y a des champs précis à dupliquer pour cette option, on rajoute aux options
+		if ($champs = lire_config("duplicator/$objet/champs", array())) {
+			$options['champs'] = $champs;
+		}
+		
+		// Si on demande à dupliquer aussi les enfants
 		if ($enfants) {
 			$options['dupliquer_enfants'] = true;
 		}
 		
 		// Si on a réussi à dupliquer
-		if ($id_objet_duplicata = intval(objet_dupliquer($objet, $id_objet, $modifications))) {
+		if ($id_objet_duplicata = intval(objet_dupliquer($objet, $id_objet, $modifications, $options))) {
 			include_spip('inc/headers');
 			
 			// S'il y avait une demande de redirection
@@ -65,6 +74,8 @@ function action_dupliquer_objet_dist($objet = null, $id_objet = null, $modificat
  * 		Tableau de champ=>valeur avec les modifications à apporter sur le contenu dupliqué
  * @param $options
  * 		Tableau d'options :
+ * 		- champs : liste des champs à dupliquer, sinon * par défaut
+ * 		- ajout_titre : ajouter une chaine à la fin du titre
  * 		- dupliquer_liens : booléen précisant si on duplique les liens ou pas, par défaut oui
  * 		- dupliquer_enfants : booléen précisant si on duplique les enfants ou pas, par défaut non
  * 		- liens_exclus : liste d'objets liables dont on ne veut pas dupliquer les liens
@@ -77,8 +88,10 @@ function objet_dupliquer($objet, $id_objet, $modifications=array(), $options=arr
 	$id_objet = intval($id_objet);
 	
 	// On cherche la liste des champs à dupliquer, par défaut tout
-	$champs = lire_config("duplicator/$objet/champs", array());
-	if (empty($champs)) {
+	if (isset($options['champs']) and $options['champs']) {
+		$champs = $options['champs'];
+	}
+	else {
 		$champs = '*';
 	}
 	
@@ -86,6 +99,12 @@ function objet_dupliquer($objet, $id_objet, $modifications=array(), $options=arr
 	$infos_a_dupliquer = sql_fetsel($champs, table_objet_sql($objet), "$cle_objet = $id_objet");
 	// On retire la clé primaire
 	unset($infos_a_dupliquer[$cle_objet]);
+	
+	// Si on a demandé à ajouter une chaine après le titre
+	// TODO : on n'a toujours rien pour trouver uniquement le champ de titre SEUL
+	if (isset($options['ajout_titre']) and isset($infos_a_dupliquer['titre'])) {
+		$infos_a_dupliquer['titre'] .= $options['ajout_titre'];
+	}
 	
 	// On applique des modifications s'il y en a
 	$infos_a_dupliquer = array_merge($infos_a_dupliquer, $modifications);
