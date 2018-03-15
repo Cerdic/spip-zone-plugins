@@ -6,8 +6,9 @@
 		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="eo" url="https://trad.spip.net/tradlang_module/boussole-spip?lang_cible=eo" total="88" traduits="53" relire="0" modifs="3" nouveaux="32" pourcent="60.23">
+	<langue code="eo" url="https://trad.spip.net/tradlang_module/boussole-spip?lang_cible=eo" total="88" traduits="60" relire="0" modifs="0" nouveaux="28" pourcent="68.18">
 		<traducteur nom="Eric Lupinacci" lien="https://trad.spip.net/auteur/_eric_" />
+		<traducteur nom="gpl" lien="https://trad.spip.net/auteur/gpl" />
 		<traducteur nom="Matthieu Marcillaud" lien="https://trad.spip.net/auteur/matthieu-marcillaud" />
 	</langue>
 	<langue code="es" url="https://trad.spip.net/tradlang_module/boussole-spip?lang_cible=es" total="88" traduits="88" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
