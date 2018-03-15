@@ -41,6 +41,11 @@ function action_dupliquer_objet_dist($objet = null, $id_objet = null) {
 			$options['champs'] = $champs;
 		}
 		
+		// S'il y a un statut forcé
+		if ($statut = lire_config("duplicator/$table_objet/statut", null)) {
+			$modifications['statut'] = $statut;
+		}
+		
 		// Si on demande à dupliquer aussi les enfants
 		if ($enfants) {
 			$options['dupliquer_enfants'] = true;
