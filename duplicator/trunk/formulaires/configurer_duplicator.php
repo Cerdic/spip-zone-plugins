@@ -40,6 +40,11 @@ function formulaires_configurer_duplicator_saisies_dist() {
 				
 				// Si l'objet a des champs
 				if (isset($declaration_objet['field']) and $champs = $declaration_objet['field']) {
+					// On cherche et vire le champ statut, car il y a une config pour ça ensuite
+					if (isset($declaration_objet['statut'][0]['champ']) and $champ_statut = $declaration_objet['statut'][0]['champ']) {
+						unset($champs[$champ_statut]);
+					}
+					
 					foreach ($champs as $champ=>$sql) {
 						$champs[$champ] = $champ;
 					}

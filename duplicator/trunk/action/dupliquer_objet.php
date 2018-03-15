@@ -33,7 +33,7 @@ function action_dupliquer_objet_dist($objet = null, $id_objet = null) {
 		include_spip('inc/config');
 		$options = array();
 		
-		// S'il y a des champs précis à dupliquer pour cette option, on rajoute aux options
+		// S'il y a des champs précis à dupliquer pour cet objet, on rajoute aux options
 		if ($champs = lire_config("duplicator/$objet/champs", array())) {
 			$options['champs'] = $champs;
 		}
@@ -83,13 +83,23 @@ function action_dupliquer_objet_dist($objet = null, $id_objet = null) {
  * 		Retourne l'identifiant du duplicata
  */
 function objet_dupliquer($objet, $id_objet, $modifications=array(), $options=array()) {
+	include_spip('inc/filtres');
 	$id_objet_duplicata = false;
 	$cle_objet = id_table_objet($objet);
 	$id_objet = intval($id_objet);
 	
 	// On cherche la liste des champs à dupliquer, par défaut tout
-	if (isset($options['champs']) and $options['champs']) {
+	if (isset($options['champs']) and is_array($options['champs'])) {
 		$champs = $options['champs'];
+		
+		// On s'assure qu'il y a toujours le statut quand même
+		if (
+			$declaration_statut = objet_info($objet, 'statut')
+			and isset($declaration_statut[0]['champ'])
+			and $champ_statut = $declaration_statut[0]['champ']
+		) {
+			$champs[] = $champ_statut;
+		}
 	}
 	else {
 		$champs = '*';
@@ -114,17 +124,20 @@ function objet_dupliquer($objet, $id_objet, $modifications=array(), $options=arr
 	
 	// Si on a bien notre nouvel objet
 	if ($id_objet_duplicata = intval($id_objet_duplicata)) {
-		// On cherche quels liens
-		$liens = $liens_exclus = null;
-		if (isset($options['liens'])) {
-			$liens = $options['liens'];
+		// Si on duplique bien les liens
+		if (!isset($options['dupliquer_liens']) or $options['dupliquer_liens']) {
+			// On cherche quels liens
+			$liens = $liens_exclus = null;
+			if (isset($options['liens']) and is_array($options['liens'])) {
+				$liens = $options['liens'];
+			}
+			if (isset($options['liens_exclus']) and is_array($options['liens_exclus'])) {
+				$liens_exclus = $options['liens_exclus'];
+			}
+			
+			// On duplique les liens
+			objet_dupliquer_liens($objet, $id_objet, $id_objet_duplicata, $liens, $liens_exclus);
 		}
-		if (isset($options['liens_exclus'])) {
-			$liens_exclus = $options['liens_exclus'];
-		}
-		
-		// On duplique les liens
-		objet_dupliquer_liens($objet, $id_objet, $id_objet_duplicata, $liens, $liens_exclus);
 		
 		// On duplique les logos
 		logo_dupliquer($objet, $id_objet, $id_objet_duplicata, 'on');
@@ -136,6 +149,24 @@ function objet_dupliquer($objet, $id_objet, $modifications=array(), $options=arr
 			'id_objet_origine' => $id_rubrique,
 			'id_objet' => $id_nouvelle_rubrique
 		));
+		
+		// On duplique peut-être aussi tous les enfants
+		if (
+			isset($options['dupliquer_enfants'])
+			and $options['dupliquer_enfants']
+			and include_spip('base/objets_parents')
+			and $enfants_methodes = type_objet_info_enfants($objet)
+			and $enfants = objet_trouver_enfants($objet, $id_objet)
+		) {
+			// On parcourt tous les types d'enfants
+			foreach ($enfants as $objet_enfant => $ids) {
+				if (is_array($ids)) {
+					foreach ($ids as $id_enfant) {
+						
+					}
+				}
+			}
+		}
 	}
 	
 	return $id_objet_duplicata;
