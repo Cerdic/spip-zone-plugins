@@ -6,13 +6,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
-	'aide_choix_champs' => 'Liste des noms des champs SQL séparés par des ","<br/><em>Laisser vide pour sélectionner tous les champs principaux.</em>',
-	'action_dupliquer_article' => "Dupliquer cet article",
-	'action_dupliquer_rubrique' => "Dupliquer cette rubrique",
-	'action_dupliquer_rubrique_arbo' => 'Dupliquer l\'arborescence de la rubrique',
-	'autorisations' => 'Autorisations',
-	'autorisations_article' => 'Qui peut dupliquer des articles&nbsp;?',
-	'autorisations_rubriques' => 'Qui peut dupliquer des rubriques&nbsp;?',
+	'action_dupliquer_contenu' => 'Dupliquer ce contenu',
+	'action_dupliquer_contenu_enfants' => 'Dupliquer ce contenu et ses enfants',
+	'action_dupliquer_contenu_enfants_confirmer' => 'Êtes-vous sûrs de vouloir dupliquer ce contenu et tous ses enfants ?',
 	
 	// B
 	'bouton_confirmer' => 'Confirmer',

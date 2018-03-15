@@ -12,21 +12,48 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function duplicator_boite_infos($flux){
-	$type = $flux['args']['type'];
-	if(autoriser("dupliquer", "rubrique")){
-			if (($id = intval($flux['args']['id'])) && ($type=='rubrique')){
-				$contexte = array('id_objet'=>$id,'objet'=>$type);
-				$flux["data"] .= recuperer_fond("noisettes/bouton_duplicator", $contexte);
-			}
+	include_spip('inc/config');
+	include_spip('base/objets');
+	include_spip('inc/autoriser');
+	$objet = $flux['args']['type'];
+	$id_objet = intval($flux['args']['id']);
+	$table = table_objet_sql($objet);
+	
+	// Si on a accepté de dupliquer cet objet et que la personne en cours a bien le droit
+	if (
+		$objets = lire_config('duplicator/objets')
+		and in_array($table, $objets)
+		and autoriser('dupliquer', $objet, $id_objet)
+	) {
+		include_spip('inc/filtres');
+		include_spip('inc/actions');
+		
+		$flux["data"] .= bouton_action(
+			_T('duplicator:action_dupliquer_contenu'),
+			generer_action_auteur('dupliquer_objet', "$objet/$id_objet")
+		);
+		
+		$flux["data"] .= bouton_action(
+			_T('duplicator:action_dupliquer_contenu_enfants'),
+			generer_action_auteur('dupliquer_objet', "$objet/$id_objet/enfants"),
+			'',
+			_T('duplicator:action_dupliquer_contenu_enfants_confirmer')
+		);
 	}
 	
-	if(autoriser("dupliquer", "article")){
-			if (($id = intval($flux['args']['id'])) && ($type=='article')){
-				$contexte = array('id_objet'=>$id,'objet'=>$type);
-				$flux["data"] .= recuperer_fond("noisettes/bouton_duplicator", $contexte);
-			}
-
-	}
+	//~ if(autoriser("dupliquer", "rubrique")){
+			//~ if (($id = intval($flux['args']['id'])) && ($type=='rubrique')){
+				//~ $contexte = array('id_objet'=>$id,'objet'=>$type);
+				//~ $flux["data"] .= recuperer_fond("noisettes/bouton_duplicator", $contexte);
+			//~ }
+	//~ }
+	
+	//~ if(autoriser("dupliquer", "article")){
+			//~ if (($id = intval($flux['args']['id'])) && ($type=='article')){
+				//~ $contexte = array('id_objet'=>$id,'objet'=>$type);
+				//~ $flux["data"] .= recuperer_fond("noisettes/bouton_duplicator", $contexte);
+			//~ }
+	//~ }
 
 	return $flux;
 }
@@ -35,5 +62,6 @@ function duplicator_jqueryui_plugins($plugins){
 	if (test_espace_prive()){
 		$plugins[] = "jquery.ui.dialog";
 	}
+	
 	return $plugins;
 }

@@ -30,8 +30,17 @@ function autoriser_dupliquer($faire, $quoi='', $id=0, $qui=null, $options=null) 
 	}
 	// Sinon on cherche une autorisation logique par défaut, de création ou de création dans un parent
 	else {
-		// TODO ici une recherche du parent et appel d'autorisation de "creerpatatedans"
-		return true;
+		include_spip('base/objets_parents');
+		
+		// Si on trouve un parent pour ce type d'objet
+		if ($parent = objet_trouver_parent($quoi, $id)) {
+			// On construit le nom de la fonction
+			return autoriser("creer${quoi}dans", $parent['objet'], $parent['id_objet']);
+		}
+		// Sinon c'est juste la création tout court
+		else {
+			return autoriser('creer', $quoi);
+		}
 	}
 	
 	return false;

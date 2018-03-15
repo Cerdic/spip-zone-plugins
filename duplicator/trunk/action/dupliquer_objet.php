@@ -21,19 +21,37 @@ include_spip('action/editer_objet');
  * 		Tableau de champ=>valeur avec les modifications à apporter sur le contenu dupliqué
  * @return array
  */
-function action_dupliquer_objet_dist($objet = null, $id_objet = null, $modifications = null) {
-	// appel direct depuis une url avec arg = "objet/id"
+function action_dupliquer_objet_dist($objet = null, $id_objet = null, $modifications = array(), $options=array()) {
+	// appel direct depuis une url avec arg = "objet/id/enfants"
 	if (is_null($id_objet) or is_null($objet)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
-		list($objet, $id_objet) = array_pad(explode("/", $arg, 2), 2, null);
+		list($objet, $id_objet, $enfants) = array_pad(explode("/", $arg), 3, null);
 	}
 	
 	if ($objet and $id_objet) {
-		$id_objet_duplicata = objet_dupliquer($objet, $id_objet, $modifications);
+		if ($enfants) {
+			$options['dupliquer_enfants'] = true;
+		}
+		
+		// Si on a réussi à dupliquer
+		if ($id_objet_duplicata = intval(objet_dupliquer($objet, $id_objet, $modifications))) {
+			include_spip('inc/headers');
+			
+			// S'il y avait une demande de redirection
+			if ($redirect = _request('redirect')) {
+				redirige_par_entete(
+					str_replace('&amp;', '&', $redirect)
+				);
+			}
+			// Sinon on redirige sur la page de l'objet (TODO choix à configurer ?)
+			else {
+				redirige_par_entete(
+					str_replace('&amp;', '&', generer_url_entite($id_objet_duplicata, $objet))
+				);
+			}
+		}
 	}
-	
-	return $id_objet_duplicata;
 }
 
 /**
@@ -54,6 +72,7 @@ function action_dupliquer_objet_dist($objet = null, $id_objet = null, $modificat
  * 		Retourne l'identifiant du duplicata
  */
 function objet_dupliquer($objet, $id_objet, $modifications=array(), $options=array()) {
+	$id_objet_duplicata = false;
 	$cle_objet = id_table_objet($objet);
 	$id_objet = intval($id_objet);
 	
@@ -65,6 +84,8 @@ function objet_dupliquer($objet, $id_objet, $modifications=array(), $options=arr
 	
 	// On récupère les infos à dupliquer
 	$infos_a_dupliquer = sql_fetsel($champs, table_objet_sql($objet), "$cle_objet = $id_objet");
+	// On retire la clé primaire
+	unset($infos_a_dupliquer[$cle_objet]);
 	
 	// On applique des modifications s'il y en a
 	$infos_a_dupliquer = array_merge($infos_a_dupliquer, $modifications);
@@ -97,6 +118,8 @@ function objet_dupliquer($objet, $id_objet, $modifications=array(), $options=arr
 			'id_objet' => $id_nouvelle_rubrique
 		));
 	}
+	
+	return $id_objet_duplicata;
 }
 
 if (!function_exists('logo_dupliquer')) {
