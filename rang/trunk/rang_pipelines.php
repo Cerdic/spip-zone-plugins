@@ -48,7 +48,8 @@ function rang_recuperer_fond($flux) {
 
 	
 	if (isset($tables_objets_selectionnes) AND !empty($tables_objets_selectionnes)) {
-		/* Gestion du contexte : dans quelle page insérer le JS */
+		
+		// Gestion du contexte : dans quelle page insérer le JS ?
 		$exec 		= _request('exec');
 		$contextes	= pipeline('rang_declarer_contexte', array('rubrique', 'groupe_mots', 'mots'));
 		$sources	= rang_get_sources();
@@ -59,9 +60,8 @@ function rang_recuperer_fond($flux) {
 		) {
 			// recuperer les paramètres pour le calcul du JS correspondant
 			preg_match('/liste-objets\s([A-Za-z]+)/', $flux['data']['texte'], $result);
-			$type_objet = $result[1];
-
-			$nom_objet  = table_objet($type_objet);
+			$nom_objet = $result[1];
+			$type_objet  = objet_type($nom_objet);
 
 			// récupérer le type de parent…
 			$table_objet = table_objet_sql($type_objet);
@@ -72,9 +72,25 @@ function rang_recuperer_fond($flux) {
 			$id = id_table_objet($type_parent);
 			$id_parent = $flux['args']['contexte'][$id];
 
+			// suffixe de la pagination : particularité des objets historiques
+			switch ($type_objet) {
+				case 'article':
+					$suffixe_pagination = 'art';
+					break;
+				case 'site':
+					$suffixe_pagination = 'sites';
+					break;
+				case 'breve':
+					$suffixe_pagination = 'bre';
+					break;
+				default:
+					$suffixe_pagination = $type_objet;
+					break;
+			}
+
 			// Calcul du JS à insérer avec les paramètres
-			$ajout_script = recuperer_fond('prive/squelettes/inclure/rang', array(  'suffixe_pagination' => $nom_objet, 
-																					'objet' => $type_objet, 
+			$ajout_script = recuperer_fond('prive/squelettes/inclure/rang', array(  'suffixe_pagination' => $suffixe_pagination, 
+																					'objet' => $nom_objet, 
 																					'id_parent' => $id_parent ));
 
 			// et hop, on insère le JS calculé

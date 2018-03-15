@@ -38,9 +38,8 @@ function action_trier_items_dist() {
 
 	$table		= table_objet_sql($objet);
 	$definition_table = lister_tables_objets_sql($table);
-	$id_objet_parent = $definition_table['parent']['champ'];
+	$id_objet_parent = $definition_table['parent']['0']['champ'];
 	$id_objet	= id_table_objet($objet);
-
 
 	// reclassement !
 	foreach ($tab as $key => $value) {
@@ -70,13 +69,13 @@ function action_trier_items_dist() {
  * @return array
  *     note : sans ce return (a priori inutile, la fonction plante (???)
 **/
-function rang_supprimer_item($id){
+function rang_supprimer_item($id) {
 	// suppression du mot
 	$new_id = intval(substr($id, 4));
 	sql_delete('spip_mots', "id_mot=$new_id");
 
 	//récupérer le tableau id/rang actuel
-	$id_grp = sql_getfetsel('id_groupe', 'spip_groupes_mots', 'titre='.sql_quote('Actualités'));
+	$id_grp = sql_getfetsel('id_groupe', 'spip_groupes_mots');
 	$res = sql_select('id_mot', 'spip_mots', "id_groupe=$id_grp", '', 'rang');
 	while ($tab = sql_fetch($res)){
 		$new_tab[] = 'id_mot_'.$tab['id_mot'];
