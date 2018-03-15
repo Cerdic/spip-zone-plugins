@@ -31,10 +31,13 @@ function action_dupliquer_objet_dist($objet = null, $id_objet = null) {
 	
 	if ($objet and $id_objet) {
 		include_spip('inc/config');
+		include_spip('base/objets');
+		$table_objet = table_objet($objet);
+		$modifications = array();
 		$options = array();
 		
 		// S'il y a des champs précis à dupliquer pour cet objet, on rajoute aux options
-		if ($champs = lire_config("duplicator/$objet/champs", array())) {
+		if ($champs = lire_config("duplicator/$table_objet/champs", array())) {
 			$options['champs'] = $champs;
 		}
 		
@@ -117,7 +120,9 @@ function objet_dupliquer($objet, $id_objet, $modifications=array(), $options=arr
 	}
 	
 	// On applique des modifications s'il y en a
-	$infos_a_dupliquer = array_merge($infos_a_dupliquer, $modifications);
+	if ($modifications and is_array($modifications)) {
+		$infos_a_dupliquer = array_merge($infos_a_dupliquer, $modifications);
+	}
 	
 	// On commence la duplication de l'objet lui-même
 	$id_objet_duplicata = objet_inserer($objet, 0, $infos_a_dupliquer);
