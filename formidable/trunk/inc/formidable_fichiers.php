@@ -523,7 +523,12 @@ function formidable_generer_url_action_recuperer_fichier_email($saisie, $fichier
 }
 
 /** Générer le chemin d'un fichier d'après les paramètres passés en argument
- * @param array $param, paramètres décrivant le fichiers: nom, timestamp de la réponse ou numéro d'enregistrement de la réponse, id du formulaire,  champ formidable
+ * @param array $param, paramètres décrivant le fichiers: 
+ * formulaire => identifiant numérique du formulaire,  
+ * timestamp => timestamp de la réponse (si la réponse est uniquement envoyée par courriel)
+ * reponse => identifiant numérique de la réponse
+ * saisie => nom du champ formidable (type fichier_1)
+ * fichier => nom du fichier
  * @return string $chemin;
 **/
 function formidable_generer_chemin_fichier($param){
