@@ -19,7 +19,8 @@
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Paolo" lien="https://trad.spip.net/auteur/paolo" />
 	</langue>
-	<langue code="eo" url="https://trad.spip.net/tradlang_module/crayons?lang_cible=eo" total="52" traduits="14" relire="0" modifs="0" nouveaux="38" pourcent="26.92">
+	<langue code="eo" url="https://trad.spip.net/tradlang_module/crayons?lang_cible=eo" total="52" traduits="52" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="gpl" lien="https://trad.spip.net/auteur/gpl" />
 	</langue>
 	<langue code="es" url="https://trad.spip.net/tradlang_module/crayons?lang_cible=es" total="52" traduits="52" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="dani" lien="https://trad.spip.net/auteur/dani" />
