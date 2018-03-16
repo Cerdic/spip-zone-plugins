@@ -59,10 +59,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_rub_interface_explication' => 'Exibir apenas as seções do idioma do usuário',
 	'option_aff_rub_interface_label' => 'Exibição multilíngue',
 	'option_afficher_si_explication' => 'Informe as condições para exibir o campo, em função do valor de outros campos. O identificador dos outros campos deve ser inserido entre <code>@</code>.<br />
-Exemplo: code>@selection_1@=="Toto"</code> condiciona a exibição do campo a que o campo  <code>selection_1</code> tenha o valor <code>Toto</code>.', # MODIF
+Exemplo: code>@selection_1@=="Toto"</code> condiciona a exibição do campo a que o campo  <code>selection_1</code> tenha o valor <code>Toto</code>.<br />
+Pode-se usar operadores boleanos <code>||</code> (ou) e  <code>&&</code> (e)',
 	'option_afficher_si_label' => 'Exibição condicional',
+	'option_afficher_si_remplissage_uniquement_explication' => 'Marcando este checkbox, a exibição condicioinal se aplicará unicamente no preenchimento do formulário e não na exibição dos resultados.',
+	'option_afficher_si_remplissage_uniquement_label' => 'Unicamente no preenchimento',
 	'option_attention_explication' => 'Uma mensagem mais importante que a explicação.',
 	'option_attention_label' => 'Aviso',
+	'option_attribut_title_label' => 'Incluir um atributo title no label, contendo o valor do campo. Para ser usado com moderação.',
 	'option_autocomplete_defaut' => 'Deixar por padrão',
 	'option_autocomplete_explication' => 'Ao carregar a página, o seu navegador pode preencher previamente o campo em função do seu histórico',
 	'option_autocomplete_label' => 'Preenchimento prévio do campo',
@@ -108,6 +112,10 @@ Você pode indicar o início de um subgrupo, no formato "*Título do subgrupo". 
 	'option_label_case_label' => 'Rótulo localizado ao lado do checkbox',
 	'option_label_explication' => 'O titulo que será exibido.',
 	'option_label_label' => 'Rótulo',
+	'option_label_non_explication' => 'Será visível na exibição dos resultados.',
+	'option_label_non_label' => 'Label se o checkbox não estiver marcado',
+	'option_label_oui_explication' => 'Será visível na exibição dos resultados.',
+	'option_label_oui_label' => 'Label se o checkbox estiver marcado',
 	'option_limite_branche_explication' => 'Limita a escolha a um ramo específico do site',
 	'option_limite_branche_label' => 'Limitar a um ramo',
 	'option_maxlength_explication' => 'O usuário não poderá digitar mais do que esse número de caracteres.',
@@ -133,6 +141,7 @@ Você pode indicar o início de um subgrupo, no formato "*Título do subgrupo". 
 	'option_rows_label' => 'Número de linhas',
 	'option_size_explication' => 'Largura do campo em número de caractéres. Esta opção não é sempre aplicável, já que os estilos CSS do seu site poderão sobrepor-se.',
 	'option_size_label' => 'Tamanho do campo',
+	'option_statut_label' => 'Status particular(es)',
 	'option_type_choix_plusieurs' => 'Permitir que o usuário escolha <strong>diversos</strong> destinatários.',
 	'option_type_choix_tous' => 'Incluir <strong>todos</strong> estes autores como destinatários. O usuário não terá nenhuma escolha.',
 	'option_type_choix_un' => 'Permitir ao usuário escolher <strong>um único</strong> destinatário (no formato de lista).',
@@ -141,10 +150,13 @@ Você pode indicar o início de um subgrupo, no formato "*Título do subgrupo". 
 	'option_type_label' => 'Tipo do campo',
 	'option_type_password' => 'Texto mascarado durante o preenchimento (ex: senha).',
 	'option_type_text' => 'Normal',
-	'option_valeur_non_explication' => 'Valor postado se o checkbox não estiver selecionado', # MODIF
+	'option_valeur_non_explication' => 'Valor postado se o checkbox não estiver selecionado. Atenção, trata-se de um valor tecnico e não de um valor exibido.',
 	'option_valeur_non_label' => 'Valor não',
-	'option_valeur_oui_explication' => 'VAlor postado se o checkbox estiver selecionado', # MODIF
+	'option_valeur_oui_explication' => 'Valor postado se o checkbox estiver selecionado. Atenção, trata-se de um valor tecnico e não de um valor exibido.',
 	'option_valeur_oui_label' => 'Valor sim',
+
+	// P
+	'plugin_yaml_inactif' => 'O plugin YAML está desativado. Você precisa ativá-lo para que esta página fique funcional.',
 
 	// S
 	'saisie_auteurs_explication' => 'Permite selecionar um ou mais autores',
@@ -157,6 +169,8 @@ Você pode indicar o início de um subgrupo, no formato "*Título do subgrupo". 
 	'saisie_date_titre' => 'Data',
 	'saisie_destinataires_explication' => 'Permite escolher um ou mais destinatários entre autores pré-selecionados.',
 	'saisie_destinataires_titre' => 'Destinatários',
+	'saisie_email_explication' => 'Permite ter um campos do tipo e-mail em HTML5.',
+	'saisie_email_titre' => 'Endereço de e-mail',
 	'saisie_explication_explication' => 'Um texto explicativo geral.',
 	'saisie_explication_titre' => 'Explicação',
 	'saisie_fieldset_explication' => 'Uma área que poderá englobar vários campos.',
@@ -192,8 +206,9 @@ Você pode indicar o início de um subgrupo, no formato "*Título do subgrupo". 
 	'saisie_textarea_titre' => 'Bloco de texto',
 
 	// T
+	'titre_page_saisies_doc' => 'Documentação das entradas de dados',
 	'tous_visiteurs' => 'Todos os visitantes (mesmo os não registrados)',
-	'tout_selectionner' => 'Selecionar tudo', # MODIF
+	'tout_selectionner' => '(De)Selecionar tudo',
 
 	// V
 	'vue_sans_reponse' => '<i>Sem resposta</i>',
