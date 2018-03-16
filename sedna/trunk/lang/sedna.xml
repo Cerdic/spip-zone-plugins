@@ -19,7 +19,8 @@
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Mark" lien="https://trad.spip.net/auteur/mark" />
 	</langue>
-	<langue code="eo" url="https://trad.spip.net/tradlang_module/sedna?lang_cible=eo" total="24" traduits="22" relire="0" modifs="2" nouveaux="0" pourcent="91.67">
+	<langue code="eo" url="https://trad.spip.net/tradlang_module/sedna?lang_cible=eo" total="24" traduits="24" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="gpl" lien="https://trad.spip.net/auteur/gpl" />
 	</langue>
 	<langue code="es" url="https://trad.spip.net/tradlang_module/sedna?lang_cible=es" total="24" traduits="24" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
