@@ -15,6 +15,9 @@
 	<langue code="en" url="https://trad.spip.net/tradlang_module/cfg?lang_cible=en" total="33" traduits="33" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="sQuonk" lien="https://trad.spip.net/auteur/squonk" />
 	</langue>
+	<langue code="eo" url="https://trad.spip.net/tradlang_module/cfg?lang_cible=eo" total="33" traduits="33" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="gpl" lien="https://trad.spip.net/auteur/gpl" />
+	</langue>
 	<langue code="es" url="https://trad.spip.net/tradlang_module/cfg?lang_cible=es" total="33" traduits="33" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="dani" lien="https://trad.spip.net/auteur/dani" />
 		<traducteur nom="Fil" lien="https://trad.spip.net/auteur/fil" />
