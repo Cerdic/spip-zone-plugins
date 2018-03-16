@@ -24,9 +24,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_lien' => 'Inclui qualquer link, interno (URL relativo) ou externo (http://...).',
 	'description_menu_mapage' => 'Si o visitante esta conectado, inclui um link até sua página pessoal.',
 	'description_menu_mots' => 'Exibi automaticamente um menu listando as matérias vinculadas no palavra-chave.',
-	'description_menu_objet' => 'Crie um link até um objeto de SPIP : matéria, seção ou outro. O valor padrão do nome da entrada é o título do objeto.', # MODIF
+	'description_menu_objet' => 'Crie um link para um objeto de SPIP: matéria, seção ou outro. Por padrão, o nome da entrada será o título do objeto. A entrada só será visível quando o objeto estiver publicado.',
 	'description_menu_page_speciale' => 'Inclui um link até uma  página template acessível através um endereço (URL) do tipo <code>spip.php?page=nom&param1=xx&param2=yyy...</code>. Essas páginas template são entregadas geralmente com cada plugin.',
-	'description_menu_page_speciale_zajax' => 'Inclui um link até um bloco duma página acessível através um endereço (URL) do tipo <code>spip.php?page=nom&param1=xx&param2=yyy...</code>. Precisa dum template de tipo Z e do plugin <a href="http://contrib.spip.net/MediaBox">Mediabox</a>.', # MODIF
+	'description_menu_page_speciale_zajax' => 'Inclui um link para um bloco de uma página acessível por um URL do tipo <code>spip.php?page=nom&param1=xx&param2=yyy...</code>. Precisa de um template do tipo Z e do plugin <a href="http://contrib.spip.net/MediaBox">Mediabox</a>.',
 	'description_menu_rubriques_articles' => 'Exibi uma lista de seções, e si você quiser, as subseções e matérias através vários níveis. O valor padrão exibi todas as seções desde a raiz, classificadas por título (numericamente e depois alfabeticamente). As matérias estão armazenadas sistematicamente depois as seções. ',
 	'description_menu_rubriques_completes' => 'Exibi uma lista de seções, e si você quiser, as subseções e matérias através vários níveis. O valor padrão exibi todas as seções desde a raiz, classificadas por título (numericamente e depois alfabeticamente).',
 	'description_menu_secteurlangue' => 'Essa entrada é dedicada pelos sites utilizando um setor por idioma. Ela exibi automaticamente um menu com as seções do setor correspondente a idioma da página, e, si você quiser, pode exibir as subseções no vários níveis. O valor padrão exibi todas as seções desde a raiz, classificadas por título (numericamente e depois alfabeticamente). ',
@@ -58,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_rubriques_exclues' => 'Números das seções para retirada, separadas com vírgulas',
 	'entree_id_secteur_exclus' => 'Números dos setores para retirada, separados com vírgulas',
 	'entree_infini' => 'Sem fim',
+	'entree_lien_direct_articles_uniques' => 'Se sim, e se as matérias únicas estiverem ocultas, se a seção tiver apenas uma matéria, faz o link para a matéria? (marcar "sim" para isso)',
 	'entree_mapage' => 'Minha página pessoal',
 	'entree_masquer_articles_uniques' => 'Si "oui", e si uma seção tem só uma matéria, deveria esconder ? (colocar "oui" para fazer isso)',
 	'entree_niveau' => 'Nível dos subseções',
