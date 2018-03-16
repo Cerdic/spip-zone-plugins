@@ -86,6 +86,7 @@ function action_dupliquer_objet_dist($objet = null, $id_objet = null) {
  * 		- ajout_titre : ajouter une chaine à la fin du titre
  * 		- dupliquer_liens : booléen précisant si on duplique les liens ou pas, par défaut oui
  * 		- dupliquer_enfants : booléen précisant si on duplique les enfants ou pas, par défaut non
+ * 		- liens : liste d'objets liables dont on veut dupliquer les liens
  * 		- liens_exclus : liste d'objets liables dont on ne veut pas dupliquer les liens
  * @return int
  * 		Retourne l'identifiant du duplicata
@@ -172,7 +173,22 @@ function objet_dupliquer($objet, $id_objet, $modifications=array(), $options=arr
 			foreach ($enfants as $objet_enfant => $ids) {
 				if (is_array($ids)) {
 					foreach ($ids as $id_enfant) {
+						$modifications_enfant = array();
+						$options_enfant = $options;
 						
+						// On enlève des options qui n'ont pas à venir du parent de départ
+						unset($options_enfant['champs']);
+						unset($options_enfant['ajout_titre']);
+						
+						// Les modifications nécessaires pour mettre le bon parent suivant la méthode
+						if (isset($enfants_methodes[$objet_enfant]['champ'])) {
+							$modifications_enfant[$enfants_methodes[$objet_enfant]['champ']] = $id_objet_duplicata;
+						}
+						if (isset($enfants_methodes[$objet_enfant]['champ_type'])) {
+							$modifications_enfant[$enfants_methodes[$objet_enfant]['champ_type']] = $objet;
+						}
+						
+						$id_enfant_duplicata = objet_dupliquer($objet_enfant, $id_enfant, $modifications_enfant, $options_enfant);
 					}
 				}
 			}
