@@ -120,7 +120,7 @@ function chapitres_afficher_config_objet($flux) {
 function chapitres_pre_insertion($flux) {
 	if ($flux['args']['table'] == 'spip_chapitres') {
 		// S'il y a un id_parent
-		if ($id_parent = intval($flux['args']['id_parent'])) {
+		if ($id_parent = intval($flux['data']['id_parent']) or $id_parent = intval($flux['args']['id_parent'])) {
 			$flux['data']['id_parent'] = $id_parent;
 			
 			// Et dans ce cas, le nouveau chapitre utilise forcément l'objet et id_objet du parent
