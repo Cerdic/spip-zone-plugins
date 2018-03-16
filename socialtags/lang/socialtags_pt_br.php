@@ -11,6 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_activer_javascript' => 'Por favor, ative o Javascript.',
+	'cfg_afterorappend' => 'Localização:',
+	'cfg_afterorappend_exp' => 'Inserção após o bloco do seletor (padrão), ou dentro do bloco do seletor?',
 	'cfg_badge_fb' => 'Badge/Widget Facebook',
 	'cfg_badge_fb_existe' => 'Se você possui um Badge Facebook (<a href="http://www.facebook.com/facebook-widgets/" class="spip_out">ajuda no site FB</a>), indique abaixo o seu conteúdo, tanto em JS, quanto em HTML.',
 	'cfg_badge_html' => 'Badge HTML',
@@ -25,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_insertion' => 'Inclusão nas páginas:',
 	'cfg_liste_site' => 'Lista de mídias sociais',
 	'cfg_plusone' => 'Google plus one',
-	'cfg_plusone_existe' => 'Para ativar o Google+1, instale o plugin (<a href="http://contrib.spip.net/Google-1" class="spip_out">de ajuda em spip-contrib</a>).', # MODIF
+	'cfg_plusone_existe' => 'Para ativar o Google+1, instale o plugin (<a href="http://contrib.spip.net/Google-1" class="spip_out">de ajuda em spip-contrib</a>).',
 	'cfg_referer' => 'Exibir o badge e os botões apenas para os visitantes originários dos respectivos sites.',
 	'cfg_selector' => 'Seletor:',
 	'cfg_sous_bloc' => 'No bloco de título das páginas de matérias',
@@ -41,6 +43,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_noisette_badge_facebook' => 'Exibir o badge Facebook definido na página de configuração',
 	'description_noisette_facebook_like' => 'Exibir o botão Facebook <b>Curtir</b> ou <b>Recomendar</b> e enventualmente <b>Enviar</b>',
 	'description_noisette_facebook_like_box' => 'Exibir o box Facebook <b>Curtir</b>. ele exibe o número de fans que curitam a página Facebook referenciada',
+
+	// I
+	'item_after' => 'No interior',
+	'item_append' => 'Após',
 
 	// N
 	'noisette_action_like' => 'Curtir',
