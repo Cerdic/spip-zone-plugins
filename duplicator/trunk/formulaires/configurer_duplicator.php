@@ -8,6 +8,9 @@ include_spip('base/objets');
 
 function formulaires_configurer_duplicator_saisies_dist() {
 	$declaration_objets = lister_tables_objets_sql();
+	$textes_objets = array_column($declaration_objets, 'texte_objets');
+	$textes_objets = array_map('_T', $textes_objets);
+	array_multisort($textes_objets, SORT_ASC, $declaration_objets);
 	$config = lire_config('duplicator');
 	
 	$saisies = array(
