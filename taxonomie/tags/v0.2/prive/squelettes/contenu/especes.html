@@ -1,0 +1,21 @@
+[(#AUTORISER{voir, _especes}|sinon_interdire_acces)]
+<h1 class="grostitre"><:taxonomie:titre_page_taxonomie:></h1>
+
+
+[(#REM) Onglets pour le filtrage par règne et par indicateur d'édition ]
+<INCLURE{fond=prive/squelettes/inclure/inc-filtres_listes,
+	env} />
+
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF, ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/especes,
+	par=nom_scientifique,
+	info_1=taxonomie:info_1_espece,
+	info_nb=taxonomie:info_nb_especes,
+	sinon=<:espece:info_aucun_espece:>,
+	env, ajax}>
+
+[(#AUTORISER{creer,espece})
+	[(#URL_ECRIRE{espece_creer}|icone_verticale{<:espece:icone_creer_espece:>, espece, new, right})]
+]

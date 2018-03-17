@@ -1,0 +1,63 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+	<h3 class="titrem"><:taxonomie:info_etape{etape=#ENV{_etape}, etapes=#ENV{_etapes}}:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class="editer-groupe">
+			[(#SAISIE{radio, type_recherche,
+				explication=<:taxonomie:explication_recherche_type:>,
+				label=<:taxonomie:label_recherche_type:>,
+				datas=#ENV{_types_recherche},
+				defaut=#ENV{_type_recherche_defaut}
+			})]
+
+			[(#SAISIE{input, recherche,
+				explication=<:taxonomie:explication_recherche_taxon:>,
+				label=<:taxonomie:label_recherche_taxon:>,
+				obligatoire=oui
+			})]
+
+			[(#SAISIE{radio, correspondance,
+				explication=<:taxonomie:explication_recherche_correspondance:>,
+				label=<:taxonomie:label_recherche_correspondance:>,
+				datas=#ENV{_correspondances},
+				defaut=#ENV{_correspondance_defaut}
+			})]
+
+			[(#SAISIE{radio, regne,
+				label=<:taxonomie:label_recherche_regne:>,
+				explication=<:taxonomie:explication_recherche_regne:>,
+				datas=#ENV{_regnes},
+				defaut=#ENV{_regne_defaut}
+			})]
+		</div>
+
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:taxonomie:bouton_continuer:>" />
+		</p>
+	</div>
+	</form>
+</div>
+
+<script type="text/javascript">/*<![CDATA[*/
+	jQuery(document).ready(function() {
+	[(#ENV{type_recherche, scientificname}|=={scientificname}|oui)
+		jQuery(".choix_debut").hide('fast');
+		jQuery(".choix_fin").hide('fast');
+	]
+		jQuery("input[name='type_recherche']").change(function() {
+			if (jQuery("input[name='type_recherche']:checked").val() == 'commonname') {
+				jQuery(".choix_debut").show('fast');
+				jQuery(".choix_fin").show('fast');
+			}
+			else {
+				jQuery(".choix_debut").hide('fast');
+				jQuery(".choix_fin").hide('fast');
+			}
+			jQuery(this).blur();
+		});
+	});
+/*]]>*/</script>

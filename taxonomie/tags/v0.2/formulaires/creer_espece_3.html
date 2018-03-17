@@ -1,0 +1,67 @@
+<div class="formulaire_spip formulaire_charger formulaire_#FORM">
+	<h3 class="titrem"><:taxonomie:info_etape{etape=#ENV{_etape}, etapes=#ENV{_etapes}}:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<div>
+		<p>
+			[(#SET{nom, [<span class="nom_scientifique_inline"><strong>(#ENV{_espece/nom_scientifique})</strong></span>]})]
+			<:taxonomie:info_espece_choisie_intro{taxon=#GET{nom}}:>
+		</p>
+		<table class="spip liste">
+			<tbody>
+				<tr>
+					<td><:espece:champ_tsn_label:></td>
+					<td class="principale">#ENV{_espece/tsn}</td>
+				</tr>
+				<tr>
+					<td><:espece:champ_nom_scientifique_label:></td>
+					<td class="principale nom_scientifique">#ENV{_espece/nom_scientifique}</td>
+				</tr>
+				<tr>
+					<td><:espece:champ_auteur_label:></td>
+					<td class="principale">#ENV{_espece/auteur}</td>
+				</tr>
+				<tr>
+					<td><:espece:champ_nom_commun_label:></td>
+					<td class="principale">[(#ENV*{_espece/nom_commun_affiche})]</td>
+				</tr>
+				<tr>
+					<td><:espece:champ_rang_label:></td>
+					<td class="principale">[(#VAL{taxonomie:rang_}|concat{#ENV{_espece/rang}}|_T)]</td>
+				</tr>
+				<tr>
+					<td><:espece:champ_regne_label:></td>
+					<td class="principale nom_scientifique">#ENV{_espece/regne}</td>
+				</tr>
+				<tr>
+					<td><:taxonomie:label_parents_espece:></td>
+					<td class="principale">
+						<ul class="contenu_ascendance">
+						<BOUCLE_parents(DATA) {source table, #ENV{_parents}}{par cle}>
+							[<li[ class="rang(#CLE|plus{1})"]>
+								(#VAL{taxonomie:rang_}|concat{#VALEUR{rang}}|_T) :
+								[<span class="nom_scientifique_inline">(#VALEUR{nom_scientifique})</span>
+								\(#VALEUR{tsn}\)]
+							</li>]
+						</BOUCLE_parents>
+						</ul>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p><:taxonomie:info_espece_choisie_fin:></p>
+	</div>
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<p class="boutons">
+			#SET{etape_precedente, #ENV{_etape}|moins{1}}
+			<input type="submit" class="submit" name="_retour_etape_2" value="<:taxonomie:bouton_retourner{etape=#GET{etape_precedente}}:>" />
+			<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+	</div>
+	</form>
+</div>

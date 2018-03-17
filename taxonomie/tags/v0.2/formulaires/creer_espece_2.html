@@ -1,0 +1,47 @@
+<div class="formulaire_spip formulaire_charger formulaire_#FORM">
+	<h3 class="titrem"><:taxonomie:info_etape{etape=#ENV{_etape}, etapes=#ENV{_etapes}}:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<div>
+		<p>
+			<:taxonomie:info_espece_recherche_intro:>
+		</p>
+		<ul class="spip">
+			<li>
+				[(#SET{parametre, [<strong>(#ENV{recherche})</strong>]})]
+				[(#VAL{taxonomie:info_espece_recherche_}
+					|concat{#ENV{type_recherche}}
+					|concat{_}
+					|concat{#ENV{correspondance}}
+					|_T{#ARRAY{recherche, #GET{parametre}}}
+				)]
+			</li>
+			<li>
+				[(#SET{parametre, [(#VAL{taxonomie:regne_}|concat{#ENV{regne}}|_T)]})]
+				<:taxonomie:info_espece_recherche_regne{regne=#GET{parametre}}:>
+			</li>
+		</ul>
+		<p><:taxonomie:info_espece_recherche_fin:></p>
+	</div>
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class="editer-groupe">
+			[(#SAISIE{radio, tsn,
+				label=<:taxonomie:label_taxon_trouve:>,
+				explication=<:taxonomie:explication_taxon_trouve:>,
+				datas=#ENV{_taxons},
+				defaut=#ENV{_taxon_defaut},
+			})]
+		</div>
+
+		<p class="boutons">
+			#SET{etape_precedente, #ENV{_etape}|moins{1}}
+			<input type="submit" class="submit" name="_retour_etape_1" value="<:taxonomie:bouton_retourner{etape=#GET{etape_precedente}}:>" />
+			<input type="submit" class="submit" value="<:taxonomie:bouton_continuer:>" />
+		</p>
+	</div>
+	</form>
+</div>

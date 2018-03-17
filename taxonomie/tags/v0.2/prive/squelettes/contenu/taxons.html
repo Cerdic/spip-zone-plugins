@@ -1,0 +1,17 @@
+[(#AUTORISER{voir, _taxons}|sinon_interdire_acces)]
+<h1 class="grostitre"><:taxonomie:titre_page_taxonomie:></h1>
+
+[(#REM) Onglets pour le filtrage par règne et par indicateur d'édition ]
+<INCLURE{fond=prive/squelettes/inclure/inc-filtres_listes,
+	filtres=#LISTE{edition},
+	env} />
+
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/taxons,
+	par=nom_scientifique,
+	info_1=taxonomie:info_1_taxon,
+	info_nb=taxonomie:info_nb_taxons,
+	sinon=<:taxon:info_aucun_taxon:>,
+	env, ajax} />

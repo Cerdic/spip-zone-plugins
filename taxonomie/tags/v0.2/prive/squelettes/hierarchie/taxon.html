@@ -1,0 +1,11 @@
+<!-- hierarchie -->
+#SET{objet, taxon}
+<a	href="[(#URL_ECRIRE{taxons})]">[(#GET{objet}|objet_info{texte_objets}|_T)]</a> &gt;
+
+<BOUCLE_taxon(TAXONS) {id_taxon}>
+	[(#LANG|changer_typo)]
+	<strong class="nom_scientifique_inline on">
+		#NOM_SCIENTIFIQUE
+	</strong>
+	[(#REM|changer_typo)]
+</BOUCLE_taxon>

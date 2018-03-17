@@ -1,0 +1,29 @@
+<paquet
+	prefix="taxonomie"
+	categorie="divers"
+	version="0.2.0"
+	etat="dev"
+	compatibilite="[3.0.17;3.2.*]"
+	logo="taxonomie_logo-64.png"
+	documentation=""
+	schema="1"
+>
+	<nom>Taxonomie</nom>
+	<!--Créer une base du monde vivant-->
+
+	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="autoriser" inclure="taxonomie_autorisations.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/taxonomie_declarations.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/taxonomie_declarations.php" />
+	<pipeline nom="pre_edition" inclure="taxonomie_pipelines.php" />
+
+	<necessite nom="saisies"  compatibilite="[1.24.0;]" />
+	<utilise nom="convertisseur"  compatibilite="[0.5.0;]" />
+
+	<genie nom="actualiser_itis" periode="86400" />
+
+	<menu nom="especes" titre="espece:titre_especes" parent="menu_edition" icone="images/espece-16.png" action="especes" />
+	<menu nom="espece_creer" titre="espece:icone_creer_espece" parent="outils_rapides" icone="images/espece-new-16.png" action="espece_creer" />
+</paquet>

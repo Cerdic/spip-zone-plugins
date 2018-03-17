@@ -1,0 +1,10 @@
+[(#AUTORISER{creer, taxon}|sinon_interdire_acces)]
+<h1 class="grostitre"><:taxonomie:titre_page_taxonomie:></h1>
+
+[(#REM) <!-- Liste des règnes chargés --> ]
+<INCLURE{fond=prive/squelettes/liste/regnes,
+	titre=<:taxonomie:titre_liste_regnes:>,
+	env, ajax} />
+
+[(#REM) <!-- Formulaire de chargement ou de mise à jour d'un règne --> ]
+#FORMULAIRE_CHARGER_REGNE

@@ -1,0 +1,8 @@
+[(#REM) <!-- Boite d'information sur la page de navigation dans la liste des taxons d'un rang donné --> ]
+#BOITE_OUVRIR{#CHEMIN_IMAGE{taxonomie_gerer-24.png}|balise_img{'',cadre-icone}, info}
+	<:taxonomie:info_boite_especes:>
+#BOITE_FERMER
+
+[(#REM) <!-- Menu des onglets --> ]
+<INCLURE{fond=prive/squelettes/inclure/inc-taxonomie-navigation,
+	env} />

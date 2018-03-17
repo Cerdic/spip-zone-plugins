@@ -1,0 +1,6 @@
+#SET{open,#BOITE_OUVRIR{'',raccourcis}}
+[(#GET{open}|unique)]
+[(#URL_ECRIRE{taxon_decrire}
+	|parametre_url{id_taxon, #ID_TAXON}
+	|icone_horizontale{<:taxonomie:bouton_wikipedia_descriptif:>, wikipedia-24})]
+[(#GET{open}|unique|?{'',#BOITE_FERMER})]

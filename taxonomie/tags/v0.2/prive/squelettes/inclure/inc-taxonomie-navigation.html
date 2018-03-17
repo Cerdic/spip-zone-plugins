@@ -1,0 +1,28 @@
+[(#REM) <!-- Menu des onglets "gestion des règnes", "navigation dans les taxons" et "configuration du plugin"
+ --> ]
+<ul class="liste-items sous_navigation">
+	[<li class="item">
+		(#URL_ECRIRE{especes}
+			|lien_ou_expose{
+				<:taxonomie:onglet_espece:>,
+				[(#ENV{exec}|=={especes})]})
+	</li>]
+	[<li class="item">
+		(#URL_ECRIRE{taxons}
+			|lien_ou_expose{
+				<:taxonomie:onglet_navigation:>,
+				[(#ENV{exec}|=={taxons})]})
+	</li>]
+	[<li class="item">
+		(#URL_ECRIRE{regnes}
+			|lien_ou_expose{
+				<:taxonomie:onglet_gestion:>,
+				[(#ENV{exec}|=={regnes})]})
+	</li>]
+	[<li class="item">
+		(#URL_ECRIRE{configurer_taxonomie}
+			|lien_ou_expose{
+				<:taxonomie:onglet_configuration:>,
+				[(#ENV{exec}|=={configurer_taxonomie})]})
+	</li>]
+</ul>

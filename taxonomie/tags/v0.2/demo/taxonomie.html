@@ -1,0 +1,138 @@
+#CACHE{0}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+
+<body dir="#LANG_DIR">
+<div id="container">
+<?php
+    include_spip('services/itis/itis_api');
+    include_spip('inc/filtres');
+    include_spip('inc/taxonomie');
+
+    var_dump(itis_get_information('scientificname', 183803));
+    var_dump(itis_get_information('kingdomname', 183803));
+    var_dump(itis_get_information('parent', 183803));
+    var_dump(itis_get_information('rankname', 183803));
+    var_dump(itis_get_information('author', 183803));
+    var_dump(itis_get_information('commonnames', 183803));
+    var_dump(itis_get_information('hierarchyfull', 183803));
+?>
+
+	<?php die(); ?>
+	<h1>TAXONOMER</h1>
+
+	<h2>Fonction : taxon_merger_traductions</h2>
+	[(#VAL|tester_taxon_merger_traductions|propre)]
+
+	<h2>Fonction : extraire_multi</h2>
+	[(#VAL|tester_extraire_multi|propre)]
+
+	<h2>Fonction : extraire_trads</h2>
+<?php
+	$multi = "<multi>[fr]en français</multi>";
+	$ret = preg_match(_EXTRAIRE_MULTI, $multi, $match);
+	var_dump($multi, $ret, gettype($ret), $match);
+	die();
+
+	$multi = '';
+	var_dump($multi, extraire_trads($multi));
+
+	$multi = 'sans langue';
+	var_dump($multi, extraire_trads($multi));
+
+	$multi = '[fr]en français';
+	var_dump($multi, extraire_trads($multi));
+
+	$multi = '[fr]en français[en]en anglais';
+	var_dump($multi, extraire_trads($multi));
+
+	$multi = 'en defaut[fr]en français[en]en anglais';
+	var_dump($multi, extraire_trads($multi));
+?>
+
+    <h1>Service ITIS</h1>
+
+    <h2>Action : search_tsn</h2>
+<?php
+    $nom = 'Animalia';
+    $tsn = itis_search_tsn('scientificname', $nom);
+    var_dump("TSN $nom (stricte)",$tsn);
+
+    $nom = 'panthera leo';
+    $tsn = itis_search_tsn('scientificname', $nom, false);
+    var_dump("TSN $nom (non stricte)",$tsn);
+
+    $nom = 'panthera leo';
+    $tsn = itis_search_tsn('scientificname', $nom);
+    var_dump("TSN $nom (stricte)",$tsn);
+?>
+
+    <h2>Action : get_record</h2>
+<?php
+    $tsn = 202423;
+    $taxon = itis_get_record($tsn);
+    var_dump("Informations du taxon $tsn", $taxon);
+
+    $tsn = 170945;
+    $taxon = itis_get_record($tsn);
+    var_dump("Informations du taxon $tsn", $taxon);
+
+    $tsn = 117318;
+    $taxon = itis_get_record($tsn);
+    var_dump("Informations du taxon $tsn", $taxon);
+?>
+
+    <h2>Action : get_information</h2>
+<?php
+    $tsn = 117318;
+    echo "Informations du taxon $tsn</br>";
+    $info = itis_get_information('scientificname', $tsn);
+    var_dump('scientificname', $info);
+
+    $info = itis_get_information('kingdomname', $tsn);
+    var_dump('kingdomname', $info);
+
+    $info = itis_get_information('parent', $tsn);
+    var_dump('parent', $info);
+
+    $info = itis_get_information('rankname', $tsn);
+    var_dump('rankname', $info);
+
+    $info = itis_get_information('author', $tsn);
+    var_dump('author', $info);
+
+    $info = itis_get_information('commonnames', $tsn);
+    var_dump('commonnames', $info);
+
+    $info = itis_get_information('hierarchydown', $tsn);
+    var_dump('hierarchydown', $info);
+
+    $info = itis_get_information('hierarchyfull', $tsn);
+    var_dump('hierarchyfull', $info);
+
+    $info = itis_get_information('coremetadata', $tsn);
+    var_dump('coremetadata', $info);
+
+    $info = itis_get_information('experts', $tsn);
+    var_dump('experts', $info);
+
+    $info = itis_get_information('othersources', $tsn);
+    var_dump('othersources', $info);
+?>
+
+    <h2>Action : list_vernaculars</h2>
+<?php
+	$langue = 'french';
+    $tsns = itis_list_vernaculars($langue);
+    var_dump("Noms communs en $langue", $tsns);
+?>
+
+	<h2>Action : read_hierarchy</h2>
+<?php
+	$taxons = itis_read_hierarchy('fungi', 'genus', $sha);
+	var_dump($taxons, $sha);
+?>
+
+</div>
+</body>
+</html>
