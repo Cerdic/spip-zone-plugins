@@ -19,6 +19,7 @@ function formulaires_configurer_duplicator_saisies_dist() {
 			'options' => array(
 				'nom' => 'objets',
 				'label' => _T('duplicator:configurer_objets_label'),
+				'explication' => _T('duplicator:configurer_objets_explication'),
 				'defaut' => isset($config['objets']) ? $config['objets'] : array(),
 			),
 		),
@@ -26,6 +27,15 @@ function formulaires_configurer_duplicator_saisies_dist() {
 	
 	// Pour chaque objet déjà choisi, on ajoute des options
 	if (isset($config['objets'])) {
+		// Une explication de pourquoi l'ensemble des objets
+		$saisies[] = array(
+			'saisie' => 'explication',
+			'options' => array(
+				'nom' => 'explication_objets',
+				'texte' => _T('duplicator:configurer_explication_objets_texte'),
+			),
+		);
+		
 		// On boucle sur tous les objets possibles
 		foreach ($declaration_objets as $table_objet_sql=>$declaration_objet) {
 			$table_objet = table_objet($table_objet_sql);
