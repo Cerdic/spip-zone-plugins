@@ -5,6 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 include_spip('base/objets');
+include_spip('base/objets_parents');
 
 function formulaires_configurer_duplicator_saisies_dist() {
 	$declaration_objets = lister_tables_objets_sql();
@@ -115,6 +116,32 @@ function formulaires_configurer_duplicator_saisies_dist() {
 				),
 			);
 			
+			// Les enfants à dupliquer
+			if ($enfants_possibles = type_objet_info_enfants($objet)) {
+				$enfants_possibles = array_map('table_objet_sql', array_keys($enfants_possibles));
+				$enfants_exclus = array_diff(array_keys($declaration_objets), $enfants_possibles);
+				
+				$groupe_objet['saisies'][] = array(
+					'saisie' => 'case',
+					'options' => array(
+						'nom' => "${table_objet}[personnaliser_enfants]",
+						'label_case' => _T('duplicator:configurer_personnaliser_enfants_label'),
+						'valeur_forcee' => (isset($config[$table_objet]['objets_enfants']) and $config[$table_objet]['objets_enfants']) ? 'on' : '',
+					),
+				);
+				$groupe_objet['saisies'][] = array(
+					'saisie' => 'choisir_objets',
+					'options' => array(
+						'nom' => "${table_objet}[objets_enfants]",
+						'exclus' => $enfants_exclus,
+						'label' => _T('duplicator:configurer_objets_enfants_label'),
+						'defaut' => isset($config[$table_objet]['objets_enfants']) ? $config[$table_objet]['objets_enfants'] : array(),
+						'afficher_si' => "@${table_objet}[personnaliser_enfants]@ == 'on'",
+					),
+				);
+			}
+			
+			
 			$saisies[] = $groupe_objet;
 		}
 	}
@@ -133,6 +160,12 @@ function formulaires_configurer_duplicator_verifier_dist() {
 		if (!$config_objet['personnaliser_champs']) {
 			unset($config_objet['champs']);
 		}
+		
+		// Si on a décoché la personnalisation des enfants, on vide la config des enfants
+		if (!$config_objet['personnaliser_enfants']) {
+			unset($config_objet['objets_enfants']);
+		}
+		
 		// On remet dans la course
 		set_request($table_objet, $config_objet);
 	}
