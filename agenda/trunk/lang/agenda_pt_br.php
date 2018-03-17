@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_suivante' => 'ano seguinte',
 	'aucun_evenement' => 'nenhum evento',
 	'aucun_inscrit' => 'Nenhum inscrito',
-	'aucune_rubrique_mode_agenda' => 'Por padrão, todas as seções permitem usar os eventos. Se você ativar o modo agenda em uma ou mais seções, o gerenciamento dos eventos será limitado a esse ramo da estrutura.', # MODIF
+	'aucune_rubrique_mode_agenda' => 'Por padrão, todas as seções permitem usar os eventos. Se você ativar o modo agenda em uma ou mais seções, o gerenciamento dos eventos será limitado a esse ramo da estrutura.',
 
 	// B
 	'bouton_annuler' => 'Anular',
