@@ -29,7 +29,8 @@
 #navigation .infos .numero { margin-bottom: 10px; }
 
 /* Mettre en exergue l'auteur comme le descriptif */
-.taxon .fiche_objet #wysiwyg .contenu_auteur {
+.taxon .fiche_objet #wysiwyg .contenu_auteur,
+.espece .fiche_objet #wysiwyg .contenu_auteur {
     background-color: #[(#ENV{foncee}|couleur_luminance{0.15})];
     border: 0 none;
     padding: 10px 15px;
@@ -43,7 +44,8 @@
 	.contenu_ascendance[ .rang(#VALEUR)] {[ padding-left: (#VALEUR|mult{7})px; ]}
 </BOUCLE_ascendance>
 /* Mettre en valeur chaque sources du titre */
-.taxon .fiche_objet #wysiwyg .contenu_descriptif li.sources { margin-top: 0.5em; }
+.taxon .fiche_objet #wysiwyg .contenu_descriptif li.sources,
+.espece .fiche_objet #wysiwyg .contenu_descriptif li.sources { margin-top: 0.5em; }
 
 /* Variations des colonnes de la liste des taxons */
 .liste-objets.taxons .nom { display: none; }
