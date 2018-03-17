@@ -121,3 +121,21 @@ function formulaires_configurer_duplicator_saisies_dist() {
 	
 	return $saisies;
 }
+
+function formulaires_configurer_duplicator_verifier_dist() {
+	// Pour chaque type d'objets
+	$declaration_objets = lister_tables_objets_sql();
+	foreach ($declaration_objets as $table_objet_sql=>$declaration_objet) {
+		$table_objet = table_objet($table_objet_sql);
+		$config_objet = _request($table_objet);
+		
+		// Si on a décoché la personnalisation des champs, on vide la config des champs
+		if (!$config_objet['personnaliser_champs']) {
+			unset($config_objet['champs']);
+		}
+		// On remet dans la course
+		set_request($table_objet, $config_objet);
+	}
+	
+	return array();
+}
