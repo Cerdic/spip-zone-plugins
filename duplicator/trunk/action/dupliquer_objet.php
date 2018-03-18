@@ -32,23 +32,32 @@ function action_dupliquer_objet_dist($objet = null, $id_objet = null) {
 	if ($objet and $id_objet) {
 		include_spip('inc/config');
 		include_spip('base/objets');
-		$table_objet = table_objet($objet);
+		$config = lire_config('duplicator', array());
+		$objet = objet_type($objet); // assurance
 		$modifications = array();
 		$options = array();
 		
 		// S'il y a des champs précis à dupliquer pour cet objet, on rajoute aux options
-		if ($champs = lire_config("duplicator/$table_objet/champs", array())) {
+		if (isset($config[$objet]['champs']) and $champs = $config[$objet]['champs']) {
 			$options['champs'] = $champs;
 		}
 		
-		// S'il y a un statut forcé
-		if ($statut = lire_config("duplicator/$table_objet/statut", null)) {
+		// S'il y a un statut forcé pour cet objet
+		if (isset($config[$objet]['statut']) and $statut = $config[$objet]['statut']) {
 			$modifications['statut'] = $statut;
 		}
 		
 		// Si on demande à dupliquer aussi les enfants
 		if ($enfants) {
 			$options['dupliquer_enfants'] = true;
+			
+			// On cherche si seulement certains enfants sont acceptés à dupliquer pour cet objet
+			if (isset($config[$objet]['enfants']) and $enfants = $config[$objet]['enfants']) {
+				$options['enfants'] = array_map('objet_type', $config[$objet]['enfants']);
+			}
+			
+			// Dans ce cas on passe aussi le tableau de toutes les options, avec "champs" et "enfants" qui seront pris en compte
+			$options['options_objets'] = $config;
 		}
 		
 		// Si on a réussi à dupliquer
@@ -85,9 +94,13 @@ function action_dupliquer_objet_dist($objet = null, $id_objet = null) {
  * 		- champs : liste des champs à dupliquer, sinon * par défaut
  * 		- ajout_titre : ajouter une chaine à la fin du titre
  * 		- dupliquer_liens : booléen précisant si on duplique les liens ou pas, par défaut oui
- * 		- dupliquer_enfants : booléen précisant si on duplique les enfants ou pas, par défaut non
  * 		- liens : liste d'objets liables dont on veut dupliquer les liens
  * 		- liens_exclus : liste d'objets liables dont on ne veut pas dupliquer les liens
+ * 		- dupliquer_enfants : booléen précisant si on duplique les enfants ou pas, par défaut non
+ * 		- enfants : liste d'objets d'enfants acceptés pour la duplication en cascade
+ * 		- options_objets : tableau indexé par objet, avec pour chacun un tableau des options précédentes
+ * 		  Cela permet de passer en cascade aux enfants certaines options qui ne sont pas forcément les mêmes que dans l'appel de départ
+ * 		  'article' => array('champs'=>array(…), 'enfants'=>array(…))
  * @return int
  * 		Retourne l'identifiant du duplicata
  */
@@ -168,8 +181,18 @@ function objet_dupliquer($objet, $id_objet, $modifications=array(), $options=arr
 			and include_spip('base/objets_parents')
 			and $enfants_methodes = type_objet_info_enfants($objet)
 			and $enfants = objet_trouver_enfants($objet, $id_objet)
+			// S'il n'y a pas de config d'enfants alors tous, sinon seulement les enfants autorisés
+			and (
+				!isset($options['enfants'])
+				or $options['enfants'] == 'tous'
+				or (
+					$enfants_autorises = ($options['enfants'] ? $options['enfants'] : array())
+					and $enfants_autorises = array_flip(array_map('objet_type', $enfants_autorises))
+					and $enfants = array_intersect_key($enfants, $enfants_autorises)
+				)
+			)
 		) {
-			// On parcourt tous les types d'enfants
+			// On parcourt tous les types d'enfants autorisés
 			foreach ($enfants as $objet_enfant => $ids) {
 				if (is_array($ids)) {
 					foreach ($ids as $id_enfant) {
@@ -179,6 +202,11 @@ function objet_dupliquer($objet, $id_objet, $modifications=array(), $options=arr
 						// On enlève des options qui n'ont pas à venir du parent de départ
 						unset($options_enfant['champs']);
 						unset($options_enfant['ajout_titre']);
+						
+						// S'il existe des options d'objets, on utilise
+						if (isset($options['options_objets'][$objet_enfant])) {
+							$options_enfant = array_merge($options_enfant, $options['options_objets'][$objet_enfant]);
+						}
 						
 						// Les modifications nécessaires pour mettre le bon parent suivant la méthode
 						if (isset($enfants_methodes[$objet_enfant]['champ'])) {

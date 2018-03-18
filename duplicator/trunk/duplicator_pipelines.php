@@ -46,27 +46,5 @@ function duplicator_boite_infos($flux){
 		}
 	}
 	
-	//~ if(autoriser("dupliquer", "rubrique")){
-			//~ if (($id = intval($flux['args']['id'])) && ($type=='rubrique')){
-				//~ $contexte = array('id_objet'=>$id,'objet'=>$type);
-				//~ $flux["data"] .= recuperer_fond("noisettes/bouton_duplicator", $contexte);
-			//~ }
-	//~ }
-	
-	//~ if(autoriser("dupliquer", "article")){
-			//~ if (($id = intval($flux['args']['id'])) && ($type=='article')){
-				//~ $contexte = array('id_objet'=>$id,'objet'=>$type);
-				//~ $flux["data"] .= recuperer_fond("noisettes/bouton_duplicator", $contexte);
-			//~ }
-	//~ }
-
 	return $flux;
-}
-
-function duplicator_jqueryui_plugins($plugins){
-	if (test_espace_prive()){
-		$plugins[] = "jquery.ui.dialog";
-	}
-	
-	return $plugins;
 }

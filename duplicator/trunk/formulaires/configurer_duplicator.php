@@ -39,13 +39,12 @@ function formulaires_configurer_duplicator_saisies_dist() {
 		
 		// On boucle sur tous les objets possibles
 		foreach ($declaration_objets as $table_objet_sql=>$declaration_objet) {
-			$table_objet = table_objet($table_objet_sql);
-			$objet = objet_type($table_objet);
+			$objet = objet_type($table_objet_sql);
 			
 			$groupe_objet = array(
 				'saisie' => 'fieldset',
 				'options' => array(
-					'nom' => "groupe_$table_objet",
+					'nom' => "groupe_$objet",
 					'label' => _T($declaration_objet['texte_objets']),
 					'pliable' => 'oui',
 					'plie' => 'oui',
@@ -66,19 +65,19 @@ function formulaires_configurer_duplicator_saisies_dist() {
 				$groupe_objet['saisies'][] = array(
 					'saisie' => 'case',
 					'options' => array(
-						'nom' => "${table_objet}[personnaliser_champs]",
+						'nom' => "${objet}[personnaliser_champs]",
 						'label_case' => _T('duplicator:configurer_personnaliser_champs_label'),
-						'valeur_forcee' => (isset($config[$table_objet]['champs']) and $config[$table_objet]['champs']) ? 'on' : '',
+						'valeur_forcee' => (isset($config[$objet]['champs']) and $config[$objet]['champs']) ? 'on' : '',
 					),
 				);
 				$groupe_objet['saisies'][] = array(
 					'saisie' => 'checkbox',
 					'options' => array(
-						'nom' => "${table_objet}[champs]",
+						'nom' => "${objet}[champs]",
 						'label' => _T('duplicator:configurer_champs_label'),
 						'data' => $champs,
-						'defaut' => isset($config[$table_objet]['champs']) ? $config[$table_objet]['champs'] : array(),
-						'afficher_si' => "@${table_objet}[personnaliser_champs]@ == 'on'",
+						'defaut' => isset($config[$objet]['champs']) ? $config[$objet]['champs'] : array(),
+						'afficher_si' => "@${objet}[personnaliser_champs]@ == 'on'",
 					),
 				);
 			}
@@ -91,11 +90,11 @@ function formulaires_configurer_duplicator_saisies_dist() {
 				$groupe_objet['saisies'][] = array(
 					'saisie' => 'selection',
 					'options' => array(
-						'nom' => "${table_objet}[statut]",
+						'nom' => "${objet}[statut]",
 						'label' => _T('duplicator:configurer_statut_label'),
 						'option_intro' => _T('duplicator:configurer_statut_option_intro'),
 						'data' => $statuts,
-						'defaut' => isset($config[$table_objet]['statut']) ? $config[$table_objet]['statut'] : '',
+						'defaut' => isset($config[$objet]['statut']) ? $config[$objet]['statut'] : '',
 					),
 				);
 			}
@@ -104,7 +103,7 @@ function formulaires_configurer_duplicator_saisies_dist() {
 			$groupe_objet['saisies'][] = array(
 				'saisie' => 'selection',
 				'options' => array(
-					'nom' => "${table_objet}[autorisation]",
+					'nom' => "${objet}[autorisation]",
 					'label' => _T('duplicator:configurer_autorisation_label'),
 					'option_intro' => _T('duplicator:configurer_autorisation_option_intro'),
 					'data' => array(
@@ -112,7 +111,7 @@ function formulaires_configurer_duplicator_saisies_dist() {
 						'administrateur' => _T('duplicator:configurer_autorisation_choix_administrateur'),
 						'redacteur' => _T('duplicator:configurer_autorisation_choix_redacteur'),
 					),
-					'defaut' => isset($config[$table_objet]['autorisation']) ? $config[$table_objet]['autorisation'] : '',
+					'defaut' => isset($config[$objet]['autorisation']) ? $config[$objet]['autorisation'] : '',
 				),
 			);
 			
@@ -124,19 +123,19 @@ function formulaires_configurer_duplicator_saisies_dist() {
 				$groupe_objet['saisies'][] = array(
 					'saisie' => 'case',
 					'options' => array(
-						'nom' => "${table_objet}[personnaliser_enfants]",
+						'nom' => "${objet}[personnaliser_enfants]",
 						'label_case' => _T('duplicator:configurer_personnaliser_enfants_label'),
-						'valeur_forcee' => (isset($config[$table_objet]['objets_enfants']) and $config[$table_objet]['objets_enfants']) ? 'on' : '',
+						'defaut' => isset($config[$objet]['personnaliser_enfants']) ? $config[$objet]['personnaliser_enfants'] : '',
 					),
 				);
 				$groupe_objet['saisies'][] = array(
 					'saisie' => 'choisir_objets',
 					'options' => array(
-						'nom' => "${table_objet}[objets_enfants]",
+						'nom' => "${objet}[enfants]",
 						'exclus' => $enfants_exclus,
-						'label' => _T('duplicator:configurer_objets_enfants_label'),
-						'defaut' => isset($config[$table_objet]['objets_enfants']) ? $config[$table_objet]['objets_enfants'] : array(),
-						'afficher_si' => "@${table_objet}[personnaliser_enfants]@ == 'on'",
+						'label' => _T('duplicator:configurer_enfants_label'),
+						'defaut' => isset($config[$objet]['enfants']) ? $config[$objet]['enfants'] : array(),
+						'afficher_si' => "@${objet}[personnaliser_enfants]@ == 'on'",
 					),
 				);
 			}
@@ -153,8 +152,8 @@ function formulaires_configurer_duplicator_verifier_dist() {
 	// Pour chaque type d'objets
 	$declaration_objets = lister_tables_objets_sql();
 	foreach ($declaration_objets as $table_objet_sql=>$declaration_objet) {
-		$table_objet = table_objet($table_objet_sql);
-		$config_objet = _request($table_objet);
+		$objet = objet_type($table_objet_sql);
+		$config_objet = _request($objet);
 		
 		// Si on a décoché la personnalisation des champs, on vide la config des champs
 		if (!$config_objet['personnaliser_champs']) {
@@ -163,11 +162,15 @@ function formulaires_configurer_duplicator_verifier_dist() {
 		
 		// Si on a décoché la personnalisation des enfants, on vide la config des enfants
 		if (!$config_objet['personnaliser_enfants']) {
-			unset($config_objet['objets_enfants']);
+			$config_objet['enfants'] = 'tous';
+		}
+		else {
+			// Le hidden pourri dans la saisie inc-choisir-enfants qu'il faut virer
+			$config_objet['enfants'] = array_filter($config_objet['enfants']);
 		}
 		
 		// On remet dans la course
-		set_request($table_objet, $config_objet);
+		set_request($objet, $config_objet);
 	}
 	
 	return array();

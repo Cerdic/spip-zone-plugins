@@ -62,22 +62,22 @@ function duplicator_maj_1_0_0() {
 	if (isset($config['rub_champs']) and $champs = $config['rub_champs']) {
 		$champs = explode(',', $champs);
 		$champs = array_map('trim', $champs);
-		$nouvelle_config['rubriques']['champs'] = $champs;
+		$nouvelle_config['rubrique']['champs'] = $champs;
 	}
 	if (isset($config['art_champs']) and $champs = $config['art_champs']) {
 		$champs = explode(',', $champs);
 		$champs = array_map('trim', $champs);
-		$nouvelle_config['articles']['champs'] = $champs;
+		$nouvelle_config['article']['champs'] = $champs;
 	}
 	
 	// Config des autorisations : non on prend par défaut plutôt, qui n'existait pas avant, donc ça on ne le migre pas
 	
 	// Config du statut
 	if (isset($config['duplic_article_etat_pub']) and $config['duplic_article_etat_pub'] == 'oui') {
-		$nouvelle_config['articles']['statut'] = '';
+		$nouvelle_config['article']['statut'] = '';
 	}
 	else {
-		$nouvelle_config['articles']['statut'] = 'prepa';
+		$nouvelle_config['article']['statut'] = 'prepa';
 	}
 	
 	// Et on enregistre
