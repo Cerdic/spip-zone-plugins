@@ -104,7 +104,7 @@ function taxonomie_declarer_tables_objets_sql($tables) {
                 'exception' => array('statut', 'tout')
             )
         ),
-        'texte_changer_statut' => 'espece:texte_changer_statut_espece',
+        'texte_changer_statut' => 'taxon:texte_changer_statut_taxon',
 	);
 
 	return $tables;

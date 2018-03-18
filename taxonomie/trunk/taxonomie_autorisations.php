@@ -130,6 +130,31 @@ function autoriser_taxon_iconifier_dist($faire, $type, $id, $qui, $opt) {
 }
 
 /**
+ * Autorisation de modifier le statut d'un taxon.
+ * Cela n'est possible que pour les espèces ne possédant aucun enfant.
+ *
+ * @param object $faire
+ * @param object $type
+ * @param object $id
+ * @param object $qui
+ * @param object $opt
+ * @return
+ */
+function autoriser_taxon_instituer_dist($faire, $type, $id, $qui, $opt) {
+
+	$autoriser = false;
+
+	if ($id_taxon = intval($id)) {
+		$from = 'spip_taxons';
+		$where = array("id_taxon=$id_taxon");
+		$espece = sql_getfetsel('espece', $from, $where);
+
+		$autoriser = (($espece == 'oui') and  autoriser('modifier', 'taxon', $id_taxon, $qui, $opt));
+	}
+
+	return $autoriser;
+}
+/**
  * Autorisation de voir la liste des taxons : tout le monde est autorisé.
  *
  * @param string	$faire
