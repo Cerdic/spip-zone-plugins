@@ -6,13 +6,13 @@
 			[(#GET{async}|oui)
 			onclick="if (jQuery(this).is('.oe-play-button')){jQuery(this).removeClass('oe-play-button').addClass('loading').html(decodeURIComponent('[(#ENV*{data/html}|oembed_force_video_autoplay|rawurlencode|texte_script)]'));}"
 		]>
-			[(#GET{async}|oui)<button onclick="jQuery(this).parent().trigger('click');"><:oembed:bouton_lecture:></button>]
+			[(#GET{async}|oui)<button onclick="jQuery(this).parent().trigger('click');"><span class="label"><:oembed:bouton_lecture:></span></button>]
 			[(#GET{async}|non)[(#ENV*{data/html}|et{#ENV{autoplay}}|?{[(#ENV*{data/html}|oembed_force_video_autoplay)],#ENV*{data/html}|sinon{#ENV{url}}})] ]
 	</div>
 	<style><!--/**/.oe-video .loading {background-image:url("#CHEMIN_IMAGE{searching.gif}")!important;background-size:auto !important;}/**/--></style>
 </div>
 <figcaption>
 [<div class="spip_doc_titre" style="max-width:#ENV{data/width}px;"><a href="#ENV*{url}" class="oe-title">(#ENV*{data/title})</a>[(#ENV*{data/author_name}|oui)
-<span class="oe-author_name"><br /><i><:par_auteur:> [(#ENV*{data/author_url}|?{[<a href="#ENV*{data/author_url}">(#ENV*{data/author_name})</a>],#ENV*{data/author_name}})]</i></span>]</div>]
+<span class="oe-author_name"><span class="par"><:par_auteur:></span>[(#ENV*{data/author_url}|?{[<a class="nom" href="#ENV*{data/author_url}">(#ENV*{data/author_name})</a>],<span class="nom">#ENV*{data/author_name}}</span>)]</span>]</div>]
 [<div class="spip_doc_titre oembed-source">(#ENV*{lien}|echappe_retour)</div>]
 </figcaption>
