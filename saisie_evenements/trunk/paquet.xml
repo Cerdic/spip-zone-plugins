@@ -1,8 +1,8 @@
 <paquet
 	prefix="saisie_evenements"
 	categorie="outil"
-	version="0.1.0"
-	etat="dev"
+	version="1.0.0"
+	etat="test"
 	compatibilite="[3.2.0;3.2.*]"
 	documentation="https://contrib.spip.net/4977"
 >
