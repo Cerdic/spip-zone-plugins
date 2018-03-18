@@ -41,7 +41,7 @@
 		</tr>
 		
 		#SET{profondeur, 1}
-		<BOUCLE_liste_chapitres_enfants (CHAPITRES) {si #ENV{arbo}|=={oui}}{id_parent=#ID_CHAPITRE}{objet?}{id_objet?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}>
+		<BOUCLE_liste_chapitres_enfants (CHAPITRES) {si #ENV{arbo}|=={oui}}{id_parent=#ID_CHAPITRE}{objet?}{id_objet?}{id_mot?}{id_auteur?}{where?}{statut==.*}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}>
 		#SET{compteur,#GET{compteur}|plus{1}}
 		<tr class="[(#GET{compteur}|alterner{row_odd,row_even})]">
 			<td class="statut">[(#STATUT|puce_statut{chapitre,#ID_CHAPITRE})]</td> 
