@@ -29,3 +29,5 @@
 </BOUCLE_evenements>
 #SET{description,#GET{description}|array_flip}
 
+#INCLURE{fond=saisies/#ENV{type_choix},datas=#GET{description},env}
+
