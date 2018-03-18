@@ -3,8 +3,7 @@
     #PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','taxon','id',#ENV{id_taxon}}}}
 #BOITE_FERMER
 
-<INCLURE{fond=prive/squelettes/inclure/inc-taxonomie-services,
-    nom=#NOM_SCIENTIFIQUE,
+<INCLURE{fond=prive/squelettes/inclure/inc-taxonomie-raccourci,
     env}>
 
 #PIPELINE{afficher_config_objet,#ARRAY{args,#ARRAY{type,taxon,id,#ID_TAXON},data,''}}

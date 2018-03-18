@@ -586,7 +586,7 @@ function itis_list_vernaculars($language) {
  *        Liste des rangs disponibles pour le règne concerné structurée comme une hiérarchie du règne aux rangs
  *        inférieurs. Cette liste contient tous les rangs principaux, secondaires et intercalaires.
  *        Le tableau est de la forme [nom anglais du rang en minuscules] = détails du rang
- * @param int    $sha_file
+ * @param string $sha_file
  *        Sha calculé à partir du fichier de taxons correspondant au règne choisi. Le sha est retourné
  *        par la fonction afin d'être stocké par le plugin.
  *
@@ -633,11 +633,14 @@ function itis_read_hierarchy($kingdom, $ranks_hierarchy, &$sha_file) {
 				include_spip('inc/charsets');
 				foreach ($lines as $_line) {
 					$taxon = array(
-						'regne'      => $kingdom,
-						'nom_commun' => '',
-						'descriptif' => '',
-						'indicateur' => '',
-						'edite'      => 'non'
+						'regne'       => $kingdom,
+						'nom_commun'  => '',
+						'descriptif'  => '',
+						'indicateurs' => '',
+						'edite'       => 'non',
+						'importe'     => 'oui',
+						'espece'      => 'non',
+						'statut'      => 'publie',
 					);
 					if (preg_match($regexp, $_line, $match)) {
 						// Initialisation du taxon
@@ -652,7 +655,7 @@ function itis_read_hierarchy($kingdom, $ranks_hierarchy, &$sha_file) {
 						// Vérifier si il existe un indicateur spécial dans le nom scientifique comme
 						// un X pour indiquer un taxon hybride.
 						if (strtolower(trim($match[3])) == 'x') {
-							$taxon['indicateur'] = 'hybride';
+							$taxon['indicateurs'] = 'hybride';
 						}
 
 						// Recherche du parent
@@ -703,7 +706,7 @@ function itis_read_hierarchy($kingdom, $ranks_hierarchy, &$sha_file) {
  *
  * @param string $language
  *        Langue au sens d'ITIS écrite en minuscules. Vaut `french`, `english`, `spanish` etc.
- * @param int    $sha_file
+ * @param string $sha_file
  *        Sha calculé à partir du fichier des noms communs choisi. Le sha est retourné
  *        par la fonction afin d'être stocké par le plugin.
  *
@@ -744,7 +747,7 @@ function itis_read_vernaculars($language, &$sha_file) {
  *
  * @param string $kingdom
  *        Nom scientifique du règne en lettres minuscules : `animalia`, `plantae`, `fungi`.
- * @param int    $sha_file
+ * @param string $sha_file
  *        Sha calculé à partir du fichier de taxons correspondant au règne choisi. Le sha est retourné
  *        par la fonction afin d'être stocké par le plugin.
  *

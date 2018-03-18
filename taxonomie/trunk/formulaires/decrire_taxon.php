@@ -1,6 +1,6 @@
 <?php
 /**
- * Gestion du formulaire de chargement du descriptif d'un taxon à partir de Wikipedia.
+ * Gestion du formulaire d'initialisation du descriptif ou du texte d'un taxon à partir de Wikipedia.
  *
  * @package    SPIP\TAXONOMIE\TAXON
  */
@@ -9,10 +9,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Chargement des données : le formulaire récupère une page wikipedia pour le descriptif du taxon.
- * Le formulaire propose ce descriptif mais aussi une liste d'autres pages qui matchent avec le taxon.
+ * Le formulaire propose une page par défaut mais aussi une liste d'autres pages qui matchent avec le taxon.
  *
  * @uses wikipedia_get_page()
  * @uses convertisseur_texte_spip()
+ *
+ * @param int    $id_taxon
+ *      Id du taxon concerné.
+ * @param string $element
+ *      Elément de contenu qui sera initialisé. Prend les valeurs `texte` ou `descriptif`.
  *
  * @return array
  * 		Tableau des données à charger par le formulaire (affichage). Aucune donnée chargée n'est un
@@ -22,26 +27,29 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 		- `langue`         : code de langue SPIP choisi lors de l'étape 1
  * 		- `_liens`         : liste des liens possibles pour la recherche (étape 2)
  * 		- `_lien_defaut`   : lien par défaut (étape 2)
- * 		- `_descriptif`    : texte de la page trouvée ou choisie par l'utilisateur (étape 2)
- * 		- `_etapes`        : nombre d'étapes du formaulaire, à savoir, 2.
+ * 		- `_page`          : texte de la page trouvée ou choisie par l'utilisateur (étape 2)
+ * 		- `_etapes`        : nombre d'étapes du formulaire, à savoir, 2.
  */
-function formulaires_decrire_taxon_charger($id_taxon) {
+function formulaires_decrire_taxon_charger($id_taxon, $element) {
 
 	// Initialisation du chargement.
 	$valeurs = array();
 
+	// On passe l'élément de contenu concerné par l'initialisation.
+	$valeurs['_element'] = $element;
+
 	// Langue choisie pour la page wikipedia.
 	$valeurs['langue'] = _request('langue');
 
-	// Déterminer si un descriptif existe pour une langue donnée.
+	// Déterminer si un descriptif ou un texte explicatif existe pour une langue donnée.
 	include_spip('inc/filtres');
 	$traductions = array();
-	if ($descriptif = sql_getfetsel('descriptif', 'spip_taxons', array('id_taxon=' . sql_quote($id_taxon)))) {
-		$descriptif = trim($descriptif);
-		if (preg_match(_EXTRAIRE_MULTI, $descriptif, $match)) {
-			$descriptif = trim($match[1]);
+	if ($contenu = sql_getfetsel($element, 'spip_taxons', array('id_taxon=' . sql_quote($id_taxon)))) {
+		$contenu = trim($contenu);
+		if (preg_match(_EXTRAIRE_MULTI, $contenu, $match)) {
+			$contenu = trim($match[1]);
 		}
-		$traductions = extraire_trads($descriptif);
+		$traductions = extraire_trads($contenu);
 	}
 
 	// Liste des langues utilisées par le plugin.
@@ -50,7 +58,7 @@ function formulaires_decrire_taxon_charger($id_taxon) {
 	foreach ($langues_utilisees as $_code_langue) {
 		$valeurs['_langues'][$_code_langue] = traduire_nom_langue($_code_langue);
 		if ($traductions and array_key_exists($_code_langue, $traductions)) {
-			$valeurs['_langues'][$_code_langue] .= ' (' . _T('taxonomie:info_descriptif_existe') .')';
+			$valeurs['_langues'][$_code_langue] .= ' (' . _T('taxonomie:info_element_existe') .')';
 		}
 	}
 
@@ -66,7 +74,7 @@ function formulaires_decrire_taxon_charger($id_taxon) {
 
 	// Initialisation des paramètres du formulaire utilisés en étape 2 et mis à jour dans la vérification
 	// de l'étape 1.
-	$valeurs['_descriptif'] = _request('_descriptif');
+	$valeurs['_page'] = _request('_page');
 	$valeurs['_liens'] = _request('_liens');
 	$valeurs['_lien_defaut'] = _request('_lien_defaut');
 
@@ -83,14 +91,19 @@ function formulaires_decrire_taxon_charger($id_taxon) {
  * @uses wikipedia_get_page()
  * @uses convertisseur_texte_spip()
  *
+ * @param int    $id_taxon
+ *      Id du taxon concerné.
+ * @param string $element
+ *      Elément de contenu qui sera initialisé. Prend les valeurs `texte` ou `descriptif`.
+ *
  * @return array
  * 		Message d'erreur si aucune page n'est disponible ou chargement des champs utiles à l'étape 2 sinon.
  *      Ces champs sont :
  * 		- `_liens`         : liste des liens possibles pour la recherche (étape 2)
  * 		- `_lien_defaut`   : lien par défaut (étape 2)
- * 		- `_descriptif`    : texte de la page trouvée ou choisie par l'utilisateur (étape 2)
+ * 		- `_page`    : texte de la page trouvée ou choisie par l'utilisateur (étape 2)
  */
-function formulaires_decrire_taxon_verifier_1($id_taxon) {
+function formulaires_decrire_taxon_verifier_1($id_taxon, $element) {
 
 	// Initialisation des erreurs de vérification.
 	$erreurs = array();
@@ -112,13 +125,13 @@ function formulaires_decrire_taxon_verifier_1($id_taxon) {
 		$information = wikipedia_get_page($recherche, $langue);
 
 		// On convertit le descriptif afin de visualiser un texte plus clair.
-		$valeurs['_descriptif'] = '';
+		$valeurs['_page'] = '';
 		if (!empty($information['text'])) {
 			// Si le plugin Convertisseur est actif, conversion du texte mediawiki vers SPIP.
 			// Mise en format multi systématique.
 			include_spip('inc/filtres');
 			$convertir = chercher_filtre('convertisseur_texte_spip');
-			$valeurs['_descriptif'] = $convertir ? $convertir($information['text'], 'MediaWiki_SPIP') : $information['text'];
+			$valeurs['_page'] = $convertir ? $convertir($information['text'], 'MediaWiki_SPIP') : $information['text'];
 
 			// On prépare la liste des choix possibles si le texte récupéré n'est pas le bon.
 			$valeurs['_liens'] = array();
@@ -135,7 +148,7 @@ function formulaires_decrire_taxon_verifier_1($id_taxon) {
 				set_request($_champ, $_valeur);
 			}
 		} else {
-			$erreurs['message_erreur'] = _T('taxonomie:erreur_wikipedia_descriptif');
+			$erreurs['message_erreur'] = _T('taxonomie:erreur_wikipedia_page');
 		}
 	}
 
@@ -151,35 +164,40 @@ function formulaires_decrire_taxon_verifier_1($id_taxon) {
  * @uses convertisseur_texte_spip()
  * @uses taxon_merger_traductions()
  *
+ * @param int    $id_taxon
+ *      Id du taxon concerné.
+ * @param string $element
+ *      Elément de contenu qui sera initialisé. Prend les valeurs `texte` ou `descriptif`.
+ *
  * @return array
  * 		Tableau retourné par le formulaire contenant toujours un message de bonne exécution ou
  * 		d'erreur. L'indicateur editable est toujours à vrai.
  */
-function formulaires_decrire_taxon_traiter($id_taxon) {
+function formulaires_decrire_taxon_traiter($id_taxon, $element) {
 	$retour = array();
 
 	// Initialisation des saisies.
 	$langue = _request('langue');
-	$choix_descriptif = _request('choix_descriptif');
+	$choix_page = _request('choix_page');
 
 	// Récupération des informations de base du taxon
-	$select = array('tsn', 'nom_scientifique', 'edite', 'descriptif', 'sources');
+	$select = array('tsn', 'nom_scientifique', 'edite', $element, 'sources');
 	$where = array('id_taxon=' . sql_quote($id_taxon));
 	$taxon = sql_fetsel($select, 'spip_taxons', $where);
 
 	// Récupération de la page wikipedia choisie:
 	include_spip('services/wikipedia/wikipedia_api');
-	if (strtolower($choix_descriptif) == strtolower($taxon['nom_scientifique'])) {
-		// Le descriptif déjà fourni par défaut est le bon. On ne met pas à jour le cache.
+	if (strtolower($choix_page) == strtolower($taxon['nom_scientifique'])) {
+		// La page déjà fournie par défaut est la bonne. On ne met pas à jour le cache.
 		$recherche = array('name' => $taxon['nom_scientifique'], 'tsn' => $taxon['tsn']);
 		$information = wikipedia_get_page($recherche, $langue);
 	} else {
 		// On a choisit une autre page que celle par défaut : on recharge le cache avec la nouvelle recherche.
-		$recherche = array('name' => $choix_descriptif, 'tsn' => $taxon['tsn']);
+		$recherche = array('name' => $choix_page, 'tsn' => $taxon['tsn']);
 		$information = wikipedia_get_page($recherche, $langue, null, array('reload' => true));
 	}
 
-	// On convertit le descriptif afin de proposer un texte plus clair.
+	// On convertit le contenu de la page afin de proposer un texte plus clair possible.
 	if (!empty($information['text'])) {
 		// Si le plugin Convertisseur est actif, conversion du texte mediawiki vers SPIP.
 		include_spip('inc/filtres');
@@ -192,20 +210,24 @@ function formulaires_decrire_taxon_traiter($id_taxon) {
 		$limite_texte = floor(65535 / (count($langues_utilisees) + 1));
 		$texte_converti = '<multi>'
 						  . '[' . $langue . ']'
-						  . substr($texte_converti, 0, $limite_texte)
+						  . ($element=='descriptif' ? substr($texte_converti, 0, $limite_texte) : $texte_converti)
 						  . '</multi>';
-		// Mise à jour pour le taxon du descriptif et des champs connexes en base de données
+		// Mise à jour pour le taxon de l'élément textuel concerné et des champs connexes.
 		$maj = array();
-		// - le texte du descriptif est inséré dans la langue choisie en mergeant avec l'existant
+		// - le texte ou le descriptif est inséré dans la langue choisie en mergeant avec l'existant
 		//   si besoin. On limite la taille du descriptif pour éviter un problème lors de l'update
 		include_spip('inc/taxonomie');
-		$maj['descriptif'] = taxon_merger_traductions($texte_converti, $taxon['descriptif']);
+		$maj[$element] = taxon_merger_traductions($texte_converti, $taxon[$element]);
 		// - l'indicateur d'édition est positionné à oui
 		$maj['edite'] = 'oui';
-		// - la source wikipedia est ajoutée (ou écrasée si elle existe déjà)
-		$maj['sources'] = array('wikipedia' => array('champs' => array('descriptif')));
-		if ($sources = unserialize($taxon['sources'])) {
-			$maj['sources'] = array_merge($maj['sources'], $sources);
+		// - la source wikipedia est ajoutée (ou écrasée si elle existe déjà) et on met à jour la liste des champs
+		$maj['sources'] = unserialize($taxon['sources']);
+		if (isset($maj['sources']['wikipedia'])) {
+			if (!in_array($element, $maj['sources']['wikipedia']['champs'])) {
+				$maj['sources']['wikipedia']['champs'][] = $element;
+			}
+		} else {
+			$maj['sources']['wikipedia'] = array('champs' => array($element));
 		}
 		$maj['sources'] = serialize($maj['sources']);
 		// - Mise à jour
@@ -214,7 +236,7 @@ function formulaires_decrire_taxon_traiter($id_taxon) {
 		// Redirection vers la page d'édition du taxon
 		$retour['redirect'] = parametre_url(generer_url_ecrire('taxon_edit'), 'id_taxon', $id_taxon);
 	} else {
-		$retour['message_erreur'] = _T('taxonomie:erreur_wikipedia_descriptif');
+		$retour['message_erreur'] = _T('taxonomie:erreur_wikipedia_page');
 	}
 
 	return $retour;

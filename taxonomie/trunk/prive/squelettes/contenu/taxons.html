@@ -3,13 +3,14 @@
 
 [(#REM) Onglets pour le filtrage par règne et par indicateur d'édition ]
 <INCLURE{fond=prive/squelettes/inclure/inc-filtres_listes,
-	filtres=#LISTE{edition},
+	filtres=#LISTE{edite, importe},
 	env} />
 
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 <div class="nettoyeur"></div>
 
 <INCLURE{fond=prive/objets/liste/taxons,
+	espece=non,
 	par=nom_scientifique,
 	info_1=taxonomie:info_1_taxon,
 	info_nb=taxonomie:info_nb_taxons,

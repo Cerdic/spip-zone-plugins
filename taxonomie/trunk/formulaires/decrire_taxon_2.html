@@ -13,15 +13,17 @@
 				label=<:taxonomie:label_langue_descriptif:>
 			})]
 
-		[(#ENV{_descriptif}|oui)
-			[(#SAISIE{textarea, _descriptif,
-				explication=<:taxonomie:explication_wikipedia_descriptif:>,
-				label=<:taxonomie:label_wikipedia_descriptif:>,
+		[(#ENV{_page}|oui)
+			[(#SAISIE{textarea, _page,
+				explication=<:taxonomie:explication_wikipedia_page:>,
+				label=<:taxonomie:label_wikipedia_page:>,
 				disable=oui
 			})]
 
-			[(#SAISIE{radio, choix_descriptif,
-				explication=<:taxonomie:explication_wikipedia_lien:>,
+			[(#SET{nom_element, [(#VAL{taxon:champ_}|concat{#ENV{_element}}|concat{_label}|_T|strtolower)]})]
+			[(#SET{explication, [(#VAL{taxonomie:explication_wikipedia_lien}|_T{#ARRAY{element, #GET{nom_element}}})]})]
+			[(#SAISIE{radio, choix_page,
+				explication=#GET{explication},
 				label=<:taxonomie:label_wikipedia_lien:>,
 				datas=#ENV{_liens},
 				defaut=#ENV{_lien_defaut}
@@ -32,7 +34,7 @@
 		<p class="boutons">
 			#SET{etape_precedente, #ENV{_etape}|moins{1}}
 			<input type="submit" class="submit" name="_retour_etape_1" value="<:taxonomie:bouton_retourner{etape=#GET{etape_precedente}}:>" />
-		[(#ENV{_descriptif}|oui)
+		[(#ENV{_page}|oui)
 			<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
 		]
 		</p>

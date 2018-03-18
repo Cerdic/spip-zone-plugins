@@ -81,8 +81,8 @@ function formulaires_charger_regne_verifier() {
 }
 
 /**
- * Exécution du formulaire : le règne choisi est soit vidé, soit chargé jusqu'au rang minimal
- * choisi en y intégrant les traductions des noms communs sélectionnées.
+ * Exécution du formulaire : le règne choisi est soit vidé, soit chargé jusqu'au rang genre
+ * en y intégrant les traductions des noms communs sélectionnées.
  *
  * @uses regne_existe()
  * @uses regne_vider()

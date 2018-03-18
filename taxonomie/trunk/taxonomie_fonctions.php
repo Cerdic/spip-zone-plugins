@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 /**
- * Charge tous les taxons d'un règne donné, du règne lui-même jusqu'aux taxons de genre.
+ * Charge tous les taxons d'un règne donné fourni dans le fichier ITIS, du règne lui-même jusqu'aux taxons de genre.
  * Les nom communs anglais, français, espagnols, etc, peuvent aussi être chargés en complément mais
  * ne couvrent pas l'ensemble des taxons.
  *
@@ -93,13 +93,15 @@ function regne_charger($regne, $codes_langue = array()) {
 		}
 
 		// Ré-injection des modifications manuelles effectuées sur les taxons importés via le fichier ITIS du règne.
-		// -- descriptif: remplacement
+		// -- descriptif, texte, sources: remplacement
 		// -- nom commun: merge en considérant que la mise à jour manuelle est prioritaire
-		// -- edite: oui, on conserve bien sur l'indicateur d'édition
-		if ($taxons_preserves['edites']) {
+		// -- edite: positionné à 1, on conserve bien sur l'indicateur d'édition
+		if (!empty($taxons_preserves['edites'])) {
 			foreach ($taxons_preserves['edites'] as $_taxon_edite) {
 				if (($tsn = $_taxon_edite['tsn']) and (array_key_exists($tsn, $taxons))) {
 					$taxons[$tsn]['descriptif'] = $_taxon_edite['descriptif'];
+					$taxons[$tsn]['texte'] = $_taxon_edite['texte'];
+					$taxons[$tsn]['sources'] = $_taxon_edite['sources'];
 					$taxons[$tsn]['nom_commun'] = taxon_merger_traductions(
 						$_taxon_edite['nom_commun'],
 						$taxons[$tsn]['nom_commun']);
@@ -113,7 +115,7 @@ function regne_charger($regne, $codes_langue = array()) {
 
 		// Ré-injection des taxons créés lors de l'ajout d'une espèce et donc jamais importés via le fichier ITIS
 		// du règne.
-		if ($taxons_preserves['crees']) {
+		if (!empty($taxons_preserves['crees'])) {
 			$taxons = array_merge($taxons, $taxons_preserves['crees']);
 		}
 
@@ -123,6 +125,7 @@ function regne_charger($regne, $codes_langue = array()) {
 			// Insérer les informations de chargement dans une meta propre au règne.
 			// Ca permettra de tester l'utilité ou pas d'un rechargement du règne
 			$meta_regne['maj'] = date('Y-m-d H:i:s');
+			$meta_regne['fichier'] = "${regne}_genus.txt";
 
 			// Mise à jour de la meta du règne.
 			include_spip('inc/config');
@@ -135,10 +138,10 @@ function regne_charger($regne, $codes_langue = array()) {
 
 
 /**
- * Supprime tous les taxons d'un règne donné de la base de données.
+ * Supprime de la base de données tous les taxons importés à partir du rapport hiérarchique d'un règne donné.
  * La meta concernant les informations de chargement du règne est aussi effacée.
- * Les modifications manuelles effectuées sur les taxons du règne sont perdues, elles
- * doivent donc être préservées au préalable.
+ * Les modifications manuelles effectuées sur les taxons concernés ainsi que les taxons ajoutés lors de la création
+ * d'une espèce sont perdues : elles doivent donc être préservées au préalable.
  *
  * @package SPIP\TAXONOMIE\REGNE
  *
@@ -153,7 +156,8 @@ function regne_charger($regne, $codes_langue = array()) {
  */
 function regne_vider($regne) {
 
-	$retour = sql_delete('spip_taxons', 'regne=' . sql_quote($regne));
+	$where = array('regne=' . sql_quote($regne), 'importe=' . sql_quote('oui'));
+	$retour = sql_delete('spip_taxons', $where);
 	if ($retour !== false) {
 		// Supprimer la meta propre au règne.
 		effacer_meta("taxonomie_$regne");
@@ -166,7 +170,7 @@ function regne_vider($regne) {
 
 /**
  * Retourne l'existence ou pas d'un règne en base de données.
- * La fonction scrute la table `spip_taxons` et non la meta propre au règne.
+ * La fonction scrute les taxons importés de la table `spip_taxons` et non la meta propre au règne.
  *
  * @package SPIP\TAXONOMIE\REGNE
  *
@@ -187,7 +191,8 @@ function regne_existe($regne, &$meta_regne) {
 	$meta_regne = array();
 	$existe = false;
 
-	$retour = sql_countsel('spip_taxons', 'regne=' . sql_quote($regne));
+	$where = array('regne=' . sql_quote($regne), 'importe=' . sql_quote('oui'));
+	$retour = sql_countsel('spip_taxons', $where);
 	if ($retour) {
 		// Récupérer la meta propre au règne afin de la retourner.
 		include_spip('inc/config');
@@ -200,7 +205,7 @@ function regne_existe($regne, &$meta_regne) {
 
 
 /**
- * Fournit l'ascendance taxonomique d'un taxon donné par consultation dans la base de données.
+ * Fournit l'ascendance taxonomique d'un taxon donné, par consultation dans la base de données.
  *
  * @package SPIP\TAXONOMIE\TAXON
  *
@@ -217,7 +222,8 @@ function regne_existe($regne, &$meta_regne) {
  *
  * @return array
  *        Liste des taxons ascendants. Chaque taxon est un tableau associatif contenant les informations
- *        suivantes : `id_taxon`, `tsn_parent`, `nom_scientifique`, `nom_commun`, `rang`.
+ *        suivantes : `id_taxon`, `tsn_parent`, `nom_scientifique`, `nom_commun`, `rang`, `statut` et l'indicateur
+ *        d'espèce `espèce`.
  */
 function taxon_informer_ascendance($id_taxon, $tsn_parent = null, $ordre = 'descendant') {
 
@@ -231,7 +237,7 @@ function taxon_informer_ascendance($id_taxon, $tsn_parent = null, $ordre = 'desc
 	}
 
 	while ($tsn_parent > 0) {
-		$select = array('id_taxon', 'tsn_parent', 'nom_scientifique', 'nom_commun', 'rang');
+		$select = array('id_taxon', 'tsn_parent', 'nom_scientifique', 'nom_commun', 'rang', 'statut', 'espece');
 		$where = array('tsn=' . intval($tsn_parent));
 		$taxon = sql_fetsel($select, 'spip_taxons', $where);
 		if ($taxon) {

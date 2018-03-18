@@ -8,7 +8,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_continuer' => 'Passer à l\'étape suivante',
 	'bouton_retourner' => 'Retourner à l\'étape @etape@',
 	'bouton_taxonomie' => 'Taxons',
-	'bouton_wikipedia_descriptif' => 'Remplir le descriptif avec Wikipedia',
+	'bouton_wikipedia_descriptif' => 'Initialiser le descriptif avec Wikipedia',
+	'bouton_wikipedia_texte' => 'Initialiser le texte avec Wikipedia',
 
 	// C
 	'credit_itis' => 'Integrated Taxonomic Information System, @url_site@ (informations taxonomiques de base). Voir aussi la page du taxon @url_taxon@.',
@@ -18,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_vider_regne' => 'Erreur lors du vidage du règne @regne@ en base de données.',
 	'erreur_charger_regne' => 'Erreur lors du chargement du règne @regne@ en base de données.',
-	'erreur_wikipedia_descriptif' => 'Aucun descriptif dans la langue choisie n\'a pu être récupéré de Wikipedia.',
+	'erreur_wikipedia_page' => 'Aucune page dans la langue choisie n\'a pu être récupérée de Wikipedia.',
 	'erreur_recherche_nom_scientifique' => 'Le nom scientifique d\'une espèce ou d\'un taxon de rang inférieur est toujours constitué d\'au moins deux mots. Saisissez un second mot ou changez le type de correspondance.',
 	'erreur_recherche_aucun_taxon' => 'Le service ITIS ne trouve aucun taxon de rang espèce ou inférieur correspondant à cette recherche ou tous les taxons trouvés ont déjà été créés.',
 	'erreur_espece_tsn_invalide' => 'Le TSN de l\'espèce choisie est invalide. Veuillez relancer le formulaire et réessayer.',
@@ -27,18 +28,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_recherche_taxon' => 'Le taxon recherché doit correspondre à une espèce ou à un taxon de rang inférieur.',
 	'explication_recherche_correspondance' => 'Il conseillé d\'adapter le type de correspondance afin de limiter le nombre de taxons potentiellement compatibles.',
 	'explication_recherche_regne' => 'Les règnes proposés sont uniquement ceux qui ont déjà été chargés dans la base de données taxonomique.',
-	'explication_action_regne' => 'Si le règne est déjà présent dans la base de données taxonomique, tous les taxons qui le composent seront supprimés avant le chargement.',
+	'explication_action_regne' => 'Si le règne est déjà présent dans la base de données taxonomique, tous les taxons du règne au genre qui le composent seront supprimés avant le chargement.',
 	'explication_langues_regne' => 'Les taxons sont chargés par défaut avec leur nom scientifique. Cette option permet de compléter certains taxons avec leur nom commun dans la ou les langues précisées.',
 	'explication_langues_utilisees' => 'Le plugin supporte quelques langues comme le français, l\'anglais et l\'espagnol. Cela permet de charger voire de saisir manuellement les noms communs et descriptifs dans ces langues.
 	Néanmoins, en fonction de votre besoin vous pouvez limiter l\'utilisation de ces langues mais une langue est au moins requise.',
-	'explication_wikipedia_langue' => 'Si vous utilisez plusieurs langues pour traduire vos taxons, choisissez la langue à utiliser pour récupérer le descriptif.',
-	'explication_wikipedia_descriptif' => 'Vérifier si ce descriptif est bien celui qui décrit le mieux le taxon. Si non, choisissez une page alternative parmi celle éventuellement proposée dans la liste ci-dessous.',
-	'explication_wikipedia_lien' => 'Choisissez la page Wikipedia que vous souhaitez intégrer comme descriptif du taxon.',
+	'explication_wikipedia_langue' => 'Si vous utilisez plusieurs langues pour traduire vos taxons, choisissez la langue à utiliser pour récupérer la page Wikipedia.',
+	'explication_wikipedia_page' => 'Vérifier si cette page est bien celle qui décrit le mieux le taxon. Si non, choisissez une page alternative parmi celle éventuellement proposée dans la liste ci-dessous.',
+	'explication_wikipedia_lien' => 'Choisissez la page Wikipedia que vous souhaitez intégrer dans le champ «&nbsp;@element@&nbsp;» du taxon.',
 
 	// F
-	'filtre_edite_oui' => 'Taxons édités',
-	'filtre_edite_non' => 'Taxons non édités',
-	'filtre_edite_tout' => 'Tous les taxons',
+	'filtre_edite_oui' => 'Edités',
+	'filtre_edite_non' => 'Non édités',
+	'filtre_edite_tout' => 'Tous',
+	'filtre_importe_oui' => 'Importés',
+	'filtre_importe_non' => 'Non importés',
+	'filtre_importe_tout' => 'Tous',
 	'filtre_regnes_tout' => 'Tous les règnes',
 
 	// I
@@ -47,16 +51,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_especes' => '@nb@ espèces et taxons de rang inférieur',
 	'info_nb_taxons' => '@nb@ taxons du règne au genre',
 	'info_boite_taxonomie_configuration' => 'Cette page permet de configurer les paramètres de base du plugin comme la liste des langues utilisables pour nommer ou décrire les taxons.',
-	'info_boite_regnes' => 'Cette page permet de consulter, charger, mettre à jour ou vider les taxons du règne au genre des règnes animal, végétal et fongique.',
-	'info_boite_taxons' => 'Cette page permet aux utilisateurs de consulter la liste des taxons du règne au genre chargés en base de données et de naviguer de taxon en taxon.',
+	'info_boite_regnes' => 'Cette page permet de charger, mettre à jour ou vider les taxons du règne au genre (rangs principaux, secondaires et intercalaires) importés à partir des rapports hiérarchiques extraits de la base ITIS. Ces taxons peuvent être rechargés sans danger pour les autres taxons et pour les modifications éventuellement effectuées.',
+	'info_boite_taxons' => 'Cette page permet de consulter la liste des taxons dont le rang est strictement supérieur au rang espèce. Ces taxons sont tous créés automatiquement même si ils peuvent être modifiés manuellement après coup.',
 	'info_boite_especes' => 'Cette page permet de consulter la liste des espèces et des taxons de rang inférieur créés par les utilisateurs.',
 	'info_boite_espece_creer' => 'Cette page permet de créer une espèce ou un taxon de rang inférieur à partir de son nom scientifique ou d\'un nom commun. Le formulaire fait appel à la base ITIS via des services web afin de récupérer l\'ensemble des informations de base sur le taxon.
 	Une fois le taxon proposé validé, l\'espèce est créée dans la base de données taxonomique et la page d\'édition de l\'espèce est affichée.',
-	'info_descriptif_existe' => 'non vide',
+	'info_element_existe' => 'non vide',
 	'info_etape' => 'Etape @etape@ / @etapes@',
 	'info_indicateur_hybride' => 'Ce taxon est un hydribe',
 	'info_regne_charge' => 'déjà chargé',
-	'info_regne_compteur_taxons' => '@nb@ taxons chargés du règne au genre (rangs principaux, secondaires et intercalaires)',
+	'info_regne_compteur_taxons' => '@nb@ taxons chargés du règne au genre à partir du fichier «&nbsp;@fichier@&nbsp;»',
 	'info_regne_compteur_traductions' => '@nb@ noms communs en [@langue@]',
 	'info_espece_recherche_intro' => 'Vous avez choisi de rechercher une espèce :',
 	'info_espece_recherche_scientificname_exact' => 'dont le nom scientifique est exactement «&nbsp;@recherche@&nbsp;»',
@@ -83,8 +87,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_langues_utilisees' => 'Langues à utiliser',
 	'label_taxon_trouve' => 'Taxons correspondant à la recherche',
 	'label_wikipedia_alternative_defaut' => 'Utiliser le descriptif proposé par défaut',
-	'label_wikipedia_alternative' => 'Utiliser la page « @alternative@ »',
-	'label_wikipedia_descriptif' => 'Descriptif Wikipedia fourni par défaut',
+	'label_wikipedia_alternative' => 'Utiliser la page «&nbsp;@alternative@&nbsp;»',
+	'label_wikipedia_page' => 'Page Wikipedia fournie par défaut',
 	'label_wikipedia_langue' => 'Langue à utiliser par Wikipedia',
 	'label_wikipedia_lien' => 'Page Wikipedia à utiliser',
 	'label_recherche_type' => 'Rechercher par',
@@ -142,10 +146,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'regne_plantae' => 'règne végétal',
 
 	// O
-	'onglet_espece' => 'Espèces et rangs inférieurs',
+	'onglet_espece' => 'Espèces et descendants',
 	'onglet_gestion' => 'Gestion des règnes',
 	'onglet_configuration' => 'Configuration du plugin',
-	'onglet_navigation' => 'Taxons du règne au genre',
+	'onglet_navigation' => 'Ascendants des espèces',
 
 	// S
 	'succes_vider_regne' => 'Le règne @regne@ a bien été supprimé de la base de données.',
@@ -156,7 +160,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_form_gestion_regne' => 'Gestion des règnes',
 	'titre_liste_regnes' => 'Liste des règnes chargés en base de données',
 	'titre_liste_fils_taxon' => 'Liste des descendants directs',
-	'titre_page_decrire_wikipedia' => 'Descriptif Wikipedia du taxon <span class="nom_scientifique_inline">@taxon@</span>',
 	'titre_page_taxonomie' => 'Taxonomie',
 	'titre_page_creer_espece' => 'Créer une espèce ou un taxon de rang inférieur',
 );

@@ -11,7 +11,7 @@
 		[<li>
 			(#SELF
 				|parametre_url{regne, #REGNE}
-				|lien_ou_expose{[(#VAL{taxonomie:regne_}|concat{#REGNE}|_T|ucfirst)], #ENV{regne}|=={#REGNE}, ajax})
+				|lien_ou_expose{[(#VAL{taxonomie:regne_}|concat{#REGNE}|_T|ucfirst)], #ENV{regne, ''}|=={#REGNE}, ajax})
 		</li>]
 </BOUCLE_regnes>
 	</ul>
@@ -19,26 +19,28 @@
 </div>
 
 [(#REM) Onglets de second niveau pour le filtrage par indicateur d'édition ]
-[(#ENV{filtres}|oui)<div class="onglets_simple second clearfix">]
-[(#VAL{edition}|in_array{#ENV{filtres, #ARRAY}}|oui)
-	<ul class="edition">
+<B_filtres>
+<div class="onglets_simple second clearfix">
+<BOUCLE_filtres(DATA) {source table, #ENV{filtres}}>
+	<ul[ class="(#VALEUR) [(#COMPTEUR_BOUCLE|>{1}|oui) suivant]"]>
 		[<li class="first">
 			(#SELF
-				|parametre_url{edite, ''}
-				|lien_ou_expose{<:taxonomie:filtre_edite_tout:>, #ENV{edite, ''}|=={''}, ajax})
+				|parametre_url{#VALEUR, ''}
+				|lien_ou_expose{[(#VAL{taxonomie:filtre_}|concat{#VALEUR}|concat{_tout}|_T)], #ENV{#VALEUR}|=={''}, ajax})
 		</li>]
 		[<li>
 			(#SELF
-				|parametre_url{edite, oui}
-				|lien_ou_expose{<:taxonomie:filtre_edite_oui:>, #ENV{edite, ''}|=={oui}, ajax})
+				|parametre_url{#VALEUR, oui}
+				|lien_ou_expose{[(#VAL{taxonomie:filtre_}|concat{#VALEUR}|concat{_oui}|_T)], #ENV{#VALEUR}|=={'oui'}, ajax})
 		</li>]
 		[<li>
 			(#SELF
-				|parametre_url{edite, non}
-				|lien_ou_expose{<:taxonomie:filtre_edite_non:>, #ENV{edite, ''}|=={non}, ajax})
+				|parametre_url{#VALEUR, non}
+				|lien_ou_expose{[(#VAL{taxonomie:filtre_}|concat{#VALEUR}|concat{_non}|_T)], #ENV{#VALEUR}|=={'non'}, ajax})
 		</li>]
 	</ul>
-	<div class="nettoyeur"></div>
-]
-[(#ENV{sous_onglets}|oui)</div>]
+</BOUCLE_filtres>
+	<br class="nettoyeur" />
+</div>
+</B_filtres>
 </B_regnes>

@@ -1,8 +1,11 @@
 [(#AUTORISER{modifier, taxon, #ENV{id_taxon}}|sinon_interdire_acces)]
 <BOUCLE_taxon_decrire(TAXONS) {id_taxon}>
-<h1 class="grostitre"><:taxonomie:titre_page_decrire_wikipedia{taxon=#NOM_SCIENTIFIQUE}:></h1>
+<h1 class="grostitre">
+	<span class="nom_scientifique_inline">#NOM_SCIENTIFIQUE</span>
+	[ - (#VAL{taxonomie:bouton_wikipedia_}|concat{#ENV{element}}|_T)]
+</h1>
 
 [<div class="noajax">
-	(#FORMULAIRE_DECRIRE_TAXON{#ENV{id_taxon}})
+	(#FORMULAIRE_DECRIRE_TAXON{#ENV{id_taxon}, #ENV{element}})
 </div>]
 </BOUCLE_taxon_decrire>

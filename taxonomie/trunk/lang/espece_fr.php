@@ -10,17 +10,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_espece' => 'Ajouter cette espèce',
 
 	// C
-	'champ_auteur_label' => 'Auteur',
-	'champ_descriptif_label' => 'Descriptif',
-	'champ_nom_commun_label' => 'Nom commun',
-	'champ_nom_scientifique_label' => 'Nom scientifique',
-	'champ_rang_label' => 'Rang',
-	'champ_regne_label' => 'Regne',
-	'champ_sources_label' => 'Sources',
-	'champ_texte_label' => 'Texte explicatif sur l\'espèce',
-	'champ_objet_genre_label' => 'Type d\'objet du parent de l\'espèce',
-	'champ_tsn_label' => 'Identifiant ITIS',
-	'champ_tsn_parent_label' => 'Taxon parent',
 
 	// I
 	'icone_creer_espece' => 'Créer une espèce',

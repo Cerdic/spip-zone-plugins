@@ -8,7 +8,7 @@
 		[(#NOM_SCIENTIFIQUE)]
 	</a> &gt;
 	<strong class="on">
-		<:taxonomie:titre_page_decrire_wikipedia{taxon=#NOM_SCIENTIFIQUE}:>
+		[(#VAL{taxonomie:bouton_wikipedia_}|concat{#ENV{element}}|_T)]
 	</strong>
 	[(#REM|changer_typo)]
 </BOUCLE_taxon>
