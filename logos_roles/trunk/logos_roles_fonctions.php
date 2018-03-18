@@ -26,16 +26,22 @@
  *	)
  *
  * @param string|null $objet : Un nom d'objet auquel se restreindre. La fonction
- *        ne retourne alors que les rôles de logos que l'on peut attribuer à cet
- *        objet.
+ *     ne retourne alors que les rôles de logos que l'on peut attribuer à cet
+ *     objet.
  * @param string|null $role : Un rôle auquel se restreindre. On accepte `on` ou
- * `off` pour la rétro-compatibilité
+ *     `off` pour la rétro-compatibilité
+ * @param string|null $tous_les_objets : Une liste des objets éditoriaux à
+ *     prendre en compte. Ça n'est nécessaire que dans le cas où l'on appelle
+ *     cette fonction à un moment où l'API lister_tables_objets_sql n'est pas
+ *     encore disponible, notamment dans le pipeline declarer_tables_objets_sql.
+ *     Dans les autres cas on utilise l'API pour trouver les tables, pas besoin
+ *     de les spécifier.
  *
  * @return array : Retourne le tableau décrivant les rôles de logos. Si on a
- * passé un paramètre rôle, on retourne directement la définition plutôt qu'une
- * liste avec un seul rôle.
+ *     passé un paramètre rôle, on retourne directement la définition plutôt
+ *     qu'une liste avec un seul rôle.
  */
-function lister_roles_logos($objet = null, $role = null) {
+function lister_roles_logos($objet = null, $role = null, $tous_les_objets = null) {
 
 	if ($role === 'on') {
 		$role = 'logo';
@@ -43,7 +49,12 @@ function lister_roles_logos($objet = null, $role = null) {
 		$role = 'logo_survol';
 	}
 
-	$tous_les_objets = array_map('table_objet', array_keys(lister_tables_objets_sql()));
+	if (! $tous_les_objets) {
+		$tous_les_objets = array_map(
+			'table_objet',
+			array_filter(array_keys(lister_tables_objets_sql()))
+		);
+	}
 
 	// Logos par défaut
 	$roles_logos = pipeline(
@@ -70,7 +81,7 @@ function lister_roles_logos($objet = null, $role = null) {
 	include_spip('base/objets');
 
 	/* Filtrer par objet */
-	if ($objet = table_objet($objet)) {
+	if ($objet and $objet = table_objet($objet)) {
 		$roles_logos_objet = array();
 		foreach ($roles_logos as $cle_role => $options) {
 			if ((! is_array($options['objets']))
