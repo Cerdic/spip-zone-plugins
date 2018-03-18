@@ -71,11 +71,13 @@ function lister_roles_logos($objet = null, $role = null, $tous_les_objets = null
 		)
 	);
 
-	foreach (lire_config('logos_roles/roles_logos') as $r) {
-		$roles_logos['logo_' . $r['slug']] = array(
-			'label' => $r['titre'] ?: $r['slug'],
-			'objets' => $r['objets'],
-		);
+	if (is_array(lire_config('logos_roles/roles_logos'))) {
+		foreach (lire_config('logos_roles/roles_logos') as $r) {
+			$roles_logos['logo_' . $r['slug']] = array(
+				'label' => $r['titre'] ?: $r['slug'],
+				'objets' => $r['objets'],
+			);
+		}
 	}
 
 	include_spip('base/objets');
@@ -184,7 +186,11 @@ function trouver_logo_par_role($logo, $objet, $id_objet, $role) {
 		$balise_img = charger_filtre('balise_img');
 
 		$logo = $chercher_logo($id_objet, id_table_objet($objet), $role);
-		$logo = $balise_img($logo[0]);
+		if (isset($logo[0])) {
+			$logo = $balise_img($logo[0]);
+		} else {
+			return '';
+		}
 	}
 
 	return $logo;
