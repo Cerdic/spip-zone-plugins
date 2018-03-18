@@ -1,3 +1,4 @@
+#SET{description,#ARRAY} 
 <BOUCLE_evenements(EVENEMENTS)
 	{par date_debut}
 	{id_evenement ?IN #ENV{id_evenement}|explode{","}}
@@ -11,7 +12,20 @@
 	{date_debut <= #ENV{date_debut_max_fixe,9999-31-12 23:59:59}}
 	>
 	[(#REM) Le mult -1 permet d'avoir une numérotation logique dans le constructeur : nombre négatif pour le passé, positif pour le futur)]
-	#TITRE [(#DATE_DEBUT|affdate)] --- #ID_EVENEMENT<br />
-</BOUCLE_evenements>
 
-	#ENV{date_debut_max_fixe}
+	[(#ENV{type_affichage}|=={titre_date}|oui)
+		#SET{texte,#TITRE|concat{' - ', #DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE}}}
+	]
+	[(#ENV{type_affichage}|=={titre}|oui)
+		#SET{texte,#TITRE}
+	]
+	[(#ENV{type_affichage}|=={date}|oui)
+		#SET{texte,#DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE}}
+	]
+	[(#SET{description,#GET{description}|array_merge{#ARRAY{
+		#GET{texte},#ID_EVENEMENT
+	}}})]
+	
+</BOUCLE_evenements>
+#SET{description,#GET{description}|array_flip}
+
