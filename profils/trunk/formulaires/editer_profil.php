@@ -204,7 +204,7 @@ function formulaires_editer_profil_saisies_dist($id_profil = 'new', $retour = ''
 					'nom' => 'config[coordonnees][organisation]',
 					'conteneur_class' => 'pleine_largeur',
 					'caption' => _T('profil:champ_config_coordonnees_organisation_caption'),
-					'afficher_si' => '@config[activer_coordonnees_organisation]@ == "on"',
+					'afficher_si' => '@config[activer_organisation]@ == "on" && @config[activer_coordonnees_organisation]@ == "on"',
 				),
 			);
 		}
@@ -243,7 +243,7 @@ function formulaires_editer_profil_saisies_dist($id_profil = 'new', $retour = ''
 			'options' => array(
 				'nom' => 'config[activer_groupe_contact]',
 				'label' => _T('profil:champ_config_activer_groupe_contact_label'),
-				'explicaiton' => _T('profil:champ_config_activer_groupe_explication'),
+				'explication' => _T('profil:champ_config_activer_groupe_explication'),
 				'afficher_si' => '@config[activer_contact]@ == "on"',
 			),
 		);
@@ -279,7 +279,7 @@ function formulaires_editer_profil_saisies_dist($id_profil = 'new', $retour = ''
 					'nom' => 'config[coordonnees][contact]',
 					'conteneur_class' => 'pleine_largeur',
 					'caption' => _T('profil:champ_config_coordonnees_contact_caption'),
-					'afficher_si' => '@config[activer_coordonnees_contact]@ == "on"',
+					'afficher_si' => '@config[activer_contact]@ == "on" && @config[activer_coordonnees_contact]@ == "on"',
 				),
 			);
 		}
