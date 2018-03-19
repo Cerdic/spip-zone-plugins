@@ -2,16 +2,16 @@
  --> ]
 <ul class="liste-items sous_navigation">
 	[<li class="item">
-		(#URL_ECRIRE{especes}
+		(#URL_ECRIRE{especes}|parametre_url{espece, oui}
 			|lien_ou_expose{
 				<:taxonomie:onglet_espece:>,
-				[(#ENV{exec}|=={especes})]})
+				[(#ENV{exec}|=={especes}|et{#ENV{espece}|=={oui}})]})
 	</li>]
 	[<li class="item">
-		(#URL_ECRIRE{taxons}
+		(#URL_ECRIRE{taxons}|parametre_url{espece, non}
 			|lien_ou_expose{
 				<:taxonomie:onglet_navigation:>,
-				[(#ENV{exec}|=={taxons})]})
+				[(#ENV{exec}|=={taxons}|et{#ENV{espece}|=={non}})]})
 	</li>]
 	[<li class="item">
 		(#URL_ECRIRE{regnes}

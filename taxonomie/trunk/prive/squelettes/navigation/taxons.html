@@ -1,6 +1,6 @@
 [(#REM) <!-- Boite d'information sur la pge de navigation dans la liste des taxons d'un rang donné --> ]
 #BOITE_OUVRIR{#CHEMIN_IMAGE{taxon-24.png}|balise_img{'',cadre-icone}, info}
-	<:taxonomie:info_boite_taxons:>
+	[(#ENV{espece}|=={oui}|?{<:taxonomie:info_boite_especes:>, <:taxonomie:info_boite_taxons:>})]
 #BOITE_FERMER
 
 [(#REM) <!-- Menu des onglets --> ]

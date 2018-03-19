@@ -1,18 +1,29 @@
-[(#AUTORISER{voir, _taxons}|sinon_interdire_acces)]
+[(#ENV{espece}|=={oui}|oui)
+	[(#AUTORISER{voir, _especes}|sinon_interdire_acces)]
+][(#ENV{espece}|=={non}|oui)
+	[(#AUTORISER{voir, _taxons}|sinon_interdire_acces)]
+]
 <h1 class="grostitre"><:taxonomie:titre_page_taxonomie:></h1>
 
 [(#REM) Onglets pour le filtrage par règne et par indicateur d'édition ]
+#SET{filtres, #LISTE}
+[(#ENV{espece}|=={oui}|non)
+	#SET{filtres, #LISTE{edite, importe}}
+]
 <INCLURE{fond=prive/squelettes/inclure/inc-filtres_listes,
-	filtres=#LISTE{edite, importe},
+	filtres=#GET{filtres},
 	env} />
 
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 <div class="nettoyeur"></div>
 
 <INCLURE{fond=prive/objets/liste/taxons,
-	espece=non,
 	par=nom_scientifique,
 	info_1=taxonomie:info_1_taxon,
 	info_nb=taxonomie:info_nb_taxons,
 	sinon=<:taxon:info_aucun_taxon:>,
 	env, ajax} />
+
+[(#ENV{espece}|=={oui}|et{#AUTORISER{creer, espece}}|oui)
+	[(#URL_ECRIRE{espece_creer}|icone_verticale{<:espece:icone_creer_espece:>, espece, new, right})]
+]
