@@ -1,0 +1,7 @@
+<h1 class="grostitre"><:option:titres:></h1>
+
+<INCLURE{fond=prive/objets/liste/options, env, ajax=liste-objets, sinon=<:option:info_aucun_option:>}>
+
+[(#AUTORISER{creer,option})
+	[(#URL_ECRIRE{option_edit,new=oui}|icone_verticale{<:option:icone_creer_option:>,option,new,right})]
+]

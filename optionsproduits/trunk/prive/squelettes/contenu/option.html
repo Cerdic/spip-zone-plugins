@@ -1,0 +1,49 @@
+[(#AUTORISER{voir,option,#ID_OPTION}|sinon_interdire_acces)]
+[(#SET{url_voir,#VAL{option}|objet_info{url_voir}})]
+[(#SET{url_edit,#VAL{option}|objet_info{url_edit}})]
+<BOUCLE_option(OPTIONS){id_option}{si #ENV{exec}|=={#GET{url_voir}}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,option,#ID_OPTION})
+		[(#ID_OPTION|afficher_qui_edite{option}|non)
+			[(#URL_ECRIRE{#GET{url_edit},id_option=#ID_OPTION}|icone_verticale{<:option:icone_modifier_option:>,option,edit,right ajax preload})]
+		]
+		[(#ID_OPTION|afficher_qui_edite{option}|oui)
+			[(#URL_ECRIRE{#GET{url_edit},id_option=#ID_OPTION}|icone_verticale{#ID_OPTION|afficher_qui_edite{option},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{option-24.png}|balise_img{option,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{option,#ID_OPTION}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/option,id=#ID_OPTION,id_option=#ID_OPTION,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,option,#ID_OPTION})
+	[(#ID_OPTION|afficher_qui_edite{option}|non)
+		[(#URL_ECRIRE{#GET{url_edit},id_option=#ID_OPTION}|icone_verticale{<:option:icone_modifier_option:>,option,edit,right ajax preload})]
+	]
+	[(#ID_OPTION|afficher_qui_edite{option}|oui)
+		[(#URL_ECRIRE{#GET{url_edit},id_option=#ID_OPTION}|icone_verticale{#ID_OPTION|afficher_qui_edite{option},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,option,id,#ID_OPTION},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+		
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_option>
+[(#ENV**{exec}|=={#GET{url_edit}}|?{#INCLURE{fond=prive/squelettes/contenu/#GET{url_edit},redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_option>

@@ -1,0 +1,36 @@
+[(#ID_OPTION|oui)
+	[(#AUTORISER{modifier,option,#ID_OPTION}|sinon_interdire_acces)]
+	[(#SET{id_parent,#INFO_ID_OPTIONSGROUPE{option,#ID_OPTION}})]
+]
+
+[(#ID_OPTION|non)
+	#SET{id_parent,#ENV{id_optionsgroupe,#ENV{id_parent}}}
+	[(#GET{id_parent}|non|ou{[(#AUTORISER{creeroptiondans, optionsgroupe, #GET{id_parent}})]}|sinon_interdire_acces)]
+]
+
+#SET{redirect,#ENV{redirect}|sinon{#ID_OPTION|?{#ID_OPTION|generer_url_entite{option},#GET{id_parent}|?{#GET{id_parent}|generer_url_entite{optionsgroupe},#URL_ECRIRE{optionsgroupes}}}}}
+
+
+
+<div class="cadre-formulaire-editer">
+<div class="entete-formulaire">
+	[(#ID_OPTION|oui)
+	[(#GET{redirect}|icone_verticale{<:icone_retour:>,option,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_OPTION|?{<:option:icone_modifier_option:>,<:option:icone_creer_option:>})]
+		<h1>(#ENV{titre,#INFO_TITRE{option,#ID_OPTION}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_OPTION|generer_url_entite{option}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_OPTION{#ENV{id_option,oui}, #GET{id_parent}, #GET{redirect}, #ENV{associer_objet}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>

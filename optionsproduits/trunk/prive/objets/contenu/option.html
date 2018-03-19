@@ -1,0 +1,18 @@
+<BOUCLE_option(OPTIONS){id_option}>
+
+
+[<div class="champ texte">
+	(#DESCRIPTION|propre|PtoBR)
+</div><hr>]
+
+[<p class="champ">
+	<strong class="label"><:option:champ_id_optionsgroupe_label:> : </strong>
+	(#INFO_TITRE{optionsgroupe,#ID_OPTIONSGROUPE}|sinon{<em>Aucun</em>})
+</p>]
+
+[<p class="champ">
+	<strong class="label"><:option:champ_prix_defaut_label:> : </strong>
+	<span>(#PRIX_DEFAUT)</span>
+</p>]
+
+</BOUCLE_option>

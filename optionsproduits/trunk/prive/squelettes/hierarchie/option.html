@@ -1,0 +1,10 @@
+<!-- hierarchie -->
+<a href="#URL_ECRIRE{options}"><:option:titre_options:></a>
+<BOUCLE_hierarchie(OPTIONS){id_option}>
+&gt; [(#URL_ECRIRE{optionsgroupe,id_optionsgroupe=#ID_OPTIONSGROUPE}|lien_ou_expose{#INFO_TITRE{optionsgroupes,#ID_OPTIONSGROUPE},''})]
+&gt; <strong class="on">#TITRE</strong>
+</BOUCLE_hierarchie>
+[(#ENV{id_optionsgroupe}|oui)
+	&gt; [(#URL_ECRIRE{optionsgroupe,id_optionsgroupe=#ID_OPTIONSGROUPE}|lien_ou_expose{#INFO_TITRE_GROUPE{optionsgroupes,#ID_OPTIONSGROUPE},''})]
+]&gt; <strong class="on"><:ecrire:info_sans_titre:></strong>
+<//B_hierarchie>

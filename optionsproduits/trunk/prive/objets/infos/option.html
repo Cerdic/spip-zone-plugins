@@ -1,0 +1,16 @@
+<BOUCLE_option(OPTIONS){id_option=#ENV{id}}>
+<div class="infos">
+[(#SET{texte_objet,<:option:titre:>})]
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_OPTION</p></div>
+
+	<div class='nb_elements'><!--nb_elements--></div>
+
+	[(#AUTORISER{supprimer, option, #ID_OPTION}|oui)
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{option-del-24.png}|balise_img{<:option:supprimer_option:>}|concat{' ',#VAL{<:option:supprimer_option:>}|wrap{<b>}}|trim)],
+			#URL_ACTION_AUTEUR{supprimer_option, #ID_OPTION, #URL_ECRIRE{options}},
+			icone s24 horizontale danger option-del-24, <:option:confirmer_supprimer_option:>})]
+	]
+
+</div>
+</BOUCLE_option>

@@ -1,0 +1,7 @@
+<h1><:optionsgroupe:titre_optionsgroupes:></h1>
+
+<INCLURE{fond=prive/objets/liste/optionsgroupes, env, ajax, sinon=<:optionsgroupe:info_aucun_optionsgroupe:>}>
+
+[(#AUTORISER{creer,optionsgroupe})
+	[(#URL_ECRIRE{optionsgroupe_edit,new=oui}|icone_verticale{<:optionsgroupe:icone_creer_optionsgroupe:>,optionsgroupe,new,right})]
+]

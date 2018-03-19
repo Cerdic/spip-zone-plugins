@@ -1,0 +1,16 @@
+<BOUCLE_optionsgroupe(OPTIONSGROUPES){id_optionsgroupe=#ENV{id}}>
+<div class="infos">
+[(#SET{texte_objet,<:optionsgroupe:titre_optionsgroupe:>})]
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_OPTIONSGROUPE</p></div>
+
+	<div class='nb_elements'><!--nb_elements--></div>
+
+	[(#AUTORISER{supprimer, optionsgroupe, #ID_OPTIONSGROUPE}|oui)
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{optionsgroupe-del-24.png}|balise_img{<:optionsgroupe:supprimer_optionsgroupe:>}|concat{' ',#VAL{<:optionsgroupe:supprimer_optionsgroupe:>}|wrap{<b>}}|trim)],
+			#URL_ACTION_AUTEUR{supprimer_optionsgroupe, #ID_OPTIONSGROUPE, #URL_ECRIRE{optionsgroupes}},
+			icone s24 horizontale danger optionsgroupe-del-24, <:optionsgroupe:confirmer_supprimer_optionsgroupe:>})]
+	]
+
+</div>
+</BOUCLE_optionsgroupe>
