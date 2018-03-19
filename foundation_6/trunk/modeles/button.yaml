@@ -1,0 +1,35 @@
+nom: '<:foundation_6:button:>'
+logo: 'icones_barre/fi-button.png'
+icone_barre: 'fi-button.png'
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'button'
+  -
+    saisie: 'input'
+    options:
+      nom: 'titre'
+      label: '<:foundation_6:button_titre:>'
+      obligatoire: 'oui'
+      defaut: ''
+  -
+    saisie: 'input'
+    options:
+      nom: 'href'
+      label: '<:foundation_6:button_href:>'
+      obligatoire: 'oui'
+      defaut: ''
+  -
+    saisie: 'input'
+    options:
+      nom: 'container_class'
+      label: '<:foundation_6:button_container_class:>'
+      defaut: ''
+  -
+    saisie: 'input'
+    options:
+      nom: 'class'
+      label: '<:foundation_6:button_class:>'
+      defaut: ''

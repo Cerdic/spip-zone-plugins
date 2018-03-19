@@ -34,5 +34,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'grille_large_up' => 'Grille large (desktop)',
 	'grille_medium_up' => 'Grille medium (Tablette)',
 	'grille_small_up' => 'Grille small (Smartphone)',
-	'modele_grille_class' => 'Class css'
+	'modele_grille_class' => 'Class css',
+    'button' => 'Bouton',
+    'button_container_class' => 'Class du container',
+    'button_href' => 'Lien du bouton',
+    'button_class' => 'Class du bouton',
+    'button_titre' => 'Titre du bouton'
 );
