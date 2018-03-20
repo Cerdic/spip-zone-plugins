@@ -32,7 +32,6 @@ function genie_maintenancekit_recalculer_status_rubriques_dist($taches_generales
 		}
 	}
 
-    spip_log("recalcul des status des touts les rubriques","maintenancekit");
-
+	spip_log("recalcul des status des touts les rubriques","maintenancekit");
 	return $taches_generales;
 }
