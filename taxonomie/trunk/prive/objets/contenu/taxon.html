@@ -1,5 +1,4 @@
-<BOUCLE_taxon(TAXONS){id_taxon}>
-
+<BOUCLE_contenu_taxon(TAXONS){id_taxon}>
 [<div class="champ contenu_auteur[ (#AUTEUR*|strlen|?{'',vide})]">
 	<label><:taxon:champ_auteur_label:> : </label>
 	<span dir="#LANG_DIR" class="auteur">(#AUTEUR)</span>
@@ -47,4 +46,13 @@
 </B_sources>
 <//B_sources>
 
-</BOUCLE_taxon>
+<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+<div class="label"><:info_texte:></div>
+<div dir="#LANG_DIR" class="#EDIT{texte} texte">[(#TEXTE|image_reduire{500,0})]</div>
+</div>
+
+[<div class="champ contenu_notes">
+<div class="label"><:info_notes:></div>
+<div dir="#LANG_DIR" class="#EDIT{notes} notes">(#NOTES)</div>
+</div>]
+</BOUCLE_contenu_taxon>
