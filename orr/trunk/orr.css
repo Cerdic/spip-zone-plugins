@@ -3,6 +3,7 @@
 .icones span { margin-left: 2em; }
 #orr { width: 100%; }
 #tabs { width: 100%; }
+.nettoyeur { clear: both; height: 0; margin: 0; padding: 0; border: 0; line-height: 1px; font-size: 1px; }
 
 /* partie haute */
 #motcle {float:left; padding: 0.2em; }
