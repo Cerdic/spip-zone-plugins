@@ -91,6 +91,22 @@ function inc_generer_pdf_version_objet_dist($objet, $id_objet, $pdf_file) {
 		'--footer-html' => $tmp_file_footer,
 		'--footer-spacing' => '5',
 	);
+
+	// rechercher les variables dans le <head> du html principal
+	// elles peuvent etre injectees sous forme de commentaire
+	/*
+	<!--
+	 --margin-top=45mm
+	-->
+	 */
+	$head = explode('</head>', $html);
+	$head = reset($head);
+	foreach ($args as $k=>$v) {
+		if (preg_match(",$k=(.*)\n,Uims", $head, $m)) {
+			$args[$k] = trim($m[1]);
+		}
+	}
+
 	$exec_wkhtmltopdf($tmp_file, $pdf_file, $args);
 
 	@unlink($tmp_file);
