@@ -72,7 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_espece_recherche_regne' => 'et appartenant au @regne@.',
 	'info_espece_recherche_fin' => 'Choisissez ci-dessous le taxon qui correspond à votre recherche.',
 	'info_espece_choisie_intro' => 'Vous avez choisi de créer le taxon «&nbsp;@taxon@&nbsp;» dont les caractéristiques sont les suivantes :',
-	'info_espece_choisie_fin' => 'Si ce taxon est bien celui que vous souhaitez, valider ce formulaire pour le créer et l\'éditer dans la foulée.',
+	'info_espece_choisie_fin' => 'Si ce taxon est bien celui que vous souhaitez, valider ce formulaire pour le créer et l\'éditer dans la foulée. Les ascendants suivis d\'une étoile seront créés en même temps que le taxon principal.',
 
 	// L
 	'label_action_charger_regne' => 'Charger un règne',

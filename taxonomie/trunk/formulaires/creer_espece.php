@@ -158,7 +158,7 @@ function formulaires_creer_espece_verifier_1() {
 			$valeurs['_taxon_defaut'] = 0;
 			include_spip('inc/taxonomie');
 			foreach ($taxons as $_taxon) {
-				if (!sql_countsel('spip_especes', array('tsn=' . intval($_taxon['tsn'])))) {
+				if (!sql_countsel('spip_taxons', array('tsn=' . intval($_taxon['tsn'])))) {
 					$taxon = itis_get_record($_taxon['tsn']);
 					if (($taxon['usage_valide'])
 					and (strcasecmp($taxon['regne'], $regne) === 0)
@@ -307,8 +307,6 @@ function formulaires_creer_espece_traiter() {
 		include_spip('base/objets');
 		$description_table = lister_tables_objets_sql('spip_taxons');
 		$champs['spip_taxons'] = $description_table['field'];
-		$description_table = lister_tables_objets_sql('spip_especes');
-		$champs['spip_especes'] = $description_table['field'];
 
 		// On range la liste des taxons de plus haut rang (genre) à celui de plus petit rang et on ajoute le
 		// taxon espèce en fin de liste.
@@ -328,14 +326,13 @@ function formulaires_creer_espece_traiter() {
   				// Les parents non créés sont donc soit des taxons comme les sous-genres etc, soit un taxon de rang
 				// espèce ou inférieur.
 				// -- On récupère le bloc des informations ITIS du taxon à créer et sa table de destination.
+				$table = 'spip_taxons';
 				if (isset($_taxon['deja_cree'])) {
 					// C'est un ascendant de l'espèce
 					$taxon = itis_get_record($_taxon['tsn']);
-					$table = $_taxon['est_espece'] ? 'spip_especes' : 'spip_taxons';
 				} else {
 					// C'est l'espèce
 					$taxon = $_taxon;
-					$table = 'spip_especes';
 				}
 				// -- On ne retient que les index correspondant à des champs de la table concernée.
 				$taxon = array_intersect_key($taxon, $champs[$table]);
@@ -350,18 +347,19 @@ function formulaires_creer_espece_traiter() {
 				}
 				$taxon['nom_commun'] = $nom_multi;
 
-				// Ajout du type d'objet du parent.
-				$taxon['objet_parent'] = $taxons[$_index - 1]['est_espece'] ? 'espece' : 'taxon';
-
 				// Finalisation de l'enregistrement du taxon suivant son rang (ie. sa table).
+				// -- tous les taxons créés on des indicateurs d'édition et d'importation à 'non'
+				$taxon['edite'] = 'non';
+				$taxon['importe'] = 'non';
 				if (isset($_taxon['est_espece']) and !$_taxon['est_espece']) {
-					// Pour les taxons de rang supérieur à une espèce, on positionne les indicateurs d'édition
-					// et d'importation.
-					$taxon['edite'] = 'non';
-					$taxon['importe'] = 'non';
+					// Pour les taxons de rang supérieur à une espèce, on positionne le statut à 'publie'
+					// comme pour tous les autres taxons de ce type (ceux importés via le fichier de règne).
+					$taxon['espece'] = 'non';
+					$taxon['statut'] = 'publie';
 				} else {
 					// Pour les taxons espèce et de rang inférieur, on positionne le statut à prop (pas de publication
 					// par défaut).
+					$taxon['espece'] = 'oui';
 					$taxon['statut'] = 'prop';
 				}
 
@@ -386,7 +384,7 @@ function formulaires_creer_espece_traiter() {
 			$retour['message_erreur'] = _T('taxonomie:erreur_inconnue');
 		} else {
 			// Redirection vers la page d'édition du taxon
-			$retour['redirect'] = parametre_url(generer_url_ecrire('espece_edit'), 'id_espece', $id_espece);
+			$retour['redirect'] = parametre_url(generer_url_ecrire('taxon_edit'), 'id_taxon', $id_espece);
 		}
 	} else {
 		$retour['message_erreur'] = _T('taxonomie:erreur_inconnue');
