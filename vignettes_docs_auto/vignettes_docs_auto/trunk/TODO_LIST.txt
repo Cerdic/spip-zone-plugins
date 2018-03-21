@@ -1,0 +1,16 @@
+
+
+
+- à la création, on reprend le nom du pdf que l'on passe en .png
+==> verifier que le fichier n'exista pas déjà !!!
+- Laisse une trace (un dossier) ds /tmp ??
+	==> a cause ds fonctions.php de $save_to=_DIR_RACINE."IMG/tmp/". qui n existe pas
+
+- limiter à la mediatheque l'apparition de la vignette après generation
+
+- choix general : png ou jpg
+								systèmatiquement aux ajouts de pdf (post_edition?)
+- procédure pour faire tous les pdf sans vignette (?)
+
+- peut aussi s'appliquer a d'autres formats que pdf => mpeg, tiff, avi, 
+	doc aussi ? http://www.imagemagick.org/discourse-server/viewtopic.php?t=29493

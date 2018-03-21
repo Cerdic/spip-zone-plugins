@@ -1,0 +1,28 @@
+[(#ENV{exec})b]
+[(#ENV{type-page})c]
+
+
+[(#ENV*{vignette}|non)
+<div class='formulaire_illustrer_document_automatique' id='formulaire_illustrer_document_automatique-#ENV{id,new}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})		]
+	<form action="#ENV{action}" method="post">
+[(#REM)  enctype='multipart/form-data' ]
+	<div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+
+			<div class="editer editer_fichier[ (#ENV**{erreurs}|table_valeur{fichier}|oui)erreur]">
+
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier})</span>]
+			  <p class="boutons"><input type='submit' class='submit' value='<:generer:> <:medias:label_fichier_vignette:>' /></p>
+
+		</div>
+
+	</div></form>
+
+</div>
+]
+[(#ENV*{vignette}|oui)
+[(#ENV*{vignette}|image_reduire{100,100})]
+]
