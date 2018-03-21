@@ -1,0 +1,25 @@
+<paquet
+	prefix="vignettes_docs_auto"
+	categorie="edition"
+	version="2018.03.21.2"
+	etat="dev"
+	compatibilite="[3.1.0;3.2.*]"
+>	
+	<nom>Vignette de docs (pdf) générées via un bouton</nom>
+	<!-- Création des vignettes de pdf automatiquement -->
+	<auteur>Oniris Productions/ Alexandre Catonné</auteur>
+
+	<licence>GNU/GPL</licence>
+
+
+	<utilise nom="medias" />
+	
+
+	<pipeline nom="affiche_gauche" inclure="vignettes_docs_auto_pipelines.php" />
+		<pipeline nom="editer_contenu_objet" inclure="vignettes_docs_auto_pipelines.php" />
+		<pipeline nom="affiche_milieu" inclure="vignettes_docs_auto_pipelines.php" />
+		<pipeline nom="document_desc_actions" inclure="vignettes_docs_auto_pipelines.php" />
+
+
+
+</paquet>

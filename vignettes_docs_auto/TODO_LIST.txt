@@ -1,0 +1,12 @@
+- à la création, on reprend le nom du pdf que l'on passe en .png
+==> verifier que le fichier n'exista pas déjà !!!
+- Laisse une trace (un dossier) ds /tmp ??
+	==> a cause ds fonctions.php de $save_to=_DIR_RACINE."IMG/tmp/". qui n existe pas
+
+- ds la mediatheque on ne voit pas la vignette créée (ajouter que quand mediatheque)?
+
+
+- choix general : png ou jpg
+- procédure pour faire tous les pdf sans vignette
+- peut aussi s'appliquer a d'autres formats que pdf => mpeg, tiff, avi, 
+	doc aussi ? http://www.imagemagick.org/discourse-server/viewtopic.php?t=29493
