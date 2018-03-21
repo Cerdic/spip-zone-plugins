@@ -4,7 +4,7 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	'icone_voir_pdf_version' => 'Voir la version PDF',
+	'icone_voir_pdf_version' => 'View PDF version',
 	'titre_configurer' => 'PDF version configuration',
 	'label_methode' => 'PDF generation method',
 	'label_methode_exec' => '<tt>exec(\'wkhtmltopdf\')</tt> on this server',
