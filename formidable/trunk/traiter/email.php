@@ -255,28 +255,6 @@ function traiter_email_dist($args, $retours) {
 			}
 			$sujet_accuse = filtrer_entites($sujet_accuse);
 
-			// Si un nom d'expéditeur est précisé pour l'AR, on l'utilise,
-			// sinon on utilise le nomde l'envoyeur du courriel principal
-			$nom_envoyeur_accuse = trim($options['nom_envoyeur_accuse']);
-			if (!$nom_envoyeur_accuse) {
-				$nom_envoyeur_accuse = $nom_envoyeur;
-			}
-
-			//A fortiori, si un courriel d'expéditeur est précisé pour l'AR, on l'utilise
-			if ($options['courriel_envoyeur_accuse']) {
-				$courriel_envoyeur_accuse = $options['courriel_envoyeur_accuse'];
-			} else {
-				$courriel_envoyeur_accuse = $courriel_envoyeur;
-			}
-
-			//Et on teste si on doit mettre cela en from ou en reply-to
-			if ($options['activer_vrai_envoyeur'] and $courriel_envoyeur_accuse) {
-				$courriel_from_accuse = $courriel_envoyeur_accuse;
-			} elseif ($courriel_envoyeur_accuse) {
-				$corps['repondre_a'] = $courriel_envoyeur_accuse;
-				$courriel_from_accuse = '';
-			}
-
 			// Mais quel va donc être le fond ?
 			if (find_in_path('notifications/formulaire_'.$formulaire['identifiant'].'_accuse.html')) {
 				$accuse = 'notifications/formulaire_'.$formulaire['identifiant'].'_accuse';
@@ -303,12 +281,34 @@ function traiter_email_dist($args, $retours) {
 			// On génère le texte brut
 			$texte = facteur_mail_html2text($html_accuse);
 
+			// Si un nom d'expéditeur est précisé pour l'AR, on l'utilise,
+			// sinon on utilise le nomde l'envoyeur du courriel principal
+			$nom_envoyeur_accuse = trim($options['nom_envoyeur_accuse']);
+			if (!$nom_envoyeur_accuse) {
+				$nom_envoyeur_accuse = $nom_envoyeur;
+			}
+
 			$corps = array(
 				'html' => $html_accuse,
 				'texte' => $texte,
 				'nom_envoyeur' => filtrer_entites($nom_envoyeur_accuse),
 			);
+			
+			//A fortiori, si un courriel d'expéditeur est précisé pour l'AR, on l'utilise
+			if ($options['courriel_envoyeur_accuse']) {
+				$courriel_envoyeur_accuse = $options['courriel_envoyeur_accuse'];
+			} else {
+				$courriel_envoyeur_accuse = $courriel_envoyeur;
+			}
 
+			//Et on teste si on doit mettre cela en from ou en reply-to
+			if ($options['activer_vrai_envoyeur'] and $courriel_envoyeur_accuse) {
+				$courriel_from_accuse = $courriel_envoyeur_accuse;
+			} elseif ($courriel_envoyeur_accuse) {
+				$corps['repondre_a'] = $courriel_envoyeur_accuse;
+				$courriel_from_accuse = '';
+			}
+			
 			// Joindre les pj si léger et nécessaire
 			if ($joindre_pj and  _FORMIDABLE_LIENS_FICHIERS_ACCUSE_RECEPTION == false) {
 				$corps['pieces_jointes'] = $fichiers_facteur;
