@@ -219,7 +219,7 @@ function executer_actions_liste_objet($valeurs) {
 		foreach ($valeurs['action'] as $details_action => $valeur_submit) {
 			$details_action = explode('-', $details_action);
 			$action      = $details_action[0];
-			$index_objet = $details_action[1];
+			$index_objet = isset($details_action[1]) ? $details_action[1] : null;
 			switch ($action) {
 				case 'supprimer':
 					unset($valeurs[intval($index_objet)]);
