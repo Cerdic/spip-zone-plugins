@@ -2,6 +2,10 @@ Plugin Fabrique pour SPIP
 Ce plugin génère d'autres plugins !
 -----------------------------------
 
+2.3.12 le 23 03 2018
+-------------------
+* Correction d’une petite erreur PHP sur l’envoi des images
+
 2.3.11 le 28 06 2017
 -------------------
 * Compatibilité SPIP 3.2
