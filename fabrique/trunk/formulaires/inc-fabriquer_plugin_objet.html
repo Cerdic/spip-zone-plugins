@@ -133,9 +133,9 @@
 	<datalist id="champs_#CLE">
 		<BOUCLE_list_champs(DATA){source tableau, #CHAMPS}>
 		<option label="#CHAMP" value="#CHAMP"/>
-		[(#CHAMP|in_array{#LISTE{nom,titre}}|oui) #SET{defaut_titre,#CHAMP} )]
-		[(#CHAMP|in_array{#LISTE{lang}}|oui) #SET{defaut_lang,#CHAMP} )]
-		[(#CHAMP|in_array{#LISTE{date_publication,date_creation,date}}|oui) #SET{defaut_date,#CHAMP} )]
+		[(#CHAMP|in_array{#LISTE{nom,titre}}|oui) #SET{defaut_titre,#CHAMP} ]
+		[(#CHAMP|in_array{#LISTE{lang}}|oui) #SET{defaut_lang,#CHAMP} ]
+		[(#CHAMP|in_array{#LISTE{date_publication,date_creation,date}}|oui) #SET{defaut_date,#CHAMP} ]
 		</BOUCLE_list_champs>
 	</datalist>
 	

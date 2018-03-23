@@ -57,13 +57,17 @@ function formulaires_restaurer_plugin_charger_dist() {
 		}
 	}
 	unset($sauvegardes);
+	$liste_fichiers = [];
+	if (count($sauvegardes_plugins)) {
+		$liste_fichiers['Sauvegarde intégrée au plugin (la plus récente donc)'] = $sauvegardes_plugins;
+	}
+	if (count($sauvegardes_backup)) {
+		$liste_fichiers['Sauvegarde intégrée au plugin (la plus récente donc)'] = $sauvegardes_backup;
+	}
 
 	$contexte = array(
 		'sauvegarde' => '',
-		'liste_fichiers' => array(
-			'Sauvegarde intégrée au plugin (la plus récente donc)' => $sauvegardes_plugins,
-			'Sauvegardes issues de créations antérieures' => $sauvegardes_backup,
-		),
+		'liste_fichiers' => $liste_fichiers,
 	);
 	return $contexte;
 }

@@ -431,7 +431,7 @@ function options_presentes($objet, $champs) {
  *
  * @param array $objet
  *     Descrption de l'objet
- * @param array $champ
+ * @param string $champ
  *     Nom de l'option à tester
  * @return string
  *     Même retour que le filtre |oui :
@@ -1295,7 +1295,7 @@ function filtre_fabrique_lister_objets_editoriaux($objets_fabrique, $inclus=arra
  *
  * @param array $objet
  *     Déclaration d'un objet dans la Fabrique
- * @param array $objet s
+ * @param array $objets
  *     Déclaration de tous les objets dans la Fabrique
  * @return array
  *     Description du parent
@@ -1363,7 +1363,7 @@ function fabrique_id_table_objet($table, $objets) {
 	}
 	// déclaré dans la Fabrique
 	foreach ($objets as $objet) {
-		if ($objet['table'] == $table) {
+		if (isset($objet['table']) and $objet['table'] == $table) {
 			return $objet['id_objet'];
 		}
 	}
@@ -1389,7 +1389,7 @@ function fabrique_table_objet($table, $objets) {
 	}
 	// déclaré dans la Fabrique
 	foreach ($objets as $objet) {
-		if ($objet['table'] == $table) {
+		if (isset($objet['table']) and $objet['table'] == $table) {
 			return $objet['objet'];
 		}
 	}
@@ -1415,7 +1415,7 @@ function fabrique_objet_type($table, $objets) {
 	}
 	// déclaré dans la Fabrique
 	foreach ($objets as $objet) {
-		if ($objet['table'] == $table) {
+		if (isset($objet['table']) and $objet['table'] == $table) {
 			return $objet['type'];
 		}
 	}
