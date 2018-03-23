@@ -71,8 +71,8 @@ function logos_roles_declarer_tables_interfaces($interfaces) {
 					// utilise ce traitement pour trouver le bon logo.
 					$interfaces = logos_roles_ajouter_traitement_automatique(
 						$interfaces,
-						'trouver_logo_par_role(%s, '.objet_type($table).', $Pile[1][\''.id_table_objet($table).'\'], \''.$role.'\')',
-						strtoupper('LOGO_'.objet_type($table) . $suffixe_balise)
+						'trouver_logo_par_role(%s, \'' . objet_type($table) . '\', $Pile[1][\''.id_table_objet($table).'\'], \''.$role.'\')',
+						strtoupper('LOGO_' . objet_type($table) . $suffixe_balise)
 					);
 
 					// Le massicot ne déclare lui-même que les rôles logo et
@@ -81,8 +81,8 @@ function logos_roles_declarer_tables_interfaces($interfaces) {
 						and (! in_array($role, array('logo', 'logo_survol')))) {
 						$interfaces = logos_roles_ajouter_traitement_automatique(
 							$interfaces,
-							'massicoter_logo(%s, '.objet_type($table).', $Pile[1][\''.id_table_objet($table).'\'], \''.$role.'\')',
-							strtoupper('LOGO_'.objet_type($table)) . $suffixe_balise
+							'massicoter_logo(%s, \'' . objet_type($table) . '\', $Pile[1][\''.id_table_objet($table).'\'], \''.$role.'\')',
+							strtoupper('LOGO_' . objet_type($table)) . $suffixe_balise
 						);
 					}
 
@@ -90,8 +90,8 @@ function logos_roles_declarer_tables_interfaces($interfaces) {
 					// est déclaré dans la définition du rôle
 					$interfaces = logos_roles_ajouter_traitement_automatique(
 						$interfaces,
-						'forcer_dimensions_role(%s, '.objet_type($table).', $Pile[1][\''.id_table_objet($table).'\'], \''.$role.'\')',
-						strtoupper('LOGO_'.objet_type($table) . $suffixe_balise)
+						'forcer_dimensions_role(%s, \'' . objet_type($table) . '\', $Pile[1][\''.id_table_objet($table).'\'], \''.$role.'\')',
+						strtoupper('LOGO_' . objet_type($table) . $suffixe_balise)
 					);
 				}
 			}
