@@ -7,7 +7,6 @@
  *	   Tableau des saisies du formulaire
  */
 function formulaires_configurer_logos_roles_saisies_dist() {
-
 	$datas_objets = array();
 	foreach (lister_tables_objets_sql() as $table => $def) {
 		$datas_objets[table_objet($table)] = _T($def['texte_objets']);
@@ -63,15 +62,13 @@ function formulaires_configurer_logos_roles_saisies_dist() {
  *	   Environnement du formulaire
  */
 function formulaires_configurer_logos_roles_charger_dist() {
-
 	if (_request('roles_logos')) {
 		$valeurs = array(
 			'roles_logos' => _request('roles_logos'),
 		);
 	} else {
-		$valeurs = lire_config('logos_roles');
+		$valeurs = lire_config('logos_roles/', array());
 	}
-
 	return $valeurs;
 }
 

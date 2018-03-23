@@ -61,11 +61,11 @@ function lister_roles_logos($objet = null, $role = null, $tous_les_objets = null
 		'roles_logos',
 		array(
 			'logo' => array(
-				'label' => 'Logo',
+				'label' => 'logos_roles:logo',
 				'objets' => $tous_les_objets,
 			),
 			'logo_survol' => array(
-				'label' => 'Logo survol',
+				'label' => 'logo_survol',
 				'objets' => $tous_les_objets,
 			),
 		)
