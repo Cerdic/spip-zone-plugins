@@ -98,6 +98,7 @@ function inc_exporter_csv_dist($titre, $resource, $delim = ',', $entetes = null,
 		ob_clean();
 		flush();
 		readfile($fichier);
+		exit;
 	}
 
 	return $fichier;
