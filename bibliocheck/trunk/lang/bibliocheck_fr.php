@@ -68,6 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_config_composant' => 'Composant des tickets',
 	'label_config_docs_joints' => 'Documents joints',
 	'label_config_email' => 'Courriel de contact (support)',
+	'label_explication_personnalisee_ajouter_reference' => 'Explication personnalisée pour le formulaire "Proposer une nouvelle référence"',
 	'lien' => 'Lien :',
 
 // P
@@ -77,6 +78,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // R
 	'reference_en_base' => 'Réference actuellement en base de données',
+	
+// S
+	'syntaxe_spip_autorisee' => 'Vous pouvez utiliser la syntaxe SPIP dans ce champs.',
 
 // T
 	'type_biblio' => 'Biblio',
