@@ -37,7 +37,7 @@ function saisies_header_prive($flux) {
  * @param string $flux
  * @return string
 **/
-function saisies_affichage_final_dist($flux) {
+function saisies_affichage_final($flux) {
 	if (
 		$GLOBALS['html'] // si c'est bien du HTML
 		and ($p = strpos($flux, '<!--!inserer_saisie_editer-->')) !== false // et qu'on a au moins une saisie
