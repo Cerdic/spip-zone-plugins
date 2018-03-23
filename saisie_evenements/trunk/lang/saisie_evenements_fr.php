@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_debut_min_mobile_label' => 'Date de début minimale (mobile)',
 
 	// I
-	'id_article_explication' => 'Proposer les événements des articles des articles suivants.',
+	'id_article_explication' => 'Proposer les événements des articles suivants.',
 	'id_article_label' => 'Articles',
 	'id_evenement_explication' => 'Proposer les événements suivants.',
 	'id_evenement_label' => 'Événements',
