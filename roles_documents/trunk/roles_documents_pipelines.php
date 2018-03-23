@@ -182,8 +182,10 @@ function roles_documents_pre_boucle($boucle) {
 		$utilise_critere_logo = false;
 		foreach ($boucle->criteres as $critere) {
 			if ($critere->type === 'critere') {
-				if (($critere->param[0][0]->texte === 'role') or
-					($critere->op === 'role')) {
+				if (
+					(isset($critere->param[0][0]) and $critere->param[0][0]->texte === 'role')
+					or ($critere->op === 'role')
+				) {
 					$utilise_critere_logo = true;
 				}
 			}
@@ -207,8 +209,9 @@ function roles_documents_pre_boucle($boucle) {
 		}
 
 		// Go go go
-		if (!$utilise_critere_logo
-			and $boucle->modificateur['tout'] == false
+		if (
+			!$utilise_critere_logo
+			and (empty($boucle->modificateur['tout']) or $boucle->modificateur['tout'] === false)
 			and !$bypass
 		) {
 			$table_liens = 'spip_documents_liens';
