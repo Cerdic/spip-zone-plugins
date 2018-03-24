@@ -39,6 +39,7 @@ function promotions_multiples_evenements_dist($flux = array()) {
 	}
 	$return = array (
 		'nom' => _T('reservation:nom_reservation_multiples_evenements'),
+		'plugins_applicables' => 'reservation_evenement',
 		'saisies' => array (
 			array (
 				'saisie' => 'radio',
