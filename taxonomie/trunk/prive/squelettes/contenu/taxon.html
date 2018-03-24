@@ -1,7 +1,7 @@
-[(#AUTORISER{voir,taxon,#ID_TAXON}|sinon_interdire_acces)]
-<BOUCLE_taxon(TAXONS){id_taxon}{si #ENV{exec}|=={taxon}}>
+[(#AUTORISER{voir, taxon, #ID_TAXON}|sinon_interdire_acces)]
+<BOUCLE_taxon(TAXONS){id_taxon}{statut==.*}{si #ENV{exec}|=={taxon}}>
 [(#BOITE_OUVRIR{[
-	[(#AUTORISER{modifier,taxon,#ID_TAXON})
+	[(#AUTORISER{modifier, taxon, #ID_TAXON})
 		[(#ID_TAXON|afficher_qui_edite{taxon}|non)
 			[(#URL_ECRIRE{taxon_edit,id_taxon=#ID_TAXON}|icone_verticale{<:taxon:icone_modifier_taxon:>,taxon,edit,right ajax preload})]
 		]

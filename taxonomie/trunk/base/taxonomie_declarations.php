@@ -100,7 +100,7 @@ function taxonomie_declarer_tables_objets_sql($tables) {
             array(
                 'champ'     => 'statut',
                 'publie'    => 'publie',
-                'previsu'   => 'publie, prop',
+                'previsu'   => 'publie,prop',
                 'exception' => array('statut', 'tout')
             )
         ),

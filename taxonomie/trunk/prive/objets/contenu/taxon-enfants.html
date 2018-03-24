@@ -1,5 +1,5 @@
 [(#REM) <!-- Liste des descendants directs du taxon --> ]
-<BOUCLE_enfants_taxon(TAXONS) {id_taxon}>
+<BOUCLE_enfants_taxon(TAXONS) {id_taxon}{statut==.*}>
 	[(#SET{parent, [(#VAL{tsn_parent=}|concat{#TSN})]})]
 	[(#INCLURE{fond=prive/objets/liste/taxons,
 		titre=<:taxonomie:titre_liste_fils_taxon:>,

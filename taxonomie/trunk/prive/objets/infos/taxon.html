@@ -1,4 +1,4 @@
-<BOUCLE_taxon(TAXONS){id_taxon=#ENV{id}}>
+<BOUCLE_taxon(TAXONS){id_taxon=#ENV{id}}{statut==.*}>
 <div class="infos">
 	[(#SET{texte_objet,<:taxon:titre_taxon:>})]
 	<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:>
@@ -32,9 +32,9 @@
 		|parametre_url{var_mode, calcul}
 		|icone_horizontale{<:icone_voir_en_ligne:>, racine})]
 	</BOUCLE_publie>
-	[(#AUTORISER{previsualiser, taxons, #ID_TAXON, '', #ARRAY{statut,#STATUT}})
+	[(#AUTORISER{previsualiser, taxon, #ID_TAXON, '', #ARRAY{statut,#STATUT}})
 		[(#VAL{redirect}
-			|generer_url_action{type=taxons&id=#ID_TAXON}
+			|generer_url_action{type=taxon&id=#ID_TAXON}
 			|parametre_url{var_mode, preview}
 			|icone_horizontale{<:previsualiser:>, preview})]
 	]
