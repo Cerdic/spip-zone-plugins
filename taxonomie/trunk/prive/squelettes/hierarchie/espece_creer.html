@@ -1,7 +1,5 @@
 <!-- hierarchie -->
-#SET{objet, espece}
-<a	href="[(#URL_ECRIRE{especes})]">[(#GET{objet}|objet_info{texte_objets}|_T)]</a> &gt;
-
+<a	href="[(#URL_ECRIRE{taxons}|parametre_url{espece, oui})]"><:taxonomie:onglet_espece:></a> &gt;
 [(#LANG|changer_typo)]
 <strong class="nom_scientifique_inline on">
 	<:info_sans_titre:>
