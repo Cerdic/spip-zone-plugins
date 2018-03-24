@@ -72,9 +72,10 @@ function lister_roles_logos($objet = null, $role = null, $tous_les_objets = null
 	);
 
 	if (is_array(lire_config('logos_roles/roles_logos'))) {
+		include_spip('inc/filtres');
 		foreach (lire_config('logos_roles/roles_logos') as $r) {
 			$roles_logos['logo_' . $r['slug']] = array(
-				'label' => $r['titre'] ?: $r['slug'],
+				'label' => extraire_multi($r['titre']) ?: $r['slug'],
 				'objets' => $r['objets'],
 			);
 		}
