@@ -20,7 +20,7 @@
 				[(#VALEUR{espece}|=={oui}|oui)<strong>]
 				(#VAL{taxonomie:rang_}|concat{#VALEUR{rang}}|_T|ucfirst) :
 				[(#VALEUR{espece}|=={oui}|oui)</strong>]
-				[<a class="nom_scientifique_inline"[ href="(#VALEUR|table_valeur{id_taxon}|generer_url_entite{taxon})"]>
+				[<a class="nom_scientifique_inline"[ href="(#VALEUR{id_taxon}|generer_url_entite{taxon})"]>
 					(#VALEUR{nom_scientifique}|ucfirst)
 				</a>]
 				[<span class="nom_commun">&nbsp;\((#VALEUR{nom_commun}|extraire_multi{#LANG, #ARRAY{lang_defaut, aucune}}|ucfirst)\)</span>]
