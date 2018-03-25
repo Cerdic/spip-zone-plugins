@@ -17,11 +17,13 @@
 <BOUCLE_ascendance(DATA) {source table, #GET{ascendance}}>
 		[<li[ class="rang(#CLE|plus{1})"]>
 			<span dir="#LANG_DIR">
-				(#VAL{taxonomie:rang_}|concat{#VALEUR|table_valeur{rang}}|_T|ucfirst) :
+				[(#VALEUR{espece}|=={oui}|oui)<strong>]
+				(#VAL{taxonomie:rang_}|concat{#VALEUR{rang}}|_T|ucfirst) :
+				[(#VALEUR{espece}|=={oui}|oui)</strong>]
 				[<a class="nom_scientifique_inline"[ href="(#VALEUR|table_valeur{id_taxon}|generer_url_entite{taxon})"]>
-					(#VALEUR|table_valeur{nom_scientifique}|ucfirst)
+					(#VALEUR{nom_scientifique}|ucfirst)
 				</a>]
-				[<span class="nom_commun">&nbsp;\((#VALEUR|table_valeur{nom_commun}|extraire_multi{#LANG, #ARRAY{lang_defaut, aucune}}|ucfirst)\)</span>]
+				[<span class="nom_commun">&nbsp;\((#VALEUR{nom_commun}|extraire_multi{#LANG, #ARRAY{lang_defaut, aucune}}|ucfirst)\)</span>]
 			</span>
 		</li>]
 </BOUCLE_ascendance>
