@@ -22,7 +22,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_wikipedia_page' => 'Aucune page dans la langue choisie n\'a pu être récupérée de Wikipedia.',
 	'erreur_recherche_nom_scientifique' => 'Le nom scientifique d\'une espèce ou d\'un taxon de rang inférieur est toujours constitué d\'au moins deux mots. Saisissez un second mot ou changez le type de correspondance.',
 	'erreur_recherche_aucun_taxon' => 'Le service ITIS ne trouve aucun taxon de rang espèce ou inférieur correspondant à cette recherche ou tous les taxons trouvés ont déjà été créés.',
-	'erreur_espece_tsn_invalide' => 'Le TSN de l\'espèce choisie est invalide. Veuillez relancer le formulaire et réessayer.',
+	'erreur_formulaire_creer_espece' => 'Une erreur s\'est produite lors du processus de création. Veuillez relancer le formulaire et réessayer.',
+	'erreur_creation_taxon' => 'Une erreur s\'est produite lors de la création du taxon @taxon@ en base de données. Veuillez consulter la liste des taxons et relancer le formulaire si besoin.',
 	'explication_taxon_trouve' => 'Chaque taxon est désigné par son nom, scientifique ou commun, et son rang.',
 	'explication_recherche_type' => 'Si vous le connaissez, le nom scientifique permet une recherche d\'emblée plus précise.',
 	'explication_recherche_taxon' => 'Le taxon recherché doit correspondre à une espèce ou à un taxon de rang inférieur.',
@@ -44,6 +45,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'filtre_importe_non' => 'Non importés',
 	'filtre_importe_tout' => 'Tous',
 	'filtre_regnes_tout' => 'Tous les règnes',
+	'filtre_statut_prop' => 'Proposés à la publication',
+	'filtre_statut_poubelle' => 'Publiés',
+	'filtre_statut_publie' => 'A la poubelle',
+	'filtre_statut_tout' => 'Tous',
 
 	// I
 	'info_1_espece' => 'Une espèce ou taxon de rang inférieur',
@@ -99,7 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_recherche_correspondance_debut' => 'Commence par le texte de la recherche',
 	'label_recherche_correspondance_fin' => 'Se termine par le texte de la recherche',
 	'label_recherche_regne' => 'Limiter la recherche à un règne',
-	'label_parents_espece' => 'Ascendance du taxon jusqu\'au genre',
+	'label_parents_espece' => 'Ascendance jusqu\'au genre',
 
 	// N
 	'notice_vider_regne_inexistant' => 'Le règne @regne@ n\'a pas été trouvé en base de données.',

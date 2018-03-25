@@ -22,22 +22,22 @@
 <B_filtres>
 <div class="onglets_simple second clearfix">
 <BOUCLE_filtres(DATA) {source table, #ENV{filtres}}>
-	<ul[ class="(#VALEUR) [(#COMPTEUR_BOUCLE|>{1}|oui) suivant]"]>
+	<ul[ class="(#CLE) [(#COMPTEUR_BOUCLE|>{1}|oui) suivant]"]>
 		[<li class="first">
 			(#SELF
-				|parametre_url{#VALEUR, ''}
-				|lien_ou_expose{[(#VAL{taxonomie:filtre_}|concat{#VALEUR}|concat{_tout}|_T)], #ENV{#VALEUR}|=={''}, ajax})
+				|parametre_url{#CLE, ''}
+				|lien_ou_expose{[(#VAL{taxonomie:filtre_}|concat{#CLE}|concat{_tout}|_T)], #ENV{#CLE}|=={''}, ajax})
 		</li>]
+	<BOUCLE_items_filtre(DATA) {source table, #_filtres:VALEUR|explode{:}}{par cle}>
 		[<li>
 			(#SELF
-				|parametre_url{#VALEUR, oui}
-				|lien_ou_expose{[(#VAL{taxonomie:filtre_}|concat{#VALEUR}|concat{_oui}|_T)], #ENV{#VALEUR}|=={'oui'}, ajax})
+				|parametre_url{#_filtres:CLE, #VALEUR}
+				|lien_ou_expose{
+					[(#VAL{taxonomie:filtre_}|concat{#_filtres:CLE}|concat{_}|concat{#VALEUR}|_T)],
+					#ENV{#_filtres:CLE}|=={#VALEUR},
+					ajax})
 		</li>]
-		[<li>
-			(#SELF
-				|parametre_url{#VALEUR, non}
-				|lien_ou_expose{[(#VAL{taxonomie:filtre_}|concat{#VALEUR}|concat{_non}|_T)], #ENV{#VALEUR}|=={'non'}, ajax})
-		</li>]
+	</BOUCLE_items_filtre>
 	</ul>
 </BOUCLE_filtres>
 	<br class="nettoyeur" />

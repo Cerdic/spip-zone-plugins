@@ -7,8 +7,15 @@
 
 [(#REM) Onglets pour le filtrage par règne et par indicateur d'édition ]
 #SET{filtres, #LISTE}
+[(#ENV{espece}|=={oui}|oui)
+	#SET{filtres, #ARRAY{statut, prop:publie:poubelle}}
+	#SET{titre_1, taxonomie:info_1_espece}
+	#SET{titre_n, taxonomie:info_nb_especes}
+]
 [(#ENV{espece}|=={oui}|non)
-	#SET{filtres, #LISTE{edite, importe}}
+	#SET{filtres, #ARRAY{edite, oui:non, importe, oui:non}}
+	#SET{titre_1, taxonomie:info_1_taxon}
+	#SET{titre_n, taxonomie:info_nb_taxons}
 ]
 <INCLURE{fond=prive/squelettes/inclure/inc-filtres_listes,
 	filtres=#GET{filtres},
@@ -19,11 +26,11 @@
 
 <INCLURE{fond=prive/objets/liste/taxons,
 	par=nom_scientifique,
-	info_1=taxonomie:info_1_taxon,
-	info_nb=taxonomie:info_nb_taxons,
+	info_1=#GET{titre_1},
+	info_nb=#GET{titre_n},
 	sinon=<:taxon:info_aucun_taxon:>,
 	env, ajax} />
 
-[(#ENV{espece}|=={oui}|et{#AUTORISER{creer, espece}}|oui)
+[(#AUTORISER{creer, espece}|oui)
 	[(#URL_ECRIRE{espece_creer}|icone_verticale{<:espece:icone_creer_espece:>, espece, new, right})]
 ]
