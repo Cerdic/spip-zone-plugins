@@ -182,7 +182,7 @@ function formulaires_decrire_taxon_traiter($id_taxon, $element) {
 
 	// Récupération des informations de base du taxon
 	$select = array('tsn', 'nom_scientifique', 'edite', $element, 'sources');
-	$where = array('id_taxon=' . sql_quote($id_taxon));
+	$where = array('id_taxon=' . intval($id_taxon));
 	$taxon = sql_fetsel($select, 'spip_taxons', $where);
 
 	// Récupération de la page wikipedia choisie:
@@ -231,7 +231,7 @@ function formulaires_decrire_taxon_traiter($id_taxon, $element) {
 		}
 		$maj['sources'] = serialize($maj['sources']);
 		// - Mise à jour
-		sql_updateq('spip_taxons', $maj, 'id_taxon=' . sql_quote($id_taxon));
+		sql_updateq('spip_taxons', $maj, 'id_taxon=' . intval($id_taxon));
 
 		// Redirection vers la page d'édition du taxon
 		$retour['redirect'] = parametre_url(generer_url_ecrire('taxon_edit'), 'id_taxon', $id_taxon);

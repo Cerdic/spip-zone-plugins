@@ -131,29 +131,58 @@ function autoriser_taxon_iconifier_dist($faire, $type, $id, $qui, $opt) {
 
 /**
  * Autorisation de modifier le statut d'un taxon.
- * Cela n'est possible que pour les espèces ne possédant aucun enfant.
+ * Cela n'est possible que :
+ * - si l'auteur possède l'autorisation de modifier le taxon
+ * - et le taxon est une espèce
+ * - et que l'espèce est soit une feuille de la hiérarchie soit possède des enfants dont aucun n'est au statut
+ *   publié.
  *
  * @param object $faire
  * @param object $type
  * @param object $id
  * @param object $qui
  * @param object $opt
+ *
  * @return
+ *        `true`si autorisé, `false`sinon.
  */
 function autoriser_taxon_instituer_dist($faire, $type, $id, $qui, $opt) {
 
 	$autoriser = false;
 
 	if ($id_taxon = intval($id)) {
+		// On récupère les informations sur le taxon concerné et en particulier si celui-ci est bien une espèce
+		// ou un descendant d'espèce.
 		$from = 'spip_taxons';
 		$where = array("id_taxon=$id_taxon");
-		$espece = sql_getfetsel('espece', $from, $where);
+		$select = array('espece', 'statut', 'tsn');
+		$taxon = sql_fetsel($select, $from, $where);
 
-		$autoriser = (($espece == 'oui') and  autoriser('modifier', 'taxon', $id_taxon, $qui, $opt));
+		if (($taxon['espece'] == 'oui') and  autoriser('modifier', 'taxon', $id_taxon, $qui, $opt)) {
+			// On vérifie que l'espèce ne possède pas des descendants directs
+			$where = array('tsn_parent=' . intval($taxon['tsn']));
+			$select = array('statut');
+			$enfants = sql_allfetsel($select, $from, $where);
+			if (!$enfants) {
+				// Si le taxon est une feuille de la hiérarchie alors il peut toujours être institué.
+				$autoriser = true;
+			} else {
+				// Le taxon a des descendants.
+				// - si un descendants est publié alors l'espèce concernée l'est aussi et ne peut pas être
+				//   instituée (prop ou poubelle) sous peine de casser la hiérarchie.
+				// - si aucun descendant n'est publié alors quelque soit le statut de l'espèce concernée celle-ci
+				//   peut être instituée.
+				if (!in_array('publie', array_column($enfants, 'statut'))) {
+					$autoriser = true;
+				}
+			}
+		}
 	}
 
 	return $autoriser;
 }
+
+
 /**
  * Autorisation de voir la liste des taxons : tout le monde est autorisé.
  *

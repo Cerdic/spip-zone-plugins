@@ -300,3 +300,37 @@ function taxon_crediter($id_taxon, $sources_specifiques = null) {
 
 	return $sources;
 }
+
+
+/**
+ * Affiche la puce de statut d'un taxon sans proposer le formulaire de changement de statut.
+ *
+ * @package SPIP\TAXONOMIE\TAXON
+ *
+ * @api
+ * @filtre
+ *
+ * @param string $statut
+ *        Statut du taxon, `prop`, `publie`ou `poubelle`.
+ * @param int    $id_taxon
+ *        Id du taxon.
+ *
+ * @return array
+ *        Image de la puce.
+ */
+function taxon_afficher_statut($statut, $id_objet = 0) {
+
+	// On évite de charger la fonction n fois.
+	static $afficher_puce = null;
+
+	if (!$afficher_puce) {
+		// Chargement de la fonction d'affichage
+		$afficher_puce = charger_fonction('puce_statut', 'inc');
+	}
+
+	// On affiche la puce sans proposer le formulaire rapide de changement de statut qui pose un problème avec
+	// l'ajax sachant qu'un changement peut en provoquer d'autres, la liste n'est plus à jour.
+	$puce = $afficher_puce($id_objet, $statut, 0, 'taxon', false, false);
+
+	return $puce;
+}
