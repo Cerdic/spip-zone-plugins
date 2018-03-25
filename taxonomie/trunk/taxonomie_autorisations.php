@@ -260,7 +260,8 @@ function autoriser_especes_menu_dist($faire, $type, $id, $qui, $opt){
 
 
 /**
- * Autorisation de voir le bouton d'accès rapide de création (espece)
+ * Autorisation de voir le bouton d'accès rapide de création d'une espèce qui est un taxon
+ * de la table `spip_taxons` dont l'indicateur `espece` est à 'oui'.
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -298,49 +299,7 @@ function autoriser_espece_creer_dist($faire, $type, $id, $qui, $opt) {
 	}
 
 	// Il faut aussi être admin ou rédacteur.
-	$autoriser = $regne_existe and in_array($qui['statut'], array('0minirezo', '1comite'));
+	$autoriser = $regne_existe and autoriser('creer', 'taxon', $id, $qui, $opt);
 
 	return $autoriser;
-}
-
-/**
- * Autorisation de voir (espece)
- *
- * @param  string $faire Action demandée
- * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
- * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_espece_voir_dist($faire, $type, $id, $qui, $opt) {
-	return true;
-}
-
-/**
- * Autorisation de modifier (espece)
- *
- * @param  string $faire Action demandée
- * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
- * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_espece_modifier_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite'));
-}
-
-/**
- * Autorisation de supprimer (espece)
- *
- * @param  string $faire Action demandée
- * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
- * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_espece_supprimer_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
 }
