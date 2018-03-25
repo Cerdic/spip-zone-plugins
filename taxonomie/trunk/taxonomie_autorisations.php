@@ -109,7 +109,7 @@ function autoriser_taxon_voir_dist($faire, $type, $id, $qui, $opt) {
 }
 
 /**
- * Autorisation d'iconifier un taxon : aucun taxon ne peut être iconifié actuellement.
+ * Autorisation d'iconifier un taxon : seules les espèces et les taxons de rang inférieur possède un logo.
  *
  * @param string	$faire
  * 		Action demandée.
@@ -126,7 +126,19 @@ function autoriser_taxon_voir_dist($faire, $type, $id, $qui, $opt) {
  * 		`true` si l'autoriation est donnée, `false` sinon
 **/
 function autoriser_taxon_iconifier_dist($faire, $type, $id, $qui, $opt) {
-	return false;
+
+	$autoriser = false;
+
+	if ($id_taxon = intval($id)) {
+		// On récupère le champ indiquant si le taxon est une espèce ou pas.
+		$where = array("id_taxon=$id_taxon");
+		$espece = sql_getfetsel('espece', 'spip_taxons', $where);
+		if ($espece == 'oui') {
+			$autoriser = true;
+		}
+	}
+
+	return $autoriser;
 }
 
 /**
