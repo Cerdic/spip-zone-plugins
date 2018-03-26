@@ -225,16 +225,19 @@ function mailshot_envoyer_lot($nb_max=5,$offset=0){
 
 /**
  * Verifier un email en fail et si plus de N fails consecutifs le desabonner (email foireux)
+ * (MAIS ignorer les envois qui n'ont que des fails car c'est un blocage du compte du prestataire d'envoi)
  * @param $email
  */
 function mailshot_verifier_email_fail($email) {
+	static $mailshot_valides = array();
+
 	if (_MAILSHOT_DESABONNER_FAILED != false) {
 		if (!defined('_MAILSHOT_MAX_FAIL')) {
 			define('_MAILSHOT_MAX_FAIL', 3);
 		}
 
 		$historique = sql_allfetsel(
-			'date, statut, try',
+			'id_mailshot, date, statut, try',
 			'spip_mailshots_destinataires',
 			'statut!=' . sql_quote('todo') . ' AND email=' . sql_quote($email),
 			'',
@@ -245,7 +248,14 @@ function mailshot_verifier_email_fail($email) {
 		$nb_failed = 0;
 		foreach ($historique as $h) {
 			if ($h['statut'] == 'fail' AND $h['try'] > 1) {
-				$nb_failed++;
+				// on ne compte le fail que si l'envoi a reussi au moins une fois
+				// pour ne pas perdre tous les abonnes quand le service d'envoi bloque le compte
+				if (!isset($mailshot_valides[$h['id_mailshot']])) {
+					$mailshot_valides[$h['id_mailshot']] = sql_getfetsel('id_mailshot', 'spip_mailshots_destinataires', sql_in('statut', array('todo','fail'),'NOT').' AND id_mailshot='.intval($h['id_mailshot']),'','','0,1');
+				}
+				if ($mailshot_valides[$h['id_mailshot']]) {
+					$nb_failed++;
+				}
 			}
 		}
 		if ($nb_failed >= _MAILSHOT_MAX_FAIL) {
