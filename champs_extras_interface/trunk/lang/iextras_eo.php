@@ -23,6 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_supprimer' => 'forigi',
 	'action_supprimer_title' => 'Forigi komplete la kampon el la datumbazo',
 
+	// B
+	'bouton_importer' => 'Importi',
+
 	// C
 	'caracteres_autorises_champ' => 'Taŭgaj signoj : sensupersignaj literoj, ciferoj, - kaj _',
 	'caracteres_interdits' => 'Iuj uzitaj signoj ne taŭgas por tiu ĉi kampo.',
@@ -34,9 +37,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_action' => 'Ago @action@ nekonata.',
 	'erreur_enregistrement_champ' => 'Problemo dum kreado de la ekstra kampo.',
+	'erreur_format_export' => 'Dosierformo @format@ ne konata.',
+	'erreur_nom_champ_mysql_keyword' => 'Tiu kamponomo estas SQL-rezervita ŝlosilvorto, kaj sekve ne povas uziĝi. ',
+	'erreur_nom_champ_utilise' => 'Tiu kamponomo estas jam uzita de SPIP aŭ de aktiva kromprogramo.',
+	'exporter_objet' => 'Eksporti ĉiujn ekstrajn kampojn el : @objet@',
+	'exporter_objet_champ' => 'Eksporti ekstran kampon : @objet@ / @nom@',
+	'exporter_tous' => 'Eksporti ĉiujn ekstrajn kampojn',
+	'exporter_tous_explication' => 'Eksporti ĉiujn ekstrajn kampojn en YAML-dosierformo por uzo en importoformularo.',
+	'exporter_tous_php' => 'PHP-eksporto',
+	'exporter_tous_php_explication' => 'Eksporti en PHP-dosierformo por reuzo en kromprogramo dependanta nur de Kernaj ekstraj kampoj.',
 
 	// I
 	'icone_creer_champ_extra' => 'Krei novan ekstran kampon.',
+	'importer_explications' => 'Importi ekstrajn kampojn en tiu ĉi retejo aldonos al jam ekzistantaj ekstraj kampoj la novajn difinitajn en la importodosiero. La novaj kampoj venos sekve de la jam ekzistantaj kampoj.',
+	'importer_fichier' => 'Dosiero importota',
+	'importer_fichier_explication' => 'YAML-eksporto-dosierformo',
+	'importer_fusionner' => 'Modifi la jam ekzistantajn kampojn ',
+	'importer_fusionner_explication' => 'Se la importotajn ekstrajn kampojn estas jam ekzistantaj ĉe la retejo, la importotraktado ilin malatentas defaŭlte. Vi povas tamen peti modifi ĉiujn informojn el tiuj kampoj per preno de la importotaj kampoj.',
+	'importer_fusionner_non' => 'Ne modifi la jam ekzistantajn kampojn en la retejo',
+	'importer_fusionner_oui' => 'Modifi la ekstrajn kampojn komunajn kun la importo',
 	'info_description_champ_extra' => 'Tiu paĝo ebligas la mastrumadon de la ekstraj kampoj, t.e. de la kromaj kampoj en la tabeloj de SPIP, uzeblaj en redakto-formularoj.',
 	'info_description_champ_extra_creer' => 'Vi povas krei novajn kampojn, kiuj montriĝos tiam en tiu ĉi paĝo, en la kadro „Listo de la redaktaj objektoj“, kaj ankaŭ en la formularoj.',
 	'info_description_champ_extra_presents' => 'Fine, se kampoj jam ekzistas en via datumbazo, sed ne estas deklaritaj (de kromprogramo aŭ skeletaro), vi povas uzi tiun kromprogramon por mastrumi ilin. Tiuj kampoj, se ili ekzistas, aperas en kadro „Listo de la ne mastrumataj kampoj“',
@@ -48,6 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_attention' => 'Tre gravaj klarigoj',
 	'label_champ' => 'Kamponomo',
 	'label_class' => 'CSS-klasoj',
+	'label_conteneur_class' => 'CSS-klasoj el patra ujo',
 	'label_datas' => 'Valorlisto',
 	'label_explication' => 'Klarigoj pri la enigo',
 	'label_label' => 'Eniga etikedo',
@@ -62,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_sql' => 'SQL-difino',
 	'label_table' => 'Objekto',
 	'label_traitements' => 'Aŭtomataj traktadoj',
-	'label_versionner' => 'Uzi versikontrolon por la enhavo de la kampo',
+	'label_versionner' => 'Uzi versitenan sistemon por la enhavo de la kampo',
 	'legend_declaration' => 'Deklaro',
 	'legend_options_saisies' => 'Enigaj opcioj',
 	'legend_options_techniques' => 'Teknikaĵoj',
@@ -80,6 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'precisions_pour_attention' => 'Por iu tre grava. Uzu moderege ! Povas esti lingvoĉeno „kromprogramo:cxeno“.',
 	'precisions_pour_class' => 'Aldoni CSS-klasojn al elemento. apartigitajn per spacoj. Ekz. : „inserer_barre_edition“ (enmeti redaktan breton) por bloko el la kromprogramo Plumingo.',
+	'precisions_pour_conteneur_class' => 'Aldoni CSS-klasojn super la patra ujo, apartigitajn per spacoj. Ekz. : „pleine_largeur“ (t.e. plena larĝo) por havi plenlarĝan formularon.',
 	'precisions_pour_datas' => 'Iuj kampotipoj postulas liston de eblaj valoroj : indiku tie po unu linie, sekvita de komo kaj priskribo. Malplena linio por defaŭlta valoro. Priskribo povas esti lingvoĉeno.',
 	'precisions_pour_explication' => 'Vi povas aldoni plian informon pri la enigo.	Povas esti lingvoĉeno „kromprogramo:cxeno“.',
 	'precisions_pour_label' => 'Povas esti lingvoĉeno „kromprogramo:cxeno“.',
@@ -92,9 +113,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'precisions_pour_restrictions_secteurs' => 'Radikrubrikaj identigiloj permesataj (disigilo „ :“)',
 	'precisions_pour_saisie' => 'Montri enigon de tipo :',
 	'precisions_pour_traitements' => 'Apliki aŭtomate traktadon por la kreita marko #NOMO_DE_LA_KAMPO :',
+	'precisions_pour_versionner' => 'Versiteno nur okazos, se la kromprogramo „Revisioj“ estas aktiva, kaj se la redakta objekto el la ekstra kampo estas ĝi mem en versitena sistemo.',
 
 	// R
 	'radio_restrictions_auteur_admin' => 'Nur la mastrumantoj (eĉ limigitaj)',
+	'radio_restrictions_auteur_admin_complet' => 'Nur plenajn administrantoj',
 	'radio_restrictions_auteur_aucune' => 'Ĉiuj povas',
 	'radio_restrictions_auteur_webmestre' => 'Nur la retejestro',
 	'radio_traitements_aucun' => 'Neniu',
@@ -108,6 +131,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_iextras' => 'Ekstraj kampoj',
+	'titre_iextras_exporter' => 'Eksporti ekstrajn kampojn',
+	'titre_iextras_exporter_importer' => 'Eksporti aŭ importi ekstrajn kampojn',
+	'titre_iextras_importer' => 'Importi ekstrajn kampojn',
 	'titre_page_iextras' => 'Ekstraj kampoj',
 
 	// V
