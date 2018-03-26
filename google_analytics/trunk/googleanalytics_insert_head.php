@@ -34,7 +34,7 @@ function googleanalytics_snippet(){
 	include_spip('inc/config');
 	$id_google = lire_config('googleanalytics/idGoogle');
 	$cookiebar = (isset($_COOKIE["cb-enabled"]) ? $_COOKIE["cb-enabled"] : '');
-	$displayCookieConsent = (isset($_COOKIE["displayCookieConsent"]) ? $_COOKIE["displayCookieConsent"] : 'y');
+	$displayCookieConsent = ((isset($_COOKIE["displayCookieConsent"]) and strlen($_COOKIE["displayCookieConsent"])) ? $_COOKIE["displayCookieConsent"] : 'y');
 	if ($id_google
 	  AND $id_google !== '_'
 	  AND (strncmp($id_google,"UA-xxx",6) != '0')
