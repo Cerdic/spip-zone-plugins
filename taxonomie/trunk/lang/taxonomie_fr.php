@@ -46,8 +46,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'filtre_importe_tout' => 'Tous',
 	'filtre_regnes_tout' => 'Tous les règnes',
 	'filtre_statut_prop' => 'Proposés à la publication',
-	'filtre_statut_poubelle' => 'Publiés',
-	'filtre_statut_publie' => 'A la poubelle',
+	'filtre_statut_publie' => 'Publiés',
+	'filtre_statut_poubelle' => 'À la poubelle',
 	'filtre_statut_tout' => 'Tous',
 
 	// I
@@ -161,6 +161,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'succes_charger_regne' => 'Le règne @regne@ a bien été chargé en base de données.',
 
 	// T
+	'texte_statut_prop' => 'proposé à la publication',
+	'texte_statut_publie' => 'publié',
+	'texte_statut_poubelle' => 'à la poubelle',
 	'titre_form_configuration' => 'Configuration du plugin',
 	'titre_form_gestion_regne' => 'Gestion des règnes',
 	'titre_liste_regnes' => 'Liste des règnes chargés en base de données',

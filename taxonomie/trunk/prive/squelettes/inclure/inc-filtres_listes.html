@@ -18,7 +18,7 @@
 	<div class="nettoyeur"></div>
 </div>
 
-[(#REM) Onglets de second niveau pour le filtrage par indicateur d'édition ]
+[(#REM) Onglets de second niveau pour le filtrage (édition, importation, statut...) ]
 <B_filtres>
 <div class="onglets_simple second clearfix">
 <BOUCLE_filtres(DATA) {source table, #ENV{filtres}}>
@@ -28,7 +28,7 @@
 				|parametre_url{#CLE, ''}
 				|lien_ou_expose{[(#VAL{taxonomie:filtre_}|concat{#CLE}|concat{_tout}|_T)], #ENV{#CLE}|=={''}, ajax})
 		</li>]
-	<BOUCLE_items_filtre(DATA) {source table, #_filtres:VALEUR|explode{:}}{par cle}>
+	<BOUCLE_items_filtre(DATA) {source table, #_filtres:VALEUR|explode{:}}>
 		[<li>
 			(#SELF
 				|parametre_url{#_filtres:CLE, #VALEUR}

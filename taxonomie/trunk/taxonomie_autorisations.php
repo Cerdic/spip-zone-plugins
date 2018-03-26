@@ -58,6 +58,7 @@ function autoriser_taxon_creer_dist($faire, $type, $id, $qui, $opt) {
  * 		`true` si l'autoriation est donnée, `false` sinon
 **/
 function autoriser_taxon_modifier_dist($faire, $type, $id, $qui, $opt) {
+
 	$autoriser = false;
 	if (intval($id)) {
 		$autoriser = autoriser('creer', 'taxon', $id, $qui, $opt);
