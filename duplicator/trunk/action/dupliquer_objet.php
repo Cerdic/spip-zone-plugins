@@ -244,6 +244,7 @@ if (!function_exists('logo_dupliquer')) {
  * 		Retourne le chemin du nouveau logo si tout s'est déroulé correctement
  */
 function logo_dupliquer($objet, $id_source, $id_cible, $etat='on') {
+	include_spip('action/editer_logo');
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	$cle_objet = id_table_objet($objet);
 	
