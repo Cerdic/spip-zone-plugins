@@ -4,6 +4,9 @@
 	</langue>
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-facteur?lang_cible=en" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
+	<langue code="eo" url="https://trad.spip.net/tradlang_module/paquet-facteur?lang_cible=eo" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="gpl" lien="https://trad.spip.net/auteur/gpl" />
+	</langue>
 	<langue code="es" url="https://trad.spip.net/tradlang_module/paquet-facteur?lang_cible=es" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 	</langue>
