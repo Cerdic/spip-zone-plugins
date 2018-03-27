@@ -11,6 +11,9 @@
 		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
+	<langue code="eo" url="https://trad.spip.net/tradlang_module/facteur?lang_cible=eo" total="55" traduits="55" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="gpl" lien="https://trad.spip.net/auteur/gpl" />
+	</langue>
 	<langue code="es" url="https://trad.spip.net/tradlang_module/facteur?lang_cible=es" total="55" traduits="43" relire="0" modifs="7" nouveaux="5" pourcent="78.18">
 		<traducteur nom="dani" lien="https://trad.spip.net/auteur/dani" />
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
