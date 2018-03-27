@@ -119,7 +119,8 @@ function photoshow_identify(me) {
     }
 }
 
-function photoshow_gallery(items, index, galerie=1) {
+function photoshow_gallery(items, index, galerie) {
+	galerie = typeof galerie !== 'undefined' ? galerie : 1;
     var pswpElement = document.querySelectorAll('.pswp')[0];
 
     // define options (if needed)
