@@ -49,7 +49,7 @@
         ]
 
         <div class="objet td">
-          <ul class="liste-saisies">
+          <div class="liste-saisies">
             <BOUCLE_saisies_objet(DATA) {source table, #ENV{saisies}}>
 
               #SET{saisie, #VALEUR}
@@ -65,7 +65,7 @@
               [(#GENERER_SAISIES{#ARRAY{0,#GET{saisie}}})]
 
             </BOUCLE_saisies_objet>
-          </ul>
+          </div>
         </div>
 
         [(#ENV{cacher_supprimer}|non)
