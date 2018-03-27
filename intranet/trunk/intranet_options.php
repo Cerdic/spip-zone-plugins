@@ -98,7 +98,7 @@ function intranet_styliser($flux) {
 		and include_spip('inc/autoriser')
 		and !autoriser('intranet')
 		and include_spip('inc/config')
-		and ($pages_ok = array_filter(pipeline('intranet_pages_ok', array_merge(array('robots.txt','spip_pass','favicon.ico','informer_auteur'), explode(',', lire_config('intranet/pages_intranet', ' '))))))
+		and ($pages_ok = array_filter(pipeline('intranet_pages_ok', array_merge(array('robots.txt','spip_pass','favicon.ico','informer_auteur'), array_map('trim', explode(',', lire_config('intranet/pages_intranet', ' ')))))))
 		and (
 			!in_array($flux['args']['fond'], $pages_ok)
 			and (!isset($flux['args']['contexte'][_SPIP_PAGE]) or !in_array($flux['args']['contexte'][_SPIP_PAGE], $pages_ok)))
