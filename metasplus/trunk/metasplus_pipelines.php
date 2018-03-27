@@ -30,6 +30,8 @@ function metasplus_affichage_final($flux) {
 
 	// Tests préliminaires avant d'inclure éventuellement les métas
 	if (!test_espace_prive()
+		// Il y a un <head>
+		and $pos_head = strpos($flux, '</head>')
 		// Les protocoles ne sont pas tous désactivés (improbable mais possible)
 		and (
 			!lire_config('metasplus')
@@ -47,11 +49,11 @@ function metasplus_affichage_final($flux) {
 				array()
 		))
 		and (!in_array($contexte['type-page'], $pages_exclues))
-		// Ce n'est pas une page d'un pseudo fichier (ex. robots.txt)
+		// Ce n'est pas une page d'un pseudo fichier (ex. robots.txt.html)
 		and !strpos($contexte['type-page'], '.')
 	) {
 
-		// Trouver le squelette à utiliser : variante de la page si elle existe, sinon le squelette par défaut (dist.hmtl)
+		// Trouver le squelette à utiliser : variante de la page si elle existe, sinon le squelette par défaut (dist.html)
 		$fond_defaut   = 'inclure/metasplus/dist';
 		$fond_variante = 'inclure/metasplus/' . $contexte['type-page'];
 		if (find_in_path($fond_variante.'.html')) {
@@ -65,7 +67,6 @@ function metasplus_affichage_final($flux) {
 			and $metas = recuperer_fond($fond, $contexte)
 		) {
 			$metas = "<!-- Plugin Métas + -->\n$metas\n";
-			$pos_head = strpos($flux, '</head>');
 			$flux = substr_replace($flux, $metas, $pos_head, 0);
 		}
 	}
