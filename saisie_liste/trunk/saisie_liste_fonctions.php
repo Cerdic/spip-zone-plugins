@@ -19,6 +19,32 @@ function joindre($tableau, $liant) {
 }
 
 /**
+ * Appliquer récursivement une fonction à une liste de saisies
+ *
+ * On traite aussi les sous-saisies quand il y en a.
+ *
+ * @param callable $f : La fonction qu'on applique aux saisies. N'est pas sensée
+ *     toucher aux sous-saisies…
+ * @param array $saisies : Le tableau de saisies.
+ *
+ * @return array : La liste après application de la fonction
+ */
+function saisies_map_recursif($f, $saisies) {
+
+	foreach ($saisies as $i => $saisie) {
+		$saisies[$i] = $f($saisie);
+
+		if (isset($saisie['saisies']) and
+				is_array($saisie['saisies'])) {
+			$saisies[$i]['saisies'] =
+				saisies_map_recursif($f, $saisie['saisies']);
+		}
+	}
+
+	return $saisies;
+}
+
+/**
  * preparer_tableau_saisies - convertit un tableau définissant des saisies
  *
  * Convertit un tableau définissant une saisie au format :
@@ -110,7 +136,8 @@ function charger_valeurs($tableau_saisie, $valeurs, $index_objet) {
 }
 
 /**
- * renommer_saisies - renomme les saisies d'un objet d'une saisie liste_objet pour en faire des sous-saisies.
+ * renommer_saisies - renomme les saisies d'un objet d'une saisie liste_objet
+ * pour en faire des sous-saisies.
  *
  * Parcours les noms de l'objet, et change "nom" en
  * "nom-saisie-liste-objet[$index_objet][nom]"
@@ -127,7 +154,21 @@ function charger_valeurs($tableau_saisie, $valeurs, $index_objet) {
  */
 function renommer_saisies($tableau_saisie, $index_objet, $nom_objet) {
 
-	$tableau_saisie['options']['nom'] = $nom_objet . '['.$index_objet.']['.$tableau_saisie['options']['nom'].']';
+	$renommer = function ($saisie) use ($index_objet, $nom_objet) {
+		$saisie['options']['nom'] =
+			sprintf('%s[%s][%s]', $nom_objet, $index_objet, $saisie['options']['nom']);
+		return $saisie;
+	};
+
+	$tableau_saisie = $renommer($tableau_saisie);
+
+	if (isset($tableau_saisie['saisies']) and
+			is_array($tableau_saisie['saisies'])) {
+		$tableau_saisie['saisies'] = saisies_map_recursif(
+			$renommer,
+			$tableau_saisie['saisies']
+		);
+	}
 
 	return $tableau_saisie;
 }
