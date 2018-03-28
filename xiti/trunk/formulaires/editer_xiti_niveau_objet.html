@@ -36,7 +36,7 @@
 				]<B_xiti_niveaux>
 				<select id="id_xiti_niveau" name="id_xiti_niveau">
 					<option value="">--</option>
-				<BOUCLE_xiti_niveaux(XITI_NIVEAUX){xtsite ?}>
+				<BOUCLE_xiti_niveaux(XITI_NIVEAUX){xtsite ?}{par titre}>
 					<option value="#ID_XITI_NIVEAU"[(#ID_XITI_NIVEAU|=={#ENV{id_xiti_niveau}}|oui) selected="selected"]>
 						#TITRE
 					</option>
