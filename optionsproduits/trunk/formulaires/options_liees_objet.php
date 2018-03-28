@@ -14,7 +14,7 @@ function formulaires_options_liees_objet_charger_dist($objet, $id_objet) {
 		'modifier_option' => _request('modifier_option'),
 	);
 
-	if (_request('modifier_option') && _request('id_option') && lire_config('produits/editer_ttc')) {
+	if (_request('modifier_option') && _request('id_option') && lire_config('optionsproduits/editer_ttc')) {
 		$prix  = sql_getfetsel(
 			'prix_option_objet',
 			'spip_options_liens',

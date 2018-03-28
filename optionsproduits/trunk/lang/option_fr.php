@@ -23,7 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'explication_laisser_vide'              => 'Laisser vide pour utiliser le prix par défaut',
-	
+	'editer_ttc'                            => 'Prix des options sur les objets saisis en TTC',
+
 	// I
 	'icone_creer_option'                    => 'Créer une option',
 	'icone_modifier_option'                 => 'Modifier cette option',
