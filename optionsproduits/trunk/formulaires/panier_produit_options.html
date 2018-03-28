@@ -7,11 +7,11 @@
 		
 		[(#REM) les options listées par groupe ]
 		#SET{options, #ENV{options}|explode{|}}
-		<BOUCLE_optionsgroupes(OPTIONSGROUPES){par titre_groupe}>
+		<BOUCLE_optionsgroupes(OPTIONSGROUPES){par rang, titre_groupe}>
 		<B_radio>
 			<div class="editer editer_radio editer_options_produit">
 				<label>#TITRE_GROUPE</label>
-				<BOUCLE_radio(OPTIONS){id_optionsgroupe}{options_liens.objet=produit}{options_liens.id_objet=#ID_PRODUIT}{par prix_option_objet}{doublons}>
+				<BOUCLE_radio(OPTIONS){id_optionsgroupe}{options_liens.objet=produit}{options_liens.id_objet=#ID_PRODUIT}{par rang, prix_option_objet}{doublons}>
 				[(#SET{prix_option, #PRIX_OPTION*{produit,#ID_PRODUIT,#ID_OPTION}})]
 				[(#SET{prix_option_seule, #GET{prix_option}|moins{#GET{prix}}})]
 				<div class="choix">

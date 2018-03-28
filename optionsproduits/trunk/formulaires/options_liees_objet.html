@@ -20,7 +20,7 @@
 			</thead>
 			<tbody>
 				<BOUCLE_options_liees(OPTIONS spip_options_liens spip_optionsgroupes)
-					{par num titre_groupe, options_liens.prix_option_objet, num titre}
+					{par rang, num titre_groupe, options_liens.prix_option_objet, num titre}
 					{options_liens.objet=#ENV{objet}}{options_liens.id_objet=#ENV{id_objet}}{si #ENV{modifier_option}|non}>
 				
 				[(#REM) |unique sur l'id, pas sur le titre, au cas où deux groupes aient le même nom ]
@@ -84,7 +84,7 @@
 				<label for="ajout_option_groupe_#ID_OPTIONSGROUPE">#TITRE_GROUPE</label>
 				<select id="ajout_option_groupe_#ID_OPTIONSGROUPE" name="id_option_groupe_#ID_OPTIONSGROUPE">
 				<option value=""></option>
-				<BOUCLE_options(OPTIONS){par prix_defaut, num titre}{id_optionsgroupe}{id_option !IN #GET{options_liees}}>
+				<BOUCLE_options(OPTIONS){par rang, prix_defaut, num titre}{id_optionsgroupe}{id_option !IN #GET{options_liees}}>
 				<option value="#ID_OPTION">#TITRE : [(#PRIX_DEFAUT|prix_formater)]</option>
 				</BOUCLE_options>
 				</select>
