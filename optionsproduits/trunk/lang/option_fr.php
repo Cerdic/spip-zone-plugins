@@ -17,9 +17,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_prix_defaut_explication'         => '(peut être modifié pour chaque association avec un objet)',
 	'champ_prix_defaut_label'               => 'Prix HT par défaut',
 	'champ_prix_option_label'               => 'Prix HT de l\'option',
+	'champ_prix_option_ttc_label'           => 'Prix TTC de l\'option',
 	'champ_titre_label'                     => 'Libellé',
 	'confirmer_supprimer_option'            => 'Confirmez-vous la suppression de cette option ?',
 
+	// E
+	'explication_laisser_vide'              => 'Laisser vide pour utiliser le prix par défaut',
+	
 	// I
 	'icone_creer_option'                    => 'Créer une option',
 	'icone_modifier_option'                 => 'Modifier cette option',

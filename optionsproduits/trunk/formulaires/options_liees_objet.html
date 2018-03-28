@@ -62,8 +62,9 @@
 				<h3>[(#TITRE)]</h3>
 			</div>
 			<input type="hidden" name="id_option" value="#ENV{id_option}" />
+			<input type="hidden" name="ttc" value="#ENV{ttc}" />
 			<input type="hidden" name="modifier_option" value="1" />
-			[(#SAISIE{input, prix, label=<:option:champ_prix_option_label:>, explication=Laisser vide pour utiliser le prix par défaut,valeur=#ENV{prix,#PRIX_OPTION_OBJET}})]
+			[(#SAISIE{input, prix, label=#ENV{ttc}|?{<:option:champ_prix_option_ttc_label:>,<:option:champ_prix_option_label:>}, explication=<:option:explication_laisser_vide:>,valeur=#ENV{prix,#PRIX_OPTION_OBJET}})]
 			</BOUCLE_modifoption>
 		</div>
 		<p class="boutons">
