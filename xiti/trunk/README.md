@@ -34,10 +34,11 @@
 
 ### Version 2.x.x (Passage à smarttag.js)
 
-#### Version 2.3.2 (2018-03-27)
+#### Version 2.3.2 (2018-03-28)
 
 - Tri des niveaux deux par ordre alphabétique dans le formulaire
 - Enlever l'usage du pipeline `trig_supprimer_objets_lies` mal utilisé et non pertinent
+- Petite optimisation sur le code du marqueur
 
 #### Version 2.3.1 (2017-11-13)
 
