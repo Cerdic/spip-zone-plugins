@@ -63,6 +63,7 @@ function formulaires_options_liees_objet_traiter_dist($objet, $id_objet) {
 					$retours['message_ok'] = _T('option:option_ajoutee');
 				}
 			}
+			set_request('id_option_groupe_' . $groupe['id_optionsgroupe'], '');
 		}
 		
 	}
