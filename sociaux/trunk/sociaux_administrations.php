@@ -3,7 +3,7 @@
  * Fichier gérant l'installation et désinstallation du plugin sociaux
  *
  * @plugin     sociaux
- * @copyright  2016
+ * @copyright  2018
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\sociaux\Installation

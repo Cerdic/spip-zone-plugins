@@ -30,6 +30,7 @@ function sociaux_sociaux_lister($flux) {
 	/**
 	 * On reprend les éléments initiaux de la v1 du plugin :
 	 * facebook, twitter, instagram, google-plus, blogger, pinterest, linkedin, youtube, rss, email, tripadvisor, vimeo, flickr
+	 *
 	 */
 	if (isset($flux['data'])) {
 		$flux['data']['facebook'] = 'Facebook';
@@ -41,10 +42,13 @@ function sociaux_sociaux_lister($flux) {
 		$flux['data']['linkedin'] = 'Linkedin';
 		$flux['data']['youtube'] = 'Youtube';
 		$flux['data']['rss'] = 'RSS';
-		$flux['data']['mail'] = 'E-mail'; // Dans la v1, on faisait référence à 'email' mais c'est une erreur
+		$flux['data']['mail'] = 'E-mail';
 		$flux['data']['tripadvisor'] = 'TripAdvisor';
 		$flux['data']['vimeo'] = 'Vimeo';
 		$flux['data']['flickr'] = 'Flickr';
+		$flux['data']['viber'] = 'Viber';
+		$flux['data']['whatsapp'] = 'Whatsapp';
+		$flux['data']['skype'] = 'Skype';
 	}
 
 	return $flux;

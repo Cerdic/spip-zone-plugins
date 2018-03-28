@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sociaux_titre' => 'Liens sociaux',
 
 	// C
-	'cfg_explication' => 'Indiquez les adresses des réseaux sociaux vers lesquels vous voulez faire le lien',
+	'cfg_explication' => 'Indiquez les adresses des réseaux sociaux vers lesquels vous voulez faire le lien.',
 	'cfg_label_css' => 'Activer l\'habillage graphique de la barre de liens avec la feuille de style basée sur la police socicon',
 	'cfg_label_css_oui' => 'Oui',
 	'css_fiedset' => 'Habillage',
