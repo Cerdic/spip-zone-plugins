@@ -1,8 +1,8 @@
 <paquet
 	prefix="optionsproduits"
 	categorie="divers"
-	version="1.0.1"
-	etat="test"
+	version="1.1.0"
+	etat="dev"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="prive/themes/spip/images/options-64.png"
 	schema="1.0.0" 
