@@ -2,7 +2,7 @@
 /**
  * Utilisations de pipelines
  * @plugin     Xiti
- * @copyright  2014-2017
+ * @copyright  2014-2018
  * @author     France diplomatie - Vincent
  * @licence    GNU/GPL
  * @package SPIP\Xiti\Pipelines
@@ -65,15 +65,3 @@ function xiti_optimiser_base_disparus($flux){
 	return $flux;
 }
 
-/**
- * Supprimer les niveaux deux lies aux objets du core lors de leur suppression
- *
- * @param array $objets
- * @return array
- */
-function xiti_trig_supprimer_objets_lies($objets){
-	foreach($objets as $objet){
-		sql_delete('spip_xiti_niveaux_liens', 'objet='.sql_quote($objet['type']).' AND id_objet='.intval($objet['id']));
-	}
-	return $objets;
-}

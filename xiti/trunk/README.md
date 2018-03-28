@@ -34,6 +34,11 @@
 
 ### Version 2.x.x (Passage à smarttag.js)
 
+#### Version 2.3.2 (2018-03-27)
+
+- Tri des niveaux deux par ordre alphabétique dans le formulaire
+- Enlever l'usage du pipeline `trig_supprimer_objets_lies` mal utilisé et non pertinent
+
 #### Version 2.3.1 (2017-11-13)
 
 - Compatibilité SPIP 3.2.x
