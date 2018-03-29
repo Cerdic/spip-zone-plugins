@@ -206,6 +206,7 @@ function formulaires_editer_produit_charger($id_produit = 'new', $id_rubrique = 
 	$contexte['_taxe_defaut'] = 100 * lire_config('produits/taxe', 0);
 
 	$precision_ttc = lire_config('produits/precision_ttc', 2);
+	$contexte['prix_ht'] = floatval($contexte['prix_ht']);
 	$contexte['prix_ttc'] = round($contexte['prix_ht'] * (1+$taxe), $precision_ttc);
 
 	unset($contexte['id_produit']);
