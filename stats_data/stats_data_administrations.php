@@ -13,11 +13,11 @@ function stats_data_upgrade($nom_meta_base_version,$version_cible){
 	
 	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-			if (version_compare($current_version,'0.1','<')){
+			if (version_compare($current_version,'1.0.0','<')){
 				include_spip('base/abstract_sql');
 				sql_alter("TABLE spip_referers_articles ADD visites_jour int(10) unsigned not null default '0'");
 				sql_alter("TABLE spip_referers_articles ADD visites_veille int(10) unsigned not null default '0'");
-				ecrire_meta($nom_meta_base_version,$current_version="0.1");
+				ecrire_meta($nom_meta_base_version,$current_version="1.0.0");
 		}
 	}
 }
