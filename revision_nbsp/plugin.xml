@@ -2,8 +2,8 @@
 	<nom>R&#233;vision ins&#233;cables &#38; notes</nom>
 	<slogan>Faciliter la relecture et l'insertion de notes</slogan>
 	<auteur>fil@rezo.net</auteur>
-	<licence>&#169; 2005-2011 - GNU/GPL</licence>
-	<version>0.4.3</version>
+	<licence>&#169; 2005-2018 - GNU/GPL</licence>
+	<version>0.4.4</version>
 	<etat>stable</etat>
 	<description>
 	Dans l'espace priv&#233;:
@@ -17,7 +17,7 @@
 		<inclure>revision_nbsp.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>affiche_droite</nom>
+		<nom>affiche_gauche</nom>
 		<action>ajoute_bouton_corriger_les_notes</action>
 		<inclure>revision_nbsp.php</inclure>
 	</pipeline>
