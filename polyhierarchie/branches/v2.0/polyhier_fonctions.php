@@ -169,15 +169,17 @@ function calcul_branche_polyhier_in($id, $tous=true) {
  * @param <type> $crit
  */
 function critere_branche($idb, &$boucles, $crit, $tous='elargie') {
-
 	$not = $crit->not;
 	$boucle = &$boucles[$idb];
-	if (isset($crit->param[0])){
+	
+	// On cherche la ou les rubriques dont on demande la branche
+	if (isset($crit->param[0])) {
 		$arg = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
 	}
-	else
+	else {
 		$arg = kwote(calculer_argument_precedent($idb, 'id_rubrique', $boucles));
-
+	}
+	
 	$type = objet_type($boucle->type_requete);
 	$primary = $boucle->id_table.".".$boucle->primary;
 
@@ -212,8 +214,11 @@ function critere_branche($idb, &$boucles, $crit, $tous='elargie') {
 			$primary_jointure = $cle . "." . id_table_objet($boucle->from[$cle]);
 		}
 	}
-	else $cle = $boucle->id_table;
+	else {
+		$cle = $boucle->id_table;
+	}
 
+	$where = array();
 
 	$c = "sql_in('$cle" . ".$champ', \$b = calcul_branche_polyhier_in($arg,".($tous===true?'true':"'directs'").")"
 	  . ($not ? ", 'NOT'" : '') . ")";

@@ -189,7 +189,6 @@ function critere_branche($idb, &$boucles, $crit, $tous='elargie') {
 		$arg = kwote(calculer_argument_precedent($idb, 'id_rubrique', $boucles));
 	}
 	
-
 	$type = objet_type($boucle->type_requete);
 	$primary = $boucle->id_table.".".$boucle->primary;
 
