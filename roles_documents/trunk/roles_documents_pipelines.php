@@ -330,11 +330,9 @@ function roles_documents_recuperer_fond($flux) {
 				$roles['attribuables'] :
 				$roles['possibles']
 			);
-		$multiple = !empty($flux['args']['contexte']['editer_logo']) ? false : true;
 		$contexte = array(
 			'roles'              => $flux['args']['contexte']['roles'],
 			'roles_attribuables' => $roles_attribuables,
-			'multiple'           => $multiple,
 		);
 
 		$selecteur_roles = recuperer_fond('formulaires/inc-selecteur_role', $contexte);

@@ -43,7 +43,8 @@ small[class*=role-logo]:before {
 	height: 12px;
 }
 /* fix pour s'assurer que le dropdown soit visible */
-.liste_items.documents .item {
+.portfolios.portfolios .item,
+.portfolios.portfolios .item .descriptions {
 	overflow: visible;
 }
 
@@ -95,10 +96,54 @@ small[class*=role-logo]:before {
 .formulaire_editer_logo .apercu .editbox {
 	font-weight: bold;
 }
-.lat .selecteur-role {
+.lat .editer-role {
 	font-size: 0.9em;
 }
 /* Ajout */
 .lat .editer_logo.joindre_document {
 	padding-bottom: 0;
 }
+
+/**
+ * Fix plugin médias < r109742
+ */
+[(#PLUGIN{medias,version}|<{2.20.24}|oui)
+.portfolios.portfolios .item .infos { margin-top: auto; }
+.portfolios.portfolios .documents_liste .item .descriptions { 
+	-webkit-box-orient: horizontal; 
+	-webkit-box-direction: normal; 
+	    -ms-flex-direction: row; 
+	        flex-direction: row; 
+}
+.portfolios.portfolios .documents_liste .item .actions {
+	margin-#ENV{left}: auto;
+	margin-top: 0;
+}
+.portfolios.portfolios .documents_cases .item .presentation {
+	-webkit-box-flex:1;
+	-ms-flex-positive:1;
+	flex-grow:1;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	   -ms-flex-direction: column;
+	       flex-direction: column;
+}
+.portfolios.portfolios .documents_cases .item .descriptions {
+	margin: 0; 
+	padding: 0; 
+	-webkit-box-pack: end; 
+	   -ms-flex-pack: end; 
+	 justify-content: flex-end;
+}
+.portfolios.portfolios .documents_cases .item .descriptions {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+.portfolios .documents_cases .item .descriptions > *:not(.actions) {
+	display: none;
+}
+]

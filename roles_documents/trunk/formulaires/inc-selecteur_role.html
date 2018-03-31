@@ -2,6 +2,9 @@
 
 	Sélection d'un role à attribuer à un document
 
+	Si unique : radio
+	Si multiple : checkbox
+
 	Paramètres :
 	**obligatoire
 	*conseillé
@@ -11,22 +14,21 @@
 		- multiple : 'oui' pour permettre une sélection de plusieurs rôles
 		- readonly : 'oui' pour interdire l'édition
 ]
-<B_selecteur_roles>
-#SET{multiple, #ENV{multiple}|?{multiple}}
+#SET{type, #ENV{multiple}|?{checkbox,radio}}
 #SET{readonly, #ENV{readonly}|?{readonly}}
 
-<div class="selecteur-role">
+<B_selecteur_roles>
+<div class="editer[ editer-(#GET{type}) ]editer-role">
 
-	<label for="roles">[(#GET{multiple}|?{<:roles_documents:champ_roles_label:>,<:roles_documents:champ_role_label:>})]&nbsp;:</label>
-	
-	<select name="[(#GET{multiple}|?{roles\[\],roles})]" id="roles" class="select[(#GET{multiple}|oui) chosen]"[ readonly="(#GET{readonly})"][ multiple="(#GET{multiple})"]>
+	<label>[(#ENV{multiple}|?{<:roles_documents:champ_roles_label:>,<:roles_documents:champ_role_label:>})]&nbsp;:</label>
 
-		<BOUCLE_selecteur_roles(DATA){source table, #ENV{roles_attribuables}}>
-		#SET{selected, #VALEUR|=={#ENV{role}}|ou{#ENV{role}|non|et{#COMPTEUR_BOUCLE|=={1}}}|?{selected}}
-		<option value="#VALEUR"[ selected="(#GET{selected})"]>[(#VALEUR|role{document})]</option>
-		</BOUCLE_selecteur_roles>
-
-	</select>
+	<BOUCLE_selecteur_roles(DATA){source table, #ENV{roles_attribuables}}>
+	#SET{checked, #VALEUR|=={#ENV{role}}|ou{#ENV{role}|non|et{#COMPTEUR_BOUCLE|=={1}}}|?{checked}}
+	<div class="choix">
+		<input type="#GET{type}" id="champ_roles_#COMPTEUR_BOUCLE" name="roles" value="#VALEUR"[ checked="(#GET{checked})"][ readonly="(#GET{readonly})"]>
+		<label for="champ_roles_#COMPTEUR_BOUCLE">[(#VALEUR|role{document})]</label>
+	</div>
+	</BOUCLE_selecteur_roles>
 
 </div>
 </B_selecteur_roles>
