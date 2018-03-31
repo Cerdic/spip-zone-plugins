@@ -230,7 +230,7 @@ function critere_branche($idb, &$boucles, $crit, $tous='elargie') {
 	) {
 		// S'il y a une jointure, on cherche toujours les liaisons avec celle-ci
 		if (isset($type_jointure)) {
-			$sous_jointure = "sql_get_select('rl.id_objet','spip_rubriques_liens as rl',sql_in('rl.id_parent',\$in_rub" . ($not ? ", 'NOT'" : '') . ").' AND rl.objet=\'$type_jointure\'')";
+			$sous_jointure = "sql_get_select('rl.id_objet','spip_rubriques_liens as rl',sql_in('rl.id_parent',\$b" . ($not ? ", 'NOT'" : '') . ").' AND rl.objet=\'$type_jointure\'')";
 			$where_jointure = "array('IN', '$primary_jointure', '(SELECT * FROM('.$sous_jointure.') AS subquery)')";
 		}
 		
@@ -240,7 +240,7 @@ function critere_branche($idb, &$boucles, $crit, $tous='elargie') {
 			!isset($type_jointure)
 			or (include_spip('inc/config') and in_array(table_objet_sql($type), lire_config('polyhier/lier_objets', array())))
 		) {
-			$sous_objet = "sql_get_select('rl.id_objet','spip_rubriques_liens as rl',sql_in('rl.id_parent',\$in_rub" . ($not ? ", 'NOT'" : '') . ").' AND rl.objet=\'$type\'')";
+			$sous_objet = "sql_get_select('rl.id_objet','spip_rubriques_liens as rl',sql_in('rl.id_parent',\$b" . ($not ? ", 'NOT'" : '') . ").' AND rl.objet=\'$type\'')";
 			$where_objet = "array('IN', '$primary', '(SELECT * FROM('.$sous_objet.') AS subquery)')";
 		}
 		
