@@ -71,8 +71,11 @@ function taxonomie_vider_tables($nom_meta_base_version) {
  * 		Le tableau de la configuration par défaut qui servira à initialiser la meta `taxonomie`.
  */
 function configurer_taxonomie() {
+
 	$config = array(
 		'langues_utilisees' => array('fr'),
+		'services'          => array('wikipedia'),
+		'iucn_token'        => ''
 	);
 
 	return $config;

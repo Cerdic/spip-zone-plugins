@@ -1,11 +1,16 @@
 #SET{open,#BOITE_OUVRIR{'',raccourcis}}
+[(#VAL{wikipedia}|in_array{#CONFIG{taxonomie/services_utilises}}|oui)
 [(#GET{open}|unique)]
-[(#URL_ECRIRE{taxon_decrire}
-	|parametre_url{id_taxon, #ID_TAXON}
-	|parametre_url{element, descriptif}
-	|icone_horizontale{<:taxonomie:bouton_wikipedia_descriptif:>, wikipedia-24})]
-[(#URL_ECRIRE{taxon_decrire}
-	|parametre_url{id_taxon, #ID_TAXON}
-	|parametre_url{element, texte}
-	|icone_horizontale{<:taxonomie:bouton_wikipedia_texte:>, wikipedia-24})]
+	[(#URL_ECRIRE{taxon_decrire}
+		|parametre_url{id_taxon, #ID_TAXON}
+		|parametre_url{element, descriptif}
+		|icone_horizontale{<:taxonomie:bouton_wikipedia_descriptif:>, wikipedia-24})]
+	[(#URL_ECRIRE{taxon_decrire}
+		|parametre_url{id_taxon, #ID_TAXON}
+		|parametre_url{element, texte}
+		|icone_horizontale{<:taxonomie:bouton_wikipedia_texte:>, wikipedia-24})]
+]
+[(#ESPECE|=={oui}|et{#VAL{iucn}|in_array{#CONFIG{taxonomie/services_utilises}}}|oui)
+[(#GET{open}|unique)]
+]
 [(#GET{open}|unique|?{'',#BOITE_FERMER})]

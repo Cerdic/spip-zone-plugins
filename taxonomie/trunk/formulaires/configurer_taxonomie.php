@@ -30,6 +30,22 @@ function formulaires_configurer_taxonomie_charger() {
 	// Liste des langues réellement utilisées
 	$valeurs['langues_utilisees'] = lire_config('taxonomie/langues_utilisees');
 
+	// Configuration des services à utiliser et des paramètre de chacun d'eux.
+	// Le service ITIS est lui toujours actif, on l'exclut de cette liste.
+	$valeurs['_services'] = array();
+	if ($fichiers_api = glob(_DIR_PLUGIN_TAXONOMIE . '/services/*/*.php')) {
+		foreach ($fichiers_api as $_fichier) {
+			// On détermine l'alias du service
+			$service = str_replace('_api', '', strtolower(basename($_fichier, '.php')));
+			if ($service != 'itis') {
+				$valeurs['_services'][$service] = _T("taxonomie:label_service_${service}");
+			}
+		}
+	}
+	$valeurs['services_utilises'] = lire_config('taxonomie/services_utilises');
+	// IUCN : nécessite un token d'enregistrement.
+	$valeurs['iucn_token'] = lire_config('taxonomie/iucn_token');
+
 	return $valeurs;
 }
 
@@ -40,12 +56,20 @@ function formulaires_configurer_taxonomie_charger() {
  * 		Tableau des erreurs d'absence de langue saisie ou tableau vide si aucune erreur.
  */
 function formulaires_configurer_taxonomie_verifier() {
+
 	$erreurs = array();
 
 	$obligatoires = array('langues_utilisees');
 	foreach ($obligatoires as $_obligatoire) {
 		if (!_request($_obligatoire))
 			$erreurs[$_obligatoire] = _T('info_obligatoire');
+	}
+
+	// Si le service IUCN est activé, il faut absolument saisir un token récupéré sur le site.
+	if (_request('services_utilises')
+	and in_array('iucn', _request('services_utilises'))
+	and !_request('iucn_token')) {
+		$erreurs['iucn_token'] = _T('taxonomie:erreur_saisie_iucn_token');
 	}
 
 	return $erreurs;

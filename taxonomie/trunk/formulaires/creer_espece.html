@@ -45,16 +45,13 @@
 <script type="text/javascript">/*<![CDATA[*/
 	jQuery(document).ready(function() {
 	[(#ENV{type_recherche, scientificname}|=={scientificname}|oui)
-		jQuery(".choix_debut").hide('fast');
 		jQuery(".choix_fin").hide('fast');
 	]
 		jQuery("input[name='type_recherche']").change(function() {
 			if (jQuery("input[name='type_recherche']:checked").val() == 'commonname') {
-				jQuery(".choix_debut").show('fast');
 				jQuery(".choix_fin").show('fast');
 			}
 			else {
-				jQuery(".choix_debut").hide('fast');
 				jQuery(".choix_fin").hide('fast');
 			}
 			jQuery(this).blur();

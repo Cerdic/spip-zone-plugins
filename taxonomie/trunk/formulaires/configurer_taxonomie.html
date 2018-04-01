@@ -17,9 +17,26 @@
 			datas=#ENV{_langues},
 			obligatoire=oui,
 		})]
+
+		[(#SAISIE{checkbox, services_utilises,
+			explication=<:taxonomie:explication_services_utilises:>,
+			label=<:taxonomie:label_services_utilises:>,
+			data=#ENV{_services}
+		})]
+		<div id="iucn_token">
+			[(#SAISIE{input, iucn_token,
+				explication=<:taxonomie:explication_iucn_token:>,
+				label=<:taxonomie:label_iucn_token:>,
+				size=64,
+				maxlength=64
+			})]
+		</div>
 		</div>
 
-		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+		<p class="boutons">
+			<span class="image_loading">&nbsp;</span>
+			<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
 	</div>
 	</form>
 </div>
