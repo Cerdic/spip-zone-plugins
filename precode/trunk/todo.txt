@@ -1,7 +1,5 @@
 = TODO
-= pour Simple C
-
-https://mensuel.framapad.org/p/simplec
+= pour Pre & Code
 
 == WHY
 Ce plugin a pour vocation de rationaliser l’affichage du code sous SPIP, par l’usage des éléments HTML corrects <code> et <pre>, en préservant les chouettes avantages du traitement du code par SPIP.
@@ -15,7 +13,7 @@ ce qui peut se faire via JS auj.
 2 effets et 1 seul raccourci suffisent.
 
 dépôt :
-https://bitbucket.org/tetue/simplec/
+https://zone.spip.org/trac/spip-zone/log/_plugins_/precode
 
 
 ==== ==== ==== ==== V1
@@ -45,16 +43,6 @@ x détail luxueux : une seule class .copied à la fois dans la page (pour évite
 = on verra ensuite comment looker toussa — DOING
 - pas d’autre gadget : on se contente de couvrir le périmètre fonctionnel existant
 - <cadre> est consécutivement déprécié.
-
-
-== Partager
-Pour pouvoir le partager dans SPIP, il faut un fichu nom à ce plugin :
-x « Simple C » = dans l’idée d’un raccourci simple et unique <c>… finalement non
-x j’aime bien « code » tout simplement (mais peut-être problématique comme prefix ?) = mauvaise idée (conflits)
-- sinon « PreCode » ? « CodePre » ?
-- ou « SPIP Code » comme ce que ce plugin vient remplacer ?
-- What’s else ?
-
 
 
 ==== ==== ==== ==== V2 ?
