@@ -7,11 +7,11 @@
 	<etat>test</etat>
 	<categorie>edition</categorie>
 
-	<slogan>Afficher proprement du code dans SPIP</slogan>
+	<slogan>Affichez proprement du code dans SPIP</slogan>
 	<description>
-		Pour afficher proprement du code dans SPIP.
+		Affichez proprement du code dans SPIP et facilitez le copier-coller de n'importe quel bloc de code.
 	</description>
-	<lien>https://contrib.spip.net/Pre-code?var_mode=preview</lien>
+	<lien>https://contrib.spip.net/?article4983</lien>
 	<auteur>&copy; 2017 [tetue->http://spip.tetue.net]</auteur>
 	<auteur>nicod_</auteur>
 	<auteur>Librairie clipboard.js par [Zeno Rocha->https://zenorocha.com]</auteur>

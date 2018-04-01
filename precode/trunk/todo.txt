@@ -12,9 +12,6 @@ ce qui peut se faire via JS auj.
 - Nous avons 2 raccourcis pour 3 effets :
 2 effets et 1 seul raccourci suffisent.
 
-dépôt :
-https://zone.spip.org/trac/spip-zone/log/_plugins_/precode
-
 
 ==== ==== ==== ==== V1
 
