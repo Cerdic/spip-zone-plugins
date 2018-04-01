@@ -98,21 +98,4 @@ pre.xml::before   { color: rgba(246, 120, 0, .75); }
 /* pour trouver la couleur rgba transparente correspondant à l'hexa :
 http://hex2rgba.devoth.com */
 
-/* Autres */
-kbd {
-  white-space: nowrap;
-  padding: .1em .3em;
-  background-color: #eee;
-  border: 1px solid #aaa;
-  border-radius: 4px;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px #fff inset;
-  color: #333;
-}
-samp {
-  font-weight: bold;
-}
-var {
-  font-style: italic;
-}
-
 /* end */
