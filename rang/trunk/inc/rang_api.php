@@ -56,29 +56,6 @@ function rang_objet_select($id_mot, $id_objet, $objet) {
 	else return false;
 }
 
-/**
- * Trier les rangs de la liste suite à un nouveau classement
- *
- * @param array $tab
- *     tableau des items de la liste suite à une modification du classement
- * @param string $objet
- *     sur quel objet faire le classement
- * @param string $rubrique optionel
- *     dans quelle rubrique faire le classement
- * @return array
- *     note : sans ce return (a priori inutile, la fonction plante (???)
-**/
-// function rang_trier_items($tab, $objet=null, $id_rubrique=null){
-
-// 	exit();
-	
-// 	foreach ($tab as $key => $value) {
-// 		$rang = $key + 1; //le classement commence à 1, pas à 0
-// 		$id = intval(substr($value, 7));
-// 		sql_updateq('spip_mots', array('rang' => $rang), "id_mot=$id");
-// 	}
-// 	return $tab;
-// }
 
 /**
  * supprimer un mot, puis réordonner
@@ -195,28 +172,28 @@ function rang_get_sources() {
 }
 
 /**
- * Classer l'objet à la fin de la liste quand on le publie 
+ * Calculer le rang pour la nouvelle occurence de l’objet
  * @param string $table
  * @param int $id_objet
  * @return int
  */
  function rang_classer_dernier($table, $id_objet) {
 
- 	// quel objet pour quel parent ?
-	$definition_table	= lister_tables_objets_sql($table);
-	$id_table_objet		= id_table_objet($table);
-	$objet_parent 		= $definition_table['parent']['type'];
-	$id_objet_parent	= $definition_table['parent']['champ'];
+ 	$objet_type = objet_type($table);
+ 	include_spip('base/objets_parents');
 
-	// et hop, on place le nouvel objet publié à la fin
-	if($id_objet_parent) {
-		$id_parent = sql_getfetsel($id_objet_parent, $table, "$id_table_objet = $id_objet");
-		$rang = sql_getfetsel('max(rang)', $table, "$id_objet_parent = $id_parent");
+	// si l'objet à un parent…
+	if ($parent = type_objet_info_parent($objet_type)) {
+		$id_table_objet = id_table_objet($table);
+		$parent_champ = $parent['0']['champ'];
+		$id_parent = sql_getfetsel($parent_champ, $table, "$id_table_objet = $id_objet");
+		$rang = sql_getfetsel('max(rang)', $table, "$parent_champ = $id_parent");
 	} else {
+	// si pas de parent, c'est plus simple
 		$rang = sql_getfetsel('max(rang)', $table);
 	}
 	 
-	// todo : on classe l'article à la fin (rang max) mais on pourrait vouloir le classer au début
+	// todo : on classe l'objet à la fin (rang max) mais on pourrait vouloir le classer au début
 	// il faudrait donc une configuration pour ça, et dans ce cas reclasser tous les autres à un rang++
 	$dernier = $rang+1;
 

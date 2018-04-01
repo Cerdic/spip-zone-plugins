@@ -61,20 +61,17 @@ function rang_recuperer_fond($flux) {
 		) {
 			// recuperer les paramètres pour le calcul du JS correspondant
 			preg_match('/liste-objets\s([A-Za-z]+)/', $flux['data']['texte'], $result);
-			$nom_objet = $result[1];
-			$type_objet  = objet_type($nom_objet);
+			$objet_nom	= $result[1];
+			$objet_type = objet_type($objet_nom);
 
 			// récupérer le type de parent…
-			$table_objet = table_objet_sql($type_objet);
-			$table = lister_tables_objets_sql($table_objet);
-			$type_parent = $table['parent']['0']['type'];
-
-			// …puis l'id_parent
-			$id = id_table_objet($type_parent);
-			$id_parent = $flux['args']['contexte'][$id];
+			include_spip('base/objets_parents');
+			$parent = type_objet_info_parent($objet_type);
+			$parent_champ	= $parent['0']['champ'];
+			$id_parent		= $flux['args']['contexte'][$parent_champ];
 
 			// suffixe de la pagination : particularité des objets historiques
-			switch ($type_objet) {
+			switch ($objet_type) {
 				case 'article':
 					$suffixe_pagination = 'art';
 					break;
@@ -85,13 +82,13 @@ function rang_recuperer_fond($flux) {
 					$suffixe_pagination = 'bre';
 					break;
 				default:
-					$suffixe_pagination = $type_objet;
+					$suffixe_pagination = $objet_type;
 					break;
 			}
 
 			// Calcul du JS à insérer avec les paramètres
 			$ajout_script = recuperer_fond('prive/squelettes/inclure/rang', array(  'suffixe_pagination' => $suffixe_pagination, 
-																					'objet' => $nom_objet, 
+																					'objet' 	=> $objet_nom, 
 																					'id_parent' => $id_parent ));
 
 			// et hop, on insère le JS calculé
@@ -108,12 +105,14 @@ function rang_recuperer_fond($flux) {
  */
 function rang_pre_edition($flux) {
 
-	if ($flux['args']['action']=='instituer' && lire_config('rang/rang_max')) {
+	$rang_max = lire_config('rang/rang_max');
+	
+	if (isset($rang_max) && !empty($rang_max) && $flux['args']['action']=='instituer' ) {
+
 		$rang_objets	= rtrim(lire_config('rang/rang_objets'), ',');
 		$liste_objets	= explode(',', $rang_objets);
 		$table			= $flux['args']['table'];
 
-		// cas des objets avec statut
 		if (in_array($table, $liste_objets)) {
 			$id_objet	= $flux['args']['id_objet'];
 			

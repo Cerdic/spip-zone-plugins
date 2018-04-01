@@ -24,12 +24,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     sur quel objet faire le classement
  * @param string $rubrique optionel
  *     dans quelle rubrique faire le classement
- * @return array
- *     note : sans ce return (a priori inutile, la fonction plante (???)
+ *
 **/
 function action_trier_items_dist() {
 
 	include_spip('base/objets');
+	include_spip('base/objets_parents');
 
 	$tab		= _request('trier');
 	$page 		= _request('debut_liste');
@@ -37,9 +37,12 @@ function action_trier_items_dist() {
 	$id_parent	= _request('id_parent');
 
 	$table		= table_objet_sql($objet);
-	$definition_table = lister_tables_objets_sql($table);
-	$id_objet_parent = $definition_table['parent']['0']['champ'];
 	$id_objet	= id_table_objet($objet);
+	$objet_type = objet_type($objet);
+	if ($id_parent != 'rien') {
+	 	$parent	= type_objet_info_parent($objet_type);
+		$parent_champ = $parent['0']['champ'];
+	}
 
 	// reclassement !
 	foreach ($tab as $key => $value) {
@@ -49,40 +52,12 @@ function action_trier_items_dist() {
 			$where = "$id_objet=$id";
 		}
 		else {
-			$where = "$id_objet=$id AND $id_objet_parent=$id_parent";
+			$where = "$id_objet=$id AND $parent_champ=$id_parent";
 		}
 		sql_updateq($table, array('rang' => $rang), $where);
 	}
-	$msg = 'ok';
 
 	include_spip('inc/invalideur');
 	suivre_invalideur("rang");
 
-	return $msg;
-}
-
-/**
- * supprimer un mot, puis réordonner
- *
- * @param string $id
- *     id de la forme mot_xx
- * @return array
- *     note : sans ce return (a priori inutile, la fonction plante (???)
-**/
-function rang_supprimer_item($id) {
-	// suppression du mot
-	$new_id = intval(substr($id, 4));
-	sql_delete('spip_mots', "id_mot=$new_id");
-
-	//récupérer le tableau id/rang actuel
-	$id_grp = sql_getfetsel('id_groupe', 'spip_groupes_mots');
-	$res = sql_select('id_mot', 'spip_mots', "id_groupe=$id_grp", '', 'rang');
-	while ($tab = sql_fetch($res)){
-		$new_tab[] = 'id_mot_'.$tab['id_mot'];
-	}
-
-	//  réordonnement !
-	$tab_result = rang_trier_items($new_tab);
-
-	return $tab_result;
 }
