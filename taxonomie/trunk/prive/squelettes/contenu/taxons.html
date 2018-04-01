@@ -8,11 +8,13 @@
 [(#REM) Onglets pour le filtrage par règne et par indicateur d'édition ]
 #SET{filtres, #LISTE}
 [(#ENV{espece}|=={oui}|oui)
+	#SET{nb, 20}
 	#SET{filtres, #ARRAY{statut, prop:publie:poubelle}}
 	#SET{titre_1, taxonomie:info_1_espece}
 	#SET{titre_n, taxonomie:info_nb_especes}
 ]
 [(#ENV{espece}|=={oui}|non)
+	#SET{nb, 100}
 	#SET{filtres, #ARRAY{edite, oui:non, importe, oui:non}}
 	#SET{titre_1, taxonomie:info_1_taxon}
 	#SET{titre_n, taxonomie:info_nb_taxons}
@@ -25,6 +27,7 @@
 <div class="nettoyeur"></div>
 
 <INCLURE{fond=prive/objets/liste/taxons,
+	nb=#GET{nb},
 	par=nom_scientifique,
 	info_1=#GET{titre_1},
 	info_nb=#GET{titre_n},
