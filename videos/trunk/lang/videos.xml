@@ -1,5 +1,5 @@
 <traduction module="videos" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/videos/trunk/lang/" reference="fr">
-	<langue code="de" url="https://trad.spip.net/tradlang_module/videos?lang_cible=de" total="40" traduits="39" relire="0" modifs="0" nouveaux="1" pourcent="97.50">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/videos?lang_cible=de" total="40" traduits="40" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
 	<langue code="en" url="https://trad.spip.net/tradlang_module/videos?lang_cible=en" total="40" traduits="26" relire="0" modifs="1" nouveaux="13" pourcent="65.00">
