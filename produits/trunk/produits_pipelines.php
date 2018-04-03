@@ -89,11 +89,22 @@ function produits_boite_infos($flux) {
 	return $flux;
 }
 
-// Compter les produits comme des enfants de rubriques
+/**
+ * Compter les enfants d'un objet
+ *
+ * @pipeline objets_compte_enfants
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+**/
 function produits_objet_compte_enfants($flux) {
-	if ($flux['args']['objet'] == 'rubrique' and ($id_rubrique = intval($flux['args']['id_objet'])) > 0) {
-		$statut = $flux['args']['statut'] ? ' and statut='.sql_quote($flux['args']['statut']) : '';
-		$flux['data']['produits'] = sql_countsel('spip_produits', 'id_rubrique='.$id_rubrique.$statut);
+	if ($flux['args']['objet'] == 'rubrique' and $id_rubrique = intval($flux['args']['id_objet'])) {
+		// juste les publiés ?
+		if (array_key_exists('statut', $flux['args']) and ($flux['args']['statut'] == 'publie')) {
+			$flux['data']['produits'] = sql_countsel('spip_produits', 'id_rubrique= ' . intval($id_rubrique) . " AND (statut = 'publie')");
+		}
+		else {
+			$flux['data']['produits'] = sql_countsel('spip_produits', 'id_rubrique= ' . intval($id_rubrique) . " AND (statut <> 'poubelle')");
+		}
 	}
 	return $flux;
 }
