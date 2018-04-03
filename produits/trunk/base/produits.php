@@ -101,9 +101,6 @@ function produits_declarer_tables_objets_sql($tables) {
 				'exception' => array('statut', 'tout')
 			)
 		),
-		'parent' => array(
-			array('type' => 'rubrique', 'champ' => 'id_rubrique'),
-		),
 		'texte_changer_statut' => 'produits:produit_statut',
 		'join' => array(
 			'id_produit' => 'id_produit',
