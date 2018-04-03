@@ -1,7 +1,7 @@
 <paquet
 	prefix="inscriptionmotdepasse"
 	categorie="auteur"
-	version="1.0.14"
+	version="1.0.15"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="inscriptionmotdepasse.png"
@@ -16,7 +16,7 @@
 
 	<necessite nom="notifications" compatibilite="[3.0.0;[" />
 
-	<necessite nom="facteur" compatibilite="[3.4.7;]" />
+	<necessite nom="facteur" compatibilite="[3.5.2;]" />
 	<necessite nom="saisies" compatibilite="[2.6.1;]"/>
 
 	<pipeline nom="formulaire_charger" inclure="inscriptionmotdepasse_pipelines.php" />
