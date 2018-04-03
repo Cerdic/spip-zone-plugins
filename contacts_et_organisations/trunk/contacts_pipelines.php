@@ -302,6 +302,13 @@ function contacts_formulaire_fond($flux) {
 			include_spip('inc/saisies');
 			$saisies = saisies_chercher_formulaire('editer_contact', array($flux['args']['contexte']['id_contact']));
 			$saisies = saisies_transformer_noms($saisies, '/^.*$/', 'contact_$0');
+			array_unshift($saisies, array(
+				'saisie' => 'hidden',
+				'options' => array(
+					'nom' => 'id_contact',
+					'defaut' => $flux['args']['contexte']['id_contact'],
+				)
+			));
 			$saisies = array(
 				array(
 					'saisie' => 'fieldset',
@@ -310,15 +317,7 @@ function contacts_formulaire_fond($flux) {
 						'label' => _T('contacts:contact'),
 						'conteneur_class' => 'editer_contact',
 					),
-					'saisies' => array(
-						array(
-							'saisie' => 'hidden',
-							'options' => array(
-								'nom' => 'id_contact',
-								'defaut' => $flux['args']['contexte']['id_contact'],
-							)
-						)
-					) + $saisies // on concatène le hidden avec les saisies des orgas
+					'saisies' => $saisies
 				)
 			);
 			
@@ -335,6 +334,13 @@ function contacts_formulaire_fond($flux) {
 			include_spip('inc/saisies');
 			$saisies = saisies_chercher_formulaire('editer_organisation', array($flux['args']['contexte']['id_organisation']));
 			$saisies = saisies_transformer_noms($saisies, '/^.*$/', 'organisation_$0');
+			array_unshift($saisies, array(
+				'saisie' => 'hidden',
+				'options' => array(
+					'nom' => 'id_organisation',
+					'defaut' => $flux['args']['contexte']['id_organisation'],
+				)
+			));
 			$saisies = array(
 				array(
 					'saisie' => 'fieldset',
@@ -343,18 +349,10 @@ function contacts_formulaire_fond($flux) {
 						'label' => _T('contacts:organisation'),
 						'conteneur_class' => 'editer_organisation',
 					),
-					'saisies' => array(
-						array(
-							'saisie' => 'hidden',
-							'options' => array(
-								'nom' => 'id_organisation',
-								'defaut' => $flux['args']['contexte']['id_organisation'],
-							)
-						)
-					) + $saisies // on concatène le hidden avec les saisies des orgas
+					'saisies' => $saisies 
 				)
 			);
-			
+
 			$contexte = $flux['args']['contexte'];
 			$contexte['saisies'] = $saisies;
 			
