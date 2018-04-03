@@ -18,15 +18,15 @@ if (!defined('_NCORE_DIRCACHE')) {
 }
 if (!defined('_NCORE_NOMCACHE_TYPE_NOISETTE_SIGNATURE')) {
 	/**
-	 * Cache des signatures des fichiers YAML de noisettes.
-	 * Contient le tableau sérialisé `[noisette] = signature`.
+	 * Cache des signatures des fichiers YAML de types de noisette.
+	 * Contient le tableau sérialisé `[type_noisette] = signature`.
 	 */
 	define('_NCORE_NOMCACHE_TYPE_NOISETTE_SIGNATURE', 'type_noisette_signatures.php');
 }
 if (!defined('_NCORE_NOMCACHE_TYPE_NOISETTE_DESCRIPTION')) {
 	/**
-	 * Cache des descriptions de noisettes issues des fichiers YAML.
-	 * Contient le tableau sérialisé `[noisette] = tableau de la description complète`.
+	 * Cache des descriptions des types de noisettes issues des fichiers YAML.
+	 * Contient le tableau sérialisé `[type_noisette] = tableau de la description complète`.
 	 * Chaque description contient aussi l'identifiant de la noisette déjà utilisé en index et la signature.
 	 */
 	define('_NCORE_NOMCACHE_TYPE_NOISETTE_DESCRIPTION', 'type_noisette_descriptions.php');
@@ -45,12 +45,12 @@ if (!defined('_NCORE_NOMCACHE_NOISETTE_INCLUSION')) {
 	 */
 	define('_NCORE_NOMCACHE_NOISETTE_INCLUSION', 'noisette_inclusions.php');
 }
-if (!defined('_NCORE_NOMCACHE_NOISETTE_CONTEXTE')) {
+if (!defined('_NCORE_NOMCACHE_TYPE_NOISETTE_CONTEXTE')) {
 	/**
-	 * Cache des contextes de noisettes issues des fichiers YAML.
-	 * Contient le tableau sérialisé `[noisette] = tableau des éléments du contexte`.
+	 * Cache des contextes des types de noisette issus des fichiers YAML.
+	 * Contient le tableau sérialisé `[type_noisette] = tableau des éléments du contexte`.
 	 */
-	define('_NCORE_NOMCACHE_NOISETTE_CONTEXTE', 'noisette_contextes.php');
+	define('_NCORE_NOMCACHE_TYPE_NOISETTE_CONTEXTE', 'type_noisette_contextes.php');
 }
 
 

@@ -1,0 +1,6 @@
+<BOUCLE_compilation_noisettes(DATA){source table, #ENV{liste}}{par rang}>
+	#SET{avec_div, #CHAMP_SQL{balise}|=={defaut}|?{#CONFIG{noizetier/balise_noisette}, #CHAMP_SQL{balise}}}
+	[[(#GET{avec_div}|oui)<div class="noisette noisette_#NOISETTE[ (#CHAMP_SQL{css})]">]
+		(#NOIZETIER_AFFICHER_NOISETTE)
+	[(#GET{avec_div}|oui)</div>]]
+</BOUCLE_compilation_noisettes>

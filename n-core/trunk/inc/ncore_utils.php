@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Cherche une fonction donnée en se basant sur le service de stockage ou à défaut sur le plugin appelant.
- * Si ni le service de stockage ni le plugin ne fournissent la fonction demandée la chaine vide est renvoyée.
+ * Si ni le service de stockage ni le plugin ne fournissent la fonction demandée la chaîne vide est renvoyée.
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou

@@ -190,51 +190,72 @@ function ncore_noisette_est_dynamique($service, $noisette) {
  * @api
  * @filtre
  *
- * @param string	$service
- *      Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
- *      un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- *      La fonction utilisera les fonctions de lecture du contexte de la noisette, spécifique au service,
- *      ou à défaut, celle fournie par N-Core.
- * @param string	$noisette
- * 		Identifiant de la $noisette.
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param mixed  $noisette
+ *        Identifiant de la noisette qui peut prendre soit la forme d'un entier ou d'une chaîne unique, soit la forme
+ *        d'un couple (id conteneur, rang).
+ * @param string $stockage
+ *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
+ *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
+ *        fournissant le service de stockage souhaité.
  *
  * @return array
  * 		Le tableau éventuellement vide des éléments de contexte de la noisette.
  */
-function ncore_noisette_contexte($service, $noisette) {
+function noisette_contextualiser($plugin, $noisette, $type_noisette, $environnement, $stockage = '') {
 
 	// On indexe le tableau des indicateurs ajax par le service appelant en cas d'appel sur le même hit
 	// par deux services différents.
-	static $contexte = array();
+	static $contextes_type_noisette = array();
 
-	if (!isset($contexte[$service][$noisette])) {
-		// On détermine le cache en fonction du service, puis son existence et son contenu.
+	// On initialise le contexte de la noisette a minima.
+	// -- on transmet toujours l'identifiant de la noisette quel qu'il soit : id_noisette ou couple (id_conteneur, rang).
+	$contexte = is_array($noisette) ? $noisette : array('id_noisette' => $noisette);
+	// -- on appelle une fonction de service pour éventuellement compléter le contexte par d'autres variables en fonction
+	//    du plugin.
+	include_spip('ncore/ncore');
+//	$contexte = array_merge($contexte, ncore_noisette_contexte_completer($plugin, $noisette, $stockage));
+
+	// Récupération du contexte défini pour le type de noisette. Ce contexte est juste une liste de variables non
+	// valorisées. La valorisation sera faite avec l'environnement.
+	// -- les contextes sont stockés dans un cache dédié.
+	if (!isset($contextes_type_noisette[$plugin][$type_noisette])) {
+		// On vérifie si on doit recalculer le cache le cache ou pas.
 		include_spip('inc/ncore_cache');
-		$contexte[$service] = cache_lire($service, _NCORE_NOMCACHE_NOISETTE_CONTEXTE);
-
-		// On doit recalculer le cache.
-		if (!$contexte[$service]
-		or (_request('var_mode') == 'recalcul')
-		or (defined('_NO_CACHE') and (_NO_CACHE != 0))) {
-			// On charge l'API de N-Core.
-			// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
-			include_spip("ncore/ncore");
-
-			// On repertorie la configuration du contexte de toutes les noisettes disponibles et on
+		if ((_request('var_mode') == 'recalcul')
+		or (defined('_NO_CACHE') and (_NO_CACHE != 0))
+		or (!$contextes_type_noisette[$plugin] = cache_lire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_CONTEXTE))) {
+			// On répertorie la configuration du contexte de toutes les noisettes disponibles et on
 			// le renvoie le résultat tel quel.
-			$contexte[$service] = ncore_noisette_lister($service, 'contexte');
-			$contexte[$service] = unserialize($contexte[$service]);
+			$contextes_type_noisette[$plugin] = ncore_type_noisette_lister($plugin, 'contexte', $stockage);
 
-			// On vérifie que la noisette demandée est bien dans la liste.
+			// On vérifie que le type de noisette demandé est bien dans la liste.
 			// Si non, on la rajoute en utilisant en positionnant le contexte à tableau vide.
-			if (!isset($contexte[$service][$noisette])) {
-				$contexte[$service][$noisette] = array();
+			if (!isset($contextes_type_noisette[$plugin][$type_noisette])) {
+				$contextes_type_noisette[$plugin][$type_noisette] = serialize(array());
 			}
 
 			// In fine, on met à jour le cache
-			cache_ecrire($service, _NCORE_NOMCACHE_NOISETTE_CONTEXTE, $contexte[$service]);
+			cache_ecrire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_CONTEXTE, $contextes_type_noisette[$plugin]);
+		}
+	}
+	// -- on inverse les index et valeurs du tableau de contexte pour obtenir un tableau de type contexte.
+	$contexte_type_noisette = array_flip(unserialize($contextes_type_noisette[$plugin][$type_noisette]));
+
+	// On construit le contexte final en fonction de celui du type de noisette.
+	// On renvoie systématiquement le contexte minimal déjà initialisé et si le contexte du type de noisette contient:
+	// - aucun => rien de plus.
+	// - env ou vide => l'environnement complet également.
+	// - une liste de variables => on renvoie également l'intersection de cette liste avec l'environnement.
+	if (!isset($contexte_type_noisette['aucun'])) {
+		if (isset($contexte_noisette['env'])) {
+			$contexte = array_merge($environnement, $contexte);
+		} else {
+			$contexte = array_merge(array_intersect_key($environnement, $contexte_type_noisette), $contexte);
 		}
 	}
 
-	return $contexte[$service][$noisette];
+	return $contexte;
 }

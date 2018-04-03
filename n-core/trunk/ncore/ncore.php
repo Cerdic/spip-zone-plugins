@@ -722,7 +722,7 @@ function ncore_conteneur_identifier($plugin, $conteneur, $stockage) {
 /**
  * Retire, de l'espace de stockage, toutes les noisettes d'un conteneur.
  *
- * @package SPIP\NCORE\SERVICE\NOISETTE
+ * @package SPIP\NCORE\SERVICE\CONTENEUR
  *
  * @uses ncore_chercher_service()
  * @uses ncore_conteneur_identifier()

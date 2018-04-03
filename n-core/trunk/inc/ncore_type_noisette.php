@@ -295,7 +295,7 @@ function type_noisette_repertorier($plugin, $filtres = array(), $stockage = '') 
 		// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
 		include_spip("ncore/ncore");
 
-		// On récupère la description complète de tous les types de noisettes détects par le plugin appelant
+		// On récupère la description complète de tous les types de noisettes détectés par le plugin appelant
 		$types_noisette[$plugin] = ncore_type_noisette_lister($plugin, '', $stockage);
 	}
 
