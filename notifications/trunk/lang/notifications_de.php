@@ -112,6 +112,7 @@ Sie hat folgende Adresse :',
 	'messagerie_interne' => 'Internes Nachrichtensystem',
 	'messagerie_interne_signaler' => '<strong>Über neue private Nachrichten informieren</strong> : Aktivieren Sie diese Option, damit Redakteure per Mail über ungelesene Nachrichten im Redaktionssystem benachrichtigt werden. Das System wartet 20 Minuten bis zum Versand der Mail, damit im Redaktionssystem eingelogte Redakteure nicht mit sinnlosen Mails belästigt werden.',
 	'moderateur' => '<strong>Moderator</strong>',
+	'moderation_email_protection_antibot' => '<b>Die E-Mail-Moderation gegen Bots schützen</b> die auf die Links in den E-Mails klicken',
 
 	// N
 	'notifications' => 'Benachrichtigungen',
