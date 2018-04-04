@@ -201,6 +201,39 @@ function memoization_methode($methode=null) {
 }
 
 
+/**
+ * Recuperer de l'editorial cache, mais invalide avec la meta derniere_modif ou avec un var_mode
+ * @param string $key
+ * @return string
+ */
+function cache_edito_get($key) {
+	if (function_exists('cache_get')
+	  and !_VAR_MODE
+	  and $cache = cache_get("edito-$key")
+	  and isset($cache['time'])
+	  and isset($cache['value'])
+	  and (!isset($GLOBALS['meta']['derniere_modif']) or $cache['time']>$GLOBALS['meta']['derniere_modif'])) {
+		return $cache['value'];
+	}
+
+	return null;
+}
+
+/**
+ * Stocker de l'editorial cache, avec un timestamp pour gerer l'invalidation
+ * @param string $key
+ * @param mixed $value
+ * @return mixed
+ */
+function cache_edito_set($key, $value) {
+	if (function_exists('cache_set')) {
+		$cache = array('value' => $value, 'time' => $_SERVER['REQUEST_TIME']);
+		cache_set($key, $cache);
+	}
+	return $value;
+}
+
+
 //
 // Cache a function's result cache_me()
 // (c) Fil 2009 - Double-licensed under the GNU/LGPL and MIT licenses
