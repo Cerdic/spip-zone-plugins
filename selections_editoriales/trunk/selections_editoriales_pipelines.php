@@ -159,32 +159,80 @@ function selections_editoriales_boite_infos($flux) {
  * @return array       Données du pipeline
  */
 function selections_editoriales_afficher_complement_objet($flux) {
-	$exec = trouver_objet_exec($flux['args']['type']);
-	$id = intval($flux['args']['id']);
+	if (version_compare($GLOBALS['spip_version_branche'], '3.2.1', '<')) {
+		$exec = trouver_objet_exec($flux['args']['type']);
+		$id = intval($flux['args']['id']);
 
-	if (
-		$exec !== false // page d'un objet éditorial
-		and $exec['edition'] === false // pas en mode édition
-		and $type = $exec['type']
-		and (
-			autoriser('associerselections', $type, $id)
+		if (
+			$exec !== false // page d'un objet éditorial
+			and $exec['edition'] === false // pas en mode édition
+			and $type = $exec['type']
 			and (
-				autoriser('creer', 'selection')
-				or autoriser('modifier', 'selection')
+				autoriser('associerselections', $type, $id)
+				and (
+					autoriser('creer', 'selection')
+					or autoriser('modifier', 'selection')
+				)
 			)
-		)
-	 ) {
-		$flux['data'] .= recuperer_fond(
-			'prive/squelettes/inclure/selections_objet',
-			array(
-				'objet' => $type,
-				'id_objet' => $id,
-				'editer_contenu' => _request('editer_contenu'),
-				'editer_contenu_logo' => _request('editer_contenu_logo'),
-			),
-			array('ajax'=>true)
-		);
+		) {
+			$selections = recuperer_fond(
+				'prive/squelettes/inclure/selections_objet',
+				array(
+					'objet' => $type,
+					'id_objet' => $id,
+					'editer_contenu' => _request('editer_contenu'),
+					'editer_contenu_logo' => _request('editer_contenu_logo'),
+				),
+				array('ajax'=>true)
+			);
+			
+			$flux['data'] .= $selections;
+		}
 	}
+	
+	return $flux;
+}
+
+/**
+ * Ajoute des sélections sous les objets configurés pour ça, dans les enfants >= 3.2.1
+ *
+ *
+ * @pipeline affiche_enfants
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function selections_editoriales_affiche_enfants($flux) {
+	if (version_compare($GLOBALS['spip_version_branche'], '3.2.1', '>=')) {
+		$exec = trouver_objet_exec($flux['args']['objet']);
+		$id = intval($flux['args']['id_objet']);
+
+		if (
+			$exec !== false // page d'un objet éditorial
+			and $exec['edition'] === false // pas en mode édition
+			and $type = $exec['type']
+			and (
+				autoriser('associerselections', $type, $id)
+				and (
+					autoriser('creer', 'selection')
+					or autoriser('modifier', 'selection')
+				)
+			)
+		) {
+			$selections = recuperer_fond(
+				'prive/squelettes/inclure/selections_objet',
+				array(
+					'objet' => $type,
+					'id_objet' => $id,
+					'editer_contenu' => _request('editer_contenu'),
+					'editer_contenu_logo' => _request('editer_contenu_logo'),
+				),
+				array('ajax'=>true)
+			);
+			
+			$flux['data'] .= $selections;
+		}
+	}
+	
 	return $flux;
 }
 

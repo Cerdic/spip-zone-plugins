@@ -1,7 +1,7 @@
 <paquet
 	prefix="selections_editoriales"
 	categorie="navigation"
-	version="1.7.10"
+	version="1.7.11"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/selections_editoriales-64.png"
@@ -23,6 +23,7 @@
 	<pipeline nom="formulaire_fond" inclure="selections_editoriales_pipelines.php" />
 	<pipeline nom="boite_infos" inclure="selections_editoriales_pipelines.php" />
 	<pipeline nom="afficher_complement_objet" inclure="selections_editoriales_pipelines.php" />
+	<pipeline nom="affiche_enfants" inclure="selections_editoriales_pipelines.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/selections_editoriales.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/selections_editoriales.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/selections_editoriales.php" />
