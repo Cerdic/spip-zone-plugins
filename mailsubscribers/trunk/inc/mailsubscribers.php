@@ -37,12 +37,11 @@ function mailsubscribers_verifier_args_action($action) {
 			$arg = substr($arg, -40);
 		}
 		if ($arg AND $email) {
-			spip_log("mailsubscriber : query_string mal formee, verifiez votre service d'envoi de mails [" . $_SERVER["QUERY_STRING"] . "]",
-				"mailsubscribers" . _LOG_INFO_IMPORTANTE);
+			spip_log("mailsubscriber : $email|$arg reconnus malgre la query_string mal formee (verifiez votre service d'envoi de mails) [" . $_SERVER["QUERY_STRING"] . "]", "mailsubscribers" . _LOG_INFO_IMPORTANTE);
 		}
 	}
 	if (!$email OR !$arg){
-		spip_log(_request('action')." : (email,arg)=($email,$arg) non trouves", "mailsubscribers"._LOG_ERREUR);
+		spip_log(_request('action')." : (email,arg)=($email,$arg) non trouves [" . $_SERVER["QUERY_STRING"] . "]", "mailsubscribers"._LOG_ERREUR);
 		return false;
 	}
 
@@ -57,12 +56,12 @@ function mailsubscribers_verifier_args_action($action) {
 		
 		$identifiant = "";
 		// verifier la cle telle quelle => generique, applicable pour toutes les listes
-		$cle = mailsubscriber_cle_action($action, $row['email'], $row['jeton']);
+		$cle = mailsubscriber_cle_action($action, $email, $row['jeton']);
 		if ($arg !== $cle) {
 			$subscriptions = sql_allfetsel('*', 'spip_mailsubscriptions', 'id_mailsubscriber=' . intval($row['id_mailsubscriber']));
 			foreach ($subscriptions as $subscription){
 				// verifier la cle pour cette liste
-				$cle = mailsubscriber_cle_action($action, $row['email'], $row['jeton'] . '+' . $subscription['id_mailsubscribinglist']);
+				$cle = mailsubscriber_cle_action($action, $email, $row['jeton'] . '+' . $subscription['id_mailsubscribinglist']);
 				if ($arg == $cle) {
 					$identifiant = sql_getfetsel('identifiant', 'spip_mailsubscribinglists', 'id_mailsubscribinglist=' . intval($subscription['id_mailsubscribinglist']));
 					break;
