@@ -1,7 +1,7 @@
 <paquet
 	prefix="tipafriend"
 	categorie="communication"
-	version="1.6.6"
+	version="1.6.7"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="img/letter_32.png"
@@ -17,6 +17,6 @@
 
 	<traduire module="tipafriend" reference="fr" gestionnaire="salvatore" />
 
-	<utilise nom="facteur" compatibilite="[3.5;2[" />
+	<utilise nom="facteur" compatibilite="[3.5.2[" />
 
 </paquet>
