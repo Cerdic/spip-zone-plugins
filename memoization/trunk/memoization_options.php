@@ -228,7 +228,7 @@ function cache_edito_get($key) {
 function cache_edito_set($key, $value) {
 	if (function_exists('cache_set')) {
 		$cache = array('value' => $value, 'time' => $_SERVER['REQUEST_TIME']);
-		cache_set($key, $cache);
+		cache_set("edito-$key", $cache);
 	}
 	return $value;
 }
