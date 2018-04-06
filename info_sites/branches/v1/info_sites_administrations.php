@@ -42,6 +42,8 @@ function info_sites_upgrade($nom_meta_base_version, $version_cible) {
 	include_spip('base/info_sites_extras');
 	cextras_api_upgrade(info_sites_declarer_champs_extras(), $maj['1.1.0']);
 	$maj['1.2.0'][] = array('info_sites_maj_120');
+	$maj['1.3.0'][] = array('maj_tables', array('spip_projets_references', 'spip_projets_references_liens'));
+	$maj['1.3.1'][] = array('info_sites_menu_pages');
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -57,9 +59,23 @@ function info_sites_upgrade($nom_meta_base_version, $version_cible) {
  **/
 function info_sites_vider_tables($nom_meta_base_version) {
 	include_spip('inc/meta');
+	include_spip('base/abstract_sql');
 	include_spip('inc/cextras');
 	include_spip('base/info_sites_extras');
 	cextras_api_vider_tables(info_sites_declarer_champs_extras());
+
+	sql_drop_table('spip_projets_references');
+	sql_drop_table('spip_projets_references_liens');
+
+	# Nettoyer les liens courants (le génie optimiser_base_disparus se chargera de nettoyer toutes les tables de liens)
+	sql_delete('spip_documents_liens', sql_in('objet', array('projets_reference')));
+	sql_delete('spip_mots_liens', sql_in('objet', array('projets_reference')));
+	sql_delete('spip_auteurs_liens', sql_in('objet', array('projets_reference')));
+	# Nettoyer les versionnages et forums
+	sql_delete('spip_versions', sql_in('objet', array('projets_reference')));
+	sql_delete('spip_versions_fragments', sql_in('objet', array('projets_reference')));
+	sql_delete('spip_forum', sql_in('objet', array('projets_reference')));
+
 	// On efface la meta de menu du plugin
 	effacer_meta('info_sites_menu');
 	// Ici on efface tout le reste :
@@ -103,29 +119,18 @@ function info_sites_menu_pages() {
 			'nom' => 'info_sites:menu_statistiques',
 			'icone' => 'fa fa-bar-chart-o fa-lg',
 		),
+		'projets_dashboard' => array(
+			'nom' => 'info_sites:titre_page_projets_dashboard',
+			'icone' => 'fa fa-dashboard fa-lg',
+		),
 	);
-	$meta = lire_meta('info_sites_menu');
+	$meta = lire_config('info_sites_menu');
 	if ($meta and $meta = @serialize($meta) and is_array($meta)) {
-
-		if (!array_key_exists(array_keys($liste_pages), $meta)) {
-			// ici il faudrait vérifier que `organisations`,
-			// `projets` et `sites` soient bien dans la meta
-			// pour permettre son utilisation standard à l'installation
-			foreach ($liste_pages as $key => $value) {
-				$meta[$key] = $liste_pages[$key];
-			}
-		} else {
-			foreach ($meta as $key => $value) {
-				if ($meta[$key] != $liste_pages[$key]) {
-					$meta[$key] = $liste_pages[$key];
-				}
-			}
-		}
-		// maintenant qu'on a vérifié les valeurs de la meta selon nos besoins de base,
+		$meta = array_merge($liste_pages, $meta);
 		// on stocke sa nouvelle valeur dans `spip_meta`
-		ecrire_meta('info_sites_menu', @serialize($meta));
+		ecrire_config('info_sites_menu', @serialize($meta));
 	} else {
-		ecrire_meta('info_sites_menu', @serialize($liste_pages));
+		ecrire_config('info_sites_menu', @serialize($liste_pages));
 	}
 }
 

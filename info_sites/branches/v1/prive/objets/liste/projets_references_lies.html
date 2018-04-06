@@ -1,0 +1,60 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi nom,1,
+	id_projets_reference,1
+}})
+]
+#SET{selection,#ENV**{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#SET{debut,#ENV{debutprol,#EVAL{_request("debutprol");}}}
+<B_liste_projets_references>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutprol,#EVAL{_request("debutprol");}}}
+#SET{afficher_lettres,#TRI|=={'multi nom'}|oui}
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies projets_references">
+<table class="spip liste">
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{projets_reference:info_1_projets_reference,projets_reference:info_nb_projets_references}})</strong></caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(PROJETS_REFERENCES){tout}{id_projets_reference IN #GET{selection}}{where?}
+			{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_projets_reference==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#NOM**|extraire_multi|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutprol,@#ID_PROJETS_REFERENCE}|ancre_url{paginationprol}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="4"><p class="pagination">(#GET{p})</p></td></tr>]
+
+		<tr class="first_row">
+			<th class="nom" scope="col">[(#TRI{multi nom,<:projets_reference:champ_nom_label:>,ajax})]</th>
+			<th class="action" scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_projets_references(PROJETS_REFERENCES){id_projets_reference IN #GET{selection}}
+		{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} prol}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_PROJETS_REFERENCE|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class="nom">[(#LOGO_PROJETS_REFERENCE|image_reduire{20,20})]<a href="[(#ID_PROJETS_REFERENCE|generer_url_entite{projets_reference})]">#NOM</a></td>
+
+			<td class="action">
+				[(#ENV{editable}|oui)
+					<button type="submit" class="button link delete" name="supprimer_lien\[projets_reference-#ID_PROJETS_REFERENCE-#OBJET-#ID_OBJET\]" value="X"><:projets_reference:retirer_lien_projets_reference:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_projets_references>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\[projets_reference-*-#OBJET-#ID_OBJET\]" value="X"><:projets_reference:retirer_tous_liens_projets_references:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_liste_projets_references>
+<div class="liste-objets liste-objets-lies projets_references caption-wrap">
+	<strong class="caption">[(#ENV*{titre,<:projets_reference:info_aucun_projets_reference:>})]</strong>
+</div>
+<//B_liste_projets_references>

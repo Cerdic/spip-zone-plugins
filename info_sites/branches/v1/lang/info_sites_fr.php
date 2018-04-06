@@ -80,6 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'controle_organisations_titre_page' => 'Quelques points de contrôle sur les organisations',
 	'controle_projets_auteurs_orphelins' => 'Projets sans utilisateurs',
 	'controle_projets_auteurs_orphelins_explication' => 'Les projets qui seraient listés ci-dessous sont sans utilisateurs associés.',
+	'controle_projets_references_menu' => 'Références de projets',
 	'controle_projets_date_debut_vide' => 'Date de démarrage non-saisie',
 	'controle_projets_date_livraison_prevue_vide' => 'Date de livraison prévue, non-saisie',
 	'controle_projets_date_livraison_vide' => 'Date de livraison effective, non-saisie',
@@ -89,6 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'controle_projets_organisations_orphelins_explication' => 'Les projets listés ci-dessous ne sont liés à aucune organisation.',
 	'controle_projets_orphelins' => 'Projets sans organisation',
 	'controle_projets_orphelins_sites' => 'Projets sans sites liés',
+	'controle_projets_projets_sites_menu' => 'Les projets et leurs sites',
 	'controle_projets_sites_logiciel_nom_vide' => 'Nom du logiciel non-renseigné',
 	'controle_projets_sites_logiciel_version_vide' => 'Version du logiciel non-renseigné',
 	'controle_projets_sites_menu' => 'Les sites de projets',
@@ -213,6 +215,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_configurer_info_sites' => 'Configurer le plugin Info Sites',
 	'titre_page_controle_info_sites' => 'Contrôler le contenu d’Info Sites',
 	'titre_page_lister_projets_sites' => 'Lister les sites de projets',
+	'titre_page_projets_dashboard' => 'Tableau de bord des projets',
 
 	// V
 	'voir_tout' => 'Tout voir',

@@ -1,0 +1,31 @@
+<div class="formulaire_spip formulaire_#FORM">
+[<p class="reponse_formulaire reponse_formulaire_erreur">
+    (#ENV*{message_erreur})
+</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">
+    (#ENV*{message_ok})
+</p>]
+[(#EDITABLE|oui)
+    <form action="#ENV{action}" method="post" enctype="multipart/form-data">
+    	#ACTION_FORMULAIRE{#ENV{action}}
+	    <[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+
+			[(#SAISIE{explication,importer_projets_references_explication,
+				texte=<:projets_reference:importer_projets_references_explication:>})]
+
+	        [(#SAISIE{input, fichier,
+		        type=file,
+				label=<:projets_reference:fichier_csv:>,
+	        })]
+
+		    [(#SAISIE{oui_non, premiere_ligne,
+		        label=<:projets_reference:premiere_ligne_nom:>
+		    })]
+
+        </[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+        <p class="boutons">
+            <input type="submit" class="submit" value="<:projets_reference:bouton_importer:>" />
+        </p>
+    </form>
+]
+</div>
