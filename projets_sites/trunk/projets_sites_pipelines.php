@@ -83,6 +83,9 @@ function projets_sites_optimiser_base_disparus($flux) {
 /**
  * Insert header prive
  *
+ * @param string $flux
+ *
+ * @return string $flux
  */
 function projets_sites_header_prive($flux) {
 	$flux .= '<script type="application/javascript" src="'
@@ -95,7 +98,9 @@ function projets_sites_header_prive($flux) {
 /**
  * Ce pipeline permet de rajouter des écritures de noms de logiciels d'un site
  *
- * @param $flux
+ * @param array $flux
+ *
+ * @return array $flux
  */
 function projets_sites_lister_logiciels_noms($flux) {
 
@@ -122,4 +127,26 @@ function projets_sites_lister_logiciels_noms($flux) {
 
 	return $flux;
 
+}
+
+/**
+ * Insertion dans le pipeline revisions_chercher_label (Plugin révisions)
+ * Trouver le bon label à afficher sur les champs dans les listes de révisions
+ *
+ * Si un champ est un champ extra, son label correspond au label défini du champs extra
+ *
+ * @pipeline revisions_chercher_label
+ * @param array $flux Données du pipeline
+ * @return array      Données du pipeline
+ **/
+function projets_sites_revisions_chercher_label($flux) {
+	if (isset($flux['args']['objet']) and $flux['args']['objet'] == 'projets_site') {
+		foreach (array('id_projets_site', 'titre', 'descriptif', 'type_site', 'uniqid', 'webservice', 'logiciel_nom', 'logiciel_version', 'logiciel_revision', 'logiciel_plugins', 'logiciel_charset', 'auteurs_admin', 'auteurs_webmestres', 'fo_url', 'fo_login', 'fo_password', 'bo_url', 'bo_login', 'bo_password', 'serveur_nom', 'serveur_port', 'serveur_path', 'serveur_logiciel', 'serveur_surveillance', 'versioning_path', 'versioning_trac', 'versioning_type', 'sas_serveur', 'sas_port', 'sas_protocole', 'sas_login', 'sas_password', 'sgbd_type', 'sgbd_version', 'sgbd_serveur', 'sgbd_port', 'sgbd_gestion', 'sgbd_nom', 'sgbd_prefixe', 'sgbd_charset', 'sgbd_collation', 'sgbd_login', 'sgbd_password', 'apache_modules', 'php_version', 'php_memory', 'php_extensions', 'php_timezone', 'sso', 'perimetre_acces', 'statistiques', 'moteur_recherche', 'autres_outils', 'remarques', 'date_creation', 'maj') as $champ) {
+			if ($flux['args']['champ'] == $champ) {
+				$flux['data'] = 'projets_site:' . $champ . '_label';
+			}
+		}
+	}
+
+	return $flux;
 }

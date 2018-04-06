@@ -1,7 +1,7 @@
 <paquet
 	prefix="projets_sites"
 	categorie="divers"
-	version="1.8.18"
+	version="1.9.0"
 	etat="stable"
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/projets_sites-64.png"
@@ -32,6 +32,7 @@
 	<pipeline nom="header_prive" inclure="projets_sites_pipelines.php"/>
 	<pipeline nom="optimiser_base_disparus" inclure="projets_sites_pipelines.php"/>
 	<pipeline nom="lister_logiciels_noms" inclure="projets_sites_pipelines.php"/>
+	<pipeline nom="revisions_chercher_label" inclure="projets_sites_pipelines.php"/>
 
 	<menu nom="projets_sites" titre="projets_site:titre_projets_sites" parent="menu_edition" icone="images/projets_site-16.png" action="projets_sites"/>
 	<menu nom="projets_site_creer" titre="projets_site:icone_creer_projets_site" parent="outils_rapides" icone="images/projets_site-new-16.png" action="projets_site_edit" parametres="new=oui"/>
