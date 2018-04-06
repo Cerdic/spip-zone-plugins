@@ -37,6 +37,9 @@
 	[(#GET{disabled}|strlen|non) #SET{disabled,#ARRAY} ]
 	[(#GET{disabled}|oui) #SET{disabled,#ARRAY|push{#GET{disabled}}} ]
 ]
+[(#ENV{disable_choix}|strlen|oui)
+	#SET{disabled, #ENV{disable_choix}|explode{','}}
+]
 [(#ENV{tout_selectionner}|oui)
 	<div class="[(#ENV{choix,choix})][ (#ENV{choix,choix})_tout_selectionner ][ (#ENV{class}) ]none-nojs">
 		<input type="checkbox" name="#ENV{nom}_tout" class="checkbox" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_tout" value="on" onChange="if (jQuery(this).prop('checked')==true) jQuery(this).parent('div').parent().find('input').prop('checked',true); else jQuery(this).parent('div').parent().find('input').prop('checked',false);"/>
@@ -46,7 +49,7 @@
 
 <BOUCLE_checkbox(POUR){tableau #GET{data}}>
 <div class="#ENV{choix,choix}[ (#ENV{choix,choix})_#CLE][ (#ENV{class})]">[(#SET{id,champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_[(#COMPTEUR_BOUCLE|concat{'-',#CLE}|md5)]})]
-	<input type="checkbox" name="#ENV{nom}[]" class="checkbox" id="#GET{id}"[ (#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)checked="checked"] value="#CLE"[(#CLE|in_array{#GET{disabled}}|oui) disabled="disabled"][ aria-describedby="(#ENV{describedby})"][ (#ENV*{attributs})] />
+	<input type="checkbox" name="#ENV{nom}[]" class="checkbox checkbox_#ENV{nom}" id="#GET{id}"[ (#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)checked="checked"] value="#CLE"[(#CLE|in_array{#GET{disabled}}|oui) disabled="disabled"][ aria-describedby="(#ENV{describedby})"][ (#ENV*{attributs})] />
 	<label for="#GET{id}"[(#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)class="on"][(#ENV{attribut_title}|oui) title="#CLE"]>#VALEUR</label>
 </div>
 </BOUCLE_checkbox>
@@ -63,3 +66,12 @@
 </div>
 ]
 </B_checkbox>
+[(#ENV{maximum_choix}|intval|oui)
+<script type="text/javascript">
+	$('input.checkbox_#ENV{nom}').on('change', function() {
+		if($('input.checkbox_#ENV{nom}:checked').length > [(#ENV{maximum_choix}|intval)]) {
+			this.checked = false;
+		}
+	});
+</script>	
+]

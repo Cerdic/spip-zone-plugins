@@ -140,6 +140,12 @@ options:
       label: '<:saisies:option_groupe_validation:>'
     saisies:
       -
+        saisie: 'input'
+        options:
+          nom: 'longueur_max'
+          label: '<:saisies:option_maxlength_label:>'
+          explication: '<:saisies:option_maxlength_explication:>'
+      -
         saisie: 'oui_non'
         options:
           nom: 'obligatoire'
