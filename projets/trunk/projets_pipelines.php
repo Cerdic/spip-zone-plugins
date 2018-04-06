@@ -102,3 +102,24 @@ function projets_optimiser_base_disparus($flux) {
 	return $flux;
 }
 
+/**
+ * Insertion dans le pipeline revisions_chercher_label (Plugin révisions)
+ * Trouver le bon label à afficher sur les champs dans les listes de révisions
+ *
+ * Si un champ est un champ extra, son label correspond au label défini du champs extra
+ *
+ * @pipeline revisions_chercher_label
+ * @param array $flux Données du pipeline
+ * @return array      Données du pipeline
+ **/
+function projets_revisions_chercher_label($flux) {
+	if (isset($flux['args']['objet']) and $flux['args']['objet'] == 'projet') {
+		foreach (array('id_projet', 'id_projet_parent', 'nom', 'url_site', 'id_projets_cadre', 'date_debut', 'date_livraison_prevue', 'date_livraison', 'nb_heures_estimees', 'nb_heures_reelles', 'actif', 'objectif', 'enjeux', 'methode', 'descriptif', 'date_publication', 'statut') as $champ) {
+			if ($flux['args']['champ'] == $champ) {
+				$flux['data'] = 'projet:label_' . $champ;
+			}
+		}
+	}
+
+	return $flux;
+}
