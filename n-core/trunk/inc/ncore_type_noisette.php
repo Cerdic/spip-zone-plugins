@@ -18,6 +18,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @api
  * @uses ncore_type_noisette_lister()
+ * @uses ncore_type_noisette_completer()
  * @uses ncore_type_noisette_stocker()
  *
  * @param string $plugin
