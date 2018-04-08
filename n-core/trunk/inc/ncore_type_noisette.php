@@ -76,17 +76,17 @@ function type_noisette_charger($plugin, $dossier = 'noisettes/', $recharger = fa
 			// Initialisation de la description par défaut du type de noisette
 			// -- on y inclut le plugin appelant et la signature
 			$description_defaut = array(
-				'noisette'    => $type_noisette,
-				'nom'         => $type_noisette,
-				'description' => '',
-				'icon'        => 'noisette-24.png',
-				'necessite'   => array(),
-				'contexte'    => array(),
-				'ajax'        => 'defaut',
-				'inclusion'   => 'statique',
-				'parametres'  => array(),
-				'plugin'      => $plugin,
-				'signature'   => '',
+				'type_noisette' => $type_noisette,
+				'nom'           => $type_noisette,
+				'description'   => '',
+				'icon'          => 'noisette-24.png',
+				'necessite'     => array(),
+				'contexte'      => array(),
+				'ajax'          => 'defaut',
+				'inclusion'     => 'statique',
+				'parametres'    => array(),
+				'plugin'        => $plugin,
+				'signature'     => '',
 			);
 
 			// On vérifie que le md5 du fichier YAML est bien différent de celui stocké avant de charger

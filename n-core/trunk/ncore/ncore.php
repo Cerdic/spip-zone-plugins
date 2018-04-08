@@ -74,10 +74,10 @@ function ncore_type_noisette_stocker($plugin, $types_noisette, $recharger, $stoc
 		if ($recharger) {
 			// Si le rechargement est forcé, tous les types de noisette sont nouveaux, on peut donc écraser les caches
 			// existants sans s'en préoccuper.
-			$descriptions = array_column($types_noisette['a_ajouter'], null, 'noisette');
+			$descriptions = array_column($types_noisette['a_ajouter'], null, 'type_noisette');
 			cache_ecrire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_DESCRIPTION, $descriptions);
 
-			$signatures = array_column($types_noisette['a_ajouter'], 'signature', 'noisette');
+			$signatures = array_column($types_noisette['a_ajouter'], 'signature', 'type_noisette');
 			cache_ecrire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_SIGNATURE, $signatures);
 		} else {
 			// On lit les cache existants et on applique les modifications.
@@ -86,22 +86,22 @@ function ncore_type_noisette_stocker($plugin, $types_noisette, $recharger, $stoc
 
 			// On supprime les noisettes obsolètes
 			if (!empty($types_noisette['a_effacer'])) {
-				$descriptions_obsoletes = array_column($types_noisette['a_effacer'], null, 'noisette');
+				$descriptions_obsoletes = array_column($types_noisette['a_effacer'], null, 'type_noisette');
 				$descriptions = array_diff($descriptions, $descriptions_obsoletes);
 
-				$signatures_obsoletes = array_column($types_noisette['a_effacer'], 'signature', 'noisette');
+				$signatures_obsoletes = array_column($types_noisette['a_effacer'], 'signature', 'type_noisette');
 				$signatures = array_diff($signatures, $signatures_obsoletes);
 			}
 
 			// On remplace les noisettes modifiées et on ajoute les noisettes nouvelles. Cette opération peut-être
 			// réalisée en une action avec la fonction array_merge.
 			if (!empty($types_noisette['a_changer']) or !empty($types_noisette['a_ajouter'])) {
-				$descriptions_modifiees = array_column($types_noisette['a_changer'], null, 'noisette');
-				$descriptions_nouvelles = array_column($types_noisette['a_ajouter'], null, 'noisette');
+				$descriptions_modifiees = array_column($types_noisette['a_changer'], null, 'type_noisette');
+				$descriptions_nouvelles = array_column($types_noisette['a_ajouter'], null, 'type_noisette');
 				$descriptions = array_merge($descriptions, $descriptions_modifiees, $descriptions_nouvelles);
 
-				$signatures_modifiees = array_column($types_noisette['a_changer'], 'signature', 'noisette');
-				$signatures_nouvelles = array_column($types_noisette['a_ajouter'], 'signature', 'noisette');
+				$signatures_modifiees = array_column($types_noisette['a_changer'], 'signature', 'type_noisette');
+				$signatures_nouvelles = array_column($types_noisette['a_ajouter'], 'signature', 'type_noisette');
 				$signatures = array_merge($signatures, $signatures_modifiees, $signatures_nouvelles);
 			}
 
@@ -250,7 +250,7 @@ function ncore_type_noisette_lister($plugin, $information = '', $stockage = '') 
 		} elseif ($descriptions = cache_lire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_DESCRIPTION)) {
 			if ($information) {
 				// Si $information n'est pas une colonne valide array_column retournera un tableau vide.
-				$types_noisettes = array_column($descriptions, $information, 'noisette');
+				$types_noisettes = array_column($descriptions, $information, 'type_noisette');
 			} else {
 				$types_noisettes = $descriptions;
 			}
@@ -321,16 +321,16 @@ function ncore_noisette_stocker($plugin, $description, $stockage = '') {
 				// -- la description est complète à l'exception de l'id unique qui est créé à la volée
 				// -- et on range la noisette avec les noisettes affectées au même conteneur en fonction de son rang.
 				$description['id_noisette'] = uniqid("${plugin}_");
-				$noisettes[$id_conteneur][$description['rang']] = $description;
+				$noisettes[$id_conteneur][$description['rang_noisette']] = $description;
 			} else {
 				// Modification de la noisette :
 				// -- les identifiants de la noisette sont toujours fournies, à savoir, l'id, le conteneur et le rang.
 				// -- on utilise le conteneur et le rang pour se positionner sur la noisette concernée.
 				// -- Les modifications ne concernent que les paramètres d'affichage, cette fonction n'est jamais utilisée
 				//    pour le changement de rang.
-				if (isset($noisettes[$id_conteneur][$description['rang']])) {
-					$noisettes[$id_conteneur][$description['rang']] = array_merge(
-						$noisettes[$id_conteneur][$description['rang']],
+				if (isset($noisettes[$id_conteneur][$description['rang_noisette']])) {
+					$noisettes[$id_conteneur][$description['rang_noisette']] = array_merge(
+						$noisettes[$id_conteneur][$description['rang_noisette']],
 						$description
 					);
 				}
@@ -437,8 +437,8 @@ function ncore_noisette_ranger($plugin, $description, $rang_destination, $stocka
 			// On ajoute la noisette au rang choisi même si on doit écraser un index existant:
 			// -- Il est donc nécessaire de gérer la collision en amont de cette fonction.
 			// -- Par contre, l'ancien rang de la noisette est supprimé sauf si celui-ci est à zéro.
-			$rang_source = $description['rang'];
-			$description['rang'] = $rang_destination;
+			$rang_source = $description['rang_noisette'];
+			$description['rang_noisette'] = $rang_destination;
 			$noisettes[$id_conteneur][$rang_destination] = $description;
 			if ($rang_source != 0) {
 				unset($noisettes[$id_conteneur][$rang_source]);
@@ -495,9 +495,9 @@ function ncore_noisette_destocker($plugin, $description, $stockage = '') {
 		include_spip('inc/config');
 		$meta_noisettes = lire_config("${plugin}_noisettes", array());
 
-		if (isset($meta_noisettes[$description['id_conteneur']][$description['rang']])) {
+		if (isset($meta_noisettes[$description['id_conteneur']][$description['rang_noisette']])) {
 			// On supprime une noisette donnée.
-			unset($meta_noisettes[$description['id_conteneur']][$description['rang']]);
+			unset($meta_noisettes[$description['id_conteneur']][$description['rang_noisette']]);
 			// Si c'est la dernière noisette du conteneur il faut aussi supprimer l'index correspondant au conteneur.
 			if (!$meta_noisettes[$description['id_conteneur']]) {
 				unset($meta_noisettes[$description['id_conteneur']]);
@@ -540,7 +540,7 @@ function ncore_noisette_destocker($plugin, $description, $stockage = '') {
  * @return array
  *        Tableau de la liste des informations demandées indexé par identifiant de noisette ou par rang.
  */
-function ncore_noisette_lister($plugin, $conteneur = array(), $information = '', $cle = 'rang', $stockage = '') {
+function ncore_noisette_lister($plugin, $conteneur = array(), $information = '', $cle = 'rang_noisette', $stockage = '') {
 
 	// On cherche le service de stockage à utiliser selon la logique suivante :
 	// - si le service de stockage est non vide on l'utilise en considérant que la fonction existe forcément;
@@ -575,7 +575,7 @@ function ncore_noisette_lister($plugin, $conteneur = array(), $information = '',
 					: array_column($noisettes, null, $cle);
 			}
 		} elseif ($meta_noisettes) {
-			if ($cle == 'rang') {
+			if ($cle == 'rang_noisette') {
 				$noisettes = $meta_noisettes;
 			} else {
 				foreach ($meta_noisettes as $_squelette => $_descriptions) {
@@ -655,14 +655,14 @@ function ncore_noisette_decrire($plugin, $noisette, $stockage = '') {
 					}
 				}
 			} else {
-				if (isset($noisette['squelette'], $noisette['contexte'], $noisette['rang'])) {
+				if (isset($noisette['id_conteneur'], $noisette['rang_noisette'])) {
 					// Détermination de l'identifiant du conteneur.
 					$id_conteneur = $noisette['id_conteneur'];
-					if (!empty($meta_noisettes[$id_conteneur][$noisette['rang']])) {
+					if (!empty($meta_noisettes[$id_conteneur][$noisette['rang_noisette']])) {
 					// L'identifiant est un tableau associatif fournissant le conteneur et le rang.
 					// Comme la meta de N-Core est structurée ainsi c'est la méthode la plus adaptée pour adresser
 					// le stockage de N-Core.
-					$description = $meta_noisettes[$id_conteneur][$noisette['rang']];
+					$description = $meta_noisettes[$id_conteneur][$noisette['rang_noisette']];
 					}
 				}
 			}
