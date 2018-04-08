@@ -35,9 +35,9 @@ function action_deplacer_noisette_dist() {
 
 		// Recherche des informations sur la noisette.
 		if (in_array($sens, array('bas', 'haut')) and ($id_noisette = intval($id_noisette))) {
-			$select = array('type', 'composition', 'objet', 'id_objet', 'bloc', 'rang');
+			$select = array('type', 'composition', 'objet', 'id_objet', 'bloc', 'rang_noisette');
 			$where = array('id_noisette=' . $id_noisette);
-			$noisette = sql_fetsel($select, 'spip_noizetier', $where);
+			$noisette = sql_fetsel($select, 'spip_noisettes', $where);
 			$options = array();
 			if ($noisette['type']) {
 				$options['page'] = $noisette['composition']
@@ -58,17 +58,17 @@ function action_deplacer_noisette_dist() {
 			// Détermination du rang de destination de la noisette. Les rangs des noisettes dans un conteneur
 			// sont toujours compris entre 1 et le nombre de noisettes du conteneur.
 			if ($sens == 'bas') {
-				if ($noisette['rang'] < $nb_noisettes) {
+				if ($noisette['rang_noisette'] < $nb_noisettes) {
 					// La noisette peut être échangée avec la suivante
-					$rang_destination = $noisette['rang'] + 1;
+					$rang_destination = $noisette['rang_noisette'] + 1;
 				} else {
 					// La noisette passe en début de liste
 					$rang_destination = 1;
 				}
 			} else {
-				if ($noisette['rang'] > 1) {
+				if ($noisette['rang_noisette'] > 1) {
 					// La noisette peut être échangée avec la précédente
-					$rang_destination = $noisette['rang'] - 1;
+					$rang_destination = $noisette['rang_noisette'] - 1;
 				} else {
 					// La noisette passe en fin de liste
 					$rang_destination = $nb_noisettes;

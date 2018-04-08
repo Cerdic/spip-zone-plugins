@@ -103,7 +103,7 @@ function noizetier_recuperer_fond($flux) {
 					if (
 						isset($flux['args']['contexte']['type-page'])
 						and $objet = $flux['args']['contexte']['type-page']
-						and sql_fetsel('id_noisette', 'spip_noizetier', array('objet = '.sql_quote($objet),'id_objet = '.$id_objet))
+						and sql_fetsel('id_noisette', 'spip_noisettes', array('objet = '.sql_quote($objet),'id_objet = '.$id_objet))
 					) {
 						$contexte['objet'] = $objet;
 						$contexte['id_objet'] = $id_objet;
@@ -142,7 +142,7 @@ function noizetier_boite_infos($flux){
 			'plugin=' . sql_quote('noizetier'),
 			'objet = ' . sql_quote($flux['args']['type']),
 			'id_objet = ' . intval($flux['args']['id']));
-		$nbr_noisettes = sql_countsel('spip_noizetier', $where);
+		$nbr_noisettes = sql_countsel('spip_noisettes', $where);
 		if (!$nbr_noisettes) {
 			$texte = _T('noizetier:noisettes_configurees_aucune');
 		}

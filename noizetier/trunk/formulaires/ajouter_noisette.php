@@ -52,10 +52,10 @@ function formulaires_ajouter_noisette_traiter_dist($page, $bloc, $redirect = '')
 	}
 
 	if (autoriser('configurerpage', 'noizetier', 0, '', $identifiant)) {
-		if ($noisette = _request('noisette')) {
+		if ($type_noisette = _request('type_noisette')) {
 			include_spip('inc/ncore_noisette');
 			// Ajout de la noisette en fin de liste pour le squelette concerné.
-			if ($id_noisette = noisette_ajouter('noizetier', $noisette, $conteneur)) {
+			if ($id_noisette = noisette_ajouter('noizetier', $type_noisette, $conteneur)) {
 				$retour['message_ok'] = _T('info_modification_enregistree');
 				if ($redirect) {
 					// Note : $redirect indique la page à charger en cas d'ajout

@@ -21,9 +21,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function noizetier_declarer_tables_interfaces($interface) {
 
 	// Les tables : permet d'appeler une boucle avec le *type* de la table uniquement
-	$interface['table_des_tables']['noizetier'] = 'noizetier';
 	$interface['table_des_tables']['noizetier_pages'] = 'noizetier_pages';
-	$interface['table_des_tables']['noizetier_noisettes'] = 'noizetier_noisettes';
+	$interface['table_des_tables']['types_noisettes'] = 'types_noisettes';
+	$interface['table_des_tables']['noisettes'] = 'noisettes';
 
 	// Les traitements
 	// - table spip_noizetier_pages : on desérialise les tableaux et on passe _T_ou_typo
@@ -32,12 +32,12 @@ function noizetier_declarer_tables_interfaces($interface) {
 	$interface['table_des_traitements']['NECESSITE']['noizetier_pages'] = 'unserialize(%s)';
 	$interface['table_des_traitements']['NOM']['noizetier_pages'] = '_T_ou_typo(%s)';
 	$interface['table_des_traitements']['DESCRIPTION']['noizetier_pages'] = '_T_ou_typo(%s)';
-	// - table spip_noizetier_noisettes : on desérialise les tableaux et on passe _T_ou_typo
-	$interface['table_des_traitements']['PARAMETRES']['noizetier_noisettes'] = 'unserialize(%s)';
-	$interface['table_des_traitements']['CONTEXTE']['noizetier_noisettes'] = 'unserialize(%s)';
-	$interface['table_des_traitements']['NECESSITE']['noizetier_noisettes'] = 'unserialize(%s)';
-	$interface['table_des_traitements']['NOM']['noizetier_noisettes'] = '_T_ou_typo(%s)';
-	$interface['table_des_traitements']['DESCRIPTION']['noizetier_noisettes'] = '_T_ou_typo(%s)';
+	// - table spip_types_noisettes : on desérialise les tableaux et on passe _T_ou_typo
+	$interface['table_des_traitements']['PARAMETRES']['types_noisettes'] = 'unserialize(%s)';
+	$interface['table_des_traitements']['CONTEXTE']['types_noisettes'] = 'unserialize(%s)';
+	$interface['table_des_traitements']['NECESSITE']['types_noisettes'] = 'unserialize(%s)';
+	$interface['table_des_traitements']['NOM']['types_noisettes'] = '_T_ou_typo(%s)';
+	$interface['table_des_traitements']['DESCRIPTION']['types_noisettes'] = '_T_ou_typo(%s)';
 
 	return $interface;
 }
@@ -48,8 +48,8 @@ function noizetier_declarer_tables_interfaces($interface) {
  * Le plugin déclare trois nouvelles tables qui sont :
  *
  * - `spip_noizetier_pages`, qui contient les éléments descriptifs des pages et compositions,
- * - `spip_noizetier_noisettes`, qui contient les éléments descriptifs des types de noisette disponibles,
- * - `spip_noizetier`, qui contient l'affectation des noisettes dans les pages concernées.
+ * - `spip_types_noisettes`, qui contient les éléments descriptifs des types de noisette disponibles,
+ * - `spip_noisettes`, qui contient l'affectation des noisettes dans les pages concernées.
  *
  * @pipeline declarer_tables_principales
  *
@@ -93,10 +93,10 @@ function noizetier_declarer_tables_principales($tables_principales) {
 		'key' => &$pages_cles,
 	);
 
-	// Table spip_noizetier_noisettes
+	// Table spip_types_noisettes
 	$types_noisettes = array(
 		'plugin'         => "varchar(30) DEFAULT '' NOT NULL",
-		'noisette'       => "varchar(255) DEFAULT '' NOT NULL",
+		'type_noisette'  => "varchar(255) DEFAULT '' NOT NULL",
 		'type'           => "varchar(127) DEFAULT '' NOT NULL",
 		'composition'    => "varchar(127) DEFAULT '' NOT NULL",
 		'nom'            => "text DEFAULT '' NOT NULL",
@@ -112,53 +112,53 @@ function noizetier_declarer_tables_principales($tables_principales) {
 	);
 
 	$types_noisettes_cles = array(
-		'PRIMARY KEY'    => 'plugin, noisette',
-		'KEY type'       => 'type',
-		'KEY composition'    => 'composition',
-		'KEY ajax'       => 'ajax',
-		'KEY inclusion'  => 'inclusion',
+		'PRIMARY KEY'     => 'plugin, type_noisette',
+		'KEY type'        => 'type',
+		'KEY composition' => 'composition',
+		'KEY ajax'        => 'ajax',
+		'KEY inclusion'   => 'inclusion',
 	);
 
-	$tables_principales['spip_noizetier_noisettes'] = array(
+	$tables_principales['spip_types_noisettes'] = array(
 		'field' => &$types_noisettes,
 		'key' => &$types_noisettes_cles,
 	);
 
-	// Table spip_noizetier
-	$noizetier = array(
-		'id_noisette' => 'bigint(21) NOT NULL',
-		'plugin'      => "varchar(30) DEFAULT '' NOT NULL",
-		'id_conteneur'=> "varchar(255) DEFAULT '' NOT NULL",
-		'rang'        => "smallint DEFAULT 1 NOT NULL",
-		'type'        => "varchar(127) DEFAULT '' NOT NULL",
-		'composition' => "varchar(127) DEFAULT '' NOT NULL",
-		'objet'       => 'varchar(25) NOT NULL default ""',
-		'id_objet'    => 'bigint(21) NOT NULL default 0',
-		'bloc'        => "varchar(255) DEFAULT '' NOT NULL",
-		'noisette'    => "varchar(255) DEFAULT '' NOT NULL",
-		'parametres'  => "text DEFAULT '' NOT NULL",
-		'balise'      => "varchar(6) DEFAULT 'defaut' NOT NULL",
-		'css'         => "tinytext DEFAULT '' NOT NULL",
+	// Table spip_noisettes
+	$noisettes = array(
+		'id_noisette'   => 'bigint(21) NOT NULL',
+		'plugin'        => "varchar(30) DEFAULT '' NOT NULL",
+		'id_conteneur'  => "varchar(255) DEFAULT '' NOT NULL",
+		'rang_noisette' => "smallint DEFAULT 1 NOT NULL",
+		'type'          => "varchar(127) DEFAULT '' NOT NULL",
+		'composition'   => "varchar(127) DEFAULT '' NOT NULL",
+		'objet'         => 'varchar(25) NOT NULL default ""',
+		'id_objet'      => 'bigint(21) NOT NULL default 0',
+		'bloc'          => "varchar(255) DEFAULT '' NOT NULL",
+		'type_noisette' => "varchar(255) DEFAULT '' NOT NULL",
+		'parametres'    => "text DEFAULT '' NOT NULL",
+		'balise'        => "varchar(6) DEFAULT 'defaut' NOT NULL",
+		'css'           => "tinytext DEFAULT '' NOT NULL",
 	);
 
-	$noizetier_cles = array(
-		'PRIMARY KEY'     => 'id_noisette',
-		'KEY plugin'      => 'plugin',
-		'KEY id_conteneur'=> 'id_conteneur',
-		'KEY type'        => 'type',
-		'KEY composition' => 'composition',
-		'KEY bloc'        => 'bloc',
-		'KEY noisette'    => 'noisette',
-		'KEY objet'       => 'objet',
-		'KEY id_objet'    => 'id_objet',
+	$noisettes_cles = array(
+		'PRIMARY KEY'       => 'id_noisette',
+		'KEY plugin'        => 'plugin',
+		'KEY id_conteneur'  => 'id_conteneur',
+		'KEY type'          => 'type',
+		'KEY composition'   => 'composition',
+		'KEY bloc'          => 'bloc',
+		'KEY type_noisette' => 'type_noisette',
+		'KEY objet'         => 'objet',
+		'KEY id_objet'      => 'id_objet',
 	);
 
-	$tables_principales['spip_noizetier'] = array(
-		'field' => &$noizetier,
-		'key'   => &$noizetier_cles,
+	$tables_principales['spip_noisettes'] = array(
+		'field' => &$noisettes,
+		'key'   => &$noisettes_cles,
 		'join'  => array(
-			'id_noisette' => 'id_noisette',
-			'noisette'    => 'noisette',
+			'id_noisette'   => 'id_noisette',
+			'type_noisette' => 'type_noisette',
 		),
 	);
 

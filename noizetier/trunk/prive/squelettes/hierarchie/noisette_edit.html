@@ -1,6 +1,6 @@
-<BOUCLE_noisette_edit(NOIZETIER) {id_noisette}>
+<BOUCLE_noisette_edit(NOISETTES) {id_noisette}>
 	[(#REM) <!-- Détermination du nom de la noisette --> ]
-	<BOUCLE_noisette(NOIZETIER_NOISETTES) {noisette}>
+	<BOUCLE_noisette(TYPES_NOISETTES) {type_noisette}>
 		[(#SET{nom_noisette, #NOM})]
 	</BOUCLE_noisette>
 
@@ -15,7 +15,7 @@
 		<strong class="on">[ (#GET{nom_noisette})]</strong>
 	</B_page>
 		<a href="#URL_ECRIRE{noizetier_objets}"><:noizetier:liste_objets:></a> &gt;
-		[(#INFO_LANG{#OBJET,#ID_OBJET}|changer_typo)]
+		[(#INFO_LANG{#OBJET, #ID_OBJET}|changer_typo)]
 		<a href="[(#URL_ECRIRE{noizetier_page}|parametre_url{objet, #OBJET}|parametre_url{id_objet, #ID_OBJET})]">
 			[ (#INFO_TITRE{#OBJET, #ID_OBJET}|couper{80})]
 		</a> &gt;

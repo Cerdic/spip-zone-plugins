@@ -34,8 +34,8 @@ function noizetier_type_noisette_compter($page) {
 	$type = noizetier_page_type($page);
 	$composition = noizetier_page_composition($page);
 
-	// Les compteurs de types de noisette d'une page sont calculés par une lecture de la table spip_noizetier_noisettes.
-	$from = array('spip_noizetier_noisettes');
+	// Les compteurs de types de noisette d'une page sont calculés par une lecture de la table spip_types_noisettes.
+	$from = array('spip_types_noisettes');
 	$where = array(
 		'plugin=' . sql_quote('noizetier'),
 		'type=' . sql_quote($type),
@@ -134,9 +134,9 @@ function noizetier_noisette_ordonner($ordre, $index_initial = 0) {
 		// initial.
 		foreach ($ordre as $_cle => $_id_noisette) {
 			if ($_cle >= $index_initial) {
-				$modification = array('rang' => $_cle + 1);
+				$modification = array('rang_noisette' => $_cle + 1);
 				$where = array('id_noisette=' . intval($_id_noisette));
-				sql_updateq('spip_noizetier', $modification, $where);
+				sql_updateq('spip_noisettes', $modification, $where);
 			}
 		}
 
@@ -324,9 +324,9 @@ function noizetier_bloc_compter_noisettes($identifiant) {
 		// Initialisation des compteurs par bloc
 		$nb_noisettes = array();
 
-		// Le nombre de noisettes par bloc doit être calculé par une lecture de la table spip_noizetier.
-		$from = array('spip_noizetier');
-		$select = array('bloc', "count(noisette) as 'noisettes'");
+		// Le nombre de noisettes par bloc doit être calculé par une lecture de la table spip_noisettes.
+		$from = array('spip_noisettes');
+		$select = array('bloc', "count(type_noisette) as 'noisettes'");
 		// -- Contruction du where identifiant précisément la page ou l'objet concerné
 		$identifiants = explode('-', $identifiant);
 		if (isset($identifiants[1]) and ($id = intval($identifiants[1]))) {
@@ -743,7 +743,7 @@ function noizetier_objet_lire($type_objet, $id_objet, $information = '') {
 
 		// On récupère le nombre de noisette déjà configurées dans l'objet.
 		$description['noisettes'] = 0;
-		$from = array('spip_noizetier');
+		$from = array('spip_noisettes');
 		$where = array('objet=' . sql_quote($type_objet), 'id_objet=' . intval($id_objet));
 		if ($noisettes = sql_countsel($from, $where)) {
 			$description['noisettes'] = $noisettes;
@@ -793,9 +793,9 @@ function noizetier_objet_repertorier($filtres = array()) {
 	static $objets = null;
 
 	if (is_null($objets)) {
-		// On récupère le ou les objets ayant des noisettes dans la table spip_noizetier.
-		$from = array('spip_noizetier');
-		$select = array('objet', 'id_objet', "count(noisette) as 'noisettes'");
+		// On récupère le ou les objets ayant des noisettes dans la table spip_noisettes.
+		$from = array('spip_noisettes');
+		$select = array('objet', 'id_objet', "count(type_noisette) as 'noisettes'");
 		$where = array('id_objet>0');
 		$group = array('objet', 'id_objet');
 		$objets_configures = sql_allfetsel($select, $from, $where, $group);
@@ -919,12 +919,6 @@ function noizetier_objet_type_active($type_objet) {
  * 		`true` si la configuration a été modifiée, `false` sinon.
  */
  // TODO : a voir si cette fonction n'est pas utilisée pour les noisettes on la renommera en noizetier_page_modifiee()
-/**
- * @param string $entite
- * @param string $identifiant
- *
- * @return bool
- */
 function noizetier_configuration_est_modifiee($entite, $identifiant) {
 
 	$est_modifiee = true;
@@ -933,7 +927,7 @@ function noizetier_configuration_est_modifiee($entite, $identifiant) {
 	$repertoire = ($entite == 'page') ? noizetier_page_repertoire() : 'noisettes/';
 
 	// Récupération du md5 enregistré en base de données
-	$from = "spip_noizetier_${entite}s";
+	$from = ($entite == 'page') ? 'spip_noizetier_pages' : 'spip_types_noisettes';
 	$where = array($entite . '=' . sql_quote($identifiant));
 	$md5_enregistre = sql_getfetsel('signature', $from, $where);
 
@@ -952,5 +946,6 @@ function noizetier_configuration_est_modifiee($entite, $identifiant) {
 	return $est_modifiee;
 }
 
+include_spip('inc/ncore_compilation');
 include_spip('public/noizetier_balises');
 include_spip('noizetier_vieilles_fonctions');

@@ -19,7 +19,7 @@
 		[<p>(#GET{infos_bloc/description})</p>]
 		<B_noisettes>
 		<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-bloc">
-		<BOUCLE_noisettes(NOIZETIER noizetier_noisettes){plugin=noizetier}{objet?}{id_objet?}{type=#ENV{page}|noizetier_page_type}{composition=#ENV{page}|noizetier_page_composition}{bloc=#ENV{bloc}}{par rang}>
+		<BOUCLE_noisettes(NOISETTES types_noisettes){plugin=noizetier}{objet?}{id_objet?}{type=#ENV{page}|noizetier_page_type}{composition=#ENV{page}|noizetier_page_composition}{bloc=#ENV{bloc}}{par rang_noisette}>
 			[(#COMPTEUR_BOUCLE|=={1}|oui)#SET{id_conteneur, #ID_CONTENEUR}]
 			<li class="editer item noisette" id="noisette-#ID_NOISETTE">
 				<div>

@@ -10,11 +10,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Cette action permet à l'utilisateur de recharger en base de données, de façon sécurisée,
- * soit l'ensemble des pages à partir de leur fichier XML ou YAML, soit l'ensemble des noisettes
+ * soit l'ensemble des pages à partir de leur fichier XML ou YAML, soit l'ensemble des types de noisette
  * à partir de leur fichier YAML.
  *
  * Cette action est réservée aux utilisateurs pouvant utiliser le noiZetier.
- * Elle nécessite l'objet concerné soit page ou noisette.
+ * Elle nécessite l'objet concerné soit page ou type_noisette.
  *
  * @return void
  */
@@ -39,7 +39,7 @@ function action_recharger_configuration_dist() {
 	if ($argument == 'page') {
 		include_spip('noizetier_fonctions');
 		noizetier_page_charger();
-	} elseif ($argument == 'noisette') {
+	} elseif ($argument == 'type_noisette') {
 		include_spip('inc/ncore_type_noisette');
 		type_noisette_charger('noizetier', 'noisettes/');
 	}

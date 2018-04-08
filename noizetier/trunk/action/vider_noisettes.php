@@ -76,7 +76,7 @@ function action_vider_noisettes_dist() {
 			} else {
 				// Suppression des noisettes d'une page.
 				// Il faut tenir compte du cas où la page est une composition auquel cas le type et la
-				// composition sont insérées séparément dans la table spip_noizetier.
+				// composition sont insérées séparément dans la table spip_noisettes.
 				$identifiants = explode('-', $options['page'], 2);
 				$where[] = 'type=' . sql_quote($identifiants[0]);
 				if (isset($identifiants[1])) {
@@ -87,7 +87,7 @@ function action_vider_noisettes_dist() {
 			}
 
 			// Suppression en base de données
-			sql_delete('spip_noizetier', $where);
+			sql_delete('spip_noisettes', $where);
 		}
 
 		// On invalide le cache

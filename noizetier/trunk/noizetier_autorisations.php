@@ -300,7 +300,7 @@ function autoriser_noizetier_editernoisette_dist($faire, $type, $id, $qui, $opt)
 		// l'autorisation de configurer cette page ou objet.
 		$select = array('type', 'composition', 'objet', 'id_objet');
 		$where = array('id_noisette=' . $id_noisette);
-		$noisette = sql_fetsel($select, 'spip_noizetier', $where);
+		$noisette = sql_fetsel($select, 'spip_noisettes', $where);
 		if ($noisette) {
 			if ($noisette['objet'] and intval($noisette['id_objet'])) {
 				$opt['objet'] = $noisette['objet'];

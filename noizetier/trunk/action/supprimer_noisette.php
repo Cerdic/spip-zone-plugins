@@ -30,7 +30,7 @@ function action_supprimer_noisette_dist() {
 		// pas fournies en argument, il faut les lire en base de données.
 		$select = array('type', 'composition', 'objet', 'id_objet');
 		$where = array('id_noisette=' . $id_noisette);
-		$noisette = sql_fetsel($select, 'spip_noizetier', $where);
+		$noisette = sql_fetsel($select, 'spip_noisettes', $where);
 
 		// Verification des autorisations
 		$options = array();

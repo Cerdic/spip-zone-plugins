@@ -33,7 +33,7 @@ function noizetier_upgrade($nom_meta_base_version, $version_cible) {
 	);
 
 	$maj['create'] = array(
-		array('maj_tables',array('spip_noizetier_pages', 'spip_noizetier_noisettes', 'spip_noizetier')),
+		array('maj_tables',array('spip_noizetier_pages', 'spip_types_noisettes', 'spip_noisettes')),
 		array('ecrire_config', 'noizetier', $config_060),
 	);
 
@@ -81,8 +81,8 @@ function noizetier_upgrade($nom_meta_base_version, $version_cible) {
 function noizetier_vider_tables($nom_meta_version_base) {
 	// On efface les tables du plugin
 	sql_drop_table('spip_noizetier_pages');
-	sql_drop_table('spip_noizetier_noisettes');
-	sql_drop_table('spip_noizetier');
+	sql_drop_table('spip_types_noisettes');
+	sql_drop_table('spip_noisettes');
 
 	// On efface la version enregistrée du schéma des données du plugin
 	effacer_meta($nom_meta_version_base);
@@ -96,13 +96,13 @@ function noizetier_vider_tables($nom_meta_version_base) {
  * Les actions effectuées sont les suivantes:
  * - ajout de la tables `spip_noisettes_pages` pour stocker l'ensemble des pages et compositions
  *   explicites et virtuelles.
- * - ajout du champ `balise` à la table `spip_noizetier` pour déterminer si le noiZetier doit inclure
+ * - ajout du champ `balise` à la table `spip_noisettes` pour déterminer si le noiZetier doit inclure
  *   la noisette concernée dans un div englobant et ajout du champ plugin pour étendre le stockage au-delà
  *   du noiZetier.
- * - mise à jour de la taille des champs type, composition et objet dans la table `spip_noizetier`
+ * - mise à jour de la taille des champs type, composition et objet dans la table `spip_noisettes`
  * - ajout d'une liste de variables de configuration initialisées
  * - transfert des compositions virtuelles de la meta `noizetier_compositions` dans la nouvelle
- *   table `spip_noisettes_pages` et suppression définitive de la meta.
+ *   table `spip_noizetier_pages` et suppression définitive de la meta.
  *
  * @param array $config_defaut
  * 		Tableau des variables de configuration intialisées.
@@ -112,20 +112,23 @@ function noizetier_vider_tables($nom_meta_version_base) {
 function maj_060($config_defaut) {
 
 	// Ajout de la tables des pages du noizetier qui contiendra pages et compositions qu'elles soient
-	// explicites ou virtuelles.
+	// explicites ou virtuelles et de la tables des types de noisette.
 	include_spip('base/create');
-	maj_tables(array('spip_noizetier_pages', 'spip_noizetier_noisettes'));
+	maj_tables(array('spip_noizetier_pages', 'spip_types_noisettes'));
 
 	// Modification de la table spip_noisettes
 	// -- Ajout de la colonne 'balise' qui indique pour chaque noisette si le noiZetier doit l'inclure dans un div
 	//    englobant ou pas. Le champ prend les valeurs 'on', '' ou 'defaut' qui indique qu'il faut prendre
 	//    en compte la valeur configurée par défaut (configuration du noizetier).
 	// -- Ajout de la colonne 'plugin' qui vaut 'noizetier' pour ce plugin.
-	// -- Ajout de la colonne 'squelette'.
+	// -- Ajout de la colonne 'id_conteneur'.
 	sql_alter("TABLE spip_noisettes ADD plugin varchar(30) DEFAULT '' NOT NULL AFTER id_noisette");
 	sql_alter("TABLE spip_noisettes ADD id_conteneur varchar(255) DEFAULT '' NOT NULL AFTER plugin");
 	sql_alter("TABLE spip_noisettes ADD balise varchar(6) DEFAULT 'defaut' NOT NULL AFTER parametres");
-//	sql_alter("TABLE spip_noisettes ADD maj timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL");
+	// -- Changement du nom du champ 'rang' en 'rang_noisette'
+	sql_alter("TABLE spip_noisettes CHANGE rang rang_noisette smallint DEFAULT 1 NOT NULL");
+	// -- Changement du nom du champ 'noisette' en 'type_noisette' et de sa taille
+	sql_alter("TABLE spip_noisettes CHANGE noisette type_noisette varchar(255) DEFAULT '' NOT NULL");
 	// -- Suppression des index pour des colonnes dont on va modifier la taille ou le type
 	sql_alter("TABLE spip_noisettes DROP INDEX type");
 	sql_alter("TABLE spip_noisettes DROP INDEX composition");
@@ -133,26 +136,42 @@ function maj_060($config_defaut) {
 	sql_alter("TABLE spip_noisettes DROP INDEX noisette");
 	// Mise à jour des tailles des colonnes type, composition et objet pour cohérence
 	sql_alter("TABLE spip_noisettes MODIFY bloc varchar(255) DEFAULT '' NOT NULL");
-	sql_alter("TABLE spip_noisettes MODIFY noisette varchar(255) DEFAULT '' NOT NULL");
-	// -- Mise à jour des tailles des colonnes type, composition et objet pour cohérence
 	sql_alter("TABLE spip_noisettes MODIFY type varchar(127) NOT NULL");
 	sql_alter("TABLE spip_noisettes MODIFY composition varchar(127) NOT NULL");
-	sql_alter("TABLE spip_noisettes MODIFY balise varchar(25) NOT NULL");
-	// -- Mise à jour de la valeur par défaut du rang
-	sql_alter("TABLE spip_noisettes MODIFY rang smallint DEFAULT 1 NOT NULL");
+	sql_alter("TABLE spip_noisettes MODIFY objet varchar(25) NOT NULL");
 	// -- Création des index détruits précédemment et des nouveaux index plugin et conteneur
 	sql_alter("TABLE spip_noisettes ADD INDEX type (type)");
 	sql_alter("TABLE spip_noisettes ADD INDEX composition (composition)");
 	sql_alter("TABLE spip_noisettes ADD INDEX bloc (bloc)");
-	sql_alter("TABLE spip_noisettes ADD INDEX noisette (noisette)");
+	sql_alter("TABLE spip_noisettes ADD INDEX type_noisette (type_noisette)");
 	sql_alter("TABLE spip_noisettes ADD INDEX plugin (plugin)");
 	sql_alter("TABLE spip_noisettes ADD INDEX id_conteneur (id_conteneur)");
-	// -- Renommage de la table
-	sql_alter("TABLE spip_noisettes RENAME spip_noizetier");
-	// -- Remplissage de la nouvelle colonne plugin avec la valeur 'noizetier'.
-	// TODO : A compléter
-	// -- Remplissage de la nouvelle colonne squelette.
-	// TODO : A compléter
+	sql_alter("TABLE spip_noisettes ADD INDEX rang_noisette (rang_noisette)");
+	// -- Remplissage des nouvelles colonnes plugin avec la valeur 'noizetier' et id_conteneur.
+	$select = array('id_noisette', 'type', 'composition', 'objet', 'id_objet', 'bloc');
+	$from = 'spip_noisettes';
+	$noisettes = sql_allfetsel($select, $from);
+	if ($noisettes) {
+		include_spip('ncore/noizetier');
+		foreach ($noisettes as $_cle => $_noisette) {
+			// C'est le plugin noiZetier
+			$noisettes[$_cle]['plugin'] = 'noizetier';
+			// On calcule le conteneur au format tableau et on appelle la fonction de service de construction
+			// de l'id du conteneur
+			$conteneur = array();
+			if (!empty($_noisette['objet']) and !empty($_noisette['id_objet']) and intval($_noisette['id_objet'])) {
+				$conteneur['objet'] = $_noisette['objet'];
+				$conteneur['id_objet'] = $_noisette['id_objet'];
+				$conteneur['squelette'] = $_noisette['bloc'];
+			}
+			else {
+				$page = $_noisette['type'] . ($_noisette['composition'] ? "-{$_noisette['composition']}" : '');
+				$conteneur['squelette'] = "{$_noisette['bloc']}/${page}";
+			}
+			$noisettes[$_cle]['id_conteneur'] = noizetier_conteneur_identifier('noizetier', $conteneur);
+		}
+		sql_replace_multi($from, $noisettes);
+	}
 
 	// Mise à jour de la configuration du plugin
 	include_spip('inc/config');
