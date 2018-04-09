@@ -180,10 +180,12 @@ function cadre_ou_code($regs) {
 	}
 
 	if ($regs[1] == 'code') {
-		return traiter_echap_code_dist($regs);
+		return defined('_DIR_PLUGIN_PRECODE') && _DIR_PLUGIN_PRECODE ?
+			precode_traiter_echap_code($regs) : traiter_echap_code_dist($regs);
 	}
-
-	return traiter_echap_cadre_dist($regs);
+	
+	return defined('_DIR_PLUGIN_PRECODE') && _DIR_PLUGIN_PRECODE ?
+		precode_traiter_echap_cadre($regs) : traiter_echap_cadre_dist($regs);
 }
 
 /**
