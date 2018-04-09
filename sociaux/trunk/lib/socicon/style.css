@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'Socicon';
-  src:  url('fonts/Socicon.eot?jxsw4b');
-  src:  url('fonts/Socicon.eot?jxsw4b#iefix') format('embedded-opentype'),
-    url('fonts/Socicon.woff2?jxsw4b') format('woff2'),
-    url('fonts/Socicon.ttf?jxsw4b') format('truetype'),
-    url('fonts/Socicon.woff?jxsw4b') format('woff'),
-    url('fonts/Socicon.svg?jxsw4b#Socicon') format('svg');
+  src:  url('fonts/Socicon.eot?orx2yt');
+  src:  url('fonts/Socicon.eot?orx2yt#iefix') format('embedded-opentype'),
+    url('fonts/Socicon.woff2?orx2yt') format('woff2'),
+    url('fonts/Socicon.ttf?orx2yt') format('truetype'),
+    url('fonts/Socicon.woff?orx2yt') format('woff'),
+    url('fonts/Socicon.svg?orx2yt#Socicon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -25,6 +25,42 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.socicon-moddb:before {
+  content: "\e94b";
+}
+.socicon-indiedb:before {
+  content: "\e94c";
+}
+.socicon-traxsource:before {
+  content: "\e94d";
+}
+.socicon-gamefor:before {
+  content: "\e94e";
+}
+.socicon-pixiv:before {
+  content: "\e94f";
+}
+.socicon-myanimelist:before {
+  content: "\e950";
+}
+.socicon-blackberry:before {
+  content: "\e951";
+}
+.socicon-wickr:before {
+  content: "\e952";
+}
+.socicon-spip:before {
+  content: "\e953";
+}
+.socicon-napster:before {
+  content: "\e954";
+}
+.socicon-beatport:before {
+  content: "\e955";
+}
+.socicon-hackerone:before {
+  content: "\e956";
+}
 .socicon-hackernews:before {
   content: "\e946";
 }
