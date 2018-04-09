@@ -15,9 +15,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Ajout d'une feuille de style CSS dans l'espace privé pour l'affichage des codes et cadres
  *
  * @param string $flux
- * 		Le contenu de la partie css du head
+ *        Le contenu de la partie css du head
+ *
  * @return string $flux
- * 		Le contenu de la partie css du head modifiée
+ *        Le contenu de la partie css du head modifiée
  */
 function coloration_code_header_prive_css($flux) {
 	$css2 = find_in_path('prive/themes/spip/coloration_code.css');
@@ -29,11 +30,12 @@ function coloration_code_header_prive_css($flux) {
  * Inserer des styles
  *
  * @param string $flux
+ *
  * @return string
  */
 function coloration_code_insert_head_css($flux) {
 	if ($f = find_in_path('css/coloration_code.css') and !PLUGIN_COLORATION_CODE_SANS_STYLES) {
-		$flux .= '<link rel="stylesheet" href="'.direction_css($f).'" type="text/css" media="all" />';
+		$flux .= '<link rel="stylesheet" href="' . direction_css($f) . '" type="text/css" media="all" />';
 	}
 	return $flux;
 }
