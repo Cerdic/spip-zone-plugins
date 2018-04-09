@@ -18,6 +18,7 @@ class Sphinx implements StorageInterface {
 
 	public function replaceDocuments($documents){
 		include_spip('inc/config');
+		$this->sphinxql->connect(); // reconnecter en cas de timeout
 
 		$query = "
 			REPLACE INTO $this->indexName
