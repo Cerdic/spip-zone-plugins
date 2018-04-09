@@ -113,7 +113,7 @@
 #SET{maj_auto,        ''}
 #SET{lang_auto,       #LANG}
 #SET{territoire_auto, ''}
-#SET{logos_auto,      #LOGO_SITE_SPIP|extraire_attribut{src}|supprimer_timestamp}
+#SET{logos_auto,      #INFO_FICHIER{document,#CONFIG{metasplus/id_doc_logo}}|sinon{#LOGO_SITE_SPIP|extraire_attribut{src}}|supprimer_timestamp}
 #SET{auteurs_auto,    ''}
 #SET{mots_auto,       ''}
 <//B_objet>
