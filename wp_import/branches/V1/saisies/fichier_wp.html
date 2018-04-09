@@ -1,0 +1,30 @@
+<div class="ajouter_fichier">
+<input type="hidden" name="cle_#ENV{nom}" value="#ENV{cle}" />
+[(#SET{bouton_label,'Charger un document'})]
+<B_test>
+[(#ENV{multiple}|=={oui}|oui)#SET{bouton_label,'Ajouter un autre document'}]
+[(#ENV{multiple}|=={non}|oui)#SET{bouton_label,'Remplacer le document'}]
+<ul>
+<BOUCLE_test(POUR){tableau #ENV{fichiers}}>
+<li id="document_#CLE">
+[<div class="miniature">(#VALEUR|table_valeur{miniature}|image_reduire{100,100})</div>]
+[(#VALEUR|table_valeur{miniature}|non)<div class="icone">[(#VALEUR|table_valeur{icone}|image_reduire{48,48})]</div>]
+<div class="description">
+	[<div class="nom_fichier">(#VALEUR|table_valeur{nom_fichier})</div>
+	<input type='checkbox' name='supprimer_#ENV{nom}' id='champ_supprimer_document_#ENV{nom}_#CLE' value="supprimer" />]<label for="champ_supprimer_document_#ENV{nom}_#CLE">supprimer</label>
+</div>
+</li>
+</BOUCLE_test>
+</ul>
+</B_test>
+<div class="charger_fichier">
+<BOUCLE_test2(CONDITION){si #ENV{multiple}|=={oui}}>
+<input type="file" name="#ENV{nom}[]" class="multi file[ (#ENV{class})]" id="champ_#ENV{nom}" [ accept="(#ENV{formats})"][ value="(#GET{bouton_label})"][ size="(#ENV{size})"][ maxlength="(#ENV{maxlength})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][(#ENV{obligatoire}|et{#HTML5}|oui) required="required"] />]
+</BOUCLE_test2>
+<input type="file" name="#ENV{nom}" class="[file (#ENV{class})]" id="champ_#ENV{nom}" [ accept="(#ENV{formats})"][ value="(#GET{bouton_label})"][ size="(#ENV{size})"][ maxlength="(#ENV{maxlength})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][(#ENV{obligatoire}|et{#HTML5}|oui) required="required"] />
+<//B_test2>
+</div>
+</div>
+
+
+
