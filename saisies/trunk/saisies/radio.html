@@ -21,6 +21,7 @@
 #SET{data, #ENV*{data, #ENV*{datas}}}
 #SET{data, #GET{data}|is_string|?{(#GET{data}|saisies_chaine2tableau), #GET{data}}}
 
+#SET{disable_choix,#ARRAY}
 [(#ENV{disable_choix}|strlen|oui)
 #SET{disable_choix, #ENV{disable_choix}|trim|explode{','}}
 ]
