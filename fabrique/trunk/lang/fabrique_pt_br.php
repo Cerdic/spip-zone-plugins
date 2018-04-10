@@ -262,5 +262,148 @@ Uma saída deve existir para o objeto superior selecionado aqui.',
 	'label_nom_pluriel_explication' => 'Exemplo «Coisas»',
 	'label_nom_singulier' => 'Nome simgular',
 	'label_nom_singulier_explication' => 'Exemplo «Coisa»',
-	'label_prefixe' => 'Prefixo'
+	'label_prefixe' => 'Prefixo',
+	'label_recherche' => 'Busca',
+	'label_recherche_explication' => 'Ponderação da busca neste campo. Valores compreendidos entre 1 e 10 
+		indicará que o SPIP pode pesquisar neste campo durante uma busca no objeto.
+		Deixe em branco para não pesquisar no campo.',
+	'label_roles' => 'Lista dos papéis',
+	'label_roles_explication' => 'Cada linha descreve um papel: <code>código do papel,Título do papel</code>.
+		O primeiro papel é considerado como o papel a ser aplicado por padrão. Exemplo:
+<code>tradutor,Tradutor</code>',
+	'label_saisie' => 'Tipo de entrada',
+	'label_saisie_explication' => 'Se necessário (para exibir este campo no formulário), indique o tipo de entrada (do plugin entradas) desejado.',
+	'label_saisie_options' => 'Opções de entrada',
+	'label_saisie_options_explication' => 'Opções do código da tag #SAISIE.<br />
+		Exemplo para uma textarea:<br />
+		<code>conteneur_class=pleine_largeur, class=inserer_barre_edition, rows=4</code><br />
+		Exemplo para um seletor / checkbox / radio :<br />
+		<code>datas=[(#ARRAY{chave1,valor1,chave2,valor2})]</code>',
+	'label_saisies' => 'Entradas',
+	'label_saisies_explication' => 'Criar as entradas e os seus valores visíveis',
+	'label_schema' => 'Esquema',
+	'label_schema_explication' => 'Versão da estrutura dos dados',
+	'label_scripts_post_creation' => '<code>post_creation</code>',
+	'label_scripts_post_creation_explication' => 'Após a criação dos arquivos do seu plugin em <code>@destination_plugin@</code>',
+	'label_scripts_pre_copie' => '<code>pre_copie</code>',
+	'label_scripts_pre_copie_explication' => 'Antes de fazer a cópia de segurança do plugin corrente em <code>@destination_ancien_plugin@</code>',
+	'label_slogan' => 'Slogan',
+	'label_table' => 'Nome da tabela SQL',
+	'label_table_a_exporter' => 'Tabela SQL a exportar',
+	'label_table_attention' => 'Éaconselhável nomear a sua tabela no plural, com um s no final.
+		Desse modo, o SPIP e a Fábrica saberão gerenciar os outros casos.',
+	'label_table_compresser_donnees' => 'Comprimir os dados?',
+	'label_table_compresser_donnees_explication' => 'Útil se a tabela for volumosa!',
+	'label_table_destination' => 'Tabela SQL de destino',
+	'label_table_destination_explication' => 'Nome da tabela onde serão importados os dados.
+		Por padrão, o mesmo nome que a tabela fonte.',
+	'label_table_explication' => 'Por exemplo «spip_coisas»',
+	'label_table_liens' => 'Criar uma tabela de links?',
+	'label_table_type' => 'Tipo do objeto',
+	'label_table_type_attention' => 'É aconselhável inserir o nome da chave primária, sem o seu prefixo.',
+	'label_table_type_explication' => 'Exemplo «coisa»',
+	'label_transformer_objet' => 'Transformar os textos deste objeto',
+	'label_transformer_objet_explication' => 'mudará, na melhor hipóetese o que for relativo a um objeto (articles, #ID_ARTICLE...) usando a sintaxe prevista pela Fábrica',
+	'label_version' => 'Versão',
+	'label_vue_auteurs_liens' => 'A lista na visão de um autor?',
+	'label_vue_auteurs_liens_explication' => 'Permite exibir a lista dos elementos deste objeto ligados a um autor, na página do autor.',
+	'label_vue_liens' => 'Permitir entrar os links neste objetos?',
+	'label_vue_liens_explication' => 'Inclui um formulário de edição de links nos obetos:',
+	'legend_autorisations' => 'Autorizações',
+	'legend_autorisations_explication' => 'Permite definir para certas ações sobre o objeto editorial, 
+		tal como a sua modificação, os testes de autorização que serão realizados. Eles podem depender
+		do status do autor, da seção a que pertence o objeto (se ele conta com o campo id_rubrique),
+		ou ainda do status do próprio objeto (se já está publicado ou não). 
+		A autorização de <code>criar</code> não tem todas as opções.',
+	'legend_chaines_langues' => 'Cadeias de idioma',
+	'legend_champs' => 'Campos',
+	'legend_champs_speciaux' => 'Campoos especiais',
+	'legend_champs_sql' => 'Campos SQL usados para:',
+	'legend_configuration' => 'Configuração',
+	'legend_date_publication' => 'Data de publicação',
+	'legend_description' => 'Descrição',
+	'legend_fichiers' => 'Arquivos',
+	'legend_fichiers_supplementaires' => 'Arquivos suplementares',
+	'legend_inserer_administrations' => 'Em <code>@prefixe@_administrations.php</code>',
+	'legend_inserer_base_tables' => 'Em <code>base/@prefixe@.php</code>',
+	'legend_inserer_paquet' => 'Em <code>paquet.xml</code>',
+	'legend_insertion_code' => 'Inserção de código',
+	'legend_installation' => 'Instalação',
+	'legend_langues_et_traductions' => 'Idiomas e traduções',
+	'legend_liaison_directe_autre_objet' => 'Num outro objeto editorial',
+	'legend_liaisons_auteurs_liens' => 'spip_auteurs_liens',
+	'legend_liaisons_directes' => 'Vínculos diretos',
+	'legend_liaisons_indirectes' => 'Vínculos indiretos',
+	'legend_liaisons_objet_liens' => 'spip_@objet@_liens',
+	'legend_logo' => 'Ícones',
+	'legend_logo_specifiques' => 'Ícones específicos',
+	'legend_logo_specifiques_explication' => 'Você pode igualmente fornecer logos específicos
+		para certos tamanhos. Estas imagens serão ou calculadas pelo SPIP
+		a partir do tamanho acima mais próximo, ou a partir do logo de base do objeto.',
+	'legend_options' => 'Opções',
+	'legend_paquet' => 'Pacote',
+	'legend_pre_construire' => 'Pré construir',
+	'legend_resultat' => 'Resultado',
+	'legend_roles' => 'Papeis',
+	'legend_rubriques' => 'Seções',
+	'legend_saisie' => 'Entrada',
+	'legend_scripts' => 'Scripts a executar',
+	'legend_statut' => 'Status',
+	'legend_suppression' => 'Exclusão',
+	'legend_table' => 'Tabela',
+	'legend_tables_hors_normes' => 'Especificidades de tabelas fora das normas',
+
+	// M
+	'message_diff' => 'Diferenças com a criação anterior',
+	'message_diff_explication' => 'Este «diff» também é armazenado no arquivo <code>fabrique_diff.diff</code>
+		do plugin gerado.',
+	'message_diff_suppressions' => 'Os arquivos foram excluídos quando desta nova criação.',
+
+	// O
+	'objet_ajoute' => 'Um novo objeto editorial foi incluído',
+	'objet_autorisations_reinitialisees' => 'As autorizações do objeto foram reinicializadas.',
+	'objet_chaines_reinitialisees' => 'As cadeias de idiomas do objeto foram reinicializadas.',
+	'objet_deplace' => 'O objeto foi movido',
+	'objet_renseigne' => 'O objeto editorial foi populado com a tabela SQL indicada',
+	'objet_supprime' => 'O objeto editorial foi excluído',
+	'onglet_fabrique' => 'Fábrica de plugins',
+	'onglet_fabrique_outils' => 'Ferramentas',
+	'onglet_fabrique_restaurer' => 'Restauração, Reinicialização',
+	'onglet_objet' => 'Objeto',
+	'onglet_objet_n' => 'Objeto #@nb@',
+	'onglet_plugin' => 'Plugin',
+
+	// P
+	'plugin_cree_succes' => 'O plugin foi criado corretamente',
+	'plugin_cree_succes_dans' => 'O plugin foi criado corretamente em <br /><code>@dir@</code>',
+
+	// R
+	'reinitialisation_effectuee' => 'Reinicialização realizada',
+	'reititialiser' => 'Reinicializar',
+	'repertoire_plugin_fabrique' => 'Para facilitar os testes, você pode criar uma pasta <code>@dir@</code> acessível para leitura no seu
+		diretório de plugins. Desse modo, os plugins criados ficarão imediatamente disponĩveis
+		na administração dos plugins e ativáveis.',
+	'restaurer' => 'Restaurar',
+
+	// S
+	'saisies_objets' => 'Entrada <code>@saisie@</code>: seletor de objeto simples para tabelas pouco populadas.',
+	'scripts_explication' => 'Código PHP válido pode ser executado
+		em certos momentos do procedimento da criação do plugin. Isso permite tratar as
+		ações não previstas pela Fábrica, como remeter os arquivos que você tenha incluído,
+		deslocando-os do plugin antigo para o novo.
+		Um certo número de variáveis estão à sua disposição
+		no momento da execução desses scripts, como <code>$destination_plugin</code>
+		(o caminho até o futuro plugin), <code>$destination_ancien_plugin</code> (a
+		cópia do plugin antigo - se ele existir antes!), <code>$destination</code> (o
+		caminho superior dos últimos)',
+	'scripts_securite_webmestres' => 'Por questões de segurança, apenas os webmasters
+		deste site podem executar os scripts escritos nesta parte.',
+
+	// T
+	'titre_plugin' => 'Plugin « @plugin@ »',
+
+	// V
+	'valider_nom_objet_avant' => 'Para informar as cadeias de idiomas, por favor, valide
+		o formulário depois de preencher o nome do objeto. Isto permite completar uma parte 
+		das cadeias de idiomas, que você precisará apenas verificar.'
 );
