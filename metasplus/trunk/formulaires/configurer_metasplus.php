@@ -19,7 +19,6 @@ function formulaires_configurer_metasplus_traiter_dist() {
 	$retours = array();
 
 	// On enregistre la nouvelle configuration
-	$doc_bis = $id_document;
 	$trace = cvtconf_formulaires_configurer_enregistre('configurer_metasplus', array());
 
 	$retours['message_ok'] = _T('config_info_enregistree') . $trace;
