@@ -1,0 +1,19 @@
+[(#AUTORISER{configurer,_prestations}|sinon_interdire_acces)]
+
+<h1 class="grostitre"><:prestations:titre_page_configurer_prestations:></h1>
+
+<INCLURE{fond=prive/objets/liste/prestations_unites,sinon=<:prestations_unite:info_aucun_prestations_unite:>,env,ajax}>
+[(#AUTORISER{creer, prestations_unite})
+	[(#REM|generer_url_ecrire_entite_edit{prestations_unite}|parametre_url{new,oui}|parametre_url{redirect,#SELF}|icone_verticale{<:prestations_unite:texte_ajouter_prestations_unite:>,'',new,right})]
+]
+<hr class="nettoyeur" />
+
+<INCLURE{fond=prive/objets/liste/prestations_types,sinon=<:prestations_type:info_aucun_prestations_type:>,env,ajax}>
+[(#AUTORISER{creer, prestations_type})
+	[(#REM|generer_url_ecrire_entite_edit{prestations_type}|parametre_url{new,oui}|parametre_url{redirect,#SELF}|icone_verticale{<:prestations_type:texte_ajouter_prestations_type:>,'',new,right})]
+]
+<hr class="nettoyeur" />
+
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_PRESTATIONS
+</div>

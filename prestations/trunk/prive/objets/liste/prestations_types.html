@@ -1,0 +1,32 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	id_prestations_type,1,
+	points,-1
+}})]<B_liste_prestations_types>
+#ANCRE_PAGINATION
+<div class="liste-objets prestations_types">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{prestations_type:info_1_prestations_type,prestations_type:info_nb_prestations_types}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="titre" scope="col">[(#TRI{titre,<:prestations_type:champ_titre_label:>,ajax})]</th>
+			<th class="id" scope="col">[(#TRI{id_prestations_type,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_prestations_types(PRESTATIONS_TYPES){id_prestations_unite?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,50}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="titre principale">[(#LOGO_PRESTATIONS_TYPE|image_reduire{20,26})]<a href="[(#ID_PRESTATIONS_TYPE|generer_url_entite{prestations_type})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PRESTATIONS_TYPE">[(#RANG). ]#TITRE</a></td>
+			<td class="id">[(#AUTORISER{modifier,prestations_type,#ID_PRESTATIONS_TYPE}|?{
+				<a href="[(#URL_ECRIRE{prestations_type_edit,id_prestations_type=#ID_PRESTATIONS_TYPE})]">#ID_PRESTATIONS_TYPE</a>,
+				#ID_PRESTATIONS_TYPE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_prestations_types>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_prestations_types>[
+<div class="liste-objets prestations_types caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_prestations_types>

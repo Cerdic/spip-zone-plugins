@@ -1,0 +1,23 @@
+<paquet
+	prefix="prestations"
+	categorie="divers"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.2.0;3.2.*]"
+	logo="prive/themes/spip/images/prestations-64.png"
+	documentation=""
+	schema="1.0.0" 
+>
+	<nom>Prestations</nom>
+	
+	<auteur lien='https://www.ldd.fr'>RastaPopoulos</auteur>
+	<licence>GNU/GPL</licence>
+	
+	<necessite nom="saisies" compatibilite="[2.4.0;]" />
+	<necessite nom="prix" compatibilite="[0.1.15;]" />
+
+	<pipeline nom="autoriser" inclure="prestations_autorisations.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/prestations.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/prestations.php" />
+	<pipeline nom="affiche_enfants" inclure="prestations_pipelines.php" />
+</paquet>

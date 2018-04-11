@@ -1,0 +1,16 @@
+<BOUCLE_prestation(PRESTATIONS){id_prestation=#ENV{id}}>
+<div class="infos">
+[(#SET{texte_objet,<:prestation:titre_prestation:>})]
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_PRESTATION</p></div>
+
+	<div class='nb_elements'><!--nb_elements--></div>
+
+	[(#AUTORISER{supprimer, prestation, #ID_PRESTATION}|oui)
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{prestation-del-24.png}|balise_img{<:prestation:supprimer_prestation:>}|concat{' ',#VAL{<:prestation:supprimer_prestation:>}|wrap{<b>}}|trim)],
+			#URL_ACTION_AUTEUR{supprimer_prestation, #ID_PRESTATION, #URL_ECRIRE{prestations}},
+			icone s24 horizontale danger prestation-del-24, <:prestation:confirmer_supprimer_prestation:>})]
+	]
+
+</div>
+</BOUCLE_prestation>

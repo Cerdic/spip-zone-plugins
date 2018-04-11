@@ -1,0 +1,22 @@
+<BOUCLE_prestations_type(PRESTATIONS_TYPES){id_prestations_type}>
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:prestations_type:champ_titre_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{titre} titre">(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_prix_unitaire_ht[ (#PRIX_UNITAIRE_HT*|strlen|?{'',vide})]">
+	<label><:prestations_type:champ_prix_unitaire_ht_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{prix_unitaire_ht} prix_unitaire_ht">(#PRIX_UNITAIRE_HT)</span>
+</div>]
+
+[<div class="champ contenu_id_prestations_unite[ (#ID_PRESTATIONS_UNITE*|strlen|?{'',vide})]">
+	<label><:prestations_type:champ_id_prestations_unite_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{id_prestations_unite} id_prestations_unite">(#VOIR_SAISIE{prestations_unites,id_prestations_unite,valeur_uniquement=oui,valeur=#ID_PRESTATIONS_UNITE}|ptobr)</span>
+</div>]
+
+[<div class="champ contenu_taxe[ (#TAXE*|strlen|?{'',vide})]">
+	<label><:prestations_type:champ_taxe_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{taxe} taxe">(#TAXE)</span>
+</div>]
+
+</BOUCLE_prestations_type>

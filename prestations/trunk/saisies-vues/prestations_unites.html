@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_prestations_unites_selectionnes>
+	<ul>
+	<BOUCLE_prestations_unites_selectionnes(PRESTATIONS_UNITES){id_prestations_unite IN #GET*{valeur}}
+		{par num titre, titre}{tout}>
+		<li class="choix">#TITRE (#ID_PRESTATIONS_UNITE)</li>
+	</BOUCLE_prestations_unites_selectionnes>
+	</ul>
+	</B_prestations_unites_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_prestations_unites_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_prestations_unite_selectionne(PRESTATIONS_UNITES){id_prestations_unite=#ENV{valeur}}
+		{par num titre, titre}{tout}>
+	  	<p>#TITRE</p>
+	</BOUCLE_prestations_unite_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_prestations_unite_selectionne>
+<//B_test_multiple>

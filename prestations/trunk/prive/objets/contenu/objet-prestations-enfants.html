@@ -1,0 +1,19 @@
+[(#OBJET|=={chapitre}|non)
+	#SET{objet, #OBJET}
+	#SET{id_objet, #ID_OBJET}
+	#SET{id_parent, 0}
+	#SET{arbo, oui}
+]
+[(#OBJET|=={chapitre}|oui)
+	#SET{objet, ''}
+	#SET{id_objet, ''}
+	#SET{id_parent, #ID_OBJET}
+	#SET{arbo, non}
+]
+<INCLURE{fond=prive/objets/liste/prestations,sinon=<:prestation:info_aucun_prestation:>,objet=#ENV{objet},id_objet=#ENV{id_objet},ajax,env} />
+
+[(#AUTORISER{creerprestationdans, #ENV{objet}, #ENV{id_objet}}|oui)
+	#SET{url_parent, #GET{id_objet}|generer_url_entite{#GET{objet}}|sinon{#GET{id_parent}|generer_url_entite{chapitre}}}
+	[(#URL_ECRIRE{prestation_edit, new=oui}|parametre_url{objet, #ENV{objet}}|parametre_url{id_objet, #ENV{id_objet}}|parametre_url{redirect, #SELF|parametre_url{id_prestation,''}}|icone_verticale{<:prestation:icone_creer_prestation:>,prestation,new,right})]
+]
+<div class="nettoyeur"></div>

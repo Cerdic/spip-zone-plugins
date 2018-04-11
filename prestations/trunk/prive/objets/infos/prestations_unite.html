@@ -1,0 +1,16 @@
+<BOUCLE_prestations_unite(PRESTATIONS_UNITES){id_prestations_unite=#ENV{id}}>
+<div class="infos">
+[(#SET{texte_objet,<:prestations_unite:titre_prestations_unite:>})]
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_PRESTATIONS_UNITE</p></div>
+
+	<div class='nb_elements'><!--nb_elements--></div>
+
+	[(#AUTORISER{supprimer, prestations_unite, #ID_PRESTATIONS_UNITE}|oui)
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{prestations_unite-del-24.png}|balise_img{<:prestations_unite:supprimer_prestations_unite:>}|concat{' ',#VAL{<:prestations_unite:supprimer_prestations_unite:>}|wrap{<b>}}|trim)],
+			#URL_ACTION_AUTEUR{supprimer_prestations_unite, #ID_PRESTATIONS_UNITE, #URL_ECRIRE{prestations_unites}},
+			icone s24 horizontale danger prestations_unite-del-24, <:prestations_unite:confirmer_supprimer_prestations_unite:>})]
+	]
+
+</div>
+</BOUCLE_prestations_unite>
