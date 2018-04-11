@@ -57,12 +57,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'c_fabrique_dans_plugins_texte' => 'Ao criar um diretório <code>@dir@</code> acessível para escrita no seu diretório de plugins, a Fábrica poderá confeccionar o plugin (seus arquivos e estrutura de pastas) diretamente nele. Você poderá, assim que o plugin for criado, ativá-lo de imediato na área de administração dos plugins e testá-lo.<br><br>
 Atenção, de outra forma, o plugin será criado em <code>tmp/cache/@dir_cache@</code>;  esta pasta é excluída quando se esvazia o cache.',
 	'c_fabrique_info' => 'Criação de um plugin',
-	'c_fabrique_info_texte' => 'Esta ferramenta permite criar facilmente uma base de código de plugin. Embora o código produzido seja funcional, não será provavelmente o que você deseja exatamente, e não é esse o objetivo! A Fábrica cria as bases dos arquivos e dos códigos mas será provavelmente necessário modificá-los em seguida para o que você realmente deseja.<br><br>
+	'c_fabrique_info_texte' => 'Esta ferramenta permite criar facilmente o código básico para um plugin. Embora o código produzido seja funcional, provavelmente não será exatamente o que você deseja, e não é esse o objetivo! A Fábrica cria os arquivos e os códigos básicos mas provavelmente será necessário modificá-los em seguida para o que você realmente deseja.<br><br>
 É aconselhável que você compreenda previamente o funcionamento dos plugins, do SPIP e dos seus templates, e se desejar criar objetos editoriais, o funcionamento dos pipelines, autorizações, formulários. Este plugin pode, contudo, servir para estudar o código gerado em função das opções que você selecionar.',
 	'c_fabrique_zone' => 'Wow, é muito fácil!',
-	'c_fabrique_zone_texte' => 'Você certamente apreciará o fato de produzir um plugin que gerencie um ou diversos objetos editoriais. Melhor ainda!<br><br>
-No entanto, cuidado! Se a criação de um plugin é fácil, mantê-lo ao longo do tempo, gerenciar a sua documentação, sua vida, é bem mais difícil. O melhor meio para manter um plugin implica geralmente em duas condições: que ele seja útil e que ele seja partilhado; partilhado entre outros desenvolvedores e colaboradores podem participar e melhorá-lo. Em SPIP, os plugins partilhados com código livre, podem ser hospedados no espaço de colaboração SPIP Zone.<br><br>
-Antes de se lançar na criação de um novo plugin, verifique se não existe já no espaço de colaboração um plugin equivalente ao qual você possa aplicar as suas melhorias, a sua documentação. è mais interessante para todos que haja um mínimo de duplicados e sim plugins funcionais e duradouros!
+	'c_fabrique_zone_texte' => 'Você certamente apreciará poder produzir um plugin que  
+		gerencie um ou diversos objetos editoriais. Bom!<br><br>
+		Atenção, no entanto! Se criar um plugin é fácil, mantê-lo ao longo do tempo, 
+		gerenciar a sua documentação, sua vida, é bem mais difícil. O melhor meio para 
+		manter um plugin implica geralmente em duas condições: que ele seja 
+		útil e que ele seja partilhado; quando partilhado entre outros 
+		desenvolvedores e colaboradores, estes podem participar e melhorá-lo. No SPIP, 
+		os plugins partilhados com código livre, podem ser hospedados no espaço de 
+		colaboração SPIP Zone.<br><br>
+		Antes de se lançar na criação de um novo plugin, verifique se não existe já no 
+		espaço de colaboração um plugin equivalente ao qual você possa aplicar as suas 
+		melhorias, a sua documentação. è mais interessante para todos que haja um 
+		mínimo de duplicados e sim plugins funcionais e duradouros!
 	',
 	'calcul_effectue' => 'Cálculo efetuado',
 	'chaine_ajouter_lien_objet' => 'Incluir este @type@',
