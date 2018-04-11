@@ -18,7 +18,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Effectuer des traitements juste avant l'envoi des pages publiques.
  *
  * Ajout des metas open graph, dublin core et twitter dans le <head> public.
- * 
+ *
  * @Note : on retrouve les informations du contexte au moyen d'un squelette pour pour bénéficier de la mise en cache. Capillotracté mais ça fontionne.
  *
  * @param $flux
@@ -71,5 +71,25 @@ function metasplus_affichage_final($flux) {
 		}
 	}
 
+	return $flux;
+}
+
+/**
+ * pipeline post_edition pour supprimer la meta metasplus/id_doc_logo
+ * quand on supprime l'image dans le formualire de configuration
+ *
+ * @param $flux
+ * @return $flux
+ * @author tofulm
+ **/
+function metasplus_post_edition($flux){
+	if (
+		$flux['args']['table'] === 'spip_documents' and
+		$flux['args']['operation'] === 'supprimer_document' and
+		$flux['args']['action'] === 'supprimer_document' and
+		$flux['args']['id_objet'] == lire_config('metasplus/id_doc_logo')
+	) {
+		effacer_config('metasplus/id_doc_logo');
+	}
 	return $flux;
 }

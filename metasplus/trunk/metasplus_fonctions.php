@@ -1,10 +1,11 @@
-<?php	
+<?php
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
 /* rétro-compatibilité pour SPIP 3.0 */
+include_spip('inc/filtres');
 if (!function_exists('supprimer_timestamp')) {
 	function supprimer_timestamp($url) {
 			if (strpos($url, "?") === false) {
@@ -13,6 +14,7 @@ if (!function_exists('supprimer_timestamp')) {
 			return preg_replace(",\?[[:digit:]]+$,", "", $url);
 	}
 }
+include_spip('public/quete');
 if (!function_exists('quete_logo_objet')) {
 	function quete_logo_objet($id_objet, $objet, $mode) {
 			static $chercher_logo;
