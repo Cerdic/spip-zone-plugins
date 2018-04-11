@@ -1,8 +1,8 @@
 <paquet
 	prefix="responsivenav"
 	categorie="navigation"
-	version="0.1.9"
-	etat="test"
+	version="0.1.10"
+	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/responsivenav-32.png"
 	documentation="https://contrib.spip.net/4782"
