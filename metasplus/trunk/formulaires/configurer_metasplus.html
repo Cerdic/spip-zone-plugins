@@ -36,6 +36,7 @@
 	<label for="id_doc_logo"><:metasplus:logo_bis:></label>
 	<input type="file" id="id_doc_logo" name="id_doc_logo">
 	<input type="hidden" value="#ENV{id_doc_logo}" name="id_doc_logo">
+	<p class="explication"><:metasplus:explication_id_doc_logo:></p>
 	<div class="a_droite" style="float: right;">
 		<BOUCLE_doc(DOCUMENTS){id_document=#CONFIG{metasplus/id_doc_logo}}>
 			[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
