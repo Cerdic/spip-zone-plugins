@@ -50,7 +50,11 @@ function saisies_affichage_final($flux) {
 		$css = generer_url_public('saisies.css');
 		$ins_css = "\n<link rel='stylesheet' href='$css' type='text/css' media='all' />\n";
 
-		if (strpos($flux, 'saisie_date') !==false) {//si on a une saisie de type date, on va charger les css de jquery_ui
+		//si on a une saisie de type date, on va charger les css de jquery_ui
+		if (
+			(!defined('_JQUERYUI_CSS_NON') or !boolval(_JQUERYUI_CSS_NON)) 
+			and strpos($flux, 'saisie_date') !==false
+		) {
 			include_spip('jqueryui_pipelines');
 			if (function_exists('jqueryui_dependances')) {
 				$ui_plugins = jqueryui_dependances(array('jquery.ui.datepicker'));
