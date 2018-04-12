@@ -149,7 +149,7 @@ function commandes_abonnements_generer_commande($id_auteur) {
 		// Si on trouve une taxe, on regénère un montant HT
 		// (car comme le montant peut être personnalisé, ce qu'on a c'est toujours le TTC)
 		if ($taxe = floatval($offre['taxe'])) {
-			$montant_ht = $montant * (1 / (1 + $taxe));
+			$montant_ht = round($montant * (1 / (1 + $taxe)), 2);
 		}
 		
 		if ($renouvellement_auto) {
