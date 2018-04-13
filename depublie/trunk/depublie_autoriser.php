@@ -20,8 +20,8 @@ function autoriser_depublierafficher($faire, $type, $id, $qui, $opt) {
 	if (!function_exists('lire_config')) {
 		include_spip('inc/config');
 	}
+	$table = table_objet_sql($type);
 	if (lire_config('depublie/rubrique_depublie') != '' || lire_config('depublie/secteur_depublie') != '') {
-		$table = table_objet_sql($type);
 		// pour l'instant, depublie ne s'applique qu'aux articles
 		// on évite un select id_rubrique, id_secteur sur les objets qui n'en ont pas
 		if ($table != "spip_articles") {
@@ -35,7 +35,12 @@ function autoriser_depublierafficher($faire, $type, $id, $qui, $opt) {
 			return autoriser('modifier', $type, $id, $qui, $opt) OR autoriser('dater', $type, $id, $qui, $opt);
 		}
 	} else {
-		return autoriser('modifier', $type, $id, $qui, $opt) OR autoriser('dater', $type, $id, $qui, $opt);
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		if ($desc = $trouver_table($table)
+			AND isset($desc['statut'])
+			AND $desc['statut']){
+			return autoriser('modifier', $type, $id, $qui, $opt) OR autoriser('dater', $type, $id, $qui, $opt);
+		}
 	}
 	return false;
 }
