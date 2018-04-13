@@ -3,7 +3,7 @@
 	categorie="divers"
 	version="1.6.0"
 	etat="stable"
-	compatibilite="[1.9.0;3.0.*]"
+	compatibilite="[1.9.0;3.1.*]"
 	logo="img_pack/logo_thelia.png"
 	documentation="https://contrib.spip.net/Plugin-Thelia"
 >	
