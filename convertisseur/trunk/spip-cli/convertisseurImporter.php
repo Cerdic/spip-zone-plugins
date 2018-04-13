@@ -147,7 +147,7 @@ class fichiersImporter extends Command {
 						$texte = preg_replace("/@@SOURCE.*/", "", $texte);
 						
 						// Si des <ins> correspondent à des champs metadonnees connus, on les ajoute.
-						$champs_metadonnees = array("mots_cles", "auteurs", "hierarchie", "documents", "descriptif_rubrique");
+						$champs_metadonnees = array("mots_cles", "auteurs", "hierarchie", "documents", "descriptif_rubrique", "texte_rubrique");
 						$hierarchie = "" ;
 						$auteurs = "" ;
 						$mots_cles = "" ;
@@ -166,12 +166,8 @@ class fichiersImporter extends Command {
 							}
 						}
 						
-						$texte_rubrique = $texte_rubrique[0] ;
-						$descriptif_rubrique = $descriptif_rubrique[0] ;
-						
 						if (preg_match(",<ins class='id_article'>(.*?)</ins>,ims", $texte, $z))
 							$id_source = $z[1];
-						
 						
 						// dans quelle rubrique importer ?
 						// La hierarchie est-elle précisée dans le fichier ? (en principe oui)
@@ -184,9 +180,9 @@ class fichiersImporter extends Command {
 						include_spip("inc/rubriques");
 						$id_rubrique = creer_rubrique_nommee("$hierarchie", $id_parent);
 						
-						
-						if($descriptif_rubrique OR $texte_rubrique)
-							$up = sql_updateq('spip_rubriques', array('statut' => 'publie', 'texte' => $texte_rubrique, 'descriptif' => $descriptif_rubrique), "id_rubrique=$id_rubrique");
+						if($descriptif_rubrique OR $texte_rubrique){
+							$up = sql_update('spip_rubriques', array('statut' => sql_quote("publie"), 'texte' => sql_quote($texte_rubrique), 'descriptif' => sql_quote($descriptif_rubrique)), "id_rubrique=$id_rubrique");
+						}
 						else
 							$up = sql_updateq('spip_rubriques', array('statut' => 'publie'), "id_rubrique=$id_rubrique");
 						
