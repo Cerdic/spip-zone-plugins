@@ -152,6 +152,7 @@ class fichiersImporter extends Command {
 						$auteurs = "" ;
 						$mots_cles = "" ;
 						$documents = "" ;
+						$texte_rubrique = "" ;
 						$descriptif_rubrique = "" ;
 						
 						if (preg_match_all(",<ins[^>]+class='(.*?)'[^>]*?>(.*?)</ins>,ims", $texte, $z, PREG_SET_ORDER)){ 
@@ -165,6 +166,7 @@ class fichiersImporter extends Command {
 							}
 						}
 						
+						$texte_rubrique = $texte_rubrique[0] ;
 						$descriptif_rubrique = $descriptif_rubrique[0] ;
 						
 						if (preg_match(",<ins class='id_article'>(.*?)</ins>,ims", $texte, $z))
@@ -183,8 +185,8 @@ class fichiersImporter extends Command {
 						$id_rubrique = creer_rubrique_nommee("$hierarchie", $id_parent);
 						
 						
-						if($descriptif_rubrique)
-							$up = sql_updateq('spip_rubriques', array('statut' => 'publie', 'descriptif' => $descriptif_rubrique), "id_rubrique=$id_rubrique");
+						if($descriptif_rubrique OR $texte_rubrique)
+							$up = sql_updateq('spip_rubriques', array('statut' => 'publie', 'texte' => $texte_rubrique, 'descriptif' => $descriptif_rubrique), "id_rubrique=$id_rubrique");
 						else
 							$up = sql_updateq('spip_rubriques', array('statut' => 'publie'), "id_rubrique=$id_rubrique");
 						
