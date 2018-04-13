@@ -89,6 +89,7 @@ function grappes_afficher_contenu_objet($flux) {
  * 	Le tableau complété
  */
 function grappes_grappes_objets_lies($array) {
+	$array = is_array($array) ? $array : array();
 	$array['articles'] = _T('grappes:item_groupes_association_articles');
 	$array['auteurs'] = _T('grappes:item_groupes_association_auteurs');
 	$array['mots'] = _T('grappes:item_groupes_association_mots');
