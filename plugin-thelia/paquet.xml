@@ -1,12 +1,12 @@
 <paquet
 	prefix="spip_thelia"
 	categorie="divers"
-	version="1.6.0"
+	version="1.6.1"
 	etat="stable"
 	compatibilite="[1.9.0;3.1.*]"
 	logo="img_pack/logo_thelia.png"
 	documentation="https://contrib.spip.net/Plugin-Thelia"
->	
+>
 
 	<nom>Interface Th&#233;lia</nom>
 
