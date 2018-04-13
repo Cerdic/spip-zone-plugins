@@ -170,7 +170,7 @@ class fichiersExporter extends Command {
 						
 						$hierarchie = implode("@@", $hierarchie);
 						
-						$rubrique = sql_fetsel("texte", "descriptif", "spip_rubriques", "id_rubrique=$id_rubrique");
+						$rubrique = sql_fetsel("texte,descriptif", "spip_rubriques", "id_rubrique=$id_rubrique");
 						
 						if($texte_rubrique = $rubrique['texte'])
 							$texte_rubrique = "<ins class='texte_rubrique'>$texte_rubrique</ins>\n" ;
