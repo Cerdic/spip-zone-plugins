@@ -16,6 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @api
  * @uses type_noisette_lire()
+ * @uses ncore_noisette_completer()
  * @uses ncore_noisette_lister()
  * @uses ncore_noisette_stocker()
  * @uses ncore_noisette_ranger()
@@ -192,7 +193,6 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
  * Les champs textuels peuvent subir un traitement typo si demandé.
  *
  * @api
- * @uses ncore_conteneur_identifier()
  * @uses ncore_noisette_decrire()
  *
  * @param string  $plugin
