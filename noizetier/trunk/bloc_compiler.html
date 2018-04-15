@@ -1,8 +1,8 @@
-#SET{type, #OBJET|?{'',#ENV{type, #ENV{type-page, #ENV{page}}}}}
+#SET{type, #OBJET|?{'', #ENV{type, #ENV{type-page, #ENV{page}}}}}
 #SET{composition, #OBJET|?{'', #ENV{composition}}}
-<BOUCLE_noisettes(NOISETTES){plugin=noizetier}{objet?}{id_objet?}{bloc=#ENV{bloc}}{type=#GET{type}}{composition=#GET{composition}}{par rang_noisette}>
+<BOUCLE_noisettes(NOISETTES){plugin=noizetier}{objet?}{id_objet?}{type=#GET{type}}{composition=#GET{composition}}{bloc=#ENV{bloc}}{par rang_noisette}>
 	#SET{avec_div, #CHAMP_SQL{balise}|=={defaut}|?{#CONFIG{noizetier/balise_noisette}, #CHAMP_SQL{balise}}}
 	[[(#GET{avec_div}|oui)<div class="noisette noisette_#TYPE_NOISETTE[ (#CHAMP_SQL{css})]">]
-		(#NOIZETIER_AFFICHER_NOISETTE)
+		(#NOISETTE_COMPILER)
 	[(#GET{avec_div}|oui)</div>]]
 </BOUCLE_noisettes>

@@ -79,6 +79,7 @@ function noizetier_upgrade($nom_meta_base_version, $version_cible) {
  * @return void
  */
 function noizetier_vider_tables($nom_meta_version_base) {
+
 	// On efface les tables du plugin
 	sql_drop_table('spip_noizetier_pages');
 	sql_drop_table('spip_types_noisettes');

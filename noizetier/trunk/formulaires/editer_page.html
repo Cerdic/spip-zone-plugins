@@ -72,7 +72,7 @@
 					jQuery('#aide_choix_icone').show();
 					maj_apercu_icone = function(){
 						i = jQuery('input#icon').val();
-						jQuery.get('#URL_PAGE{icone-preview}&icone='+i, function(data) {
+						jQuery.get('#URL_PAGE{icone_preview}&icone='+i, function(data) {
 							jQuery('span#apercu_icone').html(data);
 						});
 					};

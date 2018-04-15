@@ -14,9 +14,8 @@ function formulaires_configurer_noizetier_traiter_dist() {
 	$defaut_ajax = lire_config('noizetier/ajax_noisette');
 
 	if ($defaut_ajax != _request('ajax_noisette')) {
-		include_spip('inc/flock');
-		include_spip('noizetier_fonctions');
-		supprimer_fichier(_CACHE_AJAX_NOISETTES);
+		include_spip('inc/ncore_cache');
+		cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_AJAX);
 	}
 
 	// On filtre le tableau des objets configurables pour éviter l'index vide fourni systématiquement par la saisie.

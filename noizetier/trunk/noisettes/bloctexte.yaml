@@ -2,6 +2,7 @@ nom: '<:noizetier:nom_bloctexte:>'
 description: '<:noizetier:description_bloctexte:>'
 icon: 'texte-24.png'
 contexte: 'aucun'
+ajax: 'non'
 parametres:
   -
     saisie: 'input'

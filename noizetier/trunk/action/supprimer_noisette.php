@@ -20,7 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function action_supprimer_noisette_dist() {
 
 	// Securisation et autorisation.
-	// L'id de la noisette est le seul arguement attendu.
+	// L'id de la noisette est le seul argument attendu.
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$argument = $securiser_action();
 

@@ -73,9 +73,9 @@ function noizetier_recuperer_fond($flux) {
 					}
 
 					if (isset($flux['args']['contexte']['voir']) && $flux['args']['contexte']['voir'] == 'noisettes' && autoriser('configurer', 'noizetier')) {
-						$complements = recuperer_fond('noizetier-generer-bloc-voir-noisettes', $contexte, array('raw' => true));
+						$complements = recuperer_fond('bloc_preview', $contexte, array('raw' => true));
 					} else {
-						$complements = recuperer_fond('noizetier-generer-bloc', $contexte, array('raw' => true));
+						$complements = recuperer_fond('bloc_compiler', $contexte, array('raw' => true));
 					}
 
 					// S'il y a une indication d'insertion explicite
@@ -113,7 +113,7 @@ function noizetier_recuperer_fond($flux) {
 					$page .= (isset($contexte['composition']) && $contexte['composition']) ? '-'.$contexte['composition'] : '';
 					$blocs = noizetier_page_lister_blocs($page);
 					if (isset($blocs[$bloc])) {
-						$complements = recuperer_fond('noizetier-generer-bloc-voir-noisettes', $contexte, array('raw' => true));
+						$complements = recuperer_fond('bloc_preview', $contexte, array('raw' => true));
 						$flux['data']['texte'] .= $complements['texte'];
 					}
 				}
@@ -278,8 +278,8 @@ function noizetier_noizetier_config_import($flux) {
 // les boutons d'administration : ajouter le mode voir=noisettes
 function noizetier_formulaire_admin($flux) {
 	if (autoriser('configurer', 'noizetier')) {
-		$btn = recuperer_fond('prive/bouton/voir_noisettes');
-		$flux['data'] = preg_replace('%(<!--extra-->)%is', $btn.'$1', $flux['data']);
+		$bouton = recuperer_fond('prive/bouton/voir_noisettes');
+		$flux['data'] = preg_replace('%(<!--extra-->)%is', $bouton.'$1', $flux['data']);
 	}
 
 	return $flux;
@@ -298,11 +298,11 @@ function noizetier_affiche_milieu($flux) {
 		include_spip('inc/ncore_type_noisette');
 		type_noisette_charger('noizetier', 'noisettes/');
 
-		// TODO : à revoir avec N-Core
-		include_spip('inc/flock');
-		supprimer_fichier(_CACHE_AJAX_NOISETTES);
-		supprimer_fichier(_CACHE_CONTEXTE_NOISETTES);
-		supprimer_fichier(_CACHE_INCLUSIONS_NOISETTES);
+		// Suppression des caches N-Core nécessaires à la compilation des noisettes
+		include_spip('inc/ncore_cache');
+		cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_CONTEXTE);
+		cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_AJAX);
+		cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_INCLUSION);
 	}
 
 	return $flux;

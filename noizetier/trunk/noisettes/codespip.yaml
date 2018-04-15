@@ -1,6 +1,7 @@
 nom: '<:noizetier:nom_codespip:>'
 icon: 'code-spip-24.png'
 contexte: 'env'
+ajax: 'non'
 parametres:
   -
     saisie: 'textarea'

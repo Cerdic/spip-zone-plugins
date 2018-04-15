@@ -5,10 +5,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-define('_CACHE_AJAX_NOISETTES', _DIR_CACHE . 'noisettes_ajax.php');
-define('_CACHE_CONTEXTE_NOISETTES', _DIR_CACHE . 'noisettes_contextes.php');
-define('_CACHE_INCLUSIONS_NOISETTES', _DIR_CACHE . 'noisettes_inclusions.php');
-
 
 // --------------------------------------------------------------------------------
 // --------------------- API TYPES DE NOISETTE : COMPLEMENT -----------------------
@@ -76,47 +72,14 @@ function noizetier_type_noisette_compter($page) {
 // ------------------------- API NOISETTES : COMPLEMENT ---------------------------
 // --------------------------------------------------------------------------------
 
-/**
- * Retourne les elements du contexte uniquement
- * utiles a la noisette demande.
- *
- * @param
- *
- * @return
- **/
-function noizetier_choisir_contexte($noisette, $contexte_entrant, $id_noisette) {
-	$contexte_noisette = array_flip(noizetier_noisette_contexte($noisette));
-
-	// On transmet toujours l'id_noisette et les variables se terminant par _$id_noisette (utilisees par exemple par Aveline pour la pagination)
-	$contexte_min = array('id_noisette' => $id_noisette);
-
-	if (isset($contexte_noisette['env'])) {
-		return array_merge($contexte_entrant, $contexte_min);
-	}
-
-	$l = -1 * (strlen($id_noisette) + 1);
-	foreach ($contexte_entrant as $variable => $valeur) {
-		if (substr($variable, $l) == '_'.$id_noisette) {
-			$contexte_min[$variable] = $valeur;
-		}
-	}
-
-	if (isset($contexte_noisette['aucun'])) {
-		return $contexte_min;
-	}
-	if ($contexte_noisette) {
-		return array_merge(array_intersect_key($contexte_entrant, $contexte_noisette), $contexte_min);
-	}
-
-	return $contexte_entrant;
-}
-
 
 /**
  * Réordonne les noisettes d'un bloc d'une page ou d'un objet à partir d'un index donné du tableau.
  * L'ordre est renvoyé pour l'ensemble des noisettes du bloc.
  * Si l'index à partir duquel les noisettes sont réordonnées n'est pas fourni ou est égal à 0
  * la fonction réordonne toutes les noisettes.
+ *
+ * @api
  *
  * @param array	$ordre
  * @param int	$index_initial
@@ -240,6 +203,7 @@ function noizetier_bloc_defaut() {
  *
  * @package SPIP\NOIZETIER\API\BLOC
  * @api
+ * @filtre
  *
  * @return array|string
  */
@@ -359,6 +323,9 @@ function noizetier_bloc_compter_noisettes($identifiant) {
 // -------------------------------------------------------------------
 
 /**
+ *
+ * @api
+ *
  * @param bool $recharger
  *
  * @return bool
@@ -498,6 +465,9 @@ function noizetier_page_charger($recharger = false) {
 }
 
 /**
+ *
+ * @filtre
+ *
  * @param       $page
  * @param array $blocs_exclus
  *
@@ -623,7 +593,6 @@ function noizetier_page_composition($page) {
  *
  * @package SPIP\NOIZETIER\API\PAGE
  * @api
- * @filtre
  *
  * @param string $page
  * 		L'identifiant de la page.
@@ -647,7 +616,6 @@ function noizetier_page_est_composition($page) {
  *
  * @package SPIP\NOIZETIER\API\OBJET
  * @api
- * @filtre
  *
  * @param string $type
  * 		Identifiant du type de page.
@@ -676,7 +644,6 @@ function noizetier_page_composition_activee($type) {
  *
  * @package SPIP\NOIZETIER\API\PAGE
  * @api
- * @filtre
  *
  * @return string
  * 		Le répertoire des pages sous la forme dossier/.
@@ -871,7 +838,6 @@ function noizetier_objet_lister_exclusions() {
  *
  * @package SPIP\NOIZETIER\API\OBJET
  * @api
- * @filtre
  *
  * @param string $type_objet
  * 		Type d'objet SPIP comme article, rubrique...
@@ -946,6 +912,8 @@ function noizetier_configuration_est_modifiee($entite, $identifiant) {
 	return $est_modifiee;
 }
 
-include_spip('inc/ncore_compilation');
+
+// --------------------------------------------------------------------
+// ------------------------------ BALISES -----------------------------
+// --------------------------------------------------------------------
 include_spip('public/noizetier_balises');
-include_spip('noizetier_vieilles_fonctions');

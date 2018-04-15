@@ -50,7 +50,7 @@ function noizetier_ieconfig($flux)
 	// Tableau d'export
 	if ($action == 'export' && _request('noizetier_export_option') == 'on') {
 		include_spip('noizetier_fonctions');
-		$flux['data']['noizetier'] = noizetier_tableau_export();
+		$flux['data']['noizetier'] = noizetier_ieconfig_exporter();
 	}
 
 	// Formulaire d'import
@@ -170,10 +170,135 @@ function noizetier_ieconfig($flux)
 	// Import de la configuration
 	if ($action == 'import' && isset($flux['args']['config']['noizetier']) && _request('noizetier_type_import') != '') {
 		include_spip('noizetier_fonctions');
-		if (!noizetier_importer_configuration(_request('noizetier_type_import'), _request('noizetier_import_compos'), $flux['args']['config']['noizetier'])) {
+		if (!noizetier_ieconfig_importer(_request('noizetier_type_import'), _request('noizetier_import_compos'), $flux['args']['config']['noizetier'])) {
 			$flux['data'] .= _T('noizetier:ieconfig_probleme_import_config').'<br />';
 		}
 	}
 
 	return($flux);
+}
+
+
+// --------------------------------------------------------------------
+// ------------------------- API IMPORT/EXPORT ------------------------
+// --------------------------------------------------------------------
+
+/**
+ * Retourne le tableau des noisettes et des compositions du noizetier pour les exports.
+ *
+ * @return
+ **/
+function noizetier_ieconfig_exporter() {
+	$data = array();
+
+	// On calcule le tableau des noisettes
+	// TODO : a modifier pour les objets non ?
+	$data['noisettes'] = sql_allfetsel(
+		'type, composition, bloc, type_noisette, parametres, css',
+		'spip_noisettes',
+		'1',
+		'',
+		'type, composition, bloc, rang'
+	);
+
+	// On remet au propre les parametres
+	foreach ($data['noisettes'] as $cle => $noisette) {
+		$data['noisettes'][$cle]['parametres'] = unserialize($noisette['parametres']);
+	}
+
+	// On recupere les compositions du noizetier
+	// TODO : a supprimer car elles sont dans la table des pages
+	$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
+	if (is_array($noizetier_compositions) and count($noizetier_compositions) > 0) {
+		$data['noizetier_compositions'] = $noizetier_compositions;
+	}
+
+	$data = pipeline('noizetier_config_export', $data);
+
+	return $data;
+}
+
+/**
+ * Importe une configuration de noisettes et de compositions.
+ *
+ * @param string  $type_import
+ * @param string  $import_compos
+ * @param array $config
+ *
+ * @return bool
+ */
+function noizetier_ieconfig_importer($type_import, $import_compos, $config) {
+	if ($type_import != 'remplacer') {
+		$type_import = 'fusion';
+	}
+	if ($import_compos != 'oui') {
+		$import_compos = 'non';
+	}
+
+	$config = pipeline('noizetier_config_import', $config);
+
+	// On s'occupe deja des noisettes
+	$noisettes = $config['noisettes'];
+	include_spip('base/abstract_sql');
+	if (is_array($noisettes) and count($noisettes) > 0) {
+		$noisettes_insert = array();
+		$rang = 1;
+		$page = '';
+
+		if ($type_import == 'remplacer') {
+			sql_delete('spip_noisettes', '1');
+		}
+
+		foreach ($noisettes as $noisette) {
+			$type = $noisette['type'];
+			$composition = $noisette['composition'];
+			if ($type.'-'.$composition != $page) {
+				$page = $type.'-'.$composition;
+				$rang = 1;
+				if ($type_import == 'fusion') {
+					$rang = sql_getfetsel('rang_noisette', 'spip_noisettes', 'type='.sql_quote($type).' AND composition='.sql_quote($composition), '', 'rang DESC') + 1;
+				}
+			} else {
+				$rang = $rang + 1;
+			}
+			$noisette['rang_noisette'] = $rang;
+			$noisette['parametres'] = serialize($noisette['parametres']);
+			$noisettes_insert[] = $noisette;
+		}
+
+		$ok = sql_insertq_multi('spip_noisettes', $noisettes_insert);
+	}
+
+	// On s'occupe des compositions du noizetier
+	// TODO : à modifier car les compositions sont dans la table des pages
+	if ($import_compos == 'oui') {
+		include_spip('inc/meta');
+		$compos_importees = $config['noizetier_compositions'];
+		if (is_array($compos_importees) and count($compos_importees) > 0) {
+			if ($type_import == 'remplacer') {
+				effacer_meta('noizetier_compositions');
+			} else {
+				$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
+			}
+
+			if (!is_array($noizetier_compositions)) {
+				$noizetier_compositions = array();
+			}
+
+			foreach ($compos_importees as $type => $compos_type) {
+				foreach ($compos_type as $composition => $info_compo) {
+					$noizetier_compositions[$type][$composition] = $info_compo;
+				}
+			}
+
+			ecrire_meta('noizetier_compositions', serialize($noizetier_compositions));
+			ecrire_metas();
+		}
+	}
+
+	// On invalide le cache
+	include_spip('inc/invalideur');
+	suivre_invalideur('noizetier-import-config');
+
+	return $ok;
 }

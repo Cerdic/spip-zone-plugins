@@ -148,7 +148,7 @@ function noizetier_type_noisette_decrire($plugin, $noisette) {
  *        un champ invalide la fonction renvoie un tableau vide.
  *
  * @return array
- *        Tableau de la forme `[noisette] = information ou description complète`.
+ *        Tableau de la forme `[type_noisette] = information ou description complète`.
  */
 function noizetier_type_noisette_lister($plugin, $information = '') {
 
@@ -163,6 +163,31 @@ function noizetier_type_noisette_lister($plugin, $information = '') {
 	}
 
 	return $info_noisettes;
+}
+
+/**
+ * Renvoie la configuration par défaut de l'ajax à appliquer pour la compilation des noisettes.
+ * Cette information est utilisée si la description YAML d'un type noisette ne contient pas de tag ajax
+ * ou contient un tag ajax à `defaut`.
+ *
+ * @package SPIP\NOIZETIER\SERVICE\TYPE_NOISETTE
+ *
+ * @uses ncore_chercher_service()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ *
+ * @return bool
+ * 		`true` si par défaut une noisette est insérée en ajax, `false` sinon.
+ */
+function noizetier_type_noisette_initialiser_ajax($plugin) {
+
+	// La valeur Ajax par défaut est inscrite dans la configuration du plugin.
+	include_spip('inc/config');
+	$defaut_ajax = lire_config('noizetier/ajax_noisette');
+
+	return $defaut_ajax;
 }
 
 
@@ -540,14 +565,4 @@ function noizetier_conteneur_destocker($plugin, $conteneur) {
 	}
 
 	return $retour;
-}
-
-
-function noizetier_noisette_config_ajax() {
-
-	// On détermine la valeur par défaut de l'ajax des noisettes qui est stocké dans la configuration du plugin.
-	include_spip('inc/config');
-	$defaut_ajax = lire_config('noizetier/ajax_noisette') == 'on' ? true : false;
-
-	return $defaut_ajax;
 }
