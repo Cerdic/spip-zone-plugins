@@ -31,19 +31,19 @@ if (!defined('_NCORE_NOMCACHE_TYPE_NOISETTE_DESCRIPTION')) {
 	 */
 	define('_NCORE_NOMCACHE_TYPE_NOISETTE_DESCRIPTION', 'type_noisette_descriptions.php');
 }
-if (!defined('_NCORE_NOMCACHE_NOISETTE_AJAX')) {
+if (!defined('_NCORE_NOMCACHE_TYPE_NOISETTE_AJAX')) {
 	/**
 	 * Cache du paramétrage ajax des noisettes.
-	 * Contient le tableau sérialisé `[noisette] = true/false`.
+	 * Contient le tableau sérialisé `[type_noisette] = true/false`.
 	 */
-	define('_NCORE_NOMCACHE_NOISETTE_AJAX', 'noisette_ajax.php');
+	define('_NCORE_NOMCACHE_TYPE_NOISETTE_AJAX', 'type_noisette_ajax.php');
 }
-if (!defined('_NCORE_NOMCACHE_NOISETTE_INCLUSION')) {
+if (!defined('_NCORE_NOMCACHE_TYPE_NOISETTE_INCLUSION')) {
 	/**
 	 * Cache du paramétrage d'inclusion dynamique des noisettes.
-	 * Contient le tableau sérialisé `[noisette] = true/false`.
+	 * Contient le tableau sérialisé `[type_noisette] = true/false`.
 	 */
-	define('_NCORE_NOMCACHE_NOISETTE_INCLUSION', 'noisette_inclusions.php');
+	define('_NCORE_NOMCACHE_TYPE_NOISETTE_INCLUSION', 'type_noisette_inclusions.php');
 }
 if (!defined('_NCORE_NOMCACHE_TYPE_NOISETTE_CONTEXTE')) {
 	/**

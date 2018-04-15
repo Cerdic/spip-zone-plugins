@@ -5,39 +5,43 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function balise_NOISETTE_COMPILER_dist($p)
-{
-	// TODO : il faudrait appeler une fonction de service du plugin pour choisir si on passe l'id_noisette ou le couple
-	// (id_conteneur, rang)
+function balise_NOISETTE_COMPILER_dist($p) {
+
+	// On passe dans le contexte toujours les deux identifiants d'une noisette, à savoir, l'id_noisette et le couple
+	// (id_conteneur, rang).
 	$id_noisette = champ_sql('id_noisette', $p);
+	$id_conteneur = champ_sql('id_conteneur', $p);
+	$rang_noisette = champ_sql('rang_noisette', $p);
+	$noisette = "array(
+		'id_noisette' => $id_noisette,
+		'id_conteneur' => $id_conteneur,
+		'rang_noisette' => $rang_noisette
+	)";
+
+	// On extrait les autres informations de la noisette
 	$type_noisette = champ_sql('type_noisette', $p);
 	$parametres = champ_sql('parametres', $p);
 	$plugin = champ_sql('plugin', $p);
 
-	// A-t-on demandé un stockage spécifique
+	// A-t-on demandé un stockage spécifique en paramètre de la balise ?
 	$stockage = interprete_argument_balise(1, $p);
 	$stockage = isset($stockage) ? str_replace('\'', '"', $stockage) : '""';
 
-	// si pas de contexte attribuer, on passe tout le contexte que l'on recoit
-	// sinon, on regarde si 'aucun' ou 'env' est indique :
-	// si 'aucun' => aucun contexte
-	// si 'env' => tout le contexte recu.
-	// $id_noisette est toujours transmis dans l'environnement
-	$environnement = "array_merge(\$Pile[0],array('id_noisette' => $id_noisette))";
+	// On récupère l'environnement
+	$environnement = "\$Pile[0]";
 
+	// On prépare le code en fonction du type d'inclusion dynamique ou pas
 	$inclusion_dynamique = "\"<?php echo recuperer_fond(
 		'noisettes/\".$type_noisette.\"',
-		\".var_export(array_merge(unserialize($parametres), noizetier_choisir_contexte($type_noisette, $environnement, $id_noisette)),true).\",
-		\".var_export(array('ajax'=>($_ajax && noizetier_noisette_ajax($type_noisette))),true).\"
+		\".var_export(array_merge(unserialize($parametres), noisette_contextualiser($plugin, $noisette, $type_noisette, $environnement, $stockage)),true).\",
+		\".var_export(array('ajax'=>(type_noisette_ajaxifier($plugin, $type_noisette, $stockage))),true).\"
 	);?>\"";
-
 	$inclusion_statique = "recuperer_fond(
 		'noisettes/'.$type_noisette,
-		array_merge(unserialize($parametres), noisette_contextualiser($plugin, $id_noisette, $type_noisette, $environnement, $stockage)),
-		array('ajax'=>($_ajax && noizetier_noisette_ajax($type_noisette)))
+		array_merge(unserialize($parametres), noisette_contextualiser($plugin, $noisette, $type_noisette, $environnement, $stockage)),
+		array('ajax'=>(type_noisette_ajaxifier($plugin, $type_noisette, $stockage)))
 	)";
-
-	$code = "((noizetier_noisette_dynamique($type_noisette)) ? $inclusion_dynamique : $inclusion_statique)";
+	$code = "((type_noisette_dynamiser($plugin, $type_noisette, $stockage)) ? $inclusion_dynamique : $inclusion_statique)";
 
 	$p->code = "((!$id_noisette) ? _T('zbug_champ_hors_motif', array('champ'=>'ID_NOISETTE', 'motif'=>'NOISETTES')) : $code)";
 	$p->interdire_scripts = false;

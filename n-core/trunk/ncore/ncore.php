@@ -260,6 +260,44 @@ function ncore_type_noisette_lister($plugin, $information = '', $stockage = '') 
 	return $types_noisettes;
 }
 
+/**
+ * Renvoie la configuration par défaut de l'ajax à appliquer pour la compilation des noisettes.
+ * Cette information est utilisée si la description YAML d'un type noisette ne contient pas de tag ajax
+ * ou contient un tag ajax à `defaut`.
+ *
+ * Le service N-Core considère que toute noisette est par défaut insérée en ajax.
+ *
+ * @package SPIP\NCORE\SERVICE\TYPE_NOISETTE
+ *
+ * @uses ncore_chercher_service()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ *
+ * @return bool
+ * 		`true` si par défaut une noisette est insérée en ajax, `false` sinon.
+ */
+function ncore_type_noisette_initialiser_ajax($plugin) {
+
+	// On cherche le service de stockage à utiliser selon la logique suivante :
+	// - si le service de stockage est non vide on l'utilise en considérant que la fonction existe forcément;
+	// - sinon, on utilise la fonction du plugin appelant si elle existe;
+	// - et sinon, on utilise la fonction de N-Core.
+	include_spip('inc/ncore_utils');
+	if ($configurer = ncore_chercher_service($plugin, 'type_noisette_initialiser_ajax', '')) {
+		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
+		// On autorise la fonction du plugin à retourner autre chose que true ou false si tant est que l'on puisse
+		// en déduire un booléen (par exemple, 'on' et '' comme le retourne une case à cocher du plugin Saisies).
+		$defaut_ajax = $configurer($plugin) ? true : false;
+	} else {
+		// Le service ne propose pas de fonction propre, on utilise celle de N-Core.
+		$defaut_ajax = true;
+	}
+
+	return $defaut_ajax;
+}
+
 
 // -----------------------------------------------------------------------
 // ----------------------------- NOISETTES -------------------------------
