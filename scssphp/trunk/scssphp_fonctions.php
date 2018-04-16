@@ -268,11 +268,13 @@ function scss_cssify_head($head) {
  * - un .css statique
  * - un .css.html calcule en .css
  */
-function balise_CSS($p) {
-	$_css = interprete_argument_balise(1, $p);
-	$p->code = "timestamp(direction_css(scss_select_css($_css)))";
-	$p->interdire_scripts = false;
-	return $p;
+if (!function_exists('balise_CSS')) {
+	function balise_CSS($p) {
+		$_css = interprete_argument_balise(1, $p);
+		$p->code = "timestamp(direction_css(scss_select_css($_css)))";
+		$p->interdire_scripts = false;
+		return $p;
+	}
 }
 
 /**
