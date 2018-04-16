@@ -1,7 +1,7 @@
 <paquet
 	prefix="syndic_etendue"
 	categorie="edition"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="syndic_etendue-32.png"
