@@ -1,5 +1,5 @@
 
-function calculer_spip_documents() {
+function calculer_spip_documents() {
 
 	$(".spip_documents").each(function() {
 		var t = $(this);
@@ -69,7 +69,7 @@ $(document).on("ajaxComplete", declencher_documents_actifs);
 
 var didScroll_documents_actifs = false
 
-function declencher_documents_actifs () {
+function declencher_documents_actifs () {
 	didScroll_documents_actifs = true;
 }
 function render_documents_actifs() {

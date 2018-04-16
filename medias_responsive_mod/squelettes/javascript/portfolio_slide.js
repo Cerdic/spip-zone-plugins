@@ -9,7 +9,7 @@ function _getComputedTranslateX(obj)
 }
 
 
-function calculer_portfolio_slide() {
+function calculer_portfolio_slide() {
 	$(".portfolio_slide").each(function() {
 			var ratio_ecran = ($( window ).height() - 60) / $( this ).outerWidth() * 100;
 
