@@ -7,6 +7,10 @@
  * cf. paquet.xml pour plus d'infos.
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
+
 // --------------------------------------
 //  COMPATIBILITE PLUGIN ACCES RESTREINT
 // --------------------------------------
@@ -18,13 +22,14 @@
  * @param unknown_type $boucles
  * @param unknown_type $crit
  */
-if (!function_exists('critere_tout_voir_dist')){
+if (!function_exists('critere_tout_voir_dist')) {
 function critere_tout_voir_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$boucle->modificateur['tout_voir'] = true;
 }
+
 }
-function simplecal_pre_boucle(&$boucle){
+function simplecal_pre_boucle(&$boucle) {
 	if (!isset($boucle->modificateur['tout_voir'])){
 		$securise = false;
 		
@@ -57,7 +62,3 @@ function simplecal_pre_boucle(&$boucle){
 	}
 	return $boucle;
 }
-
-
-
-?>

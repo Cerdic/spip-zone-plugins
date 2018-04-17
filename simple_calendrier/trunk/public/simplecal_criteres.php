@@ -1,12 +1,17 @@
 <?php
+
 /**
  * Plugin Simple Calendrier v2 pour SPIP 3
  * Licence GNU/GPL
- * 2010-2016
+ * 2010-2018
  *
  * cf. paquet.xml pour plus d'infos.
  */
 
+
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 /**
  * Critere {a_venir} 
@@ -17,25 +22,35 @@
  */
 function critere_a_venir_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
-	$table = $boucle->id_table;
-	$not = $crit->not;
-	
-	$horaire_actif = lire_config('simplecal_horaire');
-	if ($horaire_actif == 'oui') {
-		$c = array("'OR'",
-			array("'>='", "'$table.date_debut'", "sql_quote(date('Y-m-d H:i:s'))"),
-			array("'>='", "'$table.date_fin'", "sql_quote(date('Y-m-d H:i:s'))"));
+	$id_table = $boucle->id_table;
+
+	$_dateref = time_calculer_date_reference($idb, $boucles, $crit);
+	$_date = "$id_table.date_debut";
+	$op = $crit->not ? '<=' : '>';
+
+	// si on ne sait pas si les heures comptent, on utilise toute la journee.
+	// sinon, on s'appuie sur le champ 'horaire=oui'
+	// pour savoir si les dates utilisent les heures ou pas.
+	$where_futur_sans_heure =
+		array("'$op'", "'$_date'", "sql_quote(date('Y-m-d 23:59:59', strtotime($_dateref)))");
+
+	if (array_key_exists('horaire', $boucle->show['field'])) {
+		$where =
+			array("'OR'",
+				array("'AND'",
+					array("'='", "'horaire'", "sql_quote('oui')"),
+					array("'$op'","'$_date'","sql_quote($_dateref)")
+				),
+				array("'AND'",
+					array("'!='", "'horaire'", "sql_quote('oui')"),
+					$where_futur_sans_heure
+				)
+			);
+	} else {
+		$where = $where_futur_sans_heure;
 	}
-	else {
-		$c = array("'OR'",
-			array("'>='", "'$table.date_debut'", "sql_quote(date('Y-m-d'))"),
-			array("'>='", "'$table.date_fin'", "sql_quote(date('Y-m-d'))"));
-	}
-	
-	// Inversion de la condition ?
-	$c = ($not ? array("'NOT'", $c) : $c);
-	
-	$boucle->where[] = $c;
+
+	$boucle->where[] = $where;
 }
 
 /**
@@ -175,4 +190,21 @@ function critere_simplecalperiode_dist($idb, &$boucles, $crit) {
     $boucle->where[] = $c;
 }
 
-?>
+/**
+ * Fonction privee pour mutualiser de code des criteres_evenement_*
+ * Retourne le code php pour obtenir la date de reference de comparaison
+ * des evenements a trouver
+ *
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
+ *
+ * @return string code PHP concernant la date.
+**/
+function time_calculer_date_reference($idb, &$boucles, $crit) {
+	if (isset($crit->param[0])) {
+		return calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	} else {
+		return "date('Y-m-d H:i:00')";
+	}
+}
