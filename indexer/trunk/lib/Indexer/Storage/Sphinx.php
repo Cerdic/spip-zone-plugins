@@ -25,6 +25,12 @@ class Sphinx implements StorageInterface {
 				(id,  title, summary, content, date, date_indexation, uri, properties, signature)
 			VALUES
 		";
+		
+		
+		if (defined('_INDEXER_READONLY') && _INDEXER_READONLY) {
+			spip_log($query, 'indexer');
+			return true;
+		}
 
 		// insertion document par document
 		// il semble que sphinxql n'aime pas plusieurs lignes d'un coup.
