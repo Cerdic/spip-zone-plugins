@@ -16,6 +16,6 @@
 
 	<necessite nom="saisies" compatibilite="[1.19.0;]" />
     
-    <menu nom="wp_import" titre="wp_import:migration" parent="menu_administration" icone="images/wp_import-16.png" />
+    <menu nom="wp_import" titre="wp_import:migration" parent="menu_developpement" icone="images/wp_import-16.png" />
 
 </paquet>
