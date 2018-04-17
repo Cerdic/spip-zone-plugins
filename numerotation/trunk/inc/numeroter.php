@@ -41,15 +41,28 @@ function numero_info_objet($objet,$id_objet=0){
 
 		// champ parent
 		$parent = "";
-		if (isset($desc['field']['id_rubrique']))
+		
+		// Si l'objet a un champ id_rubrique, on pré-remplit le champ du parent
+		if (isset($desc['field']['id_rubrique'])) {
 			$parent = "id_rubrique";
-		switch($type){
-			case 'rubrique': $parent = "id_parent";break;
-			case 'mot': $parent = "id_groupe";break;
-			case 'groupe_mots': $parent = "";break;
-			// type non prevu ici (et pas range dans une rubrique) : on ne fait rien
+		}
+		
+		// Suivant le type d'objet, on gère des cas particuliers
+		switch($type) {
+			case 'rubrique':
+				$parent = "id_parent";
+				break;
+			case 'mot':
+				$parent = "id_groupe";
+				break;
+			case 'groupe_mots':
+				$parent = "";
+				break;
+			// Type non prevu ici (et pas rangé dans une rubrique) : on ne fait rien, on quitte
 			default :
-				if (!$parent) false;
+				if (!$parent) {
+					return false;
+				}
 				break;
 		}
 
