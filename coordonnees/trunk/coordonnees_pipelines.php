@@ -27,8 +27,9 @@ function coordonnees_ieconfig_metas($table) {
 	return $table;
 }
 /**
- * Ajout des coordonnées (adresses, mails, numéros)
+ * Affichage des coordonnées (adresses, mails, numéros)
  * sur la page de visualisation des objets associes
+ * Surcharge possible avec 'prive/squelettes/contenu/coordonnees_fiche_nom-objet-associe.html'
 **/
 function coordonnees_afficher_fiche_objet($flux) {
 	$texte = '';
@@ -48,9 +49,14 @@ function coordonnees_afficher_fiche_objet($flux) {
 		}
 	}
 
+	$coordonnees_fiche_objet = 'prive/squelettes/contenu/coordonnees_fiche_'.$type;
+	if(!find_in_path($coordonnees_fiche_objet.'.html')){
+			$coordonnees_fiche_objet = 'prive/squelettes/contenu/coordonnees_fiche_objet';
+	}
+
 	if (!$e['edition'] and ($editable or $has)) {
 		$texte .= recuperer_fond(
-			'prive/squelettes/contenu/coordonnees_fiche_objet',
+			$coordonnees_fiche_objet,
 			array(
 			'objet' => $type,
 			'id_objet' => intval($flux['args']['id']),
