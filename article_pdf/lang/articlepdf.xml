@@ -18,4 +18,7 @@
 	<langue code="oc_ni_mis" url="https://trad.spip.net/tradlang_module/articlepdf?lang_cible=oc_ni_mis" total="12" traduits="6" relire="0" modifs="0" nouveaux="6" pourcent="50.00">
 		<traducteur nom="sylvain" lien="https://trad.spip.net/auteur/sylvain" />
 	</langue>
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/articlepdf?lang_cible=pt_br" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
+	</langue>
 </traduction>
