@@ -1,0 +1,43 @@
+<BOUCLE_afficher_contenu(EVENEMENTS){tout}{id_evenement=#ENV{id}}{statut?}>
+	<div class="champ contenu_notes">
+		<div class="label"><:simplecal:date_de_debut:> :</div>
+		<div dir="#LANG_DIR">
+			[(#CONFIG{simplecal_horaire}|=={oui}|et{#HORAIRE|=={oui}}|oui)[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN})]]
+			[(#CONFIG{simplecal_horaire}|=={oui}|et{#HORAIRE|=={non}}|oui)[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,non})]]
+			[(#CONFIG{simplecal_horaire}|=={oui}|non)[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,non})]]
+		</div>
+	</div>
+	
+	<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+		<div class="label"><:simplecal:descriptif:> : </div>
+		<div dir="#LANG_DIR" class="#EDIT{descriptif} descriptif">[(#DESCRIPTIF|image_reduire{500,0})]</div>
+	</div>
+	
+	<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+		<div class="label"><:simplecal:texte:></div>
+		<div dir="#LANG_DIR" class="#EDIT{texte} texte">[(#TEXTE|image_reduire{500,0})]</div>
+	</div>
+
+	[<div class="champ contenu_notes">
+		<div dir="#LANG_DIR" class="#EDIT{lieu} lieu"><b>(#LIEU)</b></div>
+		[<div dir="#LANG_DIR" class="#EDIT{lieu} lieu">(#ADRESSE)</div>]
+	</div>]
+	
+	[(#TYPE|oui)
+	<div class="champ contenu_notes">
+		<div class="label"><:simplecal:texte_issu_autre_objet:></div>
+		<div dir="#LANG_DIR" class="#EDIT{texte} texte">
+			&rarr;<:simplecal:reference_objet:> 
+			<a href="?exec=#TYPE&id_#TYPE=#ID_OBJET">#TYPE#ID_OBJET</a>
+		</div>
+	</div>]
+	
+	[(#LIEN_URL|oui)
+	<div class="champ contenu_lien_titre">
+		<div class="label"><:lien_voir_en_ligne:></div>
+		<div dir="#LANG_DIR" class="lien_titre">
+			<a href="#LIEN_URL">[(#LIEN_TITRE*|strlen|?{#LIEN_TITRE,#LIEN_URL})]</a>
+		</div>
+	</div>]
+	
+</BOUCLE_afficher_contenu>

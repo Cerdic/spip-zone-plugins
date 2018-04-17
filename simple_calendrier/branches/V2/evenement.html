@@ -1,0 +1,92 @@
+<BOUCLE_principale(EVENEMENTS) {id_evenement}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#TITRE|couper{80}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<link rel="canonical" href="(#URL_EVENEMENT|url_absolue)" />]
+<INCLURE{fond=inclure/head} />
+</head>
+
+<body class="pas_surlignable page_evenement">
+<div class="page">
+
+	<INCLURE{fond=inclure/header} />
+	<INCLURE{fond=inclure/nav,env} />
+	#FORMULAIRE_RECHERCHE
+	
+	<div class="main">
+		[(#REM) Contenu principal : corps de l'evenement ]
+		<div class="wrapper">
+		<div class="content" id="content">
+			<p class="arbo"><a href="#URL_SITE_SPIP/" ><:accueil_site:></a><BOUCLE_ariane(RUBRIQUES){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
+
+			<div class="cartouche">
+				<h1 class="#EDIT{titre}">[(#LOGO_EVENEMENT_RUBRIQUE|image_reduire{40,*}) ]#TITRE</h1>
+				<p class="info-publi">
+					<abbr class="published">[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN})]</abbr>
+					[ &mdash; (#LIEU)]
+				</p>
+			</div>
+			
+			[<div class="#EDIT{texte} texte">(#TEXTE)</div>]
+			[(#LIEN_URL|oui)
+				<hr /><p class="hyperlien"><:voir_en_ligne:> : <a href='#LIEN_URL'>[(#LIEN_TITRE|?{#LIEN_TITRE,#LIEN_URL})]</a></p>
+			]
+			
+			[<div class="notes"><hr />(#NOTES)</div>]
+			
+			[(#REM) Forum de l'evenement
+			NB : pour desactiver les forums de l'evenement, supprimez simplement les lignes ci-dessous ]
+			<a href="#forum" name="forum" id="forum"></a>
+			<INCLURE{fond=inc-forum-evenement, id_evenement} />
+			[<h2><:forum:form_pet_message_commentaire:></h2>
+			(#FORMULAIRE_FORUM)]
+				
+		</div><!--.content-->
+		</div><!--.wrapper-->
+	
+		<div class="aside">
+	
+			<INCLURE{fond=inclure/navsub, id_rubrique} />
+	
+			[(#REM) Evenements dans la meme rubrique ]
+			<B_evenements>
+			<div class="menu menu_breves">
+				<h2><:simplecal:autres_evenements:></h2>
+				#SIMPLE_CALENDRIER
+				<ul>
+					<BOUCLE_evenements(EVENEMENTS) {id_rubrique} {a_venir} {par date_debut} {0,10}>
+					<li>[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN}) &ndash; ]<a href="#URL_EVENEMENT"[ class="(#EXPOSE)"]>#TITRE</a></li>
+					</BOUCLE_evenements>
+				</ul>
+			</div>
+			</B_evenements>
+	
+			[(#REM) Menu de navigation mots-cles ]
+			<B_mots>
+			<div class="menu">
+				<h2><:mots_clefs:></h2>
+				<ul>
+				<BOUCLE_mots(MOTS) {id_evenement} {par titre}>
+					<li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
+				</BOUCLE_mots>
+				</ul>
+			</div>
+			</B_mots>
+			
+		</div><!--.aside-->
+	</div><!--.main-->
+
+	<INCLURE{fond=inclure/footer,self=#SELF} />
+
+</div><!--.page-->
+</body>
+</html>
+</BOUCLE_principale>[(#INCLURE{fond=404, erreur=<:aucun_evenement:>})]
+<//B_principale>
