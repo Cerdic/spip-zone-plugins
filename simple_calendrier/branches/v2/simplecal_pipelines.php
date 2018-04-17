@@ -194,6 +194,17 @@ function simplecal_affiche_gauche($flux) {
 			$flux['data'] .= $portlet;
 		}
 	}
+
+	// On se trouve dans une rubrique
+	if ($exec == 'rubrique'){
+		$id_rubrique = $flux['args']['id_rubrique'];
+		$contexte = array(
+			'id_rubrique' => $flux['args']['id_rubrique'],
+			'mode' => 'avenir'
+		);
+		$nav_evenements = recuperer_fond('prive/squelettes/navigation/evenements', $contexte);
+		$flux['data'] .= $nav_evenements;
+	}
 	
 	return $flux;
 }

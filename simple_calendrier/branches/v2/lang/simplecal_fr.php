@@ -144,7 +144,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_texte_2possibilites' => 'Texte : spécifique (2ème possibilité)',
 	'info_titre' => 'Titre',
 	'info_tous_evenements_en_redaction' => 'Tous les évènements en cours de rédaction',
-	'info_tous_evenements_presents' => 'Tous les évènements publiés dans cette rubrique',
+	'info_tous_evenements_presents' => 'Tous les évènements à venir publiés dans cette rubrique',
 	'info_tous_evenements_refuses' => 'Tous les évènements refusés',
 	'item_mots_cles_association_evenements' => 'aux évènements',
 

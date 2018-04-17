@@ -17,17 +17,23 @@
 	#FORMULAIRE_DATER{evenement,#ID_EVENEMENT}
 </div>
 
+<!--affiche_milieu-->
+
 <div class="ajax">
 	#FORMULAIRE_EDITER_LIENS{auteurs,evenement,#ID_EVENEMENT}
 </div>
 
 <div id="wysiwyg">
-	<INCLURE{fond=prive/objets/contenu/evenement,id=#ID_EVENEMENT} />
+	<INCLURE{fond=prive/objets/contenu/evenement,id=#ID_EVENEMENT,id_evenement=#ID_EVENEMENT,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
 </div>
+
+<div class="nettoyeur"></div>
 
 #PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,evenement,id,#ID_EVENEMENT},data,'<div class="nettoyeur"></div>'}}
 
 #BOITE_FERMER
+
+
 [(#EVAL{_AJAX}|oui)
 <script type="text/javascript">if (window.jQuery)
 jQuery(function(){jQuery('#navigation>div').ajaxReload({args:{exec:'evenement'}});})

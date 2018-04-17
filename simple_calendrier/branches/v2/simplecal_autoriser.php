@@ -126,4 +126,30 @@ function autoriser_evenement_modifier($faire, $type, $id, $qui, $opt) {
 	return $autorise;
 }
 
+/**
+ * Autorisation de créer un événement dans une rubrique
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_rubrique_creerevenementdans_dist($faire, $type, $id, $qui, $opt) {
+	return ($id and autoriser('voir', 'rubrique', $id) and autoriser('creer', 'evenement', $id));
+}
+
+/* Compatibilité avec le plugin LIM : restriction par rubrique */
+if (!function_exists('autoriser_rubrique_creerevenementdans') AND test_plugin_actif('lim')) {
+	function autoriser_rubrique_creerevenementdans($faire, $type, $id, $qui, $opt) {
+		$quelles_rubriques = lire_config('lim_rubriques/evenement');
+		is_null($quelles_rubriques) ? $lim_rub = true : $lim_rub = !in_array($id,$quelles_rubriques);
+		
+		return
+			$lim_rub
+			AND autoriser_rubrique_creerevenementdans_dist($faire, $type, $id, $qui, $opt);
+	}
+}
+
 ?>
