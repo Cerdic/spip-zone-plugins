@@ -27,11 +27,14 @@ function produits_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['produits'] = 'produits';
 
 	// Champs date sur les tables
-	$interface['table_date']['produits'] = 'date';
+	$interfaces['table_date']['produits'] = 'date';
 
 	// Déclaration du titre
-	$interface['table_titre']['produits'] = 'titre, "" as lang';
+	$interfaces['table_titre']['produits'] = 'titre, "" as lang';
 
+	// pour pouvoir faire une boucle par id_groupe de mot clé
+	$interfaces['exceptions_des_jointures']['spip_produits']['id_groupe'] = array('spip_mots', 'id_groupe');
+	
 	return $interfaces;
 }
 
