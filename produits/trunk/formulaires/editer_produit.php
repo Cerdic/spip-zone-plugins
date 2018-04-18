@@ -192,9 +192,6 @@ function formulaires_editer_produit_charger($id_produit = 'new', $id_rubrique = 
 
 	$contexte = formulaires_editer_objet_charger('produit', $id_produit, $id_rubrique, $lier_trad = 0, $retour, '');
 
-	// Typecaster les nombres pour éviter des notices
-	$contexte['prix_ht'] = floatval($contexte['prix_ht']);
-
 	//Si on a déjà le $id_produit il faut afficher sa rubrique!
 	if ($id_produit > 0) {
 		$id_rubrique=sql_getfetsel('id_rubrique', 'spip_produits', 'id_produit='.sql_quote($id_produit));
