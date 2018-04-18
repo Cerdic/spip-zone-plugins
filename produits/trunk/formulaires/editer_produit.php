@@ -192,6 +192,9 @@ function formulaires_editer_produit_charger($id_produit = 'new', $id_rubrique = 
 
 	$contexte = formulaires_editer_objet_charger('produit', $id_produit, $id_rubrique, $lier_trad = 0, $retour, '');
 
+	// Typecaster les nombres pour éviter des notices
+	$contexte['prix_ht'] = floatval($contexte['prix_ht']);
+
 	//Si on a déjà le $id_produit il faut afficher sa rubrique!
 	if ($id_produit > 0) {
 		$id_rubrique=sql_getfetsel('id_rubrique', 'spip_produits', 'id_produit='.sql_quote($id_produit));
@@ -199,13 +202,13 @@ function formulaires_editer_produit_charger($id_produit = 'new', $id_rubrique = 
 	$contexte['parent'] = 'rubrique|'.($contexte['id_rubrique']?$contexte['id_rubrique']:$id_rubrique);
 
 	//Calculer le prix TTC selon le contexte
-	$taxe = $contexte['taxe'] ? $contexte['taxe'] : lire_config('produits/taxe', 0);
+	$taxe = floatval($contexte['taxe'] ? $contexte['taxe'] : lire_config('produits/taxe', 0));
 	if (strlen($contexte['taxe'])) {
 		$contexte['taxe'] = 100 * $contexte['taxe'];
 	}
 	$contexte['_taxe_defaut'] = 100 * lire_config('produits/taxe', 0);
 
-	$precision_ttc = lire_config('produits/precision_ttc', 2);
+	$precision_ttc = intval(lire_config('produits/precision_ttc', 2));
 	$contexte['prix_ht'] = floatval($contexte['prix_ht']);
 	$contexte['prix_ttc'] = round($contexte['prix_ht'] * (1+$taxe), $precision_ttc);
 
