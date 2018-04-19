@@ -5,7 +5,8 @@ if (!defined("_ECRIRE_INC_VERSION"))
 	// Définition des champs pour le détail du formulaire promotion du plugin promotions (https://github.com/abelass/promotions)
 function promotions_reservation_multiple_simple_dist($flux = '') {
 	return array(
-		'nom' => _T('reservations_multiples:nom_reservation_multiple_simple')
+		'nom' => _T('reservations_multiples:nom_reservation_multiple_simple'),
+		'plugins_applicables' => 'reservation_evenement',
 	);
 }
 
