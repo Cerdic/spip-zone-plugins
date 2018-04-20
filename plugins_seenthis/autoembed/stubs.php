@@ -43,7 +43,7 @@ $AutoEmbed_stubs = array(
     'embed-width' => '480',
     'embed-height' => '270',
     'image-src' => 'https://img.youtube.com/vi/$2/0.jpg',
-    'iframe-player' => 'https://www.youtube.com/embed/$2',
+    'iframe-player' => 'https://www.youtube.com/embed/$2?autoplay=1',
   ),
   array(
     'title' => 'YouTube',
@@ -53,7 +53,7 @@ $AutoEmbed_stubs = array(
     'embed-width' => '480',
     'embed-height' => '270',
     'image-src' => 'http://img.youtube.com/vi/$2/0.jpg',
-    'iframe-player' => 'https://www.youtube.com/embed/$2',
+    'iframe-player' => 'https://www.youtube.com/embed/$2?autoplay=1',
   ),
   array(
     'title' => 'YouTube (Playlists)',

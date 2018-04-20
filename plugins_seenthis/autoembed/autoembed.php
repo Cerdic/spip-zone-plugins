@@ -175,6 +175,11 @@ function embed_url($url) {
 				$vignette = $AE->getImageURL();
 				
 				$source = $AE->getStub("title");
+				
+				if ($source == "YouTube") {
+					$embed = rawurlencode($embed);
+					$embed = "<div onclick=\"this.innerHTML = (decodeURIComponent('$embed'));\" style='width: ".$w."px; height: ".$h."px; background: url($vignette) center center; cursor: pointer;'></div>"; 
+				}
 								
 				if ($source == "Twitpic" OR $source == "500px") {
 					$embed = "<a href='$url'><img src='$vignette' alt='' style='max-width:200px; max-height: 200px;' /></a>";
