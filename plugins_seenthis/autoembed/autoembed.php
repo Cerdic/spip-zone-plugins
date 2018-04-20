@@ -178,7 +178,7 @@ function embed_url($url) {
 				
 				if ($source == "YouTube") {
 					$embed = rawurlencode($embed);
-					$embed = "<div onclick=\"this.innerHTML = (decodeURIComponent('$embed'));\" style='width: ".$w."px; height: ".$h."px; background: url($vignette) center center; cursor: pointer;'></div>"; 
+					$embed = "<div onclick=\"this.innerHTML = (decodeURIComponent('$embed'));\" style='position: relative; width:100%; height:0; padding-bottom:56.3636363636%; background: url($vignette) center center; cursor: pointer;'></div>"; 
 				}
 								
 				if ($source == "Twitpic" OR $source == "500px") {
