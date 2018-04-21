@@ -5,11 +5,11 @@
 	<form method='post' action='#ENV{action}'>
 		<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
+		<h3>Vider les tables</h3>
 		<div>
 			[(#GENERER_SAISIES{#ENV{mes_saisies}})]
 		</div>
-
-		<p class='boutons'><input type='submit' class='submit' value='<:wp_import:bouton_importer:>' /></p>
+		<p class='boutons'><input type='submit' class='submit' value='<:wp_import:bouton_vider:>' /></p>
 		</div>
 	</form>
 </div>
