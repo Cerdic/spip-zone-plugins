@@ -8,10 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'articles_explication' => 'Les articles sont en général : les Posts (articles de blog, des fois utilisé comment actus), les Pages, et enfin les Topics c.a.d. les sujets de forum. Pour ce dernier cas, si le script trouve des Replys, ils seront automatiquement rattachés à l’article correspondant',
+	'articles_explication' => 'Les articles sont en général : les Posts (articles de blog, des fois utilisé comment actus), les Pages, et enfin les Topics c.a.d. les sujets de forum. Pour ce dernier cas, si le script trouve des Replys, ils seront automatiquement rattachés à l’article correspondant',
 	'articles_label' => 'Importer les articles ? ',
 	'auteurs_explication' => 'Importer les auteurs ',
-	'auteurs_label' => 'Importer les auteurs  ?',
+	'auteurs_label' => 'Importer les auteurs ?',
 
 	// B
 	'bouton_importer' => 'Importer',
@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'id_parent_label' => 'N° rubrique',
 
 	// M
-	'menage_explication' => 'Remettre à zéro la base de données : vider les tables auteurs, rubriques, articles, documents, forum et mot-clés. ATTENTION Ne pas cocher en prod ;) ',
+	'menage_explication' => 'Remettre à zéro la base de données : vider les tables auteurs, rubriques, articles, documents, forum et mot-clés. ATTENTION Ne pas cocher en prod ;) ',
 	'menage_label' => 'Ménage',
 	'migration' => 'Migration depuis Wordpress',
 	'migration2' => 'Migration de Wordpress vers SPIP',
@@ -50,5 +50,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'rubriques_explication' => 'Attention, la logique [category WP = rubrique SPIP] n’est pas toujours vraie. C’est fonction de comment sont utilisées les category dans WP. A utiliser donc en connaissance de cause.',
-	'rubriques_label' => 'Importer les rubriques ?'
+	'rubriques_label' => 'Importer les rubriques ?'
 );
