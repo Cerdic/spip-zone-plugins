@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.10;3.2.*]"
 	logo="images/logo_saisie_liste_48.png"
-  documentation="https://zone.spip.org/trac/spip-zone/browser/_plugins_/saisie_liste/trunk/README.md"
+	documentation="https://zone.spip.org/trac/spip-zone/browser/_plugins_/saisie_liste/trunk/README.md"
 	demonstration="?exec=exemples_saisie_liste"
 >
 
