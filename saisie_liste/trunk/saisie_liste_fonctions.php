@@ -155,8 +155,21 @@ function charger_valeurs($tableau_saisie, $valeurs, $index_objet) {
 function renommer_saisies($tableau_saisie, $index_objet, $nom_objet) {
 
 	$renommer = function ($saisie) use ($index_objet, $nom_objet) {
+		$nom = $saisie['options']['nom'];
+
+		// Si le nom contient des [], il faut les sortir des crochets qu'on met
+		// autour du nom :
+		//   blabla					=> [blabla]
+		//   bla[bli][blou] => [bla][bli][blou]
+		$pos = strpos($nom, '[');
+		if ($pos === false) {
+			$suffixe_nom = "[$nom]";
+		} else {
+			$suffixe_nom = sprintf('[%s]%s', substr($nom, 0, $pos), substr($nom, $pos));
+		}
+
 		$saisie['options']['nom'] =
-			sprintf('%s[%s][%s]', $nom_objet, $index_objet, $saisie['options']['nom']);
+			sprintf('%s[%s]%s', $nom_objet, $index_objet, $suffixe_nom);
 		return $saisie;
 	};
 
