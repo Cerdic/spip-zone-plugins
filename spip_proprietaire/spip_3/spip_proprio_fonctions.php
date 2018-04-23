@@ -376,6 +376,7 @@ function spip_proprio_image_alpha($img, $alpha = '', $src = false) {
 	include_spip('inc/filtres_images');
 	$image = _image_valeurs_trans($img, 'one', 'png');
 //var_export($image);
+	include_spip('filtres/images_transforme');
 	$img = image_alpha($img, $alpha);
 	if ($src) {
 		return(extraire_attribut($img, 'src'));
