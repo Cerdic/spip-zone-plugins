@@ -45,7 +45,7 @@ Afficher des stats dans l'admin avec des boucles data :
 
 [(#REM) Si la période n'est pas précisée parcourir les fichiers de visites en cours dans tmp/visites et enregistrer les données dans des tableaux (articles lus, sites affluents, et nombre de visites sur les articles) ]
 
-<BOUCLE_visites(DATA){source ls,#EVAL{_DIR_TMP . 'visites'}/*}{si #ENV{jour}|non}> <BOUCLE_visite(DATA){source file,#FILE}> <BOUCLE_pages_vues(DATA){source table,#VALEUR|unserialize}>
+<BOUCLE_visites(DATA){source ls,#EVAL{_DIR_TMP . 'visites'}/*}{si #ENV{jour}|non}> [(#REM)<hr>#FILE<hr>] <BOUCLE_visite(DATA){source file,#FILE}> <BOUCLE_pages_vues(DATA){source table,#VALEUR|unserialize}>[(#REM)#CLE -> [(#VALEUR|print)]<br>]
 #SET{type,#CLE|explode{"	"}|table_valeur{0}}
 #SET{id,#CLE|explode{"	"}|table_valeur{1}}
 #SET{referrer,#CLE|explode{"	"}|table_valeur{2}}
@@ -203,12 +203,12 @@ Afficher des stats dans l'admin avec des boucles data :
 	display:inline;
 }
 ul.valeur{
-	max-height:500px;
+	max-height:15em;
 	overflow:auto;
 	text-align:left;
 }
 .stats_visites .valeur{
-	max-height:250px;
+	max-height:40em;
 }
 .stats_contenu p{
 	margin:0 0 20px 0;
@@ -275,13 +275,12 @@ ul.valeur{
 
 [(#REM)
 [<pre><code>(#GET{articles_lus}|print_r{1})</code></pre>]
-[<pre style="height:300px;overflow:auto"><code>(#GET{sites_affluents}|print_r{1})</code></pre>]
 ]
 
 #SET{reg_moteurs,"Google|Duckduckgo|Yahoo|Baidu|Bing|Yandex"}
 #SET{reg_reseaux_sociaux,"Facebook|^t$"}
 #SET{reg_emails,"outlook"}
-#SET{reg_site,#URL_SITE_SPIP|replace{^https?://}|replace{\..*$}}
+#SET{reg_site,#URL_SITE_SPIP|match{#GET{reg_domaine},"i",3}}
 [(#SET{reg_domaines_connus,[(#GET{reg_moteurs})]|[(#GET{reg_reseaux_sociaux})]|[(#GET{reg_site})]})]
 
 <BOUCLE_total_visites_domaine(DATA){source table,#GET{sites_affluents}}>
@@ -327,12 +326,14 @@ ul.valeur{
 					<li>#CLE : [(#VALEUR|number_format{0,""," "})] visites <small>([(#VALEUR|div{#GET{visites}}|mult{100}|floor)%])</small></li>
 					</BOUCLE_domaines_connus>
 				</ul>
-				#SET{reg_recherche,#URL_PAGE{recherche}|replace{^https?://}|preg_quote|concat{&(amp;)?recherche=}}
-				<BOUCLE_recherches(DATA){source table,#GET{sites_affluents}}{cle==#GET{reg_site}}{!par visites}>
-					<h3>#VISITES terme[(#VISITES|>{1}|?{s})] recherché[(#VISITES|>{1}|?{s})]</h3>
-					<ul style="margin-bottom:10px;height:10em;overflow:auto;">
-					<BOUCLE_recherche(DATA){source table,#REFERERS|array_unique}{pagination 50}>
-						<li>[<a href="#VALEUR">(#VALEUR|replace{^https?://}|replace{#GET{reg_recherche}}|urldecode)]</a></li>
+				#SET{reg_recherche,^.*recherche=}
+				<BOUCLE_recherches(DATA){source table,#GET{sites_affluents}}{cle==#GET{reg_site}}>
+					<B_recherche>
+					#ANCRE_PAGINATION
+					<h3>[(#VISITES||number_format{0,""," "})] terme[(#VISITES|>{1}|?{s})] recherché[(#VISITES|>{1}|?{s})]</h3>
+					<ul style="margin-bottom:10px;height:30em;overflow:auto;">
+					<BOUCLE_recherche(DATA){source termes_recherches,#REFERERS|array_unique}{pagination 50}>
+						<li>[<a href="#URL_PAGE{recherche,recherche=#CLE}">(#CLE|urldecode)]</a> <small>(#VALEUR)</small></li>
 					</BOUCLE_recherche>
 					</ul>
 					<p>#PAGINATION</p>
@@ -426,7 +427,7 @@ ul.valeur{
 					Autres affluents
 				</h3>
 				
-				<ul class="valeur">
+				<ul style="max-height:15em;overflow:auto">
 				<BOUCLE_affluents(DATA){source table,#GET{sites_affluents}}{cle!==#GET{reg_domaines_connus}}{!par visites}{pagination 50}>
 				<li>[(#CLE|ucfirst)] <small>([(#VISITES|number_format{0,""," "}) visite[(#VISITES|>{1}|?{s})]])</small></li>
 				</BOUCLE_affluents>
