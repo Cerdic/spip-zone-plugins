@@ -191,6 +191,36 @@ function renommer_saisies($tableau_saisie, $index_objet, $nom_objet) {
 /****************************/
 
 /**
+ * Déterminer si une valeur n'est pas « vide »
+ *
+ * On considère qu'un string vide, ou un tableau dont les valeurs sont toutes
+ * des strings vides sont vides. Tout le reste n'est pas vide.
+ *
+ * @param mixed $valeur : Une valeur dont on teste la non-vacuité
+ * @return bool
+ */
+function est_non_vide($valeur) {
+	$resultat = false;
+
+	if (is_array($valeur)) {
+		foreach ($valeur as $v) {
+			if (est_non_vide($v)) {
+				$resultat = true;
+				break;
+			}
+		}
+	} elseif (is_string($valeur)) {
+		if ($valeur !== '') {
+			$resultat = true;
+		}
+	} else {
+		$resultat = true;
+	}
+
+	return $resultat;
+}
+
+/**
  * filtrer_valeurs - filtre un tableau de valeurs pour retirer les infos
  *     qui n'importent que pour le fonctionnement interne de la saisie
  *     liste. Retire aussi les valeurs vides.
@@ -202,26 +232,10 @@ function renommer_saisies($tableau_saisie, $index_objet, $nom_objet) {
  */
 function filtrer_valeurs($valeurs) {
 
-	$valeurs_filtrees = array();
-
 	unset($valeurs['action']);
 	unset($valeurs['permutations']);
 
-	foreach ($valeurs as $objet) {
-		$objet_est_vide = true;
-		if (is_array($objet)) {
-			foreach ($objet as $valeur) {
-				if ($valeur !== '') {
-					$objet_est_vide = false;
-				}
-			}
-		}
-		if (! $objet_est_vide) {
-			$valeurs_filtrees[] = $objet;
-		}
-	}
-
-	return $valeurs_filtrees;
+	return array_filter($valeurs, 'est_non_vide');
 }
 
 /**
