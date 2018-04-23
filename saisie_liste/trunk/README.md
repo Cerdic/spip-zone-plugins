@@ -121,7 +121,7 @@ interrompre les traitements du formulaire comme dans les exemples
 ci-dessus.
 
 Dans le cas où le formulaire à été posté par un autre submit,
-`saisies_liste_verfier` et `saisies_liste_traiter` retournent
+`saisies_liste_verifier` et `saisies_liste_traiter` retournent
 `FALSE`. On peux alors récupérer les valeurs saisies en appelant :
 
 ```php
