@@ -78,7 +78,7 @@ function noizetier_upgrade($nom_meta_base_version, $version_cible) {
  *
  * @return void
  */
-function noizetier_vider_tables($nom_meta_version_base) {
+function noizetier_vider_tables($nom_meta_base_version) {
 
 	// On efface les tables du plugin
 	sql_drop_table('spip_noizetier_pages');
@@ -86,7 +86,7 @@ function noizetier_vider_tables($nom_meta_version_base) {
 	sql_drop_table('spip_noisettes');
 
 	// On efface la version enregistrée du schéma des données du plugin
-	effacer_meta($nom_meta_version_base);
+	effacer_meta($nom_meta_base_version);
 	// On efface la configuration du plugin
 	effacer_meta('noizetier');
 }
@@ -159,7 +159,7 @@ function maj_060($config_defaut) {
 	if ($noisettes) {
 		include_spip('ncore/noizetier');
 		foreach ($noisettes as $_cle => $_noisette) {
-			// C'est le plugin noiZetier
+			// C'est le plugin noizetier
 			$noisettes[$_cle]['plugin'] = 'noizetier';
 			// On calcule le conteneur au format tableau et on appelle la fonction de service de construction
 			// de l'id du conteneur
