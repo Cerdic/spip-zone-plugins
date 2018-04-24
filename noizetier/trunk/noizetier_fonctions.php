@@ -205,6 +205,9 @@ function noizetier_bloc_defaut() {
  * @api
  * @filtre
  *
+ * @param string $bloc
+ * @param string $information
+ *
  * @return array|string
  */
 function noizetier_bloc_informer($bloc = '', $information = '') {
@@ -218,7 +221,6 @@ function noizetier_bloc_informer($bloc = '', $information = '') {
 		$identifiants_blocs = $bloc ? array($bloc) : noizetier_bloc_defaut();
 
 		foreach ($identifiants_blocs as $_bloc) {
-			$description = array();
 			if ($fichier = find_in_path("${_bloc}/bloc.yaml")) {
 				// Il y a un fichier YAML de configuration dans le répertoire du bloc
 				include_spip('inc/yaml');
@@ -431,6 +433,7 @@ function noizetier_page_charger($recharger = false) {
 					// Ce peut être en particulier le cas où une page HTML sans XML n'est plus détectée car le
 					// paramètre _NOIZETIER_LISTER_PAGES_SANS_XML a été positionné de true à false.
 					// => il faut donc ne rien faire pour laisser la page dans les obsolètes
+					continue;
 				}
 			}
 		}
@@ -674,16 +677,15 @@ function noizetier_page_repertoire() {
  * @api
  * @filtre
  *
- * @param string $objet
- * 		Type d'objet ou chaine vide.
+ * @param string $type_objet
  * @param string $id_objet
- * 		Id de l'objet ou 0.
+ *        Id de l'objet ou 0.
  * @param string $information
- * 		Champ précis à renvoyer ou chaine vide pour renvoyer toutes les champs de l'objet.
+ *        Champ précis à renvoyer ou chaine vide pour renvoyer toutes les champs de l'objet.
  *
  * @return array|string
- * 		Si le type et l'id du contenu sont fournis, on renvoie la description de la page de ce contenu.
- * 		Sinon, on renvoie le tableau des descriptions des pages de tous les contenus indexés par [type_objet][id_objet].
+ *        Si le type et l'id du contenu sont fournis, on renvoie la description de la page de ce contenu.
+ *        Sinon, on renvoie le tableau des descriptions des pages de tous les contenus indexés par [type_objet][id_objet].
  */
 function noizetier_objet_lire($type_objet, $id_objet, $information = '') {
 
@@ -746,10 +748,8 @@ function noizetier_objet_lire($type_objet, $id_objet, $information = '') {
  * @api
  * @filtre
  *
- * @param string $objet
- * 		Type d'objet ou chaine vide.
- * @param string $id_objet
- * 		Id de l'objet ou 0.
+ * @param array $filtres
+ * 		Liste des champs sur lesquels appliquer les filtres des objets.
  *
  * @return array|string
  * 		Si le type et l'id du contenu sont fournis, on renvoie la description de la page de ce contenu.

@@ -21,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param array  $types_noisette
+ * @param array  $types_noisettes
  *        Tableau associatif à 3 entrées fournissant les descriptions des types de noisettes nouveaux, obsolètes
  *        et modifiés:
  *        `a_effacer` : liste des identifiants de type de noisette devenus obsolètes.
@@ -123,11 +123,11 @@ function noizetier_type_noisette_completer($plugin, $description) {
  *        Tableau de la description du type de noisette. Les champs textuels et les champs de type tableau sérialisé
  *        sont retournés en l'état.
  */
-function noizetier_type_noisette_decrire($plugin, $noisette) {
+function noizetier_type_noisette_decrire($plugin, $type_noisette) {
 
 	// Chargement de toute la configuration de la noisette en base de données.
 	// Les données sont renvoyées brutes sans traitement sur les textes ni les tableaux sérialisés.
-	$where = array('plugin=' . sql_quote($plugin), 'type_noisette=' . sql_quote($noisette));
+	$where = array('plugin=' . sql_quote($plugin), 'type_noisette=' . sql_quote($type_noisette));
 	$description = sql_fetsel('*', 'spip_types_noisettes', $where);
 
 	return $description;
