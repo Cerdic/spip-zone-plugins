@@ -87,6 +87,10 @@ function action_remplir_panier_dist($arg=null) {
 			}
 		} // Sinon on crée le lien
 		else {
+			sql_delete(
+				'spip_paniers_liens',
+				'id_panier = ' . intval($id_panier) . ' and objet = ' . sql_quote($objet) . ' and id_objet = ' . intval($id_objet) . ' and options = ' . sql_quote($options)
+			);
 			$id_panier_lien = sql_insertq(
 				'spip_paniers_liens',
 				array(
