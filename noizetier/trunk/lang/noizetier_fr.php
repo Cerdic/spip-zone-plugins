@@ -67,6 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'formulaire_ajouter_noisette' => 'Ajouter une noisette',
+	'formulaire_ajouter_noisette_conteneur' => 'Ajouter une noisette à cette noisette conteneur',
 	'formulaire_blocs_exclus' => 'Blocs à exclure',
 	'formulaire_composition' => 'Identifiant de composition',
 	'formulaire_composition_erreur' => 'Requête non aboutie pour la composition',

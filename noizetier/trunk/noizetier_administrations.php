@@ -123,8 +123,11 @@ function maj_060($config_defaut) {
 	//    en compte la valeur configurée par défaut (configuration du noizetier).
 	// -- Ajout de la colonne 'plugin' qui vaut 'noizetier' pour ce plugin.
 	// -- Ajout de la colonne 'id_conteneur'.
+	// -- Ajout de la colonne 'est_conteneur' toujours à la valeur 'non' car il n'existe pas de noisette de ce type
+	//    dans les versions précédentes du plugin.
 	sql_alter("TABLE spip_noisettes ADD plugin varchar(30) DEFAULT '' NOT NULL AFTER id_noisette");
 	sql_alter("TABLE spip_noisettes ADD id_conteneur varchar(255) DEFAULT '' NOT NULL AFTER plugin");
+	sql_alter("TABLE spip_noisettes ADD est_conteneur varchar(3) DEFAULT 'non' NOT NULL AFTER type_noisette");
 	sql_alter("TABLE spip_noisettes ADD balise varchar(6) DEFAULT 'defaut' NOT NULL AFTER parametres");
 	// -- Changement du nom du champ 'rang' en 'rang_noisette'
 	sql_alter("TABLE spip_noisettes CHANGE rang rang_noisette smallint DEFAULT 1 NOT NULL");
@@ -148,7 +151,8 @@ function maj_060($config_defaut) {
 	sql_alter("TABLE spip_noisettes ADD INDEX plugin (plugin)");
 	sql_alter("TABLE spip_noisettes ADD INDEX id_conteneur (id_conteneur)");
 	sql_alter("TABLE spip_noisettes ADD INDEX rang_noisette (rang_noisette)");
-	// -- Remplissage des nouvelles colonnes plugin avec la valeur 'noizetier' et id_conteneur.
+	// -- Remplissage de la nouvelle colonne plugin avec la valeur 'noizetier'
+	//    et de la colonne id_conteneur à partir des autres colonnes existantes.
 	$select = array('id_noisette', 'type', 'composition', 'objet', 'id_objet', 'bloc');
 	$from = 'spip_noisettes';
 	$noisettes = sql_allfetsel($select, $from);
