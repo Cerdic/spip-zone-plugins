@@ -2,7 +2,7 @@
 /**
  * Ce fichier contient l'API N-Core de gestion des conteneurs.
  *
- * @package SPIP\NCORE\API\CONTENEUR
+ * @package SPIP\NCORE\CONTENEUR\API
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;

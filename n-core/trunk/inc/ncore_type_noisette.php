@@ -2,7 +2,7 @@
 /**
  * Ce fichier contient l'API N-Core de gestion des types de noisette, c'est-à-dire les squelettes et leur YAML.
  *
- * @package SPIP\NCORE\API\TYPE_NOISETTE
+ * @package SPIP\NCORE\TYPE_NOISETTE\API
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -38,7 +38,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return bool
  *        `false` si une erreur s'est produite, `true` sinon.
  */
-function type_noisette_charger($plugin, $dossier = 'noisettes/', $recharger = false, $stockage = '') {
+function type_noisette_charger($plugin, $recharger = false, $stockage = '') {
 
 	// Retour de la fonction
 	$retour = true;
@@ -46,13 +46,16 @@ function type_noisette_charger($plugin, $dossier = 'noisettes/', $recharger = fa
 	// Initialiser le contexte de rechargement
 	// TODO : voir si on ajoute un var_mode=recalcul_noisettes ?
 
+	// On charge l'API de stockge de N-Core.
+	// Ce sont ces fonctions qui aiguillent ou pas vers une éventuelle fonction spécifique de stockage.
+	include_spip("ncore/ncore");
+
+	// On récupère la configuration du dossier relatif où chercher les types de noisettes à charger.
+	$dossier = ncore_type_noisette_initialiser_dossier($plugin);
+
 	// On recherche les types de noisette directement par leur fichier YAML de configuration car il est
 	// obligatoire. La recherche s'effectue dans le path en utilisant le dossier relatif fourni.
 	if ($fichiers = find_all_in_path($dossier, '.+[.]yaml$')) {
-		// On charge l'API de stockge de N-Core.
-		// Ce sont ces fonctions qui aiguillent ou pas vers une éventuelle fonction spécifique de stockage.
-		include_spip("ncore/ncore");
-
 		// Initialisation des tableaux de types de noisette.
 		$types_noisette_a_ajouter = $types_noisette_a_changer = $types_noisette_a_effacer = array();
 
@@ -82,6 +85,7 @@ function type_noisette_charger($plugin, $dossier = 'noisettes/', $recharger = fa
 				'description'   => '',
 				'icon'          => 'noisette-24.png',
 				'necessite'     => array(),
+				'conteneur'     => 'non',
 				'contexte'      => array(),
 				'ajax'          => 'defaut',
 				'inclusion'     => 'statique',
@@ -130,7 +134,14 @@ function type_noisette_charger($plugin, $dossier = 'noisettes/', $recharger = fa
 					$description['signature'] = $md5;
 					// Complétude de la description avec les valeurs par défaut
 					$description = array_merge($description_defaut, $description);
-					// Sérialisation des champs necessite, contexte et parametres qui sont des tableaux
+					// Traitement spécifique d'un type de noisette conteneur : son contexte est toujours env et
+					// l'ajax et l'inclusion dynamique ne sont pas autorisés.
+					if ($description['conteneur'] == 'oui') {
+						$description['contexte'] = array('env');
+						$description['ajax'] = 'non';
+						$description['inclusion'] = 'statique';
+					}
+					// Sérialisation des champs 'necessite', 'contexte' et 'parametres' qui sont des tableaux
 					$description['necessite'] = serialize($description['necessite']);
 					$description['contexte'] = serialize($description['contexte']);
 					$description['parametres'] = serialize($description['parametres']);

@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Détermine si le type de noisette spécifié doit être inclus en AJAX ou pas. Cette fonction gère un cache
  * des indicateurs ajax.
  *
- * @package SPIP\NCORE\API\TYPE_NOISETTE
+ * @package SPIP\NCORE\TYPE_NOISETTE\API
  *
  * @api
  * @filtre
@@ -83,7 +83,7 @@ function type_noisette_ajaxifier($plugin, $type_noisette, $stockage = '') {
  * Détermine si la noisette spécifiée doit être incluse dynamiquement ou pas. Cette fonction gère un cache
  * des indicateurs d'inclusion dynamique.
  *
- * @package SPIP\NCORE\API\TYPE_NOISETTE
+ * @package SPIP\NCORE\TYPE_NOISETTE\API
  *
  * @api
  * @filtre
@@ -148,7 +148,7 @@ function type_noisette_dynamiser($plugin, $type_noisette, $stockage = '') {
  * Renvoie le contexte de la noisette sous la forme d'un tableau éventuellement vide. Cette fonction gère un cache
  * des contextes génériques des types de noisette disponibles.
  *
- * @package SPIP\NCORE\API\NOISETTE
+ * @package SPIP\NCORE\NOISETTE\API
  *
  * @api
  * @filtre

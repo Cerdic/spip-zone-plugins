@@ -3,7 +3,7 @@
  * Ce fichier contient l'API N-Core de gestion des noisettes, c'est-à-dire les instances paramétrées
  * de types de noisette affectées à un conteneur.
  *
- * @package SPIP\NCORE\API\NOISETTE
+ * @package SPIP\NCORE\NOISETTE\API
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -74,6 +74,7 @@ function noisette_ajouter($plugin, $type_noisette, $conteneur, $rang = 0, $stock
 			'conteneur'     => serialize($conteneur),
 			'id_conteneur'  => ncore_conteneur_identifier($plugin, $conteneur, $stockage),
 			'rang_noisette' => intval($rang),
+			'est_conteneur' => type_noisette_lire($plugin, $type_noisette, 'est_conteneur', false, $stockage),
 			'parametres'    => serialize($parametres),
 			'balise'        => 'defaut',
 			'css'           => ''

@@ -2,7 +2,7 @@
 /**
  * Ce fichier contient les fonctions de gestion des caches utilisés par N-Core.
  *
- * @package SPIP\NCORE\API\CACHE
+ * @package SPIP\NCORE\CACHE\API
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;

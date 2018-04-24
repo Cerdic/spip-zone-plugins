@@ -24,7 +24,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * Le service N-Core stocke les descriptions dans un cache et les signatures dans un autre.
  *
- * @package SPIP\NCORE\SERVICE\TYPE_NOISETTE
+ * @package SPIP\NCORE\TYPE_NOISETTE\SERVICE
  *
  * @uses ncore_chercher_service()
  * @uses cache_lire()
@@ -119,7 +119,7 @@ function ncore_type_noisette_stocker($plugin, $types_noisette, $recharger, $stoc
  *
  * Le plugin N-Core ne complète pas les types de noisette.
  *
- * @package SPIP\NCORE\SERVICE\TYPE_NOISETTE
+ * @package SPIP\NCORE\TYPE_NOISETTE\SERVICE
  *
  * @uses ncore_chercher_service()
  *
@@ -159,7 +159,7 @@ function ncore_type_noisette_completer($plugin, $description, $stockage = '') {
  *
  * Le service N-Core lit la description du type de noisette concerné dans le cache des descriptions.
  *
- * @package SPIP\NCORE\SERVICE\TYPE_NOISETTE
+ * @package SPIP\NCORE\TYPE_NOISETTE\SERVICE
  *
  * @uses ncore_chercher_service()
  * @uses cache_lire()
@@ -209,7 +209,7 @@ function ncore_type_noisette_decrire($plugin, $type_noisette, $stockage = '') {
  * Renvoie l'information brute demandée pour l'ensemble des types de noisette utilisés par le plugin appelant
  * ou toute les descriptions si aucune information n'est explicitement demandée.
  *
- * @package SPIP\NCORE\SERVICE\TYPE_NOISETTE
+ * @package SPIP\NCORE\TYPE_NOISETTE\SERVICE
  *
  * @uses ncore_chercher_service()
  * @uses cache_lire()
@@ -267,7 +267,7 @@ function ncore_type_noisette_lister($plugin, $information = '', $stockage = '') 
  *
  * Le service N-Core considère que toute noisette est par défaut insérée en ajax.
  *
- * @package SPIP\NCORE\SERVICE\TYPE_NOISETTE
+ * @package SPIP\NCORE\TYPE_NOISETTE\SERVICE
  *
  * @uses ncore_chercher_service()
  *
@@ -298,6 +298,43 @@ function ncore_type_noisette_initialiser_ajax($plugin) {
 	return $defaut_ajax;
 }
 
+/**
+ * Renvoie la configuration par défaut du dossier relatif où trouver les types de noisettes.
+ * Cette information est utilisée a minima au chargement des types de noisettes disponibles.
+ *
+ * Le service N-Core considère que par défaut le dossier relatif des types de noisette est 'noisettes/'.
+ *
+ * @package SPIP\NCORE\SERVICE\TYPE_NOISETTE
+ *
+ * @uses ncore_chercher_service()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ *
+ * @return string
+ * 		Chemin relatif du dossier où chercher les types de noisette.
+ */
+function ncore_type_noisette_initialiser_dossier($plugin) {
+
+	// On cherche le service de stockage à utiliser selon la logique suivante :
+	// - si le service de stockage est non vide on l'utilise en considérant que la fonction existe forcément;
+	// - sinon, on utilise la fonction du plugin appelant si elle existe;
+	// - et sinon, on utilise la fonction de N-Core.
+	include_spip('inc/ncore_utils');
+	if ($configurer = ncore_chercher_service($plugin, 'type_noisette_initialiser_dossier', '')) {
+		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
+		// On autorise la fonction du plugin à retourner autre chose que true ou false si tant est que l'on puisse
+		// en déduire un booléen (par exemple, 'on' et '' comme le retourne une case à cocher du plugin Saisies).
+		$dossier = $configurer($plugin);
+	} else {
+		// Le service ne propose pas de fonction propre, on utilise celle de N-Core.
+		$dossier = 'noisettes/';
+	}
+
+	return $dossier;
+}
+
 
 // -----------------------------------------------------------------------
 // ----------------------------- NOISETTES -------------------------------
@@ -307,7 +344,7 @@ function ncore_type_noisette_initialiser_ajax($plugin) {
  * Stocke la description d'une nouvelle noisette et calcule son identifiant unique, ou met à jour les paramètres
  * d'affichage d'une noisette existante.
  *
- * @package SPIP\NCORE\SERVICE\NOISETTE
+ * @package SPIP\NCORE\NOISETTE\SERVICE
  *
  * @uses ncore_chercher_service()
  *
@@ -391,7 +428,7 @@ function ncore_noisette_stocker($plugin, $description, $stockage = '') {
  *
  * Le plugin N-Core ne complète pas les descriptions de noisette.
  *
- * @package SPIP\NCORE\SERVICE\NOISETTE
+ * @package SPIP\NCORE\NOISETTE\SERVICE
  *
  * @uses ncore_chercher_service()
  *
@@ -429,7 +466,7 @@ function ncore_noisette_completer($plugin, $description, $stockage = '') {
 /**
  * Positionne une noisette à un rang différent de celui qu'elle occupe dans le conteneur.
  *
- * @package SPIP\NCORE\SERVICE\NOISETTE
+ * @package SPIP\NCORE\NOISETTE\SERVICE
  *
  * @uses ncore_chercher_service()
  *
@@ -494,7 +531,7 @@ function ncore_noisette_ranger($plugin, $description, $rang_destination, $stocka
 /**
  * Retire, de l'espace de stockage, une noisette donnée de son conteneur.
  *
- * @package SPIP\NCORE\SERVICE\NOISETTE
+ * @package SPIP\NCORE\NOISETTE\SERVICE
  *
  * @uses ncore_chercher_service()
  *
@@ -553,7 +590,7 @@ function ncore_noisette_destocker($plugin, $description, $stockage = '') {
  * Renvoie un champ ou toute la description des noisettes d'un conteneur ou de tous les conteneurs.
  * Le tableau retourné est indexé soit par identifiant de noisette soit par identifiant du conteneur et rang.
  *
- * @package SPIP\NCORE\SERVICE\NOISETTE
+ * @package SPIP\NCORE\NOISETTE\SERVICE
  *
  * @uses ncore_chercher_service()
  * @uses ncore_conteneur_identifier()
@@ -634,7 +671,7 @@ function ncore_noisette_lister($plugin, $conteneur = array(), $information = '',
  * Renvoie la description brute d'une noisette sans traitement typo des champs textuels ni désérialisation
  * des champs de type tableau sérialisé.
  *
- * @package SPIP\NCORE\SERVICE\NOISETTE
+ * @package SPIP\NCORE\NOISETTE\SERVICE
  *
  * @uses ncore_chercher_service()
  *
@@ -720,7 +757,7 @@ function ncore_noisette_decrire($plugin, $noisette, $stockage = '') {
  * Cette fonction est juste un aiguillage vers la fonction éventuelle du plugin utilisateur
  * car N-Core ne fournit pas de calcul par défaut.
  *
- * @package SPIP\NCORE\SERVICE\CONTENEUR
+ * @package SPIP\NCORE\CONTENEUR\SERVICE
  *
  * @uses ncore_chercher_service()
  *
@@ -760,7 +797,7 @@ function ncore_conteneur_identifier($plugin, $conteneur, $stockage) {
 /**
  * Retire, de l'espace de stockage, toutes les noisettes d'un conteneur.
  *
- * @package SPIP\NCORE\SERVICE\CONTENEUR
+ * @package SPIP\NCORE\CONTENEUR\SERVICE
  *
  * @uses ncore_chercher_service()
  * @uses ncore_conteneur_identifier()
