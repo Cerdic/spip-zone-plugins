@@ -126,7 +126,7 @@ function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_t
 // Balise placée dans une boucle DOCUMENTS et appelée dans un modèle <media>
 function balise_MEDIA_AFFICHER_LEGENDE_dist($p) {
 	$conteneur = interprete_argument_balise(1,$p);
-	$p->code = "\$Pile[0]['legende'] || \$Pile[0]['titre'] || \$Pile[0]['descriptif'] || \$Pile[0]['credits'] || \$Pile[0]['args']['type'] || \$Pile[0]['poids'] ? ' ' : ''";
+	$p->code = "!empty(\$Pile[0]['legende']) || !empty(\$Pile[0]['titre']) || !empty(\$Pile[0]['descriptif']) || !empty(\$Pile[0]['credits']) || !empty(\$Pile[0]['args']['type']) || !empty(\$Pile[0]['poids']) ? ' ' : ''";
 	return $p;
 }
 
@@ -253,7 +253,7 @@ function balise_MEDIA_LIEN_dist($p) {
 	if (isset($p->boucles[$p->id_boucle]))
 		$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 	$connect = _q($connect);
-	$p->code = "calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$url_document,\$Pile[0]['args'],\$Pile[0]['lien'],\$Pile[0]['lang'],$connect)";
+	$p->code = "calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$url_document,\$Pile[0]['args'],isset(\$Pile[0]['lien']) ? \$Pile[0]['lien'] : '',\$Pile[0]['lang'],$connect)";
 	return $p;
 }
 
@@ -283,7 +283,7 @@ function calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$url_docume
 	$a .= $l['class'] ? ' class="'.$l['class'].'"' : '';
 	$a .= $l['titre'] ? ' title="'.attribut_html(typo($l['titre'])).'"' : '';
 	$a .= ($l['lang'] && $l['lang']!=$lang) ? ' hreflang="'.$l['lang'].'"' : ''; // Seulement si hreflang diffère de la langue en cours
-	$a .= $l['mime'] ? ' type="'.$l['mime'].'"' : '';
+	$a .= isset($l['mime']) ? ' type="'.$l['mime'].'"' : '';
 	$a .= '>';
 	return $a.$objet.'</a>';
 }
