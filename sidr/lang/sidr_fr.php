@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_apparence' => 'Apparence',
 	'label_choix_skin_dark' => 'Sombre',
 	'label_choix_skin_light' => 'Clair',
+	'label_choix_skin_container' => 'Conteneur sans décoration',
 	'label_selecteur' => 'Source',
 	'label_bouton_sidr' => 'Bouton',
 	'label_skin' => 'Habillage visuel',
