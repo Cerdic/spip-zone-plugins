@@ -62,9 +62,3 @@ function balise_PRIX_OPTION_dist($p) {
 
 	return $p;
 }
-
-// éviter une erreur si le plugin Rang n'est pas activé
-$f = chercher_filtre('info_plugin');
-if(!$f('rang','est_actif')) {
-	function rang_objet_dans_config() { }
-}
