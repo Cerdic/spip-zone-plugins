@@ -400,7 +400,7 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 // (passage par reference pour alleger)
 // https://code.spip.net/@gunzip_page
 function gunzip_page(&$page) {
-	if ($page['gz']) {
+	if (isset($page['gz'])) {
 		$page['texte'] = gzuncompress($page['texte']);
 		$page['gz'] = false; // ne pas gzuncompress deux fois une meme page
 	}
