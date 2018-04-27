@@ -119,7 +119,6 @@ function importer_evenement($objet_evenement,$id_almanach,$id_article,$decalage,
 				"date_creation"=>date('Y-m-d H:i:s')
 		)
 	);
-
 	# création de l'evt
 	autoriser_exception('creer','evenement','');
   $id_evenement= objet_inserer('spip_evenements',$id_article,$champs_sql);
@@ -170,9 +169,13 @@ function evenement_ical_to_sql($objet_evenement,$decalage){
 		  	$dtstart_array = $objet_evenement->getProperty("dtstart", 1, TRUE);
 				list ($date_debut,$start_all_day) = date_ical_to_sql($dtstart_array,$decalage);
 		#les 3 lignes suivantes servent à récupérer la date de fin et à la mettre dans le bon format
-	  		$dtend_array = $objet_evenement->getProperty("dtend", 1, TRUE);
-	   		list ($date_fin,$end_all_day) = date_ical_to_sql($dtend_array,$decalage);
-
+				$dtend_array = $objet_evenement->getProperty("dtend", 1, TRUE);
+				if (is_array($dtend_array)){
+					list ($date_fin,$end_all_day) = date_ical_to_sql($dtend_array,$decalage);
+				} else {
+					$date_fin = $date_debut;
+					$end_all_day = $debut_all_day;
+				}
 			// Est-ce que l'evt dure toute la journée?
 			if ($end_all_day and $start_all_day){
 				$horaire = "non";
