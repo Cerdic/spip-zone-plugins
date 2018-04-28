@@ -1,0 +1,25 @@
+[(#REM) <!--  #COMPILER_NOISETTE
+
+	Compile une liste de noisettes fournies en paramètres de l'inclusion.
+	La valeur par défaut de l'utilisation d'une balise div englobante est donc à gérer par le plugin appelant
+	(constante, configuration...).
+	Les noisettes de type conteneur ne sont pas incluses avec la balise #NOISETTE_COMPILER mais englobent
+	les noisettes qui lui sont rattachées. En effet, on considère qu'une noisette conteneur est toujours limitée
+	à une balise ouvrante/fermante éventuellement stylée.
+
+	@api
+
+    @param string balise
+           Indique si la noisette demande une balise <div> englobante. Prend les valeurs
+           oui, non ou defaut.
+	@param array  css
+	       Classes CSS à rajouter à la balise <div> englobante si besoin.
+	@param string stockage
+           Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
+           ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
+           fournissant le service de stockage souhaité.
+-->]
+#SET{avec_div, #ENV{balise}|=={defaut}|?{oui, #ENV{balise}}}
+[[(#GET{avec_div}|oui)<div class="noisette noisette_#NOISETTE[ (#ENV{css})]">]
+	(#NOISETTE_COMPILER{#ENV{stockage, ''}})
+[(#GET{avec_div}|oui)</div>]]

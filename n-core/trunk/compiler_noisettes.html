@@ -1,8 +1,12 @@
 [(#REM) <!--  #COMPILER_NOISETTES
 
 	Compile une liste de noisettes fournies en paramètres de l'inclusion.
-	Ce fichier est donné à titre d'exemple : la valeur par défaut de l'utilisation d'une balise div englobante
-	est donc à gérer par le plugin appelant (constante, configuration...).
+	La valeur par défaut de l'utilisation d'une balise div englobante est donc à gérer par le plugin appelant
+	(constante, configuration...).
+	Les noisettes de type conteneur ne sont pas incluses avec la balise #NOISETTE_COMPILER mais englobent
+	les noisettes qui lui sont rattachées. En effet, on considère qu'une noisette conteneur est toujours limitée
+	à une balise ouvrante/fermante éventuellement stylée.
+	Pour l'instant un seul niveau de noisette conteneur est pris en compte.
 
 	@api
 
@@ -16,9 +20,28 @@
            ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
            fournissant le service de stockage souhaité.
 -->]
-<BOUCLE_compilation_noisettes(DATA){source table, #ENV{noisettes, #ARRAY}}{plugin}{par rang_noisette}>
-	#SET{avec_div, #VALEUR{balise}|=={defaut}|?{oui, #VALEUR{balise}}}
-	[[(#GET{avec_div}|oui)<div class="noisette noisette_#NOISETTE[ (#VALEUR{css})]">]
-		(#NOISETTE_COMPILER{#ENV{stockage, ''}})
-	[(#GET{avec_div}|oui)</div>]]
+<BOUCLE_compilation_noisettes(DATA) {source table, #ENV{noisettes, #ARRAY}}{plugin}{par rang_noisette}>
+	<BOUCLE_si_conteneur(CONDITION) {si #VALEUR{est_conteneur}|=={oui}}>
+		#SET{conteneur, #ARRAY{type_noisette, #TYPE_NOISETTE, id_noisette, #ID_NOISETTE}}
+		<B_compilation_conteneur>
+			#SET{balise, #VALEUR{conteneur_balise}|sinon{div}}
+			[<(#GET{balise})[ class="(#VALEUR{conteneur_css})"]>]
+		<BOUCLE_compilation_conteneur(DATA)
+			{source table, #NOISETTE_REPERTORIER{#ENV{plugin}, #GET{conteneur}, #ENV{stockage}}}
+			{par rang_noisette}>
+			<INCLURE{fond=inclure/inc-compiler_noisette,
+				balise=#VALEUR{balise},
+				css=#VALEUR{css},
+				stockage=#ENV{stockage},
+				env} />
+		</BOUCLE_compilation_conteneur>
+			[</(#GET{balise})>]
+		</B_compilation_conteneur>
+	</BOUCLE_si_conteneur>
+		<INCLURE{fond=inclure/inc-compiler_noisette,
+			balise=#VALEUR{balise},
+			css=#VALEUR{css},
+			stockage=#ENV{stockage},
+			env} />
+	<//B_si_conteneur>
 </BOUCLE_compilation_noisettes>

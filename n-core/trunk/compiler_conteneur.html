@@ -1,0 +1,23 @@
+[(#REM) <!--  #COMPILER_CONTENEUR
+
+	Compile les noisettes d'un conteneur fourni en paramètre de l'inclusion.
+	Utilise ensuite l'inclusion générique compiler_noisette.html.
+
+	@api
+
+    @param string plugin
+           Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+           un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+	@param array  conteneur
+	       Tableau associatif représentant le conteneur à compiler.
+	@param string stockage
+           Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
+           ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
+           fournissant le service de stockage souhaité.
+-->]
+#SET{noisettes, #NOISETTE_REPERTORIER{#ENV{plugin}, #ENV{conteneur}, #ENV{stockage}}}
+<INCLURE{fond=compiler_noisettes,
+	plugin=#ENV{plugin},
+	noisettes=#GET{noisettes},
+	stockage=#ENV{stockage},
+	env} />
