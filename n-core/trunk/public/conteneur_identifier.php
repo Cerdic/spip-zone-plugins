@@ -5,7 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function balise_NOISETTE_REPERTORIER_dist($p) {
+function balise_CONTENEUR_IDENTIFIER_dist($p) {
 
 	// Récupération des arguments.
 	// -- la balise utilise toujours le rangement par rang au sein du conteneur
@@ -18,15 +18,15 @@ function balise_NOISETTE_REPERTORIER_dist($p) {
 	$stockage = isset($stockage) ? str_replace('\'', '"', $stockage) : '""';
 
 	// On appelle la fonction de calcul de la liste des noisette
-	$p->code = "calculer_liste_noisettes($plugin, $conteneur, $stockage)";
+	$p->code = "calculer_identifiant_conteneur($plugin, $conteneur, $stockage)";
 
 	return $p;
 }
 
-function calculer_liste_noisettes($plugin, $conteneur, $stockage) {
+function calculer_identifiant_conteneur($plugin, $conteneur, $stockage) {
 
-	include_spip('inc/ncore_noisette');
-	$noisettes = noisette_repertorier($plugin, $conteneur, 'rang_noisette', array(), $stockage);
+	include_spip('ncore/ncore');
+	$identifiant = ncore_conteneur_identifier($plugin, $conteneur, $stockage);
 
-	return $noisettes;
+	return $identifiant;
 }

@@ -224,6 +224,7 @@ function noisette_contextualiser($plugin, $noisette, $type_noisette, $environnem
 	return $contexte;
 }
 
-// Balise #NOISETTE_COMPILER
+// Balises
 include_spip('public/noisette_compiler');
 include_spip('public/noisette_repertorier');
+include_spip('public/conteneur_identifier');

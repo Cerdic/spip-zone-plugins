@@ -9,7 +9,10 @@ function balise_NOISETTE_COMPILER_dist($p) {
 
 	// On passe dans le contexte toujours les deux identifiants d'une noisette, à savoir, l'id_noisette et le couple
 	// (id_conteneur, rang).
-	$id_noisette = champ_sql('id_noisette', $p);
+	$id_noisette = interprete_argument_balise(1, $p);
+	$id_noisette = isset($id_noisette) ? str_replace('\'', '"', $id_noisette) : '0';
+
+//	$id_noisette = champ_sql('id_noisette', $p);
 	$id_conteneur = champ_sql('id_conteneur', $p);
 	$rang_noisette = champ_sql('rang_noisette', $p);
 	$noisette = "array(
@@ -24,7 +27,7 @@ function balise_NOISETTE_COMPILER_dist($p) {
 	$plugin = champ_sql('plugin', $p);
 
 	// A-t-on demandé un stockage spécifique en paramètre de la balise ?
-	$stockage = interprete_argument_balise(1, $p);
+	$stockage = interprete_argument_balise(2, $p);
 	$stockage = isset($stockage) ? str_replace('\'', '"', $stockage) : '""';
 
 	// On récupère l'environnement

@@ -22,7 +22,7 @@
 -->]
 <BOUCLE_compilation_noisettes(DATA) {source table, #ENV{noisettes, #ARRAY}}{plugin}{par rang_noisette}>
 	<BOUCLE_si_conteneur(CONDITION) {si #VALEUR{est_conteneur}|=={oui}}>
-		#SET{conteneur, #ARRAY{type_noisette, #TYPE_NOISETTE, id_noisette, #ID_NOISETTE}}
+		#SET{conteneur, #ARRAY{type_noisette, #VALEUR{type_noisette}, id_noisette, #VALEUR{id_noisette}}}
 		<B_compilation_conteneur>
 			#SET{balise, #VALEUR{conteneur_balise}|sinon{div}}
 			[<(#GET{balise})[ class="(#VALEUR{conteneur_css})"]>]
@@ -30,6 +30,7 @@
 			{source table, #NOISETTE_REPERTORIER{#ENV{plugin}, #GET{conteneur}, #ENV{stockage}}}
 			{par rang_noisette}>
 			<INCLURE{fond=inclure/inc-compiler_noisette,
+				id_noisette=#VALEUR{id_noisette},
 				balise=#VALEUR{balise},
 				css=#VALEUR{css},
 				stockage=#ENV{stockage},
@@ -39,6 +40,7 @@
 		</B_compilation_conteneur>
 	</BOUCLE_si_conteneur>
 		<INCLURE{fond=inclure/inc-compiler_noisette,
+			id_noisette=#VALEUR{id_noisette},
 			balise=#VALEUR{balise},
 			css=#VALEUR{css},
 			stockage=#ENV{stockage},

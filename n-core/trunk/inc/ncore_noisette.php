@@ -80,6 +80,12 @@ function noisette_ajouter($plugin, $type_noisette, $conteneur, $rang = 0, $stock
 			'css'           => ''
 		);
 
+		// Mise à jour de la description pour les noisettes conteneur:
+		// -- pas de div englobante ni de CSS
+		if ($description['est_conteneur'] == 'oui') {
+			$description['balise'] = 'non';
+		}
+
 		// Complément à la description par défaut, spécifique au plugin utilisateur, si nécessaire.
 		$description = ncore_noisette_completer($plugin, $description, $stockage);
 
