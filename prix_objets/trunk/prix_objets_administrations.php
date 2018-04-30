@@ -1,21 +1,34 @@
 <?php
 /**
- * Plugin Prix Objets
- * (c) 2012 My Chacra
- * Licence GNU/GPL
+ * Fichier gérant l'installation et désinstallation du plugin Prix Objets
+ *
+ * @plugin     Prix Objets
+ * @copyright  2012 - 2018
+ * @author     Rainer Müller
+ * @licence    GNU/GPL
+ * @package    SPIP\Reservation_evenement\Installation
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
- * Fonction d'installation du plugin et de mise à jour.
+ * Fonction d'installation et de mise à jour du plugin Prix Objets.
+ *
  * Vous pouvez :
+ *
  * - créer la structure SQL,
  * - insérer du pre-contenu,
  * - installer des valeurs de configuration,
  * - mettre à jour la structure SQL
-**/
+ *
+ * @param string $nom_meta_base_version
+ *        	Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * @param string $version_cible
+ *        	Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
+ * @return void
+ *
+ */
 function prix_objets_upgrade($nom_meta_base_version, $version_cible) {
 		include_spip('inc/config');
 
@@ -53,11 +66,18 @@ function prix_objets_upgrade($nom_meta_base_version, $version_cible) {
 
 
 /**
- * Fonction de désinstallation du plugin.
+ * Fonction de désinstallation du plugin Prix Objets.
+ *
  * Vous devez :
+ *
  * - nettoyer toutes les données ajoutées par le plugin et son utilisation
  * - supprimer les tables et les champs créés par le plugin.
-**/
+ *
+ * @param string $nom_meta_base_version
+ *        	Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * @return void
+ *
+ */
 function prix_objets_vider_tables($nom_meta_base_version) {
 
 		sql_drop_table("spip_prix_objets");
@@ -65,4 +85,3 @@ function prix_objets_vider_tables($nom_meta_base_version) {
 	effacer_meta($nom_meta_base_version);
 }
 
-?>

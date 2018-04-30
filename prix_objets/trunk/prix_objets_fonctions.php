@@ -1,4 +1,13 @@
 <?php
+/**
+ * Fonctions utiles au plugin Prix Objets
+ *
+ * @plugin     Prix Objets
+ * @copyright  2012 - 2018
+ * @author     Rainer Müller
+ * @licence    GNU/GPL
+ * @package    SPIP\Promotions_commandes\Fonctions
+ */
 
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION'))
