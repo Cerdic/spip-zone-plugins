@@ -9,23 +9,7 @@
 [(#SET{identifiant,[(#VAL{sel_prix})]})]
 	[(#VAL{e}|debut_cadre{'','',[(#VAL{<:prix_objets:info_prix:>}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})]})]
 
-<B_prix>
-		<div class="liste prix">
-		<ul style="list-style:none;">
-		<BOUCLE_prix(POUR){tableau #ENV{prix_choisis}}>
-			<li>[(#VALEUR|table_valeur{prix_ht}|!=={0.00}|?{
-					#SET{prix,#VALEUR|table_valeur{prix_ht}}
-					#SET{taxes,<:prix_objets:prix_ht:>}
-					,
-					#SET{prix,#VALEUR|table_valeur{prix}}
-					#SET{taxes,<:prix_objets:prix_ttc:>}
-			})]
-				<span>[(#VALEUR{titre})]</span> <span>[(#GET{prix}|filtres_prix_formater{#VALEUR{code_devise}})][ ((#GET{taxes}) [ - <:prix_objets:taxes:> (#VALEUR{taxe}|sinon{#TAXES})%])]</span>&nbsp;<span></span><a class="ajax" href="[(#URL_ACTION_AUTEUR{eliminer_prix,[(#VALEUR|table_valeur{id_prix_objet})],[(#SELF|parametre_url{retour_action,oui})]})]#prix"> <img src="#CHEMIN_IMAGE{supprimer-12.png}" /></a>
-			</li>
-		</BOUCLE_prix>
-		</ul>
-	</div>
-</B_prix>
+<INCLURE {fond=formulaires/inc-prix_affichage,env} />
 
 [(#GET{plie}|debut_block_depliable{#GET{identifiant}})]
 <BOUCLE_test0(CONDITION){si #ENV{devises}|count|>{0}}>
@@ -55,15 +39,15 @@
 					<//B_test>
 				</div>
 			</div>
-				[(#SAISIE{oui_non,taxes_inclus,
-						label=<:prix_objets:taxes_inclus:>})]
-				<div class="editer">
-						<p><:prix_objets:taxes_defaut:> #ENV{taxes}%</p>
-				</div>
-				[(#SAISIE{input,taxe,
-						label=<:prix_objets:taxes_surcharge:>})]
+			[(#SAISIE{oui_non,taxes_inclus,
+					label=<:prix_objets:taxes_inclus:>})]
+			<div class="editer">
+					<p><:prix_objets:taxes_defaut:> #ENV{taxes}%</p>
+			</div>
+			[(#SAISIE{input,taxe,
+					label=<:prix_objets:taxes_surcharge:>})]
 
-
+			#GENERER_SAISIES{#ENV{_saisies_extras}}
 
 			<!--fini champs!-->
 			</div>

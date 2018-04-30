@@ -1,6 +1,9 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION"))
 	return;
+
+include_spip('inc/saisies');
+
 function formulaires_prix_charger_dist($id_objet, $objet = 'article') {
 	include_spip('inc/config');
 
@@ -47,11 +50,24 @@ function formulaires_prix_charger_dist($id_objet, $objet = 'article') {
 	$valeurs['_hidden'] = '<input type="hidden" name="objet" value="' . $objet . '">';
 	$valeurs['_hidden'] .= '<input type="hidden" name="id_objet" value="' . $id_objet . '">';
 	// Si le plugin declinaisons est activé
-	if (test_plugin_actif('declinaisons')) {
+	/*if (test_plugin_actif('declinaisons')) {
 		$valeurs['id_objet_titre'] = '';
 		$valeurs['_hidden'] .= '<input type="hidden" name="id_objet_titre" value="' . $id_objet . '">';
 		$valeurs['id_declinaison'] = '';
+	}*/
+
+	$valeurs['_saisies_extras'] = pipeline(
+		'prix_objet_champs_extras', array(
+			'data' => array(),
+			'args' => array_merge($valeurs, array('id_auteur' => session_get('id_auteur'))),
+		)
+	);
+
+	foreach (saisies_lister_par_nom($valeurs['_saisies_extras']) as $nom => $definition) {
+		$valeurs[$nom] = _request($nom);
 	}
+
+
 	return $valeurs;
 }
 function formulaires_prix_verifier_dist($id_objet, $objet = 'article') {
@@ -75,9 +91,17 @@ function formulaires_prix_traiter_dist($id_objet, $objet = 'article') {
 	// Génération du titre
 	$titre = extraire_multi(supprimer_numero(generer_info_entite($id_objet, $objet, 'titre', '*')));
 
-	$titre_secondaire = extraire_multi(supprimer_numero(generer_info_entite(_request('id_objet_titre'), _request('objet_titre'), 'titre', '*')));
+	$titre_secondaire = extraire_multi(
+		supprimer_numero(
+			generer_info_entite(
+				_request('id_prix_extension_objet'),
+				_request('prix_extension_objet'),
+				'titre', '*'
+				)
+			)
+		);
 
-	if ($titre_secondaire and _request('id_objet_titre'))
+	if ($titre_secondaire and _request('id_prix_extension_objet'))
 		$titre = $titre . ' - ' . $titre_secondaire;
 
 		// On inscrit dans la bd
@@ -91,8 +115,10 @@ function formulaires_prix_traiter_dist($id_objet, $objet = 'article') {
 		'prix_ht' => 0
 	);
 
-	if (_request('id_objet_titre'))
-		$valeurs['id_declinaison'] = _request('id_objet_titre');
+	if (_request('id_prix_extension_objet')) {
+		$valeurs['id_declinaison'] = _request('id_prix_extension_objet');
+	}
+
 
 	if ($ttc = _request('taxes_inclus'))
 		$valeurs['prix'] = $prix;
