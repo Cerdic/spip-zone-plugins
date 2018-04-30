@@ -12,6 +12,14 @@
 if (!defined("_ECRIRE_INC_VERSION"))
 	return;
 
+/**
+ * Ajouter du contenu sur les pages exec/ de SPIP, après le contenu prévu au centre de la page.
+ *
+ * @pipeline affiche_milieu
+ *
+ * @param array $flux
+ * @return array
+ */
 function prix_objets_affiche_milieu($flux) {
 	// affichage du formulaire d'activation désactivation projets
 	include_spip('inc/config');
@@ -55,7 +63,15 @@ function prix_objets_affiche_milieu($flux) {
 	return $flux;
 }
 
-// declare l'object pour le Plugin shop https://github.com/abelass/shop
+
+/**
+ * Declare l'object pour le Plugin shop https://github.com/abelass/shop.
+ *
+ * @pipeline shop_objets
+ *
+ * @param array $flux
+ * @return array
+ */
 function prix_objets_shop_objets($flux) {
 	$flux['data']['prix_objets'] = array(
 		'action' => 'prix_objets',
