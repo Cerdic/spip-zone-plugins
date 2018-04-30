@@ -5,7 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function balise_IDENTITE_($p) {
-    $cfg = $GLOBALS['identite_extra'];
+    $cfg = identite_extra_champs();
 
     $nom = $p->nom_champ;
     $champ = substr(strtolower($nom),9);

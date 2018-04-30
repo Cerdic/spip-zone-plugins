@@ -6,10 +6,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Ajouter des champs supplémentaires sur configurer_identite
- * les champs sont définis dans une globale facilement surchargeable dans le fichier mes_options.php
- *
- * exemple:
- * $GLOBALS['identite_extra'] = array('champs1','champs2','champs3',...)
+ * 
+ * Les champs sont définis dans une fonction extensible par le pipeline "identite_extra_champs"
  *
  * @param array $flux
  * @return array
@@ -19,10 +17,9 @@ function identite_extra_formulaire_fond($flux) {
 	if (
 		$flux['args']['form'] == 'configurer_identite'
 		and ($p = strpos($flux['data'], '<!--extra-->'))
-		and isset($GLOBALS['identite_extra'])
-		and is_array($GLOBALS['identite_extra'])
+		and identite_extra_champs()
 	) {
-		$ajout = recuperer_fond("prive/formulaires/configurer_identite_extra", $flux['args']['contexte']);
+		$ajout = recuperer_fond('prive/formulaires/configurer_identite_extra', $flux['args']['contexte']);
 		$flux['data'] = substr_replace($flux['data'], $ajout, $p, 0);
 	}
 	
@@ -35,8 +32,8 @@ function identite_extra_formulaire_charger($flux) {
 	if ( $flux['args']['form'] == 'configurer_identite' ) {
 		$valeurs = array();
 		
-		foreach ($GLOBALS['identite_extra'] as $k) {
-			$valeurs['identite_extra'][$k] = lire_config('identite_extra/' . $k, '');
+		foreach (identite_extra_champs() as $champ) {
+			$valeurs['identite_extra'][$champ] = lire_config('identite_extra/' . $champ, '');
 		}
 		
 		$flux['data'] = array_merge($flux['data'], $valeurs);
