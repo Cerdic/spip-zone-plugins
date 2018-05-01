@@ -17,9 +17,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 /**
  * Effectuer des traitements juste avant l'envoi des pages publiques.
  *
- * Ajout des metas open graph, dublin core et twitter dans le <head> public.
+ * => Ajout des metas Open Graph, Dublin Core et Twitter dans le <head> public.
  *
- * @Note : on retrouve les informations du contexte au moyen d'un squelette pour pour bénéficier de la mise en cache. Capillotracté mais ça fontionne.
+ * Règles :
+ * On va chercher dans le dossier inclure/metasplus le squelette de la variante spécifique à la page si elle existe, sinon le squelette générique dist.html qui génère automatiquement les métas.
+ *
+ * @Note : on retrouve les informations du contexte de l apage actuelle au moyen d'un squelette pour bénéficier de la mise en cache et éviter des requêtes SQL à chaque hit via decoder_url()
  *
  * @param $flux
  * @return mixed
@@ -27,6 +30,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function metasplus_affichage_final($flux) {
 
 	include_spip('inc/config');
+	include_spip('inc/utils'); // pour self()
 
 	// Tests préliminaires avant d'inclure éventuellement les métas
 	if (!test_espace_prive()
@@ -38,7 +42,8 @@ function metasplus_affichage_final($flux) {
 			or count(lire_config('metasplus')) < 3
 		)
 		// Le contexte est retrouvé
-		and $contexte = recuperer_fond('metasplus_trouver_contexte')
+		and $url = self()
+		and $contexte = recuperer_fond('metasplus_trouver_contexte', array('url' => $url))
 		and is_array($contexte = unserialize($contexte))
 		// La page n'est pas en erreur
 		and empty($contexte['erreur'])
