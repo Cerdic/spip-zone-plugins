@@ -184,25 +184,22 @@ function rang_get_contextes() {
 	if(is_array($contextes)){
 		return $contextes;
 	}
+	include_spip('base/objets_parents');
 	$tables = explode(',', lire_config('rang/rang_objets'));
 	$contextes = array();
+	$tables[] = 'spip_forums';
 	foreach ($tables as $table) {
-		$objet    = table_objet($table);
-		$contextes[] = $objet;
-		// cas objets historiques
-		switch ($objet) {
-			case 'mots':
-				$contextes[] = 'groupe_mots';
-				$contextes[] = 'mots-admin';
-				break;
-			case 'articles':
-				$contextes[] = 'rubrique';
-				break;
+		// le nom de l'objet au pluriel
+		$contextes[] = table_objet($table);
+		// si l'objet a un parent, on ajoute le nom de cet objet
+		$info_parent = type_objet_info_parent(objet_type($table));
+		if (isset($info_parent['type']) && $info_parent['type']) {
+			$contextes[] = $info_parent['type'];
 		}
 	}
 	// vérifier si des plugins déclarent des contextes spécifiques
 	$contextes = pipeline('rang_declarer_contexte',$contextes);
-	
+	debug($contextes);
 	return $contextes;
 }
 
