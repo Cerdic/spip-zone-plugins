@@ -72,6 +72,11 @@ function type_objet_info_enfants($objet) {
 			
 			// On ne va pas refaire les tests des différents cas, on réutilise
 			if ($parent_methodes = type_objet_info_parent($objet_enfant)) {
+				// Les méthode qui sont un simple tableau sont forcées en tableau de tableau,
+				// pour pouvoir les parcourir comme les conditions
+				if (count($parent_methodes) == count($parent_methodes, COUNT_RECURSIVE)) {
+					$parent_methodes = array($parent_methodes);
+				}
 				// On parcourt les différents cas possible, si certains peuvent concerner l'objet demandé
 				foreach ($parent_methodes as $parent_methode) {
 					// Si la méthode qu'on teste n'exclut pas le parent demandé
@@ -114,7 +119,12 @@ function objet_trouver_parent($objet, $id_objet) {
 		$table = table_objet_sql($objet);
 		$cle_objet = id_table_objet($objet);
 		$id_objet = intval($id_objet);
-		
+
+		// Les méthode qui sont un simple tableau sont forcées en tableau de tableau,
+		// pour pouvoir les parcourir comme les conditions
+		if (count($parent_methodes) == count($parent_methodes, COUNT_RECURSIVE)) {
+			$parent_methodes = array($parent_methodes);
+		}
 		// On teste chacun méthode dans l'ordre, et dès qu'on a trouvé un parent on s'arrête
 		foreach ($parent_methodes as $parent_methode) {
 			$where = array("$cle_objet = $id_objet");
