@@ -332,7 +332,7 @@ function filtres_prix_formater($prix, $devise = '') {
 					$devise = $_COOKIE['devise_selectionnee'];
 					$GLOBALS['devise_defaut'] = $devise;
 				}
-			// Sinon on regarde si il ya une devise defaut valable
+		// Sinon on regarde si il ya une devise defaut valable
 		else {
 			$devise = prix_objets_devise_defaut($config);
 		}

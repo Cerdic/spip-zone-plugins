@@ -1,8 +1,12 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION"))
 	return;
+
+include_spip('inc/saisies');
+
 function formulaires_prix_charger_dist($id_objet, $objet = 'article') {
 	include_spip('inc/config');
+	include_spip('inc/prix_objets');
 
 	$devises_dispos = lire_config('prix_objets/devises');
 	$taxes_inclus = lire_config('prix_objets/taxes_inclus');
@@ -23,7 +27,6 @@ function formulaires_prix_charger_dist($id_objet, $objet = 'article') {
 	}
 
 	// établit les devises diponible moins ceux déjà utilisés
-
 	while ($row = sql_fetch($d)) {
 		// $devises_choisis[$row['code_devise']] = $row['code_devise'];
 		$prix_choisis[] = $row;
@@ -47,11 +50,40 @@ function formulaires_prix_charger_dist($id_objet, $objet = 'article') {
 	$valeurs['_hidden'] = '<input type="hidden" name="objet" value="' . $objet . '">';
 	$valeurs['_hidden'] .= '<input type="hidden" name="id_objet" value="' . $id_objet . '">';
 	// Si le plugin declinaisons est activé
-	if (test_plugin_actif('declinaisons')) {
+	/*if (test_plugin_actif('declinaisons')) {
 		$valeurs['id_objet_titre'] = '';
 		$valeurs['_hidden'] .= '<input type="hidden" name="id_objet_titre" value="' . $id_objet . '">';
 		$valeurs['id_declinaison'] = '';
+	}*/
+
+	// Inclus les extensions.
+	$valeurs['_saisies_extras'] = prix_objets_extensions_declaration($valeurs);
+	$extensions = array();
+	foreach (saisies_lister_par_nom($valeurs['_saisies_extras']) as $nom => $definition) {
+		$valeurs[$nom] = _request($nom);
+		if (preg_match('|id_prix_extension_|', $nom)) {
+			$extension = str_replace('id_prix_extension_', '', $nom);
+			$extensions[] = $extension;
+		}
 	}
+
+	// Déclarer les extensions
+	if (count($extensions) > 0) {
+		$saisie = array(
+				array(
+				'saisie' => 'hidden',
+				'options' => array(
+					'nom' => 'extensions',
+					'defaut' => implode(',', $extensions),
+				)
+			)
+		);
+		$valeurs['extensions'] = _request('extensions');
+		$valeurs['_saisies_extras'] = array_merge($valeurs['_saisies_extras'], $saisie);
+	}
+
+
+
 	return $valeurs;
 }
 function formulaires_prix_verifier_dist($id_objet, $objet = 'article') {
@@ -72,27 +104,49 @@ function formulaires_prix_verifier_dist($id_objet, $objet = 'article') {
 function formulaires_prix_traiter_dist($id_objet, $objet = 'article') {
 	$prix = _request('prix');
 	$id_declinaison = _request('id_declinaison');
+	$extensions =  _request('extensions') ? explode(',', _request('extensions')) : array();
+
 	// Génération du titre
 	$titre = extraire_multi(supprimer_numero(generer_info_entite($id_objet, $objet, 'titre', '*')));
 
-	$titre_secondaire = extraire_multi(supprimer_numero(generer_info_entite(_request('id_objet_titre'), _request('objet_titre'), 'titre', '*')));
+	// Le titre secondaire composé des extensions.
+	if (!is_array($extensions)) {
+		$extensions = array(0 => $extensions);
+	}
 
-	if ($titre_secondaire and _request('id_objet_titre'))
+	$titre_secondaire = array();
+	$valeurs = array();
+	foreach($extensions as $extension) {
+		if ($id_prix_extension = _request('id_prix_extension_' . $extension)) {
+			$titre_secondaire[] = extraire_multi(
+					supprimer_numero(
+							generer_info_entite(
+									$id_prix_extension,
+									$extension,
+									'titre', '*'
+									)
+							)
+					);
+			$valeurs['id_' . $extension] = $id_prix_extension;
+		}
+	}
+
+		$titre_secondaire = implode(' / ', $titre_secondaire);
+
+	if ($titre_secondaire)
 		$titre = $titre . ' - ' . $titre_secondaire;
 
-		// On inscrit dans la bd
-	$valeurs = array(
-		'id_objet' => $id_objet,
-		'objet' => $objet,
-		'code_devise' => _request('code_devise'),
-		'titre' => $titre,
-		'taxe' => _request('taxe'),
-		'prix' => 0,
-		'prix_ht' => 0
+	// On inscrit dans la bd
+	$valeurs = array_merge($valeurs, array(
+			'id_objet' => $id_objet,
+			'objet' => $objet,
+			'code_devise' => _request('code_devise'),
+			'titre' => $titre,
+			'taxe' => _request('taxe'),
+			'prix' => 0,
+			'prix_ht' => 0
+		)
 	);
-
-	if (_request('id_objet_titre'))
-		$valeurs['id_declinaison'] = _request('id_objet_titre');
 
 	if ($ttc = _request('taxes_inclus'))
 		$valeurs['prix'] = $prix;
