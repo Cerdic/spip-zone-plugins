@@ -25,6 +25,66 @@ function accesrestreint_securise_squelette($letexte) {
 	return '';
 }
 
+/**
+ * filtre de test générique pour savoir si l'acces à un objet est restreint
+ *
+ * @uses accesrestreint_article_restreint
+ * @uses accesrestreint_rubrique_restreinte
+ * 
+ * @param string $objet
+ * @param int $id_objet
+ * @param int $id_auteur
+ * @return bool
+ */
+function accesrestreint_objet_restreint($id_objet, $objet, $id_auteur = null) {
+
+	// S'il existe une fonction spécifique pour le type d'objet, on l'utilise
+	if ($fonction = "accesrestreint_${objet}_restreint"
+		and function_exists($fonction)
+	) {
+		$restreint = $fonction($id_objet, $id_auteur);
+
+	// Sinon du générique
+	} else {
+
+		include_spip('inc/accesrestreint');
+		include_spip('base/objets');
+		$table_objet_sql = table_objet_sql($objet);
+		$champs = objet_info($objet, 'field');
+
+		// Si l'objet est dans une rubrique, vérifier qu'elle ne soit pas exclue
+		$rubrique_exclue = false;
+		if (isset($champs['id_rubrique'])) {
+			include_spip('public/quete');
+			$objet_lang = quete_parent_lang($table_objet_sql, $id_objet);
+			$rubrique_exclue = @in_array(
+				$objet_lang['id_rubrique'],
+				accesrestreint_liste_rubriques_exclues(!test_espace_prive(), $id_auteur)
+			);
+		}
+
+		// Le test
+		$restreint =
+			$rubrique_exclue
+			or @in_array($id_objet, accesrestreint_liste_objets_exclus($objet, !test_espace_prive(), $id_auteur));
+	}
+
+	// Permettre aux plugins de modifier le résultat
+	$restreint = pipeline(
+		'accesrestreint_objet_restreint',
+		array(
+			'args' => array(
+				'objet'     => $objet,
+				'id_objet'  => $id_objet,
+				'id_auteur' => $id_auteur,
+			),
+			'data' => $restreint,
+		)
+	);
+
+	return $restreint;
+}
+
 
 /**
  * filtre de test pour savoir si l'acces a un article est restreint

@@ -134,8 +134,22 @@ function accesrestreint_rubriques_accessibles_where($primary, $not = 'NOT', $_pu
 	if (!$_publique) {
 		$_publique = '!test_espace_prive()';
 	}
+	$where = "sql_in('$primary', accesrestreint_liste_rubriques_exclues($_publique), '$not')";
 
-	return "sql_in('$primary', accesrestreint_liste_rubriques_exclues($_publique), '$not')";
+	// Permettre aux plugins de modifier la condition
+	$where = pipeline('accesrestreint_objets_accessibles_where',
+		array(
+			'args' => array(
+				'table_objet' => 'rubriques',
+				'primary'   => $primary,
+				'publique' => $_publique,
+				'not'       => $not,
+			),
+			'data' => $where
+		)
+	);
+
+	return $where;
 }
 
 /**
@@ -148,6 +162,20 @@ function accesrestreint_articles_accessibles_where($primary, $_publique = '') {
 	# hack : on utilise zzz pour eviter que l'optimiseur ne confonde avec un morceau de la requete principale
 	$where =  "array('NOT IN','$primary','(SELECT * FROM('.sql_get_select('zzza.id_article','spip_articles as zzza',".accesrestreint_rubriques_accessibles_where('zzza.id_rubrique', '', $_publique).", '', '', '', '',\$connect).') AS subquery)')";
 	$where = "array('AND', $where, ".accesrestreint_objets_accessibles_where('articles', $primary, 'not', $_publique).")";
+
+	// Permettre aux plugins de modifier la condition
+	$where = pipeline('accesrestreint_objets_accessibles_where',
+		array(
+			'args' => array(
+				'table_objet' => 'articles',
+				'primary'     => $primary,
+				'publique'   => $_publique,
+				'not'         => null,
+			),
+			'data' => $where
+		)
+	);
+
 	return $where;
 	#return array('SUBSELECT','id_article','spip_articles',array(".accesrestreint_rubriques_accessibles_where('id_rubrique').")))";
 }
@@ -162,6 +190,20 @@ function accesrestreint_breves_accessibles_where($primary, $_publique = '') {
 	# hack : on utilise zzz pour eviter que l'optimiseur ne confonde avec un morceau de la requete principale
 	$where = "array('NOT IN','$primary','(SELECT * FROM('.sql_get_select('zzzb.id_breve','spip_breves as zzzb',".accesrestreint_rubriques_accessibles_where('zzzb.id_rubrique', '', $_publique).", '', '', '', '',\$connect).') AS subquery)')";
 	$where = "array('AND', $where, ".accesrestreint_objets_accessibles_where('breves', $primary, 'not', $_publique).")";
+
+	// Permettre aux plugins de modifier la condition
+	$where = pipeline('accesrestreint_objets_accessibles_where',
+		array(
+			'args' => array(
+				'table_objet' => 'breves',
+				'primary'     => $primary,
+				'publique'   => $_publique,
+				'not'         => null,
+			),
+			'data' => $where
+		)
+	);
+
 	return $where;
 	#return "array('IN','$primary',array('SUBSELECT','id_breve','spip_breves',array(".accesrestreint_rubriques_accessibles_where('id_rubrique').")))";
 }
@@ -176,6 +218,20 @@ function accesrestreint_syndic_articles_accessibles_where($primary, $_publique =
 	# hack : on utilise zzz pour eviter que l'optimiseur ne confonde avec un morceau de la requete principale
 	$where = "array('NOT IN','$primary','(SELECT * FROM('.sql_get_select('zzzs.id_syndic','spip_syndic as zzzs',".accesrestreint_rubriques_accessibles_where('zzzs.id_rubrique', '', $_publique).", '', '', '', '',\$connect).') AS subquery)')";
 	$where = "array('AND', $where, ".accesrestreint_objets_accessibles_where('syndic', $primary, 'not', $_publique).")";
+
+	// Permettre aux plugins de modifier la condition
+	$where = pipeline('accesrestreint_objets_accessibles_where',
+		array(
+			'args' => array(
+				'table_objet' => 'syndic_articles',
+				'primary'     => $primary,
+				'publique'   => $_publique,
+				'not'         => null,
+			),
+			'data' => $where
+		)
+	);
+
 	return $where;
 	#return "array('IN','$primary',array('SUBSELECT','id_syndic','spip_syndic',array(".accesrestreint_rubriques_accessibles_where('id_rubrique').")))";
 }
@@ -199,6 +255,19 @@ function accesrestreint_forums_accessibles_where($primary, $_publique = '') {
 		.")";
 	$where = "array('OR',$where,sql_in('zzzf.objet',\"'rubrique','article','breve'\",'NOT',\$connect))";
 
+	// Permettre aux plugins de modifier la condition
+	$where = pipeline('accesrestreint_objets_accessibles_where',
+		array(
+			'args' => array(
+				'table_objet' => 'forums',
+				'primary'     => $primary,
+				'publique'   => $_publique,
+				'not'         => null,
+			),
+			'data' => $where
+		)
+	);
+
 	return "array('IN','$primary','(SELECT * FROM('.sql_get_select('zzzf.id_forum','spip_forum as zzzf',array($where),'','','','',\$connect).') AS subquery)')";
 }
 
@@ -208,6 +277,7 @@ function accesrestreint_forums_accessibles_where($primary, $_publique = '') {
  * on ne rend visible que les docs qui sont lies a un article, une breve ou une rubrique visible
  *
  * @param string $primary
+ * @param mixed $_publique
  * @return string
  */
 function accesrestreint_documents_accessibles_where($primary, $_publique = '') {
@@ -222,6 +292,19 @@ function accesrestreint_documents_accessibles_where($primary, $_publique = '') {
 	array('IN','$primary','(SELECT * FROM('.sql_get_select('zzzd.id_document','spip_documents_liens as zzzd',array($where),'','','','',\$connect).') AS subquery)'),
 	array('NOT IN','$primary','(SELECT * FROM('.sql_get_select('zzzd.id_document','spip_documents_liens as zzzd','','','','','',\$connect).') AS subquery)')
 	)";
+
+	// Permettre aux plugins de modifier la condition
+	$where = pipeline('accesrestreint_objets_accessibles_where',
+		array(
+			'args' => array(
+				'table_objet' => 'documents',
+				'primary'     => $primary,
+				'publique'   => $_publique,
+				'not'         => null,
+			),
+			'data' => $where
+		)
+	);
 
 	return $where;
 }

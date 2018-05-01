@@ -1,7 +1,7 @@
 <paquet
 	prefix="accesrestreint"
 	categorie="auteur"
-	version="3.15.12"
+	version="3.15.13"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/zone-32.png"
@@ -39,6 +39,10 @@
 	<pipeline nom="accesrestreint_pre_vue_document" action="" />
 	<!-- Après avoir analysé le doc, et juste avant son affichage -->
 	<pipeline nom="accesrestreint_afficher_document" action="" />
+	<!-- Code de la condition pour filtrer les objets accessibles  -->
+	<pipeline nom="accesrestreint_objets_accessibles_where" action="" />
+	<!-- Test pour savoir si un objet est restreint -->
+	<pipeline nom="accesrestreint_objet_restreint" action="" />
 
 	<menu nom="zones" titre="accesrestreint:icone_menu_config" parent="menu_publication" icone="images/zone-16.png" />
 
