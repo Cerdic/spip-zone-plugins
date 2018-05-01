@@ -43,7 +43,8 @@ function balise_RANG($p) {
  * @return mixed
  */
 function balise_RANG_LISTE_OBJETS($p) {
-	$p->code = "rang_liste_objets()";
+	// utiliser function_exists pour éviter une erreur quand on désactive Rang
+	$p->code = "function_exists('rang_liste_objets')?rang_liste_objets():array()";
 	$p->interdire_scripts = false;
 	return $p;
 }
