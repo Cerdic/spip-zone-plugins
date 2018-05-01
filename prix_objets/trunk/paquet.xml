@@ -15,10 +15,10 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[2.23.3;]" />
+	<necessite nom="saisies" compatibilite="[2.25.1;]" />
 	<necessite nom="prix" compatibilite="[0.1.15;]" />
 
-	<utilise nom="shop" compatibilite="[1.2.0;[" />
+	<utilise nom="shop" compatibilite="[1.2.0;]" />
 
 	<!-- Déclaration de pipelines -->
 	<pipeline nom="prix_objets_extensions" action='' />
