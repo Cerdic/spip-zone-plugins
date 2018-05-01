@@ -187,7 +187,6 @@ function rang_get_contextes() {
 	include_spip('base/objets_parents');
 	$tables = explode(',', lire_config('rang/rang_objets'));
 	$contextes = array();
-	$tables[] = 'spip_forums';
 	foreach ($tables as $table) {
 		// le nom de l'objet au pluriel
 		$contextes[] = table_objet($table);
