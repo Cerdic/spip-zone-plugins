@@ -47,7 +47,7 @@ function action_trier_items_dist() {
 	// reclassement !
 	foreach ($tab as $key => $value) {
 		$rang	= $page + $key + 1; // le classement commence à 1, pas à 0
-		$id		= intval(substr($value, 3));
+		$id		= intval($value);
 		if ($id_parent == 'rien') {
 			$where = "$id_objet=$id";
 		}

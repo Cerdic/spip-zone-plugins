@@ -172,6 +172,41 @@ function rang_get_sources() {
 }
 
 /**
+ * Retourne la listes des pages (exec) sur lesquelles activer Rang.
+ * On prend la liste des objets cochés dans la configuration en considérant que le nom de l'objet et de l'exec sont identiques.
+ * Si ce n'est pas le cas, le pipeline rang_declarer_contexte permet d'ajouter un exec spécifique.
+ * On ajoute aussi les cas particuliers historiques.
+ *
+ * @return array
+ */
+function rang_get_contextes() {
+	static $contextes;
+	if(is_array($contextes)){
+		return $contextes;
+	}
+	$tables = explode(',', lire_config('rang/rang_objets'));
+	$contextes = array();
+	foreach ($tables as $table) {
+		$objet    = table_objet($table);
+		$contextes[] = $objet;
+		// cas objets historiques
+		switch ($objet) {
+			case 'mots':
+				$contextes[] = 'groupe_mots';
+				$contextes[] = 'mots-admin';
+				break;
+			case 'articles':
+				$contextes[] = 'rubrique';
+				break;
+		}
+	}
+	// vérifier si des plugins déclarent des contextes spécifiques
+	$contextes = pipeline('rang_declarer_contexte',$contextes);
+	
+	return $contextes;
+}
+
+/**
  * Calculer le rang pour la nouvelle occurence de l’objet
  * @param string $table
  * @param int $id_objet
