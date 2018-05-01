@@ -199,7 +199,6 @@ function rang_get_contextes() {
 	}
 	// vérifier si des plugins déclarent des contextes spécifiques
 	$contextes = pipeline('rang_declarer_contexte',$contextes);
-	debug($contextes);
 	return $contextes;
 }
 
