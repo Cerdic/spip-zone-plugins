@@ -125,7 +125,8 @@ function noisette_ajouter($plugin, $type_noisette, $conteneur, $rang = 0, $stock
 }
 
 /**
- * Supprime une noisette donnée du conteneur auquel elle est associée.
+ * Supprime une noisette donnée du conteneur auquel elle est associée et, si cette noisette est un conteneur,
+ * le vide de ses noisettes au préalable.
  * La fonction met à jour les rangs des autres noisettes si nécessaire.
  *
  * @api
@@ -172,7 +173,7 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
 		if ($description['est_conteneur'] == 'oui') {
 			// Inutile de redéfinir un conteneur car la description de la noisette contient les deux champs
 			// essentiels, à savoir, type_noisette et id_noisette.
-			conteneur_vider($plugin, $description, $stockage);
+			ncore_conteneur_destocker($plugin, $description, $stockage);
 		}
 
 		// Suppression de la noisette. On passe la description complète ce qui permet à la fonction de

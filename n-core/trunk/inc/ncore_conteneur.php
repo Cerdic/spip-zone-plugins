@@ -37,7 +37,17 @@ function conteneur_vider($plugin, $conteneur, $stockage = '') {
 	include_spip('ncore/ncore');
 
 	if ($conteneur) {
-		// TODO : gérer l'impbrication de noisettes conteneur.
+		// Si le conteneur n'est pas une noisette, on vérifie si il ne contient pas des noisettes conteneur auquel
+		// cas il faudrait les vider préalablement.
+		if (empty($conteneur['id_noisette'])) {
+			// On liste les noisettes du conteneur concerné et on repère les noisettes conteneur.
+			// Chaque noisette conteneur est vidée.
+			foreach (ncore_noisette_lister($plugin, $conteneur, '', 'rang_noisette', $stockage) as $_noisette) {
+				if ($_noisette['est_conteneur'] == 'oui') {
+					ncore_conteneur_destocker($plugin, $_noisette, $stockage);
+				}
+			}
+		}
 		$retour = ncore_conteneur_destocker($plugin, $conteneur, $stockage);
 	}
 

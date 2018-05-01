@@ -831,8 +831,6 @@ function ncore_conteneur_destocker($plugin, $conteneur, $stockage = '') {
 		// Le plugin ne propose pas de fonction propre ou le stockage N-Core est explicitement demandé.
 		// -- N-Core stocke les noisettes dans une meta propre au plugin appelant contenant un tableau au format
 		//    [conteneur][rang] = description
-		// -- $description est soit le tableau descriptif de la noisette, soit le conteneur, et dans ce cas, il faut
-		//    supprimer toutes les noisettes du conteneur.
 		include_spip('inc/config');
 		$meta_noisettes = lire_config("${plugin}_noisettes", array());
 
