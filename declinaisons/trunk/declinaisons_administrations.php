@@ -1,9 +1,14 @@
 <?php
 /**
- * Plugin Déclinaisons Prix
- * (c) 2012 Rainer Müller
- * Licence GNU/GPL
+ * Fichier gérant l'installation et désinstallation du plugin Déclinaisons Prix
+ *
+ * @plugin     Déclinaisons Prix
+ * @copyright  2012 - 2018
+ * @author     Rainer Müller
+ * @licence    GNU/GPL
+ * @package    SPIP\Reservation_evenement\Installation
  */
+
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
