@@ -25,7 +25,7 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/declinaisons.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/declinaisons.php" />
 	<pipeline nom="shop_objets" inclure="declinaisons_pipelines.php" />
-	<pipeline nom="prix_objet_champs_extras" inclure="declinaisons_pipelines.php" />
+	<pipeline nom="prix_objets_extensions" inclure="declinaisons_pipelines.php" />
 
 	<menu nom="declinaisons" titre="declinaison:titre_declinaisons" parent="menu_edition" icone="images/declinaison-16.png" action="declinaisons" />
 	<menu nom="declinaison_creer" titre="declinaison:icone_creer_declinaison" parent="outils_rapides" icone="images/declinaison-new-16.png" action="declinaison_edit" parametres="new=oui" />
