@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 /**
- * Ajoute à un conteneur, à un rang donné ou en dernier rang, une noisette d'un type donné.
+ * Ajoute dans un conteneur, à un rang donné ou en dernier rang, une noisette d'un type donné.
  * La fonction met à jour les rangs des autres noisettes si nécessaire.
  *
  * @api
@@ -81,7 +81,7 @@ function noisette_ajouter($plugin, $type_noisette, $conteneur, $rang = 0, $stock
 		);
 
 		// Mise à jour de la description pour les noisettes conteneur:
-		// -- pas de div englobante ni de CSS
+		// -- pas de div englobante.
 		if ($description['est_conteneur'] == 'oui') {
 			$description['balise'] = 'non';
 		}
@@ -166,6 +166,14 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
 		// Cela permet de conserver le rang et l'id du conteneur indépendamment de l'identifiant
 		// utilisé pour spécifier la noisette.
 		$description = ncore_noisette_decrire($plugin, $noisette, $stockage);
+
+		// Si la noisette est de type conteneur, il faut vider le conteneur des éventuelles noisettes
+		// incluses avant de supprimer la noisette elle-même.
+		if ($description['est_conteneur'] == 'oui') {
+			// Inutile de redéfinir un conteneur car la description de la noisette contient les deux champs
+			// essentiels, à savoir, type_noisette et id_noisette.
+			conteneur_vider($plugin, $description, $stockage);
+		}
 
 		// Suppression de la noisette. On passe la description complète ce qui permet à la fonction de
 		// destockage de choisir la méthode d'identification la plus adaptée.

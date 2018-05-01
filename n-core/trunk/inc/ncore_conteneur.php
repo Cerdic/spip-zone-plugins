@@ -37,6 +37,7 @@ function conteneur_vider($plugin, $conteneur, $stockage = '') {
 	include_spip('ncore/ncore');
 
 	if ($conteneur) {
+		// TODO : gérer l'impbrication de noisettes conteneur.
 		$retour = ncore_conteneur_destocker($plugin, $conteneur, $stockage);
 	}
 
