@@ -21,7 +21,7 @@
 	<utilise nom="shop" compatibilite="[1.2.0;[" />
 
 	<!-- Déclaration de pipelines -->
-	<pipeline nom="prix_objet_champs_extras" action='' />
+	<pipeline nom="prix_objets_extensions" action='' />
 
 	<!-- Appels des pipelines -->
 	<pipeline nom="autoriser" inclure="prix_objets_autorisations.php" />

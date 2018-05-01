@@ -57,7 +57,7 @@ function formulaires_prix_charger_dist($id_objet, $objet = 'article') {
 	}*/
 
 	$valeurs['_saisies_extras'] = pipeline(
-		'prix_objet_champs_extras', array(
+		'prix_objets_extensions', array(
 			'data' => array(),
 			'args' => array_merge($valeurs, array('id_auteur' => session_get('id_auteur'))),
 		)
