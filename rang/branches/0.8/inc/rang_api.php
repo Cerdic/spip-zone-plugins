@@ -196,6 +196,9 @@ function rang_get_contextes() {
 		if (isset($info_parent['type']) && $info_parent['type']) {
 			$contextes[] = $info_parent['type'];
 		}
+		if($table=='spip_mots'){
+			$contextes[] = 'groupe_mots';
+		}
 	}
 	// vérifier si des plugins déclarent des contextes spécifiques
 	$contextes = pipeline('rang_declarer_contexte',$contextes);
