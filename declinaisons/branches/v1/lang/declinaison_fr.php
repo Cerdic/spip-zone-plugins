@@ -25,11 +25,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_declinaison' => 'Créer une déclinaison',
 	'icone_modifier_declinaison' => 'Modifier cette déclinaison',
 	'info_1_declinaison' => 'Une déclinaison',
-	'info_1_prix' => 'Un prix attaché',
 	'info_aucun_declinaison' => 'Aucune déclinaison',
 	'info_declinaisons_auteur' => 'Les déclinaisons de cet auteur',
 	'info_nb_declinaisons' => '@nb@ déclinaisons',
-	'info_nb_prix' => '@nb@ prix attachés',
 
 	// L
 	'label_descriptif' => 'Descriptif',
