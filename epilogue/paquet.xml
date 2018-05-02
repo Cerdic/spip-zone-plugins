@@ -1,0 +1,32 @@
+<paquet
+	prefix="epilogue"
+	categorie="squelette"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.2.0;3.2.*]"
+	logo=""
+	documentation=""
+	schema="1.0.0" 
+>
+	<!--
+		Paquet généré le 2018-05-02 20:27:31
+	-->
+
+	<nom>epilogue</nom>
+	<!-- Squelette basé sur epilogue  -->
+
+	<auteur lien='http://contrib.spip.net/Amauryadon'>Amaury ADON</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="Zcore" compatibilite="[2.3.0;[" />
+	<necessite nom="bootstrap" compatibilite="];[" />
+	<necessite nom="menus" compatibilite="[1.5.3;[" />
+
+
+	<pipeline nom="autoriser" inclure="epilogue_autorisations.php" /> 
+
+	<chemin path="./" />
+	<chemin path="squelettes" type='public'/>
+
+</paquet>
