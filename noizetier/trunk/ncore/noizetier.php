@@ -202,7 +202,7 @@ function noizetier_type_noisette_initialiser_ajax($plugin) {
  * @package SPIP\NOIZETIER\NCORE\NOISETTE
  *
  * @param string $plugin
- *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noizetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param array  $description
  *        Description de la noisette. Soit la description ne contient pas l'id de la noisette et c'est un ajout,
@@ -268,39 +268,51 @@ function noizetier_noisette_completer($plugin, $description) {
 			'bloc'        => ''
 		);
 
-		// On désérialise le conteneur et après on traite les compléments.
+		// On desérialise le conteneur et après on traite les compléments.
 		$conteneur = unserialize($description['conteneur']);
 
-		if (!empty($conteneur['squelette'])) {
-			$squelette = strtolower($conteneur['squelette']);
+		// Détermination du complément en fonction du fait que le conteneur soit une noisette ou pas.
+		if (!empty($conteneur['id_noisette']) and ($id_noisette = intval($conteneur['id_noisette']))) {
+			// -- si le conteneur est une noisette on récupère les informations de son conteneur qui ne l'est forcément
+			//    pas (limitation à 1 niveau d'imbrication de noisettes).
+			$select = array_keys($complement);
+			$where = array('id_noisette=' . $id_noisette);
+			$complement = sql_fetsel($select, 'spip_noisettes', $where);
+		} else {
+			// -- si le conteneur n'est pas une noisette, le complément se déduit du conteneur lui-même.
+			if (!empty($conteneur['squelette'])) {
+				$squelette = strtolower($conteneur['squelette']);
 
-			if (!empty($conteneur['objet']) and !empty($conteneur['id_objet']) and ($id = intval($conteneur['id_objet']))) {
-				// Objet
-				$complement['objet'] = $conteneur['objet'];
-				$complement['id_objet'] = $id;
-				$complement['bloc'] = $conteneur['squelette'];
-			} else {
-				$page = basename($squelette);
-				$identifiants_page = explode('-', $page, 2);
-				if (!empty($identifiants_page[1])) {
-					// Forcément une composition
-					$complement['type'] = $identifiants_page[0];
-					$complement['composition'] = $identifiants_page[1];
+				if (!empty($conteneur['objet']) and !empty($conteneur['id_objet']) and ($id = intval($conteneur['id_objet']))) {
+					// Objet
+					$complement['objet'] = $conteneur['objet'];
+					$complement['id_objet'] = $id;
+					$complement['bloc'] = $conteneur['squelette'];
 				} else {
-					// Page simple
-					$complement['type'] = $identifiants_page[0];
-				}
-				$bloc = dirname($squelette);
-				if ($bloc != '.') {
-					$complement['bloc'] = basename($bloc);
+					$page = basename($squelette);
+					$identifiants_page = explode('-', $page, 2);
+					if (!empty($identifiants_page[1])) {
+						// Forcément une composition
+						$complement['type'] = $identifiants_page[0];
+						$complement['composition'] = $identifiants_page[1];
+					} else {
+						// Page simple
+						$complement['type'] = $identifiants_page[0];
+					}
+					$bloc = dirname($squelette);
+					if ($bloc != '.') {
+						$complement['bloc'] = basename($bloc);
+					}
 				}
 			}
-			$description = array_merge($description, $complement);
-
-			// On supprime l'index 'conteneur' qui n'est pas utile pour le noiZetier qui utilise uniquement les
-			// données de page et d'objet venant d'être ajoutées et l'id du conteneur.
-			unset($description['conteneur']);
 		}
+
+		// Ajout du complément à la description.
+		$description = array_merge($description, $complement);
+
+		// On supprime l'index 'conteneur' qui n'est pas utile pour le noiZetier qui utilise uniquement les
+		// données de page et d'objet venant d'être ajoutées et l'id du conteneur.
+		unset($description['conteneur']);
 	}
 
 	return $description;
@@ -515,14 +527,19 @@ function noizetier_conteneur_identifier($plugin, $conteneur) {
 	$identifiant = '';
 
 	if ($conteneur) {
-		// Le nom du squelette en premier si il existe (normalement toujours).
-		if (!empty($conteneur['squelette'])) {
-			$identifiant .= $conteneur['squelette'];
-		}
+		// Cas d'une noisette conteneur.
+		if (!empty($conteneur['type_noisette']) and intval($conteneur['id_noisette'])) {
+			$identifiant = $conteneur['type_noisette'] . '|noisette|' . $conteneur['id_noisette'];
+		} else {
+			// Le nom du squelette en premier si il existe (normalement toujours).
+			if (!empty($conteneur['squelette'])) {
+				$identifiant .= $conteneur['squelette'];
+			}
 
-		// L'objet et son id si on est en présence d'un objet.
-		if (!empty($conteneur['objet'])	and !empty($conteneur['id_objet']) and intval($conteneur['id_objet'])) {
-			$identifiant .= ($identifiant ? '|' : '') . "{$conteneur['objet']}|{$conteneur['id_objet']}";
+			// L'objet et son id si on est en présence d'un objet.
+			if (!empty($conteneur['objet'])	and !empty($conteneur['id_objet']) and intval($conteneur['id_objet'])) {
+				$identifiant .= ($identifiant ? '|' : '') . "{$conteneur['objet']}|{$conteneur['id_objet']}";
+			}
 		}
 	}
 

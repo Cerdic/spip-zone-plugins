@@ -14,13 +14,15 @@
 			<h4><:noizetier:noisettes_composition{composition=#GET{nom_composition}}:></h4>
 			<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
 		<BOUCLE_noisettes_composition(TYPES_NOISETTES){plugin=noizetier}{type=#GET{type}}{composition=#GET{composition}}{par type_noisette}>
+			[(#ENV{id_noisette}|=={0}|ou{#ENV{id_noisette}|>{0}|et{#CONTENEUR|=={non}}}|oui)
 				<li class="editer item noisette">
-					<INCLURE{fond=formulaires/inclure/inc-input_noisette,
+					<INCLURE{fond=formulaires/inclure/inc-input_type_noisette,
 						type_noisette,
 						nom=#NOM,
 						icon,
 						input_radio} />
 				</li>
+			]
 		</BOUCLE_noisettes_composition>
 			</ul>
 		</div>
@@ -32,13 +34,15 @@
 			<h4><:noizetier:noisettes_page{type=#GET{nom_type}}:></h4>
 			<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
 	<BOUCLE_noisettes_type(TYPES_NOISETTES){plugin=noizetier}{type=#GET{type}}{composition=''}{par type_noisette}>
+			[(#ENV{id_noisette}|=={0}|ou{#ENV{id_noisette}|>{0}|et{#CONTENEUR|=={non}}}|oui)
 				<li class="editer item noisette">
-					<INCLURE{fond=formulaires/inclure/inc-input_noisette,
+					<INCLURE{fond=formulaires/inclure/inc-input_type_noisette,
 						type_noisette,
 						nom=#NOM,
 						icon,
 						input_radio} />
 				</li>
+			]
 	</BOUCLE_noisettes_type>
 			</ul>
 		</div>
@@ -49,13 +53,15 @@
 			<h4><:noizetier:noisettes_toutes_pages:></h4>
 			<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
 	<BOUCLE_noisettes_communes(TYPES_NOISETTES){plugin=noizetier}{type=''}{composition=''}{par type_noisette}>
+			[(#ENV{id_noisette}|=={0}|ou{#ENV{id_noisette}|>{0}|et{#CONTENEUR|=={non}}}|oui)
 				<li class="editer item noisette">
-					<INCLURE{fond=formulaires/inclure/inc-input_noisette,
+					<INCLURE{fond=formulaires/inclure/inc-input_type_noisette,
 						type_noisette,
 						nom=#NOM,
 						icon,
 						input_radio} />
 				</li>
+			]
 	</BOUCLE_noisettes_communes>
 			</ul>
 		</div>

@@ -5,14 +5,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 include_spip('inc/config');
-include_spip('inc/ncore_type_noisette');
+//include_spip('inc/ncore_type_noisette');
 include_spip('inc/ncore_noisette');
-include_spip('ncore/ncore');
-include_spip('ncore/noizetier');
+//include_spip('ncore/ncore');
+//include_spip('ncore/noizetier');
 
 $contexte = array('objet' => 'auteur', 'id' => 12);
 
-foreach (array('noiZetier') as $_plugin) {
+foreach (array('noizetier') as $_plugin) {
 	var_dump("PLUGIN : $_plugin");
 
 	$timestamp_debut = microtime(true);
@@ -37,19 +37,19 @@ foreach (array('noiZetier') as $_plugin) {
 //	$retour = noizetier_noisette_lister($_plugin, $conteneur, 'type_noisette', $cle = 'id_noisette');
 //	var_dump('conteneur info noisette id_noisette', $retour);
 
-	$conteneur = array();
-	$retour = noizetier_noisette_lister($_plugin, $conteneur, '', $cle = 'rang_noisette');
-	var_dump('conteneur tout info rang', $retour);
-	$retour = noizetier_noisette_lister($_plugin, $conteneur, '', $cle = 'id_noisette');
-	var_dump('conteneur tout info id_noisette', $retour);
-	$retour = noizetier_noisette_lister($_plugin, $conteneur, 'type_noisette', $cle = 'rang_noisette');
-	var_dump('conteneur info noisette rang', $retour);
-	$retour = noizetier_noisette_lister($_plugin, $conteneur, 'type_noisette', $cle = 'id_noisette');
-	var_dump('conteneur info noisette id_noisette', $retour);
+//	$conteneur = array();
+//	$retour = noizetier_noisette_lister($_plugin, $conteneur, '', $cle = 'rang_noisette');
+//	var_dump('conteneur tout info rang', $retour);
+//	$retour = noizetier_noisette_lister($_plugin, $conteneur, '', $cle = 'id_noisette');
+//	var_dump('conteneur tout info id_noisette', $retour);
+//	$retour = noizetier_noisette_lister($_plugin, $conteneur, 'type_noisette', $cle = 'rang_noisette');
+//	var_dump('conteneur info noisette rang', $retour);
+//	$retour = noizetier_noisette_lister($_plugin, $conteneur, 'type_noisette', $cle = 'id_noisette');
+//	var_dump('conteneur info noisette id_noisette', $retour);
 
-
-//	$retour = noisette_ajouter($_plugin, 'bloctexte', 'content/article', array());
-//	var_dump($retour);
+	$conteneur = array('type_noisette' => 'conteneur', 'id_noisette' => 8);
+	$retour = noisette_ajouter($_plugin, 'codespip', $conteneur, array());
+	var_dump($retour);
 //	$retour = noisette_ajouter($_plugin, 'codespip', 'content/article', array(), 2);
 //	var_dump($retour);
 //	$retour = noisette_ajouter($_plugin, 'portfolio', 'content/article', array());

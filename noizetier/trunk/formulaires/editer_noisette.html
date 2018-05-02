@@ -16,7 +16,9 @@
 			[(#ENV{_champs}|non)#BOITE_OUVRIR{'','notice'}<:noizetier:formulaire_noisette_sans_parametre:>#BOITE_FERMER]
 		</fieldset>
 
-		[(#REM) Paramètres de configuration généraux à toute noisette (div englobant, CSS) ]
+		[(#REM) Paramètres de configuration généraux à toute noisette (div englobant, CSS) sauf
+		        si la noisette est un conteneur pour lequel on interdit de l'engloer encore d'un div ]
+		[(#ENV{est_conteneur}|=={non}|oui)
 		<fieldset>
 			<legend><:noizetier:legende_noisette_inclusion:></legend>
 			<div class="editer-groupe">
@@ -34,6 +36,7 @@
 				})</div>]
 			</div>
 		</fieldset>
+		]
 
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->

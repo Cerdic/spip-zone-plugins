@@ -17,6 +17,7 @@ function formulaires_editer_noisette_charger_dist($id_noisette, $redirect = '') 
 		$valeurs['id_noisette'] = intval($id_noisette);
 		$select = array(
 			't1.type_noisette as type_noisette',
+			't1.est_conteneur as est_conteneur',
 			't1.parametres as parametres',
 			't1.balise as balise',
 			't1.css as css',
@@ -30,6 +31,7 @@ function formulaires_editer_noisette_charger_dist($id_noisette, $redirect = '') 
 		if ($noisette) {
 			// Type de la noisette
 			$valeurs['type_noisette'] = $noisette['type_noisette'];
+			$valeurs['est_conteneur'] = $noisette['est_conteneur'];
 
 			// Configuration standard de la noisette définie dans son fichier YAML.
 			// Cette configuration peut comporter des paramètres de saisie spécifiques dont les valeurs sont ensuite

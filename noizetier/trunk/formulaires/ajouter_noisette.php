@@ -9,7 +9,7 @@ if (!function_exists('autoriser')) {
 }     // si on utilise le formulaire dans le public
 
 
-function formulaires_ajouter_noisette_charger_dist($page, $bloc, $redirect = '') {
+function formulaires_ajouter_noisette_charger_dist($page, $bloc, $id_noisette, $redirect = '') {
 
 	$valeurs = array('editable' => false);
 
@@ -25,6 +25,7 @@ function formulaires_ajouter_noisette_charger_dist($page, $bloc, $redirect = '')
 	if (autoriser('configurerpage', 'noizetier', 0, '', $identifiant)) {
 		// On ajoute l'identifiant à la liste des valeurs ainsi que le bloc
 		$valeurs = array_merge($valeurs, $identifiant);
+		$valeurs['id_noisette'] = $id_noisette;
 		$valeurs['bloc'] = $bloc;
 		$valeurs['editable'] = true;
 	}
@@ -33,7 +34,7 @@ function formulaires_ajouter_noisette_charger_dist($page, $bloc, $redirect = '')
 }
 
 
-function formulaires_ajouter_noisette_traiter_dist($page, $bloc, $redirect = '') {
+function formulaires_ajouter_noisette_traiter_dist($page, $bloc, $id_noisette, $redirect = '') {
 
 	$retour = array();
 

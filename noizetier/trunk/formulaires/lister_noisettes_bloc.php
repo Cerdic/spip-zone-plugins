@@ -5,7 +5,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 
-function formulaires_lister_noisettes_page_charger_dist($page, $bloc) {
+/**
+ * @param $page
+ * @param $bloc
+ *
+ * @return array
+ */
+function formulaires_lister_noisettes_bloc_charger_dist($page, $bloc) {
 
 	// Si on est en présence d'une page, il faut convertir l'identifiant en tableau.
 	// Sinon, on est en présence d'un objet précis connu par son type et son id fourni dans un
@@ -14,12 +20,22 @@ function formulaires_lister_noisettes_page_charger_dist($page, $bloc) {
 
 	// Ajout du bloc recevant les noisettes
 	$valeurs['bloc'] = $bloc;
+
+	// Ajout de l'identifiant du conteneur qui servira à la boucle des noisettes
+	include_spip('inc/noizetier_conteneur');
+	$valeurs['id_conteneur'] = noizetier_conteneur_composer($page, $bloc);
 	
 	return $valeurs;
 }
 
 
-function formulaires_lister_noisettes_page_traiter_dist($page, $bloc) {
+/**
+ * @param $page
+ * @param $bloc
+ *
+ * @return array
+ */
+function formulaires_lister_noisettes_bloc_traiter_dist($page, $bloc) {
 
 	$retour = array();
 

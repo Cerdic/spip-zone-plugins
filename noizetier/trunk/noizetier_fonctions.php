@@ -1,6 +1,5 @@
 <?php
-
-// Securite
+// Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -30,7 +29,7 @@ function noizetier_type_noisette_compter($page) {
 	$type = noizetier_page_type($page);
 	$composition = noizetier_page_composition($page);
 
-	// Les compteurs de types de noisette d'une page sont calculés par une lecture de la table spip_types_noisettes.
+	// Les compteurs de types de noisette d'une page sont calculés par une lecture de la table 'spip_types_noisettes'.
 	$from = array('spip_types_noisettes');
 	$where = array(
 		'plugin=' . sql_quote('noizetier'),
@@ -72,7 +71,6 @@ function noizetier_type_noisette_compter($page) {
 // ------------------------- API NOISETTES : COMPLEMENT ---------------------------
 // --------------------------------------------------------------------------------
 
-
 /**
  * Réordonne les noisettes d'un bloc d'une page ou d'un objet à partir d'un index donné du tableau.
  * L'ordre est renvoyé pour l'ensemble des noisettes du bloc.
@@ -112,6 +110,12 @@ function noizetier_noisette_ordonner($ordre, $index_initial = 0) {
 }
 
 
+// --------------------------------------------------------------------------------
+// ------------------------- API CONTENEURS : COMPLEMENT --------------------------
+// --------------------------------------------------------------------------------
+include_spip('inc/noizetier_conteneur');
+
+
 // -------------------------------------------------------------------
 // --------------------------- API ICONES ----------------------------
 // -------------------------------------------------------------------
@@ -137,7 +141,6 @@ function noizetier_noisette_ordonner($ordre, $index_initial = 0) {
 
 	return $chemin;
 }
-
 
 /**
  * Liste d'icones d'une taille donnée en pixels obtenues en fouillant dans les thème
@@ -195,7 +198,6 @@ function noizetier_bloc_defaut() {
 
 	return $blocs_defaut;
 }
-
 
 /**
  * Retourne la description complète d'un bloc.
@@ -265,7 +267,6 @@ function noizetier_bloc_informer($bloc = '', $information = '') {
 		return $blocs;
 	}
 }
-
 
 /**
  * Renvoie le nombre de noisettes de chaque bloc configurables d'une page, d'une composition
@@ -548,7 +549,6 @@ function noizetier_page_informer($page, $traitement_typo = true) {
 	return $description_page[$traitement_typo][$page];
 }
 
-
 /**
  * Renvoie le type d'une page à partir de son identifiant.
  *
@@ -612,8 +612,6 @@ function noizetier_page_est_composition($page) {
 	return $est_composition;
 }
 
-
-
 /**
  * Détermine si les compositions sont possibles sur un type de page.
  *
@@ -639,7 +637,6 @@ function noizetier_page_composition_activee($type) {
 
 	return $est_activee;
 }
-
 
 /**
  * Déterminer le répertoire dans lequel le NoiZetier peut lister les pages pouvant supporter
@@ -739,8 +736,6 @@ function noizetier_objet_lire($type_objet, $id_objet, $information = '') {
 	return $retour;
 }
 
-
-
 /**
  * Lister les contenus ayant des noisettes spécifiquement configurées pour leur page.
  *
@@ -795,7 +790,6 @@ function noizetier_objet_repertorier($filtres = array()) {
 	return $objets;
 }
 
-
 /**
  * Renvoie la liste des types d'objet ne pouvant pas être personnaliser car ne possédant pas de page
  * détectable par le noiZetier.
@@ -831,7 +825,6 @@ function noizetier_objet_lister_exclusions() {
 	return $exclusions;
 }
 
-
 /**
  * Détermine si un type d'objet est activé par configuration du noiZetier.
  * Si oui, ses objets peuvent recevoir une configuration de noisettes.
@@ -863,6 +856,7 @@ function noizetier_objet_type_active($type_objet) {
 
 	return $est_active;
 }
+
 
 // --------------------------------------------------------------------
 // ------------------------- API CONFIGURATION ------------------------

@@ -3,7 +3,7 @@
  * Ce fichier contient l'action `deplacer_noisette` lancée par un utilisateur pour
  * déplacer d'un rang vers le haut ou vers le bas de façon sécurisée une noisette donnée.
  *
- * @package SPIP\NOIZETIER\ACTION
+ * @package SPIP\NOIZETIER\NOISETTE\ACTION
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -17,6 +17,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Cette action est réservée aux utilisateurs autorisés à modifier la configuration de la page
  * à laquelle est rattachée la noisette. Elle nécessite des arguments dont le sens et l'id de la noisette.
  *
+ * @uses noizetier_conteneur_decomposer()
  * @uses noisette_deplacer()
  *
  * @return void
@@ -35,21 +36,17 @@ function action_deplacer_noisette_dist() {
 
 		// Recherche des informations sur la noisette.
 		if (in_array($sens, array('bas', 'haut')) and ($id_noisette = intval($id_noisette))) {
-			$select = array('type', 'composition', 'objet', 'id_objet', 'bloc', 'rang_noisette');
+			// Récupération du conteneur de la noisette
+			$select = array('id_conteneur', 'rang_noisette');
 			$where = array('id_noisette=' . $id_noisette);
 			$noisette = sql_fetsel($select, 'spip_noisettes', $where);
-			$options = array();
-			if ($noisette['type']) {
-				$options['page'] = $noisette['composition']
-					? $noisette['type'] . '-' . $noisette['composition']
-					: $noisette['type'];
-			} else {
-				$options['objet'] = $noisette['objet'];
-				$options['id_objet'] = $noisette['id_objet'];
-			}
+
+			// Décomposition de l'id du conteneur en éléments du noiZetier
+			include_spip('inc/noizetier_conteneur');
+			$conteneur = noizetier_conteneur_decomposer($noisette['id_conteneur']);
 
 			// Test de l'autorisation
-			if (!autoriser('configurerpage', 'noizetier', '', 0, $options)) {
+			if (!autoriser('configurerpage', 'noizetier', '', 0, $conteneur)) {
 				include_spip('inc/minipres');
 				echo minipres();
 				exit();
@@ -74,7 +71,6 @@ function action_deplacer_noisette_dist() {
 					$rang_destination = $nb_noisettes;
 				}
 			}
-
 
 			// Déplacement de la noisette par modification de son rang en base de données.
 			include_spip('inc/ncore_noisette');

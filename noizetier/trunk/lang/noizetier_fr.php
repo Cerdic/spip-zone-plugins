@@ -107,6 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_peuplement' => 'Copier les noisettes de la page source « @page@ »',
 	'formulaire_supprimer_noisette' => 'Supprimer cette noisette',
 	'formulaire_supprimer_noisettes_bloc' => 'Supprimer les noisettes du bloc',
+	'formulaire_supprimer_noisettes_noisette' => 'Supprimer les noisettes incluses dans la noisette conteneur',
 	'formulaire_supprimer_noisettes_page' => 'Supprimer toutes les noisettes',
 	'formulaire_supprimer_page' => 'Supprimer cette composition',
 	'formulaire_type' => 'Type de page',

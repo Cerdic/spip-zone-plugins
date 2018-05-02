@@ -27,7 +27,7 @@
 	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").attr("href","'#GET{redirect}'").followLink();'}
 ]
 <div class="ajax">
-	#FORMULAIRE_AJOUTER_NOISETTE{#ENV{page, #ARRAY{objet,#OBJET,id_objet,#ID_OBJET}},#ENV{bloc},#GET{redirect}}
+	#FORMULAIRE_AJOUTER_NOISETTE{#ENV{page, #ARRAY{objet,#OBJET,id_objet,#ID_OBJET}}, #ENV{bloc}, #ENV{id_noisette, 0}, #GET{redirect}}
 </div>
 [(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\[CDATA\[*/
