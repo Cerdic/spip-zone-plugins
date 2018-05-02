@@ -1,0 +1,18 @@
+<BOUCLE_header_css(RUBRIQUES){id_rubrique}>
+[(#LOGO_RUBRIQUE|oui)
+<style type="text/css">
+	#header{
+		background-image: url("[(#LOGO_RUBRIQUE|extraire_attribut{src})]");
+	}
+</style>
+]
+</BOUCLE_header_css>
+<header id="header" class="alt">
+	<div class="inner">
+		[(#SI_PAGE{sommaire}|non)<a rel="start home" href="#URL_SITE_SPIP/" title="<:accueil_site:>"
+		>]<h1 id="logo_site_spip"[ class="(#EDIT{meta-nom_site})"]>
+			#NOM_SITE_SPIP
+		</h1>[(#SI_PAGE{sommaire}|non)</a>]
+		<BOUCLE_header(RUBRIQUES){id_rubrique}><h2><span class="#EDIT{titre}">#TITRE</span></h2></BOUCLE_header>
+	</div>
+</header>

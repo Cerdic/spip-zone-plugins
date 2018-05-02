@@ -1,0 +1,20 @@
+<BOUCLE_principale(AUTEURS) {id_auteur}>
+<div class="wrapper">
+<div class="content" id="content">
+
+	<div class="vcard">[(#REM) microformat vcard]
+	<div class="cartouche">
+		[(#LOGO_AUTEUR|image_reduire{224,*})]
+		<h1 class="#EDIT{qui} fn">#NOM</h1>
+	</div>
+
+	[<div class="#EDIT{bio} texte note">(#BIO)</div>]
+	</div>[(#REM) / vcard]
+
+	#FORMULAIRE_ECRIRE_AUTEUR
+
+	[<div class="notes"><hr />(#NOTES)</div>]
+
+</div><!--.content-->
+</div><!--.wrapper-->
+</BOUCLE_principale>

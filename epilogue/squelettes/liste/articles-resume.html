@@ -1,0 +1,20 @@
+<B_articles>
+	#ANCRE_PAGINATION
+	<section class="main items">
+		<BOUCLE_articles(ARTICLES){id_rubrique?} {!par date} {lang?} {pagination #ENV{nb,4}}>
+				<article class="item">
+					<header>
+						<a href="#URL_ARTICLE">[(#LOGO_ARTICLE_RUBRIQUE|adaptive_images)]</a>
+						<h3>#TITRE</h3>
+					</header>
+					[(#CHAPO)]
+					<ul class="actions">
+						<li><a href="#URL_ARTICLE" class="button"><:zcore:lire_la_suite|attribut_html:><i class="icon-chevron-right" title="<:zcore:lire_la_suite|attribut_html:><:zcore:lire_la_suite_de|attribut_html:>&laquo;[(#TITRE|attribut_html)]&raquo;"></i></a></li>
+					</ul>
+				</article>
+		</BOUCLE_articles>
+	</section>
+	[<div class="pagination">(#PAGINATION{precedent_suivant})</div>]
+</B_articles>
+
+

@@ -1,0 +1,44 @@
+<BOUCLE_content(RUBRIQUES){id_rubrique}>
+
+		[<div class="#EDIT{texte} chapo">(#TEXTE|adaptive_images)</div>]
+
+	<BOUCLE_articles(ARTICLES){id_rubrique}{0,1}>
+		<INCLURE{fond=liste/articles-resume,env,ajax,titre=<:articles_rubrique:>} />
+	</BOUCLE_articles>
+
+		[(#REM) Si aucun article, affiche un plan de la rubrique ]
+		<B_sous_rubriques>
+		<div class="main menu rubriques">
+			<h2 class="h2"><:sous_rubriques:></h2>
+			<ul class="items menu-items menu-liste">
+				<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}>
+				<li class="item menu-entree">
+					<header>
+						<a href="#URL_RUBRIQUE">[(#LOGO_RUBRIQUE|adaptive_images)]</a>
+						<h3>[(#TITRE)]</h3>
+					</header>
+					[(#DESCRIPTIF)]
+
+					<ul class="actions">
+						<li><a href="#URL_RUBRIQUE" class="button">Mehr</a></li>
+					</ul>
+
+					[(#REM) Une boucle recursive pour le mini plan]
+					<B_miniplan>
+					<ul class="menu-items menu-liste">
+						<BOUCLE_miniplan(RUBRIQUES) {id_parent} {par num titre, titre}>
+						<li class="item menu-entree">
+							<a href="#URL_RUBRIQUE">[(#TITRE)]</a>
+							<BOUCLE_m2(BOUCLE_miniplan)></BOUCLE_m2>
+						</li>
+						</BOUCLE_miniplan>
+					</ul>
+					</B_miniplan>
+
+				</li>
+				</BOUCLE_sous_rubriques>
+			</ul>
+			</div>
+		</B_sous_rubriques>
+	<//B_articles>
+</BOUCLE_content>

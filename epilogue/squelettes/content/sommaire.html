@@ -1,0 +1,11 @@
+#SET{exclus,#ARRAY}
+<BOUCLE_art(ARTICLES){par hasard}{0,1}>
+	<section id="intro" class="main">
+		<INCLURE{fond=inclure/article-hero,id_article,env,ajax} />
+		#SET{exclus,#LISTE{#ID_ARTICLE}}
+	</section>
+</BOUCLE_art>
+
+<section class="content">
+	<INCLURE{fond=liste/articles-resume,articles_exclus=#GET{exclus},titre=<:articles_rubrique:>,lang,env,ajax} />
+</section>

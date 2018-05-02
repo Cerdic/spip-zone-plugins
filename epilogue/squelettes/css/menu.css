@@ -1,0 +1,132 @@
+.menu_btn {
+	background: #AD9361 url(img/menu_bg.png) center center no-repeat;
+	display:block;
+	height:42px;
+	width:42px;
+	position:fixed;
+	top:1em;
+	left:1em;
+	border: 2px solid #787746;
+	z-index: 9999;
+}
+
+a.menu_btn:hover{
+	border-bottom-color: #787746;
+}
+
+.menu-entree.item{
+		/*padding: 0;*/
+		background-color: transparent;
+		border-radius: 0;
+		text-align: left;
+		width: 100%
+}
+
+
+#menu {
+	height:100%;
+	position:fixed;
+	/*background:#B4AF91;*/
+	background:#AD9361;
+	top:0;
+	bottom:0;
+	height:100%;
+	width:240px;
+	left:-240px;
+	z-index:9999;
+}
+
+#menu ul {
+	padding:0;
+	margin:0;
+	list-style:none;
+	color:white;
+}
+
+#menu ul li {
+	/*height:47px;*/
+	padding-left:30px;
+	/*line-height:47px;*/
+	border-bottom:1px solid #2D281A;
+	/*border-bottom:1px solid #787746;*/
+	width: 100%;
+}
+
+#menu>ul.menu-items>li{
+	display: block;
+}
+
+#menu ul li.active {
+	background:#2D281A;
+}
+
+#menu ul li:hover {
+	background:#2D281A;
+}
+#menu ul li.item {
+	padding:0 0 0 1em;
+	height:47px;
+	line-height:47px;
+}
+#menu ul li a {
+	color:white;
+	text-decoration:none;
+	font-family: 'Open Sans', sans-serif;
+	font-size:16px;
+	/*display: block;*/
+	border-bottom: 0;
+	width: 100%;
+	height: 100%;
+	/*margin-top: -20px;*/
+}
+#menu ul li a:hover{
+	color: white !important;
+} 
+
+/*.close {
+	display:block;
+	background:#373737 url(../img/croix.png) center center no-repeat;
+	height:47px;
+	width:47px;
+	position:absolute;
+	top:0;
+	right:-47px;	
+}*/
+
+.close {
+	background:#373737 url(img/croix.png) center center no-repeat;
+	height:47px;
+	width:47px !important;
+	top: 0;
+	left: 240px;
+	position: absolute;
+	display: block;
+	z-index: 9999;
+}
+
+
+
+/* Disable iOS/WinMobile font size changes */
+@media screen and (max-width: 600px),
+screen and (max-device-width: 480px) {
+	html {
+		-ms-text-size-adjust: none;
+		-webkit-text-size-adjust: none;
+	}
+}
+
+/* ==== Media Queries ==== */
+
+
+/* Mobile Screen Wide */
+@media (max-width : 640px) {
+
+	.menu_btn {
+		left:10px;	
+	}
+
+
+}
+
+
+
