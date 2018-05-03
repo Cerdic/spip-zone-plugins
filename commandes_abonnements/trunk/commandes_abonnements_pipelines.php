@@ -110,9 +110,13 @@ function commandes_abonnements_formulaire_traiter($flux) {
 		and $id_auteur = $flux['data']['id_auteur']
 	) {
 		$flux['data'] += commandes_abonnements_generer_commande($id_auteur);
+		
 		// On ajoute le référence de la commande créé si on part sur une autre page
 		if (
 			isset($flux['data']['redirect'])
+			and $flux['data']['redirect']
+			and isset($flux['data']['reference'])
+			and $flux['data']['reference']
 		) {
 			$flux['data']['redirect'] = parametre_url($flux['data']['redirect'], 'reference', $flux['data']['reference']);
 		}
