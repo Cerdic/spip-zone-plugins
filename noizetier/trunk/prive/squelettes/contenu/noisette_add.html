@@ -27,8 +27,8 @@
 	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").attr("href","'#GET{redirect}'").followLink();'}
 ]
 <div class="ajax">
-	[(#ID_NOISETTE|?{
-		[(#SET{noisette, [(#SET{noisette, #ARRAY{type_noisette, #TYPE_NOISETTE, id_noisette, #ID_NOISETTE}})],
+	[(#ENV{id_noisette}|?{
+		[(#SET{noisette, #ARRAY{type_noisette, #ENV{type_noisette}, id_noisette, #ENV{id_noisette}}})],
 		[(#SET{noisette, #ARRAY})]}
 	)]
 	#FORMULAIRE_AJOUTER_NOISETTE{
