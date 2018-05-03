@@ -11,17 +11,17 @@
 	Normalisation des valeurs + variables utiles
 
 ]
-#SET{titre,      #ENV{titre}|trim|supprimer_tags|textebrut}
-#SET{desc,       #ENV{desc}|trim|supprimer_tags|textebrut}
+#SET{titre,      #ENV{titre}|trim|html_entity_decode|supprimer_tags|textebrut}
+#SET{desc,       #ENV{desc}|trim|html_entity_decode|supprimer_tags|textebrut}
 #SET{url,        #ENV{url}|trim}
 #SET{date,       #ENV{date}|trim}
 #SET{maj,        #ENV{maj}|trim}
 #SET{lang,       #ENV{lang}|trim}
 #SET{og-type,    #ENV{og-type}|trim}
 #SET{dc-type,    #ENV{dc-type}|trim}
-#SET{auteurs,    #ENV{auteurs,#ENV{auteur}}|trim|supprimer_tags|textebrut|explode{','}|array_filter}
+#SET{auteurs,    #ENV{auteurs,#ENV{auteur}}|trim|html_entity_decode|supprimer_tags|textebrut|explode{','}|array_filter}
 #SET{logos,      #ENV{logos,#ENV{logo}}|trim|supprimer_tags|textebrut|explode{','}|array_filter}
-#SET{mots,       #ENV{mots}|trim|supprimer_tags|textebrut|explode{','}|array_filter}
+#SET{mots,       #ENV{mots}|trim|html_entity_decode|supprimer_tags|textebrut|explode{','}|array_filter}
 #SET{territoire, #ENV{territoire}|=={en}|?{uk,#ENV{territoire,#ENV{lang}}}|strtoupper|trim}
 #SET{locale,     #ENV{lang}|concat{_,#GET{territoire}}|trim}
 #SET{couper,     200}
