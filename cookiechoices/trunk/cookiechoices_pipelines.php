@@ -22,7 +22,7 @@ function cookiechoices_affichage_final($page){
 	}
 	$js_cookiechoices = produire_fond_statique("cookiechoices_call.js", array('lang' => $lang));
 
-	$script .=
+	$script =
 		"<script type='text/javascript' src='".find_in_path('js/cookiechoices.js')."'></script>\n"
 		. "<script type='text/javascript' src='$js_cookiechoices'></script>\n";
 
