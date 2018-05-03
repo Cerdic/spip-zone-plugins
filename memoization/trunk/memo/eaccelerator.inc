@@ -51,5 +51,3 @@ class MCacheBackend_eaccelerator extends MCacheBackend {
 	}
 
 }
-
-?>

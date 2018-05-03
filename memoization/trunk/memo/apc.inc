@@ -71,5 +71,3 @@ class MCacheBackend_apc extends MCacheBackend {
 	}
 
 }
-
-?>

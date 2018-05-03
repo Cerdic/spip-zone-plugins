@@ -31,6 +31,10 @@
 							selected="(#ENV{methode}|=={eaccelerator}|?{selected})"][
 								disabled="(#VAL{eaccelerator}|memoization_methode|non|?{disabled})"]
 								><:memoization:option_methode_eaccelerator:></option>
+						<option value="memcached"[
+							selected="(#ENV{methode}|=={memcached}|?{selected})"][
+								disabled="(#VAL{memcached}|memoization_methode|non|?{disabled})"]
+								><:memoization:option_methode_memcached:></option>
 						<option value="memcache"[
 							selected="(#ENV{methode}|=={memcache}|?{selected})"][
 								disabled="(#VAL{memcache}|memoization_methode|non|?{disabled})"]
@@ -108,12 +112,25 @@
 		<script type="text/javascript">
 		<!--
 			var methode_memcache = function() {
-				if ($("#methode").val() == 'memcache')
+				if ($("#methode").val() == 'memcache') {
 					$('#memcache_options').slideDown();
-				else
+				} else {
 					$('#memcache_options').hide();
+				}
 			};
 			methode_memcache();
+
+			/** mêmes options que memcache, mais pas d’admin */
+			var methode_memcached = function() {
+				if ($("#methode").val() == 'memcached') {
+					$('#memcache_options .lien_memcache').hide();
+					$('#memcache_options').slideDown();
+				} else {
+					$('#memcache_options').hide();
+					$('#memcache_options .lien_memcache').show();
+				}
+			};
+			methode_memcached();
 
 			var methode_redis = function() {
 				if ($("#methode").val() == 'redis')

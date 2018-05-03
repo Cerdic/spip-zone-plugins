@@ -46,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_methode_eaccelerator' => 'EAccelerator',
 	'option_methode_filecache' => 'Fichiers (filecache)',
 	'option_methode_memcache' => 'Memcache',
+	'option_methode_memcached' => 'Memcached',
 	'option_methode_nocache' => 'Désactivé (nocache)',
 	'option_methode_redis' => 'Redis',
 	'option_methode_xcache' => 'XCache',

@@ -51,6 +51,8 @@ class MCache {
 				return @xcache_get('xcache_autodetect')==1234;
 			case 'memcache':
 				return function_exists('memcache_set');
+			case 'memcached':
+				return class_exists('Memcached');
 			case 'eaccelerator':
 				return function_exists('eaccelerator_put');
 			case 'redis':
@@ -273,8 +275,9 @@ if (!function_exists('debug_backtrace')) {
 // outil pour memcache (hosts et ports a configurer dans le CFG)
 function cfg_memcache_servers() {
 	$cfg = @unserialize($GLOBALS['meta']['memoization']);
-	if (!$cfg = $cfg['memcache_servers'])
+	if (!$cfg = $cfg['memcache_servers']) {
 		$cfg = 'localhost:11211';
+	}
 	preg_match_all('/[a-z0-9._-]*(?::\d+)/', $cfg, $s, PREG_PATTERN_ORDER);
 	return $s[0];
 }

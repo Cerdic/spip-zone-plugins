@@ -120,5 +120,3 @@ class MCacheBackend_memcache extends MCacheBackend {
 	}
 
 }
-
-?>

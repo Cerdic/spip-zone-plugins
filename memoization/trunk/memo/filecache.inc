@@ -145,5 +145,3 @@ class MCacheBackend_filecache extends MCacheBackend {
 		return $t;
 	}
 }
-
-?>
