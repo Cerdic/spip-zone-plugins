@@ -211,3 +211,27 @@ function commandes_abonnements_generer_commande($id_auteur) {
 	
 	return $retours;
 }
+
+/**
+ * Modifier le résultat de la compilation d'un squelette
+ *
+ * => Ajouter les nouveaux champs dans la fiche d'une offre d'abonnement
+ *
+ * @pipeline recuperer_fond
+ * @param array $flux
+ * 		Flux du pipeline contenant le squelette compilé
+ * @return array
+ * 		Retourne le flux possiblement modifié
+ */
+function commandes_abonnements_recuperer_fond($flux) {
+
+	if (isset($flux['args']['fond'])
+		and $flux['args']['fond'] == 'prive/objets/contenu/abonnements_offre'
+		and isset($flux['args']['contexte'])
+		and $complement = recuperer_fond('prive/objets/contenu/abonnements_offre_complement', $flux['args']['contexte'])
+	) {
+		$flux['data']['texte'] .= $complement;
+	}
+	
+	return $flux;
+}
