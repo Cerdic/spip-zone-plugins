@@ -19,10 +19,14 @@ function formulaires_utiliser_coupon_verifier_dist() {
 		return array('code_coupon' => _T('info_obligatoire_02'));
 	}
 
-	$coupon = sql_fetsel('*', 'spip_coupons', 'code = ' . sql_quote($code_coupon));
+	$coupon = sql_fetsel(
+		'id_coupon', 
+		'spip_coupons', 
+		'actif=' . sql_quote('on') . ' and code = ' . sql_quote($code_coupon)
+	);
 
 	// coupon inconnu ou déjà utilisé ?
-	if (!$coupon['id_coupon'] || !coupon_utilisable($coupon['id_coupon'])) {
+	if (!$coupon['id_coupon']) {
 		return array('code_coupon' => _T('coupons:code_invalide'));
 	}
 
@@ -64,7 +68,7 @@ function formulaires_utiliser_coupon_traiter_dist() {
 				$total_commande += $total_produit;
 			}
 		}
-		
+
 		// vérifier si le montant de la réduction est supérieur au total des produits
 		if ($montant_reduction > $total_commande) {
 			$montant_reduction = $total_commande;

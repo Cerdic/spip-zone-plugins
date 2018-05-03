@@ -1,5 +1,10 @@
 <BOUCLE_coupon(COUPONS){id_coupon}>
 
+<div class="champ">
+	<label><:coupon:champ_actif_label:> : </label>
+	[(#ACTIF|?{<:item_non:>,<:item_oui:>})]
+</div>
+
 [<div class="champ">
 	<label><:coupon:champ_code_label:> : </label>
 	(#CODE)

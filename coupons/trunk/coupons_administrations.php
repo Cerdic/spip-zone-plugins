@@ -32,6 +32,10 @@ function coupons_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 	$maj['create'] = array(array('maj_tables', array('spip_coupons')));
+	$maj['1.3.0'] = array(
+		array('maj_tables', array('spip_coupons')),
+		array('coupons_update_statut')
+	);
 
 	// Créer les champs extras
 	cextras_api_upgrade(coupons_declarer_champs_extras(), $maj['create']);
@@ -54,4 +58,21 @@ function coupons_vider_tables($nom_meta_base_version) {
 	cextras_api_vider_tables(coupons_declarer_champs_extras());
 	
 	effacer_meta($nom_meta_base_version);
+}
+
+function coupons_update_statut(){
+	sql_updateq(
+		'spip_coupons',
+		array(
+			'actif' => 'on'
+		),
+		'id_commande = 0'
+	);
+	sql_updateq(
+		'spip_coupons',
+		array(
+			'actif' => ''
+		),
+		'id_commande <> 0'
+	);
 }

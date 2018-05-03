@@ -14,24 +14,31 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function coupons_post_edition($flux) {
-	
+
 	if (
 		$flux['args']['table'] == 'spip_commandes'
 		&& $flux['args']['action'] == 'instituer'
 		&& $flux['data']['statut'] == 'paye'
 	) {
 		$id_commande = intval($flux['args']['id_objet']);
-		
+
 		// 1 - au paiement de la commande, marquer les coupons comme utilisés
-		
+
 		$infos_coupons = sql_allfetsel(
 			'id_objet',
 			'spip_commandes_details',
 			'id_commande = ' . $id_commande . ' AND objet = "coupon"');
 
 		foreach ($infos_coupons as $coupon) {
-			sql_updateq('spip_coupons', array('id_commande' => $id_commande), 'id_coupon = ' . $coupon['id_objet']);
-			spip_log('coupon '.$coupon['id_objet'].' utilisé par commande '.$id_commande, 'coupons');
+			sql_updateq(
+				'spip_coupons',
+				array(
+					'id_commande' => $id_commande,
+					'actif'       => '',
+				),
+				'id_coupon = ' . $coupon['id_objet']
+			);
+			spip_log('coupon ' . $coupon['id_objet'] . ' utilisé par commande ' . $id_commande, 'coupons');
 		}
 
 		// 2 - générer un coupon pour chaque bon d'achat dans la commande
@@ -43,7 +50,7 @@ function coupons_post_edition($flux) {
 
 		foreach ($infos_bon_cadeau as $bon) {
 
-			for($i=0; $i<$bon['quantite']; $i++) {
+			for ($i = 0; $i < $bon['quantite']; $i++) {
 				// montant TTC du bon de réduction
 				$montant_coupon = $bon['prix_unitaire_ht'] * (1 + $bon['taxe']);
 				if ($montant_coupon) {
@@ -55,6 +62,7 @@ function coupons_post_edition($flux) {
 						'id_commandes_detail_origine' => $bon['id_commandes_detail'],
 						'titre'                       => $bon['titre'],
 						'code'                        => coupon_generer_code(),
+						'actif'                       => 'on',
 					);
 					objet_modifier('coupon', $id_coupon, $valeurs_coupon);
 
@@ -68,12 +76,12 @@ function coupons_post_edition($flux) {
 
 					spip_log('création du coupon ' . $id_coupon, 'coupons');
 					spip_log($valeurs_coupon, 'coupons');
-				} 
+				}
 			}
 
 		}
 	}
-	
+
 	return $flux;
 }
 

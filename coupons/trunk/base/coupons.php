@@ -45,26 +45,27 @@ function coupons_declarer_tables_interfaces($interfaces) {
 function coupons_declarer_tables_objets_sql($tables) {
 
 	$tables['spip_coupons'] = array(
-		'type'              => 'coupon',
-		'principale'        => 'oui',
-		'field'             => array(
+		'type'                 => 'coupon',
+		'principale'           => 'oui',
+		'field'                => array(
 			'id_coupon'                   => 'bigint(21) NOT NULL',
 			'titre'                       => 'text',
 			'code'                        => 'varchar(25) NOT NULL DEFAULT ""',
 			'montant'                     => 'decimal(20,6)',
 			'id_commandes_detail_origine' => 'bigint(21) NOT NULL DEFAULT 0',
 			'id_commande'                 => 'bigint(21) NOT NULL DEFAULT 0',
+			'actif'                       => 'varchar(3)  DEFAULT "" NOT NULL',
 			'restriction_taxe'            => 'decimal(20,6)',
 			'date'                        => 'datetime NOT NULL DEFAULT "0000-00-00 00:00:00"',
 			'maj'                         => 'TIMESTAMP',
 		),
-		'key'               => array(
+		'key'                  => array(
 			'PRIMARY KEY' => 'id_coupon',
 		),
-		'titre'             => 'titre AS titre, "" AS lang',
-		'date'              => 'date',
-		'page'              => false,
-		'champs_editables'  => array(
+		'titre'                => 'titre AS titre, "" AS lang',
+		'date'                 => 'date',
+		'page'                 => false,
+		'champs_editables'     => array(
 			'titre',
 			'code',
 			'montant',
@@ -72,7 +73,7 @@ function coupons_declarer_tables_objets_sql($tables) {
 			'id_commande',
 			'restriction_taxe',
 		),
-		'champs_versionnes' => array(
+		'champs_versionnes'    => array(
 			'titre',
 			'code',
 			'montant',
@@ -80,8 +81,9 @@ function coupons_declarer_tables_objets_sql($tables) {
 			'id_commande',
 			'restriction_taxe',
 		),
-		'rechercher_champs' => array("titre" => 10),
-		'tables_jointures'  => array(),
+		'rechercher_champs'    => array("titre" => 10),
+		'tables_jointures'     => array(),
+		'texte_changer_statut' => 'coupon:texte_changer_statut_coupon',
 
 	);
 

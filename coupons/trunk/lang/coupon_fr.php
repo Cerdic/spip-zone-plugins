@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_coupon'                     => 'Ajouter ce coupon de réduction',
 
 	// C
+	'champ_actif_label'                       => 'Coupon activé ?',
 	'champ_code_label'                        => 'Code',
 	'champ_id_commande_label'                 => 'Utilisé dans la commande',
 	'champ_id_commandes_detail_origine_label' => 'Généré par la commande',
