@@ -22,7 +22,7 @@
 </div>
 
 <div class="champ contenu_prix_ttc">
-    <label><:abonnementsoffre:champ_prix_ttc_label:> : </label>
+	<label><:abonnementsoffre:champ_prix_ttc_label:> : </label>
 	<span dir='#LANG_DIR' class='prix'>[(#PRIX*|appliquer_filtre{prix_formater,true})]</span>
 </div>
 
@@ -37,4 +37,9 @@
 	<span dir='#LANG_DIR' class='prix'>[(#PRIX*|appliquer_filtre{prix_formater,true})]</span>
 </div>
 ]
+
+<div class="champ contenu_immateriel[ (#IMMATERIEL*|strlen|?{'',vide})]">
+	<label><:abonnementsoffre:champ_immateriel_label:> : </label>
+	<span dir='#LANG_DIR' class='immateriel'><:abonnementsoffre:champ_immateriel_label_case:></span>
+</div>
 </BOUCLE_abonnements_offre>
