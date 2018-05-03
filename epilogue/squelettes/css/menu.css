@@ -1,5 +1,5 @@
 .menu_btn {
-	background: #AD9361 url(img/menu_bg.png) center center no-repeat;
+	background: #f4f4f4 url(img/menu_bg.png) center center no-repeat;
 	display:block;
 	height:42px;
 	width:42px;
@@ -26,8 +26,8 @@ a.menu_btn:hover{
 #menu {
 	height:100%;
 	position:fixed;
-	/*background:#B4AF91;*/
-	background:#AD9361;
+	background:#B4AF91;
+	/*background:#f4f4f4;*/
 	top:0;
 	bottom:0;
 	height:100%;
@@ -47,7 +47,7 @@ a.menu_btn:hover{
 	/*height:47px;*/
 	padding-left:30px;
 	/*line-height:47px;*/
-	border-bottom:1px solid #2D281A;
+	border-bottom:1px solid #787746;
 	/*border-bottom:1px solid #787746;*/
 	width: 100%;
 }
@@ -57,11 +57,11 @@ a.menu_btn:hover{
 }
 
 #menu ul li.active {
-	background:#2D281A;
+	background:#787746;
 }
 
 #menu ul li:hover {
-	background:#2D281A;
+	background:#787746;
 }
 #menu ul li.item {
 	padding:0 0 0 1em;
@@ -79,9 +79,9 @@ a.menu_btn:hover{
 	height: 100%;
 	/*margin-top: -20px;*/
 }
-#menu ul li a:hover{
+/*#menu ul li a:hover{
 	color: white !important;
-} 
+} */
 
 /*.close {
 	display:block;
@@ -103,7 +103,12 @@ a.menu_btn:hover{
 	display: block;
 	z-index: 9999;
 }
+.close:hover{
+	color: #000000;
+	background:#373737 url(img/croix.png) center center no-repeat;
+	opacity: 1;
 
+}
 
 
 /* Disable iOS/WinMobile font size changes */

@@ -1,24 +1,13 @@
 <body>
 	<div id="menu">
-	<a href="javascript:;" class="close"></a>
-	#INCLURE{fond=inclure/menu, env, identifiant=barrenav}
-<!-- 	<ul>
-		<li class="active"><a href="#URL_SITE_SPIP">Startseite</a></li>
-		<li><a href="#">Articles</a>
-			<ul>
-				<li>test</li>
-			</ul>
-		</li>
-
-		<li><a href="#">Votes</a></li>
-		<li><a href="#">Blog</a></li>
-	</ul> -->
+		<a href="javascript:;" class="close"></a>
+		#INCLURE{fond=inclure/menu, env, identifiant=barrenav}
 	</div>
 	<div class="header" id="header alt">
 		<INCLURE{fond=header/#ENV{type-page},env} />
 	</div>
 
-	        <a href="javascript:;" class="menu_btn"></a>
+	<a href="javascript:;" class="menu_btn"></a>
 
 	<div id="wrapper">
 		<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
