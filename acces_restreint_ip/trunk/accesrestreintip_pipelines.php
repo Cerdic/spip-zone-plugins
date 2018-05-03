@@ -29,7 +29,7 @@ function accesrestreintip_declarer_tables_objets_sql($tables){
 function accesrestreintip_editer_contenu_objet($flux){
 	if ($flux['args']['type'] == 'zone') {
 		$champ_ips = recuperer_fond('formulaires/inc-editer_zone-ips', $flux['args']['contexte']);
-		$flux['data'] = preg_replace('|(<li[^>]*editer_descriptif[^>]*>.*?</li>)|is', "$1\n$champ_ips", $flux['data']);
+		$flux['data'] = preg_replace('%(<(li|div)[^>]*editer_descriptif[^>]*>.*?</\2>)%is', "$1\n$champ_ips", $flux['data']);
 	}
 
 	return $flux;
