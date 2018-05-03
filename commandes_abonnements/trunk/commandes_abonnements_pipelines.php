@@ -99,9 +99,14 @@ function commandes_abonnements_formulaire_saisies($flux) {
  * 		Retourne le flux possiblement modifié
  **/
 function commandes_abonnements_formulaire_traiter($flux) {
+	$formulaires = pipeline(
+		'commandes_generer_apres_formulaires',
+		array('editer_auteur', 'inscription', 'profil')
+	);
+	
 	if (
-		// TODO : pipeline pour cette liste ?
-		in_array($flux['args']['form'], array('editer_auteur', 'inscription', 'profil'))
+		is_array($formulaires)
+		and in_array($flux['args']['form'], $formulaires)
 		and $id_auteur = $flux['data']['id_auteur']
 	) {
 		$flux['data'] += commandes_abonnements_generer_commande($id_auteur);
