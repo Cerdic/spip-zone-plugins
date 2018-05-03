@@ -1,0 +1,46 @@
+[(#REM)
+
+	Un exemple générique d'utilisation de filtre de recherche en ajax sur une liste d'articles
+
+]
+<div class="formulaire formulaire_spip formulaire_navigation_filtre">
+	#ENV{action}
+	<form method='post'>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class="editer-groupe">
+
+			#SET{objet,articles}
+			<div class="editer">
+				<label for="filtre-statut">Statut</label>
+				<select class="select statut" name="statut" id="filtre-statut">
+					<option value=""></option>
+					#SET{statuts, #GET{objet}|table_objet_sql|lister_tables_objets_sql|table_valeur{statut_textes_instituer}}
+					<BOUCLE_choix(POUR){tableau #GET{statuts}}>
+					<option value="#CLE"[(#ENV{statut}|=={#CLE}|oui)selected="selected"]>[(#VALEUR|_T|ucfirst)]</option>
+					</BOUCLE_choix>
+				</select>
+			</div>
+
+			#SET{secteurs,#ARRAY{Tous,''}}
+			<BOUCLE_rubriques(RUBRIQUES){id_parent=0}>
+			#SET{secteurs,#GET{secteurs}|array_merge{#ARRAY{#TITRE,#ID_RUBRIQUE}}}
+			</BOUCLE_rubriques>
+			[(#SET{secteurs, #GET{secteurs}|array_flip})]
+			[(#SAISIE{radio, id_secteur, label=Secteur, datas=#GET{secteurs} })]
+
+			#SET{mots,#ARRAY}
+			<BOUCLE_articles_mots(MOTS){par hasard}{0,10}{id_groupe = 24}>
+			<BOUCLE_mot(MOTS){id_mot}{0,1}>
+			#SET{mots,#GET{mots}|array_merge{#ARRAY{#TITRE,#ID_MOT}}}
+			</BOUCLE_mot>
+			</BOUCLE_articles_mots>
+			[(#SET{mots, #GET{mots}|array_flip})]
+			[(#SAISIE{checkbox, id_mot, label=Mots (au hasard), datas=#GET{mots} })]
+
+			
+			[(#SAISIE{input, recherche, label=Recherche, explication=<:info_rechercher_02:/>})]
+
+		</div>
+		<p class="boutons"><input type="submit" class="submit" name="valide" value="Recherche"/></p>
+	</form>
+</div>
