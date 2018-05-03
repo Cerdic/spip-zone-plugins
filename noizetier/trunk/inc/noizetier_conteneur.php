@@ -19,31 +19,37 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @uses noizetier_conteneur_identifier()
  *
- * @param array|string $page
+ * @param array|string $page_ou_objet
+ * 		  Page au sens SPIP ou objet spécifiquement identifié.
+ *        - dans le cas d'une page SPIP comme sommaire, l'argument est une chaîne.
+ * 	 	  - dans le cas d'un objet SPIP comme un article d'id x, l'argument est un tableau associatif à deux index,
+ *          `objet` et `id_objet`.
  * @param string       $bloc
- * @param int          $id_noisette
+ * 		  Bloc de page au sens Z.
+ * @param array        $noisette
+ *        Tableau descriptif d'une noisette contenant à minima son type et son id.
  *
  * @return string
  */
-function noizetier_conteneur_composer($page, $bloc='') {
+function noizetier_conteneur_composer($page_ou_objet, $bloc, $noisette=array()) {
 
 	$conteneur = array();
 
 	// Construction du tableau associatif du conteneur.
-	if (is_array($page)) {
-		if (!empty($page['type_noisette']) and !empty($page['id_noisette'])) {
-			// Le conteneur est une noisette.
-			$conteneur = $page;
-		} else {
+	if (!empty($noisette['type_noisette']) and !empty($noisette['id_noisette'])) {
+		// Le conteneur est une noisette.
+		$conteneur = $noisette;
+	} else {
+		if (is_array($page_ou_objet)) {
 			// Le conteneur est un objet.
-			$conteneur['objet'] = $page['objet'];
-			$conteneur['id_objet'] = $page['id_objet'];
+			$conteneur['objet'] = $page_ou_objet['objet'];
+			$conteneur['id_objet'] = $page_ou_objet['id_objet'];
 			$conteneur['squelette'] = "${bloc}";
 		}
-	}
-	else {
-		// Le conteneur est une page ou une composition.
-		$conteneur['squelette'] = "${bloc}/${page}";
+		else {
+			// Le conteneur est une page ou une composition.
+			$conteneur['squelette'] = "${bloc}/${page_ou_objet}";
+		}
 	}
 
 	// Calcul de l'identifiant du conteneur
@@ -66,6 +72,7 @@ function noizetier_conteneur_composer($page, $bloc='') {
  * @uses ncore_type_noisette_initialiser_dossier()
  *
  * @param string $id_conteneur
+ *        Identifiant du conteneur sous forme de chaine unique.
  *
  * @return array
  */

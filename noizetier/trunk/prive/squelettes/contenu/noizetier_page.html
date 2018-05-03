@@ -34,7 +34,7 @@
 	#SET{blocs, #ENV{page, #OBJET}|noizetier_page_lister_blocs}
 	#SET{bloc_affiche, #ENV{bloc}|sinon{#GET{blocs}|reset}}
 	<div class="ajax">
-		#FORMULAIRE_LISTER_NOISETTES_BLOC{#ENV{page,#ARRAY{objet,#OBJET,id_objet,#ID_OBJET}}, #GET{bloc_affiche}}
+		#FORMULAIRE_LISTER_NOISETTES_BLOC{#ENV{page, #ARRAY{objet,#OBJET,id_objet,#ID_OBJET}}, #GET{bloc_affiche}}
 	</div>
 
 	[(#REM) <!-- Liste des types de noisette disponibles --> ]

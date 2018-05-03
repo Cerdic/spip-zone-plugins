@@ -9,50 +9,62 @@ if (!function_exists('autoriser')) {
 }     // si on utilise le formulaire dans le public
 
 
-function formulaires_ajouter_noisette_charger_dist($page, $bloc, $id_noisette, $redirect = '') {
+/**
+ * Formulaire listant les noisettes incluses dans un conteneur de type (page, bloc), (objet, bloc) ou noisette conteneur.
+ * La fonction charger déclare les champs postés et y intègre les valeurs par défaut.
+ *
+ * @param array|string $page_ou_objet
+ *        Page au sens SPIP ou objet spécifiquement identifié.
+ *        - dans le cas d'une page SPIP comme sommaire, l'argument est une chaîne.
+ *        - dans le cas d'un objet SPIP comme un article d'id x, l'argument est un tableau associatif à deux index,
+ *          `objet` et `id_objet`.
+ * @param string       $bloc
+ * 		  Bloc de page au sens Z.
+ * @param array        $noisette
+ *        Tableau descriptif d'une noisette contenant à minima son type et son id.
+ * @param string $redirect
+ * 		URL de redirection. La valeur dépend du type d'édition.
+ *
+ * @return array
+ * 		Tableau des champs postés pour l'affichage du formulaire.
+ */
+function formulaires_ajouter_noisette_charger_dist($page_ou_objet, $bloc, $noisette = array(), $redirect = '') {
 
-	$valeurs = array('editable' => false);
+	// Ajout à la liste des valeurs l'identifiant de la page ou de l'objet concerné
+	$valeurs = is_array($page_ou_objet) ? $page_ou_objet : array('page' => $page_ou_objet);
 
-	// Détermination de l'identifiant de la page ou de l'objet concerné
-	if (is_array($page)) {
-		$identifiant['objet'] = $page['objet'];
-		$identifiant['id_objet'] = $page['id_objet'];
-	}
-	else {
-		$identifiant['page'] = $page;
-	}
-
-	if (autoriser('configurerpage', 'noizetier', 0, '', $identifiant)) {
-		// On ajoute l'identifiant à la liste des valeurs ainsi que le bloc
-		$valeurs = array_merge($valeurs, $identifiant);
-		$valeurs['id_noisette'] = $id_noisette;
+	if (autoriser('configurerpage', 'noizetier', 0, '', $valeurs)) {
+		// On ajoute à la liste des valeurs :
+		// - le bloc
+		// - la noisette conteneur si elle existe
+		$valeurs = array_merge($valeurs, $noisette);
 		$valeurs['bloc'] = $bloc;
+
+		// Ajout de l'identifiant du conteneur
+		include_spip('inc/noizetier_conteneur');
+		$valeurs['id_conteneur'] = noizetier_conteneur_composer($page_ou_objet, $bloc, $noisette);
+
 		$valeurs['editable'] = true;
+	} else {
+		$valeurs = array('editable' => false);
 	}
 
 	return $valeurs;
 }
 
 
-function formulaires_ajouter_noisette_traiter_dist($page, $bloc, $id_noisette, $redirect = '') {
+function formulaires_ajouter_noisette_traiter_dist($page_ou_objet, $bloc, $noisette = array(), $redirect = '') {
 
 	$retour = array();
 
-	// Détermination de l'identifiant de la page ou de l'objet concerné et construction du conteneur de la
-	// noisette
-	$conteneur = array();
-	if (is_array($page)) {
-		$identifiant['objet'] = $page['objet'];
-		$identifiant['id_objet'] = $page['id_objet'];
-		$conteneur['squelette'] = "${bloc}";
-		$conteneur = array_merge($conteneur, $identifiant);
-	}
-	else {
-		$identifiant['page'] = $page;
-		$conteneur['squelette'] = "${bloc}/${page}";
-	}
+	// Récupération de l'identifiant du conteneur dans lequel ajouter les noisettes.
+	$id_conteneur = _request('id_conteneur');
 
-	if (autoriser('configurerpage', 'noizetier', 0, '', $identifiant)) {
+	// Décomposition du conteneur en tableau associatif.
+	include_spip('inc/noizetier_conteneur');
+	$conteneur = noizetier_conteneur_decomposer($id_conteneur);
+
+	if (autoriser('configurerpage', 'noizetier', 0, '', $conteneur)) {
 		if ($type_noisette = _request('type_noisette')) {
 			include_spip('inc/ncore_noisette');
 			// Ajout de la noisette en fin de liste pour le squelette concerné.
