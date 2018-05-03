@@ -29,13 +29,13 @@
 			[(#SAISIE{radio, id_secteur, label=Secteur, datas=#GET{secteurs} })]
 
 			#SET{mots,#ARRAY}
-			<BOUCLE_articles_mots(MOTS){par hasard}{0,10}{id_groupe = 24}>
+			<BOUCLE_articles_mots(spip_mots_liens){objet="article"}{par hasard}{0,10}>
 			<BOUCLE_mot(MOTS){id_mot}{0,1}>
 			#SET{mots,#GET{mots}|array_merge{#ARRAY{#TITRE,#ID_MOT}}}
 			</BOUCLE_mot>
 			</BOUCLE_articles_mots>
 			[(#SET{mots, #GET{mots}|array_flip})]
-			[(#SAISIE{checkbox, id_mot, label=Mots (au hasard), datas=#GET{mots} })]
+			[(#SAISIE{checkbox, id_mot, label=Mots clés (10 maximum, au hasard), datas=#GET{mots} })]
 
 			
 			[(#SAISIE{input, recherche, label=Recherche, explication=<:info_rechercher_02:/>})]
