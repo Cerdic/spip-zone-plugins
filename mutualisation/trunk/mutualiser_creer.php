@@ -13,6 +13,11 @@
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
+if (find_in_path('images/logo-spip.png')) {
+	define( _SPIP_LOGO_MUTU,find_in_path('images/logo-spip.png'));
+} else {
+	define( _SPIP_LOGO_MUTU,find_in_path('images/logo-spip.gif'));
+}
 
 define('_PRIVILEGES_MYSQL_USER_BASE', 'Alter, Select, Insert, Update, Delete, Create, Drop');
 #define('_DIRMUT','mutualisation/');
@@ -81,7 +86,7 @@ function mutu_etape_code_activation($e, $options) {
 			echo mutu_minipres(
 				_T('mutu:site_suspendu'),
 				mutu_menu_langues() .
-				"<div><img alt='SPIP' src='" . find_in_path('images/logo-spip.gif') . "' /></div>\n" .
+				"<div><img alt='SPIP' src='" . _SPIP_LOGO_MUTU . "' /></div>\n" .
 				'<h3>' . _T('mutu:message_site_desactive', array('lien' => $lien)) . '</h3>',
 				" id='mutu'"
 			);
@@ -91,7 +96,7 @@ function mutu_etape_code_activation($e, $options) {
 			echo mutu_minipres(
 				_T('mutu:site_supprime'),
 				mutu_menu_langues() .
-				"<div><img alt='SPIP' src='" . find_in_path('images/logo-spip.gif') . "' /></div>\n" .
+				"<div><img alt='SPIP' src='" . _SPIP_LOGO_MUTU . "' /></div>\n" .
 				'<h3>' . _T('mutu:message_site_desactive', array('lien' => $lien)) . '</h3>',
 				" id='mutu'"
 			);
@@ -101,7 +106,7 @@ function mutu_etape_code_activation($e, $options) {
 			echo mutu_minipres(
 				_T('mutu:site_non_demande'),
 				mutu_menu_langues() .
-				"<div><img alt='SPIP' src='" . find_in_path('images/logo-spip.gif') . "' /></div>\n" .
+				"<div><img alt='SPIP' src='" . _SPIP_LOGO_MUTU . "' /></div>\n" .
 				'<h3>' . _T('mutu:message_site_desactive', array('lien' => $lien)) . '</h3>',
 				" id='mutu'"
 			);
@@ -111,7 +116,7 @@ function mutu_etape_code_activation($e, $options) {
 			echo mutu_minipres(
 				_T('mutu:site_non_active'),
 				mutu_menu_langues() .
-				"<div><img alt='SPIP' src='" . find_in_path('images/logo-spip.gif') . "' /></div>\n" .
+				"<div><img alt='SPIP' src='" . _SPIP_LOGO_MUTU . "' /></div>\n" .
 				'<h3>' . _T('mutu:message_site_desactive', array('lien' => $lien)) . '</h3>',
 				" id='mutu'"
 			);
@@ -141,7 +146,7 @@ function mutu_etape_code_activation($e, $options) {
 			echo mutu_minipres(
 				_T('mutu:install_site'),
 				mutu_menu_langues() .
-				"<div><img alt='SPIP' src='" . find_in_path('images/logo-spip.gif') . "' /></div>\n" .
+				"<div><img alt='SPIP' src='" . _SPIP_LOGO_MUTU . "' /></div>\n" .
 				(isset($_REQUEST['code_activation'])
 					? _T('mutu:install_err')
 					: ''
@@ -205,7 +210,7 @@ function mutu_etape_creer_base($e, $options) {
 						if (!sql_selectdb(_INSTALL_NAME_DB, _INSTALL_SERVER_DB)) {
 							echo mutu_minipres(
 								_T('mutu:install_bd_echec', array('nombase' => '<tt>' . _INSTALL_NAME_DB . '</tt>')),
-								"<div><img alt='SPIP' src='" . find_in_path('images/logo-spip.gif') . "' /></div>\n" .
+								"<div><img alt='SPIP' src='" . _SPIP_LOGO_MUTU . "' /></div>\n" .
 								'<h3>'
 								. '<a href="' . parametre_url(self(), 'creerbase',
 									'oui') . '">' . _T('mutu:install_bd_reessayer') . '</a>'
@@ -277,7 +282,7 @@ function mutu_etape_creer_base($e, $options) {
 
 						echo mutu_minipres(
 							_T('mutu:install_bd_cree', array('nombase' => '<tt>' . _INSTALL_NAME_DB . '</tt>')),
-							"<div><img alt='SPIP' src='" . find_in_path('images/logo-spip.gif') . "' /></div>\n" .
+							"<div><img alt='SPIP' src='" . _SPIP_LOGO_MUTU . "' /></div>\n" .
 							'<h3>'
 							. _T('mutu:install_spip_1')
 							. '<a href="' . generer_url_ecrire('install') . '">'
@@ -301,7 +306,7 @@ function mutu_etape_creer_base($e, $options) {
 					} else {
 						echo mutu_minipres(
 							_T('mutu:install_creation_bd', array('nombase' => '<tt>' . _INSTALL_NAME_DB . '</tt>')),
-							"<div><img alt='SPIP' src='" . find_in_path('images/logo-spip.gif') . "' /></div>\n" .
+							"<div><img alt='SPIP' src='" . _SPIP_LOGO_MUTU . "' /></div>\n" .
 							'<h3>'
 							. _T('mutu:install_err')
 							. '</h3>',
@@ -312,7 +317,7 @@ function mutu_etape_creer_base($e, $options) {
 				} else {
 					echo mutu_minipres(
 						_T('mutu:install_creation_bd', array('nombase' => '<tt>' . _INSTALL_NAME_DB . '</tt>')),
-						"<div><img alt='SPIP' src='" . find_in_path('images/logo-spip.gif') . "' /></div>\n" .
+						"<div><img alt='SPIP' src='" . _SPIP_LOGO_MUTU . "' /></div>\n" .
 						'<h3>'
 						. _T('mutu:install_creer_bd_1')
 						. '<a href="' . parametre_url(self(), 'creerbase', 'oui') . '">'
@@ -328,7 +333,7 @@ function mutu_etape_creer_base($e, $options) {
 		} else {
 			echo mutu_minipres(
 				_T('mutu:install_creation_bd_site') . '(<tt>' . joli_repertoire($e) . '</tt>)',
-				"<div><img alt='SPIP' src='" . find_in_path('images/logo-spip.gif') . "' /></div>\n"
+				"<div><img alt='SPIP' src='" . _SPIP_LOGO_MUTU . "' /></div>\n"
 				. '<h3>' . _T('mutu:install_err') . '</h3>'
 				. _T('mutu:install_no_data_connexion', array('connexion' => strtoupper(_INSTALL_SERVER_DB))),
 				" id='mutu'"
@@ -350,7 +355,7 @@ function mutu_etape_creer_repertoires($e, $options) {
 		if (!$ok_dir) {
 			echo mutu_minipres(
 				_T('mutu:install_creation_repertoire', array('repertoire' => '<tt>' . joli_repertoire($e) . '</tt>')),
-				"<div><img alt='SPIP' src='" . find_in_path('images/logo-spip.gif') . "' /></div>\n"
+				"<div><img alt='SPIP' src='" . _SPIP_LOGO_MUTU . "' /></div>\n"
 				. '<h3>' . _T('mutu:install_err') . '</h3>'
 				. _T('mutu:install_repertoire_inaccessible',
 					array('repertoire' => '<tt>' . $options['repertoire'] . '/</tt>')),
@@ -381,7 +386,7 @@ function mutu_etape_creer_repertoires($e, $options) {
 
 			echo mutu_minipres(
 				_T('mutu:install_creation_repertoire', array('repertoire' => '<tt>' . joli_repertoire($e) . '</tt>')),
-				"<div><img alt='SPIP' src='" . find_in_path('images/logo-spip.gif') . "' /></div>\n"
+				"<div><img alt='SPIP' src='" . _SPIP_LOGO_MUTU . "' /></div>\n"
 				. '<h3>'
 				. ($ok
 					? _T('mutu:install_creation_rep_ok_1') . '<a href="' . parametre_url(self(), 'creerrepertoire',
@@ -407,7 +412,7 @@ function mutu_etape_creer_repertoires($e, $options) {
 		) {
 			echo mutu_minipres(
 				_T('mutu:install_creation_repertoire', array('repertoire' => '<tt>' . joli_repertoire($e) . '</tt>')),
-				"<div><img alt='SPIP' src='" . find_in_path('images/logo-spip.gif') . "' /></div>\n"
+				"<div><img alt='SPIP' src='" . _SPIP_LOGO_MUTU . "' /></div>\n"
 				. '<h3>' .
 				_T('mutu:install_creer_rep_1')
 				. '<a href="' . parametre_url(self(), 'creerrepertoire', 'oui') . '">'
@@ -422,7 +427,7 @@ function mutu_etape_creer_repertoires($e, $options) {
 	} else {
 		echo mutu_minipres(
 			_T('mutu:install_repertoire_noexist', array('repertoire' => '<tt>' . joli_repertoire($e) . '</tt>')),
-			"<div><img alt='SPIP' src='" . find_in_path('images/logo-spip.gif') . "' /></div>\n" .
+			"<div><img alt='SPIP' src='" . _SPIP_LOGO_MUTU . "' /></div>\n" .
 			'<h3>'
 			. _T('mutu:install_repertoire_noexist', array('repertoire' => joli_repertoire($e)))
 			. '</h3>'
@@ -449,7 +454,7 @@ function mutu_etape_fin($e, $options) {
 	echo mutu_minipres(
 		_T('mutu:install_rep_bd_ok'),
 		"<div><img alt='SPIP' src='"
-		. find_in_path('images/logo-spip.gif')
+		. _SPIP_LOGO_MUTU
 		. "' /></div>\n"
 		. '<h3>'
 		. _T('mutu:install_spip_3', array('url' => generer_url_ecrire('install')))
