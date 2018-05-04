@@ -58,7 +58,7 @@ function formulaires_ajouter_noisette_traiter_dist($page_ou_objet, $bloc, $noise
 	$retour = array();
 
 	// Récupération de l'identifiant du conteneur dans lequel ajouter les noisettes.
-	$id_conteneur = _request('id_conteneur');
+	$id_conteneur = _request('conteneur_id');
 
 	// Décomposition du conteneur en tableau associatif.
 	include_spip('inc/noizetier_conteneur');

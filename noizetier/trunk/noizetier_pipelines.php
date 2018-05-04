@@ -67,9 +67,15 @@ function noizetier_recuperer_fond($flux) {
 					$contexte = $flux['data']['contexte'];
 					$contexte['bloc'] = $bloc;
 
+					include_spip('inc/conteneur');
 					if ($par_objet) {
 						$contexte['objet'] = $objet;
 						$contexte['id_objet'] = $id_objet;
+						$contexte['id_conteneur'] = noizetier_conteneur_composer($contexte, $bloc);
+					} else {
+						$page = !empty($contexte['type-page']) ? $contexte['type-page'] : $contexte['page'];
+						$page .= !empty($contexte['composition']) ? '-' . $contexte['composition'] : '';
+						$contexte['id_conteneur'] = noizetier_conteneur_composer($page, $bloc);
 					}
 
 					if (isset($flux['args']['contexte']['voir']) && $flux['args']['contexte']['voir'] == 'noisettes' && autoriser('configurer', 'noizetier')) {

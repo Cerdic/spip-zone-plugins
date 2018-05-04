@@ -31,30 +31,18 @@
 	<//B_si_page>
 	#BOITE_FERMER
 
+	[(#REM) <!-- Liste des blocs configurables pour la page en cours --> ]
 	#SET{blocs, #ENV{page, #OBJET}|noizetier_page_lister_blocs}
 	#SET{bloc_affiche, #ENV{bloc}|sinon{#GET{blocs}|reset}}
+	<INCLURE{fond=prive/squelettes/inclure/inc-nav_blocs,
+		blocs=#GET{blocs},
+		bloc_affiche=#GET{bloc_affiche},
+		env} />
+
+	[(#REM) <!-- Liste configurable des noisettes du bloc affiché --> ]
 	<div class="ajax">
 		#FORMULAIRE_LISTER_NOISETTES_BLOC{#ENV{page, #ARRAY{objet,#OBJET,id_objet,#ID_OBJET}}, #GET{bloc_affiche}}
 	</div>
-
-	[(#REM) <!-- Liste des types de noisette disponibles --> ]
-	<h3><:noizetier:noisettes_disponibles:></h3>
-	<p><:noizetier:explication_glisser_deposer:></p>
-	<INCLURE{fond=formulaires/inclure/inc-liste_types_noisette,
-		page,
-		objet,
-		id_objet,
-		input_radio=''} />
-	<script type="text/javascript">/*<!\[CDATA\[*/
-		jQuery('.noisettes_disponibles').show();
-		jQuery('ul.liste-noisettes-disponibles li.noisette').draggable({
-			connectToSortable: 'ul.liste-noisettes-bloc',
-			helper: 'clone',
-			revert: 'invalid',
-			cursor: 'move',
-			opacity: 0.5
-		});
-	/*\]\]>*/</script>
 
 	[(#CONST{_AJAX}|oui)
 		<script type="text/javascript">/*<!\[CDATA\[*/
