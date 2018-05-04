@@ -10,6 +10,16 @@ function inserer_modeles_header_prive($flux) {
 	return $flux;
 }
 
+function inserer_modeles_insert_head($flux){
+	if(lire_config('barre_outils_public') == 'oui'){
+		$js = find_in_path('javascript/autosize.min.js');
+		$flux .= "\n<script type='text/javascript' src='$js'></script>\n";
+	}
+	return $flux;
+}
+
+
+
 function inserer_modeles_affiche_droite($flux) {
 	$config_meta = inserer_modeles_configuration();
 	if (in_array($flux['args']['exec'], $config_meta['objets'])) {
