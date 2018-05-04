@@ -30,7 +30,7 @@ function genie_popularites($t) {
 
 	$aujourdhui = date("Y-m-d");
 	
-	spip_log("cron pop de " . $t , "debug_stats.4");
+	spip_log("cron pop de " . date("Y-m-d H:i:s", $t) , "debug_stats.4");
 	
 	if (($d = $GLOBALS['meta']['date_statistiques']) != $aujourdhui) {
 		
@@ -109,6 +109,8 @@ function genie_visites($t) {
  **/
 function calculer_visites2($t) {
 	include_spip('base/abstract_sql');
+	
+	// spip_log("calculer visites 2 OK " . date("Y-m-d H:i:s", $t) , "debug_stats.4");
 	
 	// Initialisations
 	$visites = array(); # visites du site
