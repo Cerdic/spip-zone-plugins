@@ -1,9 +1,9 @@
 <paquet
 	prefix="diogene"
 	categorie="edition"
-	version="1.9.3"
+	version="1.9.4"
 	etat="stable"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="images/diogene-128.png"
 	schema="0.3.7"
 	documentation="https://www.mediaspip.net/spip.php?article50"
