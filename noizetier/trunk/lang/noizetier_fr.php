@@ -67,6 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'formulaire_ajouter_noisette' => 'Ajouter une noisette',
+	'formulaire_ajouter_noisette_bloc' => 'Ajouter une noisette au bloc',
 	'formulaire_ajouter_noisette_conteneur' => 'Ajouter une noisette à cette noisette conteneur',
 	'formulaire_blocs_exclus' => 'Blocs à exclure',
 	'formulaire_composition' => 'Identifiant de composition',
@@ -166,9 +167,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisettes_configurees_nb' => '@nb@ noisettes configurées',
 	'noisettes_configurees_une' => 'Une noisette configurée',
 	'noisettes_disponibles' => 'Types de noisette disponibles',
-	'noisettes_page' => 'Noisettes spécifiques à la page <i>@type@</i> :',
+	'noisettes_page' => 'Types de noisette spécifiques à la page <i>@type@</i> :',
 	'noisettes_pour' => 'Noisettes pour : ',
-	'noisettes_toutes_pages' => 'Noisettes communes à toutes les pages :',
+	'noisettes_toutes_pages' => 'Types de noisette communs à toutes les pages :',
 	'noizetier' => 'noiZetier',
 	'nom_bloc_contenu' => 'Contenu',
 	'nom_bloc_extra' => 'Extra',
