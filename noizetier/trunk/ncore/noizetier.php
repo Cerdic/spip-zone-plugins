@@ -16,7 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * Les types de noisettes sont stockés dans la table `spip_types_noisettes`.
  *
- * @package SPIP\NOIZETIER\NCORE\TYPE_NOISETTE
+ * @package SPIP\NOIZETIER\TYPE_NOISETTE\SERVICE
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -74,7 +74,7 @@ function noizetier_type_noisette_stocker($plugin, $types_noisettes, $recharger) 
  *
  * Le noiZetier phrase le type de noisette pour détecter son type et sa composition éventuelle.
  *
- * @package SPIP\NOIZETIER\NCORE\TYPE_NOISETTE
+ * @package SPIP\NOIZETIER\TYPE_NOISETTE\SERVICE
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -111,7 +111,7 @@ function noizetier_type_noisette_completer($plugin, $description) {
  *
  * Le noiZetier lit la description du type de noisette concerné dans la table `spip_types_noisettes`.
  *
- * @package SPIP\NOIZETIER\NCORE\TYPE_NOISETTE
+ * @package SPIP\NOIZETIER\TYPE_NOISETTE\SERVICE
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -137,7 +137,7 @@ function noizetier_type_noisette_decrire($plugin, $type_noisette) {
  * Renvoie l'information brute demandée pour l'ensemble des types de noisette utilisés
  * ou toute les descriptions si aucune information n'est explicitement demandée.
  *
- * @package SPIP\NOIZETIER\NCORE\TYPE_NOISETTE
+ * @package SPIP\NOIZETIER\TYPE_NOISETTE\SERVICE
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -170,9 +170,7 @@ function noizetier_type_noisette_lister($plugin, $information = '') {
  * Cette information est utilisée si la description YAML d'un type noisette ne contient pas de tag ajax
  * ou contient un tag ajax à `defaut`.
  *
- * @package SPIP\NOIZETIER\SERVICE\TYPE_NOISETTE
- *
- * @uses ncore_chercher_service()
+ * @package SPIP\NOIZETIER\TYPE_NOISETTE\SERVICE
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -190,6 +188,27 @@ function noizetier_type_noisette_initialiser_ajax($plugin) {
 	return $defaut_ajax;
 }
 
+/**
+ * Renvoie la configuration par défaut du dossier relatif où trouver les types de noisettes.
+ * Cette information est utilisée a minima au chargement des types de noisettes disponibles.
+ *
+ * @package SPIP\NOIZETIER\TYPE_NOISETTE\SERVICE
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ *
+ * @return string
+ * 		Chemin relatif du dossier où chercher les types de noisette.
+ */
+function noizetier_type_noisette_initialiser_dossier($plugin) {
+
+	// On va chercher les noisettes dans le répertoire classique noisettes/.
+	$dossier = 'noisettes/';
+
+	return $dossier;
+}
+
 
 // -----------------------------------------------------------------------
 // ----------------------------- NOISETTES -------------------------------
@@ -199,7 +218,7 @@ function noizetier_type_noisette_initialiser_ajax($plugin) {
  * Stocke la description d'une nouvelle noisette et calcule son identifiant unique, ou met à jour les paramètres
  * d'affichage d'une noisette existante.
  *
- * @package SPIP\NOIZETIER\NCORE\NOISETTE
+ * @package SPIP\NOIZETIER\NOISETTE\SERVICE
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noizetier ou
@@ -243,7 +262,7 @@ function noizetier_noisette_stocker($plugin, $description) {
  * la page/composition ou l'objet et le bloc.
  * On parse le squelette pour identifier les données manquantes.
  *
- * @package SPIP\NOIZETIER\NCORE\NOISETTE
+ * @package SPIP\NOIZETIER\NOISETTE\SERVICE
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -321,7 +340,7 @@ function noizetier_noisette_completer($plugin, $description) {
 /**
  * Positionne une noisette à un rang différent que celui qu'elle occupe dans le conteneur.
  *
- * @package SPIP\NOIZETIER\NCORE\NOISETTE
+ * @package SPIP\NOIZETIER\NOISETTE\SERVICE
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -353,7 +372,7 @@ function noizetier_noisette_ranger($plugin, $description, $rang_destination) {
 /**
  * Retire, de l'espace de stockage, une noisette donnée de son conteneur.
  *
- * @package SPIP\NOIZETIER\NCORE\NOISETTE
+ * @package SPIP\NOIZETIER\NOISETTE\SERVICE
  *
  * @param string       $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -382,12 +401,11 @@ function noizetier_noisette_destocker($plugin, $description) {
 	return $retour;
 }
 
-
 /**
  * Renvoie un champ ou toute la description des noisettes d'un conteneur ou de tous les conteneurs.
  * Le tableau retourné est indexé soit par identifiant de noisette soit par identifiant du conteneur et rang.
  *
- * @package SPIP\NOIZETIER\NCORE\NOISETTE
+ * @package SPIP\NOIZETIER\NOISETTE\SERVICE
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -463,7 +481,7 @@ function noizetier_noisette_lister($plugin, $conteneur = array(), $information =
  * Renvoie la description brute d'une noisette sans traitement typo des champs textuels ni désérialisation
  * des champs de type tableau sérialisé.
  *
- * @package SPIP\NOIZETIER\NCORE\NOISETTE
+ * @package SPIP\NOIZETIER\NOISETTE\SERVICE
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -506,9 +524,10 @@ function noizetier_noisette_decrire($plugin, $noisette) {
 
 /**
  * Construit un identifiant unique pour le conteneur de noisettes.
- * Pour le noiZetier, un conteneur est toujours un squelette, soit générique soit d'un objet donné.
+ * Pour le noiZetier, un conteneur est toujours un squelette, soit générique soit d'un objet donné ou
+ * une noisette de type conteneur.
  *
- * @package SPIP\NOIZETIER\NCORE\CONTENEUR
+ * @package SPIP\NOIZETIER\CONTENEUR\SERVICE
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -550,7 +569,7 @@ function noizetier_conteneur_identifier($plugin, $conteneur) {
 /**
  * Retire, de l'espace de stockage, toutes les noisettes d'un conteneur.
  *
- * @package SPIP\NOIZETIER\NCORE\CONTENEUR
+ * @package SPIP\NOIZETIER\CONTENEUR\SERVICE
  *
  * @param string       $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou

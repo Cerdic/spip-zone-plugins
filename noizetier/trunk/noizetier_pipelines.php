@@ -19,7 +19,7 @@ function noizetier_recuperer_fond($flux) {
 	// Il est cependant possible de désactiver ce fonctionnement en positionnant la constante _NOIZETIER_RECUPERER_FOND
 	// à false.
 	if ((defined('_NOIZETIER_RECUPERER_FOND') ? _NOIZETIER_RECUPERER_FOND : true) and !test_espace_prive()) {
-		include_spip('noizetier_fonctions');
+		include_spip('inc/noizetier_page');
 		$fond = isset($flux['args']['fond']) ? $flux['args']['fond'] : '';
 		if ($fond) {
 			// On détermine la page et le bloc à partir du fond qui est de la forme bloc/page.
@@ -53,6 +53,7 @@ function noizetier_recuperer_fond($flux) {
 				// On cherche en priorité une correspondance d'objet précis !
 				// Sinon on cherche pour le type de page ou la composition
 				$par_objet = false;
+				include_spip('inc/noizetier_bloc');
 				if (
 					(
 						isset($flux['args']['contexte']['type-page'])
@@ -67,7 +68,7 @@ function noizetier_recuperer_fond($flux) {
 					$contexte = $flux['data']['contexte'];
 					$contexte['bloc'] = $bloc;
 
-					include_spip('inc/conteneur');
+					include_spip('inc/noizetier_conteneur');
 					if ($par_objet) {
 						$contexte['objet'] = $objet;
 						$contexte['id_objet'] = $id_objet;
@@ -117,7 +118,7 @@ function noizetier_recuperer_fond($flux) {
 
 					$page = isset($contexte['type']) ? $contexte['type'] : (isset($contexte['type-page']) ? $contexte['type-page'] : '');
 					$page .= (isset($contexte['composition']) && $contexte['composition']) ? '-'.$contexte['composition'] : '';
-					$blocs = noizetier_page_lister_blocs($page);
+					$blocs = noizetier_bloc_lister($page);
 					if (isset($blocs[$bloc])) {
 						$complements = recuperer_fond('bloc_preview', $contexte, array('raw' => true));
 						$flux['data']['texte'] .= $complements['texte'];
@@ -299,7 +300,7 @@ function noizetier_affiche_milieu($flux) {
 	$exec = $flux['args']['exec'];
 
 	if ($exec == 'admin_plugin') {
-		include_spip('noizetier_fonctions');
+		include_spip('inc/noizetier_page');
 		noizetier_page_charger();
 		include_spip('inc/ncore_type_noisette');
 		type_noisette_charger('noizetier');

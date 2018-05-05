@@ -1,6 +1,6 @@
 <?php
 /**
- * Ce fichier contient l'API N-Core de gestion des conteneurs.
+ * Ce fichier contient l'API complémentaire spécifique au noiZetier de gestion des conteneurs.
  *
  * @package SPIP\NOIZETIER\CONTENEUR\API
  */
@@ -15,7 +15,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * de reconstituer le conteneur à partir des données du noizetier page, composition, objet et noisette.
  *
  * @api
- * @filtre
  *
  * @uses noizetier_conteneur_identifier()
  *
@@ -65,7 +64,6 @@ function noizetier_conteneur_composer($page_ou_objet, $bloc, $noisette=array()) 
  * Le tableau ainsi produit peut-être fourni aux autorisations concernant la manipulation des pages du noiZetier.
  *
  * @api
- * @filtre
  *
  * @uses noizetier_page_type()
  * @uses noizetier_page_composition()
@@ -93,7 +91,7 @@ function noizetier_conteneur_decomposer($id_conteneur) {
 		$conteneur['bloc'] = $bloc;
 		$conteneur['page'] = $page;
 		// -- Type et composition
-		include_spip('noizetier_fonctions');
+		include_spip('inc/noizetier_page');
 		$conteneur['type'] = noizetier_page_type($conteneur['page']);
 		$conteneur['composition'] = noizetier_page_composition($conteneur['page']);
 	} else {
@@ -103,8 +101,8 @@ function noizetier_conteneur_decomposer($id_conteneur) {
 			$conteneur['type_noisette'] = $elements[0];
 			$conteneur['id_noisette'] = intval($elements[2]);
 			// -- le squelette
-			include_spip('ncore/ncore');
-			$conteneur['squelette'] = ncore_type_noisette_initialiser_dossier('noizetier') . $conteneur['type_noisette'];
+			include_spip('ncore/noizetier');
+			$conteneur['squelette'] = noizetier_type_noisette_initialiser_dossier('noizetier') . $conteneur['type_noisette'];
 			// -- les éléments du conteneur de la noisette parent utiles pour les autorisations
 			$select = array('type', 'composition', 'objet', 'id_objet', 'bloc');
 			$where = array('id_noisette=' . $conteneur['id_noisette']);

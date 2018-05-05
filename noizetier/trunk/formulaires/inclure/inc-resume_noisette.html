@@ -1,5 +1,5 @@
 <BOUCLE_noisette(NOISETTES types_noisettes){id_noisette}>
-<div>
+<div[ class="(#ENV{classe})"]>
 	<div class="resume">
 		[(#NOM|_T_ou_typo)]
 		[<br />(#NOIZETIER_NOISETTE_PREVIEW)]
@@ -43,4 +43,7 @@
 		</a>]
 	</div>
 </div>
+<input type="hidden" name="ordre[]" value="#ID_NOISETTE" />
+<input type="hidden" name="rangs_noisette[]" value="#RANG_NOISETTE" />
+<input type="hidden" name="conteneurs_noisette[]" value="#ID_CONTENEUR" />
 </BOUCLE_noisette>

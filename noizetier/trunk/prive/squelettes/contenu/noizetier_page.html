@@ -34,7 +34,7 @@
 	[(#REM) <!-- Liste des blocs configurables pour la page en cours --> ]
 	<br class="clear" />
 	<h3><:noizetier:menu_blocs:></h3>
-	#SET{blocs, #ENV{page, #OBJET}|noizetier_page_lister_blocs}
+	#SET{blocs, #ENV{page, #OBJET}|noizetier_bloc_lister}
 	#SET{bloc_affiche, #ENV{bloc}|sinon{#GET{blocs}|reset}}
 	<INCLURE{fond=prive/squelettes/inclure/inc-nav_blocs,
 		blocs=#GET{blocs},
