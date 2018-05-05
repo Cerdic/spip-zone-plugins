@@ -9,4 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajaxfiltre_titre' => 'Filtres rapides dans le privé',
+
+	// M
+	'message_erreur_plugin_saisies' => 'Cette démo nécessite le plugin <a href="@url@">Saisies</a>.',
 );
