@@ -10,23 +10,17 @@ if (window.jQuery) {
 		]
 			
 		$(".spip.liste tbody").each(function(){
-			if($(this).find('tr').length > 1 && $(this).find('tr').data('id_objet')) {
-				// ajouter automatiquement une colonne avec le picto "draggable" si elle n'est pas présente
-				if(!$(this).find('img[src*=draggable]').length) {
-					$(this).parent('table').find('thead').find('tr').prepend("<th class='drag'>&nbsp;</th>");
-					$(this).find('tr').prepend("<td class='drag'>[(#CHEMIN_IMAGE{draggable-16.png}|balise_img)]</td>");
-				}
-				// ajouter le comportement "sortable"
+			if($(this).find('tr').length > 1 && $(this).find('tr').attr('id')) {
 				$(this).sortable({
 					placeholder: ".ui-state-highlight",
 					cursor: "move",
 					containment: "parent",
 					tolerance: "pointer",
-					classes: {"ui-sortable-helper": "rang-sortable-helper"},
 					update: function( event, ui ) {
 						var url = "[(#VAL{trier_items}|generer_url_action{#ENV{objet}, 1})]";
 						var $me = $(this);
-						var liste = $me.sortable("toArray", {attribute: 'data-id_objet'});
+						var liste = $me.sortable("toArray");
+	
 						var page = parseInt(window.location.search.split('&debut_liste_#ENV{suffixe_pagination}=')[1]);
 						if (isNaN(page) === false) {
 							page = (page < 0) ? 0 : page;
@@ -40,9 +34,10 @@ if (window.jQuery) {
 							});
 					}
 				});
-				$(this).disableSelection();
 			}
-		});		
+		});
+
+		$( ".spip.liste tbody" ).disableSelection();
 
 		[(#SPIP_VERSION|version_compare{3.2, <}|oui)
 		})})})})
