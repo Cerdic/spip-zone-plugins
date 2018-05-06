@@ -15,7 +15,22 @@ include_spip('inc/noizetier_type_noisette');
 // ------------------------- API NOISETTES : COMPLEMENT ---------------------------
 // --------------------------------------------------------------------------------
 
+/**
+ * Compile la balise `#NOIZETIER_NOISETTE_PREVIEW` qui permet d'afficher la prévisualisation d'une noisette
+ * si le squelette idoine existe (type_noisette-preview.html) dans le même répertoire que celui du type de noisette.
+ * La signature de la balise est : `#NOIZETIER_NOISETTE_PREVIEW`.
+ *
+ * @package SPIP\NOIZETIER\NOISETTE\BALISE
+ * @balise
+ *
+ * @param Champ $p
+ *        Pile au niveau de la balise.
+ *
+ * @return Champ
+ *         Pile complétée par le code à générer.
+ **/
 function balise_NOIZETIER_NOISETTE_PREVIEW_dist($p) {
+
 	$id_noisette = champ_sql('id_noisette', $p);
 	$type_noisette = champ_sql('type_noisette', $p);
 	$parametres = champ_sql('parametres', $p);
@@ -46,7 +61,7 @@ function balise_NOIZETIER_NOISETTE_PREVIEW_dist($p) {
  * La fonction vérifie d'abord que l'icone est dans le thème du privé (chemin_image),
  * sinon cherche dans le path SPIP (find_in_path).
  *
- * @package SPIP\NOIZETIER\API\ICONE
+ * @package SPIP\NOIZETIER\ICONE\API
  * @api
  * @filtre
  *
@@ -67,7 +82,7 @@ function balise_NOIZETIER_NOISETTE_PREVIEW_dist($p) {
  * Liste d'icones d'une taille donnée en pixels obtenues en fouillant dans les thème
  * spip du privé.
  *
- * @package SPIP\NOIZETIER\API\ICONE
+ * @package SPIP\NOIZETIER\ICONE\API
  * @api
  * @filtre
  *
@@ -97,6 +112,7 @@ function noizetier_icone_repertorier($taille = 24) {
  * Renvoie le nombre de noisettes de chaque bloc configurables d'une page, d'une composition
  * ou d'un objet.
  *
+ * @package SPIP\NOIZETIER\BLOC\API
  * @api
  * @filtre
  *
@@ -142,10 +158,30 @@ function noizetier_bloc_compter_noisettes($page_ou_objet) {
 		$blocs_compteur[$page_ou_objet] = $nb_noisettes;
 	}
 
-	return (isset($blocs_compteur[$page_ou_objet]) ? $blocs_compteur[$page_ou_objet] : array());
+	return (isset($blocs_compteur[$page_ou_objet])
+		? $blocs_compteur[$page_ou_objet]
+		: array());
 }
 
-// Cette balise renvoie la description complète ou l'info donnée d'un bloc
+/**
+ * Compile la balise `#NOIZETIER_BLOC_INFOS` qui fournit un champ ou tous les champs descriptifs d'un bloc Z
+ * donné. Ces champs sont lus dans le fichier YAML du bloc si il existe.
+ * La signature de la balise est : `#NOIZETIER_BLOC_INFOS{bloc, information}`.
+ *
+ * @package SPIP\NOIZETIER\BLOC\BALISE
+ * @balise
+ *
+ * @example
+ *     ```
+ *     #NOIZETIER_BLOC_INFOS{content}, renvoie tous les champs descriptifs du bloc content
+ *     #NOIZETIER_BLOC_INFOS{content, nom}, renvoie le titre du bloc content
+ *     ```
+ * @param Champ $p
+ *        Pile au niveau de la balise.
+ *
+ * @return Champ
+ *         Pile complétée par le code à générer.
+ **/
 function balise_NOIZETIER_BLOC_INFOS_dist($p) {
 	$bloc = interprete_argument_balise(1, $p);
 	$bloc = str_replace('\'', '"', $bloc);
@@ -156,6 +192,12 @@ function balise_NOIZETIER_BLOC_INFOS_dist($p) {
 	return $p;
 }
 
+/**
+ * @param string $bloc
+ * @param string $information
+ *
+ * @return array|string
+ */
 function calculer_infos_bloc($bloc = '', $information = '') {
 
 	include_spip('inc/noizetier_bloc');
@@ -167,7 +209,27 @@ function calculer_infos_bloc($bloc = '', $information = '') {
 // ---------------------------- API PAGES ----------------------------
 // -------------------------------------------------------------------
 
-// Cette balise renvoie le tableau de la liste des objets possédant des noisettes configurées
+/**
+ * Compile la balise `#NOIZETIER_PAGE_INFOS` qui fournit un champ ou tous les champs descriptifs d'une page
+ * ou d'une composition donnée. Ces champs sont lus dans la table `spip_noizetier_pages`.
+ * La signature de la balise est : `#NOIZETIER_PAGE_INFOS{page, information}`.
+ *
+ * @package SPIP\NOIZETIER\PAGE\BALISE
+ * @balise
+ *
+ * @example
+ *     ```
+ *     #NOIZETIER_PAGE_INFOS{article}, renvoie tous les champs descriptifs de la page article
+ *     #NOIZETIER_PAGE_INFOS{article, nom}, renvoie le titre de la page article
+ *     #NOIZETIER_PAGE_INFOS{article-forum, nom}, renvoie le titre de la composition forum de la page article
+ *     ```
+ *
+ * @param Champ $p
+ *        Pile au niveau de la balise.
+ *
+ * @return Champ
+ *         Pile complétée par le code à générer.
+ **/
 function balise_NOIZETIER_PAGE_INFOS_dist($p) {
 
 	// Récupération des arguments de la balise.
@@ -183,6 +245,12 @@ function balise_NOIZETIER_PAGE_INFOS_dist($p) {
 	return $p;
 }
 
+/**
+ * @param        $page
+ * @param string $information
+ *
+ * @return array
+ */
 function calculer_infos_page($page, $information = '') {
 
 	include_spip('inc/noizetier_page');
@@ -194,7 +262,26 @@ function calculer_infos_page($page, $information = '') {
 // ---------------------------- API OBJETS ----------------------------
 // --------------------------------------------------------------------
 
-// Cette balise renvoie le tableau de la liste des objets possédant des noisettes configurées
+/**
+ * Compile la balise `#NOIZETIER_OBJET_INFOS` qui fournit un champ ou tous les champs descriptifs d'un objet
+ * donné. Ces champs sont lus dans la table de l'objet.
+ * La signature de la balise est : `#NOIZETIER_OBJET_INFOS{type_objet, id_objet, information}`.
+ *
+ * @package SPIP\NOIZETIER\OBJET\BALISE
+ * @balise
+ *
+ * @example
+ *     ```
+ *     #NOIZETIER_OBJET_INFOS{article, 12}, renvoie tous les champs descriptifs de la page article
+ *     #NOIZETIER_OBJET_INFOS{article, 12, nom}, renvoie le titre de la page article
+ *     ```
+ *
+ * @param Champ $p
+ *        Pile au niveau de la balise.
+ *
+ * @return Champ
+ *         Pile complétée par le code à générer.
+ **/
 function balise_NOIZETIER_OBJET_INFOS_dist($p) {
 
 	// Récupération des arguments de la balise.
@@ -212,6 +299,13 @@ function balise_NOIZETIER_OBJET_INFOS_dist($p) {
 	return $p;
 }
 
+/**
+ * @param        $objet
+ * @param        $id_objet
+ * @param string $information
+ *
+ * @return mixed
+ */
 function calculer_infos_objet($objet, $id_objet, $information = '') {
 
 	include_spip('inc/noizetier_objet');
@@ -219,7 +313,19 @@ function calculer_infos_objet($objet, $id_objet, $information = '') {
 }
 
 
-// Cette balise renvoie le tableau de la liste des objets possédant des noisettes configurées
+/**
+ * Compile la balise `#NOIZETIER_OBJET_LISTE` qui renvoie la liste des objets possédant des noisettes
+ * configurées. Chaque objet est fourni avec sa description complète.
+ * La signature de la balise est : `#NOIZETIER_OBJET_LISTE`.
+ *
+ * @balise
+ *
+ * @param Champ $p
+ *        Pile au niveau de la balise.
+ *
+ * @return Champ
+ *         Pile complétée par le code à générer.
+ **/
 function balise_NOIZETIER_OBJET_LISTE_dist($p) {
 
 	// Aucun argument à la balise.
@@ -228,6 +334,9 @@ function balise_NOIZETIER_OBJET_LISTE_dist($p) {
 	return $p;
 }
 
+/**
+ * @return array|string
+ */
 function calculer_liste_objets() {
 
 	include_spip('inc/noizetier_objet');
@@ -254,9 +363,9 @@ function calculer_liste_objets() {
  * @return boolean
  * 		`true` si la configuration a été modifiée, `false` sinon.
  */
- // TODO : a voir si cette fonction n'est pas utilisée pour les noisettes on la renommera en noizetier_page_modifiee()
 function noizetier_configuration_est_modifiee($entite, $identifiant) {
 
+	// TODO : a voir si cette fonction n'est pas utilisée pour les noisettes on la renommera en noizetier_page_modifiee()
 	$est_modifiee = true;
 
 	// Détermination du répertoire par défaut
