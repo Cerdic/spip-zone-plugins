@@ -214,6 +214,9 @@ function calculer_infos_bloc($bloc = '', $information = '') {
  * ou d'une composition donnée. Ces champs sont lus dans la table `spip_noizetier_pages`.
  * La signature de la balise est : `#NOIZETIER_PAGE_INFOS{page, information}`.
  *
+ * La fonction peut aussi renvoyée une information spéciale `est_modifiee` qui indique si la configuration
+ * du fichier YAML ou XML de la page a été modifiée ou pas.
+ *
  * @package SPIP\NOIZETIER\PAGE\BALISE
  * @balise
  *
@@ -222,6 +225,7 @@ function calculer_infos_bloc($bloc = '', $information = '') {
  *     #NOIZETIER_PAGE_INFOS{article}, renvoie tous les champs descriptifs de la page article
  *     #NOIZETIER_PAGE_INFOS{article, nom}, renvoie le titre de la page article
  *     #NOIZETIER_PAGE_INFOS{article-forum, nom}, renvoie le titre de la composition forum de la page article
+ *     #NOIZETIER_PAGE_INFOS{article, est_modifiee}, indique si la configuration de la page article a été modifiée
  *     ```
  *
  * @param Champ $p
@@ -254,7 +258,33 @@ function balise_NOIZETIER_PAGE_INFOS_dist($p) {
 function calculer_infos_page($page, $information = '') {
 
 	include_spip('inc/noizetier_page');
-	return noizetier_page_lire($page, $information);
+	if ($information == 'est_modifiee') {
+		// Initialisation du retour
+		$retour = true;
+
+		// Détermination du répertoire par défaut
+		$repertoire = noizetier_page_repertoire();
+
+		// Récupération du md5 enregistré en base de données
+		$from = 'spip_noizetier_pages';
+		$where = array('page=' . sql_quote($page));
+		$md5_enregistre = sql_getfetsel('signature', $from, $where);
+
+		if ($md5_enregistre) {
+			// On recherche d'abord le fichier YAML et sinon le fichier XML pou compatibilité ascendante.
+			if (($fichier = find_in_path("${repertoire}${page}.yaml"))
+			or ($fichier = find_in_path("${repertoire}${page}.xml"))) {
+				$md5 = md5_file($fichier);
+				if ($md5 == $md5_enregistre) {
+					$retour = false;
+				}
+			}
+		}
+	} else {
+		$retour = noizetier_page_lire($page, $information);
+	}
+
+	return $retour;
 }
 
 
@@ -341,53 +371,4 @@ function calculer_liste_objets() {
 
 	include_spip('inc/noizetier_objet');
 	return noizetier_objet_repertorier();
-}
-
-// --------------------------------------------------------------------
-// ------------------------- API CONFIGURATION ------------------------
-// --------------------------------------------------------------------
-
-/**
- * Détermine si la configuration d'une page ou d'une noisette contenue dans son
- * fichier XML ou YAML a été modifié ou pas.
- *
- * @package SPIP\NOIZETIER\API\PAGE
- * @api
- * @filtre
- *
- * @param string $entite
- * 		`page` pour désigner une page ou `noisette` pour une noisette.
- * @param string $identifiant
- * 		Identifiant de la page ou de la noisette.
- *
- * @return boolean
- * 		`true` si la configuration a été modifiée, `false` sinon.
- */
-function noizetier_configuration_est_modifiee($entite, $identifiant) {
-
-	// TODO : a voir si cette fonction n'est pas utilisée pour les noisettes on la renommera en noizetier_page_modifiee()
-	$est_modifiee = true;
-
-	// Détermination du répertoire par défaut
-	include_spip('inc/noizetier_page');
-	$repertoire = ($entite == 'page') ? noizetier_page_repertoire() : 'noisettes/';
-
-	// Récupération du md5 enregistré en base de données
-	$from = ($entite == 'page') ? 'spip_noizetier_pages' : 'spip_types_noisettes';
-	$where = array($entite . '=' . sql_quote($identifiant));
-	$md5_enregistre = sql_getfetsel('signature', $from, $where);
-
-	if ($md5_enregistre) {
-		// On recherche d'abord le fichier YAML qui est commun aux 2 entités et sinon le fichier
-		// XML si c'est une page.
-		if (($fichier = find_in_path("${repertoire}${identifiant}.yaml"))
-		or (($entite == 'page') and ($fichier = find_in_path("${repertoire}${identifiant}.xml")))) {
-			$md5 = md5_file($fichier);
-			if ($md5 == $md5_enregistre) {
-				$est_modifiee = false;
-			}
-		}
-	}
-
-	return $est_modifiee;
 }

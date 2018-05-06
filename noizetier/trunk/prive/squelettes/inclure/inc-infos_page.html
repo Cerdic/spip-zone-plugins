@@ -7,7 +7,7 @@
 
 	[<p class="explication">(#ENV{explication}|_T{#ARRAY{type, #ENV{type}}})</p>]
 
-	[(#ENV{est_virtuelle}|=={non}|et{#VAL{page}|noizetier_configuration_est_modifiee{#ENV{page}}}|oui)
+	[(#ENV{est_virtuelle}|=={non}|et{#NOIZETIER_PAGE_INFOS{#ENV{page}, est_modifiee}}|oui)
 		[(#SET{libelle, #ENV{composition}|?{<:noizetier:recharger_composition:>, <:noizetier:recharger_page:>}})]
 		<!-- TODO : voir comment ne recharger que la page concernée -->
 		[(#REM) <!-- Inutile d'utiliser l'autorisation noizetier car l'autorisation de cette page l'inclut déjà	-->]
