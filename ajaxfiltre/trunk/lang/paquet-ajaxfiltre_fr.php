@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 		// A
-		'ajaxfiltre_description' => 'Ce plugin permet de créer une navigation par facettes qui recharge une liste d\'objets en ajax.
+		'ajaxfiltre_description' => 'Ce plugin permet de créer des filtres de recherche multiples dans la colonne de gauche (navigation), qui rechargent une liste d\'objets en ajax.
 
 Fonctionne avec n\'importe quelle liste d\'objets.
 Il suffit d\'ajouter le nom {liste-objets} au paramètre ajax dans {prive/squelettes/contenu/pataes.html}, 
