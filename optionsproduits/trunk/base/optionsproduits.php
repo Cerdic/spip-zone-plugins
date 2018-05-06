@@ -80,9 +80,7 @@ function optionsproduits_declarer_tables_objets_sql($tables) {
 			'id_option'        => 'id_option',
 			'id_optionsgroupe' => 'id_optionsgroupe',
 		),
-		'parent'            => array(
-			array('type' => 'optionsgroupe', 'champ' => 'id_optionsgroupe'),
-		),
+		'parent'            => array('type' => 'optionsgroupe', 'champ' => 'id_optionsgroupe'),
 	);
 
 	$tables['spip_optionsgroupes'] = array(

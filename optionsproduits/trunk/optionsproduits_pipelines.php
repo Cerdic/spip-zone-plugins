@@ -141,19 +141,3 @@ function optionsproduits_optimiser_base_disparus($flux) {
 	return $flux;
 }
 
-/**
- * Déclarer les contextes pour le plugin Rang
- *
- * @pipeline rang_declarer_contexte
- *
- * @param  array $contexte Données du pipeline
- *
- * @return array       Données du pipeline
- */
-function optionsproduits_rang_declarer_contexte($contexte) {
-	$contexte[] = 'options';
-	$contexte[] = 'optionsgroupe';
-	$contexte[] = 'optionsgroupes';
-	//debug($contexte);
-	return $contexte;
-}
