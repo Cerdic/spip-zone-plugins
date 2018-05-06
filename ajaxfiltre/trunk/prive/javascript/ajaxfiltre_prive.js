@@ -9,11 +9,6 @@
 			base.options = $.extend({}, $.ajaxFiltre.defaultOptions, options);
 
 			base.$el.find('select, input[type=checkbox], input[type=radio]').on('change', function() {
-				base.$el.submit();
-			});
-
-			base.$el.on('submit', function(e) {
-				e.preventDefault();
 				
 				var formData = base.$el.serializeArray().reduce(function(obj, item) {
 					// si le name comporte des [] on construit un tableau
