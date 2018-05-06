@@ -258,7 +258,6 @@ function noizetier_page_type($page) {
  * Détermine, à partir de son identifiant, la composition d'une page si elle existe.
  *
  * @api
- * @filtre
  *
  * @param string $page
  * 		L'identifiant de la page.

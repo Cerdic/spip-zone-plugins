@@ -240,7 +240,7 @@ function balise_NOIZETIER_PAGE_INFOS_dist($p) {
 	// -- seul l'argument information est optionnel.
 	$page = interprete_argument_balise(1, $p);
 	$page = str_replace('\'', '"', $page);
-	$information = interprete_argument_balise(3, $p);
+	$information = interprete_argument_balise(2, $p);
 	$information = isset($information) ? str_replace('\'', '"', $information) : '""';
 
 	// Calcul de la balise

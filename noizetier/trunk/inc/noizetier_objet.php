@@ -136,7 +136,6 @@ function noizetier_objet_repertorier($filtres = array()) {
  * de page détectable par le noiZetier.
  *
  * @api
- * @filtre
  *
  * @return array|null
  */
