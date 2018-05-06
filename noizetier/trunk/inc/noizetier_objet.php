@@ -10,20 +10,20 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 /**
- * Lister les contenus ayant des noisettes spécifiquement configurées pour leur page.
+ * Renvoie la description complète ou uniquement une information précise pour un objet donné.
+ * Cette fonction est utilisable dans le public via la balise #NOIZETIER_OBJET_INFOS.
  *
  * @api
- * @filtre
  *
  * @param string $type_objet
+ *        Type de l'objet comme `article`.
  * @param string $id_objet
- *        Id de l'objet ou 0.
+ *        Id de l'objet.
  * @param string $information
- *        Champ précis à renvoyer ou chaine vide pour renvoyer toutes les champs de l'objet.
+ *        Champ précis à renvoyer ou chaîne vide pour renvoyer toutes les champs de l'objet.
  *
- * @return array|string
- *        Si le type et l'id du contenu sont fournis, on renvoie la description de la page de ce contenu.
- *        Sinon, on renvoie le tableau des descriptions des pages de tous les contenus indexés par [type_objet][id_objet].
+ * @return mixed
+ *         La description complète sous forme de tableau ou l'information précise demandée.
  */
 function noizetier_objet_lire($type_objet, $id_objet, $information = '') {
 
@@ -57,8 +57,8 @@ function noizetier_objet_lire($type_objet, $id_objet, $information = '') {
 		}
 
 		// On rajoute les blocs du type de page dont l'objet est une instance
-		include_spip('inc/noizetier_bloc');
-		$description['blocs'] = noizetier_bloc_lister($type_objet);
+		include_spip('inc/noizetier_page');
+		$description['blocs'] = noizetier_page_lister_blocs($type_objet);
 
 		// On sauvegarde finalement la description complète.
 		$description_objet[$type_objet][$id_objet] = $description;
@@ -80,16 +80,16 @@ function noizetier_objet_lire($type_objet, $id_objet, $information = '') {
 
 /**
  * Lister les contenus ayant des noisettes spécifiquement configurées pour leur page.
+ * Cette fonction est utilisable dans le public via la balise #NOIZETIER_OBJET_LISTE.
  *
  * @api
- * @filtre
  *
  * @param array $filtres
- * 		Liste des champs sur lesquels appliquer les filtres des objets.
+ * 	      Liste des champs sur lesquels appliquer les filtres des objets.
  *
  * @return array|string
- * 		Si le type et l'id du contenu sont fournis, on renvoie la description de la page de ce contenu.
- * 		Sinon, on renvoie le tableau des descriptions des pages de tous les contenus indexés par [type_objet][id_objet].
+ * 		   Tableau des descriptions de chaque objet trouvés. Ce tableau est éventuellement filtré sur
+ *         un ou plusieurs champs de la description.
  */
 function noizetier_objet_repertorier($filtres = array()) {
 
@@ -132,8 +132,8 @@ function noizetier_objet_repertorier($filtres = array()) {
 }
 
 /**
- * Renvoie la liste des types d'objet ne pouvant pas être personnaliser car ne possédant pas de page
- * détectable par le noiZetier.
+ * Renvoie la liste des types d'objet ne pouvant pas être personnalisés car ne possédant pas
+ * de page détectable par le noiZetier.
  *
  * @api
  * @filtre
@@ -166,7 +166,7 @@ function noizetier_objet_lister_exclusions() {
 }
 
 /**
- * Détermine si un type d'objet est activé par configuration du noiZetier.
+ * Détermine si un type d'objet est activé dans la configuration du noiZetier.
  * Si oui, ses objets peuvent recevoir une configuration de noisettes.
  *
  * @api

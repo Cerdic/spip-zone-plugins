@@ -157,7 +157,6 @@ function noizetier_page_charger($recharger = false) {
  * La configuration est stockée en base de données, certains champs sont recalculés avant d'être fournis.
  *
  * @api
- * @filtre
  *
  * @uses noizetier_bloc_defaut()
  *
@@ -170,7 +169,7 @@ function noizetier_page_charger($recharger = false) {
  *
  * @return array
  */
-function noizetier_page_informer($page, $traitement_typo = true) {
+function noizetier_page_lire($page, $traitement_typo = true) {
 
 	static $description_page = array();
 
@@ -192,8 +191,7 @@ function noizetier_page_informer($page, $traitement_typo = true) {
 			$description['necessite'] = unserialize($description['necessite']);
 			$description['branche'] = unserialize($description['branche']);
 			// Calcul des blocs
-			include_spip('inc/noizetier_bloc');
-			$description['blocs'] = noizetier_bloc_lister($page, $description['blocs_exclus']);
+			$description['blocs'] = noizetier_page_lister_blocs($page, $description['blocs_exclus']);
 			$description_page[$traitement_typo][$page] = $description;
 		} else {
 			$description_page[$traitement_typo][$page] = array();
@@ -203,11 +201,44 @@ function noizetier_page_informer($page, $traitement_typo = true) {
 	return $description_page[$traitement_typo][$page];
 }
 
+
+
+/**
+ *
+ * @api
+ *
+ * @param       $page
+ * @param array $blocs_exclus
+ *
+ * @return array
+ */
+function noizetier_page_lister_blocs($page, $blocs_exclus = array()) {
+
+	// Initialisation des blocs avec la liste des blocs par défaut
+	include_spip('inc/noizetier_bloc');
+	$blocs = noizetier_bloc_defaut();
+
+	// Si la liste des blocs exclus n'a pas été passé en argument on les cherche dans la configuration
+	// de la page
+	if (!$blocs_exclus) {
+		$where = array('page=' . sql_quote($page));
+		$blocs_exclus = sql_getfetsel('blocs_exclus', 'spip_noizetier_pages', $where);
+		$blocs_exclus = unserialize($blocs_exclus);
+	}
+
+	if ($blocs_exclus) {
+		$blocs = array_diff($blocs, $blocs_exclus);
+		sort($blocs);
+	}
+
+	return $blocs;
+}
+
+
 /**
  * Renvoie le type d'une page à partir de son identifiant.
  *
  * @api
- * @filtre
  *
  * @param string $page
  * 		L'identifiant de la page.

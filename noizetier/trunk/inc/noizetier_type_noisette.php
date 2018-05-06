@@ -10,11 +10,18 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 /**
+ * Renvoie le nombre de types de noisettes disponibles pour une page ou une composition donnée en distinguant
+ * les types de noisettes communs à toutes les pages, les types de noisettes spécifiques à un type de page et
+ * les types de noisettes spécifiques à une composition.
+ *
+ * @api
  * @filtre
  *
  * @param $page
+ *        Identifiant de la page ou de la composition.
  *
  * @return array
+ *         Tableau associatif des compteurs avec les index `commun`, `type`, `composition` et `total`.
  */
 function noizetier_type_noisette_compter($page) {
 

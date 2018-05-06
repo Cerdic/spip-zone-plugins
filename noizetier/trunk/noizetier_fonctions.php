@@ -76,18 +76,67 @@ function noizetier_icone_repertorier($taille = 24) {
 // -------------------------------------------------------------------
 // ---------------------------- API BLOCS ----------------------------
 // -------------------------------------------------------------------
-include_spip('inc/noizetier_bloc');
+
+/**
+ * Renvoie le nombre de noisettes de chaque bloc configurables d'une page, d'une composition
+ * ou d'un objet.
+ *
+ * @api
+ * @filtre
+ *
+ * @param string $page_ou_objet
+ * 		L'identifiant de la page, de la composition ou de l'objet au format:
+ * 		- pour une page : type
+ * 		- pour une composition : type-composition
+ * 		- pour un objet : type_objet-id_objet
+ *
+ * @return array
+ */
+function noizetier_bloc_compter_noisettes($page_ou_objet) {
+
+	static $blocs_compteur = array();
+
+	if (!isset($blocs_compteur[$page_ou_objet])) {
+		// Initialisation des compteurs par bloc
+		$nb_noisettes = array();
+
+		// Le nombre de noisettes par bloc doit être calculé par une lecture de la table spip_noisettes.
+		$from = array('spip_noisettes');
+		$select = array('bloc', "count(type_noisette) as 'noisettes'");
+		// -- Construction du where identifiant précisément la page ou l'objet concerné
+		$identifiants = explode('-', $page_ou_objet);
+		if (isset($identifiants[1]) and ($id = intval($identifiants[1]))) {
+			// L'identifiant est celui d'un objet
+			$where = array('objet=' . sql_quote($identifiants[0]), 'id_objet=' . $id);
+		} else {
+			if (!isset($identifiants[1])) {
+				// L'identifiant est celui d'une page
+				$identifiants[1] = '';
+			}
+			$where = array('type=' . sql_quote($identifiants[0]), 'composition=' . sql_quote($identifiants[1]));
+		}
+		$group = array('bloc');
+		$compteurs = sql_allfetsel($select, $from, $where, $group);
+		if ($compteurs) {
+			// On formate le tableau [bloc] = nb noisettes
+			foreach ($compteurs as $_compteur) {
+				$nb_noisettes[$_compteur['bloc']] = $_compteur['noisettes'];
+			}
+		}
+		$blocs_compteur[$page_ou_objet] = $nb_noisettes;
+	}
+
+	return (isset($blocs_compteur[$page_ou_objet]) ? $blocs_compteur[$page_ou_objet] : array());
+}
 
 // -------------------------------------------------------------------
 // ---------------------------- API PAGES ----------------------------
 // -------------------------------------------------------------------
-include_spip('inc/noizetier_page');
 
 
 // --------------------------------------------------------------------
 // ---------------------------- API OBJETS ----------------------------
 // --------------------------------------------------------------------
-include_spip('inc/noizetier_objet');
 
 
 // --------------------------------------------------------------------
@@ -116,6 +165,7 @@ function noizetier_configuration_est_modifiee($entite, $identifiant) {
 	$est_modifiee = true;
 
 	// Détermination du répertoire par défaut
+	include_spip('inc/noizetier_page');
 	$repertoire = ($entite == 'page') ? noizetier_page_repertoire() : 'noisettes/';
 
 	// Récupération du md5 enregistré en base de données

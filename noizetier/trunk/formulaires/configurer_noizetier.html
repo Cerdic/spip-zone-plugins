@@ -21,11 +21,10 @@
 		[(#REM) Il faut exclure les types d'objet qui n'ont pas de page explicitement détectable par le noiZetier pour
 		        ne proposer que les types d'objet potentiellement utilisables ]
 		<div class="editer-groupe">
-		#SET{objets_exclus, #VAL|noizetier_objet_lister_exclusions}
 		[(#SAISIE{choisir_objets, objets_noisettes,
 			label=<:noizetier:configurer_objets_noisettes_label:>,
 			explication=<:noizetier:configurer_objets_noisettes_explication:>,
-			exclus=#GET{objets_exclus}})]
+			exclus=#ENV{_objets_exclus}})]
 		</div>
 
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>

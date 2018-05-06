@@ -118,7 +118,7 @@ function noizetier_recuperer_fond($flux) {
 
 					$page = isset($contexte['type']) ? $contexte['type'] : (isset($contexte['type-page']) ? $contexte['type-page'] : '');
 					$page .= (isset($contexte['composition']) && $contexte['composition']) ? '-'.$contexte['composition'] : '';
-					$blocs = noizetier_bloc_lister($page);
+					$blocs = noizetier_page_lister_blocs($page);
 					if (isset($blocs[$bloc])) {
 						$complements = recuperer_fond('bloc_preview', $contexte, array('raw' => true));
 						$flux['data']['texte'] .= $complements['texte'];

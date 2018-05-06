@@ -5,6 +5,22 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 
+function formulaires_configurer_noizetier_charger_dist() {
+
+	// On récupère les valeurs configurées
+	include_spip('inc/cvt_configurer');
+	$valeurs = cvtconf_formulaires_configurer_recense('configurer_noizetier');
+
+	// Injecter les objets exclus
+	include_spip('inc/noizetier_objet');
+	$valeurs['_objets_exclus'] = noizetier_objet_lister_exclusions();
+
+	$valeurs['editable'] = true;
+
+	return $valeurs;
+}
+
+
 function formulaires_configurer_noizetier_traiter_dist() {
 	$retour = array();
 
