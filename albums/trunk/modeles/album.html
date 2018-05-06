@@ -153,7 +153,7 @@
 		(#SET{titre_doc,      #TITRE|sinon{#FICHIER|basename}})][
 		(#SET{titre_doc_long, #EVAL{_ALBUMS_TITRE_COURT}|?{#GET{titre_doc},#GET{titre_doc}|concat{' - ',#TYPE_DOCUMENT,' - ',#VAL{#TAILLE|taille_en_octets},#MEDIA|=={image}|?{#VAL{' - '}|concat{#LARGEUR,'&times;',#HAUTEUR,' px'}}}}})][
 		(#SET{ratio,          #GET{recadrer}|?{#VAL{/\[-:\/\]/}|preg_split{#ENV*{ratio,1}}}})][
-		(#SET{ratio,          #GET{ratio}|count|>{1}|?{#GET{ratio/1}|div{#GET{ratio/0}},#GET{ratio/0}}|floatval})][
+		(#SET{ratio,          #GET{ratio,#LISTE}|count|>{1}|?{#GET{ratio/1}|div{#GET{ratio/0}},#GET{ratio/0}}|floatval})][
 		(#SET{ratio,          #GET{ratio}|sinon{#LARGEUR|div{#HAUTEUR}}|floatval})][
 		(#SET{largeur,        #ENV{largeur}|sinon{#ENV{hauteur}|div{#GET{ratio}}}|sinon{#GET{taille_preview}}|intval})][
 		(#SET{hauteur,        #ENV{hauteur,#GET{largeur}|mult{#GET{ratio}}}|intval})][
