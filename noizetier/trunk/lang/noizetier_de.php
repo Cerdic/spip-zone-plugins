@@ -93,8 +93,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'ne_pas_definir_d_heritage' => 'Keine Vererbung festlegen', # MODIF
 	'noisettes_composition' => 'Code-Nüsse der Komposition <i>@composition@</i> :',
-	'noisettes_page' => 'Code-Nüsse der Seite <i>@type@</i> :',
-	'noisettes_toutes_pages' => 'Code-Nüsse für alle Seiten:',
+	'noisettes_page' => 'Code-Nüsse der Seite <i>@type@</i> :', # MODIF
+	'noisettes_toutes_pages' => 'Code-Nüsse für alle Seiten:', # MODIF
 	'nom_bloc_contenu' => 'Inhalt',
 	'nom_bloc_extra' => 'Extra',
 	'nom_bloc_navigation' => 'Navigation',

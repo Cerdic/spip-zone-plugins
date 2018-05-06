@@ -124,8 +124,8 @@ nuts on the following pages:',
 	'noisette_numero' => 'nut number :',
 	'noisettes_composition' => 'Specific nuts to the composition <i>@composition@</i>:',
 	'noisettes_disponibles' => 'Nuts available', # MODIF
-	'noisettes_page' => 'Specific nuts to the page <i>@type@</i>:',
-	'noisettes_toutes_pages' => 'Common nuts to all pages:',
+	'noisettes_page' => 'Specific nuts to the page <i>@type@</i>:', # MODIF
+	'noisettes_toutes_pages' => 'Common nuts to all pages:', # MODIF
 	'noizetier' => 'Nuts Manager',
 	'nom_bloc_contenu' => 'Content',
 	'nom_bloc_extra' => 'Extra',

@@ -93,8 +93,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'ne_pas_definir_d_heritage' => 'تعريف نكردن ميراث', # MODIF
 	'noisettes_composition' => 'فندق‌هاي مشخص شده در تركيب <i>@composition@</i>:',
-	'noisettes_page' => 'فندق‌هاي مشخص شده براي صفحه‌ي <i>@type@</i> :',
-	'noisettes_toutes_pages' => 'فندق‌هاي مشترك در تمام صفحه‌ها: ',
+	'noisettes_page' => 'فندق‌هاي مشخص شده براي صفحه‌ي <i>@type@</i> :', # MODIF
+	'noisettes_toutes_pages' => 'فندق‌هاي مشترك در تمام صفحه‌ها: ', # MODIF
 	'noizetier' => 'درخت فندق',
 	'nom_bloc_contenu' => 'مطلب',
 	'nom_bloc_extra' => 'فوق‌العاده ',
