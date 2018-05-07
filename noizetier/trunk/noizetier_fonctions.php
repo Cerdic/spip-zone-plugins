@@ -162,7 +162,7 @@ function calculer_infos_bloc($bloc = '', $information = '') {
  * ou d'une composition donnée. Ces champs sont lus dans la table `spip_noizetier_pages`.
  * La signature de la balise est : `#NOIZETIER_PAGE_INFOS{page, information}`.
  *
- * La fonction peut aussi renvoyée d'autres informations calculées, à savoir :
+ * La fonction peut aussi renvoyer d'autres informations calculées, à savoir :
  * - `est_modifiee` qui indique si la configuration du fichier YAML ou XML de la page a été modifiée ou pas.
  * - `compteurs_type_noisette` qui donne le nombre de types de noisettes disponibles pour la page ou la composition
  *    donnée en distinguant les types de noisettes communs à toutes les pages, les types de noisettes spécifiques à
