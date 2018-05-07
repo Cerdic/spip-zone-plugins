@@ -1,11 +1,13 @@
 <?php
-
-
 /*
 	La Fonction Sale()
 	(c)2005 James <klike@free.fr>
 	d'après le bouton memo et le script spip_unparse
 */
+
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function tag2attributs($innerTag) {
 	$pattern1 = "([a-zA-Z_]*)\s*=\s*[']([^']*)[']";
@@ -105,6 +107,10 @@ function correspondances_a_bas_le_html() {
 		// on ne veux pas des div
 		',<div.*>,Uims' => '',
 		",<\/div.*>,Uims" => '',
+
+		// on ne veut pas des span
+		',<span.*>,Uims' => '',
+		",<\/span.*>,Uims" => '',
 
 		// divers et variés 
 		',<csobj.*>,Uims' => '',
@@ -429,7 +435,7 @@ function sale($contenu_sale, $correspondances = '') {
 
 	// a priori on garde ce qui est pas analysé
 	//foreach(correspondances_a_bas_le_html() as $motif => $remplacement)
-	//	$contenu_propre = preg_replace($motif, $remplacement, $contenu_propre);
+	//  $contenu_propre = preg_replace($motif, $remplacement, $contenu_propre);
 
 	return $contenu_propre;
 }
