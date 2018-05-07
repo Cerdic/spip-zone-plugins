@@ -253,41 +253,68 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
 		$res['redirect'] = $retour;
 	}
 
-	// Retours du formulaire d'ajout de document
+	// Si c'est un doc de la médiathèque, notons s'il est déjà lié
+	$doc_deja_present = (
+		_request('joindre_mediatheque')
+		and sql_countsel(
+		'spip_documents_liens',
+			array(
+				'objet = ' . sql_quote($objet),
+				'id_objet = ' . intval($id_objet),
+				'id_document = ' . intval(_request('refdoc_joindre')),
+				'id_document > 0'
+			)
+		)
+	);
+
+	// Traitements génériques du formulaire d'ajout de documents
+	// (ajout du doc dans la table, liaison avec l'objet, etc.)
 	$traiter_joindre_document = charger_fonction('traiter', 'formulaires/joindre_document');
 	$res_joindre_document = $traiter_joindre_document('new', $id_objet, $objet);
 
-	// En cas de succès
-	if (isset($res_joindre_document['message_ok'])) {
+	// En cas de succès, on ajoute le rôle sélectionné
+	if ($roles = _request('roles')
+		and isset($res_joindre_document['message_ok'])
+		and !empty($res_joindre_document['ids'])
+	) {
 
-		// En présence d'un role sélectionne, on requalifie le lien créé
-		if ($roles = _request('roles')
-			and !empty($res_joindre_document['ids'])
-		) {
-			// le role est unique mais on ne sait jamais
-			if (is_array($roles)) {
-				$roles = array_shift($roles);
-			}
-			// On ne prend qu'un seul document
-			if ($id_document = intval(array_shift($res_joindre_document['ids']))) {
-				$update = sql_updateq(
-					'spip_documents_liens',
-					array('role' => $roles),
-					array(
-						'id_document=' . intval($id_document),
-						'objet='       . sql_quote($objet),
-						'id_objet='    . intval($id_objet),
-						'role='        . sql_quote('document'),
-					)
-				);
-			}
+		// Un seul rôle peut être sélectionné, mais on ne sait jamais
+		if (is_array($roles)) {
+			$roles = array_shift($roles);
+		}
+
+		// On ne prend qu'un seul document
+		$id_document = intval(array_shift($res_joindre_document['ids']));
+
+		// Cas 1 : le document n'était pas déjà lié, on requalifie le lien créé
+		if (!$doc_deja_present) {
+			$update = sql_updateq(
+				'spip_documents_liens',
+				array('role' => $roles),
+				array(
+					'id_document=' . intval($id_document),
+					'objet='       . sql_quote($objet),
+					'id_objet='    . intval($id_objet),
+					'role='        . sql_quote('document'),
+				)
+			);
+
+		// Cas 2 : le document était déjà lié, on crée un nouveau lien qualifié
+		} else {
+			$insert = sql_insertq(
+				'spip_documents_liens',
+				array(
+					'id_document' => intval($id_document),
+					'objet'       => $objet,
+					'id_objet'    => intval($id_objet),
+					'role'        => $roles,
+				)
+			);
 		}
 
 		// Invalider les caches de l'objet
 		include_spip('inc/invalideur');
 		suivre_invalideur("id='$objet/$id_objet'");
-
-		// TODO : Modifier le javascript du message de retour
 
 	}
 
