@@ -52,7 +52,7 @@
 						[<a href="#" onclick="jQuery('#suggestions_icones').show(500);jQuery('#afficher_suggestions').hide(500);return false;" ><:noizetier:suggestions:></a>]
 					</div>
 					<strong><:noizetier:apercu:></strong><br />
-					<span id="apercu_icone">[(#ENV{icon}|noizetier_icone_chemin|balise_img)]</span>
+					<span id="apercu_icone">[(#CHEMIN_IMAGE{#ENV{icon}}|balise_img)]</span>
 					<B_suggestions_icones>
 					<div id="suggestions_icones">
 						<div id="bouton_suggestion">
@@ -61,7 +61,7 @@
 						<p><strong><:noizetier:suggestions:></strong></p>
 					<BOUCLE_suggestions_icones(DATA){source table, #NOIZETIER_ICONE_LISTE{24}}{par cle}>
 							<div class="suggestion_icone" onclick="jQuery('input#icon').val('#CLE');maj_apercu_icone();jQuery('#suggestions_icones').hide(500);jQuery('#afficher_suggestions').show(500);return false;">
-								[(#CLE|noizetier_icone_chemin|balise_img)<br />]
+								[(#CHEMIN_IMAGE{#CLE}|balise_img)<br />]
 								#CLE
 							</div>
 					</BOUCLE_suggestions_icones>

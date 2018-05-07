@@ -45,7 +45,7 @@ function noizetier_objet_lire($type_objet, $id_objet, $information = '') {
 			$description['logo'] = isset($logo_infos['src']) ? $logo_infos['src'] : '';
 		}
 		if (!$description['logo']) {
-			$description['logo'] = noizetier_icone_chemin("${type_objet}.png");
+			$description['logo'] = chemin_image("${type_objet}.png");
 		}
 
 		// On récupère le nombre de noisette déjà configurées dans l'objet.
@@ -193,4 +193,49 @@ function noizetier_objet_type_active($type_objet) {
 	}
 
 	return $est_active;
+}
+
+
+/**
+ * Détermine, pour un objet donné, la liste des blocs ayant des noisettes incluses et renvoie leur nombre.
+ *
+ * @api
+ *
+ * @param string $objet
+ * 	      Le type d'objet comme `article`.
+ * @param int    $id_objet
+ * 	      L'id de l'objet.
+ *
+ * @return array
+ * 	       Tableau des nombre de noisettes incluses par bloc de la forme [bloc] = nombre de noisettes.
+ */
+function noizetier_objet_compter_noisettes($objet, $id_objet) {
+
+	static $blocs_compteur = array();
+
+	if (!isset($blocs_compteur["${objet}-${id_objet}"])) {
+		// Initialisation des compteurs par bloc
+		$nb_noisettes = array();
+
+		// Le nombre de noisettes par bloc doit être calculé par une lecture de la table spip_noisettes.
+		$from = array('spip_noisettes');
+		$select = array('bloc', "count(type_noisette) as 'noisettes'");
+		// -- Construction du where identifiant précisément le type et la composition de la page
+		$where = array(
+			'plugin=' . sql_quote('noizetier'),
+			'objet=' . sql_quote($objet),
+			'id_objet=' . intval($id_objet)
+		);
+		$group = array('bloc');
+		$blocs_non_vides = sql_allfetsel($select, $from, $where, $group);
+		if ($blocs_non_vides) {
+			// On formate le tableau [bloc] = nb noisettes
+			$nb_noisettes = array_column($blocs_non_vides, 'noisettes', 'bloc');
+		}
+
+		// Sauvegarde des compteurs pour les blocs concernés.
+		$blocs_compteur["${objet}-${id_objet}"] = $nb_noisettes;
+	}
+
+	return $blocs_compteur["${objet}-${id_objet}"];
 }

@@ -322,7 +322,6 @@ function noizetier_page_composition_activee($type) {
  * Déterminer le répertoire dans lequel le NoiZetier peut lister les pages pouvant supporter
  * l'insertion de noisettes.
  *
- * @package SPIP\NOIZETIER\API\PAGE
  * @api
  *
  * @return string
@@ -340,6 +339,48 @@ function noizetier_page_repertoire() {
 	}
 
 	return $repertoire_pages;
+}
+
+/**
+ * Détermine, pour une page donnée, la liste des blocs ayant des noisettes incluses et renvoie leur nombre.
+ *
+ * @api
+ *
+ * @param string $page
+ * 	      L'identifiant de la page ou de la composition.
+ *
+ * @return array
+ * 	       Tableau des nombre de noisettes incluses par bloc de la forme [bloc] = nombre de noisettes.
+ */
+function noizetier_page_compter_noisettes($page) {
+
+	static $blocs_compteur = array();
+
+	if (!isset($blocs_compteur[$page])) {
+		// Initialisation des compteurs par bloc
+		$nb_noisettes = array();
+
+		// Le nombre de noisettes par bloc doit être calculé par une lecture de la table spip_noisettes.
+		$from = array('spip_noisettes');
+		$select = array('bloc', "count(type_noisette) as 'noisettes'");
+		// -- Construction du where identifiant précisément le type et la composition de la page
+		$where = array(
+			'plugin=' . sql_quote('noizetier'),
+			'type=' . sql_quote(noizetier_page_type($page)),
+			'composition=' . sql_quote(noizetier_page_composition($page))
+		);
+		$group = array('bloc');
+		$blocs_non_vides = sql_allfetsel($select, $from, $where, $group);
+		if ($blocs_non_vides) {
+			// On formate le tableau [bloc] = nb noisettes
+			$nb_noisettes = array_column($blocs_non_vides, 'noisettes', 'bloc');
+		}
+
+		// Sauvegarde des compteurs pour les blocs concernés.
+		$blocs_compteur[$page] = $nb_noisettes;
+	}
+
+	return $blocs_compteur[$page];
 }
 
 /**

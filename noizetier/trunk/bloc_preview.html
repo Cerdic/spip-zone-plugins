@@ -24,7 +24,7 @@
 	<div class="noizetier-noisette" id="noizetier-noisette-#ID_NOISETTE" style="padding:10px; border:2px solid #9DBA00; margin:10px 0;">
 		<BOUCLE_type_noisette(TYPES_NOISETTES){type_noisette}>
 			<div style="color:#9DBA00; font-size:1.5em; margin:5px 0;"><strong>
-				<div style="float:right;">[(#ICON|sinon{noisette-24.png}|noizetier_icone_chemin|balise_img{})]</div>
+				<div style="float:right;">[(#CHEMIN_IMAGE{#ICON|sinon{noisette-24.png}}|balise_img{})]</div>
 				[(#NOM)]
 			</strong></div>
 		</BOUCLE_type_noisette>

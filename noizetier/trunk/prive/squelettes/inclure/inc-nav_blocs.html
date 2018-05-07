@@ -1,5 +1,10 @@
 [(#REM) <!-- Navigation dans les blocs configurables de la page --> ]
-[(#SET{blocs_decompte, [(#ENV{page}|?{#ENV{page}, #ENV{objet}-#ENV{id_objet}}|noizetier_bloc_compter_noisettes)]})]
+#SET{blocs_decompte,
+	#ENV{page}|?{
+		#NOIZETIER_PAGE_INFOS{#ENV{page}, compteurs_noisette},
+		#NOIZETIER_OBJET_INFOS{#ENV{objet}, #ENV{id_objet}, compteurs_noisette}
+	}
+}
 <B_blocs>
 <div class="onglets_simple second clearfix">
 	<ul class="blocs">

@@ -1,4 +1,4 @@
-#SET{compteurs, #ENV{page, #OBJET}|noizetier_type_noisette_compter}
+#SET{compteurs, #NOIZETIER_PAGE_INFOS{#ENV{page, #OBJET}, compteurs_type_noisette}}
 <BOUCLE_si_noisette(CONDITION) {si #GET{compteurs/total}}>
 	<BOUCLE_infos_page(NOIZETIER_PAGES) {page=#ENV{page, #OBJET}}>
 		[(#SET{type, #TYPE})]

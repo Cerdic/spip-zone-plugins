@@ -20,6 +20,7 @@ function noizetier_recuperer_fond($flux) {
 	// à false.
 	if ((defined('_NOIZETIER_RECUPERER_FOND') ? _NOIZETIER_RECUPERER_FOND : true) and !test_espace_prive()) {
 		include_spip('inc/noizetier_page');
+		include_spip('inc/noizetier_objet');
 		$fond = isset($flux['args']['fond']) ? $flux['args']['fond'] : '';
 		if ($fond) {
 			// On détermine la page et le bloc à partir du fond qui est de la forme bloc/page.
@@ -61,9 +62,9 @@ function noizetier_recuperer_fond($flux) {
 						and $cle_objet = id_table_objet($objet)
 						and isset($flux['args']['contexte'][$cle_objet])
 						and $id_objet = intval($flux['args']['contexte'][$cle_objet])
-						and $par_objet = array_key_exists($bloc, noizetier_bloc_compter_noisettes("${objet}-${id_objet}"))
+						and $par_objet = array_key_exists($bloc, noizetier_objet_compter_noisettes($objet, $id_objet))
 					)
-					or array_key_exists($bloc, noizetier_bloc_compter_noisettes($page))
+					or array_key_exists($bloc, noizetier_page_compter_noisettes($page))
 				) {
 					$contexte = $flux['data']['contexte'];
 					$contexte['bloc'] = $bloc;
@@ -206,7 +207,7 @@ function noizetier_compositions_lister_disponibles($flux) {
 				$flux['data'][$_configuration['type']][$_configuration['composition']] = array(
 					'nom' 			=> _T_ou_typo($_configuration['nom']),
 					'description'	=> isset($_configuration['description']) ? _T_ou_typo($_configuration['description']) : '',
-					'icon' 			=> noizetier_icone_chemin($_configuration['icon']),
+					'icon' 			=> chemin_image($_configuration['icon']),
 					'branche' 		=> unserialize($_configuration['branche']),
 					'class' 		=> '',
 					'configuration'	=> '',

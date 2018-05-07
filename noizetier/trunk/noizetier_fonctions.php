@@ -11,7 +11,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 // --------------------------------------------------------------------------------
 // --------------------- API TYPES DE NOISETTE : COMPLEMENT -----------------------
 // --------------------------------------------------------------------------------
-include_spip('inc/noizetier_type_noisette');
 
 
 // --------------------------------------------------------------------------------
@@ -60,28 +59,6 @@ function balise_NOIZETIER_NOISETTE_PREVIEW_dist($p) {
 // -------------------------------------------------------------------
 
 /**
- * Retourne le chemin complet d'une icone.
- * La fonction vérifie d'abord que l'icone est dans le thème du privé (chemin_image),
- * sinon cherche dans le path SPIP (find_in_path).
- *
- * @package SPIP\NOIZETIER\ICONE\API
- * @api
- * @filtre
- *
- * @param string $icone
- *
- * @return string
- */
- function noizetier_icone_chemin($icone){
-	// TODO : faut-il garder cette fonction ou simplifier en utilisant uniquement chemin_image() ?
-	if (!$chemin = chemin_image($icone)) {
-		$chemin = find_in_path($icone);
-	}
-
-	return $chemin;
-}
-
-/**
  * Compile la balise `#NOIZETIER_ICONE_LISTE` qui fournit la liste des icones d'une taille donnée en pixels
  * disponibles dans les thèmes SPIP de l'espace privé.
  * La signature de la balise est : `#NOIZETIER_ICONE_LISTE{taille}`.
@@ -109,6 +86,8 @@ function balise_NOIZETIER_ICONE_LISTE_dist($p) {
 }
 
 /**
+ * @internal
+ *
  * @param int $taille
  *
  * @return array|string
@@ -129,61 +108,6 @@ function calculer_liste_icones($taille = 24) {
 // -------------------------------------------------------------------
 // ---------------------------- API BLOCS ----------------------------
 // -------------------------------------------------------------------
-
-/**
- * Renvoie le nombre de noisettes de chaque bloc configurables d'une page, d'une composition
- * ou d'un objet.
- *
- * @package SPIP\NOIZETIER\BLOC\API
- * @api
- * @filtre
- *
- * @param string $page_ou_objet
- * 		L'identifiant de la page, de la composition ou de l'objet au format:
- * 		- pour une page : type
- * 		- pour une composition : type-composition
- * 		- pour un objet : type_objet-id_objet
- *
- * @return array
- */
-function noizetier_bloc_compter_noisettes($page_ou_objet) {
-
-	static $blocs_compteur = array();
-
-	if (!isset($blocs_compteur[$page_ou_objet])) {
-		// Initialisation des compteurs par bloc
-		$nb_noisettes = array();
-
-		// Le nombre de noisettes par bloc doit être calculé par une lecture de la table spip_noisettes.
-		$from = array('spip_noisettes');
-		$select = array('bloc', "count(type_noisette) as 'noisettes'");
-		// -- Construction du where identifiant précisément la page ou l'objet concerné
-		$identifiants = explode('-', $page_ou_objet);
-		if (isset($identifiants[1]) and ($id = intval($identifiants[1]))) {
-			// L'identifiant est celui d'un objet
-			$where = array('objet=' . sql_quote($identifiants[0]), 'id_objet=' . $id);
-		} else {
-			if (!isset($identifiants[1])) {
-				// L'identifiant est celui d'une page
-				$identifiants[1] = '';
-			}
-			$where = array('type=' . sql_quote($identifiants[0]), 'composition=' . sql_quote($identifiants[1]));
-		}
-		$group = array('bloc');
-		$compteurs = sql_allfetsel($select, $from, $where, $group);
-		if ($compteurs) {
-			// On formate le tableau [bloc] = nb noisettes
-			foreach ($compteurs as $_compteur) {
-				$nb_noisettes[$_compteur['bloc']] = $_compteur['noisettes'];
-			}
-		}
-		$blocs_compteur[$page_ou_objet] = $nb_noisettes;
-	}
-
-	return (isset($blocs_compteur[$page_ou_objet])
-		? $blocs_compteur[$page_ou_objet]
-		: array());
-}
 
 /**
  * Compile la balise `#NOIZETIER_BLOC_INFOS` qui fournit un champ ou tous les champs descriptifs d'un bloc Z
@@ -215,6 +139,8 @@ function balise_NOIZETIER_BLOC_INFOS_dist($p) {
 }
 
 /**
+ * @internal
+ *
  * @param string $bloc
  * @param string $information
  *
@@ -236,8 +162,12 @@ function calculer_infos_bloc($bloc = '', $information = '') {
  * ou d'une composition donnée. Ces champs sont lus dans la table `spip_noizetier_pages`.
  * La signature de la balise est : `#NOIZETIER_PAGE_INFOS{page, information}`.
  *
- * La fonction peut aussi renvoyée une information spéciale `est_modifiee` qui indique si la configuration
- * du fichier YAML ou XML de la page a été modifiée ou pas.
+ * La fonction peut aussi renvoyée d'autres informations calculées, à savoir :
+ * - `est_modifiee` qui indique si la configuration du fichier YAML ou XML de la page a été modifiée ou pas.
+ * - `compteurs_type_noisette` qui donne le nombre de types de noisettes disponibles pour la page ou la composition
+ *    donnée en distinguant les types de noisettes communs à toutes les pages, les types de noisettes spécifiques à
+ *    un type de page et les types de noisettes spécifiques à une composition.
+ * - `compteurs_noisette` qui donne le nombre de noisettes incluses dans chaque bloc de la page.
  *
  * @package SPIP\NOIZETIER\PAGE\BALISE
  * @balise
@@ -248,6 +178,8 @@ function calculer_infos_bloc($bloc = '', $information = '') {
  *     #NOIZETIER_PAGE_INFOS{article, nom}, renvoie le titre de la page article
  *     #NOIZETIER_PAGE_INFOS{article-forum, nom}, renvoie le titre de la composition forum de la page article
  *     #NOIZETIER_PAGE_INFOS{article, est_modifiee}, indique si la configuration de la page article a été modifiée
+ *     #NOIZETIER_PAGE_INFOS{article, compteurs_type_noisette}, fournit les compteurs de types de noisette compatibles
+ *     #NOIZETIER_PAGE_INFOS{article, compteurs_noisette}, fournit les compteurs de noisettes incluses par bloc
  *     ```
  *
  * @param Champ $p
@@ -272,10 +204,12 @@ function balise_NOIZETIER_PAGE_INFOS_dist($p) {
 }
 
 /**
+ * @internal
+ *
  * @param        $page
  * @param string $information
  *
- * @return array
+ * @return mixed
  */
 function calculer_infos_page($page, $information = '') {
 
@@ -302,6 +236,54 @@ function calculer_infos_page($page, $information = '') {
 				}
 			}
 		}
+	} elseif ($information == 'compteurs_type_noisette') {
+		// Initialisation des compteurs par bloc
+		$retour = array(
+			'composition' => 0,
+			'type'        => 0,
+			'commun'      => 0
+		);
+
+		// Acquisition du type et de la composition éventuelle.
+		$type = noizetier_page_type($page);
+		$composition = noizetier_page_composition($page);
+
+		// Les compteurs de types de noisette d'une page sont calculés par une lecture de la table 'spip_types_noisettes'.
+		$from = array('spip_types_noisettes');
+		$where = array(
+			'plugin=' . sql_quote('noizetier'),
+			'type=' . sql_quote($type),
+			'composition=' . sql_quote($composition)
+		);
+		$compteur = sql_countsel($from, $where);
+
+		// On cherche maintenant les 3 compteurs possibles :
+		if ($composition) {
+			// - les types de noisette spécifiques de la composition si la page en est une.
+			if ($compteur) {
+				$retour['composition'] = $compteur;
+			}
+			$where[2] = 'composition=' . sql_quote('');
+			$compteur = sql_countsel($from, $where);
+			if ($compteur) {
+				$retour['type'] = $compteur;
+			}
+		} else {
+			// - les types de noisette spécifiques de la page ou du type de la composition
+			if ($compteur) {
+				$retour['type'] = $compteur;
+			}
+		}
+		// - les types de noisette communs à toutes les pages.
+		$where[1] = 'type=' . sql_quote('');
+		$compteur = sql_countsel($from, $where);
+		if ($compteur) {
+			$retour['commun'] = $compteur;
+		}
+
+		$retour['total'] = array_sum($retour);
+	} elseif ($information == 'compteurs_noisette') {
+		$retour = noizetier_page_compter_noisettes($page);
 	} else {
 		$retour = noizetier_page_lire($page, $information);
 	}
@@ -352,6 +334,8 @@ function balise_NOIZETIER_OBJET_INFOS_dist($p) {
 }
 
 /**
+ * @internal
+ *
  * @param        $objet
  * @param        $id_objet
  * @param string $information
@@ -361,7 +345,12 @@ function balise_NOIZETIER_OBJET_INFOS_dist($p) {
 function calculer_infos_objet($objet, $id_objet, $information = '') {
 
 	include_spip('inc/noizetier_objet');
-	return noizetier_objet_lire($objet, $id_objet, $information);
+	if ($information == 'compteurs_noisette') {
+		$retour = noizetier_objet_compter_noisettes($objet, $id_objet);
+	} else {
+		$retour = noizetier_objet_lire($objet, $id_objet, $information);
+	}
+	return $retour;
 }
 
 
@@ -387,6 +376,8 @@ function balise_NOIZETIER_OBJET_LISTE_dist($p) {
 }
 
 /**
+ * @internal
+ *
  * @return array|string
  */
 function calculer_liste_objets() {
