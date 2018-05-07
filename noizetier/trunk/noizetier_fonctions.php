@@ -301,6 +301,9 @@ function calculer_infos_page($page, $information = '') {
  * donné. Ces champs sont lus dans la table de l'objet.
  * La signature de la balise est : `#NOIZETIER_OBJET_INFOS{type_objet, id_objet, information}`.
  *
+ * La fonction peut aussi renvoyer d'autres informations calculées, à savoir :
+ * - `compteurs_noisette` qui donne le nombre de noisettes incluses dans chaque bloc de l'objet.
+ *
  * @package SPIP\NOIZETIER\OBJET\BALISE
  * @balise
  *
@@ -308,6 +311,7 @@ function calculer_infos_page($page, $information = '') {
  *     ```
  *     #NOIZETIER_OBJET_INFOS{article, 12}, renvoie tous les champs descriptifs de la page article
  *     #NOIZETIER_OBJET_INFOS{article, 12, nom}, renvoie le titre de la page article
+ *     #NOIZETIER_OBJET_INFOS{article, 12, compteurs_noisette}, fournit les compteurs de noisettes incluses par bloc
  *     ```
  *
  * @param Champ $p
