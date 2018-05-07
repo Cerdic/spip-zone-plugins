@@ -59,7 +59,7 @@
 							[<a href="#" onclick="jQuery('#suggestions_icones').hide(500);jQuery('#afficher_suggestions').show(500);return false;"><:noizetier:masquer:></a>]
 						</div>
 						<p><strong><:noizetier:suggestions:></strong></p>
-					<BOUCLE_suggestions_icones(DATA){source table, #VAL{24}|noizetier_icone_repertorier}{par cle}>
+					<BOUCLE_suggestions_icones(DATA){source table, #NOIZETIER_ICONE_LISTE{24}}{par cle}>
 							<div class="suggestion_icone" onclick="jQuery('input#icon').val('#CLE');maj_apercu_icone();jQuery('#suggestions_icones').hide(500);jQuery('#afficher_suggestions').show(500);return false;">
 								[(#CLE|noizetier_icone_chemin|balise_img)<br />]
 								#CLE

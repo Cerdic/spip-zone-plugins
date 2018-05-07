@@ -1,5 +1,8 @@
 <?php
-// Sécurité
+/**
+ * Ce fichier contient les filtres et balises du noiZetier.
+ *
+ */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -79,20 +82,39 @@ function balise_NOIZETIER_NOISETTE_PREVIEW_dist($p) {
 }
 
 /**
- * Liste d'icones d'une taille donnée en pixels obtenues en fouillant dans les thème
- * spip du privé.
+ * Compile la balise `#NOIZETIER_ICONE_LISTE` qui fournit la liste des icones d'une taille donnée en pixels
+ * disponibles dans les thèmes SPIP de l'espace privé.
+ * La signature de la balise est : `#NOIZETIER_ICONE_LISTE{taille}`.
  *
- * @package SPIP\NOIZETIER\ICONE\API
- * @api
- * @filtre
+ * @package SPIP\NOIZETIER\ICONE\BALISE
+ * @balise
  *
- * @param $taille	int
- * 		Taille en pixels des icones à répertorier.
+ * @example
+ *     ```
+ *     #NOIZETIER_BLOC_INFOS{24}, renvoie les icones de taille 24px présents dans les thèmes du privé
+ *     ```
  *
- * @return array
- * 		Tableau des chemins complets des icones trouvés dans le path SPIP.
+ * @param Champ $p
+ *        Pile au niveau de la balise.
+ *
+ * @return Champ
+ *         Pile complétée par le code à générer.
+ **/
+function balise_NOIZETIER_ICONE_LISTE_dist($p) {
+	$taille = interprete_argument_balise(1, $p);
+	$taille = str_replace('\'', '"', $taille);
+	$p->code = "calculer_liste_icones($taille)";
+
+	return $p;
+}
+
+/**
+ * @param int $taille
+ *
+ * @return array|string
  */
-function noizetier_icone_repertorier($taille = 24) {
+function calculer_liste_icones($taille = 24) {
+
 	static $icones = null;
 
 	if (is_null($icones)) {
