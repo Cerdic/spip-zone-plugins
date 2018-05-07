@@ -9,7 +9,7 @@ function balise_NOISETTE_REPERTORIER_dist($p) {
 
 	// Récupération des arguments.
 	// -- la balise utilise toujours le rangement par rang au sein du conteneur
-	// -- et ne permet de filtrer les noisettes autrement que sur le conteneur.
+	// -- et ne permet pas de filtrer les noisettes autrement que sur le conteneur.
 	$plugin = interprete_argument_balise(1, $p);
 	$plugin = isset($plugin) ? str_replace('\'', '"', $plugin) : '""';
 	$conteneur = interprete_argument_balise(2, $p);

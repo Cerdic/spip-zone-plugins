@@ -34,13 +34,16 @@ function balise_NOISETTE_COMPILER_dist($p) {
 	$environnement = "\$Pile[0]";
 
 	// On prépare le code en fonction du type d'inclusion dynamique ou pas
+	// -- il faut récupérer le dossier où sont stockés les noisettes pour le plugin appelant.
+	include_spip('ncore/ncore');
+	$dossier_type_noisette = ncore_type_noisette_initialiser_dossier($plugin);
 	$inclusion_dynamique = "\"<?php echo recuperer_fond(
-		'noisettes/\".$type_noisette.\"',
+		'$dossier_type_noisette\".$type_noisette.\"',
 		\".var_export(array_merge(unserialize($parametres), noisette_contextualiser($plugin, $noisette, $type_noisette, $environnement, $stockage)),true).\",
 		\".var_export(array('ajax'=>(type_noisette_ajaxifier($plugin, $type_noisette, $stockage))),true).\"
 	);?>\"";
 	$inclusion_statique = "recuperer_fond(
-		'noisettes/'.$type_noisette,
+		'$dossier_type_noisette'.$type_noisette,
 		array_merge(unserialize($parametres), noisette_contextualiser($plugin, $noisette, $type_noisette, $environnement, $stockage)),
 		array('ajax'=>(type_noisette_ajaxifier($plugin, $type_noisette, $stockage)))
 	)";
