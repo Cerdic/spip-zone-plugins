@@ -23,4 +23,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		
 	'pb_couleur_rubrique_slogan' => 'Une couleur pour chaque rubrique',
 );
-?>

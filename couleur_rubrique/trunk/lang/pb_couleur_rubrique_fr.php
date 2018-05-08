@@ -38,4 +38,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'supprimer_la_couleur' => 'Supprimer la couleur'
 );
-?>

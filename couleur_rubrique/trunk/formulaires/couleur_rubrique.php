@@ -45,5 +45,3 @@ function formulaires_couleur_rubrique_traiter_dist($id_rubrique){
 
 	return array("message_ok" => _T('pb_couleur_rubrique:info_message_ok'),"editable"=>true);
 }
-
-?>

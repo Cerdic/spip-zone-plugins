@@ -1,7 +1,7 @@
 <paquet
 	prefix="pb_couleur_rubrique"
 	categorie="maintenance"
-	version="2.3.7"
+	version="2.3.8"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="img_pack/pb_couleur_rubrique.png"

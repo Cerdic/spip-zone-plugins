@@ -39,6 +39,3 @@ function pb_couleur_rubrique_affiche_droite($flux){
 	}
 	return $flux;
 }
-
-
-?>

@@ -24,5 +24,3 @@ function couleur_secteur($id_rubrique){
 	$couleur_secteur = lire_meta("pb_couleur_rubrique$id_secteur");
 	return $couleur_secteur;
 }
-
-?>
