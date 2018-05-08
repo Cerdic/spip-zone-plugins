@@ -4,6 +4,8 @@
 
 	Il est inclus dans inclure/metasplus/dist.html, voir ce dernier pour les explications et les paramètres.
 
+	Ici aucune requête SQL, on doit recevoir toutes les données.
+
 ]
 
 [(#REM)
@@ -20,7 +22,6 @@
 #SET{og-type,    #ENV{og-type}|trim}
 #SET{dc-type,    #ENV{dc-type}|trim}
 #SET{auteurs,    #ENV{auteurs,#ENV{auteur}}|trim|html_entity_decode|supprimer_tags|textebrut|explode{','}|array_filter}
-#SET{logos,      #ENV{logos,#ENV{logo}}|trim|supprimer_tags|textebrut|explode{','}|array_filter}
 #SET{mots,       #ENV{mots}|trim|html_entity_decode|supprimer_tags|textebrut|explode{','}|array_filter}
 #SET{territoire, #ENV{territoire}|=={en}|?{uk,#ENV{territoire,#ENV{lang}}}|strtoupper|trim}
 #SET{locale,     #ENV{lang}|concat{_,#GET{territoire}}|trim}
@@ -29,6 +30,17 @@
 	opengraph, 1200:630,
 	twitter,   506:253,
 }}
+#SET{logos,#ARRAY}
+<BOUCLE_normaliser_logos_array(DATA){source table, #ENV{logos,#ENV{logo}}}{si #ENV{logos,#ENV{logo}}|is_array}>
+#SET{logos,#GET{logos}|push{#ARRAY{
+	url, #VALEUR{url},
+	alt, #VAL{#VALEUR{alt}|trim|supprimer_tags|textebrut},
+}|array_filter}}
+</BOUCLE_normaliser_logos_array>
+<BOUCLE_normaliser_logos_string(DATA){soure table, #ENV{logos,#ENV{logo}}|trim|supprimer_tags|textebrut|explode{','}|array_filter}>
+#SET{logos,#GET{logos}|push{#ARRAY{url,#VALEUR}}}
+</BOUCLE_normaliser_logos_string>
+<//B_normaliser_logos_array>
 
 [(#REM)
 
@@ -86,8 +98,8 @@
 #SET{largeur,#GET{dimensions/opengraph}|explode{:}|table_valeur{0}}
 #SET{hauteur,#GET{dimensions/opengraph}|explode{:}|table_valeur{1}}
 <BOUCLE_logos_opengraph(DATA) {source table, #GET{logos}}>
-[(#CHEMIN{#VALEUR}|oui)
-#SET{src, #VALEUR|image_recadre{#GET{dimensions/opengraph},-,focus}
+[(#CHEMIN{#VALEUR{url}}|oui)
+#SET{src, #VALEUR{url}|image_recadre{#GET{dimensions/opengraph},-,focus}
 	|image_reduire{#GET{largeur},#GET{hauteur}}
 	|extraire_attribut{src}
 	|supprimer_timestamp}
@@ -95,7 +107,7 @@
 [<meta property="og:image:width" content="(#GET{src}|largeur)" />]
 [<meta property="og:image:height" content="(#GET{src}|hauteur)" />]
 [<meta property="og:image:type" content="(#GET{src}|mime_content_type)" />]
-[<meta property="og:image:alt" content="(#GET{titre}|couper{80}|attribut_html)" />]
+[<meta property="og:image:alt" content="(#VALEUR{alt}|couper{80}|attribut_html)" />]
 ]
 </BOUCLE_logos_opengraph>
 <BOUCLE_article_opengraph(CONDITION) {si #GET{og-type}|=={article}}>
@@ -132,13 +144,13 @@
 #SET{largeur,#GET{dimensions/twitter}|explode{:}|table_valeur{0}}
 #SET{hauteur,#GET{dimensions/twitter}|explode{:}|table_valeur{1}}
 <BOUCLE_images_twitter(DATA) {source table, #GET{logos}} {0,1}>
-[(#CHEMIN{#VALEUR}|oui)
-#SET{src, #VALEUR|image_recadre{#GET{dimensions/twitter},-,focus}
+[(#CHEMIN{#VALEUR{url}}|oui)
+#SET{src, #VALEUR{url}|image_recadre{#GET{dimensions/twitter},-,focus}
 	|image_reduire{#GET{largeur},#GET{hauteur}}
 	|extraire_attribut{src}
 	|supprimer_timestamp}
 [<meta name="twitter:image" content="(#GET{src}|url_absolue)" />]
-[<meta property="twitter:image:alt" content="(#GET{titre}|couper{80}|attribut_html)" />]
+[<meta property="twitter:image:alt" content="(#VALEUR{alt}|couper{80}|attribut_html)" />]
 ]
 </BOUCLE_images_twitter>
 </BOUCLE_twitter>

@@ -1,8 +1,11 @@
+[(#ENV{debug}|oui)#HTTP_HEADER{Content-Type:text/plain}]
 [(#REM)
 
 	Métas+ : ce squelette génère les métas pour Dublin Core, Open Graph et Twitter.
 
 	Il s'agit du squelette par défaut inclus automatiquement dans le <head>, il tente de générer au mieux les informations des pages.
+
+	On peut lui transmettre certaines valeurs à prendre en priorité par rapport à la récupération automatique.
 
 	Il est possible de créer des variantes pour des pages précises : inclure/metasplus/{page}.html
 	Plusieurs possibilités pour le contenu des variantes :
@@ -27,6 +30,8 @@
 		             ratio 1.91:1
 
 	Paramètres :
+		- debug :      'Oui' quand on débogue le squelette
+		               spip.php?page=inclure/metasplus/dist&objet=truc&id_objet=N&debug=oui
 		- titre :      Titre de la ressource
 		- desc :       Description
 		- lang :       Langue au format iso. ex. fr
@@ -36,11 +41,15 @@
 		- maj :        Date de mise à jour au format Y-m-d
 		- url :        URL de la ressource
 		- auteurs :    Un ou plusieurs auteurs séparés par des virgules
-		- logos :      Une ou plusieurs URLs d'images séparées par des virgules
+		- logos :      Soit un tableau de tableaux associatifs avec URL et alt
+		               Soit des URLs séparées par des virgules
 		- mots :       Un ou plusieurs mots-clés séparés par des virgules
 		- og-type :    (open graph) Type de la ressource : article, profile, book, etc.
 		- dc-type :    (dublin core) Type de la ressource : Text, Event, PhysicalObject, etc.
 
+	Paramètres dépréciés :
+		- auteur => auteurs
+		- logo => logos
 ]
 
 [(#REM)
@@ -85,8 +94,8 @@
 >
 #SET{mots_auto, #GET{mots_auto}|concat{#GET{mots_auto}|?{','},#TITRE}}
 </BOUCLE_mots_objet>
-[(#REM) Le logo de l'objet et les images jointes si nécessaires ]
-#SET{logos_auto, #ENV{logos}|extraire_attribut{src}|sinon{#ENV{id_objet}|quete_logo_objet{#ENV{objet},on}|table_valeur{chemin}}}
+[(#REM) Les images ]
+#SET{logos_auto, #LISTE{#ARRAY{url,#ENV{id_objet}|quete_logo_objet{#ENV{objet},on}|table_valeur{chemin}}}}
 <BOUCLE_logos_objet(DOCUMENTS)
 	{objet}
 	{id_objet}
@@ -95,7 +104,10 @@
 	{!par largeur}
 	{0,#GET{logos_auto}|?{2,3}}
 >
-#SET{logos_auto, #GET{logos_auto}|concat{#GET{logos_auto}|?{','},#FICHIER}}
+#SET{logos_auto, #GET{logos_auto}|push{#ARRAY{
+	url, #FICHIER,
+	alt, #TITRE|sinon{#DESCRIPTIF}|couper{80},
+}}}
 </BOUCLE_logos_objet>
 </BOUCLE_objet>
 
