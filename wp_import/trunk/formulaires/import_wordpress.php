@@ -57,6 +57,13 @@ $valeurs['mes_saisies'] = array(
 	array(
 		'saisie' => 'case',
 		'options' => array(
+			'nom' => 'motcle',
+			'label' => _T('wp_import:motcle_label'),
+			'explication' => _T('wp_import:motcle_explication')
+		)),
+	array(
+		'saisie' => 'case',
+		'options' => array(
 			'nom' => 'articles',
 			'label' => _T('wp_import:articles_label'),
 			'explication' => _T('wp_import:articles_explication')
@@ -77,13 +84,7 @@ $valeurs['mes_saisies'] = array(
 	// 		'afficher_si' =>  '@forum@=="on"'
 	// 	)),
 	
-	// array(
-	// 	'saisie' => 'case',
-	// 	'options' => array(
-	// 		'nom' => 'motcle',
-	// 		'label' => _T('wp_import:motcle_label'),
-	// 		'explication' => _T('wp_import:motcle_explication')
-	// 	))
+	
     );
 
     return $valeurs;
@@ -127,14 +128,14 @@ function formulaires_import_wordpress_traiter_dist() {
 function wp_import_import_wordpress() {
 
 	$chemin_temp = sous_repertoire(_DIR_TMP, 'wordpress');
-	//$chemin_fichier = _DIR_TMP . _request('document_xml');
-	$chemin_fichier = "../tmp/afap.wordpress.2018-04-06.xml";
-	include_spip('inc/getdocument');
+	$chemin_fichier = _DIR_TMP . _request('document_xml');
+	
 
 	if (file_exists($chemin_fichier)) {
 
 		include_spip('inc/xml');
 		include_spip('sale_fonctions');
+		include_spip('inc/getdocument');
 	
 
 		$tab_document = array();
@@ -392,10 +393,6 @@ function wp_import_forum($reply_wp, $correspondance) {
 
 	$id_wp_parent = $reply_wp['wp:post_parent'][0];
 	$id_article = $tab_forum[$id_wp_parent];
-
-	// debug($id_wp_parent);
-	// debug($id_article);
-
 
 	// récupérer les infos de l'auteur
 	$login_auteur = wp_import_twp($reply_wp['dc:creator'][0]);
