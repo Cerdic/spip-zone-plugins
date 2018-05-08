@@ -277,4 +277,17 @@ function couleur_hexa_to_dec($couleur) {
 	return _couleur_hex_to_dec($couleur);
 }
 
-?>
+/**
+ *
+ * permet d'afficher la valeur r,g,b de la couleur de manière exploitable
+ * source: https://bavotasan.com/2011/convert-hex-color-to-rgb-using-php/
+ * utilisation: 
+ *	[(#COULEUR|couleur_rgb)]
+ *	[background-color: rgba((#COULEUR|couleur_*|couleur_rgb),0.8);]
+ * 
+**/
+
+function couleur_rgb($couleur) {
+	$couleur = _couleur_hex_to_dec($couleur);
+	return implode(",", $couleur); // returns the rgb values separated by commas
+}

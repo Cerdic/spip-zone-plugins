@@ -1194,4 +1194,3 @@ function image_merge($im, $masque, $h='left', $v='top'){
 
 	return _image_ecrire_tag($image,array('src'=>$dest));
 }
-?>
