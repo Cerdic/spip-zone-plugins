@@ -541,7 +541,14 @@ function mailsubscribers_do_synchro_list($liste) {
 		) {
 			$n = count($abonnes);
 			spip_log("Synchronise liste $liste avec $n abonnes (fonction $f)", "mailsubscribers");
-			mailsubscribers_synchronise_liste($liste, $abonnes);
+			if (!mailsubscribers_synchronise_liste($liste, $abonnes)) {
+				job_queue_add(
+					"mailsubscribers_do_synchro_list",
+					"Synchro liste (poursuivre) " . $liste,
+					array($liste),
+					"inc/mailsubscribers"
+				);
+			}
 		} else {
 			spip_log("Synchronise liste $liste : abonnes mal formes en retour de la fonction $f",
 				"mailsubscribers" . _LOG_ERREUR);
@@ -595,14 +602,25 @@ function mailsubscribers_synchro_list_newsletter_6forum() {
  * @param array $options
  *   bool addonly : pour ajouter uniquement les nouveaux abonnes, et ne desabonner personne
  *   bool graceful : pour ne pas reabonner ceux qui se sont desabonnes manuellement
+ * @return bool
+ *   - true : indique que la synchronisation s’est terminée (ou qu’il n’y avait rien à faire)
+ *   - false : indique que la synchronisation ne s’est pas terminée à cause d’un timeout proche
  */
 function mailsubscribers_synchronise_liste($liste, $abonnes, $options = array()) {
 	$listes = array($liste);
 	$id_mailsubscribinglist = sql_getfetsel('id_mailsubscribinglist', 'spip_mailsubscribinglists',
 		'identifiant=' . sql_quote($liste));
 	if (!$id_mailsubscribinglist) {
-		return;
+		spip_log("Mailing liste $liste introuvable pour synchro", 'mailsubscribers');
+		return true;
 	}
+
+	$timeout = ini_get('max_execution_time');
+	// valeur conservatrice si on a pas reussi a lire le max_execution_time
+	if (!$timeout) {
+		$timeout = 30;
+	} // parions sur une valeur tellement courante ...
+	$max_time = time() + $timeout / 2;
 
 	if (is_bool($options)) {
 		$options = array('addonly' => $options);
@@ -638,6 +656,9 @@ function mailsubscribers_synchronise_liste($liste, $abonnes, $options = array())
 			//echo "unsubscribe ".$sub['email']."<br />";
 			$unsubscribe($sub['email'], array('listes' => $listes, 'notify' => false, 'remove' => true));
 		}
+		if (time() >= $max_time) {
+			return false;
+		}
 	}
 
 	spip_log("mailsubscribers_synchronise_liste $liste: " . count($abonnes_emails) . " a abonner dans la liste", "mailsubscribers" . _LOG_DEBUG);
@@ -658,6 +679,9 @@ function mailsubscribers_synchronise_liste($liste, $abonnes, $options = array())
 			$data_subscriber['lang'] = $abonne['lang'];
 		}
 		$subscribe($email, $data_subscriber);
+		if (time() >= $max_time) {
+			return false;
+		}
 	}
 
 	// baisser les drapeaux edition de tout ce qu'on vient de faire
@@ -665,4 +689,6 @@ function mailsubscribers_synchronise_liste($liste, $abonnes, $options = array())
 		$id_a = (isset($GLOBALS['visiteur_session']['id_auteur']) ? $GLOBALS['visiteur_session']['id_auteur'] : $GLOBALS['ip']);
 		debloquer_tous($id_a);
 	}
+
+	return true;
 }
