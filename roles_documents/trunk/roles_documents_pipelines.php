@@ -301,7 +301,7 @@ function roles_documents_formulaire_traiter($flux) {
 /**
  * Modifier le résultat du calcul d’un squelette donné.
  *
- * Ajout du sélecteur de rôle sur un inclure du formulaire d'ajout de document.
+ * Formulaire d'ajout de document : ajout du sélecteur de rôle, et rendre les identifiants uniques pour éviter un pb de JS quand le form est présent plusieurs fois sur la page.
  *
  * @pipeline recuperer_fond
  *
@@ -315,6 +315,8 @@ function roles_documents_recuperer_fond($flux) {
 		and isset($flux['args']['contexte']['objet'])
 		and isset($flux['args']['contexte']['id_objet'])
 	) {
+
+		// 1) Ajout du sélecteur de rôle
 
 		// Est-ce qu'il s'agit d'un ajout de logo ?
 		$editer_logo = !empty($flux['args']['contexte']['editer_logo']);
@@ -337,8 +339,18 @@ function roles_documents_recuperer_fond($flux) {
 			'multiple'           => $multiple,
 		);
 
+		// On place le sélecteur au début (compliqué de le placer juste avant les boutons, déplacés en JS, et des blocs cachés)
 		$selecteur_roles = recuperer_fond('formulaires/inc-selecteur_role', $contexte);
 		$flux['data']['texte'] = $selecteur_roles . $flux['data']['texte'];
+
+		// 2) Rendre les identifiants vraiment uniques pour le JS
+
+		if (preg_match('/id=["\']defaultsubmit([^"\']+)/i', $flux['data']['texte'], $res)) {
+			$domid = $res[1]; // L'identifiant pas si unique présent par défaut
+			$uniqid = $domid . '_' . uniqid(); // Identifiant vraiement unique
+			$flux['data']['texte'] = str_replace($domid, $uniqid, $flux['data']['texte']);
+		}
+
 	}
 
 	return $flux;
