@@ -155,6 +155,15 @@ function formulaires_configurer_rubrique_a_linscription_saisies() {
 					),
 					'defaut' => 'rub' 
 				)
+			),
+			array (
+				'saisie' => 'case',
+				'options' => array (
+					'nom' => 'duplicator_modif_auteur',
+					'label' => _T('rubrique_a_linscription:cfg_duplicator_modif_auteur'), 
+					'explication' => _T('rubrique_a_linscription:cfg_duplicator_modif_auteur_explication'), 
+					'defaut' => lire_config('rubrique_a_linscription/cfg_duplicator_modif_auteur') 
+				)
 			)
 		);
 	} elseif (lire_config('rubrique_a_linscription/duplicator')) {
