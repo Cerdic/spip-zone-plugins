@@ -19,7 +19,7 @@
 	<pipeline nom="formulaire_verifier" inclure="rubrique_a_linscription.php" />
 	<pipeline nom="autoriser" inclure="autoriser_rubrique_a_linscription.php" />
 
-	<menu nom="configurer_rubrique_a_linscription" titre="rubrique_a_linscription:rubrique_a_linscription" parent="bando_configuration" icone="prive/images/admin-12.gif" action="configurer_rubrique_a_linscription" />
+	<menu nom="configurer_rubrique_a_linscription" titre="rubrique_a_linscription:rubrique_a_linscription" parent="bando_configuration" icone="images/rubrique_a_linscription-12.png" action="configurer_rubrique_a_linscription" />
 
 	<necessite nom="saisies" compatibilite="[2.23.2;[" />
 
