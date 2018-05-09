@@ -28,6 +28,8 @@ function traiter_email_dist($args, $retours) {
 		$champs_a_exclure = explode(",", $options['exclure_champs_email']);
 		$champs = array_diff($champs, $champs_a_exclure);
 		foreach ($champs_a_exclure as $champ_a_exclure) {
+			$champ_a_exclure = trim($champ_a_exclure);
+			$champ_a_exclure = str_replace('@','',$champ_a_exclure);
 			$saisies = saisies_supprimer($saisies,$champ_a_exclure);
 		}
 	}
