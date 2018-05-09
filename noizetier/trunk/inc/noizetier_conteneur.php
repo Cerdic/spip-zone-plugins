@@ -67,7 +67,7 @@ function noizetier_conteneur_composer($page_ou_objet, $bloc, $noisette=array()) 
  *
  * @uses noizetier_page_type()
  * @uses noizetier_page_composition()
- * @uses ncore_type_noisette_initialiser_dossier()
+ * @uses noizetier_type_noisette_initialiser_dossier()
  *
  * @param string $id_conteneur
  *        Identifiant du conteneur sous forme de chaine unique.

@@ -14,115 +14,120 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function noizetier_recuperer_fond($flux) {
 
-	// Par défaut le noiZetier intercepte le pipeline recuperer_fond pour y insérer les noisettes configurées
-	// pour la page en cours de traitement.
-	// Il est cependant possible de désactiver ce fonctionnement en positionnant la constante _NOIZETIER_RECUPERER_FOND
-	// à false.
-	if ((defined('_NOIZETIER_RECUPERER_FOND') ? _NOIZETIER_RECUPERER_FOND : true) and !test_espace_prive()) {
+	// Le noiZetier v3 est essentiellement dédié aux squelettes Z.
+	// De fait, il intercepte systématiquement tout appel à la fonction recuperer_fond() à partir du moment où celui-ci
+	// ne concerne pas le privé.
+	// Le fonctionnement du pipeline consiste à détecter si le squelette concerné par l'appel à recuperer_fond() est
+	// celui d'un bloc autorisé pour une page ou un objet donné.
+	$contexte = $flux['data']['contexte'];
+	if (!test_espace_prive() and !isset($contexte['fond_compilation_noizetier'])) {
 		include_spip('inc/noizetier_page');
 		include_spip('inc/noizetier_objet');
-		$fond = isset($flux['args']['fond']) ? $flux['args']['fond'] : '';
-		if ($fond) {
-			// On détermine la page et le bloc à partir du fond qui est de la forme bloc/page.
-			$elements = explode('/', $fond);
-			if (!empty($elements[1])) {
-				$bloc = $elements[0];
-				$page = $elements[1];
-			} else {
-				$bloc = '';
-				$page = $elements[0];
-			}
 
-			// Traitement des cas particuliers de certaines compositions
-			$composition = isset($flux['args']['contexte']['composition']) ? $flux['args']['contexte']['composition'] : '';
-			// Si une composition est définie et si elle n'est pas déjà dans le fond, on l'ajoute au fond
-			// sauf s'il s'agit d'une page de type page (les squelettes page.html assurant la redirection)
-			if ($composition != '' and noizetier_page_composition($page) == '' and noizetier_page_type($page) != 'page') {
-				$fond .= '-'.$composition;
-				$page .= '-'.$composition;
-			}
+		// On récupère le squelette en cours de traitement et on identifie si celui-ci est un bloc autorisé d'une
+		// page ou d'un objet.
+		// On exclut le squelette structure.html et les noisettes elles-mêmes.
+		include_spip('ncore/noizetier');
+		$squelette = isset($flux['args']['fond']) ? $flux['args']['fond'] : '';
+		if ($squelette
+		and ($squelette != 'body')
+		and ($squelette != 'structure')
+		and (dirname($squelette) != trim(noizetier_type_noisette_initialiser_dossier('noizetier'), '/'))) {
+			// On détermine la page et le bloc à partir du squelette qui, en Z, est toujours de la forme bloc/page
+			// ou bloc/type_objet.
+			$extension = pathinfo($squelette,  PATHINFO_EXTENSION);
+			$squelette = explode('/', $squelette);
 
-			// Tester l'installation du noizetier pour éviter un message d'erreur à l'installation
-			// TODO : vérifier que ce cas n'est plus possible si on est pas dans le privé
-			if (isset($GLOBALS['meta']['noizetier_base_version'])) {
-				if (isset($flux['args']['contexte']['voir'])
-				and ($flux['args']['contexte']['voir'] == 'noisettes')
-				and !function_exists('autoriser')) {
-					include_spip('inc/autoriser');
-				}     // si on utilise le formulaire dans le public
+			// Si le squelette n'est pas de la forme bloc/page alors on n'est pas en présence d'un bloc configurable
+			// avec des noisettes.
+			// On élimine aussi les js et css qui sont les seuls à avoir une extension.
+			if ((count($squelette) == 2) and (!$extension)) {
+				$bloc = $squelette[0];
+				$page = $squelette[1];
 
-				// On cherche en priorité une correspondance d'objet précis !
-				// Sinon on cherche pour le type de page ou la composition
-				$par_objet = false;
-				include_spip('inc/noizetier_bloc');
-				if (
-					(
-						isset($flux['args']['contexte']['type-page'])
-						and $objet = $flux['args']['contexte']['type-page']
-						and $cle_objet = id_table_objet($objet)
-						and isset($flux['args']['contexte'][$cle_objet])
-						and $id_objet = intval($flux['args']['contexte'][$cle_objet])
-						and $par_objet = array_key_exists($bloc, noizetier_objet_compter_noisettes($objet, $id_objet))
-					)
-					or array_key_exists($bloc, noizetier_page_compter_noisettes($page))
-				) {
-					$contexte = $flux['data']['contexte'];
-					$contexte['bloc'] = $bloc;
+				// On vérifie que le bloc fait bien partie de la liste des blocs configurables de la page.
+				$blocs = noizetier_page_lister_blocs($page);
+				if (in_array($bloc, $blocs)) {
+					// Traitement des cas particuliers de certaines compositions
+					// TODO : cela sert à quoi ?
+					$composition = isset($flux['args']['contexte']['composition'])
+						? $flux['args']['contexte']['composition']
+						: '';
+					// Si une composition est définie et si elle n'est pas déjà dans le fond, on l'ajoute au fond
+					// sauf s'il s'agit d'une page de type page (les squelettes page.html assurant la redirection)
+					if ($composition != '' and noizetier_page_composition($page) == '' and noizetier_page_type($page) != 'page') {
+						$page .= '-'.$composition;
+					}
 
+					// On détermine si on est en présence d'un objet ou d'une page (ou composition).
+					// -- recherche en priorité d'une correspondance d'objet précis
+					// -- ajout de l'id_conteneur dans le contexte
 					include_spip('inc/noizetier_conteneur');
-					if ($par_objet) {
+					if ((isset($flux['args']['contexte']['type-page'])
+						and ($objet = $flux['args']['contexte']['type-page'])
+						and ($cle_objet = id_table_objet($objet))
+						and (isset($flux['args']['contexte'][$cle_objet]))
+						and ($id_objet = intval($flux['args']['contexte'][$cle_objet])))) {
+						// C'est un objet.
+						$est_objet = true;
+						// -- identification de l'objet
 						$contexte['objet'] = $objet;
 						$contexte['id_objet'] = $id_objet;
+						// -- identification du conteneur
 						$contexte['id_conteneur'] = noizetier_conteneur_composer($contexte, $bloc);
+						// -- identification du bloc et des compteurs de noisettes de chaque bloc de l'objet.
+						$contexte['bloc'] = $bloc;
+						$compteurs_noisette = noizetier_objet_compter_noisettes($objet, $id_objet);
 					} else {
-						$page = !empty($contexte['type-page']) ? $contexte['type-page'] : $contexte['page'];
-						$page .= !empty($contexte['composition']) ? '-' . $contexte['composition'] : '';
+						// C'est une page ou une composition.
+						$est_objet = false;
+						// -- identification du conteneur
 						$contexte['id_conteneur'] = noizetier_conteneur_composer($page, $bloc);
+						// -- identification du bloc et des compteurs de noisettes de chaque bloc de la page.
+						$contexte['bloc'] = $bloc;
+						$compteurs_noisette = noizetier_page_compter_noisettes($page);
+					}
+					$bloc_avec_noisettes = array_key_exists($bloc, $compteurs_noisette);
+
+					// Suivant le mode, affichage normal ou prévisualisation (voir=noisettes), on affiche ou pas les
+					// blocs vides.
+					$fond_compilation_bloc = '';
+					if (isset($flux['args']['contexte']['voir']) and ($flux['args']['contexte']['voir'] == 'noisettes')) {
+						// Mode de prévisualisation.
+						// -- Étant donné que la prévisualisation permet de configurer aussi les noisettes dans les blocs
+						//    de la page ou de l'objet affiché, on teste l'autorisation (identique à noizetier_page
+						//    du privé).
+						include_spip('inc/autoriser');
+						if (autoriser('configurer', 'noizetier')
+						and ($bloc_avec_noisettes
+							or (!$bloc_avec_noisettes and !$est_objet)
+							or (!$bloc_avec_noisettes and $est_objet and $compteurs_noisette))) {
+							$fond_compilation_bloc = 'bloc_preview';
+						}
+					} elseif ($bloc_avec_noisettes) {
+						// Mode normal d'afichage
+						$fond_compilation_bloc = 'bloc_compiler';
 					}
 
-					if (isset($flux['args']['contexte']['voir']) && $flux['args']['contexte']['voir'] == 'noisettes' && autoriser('configurer', 'noizetier')) {
-						$complements = recuperer_fond('bloc_preview', $contexte, array('raw' => true));
-					} else {
-						$complements = recuperer_fond('bloc_compiler', $contexte, array('raw' => true));
-					}
+					// Si le fond n'est pas vide c'est qu'il faut bien compiler soit une liste de noisettes
+					// soit un bloc vide et l'ajouter au flux.
+					if ($fond_compilation_bloc) {
+						// On passe un indicateur dans le contexte qui permet de sortir rapidement du pipeline
+						// lors des appels successifs liées à cette compilation.
+						$contexte['fond_compilation_noizetier'] = true;
+						$complements = recuperer_fond($fond_compilation_bloc, $contexte, array('raw' => true));
 
-					// S'il y a une indication d'insertion explicite
-					if (strpos($flux['data']['texte'], '<!--noisettes-->') !== false) {
-						$flux['data']['texte'] = preg_replace(
-							'%(<!--noisettes-->)%is',
-							"${complements['texte']}\n" . '$1',
-							$flux['data']['texte']
-						);
-					}
-					else {
-						$flux['data']['texte'] .= $complements['texte'];
-					}
-				}
-				// Il faut ajouter les blocs vides en mode voir=noisettes
-				elseif (
-					isset($flux['args']['contexte']['voir'])
-					and $flux['args']['contexte']['voir'] == 'noisettes'
-					and autoriser('configurer', 'noizetier')
-				) {
-					$contexte = $flux['data']['contexte'];
-					$contexte['bloc'] = $bloc;
-
-					// Si ya au moins une noisette pour cet objet peu importe le bloc
-					if (
-						isset($flux['args']['contexte']['type-page'])
-						and $objet = $flux['args']['contexte']['type-page']
-						and sql_fetsel('id_noisette', 'spip_noisettes', array('objet = '.sql_quote($objet),'id_objet = '.$id_objet))
-					) {
-						$contexte['objet'] = $objet;
-						$contexte['id_objet'] = $id_objet;
-					}
-
-					$page = isset($contexte['type']) ? $contexte['type'] : (isset($contexte['type-page']) ? $contexte['type-page'] : '');
-					$page .= (isset($contexte['composition']) && $contexte['composition']) ? '-'.$contexte['composition'] : '';
-					$blocs = noizetier_page_lister_blocs($page);
-					if (isset($blocs[$bloc])) {
-						$complements = recuperer_fond('bloc_preview', $contexte, array('raw' => true));
-						$flux['data']['texte'] .= $complements['texte'];
+						// S'il y a une indication d'insertion explicite
+						if (strpos($flux['data']['texte'], '<!--noisettes-->') !== false) {
+							$flux['data']['texte'] = preg_replace(
+								'%(<!--noisettes-->)%is',
+								"${complements['texte']}\n" . '$1',
+								$flux['data']['texte']
+							);
+						}
+						else {
+							$flux['data']['texte'] .= $complements['texte'];
+						}
 					}
 				}
 			}
