@@ -41,6 +41,8 @@
 #SET{logos,#GET{logos}|push{#ARRAY{url,#VALEUR}}}
 </BOUCLE_normaliser_logos_string>
 <//B_normaliser_logos_array>
+#SET{logos,#GET{logos}|array_filter}
+
 
 [(#REM)
 
