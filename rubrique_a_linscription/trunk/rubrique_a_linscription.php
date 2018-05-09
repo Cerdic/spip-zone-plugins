@@ -102,7 +102,28 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 					include_spip('inc/duplicator');
 					$titre_rubrique = _T('rubrique_a_linscription:titre_rubrique_duplicator',array('nom'=>$nom_inscription));
 					$id_rubrique = dupliquer_rubrique($duplicator,$id_parent,$titre_rubrique,$duplicator_arbo);
-				
+					
+					$calcul_branche_in = charger_fonction('calcul_branche_in', 'inc');
+					$rubriques_filles = $calcul_branche_in($id_rubrique);
+					if (lire_config("rubrique_a_linscription/duplicator_modif_auteur")) {
+						$articles = sql_select('id_article','spip_articles',
+							sql_in('id_rubrique',$rubriques_filles)
+						);
+
+						include_spip('action/editer_liens.php');
+						while ($row = sql_fetch($articles)) {
+							$id_article = $row['id_article'];
+							objet_dissocier(
+								array('auteur' => '*'),
+								array('article' => $id_article)
+							);
+							objet_associer (
+								array('auteur' => $id_auteur),
+								array('article' => $id_article)
+							);
+
+						}
+					}
 				} else { // pas de duplicator : on se contente de créer la rubrique
 					$titre_rubrique = _T('rubrique_a_linscription:titre_rubrique',array('nom'=>$nom_inscription));
 					$id_rubrique = creer_rubrique_nommee($titre_rubrique, $id_parent);
