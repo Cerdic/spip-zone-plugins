@@ -101,8 +101,8 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 				if ($duplicator) {
 					include_spip('inc/duplicator');
 					$titre_rubrique = _T('rubrique_a_linscription:titre_rubrique_duplicator',array('nom'=>$nom_inscription));
-					dupliquer_rubrique($duplicator,$id_parent,$titre_rubrique,$duplicator_arbo);
-
+					$id_rubrique = dupliquer_rubrique($duplicator,$id_parent,$titre_rubrique,$duplicator_arbo);
+				
 				} else { // pas de duplicator : on se contente de créer la rubrique
 					$titre_rubrique = _T('rubrique_a_linscription:titre_rubrique',array('nom'=>$nom_inscription));
 					$id_rubrique = creer_rubrique_nommee($titre_rubrique, $id_parent);
