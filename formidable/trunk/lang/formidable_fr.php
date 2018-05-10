@@ -213,6 +213,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traitements_avertissement_modification' => 'Les modifications sur les champs du formulaire ont été enregistrées avec succès. <strong>Certains traitements doivent peut-être être reconfigurés en conséquence.</strong>',
 	'traitements_champ_aucun' => 'Aucun',
 	'traiter_email_description' => 'Poster par courriel le résultat du formulaire  à une liste de destinataires.',
+	'traiter_email_destinataires_courriel_label' => 'Destinataires du courriel', 
+	'traiter_email_contenu_courriel_label' => 'Contenu du courriel', 
+	'traiter_email_sujet_courriel_label' => 'Sujet du courriel', 
+	'traiter_email_envoyeur_courriel_label' => 'Expéditeur du courriel',
+	'traiter_email_AR_label' => 'Accusé de réception',
 	'traiter_email_horodatage' => 'Formulaire "@formulaire@" posté le @date@ à @heure@.',
 	'traiter_email_message_erreur' => 'Une erreur est survenue lors de l’envoi du courriel.',
 	'traiter_email_message_ok' => 'Votre message a bien été envoyé par courriel.',
@@ -220,9 +225,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_activer_ip_label_case' => 'Envoyer l’adresse IP de l’envoyeur aux destinataires.',
 	'traiter_email_option_courriel_envoyeur_accuse_explication' => 'Précisez le courriel utilisé pour envoyer l’accusé de réception. À défaut, le destinataire sera l’expéditeur.',
 	'traiter_email_option_courriel_envoyeur_accuse_label' => 'Courriel de l’accusé de réception',
+	'traiter_email_option_destinataires_champ_form_attention' => 'Cette option est déconseillée, car elle constitue un appel au SPAM.
+	<br />- Pour envoyer à un auteur du site, utiliser l\'option «&nbsp;Destinataire&nbsp;» (plus haut).
+  <br />- Pour envoyer à la personne qui remplit le formulaire, configurer l\'accusé de réception (plus bas).',
 	'traiter_email_option_destinataires_champ_form_explication' => 'Si un de vos champ est une adresse email et que vous souhaitez envoyer le formulaire à cette adresse, sélectionnez le champ.',
 	'traiter_email_option_destinataires_champ_form_label' => 'Destinaire présent dans un des champ des formulaires',
-	'traiter_email_option_destinataires_explication' => 'Choisissez le champ qui correspondra aux destinataires du message.',
+	'traiter_email_option_destinataires_explication' => 'Choisissez le champ qui correspondra aux destinataires du message. <br />
+	Il s\'agit d\'un champ de type «&nbsp;Destinataires&nbsp;» ou «&nbsp;Champ caché&nbsp;», comprenant l\'identifiant numérique d\'un auteur du site.
+',
 	'traiter_email_option_destinataires_label' => 'Destinataires',
 	'traiter_email_option_destinataires_plus_explication' => 'Une liste d’adresses séparées par des virgules.',
 	'traiter_email_option_destinataires_plus_label' => 'Destinataires supplémentaires',
@@ -242,7 +252,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_pj_label' => 'Joindre les fichiers dans le courriel',
 	'traiter_email_option_sujet_accuse_label' => 'Sujet de l’accusé de réception',
 	'traiter_email_option_sujet_explication' => 'Construisez le sujet à l’aide des @raccourcis@. Si vous ne mettez rien, le sujet sera construit automatiquement.',
-	'traiter_email_option_sujet_label' => 'Sujet du message',
+	'traiter_email_option_sujet_label' => 'Sujet du courriel',
 	'traiter_email_option_sujet_valeurs_brutes_label' => 'Valeurs brutes',
 	'traiter_email_option_sujet_valeurs_brutes_label_case' => 'Le courriel est destiné à un robot et non pas à un·e humain·e. Dans le sujet du message, mettre les valeurs brutes (compréhensibles par des robots) des champs et non pas les valeurs interprétées (compréhensible par des humain·e·s).',
 	'traiter_email_option_vrai_envoyeur_explication' => 'Certains serveurs SMTP ne permettent pas d’utiliser un courriel arbitraire pour le champ "From". Pour cette raison Formidable insère par défaut le courriel de l’envoyeur dans le champ "Reply-To". Cocher ici pour insèrer le courriel dans le champ "From".',
