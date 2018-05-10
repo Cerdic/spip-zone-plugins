@@ -25,11 +25,27 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 **/
 function rang_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
-
+	
+	// Déplacer l'ancienne config
+	$maj['1.0.0'] = array(
+		array('rang_maj_100'),
+	);
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
+/**
+ * Maj 1.0.0 : déplacer l'ancienne config
+ **/
+function rang_maj_100() {
+	include_spip('inc/config');
+	
+	if ($objets = lire_config('rang_objets')) {
+		ecrire_config('rang/rang_objets', $objets);
+		effacer_config('rang_objets');
+	}
+}
 
 /**
  * Fonction de désinstallation du plugin Rang.
@@ -39,7 +55,6 @@ function rang_upgrade($nom_meta_base_version, $version_cible) {
  * @return void
 **/
 function rang_vider_tables($nom_meta_base_version) {
-
 	include_spip('inc/rang_api');
 
 	// supprimer les champs 'rang'
