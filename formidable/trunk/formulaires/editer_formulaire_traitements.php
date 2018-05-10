@@ -79,9 +79,23 @@ function formulaires_editer_formulaire_traitements_verifier($id_formulaire) {
 
 	if (is_array($traitements_choisis)) {
 		foreach ($traitements_choisis as $type_traitement) {
-			$erreurs = array_merge($erreurs, saisies_verifier(saisies_transformer_noms($traitements_disponibles[$type_traitement]['options'], '/^.*$/', "traitements[$type_traitement][\\0]")));
+			$erreurs_traitement_brut = saisies_verifier(
+				saisies_transformer_noms(
+					$traitements_disponibles[$type_traitement]['options'], 
+					'/^.*$/', 
+					"traitements[$type_traitement][\\0]")
+				);
+			if (!empty($erreurs_traitement_brut)) {
+				$erreurs_traitement = array($type_traitement => array());
+			}
+			foreach ($erreurs_traitement_brut as $champ => $erreur) {
+				$champ_brut = preg_replace("#traitements\[$type_traitement\]\[(.*)\]#",'\1',$champ);
+				$erreurs_traitement[$type_traitement][$champ_brut] = $erreur;
+			}
+			$erreurs = array_merge($erreurs, $erreurs_traitement);
 		}
 	}
+	$erreurs = array('traitements' => $erreurs);
 	return $erreurs;
 }
 
