@@ -87,15 +87,17 @@ function formulaires_editer_formulaire_traitements_verifier($id_formulaire) {
 				);
 			if (!empty($erreurs_traitement_brut)) {
 				$erreurs_traitement = array($type_traitement => array());
+				foreach ($erreurs_traitement_brut as $champ => $erreur) {
+					$champ_brut = preg_replace("#traitements\[$type_traitement\]\[(.*)\]#",'\1',$champ);
+					$erreurs_traitement[$type_traitement][$champ_brut] = $erreur;
+				}
+				$erreurs = array_merge($erreurs, $erreurs_traitement);
 			}
-			foreach ($erreurs_traitement_brut as $champ => $erreur) {
-				$champ_brut = preg_replace("#traitements\[$type_traitement\]\[(.*)\]#",'\1',$champ);
-				$erreurs_traitement[$type_traitement][$champ_brut] = $erreur;
-			}
-			$erreurs = array_merge($erreurs, $erreurs_traitement);
 		}
 	}
-	$erreurs = array('traitements' => $erreurs);
+	if (!empty($erreurs)) {
+		$erreurs = array('traitements' => $erreurs);
+	}
 	return $erreurs;
 }
 
