@@ -227,7 +227,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_courriel_envoyeur_accuse_label' => 'Courriel de l’accusé de réception',
 	'traiter_email_option_destinataires_champ_form_attention' => 'Cette option est déconseillée, car elle constitue un appel au SPAM.
 	<br />- Pour envoyer à un auteur du site, utiliser l\'option «&nbsp;Destinataire&nbsp;» (plus haut).
-  <br />- Pour envoyer à la personne qui remplit le formulaire, configurer l\'accusé de réception (plus bas).',
+	<br />- Pour envoyer à la personne qui remplit le formulaire, configurer l\'accusé de réception (plus bas).
+<br />
+Cette option n\'est conservée que pour compatibilité ascendante. Elle n\'apparaît pas sur les nouveaux formulaires.
+',
 	'traiter_email_option_destinataires_champ_form_explication' => 'Si un de vos champ est une adresse email et que vous souhaitez envoyer le formulaire à cette adresse, sélectionnez le champ.',
 	'traiter_email_option_destinataires_champ_form_label' => 'Destinaire présent dans un des champ des formulaires',
 	'traiter_email_option_destinataires_explication' => 'Choisissez le champ qui correspondra aux destinataires du message. <br />

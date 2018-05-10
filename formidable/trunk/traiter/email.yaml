@@ -41,6 +41,7 @@ options:
           label: '<:formidable:traiter_email_option_destinataires_champ_form_label:>'
           explication: '<:formidable:traiter_email_option_destinataires_champ_form_explication:>'
           attention: '<:formidable:traiter_email_option_destinataires_champ_form_attention:>'
+          afficher_si: '@traitements[email][champ_courriel_destinataire_form]@!=""'
           env: true
   -
     saisie: 'fieldset'
