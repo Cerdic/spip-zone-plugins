@@ -46,7 +46,7 @@ function formulaires_configurer_rang_traiter_dist() {
 	// création / mise à jour des métas
 	if (!is_null(_request('objets'))) {
 		$objets = array_filter(_request('objets'));
-		ecrire_config('rang/objets', $objets;
+		ecrire_config('rang/objets', $objets);
 	}
 	ecrire_config('rang/rang_max', _request('rang_max'));
 

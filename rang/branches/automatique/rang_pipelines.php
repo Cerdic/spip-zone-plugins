@@ -20,15 +20,21 @@ include_spip('inc/config');
  * Declaration du champ Rang sur les objets sélectionnés
  *
  * @param array $tables
- *
  * @return array
  */
 function rang_declarer_tables_objets_sql($tables) {
 	$tables_objets_selectionnes = lire_config('rang/objets');
 	
-	if (isset($tables_objets_selectionnes) and !empty($tables_objets_selectionnes)) {
+	// Tant qu'on n'a rien rajouté, on commence par lister les tables qui ont DEJA un champ rang !
+	$tables_deja_rang = rang_lister_tables_deja_rang($tables);
+	
+	// On déclare le champ "rang" sur les tables demandées
+	if (is_array($tables_objets_selectionnes)) {
 		foreach ($tables_objets_selectionnes as $table) {
-			$tables[$table]['field']['rang'] = "SMALLINT NOT NULL";
+			// Mais on ne déclare le champ que s'il n'existait pas déjà !
+			if (!isset($tables[$table]['field']['rang'])) {
+				$tables[$table]['field']['rang'] = "SMALLINT NOT NULL";
+			}
 		}
 	}
 	
@@ -39,7 +45,6 @@ function rang_declarer_tables_objets_sql($tables) {
  * Calculer et Inserer le JS qui gére le tri par Drag&Drop dans le bon contexte (la page ?exec=xxxxx)
  *
  * @param    array $flux Données du pipeline
- *
  * @return    array        Données du pipeline
  */
 function rang_recuperer_fond($flux) {
@@ -100,7 +105,6 @@ function rang_recuperer_fond($flux) {
  * Insertion dans le pipeline pre_edition pour le classer l'objet quand on le publie
  *
  * @param    array $flux Données du pipeline
- *
  * @return    array        Données du pipeline
  */
 function rang_pre_edition($flux) {

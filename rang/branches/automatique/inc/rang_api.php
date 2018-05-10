@@ -14,6 +14,31 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
+ * Remplir ou ressortir les tables ayant déjà un rang
+ * 
+ * Au premier appel on fournit la liste complète de toutes les tables d'objets, pour faire la recherche.
+ * Ensuite on peut appeler la fonction sans rien, et elle sortira la liste des tables qui ont un rang AVANT le plugin Rang.
+ * 
+ * @param array $tables
+ * 		Le tableau complet de toutes les tables d'objets au premier appel
+ **/
+function rang_lister_tables_deja_rang($tables=null) {
+	static $tables_deja_rang = null;
+	
+	// Si on n'a pas encore fait la recherche et qu'on a fourni la liste des tables d'objets
+	if (is_null($tables_deja_rang) and is_array($tables)) {
+		$tables_deja_rang = array();
+		foreach ($tables as $table => $description) {
+			if (isset($description['field']['rang'])) {
+				$tables_deja_rang[] = $table;
+			}
+		}
+	}
+	
+	return $tables_deja_rang;
+}
+
+/**
  * Construire la liste des objets à exclure de la configuration
  * 
  * @return array
@@ -45,14 +70,14 @@ function rang_objets_a_exclure() {
  *     liste d'objets
  **/
 function rang_creer_champs ($objets) {
-	foreach ($objets as $key => $table) {
+	foreach ($objets as $table) {
 		if (!empty($table)) {
-			// si le champ 'rang' n'existe pas, le créer et le remplir
 			$champs_table = sql_showtable($table);
+			
+			// si le champ 'rang' n'existe pas, le créer et le remplir
 			if (!isset($champs_table['field']['rang'])) {
-
 				// créer le champ 'rang'
-				sql_alter('TABLE '.$table.' ADD rang SMALLINT NOT NULL');
+				sql_alter('TABLE ' . $table . ' ADD rang SMALLINT NOT NULL');
 
 				// remplir #1 : si aucun numero_titre n'est trouvé, on met la valeur de l'id_prefixe dans rang
 				if (!rang_tester_presence_numero($table)) {

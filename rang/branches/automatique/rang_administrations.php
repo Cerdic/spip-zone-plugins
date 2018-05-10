@@ -82,14 +82,22 @@ function rang_maj_1_0_1() {
 **/
 function rang_vider_tables($nom_meta_base_version) {
 	include_spip('inc/rang_api');
+	include_spip('base/objets');
+	
+	// On appelle la fonction pour que ça lance le pipeline de Rang
+	// et donc remplisse les tables ayant déjà un rang AVANT
+	lister_tables_objets_sql();
+	$tables_deja_rang = rang_lister_tables_deja_rang();
 
-	// supprimer les champs 'rang'
+	// Supprimer les champs 'rang' sur les tables qui ne l'avaient pas avant
 	// note : ici que faire si un objet a ete selectionne, puis deselectionne dans la config ?
 	$objets = lire_config('rang/objets');
-	foreach ($objets as $value) {
-		$champs_table = sql_showtable($value);
-		if (isset($champs_table['field']['rang'])) {
-			sql_alter("TABLE $value DROP rang");
+	foreach ($objets as $table) {
+		$champs_table = sql_showtable($table);
+		
+		// S'il y a bien toujours un champ "rang" mais que la table ne l'avait PAS avant
+		if (isset($champs_table['field']['rang']) and !in_array($table, $tables_deja_rang)) {
+			sql_alter("TABLE $table DROP rang");
 		}
 	}
 
