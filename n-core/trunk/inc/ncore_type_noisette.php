@@ -85,6 +85,7 @@ function type_noisette_charger($plugin, $recharger = false, $stockage = '') {
 				'description'   => '',
 				'icon'          => 'noisette-24.png',
 				'necessite'     => array(),
+				'actif'         => 'oui',
 				'conteneur'     => 'non',
 				'contexte'      => array(),
 				'ajax'          => 'defaut',
@@ -110,62 +111,56 @@ function type_noisette_charger($plugin, $recharger = false, $stockage = '') {
 					$description['contexte'] = array($description['contexte']);
 				}
 
-				// On n'inclue ce type de noisette que si les plugins qu'il nécessite explicitement dans son
-				// fichier de configuration sont bien tous activés.
+				// On repère les types de noisette qui nécessitent des plugins explicitement dans leur
+				// fichier de configuration :
+				// -- si un plugin nécessité est inactif, on indique le type de noisette comme inactif mais on l'inclut
+				//    dans la liste retournée.
 				// Rappel: si un type de noisette est incluse dans un plugin non actif elle ne sera pas détectée
 				//         lors du find_all_in_path() puisque le plugin n'est pas dans le path SPIP.
 				//         Ce n'est pas ce cas qui est traité ici.
-				$type_noisette_a_garder = true;
 				if (!empty($description['necessite'])) {
 					foreach ($description['necessite'] as $_plugin_necessite) {
 						if (!defined('_DIR_PLUGIN_' . strtoupper($_plugin_necessite))) {
-							$type_noisette_a_garder = false;
+							$description['actif'] = 'non';
 							break;
 						}
 					}
 				}
 
-				// Si la noisette est à garder on finalise sa description et on détermine si elle est nouvelle ou modifiée.
 				// En mode rechargement forcé toute noisette est considérée comme nouvelle.
 				// Sinon, la noisette doit être retirée de la base car un plugin qu'elle nécessite a été désactivée:
 				// => il suffit pour cela de la laisser dans la liste des noisettes obsolètes.
-				if ($type_noisette_a_garder) {
-					// Mise à jour du md5
-					$description['signature'] = $md5;
-					// Complétude de la description avec les valeurs par défaut
-					$description = array_merge($description_defaut, $description);
-					// Traitement spécifique d'un type de noisette conteneur : son contexte est toujours env et
-					// l'ajax et l'inclusion dynamique ne sont pas autorisés.
-					if ($description['conteneur'] == 'oui') {
-						$description['contexte'] = array('env');
-						$description['ajax'] = 'non';
-						$description['inclusion'] = 'statique';
-					}
-					// Sérialisation des champs 'necessite', 'contexte' et 'parametres' qui sont des tableaux
-					$description['necessite'] = serialize($description['necessite']);
-					$description['contexte'] = serialize($description['contexte']);
-					$description['parametres'] = serialize($description['parametres']);
-					// Complément spécifique au plugin utilisateur si nécessaire
-					$description = ncore_type_noisette_completer($plugin, $description, $stockage);
+				// Mise à jour du md5
+				$description['signature'] = $md5;
+				// Complétude de la description avec les valeurs par défaut
+				$description = array_merge($description_defaut, $description);
+				// Traitement spécifique d'un type de noisette conteneur : son contexte est toujours env et
+				// l'ajax et l'inclusion dynamique ne sont pas autorisés.
+				if ($description['conteneur'] == 'oui') {
+					$description['contexte'] = array('env');
+					$description['ajax'] = 'non';
+					$description['inclusion'] = 'statique';
+				}
+				// Sérialisation des champs 'necessite', 'contexte' et 'parametres' qui sont des tableaux
+				$description['necessite'] = serialize($description['necessite']);
+				$description['contexte'] = serialize($description['contexte']);
+				$description['parametres'] = serialize($description['parametres']);
+				// Complément spécifique au plugin utilisateur si nécessaire
+				$description = ncore_type_noisette_completer($plugin, $description, $stockage);
 
-					if (!$md5_stocke or $recharger) {
-						// Le type de noisette est soit nouveau soit on est en mode rechargement forcé:
-						// => il faut le rajouter.
-						$types_noisette_a_ajouter[] = $description;
-					} else {
-						// La description stockée a été modifiée et le mode ne force pas le rechargement:
-						// => il faut mettre à jour le type de noisette.
-						$types_noisette_a_changer[] = $description;
-						// => et il faut donc le supprimer de la liste de types de noisette obsolètes
-						$types_noisette_a_effacer = array_diff($types_noisette_a_effacer, array($type_noisette));
-					}
+				if (!$md5_stocke or $recharger) {
+					// Le type de noisette est soit nouveau soit on est en mode rechargement forcé:
+					// => il faut le rajouter.
+					$types_noisette_a_ajouter[] = $description;
 				} else {
-					// Le type de noisette ne peut plus être utilisé car un des plugins qu'il nécessite n'est plus actif.
-					// => il faut le laisser dans la liste des obsolètes.
-					continue;
+					// La description stockée a été modifiée et le mode ne force pas le rechargement:
+					// => il faut mettre à jour le type de noisette.
+					$types_noisette_a_changer[] = $description;
+					// => et il faut donc le supprimer de la liste de types de noisette obsolètes
+					$types_noisette_a_effacer = array_diff($types_noisette_a_effacer, array($type_noisette));
 				}
 			} else {
-				// Le type de noisette n'a pas changé et n'a donc pas été réchargé:
+				// Le type de noisette n'a pas changé et n'a donc pas été rechargé:
 				// => Il faut donc juste indiquer qu'il n'est pas obsolète.
 				$types_noisette_a_effacer = array_diff($types_noisette_a_effacer, array($type_noisette));
 			}
