@@ -17,37 +17,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 // ------------------------- API NOISETTES : COMPLEMENT ---------------------------
 // --------------------------------------------------------------------------------
 
-/**
- * Compile la balise `#NOIZETIER_NOISETTE_PREVIEW` qui permet d'afficher la prévisualisation d'une noisette
- * si le squelette idoine existe (type_noisette-preview.html) dans le même répertoire que celui du type de noisette.
- * La signature de la balise est : `#NOIZETIER_NOISETTE_PREVIEW`.
- *
- * @package SPIP\NOIZETIER\NOISETTE\BALISE
- * @balise
- *
- * @param Champ $p
- *        Pile au niveau de la balise.
- *
- * @return Champ
- *         Pile complétée par le code à générer.
- **/
-function balise_NOIZETIER_NOISETTE_PREVIEW_dist($p) {
-
-	$id_noisette = champ_sql('id_noisette', $p);
-	$type_noisette = champ_sql('type_noisette', $p);
-	$parametres = champ_sql('parametres', $p);
-
-	$inclusion = "recuperer_fond(
-		'noisette_preview',
-		array_merge(unserialize($parametres), array('type_noisette' => $type_noisette))
-	)";
-
-	$p->code = "$inclusion";
-	$p->interdire_scripts = false;
-
-	return $p;
-}
-
 
 // --------------------------------------------------------------------------------
 // ------------------------- API CONTENEURS : COMPLEMENT --------------------------

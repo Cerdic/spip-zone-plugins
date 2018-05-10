@@ -21,9 +21,6 @@ function noizetier_recuperer_fond($flux) {
 	// celui d'un bloc autorisé pour une page ou un objet donné.
 	$contexte = $flux['data']['contexte'];
 	if (!test_espace_prive() and !isset($contexte['fond_compilation_noizetier'])) {
-		include_spip('inc/noizetier_page');
-		include_spip('inc/noizetier_objet');
-
 		// On récupère le squelette en cours de traitement et on identifie si celui-ci est un bloc autorisé d'une
 		// page ou d'un objet.
 		// On exclut le squelette structure.html et les noisettes elles-mêmes.
@@ -46,6 +43,7 @@ function noizetier_recuperer_fond($flux) {
 				$page = $squelette[1];
 
 				// On vérifie que le bloc fait bien partie de la liste des blocs configurables de la page.
+				include_spip('inc/noizetier_page');
 				$blocs = noizetier_page_lister_blocs($page);
 				if (in_array($bloc, $blocs)) {
 					// Traitement des cas particuliers de certaines compositions
@@ -77,6 +75,7 @@ function noizetier_recuperer_fond($flux) {
 						$contexte['id_conteneur'] = noizetier_conteneur_composer($contexte, $bloc);
 						// -- identification du bloc et des compteurs de noisettes de chaque bloc de l'objet.
 						$contexte['bloc'] = $bloc;
+						include_spip('inc/noizetier_objet');
 						$compteurs_noisette = noizetier_objet_compter_noisettes($objet, $id_objet);
 					} else {
 						// C'est une page ou une composition.
@@ -102,7 +101,7 @@ function noizetier_recuperer_fond($flux) {
 						and ($bloc_avec_noisettes
 							or (!$bloc_avec_noisettes and !$est_objet)
 							or (!$bloc_avec_noisettes and $est_objet and $compteurs_noisette))) {
-							$fond_compilation_bloc = 'bloc_preview';
+							$fond_compilation_bloc = 'bloc_compiler_editer';
 						}
 					} elseif ($bloc_avec_noisettes) {
 						// Mode normal d'afichage
@@ -235,25 +234,25 @@ function noizetier_compositions_lister_disponibles($flux) {
  * @return array
  */
  // TODO : revoir l'utilité de ce code qui est mort à priori car on a toujours une page source pour une composition
-function noizetier_styliser($flux) {
-	if (defined('_NOIZETIER_COMPOSITIONS_TYPE_PAGE') and _NOIZETIER_COMPOSITIONS_TYPE_PAGE) {
-		$squelette = $flux['data'];
-		$fond = $flux['args']['fond'];
-		$ext = $flux['args']['ext'];
-		
-		// Si on n'a pas trouvé de squelette
-		if (!$squelette) {
-			$noizetier_compositions = (isset($GLOBALS['meta']['noizetier_compositions'])) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
-			// On vérifie qu'on n'a pas demandé une composition du noizetier de type page et qu'on appele ?page=type
-			if (isset($noizetier_compositions['page'][$fond])) {
-				$flux['data'] = substr(find_in_path("page.$ext"), 0, -strlen(".$ext"));
-				$flux['args']['composition'] = $fond;
-			}
-		}
-	}
-
-	return $flux;
-}
+//function noizetier_styliser($flux) {
+//	if (defined('_NOIZETIER_COMPOSITIONS_TYPE_PAGE') and _NOIZETIER_COMPOSITIONS_TYPE_PAGE) {
+//		$squelette = $flux['data'];
+//		$fond = $flux['args']['fond'];
+//		$ext = $flux['args']['ext'];
+//
+//		// Si on n'a pas trouvé de squelette
+//		if (!$squelette) {
+//			$noizetier_compositions = (isset($GLOBALS['meta']['noizetier_compositions'])) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
+//			// On vérifie qu'on n'a pas demandé une composition du noizetier de type page et qu'on appele ?page=type
+//			if (isset($noizetier_compositions['page'][$fond])) {
+//				$flux['data'] = substr(find_in_path("page.$ext"), 0, -strlen(".$ext"));
+//				$flux['args']['composition'] = $fond;
+//			}
+//		}
+//	}
+//
+//	return $flux;
+//}
 
 /**
  * Pipeline jqueryui_forcer pour demander au plugin l'insertion des scripts pour .sortable().

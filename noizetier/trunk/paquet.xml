@@ -1,7 +1,7 @@
 <paquet
 	prefix="noizetier"
 	categorie="maintenance"
-	version="3.0.2"
+	version="3.0.3"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/noizetier-32.png"
@@ -24,7 +24,6 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/noizetier_tables.php" />
 	<pipeline nom="autoriser" inclure="noizetier_autorisations.php" />
 	<pipeline nom="recuperer_fond" inclure="noizetier_pipelines.php" />
-	<pipeline nom="styliser" inclure="noizetier_pipelines.php" />
 	<pipeline nom="compositions_lister_disponibles" inclure="noizetier_pipelines.php" />
 	<pipeline nom="jqueryui_plugins" inclure="noizetier_pipelines.php" action="jqueryui_forcer" />
 	<pipeline nom="noizetier_lister_pages" inclure="noizetier_pipelines.php" />

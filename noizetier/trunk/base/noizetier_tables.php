@@ -103,6 +103,7 @@ function noizetier_declarer_tables_principales($tables_principales) {
 		'description'    => "text DEFAULT '' NOT NULL",
 		'icon'           => "varchar(255) DEFAULT '' NOT NULL",
 		'necessite'      => "text DEFAULT '' NOT NULL",
+		'actif'          => "varchar(3) DEFAULT 'oui' NOT NULL",
 		'conteneur'      => "varchar(3) DEFAULT 'non' NOT NULL",
 		'contexte'       => "text DEFAULT '' NOT NULL",
 		'ajax'           => "varchar(6) DEFAULT '' NOT NULL",
@@ -116,6 +117,7 @@ function noizetier_declarer_tables_principales($tables_principales) {
 		'PRIMARY KEY'     => 'plugin, type_noisette',
 		'KEY type'        => 'type',
 		'KEY composition' => 'composition',
+		'KEY actif'       => 'actif',
 		'KEY ajax'        => 'ajax',
 		'KEY inclusion'   => 'inclusion',
 	);
