@@ -235,6 +235,8 @@ Cette option n\'est conservée que pour compatibilité ascendante. Elle n\'appar
 	'traiter_email_option_destinataires_champ_form_label' => 'Destinaire présent dans un des champ des formulaires',
 	'traiter_email_option_destinataires_explication' => 'Choisissez le champ qui correspondra aux destinataires du message. <br />
 	Il s\'agit d\'un champ de type «&nbsp;Destinataires&nbsp;» ou «&nbsp;Champ caché&nbsp;», comprenant l\'identifiant numérique d\'un auteur du site.
+<br />
+Pour un accusé de réception à la personne remplissant le formulaire, voir plus bas.
 ',
 	'traiter_email_option_destinataires_label' => 'Destinataires',
 	'traiter_email_option_destinataires_plus_explication' => 'Une liste d’adresses séparées par des virgules.',
