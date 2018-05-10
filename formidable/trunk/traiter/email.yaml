@@ -131,26 +131,36 @@ options:
       tagfield: '<legend>'
     saisies:
       -
+        saisie: 'explication'
+        options:
+          nom: 'accuse_explication'
+          afficher_si: '@traitements[email][champ_courriel]@==""'
+          texte: '<:formidable:traiter_email_accuse_explication_texte:>'
+      -
         saisie: 'case'
         options:
           nom: 'activer_accuse'
           li_class: 'pleine_largeur'
           label_case: '<:formidable:traiter_email_option_activer_accuse_label_case:>'
+          afficher_si: '@traitements[email][champ_courriel]@!=""'
       -
         saisie: 'input'
         options:
           nom: 'sujet_accuse'
           label: '<:formidable:traiter_email_option_sujet_accuse_label:>'
           explication: '<:formidable:traiter_email_option_sujet_explication:>'
+          afficher_si: '@traitements[email][champ_courriel]@!=""'
       -
         saisie: 'input'
         options:
           nom: 'courriel_envoyeur_accuse'
           label: '<:formidable:traiter_email_option_courriel_envoyeur_accuse_label:>'
           explication: '<:formidable:traiter_email_option_courriel_envoyeur_accuse_explication:>'
+          afficher_si: '@traitements[email][champ_courriel]@!=""'
       -
         saisie: 'input'
         options:
           nom: 'nom_envoyeur_accuse'
           label: '<:formidable:traiter_email_option_nom_envoyeur_accuse_label:>'
           explication: '<:formidable:traiter_email_option_nom_envoyeur_accuse_explication:>'
+          afficher_si: '@traitements[email][champ_courriel]@!=""'

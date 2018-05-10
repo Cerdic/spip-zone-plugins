@@ -208,6 +208,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_formulaires_archives' => 'Archives',
 	'titre_reponses' => 'Réponses',
 	'traitements_actives' => 'Traitements activés',
+	'traiter_email_accuse_explication_texte' => 'Pour activer la fonctionnalité d\'accusé de réception, vous devez au préalable définir un expéditeur.', 
 	'traitements_aide_memoire' => 'Aide mémoire :',
 	'traitements_avertissement_creation' => 'Les modifications sur les champs du formulaire ont été enregistrées avec succès. Vous pouvez maintenant définir quels traitements seront effectués lors de l’utilisation du formulaire.',
 	'traitements_avertissement_modification' => 'Les modifications sur les champs du formulaire ont été enregistrées avec succès. <strong>Certains traitements doivent peut-être être reconfigurés en conséquence.</strong>',
