@@ -253,6 +253,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_label_titre_previsions' => 'Afficher un titre pour les prévisions ?',
 	'noisette_titre_conditions' => 'Conditions météorologiques',
 	'noisette_titre_previsions_24h' => 'Prévisions météorologiques 24h',
+	'noisette_preview_previsions' => 'Jours de prévisions : @nb_jours@ - Premier jour : @jour_1@.',
 	'nuit' => 'nuit',
 
 	// P

@@ -281,6 +281,17 @@ function rainette_afficher_unite($valeur, $type_donnee = '', $precision = -1, $s
 }
 
 
+function rainette_afficher_service($service) {
+
+	// Acquérir la configuration statique du service.
+	include_spip("services/${service}");
+	$configurer = "${service}_service2configuration";
+	$configuration = $configurer('service');
+
+	return $configuration['nom'];
+}
+
+
 /**
  * @param string $mode
  *

@@ -1,0 +1,3 @@
+[(#REM) Prévisualisation de la noisette des conditions météorologiques d'un lieu donné ]
+[(#ENV{service}|rainette_afficher_service)][ - (#ENV{lieu}|typo)<br />]
+[(#VAL{rainette:noisette_preview_previsions}|_T{#ARRAY{nb_jours, #ENV{nb_jours}, jour_1, #ENV{jour_1}}})]
