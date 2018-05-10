@@ -7,6 +7,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+// E
+	'erreur_type_noisette_inactif' => 'Le type de noisette @type_noisette@ est inactivé car au moins un plugin nécessaire à son utilisation est désactivé.',
+
 // L
 	'label_conteneur_balise' => 'Balise matérialisant le conteneur',
 	'label_conteneur_css' => 'Style à affecter à la balise conteneur',
@@ -14,4 +17,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // T
 	'type_noisette_conteneur_nom' => 'Bloc conteneur',
 	'type_noisette_conteneur_description' => 'Conteneur pouvant accueillir des noisettes',
+	'type_noisette_conteneur_preview' => 'Balise englobante : @balise@',
 );

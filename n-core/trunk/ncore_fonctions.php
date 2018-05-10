@@ -226,5 +226,6 @@ function noisette_contextualiser($plugin, $noisette, $type_noisette, $environnem
 
 // Balises
 include_spip('public/noisette_compiler');
+include_spip('public/noisette_preview');
 include_spip('public/noisette_repertorier');
 include_spip('public/conteneur_identifier');
