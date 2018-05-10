@@ -10,7 +10,7 @@
 	<[(#DIV|sinon{ul})]>
 		
 		#ACTION_FORMULAIRE{#ENV{action}}
-		#SET{name,rang_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		#SET{name, objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 		[(#SET{exclus, #REM|rang_objets_a_exclure})]
 
 		<[(#DIV|sinon{li})] class="editer">

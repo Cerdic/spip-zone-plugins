@@ -100,8 +100,7 @@ function rang_get_sources() {
 	}
 	
 	$sources = array();
-	$objets_selectionnes = lire_config('rang/rang_objets');
-	$objets=explode(',',$objets_selectionnes);
+	$objets = lire_config('rang/objets');
 
 	foreach ($objets as $value) {
 		$objet = table_objet($value);
@@ -137,8 +136,9 @@ function rang_get_contextes() {
 		return $contextes;
 	}
 	include_spip('base/objets_parents');
-	$tables = explode(',', lire_config('rang/rang_objets'));
+	$tables = lire_config('rang/objets');
 	$contextes = array();
+	
 	foreach ($tables as $table) {
 		// le nom de l'objet au pluriel
 		$contextes[] = table_objet($table);

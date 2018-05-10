@@ -27,6 +27,7 @@ include_spip('inc/mots');
 function balise_RANG($p) {
 	$p = balise_RANG_dist($p);
 	$p->code = "(intval($p->code) == 0 ? '' : $p->code)";
+	
 	return $p;
 }
 
@@ -46,6 +47,7 @@ function balise_RANG_LISTE_OBJETS($p) {
 	// utiliser function_exists pour éviter une erreur quand on désactive Rang
 	$p->code = "function_exists('rang_liste_objets')?rang_liste_objets():array()";
 	$p->interdire_scripts = false;
+	
 	return $p;
 }
 
@@ -55,11 +57,13 @@ function balise_RANG_LISTE_OBJETS($p) {
  * @return array
  */
 function rang_liste_objets() {
-	$tables = explode(',', lire_config('rang/rang_objets'));
+	$tables = lire_config('rang/objets');
 	$objets = array();
+	
 	foreach ($tables as $table) {
 		$objets[] = table_objet($table);
 	}
+	
 	return $objets;
 }
 
@@ -77,7 +81,8 @@ function rang_liste_objets() {
  **/
 function rang_objet_dans_config($objet) {
 	$table = table_objet_sql($objet);
-	$liste = explode(',', lire_config('rang/rang_objets'));
+	$liste = lire_config('rang/objets');
+	
 	return in_array($table, $liste);
 }
 

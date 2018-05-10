@@ -24,18 +24,14 @@ include_spip('inc/config');
  * @return array
  */
 function rang_declarer_tables_objets_sql($tables) {
-
-	$tables_objets_selectionnes = lire_config('rang/rang_objets');
-	if (isset($tables_objets_selectionnes) AND !empty($tables_objets_selectionnes)) {
-
-		/* Declaration du champ Rang sur les objets sélectionnés */
-		$rang_objets  = rtrim(lire_config('rang/rang_objets'), ',');
-		$liste_objets = explode(',', $rang_objets);
-
-		foreach ($liste_objets as $table) {
+	$tables_objets_selectionnes = lire_config('rang/objets');
+	
+	if (isset($tables_objets_selectionnes) and !empty($tables_objets_selectionnes)) {
+		foreach ($tables_objets_selectionnes as $table) {
 			$tables[$table]['field']['rang'] = "SMALLINT NOT NULL";
 		}
 	}
+	
 	return $tables;
 }
 
@@ -47,10 +43,9 @@ function rang_declarer_tables_objets_sql($tables) {
  * @return    array        Données du pipeline
  */
 function rang_recuperer_fond($flux) {
-
-	$tables_objets_selectionnes = lire_config('rang/rang_objets');
-	if (isset($tables_objets_selectionnes) AND !empty($tables_objets_selectionnes)) {
-
+	$tables_objets_selectionnes = lire_config('rang/objets');
+	
+	if (isset($tables_objets_selectionnes) and !empty($tables_objets_selectionnes)) {
 		// Gestion du contexte : dans quelle page insérer le JS ?
 		if (in_array(_request('exec'), rang_get_contextes())
 			&& in_array($flux['args']['fond'], rang_get_sources())
@@ -97,6 +92,7 @@ function rang_recuperer_fond($flux) {
 			}
 		}
 	}
+	
 	return $flux;
 }
 
@@ -108,14 +104,11 @@ function rang_recuperer_fond($flux) {
  * @return    array        Données du pipeline
  */
 function rang_pre_edition($flux) {
-
 	$rang_max = lire_config('rang/rang_max');
 
 	if (isset($rang_max) && !empty($rang_max) && $flux['args']['action'] == 'instituer') {
-
-		$rang_objets  = rtrim(lire_config('rang/rang_objets'), ',');
-		$liste_objets = explode(',', $rang_objets);
-		$table        = $flux['args']['table'];
+		$liste_objets  = lire_config('rang/objets');
+		$table         = $flux['args']['table'];
 
 		if (in_array($table, $liste_objets)) {
 			$id_objet = $flux['args']['id_objet'];
@@ -130,5 +123,6 @@ function rang_pre_edition($flux) {
 			}
 		}
 	}
+	
 	return $flux;
 }

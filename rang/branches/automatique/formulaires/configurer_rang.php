@@ -24,11 +24,10 @@ include_spip('inc/rang_api');
  *     Environnement du formulaire
  **/
 function formulaires_configurer_rang_charger_dist() {
-	$objets = lire_config('rang/rang_objets');
-	if ($objets) {
-		$valeurs['rang_objets'] = explode(',', $objets);
-	}
-	$valeurs['rang_max'] = lire_config('rang/rang_max');
+	$config = lire_config('rang');
+	
+	$valeurs['objets'] = $config['objets'] ? $config['objets'] : array();
+	$valeurs['rang_max'] = $config['rang_max'];
 	
 	return $valeurs;
 }
@@ -45,9 +44,9 @@ function formulaires_configurer_rang_traiter_dist() {
 	$err = null;
 
 	// création / mise à jour des métas
-	if (!is_null(_request('rang_objets'))) {
-		$objets = array_filter(_request('rang_objets'));
-		ecrire_config('rang/rang_objets', is_array($objets) ? implode(',', $objets) : '');
+	if (!is_null(_request('objets'))) {
+		$objets = array_filter(_request('objets'));
+		ecrire_config('rang/objets', $objets;
 	}
 	ecrire_config('rang/rang_max', _request('rang_max'));
 
