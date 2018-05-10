@@ -332,21 +332,24 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 		// lorsque le name est un tableau
 		if (isset($saisie['options']['afficher_si'])) {
 			++$i;
+			// Les [] dans le nom de la saisie sont transformés en _ dans le
+			// nom de la classe, il faut faire pareil
+			$nom_underscore = rtrim(
+					preg_replace('/[][]\[?/', '_', $saisie['options']['nom']),
+					'_'
+			);
 			// retrouver la classe css probable
 			switch ($saisie['saisie']) {
 				case 'fieldset':
-					$class_li = 'fieldset_'.$saisie['options']['nom'];
+					$class_li = 'fieldset_'.$nom_underscore;
 					break;
 				case 'explication':
-					$class_li = 'explication_'.$saisie['options']['nom'];
+					$class_li = 'explication_'.$nom_underscore;
 					break;
 				default:
 					// Les [] dans le nom de la saisie sont transformés en _ dans le
 					// nom de la classe, il faut faire pareil
-					$class_li = 'editer_' . rtrim(
-						preg_replace('/[][]\[?/', '_', $saisie['options']['nom']),
-						'_'
-					);
+					$class_li = 'editer_'.$nom_underscore;
 			}
 			$condition = isset($saisie['options']['afficher_si']) ? $saisie['options']['afficher_si'] : '';
 			// retrouver l'identifiant
