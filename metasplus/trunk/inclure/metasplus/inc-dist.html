@@ -53,7 +53,7 @@
 
 
 ]
-<BOUCLE_dublincore(CONDITION) {si #CONFIG{metasplus/dublincore}|non}>
+<BOUCLE_dublincore(CONDITION) {si #CONFIG{metasplus/dublincore}}>
 <!-- Dublin Core -->
 <link rel="schema.DC" href="https://purl.org/dc/elements/1.1/" />
 <link rel="schema.DCTERMS" href="https://purl.org/dc/terms/" />
@@ -86,7 +86,7 @@
 
 
 ]
-<BOUCLE_opengraph(CONDITION) {si #CONFIG{metasplus/opengraph}|non}>
+<BOUCLE_opengraph(CONDITION) {si #CONFIG{metasplus/opengraph}}>
 <!-- Open Graph -->
 [(#GET{logos}|count|oui)
 <meta property="og:rich_attachment" content="true" />
@@ -136,7 +136,7 @@
 
 
 ]
-<BOUCLE_twitter(CONDITION) {si #CONFIG{metasplus/twitter}|non}>
+<BOUCLE_twitter(CONDITION) {si #CONFIG{metasplus/twitter}}>
 <!-- Twitter Card -->
 <meta name="twitter:card" content="[(#GET{logos}|count|?{summary_large_image,summary})]" />
 [<meta name="twitter:title" content="(#GET{titre}|attribut_html)" />]
