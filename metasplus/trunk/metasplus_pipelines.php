@@ -14,16 +14,20 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+
 /**
  * Effectuer des traitements juste avant l'envoi des pages publiques.
  *
- * => Ajout des metas Open Graph, Dublin Core et Twitter dans le <head> public.
+ * => Ajout des métadonnéess Open Graph, Dublin Core et Twitter
+ * dans le <head> public de certaines pages.
  *
- * Règles :
- * On va chercher dans le dossier inclure/metasplus le squelette de la variante spécifique à la page si elle existe, sinon le squelette générique dist.html qui génère automatiquement les métas.
+ * @Note : on retrouve les informations du contexte de la page
+ * au moyen d'un squelette pour bénéficier de la mise en cache
+ * et éviter des requêtes SQL à chaque hit via decoder_url().
  *
- * @Note : on retrouve les informations du contexte de l apage actuelle au moyen d'un squelette pour bénéficier de la mise en cache et éviter des requêtes SQL à chaque hit via decoder_url()
- *
+ * @uses metasplus_identifier_contexte()
+ * @uses metasplus_selectionner_fond()
+ * 
  * @param $flux
  * @return mixed
  */
@@ -36,14 +40,11 @@ function metasplus_affichage_final($flux) {
 	if (!test_espace_prive()
 		// Il y a un <head>
 		and $pos_head = strpos($flux, '</head>')
-		// Les protocoles ne sont pas tous désactivés (improbable mais possible)
-		and (
-			!lire_config('metasplus')
-			or count(lire_config('metasplus')) < 3
-		)
+		// Au moins un protocole est activé
+		and count(lire_config('metasplus'))
 		// Le contexte est retrouvé
 		and $url = self()
-		and $contexte = recuperer_fond('metasplus_trouver_contexte', array('url' => $url))
+		and $contexte = recuperer_fond('metasplus_identifier_contexte', array('url' => $url))
 		and is_array($contexte = unserialize($contexte))
 		// La page n'est pas en erreur
 		and empty($contexte['erreur'])
@@ -58,14 +59,8 @@ function metasplus_affichage_final($flux) {
 		and !strpos($contexte['type-page'], '.')
 	) {
 
-		// Trouver le squelette à utiliser : variante de la page si elle existe, sinon le squelette par défaut (dist.html)
-		$fond_defaut   = 'inclure/metasplus/dist';
-		$fond_variante = 'inclure/metasplus/' . $contexte['type-page'];
-		if (find_in_path($fond_variante.'.html')) {
-			$fond = $fond_variante;
-		} elseif (find_in_path($fond_defaut.'.html')) {
-			$fond = $fond_defaut;
-		}
+		// Trouver le squelette à utiliser
+		$fond = metasplus_selectionner_fond($contexte['type-page']);
 
 		// Si le squelette n'est pas vide, on ajoute son contenu à la fin du head
 		if ($fond
@@ -78,6 +73,7 @@ function metasplus_affichage_final($flux) {
 
 	return $flux;
 }
+
 
 /**
  * pipeline post_edition pour supprimer la meta metasplus/id_doc_logo
@@ -96,5 +92,39 @@ function metasplus_post_edition($flux){
 	) {
 		effacer_config('metasplus/id_doc_logo');
 	}
+	return $flux;
+}
+
+
+/**
+ * Gérer les informations affichées dans l’espace privé
+ * dans le cadre d’information des objets SPIP
+ *
+ * => Ajout du bouton de prévisualisation des métas+
+ *
+ * @param $flux
+ * @return $flux
+ * @author tofulm
+ **/
+function metasplus_boite_infos($flux){
+
+	if ($objet = $flux['args']['type']
+		and $id_objet = $flux['args']['id']
+		and autoriser('previsualiser_metasplus', $objet, $id_objet)
+	) {
+		include_spip('base/objets');
+		include_spip('inc/filtres');
+		$type_page = objet_info($objet, 'page');
+		$id_table_objet = id_table_objet($objet);
+		$contexte = array(
+			'type-page'      => $type_page,
+			'objet'          => $objet,
+			'id_objet'       => $id_objet,
+			$id_table_objet  => $id_objet,
+		);
+		$fond_previsu = recuperer_fond('prive/squelettes/inclure/metasplus_bouton_previsu', $contexte);
+		$flux['data'] .= $fond_previsu;
+	}
+
 	return $flux;
 }

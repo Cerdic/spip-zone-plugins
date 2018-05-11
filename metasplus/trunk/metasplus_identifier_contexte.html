@@ -1,0 +1,16 @@
+[(#REM)
+
+	Squelette technique pour retrouver le contexte correspondant à une URL.
+	Cf. pipeline affichage_final
+
+	Renvoie le contexte sous forme de tableau associatif sérialisé :
+	- type-page : le type de la page
+	- objet : le type d'objet le cas échéant
+	- id_objet : son identifiant
+	- id_patate : idem, mais avec le nom de sa clé primaire
+	- erreur : 'true' si la page est en erreur
+
+	Paramètres :
+	- url : url à décoder, par défaut l'url courante.
+
+][(#ENV{url,#SELF}|url_absolue|metasplus_identifier_contexte|serialize)]
