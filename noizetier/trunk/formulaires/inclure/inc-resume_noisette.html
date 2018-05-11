@@ -38,7 +38,8 @@
 		#SET{conteneur, #CONTENEUR_IDENTIFIER{noizetier, #ARRAY{type_noisette, #TYPE_NOISETTE, id_noisette, #ID_NOISETTE}}
 		[<a href="(#ENV{url_add}
 				|parametre_url{type_noisette, #TYPE_NOISETTE}
-				|parametre_url{id_noisette, #ID_NOISETTE})"
+				|parametre_url{id_noisette, #ID_NOISETTE}
+				|parametre_url{profondeur, #ENV{profondeur}})"
 			title="<:noizetier:formulaire_ajouter_noisette_conteneur:>">
 			[<img height="24" width="24" src="(#CHEMIN_IMAGE{noisette-add-24.png})" alt="" />]
 		</a>]

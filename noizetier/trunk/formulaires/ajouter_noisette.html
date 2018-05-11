@@ -9,15 +9,15 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type="hidden" name="conteneur_id" value="#ENV{id_conteneur}" />
 		<h3 class="titrem"><:noizetier:noisettes_disponibles:></h3>
-		[(#ENV{id_noisette}|>{0}|?{
-			#SET{critere, conteneur!='oui'},
-			#SET{critere, ''}
+		[(#ENV{id_noisette}|>{0}|et{#ENV{profondeur}|>={1}}|?{
+			#SET{critere_conteneur, conteneur!='oui'},
+			#SET{critere_conteneur, ''}
 		})]
 		<INCLURE{fond=formulaires/inclure/inc-liste_types_noisette,
 			page,
 			objet,
 			id_objet,
-			where=#GET{critere},
+			where=#GET{critere_conteneur},
 			input_radio=on} />
 
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]

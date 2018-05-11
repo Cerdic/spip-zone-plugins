@@ -28,7 +28,7 @@
 ]
 <div class="ajax">
 	[(#ENV{id_noisette}|?{
-		[(#SET{noisette, #ARRAY{type_noisette, #ENV{type_noisette}, id_noisette, #ENV{id_noisette}}})],
+		[(#SET{noisette, #ARRAY{type_noisette, #ENV{type_noisette}, id_noisette, #ENV{id_noisette}, profondeur, #ENV{profondeur}}})],
 		[(#SET{noisette, #ARRAY})]}
 	)]
 	#FORMULAIRE_AJOUTER_NOISETTE{

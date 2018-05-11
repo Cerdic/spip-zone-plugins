@@ -23,36 +23,42 @@
 		<B_noisettes>
 		<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-bloc">
 		<BOUCLE_noisettes(NOISETTES){plugin=noizetier}{id_conteneur?}{par rang_noisette}>
+			#SET{profondeur, 0}
 			<li class="editer item noisette" id="noisette-#ID_NOISETTE">
 				<INCLURE{fond=formulaires/inclure/inc-resume_noisette,
 					id_noisette,
 					id_conteneur,
 					rang_noisette,
 					nb_noisettes=#TOTAL_BOUCLE,
+					profondeur=#GET{profondeur},
 					url_page=#GET{self},
 					url_add=#GET{url_add},
 					bloc} />
 				#SET{conteneur, #CONTENEUR_IDENTIFIER{noizetier, #ARRAY{type_noisette, #TYPE_NOISETTE, id_noisette, #ID_NOISETTE}}}
 			</li>
-			<B_sous_noisettes>
+
+			<B_noisettes_enfants>
 			<ul class="liste-noisettes-conteneur">
-			<BOUCLE_sous_noisettes(NOISETTES){plugin=noizetier}{id_conteneur=#GET{conteneur}}{par rang_noisette}>
+			<BOUCLE_noisettes_enfants(NOISETTES){plugin=noizetier}{id_conteneur=#GET{conteneur}}{par rang_noisette}>
+				#SET{profondeur, #GET{profondeur}|plus{1}}
 				<li class="editer item noisette" id="noisette-#ID_NOISETTE">
 					<INCLURE{fond=formulaires/inclure/inc-resume_noisette,
 						id_noisette,
 						id_conteneur,
 						rang_noisette,
-						nb_noisettes=#_sous_noisettes:TOTAL_BOUCLE,
-						classe=conteneur,
+						nb_noisettes=#_noisettes_enfants:TOTAL_BOUCLE,
+						classe=conteneur-#GET{profondeur},
+						profondeur=#GET{profondeur},
 						url_page=#GET{self},
 						url_add=#GET{url_add},
 						bloc} />
 					#SET{conteneur, #CONTENEUR_IDENTIFIER{noizetier, #ARRAY{type_noisette, #TYPE_NOISETTE, id_noisette, #ID_NOISETTE}}}
 				</li>
-				<BOUCLE_recursive(BOUCLE_sous_noisettes)></BOUCLE_recursive>
-			</BOUCLE_sous_noisettes>
+				<BOUCLE_noisettes_petits_enfants(BOUCLE_noisettes_enfants)></BOUCLE_noisettes_petits_enfants>
+				#SET{profondeur,#GET{profondeur}|moins{1}}
+			</BOUCLE_noisettes_enfants>
 			</ul>
-			</B_sous_noisettes>
+			</B_noisettes_enfants>
 		</BOUCLE_noisettes>
 			<input type="hidden" name="nb_noisettes" value="#TOTAL_BOUCLE" />
 		</ul>

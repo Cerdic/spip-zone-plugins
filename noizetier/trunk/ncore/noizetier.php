@@ -568,6 +568,7 @@ function noizetier_conteneur_identifier($plugin, $conteneur) {
 
 /**
  * Retire, de l'espace de stockage, toutes les noisettes d'un conteneur.
+ * L'imbrication des conteneurs est gérée dans la fonction de service de N-Core.
  *
  * @package SPIP\NOIZETIER\CONTENEUR\SERVICE
  *
