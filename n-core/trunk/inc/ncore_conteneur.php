@@ -11,6 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Supprime toutes les noisettes d’un conteneur.
+ * L'éventuelle imbrication de conteneurs est gérée dans la fonction de service ncore_conteneur_destocker().
  *
  * @api
  * @uses ncore_conteneur_destocker()
@@ -32,22 +33,10 @@ function conteneur_vider($plugin, $conteneur, $stockage = '') {
 	// Initialisation du retour
 	$retour = false;
 
-	// On charge l'API de N-Core.
-	// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
-	include_spip('ncore/ncore');
-
 	if ($conteneur) {
-		// Si le conteneur n'est pas une noisette, on vérifie si il ne contient pas des noisettes conteneur auquel
-		// cas il faudrait les vider préalablement.
-		if (empty($conteneur['id_noisette'])) {
-			// On liste les noisettes du conteneur concerné et on repère les noisettes conteneur.
-			// Chaque noisette conteneur est vidée.
-			foreach (ncore_noisette_lister($plugin, $conteneur, '', 'rang_noisette', $stockage) as $_noisette) {
-				if ($_noisette['est_conteneur'] == 'oui') {
-					ncore_conteneur_destocker($plugin, $_noisette, $stockage);
-				}
-			}
-		}
+		// On charge l'API de N-Core.
+		// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
+		include_spip('ncore/ncore');
 		$retour = ncore_conteneur_destocker($plugin, $conteneur, $stockage);
 	}
 

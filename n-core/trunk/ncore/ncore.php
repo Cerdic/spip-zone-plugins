@@ -795,11 +795,13 @@ function ncore_conteneur_identifier($plugin, $conteneur, $stockage) {
 }
 
 /**
- * Retire, de l'espace de stockage, toutes les noisettes d'un conteneur.
+ * Retire, de l'espace de stockage, toutes les noisettes d'un conteneur et ce de façon récursive si
+ * il existe une imbrication de conteneurs.
  *
  * @package SPIP\NCORE\CONTENEUR\SERVICE
  *
  * @uses ncore_chercher_service()
+ * @uses ncore_noisette_lister()
  * @uses ncore_conteneur_identifier()
  *
  * @param string       $plugin
@@ -818,6 +820,15 @@ function ncore_conteneur_destocker($plugin, $conteneur, $stockage = '') {
 
 	// Initialisation de la sortie.
 	$retour = false;
+
+	// On liste les noisettes du conteneur concerné et on repère les noisettes conteneur.
+	// Chaque conteneur imbriqué est vidé et ce de façon récursive.
+	foreach (ncore_noisette_lister($plugin, $conteneur, '', 'rang_noisette', $stockage) as $_noisette) {
+		if ($_noisette['est_conteneur'] == 'oui') {
+			// On vide récursivement les noisettes de type conteneur.
+			ncore_conteneur_destocker($plugin, $_noisette, $stockage);
+		}
+	}
 
 	// On cherche le service de stockage à utiliser selon la logique suivante :
 	// - si le service de stockage est non vide on l'utilise en considérant que la fonction existe forcément;

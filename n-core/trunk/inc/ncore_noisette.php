@@ -168,17 +168,17 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
 		// utilisé pour spécifier la noisette.
 		$description = ncore_noisette_decrire($plugin, $noisette, $stockage);
 
-		// Si la noisette est de type conteneur, il faut vider le conteneur des éventuelles noisettes
-		// incluses avant de supprimer la noisette elle-même.
+		// Si la noisette est de type conteneur, il faut la supprimer en vidant le conteneur qu'elle représente
+		// et ce de façon récursive. La récursivité est gérée par la fonction de service ncore_conteneur_destocker().
 		if ($description['est_conteneur'] == 'oui') {
 			// Inutile de redéfinir un conteneur car la description de la noisette contient les deux champs
 			// essentiels, à savoir, type_noisette et id_noisette.
-			ncore_conteneur_destocker($plugin, $description, $stockage);
+			$retour = ncore_conteneur_destocker($plugin, $description, $stockage);
+		} else {
+			// Suppression de la noisette. On passe la description complète ce qui permet à la fonction de
+			// destockage de choisir la méthode d'identification la plus adaptée.
+			$retour = ncore_noisette_destocker($plugin, $description, $stockage);
 		}
-
-		// Suppression de la noisette. On passe la description complète ce qui permet à la fonction de
-		// destockage de choisir la méthode d'identification la plus adaptée.
-		$retour = ncore_noisette_destocker($plugin, $description, $stockage);
 
 		// On récupère les noisettes restant affectées au conteneur sous la forme d'un tableau indexé par rang.
 		$autres_noisettes = ncore_noisette_lister(
