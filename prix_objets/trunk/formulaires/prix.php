@@ -49,22 +49,22 @@ function formulaires_prix_charger_dist($id_objet, $objet = 'article') {
 
 	$valeurs['_hidden'] = '<input type="hidden" name="objet" value="' . $objet . '">';
 	$valeurs['_hidden'] .= '<input type="hidden" name="id_objet" value="' . $id_objet . '">';
-	// Si le plugin declinaisons est activé
-	/*if (test_plugin_actif('declinaisons')) {
-		$valeurs['id_objet_titre'] = '';
-		$valeurs['_hidden'] .= '<input type="hidden" name="id_objet_titre" value="' . $id_objet . '">';
-		$valeurs['id_declinaison'] = '';
-	}*/
 
 	// Inclus les extensions.
 	$valeurs['_saisies_extras'] = prix_objets_extensions_declaration($valeurs);
+	//print_r($valeurs['_saisies_extras']);
 	$extensions = array();
-	foreach (saisies_lister_par_nom($valeurs['_saisies_extras']) as $nom => $definition) {
-		$valeurs[$nom] = _request($nom);
-		if (preg_match('|id_prix_extension_|', $nom)) {
-			$extension = str_replace('id_prix_extension_', '', $nom);
-			$extensions[] = $extension;
+	$saisies = array();
+	foreach ($valeurs['_saisies_extras'] as $s) {
+		$saisies = array_merge($saisies, $s);
+		foreach (saisies_lister_par_nom($s) as $nom => $definition) {
+			$valeurs[$nom] = _request($nom);
+			if (preg_match('|id_prix_extension_|', $nom)) {
+				$extension = str_replace('id_prix_extension_', '', $nom);
+				$extensions[] = $extension;
+			}
 		}
+
 	}
 
 	// Déclarer les extensions
@@ -79,7 +79,8 @@ function formulaires_prix_charger_dist($id_objet, $objet = 'article') {
 			)
 		);
 		$valeurs['extensions'] = _request('extensions');
-		$valeurs['_saisies_extras'] = array_merge($valeurs['_saisies_extras'], $saisie);
+
+		$valeurs['_saisies_extras'] = array_merge($saisies, $saisie);
 	}
 
 
