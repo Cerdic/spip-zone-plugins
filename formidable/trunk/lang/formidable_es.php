@@ -165,7 +165,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_activer_accuse_label_case' => 'También enviar un correo electrónico al remitente con un mensaje de confirmación.',
 	'traiter_email_option_destinataires_champ_form_explication' => 'Si uno de sus campos es una dirección de correo electrónico y si desea mandar el formulario a esta dirección, seleccione el campo.',
 	'traiter_email_option_destinataires_champ_form_label' => 'Destinatario presente en uno de los campos de los formularios',
-	'traiter_email_option_destinataires_explication' => 'Elige el campo que corresponde a los destinatarios del mensaje.',
+	'traiter_email_option_destinataires_explication' => 'Elige el campo que corresponde a los destinatarios del mensaje.', # MODIF
 	'traiter_email_option_destinataires_label' => 'Destinatarios',
 	'traiter_email_option_destinataires_plus_explication' => 'Una lista de direcciones separadas por coma',
 	'traiter_email_option_destinataires_plus_label' => 'Destinatarios extra',
@@ -175,12 +175,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_envoyeur_nom_label' => 'Nombre del remitente',
 	'traiter_email_option_sujet_accuse_label' => 'Asunto del acuse de recibo. ',
 	'traiter_email_option_sujet_explication' => 'Construye este asunto usando los @raccourcis@ (usa la ayuda memoria). Si lo dejas en blanco se usará uno por defecto. ',
-	'traiter_email_option_sujet_label' => 'Asunto del mensaje',
+	'traiter_email_option_sujet_label' => 'Asunto del mensaje', # MODIF
 	'traiter_email_option_vrai_envoyeur_explication' => 'Algunos servidores SMTP no permiten el uso de un correo electrónico arbitrario para el campo "From". Por esta razón Formidable inserta  por defecto el correo del remitente en el campo "Reply-to". Marca aquí para insertarlo en el campo "From".',
 	'traiter_email_option_vrai_envoyeur_label' => 'Inserta el correo del remitente en el campo "From"',
 	'traiter_email_page' => '<a href="@url@">Desde esta página</a>.',
 	'traiter_email_sujet' => '@nom@ ha escrito a usted.',
 	'traiter_email_sujet_accuse' => 'Gracias por su respuesta. ',
+	'traiter_email_sujet_courriel_label' => 'Asunto del mensaje', # MODIF
 	'traiter_email_titre' => 'Enviar por correo electrónico',
 	'traiter_email_url_enregistrement' => 'Puede gestionar las respuestas <a href="@url@">desde esta página</a>.', # MODIF
 	'traiter_enregistrement_description' => 'Salvar los resultados del formulario en una base de datos', # MODIF

@@ -111,7 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_message_erreur' => 'Si è verificato un errore all’atto dell’invio dell’email.',
 	'traiter_email_message_ok' => 'Il tuo messaggio è stato inviato per posta elettronica.',
 	'traiter_email_option_activer_accuse_label_case' => 'Invia anche una email all’indirizzo del mittente con un messaggio di conferma.',
-	'traiter_email_option_destinataires_explication' => 'Scegli il campo che corrisponde al destinatario del messaggio.',
+	'traiter_email_option_destinataires_explication' => 'Scegli il campo che corrisponde al destinatario del messaggio.', # MODIF
 	'traiter_email_option_destinataires_label' => 'Destinatari',
 	'traiter_email_option_destinataires_plus_explication' => 'Un elenco di indirizzi separati da virgole.',
 	'traiter_email_option_destinataires_plus_label' => 'Destinatari supplementari',
@@ -121,10 +121,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_envoyeur_nom_label' => 'Nome del mittente',
 	'traiter_email_option_sujet_accuse_label' => 'Oggetto della conferma di ricezione',
 	'traiter_email_option_sujet_explication' => 'Costruisci l’oggetto grazie all’aiuto dei @segnaposto@. Se non inserisci nulla, l’oggetto verrà generato automaticamente.',
-	'traiter_email_option_sujet_label' => 'Oggetto del messaggio',
+	'traiter_email_option_sujet_label' => 'Oggetto del messaggio', # MODIF
 	'traiter_email_page' => '<a href="@url@">Da questa pagina</a>.',
 	'traiter_email_sujet' => '@nom@ ti ha scritto.',
 	'traiter_email_sujet_accuse' => 'Grazie per aver risposto.',
+	'traiter_email_sujet_courriel_label' => 'Oggetto del messaggio', # MODIF
 	'traiter_email_titre' => 'Invia per posta',
 	'traiter_email_url_enregistrement' => 'Puoi gestire le risposte <a href="@url@">su questa pagina</a>.', # MODIF
 	'traiter_enregistrement_description' => 'Salva i risultati del modulo nella base dati', # MODIF

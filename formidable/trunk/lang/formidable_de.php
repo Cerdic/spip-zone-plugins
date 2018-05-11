@@ -93,7 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_message_erreur' => 'Beim Versenden des Formulars ist ein Fehler aufgetreten.',
 	'traiter_email_message_ok' => 'Ihre Nachricht wurde per Mail gesendet.',
 	'traiter_email_option_activer_accuse_label_case' => 'Ebenfalls eine Empfangsbestätigung an Absender senden.',
-	'traiter_email_option_destinataires_explication' => 'Legen sie das Feld fest, das die Empfängeradresse enthält.',
+	'traiter_email_option_destinataires_explication' => 'Legen sie das Feld fest, das die Empfängeradresse enthält.', # MODIF
 	'traiter_email_option_destinataires_label' => 'Empfänger',
 	'traiter_email_option_destinataires_plus_explication' => 'Eine kommagetrennte Empfängerliste.',
 	'traiter_email_option_destinataires_plus_label' => 'Weitere Empfänger',
@@ -103,10 +103,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_envoyeur_nom_label' => 'Name des Absenders',
 	'traiter_email_option_sujet_accuse_label' => 'Betreff der Empfangsbestätigung',
 	'traiter_email_option_sujet_explication' => 'Definieren sie den Betreff mit Hilf der @raccourcis@. Wenn sie das Feld freilassen, wird der Inhalt automatisch erstellt.',
-	'traiter_email_option_sujet_label' => 'Betreff der Nachricht',
+	'traiter_email_option_sujet_label' => 'Betreff der Nachricht', # MODIF
 	'traiter_email_page' => '<a href="@url@">Aus der Seite</a>.',
 	'traiter_email_sujet' => '@nom@ hat ihnen geschrieben.',
 	'traiter_email_sujet_accuse' => 'Danke für ihre Antwort.',
+	'traiter_email_sujet_courriel_label' => 'Betreff der Nachricht', # MODIF
 	'traiter_email_titre' => 'Per Mail senden',
 	'traiter_email_url_enregistrement' => 'Sie könen die Antworten <a href="@url@">auf dieser Seite verwalten</a>.', # MODIF
 	'traiter_email_url_enregistrement_precis' => 'Sie können Ihre Antwort <a href="@url@">auf dieser Seite einsehen</a>.',

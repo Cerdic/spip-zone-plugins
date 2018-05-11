@@ -208,34 +208,33 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_formulaires_archives' => 'Archives',
 	'titre_reponses' => 'Réponses',
 	'traitements_actives' => 'Traitements activés',
-	'traiter_email_accuse_explication_texte' => 'Pour activer la fonctionnalité d\'accusé de réception, vous devez au préalable définir un expéditeur.', 
 	'traitements_aide_memoire' => 'Aide mémoire :',
 	'traitements_avertissement_creation' => 'Les modifications sur les champs du formulaire ont été enregistrées avec succès. Vous pouvez maintenant définir quels traitements seront effectués lors de l’utilisation du formulaire.',
 	'traitements_avertissement_modification' => 'Les modifications sur les champs du formulaire ont été enregistrées avec succès. <strong>Certains traitements doivent peut-être être reconfigurés en conséquence.</strong>',
 	'traitements_champ_aucun' => 'Aucun',
-	'traiter_email_description' => 'Poster par courriel le résultat du formulaire  à une liste de destinataires.',
-	'traiter_email_destinataires_courriel_label' => 'Destinataires du courriel', 
-	'traiter_email_contenu_courriel_label' => 'Contenu du courriel', 
-	'traiter_email_sujet_courriel_label' => 'Sujet du courriel', 
-	'traiter_email_envoyeur_courriel_label' => 'Expéditeur du courriel',
 	'traiter_email_AR_label' => 'Accusé de réception',
+	'traiter_email_accuse_explication_texte' => 'Pour activer la fonctionnalité d’accusé de réception, vous devez au préalable définir un expéditeur.',
+	'traiter_email_contenu_courriel_label' => 'Contenu du courriel',
+	'traiter_email_description' => 'Poster par courriel le résultat du formulaire  à une liste de destinataires.',
+	'traiter_email_destinataires_courriel_label' => 'Destinataires du courriel',
+	'traiter_email_envoyeur_courriel_label' => 'Expéditeur du courriel',
 	'traiter_email_horodatage' => 'Formulaire "@formulaire@" posté le @date@ à @heure@.',
 	'traiter_email_message_erreur' => 'Une erreur est survenue lors de l’envoi du courriel.',
 	'traiter_email_message_ok' => 'Votre message a bien été envoyé par courriel.',
 	'traiter_email_option_activer_accuse_label_case' => 'Envoyer aussi un courriel à l’adresse de l’envoyeur avec un message de confirmation.',
 	'traiter_email_option_activer_ip_label_case' => 'Envoyer l’adresse IP de l’envoyeur aux destinataires.',
-	'traiter_email_option_courriel_envoyeur_accuse_explication' => 'Précisez le courriel utilisé pour envoyer l’accusé de réception. À défaut, le destinataire de l\'accusé de réception sera l’expéditeur du courriel principal.',
+	'traiter_email_option_courriel_envoyeur_accuse_explication' => 'Précisez le courriel utilisé pour envoyer l’accusé de réception. À défaut, le destinataire de l’accusé de réception sera l’expéditeur du courriel principal.',
 	'traiter_email_option_courriel_envoyeur_accuse_label' => 'Courriel de l’accusé de réception',
 	'traiter_email_option_destinataires_champ_form_attention' => 'Cette option est déconseillée, car elle constitue un appel au SPAM.
-	<br />- Pour envoyer à un auteur du site, utiliser l\'option «&nbsp;Destinataire&nbsp;» (plus haut).
-	<br />- Pour envoyer à la personne qui remplit le formulaire, configurer l\'accusé de réception (plus bas).
+	<br />- Pour envoyer à un auteur du site, utiliser l’option « Destinataire » (plus haut).
+	<br />- Pour envoyer à la personne qui remplit le formulaire, configurer l’accusé de réception (plus bas).
 <br />
-Cette option n\'est conservée que pour compatibilité ascendante. Elle n\'apparaît pas sur les nouveaux formulaires.
+Cette option n’est conservée que pour compatibilité ascendante. Elle n’apparaît pas sur les nouveaux formulaires.
 ',
 	'traiter_email_option_destinataires_champ_form_explication' => 'Si un de vos champ est une adresse email et que vous souhaitez envoyer le formulaire à cette adresse, sélectionnez le champ.',
 	'traiter_email_option_destinataires_champ_form_label' => 'Destinaire présent dans un des champ des formulaires',
 	'traiter_email_option_destinataires_explication' => 'Choisissez le champ qui correspondra aux destinataires du message. <br />
-	Il s\'agit d\'un champ de type «&nbsp;Destinataires&nbsp;» ou «&nbsp;Champ caché&nbsp;», comprenant l\'identifiant numérique d\'un auteur du site.',
+	Il s’agit d’un champ de type « Destinataires » ou « Champ caché », comprenant l’identifiant numérique d’un auteur du site.',
 	'traiter_email_option_destinataires_label' => 'Destinataires',
 	'traiter_email_option_destinataires_plus_explication' => 'Une liste d’adresses séparées par des virgules.',
 	'traiter_email_option_destinataires_plus_label' => 'Destinataires supplémentaires',
@@ -249,7 +248,7 @@ Cette option n\'est conservée que pour compatibilité ascendante. Elle n\'appar
 	'traiter_email_option_exclure_champs_email_explication' => 'Si vous souhaitez que certains champs ne s’affichent pas dans les emails envoyés (par exemple des champs cachés), il suffit de les définir ici, séparés par une virgule.',
 	'traiter_email_option_exclure_champs_email_label' => 'Champs à exclure du contenu du message',
 	'traiter_email_option_masquer_liens_label_case' => 'Masquer les liens d’administration dans le courriel.',
-	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Précisez le nom de l’expéditeur utilisé pour envoyer l’accusé de réception. À défaut, le destinataire de l\'accusé de réception sera l’expéditeur du courriel principal.',
+	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Précisez le nom de l’expéditeur utilisé pour envoyer l’accusé de réception. À défaut, le destinataire de l’accusé de réception sera l’expéditeur du courriel principal.',
 	'traiter_email_option_nom_envoyeur_accuse_label' => 'Nom de l’expéditeur de l’accusé de réception',
 	'traiter_email_option_pj_explication' => 'Si les documents postés pèsent moins de _FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL Mio (constante modifiable par le·la webmestre).',
 	'traiter_email_option_pj_label' => 'Joindre les fichiers dans le courriel',
@@ -263,6 +262,7 @@ Cette option n\'est conservée que pour compatibilité ascendante. Elle n\'appar
 	'traiter_email_page' => '<a href="@url@">Depuis cette page</a>.',
 	'traiter_email_sujet' => '@nom@ vous a écrit.',
 	'traiter_email_sujet_accuse' => 'Merci de votre réponse.',
+	'traiter_email_sujet_courriel_label' => 'Sujet du courriel',
 	'traiter_email_titre' => 'Envoyer par courriel',
 	'traiter_email_url_enregistrement' => 'Vous pouvez gérer l’ensemble des réponses <a href="@url@">sur cette page</a>.',
 	'traiter_email_url_enregistrement_precis' => 'Vous pouvez voir cette réponse <a href="@url@">sur cette page</a>.',

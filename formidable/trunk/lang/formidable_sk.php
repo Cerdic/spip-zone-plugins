@@ -129,7 +129,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_message_erreur' => 'Pri odosielaní e-mailu sa vyskytla chyba.',
 	'traiter_email_message_ok' => 'Vaša správa bola odoslaná.',
 	'traiter_email_option_activer_accuse_label_case' => 'Poslať e-mail aj na adresu odosielateľa so žiadosťou o potvrdenie.',
-	'traiter_email_option_destinataires_explication' => 'Vyberte si pole, v ktorom budú príjemcovia správy.',
+	'traiter_email_option_destinataires_explication' => 'Vyberte si pole, v ktorom budú príjemcovia správy.', # MODIF
 	'traiter_email_option_destinataires_label' => 'Príjemcovia',
 	'traiter_email_option_destinataires_plus_explication' => 'Zoznam adries oddelený čiarkami.',
 	'traiter_email_option_destinataires_plus_label' => 'Ďalší príjemcovia',
@@ -139,12 +139,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_envoyeur_nom_label' => 'Meno odosielateľa',
 	'traiter_email_option_sujet_accuse_label' => 'Predmet potvrdenia o prijatí',
 	'traiter_email_option_sujet_explication' => 'Vytvorte predmet pomocou @raccourcis@. Ak neurobíte nič, predmet bude vytvorený automaticky.',
-	'traiter_email_option_sujet_label' => 'Predmet správy',
+	'traiter_email_option_sujet_label' => 'Predmet správy', # MODIF
 	'traiter_email_option_vrai_envoyeur_explication' => 'Niektoré servery SMTP neumožňujú používať ľubovoľný e-mail pre pole "From" (Od koho). Z tohto dôvodu Formidable podľa predvolených nastavení vkladá e-mail odosielateľa do poľa "Reply-To". Ak chcete, aby bol vložený do poľa "From", zaškrtnite túto možnosť tu.',
 	'traiter_email_option_vrai_envoyeur_label' => 'Vložiť e-mail odosielateľa do poľa "From" (= "Od koho")',
 	'traiter_email_page' => '<a href="@url@">Z tejto stránky.</a>',
 	'traiter_email_sujet' => '@nom@ vám napísal(a).',
 	'traiter_email_sujet_accuse' => 'Ďakujeme vám za odpoveď.',
+	'traiter_email_sujet_courriel_label' => 'Predmet správy', # MODIF
 	'traiter_email_titre' => 'Poslať e-mailom',
 	'traiter_email_url_enregistrement' => 'Riadiť odpovede môžete <a href="@url@">na tejto stránke.</a>', # MODIF
 	'traiter_enregistrement_description' => 'Uloží výsledky z formulára do databázy', # MODIF

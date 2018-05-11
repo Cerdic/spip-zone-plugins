@@ -218,11 +218,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_message_ok' => 'Sua mensagem foi enviada corretamente por e-mail.',
 	'traiter_email_option_activer_accuse_label_case' => 'Enviar também um e-mail para o remetente com uma mensagem de confirmação.',
 	'traiter_email_option_activer_ip_label_case' => 'Enviar o endereço IP do remetente aos destinatários.',
-	'traiter_email_option_courriel_envoyeur_accuse_explication' => 'Indique o e-mail utilizado para enviar o aviso de recebimento. Por padrão, o destinatário será o remetente.',
+	'traiter_email_option_courriel_envoyeur_accuse_explication' => 'Indique o e-mail utilizado para enviar o aviso de recebimento. Por padrão, o destinatário será o remetente.', # MODIF
 	'traiter_email_option_courriel_envoyeur_accuse_label' => 'E-mail de aviso de recebimento',
 	'traiter_email_option_destinataires_champ_form_explication' => 'Se um dos campos é um endereço de email ao qual você queira enviar o formulário, selecione o campo.',
 	'traiter_email_option_destinataires_champ_form_label' => 'Destinatário presente em um dos campos dos formulários',
-	'traiter_email_option_destinataires_explication' => 'Escolha o campo que corresponderá aos destinatários da mensagem.',
+	'traiter_email_option_destinataires_explication' => 'Escolha o campo que corresponderá aos destinatários da mensagem.', # MODIF
 	'traiter_email_option_destinataires_label' => 'Destinatários',
 	'traiter_email_option_destinataires_plus_explication' => 'Uma lista de e-mails separados por vírgulas.',
 	'traiter_email_option_destinataires_plus_label' => 'Destinatários suplementares',
@@ -235,18 +235,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_exclure_champs_email_explication' => 'Se desejar que certos campos não sejam exibidos nas mensagens enviadas (por exemplo, campos escondidos), basta declará-los aqui, separados por vírgula.',
 	'traiter_email_option_exclure_champs_email_label' => 'Campos a excluir do conteúdo da mensagem',
 	'traiter_email_option_masquer_liens_label_case' => 'Ocultar os links de administração na mensagem.',
-	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Indique o nome do remetente utilizado para enviar o aviso de recebimento. Por padrão, o destinatário será o remetente.',
+	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Indique o nome do remetente utilizado para enviar o aviso de recebimento. Por padrão, o destinatário será o remetente.', # MODIF
 	'traiter_email_option_nom_envoyeur_accuse_label' => 'Nome do remetente do aviso de recebimento',
 	'traiter_email_option_pj_explication' => 'Se os documentos postados pesarem menos de _FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL Mio (constante modificável pelo webmaster).',
 	'traiter_email_option_pj_label' => 'Anexar os arquivos na mensagem',
 	'traiter_email_option_sujet_accuse_label' => 'Assunto do aviso de recebimento',
 	'traiter_email_option_sujet_explication' => 'Construa o assunto com ajuda de @raccourcis@. Se for deixando em branco, o assunto será construído automaticamente.',
-	'traiter_email_option_sujet_label' => 'Assunto da mensagem',
+	'traiter_email_option_sujet_label' => 'Assunto da mensagem', # MODIF
 	'traiter_email_option_vrai_envoyeur_explication' => 'Alguns servidores SMTP não permitem a utilização de um e-mail arbitrário para o campo "From". Por isso, Formidable insere por padrão o e-mail do remetente no campo "Reply-To". Marce esta opção para inserir o e-mail no campo "From".',
 	'traiter_email_option_vrai_envoyeur_label' => 'Inserir o e-mail do remetente no campo "From"',
 	'traiter_email_page' => '<a href="@url@">A partir desta página</a>.',
 	'traiter_email_sujet' => '@nom@  enviou uma mensagem',
 	'traiter_email_sujet_accuse' => 'Obrigado pela sua resposta.',
+	'traiter_email_sujet_courriel_label' => 'Assunto da mensagem', # MODIF
 	'traiter_email_titre' => 'Enviar por e-mail',
 	'traiter_email_url_enregistrement' => 'Você pode gerenciar as respostas <a href="@url@">nesta página</a>.',
 	'traiter_email_url_enregistrement_precis' => 'Você pode visualizar estar resposta <a href="@url@">nesta página</a>.',

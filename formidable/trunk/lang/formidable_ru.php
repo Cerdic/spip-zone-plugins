@@ -168,7 +168,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_activer_accuse_label_case' => 'Кроме указанных получателей, отправить отправителю сообщение с подтверждением.',
 	'traiter_email_option_courriel_envoyeur_accuse_label' => 'Уведомление электронной почтой',
 	'traiter_email_option_destinataires_champ_form_label' => 'Емейл получатель указывается в одном из полей формы',
-	'traiter_email_option_destinataires_explication' => 'Выберите поле, которое соответствует получателям сообщения.',
+	'traiter_email_option_destinataires_explication' => 'Выберите поле, которое соответствует получателям сообщения.', # MODIF
 	'traiter_email_option_destinataires_label' => 'Получатели',
 	'traiter_email_option_destinataires_plus_explication' => 'Список адресов, разделенных запятыми.',
 	'traiter_email_option_destinataires_plus_label' => 'Дополнительные получатели',
@@ -178,11 +178,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_envoyeur_nom_label' => 'Имя отправителя',
 	'traiter_email_option_sujet_accuse_label' => 'Тема подтверждающего сообщения',
 	'traiter_email_option_sujet_explication' => 'Можно создать тему с использованием @ярлыков@. Если оставить пустым, тема будет создана автоматически.',
-	'traiter_email_option_sujet_label' => 'Тема сообщения',
+	'traiter_email_option_sujet_label' => 'Тема сообщения', # MODIF
 	'traiter_email_option_vrai_envoyeur_label' => 'Использовать емейл отправителя для поля "From"',
 	'traiter_email_page' => '<a href="@url@">На этой странице</a>.',
 	'traiter_email_sujet' => '@nom@ вы написали.',
 	'traiter_email_sujet_accuse' => 'Спасибо за ваш ответ.',
+	'traiter_email_sujet_courriel_label' => 'Тема сообщения', # MODIF
 	'traiter_email_titre' => 'Отправлять данные формы электронной почтой',
 	'traiter_email_url_enregistrement' => 'Вы можете управлять ответами <a href="@url@">на этой странице</a>.', # MODIF
 	'traiter_enregistrement_description' => 'Сохранять заполненные формы в базе данных', # MODIF
