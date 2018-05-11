@@ -20,30 +20,29 @@
            ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
            fournissant le service de stockage souhaité.
 -->]
-<BOUCLE_compilation_noisettes(DATA) {source table, #ENV{noisettes, #ARRAY}}{plugin}{par rang_noisette}>
-	<BOUCLE_si_conteneur(CONDITION) {si #VALEUR{est_conteneur}|=={oui}}>
+<BOUCLE_noisettes(DATA) {source table, #ENV{noisettes, #ARRAY}}{plugin}{par rang_noisette}>
+	#SET{conteneur, #ARRAY{type_noisette, #VALEUR{type_noisette}, id_noisette, #VALEUR{id_noisette}}}
+	<B_noisettes_enfants>
+		#SET{balise, #VALEUR{conteneur_balise}|sinon{div}}
+		[<(#GET{balise})[ class="(#VALEUR{conteneur_css})"]>]
+	<BOUCLE_noisettes_enfants(DATA)
+		{source table, #NOISETTE_REPERTORIER{#ENV{plugin}, #GET{conteneur}, #ENV{stockage}}}
+		{par rang_noisette}>
 		#SET{conteneur, #ARRAY{type_noisette, #VALEUR{type_noisette}, id_noisette, #VALEUR{id_noisette}}}
-		<B_compilation_conteneur>
-			#SET{balise, #VALEUR{conteneur_balise}|sinon{div}}
-			[<(#GET{balise})[ class="(#VALEUR{conteneur_css})"]>]
-		<BOUCLE_compilation_conteneur(DATA)
-			{source table, #NOISETTE_REPERTORIER{#ENV{plugin}, #GET{conteneur}, #ENV{stockage}}}
-			{par rang_noisette}>
-			<INCLURE{fond=inclure/inc-compiler_noisette,
-				id_noisette=#VALEUR{id_noisette},
-				balise=#VALEUR{balise},
-				css=#VALEUR{css},
-				stockage=#ENV{stockage},
-				env} />
-		</BOUCLE_compilation_conteneur>
-			[</(#GET{balise})>]
-		</B_compilation_conteneur>
-	</BOUCLE_si_conteneur>
+		<BOUCLE_noisettes_petits_enfants(BOUCLE_noisettes_enfants)></BOUCLE_noisettes_petits_enfants>
 		<INCLURE{fond=inclure/inc-compiler_noisette,
 			id_noisette=#VALEUR{id_noisette},
 			balise=#VALEUR{balise},
 			css=#VALEUR{css},
 			stockage=#ENV{stockage},
 			env} />
-	<//B_si_conteneur>
-</BOUCLE_compilation_noisettes>
+	</BOUCLE_noisettes_enfants>
+		[</(#GET{balise})>]
+	</B_noisettes_enfants>
+	<INCLURE{fond=inclure/inc-compiler_noisette,
+		id_noisette=#VALEUR{id_noisette},
+		balise=#VALEUR{balise},
+		css=#VALEUR{css},
+		stockage=#ENV{stockage},
+		env} />
+</BOUCLE_noisettes>
