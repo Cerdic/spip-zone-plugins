@@ -11,16 +11,20 @@ function formulaires_prix_charger_dist($id_objet, $objet = 'article') {
 	$devises_dispos = lire_config('prix_objets/devises');
 	$taxes_inclus = lire_config('prix_objets/taxes_inclus');
 	$taxes = lire_config('prix_objets/taxes');
+	$table = 'spip_prix_objets';
 
 	// Devise par défaut si rien configuré
-	if (!$devises_dispos)
+	if (!$devises_dispos) {
 		$devises_dispos = array(
 			'0' => 'EUR'
 		);
+	}
+
 	$devises_choisis = array();
 	$prix_choisis = array();
-	if (is_array($id_objet))
+	if (is_array($id_objet)) {
 		$id_objet_produit = implode(',', $id_objet);
+	}
 
 	if ($id_objet) {
 		$d = sql_select('*', 'spip_prix_objets', 'id_objet IN(' . $id_objet . ') AND objet =' . sql_quote($objet));
@@ -28,7 +32,6 @@ function formulaires_prix_charger_dist($id_objet, $objet = 'article') {
 
 	// établit les devises diponible moins ceux déjà utilisés
 	while ($row = sql_fetch($d)) {
-		// $devises_choisis[$row['code_devise']] = $row['code_devise'];
 		$prix_choisis[] = $row;
 	}
 
@@ -50,21 +53,30 @@ function formulaires_prix_charger_dist($id_objet, $objet = 'article') {
 	$valeurs['_hidden'] = '<input type="hidden" name="objet" value="' . $objet . '">';
 	$valeurs['_hidden'] .= '<input type="hidden" name="id_objet" value="' . $id_objet . '">';
 
-	// Inclus les extensions.
+	// Inclure les extensions.
 	$valeurs['_saisies_extras'] = prix_objets_extensions_declaration($valeurs);
-	//print_r($valeurs['_saisies_extras']);
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$decription_table = $trouver_table($table);
 	$extensions = array();
 	$saisies = array();
+
 	foreach ($valeurs['_saisies_extras'] as $s) {
 		$saisies = array_merge($saisies, $s);
 		foreach (saisies_lister_par_nom($s) as $nom => $definition) {
 			$valeurs[$nom] = _request($nom);
-			if (preg_match('|id_prix_extension_|', $nom)) {
-				$extension = str_replace('id_prix_extension_', '', $nom);
-				$extensions[] = $extension;
+			$objet = $definition['objet'];
+			$extensions[] = $objet;
+
+			// Assurer que un champ d'identifiant de l'extension existe, sinon l'ajouter.
+			if ($identifiant_extension = id_table_objet($objet) and
+					!isset($decription_table['field'][$identifiant_extension])
+					) {
+				sql_alter("TABLE $table ADD $identifiant_extension bigint(21) NOT NULL");
+
+				// Vide le chache des déscriptions des tables.
+				$trouver_table('');
 			}
 		}
-
 	}
 
 	// Déclarer les extensions
