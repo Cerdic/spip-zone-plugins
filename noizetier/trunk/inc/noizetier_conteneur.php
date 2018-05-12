@@ -67,7 +67,7 @@ function noizetier_conteneur_composer($page_ou_objet, $bloc, $noisette=array()) 
  *
  * @uses noizetier_page_type()
  * @uses noizetier_page_composition()
- * @uses noizetier_type_noisette_initialiser_dossier()
+ * @uses type_noisette_localiser()
  *
  * @param string $id_conteneur
  *        Identifiant du conteneur sous forme de chaine unique.
@@ -102,7 +102,7 @@ function noizetier_conteneur_decomposer($id_conteneur) {
 			$conteneur['id_noisette'] = intval($elements[2]);
 			// -- le squelette
 			include_spip('ncore/noizetier');
-			$conteneur['squelette'] = noizetier_type_noisette_initialiser_dossier('noizetier') . $conteneur['type_noisette'];
+			$conteneur['squelette'] = type_noisette_localiser('noizetier', $conteneur['type_noisette']);
 			// -- les éléments du conteneur de la noisette parent utiles pour les autorisations
 			$select = array('type', 'composition', 'objet', 'id_objet', 'bloc');
 			$where = array('id_noisette=' . $conteneur['id_noisette']);

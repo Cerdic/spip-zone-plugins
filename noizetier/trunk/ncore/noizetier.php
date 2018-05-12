@@ -188,27 +188,6 @@ function noizetier_type_noisette_initialiser_ajax($plugin) {
 	return $defaut_ajax;
 }
 
-/**
- * Renvoie la configuration par défaut du dossier relatif où trouver les types de noisettes.
- * Cette information est utilisée a minima au chargement des types de noisettes disponibles.
- *
- * @package SPIP\NOIZETIER\TYPE_NOISETTE\SERVICE
- *
- * @param string $plugin
- *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
- *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- *
- * @return string
- * 		Chemin relatif du dossier où chercher les types de noisette.
- */
-function noizetier_type_noisette_initialiser_dossier($plugin) {
-
-	// On va chercher les noisettes dans le répertoire classique noisettes/.
-	$dossier = 'noisettes/';
-
-	return $dossier;
-}
-
 
 // -----------------------------------------------------------------------
 // ----------------------------- NOISETTES -------------------------------

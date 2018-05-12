@@ -29,7 +29,7 @@ function noizetier_recuperer_fond($flux) {
 		if ($squelette
 		and ($squelette != 'body')
 		and ($squelette != 'structure')
-		and (dirname($squelette) != trim(noizetier_type_noisette_initialiser_dossier('noizetier'), '/'))) {
+		and (dirname($squelette) != trim(type_noisette_localiser('noizetier'), '/'))) {
 			// On détermine la page et le bloc à partir du squelette qui, en Z, est toujours de la forme bloc/page
 			// ou bloc/type_objet.
 			$extension = pathinfo($squelette,  PATHINFO_EXTENSION);
