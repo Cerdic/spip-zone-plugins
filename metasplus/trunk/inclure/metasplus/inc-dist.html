@@ -1,16 +1,17 @@
 [(#REM)
 
 	Métas+ : ce squelette contient le code des métas pour Dublin Core, Open Graph et Twitter.
-
+	Ici aucune requête SQL, on doit recevoir toutes les données.
 	Il est inclus dans inclure/metasplus/dist.html, voir ce dernier pour les explications et les paramètres.
 
-	Ici aucune requête SQL, on doit recevoir toutes les données.
-
 ]
-
 [(#REM)
 
-	Normalisation des valeurs + variables utiles
+
+	============================================
+	1) Normalisation et vérification des valeurs
+	============================================
+
 
 ]
 #SET{titre,      #ENV{titre}|trim|html_entity_decode|supprimer_tags|textebrut}
@@ -21,8 +22,6 @@
 #SET{lang,       #ENV{lang}|trim}
 #SET{og-type,    #ENV{og-type}|trim}
 #SET{dc-type,    #ENV{dc-type}|trim}
-#SET{auteurs,    #ENV{auteurs,#ENV{auteur}}|trim|html_entity_decode|supprimer_tags|textebrut|explode{','}|array_filter}
-#SET{mots,       #ENV{mots}|trim|html_entity_decode|supprimer_tags|textebrut|explode{','}|array_filter}
 #SET{territoire, #ENV{territoire}|=={en}|?{uk,#ENV{territoire,#ENV{lang}}}|strtoupper|trim}
 #SET{locale,     #ENV{lang}|concat{_,#GET{territoire}}|trim}
 #SET{couper,     200}
@@ -30,27 +29,52 @@
 	opengraph, 1200:630,
 	twitter,   506:253,
 }}
+[(#REM)
+	auteurs
+]
+#SET{auteurs,#ARRAY}
+<BOUCLE_normaliser_auteurs(DATA){source table, #ENV{auteurs}|is_array|?{#ENV{auteurs},#ENV{auteurs}|explode{','}}|array_filter}>
+#SET{auteurs,#GET{auteurs}|push{#VALEUR|trim|html_entity_decode|supprimer_tags|textebrut}}
+</BOUCLE_normaliser_auteurs>
+[(#REM)
+	mots-clés
+]
+#SET{mots,#ARRAY}
+<BOUCLE_normaliser_mots(DATA){source table, #ENV{mots}|is_array|?{#ENV{mots},#ENV{mots}|explode{','}}|array_filter}>
+#SET{mots,#GET{mots}|push{#VALEUR|trim|html_entity_decode|supprimer_tags|textebrut}}
+</BOUCLE_normaliser_mots>
+[(#REM)
+	Logos
+]
 #SET{logos,#ARRAY}
-<BOUCLE_normaliser_logos_array(DATA){source table, #ENV{logos,#ENV{logo}}}{si #ENV{logos,#ENV{logo}}|is_array}>
-#SET{logos,#GET{logos}|push{#ARRAY{
-	url, #VALEUR{url},
-	alt, #VAL{#VALEUR{alt}|trim|supprimer_tags|textebrut},
-}|array_filter}}
-</BOUCLE_normaliser_logos_array>
-<BOUCLE_normaliser_logos_string(DATA){soure table, #ENV{logos,#ENV{logo}}|trim|supprimer_tags|textebrut|explode{','}|array_filter}>
-#SET{logos,#GET{logos}|push{#ARRAY{url,#VALEUR}}}
-</BOUCLE_normaliser_logos_string>
-<//B_normaliser_logos_array>
-#SET{logos,#GET{logos}|array_filter}
-
-
+<BOUCLE_normaliser_logos(DATA){source table, #ENV{logos}|is_array|?{#ENV{logos},#ENV{logos}|explode{','}}|array_filter}>
+#SET{valeur,#VALEUR{url}|?{
+	#ARRAY{
+		url, #VALEUR{url},
+		alt, #VAL{#VALEUR{alt}|trim|supprimer_tags|textebrut},
+	},
+	#ARRAY{url,#VALEUR}
+}|array_filter}
+[(#CHEMIN{#VALEUR{url}}|oui)
+#SET{logos,#GET{logos}|push{#GET{valeur}}}
+]
+</BOUCLE_normaliser_logos>
 [(#REM)
 
 
+	============================
+	2) Affichage des métadonnées
+	============================
+
+
+]
+[(#REM)
+
+	===========
 	Dublin Core
+	===========
 
 	http://dublincore.org
-
 
 ]
 <BOUCLE_dublincore(CONDITION) {si #CONFIG{metasplus/dublincore}}>
@@ -76,14 +100,14 @@
 </BOUCLE_dublincore>
 [(#REM)
 
-
+	==========
 	Open Graph
+	==========
 
 	http://ogp.me
 	https://developers.facebook.com/docs/sharing/opengraph/object-properties
 	https://developers.facebook.com/docs/sharing/best-practices#images
 	https://developers.facebook.com/tools/debug/
-
 
 ]
 <BOUCLE_opengraph(CONDITION) {si #CONFIG{metasplus/opengraph}}>
@@ -100,7 +124,6 @@
 #SET{largeur,#GET{dimensions/opengraph}|explode{:}|table_valeur{0}}
 #SET{hauteur,#GET{dimensions/opengraph}|explode{:}|table_valeur{1}}
 <BOUCLE_logos_opengraph(DATA) {source table, #GET{logos}}>
-[(#CHEMIN{#VALEUR{url}}|oui)
 #SET{src, #VALEUR{url}|image_recadre{#GET{dimensions/opengraph},-,focus}
 	|image_reduire{#GET{largeur},#GET{hauteur}}
 	|extraire_attribut{src}
@@ -110,7 +133,6 @@
 [<meta property="og:image:height" content="(#GET{src}|hauteur)" />]
 [<meta property="og:image:type" content="(#GET{src}|mime_content_type)" />]
 [<meta property="og:image:alt" content="(#VALEUR{alt}|couper{80}|attribut_html)" />]
-]
 </BOUCLE_logos_opengraph>
 <BOUCLE_article_opengraph(CONDITION) {si #GET{og-type}|=={article}}>
 [<meta property="article:published_time" content="(#GET{date}|affdate{Y-m-d})" />]
@@ -127,13 +149,13 @@
 </BOUCLE_opengraph>
 [(#REM)
 
-
+	============
 	Twitter Card
+	============
 
 	https://dev.twitter.com/cards/types/summary
 	https://dev.twitter.com/cards/types/summary-large-image
 	https://cards-dev.twitter.com/validator
-
 
 ]
 <BOUCLE_twitter(CONDITION) {si #CONFIG{metasplus/twitter}}>
@@ -146,14 +168,12 @@
 #SET{largeur,#GET{dimensions/twitter}|explode{:}|table_valeur{0}}
 #SET{hauteur,#GET{dimensions/twitter}|explode{:}|table_valeur{1}}
 <BOUCLE_images_twitter(DATA) {source table, #GET{logos}} {0,1}>
-[(#CHEMIN{#VALEUR{url}}|oui)
 #SET{src, #VALEUR{url}|image_recadre{#GET{dimensions/twitter},-,focus}
 	|image_reduire{#GET{largeur},#GET{hauteur}}
 	|extraire_attribut{src}
 	|supprimer_timestamp}
 [<meta name="twitter:image" content="(#GET{src}|url_absolue)" />]
 [<meta property="twitter:image:alt" content="(#VALEUR{alt}|couper{80}|attribut_html)" />]
-]
 </BOUCLE_images_twitter>
 </BOUCLE_twitter>
 

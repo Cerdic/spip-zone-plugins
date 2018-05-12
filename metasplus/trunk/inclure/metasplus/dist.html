@@ -46,10 +46,13 @@
 		- date :       Date de publication au format Y-m-d
 		- maj :        Date de mise à jour au format Y-m-d
 		- url :        URL de la ressource
-		- auteurs :    Un ou plusieurs auteurs séparés par des virgules
+		- auteurs :    Soit un tableau linéaires
+		               Soit des auteurs séparés par des virgules
 		- logos :      Soit un tableau de tableaux associatifs avec URL et alt
+		               #LISTE{#ARRAY{url,...,alt...},#ARRAY{url,...,alt...}}
 		               Soit des URLs séparées par des virgules
-		- mots :       Un ou plusieurs mots-clés séparés par des virgules
+		- mots :       Soit un tableau linéaire
+		               Soit des mots-clés séparés par des virgules
 		- og-type :    (open graph) Type de la ressource : article, profile, book, etc.
 		- dc-type :    (dublin core) Type de la ressource : Text, Event, PhysicalObject, etc.
 
@@ -90,31 +93,36 @@
 	{par nom}
 	{si #ENV{auteurs}|non}
 >
-#SET{auteurs_auto, #GET{auteurs_auto}|concat{#GET{auteurs_auto}|?{','},#NOM}}
+#SET{auteurs_auto, #GET{auteurs_auto}|push{#NOM}}
 </BOUCLE_auteurs_objet>
 [(#REM) Les mots-clés ]
 <BOUCLE_mots_objet(MOTS)
 	{objet}
 	{id_objet}
 	{par titre}
+	{si #ENV{mots}|non}
 >
-#SET{mots_auto, #GET{mots_auto}|concat{#GET{mots_auto}|?{','},#TITRE}}
+#SET{mots_auto, #GET{mots_auto}|push{#TITRE}}
 </BOUCLE_mots_objet>
 [(#REM) Les images ]
-#SET{logos_auto, #LISTE{#ARRAY{url,#ENV{id_objet}|quete_logo_objet{#ENV{objet},on}|table_valeur{chemin}}}}
-<BOUCLE_logos_objet(DOCUMENTS)
+[(#ENV{logos}|non)
+#SET{logo_objet,#ENV{id_objet}|quete_logo_objet{#ENV{objet},on}}
+#SET{logos_auto, #LISTE{#ARRAY{url,#GET{logo_objet/chemin}}}}
+]
+<BOUCLE_images_objet(DOCUMENTS)
 	{objet}
 	{id_objet}
 	{media = image}
 	{fichier != #GET{logos_auto}|replace{#VAL{_NOM_PERMANENTS_ACCESSIBLES}|constant}}
 	{!par largeur}
 	{0,#GET{logos_auto}|?{2,3}}
+	{si #ENV{logos}|non}
 >
 #SET{logos_auto, #GET{logos_auto}|push{#ARRAY{
 	url, #FICHIER,
 	alt, #TITRE|sinon{#DESCRIPTIF}|couper{80},
 }}}
-</BOUCLE_logos_objet>
+</BOUCLE_images_objet>
 </BOUCLE_objet>
 
 [(#REM)
@@ -154,8 +162,8 @@
 	territoire=#ENV{territoire,#GET{territoire_auto}},
 	og-type=#ENV{og-type,#GET{og-type_auto}},
 	dc-type=#ENV{dc-type,#GET{dc-type_auto}},
-	logos=#ENV{logos,#ENV{logo,#GET{logos_auto}}},
-	auteurs=#ENV{auteurs,#ENV{auteur,#GET{auteurs_auto}}},
+	logos=#ENV{logos,#GET{logos_auto}},
+	auteurs=#ENV{auteurs,#GET{auteurs_auto}},
 	mots=#ENV{mots,#GET{mots_auto}}
 }/>
 
