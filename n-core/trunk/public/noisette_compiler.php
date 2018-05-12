@@ -10,9 +10,8 @@ function balise_NOISETTE_COMPILER_dist($p) {
 	// On passe dans le contexte toujours les deux identifiants d'une noisette, à savoir, l'id_noisette et le couple
 	// (id_conteneur, rang).
 	$id_noisette = interprete_argument_balise(1, $p);
-	$id_noisette = isset($id_noisette) ? str_replace('\'', '"', $id_noisette) : '0';
+	$id_noisette = isset($id_noisette) ? $id_noisette : '0';
 
-//	$id_noisette = champ_sql('id_noisette', $p);
 	$id_conteneur = champ_sql('id_conteneur', $p);
 	$rang_noisette = champ_sql('rang_noisette', $p);
 	$noisette = "array(
@@ -34,16 +33,13 @@ function balise_NOISETTE_COMPILER_dist($p) {
 	$environnement = "\$Pile[0]";
 
 	// On prépare le code en fonction du type d'inclusion dynamique ou pas
-	// -- il faut récupérer le dossier où sont stockés les noisettes pour le plugin appelant.
-	include_spip('ncore/ncore');
-	$dossier_type_noisette = ncore_type_noisette_initialiser_dossier($plugin);
 	$inclusion_dynamique = "\"<?php echo recuperer_fond(
-		'$dossier_type_noisette\".$type_noisette.\"',
+		type_noisette_localiser($plugin)\".$type_noisette.\",
 		\".var_export(array_merge(unserialize($parametres), noisette_contextualiser($plugin, $noisette, $type_noisette, $environnement, $stockage)),true).\",
 		\".var_export(array('ajax'=>(type_noisette_ajaxifier($plugin, $type_noisette, $stockage))),true).\"
 	);?>\"";
 	$inclusion_statique = "recuperer_fond(
-		'$dossier_type_noisette'.$type_noisette,
+		type_noisette_localiser($plugin).$type_noisette,
 		array_merge(unserialize($parametres), noisette_contextualiser($plugin, $noisette, $type_noisette, $environnement, $stockage)),
 		array('ajax'=>(type_noisette_ajaxifier($plugin, $type_noisette, $stockage)))
 	)";

@@ -95,7 +95,7 @@ function type_noisette_ajaxifier($plugin, $type_noisette, $stockage = '') {
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param string	$type_noisette
+ * @param string $type_noisette
  * 	      Identifiant du type de noisette.
  * @param string $stockage
  *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
@@ -163,6 +163,10 @@ function type_noisette_dynamiser($plugin, $type_noisette, $stockage = '') {
  * @param mixed  $noisette
  *        Tableau des identifiants de la noisette qui peut prendre d'un tableau avec pour index
  *        id_noisette, id conteneur et rang_noisette, ce qui permet d'utiliser l'un ou l'autre des identifiants.
+ * @param string $type_noisette
+ * 	      Identifiant du type de noisette.
+ * @param array  $environnement
+ * 	      Tableau de l'environnement reçu par la noisette.
  * @param string $stockage
  *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
  *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
@@ -222,6 +226,32 @@ function noisette_contextualiser($plugin, $noisette, $type_noisette, $environnem
 	}
 
 	return $contexte;
+}
+
+
+/**
+ * Renvoie la localisation relative des types de noisette pour le plugin appelant.
+ *
+ * @package SPIP\NCORE\TYPE_NOISETTE\API
+ *
+ * @api
+ * @filtre
+ *
+ * @uses ncore_type_noisette_initialiser_dossier()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ *
+ * @return string
+ *        Chemin relatif du dossier où chercher les types de noisette.
+ */
+function type_noisette_localiser($plugin) {
+
+	include_spip('ncore/ncore');
+	$dossier = ncore_type_noisette_initialiser_dossier($plugin);
+
+	return $dossier;
 }
 
 // Balises
