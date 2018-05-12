@@ -47,9 +47,8 @@ function calculer_preview_noisette($plugin, $noisette, $type_noisette_actif) {
 	if ($type_noisette_actif == 'oui') {
 		// On récupère le dossier de stockage des type de noisette afin de vérifier si un squelette de prévisualisation
 		// existe pour le type de noisette concerné.
-		include_spip('ncore/ncore');
 		include_spip('inc/utils');
-		$squelette_preview = ncore_type_noisette_initialiser_dossier($plugin) . $noisette['type_noisette'] . '-preview';
+		$squelette_preview = type_noisette_localiser($plugin, $noisette['type_noisette']) . '-preview';
 		if (trouver_fond($squelette_preview)) {
 			$preview = recuperer_fond($squelette_preview, $noisette);
 		}

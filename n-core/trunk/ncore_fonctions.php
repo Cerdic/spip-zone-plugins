@@ -7,6 +7,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+// -----------------------------------------------------------------------
+// --------------------- FILTRES TYPES DE NOISETTE -----------------------
+// -----------------------------------------------------------------------
 
 /**
  * Détermine si le type de noisette spécifié doit être inclus en AJAX ou pas. Cette fonction gère un cache
@@ -78,7 +81,6 @@ function type_noisette_ajaxifier($plugin, $type_noisette, $stockage = '') {
 	return $est_ajax[$plugin][$type_noisette];
 }
 
-
 /**
  * Détermine si la noisette spécifiée doit être incluse dynamiquement ou pas. Cette fonction gère un cache
  * des indicateurs d'inclusion dynamique.
@@ -143,6 +145,52 @@ function type_noisette_dynamiser($plugin, $type_noisette, $stockage = '') {
 	return $est_dynamique[$plugin][$type_noisette];
 }
 
+/**
+ * Renvoie le dossier relatif des types de noisette pour le plugin appelant ou la localisation
+ * du type de noisette demandé.
+ * Cette fonction gère le cas particulier de la noisette conteneur fournie par N-Core qui est elle
+ * toujours dans le dossier par défaut de N-Core.
+ *
+ * @package SPIP\NCORE\TYPE_NOISETTE\API
+ *
+ * @api
+ * @filtre
+ *
+ * @uses ncore_type_noisette_initialiser_dossier()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param string $type_noisette
+ * 	      Identifiant du type de noisette ou chaine vide si on ne veut que le dossier.
+ *
+ * @return string
+ *        Chemin relatif du dossier où chercher les types de noisette ou du type de noisette demandé.
+ */
+function type_noisette_localiser($plugin, $type_noisette = '') {
+
+	// Si le type de noisette est précisé et correspond à la noisette conteneur fournie par N-Core
+	// alors on impose le dossier à celui par défaut de N-Core.
+	// Sinon on prend le dossier du plugin appelant.
+	include_spip('ncore/ncore');
+	if ($type_noisette == 'conteneur') {
+		$dossier = ncore_type_noisette_initialiser_dossier('ncore');
+	} else {
+		$dossier = ncore_type_noisette_initialiser_dossier($plugin);
+	}
+
+	// Si le type de noisette est vide on ne renvoie que le dossier, sinon on renvoie le chemin de
+	// la noisette.
+	return $dossier . $type_noisette;
+}
+
+
+// -----------------------------------------------------------------------
+// -------------------- FILTRES & BALISES NOISETTES ----------------------
+// -----------------------------------------------------------------------
+include_spip('public/noisette_compiler');
+include_spip('public/noisette_preview');
+include_spip('public/noisette_repertorier');
 
 /**
  * Renvoie le contexte de la noisette sous la forme d'un tableau éventuellement vide. Cette fonction gère un cache
@@ -229,33 +277,7 @@ function noisette_contextualiser($plugin, $noisette, $type_noisette, $environnem
 }
 
 
-/**
- * Renvoie la localisation relative des types de noisette pour le plugin appelant.
- *
- * @package SPIP\NCORE\TYPE_NOISETTE\API
- *
- * @api
- * @filtre
- *
- * @uses ncore_type_noisette_initialiser_dossier()
- *
- * @param string $plugin
- *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
- *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- *
- * @return string
- *        Chemin relatif du dossier où chercher les types de noisette.
- */
-function type_noisette_localiser($plugin) {
-
-	include_spip('ncore/ncore');
-	$dossier = ncore_type_noisette_initialiser_dossier($plugin);
-
-	return $dossier;
-}
-
-// Balises
-include_spip('public/noisette_compiler');
-include_spip('public/noisette_preview');
-include_spip('public/noisette_repertorier');
+// -----------------------------------------------------------------------
+// ------------------------- BALISES CONTENEURS --------------------------
+// -----------------------------------------------------------------------
 include_spip('public/conteneur_identifier');

@@ -34,12 +34,12 @@ function balise_NOISETTE_COMPILER_dist($p) {
 
 	// On prépare le code en fonction du type d'inclusion dynamique ou pas
 	$inclusion_dynamique = "\"<?php echo recuperer_fond(
-		type_noisette_localiser($plugin)\".$type_noisette.\",
+		\".type_noisette_localiser($plugin, $type_noisette).\",
 		\".var_export(array_merge(unserialize($parametres), noisette_contextualiser($plugin, $noisette, $type_noisette, $environnement, $stockage)),true).\",
 		\".var_export(array('ajax'=>(type_noisette_ajaxifier($plugin, $type_noisette, $stockage))),true).\"
 	);?>\"";
 	$inclusion_statique = "recuperer_fond(
-		type_noisette_localiser($plugin).$type_noisette,
+		type_noisette_localiser($plugin, $type_noisette),
 		array_merge(unserialize($parametres), noisette_contextualiser($plugin, $noisette, $type_noisette, $environnement, $stockage)),
 		array('ajax'=>(type_noisette_ajaxifier($plugin, $type_noisette, $stockage)))
 	)";
