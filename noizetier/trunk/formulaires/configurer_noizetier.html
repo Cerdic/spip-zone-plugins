@@ -18,6 +18,13 @@
 			})]
 		</div>
 
+		<div class="editer-groupe">
+			[(#SAISIE{radio, profondeur_max,
+				explication=<:noizetier:explication_noizetier_profondeur_max:>,
+				datas=#ARRAY{0, <:noizetier:option_profondeur_max_1:>, 1, <:noizetier:option_profondeur_max_2:>},
+			})]
+		</div>
+
 		[(#REM) Il faut exclure les types d'objet qui n'ont pas de page explicitement détectable par le noiZetier pour
 		        ne proposer que les types d'objet potentiellement utilisables ]
 		<div class="editer-groupe">

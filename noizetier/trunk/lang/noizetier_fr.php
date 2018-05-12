@@ -60,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_noisette_css' => 'Vous pouvez ajouter à la balise englobante de la noisette d’éventuelles classes CSS supplémentaires.',
 	'explication_noizetier_ajax' => 'Le mode par défaut d’inclusion AJAX peut être modifié unitairement pour chaque noisette (fichier YAML).',
 	'explication_noizetier_balise' => 'Le mode par défaut d’inclusion dans une balise englobante peut être modifié unitairement pour chaque noisette (paramètrage).',
+	'explication_noizetier_profondeur_max' => 'Vous pouvez imbriquer des noisettes de type conteneur. Choisissez le nombre de niveaux d\'imbrication souhaité.',
 	'explication_objet' => 'Contenu de type « @type@ »',
 	'explication_page' => 'Page autonome non liée à un type de contenu',
 	'explication_page_objet' => 'Page liée au type de contenu « @type@ »',
@@ -186,6 +187,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_noisette_balise_oui' => 'Toujours utiliser une balise englobante',
 	'option_noizetier_balise_non' => 'sans balise',
 	'option_noizetier_balise_oui' => 'avec balise',
+	'option_profondeur_max_1' => '1 niveau',
+	'option_profondeur_max_2' => '2 niveaux',
 	'oui' => 'Oui',
 
 	// P
