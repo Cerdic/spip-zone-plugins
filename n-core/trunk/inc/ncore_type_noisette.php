@@ -56,6 +56,13 @@ function type_noisette_charger($plugin, $recharger = false, $stockage = '') {
 	// On recherche les types de noisette directement par leur fichier YAML de configuration car il est
 	// obligatoire. La recherche s'effectue dans le path en utilisant le dossier relatif fourni.
 	if ($fichiers = find_all_in_path($dossier, '.+[.]yaml$')) {
+		// On s'assure que la noisette conteneur fournie par N-Core soit bien dans la liste ce qui peut ne pas être
+		// le cas si le dossier relatif des types de noisette du plugin appelant est différent de celui de N-Core.
+		$dossier_ncore = ncore_type_noisette_initialiser_dossier('ncore');
+		if ($dossier != $dossier_ncore) {
+			$fichiers['conteneur.yaml'] = find_in_path("${dossier_ncore}conteneur.yaml");
+		}
+
 		// Initialisation des tableaux de types de noisette.
 		$types_noisette_a_ajouter = $types_noisette_a_changer = $types_noisette_a_effacer = array();
 
