@@ -1,5 +1,5 @@
 #SET{compteurs, #NOIZETIER_PAGE_INFOS{#ENV{page, #OBJET}, compteurs_type_noisette}}
-<BOUCLE_si_noisette(CONDITION) {si #GET{compteurs/total}}>
+<BOUCLE_si_type_noisette(CONDITION) {si #GET{compteurs/total}}>
 	<BOUCLE_infos_page(NOIZETIER_PAGES) {page=#ENV{page, #OBJET}}>
 		[(#SET{type, #TYPE})]
 		[(#SET{composition, #COMPOSITION})]
@@ -7,60 +7,59 @@
 		<BOUCLE_infos_type(NOIZETIER_PAGES) {page=#GET{type}}{composition=''}>#SET{nom_type, #NOM}</BOUCLE_infos_type>
 	</BOUCLE_infos_page>
 
-	<div id="onglets-noisettes-disponibles">
 	<BOUCLE_si_composition(CONDITION) {si #GET{composition}}>
-		<B_noisettes_composition>
-		<div id="noisettes-composition">
-			<h4><:noizetier:noisettes_composition{composition=#GET{nom_composition}}:></h4>
-			<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
-		<BOUCLE_noisettes_composition(TYPES_NOISETTES){plugin=noizetier}{type=#GET{type}}{composition=#GET{composition}}{actif?}{where?}{par type_noisette}>
-				<li class="editer item noisette">
-					<INCLURE{fond=formulaires/inclure/inc-input_type_noisette,
-						type_noisette,
-						nom=#NOM,
-						icon,
-						input_radio} />
-				</li>
-		</BOUCLE_noisettes_composition>
-			</ul>
+		<B_types_noisette_composition>
+		<div class="editer pleine_largeur editer_type_noisette" id="types_noisette-composition">
+			<p class="explication"><:noizetier:noisettes_composition{composition=#GET{nom_composition}}:></p>
+		[(#ENV{input_type}|non)
+			<ul class="liste-items liste-noisettes liste-noisettes-disponibles">
+		]
+		<BOUCLE_types_noisette_composition(TYPES_NOISETTES){plugin=noizetier}{type=#GET{type}}{composition=#GET{composition}}{actif?}{where?}{par type_noisette}>
+			<INCLURE{fond=formulaires/inclure/inc-input_type_noisette,
+				type_noisette,
+				nom=#NOM,
+				icon,
+				input_type} />
+		</BOUCLE_types_noisette_composition>
+			[(#ENV{input_type}|non)</ul>]
 		</div>
-		</B_noisettes_composition>
+		</B_types_noisette_composition>
 	</BOUCLE_si_composition>
 
-	<B_noisettes_type>
-		<div id="noisettes-page">
-			<h4><:noizetier:noisettes_page{type=#GET{nom_type}}:></h4>
-			<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
-	<BOUCLE_noisettes_type(TYPES_NOISETTES){plugin=noizetier}{type=#GET{type}}{composition=''}{actif?}{where?}{par type_noisette}>
-				<li class="editer item noisette">
-					<INCLURE{fond=formulaires/inclure/inc-input_type_noisette,
-						type_noisette,
-						nom=#NOM,
-						icon,
-						input_radio} />
-				</li>
-	</BOUCLE_noisettes_type>
-			</ul>
+	<B_types_noisette_page>
+		<div class="editer pleine_largeur editer_type_noisette" id="types_noisette-page">
+			<p class="explication"><:noizetier:noisettes_page{type=#GET{nom_type}}:></p>
+		[(#ENV{input_type}|non)
+			<ul class="liste-items liste-noisettes liste-noisettes-disponibles">
+		]
+	<BOUCLE_types_noisette_page(TYPES_NOISETTES){plugin=noizetier}{type=#GET{type}}{composition=''}{actif?}{where?}{par type_noisette}>
+			<INCLURE{fond=formulaires/inclure/inc-input_type_noisette,
+				type_noisette,
+				nom=#NOM,
+				icon,
+				input_type} />
+	</BOUCLE_types_noisette_page>
+			[(#ENV{input_type}|non)</ul>]
 		</div>
-	</B_noisettes_type>
+	</B_types_noisette_page>
 
-	<B_noisettes_communes>
-		<div id="noisettes-communes">
-			<h4><:noizetier:noisettes_toutes_pages:></h4>
-			<ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
-	<BOUCLE_noisettes_communes(TYPES_NOISETTES){plugin=noizetier}{type=''}{composition=''}{actif?}{where?}{par type_noisette}>
-				<li class="editer item noisette">
-					<INCLURE{fond=formulaires/inclure/inc-input_type_noisette,
-						type_noisette,
-						nom=#NOM,
-						icon,
-						input_radio} />
-				</li>
-	</BOUCLE_noisettes_communes>
-			</ul>
+	<B_types_noisette_communes>
+		<div class="editer pleine_largeur editer_type_noisette" id="types_noisette-communs">
+			<p class="explication"><:noizetier:noisettes_toutes_pages:></p>
+		[(#ENV{input_type}|non)
+			<ul class="liste-items liste-noisettes liste-noisettes-disponibles">
+		]
+	<BOUCLE_types_noisette_communes(TYPES_NOISETTES){plugin=noizetier}{type=''}{composition=''}{actif?}{where?}{par type_noisette}>
+			<INCLURE{fond=formulaires/inclure/inc-input_type_noisette,
+				type_noisette,
+				nom=#NOM,
+				icon,
+				input_type} />
+	</BOUCLE_types_noisette_communes>
+			[(#ENV{input_type}|non)</ul>]
 		</div>
-	</B_noisettes_communes>
+	</B_types_noisette_communes>
 	</div>
-</BOUCLE_si_noisette>
+</BOUCLE_si_type_noisette>
 	<:noizetier:aucun_type_noisette:>
-<//B_si_noisette>
+<//B_si_type_noisette>

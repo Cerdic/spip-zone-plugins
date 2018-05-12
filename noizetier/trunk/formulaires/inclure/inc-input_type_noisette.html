@@ -1,11 +1,19 @@
-[(#ENV{input_radio}|oui)
-	[(#SET{id,#VAL{noisettes_}|uniqid})]
-	<input type="radio" name="type_noisette" value="#ENV{type_noisette}" id="#GET{id}" />
-	<label for="#GET{id}">
+[(#ENV{input_type}|oui)
+	<div class="choix">
+		[(#SET{id, #VAL{noisettes_}|uniqid})]
+		<input type="#ENV{input_type}" class="#ENV{input_type}" name="[(#ENV{input_type}|=={radio}|?{type_noisette, type_noisette\[\]})]" value="#ENV{type_noisette}" id="#GET{id}" />
+		<label for="#GET{id}">
+			[(#ENV{nom})]
+			[<i>\((#ENV{type_noisette})\)</i>]
+		</label>
+	</div>
 ]
-[(#ENV{nom})]
-[(#ENV{input_radio}|oui)</label>]
-<div class="icone">
-	[(#CHEMIN_IMAGE{#ENV{icon}}|image_reduire{24}|extraire_attribut{src}|balise_img)]
-</div>
-[(#ENV{input_radio}|non)<input type="hidden" name="ordre\[\]" value="#ENV{type_noisette}" />]
+[(#ENV{input_type}|non)
+	<li class="item noisette">
+		[(#ENV{nom})]
+		<div class="icone">
+			[(#CHEMIN_IMAGE{#ENV{icon}}|image_reduire{24}|extraire_attribut{src}|balise_img)]
+		</div>
+		<input type="hidden" name="ordre\[\]" value="#ENV{type_noisette}" />
+	</li>
+]
