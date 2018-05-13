@@ -58,7 +58,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_langue_label' => 'Display the language',
 	'option_aff_rub_interface_explication' => 'Display only the sections in the user’s language',
 	'option_aff_rub_interface_label' => 'Multilingual display',
-	'option_afficher_si_explication' => 'Indicate the display conditions of this field in function of the value of other fields. The identifier of the other fields has to be entered between <code>@</code>. <br />Example <code>@selection_1@=="Toto"</code> conditions the display of the field only when field <code>selection_1</code> has a value of <code>Toto</code>.', # MODIF
+	'option_afficher_si_explication' => 'Indicate the display conditions of this field in function of the value of other fields. The identifier of the other fields has to be entered between <code>@</code>. <br />Example <code>@selection_1@=="Toto"</code> conditions the display of the field only when field <code>selection_1</code> has a value of <code>Toto</code>.<br />
+It is possible to use Boolean operators <code> || </ code> (or) and <code> && </ code> (and)',
 	'option_afficher_si_label' => 'Conditional display',
 	'option_afficher_si_remplissage_uniquement_explication' => 'By checking this box, the conditional display will only apply when filling in the form, not when displaying the results.',
 	'option_afficher_si_remplissage_uniquement_label' => 'Only when filling the form',
@@ -85,6 +86,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_defaut_label' => 'Default value',
 	'option_disable_avec_post_explication' => 'Same as previous option position but still post value in a hidden field.',
 	'option_disable_avec_post_label' => 'Disabled but posted.',
+	'option_disable_choix_explication' => 'Indicate the choices separated by a comma, example: choice1,choice3', # RELIRE
+	'option_disable_choix_label' => 'Deactivate some choices',
 	'option_disable_explication' => 'The field can not get the focus.',
 	'option_disable_label' => 'Disable the field',
 	'option_erreur_obligatoire_explication' => 'You can customize the error message displayed to show an obligation (otherwise leave blank).',
@@ -115,6 +118,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_label_oui_label' => 'Label if the box is checked',
 	'option_limite_branche_explication' => 'Limit the choice to one specific branch of the site',
 	'option_limite_branche_label' => 'Limit to one branch',
+	'option_maximum_choix_explication' => 'Maximum number of choices?',
+	'option_maximum_choix_label' => 'Limit the number of choices',
 	'option_maxlength_explication' => 'The user can not type more characters than this number.',
 	'option_maxlength_label' => 'Maximum number of characters',
 	'option_multiple_explication' => 'The user will be able to select several values',
