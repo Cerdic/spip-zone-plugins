@@ -9,7 +9,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * en gérant le fait que la type de noisette soit actif et propose bien un fichier de prévisualisation.
  * La signature de la balise est : `#NOISETTE_PREVIEW{id_noisette, type_noisette_actif}`.
  *
- * @package SPIP\NCORE\CONTENEUR\BALISE
+ * @package SPIP\NCORE\NOISETTE\BALISE
  * @balise
  *
  * @param Champ $p
