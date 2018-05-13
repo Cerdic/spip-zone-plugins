@@ -1,10 +1,23 @@
 <?php
-
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+/**
+ * Compile la balise `#NOISETTE_PREVIEW` qui génère la prévisualisation de la noisette passée en argument
+ * en gérant le fait que la type de noisette soit actif et propose bien un fichier de prévisualisation.
+ * La signature de la balise est : `#NOISETTE_PREVIEW{id_noisette, type_noisette_actif}`.
+ *
+ * @package SPIP\NCORE\CONTENEUR\BALISE
+ * @balise
+ *
+ * @param Champ $p
+ *        Pile au niveau de la balise.
+ *
+ * @return Champ
+ *         Pile complétée par le code à générer.
+ **/
 function balise_NOISETTE_PREVIEW_dist($p) {
 
 	// On passe dans le contexte toujours les deux identifiants d'une noisette, à savoir, l'id_noisette et le couple
@@ -39,6 +52,23 @@ function balise_NOISETTE_PREVIEW_dist($p) {
 	return $p;
 }
 
+/**
+ * Calcule la prévisualisation de la noisette passée en argument.
+ *
+ * @uses type_noisette_localiser()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array  $noisette
+ *        Tableau associatif descriptif de la noisette : les deux identifiants et le type de noisette.
+ * @param string $type_noisette_actif
+ *        Indique si le type de noisette est actif ou pas (au moins un plugin nécessité est désactivé). Prend
+ *        les valeurs `oui` ou `non`.
+ *
+ * @return string
+ *        Code HTML généré pour la noisette.
+ */
 function calculer_preview_noisette($plugin, $noisette, $type_noisette_actif) {
 
 	// Initialisation de la sortie.

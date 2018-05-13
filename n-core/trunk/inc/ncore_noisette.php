@@ -426,7 +426,8 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
  *        fournissant le service de stockage souhaité.
  *
  * @return array
- *        Tableau des descriptions des types de noisette trouvés indexé par le type de noisette.
+ *        Tableau des descriptions des noisettes du conteneur indexé par le champ fourni en argument (par défaut le
+ *        rang).
  */
 function noisette_repertorier($plugin, $conteneur, $cle = 'rang_noisette', $filtres = array(), $stockage = '') {
 

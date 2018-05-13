@@ -1,10 +1,22 @@
 <?php
-
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+/**
+ * Compile la balise `#NOISETTE_COMPILER` qui génère l'affichage de la noisette passée en argument.
+ * La signature de la balise est : `#CONTENEUR_IDENTIFIER{id_noisette[, stockage]}`.
+ *
+ * @package SPIP\NCORE\NOISETTE\BALISE
+ * @balise
+ *
+ * @param Champ $p
+ *        Pile au niveau de la balise.
+ *
+ * @return Champ
+ *         Pile complétée par le code à générer.
+ **/
 function balise_NOISETTE_COMPILER_dist($p) {
 
 	// On passe dans le contexte toujours les deux identifiants d'une noisette, à savoir, l'id_noisette et le couple
