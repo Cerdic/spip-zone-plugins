@@ -290,7 +290,7 @@ function noizetier_noizetier_config_import($flux) {
 // les boutons d'administration : ajouter le mode voir=noisettes
 function noizetier_formulaire_admin($flux) {
 	if (autoriser('configurer', 'noizetier')) {
-		$bouton = recuperer_fond('prive/bouton/voir_noisettes');
+		$bouton = recuperer_fond('prive/squelettes/inclure/inc-bouton_voir_noisettes');
 		$flux['data'] = preg_replace('%(<!--extra-->)%is', $bouton.'$1', $flux['data']);
 	}
 
@@ -382,4 +382,25 @@ function noizetier_pre_boucle($boucle) {
 	}
 
 	return $boucle;
+}
+
+
+// Insertion des css du noiZetier pour l'édition avec le mode voir_noisettes.
+function noizetier_insert_head_css($flux) {
+	static $done = false;
+	if (!$done) {
+		$done = true;
+		if (_request('voir') == 'noisettes') {
+			$flux .= '<link rel="stylesheet" href="' . find_in_path('css/noizetier.css') . '" type="text/css" media="all" />';
+		}
+	}
+
+	return $flux;
+}
+
+function noizetier_insert_head($flux) {
+	// au cas ou il n'est pas implemente
+	$flux .= rainette_insert_head_css($flux);
+
+	return $flux;
 }

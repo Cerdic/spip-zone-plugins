@@ -36,6 +36,8 @@
 	<pipeline nom="ieconfig" inclure="noizetier_ieconfig.php" />
 	<pipeline nom="noizetier_config_export" inclure="noizetier_pipelines.php" />
 	<pipeline nom="noizetier_config_import" inclure="noizetier_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="noizetier_pipelines.php" />
+	<pipeline nom="insert_head" action="insert_head_css" inclure="noizetier_pipelines.php" />
 
 	<necessite nom="ncore" compatibilite="[0.4.0;[" />
 	<necessite nom="yaml" compatibilite="[1.5.2;[" />
