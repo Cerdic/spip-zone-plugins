@@ -18,11 +18,13 @@ function swiper_configurateur() {
 	$c = lire_config('swiper');
 	$flux = '<script type="text/javascript">';
 	$flux .= '	var swiper_options = '.$c["swiper_options"];
-	$flux .= '	, mySwipers;';
+	$flux .= '	, mySwipers={};';
 	$flux .= '	$(document).ready(function(){ ';
 	$flux .= '    var target = swiper_options.containerModifierClass || ".swiper-container";';
 	$flux .= '		target = $(target);';
-	$flux .= '		if (target.length) {mySwipers = new Swiper($(target)[0], swiper_options);}';
+	$flux .= '		if (target.length) {';
+	$flux .= '			target.each(function(i,el) { mySwipers[i] = new Swiper($(el), swiper_options); })';
+	$flux .= '		}';
 	$flux .= '	})';
 	$flux .= '</script>';
 
