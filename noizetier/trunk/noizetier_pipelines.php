@@ -25,6 +25,7 @@ function noizetier_recuperer_fond($flux) {
 		// page ou d'un objet.
 		// On exclut le squelette structure.html et les noisettes elles-mêmes.
 		include_spip('ncore/noizetier');
+		include_spip('ncore_fonctions');
 		$squelette = isset($flux['args']['fond']) ? $flux['args']['fond'] : '';
 		if ($squelette
 		and ($squelette != 'body')
