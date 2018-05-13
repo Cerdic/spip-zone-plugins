@@ -83,7 +83,7 @@ function calculer_preview_noisette($plugin, $noisette, $type_noisette_actif) {
 			$preview = recuperer_fond($squelette_preview, $noisette);
 		}
 	} else {
-		$preview = recuperer_fond('preview_erreur', $noisette);
+		$preview = recuperer_fond('avertir_preview', $noisette);
 	}
 
 	return $preview;

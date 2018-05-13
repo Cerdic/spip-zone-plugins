@@ -1,12 +1,11 @@
 [(#REM) <!--  #COMPILER_NOISETTES
 
-	Compile une liste de noisettes fournies en paramètres de l'inclusion.
-	La valeur par défaut de l'utilisation d'une balise div englobante est donc à gérer par le plugin appelant
-	(constante, configuration...).
+	Compile une liste de noisettes fournies en paramètres de l'inclusion et gère de fait l'utilisation
+	d'une balise div englobante pour chaque noisette suivant son paramétrage.
 	Les noisettes de type conteneur ne sont pas incluses avec la balise #NOISETTE_COMPILER mais englobent
 	les noisettes qui lui sont rattachées. En effet, on considère qu'une noisette conteneur est toujours limitée
 	à une balise ouvrante/fermante éventuellement stylée.
-	Pour l'instant un seul niveau de noisette conteneur est pris en compte.
+	Les niveaux d'imbrication ne sont pas limités.
 
 	@api
 
@@ -15,6 +14,8 @@
            un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
 	@param array  noisettes
 	       Liste des descriptions de noisette à compiler dans l'ordre de leur rang.
+	@param string defaut_balise
+	       Valeur à utiliser si la noisette est paramétrée avec la valeur `defaut`.
 	@param string stockage
            Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
            ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
@@ -23,26 +24,22 @@
 <BOUCLE_noisettes(DATA) {source table, #ENV{noisettes, #ARRAY}}{plugin}{par rang_noisette}>
 	#SET{conteneur, #ARRAY{type_noisette, #VALEUR{type_noisette}, id_noisette, #VALEUR{id_noisette}}}
 	<B_noisettes_enfants>
-		#SET{balise, #VALEUR{conteneur_balise}|sinon{div}}
-		[<(#GET{balise})[ class="(#VALEUR{conteneur_css})"]>]
+		#SET{balise_conteneur, #VALEUR{conteneur_balise}|sinon{div}}
+		[<(#GET{balise_conteneur})[ class="(#VALEUR{conteneur_css})"]>]
 	<BOUCLE_noisettes_enfants(DATA)
 		{source table, #NOISETTE_REPERTORIER{#ENV{plugin}, #GET{conteneur}, #ENV{stockage}}}
 		{par rang_noisette}>
 		#SET{conteneur, #ARRAY{type_noisette, #VALEUR{type_noisette}, id_noisette, #VALEUR{id_noisette}}}
 		<BOUCLE_noisettes_petits_enfants(BOUCLE_noisettes_enfants)></BOUCLE_noisettes_petits_enfants>
-		<INCLURE{fond=inclure/inc-compiler_noisette,
-			id_noisette=#VALEUR{id_noisette},
-			balise=#VALEUR{balise},
-			css=#VALEUR{css},
-			stockage=#ENV{stockage},
-			env} />
+		#SET{avec_div, #VALEUR{balise}|=={defaut}|?{#ENV{defaut_balise, oui}, #VALEUR{balise}}}
+		[[(#GET{avec_div}|oui)<div class="noisette[ noisette_(#VALEUR{type_noisette})][ (#VALEUR{css})]">]
+			(#NOISETTE_COMPILER{#VALEUR{id_noisette}, #ENV{stockage, ''}})
+		[(#GET{avec_div}|oui)</div>]]
 	</BOUCLE_noisettes_enfants>
-		[</(#GET{balise})>]
+		[</(#GET{balise_conteneur})>]
 	</B_noisettes_enfants>
-	<INCLURE{fond=inclure/inc-compiler_noisette,
-		id_noisette=#VALEUR{id_noisette},
-		balise=#VALEUR{balise},
-		css=#VALEUR{css},
-		stockage=#ENV{stockage},
-		env} />
+	#SET{avec_div, #VALEUR{balise}|=={defaut}|?{#ENV{defaut_balise, oui}, #VALEUR{balise}}}
+	[[(#GET{avec_div}|oui)<div class="noisette[ noisette_(#VALEUR{type_noisette})][ (#VALEUR{css})]">]
+		(#NOISETTE_COMPILER{#VALEUR{id_noisette}, #ENV{stockage, ''}})
+	[(#GET{avec_div}|oui)</div>]]
 </BOUCLE_noisettes>

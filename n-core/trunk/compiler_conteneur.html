@@ -10,6 +10,8 @@
            un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
 	@param array  conteneur
 	       Tableau associatif représentant le conteneur à compiler.
+	@param string defaut_balise
+	       Valeur à utiliser si la noisette est paramétrée avec la valeur `defaut`.
 	@param string stockage
            Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
            ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
@@ -19,5 +21,6 @@
 <INCLURE{fond=compiler_noisettes,
 	plugin=#ENV{plugin},
 	noisettes=#GET{noisettes},
+	defaut_balise=#ENV{defaut_balise}
 	stockage=#ENV{stockage},
 	env} />
