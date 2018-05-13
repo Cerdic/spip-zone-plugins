@@ -218,17 +218,28 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'traitements_avertissement_creation' => 'Changes to the form fields have been successfully saved. You can now define which treatments will be performed when using the form.',
 	'traitements_avertissement_modification' => 'Changes to the form fields have been successfully saved. <strong>Some treatments may need to be reconfigured accordingly.</ strong>',
 	'traitements_champ_aucun' => 'None',
+	'traiter_email_AR_label' => 'Acknowledgement of receipt',
+	'traiter_email_accuse_explication_texte' => 'To enable the acknowledgment of receipt feature, you must first define a sender.',
+	'traiter_email_contenu_courriel_label' => 'Content of the email',
 	'traiter_email_description' => 'Post by email the result of the form to a list of recipients.',
+	'traiter_email_destinataires_courriel_label' => 'Recipients of the email',
+	'traiter_email_envoyeur_courriel_label' => 'Email sender',
 	'traiter_email_horodatage' => 'Form "@formulaire@" sent on @date@ at @heure@.',
 	'traiter_email_message_erreur' => 'An error occurred when sending the email.',
 	'traiter_email_message_ok' => 'Your message has been successfully sent by email.',
 	'traiter_email_option_activer_accuse_label_case' => 'Also send an email to the sender with a confirmation message.',
 	'traiter_email_option_activer_ip_label_case' => 'Send the IP address of the sender to the recipients.',
-	'traiter_email_option_courriel_envoyeur_accuse_explication' => 'Specify the email used to send the acknowledgment. Otherwise, the recipient will be the sender.', # MODIF
+	'traiter_email_option_courriel_envoyeur_accuse_explication' => 'Specify the email used to send the acknowledgment of receipt. Otherwise, the recipient will be the sender of the main email.',
 	'traiter_email_option_courriel_envoyeur_accuse_label' => 'Email of the acknowledgement of receipt',
+	'traiter_email_option_destinataires_champ_form_attention' => 'This option is deprecated because it is a call to SPAM.
+<br /> - To send to an author of the site, use the option "Recipient" (above).
+<br /> - To send to the person filling out the form, configure the acknowledgment of receipt (lower).
+<br />
+This option is only retained for backward compatibility. It does not appear on the new forms.',
 	'traiter_email_option_destinataires_champ_form_explication' => 'If one of the fields is an email address and you want to send the form to this address, select the field.',
 	'traiter_email_option_destinataires_champ_form_label' => 'The recipient is in one of the fields of the forms',
-	'traiter_email_option_destinataires_explication' => 'Choose the field that corresponds to the message recipients.', # MODIF
+	'traiter_email_option_destinataires_explication' => 'Choose the field that corresponds to the message recipients. <br />
+This is a "Recipients" or "Hidden Field" , including the numeric identifier of an author of the site.',
 	'traiter_email_option_destinataires_label' => 'Recipients',
 	'traiter_email_option_destinataires_plus_explication' => 'A list of addresses separated by commas.',
 	'traiter_email_option_destinataires_plus_label' => 'Extra recipients',
@@ -242,19 +253,21 @@ Indicate the field, its value, and the concerned email (s) (separated by a comma
 	'traiter_email_option_exclure_champs_email_explication' => 'If you do not want certain fields to appear in sent emails (for example hidden fields), just define them here, separated by a comma.',
 	'traiter_email_option_exclure_champs_email_label' => 'Fields to exclude from the message content',
 	'traiter_email_option_masquer_liens_label_case' => 'Hide administration links in the email.',
-	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Specify the name of the sender used to send the acknowledgment. Otherwise, the recipient will be the sender.', # MODIF
+	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Specify the name of the sender used to send the acknowledgment of receipt. Otherwise, the recipient will be the sender of the main email.',
 	'traiter_email_option_nom_envoyeur_accuse_label' => 'Name of the sender of the acknowledgment',
 	'traiter_email_option_pj_explication' => 'If the documents posted weigh less than _FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL Mio (constant modifiable by the webmaster).',
 	'traiter_email_option_pj_label' => 'Join the files in the email',
 	'traiter_email_option_sujet_accuse_label' => 'Subject of the acknowledgement of receipt',
 	'traiter_email_option_sujet_explication' => 'Build topic using @raccourcis@. If you enter nothing, the subject will be built automatically.',
-	'traiter_email_option_sujet_label' => 'Message subject', # MODIF
+	'traiter_email_option_sujet_label' => 'Message subject',
+	'traiter_email_option_sujet_valeurs_brutes_label' => 'Raw values',
+	'traiter_email_option_sujet_valeurs_brutes_label_case' => 'The email is for a robot and not for a human. In the subject of the message, put the raw values (understandable by robots) fields and not the interpreted values (comprehensible by humans).',
 	'traiter_email_option_vrai_envoyeur_explication' => 'Some SMTP servers do not allow to use arbitrary email for the "From" field. For this reason Formidable inserts the default email sender in the "Reply-To". Tick here to insert the email in the "From" field.',
 	'traiter_email_option_vrai_envoyeur_label' => 'Insert email of the sender in the "From" field',
 	'traiter_email_page' => '<a href="@url@">From this page</a>.',
 	'traiter_email_sujet' => '@nom@ has written to you.',
 	'traiter_email_sujet_accuse' => 'Thank you for you reply.',
-	'traiter_email_sujet_courriel_label' => 'Message subject', # MODIF
+	'traiter_email_sujet_courriel_label' => 'Message subject',
 	'traiter_email_titre' => 'Send by email',
 	'traiter_email_url_enregistrement' => 'You can manage all the answers <a href="@url@">on this page</a>.',
 	'traiter_email_url_enregistrement_precis' => 'You can see this answer <a href="@url@"> on this page</a>.',
