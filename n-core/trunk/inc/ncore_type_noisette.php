@@ -17,6 +17,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * les md5 des fichiers YAML.
  *
  * @api
+ * @uses ncore_type_noisette_initialiser_dossier()
  * @uses ncore_type_noisette_lister()
  * @uses ncore_type_noisette_completer()
  * @uses ncore_type_noisette_stocker()
