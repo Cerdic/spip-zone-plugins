@@ -183,7 +183,7 @@ function noizetier_type_noisette_initialiser_ajax($plugin) {
 
 	// La valeur Ajax par défaut est inscrite dans la configuration du plugin.
 	include_spip('inc/config');
-	$defaut_ajax = lire_config('noizetier/ajax_noisette');
+	$defaut_ajax = lire_config("${plugin}/ajax_noisette");
 
 	return $defaut_ajax;
 }
@@ -213,15 +213,19 @@ function noizetier_noisette_stocker($plugin, $description) {
 
 	// Mise à jour en base de données.
 	if (empty($description['id_noisette'])) {
-		// Insertion de la nouvelle noisette.
-		$id_noisette = sql_insertq('spip_noisettes', $description);
+		// On s'assure que la description contient bien le plugin et alors on insère la nouvelle noisette.
+		$id_noisette = 0;
+		if (isset($description['plugin']) and ($description['plugin'] == $plugin)) {
+			// Insertion de la nouvelle noisette.
+			$id_noisette = sql_insertq('spip_noisettes', $description);
+		}
 	} else {
 		// On sauvegarde l'id de la noisette et on le retire de la description pour éviter une erreur à l'update.
 		$id_noisette = intval($description['id_noisette']);
 		unset($description['id_noisette']);
 
 		// Mise à jour de la noisette.
-		$where = array('id_noisette=' . $id_noisette);
+		$where = array('id_noisette=' . $id_noisette, 'plugin=' . sql_quote($plugin));
 		if (!sql_updateq('spip_noisettes', $description, $where)) {
 			$id_noisette = 0;
 		}
@@ -271,10 +275,11 @@ function noizetier_noisette_completer($plugin, $description) {
 
 		// Détermination du complément en fonction du fait que le conteneur soit une noisette ou pas.
 		if (!empty($conteneur['id_noisette']) and ($id_noisette = intval($conteneur['id_noisette']))) {
-			// -- si le conteneur est une noisette on récupère les informations de son conteneur qui ne l'est forcément
-			//    pas (limitation à 1 niveau d'imbrication de noisettes).
+			// -- si le conteneur est une noisette on récupère les informations de son conteneur. Comme les noisettes
+			//    sont insérées par niveau on duplique forcément les informations du bloc supérieur à chaque imbrication.
+			//    Il est donc inutile de remonter au bloc racine.
 			$select = array_keys($complement);
-			$where = array('id_noisette=' . $id_noisette);
+			$where = array('id_noisette=' . $id_noisette, 'plugin=' . sql_quote($plugin));
 			$complement = sql_fetsel($select, 'spip_noisettes', $where);
 		} else {
 			// -- si le conteneur n'est pas une noisette, le complément se déduit du conteneur lui-même.
@@ -338,7 +343,7 @@ function noizetier_noisette_ranger($plugin, $description, $rang_destination) {
 	$retour = false;
 
 	if (isset($description['id_noisette']) and ($id = intval($description['id_noisette']))) {
-		$where = array('id_noisette=' . $id);
+		$where = array('id_noisette=' . $id, 'plugin=' . sql_quote($plugin));
 		$update = array('rang_noisette' => $rang_destination);
 		if (sql_updateq('spip_noisettes', $update, $where)) {
 			$retour = true;
@@ -369,7 +374,7 @@ function noizetier_noisette_destocker($plugin, $description) {
 
 	// Calcul de la clause where à partir de l'id du conteneur.
 	if (isset($description['id_noisette'])) {
-		$where = array('id_noisette=' . intval($description['id_noisette']));
+		$where = array('id_noisette=' . intval($description['id_noisette']), 'plugin=' . sql_quote($plugin));
 
 		// Suppression de la noisette.
 		if (sql_delete('spip_noisettes', $where)) {
@@ -477,16 +482,16 @@ function noizetier_noisette_decrire($plugin, $noisette) {
 
 	$description = array();
 
+	$where = array('plugin=' . sql_quote($plugin));
 	if (!is_array($noisette)) {
 		// L'identifiant est l'id unique de la noisette. Il faut donc parcourir le tableau pour trouver la
 		// noisette désirée
 		// => C'est la méthode optimale pour le stockage noiZetier.
-		$where = array('id_noisette=' . intval($noisette));
+		$where[] = 'id_noisette=' . intval($noisette);
 	} elseif (isset($noisette['id_conteneur']) and isset($noisette['rang_noisette'])) {
 		// L'identifiant est un tableau associatif fournissant l'id du conteneur et le rang.
-		$where = array('id_conteneur=' . sql_quote($noisette['id_conteneur']), 'rang_noisette=' . intval($noisette['rang_noisette']));
-	} else {
-		$where = array();
+		$where[] = 'id_conteneur=' . sql_quote($noisette['id_conteneur']);
+		$where[] = 'rang_noisette=' . intval($noisette['rang_noisette']);
 	}
 
 	if ($where) {
@@ -574,7 +579,7 @@ function noizetier_conteneur_destocker($plugin, $conteneur) {
 
 	if ($id_conteneur) {
 		// Suppression de toutes les noisettes du conteneur.
-		$where = array('id_conteneur=' . sql_quote($id_conteneur));
+		$where = array('id_conteneur=' . sql_quote($id_conteneur), 'plugin=' . sql_quote($plugin));
 		if (sql_delete('spip_noisettes', $where)) {
 			$retour = true;
 		}
