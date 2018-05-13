@@ -8,8 +8,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'champ_page_label' => 'Page',
 	'champ_page_tri' => 'Page',
-	'champ_page_explication' => 'Indiquez le nom de fichier du squelette correspondant à la page, sans l\'extension .html et en respectant la casse : unePage.html &rarr; unePage.
-	Les objets éditoriaux et leurs déclinaisons sont proscris !',
+	'champ_page_explication' => 'Indiquez le fond de la page : nom de fichier du squelette sans extension, en respectant la casse. Rappel : les objets éditoriaux sont proscris !
+	Ex. : unePage.html &rarr; unePage',
 	'champ_page_explication_fond' => 'Squelette de la page : @fond@',
 	'champ_fond_label' => 'Fond',
 	'champ_statut' => 'Statut',
@@ -22,10 +22,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_dossier' => 'Dossier contenant les squelettes',
 	'explication_generale' => 'Les « pages » sont des squelettes ne correspondant à aucun objet éditorial.
 
-	Gérez ici leurs URLs, elles sont prises en compte par la balise <tt>#URL_PAGE</tt>.
+	Leurs URLs sont prises en compte par la balise <code>#URL_PAGE</code>.
 
-	L\'onglet « fonds des pages » contient une liste des pages sans URL personnalisée, à titre indicatif.
-	Si une page n\'y figure pas, vous pouvez tout de même lui en attribuer une en saisissant la page manuellement.',
+	→ L\'onglet {« URLs enregistrées »} présente la liste des URLs enregistrées.
+
+	→ L\'onglet {« fonds détectés »} présente la liste fonds de pages détectés automatiquement qui n\'ont pas encore d\'URL personnalisée.
+
+	Si un fond de page est absent de la liste, attribuez-lui une URL manuellement.',
 	'erreur_page_mauvais_format' => 'Le nom de la page est incorrect. Il doit s\'agir du nom de fichier d\'un squelette, sans l\'extension .html',
 	'erreur_url_doublon' => 'Cette URL est déjà utilisée',
 	'erreur_fond_doublon' => 'Cette page est déjà enregistrée dans la base',
@@ -60,10 +63,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_url_update_ok' => 'L\'URL a été mise à jour',
 	'message_url_insert_ok' => 'L\'URL a été enregistrée',
-	'menu_onglet_pages' => 'URLs des pages',
-	'menu_onglet_fonds' => 'Fonds des pages',
+	'menu_onglet_pages' => 'URLs enregistrées',
+	'menu_onglet_fonds' => 'Fonds détectés',
+	'menu_onglet_erreurs' => 'Erreurs migration',
 	'menu_urls_pages' => 'URLs des pages',
 	'menu_urls_objets' => 'URLs des objets éditoriaux',
+	'message_erreur_migration' => 'Les URLs des pages suivantes n\'ont pas été migrées automatiquement vers la table des URLs lors du passage à la V1 car elles étaient déjà utilisées pour des objets éditoriaux.',
 
 	// T
 	'titre_pages_detectees' => 'Pages détectées',
@@ -72,6 +77,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_creer_url_page' => 'Créer l\'URL d\'une page',
 	'titre_nouvelle_url' => 'Nouvelle URL',
 
+	// U
+	'utilisation' => 'Utilisation',
 );
-
-?>

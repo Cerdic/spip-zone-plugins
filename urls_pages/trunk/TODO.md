@@ -4,8 +4,21 @@
 ## URLs pages non migrées
 
 Lors de la migration de la branche 0.x vers la branche 1.x, les URLs enregistrées dans le meta `urls_pages` sont migrées dans la table `spip_urls`.
-Seules les URLs non converties car déjà présentes dans la table sont conservées dans le meta.
+Dans le cas improbable où certaines sont déjà utilisées par des objets éditoriaux, elles sont conservées dans le meta (mais elles ne sont plus fonctionnelles donc).
 
-En principe, ce cas de figure ne devrait pas se présenter car on vérifiait les doublons au moment d'enregistrer les URLs, mais réfléchir à ce qu'on pourrait faire dans ce cas improbable :
-- message de mise en garde sur la page des URLs ?
-- migration sauvage (c'est à dire qu'on enregistre quand même, et l'URL de la page prendra le pas sur l'URL de l'objet) ?
+Pour l'instant on les montre aux utilisateurs dans un onglet à part, il faut ajouter un moyen de régler le problème (un bouton pour supprimer la meta après que les admins aient réglé le problème, ou autre).
+
+## Refactorisation
+
+Tous les traitements se font actuellement dans le formulaire editer_url_page.
+Il faut les déplacer dans l'API (à créer) :
+
+- action/editer_url_page.php
+    - url_page_insert()
+    - url_page_edit()
+    - url_page_delete()
+- supprimer_url_page.php
+
+## Langues
+
+Réfléchir à la prise en compte des langues.

@@ -10,6 +10,7 @@
 <h1 class="grostitre"><:urls_pages:titre_urls_pages:></h1>
 
 #SET{onglets, #LISTE{pages,fonds}}
+[(#LIRE_CONFIG{urls_pages}|oui)#SET{onglets,#GET{onglets}|push{erreurs}}]
 #SET{onglet, #ENV{onglet}|in_array{#GET{onglets}}|?{#ENV{onglet},#GET{onglets/0}}}
 <div class='onglets_simple clearfix'>
 	<ul>
@@ -28,6 +29,10 @@
 
 [(#GET{onglet}|=={fonds}|oui)
 <INCLURE{fond=prive/objets/liste/fonds_pages, boutons=editer}>
+]
+
+[(#GET{onglet}|=={erreurs}|oui)
+<INCLURE{fond=prive/objets/liste/urls_pages_erreurs}>
 ]
 
 [(#URL_ECRIRE{url_page_edit}|parametre_url{redirect,#SELF}|icone_verticale{<:urls_pages:icone_ajouter_url_page:>,url,new,'right'})]

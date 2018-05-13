@@ -1,6 +1,8 @@
 <div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
@@ -11,8 +13,12 @@
 			#SET{name,page}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,'obligatoire'}
 			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="champ_#GET{name}"><:urls_pages:champ_page_label:></label>
-				[(#ENV{page_locked}|non)<span class='explication'><:urls_pages:champ_page_explication:></span>]
-				[(#ENV{page_locked}|et{#ENV{page_fond}}|oui)<span class='explication'><:urls_pages:champ_page_explication_fond{fond=#ENV{page_fond}}:></span>]
+				[(#ENV{page_locked}|non)
+				<span class='explication'><:urls_pages:champ_page_explication|propre:></span>
+				]
+				[(#ENV{page_locked}|et{#ENV{page_fond}}|oui)
+				<span class='explication'><:urls_pages:champ_page_explication_fond{fond=#ENV{page_fond}}|propre:></span>
+				]
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<input type="text" class="text" name="#GET{name}[(#ENV{page_locked}|oui)_off]" id="champ_#GET{name}" size="40" value="#ENV{#GET{name}}"[ (#ENV{page_locked}|oui)disabled="disabled" readonly="readonly"][ (#GET{obli}|oui)required="required"] />
 				[(#ENV{page_locked}|non)

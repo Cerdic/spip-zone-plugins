@@ -53,6 +53,9 @@ function urls_pages_vider_tables($nom_meta_base_version) {
 	// Suppression meta
 	effacer_meta($nom_meta_base_version);
 
+	// Invalider le cache pour éviter une erreur undefined function url_perso
+	include_spip('inc/invalideur');
+	suivre_invalideur(1);
 }
 
 
@@ -94,7 +97,4 @@ function urls_pages_maj_100(){
 		ecrire_config('urls_pages', $nouvelle_config);
 	}
 
-	// Invalider le cache pour éviter une erreur undefined function url_perso
-	include_spip('inc/invalideur');
-	suivre_invalideur(1);
 }
