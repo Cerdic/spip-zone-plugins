@@ -48,14 +48,14 @@
 ]
 #SET{logos,#ARRAY}
 <BOUCLE_normaliser_logos(DATA){source table, #ENV{logos}|is_array|?{#ENV{logos},#ENV{logos}|explode{','}}|array_filter}>
-#SET{valeur,#VALEUR{url}|?{
+#SET{valeur,#VALEUR|is_array|?{
 	#ARRAY{
 		url, #VALEUR{url},
 		alt, #VAL{#VALEUR{alt}|trim|supprimer_tags|textebrut},
 	},
 	#ARRAY{url,#VALEUR}
 }|array_filter}
-[(#CHEMIN{#VALEUR{url}}|oui)
+[(#VALEUR{url}|oui)
 #SET{logos,#GET{logos}|push{#GET{valeur}}}
 ]
 </BOUCLE_normaliser_logos>
