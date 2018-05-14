@@ -9,8 +9,9 @@
  * @package    SPIP\Lim\Installation
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction d'installation et de mise à jour du plugin Lim.
@@ -38,7 +39,7 @@ function lim_upgrade($nom_meta_base_version, $version_cible) {
  * il faut créer et renseigner la nouvelle méta 'lim_objets' en conséquence
  *
 **/
-function lim_creation_meta_objets(){
+function lim_creation_meta_objets() {
 	include_spip('inc/config');
 	
 	$rubrique = lire_config('lim_rubriques');
@@ -67,5 +68,3 @@ function lim_vider_tables($nom_meta_base_version) {
 	effacer_meta('lim_objets');
 	effacer_meta($nom_meta_base_version);
 }
-
-?>
