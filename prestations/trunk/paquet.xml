@@ -1,7 +1,7 @@
 <paquet
 	prefix="prestations"
 	categorie="divers"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/prestations-64.png"

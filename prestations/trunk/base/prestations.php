@@ -72,8 +72,7 @@ function prestations_declarer_tables_objets_sql($tables) {
 		'champs_versionnes' => array('titre', 'id_prestations_type', 'prix_unitaire_ht', 'quantite', 'quantite_relative', 'quantite_relative_type', 'quantite_relative_rang', 'id_prestations_unite', 'taxe', 'objet', 'id_objet', 'rang'),
 		'rechercher_champs' => array("titre" => 10),
 		'tables_jointures'  => array(),
-
-
+		'parent' => array('champ_type' => 'objet', 'champ' => 'id_objet'),
 	);
 
 	$tables['spip_prestations_types'] = array(
