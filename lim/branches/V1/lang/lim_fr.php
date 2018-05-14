@@ -1,8 +1,10 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
- 
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+ }
+
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
@@ -30,8 +32,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_forums_publics' => "Désactiver l'affichage du bloc Forum dans les pages Articles ?",
 	'label_petitions' => "Désactiver l'affichage du bloc Pétitions dans les pages Articles ?",
 	'label_desactive_auteur_bio' => "Désactiver l'affichage du champ <i>Qui est l’auteur</i> ?",
-	'label_desactive_auteur_pgp' => "Désactiver l'affichage du champ <i>Clé PGP</i> ?",
+	'label_desactive_auteur_email' => "Désactiver l'affichage du champ <i>Adresse email</i> ?",
 	'label_desactive_auteur_liens_sites' => "Désactiver l'affichage du fieldset <i>Lien Site</i> ?",
+	'label_desactive_auteur_pgp' => "Désactiver l'affichage du champ <i>Clé PGP</i> ?",
 
 	// O
 	'onglet_lim' => 'Forums Publics et Pétitions',
@@ -42,5 +45,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_page_configurer_lim' => 'LIM : Alléger l\'espace privé',
 );
-
-?>

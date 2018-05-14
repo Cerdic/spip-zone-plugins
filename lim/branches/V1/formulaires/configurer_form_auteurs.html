@@ -11,6 +11,8 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 
 		<ul class="editer-groupe">
+			[(#SAISIE{oui_non_ligne, email,label=<:lim:label_desactive_auteur_email:>, li_class=long_label})]
+			
 			[(#SAISIE{oui_non_ligne, bio,label=<:lim:label_desactive_auteur_bio:>, li_class=long_label})]
 
 			[(#SAISIE{oui_non_ligne, pgp,label=<:lim:label_desactive_auteur_pgp:>, li_class=long_label})]
