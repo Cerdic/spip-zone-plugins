@@ -516,7 +516,7 @@ function page_phraser_fichier($page, $options = array()) {
 				}
 			}
 		}
-	} elseif (defined('_NOIZETIER_LISTER_PAGES_SANS_XML') ? _NOIZETIER_LISTER_PAGES_SANS_XML : false) {
+	} elseif (defined('_NOIZETIER_LISTER_PAGES_SANS_XML') ? _NOIZETIER_LISTER_PAGES_SANS_XML : true) {
 		// 1c- il est autorisé de ne pas avoir de fichier XML de configuration.
 		// Ces pages sans XML ne sont chargées qu'une fois, la première. Ensuite, aucune mise à jour n'est nécessaire.
 		if (!$options['md5']) {
