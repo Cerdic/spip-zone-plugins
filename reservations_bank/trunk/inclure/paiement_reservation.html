@@ -5,8 +5,8 @@
 	#SET{prix, #ARRAY}
 	#SET{prix_ht, #ARRAY}
 	<BOUCLE_reservation_details(RESERVATIONS_DETAILS){id_reservation}{id_reservations_detail ?}{tout}>
-		#SET{prix_ht,#GET{prix_ht}|push{#PRIX_HT*|mult{#QUANTITE}}}
-		#SET{prix,#GET{prix}|push{#PRIX*|mult{#QUANTITE}}}
+		#SET{prix_ht,#GET{prix_ht}|push{#PRIX_HT*}}
+		#SET{prix,#GET{prix}|push{#PRIX*}}
 		</BOUCLE_reservation_details>
 		#SET{total,#GET{prix}|array_sum}
 		#SET{montant_ht,#GET{prix_ht}|array_sum}
