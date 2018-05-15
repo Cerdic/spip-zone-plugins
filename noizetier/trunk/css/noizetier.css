@@ -1,10 +1,12 @@
-/* Styles d'une page publique en édition sous voir_noisettes */
+/* Styles d'une page publique en édition avec voir=noisettes */
 /* -- pour le bloc */
 .noizetier-bloc {padding:10px; border:4px dotted #df454f; margin:10px 0;}
 .noizetier-bloc .bloc-nom {color:#8a1f11; font-size:2em; margin:5px 0;}
 .noizetier-bloc .bloc-noisette {padding:10px; border:2px solid #9dba00; margin:10px 0;}
 .noizetier-bloc .bloc-noisette .type_noisette {color:#9DBA00; font-size:1.5em; margin:5px 0;}
 .noizetier-bloc .bloc-noisette .type_noisette .icone {float:right;}
+.noizetier-bloc .action_noisette-ltr {text-align:right;}
+.noizetier-bloc .action_noisette-rtl {text-align:left;}
 
 .formulaire_editer_noisette li.fieldset {margin-left:10px; margin-right:10px; border-left: solid 1px #CCC; border-right: solid 1px #CCC; border-bottom: solid 1px #CCC;}
 ul.liste-noisettes li.noisette {padding-left: 30px; background-repeat: no-repeat; background-position: left 9px;}

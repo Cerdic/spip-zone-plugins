@@ -33,7 +33,7 @@ function noizetier_page_charger($recharger = false) {
 	// TODO : en attente de voir si on rajoute un var_mode=vider_noizetier
 	$forcer_chargement = $recharger;
 
-	// Initaliser la table et le where des pages non virtuelles qui sont utilisés plusieurs fois.
+	// Initialiser la table et le where des pages non virtuelles qui sont utilisés plusieurs fois.
 	$from ='spip_noizetier_pages';
 	$where = array('est_virtuelle=' . sql_quote('non'));
 
@@ -66,7 +66,7 @@ function noizetier_page_charger($recharger = false) {
 			and (($page != 'page') or !defined('_DIR_PLUGIN_Z'))
 			and (($page != 'z_apl') or (!defined('_DIR_PLUGIN_Z') and !defined('_DIR_PLUGIN_ZCORE')))
 			and (!$est_composition or ($est_composition	and defined('_DIR_PLUGIN_COMPOSITIONS')))) {
-				// On passe le md5 de la page si il existe sinon la chaine vide. Cela permet de déterminer
+				// On passe le md5 de la page si il existe sinon la chaîne vide. Cela permet de déterminer
 				// si on doit ajouter la page ou la mettre à jour.
 				// Si le md5 est le même et qu'il n'est donc pas utile de recharger la page, la configuration
 				// retournée est vide.
