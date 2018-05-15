@@ -18,7 +18,7 @@
 		sinon c'est un vieux logo
 	]
 	<B_logos>
-	<div class="apercu liste_items documents">
+	<div class="apercu liste_items documents spip_logo">
 		<BOUCLE_logos(DATA){source table, #ENV{logos}}>
 		#SET{type, #VALEUR{5}|intval|?{document,logo}}
 		[(#GET{type}|=={document}|oui)
