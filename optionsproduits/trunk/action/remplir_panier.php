@@ -16,6 +16,11 @@ function action_remplir_panier_dist($arg=null) {
 	// On récupère les infos de l'argument
 	@list($objet, $id_objet, $quantite, $negatif, $options) = explode('-', $arg);
 
+	// éviter un cas tordu qui insère un 0 comme valeur d'option (et qui duplique donc les produits dans le panier)
+	if(!$options || $options==='0'){
+		$options = '';
+	}
+	
 	$paniers_arrondir_quantite = charger_fonction('paniers_arrondir_quantite', 'inc');
 	if (!isset($quantite) or is_null($quantite) or !strlen($quantite)) {
 		$quantite = 1;
