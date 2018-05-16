@@ -28,5 +28,5 @@
 
 
 	<necessite nom="facteur" compatibilite="[3.5.2;]" />
-	<menu nom="mailshost" titre="mailshot:titre_menu_mailshots" parent="menu_publication" icone="images/mailshot-16.png" action="mailshots" />
+	<menu nom="mailshots" titre="mailshot:titre_menu_mailshots" parent="menu_publication" icone="images/mailshot-16.png" action="mailshots" />
 </paquet>

@@ -120,7 +120,7 @@ function mailshot_optimiser_base_disparus($flux){
 	$n = &$flux['data'];
 	$mydate = $flux['args']['date'];
 
-	// supprimer les mailshosts a la poubelle, plus vieux que $mydate
+	// supprimer les mailshots a la poubelle, plus vieux que $mydate
 	$ids = sql_allfetsel("id_mailshot","spip_mailshots","maj<".sql_quote($mydate)." AND statut=".sql_quote('poubelle'));
 	$ids = array_map('reset',$ids);
 
