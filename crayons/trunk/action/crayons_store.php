@@ -454,11 +454,23 @@ function crayons_update($id, $colval = array(), $type = '') {
 			$sep = ', ';
 		}
 
-		$a = spip_query($q = 'UPDATE `' . $nom_table . '` SET ' . $update . ' WHERE ' . $where, $distant);
+		// Sur une bdd externe on utilise sql_updateq de preference ;
+        // l'api sql sait gerer les prefixes contrairement a spip_query.
+        // On garde un semblant de compatibilité
+        if ( isset($GLOBALS['spip_version_code']) && $GLOBALS['spip_version_code'] >= '1.93' ) {
+            $a = sql_updateq($nom_table , array($col => $val), $where,'',$distant);
+        }
+        else {
+            $a = spip_query($q = 'UPDATE `' . $nom_table . '` SET ' . $update . ' WHERE ' . $where, $distant);
+            #spip_log($q);
+        }
 
-		#spip_log($q);
 		include_spip('inc/invalideur');
-		suivre_invalideur($cond, $modif = true);
+
+		// Pour une base externe doit on prefixer le type avec le nom du connecteur?
+        // ex: nomconnect_objet
+		suivre_invalideur($type, $modif = true);
+
 	} else {
 		// cle primaire composee : 3-4-rubrique
 		// calculer un where approprie
