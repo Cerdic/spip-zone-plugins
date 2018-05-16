@@ -126,11 +126,12 @@ function accesrestreint_page_indisponible($contexte) {
  * 		Retourne le flux du pipeline possiblement modifié
  **/
 function accesrestreint_post_edition($flux) {
-	// Si on vient de modifier une zone et qu'elle a l'option autoriser_si_connexion
+	// Si on vient de modifier l'option autoriser_si_connexion d'une zone (par defaut non cochée)
 	if (
 		isset($flux['args']['type'])
 		and $flux['args']['type'] == 'zone'
 		and $id_zone = $flux['args']['id_objet']
+		and isset($flux['data']['autoriser_si_connexion']) 
 	) {
 		include_spip('inc/config');
 		
@@ -144,10 +145,10 @@ function accesrestreint_post_edition($flux) {
 		}
 		
 		// Si on a coché la case, on ajoute cette zone là
-		if (isset($flux['data']['autoriser_si_connexion']) and $flux['data']['autoriser_si_connexion'] == 'oui') {
+		if ($flux['data']['autoriser_si_connexion'] == 'oui') {
 			array_push($zones_si_connexion, $id_zone);
 		}
-		// Sinon on la retire
+		// Sinon décoché, on la retire
 		else {
 			$zones_si_connexion = array_diff($zones_si_connexion, array($id_zone));
 		}
