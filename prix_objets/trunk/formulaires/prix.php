@@ -128,29 +128,56 @@ function formulaires_prix_traiter_dist($id_objet, $objet = 'article') {
 	}
 
 	$titre_secondaire = array();
-	$valeurs = array();
+	$valeurs_extensions = array();
 	foreach($extensions as $extension) {
-		if ($id_prix_extension = _request('id_prix_extension_' . $extension)) {
-			$titre_secondaire[] = extraire_multi(
+		if ($id_extension = _request('id_prix_extension_' . $extension)) {
+			if (!is_array($id_extension)) {
+				$titre = extraire_multi(
 					supprimer_numero(
-							generer_info_entite(
-									$id_prix_extension,
-									$extension,
-									'titre', '*'
-									)
+						generer_info_entite(
+							$id_extension,
+							$extension,
+							'titre', '*'
 							)
+						)
 					);
-			$valeurs['id_' . $extension] = $id_prix_extension;
+				$titre_secondaire[] = $titre;
+				$valeurs_extensions[] = array(
+					'titre' => $titre,
+					'extension' => $extension,
+					'id_extension' => $id_extension
+				);
+			}
+			else {
+				foreach ($id_extension as $id) {
+					$titre = extraire_multi(
+						supprimer_numero(
+							generer_info_entite(
+								$id,
+								$extension,
+								'titre', '*'
+								)
+							)
+						);
+					$titre_secondaire[] = $titre;
+					$valeurs_extensions[] = array(
+						'titre' => $titre,
+						'extension' => $extension,
+						'id_extension' => $id
+					);
+				}
+			}
 		}
 	}
 
 		$titre_secondaire = implode(' / ', $titre_secondaire);
 
-	if ($titre_secondaire)
-		$titre = $titre . ' - ' . $titre_secondaire;
+		if ($titre_secondaire) {
+			$titre = $titre . ' - ' . $titre_secondaire;
+		}
 
 	// On inscrit dans la bd
-	$valeurs = array_merge($valeurs, array(
+	$valeurs =  array(
 			'id_objet' => $id_objet,
 			'objet' => $objet,
 			'code_devise' => _request('code_devise'),
@@ -158,8 +185,7 @@ function formulaires_prix_traiter_dist($id_objet, $objet = 'article') {
 			'taxe' => _request('taxe'),
 			'prix' => 0,
 			'prix_ht' => 0
-		)
-	);
+		);
 
 	if ($ttc = _request('taxes_inclus'))
 		$valeurs['prix'] = $prix;
