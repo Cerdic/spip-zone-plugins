@@ -16,7 +16,7 @@
 	<licence>GNU/GPL</licence>
 
 	<necessite nom="saisies" compatibilite="[2.25.1;]" />
-	<necessite nom="prix_objets" compatibilite="[1.8.1;]" />
+	<necessite nom="prix_objets" compatibilite="[2.0.0;]" />
 	<utilise nom="shop" compatibilite="[1.1.0;]" />
 
 	<pipeline nom="autoriser" inclure="declinaisons_autorisations.php" />
