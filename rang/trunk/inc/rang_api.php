@@ -218,7 +218,7 @@ function rang_get_contextes() {
 	// si l'objet à un parent…
 	if ($parent = type_objet_info_parent($objet_type)) {
 		$id_table_objet = id_table_objet($table);
-		$parent_champ = $parent['0']['champ'];
+		$parent_champ = $parent['champ'];
 		$id_parent = sql_getfetsel($parent_champ, $table, "$id_table_objet = $id_objet");
 		$rang = sql_getfetsel('max(rang)', $table, "$parent_champ = $id_parent");
 	} else {

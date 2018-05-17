@@ -22,8 +22,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * 		quelle pagination
  * @param string $objet
  *     sur quel objet faire le classement
- * @param string $rubrique optionel
- *     dans quelle rubrique faire le classement
+ * @param string $id_parent
+ *     id_parent dans lequel faire le classement
  *
 **/
 function action_trier_items_dist() {
@@ -41,8 +41,10 @@ function action_trier_items_dist() {
 	$objet_type = objet_type($objet);
 	if ($id_parent != 'rien') {
 	 	$parent	= type_objet_info_parent($objet_type);
-		$parent_champ = $parent['0']['champ'];
+		$parent_champ = $parent['champ'];
 	}
+
+	spip_log("objet : ".$objet."\n id_parent : ".$id_parent."\nparent : ".$parent_champ, 'rang.' . _LOG_DEBUG);
 
 	// reclassement !
 	foreach ($tab as $key => $value) {
@@ -54,7 +56,8 @@ function action_trier_items_dist() {
 		else {
 			$where = "$id_objet=$id AND $parent_champ=$id_parent";
 		}
-		sql_updateq($table, array('rang' => $rang), $where);
+		$res = sql_updateq($table, array('rang' => $rang), $where);
+		spip_log($res, 'rang.' . _LOG_DEBUG);
 	}
 
 	include_spip('inc/invalideur');

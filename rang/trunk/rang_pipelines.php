@@ -66,7 +66,7 @@ function rang_recuperer_fond($flux) {
 				// récupérer le type de parent…
 				include_spip('base/objets_parents');
 				$parent       = type_objet_info_parent($objet_type);
-				$parent_champ = $parent['0']['champ'];
+				$parent_champ = $parent['champ'];
 				$id_parent    = $flux['args']['contexte'][$parent_champ];
 
 				// suffixe de la pagination : particularité des objets historiques
