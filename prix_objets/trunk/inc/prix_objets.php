@@ -8,7 +8,7 @@ if (!defined("_ECRIRE_INC_VERSION"))
  * @param array $valeurs
  * @return array
  */
-function prix_objets_extensions_declaration($valeurs) {
+function prix_objets_extensions_declaration($valeurs = array()) {
 
 	return pipeline(
 			'prix_objets_extensions', array(
