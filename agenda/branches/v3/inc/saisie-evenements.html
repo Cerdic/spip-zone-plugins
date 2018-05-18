@@ -27,7 +27,7 @@
 </BOUCLE_evenements>
 #SET{description,#GET{description}|array_flip}
 [(#ENV{vues}|?{
-	#INCLURE{fond=saisies-vues/#ENV{type_choix},data=#GET{description},env},
-	#INCLURE{fond=saisies/#ENV{type_choix},data=#GET{description},env}
+	#INCLURE{fond=saisies-vues/#ENV{type_choix,radio},data=#GET{description},env},
+	#INCLURE{fond=saisies/#ENV{type_choix,radio},data=#GET{description},env}
 	}
 )]
