@@ -1,5 +1,5 @@
 [(#REM) On teste l'autorisation en fonction du type d'édition ]
-[(#ENV{edition}|=={modifier}|et{#AUTORISER{modifiercomposition, noizetier, '', '', #ARRAY{page, #ENV{page}}}}
+[(#ENV{edition}|=={modifier}|et{#AUTORISER{modifierpage, noizetier, '', '', #ARRAY{page, #ENV{page}}}}
 	|ou{#ENV{edition}|=={creer}|et{#AUTORISER{creercomposition, noizetier, '', '', #ARRAY{page, #ENV{source}}}}}
 	|ou{#ENV{edition}|=={dupliquer}|et{#AUTORISER{dupliquercomposition, noizetier, '', '', #ARRAY{page, #ENV{source}}}}}
 	|sinon_interdire_acces)]

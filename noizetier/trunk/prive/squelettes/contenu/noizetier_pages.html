@@ -40,20 +40,20 @@
 						[<img height="24" width="24" src="(#CHEMIN_IMAGE{composition-set-24.png})" alt="" />]
 					</a>]
 				]
-				[(#AUTORISER{modifiercomposition, noizetier, '', '', #ARRAY{page, #PAGE}})
-					[<a href="(#URL_ECRIRE{noizetier_page_edit}
-								|parametre_url{edition, modifier}
-								|parametre_url{page, #PAGE})"
-						title="<:noizetier:bulle_modifier_composition:>">
-						[<img height="24" width="24" src="(#CHEMIN_IMAGE{edit-24.png})" alt="" />]
-					</a>]
-				]
 				[(#AUTORISER{dupliquercomposition, noizetier, '', '', #ARRAY{page, #PAGE}})
 					[<a href="(#URL_ECRIRE{noizetier_page_edit}
 								|parametre_url{edition, dupliquer}
 								|parametre_url{source, #PAGE})"
 						title="<:noizetier:bulle_dupliquer_composition{page=#PAGE}:>">
 						[<img height="24" width="24" src="(#CHEMIN_IMAGE{composition-copy-24.png})" alt="" />]
+					</a>]
+				]
+				[(#AUTORISER{modifierpage, noizetier, '', '', #ARRAY{page, #PAGE}})
+					[<a href="(#URL_ECRIRE{noizetier_page_edit}
+								|parametre_url{edition, modifier}
+								|parametre_url{page, #PAGE})"
+						title="[(#COMPOSITION|?{<:noizetier:bulle_modifier_composition:>, <:noizetier:bulle_modifier_page:>})]">
+						[<img height="24" width="24" src="(#CHEMIN_IMAGE{edit-24.png})" alt="" />]
 					</a>]
 				]
 			</div>

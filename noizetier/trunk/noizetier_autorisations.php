@@ -219,9 +219,10 @@ function autoriser_noizetier_supprimercomposition_dist($faire, $type, $id, $qui,
 }
 
 /**
- * Autorisation de modification d'une composition virtuelle du noiZetier (page=noizetier_page_edit).
+ * Autorisation de modification certains paramètres d'une page (page=noizetier_page_edit). Suivant que la page est
+ * une page explicite ou une composition virtuelle la liste des paramètres éditables varie.
  * Il faut :
- * - que la composition existe bien et soit virtuelle.
+ * - que .
  * - et être autorisé à créer une composition virtuelle du noiZetier à partir d'une page source qui
  *   coincide avec le type de la composition virtuelle.
  *
@@ -233,16 +234,9 @@ function autoriser_noizetier_supprimercomposition_dist($faire, $type, $id, $qui,
  *
  * @return bool
  */
-function autoriser_noizetier_modifiercomposition_dist($faire, $type, $id, $qui, $options) {
-	$autoriser = false;
+function autoriser_noizetier_modifierpage_dist($faire, $type, $id, $qui, $options) {
 
-	include_spip('inc/noizetier_page');
-	if ((is_array($options) and !empty($options))
-	and (!empty($options['page']) and ($configuration = noizetier_page_lire($options['page'], false))
-	and ($configuration['est_virtuelle'] == 'oui'))
-	and autoriser('creercomposition', 'noizetier', $id, $qui,  array('page' => $configuration['type']))) {
-		$autoriser = true;
-	}
+	$autoriser = autoriser('configurerpage', 'noizetier', 0, '', $options);
 
 	return $autoriser;
 }

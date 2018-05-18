@@ -50,12 +50,16 @@ function formulaires_editer_page_charger_dist($edition, $page, $redirect = '') {
 		if ($edition == 'modifier') {
 			// La page désignée par $page est déjà une composition virtuelle dont on souhaite modifier une
 			// partie de la configuration (hors noisettes).
-			// L'argument $description_page contient donc la configuration complète de cette page.
+			// La variable $description_page contient donc la configuration complète de cette page.
 			$valeurs['type_page'] = $description_page['type'];
 			$valeurs['composition'] = $description_page['composition'];
-			$valeurs['nom'] = $description_page['nom'];
-			$valeurs['description'] = $description_page['description'];
-			$valeurs['icon'] = $description_page['icon'];
+			$valeurs['est_virtuelle'] = $description_page['est_virtuelle'];
+
+			if ($valeurs['est_virtuelle'] == 'oui') {
+				$valeurs['nom'] = $description_page['nom'];
+				$valeurs['description'] = $description_page['description'];
+				$valeurs['icon'] = $description_page['icon'];
+			}
 
 		} elseif ($edition == 'dupliquer') {
 			// La page désignée est la composition source que l'on souhaite dupliquer pour créer une nouvelle
@@ -68,7 +72,7 @@ function formulaires_editer_page_charger_dist($edition, $page, $redirect = '') {
 
 		} elseif ($edition == 'creer') {
 			// On crée une nouvelle composition à partir d'une page source.
-			// L'argument $description_page contient donc la configuration complète de la page source.
+			// La variable $description_page contient donc la configuration complète de la page source.
 			$valeurs['type_page'] = $description_page['type'];
 			$valeurs['nom'] = _T('info_sans_titre');
 
@@ -98,10 +102,13 @@ function formulaires_editer_page_charger_dist($edition, $page, $redirect = '') {
 		// lui d'initialiser les héritages avec :
 		// - soit ceux de la page en cours de modification
 		// - soit ceux de la composition source pour une duplication
-		$page = $description_page['composition']
-			? "{$description_page['type']}-{$description_page['composition']}"
-			: '';
-		$valeurs = array_merge($valeurs, construire_heritages($valeurs['type_page'], $page));
+		$valeurs['_heritiers'] = array();
+		if ($valeurs['est_virtuelle'] == 'oui') {
+			$page = $description_page['composition']
+				? "{$description_page['type']}-{$description_page['composition']}"
+				: '';
+			$valeurs = array_merge($valeurs, construire_heritages($valeurs['type_page'], $page));
+		}
 	}
 
 	return $valeurs;
@@ -127,9 +134,11 @@ function formulaires_editer_page_verifier_dist($edition, $page, $redirect = '') 
 	$erreurs = array();
 
 	// On vérifie que les champs obligatoires ont été bien saisis
-	foreach (array('type_page', 'composition', 'nom') as $champ) {
-		if (!_request($champ)) {
-			$erreurs[$champ] = _T('noizetier:formulaire_obligatoire');
+	if (_request('est_virtuelle') == 'oui') {
+		foreach (array('type_page', 'composition', 'nom') as $champ) {
+			if (!_request($champ)) {
+				$erreurs[$champ] = _T('noizetier:formulaire_obligatoire');
+			}
 		}
 	}
 
@@ -179,31 +188,37 @@ function formulaires_editer_page_traiter_dist($edition, $page, $redirect = '') {
 	$retour = array();
 	$description = array();
 
-	// Identifiant de la composition résultante.
+	// Identifiant de la page ou de la composition.
 	$type_page = _request('type_page');
 	$composition = _request('composition');
-	$identifiant = "${type_page}-${composition}";
+	$identifiant = $composition ? "${type_page}-${composition}" : $type_page;
+
+	// Déterminer si la page est explicite ou est une composition virtuelle.
+	// En effet, pour les pages explicites seuls les blocs exclus peuvent être modifiés.
+	$est_virtuelle = _request('est_virtuelle');
 
 	// Récupération des champs descriptifs et de l'icone.
-	$description['nom'] = _request('nom');
-	$description['description'] = _request('description');
-	$description['icon'] = _request('icon');
+	if ($est_virtuelle == 'oui') {
+		$description['nom'] = _request('nom');
+		$description['description'] = _request('description');
+		$description['icon'] = _request('icon');
+
+		// Traitement des branches éventuelles pour la composition virtuelle résultante
+		$branche = array();
+		$heritages = construire_heritages($type_page);
+		foreach ($heritages['_heritiers'] as $_objet => $_composition) {
+			if ($composition_heritee = _request("heritage-${_objet}")) {
+				$branche[$_objet] = $composition_heritee;
+			}
+		}
+		$description['branche'] = $branche;
+	}
 
 	// Traitement des blocs configurables
 	$blocs_exclus = _request('blocs_exclus');
 	$description['blocs_exclus'] = $blocs_exclus;
 	// TODO : si on exclut des blocs il faut supprimer leurs éventuelles noisettes.
-	// Une autre solution serait d'interdire l'exclusion d'un bloc contenant une noisette
-
-	// Traitement des branches éventuelles pour la composition virtuelle résultante
-	$branche = array();
-	$heritages = construire_heritages($type_page);
-	foreach ($heritages['_heritiers'] as $_objet => $_composition) {
-		if ($composition_heritee = _request("heritage-${_objet}")) {
-			$branche[$_objet] = $composition_heritee;
-		}
-	}
-	$description['branche'] = $branche;
+	// TODO : une autre solution serait d'interdire l'exclusion d'un bloc contenant une noisette
 
 	if ($edition != 'modifier') {
 		// Initialisation de la description pour une composition virtuelle.
@@ -233,14 +248,16 @@ function formulaires_editer_page_traiter_dist($edition, $page, $redirect = '') {
 
 	// On termine en sérialisant les tableaux des blocs exclus, necessite et branche.
 	$description['blocs_exclus'] = serialize($description['blocs_exclus']);
-	$description['branche'] = serialize($description['branche']);
-	if (isset($description['necessite'])) {
-		$description['necessite'] = serialize($description['necessite']);
+	if ($est_virtuelle == 'oui') {
+		$description['branche'] = serialize($description['branche']);
+		if (isset($description['necessite'])) {
+			$description['necessite'] = serialize($description['necessite']);
+		}
 	}
 
 	// Mise ou insertion de la composition virtuelle
 	if ($edition == 'modifier') {
-		// -- Update de la compositon modifiée
+		// -- Update de la composition modifiée
 		$where = array('page=' . sql_quote($identifiant));
 		$retour_sql = sql_updateq('spip_noizetier_pages', $description, $where);
 	} else {

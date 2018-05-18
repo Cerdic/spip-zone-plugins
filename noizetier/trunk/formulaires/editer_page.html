@@ -2,10 +2,11 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<form method="post" action="#ENV{action}"><div>
-	<BOUCLE_editable(condition){si #ENV{editable}}>
+	<BOUCLE_editable(CONDITION){si #ENV{editable}}>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="est_virtuelle" value="#ENV{est_virtuelle}" />
 		<div class="editer-groupe">
 			[(#REM) Le type de page n'est pas éditable car la composition est toujours basée sur une page précise ]
 			[(#SAISIE{input, type_page,
@@ -15,72 +16,77 @@
 			})]
 
 			[(#REM) L'identifiant de composition n'est éditable que lors d'une création ou d'une duplication de composition ]
-			#SET{disable, #ENV{edition}|=={modifier}|?{oui, ''}}
-			[(#SET{explication, #ENV{edition}|!={modifier}|?{<:noizetier:formulaire_composition_explication:>, ''}})]
-			[(#SAISIE{input, composition,
-						label=<:noizetier:formulaire_composition:>,
-						explication=#GET{explication},
-						readonly=#GET{disable},
-						obligatoire=oui,
-			})]
+			[(#ENV{composition}|oui)
+				#SET{disable, #ENV{edition}|=={modifier}|?{oui, ''}}
+				[(#SET{explication, #ENV{edition}|!={modifier}|?{<:noizetier:formulaire_composition_explication:>, ''}})]
+				[(#SAISIE{input, composition,
+							label=<:noizetier:formulaire_composition:>,
+							explication=#GET{explication},
+							readonly=#GET{disable},
+							obligatoire=oui,
+				})]
+			]
+			[(#ENV{composition}|non)<input type="hidden" name="composition" value="#ENV{composition}" />]
 
 			[(#REM) Le titre de la composition est obligatoire ]
-			[(#SAISIE{input, nom,
-						label=<:noizetier:formulaire_nom:>,
-						explication=<:noizetier:formulaire_nom_explication:>,
-						size=40,
-						obligatoire=oui,
-			})]
+			<BOUCLE_est_virtuelle(CONDITION){si #ENV{est_virtuelle}|=={oui}}>
+				[(#SAISIE{input, nom,
+							label=<:noizetier:formulaire_nom:>,
+							explication=<:noizetier:formulaire_nom_explication:>,
+							size=40,
+							obligatoire=oui,
+				})]
 
-			[(#REM) La description est recommandée mais pas obligatoire ]
-			[(#SAISIE{textarea, description,
-						label=<:noizetier:formulaire_description:>,
-						explication=<:noizetier:formulaire_description_explication:>,
-						rows=3,
-			})]
+				[(#REM) La description est recommandée mais pas obligatoire ]
+				[(#SAISIE{textarea, description,
+							label=<:noizetier:formulaire_description:>,
+							explication=<:noizetier:formulaire_description_explication:>,
+							rows=3,
+				})]
 
-			#SET{name, icon}
-			#SET{obli, ''}
-			#SET{erreurs, #ENV**{erreurs}|table_valeur{#GET{name}}}
-			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-				<label for="#GET{name}"><:noizetier:formulaire_icon:></label>
-				<div class="explication"><:noizetier:formulaire_icon_explication:></div>
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				<input type="text" class="text" name="#GET{name}" id="#GET{name}" size="40" value="#ENV{#GET{name}}" />
-				<div id="aide_choix_icone">
-					<div id="afficher_suggestions">
-						[<a href="#" onclick="jQuery('#suggestions_icones').show(500);jQuery('#afficher_suggestions').hide(500);return false;" ><:noizetier:suggestions:></a>]
-					</div>
-					<strong><:noizetier:apercu:></strong><br />
-					<span id="apercu_icone">[(#CHEMIN_IMAGE{#ENV{icon}}|balise_img)]</span>
-					<B_suggestions_icones>
-					<div id="suggestions_icones">
-						<div id="bouton_suggestion">
-							[<a href="#" onclick="jQuery('#suggestions_icones').hide(500);jQuery('#afficher_suggestions').show(500);return false;"><:noizetier:masquer:></a>]
+				#SET{name, icon}
+				#SET{obli, ''}
+				#SET{erreurs, #ENV**{erreurs}|table_valeur{#GET{name}}}
+				<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}"><:noizetier:formulaire_icon:></label>
+					<div class="explication"><:noizetier:formulaire_icon_explication:></div>
+					[<span class='erreur_message'>(#GET{erreurs})</span>]
+					<input type="text" class="text" name="#GET{name}" id="#GET{name}" size="40" value="#ENV{#GET{name}}" />
+					<div id="aide_choix_icone">
+						<div id="afficher_suggestions">
+							[<a href="#" onclick="jQuery('#suggestions_icones').show(500);jQuery('#afficher_suggestions').hide(500);return false;" ><:noizetier:suggestions:></a>]
 						</div>
-						<p><strong><:noizetier:suggestions:></strong></p>
-					<BOUCLE_suggestions_icones(DATA){source table, #NOIZETIER_ICONE_LISTE{24}}{par cle}>
-							<div class="suggestion_icone" onclick="jQuery('input#icon').val('#CLE');maj_apercu_icone();jQuery('#suggestions_icones').hide(500);jQuery('#afficher_suggestions').show(500);return false;">
-								[(#CHEMIN_IMAGE{#CLE}|balise_img)<br />]
-								#CLE
+						<strong><:noizetier:apercu:></strong><br />
+						<span id="apercu_icone">[(#CHEMIN_IMAGE{#ENV{icon}}|balise_img)]</span>
+						<B_suggestions_icones>
+						<div id="suggestions_icones">
+							<div id="bouton_suggestion">
+								[<a href="#" onclick="jQuery('#suggestions_icones').hide(500);jQuery('#afficher_suggestions').show(500);return false;"><:noizetier:masquer:></a>]
 							</div>
-					</BOUCLE_suggestions_icones>
+							<p><strong><:noizetier:suggestions:></strong></p>
+						<BOUCLE_suggestions_icones(DATA){source table, #NOIZETIER_ICONE_LISTE{24}}{par cle}>
+								<div class="suggestion_icone" onclick="jQuery('input#icon').val('#CLE');maj_apercu_icone();jQuery('#suggestions_icones').hide(500);jQuery('#afficher_suggestions').show(500);return false;">
+									[(#CHEMIN_IMAGE{#CLE}|balise_img)<br />]
+									#CLE
+								</div>
+						</BOUCLE_suggestions_icones>
+						</div>
+						</B_suggestions_icones>
 					</div>
-					</B_suggestions_icones>
-				</div>
-				<script type="text/javascript">/*<!\[CDATA\[*/
-					jQuery('#aide_choix_icone').show();
-					maj_apercu_icone = function(){
-						i = jQuery('input#icon').val();
-						jQuery.get('#URL_PAGE{icone_preview}&icone='+i, function(data) {
-							jQuery('span#apercu_icone').html(data);
+					<script type="text/javascript">/*<!\[CDATA\[*/
+						jQuery('#aide_choix_icone').show();
+						maj_apercu_icone = function(){
+							i = jQuery('input#icon').val();
+							jQuery.get('#URL_PAGE{icone_preview}&icone='+i, function(data) {
+								jQuery('span#apercu_icone').html(data);
+							});
+						};
+						jQuery('input#icon').change(function(){
+							maj_apercu_icone();
 						});
-					};
-					jQuery('input#icon').change(function(){
-						maj_apercu_icone();
-					});
-				/*\]\]>*/</script>
-			</div>
+					/*\]\]>*/</script>
+				</div>
+			</BOUCLE_est_virtuelle>
 
 			[(#REM) Choix des blocs que l'on souhaite exclure de la configuration de noisettes ]
 			[(#SAISIE{checkbox, blocs_exclus,

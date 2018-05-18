@@ -2,11 +2,11 @@
 <BOUCLE_page_contenu(CONDITION) {si #ENV{exec}|=={noizetier_page}|et{#ENV{page}|ou{#OBJET|et{#ID_OBJET}}}}>
 	<BOUCLE_si_page(NOIZETIER_PAGES) {page}>
 	[(#BOITE_OUVRIR{
-		[(#AUTORISER{modifiercomposition, noizetier, '', '', #ARRAY{page, #PAGE}}|oui)
+		[(#AUTORISER{modifierpage, noizetier, '', '', #ARRAY{page, #PAGE}})
 			[(#URL_ECRIRE{noizetier_page_edit}
 				|parametre_url{edition, modifier}
 				|parametre_url{page,#PAGE}
-				|icone_verticale{<:noizetier:formulaire_modifier_page:>,page,edit,right ajax preload})]
+				|icone_verticale{[(#COMPOSITION|?{<:noizetier:formulaire_modifier_composition:>, <:noizetier:formulaire_modifier_page:>})],page,edit,right ajax preload})]
 		]
 
 		<h1>
