@@ -13,6 +13,30 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+
+/**
+ * Balise IDENTIFIANT
+ *
+ * Retourne l'identifiant de l'objet du contexte
+ * ou l'identifiant de l'objets,id_objet passé en paramètre
+ *
+ */
+function balise_IDENTIFIANT_dist($p) {
+	if (!$_objet = interprete_argument_balise(1, $p)) {
+		$_objet = objet_type($p->type_requete);
+		$_id = champ_sql($p->boucles[$p->id_boucle]->primary, $p);
+	} else {
+		$_objet = interprete_argument_balise(1, $p);
+		$_id = interprete_argument_balise(2, $p);
+	}
+
+	$p->code = "identifiant_objet($_objet,$_id)";
+	$p->interdire_scripts = false;
+
+	return $p;
+}
+
+
 /**
  * Retourne l'identifiant d'un objet
  *
@@ -54,7 +78,6 @@ function identifiant_objet($objet, $id_objet) {
 
 	return $identifiant;
 }
-
 
 /**
  * Manipuler l'identifiant d'un objet : créer, mettre à jour, ou supprimer.
