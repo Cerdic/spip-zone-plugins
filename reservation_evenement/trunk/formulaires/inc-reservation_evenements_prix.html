@@ -1,11 +1,11 @@
 <BOUCLE_prix(PRIX_OBJETS?){id_objet=#ID_EVENEMENT}{objet=evenement}{0,1}>
 	#SET{prix,#PRIX}
 </BOUCLE_prix>
-	<BOUCLE_prix_ev_source(PRIX_OBJETS?){id_objet=#ID_EVENEMENT_SOURCE}{objet=evenement}{0,1}>
+	<BOUCLE_prix_ev_source(PRIX_OBJETS?){id_prix_objet_source=0}{id_objet=#ID_EVENEMENT_SOURCE}{objet=evenement}{0,1}>
 		#SET{prix,#PRIX}
 	</BOUCLE_prix_ev_source>
 		[(#REM) ou à l'article]
-		<BOUCLE_prix_article(PRIX_OBJETS?){id_objet=#ID_ARTICLE}{objet=article}{0,1}>
+		<BOUCLE_prix_article(PRIX_OBJETS?){id_prix_objet_source=0}{id_objet=#ID_ARTICLE}{objet=article}{0,1}>
 			#SET{prix,#PRIX}
 			</BOUCLE_prix_article>
 			[(#REM) Sinon, si l'événement ne contient pas de prix, on prend le prix du champs prix l'article]

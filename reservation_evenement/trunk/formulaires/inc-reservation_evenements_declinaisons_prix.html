@@ -1,14 +1,15 @@
 #SET{prix,#ENV{prix}}
+
 <B_decl>
 <div class="choix">
-	<BOUCLE_decl (DECLINAISONS){id_declinaison}{statut ?}{par num titre,titre}>
-	<input type="radio" name="id_objet_prix[#ID_EVENEMENT]"
+	<BOUCLE_decl (PRIX_OBJETS){id_prix_objet_source}{par num titre,titre}{extension=declinaison}>#ENV{id_evenement}
+	<input type="radio" name="id_objet_prix[#ENV{id_evenement}]"
 		class="radio evenement declinaison"
-		id="id_objet_prix[_(#ID_EVENEMENT)][_(#ID_PRIX_OBJET)]"
-		value="#ID_PRIX_OBJET"
-		[(#ID_PRIX_OBJET|in_array{#ENV{id_objet_prix}}|oui) checked="checked" ]/>
-	<label for="id_objet_prix[_(#ID_EVENEMENT)][_(#ID_PRIX_OBJET)]">#TITRE[
-		: <strong data-prix="#ID_PRIX_OBJET">(#GET{prix})</strong>]
+		id="id_objet_prix[_(#ENV{id_evenement})][_(#ID_PRIX_OBJET_SOURCE)]"
+		value="#ID_PRIX_OBJET_SOURCE"
+		[(#ID_PRIX_OBJET_SOURCE|in_array{#ENV{id_objet_prix}}|oui) checked="checked" ]/>
+	<label for="id_objet_prix[_(#ENV{id_evenement})][_(#ID_PRIX_OBJET_SOURCE)]">#TITRE[
+		: <strong data-prix="#ID_PRIX_OBJET_SOURCE">(#GET{prix})</strong>]
 	</label>
 	</BOUCLE_decl>
 </div>
@@ -16,11 +17,11 @@
 <div class="choix">
 	<input type="radio" name="id_objet_prix[#ID_EVENEMENT]"
 		class="radio evenement declinaison"
-		id="id_objet_prix[_(#ID_EVENEMENT)][_(#ID_PRIX_OBJET)]"
-		value="#ID_PRIX_OBJET"
-		[(#ID_PRIX_OBJET|in_array{#ENV{id_objet_prix}}|oui) checked="checked" ]/>
-	<label for="id_objet_prix[_(#ID_EVENEMENT)][_(#ID_PRIX_OBJET)]">
-		[ <strong data-prix="#ID_PRIX_OBJET">(#GET{prix})</strong>]
+		id="id_objet_prix[_(#ID_EVENEMENT)][_(#ID_PRIX_OBJET_SOURCE)]"
+		value="#ID_PRIX_OBJET_SOURCE"
+		[(#ID_PRIX_OBJET_SOURCE|in_array{#ENV{id_objet_prix}}|oui) checked="checked" ]/>
+	<label for="id_objet_prix[_(#ID_EVENEMENT)][_(#ID_PRIX_OBJET_SOURCE)]">
+		[ <strong data-prix="#ID_PRIX_OBJET_SOURCE">(#GET{prix})</strong>]
 	</label>
 </div>
 <//B_decl>
