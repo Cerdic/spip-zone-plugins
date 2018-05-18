@@ -19,7 +19,7 @@ if (!defined('_EMOGRIFIER_CSS')) {
 
 function filtre_emogrifier($html, $fichier_css = _EMOGRIFIER_CSS) {
 
-  include_spip('lib/emogrifier/Classes/Emogrifier');
+  include_spip('lib/emogrifier/Emogrifier');
 
   $fichiers = explode(',', $fichier_css);
 
