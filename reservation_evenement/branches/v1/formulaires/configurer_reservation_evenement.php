@@ -435,4 +435,4 @@ function formulaires_configurer_reservation_evenement_saisies_dist() {
 		)
 	);
 }
-?>
+

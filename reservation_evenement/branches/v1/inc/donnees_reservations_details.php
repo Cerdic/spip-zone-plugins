@@ -11,7 +11,6 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 		// Les données de l'évènenement
 
 		$evenement = sql_fetsel('*', 'spip_evenements', 'id_evenement=' . $id_evenement);
-
 		$date_debut = $evenement['date_debut'];
 		if (!$date_fin = sql_getfetsel('date_fin', 'spip_evenements', 'id_evenement_source=' . $id_evenement, '', 'date_debut DESC'))
 			$date_fin = $evenement['date_fin'];
@@ -43,8 +42,8 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 
 		$set['quantite'] = _request('quantite') ? _request('quantite') : 1;
 		if (is_array($set['quantite']) and isset($set['quantite'][$id_evenement]))
-			$set['quantite'] = ($set['quantite'][$id_evenement] > 0) ? 
-				$set['quantite'][$id_evenement] : 
+			$set['quantite'] = ($set['quantite'][$id_evenement] > 0) ?
+				$set['quantite'][$id_evenement] :
 				1;
 
 		$quantite = $set['quantite'];
@@ -60,20 +59,19 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 				// si le plugin déclinaison produit (https://plugins.spip.net/declinaisons.html)
 				// est active il peut y avoir plusieurs prix par évenement
 				if (test_plugin_actif('declinaisons')) {
-					$id_prix = isset($set['id_prix_objet']) ? 
-						$set['id_prix_objet'] : 
+					$id_prix = isset($set['id_prix_objet']) ?
+						$set['id_prix_objet'] :
 						$reservations_details['id_prix_objet'];
-					$p = sql_fetsel(
-							'prix_ht,id_prix_objet,id_declinaison,code_devise,taxe',
-							'spip_prix_objets', 'id_prix_objet=' . $id_prix);
-					if ($p['id_declinaison'] > 0)
-						$titre = extraire_multi(
-								supprimer_numero(
-										sql_getfetsel(
-												'titre',
-												'spip_declinaisons',
-												'id_declinaison=' . $p['id_declinaison'])));
-						$set['descriptif'] .= ' - ' . $titre;
+
+				//les déclinaisons
+
+						$p = sql_fetsel(
+							'titre,id_prix_objet',
+							'spip_prix_objets',
+							'id_prix_objet=' . $id_prix);
+
+						$set['descriptif'] .= ' - ' . $p['titre'];
+
 				}
 				// Sinon on cherche d'abord le prix attaché
 				else {
@@ -85,15 +83,19 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 				if (isset($p)) {
 					$prix_ht = $quantite * $fonction_prix_ht('prix_objet', $p['id_prix_objet']);
 					$prix = $quantite * $fonction_prix('prix_objet', $p['id_prix_objet']);
-					if ($prix_ht)
+					if ($prix_ht) {
 						$taxe = $p['taxe'];
+					}
+
 					$set['prix_ht'] = $prix_ht;
 					$set['prix'] = $prix;
 					$set['taxe'] = $taxe;
 					$set['id_prix_objet'] = $p['id_prix_objet'];
+
 					// Si pas de devise fournit par le contexte, on prend celle de prix_objets
-					if (!isset($set['devise']))
+					if (!isset($set['devise'])) {
 						$set['devise'] = $p['code_devise'];
+					}
 				}
 			}
 			// Sinon voir s'il y a un champ prix dans la table evenement
@@ -149,10 +151,20 @@ function etablir_prix($id, $objet, $datas, $set, $quantite) {
  * @return array Les données du prix.
  */
 function prix_attache($id_evenement, $id_article, $id_evenement_source) {
+
 	// Etablir le prix de l'événement sinon de l'article.
-	if (!$p = sql_fetsel('prix_ht,prix,id_prix_objet,code_devise,taxe', 'spip_prix_objets', 'objet="evenement" AND id_objet=' . $id_evenement)) {
-		if (!$p = sql_fetsel('prix_ht,prix,id_prix_objet,code_devise,taxe', 'spip_prix_objets', 'objet="evenement" AND id_objet=' . $id_evenement_source)) {
-			$p = sql_fetsel('prix_ht,prix,id_prix_objet,code_devise,taxe', 'spip_prix_objets', 'objet="article" AND id_objet=' . $id_article);
+	if (!$p = sql_fetsel(
+		'prix_ht,prix,id_prix_objet,code_devise,taxe',
+		'spip_prix_objets',
+		'id_prix_objet_source=0 AND objet="evenement" AND id_objet=' . $id_evenement)) {
+		if (!$p = sql_fetsel(
+			'prix_ht,prix,id_prix_objet,code_devise,taxe',
+			'spip_prix_objets',
+			'id_prix_objet_source=0 AND objet="evenement" AND id_objet=' . $id_evenement_source)) {
+			$p = sql_fetsel(
+				'prix_ht,prix,id_prix_objet,code_devise,taxe',
+				'spip_prix_objets',
+				'id_prix_objet_source=0 AND objet="article" AND id_objet=' . $id_article);
 		}
 	}
 	return $p;
