@@ -27,7 +27,11 @@ function formulaires_prix_charger_dist($id_objet, $objet = 'article') {
 	}
 
 	if ($id_objet) {
-		$d = sql_select('*', 'spip_prix_objets', 'id_objet IN(' . $id_objet . ') AND objet =' . sql_quote($objet));
+		$d = sql_select(
+			'*',
+			'spip_prix_objets',
+			'id_prix_objet_source = 0 AND id_objet IN(' . $id_objet . ') AND objet =' . sql_quote($objet)
+		);
 	}
 
 	// établit les devises diponible moins ceux déjà utilisés
@@ -55,44 +59,33 @@ function formulaires_prix_charger_dist($id_objet, $objet = 'article') {
 
 	// Inclure les extensions.
 	$valeurs['_saisies_extras'] = prix_objets_extensions_declaration($valeurs);
-	$trouver_table = charger_fonction('trouver_table', 'base');
-	$decription_table = $trouver_table($table);
-	$extensions = array();
+	$extensions = array_keys($valeurs['_saisies_extras']);
 	$saisies = array();
 
 	foreach ($valeurs['_saisies_extras'] as $s) {
 		$saisies = array_merge($saisies, $s);
 		foreach (saisies_lister_par_nom($s) as $nom => $definition) {
 			$valeurs[$nom] = _request($nom);
-			$objet = $definition['objet'];
-			$extensions[] = $objet;
-
-			// Assurer que un champ d'identifiant de l'extension existe, sinon l'ajouter.
-			if ($identifiant_extension = id_table_objet($objet) and
-					!isset($decription_table['field'][$identifiant_extension])
-					) {
-				sql_alter("TABLE $table ADD $identifiant_extension bigint(21) NOT NULL");
-
-				// Vide le chache des déscriptions des tables.
-				$trouver_table('');
-			}
 		}
 	}
 
 	// Déclarer les extensions
 	if (count($extensions) > 0) {
-		$saisie = array(
+
+		$valeurs['extensions'] = _request('extensions');
+
+		$valeurs['_saisies_extras'] = array_merge(
+			$saisies,
+			array(
 				array(
-				'saisie' => 'hidden',
-				'options' => array(
-					'nom' => 'extensions',
-					'defaut' => implode(',', $extensions),
+					'saisie' => 'hidden',
+					'options' => array(
+						'nom' => 'extensions',
+						'defaut' => implode(',', $extensions),
+					)
 				)
 			)
 		);
-		$valeurs['extensions'] = _request('extensions');
-
-		$valeurs['_saisies_extras'] = array_merge($saisies, $saisie);
 	}
 
 
@@ -127,12 +120,13 @@ function formulaires_prix_traiter_dist($id_objet, $objet = 'article') {
 		$extensions = array(0 => $extensions);
 	}
 
+	// Les infos des extensions
 	$titre_secondaire = array();
 	$valeurs_extensions = array();
 	foreach($extensions as $extension) {
 		if ($id_extension = _request('id_prix_extension_' . $extension)) {
 			if (!is_array($id_extension)) {
-				$titre = extraire_multi(
+				$titre_secondaire = extraire_multi(
 					supprimer_numero(
 						generer_info_entite(
 							$id_extension,
@@ -141,16 +135,18 @@ function formulaires_prix_traiter_dist($id_objet, $objet = 'article') {
 							)
 						)
 					);
-				$titre_secondaire[] = $titre;
+				$titres_secondaires[] = $titre_secondaire;
 				$valeurs_extensions[] = array(
-					'titre' => $titre,
+					'objet' => $objet,
+					'id_objet' => $id_objet,
+					'titre' => $titre_secondaire,
 					'extension' => $extension,
 					'id_extension' => $id_extension
 				);
 			}
 			else {
 				foreach ($id_extension as $id) {
-					$titre = extraire_multi(
+					$titre_secondaire = extraire_multi(
 						supprimer_numero(
 							generer_info_entite(
 								$id,
@@ -159,9 +155,11 @@ function formulaires_prix_traiter_dist($id_objet, $objet = 'article') {
 								)
 							)
 						);
-					$titre_secondaire[] = $titre;
+					$titres_secondaires[] = $titre_secondaire;
 					$valeurs_extensions[] = array(
-						'titre' => $titre,
+						'objet' => $objet,
+						'id_objet' => $id_objet,
+						'titre' => $titre_secondaire,
 						'extension' => $extension,
 						'id_extension' => $id
 					);
@@ -170,10 +168,10 @@ function formulaires_prix_traiter_dist($id_objet, $objet = 'article') {
 		}
 	}
 
-		$titre_secondaire = implode(' / ', $titre_secondaire);
+	$titres_secondaires = implode(' / ', $titres_secondaires);
 
-		if ($titre_secondaire) {
-			$titre = $titre . ' - ' . $titre_secondaire;
+	if ($titres_secondaires) {
+		$titre = $titre . ' - ' . $titres_secondaires;
 		}
 
 	// On inscrit dans la bd
@@ -187,12 +185,21 @@ function formulaires_prix_traiter_dist($id_objet, $objet = 'article') {
 			'prix_ht' => 0
 		);
 
-	if ($ttc = _request('taxes_inclus'))
+	if ($ttc = _request('taxes_inclus')) {
 		$valeurs['prix'] = $prix;
-	else
+	}
+	else {
 		$valeurs['prix_ht'] = $prix;
+	}
 
-	$result = sql_insertq('spip_prix_objets', $valeurs);
+	// Enregistrement du prix
+	$id_prix_objet = sql_insertq('spip_prix_objets', $valeurs);
+
+	// Enregistrement des extensions
+	foreach($valeurs_extensions as $valeur_extension) {
+		$valeur_extension['id_prix_objet_source'] = $id_prix_objet;
+		sql_insertq('spip_prix_objets', $valeur_extension);
+	}
 
 	// Ivalider le cache
 	include_spip('inc/invalideur');
@@ -200,5 +207,3 @@ function formulaires_prix_traiter_dist($id_objet, $objet = 'article') {
 
 	return $valeur['message_ok'] = true;
 }
-
-?>

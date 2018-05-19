@@ -61,9 +61,10 @@ function prix_objets_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter','TABLE spip_prix_objets CHANGE prix prix decimal(15,2) NOT NULL DEFAULT "0.00"'),
 		array('sql_alter','TABLE spip_prix_objets CHANGE prix_ht prix_ht decimal(15,2) NOT NULL DEFAULT "0.00"'),
 	);
-	$maj['2.0.3']  = array(
+	$maj['2.0.0']  = array(
 		array('maj_tables', array('spip_prix_objets')),
-		array('sql_alter','TABLE spip_prix_objets ADD INDEX `id_objet` (`objet,id_extension,extension`)'),
+		array('sql_alter','TABLE spip_prix_objets DROP INDEX id_objet'),
+		array('sql_alter','TABLE spip_prix_objets ADD INDEX `id_objet` (`id_objet`,`id_prix_objet_source`,`objet`,`id_extension`,`extension`)'),
 		array('po_upgrade',$version_cible),
 	);
 
