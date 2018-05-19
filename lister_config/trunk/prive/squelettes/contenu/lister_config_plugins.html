@@ -6,7 +6,7 @@
 <div class="nettoyeur"></div>
 
 [(#SET{config, #ARRAY})]
-<BOUCLE_actif (PLUGINS paquets) {tout} {actif=='oui'}>[(#SET{chemin, configurer_#PREFIXE|strtolower})]
+<BOUCLE_actif (PLUGINS paquets) {tout}{prefixe != 'couteau_suisse'}{actif=='oui'}>[(#SET{chemin, configurer_#PREFIXE|strtolower})]
 [(#GET{chemin}|tester_url_ecrire|oui)[(#SET{config, #GET{config}|push{#PREFIXE}})] ]
 </BOUCLE_actif>
 

@@ -1,5 +1,5 @@
 [(#SET{actif, #ARRAY})]
-<BOUCLE_actif (PLUGINS paquets) {tout} {actif=='oui'}>[(#SET{chemin, configurer_#PREFIXE|strtolower})]
+<BOUCLE_actif (PLUGINS paquets){prefixe != 'couteau_suisse'}{tout} {actif=='oui'}>[(#SET{chemin, configurer_#PREFIXE|strtolower})]
 [(#GET{chemin}|tester_url_ecrire|oui)[(#SET{actif, #GET{actif}|push{#PREFIXE}})] ]
 </BOUCLE_actif>
 
