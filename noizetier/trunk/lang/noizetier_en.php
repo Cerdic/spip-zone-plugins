@@ -71,7 +71,7 @@ You can choose a new identifier or suffix the reference identifier as follows:
 	'formulaire_liste_compos_config' => 'This configuration file defines the following Nuts Manager compositions:',
 	'formulaire_liste_pages_config' => 'This configuration file defines
 nuts on the following pages:',
-	'formulaire_modifier_composition' => 'Edit this composition:',
+	'formulaire_modifier_composition' => 'Edit this composition:', # MODIF
 	'formulaire_modifier_composition_heritages' => 'Edit the heritages', # MODIF
 	'formulaire_modifier_noisette' => 'Edit this nut',
 	'formulaire_modifier_page' => 'Edit this page', # MODIF
