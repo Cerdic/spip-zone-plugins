@@ -107,6 +107,57 @@ function rang_creer_champs ($objets) {
 	}
 }
 
+/**
+ * Trouver l'objet qui correspond au squelette de liste de l'espace privé passé en argument sur le même modele que trouver_objet_exec()
+ * 
+ * @see trouver_objet_exec
+ * @param string $squelette
+ * 		Chemin d'un squelette de liste de l'admin (prive/objets/liste/patates)
+ * @return array
+ * 		Retourne un tableau avec les infos de l'objet trouvé, sinon false
+ **/
+function rang_trouver_objet_liste($squelette) {
+	static $objets_listes = array();
+	
+	if (!isset($objets_listes[$squelette])) {
+		include_spip('base/objets');
+		$objets_listes[$squelette] = false;
+		
+		if ($squelette and strpos($squelette, 'prive/objets/liste/') === 0) {
+			$exceptions = pipeline(
+				'rang_trouver_objet_liste',
+				array(
+					'prive/objets/liste/mots-admin' => 'mot',
+				)
+			);
+			
+			// Soit on trouve l'objet dans la liste explicite
+			if (isset($exceptions[$squelette])) {
+				$objet = $exceptions[$squelette];
+			}
+			else {
+				$objet = str_replace('prive/objets/liste/', '', $squelette);
+			}
+			
+			// Si on a un objet et qu'il est dans les objets connus de SPIP
+			if (
+				$objet
+				and $table_objet_sql = table_objet_sql($objet)
+				and $objets = lister_tables_objets_sql()
+				and isset($objets[$table_objet_sql])
+			) {
+				$objets_listes[$squelette] = array(
+					'objet' => objet_type($objet),
+					'table_objet_sql' => $table_objet_sql,
+					'table_objet' => table_objet($objet),
+					'cle_objet' => id_table_objet($objet),
+				);
+			}
+		}
+	}
+	
+	return $objets_listes[$squelette];
+}
 
 /**
  * Construction, a partir des objets selectionnes, des chemins de sources vers les listes correspondantes
@@ -115,7 +166,6 @@ function rang_creer_champs ($objets) {
  * @return array
  *     les chemins sources vers les listes où activer Rang
  **/
-
 function rang_get_sources() {
 	include_spip('inc/config');
 	// mettre en cache le tableau calculé
@@ -156,28 +206,30 @@ function rang_get_sources() {
  * @return array
  */
 function rang_get_contextes() {
-	static $contextes;
-	if(is_array($contextes)){
-		return $contextes;
-	}
-	include_spip('base/objets_parents');
-	$tables = lire_config('rang/objets');
-	$contextes = array();
+	static $contextes = null;
 	
-	foreach ($tables as $table) {
-		// le nom de l'objet au pluriel
-		$contextes[] = table_objet($table);
-		// si l'objet a un parent, on ajoute le nom de cet objet
-		$info_parent = type_objet_info_parent(objet_type($table));
-		if (isset($info_parent['type']) && $info_parent['type']) {
-			$contextes[] = $info_parent['type'];
+	if (!is_array($contextes)) {
+		include_spip('base/objets_parents');
+		
+		$tables = lire_config('rang/objets');
+		$contextes = array();
+		
+		foreach ($tables as $table) {
+			// le nom de l'objet au pluriel
+			$contextes[] = table_objet($table);
+			// si l'objet a un parent, on ajoute le nom de cet objet
+			$info_parent = type_objet_info_parent(objet_type($table));
+			if (isset($info_parent['type']) and $info_parent['type']) {
+				$contextes[] = $info_parent['type'];
+			}
+			if($table == 'spip_mots'){
+				$contextes[] = 'groupe_mots';
+			}
 		}
-		if($table=='spip_mots'){
-			$contextes[] = 'groupe_mots';
-		}
+		// vérifier si des plugins déclarent des contextes spécifiques
+		$contextes = pipeline('rang_declarer_contexte', $contextes);
 	}
-	// vérifier si des plugins déclarent des contextes spécifiques
-	$contextes = pipeline('rang_declarer_contexte',$contextes);
+	
 	return $contextes;
 }
 
