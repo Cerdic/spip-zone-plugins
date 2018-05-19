@@ -42,7 +42,7 @@ function declinaisons_shop_objets($flux) {
  */
 function declinaisons_prix_objets_extensions($flux) {
 
-	$flux['data'] = array (
+	$flux['data']['declinaison'] = array (
 		array(
 			'saisie' => 'declinaisons',
 			'options' => array(

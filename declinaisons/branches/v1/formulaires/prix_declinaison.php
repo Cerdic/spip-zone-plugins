@@ -14,12 +14,15 @@ function formulaires_prix_declinaison_charger_dist($id_objet, $objet = 'article'
 	$devises_choisis = array();
 	$prix_choisis = array();
 	$declinaisons_choisis = array();
-	$d = sql_select('code_devise,objet,id_objet,prix_ht,id_prix_objet,id_declinaison', 'spip_prix_objets', 'id_objet=' . $id_objet . ' AND objet =' . sql_quote($objet));
+	$d = sql_select(
+		'code_devise,objet,id_objet,prix_ht,id_prix_objet,extension,id_extension',
+		'spip_prix_objets',
+		'id_prix_objet_source=0 AND id_objet=' . $id_objet . ' AND objet =' . sql_quote($objet)
+	);
 
 	// établit les devises diponible moins ceux déjà utilisés
 	while ($row = sql_fetch($d)) {
-		// $devises_choisis[$row['code_devise']] = $row['code_devise'];
-		$declinaisons_choisis[$row['id_declinaison']] = $row['id_declinaison'];
+		$declinaisons_choisis[$row['id_declinaison']] = $row['id_extension'];
 		$prix_choisis[] = $row;
 	}
 
