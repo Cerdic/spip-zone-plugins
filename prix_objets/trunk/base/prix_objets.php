@@ -82,7 +82,8 @@ function po_upgrade($version_cible) {
 										supprimer_numero(
 												generer_info_entite(
 														$data[$identifiant_extension],
-														$extension, 'titre', '*'))),
+														$extension,
+														'titre', '*'))),
 								'prix' => $data['prix_ht']
 							));
 				}
