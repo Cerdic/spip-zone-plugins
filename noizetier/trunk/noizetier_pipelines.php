@@ -54,7 +54,7 @@ function noizetier_recuperer_fond($flux) {
 						: '';
 					// Si une composition est définie et si elle n'est pas déjà dans le fond, on l'ajoute au fond
 					// sauf s'il s'agit d'une page de type page (les squelettes page.html assurant la redirection)
-					if ($composition != '' and noizetier_page_composition($page) == '' and noizetier_page_type($page) != 'page') {
+					if ($composition != '' and noizetier_page_extraire_composition($page) == '' and noizetier_page_extraire_type($page) != 'page') {
 						$page .= '-'.$composition;
 					}
 

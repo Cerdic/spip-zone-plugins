@@ -65,8 +65,8 @@ function noizetier_conteneur_composer($page_ou_objet, $bloc, $noisette=array()) 
  *
  * @api
  *
- * @uses noizetier_page_type()
- * @uses noizetier_page_composition()
+ * @uses noizetier_page_extraire_type()
+ * @uses noizetier_page_extraire_composition()
  * @uses type_noisette_localiser()
  *
  * @param string $id_conteneur
@@ -92,8 +92,8 @@ function noizetier_conteneur_decomposer($id_conteneur) {
 		$conteneur['page'] = $page;
 		// -- Type et composition
 		include_spip('inc/noizetier_page');
-		$conteneur['type'] = noizetier_page_type($conteneur['page']);
-		$conteneur['composition'] = noizetier_page_composition($conteneur['page']);
+		$conteneur['type'] = noizetier_page_extraire_type($conteneur['page']);
+		$conteneur['composition'] = noizetier_page_extraire_composition($conteneur['page']);
 	} else {
 		if ($elements[1] == 'noisette') {
 			// C'est une noisette

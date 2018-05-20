@@ -188,7 +188,7 @@ function calculer_infos_page($page, $information = '') {
 		$retour = true;
 
 		// Détermination du répertoire par défaut
-		$repertoire = noizetier_page_repertoire();
+		$repertoire = noizetier_page_initialiser_dossier();
 
 		// Récupération du md5 enregistré en base de données
 		$from = 'spip_noizetier_pages';
@@ -196,7 +196,7 @@ function calculer_infos_page($page, $information = '') {
 		$md5_enregistre = sql_getfetsel('signature', $from, $where);
 
 		if ($md5_enregistre) {
-			// On recherche d'abord le fichier YAML et sinon le fichier XML pou compatibilité ascendante.
+			// On recherche d'abord le fichier YAML et sinon le fichier XML pour la compatibilité ascendante.
 			if (($fichier = find_in_path("${repertoire}${page}.yaml"))
 			or ($fichier = find_in_path("${repertoire}${page}.xml"))) {
 				$md5 = md5_file($fichier);
@@ -214,8 +214,8 @@ function calculer_infos_page($page, $information = '') {
 		);
 
 		// Acquisition du type et de la composition éventuelle.
-		$type = noizetier_page_type($page);
-		$composition = noizetier_page_composition($page);
+		$type = noizetier_page_extraire_type($page);
+		$composition = noizetier_page_extraire_composition($page);
 
 		// Les compteurs de types de noisette d'une page sont calculés par une lecture de la table 'spip_types_noisettes'.
 		$from = array('spip_types_noisettes');

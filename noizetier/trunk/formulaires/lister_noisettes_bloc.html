@@ -82,29 +82,56 @@
 <script type="text/javascript">
 /*<!\[CDATA\[*/
 	[(#REM) <!-- Autoriser le tri des noisettes du bloc -->]
-	jQuery('ul.liste-noisettes-bloc').sortable({
-		items: 'li.noisette',
-		axis: 'y',
-		opacity: 0.5,
-		connectWith: 'ul.liste-noisettes-bloc',
-		forcePlaceholderSize: true,
-		cursor: 'move',
-		update: function(event, ui) {
-			form = $(this).closest('form');
-			form.submit();
-		}
-	});
+	// jQuery('ul.liste-noisettes-bloc').sortable({
+	// 	items: 'li.noisette',
+	// 	axis: 'y',
+	// 	opacity: 0.5,
+	// 	connectWith: 'ul.liste-noisettes-bloc',
+	// 	forcePlaceholderSize: true,
+	// 	cursor: 'move',
+	// 	update: function(event, ui) {
+	// 		form = $(this).closest('form');
+	// 		form.submit();
+	// 	}
+	// });
 
-	[(#REM) <!-- Affichage ou effacement des boutons d'actions de chaque page -->]
-	$(function(){
-		$('.item.noisette .edition a:not(.visible)').hide();
-		$('.item.noisette')
-			.hover(
-				function(){
-					$(this).find('.edition a').show();
-				},
-				function(){
-					$(this).find('.edition a:not(.visible)').hide();
+	[(#REM) <!-- Affichage du menu des actions de chaque noisette -->]
+	$(function() {
+		function afficherMenu (bouton) {
+			$(bouton).parents('ul').children('li').children('ul').addClass('visible');
+		}
+
+		function masquerMenu (bouton) {
+			$(bouton).parents('ul').children('li').children('ul').removeClass('visible');
+		}
+
+		function toggleMenu (bouton) {
+			$(bouton).parents('ul').children('li').children('ul').toggleClass('visible');
+		}
+
+		$('a.bouton-edition')
+			// .focusin(
+			// 	function() {
+			// 		afficherMenu(this);
+			// 	}
+			// )
+			// .focusout(
+			// 	function() {
+			// 		masquerMenu(this);
+			// 	}
+			// )
+			// .hover(
+			// 	function() {
+			// 		afficherMenu(this);
+			// 	},
+			// 	function() {
+			// 		masquerMenu(this);
+			// 	}
+			// )
+			.click(
+				function(event) {
+					event.preventDefault();
+					toggleMenu(this);
 				}
 			);
 	});

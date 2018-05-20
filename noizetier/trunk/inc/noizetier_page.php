@@ -27,7 +27,7 @@ function noizetier_page_charger($recharger = false) {
 	$options['blocs_defaut'] = noizetier_bloc_defaut();
 
 	// Choisir le bon répertoire des pages
-	$options['repertoire_pages'] = noizetier_page_repertoire();
+	$options['repertoire_pages'] = noizetier_page_initialiser_dossier();
 
 	// Initialiser le contexte de rechargement
 	// TODO : en attente de voir si on rajoute un var_mode=vider_noizetier
@@ -56,7 +56,7 @@ function noizetier_page_charger($recharger = false) {
 		foreach ($fichiers as $_squelette => $_chemin) {
 			$page = basename($_squelette, '.html');
 			$dossier = dirname($_chemin);
-			$est_composition = noizetier_page_est_composition($page);
+			$est_composition = (noizetier_page_extraire_composition($page) == '');
 			// Exclure certaines pages :
 			// -- celles du privé situes dans prive/contenu
 			// -- page liée au plugin Zpip en v1
@@ -248,10 +248,12 @@ function noizetier_page_lister_blocs($page, $blocs_exclus = array()) {
  * 		- soit l'identifiant complet de la page,
  * 		- soit le mot précédent le tiret dans le cas d'une composition.
  */
-function noizetier_page_type($page) {
-	$type = explode('-', $page, 2);
+function noizetier_page_extraire_type($page) {
 
-	return $type[0];
+	$type = explode('-', $page, 2);
+	$type = $type[0];
+
+	return $type;
 }
 
 /**
@@ -266,31 +268,12 @@ function noizetier_page_type($page) {
  *      La composition de la page choisie, à savoir, le mot suivant le tiret,
  * 		ou la chaine vide sinon.
  */
-function noizetier_page_composition($page) {
+function noizetier_page_extraire_composition($page) {
+
 	$composition = explode('-', $page, 2);
 	$composition = isset($composition[1]) ? $composition[1] : '';
 
 	return $composition;
-}
-
-/**
- * Détermine, à partir de son identifiant, si la page est une composition.
- *
- * @api
- *
- * @param string $page
- * 		L'identifiant de la page.
- *
- * @return boolean
- *      `true` si la page est une composition, `false` sinon.
- */
-function noizetier_page_est_composition($page) {
-	$est_composition = false;
-	if (strpos($page, '-') !== false) {
-		$est_composition = true;
-	}
-
-	return $est_composition;
 }
 
 /**
@@ -327,7 +310,7 @@ function noizetier_page_composition_activee($type) {
  * @return string
  * 		Le répertoire des pages sous la forme dossier/.
  */
-function noizetier_page_repertoire() {
+function noizetier_page_initialiser_dossier() {
 
 	if (defined('_NOIZETIER_REPERTOIRE_PAGES')) {
 		$repertoire_pages = _NOIZETIER_REPERTOIRE_PAGES;
@@ -366,8 +349,8 @@ function noizetier_page_compter_noisettes($page) {
 		// -- Construction du where identifiant précisément le type et la composition de la page
 		$where = array(
 			'plugin=' . sql_quote('noizetier'),
-			'type=' . sql_quote(noizetier_page_type($page)),
-			'composition=' . sql_quote(noizetier_page_composition($page))
+			'type=' . sql_quote(noizetier_page_extraire_type($page)),
+			'composition=' . sql_quote(noizetier_page_extraire_composition($page))
 		);
 		$group = array('bloc');
 		$blocs_non_vides = sql_allfetsel($select, $from, $where, $group);
@@ -389,7 +372,7 @@ function noizetier_page_compter_noisettes($page) {
  *
  * @internal
  *
- * @uses noizetier_page_repertoire()
+ * @uses noizetier_page_initialiser_dossier()
  * @uses noizetier_bloc_defaut()
  *
  * @param       $page
@@ -404,7 +387,7 @@ function page_phraser_fichier($page, $options = array()) {
 
 	// Choisir le bon répertoire des pages
 	if (empty($options['repertoire_pages'])) {
-		$options['repertoire_pages'] = noizetier_page_repertoire();
+		$options['repertoire_pages'] = noizetier_page_initialiser_dossier();
 	}
 
 	// Initialiser les blocs par défaut

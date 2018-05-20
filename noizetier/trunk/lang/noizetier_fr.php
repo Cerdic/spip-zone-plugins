@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'formulaire_ajouter_noisette' => 'Ajouter une noisette',
 	'formulaire_ajouter_noisette_bloc' => 'Ajouter une noisette au bloc',
-	'formulaire_ajouter_noisette_conteneur' => 'Ajouter une noisette à cette noisette conteneur',
+	'formulaire_ajouter_noisette_conteneur' => 'Ajouter une noisette au conteneur',
 	'formulaire_blocs_exclus' => 'Blocs à exclure',
 	'formulaire_composition' => 'Identifiant de composition',
 	'formulaire_composition_erreur' => 'Requête non aboutie pour la composition',
@@ -110,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_peuplement' => 'Copier les noisettes de la page source « @page@ »',
 	'formulaire_supprimer_noisette' => 'Supprimer cette noisette',
 	'formulaire_supprimer_noisettes_bloc' => 'Supprimer les noisettes du bloc',
-	'formulaire_supprimer_noisettes_noisette' => 'Supprimer les noisettes incluses dans la noisette conteneur',
+	'formulaire_supprimer_noisettes_noisette' => 'Supprimer les noisettes du conteneur',
 	'formulaire_supprimer_noisettes_page' => 'Supprimer toutes les noisettes',
 	'formulaire_supprimer_page' => 'Supprimer cette composition',
 	'formulaire_type' => 'Type de page',
