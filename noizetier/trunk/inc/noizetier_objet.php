@@ -51,7 +51,11 @@ function noizetier_objet_lire($type_objet, $id_objet, $information = '') {
 		// On récupère le nombre de noisette déjà configurées dans l'objet.
 		$description['noisettes'] = 0;
 		$from = array('spip_noisettes');
-		$where = array('objet=' . sql_quote($type_objet), 'id_objet=' . intval($id_objet));
+		$where = array(
+			'plugin=' . sql_quote('noizetier'),
+			'objet=' . sql_quote($type_objet),
+			'id_objet=' . intval($id_objet)
+		);
 		if ($noisettes = sql_countsel($from, $where)) {
 			$description['noisettes'] = $noisettes;
 		}
@@ -99,7 +103,10 @@ function noizetier_objet_repertorier($filtres = array()) {
 		// On récupère le ou les objets ayant des noisettes dans la table spip_noisettes.
 		$from = array('spip_noisettes');
 		$select = array('objet', 'id_objet', "count(type_noisette) as 'noisettes'");
-		$where = array('id_objet>0');
+		$where = array(
+			'plugin=' . sql_quote('noizetier'),
+			'id_objet>0'
+		);
 		$group = array('objet', 'id_objet');
 		$objets_configures = sql_allfetsel($select, $from, $where, $group);
 		if ($objets_configures) {
