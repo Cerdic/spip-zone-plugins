@@ -43,7 +43,7 @@ function noizetier_conteneur_composer($page_ou_objet, $bloc, $noisette=array()) 
 			// Le conteneur est un objet.
 			$conteneur['objet'] = $page_ou_objet['objet'];
 			$conteneur['id_objet'] = $page_ou_objet['id_objet'];
-			$conteneur['squelette'] = "${bloc}";
+			$conteneur['squelette'] = "${bloc}/{$page_ou_objet['objet']}";
 		}
 		else {
 			// Le conteneur est une page ou une composition.
@@ -101,6 +101,7 @@ function noizetier_conteneur_decomposer($id_conteneur) {
 			$conteneur['type_noisette'] = $elements[0];
 			$conteneur['id_noisette'] = intval($elements[2]);
 			// -- le squelette
+			// TODO : revoir l'intérêt voire la cohérence de ce champ
 			include_spip('ncore/noizetier');
 			$conteneur['squelette'] = type_noisette_localiser('noizetier', $conteneur['type_noisette']);
 			// -- les éléments du conteneur de la noisette parent utiles pour les autorisations
@@ -124,10 +125,11 @@ function noizetier_conteneur_decomposer($id_conteneur) {
 			// -- le type d'objet et son id
 			$conteneur['objet'] = $elements[1];
 			$conteneur['id_objet'] = $elements[2];
-			// -- le bloc
-			$conteneur['bloc'] = $elements[0];
 			// -- le squelette
-			$conteneur['squelette'] = $conteneur['bloc'] . '/' . $conteneur['objet'];
+			$conteneur['squelette'] = $elements[0];
+			// -- le bloc
+			list($bloc, ) = explode('/', $conteneur['squelette']);
+			$conteneur['bloc'] = $bloc;
 		}
 	}
 
