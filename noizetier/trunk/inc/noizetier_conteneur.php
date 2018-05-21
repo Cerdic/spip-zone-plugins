@@ -79,7 +79,7 @@ function noizetier_conteneur_decomposer($id_conteneur) {
 	$conteneur = array();
 
 	// Construction du tableau associatif propre au noizetier contenant les éléments
-	// d'une conteneur mais aussi les éléments propres au noiZetier comme la page,
+	// d'un conteneur mais aussi les éléments propres au noiZetier comme la page,
 	// la composition, le type, l'objet ou la noisette conteneur.
 	$elements = explode('|', $id_conteneur);
 	if (count($elements) == 1) {
