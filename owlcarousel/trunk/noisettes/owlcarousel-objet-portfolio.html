@@ -73,7 +73,9 @@ Usage:
 </style>
 [(#REM)<!-- Visuel Grand -->]
 <div id="[(#GET{id-carousel})]" class="owl-carousel owl-theme">
-    <BOUCLE_listDocs(DOCUMENTS spip_documents_liens){objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{mode=document}{extension==jpg|png|gif}>
+    <BOUCLE_listDocs(DOCUMENTS spip_documents_liens){objet ?}{id_objet ?}
+                                                  {par rang_lien,num titre, date}
+                                                  {mode=document}{extension==jpg|png|gif}>
     <div class="owl-slide" data-hash="[(#GET{id-carousel})]_#ID_DOCUMENT">
         [(#ENV{caption,oui}|=={oui}|oui)
         <div class="caption[ (#ENV{caption_css})]">[<h3 class="title">(#TITRE)</h3>][<p class="hidden-phone">(#DESCRIPTIF|textebrut)</p>]</div>]
@@ -87,7 +89,9 @@ Usage:
 <B_docs>
 <div class="diapo_vignettes">
     <ul id="list-thumbnails" class="diapo_thumbnails owl-carousel">
-    <BOUCLE_docs(DOCUMENTS spip_documents_liens){objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{mode=document}{extension==jpg|png|gif}>
+    <BOUCLE_docs(DOCUMENTS spip_documents_liens){objet ?}{id_objet ?}
+                                  {par rang_lien,num titre, date}
+                                  {mode=document}{extension==jpg|png|gif}>
         [<li class="owl-slide">
             <a class="diapo_thumbnail[ (#ENV{doc}|=={#ID_DOCUMENT}|oui)active]"
                href="[#(#GET{id-carousel})]_[(#ID_DOCUMENT)]"
@@ -108,12 +112,14 @@ jQuery(function($){
         margin:0,
         items: 1,
         dots: true,[
+        autoHeight:(#ENV{autoHeight, false}),][
         nav:(#ENV{navigation, false}),][
         autoplay: (#ENV{autoplay}),][
         autoplayHoverPause: (#ENV{autoplayHoverPause}),][
         lazyLoad: (#ENV{lazyLoad}),][
         animateIn:'(#ENV{animateIn})',][
         animateOut:'(#ENV{animateOut})',]
+        navText : ["<:owlcarousel:suiv:>","<:owlcarousel:suiv:>"],
         responsive:{
 					0:{
 						items:1
