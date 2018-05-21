@@ -2,7 +2,7 @@
 /**
  * Déclarations relatives à la base de données
  *
- * @plugin     Déclinaisons Prix
+ * @plugin     Prix Objets
  * @copyright  2012 - 2018
  * @author     Rainer Müller
  * @licence    GNU/GPL

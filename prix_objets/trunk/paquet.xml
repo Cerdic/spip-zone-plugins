@@ -1,7 +1,7 @@
 <paquet
 	prefix="prix_objets"
 	categorie="edition"
-	version="2.0.0"
+	version="2.1.0"
 	etat="stable"
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/prix_objets-64.png"
@@ -20,8 +20,9 @@
 
 	<utilise nom="shop" compatibilite="[1.2.0;]" />
 
-	<!-- Déclaration de pipelines -->
+	<!-- Déclaration des pipelines -->
 	<pipeline nom="prix_objets_extensions" action='' />
+	<pipeline nom="prix_par_objet" action='' />
 
 	<!-- Appels des pipelines -->
 	<pipeline nom="autoriser" inclure="prix_objets_autorisations.php" />
