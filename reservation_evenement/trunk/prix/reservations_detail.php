@@ -43,5 +43,3 @@ function prix_reservations_detail_dist($id_reservations_detail) {
 	}
 	return $prix;
 }
-
-?>
