@@ -1,7 +1,7 @@
 <paquet
 	prefix="declinaisons"
 	categorie="communication"
-	version="2.0.1"
+	version="2.0.2"
 	etat="test"
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/declinaisons-64.png"
@@ -23,7 +23,6 @@
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/declinaisons.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/declinaisons.php" />
-	<pipeline nom="declarer_tables_principales" inclure="base/declinaisons.php" />
 	<pipeline nom="shop_objets" inclure="declinaisons_pipelines.php" />
 	<pipeline nom="prix_objets_extensions" inclure="declinaisons_pipelines.php" />
 
