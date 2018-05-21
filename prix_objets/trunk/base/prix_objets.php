@@ -1,13 +1,40 @@
 <?php
+/**
+ * Déclarations relatives à la base de données
+ *
+ * @plugin     Déclinaisons Prix
+ * @copyright  2012 - 2018
+ * @author     Rainer Müller
+ * @licence    GNU/GPL
+ * @package    SPIP\Promotions_commandes\Pipelines
+ */
 if (! defined("_ECRIRE_INC_VERSION"))
 	return;
 
+/**
+ * Déclaration des alias de tables et filtres automatiques de champs
+ *
+ * @pipeline declarer_tables_interfaces
+ * @param array $interfaces
+ *     Déclarations d'interface pour le compilateur
+ * @return array
+ *     Déclarations d'interface pour le compilateur
+ */
 function prix_objets_declarer_tables_interfaces($tables_interfaces) {
 	$tables_interfaces['table_des_tables']['prix_objets'] = 'prix_objets';
 
 	return $tables_interfaces;
 }
 
+/**
+ * Déclaration des tables principales.
+ *
+ * @pipeline declarer_tables_interfaces
+ * @param array $tables_principales
+ *     Déclarations des tables principales pour le compilateur
+ * @return array
+ *     Déclarations des tables principales pour le compilateur
+ */
 function prix_objets_declarer_tables_principales($tables_principales) {
 	$spip_prix_objets = array(
 		"id_prix_objet" => "bigint(21) NOT NULL",
@@ -92,4 +119,3 @@ function po_upgrade($version_cible) {
 		}
 	}
 }
-
