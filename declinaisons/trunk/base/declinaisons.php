@@ -1,6 +1,6 @@
 <?php
 /**
- * Utilisations de pipelines par Déclinaisons Prix
+ * Déclarations relatives à la base de données.
  *
  * @plugin     Déclinaisons Prix
  * @copyright  2012 - 2018
