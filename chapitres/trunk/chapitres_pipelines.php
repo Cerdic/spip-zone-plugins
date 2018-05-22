@@ -54,7 +54,7 @@ function chapitres_affiche_milieu($flux) {
  */
 function chapitres_affiche_enfants($flux) {
 	include_spip('inc/config');
-	$objets = lire_config('chapitres/objets');
+	$objets = lire_config('chapitres/objets', array());
 	
 	if (
 		isset($flux['args']['objet'])
