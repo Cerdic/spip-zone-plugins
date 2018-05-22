@@ -27,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_detecter_lien' => 'Détecter automatiquement les providers (ignorer la liste blanche) ?',
 	'label_embed_auto' => 'Transformer automatiquement les URLs insérées dans le texte ?',
 	'label_endpoint' => 'Endpoint',
+	'label_inserer_head' => 'Le site est lui même provider oembed',
 	'label_maxheight' => 'Hauteur maxi. par défaut (px)',
 	'label_maxwidth' => 'Largeur maxi. par défaut (px)',
 	'label_scheme' => 'Scheme',

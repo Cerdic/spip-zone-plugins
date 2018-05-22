@@ -26,6 +26,10 @@ function oembed_insert_head_css($head) {
  * @return string
  */
 function oembed_insert_head($head) {
+	if(lire_config('oembed/inserer_head')=='non') {
+		return $head;
+	}
+	
 	$service = 'oembed.api/';
 
 	$ins = '<link rel="alternate" type="application/json+oembed" href="<?php include_spip(\'inc/filtres_mini\');echo parametre_url(url_absolue("'.parametre_url($service, 'format', 'json').'"), "url", url_absolue(self()));?>" />'."\n";
