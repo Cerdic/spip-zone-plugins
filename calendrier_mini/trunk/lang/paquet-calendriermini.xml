@@ -22,6 +22,9 @@
 	<langue code="oc_ni_mis" url="https://trad.spip.net/tradlang_module/paquet-calendriermini?lang_cible=oc_ni_mis" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="sylvain" lien="https://trad.spip.net/auteur/sylvain" />
 	</langue>
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/paquet-calendriermini?lang_cible=pt_br" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
+	</langue>
 	<langue code="ru" url="https://trad.spip.net/tradlang_module/paquet-calendriermini?lang_cible=ru" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="olly" lien="https://trad.spip.net/auteur/olly" />
 	</langue>
