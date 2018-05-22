@@ -12,9 +12,10 @@ function action_corriger_notes() {
 	
 	if ($GLOBALS['auteur_session']['statut'] == '0minirezo') {
 		include_spip('revision_nbsp');
+		include_spip('base/abstract_sql');
 		$id_article = intval(_request('id_article'));
 		$s = spip_query("SELECT texte FROM spip_articles WHERE id_article=$id_article");
-		$t=spip_fetch_array($s);
+		$t = sql_fetch($s);
 		if ($c = notes_automatiques($t['texte'])) {
 			include_spip('inc/modifier');
 			modifier_contenu('article', $id_article,
