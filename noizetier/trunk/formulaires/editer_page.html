@@ -10,9 +10,8 @@
 		<div class="editer-groupe">
 			[(#REM) Le type de page n'est pas éditable car la composition est toujours basée sur une page précise ]
 			[(#SAISIE{input, type_page,
-						label=<:noizetier:formulaire_type:>,
-						readonly=oui,
-						obligatoire=oui,
+				label=<:noizetier:formulaire_type:>,
+				readonly=oui,
 			})]
 
 			[(#REM) L'identifiant de composition n'est éditable que lors d'une création ou d'une duplication de composition ]
@@ -20,10 +19,10 @@
 				#SET{disable, #ENV{edition}|=={modifier}|?{oui, ''}}
 				[(#SET{explication, #ENV{edition}|!={modifier}|?{<:noizetier:formulaire_composition_explication:>, ''}})]
 				[(#SAISIE{input, composition,
-							label=<:noizetier:formulaire_composition:>,
-							explication=#GET{explication},
-							readonly=#GET{disable},
-							obligatoire=oui,
+					label=<:noizetier:formulaire_composition:>,
+					explication=#GET{explication},
+					readonly=#GET{disable},
+					obligatoire=[(#GET{disable}|non)],
 				})]
 			]
 			[(#ENV{composition}|non)<input type="hidden" name="composition" value="#ENV{composition}" />]
@@ -31,17 +30,17 @@
 			[(#REM) Le titre de la composition est obligatoire ]
 			<BOUCLE_est_virtuelle(CONDITION){si #ENV{est_virtuelle}|=={oui}}>
 				[(#SAISIE{input, nom,
-							label=<:noizetier:formulaire_nom:>,
-							explication=<:noizetier:formulaire_nom_explication:>,
-							size=40,
-							obligatoire=oui,
+					label=<:noizetier:formulaire_nom:>,
+					explication=<:noizetier:formulaire_nom_explication:>,
+					size=40,
+					obligatoire=oui,
 				})]
 
 				[(#REM) La description est recommandée mais pas obligatoire ]
 				[(#SAISIE{textarea, description,
-							label=<:noizetier:formulaire_description:>,
-							explication=<:noizetier:formulaire_description_explication:>,
-							rows=3,
+					label=<:noizetier:formulaire_description:>,
+					explication=<:noizetier:formulaire_description_explication:>,
+					rows=3,
 				})]
 
 				#SET{name, icon}

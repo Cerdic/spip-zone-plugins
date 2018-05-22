@@ -40,6 +40,7 @@ function formulaires_editer_page_charger_dist($edition, $page, $redirect = '') {
 		'nom' => '',
 		'description' => '',
 		'icon' => '',
+		'est_virtuelle' => 'oui',
 		'_blocs' => array(),
 		'_blocs_defaut' => array(),
 	);
