@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/devis, env, ajax, sinon=<:devis:info_aucun_devis:>}>
+
+[(#AUTORISER{creer,devis})
+	[(#URL_ECRIRE{devis_edit,new=oui}|icone_verticale{<:devis:icone_creer_devis:>,devis,new,right})]
+]

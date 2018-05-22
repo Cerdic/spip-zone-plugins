@@ -1,0 +1,35 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_devis,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE
+		<input type="hidden" name="id_devis" value="#ENV{id_devis}" />
+		<div class="editer-groupe">
+
+			[(#SAISIE{input, titre, obligatoire=oui,
+				label=<:devis:champ_titre_label:>})]
+
+			[<div class="editer editer_rubrique[ (#ENV**{erreurs/id_parent}|oui)erreur]">
+					<label for="id_parent"><:titre_cadre_interieur_rubrique:></label>[
+					<span class="erreur_message">(#ENV**{erreurs/id_parent})</span>
+					]
+					(#VAL|chercher_rubrique{#ENV{id_devis},#ENV{id_parent},'devis',#ENV{id_secteur},'',0,form_simple})
+			</div>]
+
+
+
+			[(#SAISIE{input, reference, obligatoire=oui,
+				label=<:devis:champ_reference_label:>})]
+
+			[(#SAISIE{textarea, descriptif,
+				label=<:devis:champ_descriptif_label:>})]
+
+		</div>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	]
+</div>
