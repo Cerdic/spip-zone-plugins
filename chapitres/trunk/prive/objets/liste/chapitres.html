@@ -31,9 +31,9 @@
 			<td class="statut">[(#STATUT|puce_statut{chapitre,#ID_CHAPITRE})]</td> 
 			<td class="titre principale">[(#LOGO_CHAPITRE|image_reduire{20,26})]<a href="[(#ID_CHAPITRE|generer_url_entite{chapitre})]" title="<:info_numero_abbreviation|attribut_html:> #ID_CHAPITRE">[(#RANG). ]#TITRE</a></td>
 			[(#ENV{simple}|!={oui}|oui)<td class="date secondaire">[(#DATE|affdate_jourcourt)]</td>]
-			<BOUCLE_compter_enfants (CHAPITRES) {si #ENV{arbo}|!={oui}}{id_parent=#ID_CHAPITRE}{objet?}{id_objet?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}>
-			<td class="sous">#TOTAL_BOUCLE</td>
-			</BOUCLE_compter_enfants>
+			<BOUCLE_compter_enfants (CHAPITRES) {si #ENV{arbo}|!={oui}}{id_parent=#ID_CHAPITRE}{objet?}{id_objet?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?} />
+			[(#ENV{arbo}|!={oui}|oui)<td class="sous">#TOTAL_BOUCLE</td>]
+			<//B_compter_enfants>
 			<td class="id">[(#AUTORISER{modifier,chapitre,#ID_CHAPITRE}|?{
 				<a href="[(#URL_ECRIRE{chapitre_edit,id_chapitre=#ID_CHAPITRE})]">#ID_CHAPITRE</a>,
 				#ID_CHAPITRE
