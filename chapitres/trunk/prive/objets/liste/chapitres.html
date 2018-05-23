@@ -29,7 +29,13 @@
 		#SET{compteur,#GET{compteur}|plus{1}}
 		<tr class="[(#GET{compteur}|alterner{row_odd,row_even})]">
 			<td class="statut">[(#STATUT|puce_statut{chapitre,#ID_CHAPITRE})]</td> 
-			<td class="titre principale">[(#LOGO_CHAPITRE|image_reduire{20,26})]<a href="[(#ID_CHAPITRE|generer_url_entite{chapitre})]" title="<:info_numero_abbreviation|attribut_html:> #ID_CHAPITRE">[(#RANG). ]#TITRE</a></td>
+			<td
+				class="titre principale"
+				data-profondeur="0"
+				[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)data-impasse="true"]
+			>
+				[(#LOGO_CHAPITRE|image_reduire{20,26})]<a href="[(#ID_CHAPITRE|generer_url_entite{chapitre})]" title="<:info_numero_abbreviation|attribut_html:> #ID_CHAPITRE">[(#RANG). ]#TITRE</a>
+			</td>
 			[(#ENV{simple}|!={oui}|oui)<td class="date secondaire">[(#DATE|affdate_jourcourt)]</td>]
 			<BOUCLE_compter_enfants (CHAPITRES) {si #ENV{arbo}|!={oui}}{id_parent=#ID_CHAPITRE}{objet?}{id_objet?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?} />
 			[(#ENV{arbo}|!={oui}|oui)<td class="sous">#TOTAL_BOUCLE</td>]
@@ -45,10 +51,14 @@
 		#SET{compteur,#GET{compteur}|plus{1}}
 		<tr class="[(#GET{compteur}|alterner{row_odd,row_even})]">
 			<td class="statut">[(#STATUT|puce_statut{chapitre,#ID_CHAPITRE})]</td> 
-			<td class="titre principale">
+			<td
+				class="titre principale"
+				data-profondeur="#GET{profondeur}"
+				[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)data-impasse="true"]
+			>
 				[(#LOGO_CHAPITRE|image_reduire{20,26})]
 				<a href="[(#ID_CHAPITRE|generer_url_entite{chapitre})]" title="<:info_numero_abbreviation|attribut_html:> #ID_CHAPITRE">
-					[(#VAL{"→&nbsp;"}|str_repeat{#GET{profondeur}|intval})][(#RANG). ]#TITRE
+					[(#RANG). ]#TITRE
 				</a>
 			</td>
 			[(#ENV{simple}|!={oui}|oui)<td class="date secondaire">[(#DATE|affdate_jourcourt)]</td>]

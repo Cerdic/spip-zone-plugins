@@ -1,0 +1,27 @@
+[(#REM)<style>]
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+#SET{claire,##ENV{couleur_claire,c5e41c}}
+#SET{foncee,##ENV{couleur_foncee,9dba00}}
+
+/* Visualisation de l'arborescence dans les listes de chapitres */
+.liste-objets.chapitres td {
+  border-style: dotted;
+}
+.liste-objets.chapitres td[data-profondeur="0"] {
+  padding-left: 0;
+  font-weight: bold;
+}
+<BOUCLE_profondeurs(DATA){enum 1,6}>
+.liste-objets.chapitres td[data-profondeur="#VALEUR"] {
+  padding-left: [(#VALEUR|plus{1})]em;
+  background-repeat: no-repeat;
+  background-size: 1em auto;
+  background-image: url("#CHEMIN{prive/themes/spip/images/arbo-node.svg}");
+  background-position: [(#VALEUR)]em center;
+}
+.liste-objets.chapitres td[data-profondeur="#VALEUR"][data-impasse] {
+  background-image: url("#CHEMIN{prive/themes/spip/images/arbo-corner.svg}");
+  background-position: [(#VALEUR)]em center;
+}
+</BOUCLE_profondeurs>
