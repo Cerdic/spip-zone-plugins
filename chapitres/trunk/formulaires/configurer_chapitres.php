@@ -17,7 +17,15 @@ function formulaires_configurer_chapitres_saisies_dist() {
 				'defaut' => lire_config('chapitres/objets'),
 			),
 		),
+		array(
+			'saisie' => 'case',
+			'options' => array(
+				'nom' => 'publier_auto',
+				'label' => _T('chapitres:configurer_publier_auto_label'),
+				'label_case' => _T('chapitres:configurer_publier_auto_label_case'),
+			),
+		),
 	);
-	
+
 	return $saisies;
 }

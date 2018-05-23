@@ -111,14 +111,22 @@ function chapitres_afficher_config_objet($flux) {
 }
 
 /**
- * Ajout de contenu sous la fiche d'un objet
+ * Agir avant l'insertion d'un nouvel objet dans la base
  *
+ * => Chapitre : définir le parent
+ * => Chapitre : publier d'office éventuellement
+ * 
  * @pipeline pre_insertion
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
  */
 function chapitres_pre_insertion($flux) {
+
 	if ($flux['args']['table'] == 'spip_chapitres') {
+
+		include_spip('inc/config');
+
+		// 1) Définir le parent
 		// S'il y a un id_parent
 		if ($id_parent = intval($flux['data']['id_parent']) or $id_parent = intval($flux['args']['id_parent'])) {
 			$flux['data']['id_parent'] = $id_parent;
@@ -133,10 +141,17 @@ function chapitres_pre_insertion($flux) {
 			$flux['data']['objet'] = $objet;
 			$flux['data']['id_objet'] = $id_objet;
 		}
-	} 
+
+		// 2) Publier éventuellement
+		if (lire_config('chapitres/publier_auto')) {
+			$flux['data']['statut'] = 'publie';
+		}
+
+	}
 	
 	return $flux;
 }
+
 
 /**
  * Optimiser la base de données
