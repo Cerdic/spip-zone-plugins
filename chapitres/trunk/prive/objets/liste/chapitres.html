@@ -22,6 +22,7 @@
 			[(#ENV{simple}|!={oui}|oui)<th class="date" scope="col">[(#TRI{date,<:date:>,ajax})]</th>]
 			[(#ENV{arbo}|!={oui}|oui)<th class="sous"><:chapitre:titre_chapitres_sous:></th>]
 			<th class="id" scope="col">[(#TRI{id_chapitre,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class="actions" closs="col"></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -44,6 +45,13 @@
 				<a href="[(#URL_ECRIRE{chapitre_edit,id_chapitre=#ID_CHAPITRE})]">#ID_CHAPITRE</a>,
 				#ID_CHAPITRE
 			})]</td>
+			<td class="actions">
+				[(#AUTORISER{creer,chapitre}|oui)
+					<a href="[(#URL_ECRIRE{chapitre_edit,id_parent=#ID_CHAPITRE}|parametre_url{objet,#OBJET}|parametre_url{id_objet,#ID_OBJET}|parametre_url{redirect,#SELF})]" class="icone" title="<:chapitre:icone_ajouter_chapitre_enfant:>">
+						[(#CHEMIN_IMAGE{chapitre-add-16}|balise_img) ]<b><:chapitre:icone_ajouter_chapitre_enfant:></b>
+					</a>
+				]
+			</td>
 		</tr>
 		
 		#SET{profondeur, 1}
@@ -66,6 +74,13 @@
 				<a href="[(#URL_ECRIRE{chapitre_edit,id_chapitre=#ID_CHAPITRE})]">#ID_CHAPITRE</a>,
 				#ID_CHAPITRE
 			})]</td>
+			<td class="actions">
+				[(#AUTORISER{creer,chapitre}|oui)
+					<a href="[(#URL_ECRIRE{chapitre_edit,id_parent=#ID_CHAPITRE}|parametre_url{objet,#OBJET}|parametre_url{id_objet,#ID_OBJET}|parametre_url{redirect,#SELF})]" class="icone" title="<:chapitre:icone_ajouter_chapitre_enfant:>">
+						[(#CHEMIN_IMAGE{chapitre-add-16}|balise_img) ]<b><:chapitre:icone_ajouter_chapitre_enfant:></b>
+					</a>
+				]
+			</td>
 		</tr>
 		
 		#SET{profondeur,#GET{profondeur}|plus{1}}

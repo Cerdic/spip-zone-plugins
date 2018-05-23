@@ -20,6 +20,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_creer_chapitre' => 'Créer un chapitre',
+	'icone_ajouter_chapitre_cousin' => 'Ajouter un chapitre au même niveau',
+	'icone_ajouter_chapitre_enfant' => 'Ajouter un sous-chapitre',
 	'icone_modifier_chapitre' => 'Modifier ce chapitre',
 	'info_1_chapitre' => 'Un chapitre',
 	'info_aucun_chapitre' => 'Aucun chapitre',
