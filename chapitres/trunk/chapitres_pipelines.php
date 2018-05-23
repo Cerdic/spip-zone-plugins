@@ -154,53 +154,6 @@ function chapitres_pre_insertion($flux) {
 
 
 /**
- * Agir après l'enregistrement des données lors de l'édition d'un contenu
- *
- * => Quand on dépublie un chapitre, dépublier aussi tous ses enfants (la branche)
- *
- * @pipeline pre_insertion
- * @param  array $flux Données du pipeline
- * @return array       Données du pipeline
- */
-function chapitres_post_edition($flux) {
-
-	// Si on institue un chapitre
-	if ($flux['args']['action'] == 'instituer'
-		and $flux['args']['table'] == 'spip_chapitres'
-		and $statut = $flux['data']['statut']
-		and $statut_ancien = $flux['args']['statut_ancien']
-		and $id_chapitre = intval($flux['args']['id_objet'])
-	) {
-
-		// Récupérer les statuts de publication
-		include_spip('base/objets');
-		$info_statut = array_shift(objet_info('chapitre', 'statut'));
-		$statuts_publie = explode(',', $info_statut['publie']);
-
-		// Si on dépublie, poser le même statut à toute la branche
-		if (in_array($statut_ancien, $statuts_publie)
-			and !in_array($statut, $statuts_publie)
-			and count($ids_branche = array_map('intval', explode(',', calcul_branche_in_chapitres($id_chapitre))))
-		) {
-			// Enlever le chapitre parent, qui a déjà été institué
-			if (($k = array_search($id_chapitre, $ids_branche)) !== false) {
-				unset($ids_branche[$k]);
-			}
-			// Dépublier
-			sql_updateq(
-				'spip_chapitres',
-				array('statut' => $statut),
-				sql_in('id_chapitre', $ids_branche)
-			);
-		}
-
-	}
-
-	return $flux;
-}
-
-
-/**
  * Optimiser la base de données
  *
  * Supprime les objets à la poubelle.

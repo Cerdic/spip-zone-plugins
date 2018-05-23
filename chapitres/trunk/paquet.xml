@@ -1,7 +1,7 @@
 <paquet
 	prefix="chapitres"
 	categorie="edition"
-	version="1.0.7"
+	version="1.0.6"
 	etat="dev"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/chapitres-64.png"
@@ -27,7 +27,6 @@
 	<pipeline nom="affiche_enfants" inclure="chapitres_pipelines.php" />
 	<pipeline nom="afficher_config_objet" inclure="chapitres_pipelines.php" />
 	<pipeline nom="pre_insertion" inclure="chapitres_pipelines.php" />
-	<pipeline nom="post_edition" inclure="chapitres_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="chapitres_pipelines.php" />
 
 </paquet>
