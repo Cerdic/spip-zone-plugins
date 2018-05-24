@@ -98,6 +98,7 @@ function chapitres_afficher_config_objet($flux) {
 				'objet' => $chapitre['objet'],
 				'id_objet' => $chapitre['id_objet'],
 				'id_parent' => 0,
+				'id_chapitre' => $flux['args']['id'],
 				'arbo' => 'oui',
 				'simple' => 'oui',
 				'titre' => _T('chapitre:titre_plan'),

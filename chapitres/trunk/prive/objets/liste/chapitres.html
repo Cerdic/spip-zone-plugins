@@ -4,6 +4,7 @@
 	id_chapitre,1,
 	points,-1
 }})]
+#SET{enfant,#ENV{id_parent}|ou{#ENV{objet}|=={chapitre}}}
 
 #SET{compteur,0}
 <B_liste_chapitres>
@@ -14,7 +15,7 @@
 	<BOUCLE_total_chapitres (CHAPITRES) {si #ENV{arbo}|=={oui}}{branche #ID_PARENT}{objet?}{id_objet?}{id_mot?}{where?}{statut?}{recherche?}>
 	#SET{total, #TOTAL_BOUCLE}
 	</BOUCLE_total_chapitres>
-	[<caption><strong class="caption">(#ENV*{titre,#GET{total}|singulier_ou_pluriel{chapitre:info_1_chapitre,chapitre:info_nb_chapitres}})</strong></caption>]
+	[<caption><strong class="caption">(#ENV*{titre,#GET{total}|singulier_ou_pluriel{#GET{enfant}|?{chapitre:info_1_chapitre_enfant,chapitre:info_1_chapitre},#GET{enfant}|?{chapitre:info_nb_chapitres_enfants,chapitre:info_nb_chapitres}}})</strong></caption>]
 	<thead>
 		<tr class="first_row">
 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
@@ -28,7 +29,7 @@
 	<tbody>
 	<BOUCLE_liste_chapitres (CHAPITRES) {id_parent?}{objet?}{id_objet?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		#SET{compteur,#GET{compteur}|plus{1}}
-		<tr class="[(#GET{compteur}|alterner{row_odd,row_even})]">
+		<tr class="[(#GET{compteur}|alterner{row_odd,row_even})][ (#EXPOSE{expose})]">
 			<td class="statut">[(#STATUT|puce_statut{chapitre,#ID_CHAPITRE})]</td> 
 			<td
 				class="titre principale"
@@ -57,7 +58,7 @@
 		#SET{profondeur, 1}
 		<BOUCLE_liste_chapitres_enfants (CHAPITRES) {si #ENV{arbo}|=={oui}}{id_parent=#ID_CHAPITRE}{objet?}{id_objet?}{id_mot?}{id_auteur?}{where?}{statut==.*}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}>
 		#SET{compteur,#GET{compteur}|plus{1}}
-		<tr class="[(#GET{compteur}|alterner{row_odd,row_even})]">
+		<tr class="[(#GET{compteur}|alterner{row_odd,row_even})][ (#EXPOSE{expose})]">
 			<td class="statut">[(#STATUT|puce_statut{chapitre,#ID_CHAPITRE})]</td> 
 			<td
 				class="titre principale"

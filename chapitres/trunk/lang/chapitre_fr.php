@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_creer_chapitre' => 'Créer un chapitre',
+	'icone_creer_chapitre_enfant' => 'Créer un sous-chapitre',
 	'icone_ajouter_chapitre_cousin' => 'Ajouter un chapitre au même niveau',
 	'icone_ajouter_chapitre_enfant' => 'Ajouter un sous-chapitre',
 	'icone_modifier_chapitre' => 'Modifier ce chapitre',
@@ -27,6 +28,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_chapitre' => 'Aucun chapitre',
 	'info_chapitres_auteur' => 'Les chapitres de cet auteur',
 	'info_nb_chapitres' => '@nb@ chapitres',
+	'info_1_chapitre_enfant' => 'Un sous-chapitre',
+	'info_aucun_chapitre_enfant' => 'Aucun sous-chapitre',
+	'info_nb_chapitres_enfants' => '@nb@ sous-chapitres',
 
 	// R
 	'retirer_lien_chapitre' => 'Retirer ce chapitre',

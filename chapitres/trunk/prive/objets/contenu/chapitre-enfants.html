@@ -10,10 +10,22 @@
 	#SET{id_parent, #ID_OBJET}
 	#SET{arbo, non}
 ]
-<INCLURE{fond=prive/objets/liste/chapitres,arbo=#GET{arbo},sinon=<:chapitre:info_aucun_chapitre:>,objet=#GET{objet},id_objet=#GET{id_objet},id_parent=#GET{id_parent},id_chapitre="",ajax,env} />
+#SET{enfant,#ENV{id_parent}|ou{#OBJET|=={chapitre}}}
+
+<INCLURE{fond=prive/objets/liste/chapitres,
+	arbo=#GET{arbo},
+	sinon=#GET{enfant}|?{<:chapitre:info_aucun_chapitre_enfant:>,<:chapitre:info_aucun_chapitre:>},
+	objet=#GET{objet},
+	id_objet=#GET{id_objet},
+	id_parent=#GET{id_parent},
+	id_chapitre="",
+	ajax,
+	env}
+/>
 
 [(#AUTORISER{creerchapitredans, #GET{objet,chapitre}, #GET{id_objet, #GET{id_parent}}}|oui)
+	[(#SET{intitule,#GET{enfant}|?{<:chapitre:icone_creer_chapitre_enfant:>,<:chapitre:icone_creer_chapitre:>}})]
 	#SET{url_parent, #GET{id_objet}|generer_url_entite{#GET{objet}}|sinon{#GET{id_parent}|generer_url_entite{chapitre}}}
-	[(#URL_ECRIRE{chapitre_edit, new=oui}|parametre_url{objet, #GET{objet}}|parametre_url{id_objet, #GET{id_objet}}|parametre_url{id_parent, #GET{id_parent}}|parametre_url{redirect, #GET{url_parent}}|icone_verticale{<:chapitre:icone_creer_chapitre:>,chapitre,new,right})]
+	[(#URL_ECRIRE{chapitre_edit, new=oui}|parametre_url{objet, #GET{objet}}|parametre_url{id_objet, #GET{id_objet}}|parametre_url{id_parent, #GET{id_parent}}|parametre_url{redirect, #GET{url_parent}}|icone_verticale{#GET{intitule},chapitre,new,right})]
 ]
 <div class="nettoyeur"></div>

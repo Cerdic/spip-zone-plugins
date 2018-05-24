@@ -4,7 +4,7 @@
 #SET{claire,##ENV{couleur_claire,c5e41c}}
 #SET{foncee,##ENV{couleur_foncee,9dba00}}
 
-/* Visualisation de l'arborescence dans les listes de chapitres */
+/* Liste de chapitres : visualiser l'arborescence et détails */
 .liste-objets.chapitres td {
   border-style: dotted;
 }
@@ -25,7 +25,9 @@
   background-position: [(#VALEUR)]em center;
 }
 </BOUCLE_profondeurs>
-/* icônes */
 .liste-objets.chapitres .icone b {
   display: none;
+}
+.liste-objets.chapitres tr.expose:not(:hover) td {
+  background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];
 }
