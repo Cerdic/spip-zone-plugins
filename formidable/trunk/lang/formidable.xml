@@ -6,7 +6,7 @@
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/formidable?lang_cible=en" total="248" traduits="248" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/formidable?lang_cible=en" total="248" traduits="245" relire="0" modifs="3" nouveaux="0" pourcent="98.79">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
@@ -23,11 +23,11 @@
 	<langue code="it" url="https://trad.spip.net/tradlang_module/formidable?lang_cible=it" total="248" traduits="108" relire="0" modifs="10" nouveaux="130" pourcent="43.55">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/formidable?lang_cible=pt_br" total="248" traduits="235" relire="0" modifs="5" nouveaux="8" pourcent="94.76">
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/formidable?lang_cible=pt_br" total="248" traduits="234" relire="0" modifs="6" nouveaux="8" pourcent="94.35">
 		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
 		<traducteur nom="telopa" lien="https://trad.spip.net/auteur/telopa" />
 	</langue>
-	<langue code="ru" url="https://trad.spip.net/tradlang_module/formidable?lang_cible=ru" total="248" traduits="167" relire="2" modifs="11" nouveaux="68" pourcent="67.34">
+	<langue code="ru" url="https://trad.spip.net/tradlang_module/formidable?lang_cible=ru" total="248" traduits="166" relire="2" modifs="12" nouveaux="68" pourcent="66.94">
 		<traducteur nom="Serge Markitanenko" lien="https://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
 	<langue code="sk" url="https://trad.spip.net/tradlang_module/formidable?lang_cible=sk" total="248" traduits="128" relire="0" modifs="11" nouveaux="109" pourcent="51.61">

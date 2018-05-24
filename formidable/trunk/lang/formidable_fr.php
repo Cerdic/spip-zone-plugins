@@ -223,8 +223,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_message_ok' => 'Votre message a bien été envoyé par courriel.',
 	'traiter_email_option_activer_accuse_label_case' => 'Envoyer aussi un courriel à l’adresse de l’envoyeur avec un message de confirmation.',
 	'traiter_email_option_activer_ip_label_case' => 'Envoyer l’adresse IP de l’envoyeur aux destinataires.',
- 	'traiter_email_option_courriel_envoyeur_accuse_explication' => 'Précisez le courriel utilisé pour envoyer l’accusé de réception. À défaut, l\'expéditeur de l\'accusé de réception sera le destinataire du courriel principal.',
-	'traiter_email_option_courriel_envoyeur_accuse_label' => 'Courriel de l\'expéditeur de l’accusé de réception',
+	'traiter_email_option_courriel_envoyeur_accuse_explication' => 'Précisez le courriel utilisé pour envoyer l’accusé de réception. À défaut, l’expéditeur de l’accusé de réception sera le destinataire du courriel principal.',
+	'traiter_email_option_courriel_envoyeur_accuse_label' => 'Courriel de l’expéditeur de l’accusé de réception',
 	'traiter_email_option_destinataires_champ_form_attention' => 'Cette option est déconseillée, car elle constitue un appel au SPAM.
 	<br />- Pour envoyer à un auteur du site, utiliser l’option « Destinataire » (plus haut).
 	<br />- Pour envoyer à la personne qui remplit le formulaire, configurer l’accusé de réception (plus bas).
@@ -248,7 +248,7 @@ Cette option n’est conservée que pour compatibilité ascendante. Elle n’app
 	'traiter_email_option_exclure_champs_email_explication' => 'Si vous souhaitez que certains champs ne s’affichent pas dans les emails envoyés (par exemple des champs cachés), il suffit de les définir ici, séparés par une virgule.',
 	'traiter_email_option_exclure_champs_email_label' => 'Champs à exclure du contenu du message',
 	'traiter_email_option_masquer_liens_label_case' => 'Masquer les liens d’administration dans le courriel.',
-	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Précisez le nom de l’expéditeur utilisé pour envoyer l’accusé de réception. À défaut, l\'expéditeur de l\'accusé de réception sera le destinataire du courriel principal.',
+	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Précisez le nom de l’expéditeur utilisé pour envoyer l’accusé de réception. À défaut, l’expéditeur de l’accusé de réception sera le destinataire du courriel principal.',
 	'traiter_email_option_nom_envoyeur_accuse_label' => 'Nom de l’expéditeur de l’accusé de réception',
 	'traiter_email_option_pj_explication' => 'Si les documents postés pèsent moins de _FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL Mio (constante modifiable par le·la webmestre).',
 	'traiter_email_option_pj_label' => 'Joindre les fichiers dans le courriel',

@@ -229,8 +229,8 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'traiter_email_message_ok' => 'Your message has been successfully sent by email.',
 	'traiter_email_option_activer_accuse_label_case' => 'Also send an email to the sender with a confirmation message.',
 	'traiter_email_option_activer_ip_label_case' => 'Send the IP address of the sender to the recipients.',
-	'traiter_email_option_courriel_envoyeur_accuse_explication' => 'Specify the email used to send the acknowledgment of receipt. Otherwise, the recipient will be the sender of the main email.',
-	'traiter_email_option_courriel_envoyeur_accuse_label' => 'Email of the acknowledgement of receipt',
+	'traiter_email_option_courriel_envoyeur_accuse_explication' => 'Specify the email used to send the acknowledgment of receipt. Otherwise, the recipient will be the sender of the main email.', # MODIF
+	'traiter_email_option_courriel_envoyeur_accuse_label' => 'Email of the acknowledgement of receipt', # MODIF
 	'traiter_email_option_destinataires_champ_form_attention' => 'This option is deprecated because it is a call to SPAM.
 <br /> - To send to an author of the site, use the option "Recipient" (above).
 <br /> - To send to the person filling out the form, configure the acknowledgment of receipt (lower).
@@ -253,7 +253,7 @@ Indicate the field, its value, and the concerned email (s) (separated by a comma
 	'traiter_email_option_exclure_champs_email_explication' => 'If you do not want certain fields to appear in sent emails (for example hidden fields), just define them here, separated by a comma.',
 	'traiter_email_option_exclure_champs_email_label' => 'Fields to exclude from the message content',
 	'traiter_email_option_masquer_liens_label_case' => 'Hide administration links in the email.',
-	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Specify the name of the sender used to send the acknowledgment of receipt. Otherwise, the recipient will be the sender of the main email.',
+	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Specify the name of the sender used to send the acknowledgment of receipt. Otherwise, the recipient will be the sender of the main email.', # MODIF
 	'traiter_email_option_nom_envoyeur_accuse_label' => 'Name of the sender of the acknowledgment',
 	'traiter_email_option_pj_explication' => 'If the documents posted weigh less than _FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL Mio (constant modifiable by the webmaster).',
 	'traiter_email_option_pj_label' => 'Join the files in the email',
