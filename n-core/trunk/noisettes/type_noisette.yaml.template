@@ -1,0 +1,55 @@
+# Template de fichier descriptif d'un type de noisette
+
+# Titre du type de noisette
+# - obligatoire
+# - chaîne immédiate ou item de langue
+nom: '<:ncore:type_noisette_xxxx_nom:>'
+# Description du rôle du type de noisette
+# - facultatif, vide si absent
+# - chaîne immédiate ou item de langue
+description: '<:ncore:type_noisette_xxxx_description:>'
+# Nom de l'icone représentant le type de noisette sans chemin
+# - facultatif, 'noisette-24.png' si absent
+icon: 'xxxx-24.png'
+# Indique si la noisette est un conteneur ou pas
+# - facultatif, 'non' si absent
+# - 'oui' ou 'non'
+conteneur: 'oui'
+# Indique si la noisette est un conteneur ou pas
+# - facultatif, 'non' si absent
+# - 'oui' ou 'non'
+contexte: 'aucun'
+# Indique la méthode ajax à appliquer à ce type de noisette
+# - facultatif, 'defaut' si absent
+# - 'defaut', 'oui' ou 'non'
+ajax: 'non'
+# Indique la méthode d'inclusion de ce type de noisette
+# - facultatif, 'statique' si absent
+# - 'statique' ou 'dynamique'
+inclusion: 'statique'
+# Liste des plugins nécessités pour le fonctionnement de la noisette
+# - facultatif, [] si absent
+# - tableau des préfixes de plugin
+necessite: ['prefixe1', 'prefixe2']
+# Indique si la noisette est un conteneur ou pas
+# - facultatif, prend les valeurs 'oui' ou 'non' (par défaut)
+parametres:
+  -
+    saisie: 'selection'
+    options:
+      nom: 'conteneur_balise'
+      label: '<:ncore:label_conteneur_balise:>'
+      defaut: 'div'
+      cacher_option_intro: 'oui'
+      datas:
+        div: 'div'
+        section: 'section'
+        article: 'article'
+        aside: 'aside'
+        nav: 'nav'
+        p: 'p'
+  -
+    saisie: 'input'
+    options:
+      nom: 'conteneur_css'
+      label: '<:ncore:label_conteneur_css:>'
