@@ -6,7 +6,7 @@
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/prix_objets-64.png"
 	documentation="https://contrib.spip.net/Prix-Objets"
-	schema="2.0.0"
+	schema="2.1.0"
 >
 
 	<nom>Prix Objets</nom>
@@ -32,4 +32,5 @@
 	<pipeline nom="shop_objets" inclure="prix_objets_pipelines.php" />
 	<pipeline nom="header_prive" inclure="prix_objets_pipelines.php" />
 	<pipeline nom="reservation_evenement_objets_configuration" inclure="prix_objets_pipelines.php" />
+	<pipeline nom="jqueryui_plugins" inclure="prix_objets_pipelines.php" />
 </paquet>

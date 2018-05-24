@@ -67,6 +67,9 @@ function prix_objets_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter','TABLE spip_prix_objets ADD INDEX `id_objet` (`id_objet`,`id_prix_objet_source`,`objet`,`id_extension`,`extension`)'),
 		array('po_upgrade',$version_cible),
 	);
+	$maj['2.1.0']  = array(
+		array('maj_tables', array('spip_prix_objets')),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

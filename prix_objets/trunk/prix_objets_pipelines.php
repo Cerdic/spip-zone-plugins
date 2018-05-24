@@ -116,3 +116,17 @@ function prix_objets_header_prive($flux){
 	$flux .= '<link rel="stylesheet" href="' . _DIR_PLUGIN_PRIX_OBJETS .'css/prix_objets_admin.css" type="text/css" media="all" />';
 	return $flux;
 }
+
+/**
+ * Active des modules de jquery ui
+ *
+ * @pipeline jqueryui_plugins
+ *
+ * @param array $scripts
+ *        	Données du pipeline
+ * @return array
+ */
+function prix_objets_jqueryui_plugins($scripts) {
+	$scripts[] = "jquery.ui.sortable";
+	return $scripts;
+}

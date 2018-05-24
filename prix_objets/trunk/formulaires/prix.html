@@ -13,7 +13,6 @@
 
 [(#GET{plie}|debut_block_depliable{#GET{identifiant}})]
 <BOUCLE_test0(CONDITION){si #ENV{devises}|count|>{0}}>
-
 	<form id="form_prix" name="form_prix" action="#ENV{action}#form_prix" method="post"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		[<div class='erreur_message'>(#ENV**{erreurs}|table_valeur{code_devise})</div>]
@@ -21,7 +20,7 @@
 			<div class="obligatoire editer editer_prix saisie_input [ (#ENV**{erreurs}|table_valeur{prix_ht}) erreur]">
 				<div>
 					[<div class='erreur_message'>(#ENV**{erreurs}|table_valeur{prix})</div>]
-					<label><:prix_objets:ajouter_prix:></label>
+					<label><:prix_objets:info_prix:></label>
 					<input type="text" name="prix" value="#ENV{prix}"/>
 					<BOUCLE_test(CONDITION){si #ENV{devises}|count|<{2}}>
 					[(#ENV{devises}|table_valeur{0}|traduire_devise)]
@@ -51,7 +50,7 @@
 
 			<!--fini champs!-->
 			</div>
-		<p class="boutons"><input type="submit"  class="submit" value="<:prix_objets:ajouter:>" /></p></div>
+		<p class="boutons"><input type="submit"  class="submit" value="<:prix_objets:ajouter_prix:>" /></p></div>
 	</form>
 
 </BOUCLE_test0>

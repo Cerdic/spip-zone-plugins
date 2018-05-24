@@ -1,3 +1,15 @@
 .formulaire_spip select.code_devise {
 	width: auto;
 }
+
+.fieldset_extensions .editer {
+	width : 234px;
+	float : left;
+}
+
+.fieldset_extensions .saisie_ajouter_action {
+	width: 72px;
+	float: left;
+	clear: none;
+	padding: 0 10px;
+}
