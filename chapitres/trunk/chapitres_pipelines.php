@@ -128,7 +128,9 @@ function chapitres_pre_insertion($flux) {
 
 		// 1) Définir le parent
 		// S'il y a un id_parent
-		if ($id_parent = intval($flux['data']['id_parent']) or $id_parent = intval($flux['args']['id_parent'])) {
+		if ($id_parent = intval($flux['data']['id_parent'])
+			or $id_parent = intval($flux['args']['id_parent'])
+		) {
 			$flux['data']['id_parent'] = $id_parent;
 			
 			// Et dans ce cas, le nouveau chapitre utilise forcément l'objet et id_objet du parent
@@ -149,6 +151,34 @@ function chapitres_pre_insertion($flux) {
 
 	}
 	
+	return $flux;
+}
+
+
+/**
+ * Agir avant l'édition d'un objet
+ *
+ * => Institution d'un chapitre : si id_parent a été modifié, le renvoyer dans la liste des champs sinon il est ignoré. l'API cherche par défaut une rubrique comme parent, qui forcément n'existe pas.
+ *
+ * @pipeline pre_edition
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function chapitres_pre_edition($flux) {
+
+	// Si on institue un chapitre et qu'un nouveau id_parent est sélectionné
+	if ($flux['args']['action'] == 'instituer'
+		and $flux['args']['table'] == 'spip_chapitres'
+		and $id_chapitre = intval($flux['args']['id_objet'])
+		and !is_null($id_parent = _request('id_parent'))
+		and $id_parent_ancien = sql_getfetsel('id_parent', 'spip_chapitres', 'id_chapitre='.intval($id_chapitre))
+		and $id_parent != $id_parent_ancien
+	) {
+
+		$flux['data']['id_parent'] = $id_parent;
+
+	}
+
 	return $flux;
 }
 

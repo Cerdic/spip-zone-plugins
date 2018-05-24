@@ -1,5 +1,5 @@
 [(#SET{separateur,[(#ENV{separateur}|concat{&nbsp;&rsaquo;&nbsp;})]})]
-<BOUCLE_chapitres(CHAPITRES){par num titre, titre}{id_parent}{tout}>
+<BOUCLE_chapitres(CHAPITRES){par num titre, titre}{id_parent}{!id_chapitre IN #ENV{exclus}}{tout}>
 	[(#ENV{multiple}|oui)
 	<option value="#ID_CHAPITRE"[(#ID_CHAPITRE|in_array{#ENV{valeur,#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#GET{separateur}#TITRE</option>]
 	[(#ENV{multiple}|non)

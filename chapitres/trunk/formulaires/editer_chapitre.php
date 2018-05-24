@@ -86,6 +86,15 @@ function formulaires_editer_chapitre_saisies_dist($id_chapitre = 'new', $objet='
 			),
 		),
 		array(
+			'saisie' => 'chapitres',
+			'options' => array(
+				'nom' => 'id_parent',
+				'label' => _T('chapitre:champ_id_parent_label'),
+				'recursif' => 'oui',
+				'exclus' => $id_chapitre,
+			),
+		),
+		array(
 			'saisie' => 'textarea',
 			'options' => array(
 				'nom' => 'chapo',
@@ -154,7 +163,6 @@ function formulaires_editer_chapitre_charger_dist($id_chapitre = 'new', $objet='
 	else {
 		$valeurs = formulaires_editer_objet_charger('chapitre', $id_chapitre, $id_parent, $lier_trad, $retour, $config_fonc, $row, $hidden);
 	}
-	
 	return $valeurs;
 }
 
@@ -190,9 +198,10 @@ function formulaires_editer_chapitre_traiter_dist($id_chapitre = 'new', $objet='
 	// On force ces valeurs
 	set_request('objet', $objet);
 	set_request('id_objet', $id_objet);
-	set_request('id_parent', $id_parent);
-	
+	// id_parent : on prend en priorité celui choisi manuellement
+	$id_parent = is_null(_request('id_parent')) ? $id_parent : intval(_request('id_parent'));
+
 	$retours = formulaires_editer_objet_traiter('chapitre', $id_chapitre, $id_parent, $lier_trad, $retour, $config_fonc, $row, $hidden);
-	
+
 	return $retours;
 }
