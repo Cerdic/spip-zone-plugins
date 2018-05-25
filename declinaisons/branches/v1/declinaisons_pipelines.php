@@ -49,6 +49,7 @@ function declinaisons_prix_objets_extensions($flux) {
 				'label' => _T('declinaison:choisir_declinaison'),
 				'option_intro' => _T('declinaison:info_aucun_declinaison'),
 				'defaut' => $flux['id_prix_extension_objet'],
+				'class' => 'chosen',
 				'multiple' => 'oui',
 			)
 		),
@@ -57,7 +58,7 @@ function declinaisons_prix_objets_extensions($flux) {
 			'options' => array(
 				'nom' => 'ajouter_declinaison',
 				'label_action' => _T('declinaison:icone_creer_declinaison'),
-				'action' => 'declinaison_edit',
+				'objet' => 'declinaison',
 			)
 		),
 	);
