@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_1_prix' => 'Un prix attaché',
+	'info_aucun_prix_objets' => 'Aucun prix',
 	'info_actions' => 'Actions',
 	'info_extensions' => 'Extensions',
 	'info_nb_prix' => '@nb@ prix attachés',

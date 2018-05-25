@@ -1,5 +1,5 @@
 <B_prix>
-<div class="liste prix">
+<div class="liste-objets liste-objets-lies prix_objets">
 <table class="spip liste ordonner_rang_lien liste_items prix_objets"
 	id="prix_choisis"
 	data-lien="[(#OBJET|concat{'/',#ID_OBJET}|attribut_html)]">
@@ -54,88 +54,12 @@
 </table>
 </div>
 </B_prix>
+<div class="liste-objets liste-objets-lies prix_objets caption-wrap">
+	<strong class="caption">[(#ENV*{titre,<:prix_objets:info_aucun_prix_objets:>})]</strong>
+</div>
+<//B_prix>
 
-<script type="text/javascript">
-/* Gestion du tri des listes de documents et de leur enregistrement */
-
-	$(function($){
-
-	if ($.fn.sortable) {
-		$(".liste.prix .ordonner_rang_lien[data-lien]").find('.sortable').each(function () {
-
-			// détruire / recréer le sortable à chaque appel ajax
-			if ($(this).has('.ui-sortable').length) {
-				$(this).sortable('destroy');
-			}
-			// pas de tri possible s'il n'y a qu'un seul élément.
-			if ($(this).find('tr').length < 2) {
-				$(this).find('.deplacer-document').hide();
-				return true; // continue
-			} else {
-				$(this).find('.deplacer-document').show();
-			}
-			$(this).sortable({
-				/*axis: "y",*/ /* minidoc a un affichage en case */
-				placeholder: ".ui-state-highlight",
-				cursor: "move",
-				containment: "parent",
-				tolerance: "pointer",
-				update: function (event, ui) {
-					var items = $(this);
-					var item = ui.item;
-					var liste = items.sortable('toArray');
-					var ordre = [];
-
-					$.each(liste, function(i, id) {
-						if (id) {
-							ordre.push( id.substring(4) ); // prix123 => 123
-						}
-					});
-
-					// l'objet lié est indiqué dans l'attribut data-lien sur la liste
-					var lien = items.parents(".liste_items.prix_objets").data("lien").split("/");
-					var objet_lie = lien[0];
-					var id_objet_lie = lien[1];
-					var action = '[(#VAL{ordonner_prix_objets}|generer_url_action{"", 1})]';
-					var params = {
-						objet_source: 'prix_objet',
-						objet_lie: objet_lie,
-						id_objet_lie: id_objet_lie,
-						ordre: ordre,
-					};
-
-					$.ajax({
-						url: action,
-						data: params,
-						dataType: 'json',
-						cache: false,
-					}).done(function(data) {
-
-						var couleur_origine = item.css('background-color');
-						var couleur_erreur = $("<div class='remove'></div>").css('background-color');
-						var couleur_succes = $("<div class='append'></div>").css('background-color');
-
-						if (data.errors.length) {
-							items.sortable('cancel');
-							item.css({backgroundColor: couleur_erreur}).animate({backgroundColor: couleur_origine}, 'normal', function(){
-								item.css({backgroundColor: ''});
-							});
-						} else {
-							item.css({backgroundColor: couleur_succes}).animate({backgroundColor: couleur_origine}, 'normal', function(){
-								item.css({backgroundColor: ''});
-							});
-							items.parent().find('.tout_desordonner').show();
-						}
-					});
-				}
-			});
-			// bouton "désordonner"
-			if ($(this).parent().find('.deplacer-document[data-rang!=0]').length) {
-				$(this).parent().find('.tout_desordonner').show();
-			} else {
-				$(this).parent().find('.tout_desordonner').hide();
-			}
-		});
-	}
-});
+<script type="text/javascript">/*<![CDATA[*/
+	[(#INCLURE{fond=javascript/gestion_listes_prix_objets.js}|compacte{js})]
+/*]]>*/
 </script>

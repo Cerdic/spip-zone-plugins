@@ -51,7 +51,8 @@ function formulaires_prix_charger_dist($id_objet, $objet = 'article') {
 		'prix_ht' => $taxes_inclus,
 		'objet_titre' => '',
 		'taxes' => $taxes,
-		'taxe' => ''
+		'taxe' => '',
+		'visible' => _request('visible') ? _request('visible') : ''
 	);
 
 	$valeurs['_hidden'] = '<input type="hidden" name="objet" value="' . $objet . '">';
@@ -176,11 +177,8 @@ function formulaires_prix_traiter_dist($id_objet, $objet = 'article') {
 	}
 
 
-	$titres_secondaires = implode(' / ', $titres_secondaires);
-
-
-
 	if ($titres_secondaires) {
+		$titres_secondaires = implode(' / ', $titres_secondaires);
 		$titre = $titre . ' - ' . $titres_secondaires;
 	}
 
