@@ -1,13 +1,40 @@
 <?php
+/**
+ * Déclarations relatives à la base de données
+ *
+ * @plugin     Prix Objets
+ * @copyright  2012 - 2018
+ * @author     Rainer Müller
+ * @licence    GNU/GPL
+ * @package    SPIP\Promotions_commandes\Pipelines
+ */
 if (! defined("_ECRIRE_INC_VERSION"))
 	return;
 
+/**
+ * Déclaration des alias de tables et filtres automatiques de champs
+ *
+ * @pipeline declarer_tables_interfaces
+ * @param array $interfaces
+ *     Déclarations d'interface pour le compilateur
+ * @return array
+ *     Déclarations d'interface pour le compilateur
+ */
 function prix_objets_declarer_tables_interfaces($tables_interfaces) {
 	$tables_interfaces['table_des_tables']['prix_objets'] = 'prix_objets';
 
 	return $tables_interfaces;
 }
 
+/**
+ * Déclaration des tables principales.
+ *
+ * @pipeline declarer_tables_interfaces
+ * @param array $tables_principales
+ *     Déclarations des tables principales pour le compilateur
+ * @return array
+ *     Déclarations des tables principales pour le compilateur
+ */
 function prix_objets_declarer_tables_principales($tables_principales) {
 	$spip_prix_objets = array(
 		"id_prix_objet" => "bigint(21) NOT NULL",
@@ -21,7 +48,8 @@ function prix_objets_declarer_tables_principales($tables_principales) {
 		"prix" => "decimal(15,2) NOT NULL DEFAULT '0.00'",
 		"taxe" => "varchar(10)  DEFAULT '' NOT NULL",
 		'extension' => 'varchar(50) not null default ""',
-		"id_extension" => "bigint(21) NOT NULL"
+		"id_extension" => "bigint(21) NOT NULL",
+		"rang_lien" => "int(4) NOT NULL DEFAULT '0'",
 	);
 
 	$spip_prix_objets_key = array(
@@ -66,12 +94,12 @@ function po_upgrade($version_cible) {
 
 		foreach ($extensions as $extension) {
 			if ($identifiant_extension = id_table_objet($extension) and
-					isset($decription_table['field'][$identifiant_extension])) {
-				$sql = sql_select('*', 'spip_prix_objets',
+				isset($decription_table['field'][$identifiant_extension])) {
+					$sql = sql_select('*', 'spip_prix_objets',
 						$identifiant_extension . '>0');
 
-				while ($data = sql_fetch($sql)) {
-					sql_insertq('spip_prix_objets',
+					while ($data = sql_fetch($sql)) {
+						sql_insertq('spip_prix_objets',
 							array(
 								'id_prix_objet_source' => $data['id_prix_objet'],
 								'extension' => $extension,
@@ -79,19 +107,16 @@ function po_upgrade($version_cible) {
 								'objet' => $data['objet'],
 								'id_objet' => $data['id_objet'],
 								'titre' => extraire_multi(
-										supprimer_numero(
-												generer_info_entite(
-														$data[$identifiant_extension],
-														$extension,
-														'titre', '*'))),
+									supprimer_numero(
+										generer_info_entite(
+											$data[$identifiant_extension],
+											$extension,
+											'titre', '*'))),
 								'prix' => $data['prix_ht']
 							));
+					}
+					sql_alter("TABLE $table DROP COLUMN  $identifiant_extension");
 				}
-				sql_alter("TABLE $table DROP COLUMN  $identifiant_extension");
-			}
 		}
 	}
 }
-
-
-?>
