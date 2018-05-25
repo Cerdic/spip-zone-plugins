@@ -1,12 +1,12 @@
 <paquet
 	prefix="prix_objets"
 	categorie="edition"
-	version="2.0.0"
+	version="2.1.0"
 	etat="stable"
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/prix_objets-64.png"
 	documentation="https://contrib.spip.net/Prix-Objets"
-	schema="2.0.0"
+	schema="2.1.0"
 >
 
 	<nom>Prix Objets</nom>
@@ -20,8 +20,9 @@
 
 	<utilise nom="shop" compatibilite="[1.2.0;]" />
 
-	<!-- Déclaration de pipelines -->
+	<!-- Déclaration des pipelines -->
 	<pipeline nom="prix_objets_extensions" action='' />
+	<pipeline nom="prix_par_objet" action='' />
 
 	<!-- Appels des pipelines -->
 	<pipeline nom="autoriser" inclure="prix_objets_autorisations.php" />
@@ -31,4 +32,5 @@
 	<pipeline nom="shop_objets" inclure="prix_objets_pipelines.php" />
 	<pipeline nom="header_prive" inclure="prix_objets_pipelines.php" />
 	<pipeline nom="reservation_evenement_objets_configuration" inclure="prix_objets_pipelines.php" />
+	<pipeline nom="jqueryui_plugins" inclure="prix_objets_pipelines.php" />
 </paquet>

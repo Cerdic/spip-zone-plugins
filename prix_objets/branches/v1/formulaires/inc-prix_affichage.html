@@ -1,6 +1,8 @@
 <B_prix>
-<div class="liste prix">
-<table class='spip liste'>
+<div class="liste-objets liste-objets-lies prix_objets">
+<table class="spip liste ordonner_rang_lien liste_items prix_objets"
+	id="prix_choisis"
+	data-lien="[(#OBJET|concat{'/',#ID_OBJET}|attribut_html)]">
 	[<caption>
 		<strong class="caption">
 			(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{prix_objets:info_1_prix,prix_objets:info_nb_prix}})
@@ -9,14 +11,14 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='prix' scope='col'><:prix_objets:info_prix:></th>
-			<th class='statut' scope='col'><:prix_objets:devises_choisis:></th>
+			<th class='statut' scope='col'><:prix_objets:choix_devise:></th>
 			<th class='taxes' scope='col'><:prix_objets:taxes:></th>
 			<th class='titre' scope='col'><:ecrire:info_titre:></th>
-			<th class='titre' scope='col'><:spip:lien_supprimer:></th>
+			<th class='titre' scope='col'><:prix_objets:info_actions:></th>
 		</tr>
 	</thead>
-	<tbody>
-	<BOUCLE_prix(POUR){tableau #ENV{prix_choisis}}>
+	<tbody class="sortable">
+	<BOUCLE_prix(DATA){source tableau, #ENV{prix_choisis}} {par rang_lien, titre, prix_ht}>
 	[(#VALEUR|table_valeur{prix_ht}|!={0.00}|?{
 		#SET{prix,#VALEUR|table_valeur{prix_ht}}
 		#SET{taxes,<:prix_objets:prix_ht:>}
@@ -24,16 +26,23 @@
 		#SET{prix,#VALEUR|table_valeur{prix}}
 		#SET{taxes,<:prix_objets:prix_ttc:>}
 	})]
-		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]" id="prix#ID_PRIX_OBJET">
 			<td>#GET{prix}</td>
 			<td>[(#VALEUR|table_valeur{code_devise}|traduire_devise)]</td>
 			<td>#GET{taxes}</td>
 			<td>#VALEUR{titre}</td>
 			<td>
+				<span class="deplacer-prix" data-rang="#RANG_LIEN">
+					<img src='#CHEMIN_IMAGE{deplacer-16.png}'
+					width='16'
+					height='16'
+					alt='<:medias:ordonner_ce_document|attribut_html:>'
+					title='<:medias:ordonner_ce_document|attribut_html:>' />
+				</span>
 				<a
 					class="ajax"
 					href="[(#URL_ACTION_AUTEUR{
-						eliminer_prix,[(#VALEUR|table_valeur{id_prix_objet})],[(#SELF|parametre_url{retour_action,oui})]
+						eliminer_prix,#ID_PRIX_OBJET,[(#SELF|parametre_url{retour_action,oui})]
 						})]#edition_prix"
 					title="<:spip:lien_supprimer:>">
 					<img src="#CHEMIN_IMAGE{supprimer-12.png}" />
@@ -45,3 +54,12 @@
 </table>
 </div>
 </B_prix>
+<div class="liste-objets liste-objets-lies prix_objets caption-wrap">
+	<strong class="caption">[(#ENV*{titre,<:prix_objets:info_aucun_prix_objets:>})]</strong>
+</div>
+<//B_prix>
+
+<script type="text/javascript">/*<![CDATA[*/
+	[(#INCLURE{fond=javascript/gestion_listes_prix_objets.js}|compacte{js})]
+/*]]>*/
+</script>
