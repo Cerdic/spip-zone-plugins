@@ -54,4 +54,3 @@ function prix_prix_objet_dist($id_objet) {
 
 	return $prix;
 }
-
