@@ -41,7 +41,6 @@ function declinaisons_shop_objets($flux) {
  * @return array
  */
 function declinaisons_prix_objets_extensions($flux) {
-
 	$flux['data']['declinaison'] = array (
 		array(
 			'saisie' => 'declinaisons',
@@ -50,6 +49,7 @@ function declinaisons_prix_objets_extensions($flux) {
 				'label' => _T('declinaison:choisir_declinaison'),
 				'option_intro' => _T('declinaison:info_aucun_declinaison'),
 				'defaut' => $flux['id_prix_extension_objet'],
+				'multiple' => 'oui',
 			)
 		),
 		array(

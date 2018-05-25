@@ -1,8 +1,12 @@
 <?php
 /**
- * Plugin Déclinaisons Prix
- * (c) 2012 Rainer Müller
- * Licence GNU/GPL
+ * Déclarations relatives à la base de données.
+ *
+ * @plugin     Déclinaisons Prix
+ * @copyright  2012 - 2018
+ * @author     Rainer Müller
+ * @licence    GNU/GPL
+ * @package    SPIP\Promotions_commandes\Vase
  */
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
