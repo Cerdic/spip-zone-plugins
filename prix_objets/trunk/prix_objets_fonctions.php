@@ -457,7 +457,7 @@ function prix_par_objet($objet, $id_objet, $contexte, $type = 'prix_ht', $option
 
 		// On choisit le premier prix applicable.
 		if (count($applicables) == $i) {
-			$prix =$fonction_prix('prix_objet', $id_prix_objet);
+			$prix = $fonction_prix('prix_objet', $id_prix_objet);
 			break;
 		}
 	}
