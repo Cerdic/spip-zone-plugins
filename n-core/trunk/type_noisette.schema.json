@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema#",
-  "title": "Noisette SPIP",
-  "description": "Règle de validation du fichier YAML de description d'une noisette",
+  "title": "Type de noisette N-Core",
+  "description": "Règles de validation du fichier YAML de description d'une noisette",
   "definitions": {
     "texte_ou_item": {
       "anyOf": [
