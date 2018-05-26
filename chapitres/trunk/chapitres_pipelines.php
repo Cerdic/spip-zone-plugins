@@ -102,7 +102,8 @@ function chapitres_afficher_config_objet($flux) {
 				'arbo' => 'oui',
 				'simple' => 'oui',
 				'titre' => _T('chapitre:titre_plan'),
-			)
+			),
+			array('ajax' => true)
 		);
 		
 		$flux['data'] .= $plan;
