@@ -11,6 +11,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'ajouter_lien_chapitre' => 'Ajouter ce chapitre',
 
+	// B
+	'bouton_plier' => 'Plier',
+	'bouton_deplier' => 'Déplier',
+
 	// C
 	'champ_chapo_label' => 'Chapeau',
 	'champ_id_parent_label' => 'Chapitre parent',

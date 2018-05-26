@@ -8,19 +8,19 @@
 .liste-objets.chapitres td {
   border-style: dotted;
 }
-.liste-objets.chapitres td[data-profondeur="0"] {
+.liste-objets.chapitres tr[data-profondeur="0"] td.titre {
   padding-left: 0;
   font-weight: bold;
 }
 <BOUCLE_profondeurs(DATA){enum 1,6}>
-.liste-objets.chapitres td[data-profondeur="#VALEUR"] {
+.liste-objets.chapitres tr[data-profondeur="#VALEUR"] td.titre {
   padding-left: [(#VALEUR|plus{1})]em;
   background-repeat: no-repeat;
   background-size: 1em auto;
   background-image: url("#CHEMIN{prive/themes/spip/images/arbo-node.svg}");
   background-position: [(#VALEUR)]em center;
 }
-.liste-objets.chapitres td[data-profondeur="#VALEUR"][data-impasse] {
+.liste-objets.chapitres tr[data-profondeur="#VALEUR"][data-impasse] td.titre {
   background-image: url("#CHEMIN{prive/themes/spip/images/arbo-corner.svg}");
   background-position: [(#VALEUR)]em center;
 }
@@ -30,4 +30,22 @@
 }
 .liste-objets.chapitres tr.expose:not(:hover) td {
   background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];
+}
+/* pliage */
+.liste-objets.chapitres.plie tbody tr:not([data-profondeur="0"]) {
+  display: none;
+}
+.liste-objets.chapitres .label-pliage {
+  font-weight: normal;
+  float: #ENV{right};
+}
+.liste-objets.chapitres caption a:hover {
+  cursor: n-resize;
+  text-decoration: none;
+}
+.liste-objets.chapitres caption a:hover .label-pliage {
+  color: #GET{foncee};
+}
+.liste-objets.chapitres.plie caption a:hover {
+  cursor: s-resize;
 }
