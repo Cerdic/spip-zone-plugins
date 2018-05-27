@@ -20,19 +20,28 @@
 <!--================ DTD originale =========================-->
 
 <!ENTITY % NAME "CDATA"> <!-- identificateur (notamment nom de fonction) -->
-<!ENTITY % ITEM "CDATA"> <!-- chaine de langue -->
+<!ENTITY % IDIOME "CDATA"> <!-- chaine de langue écriture avec balise <:module:item:> -->
+<!ENTITY % ITEM "CDATA"> <!-- chaine de langue écriture sans balise module:item -->
 <!ENTITY % PATH "CDATA"> <!-- chemin d'acces relatif a un fichier -->
 
 <!ENTITY % CONTENT "(description|icon)*" >
 
-<!ELEMENT page (nom, %CONTENT;, necessite*) >
+<!ELEMENT page (nom, %CONTENT;, bloc*, necessite*) >
 
-<!ELEMENT nom (%ITEM|#PCDATA)>
+<!ELEMENT nom (%IDIOME|#PCDATA)>
 
-<!ELEMENT description (%ITEM|#PCDATA)>
+<!ELEMENT description (%IDIOME|#PCDATA)>
 <!ELEMENT icon (%PATH)>
+
+<!ELEMENT bloc EMPTY>
+<!ATTLIST bloc
+	id %NAME; #REQUIRED
+	nom %ITEM; #IMPLIED
+	description %ITEM; #IMPLIED
+	icon %PATH; #IMPLIED
+>
 
 <!ELEMENT necessite EMPTY>
 <!ATTLIST necessite
-          id %NAME; #REQUIRED
+	id %NAME; #REQUIRED
 >
