@@ -112,11 +112,16 @@ function affiche_resume_reponse($id_formulaires_reponse, $id_formulaire = null, 
 		);
 	}
 	if (is_null($modele_resume) and !isset($modeles_resume[$id_formulaire])) {
-		$modeles_resume[$id_formulaire] = sql_getfetsel(
-			'resume_reponse',
+		$traitements_formulaire = unserialize(sql_getfetsel(
+			'traitements',
 			'spip_formulaires',
 			'id_formulaire='.intval($id_formulaire)
-		);
+		));
+		if (isset($traitements_formulaire['enregistrement']['resume_reponse'])) {
+			$modeles_resume[$id_formulaire] = $traitements_formulaire['enregistrement']['resume_reponse'];
+		} else {
+			$modeles_resume[$id_formulaire] = '';
+		}
 	}
 	if (is_null($modele_resume)) {
 		$modele_resume = $modeles_resume[$id_formulaire];

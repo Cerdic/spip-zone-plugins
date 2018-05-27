@@ -78,7 +78,6 @@ function formidable_declarer_tables_objets_sql($tables) {
 			'message_erreur_unicite' => "text NOT NULL default ''",
 			'url_redirect' => 'varchar(255)',
 			'statut' => "varchar(10) NOT NULL default ''",
-			'resume_reponse' => "text NOT NULL default ''",
 			'date_creation' => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
 			'maj' => 'timestamp',
 		),

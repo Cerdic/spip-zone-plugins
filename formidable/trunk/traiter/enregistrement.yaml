@@ -3,6 +3,12 @@ titre: '<:formidable:traiter_enregistrement_titre:>'
 description: '<:formidable:traiter_enregistrement_description:>'
 options:
   -
+    saisie: 'input'
+    options:
+      nom: 'resume_reponse'
+      label: '<:formidable:traiter_enregistrement_option_resume_reponse_label:>'
+      explication: '<:formidable:traiter_enregistrement_option_resume_reponse_explication:>'
+  -
     saisie: 'case'
     options:
       nom: 'multiple'

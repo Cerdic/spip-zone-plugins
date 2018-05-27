@@ -85,7 +85,9 @@ function formidable_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.8.0'] = array(
 		array('formidable_migrer_formulaires_afficher_si_remplissage')
 	);
-
+	$maj['0.9.0'] = array(
+		array('formidable_migrer_resume_reponse')
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -206,7 +208,37 @@ function formidable_migrer_formulaires_afficher_si_remplissage(){
 }
 
 
+/**
+ * Cherche tous les formulaires et migre le champ resume_reponse vers une option du traitement "enregistrer" 
+ *
+ * Supprime ensuite ce champ de la structure de table
+ * @return void
+ */
+function formidable_migrer_resume_reponse() {
+	if ($res = sql_select(array('id_formulaire','traitements','resume_reponse'), 'spip_formulaires')) {
+		while ($row = sql_fetch($res)) {
+			$id_formulaire = $row['id_formulaire'];
+			$traitements = unserialize($row['traitements']);
+			$resume_reponse = $row['resume_reponse'];
+			if ($resume_reponse) {
+				if (isset($traitements['enregistrement'])) {
+					$traitements['enregistrement']['resume_reponse'] = $resume_reponse;
+				} else {
+					$traitements['enregistrement'] = array('resume_reponse' => $resume_reponse);
+				}
+				sql_updateq(
+					'spip_formulaires',
+					array('traitements'=>serialize($traitements)),
+					"id_formulaire=$id_formulaire"
+				);
+			}
+		}
+	}
 
+	// suppression du champ
+	sql_alter("TABLE spip_formulaires DROP COLUMN resume_reponse");
+
+}
 /**
  * Désinstallation/suppression des tables de formidable
  *

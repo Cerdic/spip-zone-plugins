@@ -77,8 +77,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_nouveau' => 'New form',
 	'editer_redirige_url' => 'Forwarding address after validation',
 	'editer_redirige_url_explication' => 'Leave blank if you want to stay on the same page',
-	'editer_resume_reponse' => 'Display summary of the response',
-	'editer_resume_reponse_explication' => '
+	'traiter_enregistrement_option_resume_reponse_label' => 'Display summary of the response',
+	'traiter_enregistrement_option_resume_reponse_explication' => '
 This string is used to display a summary of each reply in the lists. Fields such as <tt>@input_1@</tt> will be replaced as indicated by the following reminder',
 	'editer_titre' => 'Title',
 	'editer_unicite_explication' => 'Save the form only if a field is unique',
