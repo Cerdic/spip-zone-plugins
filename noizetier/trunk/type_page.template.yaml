@@ -5,7 +5,7 @@
 # - obligatoire
 # - texte ou item de langue
 nom: '<:noizetier:type_page_xxxx_nom:>'
-# Description du rôle dde la page
+# Description du rôle de la page
 # - facultatif, vide si absent
 # - texte ou item de langue
 description: '<:noizetier:type_page_xxxx_description:>'
