@@ -23,7 +23,13 @@
 				<div class="icone">
 					[(#CHEMIN_IMAGE{#ICON}|image_reduire{24}|extraire_attribut{src}|balise_img)]
 				</div>
+			[(#EST_ACTIVE|=={non}|oui)
+				#BOITE_OUVRIR{'','notice'}
+					<:noizetier:erreur_page_inactive{page=#PAGE}:>
+				#BOITE_FERMER
+			]
 			</div>
+
 			[(#REM) Actions possibles sur la page ]
 			<div class="edition">
 				[(#AUTORISER{creercomposition, noizetier, '', '', #ARRAY{page, #PAGE}})

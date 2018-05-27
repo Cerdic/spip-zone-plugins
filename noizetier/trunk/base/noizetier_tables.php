@@ -70,6 +70,7 @@ function noizetier_declarer_tables_principales($tables_principales) {
 		'icon'           => "varchar(255) DEFAULT '' NOT NULL",
 		'blocs_exclus'   => "text DEFAULT '' NOT NULL",
 		'necessite'      => "text DEFAULT '' NOT NULL",
+		'est_active'     => "varchar(3) DEFAULT 'oui' NOT NULL",
 		'branche'        => "text DEFAULT '' NOT NULL",
 		'est_page_objet' => "varchar(3) DEFAULT 'oui' NOT NULL",
 		'est_virtuelle'  => "varchar(3) DEFAULT 'non' NOT NULL",

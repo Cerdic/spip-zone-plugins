@@ -213,6 +213,16 @@ function maj_060($config_defaut) {
 				if (empty($_description['icon'])) {
 					$_description['icon'] = 'composition-24.png';
 				}
+				// Traitement des necessite pour identifier l'activité de la page
+				$_description['est_active'] = 'oui';
+				if (!empty($_description['necessite'])) {
+					foreach ($_description['necessite'] as $_plugin_necessite) {
+						if (!defined('_DIR_PLUGIN_' . strtoupper($_plugin_necessite))) {
+							$_description['est_active'] = 'non';
+							break;
+						}
+					}
+				}
 				// Blocs, necessite et branche: des tableaux à sérialiser
 				$_description['blocs_exclus'] = isset($_description['blocs_exclus'])
 					? serialize($_description['blocs_exclus'])

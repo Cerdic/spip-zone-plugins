@@ -427,6 +427,7 @@ function page_phraser_fichier($page, $options = array()) {
 		'icon'           => 'page-24.png',
 		'blocs_exclus'   => array(),
 		'necessite'      => array(),
+		'est_active'     => 'oui',
 		'branche'        => array(),
 		'est_virtuelle'  => 'non',
 		'est_page_objet' => 'non',
@@ -520,6 +521,16 @@ function page_phraser_fichier($page, $options = array()) {
 		$description['est_page_objet'] = in_array(table_objet_sql($description_defaut['type']), $tables_objets) ? 'oui' : 'non';
 		// Complétude de la description avec les valeurs par défaut
 		$description = array_merge($description_defaut, $description);
+		// Traitement des necessite pour identifier l'activité de la page
+		$description['est_active'] = 'oui';
+		if ($description['necessite']) {
+			foreach ($description['necessite'] as $_plugin_necessite) {
+				if (!defined('_DIR_PLUGIN_' . strtoupper($_plugin_necessite))) {
+					$description['est_active'] = 'non';
+					break;
+				}
+			}
+		}
 		// Sérialisation des champs blocs_exclus, necessite et branche qui sont des tableaux
 		$description['blocs_exclus'] = serialize($description['blocs_exclus']);
 		$description['necessite'] = serialize($description['necessite']);
