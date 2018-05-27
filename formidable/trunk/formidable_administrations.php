@@ -81,7 +81,7 @@ function formidable_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.7.0'] = array(
 		array('maj_tables', array('spip_formulaires')),
 	);
-	// Migrer afficher_si_remplissage vers la checkboc
+	// Migrer afficher_si_remplissage vers la checkbox
 	$maj['0.8.0'] = array(
 		array('formidable_migrer_formulaires_afficher_si_remplissage')
 	);
