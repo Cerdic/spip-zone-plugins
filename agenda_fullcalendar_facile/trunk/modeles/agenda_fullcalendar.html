@@ -35,7 +35,7 @@ jQuery(function($) {
 <B_agenda>
 <div id="calendrier-loading">
 <p class="pagination">#PAGINATION</p>
-<BOUCLE_agenda(DATA){source json, #PRODUIRE{fond=agenda.json, start=0,end=2147483647,_=#REM|time}}{pagination 15}>
+<BOUCLE_agenda(DATA){source json, #PRODUIRE{fond=agenda.json, start=0,end=2147483647,_=#REM|time}|url_absolue}{pagination 15}>
     <dl>
         [<dt><:agenda:evenement_titre:></dt>
         <dd><a href="#VALEUR{url}">(#VALEUR{title})</a></dd>]
