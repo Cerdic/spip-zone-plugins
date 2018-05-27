@@ -23,14 +23,14 @@
 <!ENTITY % ITEM "CDATA"> <!-- chaine de langue -->
 <!ENTITY % PATH "CDATA"> <!-- chemin d'acces relatif a un fichier -->
 
-<!ENTITY % CONTENT "description|icon" >
+<!ENTITY % CONTENT "(description|icon)*" >
 
-<!ELEMENT page (nom, %CONTENT;*, necessite*) >
+<!ELEMENT page (nom, %CONTENT;, necessite*) >
 
-<!ELEMENT nom (%ITEM|#PCDATA)*>
+<!ELEMENT nom (%ITEM|#PCDATA)>
 
-<!ELEMENT description (%ITEM|#PCDATA)*>
-<!ELEMENT icon (%PATH)*>
+<!ELEMENT description (%ITEM|#PCDATA)>
+<!ELEMENT icon (%PATH)>
 
 <!ELEMENT necessite EMPTY>
 <!ATTLIST necessite
