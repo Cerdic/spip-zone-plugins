@@ -22,7 +22,7 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="statut">[(#ID_FORMULAIRES_REPONSE|puce_changement_statut{#STATUT, #ID_FORMULAIRE, formulaires_reponse})]</td>
 			<td class="date">[(#DATE|affdate_jourcourt|concat{#DATE|affdate{", H:i"}})]</td>
-			<td class="resume">[(#ID_FORMULAIRES_REPONSE|affiche_resume_reponse{#ID_FORMULAIRE}|sinon{[<a href="(#URL_ECRIRE{formulaires_reponse,id_formulaires_reponse=#ID_FORMULAIRES_REPONSE})"><:formidable:reponses_voir_detail:></a>]})]</td>
+			<td class="resume">[<a href="[(#URL_ECRIRE{formulaires_reponse,id_formulaires_reponse=#ID_FORMULAIRES_REPONSE})]">(#ID_FORMULAIRES_REPONSE|affiche_resume_reponse{#ID_FORMULAIRE}|sinon{<:formidable:reponses_voir_detail:>})</a>]</td>
 			<td class="auteur">
 				<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
 				<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a>
