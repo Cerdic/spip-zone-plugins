@@ -21,7 +21,7 @@
 	<tbody>
 	<BOUCLE_liste_prestations(PRESTATIONS){id_prestations_type?}{id_prestations_unite?}{id_objet?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class="titre principale">[(#LOGO_PRESTATION|image_reduire{20,26})]<a href="[(#ID_PRESTATION|generer_url_entite{prestation})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PRESTATION">[(#RANG). ]#TITRE</a></td>
+			<td class="titre principale">[(#LOGO_PRESTATION|image_reduire{20,26})]<a href="[(#ID_PRESTATION|generer_url_entite{prestation})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PRESTATION">#TITRE</a></td>
 			<td class="prix_unitaire_ht">[(#PRIX_UNITAIRE_HT|prix_formater)]</td>
 			<td class="quantite">[(#ID_PRESTATION|prestations_calculer_quantite)] #INFO_TITRE{prestations_unite,#ID_PRESTATIONS_UNITE}</td>
 			<td class="prix_ht">#PRIX_HT #SET{total,#GET{total}|plus{#PRIX_HT*}}</td>
