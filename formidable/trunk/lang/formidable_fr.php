@@ -72,8 +72,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_nouveau' => 'Nouveau formulaire',
 	'editer_redirige_url' => 'Adresse de redirection après validation',
 	'editer_redirige_url_explication' => 'Laissez vide si vous souhaitez rester sur la même page',
-	'traiter_enregistrement_option_resume_reponse_label' => 'Affichage résumé de la réponse',
-	'traiter_enregistrement_option_resume_reponse_explication' => 'Cette chaîne sera utilisée pour afficher un résumé de chaque réponse dans les listes. Les champs comme <tt>@input_1@</tt> seront remplacés comme indiqué par l’aide mémoire ci-contre.',
 	'editer_titre' => 'Titre',
 	'editer_unicite_explication' => 'Enregistrer le formulaire seulement si un champ est unique',
 	'editer_unicite_label' => 'Vérifier l’unicité d’un champ',
@@ -288,6 +286,8 @@ Cette option n’est conservée que pour compatibilité ascendante. Elle n’app
 	'traiter_enregistrement_option_modifiable_label' => 'Réponses modifiables',
 	'traiter_enregistrement_option_multiple_explication' => 'Multiple : Une même personne peut répondre plusieurs fois.',
 	'traiter_enregistrement_option_multiple_label' => 'Réponses multiples',
+	'traiter_enregistrement_option_resume_reponse_explication' => 'Cette chaîne sera utilisée pour afficher un résumé de chaque réponse dans les listes. Les champs comme <tt>@input_1@</tt> seront remplacés comme indiqué par l’aide mémoire ci-contre.',
+	'traiter_enregistrement_option_resume_reponse_label' => 'Affichage résumé de la réponse',
 	'traiter_enregistrement_titre' => 'Enregistrer les résultats',
 
 	// V

@@ -58,7 +58,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_nouveau' => 'Новая форма',
 	'editer_redirige_url' => 'Адрес переадресации после обработки формы',
 	'editer_redirige_url_explication' => 'Оставьте пустым, если хотите остаться на той же странице',
-	'traiter_enregistrement_option_resume_reponse_label' => 'Показать сводную информацию по ответам',
 	'editer_titre' => 'Название',
 	'editer_unicite_explication' => 'Сохранять ответ только если значение поля уникально ( не встречалось в других ответах).',
 	'editer_unicite_label' => 'Проверять уникальность значения для поля',

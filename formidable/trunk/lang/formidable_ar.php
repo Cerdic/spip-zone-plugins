@@ -58,7 +58,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_nouveau' => 'استمارة جديدة',
 	'editer_redirige_url' => 'عنوان إعادة التوجيه بعد التصديق',
 	'editer_redirige_url_explication' => 'أترك فارغاً اذا اردت البقاء في الصفحة نفسها',
-	'traiter_enregistrement_option_resume_reponse_label' => 'عرض مقتضب للإجابة',
 	'editer_titre' => 'العنوان',
 	'erreur_identifiant' => 'هذا المعرّف مستخدم سايقاً',
 	'erreur_inexistant' => 'هذه الاستمارة غير موجودة',
