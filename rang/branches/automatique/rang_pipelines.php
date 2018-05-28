@@ -62,39 +62,77 @@ function rang_recuperer_fond($flux) {
 		// Si la page sur laquelle on est fait partie des contextes qui peut avoir des rangs à trier
 		//and in_array(_request('exec'), rang_get_contextes())
 	) {
-		// Si pas déjà présent, on ajoute l'info de l'objet sur le tableau
-		if (strpos($flux['data']['texte'], 'data-objet=') === false) {
-			$flux['data']['texte'] = preg_replace('/<table/i', '<table data-objet="'.$objet_info['objet'].'"', $flux['data']['texte']);
-		}
+		//var_dump(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS));
 		
-		// Si pas déjà, on ajoute l'info d'identifiant sur chaque ligne
-		if (
-			// Si pas de id_objet déjà dans le tableau
-			strpos($flux['data']['texte'], 'data-id_objet') === false
-			// Et qu'il y a des cellules avec les ids
-			and preg_match('%<td[^>]+?class=("|\')[^>]*?id%is', $flux['data']['texte'])
-		) {
-			include_spip('inc/filtres');
+		// On teste rapide pour les choses à ajouter
+		$ajouter_objet = (strpos($flux['data']['texte'], 'data-objet=') === false);
+		$ajouter_ids = (strpos($flux['data']['texte'], 'data-id_objet') === false);
+		$ajouter_rangs = !preg_match('%<th[^>]+?class=("|\')[\w ]*?rang%is', $flux['data']['texte']);
+		
+		// On continue et on fait de l'analyse de DOM seulement si au moins un des trois
+		if ($ajouter_objet or $ajouter_ids or $ajouter_rangs) {
+			// On charge le DOM de la liste
+			libxml_use_internal_errors(true);
+			$dom = new DOMDocument;
+			$dom->loadHTML('<?xml encoding="utf-8" ?>' . $flux['data']['texte']);
+			$finder = new DomXPath($dom);
 			
-			$flux['data']['texte'] = preg_replace_callback(
-				'%(<tbody[^>]*?>)(.*?)</tbody>%is',
-				function ($matches) {
-					$lignes = preg_replace_callback(
-						'%<tr([^>]*?)>(.*?)</tr>%is',
-						function ($matches) {
-							// On cherche le numéro d'id
-							preg_match('%<td[^>]+?class=("|\')[^>]*?id[^>]*?>(.*?)</td>%is', $matches[2], $trouver);
-							$id = supprimer_tags($trouver[2]);
-							
-							return '<tr' . $matches[1] . "data-id_objet=\"$id\"" . '>' . $matches[2] . '</tr>';
-						},
-						$matches[2]
-					);
+			// Si pas déjà présent, on ajoute l'info de l'objet sur le tableau
+			if ($ajouter_objet and $table = $dom->getElementsByTagName('table')->item(0)) {
+				$table->setAttribute('data-objet', $objet_info['objet']);
+			}
+			
+			// On voit si on doit ajouter un th de rang
+			if (
+				$ajouter_rangs
+				and $thead_tr = $finder->query('//thead/tr')->item(0)
+				and $th_premier = $dom->getElementsByTagName('th')->item(0)
+			) {
+				$url_trier_rang = parametre_url(self(), 'par', 'rang', '&');
+				$lien_tri = $dom->createElement('a', 'Rang');
+				$lien_tri->setAttribute('href', $url_trier_rang);
+				$lien_tri->setAttribute('class', 'ajax');
+				$th = $dom->createElement('th');
+				$th->appendChild($lien_tri);
+				$thead_tr->insertBefore($th, $th_premier);
+			}
+			
+			// On parcourt toutes les lignes de contenu
+			$tbody_trs = $finder->query('//tbody/tr');
+			foreach ($tbody_trs as $tr) {
+				// Il faut toujours avoir l'id sous la main
+				if ($td_id = $finder->query('.//td[contains(@class, "id")]', $tr)->item(0)) {
+					$id_objet = intval($td_id->textContent);
 					
-					return $matches[1] . $lignes . '</tbody>';
-				},
-				$flux['data']['texte']
-			);
+					// Si on doit ajouter les ids
+					if ($ajouter_ids) {
+						$tr->setAttribute('data-id_objet', $id_objet);
+					}
+					
+					// Si on doit ajouter les rangs
+					if (
+						$ajouter_rangs
+						and $td_premier = $tr->getElementsByTagName('td')->item(0)
+					) {
+						$rang = sql_getfetsel('rang', $objet_info['table_objet_sql'], $objet_info['cle_objet'].'='.$id_objet);
+						$tr->insertBefore($dom->createElement('td', $rang), $td_premier);
+					}
+				}
+			}
+			
+			// S'il a un tfoot on rajoute aussi
+			if (
+				$ajouter_rangs
+				and $tfoot_trs = $finder->query('//tfoot/tr')
+			) {
+				foreach ($tfoot_trs as $tr) {
+					$td_premier = $tr->getElementsByTagName('td')->item(0);
+					$tr->insertBefore($dom->createElement('td'), $td_premier);
+				}
+			}
+			
+			// On retransforme en HTML à la fin
+			$flux['data']['texte'] = $dom->saveHTML();
 		}
 		
 		$objet = $objet_info['objet'];
