@@ -14,6 +14,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_objets_label' => 'Contenus chapitrés',
 	'configurer_titre' => 'Configuration des chapitres',
 	'configurer_publier_auto_label' => 'Publication',
-	'configurer_publier_auto_label_case' => 'Publier d\'office les chapitres',
+	'configurer_publier_auto_label_case' => 'Publier d\'office les nouveaux chapitres',
 
 );
