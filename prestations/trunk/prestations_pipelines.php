@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function prestations_affiche_enfants($flux) {
 	include_spip('inc/config');
-	$objets = lire_config('prestations/objets');
+	$objets = lire_config('prestations/objets', array());
 	
 	if (
 		isset($flux['args']['objet'])

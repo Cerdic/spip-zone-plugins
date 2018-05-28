@@ -120,5 +120,9 @@ function formulaires_editer_prestations_unite_verifier_dist($id_prestations_unit
  */
 function formulaires_editer_prestations_unite_traiter_dist($id_prestations_unite = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	$retours = formulaires_editer_objet_traiter('prestations_unite', $id_prestations_unite, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+	// Virer le id_prestations_unite du redirect
+	if (!empty($retours['redirect'])) {
+		$retours['redirect'] = parametre_url($retours['redirect'], 'id_prestations_unite', '');
+	}
 	return $retours;
 }
