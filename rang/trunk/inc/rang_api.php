@@ -26,11 +26,10 @@ function rang_objets_a_exclure() {
 	$liste_toujours_exclus = array('spip_auteurs', 'spip_documents', 'spip_groupes_mots', 'spip_messages');
 	$exclus = array_merge($exclus, $liste_toujours_exclus);
 	
-	// Pour le moment, on ne gère pas les rubriques elles-memes
+	// Pour le moment, on ne gère pas les rubriques elles-memes (voir todo.md)
 	array_push($exclus, 'spip_rubriques');
 
-	// et on ne gère pas les breves et sites
-	array_push($exclus, 'spip_syndic');
+	// et on ne gère pas les breves
 	array_push($exclus, 'spip_breves');
 
 	return $exclus;
@@ -173,9 +172,10 @@ function rang_get_sources() {
 
 /**
  * Retourne la listes des pages (exec) sur lesquelles activer Rang.
- * On prend la liste des objets cochés dans la configuration en considérant que le nom de l'objet et de l'exec sont identiques.
- * Si ce n'est pas le cas, le pipeline rang_declarer_contexte permet d'ajouter un exec spécifique.
- * On ajoute aussi les cas particuliers historiques.
+ * - Prendre la liste des objets cochés dans la configuration en considérant que le nom de l'objet et de l'exec sont identiques ;
+ * - Ajouter le nom de l'objet parent si il existe ;
+ * - Ajouter les cas particuliers historiques ;
+ * - Enfin le pipeline rang_declarer_contexte permet d'ajouter un exec spécifique (une page de config, etc.).
  *
  * @return array
  */
@@ -195,7 +195,8 @@ function rang_get_contextes() {
 		if (isset($info_parent['type']) && $info_parent['type']) {
 			$contextes[] = $info_parent['type'];
 		}
-		if($table=='spip_mots'){
+		// parce que les mots ne font rien comme les autres
+		if ($table == 'spip_mots') {
 			$contextes[] = 'groupe_mots';
 		}
 	}
