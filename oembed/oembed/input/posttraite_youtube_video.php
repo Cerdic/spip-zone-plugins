@@ -27,6 +27,9 @@ function oembed_input_posttraite_youtube_video_dist($data, $url_orig) {
 	if (strpos(strtolower($url_orig), '&wmode=opaque') or strpos(strtolower($url_orig), '?wmode=opaque')) {
 		$data['html'] = str_replace('feature=oembed', 'feature=oembed&wmode=Opaque', $data['html']);
 	}
+	
+	// Forcer l'utilisation de la version sans cookie de youtube
+	$data['html'] = str_replace('https://www.youtube.com/', 'https://www.youtube-nocookie.com/', $data['html']);
 
 	// recuperer la duree si possible, ruse de sioux
 	// http://stackoverflow.com/questions/10066638/get-youtube-information-via-json-for-single-video-not-feed-in-javascript
