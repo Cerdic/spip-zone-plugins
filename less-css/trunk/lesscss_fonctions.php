@@ -20,6 +20,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function lesscss_compile($style, $contexte = array()){
 	static $import_dirs = null;
 	static $parser_options = null;
+	static $chemin = null;
 
 	spip_timer('lesscss_compile');
 	if (!class_exists('Less_Parser')){
@@ -37,10 +38,23 @@ function lesscss_compile($style, $contexte = array()){
 		}
 	}
 	if (is_null($parser_options)) {
-		$parser_options = array(
-			'sourceMap' => lire_config('lesscss/activer_sourcemaps', false) == "on" ? true : false,
-			//'cache_dir' => sous_repertoire(_DIR_CACHE,'less'),
-		);
+		$parser_options = array();
+		if (lire_config('lesscss/activer_sourcemaps', false) == "on") {
+			$parser_options['sourceMap'] = true;
+		}
+	}
+
+	if ($parser_options['sourceMap']) {
+		if (!empty($contexte['dest'])) {
+			$parser_options['sourceMapWriteTo'] = $contexte['dest'] . '.map';
+			$parser_options['sourceMapURL'] = protocole_implicite(url_absolue($parser_options['sourceMapWriteTo']));
+		}
+		else {
+			unset($parser_options['sourceMapWriteTo']);
+			unset($parser_options['sourceMapURL']);
+		}
+		$parser_options['sourceMapBasepath'] = realpath(_DIR_RACINE);
+		$parser_options['sourceMapRootpath'] = protocole_implicite(url_absolue(_DIR_RACINE?_DIR_RACINE:'./'));
 	}
 
 	$parser = new Less_Parser($parser_options);
@@ -49,6 +63,7 @@ function lesscss_compile($style, $contexte = array()){
 
 	try {
 		$url_absolue = (!empty($contexte['file'])?protocole_implicite(url_absolue($contexte['file'])):null);
+		$url_absolue = (!empty($contexte['file'])?$contexte['file']:null);
 		$parser->parse($style,$url_absolue);
 		$out = $parser->getCss();
 
@@ -139,7 +154,7 @@ function less_css($source){
 			$contenu = "/* Source $source : vide */\n";
 		}
 		else {
-			$contenu = lesscss_compile($contenu, array('file'=>$source));
+			$contenu = lesscss_compile($contenu, array('file'=>$source, 'dest'=>$f));
 		}
 		// si erreur de compilation on renvoit un commentaire, et il y a deja eu un log
 		if (!$contenu){
