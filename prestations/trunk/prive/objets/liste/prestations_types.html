@@ -1,6 +1,8 @@
 [(#SET{defaut_tri,#ARRAY{
 	titre,1,
 	id_prestations_type,1,
+	prix_unitaire_ht,1,
+	taxe,1,
 	points,-1
 }})]<B_liste_prestations_types>
 #ANCRE_PAGINATION
@@ -11,6 +13,7 @@
 		<tr class="first_row">
 			<th class="titre" scope="col">[(#TRI{titre,<:prestations_type:champ_titre_label:>,ajax})]</th>
 			<th class="titre" scope="col">[(#TRI{prix_unitaire_ht,<:prestations_type:champ_prix_unitaire_ht_label:>,ajax})]</th>
+			<th class="titre" scope="col">[(#TRI{taxe,<:prestations_type:champ_taxe_label:>,ajax})]</th>
 			<th class="titre" scope="col">[(#TRI{id_prestations_unite,<:prestations_type:champ_id_prestations_unite_label:>,ajax})]</th>
 			<th class="id" scope="col">[(#TRI{id_prestations_type,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
@@ -20,6 +23,7 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="titre principale">[(#LOGO_PRESTATIONS_TYPE|image_reduire{20,26})]<a href="[(#ID_PRESTATIONS_TYPE|generer_url_entite{prestations_type})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PRESTATIONS_TYPE">[(#RANG). ]#TITRE</a></td>
 			<td class="prix_unitaire_ht">[(#PRIX_UNITAIRE_HT|prix_formater)]</td>
+			<td class="taxe">[(#TAXE)]</td>
 			<td class="prix_id_prestations_unite">[(#INFO_TITRE{prestations_unite,#ID_PRESTATIONS_UNITE})]</td>
 			<td class="id">[(#AUTORISER{modifier,prestations_type,#ID_PRESTATIONS_TYPE}|?{
 				<a href="[(#URL_ECRIRE{prestations_type_edit,id_prestations_type=#ID_PRESTATIONS_TYPE})]">#ID_PRESTATIONS_TYPE</a>,
