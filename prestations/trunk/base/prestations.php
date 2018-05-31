@@ -24,7 +24,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Déclarations d'interface pour le compilateur
  */
 function prestations_declarer_tables_interfaces($interfaces) {
-
 	$interfaces['table_des_tables']['prestations'] = 'prestations';
 	$interfaces['table_des_tables']['prestations_types'] = 'prestations_types';
 	$interfaces['table_des_tables']['prestations_unites'] = 'prestations_unites';
@@ -43,10 +42,10 @@ function prestations_declarer_tables_interfaces($interfaces) {
  *     Description complétée des tables
  */
 function prestations_declarer_tables_objets_sql($tables) {
-
 	$tables['spip_prestations'] = array(
 		'type' => 'prestation',
 		'principale' => 'oui',
+		'page' => '',
 		'field'=> array(
 			'id_prestation'          => 'bigint(21) NOT NULL',
 			'titre'                  => 'text NOT NULL DEFAULT ""',
@@ -78,6 +77,7 @@ function prestations_declarer_tables_objets_sql($tables) {
 	$tables['spip_prestations_types'] = array(
 		'type' => 'prestations_type',
 		'principale' => 'oui',
+		'page' => '',
 		'table_objet_surnoms' => array('prestationstype'), // table_objet('prestations_type') => 'prestations_types' 
 		'field'=> array(
 			'id_prestations_type' => 'bigint(21) NOT NULL',
@@ -96,13 +96,12 @@ function prestations_declarer_tables_objets_sql($tables) {
 		'champs_versionnes' => array('titre', 'prix_unitaire_ht', 'id_prestations_unite', 'taxe'),
 		'rechercher_champs' => array(),
 		'tables_jointures'  => array(),
-
-
 	);
 
 	$tables['spip_prestations_unites'] = array(
 		'type' => 'prestations_unite',
 		'principale' => 'oui',
+		'page' => '',
 		'table_objet_surnoms' => array('prestationsunite'), // table_objet('prestations_unite') => 'prestations_unites' 
 		'field'=> array(
 			'id_prestations_unite' => 'bigint(21) NOT NULL',
@@ -118,8 +117,6 @@ function prestations_declarer_tables_objets_sql($tables) {
 		'champs_versionnes' => array('titre'),
 		'rechercher_champs' => array(),
 		'tables_jointures'  => array(),
-
-
 	);
 
 	return $tables;
