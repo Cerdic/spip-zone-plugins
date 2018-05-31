@@ -1,4 +1,5 @@
 [(#SET{defaut_tri,#ARRAY{
+	rang,1,
 	titre,1,
 	id_prestation,1,
 	points,-1
@@ -11,6 +12,7 @@
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{prestation:info_1_prestation,prestation:info_nb_prestations}})</strong></caption>]
 	<thead>
 		<tr class="first_row">
+			<th class="rang" scope="col">[(#TRI{rang,<:prestation:champ_rang_label:>,ajax})]</th>
 			<th class="titre" scope="col">[(#TRI{titre,<:prestation:champ_titre_label:>,ajax})]</th>
 			<th class="prix_unitaire_ht" scope="col"><:prestation:champ_prix_unitaire_ht_label:></th>
 			<th class="quantite" scope="col"><:prestation:champ_quantite_label:></th>
@@ -19,8 +21,9 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_prestations(PRESTATIONS){id_prestations_type?}{id_prestations_unite?}{id_objet?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_prestations(PRESTATIONS){id_prestations_type?}{id_prestations_unite?}{id_objet?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,rang},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="rang">[(#RANG)]</td>
 			<td class="titre principale">[(#LOGO_PRESTATION|image_reduire{20,26})]<a href="[(#ID_PRESTATION|generer_url_entite{prestation})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PRESTATION">#TITRE</a></td>
 			<td class="prix_unitaire_ht">[(#PRIX_UNITAIRE_HT|prix_formater)]</td>
 			<td class="quantite">[(#ID_PRESTATION|prestations_calculer_quantite)] #INFO_TITRE{prestations_unite,#ID_PRESTATIONS_UNITE}</td>
@@ -34,7 +37,7 @@
 	</tbody>
 	<tfoot>
 		<tr>
-			<td colspan="3"><strong>Total</strong></td>
+			<td colspan="4"><strong>Total</strong></td>
 			<td colspan="2">[(#GET{total}|prix_formater)]</td>
 		</tr>
 	</tfoot>
