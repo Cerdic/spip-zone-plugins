@@ -30,11 +30,7 @@ function prestations_affiche_enfants($flux) {
 			)
 		);
 		
-		if ($p = strpos($flux['data'], '<!--affiche_milieu-->')) {
-			$flux['data'] = substr_replace($flux['data'], $enfants, $p, 0);
-		} else {
-			$flux['data'] .= $enfants;
-		}
+		$flux['data'] = $enfants . $flux['data'];
 	}
 	
 	return $flux;
