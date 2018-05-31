@@ -32,7 +32,7 @@
   background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];
 }
 /* pliage */
-.liste-objets.chapitres.plie tbody tr:not([data-profondeur="0"]) {
+.liste-objets.chapitres.plie tbody tr:not([data-profondeur="0"]):not(.expose) {
   display: none;
 }
 .liste-objets.chapitres .label-pliage {
