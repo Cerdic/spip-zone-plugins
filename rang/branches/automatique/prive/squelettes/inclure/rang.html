@@ -13,8 +13,7 @@ if (window.jQuery) {
 			if($(this).find('tr').length > 1 && $(this).find('tr').data('id_objet')) {
 				// ajouter automatiquement une colonne avec le picto "draggable" si elle n'est pas présente
 				if(!$(this).find('img[src*=draggable]').length) {
-					$(this).parent('table').find('thead').find('tr').prepend("<th class='drag'>&nbsp;</th>");
-					$(this).find('tr').prepend("<td class='drag'>[(#CHEMIN_IMAGE{draggable-16.png}|balise_img)]</td>");
+					$(this).find('tr>td:first-child').prepend("[(#CHEMIN_IMAGE{draggable-16.png}|balise_img|inserer_attribut{class,drag})]&nbsp;");
 				}
 				// ajouter le comportement "sortable"
 				$(this).sortable({
