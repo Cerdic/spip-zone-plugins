@@ -29,8 +29,8 @@ Il inclu aussi un système de plugin, permettant d'étendre ses fonctionnalitée
 
 Lazysizes est conçut différement des autres scripts de lazyload d'image.
 
-Il detecte automatiquement les changement de visibilité affectant l'élément courrant a précharger
-ainsi que les suivant, et ce dans n'importe quel environement :
+Il detecte automatiquement les changement de visibilité affectant l'élément courant a précharger
+ainsi que les suivant, et ce dans n'importe quel environnement :
 
 Le script fonctionne de manière autonome, auto initialisé, auto configuré,
 de manière universelle, désactivant ou adaptant les composants future a précharger images ou iframes
@@ -56,7 +56,7 @@ or create a mega menu containing images.
 
 It's based on highly efficient, best practice code (runtime and network)
 to work jank-free at 60fps and can be used with hundreds of images/iframes on CSS and JS-heavy pages or webapps.
-	
+
 **Extendable** :
 
 It provides JS and CSS hooks to extend lazysizes with any kind of lazy loading, lazy instantiation,
@@ -185,9 +185,9 @@ puis les charger dans insert_head
 	- [] ajouter les scripts dans le privé vu que les modèle sont dipponibles
 - [] 	preview des modeles dans l'espace privé
 		par exemple : `<picture5|id_document=5>`
-		
+
 - [X] config export ie_config()
-- [] traduire la doc 
+- [] traduire la doc
 - [] Ajouter via define ou config les options de configuration
 - [] surcharger les modèles media, interressants a "lazyloader"
 - [] Chaines de langue, et docs/aide des addons

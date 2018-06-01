@@ -29,11 +29,18 @@ function inc_safehtml($t, $allowed = null) {
 	$config->set('HTML.Doctype', 'HTML 4.01 Transitional');
 	$config->set('CSS.AllowTricky', true);
 	$config->set('HTML.Allowed', $allowed);
+	//https://stackoverflow.com/questions/11747918/htmlpurifier-allow-class-attribute
+	//$config->set('HTML.AllowedAttributes', 'img.src,*.class');
 	$config->set('Attr.AllowedFrameTargets', array('_blank'=>true));
 	
 	//$config->set('HTML.TargetBlank', true); 
 	//$config->set('HTML.TargetNoopener', true);
-	$config->set('Cache.SerializerPath', preg_replace(',/$,', '', realpath(_DIR_TMP)));
+	$config->set('Cache.SerializerPath', preg_replace(',/$,', '', realpath(_DIR_TMP.'cache/')));
+	
+	  // Set some HTML5 properties
+	//$config->set('HTML.DefinitionID', 'html5-definitions'); // unqiue id
+	//$config->set('HTML.DefinitionRev', 1);
+  
 	$def = $config->getHTMLDefinition(true);
 	 
 	// HTML5
@@ -92,6 +99,8 @@ function inc_safehtml($t, $allowed = null) {
 	$def->addAttribute('img', 'data-srcset', 'URI');
 	$def->addAttribute('img', 'data-sizes', 'CDATA');
 	
+	$def->addAttribute('a', 'class', 'Text');
+	$def->addAttribute('a', 'href', 'URI');
 	//var_dump($def);
 	if (!isset($purifier))
 		$purifier = new HTMLPurifier($config);

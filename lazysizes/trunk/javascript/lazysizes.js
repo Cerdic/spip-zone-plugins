@@ -163,21 +163,21 @@
 	var throttle = function(fn){
 		var running;
 		var lastTime = 0;
-		var gDelay = 125;
-		var RIC_DEFAULT_TIMEOUT = 666;
-		var rICTimeout = RIC_DEFAULT_TIMEOUT;
+		var gDelay = lazySizesConfig.throttleDelay;
+		var rICTimeout = lazySizesConfig.ricTimeout;
 		var run = function(){
 			running = false;
 			lastTime = Date.now();
 			fn();
 		};
-		var idleCallback = requestIdleCallback ?
+		var idleCallback = requestIdleCallback && rICTimeout > 49 ?
 			function(){
 				requestIdleCallback(run, {timeout: rICTimeout});
-				if(rICTimeout !== RIC_DEFAULT_TIMEOUT){
-					rICTimeout = RIC_DEFAULT_TIMEOUT;
+
+				if(rICTimeout !== lazySizesConfig.ricTimeout){
+					rICTimeout = lazySizesConfig.ricTimeout;
 				}
-			}:
+			} :
 			rAFIt(function(){
 				setTimeout(run);
 			}, true)
@@ -185,8 +185,9 @@
 
 		return function(isPriority){
 			var delay;
+
 			if((isPriority = isPriority === true)){
-				rICTimeout = 44;
+				rICTimeout = 33;
 			}
 
 			if(running){
@@ -201,7 +202,7 @@
 				delay = 0;
 			}
 
-			if(isPriority || (delay < 9 && requestIdleCallback)){
+			if(isPriority || delay < 9){
 				idleCallback();
 			} else {
 				setTimeout(idleCallback, delay);
@@ -236,6 +237,48 @@
 		};
 	};
 
+	(function(){
+		var prop;
+
+		var lazySizesDefaults = {
+			lazyClass: 'lazyload',
+			loadedClass: 'lazyloaded',
+			loadingClass: 'lazyloading',
+			preloadClass: 'lazypreload',
+			errorClass: 'lazyerror',
+			//strictClass: 'lazystrict',
+			autosizesClass: 'lazyautosizes',
+			srcAttr: 'data-src',
+			srcsetAttr: 'data-srcset',
+			sizesAttr: 'data-sizes',
+			//preloadAfterLoad: false,
+			minSize: 40,
+			customMedia: {},
+			init: true,
+			expFactor: 1.5,
+			hFac: 0.8,
+			loadMode: 2,
+			loadHidden: true,
+			ricTimeout: 0,
+			throttleDelay: 125,
+		};
+
+		lazySizesConfig = window.lazySizesConfig || window.lazysizesConfig || {};
+
+		for(prop in lazySizesDefaults){
+			if(!(prop in lazySizesConfig)){
+				lazySizesConfig[prop] = lazySizesDefaults[prop];
+			}
+		}
+
+		window.lazySizesConfig = lazySizesConfig;
+
+		setTimeout(function(){
+			if(lazySizesConfig.init){
+				init();
+			}
+		});
+	})();
 
 	var loader = (function(){
 		var preloadElems, isCompleted, resetPreloadingTimer, loadMode, started;
@@ -478,7 +521,7 @@
 			var sizes = isImg && (elem[_getAttribute](lazySizesConfig.sizesAttr) || elem[_getAttribute]('sizes'));
 			var isAuto = sizes == 'auto';
 
-			if( (isAuto || !isCompleted) && isImg && (elem[_getAttribute]('src') || elem.srcset) && !elem.complete && !hasClass(elem, lazySizesConfig.errorClass)){return;}
+			if( (isAuto || !isCompleted) && isImg && (elem[_getAttribute]('src') || elem.srcset) && !elem.complete && !hasClass(elem, lazySizesConfig.errorClass) && hasClass(elem, lazySizesConfig.lazyClass)){return;}
 
 			detail = triggerEvent(elem, 'lazyunveilread').detail;
 
@@ -635,47 +678,6 @@
 			loader._();
 		}
 	};
-
-	(function(){
-		var prop;
-
-		var lazySizesDefaults = {
-			lazyClass: 'lazyload',
-			loadedClass: 'lazyloaded',
-			loadingClass: 'lazyloading',
-			preloadClass: 'lazypreload',
-			errorClass: 'lazyerror',
-			//strictClass: 'lazystrict',
-			autosizesClass: 'lazyautosizes',
-			srcAttr: 'data-src',
-			srcsetAttr: 'data-srcset',
-			sizesAttr: 'data-sizes',
-			//preloadAfterLoad: false,
-			minSize: 40,
-			customMedia: {},
-			init: true,
-			expFactor: 1.5,
-			hFac: 0.8,
-			loadMode: 2,
-			loadHidden: true,
-		};
-
-		lazySizesConfig = window.lazySizesConfig || window.lazysizesConfig || {};
-
-		for(prop in lazySizesDefaults){
-			if(!(prop in lazySizesConfig)){
-				lazySizesConfig[prop] = lazySizesDefaults[prop];
-			}
-		}
-
-		window.lazySizesConfig = lazySizesConfig;
-
-		setTimeout(function(){
-			if(lazySizesConfig.init){
-				init();
-			}
-		});
-	})();
 
 	lazysizes = {
 		cfg: lazySizesConfig,

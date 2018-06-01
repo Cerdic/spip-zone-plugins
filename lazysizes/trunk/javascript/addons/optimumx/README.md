@@ -83,7 +83,7 @@ Normally the image specific optimal pixel density should be added as a floating 
 ```html
 <script>
 window.lazySizesConfig = window.lazySizesConfig || {};
-window.lazySizesConfig.getOptimumX = function(element){
+window.lazySizesConfig.getOptimumX = function(_element){
     return window.devicePixelRatio > 1.6 ? devicePixelRatio * 0.9 : 1;
 };
 </script>
@@ -115,6 +115,27 @@ window.lazySizesConfig.config.getOptimumX = function(/*element*/){
     }
     return Math.min(Math.round(dpr * 100) / 100, 2);
 };
+```
+
+### The `constrainPixelDensity` option
+
+In case the `constrainPixelDensity` is set to `true`. All images without a `data-optimumx` attribute are treated as they would have a `data-optimumx="auto"` attribute.
+
+```html
+<script>
+window.lazySizesConfig = window.lazySizesConfig || {};
+window.lazySizesConfig.constrainPixelDensity = true;
+</script>
+
+<img
+    data-srcset="http://placehold.it/300x150 300w,
+    	http://placehold.it/700x300 700w,
+    	http://placehold.it/1400x600 1400w,
+    	http://placehold.it/2800x1200 2800w"
+     data-sizes="auto"
+     class="lazyload"
+     src="http://placehold.it/300x150"
+     alt="flexible image" />
 ```
 
 ## <a name="compressive-picture-pattern"></a>Background information: Compressive picture pattern
