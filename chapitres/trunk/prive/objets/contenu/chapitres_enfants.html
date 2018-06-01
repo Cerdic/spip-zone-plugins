@@ -1,0 +1,23 @@
+[(#REM)
+
+	Chapitres d'un objet : plan réduit ou vue complète
+
+]
+#SET{vues,#LISTE{plan,complets}}
+#SET{vue,#ENV{chapitres}|in_array{#GET{vues}}|?{#ENV{chapitres},#GET{vues/0}}}
+
+<div class="onglets_simple clearfix">
+	<ul>
+		<BOUCLE_vue(DATA){source table, #GET{vues}}>
+		<li>
+			[(#SELF|parametre_url{chapitres,#VALEUR}|lien_ou_expose{
+				[(#VAL{chapitre:titre_#VALEUR}|_T)],
+				#VALEUR|=={#GET{vue}},
+				ajax
+			})]
+		</li>
+		</BOUCLE_vue>
+	</ul>
+</div>
+
+<INCLURE{fond=prive/squelettes/inclure/chapitres_#GET{vue}, env} />

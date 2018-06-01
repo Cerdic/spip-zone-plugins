@@ -5,22 +5,27 @@
 ]
 #SET{defaut_tri,#ARRAY{
 	titre,1,
+	num titre,1,
 	date,-1,
 	id_chapitre,1,
 	points,-1
 }}
-#SET{profondeur,0}
-
-#BOITE_OUVRIR{#INFO_TITRE{#OBJET,#ID_OBJET}|wrap{<h1>}, simple fiche_objet chapitres_complets}
-
-<div id="wysiwyg">
+<div class="chapitres_complets">
 
 	<B_liste_chapitres>
+	<h2>
+		<BOUCLE_total(CHAPITRES){objet}{id_objet}{statut?} />
+		[(#TOTAL_BOUCLE|singulier_ou_pluriel{chapitre:info_1_chapitre,chapitre:info_nb_chapitres})]
+		<//B_total>
+	</h2>
 
-	<p class="pagination tri">
-		<span class="statut">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</span> 
-		<span class="titre">[(#TRI{titre,<:chapitre:champ_titre_label:>,ajax})]</th>
+	<p class="tri">
+		<span class="statut">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</span>
+		<span class="sep">|</span>
+		<span class="titre">[(#TRI{num titre,<:chapitre:champ_titre_label:>,ajax})]</span>
+		<span class="sep">|</span>
 		<span class="date">[(#TRI{date,<:date:>,ajax})]</span>
+		<span class="sep">|</span>
 		<span class="id">[(#TRI{id_chapitre,<:info_numero_abbreviation:>,ajax})]</span>
 	</p>
 
@@ -32,20 +37,24 @@
 		{recherche?}
 		{tri #ENV{par,num titre},#GET{defaut_tri}}
 		{par titre}
-		{"<hr class='chapitre__sep' />"}
 	>
 	#SET{numero,#COMPTEUR_BOUCLE}
 	#SET{numero_parent,#GET{numero}}
 
-	<section class="chapitre clearfix #EXPOSE" id="chapitre#ID_CHAPITRE" data-profondeur="#GET{profondeur}">
+	#BOITE_OUVRIR{'','simple'}
+	<section
+		class="chapitre chapitre__racine clearfix[ (#EXPOSE{expose})]"
+		id="chapitre#ID_CHAPITRE"
+		data-profondeur="0"
+	>
 
-		<INCLURE{fond=prive/squelettes/inclure/chapitre_enplace,
+		<INCLURE{fond=prive/squelettes/inclure/chapitre_editable,
 			id_chapitre,
 			objet,
 			id_objet,
 			id_parent=#ENV{id_parent},
 			edit,
-			profondeur=#GET{profondeur},
+			profondeur=0,
 			numero=#GET{numero},
 			ajax}
 		/>
@@ -63,11 +72,15 @@
 		#SET{numero,#GET{numero_parent}|concat{'.',#COMPTEUR_BOUCLE}}
 		#SET{numero_parent,#GET{numero}}
 
-		<section class="chapitre clearfix #EXPOSE" id="chapitre#ID_CHAPITRE" data-profondeur="#GET{profondeur}">
+		<section
+			class="chapitre chapitre__enfant clearfix[ (#EXPOSE{expose})]"
+			id="chapitre#ID_CHAPITRE"
+			data-profondeur="#GET{profondeur}"
+		>
 
 			<hr class="chapitre__sep" />
 
-			<INCLURE{fond=prive/squelettes/inclure/chapitre_enplace,
+			<INCLURE{fond=prive/squelettes/inclure/chapitre_editable,
 				id_chapitre,
 				objet,
 				id_objet,
@@ -87,13 +100,12 @@
 		</BOUCLE_liste_chapitres_enfants>
 
 	</section>
+	#BOITE_FERMER
 	</BOUCLE_liste_chapitres>
 
 	[<div class="liste-objets chapitres caption-wrap">
-		<strong class="caption">(#ENV*{sinon,''})</strong>
+		<strong class="caption">(#ENV*{sinon,<:chapitre_info_aucun_chapitre:>})</strong>
 	</div>
 	]<//B_liste_chapitres>
 
 </div>
-
-#BOITE_FERMER

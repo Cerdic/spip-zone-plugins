@@ -55,8 +55,18 @@
 }
 
 /* Chapitres complets */
-.chapitres_complets .chapitre__titre {
-  color: #GET{foncee};
+/* Reprendre des styles de #wysiwyg */
+.chapitres_complets .chapitre {
+  max-width: 50em;
+  margin: 0 auto;
+}
+.chapitres_complets .champ {
+  font-size: 1.2em;
+  font-family: Cambria, Georgia, "Times New Roman", Times, serif;
+}
+.chapitres_complets .champ label,
+.chapitres_complets .champ.contenu_titre {
+  display: none;
 }
 .chapitres_complets .chapitre__lien,
 .chapitres_complets .chapitre__statut {
@@ -66,8 +76,8 @@
   margin-#ENV{right}: 0.5em;
 }
 .chapitres_complets .chapitre__sep {
-  margin: 3em 0;
+  /* margin: 3em 0; */
 }
 .chapitres_complets .chapitre .chapitre {
-  padding-left: 2em;
+  /* padding-left: 2em; */
 }

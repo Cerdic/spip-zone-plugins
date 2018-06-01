@@ -40,11 +40,11 @@
 
 		[(#REM) Icône ajouter sous-chapitre ]
 		[(#GET{edit}|=={new}|non)
-			[(#GET{self}|parametre_url{edit,new}|parametre_url{id_parent,#ID_CHAPITRE}|icone_verticale{<:chapitre:icone_ajouter_chapitre_enfant:>,chapitre,add,right ajax})]
+			[(#GET{self}|parametre_url{edit,new}|parametre_url{id_parent,#ID_CHAPITRE}|icone_verticale{<:chapitre:icone_ajouter_chapitre_enfant:>,chapitre-16,add,right ajax})]
 		]
 		[(#REM) Icône éditer chapitre ]
 		[(#GET{edit}|non)
-			[(#GET{self}|parametre_url{edit,#ID_CHAPITRE}|icone_verticale{<:chapitre:icone_modifier_chapitre:>,chapitre,edit,right ajax})]
+			[(#GET{self}|parametre_url{edit,#ID_CHAPITRE}|icone_verticale{<:chapitre:icone_modifier_chapitre:>,chapitre-16,edit,right ajax})]
 		]
 
 	]
