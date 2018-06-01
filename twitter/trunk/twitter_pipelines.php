@@ -21,7 +21,7 @@ function twitter_afficher_complement_objet($flux){
 	  AND $id_article = $flux['args']['id']
 	  AND include_spip('inc/config')
 	  AND $cfg = lire_config('microblog')
-		AND ($cfg['evt_publierarticles'] OR $cfg['evt_proposerarticles'])
+		AND (isset($cfg['evt_publierarticles']) OR isset($cfg['evt_proposerarticles']))
 		AND $cfg['invite']
 		){
 		$flux['data'] .= recuperer_fond('prive/editer/microblog', array_merge($_GET, array('objet'=>'article','id_objet'=>$id_article)));
