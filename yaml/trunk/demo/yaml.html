@@ -1,0 +1,23 @@
+#CACHE{0}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+
+<body dir="#LANG_DIR">
+<div id="container">
+
+	<h1>YAML TESTS</h1>
+	[<p>(#VAL|verifier_libyaml)</p>]
+
+	<h1>YAML PARSE FILE</h1>
+	[<p>(#CHEMIN{noisettes/conteneur.yaml}|libyaml_parse_file|bel_env)</p>]
+	[<p>(#CHEMIN{noisettes/conteneur.yaml}|sfyaml_parse_file|bel_env)</p>]
+	[<p>(#CHEMIN{noisettes/conteneur.yaml}|symfony_parse_file|bel_env)</p>]
+
+	<h1>YAML PARSE STRING</h1>
+	[<p>(#CHEMIN{noisettes/conteneur.yaml}|libyaml_parse|bel_env)</p>]
+	[<p>(#CHEMIN{noisettes/conteneur.yaml}|sfyaml_parse|bel_env)</p>]
+	[<p>(#CHEMIN{noisettes/conteneur.yaml}|symfony_parse|bel_env)</p>]
+
+</div>
+</body>
+</html>
