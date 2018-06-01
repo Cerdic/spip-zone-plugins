@@ -44,6 +44,7 @@ function lesscss_compile($style, $contexte = array()){
 		}
 	}
 
+	$url_absolue = (!empty($contexte['file'])?protocole_implicite(url_absolue($contexte['file'])):null);
 	if ($parser_options['sourceMap']) {
 		if (!empty($contexte['dest'])) {
 			$parser_options['sourceMapWriteTo'] = $contexte['dest'] . '.map';
@@ -54,7 +55,19 @@ function lesscss_compile($style, $contexte = array()){
 			unset($parser_options['sourceMapURL']);
 		}
 		$parser_options['sourceMapBasepath'] = realpath(_DIR_RACINE);
-		$parser_options['sourceMapRootpath'] = protocole_implicite(url_absolue(_DIR_RACINE?_DIR_RACINE:'./'));
+		$url_base = url_absolue(_DIR_RACINE?_DIR_RACINE:'./');
+		$parts = parse_url($url_base);
+		$path = rtrim($parts['path'],'/');
+		if (strlen($path)) {
+			$url_base = explode($path, $url_base);
+			$url_base = reset($url_base).'/';
+			$parser_options['sourceMapBasepath'] = substr($parser_options['sourceMapBasepath'], 0, -strlen($path));
+		}
+		$url_base = protocole_implicite($url_base);
+		if ($url_absolue) {
+			$url_absolue = '/' . substr($url_absolue, strlen($url_base));
+		}
+		$parser_options['sourceMapRootpath'] = $url_base;
 	}
 
 	$parser = new Less_Parser($parser_options);
@@ -62,8 +75,6 @@ function lesscss_compile($style, $contexte = array()){
 	$parser->relativeUrls = true;
 
 	try {
-		$url_absolue = (!empty($contexte['file'])?protocole_implicite(url_absolue($contexte['file'])):null);
-		$url_absolue = (!empty($contexte['file'])?$contexte['file']:null);
 		$parser->parse($style,$url_absolue);
 		$out = $parser->getCss();
 
