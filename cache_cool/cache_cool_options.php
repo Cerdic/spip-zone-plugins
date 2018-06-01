@@ -282,7 +282,7 @@ function cache_cool_get_global_context(){
 		'REQUEST_URI',
 		'REQUEST_METHOD',
 	) as $v)
-		$contexte[$v] = $GLOBALS[$v];
+		$contexte[$v] = (isset($GLOBALS[$v])?$GLOBALS[$v]:null);
 	$contexte['url_de_base'] = url_de_base(false);
 	$contexte['nettoyer_uri'] = nettoyer_uri();
 	return $contexte;
