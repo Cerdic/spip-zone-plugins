@@ -1,0 +1,78 @@
+[(#REM)
+
+	Prévisu et édition sur place d'un chapitre
+
+	Paramètres :
+		**obligatoire
+		*conseillé
+
+		- **id_chapitre
+		- **objet
+		- **id_objet
+		- **id_parent
+		- **edit : 'new' ou id_chapitre
+		- **numero : numéro pour chapitrage
+		- ** profondeur : niveau du chapitre, 0 = racine
+]
+#SET{edit,#ENV{edit}|=={#ID_CHAPITRE}|?{#ID_CHAPITRE,#ENV{edit}|et{#ENV{id_parent}|=={#ID_CHAPITRE}}|?{new}}}
+#SET{self,#SELF|parametre_url{edit|id_parent,''}}
+#SET{heading,#VAL{h}|concat{#ENV{profondeur}|plus{3}}}
+
+<div class="clearfix">
+
+	[(#REM)
+		=======
+		Prévisu
+		=======
+	]
+	[(#GET{edit}|=={#ID_CHAPITRE}|non)
+
+		<a href="[(#ID_CHAPITRE|generer_url_entite{chapitre})]" class="chapitre__lien">
+			<:info_numero_abbreviation:> #ID_CHAPITRE
+		</a>
+		<span class="chapitre__statut">[(#INFO_STATUT{chapitre,#ID_CHAPITRE}|puce_statut{chapitre,#ID_CHAPITRE})]</span>
+
+		[<(#GET{heading}) class="spip chapitre__titre">]
+			[<span class="chapitre__numero">(#ENV{numero})</span> ]#INFO_TITRE{chapitre,#ID_CHAPITRE}
+		[</(#GET{heading})>]
+
+		<INCLURE{fond=prive/objets/contenu/chapitre, id_chapitre} />
+
+		[(#REM) Icône ajouter sous-chapitre ]
+		[(#GET{edit}|=={new}|non)
+			[(#GET{self}|parametre_url{edit,new}|parametre_url{id_parent,#ID_CHAPITRE}|icone_verticale{<:chapitre:icone_ajouter_chapitre_enfant:>,chapitre,add,right ajax})]
+		]
+		[(#REM) Icône éditer chapitre ]
+		[(#GET{edit}|non)
+			[(#GET{self}|parametre_url{edit,#ID_CHAPITRE}|icone_verticale{<:chapitre:icone_modifier_chapitre:>,chapitre,edit,right ajax})]
+		]
+
+	]
+
+	[(#REM)
+		=======
+		Édition
+		=======
+	]
+	[(#GET{edit}|oui)
+		<br class="nettoyeur" />
+		<div class="cadre-formulaire-editer">
+			<div class="entete-formulaire">
+				[(#GET{self}|icone_verticale{<:retour:>,chapitre,'',right ajax})]
+				[(#GET{edit}|intval|oui)
+					[(#VAL{chapitre}|objet_info{texte_modifier}|_T)]
+				][(#GET{edit}|intval|non)
+					<:chapitre:icone_ajouter_chapitre_enfant:>
+				]
+			</div>
+			<div class="ajax">
+				[(#GET{edit}|intval|oui)
+					#FORMULAIRE_EDITER_CHAPITRE{#ID_CHAPITRE,#OBJET,#ID_OBJET,0,#SELF|parametre_url{edit,''}|ancre_url{chapitre#ID_CHAPITRE}}
+				][(#GET{edit}|intval|non)
+					#FORMULAIRE_EDITER_CHAPITRE{new,#OBJET,#ID_OBJET,#ID_CHAPITRE,#SELF|parametre_url{edit,''}|ancre_url{chapitre#ID_CHAPITRE}}
+				]
+			</div>
+		</div>
+	]
+
+</div>

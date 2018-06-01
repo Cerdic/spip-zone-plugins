@@ -1,0 +1,99 @@
+[(#REM)
+
+	Vue complète des chapitres d'un objet
+
+]
+#SET{defaut_tri,#ARRAY{
+	titre,1,
+	date,-1,
+	id_chapitre,1,
+	points,-1
+}}
+#SET{profondeur,0}
+
+#BOITE_OUVRIR{#INFO_TITRE{#OBJET,#ID_OBJET}|wrap{<h1>}, simple fiche_objet chapitres_complets}
+
+<div id="wysiwyg">
+
+	<B_liste_chapitres>
+
+	<p class="pagination tri">
+		<span class="statut">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</span> 
+		<span class="titre">[(#TRI{titre,<:chapitre:champ_titre_label:>,ajax})]</th>
+		<span class="date">[(#TRI{date,<:date:>,ajax})]</span>
+		<span class="id">[(#TRI{id_chapitre,<:info_numero_abbreviation:>,ajax})]</span>
+	</p>
+
+	<BOUCLE_liste_chapitres (CHAPITRES)
+		{id_parent=0}
+		{objet}
+		{id_objet}
+		{statut?}
+		{recherche?}
+		{tri #ENV{par,num titre},#GET{defaut_tri}}
+		{par titre}
+		{"<hr class='chapitre__sep' />"}
+	>
+	#SET{numero,#COMPTEUR_BOUCLE}
+	#SET{numero_parent,#GET{numero}}
+
+	<section class="chapitre clearfix #EXPOSE" id="chapitre#ID_CHAPITRE" data-profondeur="#GET{profondeur}">
+
+		<INCLURE{fond=prive/squelettes/inclure/chapitre_enplace,
+			id_chapitre,
+			objet,
+			id_objet,
+			id_parent=#ENV{id_parent},
+			edit,
+			profondeur=#GET{profondeur},
+			numero=#GET{numero},
+			ajax}
+		/>
+
+		#SET{profondeur, 1}
+		<BOUCLE_liste_chapitres_enfants (CHAPITRES)
+			{id_parent=#ID_CHAPITRE}
+			{objet}
+			{id_objet}
+			{statut==.*}
+			{recherche?}
+			{tri #ENV{par,num titre},#GET{defaut_tri}}
+			{par titre}
+		>
+		#SET{numero,#GET{numero_parent}|concat{'.',#COMPTEUR_BOUCLE}}
+		#SET{numero_parent,#GET{numero}}
+
+		<section class="chapitre clearfix #EXPOSE" id="chapitre#ID_CHAPITRE" data-profondeur="#GET{profondeur}">
+
+			<hr class="chapitre__sep" />
+
+			<INCLURE{fond=prive/squelettes/inclure/chapitre_enplace,
+				id_chapitre,
+				objet,
+				id_objet,
+				id_parent=#ENV{id_parent},
+				edit,
+				profondeur=#GET{profondeur},
+				numero=#GET{numero},
+				ajax}
+			/>
+
+			#SET{profondeur,#GET{profondeur}|plus{1}}
+			<BOUCLE_liste_chapitres_petits_enfants (BOUCLE_liste_chapitres_enfants) />
+			#SET{profondeur,#GET{profondeur}|moins{1}}
+			#SET{numero_parent,#GET{numero}|substr{0,#GET{numero}|strlen|moins{2}}}
+
+		</section>
+		</BOUCLE_liste_chapitres_enfants>
+
+	</section>
+	</BOUCLE_liste_chapitres>
+
+	[<div class="liste-objets chapitres caption-wrap">
+		<strong class="caption">(#ENV*{sinon,''})</strong>
+	</div>
+	]<//B_liste_chapitres>
+
+</div>
+
+#BOITE_FERMER

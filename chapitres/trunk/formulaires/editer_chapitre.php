@@ -203,5 +203,9 @@ function formulaires_editer_chapitre_traiter_dist($id_chapitre = 'new', $objet='
 
 	$retours = formulaires_editer_objet_traiter('chapitre', $id_chapitre, $id_parent, $lier_trad, $retour, $config_fonc, $row, $hidden);
 
+	if (isset($retours['redirect'])) {
+		$retours['redirect'] = parametre_url($retours['redirect'], 'id_chapitre', '');
+	}
+
 	return $retours;
 }
