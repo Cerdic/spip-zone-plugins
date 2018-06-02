@@ -43,6 +43,11 @@
 			[(#SAISIE{input,taxe,
 					label=<:prix_objets:taxes_surcharge:>})]
 
+			[(#SAISIE{oui_non,prix_total,
+					label=<:prix_objets:champ_prix_total_label:>,
+					valeur_oui=1,
+					valeur_non=0})]
+
 			#GENERER_SAISIES{#ENV{_saisies_extras}}
 
 			<!--fini champs!-->

@@ -52,7 +52,8 @@ function formulaires_prix_charger_dist($id_objet, $objet = 'article') {
 		'objet_titre' => '',
 		'taxes' => $taxes,
 		'taxe' => '',
-		'visible' => _request('visible') ? _request('visible') : ''
+		'visible' => _request('visible') ? _request('visible') : '',
+		'prix_total' => 0,
 	);
 
 	$valeurs['_hidden'] = '<input type="hidden" name="objet" value="' . $objet . '">';
@@ -119,6 +120,7 @@ function formulaires_prix_traiter_dist($id_objet, $objet = 'article') {
 	$prix = _request('prix');
 	$id_declinaison = _request('id_declinaison');
 	$extensions =  _request('extensions') ? explode(',', _request('extensions')) : array();
+	$prix_total = _request('prix_total');
 
 	// Génération du titre
 	$titre = extraire_multi(supprimer_numero(generer_info_entite($id_objet, $objet, 'titre', '*')));
@@ -169,7 +171,8 @@ function formulaires_prix_traiter_dist($id_objet, $objet = 'article') {
 						'id_objet' => $id_objet,
 						'titre' => $titre_secondaire,
 						'extension' => $extension,
-						'id_extension' => $id
+						'id_extension' => $id,
+						'prix_total' => $prix_total,
 					);
 				}
 			}
@@ -201,6 +204,7 @@ function formulaires_prix_traiter_dist($id_objet, $objet = 'article') {
 			'taxe' => _request('taxe'),
 			'prix' => 0,
 			'prix_ht' => 0,
+			'prix_total' => $prix_total,
 			'rang_lien' => $dernier_rang + 1,
 		);
 

@@ -70,6 +70,9 @@ function prix_objets_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['2.1.1']  = array(
 		array('maj_tables', array('spip_prix_objets')),
 	);
+	$maj['2.1.4']  = array(
+		array('maj_tables', array('spip_prix_objets')),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
