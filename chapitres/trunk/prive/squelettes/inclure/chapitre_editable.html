@@ -16,7 +16,7 @@
 ]
 #SET{edit,#ENV{edit}|=={#ID_CHAPITRE}|?{#ID_CHAPITRE,#ENV{edit}|et{#ENV{id_parent}|=={#ID_CHAPITRE}}|?{new}}}
 #SET{self,#SELF|parametre_url{edit|id_parent,''}}
-#SET{heading,#VAL{h}|concat{#ENV{profondeur}|plus{3}}}
+#SET{heading,#VAL{h}|concat{#ENV{profondeur}|plus{2}}}
 
 <div class="clearfix">
 
@@ -36,7 +36,7 @@
 			[<span class="chapitre__numero">(#ENV{numero})</span> ]#INFO_TITRE{chapitre,#ID_CHAPITRE}
 		[</(#GET{heading})>]
 
-		<INCLURE{fond=prive/objets/contenu/chapitre, id_chapitre} />
+		[(#INCLURE{fond=prive/objets/contenu/chapitre, id_chapitre}|chapitres_remplacer_intertitres{#ENV{profondeur},2})]
 
 		[(#REM) Icône ajouter sous-chapitre ]
 		[(#GET{edit}|=={new}|non)

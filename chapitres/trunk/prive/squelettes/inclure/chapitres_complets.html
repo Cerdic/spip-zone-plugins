@@ -6,28 +6,12 @@
 #SET{defaut_tri,#ARRAY{
 	titre,1,
 	num titre,1,
+	rang,1,
 	date,-1,
 	id_chapitre,1,
 	points,-1
 }}
 <div class="chapitres_complets">
-
-	<B_liste_chapitres>
-	<h2>
-		<BOUCLE_total(CHAPITRES){objet}{id_objet}{statut?} />
-		[(#TOTAL_BOUCLE|singulier_ou_pluriel{chapitre:info_1_chapitre,chapitre:info_nb_chapitres})]
-		<//B_total>
-	</h2>
-
-	<p class="tri">
-		<span class="statut">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</span>
-		<span class="sep">|</span>
-		<span class="titre">[(#TRI{num titre,<:chapitre:champ_titre_label:>,ajax})]</span>
-		<span class="sep">|</span>
-		<span class="date">[(#TRI{date,<:date:>,ajax})]</span>
-		<span class="sep">|</span>
-		<span class="id">[(#TRI{id_chapitre,<:info_numero_abbreviation:>,ajax})]</span>
-	</p>
 
 	<BOUCLE_liste_chapitres (CHAPITRES)
 		{id_parent=0}
@@ -56,6 +40,9 @@
 			edit,
 			profondeur=0,
 			numero=#GET{numero},
+			cacher_titre=oui,
+			cacher_statut=oui,
+			cacher_meta=oui,
 			ajax}
 		/>
 

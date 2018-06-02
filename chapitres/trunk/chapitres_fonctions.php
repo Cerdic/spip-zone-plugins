@@ -109,3 +109,71 @@ function calcul_branche_in_chapitres($id, $id_inclus=false){
 		$b[$i] = $branche;
 	return $branche;
 }
+
+
+/**
+ * Remplacer les intertitres dans le texte d'un chapitre par une classe sémantique
+ *
+ * Dans les chapitres, la hiérarchie des titres est régie par leur imbrication,
+ * il ne faut donc pas de vrais intertitres dans le texte.
+ *
+ * Par exemple, <h3> devient <div class="hn"> en fonction de la profondeur du chapitre et du niveau de heading des chapitres à la racine.
+ *
+ * @example
+ * [(#TEXTE|chapitres_remplacer_intertitres{#GET{profondeur},2})]
+ *
+ * @param string $texte
+ *    Texte sans traitement typo
+ * @param int|string $profondeur
+ *    Profondeur du chapitre
+ *    0 = racine
+ * @param int|string $niveau_racine
+ *    Numéro du heading le plus haut (ceux des chapitres à la racine)
+ *    Ex. : <h1> = 1, <h2> = 2, etc.
+ *    Par défaut 2
+ */
+function chapitres_remplacer_intertitres($texte, $profondeur, $niveau_racine = 2) {
+
+	// DOMDocument plutôt qu'une regex car plus fiable (ignorer commentaires, styles inline etc.).
+	libxml_use_internal_errors(true);
+	$dom = new DOMDocument;
+	$dom->loadHTML(
+		mb_convert_encoding($texte, 'HTML-ENTITIES', 'UTF-8'),
+		LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD
+	);
+
+	// On repère les intertitres et on note les niveaux présents.
+	$niveaux_intertitres = array();
+	for ($i = 1; $i <= 6; $i++) {
+		if ($dom->getElementsByTagName("h$i")->item(0)) {
+			$niveaux_intertitres[] = $i;
+		}
+	}
+
+	if (count($niveaux_intertitres)) {
+
+		// Niveau du chapitre actuel, à partir duquel on descend
+		$niveau_chapitre = $niveau_racine + $profondeur;
+
+		foreach ($niveaux_intertitres as $n) {
+			// Définir le nouveau niveau
+			$delta = $n - min($niveaux_intertitres);
+			$niveau = $niveau_chapitre + 1 + $delta;
+			$niveau = min($niveau, 6); // Limiter à .h6
+			// Remplacer les intertitres
+			// Boucle en arrière, cf. 
+			$intertitres = $dom->getElementsByTagName("h$n");
+			for ($i = $intertitres->length - 1; $i >= 0; $i--) {
+				$avant = $intertitres->item($i);
+				$apres = $dom->createElement('div', $avant->nodeValue);
+				$apres->setAttribute('class', "spip h$niveau");
+				$avant->parentNode->replaceChild($apres, $avant);
+			}
+		}
+
+		$texte = $dom->saveHTML();
+
+	}
+
+	return $texte;
+}
