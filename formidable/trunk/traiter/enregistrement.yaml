@@ -85,4 +85,11 @@ options:
       nom: 'effacement_delai'
       label: '<:formidable:traiter_enregistrement_option_effacement_delai_label:>'
       afficher_si: '@traitements[enregistrement][effacement]@=="on"'
+  - 
+    saisie: 'case'
+    options:
+      nom: 'invalider'
+      li_class: 'pleine_largeur'
+      label_case: '<:formidable:traiter_enregistrement_option_invalider_label:>'
+      explication: '<:formidable:traiter_enregistrement_option_invalider_explication:>'
 

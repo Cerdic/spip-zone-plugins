@@ -170,6 +170,16 @@ function traiter_enregistrement_dist($args, $retours) {
 		$retours['id_formulaires_reponse'] = $id_formulaires_reponse;
 	}
 
+	//Invalider le cache le cas échéant
+	if (
+		isset($options['invalider']) 
+		and $options['invalider'] 
+		and $options['moderation']=='posteriori'
+	) {
+		include_spip('inc/invalideur');
+		suivre_invalideur("formulaires_reponse/$id_formulaires_reponse");
+	}
+
 	// noter qu'on a deja fait le boulot, pour ne pas risquer double appel
 	$retours['traitements']['enregistrement'] = true;
 	return $retours;
