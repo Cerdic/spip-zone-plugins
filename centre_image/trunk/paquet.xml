@@ -1,11 +1,11 @@
 <paquet
 	prefix="centre_image"
 	categorie="multimedia"
-	version="0.10.2"
+	version="0.10.3"
 	etat="dev"
 	compatibilite="[3.0.19;3.2.*]"
 	logo="prive/themes/spip/images/centre_image-64.png"
-	documentation="https://seenthis.net/messages/362099"
+	documentation="https://www.paris-beyrouth.org/Plugin-centre_image"
 >
 
 	<nom>Centre image</nom>
