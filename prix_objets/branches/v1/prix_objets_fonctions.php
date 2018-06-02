@@ -417,7 +417,7 @@ function prix_par_objet($objet, $id_objet, $contexte, $type = 'prix_ht', $option
 	}
 
 	$prix_source = sql_select(
-			'id_prix_objet',
+			'id_prix_objet,prix_total',
 			'spip_prix_objets',
 			'id_prix_objet_source=0 AND objet LIKE ' . sql_quote($objet) . ' AND id_objet=' . $id_objet,
 			'',
@@ -427,29 +427,35 @@ function prix_par_objet($objet, $id_objet, $contexte, $type = 'prix_ht', $option
 	// On parcours les extension pour chaque prix principal.
 	while ($data_source = sql_fetch($prix_source)) {
 		$id_prix_objet = $data_source['id_prix_objet'];
+		set_request('prix_total', $data_source['prix_total']);
 		$extensions = sql_select(
 				'extension,id_extension,titre',
 				'spip_prix_objets',
 				'id_prix_objet_source=' . $id_prix_objet);
-		$applicables = array();
-		$i = 0;
-		while ($data_extension = sql_fetch($extensions)) {
-			$i++;
 
-			if($extension = charger_fonction($data_extension['extension'], 'prix_objet/', TRUE)) {
-				if ($extension($data_extension['id_extension'], $contexte)) {
+		if (sql_count($data_extension) > 0) {
+			$applicables = array();
+			$i = 0;
+			while ($data_extension = sql_fetch($extensions)) {
+				$i++;
+				if($extension = charger_fonction($data_extension['extension'], 'prix_objet/', TRUE)) {
+					if ($extension($data_extension['id_extension'], $contexte)) {
+						$applicables[] = 1;
+					}
+				}
+				else {
 					$applicables[] = 1;
 				}
 			}
-			else {
-				$applicables[] = 1;
+
+			// On choisit le premier prix applicable.
+			if (count($applicables) == $i) {
+				$prix = $fonction_prix('prix_objet', $id_prix_objet);
+				break;
 			}
 		}
-
-		// On choisit le premier prix applicable.
-		if (count($applicables) == $i) {
+		else {
 			$prix = $fonction_prix('prix_objet', $id_prix_objet);
-			break;
 		}
 	}
 

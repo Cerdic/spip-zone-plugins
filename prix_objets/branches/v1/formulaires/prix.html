@@ -12,7 +12,6 @@
 	<BOUCLE_editable_visible(CONDITION){si #ENV{visible,0}|et{#ENV{editable}}|oui}>
 	<div class="selecteur[(#ENV{recherche}|oui)filtre]">
 		<h3 class="titrem"><:prix_objets:ajouter_prix:></h3>
-		[<div class='erreur_message'>(#ENV**{erreurs}|table_valeur{code_devise})</div>]
 		<div class="editer-groupe">
 			<div class="obligatoire editer editer_prix saisie_input [ (#ENV**{erreurs}|table_valeur{prix_ht}) erreur]">
 				<div>
@@ -43,6 +42,11 @@
 			</div>
 			[(#SAISIE{input,taxe,
 					label=<:prix_objets:taxes_surcharge:>})]
+
+			[(#SAISIE{oui_non,prix_total,
+					label=<:prix_objets:champ_prix_total_label:>,
+					valeur_oui=1,
+					valeur_non=0})]
 
 			#GENERER_SAISIES{#ENV{_saisies_extras}}
 

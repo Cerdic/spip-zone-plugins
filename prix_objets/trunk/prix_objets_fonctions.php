@@ -426,7 +426,7 @@ function prix_par_objet($objet, $id_objet, $contexte, $type = 'prix_ht', $option
 	}
 
 	$prix_source = sql_select(
-			'id_prix_objet,prix_total',
+			'id_prix_objet,prix_total,titre',
 			'spip_prix_objets',
 			'id_prix_objet_source=0 AND objet LIKE ' . sql_quote($objet) . ' AND id_objet=' . $id_objet,
 			'',
@@ -437,15 +437,16 @@ function prix_par_objet($objet, $id_objet, $contexte, $type = 'prix_ht', $option
 	while ($data_source = sql_fetch($prix_source)) {
 		$id_prix_objet = $data_source['id_prix_objet'];
 		set_request('prix_total', $data_source['prix_total']);
-		$extensions = sql_select(
+		$extensions = sql_allfetsel(
 				'extension,id_extension,titre',
 				'spip_prix_objets',
 				'id_prix_objet_source=' . $id_prix_objet);
 
-		if (sql_count($data_extension) > 0) {
+		if (count($extensions) > 0) {
 			$applicables = array();
 			$i = 0;
-			while ($data_extension = sql_fetch($extensions)) {
+
+			foreach ($extensions as $data_extension) {
 				$i++;
 				if($extension = charger_fonction($data_extension['extension'], 'prix_objet/', TRUE)) {
 					if ($extension($data_extension['id_extension'], $contexte)) {
@@ -456,7 +457,6 @@ function prix_par_objet($objet, $id_objet, $contexte, $type = 'prix_ht', $option
 					$applicables[] = 1;
 				}
 			}
-
 			// On choisit le premier prix applicable.
 			if (count($applicables) == $i) {
 				$prix = $fonction_prix('prix_objet', $id_prix_objet);
