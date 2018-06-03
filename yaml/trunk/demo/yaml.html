@@ -8,7 +8,7 @@
 	#SET{librairies, #GET{librairies}|ajouter_libyaml}
 
 	<BOUCLE_parse_demo(DATA) {source table, #GET{librairies}}>
-		#SET{fichier, demo/#VALEUR.yaml}
+		#SET{fichier, demo/test_#VALEUR.yaml}
 		<h1>YAML PARSE DEMO FILE : [(#VALEUR) - ]#GET{fichier}</h1>
 		[<p>(#CHEMIN{#GET{fichier}}|decoder_fichier_yaml{#ARRAY{library, #VALEUR, include, #EVAL{true}, show_error, #EVAL{true}}}|bel_env)</p>]
 	</BOUCLE_parse_demo>
@@ -19,11 +19,17 @@
 		[<p>(#CHEMIN{#GET{fichier}}|decoder_fichier_yaml{#ARRAY{library, #VALEUR, include, #EVAL{true}, show_error, #EVAL{true}}}|bel_env)</p>]
 	</BOUCLE_parse_inclure>
 
-	#SET{fichier, noisettes/conteneur.yaml}
+	#SET{fichier, demo/test_noisette.yaml}
 	<BOUCLE_parse_noisette(DATA) {source table, #GET{librairies}}>
 		<h1>YAML PARSE NOISETTE FILE : [(#VALEUR) - ]#GET{fichier}</h1>
 		[<p>(#CHEMIN{#GET{fichier}}|decoder_fichier_yaml{#ARRAY{library, #VALEUR, include, #EVAL{true}, show_error, #EVAL{true}}}|bel_env)</p>]
 	</BOUCLE_parse_noisette>
+
+	#SET{fichier, demo/test_saisie.yaml}
+	<BOUCLE_parse_saisie(DATA) {source table, #GET{librairies}}>
+		<h1>YAML PARSE SAISIE FILE : [(#VALEUR) - ]#GET{fichier}</h1>
+		[<p>(#CHEMIN{#GET{fichier}}|decoder_fichier_yaml{#ARRAY{library, #VALEUR, include, #EVAL{true}, show_error, #EVAL{true}}}|bel_env)</p>]
+	</BOUCLE_parse_saisie>
 
 </div>
 </body>

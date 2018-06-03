@@ -1,16 +1,15 @@
 nom: '<:aveline:nom_anythingslider_liste_articles:>'
 description: '<:aveline:description_anythingslider_liste_articles:>'
 icon: 'article-24.png'
-necessite:
-  - 'anythingslider'
+necessite: ['anythingslider']
 contexte:
   - 'id_rubrique'
   - 'id_secteur'
   - 'id_article'
   - 'lang'
 parametres:
-  - 'inclure:inc-test_inclure.yaml'
-  - 'inclure:demo/inc-test_inclure.yaml'
+  - 'inclure:inclusion-introuvable.yaml'
+  - 'inclure:demo/test_inclure_inclusion.yaml'
   -
     saisie: 'hidden'
     options:
