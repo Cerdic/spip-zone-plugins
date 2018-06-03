@@ -112,7 +112,7 @@ function calcul_branche_in_chapitres($id, $id_inclus=false){
 
 
 /**
- * Remplacer les intertitres dans le texte d'un chapitre par une classe sémantique
+ * Remplacer les intertitres dans le texte d'un chapitre par une autre balise avec une classe sémantique
  *
  * Dans les chapitres, la hiérarchie des titres est régie par leur imbrication,
  * il ne faut donc pas de vrais intertitres dans le texte.

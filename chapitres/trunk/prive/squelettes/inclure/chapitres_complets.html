@@ -53,7 +53,7 @@
 			{tri #ENV{par,num titre},#GET{defaut_tri}}
 			{par titre}
 		>
-		#SET{numero,#GET{numero_parent}|concat{'.',#COMPTEUR_BOUCLE}}
+		#SET{numero,#GET{numero_parent}|concat{.#COMPTEUR_BOUCLE}}
 		#SET{numero_parent,#GET{numero}}
 
 		<section
@@ -78,7 +78,7 @@
 			#SET{profondeur,#GET{profondeur}|plus{1}}
 			<BOUCLE_liste_chapitres_petits_enfants (BOUCLE_liste_chapitres_enfants) />
 			#SET{profondeur,#GET{profondeur}|moins{1}}
-			#SET{numero_parent,#GET{numero}|substr{0,#GET{numero}|strlen|moins{2}}}
+			#SET{numero_parent,#GET{numero_parent}|substr{0,-2}}
 
 		</section>
 		</BOUCLE_liste_chapitres_enfants>
