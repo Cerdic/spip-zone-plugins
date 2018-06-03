@@ -15,6 +15,7 @@
  * @subpackage yaml
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
  * @version    SVN: $Id: sfYaml.class.php 8988 2008-05-15 20:24:26Z fabien $
+ *             version 1.0.6 - plus maintenue
  */
 class sfYaml
 {
@@ -83,7 +84,7 @@ class sfYaml
         $retval = eval('?'.'>'.$yaml);
         $content = ob_get_clean();
         // syntax error?
-        if ($retval === FALSE)
+        if ($retval === false)
           $content = $yaml;
       }
 

@@ -3,105 +3,37 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function verifier_libyaml() {
+function ajouter_libyaml($librairies) {
+
 	if (function_exists('yaml_parse')) {
-		$message = 'libYAML dispo';
-	} else {
-		$message = 'libYAML indispo';
+		$librairies[] = 'libyaml';
 	}
 
-	return $message;
+	return $librairies;
 }
 
-function libyaml_parse_file($file) {
+function decoder_fichier_yaml($filename, $options = array()) {
 	$timestamp_debut = microtime(true);
 
-	$parsed = yaml_parse_file($file, 0);
+	include_spip('inc/yaml');
+	$file = find_in_path($filename);
+	$parsed = yaml_decode_file($file, $options);
 
 	$timestamp_fin = microtime(true);
 	$duree = $timestamp_fin - $timestamp_debut;
-	var_dump('libyaml : ', $duree*1000);
 
-	return $parsed;
+	return array('lib' => sinon($options['library'], 'sfyaml'), 'duree' => $duree*1000, 'yaml' => $parsed);
 }
 
-function sfyaml_parse_file($file) {
+function decoder_fichier_yaml_avec_inclusions($filename, $options = array()) {
 	$timestamp_debut = microtime(true);
 
-	include_spip('inc/flock');
-	lire_fichier($file, $yaml);
-	// Si on recupere bien quelque chose
-	if ($yaml) {
-		include_spip('inc/yaml_sfyaml');
-		$parsed = yaml_sfyaml_decode($yaml);
-	}
+	include_spip('inc/yaml');
+	$file = find_in_path($filename);
+	$parsed = yaml_charger_inclusions(yaml_decode_file($file, $options));
 
 	$timestamp_fin = microtime(true);
 	$duree = $timestamp_fin - $timestamp_debut;
-	var_dump('sfyaml : ', $duree*1000);
 
-	return $parsed;
+	return array('lib' => sinon($options['library'], 'sfyaml'), 'duree' => $duree*1000, 'yaml' => $parsed);
 }
-
-function symfony_parse_file($file) {
-	$timestamp_debut = microtime(true);
-
-	include_spip('inc/yaml_symfony');
-	$parsed = yaml_symfony_decode_file($file);
-
-	$timestamp_fin = microtime(true);
-	$duree = $timestamp_fin - $timestamp_debut;
-	var_dump('symfony : ', $duree*1000);
-
-	return $parsed;
-}
-
-
-function libyaml_parse($file) {
-	$timestamp_debut = microtime(true);
-
-	include_spip('inc/flock');
-	lire_fichier($file, $input);
-
-	$parsed = yaml_parse($input, 0);
-
-	$timestamp_fin = microtime(true);
-	$duree = $timestamp_fin - $timestamp_debut;
-	var_dump('libyaml : ', $duree*1000);
-
-	return $parsed;
-}
-
-function sfyaml_parse($file) {
-	$timestamp_debut = microtime(true);
-
-	include_spip('inc/flock');
-	lire_fichier($file, $input);
-
-	// Si on recupere bien quelque chose
-	include_spip('inc/yaml_sfyaml');
-	$parsed = yaml_sfyaml_decode($input);
-
-	$timestamp_fin = microtime(true);
-	$duree = $timestamp_fin - $timestamp_debut;
-	var_dump('sfyaml : ', $duree*1000);
-
-	return $parsed;
-}
-
-function symfony_parse($file) {
-	$timestamp_debut = microtime(true);
-
-	include_spip('inc/flock');
-	lire_fichier($file, $input);
-
-	include_spip('inc/yaml_symfony');
-	$parsed = yaml_symfony_decode($input);
-
-	$timestamp_fin = microtime(true);
-	$duree = $timestamp_fin - $timestamp_debut;
-	var_dump('symfony : ', $duree*1000);
-
-	return $parsed;
-}
-

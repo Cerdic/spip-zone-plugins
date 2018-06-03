@@ -8,6 +8,8 @@
  * file that was distributed with this source code.
  */
 
+require_once dirname(__FILE__).'/sfYaml.php';
+
 /**
  * sfYamlInline implements a YAML parser/dumper for the YAML inline syntax.
  *
@@ -18,6 +20,8 @@
  */
 class sfYamlInline
 {
+  const REGEX_QUOTED_STRING = '(?:"([^"\\\\]*(?:\\\\.[^"\\\\]*)*)"|\'([^\']*(?:\'\'[^\']*)*)\')';
+
   /**
    * Convert a YAML string to a PHP array.
    *
@@ -34,15 +38,30 @@ class sfYamlInline
       return '';
     }
 
+    if (function_exists('mb_internal_encoding') && ((int) ini_get('mbstring.func_overload')) & 2)
+    {
+      $mbEncoding = mb_internal_encoding();
+      mb_internal_encoding('ASCII');
+    }
+
     switch ($value[0])
     {
       case '[':
-        return self::parseSequence($value);
+        $result = self::parseSequence($value);
+        break;
       case '{':
-        return self::parseMapping($value);
+        $result = self::parseMapping($value);
+        break;
       default:
-        return self::parseScalar($value);
+        $result = self::parseScalar($value);
     }
+
+    if (isset($mbEncoding))
+    {
+      mb_internal_encoding($mbEncoding);
+    }
+
+    return $result;
   }
 
   /**
@@ -54,8 +73,16 @@ class sfYamlInline
    */
   static public function dump($value)
   {
-    $trueValues = '1.1' == sfYaml::getSpecVersion() ? array('true', 'on', '+', 'yes', 'y') : array('true');
-    $falseValues = '1.1' == sfYaml::getSpecVersion() ? array('false', 'off', '-', 'no', 'n') : array('false');
+    if ('1.1' === sfYaml::getSpecVersion())
+    {
+      $trueValues = array('true', 'on', '+', 'yes', 'y');
+      $falseValues = array('false', 'off', '-', 'no', 'n');
+    }
+    else
+    {
+      $trueValues = array('true');
+      $falseValues = array('false');
+    }
 
     switch (true)
     {
@@ -75,9 +102,9 @@ class sfYamlInline
         return is_string($value) ? "'$value'" : (int) $value;
       case is_numeric($value):
         return is_infinite($value) ? str_ireplace('INF', '.Inf', strval($value)) : (is_string($value) ? "'$value'" : $value);
-      case false !== strpos($value, "\n"):
+      case false !== strpos($value, "\n") || false !== strpos($value, "\r"):
         return sprintf('"%s"', str_replace(array('"', "\n", "\r"), array('\\"', '\n', '\r'), $value));
-      case preg_match('/[ \s \' " \: \{ \} \[ \] , & \* \#] | \A[ - ? | < > = ! % @ ]/x', $value):
+      case preg_match('/[ \s \' " \: \{ \} \[ \] , & \* \# \?] | \A[ - ? | < > = ! % @ ` ]/x', $value):
         return sprintf("'%s'", str_replace('\'', '\'\'', $value));
       case '' == $value:
         return "''";
@@ -146,9 +173,6 @@ class sfYamlInline
     {
       // quoted scalar
       $output = self::parseQuotedScalar($scalar, $i);
-
-      // skip next delimiter
-      ++$i;
     }
     else
     {
@@ -190,41 +214,30 @@ class sfYamlInline
    */
   static protected function parseQuotedScalar($scalar, &$i)
   {
-    $delimiter = $scalar[$i];
-    ++$i;
-    $buffer = '';
-    $len = strlen($scalar);
-    $escaped = '"' == $delimiter ? '\\"' : "''";
-
-    while ($i < $len)
+    if (!preg_match('/'.self::REGEX_QUOTED_STRING.'/Au', substr($scalar, $i), $match))
     {
-      if (isset($scalar[$i + 1]) && $escaped == $scalar[$i].$scalar[$i + 1])
-      {
-        $buffer .= $delimiter;
-        ++$i;
-      }
-      else if ($delimiter == $scalar[$i])
-      {
-        break;
-      }
-      else
-      {
-        $buffer .= $scalar[$i];
-      }
-
-      ++$i;
+      throw new InvalidArgumentException(sprintf('Malformed inline YAML string (%s).', substr($scalar, $i)));
     }
 
-    if ('"' == $delimiter)
+    $output = substr($match[0], 1, strlen($match[0]) - 2);
+
+    if ('"' == $scalar[$i])
     {
       // evaluate the string
-      $buffer = str_replace(array('\\n', '\\r'), array("\n", "\r"), $buffer);
-			if (strpos($buffer,'\\x')!==false){
-				$buffer = preg_replace_callback(',\\\\x([0-9a-f]+),', create_function('$m', 'return chr(hexdec($m[1]));'), $buffer);
-			}
+      $output = str_replace(array('\\"', '\\n', '\\r'), array('"', "\n", "\r"), $output);
+	  if (strpos($output,'\\x')!==false){
+		$output = preg_replace_callback(',\\\\x([0-9a-f]+),', create_function('$m', 'return chr(hexdec($m[1]));'), $output);
+	  }
+    }
+    else
+    {
+      // unescape '
+      $output = str_replace('\'\'', '\'', $output);
     }
 
-    return $buffer;
+    $i += strlen($match[0]);
+
+    return $output;
   }
 
   /**
@@ -365,8 +378,16 @@ class sfYamlInline
   {
     $scalar = trim($scalar);
 
-    $trueValues = '1.1' == sfYaml::getSpecVersion() ? array('true', 'on', '+', 'yes', 'y') : array('true');
-    $falseValues = '1.1' == sfYaml::getSpecVersion() ? array('false', 'off', '-', 'no', 'n') : array('false');
+    if ('1.1' === sfYaml::getSpecVersion())
+    {
+      $trueValues = array('true', 'on', '+', 'yes', 'y');
+      $falseValues = array('false', 'off', '-', 'no', 'n');
+    }
+    else
+    {
+      $trueValues = array('true');
+      $falseValues = array('false');
+    }
 
     switch (true)
     {

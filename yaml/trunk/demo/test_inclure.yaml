@@ -1,0 +1,18 @@
+nom: '<:aveline:nom_anythingslider_liste_articles:>'
+description: '<:aveline:description_anythingslider_liste_articles:>'
+icon: 'article-24.png'
+necessite:
+  - 'anythingslider'
+contexte:
+  - 'id_rubrique'
+  - 'id_secteur'
+  - 'id_article'
+  - 'lang'
+parametres:
+  - 'inclure:inc-test_inclure.yaml'
+  - 'inclure:demo/inc-test_inclure.yaml'
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'selection'
+      defaut: 'limite'

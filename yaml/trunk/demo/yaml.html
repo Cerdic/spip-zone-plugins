@@ -4,19 +4,26 @@
 
 <body dir="#LANG_DIR">
 <div id="container">
+	#SET{librairies, #LISTE{sfyaml, symfony, spyc}}
+	#SET{librairies, #GET{librairies}|ajouter_libyaml}
 
-	<h1>YAML TESTS</h1>
-	[<p>(#VAL|verifier_libyaml)</p>]
+	<BOUCLE_parse_demo(DATA) {source table, #GET{librairies}}>
+		#SET{fichier, demo/#VALEUR.yaml}
+		<h1>YAML PARSE DEMO FILE : [(#VALEUR) - ]#GET{fichier}</h1>
+		[<p>(#CHEMIN{#GET{fichier}}|decoder_fichier_yaml{#ARRAY{library, #VALEUR, include, #EVAL{true}, show_error, #EVAL{true}}}|bel_env)</p>]
+	</BOUCLE_parse_demo>
 
-	<h1>YAML PARSE FILE</h1>
-	[<p>(#CHEMIN{noisettes/conteneur.yaml}|libyaml_parse_file|bel_env)</p>]
-	[<p>(#CHEMIN{noisettes/conteneur.yaml}|sfyaml_parse_file|bel_env)</p>]
-	[<p>(#CHEMIN{noisettes/conteneur.yaml}|symfony_parse_file|bel_env)</p>]
+	#SET{fichier, demo/test_inclure.yaml}
+	<BOUCLE_parse_inclure(DATA) {source table, #GET{librairies}}>
+		<h1>YAML PARSE INCLURE FILE : [(#VALEUR) - ]#GET{fichier}</h1>
+		[<p>(#CHEMIN{#GET{fichier}}|decoder_fichier_yaml{#ARRAY{library, #VALEUR, include, #EVAL{true}, show_error, #EVAL{true}}}|bel_env)</p>]
+	</BOUCLE_parse_inclure>
 
-	<h1>YAML PARSE STRING</h1>
-	[<p>(#CHEMIN{noisettes/conteneur.yaml}|libyaml_parse|bel_env)</p>]
-	[<p>(#CHEMIN{noisettes/conteneur.yaml}|sfyaml_parse|bel_env)</p>]
-	[<p>(#CHEMIN{noisettes/conteneur.yaml}|symfony_parse|bel_env)</p>]
+	#SET{fichier, noisettes/conteneur.yaml}
+	<BOUCLE_parse_noisette(DATA) {source table, #GET{librairies}}>
+		<h1>YAML PARSE NOISETTE FILE : [(#VALEUR) - ]#GET{fichier}</h1>
+		[<p>(#CHEMIN{#GET{fichier}}|decoder_fichier_yaml{#ARRAY{library, #VALEUR, include, #EVAL{true}, show_error, #EVAL{true}}}|bel_env)</p>]
+	</BOUCLE_parse_noisette>
 
 </div>
 </body>
