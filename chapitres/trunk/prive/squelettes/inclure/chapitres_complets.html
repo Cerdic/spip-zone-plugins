@@ -3,6 +3,14 @@
 	Vue complète des chapitres d'un objet
 
 ]
+[(#OBJET|=={chapitre}|non)
+	[(#VAL{0}|setenv{id_parent})]
+]
+[(#OBJET|=={chapitre}|oui)
+	[(#ID_OBJET|setenv{id_parent})]
+	[(#VAL{''}|setenv{objet})]
+	[(#VAL{''}|setenv{id_objet})]
+]
 #SET{defaut_tri,#ARRAY{
 	titre,1,
 	num titre,1,
@@ -14,9 +22,9 @@
 <div class="chapitres_complets">
 
 	<BOUCLE_liste_chapitres (CHAPITRES)
-		{id_parent=0}
-		{objet}
-		{id_objet}
+		{id_parent?}
+		{objet?}
+		{id_objet?}
 		{statut?}
 		{recherche?}
 		{tri #ENV{par,num titre},#GET{defaut_tri}}
@@ -91,7 +99,7 @@
 	<INCLURE{fond=prive/squelettes/inclure/chapitre_editable,
 		objet,
 		id_objet,
-		id_parent=0,
+		id_parent,
 		edit,
 		profondeur=0,
 		ajax}

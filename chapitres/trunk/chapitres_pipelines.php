@@ -64,7 +64,7 @@ function chapitres_affiche_enfants($flux) {
 		and in_array(table_objet_sql($objet), $objets)
 	) {
 		$enfants = recuperer_fond(
-			'prive/objets/contenu/chapitres_enfants',
+			'prive/objets/contenu/chapitre-enfants',
 			array(
 				'objet' => $objet,
 				'id_objet' => $id_objet,
