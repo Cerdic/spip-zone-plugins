@@ -4,7 +4,10 @@
 #SET{claire,##ENV{couleur_claire,c5e41c}}
 #SET{foncee,##ENV{couleur_foncee,9dba00}}
 
-/* Liste de chapitres : visualiser l'arborescence et détails */
+/* ==================
+   Liste de chapitres
+   ==================
+*/
 .liste-objets.chapitres td {
   border-style: dotted;
 }
@@ -54,7 +57,14 @@
   cursor: s-resize;
 }
 
-/* Chapitres complets */
+/* ==================
+   Chapitres complets
+   ==================
+*/
+/* Indentation */
+.chapitres_complets .chapitre .chapitre {
+   padding-left: 2em;
+}
 /* Reprendre des styles de #wysiwyg */
 .chapitres_complets .chapitre {
   max-width: 50em;
@@ -68,26 +78,24 @@
 .chapitres_complets .champ.contenu_titre {
   display: none;
 }
-.chapitres_complets .chapitre__lien,
-.chapitres_complets .chapitre__statut {
+/* Divers */
+.chapitres_complets .chapitre__metas {
   float: #ENV{right};
 }
-.chapitres_complets .chapitre__statut {
+.chapitres_complets .chapitre__metas > * {
   margin-#ENV{right}: 0.5em;
-}
-.chapitres_complets .chapitre .chapitre {
-   padding-left: 1em;
 }
 .chapitres_complets .bd {
   padding-top: 2em;
 }
-/* icones */
-.chapitres_complets .icone.#ENV{right} {
-  margin-#ENV{left}: 0.5em;
+.chapitres_complets .cadre-formulaire-editer {
+  margin-top: 1em;
 }
-.chapitres_complets .icone a {
+/* Icones */
+.chapitres_complets .icone.verticale a {
   width: auto;
+  padding: 0;
 }
-.chapitres_complets .icone a b {
+.chapitres_complets .icone.simple a b {
   display: none;
 }

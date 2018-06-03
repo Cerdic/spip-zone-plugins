@@ -87,6 +87,17 @@
 	#BOITE_FERMER
 	</BOUCLE_liste_chapitres>
 
+	[(#REM) Ajout de chapitre à la racine ]
+	<INCLURE{fond=prive/squelettes/inclure/chapitre_editable,
+		objet,
+		id_objet,
+		id_parent=0,
+		edit,
+		profondeur=0,
+		ajax}
+	/>
+	</B_liste_chapitres>
+
 	[<div class="liste-objets chapitres caption-wrap">
 		<strong class="caption">(#ENV*{sinon,<:chapitre_info_aucun_chapitre:>})</strong>
 	</div>

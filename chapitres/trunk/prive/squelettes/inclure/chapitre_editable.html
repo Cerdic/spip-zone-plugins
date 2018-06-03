@@ -6,7 +6,7 @@
 		**obligatoire
 		*conseillé
 
-		- **id_chapitre
+		- id_chapitre : si pas présent, juste un bouton pour en créer un à la racine
 		- **objet
 		- **id_objet
 		- **id_parent
@@ -14,40 +14,44 @@
 		- **numero : numéro pour chapitrage
 		- ** profondeur : niveau du chapitre, 0 = racine
 ]
-#SET{edit,#ENV{edit}|=={#ID_CHAPITRE}|?{#ID_CHAPITRE,#ENV{edit}|et{#ENV{id_parent}|=={#ID_CHAPITRE}}|?{new}}}
+#SET{edit,#ENV{edit}|?{#ENV{edit}|=={#ID_CHAPITRE}|?{#ID_CHAPITRE,new}}}
 #SET{self,#SELF|parametre_url{edit|id_parent,''}}
 #SET{heading,#VAL{h}|concat{#ENV{profondeur}|plus{2}}}
 
 <div class="clearfix">
+
 
 	[(#REM)
 		=======
 		Prévisu
 		=======
 	]
-	[(#GET{edit}|=={#ID_CHAPITRE}|non)
+	[(#ID_CHAPITRE|oui)
+		<header class="chapitre__header">
+			<div class="chapitre__metas">
+				[<span class="chapitre__statut">(#INFO_STATUT{chapitre,#ID_CHAPITRE}|puce_statut{chapitre,#ID_CHAPITRE})</span>]
+				[<a href="[(#ID_CHAPITRE|generer_url_entite{chapitre})]" class="chapitre__lien">
+					<:info_numero_abbreviation:> (#ID_CHAPITRE)
+				</a>]
+				[(#REM) Modifier ]
+				[(#GET{self}|parametre_url{edit,#ID_CHAPITRE}|icone_verticale{<:chapitre:icone_modifier_chapitre:>,chapitre-16,edit,right simple ajax})]
+				[(#REM) Ajouter un chapitre enfant ]
+				[(#GET{self}|parametre_url{edit,new}|parametre_url{id_parent,#ID_CHAPITRE}|icone_verticale{<:chapitre:icone_ajouter_chapitre_enfant:>,chapitre-16,add,right simple ajax})]
+			</div>
+			[<(#GET{heading}) class="spip chapitre__titre">]
+				[<span class="chapitre__numero">(#ENV{numero})</span> ]#INFO_TITRE{chapitre,#ID_CHAPITRE}
+			[</(#GET{heading})>]
+		</header>
 
-		<a href="[(#ID_CHAPITRE|generer_url_entite{chapitre})]" class="chapitre__lien">
-			<:info_numero_abbreviation:> #ID_CHAPITRE
-		</a>
-		<span class="chapitre__statut">[(#INFO_STATUT{chapitre,#ID_CHAPITRE}|puce_statut{chapitre,#ID_CHAPITRE})]</span>
-
-		[<(#GET{heading}) class="spip chapitre__titre">]
-			[<span class="chapitre__numero">(#ENV{numero})</span> ]#INFO_TITRE{chapitre,#ID_CHAPITRE}
-		[</(#GET{heading})>]
-
-		[(#INCLURE{fond=prive/objets/contenu/chapitre, id_chapitre}|chapitres_remplacer_intertitres{#ENV{profondeur},2})]
-
-		[(#REM) Icône ajouter sous-chapitre ]
-		[(#GET{edit}|=={new}|non)
-			[(#GET{self}|parametre_url{edit,new}|parametre_url{id_parent,#ID_CHAPITRE}|icone_verticale{<:chapitre:icone_ajouter_chapitre_enfant:>,chapitre-16,add,right ajax})]
+		[(#GET{edit}|!={#ID_CHAPITRE}|oui)
+			[(#INCLURE{fond=prive/objets/contenu/chapitre, id_chapitre}|chapitres_remplacer_intertitres{#ENV{profondeur},2})]
 		]
-		[(#REM) Icône éditer chapitre ]
-		[(#GET{edit}|non)
-			[(#GET{self}|parametre_url{edit,#ID_CHAPITRE}|icone_verticale{<:chapitre:icone_modifier_chapitre:>,chapitre-16,edit,right ajax})]
-		]
-
 	]
+
+	[(#ID_CHAPITRE|non)
+		[(#GET{self}|parametre_url{edit,new}|parametre_url{id_parent,0}|icone_verticale{<:chapitre:icone_creer_chapitre:>,chapitre-16,add,center ajax})]
+	]
+
 
 	[(#REM)
 		=======
@@ -62,14 +66,14 @@
 				[(#GET{edit}|intval|oui)
 					[(#VAL{chapitre}|objet_info{texte_modifier}|_T)]
 				][(#GET{edit}|intval|non)
-					<:chapitre:icone_ajouter_chapitre_enfant:>
+					<:chapitre:icone_creer_chapitre:>
 				]
 			</div>
 			<div class="ajax">
 				[(#GET{edit}|intval|oui)
-					#FORMULAIRE_EDITER_CHAPITRE{#ID_CHAPITRE,#OBJET,#ID_OBJET,0,#SELF|parametre_url{edit,''}|ancre_url{chapitre#ID_CHAPITRE}}
+					#FORMULAIRE_EDITER_CHAPITRE{#ID_CHAPITRE,#OBJET,#ID_OBJET,#INFO_ID_PARENT{chapitre,#ID_CHAPITRE},#GET{self}|ancre_url{chapitre#ID_CHAPITRE}}
 				][(#GET{edit}|intval|non)
-					#FORMULAIRE_EDITER_CHAPITRE{new,#OBJET,#ID_OBJET,#ID_CHAPITRE,#SELF|parametre_url{edit,''}|ancre_url{chapitre#ID_CHAPITRE}}
+					#FORMULAIRE_EDITER_CHAPITRE{new,#OBJET,#ID_OBJET,#ENV{id_parent},#GET{self}|ancre_url{chapitre#ID_CHAPITRE}}
 				]
 			</div>
 		</div>

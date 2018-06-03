@@ -134,45 +134,47 @@ function calcul_branche_in_chapitres($id, $id_inclus=false){
  */
 function chapitres_remplacer_intertitres($texte, $profondeur, $niveau_racine = 2) {
 
-	// DOMDocument plutôt qu'une regex car plus fiable (ignorer commentaires, styles inline etc.).
-	libxml_use_internal_errors(true);
-	$dom = new DOMDocument;
-	$dom->loadHTML(
-		mb_convert_encoding($texte, 'HTML-ENTITIES', 'UTF-8'),
-		LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD
-	);
+	if (strlen(trim($texte))) {
+		// DOMDocument plutôt qu'une regex car plus fiable (ignorer commentaires, styles inline etc.).
+		libxml_use_internal_errors(true);
+		$dom = new DOMDocument;
+		$dom->loadHTML(
+			mb_convert_encoding($texte, 'HTML-ENTITIES', 'UTF-8'),
+			LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD
+		);
 
-	// On repère les intertitres et on note les niveaux présents.
-	$niveaux_intertitres = array();
-	for ($i = 1; $i <= 6; $i++) {
-		if ($dom->getElementsByTagName("h$i")->item(0)) {
-			$niveaux_intertitres[] = $i;
-		}
-	}
-
-	if (count($niveaux_intertitres)) {
-
-		// Niveau du chapitre actuel, à partir duquel on descend
-		$niveau_chapitre = $niveau_racine + $profondeur;
-
-		foreach ($niveaux_intertitres as $n) {
-			// Définir le nouveau niveau
-			$delta = $n - min($niveaux_intertitres);
-			$niveau = $niveau_chapitre + 1 + $delta;
-			$niveau = min($niveau, 6); // Limiter à .h6
-			// Remplacer les intertitres
-			// Boucle en arrière, cf. 
-			$intertitres = $dom->getElementsByTagName("h$n");
-			for ($i = $intertitres->length - 1; $i >= 0; $i--) {
-				$avant = $intertitres->item($i);
-				$apres = $dom->createElement('div', $avant->nodeValue);
-				$apres->setAttribute('class', "spip h$niveau");
-				$avant->parentNode->replaceChild($apres, $avant);
+		// On repère les intertitres et on note les niveaux présents.
+		$niveaux_intertitres = array();
+		for ($i = 1; $i <= 6; $i++) {
+			if ($dom->getElementsByTagName("h$i")->item(0)) {
+				$niveaux_intertitres[] = $i;
 			}
 		}
 
-		$texte = $dom->saveHTML();
+		if (count($niveaux_intertitres)) {
 
+			// Niveau du chapitre actuel, à partir duquel on descend
+			$niveau_chapitre = $niveau_racine + $profondeur;
+
+			foreach ($niveaux_intertitres as $n) {
+				// Définir le nouveau niveau
+				$delta = $n - min($niveaux_intertitres);
+				$niveau = $niveau_chapitre + 1 + $delta;
+				$niveau = min($niveau, 6); // Limiter à .h6
+				// Remplacer les intertitres
+				// Boucle en arrière, cf. 
+				$intertitres = $dom->getElementsByTagName("h$n");
+				for ($i = $intertitres->length - 1; $i >= 0; $i--) {
+					$avant = $intertitres->item($i);
+					$apres = $dom->createElement('div', $avant->nodeValue);
+					$apres->setAttribute('class', "spip h$niveau");
+					$avant->parentNode->replaceChild($apres, $avant);
+				}
+			}
+
+			$texte = $dom->saveHTML();
+
+		}
 	}
 
 	return $texte;
