@@ -17,7 +17,7 @@
 		<traducteur nom="RastaPopoulos" lien="" />
 		<traducteur nom="Suske" lien="https://trad.spip.net/auteur/suske" />
 	</langue>
-	<langue code="eo" url="https://trad.spip.net/tradlang_module/menus?lang_cible=eo" total="151" traduits="121" relire="0" modifs="0" nouveaux="30" pourcent="80.13">
+	<langue code="eo" url="https://trad.spip.net/tradlang_module/menus?lang_cible=eo" total="151" traduits="151" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="gpl" lien="https://trad.spip.net/auteur/gpl" />
 	</langue>
 	<langue code="es" url="https://trad.spip.net/tradlang_module/menus?lang_cible=es" total="151" traduits="143" relire="0" modifs="2" nouveaux="6" pourcent="94.70">

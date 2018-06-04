@@ -10,7 +10,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
+	'configurer_entrees_masquees_explication' => 'Marku la elementojn, kiujn vi volas <strong>kaŝi</strong> dum la kreado de menuo.',
+	'configurer_titre' => 'Agordi la elementojn de la kromprogramo „Menuoj“',
 	'confirmer_supprimer_entree' => 'Ĉi vi vere volas forigi tiun elementon ?',
+	'confirmer_supprimer_sous_menu' => 'Ĉu vi vere volas forigi tiun submenuon ?',
 
 	// D
 	'description_menu_accueil' => 'Ligilo al la hejmpaĝo de la retejo.',
@@ -25,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_page_speciale' => 'Aldonas ligilon al paĝoskeleto irebla per retadreso kiel <code>spip.php?page=nomo&param1=xx&param2=yyy...</code> Tiuj paĝoj ofte devenas de kromprogramoj.',
 	'description_menu_page_speciale_zajax' => 'Aldonas ligilon al paĝobloko irebla per retadreso kiel <code>spip.php?page=nomo&param1=xx&param2=yyy...</code> Tiu bezonas „Z“-tipan skeleton kaj la kromprogramon <a href="https://contrib.spip.net/MediaBox">Plurmedia skatolo („Mediabox“)</a>.',
 	'description_menu_rubriques_articles' => 'Montras liston de rubrikoj kaj, se oni volas, la subrubrikoj kaj la artikoloj plurnivele. Defaŭlte, montras ĉiujn rubrikojn ekde la radiko, ordigita per titolo (nombre poste alfabete). Artikoloj venas ĉiufoje post la rubrikoj.',
+	'description_menu_rubriques_completes' => 'Montras liston de rubrikoj kaj, se oni volas, la subrubrikoj plurnivele. Defaŭlte, montras ĉiujn rubrikojn ekde la radiko, ordigitajn per titolo (nombre, poste alfabete).',
 	'description_menu_secteurlangue' => 'Tiu elemento utilas por retejoj, kiuj havas po unu lingvon por radikrubriko. Ĝi montras aŭtomate menuon, kiu listigas la rubrikojn el la samlingvaj radikrubrikoj kaj, opcie, la subrubrikojn plurnivele. Defaŭlte, ĝi montras ĉiujn rubrikojn elde la radiko, ordigita per titolo (nombre poste alfabete).',
 	'description_menu_texte_libre' => 'Teksto, kiun vi deziras, aŭ SPIP-lingvomarko (< :... :>)',
 
@@ -41,31 +45,43 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_aucun' => 'Neniu',
 	'entree_bloc' => 'Zpip-bloko',
 	'entree_choisir' => 'Elektu la enigtipon, kiun vi volas aldoni :',
+	'entree_classe_parent' => 'Klaso de la ligiloj de la patraj elementoj. Tiu klaso aldoniĝos al „li>a“, kiu havas sekvadon „ul/li“. Ekzemple, se vi entajpas „daddy“, tiu ebligas vin uzi la kromprogramon „Menu déroulant 2“ („Falmenuo 2“) por aranĝi la menuojn.',
 	'entree_connexion_objet' => 'Devigi esti konektita (entajpi „session“) aŭ nekonektita (entajpi „nosession“) por vidi la objekton',
+	'entree_contenu' => 'Enhavo',
 	'entree_css' => 'CSS-klasoj de la elemento (de la ujo)',
 	'entree_css_lien' => 'CSS-klasoj de la ligilo',
 	'entree_id_groupe' => 'Numero de la grupo de ŝlosilvortoj',
 	'entree_id_mot' => 'Numero de la ŝlosilvorto',
 	'entree_id_objet' => 'Numero',
 	'entree_id_rubrique' => 'Numero de la patra rubriko',
+	'entree_id_rubrique_ou_courante' => 'Numero de la patra rubriko aŭ „aktuala“ se la patra rubriko estas la aktuala rubriko el la kunteksto',
 	'entree_id_rubriques_exclues' => 'Numeroj el la rubrikoj ekskludendaj, dislimitaj per komoj',
 	'entree_id_secteur_exclus' => 'Numeroj de la radikrubrikoj ekskludotaj, dislimitaj per komoj',
 	'entree_infini' => 'Senfine',
+	'entree_lien_direct_articles_uniques' => 'Se jes kaj se la unikaj artikoloj estas kaŝitaj, kiam rubriko enhavas nur unu artikolon, ligi al la artikolo ? (entajpi „oui“ [france „jes“] por ebligi tion)',
 	'entree_mapage' => 'Mia persona paĝo',
 	'entree_masquer_articles_uniques' => 'Se jes kaj se rubriko enhavas nur unu artikolon, ĉu kaŝi ĝin ? (tapji „oui“ por ebligi tion, „oui“ estas „jes“ france)',
 	'entree_niveau' => 'Nivelo de la subrubrikoj',
 	'entree_nombre_articles' => 'Nombro de artikoloj maksimume (0 defaŭlte)',
 	'entree_page' => 'Paĝonomo',
 	'entree_parametres' => 'Listo de la parametroj',
+	'entree_rubriques_max_affichees' => 'Maksimuma nombro de rubrikoj montritaj (sekvataj de ligilo „Ĉiuj rubrikoj“ al la patra rubriko)',
 	'entree_sousrub_cond' => 'Nur montri subrubrikojn el la aktuala rubriko (tapji „oui“ por ebligi tion, „oui“ estas jes france, alie lasi neplena)',
+	'entree_suivant_connexion' => 'Limigi tiun elementon laŭ la konektado (entajpi „connecte“ [france „konektita“] por montri nur se la vizitanto estas konektita, „deconnecte“ [france „nekonektita“] por la mala okazo, aŭ „admin“ [„mastrumanto“ france] se la aŭtoro estas mastrumanto, aŭ lasi malplena por ĉiam montri)',
+	'entree_suivant_connexion_connecte' => 'nur se konektita',
+	'entree_suivant_connexion_deconnecte' => 'nur se nekonektita',
 	'entree_sur_n_articles' => '@n@ montrita(j) artikolo(j)',
 	'entree_sur_n_mots' => '@n@ montrita(j) vorto(j)',
 	'entree_sur_n_niveaux' => 'Je @n@ nivelo(j)',
+	'entree_titre' => 'Titolo',
 	'entree_titre_connecter' => 'Titolo por aliro al la ensalut-formularo',
 	'entree_titre_prive' => 'Titolo por aliro al la privata spaco',
 	'entree_traduction_articles_rubriques' => 'Laŭeble, montri la rubrikajn artikolojn en la kunteksta lingvo (tapji „trad“ por ebligi tion)',
 	'entree_traduction_objet' => 'Elekti la tradukon laŭ la kunteksto (tapji „trad“ por ebligi tion)',
+	'entree_tri' => 'Kriterio por ordigi la rubrikojn (entajpi „titre“ [france „titolo“] por ordigi per titolo, „num titre“ [france „numero de la titolo“] por ordigi per numero de titolo, antaŭmeti „ !“ por inversigi la ordon)',
+	'entree_tri_articles' => 'Kriterio por ordigi la artikolojn (entajpi „titre“ [france „titolo“] por ordigi per titolo, „num titre“ [france „numero de la titolo“] por ordigi per numero de titolo, antaŭskribi „ !“ por inversigi la ordon)',
 	'entree_type_objet' => 'Objektotipo',
+	'entree_url' => 'Adreso',
 	'entree_url_public' => 'Reven-retadreso post la konekto',
 	'erreur_aucun_type' => 'Neniu enigtipo trovita.',
 	'erreur_autorisation' => 'Vi ne rajtas modifi tiujn menuojn.',
@@ -75,6 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_mise_a_jour' => 'Eraro okazis dum la ĝisdatigo de la datumbazo.',
 	'erreur_parametres' => 'Estas eraro en la parametroj de la paĝo.',
 	'erreur_type_menu' => 'Vi elektu menutipon.',
+	'erreur_type_menu_inexistant' => 'Tia menuo ne (plu) disponeblas',
 
 	// F
 	'formulaire_ajouter_entree' => 'Aldoni elementon',
@@ -103,24 +120,29 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_supprimer_entree' => 'Forigi tiun elementon',
 	'formulaire_supprimer_menu' => 'Forigi la menuon',
 	'formulaire_supprimer_sous_menu' => 'Forigi tiun submenuon',
+	'formulaire_titre' => 'Titolo',
 
 	// I
 	'info_afficher_articles' => 'La artikolojn inkluziviĝos en la menuo.',
 	'info_articles_max' => 'Nur se la rubriko enhavas maksimume @max@ artikolojn',
 	'info_articles_max_affiches' => 'Vido limigita al @max@ artikoloj',
+	'info_classe_parent' => 'Klaso por la patraj elementoj :',
 	'info_connexion_obligatoire' => 'Nepra konekto',
 	'info_deconnexion_obligatoire' => 'Nur malkonektita',
 	'info_masquer_articles_uniques' => 'Unikaj artikoloj kaŝitaj',
 	'info_numero_menu' => 'MENUO NUMERO :',
 	'info_page_speciale' => 'Ligilo al la paĝo „@page@“',
 	'info_page_speciale_zajax' => '„Modalbox“ de la paĝo „@page@“ por la bloko „@bloc@“',
+	'info_rubrique_courante' => 'Aktuala rubriko',
 	'info_rubriques_exclues' => ' / escepte de rubriko(j) @id_rubriques@',
+	'info_rubriques_max_affichees' => 'Vido limigita al @max@ rubrikoj',
 	'info_secteur_exclus' => ' / escepte de radikrubriko(j) @id_secteur@',
 	'info_sousrub_cond' => 'Nur la subrubrikoj de la aktuala rubriko montriĝas.',
 	'info_tous_groupes_mots' => 'Ĉiuj grupoj de vortoj',
 	'info_traduction_recuperee' => 'La kunteksto determinos la elektitan tradukon',
 	'info_tri' => 'Ordigo de la rubrikoj :',
 	'info_tri_alpha' => '(laŭalfabete)',
+	'info_tri_articles' => 'Ordigo de la artikoloj :',
 	'info_tri_num' => '(nombre)',
 
 	// N
@@ -128,7 +150,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_label_afficher_titre_menu' => 'Montri la titolon de la menuo ?',
 	'noisette_label_identifiant' => 'Menuo montrota :',
 	'noisette_nom_noisette' => 'Menuo',
+	'nom_menu_accueil' => 'Hejmpaĝo',
 	'nom_menu_articles_rubrique' => 'Artikoloj de rubriko',
+	'nom_menu_deconnecter' => 'Elsaluti',
 	'nom_menu_espace_prive' => 'Konektiĝi / Ligilo al la privata spaco',
 	'nom_menu_groupes_mots' => 'Ŝlosilvortoj kaj artikoloj el vortogrupo',
 	'nom_menu_lien' => 'Laŭvola ligilo',
@@ -137,10 +161,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_objet' => 'Artikolo, rubriko aŭ alia SPIP-objekto',
 	'nom_menu_page_speciale' => 'Ligilo al paĝoskeleto',
 	'nom_menu_page_speciale_zajax' => 'Bloko el Zpip-paĝo',
+	'nom_menu_rubriques_completes' => 'Listo aŭ arbo de rubrikoj kaj artikoloj (kun multe da agordoj)',
 	'nom_menu_rubriques_evenements' => 'Eventoj el rubrikoj',
 	'nom_menu_secteurlangue' => 'Lingvaj radikrubrikoj',
 	'nom_menu_texte_libre' => 'Laŭvola teksto',
 
 	// T
-	'tous_les_articles' => '... Ĉiuj artikoloj'
+	'tous_les_articles' => '... Ĉiuj artikoloj',
+	'toutes_les_rubriques' => '... Ĉiuj rubrikoj',
+
+	// U
+	'utiles_explication' => 'La nunaj skeletoj de la retejo povas uzi la jenajn menuojn.',
+	'utiles_generer_menu' => 'Krei la menuon <strong>@titre@ (<em>@identifiant@</em>)</strong>',
+	'utiles_generer_menus' => 'Krei <strong>ĉiujn</strong> utilajn menuojn',
+	'utiles_titre' => 'Utilaj menuoj'
 );
