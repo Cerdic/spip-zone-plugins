@@ -60,6 +60,7 @@ function metasplus_affichage_final($flux) {
 	) {
 
 		// Trouver le squelette à utiliser
+		include_spip('metasplus_fonctions');
 		$fond = metasplus_selectionner_fond($contexte['type-page']);
 
 		// Si le squelette n'est pas vide, on ajoute son contenu à la fin du head
