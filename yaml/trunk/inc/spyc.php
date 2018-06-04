@@ -20,7 +20,7 @@ require_once _DIR_PLUGIN_YAML . 'vendor/autoload.php';
  * @return string
  *        Chaîne YAML construite.
  */
-function yaml_spyc_encode($structure, $options = array()) {
+function spyc_yaml_encode($structure, $options = array()) {
 
 	// Traitement des options
 	if (empty($options['indent']) or (isset($options['indent']) and !is_int($options['indent']))) {
@@ -47,7 +47,7 @@ function yaml_spyc_encode($structure, $options = array()) {
  * @return bool|mixed
  *        Structure PHP produite par le parsing de la chaîne YAML.
  */
-function yaml_spyc_decode($input, $options = array()) {
+function spyc_yaml_decode($input, $options = array()) {
 
 	return Spyc::YAMLLoadString($input);
 }

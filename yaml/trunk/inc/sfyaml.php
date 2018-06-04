@@ -18,7 +18,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return string
  *        Chaîne YAML construite.
  */
-function yaml_sfyaml_encode($structure, $options = array()) {
+function sfyaml_yaml_encode($structure, $options = array()) {
 
 	require_once _DIR_PLUGIN_YAML . 'sfyaml/sfYaml.php';
 	require_once _DIR_PLUGIN_YAML . 'sfyaml/sfYamlDumper.php';
@@ -54,7 +54,7 @@ function yaml_sfyaml_encode($structure, $options = array()) {
  * @return bool|mixed
  *        Structure PHP produite par le parsing de la chaîne YAML.
  */
-function yaml_sfyaml_decode($input, $options = array()) {
+function sfyaml_yaml_decode($input, $options = array()) {
 
 	require_once _DIR_PLUGIN_YAML . 'sfyaml/sfYaml.php';
 	require_once _DIR_PLUGIN_YAML . 'sfyaml/sfYamlParser.php';
@@ -66,10 +66,14 @@ function yaml_sfyaml_decode($input, $options = array()) {
 	try {
 		$parsed = $yaml->parse($input);
 	} catch (Exception $exception) {
-		// On garde la compatibilité ascendante avec l'ancien argument $show_error qui a été remplacé par $options.
+		// On garde la compatibilité ascendante avec l'ancien argument $show_error qui a été remplacé par $options
+		// mais on inverse la valeur par défaut.
 		if ((is_bool($options) and $options) or (!empty($options['show_error']))) {
 			throw new InvalidArgumentException(sprintf('Unable to parse string: %s', $exception->getMessage()));
 		}
+
+		// Pour compenser l'absence par défaut d'erreurs, on loge l'erreur dans les logs SPIP.
+		spip_log("Erreur d'analyse YAML : " . $exception->getMessage(), 'yaml' . _LOG_ERREUR);
 	}
 
 	return $parsed;

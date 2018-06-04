@@ -17,7 +17,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return string
  *        Chaîne YAML construite.
  */
-function yaml_libyaml_encode($structure, $options = array()) {
+function libyaml_yaml_encode($structure, $options = array()) {
 
 	// Traitement des options
 	if (!empty($options['indent']) and is_int($options['indent'])) {
@@ -42,13 +42,7 @@ function yaml_libyaml_encode($structure, $options = array()) {
  * @return bool|mixed
  *        Structure PHP produite par le parsing de la chaîne YAML.
  */
-function yaml_libyaml_decode($input, $options = array()) {
+function libyaml_yaml_decode($input, $options = array()) {
 
 	return yaml_parse($input,-1);
-}
-
-
-function libyaml_tag_inclure($filename) {
-
-	// De façon récursive on remplace le nom du fichier YAML à inclure par
 }

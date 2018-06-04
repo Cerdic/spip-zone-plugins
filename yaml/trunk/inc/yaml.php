@@ -44,8 +44,8 @@ function yaml_encode($structure, $options = array()) {
 	}
 
 	// Déterminer la fonction à appeler à partir de la librairie utilisée.
-	require_once _DIR_PLUGIN_YAML . 'inc/yaml_' . $librairie . '.php';
-	$encoder = 'yaml_' . $librairie . '_encode';
+	require_once _DIR_PLUGIN_YAML . "inc/${librairie}.php";
+	$encoder = "${librairie}_yaml_encode";
 
 	return $encoder($structure, $options);
 }
@@ -72,8 +72,8 @@ if (!function_exists('yaml_decode')) {
 		}
 
 		// Déterminer la fonction à appeler à partir de la librairie utilisée.
-		require_once _DIR_PLUGIN_YAML . 'inc/yaml_' . $librairie . '.php';
-		$decoder = 'yaml_' . $librairie . '_decode';
+		require_once _DIR_PLUGIN_YAML . "inc/${librairie}.php";
+		$decoder = "${librairie}_yaml_decode";
 
 		return $decoder($input, $options);
 	}
@@ -106,7 +106,7 @@ function yaml_decode_file($fichier, $options = array()) {
 	if ($yaml) {
 		$retour = yaml_decode($yaml, $options);
 		if ($options['include']) {
-			$retour = yaml_decode_inclusions($retour, $options);
+			$retour = decode_inclusions($retour, $options);
 		}
 	}
 
@@ -121,7 +121,7 @@ function yaml_decode_file($fichier, $options = array()) {
  * On passe donc par find_in_path() pour trouver le fichier
  * @param array $tableau
  */
-function yaml_decode_inclusions($parsed, $options = array()) {
+function decode_inclusions($parsed, $options = array()) {
 
 	if (is_array($parsed)) {
 		$retour = array();
@@ -134,7 +134,7 @@ function yaml_decode_inclusions($parsed, $options = array()) {
 					$retour = array_merge($retour, array($cle => $valeur));
 				}
 			} elseif (is_array($valeur)) {
-				$retour = array_merge($retour, array($cle => yaml_decode_inclusions($valeur, $options)));
+				$retour = array_merge($retour, array($cle => decode_inclusions($valeur, $options)));
 			} else {
 				$retour = array_merge($retour, array($cle => $valeur));
 			}

@@ -22,7 +22,7 @@ use Symfony\Component\Yaml\Exception\ParseException;
  * @return string
  *        Chaîne YAML construite.
  */
-function yaml_symfony_encode($structure, $options = array()) {
+function symfony_yaml_encode($structure, $options = array()) {
 
 	// Traitement des options du dump
 	if (empty($options['inline']) or (isset($options['inline']) and !is_int($options['inline']))) {
@@ -55,17 +55,14 @@ function yaml_symfony_encode($structure, $options = array()) {
  * @return bool|mixed
  *        Structure PHP produite par le parsing de la chaîne YAML.
  */
-function yaml_symfony_decode($input = true, $options = array()) {
+function symfony_yaml_decode($input = true, $options = array()) {
 
 	$parsed = false;
 
 	// Traitement des options du parsing.
 	$flags = 0;
-//	if (!empty($options['include'])) {
-//		$flags = Yaml::PARSE_CUSTOM_TAGS;
-//	}
 	if (isset($options['flags']) and is_int($options['flags'])) {
-		$flags = $flags | $options['flags'];
+		$flags = $options['flags'];
 	}
 
 	try {
@@ -74,6 +71,9 @@ function yaml_symfony_decode($input = true, $options = array()) {
 		if ((is_bool($options) and $options) or (!empty($options['show_error']))) {
 			printf('Unable to parse the YAML string: %s', $exception->getMessage());
 		}
+
+		// Pour compenser l'absence par défaut d'erreurs, on loge l'erreur dans les logs SPIP.
+		spip_log("Erreur d'analyse YAML : " . $exception->getMessage(), 'yaml' . _LOG_ERREUR);
 	}
 
 	return $parsed;
