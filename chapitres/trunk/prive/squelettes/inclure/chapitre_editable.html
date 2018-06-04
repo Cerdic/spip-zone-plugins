@@ -28,19 +28,19 @@
 	]
 	[(#ID_CHAPITRE|oui)
 		<header class="chapitre__header">
+			[<(#GET{heading}) class="chapitre__titre">]
+				[<span class="chapitre__numero">(#ENV{numero})</span> ]#INFO_TITRE{chapitre,#ID_CHAPITRE}
+			[</(#GET{heading})>]
 			<div class="chapitre__metas">
 				[<span class="chapitre__statut">(#INFO_STATUT{chapitre,#ID_CHAPITRE}|puce_statut{chapitre,#ID_CHAPITRE})</span>]
 				[<a href="[(#ID_CHAPITRE|generer_url_entite{chapitre})]" class="chapitre__lien">
 					<:info_numero_abbreviation:> (#ID_CHAPITRE)
 				</a>]
 				[(#REM) Modifier ]
-				[(#GET{self}|parametre_url{edit,#ID_CHAPITRE}|icone_verticale{<:chapitre:icone_modifier_chapitre:>,chapitre-16,edit,right simple ajax})]
+				[(#GET{self}|parametre_url{edit,#ID_CHAPITRE}|icone_verticale{<:chapitre:icone_modifier_chapitre:>,simple-edit-16,'',simple ajax})]
 				[(#REM) Ajouter un chapitre enfant ]
-				[(#GET{self}|parametre_url{edit,new}|parametre_url{id_parent,#ID_CHAPITRE}|icone_verticale{<:chapitre:icone_ajouter_chapitre_enfant:>,chapitre-16,add,right simple ajax})]
+				[(#GET{self}|parametre_url{edit,new}|parametre_url{id_parent,#ID_CHAPITRE}|icone_verticale{<:chapitre:icone_ajouter_chapitre_enfant:>,simple-add-16,'',simple ajax})]
 			</div>
-			[<(#GET{heading}) class="spip chapitre__titre">]
-				[<span class="chapitre__numero">(#ENV{numero})</span> ]#INFO_TITRE{chapitre,#ID_CHAPITRE}
-			[</(#GET{heading})>]
 		</header>
 
 		[(#GET{edit}|!={#ID_CHAPITRE}|oui)
@@ -59,15 +59,13 @@
 		=======
 	]
 	[(#GET{edit}|oui)
-		<br class="nettoyeur" />
 		<div class="cadre-formulaire-editer">
 			<div class="entete-formulaire">
-				[(#GET{self}|icone_verticale{<:retour:>,chapitre,'',right ajax})]
-				[(#GET{edit}|intval|oui)
-					[(#VAL{chapitre}|objet_info{texte_modifier}|_T)]
-				][(#GET{edit}|intval|non)
+				[(#GET{self}|icone_verticale{<:retour:>,chapitre,'',left ajax})]
+				[(#GET{edit}|intval|?{
+					[(#VAL{chapitre}|objet_info{texte_modifier}|_T)],
 					<:chapitre:icone_creer_chapitre:>
-				]
+				})]
 			</div>
 			<div class="ajax">
 				[(#GET{edit}|intval|oui)

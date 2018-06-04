@@ -63,7 +63,7 @@
 */
 /* Indentation */
 .chapitres_complets .chapitre .chapitre {
-   padding-left: 2em;
+   padding-left: 1em;
 }
 /* Reprendre des styles de #wysiwyg */
 .chapitres_complets .chapitre {
@@ -79,23 +79,32 @@
   display: none;
 }
 /* Divers */
-.chapitres_complets .chapitre__metas {
-  float: #ENV{right};
-}
-.chapitres_complets .chapitre__metas > * {
-  margin-#ENV{right}: 0.5em;
-}
 .chapitres_complets .bd {
   padding-top: 2em;
 }
 .chapitres_complets .cadre-formulaire-editer {
   margin-top: 1em;
 }
+/* Header */
+.chapitres_complets .chapitre__header {
+  display: flex;
+}
+/* Metas */
+.chapitres_complets .chapitre__metas {
+  margin-#ENV{left}: auto;
+  display: flex;
+}
+.chapitres_complets .chapitre__metas > *:not(:last-child) {
+  margin-#ENV{right}: 0.5em;
+}
 /* Icones */
-.chapitres_complets .icone.verticale a {
+.chapitres_complets .icone.simple.verticale a {
   width: auto;
   padding: 0;
 }
 .chapitres_complets .icone.simple a b {
   display: none;
+}
+.chapitres_complets .icone.simple img {
+  padding: 0.2em;
 }
