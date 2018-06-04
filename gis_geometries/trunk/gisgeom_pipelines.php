@@ -197,6 +197,33 @@ function gisgeom_post_edition($flux) {
 			'id_gis = '.intval($id_gis)
 		);
 	}
+
+	if (isset($flux['data']['lon'])
+		and isset($flux['data']['lat'])
+		and $flux['args']['type'] == 'gis'
+		and $flux['args']['action'] == 'modifier') {
+		// générer automatiquemebt le champ geo à partir de lat et lon quand on passe par l'API et gis_modifier
+		$id_gis = $flux['args']['id_objet'];
+		if (isset($flux['data']['type']) && $flux['data']['type']) {
+			$type = $flux['data']['type'];
+		} else {
+			$type                 = 'Point';
+			$flux['data']['type'] = $type;
+		}
+		$point = array('type' => 'Feature', 'geometry' => array('type' => $type, 'coordinates' => array($flux['data']['lon'], $flux['data']['lat'])));
+		$json  = json_encode($point);
+		include_spip('gisgeom_fonctions');
+		$wkt = json_to_wkt($json);
+		sql_update(
+			'spip_gis',
+			array(
+				'geo' => "GeomFromText('$wkt')",
+				'type' => sql_quote($type)
+			),
+			'id_gis = '.intval($id_gis)
+		);
+	}
+	
 	return $flux;
 }
 
