@@ -35,13 +35,13 @@
 
 	#BOITE_OUVRIR{'','simple'}
 	<section
-		class="chapitre chapitre__racine clearfix[ (#EXPOSE{expose})]"
+		class="chapitre chapitre__racine clearfix"
 		id="chapitre#ID_CHAPITRE"
 		data-profondeur="0"
 	>
 
 		<INCLURE{fond=prive/squelettes/inclure/chapitre_editable,
-			id_chapitre,
+			id_chapitre_editable=#ID_CHAPITRE,
 			objet,
 			id_objet,
 			id_parent=#ENV{id_parent},
@@ -65,13 +65,13 @@
 		#SET{numero_parent,#GET{numero}}
 
 		<section
-			class="chapitre chapitre__enfant clearfix[ (#EXPOSE{expose})]"
+			class="chapitre chapitre__enfant clearfix"
 			id="chapitre#ID_CHAPITRE"
 			data-profondeur="#GET{profondeur}"
 		>
 
 			<INCLURE{fond=prive/squelettes/inclure/chapitre_editable,
-				id_chapitre,
+				id_chapitre_editable=#ID_CHAPITRE,
 				objet,
 				id_objet,
 				id_parent=#ENV{id_parent},

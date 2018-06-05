@@ -81,6 +81,9 @@
 .chapitres_complets .cadre-formulaire-editer {
   margin-top: 1em;
 }
+.chapitres_complets .chapitre__contenu.expose {
+  background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];
+}
 /* Header */
 .chapitres_complets .chapitre__header {
   display: flex;
@@ -93,7 +96,8 @@
 .chapitre__indentation {
   color: #GET{foncee};
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 100;
+  font-family: monospace;
 }
 /* Metas */
 .chapitres_complets .chapitre__metas {

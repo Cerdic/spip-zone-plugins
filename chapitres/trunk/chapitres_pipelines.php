@@ -69,6 +69,7 @@ function chapitres_affiche_enfants($flux) {
 				'objet' => $objet,
 				'id_objet' => $id_objet,
 				'chapitres' => _request('chapitres'),
+				'id_chapitre' => _request('id_chapitre'),
 			),
 			array (
 				'ajax' => true,
