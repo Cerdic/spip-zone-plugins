@@ -161,7 +161,8 @@ function chapitres_pre_insertion($flux) {
 /**
  * Agir avant l'édition d'un objet
  *
- * => Institution d'un chapitre : si id_parent a été modifié, le renvoyer dans la liste des champs sinon il est ignoré. l'API cherche par défaut une rubrique comme parent, qui forcément n'existe pas.
+ * => Modification / institution d'un chapitre : si id_parent a été modifié, le renvoyer dans la liste des champs sinon il est ignoré.
+ * l'API cherche par défaut une rubrique comme parent, qui forcément n'existe pas.
  *
  * @pipeline pre_edition
  * @param  array $flux Données du pipeline
@@ -169,16 +170,20 @@ function chapitres_pre_insertion($flux) {
  */
 function chapitres_pre_edition($flux) {
 
-	// Si on institue un chapitre et qu'un nouveau id_parent est sélectionné
-	if ($flux['args']['action'] == 'instituer'
-		and $flux['args']['table'] == 'spip_chapitres'
+	$zid_parent_ancien = sql_getfetsel('id_parent', 'spip_chapitres', 'id_chapitre='.intval($flux['args']['id_objet']));
+	$zid_parent = _request('id_parent');
+
+	// Si on modifie ou institue un chapitre et qu'un nouveau id_parent est sélectionné
+	if (
+		$flux['args']['type'] == 'chapitre'
+		and in_array($flux['args']['action'], array('instituer', 'modifier'))
 		and $id_chapitre = intval($flux['args']['id_objet'])
 		and !is_null($id_parent = _request('id_parent'))
-		and $id_parent_ancien = sql_getfetsel('id_parent', 'spip_chapitres', 'id_chapitre='.intval($id_chapitre))
+		and (($id_parent_ancien = sql_getfetsel('id_parent', 'spip_chapitres', 'id_chapitre='.intval($id_chapitre))) !== false)
 		and $id_parent != $id_parent_ancien
 	) {
 
-		$flux['data']['id_parent'] = $id_parent;
+		$flux['data']['id_parent'] = intval($id_parent);
 
 	}
 
