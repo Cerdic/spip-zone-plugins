@@ -1,7 +1,7 @@
 <paquet
 	prefix="gisgeom"
 	categorie="divers"
-	version="1.11.4"
+	version="1.11.5"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/gis.png"
