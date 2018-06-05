@@ -29,6 +29,7 @@
 	[(#ID_CHAPITRE|oui)
 		<header class="chapitre__header">
 			[<(#GET{heading}) class="chapitre__titre">]
+				[<span class="chapitre__indentation">(#VAL{→}|str_repeat{#ENV{profondeur}})</span>]
 				[<span class="chapitre__numero">(#ENV{numero})</span> ]#INFO_TITRE{chapitre,#ID_CHAPITRE}
 			[</(#GET{heading})>]
 			<div class="chapitre__metas">
