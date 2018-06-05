@@ -7,29 +7,40 @@
 	#SET{librairies, #LISTE{sfyaml, symfony, spyc}}
 	#SET{librairies, #GET{librairies}|ajouter_libyaml}
 
+	<h1>YAML DECODE : DEMO</h1>
 	<BOUCLE_parse_demo(DATA) {source table, #GET{librairies}}>
 		#SET{fichier, demo/test_#VALEUR.yaml}
-		<h1>YAML PARSE DEMO FILE : [(#VALEUR) - ]#GET{fichier}</h1>
+		<h2>LIBRAIRIE : [(#VALEUR) - ][FICHIER : (#GET{fichier})]</h2>
 		[<p>(#CHEMIN{#GET{fichier}}|decoder_fichier_yaml{#ARRAY{library, #VALEUR, include, #EVAL{true}, show_error, #EVAL{true}}}|bel_env)</p>]
 	</BOUCLE_parse_demo>
 
+	<h1>YAML DECODE : INCLUSION</h1>
 	#SET{fichier, demo/test_inclure.yaml}
 	<BOUCLE_parse_inclure(DATA) {source table, #GET{librairies}}>
-		<h1>YAML PARSE INCLURE FILE : [(#VALEUR) - ]#GET{fichier}</h1>
+		<h2>LIBRAIRIE : [(#VALEUR) - ][FICHIER : (#GET{fichier})]</h2>
 		[<p>(#CHEMIN{#GET{fichier}}|decoder_fichier_yaml{#ARRAY{library, #VALEUR, include, #EVAL{true}, show_error, #EVAL{true}}}|bel_env)</p>]
 	</BOUCLE_parse_inclure>
 
+	<h1>YAML DECODE : NOISETTE</h1>
 	#SET{fichier, demo/test_noisette.yaml}
 	<BOUCLE_parse_noisette(DATA) {source table, #GET{librairies}}>
-		<h1>YAML PARSE NOISETTE FILE : [(#VALEUR) - ]#GET{fichier}</h1>
+		<h2>LIBRAIRIE : [(#VALEUR) - ][FICHIER : (#GET{fichier})]</h2>
 		[<p>(#CHEMIN{#GET{fichier}}|decoder_fichier_yaml{#ARRAY{library, #VALEUR, include, #EVAL{true}, show_error, #EVAL{true}}}|bel_env)</p>]
 	</BOUCLE_parse_noisette>
 
+	<h1>YAML DECODE : SAISIE</h1>
 	#SET{fichier, demo/test_saisie.yaml}
 	<BOUCLE_parse_saisie(DATA) {source table, #GET{librairies}}>
-		<h1>YAML PARSE SAISIE FILE : [(#VALEUR) - ]#GET{fichier}</h1>
+		<h2>LIBRAIRIE : [(#VALEUR) - ][FICHIER : (#GET{fichier})]</h2>
 		[<p>(#CHEMIN{#GET{fichier}}|decoder_fichier_yaml{#ARRAY{library, #VALEUR, include, #EVAL{true}, show_error, #EVAL{true}}}|bel_env)</p>]
 	</BOUCLE_parse_saisie>
+
+	<h1>YAML DECODE : FORMULAIRE</h1>
+	#SET{fichier, demo/test_formulaire.yaml}
+	<BOUCLE_parse_formulaire(DATA) {source table, #GET{librairies}}>
+		<h2>LIBRAIRIE : [(#VALEUR) - ][FICHIER : (#GET{fichier})]</h2>
+		[<p>(#CHEMIN{#GET{fichier}}|decoder_fichier_yaml{#ARRAY{library, #VALEUR, include, #EVAL{true}, show_error, #EVAL{true}}}|bel_env)</p>]
+	</BOUCLE_parse_formulaire>
 
 </div>
 </body>
