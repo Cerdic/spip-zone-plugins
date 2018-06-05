@@ -40,7 +40,6 @@
 	<pipeline nom="insert_head" action="insert_head_css" inclure="noizetier_pipelines.php" />
 
 	<necessite nom="ncore" compatibilite="[0.4.0;[" />
-	<necessite nom="yaml" compatibilite="[1.5.2;[" />
 	<necessite nom="saisies" compatibilite="[2.2.3;[" />
 	<necessite nom="verifier" compatibilite="[1.0.5;[" />
 

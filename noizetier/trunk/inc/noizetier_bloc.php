@@ -63,8 +63,9 @@ function noizetier_bloc_lire($bloc, $information = '') {
 		if (!isset($description_bloc[$bloc])) {
 			if ($fichier = find_in_path("${bloc}/bloc.yaml")) {
 				// Il y a un fichier YAML de configuration dans le répertoire du bloc, on le lit.
+				// Un YAML de bloc ne peut pas contenir d'inclusion YAML.
 				include_spip('inc/yaml');
-				if ($description = yaml_charger_inclusions(yaml_decode_file($fichier))) {
+				if ($description = yaml_decode_file($fichier)) {
 					$description['nom'] = isset($description['nom']) ? _T_ou_typo($description['nom']) : ucfirst($bloc);
 					if (isset($description['description'])) {
 						$description['description'] = _T_ou_typo($description['description']);

@@ -442,10 +442,11 @@ function page_phraser_fichier($page, $options = array()) {
 	$md5 = '';
 	if ($fichier = find_in_path("{$options['repertoire_pages']}${page}.yaml")) {
 		// 1a- il y a un fichier YAML de configuration, on vérifie le md5 avant de charger le contenu.
+		//     Un YAML de page ne peut pas contenir d'inclusion YAML.
 		$md5 = md5_file($fichier);
 		if ($md5 != $options['md5']) {
 			include_spip('inc/yaml');
-			$description = yaml_charger_inclusions(yaml_decode_file($fichier));
+			$description = yaml_decode_file($fichier);
 		}
 	} elseif ($fichier = find_in_path("{$options['repertoire_pages']}${page}.xml")) {
 		// 1b- il y a un fichier XML de configuration, on vérifie le md5 avant de charger le contenu.
