@@ -108,7 +108,7 @@ function type_noisette_charger($plugin, $recharger = false, $stockage = '') {
 			$md5 = md5_file($_chemin);
 			if ($md5 != $md5_stocke) {
 				include_spip('inc/yaml');
-				$description = yaml_charger_inclusions(yaml_decode_file($_chemin));
+				$description = yaml_decode_file($_chemin, array('include' => true));
 
 				// TODO : ne faudrait-il pas "valider" le fichier YAML ici ou alors lors du stockage ?
 				// Traitements des champs pouvant être soit une chaine soit un tableau

@@ -13,5 +13,5 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-	<necessite nom="yaml" compatibilite="[1.5.3;[" />
+	<necessite nom="yaml" compatibilite="[2.0.1;[" />
 </paquet>
