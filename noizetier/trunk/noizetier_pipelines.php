@@ -19,8 +19,10 @@ function noizetier_recuperer_fond($flux) {
 	// ne concerne pas le privé.
 	// Le fonctionnement du pipeline consiste à détecter si le squelette concerné par l'appel à recuperer_fond() est
 	// celui d'un bloc autorisé pour une page ou un objet donné.
-	$contexte = $flux['data']['contexte'];
-	if (!test_espace_prive() and !isset($contexte['fond_compilation_noizetier'])) {
+	if (!test_espace_prive()
+	and isset($flux['data']['contexte'])
+	and ($contexte = $flux['data']['contexte'])
+	and !isset($contexte['fond_compilation_noizetier'])) {
 		// On récupère le squelette en cours de traitement et on identifie si celui-ci est un bloc autorisé d'une
 		// page ou d'un objet.
 		// On exclut le squelette structure.html et les noisettes elles-mêmes.
@@ -401,7 +403,7 @@ function noizetier_insert_head_css($flux) {
 
 function noizetier_insert_head($flux) {
 	// au cas ou il n'est pas implemente
-	$flux .= rainette_insert_head_css($flux);
+	$flux .= noizetier_insert_head_css($flux);
 
 	return $flux;
 }
