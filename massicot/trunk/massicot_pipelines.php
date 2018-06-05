@@ -85,7 +85,7 @@ function massicot_document_desc_actions($flux) {
  */
 function massicot_post_edition($flux) {
 
-	if (($flux['args']['type'] === 'document')
+	if (isset($flux['args']['type']) and ($flux['args']['type'] === 'document')
 	    and isset($flux['data']['fichier'])) {
 		include_spip('base/abstract_sql');
 		include_spip('action/editer_liens');
