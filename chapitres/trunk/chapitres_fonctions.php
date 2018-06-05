@@ -135,6 +135,11 @@ function calcul_branche_in_chapitres($id, $id_inclus=false){
 function chapitres_remplacer_intertitres($texte, $profondeur, $niveau_racine = 2) {
 
 	if (strlen(trim($texte))) {
+
+		// Encapsuler temporairement le texte
+		// car le remplacement nécessite un noeud parent
+		$texte = "<div>$texte</div>";
+
 		// DOMDocument plutôt qu'une regex car plus fiable (ignorer commentaires, styles inline etc.).
 		libxml_use_internal_errors(true);
 		$dom = new DOMDocument;
@@ -162,17 +167,20 @@ function chapitres_remplacer_intertitres($texte, $profondeur, $niveau_racine = 2
 				$niveau = $niveau_chapitre + 1 + $delta;
 				$niveau = min($niveau, 6); // Limiter à .h6
 				// Remplacer les intertitres
-				// Boucle en arrière, cf. 
+				// Plusieurs noeuds à remplacer = boucle regressive, cf. https://stackoverflow.com/a/12018817
 				$intertitres = $dom->getElementsByTagName("h$n");
 				for ($i = $intertitres->length - 1; $i >= 0; $i--) {
-					$avant = $intertitres->item($i);
-					$apres = $dom->createElement('div', $avant->nodeValue);
-					$apres->setAttribute('class', "spip h$niveau");
-					$avant->parentNode->replaceChild($apres, $avant);
+					$ancien = $intertitres->item($i);
+					$nouveau= $dom->createElement('div', $ancien->nodeValue);
+					$nouveau->setAttribute('class', "spip h$niveau");
+					$ancien->parentNode->replaceChild($nouveau, $ancien);
 				}
 			}
 
 			$texte = $dom->saveHTML();
+
+			// Retirer l'encapsulation temporaire
+			$texte = substr(substr($texte, 0, -7), 5);
 
 		}
 	}
