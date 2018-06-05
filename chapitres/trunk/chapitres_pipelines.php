@@ -170,9 +170,6 @@ function chapitres_pre_insertion($flux) {
  */
 function chapitres_pre_edition($flux) {
 
-	$zid_parent_ancien = sql_getfetsel('id_parent', 'spip_chapitres', 'id_chapitre='.intval($flux['args']['id_objet']));
-	$zid_parent = _request('id_parent');
-
 	// Si on modifie ou institue un chapitre et qu'un nouveau id_parent est sélectionné
 	if (
 		$flux['args']['type'] == 'chapitre'
