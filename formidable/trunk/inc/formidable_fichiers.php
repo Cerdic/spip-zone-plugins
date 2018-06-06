@@ -192,6 +192,8 @@ function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $mime
 			spip_log("Impossible d'écrire dans $dossier", 'formidable'._LOG_ERREUR);
 			return '';
 		}
+		// WARNING : ce test n'est pas fiable car il repose sur le fait que le serveur est capable d'acceder a ses propres URLs
+		// ce qui n'est pas forcement vrai selon la config reseau etc. Peut provoquer un delai d'attente important si le firewall bloque la requete http
 		include_spip('inc/distant');
 		$url = url_absolue($fichier_test);
 		if ($data = recuperer_page($url) && $data != null) {
