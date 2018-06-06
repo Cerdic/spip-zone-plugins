@@ -59,6 +59,7 @@ function cvtupload_generer_html($infos_fichiers = null) {
 				);
 			} // Sinon c'est un champ multiple
 			else {
+				$html_fichiers[$champ] = array();
 				foreach ($fichier as $cle => $infos) {
 					$html_fichiers[$champ][$cle] = recuperer_fond(
 						'formulaires/inc-cvtupload-fichier',
