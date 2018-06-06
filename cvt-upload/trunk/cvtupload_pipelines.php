@@ -196,7 +196,7 @@ function cvtupload_formulaire_fond($flux) {
  */
 function cvtupload_insert_head_css($flux, $prive = false) {
 	if (!$prive) {
-		$css = find_in_path('css/cvtupload.css');
+		$css = timestamp(find_in_path('css/cvtupload.css'));
 
 		$flux .= "\n<link rel='stylesheet' href='$css' type='text/css' media='all' />\n";
 	}
