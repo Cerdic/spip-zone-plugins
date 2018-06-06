@@ -7,6 +7,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 include_spip('inc/cvtupload');
 
+/**
+ * Charger les informations qui correspondent aux champs fichiers du formulaire
+ * @param array $flux
+ * @return array mixed
+ */
 function cvtupload_formulaire_charger($flux) {
 	// S'il y a des champs fichiers de déclarés
 	if ($champs_fichiers = cvtupload_chercher_fichiers($flux['args']['form'], $flux['args']['args'])) {
@@ -15,11 +20,14 @@ function cvtupload_formulaire_charger($flux) {
 		$contexte['cvtupload_fichiers_precedents'] = array();
 
 		// On met dans le contexte le HTML pour les fichiers précédemment postés
-		$_fichiers = _request('_fichiers');
+		// cvtupload_generer_html() a prepare son contenu lors de son appel depuis verifier()
 		$forcer = _request('_cvtupload_precharger_fichiers_forcer');
-		if ($html_fichiers = cvtupload_generer_html() and $_fichiers) {
+		if ($html_fichiers = cvtupload_generer_html()
+		  and $_fichiers = _request('_fichiers')) {
 			$contexte['_fichiers_precedents_html'] = $html_fichiers;
-		} elseif (isset($flux['data']['cvtupload_precharger_fichiers']) and ($flux['args']['je_suis_poste']==false or $forcer == true)) {
+		}
+		elseif (isset($flux['data']['cvtupload_precharger_fichiers'])
+		  and ($flux['args']['je_suis_poste']==false or $forcer == true)) {
 			$precharger_fichiers = charger_fonction('cvtupload_precharger_fichiers', 'inc');
 			$contexte['_fichiers_precedents_html'] = cvtupload_generer_html($precharger_fichiers($flux['data']['cvtupload_precharger_fichiers'],$flux['args']['form']));
 		}
@@ -28,6 +36,11 @@ function cvtupload_formulaire_charger($flux) {
 	return $flux;
 }
 
+/**
+ * Verifier les contenus uploades sur les champs fichiers
+ * @param array $flux
+ * @return array
+ */
 function cvtupload_formulaire_verifier($flux) {
 	// S'il y a des champs fichiers de déclarés
 	if ($champs_fichiers = cvtupload_chercher_fichiers($flux['args']['form'], $flux['args']['args'])) {
@@ -122,6 +135,11 @@ function cvtupload_formulaire_verifier($flux) {
 	return $flux;
 }
 
+/**
+ * Injecter le html de presentation du fichier deja uploade avant chaque input file
+ * @param array $flux
+ * @return array mixed
+ */
 function cvtupload_formulaire_fond($flux) {
 	// Si ça a déjà été posté (après verifier()) et qu'il y a des champs fichiers déclarés
 	if (($flux['args']['je_suis_poste'] or isset($flux['args']['contexte']['cvtupload_precharger_fichiers']))
@@ -170,6 +188,12 @@ function cvtupload_formulaire_fond($flux) {
 	return $flux;
 }
 
+/**
+ * Ajouter la CSS dans le head du site public
+ * @param string $flux
+ * @param bool $prive
+ * @return string
+ */
 function cvtupload_insert_head_css($flux, $prive = false) {
 	if (!$prive) {
 		$css = find_in_path('css/cvtupload.css');

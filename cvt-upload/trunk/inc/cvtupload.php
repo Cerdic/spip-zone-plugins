@@ -246,7 +246,7 @@ function cvtupload_nettoyer_files_selon_erreurs($champ, $erreurs) {
  * Ce qui n'est absolument pas utilse
  * @param string $mime_suppose
  * @param string $extension
- * return string $mime_trouve
+ * @return string $mime_trouve
 **/
 function cvt_upload_determiner_mime($mime_suppose, $extension) {
 	if (!in_array($mime_suppose, array('text/plain', '', 'application/octet-stream'))) { // si on a un mime précis, on le renvoie, tout simplement
@@ -259,6 +259,7 @@ function cvt_upload_determiner_mime($mime_suppose, $extension) {
 		return $mime_suppose;
 	}
 }
+
 /**
  * Nettoyer un répertoire suivant l'age et le nombre de ses fichiers
  *

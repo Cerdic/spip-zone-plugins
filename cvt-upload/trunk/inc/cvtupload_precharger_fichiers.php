@@ -5,6 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 include_spip('inc/cvtupload');
+
 /**
  * Une fonction qui permet de précharger des fichiers.
  * Si la fonction formulaires_formidable_charger
