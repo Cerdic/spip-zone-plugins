@@ -3,7 +3,7 @@
 	margin-bottom: 1em;
 }
 
-.formulaire_spip .choix > .fichier_precedent {
+.formulaire_spip .editer .cvtup-fichier-precedent {
 	display:       block;
 	width:         100%;
 	overflow: auto;
@@ -12,27 +12,30 @@
 	border-radius: 5px;
 }
 
-.formulaire_spip .choix .fichier_precedent .description,
-.formulaire_spip .choix .fichier_precedent .action {
+.formulaire_spip .editer .cvtup-fichier-precedent .cvtup-description,
+.formulaire_spip .editer .cvtup-fichier-precedent .cvtup-action {
 	display: block;
 	overflow: visible;
 	padding: .5em;
 	vertical-align: top;
 }
-.formulaire_spip .choix .fichier_precedent .description {
-	width: 10%;
+.formulaire_spip .editer .cvtup-fichier-precedent .cvtup-description {
 	overflow: visible;
 }
-.formulaire_spip .choix .fichier_precedent .description img {
-	display:       block;
+.formulaire_spip .editer .cvtup-fichier-precedent .cvtup-description img {
+	max-width: 100%;
+	height: auto;
 	margin-bottom: .5em;
 }
+.formulaire_spip .editer .cvtup-fichier-precedent .cvtup-description .cvtup-filename {
+	display: block;
+}
 
-.formulaire_spip .choix .fichier_precedent .action label {
+.formulaire_spip .editer .cvtup-fichier-precedent .cvtup-action label {
 	display: inline;
 }
 
-.formulaire_spip .choix .fichier_precedent .remplacer{
+.formulaire_spip .editer .cvtup-fichier-precedent .cvtup-remplacer {
 	clear:both;
 	padding:.5em;
 }
