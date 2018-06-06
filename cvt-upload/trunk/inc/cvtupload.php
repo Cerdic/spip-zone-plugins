@@ -94,65 +94,42 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer = tr
 
 	// On commence par nettoyer le dossier
 	cvtupload_nettoyer_repertoire($repertoire);
-	if (is_array($fichier['name'])) {
-		foreach ($fichier['name'] as $cle => $nom) {
-			// On commence par transformer le nom du fichier pour éviter les conflits, on supprime notamment les accents
-			$nom = preg_replace(',\.\.+,', '.', $nom); // pas de .. dans le nom du doc
-			$nom = preg_replace("/[^.=\w-]+/", "_",
-				translitteration(preg_replace("/<[^>]*>/", '', $nom)));
-			$nom = strtolower($nom);
-			if (// Si le fichier a bien un nom et qu'il n'y a pas d'erreur associé à ce fichier
-				($nom != null)
-				and ($fichier['error'][$cle] == 0)
-				// Et qu'on génère bien un nom de fichier aléatoire pour déplacer le fichier
-				and $chemin_aleatoire = tempnam($repertoire, $form.'_')
-			) {
-				$extension = strtolower(pathinfo($fichier['name'][$cle], PATHINFO_EXTENSION));
-				// Déplacement du fichier vers le dossier de réception temporaire + récupération d'infos
-				if (deplacer_fichier_upload($fichier['tmp_name'][$cle], $chemin_aleatoire, $deplacer)) {
-					$infos[$cle]['tmp_name'] = $chemin_aleatoire;
-					$infos[$cle]['name'] = $nom;
-					$infos[$cle]['extension'] = $extension;
-					// si image on fait une copie avec l'extension pour pouvoir avoir l'image réduite en vignette
-					if (in_array($extension, array('png','jpg','gif'))) {
-						deplacer_fichier_upload($chemin_aleatoire, $chemin_aleatoire.".$extension", false);
-						$infos[$cle]['vignette'] = $chemin_aleatoire.".$extension";
-					} else {
-						$infos[$cle]['vignette'] = $vignette_par_defaut($infos[$cle]['extension'], false, true);
-					}
-					//On récupère le type MIME du fichier aussi
-					$infos[$cle]['mime'] = cvt_upload_determiner_mime($fichier['type'][$cle], $infos[$cle]['extension']);
-					$infos[$cle]['taille'] = $fichier['size'][$cle];
-					// On stocke des infos sur le formulaire
-					$infos[$cle]['form'] = $form;
-					$infos[$cle]['infos_encodees'] = encoder_contexte_ajax($infos[$cle], $form);
-				}
-			}
-		}
-	} else {
-		// On commence par transformer le nom du fichier pour éviter les conflits
-		$nom = trim(preg_replace('/[\s]+/', '_', strtolower(translitteration($fichier['name']))));
+	foreach (is_array($fichier['name'])?$fichier['name']:array($fichier['name']) as $cle => $nom) {
+		// On commence par transformer le nom du fichier pour éviter les conflits, on supprime notamment les accents
+		$nom = preg_replace(',\.\.+,', '.', $nom); // pas de .. dans le nom du doc
+		$nom = preg_replace("/[^.=\w-]+/", "_",
+			translitteration(preg_replace("/<[^>]*>/", '', $nom)));
+		$nom = strtolower($nom);
 		if (// Si le fichier a bien un nom et qu'il n'y a pas d'erreur associé à ce fichier
 			($nom != null)
-			and ($fichier['error'] == 0)
+			and ($fichier['error'][$cle] == 0)
 			// Et qu'on génère bien un nom de fichier aléatoire pour déplacer le fichier
 			and $chemin_aleatoire = tempnam($repertoire, $form.'_')
 		) {
+			$extension = strtolower(pathinfo($fichier['name'][$cle], PATHINFO_EXTENSION));
 			// Déplacement du fichier vers le dossier de réception temporaire + récupération d'infos
-			if (deplacer_fichier_upload($fichier['tmp_name'], $chemin_aleatoire, $deplacer)) {
-				$infos['tmp_name'] = $chemin_aleatoire;
-				$infos['name'] = $nom;
-				// On en déduit l'extension et du coup la vignette
-				$infos['extension'] = pathinfo($fichier['name'], PATHINFO_EXTENSION);
-				$infos['vignette'] = $vignette_par_defaut($infos['extension'], false, true);
-				//On récupère le type MIME du fichier aussi, ainsi que la taille
-				$infos['mime'] = cvt_upload_determiner_mime($fichier['type'], $infos['extension']);
-				$infos['taille'] = $fichier['size'];
+			if (deplacer_fichier_upload($fichier['tmp_name'][$cle], $chemin_aleatoire, $deplacer)) {
+				$infos[$cle]['tmp_name'] = $chemin_aleatoire;
+				$infos[$cle]['name'] = $nom;
+				$infos[$cle]['extension'] = $extension;
+				// si image on fait une copie avec l'extension pour pouvoir avoir l'image réduite en vignette
+				if (in_array($extension, array('png','jpg','gif'))) {
+					deplacer_fichier_upload($chemin_aleatoire, $chemin_aleatoire.".$extension", false);
+					$infos[$cle]['vignette'] = $chemin_aleatoire.".$extension";
+				} else {
+					$infos[$cle]['vignette'] = $vignette_par_defaut($infos[$cle]['extension'], false, true);
+				}
+				//On récupère le type MIME du fichier aussi
+				$infos[$cle]['mime'] = cvt_upload_determiner_mime($fichier['type'][$cle], $infos[$cle]['extension']);
+				$infos[$cle]['taille'] = $fichier['size'][$cle];
 				// On stocke des infos sur le formulaire
-				$infos['form'] = $form;
-				$infos['infos_encodees'] = encoder_contexte_ajax($infos, $form);
+				$infos[$cle]['form'] = $form;
+				$infos[$cle]['infos_encodees'] = encoder_contexte_ajax($infos[$cle], $form);
 			}
 		}
+	}
+	if (!is_array($fichier['name'])) {
+		$infos = reset($infos);
 	}
 
 	return $infos;
