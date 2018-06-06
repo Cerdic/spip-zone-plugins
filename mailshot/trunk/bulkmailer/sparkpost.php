@@ -269,14 +269,20 @@ function sparkpost_add_sender($sender_email){
  */
 function sparkpost_api_call($method,$data=null,$http_req=null) {
 	static $api_key = null;
+	static $api_endpoint = null;
 	if (is_null($api_key)){
 		include_spip('inc/config');
 		$config = lire_config('mailshot/');
 		$api_key = $config['sparkpost_api_key'];
+		$api_endpoint = (isset($config['sparkpost_api_endpoint'])?$config['sparkpost_api_endpoint']:'');
+		if (!in_array($api_endpoint, array('', 'eu'))) {
+			$api_endpoint = '';
+		}
+		$api_endpoint = ltrim($api_endpoint . '.sparkpost.com', '.');
 	}
 
 	include_spip('inc/distant');
-	$endpoint = "https://api.sparkpost.com/api/v1/";
+	$endpoint = "https://api.".$api_endpoint."/api/v1/";
 
 	$headers =
 		  "Authorization: $api_key\n"

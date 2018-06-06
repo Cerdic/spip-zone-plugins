@@ -77,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_purger_historique_oui' => 'Effacer le détail des anciens envois',
 	'label_rate_limit' => 'Limiter la cadence d’envoi',
 	'label_sparkpost_api_key' => 'Sparkpost API Key',
+	'label_sparkpost_api_endpoint' => 'API Endpoint',
 	'label_sujet' => 'Sujet',
 	'label_texte' => 'Version Texte',
 	'legend_configuration_adresse_envoi' => 'Adresse d’envoi',
