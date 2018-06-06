@@ -78,6 +78,16 @@ options:
           label: '<:saisie_evenements:id_mot_label:>'
           explication: '<:saisie_evenements:id_mot_explication:>'
       -
+        saisie: 'selection'
+        options:
+          nom: 'inscription'
+          label: '<:saisie_evenements:inscription_label:>'
+          explication: '<:saisie_evenements:inscription_explication:>'
+          defaut: ''
+          data: 
+            choix0: '<:saisie_evenements:inscription_choix0:>'
+            choix1: '<:saisie_evenements:inscription_choix1:>'
+      -
         saisie: 'explication'
         options:
           nom: 'saisie_evenements_chronologie'
