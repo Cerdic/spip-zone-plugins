@@ -213,7 +213,7 @@ function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $mime
 		$n++;
 	}
 	if (!$zipper) { // si on ne zippe pas, c'est simple
-		if ($fichier = deplacer_fichier_upload($fichier, $chemin_final, true)) {
+		if ($fichier_dest = deplacer_fichier_upload($fichier, $chemin_final, true)) {
 			spip_log("Enregistrement du fichier $chemin_final", 'formidable');
 			return $nom;
 		} else {
@@ -229,13 +229,12 @@ function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $mime
 		}
 		spip_unlink($tmp_dir);
 		@mkdir($tmp_dir);
-		$old_fichier = $fichier;
-		if (!$fichier = deplacer_fichier_upload($fichier, $tmp_dir.'/'.$nom_dans_zip, false)) {
+		if (!$fichier_tmp = deplacer_fichier_upload($fichier, $tmp_dir.'/'.$nom_dans_zip, false)) {
 			spip_log("Pb lors de l'enregistrement du fichier $tmp_dir/$nom_dans_zip", 'formidable'._LOG_ERREUR);
 			return '';
 		}
 		$zip_final = $zip -> create(
-			$fichier,
+			$fichier_tmp,
 			PCLZIP_OPT_REMOVE_PATH,
 			$tmp_dir,
 			PCLZIP_OPT_ADD_PATH,
@@ -245,7 +244,7 @@ function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $mime
 			spip_log("Pb lors de l'enregistrement du fichier $fichier", 'formidable'._LOG_ERREUR);
 			return '';
 		} else {
-			spip_unlink($old_fichier);
+			spip_unlink($fichier);
 			supprimer_repertoire($tmp_dir);
 			spip_log("Enregistrement du fichier $fichier, automatiquement zippé", 'formidable');
 			return $nom;
@@ -330,7 +329,7 @@ function formidable_deplacer_fichiers_produire_vue_saisie($saisie, $options) {
 				$description['tmp_name'] = $mon_file['tmp_name'][$i];
 			}
 			//on ajoute la description au tableau global
-			$description_fichiers[] = $description;
+			$description_fichiers[$i] = $description;
 		}
 		$i++;
 	}
