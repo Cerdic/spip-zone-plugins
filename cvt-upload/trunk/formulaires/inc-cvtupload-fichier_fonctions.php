@@ -34,3 +34,18 @@ function _image_reduire_base64($img, $taille) {
 	$image_reduite = inserer_attribut($image_reduite, 'src', $base64_reduit);
 	return $image_reduite;
 }
+
+
+/**
+ * Passer un nom en une valeur compatible avec une classe css
+ *
+ * - toto => toto,
+ * - toto/truc => toto_truc,
+ * - toto[truc] => toto_truc
+ *
+ * @param string $nom
+ * @return string
+**/
+function cvtupload_nom2classe($nom) {
+	return str_replace(array('/', '[', ']', '&#91;', '&#93;'), array('_', '_', '', '_', ''), $nom);
+}

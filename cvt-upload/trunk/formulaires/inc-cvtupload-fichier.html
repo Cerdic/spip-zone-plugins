@@ -9,11 +9,11 @@
 		
 	</div>
 	<div class="action">
-		<input type="checkbox" class="checkbox" id="cvtupload_supprimer_fichier[(#ENV{crochets})]" name="cvtupload_supprimer_fichier[(#ENV{crochets})]" />
-		<label for="cvtupload_supprimer_fichier[(#ENV{crochets})]"><:cvtupload:supprimer_fichier:></label>
+		<input type="checkbox" class="checkbox" id="cvtupload_supprimer_fichier[(#ENV{crochets}|cvtupload_nom2classe)]" name="cvtupload_supprimer_fichier[(#ENV{crochets})]" />
+		<label for="cvtupload_supprimer_fichier[(#ENV{crochets}|cvtupload_nom2classe)]"><:cvtupload:supprimer_fichier:></label>
 	</div>
 	<div class="remplacer">
-		<label for="#ENV{champ}_remplacer"><:cvtupload:remplacer_fichier:></label>
-		<input type="file" class="file[ (#ENV{class})]" name="#ENV{champ}" id="#ENV{champ}_remplacer" size="40"[(#HTML5|oui)[ accept="(#GET{mime})"]]/>
+		<label for="[(#ENV{champ}|cvtupload_nom2classe)]_remplacer"><:cvtupload:remplacer_fichier:></label>
+		<input type="file" class="file[ (#ENV{class})]" name="#ENV{champ}" id="[(#ENV{champ}|cvtupload_nom2classe)]_remplacer" size="40"[(#HTML5|oui)[ accept="(#GET{mime})"]]/>
 	</div>
 </div>
