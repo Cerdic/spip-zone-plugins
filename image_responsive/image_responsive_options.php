@@ -282,7 +282,7 @@ function retour_image_responsive($img, $taille, $dpr, $xsendfile, $retour="http"
 				ob_get_clean();
 				header("Content-Type: image/".$extension);
 				header("Pragma: public");
-				header("Cache-Control: maxage=".$expires);
+				header("Cache-Control: max-age=".$expires);
 				header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$expires) . ' GMT');
 				header('Content-Length: '.filesize($dest));
 		
