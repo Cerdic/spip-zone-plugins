@@ -30,10 +30,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'id_mot_label' => 'Mot clé',
 	'id_rubrique_explication' => 'Proposer les événements des articles dans les rubriques suivantes.',
 	'id_rubrique_label' => 'Rubrique',
-	'inscription_label' => 'Inscription',
-	'inscription_explication' => 'Restreindre aux événements dont le critère inscription est le suivant.',
 	'inscription_choix0' => 'Inscription close',
 	'inscription_choix1' => 'Inscription ouverte',
+	'inscription_explication' => 'Restreindre aux événements dont le critère inscription est le suivant.',
+	'inscription_label' => 'Inscription',
 
 	// O
 	'option_type_affichage_date' => 'Uniquement la date de l’événement',
