@@ -113,6 +113,7 @@
 	{objet}
 	{id_objet}
 	{media = image}
+	{!extension = svg}
 	{fichier != #GET{logos_auto}|replace{#VAL{_NOM_PERMANENTS_ACCESSIBLES}|constant}}
 	{!par largeur}
 	{0,#GET{logos_auto}|?{2,3}}
@@ -139,11 +140,15 @@
 #SET{maj_auto,        ''}
 #SET{lang_auto,       #LANG}
 #SET{territoire_auto, ''}
-#SET{logos_auto,      #INFO_FICHIER{document,#CONFIG{metasplus/id_doc_logo}}|sinon{#LOGO_SITE_SPIP|extraire_attribut{src}}|supprimer_timestamp}
+<BOUCLE_logo_lambda(DOCUMENTS){id_document = #CONFIG{metasplus/id_doc_logo}}{!extension = svg}{tout}>
+#SET{logos_auto, 	  #FICHIER|supprimer_timestamp}
+</BOUCLE_logo_lambda>
+[(#LOGO_SITE_SPIP|extraire_attribut{src}|supprimer_timestamp|substr{-3}|!={svg}|oui)
+#SET{logos_auto, 	  #LOGO_SITE_SPIP|extraire_attribut{src}|supprimer_timestamp} ]
+<//B_logo_lambda>
 #SET{auteurs_auto,    ''}
 #SET{mots_auto,       ''}
 <//B_objet>
-
 
 [(#REM)
 
