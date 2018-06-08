@@ -13,8 +13,9 @@
 	<auteur lien='https://www.ldd.fr'>RastaPopoulos</auteur>
 	<licence>GNU/GPL</licence>
 	
-	<necessite nom="saisies" compatibilite="[2.4.0;]" />
 	<necessite nom="prix" compatibilite="[0.1.15;]" />
+	<necessite nom="saisies" compatibilite="[2.4.0;]" />
+	<necessite nom="verifier" compatibilite="[1.8.0;]" />
 
 	<pipeline nom="autoriser" inclure="prestations_autorisations.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/prestations.php" />

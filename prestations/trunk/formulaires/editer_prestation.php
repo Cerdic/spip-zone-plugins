@@ -68,6 +68,12 @@ function formulaires_editer_prestation_identifier_dist($id_prestation = 'new', $
 function formulaires_editer_prestation_saisies_dist($id_prestation = 'new', $objet='', $id_objet=0, $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	$saisies = array(
 		array(
+			'saisie' => 'hidden',
+			'options' => array(
+				'nom' => 'id_prestation',
+			),
+		),
+		array(
 			'saisie' => 'input',
 			'options' => array(
 				'nom' => 'titre',
@@ -111,6 +117,12 @@ function formulaires_editer_prestation_saisies_dist($id_prestation = 'new', $obj
 	</script>
 EOT
 			),
+			'verifier' => array(
+				'type' => 'decimal',
+				'options' => array(
+					'normaliser' => true,
+				),
+			),
 		),
 		array(
 			'saisie' => 'input',
@@ -133,6 +145,12 @@ EOT
 	/*]]>*/
 	</script>
 EOT
+			),
+			'verifier' => array(
+				'type' => 'decimal',
+				'options' => array(
+					'normaliser' => true,
+				),
 			),
 		),
 		array(
@@ -164,6 +182,12 @@ EOT
 			'options' => array(
 				'nom' => 'taxe',
 				'label' => _T('prestation:champ_taxe_label'),
+			),
+			'verifier' => array(
+				'type' => 'decimal',
+				'options' => array(
+					'normaliser' => true,
+				),
 			),
 		),
 	);
