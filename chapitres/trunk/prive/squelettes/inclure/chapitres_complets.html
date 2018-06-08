@@ -25,7 +25,7 @@
 		{id_parent?}
 		{objet?}
 		{id_objet?}
-		{statut !IN {refuse,poubelle}}
+		{statut !IN #LISTE{refuse,poubelle}}
 		{recherche?}
 		{tri #ENV{par,num titre},#GET{defaut_tri}}
 		{par titre}
@@ -56,7 +56,7 @@
 			{id_parent=#ID_CHAPITRE}
 			{objet}
 			{id_objet}
-			{statut !IN {refuse,poubelle}}
+			{statut !IN #LISTE{refuse,poubelle}}
 			{recherche?}
 			{tri #ENV{par,num titre},#GET{defaut_tri}}
 			{par titre}
