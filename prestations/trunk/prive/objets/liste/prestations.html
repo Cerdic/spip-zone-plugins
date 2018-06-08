@@ -6,7 +6,6 @@
 }})]
 #SET{total,0}
 <B_liste_prestations>
-#ANCRE_PAGINATION
 <div class="liste-objets prestations">
 <table class="spip liste" data-objet="prestation">
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{prestation:info_1_prestation,prestation:info_nb_prestations}})</strong></caption>]
@@ -21,7 +20,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_prestations(PRESTATIONS){id_prestations_type?}{id_prestations_unite?}{id_objet?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,rang},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_prestations(PRESTATIONS){id_prestations_type?}{id_prestations_unite?}{id_objet?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,rang},#GET{defaut_tri}}{par titre}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]" data-id_objet="#ID_PRESTATION">
 			<td class="rang">[(#RANG)]</td>
 			<td class="titre principale">[(#LOGO_PRESTATION|image_reduire{20,26})]<a href="[(#ID_PRESTATION|generer_url_entite{prestation})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PRESTATION">#TITRE</a></td>
@@ -42,7 +41,6 @@
 		</tr>
 	</tfoot>
 </table>
-[<p class="pagination">(#PAGINATION{prive})</p>]
 </div>
 </B_liste_prestations>[
 <div class="liste-objets prestations caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
