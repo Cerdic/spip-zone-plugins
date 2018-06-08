@@ -7,7 +7,7 @@
 #SET{is_enfant,#ENV{id_parent}|ou{#ENV{objet}|=={chapitre}}}
 #SET{is_plan,#ENV{arbo}|=={oui}|et{#ENV{id_parent}|intval|=={0}}}
 #SET{is_plie,#VAL{chapitres_vue}|_request|=={plie}}
-#SET{pagination,#ENV{pagination,#GET{is_plan}|?{n,10}}}
+#SET{pagination,#ENV{pagination,#GET{is_plan}|?{9999,10}}}
 #SET{compteur,0}
 <B_liste_chapitres>
 #ANCRE_PAGINATION
