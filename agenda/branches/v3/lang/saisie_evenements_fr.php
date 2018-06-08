@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/agenda/branches/v3/lang/
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/agenda/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -30,6 +30,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'id_mot_label' => 'Mot clé',
 	'id_rubrique_explication' => 'Proposer les événements des articles dans les rubriques suivantes.',
 	'id_rubrique_label' => 'Rubrique',
+	'inscription_choix0' => 'Inscription close',
+	'inscription_choix1' => 'Inscription ouverte',
+	'inscription_explication' => 'Restreindre aux événements dont le critère inscription est le suivant.',
+	'inscription_label' => 'Inscription',
 
 	// O
 	'option_type_affichage_date' => 'Uniquement la date de l’événement',
