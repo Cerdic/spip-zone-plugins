@@ -26,11 +26,37 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return string
  *   Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
  */
-function verifier_decimal_dist($valeur, $options = array()) {
+function verifier_decimal_dist($valeur, $options = array(), &$valeur_normalisee = null) {
 	$erreur = _T('verifier:erreur_decimal');
-	if (isset($options['separateur']) and $options['separateur']!='') {
-		$valeur = str_replace($options['separateur'], '.', $valeur);
+	
+	// Si on teste une chaine, on regarde si on doit changer son formatage
+	if (is_string($valeur)) {
+		// Si on demande à normaliser, on le fait avant les autres tests
+		if (isset($options['normaliser']) and $options['normaliser']) {
+			// Dans tous les cas on enlève les espaces (1 300,5 / 15 300 200)
+			$valeur = str_replace(' ', '', $valeur);
+			
+			// S'il y a une virgule, c'est le séparateur (1300,5 / 1.300,5)
+			// ou s'il y a plusieurs points à la fois (15.300.200)
+			if (
+				strpos($valeur, ',') !== false
+				or substr_count($valeur, '.') > 1
+			) {
+				// On supprime les éventuels points
+				$valeur = str_replace('.', '', $valeur);
+				
+				// Et on remplace la virgule éventuelle par un point
+				$valeur = str_replace(',', '.', $valeur);
+			}
+			
+			$valeur_normalisee = $valeur;
+		}
+		
+		if (isset($options['separateur']) and $options['separateur'] != '') {
+			$valeur = str_replace($options['separateur'], '.', $valeur);
+		}
 	}
+	
 	// Pas de tableau ni d'objet
 	if (is_numeric($valeur) and $valeur == floatval($valeur)) {
 		// Si c'est une chaine on convertit en flottant
