@@ -103,6 +103,7 @@ function chapitres_afficher_config_objet($flux) {
 				'arbo' => 'oui',
 				'simple' => 'oui',
 				'titre' => _T('chapitre:titre_plan'),
+				'statut' => array('prepa', 'propose', 'publie'),
 			),
 			array('ajax' => true)
 		);
