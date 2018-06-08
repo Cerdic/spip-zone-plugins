@@ -74,7 +74,8 @@ function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto',
 
 function formulaires_uploadhtml5_traiter_dist($objet, $id_objet, $mode = 'auto', $ajaxReload = '', $args = array()) {
 
-	$fichiers = _request('_fichiers');
+	// $fichiers = _request('_fichiers');
+	$fichiers = $_FILES;
 
 	if (isset($args['logo']) and $args['logo'] == 'oui') {
 		// si on a les plugin logo_svg et que l'on est en presence d'un fichier svg
