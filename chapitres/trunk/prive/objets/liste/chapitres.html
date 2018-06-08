@@ -7,10 +7,8 @@
 #SET{is_enfant,#ENV{id_parent}|ou{#ENV{objet}|=={chapitre}}}
 #SET{is_plan,#ENV{arbo}|=={oui}|et{#ENV{id_parent}|intval|=={0}}}
 #SET{is_plie,#VAL{chapitres_vue}|_request|=={plie}}
-#SET{pagination,#ENV{pagination,#GET{is_plan}|?{9999,10}}}
 #SET{compteur,0}
 <B_liste_chapitres>
-#ANCRE_PAGINATION
 <div class="liste-objets chapitres[ (#GET{is_plan}|oui)plan][ (#GET{is_plie}|oui)plie]">
 <table class="spip liste">
 	#SET{total, #GRAND_TOTAL}
@@ -36,7 +34,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_chapitres (CHAPITRES) {id_parent?}{objet?}{id_objet?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #GET{pagination}}>
+	<BOUCLE_liste_chapitres (CHAPITRES) {id_parent?}{objet?}{id_objet?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}>
 		#SET{compteur,#GET{compteur}|plus{1}}
 		<tr
 			class="[(#GET{compteur}|alterner{row_odd,row_even})][ (#EXPOSE{expose})]"
@@ -103,7 +101,6 @@
 	</BOUCLE_liste_chapitres>
 	</tbody>
 </table>
-[<p class="pagination">(#PAGINATION{prive})</p>]
 </div>
 </B_liste_chapitres>[
 <div class="liste-objets chapitres caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
