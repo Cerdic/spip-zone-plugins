@@ -55,6 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_langue_chapitre' => 'Langue de ce chapitre',
 	'titre_logo_chapitre' => 'Logo de ce chapitre',
 	'titre_objets_lies_chapitre' => 'Liés à ce chapitre',
-	'titre_plan' => 'Plan',
-	'titre_complets' => 'Vue complète',
+	'titre_plan' => 'Plan des chapitres',
+	'titre_vue_enfants' => 'Liste',
+	'titre_vue_editables' => 'Édition',
 );

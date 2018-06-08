@@ -1,23 +1,41 @@
 [(#REM)
 
-	Chapitres d'un objet : plan réduit ou vue complète
+	Chapitres d'un objet
+	
+	2 vues possibles :
+	- Liste des enfants directs
+	- Texte éditable de la branche complète
 
 ]
-#SET{vues,#LISTE{plan,complets}}
+#SET{vues,#LISTE{enfants,editables}}
 #SET{vue,#ENV{chapitres}|in_array{#GET{vues}}|?{#ENV{chapitres},#GET{vues/0}}}
+#SET{is_racine,#ID_PARENT|=={0}|ou{#OBJET|!={chapitre}}}
 
-<div class="onglets_simple clearfix">
+<h3><:chapitre:titre_chapitres:></h3>
+
+<div class="onglets_simple clearfix" id="chapitres-vues">
 	<ul>
 		<BOUCLE_vue(DATA){source table, #GET{vues}}>
 		<li>
 			[(#SELF|parametre_url{chapitres,#VALEUR}|lien_ou_expose{
-				[(#VAL{chapitre:titre_#VALEUR}|_T)],
+				[(#VAL{chapitre:titre_vue_#VALEUR}|_T)],
 				#VALEUR|=={#GET{vue}},
 				ajax
-			})]
+			}|inserer_attribut{data-vue,#VALEUR})]
 		</li>
 		</BOUCLE_vue>
 	</ul>
 </div>
 
 <INCLURE{fond=prive/squelettes/inclure/chapitres_#GET{vue}, env} />
+
+<script type="text/javascript">
+	jQuery(function($){
+		$('#chapitres-vues a').click(function(e){
+			var vue = $(this).data('vue');
+			if (vue == 'editables') {
+				ajaxReload('chapitres_plan', {args: {chapitres: 'editables'}});
+			}
+		});
+	});
+	</script>

@@ -1,19 +1,21 @@
+[(#REM)
+
+	Chapitres enfants directs d'un objet
+
+]
 [(#OBJET|=={chapitre}|non)
 	#SET{objet, #OBJET}
 	#SET{id_objet, #ID_OBJET}
 	#SET{id_parent, 0}
-	#SET{arbo, oui}
 ]
 [(#OBJET|=={chapitre}|oui)
 	#SET{objet, ''}
 	#SET{id_objet, ''}
 	#SET{id_parent, #ID_OBJET}
-	#SET{arbo, non}
 ]
 #SET{enfant,#ENV{id_parent}|ou{#OBJET|=={chapitre}}}
 
 <INCLURE{fond=prive/objets/liste/chapitres,
-	arbo=#GET{arbo},
 	sinon=#GET{enfant}|?{<:chapitre:info_aucun_chapitre_enfant:>,<:chapitre:info_aucun_chapitre:>},
 	objet=#GET{objet},
 	id_objet=#GET{id_objet},

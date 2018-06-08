@@ -5,23 +5,18 @@
 	points,-1
 }})]
 #SET{is_enfant,#ENV{id_parent}|ou{#ENV{objet}|=={chapitre}}}
-#SET{is_plan,#ENV{arbo}|=={oui}|et{#ENV{id_parent}|intval|=={0}}}
-#SET{is_plie,#VAL{chapitres_vue}|_request|=={plie}}
 #SET{compteur,0}
 <B_liste_chapitres>
-<div class="liste-objets chapitres[ (#GET{is_plan}|oui)plan][ (#GET{is_plie}|oui)plie]">
+<div class="liste-objets chapitres">
 <table class="spip liste">
 	#SET{total, #GRAND_TOTAL}
 	<BOUCLE_total_chapitres (CHAPITRES) {si #ENV{arbo}|=={oui}}{branche #ID_PARENT}{objet?}{id_objet?}{id_mot?}{where?}{statut?}{recherche?}>
 	#SET{total, #TOTAL_BOUCLE}
 	</BOUCLE_total_chapitres>
 	[<caption>
-		<a href="[(#SELF|parametre_url{chapitres_vue,#GET{is_plie}|?{'',plie}})]" class="ajax preload">
-			<strong class="caption">
-				(#ENV*{titre,#GET{total}|singulier_ou_pluriel{#GET{is_enfant}|?{chapitre:info_1_chapitre_enfant,chapitre:info_1_chapitre},#GET{is_enfant}|?{chapitre:info_nb_chapitres_enfants,chapitre:info_nb_chapitres}}})
-				[<span class="label-pliage">(#GET{is_plie}|?{<:chapitre:bouton_deplier:>,<:chapitre:bouton_plier:>})</:chapitre:bouton_plier:></span>]
-			</strong>
-		</a>
+		<strong class="caption">
+			(#ENV*{titre,#GET{total}|singulier_ou_pluriel{#GET{is_enfant}|?{chapitre:info_1_chapitre_enfant,chapitre:info_1_chapitre},#GET{is_enfant}|?{chapitre:info_nb_chapitres_enfants,chapitre:info_nb_chapitres}}})
+		</strong>
 	</caption>]
 	<thead>
 		<tr class="first_row">

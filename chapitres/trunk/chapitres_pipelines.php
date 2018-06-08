@@ -48,14 +48,17 @@ function chapitres_affiche_milieu($flux) {
 /**
  * Ajout de contenu sous la fiche d'un objet
  *
+ * => Chapitres enfants directs pour les objets configurés et les chapitres
+ *
  * @pipeline affiche_enfants
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
  */
 function chapitres_affiche_enfants($flux) {
+
 	include_spip('inc/config');
 	$objets = lire_config('chapitres/objets', array());
-	
+
 	if (
 		isset($flux['args']['objet'])
 		and isset($flux['args']['id_objet'])
@@ -66,48 +69,67 @@ function chapitres_affiche_enfants($flux) {
 		$enfants = recuperer_fond(
 			'prive/objets/contenu/chapitre-enfants',
 			array(
-				'objet' => $objet,
-				'id_objet' => $id_objet,
-				'chapitres' => _request('chapitres'),
-				'id_chapitre' => _request('id_chapitre'),
+				'objet'       => $objet,
+				'id_objet'    => $id_objet,
+				'chapitres'   => _request('chapitres'), // type de vue des chapitres
+				'id_chapitre' => _request('id_chapitre'), // pour exposer
 			),
 			array (
-				'ajax' => true,
+				'ajax' => 'chapitres',
 			)
 		);
-		
+
 		$flux['data'] .= $enfants;
 	}
-	
+
 	return $flux;
 }
 
 /**
- * Ajout du plan des chapitres
+ * Ajout de contenu dans la colonne de gauche
+ *
+ * => Plan des chapitres pour les objets configurés et les chapitres
  *
  * @pipeline affiche_gauche
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
  */
 function chapitres_afficher_config_objet($flux) {
-	if ($flux['args']['type'] == 'chapitre' and $id_chapitre = intval($flux['args']['id'])) {
-		$chapitre = sql_fetsel('objet, id_objet', 'spip_chapitres', 'id_chapitre = '.$id_chapitre);
-		
+
+	include_spip('inc/config');
+	$objets = lire_config('chapitres/objets', array());
+
+	if (
+		isset($flux['args']['type'])
+		and isset($flux['args']['id'])
+		and $objet = $flux['args']['type']
+		and $id_objet = intval($flux['args']['id'])
+		and (
+			in_array(table_objet_sql($objet), $objets)
+			or $objet == 'chapitre'
+		)
+	) {
+
+		if ($objet == 'chapitre') {
+			$chapitre = sql_fetsel('objet, id_objet', 'spip_chapitres', 'id_chapitre = '.$id_objet);
+			$id_chapitre = $id_objet;
+			$objet       = $chapitre['objet'];
+			$id_objet    = $chapitre['id_objet'];
+		}
+
 		$plan = recuperer_fond(
-			'prive/objets/liste/chapitres',
+			'prive/squelettes/inclure/chapitres_plan',
 			array(
-				'objet' => $chapitre['objet'],
-				'id_objet' => $chapitre['id_objet'],
-				'id_parent' => 0,
-				'id_chapitre' => $flux['args']['id'],
-				'arbo' => 'oui',
-				'simple' => 'oui',
-				'titre' => _T('chapitre:titre_plan'),
-				'statut' => array('prepa', 'propose', 'publie'),
+				'objet'       => $objet,
+				'id_objet'    => $id_objet,
+				'id_chapitre' => $id_chapitre, // pour exposer
+				'titre'       => _T('chapitre:titre_plan'),
+				'statut'      => array('prepa', 'propose', 'publie'),
+				'chapitres'   => _request('chapitres'), // type de vue des chapitres
 			),
-			array('ajax' => true)
+			array('ajax' => 'chapitres_plan')
 		);
-		
+
 		$flux['data'] .= $plan;
 	}
 	

@@ -32,16 +32,15 @@
 
 		[<(#GET{heading}) class="chapitre__titre">]
 			[<span class="chapitre__indentation">(#VAL{→}|str_repeat{#ENV{profondeur}})</span>]
-			[<span class="chapitre__numero">(#ENV{numero})</span> ]#TITRE
+			[<span class="chapitre__numero">(#ENV{numero})</span> ]
+			<a href="[(#ID_CHAPITRE|generer_url_entite{chapitre})]" class="chapitre__lien">
+			#TITRE
+			</a>
 		[</(#GET{heading})>]
 
 		<div class="chapitre__metas">
 
 			[<span class="chapitre__statut">(#STATUT|puce_statut{chapitre,#ID_CHAPITRE})</span>]
-
-			[<a href="[(#ID_CHAPITRE|generer_url_entite{chapitre})]" class="chapitre__lien">
-				<:info_numero_abbreviation:> (#ID_CHAPITRE)
-			</a>]
 
 			[(#REM) Modifier ]
 			[(#GET{self}|parametre_url{edit,#ID_CHAPITRE}|icone_verticale{<:chapitre:icone_modifier_chapitre:>,simple-edit-16,'',simple ajax})]

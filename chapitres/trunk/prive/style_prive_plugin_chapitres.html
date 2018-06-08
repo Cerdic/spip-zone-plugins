@@ -8,113 +8,84 @@
    Liste de chapitres
    ==================
 */
-.liste-objets.chapitres td {
-  border-style: dotted;
-}
-.liste-objets.chapitres tr[data-profondeur="0"] td.titre {
-  padding-left: 0;
-  font-weight: bold;
-}
-<BOUCLE_profondeurs(DATA){enum 1,6}>
-.liste-objets.chapitres tr[data-profondeur="#VALEUR"] td.titre {
-  padding-left: [(#VALEUR|plus{1})]em;
-  background-repeat: no-repeat;
-  background-size: 1em auto;
-  background-image: url("#CHEMIN{prive/themes/spip/images/arbo-node.svg}");
-  background-position: [(#VALEUR)]em center;
-}
-.liste-objets.chapitres tr[data-profondeur="#VALEUR"][data-impasse] td.titre {
-  background-image: url("#CHEMIN{prive/themes/spip/images/arbo-corner.svg}");
-  background-position: [(#VALEUR)]em center;
-}
-</BOUCLE_profondeurs>
 .liste-objets.chapitres .icone b {
   display: none;
 }
 .liste-objets.chapitres tr.expose:not(:hover) td {
   background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];
 }
-.lat .liste-objets.chapitres.plan td {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-/* pliage */
-.liste-objets.chapitres.plie tbody tr:not([data-profondeur="0"]):not(.expose) {
+
+/* ====
+   Plan
+   ====
+*/
+.chapitres-plan .jstree-themeicon:empty {
   display: none;
 }
-.liste-objets.chapitres .label-pliage {
-  font-weight: normal;
-  float: #ENV{right};
-}
-.liste-objets.chapitres caption a:hover {
-  cursor: n-resize;
-  text-decoration: none;
-}
-.liste-objets.chapitres caption a:hover .label-pliage {
+.chapitres-plan .on {
   color: #GET{foncee};
 }
-.liste-objets.chapitres.plie caption a:hover {
-  cursor: s-resize;
-}
+
 
 /* ==================
    Chapitres complets
    ==================
 */
 /* Reprendre des styles de #wysiwyg */
-.chapitres_complets .chapitre {
+.chapitres_editables .chapitre {
   max-width: 50em;
   margin: 0 auto;
 }
-.chapitres_complets .champ {
+.chapitres_editables .champ {
   font-size: 1.2em;
   font-family: Cambria, Georgia, "Times New Roman", Times, serif;
 }
-.chapitres_complets .champ label,
-.chapitres_complets .champ.contenu_titre {
+.chapitres_editables .champ label,
+.chapitres_editables .champ.contenu_titre {
   display: none;
 }
 /* Divers */
-.chapitres_complets .bd {
+.chapitres_editables .bd {
   padding-top: 2em;
 }
-.chapitres_complets .cadre-formulaire-editer {
+.chapitres_editables .cadre-formulaire-editer {
   margin-top: 1em;
 }
-.chapitres_complets .chapitre__contenu.expose {
+.chapitres_editables .chapitre__contenu.expose {
   background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];
 }
 /* Header */
-.chapitres_complets .chapitre__header {
+.chapitres_editables .chapitre__header {
   display: flex;
+}
+.chapitres_editables .chapitre:not([data-profondeur="0"]) .chapitre__header {
+  margin-top: 4em;
 }
 .chapitre__numero {
   display: inline-block;
   margin-right: 0.5em;
-  color: #GET{foncee};
 }
 .chapitre__indentation {
-  color: #GET{foncee};
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 100;
   font-family: monospace;
 }
 /* Metas */
-.chapitres_complets .chapitre__metas {
+.chapitres_editables .chapitre__metas {
   margin-#ENV{left}: auto;
   display: flex;
 }
-.chapitres_complets .chapitre__metas > *:not(:last-child) {
+.chapitres_editables .chapitre__metas > *:not(:last-child) {
   margin-#ENV{right}: 0.5em;
 }
 /* Icones */
-.chapitres_complets .icone.simple.verticale a {
+.chapitres_editables .icone.simple.verticale a {
   width: auto;
   padding: 0;
 }
-.chapitres_complets .icone.simple a b {
+.chapitres_editables .icone.simple a b {
   display: none;
 }
-.chapitres_complets .icone.simple img {
+.chapitres_editables .icone.simple img {
   padding: 0.2em;
 }
