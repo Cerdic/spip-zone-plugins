@@ -31,7 +31,8 @@
 	<header class="chapitre__header">
 
 		[<(#GET{heading}) class="chapitre__titre">]
-			[<span class="chapitre__indentation">(#VAL{→}|str_repeat{#ENV{profondeur}})</span>]
+			#SET{fleche,#CHEMIN{prive/themes/spip/images/fleche-droite.svg}|spip_file_get_contents}
+			[<span class="chapitre__indentation">(#GET{fleche}|str_repeat{#ENV{profondeur}})</span>]
 			[<span class="chapitre__numero">(#ENV{numero})</span> ]
 			<a href="[(#ID_CHAPITRE|generer_url_entite{chapitre})]" class="chapitre__lien">
 			#TITRE

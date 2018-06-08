@@ -1,0 +1,115 @@
+[(#REM)
+
+	Plan complet des chapitres d'un objet (chapitre ou autre)
+
+	Paramètres :
+
+		- objet
+		- id_objet
+		- chapitres : 'editables' pour mettre des ancres à la place des liens
+]
+#SET{ancres,#ENV{chapitres}|=={editables}|?{oui,''}}
+
+<B_liste_chapitres>
+[(#BOITE_OUVRIR{<:chapitre:titre_plan:>, 'simple chapitres-plan'})]
+
+<p class='pliage'>
+	<a href="#" onclick="jQuery('#chapitres-plan').jstree('open_all'); return false;"><:lien_tout_deplier:></a> | <a href="#" onclick="jQuery('#chapitres-plan').jstree('close_all'); return false;"><:lien_tout_replier:></a>
+</p>
+
+<div class="plan" id="chapitres-plan">
+
+	<ul class="menu-items">
+		<li class="item">
+			<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">#INFO_TITRE{#OBJET,#ID_OBJET}</a>
+
+			<ul class="menu-items">
+
+				<BOUCLE_liste_chapitres (CHAPITRES)
+					{id_parent = 0}
+					{objet?}
+					{id_objet?}
+					{id_mot?}
+					{id_auteur?}
+					{where?}
+					{statut?}
+					{recherche?}
+					{tri #ENV{par,num titre},#GET{defaut_tri}}
+					{par titre}
+				>
+				<li class="item">
+
+					#SET{expose_branche,#EXPOSE}
+					#SET{lien,#GET{ancres}|et{#GET{expose_branche}}|ou{#ENV{objet}|!={chapitre}}|?{
+						#chapitre#ID_CHAPITRE,
+						#ID_CHAPITRE|generer_url_entite{chapitre}
+					}}
+					[(#GET{lien}|lien_ou_expose{#TITRE,#EXPOSE})]
+
+					<B_liste_chapitres_enfants>
+					<ul class="menu-items">
+						<BOUCLE_liste_chapitres_enfants (CHAPITRES)
+							{id_parent = #ID_CHAPITRE}
+							{objet?}
+							{id_objet?}
+							{id_mot?}
+							{id_auteur?}
+							{where?}
+							{statut !IN #LISTE{refuse,poubelle}}
+							{recherche?}
+							{tri #ENV{par,num titre},#GET{defaut_tri}}
+							{par titre}
+						>
+
+						<li class="item">
+
+							#SET{expose_branche,#GET{expose_branche}|sinon{#EXPOSE}}
+							#SET{lien,#GET{ancres}|et{#GET{expose_branche}}|ou{#ENV{objet}|!={chapitre}}|?{
+								#chapitre#ID_CHAPITRE,
+								#ID_CHAPITRE|generer_url_entite{chapitre}
+							}}
+							[(#GET{lien}|lien_ou_expose{#TITRE,#EXPOSE})]
+
+							<BOUCLE_liste_chapitres_petits_enfants (BOUCLE_liste_chapitres_enfants) />
+
+						</li>
+
+						</BOUCLE_liste_chapitres_enfants>
+						#SET{expose_branche,''}
+					</ul>
+					</B_liste_chapitres_enfants>
+
+				</li>
+				</BOUCLE_liste_chapitres>
+
+			</ul>
+
+		</li>
+	</ul>
+
+</div>
+
+[<link rel="stylesheet" href="(#CHEMIN{lib/jstree/dist/themes/default/style.min.css}|timestamp)" type="text/css" />]
+[(#REM)[<link rel="stylesheet" href="(#PRODUIRE{fond=css/plan_prive.css})" type="text/css" />]]
+[<script src="(#CHEMIN{lib/jstree/dist/jstree.min.js}|timestamp)"></script>]
+[<script src="(#CHEMIN{prive/javascript/spiptree.js}|timestamp)"></script>]
+[<script src="(#CHEMIN{lib/sticky-kit.1.1.2/jquery.sticky-kit.js}|timestamp)"></script>]
+<script type="text/javascript">
+jQuery(function($){
+	// Plan
+	$('#chapitres-plan').spiptree({
+		drag: false,
+		textes: {},
+		urls: {},
+		default: {},
+		objets: []
+	});
+	// Sticky
+	$('.chapitres-plan').stick_in_parent({
+		parent: '#navigation'
+	});
+});
+</script>
+
+#BOITE_FERMER
+</B_liste_chapitres>
