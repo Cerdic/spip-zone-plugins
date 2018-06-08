@@ -1,29 +1,21 @@
-[(#REM) Les infos de l'objet chapitre lui-même ]
-#SET{objet,chapitre}
-#SET{id_objet,#ENV{id_chapitre}}
-
 [(#REM) Les infos de à quoi il va être lié ]
-[(#GET{id_objet}|oui)
-	[(#AUTORISER{modifier,#GET{objet},#GET{id_objet}}|sinon_interdire_acces)]
+[(#ENV{id_prestation}|oui)
+	[(#AUTORISER{modifier,prestation,#ENV{id_prestation}}|sinon_interdire_acces)]
+	#SET{redirect, #ENV{redirect}|sinon{#INFO_ID_OBJET{prestation, #ENV{id_prestation}}|generer_url_entite{#INFO_OBJET{prestation, #ENV{id_prestation}}}}}
 ]
-[(#GET{id_objet}|non)
-	#SET{objet_parent, #OBJET}
-	#SET{id_objet_parent, #ID_OBJET}
-	#SET{id_parent, #ID_PARENT}
-	[(#GET{id_parent}|?{[(#AUTORISER{[creer(#GET{objet})dans],#GET{objet_parent, chapitre},#GET{id_objet_parent, #GET{id_parent}}})],[(#AUTORISER{creer,#GET{objet}})]}|sinon_interdire_acces)]
+[(#ENV{id_prestation}|non)
+	[(#AUTORISER{creerprestationdans,#OBJET,#ID_OBJET}|sinon_interdire_acces)]
+	#SET{redirect, #ENV{redirect}|sinon{#OBJET|generer_url_entite{#ID_OBJET}}}
 ]
-#SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#GET{id_objet}}|?{#ENV{lier_trad,#GET{id_objet}}|generer_url_entite{#GET{objet}},#GET{id_parent}|?{#GET{id_parent}|generer_url_entite{#GET{objet}},#URL_ECRIRE{#GET{objet}|table_objet}}}}}
-
 <div class='cadre-formulaire-editer'>
 <div class="entete-formulaire">
-	[(#GET{redirect}|icone_verticale{[(#GET{objet}|objet_info{texte_retour}|_T)],#GET{objet}|objet_info{icone_objet},'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	[(#GET{redirect}|icone_verticale{[(#VAL{prestation}|objet_info{texte_retour}|_T)],#VAL{prestation}|objet_info{icone_objet},'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
 	[
-		[(#GET{objet}|objet_info{#GET{id_objet}|?{texte_modifier,texte_creer}}|_T)]
-		<h1>(#ENV*{titre,#INFO_TITRE{#GET{objet},#GET{id_objet}}|sinon{<:info_sans_titre:>}})</h1>
+		[(#VAL{prestation}|objet_info{#ENV{id_prestation}|?{texte_modifier,texte_creer}}|_T)]
+		<h1>(#ENV*{titre,#INFO_TITRE{prestation,#ENV{id_prestation}}|sinon{<:info_sans_titre:>}})</h1>
 	]
 </div>
 
-#SET{redirect,#ENV{redirect,#ENV{id_prestation}|generer_url_entite{prestation}}}
 [(#ENV{retourajax,''}|oui)
 	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
 	<div class="ajax">
