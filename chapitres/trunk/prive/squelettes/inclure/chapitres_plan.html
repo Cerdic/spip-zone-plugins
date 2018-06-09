@@ -40,11 +40,12 @@
 				<li class="item">
 
 					#SET{expose_branche,#EXPOSE}
-					#SET{lien,#GET{ancres}|et{#GET{expose_branche}}|ou{#ENV{objet}|!={chapitre}}|?{
+					#SET{ancre,#GET{ancres}|et{#GET{expose_branche}}|ou{#GET{ancres}|et{#ENV{id_chapitre}|non}}}
+					#SET{lien,#GET{ancre}|?{
 						#chapitre#ID_CHAPITRE,
 						#ID_CHAPITRE|generer_url_entite{chapitre}
 					}}
-					[(#GET{lien}|lien_ou_expose{#TITRE,#EXPOSE})]
+					[(#GET{lien}|lien_ou_expose{#TITRE,#EXPOSE,#GET{ancre}|?{lien-ancre,lien}})]
 
 					<B_liste_chapitres_enfants>
 					<ul class="menu-items">
@@ -63,19 +64,19 @@
 
 						<li class="item">
 
-							#SET{expose_branche,#GET{expose_branche}|sinon{#EXPOSE}}
-							#SET{lien,#GET{ancres}|et{#GET{expose_branche}}|ou{#ENV{objet}|!={chapitre}}|?{
+							#SET{expose_branche,#GET{expose_branche}|ou{#EXPOSE}}
+							#SET{ancre,#GET{ancres}|et{#GET{expose_branche}}|ou{#GET{ancres}|et{#ENV{id_chapitre}|non}}}
+							#SET{lien,#GET{ancre}|?{
 								#chapitre#ID_CHAPITRE,
 								#ID_CHAPITRE|generer_url_entite{chapitre}
 							}}
-							[(#GET{lien}|lien_ou_expose{#TITRE,#EXPOSE})]
+							[(#GET{lien}|lien_ou_expose{#TITRE,#EXPOSE,#GET{ancre}|?{lien-ancre,lien}})]
 
 							<BOUCLE_liste_chapitres_petits_enfants (BOUCLE_liste_chapitres_enfants) />
 
 						</li>
 
 						</BOUCLE_liste_chapitres_enfants>
-						#SET{expose_branche,''}
 					</ul>
 					</B_liste_chapitres_enfants>
 

@@ -33,9 +33,7 @@
 	jQuery(function($){
 		$('#chapitres-vues a').click(function(e){
 			var vue = $(this).data('vue');
-			if (vue == 'editables') {
-				ajaxReload('chapitres_plan', {args: {chapitres: 'editables'}});
-			}
+			ajaxReload('chapitres_plan', {args: {chapitres: vue}});
 		});
 	});
 	</script>
