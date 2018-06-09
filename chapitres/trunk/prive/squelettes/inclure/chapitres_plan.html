@@ -17,7 +17,7 @@
 	<a href="#" onclick="jQuery('#chapitres-plan').jstree('open_all'); return false;"><:lien_tout_deplier:></a> | <a href="#" onclick="jQuery('#chapitres-plan').jstree('close_all'); return false;"><:lien_tout_replier:></a>
 </p>
 
-<div class="plan" id="chapitres-plan">
+<div class="plan[ (#ENV{chapitres})]" id="chapitres-plan">
 
 	<ul class="menu-items">
 		<li class="item">
@@ -37,14 +37,14 @@
 					{tri #ENV{par,num titre},#GET{defaut_tri}}
 					{par titre}
 				>
-				<li class="item">
+				#SET{expose_branche,#EXPOSE}
+				#SET{ancre,#GET{ancres}|et{#GET{expose_branche}}|ou{#GET{ancres}|et{#ENV{id_chapitre}|non}}}
+				#SET{lien,#GET{ancre}|?{
+					#chapitre#ID_CHAPITRE,
+					#ID_CHAPITRE|generer_url_entite{chapitre}
+				}}
+				<li class="item[ (#EXPOSE{expose})]">
 
-					#SET{expose_branche,#EXPOSE}
-					#SET{ancre,#GET{ancres}|et{#GET{expose_branche}}|ou{#GET{ancres}|et{#ENV{id_chapitre}|non}}}
-					#SET{lien,#GET{ancre}|?{
-						#chapitre#ID_CHAPITRE,
-						#ID_CHAPITRE|generer_url_entite{chapitre}
-					}}
 					[(#GET{lien}|lien_ou_expose{#TITRE,#EXPOSE,#GET{ancre}|?{lien-ancre,lien}})]
 
 					<B_liste_chapitres_enfants>
@@ -61,15 +61,15 @@
 							{tri #ENV{par,num titre},#GET{defaut_tri}}
 							{par titre}
 						>
+						#SET{expose_branche,#GET{expose_branche}|ou{#EXPOSE}}
+						#SET{ancre,#GET{ancres}|et{#GET{expose_branche}}|ou{#GET{ancres}|et{#ENV{id_chapitre}|non}}}
+						#SET{lien,#GET{ancre}|?{
+							#chapitre#ID_CHAPITRE,
+							#ID_CHAPITRE|generer_url_entite{chapitre}
+						}}
 
-						<li class="item">
+						<li class="item[ (#EXPOSE{expose})]">
 
-							#SET{expose_branche,#GET{expose_branche}|ou{#EXPOSE}}
-							#SET{ancre,#GET{ancres}|et{#GET{expose_branche}}|ou{#GET{ancres}|et{#ENV{id_chapitre}|non}}}
-							#SET{lien,#GET{ancre}|?{
-								#chapitre#ID_CHAPITRE,
-								#ID_CHAPITRE|generer_url_entite{chapitre}
-							}}
 							[(#GET{lien}|lien_ou_expose{#TITRE,#EXPOSE,#GET{ancre}|?{lien-ancre,lien}})]
 
 							<BOUCLE_liste_chapitres_petits_enfants (BOUCLE_liste_chapitres_enfants) />
@@ -91,19 +91,37 @@
 </div>
 
 [<link rel="stylesheet" href="(#CHEMIN{lib/jstree/dist/themes/default/style.min.css}|timestamp)" type="text/css" />]
-[(#REM)[<link rel="stylesheet" href="(#PRODUIRE{fond=css/plan_prive.css})" type="text/css" />]]
 [<script src="(#CHEMIN{lib/jstree/dist/jstree.min.js}|timestamp)"></script>]
-[<script src="(#CHEMIN{prive/javascript/spiptree.js}|timestamp)"></script>]
-[<script src="(#CHEMIN{lib/sticky-kit.1.1.2/jquery.sticky-kit.js}|timestamp)"></script>]
+[<script src="(#CHEMIN{lib/sticky-kit/jquery.sticky-kit.min.js}|timestamp)"></script>]
 <script type="text/javascript">
 jQuery(function($){
 	// Plan
-	$('#chapitres-plan').spiptree({
-		drag: false,
-		textes: {},
-		urls: {},
-		default: {},
-		objets: []
+	$('#chapitres-plan').jstree({
+		core: {
+			animation: false,
+			themes: {
+				icons: false
+			}
+		}
+	});
+	$('#chapitres-plan').bind('ready.jstree', function(e, data) {
+		// Déplier la racine
+		$(this).jstree('open_node', $('#chapitres-plan > ul > li'));
+		// Déplier le chapitre en cours (toute la branche si vue complète)
+		if ($(this).hasClass('editables')) {
+			$(this).jstree('open_all', $('#chapitres-plan li.expose'));
+		} else {
+			$(this).jstree('open_node', $('#chapitres-plan li.expose'));
+		}
+		// Sélectionner le chapitre en cours
+		$(this).jstree('select_node', $('#chapitres-plan li.expose'));
+		// Liens cliquables
+		$('#chapitres-plan li a').click(function(e) {
+			var href = $(this).attr('href');
+			if (href !== '#') {
+				document.location.href = href;
+			}
+		});
 	});
 	// Sticky
 	$('.chapitres-plan').stick_in_parent({

@@ -1,7 +1,7 @@
 <paquet
 	prefix="chapitres"
 	categorie="edition"
-	version="1.0.24"
+	version="1.0.25"
 	etat="dev"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/chapitres-64.png"
@@ -19,7 +19,7 @@
 
 	<licence>GNU/GPL</licence>
 	<necessite nom="saisies" compatibilite="[2.4.0;]" />
-	<lib nom="sticky-kit.1.1.2" lien="https://github.com/leafo/sticky-kit/archive/v1.1.2.zip" />
+	<lib nom="sticky-kit" lien="https://github.com/leafo/sticky-kit/archive/v1.1.2.zip" />
 
 	<pipeline nom="autoriser" inclure="chapitres_autorisations.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/chapitres.php" />

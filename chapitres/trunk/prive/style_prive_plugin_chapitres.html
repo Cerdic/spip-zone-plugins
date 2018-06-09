@@ -19,21 +19,15 @@
    Plan
    ====
 */
-.chapitres-plan .jstree-themeicon:empty {
-  display: none;
+.chapitres-plan .item.expose {
+  /* background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; */
 }
-.chapitres-plan .on {
-  color: #GET{foncee};
+.chapitres-plan a[href="#"]:hover {
+  cursor: default;
 }
 .chapitres-plan .lien-ancre:after {
-  content: "";
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  background: url(#CHEMIN{prive/themes/spip/images/fleche-droite.svg}) center center no-repeat;
-  background-size: auto 50%;
+  content: "→";
   margin-left: 0.5em;
-  vertical-align: middle;
 }
 
 
@@ -74,11 +68,6 @@
 .chapitre__numero {
   display: inline-block;
   margin-right: 0.5em;
-}
-.chapitre__indentation svg {
-  height: 0.8em;
-  width: auto;
-  margin-right: 0.15em;
 }
 /* Metas */
 .chapitres_editables .chapitre__metas {
