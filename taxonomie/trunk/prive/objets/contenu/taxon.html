@@ -18,7 +18,7 @@
 		[<li[ class="rang(#CLE|plus{1})"]>
 			<span dir="#LANG_DIR">
 				[(#VALEUR{espece}|=={oui}|oui)<strong>]
-				(#VAL{taxonomie:rang_}|concat{#VALEUR{rang}}|_T|ucfirst) :
+				(#VAL{taxonomie:rang_}|concat{#VALEUR{rang_taxon}}|_T|ucfirst) :
 				[(#VALEUR{espece}|=={oui}|oui)</strong>]
 				[<a class="nom_scientifique_inline"[ href="(#VALEUR{id_taxon}|generer_url_entite{taxon})"]>
 					(#VALEUR{nom_scientifique}|ucfirst)

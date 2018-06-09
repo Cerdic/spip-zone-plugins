@@ -23,14 +23,14 @@
 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
 			<th class="titre principale" scope="col">[(#TRI{nom_scientifique,<:taxon:champ_nom_scientifique_label:>,ajax})]</th>
 			<th class="nom" scope="col">[(#TRI{nom_commun,<:taxon:champ_nom_commun_label:>,ajax})]</th>
-			<th class="rang" scope="col">[(#TRI{rang,<:taxon:champ_rang_label:>,ajax})]</th>
+			<th class="rang" scope="col">[(#TRI{rang_taxon,<:taxon:champ_rang_label:>,ajax})]</th>
 			<th class="regne" scope="col">[(#TRI{regne,<:taxon:champ_regne_label:>,ajax})]</th>
 			<th class="tsn" scope="col">[(#TRI{tsn,<:taxon:champ_tsn_label:>,ajax})]</th>
 			<th class="id" scope="col">[(#TRI{id_taxon,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_taxons(TAXONS){regne?}{rang?}{espece?}{statut?}{edite?}{importe?}{where?}{recherche?}{tri #ENV{par,nom_scientifique}, #GET{defaut_tri}}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_taxons(TAXONS){regne?}{rang_taxon?}{espece?}{statut?}{edite?}{importe?}{where?}{recherche?}{tri #ENV{par,nom_scientifique}, #GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="picto">[(#CHEMIN_IMAGE{taxon-16.png}|balise_img)]</td>
 			<td class="statut">[(#STATUT|taxon_afficher_statut{#ID_TAXON})]</td>
@@ -41,7 +41,7 @@
 				</a>
 			</td>
 			<td class="nom">[(#NOM_COMMUN|extraire_multi{#LANG, #ARRAY{lang_defaut, aucune}})]</td>
-			<td class="rang">[(#VAL{taxonomie:rang_}|concat{#RANG}|_T)]</td>
+			<td class="rang">[(#VAL{taxonomie:rang_}|concat{#RANG_TAXON}|_T)]</td>
 			<td class="regne nom_scientifique">[(#REGNE)]</td>
 			<td class="numero">#TSN</td>
 			<td class="id">[(#AUTORISER{modifier, taxon, #ID_TAXON}|?{

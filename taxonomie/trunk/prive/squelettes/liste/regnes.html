@@ -25,7 +25,7 @@ Les parametres d'environnement specifiques sont :
 			</tr>
 		</thead>
 		<tbody>
-	<BOUCLE_liste_regnes(TAXONS) {rang=kingdom}{where?}{tri #ENV{par, nom_scientifique}, #GET{defaut_tri}}>
+	<BOUCLE_liste_regnes(TAXONS) {rang_taxon=kingdom}{where?}{tri #ENV{par, nom_scientifique}, #GET{defaut_tri}}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
 				<td class="logo">
 					[(#CHEMIN_IMAGE{[regne_(#NOM_SCIENTIFIQUE|strtolower)-32.png]}

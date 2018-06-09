@@ -40,7 +40,7 @@
 						<ul class="contenu_ascendance">
 						<BOUCLE_parents(DATA) {source table, #ENV{_parents}}{par cle}>
 							[<li[ class="rang(#CLE|plus{1})"]>
-								(#VAL{taxonomie:rang_}|concat{#VALEUR{rang}}|_T) :
+								(#VAL{taxonomie:rang_}|concat{#VALEUR{rang_taxon}}|_T) :
 								[<span class="nom_scientifique_inline">(#VALEUR{nom_scientifique})</span>
 								\(#VALEUR{tsn}\)[(#VALEUR{deja_cree}|non) *]]
 							</li>]
