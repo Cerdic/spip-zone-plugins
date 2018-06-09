@@ -8,7 +8,7 @@
 [(#REM) Onglets pour le filtrage par règne et par indicateur d'édition ]
 #SET{filtres, #LISTE}
 [(#ENV{espece}|=={oui}|oui)
-	#SET{nb, 20}
+	#SET{nb, 15}
 	#SET{filtres, #ARRAY{statut, prop:publie:poubelle}}
 	#SET{titre_1, taxonomie:info_1_espece}
 	#SET{titre_n, taxonomie:info_nb_especes}

@@ -237,7 +237,7 @@ function taxon_informer_ascendance($id_taxon, $tsn_parent = null, $ordre = 'desc
 	}
 
 	while ($tsn_parent > 0) {
-		$select = array('id_taxon', 'tsn_parent', 'nom_scientifique', 'nom_commun', 'rang', 'statut', 'espece');
+		$select = array('id_taxon', 'tsn_parent', 'nom_scientifique', 'nom_commun', 'rang_taxon', 'statut', 'espece');
 		$where = array('tsn=' . intval($tsn_parent));
 		$taxon = sql_fetsel($select, 'spip_taxons', $where);
 		if ($taxon) {

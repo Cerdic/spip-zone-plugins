@@ -96,9 +96,9 @@ $GLOBALS['iucn_webservice'] = array(
 			'list'     => 'result',
 			'index'    => array(
 				'nom_scientifique' => 'scientific_name',
-				'iucn_categorie'   => 'category',
-				'iucn_critere'     => 'criteria',
-				'iucn_annee'       => 'published_year'
+				'code'             => 'category',
+				'critere'          => 'criteria',
+				'annee'            => 'published_year'
 			),
 		),
 		'common_name' => array(
@@ -178,7 +178,11 @@ function iucn_get_assessment($search) {
 				}
 			}
 
-			//
+			// Ajout de la catégorie dans un format non abrégé permettant de calculer le libellé traduit.
+			$assessment['categorie'] = isset($GLOBALS['iucn_categorie'][$assessment['code']])
+				? $GLOBALS['iucn_categorie'][$assessment['code']]['item']
+				: '';
+
 			// Mise en cache systématique pour gérer le cas où la page cherchée n'existe pas.
 			cache_taxonomie_ecrire(serialize($assessment), 'iucn', 'assessment', $search['tsn'], $options_cache);
 		} else {

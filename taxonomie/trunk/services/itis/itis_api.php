@@ -139,7 +139,7 @@ $GLOBALS['itis_webservice'] = array(
 			'list'     => '',
 			'index'    => array(
 				'nom_scientifique'  => 'scientificName/combinedName',
-				'rang'              => 'taxRank/rankName',
+				'rang_taxon'              => 'taxRank/rankName',
 				'regne'             => 'kingdom/kingdomName',
 				'tsn_parent'        => 'parentTSN/parentTsn',
 				'auteur'            => 'taxonAuthor/authorship',
@@ -223,7 +223,7 @@ $GLOBALS['itis_webservice'] = array(
 			'list'     => 'hierarchyList',
 			'type'     => 'array',
 			'index'    => array(
-				'rang'             => 'rankName',
+				'rang_taxon'             => 'rankName',
 				'tsn'              => 'tsn',
 				'nom_scientifique' => 'taxonName',
 				'tsn_parent'       => 'parentTsn',
@@ -384,7 +384,7 @@ function itis_get_record($tsn) {
 			$record['tsn'] = intval($tsn);
 
 			// Passer en minuscules le rang et le règne exprimé en anglais.
-			$record['rang'] = strtolower($record['rang']);
+			$record['rang_taxon'] = strtolower($record['rang_taxon']);
 			$record['regne'] = strtolower($record['regne']);
 
 			// On réorganise le sous-tableau des noms communs
@@ -645,7 +645,7 @@ function itis_read_hierarchy($kingdom, $ranks_hierarchy, &$sha_file) {
 					if (preg_match($regexp, $_line, $match)) {
 						// Initialisation du taxon
 						// -- rang et nom scientifique en minuscules
-						$taxon['rang'] = strtolower($match[1]);
+						$taxon['rang_taxon'] = strtolower($match[1]);
 						$taxon['nom_scientifique'] = $match[2];
 						// -- Importer le nom de l'auteur qui est en ISO-8859-1 dans le charset du site
 						$taxon['auteur'] = trim(importer_charset(trim($match[4]), 'iso-8859-1'), '[]');
@@ -659,7 +659,7 @@ function itis_read_hierarchy($kingdom, $ranks_hierarchy, &$sha_file) {
 						}
 
 						// Recherche du parent
-						$taxon_rank_position = $ranks[$taxon['rang']];
+						$taxon_rank_position = $ranks[$taxon['rang_taxon']];
 						if ($taxon_rank_position == $ranks[_TAXONOMIE_RANG_REGNE]) {
 							// On traite à part le cas du règne qui ne se rencontre qu'une fois en début de fichier
 							$taxon['tsn_parent'] = 0;
@@ -948,7 +948,7 @@ function itis_format_hierarchyfull($tsn, $data, $index) {
 			// On constitue le bloc du taxon.
 			$taxon = array();
 			foreach ($index as $_key_information => $_key_data) {
-				if ($_key_information == 'rang') {
+				if ($_key_information == 'rang_taxon') {
 					$taxon[$_key_information] = strtolower($_data[$_key_data]);
 				} elseif (($_key_information == 'tsn') or ($_key_information == 'tsn_parent')) {
 					$taxon[$_key_information] = $_data[$_key_data] ? intval($_data[$_key_data]) : 0;

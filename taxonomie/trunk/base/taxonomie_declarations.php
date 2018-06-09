@@ -62,7 +62,7 @@ function taxonomie_declarer_tables_objets_sql($tables) {
 			'id_taxon'          => "bigint(21) NOT NULL",
 			'nom_scientifique'	=> "varchar(35) DEFAULT '' NOT NULL",
 			'indicateurs'       => "varchar(32) DEFAULT '' NOT NULL",
-			'rang'				=> "varchar(15) DEFAULT '' NOT NULL",
+			'rang_taxon'		=> "varchar(15) DEFAULT '' NOT NULL",
 			'regne'				=> "varchar(10) DEFAULT '' NOT NULL",
 			'nom_commun'		=> "text DEFAULT '' NOT NULL",
 			'auteur'			=> "varchar(100) DEFAULT '' NOT NULL",

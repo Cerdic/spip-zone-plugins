@@ -91,7 +91,7 @@ function essais_taxon_merger_traductions(){
   ),
   9 => 
   array (
-    0 => '',
+    0 => '<multi></multi>',
     1 => '<multi></multi>',
     2 => '<multi></multi>',
   ),
@@ -122,6 +122,8 @@ function essais_taxon_merger_traductions(){
 );
 		return $essais;
 	}
+
+
 
 
 

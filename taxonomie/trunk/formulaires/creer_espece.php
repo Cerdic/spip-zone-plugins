@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 if (!defined('_TAXONOMIE_RECHERCHE_MAX_ESPECES')) {
 	/**
-	 * Nombre de réponses maximal toléré pour continuer
+	 * Nombre de réponses maximal toléré pour continuer en étape 2.
 	 */
 	define('_TAXONOMIE_RECHERCHE_MAX_ESPECES', 35);
 }
@@ -194,13 +194,13 @@ function formulaires_creer_espece_verifier_1() {
 							$taxon = itis_get_record($_taxon['tsn']);
 							if (($taxon['usage_valide'])
 							and (strcasecmp($taxon['regne'], $regne) === 0)
-							and (rang_est_espece($taxon['rang']))) {
+							and (rang_est_espece($taxon['rang_taxon']))) {
 								if ($type_recherche == 'scientificname') {
 									$valeurs['_taxons'][$taxon['tsn']] = '<span class="nom_scientifique_inline">'
 										. $_taxon['nom_scientifique']
 										. '</span>'
 										. ' - '
-										. _T('taxonomie:rang_' . $taxon['rang']);
+										. _T('taxonomie:rang_' . $taxon['rang_taxon']);
 									if (strcasecmp($recherche, $_taxon['nom_scientifique']) === 0) {
 										$valeurs['_taxon_defaut'] = $taxon['tsn'];
 									}
@@ -209,7 +209,7 @@ function formulaires_creer_espece_verifier_1() {
 									$valeurs['_taxons'][$taxon['tsn']] = $_taxon['nom_commun']
 										. " [{$_taxon['langage']}]"
 										. ' - '
-										. _T('taxonomie:rang_' . $taxon['rang']);
+										. _T('taxonomie:rang_' . $taxon['rang_taxon']);
 									if (strcasecmp($recherche, $_taxon['nom_commun']) === 0) {
 										$valeurs['_taxon_defaut'] = $taxon['tsn'];
 									}
@@ -299,7 +299,7 @@ function formulaires_creer_espece_verifier_2() {
 			$parent = $_ascendant;
 			// On détermine si l'ascendant est un taxon d'espèce ou inférieur,
 			// ou si c'est un taxon de rang supérieur à l'espèce.
-			$parent['est_espece'] = rang_est_espece($_ascendant['rang']) ? true : false;
+			$parent['est_espece'] = rang_est_espece($_ascendant['rang_taxon']) ? true : false;
 			// On indique si le parent existe déjà ou pas en base
 			$parent['deja_cree'] = false;
 			if (sql_countsel('spip_taxons', array('tsn=' . intval($_ascendant['tsn'])))) {
@@ -308,7 +308,7 @@ function formulaires_creer_espece_verifier_2() {
 			// On insère l'ascendant dans la liste des parents.
 			$parents[] = $parent;
 			// On sort si on est arrivé au taxon de genre.
-			if ($_ascendant['rang'] == _TAXONOMIE_RANG_GENRE) {
+			if ($_ascendant['rang_taxon'] == _TAXONOMIE_RANG_GENRE) {
 				break;
 			}
 		}
