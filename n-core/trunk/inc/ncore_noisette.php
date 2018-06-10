@@ -168,17 +168,16 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
 		// utilisé pour spécifier la noisette.
 		$description = ncore_noisette_decrire($plugin, $noisette, $stockage);
 
-		// Si la noisette est de type conteneur, il faut la supprimer en vidant le conteneur qu'elle représente
+		// Si la noisette est de type conteneur, il faut d'abord vider le conteneur qu'elle représente
 		// et ce de façon récursive. La récursivité est gérée par la fonction de service ncore_conteneur_destocker().
 		if ($description['est_conteneur'] == 'oui') {
 			// Inutile de redéfinir un conteneur car la description de la noisette contient les deux champs
 			// essentiels, à savoir, type_noisette et id_noisette.
-			$retour = ncore_conteneur_destocker($plugin, $description, $stockage);
-		} else {
-			// Suppression de la noisette. On passe la description complète ce qui permet à la fonction de
-			// destockage de choisir la méthode d'identification la plus adaptée.
-			$retour = ncore_noisette_destocker($plugin, $description, $stockage);
+			ncore_conteneur_destocker($plugin, $description, $stockage);
 		}
+		// Suppression de la noisette. On passe la description complète ce qui permet à la fonction de
+		// destockage de choisir la méthode d'identification la plus adaptée.
+		$retour = ncore_noisette_destocker($plugin, $description, $stockage);
 
 		// On récupère les noisettes restant affectées au conteneur sous la forme d'un tableau indexé par rang.
 		$autres_noisettes = ncore_noisette_lister(
@@ -429,7 +428,7 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
  *        Tableau des descriptions des noisettes du conteneur indexé par le champ fourni en argument (par défaut le
  *        rang).
  */
-function noisette_repertorier($plugin, $conteneur, $cle = 'rang_noisette', $filtres = array(), $stockage = '') {
+function noisette_repertorier($plugin, $conteneur = array(), $cle = 'rang_noisette', $filtres = array(), $stockage = '') {
 
 	// On indexe le tableau des noisettes par le plugin appelant en cas d'appel sur le même hit
 	// par deux plugins différents.
