@@ -52,6 +52,16 @@ function formulaires_ajouter_noisette_charger_dist($page_ou_objet, $bloc, $noise
 	return $valeurs;
 }
 
+function formulaires_ajouter_noisette_verifier_dist($page_ou_objet, $bloc, $noisette = array(), $redirect = '') {
+
+	$erreurs = array();
+	if (!_request('type_noisette')) {
+		$erreurs['type_noisette'] = _T('noizetier:erreur_aucune_noisette_selectionnee');
+	}
+
+	return $erreurs;
+}
+
 
 function formulaires_ajouter_noisette_traiter_dist($page_ou_objet, $bloc, $noisette = array(), $redirect = '') {
 
@@ -67,24 +77,30 @@ function formulaires_ajouter_noisette_traiter_dist($page_ou_objet, $bloc, $noise
 	if (autoriser('configurerpage', 'noizetier', 0, '', $conteneur)) {
 		if ($type_noisette = _request('type_noisette')) {
 			include_spip('inc/ncore_noisette');
-			// Ajout de la noisette en fin de liste pour le squelette concerné.
-			if ($id_noisette = noisette_ajouter('noizetier', $type_noisette, $conteneur)) {
-				$retour['message_ok'] = _T('info_modification_enregistree');
-				if ($redirect) {
-					// Note : $redirect indique la page à charger en cas d'ajout
-					//        @id_noisette@ étant alors remplacé par la bonne valeur, connue seulement après ajout de la noisette
-					// TODO : Grrr, y a surement plus propre => à trouver
-					$redirect = str_replace('&amp;', '&', $redirect);
-					$redirect = str_replace('@id_noisette@', $id_noisette, $redirect);
-					if (strncmp($redirect, 'javascript:', 11) == 0) {
-						$retour['message_ok'] .= '<script type="text/javascript">/*<![CDATA[*/'.substr($redirect, 11).'/*]]>*/</script>';
-						$retour['editable'] = true;
-					} else {
-						$retour['redirect'] = $redirect;
-					}
+			if (!is_array($type_noisette)) {
+				$type_noisette = array($type_noisette);
+			}
+
+			// On insère chaque noisette sélectionnée en fin de liste dans l'ordre retourné par le formulaire.
+			$erreurs = array();
+			foreach ($type_noisette as $_type_noisette) {
+				if (!$id_noisette = noisette_ajouter('noizetier', $_type_noisette, $conteneur)) {
+					$erreurs[] = $_type_noisette;
 				}
+			}
+
+			// Ajout de la noisette en fin de liste pour le squelette concerné.
+			if (!$erreurs) {
+				$retour['message_ok'] = _T('info_modification_enregistree');
+				if (count($type_noisette) == 1) {
+					// On a rajouté une seule noisette, on peut se rendre dans la page d'édition de la noisette
+					// pour finir la configuration.
+					$redirect = parametre_url(generer_url_ecrire('noisette_edit'), 'id_noisette', $id_noisette);
+				}
+				$retour['redirect'] = $redirect;
 			} else {
-				$retour['message_erreur'] = _T('noizetier:erreur_mise_a_jour');
+				$retour['message_erreur'] =
+					_T('noizetier:erreur_ajout_noisette', array('noisettes', implode(', ', $erreurs)));
 			}
 		} else {
 			$retour['message_erreur'] = _T('noizetier:erreur_aucune_noisette_selectionnee');

@@ -11,8 +11,6 @@
 						|ancre_url{bloc-#ENV{bloc}})]})]}
 )]
 #SET{retour, #ENV{retour}|sinon{#GET{retour}}}
-#SET{redirect, #URL_ECRIRE{noisette_edit,id_noisette=@id_noisette@}}
-#SET{redirect, #ENV{redirect}|sinon{#GET{redirect}}}
 
 <div class='cadre-formulaire-editer'>
 <div class="entete-formulaire">
@@ -35,7 +33,7 @@
 		#ENV{page, #ARRAY{objet,#OBJET,id_objet,#ID_OBJET}},
 		#ENV{bloc},
 		#GET{noisette},
-		#GET{redirect}}
+		#GET{retour}}
 </div>
 [(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\[CDATA\[*/
