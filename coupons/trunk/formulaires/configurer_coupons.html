@@ -9,6 +9,10 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
+		[(#SAISIE{input, duree_validite, 
+			label=<:coupons:label_duree_validite_notifications:>, 
+			explication=<:coupons:explication_duree_validite_notifications:>, defaut=365})]
+			
 		[(#SAISIE{input, emails_notifications, 
 			label=<:coupons:label_emails_notifications:>, 
 			explication=<:coupons:explication_emails_notifications:>})]

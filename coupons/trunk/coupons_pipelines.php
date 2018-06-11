@@ -13,6 +13,19 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+/**
+ * Enregistrer la date d'inscription lors de l'insertion d'un auteur en base
+ *
+ * @param array $flux
+ * @return array
+ */
+function coupons_pre_insertion($flux){
+	if ($flux['args']['table']=='spip_coupons' && !trim($flux['data']['code'])){
+		$flux['data']['code'] = coupon_generer_code();
+	}
+	return $flux;
+}
+
 function coupons_post_edition($flux) {
 
 	if (
@@ -22,26 +35,27 @@ function coupons_post_edition($flux) {
 	) {
 		$id_commande = intval($flux['args']['id_objet']);
 
-		// 1 - au paiement de la commande, marquer les coupons comme utilisés
+		// 1 - au paiement de la commande, traiter les coupons utilisés
 
 		$infos_coupons = sql_allfetsel(
-			'id_objet',
+			'id_objet, prix_unitaire_ht',
 			'spip_commandes_details',
 			'id_commande = ' . $id_commande . ' AND objet = "coupon"');
 
 		foreach ($infos_coupons as $coupon) {
-			sql_updateq(
-				'spip_coupons',
+			sql_insertq(
+				'spip_coupons_commandes',
 				array(
+					'id_coupon'   => $coupon['id_objet'],
 					'id_commande' => $id_commande,
-					'actif'       => '',
-				),
-				'id_coupon = ' . $coupon['id_objet']
-			);
-			spip_log('coupon ' . $coupon['id_objet'] . ' utilisé par commande ' . $id_commande, 'coupons');
+					'id_auteur'   => $GLOBALS['visiteur_session']['id_auteur'],
+					'montant'     => abs($coupon['prix_unitaire_ht']),
+				));
+			spip_log('coupon ' . $coupon['id_objet'] . ' utilisé par commande ' . $id_commande . ' - montant : ' . $coupon['prix_unitaire_ht'],
+				'coupons');
 		}
 
-		// 2 - générer un coupon pour chaque bon d'achat dans la commande
+		// 2 - générer un coupon pour chaque produit "bon d'achat" dans la commande
 
 		$infos_bon_cadeau = sql_allfetsel(
 			'cd.*, p.titre, p.taxe',
@@ -57,12 +71,13 @@ function coupons_post_edition($flux) {
 					include_spip('action/editer_objet');
 					$id_coupon      = objet_inserer('coupon');
 					$valeurs_coupon = array(
-						'montant'                     => $montant_coupon,
-						'restriction_taxe'            => $bon['taxe'],
-						'id_commandes_detail_origine' => $bon['id_commandes_detail'],
-						'titre'                       => $bon['titre'],
-						'code'                        => coupon_generer_code(),
-						'actif'                       => 'on',
+						'montant'             => $montant_coupon,
+						'restriction_taxe'    => $bon['taxe'],
+						'id_commandes_detail' => $bon['id_commandes_detail'],
+						'titre'               => $bon['titre'],
+						'code'                => coupon_generer_code(),
+						'actif'               => 'on',
+						'date_validite'       => date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' + ' . lire_config('coupons/duree_validite') . ' days')),
 					);
 					objet_modifier('coupon', $id_coupon, $valeurs_coupon);
 
@@ -100,7 +115,7 @@ function coupons_affiche_milieu($flux) {
 			$texte = recuperer_fond(
 				'prive/objets/liste/coupons',
 				array(
-					'where' => 'id_commandes_detail_origine IN (' . join(',', $id_commandes_details) . ')',
+					'where' => 'id_commandes_detail IN (' . join(',', $id_commandes_details) . ')',
 				)
 			);
 			if (($p = strpos($flux['data'], '<!--afficher_fiche_objet-->')) !== false) {
@@ -112,5 +127,21 @@ function coupons_affiche_milieu($flux) {
 
 	}
 
+	if ($flux['args']['exec'] == 'produit' && $flux['args']['id_produit']) {
+
+		$texte = recuperer_fond(
+			'prive/objets/liste/coupons',
+			array(
+				'id_produit' => $flux['args']['id_produit'],
+			)
+		);
+		if (($p = strpos($flux['data'], '<!--afficher_fiche_objet-->')) !== false) {
+			$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
+		} else {
+			$flux['data'] .= $texte;
+		}
+		
+	}
+	
 	return $flux;
 }

@@ -10,10 +10,8 @@
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{coupon:info_1_coupon,coupon:info_nb_coupons}})</strong></caption>]
 	<thead>
 		<tr class="first_row">
-			<th class="picto" scope="col"></th>
 			<th class="titre" scope="col">[(#TRI{titre,<:coupon:champ_titre_label:>,ajax})]</th>
 			<th class="" scope="col">[(#TRI{code,<:coupon:champ_code_label:>,ajax})]</th>
-			<th class="" scope="col">[(#TRI{id_commandes_detail_origine,<:commandes:commande_titre:>,ajax})]</th>
 			<th class="" scope="col"><:coupon:coupon_utilisable:></th>
 			<th class="date" scope="col">[(#TRI{date,<:date:>,ajax})]</th> 
 			<th class="id" scope="col">[(#TRI{id_coupon,<:info_numero_abbreviation:>,ajax})]</th>
@@ -21,14 +19,12 @@
 	</thead>
 	<tbody>
 	<BOUCLE_liste_coupons(COUPONS)
-		{id_commandes_detail_origine?}{id_mot?}{id_auteur?}{where?}{recherche?}
+		{id_commandes_detail?}{id_mot?}{id_auteur?}{where?}{code?}{id_produit?}{recherche?}
 		{tri #ENV{par,date},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class="picto">[(#CHEMIN_IMAGE{coupon-16.png}|balise_img)]</td>
 			<td class="titre principale">[(#LOGO_COUPON|image_reduire{20,26})]<a href="[(#ID_COUPON|generer_url_entite{coupon})]" title="<:info_numero_abbreviation|attribut_html:> #ID_COUPON">[(#RANG). ]#TITRE</a></td>
 			<td class="">#CODE</td>
-			<td class=""><BOUCLE_commande(COMMANDES_DETAILS){id_commandes_detail=#ID_COMMANDES_DETAIL_ORIGINE}><a href="#URL_ECRIRE{commande,id_commande=#ID_COMMANDE}">#ID_COMMANDE</a></BOUCLE_commande></td>
-			<td class="">[(#ACTIF|?{<:item_non:>,<:item_oui:>})]</td>
+			<td class="">[(#ID_COUPON|coupon_utilisable|?{Oui,Non})]</td>
 			<td class="date secondaire">[(#DATE|affdate_jourcourt)]</td> 
 			<td class="id">[(#AUTORISER{modifier,coupon,#ID_COUPON}|?{
 				<a href="[(#URL_ECRIRE{coupon_edit,id_coupon=#ID_COUPON})]">#ID_COUPON</a>,

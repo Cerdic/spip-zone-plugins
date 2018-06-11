@@ -1,39 +1,64 @@
 <BOUCLE_coupon(COUPONS){id_coupon}>
 
-<div class="champ">
-	<label><:coupon:champ_actif_label:> : </label>
-	[(#ACTIF|?{<:item_non:>,<:item_oui:>})]
-</div>
+<p class="champ">
+	<strong><:coupon:champ_actif_label:> : </strong>
+	[(#ACTIF|?{<:item_oui:>,<:item_non:>})]
+</p>
 
-[<div class="champ">
-	<label><:coupon:champ_code_label:> : </label>
+<p class="champ">
+	<strong><:coupon:champ_date_validite_label:> : </strong>
+	[(#DATE_VALIDITE|affdate)]
+</p>
+
+[<p class="champ">
+	<strong><:coupon:champ_code_label:> : </strong>
 	(#CODE)
-</div>]
+</p>]
 
-[<div class="champ">
-	<label><:coupon:champ_montant_label:> : </label>
+[<p class="champ">
+	<strong><:coupon:champ_montant_label:> : </strong>
 	(#MONTANT|prix_formater)
-</div>]
+</p>]
 
-<BOUCLE_commande_detail_origine(COMMANDES_DETAILS){id_commandes_detail=#ID_COMMANDES_DETAIL_ORIGINE}>
+[<p class="champ">
+	<strong><:coupon:montant_utilisable:> : </strong>
+	(#ID_COUPON|coupon_montant_utilisable|prix_formater)
+</p>]
+
+[<p class="champ">(#ID_PRODUIT|oui)
+	<strong><:coupon:champ_restriction_produit_titre_label:> : </strong>
+	<a href="[(#ID_PRODUIT|generer_url_entite{produit})]">[(#INFO_TITRE{produit,#ID_PRODUIT})]</a>
+</p>]
+
+[<p class="champ">(#RESTRICTION_TAXE|>{0}|oui)
+	<strong><:coupon:champ_restriction_taxe_label:> : </strong>
+	[(#RESTRICTION_TAXE|mult{100})%]
+</p>]
+
+
+[(#BOITE_OUVRIR{<:coupon:coupon_utilisable:>,'statut'})]
+	[(#ID_COUPON|coupon_utilisable|?{Oui,Non})]
+#BOITE_FERMER
+
+<BOUCLE_commande_detail_origine(COMMANDES_DETAILS){id_commandes_detail}>
 <BOUCLE_commande_origine(COMMANDES){id_commande}>
-<div class="champ">
-	<label><:coupon:champ_id_commandes_detail_origine_label:> : </label>
+[(#BOITE_OUVRIR{<:coupon:champ_id_commandes_detail_label:>,'info'})]
 	<a href="[(#ID_COMMANDE|generer_url_entite{commande})]">#REFERENCE</a>
-</div>
+#BOITE_FERMER
 </BOUCLE_commande_origine>
 </BOUCLE_commande_detail_origine>
 
-<BOUCLE_commande(COMMANDES){id_commande=#ID_COMMANDE}>
-<div class="champ">
-	<label><:coupon:champ_id_commande_label:> : </label>
-	<a href="[(#ID_COMMANDE|generer_url_entite{commande})]">#REFERENCE</a>
-</div>
-</BOUCLE_commande>
+<B_commandes>
+[(#BOITE_OUVRIR{<:coupon:utilise_dans_commandes:>,'info'})]
+<BOUCLE_commandes(COUPONS_COMMANDES){id_coupon}>
 
-[<div class="champ">(#RESTRICTION_TAXE|>{0}|oui)
-	<label><:coupon:champ_restriction_taxe_label:> : </label>
-	[(#RESTRICTION_TAXE|mult{100})%]
-</div>]
+	<p>
+		<a href="[(#ID_COMMANDE|generer_url_entite{commande})]">#INFO_REFERENCE{commande,#ID_COMMANDE}</a> : [(#MONTANT|prix_formater)] - [(#MAJ|affdate_heure)]
+	</p>
+
+</BOUCLE_commandes>
+#BOITE_FERMER
+</B_commandes>
+
 
 </BOUCLE_coupon>

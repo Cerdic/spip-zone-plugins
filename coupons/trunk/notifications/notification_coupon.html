@@ -1,6 +1,6 @@
 <p><strong><:coupon:champ_titre_label:></strong> [(#TITRE)]
 <p><strong><:coupon:champ_montant_label:></strong> [(#MONTANT|prix_formater)]
 <p><strong><:coupon:champ_code_label:></strong> [(#CODE)]
-<BOUCLE_commandes_details(COMMANDES_DETAILS){id_commandes_detail=#ID_COMMANDES_DETAIL_ORIGINE}>
+<BOUCLE_commandes_details(COMMANDES_DETAILS){id_commandes_detail}>
 <p><a href="[(#VAL{commande}|generer_url_ecrire{id_commande})]">Voir la commande n° #ID_COMMANDE</a></p>
 </BOUCLE_commandes_details>

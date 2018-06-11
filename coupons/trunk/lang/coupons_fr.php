@@ -17,9 +17,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'explication_emails_notifications' => 'Séparés par une virgule',
+	'explication_duree_validite_notifications' => 'En nombre de jours',
 
 	// L
 	'label_emails_notifications' => 'Emails à notifier de la création d\'un coupon',
+	'label_duree_validite_notifications' => 'Durée de validité d\'un nouveau coupon créé',
 
 	// U
 	'utiliser_code_reduction'    => 'Utiliser ce code de réduction',

@@ -12,13 +12,20 @@
 				label=<:coupon:champ_titre_label:>})]
 
 			[(#SAISIE{case, actif, 
-				label_case=<:coupon:champ_actif_label:>})]
+				label=<:coupon:champ_actif_label:>, defaut=on})]
 
-			[(#SAISIE{input, code, obligatoire=oui,
-				label=<:coupon:champ_code_label:>})]
+			[(#SAISIE{date, date_validite, 
+				label=<:coupon:champ_date_validite_label:>})]
+					
+					
+			[(#SAISIE{input, code, 
+				label=<:coupon:champ_code_label:>,explication=<:coupon:explication_code_label:>})]
 
 			[(#SAISIE{input, montant, obligatoire=oui,
 				label=<:coupon:champ_montant_label:>})]
+
+			[(#SAISIE{input, id_produit,
+				label=<:coupon:champ_restriction_produit_label:>})]
 
 			[(#SAISIE{input, restriction_taxe,
 				label=<:coupon:champ_restriction_taxe_label:>})]
