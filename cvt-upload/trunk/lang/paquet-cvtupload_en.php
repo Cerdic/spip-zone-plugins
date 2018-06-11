@@ -11,5 +11,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cvtupload_description' => 'Provides tools to load files properly from a CVT form.',
-	'cvtupload_slogan' => 'Download properlu files from a CVT form'
+	'cvtupload_slogan' => 'Download properly files from a CVT form'
 );
