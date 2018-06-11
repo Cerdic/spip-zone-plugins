@@ -48,7 +48,7 @@ function chapitres_affiche_milieu($flux) {
 /**
  * Ajout de contenu sous la fiche d'un objet
  *
- * => Chapitres enfants directs pour les objets configurés et les chapitres
+ * => Chapitres enfants pour les objets configurés et les chapitres
  *
  * @pipeline affiche_enfants
  * @param  array $flux Données du pipeline
@@ -64,10 +64,13 @@ function chapitres_affiche_enfants($flux) {
 		and isset($flux['args']['id_objet'])
 		and $objet = $flux['args']['objet']
 		and $id_objet = intval($flux['args']['id_objet'])
-		and in_array(table_objet_sql($objet), $objets)
+		and (
+			in_array(table_objet_sql($objet), $objets)
+			or $objet == 'chapitre'
+		)
 	) {
 		$enfants = recuperer_fond(
-			'prive/objets/contenu/chapitre-enfants',
+			'prive/objets/contenu/chapitre-enfants-ajax',
 			array(
 				'objet'       => $objet,
 				'id_objet'    => $id_objet,

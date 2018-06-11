@@ -6,6 +6,9 @@
 	- Liste des enfants directs
 	- Texte éditable de la branche complète
 
+	Note : ce squelette est nommé de façon à ne pas être inclus automatiquement dans l'échaffaudage, on a besoin qu'il soit ajaxé, et ce n'est pas le cas par défaut pour les squelettes {objet}-enfants.
+	Tout évènement ajax dans #content provoque automatiquement le rechargement de #navigation, et ça prendrait le pas sur le rechargement ajax lié au menu dans le script ci-dessous.
+
 ]
 #SET{vues,#LISTE{enfants,editables}}
 #SET{vue,#ENV{chapitres}|in_array{#GET{vues}}|?{#ENV{chapitres},#GET{vues/0}}}
@@ -36,4 +39,4 @@
 			ajaxReload('chapitres_plan', {args: {chapitres: vue}});
 		});
 	});
-	</script>
+</script>
