@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_double_optin' => 'Subscription validation',
 	'label_double_optin_0' => 'Simple Opt-in',
 	'label_double_optin_1' => 'Double Opt-in (confirmation email with validation link to subscription)',
+	'label_importer_creer_liste_1' => 'When importing emails, do not automaticaly generate a subscribinglist with these emails.',
 	'label_list_id' => 'ID',
 	'label_list_status' => 'State',
 	'label_list_titre' => 'List Name',
