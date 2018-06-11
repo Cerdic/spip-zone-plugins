@@ -39,10 +39,10 @@ Si largeur ou hauteur fournit en parametre, redimensionner
 		class="(#ENV{lien_class})"] title='[(#GET{title}|attribut_html)]'[
 		(#ENV{lien}|?{'',type="#MIME_TYPE"})]>]
 		<img src="#CHEMIN{rien.gif}" [(#GET{options/src_attr,data-src})]="#GET{fichier}" [(#GET{options/sizes_attr,data-sizes})]="auto" class="[(#GET{options/lazy_class,lazyload})]"
-			alt="#GET{title}" width="#GET{width}" height="#GET{height}">[(#GET{url}|?{</a>})][
+			alt="#GET{title}" width="#GET{width}" height="#GET{height}"><noscript><img src="#GET{fichier}" [(#GET{options/sizes_attr,data-sizes})]="auto" class="[(#GET{options/lazy_class,lazyload})]"alt="#GET{title}" width="#GET{width}" height="#GET{height}"></noscript>
+			[(#GET{url}|?{</a>})][
 	(#TITRE|ou{#DESCRIPTIF}|ou{#CREDITS}|oui)
 		<INCLURE{fond=modeles/inc_figcaption,titre=#TITRE,descriptif=#DESCRIPTIF,credits=#CREDITS,width=#GET{width}}>]
 </figure>
-
 </BOUCLE_doc>
 #FILTRE{trim}

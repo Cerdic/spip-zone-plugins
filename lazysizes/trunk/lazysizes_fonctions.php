@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /*
  * function lazysizes_addons
- * 
+ *
  */
 function lazysizes_addons() {
 	$lazy_addons = array(
@@ -33,7 +33,7 @@ function lazysizes_addons() {
 		'unveilhooks' => 'ls.unveilhooks',
 		'video-embed' => 'ls.video-embed'
 	);
-	
+
 	return $lazy_addons;
 }
 
@@ -42,30 +42,55 @@ function lazysizes_insertion_js($flux = ''){
 	$lazy_options = lire_config('lazysizes/options');
 	$js_init_options = generer_url_public('lazysizes_config.js') ;
 	$flux .= "<script type='text/javascript' src='$js_init_options' ></script>\n";;
-	
+
 	// Addons
 	$active_addons = lire_config('lazysizes/addons');
 	$ls_addons = lazysizes_addons();
-	
+
 	if (is_array($active_addons)) {
 		foreach($active_addons as $addon => $state){
 			if(array_key_exists($addon, $ls_addons)){
 				$file = timestamp(find_in_path('javascript/addons/'.$addon.'/'.$ls_addons[$addon].'.js'));
-				$flux .= "<script type='text/javascript' src='$file' ></script>\n"; 
+				$flux .= "<script type='text/javascript' src='$file' ></script>\n";
 			}
 		}
 	}
-			
-	$lazysizes = timestamp(find_in_path('javascript/lazysizes.js'));	
+
+	$lazysizes = timestamp(find_in_path('javascript/lazysizes.js'));
 	$flux .= "<script type='text/javascript' src='$lazysizes' ></script>\n";
 
-	
+
 	$flux .= "<script type='text/javascript'>window.lazySizes.init();</script>";
-	
+
 	return $flux;
 }
 
 
+
+/**
+ * filtre_unlazy_dist
+ *
+ * supprime les data-src des modèles documents pour rétablir le src du $fichier
+ * utilisé dans les gabarrits de newsletter
+ *
+ */
+function filtre_unlazy_dist($flux){
+
+	if(preg_match_all("/(<img\ [^>]*>)/",$flux,$matches)){
+		foreach($matches[1] as $img){
+			if(null !== extraire_attribut($img,'data-src')){
+				$src = ' src="'.extraire_attribut($img,'data-src').'"';
+				( extraire_attribut($img,'alt') ) ? $alt = ' alt="'.extraire_attribut($img,'alt').'"' : $alt = null;
+				( extraire_attribut($img,'width') ) ? $width = ' width="'.extraire_attribut($img,'width').'"' : $width = null ;
+				( extraire_attribut($img,'height') ) ? $height = ' height="'.extraire_attribut($img,'height').'"' : $height = null;
+
+				$flux = str_replace($img,'<img'.$src.$alt.$width.$height.'>',$flux);
+			}
+		}
+	}
+
+	return $flux;
+}
 /*
  * function titrer_document
  *
