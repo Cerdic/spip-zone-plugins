@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_suivante' => 'Año siguiente',
 	'aucun_evenement' => 'Ningún evento',
 	'aucun_inscrit' => 'Ningún inscrito',
-	'aucune_rubrique_mode_agenda' => 'Por defecto, todas las secciones permiten utilizar los eventos. Si activa el modo agenda sobre una o más secciones, la gestión de enventos se limitará a su rama.',
+	'aucune_rubrique_mode_agenda' => 'Por defecto, todas las secciones permiten utilizar los eventos. Si activa el modo agenda sobre una o más secciones, la gestión de enventos se limitará a su rama.', # MODIF
 
 	// B
 	'bouton_annuler' => 'Cancelar',

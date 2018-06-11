@@ -16,11 +16,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'agenda' => 'Kalendár udalostí',
 	'ajouter_repetition' => 'Pridať opakovania',
 	'ajouter_un_evenement' => 'pridať udalosť k tomuto článku',
-	'annee_precedente' => 'predchádzajúci rok',
-	'annee_suivante' => 'ďalší rok',
+	'annee_precedente' => 'minulý rok',
+	'annee_suivante' => 'budúci rok',
 	'aucun_evenement' => 'žiadna udalosť',
 	'aucun_inscrit' => 'Žiadne prihlásenie',
-	'aucune_rubrique_mode_agenda' => 'Podľa predvolených nastavení vám všetky rubriky umožňujú umožňujú využívať udalosti. Ak kalendár udalostí aktivujete pre jednu rubriku alebo viacero rubrík, riadenie udalostí bude obmedzené na vetvy týchto rubrík.',
+	'aucune_rubrique_mode_agenda' => 'Podľa predvolených nastavení vám všetky rubriky umožňujú umožňujú využívať udalosti. Ak kalendár udalostí aktivujete pre jednu rubriku alebo viacero rubrík, riadenie udalostí bude obmedzené na vetvy týchto rubrík.', # MODIF
 
 	// B
 	'bouton_annuler' => 'Zrušiť',
@@ -66,6 +66,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_titre' => 'Titulok',
 	'evenements' => 'Udalosti',
 	'evenements_a_venir' => 'Budúce',
+	'evenements_corbeille_tous' => 'Počet udalostí v koši: @nb@',
+	'evenements_corbeille_un' => '1 udalosť v koši',
 	'evenements_depuis_debut' => 'od začiatku',
 	'explication_synchro_flux_ical' => 'Zásuvný modul Kalendár udalostí poskytuje výpis zoznamu udalostí vo formáte iCal. Niektoré programy aktualizujú udalosti, iba ak  je pri nich uvedené číslo verzie (a to, že nastala zmena). Na to, aby bolo toto číslo verzie zavedené do vygenerovaného zdroja iCal, treba aktivovať sledovanie zmien pre udalosti (menu Konfigurácia > Zmeny).',
 	'explication_synchro_flux_ical_titre' => 'Synchronizácia zdroja iCal',

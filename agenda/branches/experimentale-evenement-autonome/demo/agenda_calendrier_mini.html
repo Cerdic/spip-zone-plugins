@@ -46,12 +46,10 @@
 #CALENDRIER_MINI{#ENV{date},'date',#SELF}
 
 		<div class="cartouche">
-				#DEBUT_SURLIGNE
-				[(#LOGO_ARTICLE||image_reduire{200,200})]
-				[<p class="surtitre">(#SURTITRE)</p>]
-				<h1 class="titre">#TITRE</h1>
-				[<p class="soustitre">(#SOUSTITRE)</p>]
-				#FIN_SURLIGNE
+				[(#LOGO_ARTICLE|image_reduire{200,200})]
+				[<p class="surtitre surlignable">(#SURTITRE)</p>]
+				<h1 class="titre surlignable">#TITRE</h1>
+				[<p class="soustitre surlignable">(#SOUSTITRE)</p>]
 
 				<p><small>[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
 
@@ -70,12 +68,10 @@
 			</div>
 
 
-			#DEBUT_SURLIGNE
-			[<div class="chapo">(#CHAPO)</div>]
+			[<div class="chapo surlignable">(#CHAPO)</div>]
 			<br class="nettoyeur" />
 			[<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-			[<div class="texte">(#TEXTE|image_reduire{520,0})</div>]
-			#FIN_SURLIGNE
+			[<div class="texte surlignable">(#TEXTE|image_reduire{520,0})</div>]
 
 			[(#REM) Portfolio : album d'images ]
 			<B_documents_portfolio>
@@ -98,7 +94,7 @@
 			</div>
 			</BOUCLE_afficher_document>
 
-			[<div class="ps"><h2><:info_ps:></h2>#DEBUT_SURLIGNE(#PS)#FIN_SURLIGNE</div>]
+			[<div class="ps surlignable"><h2><:info_ps:></h2>(#PS)</div>]
 
 			[(#REM) Autres documents joints a l'article ]
 			<B_documents_joints>
@@ -120,7 +116,7 @@
 			[ #REM Conserver cet invalideur invisible : (#PETITION|?{'',''}) ]
 			<INCLURE{fond=inc-petition}{id_article}{self=#SELF}>
 
-			[<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
+			[<div class="notes surlignable"><h2><:info_notes:></h2>(#NOTES)</div>]
 
 			[(#REM) Forum de l'article ]
 			[<h2 class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></h2>]

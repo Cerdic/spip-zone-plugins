@@ -92,6 +92,7 @@ function agenda_upgrade($nom_meta_base_version, $version_cible) {
 
 function agenda_vider_tables($nom_meta_base_version) {
 	sql_drop_table('spip_evenements');
+	sql_drop_table('spip_evenements_participants');
 	#sql_drop_table("spip_mots_evenements"); // au cas ou ?
 	sql_alter('TABLE spip_rubriques DROP COLUMN agenda');
 	effacer_meta($nom_meta_base_version);

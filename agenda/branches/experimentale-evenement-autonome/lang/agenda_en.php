@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_suivante' => 'next year',
 	'aucun_evenement' => 'no event',
 	'aucun_inscrit' => 'No registered',
-	'aucune_rubrique_mode_agenda' => 'By default, all sections can use the events. If you activate the agenda mode on one or more sections, event management will be limited in its subtree.',
+	'aucune_rubrique_mode_agenda' => 'By default, all sections can use the events. If you activate the agenda mode on one or more sections, event management will be limited in its subtree.', # MODIF
 
 	// B
 	'bouton_annuler' => 'Cancel',
@@ -66,6 +66,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_titre' => 'Title',
 	'evenements' => 'Events',
 	'evenements_a_venir' => 'Next',
+	'evenements_corbeille_tous' => '@nb@ events to the trash bin',
+	'evenements_corbeille_un' => 'One event to the trash bin',
 	'evenements_depuis_debut' => 'All',
 	'explication_synchro_flux_ical' => 'Plugin Agenda supplies a flow of events in iCal format. Certain clients do not update an event unless a version number (also indicating any modification) is present in the flow. In order to have this number included in the generated iCal flow,  you can activate revisions for events (Configuration menu > Revisions).',
 	'explication_synchro_flux_ical_titre' => 'Synchronisation of iCal flow',

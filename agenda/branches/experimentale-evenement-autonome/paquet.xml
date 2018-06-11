@@ -1,8 +1,8 @@
 <paquet
 	prefix="agenda"
 	categorie="date"
-	version="3.19.4"
-	etat="stable"
+	version="4.0.9-dev"
+	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/evenement-32.png"
 	schema="0.27.0"
@@ -17,7 +17,7 @@
 	<auteur lien="http://spip.tetue.net">Tetue</auteur>
 	<auteur lien="http://www.cahri.com">Julien Tessier</auteur>
 
-	<copyright>2006-2015</copyright>
+	<copyright>2006-2016</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
@@ -44,8 +44,6 @@
 	<utilise nom="Fulltext" compatibilite="[1.0.0;[" />
 	<utilise nom="mots" compatibilite="[2.4.6;[" />
 	<utilise nom="corbeille" compatibilite="[3.1.1;[" />
-	<utilise nom="saisies" compatibilite="[2.24.0;]" />
-	<utilise nom="verifier" compatibilite="[1.7.1;]" />
 
 	<necessite nom="calendriermini" compatibilite="[2.3.7;[" />
 

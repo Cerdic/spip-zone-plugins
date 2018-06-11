@@ -1,7 +1,0 @@
-<traduction module="migreragenda" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/agenda/trunk/lang/" reference="fr">
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/migreragenda?lang_cible=fr" total="19" traduits="19" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
-	<langue code="nl" url="https://trad.spip.net/tradlang_module/migreragenda?lang_cible=nl" total="19" traduits="19" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
-	</langue>
-</traduction>

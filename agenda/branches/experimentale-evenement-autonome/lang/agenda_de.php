@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_suivante' => 'Jahr danach',
 	'aucun_evenement' => 'Kein Event',
 	'aucun_inscrit' => 'Keine Anmeldung',
-	'aucune_rubrique_mode_agenda' => 'In der Grundeinstellung können Events in alle Rubriken eingetragen werden. Wenn sie den Kalender gezielt für eine oder mehrere Rubriken aktivieren, dann steht ihnen der Kalender nur für diese Rubriken zur Verfügung.',
+	'aucune_rubrique_mode_agenda' => 'In der Grundeinstellung können Events in alle Rubriken eingetragen werden. Wenn sie den Kalender gezielt für eine oder mehrere Rubriken aktivieren, dann steht ihnen der Kalender nur für diese Rubriken zur Verfügung.', # MODIF
 
 	// B
 	'bouton_annuler' => 'Abbrechen',
@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirm_suppression_inscription' => 'Wollen sie diese Anmeldung wirklich löschen?',
 	'confirm_suppression_inscription_toutes' => 'Wollen Sie wirklich alle Anmeldungen löschen?',
 	'connexion_necessaire_pour_inscription' => 'Um sich für den Event anmelden zu können müssen Sie sich anmelden.',
-	'creer_evenement' => 'Event neu anlegen',
+	'creer_evenement' => 'Neues Event anlegen',
 
 	// D
 	'date_fmt_agenda_label' => '<b class="day">@jour@</b> <b class="month">@mois@</b> <b class="year">@annee@</b>',
@@ -66,6 +66,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_titre' => 'Titel',
 	'evenements' => 'Events',
 	'evenements_a_venir' => 'In der Zukunft',
+	'evenements_corbeille_tous' => '@nb@ Events im Papierkorb',
+	'evenements_corbeille_un' => 'Ein Event im Papierkorb',
 	'evenements_depuis_debut' => 'Alle',
 	'explication_synchro_flux_ical' => 'Das Plugin Agenda beinhaltet eine iCal Feed der Events. Einige Klienten aktualisieren Termine nur, wenn eine Versionsnummer haben (die Änderungen anzeigt) im Feed enthalten ist. Um diese Versionsnummer  in den iCal-Feed zu integrieren muss die Versionskontrolle für Events aktiviert werden (im Menu Konfiguration > Versionen).',
 	'explication_synchro_flux_ical_titre' => 'Synchronisation des iCal Feed',

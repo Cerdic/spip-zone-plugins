@@ -103,7 +103,7 @@ function formulaires_editer_evenement_verifier_dist($id_evenement = 'new', $id_a
 	}
 
 	if (!$id_parent = intval(_request('id_parent'))) {
-		$erreurs['id_parent'] = _T('agenda:erreur_article_manquant');
+		if (!autoriser('creerorphelin', 'evenement')) $erreurs['id_parent'] = _T('agenda:erreur_article_manquant');
 	} else {
 		if (!autoriser('creerevenementdans', 'article', $id_parent)) {
 			$erreurs['id_parent'] = _T('agenda:erreur_article_interdit');
