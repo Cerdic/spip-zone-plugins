@@ -43,6 +43,10 @@
 #PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,newsletter,id,#ID_NEWSLETTER},data,'<div class="nettoyeur"></div>'}}
 
 #BOITE_FERMER
+
+#SET{enfants,''}
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,#ENV**{exec},objet,newsletter,id_objet,#ID_NEWSLETTER},data,#GET{enfants}})]})]
+
 [(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
 ]
