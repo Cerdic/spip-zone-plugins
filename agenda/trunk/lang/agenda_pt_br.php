@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_suivante' => 'ano seguinte',
 	'aucun_evenement' => 'nenhum evento',
 	'aucun_inscrit' => 'Nenhum inscrito',
-	'aucune_rubrique_mode_agenda' => 'Por padrão, todas as seções permitem usar os eventos. Se você ativar o modo agenda em uma ou mais seções, o gerenciamento dos eventos será limitado a esse ramo da estrutura.',
+	'aucune_rubrique_mode_agenda' => 'Por padrão, todas as seções permitem usar os eventos. Se você ativar o modo agenda em uma ou mais seções, o gerenciamento dos eventos será limitado a esse ramo da estrutura.', # MODIF
 
 	// B
 	'bouton_annuler' => 'Anular',
@@ -66,6 +66,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_titre' => 'Título',
 	'evenements' => 'Eventos',
 	'evenements_a_venir' => 'Futuros',
+	'evenements_corbeille_tous' => '@nb@ eventos na lixeira',
+	'evenements_corbeille_un' => 'Um evento na lixeira',
 	'evenements_depuis_debut' => 'Desde o início',
 	'explication_synchro_flux_ical' => 'O plugin Agenda oferece um fluxo de eventos no formato iCal. Alguns programas clientes só atualizam um evento se um número de versão (como indicação de que uma modificação foi feita) existir no fluxo. Para que esse número de versão seja integrado ao fluxo iCal gerado, você deve ativar o versionamento de revisões para os eventos (menu Configuração > Revisões).',
 	'explication_synchro_flux_ical_titre' => 'Sincronização do fluxo iCal',
