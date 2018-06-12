@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_subscribe' => 'Newsletter bestellen',
 	'bouton_unsubscribe' => 'Newsletter abbestellen',
+	'bouton_unsubscribe_all' => 'ALLEN Newslettern Abbestellen',
 
 	// L
 	'label_email_subscribe' => 'Email',

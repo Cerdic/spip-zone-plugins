@@ -38,7 +38,6 @@ function action_unsubscribe_mailsubscriber_dist($email = null, $identifiant = nu
 	$titre_liste = '';
 	$status = $infos['status'];
 	if ($identifiant){
-		$status = (isset($infos['subscriptions'][$identifiant]['status'])?$infos['subscriptions'][$identifiant]['status']:'');
 		$liste = sql_fetsel('id_mailsubscribinglist, titre_public', 'spip_mailsubscribinglists', 'identifiant=' . sql_quote($identifiant));
 		if ($liste['titre_public']) {
 			include_spip('inc/texte');
@@ -66,12 +65,24 @@ function action_unsubscribe_mailsubscriber_dist($email = null, $identifiant = nu
 			include_spip('inc/filtres');
 			if ($titre_liste) {
 				$titre = _T('mailsubscriber:unsubscribe_texte_confirmer_email_liste_1', $env);
+				// bouton de desinscription a cette liste si on y est abonne ET si plusieurs abonnements
+				if (isset($infos['subscriptions'][$identifiant]['status'])
+				  and $infos['subscriptions'][$identifiant]['status']=='on'
+				  and isset($infos['listes'])
+				  and count($infos['listes'])>1) {
+					$titre .= "<br /><br />" . bouton_action(_T('newsletter:bouton_unsubscribe'),
+							generer_action_auteur('confirm_unsubscribe_mailsubscriber',
+								mailsubscriber_base64url_encode($email . ":$identifiant:".time())));
+
+				}
 			} else {
 				$titre = _T('mailsubscriber:unsubscribe_texte_confirmer_email_1', $env);
 			}
-			$titre .= "<br /><br />" . bouton_action(_T('newsletter:bouton_unsubscribe'),
+
+			// bouton de desinscription globale
+			$titre .= "<br /><br />" . bouton_action(_T('newsletter:bouton_unsubscribe_all'),
 					generer_action_auteur('confirm_unsubscribe_mailsubscriber',
-						mailsubscriber_base64url_encode($email . ":$identifiant:".time())));
+						mailsubscriber_base64url_encode($email . "::".time())));
 		}
 		else {
 			$options['force'] = true;

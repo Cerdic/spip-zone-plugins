@@ -9,8 +9,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
- * Confirmer l'inscription d'un email deja en base
- * (appelle lors du double-optin : delegue a subscribe le changement de statut en valide)
+ * Confirmer la desinscription d'un email
+ *
+ * appelle par la page de desinscription pour eviter les deinscriptions intempestives
+ * par les fournisseurs de mail qui cliquent automatiquement sur les liens
+ * -> verifie que le clic n'a pas ete trop rapide (moins de 1s)
+ * -> valide la desinscription si ok, affiche un message sinon incitant l'humain a recliquer
  *
  * @param string $email
  * @param string $identifiant
