@@ -1,0 +1,28 @@
+[(#REM) 
+  Saisie permettant de sélectionner plusieurs pages uniques par leur identifiant
+  
+   utilisé pour les formulaires d'export de ieconfig
+   
+  ### /!\ boucle POUR (spip Bonux) ###
+	
+  Parametres :
+  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+  - cacher_option_intro : pas de premier option vide  (defaut:"")
+  - class : classe(s) css ajoutes au select
+  
+  Exemple d'appel :
+	[(#SAISIE{selection_pages_multiple,nom,
+		label=<:plugin:label:>,
+	})] 
+]
+
+[(#REM) defaut peut être une chaine (plusieurs valeurs ou pas) qu'on sait décomposer ]
+#SET{defaut, #ENV{defaut}}
+#SET{defaut, #GET{defaut}|is_string|?{(#GET{defaut}|saisies_chaine2tableau), (#GET{defaut}|sinon{#ARRAY})}}
+
+<select name="#ENV{nom}[]" id="champ_#ENV{nom}" multiple="multiple"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
+[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
+<BOUCLE_selection(ARTICLES){id_rubrique<0}{par titre}>
+	<option value="#PAGE" [(#PAGE|in_array{#ENV{valeur,#GET{defaut}}}|oui) selected="selected"]>[(#TITRE|typo)] (#PAGE)</option>
+</BOUCLE_selection>
+</select>
