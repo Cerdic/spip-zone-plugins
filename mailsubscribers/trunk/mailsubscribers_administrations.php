@@ -47,6 +47,10 @@ function mailsubscribers_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['1.1.2'] = array(
 		array('maj_tables', array('spip_mailsubscribinglists')),
 	);
+	$maj['1.1.3'] = array(
+		array('sql_alter','TABLE spip_mailsubscribinglists DROP anonyme'),
+		array('maj_tables', array('spip_mailsubscribinglists')),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

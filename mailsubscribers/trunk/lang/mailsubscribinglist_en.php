@@ -35,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_identifiant' => 'Id',
+	'label_titre_public' => 'Public title',
 	'label_auto_update_oui' => 'Automatic update',
 	'legend_configuration_adresse_envoi' => 'Sending Address when sending to this list',
 

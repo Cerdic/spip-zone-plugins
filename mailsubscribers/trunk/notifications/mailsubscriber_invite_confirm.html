@@ -14,7 +14,8 @@
 [(#SET{invite_email_from,<b>#ENV{invite_email_from}</b>})]
 [(#SET{nom_site_spip,[<a href="[(#URL_SITE_SPIP|url_absolue)]">(#NOM_SITE_SPIP)</a>]})]
 <BOUCLE_titreliste2(MAILSUBSCRIBINGLISTS){id_mailsubscribinglist}>
-<p><:mailsubscriber:confirmsubscribe_invite_texte_email_liste_1{invite_email_from=#GET{invite_email_from},email=#GET{email},nom_site_spip=#GET{nom_site_spip},titre_liste=#TITRE}:></p>
+#SET{titre_liste, #TITRE_PUBLIC|sinon{##ID_MAILSUBSCRIBINGLIST}}
+<p><:mailsubscriber:confirmsubscribe_invite_texte_email_liste_1{invite_email_from=#GET{invite_email_from},email=#GET{email},nom_site_spip=#GET{nom_site_spip},titre_liste=#GET{titre_liste}}:></p>
 </BOUCLE_titreliste2>
 <p><:mailsubscriber:confirmsubscribe_invite_texte_email_1{invite_email_from=#GET{invite_email_from},email=#GET{email},nom_site_spip=#GET{nom_site_spip}}:></p>
 <//B_titreliste2>

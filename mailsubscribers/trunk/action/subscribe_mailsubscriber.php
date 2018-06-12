@@ -38,9 +38,14 @@ function action_subscribe_mailsubscriber_dist($email = null, $identifiant = null
 	$status = $infos['status'];
 	if ($identifiant){
 		$status = (isset($infos['subscriptions'][$identifiant]['status'])?$infos['subscriptions'][$identifiant]['status']:'');
-		$titre_liste = sql_getfetsel('titre', 'spip_mailsubscribinglists', 'identifiant=' . sql_quote($identifiant));
-		include_spip('inc/texte');
-		$titre_liste = supprimer_numero(typo($titre_liste));
+		$liste = sql_fetsel('id_mailsubscribinglist, titre_public', 'spip_mailsubscribinglists', 'identifiant=' . sql_quote($identifiant));
+		if ($liste['titre_public']) {
+			include_spip('inc/texte');
+			$titre_liste = supprimer_numero(typo($liste['titre_public']));
+		}
+		else {
+			$titre_liste = '#' . $liste['id_mailsubscribinglist'];
+		}
 	}
 
 	if ($status == 'on') {

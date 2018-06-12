@@ -3,7 +3,7 @@
 <body>
 <div class="header">
 	<BOUCLE_titreliste(MAILSUBSCRIBINGLISTS){id_mailsubscribinglist}>
-	[(#ANONYME|=={non}|?{#SET{titre_liste, #TITRE}, #SET{titre_liste, ##ID_MAILSUBSCRIBINGLIST}})]
+	#SET{titre_liste, #TITRE_PUBLIC|sinon{##ID_MAILSUBSCRIBINGLIST}}
 	<p><:mailsubscriber:subscribe_titre_email_liste{titre_liste=#GET{titre_liste}}:></p>
 	</BOUCLE_titreliste>
 	<p><:mailsubscriber:subscribe_titre_email:></p>

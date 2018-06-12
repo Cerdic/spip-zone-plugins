@@ -10,9 +10,10 @@
 	<span dir='#LANG_DIR' class='#EDIT{identifiant} identifiant'><tt>(#IDENTIFIANT)</tt></span>
 </div>]
 
-[<div class="champ contenu_anonyme">
-	(#ANONYME|=={oui}|oui)<div><:mailsubscribinglist:label_anonyme:></div>
-</div>]
+<div class="champ contenu_descriptif[ (#TITRE_PUBLIC*|strlen|?{'',vide})]">
+	<div class='label'><:mailsubscribinglist:label_titre_public:></div>
+	<div dir='#LANG_DIR' class='#EDIT{titre_public} titre_public'>[(#TITRE_PUBLIC)]</div>
+</div>
 
 <div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
 <div class='label'><:info_descriptif:></div>

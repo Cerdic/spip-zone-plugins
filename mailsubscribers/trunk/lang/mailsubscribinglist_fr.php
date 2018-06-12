@@ -35,8 +35,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_updating' => 'Mise à jour en cours',
 
 	// L
-	'label_anonyme' => 'Cette liste est anonyme',
 	'label_identifiant' => 'Identifiant',
+	'label_titre_public' => 'Titre public',
 	'label_auto_update_oui' => 'Mise à jour automatique',
 	'legend_configuration_adresse_envoi' => 'Adresse d\'envoi pour les envois à cette liste',
 
