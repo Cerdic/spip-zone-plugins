@@ -10,7 +10,7 @@
 		[(#SET{attributs, data-selecteur="generique" data-select-php="oui" data-select-params="[(#GET{params})]"})]
 		
 		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
-			[(#SAISIE{input, url, obligatoire=oui,
+			[(#SAISIE{input, url,
 				label=<:selections_contenu:champ_url_label:>,
 				explication=<:selections_contenu:champ_url_explication:>,
 				attributs=#GET{attributs}})]

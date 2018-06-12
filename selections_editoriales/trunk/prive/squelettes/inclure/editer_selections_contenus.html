@@ -9,7 +9,7 @@
 			[(#CONFIG{activer_logos}|=={oui}|oui)
 				[<a class="ajax" title="<:info_telecharger_nouveau_logo|trim{:}:>" href="[(#SELF|parametre_url{editer_contenu,''}|parametre_url{editer_contenu_logo,#ENV{editer_contenu_logo}|=={#ID_SELECTIONS_CONTENU}|?{non,#ID_SELECTIONS_CONTENU}})]">(#LOGO_SELECTIONS_CONTENU|sinon{#CHEMIN{prive/images/rayures-gris.gif}}|image_reduire{60,60}|inserer_attribut{alt,<:info_telecharger_nouveau_logo|trim{:}:>}|inserer_attribut{class,spip_documents_left})</a>]
 			]
-			<h4 class="titrem"><span class="#EDIT{titre}"><a href="#URL">#TITRE</a></span></h4>
+			<h4 class="titrem"><span class="#EDIT{titre}">[(#URL|lien_ou_expose{#TITRE,#URL|non})]</span></h4>
 			<div class="descriptif #EDIT{descriptif}">#DESCRIPTIF</div>
 			[<div class="css #EDIT{css}"><code>(#CHAMP_SQL{css}|attribut_html)</code></div>]
 			[(#ENV{editer_contenu,non}|=={non}|oui)
