@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_suivante' => 'volgend jaar',
 	'aucun_evenement' => 'geen gebeurtenissen',
 	'aucun_inscrit' => 'Geen inschrijvingen',
-	'aucune_rubrique_mode_agenda' => 'Standaard kunnen aan elke rubriek gebeurtenissen worden toegevoegd.',
+	'aucune_rubrique_mode_agenda' => 'Standaard kunnen aan elke rubriek gebeurtenissen worden toegevoegd. Activeer je de agenda voor een of meer rubrieken, dan zal het beheer van evenementen tot die tak beperkt blijven.', # MODIF
 
 	// B
 	'bouton_annuler' => 'Annuleren',
@@ -66,6 +66,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_titre' => 'Titel',
 	'evenements' => 'Evenementen',
 	'evenements_a_venir' => 'Toekomstig',
+	'evenements_corbeille_tous' => '@nb@ evenementen naar de prullenbak',
+	'evenements_corbeille_un' => 'Eén evemenet naar de prullenbak',
 	'evenements_depuis_debut' => 'Alles',
 	'explication_synchro_flux_ical' => 'Plugin Agenda levert een stroom evenementen in iCal formaat. Sommige clients passen een evenement alleen aan bij een gewijzigd versienummer. Om dit nummer in de iCal flux te integreren, moet je de revisie optie voor evenementen inschakelen (menu Configuratie > Revisies).',
 	'explication_synchro_flux_ical_titre' => 'Synchronisatie van de iCal-flux',
