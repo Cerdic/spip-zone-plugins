@@ -93,7 +93,7 @@ function inc_odt2spip_generer_sortie($rep_dezip, $fichier_source = '') {
 	$Tarticle['date_redac'] = '0000-00-00 00:00:00';
 	$Tarticle['date'] = $Tarticle['date_modif'] = $date_jour;
 	$Tarticle['lang'] = $LanguePublication;
-	$Tarticle['statut'] = 'prop';
+	$Tarticle['statut'] = 'prepa';
 	$Tarticle['accepter_forum'] = 'non';
 
 	// traitements complementaires du texte de l'article
