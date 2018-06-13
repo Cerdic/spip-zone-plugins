@@ -125,13 +125,13 @@ class sfYaml
    *
    * @return string A YAML string representing the original PHP array
    */
-  public static function dump($array, $inline = 2)
+  public static function dump($array, $inline = 2, $indent = 2)
   {
     require_once dirname(__FILE__).'/sfYamlDumper.php';
 
-    $yaml = new sfYamlDumper();
+    $yaml = new sfYamlDumper($indent);
 
-    return $yaml->dump($array, $inline);
+    return $yaml->dump($array, $inline, 0);
   }
 }
 

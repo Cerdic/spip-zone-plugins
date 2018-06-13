@@ -26,7 +26,7 @@ function symfony_yaml_encode($structure, $options = array()) {
 
 	// Traitement des options du dump
 	if (empty($options['inline']) or (isset($options['inline']) and !is_int($options['inline']))) {
-		$options['inline'] = 2;
+		$options['inline'] = 3;
 	}
 	if (empty($options['indent']) or (isset($options['indent']) and !is_int($options['indent']))) {
 		$options['indent'] = 2;

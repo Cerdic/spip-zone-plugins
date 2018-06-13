@@ -20,12 +20,31 @@ require_once(dirname(__FILE__).'/sfYamlInline.php');
  */
 class sfYamlDumper
 {
+  protected $indentation;
+
+  /**
+   * Set indentation on creation.
+   * @fork correction pour coincider avec le fonctionnement de symfony v4
+   *       pas de risque car cette librairie n'évoluera plus
+   *
+   * @param  integer $indent The amount of spaces to use for indentation of nested nodes.
+   */
+  public function __construct($indentation = 2)
+  {
+    if ($indentation < 1) {
+      $this->indentation = 2;
+    } else {
+      $this->indentation = $indentation;
+    }
+
+  }
+
   /**
    * Dumps a PHP value to YAML.
    *
    * @param  mixed   $input  The PHP value
    * @param  integer $inline The level where you switch to inline YAML
-   * @param  integer $indent The level o indentation indentation (used internally)
+   * @param  integer $indent The level o indentation (used internally)
    *
    * @return string  The YAML representation of the PHP value
    */
@@ -50,7 +69,7 @@ class sfYamlDumper
           $prefix,
           $isAHash ? sfYamlInline::dump($key).':' : '-',
           $willBeInlined ? ' ' : "\n",
-          $this->dump($value, $inline - 1, $willBeInlined ? 0 : $indent + 2)
+          $this->dump($value, $inline - 1, $willBeInlined ? 0 : $indent + $this->indentation)
         ).($willBeInlined ? "\n" : '');
       }
     }

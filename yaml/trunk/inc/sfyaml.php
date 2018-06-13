@@ -25,16 +25,16 @@ function sfyaml_yaml_encode($structure, $options = array()) {
 
 	// Traitement des options
 	if (empty($options['inline']) or (isset($options['inline']) and !is_int($options['inline']))) {
-		$options['inline'] = 2;
+		$options['inline'] = 3;
 	}
 	if (empty($options['indent']) or (isset($options['indent']) and !is_int($options['indent']))) {
 		$options['indent'] = 2;
 	}
 
-	// On crée l'objet de dump.
-	$yaml = new sfYamlDumper();
+	// On crée l'objet de dump avec le paramètre d'indentation.
+	$yaml = new sfYamlDumper($options['indent']);
 
-	return $yaml->dump($structure, $options['inline'], $options['indent']);
+	return $yaml->dump($structure, $options['inline']);
 }
 
 
