@@ -283,11 +283,13 @@ function declarer_url_arbo_multidomaines_rec($url, $type, $parent, $type_parent,
 	// MODIF : on ne va pas jusqu'à $parent=0, on s'arrête au niveau supérieur sinon on retrouve la rubrique du site dans l'URL finale... ce qu'on ne veut pas.
 	$niveau_superieur = $parent;
 	if ($type == 'rubrique') {
-		if ($parent == 0) {
-			$niveau_superieur = 0;
+		if ($parent == '0') {
+			$niveau_superieur = '0';
 		} else {
-			$niveau_superieur = sql_getfetsel('id_parent', 'spip_urls', array('id_objet=' . intval($parent), "type='rubrique'"));
+			$niveau_superieur = sql_getfetsel('id_parent AS niveau_superieur', 'spip_urls', array('id_objet=' . intval($parent), "type='rubrique'"));
 		}
+	} elseif ($type == 'article') {
+		$niveau_superieur = '0';
 	}
 	if ($niveau_superieur == 0 or !($url_parent = declarer_url_arbo_multidomaines($type_parent ? $type_parent : 'rubrique', $parent, $contexte))) {
 		return rtrim($url, '/');
