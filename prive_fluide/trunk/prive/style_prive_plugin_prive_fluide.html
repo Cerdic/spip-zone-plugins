@@ -1,167 +1,114 @@
 [(#REM)<style>/*
-  Ce squelette definit les styles de l'espace prive
 
-  Note: l'entete "Vary:" sert a repousser l'entete par
-  defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
-  genant en cas de "rotation du cookie de session" apres
-  un changement d'IP (effet de clignotement).
+  Nouveau markup identique pour le mode étroit et large dans body.html :
+  - #conteneur
+      - #contenu
+      - #navigation
+      - #extra
 
-  ATTENTION: il faut absolument le charset sinon Firefox croit que
-  c'est du text/html !
+  On fait du mobile-first : pas de colonne à la base, puis on en met 2 ou 3 selon la largeur.
+  Pour les vieux navigateurs, on met du float comme en 40e, 
+  et du CSS grid pur les nouveaux.
+
 */]#CACHE{3600*100,cache-client}
-#HTTP_HEADER{Content-Type: text/css;charset=iso-8859-15}
+#HTTP_HEADER{Content-Type: text/css;charset=utf-8}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
 /*
-  ==========
-  conteneurs
-  ==========
-  Pleine largeur pour tout le monde !
-  Oui, on ignore les préférences utilisateur (de toute façon le mode « écran large » rendait le contenu central... plus étroit !).
+  ====
+  Base
+  ====
+  - On met tout en pleine largeur
+  - Pas de colonne (mobile first)
 */
 
+/* Containers en pleine largeur */
 body,
 body.large {
   min-width: auto;
 }
-
-.largeur, #conteneur, .table_page,
-.large .largeur, .large #conteneur, .large .table_page {
-  width: auto !important;
-}
-
-#bando_haut .largeur,
-#haut,
+.largeur,
 #conteneur,
-#pied .largeur,
-.table_page {
-  padding: 0 30px; /* = margin-left de #contenu */
-}
-
-.large #bando_haut .largeur,
+.table_page,
+.large .largeur,
 .large #conteneur,
-.large #haut,
-.large #pied .largeur,
 .large .table_page {
-  padding: 0 24px; /* = margin-left de #contenu */
-}
-
-
-/*
-  ======
-  layout
-  ======
-  On passe les 3 items #contenu, #navigation et #extra en flexbox.
-  De base, une colonne et on place #contenu en premier.
-*/
-
-#conteneur {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-#contenu, #navigation, #extra,
-.large #contenu, .large #navigation, .large #extra {
-  float: none;
   width: auto;
 }
+.largeur,
+.large .largeur {
+  padding: 0 1.5vw;
+}
 
-/* ordre des items */
-#contenu {
-  -webkit-box-ordinal-group: 2;
-      -ms-flex-order: 1;
-          order: 1;
-  margin-left: 0;
-}
-.large #contenu {
-  margin-left: 0;
-}
-#navigation {
-  -webkit-box-ordinal-group: 3;
-      -ms-flex-order: 2;
-          order: 2;
-}
+/* Pas de colonne */
+#contenu,
+#navigation,
 #extra {
-  -webkit-box-ordinal-group: 4;
-      -ms-flex-order: 3;
-          order: 3;
+  width: 100%;
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* prévisualisation du contenu éditorial */
-#wysiwyg {
-  max-width: 50em; /* ~70 caractères par ligne */
+/* Des blocs à limiter en largeur pour obtenir ~80 caractères max par ligne */
+#wysiwyg,
+/* .cadre-formulaire-editer, */
+.formulaire_spip textarea,
+.formulaire_spip .edition {
+  display: block;
+  max-width: 45em;
   margin-left: auto;
   margin-right: auto;
 }
 
 
 /*
-    ==========
-    Responsive
-    ==========
-    On passe en colonnes au-delà de 780px
-    Cette valeur est tirée de la largeur minimale de la page par défaut dans les styles vanilla de SPIP.
-    Quand #navigation ou #extra sont vides, le contenu central s'adapte pour prendre tout l'espace disponible.
-    Malheureusement on ne peut pas mettre de largeur en pourcentage pour les colonnes, sinon on a des colonnes fantomes en absence de contenu.
+  ==========
+  Responsive
+  ==========
 */
 
+
+/* 2 colonnes */ 
 @media (min-width: 780px) {
 
-  /* Conteneur */
-  #conteneur {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
+  /* D'abord le fallback pour les vieux navigateurs */
+  /* [TODO] */
+  
+  /* Ensuite le layout en CSS grid : 2 colonnes */
+  @supports (display: grid) {
+    #conteneur {
+      display: grid;
+      grid-gap: 0 1.5vw;
+      grid-template-columns: auto repeat(3, 1fr);
+      grid-template-rows: auto 1fr; /* la 1ère ligne doit se collapser */
+      grid-template-areas:
+        "navigation contenu contenu contenu"
+        "extra      contenu contenu contenu";
+    }
+    #contenu {
+      grid-area: contenu;
+    }
+    #navigation {
+      grid-area: navigation;
+    }
+    #extra {
+      grid-area: extra;
+    }
   }
+}
 
-   #contenu, #navigation, #extra {
-     width: auto !important;
-   }
+/* 3 colonnes */
+@media (min-width: 1200px) {
 
-  /* contenu principal */
-  #contenu {
-    -webkit-box-flex: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    -webkit-box-ordinal-group: 3;
-        -ms-flex-order: 2;
-            order: 2;
-    margin-left: 30px !important;
-  }
-
-  /* colonne */
-  #navigation, #extra {
-    width: initial !important; /* pas de colonne fantome en abscence de contenu */
-    max-width: 33%;
-    -webkit-box-flex: 0;
-    -ms-flex-positive: 0;
-    flex-grow: 0; /* pas de colonne fantome en abscence de contenu */
-    -ms-flex-negative: 1;
-    flex-shrink: 1;
-    -webkit-box-ordinal-group: 2;
-        -ms-flex-order: 1;
-            order: 1;
-  }
-  /* largeur de colonne : on cible le premier contenu pour éviter une colonne fantome en abscence de contenu */
-  #navigation > .ajaxbloc:first-child > * {
-    width: 22rem;
-  }
-
-  /* mode large : on place #extra à droite */
-  .large #extra {
-    -webkit-box-ordinal-group: 4;
-    -ms-flex-order: 3;
-    order: 3;
-    margin-left: 24px !important; /* = margin-left de #contenu */
-  }
-  .large #contenu {
-    margin-left: 24px !important;
+  @supports (display: grid) {
+    #conteneur {
+      grid-template-columns: auto repeat(3, 1fr) auto;
+      grid-template-rows: auto auto;
+      grid-template-areas:
+        "navigation contenu contenu contenu extra"
+        "navigation contenu contenu contenu extra";
+    }
   }
 
 }
