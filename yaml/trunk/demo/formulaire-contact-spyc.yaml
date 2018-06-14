@@ -1,0 +1,422 @@
+id_formulaire: "1"
+identifiant: contact_spyc
+titre: Contact form
+descriptif: ""
+css: ""
+message_retour: '<multi>[en]Thank you for contacting us![fr]Merci de nous avoir contactés !</multi>'
+saisies:
+  - 
+    options:
+      label: '<multi>[en]Your Name[fr]Votre nom</multi>'
+      placeholder: '<multi>[en]First Last[fr]Prénom Nom</multi>'
+      type: text
+      info_obligatoire: '*'
+      size: "40"
+      autocomplete: defaut
+      obligatoire: 'on'
+      nom: input_1
+    identifiant: @57ced83ce37ea
+    saisie: input
+  - 
+    options:
+      label: '<multi>[en]Job Function[fr]Fonction</multi>'
+      type: text
+      info_obligatoire: '*'
+      size: "40"
+      autocomplete: defaut
+      obligatoire: 'on'
+      nom: input_2
+    identifiant: @57ced8cf52849
+    saisie: input
+  - 
+    options:
+      label: '<multi>[en]Company[fr]Société</multi>'
+      type: text
+      info_obligatoire: '*'
+      size: "40"
+      autocomplete: defaut
+      obligatoire: 'on'
+      nom: input_4
+    identifiant: @57cf3f816910f
+    saisie: input
+  - 
+    options:
+      label: '<multi>[en]Address[fr]Adresse</multi>'
+      rows: "5"
+      cols: "40"
+      nom: textarea_2
+    identifiant: @57cfc1acd01ac
+    saisie: textarea
+  - 
+    options:
+      label: '<multi>[en]City[fr]Ville</multi>'
+      type: text
+      info_obligatoire: '*'
+      size: "40"
+      autocomplete: defaut
+      obligatoire: 'on'
+      nom: input_6
+    identifiant: @57cf4126e26f0
+    saisie: input
+  - 
+    options:
+      label: '<multi>[en]Zip code[fr]Code Postal</multi>'
+      type: text
+      info_obligatoire: '*'
+      size: "40"
+      autocomplete: defaut
+      obligatoire: 'on'
+      nom: input_7
+    verifier:
+      type: code_postal
+      options: [ ]
+    identifiant: @57cf42039c1c0
+    saisie: input
+  - 
+    options:
+      label: '<multi>[en]Country[fr]Pays</multi>'
+      datas: |
+        |Please Select...
+        Afganistan|Afghanistan
+        Albania|Albania
+        Algeria|Algeria
+        American Samoa|American Samoa
+        Andorra|Andorra
+        Angola|Angola
+        Anguilla|Anguilla
+        Antigua & Barbuda|Antigua & Barbuda
+        Argentina|Argentina
+        Armenia|Armenia
+        Aruba|Aruba
+        Australia|Australia
+        Austria|Austria
+        Azerbaijan|Azerbaijan
+        Bahamas|Bahamas
+        Bahrain|Bahrain
+        Bangladesh|Bangladesh
+        Barbados|Barbados
+        Belarus|Belarus
+        Belgium|Belgium
+        Belize|Belize
+        Benin|Benin
+        Bermuda|Bermuda
+        Bhutan|Bhutan
+        Bolivia|Bolivia
+        Bonaire|Bonaire
+        Bosnia & Herzegovina|Bosnia & Herzegovina
+        Botswana|Botswana
+        Brazil|Brazil
+        British Indian Ocean Ter|British Indian Ocean Ter
+        Brunei|Brunei
+        Bulgaria|Bulgaria
+        Burkina Faso|Burkina Faso
+        Burundi|Burundi
+        Cambodia|Cambodia
+        Cameroon|Cameroon
+        Canada|Canada
+        Canary Islands|Canary Islands
+        Cape Verde|Cape Verde
+        Cayman Islands|Cayman Islands
+        Central African Republic|Central African Republic
+        Chad|Chad
+        Channel Islands|Channel Islands
+        Chile|Chile
+        China|China
+        Christmas Island|Christmas Island
+        Cocos Island|Cocos Island
+        Colombia|Colombia
+        Comoros|Comoros
+        Congo|Congo
+        Cook Islands|Cook Islands
+        Costa Rica|Costa Rica
+        Cote DIvoire|Cote D'Ivoire
+        Croatia|Croatia
+        Cuba|Cuba
+        Curaco|Curacao
+        Cyprus|Cyprus
+        Czech Republic|Czech Republic
+        Denmark|Denmark
+        Djibouti|Djibouti
+        Dominica|Dominica
+        Dominican Republic|Dominican Republic
+        East Timor|East Timor
+        Ecuador|Ecuador
+        Egypt|Egypt
+        El Salvador|El Salvador
+        Equatorial Guinea|Equatorial Guinea
+        Eritrea|Eritrea
+        Estonia|Estonia
+        Ethiopia|Ethiopia
+        Falkland Islands|Falkland Islands
+        Faroe Islands|Faroe Islands
+        Fiji|Fiji
+        Finland|Finland
+        France|France
+        French Guiana|French Guiana
+        French Polynesia|French Polynesia
+        French Southern Ter|French Southern Ter
+        Gabon|Gabon
+        Gambia|Gambia
+        Georgia|Georgia
+        Germany|Germany
+        Ghana|Ghana
+        Gibraltar|Gibraltar
+        Great Britain|Great Britain
+        Greece|Greece
+        Greenland|Greenland
+        Grenada|Grenada
+        Guadeloupe|Guadeloupe
+        Guam|Guam
+        Guatemala|Guatemala
+        Guinea|Guinea
+        Guyana|Guyana
+        Haiti|Haiti
+        Hawaii|Hawaii
+        Honduras|Honduras
+        Hong Kong|Hong Kong
+        Hungary|Hungary
+        Iceland|Iceland
+        India|India
+        Indonesia|Indonesia
+        Iran|Iran
+        Iraq|Iraq
+        Ireland|Ireland
+        Isle of Man|Isle of Man
+        Israel|Israel
+        Italy|Italy
+        Jamaica|Jamaica
+        Japan|Japan
+        Jordan|Jordan
+        Kazakhstan|Kazakhstan
+        Kenya|Kenya
+        Kiribati|Kiribati
+        Korea North|Korea North
+        Korea Sout|Korea South
+        Kuwait|Kuwait
+        Kyrgyzstan|Kyrgyzstan
+        Laos|Laos
+        Latvia|Latvia
+        Lebanon|Lebanon
+        Lesotho|Lesotho
+        Liberia|Liberia
+        Libya|Libya
+        Liechtenstein|Liechtenstein
+        Lithuania|Lithuania
+        Luxembourg|Luxembourg
+        Macau|Macau
+        Macedonia|Macedonia
+        Madagascar|Madagascar
+        Malaysia|Malaysia
+        Malawi|Malawi
+        Maldives|Maldives
+        Mali|Mali
+        Malta|Malta
+        Marshall Islands|Marshall Islands
+        Martinique|Martinique
+        Mauritania|Mauritania
+        Mauritius|Mauritius
+        Mayotte|Mayotte
+        Mexico|Mexico
+        Midway Islands|Midway Islands
+        Moldova|Moldova
+        Monaco|Monaco
+        Mongolia|Mongolia
+        Montserrat|Montserrat
+        Morocco|Morocco
+        Mozambique|Mozambique
+        Myanmar|Myanmar
+        Nambia|Nambia
+        Nauru|Nauru
+        Nepal|Nepal
+        Netherland Antilles|Netherland Antilles
+        Netherlands|Netherlands (Holland, Europe)
+        Nevis|Nevis
+        New Caledonia|New Caledonia
+        New Zealand|New Zealand
+        Nicaragua|Nicaragua
+        Niger|Niger
+        Nigeria|Nigeria
+        Niue|Niue
+        Norfolk Island|Norfolk Island
+        Norway|Norway
+        Oman|Oman
+        Pakistan|Pakistan
+        Palau Island|Palau Island
+        Palestine|Palestine
+        Panama|Panama
+        Papua New Guinea|Papua New Guinea
+        Paraguay|Paraguay
+        Peru|Peru
+        Phillipines|Philippines
+        Pitcairn Island|Pitcairn Island
+        Poland|Poland
+        Portugal|Portugal
+        Puerto Rico|Puerto Rico
+        Qatar|Qatar
+        Republic of Montenegro|Republic of Montenegro
+        Republic of Serbia|Republic of Serbia
+        Reunion|Reunion
+        Romania|Romania
+        Russia|Russia
+        Rwanda|Rwanda
+        St Barthelemy|St Barthelemy
+        St Eustatius|St Eustatius
+        St Helena|St Helena
+        St Kitts-Nevis|St Kitts-Nevis
+        St Lucia|St Lucia
+        St Maarten|St Maarten
+        St Pierre & Miquelon|St Pierre & Miquelon
+        St Vincent & Grenadines|St Vincent & Grenadines
+        Saipan|Saipan
+        Samoa|Samoa
+        Samoa American|Samoa American
+        San Marino|San Marino
+        Sao Tome & Principe|Sao Tome & Principe
+        Saudi Arabia|Saudi Arabia
+        Senegal|Senegal
+        Seychelles|Seychelles
+        Sierra Leone|Sierra Leone
+        Singapore|Singapore
+        Slovakia|Slovakia
+        Slovenia|Slovenia
+        Solomon Islands|Solomon Islands
+        Somalia|Somalia
+        South Africa|South Africa
+        Spain|Spain
+        Sri Lanka|Sri Lanka
+        Sudan|Sudan
+        Suriname|Suriname
+        Swaziland|Swaziland
+        Sweden|Sweden
+        Switzerland|Switzerland
+        Syria|Syria
+        Tahiti|Tahiti
+        Taiwan|Taiwan
+        Tajikistan|Tajikistan
+        Tanzania|Tanzania
+        Thailand|Thailand
+        Togo|Togo
+        Tokelau|Tokelau
+        Tonga|Tonga
+        Trinidad & Tobago|Trinidad & Tobago
+        Tunisia|Tunisia
+        Turkey|Turkey
+        Turkmenistan|Turkmenistan
+        Turks & Caicos Is|Turks & Caicos Is
+        Tuvalu|Tuvalu
+        Uganda|Uganda
+        Ukraine|Ukraine
+        United Arab Erimates|United Arab Emirates
+        United Kingdom|United Kingdom
+        United States of America|United States of America
+        Uraguay|Uruguay
+        Uzbekistan|Uzbekistan
+        Vanuatu|Vanuatu
+        Vatican City State|Vatican City State
+        Venezuela|Venezuela
+        Vietnam|Vietnam
+        Virgin Islands (Brit)|Virgin Islands (Brit)
+        Virgin Islands (USA)|Virgin Islands (USA)
+        Wake Island|Wake Island
+        Wallis & Futana Is|Wallis & Futana Is
+        Yemen|Yemen
+        Zaire|Zaire
+        Zambia|Zambia
+        Zimbabwe|Zimbabwe
+      info_obligatoire: '*'
+      obligatoire: 'on'
+      nom: selection_1
+    identifiant: @57ceda5356004
+    saisie: selection
+  - 
+    options:
+      label: '<multi>[en]Email address[fr]Adresse Mail</multi>'
+      defaut: @
+      type: text
+      info_obligatoire: '*'
+      size: "40"
+      autocomplete: defaut
+      obligatoire: 'on'
+      nom: input_3
+    identifiant: @57cedae3b025d
+    saisie: input
+  - 
+    options:
+      label: '<multi>[en]Telephone[fr]Téléphone</multi>'
+      type: text
+      info_obligatoire: '*'
+      size: "40"
+      autocomplete: defaut
+      obligatoire: 'on'
+      nom: input_8
+    verifier:
+      type: telephone
+      options: ""
+    identifiant: @57cf42c3eae9c
+    saisie: input
+  - 
+    options:
+      label: '<multi>[en]Interested by[fr]Intérêt</multi>'
+      explication: '<multi>[en]Check the items of interest[fr]Indiquez les choix qui vous intéressent</multi>'
+      datas: |
+        IPs|<multi>[en]Intellectual Property blocks[fr]Blocs IP</multi>
+        Trainings|<multi>[en]Training Courses[fr]Formations</multi>
+        Design|<multi>[en]Design Services[fr]Services de Conception</multi>
+        Boards|<multi>[en]Board & Kits[fr]Cartes et Kits</multi>
+        Licensing|<multi>[en]IP Licensing[fr]Licence IP</multi>
+        IP_Eval|<multi>[en]IP Evaluation[fr]Evaluation IP</multi>
+        Other|<multi>[en]Other (specify below)[fr]Autres (préciser ci-dessous)</multi>
+      choix_alternatif_label: Autre choix
+      nom: checkbox_1
+    identifiant: @57cedbb1d7557
+    saisie: checkbox
+  - 
+    options:
+      label: '<multi>[en]Your message[fr]Votre message</multi>'
+      rows: "5"
+      cols: "40"
+      nom: textarea_1
+    identifiant: @57cedb444e085
+    saisie: textarea
+traitements:
+  email:
+    champ_sujet: ""
+    champ_sujet_valeurs_brutes: ""
+    exclure_champs_email: ""
+    pj: ""
+    masquer_liens: ""
+    activer_ip: 'on'
+    champ_destinataires: ""
+    destinataires_plus: jojo@toto.net
+    destinataires_selon_champ: ""
+    champ_courriel_destinataire_form: ""
+    champ_courriel: input_3
+    activer_vrai_envoyeur: 'on'
+    champ_nom: @input_1@
+    activer_accuse: 'on'
+    sujet_accuse: ""
+    courriel_envoyeur_accuse: ""
+    nom_envoyeur_accuse: ""
+  enregistrement:
+    resume_reponse: ""
+    multiple: 'on'
+    modifiable: ""
+    identification: cookie
+    anonymiser: ""
+    anonymiser_variable: ""
+    ip: 'on'
+    moderation: posteriori
+    analyse_exclure_champs: ""
+    effacement: ""
+    effacement_delai: ""
+    invalider: ""
+public: non
+apres: valeurs
+unicite: ""
+message_erreur_unicite: ""
+url_redirect: ""
+statut: publie
+date_creation: 2016-09-06 17:10:15
+maj: 2018-06-13 20:43:20
+composition: ""
+composition_lock: "0"

@@ -51,5 +51,5 @@ function libyaml_yaml_encode($structure, $options = array()) {
  */
 function libyaml_yaml_decode($input, $options = array()) {
 
-	return yaml_parse($input,-1);
+	return yaml_parse($input,0);
 }
