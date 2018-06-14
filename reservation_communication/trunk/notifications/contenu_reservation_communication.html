@@ -1,12 +1,12 @@
 #HTTP_HEADER{Content-Type:text/html}
 #INCLURE{fond=emails/inc-haut}
 <BOUCLE_communication(RESERVATION_COMMUNICATIONS){id_reservation_communication}{tout}>
-  [<div style="float:left; margin:0 1em 1em 0">(#LOGO_RESERVATION_COMMUNICATION|image_reduire{200})</div>]
-  #TEXTE
+	[<div style="float:left; margin:0 1em 1em 0">(#LOGO_RESERVATION_COMMUNICATION|image_reduire{200})</div>]
+	#TEXTE
 </BOUCLE_communication>
 <hr />
 <p><a href="#URL_SITE_SPIP">#URL_SITE_SPIP</a></p>
-</BOUCLE_art>
+
 [(#ENV{format_envoi}|=={plain}|oui)
 	#FILTRE{supprimer_tags|filtrer_entites|trim}]
 [(#ENV{format_envoi}|=={plain}|non)
