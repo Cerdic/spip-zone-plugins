@@ -1,14 +1,14 @@
 <B_notification>
 [(#BOITE_OUVRIR{
-    [(#CHEMIN_IMAGE{notification_evenement-32.png}|balise_img{'','cadre-icone'})]
-    ,'simple personnel infos'})]  
+		[(#CHEMIN_IMAGE{notification_evenement-32.png}|balise_img{'','cadre-icone'})]
+		,'simple personnel infos'})]
 <BOUCLE_notification(NOTIFICATIONS){id_notification}{statut?}>
-    <div class='infos'>
-        [(#SET{texte_objet,<:notifications_archive:titre_notification:>})]
-        <div class='numero'>
-            <:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_NOTIFICATION</p>
-        </div>
-    </div>
+		<div class='infos'>
+				[(#SET{texte_objet,<:notifications_archive:titre_notification:>})]
+				<div class='numero'>
+						<:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_NOTIFICATION</p>
+				</div>
+		</div>
 </BOUCLE_notification>
-#BOITE_FERMER     
+#BOITE_FERMER
 </B_notification>
