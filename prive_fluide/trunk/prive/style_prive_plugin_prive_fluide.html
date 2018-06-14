@@ -98,7 +98,9 @@ body.large {
     /* Hack : on met une largeur au contenu des colonnes latérales,
     ainsi quand elles sont vides, elles se collapsent */
     #navigation > .ajaxbloc > *,
-    #extra > .ajaxbloc > * {
+    #navigation > :not(.ajaxbloc),
+    #extra > .ajaxbloc > *,
+    #extra > :not(.ajaxbloc) {
       width: calc(18em + 2vw);
     }
   }
