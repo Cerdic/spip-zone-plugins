@@ -3,8 +3,8 @@
  * Définit les autorisations du plugin Réservation Comunications
  *
  * @plugin     Réservation Comunications
- * @copyright  2015
- * @author     Rainer
+ * @copyright  2015-2018
+ * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Reservation_communication\Autorisations
  */
