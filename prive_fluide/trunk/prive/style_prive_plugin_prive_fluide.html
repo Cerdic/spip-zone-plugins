@@ -95,6 +95,12 @@ body.large {
     #extra {
       grid-area: extra;
     }
+    /* Hack : on met une largeur au contenu des colonnes latérales,
+    ainsi quand elles sont vides, elles se collapsent */
+    #navigation > .ajaxbloc > *,
+    #extra > .ajaxbloc > * {
+      width: calc(18em + 2vw);
+    }
   }
 }
 
