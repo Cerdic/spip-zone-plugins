@@ -2,15 +2,21 @@
 <div class='infos'>
 [(#SET{texte_objet,<:reservation_communication:titre_reservation_communication:>})]
 <div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_RESERVATION_COMMUNICATION</p></div>
+
+
+[(#STATUT|=={envoye}|oui)
+	[(#FORMULAIRE_INSTITUER_OBJET{reservation_communications,#ID_RESERVATION_COMMUNICATION})]
+]
+
+[(#STATUT|=={envoye}|non)
 <div class="titre"><:reservation_communication:texte_changer_statut_reservation_communication:></div>
-
-  [(#SET{statuts, #ARRAY{
-      prepa,<:texte_statut_en_cours_redaction:>,
-      envoye,<:reservation_communication:texte_statut_envoye:>,
-      poubelle,<:texte_statut_poubelle:>,
-    }})]
-
-    [(#GET{statuts}|table_valeur{#STATUT})]
+	[(#SET{statuts,#ARRAY{
+			prepa,<:texte_statut_en_cours_redaction:>,
+			envoye,<:reservation_communication:texte_statut_envoye:>,
+			poubelle,<:texte_statut_poubelle:>,
+		}})]
+	[(#GET{statuts}|table_valeur{#STATUT})]
+]
 
 </div>
 </BOUCLE_reservation_communication>
