@@ -106,6 +106,7 @@ function action_dupliquer_objet_dist($objet = null, $id_objet = null) {
  */
 function objet_dupliquer($objet, $id_objet, $modifications=array(), $options=array()) {
 	include_spip('inc/filtres');
+	include_spip('action/editer_liens');
 	$id_objet_duplicata = false;
 	$cle_objet = id_table_objet($objet);
 	$id_objet = intval($id_objet);
