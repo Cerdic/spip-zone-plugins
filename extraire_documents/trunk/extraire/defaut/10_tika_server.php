@@ -48,7 +48,7 @@ function extraire_defaut_10_tika_server_extraire_dist($fichier, $infos) {
 	$loader = new \Composer\Autoload\ClassLoader();
 	
 	// On définit le bon chemin pour le namespace de la librairie nécessaire
-	$loader->addPsr4('Vaites\\ApacheTika\\', _DIR_PLUGIN_EXTRAIREDOC . 'lib/vaites/php-apache-tika/src');
+	$loader->addPsr4('Vaites\\ApacheTika\\', find_in_path('lib/vaites/php-apache-tika/src'));
 	$loader->register();
 	
 	// On récupère le client pour discuter avec Tika
@@ -57,8 +57,8 @@ function extraire_defaut_10_tika_server_extraire_dist($fichier, $infos) {
 	// On tente de récupérer le texte brut du fichier
 	try {
 		set_time_limit (0);
-		$contenu = $client->getText(_DIR_RACINE . $fichier);
-		$metadata = (array) $client->getMetadata(_DIR_RACINE . $fichier);
+		$contenu = $client->getText($fichier);
+		$metadata = (array) $client->getMetadata($fichier);
 		$meta = (array) $metadata['meta'];
 	}
 	catch (Exception $e) {

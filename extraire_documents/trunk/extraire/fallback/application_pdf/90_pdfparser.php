@@ -5,8 +5,8 @@
  **/
 function extraire_fallback_application_pdf_90_pdfparser_test_dist() {
 	if (
-		is_dir(_DIR_RACINE . 'lib/TCPDF-6.2.6')
-		and is_dir(_DIR_RACINE . 'lib/pdfparser-0.9.22/src')
+		find_in_path('lib/TCPDF-6.2.6')
+		and find_in_path('lib/pdfparser-0.9.22/src')
 	) {
 		return true;
 	}
@@ -35,14 +35,14 @@ function extraire_fallback_application_pdf_90_pdfparser_extraire_dist($fichier) 
     $loader = new \Composer\Autoload\ClassLoader();
 
     // register classes with namespaces
-    $loader->add('Smalot\PdfParser', _DIR_RACINE . 'lib/pdfparser-0.9.22/src');
+    $loader->add('Smalot\PdfParser', find_in_path('lib/pdfparser-0.9.22/src'));
     $loader->register();
 
     $parser = new \Smalot\PdfParser\Parser();
     //Tenter de lire le pdf
     try {
         set_time_limit (0);
-        $pdf = $parser->parseFile(_DIR_RACINE . $fichier);
+        $pdf = $parser->parseFile($fichier);
     }
     catch (Exception $e) {
         //Pour toute exception on s'arrete et on retourne un contenu vide

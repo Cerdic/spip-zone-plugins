@@ -27,7 +27,7 @@ function inc_extraire_document($document = array()) {
 		!isset($document['fichier'])
 		or !is_numeric($document['fichier'])
 	) {
-		$document = sql_fetsel("id_document,fichier", "spip_documents", "id_document = ".$document['id_document']);
+		$document = sql_fetsel("id_document,fichier", "spip_documents", "id_document=". intval($document['id_document']));
 	}
 	
 	if (empty($document)) {
@@ -36,9 +36,22 @@ function inc_extraire_document($document = array()) {
 	
 	include_spip('inc/distant');
 	include_spip('inc/documents');
-	
+
+	$fichier = '';
 	//Obtenir le fichier pour extraction
-	if (!$fichier = copie_locale(get_spip_doc($document['fichier']), 'test')) {
+	if($document['fichier']) {
+		if ($document['distant'] == 'oui') {
+			if ($fichier = copie_locale($document['fichier'])) {
+				// copie locale est la fonction derogatoire qui ne fournit pas un chemin relatif a la racine -> on corrige
+				$fichier = _DIR_RACINE . $fichier;
+			}
+		}
+		else {
+			$fichier = get_spip_doc($document['fichier']);
+		}
+	}
+
+	if (!$fichier) {
 		return false;
 	}
 	
@@ -48,13 +61,13 @@ function inc_extraire_document($document = array()) {
 
 	//Determiner les mime type non standard comme les vnd (docx, ....)
 	//http://fr.wikipedia.org/wiki/Type_MIME
-	$finfo = finfo_open(FILEINFO_MIME_TYPE,_DIR_PLUGIN_EXTRAIREDOC."finfo/magic"); // Demande le mime type
-	$mime = finfo_file($finfo, _DIR_RACINE.$fichier);
+	$finfo = finfo_open(FILEINFO_MIME_TYPE,find_in_path("finfo/magic")); // Demande le mime type
+	$mime = finfo_file($finfo, $fichier);
 
 	//Si on ne reconnait pas le mime type, on teste sur la base par défaut
 	if ($mime == "application/octet-stream") {
 		$finfo = finfo_open(FILEINFO_MIME_TYPE); // Demande le mime type
-		$mime = finfo_file($finfo, _DIR_RACINE.$fichier);
+		$mime = finfo_file($finfo, $fichier);
 	}
 	finfo_close($finfo);
 
@@ -67,7 +80,7 @@ function inc_extraire_document($document = array()) {
 	if ($memory_limit == -1) {
 		$memory_limit = '512M';
 	}
-	$file_size = filesize(_DIR_RACINE.$fichier);
+	$file_size = filesize($fichier);
 	if (preg_match('/^(\d+)(.)$/', $memory_limit, $matches)) {
 		if ($matches[2] == 'M') {
 			$memory_limit = (int)$matches[1] * 1024 * 1024; // nnnM -> nnn MB
