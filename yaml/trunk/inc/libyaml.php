@@ -20,11 +20,19 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function libyaml_yaml_encode($structure, $options = array()) {
 
 	// Traitement des options
+	// -- par défaut la librairie positionne l'indentation à 2 qui est la valeur par défaut
+	//    général du plugin.
 	if (!empty($options['indent']) and is_int($options['indent'])) {
 		ini_set('yaml.output_indent', strval($options['indent']));
 	}
 
-	return yaml_emit($structure);
+	// Encodage en YAML
+	$yaml = yaml_emit($structure);
+
+	// Suppression des --- et ... de début et fin.
+	$yaml = preg_replace(array(",^---[\r\n]*,", ",...$,"), array('', ''), $yaml);
+
+	return $yaml;
 }
 
 
@@ -37,7 +45,6 @@ function libyaml_yaml_encode($structure, $options = array()) {
  *        La chaîne YAML à décoder.
  * @param array $options
  *        Tableau associatif des options du parsing. Cette librairie n'accepte aucune option.
- *        - 'include'  : traiter récursivement l'inclusion de fichier YAML dans un autre.
  *
  * @return bool|mixed
  *        Structure PHP produite par le parsing de la chaîne YAML.

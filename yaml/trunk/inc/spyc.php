@@ -15,7 +15,6 @@ require_once _DIR_PLUGIN_YAML . 'vendor/autoload.php';
  * @param array $options
  *        Tableau associatif des options du dump. Cette librairie accepte:
  *        - 'indent' : nombre d'espaces pour chaque niveau d'indentation, 2 par défaut.
- *        - 'open_dashes' : indique si la chaine YAML commence par '---', false par défaut.
  *
  * @return string
  *        Chaîne YAML construite.
@@ -26,11 +25,8 @@ function spyc_yaml_encode($structure, $options = array()) {
 	if (empty($options['indent']) or (isset($options['indent']) and !is_int($options['indent']))) {
 		$options['indent'] = 2;
 	}
-	if (empty($options['open_dashes']) or (isset($options['open_dashes']) and !is_int($options['open_dashes']))) {
-		$options['open_dashes'] = false;
-	}
 
-	return Spyc::YAMLDump($structure, $options['indent'], false, $options['open_dashes']);
+	return Spyc::YAMLDump($structure, $options['indent'], 0, true);
 }
 
 
