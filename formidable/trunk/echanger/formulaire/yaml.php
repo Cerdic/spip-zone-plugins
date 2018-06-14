@@ -35,10 +35,13 @@ function echanger_formulaire_yaml_exporter_dist($id_formulaire) {
 }
 
 function echanger_formulaire_yaml_importer_dist($fichier) {
-	$yaml = '';
-	lire_fichier($fichier, $yaml);
+
+	// Initialisation
+	$id_formulaire = 0;
+	$erreur = '';
+
 	// Si on a bien recupere une chaine on tente de la decoder
-	if ($yaml) {
+	if (lire_fichier($fichier, $yaml) and $yaml) {
 		include_spip('inc/yaml');
 		$formulaire = yaml_decode($yaml);
 		// Si le decodage marche on importe alors le contenu
