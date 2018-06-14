@@ -40,17 +40,17 @@ body.large {
   padding: 0 1.5vw;
 }
 
-/* Pas de colonne */
+/* Pas de colonne
+   Obligé de mettre des !important à moins de cibler 50 variantes différentes
+   (.large #contenu, body.large .edition #contenu, etc.)
+*/
 #contenu,
 #navigation,
-#extra,
-.large #contenu,
-.large #navigation,
-.large #extra {
-  width: 100%;
-  float: none;
-  margin-left: auto;
-  margin-right: auto;
+#extra {
+  width: 100% !important;
+  float: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 /* Des blocs à limiter en largeur pour obtenir ~80 caractères max par ligne */
