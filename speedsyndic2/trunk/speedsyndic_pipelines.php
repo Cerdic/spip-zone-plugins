@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return array
  */
 function speedsyndic_taches_generales_cron($taches_generales){
-	spip_log("pipe ?","___speed");
+
 	include_spip("inc/config");
 	$config = lire_config("speedsyndic/");
 	if (isset($config['frequence'])) {
