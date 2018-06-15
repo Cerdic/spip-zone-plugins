@@ -289,7 +289,10 @@ function declarer_url_arbo_multidomaines_rec($url, $type, $parent, $type_parent,
 			$niveau_superieur = sql_getfetsel('id_parent AS niveau_superieur', 'spip_urls', array('id_objet=' . intval($parent), "type='rubrique'"));
 		}
 	} elseif ($type == 'article') {
-		$niveau_superieur = '0';
+		$id_parent = sql_getfetsel('id_parent', 'spip_rubriques','id_rubrique='.intval($parent));
+		if ($id_parent == '0') {
+			$niveau_superieur = '0';
+		}
 	}
 	if ($niveau_superieur == 0 or !($url_parent = declarer_url_arbo_multidomaines($type_parent ? $type_parent : 'rubrique', $parent, $contexte))) {
 		return rtrim($url, '/');
