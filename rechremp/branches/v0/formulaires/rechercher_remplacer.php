@@ -2,9 +2,16 @@
 
 include_spip('inc/utils');
 
+// texte figurant par défaut dans la zone de saisie 
 define("TXT_A_RECHERCHER", "votre recherche");
 
+// taille du contexte max affiché avant et après chaque extrait trouvé
+define("CONTEXTE_NB_CHARS", 10);
+
 function remplace_txt($entite, $id, $champs, $txt_search, $remplace, $remplace_par="") {
+	$n=intval(CONTEXTE_NB_CHARS);
+	$m=max($n-1,0);
+
 	$nom_table = "spip_".$entite;
 	if($entite=="article" || $entite=="rubrique" || $entite=="auteur")
 		$nom_table .= "s";
@@ -16,23 +23,31 @@ function remplace_txt($entite, $id, $champs, $txt_search, $remplace, $remplace_p
 		$select .= ', '.$nom_champ;
 	}
 
+	$pattern = "/(^.{0,$m}|.{".$n.'})'.preg_quote($txt_search, '/')."(.{0,$m}$|.{".$n.'})/m';
+
 	if($resultats = sql_select($select, $nom_table)) {
 		while($res = sql_fetch($resultats)) {
 			$nouvelles_valeurs = array();
-			$update = false;
-
+			$found = false;
+			$details = '';
 			// on parcourt tous les champs
 			foreach ($champs as $i => $nom_champ) {
 				$nb = 0;
+				
+				if ($m and preg_match_all($pattern, $res[$nom_champ], $matches))
+					$details .= '..'.implode ('...', $matches[0]).'.. ';
 				$nouvelles_valeurs[$nom_champ] = str_replace($txt_search, $remplace_par, $res[$nom_champ], $nb);
-				if($nb>0) $update = true;
+				if($nb>0) 
+					$found = true;
 			}
 
-			// Mise à jour d'un champ de la table
-			if($update) {
+			if($found) {
 				$retour .= "Texte trouv&eacute; dans <a href=\"".generer_url_entite($res[$id], $entite)."\">$entite ".$res[$id]."</a><br>";
+				// Mise à jour d'un champ de la table
 				if($remplace) 
 					sql_updateq($nom_table, $nouvelles_valeurs, $id."=".intval($res[$id]));
+				elseif ($m) 
+					$retour .= "<small style='margin-left: 2em'><small>".htmlspecialchars($details)."</small></small><br>";
 			}
 		}
 	}
