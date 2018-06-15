@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function speedsyndic_taches_generales_cron($taches_generales){
 
 	include_spip("inc/config");
-	$config = lire_config("speedsyndic/");
+	$config = lire_config("speedsyndic/", 600);
 	if (isset($config['frequence'])) {
 		$frequence = intval($config['frequence']);
 		if ($frequence < 30) {
