@@ -1,1 +1,7 @@
-<a href="[(#URL_ECRIRE{reservation_communication_edit,[(#VAL{evenements_reservations}|param_low_sec{#ENV{args}})]}|parametre_url{new,oui}|parametre_url{type,email})]" title="<:reservation_communication:envoyer_mail:>">[(#CHEMIN_IMAGE{email-16.png}|image_reduire{13})]</a>
+<a
+	href="[(#URL_ECRIRE{
+		reservation_communication_edit,
+		[(#VAL{evenements_reservations}|param_low_sec{#ENV{args}})]}|parametre_url{new,oui}|parametre_url{type,email})]"
+	title="<:reservation_communication:envoyer_mail:>">
+[(#CHEMIN_IMAGE{email-16.png}|image_reduire{13})]
+</a>
