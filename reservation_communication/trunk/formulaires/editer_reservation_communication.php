@@ -10,7 +10,7 @@
  */
 
 if (!defined('_ECRIRE_INC_VERSION'))
-  return;
+	return;
 
 include_spip('inc/actions');
 include_spip('inc/editer');
@@ -36,7 +36,7 @@ include_spip('inc/editer');
  *     Hash du formulaire
  */
 function formulaires_editer_reservation_communication_identifier_dist($id_reservation_communication = 'new', $id_rubrique = 0, $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
-  return serialize(array(intval($id_reservation_communication)));
+	return serialize(array(intval($id_reservation_communication)));
 }
 
 /**
@@ -64,50 +64,50 @@ function formulaires_editer_reservation_communication_identifier_dist($id_reserv
  *     Environnement du formulaire
  */
 function formulaires_editer_reservation_communication_charger_dist($id_reservation_communication = 'new', $id_rubrique = 0, $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
-  $valeurs = formulaires_editer_objet_charger('reservation_communication', $id_reservation_communication, $id_rubrique, $lier_trad, $retour, $config_fonc, $row, $hidden);
+	$valeurs = formulaires_editer_objet_charger('reservation_communication', $id_reservation_communication, $id_rubrique, $lier_trad, $retour, $config_fonc, $row, $hidden);
 
-  if ($id= _request('id_rubrique')) {
-    $valeurs['id_rubrique'] = $id;
-    $objet = 'rubrique';
-  }
-  elseif ($id = _request('id_article')) {
-    $valeurs['id_article'] = $id ;
-    $objet = 'article';
-  }
-  elseif ($id = _request('id_evenement')) {
-    $valeurs['id_evenement'] = $id;
-    $objet = 'evenement';
-  }
+	if ($id= _request('id_rubrique')) {
+		$valeurs['id_rubrique'] = $id;
+		$objet = 'rubrique';
+	}
+	elseif ($id = _request('id_article')) {
+		$valeurs['id_article'] = $id ;
+		$objet = 'article';
+	}
+	elseif ($id = _request('id_evenement')) {
+		$valeurs['id_evenement'] = $id;
+		$objet = 'evenement';
+	}
 
-  if ($statut_reservation = _request('statut') or $statut_reservation = _request('statut2')) {
-    $valeurs['statut_reservation'] = str_replace('-',',',$statut_reservation);
-  }
+	if ($statut_reservation = _request('statut') or $statut_reservation = _request('statut2')) {
+		$valeurs['statut_reservation'] = str_replace('-',',',$statut_reservation);
+	}
 
-  if ($id) {
-    $data = sql_fetsel('*','spip_' . $objet .'s','id_' .$objet . '=' . $id);
+	if ($id) {
+		$data = sql_fetsel('*','spip_' . $objet .'s','id_' .$objet . '=' . $id);
 
-    $valeurs['titre'] = supprimer_numero($data['titre']);
-    $valeurs['lang'] = isset($data['lang']) ? $data['lang'] : $GLOBALS['meta']['langue_site'];
-    $valeurs['id'] = $id;
-    $valeurs['_hidden'] .= '<input type="hidden" name="id" value="' .  $valeurs['id'] . '" />';
-  }
+		$valeurs['titre'] = supprimer_numero($data['titre']);
+		$valeurs['lang'] = isset($data['lang']) ? $data['lang'] : $GLOBALS['meta']['langue_site'];
+		$valeurs['id'] = $id;
+		$valeurs['_hidden'] .= '<input type="hidden" name="id" value="' .  $valeurs['id'] . '" />';
+	}
 
-  if(_request('type')) $valeurs['type'] = _request('type');
+	if(_request('type')) $valeurs['type'] = _request('type');
 
-  if ($objet) {
-    $valeurs['_hidden'] .= '<input type="hidden" name="objet" value="' . $objet . '" />';
-    $valeurs['_hidden'] .= '<input type="hidden" name="id_parent" value="' . $valeurs['id_rubrique'] . '" />';
-    $valeurs['_hidden'] .= '<input type="hidden" name="id_article" value="' . $valeurs['id_article'] . '" />';
-    $valeurs['_hidden'] .= '<input type="hidden" name="id_evenement" value="' . $valeurs['id_evenement'] . '" />';
-  }
+	if ($objet) {
+		$valeurs['_hidden'] .= '<input type="hidden" name="objet" value="' . $objet . '" />';
+		$valeurs['_hidden'] .= '<input type="hidden" name="id_parent" value="' . $valeurs['id_rubrique'] . '" />';
+		$valeurs['_hidden'] .= '<input type="hidden" name="id_article" value="' . $valeurs['id_article'] . '" />';
+		$valeurs['_hidden'] .= '<input type="hidden" name="id_evenement" value="' . $valeurs['id_evenement'] . '" />';
+	}
 
-  $valeurs['_hidden'] .= '<input type="hidden" name="statut_reservation" value="' . $valeurs['statut_reservation'] . '" />';
-  $valeurs['_hidden'] .= '<input type="hidden" name="type" value="' . $valeurs['type'] . '" />';
-  $valeurs['_hidden'] .= '<input type="hidden" name="lang" value="' . $valeurs['lang'] . '" />';
+	$valeurs['_hidden'] .= '<input type="hidden" name="statut_reservation" value="' . $valeurs['statut_reservation'] . '" />';
+	$valeurs['_hidden'] .= '<input type="hidden" name="type" value="' . $valeurs['type'] . '" />';
+	$valeurs['_hidden'] .= '<input type="hidden" name="lang" value="' . $valeurs['lang'] . '" />';
 
 
 
-  return $valeurs;
+	return $valeurs;
 }
 
 /**
@@ -136,7 +136,7 @@ function formulaires_editer_reservation_communication_charger_dist($id_reservati
  */
 function formulaires_editer_reservation_communication_verifier_dist($id_reservation_communication = 'new', $id_rubrique = 0, $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 
-  return formulaires_editer_objet_verifier('reservation_communication', $id_reservation_communication, array('titre'));
+	return formulaires_editer_objet_verifier('reservation_communication', $id_reservation_communication, array('titre'));
 
 }
 
@@ -165,5 +165,5 @@ function formulaires_editer_reservation_communication_verifier_dist($id_reservat
  *     Retours des traitements
  */
 function formulaires_editer_reservation_communication_traiter_dist($id_reservation_communication = 'new', $id_rubrique = 0, $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
-  return formulaires_editer_objet_traiter('reservation_communication', $id_reservation_communication, $id_rubrique, $lier_trad, $retour, $config_fonc, $row, $hidden);
+	return formulaires_editer_objet_traiter('reservation_communication', $id_reservation_communication, $id_rubrique, $lier_trad, $retour, $config_fonc, $row, $hidden);
 }

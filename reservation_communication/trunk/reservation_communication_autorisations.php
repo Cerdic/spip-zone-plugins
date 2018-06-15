@@ -135,7 +135,7 @@ function autoriser_rubrique_creercommunicationdans_dist($faire, $type, $id, $qui
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_communication_envoyer_dist($faire, $type, $id, $qui, $opt) {
-  return $qui['statut'] == '0minirezo';
+	return $qui['statut'] == '0minirezo';
 }
 
 ?>
