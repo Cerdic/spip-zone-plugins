@@ -32,7 +32,7 @@ function coupons_upgrade($nom_meta_base_version, $version_cible) {
 	
 	$maj = array();
 
-	$maj['create'] = array(array('maj_tables', array('spip_coupons')));
+	$maj['create'] = array(array('maj_tables', array('spip_coupons', 'spip_coupons_commandes')));
 	$maj['1.3.0']  = array(
 		array('maj_tables', array('spip_coupons')),
 		array('coupons_update_statut'),
