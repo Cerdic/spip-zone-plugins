@@ -27,8 +27,9 @@
 	}
 	#SET{menu_scans,
 		#ARRAY{
-			noisettes, Toutes les noisettes disponibles,
-			saisies, Toutes les saisies disponibles
+			noisettes, Toutes les noisettes,
+			saisies, Toutes les saisies,
+			pages, Toutes les pages noiZetier
 		}
 	}
 	#SET{menu_librairies,
@@ -67,25 +68,13 @@
 				env} />
 		</BOUCLE_test_simple>
 
-		<BOUCLE_test_saisies(CONDITION){si (#ENV{scan}|=={saisies})}>
-			<h2 class="h2">YAML DECODE : TOUTES LES SAISIES DISPONIBLES</h2>
-			#SET{dossier, saisies/}
+		<BOUCLE_test_scans(CONDITION){si #ENV{scan}|array_key_exists{#GET{menu_scans}}}>
 			<INCLURE{fond=demo/inc-decode_scan,
+				scan=#ENV{scan},
 				dossier=#GET{dossier},
-				label=Saisies,
 				menu_librairies=#GET{menu_librairies},
 				env} />
-		</BOUCLE_test_saisies>
-
-		<BOUCLE_test_noisettes(CONDITION){si (#ENV{scan}|=={noisettes})}>
-			<h2 class="h2">YAML DECODE : TOUTES LES NOISETTES DISPONIBLES</h2>
-			#SET{dossier, noisettes/}
-			<INCLURE{fond=demo/inc-decode_scan,
-				dossier=#GET{dossier},
-				label=Noisettes,
-				menu_librairies=#GET{menu_librairies},
-				env} />
-		</BOUCLE_test_noisettes>
+		</BOUCLE_test_scans>
 		</div>
 	</div>
 

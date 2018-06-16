@@ -1,6 +1,11 @@
 <h2 class="h2">YAML DECODE[ : (#ENV{test}|strtoupper)]</h2>
+#SET{options, #ARRAY{show_error, #EVAL{true}}}
+[(#ENV{test}|=={inclusion}|oui)
+	#SET{options, #GET{options}|array_merge{#ARRAY{include, #EVAL{true}}}}
+]
 <BOUCLE_tests(DATA) {source table, #ENV{librairies}}>
 	#SET{fichier, #ENV{fichier, demo/test_#VALEUR.yaml}}
+	#SET{options, #GET{options}|array_merge{#ARRAY{library, #VALEUR}}}
 	<h3 class="h3">LIBRAIRIE : [(#VALEUR) - ][FICHIER : (#GET{fichier})]</h3>
-	[<p>(#GET{fichier}|decoder_fichier_yaml{#ARRAY{library, #VALEUR, include, #EVAL{true}, show_error, #EVAL{true}}}|bel_env)</p>]
+	[<p>(#GET{fichier}|decoder_fichier_yaml{#GET{options}}|bel_env)</p>]
 </BOUCLE_tests>

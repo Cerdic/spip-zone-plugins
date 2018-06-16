@@ -9,7 +9,7 @@ contexte:
   - 'lang'
 parametres:
   - 'inclure:inclusion-introuvable.yaml'
-  - 'inclure:demo/test_inclure_inclusion.yaml'
+  - 'inclure:demo/test_inclusion_existante.yaml'
   -
     saisie: 'hidden'
     options:

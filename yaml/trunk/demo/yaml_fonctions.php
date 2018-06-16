@@ -20,20 +20,20 @@ function decoder_fichier_yaml($filename, $options = array()) {
 	$parsed = yaml_decode_file($file, $options);
 
 	$timestamp_fin = microtime(true);
-	$duree = $timestamp_fin - $timestamp_debut;
+	$duree = ($timestamp_fin - $timestamp_debut) * 1000;
 
-	return array('lib' => sinon($options['library'], 'sfyaml'), 'duree' => $duree*1000, 'yaml' => $parsed);
+	return array('lib' => sinon($options['library'], 'sfyaml'), 'duree' => "${duree} ms", 'yaml' => $parsed);
 }
 
-function comparer_decodage($fichier, $libraries) {
+function comparer_decodage($fichier, $libraries, $options = array()) {
 
 	include_spip('inc/yaml');
 
 	$compared = array();
 	$first = array();
-
 	foreach ($libraries as $_library) {
-		$parsed = yaml_decode_file($fichier, array('library' => $_library));
+		$options = array_merge($options, array('library' => $_library));
+		$parsed = yaml_decode_file($fichier, $options);
 		if (!$compared) {
 			$first = $parsed;
 			$compared[$_library] = 'référence';
