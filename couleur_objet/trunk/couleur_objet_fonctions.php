@@ -51,14 +51,14 @@ function balise_COULEUR($p) {
  *     Type de l'objet
  * @param int $id_objet
  *     Identifiant de l'objet
- * @param boolean $parent
- *     true pour chercher la couleur du parent
- * @param boolean $recursif
+ * @param boolean $fallback_parent
+ *     true pour chercher la couleur du parent en fallback
+ * @param boolean $fallback_recursif
  *     true pour chercher les parents récursivement
  * @return string|false
  *     La couleur ou false si rien trouvé
  */
-function objet_couleur($objet, $id_objet, $parent = false, $recursif = false) {
+function objet_couleur($objet, $id_objet, $fallback_parent = false, $fallback_recursif = false) {
 
 	include_spip('base/objets');
 
@@ -75,9 +75,9 @@ function objet_couleur($objet, $id_objet, $parent = false, $recursif = false) {
 	// Si besoin, on prend la couleur du parent
 	if (
 		!$couleur
-		and $parent
+		and $fallback_parent
 	) {
-		$couleur_objet = objet_couleur_parent($objet, $id_objet, $recursif);
+		$couleur_objet = objet_couleur_parent($objet, $id_objet, $fallback_recursif);
 	}
 
 	return $couleur_objet;
