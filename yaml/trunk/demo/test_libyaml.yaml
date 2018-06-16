@@ -19,10 +19,10 @@ String: Anyone's name, really.
 Int: 13
 BadHex: f0xf3
 Hex: 0xf3
-True: true
-False: false
+#True: true
+#False: false
 Zero: 0
-Null: NULL
+#Null: NULL
 NotNull: 'null'
 NotTrue: 'y'
 NotBoolTrue: 'true'

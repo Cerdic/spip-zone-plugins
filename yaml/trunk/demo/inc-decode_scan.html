@@ -1,0 +1,31 @@
+#SET{fichiers, #ENV{dossier}|find_all_in_path{'.+[.]yaml$'}}
+<B_scans>
+<table class="spip">
+	<caption><strong>Comparaisons des tableaux issus du decodage</strong></caption>
+	<thead>
+		<tr class="row_first">
+			<th>#GET{label}</th>
+		<BOUCLE_head(DATA) {source table, #ENV{menu_librairies}}>
+			<th>#VALEUR</th>
+		</BOUCLE_head>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_scans(DATA) {source table, #GET{fichiers}}>
+	#SET{comparaison, #VALEUR|comparer_decodage{#ENV{menu_librairies}|array_keys}}
+	<B_ligne_scan>
+		<tr>
+			<th>
+				[(#_scans:CLE|basename{.yaml})]
+			</th>
+	<BOUCLE_ligne_scan(DATA) {source table, #GET{comparaison}}>
+			<th>
+				[(#VALEUR)]
+			</th>
+	</BOUCLE_ligne_scan>
+		</tr>
+	</B_ligne_scan>
+</BOUCLE_scans>
+	</tbody>
+</table>
+</B_scans>

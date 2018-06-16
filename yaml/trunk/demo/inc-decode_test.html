@@ -1,0 +1,6 @@
+<h2 class="h2">YAML DECODE[ : (#ENV{test}|strtoupper)]</h2>
+<BOUCLE_tests(DATA) {source table, #ENV{librairies}}>
+	#SET{fichier, #ENV{fichier, demo/test_#VALEUR.yaml}}
+	<h3 class="h3">LIBRAIRIE : [(#VALEUR) - ][FICHIER : (#GET{fichier})]</h3>
+	[<p>(#GET{fichier}|decoder_fichier_yaml{#ARRAY{library, #VALEUR, include, #EVAL{true}, show_error, #EVAL{true}}}|bel_env)</p>]
+</BOUCLE_tests>
