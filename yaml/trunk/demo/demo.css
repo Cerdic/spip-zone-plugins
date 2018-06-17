@@ -48,4 +48,7 @@ div.notice{padding:1em;color: #514721;border:2px solid #ffd324;background-color:
 .menu-items .item a {text-decoration:none;padding:0 0 0 1em;}
 .menu-items .item a:hover {text-decoration:underline;}
 .menu-items .item .on {padding:0 0 0 1em;}
-
+div#footer ul {width: 24%; border-top: 1px solid #ccc; list-style: none; padding:0;}
+div#footer li {padding:0; border-bottom: 1px solid #ccc;}
+div#footer li a {color:#aaa; text-decoration: none;}
+div#footer li a:hover {color:#eee; text-decoration: underline; background-color: #666;}
