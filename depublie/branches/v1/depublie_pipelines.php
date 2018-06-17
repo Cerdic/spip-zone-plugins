@@ -82,12 +82,15 @@ function depublie_formulaire_charger($flux){
 function depublie_formulaire_verifier($flux){
 	if ($flux['args']['form'] == 'dater' && _request('changer')){
 		$k='date_depublie';
-		if(_request('sans_depublie')!=1 && _request('date_jour') && _request($k."_jour") && (dater_recuperer_date_saisie(_request('date_jour')) >= dater_recuperer_date_saisie(_request($k."_jour"))))
-			$flux[$k] = _T('depublie:erreur_date_superieure');
-		else if ($v=_request($k."_jour") AND !dater_recuperer_date_saisie($v))
-			$flux[$k] = _T('format_date_incorrecte');
-		elseif ($v=_request($k."_heure") AND !dater_recuperer_heure_saisie($v))
-			$flux[$k] = _T('format_heure_incorrecte');
+		if (_request('sans_depublie') != 1) {
+			if(_request('date_jour') && _request($k."_jour") && (dater_recuperer_date_saisie(_request('date_jour')) >= dater_recuperer_date_saisie(_request($k."_jour")))) {
+				$flux[$k] = _T('depublie:erreur_date_superieure');
+			} else if ($v=_request($k."_jour") AND !dater_recuperer_date_saisie($v)) {
+				$flux[$k] = _T('format_date_incorrecte');
+			} elseif ($v=_request($k."_heure") AND !dater_recuperer_heure_saisie($v)) {
+				$flux[$k] = _T('format_heure_incorrecte');
+			}
+		}
 	}
 	return $flux;
 }
