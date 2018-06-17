@@ -65,6 +65,7 @@
 			<INCLURE{fond=demo/inc-decode_test,
 				fichier=#ENV{fichier, #GET{fichier}},
 				librairies=#GET{librairies},
+				inclure=#ENV{fichier}|?{#EVAL{true}, #EVAL{false}},
 				env} />
 		</BOUCLE_test_simple>
 

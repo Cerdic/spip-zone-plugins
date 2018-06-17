@@ -22,7 +22,11 @@ function decoder_fichier_yaml($filename, $options = array()) {
 	$timestamp_fin = microtime(true);
 	$duree = ($timestamp_fin - $timestamp_debut) * 1000;
 
-	return array('lib' => sinon($options['library'], 'sfyaml'), 'duree' => "${duree} ms", 'yaml' => $parsed);
+	return array(
+		'lib' => sinon($options['library'], 'sfyaml'),
+		'fichier' => $file,
+		'duree' => "${duree} ms",
+		'yaml' => $parsed);
 }
 
 function comparer_decodage($fichier, $libraries, $options = array()) {
