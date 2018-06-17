@@ -118,6 +118,7 @@
 	{!par largeur}
 	{0,#GET{logos_auto}|?{2,3}}
 	{si #ENV{logos}|non}
+	{tous}
 >
 #SET{logos_auto, #GET{logos_auto}|push{#ARRAY{
 	url, #FICHIER,
