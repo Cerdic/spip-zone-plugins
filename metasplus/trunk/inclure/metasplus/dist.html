@@ -103,6 +103,7 @@
 	{id_objet}
 	{par titre}
 	{si #ENV{mots}|non}
+	{id_groupe !== #EVAL{_METASPLUS_EXCLURE_GROUPESMOTS}}
 >
 #SET{mots_auto, #GET{mots_auto}|push{#TITRE}}
 </BOUCLE_mots_objet>
