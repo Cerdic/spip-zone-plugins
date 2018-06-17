@@ -13,10 +13,11 @@ function ajouter_libyaml($librairies) {
 }
 
 function decoder_fichier_yaml($filename, $options = array()) {
-	$timestamp_debut = microtime(true);
 
 	include_spip('inc/yaml');
 	$file = find_in_path($filename);
+	$timestamp_debut = microtime(true);
+
 	$parsed = yaml_decode_file($file, $options);
 
 	$timestamp_fin = microtime(true);

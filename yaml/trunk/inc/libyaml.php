@@ -30,7 +30,7 @@ function libyaml_yaml_encode($structure, $options = array()) {
 	$yaml = yaml_emit($structure);
 
 	// Suppression des --- et ... de début et fin.
-	$yaml = preg_replace(array(",^---[\r\n]*,", ",...$,"), array('', ''), $yaml);
+	$yaml = preg_replace(array("#^\-\-\-.*?\n#s", "#\.\.\.\s*$#"), array('', ''), $yaml);
 
 	return $yaml;
 }
