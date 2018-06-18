@@ -42,7 +42,10 @@ function remplace_txt($entite, $id, $champs, $txt_search, $remplace, $remplace_p
 			}
 
 			if($found) {
-				$retour .= "Texte trouv&eacute; dans <a href=\"".generer_url_entite($res[$id], $entite)."\">$entite ".$res[$id]."</a><br>";
+				$url = generer_url_entite($res[$id], $entite);
+				if ($entite =='forum')
+					$url = str_replace ('debut_id_forum', 'id_forum', $url);
+				$retour .= "Texte trouv&eacute; dans <a href='$url'>$entite ".$res[$id]."</a><br>";
 				// Mise à jour d'un champ de la table
 				if($remplace) 
 					sql_updateq($nom_table, $nouvelles_valeurs, $id."=".intval($res[$id]));
