@@ -8,5 +8,5 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
-	'emb_pdf_titre' => 'Modèle calcul itinéraire',
+	'carto_itineraire_titre' => 'Modèle calcul itinéraire',
 );
