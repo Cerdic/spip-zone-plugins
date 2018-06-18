@@ -31,5 +31,8 @@
 	<pipeline nom="reservation_evenement_donnees_details" inclure="reservation_bank_pipelines.php" />
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/reservation_bank.php" />
+	
+	<chemin path="squelettes" />
+	<chemin path="" />
 
 </paquet>
