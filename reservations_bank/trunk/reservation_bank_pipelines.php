@@ -22,16 +22,6 @@ if (!defined('_ECRIRE_INC_VERSION'))
  */
 function reservation_bank_formulaire_charger($flux) {
 	$form = $flux['args']['form'];
-	/*if ($form == 'reservation') {
-		$flux['data']['checkout'] = _request('checkout');
-		if ($flux['data']['checkout'] = _request('checkout')) {
-			$flux['data']['editable'] = FALSE;
-			$flux['data']['message_ok'] .= recuperer_fond('inclure/paiement_reservation', array(
-				'id_reservation' => session_get('id_reservation'),
-				'cacher_paiement_public' => FALSE
-			));
-		}
-	}*/
 
 	if ($form == 'encaisser_reglement') {
 		$id_transaction = $flux['data']['_id_transaction'];
