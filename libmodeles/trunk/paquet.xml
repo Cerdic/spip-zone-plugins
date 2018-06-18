@@ -7,9 +7,6 @@
 	logo="prive/themes/spip/images/libmodeles-64.png"
 	documentation="https://contrib.spip.net/5011"
 >
-	<!--
-		Paquet généré le 2018-06-18 10:26:23
-	-->
 
 	<nom>Bibliothèque de modèles</nom>
 	<!-- Une bliblothèque pour tous les lier -->
@@ -17,7 +14,5 @@
 	<auteur lien='https://contrib.spip.net/RealET'>RealET</auteur>
 
 	<licence>GNU/GPL</licence>
-
-
 
 </paquet>
