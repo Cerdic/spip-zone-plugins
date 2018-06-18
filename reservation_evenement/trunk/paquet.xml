@@ -51,4 +51,7 @@
 
 	<menu nom="reservations" titre="reservation:titre_reservations" parent="menu_activite" icone="images/reservation-16.png" action="reservations" />
 	<menu nom="reservation_creer" titre="reservation:icone_creer_reservation" parent="outils_rapides" icone="images/reservation-new-16.png" action="reservation_edit" parametres="new=oui" />
+
+	<chemin path="squelettes" />
+	<chemin path="" />
 </paquet>
