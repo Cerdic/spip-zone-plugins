@@ -1,0 +1,18 @@
+<paquet
+	prefix="carto_itineraire"
+	categorie="edition"
+	version="1.0.0"
+	etat="stable"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="prive/themes/spip/images/carto_itineraire-64.png"
+	documentation="https://contrib.spip.net/4995"
+>
+
+	<nom>Modèle calcul itinéraire</nom>
+	<!-- Un modèle pour afficher un calcul d’itinéraire dans une page -->
+
+	<auteur lien='https://contrib.spip.net/RealET'>RealET</auteur>
+
+	<licence>GNU/GPL</licence>
+
+</paquet>

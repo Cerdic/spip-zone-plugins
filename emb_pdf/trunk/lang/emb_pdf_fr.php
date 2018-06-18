@@ -8,5 +8,5 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
-	'libmodeles_titre' => 'Bibliothèque de modèles',
+	'emb_pdf_titre' => 'Modèle PDF (visualiseur)',
 );
