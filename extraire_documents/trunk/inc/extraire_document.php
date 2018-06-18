@@ -25,9 +25,9 @@ function inc_extraire_document($document = array()) {
 	
 	if (
 		!isset($document['fichier'])
-		or !is_numeric($document['fichier'])
+		or !$document['fichier']
 	) {
-		$document = sql_fetsel("id_document,fichier", "spip_documents", "id_document=". intval($document['id_document']));
+		$document = sql_fetsel("id_document,fichier,distant", "spip_documents", "id_document=". intval($document['id_document']));
 	}
 	
 	if (empty($document)) {
