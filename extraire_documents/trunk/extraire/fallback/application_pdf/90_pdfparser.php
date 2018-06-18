@@ -5,8 +5,8 @@
  **/
 function extraire_fallback_application_pdf_90_pdfparser_test_dist() {
 	if (
-		find_in_path('lib/TCPDF-6.2.6')
-		and find_in_path('lib/pdfparser-0.9.22/src')
+		find_in_path('lib/TCPDF-6.2.17')
+		and find_in_path('lib/pdfparser-0.12.0/src')
 	) {
 		return true;
 	}
@@ -30,12 +30,12 @@ function extraire_fallback_application_pdf_90_pdfparser_extraire_dist($fichier) 
     if (!class_exists('Composer\\Autoload\\ClassLoader')) {
 		include_spip('lib/Composer/Autoload/ClassLoader');
 	}
-    include_spip('lib/TCPDF-6.2.6/tcpdf_parser');
+    include_spip('lib/TCPDF-6.2.17/tcpdf_parser');
 
     $loader = new \Composer\Autoload\ClassLoader();
 
     // register classes with namespaces
-    $loader->add('Smalot\PdfParser', find_in_path('lib/pdfparser-0.9.22/src'));
+    $loader->add('Smalot\PdfParser', find_in_path('lib/pdfparser-0.12.0/src'));
     $loader->register();
 
     $parser = new \Smalot\PdfParser\Parser();
