@@ -26,6 +26,8 @@ function inc_extraire_document($document = array()) {
 	if (
 		!isset($document['fichier'])
 		or !$document['fichier']
+		or !isset($document['distant'])
+		or !$document['distant']
 	) {
 		$document = sql_fetsel("id_document,fichier,distant", "spip_documents", "id_document=". intval($document['id_document']));
 	}
