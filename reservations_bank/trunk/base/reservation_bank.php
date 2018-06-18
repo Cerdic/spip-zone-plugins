@@ -3,7 +3,7 @@
  * Déclarations relatives à la base de données
  *
  * @plugin     Réservations Bank
- * @copyright  2015
+ * @copyright  2015-2018
  * @author     Rainer
  * @licence    GNU/GPL
  * @package    SPIP\Reservations_credits\Pipelines

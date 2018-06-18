@@ -3,7 +3,7 @@
  * Fonctions utiles au plugin Réservations Bank
  *
  * @plugin     Réservations Bank
- * @copyright  2015
+ * @copyright  2015-2018
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Reservation_bank\Fonctions
