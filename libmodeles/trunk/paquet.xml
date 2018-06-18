@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="prive/themes/spip/images/libmodeles-64.png"
-	documentation=""
+	documentation="https://contrib.spip.net/5011"
 >
 	<!--
 		Paquet généré le 2018-06-18 10:26:23
