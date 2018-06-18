@@ -1,0 +1,24 @@
+<style type="text/css">
+#itineraire_container #itineraire_map{width:100%;height:500px;margin:auto;}
+#itineraire_container #itineraire_panel{width:100%;margin:auto;}
+</style>
+<div id="itineraire_container">
+	<div id="itineraire_destinationForm">
+		<form action="#" method="get" name="direction" id="itineraire_direction">
+			<label for="itineraire_origin">Point de départ&nbsp;:</label>
+			<input type="text" name="origin" id="itineraire_origin" />
+			<label for="itineraire_destination">Destination&nbsp;:</label>
+			<input type="text" name="destination" id="itineraire_destination"[ value="(#ENV{destination})" readonly="readonly"] />
+			<input type="button" value="Calculer l'itinéraire" onclick="javascript:calculate_itineraire()" />
+		</form>
+	</div>
+	<div id="itineraire_panel"></div>
+	<div id="itineraire_map"[ data-title="(#ENV{destination})"][ data-lat="(#ENV{lat})"][ data-lng="(#ENV{lng})"]>
+		<p>Veuillez patienter pendant le chargement de la carte...</p>
+	</div>
+</div>
+
+<!-- Include Javascript -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?[key=(#ENV{apikey})&]callback=initialize_map_itineraire"
+  type="text/javascript"></script>
+<script type="text/javascript" src="#CHEMIN{modeles/itineraire.js}"></script>

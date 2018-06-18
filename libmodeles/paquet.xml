@@ -1,0 +1,23 @@
+<paquet
+	prefix="libmodeles"
+	categorie="edition"
+	version="1.0.0"
+	etat="stable"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="prive/themes/spip/images/libmodeles-64.png"
+	documentation=""
+>
+	<!--
+		Paquet généré le 2018-06-18 10:26:23
+	-->
+
+	<nom>Bibliothèque de modèles</nom>
+	<!-- Une bliblothèque pour tous les lier -->
+
+	<auteur lien='https://contrib.spip.net/RealET'>RealET</auteur>
+
+	<licence>GNU/GPL</licence>
+
+
+
+</paquet>
