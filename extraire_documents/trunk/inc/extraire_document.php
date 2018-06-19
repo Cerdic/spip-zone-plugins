@@ -11,7 +11,7 @@ include_spip('base/abstract_sql');
  * @param $document le document à trairer avec au moins un id et un fichier
  * @return Sdata un tableau de donnée, si non traité alors false
  */
-function inc_extraire_document($document = array()) {
+function inc_extraire_document_dist($document = array()) {
 	// Pour garder en mémoire les extracteurs déjà trouvés
 	static $extracteurs_ok = array();
 	
