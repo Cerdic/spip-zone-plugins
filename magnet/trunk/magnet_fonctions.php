@@ -35,6 +35,9 @@ function magnet_actif_sur_objet($type){
 function critere_magnet_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	if (magnet_actif_sur_objet($boucle->type_requete)){
+		if (strncmp($GLOBALS['connexions'][0]['type'], 'sqlite', 6) == 0) {
+			$boucle->group[] = 1;
+		}
 		$boucle->having[] = array($crit->not?"'='":"'<>'","'magnet'","0");
 	}
 }
