@@ -1,0 +1,547 @@
+[(#REM)
+<style>/*
+
+  Ce squelette remixe les styles de l'espace prive
+
+  Note: l'entete "Vary:" sert a repousser l'entete par
+  defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+  genant en cas de "rotation du cookie de session" apres
+  un changement d'IP (effet de clignotement).
+
+  ATTENTION: il faut absolument le charset sinon Firefox croit que
+  c'est du text/html !
+*/
+]
+#CACHE{3600 *100, cache-client}
+#HTTP_HEADER{Content-Type: text/css;charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+@font-face {
+	font-family: 'Lato';
+	src: url('#CHEMIN{webfonts/lato-black-webfont.woff2}') format('woff2'),
+	url('#CHEMIN{webfonts/lato-black-webfont.woff}') format('woff');
+	font-weight: 900;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Lato';
+	src: url('#CHEMIN{webfonts/lato-blackitalic-webfont.woff2}') format('woff2'),
+	url('#CHEMIN{webfonts/lato-blackitalic-webfont.woff}') format('woff');
+	font-weight: 900;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Lato';
+	src: url('#CHEMIN{webfonts/lato-bold-webfont.woff2}') format('woff2'),
+	url('#CHEMIN{webfonts/lato-bold-webfont.woff}') format('woff');
+	font-weight: 700;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Lato';
+	src: url('#CHEMIN{webfonts/lato-bolditalic-webfont.woff2}') format('woff2'),
+	url('#CHEMIN{webfonts/lato-bolditalic-webfont.woff}') format('woff');
+	font-weight: 700;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Lato';
+	src: url('#CHEMIN{webfonts/lato-italic-webfont.woff2}') format('woff2'),
+	url('#CHEMIN{webfonts/lato-italic-webfont.woff}') format('woff');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Lato';
+	src: url('#CHEMIN{webfonts/lato-regular-webfont.woff2}') format('woff2'),
+	url('#CHEMIN{webfonts/lato-regular-webfont.woff}') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/*=======================================
+  remix de l'espace privé
+========================================*/
+
+/*---------------------------------------
+  typo générale : Lato, 16px (1em) 
+----------------------------------------*/
+
+body {
+	font-family: 'Lato', 'Lucida Grande', Tahoma, Ubuntu, Arial, Verdana, sans-serif;
+	font-size: 1em;
+}
+
+.liste-objets tr td {
+	font-size: 1em;
+}
+
+.liste-objets tr > td:not(.principale):not(.titre) {
+	font-size: .9em;
+}
+.liste-objets tr > .date,
+.liste-objets tr > .auteur {
+	min-width: 130px;
+}
+
+#wysiwyg .champ,
+.preview {
+	font-size: 1em;
+}
+
+.formulaire_spip .toggle_box_link {
+	font-size: 0.9em;
+}
+
+.formulaire_spip .toggle_box_link button {
+	font-size: 1em;
+}
+
+#chemin {
+	font-size: 0.85em;
+}
+
+#chemin strong.on {
+	font-weight: normal;
+}
+
+.fiche_objet .formulaire_spip.formulaire_dater label,
+.fiche_objet .formulaire_spip.formulaire_dater .affiche {
+	font-size: 85%;
+}
+
+div.en_lignes {
+	font-size: 0.85em;
+}
+
+
+/*-------------------------------------- 
+  bandeau principal  
+----------------------------------------*/
+
+#bando_identite {
+	font-size: 0.9em;
+	letter-spacing: inherit;
+}
+
+#bando_navigation ul.deroulant > li a {
+	font-weight: normal;
+	font-size: 0.9em;
+}
+
+/*-------------------------------------- 
+  boites, listes  
+----------------------------------------*/
+
+.liste-objets {
+	border-radius: 5px;
+}
+
+.inner .liste-objets.articles {
+	margin-bottom: 0.5em;
+}
+
+/* espacer un peu les liens */
+.pagination {
+	padding: 4px 8px !important;
+	font-size: 0.9em !important;
+}
+
+.pagination a, .pagination strong.on {
+	padding: 0 6px !important;
+}
+
+h3.titrem,
+.lat .formulaire_spip h3.titrem {
+	padding-top: 12px;
+	padding-bottom: 12px;
+}
+
+.highlight > .inner {
+	box-shadow: none;
+}
+
+.inner .hd + .bd {
+	padding-top: 0;
+}
+
+.liste-plugins .liste-items {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+/*-------------------------------------- 
+  boites documents joints  
+----------------------------------------*/
+
+#documents_joints .item .titrem,
+#documents_joints .item .raccourcis,
+#documents_joints .item .actions,
+#documents_joints .item div.mode {
+	font-size: 0.85em;
+}
+
+#documents_joints .item .tourner button {
+	padding: 1px 4px;
+}
+
+/*-------------------------------------- 
+  Virer la plupart des icones  
+  sauf les boites de rubriques et
+  dans les barres d'onglets
+----------------------------------------*/
+
+.liste-objets .caption {
+	background-image: none !important;
+	padding-left: inherit !important;
+}
+
+a.plus_info,
+.cadre-icone {
+	display: none;
+}
+
+.sous-rub .cadre-icone,
+.barre_onglet .cadre-icone {
+	display: block;
+}
+
+.sous-rub h3.titrem a.titremancre {
+	padding: 8px 10px;
+	background-position: center;
+}
+
+.barre_onglet .cadre-icone {
+	top: 3px;
+	left: 6px;
+}
+
+.barre_onglet .cadre-icone + a,
+.barre_onglet .cadre-icone + strong {
+	padding-left: 38px;
+}
+
+/*-------------------------------------- 
+  Formulaires
+----------------------------------------*/
+
+.formulaire_spip input.text,
+.formulaire_spip input.password,
+.formulaire_spip textarea,
+.formulaire_spip select,
+.formulaire_spip .choix {
+	background: white;
+	padding: 0.5em;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+.formulaire_spip .choix {
+	border-bottom: none;
+	display: flex;
+	align-items: flex-start;
+}
+.formulaire_spip .choix > input {
+	margin-top: 0.4em;
+}
+.formulaire_spip .choix > label {
+	width: auto;
+}
+
+/* Labels plus larges */
+
+.formulaire_spip .editer, 
+.formulaire_spip .editer.gauche {
+	padding-left: 170px;
+}
+.formulaire_spip .editer.droite {
+	padding-right: 170px;
+}
+.formulaire_spip .editer > label, 
+.formulaire_spip .editer.gauche > label {
+	width: 144px;
+	margin-left: -160px;
+	margin-top: 0.25em;
+	display: inline-block;
+	float: left;
+}
+.formulaire_spip .editer.droite > label {
+	margin-right: -160px;
+}
+
+/* Labels longs */
+
+.formulaire_spip .long_label {padding-#ENV{left}:280px;}
+.formulaire_spip .long_label > label {width: 260px;margin-#ENV{left}:-270px;}
+
+/* Formulaires avec label en haut */
+/* les cas particuliers des edition pleines largeur */
+
+.formulaire_spip .editer_parent,
+.formulaire_spip .editer_groupe_mot,
+.formulaire_spip .editer_descriptif,
+.formulaire_spip .editer_chapo,
+.formulaire_spip .editer_texte,
+.formulaire_spip .editer_ps,
+.formulaire_spip .haut,
+.formulaire_spip .pleine_largeur { padding-#ENV{left}:10px;}
+
+.formulaire_spip .editer_parent label,
+.formulaire_spip .editer_groupe_mot label,
+.formulaire_spip .editer_descriptif label,
+.formulaire_spip .editer_chapo label,
+.formulaire_spip .editer_texte label,
+.formulaire_spip .editer_ps label,
+.formulaire_spip .haut label,
+.formulaire_spip .pleine_largeur>label {display: block;float: none;width:auto;margin-#ENV{left}: 0;}
+
+/* Fieldsets et legends */
+
+.formulaire_spip h3.legend,
+.formulaire_spip legend {
+	font-weight: 700;
+	font-size:   1.1925em;
+	padding: 0.25em 0.5em;
+	margin-bottom: .34625em;
+}
+.formulaire_spip legend {
+	width: calc(100% - 1em);
+	display: block;
+	overflow: hidden;
+}
+.formulaire_spip fieldset {
+	border: none;
+	border-top: none; /* à garder */
+}
+
+.lat .formulaire_spip .editer {
+	padding: .34625em 10px;
+}
+
+/*-------------------------------------- 
+  formulaires sur une seule colonne
+----------------------------------------*/
+
+/*
+.formulaire_spip .editer-groupe, 
+.formulaire_spip fieldset, 
+.formulaire_spip fieldset .editer-groupe, 
+.formulaire_spip .editer .boutons,
+.formulaire_spip .legend {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.formulaire_spip .editer,
+.formulaire_spip .editer.gauche,
+.formulaire_spip .editer.droite {
+	padding: 0.5em 0;	
+}
+.formulaire_spip .editer_parent {
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+
+.formulaire_spip .editer label, 
+.formulaire_spip .editer.gauche label,
+.formulaire_spip .editer.droite label {
+	display: block;
+	width: auto;
+	float: none;
+	margin: 0 0 0.25em 0;
+}
+
+.formulaire_spip .choix {
+	border-top: none;
+	border-bottom: none;
+}
+.formulaire_spip .choix label {
+	display: inline-block;
+	margin-bottom: 0;
+	vertical-align: middle;
+	margin-left: 0.25em;
+}
+
+.formulaire_spip h3:not(.titrem) {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+*/
+
+
+/*
+  CSS copiée du plugin prive_fluide de tcharlss
+  Nécessite une surcharge de prive/squelettes/body pour supprimer le div entourant #extra et l'intégrer dans #navigation
+*/
+
+/*=======================================
+  redimensionnement de l'espace privé
+========================================*/
+
+/*
+  Grande largeur pour tout le monde, on ignore les préférences utilisateur
+*/
+
+body,
+body.large {
+	min-width: auto;
+}
+
+* {
+	/*font-size: 1em !important;*/
+}
+
+.largeur, #conteneur, .table_page,
+.large .largeur, .large #conteneur, .large .table_page {
+	width: auto !important;
+	max-width: 1100px;
+}
+
+#bando_haut .largeur,
+#haut,
+#conteneur,
+#pied .largeur,
+.table_page {
+	padding: 0;
+}
+
+#bando_haut > div,
+#page .largeur {
+	padding: 0 1.5em;
+}
+
+#bando_outils {
+	width: auto;
+}
+
+/*=======================================
+  Layout
+========================================*/
+
+/*
+  On passe les 3 items #contenu, #navigation et #extra en flexbox.
+  De base, une colonne et on place #contenu en premier.
+*/
+
+#conteneur {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+}
+
+#contenu, #navigation, #extra {
+	float: none;
+	width: auto;
+}
+
+/* ordre des items */
+#contenu {
+	-webkit-box-ordinal-group: 2;
+	-ms-flex-order: 1;
+	order: 1;
+	margin-left: 0;
+}
+
+#navigation {
+	-webkit-box-ordinal-group: 3;
+	-ms-flex-order: 2;
+	order: 2;
+}
+
+#extra {
+	-webkit-box-ordinal-group: 4;
+	-ms-flex-order: 3;
+	order: 3;
+}
+
+/* prévisualisation du contenu éditorial */
+#wysiwyg {
+	max-width: 50em; /* ~70 caractères par ligne */
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/*=======================================
+  Responsive
+========================================*/
+
+/*
+    On passe en colonnes au-delà de 780px
+    Cette valeur est tirée de la largeur minimale de la page par défaut dans les styles vanilla de SPIP.
+    Quand #navigation ou #extra sont vides, le contenu central s'adapte pour prendre tout l'espace disponible.
+    Malheureusement on ne peut pas mettre de largeur en pourcentage pour les colonnes, sinon on a des colonnes fantomes en absence de contenu.
+*/
+
+@media (min-width: 780px) {
+
+	/* Conteneur */
+	#conteneur {
+		-webkit-box-orient: horizontal;
+		-webkit-box-direction: normal;
+		-ms-flex-direction: row;
+		flex-direction: row;
+	}
+
+	#contenu, #navigation, #extra {
+		width: auto !important;
+	}
+
+	/* contenu principal */
+	#contenu {
+		width: 70% !important;
+		-webkit-box-flex: 1;
+		-ms-flex-positive: 1;
+		flex-grow: 1;
+		-webkit-box-ordinal-group: 3;
+		-ms-flex-order: 2;
+		order: 2;
+		margin-left: 30px !important;
+	}
+
+	/* colonne */
+	#navigation, #extra {
+		/*width: initial !important; !* pas de colonne fantome en abscence de contenu *!*/
+		width: 30% !important;
+		-webkit-box-flex: 0;
+		-ms-flex-positive: 0;
+		flex-grow: 0; /* pas de colonne fantome en abscence de contenu */
+		-ms-flex-negative: 1;
+		flex-shrink: 1;
+		-webkit-box-ordinal-group: 2;
+		-ms-flex-order: 1;
+		order: 1;
+	}
+
+	/* largeur de colonne : on cible le premier contenu pour éviter une colonne fantome en abscence de contenu */
+	#navigation > .ajaxbloc:first-child > * {
+		/* width: 18 rem; */
+	}
+}
+
+/*
+  Bandeau identité sur petits écrans : chaque bloc sur une seule ligne
+ */
+@media (max-width: 780px) {
+	#bando_identite p.nom_site_spip,
+	#bando_identite p.session {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		width: 100%;
+		float: none;
+		text-align: left;
+	}
+
+	#bando_identite p.nom_site_spip a,
+	#bando_identite p.session a {
+		white-space: nowrap;
+	}
+}
