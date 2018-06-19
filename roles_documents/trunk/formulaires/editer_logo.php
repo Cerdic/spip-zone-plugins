@@ -161,7 +161,7 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 
 	// Valeurs du formulaire d'ajout de document
 	$charger_joindre_document = charger_fonction('charger', 'formulaires/joindre_document');
-	$valeurs_joindre_document = $charger_joindre_document('new', $id_objet, $objet);
+	$valeurs_joindre_document = $charger_joindre_document('new', $id_objet, $objet, 'choix');
 
 	// On fusionne les valeurs
 	$valeurs = array_merge($valeurs_joindre_document, $valeurs);
@@ -212,7 +212,7 @@ function formulaires_editer_logo_verifier_dist($objet, $id_objet, $retour = '', 
 
 	// Vérifications du formulaire d'ajout de document
 	$verifier_joindre_document = charger_fonction('verifier', 'formulaires/joindre_document');
-	$erreurs_joindre_document = $verifier_joindre_document('new', $id_objet, $objet);
+	$erreurs_joindre_document = $verifier_joindre_document('new', $id_objet, $objet, 'choix');
 
 	// On fusionnes les erreurs
 	$erreurs = array_merge($erreurs_joindre_document, $erreurs);
@@ -270,7 +270,7 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
 	// Traitements génériques du formulaire d'ajout de documents
 	// (ajout du doc dans la table, liaison avec l'objet, etc.)
 	$traiter_joindre_document = charger_fonction('traiter', 'formulaires/joindre_document');
-	$res_joindre_document = $traiter_joindre_document('new', $id_objet, $objet);
+	$res_joindre_document = $traiter_joindre_document('new', $id_objet, $objet, 'choix');
 
 	// En cas de succès, on ajoute le rôle sélectionné
 	if ($roles = _request('roles')
