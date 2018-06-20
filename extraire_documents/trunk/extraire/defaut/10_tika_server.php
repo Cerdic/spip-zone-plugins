@@ -53,6 +53,13 @@ function extraire_defaut_10_tika_server_extraire_dist($fichier, $infos) {
 	
 	// On récupère le client pour discuter avec Tika
 	$client = \Vaites\ApacheTika\Client::make($url_serveur, $port);
+
+	// verifier la memoire disponible : on a besoin de 3 fois la taille du fichier (estimation)
+	// TODO : verifier cette estimation pour ce parser
+	include_spip('inc/extrairedoc');
+	if (!extrairedoc_verifier_memoire_disponible(3 * filesize($fichier))) {
+		return '';
+	}
 	
 	// On tente de récupérer le texte brut du fichier
 	try {

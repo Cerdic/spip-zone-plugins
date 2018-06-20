@@ -38,6 +38,14 @@ function extraire_fallback_application_pdf_90_pdfparser_extraire_dist($fichier){
 	$loader->register();
 
 	$parser = new \Smalot\PdfParser\Parser();
+
+	// verifier la memoire disponible : on a besoin de 3 fois la taille du fichier (estimation)
+	// TODO : verifier cette estimation pour ce parser
+	include_spip('inc/extrairedoc');
+	if (!extrairedoc_verifier_memoire_disponible(3 * filesize($fichier))) {
+		return '';
+	}
+
 	//Tenter de lire le pdf
 	try {
 		set_time_limit(0);

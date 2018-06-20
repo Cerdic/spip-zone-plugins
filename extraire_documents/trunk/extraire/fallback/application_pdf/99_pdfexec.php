@@ -49,6 +49,13 @@ function extraire_fallback_application_pdf_99_pdfexec_extraire_dist($fichier) {
 		// on ouvre et on lit le .txt
 		$nouveaufichier = str_replace('.pdf', '.txt', $fichier);
 		if (file_exists($nouveaufichier) && is_readable($nouveaufichier)) {
+
+			// verifier la memoire disponible : on a besoin de 2 fois la taille du fichier texte (estimation)
+			include_spip('inc/extrairedoc');
+			if (!extrairedoc_verifier_memoire_disponible(2 * filesize($nouveaufichier))) {
+				return '';
+			}
+
 			$contenu = file_get_contents($nouveaufichier);
 			// TODO : comment connaitre l'encoding du fichier ?
 			include_spip('inc/charsets');
