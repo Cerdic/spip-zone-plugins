@@ -541,12 +541,19 @@
 					<p>Check me out! I'm a super cool Tab panel with text content!</p>
 				</div>
 				<div class="tabs-panel" id="panel2">
-					<p>two</p>
-					<img class="thumbnail" src="assets/img/rectangle-7.jpg">
+					[(#INCLURE{fond=modeles/carte_gis,
+						objets=point_libre,
+						lat=48.8566101,
+						lon=2.3514992,
+						zoom=16})]
 				</div>
 				<div class="tabs-panel" id="panel3">
-					<p>three</p>
-					<p>Check me out! I'm a super cool Tab panel with text content!</p>
+					[(#INCLURE{fond=modeles/carte_gis,
+						id=2,
+						objets=point_libre,
+						lat=47.8566101,
+						lon=2.3514992,
+						zoom=16})]
 				</div>
 				<div class="tabs-panel" id="panel4">
 					<p>four</p>
