@@ -94,14 +94,18 @@ function indexer_redindex_objet($objet,$id_objet){
 		}
 	}
 
-
 	// S'il existe un lien entre cet objet et un autre, réindexer l'autre
 	// note: ce n'est pas générique et ne peut probablement pas l'être
 	// car faut-il réindexer en job_queue *tous* les documents si on modifie
 	// le descriptif d'une rubrique ? on se limite pour le moment au cas
 	// des auteurs et mots-clés => réindexer les articles liés
 	// TODO: trouver mieux !? probleme de perf s'il y a 1000 articles attaches ?
-	if ($objet == 'mot') {
+	$config = @unserialize($GLOBALS['meta']['indexer']);
+
+	if ($objet == 'mot'
+	and $config['article']
+	and $config['article']['jointure_mots']
+	and $config['article']['jointure_mots']['activer'] == 'on') {
 		foreach(sql_allfetsel('id_objet', 'spip_mots_liens', array('objet="article"', 'id_mot='.intval($id_objet))) as $a) {
 			$objet = "article";
 			$id = $a['id_objet'];
@@ -114,7 +118,10 @@ function indexer_redindex_objet($objet,$id_objet){
 			);
 		}
 	}
-	if ($objet == 'auteur') {
+	if ($objet == 'auteur'
+	and $config['article']
+	and $config['article']['jointure_auteurs']
+	and $config['article']['jointure_auteurs']['activer'] == 'on') {
 		foreach(sql_allfetsel('id_objet', 'spip_auteurs_liens', array('objet="article"', 'id_auteur='.intval($id_objet))) as $a) {
 			$objet = "article";
 			$id = $a['id_objet'];
