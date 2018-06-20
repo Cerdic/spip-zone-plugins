@@ -58,9 +58,12 @@ function spip_foundation() {
         });
     });
 
-	$(".tabs").on("change.zf.tabs", function () {
-		map1.invalidateSize();
-	});
+    // Invalider les tailles de toutes les map GIS quand on change de tab
+    $(".tabs").on("change.zf.tabs", function () {
+        $(".carte_gis").each(function () {
+            $(this).get(0).map.invalidateSize();
+        });
+    });
 
     // Restaurer le deeplinking des tab Foundation (pour les version < 6.3.1)
     // En attendant que la fonction soit de retour officiellement
