@@ -9,9 +9,10 @@ include_spip('base/abstract_sql');
  *
  *
  * @param array $document le document à trairer avec au moins un id et un fichier
+ * @param string $callback_function
  * @return array Sdata un tableau de donnée, si non traité alors false
  */
-function inc_extraire_document_dist($document = array()) {
+function inc_extraire_document_dist($document = array(), $callback_function=null) {
 	// Pour garder en mémoire les extracteurs déjà trouvés
 	static $extracteurs_ok = array();
 	
@@ -134,7 +135,7 @@ function inc_extraire_document_dist($document = array()) {
 	}
 
 	if ($fonction_extraire) {
-		$contenu_filehash = substr(md5(basename($fichier) . ':' . filemtime($fichier) . ':' . filesize($fichier) . ':' . $fonction_extraire),0,8);
+		$contenu_filehash = substr(md5(basename($fichier) . ':' . filemtime($fichier) . ':' . filesize($fichier) . ':' . $fonction_extraire . ($callback_function? ':' . $callback_function : '')),0,8);
 		// si pas de contenu connu, ou si le hash du fichier a change (ou l'extracteur) ou var_mode
 		// on rejoue le parsing
 		if (!isset($document['contenu'])
@@ -145,7 +146,11 @@ function inc_extraire_document_dist($document = array()) {
 				$fonction_extraire
 				and $extraction = $fonction_extraire($fichier, $infos)
 				and is_array($extraction)
+				and isset($extraction['contenu'])
 			) {
+				if ($callback_function) {
+					$extraction['contenu'] = $callback_function($extraction['contenu']);
+				}
 				$infos = array_merge($infos, $extraction);
 				$infos['contenu_filehash'] = $contenu_filehash;
 			}
