@@ -119,6 +119,9 @@ div.en_lignes {
 	font-size: 0.85em;
 }
 
+.liste-objets table caption strong.caption {
+	font-size: 1.1em;
+}
 
 /*-------------------------------------- 
   bandeau principal  
@@ -130,7 +133,6 @@ div.en_lignes {
 }
 
 #bando_navigation ul.deroulant > li a {
-	font-weight: normal;
 	font-size: 0.9em;
 }
 
@@ -160,6 +162,7 @@ h3.titrem,
 .lat .formulaire_spip h3.titrem {
 	padding-top: 12px;
 	padding-bottom: 12px;
+	font-size: 1.1em;
 }
 
 .highlight > .inner {
@@ -198,7 +201,7 @@ h3.titrem,
 
 .liste-objets .caption {
 	background-image: none !important;
-	padding-left: inherit !important;
+	padding-#ENV{left}: inherit !important;
 }
 
 a.plus_info,
@@ -218,17 +221,25 @@ a.plus_info,
 
 .barre_onglet .cadre-icone {
 	top: 3px;
-	left: 6px;
+	#ENV{left}: 6px;
 }
 
 .barre_onglet .cadre-icone + a,
 .barre_onglet .cadre-icone + strong {
-	padding-left: 38px;
+	padding-#ENV{left}: 38px;
 }
 
 /*-------------------------------------- 
   Formulaires
 ----------------------------------------*/
+
+.entete-formulaire > .icone.#ENV{left} {
+	margin-#ENV{right}: 1em;
+}
+
+.formulaire_spip > h3.titrem {
+	margin-bottom: 0;
+}
 
 .formulaire_spip input.text,
 .formulaire_spip input.password,
@@ -256,7 +267,7 @@ a.plus_info,
 
 .formulaire_spip .editer, 
 .formulaire_spip .editer.gauche {
-	padding-left: 170px;
+	padding-#ENV{left}: 170px;
 }
 .formulaire_spip .editer.droite {
 	padding-right: 170px;
@@ -264,10 +275,10 @@ a.plus_info,
 .formulaire_spip .editer > label, 
 .formulaire_spip .editer.gauche > label {
 	width: 144px;
-	margin-left: -160px;
+	margin-#ENV{left}: -160px;
 	margin-top: 0.25em;
 	display: inline-block;
-	float: left;
+	float: #ENV{left};
 }
 .formulaire_spip .editer.droite > label {
 	margin-right: -160px;
@@ -303,9 +314,9 @@ a.plus_info,
 
 .formulaire_spip h3.legend,
 .formulaire_spip legend {
-	font-weight: 700;
-	font-size:   1.1925em;
-	padding: 0.25em 0.5em;
+	font-weight: normal;
+	font-size:   1.1em;
+	padding: 0.5em 10px;
 	margin-bottom: .34625em;
 }
 .formulaire_spip legend {
@@ -363,7 +374,7 @@ a.plus_info,
 	display: inline-block;
 	margin-bottom: 0;
 	vertical-align: middle;
-	margin-left: 0.25em;
+	margin-#ENV{left}: 0.25em;
 }
 
 .formulaire_spip h3:not(.titrem) {
@@ -391,10 +402,6 @@ body.large {
 	min-width: auto;
 }
 
-* {
-	/*font-size: 1em !important;*/
-}
-
 .largeur, #conteneur, .table_page,
 .large .largeur, .large #conteneur, .large .table_page {
 	width: auto !important;
@@ -411,10 +418,11 @@ body.large {
 
 #bando_haut > div,
 #page .largeur {
-	padding: 0 1.5em;
+	padding: 0 1em;
 }
 
-#bando_outils {
+#bando_outils,
+#bando_haut #bando_liens_rapides {
 	width: auto;
 }
 
@@ -447,7 +455,7 @@ body.large {
 	-webkit-box-ordinal-group: 2;
 	-ms-flex-order: 1;
 	order: 1;
-	margin-left: 0;
+	margin-#ENV{left}: 0;
 }
 
 #navigation {
@@ -503,7 +511,7 @@ body.large {
 		-webkit-box-ordinal-group: 3;
 		-ms-flex-order: 2;
 		order: 2;
-		margin-left: 30px !important;
+		margin-#ENV{left}: 30px !important;
 	}
 
 	/* colonne */
@@ -537,7 +545,7 @@ body.large {
 		flex-wrap: wrap;
 		width: 100%;
 		float: none;
-		text-align: left;
+		text-align:#ENV{left};
 	}
 
 	#bando_identite p.nom_site_spip a,
