@@ -106,12 +106,16 @@ function exec_mutualisation_dist() {
 			if ($cfg = @unserialize($meta['plugin'])) {
 				$plugins = array_keys($cfg);
 				ksort($plugins);
-				foreach ($plugins as $plugin) {
-					$lsplugs[strtolower($plugin)][] = $alias[$v];
-					$versionplug[strtolower($plugin)] = $cfg[$plugin]['version'];
-					// Spip n'est pas un plugin… Mais en fait oui.
-					// unset($lsplugs['spip']);
-					// unset($versionplug['spip']);
+				foreach ($plugins as $key => $plugin) {
+					if ((strtolower($plugin) == 'php') OR (trim(substr(strtolower($plugin), 0, 4)) == 'php:')) {
+						unset($plugins[$key]);
+					} else {
+						$lsplugs[strtolower($plugin)][] = $alias[$v];
+						$versionplug[strtolower($plugin)] = $cfg[$plugin]['version'];
+						// Spip n'est pas un plugin… Mais en fait oui.
+						// unset($lsplugs['spip']);
+						// unset($versionplug['spip']);
+					}
 				}
 				$cntplugins = count($plugins);
 				$plugins = strtolower(implode(', ', $plugins));
