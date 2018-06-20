@@ -8,8 +8,8 @@ include_spip('base/abstract_sql');
  * Extraire le contenu d'un document donné
  *
  *
- * @param $document le document à trairer avec au moins un id et un fichier
- * @return Sdata un tableau de donnée, si non traité alors false
+ * @param array $document le document à trairer avec au moins un id et un fichier
+ * @return array Sdata un tableau de donnée, si non traité alors false
  */
 function inc_extraire_document_dist($document = array()) {
 	// Pour garder en mémoire les extracteurs déjà trouvés
@@ -53,7 +53,7 @@ function inc_extraire_document_dist($document = array()) {
 		}
 	}
 
-	if (!$fichier) {
+	if (!$fichier or !file_exists($fichier)) {
 		return false;
 	}
 	
@@ -73,30 +73,23 @@ function inc_extraire_document_dist($document = array()) {
 	}
 	finfo_close($finfo);
 
-	//Ne pas traiter si la mémoire est insuffisante
-	//On doit avoir au moins 3 fois la taille du fichier de disponible avant traitement (choix empirique)
-	//http://stackoverflow.com/questions/10208698/checking-memory-limit-in-php
-	$memory_used = memory_get_usage();
-	$memory_limit = ini_get('memory_limit');
-	// S'il n'y a PAS de limite de mémoire on en invente une super large
-	if ($memory_limit == -1) {
-		$memory_limit = '512M';
-	}
-	$file_size = filesize($fichier);
-	if (preg_match('/^(\d+)(.)$/', $memory_limit, $matches)) {
-		if ($matches[2] == 'M') {
-			$memory_limit = (int)$matches[1] * 1024 * 1024; // nnnM -> nnn MB
-		}
-		else if ($matches[2] == 'K') {
-			$memory_limit = (int)$matches[1] * 1024; // nnnK -> nnn KB
-		}
-	}
-	$memory_available = $memory_limit - $memory_used - 3 * $file_size;
 
-	if ($memory_available < 0) {
-		return false;
+	// On cherche le contenu
+	$infos = array(
+		'mime-type' => $mime,
+		'contenu' => false,
+	);
+
+	// si on a deja un contenu connu (extraction stockee en base par l'appelant)
+	// l'utiliser en fallback
+	if (isset($document['contenu']) and $document['contenu']) {
+		$infos['contenu'] = $document['contenu'];
+		if (isset($document['contenu_filehash']) and $document['contenu_filehash']) {
+			$infos['contenu_filehash'] = $document['contenu_filehash'];
+		}
 	}
-	
+
+
 	// On cherche le bon extracteur de jus de fichier
 	// le test n'est fait qu'une seule fois par type MIME, on garde le résultat en mémoire
 	$chemin_mime = preg_replace('/[^\w_]+/','_', $mime); // on accepte seulement chiffre, lettre, et _
@@ -139,20 +132,25 @@ function inc_extraire_document_dist($document = array()) {
 			}
 		}
 	}
-	
-	// On cherche le contenu
-	$infos = array(
-		'mime-type' => $mime,
-		'contenu' => false,
-	);
-	
-	if (
-		$fonction_extraire
-		and $extraction = $fonction_extraire($fichier, $infos)
-		and is_array($extraction)
-	) {
-		$infos = array_merge($infos, $extraction);
+
+	if ($fonction_extraire) {
+		$contenu_filehash = substr(md5(basename($fichier) . ':' . filemtime($fichier) . ':' . filesize($fichier) . ':' . $fonction_extraire),0,8);
+		// si pas de contenu connu, ou si le hash du fichier a change (ou l'extracteur) ou var_mode
+		// on rejoue le parsing
+		if (!isset($document['contenu'])
+		  or !isset($document['contenu_filehash'])
+		  or $document['contenu_filehash'] !== $contenu_filehash
+		  or _VAR_MODE) {
+			if (
+				$fonction_extraire
+				and $extraction = $fonction_extraire($fichier, $infos)
+				and is_array($extraction)
+			) {
+				$infos = array_merge($infos, $extraction);
+				$infos['contenu_filehash'] = $contenu_filehash;
+			}
+		}
 	}
-	
+
 	return $infos;
 }
