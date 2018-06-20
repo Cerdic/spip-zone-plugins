@@ -130,7 +130,7 @@ function coupons_declarer_champs_extras($champs = array()) {
 		'options' =>
 			array(
 				'nom'        => 'bon_cadeau',
-				'label_case' => _T('coupons:bon_cadeau'),
+				'label_case' => _T('coupons:generer_bon_cadeau'),
 				'li_class'   => 'pleine_largeur',
 				'valeur_oui' => 'on',
 				'sql'        => 'varchar(3) DEFAULT \'\' NOT NULL',
