@@ -53,7 +53,13 @@ function autolang_utiliser_langue_visiteur() {
 }
 
 function autolang_aiguiller(){
+	// Ne rien faire si la langue est déjà définie
 	if (_request('lang')) return;
+	// Ne rien faire dans l'espace privé
+	if (test_espace_prive()) return;
+	// Pour ne rien faire si appelé depuis la ligne de commande (ex : SPIP-cli)
+	if (php_sapi_name() === 'cli' OR defined('STDIN')) return;
+	
 	$langue = (isset($_COOKIE['spip_lang']) ? $_COOKIE['spip_lang'] : '');
 	if (!$langue) {
 		include_spip('inc/lang');
