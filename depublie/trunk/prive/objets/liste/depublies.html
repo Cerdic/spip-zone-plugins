@@ -1,0 +1,44 @@
+[(#AUTORISER{configurer,_depublies}|sinon_interdire_acces)]
+
+[(#SET{defaut_tri,#ARRAY{
+	date_depublie,#ENV{date_sens,-1},
+	num titre,1,
+	points,-1
+}})
+]<B_liste_depublie>
+#ANCRE_PAGINATION
+<div class="liste-objets articles">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{depublie:info_1_objet,depublie:info_nb_objets}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='titre principale' scope='col'>[(#TRI{num titre,<:info_titre:>,ajax})]</th>
+			<th class='objet' scope='col'>[(#TRI{OBJET,<:depublie:info_objet:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{ID_OBJET,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='statut'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>"><:depublie:statut_futur:></span>,ajax})]</th>
+			<th class='date secondaire' scope='col'>[(#TRI{date_depublie,<:depublie:date_depublie:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_depublie(DEPUBLIES){objet?}{where?}{tri #ENV{par,date_depublie},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
+		[(#LANG|changer_typo)]
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='titre principale'>[(#LOGO_ARTICLE|image_reduire{20,26})]<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]" 
+			title="<:info_numero_abbreviation|attribut_html:> #ID_OBJET">[(#RANG). ]#INFO_TITRE{#OBJET,#ID_OBJET}</a> [(#ENV{lang}|=={#LANG}|non) &#40;#LANG&#41;]</td>
+			<td class='objet'>#OBJET</td>
+			<td class='id'>[(#AUTORISER{modifier,#OBJET,#ID_OBJET}|?{
+				<a href="[(#URL_ECRIRE{article_edit,ID_OBJET=#ID_OBJET})]">#ID_OBJET</a>,
+				#ID_OBJET
+			})]</td>
+			<td class='statut'>[(#STATUT|puce_statut{0,rien,0})]</td>
+			<td class='date secondaire'>[(#DATE_DEPUBLIE|affdate_jourcourt)]</td>
+		</tr>
+	</BOUCLE_liste_depublie>
+	[(#REM|changer_typo)]
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{#ENV{pagination,prive}})</p>]
+</div>
+</B_liste_depublie>[
+<div class="liste-objets articles caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_depublie>

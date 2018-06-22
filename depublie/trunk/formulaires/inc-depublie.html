@@ -1,0 +1,33 @@
+[(#REM) 
+	On affiche ce morceau dans le formulaire dater des articles uniquement si la ou les rubriques/ le ou les secteurs sont ceux configurés
+]
+[(#AUTORISER{depublierafficher,#ENV{objet},#ENV{id_objet}}|oui)
+	[(#SET{name,date_depublie})][(#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}})]
+	<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+		<label for="#GET{name}"><:depublie:texte_date_depublication:> #AIDER{artdate_depublie}</label>[
+		<span class='erreur_message'>(#GET{erreurs})</span>]
+		<span class="affiche"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>
+		[(#ENV*{afficher_#GET{name}}|affdate|sinon{<:jour_non_connu_nc:>})]
+		</span>
+		[(#ENV{editable})
+		<span class="input editable"[(#ENV{_saisie_en_cours}|non)style="display:none;"]>
+			<span class="saisie_redac"[(#ENV{sans_depublie}|oui)style="display:none;"]>
+				<input type="text" class="text date" name="#GET{name}_jour" id="#GET{name}_jour" value="#ENV{#GET{name}_jour}" size="10"
+					onchange="if (jQuery(this).val() == '0000') jQuery(this).val('');" />
+				<input type="text" class="text heure time" name="#GET{name}_heure" id="#GET{name}_heure" value="#ENV{#GET{name}_heure}" size="5"
+					onchange="if (jQuery(this).val() == '00') jQuery(this).val('');"/>
+					<br />
+			</span>
+			<span class="choix">
+				<input type="checkbox" name="sans_depublie" value="1"[(#ENV{sans_depublie}|oui)checked="checked"] id="sans_depublie"
+							onchange="if (jQuery(this).prop('checked'))  jQuery(this).parent().siblings().hide('fast'); 
+							else { jQuery(this).parent().siblings().show('fast');
+								if (jQuery('#' + '#GET{name}_heure').val() == '00') jQuery('#' + '#GET{name}_heure').val('');
+								if (jQuery('#' + '#GET{name}_jour').val() == '0000') jQuery('#' + '#GET{name}_jour').val('');
+							}"
+							/>
+				<label for="sans_depublie" style='text-transform:none'><:depublie:texte_date_depublication_nonaffichee:></label>
+			</span>
+		</span>]
+	</div>
+]
