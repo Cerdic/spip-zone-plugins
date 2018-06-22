@@ -32,8 +32,7 @@ function formulaires_motscreer_traiter_dist() {
 	$mots = array_filter(preg_split('#[\r\n]#',_request('mots')));
 
 	foreach ($mots as $mot) {
-		$id_mot = mot_inserer($id_groupe);
-		mot_modifier($id_mot,array('titre' => $mot));
+		mot_inserer($id_groupe, array('titre' => $mot));
 	}
 	
 	return array(
