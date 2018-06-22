@@ -128,10 +128,12 @@
 	|image_reduire{#GET{largeur},#GET{hauteur}}
 	|extraire_attribut{src}
 	|supprimer_timestamp}
+#SET{finfo,#EVAL{FILEINFO_MIME_TYPE}|finfo_open}
+#SET{mimetype,#GET{finfo}|finfo_file{#GET{src}}}
 [<meta property="og:image" content="(#GET{src}|url_absolue)" />]
 [<meta property="og:image:width" content="(#GET{src}|largeur)" />]
 [<meta property="og:image:height" content="(#GET{src}|hauteur)" />]
-[<meta property="og:image:type" content="(#GET{src}|mime_content_type)" />]
+[<meta property="og:image:type" content="(#GET{mimetype})" />]
 [<meta property="og:image:alt" content="(#VALEUR{alt}|couper{80}|attribut_html)" />]
 </BOUCLE_logos_opengraph>
 <BOUCLE_article_opengraph(CONDITION) {si #GET{og-type}|=={article}}>
