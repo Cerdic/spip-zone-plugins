@@ -32,7 +32,12 @@ function formulaires_motscreer_traiter_dist() {
 	$mots = array_filter(preg_split('#[\r\n]#',_request('mots')));
 
 	foreach ($mots as $mot) {
-		mot_inserer($id_groupe, array('titre' => $mot));
+		if(version_compare($GLOBALS['spip_version_branche'],'3.1','<')){
+			$id_mot = mot_inserer($id_groupe);
+			mot_modifier($id_mot,array('titre' => $mot));
+		} else {
+			mot_inserer($id_groupe, array('titre' => $mot));
+		}
 	}
 	
 	return array(
