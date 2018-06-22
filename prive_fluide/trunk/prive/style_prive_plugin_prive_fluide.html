@@ -7,7 +7,7 @@
       - #extra
 
   On fait du mobile-first : pas de colonne à la base, puis on en met 2 ou 3 selon la largeur.
-  Pour les vieux navigateurs, on met du float comme en 40e, 
+  On met du float comme en 40 pour les vieux navigateurs, 
   et du CSS grid pur les nouveaux.
 
 */]#CACHE{3600*100,cache-client}
@@ -15,11 +15,10 @@
 #HTTP_HEADER{Vary: Accept-Encoding}
 
 /*
-  ====
-  Base
-  ====
-  - On met tout en pleine largeur
-  - Pas de colonne (mobile first)
+  ======
+  LAYOUT
+  ======
+  Agencement et dimensions des blocs principaux en mobile-first
 */
 
 /* Containers en pleine largeur */
@@ -64,15 +63,7 @@ body.large {
   margin-right: auto;
 }
 
-
-/*
-  ==========
-  Responsive
-  ==========
-*/
-
-
-/* 2 colonnes */ 
+/* Moyen écran : 2 colonnes */ 
 @media (min-width: 780px) {
 
   /* D'abord le fallback pour les vieux navigateurs */
@@ -104,12 +95,12 @@ body.large {
     #navigation > :not(.ajaxbloc),
     #extra > .ajaxbloc > *,
     #extra > :not(.ajaxbloc) {
-      width: calc(18em + 2vw);
+      width: calc(8em + 12vw);
     }
   }
 }
 
-/* 3 colonnes */
+/* Grand écran : 3 colonnes */
 @media (min-width: 1200px) {
 
   @supports (display: grid) {
@@ -122,4 +113,33 @@ body.large {
     }
   }
 
+}
+
+
+/*
+  ======
+  Divers
+  ======
+  Des petits ajustements divers
+*/
+
+
+/* Polices */
+@font-face {
+  font-family: 'Lato';
+  src: url('#CHEMIN{prive/themes/spip/webfonts/lato-regular-webfont.woff2}') format('woff2'),
+  url('#CHEMIN{webfonts/lato-regular-webfont.woff}') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lato';
+  src: url('#CHEMIN{prive/themes/spip/webfonts/lato-bold-webfont.woff2}') format('woff2'),
+  url('#CHEMIN{webfonts/lato-regular-webfont.woff}') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+body {
+  font-size: calc(0.8em + 0.133vw);
+  font-family: "Lato", sans-serif;
 }
