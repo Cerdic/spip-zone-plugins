@@ -39,7 +39,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'infos_produits' => 'Informations Produits',
 
 	// L
+	'label_prix_par_objet_mode' => 'Mode de calcul de prix :',
 	'label_selection_objet_prix' => 'Ajouter un prix aux objets suivants :',
+	'legende_prix_par_objet' => 'Calcul du prix par objet',
 
 	// P
 	'prix' => 'Prix',
@@ -57,5 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'taxes_surcharge' => 'Appliquer un autre taux (en%)',
 	'titre_page_configurer_prix_objets_objets' => 'Configurer Prix Objets',
 	'titre_prix_objets' => 'Prix',
+	'titre_prix_par_objet_mode_global' => 'Global (prix de la première coincidence appliqué globalement)',
+	'titre_prix_par_objet_mode_prorata' => 'Prorata (le prix est calculé pour chaque élément de la séquence)',
 	'ttc' => 'TTC'
 );
