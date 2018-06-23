@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
+	'configurer_limiter_accueil_label' => 'Limiter l’alerte à la page d’accueil',
 	'configurer_texte_label' => 'Alerte d’urgence à diffuser :',
 	'configurer_titre' => 'Configurer l’alerte d’urgence',
 	'configurer_utilisateurs_explication' => 'Par défaut, seuls les administrateurs complets peuvent modifier l’alerte. On peut sélectionner ici des utilisateurs supplémentaires.',

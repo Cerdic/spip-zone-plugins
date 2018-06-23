@@ -11,7 +11,12 @@
 				<label for="champ_texte"><:alerte:configurer_texte_label:></label>
 				<textarea id="champ_texte" cols="40" rows="10" name="texte">#ENV{texte}</textarea>
 			</li>
-			
+			<li class="editer editer_limiter_accueil pleine_largeur">
+				<div class="choix">
+					<input type="checkbox" name="limiter_accueil" id="limiter_accueil"[ (#CONFIG{alerte_urgence/limiter_accueil}|oui)checked="checked"]>
+					<label for="limiter_accueil"><:alerte:configurer_limiter_accueil_label:></label>
+				</div>
+			</li>
 			<B_utilisateurs>
 			<li>
 				<label for="champ_utilisateurs"><:alerte:configurer_utilisateurs_label:></label>
