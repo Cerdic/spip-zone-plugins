@@ -1,0 +1,17 @@
+<paquet
+	prefix="prive_fluide_plus"
+	categorie="theme"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.2.*]"
+>
+
+	<nom>Espace Privé fluide ++</nom>
+
+	<auteur>nicod_</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="prive_fluide" compatibilite="[0.1.10;]"/>
+	
+</paquet>
