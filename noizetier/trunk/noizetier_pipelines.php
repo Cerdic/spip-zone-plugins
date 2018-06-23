@@ -308,10 +308,12 @@ function noizetier_affiche_milieu($flux) {
 	$exec = $flux['args']['exec'];
 
 	if ($exec == 'admin_plugin') {
+		// On recharge en forçant un chargement complet pour prendre en compte éventuellement les types de
+		// noisettes qui nécessitent un plugin donné qui serait activé ou désactivé.
 		include_spip('inc/noizetier_page');
-		noizetier_page_charger();
+		noizetier_page_charger(true);
 		include_spip('inc/ncore_type_noisette');
-		type_noisette_charger('noizetier');
+		type_noisette_charger('noizetier', true);
 
 		// Suppression des caches N-Core nécessaires à la compilation des noisettes
 		include_spip('inc/ncore_cache');
