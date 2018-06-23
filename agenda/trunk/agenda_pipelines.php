@@ -37,20 +37,25 @@ function agenda_insert_head_css($flux) {
  * @return array
  */
 function agenda_affiche_milieu($flux) {
+	// 
+	if (!defined('_AGENDA_CHOIX_RUBRIQUE_OUVERT'))
+		define('_AGENDA_CHOIX_RUBRIQUE_OUVERT',true);
 	$e = trouver_objet_exec($flux['args']['exec']);
 	$out = '';
+	$rubrique_agenda_presente = NULL;
 	if ($e['type']=='rubrique'
 		and autoriser('configurer')
 		and $e['edition']==false
 		and $id_rubrique = intval($flux['args']['id_rubrique'])
-		and autoriser('modifier', 'rubrique', $id_rubrique)) {
+		and autoriser('modifier', 'rubrique', $id_rubrique)
+		and ((_AGENDA_CHOIX_RUBRIQUE_OUVERT) or ($rubrique_agenda_presente = sql_countsel('spip_rubriques', 'agenda=1')))) {
 		$activer = true;
 		$res = '';
 		$actif = sql_getfetsel('agenda', 'spip_rubriques', 'id_rubrique='.intval($id_rubrique));
 		$statut = '-32';
 		$alt = '';
 		$voir = '';
-		if (!sql_countsel('spip_rubriques', 'agenda=1')) {
+		if (!$rubrique_agenda_presente) {
 			$res .= "<span class='small'>" . _T('agenda:aucune_rubrique_mode_agenda') . '</span><br />';
 		} else {
 			include_spip('inc/rubriques');
