@@ -1,0 +1,47 @@
+<div class="formulaire_spip formulaire_ajouter formulaire_ajouter_noisette formulaire_ajouter_noisette-#ENV{page}-#ENV{bloc}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="conteneur_id" value="#ENV{id_conteneur}" />
+
+		<fieldset>
+			<legend><:noizetier:legende_copie_pages_compatibles:></legend>
+			<div class="editer-groupe">
+				[(#SAISIE{checkbox, pages,
+					explication=<:noizetier:explication_copie_pages_compatibles:>,
+					datas=#ENV{_pages},
+				})]
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<legend><:noizetier:legende_copie_noisette_parametres:></legend>
+			<div class="editer-groupe">
+				[(#SAISIE{case, copie_parametres,
+					label_case=<:noizetier:label_copie_noisette_parametres:>,
+					class=pleine_largeur
+				})]
+
+				[(#SAISIE{case, copie_balise,
+					label_case=<:noizetier:label_copie_noisette_balise:>,
+				})]
+
+				[(#SAISIE{case, copie_css,
+					label_case=<:noizetier:label_copie_noisette_css:>,
+				})]
+			</div>
+		</fieldset>
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons">
+			<input type="submit" name="save" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+	</div></form>
+	]
+</div>

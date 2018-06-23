@@ -56,7 +56,7 @@ function noizetier_page_charger($recharger = false) {
 		foreach ($fichiers as $_squelette => $_chemin) {
 			$page = basename($_squelette, '.html');
 			$dossier = dirname($_chemin);
-			$est_composition = (noizetier_page_extraire_composition($page) == '');
+			$est_composition = (noizetier_page_extraire_composition($page) != '');
 			// Exclure certaines pages :
 			// -- celles du privé situes dans prive/contenu
 			// -- page liée au plugin Zpip en v1

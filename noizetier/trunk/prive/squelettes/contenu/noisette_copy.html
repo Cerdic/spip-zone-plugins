@@ -1,0 +1,39 @@
+[(#AUTORISER{configurer, noizetier}|sinon_interdire_acces)]
+<BOUCLE_noisette(NOISETTES types_noisettes){id_noisette}>
+
+[(#SET{redirect, [(#URL_ECRIRE{noizetier_page}
+					|parametre_url{page, #TYPE[-(#COMPOSITION)]}
+					|parametre_url{bloc, #BLOC})]})]
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#GET{redirect}|icone_verticale{<:noizetier:retour:>, page-noisettes-24, '', left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	<:noizetier:info_etendre_noisette{noisette=#NOM, bloc=#ENV{bloc}}:>
+	<h1>
+		[(#NOM)]
+	</h1>
+</div>
+
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").attr("href","'#GET{redirect}'").followLink();'}
+]
+<div class="ajax">
+	#FORMULAIRE_ETENDRE_NOISETTE{
+		#ARRAY{
+			id_noisette, #ID_NOISETTE,
+			type_noisette, #TYPE_NOISETTE,
+			parametres, #PARAMETRES**,
+			balise, #BALISE,
+			css, #CHAMP_SQL{css}},
+		#ENV{bloc},
+		#GET{redirect}}
+</div>
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\[CDATA\[*/
+		jQuery('html,body').animate({scrollTop: jQuery("#chemin").offset().top}, 'slow');
+		jQuery('#chemin').find('>div').ajaxReload({'args':{'exec':'noisette_copy','id_noisette':'#ENV{id_noisette}','bloc':'#ENV{bloc}', 'redirect':'#ENV{redirect}'}});
+		jQuery('#navigation').find('>div').ajaxReload({'args':{'exec':'noisette_copy','id_noisette':'#ENV{id_noisette}','bloc':'#ENV{bloc}', 'redirect':'#ENV{redirect}'}});
+	/*\]\]>*/</script>
+]
+</div>
+</BOUCLE_noisette>

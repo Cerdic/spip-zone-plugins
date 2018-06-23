@@ -284,11 +284,12 @@ function noizetier_noisette_completer($plugin, $description) {
 		} else {
 			// -- si le conteneur n'est pas une noisette, le complément se déduit du conteneur lui-même.
 			if (!empty($conteneur['squelette'])) {
+				list($bloc, ) = explode('/', $conteneur['squelette']);
 				if (!empty($conteneur['objet']) and !empty($conteneur['id_objet']) and ($id = intval($conteneur['id_objet']))) {
 					// Objet
 					$complement['objet'] = $conteneur['objet'];
 					$complement['id_objet'] = $id;
-					$complement['bloc'] = $conteneur['bloc'];
+					$complement['bloc'] = isset($conteneur['bloc']) ? $conteneur['bloc'] : $bloc;
 				} else {
 					$squelette = strtolower($conteneur['squelette']);
 					$page = basename($squelette);
@@ -301,7 +302,7 @@ function noizetier_noisette_completer($plugin, $description) {
 						// Page simple
 						$complement['type'] = $identifiants_page[0];
 					}
-					$complement['bloc'] = $conteneur['bloc'];
+					$complement['bloc'] = isset($conteneur['bloc']) ? $conteneur['bloc'] : $bloc;
 				}
 			}
 		}
