@@ -30,7 +30,6 @@ function noizetier_page_charger($recharger = false) {
 	$options['repertoire_pages'] = noizetier_page_initialiser_dossier();
 
 	// Initialiser le contexte de rechargement
-	// TODO : en attente de voir si on rajoute un var_mode=vider_noizetier
 	$forcer_chargement = $recharger;
 
 	// Initialiser la table et le where des pages non virtuelles qui sont utilisés plusieurs fois.

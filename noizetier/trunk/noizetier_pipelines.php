@@ -277,20 +277,48 @@ function noizetier_jqueryui_forcer($plugins) {
 }
 
 // TODO : à supprimer ou transformer pour exclure certaines pages pour l'utilisateur admin et pas webmestre
+/**
+ * @param $flux
+ *
+ * @return mixed
+ */
 function noizetier_noizetier_lister_pages($flux) {
 	return $flux;
 }
+
+/**
+ * @param $flux
+ *
+ * @return mixed
+ */
 function noizetier_noizetier_blocs_defaut($flux) {
 	return $flux;
 }
+
+/**
+ * @param $flux
+ *
+ * @return mixed
+ */
 function noizetier_noizetier_config_export($flux) {
 	return $flux;
 }
+
+/**
+ * @param $flux
+ *
+ * @return mixed
+ */
 function noizetier_noizetier_config_import($flux) {
 	return $flux;
 }
 
 // les boutons d'administration : ajouter le mode voir=noisettes
+/**
+ * @param $flux
+ *
+ * @return mixed
+ */
 function noizetier_formulaire_admin($flux) {
 	if (autoriser('configurer', 'noizetier')) {
 		$bouton = recuperer_fond('prive/squelettes/inclure/inc-bouton_voir_noisettes');
@@ -304,14 +332,20 @@ function noizetier_formulaire_admin($flux) {
 // C'est un peu grossier mais pas trouvé de pipeline pour agir à la mise à jour d'un plugin.
 // Au moins, le cache est supprimé à chaque changement, mise à jour des plugins.
 
+/**
+ * @param $flux
+ *
+ * @return mixed
+ */
 function noizetier_affiche_milieu($flux) {
 	$exec = $flux['args']['exec'];
 
 	if ($exec == 'admin_plugin') {
-		// On recharge en forçant un chargement complet pour prendre en compte éventuellement les types de
-		// noisettes qui nécessitent un plugin donné qui serait activé ou désactivé.
+		// On recharge les pages du noiZetier dont la liste a pu changer. Inutile de forcer un rechargement complet.
 		include_spip('inc/noizetier_page');
-		noizetier_page_charger(true);
+		noizetier_page_charger();
+		// On recharge les types de noisettes en forçant un chargement complet. En effet, il est nécessaire de tenir
+		// compte des types de noisettes qui nécessitent un plugin donné qui serait activé ou désactivé.
 		include_spip('inc/ncore_type_noisette');
 		type_noisette_charger('noizetier', true);
 
@@ -375,6 +409,11 @@ function noizetier_compagnon_messages($flux) {
 }
 
 
+/**
+ * @param $boucle
+ *
+ * @return mixed
+ */
 function noizetier_pre_boucle($boucle) {
 
 	if (!defined('_DIR_PLUGIN_COMPOSITIONS')) {
@@ -391,6 +430,11 @@ function noizetier_pre_boucle($boucle) {
 
 
 // Insertion des css du noiZetier pour l'édition avec le mode voir_noisettes.
+/**
+ * @param $flux
+ *
+ * @return string
+ */
 function noizetier_insert_head_css($flux) {
 	static $done = false;
 	if (!$done) {
@@ -403,6 +447,11 @@ function noizetier_insert_head_css($flux) {
 	return $flux;
 }
 
+/**
+ * @param $flux
+ *
+ * @return string
+ */
 function noizetier_insert_head($flux) {
 	// au cas ou il n'est pas implemente
 	$flux .= noizetier_insert_head_css($flux);

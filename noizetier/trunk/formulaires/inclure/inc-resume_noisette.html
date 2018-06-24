@@ -6,6 +6,7 @@
 		#SET{type_noisette_nom, #NOM|_T_ou_typo}
 		#SET{type_noisette_icone, #ICON}
 		#SET{type_noisette_actif, #ACTIF}
+		#SET{type_noisette_necessite, #NECESSITE**}
 		#SET{type_noisette_disponible, oui}
 	</BOUCLE_type_noisette>
 	[(#GET{type_noisette_disponible}|oui)
@@ -14,7 +15,7 @@
 		<div class="icone">
 			[(#CHEMIN_IMAGE{#GET{type_noisette_icone}}|image_reduire{24}|extraire_attribut{src}|balise_img)]
 		</div>
-		[(#NOISETTE_PREVIEW{#ID_NOISETTE, #GET{type_noisette_actif}})]
+		[(#NOISETTE_PREVIEW{#ID_NOISETTE, #GET{type_noisette_actif}, #GET{type_noisette_necessite}})]
 	]
 	[(#GET{type_noisette_disponible}|non)
 		#BOITE_OUVRIR{'','error'}
