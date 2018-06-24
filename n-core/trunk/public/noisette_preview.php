@@ -42,11 +42,19 @@ function balise_NOISETTE_PREVIEW_dist($p) {
 	$type_noisette_actif = interprete_argument_balise(2, $p);
 	$type_noisette_actif = isset($type_noisette_actif) ? str_replace('\'', '"', $type_noisette_actif) : '"oui"';
 
-	// On récupère aussi le plugin appelant qui fait partie du stocakge de la noisette.
+	// On récupère le tableau des necessite du type de noisette afin d'afficher les plugins inactifs si besoin.
+	$type_noisette_necessite = interprete_argument_balise(3, $p);
+	$type_noisette_necessite = isset($type_noisette_necessite) ? str_replace('\'', '"', $type_noisette_necessite) : '"a:0:{}"';
+
+	// On récupère aussi le plugin appelant qui fait partie du stockage de la noisette.
 	$plugin = champ_sql('plugin', $p);
 
 	// On appelle la fonction de calcul de la prévisualisation.
-	$p->code = "calculer_preview_noisette($plugin, array_merge($noisette, unserialize($parametres)), $type_noisette_actif)";
+	$p->code = "calculer_preview_noisette(
+		$plugin, 
+		array_merge($noisette, unserialize($parametres)), 
+		$type_noisette_actif,
+		$type_noisette_necessite)";
 	$p->interdire_scripts = false;
 
 	return $p;
@@ -65,11 +73,14 @@ function balise_NOISETTE_PREVIEW_dist($p) {
  * @param string $type_noisette_actif
  *        Indique si le type de noisette est actif ou pas (au moins un plugin nécessité est désactivé). Prend
  *        les valeurs `oui` ou `non`.
+ * @param string $type_noisette_necessite
+ *        Tableau sérialisé des plugins necessités par le type de noisette. Sert uniquement à afficher l'avertissement
+ *        éventuel sur les plugins inactifs.
  *
  * @return string
  *        Code HTML généré pour la noisette.
  */
-function calculer_preview_noisette($plugin, $noisette, $type_noisette_actif) {
+function calculer_preview_noisette($plugin, $noisette, $type_noisette_actif, $type_noisette_necessite) {
 
 	// Initialisation de la sortie.
 	$preview = '';
@@ -83,7 +94,17 @@ function calculer_preview_noisette($plugin, $noisette, $type_noisette_actif) {
 			$preview = recuperer_fond($squelette_preview, $noisette);
 		}
 	} else {
-		$preview = recuperer_fond('avertir_preview', $noisette);
+		$plugins = unserialize($type_noisette_necessite);
+		$plugins_inactifs = '';
+		foreach ($plugins as $_plugin) {
+			if (!defined('_DIR_PLUGIN_' . strtoupper($_plugin))) {
+				$plugins_inactifs .= (!$plugins_inactifs ? '' : ', ') . $_plugin;
+			}
+		}
+		$preview = recuperer_fond(
+			'avertir_preview',
+			array_merge($noisette, array('plugins_inactifs' => $plugins_inactifs))
+		);
 	}
 
 	return $preview;
