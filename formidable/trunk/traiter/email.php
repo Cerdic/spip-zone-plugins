@@ -93,7 +93,6 @@ function traiter_email_dist($args, $retours) {
 		include_spip('inc/filtres');
 		include_spip('inc/texte');
 
-		$nom_site_spip = supprimer_tags(typo($GLOBALS['meta']['nom_site']));
 
 		// On parcourt les champs pour générer le tableau des valeurs
 		$valeurs = array();
@@ -155,6 +154,7 @@ function traiter_email_dist($args, $retours) {
 				}
 			}
 		}
+		$nom_site_spip = supprimer_tags(typo(lire_meta('nom_site')));
 		// On récupère le nom de l'envoyeur
 		if ($options['champ_nom']) {
 			$a_remplacer = array();
