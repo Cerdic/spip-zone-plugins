@@ -125,6 +125,66 @@ function noisette_ajouter($plugin, $type_noisette, $conteneur, $rang = 0, $stock
 }
 
 /**
+ * Met à jour les paramètres éditables d'une noisette donnée.
+ * La fonction contrôle la liste des champs modifiables.
+ *
+ * @api
+ * @uses ncore_noisette_decrire()
+ * @uses ncore_noisette_stocker()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param mixed  $noisette
+ *        Identifiant de la noisette qui peut prendre soit la forme d'un entier ou d'une chaine unique, soit la forme
+ *        d'un couple (id conteneur, rang).
+ * @param array  $modifications
+ *        Tableau des couples (champ, valeur) à mettre à jour pour la noisette spécifiée.
+ *        La fonction contrôle la liste des champs éditables en filtrant les champs standard comme `parametres`,
+ *        `balise`, `css` et éventuellement ceux spécifiquement définis par le plugin utilisateur dans
+ *        l'argument $editables_specifiques.
+ * @param array  $editables_specifiques
+ *        Liste de champs éditables spécifiques au plugin utilisateur ou tableau vide sinon.
+ * @param string $stockage
+ *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
+ *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
+ *        fournissant le service de stockage souhaité.
+ *
+ * @return bool
+ */
+function noisette_parametrer($plugin, $noisette, $modifications, $editables_specifiques = array(), $stockage = '') {
+
+	// Initialisation du retour
+	$retour = false;
+
+	// On charge les services de N-Core.
+	// Ce sont ces fonctions qui aiguillent ou pas vers un service spécifique du plugin.
+	include_spip('ncore/ncore');
+
+	// L'identifiant d'une noisette peut être fourni de deux façons :
+	// - par une valeur unique, celle créée lors de l'ajout et qui peut-être un entier (id d'une table SPIP) ou
+	//   une chaine unique par exemple générée par uniqid().
+	// - ou par un tableau à deux entrées fournissant le conteneur et le rang dans le conteneur
+	//   (qui est unique pour un conteneur donné).
+	if (!empty($noisette) and (is_string($noisette) or is_numeric($noisette) or is_array($noisette))) {
+		// On récupère la description complète de la noisette avant de modifier les champs éditables spécifiés.
+		$description = ncore_noisette_decrire($plugin, $noisette, $stockage);
+
+		// On contrôle les champs éditables et on met à jour la description de la noisette.
+		$parametres = array_merge(array('parametres', 'balise', 'css'), $editables_specifiques);
+		$modifications = array_intersect_key($modifications, array_flip($parametres));
+		$description = array_merge($description, $modifications);
+
+		// La description est prête à être stockée en remplacement de l'existante.
+		if ($id_noisette = ncore_noisette_stocker($plugin, $description, $stockage)) {
+			$retour = true;
+		}
+	}
+
+	return $retour;
+}
+
+/**
  * Supprime une noisette donnée du conteneur auquel elle est associée et, si cette noisette est un conteneur,
  * le vide de ses noisettes au préalable.
  * La fonction met à jour les rangs des autres noisettes si nécessaire.

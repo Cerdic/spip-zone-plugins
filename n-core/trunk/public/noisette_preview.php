@@ -7,7 +7,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 /**
  * Compile la balise `#NOISETTE_PREVIEW` qui génère la prévisualisation de la noisette passée en argument
  * en gérant le fait que la type de noisette soit actif et propose bien un fichier de prévisualisation.
- * La signature de la balise est : `#NOISETTE_PREVIEW{id_noisette, type_noisette_actif}`.
+ * La signature de la balise est : `#NOISETTE_PREVIEW{id_noisette, type_noisette_actif, plugins_necessites}`.
  *
  * @package SPIP\NCORE\NOISETTE\BALISE
  * @balise
