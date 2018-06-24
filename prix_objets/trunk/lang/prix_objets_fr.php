@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'infos_produits' => 'Informations Produits',
 
 	// L
-	'label_prix_par_objet_mode' => 'Mode de calcul de prix :',
+	'label_prix_par_objet_mode' => 'Mode de calcul de prix :',
 	'label_selection_objet_prix' => 'Ajouter un prix aux objets suivants :',
 	'legende_prix_par_objet' => 'Calcul du prix par objet',
 
