@@ -120,9 +120,9 @@ function formulaires_editer_noisette_traiter_dist($id_noisette, $redirect = '') 
 		}
 
 		// Mise à jour de la noisette en base de données
+		include_spip('inc/ncore_noisette');
 		$valeurs = array('parametres' => serialize($parametres), 'balise' => $balise, 'css' => $css);
-		$where = array('id_noisette=' . intval($id_noisette));
-		if (sql_updateq('spip_noisettes', $valeurs, $where)) {
+		if (noisette_parametrer('noizetier', intval($id_noisette), $valeurs)) {
 			// On invalide le cache
 			include_spip('inc/invalideur');
 			suivre_invalideur("id='noisette/$id_noisette'");

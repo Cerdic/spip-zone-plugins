@@ -109,8 +109,7 @@ function formulaires_etendre_noisette_traiter_dist($noisette, $bloc, $redirect) 
 			}
 			if ($valeurs) {
 				// Mise à jour de la noisette créée avec les champs demandés.
-				$where = array('id_noisette=' . intval($id_noisette));
-				sql_updateq('spip_noisettes', $valeurs, $where);
+				noisette_parametrer('noizetier', intval($id_noisette), $valeurs);
 			}
 		}
 	}

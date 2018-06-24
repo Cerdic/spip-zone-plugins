@@ -39,7 +39,7 @@
 	<pipeline nom="insert_head_css" inclure="noizetier_pipelines.php" />
 	<pipeline nom="insert_head" action="insert_head_css" inclure="noizetier_pipelines.php" />
 
-	<necessite nom="ncore" compatibilite="[0.4.2;[" />
+	<necessite nom="ncore" compatibilite="[0.4.3;[" />
 	<necessite nom="saisies" compatibilite="[2.2.3;[" />
 	<necessite nom="verifier" compatibilite="[1.0.5;[" />
 	<necessite nom="Z" compatibilite="[2.6.6;[" />
