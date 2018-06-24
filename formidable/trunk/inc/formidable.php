@@ -408,3 +408,95 @@ function formidable_scramble($login, $id_form, $passwd = '') {
 
 	return $login_num;
 }
+
+/**
+ * Dans une chaîne, remplace les @raccourci@
+ * par la valeur saisie.
+ * @param string $chaine la chaîne à transformer
+ * @param array $saisies la liste des saisies du formulaire
+ * @param bool|string $brut=false, pour indiquer si on veut utiliser les valeurs brutes;
+ * @return string la chaîne transformée
+ */
+function formidable_raccourcis_arobases_2_valeurs_champs($chaine, $saisies, $brut=false) {
+	list($valeurs,$valeurs_libellees) = formidable_tableau_valeurs_saisies($saisies);
+	$a_remplacer = array();
+	if (preg_match_all('/@[\w]+@/', $chaine, $a_remplacer)) {
+		$a_remplacer = $a_remplacer[0];
+		foreach ($a_remplacer as $cle => $val) {
+			$a_remplacer[$cle] = trim($val, '@');
+		}
+		$a_remplacer = array_flip($a_remplacer);
+		if ($brut) {
+			$a_remplacer = array_intersect_key($valeurs, $a_remplacer);
+		}
+		else {
+			$a_remplacer = array_intersect_key($valeurs_libellees, $a_remplacer);
+		}
+		$a_remplacer = array_merge($a_remplacer, array('nom_site_spip' => $nom_site_spip));
+	}
+	return trim(_L($chaine, $a_remplacer));
+}
+/**
+ * Récupère l'ensemble des valeurs postée dans un formulaires
+ * Les retourne sous deux formes : brutes et libellés (par ex. pour les @select@
+ * @param array $saisies les saisies du formulaires
+ * @return array (brutes, libellées)
+ * On met les résultats en statiques pour gagner un peu de temps
+ */
+function formidable_tableau_valeurs_saisies($saisies) {
+	if (isset($valeurs)) {
+		return array($valeurs,$valeurs_libellees);
+	}
+	// On parcourt les champs pour générer le tableau des valeurs
+	static $valeurs = array();
+	static $valeurs_libellees = array();
+	$saisies_fichiers = saisies_lister_avec_type($saisies, 'fichiers');
+	$saisies_par_nom = saisies_lister_par_nom($saisies);
+	$champs = saisies_lister_champs($saisies);
+
+	// On n'utilise pas formulaires_formidable_fichiers,
+	// car celui-ci retourne les saisies fichiers du formulaire dans la base… or, on sait-jamais,
+	// il peut y avoir eu une modification entre le moment où l'utilisateur a vu le formulaire et maintenant
+	foreach ($champs as $champ) {
+		if (array_key_exists($champ, $saisies_fichiers)) {// si on a affaire à une saisie de type fichiers, on considère qu'il n'y pas vraiment de valeur brute
+		} else {
+			// On récupère la valeur postée
+			$valeurs[$champ] = _request($champ);
+
+			// Le champ est un tableau objet ? on le parse
+			if (is_array($valeurs[$champ])) {
+				// si on ne demande pas la valeur brute
+				if (
+					isset($saisies_par_nom[$champ]['options']['datas'])
+					and $labels_data = saisies_aplatir_tableau(saisies_chaine2tableau($saisies_par_nom[$champ]['options']['datas']))
+					and !$options['champ_sujet_valeurs_brutes']
+				) {
+					$valeurs_libellees[$champ] = array();
+					foreach ($valeurs[$champ] as $valeur) {
+						$valeurs_libellees[$champ][] = $labels_data[$valeur];
+					}
+					$valeurs_libellees[$champ] =  implode($valeurs_libellees[$champ], ",");
+				}
+				// Sinon on utilise directement la valeur postée
+				else {
+					$valeurs_libellees[$champ] = implode($valeurs[$champ],",");
+				}
+				// Si la saisie a une valeur unique
+			} else {
+				// Si la saisie est une liste de choix avec des clés et labels humains, on cherche le label humain
+				if (
+					isset($saisies_par_nom[$champ]['options']['datas'])
+					and $labels_data = saisies_aplatir_tableau(saisies_chaine2tableau($saisies_par_nom[$champ]['options']['datas']))
+					and isset($labels_data[$valeurs[$champ]])
+				) {
+					$valeurs_libellees[$champ] = $labels_data[$valeurs[$champ]];
+				}
+				// Sinon on utilise directement la valeur postée
+				else {
+					$valeurs_libellees[$champ] = $valeurs[$champ];
+				}
+			}
+		}
+	}
+	return array($valeurs, $valeurs_libellees);
+}

@@ -88,86 +88,39 @@ function traiter_email_dist($args, $retours) {
 		$courriel_envoyeur = '';
 	}
 
+	// Récuperer les valeurs saisies
+	list($valeurs,$valeurs_libellees) = formidable_tableau_valeurs_saisies($saisies);
+
+	// Traitement à part pour les saisies de types fichiers :
+	// 1. Calculer la taille totale des fichiers
+	// 2. Ajouter au facteur
+	$saisies_fichiers = saisies_lister_avec_type($saisies, 'fichiers');
+	foreach ($champs as $champ) {
+		if (array_key_exists($champ, $saisies_fichiers)) {
+			$valeurs[$champ] = traiter_email_fichiers($saisies_fichiers[$champ], $champ, $formulaire['id_formulaire'], $retours, $timestamp);
+			if ($ajouter_fichier) {
+				$retours['fichiers'][$champ] = $valeurs[$champ];
+			}
+			$taille_fichiers += formidable_calculer_taille_fichiers_saisie($valeurs[$champ]);
+			$fichiers_facteur = array_merge(
+				$fichiers_facteur,
+				vue_fichier_to_tableau_facteur($valeurs[$champ])
+			);
+		}
+	}
 	// Si on a bien des destinataires, on peut continuer
 	if ($destinataires or ($courriel_envoyeur and $options['activer_accuse'])) {
 		include_spip('inc/filtres');
 		include_spip('inc/texte');
 
-
-		// On parcourt les champs pour générer le tableau des valeurs
-		$valeurs = array();
-		$valeurs_libellees = array();
-		$saisies_fichiers = saisies_lister_avec_type($saisies, 'fichiers');
-		$saisies_par_nom = saisies_lister_par_nom($saisies);
-
-		// On n'utilise pas formulaires_formidable_fichiers,
-		// car celui-ci retourne les saisies fichiers du formulaire dans la base… or, on sait-jamais,
-		// il peut y avoir eu une modification entre le moment où l'utilisateur a vu le formulaire et maintenant
-		foreach ($champs as $champ) {
-			if (array_key_exists($champ, $saisies_fichiers)) {// si on a affaire à une saisie de type fichiers, on traite à part
-				$valeurs[$champ] = traiter_email_fichiers($saisies_fichiers[$champ], $champ, $formulaire['id_formulaire'], $retours, $timestamp);
-				if ($ajouter_fichier) {
-					$retours['fichiers'][$champ] = $valeurs[$champ];
-				}
-				$taille_fichiers += formidable_calculer_taille_fichiers_saisie($valeurs[$champ]);
-				$fichiers_facteur = array_merge(
-					$fichiers_facteur,
-					vue_fichier_to_tableau_facteur($valeurs[$champ])
-				);
-			} else {
-				// On récupère la valeur postée
-				$valeurs[$champ] = _request($champ);
-
-				// Le champ est un tableau objet ? on le parse 
-				if (is_array($valeurs[$champ])) {
-					// si on ne demande pas la valeur brute
-					if (
-						isset($saisies_par_nom[$champ]['options']['datas'])
-						and $labels_data = saisies_aplatir_tableau(saisies_chaine2tableau($saisies_par_nom[$champ]['options']['datas']))
-						and !$options['champ_sujet_valeurs_brutes']
-					) {
-						$valeurs_libellees[$champ] = array(); 
-						foreach ($valeurs[$champ] as $valeur) {
-							$valeurs_libellees[$champ][] = $labels_data[$valeur];
-						}
-						$valeurs_libellees[$champ] =  implode($valeurs_libellees[$champ], ",");
-					}
-					// Sinon on utilise directement la valeur postée
-					else {
-						$valeurs_libellees[$champ] = implode($valeurs[$champ],",");
-					}
-				// Si la saisie a une valeur unique
-				} else {
-					// Si la saisie est une liste de choix avec des clés et labels humains, on cherche le label humain, sauf si la case champ_sujet_valeurs_brutes est cochée dans la config du traitement
-					if (
-						isset($saisies_par_nom[$champ]['options']['datas'])
-						and $labels_data = saisies_aplatir_tableau(saisies_chaine2tableau($saisies_par_nom[$champ]['options']['datas']))
-						and isset($labels_data[$valeurs[$champ]])
-						and !$options['champ_sujet_valeurs_brutes']
-					) {
-						$valeurs_libellees[$champ] = $labels_data[$valeurs[$champ]];
-					}
-					// Sinon on utilise directement la valeur postée
-					else {
-						$valeurs_libellees[$champ] = $valeurs[$champ];
-					}
-				}
-			}
-		}
 		$nom_site_spip = supprimer_tags(typo(lire_meta('nom_site')));
+		
 		// On récupère le nom de l'envoyeur
 		if ($options['champ_nom']) {
-			$a_remplacer = array();
-			if (preg_match_all('/@[\w]+@/', $options['champ_nom'], $a_remplacer)) {
-				$a_remplacer = $a_remplacer[0];
-				foreach ($a_remplacer as $cle => $val) {
-					$a_remplacer[$cle] = trim($val, '@');
-				}
-				$a_remplacer = array_flip($a_remplacer);
-				$a_remplacer = array_intersect_key($valeurs_libellees, $a_remplacer);
-				$a_remplacer = array_merge($a_remplacer, array('nom_site_spip' => $nom_site_spip));
-			}
-			$nom_envoyeur = trim(_L($options['champ_nom'], $a_remplacer));
+			$nom_envoyeur = formidable_raccourcis_arobases_2_valeurs_champs(
+				$options['champ_nom'],
+				$saisies
+			);
 		}
 		if (!isset($nom_envoyeur) or !$nom_envoyeur) {
 			$nom_envoyeur = $nom_site_spip;
@@ -175,17 +128,11 @@ function traiter_email_dist($args, $retours) {
 
 		// On récupère le sujet s'il existe sinon on le construit
 		if ($options['champ_sujet']) {
-			$a_remplacer = array();
-			if (preg_match_all('/@[\w]+@/', $options['champ_sujet'], $a_remplacer)) {
-				$a_remplacer = $a_remplacer[0];
-				foreach ($a_remplacer as $cle => $val) {
-					$a_remplacer[$cle] = trim($val, '@');
-				}
-				$a_remplacer = array_flip($a_remplacer);
-				$a_remplacer = array_intersect_key($valeurs_libellees, $a_remplacer);
-				$a_remplacer = array_merge($a_remplacer, array('nom_site_spip' => $nom_site_spip));
-			}
-			$sujet = trim(_L($options['champ_sujet'], $a_remplacer));
+			$sujet = formidable_raccourcis_arobases_2_valeurs_champs(
+				$options['champ_sujet'],
+				$saisies,
+				$options['champ_sujet_valeurs_brutes']
+			);
 		}
 		if (!isset($sujet) or !$sujet) {
 			$sujet = _T('formidable:traiter_email_sujet', array('nom'=>$nom_envoyeur));
@@ -261,17 +208,10 @@ function traiter_email_dist($args, $retours) {
 		if ($ok and $courriel_envoyeur and $options['activer_accuse']) {
 			// On récupère le sujet s'il existe sinon on le construit
 			if ($options['sujet_accuse']) {
-				$a_remplacer = array();
-				if (preg_match_all('/@[\w]+@/', $options['sujet_accuse'], $a_remplacer)) {
-					$a_remplacer = $a_remplacer[0];
-					foreach ($a_remplacer as $cle => $val) {
-						$a_remplacer[$cle] = trim($val, '@');
-					}
-					$a_remplacer = array_flip($a_remplacer);
-					$a_remplacer = array_intersect_key($valeurs_libellees, $a_remplacer);
-					$a_remplacer = array_merge($a_remplacer, array('nom_site_spip' => $nom_site_spip));
-				}
-				$sujet_accuse = trim(_L($options['sujet_accuse'], $a_remplacer));
+				$sujet_accuse = formidable_raccourcis_arobases_2_valeurs_champs(
+					$options['sujet_accuse'],
+					$saisies
+				);
 			}
 			if (!isset($sujet_accuse) or !$sujet_accuse) {
 				$sujet_accuse = _T('formidable:traiter_email_sujet_accuse');
