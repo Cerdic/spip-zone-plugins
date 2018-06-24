@@ -40,122 +40,128 @@ function noizetier_page_charger($recharger = false) {
 	// Si on le trouve, on récupère la configuration du fichier XML ou YAML.
 	if ($fichiers = find_all_in_path($options['repertoire_pages'], '.+[.]html$')) {
 		$pages_nouvelles = $pages_modifiees = $pages_obsoletes = array();
-		// Récupération des signatures md5 des pages déjà enregistrées et des blocs exclus qui peuvent être
-		// modifiés après chargement: il faut donc conserver les modifications éventuelles.
-		$select = array('page', 'signature', 'blocs_exclus');
-		if ($pages = sql_allfetsel($select, $from, $where)) {
+		// Récupération :
+		// - des signatures md5 des pages déjà enregistrées pour déterminer si les fichiers YAML/XML
+		//   ont subi des changements.
+		// - des blocs exclus qui sont éditables après chargement, il faut donc conserver les modifications éventuelles.
+		// - des plugins nécessités et des indicateurs d'activité (voir fin de traitement).
+		$select = array('page', 'signature', 'blocs_exclus', 'necessite', 'est_active');
+		$signatures = $blocs_exclus = array();
+		if ($pages_existantes = sql_allfetsel($select, $from, $where)) {
 			// On construit le tableau des blocs exclus de chaque page déjà enregistrée en base.
-			$blocs_exclus = array_column($pages, 'blocs_exclus', 'page');
+			$blocs_exclus = array_column($pages_existantes, 'blocs_exclus', 'page');
 
-			// Si on force le rechargement il est inutile de gérer les signatures et les pages modifiées ou obsolètes.
-			$signatures = array();
+			// Si on force le rechargement il est inutile de gérer les signatures, les indicateurs d'activité
+			// et les pages modifiées ou obsolètes.
 			if (!$forcer_chargement) {
-				$signatures = array_column($pages, 'signature', 'page');
+				$signatures = array_column($pages_existantes, 'signature', 'page');
 				// On initialise la liste des pages à supprimer avec l'ensemble des pages non virtuelles
 				$pages_obsoletes = $signatures ? array_keys($signatures) : array();
 			}
+		}
 
-			foreach ($fichiers as $_squelette => $_chemin) {
-				$page = basename($_squelette, '.html');
-				$dossier = dirname($_chemin);
-				$est_composition = (noizetier_page_extraire_composition($page) != '');
-				// Exclure certaines pages :
-				// -- celles du privé situes dans prive/contenu
-				// -- page liée au plugin Zpip en v1
-				// -- z_apl liée aux plugins Zpip v1 et Zcore
-				// -- les compositions explicites si le plugin Compositions n'est pas activé
-				if ((substr($dossier, -13) != 'prive/contenu')
-				and (($page != 'page') or !defined('_DIR_PLUGIN_Z'))
-				and (($page != 'z_apl') or (!defined('_DIR_PLUGIN_Z') and !defined('_DIR_PLUGIN_ZCORE')))
-				and (!$est_composition or ($est_composition	and defined('_DIR_PLUGIN_COMPOSITIONS')))) {
-					// On passe le md5 de la page si il existe sinon la chaîne vide. Cela permet de déterminer
-					// si on doit ajouter la page ou la mettre à jour.
-					// Si le md5 est le même et qu'il n'est donc pas utile de recharger la page, la configuration
-					// retournée est vide.
-					$options['md5'] = isset($signatures[$page]) ? $signatures[$page] : '';
-					$options['recharger'] = $forcer_chargement;
-					if ($configuration = page_phraser_fichier($page, $options)) {
-						if (empty($configuration['identique'])) {
-							// La page a été chargée (nouvelle) ou rechargée (modifiée).
-							// Néanmoins, on n'inclue cette page que si les plugins qu'elle nécessite explicitement dans son
-							// fichier de configuration sont bien tous activés.
-							// Rappel: si une page est incluse dans un plugin non actif elle ne sera pas détectée
-							//         lors du find_all_in_path() puisque le plugin n'est pas dans le path SPIP.
-							//         Ce n'est pas ce cas qui est traité ici.
-							$page_a_garder = true;
-							$necessite = unserialize($configuration['necessite']);
-							if (!empty($necessite)) {
-								foreach ($necessite as $plugin) {
-									if (!defined('_DIR_PLUGIN_'.strtoupper($plugin))) {
-										$page_a_garder = false;
-										break;
-									}
-								}
-							}
-
-							// Si la page est à garder on met à jour les blocs exclus avec la sauvegarde effectuée
-							// au préalable et on détermine si la page est nouvelle ou modifiée.
-							// En mode rechargement forcé toute page est considérée comme nouvelle.
-							// Sinon, la page doit être retirée de la base car un plugin qu'elle nécessite a été désactivée:
-							// => il suffit pour cela de la laisser dans la liste des pages obsolètes.
-							if ($page_a_garder) {
-								// Mise à jour des blocs exclus : on écrase la valeur du YAML par celle de la base si
-								// elle existe
-								if (isset($blocs_exclus[$page])) {
-									$configuration['blocs_exclus'] = $blocs_exclus[$page];
-								}
-								if (!$options['md5'] or $forcer_chargement) {
-									// La page est soit nouvelle soit on est en mode rechargement forcé:
-									// => il faut la rajouter dans la table.
-									$pages_nouvelles[] = $configuration;
-								} else {
-									// La configuration stockée dans la table a été modifiée et le mode ne force pas le rechargement:
-									// => il faut mettre à jour la page dans la table.
-									$pages_modifiees[] = $configuration;
-									// => il faut donc la supprimer de la liste des pages obsolètes
-									$pages_obsoletes = array_diff($pages_obsoletes, array($page));
-								}
-							}
+		foreach ($fichiers as $_squelette => $_chemin) {
+			$page = basename($_squelette, '.html');
+			$dossier = dirname($_chemin);
+			$est_composition = (noizetier_page_extraire_composition($page) != '');
+			// Exclure certaines pages :
+			// -- celles du privé situes dans prive/contenu
+			// -- page liée au plugin Zpip en v1
+			// -- z_apl liée aux plugins Zpip v1 et Zcore
+			// -- les compositions explicites si le plugin Compositions n'est pas activé
+			if ((substr($dossier, -13) != 'prive/contenu')
+			and (($page != 'page') or !defined('_DIR_PLUGIN_Z'))
+			and (($page != 'z_apl') or (!defined('_DIR_PLUGIN_Z') and !defined('_DIR_PLUGIN_ZCORE')))
+			and (!$est_composition or ($est_composition	and defined('_DIR_PLUGIN_COMPOSITIONS')))) {
+				// On passe le md5 de la page si il existe sinon la chaîne vide. Cela permet de déterminer
+				// si on doit ajouter la page ou la mettre à jour.
+				// Si le md5 est le même et qu'il n'est donc pas utile de recharger la page, la configuration
+				// retournée est vide.
+				$options['md5'] = isset($signatures[$page]) ? $signatures[$page] : '';
+				$options['recharger'] = $forcer_chargement;
+				if ($configuration = page_phraser_fichier($page, $options)) {
+					if (empty($configuration['identique'])) {
+						// On met à jour les blocs exclus avec la sauvegarde effectuée au préalable (si la page
+						// existait déjà en base).
+						if (isset($blocs_exclus[$page])) {
+							$configuration['blocs_exclus'] = $blocs_exclus[$page];
+						}
+						// On détermine si la page est nouvelle ou modifiée.
+						// En mode rechargement forcé toute page est considérée comme nouvelle.
+						if (!$options['md5'] or $forcer_chargement) {
+							// La page est soit nouvelle soit on est en mode rechargement forcé:
+							// => il faut la rajouter dans la table.
+							$pages_nouvelles[] = $configuration;
 						} else {
-							// La page n'a pas changée et n'a donc pas été réchargée:
-							// => Il faut donc juste indiquer qu'elle n'est pas obsolète.
+							// La configuration stockée dans la table a été modifiée et pas de forçage du rechargement:
+							// => il faut mettre à jour la page dans la table.
+							$pages_modifiees[] = $configuration;
+							// => il faut donc la supprimer de la liste des pages obsolètes
 							$pages_obsoletes = array_diff($pages_obsoletes, array($page));
 						}
 					} else {
-						// Il y a eu une erreur sur lors du rechargement de la page.
-						// Ce peut être en particulier le cas où une page HTML sans XML n'est plus détectée car le
-						// paramètre _NOIZETIER_LISTER_PAGES_SANS_XML a été positionné de true à false.
-						// => il faut donc ne rien faire pour laisser la page dans les obsolètes
-						continue;
+						// La page n'a pas changée et n'a donc pas été réchargée:
+						// => Il faut donc juste indiquer qu'elle n'est pas obsolète.
+						$pages_obsoletes = array_diff($pages_obsoletes, array($page));
 					}
+				} else {
+					// Il y a eu une erreur sur lors du rechargement de la page.
+					// Ce peut être en particulier le cas où une page HTML sans XML n'est plus détectée car le
+					// paramètre _NOIZETIER_LISTER_PAGES_SANS_XML a été positionné de true à false.
+					// => il faut donc ne rien faire pour laisser la page dans les obsolètes
+					continue;
 				}
 			}
-
-			// Mise à jour de la table des pages
-			// -- Suppression des pages obsolètes ou de toute les pages non virtuelles si on est en mode
-			//    rechargement forcé.
-			if (sql_preferer_transaction()) {
-				sql_demarrer_transaction();
-			}
-			if ($pages_obsoletes) {
-				sql_delete($from, sql_in('page', $pages_obsoletes));
-			} elseif ($forcer_chargement) {
-				sql_delete($from, $where);
-			}
-			// -- Update des pages modifiées
-			if ($pages_modifiees) {
-				sql_replace_multi($from, $pages_modifiees);
-			}
-			// -- Insertion des nouvelles pages
-			if ($pages_nouvelles) {
-				sql_insertq_multi($from, $pages_nouvelles);
-			}
-			if (sql_preferer_transaction()) {
-				sql_terminer_transaction();
-			}
-
-			$retour = true;
 		}
+
+		// Mise à jour de la table des pages
+		// -- Suppression des pages obsolètes ou de toute les pages non virtuelles si on est en mode
+		//    rechargement forcé.
+		if (sql_preferer_transaction()) {
+			sql_demarrer_transaction();
+		}
+		if ($pages_obsoletes) {
+			sql_delete($from, sql_in('page', $pages_obsoletes));
+		} elseif ($forcer_chargement) {
+			sql_delete($from, $where);
+		}
+		// -- Update des pages modifiées
+		if ($pages_modifiees) {
+			sql_replace_multi($from, $pages_modifiees);
+		}
+		// -- Insertion des nouvelles pages
+		if ($pages_nouvelles) {
+			sql_insertq_multi($from, $pages_nouvelles);
+		}
+		if (sql_preferer_transaction()) {
+			sql_terminer_transaction();
+		}
+
+		// Pour les pages nouvelles ou modifiées, l'indicateur d'activité a été mis à jour.
+		// Mais ce n'est pas le cas pour les pages existantes dont le fichier YAML/XML n'a pas été modifié
+		// (en général, la plupart des pages).
+		// => Il faut donc mettre à jour l'indicateur d'activité pour ces pages.
+		$pages_exclues = $pages_modifiees ? array_column($pages_modifiees, 'page') : array();
+		foreach ($pages_existantes as $_page) {
+			if (!$pages_exclues or !in_array($_page['page'], $pages_exclues)) {
+				$est_active = 'oui';
+				$plugins_necessites = unserialize($_page['necessite']);
+				if ($plugins_necessites) {
+					foreach ($plugins_necessites as $_plugin_necessite) {
+						if (!defined('_DIR_PLUGIN_' . strtoupper($_plugin_necessite))) {
+							$est_active = 'non';
+							break;
+						}
+					}
+				}
+
+				if ($est_active != $_page['est_active']) {
+					sql_updateq($from, array('est_active' => $est_active), array('page=' . sql_quote($_page)));
+				}
+			}
+		}
+
+		$retour = true;
 	}
 
 	return $retour;
