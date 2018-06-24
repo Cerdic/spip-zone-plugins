@@ -101,7 +101,7 @@ function traiter_email_dist($args, $retours) {
 		$saisies_fichiers = saisies_lister_avec_type($saisies, 'fichiers');
 		$saisies_par_nom = saisies_lister_par_nom($saisies);
 
-		// On utilise pas formulaires_formidable_fichiers,
+		// On n'utilise pas formulaires_formidable_fichiers,
 		// car celui-ci retourne les saisies fichiers du formulaire dans la base… or, on sait-jamais,
 		// il peut y avoir eu une modification entre le moment où l'utilisateur a vu le formulaire et maintenant
 		foreach ($champs as $champ) {
