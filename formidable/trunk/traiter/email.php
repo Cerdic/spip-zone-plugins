@@ -234,7 +234,9 @@ function traiter_email_dist($args, $retours) {
 				array(
 					'id_formulaire' => $formulaire['id_formulaire'],
 					'titre' => _T_ou_typo($formulaire['titre']),
-					'message_retour' => $formulaire['message_retour'],
+					'message_retour' => formidable_raccourcis_arobases_2_valeurs_champs(
+						$formulaire['message_retour'], 
+						$saisies),
 					'traitements' => $traitements,
 					'saisies' => $saisies,
 					'valeurs' => $valeurs

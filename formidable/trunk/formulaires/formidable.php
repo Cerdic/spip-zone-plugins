@@ -306,6 +306,7 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 	}
 
 	$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . $id_formulaire);
+	$saisies = unserialize($formulaire['saisies']);
 	$traitements = unserialize($formulaire['traitements']);
 	$traitements = pipeline(
 		'formidable_traitements',
@@ -376,7 +377,11 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 
 		// Si on a personnalisé le message de retour, c'est lui qui est affiché uniquement
 		if ($formulaire['message_retour']) {
-			$retours['message_ok'] = _T_ou_typo($formulaire['message_retour']);
+			$retours['message_ok'] = _T_ou_typo(
+				formidable_raccourcis_arobases_2_valeurs_champs(
+					$formulaire['message_retour'],
+					$saisies)
+				);
 		}
 	} else {
 		$retours['message_erreur'] = _T('formidable:retour_aucun_traitement');
