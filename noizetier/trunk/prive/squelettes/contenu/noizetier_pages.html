@@ -23,11 +23,18 @@
 				<div class="icone">
 					[(#CHEMIN_IMAGE{#ICON}|image_reduire{24}|extraire_attribut{src}|balise_img)]
 				</div>
-			[(#EST_ACTIVE|=={non}|oui)
+			<BOUCLE_si_inactive(CONDITION) {si #EST_ACTIVE|=={non}}>
+				#SET{inactifs, #ARRAY}
+				<BOUCLE_plugins(DATA) {source table, #NECESSITE}{par cle}>
+					[(#PLUGIN{#VALEUR, est_actif}|non)
+						#SET{inactifs, #GET{inactifs}|push{#VALEUR}}
+					]
+				</BOUCLE_plugins>
+				#SET{inactifs, #GET{inactifs}|implode{', '}}
 				#BOITE_OUVRIR{'','notice'}
-					<:noizetier:erreur_page_inactive{page=#PAGE}:>
+					<:noizetier:erreur_page_inactive{plugins=#GET{inactifs}}:>
 				#BOITE_FERMER
-			]
+			</BOUCLE_si_inactive>
 			</div>
 
 			[(#REM) Actions possibles sur la page ]
