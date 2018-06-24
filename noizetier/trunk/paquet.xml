@@ -42,7 +42,6 @@
 	<necessite nom="ncore" compatibilite="[0.4.3;[" />
 	<necessite nom="saisies" compatibilite="[2.2.3;[" />
 	<necessite nom="verifier" compatibilite="[1.0.5;[" />
-	<necessite nom="Z" compatibilite="[2.6.6;[" />
 
 	<utilise nom="compositions" compatibilite="[3.3.0;[" />
 	<utilise nom="ieconfig" compatibilite="[1.3.0;[" />
