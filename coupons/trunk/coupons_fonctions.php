@@ -64,24 +64,34 @@ function coupon_montant_utilisable($id_coupon) {
 }
 
 /**
- * Calculer le montant de la réduction d'un coupon sur une commande
- * en fonction des taxes des objets
+ * Calculer le montant de la réduction d'un coupon sur une commande ou sur un panier en fonction des taxes des objets
  *
+ * @param $id_commande integer or null
+ * @param $id_panier integer
+ * 
  * @return string
  */
-function coupons_calculer_reduction_commande($id_coupon, $id_commande = null) {
-	if (!$id_commande) {
-		$id_commande = intval(session_get('id_commande'));
+function coupons_calculer_reduction_commande($id_coupon, $id_commande, $id_panier=null) {
+	if(!intval($id_commande) && !intval($id_panier)){
+		return false;
 	}
-
+	
 	$montant_reduction = coupon_montant_utilisable($id_coupon);
 	$infos_coupon  = sql_fetsel('id_produit, restriction_taxe', 'spip_coupons', 'id_coupon = ' . $id_coupon);
 	$restriction_taxe = $infos_coupon['restriction_taxe'];
 	$id_produit = $infos_coupon['id_produit'];
 	
-	// calculer le total des produits dans la commande
+	// calculer le total des produits dans la commande / le panier
 	// avec une éventuelle restriction sur la taxe
-	$where = array('id_commande = ' . $id_commande);
+	if(intval($id_commande)) {
+		$where = array('id_commande = ' . $id_commande);
+		$table = 'spip_commandes_details';
+		$champ_prix = 'prix_unitaire_ht';
+	} else if(intval($id_panier)) {
+		$where = array('id_panier = ' . $id_panier);
+		$table = 'spip_paniers_liens pl join spip_produits p on(pl.objet="produit" and pl.id_objet=p.id_produit)';
+		$champ_prix = 'prix_ht';
+	}
 	if (floatval($restriction_taxe)) {
 		$where[] = 'taxe = ' . $restriction_taxe;
 	}
@@ -89,12 +99,12 @@ function coupons_calculer_reduction_commande($id_coupon, $id_commande = null) {
 	if($id_produit) {
 		$where[] = 'objet="produit" and id_objet = ' . $id_produit;
 	}
-	$details = sql_allfetsel('*', 'spip_commandes_details', $where);
+	$details = sql_allfetsel('*', $table, $where);
 
 	$total_commande = 0;
 	foreach ($details as $detail) {
 		if (!in_array($detail['objet'], array('expedition', 'coupon'))) {
-			$total_produit = $detail['prix_unitaire_ht'] * $detail['quantite'] * (1 + $detail['taxe']);
+			$total_produit = $detail[$champ_prix] * $detail['quantite'] * (1 + $detail['taxe']);
 			if (floatval($detail['reduction']) > 0) {
 				$reduction     = min(floatval($detail['reduction']), 1.0); // on peut pas faire une reduction de plus de 100%;
 				$total_produit = $total_produit * (1.0 - $reduction);
@@ -110,7 +120,16 @@ function coupons_calculer_reduction_commande($id_coupon, $id_commande = null) {
 
 	return $montant_reduction;
 }
-
+/**
+ * Calculer le montant de la réduction d'un coupon sur un panier en fonction des taxes des objets
+ *
+ * @param $id_panier integer
+ *
+ * @return string
+ */
+function coupons_calculer_reduction_panier($id_coupon, $id_panier) {
+	return coupons_calculer_reduction_commande($id_coupon, 0, $id_panier);
+}
 /**
  * Génère un code coupon aléatoire et unique, avec un préfixe en option
  * On évite les I et O et 1 et 0 qui se ressemblent trop
@@ -129,4 +148,43 @@ function coupon_generer_code($prefixe = '', $longueur = 10) {
 	}
 
 	return $code;
+}
+
+function coupon_ajouter_commande($id_coupon, $id_commande = null){
+	include_spip('inc/session');
+	
+	if(!$id_commande) {
+		$id_commande = intval(session_get('id_commande'));
+	}
+	
+	if($id_commande) {
+		// supprimer les occurences de coupons déjà présentes dans la commande
+		$id_commande = intval(session_get('id_commande'));
+		sql_delete(
+			'spip_commandes_details',
+			'id_commande=' . $id_commande . ' and objet="coupon"');
+		
+		$titre = sql_getfetsel('titre', 'spip_coupons', 'id_coupon=' . $id_coupon);
+
+		$montant_reduction = coupons_calculer_reduction_commande($id_coupon, $id_commande);
+
+		$id_commandes_detail = objet_inserer('commandes_detail');
+		$valeurs             = array(
+			'id_commande'      => $id_commande,
+			'objet'            => 'coupon',
+			'id_objet'         => $id_coupon,
+			'descriptif'       => $titre,
+			'quantite'         => 1,
+			'prix_unitaire_ht' => 0 - $montant_reduction,
+			'taxe'             => 0,
+			'statut'           => 'attente',
+		);
+		objet_modifier('commandes_detail', $id_commandes_detail, $valeurs);
+
+		// stocker le coupon en session
+		session_set('id_coupon', $id_coupon);
+
+		spip_log('ajout du coupon ' . $id_coupon . ' dans le détail de commande ' . $id_commandes_detail, 'coupons_commandes');
+	}
+	
 }

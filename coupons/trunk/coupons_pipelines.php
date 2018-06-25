@@ -14,13 +14,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
- * Enregistrer la date d'inscription lors de l'insertion d'un auteur en base
+ * Générer un code autoamtique pour le coupon s'il n'en a pas
  *
  * @param array $flux
+ *
  * @return array
  */
-function coupons_pre_insertion($flux){
-	if ($flux['args']['table']=='spip_coupons' && !trim($flux['data']['code'])){
+function coupons_pre_insertion($flux) {
+	if ($flux['args']['table'] == 'spip_coupons' && !trim($flux['data']['code'])) {
 		$flux['data']['code'] = coupon_generer_code();
 	}
 	return $flux;
@@ -30,12 +31,31 @@ function coupons_post_edition($flux) {
 
 	if (
 		$flux['args']['table'] == 'spip_commandes'
+		&& $flux['args']['action'] == 'remplir_commande'
+	) {
+		include_spip('inc/session');
+
+		// si on a un coupon utilisable en session, le remettre dans la commande
+		if ($id_coupon = session_get('id_coupon')) {
+			if (coupon_utilisable($id_coupon)) {
+				$id_commande = intval($flux['args']['id_objet']);
+				coupon_ajouter_commande($id_coupon, $id_commande);
+			}
+		}
+	}
+
+	if (
+		$flux['args']['table'] == 'spip_commandes'
 		&& $flux['args']['action'] == 'instituer'
 		&& $flux['data']['statut'] == 'paye'
 	) {
 		$id_commande = intval($flux['args']['id_objet']);
 
+		include_spip('inc/session');
+		include_spip('action/editer_objet');
+
 		// 1 - au paiement de la commande, traiter les coupons utilisés
+		// (normalement il ne peut y en avoir qu'un seul)
 
 		$infos_coupons = sql_allfetsel(
 			'id_objet, prix_unitaire_ht',
@@ -51,9 +71,16 @@ function coupons_post_edition($flux) {
 					'id_auteur'   => $GLOBALS['visiteur_session']['id_auteur'],
 					'montant'     => abs($coupon['prix_unitaire_ht']),
 				));
-			spip_log('coupon ' . $coupon['id_objet'] . ' utilisé par commande ' . $id_commande . ' - montant : ' . $coupon['prix_unitaire_ht'],
-				'coupons');
+			spip_log('coupon ' . $coupon['id_objet'] . ' utilisé par commande ' . $id_commande . ' - montant : ' . $coupon['prix_unitaire_ht'], 'coupons');
+
+			// si le coupon en entièrement utilisé, on le désactive
+			if (!coupon_montant_utilisable($coupon['id_objet'])) {
+				objet_modifier('coupon', $coupon['id_objet'], array('actif' => ''));
+			}
 		}
+
+		// supprimer le coupon de la session
+		session_set('id_coupon', '');
 
 		// 2 - générer un coupon pour chaque produit "bon d'achat" dans la commande
 
@@ -68,7 +95,7 @@ function coupons_post_edition($flux) {
 				// montant TTC du bon de réduction
 				$montant_coupon = $bon['prix_unitaire_ht'] * (1 + $bon['taxe']);
 				if ($montant_coupon) {
-					include_spip('action/editer_objet');
+
 					$id_coupon      = objet_inserer('coupon');
 					$valeurs_coupon = array(
 						'montant'             => $montant_coupon,
@@ -101,6 +128,7 @@ function coupons_post_edition($flux) {
 }
 
 function coupons_affiche_milieu($flux) {
+	
 	if ($flux['args']['exec'] == 'commande' && $flux['args']['id_commande']) {
 		$details              = sql_allfetsel(
 			'id_commandes_detail',
@@ -124,11 +152,9 @@ function coupons_affiche_milieu($flux) {
 				$flux['data'] .= $texte;
 			}
 		}
-
 	}
 
 	if ($flux['args']['exec'] == 'produit' && $flux['args']['id_produit']) {
-
 		$texte = recuperer_fond(
 			'prive/objets/liste/coupons',
 			array(
@@ -140,8 +166,7 @@ function coupons_affiche_milieu($flux) {
 		} else {
 			$flux['data'] .= $texte;
 		}
-		
 	}
-	
+
 	return $flux;
 }
