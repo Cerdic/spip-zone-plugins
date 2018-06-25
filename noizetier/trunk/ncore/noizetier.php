@@ -121,14 +121,21 @@ function noizetier_type_noisette_completer($plugin, $description) {
  *
  * @return array
  *        Tableau de la description du type de noisette. Les champs textuels et les champs de type tableau sérialisé
- *        sont retournés en l'état.
+ *        sont retournés en l'état, le timestamp `maj n'est pas fourni.
  */
 function noizetier_type_noisette_decrire($plugin, $type_noisette) {
 
-	// Chargement de toute la configuration de la noisette en base de données.
+	// Table des types de noisette.
+	$from = 'spip_types_noisettes';
+
+	// Chargement de toute la configuration de la noisette en base de données sauf le timestamp 'maj'.
 	// Les données sont renvoyées brutes sans traitement sur les textes ni les tableaux sérialisés.
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$table = $trouver_table($from);
+	$select = array_diff(array_keys($table['field']), array('maj'));
+
 	$where = array('plugin=' . sql_quote($plugin), 'type_noisette=' . sql_quote($type_noisette));
-	$description = sql_fetsel('*', 'spip_types_noisettes', $where);
+	$description = sql_fetsel($select, $from, $where);
 
 	return $description;
 }
@@ -148,21 +155,30 @@ function noizetier_type_noisette_decrire($plugin, $type_noisette) {
  *        un champ invalide la fonction renvoie un tableau vide.
  *
  * @return array
- *        Tableau de la forme `[type_noisette] = information ou description complète`.
+ *        Tableau de la forme `[type_noisette] = information ou description complète`. Les champs textuels et
+ *        les champs de type tableau sérialisé sont retournés en l'état, le timestamp `maj n'est pas fourni.
  */
 function noizetier_type_noisette_lister($plugin, $information = '') {
 
+	$from = 'spip_types_noisettes';
 	$where = array('plugin=' . sql_quote($plugin));
-	$select = $information ? array('type_noisette', $information) : '*';
-	if ($info_noisettes = sql_allfetsel($select, 'spip_types_noisettes', $where)) {
+	if ($information) {
+		$select = array('type_noisette', $information);
+	} else {
+		// Tous les champs sauf le timestamp 'maj' sont renvoyés.
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		$table = $trouver_table($from);
+		$select = array_diff(array_keys($table['field']), array('maj'));
+	}
+	if ($types_noisettes = sql_allfetsel($select, $from, $where)) {
 		if ($information) {
-			$info_noisettes = array_column($info_noisettes, $information, 'type_noisette');
+			$types_noisettes = array_column($types_noisettes, $information, 'type_noisette');
 		} else {
-			$info_noisettes = array_column($info_noisettes, null, 'type_noisette');
+			$types_noisettes = array_column($types_noisettes, null, 'type_noisette');
 		}
 	}
 
-	return $info_noisettes;
+	return $types_noisettes;
 }
 
 /**

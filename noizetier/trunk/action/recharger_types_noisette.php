@@ -30,7 +30,7 @@ function action_recharger_types_noisette_dist() {
 		exit();
 	}
 
-	// Rechargement des types de noisette : on ne force pas le recalcul complet.
+	// Rechargement des types de noisette : on force le recalcul complet, c'est le but.
 	include_spip('inc/ncore_type_noisette');
-	type_noisette_charger('noizetier');
+	type_noisette_charger('noizetier', true);
 }

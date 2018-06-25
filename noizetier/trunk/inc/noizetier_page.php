@@ -40,16 +40,18 @@ function noizetier_page_charger($recharger = false) {
 	// Si on le trouve, on récupère la configuration du fichier XML ou YAML.
 	if ($fichiers = find_all_in_path($options['repertoire_pages'], '.+[.]html$')) {
 		$pages_nouvelles = $pages_modifiees = $pages_obsoletes = array();
-		// Récupération :
+		// Récupération pour les divers traitements qui suivent:
 		// - des signatures md5 des pages déjà enregistrées pour déterminer si les fichiers YAML/XML
 		//   ont subi des changements.
 		// - des blocs exclus qui sont éditables après chargement, il faut donc conserver les modifications éventuelles.
 		// - des plugins nécessités et des indicateurs d'activité (voir fin de traitement).
-		$select = array('page', 'signature', 'blocs_exclus', 'necessite', 'est_active');
-		$signatures = $blocs_exclus = array();
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		$table = $trouver_table($from);
+		$select = array_diff(array_keys($table['field']), array('maj'));
+		$signatures = array();
 		if ($pages_existantes = sql_allfetsel($select, $from, $where)) {
-			// On construit le tableau des blocs exclus de chaque page déjà enregistrée en base.
-			$blocs_exclus = array_column($pages_existantes, 'blocs_exclus', 'page');
+			// On construit le tableau des pages déjà enregistrée en base indexé par identifiant de page.
+			$pages_existantes = array_column($pages_existantes, null, 'page');
 
 			// Si on force le rechargement il est inutile de gérer les signatures, les indicateurs d'activité
 			// et les pages modifiées ou obsolètes.
@@ -83,8 +85,8 @@ function noizetier_page_charger($recharger = false) {
 					if (empty($configuration['identique'])) {
 						// On met à jour les blocs exclus avec la sauvegarde effectuée au préalable (si la page
 						// existait déjà en base).
-						if (isset($blocs_exclus[$page])) {
-							$configuration['blocs_exclus'] = $blocs_exclus[$page];
+						if (isset($pages_existantes[$page])) {
+							$configuration['blocs_exclus'] = $pages_existantes[$page];
 						}
 						// On détermine si la page est nouvelle ou modifiée.
 						// En mode rechargement forcé toute page est considérée comme nouvelle.
@@ -114,6 +116,41 @@ function noizetier_page_charger($recharger = false) {
 			}
 		}
 
+		// On complète la liste des pages à changer avec les pages dont l'indicateur d'activité est modifié suite
+		// à l'activation ou à la désactivation d'un plugin (le fichier XML/YAML lui n'a pas changé). Il est inutile de
+		// le faire si on recharge tout.
+		// -- on cherche ces pages en excluant les pages obsolètes et celles à changer qui ont déjà recalculé
+		//    l'indicateur lors de la lecture du fichier XML/YAML.
+		if (!$forcer_chargement) {
+			$pages_exclues = $pages_modifiees
+				? array_merge(array_column($pages_modifiees, 'page'), $pages_obsoletes)
+				: $pages_obsoletes;
+			$pages_a_verifier = $pages_exclues
+				? array_diff_key($pages_existantes, array_flip($pages_exclues))
+				: $pages_existantes;
+
+			if ($pages_a_verifier) {
+				foreach ($pages_a_verifier as $_page => $_description) {
+					$est_active = 'oui';
+					$plugins_necessites = unserialize($_description['necessite']);
+					if ($plugins_necessites) {
+						foreach ($plugins_necessites as $_plugin_necessite) {
+							if (!defined('_DIR_PLUGIN_' . strtoupper($_plugin_necessite))) {
+								$est_active = 'non';
+								break;
+							}
+						}
+					}
+					if ($est_active != $_description['est_active']) {
+						// On stocke la mise à jour dans les types à changer.
+						$_description['est_active'] = $est_active;
+						$pages_modifiees[] = $_description;
+					}
+
+				}
+			}
+		}
+
 		// Mise à jour de la table des pages
 		// -- Suppression des pages obsolètes ou de toute les pages non virtuelles si on est en mode
 		//    rechargement forcé.
@@ -135,30 +172,6 @@ function noizetier_page_charger($recharger = false) {
 		}
 		if (sql_preferer_transaction()) {
 			sql_terminer_transaction();
-		}
-
-		// Pour les pages nouvelles ou modifiées, l'indicateur d'activité a été mis à jour.
-		// Mais ce n'est pas le cas pour les pages existantes dont le fichier YAML/XML n'a pas été modifié
-		// (en général, la plupart des pages).
-		// => Il faut donc mettre à jour l'indicateur d'activité pour ces pages.
-		$pages_exclues = $pages_modifiees ? array_column($pages_modifiees, 'page') : array();
-		foreach ($pages_existantes as $_page) {
-			if (!$pages_exclues or !in_array($_page['page'], $pages_exclues)) {
-				$est_active = 'oui';
-				$plugins_necessites = unserialize($_page['necessite']);
-				if ($plugins_necessites) {
-					foreach ($plugins_necessites as $_plugin_necessite) {
-						if (!defined('_DIR_PLUGIN_' . strtoupper($_plugin_necessite))) {
-							$est_active = 'non';
-							break;
-						}
-					}
-				}
-
-				if ($est_active != $_page['est_active']) {
-					sql_updateq($from, array('est_active' => $est_active), array('page=' . sql_quote($_page)));
-				}
-			}
 		}
 
 		$retour = true;

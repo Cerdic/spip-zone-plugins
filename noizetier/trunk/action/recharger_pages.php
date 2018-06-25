@@ -30,7 +30,7 @@ function action_recharger_pages_dist() {
 		exit();
 	}
 
-	// Rechargement des pages : on ne force pas le recalcul complet.
+	// Rechargement des pages : on force le recalcul complet, c'est le but.
 	include_spip('inc/noizetier_page');
-	noizetier_page_charger();
+	noizetier_page_charger(true);
 }
