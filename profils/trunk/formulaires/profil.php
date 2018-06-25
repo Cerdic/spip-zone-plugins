@@ -203,7 +203,13 @@ function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_
 			// Si la fiche principale est une organisation
 			set_request('id_auteur', $id_auteur);
 			if ($config['activer_organisation'] and $id_organisation) {
+				// Si on ne trouve pas un nom d'organisation, on le remplit avec le nom principal comme pour l'auteur
+				if (!isset($champs_organisation['nom']) or !$champs_organisation['nom']) {
+					$champs_organisation['nom'] = $nom_principal;
+				}
+				// On remplit le request avec les champs de l'organisation
 				profils_traiter_peupler_request('edition', $champs_organisation, $config['organisation']);
+				// On appelle le traitement d'édition de l'organisation
 				$retours_organisation = formulaires_editer_objet_traiter('organisation', $id_organisation, 0, 0, $retour, '');
 				$retours = array_merge($retours, $retours_organisation);
 				$id_organisation = $retours['id_organisation'];
@@ -212,14 +218,18 @@ function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_
 				if ($config['activer_contact'] and $id_contact) {
 					// On précise l'organisation parente
 					set_request('id_parent', $id_organisation);
+					// On remplit le request avec les champs du contact
 					profils_traiter_peupler_request('edition', $champs_contact, $config['contact']);
+					// On appelle le traitement d'édition du contact
 					$retours_contact = formulaires_editer_objet_traiter('contact', $id_contact, $id_organisation, 0, $retour, '');
 					$retours = array_merge($retours_contact, $retours);
 				}
 			}
 			// Sinon si la fiche principale est un contact
 			elseif ($config['activer_contact'] and $id_contact) {
+				// On remplit le request avec les champs du contact
 				profils_traiter_peupler_request('edition', $champs_contact, $config['contact']);
+				// On appelle le traitement d'édition du contact
 				$retours_contact = formulaires_editer_objet_traiter('contact', $id_contact, 0, 0, $retour, '');
 				$retours = array_merge($retours, $retours_contact);
 				$id_contact = $retours['id_contact'];
