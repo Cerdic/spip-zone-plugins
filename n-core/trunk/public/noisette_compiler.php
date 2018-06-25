@@ -1,5 +1,9 @@
 <?php
-// Sécurité
+/**
+ * Ce fichier contient la balise `#NOISETTE_COMPILER` qui génère l'affichage public d'une noisette.
+ *
+ * @package SPIP\NCORE\NOISETTE\BALISE
+ */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -8,7 +12,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Compile la balise `#NOISETTE_COMPILER` qui génère l'affichage de la noisette passée en argument.
  * La signature de la balise est : `#CONTENEUR_IDENTIFIER{id_noisette[, stockage]}`.
  *
- * @package SPIP\NCORE\NOISETTE\BALISE
  * @balise
  *
  * @param Champ $p

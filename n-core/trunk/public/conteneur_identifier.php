@@ -1,5 +1,9 @@
 <?php
-// Sécurité
+/**
+ * Ce fichier contient la balise `#CONTENEUR_IDENTIFIER` qui calcule l'identifiant unique d'un conteneur.
+ *
+ * @package SPIP\NCORE\CONTENEUR\BALISE
+ */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -9,7 +13,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * chaîne de caractères à partir de la description tabulaire du conteneur.
  * La signature de la balise est : `#CONTENEUR_IDENTIFIER{plugin, conteneur[, stockage]}`.
  *
- * @package SPIP\NCORE\CONTENEUR\BALISE
  * @balise
  *
  * @param Champ $p

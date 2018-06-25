@@ -1,5 +1,9 @@
 <?php
-// Sécurité
+/**
+ * Ce fichier contient la balise `#NOISETTE_REPERTORIER` qui renvoie la liste des noisettes incluses dans un conteneur.
+ *
+ * @package SPIP\NCORE\NOISETTE\BALISE
+ */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
