@@ -72,7 +72,9 @@ function formulaires_editer_profil_saisies_dist($id_profil = 'new', $retour = ''
 	$data_rows_auteur = saisies_lister_labels($saisies_auteur);
 	
 	// Récupérer les types de coordonnées
-	$coordonnees_types_numeros = coordonnees_lister_types_coordonnees('numero');
+	if (defined('_DIR_PLUGIN_COORDONNEES')) {
+		$coordonnees_types_numeros = coordonnees_lister_types_coordonnees('numero');
+	}
 	
 	$saisies = array(
 		array(
