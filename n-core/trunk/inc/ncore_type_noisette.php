@@ -67,11 +67,14 @@ function type_noisette_charger($plugin, $recharger = false, $stockage = '') {
 		// Initialisation des tableaux de types de noisette.
 		$types_noisette_a_ajouter = $types_noisette_a_changer = $types_noisette_a_effacer = array();
 
-		// Récupération des signatures md5 des noisettes déjà enregistrées.
-		// Si on force le rechargement il est inutile de gérer les signatures et les noisettes modifiées ou obsolètes.
+		// Récupération la description complète des types de noisette déjà enregistrés de façon :
+		// - à gérer l'activité des types en fin de chargement
+		// - de comparer les signatures md5 des noisettes déjà enregistrées. Si on force le rechargement il est inutile
+		//   de gérer les signatures et les noisettes modifiées ou obsolètes.
+		$types_noisettes_existantes = ncore_type_noisette_lister($plugin, '', $stockage);
 		$signatures = array();
 		if (!$recharger) {
-			$signatures = ncore_type_noisette_lister($plugin, 'signature', $stockage);
+			$signatures = array_column($types_noisettes_existantes, 'signature', 'type_noisette');
 			// On initialise la liste des types de noisette à supprimer avec l'ensemble des types de noisette déjà stockés.
 			$types_noisette_a_effacer = $signatures ? array_keys($signatures) : array();
 		}
@@ -174,6 +177,41 @@ function type_noisette_charger($plugin, $recharger = false, $stockage = '') {
 			}
 		}
 
+		// On complète la liste des types de noisette à changer avec les types de noisette dont l'indicateur
+		// d'activité est modifié suite à l'activation ou à la désactivation d'un plugin (le fichier YAML lui
+		// n'a pas changé). Il est inutile de le faire si on recharge tout.
+		// -- on cherche ces types en excluant les pages obsolètes et celles à changer qui ont déjà recalculé
+		//    l'indicateur lors de la lecture du fichier YAML.
+		if (!$recharger) {
+			$types_noisette_exclus = $types_noisette_a_changer
+				? array_merge(array_column($types_noisette_a_changer, 'type_noisette'), $types_noisette_a_effacer)
+				: $types_noisette_a_effacer;
+			$types_noisette_a_verifier = $types_noisette_exclus
+				? array_intersect_assoc($types_noisettes_existantes, array_flip($types_noisette_exclus))
+				: $types_noisettes_existantes;
+
+			if ($types_noisette_a_verifier) {
+				foreach ($types_noisette_a_verifier as $_type => $_description) {
+					$actif = 'oui';
+					$plugins_necessites = unserialize($_description['necessite']);
+					if ($plugins_necessites) {
+						foreach ($plugins_necessites as $_plugin_necessite) {
+							if (!defined('_DIR_PLUGIN_' . strtoupper($_plugin_necessite))) {
+								$actif = 'non';
+								break;
+							}
+						}
+					}
+					if ($actif != $_description['actif']) {
+						// On stocke la mise à jour dans les types à changer.
+						$_description['actif'] = $actif;
+						$types_noisette_a_changer[] = $_description;
+					}
+
+				}
+			}
+		}
+
 		// Mise à jour du stockage des types de noisette si au moins un des 3 tableaux est non vide et que le chargement forcé
 		// n'est pas demandé:
 		// -- Suppression des types de noisettes obsolètes ou de tous les types de noisettes si on est en mode rechargement forcé.
@@ -181,7 +219,7 @@ function type_noisette_charger($plugin, $recharger = false, $stockage = '') {
 		// -- Update des types de noisette modifiés.
 		// -- Insertion des nouveaux types de noisette.
 		if ($recharger
-			or (!$recharger and ($types_noisette_a_ajouter or $types_noisette_a_effacer or $types_noisette_a_changer))) {
+		or (!$recharger and ($types_noisette_a_ajouter or $types_noisette_a_effacer or $types_noisette_a_changer))) {
 			$types_noisette = array('a_ajouter' => $types_noisette_a_ajouter);
 			if (!$recharger) {
 				$types_noisette['a_effacer'] = $types_noisette_a_effacer;
