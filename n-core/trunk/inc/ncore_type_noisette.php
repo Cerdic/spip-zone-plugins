@@ -1,6 +1,7 @@
 <?php
 /**
- * Ce fichier contient l'API N-Core de gestion des types de noisette, c'est-à-dire les squelettes et leur YAML.
+ * Ce fichier contient l'API N-Core de gestion des types de noisette qui consiste à stocker les descriptions
+ * dans un espace à accès rapide et à permettre leur lecture et leur mise à jour.
  *
  * @package SPIP\NCORE\TYPE_NOISETTE\API
  */
@@ -25,9 +26,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param string $dossier
- *        Chemin relatif (avec un `/` final) dans lequel chercher les fichiers YAML de description des noisettes.
- *        Par défaut, les noisettes seront recherchées dans le dossier `noisettes/`.
  * @param bool   $recharger
  *        Si `true` force le rechargement de toutes les types de noisettes, sinon le chargement se base sur le
  *        md5 des fichiers YAML. Par défaut vaut `false`.
@@ -45,7 +43,7 @@ function type_noisette_charger($plugin, $recharger = false, $stockage = '') {
 	$retour = true;
 
 	// Initialiser le contexte de rechargement
-	// TODO : voir si on ajoute un var_mode=recalcul_noisettes ?
+	// TODO : voir si on ajoute un var_mode=recalcul_types_noisette ?
 
 	// On charge l'API de stockge de N-Core.
 	// Ce sont ces fonctions qui aiguillent ou pas vers une éventuelle fonction spécifique de stockage.
