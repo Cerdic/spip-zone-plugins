@@ -185,7 +185,7 @@ function type_noisette_charger($plugin, $recharger = false, $stockage = '') {
 				? array_merge(array_column($types_noisette_a_changer, 'type_noisette'), $types_noisette_a_effacer)
 				: $types_noisette_a_effacer;
 			$types_noisette_a_verifier = $types_noisette_exclus
-				? array_intersect_assoc($types_noisettes_existantes, array_flip($types_noisette_exclus))
+				? array_diff_key($types_noisettes_existantes, array_flip($types_noisette_exclus))
 				: $types_noisettes_existantes;
 
 			if ($types_noisette_a_verifier) {
