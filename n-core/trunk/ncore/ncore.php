@@ -304,7 +304,7 @@ function ncore_type_noisette_initialiser_ajax($plugin) {
  *
  * Le service N-Core considère que par défaut le dossier relatif des types de noisette est 'noisettes/'.
  *
- * @package SPIP\NCORE\SERVICE\TYPE_NOISETTE
+ * @package SPIP\NCORE\TYPE_NOISETTE\SERVICE
  *
  * @uses ncore_chercher_service()
  *
