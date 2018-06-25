@@ -168,7 +168,7 @@ function formulaires_editer_profil_saisies_dist($id_profil = 'new', $retour = ''
 			'options' => array(
 				'nom' => 'config[activer_groupe_organisation]',
 				'label' => _T('profil:champ_config_activer_groupe_organisation_label'),
-				'explicaiton' => _T('profil:champ_config_activer_groupe_explication'),
+				'explication' => _T('profil:champ_config_activer_groupe_explication'),
 				'afficher_si' => '@config[activer_organisation]@ == "on"',
 			),
 		);
