@@ -98,7 +98,7 @@ function calculer_preview_noisette($plugin, $noisette, $type_noisette_actif, $ty
 		$plugins_inactifs = '';
 		foreach ($plugins as $_plugin) {
 			if (!defined('_DIR_PLUGIN_' . strtoupper($_plugin))) {
-				$plugins_inactifs .= (!$plugins_inactifs ? '' : ', ') . '<a href="' . generer_url_ecrire('charger_plugin', "phrase=$_plugin"). '" title="' . _T('svp:label_critere_phrase') . "\">$_plugin</a>";
+				$plugins_inactifs .= (!$plugins_inactifs ? '' : ', ') . $_plugin;
 			}
 		}
 		$preview = recuperer_fond(
