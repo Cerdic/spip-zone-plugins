@@ -37,7 +37,10 @@ function metasplus_affichage_final($flux) {
 	include_spip('inc/utils'); // pour self()
 
 	// Tests préliminaires avant d'inclure éventuellement les métas
-	if (!test_espace_prive()
+	if (
+		// C'est du HTML et on est pas dans le privé
+		$GLOBALS['html']
+		and !test_espace_prive()
 		// Il y a un <head>
 		and $pos_head = strpos($flux, '</head>')
 		// Au moins un protocole est activé
