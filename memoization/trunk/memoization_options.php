@@ -36,7 +36,7 @@ class MCache {
 	static function methode($methode = null) {
 
 		if (!$methode) {
-			$methodes = array('apc', 'apcu', 'xcache', 'eaccelerator', 'redis', 'filecache', 'nocache');
+			$methodes = array('apcu', 'apc', 'xcache', 'redis', 'filecache', 'nocache');
 			while (!MCache::methode($methode = array_shift($methodes))){};
 			return $methode;
 		}
@@ -55,8 +55,6 @@ class MCache {
 				return function_exists('memcache_set');
 			case 'memcached':
 				return class_exists('Memcached');
-			case 'eaccelerator':
-				return function_exists('eaccelerator_put');
 			case 'redis':
 				return extension_loaded('redis');
 			case 'filecache':
