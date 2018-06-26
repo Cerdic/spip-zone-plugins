@@ -180,4 +180,4 @@ class MCacheBackend_redis extends MCacheBackend {
 	}
     
 }
-?>
+

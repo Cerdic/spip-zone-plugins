@@ -3,31 +3,19 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2010                                                *
+ *  Copyright (c) 2001-2018                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // par defaut pas de progressivite d'invalidation du cache : duree=0
 if (!defined("_DUREE_INVALIDATION_PROGRESSIVE_CACHE"))
 	define("_DUREE_INVALIDATION_PROGRESSIVE_CACHE",0);
 
-/* compat SPIP 1.9 */
-if(!function_exists('test_espace_prive')) {
-	function test_espace_prive() {
-		return !!_DIR_RACINE;
-	}
-}
-/* compat SPIP 2.1 */
-if(defined('_LOG_INFO_IMPORTANTE')) {
-	function memoization_log($log) { spip_log($log, _LOG_INFO_IMPORTANTE); }
-} else {
-	function memoization_log($log) { spip_log($log); }
-}
 
 // https://code.spip.net/@generer_nom_fichier_cache
 function generer_nom_fichier_cache($contexte, $page) {
@@ -405,5 +393,3 @@ function gunzip_page(&$page) {
 		$page['gz'] = false; // ne pas gzuncompress deux fois une meme page
 	}
 }
-
-?>

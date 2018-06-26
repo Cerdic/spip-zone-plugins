@@ -1,8 +1,6 @@
 <?php
 
-if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
-}
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /*
 Vérifier la connexion au serveur redis avec les paramètres fournis par le webmestre

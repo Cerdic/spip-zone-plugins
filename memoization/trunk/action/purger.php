@@ -3,30 +3,21 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2010                                                *
+ *  Copyright (c) 2001-2018                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // https://code.spip.net/@action_purger_dist
 function action_purger_dist($arg=null)
 {
 	if (is_null($arg)) {
-		if ($securiser_action = charger_fonction('securiser_action', 'inc', true))
-			$arg = $securiser_action();
-		else {
-			/* compat SPIP 1.9 */
-			$arg = _request('arg');
-			$redirect = 'ecrire/'._request('redirect');
-			include_spip('inc/meta');
-			function spip_unlink($u) {
-				return unlink($u);
-			}
-		}
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
 	}
 
 	include_spip('inc/invalideur');
@@ -64,8 +55,6 @@ function action_purger_dist($arg=null)
 
 			# ajouter une mark pour les autres methodes de memoization
 			ecrire_meta('cache_mark', time());
-			/* compat SPIP 1.9 */
-			if (function_exists('ecrire_metas')) ecrire_metas();
 
 			break;
 
@@ -83,11 +72,5 @@ function action_purger_dist($arg=null)
 	// le faire savoir aux plugins
 	pipeline('trig_purger',$arg);
 
-	/* compat SPIP 1.9 */
-	if (isset($redirect)) {
-		include_spip('inc/headers');
-		redirige_par_entete($redirect);
-	}
 }
 
-?>

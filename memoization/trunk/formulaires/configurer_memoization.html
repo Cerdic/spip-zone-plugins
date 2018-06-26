@@ -12,7 +12,7 @@
 		[(#REM) ------------------------ Memoization --------------------- ]
 		<fieldset>
 			<h3 class="legend"><:memoization:legend_cache_methode:></h3>
-			<ul>
+			<ul class="editer-groupe">
 				<li class="editer editer_methode">
 					<label for="methode"><:memoization:label_methode:></label>
 					<p class="explication"><:memoization:methodes_grisees:></p>
@@ -57,7 +57,7 @@
 		</fieldset>
 		<fieldset id="memcache_options">
 			<h3 class="legend"><:memoization:legend_memcache:></h3>
-			<ul>
+			<ul class="editer-groupe">
 				<li class="editer editer_memcache_servers">
 					<label for="memcache_servers"><:memoization:label_memcache_serveurs:></label>
 					<p class="explication">(<:memoization:explication_memcache_servers:>)</p>
@@ -68,7 +68,7 @@
 		</fieldset>
 		<fieldset id="redis_options">
 			<h3 class="legend"><:memoization:legend_redis:></h3>
-			<ul>
+			<ul class="editer-groupe">
 				<li class="editer">
 					<div class="choix">
 						<input name="redis_type" [(#ENV{redis_type}|=={server}|ou{#ENV{redis_type}|=={""}}|oui) checked="checked"] class="radio" id="radio_server" value="server" aria-describedby="radio_explication" type="radio">

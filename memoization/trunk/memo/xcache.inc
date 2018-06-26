@@ -92,5 +92,3 @@ class MCacheBackend_xcache extends MCacheBackend {
 		return false;
 	}
 }
-
-?>
