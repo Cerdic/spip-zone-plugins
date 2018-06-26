@@ -38,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'option_methode_apc' => 'APC',
+	'option_methode_apcu' => 'APCu',
 	'option_methode_defaut' => 'Autodetekcia',
 	'option_methode_eaccelerator' => 'E-Akcelerátor',
 	'option_methode_filecache' => 'Súbory (filecache)',

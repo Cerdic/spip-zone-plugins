@@ -19,6 +19,10 @@
 					<select name="methode" id="methode">
 						<option value=""><:memoization:option_methode_defaut:>[
 							((#VAL|memoization_methode))]</option>
+						<option value="apcu"[
+							selected="(#ENV{methode}|=={apcu}|?{selected})"][
+								disabled="(#VAL{apcu}|memoization_methode|non|?{disabled})"]
+								><:memoization:option_methode_apcu:></option>
 						<option value="apc"[
 							selected="(#ENV{methode}|=={apc}|?{selected})"][
 								disabled="(#VAL{apc}|memoization_methode|non|?{disabled})"]
@@ -27,10 +31,6 @@
 							selected="(#ENV{methode}|=={xcache}|?{selected})"][
 								disabled="(#VAL{xcache}|memoization_methode|non|?{disabled})"]
 								><:memoization:option_methode_xcache:></option>
-						<option value="eaccelerator"[
-							selected="(#ENV{methode}|=={eaccelerator}|?{selected})"][
-								disabled="(#VAL{eaccelerator}|memoization_methode|non|?{disabled})"]
-								><:memoization:option_methode_eaccelerator:></option>
 						<option value="memcached"[
 							selected="(#ENV{methode}|=={memcached}|?{selected})"][
 								disabled="(#VAL{memcached}|memoization_methode|non|?{disabled})"]
