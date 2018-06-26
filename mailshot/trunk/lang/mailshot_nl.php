@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_purger_historique_delai' => 'Ouder dan',
 	'label_purger_historique_oui' => 'De details van oude verzendingen wissen',
 	'label_rate_limit' => 'Beperk het verzendvolume',
+	'label_sparkpost_api_endpoint' => 'API Endpoint',
 	'label_sparkpost_api_key' => 'Sparkpost API Key',
 	'label_sujet' => 'Onderwerp',
 	'label_texte' => 'Tekst versie',
