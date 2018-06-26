@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'champ_actif_label'                     => 'Coupon activé',
 	'champ_code_label'                      => 'Code',
+	'champ_date_creation_label'             => 'Date de creation',
 	'champ_date_validite_label'             => 'Date de fin de validité',
 	'champ_id_commandes_detail_label'       => 'Généré par la commande',
 	'champ_montant_label'                   => 'Montant',
@@ -23,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_supprimer_coupon'            => 'Confirmez-vous la suppression de cet coupon de réduction ?',
 	'coupon_genere'                         => 'Coupon généré',
 	'coupon_utilise'                        => 'Coupon utilisé',
-	'coupon_utilisable'                     => 'Coupon utilisable',
+	'coupon_utilisable'                     => 'Coupon valide',
 
 	// E
 	'explication_code_label'                => 'Laisser vide pour le générer aléatoirement',
