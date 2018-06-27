@@ -94,9 +94,11 @@
 	{id_objet}
 	{par nom}
 	{si #ENV{auteurs}|non}
+	{si #EVAL{_METASPLUS_MASQUER_AUTEURS}|!={oui}}
 >
 #SET{auteurs_auto, #GET{auteurs_auto}|push{#NOM}}
 </BOUCLE_auteurs_objet>
+[(#EVAL{_METASPLUS_MASQUER_AUTEURS}|=={oui}|oui) #SET{auteurs_auto, #GET{auteurs_auto}|push{#NOM_SITE_SPIP}} ]
 [(#REM) Les mots-clés ]
 <BOUCLE_mots_objet(MOTS)
 	{objet}
