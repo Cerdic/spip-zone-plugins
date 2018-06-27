@@ -38,7 +38,7 @@ class MCache {
 	static function methode($methode = null) {
 
 		if (!$methode) {
-			$methodes = array('apcu', 'apc', 'xcache', 'redis', 'filecache', 'nocache');
+			$methodes = array('apcu', 'apc', 'xcache', 'filecache', 'nocache');
 			while (!MCache::methode($methode = array_shift($methodes))){};
 			return $methode;
 		}
