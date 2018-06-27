@@ -1,34 +1,38 @@
 [(#REM)
+
 	Formulaire de choix de couleur sur un objet
-][(#REM)
+
 	Action (CVT) :
 		formulaires/couleur_objet.php
+
 	Inclus dans :
 		inclure/couleur_objet.html avec les paramètres :
 			#ENV{objet},#ENV{id_objet},#ENV{couleur_objet}
-		
-][(#REM)
+
 	Particularités :
-		Si plugin Palette activé et si #COULEUR_OBJET n'existe pas, il faut un code hexadécimal pour initialisé la saisie,
+		Si plugin Palette activé et si #COULEUR_OBJET n'existe pas, il faut un code hexadécimal pour initialiser la saisie,
 		c'est pourquoi value=#FFFFFF
-		
+
 ]<div class="formulaire_spip formulaire_config formulaire_#FORM">
 	<h3 class="titrem">[(#CHEMIN{img_pack/couleur_objet-24.png}|balise_img{'',cadre-icone})]Couleur</h3>
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	
 	[(#ENV{editable}|oui)
 	<form method="post" action="#ENV{action}">
 		#ACTION_FORMULAIRE{#ENV{action}}
 		[<input type='hidden' name='objet' value='(#ENV{objet})' />]
 		[<input type='hidden' name='id_objet' value='(#ENV{id_objet})' />]
-		<ul>
-			[<li>
+
+		<[(#DIV|sinon{ul})] class="editer-groupe">
+
+			[<[(#DIV|sinon{li})] class="editer">
 				<label><:couleur_objet:couleur_actuelle:></label>
-				<div class="couleur_objet_actuelle" style="margin:0 0 2px 2px;text-align:center;text-transform:uppercase;background:[(#COULEUR_OBJET)];color:[#(#COULEUR_OBJET|couleur_extreme|couleur_inverser)];border:1px solid;"
+				<div class="couleur_objet_actuelle" style="padding:0.5em;text-align:center;text-transform:uppercase;background:[(#COULEUR_OBJET)];color:[#(#COULEUR_OBJET|couleur_extreme|couleur_inverser)];border:1px solid;"
 				>(#COULEUR_OBJET)</div>
-			</li>][(#COULEUR_OBJET|non)
-			<li><:couleur_objet:aucune_couleur_definie:></li>]
-			<li class="editer_couleur_objet[(#ENV**{erreurs}|table_valeur{couleur_objet}|oui)erreur]">
+			</[(#DIV|sinon{li})]>]
+
+			<[(#DIV|sinon{li})] class="editer editer_couleur_objet[(#ENV**{erreurs}|table_valeur{couleur_objet}|oui)erreur]">
 				<label for="couleur_objet"><:couleur_objet:choisir_une_nouvelle_couleur:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{couleur_objet})</span>
 				]<input type="color" class="palette" id='couleur_objet' name='couleur_objet'[ (#PLUGIN{palette}|?{
@@ -36,8 +40,10 @@
 				,
 					value="#COULEUR_OBJET"
 				})] style="width:100%;text-transform:uppercase;" />
-			</li>
-		</ul>
+			</[(#DIV|sinon{li})]>
+
+		</[(#DIV|sinon{ul})]>
+
 		<div class="boutons clearfix">
 			<input type="submit" class="submit" value="<:bouton_enregistrer|attribut_html:>" style="float:right;" />
 			[(#COULEUR_OBJET|oui) <input type="submit" class="submit" name="supprimer" value="<:couleur_objet:bouton_supprimer|attribut_html:>" style="float:left;" />]
@@ -45,7 +51,6 @@
 	</form>
 	]
 	[(#ENV{editable}|non)
-		[(#COULEUR_OBJET|non)<p><:couleur_objet:aucune_couleur_definie:></p>]
 		[<p class="clearfix">
 			<label><:couleur_objet:couleur_actuelle:></label>
 			<div class="couleur_objet_actuelle" style="margin:0 0 2px 2px;text-align:center;text-transform:uppercase;background:[(#COULEUR_OBJET)];color:[#(#COULEUR_OBJET|couleur_extreme|couleur_inverser)];border:1px solid;"
