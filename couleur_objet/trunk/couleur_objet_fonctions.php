@@ -74,7 +74,7 @@ function objet_couleur($objet, $id_objet, $fallback_parent = false, $fallback_re
 
 	// Si besoin, on prend la couleur du parent
 	if (
-		!$couleur
+		!$couleur_objet
 		and $fallback_parent
 	) {
 		$couleur_objet = objet_couleur_parent($objet, $id_objet, $fallback_recursif);
