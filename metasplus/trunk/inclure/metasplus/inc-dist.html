@@ -128,8 +128,10 @@
 	|image_reduire{#GET{largeur},#GET{hauteur}}
 	|extraire_attribut{src}
 	|supprimer_timestamp}
+[(#VAL{finfo_file}|function_exists|oui)
 #SET{finfo,#EVAL{FILEINFO_MIME_TYPE}|finfo_open}
 #SET{mimetype,#GET{finfo}|finfo_file{#GET{src}}}
+]
 [<meta property="og:image" content="(#GET{src}|url_absolue)" />]
 [<meta property="og:image:width" content="(#GET{src}|largeur)" />]
 [<meta property="og:image:height" content="(#GET{src}|hauteur)" />]
