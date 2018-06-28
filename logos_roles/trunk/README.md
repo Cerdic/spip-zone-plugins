@@ -89,23 +89,7 @@ Le formulaire de configuration du plugin propose également de migrer les logos 
 Surcharges du core
 ------------------
 
-On surcharge plusieurs fichiers du core :
+On surcharge le critère `{logo}` pour qu'il se serve de l'API chercher_logo pour trouver quels objets ont des logos, au lieu de chercher dans le dossier IMG/.
 
-### Modification du formulaire `EDITER_LOGO` ###
-
-Ce formulaire se comporte plus ou moins comme l'ancien, avec quelques améliorations :
-
-- Il utilise les nouvelles APIs.
-- On ajoute automatiquement des champs d'upload fonctionnels pour tous les rôles de logos définis.
-- Permet d'éditer le document correspondant.
-- Ajoute un pipeline qui permet d'ajouter des liens d'actions en-dessous des aperçus de logo : `logo_desc_actions`.
-
-### Modification de `action/editer_logo.php` ###
-
-Ici aussi, on essaie de garder une totale rétro-compatibilité, mais en permettant d'utiliser un rôle dans le troisième paramètre.
-
-Les logos enregistrés avec l'ancienne API sont convertis à la nouvelle automatiquement.
-
-### Surcharge de la balise `{logo}`
-
-On surcharge cette balise pour qu'elle se serve de l'API chercher_logo pour trouver quels objets ont des logos, au lieu de chercher dans le dossier IMG/.
+C'est pas top en terme de performance, il vaudrait mieux faire ça avec une jointure…
+Et plutôt intégrer ça dans le plugin roles_documents.
