@@ -10,7 +10,9 @@
 		#ACTION_FORMULAIRE
 		<div class="editer-groupe">
 			[(#PLUGIN{motpassecomplexe}|oui)
-			<:passe_complexe:motpassecomplexe_actif:>
+			<div class="editer">
+				<div class="explication"><:passe_complexe:motpassecomplexe_actif:></div>
+			</div>
 			]
 			[(#PLUGIN{motpassecomplexe}|non)
 			<div class="editer">

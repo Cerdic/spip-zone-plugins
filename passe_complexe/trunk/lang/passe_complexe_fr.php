@@ -14,5 +14,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cfg_longueur' => 'Longueur minimum du mot de passe : ',
 'cfg_passe_complexe' => 'Configurer le plugin Mot de Passe Compliquer',
 'mot_interdit' => 'Le mot est interdit',
+'motpassecomplexe_actif' => 'Vous avez le plugin "Mot de passe complexe" actif, il faut changer la longeur du mot de passe dans ce plugin',
 
 );
