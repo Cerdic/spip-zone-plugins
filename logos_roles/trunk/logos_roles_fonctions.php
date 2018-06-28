@@ -56,20 +56,26 @@ function lister_roles_logos($objet = null, $role = null, $tous_les_objets = null
 		);
 	}
 
+	if (lire_config('activer_logos') !== 'oui') {
+		return array();
+	}
+
 	// Logos par défaut
-	$roles_logos = pipeline(
-		'roles_logos',
-		array(
-			'logo' => array(
-				'label' => 'logos_roles:logo',
-				'objets' => $tous_les_objets,
-			),
-			'logo_survol' => array(
-				'label' => 'logo_survol',
-				'objets' => $tous_les_objets,
-			),
+	$roles_logos = array(
+		'logo' => array(
+			'label' => 'logos_roles:logo',
+			'objets' => $tous_les_objets,
 		)
 	);
+
+	if (lire_config('activer_logos_survol') === 'oui') {
+		$roles_logos['logo_survol'] = array(
+			'label' => 'logo_survol',
+			'objets' => $tous_les_objets,
+		);
+	}
+
+	$roles_logos = pipeline('roles_logos', $roles_logos);
 
 	if (is_array(lire_config('logos_roles/roles_logos'))) {
 		include_spip('inc/filtres');
