@@ -71,8 +71,8 @@
           <input type='submit' class='submit' value='<:bouton_upload:>' />
         </div>
         <div class="mediatheque">
-          <input class="hidden" name="document_mediatheque_#ENV{quoi}" type="hidden" value=""/>
-          <input class="invisible" name="choisir_document_mediatheque_#ENV{quoi}"
+          <input class="hidden" name="document_mediatheque_#ENV{quoi}_#ENV{objet}_#ENV{id_objet}" type="hidden" value=""/>
+          <input class="invisible" name="choisir_document_mediatheque_#ENV{quoi}_#ENV{objet}_#ENV{id_objet}"
                  type="submit" value="<:logos_roles:valider:>"/>
 
           <a href="#" id="choisir_document_#ENV{quoi}">
@@ -93,8 +93,8 @@
            // Callback du popin, on ferme la modale, on met à jour le formulaire et on le soumet
            function maj_document_mediatheque_[(#ENV{quoi})] (id) {
              $.modalboxclose();
-             $('input\[name="document_mediatheque_#ENV{quoi}"\]').val(id);
-             $('input\[name="choisir_document_mediatheque_#ENV{quoi}"\]').click();
+             $('input\[name="document_mediatheque_#ENV{quoi}_#ENV{objet}_#ENV{id_objet}"\]').val(id);
+             $('input\[name="choisir_document_mediatheque_#ENV{quoi}_#ENV{objet}_#ENV{id_objet}"\]').click();
            };
           </script>
         </div>
