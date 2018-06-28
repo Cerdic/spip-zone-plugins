@@ -162,7 +162,8 @@ function logos_roles_declarer_tables_objets_sql($tables) {
 		foreach ($nouveaux_roles_objets as $objet => $choix) {
 			$nouveaux_roles_objets[$objet] = array(
 				'choix' => $choix,
-				'defaut' => ''
+				'defaut' => 'document',
+				'principaux' => $choix,
 			);
 		}
 
