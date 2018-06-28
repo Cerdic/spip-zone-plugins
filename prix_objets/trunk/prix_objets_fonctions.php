@@ -434,15 +434,15 @@ function prix_par_objet($objet, $id_objet, $contexte, $type = 'prix_ht', $option
 
 			// Séquence composé de dates.
 			if (isset($contexte['date_debut']) and
-				isset($contexte['date_fin']) and
-				include_spip('filtres/dates_outils') and
-				function_exists('dates_intervalle')) {
+					isset($contexte['date_fin']) and
+					include_spip('filtres/dates_outils') and
+					function_exists('dates_intervalle')) {
 
-				$sequence = dates_intervalle($contexte['date_debut'], $contexte['date_fin'], 0, -1, $horaire, $format);
-			}
-			else {
-				$sequence = array();
-			}
+						$sequence = dates_intervalle($contexte['date_debut'], $contexte['date_fin'], 0, -1, $horaire, $format);
+					}
+					else {
+						$sequence = array();
+					}
 		}
 
 		$nr_elements_sequence = count($sequence);
@@ -461,7 +461,7 @@ function prix_par_objet($objet, $id_objet, $contexte, $type = 'prix_ht', $option
 				'titre',
 				'prix_ht'
 			)
-		);
+			);
 
 
 	// On parcours les extension pour chaque prix principal.
@@ -496,7 +496,7 @@ function prix_par_objet($objet, $id_objet, $contexte, $type = 'prix_ht', $option
 								$applicables[] = $applicable;
 							}
 							break;
-						// Si prorata on détermine quels éléments de séquences sont applicables.
+							// Si prorata on détermine quels éléments de séquences sont applicables.
 						case 'prorata':
 							if (is_array($sequence)) {
 								foreach ($sequence as $index => $element) {

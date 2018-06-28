@@ -6,7 +6,7 @@
  * @copyright  2012 - 2018
  * @author     Rainer Müller
  * @licence    GNU/GPL
- * @package    SPIP\Reservation_evenement\Autorisations
+ * @package    SPIP\Prix_objets\Autorisations
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
