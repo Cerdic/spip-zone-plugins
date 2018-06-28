@@ -283,3 +283,59 @@ function lister_objets_avec_logos_roles($type) {
 
 	return join(',', $logos);
 }
+
+/**
+ * Modifier le logo d'un objet à partir d'un document
+ *
+ * @param string $objet
+ * @param int $id_objet
+ * @param string $role
+ *     le role, ou `on` ou `off` pour la rétro-compatibilité
+ * @param integer $id_document : l'identifiant du document
+ * @return string
+ *     Erreur, sinon ''
+ */
+function logo_modifier_document($objet, $id_objet, $role, $id_document) {
+
+	// Cas du LOGO_SITE_SPIP..
+	if (($objet === 'site') and ($id_objet == 0)) {
+		include_spip('base/abstract_sql');
+
+		// On supprime d'éventuels liens existants
+		sql_delete(
+			'spip_documents_liens',
+			array('objet="site"', 'id_objet=0', 'role='.sql_quote($role))
+		);
+
+		// Puis on insère le nouveau
+		sql_insertq(
+			'spip_documents_liens',
+			array(
+				'id_document' => intval($id_document),
+				'objet' => 'site',
+				'id_objet' => 0,
+				'role' => $role,
+			)
+		);
+
+		// On enregistre les logos du site dans une meta, pour pouvoir les rétablir
+		// automatiquement après le passage du CRON d'optimisation, qui efface les
+		// liens vers des id_objet qui valent 0.
+		include_spip('inc/config');
+
+		$logos_site = lire_config('logos_site') ?: array();
+		$logos_site[$role] = intval($id_document);
+		ecrire_config('logos_site', $logos_site);
+
+	// Cas des autres logos
+	} else {
+		include_spip('action/editer_liens');
+		objet_associer(
+			array('document' => $id_document),
+			array($objet => $id_objet),
+			array('role' => $role)
+		);
+	}
+
+	return $erreur = '';
+}
