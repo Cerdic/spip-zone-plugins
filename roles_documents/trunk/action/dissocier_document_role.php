@@ -95,6 +95,7 @@ function supprimer_lien_document_role($id_document, $objet, $id_objet, $role, $s
 
 	// D'abord on ne supprime pas, on dissocie
 	include_spip('action/editer_liens');
+	include_spip('roles_documents_fonctions');
 	// pas de suppression et rôle : on ne dissocie que ce rôle
 	if (!$supprime and $role) {
 		$condition = array('role' => $role);
