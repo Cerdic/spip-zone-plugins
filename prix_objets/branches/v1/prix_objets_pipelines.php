@@ -1,4 +1,13 @@
 <?php
+/**
+ * Utilisations de pipelines par Prix Objets
+ *
+ * @plugin     Prix Objets
+ * @copyright  2012 - 2018
+ * @author     Rainer Müller
+ * @licence    GNU/GPL
+ * @package    SPIP\Prix_objets\Pipelines
+ */
 if (!defined("_ECRIRE_INC_VERSION"))
 	return;
 

@@ -60,6 +60,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_configurer_prix_objets_objets' => 'Configurer Prix Objets',
 	'titre_prix_objets' => 'Prix',
 	'titre_prix_par_objet_mode_global' => 'Global (prix de la première coincidence appliqué globalement)',
-	'titre_prix_par_objet_mode_prorata' => 'Prorata (le prix est calculé pour chaque élément de la séquence)',
+	'titre_prix_par_objet_mode_prorata' => 'Prorata (moyenne des prix de chaque élément d\'une séquence - par example chaque date d\'une période)',
 	'ttc' => 'TTC'
 );
