@@ -263,3 +263,30 @@ function profils_formulaire_traiter($flux) {
 	
 	return $flux;
 }
+
+/**
+ * Ajouter la liste des comptes d'un profil
+ *
+ * @pipeline affiche_enfants
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function profils_affiche_enfants($flux) {
+	if (
+		$flux['args']['objet'] == 'profil'
+		and isset($flux['args']['id_objet'])
+		and $id_objet = $flux['args']['id_objet']
+	) {
+		$comptes = recuperer_fond(
+			'prive/objets/liste/profils_comptes',
+			array('id_profil'=>$id_objet, 'sinon' => _T('profil:comptes_aucun')),
+			array('ajax' => true)
+		);
+		
+		$flux['data'] .= icone_verticale(_T('profil:comptes_creer'), generer_url_ecrire('auteur_profil_edit', 'new=oui&id_profil='.$id_objet), 'profil-24' , 'add' , 'right');
+		$flux['data'] .= '<div class="nettoyeur"></div>';
+		$flux['data'] .= $comptes;
+	}
+	
+	return $flux;
+}

@@ -9,7 +9,6 @@
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{profil:info_1_profil,profil:info_nb_profils}})</strong></caption>]
 	<thead>
 		<tr class="first_row">
-			<th class="picto" scope="col"></th>
 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
 			<th class="titre" scope="col">[(#TRI{titre,<:profil:champ_titre_label:>,ajax})]</th>
 			<th class="id" scope="col">[(#TRI{id_profil,<:info_numero_abbreviation:>,ajax})]</th>
@@ -18,7 +17,6 @@
 	<tbody>
 	<BOUCLE_liste_profils(PROFILS){id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class="picto">[(#CHEMIN_IMAGE{profil-16.png}|balise_img)]</td>
 			<td class="statut">[(#STATUT|puce_statut{profil,#ID_PROFIL})]</td> 
 			<td class="titre principale">[(#LOGO_PROFIL|image_reduire{20,26})]<a href="[(#ID_PROFIL|generer_url_entite{profil})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROFIL">[(#RANG). ]#TITRE</a></td>
 			<td class="id">[(#AUTORISER{modifier,profil,#ID_PROFIL}|?{

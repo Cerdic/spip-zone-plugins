@@ -78,6 +78,8 @@ function profils_declarer_tables_objets_sql($tables) {
 	
 	// Ajouter un champ de profil aux comptes utilisateurs
 	$tables['spip_auteurs']['field']['id_profil'] = 'bigint(21) not null default 0';
+	$tables['spip_auteurs']['champs_editables'][] = 'id_profil';
+	$tables['spip_auteurs']['champs_versionnes'][] = 'id_profil';
 
 	return $tables;
 }

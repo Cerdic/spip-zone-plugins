@@ -16,6 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('base/objets');
 include_spip('inc/actions');
 include_spip('inc/editer');
+include_spip('inc/session');
 include_spip('inc/profils');
 
 /**
@@ -66,16 +67,27 @@ function formulaires_profil_charger_dist($id_auteur = 'new', $id_ou_identifiant_
 	include_spip('inc/autoriser');
 	$contexte = array();
 	
-	// Si pas d'id_auteur on prend celui connecté actuellement
-	if (!intval($id_auteur)) {
-		$id_auteur = session_get('id_auteur');
-	}
+	// Non, si pas d'id_auteur, on en crée un nouveau
+	//~ // Si pas d'id_auteur on prend celui connecté actuellement
+	//~ if (!intval($id_auteur)) {
+		//~ $id_auteur = session_get('id_auteur');
+	//~ }
 	
 	// On vérifie que l'auteur existe et qu'on a le droit de le modifier
+	$id_auteur = intval($id_auteur);
 	if (
-		!$auteur = sql_fetsel('id_auteur,nom,email', 'spip_auteurs', 'id_auteur = '.intval($id_auteur))
-		or !$id_auteur = intval($auteur['id_auteur'])
-		or (!($id_auteur == session_get('id_auteur')) and !autoriser('modifier', 'auteur', $id_auteur))
+		// Si demande de création mais pas le droit
+		(!$id_auteur and !autoriser('creer', 'auteur'))
+		or
+		(
+			// Ou s'il y a un id_auteur mais qu'il n'existe pas ou pas le droit de le modifier
+			$id_auteur
+			and (
+				!$auteur = sql_fetsel('id_auteur,nom,email', 'spip_auteurs', 'id_auteur = '.$id_auteur)
+				or !$id_auteur = intval($auteur['id_auteur'])
+				or (!($id_auteur == session_get('id_auteur')) and !autoriser('modifier', 'auteur', $id_auteur))
+			)
+		)
 	) {
 		return array(
 			'editable' => false,
@@ -165,22 +177,34 @@ function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_
 			$nom_principal = array_shift($nom_principal);
 		}
 		
-		// S'il faut inscrire pour avoir un nouvel utilisateur (à ne pas forcément utiliser pour l'instant)
+		// Si c'est une demande de création, deux cas possibles
 		if (!$id_auteur or $id_auteur=='new') {
-			// Pseudo et email repris des autres champs
-			set_request('mail_inscription', $email_principal);
-			set_request('nom_inscription', $nom_principal);
-			// Inscription en visiteur public
-			$inscription_dist = charger_fonction('traiter', 'formulaires/inscription');
-			$retours_inscription = $inscription_dist('6forum','');
-			$retours = array_merge($retours, $retours_inscription);
+			// Si personne n'est connecté, c'est alors une inscription
+			if (!session_get('id_auteur')) {
+				// Pseudo et email repris des autres champs
+				set_request('mail_inscription', $email_principal);
+				set_request('nom_inscription', $nom_principal);
+				// Inscription en visiteur public
+				$inscription_dist = charger_fonction('traiter', 'formulaires/inscription');
+				$retours_inscription = $inscription_dist('6forum','');
+				$retours = array_merge($retours, $retours_inscription);
+				
+				// On récupère l'auteur qui vient d'être créé
+				$auteur = sql_fetsel('*', 'spip_auteurs', 'email = '.sql_quote($email_principal));
+				$id_auteur = intval($auteur['id_auteur']);
+				// On connecte le nouvel utilisateur directement !
+				include_spip('inc/auth');
+				auth_loger($auteur);
+			}
+			// Sinon c'est qu'une personne crée un profil pour une autre, donc édition classique
+			else {
+				// On crée juste l'auteur vide, les champs seront ajoutés après
+				include_spip('action/editer_objet');
+				$id_auteur = objet_inserer('auteur');
+			}
 			
-			// On récupère l'auteur qui vient d'être créé
-			$auteur = sql_fetsel('*', 'spip_auteurs', 'email = '.sql_quote($email_principal));
-			$id_auteur = intval($auteur['id_auteur']);
-			// On connecte le nouvel utilisateur directement !
-			include_spip('inc/auth');
-			auth_loger($auteur);
+			// Pour une création, on assigne le profil principal
+			set_request('id_profil', $profil['id_profil']);
 		}
 		
 		// Si on a un utilisateur déjà connecté, on modifie déjà l'auteur existant

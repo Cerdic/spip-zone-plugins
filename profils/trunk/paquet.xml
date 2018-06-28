@@ -1,7 +1,7 @@
 <paquet
 	prefix="profils"
 	categorie="auteur"
-	version="1.0.2"
+	version="1.1.0"
 	schema="1.0.0" 
 	etat="test"
 	compatibilite="[3.2.0;3.2.*]"
@@ -27,6 +27,7 @@
 	<pipeline nom="formulaire_fond" inclure="profils_pipelines.php" />
 	<pipeline nom="formulaire_verifier" inclure="profils_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="profils_pipelines.php" />
+	<pipeline nom="affiche_enfants" inclure="profils_pipelines.php" />
 
 	<menu nom="profils" titre="profil:titre_profils" parent="menu_configuration" icone="images/profil-16.png" action="profils" /> 
 </paquet>

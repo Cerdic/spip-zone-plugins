@@ -38,6 +38,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_groupe_organisation_label' => 'Organisation',
 	'champ_identifiant_label' => 'Identifiant',
 	'champ_titre_label' => 'Titre',
+	'comptes_aucun' => 'Aucun compte pour ce profil',
+	'comptes_creer' => 'Créer un nouveau compte pour ce profil',
+	'comptes_liste_detaille' => 'Voir la liste détaillée',
+	'comptes_modifier' => 'Modifier un compte de profil',
 	'confirmer_supprimer_profil' => 'Confirmez-vous la suppression de cet profil ?',
 	
 	// E
