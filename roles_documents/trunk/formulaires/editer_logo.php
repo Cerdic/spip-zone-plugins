@@ -253,15 +253,20 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
 		$res['redirect'] = $retour;
 	}
 
+	// refdoc_joindre peut être un identifiant saisi à la main, ou une référence
+	// retournée par la modale de sélection de la médiathèque, sous la forme docXX.
+	preg_match('/^(doc)?([0-9]+)$/i', _request('refdoc_joindre'), $m);
+	$refdoc_joindre = isset($m[2]) ? $m[2] : 0;
+
 	// Si c'est un doc de la médiathèque, notons s'il est déjà lié
 	$doc_deja_present = (
 		_request('joindre_mediatheque')
 		and sql_countsel(
-		'spip_documents_liens',
+			'spip_documents_liens',
 			array(
 				'objet = ' . sql_quote($objet),
 				'id_objet = ' . intval($id_objet),
-				'id_document = ' . intval(_request('refdoc_joindre')),
+				'id_document = ' . intval($refdoc_joindre),
 				'id_document > 0'
 			)
 		)
