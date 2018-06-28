@@ -306,5 +306,11 @@ function lister_objets_avec_logos_roles($type) {
  */
 function table_objet_simple($type) {
 
+	// S'il n'y a pas de "s" à la fin, on le met.
+	if (substr($type, -1) !== 's') {
+		$type .= 's';
+	}
+
+	// S'il y a un "spip_" ou un "id_" au début, on le retire.
 	return preg_replace(',^spip_|^id_,', '', $type);
 }
