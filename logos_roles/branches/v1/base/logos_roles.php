@@ -138,10 +138,13 @@ function logos_roles_declarer_tables_interfaces($interfaces) {
  */
 function logos_roles_declarer_tables_objets_sql($tables) {
 
-	$noms_tables = array_filter(array_keys($tables), 'is_string');
-
 	include_spip('logos_roles_fonctions');
 	include_spip('base/objets');
+
+	$noms_tables = array_map(
+		'table_objet_simple',
+		array_filter(array_keys($tables), 'is_string')
+	);
 
 	$roles_logos = lister_roles_logos(null, null, $noms_tables);
 
@@ -152,16 +155,7 @@ function logos_roles_declarer_tables_objets_sql($tables) {
 		foreach ($roles_logos as $role => $options) {
 			$nouveaux_roles_titres[$role] = $options['label'];
 			foreach ($options['objets'] as $objet) {
-				// Une ré-implémentation naïve de la fonction table_objet(), qu'on n'a
-				// pas le droit d'utiliser ici, parce qu'elle appelle indirectement ce
-				// pipeline.
-				foreach ($noms_tables as $nom_table) {
-					if (preg_match("/$objet/", $nom_table) === 1) {
-						$table_objet = $nom_table;
-						$nouveaux_roles_objets[$table_objet][] = $role;
-						break;
-					}
-				}
+				$nouveaux_roles_objets[table_objet_simple($objet)][] = $role;
 			}
 		}
 

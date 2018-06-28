@@ -51,7 +51,7 @@ function lister_roles_logos($objet = null, $role = null, $tous_les_objets = null
 
 	if (! $tous_les_objets) {
 		$tous_les_objets = array_map(
-			'table_objet',
+			'table_objet_simple',
 			array_filter(array_keys(lister_tables_objets_sql()))
 		);
 	}
@@ -84,11 +84,11 @@ function lister_roles_logos($objet = null, $role = null, $tous_les_objets = null
 	include_spip('base/objets');
 
 	/* Filtrer par objet */
-	if ($objet and $objet = table_objet($objet)) {
+	if ($objet and $objet = table_objet_simple($objet)) {
 		$roles_logos_objet = array();
 		foreach ($roles_logos as $cle_role => $options) {
 			if ((! is_array($options['objets']))
-					or in_array($objet, array_map('table_objet', $options['objets']))) {
+					or in_array($objet, array_map('table_objet_simple', $options['objets']))) {
 				$roles_logos_objet[$cle_role] = $options;
 			}
 		}
@@ -282,4 +282,23 @@ function lister_objets_avec_logos_roles($type) {
 	}
 
 	return join(',', $logos);
+}
+
+/**
+ * Une ré-implémentation naïve de table_objet
+ *
+ * C'est utile parce que la fonction table_objet appelle la fonction
+ * lister_tables_objet_sql, et qu'on ne peut donc pas l'utiliser avant que la
+ * table des tables ne soit calculée, comme p.ex. dans le pipeline
+ * declarer_objets_sql.
+ *
+ * @param string $type
+ *     Nom de la table SQL (le plus souvent)
+ *     Tolère un nom de clé primaire.
+ * @return string
+ *     Nom de l'objet
+ */
+function table_objet_simple($type) {
+
+	return preg_replace(',^spip_|^id_,', '', $type);
 }
