@@ -311,8 +311,11 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 	$traitements = pipeline(
 		'formidable_traitements',
 		array(
-			'args'=>array('id_formulaire'=>$id_formulaire),
-			'data'=>$traitements
+			'args' => array(
+				'id_formulaire' => $id_formulaire,
+				'identifiant' => $formulaire['identifiant'] 
+			),
+			'data' => $traitements
 		)
 	);
 	// selon le choix, le formulaire se remet en route à la fin ou non
