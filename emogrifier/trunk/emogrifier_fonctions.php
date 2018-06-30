@@ -24,13 +24,12 @@ function filtre_emogrifier($html, $fichier_css = _EMOGRIFIER_CSS) {
   $fichiers = explode(',', $fichier_css);
 
   foreach ($fichiers as $fichier) {
-
-	if (find_in_path($fichier . '.html')) {
-		$_css = produire_fond_statique($fichier, array('format' => 'css'));	
-		$css .= file_get_contents(find_in_path(supprimer_timestamp($_css)));
-	}else{
-		$css .= file_get_contents(find_in_path(trim($fichier)));
-	}
+		if (find_in_path($fichier . '.html')) {
+			$_css = produire_fond_statique($fichier, array('format' => 'css'));
+			$css .= file_get_contents(find_in_path(supprimer_timestamp($_css)));
+		} elseif ( find_in_path(trim($fichier)) ){
+			$css .= file_get_contents(find_in_path(trim($fichier)));
+		}
   }
 
   // Pouvoir dire à DOMDocument.loadHTML de râler en silence sur le html mal formé
@@ -40,7 +39,7 @@ function filtre_emogrifier($html, $fichier_css = _EMOGRIFIER_CSS) {
 
   $htmldoc = new \Pelago\Emogrifier($html, $css);
   if (_EMOGRIFIER_DISABLE_STYLE_BLOCKS_PARSING) {
-	$htmldoc->disableStyleBlocksParsing();
+		$htmldoc->disableStyleBlocksParsing();
   }
   return $htmldoc->emogrify();
 }
