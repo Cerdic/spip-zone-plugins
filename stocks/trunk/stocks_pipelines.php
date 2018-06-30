@@ -82,26 +82,28 @@ function stocks_afficher_fiche_objet($flux) {
 }
 
 function stocks_affiche_milieu($flux) {
-
+	$texte = "";
 	if ($flux['args']['exec'] == 'produit') {
-		$texte = recuperer_fond(
-			'prive/squelettes/inclure/afficher_stock',
+		$flux['data'] .= recuperer_fond(
+			'prive/squelettes/inclure/gerer_stock',
 			$flux['args'] // On passe le contexte au squelette
 		);
 	}
-
-	if ($p = strpos($flux['data'], '<!--affiche_milieu-->')) {
-		$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
-	} else {
-		$flux['data'] .= $texte;
+	if($texte){
+		if ($p = strpos($flux['data'], "<!--affiche_milieu-->")) {
+			$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
+		} else {
+			$flux['data'] .= $texte;
+		}
 	}
 	return $flux;
 }
 
+// ? je ne vois pas la necessité de cette pipeline
+// n'utilisant pas des champ extra quantité sur des objets
 function stocks_pre_boucle($boucle) {
 	//Connaitre la table en cours
   $id_table = $boucle->id_table;
-
   // Savoir si la table a une jointure avec la table Stocks
   if ($jointure = array_keys($boucle->from, 'spip_stocks')) {
 	  //Vérifier qu'on est bien dans le cas d'une jointure automatique
@@ -115,7 +117,6 @@ function stocks_pre_boucle($boucle) {
 		  $boucle->join[$jointure[0]][3] = "'L1.objet='.sql_quote('".objet_type($id_table)."')";
 		}
   }
-
 	return $boucle;
 }
 
