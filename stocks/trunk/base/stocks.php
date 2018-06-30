@@ -14,7 +14,7 @@ function stocks_declarer_tables_interfaces($interface) {
 }
 
 function stocks_declarer_tables_objets_sql($tables) {
-
+	// Déclarer la table stocks
 	$tables['spip_stocks'] = array(
 		'type' => 'stock',
 		'principale' => 'oui',
@@ -32,6 +32,33 @@ function stocks_declarer_tables_objets_sql($tables) {
 		'champs_editables' => array('quantite', 'objet', 'id_objet'),
 		'champs_versionnes' => array('quantite', 'objet', 'id_objet')
 	);
-
+	// Ajouter un statut epuise aux produits
+	array_set_merge($tables, 'spip_produits', array(
+			'statut_textes_instituer'=> array(
+	      'prepa'    => 'texte_statut_en_cours_redaction',
+				'prop'     => 'texte_statut_propose_evaluation',
+				'publie'   => 'texte_statut_publie',
+				'refuse'   => 'texte_statut_refuse',
+				'poubelle' => 'texte_statut_poubelle',
+	      'epuise'   => 'stocks:texte_statut_epuise'
+			),
+      'statut'=> array(
+				array(
+					'champ'     => 'statut',
+					'publie'    => 'publie,epuise',
+					'previsu'   => 'publie,prop,prepa,epuise',
+					'post_date' => 'date',
+					'exception' => array('statut','tout')
+				)
+			),
+      'statut_images' => array(
+                'prepa'    => '../prive/themes/spip/images/puce-preparer-8.png',
+                'prop'     => '../prive/themes/spip/images/puce-proposer-8.png',
+                'publie'   => '../prive/themes/spip/images/puce-publier-8.png',
+                'refuse'   => '../prive/themes/spip/images/puce-refuser-8.png',
+                'poubelle' => '../prive/themes/spip/images/puce-supprimer-8.png',
+                'epuise' => 'puce-epuise-8.png',
+        )
+	));
 	return $tables;
 }

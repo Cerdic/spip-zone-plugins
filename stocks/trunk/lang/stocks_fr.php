@@ -21,4 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'stocks'	=> 'Stocks',
 	'stock_epuise'=>'Épuisé',
 	'stock_gestion' => 'Gestion du stock',
+	// T
+	'texte_statut_epuise' => 'epuisé',
+	'texte_info_epuise' => 'Epuisé',
 );

@@ -1,7 +1,7 @@
 <paquet
 	prefix="stocks"
 	categorie="divers"
-	version="0.2.0"
+	version="0.2.1"
 	etat="dev"
 	compatibilite="[3.0.1;3.2.*]"
 	logo="prive/themes/spip/images/stocks-32.png"
@@ -13,12 +13,16 @@
 	<auteur lien="https://www.mister-graphx.com">Arnaud B. (Mist. GraphX)</auteur>
 
 	<licence>GPLv3</licence>
-
+	<!--  Déclarer la structure des tables et ajouter un statut épuisé aux produits -->
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/stocks.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/stocks.php" />
+	<!--  Ajouter la gestion du stock sur la fiche objet produit -->
 	<pipeline nom="formulaire_charger" inclure="stocks_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="stocks_pipelines.php" />
 	<pipeline nom="afficher_fiche_objet" inclure="stocks_pipelines.php" />
+	<!-- Au passage d'une commande au statut payé
+				décrémenter le stock  -->
+	<pipeline nom="post_edition" inclure="stocks_pipelines.php" />
 
 	<necessite nom="produits" compatibilite="[1.1.25;["/>
 	<necessite nom="saisies" compatibilite="[2.19.1;["/>

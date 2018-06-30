@@ -8,19 +8,19 @@ https://zone.spip.org/trac/spip-zone/browser/_plugins_/stocks/trunk
 
 ## Todo
 
-!! Revoir le schema
-
-- [] un stock doit pouvoir être étendu par des champs extra ou autres fonctionalitées,
-on devrait donc créer une table stock et migrer l'actuelle vers stock_liens pour associer un stock
-a un objet editorial, plusieures espaces de stockage différents et les stocks disponibles.
-- [] Pas de fonction ou action actuelle pour décrémenter le stock au moment d’une commande
-- [] Necessite saisie juste pour 1 champ ajouté dans editer_objet
-- [] Pas de selection des objets sur lesquels on veut gérer des quantitées
-- [] ECRIRE - Export des stocks vers csv, ou autres …
+- [?] mettre en place une config pour gérer ou non le changement de statut du produit
 - [] une noisette/inclure gerer_quantite utilisable dans le panier par exemple
+
+
 
 ## Changelogs
 
+
+v0.2.1
+- Ajoute une fonction de décrémentation du stock des produits au moment du passage a payé d'une commande
+depuis le statut attente|encours (les paiements cartes/paypal ne passe pas par attente)
+- Ajoute un Statut épuise sur les produits quand le stock arrive a 0, permet de filtrer donc plus facilement les produits en ligne et dans la sitemap, sans boucler sur les stocks.
+- On peut gérer le statut d'un produit depuis la page de gestion des stocks, et le repasser manuellement en publié quand on remet du stock.
 
 
 v0.1.5

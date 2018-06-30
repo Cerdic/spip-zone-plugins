@@ -61,6 +61,7 @@ function set_quantite($objet, $id_objet, $quantite) {
  * @param $objet
  * @param $id_objet
  * @param $quantite {int} peut être négatif dans ce cas c'est une décrémentation
+ * @return $update sql_update
 */
 function incrementer_quantite($objet, $id_objet, $quantite) {
 
