@@ -1,25 +1,16 @@
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
 	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-	
+
 	<p class="explication"><:stocks:cfg_titre:></p>
 	<form method="post" action="#ENV{action}">
 		<div>
 			#ACTION_FORMULAIRE{#ENV{action}}
-			<fieldset>
-				<h3 class="legend"><:stocks:cfg_fieldset_legend:></h3>
-				<div class="editer-groupe">
-					<div class="editer">
-						<p class="explication"><:stocks:cfg_quantite_default_explication:></p>
-						<label for='quantite_default'>
-								<:stocks:cfg_quantite_default_label:>
-							</label>
-							<input type="text" name="quantite_default" class="text" value='[(#ENV{quantite_default})]' id='quantite_default'/>
-
-						</div>
-					</div>
-				</div>
-			</fieldset>
+			[(#SAISIE{input,quantite_default,
+				label=<:stocks:cfg_quantite_default_label:>,
+				explication=<:stocks:cfg_quantite_default_explication:>,
+				defaut=#ENV{quantite_default}
+			})]
 			<input type="hidden" name="_meta_casier" value="stocks"/>
 			<p class="boutons">
 				<span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>"/>
