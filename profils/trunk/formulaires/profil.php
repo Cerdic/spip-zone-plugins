@@ -274,6 +274,7 @@ function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_
 					// On appelle le traitement d'édition du contact
 					$retours_contact = formulaires_editer_objet_traiter('contact', $id_contact, $id_organisation, 0, $retour, '');
 					$retours = array_merge($retours_contact, $retours);
+					$id_contact = $retours['id_contact'];
 				}
 			}
 			// Sinon si la fiche principale est un contact
