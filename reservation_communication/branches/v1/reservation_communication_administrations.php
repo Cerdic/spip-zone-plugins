@@ -10,7 +10,7 @@
  */
 
 if (!defined('_ECRIRE_INC_VERSION'))
-  return;
+	return;
 
 /**
  * Fonction d'installation et de mise à jour du plugin Réservation Comunications.
@@ -29,18 +29,18 @@ if (!defined('_ECRIRE_INC_VERSION'))
  * @return void
  **/
 function reservation_communication_upgrade($nom_meta_base_version, $version_cible) {
-  $maj = array();
+	$maj = array();
 
-  $maj['create'] = array( array(
-      'maj_tables',
-      array(
-        'spip_reservation_communications',
-        'spip_reservation_communication_destinataires'
-      )
-    ));
+	$maj['create'] = array( array(
+			'maj_tables',
+			array(
+				'spip_reservation_communications',
+				'spip_reservation_communication_destinataires'
+			)
+		));
 
-  include_spip('base/upgrade');
-  maj_plugin($nom_meta_base_version, $version_cible, $maj);
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 /**
@@ -57,21 +57,21 @@ function reservation_communication_upgrade($nom_meta_base_version, $version_cibl
  **/
 function reservation_communication_vider_tables($nom_meta_base_version) {
 
-  sql_drop_table("spip_reservation_communications");
-  sql_drop_table("spip_reservation_communication_destinataires");
-  # Nettoyer les versionnages et forums
-  sql_delete("spip_versions", sql_in("objet", array(
-    'spip_reservation_communications',
-    'spip_reservation_communication_destinataires'
-  )));
-  sql_delete("spip_versions_fragments", sql_in("objet", array(
-    'spip_reservation_communications',
-    'spip_reservation_communication_destinataires'
-  )));
-  sql_delete("spip_forum", sql_in("objet", array(
-    'spip_reservation_communications',
-    'spip_reservation_communication_destinataires'
-  )));
+	sql_drop_table("spip_reservation_communications");
+	sql_drop_table("spip_reservation_communication_destinataires");
+	# Nettoyer les versionnages et forums
+	sql_delete("spip_versions", sql_in("objet", array(
+		'spip_reservation_communications',
+		'spip_reservation_communication_destinataires'
+	)));
+	sql_delete("spip_versions_fragments", sql_in("objet", array(
+		'spip_reservation_communications',
+		'spip_reservation_communication_destinataires'
+	)));
+	sql_delete("spip_forum", sql_in("objet", array(
+		'spip_reservation_communications',
+		'spip_reservation_communication_destinataires'
+	)));
 
-  effacer_meta($nom_meta_base_version);
+	effacer_meta($nom_meta_base_version);
 }

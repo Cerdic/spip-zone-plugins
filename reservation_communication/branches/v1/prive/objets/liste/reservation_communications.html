@@ -1,60 +1,60 @@
 [(#SET{defaut_tri,#ARRAY{
-  titre,1,
-  type,1,
-  date_redac,-1,
-  date_envoi,-1,
-  id_reservation_communication,1,
-  points,-1
-  }
+	titre,1,
+	type,1,
+	date_redac,-1,
+	date_envoi,-1,
+	id_reservation_communication,1,
+	points,-1
+	}
 })]
 <B_liste_reservation_communications>
-  #ANCRE_PAGINATION
-  <div class="liste-objets reservation_communications">
-    <table class='spip liste'>
-      [
-      <caption>
-        <strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{reservation_communication:info_1_reservation_communication,reservation_communication:info_nb_reservation_communications}})</strong>
-      </caption>
-      ]
-      <thead>
-        <tr class='first_row'>
-          <th class='picto' scope='col'></th>
+	#ANCRE_PAGINATION
+	<div class="liste-objets reservation_communications">
+		<table class='spip liste'>
+			[
+			<caption>
+				<strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{reservation_communication:info_1_reservation_communication,reservation_communication:info_nb_reservation_communications}})</strong>
+			</caption>
+			]
+			<thead>
+				<tr class='first_row'>
+					<th class='picto' scope='col'></th>
 					<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
-          <th class='titre' scope='col'>[(#TRI{titre,<:reservation_communication:champ_titre_label:>,ajax})]</th>
-          <th class='type' scope='col'>[(#TRI{type,<:reservation_communication:champ_type_label:>,ajax})]</th>
-          <th class='date_redac' scope='col'>[(#TRI{date_redac,<:reservation_communication:champ_date_redac_label:>,ajax})]</th>
-           <th class='date_envoi' scope='col'>[(#TRI{date_redac,<:reservation_communication:champ_date_envoi_label:>,ajax})]</th>
-          <th class='id' scope='col'>[(#TRI{id_reservation_communication,<:info_numero_abbreviation:>,ajax})]</th>
-        </tr>
-      </thead>
-      <tbody>
-        <BOUCLE_liste_reservation_communications(RESERVATION_COMMUNICATIONS){id_rubrique?}{id_evenement?}{id_article?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
-          <tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
-            <td class='picto'>[(#CHEMIN_IMAGE{reservation_communication-16.png}|balise_img)]</td>
-            <td class='statut'>[(#STATUT|puce_statut{reservation_communication,#ID_RESERVATION_COMMUNICATION,#ID_RUBRIQUE})]</td>
+					<th class='titre' scope='col'>[(#TRI{titre,<:reservation_communication:champ_titre_label:>,ajax})]</th>
+					<th class='type' scope='col'>[(#TRI{type,<:reservation_communication:champ_type_label:>,ajax})]</th>
+					<th class='date_redac' scope='col'>[(#TRI{date_redac,<:reservation_communication:champ_date_redac_label:>,ajax})]</th>
+					 <th class='date_envoi' scope='col'>[(#TRI{date_redac,<:reservation_communication:champ_date_envoi_label:>,ajax})]</th>
+					<th class='id' scope='col'>[(#TRI{id_reservation_communication,<:info_numero_abbreviation:>,ajax})]</th>
+				</tr>
+			</thead>
+			<tbody>
+				<BOUCLE_liste_reservation_communications(RESERVATION_COMMUNICATIONS){id_rubrique?}{id_evenement?}{id_article?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+					<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+						<td class='picto'>[(#CHEMIN_IMAGE{reservation_communication-16.png}|balise_img)]</td>
+						<td class='statut'>[(#STATUT|puce_statut{reservation_communication,#ID_RESERVATION_COMMUNICATION,#ID_RUBRIQUE})]</td>
 
-            <td class='titre principale'><a href="[(#ID_RESERVATION_COMMUNICATION|generer_url_entite{reservation_communication})]" title="<:info_numero_abbreviation|attribut_html:> #ID_RESERVATION_COMMUNICATION">[(#LOGO_RESERVATION_COMMUNICATION|image_reduire{20,26})][(#RANG). ]#TITRE</a></td>
-            <td class='type'>#TYPE</td>
-            <td class='date primaire'>[(#DATE_REDAC|affdate_jourcourt)]</td>
-            <td class='date secondaire'>[(#DATE_ENVOI|affdate_jourcourt)]</td>
-            <td class='id'>[(#AUTORISER{modifier,reservation_communication,#ID_RESERVATION_COMMUNICATION}|?{ [(#STATUT|=={prepa}|?{
-              <a href="[(#URL_ECRIRE{reservation_communication_edit,id_reservation_communication=#ID_RESERVATION_COMMUNICATION})]">#ID_RESERVATION_COMMUNICATION</a>,
-              #ID_RESERVATION_COMMUNICATION})],
-            #ID_RESERVATION_COMMUNICATION
-            })]</td>
-          </tr>
-          </BOUCLE_liste_reservation_communications>
-      </tbody>
-    </table>
-    [
-    <p class='pagination'>
-      (#PAGINATION{prive})
-    </p>
-    ]
-  </div>
+						<td class='titre principale'><a href="[(#ID_RESERVATION_COMMUNICATION|generer_url_entite{reservation_communication})]" title="<:info_numero_abbreviation|attribut_html:> #ID_RESERVATION_COMMUNICATION">[(#LOGO_RESERVATION_COMMUNICATION|image_reduire{20,26})][(#RANG). ]#TITRE</a></td>
+						<td class='type'>#TYPE</td>
+						<td class='date primaire'>[(#DATE_REDAC|affdate_jourcourt)]</td>
+						<td class='date secondaire'>[(#DATE_ENVOI|affdate_jourcourt)]</td>
+						<td class='id'>[(#AUTORISER{modifier,reservation_communication,#ID_RESERVATION_COMMUNICATION}|?{ [(#STATUT|=={prepa}|?{
+							<a href="[(#URL_ECRIRE{reservation_communication_edit,id_reservation_communication=#ID_RESERVATION_COMMUNICATION})]">#ID_RESERVATION_COMMUNICATION</a>,
+							#ID_RESERVATION_COMMUNICATION})],
+						#ID_RESERVATION_COMMUNICATION
+						})]</td>
+					</tr>
+					</BOUCLE_liste_reservation_communications>
+			</tbody>
+		</table>
+		[
+		<p class='pagination'>
+			(#PAGINATION{prive})
+		</p>
+		]
+	</div>
 </B_liste_reservation_communications>
 [
 <div class="liste-objets reservation_communications caption-wrap">
-  <strong class="caption">(#ENV*{sinon,''})</strong>
+	<strong class="caption">(#ENV*{sinon,''})</strong>
 </div>
 ]<//B_liste_reservation_communications>
