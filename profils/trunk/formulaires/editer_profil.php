@@ -288,6 +288,28 @@ function formulaires_editer_profil_saisies_dist($id_profil = 'new', $retour = ''
 		}
 		// On ajoute le groupe au formulaire
 		$saisies[] = $groupe_contact;
+		
+		// S'il y a l'option pour utiliser plusieurs annuaires
+		if (lire_config('contacts_et_organisations/utiliser_annuaires')) {
+			$saisies[] = array(
+				'saisie' => 'fieldset',
+				'options' => array(
+					'label' => _T('contacts:annuaire'),
+					'nom' => 'groupe_annuaire',
+					'afficher_si' => '@config[activer_organisation]@ == "on" || @config[activer_contact]@ == "on"',
+				),
+				'saisies' => array(
+					array(
+						'saisie' => 'annuaires',
+						'options' => array(
+							'nom' => 'config[id_annuaire]',
+							'label' => _T('profil:champ_config_id_annuaire_label'),
+							'explication' => _T('profil:champ_config_id_annuaire_explication'),
+						),
+					),
+				),
+			);
+		}
 	}
 	
 	return $saisies;

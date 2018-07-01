@@ -201,6 +201,31 @@ function profils_formulaire_traiter($flux) {
 			$retours = array_merge($retours, $retours_auteur);
 			//~ $auteur = sql_fetsel('id_auteur, nom, email', 'spip_auteurs', 'id_auteur = '.$id_auteur);
 			
+			// On voit si on doit placer dans un annuaire
+			if (defined('_DIR_PLUGIN_CONTACTS') and lire_config('contacts_et_organisations/utiliser_annuaires')) {
+				// On teste s'il faut créer un nouvel annuaire
+				if (
+					// S'il n'y a pas d'annuaire configuré
+					!isset($config['id_annuaire'])
+					or !$id_annuaire = intval($config['id_annuaire'])
+					// Ou s'il n'existe plus
+					or !sql_getfetsel('id_annuaire', 'spip_annuaires', 'id_annuaire='.$id_annuaire)
+				) {
+					// On cherche s'il existe un annuaire du même identifiant que le profil
+					if (!$id_annuaire = sql_getfetsel('id_annuaire', 'spip_annuaires', 'identifiant='.sql_quote($profil['identifiant']))) {
+						// Alors on en crée un nouveau
+						$id_annuaire = objet_inserer(
+							'annuaire',
+							null,
+							array('titre'=>$profil['titre'], 'identifiant'=>$profil['identifiant'])
+						);
+					}
+				}
+				
+				// On le met en requête
+				set_request('id_annuaire', $id_annuaire);
+			}
+			
 			// Si la fiche principale est une organisation
 			set_request('id_auteur', $id_auteur);
 			if ($config['activer_organisation'] and $id_organisation) {

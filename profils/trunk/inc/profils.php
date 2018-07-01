@@ -315,7 +315,7 @@ function profils_chercher_ids_profil($id_auteur=0, $id_ou_identifiant_profil='')
 				// Cherchons une organisation
 				if (
 					!intval($ids['id_auteur'])
-					or !$id_organisation = intval(sql_getfetsel('id_organisation', 'spip_organisations', 'id_auteur = '.$ids['id_auteur']))
+					or !$ids['id_organisation'] = intval(sql_getfetsel('id_organisation', 'spip_organisations', 'id_auteur = '.$ids['id_auteur']))
 				) {
 					$ids['id_organisation'] = 'new';
 				}
@@ -323,9 +323,9 @@ function profils_chercher_ids_profil($id_auteur=0, $id_ou_identifiant_profil='')
 				// Il peut aussi y avoir un contact physique *lié à l'orga*
 				if (
 					!intval($ids['id_organisation'])
-					or !$liens = objet_trouver_liens(array('contact'=>'*'), array('organisation'=>$ids['id_organisation']))
+					or !$liens = objet_trouver_liens(array('organisation'=>$ids['id_organisation']), array('contact'=>'*'))
 					or !$contact = $liens[0]
-					or !$ids['id_contact'] = intval($contact['id_contact'])
+					or !$ids['id_contact'] = intval($contact['id_objet'])
 				) {
 					$ids['id_contact'] = 'new';
 				}

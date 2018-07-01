@@ -17,6 +17,7 @@ include_spip('base/objets');
 include_spip('inc/actions');
 include_spip('inc/editer');
 include_spip('inc/session');
+include_spip('inc/config');
 include_spip('inc/profils');
 
 /**
@@ -84,7 +85,6 @@ function formulaires_profil_charger_dist($id_auteur = 'new', $id_ou_identifiant_
 			$id_auteur
 			and (
 				!$auteur = sql_fetsel('id_auteur,nom,email', 'spip_auteurs', 'id_auteur = '.$id_auteur)
-				or !$id_auteur = intval($auteur['id_auteur'])
 				or (!($id_auteur == session_get('id_auteur')) and !autoriser('modifier', 'auteur', $id_auteur))
 			)
 		)
@@ -200,7 +200,7 @@ function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_
 			else {
 				// On crée juste l'auteur vide, les champs seront ajoutés après
 				include_spip('action/editer_objet');
-				$id_auteur = objet_inserer('auteur');
+				$id_auteur = objet_inserer('auteur', null, array('statut' => '6forum'));
 			}
 			
 			// Pour une création, on assigne le profil principal
@@ -224,6 +224,31 @@ function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_
 			$retours = array_merge($retours, $retours_auteur);
 			//~ $auteur = sql_fetsel('id_auteur, nom, email', 'spip_auteurs', 'id_auteur = '.$id_auteur);
 			
+			// On voit si on doit placer dans un annuaire
+			if (defined('_DIR_PLUGIN_CONTACTS') and lire_config('contacts_et_organisations/utiliser_annuaires')) {
+				// On teste s'il faut créer un nouvel annuaire
+				if (
+					// S'il n'y a pas d'annuaire configuré
+					!isset($config['id_annuaire'])
+					or !$id_annuaire = intval($config['id_annuaire'])
+					// Ou s'il n'existe plus
+					or !sql_getfetsel('id_annuaire', 'spip_annuaires', 'id_annuaire='.$id_annuaire)
+				) {
+					// On cherche s'il existe un annuaire du même identifiant que le profil
+					if (!$id_annuaire = sql_getfetsel('id_annuaire', 'spip_annuaires', 'identifiant='.sql_quote($profil['identifiant']))) {
+						// Alors on en crée un nouveau
+						$id_annuaire = objet_inserer(
+							'annuaire',
+							null,
+							array('titre'=>$profil['titre'], 'identifiant'=>$profil['identifiant'])
+						);
+					}
+				}
+				
+				// On le met en requête
+				set_request('id_annuaire', $id_annuaire);
+			}
+			
 			// Si la fiche principale est une organisation
 			set_request('id_auteur', $id_auteur);
 			if ($config['activer_organisation'] and $id_organisation) {
@@ -240,6 +265,8 @@ function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_
 				
 				// Si on a aussi un contact en plus
 				if ($config['activer_contact'] and $id_contact) {
+					// On enlève l'id_auteur
+					set_request('id_auteur', null);
 					// On précise l'organisation parente
 					set_request('id_parent', $id_organisation);
 					// On remplit le request avec les champs du contact
