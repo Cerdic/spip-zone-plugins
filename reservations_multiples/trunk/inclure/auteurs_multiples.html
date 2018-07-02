@@ -1,7 +1,7 @@
 #SET{limit,#CONFIG{reservations_multiples/nombre_limite}}
 <div class="auteurs_multiples_0" id="auteurs_multiples">
 	<div class="editer label">
-	<label><:reservations_multiples:label_reserver_amie:></label>
+		<label><:reservations_multiples:label_reserver_amie:></label>
 	</div>
 		<B_extras>
 		<div class="editer multiples_personnes">
@@ -24,7 +24,7 @@
 			</div>
 			</BOUCLE_extras>
 			[(#GET{limit}|>{#TOTAL_BOUCLE}|oui|ou{#GET{limit}|non})
-			<div>
+			<div class="editer">
 				<div class="choix">
 					<input
 						type="image"
@@ -36,16 +36,16 @@
 			</div>]
 		</div>
 		</B_extras>
-	<div class="editer ajouter">
-		<div class="choix">
-			<input
-				type="image"
-				value="1"
-				name="nr_auteurs"
-				src="#CHEMIN_IMAGE{auteur-new-24.png}"
-				[ (#HTML5)formnovalidate] alt="minus" /> <label><:reservations_multiples:label_ajouter:></label>
+		<div class="editer ajouter">
+			<div class="choix">
+				<input
+					type="image"
+					value="1"
+					name="nr_auteurs"
+					src="#CHEMIN_IMAGE{auteur-new-24.png}"
+					[ (#HTML5)formnovalidate] alt="minus" /> <label><:reservations_multiples:label_ajouter:></label>
+			</div>
 		</div>
-	</div>
 	<//B_extras>
 </div>
 
