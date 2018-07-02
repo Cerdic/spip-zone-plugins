@@ -14,6 +14,7 @@
 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
 			<th class="nom" scope="col">[(#TRI{multi nom,<:info_nom:>,ajax})]</th>
 			<th class="email" scope="col">[(#TRI{email,<:email:>,ajax})]</th>
+			<th class="actions" scope="col"></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -22,12 +23,14 @@
 			<td class="statut">[(#STATUT|puce_statut{auteur,#ID_AUTEUR})]</td> 
 			<td class="nom principale">
 				[(#LOGO_AUTEUR|image_reduire{20,26})]
-				[(#AUTORISER{modifier,auteur,#ID_AUTEUR}|?{
-					<a href="[(#URL_ECRIRE{auteur_profil_edit, id_auteur=#ID_AUTEUR})]" title="<:info_numero_abbreviation|attribut_html:> #ID_AUTEUR">[(#RANG). ]#NOM</a>,
-					[(#RANG). ]#NOM
-				})]
+				<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#RANG). ]#NOM</a>
 			</td>
-			<td class='email'>[<a href='mailto:(#EMAIL)'>[(#EMAIL|couper{30})]</a>]</td>
+			<td class=""email">[<a href='mailto:(#EMAIL)'>[(#EMAIL|couper{30})]</a>]</td>
+			<td class="actions">
+				[(#AUTORISER{modifier,auteur,#ID_AUTEUR}|oui)
+					[(#URL_ECRIRE{auteur_profil_edit, id_auteur=#ID_AUTEUR}|icone_horizontale{<:bouton_modifier:>, '', 'edit-16'})]
+				]
+			</td>
 		</tr>
 	</BOUCLE_liste_comptes>
 	</tbody>
