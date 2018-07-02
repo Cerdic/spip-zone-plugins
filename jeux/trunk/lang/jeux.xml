@@ -13,4 +13,7 @@
 	<langue code="it" url="https://trad.spip.net/tradlang_module/jeux?lang_cible=it" total="82" traduits="34" relire="0" modifs="37" nouveaux="11" pourcent="41.46">
 		<traducteur nom="Alessandra" lien="https://trad.spip.net/auteur/alessandra" />
 	</langue>
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/jeux?lang_cible=nl" total="82" traduits="82" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
+	</langue>
 </traduction>
