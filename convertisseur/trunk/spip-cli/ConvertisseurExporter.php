@@ -21,7 +21,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 
-class fichiersExporter extends Command {
+class ConvertisseurExporter extends Command {
 	protected function configure() {
 		$this
 			->setName('convertisseur:exporter')
