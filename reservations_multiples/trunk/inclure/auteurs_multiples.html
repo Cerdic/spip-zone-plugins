@@ -53,16 +53,6 @@
 <script type="text/javascript">
 //<![CDATA[
 	$(function() {
-		$(".action.nr_auteurs").click(function() {
-			var nr_auteurs = $(this).attr('data-nombre');
-			console.log(nr_auteurs);
-			// Recharger les champs
-			ajaxReload('auteurs_multiples', {
-				args : {
-					nr_auteurs : nr_auteurs,
-				}
-			});
-		});
 		$("input[name='nr_auteurs']").click(function() {
 			var nr_auteurs = $(this).val();
 			// Recharger les champs

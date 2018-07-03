@@ -50,7 +50,6 @@ function reservations_multiples_formulaire_charger($flux) {
 					}
 				}
 			}
-			$flux['data']['accepte_ajax'] = _AJAX;
 			$flux['data']['id_reservation_source'] = '';
 			$flux['data']['type_lien'] = '';
 			$flux['data']['origine_lien'] = '';
