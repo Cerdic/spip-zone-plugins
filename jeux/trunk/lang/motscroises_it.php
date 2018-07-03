@@ -1,18 +1,22 @@
 <?php
-if (!defined("_ECRIRE_INC_VERSION")) return;
-// This is a SPIP language file  --  Questo &egrave; un file di lingua di  SPIP
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de https://trad.spip.net/tradlang_module/motscroises?lang_cible=it
+// ** ne pas modifier le fichier **
+
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'titre'		=>'Schema di parole crociate',
-'titre_court'		=>'Parole crociate',
+	// H
+	'horizontalement' => 'Orizzontali:',
 
-'table_summary'		=>'Schema di parole crociate di @largeur@ colonne e @hauteur@ righe',
+	// T
+	'table_summary' => 'Schema di parole crociate di @largeur@ colonne e @hauteur@ righe',
+	'titre' => 'Schema di parole crociate',
+	'titre_court' => 'Parole crociate',
 
-'horizontalement' 	=> 'Orizzontali:',
-'verticalement'		=> 'Verticali:',
-
+	// V
+	'verticalement' => 'Verticali:'
 );
-
-
-?>

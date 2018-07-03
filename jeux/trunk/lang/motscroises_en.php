@@ -1,18 +1,22 @@
 <?php
-if (!defined("_ECRIRE_INC_VERSION")) return;
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de https://trad.spip.net/tradlang_module/motscroises?lang_cible=en
+// ** ne pas modifier le fichier **
+
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'titre'		=>'Crossword puzzle',
-'titre_court'		=>'Crossword',
+	// H
+	'horizontalement' => 'Across:',
 
-'table_summary'		=>'Crossword puzzle with @largeur@ columns and @hauteur@ rows',
+	// T
+	'table_summary' => 'Crossword puzzle with @largeur@ columns and @hauteur@ rows',
+	'titre' => 'Crossword puzzle',
+	'titre_court' => 'Crossword',
 
-'horizontalement' 	=> 'Across:',
-'verticalement'		=> 'Down:',
-
+	// V
+	'verticalement' => 'Down:'
 );
-
-
-?>
