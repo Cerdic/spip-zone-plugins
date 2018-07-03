@@ -1,22 +1,24 @@
 <?php
-if (!defined("_ECRIRE_INC_VERSION")) return;
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/jeux/trunk/lang/
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'titre'		=>'Le jeu du Pendu',
-'titre_court'		=>'Pendu',
+	// C
+	'cliquez' => 'Cliquez sur la lettre que vous voulez proposer :',
 
-'regle'		=>"R&egrave;gles du jeu : Il s'agit de deviner un mot qui vous est propos&eacute;.
-_ Vous devez choisir une lettre &agrave; chaque essai. Si la lettre existe dans le mot, elle appara&icirc;t &agrave; la bonne place.
-_ La t&ecirc;te, un bras, une jambe... Au bout de la six&egrave;me erreur, vous &ecirc;tes pendu !",
+	// F
+	'fini' => 'Pendu(e) !\\n\\nIl fallait trouver : ',
 
-'cliquez'	=> "Cliquez sur la lettre que vous voulez proposer :",
+	// R
+	'regle' => 'Règles du jeu : Il s’agit de deviner un mot qui vous est proposé.
+_ Vous devez choisir une lettre à chaque essai. Si la lettre existe dans le mot, elle apparaît à la bonne place.
+_ La tête, un bras, une jambe... Au bout de la sixème erreur, vous êtes pendu !',
 
-// javascript
-'fini'		=> 'Pendu(e) !\n\nIl fallait trouver : ',
-
+	// T
+	'titre' => 'Le jeu du Pendu',
+	'titre_court' => 'Pendu'
 );
-
-
-?>
