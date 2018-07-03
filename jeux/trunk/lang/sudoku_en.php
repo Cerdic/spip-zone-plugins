@@ -1,16 +1,19 @@
 <?php
-if (!defined("_ECRIRE_INC_VERSION")) return;
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de https://trad.spip.net/tradlang_module/sudoku?lang_cible=en
+// ** ne pas modifier le fichier **
+
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'titre'		=>'Sudoku puzzle',
-'titre_court'		=>'Sudoku',
-'table_summary'		=>'Sudoku puzzle with @largeur@ columns and @hauteur@ rows',
+	// R
+	'regle' => 'Règle du jeu : en partant des chiffres déjà inscrits, remplissez la grille de manière que chaque ligne, chaque colonne et chaque carré de @largeur@ par @hauteur@ contienne une seule fois tous les chiffres de 1 à @max@.',
 
-'regle'		=> "R&egrave;gle du jeu : en partant des chiffres d&eacute;j&agrave; inscrits, remplissez la grille de mani&egrave;re que chaque ligne, chaque colonne et chaque carr&eacute; de @largeur@ par @hauteur@ contienne une seule fois tous les chiffres de 1 &agrave; @max@."
-
+	// T
+	'table_summary' => 'Sudoku puzzle with @largeur@ columns and @hauteur@ rows',
+	'titre' => 'Sudoku puzzle',
+	'titre_court' => 'Sudoku'
 );
-
-
-?>
