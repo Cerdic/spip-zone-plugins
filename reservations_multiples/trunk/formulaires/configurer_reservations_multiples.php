@@ -46,4 +46,4 @@ function formulaires_configurer_reservations_multiples_saisies_dist() {
 		)
 	);
 }
-?>
+
