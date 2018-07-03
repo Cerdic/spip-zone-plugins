@@ -283,6 +283,8 @@ function sparkpost_api_call($method,$data=null,$http_req=null) {
 
 	include_spip('inc/distant');
 	$endpoint = "https://api.".$api_endpoint."/api/v1/";
+	// for TLSv1.2 test purpose
+	//$endpoint = "https://no-tlsv1-test-api.".$api_endpoint."/api/v1/";
 
 	$headers =
 		  "Authorization: $api_key\n"
@@ -297,19 +299,7 @@ function sparkpost_api_call($method,$data=null,$http_req=null) {
 	$post_data = $headers . "\n" . $post_data;
 
 	$debug = '';
-	if (function_exists('recuperer_url')){
-		$options = array(
-			'datas'=>$post_data
-		);
-		if (in_array($http_req,array("DELETE","PUT"))) {
-			$options['methode'] = $http_req;
-		}
-		$result = recuperer_url($url, $options);
-		$debug = var_export($result, true);
-		$response = $result['page'];
-		$fonction_utilisee = 'recuperer_url';
-	}
-	elseif(function_exists('curl_init')){
+	if(function_exists('curl_init')){
 		$ch = curl_init();
 		$headers = explode("\n",$headers);
 		curl_setopt($ch, CURLOPT_URL, $url);
@@ -323,9 +313,29 @@ function sparkpost_api_call($method,$data=null,$http_req=null) {
 			curl_setopt($ch, CURLOPT_POST, TRUE);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 		}
+		if (!defined('CURL_SSLVERSION_TLSv1_2')) {
+		    define('CURL_SSLVERSION_TLSv1_2', 6);
+		}
+
+		curl_setopt ($ch, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
 		$response = curl_exec($ch);
+		if (!$response) {
+			$debug = curl_error($ch);
+		}
 		curl_close($ch);
 		$fonction_utilisee = 'curl';
+	}
+	elseif (function_exists('recuperer_url')){
+		$options = array(
+			'datas'=>$post_data
+		);
+		if (in_array($http_req,array("DELETE","PUT"))) {
+			$options['methode'] = $http_req;
+		}
+		$result = recuperer_url($url, $options);
+		$debug = var_export($result, true);
+		$response = $result['page'];
+		$fonction_utilisee = 'recuperer_url';
 	}
 	else {
 		$response = recuperer_page($url, '', '', '', $post_data);
