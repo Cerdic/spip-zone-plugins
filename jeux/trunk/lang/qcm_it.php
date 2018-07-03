@@ -1,15 +1,18 @@
 <?php
-if (!defined("_ECRIRE_INC_VERSION")) return;
-// This is a SPIP language file  --  Questo &egrave; un file lingua di SPIP
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de https://trad.spip.net/tradlang_module/qcm?lang_cible=it
+// ** ne pas modifier le fichier **
+
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'qcm_titre' => "Un questionario a scelta multipla",
-'titre' => "Questionario a Scelta Multipla",
-'titre_court' => "QSM",
+	// Q
+	'qcm_titre' => 'Un questionario a scelta multipla',
 
+	// T
+	'titre' => 'Questionario a Scelta Multipla',
+	'titre_court' => 'QSM'
 );
-
-
-?>
-
