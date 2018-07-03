@@ -70,7 +70,6 @@ class ConvertisseurExporter extends Command {
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		global $spip_racine;
 		global $spip_loaded;
-		global $spip_version_branche ;
 		
 		include_spip("iterateur/data");
 		
@@ -291,9 +290,8 @@ class ConvertisseurExporter extends Command {
 	}
 }
 
-
 // compat spip 2
-if($spip_version_branche < 3){
+if($GLOBALS['spip_version_branche'] < 3){
 	function calcul_hierarchie_in($id, $tout = true) {
 		
 		static $b = array();
