@@ -296,6 +296,7 @@ function sparkpost_api_call($method,$data=null,$http_req=null) {
 	}
 	$post_data = $headers . "\n" . $post_data;
 
+	$debug = '';
 	if (function_exists('recuperer_url')){
 		$options = array(
 			'datas'=>$post_data
@@ -304,7 +305,9 @@ function sparkpost_api_call($method,$data=null,$http_req=null) {
 			$options['methode'] = $http_req;
 		}
 		$result = recuperer_url($url, $options);
+		$debug = var_export($result, true);
 		$response = $result['page'];
+		$fonction_utilisee = 'recuperer_url';
 	}
 	elseif(function_exists('curl_init')){
 		$ch = curl_init();
@@ -322,9 +325,11 @@ function sparkpost_api_call($method,$data=null,$http_req=null) {
 		}
 		$response = curl_exec($ch);
 		curl_close($ch);
+		$fonction_utilisee = 'curl';
 	}
 	else {
 		$response = recuperer_page($url, '', '', '', $post_data);
+		$fonction_utilisee = 'recuperer_page';
 	}
 	if (!$response
 		OR !$response = json_decode($response, true)) {
@@ -332,7 +337,7 @@ function sparkpost_api_call($method,$data=null,$http_req=null) {
 			'errors' => array(
 				array(
 					'code' => '???',
-					'message' => 'Fail recuperer_page'
+					'message' => 'Fail ' . $fonction_utilisee . ' ' . $debug,
 				)
 			)
 		);
