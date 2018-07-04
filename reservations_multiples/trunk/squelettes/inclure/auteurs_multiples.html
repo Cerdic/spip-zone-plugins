@@ -52,13 +52,23 @@
 
 <script type="text/javascript">
 //<![CDATA[
+
 	$('.editer.action').on("click", "input[name='nr_auteurs']", function(){
-		var nr_auteurs = $(this).val();
+		var data = {
+				nr_auteurs : $(this).val()
+			}
+		
+		// Les valeurs des champs multiples
+		var champs_multiple = $('.editer.multiples_personnes').find('[id*=champ]');
+
+		champs_multiple.each(function() {
+			data[this.name] = this.value;
+		});
+
 		// Recharger les champs
 		ajaxReload('auteurs_multiples', {
-			args : {
-				nr_auteurs : nr_auteurs,
-			}
+			args : data
+
 		});
 		return false;
 	});
