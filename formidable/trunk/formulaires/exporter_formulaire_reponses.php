@@ -244,7 +244,7 @@ function formidable_generer_valeur_texte_saisie($valeur, $saisie) {
 		$tenter_unserialize = charger_fonction('tenter_unserialize', 'filtre/');
 	}
 
-	$hash = md5($saisie['saisie'] . ':'  . serialize($saisie['options']) . ':' . $valeur);
+	$hash = ($saisie['saisie'] . ':'  . serialize($saisie['options']) . ':' . $valeur);
 
 	if (!isset($resultats[$hash])) {
 		$valeur = $tenter_unserialize($valeur);
