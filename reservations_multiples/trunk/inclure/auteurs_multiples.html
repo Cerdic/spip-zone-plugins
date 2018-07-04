@@ -12,25 +12,25 @@
 					{fond=inclure/inc-reservation_connection_extras,
 					numero=#COMPTEUR_BOUCLE,
 					champs_extras_auteurs=#ENV{champs_extras_auteurs_add}|table_valeur{#CLE},env} />
-				<div class="editer enlever">
-					<div class="choix">
-			<input
-							type="image"
-							name="nr_auteurs"
-							value="[(#COMPTEUR_BOUCLE|=={1}|?{nada,#COMPTEUR_BOUCLE|moins{1}})]"
-							src="#CHEMIN_IMAGE{auteur-del-24.png}"
-							[ (#HTML5)formnovalidate] alt="plus" /> <label><:reservations_multiples:label_enlever:></label>
+			</BOUCLE_extras>
+			<div class="editer enlever">
+			<div class="choix">
+				<input
+					type="image"
+					name="nr_auteurs"
+					value="[(#TOTAL_BOUCLE|=={1}|?{'',#TOTAL_BOUCLE|moins{1}})]"
+					src="#CHEMIN_IMAGE{auteur-del-24.png}"
+					[ (#HTML5)formnovalidate] alt="plus" /> <label><:reservations_multiples:label_enlever:></label>
+						</div>
 					</div>
 				</div>
-			</div>
-			</BOUCLE_extras>
 			[(#GET{limit}|>{#TOTAL_BOUCLE}|oui|ou{#GET{limit}|non})
 			<div class="editer">
 				<div class="choix">
 					<input
 						type="image"
 						name="nr_auteurs"
-						value="[(#COMPTEUR_BOUCLE|plus{1})]"
+						value="[(#TOTAL_BOUCLE|plus{1})]"
 						src="#CHEMIN_IMAGE{auteur-new-24.png}"
 						[(#HTML5)formnovalidate] alt="plus" /> <label><:reservations_multiples:label_ajouter:></label>
 				</div>
