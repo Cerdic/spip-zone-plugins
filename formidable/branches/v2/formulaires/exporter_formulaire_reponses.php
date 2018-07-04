@@ -140,10 +140,7 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 
 			foreach ($saisies as $nom => $saisie) {
 				if ($saisie['saisie'] != 'explication') {
-					$valeur = $valeurs[$nom];
-					if (is_array(unserialize($valeur))) {
-						$valeur = unserialize($valeur);
-					}
+					$valeur = isset($valeurs[$nom]) ? $valeurs[$nom] : '';
 					$reponse_complete[] = formidable_generer_valeur_texte_saisie($valeur, $saisie);
 				}
 			}
@@ -183,10 +180,14 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 function formidable_generer_valeur_texte_saisie($valeur, $saisie) {
 	static $resultats = [];
 
-	$hash = md5($saisie['saisie'] . ':'  . serialize($saisie['options']) . ':' . $valeur);
+	$hash = ($saisie['saisie'] . ':'  . serialize($saisie['options']) . ':' . $valeur);
 
 	if (!isset($resultats[$hash])) {
 		// Il faut éviter de passer par là… ça prend du temps…
+		if (is_array(unserialize($valeur))) {
+			$valeur = unserialize($valeur);
+		}
+
 		$resultats[$hash] = facteur_mail_html2text(
 			recuperer_fond(
 				'saisies-vues/_base',
