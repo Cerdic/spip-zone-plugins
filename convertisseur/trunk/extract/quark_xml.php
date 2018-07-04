@@ -165,7 +165,7 @@ function convertir_quark_xml($c) {
 				}
 
 				// Inters
-				if(preg_match("/(accroche|-inter|-exergue)/i", $type)){
+				if(preg_match("/(accroche|-inter|-exergue|Article_Inter)/i", $type)){
 					$item["texte"] .= "\n\n" . '{{{' . "$texte" . '}}}' ."\n\n" ;
 					continue ;
 				}
@@ -249,6 +249,15 @@ function nettoyer_xml_quark($xml){
 
 		$prefixe_ital = "" ;
 		$ital_statut = extraire_attribut($b, "ITALIC");
+		// essayer aussi de choper un italique non conventionnel dans la police
+		if(!$ital_statut){
+			$font = extraire_attribut($b, "FONT");
+			if(preg_match("/.*Italic.*/i",$font)){
+				$ital_statut = "true" ;
+				//var_dump($b);
+			}
+		}
+		
 		if(!$ital AND $ital_statut == "true"){
 			// début d'un ital
 			$prefixe_ital = "{" ;
