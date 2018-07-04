@@ -1,0 +1,20 @@
+<B_reservation>
+
+<div class="reservations_supplementaires">
+	<h3>[(#GRAND_TOTAL
+				|singulier_ou_pluriel{
+					reservations_multiples:reservation_supplementaire,
+					reservations_multiples:reservations_supplementaires
+				}
+			)]
+	</h3>
+<BOUCLE_reservation(RESERVATIONS){id_reservation_source=#ENV{id_reservation}}{tout}>
+	<h4>#NOM</h4>
+	[(#PLUGIN{reservation_bank}|oui)
+		#SET{id_transaction,#ID_RESERVATION|rb_inserer_transaction}
+		<INCLURE{fond=inclure/lien_payer,id_transaction=#GET{id_transaction}} />
+	]
+	<INCLURE{fond=inclure/reservation,id_reservation,reservation_multiple=personne} />
+</BOUCLE_reservation>
+</div>
+</B_reservation>

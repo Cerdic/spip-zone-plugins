@@ -22,5 +22,3 @@ function promotions_reservation_multiple_simple_action_dist($flux, $promotion = 
 
 	return $flux;
 }
-
-?>
