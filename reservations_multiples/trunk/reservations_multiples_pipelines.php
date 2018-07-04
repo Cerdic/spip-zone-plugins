@@ -30,6 +30,23 @@ function reservations_multiples_formulaire_charger($flux) {
 
 		// Si inscription de plusieurs personnes
 		if ($config['multiple_personnes'] == 'on') {
+			$nombre_auteurs = intval(_request('nr_auteurs')) ? _request('nr_auteurs') :  0;
+
+			$i = 1;
+			while ($i <= $nombre_auteurs) {
+				$nr = $i++;
+				$flux['data']['nom_' . $nr] = _request('nom_' . $nr);
+				$flux['data']['email_' . $nr] = _request('email_' . $nr);
+				if ($flux['data']['champs_extras_auteurs']) {
+					// Adapter les champs extras
+					foreach ($flux['data']['champs_extras_auteurs'] as $value) {
+						$nom_champ = $value['options']['nom'] . '_' . $nr;
+						$flux['data'][$nom_champ] = _request($nom_champ);
+					}
+				}
+			}
+
+
 			$flux['data']['id_reservation_source'] = '';
 			$flux['data']['type_lien'] = '';
 			$flux['data']['origine_lien'] = '';
