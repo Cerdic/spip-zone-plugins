@@ -30,34 +30,14 @@ function reservations_multiples_formulaire_charger($flux) {
 
 		// Si inscription de plusieurs personnes
 		if ($config['multiple_personnes'] == 'on') {
-			$champs_extras_auteurs_add = array();
-			$ajouter = array();
-			$nombre_auteurs = intval(_request('nr_auteurs')) ? _request('nr_auteurs') : (_request('nombre_auteurs') ? _request('nombre_auteurs') : '');
-			if (_request('nr_auteurs') == 'nada')
-				$nombre_auteurs = 0;
-			$i = 1;
-			while ($i <= $nombre_auteurs) {
-				$nr = $i++;
-				$ajouter[$nr] = $nr;
-				$flux['data']['nom_' . $nr] = '';
-				$flux['data']['email_' . $nr] = '';
-				if ($flux['data']['champs_extras_auteurs']) {
-					// Adapter les champs extras
-					foreach ($flux['data']['champs_extras_auteurs'] as $key => $value) {
-						$flux['data'][$value['options']['nom'] . '_' . $nr] = '';
-						$champs_extras_auteurs_add[$nr][$key] = $value;
-						$champs_extras_auteurs_add[$nr][$key]['options']['nom'] = $value['options']['nom'] . '_' . $nr;
-					}
-				}
-			}
 			$flux['data']['id_reservation_source'] = '';
 			$flux['data']['type_lien'] = '';
 			$flux['data']['origine_lien'] = '';
-			$flux['data']['nombre_auteurs'] = $nombre_auteurs;
 			$flux['data']['nr_auteurs'] = '';
-			$flux['data']['champs_extras_auteurs_add'] = $champs_extras_auteurs_add;
-			//$flux['data']['ajouter'] = $ajouter;
-			$flux['data']['_hidden'] .= '<input type="hidden" name="nombre_auteurs" value="' . $flux['data']['nombre_auteurs'] . '">';
+			$flux['data']['multiple_personnes'] = 'on';
+			$flux['data']['nombre_limite'] = $config['nombre_limite'];
+			$flux['data']['_hidden'] .= '<input type="hidden" name="multiple_personnes" value="on">';
+			$flux['data']['_hidden'] .= '<input type="hidden" name="nombre_limite" value="' . $config['nombre_limite'] . '">';
 		}
 	}
 
@@ -84,13 +64,7 @@ function reservations_multiples_formulaire_verifier($flux) {
 			// enlever le message d'erreur en attendand de comnprendre d'ou vient ce message qui se met d'office
 			unset($flux['data']['message_erreur']);
 
-			// Une erreur bidon pour éviter ne pas traiter le formulaire lors de modification de nombre de inscrits
-			if (_request('nr_auteurs')) {
-				$flux['data'] = array(
-					'ajouter' => 'ajouter auteurs'
-				);
-			}
-			elseif ($nombre = _request('nombre_auteurs')) {
+		if ($nombre = _request('nr_auteurs')) {
 				include_spip('inc/saisies');
 				include_spip('cextras_pipelines');
 				$erreurs = array();
@@ -99,7 +73,7 @@ function reservations_multiples_formulaire_verifier($flux) {
 					$champs_extras_auteurs = champs_extras_objet(table_objet_sql('auteur'));
 
 					// Stocker les valeurs intitiales des champs extras
-					foreach ($champs_extras_auteurs as $key => $value) {
+					foreach ($champs_extras_auteurs as $value) {
 						$$value['options']['nom'] = _request($value['options']['nom']);
 					}
 				}
@@ -132,7 +106,7 @@ function reservations_multiples_formulaire_verifier($flux) {
 					}
 
 					// Vérifier les champs extras
-					foreach ($champs_extras_auteurs as $key => $value) {
+					foreach ($champs_extras_auteurs as $value) {
 
 						// Adapter les request pour pouvoir faire la vérification des champs extras
 						set_request($value['options']['nom'], _request($value['options']['nom'] . '_' . $nr));
@@ -148,7 +122,7 @@ function reservations_multiples_formulaire_verifier($flux) {
 				}
 
 				// Remettre les valeurs initiales
-				foreach ($champs_extras_auteurs as $key => $value) {
+				foreach ($champs_extras_auteurs as $value) {
 					set_request($value['options']['nom'], $$value['options']['nom']);
 				}
 				$flux['data'] = array_merge($flux['data'], $erreurs);
@@ -174,20 +148,16 @@ function reservations_multiples_formulaire_verifier($flux) {
  */
 function reservations_multiples_formulaire_traiter($flux) {
 	$form = $flux['args']['form'];
-	if ($form == 'reservation' and $nombre = _request('nombre_auteurs')) {
+	if ($form == 'reservation' and $nombre = _request('nr_auteurs')) {
 		$config = reservations_multiples_config();
 
 		// Si inscription de plusieurs personnes
 		if ($config['multiple_personnes'] == 'on') {
-			$noms = array(
-				_request('nom')
-			);
+
 			// Enregistrement des champs additionnels
 			$enregistrer = charger_fonction('reservation_enregistrer', 'inc');
 
 			// Lister les messages de retour
-
-
 			if (function_exists('champs_extras_objet')) {
 				$champs_extras_auteurs = champs_extras_objet(table_objet_sql('auteur'));
 			}
@@ -198,19 +168,21 @@ function reservations_multiples_formulaire_traiter($flux) {
 				// ne pas créer de compte spip
 			set_request('enregistrer', '');
 
-
 			// inscription aux mailinglistes
 			if (test_plugin_actif('reservations_mailsubscribers')) {
 				$inscription = charger_fonction('inscription_mailinglinglistes', 'inc');
 			}
 
 			// Ajouter les références à la réservation d'origine
+			set_request('id_reservation_source', $flux['data']['id_reservation']);
 			set_request('type_lien', 'multiple_personnes');
 			set_request('origine_lien', 'reservations_multiples');
-			$i = 1;
+
+
 			// Enregistrer les réservations
 			$message_original = $flux['data']['message_ok'];
 			$message_ok = array();
+			$i = 1;
 			while ($i <= $nombre) {
 				set_request('gratuit', FALSE);
 				// recupérer les champs par défaut
@@ -222,7 +194,7 @@ function reservations_multiples_formulaire_traiter($flux) {
 				$nom = _request('nom');
 
 				// Vérifier les champs extras
-				foreach ($champs_extras_auteurs as $key => $value) {
+				foreach ($champs_extras_auteurs as $value) {
 
 					// récupérer les champs extras
 					set_request($value['options']['nom'], _request($value['options']['nom'] . '_' . $nr));
@@ -237,7 +209,7 @@ function reservations_multiples_formulaire_traiter($flux) {
 				$message = "<strong>$nom</strong>" . $match['0'];
 				$nr = 0;
 
-				// inscription aux mailinglistes
+				// Inscription aux mailinglistes
 				if (test_plugin_actif('reservations_mailsubscribers')) {
 					$inscription($email);
 				}
@@ -248,11 +220,9 @@ function reservations_multiples_formulaire_traiter($flux) {
 						!_request('gratuit')) {
 					include_spip('inc/config');
 					$config_reservation_evenement = lire_config('reservation_evenement');
-					$preceder_formulaire= lire_config('reservation_bank/preceder_formulaire');
+					$preceder_formulaire = lire_config('reservation_bank/preceder_formulaire');
 					$id_transaction = rb_inserer_transaction($id_reservation);
 					$quand = isset($config['quand']) ? $config['quand'] : array();
-
-
 
 					$row = sql_fetsel('statut,date,id_auteur,email,lang,donnees_auteur', 'spip_reservations', 'id_reservation=' . intval($id_reservation));
 					$statut = $row['statut'];
@@ -334,7 +304,7 @@ function reservations_multiples_recuperer_fond($flux) {
 	if ($fond == 'formulaires/inc-reservation_connection') {
 		$config = reservations_multiples_config();
 
-		if ($config['multiple_personnes'] == 'on') {
+		if ($contexte['multiple_personnes'] == 'on') {
 
 			$auteurs_multiples = recuperer_fond('inclure/auteurs_multiples', $contexte, array(
 				'ajax' => 'auteurs_multiples'

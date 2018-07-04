@@ -1,19 +1,17 @@
-#SET{limit,#CONFIG{reservations_multiples/nombre_limite}}
-
 <div class="auteurs_multiples_0" id="auteurs_multiples">
 	<div class="editer label">
 		<label><:reservations_multiples:label_reserver_amie:></label>
 	</div>
-		<B_extras>
+		<B_auteurs_multiples>
 		<div class="editer multiples_personnes">
-			<BOUCLE_extras(DATA){enum 1, #ENV{nr_auteurs,0}} {si #ENV{nr_auteurs}|>{0}}>
+			<BOUCLE_auteurs_multiples(DATA){enum 1, #ENV{nr_auteurs,0}} {si #ENV{nr_auteurs}|>{0}}>
 			<div id="auteurs_multiples_#COMPTEUR_BOUCLE">
 				<INCLURE
 					{fond=inclure/inc-reservation_connection_extras,
 					numero=#COMPTEUR_BOUCLE,
-					champs_extras_auteurs=#ENV{champs_extras_auteurs_add}|table_valeur{#CLE},env} />
-			</BOUCLE_extras>
-			<div class="editer enlever">
+					env} />
+			</BOUCLE_auteurs_multiples>
+			<div class="editer action enlever">
 			<div class="choix">
 				<input
 					type="image"
@@ -24,8 +22,8 @@
 						</div>
 					</div>
 				</div>
-			[(#GET{limit}|>{#TOTAL_BOUCLE}|oui|ou{#GET{limit}|non})
-			<div class="editer">
+			[(#GET{limit}|>{#TOTAL_BOUCLE}|oui|ou{#ENV{nombre_limite}|non})
+			<div class="editer action ajouter">
 				<div class="choix">
 					<input
 						type="image"
@@ -36,8 +34,8 @@
 				</div>
 			</div>]
 		</div>
-		</B_extras>
-		<div class="editer ajouter">
+		</B_auteurs_multiples>
+		<div class="editer action ajouter">
 			<div class="choix">
 				<input
 					type="image"
@@ -47,22 +45,23 @@
 					[ (#HTML5)formnovalidate] alt="minus" /> <label><:reservations_multiples:label_ajouter:></label>
 			</div>
 		</div>
-	<//B_extras>
+	<//B_auteurs_multiples>
 </div>
+
+[(#SAISIE{hidden,nr_auteurs,defaut=#ENV{nr_auteurs,0}})]
 
 <script type="text/javascript">
 //<![CDATA[
-	$(function() {
-		$("input[name='nr_auteurs']").click(function() {
-			var nr_auteurs = $(this).val();
-			// Recharger les champs
-			ajaxReload('auteurs_multiples', {
-				args : {
-					nr_auteurs : nr_auteurs,
-				}
-			});
-			return false;
-		})
+	$('.editer.action').on("click", "input[name='nr_auteurs']", function(){
+		var nr_auteurs = $(this).val();
+		// Recharger les champs
+		ajaxReload('auteurs_multiples', {
+			args : {
+				nr_auteurs : nr_auteurs,
+			}
+		});
+		return false;
 	});
+
 //]]>
 </script>
