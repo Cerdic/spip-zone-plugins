@@ -1,11 +1,11 @@
 <paquet
 	prefix="motus"
 	categorie="maintenance"
-	version="1.1.5"
+	version="1.1.6"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/motus.png"
-	schema="1.0.0"
+	schema="1.0.1"
 	documentation="https://contrib.spip.net/Motus"
 >
 
