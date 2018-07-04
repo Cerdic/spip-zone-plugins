@@ -18,7 +18,7 @@
 					name="nr_auteurs"
 					value="[(#TOTAL_BOUCLE|=={1}|?{'',#TOTAL_BOUCLE|moins{1}})]"
 					src="#CHEMIN_IMAGE{auteur-del-24.png}"
-					[ (#HTML5)formnovalidate] alt="plus" /> <label><:reservations_multiples:label_enlever:></label>
+					[ (#HTML5)formnovalidate] alt="moins" /> <label><:reservations_multiples:label_enlever:></label>
 						</div>
 					</div>
 				</div>
@@ -42,7 +42,7 @@
 					value="1"
 					name="nr_auteurs"
 					src="#CHEMIN_IMAGE{auteur-new-24.png}"
-					[ (#HTML5)formnovalidate] alt="minus" /> <label><:reservations_multiples:label_ajouter:></label>
+					[ (#HTML5)formnovalidate] alt="plus" /> <label><:reservations_multiples:label_ajouter:></label>
 			</div>
 		</div>
 	<//B_auteurs_multiples>
@@ -54,16 +54,16 @@
 //<![CDATA[
 
 	$('.editer.action').on("click", "input[name='nr_auteurs']", function(){
-		var data = {
-				nr_auteurs : $(this).val()
-			}
-		
+		var data = {}
+
 		// Les valeurs des champs multiples
-		var champs_multiple = $('.editer.multiples_personnes').find('[id*=champ]');
+		var champs_multiple = $('#auteurs_multiples').find('[id*=champ]');
 
 		champs_multiple.each(function() {
 			data[this.name] = this.value;
 		});
+
+		data.nr_auteurs = $(this).val()
 
 		// Recharger les champs
 		ajaxReload('auteurs_multiples', {
