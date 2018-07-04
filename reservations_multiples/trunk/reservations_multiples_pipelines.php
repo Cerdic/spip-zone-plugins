@@ -325,6 +325,11 @@ function reservations_multiples_recuperer_fond($flux) {
 		$flux['data']['texte'] .= $lien_paiement;
 	}
 
+	if ($fond == 'content/paiement_reservation') {
+		$texte = recuperer_fond('inclure/recapitulatif_personnes_multiples', $contexte);
+		$flux['data']['texte'] = str_replace('</table></div>', '</table>' . $texte . '</div>', $flux['data']['texte']);
+	}
+
 	return $flux;
 }
 

@@ -29,4 +29,6 @@
 	<pipeline nom="insert_head" inclure="reservations_multiples_pipelines.php" />
 	<pipeline nom="reservation_evenement_objets_configuration" inclure="reservations_multiples_pipelines.php" />
 
+	<chemin path="squelettes" />
+	<chemin path="" />
 </paquet>
