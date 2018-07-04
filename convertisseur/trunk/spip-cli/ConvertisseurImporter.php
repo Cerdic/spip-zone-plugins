@@ -58,7 +58,7 @@ class ConvertisseurImporter extends Command {
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		global $spip_racine;
 		global $spip_loaded;
-		global $spip_version_branche ;
+		$spip_version_branche = $GLOBALS['spip_version_branche'] ;
 		
 		include_spip("iterateur/data");
 		
