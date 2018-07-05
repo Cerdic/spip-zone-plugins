@@ -388,14 +388,15 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 						/**
 						 * Faire fonctionner @checkbox_xx@ == 'valeur'
 						 */
-						preg_match_all('#@(.+)@\s*==\s*[\'"](.*?)[\'"]$#U', $condition, $matches2);
+						preg_match_all('#@(.+)@\s*==\s*(\'[^\']*\'|"[^"]*")#U', $condition, $matches2);
 						foreach ($matches2[2] as $value) {
-							$condition = preg_replace('#@'.preg_quote($nom).'@#U', '($(form).find(".checkbox[name=\''.$nom.'[]\'][value='.$value.']").is(":checked") ? $(form).find(".checkbox[name=\''.$nom.'[]\'][value='.$value.']").val() : "")', $condition);
+							$value_no_quote=trim($value,"'\"'");
+							$condition = preg_replace('#@'.preg_quote($nom).'@\s*==\s*'.$value.'#U', '($(form).find(".checkbox[name=\''.$nom.'[]\'][value=\''.$value_no_quote.'\']").is(":checked") ? $(form).find(".checkbox[name=\''.$nom.'[]\'][value=\''.$value_no_quote.'\']").val() : "")=='.$value, $condition);
 						}
 						/**
 						 * Faire fonctionner @checkbox_xx@ IN 'valeur' ou @checkbox_xx@ !IN 'valeur'
 						 */
-						preg_match_all('#@(.+)@\s*(!IN|IN)\s*[\'"](.*?)[\'"]$#U', $condition, $matches3);
+						preg_match_all('#@(.+)@\s*(!IN|IN)\s*[\'"](.*?)[\'"]#U', $condition, $matches3);
 						foreach ($matches3[3] as $key => $value) {
 							$not = '';
 							if ($matches3[2][$key] == '!IN') {
