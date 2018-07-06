@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_enlever' => 'Enlever',
 	'label_multiple_inscriptions' => 'Permettre d’indiquer le nombre d’inscriptions',
 	'label_multiple_personnes' => 'Permettre l’inscription de plusieurs personnes',
-	'label_reserver_amie' => 'J’aimerais également inscrire une autre persone :',
+	'label_reserver_amie' => 'J’aimerais également inscrire une autre personne :',
 
 	// M
 	'message_ok_reservations_pour' => 'Réservé pour : @noms@',
