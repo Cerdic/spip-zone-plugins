@@ -1,10 +1,10 @@
 <traduction module="reservations_multiples" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/reservations_multiples/trunk/lang/" reference="fr">
-	<langue code="en" url="https://trad.spip.net/tradlang_module/reservations_multiples?lang_cible=en" total="18" traduits="18" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/reservations_multiples?lang_cible=en" total="18" traduits="17" relire="0" modifs="1" nouveaux="0" pourcent="94.44">
 		<traducteur nom="Rainer Müller" lien="https://trad.spip.net/auteur/rainer-muller" />
 	</langue>
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/reservations_multiples?lang_cible=fr" total="18" traduits="18" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/reservations_multiples?lang_cible=pt_br" total="18" traduits="16" relire="0" modifs="0" nouveaux="2" pourcent="88.89">
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/reservations_multiples?lang_cible=pt_br" total="18" traduits="15" relire="0" modifs="1" nouveaux="2" pourcent="83.33">
 		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
 </traduction>
