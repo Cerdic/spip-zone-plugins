@@ -192,23 +192,32 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 		$verifier = isset($saisie['verifier']) ? $saisie['verifier'] : false;
 		
 		// Cas de la saisie 'fichiers':
-		if ($saisie['saisie'] == 'fichiers') {
+		if ($file) {
 			$infos_fichiers_precedents = _request('cvtupload_fichiers_precedents');
 			if (isset($infos_fichiers_precedents[$champ])) { // si on a déjà envoyé des infos avants
 				$valeur = $_FILES[$champ]; // on ne met pas true, car il faudra aussi vérifier les nouveaux fichiers du même champ qui viennent d'être envoyés.
-			} elseif (isset($_FILES[$champ]['error'])) {//si jamais on a déja envoyé quelque chose dans le précédent envoi = ok
+			}
+			elseif (isset($_FILES[$champ]['error'])) {//si jamais on a déja envoyé quelque chose dans le précédent envoi = ok
 				$valeur = null; //On considère que par défaut on a envoyé aucun fichiers
-				foreach ($_FILES[$champ]['error'] as $err) {
-					if ($err != 4) {
-						//Si un seul fichier a été envoyé, même avec une erreur,
-						// on considère que le critère obligatoire est rempli.
-						// Il faudrait que verifier/fichiers.php vérifier les autres types d'erreurs.
-						// Voir http://php.net/manual/fr/features.file-upload.errors.php
-						$valeur = $_FILES[$champ];
-						break;
+				
+				// Si c'est un champ unique
+				if (!is_array($_FILES[$champ]['error']) and $_FILES[$champ]['error'] != 4) {
+					$valeur = $_FILES[$champ];
+				}
+				elseif (is_array($_FILES[$champ]['error'])) {
+					foreach ($_FILES[$champ]['error'] as $err) {
+						if ($err != 4) {
+							//Si un seul fichier a été envoyé, même avec une erreur,
+							// on considère que le critère obligatoire est rempli.
+							// Il faudrait que verifier/fichiers.php vérifier les autres types d'erreurs.
+							// Voir http://php.net/manual/fr/features.file-upload.errors.php
+							$valeur = $_FILES[$champ];
+							break;
+						}
 					}
 				}
-			} elseif (!isset($_FILES[$champ])) {
+			}
+			elseif (!isset($_FILES[$champ])) {
 				$valeur = null;
 			}
 		}
