@@ -49,9 +49,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_email_obligatoire' => 'Il doit y avoir un email obligatoire dans les champs ou dans les coordonnées.',
 	'errreur_identifiant_existant' => 'Cet identifiant est déjà utilisé',
+	'exporter_champ_seulement_colonnes_label_case' => 'Ne pas exporter les données, seulement les colonnes',
+	'exporter_titre' => 'Exportation',
 	// I
 	'icone_creer_profil' => 'Créer un profil',
 	'icone_modifier_profil' => 'Modifier ce profil',
+	'importer_titre' => 'Importation',
 	'info_1_profil' => 'Un profil',
 	'info_aucun_profil' => 'Aucun profil',
 	'info_nb_profils' => '@nb@ profils',

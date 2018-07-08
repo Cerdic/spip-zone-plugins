@@ -27,10 +27,12 @@ include_spip('inc/profils');
  *     Identifiant du compte utilistateur. 'new' pour une création.
  * @param int|string $id_ou_identifiant_profil
  *     ID SQL ou identifiant textuel du profil voulu
+ * @param string $retour
+ * 		URL de redirection une fois terminé
  * @return string
  *     Hash du formulaire
  */
-function formulaires_profil_identifier_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '') {
+function formulaires_profil_identifier_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '', $forcer_admin=false) {
 	return serialize(array(intval($id_auteur)));
 }
 
@@ -43,10 +45,12 @@ function formulaires_profil_identifier_dist($id_auteur = 'new', $id_ou_identifia
  *     Identifiant du compte utilistateur. 'new' pour une création.
  * @param int|string $id_ou_identifiant_profil
  *     ID SQL ou identifiant textuel du profil voulu
+ * @param string $retour
+ * 		URL de redirection une fois terminé
  * @return array
- *     Environnement du formulaire
+ *     Tableau des saisies
  */
-function formulaires_profil_saisies_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '') {
+function formulaires_profil_saisies_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '', $forcer_admin=false) {
 	$saisies = profils_chercher_saisies_profil('edition', $id_auteur, $id_ou_identifiant_profil);
 	
 	return $saisies;
@@ -61,10 +65,12 @@ function formulaires_profil_saisies_dist($id_auteur = 'new', $id_ou_identifiant_
  *     Identifiant du compte utilistateur. 'new' pour une création.
  * @param int|string $id_ou_identifiant_profil
  *     ID SQL ou identifiant textuel du profil voulu
+ * @param string $retour
+ * 		URL de redirection une fois terminé
  * @return array
  *     Environnement du formulaire
  */
-function formulaires_profil_charger_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '') {
+function formulaires_profil_charger_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '', $forcer_admin=false) {
 	include_spip('inc/autoriser');
 	$contexte = array();
 	
@@ -115,10 +121,12 @@ function formulaires_profil_charger_dist($id_auteur = 'new', $id_ou_identifiant_
  *     Identifiant du compte utilistateur. 'new' pour une création.
  * @param int|string $id_ou_identifiant_profil
  *     ID SQL ou identifiant textuel du profil voulu
+ * @param string $retour
+ * 		URL de redirection une fois terminé
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_profil_verifier_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '') {
+function formulaires_profil_verifier_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '', $forcer_admin=false) {
 	$erreurs = array();
 	
 	return $erreurs;
@@ -135,10 +143,12 @@ function formulaires_profil_verifier_dist($id_auteur = 'new', $id_ou_identifiant
  *     Identifiant du compte utilistateur. 'new' pour une création.
  * @param int|string $id_ou_identifiant_profil
  *     ID SQL ou identifiant textuel du profil voulu
+ * @param string $retour
+ * 		URL de redirection une fois terminé
  * @return array
  *     Retours des traitements
  */
-function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '') {
+function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '', $forcer_admin=false) {
 	if ($retour) {
 		refuser_traiter_formulaire_ajax();
 	}
@@ -179,8 +189,8 @@ function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_
 		
 		// Si c'est une demande de création, deux cas possibles
 		if (!$id_auteur or $id_auteur=='new') {
-			// Si personne n'est connecté, c'est alors une inscription
-			if (!session_get('id_auteur')) {
+			// Si on n'a pas forcé en mode admin ou que personne n'est connecté, c'est alors une inscription de la personne qui a validé
+			if (!$forcer_admin and !session_get('id_auteur')) {
 				// Pseudo et email repris des autres champs
 				set_request('mail_inscription', $email_principal);
 				set_request('nom_inscription', $nom_principal);

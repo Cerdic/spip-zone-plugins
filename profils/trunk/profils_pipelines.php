@@ -316,3 +316,23 @@ function profils_affiche_enfants($flux) {
 	
 	return $flux;
 }
+
+/**
+ * Ajouter la liste des comptes d'un profil
+ *
+ * @pipeline affiche_enfants
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function profils_afficher_config_objet($flux) {
+	if (
+		$flux['args']['type'] == 'profil'
+		and isset($flux['args']['id'])
+		and $id_profil = $flux['args']['id']
+	) {
+		$importer = recuperer_fond('prive/squelettes/inclure/profil_importer', array('id_profil'=>$id_profil));
+		$flux['data'] .= $importer;
+	}
+	
+	return $flux;
+}
