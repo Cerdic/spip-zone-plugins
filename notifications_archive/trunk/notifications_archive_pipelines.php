@@ -3,8 +3,8 @@
  * Utilisations de pipelines par Archive notifications
  *
  * @plugin     Archive notifications
- * @copyright  2014
- * @author     Rainer
+ * @copyright  2014-2018
+ * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Notifications_archive\Pipelines
  */
@@ -54,7 +54,7 @@ function notifications_archive_reservation_evenement_objets_configuration($flux)
 function notifications_archive_reservation_evenement_objets_navigation($flux) {
 
 	$flux['data']['notifications'] = array(
-			'label' => _T('notification:titre_notification'),
+			'label' => _T('notifications_archive:titre_notifications'),
 			'objets' => array('notification', 'notifications')
 	);
 

@@ -3,8 +3,8 @@
  * Définit les autorisations du plugin Archive notifications
  *
  * @plugin     Archive notifications
- * @copyright  2014
- * @author     Rainer
+ * @copyright  2014-2018
+ * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Notifications_archive\Autorisations
  */
