@@ -1,7 +1,7 @@
 <paquet
 	prefix="prix_objets"
 	categorie="edition"
-	version="2.2.1"
+	version="2.2.2"
 	etat="stable"
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/prix_objets-64.png"
@@ -17,8 +17,6 @@
 
 	<necessite nom="saisies" compatibilite="[2.25.1;]" />
 	<necessite nom="prix" compatibilite="[0.1.15;]" />
-
-	<utilise nom="shop" compatibilite="[1.2.0;]" />
 
 	<!-- Déclaration des pipelines -->
 	<pipeline nom="prix_objets_extensions" action='' />
