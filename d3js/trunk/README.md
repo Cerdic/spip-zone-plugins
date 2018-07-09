@@ -16,6 +16,14 @@ Intégrer d3.js dans SPIP
 
 ### Version 1.2.x
 
+#### Version 1.2.6
+
+- Compatibilité SPIP 3.2.x
+
+#### Version 1.2.5
+
+* Mise à jour de d3.js en 3.5.17
+
 #### Version 1.2.4
 
 * Mise à jour de la version de d3js
