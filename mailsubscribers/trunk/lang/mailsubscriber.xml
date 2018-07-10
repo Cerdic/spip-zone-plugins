@@ -1,5 +1,5 @@
 <traduction module="mailsubscriber" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/mailsubscribers/trunk/lang/" reference="fr">
-	<langue code="de" url="https://trad.spip.net/tradlang_module/mailsubscriber?lang_cible=de" total="98" traduits="93" relire="0" modifs="1" nouveaux="4" pourcent="94.90">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/mailsubscriber?lang_cible=de" total="98" traduits="98" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>

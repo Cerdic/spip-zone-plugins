@@ -33,7 +33,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_adresse_existante' => 'Diese Adresse ist bereits in der Liste eingetragen.',
+	'erreur_adresse_existante_editer' => 'Diese E-Mailadresse ist bereits registriert - <a href="@url@">Diesen Abonnent bearbeiten</a>',
 	'erreur_technique_subscribe' => 'Bei ihrer Anmeldung kam es zu einem technischen Problem.',
+	'explication_listes_diffusion_option_defaut' => 'Einer oder mehrere Listenbezeichnungen mit Komma getrennt',
+	'explication_listes_diffusion_option_statut' => 'Listen nach ihrem Status filtern',
 	'explication_to_email' => 'Eine Anmelde-E-Mail an folgende Adressen senden (mehrere Adressen durch Komma trennen).',
 
 	// I
@@ -97,11 +100,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_ajouter_mailsubscriber' => 'Newsletter-Abonnent hinzufügen',
 	'texte_avertissement_import' => 'Die Spalte <tt>Status</tt> ist vorhanden: Daten werden unverändert importiert, bei bereits vorhandenen E-MaIadressen wird der Status überschrieben.',
 	'texte_changer_statut_mailsubscriber' => 'Dieser Abonnent ist :',
-	'texte_import_export_bonux' => 'Um Abonnentenlisten zu im- und exportieren, installieren sie bitte das Plugin  <a href="http://plugins.spip.net/spip_bonux">SPIP-Bonux</a>.', # MODIF
+	'texte_import_export_bonux' => 'Um Abonnentenlisten zu im- und exportieren, installieren Sie bitte das Plugin  <a href="https://plugins.spip.net/spip_bonux">SPIP-Bonux</a>.',
 	'texte_statut_en_attente_confirmation' => 'unbestätigt',
 	'texte_statut_pas_encore_inscrit' => 'nicht angemeldet',
 	'texte_statut_refuse' => 'abgelehnt',
 	'texte_statut_valide' => 'aktiv',
+	'texte_vous_avez_clique_vraiment_tres_vite' => 'Sie haben den Bestätigungsbutton sehr schnell geklickt sind Sie sicher, dass Sie ein Mensch sind?',
 	'titre_bonjour' => 'Guten Tag',
 	'titre_export_mailsubscribers' => 'Abonnenten exportieren',
 	'titre_export_mailsubscribers_all' => 'Alle Adressen exportieren',
