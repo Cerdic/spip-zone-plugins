@@ -96,7 +96,7 @@ Les pages et le contenu de ce site sont générés par le logiciel libre {{SPIP}
 
 <small>
 {{SPIP, Système de Publication pour l’Internet
-<br />Copyright © 2001-2008, Arnaud Martin, Antoine Pitrou, Philippe Rivière et Emmanuel Saint-James.}}
+<br />Copyright © 2001-2018, Arnaud Martin, Antoine Pitrou, Philippe Rivière et Emmanuel Saint-James.}}
 </small>
 ',
 
