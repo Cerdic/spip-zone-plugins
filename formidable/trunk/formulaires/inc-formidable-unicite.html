@@ -7,7 +7,11 @@
 	<select name="#GET{name}" class="select" id="#GET{name}">
 		<option value=""></option>
 		<BOUCLE_champs_unicite(POUR){tableau #ENV*{saisies}|unserialize}>
-		<option value="[(#VALEUR|table_valeur{options}|table_valeur{nom})]"[(#ENV{unicite,#GET{defaut}}|=={#VALEUR|table_valeur{options}|table_valeur{nom}}|oui)selected="selected"]>[(#VALEUR|table_valeur{options}|table_valeur{label})]</option>
+			<BOUCLE_champs_fieldset(POUR) {tableau #VALEUR{saisies}}>
+				<option value="[(#VALEUR|table_valeur{options}|table_valeur{nom})]"[(#ENV{unicite,#GET{defaut}}|=={#VALEUR|table_valeur{options}|table_valeur{nom}}|oui)selected="selected"]>[(#VALEUR|table_valeur{options}|table_valeur{label})]</option>
+		    </BOUCLE_champs_fieldset>
+			    <option value="[(#VALEUR|table_valeur{options}|table_valeur{nom})]"[(#ENV{unicite,#GET{defaut}}|=={#VALEUR|table_valeur{options}|table_valeur{nom}}|oui)selected="selected"]>[(#VALEUR|table_valeur{options}|table_valeur{label})]</option>
+		    <//B_champs_fieldset>
 		</BOUCLE_champs_unicite>
 	</select>
 </li>
