@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_purger_historique_delai' => 'Older than',
 	'label_purger_historique_oui' => 'Purge details of old distributions',
 	'label_rate_limit' => 'Limit sending rate',
+	'label_sparkpost_api_endpoint' => 'API Endpoint',
 	'label_sparkpost_api_key' => 'Sparkpost API Key',
 	'label_sujet' => 'Subject',
 	'label_texte' => 'Text Version',
