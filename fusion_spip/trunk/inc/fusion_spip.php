@@ -25,7 +25,7 @@ function fusion_spip_lister_tables_principales_dist($connect, $skip_non_existing
 	// zapper les tables de l'hote qui ne sont pas dans la base importée
 	if ($skip_non_existing) {
 		foreach ($tables as $table => $shema) {
-			if (!sql_showtable($table, false, $connect)) {
+			if (!sql_showtable($table, true, $connect)) {
 				unset($tables[$table]);
 			}
 		}
@@ -68,7 +68,7 @@ function fusion_spip_lister_tables_auxiliaires_dist($connect, $skip_non_existing
 	// zapper les tables de l'hote qui ne sont pas dans la base importée
 	if ($skip_non_existing) {
 		foreach ($tables as $table => $shema) {
-			if (!sql_showtable($table, false, $connect)) {
+			if (!sql_showtable($table, true, $connect)) {
 				unset($tables[$table]);
 			}
 		}
@@ -110,7 +110,7 @@ function fusion_spip_comparer_shemas_dist($connect, $principales, $auxiliaires) 
 	$tables = array_merge($principales, $auxiliaires);
 	foreach ($tables as $nom_table => $shema_table) {
 		// ne pas utiliser 'trouver_table' pour ne pas utiliser le cache
-		if ($shema_source = sql_showtable($nom_table, false, $connect)) {
+		if ($shema_source = sql_showtable($nom_table, true, $connect)) {
 			if ($diff_colonnes = array_diff(array_keys($shema_table['field']), array_keys($shema_source['field']))) {
 				$erreurs[] = _T('fusion_spip:manque_champs_source', array('table' => $nom_table, 'diff' => join(' - ', $diff_colonnes)));
 			}
@@ -139,7 +139,7 @@ function fusion_spip_inserer_table_principale_dist($nom_table, $shema, $secteur,
 
 		// on a déjà signalé par un warning que des champs manquaient dans la table source
 		// on va travailler sur l'intersection des champs de la table source et hote
-		$shema_source = sql_showtable($nom_table, false, $connect);
+		$shema_source = sql_showtable($nom_table, true, $connect);
 		if (is_array($shema_source['field'])) {
 			$champs_select = array_intersect(array_keys($shema['field']), array_keys($shema_source['field']));
 
@@ -210,7 +210,7 @@ function fusion_spip_inserer_table_principale_dist($nom_table, $shema, $secteur,
 function fusion_spip_inserer_table_auxiliaire_dist($nom_table, $shema, $cles_primaires, $connect) {
 	$time_start = microtime(true);
 
-	$shema_source = sql_showtable($nom_table, false, $connect);
+	$shema_source = sql_showtable($nom_table, true, $connect);
 	if (is_array($shema_source['field'])) {
 		// liste des champs à recopier
 		$champs_select = array_intersect(array_keys($shema['field']), array_keys($shema_source['field']));

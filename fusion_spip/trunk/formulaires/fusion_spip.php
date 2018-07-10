@@ -84,7 +84,7 @@ function formulaires_fusion_spip_verifier_dist() {
 		$auxiliaires = $lister_tables_auxiliaires($connect, false, $traite_stats, $traite_referers);
 
 		// vérifier la version de la base source
-		if (!sql_showtable('spip_meta', false, $connect)) {
+		if (!sql_showtable('spip_meta', true, $connect)) {
 			$erreurs['versions_bases'] = _T('fusion_spip:erreur_versions_impossible');
 		} else {
 			$vsource = sql_fetsel('valeur', 'spip_meta', 'nom="version_installee"', '', '', '', '', $connect);
