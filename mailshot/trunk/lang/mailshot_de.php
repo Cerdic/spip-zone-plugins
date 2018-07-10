@@ -77,6 +77,7 @@ Dies führt bei zahlreichem Versenden zu einer großen Datenmenge, weshalb es ra
 	'label_purger_historique_delai' => 'Älter als',
 	'label_purger_historique_oui' => 'Details alter Versandvorgänge löschen',
 	'label_rate_limit' => 'Versandgeschwindigkeit beschränken',
+	'label_sparkpost_api_endpoint' => 'Endpoint API',
 	'label_sparkpost_api_key' => 'Sparkpost API Key',
 	'label_sujet' => 'Gegenstand',
 	'label_texte' => 'Textversion',
