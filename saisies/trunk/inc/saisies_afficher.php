@@ -529,10 +529,10 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 
 			/**
 			 * Tester si la condition utilise des champs qui sont des tableaux
-			 * Si le _request renvoie un tableau, changer == et != par in_array et !in_array
+			 * Si _request() ou $env["valeurs"] est un tableau, changer == et != par in_array et !in_array
 			 * TODO: c'est vraiment pas terrible comme fonctionnement
 			 */
-			preg_match_all("/(_request\('.*?'\))\s*(!=|==|IN|!IN)\s*['\"](.*?)['\"]/", $condition, $matches);
+			preg_match_all('/(_request\([\'"].*?[\'"]\)|\$env\[[\'"].*?[\'"]\]\[[\'"].*?[\'"]\])\s*(!=|==|IN|!IN)\s*[\'"](.*?)[\'"]/', $condition, $matches);
 			foreach ($matches[1] as $key => $val) {
 				eval('$requete = '.$val.';');
 				if (is_array($requete)) {
