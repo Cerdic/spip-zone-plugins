@@ -7,7 +7,9 @@
  * @package    SPIP\Formidableinscription\Installation
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -21,7 +23,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 **/
 function formidableinscription_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
-
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -35,9 +36,5 @@ function formidableinscription_upgrade($nom_meta_base_version, $version_cible) {
  * @return void
 **/
 function formidableinscription_vider_tables($nom_meta_base_version) {
-
-
 	effacer_meta($nom_meta_base_version);
 }
-
-?>
