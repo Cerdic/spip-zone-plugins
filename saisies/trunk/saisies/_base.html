@@ -36,7 +36,6 @@
 	#SET{disable,#ENV{disable,#ENV{disable_avec_post}}|et{#ENV{disable,#ENV{disable_avec_post}}|!={non}}|?{#ENV{disable}|is_array|?{#ENV{disable,#ARRAY},disabled},''}}
 	#SET{readonly,#ENV{readonly}|et{#ENV{readonly}|!={non}}|?{readonly,''}}
 	#SET{saisies_autonomes,#VAL|saisies_autonomes}
-	[(#GET{saisies_autonomes}|var_dump)]
 
 	[(#ENV{type_saisie}|in_array{#GET{saisies_autonomes}}|oui)
 		[(#INCLURE{fond=saisies/#ENV{type_saisie},env,obligatoire=#GET{obligatoire},disable=#GET{disable},readonly=#GET{readonly}})]
