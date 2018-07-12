@@ -11,7 +11,8 @@
   - class : classe(s) css ajoutes au select
   - defaut : valeur par defaut si pas présente dans l'environnement
   - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
-  
+	- disable_choix : liste de valeurs à désactiver, séparées par des virgules
+	
   Exemples d'appels
   pour une liste simple :
 	[(#SAISIE{selection,produits,
@@ -48,11 +49,11 @@
 	<B_cond>
 	<optgroup label="#CLE">
 	<BOUCLE_cond(CONDITION){si #VALEUR|is_array}><BOUCLE_optgroup(POUR){tableau #VALEUR}>
-		<option value="#CLE"[(#CLE|=={#GET{valeur}}|oui)selected="selected"][(#CLE|in_array{#GET{disabled}}|oui) disabled="disabled"]>#VALEUR</option>
+		<option value="#CLE"[(#CLE|=={#GET{valeur}}|oui)selected="selected"][(#CLE|in_any{#GET{disabled}}|oui) disabled="disabled"]>#VALEUR</option>
 	</BOUCLE_optgroup></BOUCLE_cond>
 	</optgroup>
 	</B_cond>
-	<option value="#CLE"[(#CLE|=={#GET{valeur}}|oui)selected="selected"][(#CLE|in_array{#GET{disabled}}|oui) disabled="disabled"]>#VALEUR</option>
+	<option value="#CLE"[(#CLE|=={#GET{valeur}}|oui)selected="selected"][(#CLE|in_any{#GET{disabled}}|oui) disabled="disabled"]>#VALEUR</option>
 	<//B_cond>
 </BOUCLE_selection>
 </select>
