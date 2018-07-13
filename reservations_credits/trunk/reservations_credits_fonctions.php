@@ -3,8 +3,8 @@
  * Fonctions utiles au plugin Réseŕvations Crédits
  *
  * @plugin     Réseŕvations Crédits
- * @copyright  2015
- * @author     Rainer
+ * @copyright  2015-18
+ * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Reservations_credits\Fonctions
  */
@@ -34,5 +34,3 @@ function credit_client($credit='',$email='', $devise = '') {
 	}
 	return $credit;
 }
-
-?>

@@ -3,8 +3,8 @@
  * Fichier gérant l'installation et désinstallation du plugin Réseŕvations Crédits
  *
  * @plugin     Réseŕvations Crédits
- * @copyright  2015
- * @author     Rainer
+ * @copyright  2015-18
+ * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Reservations_credits\Installation
  */

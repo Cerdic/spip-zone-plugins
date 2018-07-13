@@ -3,8 +3,8 @@
  * Déclarations relatives à la base de données
  *
  * @plugin     Réseŕvations Crédits
- * @copyright  2015
- * @author     Rainer
+ * @copyright  2015-18
+ * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Reservations_credits\Pipelines
  */
