@@ -52,7 +52,7 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 		if (!isset($set['prix']) and !isset($set['prix_ht'])) {
 
 			//Existence d'un prix via le plugin Prix Objets https://plugins.spip.net/prix_objets.html
-			if ($prix_objets = test_plugin_actif('prix_objets')) {
+			if (test_plugin_actif('prix_objets')) {
 				$fonction_prix = charger_fonction('prix', 'inc/');
 				$fonction_prix_ht = charger_fonction('ht', 'inc/prix');
 
@@ -66,10 +66,9 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 				//les déclinaisons
 
 						$p = sql_fetsel(
-							'titre,id_prix_objet',
+							'titre,id_prix_objet,code_devise',
 							'spip_prix_objets',
 							'id_prix_objet=' . $id_prix);
-
 						$set['descriptif'] .= ' - ' . $p['titre'];
 
 				}
@@ -93,7 +92,7 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 					$set['id_prix_objet'] = $p['id_prix_objet'];
 
 					// Si pas de devise fournit par le contexte, on prend celle de prix_objets
-					if (!isset($set['devise'])) {
+					if (!isset($set['devise']) OR empty($set['devise'])) {
 						$set['devise'] = $p['code_devise'];
 					}
 				}
