@@ -29,8 +29,9 @@ function credit_client($credit='',$email='', $devise = '') {
 	else {
 		return;
 	}
-	if ($devise AND isset($credit[$devise])) {
+	if ($devise AND is_array($devise)  AND isset($credit[$devise])) {
 		$credit = $credit[$devise];
 	}
+
 	return $credit;
 }

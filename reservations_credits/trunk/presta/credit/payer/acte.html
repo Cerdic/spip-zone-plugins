@@ -15,7 +15,14 @@
 <BOUCLE_trans(TRANSACTIONS){id_transaction}{transaction_hash}>
 	<BOUCLE_credit(RESERVATION_CREDITS){email == #AUTEUR}>
 		<BOUCLE_reservations_detail(RESERVATIONS_DETAILS){id_reservation}{tout}{0,1}>
-		#SET{devise,#DEVISE}
+		[(#DEVISE|?{
+			#SET{devise,#DEVISE},
+			[(#CONFIG{prix_objets/devise_default}|?{
+				#SET{devise,#CONFIG{prix_objets/devise_default}},
+				#SET{devise,EUR}
+			})]
+		})]
+
 		</BOUCLE_reservations_detail>
 			#SET{credit,#CREDIT|credit_client{'',#GET{devise}}}
 	</BOUCLE_credit>
