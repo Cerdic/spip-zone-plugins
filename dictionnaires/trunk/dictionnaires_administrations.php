@@ -67,13 +67,8 @@ function definitions_langues(){
  * dans ce plugin.
 **/
 function dictionnaires_migrer_acronymes(){
-	// Si F&T est actif là tout de suite et qu'il y a une table d'acronymes
-	if (
-		_DIR_PLUGIN_FORMS
-		and include_spip('base/forms_base_api')
-		and count($liste=Forms_liste_tables('acronymes_sigles'))
-	){
-		include_spip('forms_fonctions');
+	// Si F&T contient une table d'acronymes
+	if ($liste = sql_fetsel('id_form', 'spip_forms', "type_form='acronymes_sigles'")) {
 		$id_form = intval(reset($liste));
 		$acronymes = sql_allfetsel('id_donnee, statut, date', 'spip_forms_donnees', 'id_form = '.$id_form);
 		if ($acronymes and is_array($acronymes)){
@@ -81,31 +76,41 @@ function dictionnaires_migrer_acronymes(){
 			include_spip('action/editer_dictionnaire');
 			if ($id_dictionnaire = insert_dictionnaire()){
 				// On lui met des champs par défaut
+				autoriser_exception('modifier', 'dictionnaire', $id_dictionnaire);
 				dictionnaire_set($id_dictionnaire, array(
 					'titre' => _T('dictionnaire:importer_acronymes_titre'),
 					'statut' => 'actif',
 					'descriptif' => _T('dictionnaire:importer_acronymes_descriptif'),
 					'type_defaut' => 'abbr',
 				));
+				autoriser_exception('modifier', 'dictionnaire', $id_dictionnaire, false);
 				
 				// On parcourt ensuite les acronymes à importer pour récupérer leurs infos
 				foreach ($acronymes as $acronyme){
-					if ($titre = trim(str_replace("." , "", forms_calcule_les_valeurs('forms_donnees_champs', $acronyme['id_donnee'], 'ligne_1', $id_form,' ', true)))){
+					if ($titre = trim(str_replace("." , "", reset(sql_fetsel("valeur", "spip_forms_donnees_champs", array('id_donnee='.$acronyme['id_donnee'], "champ='ligne_1'")))))){
+						$lang_select = reset(sql_fetsel("valeur", "spip_forms_donnees_champs", array('id_donnee='.$acronyme['id_donnee'], "champ='select_2'")));
+						$lang = reset(sql_fetsel("titre", "spip_forms_champs_choix", array("champ='select_2'", "choix='$lang_select'")));
 						$definition = array(
 							'id_dictionnaire' => $id_dictionnaire,
 							'titre' => $titre,
-							'texte' => forms_calcule_les_valeurs('forms_donnees_champs', $acronyme['id_donnee'], 'texte_1', $id_form,' ', true),
+							'texte' => reset(sql_fetsel("valeur", "spip_forms_donnees_champs", array('id_donnee='.$acronyme['id_donnee'], "champ='texte_1'"))),
 							'type' => 'abbr',
 							'casse' => 1,
 							'date' => $acronyme['date'],
 							'statut' => ($acronyme['statut'] == 'publie') ? 'publie' : 'prop',
-							'lang' => forms_calcule_les_valeurs('forms_donnees_champs', $acronyme['id_donnee'], 'select_2', $id_form,' ', true)
+							'lang' => $lang
 						);
 						
 						// On crée la définition dans la base SANS calculer le cache
 						include_spip('action/editer_definition');
 						if ($id_definition = insert_definition()){
+							// 0 et pas $id_dictionnaire 
+							// car insert_definition a utilisé les valeurs par défaut
+							autoriser_exception('publierdans', 'dictionnaire', 0);
+							autoriser_exception('modifier', 'definition', $id_definition);
 							definition_set($id_definition, $definition, false);
+							autoriser_exception('modifier', 'definition', $id_definition, false);
+							autoriser_exception('publierdans', 'dictionnaire', 0, false);
 						}
 					}
 				}
