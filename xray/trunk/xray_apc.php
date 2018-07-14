@@ -27,6 +27,7 @@ All other licensing and usage conditions are those of the PHP Group.
 */
 
 include_spip ('inc/autoriser');
+
 if (!autoriser('webmestre'))
 	die("Autorisation non accordée : devenez webmestre d'abord.");
 include_spip('inc/filtres');
@@ -69,14 +70,25 @@ define('XRAY_NEPASAFFICHER_DEBUTNOMCACHE', _CACHE_NAMESPACE);
 
 include_spip ('inc/xray_apc');
 
+// copie un peu modifiée de la fonction définie dans public/cacher.php
+if (!function_exists('gunzip_page')) {
+	function gunzip_page(&$page) {
+		if (isset ($page['gz']) and $page['gz']) {
+			$page['texte'] = gzuncompress($page['texte']);
+			$page['gz'] = false; // ne pas gzuncompress deux fois une meme page
+		}
+	}
+}
+else
+	die("La fonction gunzip_page ne devrait pas être déjà définie"); // à défaut de disposer de la lib nobug
+
 // Strings utils
 
-function is_serialized($str)
-{
+function is_serialized($str) {
 	return ($str == serialize(false) || @unserialize($str) !== false);
 }
-function get_serial_class($serial)
-{
+
+function get_serial_class($serial) {
 	$types = array(
 		's' => 'string',
 		'a' => 'array',
@@ -95,8 +107,14 @@ function get_apc_data($info, &$success) {
 		and ($data = apcu_fetch($info, $success)) 
 		and $success 
 		and is_array($data) and (count($data) == 1) 
-		and is_serialized($data[0]))
-		return unserialize($data[0]);
+		and is_serialized($data[0])
+		) {
+		$page = unserialize($data[0]);
+		if (is_array($page))
+			gunzip_page($page);
+		return $page;
+	};
+
 	$success = false;
 	return null;
 }
@@ -110,12 +128,15 @@ function spipsafe_unserialize($str)
 			return "Brut : $str";
 	}
 	$unser = unserialize($str);
-	if (is_array($unser) and isset($unser['texte']) and isset($_GET['ZOOM']) and ($_GET['ZOOM'] == 'TEXTECOURT')) {
-		$unser['texte'] = trim(preg_replace('/\s+/', ' ', $unser['texte']));
-		if (mb_strlen($unser['texte']) > 80)
-			$unser['texte'] = mb_substr($unser['texte'], 0, 80) . '...';
-		elseif (!$unser['texte'])
-			$unser['texte'] = '(vide)';
+	if (is_array($unser) and isset($unser['texte'])) {
+		gunzip_page($unser); // si 'texte' est trop grand il est gzcompress par gzip_page
+		if (isset($_GET['ZOOM']) and ($_GET['ZOOM'] == 'TEXTECOURT')) {
+			$unser['texte'] = trim(preg_replace('/\s+/', ' ', $unser['texte']));
+			if (mb_strlen($unser['texte']) > 80)
+				$unser['texte'] = mb_substr($unser['texte'], 0, 80) . '...';
+			elseif (!$unser['texte'])
+				$unser['texte'] = '(vide)';
+		}
 	}
 	return print_contexte($unser, 1);
 }
@@ -1214,7 +1235,7 @@ EOB;
 			<option value=0  ', $MYREQUEST['COUNT'] == '0' ? ' selected' : '', '>All</option>
 		</select>
 		&nbsp;&nbsp;&nbsp;
-		Chercher: <input name=SEARCH value="', $MYREQUEST['SEARCH'], '" type=text size=25/>
+		<span title="REGEXP">Chercher:</span> <input name=SEARCH value="', $MYREQUEST['SEARCH'], '" type=text size=25/>
 		<b>Dans:</b>
 		<select name=WHERE onChange="form.submit()">
 			<option value="" ', $MYREQUEST['WHERE'] == '' ? ' selected' : '', '>Noms des caches</option>
@@ -1229,11 +1250,16 @@ EOB;
 		if (isset($MYREQUEST['SEARCH'])) {
 			// Don't use preg_quote because we want the user to be able to specify a
 			// regular expression subpattern.
-			$MYREQUEST['SEARCH'] = '/' . str_replace('/', '\\/', $MYREQUEST['SEARCH']) . '/i';
-			if (preg_match($MYREQUEST['SEARCH'], 'test') === false) {
-				echo '<div class="error">Error: enter a valid regular expression as a search query.</div>';
-				break;
+			// Detection of a potential preg error :
+			if (@preg_match('/' . str_replace('/', '\/', $MYREQUEST['SEARCH']) . '/i', null) === false) {
+				echo '<div class="error">Error: search expression is not a valid regexp (it needs escaping parentheses etc)</div>';
+				$MYREQUEST['SEARCH'] = preg_quote($MYREQUEST['SEARCH'],'/');
+				echo "<div class='warning'>
+						Warning : search expression has been preg_quoted :
+							<xmp>{$MYREQUEST['SEARCH']}</xmp>
+					</div>";
 			}
+			$MYREQUEST['SEARCH'] = '/'.$MYREQUEST['SEARCH'].'/i';
 		}
 		echo '<div class="info"><table cellspacing=0><tbody>', '<tr>', '<th>', sortheader('S', $fieldheading), '</th>', '<th>', sortheader('H', 'Hits'), '</th>', '<th>', sortheader('Z', 'Size'), '</th>', '<th>', sortheader('A', 'Last accessed'), '</th>', '<th>', sortheader('C', 'Created at'), '</th>';
 		
@@ -1326,7 +1352,7 @@ EOB;
 					case 'ALL' :
 						break;
 					case 'HTML' :
-						if (is_array($searched)) // !textwheel
+						if (is_array($searched)) // !textwheel {
 							$searched = $data['texte'];
 						break;
 					case 'META' :
