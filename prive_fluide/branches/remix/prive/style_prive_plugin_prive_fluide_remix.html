@@ -77,21 +77,31 @@ body {
 	font-size: 1em;
 }
 
+/* pas de justification, c'est mal, et pas de césure auto */
+#wysiwyg .champ,.preview {
+	-moz-hyphens:none;
+	-webkit-hyphens:none;
+	-khtml-hyphens:none;
+	-ms-hyphens:none;
+	-o-hyphens:none;
+	hyphens:none;
+	text-align: #ENV{left};
+}
+
+
 .liste-objets tr td {
 	font-size: 1em;
 }
-
+.liste-objets tr > td.secondaire,
 .liste-objets tr > td:not(.principale):not(.titre) {
 	font-size: .9em;
+}
+.liste-objets tr > td > span {
+	font-size: inherit;
 }
 .liste-objets tr > .date,
 .liste-objets tr > .auteur {
 	min-width: 130px;
-}
-
-#wysiwyg .champ,
-.preview {
-	font-size: 1em;
 }
 
 .formulaire_spip .toggle_box_link {
@@ -405,7 +415,7 @@ body.large {
 .largeur, #conteneur, .table_page,
 .large .largeur, .large #conteneur, .large .table_page {
 	width: auto !important;
-	max-width: 1100px;
+	max-width: 1200px;
 }
 
 #bando_haut .largeur,
