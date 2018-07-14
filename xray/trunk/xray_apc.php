@@ -1438,7 +1438,7 @@ EOB;
 							case 'MACROAUTORISER' :
 								if (!isset ($data['texte']))
 									$extra = '(html non défini)';
-								elseif (preg_match_all("/if\s+\(autoriser\s*\((['\"a-z0-9\s_\-\.\/,]+)\)/", $data['texte'], $matches))
+								elseif (preg_match_all("/<\?php\s+if\s+\(autoriser\s*\((.+)\)\s*\)\s*{\s*\?>/g", $data['texte'], $matches))
 									$extra = $matches[1];
 								else
 									$extra = '(aucune balise #_AUTORISER_SI)';
