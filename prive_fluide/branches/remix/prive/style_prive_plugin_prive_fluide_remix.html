@@ -77,6 +77,10 @@ body {
 	font-size: 1em;
 }
 
+/* prévisualisation du contenu éditorial */
+#wysiwyg {
+	max-width: 45em; /* ~70 caractères par ligne */
+}
 /* pas de justification, c'est mal, et pas de césure auto */
 #wysiwyg .champ,.preview {
 	-moz-hyphens:none;
@@ -261,6 +265,9 @@ a.plus_info,
 	border: 1px solid #ddd;
 	border-radius: 4px;
 }
+.formulaire_spip textarea {
+	line-height: 1.6;
+}
 .formulaire_spip .choix {
 	border-bottom: none;
 	display: flex;
@@ -344,54 +351,57 @@ a.plus_info,
 }
 
 /*-------------------------------------- 
-  formulaires sur une seule colonne
+  En dessous de 980px, les formulaires 
+  passent sur une seule colonne 
 ----------------------------------------*/
 
-/*
-.formulaire_spip .editer-groupe, 
-.formulaire_spip fieldset, 
-.formulaire_spip fieldset .editer-groupe, 
-.formulaire_spip .editer .boutons,
-.formulaire_spip .legend {
-	margin-left: 0;
-	margin-right: 0;
-}
+@media (max-width: 980px) {
+	
+	.formulaire_spip .editer-groupe, 
+	.formulaire_spip fieldset, 
+	.formulaire_spip fieldset .editer-groupe, 
+	.formulaire_spip .editer .boutons,
+	.formulaire_spip .legend {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	
+	.formulaire_spip .editer,
+	.formulaire_spip .editer.gauche,
+	.formulaire_spip .editer.droite {
+		padding: 0.5em 0;	
+	}
+	.formulaire_spip .editer_parent {
+		padding-left: 0.5em;
+		padding-right: 0.5em;
+	}
+	
+	.formulaire_spip .editer label, 
+	.formulaire_spip .editer.gauche label,
+	.formulaire_spip .editer.droite label {
+		display: block;
+		width: auto;
+		float: none;
+		margin: 0 0 0.25em 0;
+	}
+	
+	.formulaire_spip .choix {
+		border-top: none;
+		border-bottom: none;
+	}
+	.formulaire_spip .choix label {
+		display: inline-block;
+		margin-bottom: 0;
+		vertical-align: middle;
+		margin-#ENV{left}: 0.25em;
+	}
+	
+	.formulaire_spip h3:not(.titrem) {
+		margin-top: 1em;
+		margin-bottom: 1em;
+	}
 
-.formulaire_spip .editer,
-.formulaire_spip .editer.gauche,
-.formulaire_spip .editer.droite {
-	padding: 0.5em 0;	
 }
-.formulaire_spip .editer_parent {
-	padding-left: 0.5em;
-	padding-right: 0.5em;
-}
-
-.formulaire_spip .editer label, 
-.formulaire_spip .editer.gauche label,
-.formulaire_spip .editer.droite label {
-	display: block;
-	width: auto;
-	float: none;
-	margin: 0 0 0.25em 0;
-}
-
-.formulaire_spip .choix {
-	border-top: none;
-	border-bottom: none;
-}
-.formulaire_spip .choix label {
-	display: inline-block;
-	margin-bottom: 0;
-	vertical-align: middle;
-	margin-#ENV{left}: 0.25em;
-}
-
-.formulaire_spip h3:not(.titrem) {
-	margin-top: 1em;
-	margin-bottom: 1em;
-}
-*/
 
 
 /*
@@ -415,7 +425,7 @@ body.large {
 .largeur, #conteneur, .table_page,
 .large .largeur, .large #conteneur, .large .table_page {
 	width: auto !important;
-	max-width: 1200px;
+	max-width: 1100px;
 }
 
 #bando_haut .largeur,
@@ -480,13 +490,6 @@ body.large {
 	order: 3;
 }
 
-/* prévisualisation du contenu éditorial */
-#wysiwyg {
-	max-width: 50em; /* ~70 caractères par ligne */
-	margin-left: auto;
-	margin-right: auto;
-}
-
 /*=======================================
   Responsive
 ========================================*/
@@ -526,8 +529,8 @@ body.large {
 
 	/* colonne */
 	#navigation, #extra {
-		/*width: initial !important; !* pas de colonne fantome en abscence de contenu *!*/
-		width: 30% !important;
+		width: initial !important; /* pas de colonne fantome en abscence de contenu */
+		/*width: 30% !important;*/
 		-webkit-box-flex: 0;
 		-ms-flex-positive: 0;
 		flex-grow: 0; /* pas de colonne fantome en abscence de contenu */
@@ -537,7 +540,15 @@ body.large {
 		-ms-flex-order: 1;
 		order: 1;
 	}
-
+	/* Hack : on met une largeur au contenu des colonnes latérales,
+	ainsi quand elles sont vides, elles se collapsent */
+	#navigation > .ajaxbloc > *,
+	#navigation > :not(.ajaxbloc),
+	#extra > .ajaxbloc > *,
+	#extra > :not(.ajaxbloc) {
+		width: calc(8em + 12vw);
+	}
+	
 	/* largeur de colonne : on cible le premier contenu pour éviter une colonne fantome en abscence de contenu */
 	#navigation > .ajaxbloc:first-child > * {
 		/* width: 18 rem; */
