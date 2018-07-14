@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="1.0.0"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="images/oxygen.png"
 	documentation="https://contrib.spip.net/?article3970"
 >
