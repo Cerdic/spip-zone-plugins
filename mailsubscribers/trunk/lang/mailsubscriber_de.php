@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 @url_confirmsubscribe@',
 	'confirmsubscribe_texte_email_3' => 'Sollte es sich um einen Irrtum handeln, oder Sie es sich anders überlegt haben, brauchen Sie nichts zu unternehmen. Die Anmeldung wird automatisch gelöscht.',
 	'confirmsubscribe_texte_email_envoye' => 'Eine Bestätigungsmail wurde an die Mailadresse geschickt.',
-	'confirmsubscribe_texte_email_liste_1' => 'Sie wurden darum gebeten sich für die Liste « @titre_liste@ » der Website @nom_site_spip@ mit der E-Mailadresse @email@ anzumelden.',
+	'confirmsubscribe_texte_email_liste_1' => 'Sie haben haben sich für die E-Mail-Liste « @titre_liste@ » der Website @nom_site_spip@ mit der E-Mailadresse @email@ eingetragen.',
 	'confirmsubscribe_titre_email' => 'Bestätigung der Newsletter-Anmeldung',
 	'confirmsubscribe_titre_email_liste' => 'Bestätigung der Anmeldung für die Liste « <b>@titre_liste@</b> »',
 
