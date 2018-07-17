@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_definir_presta_defaut' => 'Définir un mode de paiement unique pour le choix de paiement.',
 	'label_fieldset_montant_detail' => 'Spécifiez le montant (en @devise@) pour chaque détail de réservation',
 	'label_fieldset_specifier' => 'Spécifier',
-	'label_preceder_formulaire' => 'Préceder le formulaire de paiment au récapitulatif de la commande.',
+	'label_preceder_formulaire' => 'Préceder le formulaire de paiment au récapitulatif de la réservation.',
 	'label_presta_defaut' => 'Prestataire à attribuer',
 	'label_specifier_montant' => 'Spécifier le montant',
 
@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'montant_paye' => 'Payé :',
 
 	// P
-	'paiement_commande' => 'Paiement de la commande #@id_commande@',
+	'paiement_commande' => 'Paiement de la réservation #@id_commande@',
 	'paiement_reservation' => 'Paiement de la réservation #@id_reservation@',
 
 	// R
