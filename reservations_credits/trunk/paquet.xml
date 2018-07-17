@@ -1,11 +1,11 @@
 <paquet
 	prefix="reservations_credits"
 	categorie="date"
-	version="1.1.7"
-	etat="test"
+	version="1.1.8"
+	etat="stable"
 	compatibilite="[3.0.20;3.2.*]"
 	logo="prive/themes/spip/images/reservations_credits-64.png"
-	documentation=""
+	documentation="https://contrib.spip.net/Reservations-credits-5020"
 	schema="1.1.1">
 
 	<nom>Réservations Crédits</nom>
