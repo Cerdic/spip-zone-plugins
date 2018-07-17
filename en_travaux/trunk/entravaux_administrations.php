@@ -57,7 +57,7 @@ function entravaux_vider_tables($nom_meta_base_version) {
  * @param string $nom
  */
 function entravaux_poser_verrou($nom){
-	ecrire_fichier(_DIR_VAR.'entravaux_'.$nom.'.lock',"auteur:".$GLOBALS['visiteur_session']['id_auteur']);
+	ecrire_fichier(_DIR_VAR.'entravaux_'.$nom.'.lock',"auteur:".(isset($GLOBALS['visiteur_session']['id_auteur'])?$GLOBALS['visiteur_session']['id_auteur']:0));
 	entravaux_check_verrou($nom, true);
 }
 
