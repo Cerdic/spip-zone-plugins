@@ -19,11 +19,11 @@
 #SET{url,        #ENV{url}|trim}
 #SET{date,       #ENV{date}|trim}
 #SET{maj,        #ENV{maj}|trim}
-#SET{lang,       #ENV{lang}|trim}
+#SET{lang,       #ENV{langue}|trim}
 #SET{og-type,    #ENV{og-type}|trim}
 #SET{dc-type,    #ENV{dc-type}|trim}
-#SET{territoire, #ENV{territoire}|=={en}|?{uk,#ENV{territoire,#ENV{lang}}}|strtoupper|trim}
-#SET{locale,     #ENV{lang}|concat{_,#GET{territoire}}|trim}
+#SET{territoire, #ENV{territoire}|=={en}|?{uk,#ENV{territoire,#ENV{langue}}}|strtoupper|trim}
+#SET{locale,     #ENV{langue}|concat{_,#GET{territoire}}|trim}
 #SET{couper,     200}
 #SET{dimensions, #ARRAY{
 	opengraph, 1200:630,

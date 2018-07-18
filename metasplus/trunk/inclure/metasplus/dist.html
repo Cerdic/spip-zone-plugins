@@ -40,7 +40,7 @@
 		               spip.php?page=inclure/metasplus/dist&objet=truc&id_objet=N&debug=oui
 		- titre :      Titre de la ressource
 		- desc :       Description
-		- lang :       Langue au format iso. ex. fr
+		- langue :     Langue au format iso. ex. fr
 		- territoire : Complète la langue pour former le duet langue_territoire, ex. UK
 			             Si rien n'est renseigné, on tente un lang_LANG
 		- date :       Date de publication au format Y-m-d
@@ -59,6 +59,7 @@
 	Paramètres dépréciés :
 		- auteur => auteurs
 		- logo => logos
+		- lang => langue
 ]
 
 [(#REM)
@@ -86,8 +87,9 @@
 #SET{url_auto,        #INFO_URL{#ENV{objet},#ENV{id_objet}}}
 #SET{date_auto,       #INFO_DATE{#ENV{objet},#ENV{id_objet}}}
 #SET{maj_auto,        #INFO_MAJ{#ENV{objet},#ENV{id_objet}}}
-#SET{lang_auto,       #INFO_LANG{#ENV{objet},#ENV{id_objet}}|sinon{#LANG}}
+#SET{langue_auto,     #INFO_LANG{#ENV{objet},#ENV{id_objet}}|sinon{#LANG}}
 #SET{territoire_auto, ''}
+
 [(#REM) Les auteurs ]
 <BOUCLE_auteurs_objet(AUTEURS)
 	{objet}
@@ -169,7 +171,7 @@
 	url=#ENV{url,#GET{url_auto}},
 	date=#ENV{date,#GET{date_auto}},
 	maj=#ENV{maj,#GET{maj_auto}},
-	lang=#ENV{lang,#GET{lang_auto}},
+	langue=#ENV{langue,#GET{langue_auto}},
 	territoire=#ENV{territoire,#GET{territoire_auto}},
 	og-type=#ENV{og-type,#GET{og-type_auto}},
 	dc-type=#ENV{dc-type,#GET{dc-type_auto}},
