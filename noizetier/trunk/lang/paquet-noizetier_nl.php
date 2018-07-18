@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
-	'noizetier_description' => 'Notenboom levert een interface in de privé-ruimte waarmee voor ieder bladzijde nootjes kunnen worden toegevoegd aan de inhoud, navigatie en extra onderdelen. De nootjes vervolledigen zo de door het skelet bepaalde standaard inhoud.',
+	'noizetier_description' => 'NoiZetier (notenboom) levert een interface in de privé-ruimte waarmee voor ieder bladzijde "nootjes" kunnen worden toegevoegd aan de inhoud, navigatie en extra onderdelen. De nootjes vervolledigen zo de door het skelet bepaalde standaardinhoud.',
 	'noizetier_nom' => 'Notenboom (NoiZetier)',
 	'noizetier_slogan' => 'Beheer van nootjes, oorspronkelijke functionaliteit van squelettes Z'
 );
