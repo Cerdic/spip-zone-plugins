@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	- pour trouver le domaine du secteur : Url du secteur puis url par defaut <br />
 	- pour trouver le squelette du secteur : Chercher le dossier suivant le schéma (www.domaine.fr puis domaine.fr) puis dossiers des squelettes du secteur. <br />
 	Un domaine peut avoir plusieurs dossiers squelettes, il faut les séparer par ":" (ex:squelettes:squelettes/sous-domaine.domaine.com)',
-	'explication_identifiant' => 'Nom informatique : charactères alphanumériques ou «_»',
+	'explication_identifiant' => 'Nom informatique optionnel pour identifier le secteur : charactères alphanumériques ou «_»',
 
 	// I
 	'info_domaine_non' => 'Ce domaine n\'est pas configuré',
