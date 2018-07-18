@@ -10,10 +10,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_common' => 'Lijst van verboden soortnamen in de passwoorden. <small>(Gedeeld met kommas)</small> :',
-	'cfg_descriptif' => 'De paswword tester plugin controleert de sterkte van een passwoord.<br/>De tests worden volgens verschillende criterias uitgevooerd: lengte van de woord, uitzonderlijke tekenen, enz. <br/>Je kan ook een lijst van verboden woorden maken.',
-	'cfg_longueur' => 'Minimale lengte van de passwoord : ',
-	'common' => 'passwoord,azerty,qwertzui',
+	'cfg_common' => 'Lijst van verboden woorden in de wachtwoorden. <small>(Gescheiden door komma’s)</small>:',
+	'cfg_descriptif' => 'De wachtwoordtester plugin controleert de sterkte van een wachtwoord.<br/>De tests worden volgens verschillende criteria’s uitgevoerd: lengte van het woord, speciale tekenen, enz.<br/>Je kunt ook een lijst van verboden woorden maken.',
+	'cfg_longueur' => 'Minimale lengte van het wachtwoord: ',
+	'cfg_passe_complexe' => 'De plugin Complex Wachtwoord configureren',
+	'cfg_titre_parametrages' => 'Wachtwoordtester',
+	'common' => 'wachtwoord,azerty,qwerty,geheim',
 	'court' => 'Te kort',
 
 	// F
@@ -21,8 +23,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fort' => 'Sterk',
 
 	// M
+	'mot_interdit' => 'Dit wachtwoord is niet toegestaan',
+	'motpassecomplexe_actif' => 'Je gebruikt de plugin "Complex Wachtwoord". De lengte van het wachtwoord moet worden aangepast in deze plugin',
 	'moyen' => 'Middelmatig',
 
 	// N
-	'nb_mini' => 'Aantal tekennen (min.) : '
+	'nb_mini' => 'Minimaal aantal tekens: '
 );
