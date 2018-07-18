@@ -1,0 +1,21 @@
+#SET{config,#CONFIG**{multidomaines}|unserialize}
+#SET{titre,#ENV*{titre}|typo|sinon{#INFO_TITRE{rubrique,#ENV{id_domaine}}}}
+#SET{url,#GET{config/#ENV{id_domaine}/url}}
+#SET{is_domaine,#GET{config/#ENV{id_domaine}}}
+
+[(#REM) Aperçu dans le privé ]
+[(#ENV{appel_formulaire}|oui)
+	<div class="titre">#GET{titre}</div>
+	<div class="infos">
+		[(#GET{is_domaine}|non)<span class="erreur"><:multidomaines:info_domaine_non:></span>]
+		[(#GET{is_domaine}|oui)
+		[(#GET{url}|sinon{<span class="erreur"><:multidomaines:info_domaine_aucune_url:></span>})]
+		]
+	</div>
+]
+
+[(#REM) Vue sur le site public ]
+[(#ENV{appel_menu}|et{#GET{is_domaine}}|oui)
+	<li class="menu-entree item[ (#ENV{css})][(#ID_SECTEUR_COURANT|=={#ENV{id_domaine}}|oui) on active]">
+		<a href="#GET{url}">#GET{titre}</a>
+]
