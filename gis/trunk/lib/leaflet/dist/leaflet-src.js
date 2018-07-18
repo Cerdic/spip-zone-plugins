@@ -1,5 +1,5 @@
 /* @preserve
- * Leaflet 1.3.2+Detached: 19247955dff7db871a0c0c100bf48ad11b8c59b8.1924795, a JS library for interactive maps. http://leafletjs.com
+ * Leaflet 1.3.3+Detached: b22aef4aa71afd640bf8e91915b78899bf64ff89.b22aef4, a JS library for interactive maps. http://leafletjs.com
  * (c) 2010-2018 Vladimir Agafonkin, (c) 2010-2011 CloudMade
  */
 
@@ -9,7 +9,7 @@
 	(factory((global.L = {})));
 }(this, (function (exports) { 'use strict';
 
-var version = "1.3.2+HEAD.1924795";
+var version = "1.3.3+HEAD.b22aef4";
 
 /*
  * @namespace Util
