@@ -55,7 +55,7 @@
 	},
 	#ARRAY{url,#VALEUR}
 }|array_filter}
-[(#GET{valeur}|oui)
+[(#CHEMIN{#GET{valeur/url}}|oui)
 #SET{logos,#GET{logos}|push{#GET{valeur}}}
 ]
 </BOUCLE_normaliser_logos>

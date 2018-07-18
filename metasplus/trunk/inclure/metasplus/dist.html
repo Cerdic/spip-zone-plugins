@@ -75,8 +75,6 @@
 	Cas 1 : Page d'un objet éditorial
 
 ]
-[(#SET{auteurs_auto,#ARRAY})][
-(#SET{mots_auto,#ARRAY})]
 <BOUCLE_objet(CONDITION) {si #ENV{objet}|et{#ENV{id_objet}}}>
 #SET{og-type_auto,    article}
 #SET{dc-type_auto,    Text}
@@ -91,6 +89,7 @@
 #SET{territoire_auto, ''}
 
 [(#REM) Les auteurs ]
+#SET{auteurs_auto,#ARRAY}
 <BOUCLE_auteurs_objet(AUTEURS)
 	{objet}
 	{id_objet}
@@ -100,8 +99,11 @@
 >
 #SET{auteurs_auto, #GET{auteurs_auto}|push{#NOM}}
 </BOUCLE_auteurs_objet>
-[(#EVAL{_METASPLUS_MASQUER_AUTEURS}|=={oui}|oui) #SET{auteurs_auto, #GET{auteurs_auto}|push{#NOM_SITE_SPIP}} ]
+#SET{auteurs_auto, #GET{auteurs_auto}|push{#NOM_SITE_SPIP}}
+<//B_auteurs_objet>
+
 [(#REM) Les mots-clés ]
+#SET{mots_auto,#ARRAY}
 <BOUCLE_mots_objet(MOTS)
 	{objet}
 	{id_objet}
@@ -111,20 +113,19 @@
 >
 #SET{mots_auto, #GET{mots_auto}|push{#TITRE}}
 </BOUCLE_mots_objet>
-[(#REM) Les images ]
-[(#ENV{logos}|non)
-#SET{logo_objet,#ENV{id_objet}|quete_logo_objet{#ENV{objet},on}}
-#SET{logos_auto, #LISTE{#ARRAY{url,#GET{logo_objet/chemin}}}}
-]
+
+[(#REM) Les images : logo de l'objet puis images liées ]
+<BOUCLE_logo_objet(CONDITION){si #ENV{logos}|non}>
+#SET{logo_objet, #ENV{id_objet}|quete_logo_objet{#ENV{objet},on}}
+#SET{logos_auto, #GET{logo_objet}|?{#LISTE{#ARRAY{url,#GET{logo_objet/chemin}}}}
 <BOUCLE_images_objet(DOCUMENTS)
 	{objet}
 	{id_objet}
 	{media = image}
 	{!extension = svg}
-	{fichier != #GET{logos_auto}|replace{#VAL{_NOM_PERMANENTS_ACCESSIBLES}|constant}}
+	{!fichier = #GET{logos_auto/0/url}|replace{#VAL{_NOM_PERMANENTS_ACCESSIBLES}|constant}|replace{'\.\./'}}
 	{!par largeur}
 	{0,#GET{logos_auto}|?{2,3}}
-	{si #ENV{logos}|non}
 	{tout}
 >
 #SET{logos_auto, #GET{logos_auto}|push{#ARRAY{
@@ -132,6 +133,7 @@
 	alt, #TITRE|sinon{#DESCRIPTIF}|couper{80},
 }}}
 </BOUCLE_images_objet>
+</BOUCLE_logo_objet>
 </BOUCLE_objet>
 
 [(#REM)
@@ -146,17 +148,22 @@
 #SET{url_auto,        #URL_PAGE{#ENV{type-page}}}
 #SET{date_auto,       #DATE}
 #SET{maj_auto,        ''}
-#SET{lang_auto,       #LANG}
+#SET{langue_auto,     #LANG}
 #SET{territoire_auto, ''}
-<BOUCLE_logo_lambda(DOCUMENTS){id_document = #CONFIG{metasplus/id_doc_logo}}{!extension = svg}{tout}>
-#SET{logos_auto, 	  #FICHIER|supprimer_timestamp}
-</BOUCLE_logo_lambda>
-[(#LOGO_SITE_SPIP|extraire_attribut{src}|supprimer_timestamp|substr{-3}|!={svg}|oui)
-#SET{logos_auto, 	  #LOGO_SITE_SPIP|extraire_attribut{src}|supprimer_timestamp} ]
-<//B_logo_lambda>
 #SET{auteurs_auto,    ''}
 #SET{mots_auto,       ''}
 <//B_objet>
+
+[(#REM)
+
+	Cas 1 et 2 : compléments
+	Pas de logo ? On prend celui configuré par défaut, sinon celui du site
+
+]
+[(#ENV{logos}|non|et{#GET{logos_auto}|non}|oui)
+#SET{logos_auto,#INFO_FICHIER{document,#CONFIG{metasplus/id_doc_logo}}|sinon{#LOGO_SITE_SPIP|extraire_attribut{src}|supprimer_timestamp}}
+]
+
 
 [(#REM)
 
