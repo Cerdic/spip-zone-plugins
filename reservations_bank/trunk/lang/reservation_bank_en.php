@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_definir_presta_defaut' => 'Define a unique payment type for the payment selection.',
 	'label_fieldset_montant_detail' => 'Specify the amount (in @devise@) for each booking item',
 	'label_fieldset_specifier' => 'Specify',
-	'label_preceder_formulaire' => 'Display the payment form before the booking summary.', # MODIF
+	'label_preceder_formulaire' => 'Display the payment form before the booking summary.',
 	'label_presta_defaut' => 'Available recipients',
 	'label_specifier_montant' => 'Specify the amount',
 
@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'montant_paye' => 'Paid :',
 
 	// P
-	'paiement_commande' => 'Payment booking #@id_commande@', # MODIF
+	'paiement_commande' => 'Payment booking #@id_commande@',
 	'paiement_reservation' => 'Paiment of the booking #@id_reservation@',
 
 	// R
