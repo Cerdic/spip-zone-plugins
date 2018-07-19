@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_identifiant' => 'Nom informatique optionnel pour identifier le secteur : charactères alphanumériques ou «_»',
 
 	// I
-	'info_domaine_non' => 'Ce domaine n\'est pas configuré',
+	'info_domaine_non' => 'Le domaine « @domaine@ » n\'est pas configuré',
 	'info_domaine_aucune_url' => 'Pas d\'URL configurée',
 
 	//L
@@ -27,7 +27,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_squelette' => 'Dossier des secteurs',
 	'label_squelette_rubrique' => 'Dossiers des squelettes de la rubrique',
 	'label_squelette_secteur' => 'Dossiers des squelettes du secteur',
-	'label_entree_id_domaine' => 'N° du secteur',
+	'label_menu_id_domaine' => 'N° ou identifiant du secteur',
+	'label_menu_ancre' => 'Ancre',
 	'label_identifiant' => 'Identifiant',
 
 //T

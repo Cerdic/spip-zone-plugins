@@ -5,5 +5,6 @@
 	<icone>prive/themes/spip/images/multidomaines-24.png</icone>
 	<parametre nom="id_domaine" label="multidomaines:label_menu_id_domaine" obligatoire="oui" />
 	<parametre nom="titre" class="multilang" label="menus:entree_titre" />
+	<parametre nom="ancre" label="multidomaines:label_menu_ancre" />
 	<parametre nom="css" label="menus:entree_css" />
 </entree>

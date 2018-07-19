@@ -1,15 +1,38 @@
+[(#REM)
+
+	Entrée de menu : domaine
+
+	Paramètres :
+	** obligatoire
+	* conseillé
+
+		- id_domaine** : n° ou identifiant du secteur configuré dans le plugin
+		- titre : titre
+		- ancre : ancre à ajouter au lien
+]
 #SET{config,#CONFIG**{multidomaines}|unserialize}
-#SET{titre,#ENV*{titre}|typo|sinon{#INFO_TITRE{rubrique,#ENV{id_domaine}}}}
-#SET{url,#GET{config/#ENV{id_domaine}/url}}
-#SET{is_domaine,#GET{config/#ENV{id_domaine}}}
+
+[(#REM) Si on donne un identifiant, retrouver le n° du secteur ]
+<BOUCLE_identifiant(DATA) {source table, #GET{config}}{si #ENV{id_domaine}|is_numeric|non}>
+[(#VALEUR{identifiant}|=={#ENV{id_domaine}}|oui)
+#SET{id_domaine,#CLE}
+]
+</BOUCLE_identifiant>
+#SET{id_domaine,#ENV{id_domaine}}
+<//B_identifiant>
+
+#SET{titre,#ENV*{titre}|typo|sinon{#INFO_TITRE{rubrique,#GET{id_domaine}}}}
+#SET{url,#GET{config/#GET{id_domaine}/url}}
+#SET{is_domaine,#GET{config/#GET{id_domaine}}}
+#SET{ancre,#ENV{ancre}|?{#VAL{#}|concat{#ENV{ancre}}}}
 
 [(#REM) Aperçu dans le privé ]
 [(#ENV{appel_formulaire}|oui)
 	<div class="titre">#GET{titre}</div>
 	<div class="infos">
-		[(#GET{is_domaine}|non)<span class="erreur"><:multidomaines:info_domaine_non:></span>]
+		[(#GET{is_domaine}|non)<span class="erreur"><:multidomaines:info_domaine_non{domaine=#ENV{id_domaine}}:></span>]
 		[(#GET{is_domaine}|oui)
-		[(#GET{url}|sinon{<span class="erreur"><:multidomaines:info_domaine_aucune_url:></span>})]
+		[(#GET{url}|concat{#GET{ancre}}|sinon{<span class="erreur"><:multidomaines:info_domaine_aucune_url:></span>})]
 		]
 	</div>
 ]
@@ -17,5 +40,5 @@
 [(#REM) Vue sur le site public ]
 [(#ENV{appel_menu}|et{#GET{is_domaine}}|oui)
 	<li class="menu-entree item[ (#ENV{css})][(#ID_SECTEUR_COURANT|=={#ENV{id_domaine}}|oui) on active]">
-		<a href="#GET{url}">#GET{titre}</a>
+		<a href="[(#GET{url}|ancre_url{#ENV{ancre}})]">#GET{titre}</a>
 ]
