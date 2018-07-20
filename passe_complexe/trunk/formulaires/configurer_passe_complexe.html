@@ -24,6 +24,11 @@
 				<label for="common"><:passe_complexe:cfg_common:></label>
 				<textarea type="text" name="common" id="common">#CONFIG{passe_complexe/common}</textarea>
 			</div>
+			<div class="editer">
+				<label for="common"><:passe_complexe:cfg_showpercent:></label>
+				<input type="radio" name="showpercent" value="false" [(#CONFIG{passe_complexe/showpercent}|in_array{#LISTE{'',false}}|oui)checked] /><:passe_complexe:cfg_false:><br />
+				<input type="radio" name="showpercent" value="true" [(#CONFIG{passe_complexe/showpercent}|=={true}|oui)checked] /><:passe_complexe:cfg_true:>
+			</div>
 		</div>
 		<input type="hidden" name="_meta_casier" value="passe_complexe" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>

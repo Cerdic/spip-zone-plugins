@@ -10,9 +10,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_common' => 'Liste des mots communs interdis dans les mots de passe. <small>(Séparés par des virgules)</small> :',
 	'cfg_descriptif' => 'Le plugin testeur de mot de passe permet de tester la &quot;force&quot; d’un mot de passe.<br/>Les tests sont fait sur différents critès comme la longueur du mot de passe, s’ils contiennent des caractères spéciaux, etc... <br/>Vous pouvez aussi spécifier une liste de mots interdits dans un mot de passe.',
+	'cfg_false' => 'Désactiver',
 	'cfg_longueur' => 'Longueur minimum du mot de passe : ',
 	'cfg_passe_complexe' => 'Configurer le plugin Mot de Passe Compliquer',
+	'cfg_showpercent' => 'Afficher le pourcentage de complexité du mot de passe',
 	'cfg_titre_parametrages' => 'Testeur de Mot de Passe',
+	'cfg_true' => 'Activer',
 	'common' => 'motdepasse,azerty,qwertzui',
 	'court' => 'Trop Court',
 
