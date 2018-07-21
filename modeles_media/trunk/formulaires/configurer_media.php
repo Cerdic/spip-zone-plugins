@@ -12,7 +12,7 @@ function formulaires_configurer_media_charger_dist(){
 		'media_largeur_min_legende', 'media_largeur_max_legende');
 	$valeurs = array();
 	foreach ($media_liste_metas as $m)
-		$valeurs[$m] = $GLOBALS['meta'][$m];
+		$valeurs[$m] = (isset($GLOBALS['meta'][$m])?$GLOBALS['meta'][$m]:null);
 	return $valeurs;
 }
 
