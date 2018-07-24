@@ -11,8 +11,8 @@ function action_image_responsive() {
 	$xsendfile = _request("xsendfile");
 
 	// Gérer le plugin mutualisation
-	if (defined('_DIR_SITE'))
-		$img = _DIR_SITE.$img;
+	#if (defined('_DIR_SITE'))
+	#	$img = _DIR_SITE.$img;
 
-	retour_image_responsive($img, $taille, $dpr, $xsendfile, "http");
+	return retour_image_responsive($img, $taille, $dpr, $xsendfile, "http");
 }
