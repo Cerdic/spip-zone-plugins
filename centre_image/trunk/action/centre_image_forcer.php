@@ -26,7 +26,7 @@ function action_centre_image_forcer() {
 			$res = array("x" => $_GET["x"], "y" => $_GET["y"]);
 
 			@touch(_DIR_RACINE . $fichier);
-			file_put_contents($fichier_json, json_encode($res, TRUE));
+			file_put_contents($fichier_json, json_encode($res));
 			include_spip('inc/invalideur');
 			suivre_invalideur('centre_image');
 		}

@@ -137,7 +137,7 @@ function centre_image_densite($fichier) {
 				$res = array("x" => 0.5, "y" => 0.5);
 			}
 
-			file_put_contents($fichier_json, json_encode($res, TRUE));
+			file_put_contents($fichier_json, json_encode($res));
 		}
 	} else {
 		$res = array("x" => 0.5, "y" => 0.5);
@@ -244,7 +244,7 @@ function centre_image_visage($fichier) {
 				$res = array("x" => 0.5, "y" => 0.33);
 			}
 
-			file_put_contents($fichier_json, json_encode($res, TRUE));
+			file_put_contents($fichier_json, json_encode($res));
 		}
 	} else {
 		$res = array("x" => 0.5, "y" => 0.5);
