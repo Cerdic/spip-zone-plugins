@@ -19,7 +19,7 @@
 // @Contributor Maurice Svay
 //              maurice@svay.Com
 
-namespace svay;
+//namespace svay;
 
 use Exception;
 

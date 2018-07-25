@@ -228,7 +228,7 @@ function centre_image_visage($fichier) {
 			$res = json_decode(file_get_contents($fichier_json), TRUE);
 		} else {
 			include_spip ("inc/FaceDetector");
-			$detector = new svay\FaceDetector('detection.dat');
+			$detector = new FaceDetector('detection.dat');
 			$detector->faceDetect($fichier);
 			$face = $detector->getFace();
 
