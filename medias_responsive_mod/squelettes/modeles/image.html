@@ -23,20 +23,22 @@ equivalent a un <docXX> pour une image en mode image
 
 <figure class='spip_document_#ID_DOCUMENT spip_documents[(#ENV{large}|oui)large][(#ENV{kenburns}|oui)kenburns][ spip_documents_(#ENV{align}|sinon{center})][ (#ENV{class})] spip_lien_ok'[
 			style="max-width:(#GET{width})px;"][ data-w="(#GET{width})"]>
-[<a href="(#GET{url})"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'[ type="(#ENV{lien}|?{#ENV{lien_mime},#MIME_TYPE})"]>][(#FICHIER|image_responsive{160/320/560/1200/1920})][(#GET{url}|?{</a>})]
-[(#GET{kenburns}|=={oui}|oui)
-<style>
-	.spip_document_#ID_DOCUMENT.kenburns picture img {
-		-webkit-transform-origin: [(#FICHIER|centre_image_x|mult{100})]% [(#FICHIER|centre_image_y|mult{100})]%;
-		transform-origin: [(#FICHIER|centre_image_x|mult{100})]% [(#FICHIER|centre_image_y|mult{100})]%;
-	}
-</style>
-]
-<figcaption class='spip_doc_intitules[ spip_doc_intitules_(#EVAL{_SPIP_DOC_INTITULES_ALIGN})]'>
-	[<div class='spip_doc_titre #EDIT{titre}'><strong>(#TITRE)</strong></div>]
-	[<div class='spip_doc_descriptif #EDIT{descriptif}'>(#DESCRIPTIF|propre|PtoBR)[(#NOTES|PtoBR)]</div>]
-	[<div class='spip_doc_credits #EDIT{credits}'>(#CREDITS|propre|PtoBR)[(#NOTES|PtoBR)]</div>]
-</figcaption>
+	[<a href="(#GET{url})"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'[ type="(#ENV{lien}|?{#ENV{lien_mime},#MIME_TYPE})"]>][(#FICHIER|image_responsive{160/320/560/1200/1920})][(#GET{url}|?{</a>})]
+	[(#GET{kenburns}|=={oui}|oui)
+	<style>
+		.spip_document_#ID_DOCUMENT.kenburns picture img {
+			-webkit-transform-origin: [(#FICHIER|centre_image_x|mult{100})]% [(#FICHIER|centre_image_y|mult{100})]%;
+			transform-origin: [(#FICHIER|centre_image_x|mult{100})]% [(#FICHIER|centre_image_y|mult{100})]%;
+		}
+	</style>
+	]
+	[(#TITRE|sinon{#DESCRIPTIF}|sinon{#CREDITS}|oui)
+	<figcaption class='spip_doc_intitules[ spip_doc_intitules_(#EVAL{_SPIP_DOC_INTITULES_ALIGN})]'>
+		[<div class='spip_doc_titre #EDIT{titre}'><strong>(#TITRE)</strong></div>]
+		[<div class='spip_doc_descriptif #EDIT{descriptif}'>(#DESCRIPTIF|propre|PtoBR)[(#NOTES|PtoBR)]</div>]
+		[<div class='spip_doc_credits #EDIT{credits}'>(#CREDITS|propre|PtoBR)[(#NOTES|PtoBR)]</div>]
+	</figcaption>
+	]
 </figure>
 ][
 
@@ -45,21 +47,23 @@ equivalent a un <docXX> pour une image en mode image
 (#INCLUS|=={embed}|oui)
 <div class='spip_document_#ID_DOCUMENT spip_documents[(#ENV{large}|oui)spip_documents_large][ spip_documents_(#ENV{align}|sinon{center})]'[
 style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})']>
-<object	data='#URL_DOCUMENT' 
-	type='#MIME_TYPE'[
-	width='(#ENV{largeur}?{'', #LARGEUR})'][
-	height='(#ENV{hauteur}?{'', #HAUTEUR})']
-	[(#ENV*|env_to_attributs)] >
-	<param name='src' value='#URL_DOCUMENT' />
-	[(#ID_DOCUMENT|appliquer_filtre{#MIME_TYPE})]
-</object>
-<div class="spip_doc_intitules[ spip_doc_intitules_(#EVAL{_SPIP_DOC_INTITULES_ALIGN})]">
-[
-<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>
-][
-<div class='spip_doc_descriptif'>(#DESCRIPTIF|propre|PtoBR)[(#NOTES|PtoBR)]</div>
+	<object	data='#URL_DOCUMENT' 
+		type='#MIME_TYPE'[
+		width='(#ENV{largeur}?{'', #LARGEUR})'][
+		height='(#ENV{hauteur}?{'', #HAUTEUR})']
+		[(#ENV*|env_to_attributs)] >
+		<param name='src' value='#URL_DOCUMENT' />
+		[(#ID_DOCUMENT|appliquer_filtre{#MIME_TYPE})]
+	</object>
+	[(#TITRE|sinon{#DESCRIPTIF}|oui)
+	<div class="spip_doc_intitules[ spip_doc_intitules_(#EVAL{_SPIP_DOC_INTITULES_ALIGN})]">
+		[
+		<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>
+		][
+		<div class='spip_doc_descriptif'>(#DESCRIPTIF|propre|PtoBR)[(#NOTES|PtoBR)]</div>
+		]
+	</div>
 ]
-</div>
 </div>]
 </BOUCLE_tous>
 #FILTRE{mini_html}
