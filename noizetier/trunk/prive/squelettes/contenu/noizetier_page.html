@@ -22,12 +22,8 @@
 		</div>
 	</BOUCLE_si_page>
 	#SET{informations, #NOIZETIER_OBJET_INFOS{#OBJET, #ID_OBJET}}
-	[(#BOITE_OUVRIR{
-		<h1>
-			<a[ href="(#ID_OBJET|generer_url_entite{#OBJET})"]>[(#GET{informations/titre})]</a>
-			[(#GET{informations/logo}|image_reduire{24}|extraire_attribut{src}|balise_img{page,cadre-icone})]
-		</h1>
-	,simple fiche_objet})]
+	[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{#OBJET-24.png}|balise_img{#OBJET,cadre-icone})],simple fiche_objet})]
+		<h1><a[ href="(#ID_OBJET|generer_url_entite{#OBJET})"]>[(#GET{informations/titre})]</a></h1>
 	<//B_si_page>
 	#BOITE_FERMER
 
