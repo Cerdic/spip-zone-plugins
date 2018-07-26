@@ -8,4 +8,22 @@
 	<label><:profil:champ_identifiant_label:> : </label>
 	<span dir="#LANG_DIR" class="#EDIT{identifiant} identifiant">(#IDENTIFIANT)</span>
 </div>]
+
+[(#REM)
+	Aperçu temporaire faute de mieux
+	On affiche le formulaire du profil pour voir les champs qui ont été configurés, en enlevant le bouton de validation.
+]
+<div class="profil__apercu">
+#FORMULAIRE_PROFIL{new,#ID_PROFIL}
+</div>
+<style>
+	.profil__apercu .formulaire_profil .boutons {
+		display: none;
+	}
+</style>
+<script>
+	;jQuery(function($) {
+		$('.profil__apercu .formulaire_profil .boutons').remove();
+	});
+</script>
 </BOUCLE_profil>
