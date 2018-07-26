@@ -14,11 +14,16 @@
 	On affiche le formulaire du profil pour voir les champs qui ont été configurés, en enlevant le bouton de validation.
 ]
 <div class="profil__apercu">
+	<span class="h4">Aperçu du formulaire de ce profil :</span>
 #FORMULAIRE_PROFIL{new,#ID_PROFIL}
 </div>
 <style>
 	.profil__apercu .formulaire_profil .boutons {
 		display: none;
+	}
+	.profil__apercu > span {
+		display: block;
+		margin-top: 2em;
 	}
 </style>
 <script>
