@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_config_coordonnees_label_label' => 'Label facultatif',
 	'champ_config_coordonnees_organisation_caption' => 'Coordonnées de l’organisation',
 	'champ_config_coordonnees_type_label' => 'Type',
+	'champ_config_coordonnees_explication' => 'Pour ajouter plusieurs coordonnées, il en faut au moins une de cochée, si besoin revalidez le formulaire.',
 	'champ_config_id_annuaire_explication' => 'Vous avez activé l’utilisation des annuaires multiples. Si aucun annuaire n’est choisi, un annuaire du même nom que le profil sera créé.',
 	'champ_config_id_annuaire_label' => 'Quel annuaire',
 	'champ_groupe_auteur_label' => 'Compte utilisateur',

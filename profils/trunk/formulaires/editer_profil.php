@@ -208,6 +208,7 @@ function formulaires_editer_profil_saisies_dist($id_profil = 'new', $retour = ''
 					'conteneur_class' => 'pleine_largeur',
 					'caption' => _T('profil:champ_config_coordonnees_organisation_caption'),
 					'afficher_si' => '@config[activer_organisation]@ == "on" && @config[activer_coordonnees_organisation]@ == "on"',
+					'caption_explication' => _T('profil:champ_config_coordonnees_explication'),
 				),
 			);
 		}
@@ -283,6 +284,7 @@ function formulaires_editer_profil_saisies_dist($id_profil = 'new', $retour = ''
 					'conteneur_class' => 'pleine_largeur',
 					'caption' => _T('profil:champ_config_coordonnees_contact_caption'),
 					'afficher_si' => '@config[activer_contact]@ == "on" && @config[activer_coordonnees_contact]@ == "on"',
+					'caption_explication' => _T('profil:champ_config_coordonnees_explication'),
 				),
 			);
 		}
