@@ -303,6 +303,7 @@ function profils_affiche_enfants($flux) {
 		and isset($flux['args']['id_objet'])
 		and $id_objet = $flux['args']['id_objet']
 	) {
+		include_spip('inc/presentation');
 		$comptes = recuperer_fond(
 			'prive/objets/liste/profils_comptes',
 			array('id_profil'=>$id_objet, 'sinon' => _T('profil:comptes_aucun')),
