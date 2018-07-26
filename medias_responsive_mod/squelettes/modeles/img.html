@@ -74,13 +74,15 @@
 ]
 
 
+	[(#EVAL{defined('_MEDIAS_RESPONSIVE_MASQUER_LEGENDE')}|non|ou{#ENV{legende}|=={oui}|oui})
+	[(#ENV{legende}|=={non}|non)
 	[(#TITRE|sinon{#DESCRIPTIF}|sinon{#CREDITS}|oui)
 	<figcaption class='spip_doc_intitules[ spip_doc_intitules_(#EVAL{_SPIP_DOC_INTITULES_ALIGN})][ spip_doc_intitules_(#ENV{shape})]'>
 		[<div class='spip_doc_titre #EDIT{titre}'><strong>(#TITRE|propre|ptobr)</strong></div>]
 		[<div class='spip_doc_descriptif #EDIT{descriptif}'>(#DESCRIPTIF|propre|PtoBR)[(#NOTES|PtoBR)]</div>]
 		[<div class='spip_doc_credits  #EDIT{credits}'>(#CREDITS|propre|PtoBR)</div>]
 	</figcaption>
-	]
+	]]]
 </figure>
 </BOUCLE_document>
 #FILTRE{mini_html}
