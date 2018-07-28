@@ -1,0 +1,18 @@
+<paquet
+	prefix="datelib"
+	categorie="date"
+	version="0.0.3"
+	etat="experimental"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/datelib-128.png"
+>
+	<nom>Librairie de gestion des dates</nom>
+
+
+	<auteur>ITC Rebellyon</auteur>
+	<copyright>2018</copyright>
+	<licence>GNU/GPL</licence>
+
+	<credit lien="https://rebellyon.info">Rebellyon.info</credit>
+
+</paquet>
