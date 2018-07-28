@@ -1,30 +1,30 @@
 <paquet
 	prefix="photosafe"
 	categorie="divers"
-	version="0.0.1"
+	version="0.0.3"
 	etat="experimental"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/photosafe-128.png"
-	documentation="https://red.rebellyon.info"
->	
-	<nom>Photos Safe</nom>
-	
-	
+	schema="1.0.0"
+>
+	<nom>PhotosSafe</nom>
+
+
 	<auteur>Collectif</auteur>
 	<copyright>2012</copyright>
 	<licence>GNU/GPL</licence>
-		
-	<credit lien="http://rebellyon.info">Rebellyon.info</credit>
-	
 
-	
+	<credit lien="http://rebellyon.info">Rebellyon.info</credit>
+
 	<!-- facilitons les champs de formulaires -->
 	<necessite nom="saisies" compatibilite="[1.14.0;]" />
-	
+
 	<pipeline nom="post_edition" inclure="photosafe_pipelines.php" />
-	
-	
+	<pipeline nom="formulaire_traiter" inclure="photosafe_pipelines.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/photosafe.php" />
+	<pipeline nom="alertes_auteur" inclure="photosafe_pipelines.php" />
+
 	<menu nom="configurer_photosafe" titre="photosafe:cfg_titre_menu_photosafe" parent="menu_configuration" icone="images/photosafe-16.png" />
-	
-	
+
+
 </paquet>

@@ -1,35 +1,67 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 include_spip('inc/config');
-include_spip('photosafe_fonctions');
 include_spip('inc/documents');
+
+
+
+function rm_exif($file){
+	$cmdligne = "mat ".$file;
+	exec($cmdligne,$output);
+	return $output[1];
+}
+
+
+function photosafe_formulaire_traiter($flux){
+    	if (($flux['args']['form']=='editer_logo') or ($flux['args']['form']=='uploadhtml5')){
+		$chercher_logo = charger_fonction('chercher_logo','inc');
+		$id = $flux['args']['args'][1];
+		$type = $flux['args']['args'][0];
+		$logo = $chercher_logo($id, id_table_objet($type));
+		$logo_file = $logo[0];
+		if ($logo_file){
+			$exif_out = rm_exif($logo_file);
+		}
+    	}
+    	return $flux;
+}
 
 function photosafe_post_edition($flux) {
 
-	if (($flux['args']['table'] == 'spip_documents')) {
-		/* On nettoie les données exif si l'option est cochée */
-		$test=lire_config('photosafe/rm_exif');
-		spip_log("la variable de config : $test", 'photosafe');
-		if (lire_config('photosafe/rm_exif')=='on')
-		{ 
+	if($flux['args']['action']=='ajouter_document')
+	{
+
 			$id_photo = $flux['args']['id_objet'];
-			/*debug*/
-			spip_log($flux['args'], 'photosafe');
-			spip_log($flux['data'], 'photosafe');
-			spip_log($id_photo, 'photosafe');
-			/*fin debug*/
-			
-			if ($flux['data']['extension']=='jpg'){
-				$nom_photo = sql_fetsel('fichier', 'spip_documents', 'id_document= '.intval($id_photo));
-				$nom_photo['fichier'] = get_spip_doc($nom_photo['fichier']);
-				photosafe_rm_exif(realpath($nom_photo['fichier']));
-				/*debug*/
-				spip_log($nom_photo['fichier'], 'photosafe');
+
+			$photo_ok = isset($GLOBALS['meta']['formats_graphiques'])
+			? (strpos($GLOBALS['meta']['formats_graphiques'], $flux['data']['extension'])!==false)
+			: false;
+
+			if ($photo_ok){
+				$res=sql_select("fichier",'spip_documents','id_document= '.intval($id_photo));
+				while ($nom_photo = sql_fetch($res)){
+					$filename = realpath(get_spip_doc($nom_photo['fichier']));
+					$exif_out = rm_exif($filename);
+				}
 			}
-			
-		}
+
+
 	}
-	
+
+	return $flux;
+}
+
+/* Alerter si le Mat n'est pas installÃ© */
+function photosafe_alertes_auteur($flux) {
+	if (autoriser('webmestre', $flux['args']['id_auteur'])
+		AND (!lire_config('photosafe/mat'))
+		) {
+			$flux['data'][] = _T('avis_attention'). ' '
+				. _L("Photosafe est activÃ© mais MAT n'est pas prÃ©sent sur le serveur");
+	}
+
 	return $flux;
 }
 

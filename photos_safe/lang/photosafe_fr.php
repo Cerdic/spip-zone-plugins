@@ -6,6 +6,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//C
 	'cfg_titre_menu_photosafe' => 'Photos Safe',
 	'cfg_titre_photosafe' => 'Configuration du plugin PhotoSafe',
+	
+	//P	
 	'photosafe_exif' => 'Données EXIF'
 );
 
