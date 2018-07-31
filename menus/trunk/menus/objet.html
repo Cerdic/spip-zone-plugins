@@ -48,6 +48,6 @@
 ]
 
 [(#ENV{appel_menu}|et{#GET{visible}|=={oui}}|oui)
-	<li class="menu-entree item[ (#ENV{css})][ (#GET{id_objet}|menus_exposer{#ENV{type_objet},#ENV*{env}})]">
-		<a href="#INFO_URL{#ENV{type_objet}, #GET{id_objet}}"[ class="(#ENV{css_lien})"]>#GET{titre}</a>
+	<li class="menu-entree item menu-items__item[ (#ENV{css})][ (#GET{id_objet}|menus_exposer{#ENV{type_objet},#ENV*{env}})]">
+		<a href="#INFO_URL{#ENV{type_objet}, #GET{id_objet}}" class="menu-items__lien[ (#ENV{css_lien})]">#GET{titre}</a>
 ]
