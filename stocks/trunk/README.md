@@ -15,6 +15,8 @@ https://zone.spip.org/trac/spip-zone/browser/_plugins_/stocks/trunk
 
 ## Changelogs
 
+v0.2.4
+- correction sur le changement de statut du produit : autorisation
 
 v0.2.1
 - Ajoute une fonction de décrémentation du stock des produits au moment du passage a payé d'une commande

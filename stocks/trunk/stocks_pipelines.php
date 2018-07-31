@@ -170,8 +170,14 @@ function stocks_post_edition($flux){
 										// Passé le produit en statut épuisé si stock 0
 										$new_stock = get_quantite($objet,$id_objet);
 										if($new_stock <= 0){
+												// https://www.spip.net/fr_article5528.html
+												include_spip('inc/autoriser');
+												// donner une autorisation exceptionnelle temporaire
+												autoriser_exception('modifier', 'produit', $id_objet);
 												spip_log("Stock épuisé : $new_stock produit $id_objet",'stocks');
 												objet_modifier($objet, $id_objet, array('statut'=>'epuise'));
+												// retirer l'autorisation exceptionnelle
+												autoriser_exception('modifier', 'produit', $id_objet, false);
 										}
 								}
 						}
