@@ -102,7 +102,7 @@ function noizetier_conteneur_decomposer($id_conteneur) {
 			$conteneur['id_noisette'] = intval($elements[2]);
 			// -- le squelette
 			// TODO : revoir l'intérêt voire la cohérence de ce champ
-			include_spip('ncore/noizetier');
+			include_spip('ncore_fonctions');
 			$conteneur['squelette'] = type_noisette_localiser('noizetier', $conteneur['type_noisette']);
 			// -- les éléments du conteneur de la noisette parent utiles pour les autorisations
 			$select = array('type', 'composition', 'objet', 'id_objet', 'bloc');
