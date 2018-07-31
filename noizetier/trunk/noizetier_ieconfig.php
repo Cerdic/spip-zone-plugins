@@ -198,7 +198,7 @@ function noizetier_ieconfig_exporter() {
 		'spip_noisettes',
 		'1',
 		'',
-		'type, composition, bloc, rang'
+		'type, composition, bloc, rang_noisette'
 	);
 
 	// On remet au propre les parametres
