@@ -1,0 +1,27 @@
+<paquet
+	prefix="grigri"
+	categorie="divers"
+	version="1.0.2"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/grigri.png"
+	schema="1.0.2"
+>
+
+	<nom>Grigri</nom>
+
+	<auteur lien='http://gamuza.fr'>tofulm</auteur>
+	<auteur lien='http://gamuza.fr'>cy_altern</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="autoriser" inclure="grigri_autorisations.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/grigri.php" />
+
+	<pipeline nom="editer_contenu_objet" inclure="grigri_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="grigri_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="grigri_pipelines.php" />
+	<pipeline nom="boite_infos" inclure="grigri_pipelines.php" />
+	<pipeline nom="affiche_gauche" inclure="grigri_pipelines.php" />
+
+</paquet>

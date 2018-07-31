@@ -1,0 +1,10 @@
+[(#REM)
+
+	Affichage du grigri sur la fiche d'un objet, si présent.
+
+]
+[<div class="grigri">
+	[(#CHEMIN_IMAGE{grigri-12}|balise_img{<:grigri:champ_grigri_label:>,grigri_icone})]
+	<span class="grigri_label"><:grigri:champ_grigri_label:> :</span>
+	<span class="grigri_valeur">(#ENV{grigri})</span>
+</div>]

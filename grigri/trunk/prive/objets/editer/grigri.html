@@ -1,0 +1,9 @@
+<div class="editer editer_grigri[ (#ENV**{erreurs/grigri}|oui)erreur]">
+	<label for="grigri">
+		[(#CHEMIN_IMAGE{grigri-12}|balise_img{<:grigri:champ_grigri_label:>,grigri_icone})]
+		<:grigri:champ_grigri_label:> :
+	</label>[
+	<span class='erreur_message'>(#ENV**{erreurs/grigri})</span>
+	]<p class="explication"><:grigri:champ_grigri_explication:></p>
+	<input class="text" name="grigri" id="grigri" value="#ENV{grigri}" lang="#LANG" type="text">
+</div>

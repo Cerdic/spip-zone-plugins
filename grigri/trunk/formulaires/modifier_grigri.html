@@ -1,0 +1,22 @@
+<div class="formulaire_spip formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+
+[(#ENV{editable}|oui)   ]
+	<form name="formulaire_#FORM" action="#ENV{action}" method="post"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<div class="editer_groupe">
+			#SET{name,grigri}
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<div class="editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+				[<span class="erreur_message">(#GET{erreurs})</span>]
+				<input type="text" class="text grigri" name="#GET{name}" id="#GET{name}" value="#ENV{#GET{name}}" >
+			</div>
+		</div>
+
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" ></p>
+	</div></form>
+
+</div>
