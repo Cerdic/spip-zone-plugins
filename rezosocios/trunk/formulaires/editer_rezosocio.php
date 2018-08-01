@@ -58,19 +58,31 @@ function rezosocios_edit_config($row) {
 function formulaires_editer_rezosocio_verifier_dist($id_rezosocio = 'new', $id_parent = null, $retour = '', $associer_objet = '', $config_fonc = 'rezosocios_edit_config', $row = array(), $hidden = '') {
 
 	$erreurs = formulaires_editer_objet_verifier('rezosocio', $id_rezosocio, array('titre'));
+
 	// verifier qu'un rezosocio n'existe pas avec le meme titre
-	// la comparaison accepte un numero absent ou different
+	// la comparaison accepte un numéro absent ou différent
 	// sinon avertir
 	if (sql_countsel(
 		'spip_rezosocios',
-		'titre REGEXP '.sql_quote('^([0-9]+[.] )?'.preg_quote(supprimer_numero(_request('titre'))).'$')
-		.' AND id_rezosocio<>'.intval($id_rezosocio).' AND type_rezo=' . _request('type_rezo')
+		array(
+			'titre REGEXP '.sql_quote('^([0-9]+[.] )?'.preg_quote(supprimer_numero(_request('titre'))).'$'),
+			'id_rezosocio <> ' . intval($id_rezosocio),
+			'type_rezo = ' . sql_quote(_request('type_rezo')),
+		)
 	)) {
 		$erreurs['titre'] =
 					_T('rezosocios:avis_doublon_rezosocio_cle')
 					." <input type='hidden' name='confirm_titre_rezosocio' value='1' />";
 	}
-	if (sql_countsel('spip_rezosocios', 'nom_compte ='.sql_quote(_request('nom_compte')).' AND type_rezo=' . _request('type_rezo'))) {
+
+	// Vérifier doublons nom / type de réseau
+	if (sql_countsel(
+		'spip_rezosocios',
+		array(
+			'nom_compte = ' . sql_quote(_request('nom_compte')),
+			'type_rezo = ' . sql_quote(_request('type_rezo')),
+		)
+	)) {
 		$erreurs['nom_compte'] = _T('rezosocios:erreur_url_utilisee');
 	}
 
