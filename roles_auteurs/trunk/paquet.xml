@@ -1,7 +1,7 @@
 <paquet
 	prefix="roles_auteurs"
 	categorie="edition"
-	version="1.0.2"
+	version="1.0.3"
 	etat="experimental"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/roles_auteurs-64.png"
@@ -12,7 +12,6 @@
 	<nom>Rôles d&#039;auteurs</nom>
 
 	<auteur lien='http://www.magraine.net/'>Marcillaud Matthieu</auteur>
-
 	<credit lien="http://www.aha-soft.com/">Aha Soft (logo)</credit>
 
 	<licence>GNU/GPL</licence>

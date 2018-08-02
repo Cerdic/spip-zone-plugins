@@ -5,7 +5,9 @@
  * Licence GNU/GPL
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 
@@ -52,4 +54,3 @@ function roles_auteurs_declarer_tables_auxiliaires($tables) {
 	$tables['spip_auteurs_liens']['key']['PRIMARY KEY']   = "id_auteur,id_objet,objet,role";
 	return $tables;
 }
-?>
