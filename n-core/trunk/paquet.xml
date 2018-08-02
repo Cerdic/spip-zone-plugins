@@ -1,11 +1,12 @@
 <paquet
 	prefix="ncore"
 	categorie="outil"
-	version="0.4.7"
+	version="0.4.8"
 	etat="dev"
 	compatibilite="[3.2.0;3.2.*]"
-	logo="ncore_logo-32.png"
+	logo="prive/themes/spip/images/ncore-32.png"
 >
+<!-- Icon : https://www.shareicon.net/3d-interface-shapes-cube-cubes-squares-geometrical-shapes-and-symbols-823704 -->
 	<nom>N-Core</nom>
 	<!-- Un coeur fondant aux noisettes -->
 
