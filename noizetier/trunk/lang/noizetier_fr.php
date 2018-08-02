@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'activer_composition' => 'Activer les compositions',
 	'apercu' => 'Aperçu',
+	'aucun_type_noisette' => 'Aucun type de noisette chargé.',
 
 	// B
 	'bloc_sans_noisette' => 'Ajouter des noisettes en utilisant le bouton “ajouter une noisette” ou en glissant-déposant le type de noisette désiré sur cet emplacement.',
