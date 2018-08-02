@@ -37,6 +37,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_listes_diffusion_option_statut' => 'Filtrer les listes selon les statuts',
 	'explication_to_email' => 'Envoyer un email de pré-inscription aux adresses suivantes (plusieurs adresses séparées par une virgule si besoin).',
 
+	// F
+	'force_synchronisation' => 'Synchroniser',
+
 	// I
 	'icone_creer_mailsubscriber' => 'Ajouter une inscription',
 	'icone_modifier_mailsubscriber' => 'Modifier cette inscription',
