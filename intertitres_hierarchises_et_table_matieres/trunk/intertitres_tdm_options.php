@@ -387,17 +387,17 @@ function IntertitresTdm_composer_ancre($titre, $pass, $pos) {
  * @return string $str
  */
 function intertitre_tdm_preserver_tags_typo($str) {
-    // passe 1: on echappe les tags autorisés: i, strong, sub, sup
+	// passe 1: on echappe les tags autorisés: i, strong, sub, sup
 	$pattern = "(i|strong|sub|sup|\/i|\/strong|\/sub|\/sup)";
-    $str = preg_replace('/<'.$pattern.'/', "ßß$1" , $str);
-    $str = preg_replace('/'.$pattern.'>/', "$1γγ", $str);
+	$str = preg_replace('/<'.$pattern.'/', "ßß$1" , $str);
+	$str = preg_replace('/'.$pattern.'>/', "$1γγ", $str);
 
 	// on vire les autres tags
-    $str = trim(strip_tags($str));
+	$str = trim(strip_tags($str));
 
 	// on retablit les tags echappés
-    $str = preg_replace('/ßß'.$pattern.'/', "<$1", $str);
-    $str = preg_replace('/'.$pattern.'γγ/', "$1>", $str);
+	$str = preg_replace('/ßß'.$pattern.'/', "<$1", $str);
+	$str = preg_replace('/'.$pattern.'γγ/', "$1>", $str);
 
 	return $str;
 }
