@@ -40,7 +40,7 @@ elles viendront surcharger les valeurs définies par défaut.
 	768, #ARRAY{items,4},
 	960, #ARRAY{items,6}
 }|json_encode})]
-			
+
 <INCLURE{fond=noisettes/owlcarousel-article-portfolio}
 		{id_article=28}
 		{id-carousel=sommaire_hero}
@@ -81,7 +81,7 @@ Affiche le logo de l'article en fond et le titre ainsi que #INTRODUCTION
 	{lazyLoad=true}
 	{env}
 	{ajax} />
-	
+
 ```
 
 ## TRAVAUX :
@@ -93,8 +93,6 @@ Sat Oct 14 08:48:25 2017 :
 
 ## TODO :
 
-
-
-
-
-
+- Améliorer l'accessibilité et eviter les alertes axe
+	https://codepen.io/AlexRebula/pen/yOjVvY
+	https://github.com/rtrvrtg/owlcarousel2-a11ylayer

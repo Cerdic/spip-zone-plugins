@@ -13,6 +13,8 @@ Insertion du modele <articleX|owl>
 @param : autoplay : true (false par défaut) : le carousel démarre automatiquement.
 @param : autoplayHoverPause : true (false par défaut) : pause sur le rollHover en mode autoplay
 @param : lazyLoad : true (false par défaut) : ne charge que les images visibles pour optimiser le chargement.
+@param animateIn - une animation css3 , `fadeOut` est la seul fournie par owl, sinon ajouter animate.css
+@param animateOut - une animation css3 , `fadeOut` est la seul fournie par owl, sinon ajouter animate.css
 
 -->]
 <style>
@@ -62,6 +64,8 @@ jQuery(function($){
         autoplay: (#ENV{autoplay}),][
         autoplayHoverPause: (#ENV{autoplayHoverPause}),][
         lazyLoad: (#ENV{lazyLoad}),][
+        animateIn:'(#ENV{animateIn})',][
+        animateOut:'(#ENV{animateOut})',][
         autoplayTimeout: (#ENV{autoplayTimeout}),][
         autoHeight: (#ENV{autoHeight}),][
         URLhashListener:(#ENV{URLhashListener}),
