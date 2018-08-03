@@ -20,8 +20,7 @@
 	[(#SET{intertitre,"renvoi"})]
 <//B_Article>
 #SET{crochet,"["}
-[
-(#REM) Le renvoi est rédigé
+[(#REM) Le renvoi est rédigé
 ]
 [(#GET{crochet}
 	|concat{[(#GET{intertitre}|trim)],[|(#GET{extrait})(...)],"->",#ENV{id},"#",#ENV{partie},"]"}

@@ -11,8 +11,7 @@
 </BOUCLE_Article>
 #SET{quote,"<quote>"}
 [(#ENV{debut}|?{#SET{quote,"<quote>(...) "}})]
-[
-(#REM) L'extrait est encadré par des quotes
+[(#REM) L'extrait est encadré par des quotes
 ]
 [(#GET{quote}
 	|concat{#GET{extrait},"(...)</quote>"}
