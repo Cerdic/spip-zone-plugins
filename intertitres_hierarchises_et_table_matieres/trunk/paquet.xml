@@ -1,14 +1,14 @@
 <paquet
 	prefix="IntertitresTdm"
 	categorie="edition"
-	version="0.9.13"
+	version="0.9.14"
 	etat="test"
 	compatibilite="[1.9.0;3.2.*]"
 	logo="itdm-64.png"
 	documentation="https://contrib.spip.net/Des-intertitres-hierarchises-et-des-outils-pour-les"
 >	
 
-	<nom>Intertitres hi&#233;rarchis&#233;s et table des mati&#232;res</nom>
+	<nom>Intertitres hiérarchisés et table des matières</nom>
 	<!-- Générer automatiquement une table des matières -->
 
 	<auteur>Mortimer</auteur>

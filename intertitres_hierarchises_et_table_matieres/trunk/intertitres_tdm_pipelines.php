@@ -26,6 +26,9 @@ function IntertitresTdm_pre_propre($texte) {
 }
 
 function IntertitresTdm_post_propre($texte) {
+	include_spip('intertitres_tdm_fonctions');
+    include_spip('intertitres_tdm_options');
+
 	//le second paramètre est vide, c'est à dire qu'on n'affiche pas la table seule.
 	$new_texte = IntertitresTdm_table_des_matieres($texte);
 	return $new_texte;

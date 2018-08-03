@@ -136,7 +136,13 @@ function IntertitresTdm_table_des_matieres($texte, $tableseule = false, $url_art
 			$level = '*';
 		}
 		$titre = $matches[3+$ajout][$j];
-		$titre_lien = trim(strip_tags($matches[0][$j]));
+		if (!defined('_INTERTITRES_TDM_PRESERVER_TAGS_TYPO')) {
+			// traitement standard: on supprime tous les tags sur les titres de la table des matieres
+			$titre_lien = strip_tags($matches[0][$j]);
+		} else {
+			// traitement expérimental: preserver certains tags dans  la table des matieres
+			$titre_lien = intertitre_tdm_preserver_tags_typo($matches[0][$j]);
+		}
 
 		// Si tableseule alors on vire les <a id=''></a> des titres
 		if ($tableseule) {
@@ -372,4 +378,26 @@ function IntertitresTdm_composer_ancre($titre, $pass, $pos) {
 	$ancres_locales[$pos] = $ancre_calcule;
 
 	return ($ancre_calcule);
+}
+
+/**
+ * Supprimer les tags d'une chaine en conservant certains tags typos
+ *
+ * @param string $str
+ * @return string $str
+ */
+function intertitre_tdm_preserver_tags_typo($str) {
+    // passe 1: on echappe les tags autorisés: i, strong, sub, sup
+	$pattern = "(i|strong|sub|sup|\/i|\/strong|\/sub|\/sup)";
+    $str = preg_replace('/<'.$pattern.'/', "ßß$1" , $str);
+    $str = preg_replace('/'.$pattern.'>/', "$1γγ", $str);
+
+	// on vire les autres tags
+    $str = trim(strip_tags($str));
+
+	// on retablit les tags echappés
+    $str = preg_replace('/ßß'.$pattern.'/', "<$1", $str);
+    $str = preg_replace('/'.$pattern.'γγ/', "$1>", $str);
+
+	return $str;
 }
