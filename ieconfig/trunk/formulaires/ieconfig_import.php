@@ -231,13 +231,13 @@ function formulaires_ieconfig_import_traiter_dist() {
 							$p = substr($meta, 0, -1);
 							foreach ($config[$prefixe] as $m => $v) {
 								if (substr($m, 0, strlen($p)) == $p) {
-									$sc = lire_config($sc = lire_config($meta . '/', serialize($config[$prefixe][$meta]));
-									$config[$prefixe][$meta] = array_merge($sc,$config[$prefixe][$meta]);
-									ecrire_config($sc = lire_config($meta . '/', serialize($config[$prefixe][$meta]));
+									$sc = lire_config($m . '/', $v);
+									$v = array_merge($sc,$v);
+									ecrire_config($m . '/', $v);
 								}
 							}
 						} elseif (isset($config[$prefixe][$meta])) {
-							$sc = lire_config($meta . '/', serialize($config[$prefixe][$meta]));
+							$sc = lire_config($meta . '/', $config[$prefixe][$meta]);
 							$config[$prefixe][$meta] = array_merge($sc,$config[$prefixe][$meta]);
 							ecrire_config($meta . '/', $config[$prefixe][$meta]);
 						}
@@ -250,8 +250,8 @@ function formulaires_ieconfig_import_traiter_dist() {
 							$p = substr($meta, 0, -1);
 							foreach ($config[$prefixe] as $m => $v) {
 								if (substr($m, 0, strlen($p)) == $p) {
-									$sc = lire_config($sc = lire_config($meta . '/', serialize($config[$prefixe][$meta]));
-									$config[$prefixe][$meta] = array_merge($sc,$config[$prefixe][$meta]);
+									$sc = lire_config($m . '/', serialize($v));
+									$v = array_merge($sc,$v);
 									ecrire_config($m . '/', serialize($v));
 								}
 							}
@@ -272,13 +272,13 @@ function formulaires_ieconfig_import_traiter_dist() {
 							$p = substr($meta, 0, -1);
 							foreach ($config[$prefixe] as $m => $v) {
 								if (substr($m, 0, strlen($p)) == $p) {
-									$sc = lire_config($sc = lire_config($meta . '/', serialize($config[$prefixe][$meta]));
-									$config[$prefixe][$meta] = array_merge($config[$prefixe][$meta],$sc);
+									$sc = lire_config($m . '/', $v);
+									$v = array_merge($v,$sc);
 									ecrire_config($m . '/', $v);
 								}
 							}
 						} elseif (isset($config[$prefixe][$meta])) {
-							$sc = lire_config($meta . '/', serialize($config[$prefixe][$meta]));
+							$sc = lire_config($meta . '/', $config[$prefixe][$meta]);
 							$config[$prefixe][$meta] = array_merge($config[$prefixe][$meta],$sc);
 							ecrire_config($meta . '/', $config[$prefixe][$meta]);
 						}
@@ -291,8 +291,8 @@ function formulaires_ieconfig_import_traiter_dist() {
 							$p = substr($meta, 0, -1);
 							foreach ($config[$prefixe] as $m => $v) {
 								if (substr($m, 0, strlen($p)) == $p) {
-									$sc = lire_config($sc = lire_config($meta . '/', serialize($config[$prefixe][$meta]));
-									$config[$prefixe][$meta] = array_merge($config[$prefixe][$meta],$sc);
+									$sc = lire_config($m . '/', serialize($v));
+									$v = array_merge($v,$sc);
 									ecrire_config($m . '/', serialize($v));
 								}
 							}
