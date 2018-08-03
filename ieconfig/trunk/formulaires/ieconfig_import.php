@@ -80,37 +80,37 @@ function ieconfig_saisies_import() {
 					if (!$icone) {
 						$icone = find_in_path($data['icone']);
 					}
-					if ($icone) {
-						$icone = '<img src="' . $icone . '" alt="" style="margin-left:-50px; margin-right:34px;" />';
-					}
 				} else {
-					$icone = '';
+					$icone = 'config-export-16.png';
 				}
-				$ieconfig_metas[$prefixe] = $icone . (isset($data['titre']) ? $data['titre'] : $prefixe);
-			}
-		}
-		if (count($ieconfig_metas) > 0) {
-			$saisies[] = array(
+				$ieconfig_metas[$prefixe] = $prefixe;
+				$saisies[] = array(
 				'saisie' => 'fieldset',
 				'options' => array(
 					'nom' => 'metas_fieldset',
-					'label' => _T('ieconfig:label_importer_metas'),
-					'icone' => 'config-export-16.png',
-				),
-				'saisies' => array(
-					array(
-						'saisie' => 'checkbox',
-						'options' => array(
-							'nom' => 'import_metas',
-							'label' => _T('ieconfig:label_importer'),
-							'tout_selectionner' => 'oui',
-							'datas' => $ieconfig_metas,
-						),
+					'label' => $prefixe,
+					'icone' => $icone,
 					),
-				),
-			);
+				'saisies' => array ( 
+					array(
+						'saisie' => 'radio',
+						'options' => array(
+							'nom' => $prefixe,
+							'label' => '<:ieconfig:ieconfig_import:>',
+							'datas' => array(
+								'rien' => '<:ieconfig:ieconfig_import_rien:>',
+								'fusion' => '<:ieconfig:ieconfig_import_fusionner:>',
+								'ecrase' => '<:ieconfig:ieconfig_import_ecraser:>',
+								'fusion_inv' => '<:ieconfig:ieconfig_import_fusionner_inv:>',						
+								),
+							'defaut' => 'fusion',
+							)
+						)
+					)
+				);
+			}
 		}
-
+		
 		// On passe via le pipeline ieconfig
 		$saisies = pipeline('ieconfig', array(
 			'args' => array(
@@ -120,7 +120,6 @@ function ieconfig_saisies_import() {
 			'data' => $saisies,
 		));
 	}
-
 	return $saisies;
 }
 
@@ -187,13 +186,11 @@ function formulaires_ieconfig_import_traiter_dist() {
 		));
 
 		// Gestion des plugins utilisant le pipeline ieconfig_metas
-		$import_metas = _request('import_metas');
-		if (!is_array($import_metas)) {
-			$import_metas = array();
-		}
-
-		foreach (pipeline('ieconfig_metas', array()) as $prefixe => $data) {
-			if (in_array($prefixe, $import_metas) && isset($config[$prefixe])) {
+		foreach (pipeline('ieconfig_metas', array()) as $prefixe => $data) {			
+			$option = _request($prefixe);
+			//Si on veut une importation avec écrasement
+			if ($option === 'ecrase') {
+				
 				if (isset($data['metas_brutes'])) {
 					foreach (explode(',', $data['metas_brutes']) as $meta) {
 						// On teste le cas ou un prefixe est indique (dernier caractere est *)
@@ -220,6 +217,91 @@ function formulaires_ieconfig_import_traiter_dist() {
 								}
 							}
 						} elseif (isset($config[$prefixe][$meta])) {
+							$sc = lire_config($meta . '/', serialize($config[$prefixe][$meta]));
+							$config[$prefixe][$meta] = array_merge($sc,$config[$prefixe][$meta]);
+							ecrire_config($meta . '/', serialize($config[$prefixe][$meta]));
+						}
+					}
+				}
+			}
+			//Si on veut une importation avec fusion
+			if ($option === 'fusion') {
+				
+				if (isset($data['metas_brutes'])) {
+					foreach (explode(',', $data['metas_brutes']) as $meta) {
+						// On teste le cas ou un prefixe est indique (dernier caractere est *)
+						if (substr($meta, -1) == '*') {
+							$p = substr($meta, 0, -1);
+							foreach ($config[$prefixe] as $m => $v) {
+								if (substr($m, 0, strlen($p)) == $p) {
+									$sc = lire_config($sc = lire_config($meta . '/', serialize($config[$prefixe][$meta]));
+									$config[$prefixe][$meta] = array_merge($sc,$config[$prefixe][$meta]);
+									ecrire_config($sc = lire_config($meta . '/', serialize($config[$prefixe][$meta]));
+								}
+							}
+						} elseif (isset($config[$prefixe][$meta])) {
+							$sc = lire_config($meta . '/', serialize($config[$prefixe][$meta]));
+							$config[$prefixe][$meta] = array_merge($sc,$config[$prefixe][$meta]);
+							ecrire_config($meta . '/', $config[$prefixe][$meta]);
+						}
+					}
+				}
+				if (isset($data['metas_serialize'])) {
+					foreach (explode(',', $data['metas_serialize']) as $meta) {
+						// On teste le cas ou un prefixe est indique (dernier caractere est *)
+						if (substr($meta, -1) == '*') {
+							$p = substr($meta, 0, -1);
+							foreach ($config[$prefixe] as $m => $v) {
+								if (substr($m, 0, strlen($p)) == $p) {
+									$sc = lire_config($sc = lire_config($meta . '/', serialize($config[$prefixe][$meta]));
+									$config[$prefixe][$meta] = array_merge($sc,$config[$prefixe][$meta]);
+									ecrire_config($m . '/', serialize($v));
+								}
+							}
+						} elseif (isset($config[$prefixe][$meta])) {
+							$sc = lire_config($meta . '/', serialize($config[$prefixe][$meta]));
+							$config[$prefixe][$meta] = array_merge($sc,$config[$prefixe][$meta]);
+							ecrire_config($meta . '/', serialize($config[$prefixe][$meta]));
+						}
+					}
+				}
+			}
+			//Si on veut une importation avec fusion_inv
+			if ($option === 'fusion_inv') {
+				if (isset($data['metas_brutes'])) {
+					foreach (explode(',', $data['metas_brutes']) as $meta) {
+						// On teste le cas ou un prefixe est indique (dernier caractere est *)
+						if (substr($meta, -1) == '*') {
+							$p = substr($meta, 0, -1);
+							foreach ($config[$prefixe] as $m => $v) {
+								if (substr($m, 0, strlen($p)) == $p) {
+									$sc = lire_config($sc = lire_config($meta . '/', serialize($config[$prefixe][$meta]));
+									$config[$prefixe][$meta] = array_merge($config[$prefixe][$meta],$sc);
+									ecrire_config($m . '/', $v);
+								}
+							}
+						} elseif (isset($config[$prefixe][$meta])) {
+							$sc = lire_config($meta . '/', serialize($config[$prefixe][$meta]));
+							$config[$prefixe][$meta] = array_merge($config[$prefixe][$meta],$sc);
+							ecrire_config($meta . '/', $config[$prefixe][$meta]);
+						}
+					}
+				}
+				if (isset($data['metas_serialize'])) {
+					foreach (explode(',', $data['metas_serialize']) as $meta) {
+						// On teste le cas ou un prefixe est indique (dernier caractere est *)
+						if (substr($meta, -1) == '*') {
+							$p = substr($meta, 0, -1);
+							foreach ($config[$prefixe] as $m => $v) {
+								if (substr($m, 0, strlen($p)) == $p) {
+									$sc = lire_config($sc = lire_config($meta . '/', serialize($config[$prefixe][$meta]));
+									$config[$prefixe][$meta] = array_merge($config[$prefixe][$meta],$sc);
+									ecrire_config($m . '/', serialize($v));
+								}
+							}
+						} elseif (isset($config[$prefixe][$meta])) {
+							$sc = lire_config($meta . '/', serialize($config[$prefixe][$meta]));
+							$config[$prefixe][$meta] = array_merge($config[$prefixe][$meta],$sc);
 							ecrire_config($meta . '/', serialize($config[$prefixe][$meta]));
 						}
 					}
