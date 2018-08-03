@@ -186,8 +186,7 @@ function formulaires_ieconfig_import_traiter_dist() {
 		));
 
 		// Gestion des plugins utilisant le pipeline ieconfig_metas
-		foreach (pipeline('ieconfig_metas', array()) as $prefixe => $data) {			
-			$option = _request($prefixe);
+		foreach (pipeline('ieconfig_metas', array()) as $prefixe => $data) {
 			//Si on veut une importation avec écrasement
 			if ($option === 'ecrase') {
 				
@@ -217,8 +216,6 @@ function formulaires_ieconfig_import_traiter_dist() {
 								}
 							}
 						} elseif (isset($config[$prefixe][$meta])) {
-							$sc = lire_config($meta . '/', serialize($config[$prefixe][$meta]));
-							$config[$prefixe][$meta] = array_merge($sc,$config[$prefixe][$meta]);
 							ecrire_config($meta . '/', serialize($config[$prefixe][$meta]));
 						}
 					}
