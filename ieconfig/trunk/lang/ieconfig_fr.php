@@ -12,14 +12,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_ieconfig_import_local' => 'Liste des configurations détectées dans un sous-répertoire <i>ieconfig/</i> ou dans le répertoire <i>tmp/ieconfig/</i>.',
 
 	// I
-	'item_sauvegarder' => 'Sauvegarder le fichier',
-	'item_telecharger' => 'Télécharger le fichier',
-	'ieconfig_import' => 'Quel type d’importation voulez vous exécuter ?',
-	'ieconfig_import_explication' => 'Quel option voulez vous utiliser pour importer : ',
+	'ieconfig_import' => 'Quel type d’importation voulez vous exécuter ?',
 	'ieconfig_import_ecraser' => 'Importer avec écrasement de la configuration existante',
+	'ieconfig_import_explication' => 'Quel option voulez vous utiliser pour importer : ',
 	'ieconfig_import_fusionner' => 'Importer avec fusion des configurations (import > existant)',
 	'ieconfig_import_fusionner_inv' => 'Importer en n’écrivant que si le paramètre est manquant (existant > import)',
 	'ieconfig_import_rien' => 'Ne pas importer',
+	'item_sauvegarder' => 'Sauvegarder le fichier',
+	'item_telecharger' => 'Télécharger le fichier',
 
 	// L
 	'label_configurations_a_exporter' => 'Configurations à exporter',
@@ -39,8 +39,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_erreur_fichier_import_manquant' => 'Vous devez spécifier un fichier de configuration à importer.',
 	'message_ok_export' => 'Le fichier <i>@filename@</i> a été sauvegardé dans le répertoire <i>tmp/ieconfig/</i>.',
 	'message_ok_import' => 'La configuration a été correctement importée.',
-	//O
-	'options_import'=>'Options d’importation de ieconfig',
+
+	// O
+	'options_import' => 'Options d’importation de ieconfig',
+
 	// T
 	'texte_configuration_identique' => 'La configuration contenue dans ce fichier est identique à votre configuration actuelle.',
 	'texte_description' => 'Description :',
