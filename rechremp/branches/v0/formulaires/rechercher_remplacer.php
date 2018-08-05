@@ -17,7 +17,7 @@ function remplace_txt($entite, $id, $champs, $txt_search, $remplace, $remplace_p
 		$nom_table .= "s";
 
 	$retour = "";
-	$select = $id;
+	$select = "$id, titre";
 
 	foreach ($champs as $i => $nom_champ) {
 		$select .= ', '.$nom_champ;
@@ -45,7 +45,7 @@ function remplace_txt($entite, $id, $champs, $txt_search, $remplace, $remplace_p
 				$url = generer_url_entite($res[$id], $entite);
 				if ($entite =='forum')
 					$url = str_replace ('debut_id_forum', 'id_forum', $url);
-				$retour .= "Texte trouv&eacute; dans <a href='$url'>$entite ".$res[$id]."</a><br>";
+				$retour .= "Texte trouv&eacute; dans <a href='$url'>$entite ".$res[$id]."</a> ({$res['titre']})<br>";
 				// Mise à jour d'un champ de la table
 				if($remplace) 
 					sql_updateq($nom_table, $nouvelles_valeurs, $id."=".intval($res[$id]));
