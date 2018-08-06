@@ -1,7 +1,7 @@
 #CACHE{0}
 [(#ENV{desc}|=={'-1'}|?{[(#SET{desc,1})],[(#SET{desc,-1})]})]
 [(#ENV{desc}|=={'-1'}|?{[(#SET{class_desc,asc})],[(#SET{class_desc,desc})]})]
-[(#SET{exception,#PIPELINE{i3_exceptions_des_champs_auteurs_elargis}})]
+[(#SET{exception,#PIPELINE{i3_exceptions_des_champs_auteurs_elargis,#ARRAY}})]
 <input type="hidden" name="ordre" value="#ENV{ordre}" />
 <input type="hidden" name="desc" value="#ENV{desc}" />
 
