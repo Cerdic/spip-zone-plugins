@@ -22,7 +22,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param array $array Prend un tableau en argument qui doit être complété en fonction des besoins
  */
 
-function inscription3_i3_exceptions_chargement_champs_auteurs_elargis($array) {
+function inscription3_i3_exceptions_chargement_champs_auteurs_elargis($array = array()) {
+	if (!is_array($array)) {
+		$array = array();
+	}
 	// liste des champs pour lesquels on ne doit pas charger la valeur
 	$array[] = 'creation';
 	return $array;
@@ -38,9 +41,11 @@ function inscription3_i3_exceptions_chargement_champs_auteurs_elargis($array) {
  * @param array $array Prend un tableau en argument qui doit être complété en fonction des besoins
  */
 
-function inscription3_i3_exceptions_des_champs_auteurs_elargis($array) {
+function inscription3_i3_exceptions_des_champs_auteurs_elargis($array = array()) {
 	// liste des champs pour lesquels on ne doit pas créer de champs dans la table spip_auteurs
-
+	if (!is_array($array)) {
+		$array = array();
+	}
 	// Principalement les champs déjà présents dans spip_auteurs
 	$array[] = 'id_auteur';
 	$array[] = 'bio';
@@ -88,8 +93,10 @@ function inscription3_i3_exceptions_des_champs_auteurs_elargis($array) {
  * @param object $array Doit recevoir un tableau du même type
  */
 
-function inscription3_i3_verifications_specifiques($array) {
-
+function inscription3_i3_verifications_specifiques($array = array()) {
+	if (!is_array($array)) {
+		$array = array();
+	}
 	// Les emails : fonction verifier/email
 	$array['email'] = array('type' => 'email','options' => array('disponible'=>'disponible'));
 	$array['mail_inscription'] = array('type' => 'email','options' => array('disponible'=>'disponible'));
@@ -128,15 +135,17 @@ function inscription3_i3_verifications_specifiques($array) {
  */
 
 function inscription3_affiche_droite($flux) {
-	if (((preg_match('/^inscription3/', $flux['args']['exec']))
-		or (preg_match('/^auteur/', $flux['args']['exec']))
-		or (preg_match('/^i3_/', $flux['args']['exec']))
-		or ($flux['args']['exec'] == 'configurer_inscription3')
-		or (($flux['args']['exec'] == 'cfg')
-			and ((_request('cfg') == 'inscription3') or preg_match('/^i3_/', _request('cfg'))))
-		)
-		and ($flux['args']['exec'] != 'inscription3_adherents')) {
-		$flux['data'] .= recuperer_fond('prive/inscription3_affiche_droite');
+	if (is_array($flux) and isset($flux['args']['exec'])){
+		if (((preg_match('/^inscription3/', $flux['args']['exec']))
+			or (preg_match('/^auteur/', $flux['args']['exec']))
+			or (preg_match('/^i3_/', $flux['args']['exec']))
+			or ($flux['args']['exec'] == 'configurer_inscription3')
+			or (($flux['args']['exec'] == 'cfg')
+				and ((_request('cfg') == 'inscription3') or preg_match('/^i3_/', _request('cfg'))))
+			)
+			and ($flux['args']['exec'] != 'inscription3_adherents')) {
+			$flux['data'] .= recuperer_fond('prive/inscription3_affiche_droite');
+		}
 	}
 	return $flux;
 }
@@ -261,7 +270,9 @@ function inscription3_i3_definition_champs($flux) {
  * @return array $flux Le contexte d'environnement modifié
  */
 function inscription3_formulaire_charger($flux) {
-	if ($flux['args']['form']=='inscription') {
+	if (is_array($flux)
+		and isset($flux['args']['form'])
+		and $flux['args']['form'] =='inscription') {
 		$valeurs = array();
 		$chercher_champs = charger_fonction('inscription3_champs_formulaire', 'inc');
 		$champs = $chercher_champs(null, 'inscription');
