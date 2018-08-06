@@ -14,10 +14,15 @@ function mime_type_oembed($id_document) {
 	if (!($id_document = intval($id_document))) {
 		return '';
 	}
+	$extension = sql_getfetsel(
+		'extension',
+		'spip_documents',
+		'id_document = ' . intval($id_document)
+	);
 	$mime_type = sql_getfetsel(
 		'mime_type',
 		'spip_types_documents',
-		"extension IN (SELECT extension FROM spip_documents where id_document=$id_document)"
+		'extension = ' . sql_quote($extension)
 	);
 	if ($mime_type == 'text/html'
 		and sql_getfetsel('oembed', 'spip_documents', "id_document=$id_document")) {
