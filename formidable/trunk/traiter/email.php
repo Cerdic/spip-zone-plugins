@@ -167,7 +167,9 @@ function traiter_email_dist($args, $retours) {
 				'saisies' => $saisies,
 				'valeurs' => $valeurs,
 				'masquer_liens' => $options['masquer_liens'],
-				'ip' => $options['activer_ip']?$GLOBALS['ip']:''
+				'ip' => $options['activer_ip']?$GLOBALS['ip']:'',
+				'courriel_envoyeur' => $courriel_envoyeur, 
+				'nom_envoyeur' => filtrer_entites($nom_envoyeur)
 			)
 		);
 
