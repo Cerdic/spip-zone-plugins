@@ -323,8 +323,7 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 	$i = 0;
 	$saisies = saisies_lister_par_nom($saisies, true);
 	$code = '';
-	$code .= '(function($){';
-	$code .= "$(document).ready(function(){\n\tchargement=true;\n";
+	$code .= "$(function(){\n\tchargement=true;\n";
 	$code .= "\tverifier_saisies_".$id_form." = function(form){\n";
 	foreach ($saisies as $saisie) {
 		// on utilise comme selecteur l'identifiant de saisie en priorite s'il est connu
@@ -457,7 +456,6 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 	$code .= "\t".'$("#afficher_si_'.$id_form.'").parents("form").each(function(){'."\n\t\t".'verifier_saisies_'.$id_form.'(this);});'."\n";
 	$code .= "\t".'$("#afficher_si_'.$id_form.'").parents("form").change(function(){'."\n\t\t".'verifier_saisies_'.$id_form.'(this);});'."\n";
 	$code .= "\tchargement=false;})\n";
-	$code .= '})(jQuery);'."\n";
 
 	if (!defined('_SAISIES_AFFICHER_SI_JS_LISIBLE')) {
 		define('_SAISIES_AFFICHER_SI_JS_LISIBLE', false);
