@@ -1,7 +1,7 @@
 <paquet
 	prefix="orthotypo"
 	categorie="edition"
-	version="1.4.5"
+	version="1.4.6"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/orthotypo-32.png"
@@ -21,5 +21,7 @@
 	<pipeline nom="insert_head_css" inclure="orthotypo_fonctions.php" />
 	<pipeline nom="post_typo" inclure="orthotypo_fonctions.php" />
 	<pipeline nom="pre_propre" inclure="orthotypo_fonctions.php" />
+
+	<procure nom="typo_guillemets" version="1.5.2" />
 
 </paquet>
