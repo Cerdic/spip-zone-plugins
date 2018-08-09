@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'activer_composition' => 'Composities activeren',
 	'apercu' => 'Overzicht',
+	'aucun_type_noisette' => 'Geen enkel type nootje geladen.',
 
 	// B
 	'bloc_sans_noisette' => 'Nootjes toevoegen door gebruik te maken van de knop "een nootje toevoegen", of door het type nootje naar een gewenste plek te schuiven.',
