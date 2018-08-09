@@ -86,7 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_restrictions_auteur' => 'Per auteur',
 	'label_restrictions_branches' => 'Per tak',
 	'label_restrictions_groupes' => 'Per groep',
-	'label_restrictions_secteurs' => 'Per sector',
+	'label_restrictions_secteurs' => 'Per hoofdrubriek',
 	'label_saisie' => 'Type invoer',
 	'label_sql' => 'SQL definitie',
 	'label_table' => 'Object',
@@ -138,7 +138,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'radio_restrictions_auteur_admin_complet' => 'Alleen volledige beheerders',
 	'radio_restrictions_auteur_aucune' => 'Iedereen',
 	'radio_restrictions_auteur_webmestre' => 'Alleen webmasters',
-	'radio_traitements_aucun' => 'Niemand',
+	'radio_traitements_aucun' => 'Niets',
 	'radio_traitements_raccourcis' => 'Behandeling van SPIP snelkoppelingen (propre)',
 	'radio_traitements_typo' => 'Uitsluitend typografische behandeling (typo)',
 
