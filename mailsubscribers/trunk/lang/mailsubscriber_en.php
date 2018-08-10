@@ -39,6 +39,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_listes_diffusion_option_statut' => 'Filter the lists by status',
 	'explication_to_email' => 'People’s email to invite to subscribe to newsletter (several address separated by comma. 5 maximum emails)',
 
+	// F
+	'force_synchronisation' => 'Synchronise',
+
 	// I
 	'icone_creer_mailsubscriber' => 'Add a subscriber',
 	'icone_modifier_mailsubscriber' => 'Edit this subscriber',
