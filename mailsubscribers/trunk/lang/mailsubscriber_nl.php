@@ -39,6 +39,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_listes_diffusion_option_statut' => 'De lijsten filteren op status',
 	'explication_to_email' => 'Een voor-inschrijvingsbericht emailen naar de volgende adressen (meerdere adressen, gescheiden door een komma).',
 
+	// F
+	'force_synchronisation' => 'Synchroniseren',
+
 	// I
 	'icone_creer_mailsubscriber' => 'Een inschrijving toevoegen',
 	'icone_modifier_mailsubscriber' => 'Deze inschrijving bewerken',
