@@ -17,9 +17,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nouvelle_liste' => 'New list',
 
 	// L
+	'label_anonymiser' => 'Make the list anonymous?',
 	'label_double_optin' => 'Subscription validation',
 	'label_double_optin_0' => 'Simple Opt-in',
 	'label_double_optin_1' => 'Double Opt-in (confirmation email with validation link to subscription)',
+	'label_importer_creer_liste_1' => 'While importing email addresses, do not autmatically create a supplementary distribution list with these addresses.',
 	'label_list_id' => 'ID',
 	'label_list_status' => 'State',
 	'label_list_titre' => 'List Name',
@@ -34,5 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_listes_diffusion' => 'Mailing lists',
 
 	// T
+	'texte_config_anonymiser' => 'Replace the title of a list by its number in confirmation mails.',
 	'titre_page_configurer_mailsubscriber' => 'Subscription to Newsletter'
 );
