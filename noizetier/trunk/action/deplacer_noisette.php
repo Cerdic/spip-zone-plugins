@@ -38,7 +38,7 @@ function action_deplacer_noisette_dist() {
 		if (in_array($sens, array('bas', 'haut')) and ($id_noisette = intval($id_noisette))) {
 			// Récupération du conteneur de la noisette
 			$select = array('id_conteneur', 'rang_noisette');
-			$where = array('id_noisette=' . $id_noisette);
+			$where = array('plugin=' . sql_quote('noizetier'), 'id_noisette=' . $id_noisette);
 			$noisette = sql_fetsel($select, 'spip_noisettes', $where);
 
 			// Décomposition de l'id du conteneur en éléments du noiZetier

@@ -294,7 +294,7 @@ function autoriser_noizetier_editernoisette_dist($faire, $type, $id, $qui, $opti
 		// On vérifie que la noisette existe bien et on récupère sa localisation (page ou objet) afin d'appeler
 		// l'autorisation de configurer cette page ou objet.
 		$select = array('type', 'composition', 'objet', 'id_objet');
-		$where = array('id_noisette=' . $id_noisette);
+		$where = array('plugin=' . sql_quote('noizetier'), 'id_noisette=' . $id_noisette);
 		$noisette = sql_fetsel($select, 'spip_noisettes', $where);
 		if ($noisette) {
 			if ($noisette['objet'] and intval($noisette['id_objet'])) {
