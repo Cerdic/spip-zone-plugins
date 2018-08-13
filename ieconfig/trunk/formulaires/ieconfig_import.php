@@ -154,8 +154,8 @@ function formulaires_ieconfig_import_verifier_dist() {
 }
 
 function formulaires_ieconfig_import_traiter_dist() {
-	include_spip('inc/config');
 
+	include_spip('inc/config');
 	// Si on est à l'étape de sélection d'un fichier de configuration
 	// On place le code YAML dans le contexte
 	if (!_request('_code_yaml')) {
@@ -191,7 +191,7 @@ function formulaires_ieconfig_import_traiter_dist() {
 
 			//Si on veut une importation avec écrasement
 			if ($option === 'ecrase') {
-				print_r($option);
+				
 				if (isset($data['metas_brutes'])) {
 					foreach (explode(',', $data['metas_brutes']) as $meta) {
 						// On teste le cas ou un prefixe est indique (dernier caractere est *)
