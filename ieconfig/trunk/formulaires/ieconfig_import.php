@@ -276,7 +276,7 @@ function formulaires_ieconfig_import_traiter_dist() {
 								if (substr($m, 0, strlen($p)) == $p) {
 									$save = lire_config($m . '/', $v);
 									$import = ($v);
-									if (is_null($import)) {
+									if (is_null($save)) {
 										ecrire_config($m . '/', $import);
 									}
 								}
@@ -284,7 +284,7 @@ function formulaires_ieconfig_import_traiter_dist() {
 						} elseif (isset($config[$prefixe][$meta])) {
 							$save = lire_config($meta . '/', $config[$prefixe][$meta]);
 							$import = ($config[$prefixe][$meta]);							
-							if (is_null($import)) {
+							if (is_null($save)) {
 								ecrire_config($meta . '/', $import);
 							}
 						}
