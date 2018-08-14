@@ -62,12 +62,12 @@ class MCacheBackend_apcu extends MCacheBackend {
 	function size() {
 		if (!class_exists('APCUIterator'))
 			return false;
-		$a = new APCUIterator('user');
+		$a = new APCUIterator();
 		return $a->getTotalSize ();
 	}
 
 	function purge() {
-		return apcu_clear_cache('user');
+		return apcu_clear_cache();
 	}
 
 }
