@@ -233,16 +233,11 @@ function formulaires_ieconfig_import_traiter_dist() {
 							$p = substr($meta, 0, -1);
 							foreach ($config[$prefixe] as $m => $v) {
 								if (substr($m, 0, strlen($p)) == $p) {
-									$save = lire_config($m . '/', $v);
-									$import = ($v);
-									$import = array_merge($save,$import);
 									ecrire_config($m . '/', $v);
 								}
 							}
 						} elseif (isset($config[$prefixe][$meta])) {
-							$save = lire_config($meta . '/', $config[$prefixe][$meta]);
-							$import = ($config[$prefixe][$meta]);							
-							$import = array_merge($save,$import);
+							$import = ($config[$prefixe][$meta]);
 							ecrire_config($meta . '/', $import);
 						}
 					}
@@ -281,15 +276,17 @@ function formulaires_ieconfig_import_traiter_dist() {
 								if (substr($m, 0, strlen($p)) == $p) {
 									$save = lire_config($m . '/', $v);
 									$import = ($v);
-									$import = array_merge($import,$save);
-									ecrire_config($m . '/', $import);
+									if (is_null($import)) {
+										ecrire_config($m . '/', $import);
+									}
 								}
 							}
 						} elseif (isset($config[$prefixe][$meta])) {
 							$save = lire_config($meta . '/', $config[$prefixe][$meta]);
 							$import = ($config[$prefixe][$meta]);							
-							$import = array_merge($import,$save);
-							ecrire_config($meta . '/', $import);
+							if (is_null($import)) {
+								ecrire_config($meta . '/', $import);
+							}
 						}
 					}
 				}
