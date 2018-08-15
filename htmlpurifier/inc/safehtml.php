@@ -27,6 +27,7 @@ function inc_safehtml($t) {
 	$config = HTMLPurifier_Config::createDefault();
 
 	$config->set('Cache.SerializerPath', preg_replace(',/$,', '', realpath(_DIR_TMP)));
+	$config->set('Attr.AllowedFrameTargets', array('_blank'));
 	
 	if (!isset($purifier))
 		$purifier = new HTMLPurifier($config);
