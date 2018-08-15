@@ -212,17 +212,21 @@ function saisies_lister_labels($contenu, $avec_conteneur = false) {
 /**
  * A utiliser dans une fonction charger d'un formulaire CVT,
  * cette fonction renvoie le tableau de contexte correspondant
- * de la forme $contexte['nom_champ'] = null (ou sa valeur par défaut si définie).
+ * de la forme $contexte['nom_champ'] = ''.
  *
  * @param array $contenu Le contenu d'un formulaire (un tableau de saisies)
  *
  * @return array Un tableau de contexte
  */
 function saisies_charger_champs($contenu) {
-	$champs = array();
-	foreach(saisies_lister_par_nom($contenu, false) as $champ => $saisie) {
-		$champs[$champ] = isset($saisie['options']['defaut']) ? $saisie['options']['defaut'] : null;
+	if (function_exists('array_fill_keys')) { // php 5.2
+		return array_fill_keys(saisies_lister_champs($contenu, false), null);
 	}
+	$champs = array();
+	foreach (saisies_lister_champs($contenu, false) as $champ) {
+		$champs[$champ] = null;
+	}
+
 	return $champs;
 }
 
