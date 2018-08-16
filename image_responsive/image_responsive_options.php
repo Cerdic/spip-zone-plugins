@@ -256,7 +256,7 @@ function retour_image_responsive($img, $taille, $dpr, $xsendfile, $retour="http"
 			//cette méthode permet d'accélérer par rapport à SPIP
 			// parce qu'on connait le nom du fichier à l'avance
 			// et on fait donc les tests sans déclencher la cavalerie
-			
+			spip_log("fabrication de l'image responsive $dest","image_responsive");
 			if ($v) {	
 				$img_new = image_reduire_net ($img, 0, $taille, $dpr);
 			} else {

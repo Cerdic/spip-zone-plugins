@@ -281,8 +281,8 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 						else if (!$vertical && $t > $l) $t = $l;
 
 
-						$autorisees[$i][1] = $fichiers[$i][1];
-						$autorisees[$i][2] = $fichiers[$i][2];
+						$autorisees[$t][1] = $fichiers[$i][1];
+						$autorisees[$t][2] = $fichiers[$i][2];
 					}
 				}
 			}
