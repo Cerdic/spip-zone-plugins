@@ -75,9 +75,9 @@ function charger_url_image_responsive(this_img) {
 				} else {
 					dPR = false;
 				}
-				if (autorisees && autorisees[numdim[dim]]) {
-					if (dPR < 1.5) url_img = autorisees[numdim[dim]][1];
-					else url_img = autorisees[numdim[dim]][2];
+				if (autorisees && autorisees[dim]) {
+					if (dPR < 1.5) url_img = autorisees[dim[1];
+					else url_img = autorisees[dim[2];
 				}
 				else {				
 					if (htactif) {
@@ -176,7 +176,9 @@ function charger_url_background_responsive(this_img) {
 			if (autorisees) {
 				autorisees = $.parseJSON(autorisees.replace(/\\"/g, '"'));		
 			}
-							
+		
+			dim = Math.round(dim);
+								
 			if (autorisees && autorisees[dim][mode]) {
 				if (dPR < 1.5) url_img = autorisees[dim][mode][1];
 				else url_img = autorisees[dim][mode][2];
