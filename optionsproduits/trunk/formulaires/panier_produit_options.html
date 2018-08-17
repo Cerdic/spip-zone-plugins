@@ -3,13 +3,13 @@
 <div class="formulaire_spip overflow-visible">
 	<form action="#ENV{action}" method="post" class="js-achat-form achat">
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<input type="hidden" name="prix_produit" value="#GET{prix}">
+		<input type="hidden" name="prix_objet" value="#GET{prix}">
 		
 		[(#REM) les options listées par groupe ]
 		#SET{options, #ENV{options}|explode{|}}
 		<BOUCLE_optionsgroupes(OPTIONSGROUPES){par rang, titre_groupe}>
 		<B_radio>
-			<div class="editer editer_radio editer_options_produit">
+			<div class="editer editer_radio editer_options_objet">
 				<label>#TITRE_GROUPE</label>
 				<BOUCLE_radio(OPTIONS){id_optionsgroupe}{options_liens.objet=produit}{options_liens.id_objet=#ID_PRODUIT}{par rang, prix_option_objet}{doublons}>
 				[(#SET{prix_option, #PRIX_OPTION*{produit,#ID_PRODUIT,#ID_OPTION}})]
@@ -30,11 +30,14 @@
 		</B_radio>
 		</BOUCLE_optionsgroupes>
 
-		<div class="prix">
-			[(#GET{prix}|prix_formater)]
-		</div>
+		<p class="prix_objet">
+			<strong><span class="js-prix_objet_valeur">[(#GET{prix}|prix_formater)]</span></strong>
+		</p>
 
-		<input name="quantite" type="text" value="1">
+		<div class="editer">
+			<label for="quantite"><:options:quantite:/></label>
+			<input id="quantite" name="quantite" type="text" value="1">
+		</div>
 
 		<button type="submit" class="ajouter-panier">
 			<:options:ajouter_au_panier:/>

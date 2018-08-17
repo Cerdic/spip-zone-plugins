@@ -9,7 +9,7 @@ $GLOBALS[ $GLOBALS['idx_lang'] ] = array(
 
 	// A
 	'ajouter_au_panier'             => 'Ajouter au panier',
-	
+
 	// C
 	'cfg_objets'                    => 'Choisir les objets',
 	'cfg_objets_explication'        => 'Choisir les objets sur lesquels vous voulez activer des options.',
@@ -20,6 +20,9 @@ $GLOBALS[ $GLOBALS['idx_lang'] ] = array(
 
 	// O
 	'options_titre'                 => 'Options produits',
+
+	// Q
+	'quantite'                      => 'Quantité',
 
 	// T
 	'titre_page_configurer_options' => 'Configuration des options',

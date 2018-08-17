@@ -2,21 +2,22 @@ jQuery(function(){
 
 	// mise à jour du prix affiché en fonction du choix des options
 	if($('.js-achat-form').length) {
-		function updatePrixProduit() {
-			// calculer le prix du produit + des options
-			var prixProduit = parseFloat($('.js-achat-form input[name=prix_produit]').val());
-			$('.js-achat-form .editer_options_produit input[type=radio]:checked').each(function(){
-				prixProduit += parseFloat($(this).data('prixoption'));
+		function updatePrixOptionObjet() {
+			// calculer le prix du objet + des options
+			var prixObjet = parseFloat($('.js-achat-form input[name=prix_objet]').val());
+			$('.js-achat-form .editer_options_objet input[type=radio]:checked').each(function(){
+				prixObjet += parseFloat($(this).data('prixoption'));
+				console.log(parseFloat($(this).data('prixoption')));
 			});
 			// formater
 			// TODO : pouvoir utiliser une autre monnaie que l'euro
-			prixProduit = prixProduit.toFixed(2).replace('\.',',')+' €';
-			$('.js-achat-form').find('.prix').html(prixProduit);
+			prixObjet = prixObjet.toFixed(2).replace('\.',',')+' €';
+			$('.js-achat-form').find('.js-prix_objet_valeur').html(prixObjet);
 		}
 		
-		updatePrixProduit();
-		$('.js-achat-form .editer_options_produit input[type=radio]').on('click', function() {
-			updatePrixProduit();
+		updatePrixOptionObjet();
+		$('.js-achat-form .editer_options_objet input[type=radio]').on('click', function() {
+			updatePrixOptionObjet();
 		});
 	}
 	
