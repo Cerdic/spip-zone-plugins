@@ -3,8 +3,6 @@
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('xavier_fonctions');
-
 /**
  * Remplir un panier avec un objet quelconque
  */

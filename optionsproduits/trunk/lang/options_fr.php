@@ -5,8 +5,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-$GLOBALS[$GLOBALS['idx_lang']] = array(
+$GLOBALS[ $GLOBALS['idx_lang'] ] = array(
 
+	// A
+	'ajouter_au_panier'             => 'Ajouter au panier',
+	
 	// C
 	'cfg_objets'                    => 'Choisir les objets',
 	'cfg_objets_explication'        => 'Choisir les objets sur lesquels vous voulez activer des options.',
