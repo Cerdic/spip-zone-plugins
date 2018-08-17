@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_enlever' => 'Remove',
 	'label_multiple_inscriptions' => 'Allows to specify the the number of bookings',
 	'label_multiple_personnes' => 'Allows to book for several persons.',
-	'label_reserver_amie' => 'I would like to register one more person:',
+	'label_reserver_amie' => 'I would like to register one more person:', # MODIF
 
 	// M
 	'message_ok_reservations_pour' => 'Réservé pour : @noms@',

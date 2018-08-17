@@ -14,7 +14,7 @@ function promotions_reservation_multiple_simple_dist($flux = '') {
 function promotions_reservation_multiple_simple_action_dist($flux, $promotion = array()) {
 
 	// Si on est en présence de la première réservation d'une réservation multiple
-	if (_request('nr_auteur');) {
+	if (_request('nr_auteur')) {
 		$flux['data']['applicable'] = 'oui';
 	}
 
