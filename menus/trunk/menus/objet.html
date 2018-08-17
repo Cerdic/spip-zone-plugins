@@ -47,7 +47,13 @@
 	<div class="infos">#ENV{type_objet}-#GET{id_objet}[-(#GET{info_session})][-(#GET{info_trad})]</div>
 ]
 
-[(#ENV{appel_menu}|et{#GET{visible}|=={oui}}|oui)
+<BOUCLE_public(CONDITION) {si #ENV{appel_menu}|et{#GET{visible}|=={oui}}}>
+	#SET{url,#INFO_URL{#ENV{type_objet}, #GET{id_objet}}}
+	<BOUCLE_parametres(DATA){source table, #ENV*{parametres}|explode{&}}>
+	#SET{param,#VALEUR|explode{=}}
+	#SET{url,#GET{url}|parametre_url{#GET{param/0},#GET{param/1}}}
+	</BOUCLE_parametres>
+	#SET{url,#GET{url}|ancre_url{#ENV{ancre}}}
 	<li class="menu-entree item menu-items__item[ (#ENV{css})][ (#GET{id_objet}|menus_exposer{#ENV{type_objet},#ENV*{env}})]">
-		<a href="#INFO_URL{#ENV{type_objet}, #GET{id_objet}}" class="menu-items__lien[ (#ENV{css_lien})]">#GET{titre}</a>
-]
+		<a href="#GET{url}" class="menu-items__lien[ (#ENV{css_lien})]">#GET{titre}</a>
+</BOUCLE_public>

@@ -36,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_menus_exporter' => 'Exporter ce menu',
 	'editer_menus_nouveau' => 'Créer un nouveau menu',
 	'editer_menus_titre' => 'Menus du site',
+	'entree_ancre' => 'Ancre',
 	'entree_afficher_articles' => 'Inclure les articles dans le menu ? (mettre "oui" pour cela)',
 	'entree_afficher_item_suite' => 'Inclure les articles dans le menu ? (mettre "oui" pour cela)',
 	'entree_articles_max' => 'Si oui, afficher les articles seulement si la rubrique contient au maximum xx articles ? (mettre le nombre maximum d’articles, laissez vide pour afficher tous les articles)',
