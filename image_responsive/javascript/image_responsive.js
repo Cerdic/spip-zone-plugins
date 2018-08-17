@@ -76,8 +76,8 @@ function charger_url_image_responsive(this_img) {
 					dPR = false;
 				}
 				if (autorisees && autorisees[dim]) {
-					if (dPR < 1.5) url_img = autorisees[dim[1];
-					else url_img = autorisees[dim[2];
+					if (dPR < 1.5) url_img = autorisees[dim][1];
+					else url_img = autorisees[dim][2];
 				}
 				else {				
 					if (htactif) {
