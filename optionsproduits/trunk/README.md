@@ -1,5 +1,19 @@
 # Gérer des options sur des produits
 
+## v1.3.0 ##
+
+Les options peuvent être associées à tous les objets éditoriaux, pas uniquement les produits.
+L'association se fait dans la configuration du plugin (liste des objets à cocher).
+Les plugins produits et prix deviennent donc optionnels.
+
+Pour gérer des options sur un objet patate, on pourra par exemple ajouter un champ prix (et taxe) dans la définition de l'objet patate.
+
+Et si on utilise le plugin Panier, comme on ne sait pas boucler sur une table de façon dynamique on pourra créer un formulaire/panier_patate_options.htm et .php en copiant/adaptant celui des produits (panier_produit_options).
+
+On pourra ensuite utiliser #FORMULAIRE_PANIER_PATATE_OPTIONS{#ID_PATATE} 
+ 
+## v1.0.0 ##
+
 Le plugin gère des groupes d'options, dans lesquels on crée des options.
 
 Chaque option a un prix HT par défaut (positif ou négatif), qui s'ajoute au prix de base du produit.
