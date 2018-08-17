@@ -5,6 +5,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Remplir un panier avec un objet quelconque
+ * 
+ * Surcharge de l'action remplir_panier du plugin Paniers, qui ajoute le traitement des options
+ * 
  * @param string $arg
  */
 function action_remplir_panier_dist($arg=null) {

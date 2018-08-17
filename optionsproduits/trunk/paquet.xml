@@ -15,10 +15,11 @@
 	<licence>GNU/GPL</licence>
 	
 	<necessite nom="saisies" compatibilite="[2.4.0;]" />
-	<necessite nom="produits" compatibilite="[1.1.19;]" />
-	<necessite nom="prix" compatibilite="[0.1.15;]" />
 	<necessite nom="rang" compatibilite="[1.0.3;]" />
 	<necessite nom="spip_bonux" compatibilite="[3.4.2;]" />
+	
+	<utilise nom="produits" compatibilite="[1.1.19;]" />
+	<utilise nom="prix" compatibilite="[0.1.15;]" />
 	<utilise nom="paniers" compatibilite="[1.3.0;]" />
 	<utilise nom="commandes" compatibilite="[1.15.0;]" />
 	<utilise nom="ajaxfiltre" compatibilite="[1.0.2;]" />

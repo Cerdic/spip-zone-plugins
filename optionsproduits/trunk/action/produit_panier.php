@@ -33,7 +33,7 @@ function action_produit_panier_dist() {
 		$objet = _request('objet');
 		$id_objet= intval(_request('id_objet'));
 	}
-d($objet.'-'.$id_objet.'-'.$quantite.'-'.$negatif.'-'.$options);
+
 	// On appelle l'action remplir_panier
 	$remplir_panier=charger_fonction('remplir_panier','action');
 	return $remplir_panier($objet.'-'.$id_objet.'-'.$quantite.'-'.$negatif.'-'.$options);

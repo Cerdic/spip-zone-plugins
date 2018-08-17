@@ -7,14 +7,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// O
-	'options_titre'                 => 'Options produits',
-
 	// C
+	'cfg_objets'                    => 'Choisir les objets',
+	'cfg_objets_explication'        => 'Choisir les objets sur lesquels vous voulez activer des options.',
 	'cfg_titre_parametrages'        => 'Paramétrages',
 
-	// C
+	// G
 	'gerer_options'                 => 'Gérer les options de produits',
+
+	// O
+	'options_titre'                 => 'Options produits',
 
 	// T
 	'titre_page_configurer_options' => 'Configuration des options',
