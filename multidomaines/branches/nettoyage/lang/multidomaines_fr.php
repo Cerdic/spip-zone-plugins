@@ -28,7 +28,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_squelette_rubrique' => 'Dossiers des squelettes de la rubrique',
 	'label_squelette_secteur' => 'Dossiers des squelettes du secteur',
 	'label_menu_id_domaine' => 'N° ou identifiant du secteur',
-	'label_menu_ancre' => 'Ancre',
 	'label_identifiant' => 'Identifiant',
 
 //T

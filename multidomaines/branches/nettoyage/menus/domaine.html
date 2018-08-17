@@ -22,9 +22,13 @@
 <//B_identifiant>
 
 #SET{titre,#ENV*{titre}|typo|sinon{#INFO_TITRE{rubrique,#GET{id_domaine}}}}
-#SET{url,#GET{config/#GET{id_domaine}/url}}
 #SET{is_domaine,#GET{config/#GET{id_domaine}}}
-#SET{ancre,#ENV{ancre}|?{#VAL{#}|concat{#ENV{ancre}}}}
+#SET{url,#GET{config/#GET{id_domaine}/url}}
+<BOUCLE_parametres(DATA){source table, #ENV*{parametres}|explode{&}}>
+#SET{param,#VALEUR|explode{=}}
+#SET{url,#GET{url}|parametre_url{#GET{param/0},#GET{param/1}}}
+</BOUCLE_parametres>
+#SET{url,#GET{url}|ancre_url{#ENV{ancre}}}
 
 [(#REM) Aperçu dans le privé ]
 [(#ENV{appel_formulaire}|oui)
@@ -32,13 +36,13 @@
 	<div class="infos">
 		[(#GET{is_domaine}|non)<span class="erreur"><:multidomaines:info_domaine_non{domaine=#ENV{id_domaine}}:></span>]
 		[(#GET{is_domaine}|oui)
-		[(#GET{url}|concat{#GET{ancre}}|sinon{<span class="erreur"><:multidomaines:info_domaine_aucune_url:></span>})]
+		[(#GET{url}|sinon{<span class="erreur"><:multidomaines:info_domaine_aucune_url:></span>})]
 		]
 	</div>
 ]
 
 [(#REM) Vue sur le site public ]
 [(#ENV{appel_menu}|et{#GET{is_domaine}}|oui)
-	<li class="menu-entree item[ (#ENV{css})][(#ID_SECTEUR_COURANT|=={#ENV{id_domaine}}|oui) on active]">
-		<a href="[(#GET{url}|ancre_url{#ENV{ancre}})]">#GET{titre}</a>
+	<li class="menu-entree item menu-items__item[ (#ENV{css})][(#ID_SECTEUR_COURANT|=={#ENV{id_domaine}}|oui) on active]">
+		<a href="#GET{url}" class="menu-items__lien">#GET{titre}</a>
 ]
