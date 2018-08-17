@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_cle_google' => 'Clé d’API pour Google Translate',
 	'label_cle_bing' => 'Clé d’API pour Bing',
+	'label_cle_yandex' => 'Clé d’API pour Yandex',
 	'label_texte_source' => 'Texte source',
 	'label_hash' => 'Hash',
 	'label_traduction' => 'Traduction',

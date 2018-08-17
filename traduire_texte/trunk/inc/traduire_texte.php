@@ -98,6 +98,49 @@ class TT_Traducteur_GGTranslate extends TT_Traducteur {
 	}
 }
 
+/**
+ * Traduire avec Yandex
+ */
+class TT_Traducteur_Yandex extends TT_Traducteur {
+	public $type = 'yandex';
+	public $maxlen = 10000;
+
+	protected function _traduire($texte, $destLang = 'fr', $srcLang) {
+		$destLang = urlencode($destLang);
+		//yandex peut deviner la langue source
+		if (isset($srcLang)){
+			$srcLang = urlencode($srcLang);
+			$lang = "$srcLang-$destLang";
+		} else {
+			$lang = $destLang;
+		}
+
+		$url_page = "https://translate.yandex.net/api/v1.5/tr.json/translate?";
+		//  & [format=<text format>] & [options=<translation options>] & [callback=<name of the callback function>]
+		$parameters = "key=" . $this->apikey . "&text=" . rawurlencode($texte) . "&lang=$lang";
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url_page);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_REFERER, !empty($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : "");
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('X-HTTP-Method-Override: GET'));
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $body = curl_exec($ch);
+		curl_close($ch);
+
+		//{"code":200,"lang":"fr-en","text":["hello"]}
+		$json = json_decode($body, true);
+		
+		if (isset($result['code']) && $result['code'] > 200) {
+			spip_log($json, 'translate');
+			return false; 
+        } 
+		
+		return urldecode($json["text"][0]);
+	}
+}
+
 
 class TT_Traducteur_Shell extends TT_Traducteur {
 	public $type = 'shell';
@@ -151,7 +194,9 @@ function TT_traducteur() {
 	static $traducteur = null;
 	if (is_null($traducteur)) {
 		include_spip('inc/config');
-		if (defined('_BING_APIKEY')) {
+		if (defined('_YANDEX_APIKEY')) {
+			$traducteur = new TT_Traducteur_Yandex(_YANDEX_APIKEY);
+		} elseif (defined('_BING_APIKEY')) {
 			$traducteur = new TT_Traducteur_Bing(_BING_APIKEY, 10000);
 		} elseif (defined('_GOOGLETRANSLATE_APIKEY')) {
 			$traducteur = new TT_Traducteur_GGTranslate(_GOOGLETRANSLATE_APIKEY);
