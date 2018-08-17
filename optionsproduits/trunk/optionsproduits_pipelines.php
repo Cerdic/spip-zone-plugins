@@ -75,8 +75,8 @@ function optionsproduits_affiche_milieu($flux) {
 	$e     = trouver_objet_exec($flux['args']['exec']);
 
 	// options produits
-	$objets = lire_config('optionsproduits/objets');
-	if (!$e['edition'] and in_array(table_objet($e['type']), $objets)) {
+	$objets = explode(',',lire_config('optionsproduits/objets'));
+	if (!$e['edition'] and in_array(table_objet_sql($e['type']), $objets)) {
 		$texte .= recuperer_fond('prive/objets/liste/options_liees_objet', array(
 			'objet'    => $e['type'],
 			'id_objet' => $flux['args'][$e['id_table_objet']],

@@ -17,25 +17,38 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('inc/config');
 
 /**
- * Traitement du formulaire de configuration des optionsproduits
+ * Chargement du formulaire de configuration
+ *
+ * @return array
+ *     Environnement du formulaire
+ **/
+function formulaires_configurer_optionsproduits_charger_dist() {
+
+	$valeurs = array(
+		'objets'     => explode(',', lire_config('optionsproduits/objets')),
+		'editer_ttc' => lire_config('optionsproduits/editer_ttc'),
+	);
+
+	return $valeurs;
+}
+
+/**
+ * Traitement du formulaire de configuration
  *
  * @return array
  *     Retours du traitement
  **/
 function formulaires_configurer_optionsproduits_traiter_dist() {
-	$res    = array('editable' => true);
-	$objets = array();
-	// création / mise à jour des métas
 	if (!is_null(_request('objets'))) {
-		$objets_request = array_filter(_request('objets'));
-		foreach ($objets_request as $objet) {
-			$objets[] = table_objet($objet);
-		}
-		ecrire_config('optionsproduits/objets', is_array($objets) ? $objets : '');
+		$objets = array_filter(_request('objets'));
+		ecrire_config('optionsproduits/objets', is_array($objets) ? implode(',', $objets) : '');
 	}
 	ecrire_config('optionsproduits/editer_ttc', _request('editer_ttc'));
 
-	$res['message_ok'] = _T('config_info_enregistree');
+	$res = array(
+		'message_ok' => _T('config_info_enregistree'),
+		'editable'   => true,
+	);
 
 	return $res;
 }
