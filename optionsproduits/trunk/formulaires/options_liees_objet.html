@@ -20,7 +20,7 @@
 			</thead>
 			<tbody>
 				<BOUCLE_options_liees(OPTIONS spip_options_liens spip_optionsgroupes)
-					{par rang, num titre_groupe, options_liens.prix_option_objet, num titre}
+					{par titre_groupe, rang, options_liens.prix_option_objet, titre}
 					{options_liens.objet=#ENV{objet}}{options_liens.id_objet=#ENV{id_objet}}{si #ENV{modifier_option}|non}>
 				
 				[(#REM) |unique sur l'id, pas sur le titre, au cas où deux groupes aient le même nom ]
