@@ -320,7 +320,7 @@ function reservations_multiples_recuperer_fond($flux) {
 
 		if ($contexte['multiple_personnes'] == 'on') {
 
-			$auteurs_multiples = recuperer_fond('inclure/auteurs_multiples', $contexte, array(
+			$auteurs_multiples = recuperer_fond('inclure/auteurs_multiples', array('nr_auteurs' => $contexte['nr_auteurs']), array(
 				'ajax' => 'auteurs_multiples'
 			));
 			$flux['data']['texte'] .= $auteurs_multiples;
