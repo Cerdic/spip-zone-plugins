@@ -4,6 +4,33 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+function ieconfig_metas_liste() {
+	static $ieconfig_metas;
+	if (!is_array($ieconfig_metas)) {
+		$ieconfig_metas = array();
+		include_spip('inc/yaml');
+		$config = yaml_decode(_request('_code_yaml'));
+		
+		foreach (pipeline('ieconfig_metas', array()) as $prefixe => $data) {
+			if (isset($config[$prefixe])) {
+				if (isset($data['icone'])) {
+					$icone = chemin_image($data['icone']);
+					if (!$icone) {
+						$icone = find_in_path($data['icone']);
+					}
+					if ($icone) {
+						$icone = '<img src="' . $icone . '" alt="" style="margin-left:-50px; margin-right:34px;" />';
+					}
+				} else {
+					$icone = 'config-export-16.png';
+				}
+				$ieconfig_metas[$prefixe] = $icone . (isset($data['titre']) ? $data['titre'] : $prefixe);
+			}
+		}
+	}
+	return $ieconfig_metas;
+}
+
 function ieconfig_saisies_import() {
 	// Etape de selection du fichier
 	if (!_request('_code_yaml') or _request('annuler') or _request('importer')) {
@@ -74,35 +101,19 @@ function ieconfig_saisies_import() {
 			$texte_explication .= '<p class="reponse_formulaire reponse_formulaire_erreur">' . _T('ieconfig:texte_plugins_manquants', array('plugins' => implode(', ', $plugins_manquants))) . '</p>';
 		}
 
-		$saisies = array(
-			array(
-				'saisie' => 'explication',
-				'options' => array(
-					'nom' => 'import_details',
-					'texte' => $texte_explication,
-				),
-			),
-		);
 
 		// Gestion des plugins utilisant le pipeline ieconfig_metas
-		$ieconfig_metas = array();
-		foreach (pipeline('ieconfig_metas', array()) as $prefixe => $data) {
-			if (isset($config[$prefixe])) {
-				if (isset($data['icone'])) {
-					$icone = chemin_image($data['icone']);
-					if (!$icone) {
-						$icone = find_in_path($data['icone']);
-					}
-					if ($icone) {
-						$icone = '<img src="' . $icone . '" alt="" style="margin-left:-50px; margin-right:34px;" />';
-					}
-				} else {
-					$icone = 'config-export-16.png';
-				}
-				$ieconfig_metas[$prefixe] = $icone . (isset($data['titre']) ? $data['titre'] : $prefixe);
-			}
-		}
-		if (count($ieconfig_metas) > 0) {
+		$ieconfig_metas = ieconfig_metas_liste();
+		if (count($ieconfig_metas) > 1) {
+			$saisies = array(
+				array(
+					'saisie' => 'explication',
+					'options' => array(
+						'nom' => 'import_details',
+						'texte' => $texte_explication,
+					),
+				),
+			);
 			$saisies[] = array(
 				'saisie' => 'fieldset',
 				'options' => array(
@@ -153,6 +164,7 @@ function formulaires_ieconfig_import_charger_dist() {
 	if (_request('_code_yaml') and !_request('annuler') and !_request('importer')) {
 		$contexte['_code_yaml'] = _request('_code_yaml');
 	}
+	
 
 	return array_merge(saisies_charger_champs($saisies), $contexte);
 }
@@ -193,7 +205,8 @@ function formulaires_ieconfig_import_traiter_dist() {
 		}
 		set_request('_code_yaml', $code_yaml);
 	} // Si on valide l'import
-	elseif (_request('importer') && _request('_code_yaml')) {
+	$ieconfig_metas = ieconfig_metas_liste();
+	if (((count($ieconfig_metas) == 1) OR _request('importer')) && _request('_code_yaml')) {
 		include_spip('inc/yaml');
 		$config = yaml_decode(_request('_code_yaml'));
 
@@ -206,15 +219,20 @@ function formulaires_ieconfig_import_traiter_dist() {
 			'data' => '',
 		));
 
-		$import_metas = _request('import_metas');
+		if (count($ieconfig_metas) == 1) {
+			$import_metas = array(key($ieconfig_metas));
+		} else {
+			$import_metas = _request('import_metas');
+		}
 		if (!is_array($import_metas)) {
 			$import_metas = array();
 		}
 		// Gestion des plugins utilisant le pipeline ieconfig_metas
+		$option = _request('import_methode');
+		$config_importee = '';
 		foreach (pipeline('ieconfig_metas', array()) as $prefixe => $data) {
 			if (in_array($prefixe, $import_metas) && isset($config[$prefixe])) {
-				$option = _request('import_methode');
-
+				$config_importee .= $prefixe . '|';
 				if (isset($data['metas_brutes'])) {
 					foreach (explode(',', $data['metas_brutes']) as $meta) {
 						// On teste le cas ou un prefixe est indique (dernier caractere est *)
@@ -291,7 +309,7 @@ function formulaires_ieconfig_import_traiter_dist() {
 		if ($message_erreur != '') {
 			return array('message_erreur' => $message_erreur);
 		} else {
-			return array('message_ok' => _T('ieconfig:message_ok_import'));
+			return array('message_ok' => _T('ieconfig:message_ok_import') . " ($option / $config_importee)");
 		}
 	}
 }
