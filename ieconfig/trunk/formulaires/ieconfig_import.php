@@ -35,6 +35,19 @@ function ieconfig_saisies_import() {
 							'datas' => ieconfig_config_locales(),
 						),
 					),
+					array(
+						'saisie' => 'radio',
+						'options' => array(
+							'nom' => 'import_methode',
+							'label' => '<:ieconfig:ieconfig_import:>',
+							'datas' => array(
+								'fusion' => '<:ieconfig:ieconfig_import_fusionner:>',
+								'fusion_inv' => '<:ieconfig:ieconfig_import_fusionner_inv:>',
+								'ecrase' => '<:ieconfig:ieconfig_import_ecraser:>',
+								),
+							'defaut' => 'fusion',
+						),
+					),
 				),
 			),
 		);
@@ -80,35 +93,43 @@ function ieconfig_saisies_import() {
 					if (!$icone) {
 						$icone = find_in_path($data['icone']);
 					}
+					if ($icone) {
+						$icone = '<img src="' . $icone . '" alt="" style="margin-left:-50px; margin-right:34px;" />';
+					}
 				} else {
 					$icone = 'config-export-16.png';
 				}
-				$ieconfig_metas[$prefixe] = $prefixe;
-				$saisies[] = array(
+				$ieconfig_metas[$prefixe] = $icone . (isset($data['titre']) ? $data['titre'] : $prefixe);
+			}
+		}
+		if (count($ieconfig_metas) > 0) {
+			$saisies[] = array(
 				'saisie' => 'fieldset',
 				'options' => array(
 					'nom' => 'metas_fieldset',
-					'label' => $prefixe,
-					'icone' => $icone,
-					),
-				'saisies' => array ( 
+					'label' => _T('ieconfig:label_importer_metas').' ('._request('import_methode').')',
+					'icone' => 'config-export-16.png',
+				),
+				'saisies' => array(
 					array(
-						'saisie' => 'radio',
+						'saisie' => 'checkbox',
 						'options' => array(
-							'nom' => $prefixe,
-							'label' => '<:ieconfig:ieconfig_import:>',
-							'datas' => array(
-								'rien' => '<:ieconfig:ieconfig_import_rien:>',
-								'fusion' => '<:ieconfig:ieconfig_import_fusionner:>',
-								'ecrase' => '<:ieconfig:ieconfig_import_ecraser:>',
-								'fusion_inv' => '<:ieconfig:ieconfig_import_fusionner_inv:>',						
-								),
-							'defaut' => 'fusion',
-							)
-						)
-					)
-				);
-			}
+							'nom' => 'import_metas',
+							'label' => _T('ieconfig:label_importer'),
+							'tout_selectionner' => (count($ieconfig_metas) > 1) ? 'oui':'',
+							'datas' => $ieconfig_metas,
+						),
+					),
+					array(
+						'saisie' => 'hidden',
+						'options' => array(
+							'default' => _request('import_methode'),
+							'nom' => 'import_methode',
+							'label' => 'import_methode',
+						),
+					),
+				)
+			);
 		}
 		
 		// On passe via le pipeline ieconfig
@@ -185,87 +206,14 @@ function formulaires_ieconfig_import_traiter_dist() {
 			'data' => '',
 		));
 
+		$import_metas = _request('import_metas');
+		if (!is_array($import_metas)) {
+			$import_metas = array();
+		}
 		// Gestion des plugins utilisant le pipeline ieconfig_metas
-		foreach (pipeline('ieconfig_metas', array()) as $prefixe => $data) {			
-			$option = _request($prefixe);
-
-			//Si on veut une importation avec écrasement
-			if ($option === 'ecrase') {
-				
-				if (isset($data['metas_brutes'])) {
-					foreach (explode(',', $data['metas_brutes']) as $meta) {
-						// On teste le cas ou un prefixe est indique (dernier caractere est *)
-						if (substr($meta, -1) == '*') {
-							$p = substr($meta, 0, -1);
-							foreach ($config[$prefixe] as $m => $v) {
-								if (substr($m, 0, strlen($p)) == $p) {
-									ecrire_config($m . '/', $v);
-								}
-							}
-						} elseif (isset($config[$prefixe][$meta])) {
-							ecrire_config($meta . '/', $config[$prefixe][$meta]);
-						}
-					}
-				}
-				if (isset($data['metas_serialize'])) {
-					foreach (explode(',', $data['metas_serialize']) as $meta) {
-						// On teste le cas ou un prefixe est indique (dernier caractere est *)
-						if (substr($meta, -1) == '*') {
-							$p = substr($meta, 0, -1);
-							foreach ($config[$prefixe] as $m => $v) {
-								if (substr($m, 0, strlen($p)) == $p) {
-									ecrire_config($m . '/', serialize($v));
-								}
-							}
-						} elseif (isset($config[$prefixe][$meta])) {
-							ecrire_config($meta . '/', serialize($config[$prefixe][$meta]));
-						}
-					}
-				}
-			}
-			//Si on veut une importation avec fusion
-			if ($option === 'fusion') {
-				
-				if (isset($data['metas_brutes'])) {
-					foreach (explode(',', $data['metas_brutes']) as $meta) {
-						// On teste le cas ou un prefixe est indique (dernier caractere est *)
-						if (substr($meta, -1) == '*') {
-							$p = substr($meta, 0, -1);
-							foreach ($config[$prefixe] as $m => $v) {
-								if (substr($m, 0, strlen($p)) == $p) {
-									ecrire_config($m . '/', $v);
-								}
-							}
-						} elseif (isset($config[$prefixe][$meta])) {
-							$import = ($config[$prefixe][$meta]);
-							ecrire_config($meta . '/', $import);
-						}
-					}
-				}
-				if (isset($data['metas_serialize'])) {
-					foreach (explode(',', $data['metas_serialize']) as $meta) {
-						// On teste le cas ou un prefixe est indique (dernier caractere est *)
-						if (substr($meta, -1) == '*') {
-							$p = substr($meta, 0, -1);
-							foreach ($config[$prefixe] as $m => $v) {
-								if (substr($m, 0, strlen($p)) == $p) {
-									$save = lire_config($m . '/', serialize($v));
-									$import = ($v);
-									$import = array_merge($save,$import);
-									ecrire_config($m . '/', serialize($import));				
-								}
-							}
-						} elseif (isset($config[$prefixe][$meta])) {
-							$save = lire_config($meta . '/', serialize($config[$prefixe][$meta]));
-							$import = ($config[$prefixe][$meta]);
-							$import = array_merge($save,$import);
-							ecrire_config($meta . '/', serialize($import));
-						}
-					}
-				}
-			}
-			//Si on veut une importation avec fusion_inv
-			if ($option === 'fusion_inv') {
+		foreach (pipeline('ieconfig_metas', array()) as $prefixe => $data) {
+			if (in_array($prefixe, $import_metas) && isset($config[$prefixe])) {
+				$option = _request('import_methode');
 
 				if (isset($data['metas_brutes'])) {
 					foreach (explode(',', $data['metas_brutes']) as $meta) {
@@ -274,18 +222,24 @@ function formulaires_ieconfig_import_traiter_dist() {
 							$p = substr($meta, 0, -1);
 							foreach ($config[$prefixe] as $m => $v) {
 								if (substr($m, 0, strlen($p)) == $p) {
-									$save = lire_config($m . '/', $v);
-									$import = ($v);
-									if (is_null($save)) {
-										ecrire_config($m . '/', $import);
+									if (($option === 'ecrase') OR ($option === 'fusion')) {
+										ecrire_config($m);
+									}
+									if ($option === 'fusion_inv') {
+										if (is_null(lire_config($m . '/'))) {
+											ecrire_config($m . '/', $v);
+										}
 									}
 								}
 							}
 						} elseif (isset($config[$prefixe][$meta])) {
-							$save = lire_config($meta . '/', $config[$prefixe][$meta]);
-							$import = ($config[$prefixe][$meta]);							
-							if (is_null($save)) {
-								ecrire_config($meta . '/', $import);
+							if (($option === 'ecrase') OR ($option === 'fusion')) {
+								ecrire_config($meta . '/', $config[$prefixe][$meta]);
+							}
+							if ($option === 'fusion_inv') {
+								if (is_null(lire_config($meta . '/'))) {
+									ecrire_config($meta . '/', $config[$prefixe][$meta]);
+								}
 							}
 						}
 					}
@@ -297,16 +251,36 @@ function formulaires_ieconfig_import_traiter_dist() {
 							$p = substr($meta, 0, -1);
 							foreach ($config[$prefixe] as $m => $v) {
 								if (substr($m, 0, strlen($p)) == $p) {
-									$save = lire_config($m . '/', serialize($v));
-									$import = ($v);
-									$import = array_merge($import,$save);
+									$import = array();
+									if ($option === 'ecrase') {
+										$import = $v;
+									}
+									if ($option === 'fusion') {
+										$import = array_merge(lire_config($m . '/'), $v);
+									}
+									if ($option === 'fusion_inv') {
+										$import_plus = array_diff_key($v, lire_config($meta . '/'));
+										$import_base = array_diff_key(lire_config($meta . '/'), $import_plus);
+										$import = (array_merge($import_plus, $import_base));
+									}
+									ksort($import);
 									ecrire_config($m . '/', serialize($import));
 								}
 							}
 						} elseif (isset($config[$prefixe][$meta])) {
-							$save = lire_config($meta . '/', serialize($config[$prefixe][$meta]));
-							$import = ($config[$prefixe][$meta]);
-							$import = array_merge($import,$save);
+							$import = array();
+							if ($option === 'ecrase') {
+								$import = $config[$prefixe][$meta];
+							}
+							if ($option === 'fusion') {
+								$import = array_merge(lire_config($meta . '/'), $config[$prefixe][$meta]);
+							}
+							if ($option === 'fusion_inv') {
+								$import_plus = array_diff_key($config[$prefixe][$meta], lire_config($meta . '/'));
+								$import_base = array_diff_key(lire_config($meta . '/'), $import_plus);
+								$import = (array_merge($import_plus, $import_base));
+							}
+							ksort($import);
 							ecrire_config($meta . '/', serialize($import));
 						}
 					}
