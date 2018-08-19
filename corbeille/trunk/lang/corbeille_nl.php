@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'breves_corbeille_tous' => '@nb@ nieuwsberichten in de prullenmand',
-	'breves_corbeille_un' => '1 nieuwsbericht in de prullenmand',
+	'breves_corbeille_un' => '1 nieuwsflits in de prullenmand',
 
 	// C
 	'corbeille' => 'Prullenmand',
