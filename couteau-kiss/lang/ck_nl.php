@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_max_size' => 'Max gewicht (ko)',
 	'label_max_width' => 'Max breedte (pixel)',
 	'label_nb_objets_tranches' => 'Aantal objecten in de lijsten',
-	'label_no_autobr' => 'Het in acht nemen van alineas (enig lijn terugkeer) in de tekst desactiveren',
+	'label_no_autobr' => 'Het in acht nemen van alineas (enig lijn terugkeer) in de tekst deactiveren',
 	'label_no_set_html_base' => '<tt>&lt;base href="..."&gt;</tt> NIET automatisch bijvoegen',
 	'label_options_ecrire_perfo' => 'Prestatie',
 	'label_options_ecrire_secu' => 'Veiligheid',
@@ -48,7 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_supprimer_numero' => 'Nummers van de titels automatisch afschaffen',
 	'label_toujours_paragrapher' => 'Alle paragrafen met een <tt>&lt;p&gt;</tt> bebakenen (zelfs als er maar een paragraaf is in de tekst)',
 	'legend_cache_controle' => 'Cachebeheer',
-	'legend_espace_prive' => 'Privé ruimte ',
+	'legend_espace_prive' => 'Privé gedeelte',
 	'legend_image_documents' => 'Beelden en documenten ',
 	'legend_site_public' => 'Publieke website',
 
