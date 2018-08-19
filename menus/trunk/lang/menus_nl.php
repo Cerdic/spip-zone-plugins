@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_menus_titre' => 'Menu’s van de site',
 	'entree_afficher_articles' => 'Ook de artikelen in het menu weergeven?',
 	'entree_afficher_item_suite' => 'De artikelen in het menu invoegen?',
+	'entree_ancre' => 'Anker',
 	'entree_articles_max' => 'Zo ja, toon dan alleen de artikelen wanneer de rubriek er niet meer telt dan (geef een aantal op of laat leeg om alle artikelen te tonen)',
 	'entree_articles_max_affiches' => 'Zo ja, beperk het aantal vermelde artikelen tot (gevolgd door een item "... Alle artikelen" met een link naar de rubriek) (geef een aantal op of laat leeg om alle artikelen te tonen)',
 	'entree_aucun' => 'Geen',
