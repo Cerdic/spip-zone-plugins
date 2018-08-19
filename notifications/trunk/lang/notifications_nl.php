@@ -44,15 +44,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_changer_pass' => 'Mijn wachtwoord veranderen',
 	'bouton_finir_inscription' => 'Mijn inschrijving beëindigen',
-	'breve_propose_detail' => 'Nieuwsbericht "@titre@" wordt ter publicatie voorgesteld sinds',
+	'breve_propose_detail' => 'Nieuwsflits "@titre@" wordt ter publicatie voorgesteld sinds',
 	'breve_propose_sujet' => '[@nom_site_spip@] Voorgesteld: @titre@',
 	'breve_propose_titre' => 'Voorgesteld nieuwbericht
 	------------------------',
 	'breve_propose_url' => 'Je wordt voorgesteld het te bekijken en je mening te geven
 	in het forum, dat je vindt op dit adres:',
-	'breve_publie_detail' => 'Nieuwsbericht "@titre@" wordt gepubliceerd door @connect_nom@.',
+	'breve_publie_detail' => 'Nieuwsflits "@titre@" wordt gepubliceerd door @connect_nom@.',
 	'breve_publie_sujet' => '[@nom_site_spip@] GEPUBLICEERD: @titre@',
-	'breve_publie_titre' => 'Gepubliceerd nieuwsbericht
+	'breve_publie_titre' => 'Gepubliceerde nieuwsflits
 	--------------------------',
 
 	// E
@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_spam_a_confirmer' => 'Aan te duiden als SPAM: ',
 	'message_voir_configuration' => 'Bekijk de configuratie van de notificaties',
 	'messagerie_interne' => 'Intern berichtensysteem',
-	'messagerie_interne_signaler' => '<strong>Nieuwe privé-berichten signaleren</strong>: activeer deze optie zodat de site een notificatie stuurt wanneer een redacteur een nieuw bericht niet heeft gezien. Het systeem wacht 20 minuten alvorens de notificatie naar de redacteur wordt gestuurd, om op deze manier een redacteur die in het privé-gedeelte online is niet met emails te bekogelen.',
+	'messagerie_interne_signaler' => '<strong>Nieuwe privé-berichten signaleren</strong>: activeer deze optie zodat de site een notificatie stuurt wanneer een redacteur een nieuw bericht niet heeft gezien. Het systeem wacht 20 minuten alvorens de notificatie naar de redacteur wordt gestuurd, om op deze manier een redacteur die in het privé gedeelte online is niet met emails te bekogelen.',
 	'moderateur' => '<strong>Moderateur</strong>',
 	'moderation_email_protection_antibot' => '<b>Bescherm moderatie per email tegen bots</b> die op de links in de mails klikken',
 
