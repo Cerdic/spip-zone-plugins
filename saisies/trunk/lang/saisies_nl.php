@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_parcourir_docs_article' => 'Blader door het artikel',
-	'bouton_parcourir_docs_breve' => 'Blader door het nieuwsbericht',
+	'bouton_parcourir_docs_breve' => 'Blader door de nieuwsflits',
 	'bouton_parcourir_docs_rubrique' => 'Blader door de rubriek',
 	'bouton_parcourir_mediatheque' => 'Blader door de mediatheek',
 
