@@ -12,9 +12,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_common' => 'Lijst van verboden woorden in de wachtwoorden. <small>(Gescheiden door komma’s)</small>:',
 	'cfg_descriptif' => 'De wachtwoordtester plugin controleert de sterkte van een wachtwoord.<br/>De tests worden volgens verschillende criteria’s uitgevoerd: lengte van het woord, speciale tekenen, enz.<br/>Je kunt ook een lijst van verboden woorden maken.',
+	'cfg_false' => 'Deactiveren',
 	'cfg_longueur' => 'Minimale lengte van het wachtwoord: ',
 	'cfg_passe_complexe' => 'De plugin Complex Wachtwoord configureren',
+	'cfg_showpercent' => 'Toon het percentage van complexiteit van het wachtwoord',
 	'cfg_titre_parametrages' => 'Wachtwoordtester',
+	'cfg_true' => 'Activeren',
 	'common' => 'wachtwoord,azerty,qwerty,geheim',
 	'court' => 'Te kort',
 
