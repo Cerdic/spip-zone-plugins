@@ -174,7 +174,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'menu_blocs' => 'Te configureren blokken',
 	'mode_noisettes' => 'Nootjes aanpassen',
 	'modif_en_cours' => 'Bezig met aanpassen',
-	'modifier_dans_prive' => 'Aanpassen in de privé-ruimte',
+	'modifier_dans_prive' => 'Aanpassen in hee privé gedeelte',
 
 	// N
 	'ne_pas_definir_d_heritage' => 'Geen geërfde compositie bepalen',
