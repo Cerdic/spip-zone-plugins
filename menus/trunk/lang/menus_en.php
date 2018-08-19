@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_menus_titre' => 'Site menus',
 	'entree_afficher_articles' => 'Include articles in the menu? (put "oui" for this)',
 	'entree_afficher_item_suite' => 'Include articles in the menu? (put "oui" for this)',
+	'entree_ancre' => 'Anchor',
 	'entree_articles_max' => 'If so, show the articles only if the section contains a maximum of xx articles? (put the maximum number of articles, leave blank to display all articles)',
 	'entree_articles_max_affiches' => 'If so, limit the number of articles listed to a maximum of  xx (followed by an item "... All the articles" with a link to the parent section)? (indicate the maximum number of articles, leave blank to display all of them)',
 	'entree_aucun' => 'None',
