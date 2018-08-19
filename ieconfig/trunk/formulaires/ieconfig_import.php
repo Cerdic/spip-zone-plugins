@@ -4,7 +4,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function ieconfig_metas_liste() {
+function ieconfig_metas_liste($prefixeaimporter = null) {
 	static $ieconfig_metas;
 	if (!is_array($ieconfig_metas)) {
 		$ieconfig_metas = array();
@@ -13,25 +13,30 @@ function ieconfig_metas_liste() {
 		
 		foreach (pipeline('ieconfig_metas', array()) as $prefixe => $data) {
 			if (isset($config[$prefixe])) {
-				if (isset($data['icone'])) {
-					$icone = chemin_image($data['icone']);
-					if (!$icone) {
-						$icone = find_in_path($data['icone']);
+				if (!isset($prefixeaimporter) 
+					OR 
+					(isset($prefixeaimporter) && $prefixe === $prefixeaimporter)
+					) {
+					if (isset($data['icone'])) {
+						$icone = chemin_image($data['icone']);
+						if (!$icone) {
+							$icone = find_in_path($data['icone']);
+						}
+						if ($icone) {
+							$icone = '<img src="' . $icone . '" alt="" style="margin-left:-50px; margin-right:34px;" />';
+						}
+					} else {
+						$icone = 'config-export-16.png';
 					}
-					if ($icone) {
-						$icone = '<img src="' . $icone . '" alt="" style="margin-left:-50px; margin-right:34px;" />';
+					$ieconfig_metas[$prefixe] = $icone . (isset($data['titre']) ? $data['titre'] : $prefixe);
 					}
-				} else {
-					$icone = 'config-export-16.png';
-				}
-				$ieconfig_metas[$prefixe] = $icone . (isset($data['titre']) ? $data['titre'] : $prefixe);
 			}
 		}
 	}
 	return $ieconfig_metas;
 }
 
-function ieconfig_saisies_import() {
+function ieconfig_saisies_import($prefixeaimporter = null) {
 	// Etape de selection du fichier
 	if (!_request('_code_yaml') or _request('annuler') or _request('importer')) {
 		$saisies = array(
@@ -59,7 +64,7 @@ function ieconfig_saisies_import() {
 							'nom' => 'ieconfig_import_local',
 							'label' => '<:ieconfig:label_ieconfig_import_local:>',
 							'explication' => '<:ieconfig:explication_ieconfig_import_local:>',
-							'datas' => ieconfig_config_locales(),
+							'datas' => ieconfig_config_locales($prefixeaimporter),
 						),
 					),
 					array(
@@ -103,7 +108,7 @@ function ieconfig_saisies_import() {
 
 
 		// Gestion des plugins utilisant le pipeline ieconfig_metas
-		$ieconfig_metas = ieconfig_metas_liste();
+		$ieconfig_metas = ieconfig_metas_liste($prefixeaimporter);
 		if (count($ieconfig_metas) > 1) {
 			$saisies = array(
 				array(
@@ -155,9 +160,9 @@ function ieconfig_saisies_import() {
 	return $saisies;
 }
 
-function formulaires_ieconfig_import_charger_dist() {
+function formulaires_ieconfig_import_charger_dist($prefixeaimporter = null) {
 	include_spip('inc/saisies');
-	$saisies = ieconfig_saisies_import();
+	$saisies = ieconfig_saisies_import($prefixeaimporter);
 	$contexte = array(
 		'_saisies' => $saisies,
 	);
@@ -169,7 +174,7 @@ function formulaires_ieconfig_import_charger_dist() {
 	return array_merge(saisies_charger_champs($saisies), $contexte);
 }
 
-function formulaires_ieconfig_import_verifier_dist() {
+function formulaires_ieconfig_import_verifier_dist($prefixeaimporter = null) {
 	$erreurs = array();
 	// Etape de selection du fichier
 	if (!_request('_code_yaml')) {
@@ -180,13 +185,13 @@ function formulaires_ieconfig_import_verifier_dist() {
 	} // Options d'import
 	else {
 		include_spip('inc/saisies');
-		$erreurs = saisies_verifier(ieconfig_saisies_import());
+		$erreurs = saisies_verifier(ieconfig_saisies_import($prefixeaimporter));
 	}
 
 	return $erreurs;
 }
 
-function formulaires_ieconfig_import_traiter_dist() {
+function formulaires_ieconfig_import_traiter_dist($prefixeaimporter = null) {
 
 	include_spip('inc/config');
 	// Si on est à l'étape de sélection d'un fichier de configuration
@@ -205,7 +210,7 @@ function formulaires_ieconfig_import_traiter_dist() {
 		}
 		set_request('_code_yaml', $code_yaml);
 	} // Si on valide l'import
-	$ieconfig_metas = ieconfig_metas_liste();
+	$ieconfig_metas = ieconfig_metas_liste($prefixeaimporter);
 	if (((count($ieconfig_metas) == 1) OR _request('importer')) && _request('_code_yaml')) {
 		include_spip('inc/yaml');
 		$config = yaml_decode(_request('_code_yaml'));
@@ -232,7 +237,7 @@ function formulaires_ieconfig_import_traiter_dist() {
 		$config_importee = '';
 		foreach (pipeline('ieconfig_metas', array()) as $prefixe => $data) {
 			if (in_array($prefixe, $import_metas) && isset($config[$prefixe])) {
-				$config_importee .= $prefixe . '|';
+				$config_importee .= $prefixe . ' ';
 				if (isset($data['metas_brutes'])) {
 					foreach (explode(',', $data['metas_brutes']) as $meta) {
 						// On teste le cas ou un prefixe est indique (dernier caractere est *)
@@ -315,7 +320,7 @@ function formulaires_ieconfig_import_traiter_dist() {
 }
 
 // Renvoie la liste des fichiers de configurations présents dans un sous-répertoires ieconfig/
-function ieconfig_config_locales() {
+function ieconfig_config_locales($prefixeaimporter = null) {
 	static $liste_config = null;
 
 	if (is_null($liste_config)) {
@@ -335,6 +340,9 @@ function ieconfig_config_locales() {
 						$ok = false;
 					}
 				}
+			}
+			if (isset($prefixeaimporter) AND !isset($config[$prefixeaimporter])) {
+				$ok = false;
 			}
 			//on vérifie s'il y a un champs nom
 			if ($ok) {
