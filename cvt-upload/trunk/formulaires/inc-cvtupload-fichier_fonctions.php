@@ -13,8 +13,9 @@ if (!function_exists('supprimer_timestamp')) { // compat 3.0
 }
 
 /**
- * Réduit une image, puis encode en base64, puis supprime la vignette qui a été créée
- * Notes: le filtre ne commence pas par image, car SPIP applique automatiquement un image_graver dans ce cas -> ca plante
+ * Réduit une image, puis encode en base64, puis supprime la vignette qui a été créée. 
+ * Ceci permet que la vignette ne soit pas conservée dans local/ et donc évite que la vignette d'une image potentiellement confidentielle soit visible.
+ * Note: le filtre ne commence pas par image, car SPIP applique automatiquement un image_graver dans ce cas -> ca plante
  * @param string $img
  *     la balise img
  * @param int $taille
