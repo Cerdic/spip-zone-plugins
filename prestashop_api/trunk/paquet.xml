@@ -1,7 +1,7 @@
 <paquet
 	prefix="prestashop_api"
 	categorie="outil"
-	version="2.2.0"
+	version="2.3.0"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/prestashop_api-64.png"
