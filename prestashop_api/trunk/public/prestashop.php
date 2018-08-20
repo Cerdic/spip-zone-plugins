@@ -131,7 +131,7 @@ class IterateurPRESTASHOP extends IterateurData {
 			}
 			$this->tableau = $cache;
 		} else {
-			if (!$select = charger_fonction('prestashop_ws_' . $this->type . '_select', 'inc', true)) {
+			if (!$select = charger_fonction('prestashop_ws_' . $this->get_resource() . '_select', 'inc', true)) {
 				$select = charger_fonction('prestashop_ws_select', 'inc', true);
 			}
 			$this->tableau = $select($this->command, $this);
