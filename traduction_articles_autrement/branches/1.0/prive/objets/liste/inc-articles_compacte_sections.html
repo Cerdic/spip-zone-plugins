@@ -1,5 +1,6 @@
-[(#REM)du plugin afficher objets]
+[(#REM) Trie par défaut suivant si le plugin rang est activé]
 [(#PLUGIN{rang}|et{#VAL{article}|appliquer_filtre{rang_objet_dans_config}}|?{
+	#SET{rang_actif,oui}
 	#SET{tri,rang}
 	[(#SET{defaut_tri,#ARRAY{
 		rang,1,
@@ -20,15 +21,18 @@
 <B_liste_art>
 #ANCRE_PAGINATION
 <div class="liste-objets articles">
-<table class='spip liste'>
+<table class='spip liste' data-objet="articles">
 [<caption><strong class="caption">(#ENV*{titre,<:info_tous_articles_presents:>})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			[(#PLUGIN{rang}|oui)
+			[(#GET{rang_actif}|oui)
 				[(#ENV{id_rubrique}|et{#VAL{article}|appliquer_filtre{rang_objet_dans_config}}|oui)<th class="picto" scope="col"></th>]
 			]
 			<th class='statut'>[(#TRI{statut,<span title="<:afficher_objets:info_statut|attribut_html:>">#</span>,ajax})]</th>
-			<th class='rang'>[(#TRI{num titre,<:taa:rang:>,ajax})]</th>
+			[(#GET{rang_actif}|oui)
+			<th class="rang" scope="col">
+				[(#TRI{rang,<span title="<:rang:lien_trier_rang|attribut_html:>"><:rang:info_rang_abbr:></span>,ajax})]
+			</th>]
 			<th class='titre'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
 			<th class='auteur'><:auteur:></th>
 			<th class='date'>[(#TRI{date,<:date:>,ajax})]</th>
@@ -39,13 +43,13 @@
 	<tbody>
 	<BOUCLE_liste_art(ARTICLES){id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #GET{tri},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}{!lang_select}>
 	#SET{class,#COMPTEUR_BOUCLE|alterner{row_odd,row_even}}
-		<INCLURE{fond=prive/objets/liste/inc-articles_row}{env}{trads=oui}{id_article}{class=#GET{class}}{ajax}/>
+		<INCLURE{fond=prive/objets/liste/inc-articles_row,env,trads=oui,id_article,class=#GET{class},ajax,rang_actif=#GET{rang_actif}}/>
 	</BOUCLE_liste_art>
 	</tbody>
 </table>
-[(#PLUGIN{rang}|oui)
+[(#GET{rang_actif}|oui)
 	[(#ENV{id_rubrique}|et{#VAL{article}|appliquer_filtre{rang_objet_dans_config}}|oui)
-	<INCLURE{fond=prive/squelettes/inclure/rang,objet=articles,id_rubrique,suffixe_pagination=art}/>
+	<INCLURE{fond=prive/squelettes/inclure/rang,objet=articles,id_parent=#ID_RUBRIQUE,suffixe_pagination=art}/>
 	]
 ]
 [<p class='pagination'>(#PAGINATION{prive})</p>]

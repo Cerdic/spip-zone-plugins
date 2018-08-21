@@ -17,7 +17,7 @@
 						<label for='liste_compacte_desactive'><:taa:affichage_liste_compacte_desactive:></label>
 						<div class="choix">
 							<input type="checkbox" name="liste_compacte_desactive" class="checkbox" value="on" id="liste_compacte" [(#ENV{liste_compacte_desactive}|oui) checked="checked"] />
-							<label for='liste_compacte_desactive_oui'><:taa:oui:></label>
+							<label for='liste_compacte_desactive_oui'><:ecrire:item_oui:></label>
 						</div>
 					</li>
 					#SET{erreurs,#ENV**{erreurs}|table_valeur{limiter_secteur}}

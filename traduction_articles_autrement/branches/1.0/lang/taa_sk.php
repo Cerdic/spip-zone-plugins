@@ -31,7 +31,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'options' => 'Upraviť možnosti jazykov',
-	'oui' => 'Áno',
 
 	// R
 	'rang' => 'Hodnotenie',
