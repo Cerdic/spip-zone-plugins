@@ -1,6 +1,7 @@
 <?php
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
+
 function taa_header_prive($flux) {
 	$flux .= '<link rel="stylesheet" href="' . find_in_path('css/taa_styles.css') . '" type="text/css" media="all" />';
 	return $flux;
@@ -44,6 +45,7 @@ function taa_pre_insertion($flux) {
 	}
 	return $flux;
 }
+
 function taa_recuperer_fond($flux) {
 	// Insertion des onglets de langue
 	if ($flux['args']['fond'] == 'prive/squelettes/contenu/article') {
@@ -70,5 +72,3 @@ function taa_recuperer_fond($flux) {
 
 	return $flux;
 }
-
-?>
