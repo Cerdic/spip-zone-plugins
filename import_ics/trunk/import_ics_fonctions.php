@@ -37,7 +37,7 @@ function date_ical_to_sql($date,$decalage=array(),$seulement_date=False){
 	$date_ete = intval(affdate($date_sql,'I'));//Est-on en heure d'été?
 	if (!$all_day and is_array($decalage) 
 		and isset($decalage['ete']) 
-		and isset($decalage['ete'])){
+		and isset($decalage['hiver'])){
 			if ($date_ete){
 				$decalage = $decalage['ete'];
 			}

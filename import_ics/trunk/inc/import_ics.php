@@ -112,13 +112,14 @@ function depublier_ancients_evts($les_uid_local,$les_uid_distant,$id_article){
 * Importation d'un événement dans la base
 **/
 function importer_evenement($objet_evenement,$id_almanach,$id_article,$decalage,$statut,$mots){
-  $champs_sql = array_merge(
+	$champs_sql = array_merge(
 		evenement_ical_to_sql($objet_evenement,$decalage),
 		array(
 				"id_article"=>$id_article,
 				"date_creation"=>date('Y-m-d H:i:s')
 		)
 	);
+
 	# création de l'evt
 	autoriser_exception('creer','evenement','');
   $id_evenement= objet_inserer('spip_evenements',$id_article,$champs_sql);
@@ -167,15 +168,31 @@ function evenement_ical_to_sql($objet_evenement,$decalage){
 
 		# récupérer la date de début et la formater correctement
 		  	$dtstart_array = $objet_evenement->getProperty("dtstart", 1, TRUE);
-				list ($date_debut,$start_all_day) = date_ical_to_sql($dtstart_array,$decalage);
+			list ($date_debut,$start_all_day) = date_ical_to_sql($dtstart_array,$decalage);
 		#les 3 lignes suivantes servent à récupérer la date de fin et à la mettre dans le bon format
-				$dtend_array = $objet_evenement->getProperty("dtend", 1, TRUE);
-				if (is_array($dtend_array)){
-					list ($date_fin,$end_all_day) = date_ical_to_sql($dtend_array,$decalage);
+	  		$dtend_array = $objet_evenement->getProperty("dtend", 1, TRUE);
+			if (is_array($dtend_array)) {
+				list ($date_fin,$end_all_day) = date_ical_to_sql($dtend_array,$decalage);
+			} else {
+				$duration_array = $objet_evenement->getProperty("duration", 1, TRUE);
+				if ($duration_array["value"]<>''){
+					$date_deb = date_ical_to_sql($dtstart_array,'', TRUE);
+					$date_ete = intval(affdate($date_deb,'I'));//Est-on en heure d'été?
+					if (!$all_day AND is_array($decalage) AND isset($decalage['ete']) AND isset($decalage['hiver'])) {
+						if ($date_ete) {
+							$decalageheure = $decalage['ete'];
+						} else {
+							$decalageheure = $decalage['hiver'];
+						}
+					}
+					$duree_seconde=($duration_array["value"]["hour"]+$decalageheure)*60*60+$duration_array["value"]["min"]*60+$duration_array["value"]["sec"] ;
+					$date_fin = "DATE_ADD('$date_deb', INTERVAL $duree_seconde SECOND)";
 				} else {
 					$date_fin = $date_debut;
 					$end_all_day = $debut_all_day;
 				}
+			}
+
 			// Est-ce que l'evt dure toute la journée?
 			if ($end_all_day and $start_all_day){
 				$horaire = "non";
