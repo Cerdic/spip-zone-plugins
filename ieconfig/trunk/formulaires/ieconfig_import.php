@@ -81,7 +81,7 @@ function ieconfig_saisies_import() {
 						$icone = find_in_path($data['icone']);
 					}
 					if ($icone) {
-						$icone = '<img src="' . $icone . '" alt="" style="margin-left:-50px; margin-right:34px;" />';
+						$icone = '<img src="' . $icone . '" alt="" style="margin-left:0px; margin-right:0.5em;" />';
 					}
 				} else {
 					$icone = '';
