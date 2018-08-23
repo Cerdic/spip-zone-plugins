@@ -31,7 +31,20 @@
 			</div>
 			</fieldset>
 		</div>
+		[(#CONFIG{reservation_evenement/destinataires_supplementaires}|=={on}|oui)
+		<div class="fieldset fieldset_destinataires_supplementaires saisie_fieldset">
+		<fieldset>
+		<h3 class="legend"><:reservation:notifications_cfg_titre:></h3>
+			<div class="editer-groupe">
+					[(#SAISIE{
+						input,
+						destinataires_supplementaires,
+						label=<:reservation:label_destinataires_supplementaires:>,
+						explication=<:reservation:explication_destinataires_supplementaires:>})]
 
+			</div>
+			</fieldset>
+		</div>]
 		<div class="fieldset fieldset_donnees_reservation saisie_fieldset">
 			<fieldset><h3 class="legend"><:reservation:legend_donnees_reservation:></h3>
 			<div class="editer-groupe">

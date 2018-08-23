@@ -54,6 +54,7 @@ function formulaires_reservation_charger_dist($id = array(), $id_article = '', $
 		}
 	}
 
+
 	if (isset($id_evenement_source)) {
 		if ($id_evenement_source == 0) {
 			$id_evenement_source = false;
@@ -154,6 +155,7 @@ function formulaires_reservation_charger_dist($id = array(), $id_article = '', $
 	$valeurs['modifier_donnees_auteur'] = _request('modifier_donnees_auteur');
 	$valeurs['nom'] = $nom;
 	$valeurs['email'] = $email;
+	$valeurs['destinataires_supplementaires'] = _request('destinataires_supplementaires');
 	$valeurs['enregistrer'] = _request('enregistrer');
 	$valeurs['new_pass'] = _request('new_pass');
 	$valeurs['new_pass2'] = _request('new_pass2');

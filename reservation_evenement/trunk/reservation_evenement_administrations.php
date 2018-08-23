@@ -134,10 +134,21 @@ function reservation_evenement_upgrade($nom_meta_base_version, $version_cible) {
 			)
 		)
 	);
+
 	$maj['1.7.0']  = array(
 		array('sql_alter','TABLE spip_reservations_details CHANGE prix_ht prix_ht decimal(15,2) NOT NULL DEFAULT "0.00"'),
 		array('sql_alter','TABLE spip_reservations_details CHANGE prix prix decimal(15,2) NOT NULL DEFAULT "0.00"'),
 		array('sql_alter','TABLE spip_reservations_details CHANGE taxe taxe decimal(15,2) NOT NULL DEFAULT "0.00"'),
+	);
+
+	// Ajouter le champ "destinataires_supplementaires".
+	$maj['1.29.0']  = array(
+		array (
+			'maj_tables',
+			array (
+				'spip_reservations',
+			)
+		)
 	);
 
 	include_spip('base/upgrade');
