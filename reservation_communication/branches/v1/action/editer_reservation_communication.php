@@ -11,7 +11,7 @@
  */
 
 if (!defined('_ECRIRE_INC_VERSION'))
-  return;
+	return;
 
 /**
  * Inserer en base un objet generique
@@ -20,6 +20,9 @@ if (!defined('_ECRIRE_INC_VERSION'))
  * @return bool|int
  */
 function reservation_communication_inserer($id_parent = null, $set = null) {
+	include_spip('inc/config');
+	$config_destinataires_supplementaires = lire_config('reservation_evenement/destinataires_supplementaires');
+
 	$lang_rub = "";
 	$champs = array();
 
@@ -62,7 +65,8 @@ function reservation_communication_inserer($id_parent = null, $set = null) {
 		$select = array(
 			'aut.email AS email_auteur',
 			'res.email AS email',
-			'res.id_auteur'
+			'res.id_auteur',
+			'res.destinataires_supplementaires'
 		);
 
 		$statut_reservation = str_replace(',', '","', _request('statut_reservation'));
@@ -103,15 +107,26 @@ function reservation_communication_inserer($id_parent = null, $set = null) {
 			$sql = sql_select($select, $from, $where);
 
 			while ($data = sql_fetch($sql)) {
-			$email = isset($data['email_auteur']) ? $data['email_auteur'] : $data['email'];
-			$id_auteur = isset($data['id_auteur']) ? $data['id_auteur'] : '';
+			$emails = isset($data['email_auteur']) ? array($data['email_auteur']) : array($data['email']);
+			$auteurs = isset($data['id_auteur']) ? array($data['id_auteur']) : '';
 
-			sql_insertq('spip_reservation_communication_destinataires', array(
-			'id_reservation_communication' => $id,
-			'email' => $email,
-			'id_auteur' => $id_auteur,
-			'date' => $date,
-			));
+			// Voir si il faut envoyer à plusieurs déstinataires.
+			if ($config_destinataires_supplementaires == 'on' and
+				$destinataires_supplementaires  = $data['destinataires_supplementaires']) {
+
+					$destinataires_supplementaires = explode(',', $destinataires_supplementaires);
+					$emails = array_merge($emails, $destinataires_supplementaires);
+				}
+
+			foreach ($emails as $index => $email) {
+				sql_insertq('spip_reservation_communication_destinataires', array(
+					'id_reservation_communication' => $id,
+					'email' => $email,
+					'id_auteur' => isset($auteurs[$index]) ? $auteurs[$index] : '',
+					'date' => $date,
+				));
+			}
+
 		}
 	}
 
