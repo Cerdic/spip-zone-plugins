@@ -49,6 +49,7 @@ function reservation_evenement_declarer_tables_objets_sql ($tables) {
 			"type_paiement" => "varchar(50) NOT NULL DEFAULT ''",
 			"nom" => "varchar(255) NOT NULL DEFAULT ''",
 			"email" => "varchar(255) NOT NULL DEFAULT ''",
+			"destinataires_supplementaires" => "text NOT NULL",
 			"type_lien" => "varchar(25) NOT NULL DEFAULT ''",
 			"origine_lien" => "varchar(25) NOT NULL DEFAULT ''",
 			"maj" => "timestamp",
@@ -71,6 +72,7 @@ function reservation_evenement_declarer_tables_objets_sql ($tables) {
 			'date_paiement',
 			'nom',
 			'email',
+			'destinataires_supplementaires',
 			'type_lien',
 			'origine_lien',
 			'donnees_auteur',
@@ -82,6 +84,7 @@ function reservation_evenement_declarer_tables_objets_sql ($tables) {
 			'date_paiement',
 			'nom',
 			'email',
+			'destinataires_supplementaires',
 			'donnees_auteur',
 			'reference'
 		),
@@ -89,6 +92,7 @@ function reservation_evenement_declarer_tables_objets_sql ($tables) {
 			"reference" => 8,
 			"id_reservation" => 8,
 			"email" => 8,
+			'destinataires_supplementaires' => 5,
 			"nom" => 8
 		),
 		'tables_jointures' => array(

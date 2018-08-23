@@ -27,6 +27,17 @@
 						</legend>
 						<INCLURE {fond=formulaires/inc-reservation_connection,env} />
 					</fieldset>
+					[(#CONFIG{reservation_evenement/destinataires_supplementaires}|=={on}|oui)
+					<fieldset>
+						<legend><:reservation:notifications_cfg_titre:></legend>
+						<div class="editer-groupe">
+							[(#SAISIE{
+								input,
+								destinataires_supplementaires,
+								label=<:reservation:label_destinataires_supplementaires:>,
+								explication=<:reservation:explication_destinataires_supplementaires:>})]
+						</div>
+					</fieldset>]
 					<INCLURE {fond=formulaires/inc-reservation_champs_extras_reservation,env} />
 
 					[(#REM) ajouter les saisies supplementaires : extra et autre, a cet

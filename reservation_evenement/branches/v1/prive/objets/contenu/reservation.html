@@ -55,6 +55,11 @@
 		</BOUCLE_champs_extras>
 	<//B_auteur>
 
+	[<div class="champ contenu_destinataires_supplementaires[ (#DESTINATAIRES_SUPPLEMENTAIRES*|strlen|?{'',vide})]">
+		<label><:reservation:label_destinataires_supplementaires:></label>
+		<span dir='#LANG_DIR' class='#EDIT{destinataires_supplementaires} destinataires_supplementaires'>(#DESTINATAIRES_SUPPLEMENTAIRES)</span>
+	</div>]
+
 	[<div class="champ contenu_reference[ (#REFERENCE*|strlen|?{'',vide})]">
 		<label><:reservation:label_reference:></label>
 		<span dir='#LANG_DIR' class='#EDIT{reference} reference'>(#REFERENCE)</span>

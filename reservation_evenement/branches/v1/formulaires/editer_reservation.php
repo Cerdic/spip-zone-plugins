@@ -201,5 +201,3 @@ function formulaires_editer_reservation_verifier_dist($id_reservation = 'new', $
 function formulaires_editer_reservation_traiter_dist($id_reservation = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	return formulaires_editer_objet_traiter('reservation', $id_reservation, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 }
-
-?>

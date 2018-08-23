@@ -355,6 +355,16 @@ function formulaires_configurer_reservation_evenement_saisies_dist() {
 					)
 				),
 				array(
+					'saisie' => 'oui_non',
+					'options' => array(
+						'nom' => 'destinataires_supplementaires',
+						'label' => _T('reservation:notifications_destinataires_supplementaires_label'),
+						'explication' => _T('reservation:notifications_destinataires_supplementaires_explication'),
+						'defaut' => $config['destinataires_supplementaires'],
+						'afficher_si' => '@client@ == "on"',
+					)
+				),
+				array(
 					'saisie' => 'selection_multiple',
 					'options' => array(
 						'nom' => 'envoi_separe',
