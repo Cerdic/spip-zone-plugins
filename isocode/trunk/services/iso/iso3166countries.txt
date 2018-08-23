@@ -58,7 +58,7 @@ Croatia;Croatie (la);HR;HRV;191
 Cuba;Cuba;CU;CUB;192
 Curaçao;Curaçao;CW;CUW;531
 Cyprus;Chypre;CY;CYP;196
-Czech Republic (the);tchèque (la République);CZ;CZE;203
+Czechia;Tchéquie (la);CZ;CZE;203
 Denmark;Danemark (le);DK;DNK;208
 Djibouti;Djibouti;DJ;DJI;262
 Dominica;Dominique (la);DM;DMA;212
@@ -69,6 +69,7 @@ El Salvador;El Salvador;SV;SLV;222
 Equatorial Guinea;Guinée équatoriale (la);GQ;GNQ;226
 Eritrea;Érythrée (l');ER;ERI;232
 Estonia;Estonie (l');EE;EST;233
+Eswatini;Eswatini (l');SZ;SWZ;748
 Ethiopia;Éthiopie (l');ET;ETH;231
 Falkland Islands (the) [Malvinas];Falkland (les Îles)/Malouines (les Îles);FK;FLK;238
 Faroe Islands (the);Féroé (les Îles);FO;FRO;234
@@ -144,7 +145,7 @@ Mauritius;Maurice;MU;MUS;480
 Mayotte;Mayotte;YT;MYT;175
 Mexico;Mexique (le);MX;MEX;484
 Micronesia (Federated States of);Micronésie (États fédérés de);FM;FSM;583
-Moldova (the Republic of);Moldova , République de;MD;MDA;498
+Moldova (the Republic of);Moldova, République de;MD;MDA;498
 Monaco;Monaco;MC;MCO;492
 Mongolia;Mongolie (la);MN;MNG;496
 Montenegro;Monténégro (le);ME;MNE;499
@@ -212,7 +213,6 @@ Sri Lanka;Sri Lanka;LK;LKA;144
 Sudan (the);Soudan (le);SD;SDN;729
 Suriname;Suriname (le);SR;SUR;740
 Svalbard and Jan Mayen;Svalbard et l'Île Jan Mayen (le);SJ;SJM;744
-Swaziland;Swaziland (le);SZ;SWZ;748
 Sweden;Suède (la);SE;SWE;752
 Switzerland;Suisse (la);CH;CHE;756
 Syrian Arab Republic;République arabe syrienne (la);SY;SYR;760
