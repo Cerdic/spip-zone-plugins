@@ -132,32 +132,10 @@ function bulkmailer_sparkpost_webhook_dist($arg){
 
 	foreach($events as $e){
 		if (isset($e['msys']['track_event'])) {
-			$event = &$e['msys']['track_event'];
-			// array("open", "click", "bounce", "spam", "blocked");
-			$quoi = $event['type'];
-			if ($quoi == "open") {
-				$quoi = "read"; // open chez sparkpost, read ici
-			}
-			if ($quoi == "click") {
-				$quoi = "clic"; // click chez sparkpost, clic ici
-			}
-			if ($quoi == "bounce") {
-				$quoi = "soft_bounce"; // bounce chez sparkpost, soft_bounce ici
-			}
-			//if ($quoi=="blocked") $quoi="reject"; // blocked chez sparkpost, reject ici
-
-			$email = $event['rcpt_to'];
-			$tracking_id = $event['campaign_id'];
-			if ($tracking_id) {
-				$tracking_id = explode('/#', $tracking_id);
-				if (reset($tracking_id) == protocole_implicite($GLOBALS['meta']['adresse_site'])) {
-					$tracking_id = end($tracking_id);
-					spip_log("tracking $quoi $email $tracking_id", 'mailshot_feedback');
-					// appeler l'api webhook mailshot
-					$feedback = charger_fonction("feedback", "newsletter");
-					$feedback($quoi, $email, $tracking_id);
-				}
-			}
+			bulkmailer_sparkpost_webhook_track_event($e['msys']['track_event']);
+		}
+		if (isset($e['msys']['message_event'])) {
+			bulkmailer_sparkpost_webhook_message_event($e['msys']['message_event']);
 		}
 	}
 
@@ -166,6 +144,64 @@ function bulkmailer_sparkpost_webhook_dist($arg){
 
 }
 
+function bulkmailer_sparkpost_webhook_track_event($event) {
+	// array("open", "click", "bounce", "spam", "blocked");
+	$quoi = $event['type'];
+	if ($quoi == "open") {
+		$quoi = "read"; // open chez sparkpost, read ici
+	}
+	if ($quoi == "click") {
+		$quoi = "clic"; // click chez sparkpost, clic ici
+	}
+	if ($quoi == "bounce") {
+		$quoi = "soft_bounce"; // bounce chez sparkpost, soft_bounce ici
+		if (isset($event['bounce_class'])) {
+			switch ($event['bounce_class']) {
+				case "20":
+				case "21":
+				case "22":
+				case "23":
+				case "24":
+				case "25":
+				case "40":
+				case "60":
+				case "70":
+				case "100":
+					$quoi = "soft_bounce";
+					break;
+				default:
+					$quoi = "hard_bounce";
+					break;
+			}
+		}
+	}
+	if ($quoi == "out_of_band") {
+		$quoi = "soft_bounce";
+	}
+	if ($quoi == "spam_complaint") {
+		$quoi = "spam";
+	}
+	if ($quoi == "policy_rejection") {
+		$quoi = "reject";
+	}
+
+	$email = $event['rcpt_to'];
+	$tracking_id = $event['campaign_id'];
+	if ($tracking_id) {
+		$tracking_id = explode('/#', $tracking_id);
+		if (reset($tracking_id) == protocole_implicite($GLOBALS['meta']['adresse_site'])) {
+			$tracking_id = end($tracking_id);
+			spip_log("tracking $quoi $email $tracking_id", 'mailshot_feedback');
+			// appeler l'api webhook mailshot
+			$feedback = charger_fonction("feedback", "newsletter");
+			$feedback($quoi, $email, $tracking_id);
+		}
+	}
+}
+
+function bulkmailer_sparkpost_webhook_message_event($event) {
+	return bulkmailer_sparkpost_webhook_track_event($event);
+}
 
 /**
  * Initialiser sparkpost : declarer un eventcallbackurl pour recuperer les retours sur bounce, reject, open, clic....
