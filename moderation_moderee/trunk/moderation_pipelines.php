@@ -4,11 +4,17 @@ include_spip('inc/session');
 function moderation_pre_edition($flux) {
 	if ($flux['args']['table']=='spip_forum'
 		AND $flux['args']['action']=='instituer' 
-		AND $flux["data"]["statut"]!="prive") {
+		AND
+		!in_array(
+			$flux["data"]["statut"], 
+			array("prive","privrac","privadm")
+		)
+	) {
 		// Pour publier direct les auteurs configurés par modération modérée
 		global $visiteur_session;
 		if ($visiteur_session){
 			if (lire_config("moderation/".$visiteur_session['statut']) == 'on') {
+				var_dump($flux["data"]);
 				$flux['data']['statut']='publie';
 			}
 		} 	
