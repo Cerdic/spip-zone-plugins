@@ -35,10 +35,18 @@ function encarts_affiche_milieu($flux) {
 	include_spip('inc/config');
 	$texte = "";
 	$e = trouver_objet_exec($flux['args']['exec']);
+	$tables_objets = lire_config('encarts/objets');
+	/**
+	 * On traite ici le cas où il n'y a qu'un seul objet sélectionné.
+	 * lire_config retournera un string s'il ne rencontre pas un format non sérialisé.
+	 * Or, nous avons besoin d'un tableau.
+	 */
+	if (is_string($tables_objets)) {
+		$tables_objets = explode(',', $tables_objets);
+	}
 
 	// encarts sur les objets configurés
 	if (!$e['edition']
-		and $tables_objets = lire_config('encarts/objets')
 		and is_array($tables_objets)
 		and in_array(table_objet_sql($e['type']), $tables_objets)
 	) {
