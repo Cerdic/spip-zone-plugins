@@ -71,6 +71,12 @@ function grigri_editer_contenu_objet($flux) {
 	include_spip('inc/config');
 	include_spip('inc/autoriser');
 	$objets = tables_grigri();
+	
+	// config public/privé: faut il afficher la boite d'édition ?
+	if (test_espace_prive() AND (lire_config('grigri/grigri_prive') == 'non'))
+		return $flux;
+	if (!test_espace_prive() AND (lire_config('grigri/grigri_public') == 'non'))
+		return $flux;
 
 	// Identifiants sur les objets activés
 	if (
@@ -98,13 +104,13 @@ function grigri_editer_contenu_objet($flux) {
 		$cherche_extra = '%(<!--extra-->)%is';
 
 		if (preg_match($cherche_titre, $flux['data'])){
-			$flux['data'] = preg_replace($cherche_titre, '$1'.$saisie.'$2', $flux['data']);
+			$flux['data'] = preg_replace($cherche_titre, '$1'.$saisie.'$2', $flux['data'], 1);
 		} elseif (preg_match($cherche_1er_champ, $flux['data'])){
-			$flux['data'] = preg_replace($cherche_1er_champ, '$1'.$saisie.'$2', $flux['data']);
+			$flux['data'] = preg_replace($cherche_1er_champ, '$1'.$saisie.'$2', $flux['data'], 1);
 		} elseif (preg_match($cherche_extra, $flux['data'])){
 			$balise = (floatval(spip_version()) >= 3.1 ? 'div' : 'ul');
 			$remplace_extra = "<$balise class='editer-groupe grigri'>$saisie</$balise>\n" . '$1';
-			$flux['data'] = preg_replace($cherche_extra, $remplace_extra, $flux['data']);
+			$flux['data'] = preg_replace($cherche_extra, $remplace_extra, $flux['data'], 1);
 		}
 
 	}
@@ -116,7 +122,7 @@ function grigri_editer_contenu_objet($flux) {
 /**
  * Ajouter du contenu dans la boîte infos d'un objet
  *
- * - Afficher l'grigri sous le n° de l'objet pour les objets configurés
+ * - Afficher le grigri sous le n° de l'objet pour les objets configurés
  *
  * @pipeline boite_info
  * @param array $flux Données du pipeline
@@ -137,7 +143,7 @@ function grigri_boite_infos($flux) {
 		and autoriser('voir', 'grigri')
 	) {
 
-		// récupérer la valeur de l'grigri
+		// récupérer la valeur du grigri
 		$grigri = sql_getfetsel('grigri', $table_objet_sql, "$id=" .intval($id_objet) );
 
 		// récupérer le squelette

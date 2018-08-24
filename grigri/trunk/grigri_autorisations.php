@@ -21,7 +21,7 @@ function grigri_autoriser() {
 
 
 /**
- * Autorisation à voir les grigri.
+ * Autorisation de voir les grigri.
  *
  * Uniquement les webmestres.
  *
@@ -39,7 +39,7 @@ function autoriser_grigri_voir_dist($faire, $type, $id, $qui, $opts) {
 
 
 /**
- * Autorisation à modifier les grigri.
+ * Autorisation de modifier les grigri.
  *
  * Uniquement les webmestres.
  *
@@ -54,3 +54,14 @@ function autoriser_grigri_modifier_dist($faire, $type, $id, $qui, $opts) {
 	$autoriser = autoriser('webmestre', '', '', $qui);
 	return $autoriser;
 }
+
+/*
+ * Autorisation de configurer le plugin grigri
+ * 
+ * uniquement les webmestres
+ */
+function autoriser_grigri_configurer_dist($faire, $type, $id, $qui, $opts) {
+	$autoriser = autoriser('webmestre', '', '', $qui);
+	return $autoriser;
+}
+

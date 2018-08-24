@@ -1,11 +1,11 @@
 <paquet
 	prefix="grigri"
 	categorie="divers"
-	version="1.0.2"
+	version="1.0.3"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/grigri.png"
-	schema="1.0.2"
+	schema="1.0.3"
 >
 
 	<nom>Grigri</nom>

@@ -33,6 +33,13 @@ function grigri_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['1.0.2'] = array(
 		array('maj_tables', array('spip_auteurs', 'spip_articles', 'spip_rubriques', 'spip_documents', 'spip_mots', 'spip_groupes_mots')),
 	);
+	
+	$maj['1.0.3'] = array(
+		array(ecrire_config('grigri/grigri_public','oui'),
+			ecrire_config('grigri/grigri_prive','oui'),
+		),
+	);
+	
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

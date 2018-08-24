@@ -1,0 +1,47 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:grigri:configuration_base:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<fieldset>
+			<legend><:grigri:afficher_public_prive:></legend>
+			<ul class="editer-groupe">
+				<li class="editer editer_grigri_prive [ (#ENV**{erreurs}|table_valeur{grigri_prive}|oui)erreur]">
+					<label><:grigri:squelettes_prives:></label>
+					<p class="explication"><:grigri:explication_squelettes_prives:></p>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{grigri_prive})</span>]
+					<div class="choix">
+						<input type="radio" name="grigri_prive" class="radio" value="oui" id="grigri_prive_oui"[(#ENV{grigri_prive,'non'}|=={oui}|oui)checked="checked"]/>
+						<label for="grigri_prive_oui"><:oui:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="grigri_prive" class="radio" value="non" id="grigri_prive_non"[(#ENV{grigri_prive,'non'}|=={non}|oui)checked="checked"]/>
+						<label for="grigri_prive_non"><:non:></label>
+					</div>
+				</li>
+				<li class="editer editer_grigri_public [ (#ENV**{erreurs}|table_valeur{grigri_public}|oui)erreur]">
+					<label><:grigri:squelettes_publics:></label>
+					<p class="explication"><:grigri:explication_squelettes_publics:></p>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{grigri_public})</span>]
+					<div class="choix">
+						<input type="radio" name="grigri_public" class="radio" value="oui" id="grigri_public_oui"[(#ENV{grigri_public,'non'}|=={oui}|oui)checked="checked"]/>
+						<label for="grigri_public_oui"><:oui:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="grigri_public" class="radio" value="non" id="grigri_public_non"[(#ENV{grigri_public,'non'}|=={non}|oui)checked="checked"]/>
+						<label for="grigri_public_non"><:non:></label>
+					</div>
+				</li>
+			</ul>
+		</fieldset>
+
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>
