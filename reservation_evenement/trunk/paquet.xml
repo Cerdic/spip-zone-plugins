@@ -29,7 +29,7 @@
 	<pipeline nom="reservation_evenement_objets_navigation" action='' />
 	<pipeline nom="reservation_evenement_objets_configuration" action='' />
 
-	<!-- Apelle les pipelines -->
+	<!-- Appelle les pipelines -->
 	<pipeline nom="autoriser" inclure="reservation_evenement_autorisations.php" />
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/reservation_evenement.php" />

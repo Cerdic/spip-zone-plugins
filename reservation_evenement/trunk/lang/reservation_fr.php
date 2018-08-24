@@ -149,7 +149,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'recapitulatif' => 'Récapitulatif de la réservation :',
 	'remerciement' => 'Nous vous remercions pour votre inscription<br/>Cordialement',
-	'reservation_client' => 'Client',
 	'reservation_date' => 'Date :',
 	'reservation_de' => 'Réservation de',
 	'reservation_enregistre' => 'Votre inscription a bien été enregistrée. Vous recevrez un email de confirmation. Si aucun mail ne vous est parvenu, vérifiez dans votre dossier spam.',
