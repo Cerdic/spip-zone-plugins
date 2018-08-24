@@ -69,7 +69,7 @@ function isocode_verifier_codes_spip() {
 		foreach ($GLOBALS['codes_langues'] as $_code => $_nom) {
 			$from = array('spip_iso639codes');
 			$select = array('*');
-			$codes_verifies[$_code] = array('nom_spip' => $_nom, 'type_code' => '', 'erreur' => false);
+			$codes_verifies[$_code] = array('nom_spip' => $_nom, 'type_code' => '', 'scope' => '', 'erreur' => false);
 			if (strlen($_code) == 2) {
 				// Si le code a une taille de 2 caractères on recherche de suite dans la table iso639codes
 				// un élément dont le code ISO639-1 est égal.
@@ -90,12 +90,14 @@ function isocode_verifier_codes_spip() {
 				if ($codes_iso) {
 					$codes_verifies[$_code] = array_merge($codes_verifies[$_code], $codes_iso);
 					$codes_verifies[$_code]['type_code'] = '639-3';
+					$where = array('macro_639_3=' . sql_quote($_code));
 				} else {
 					$where = array('code_639_5=' . sql_quote($_code));
 					$code_famille = sql_fetsel($select, array('spip_iso639families'), $where);
 					if ($code_famille) {
 						$codes_verifies[$_code] = array_merge($codes_verifies[$_code], $code_famille);
 						$codes_verifies[$_code]['type_code'] = '639-5';
+						$codes_verifies[$_code]['scope'] = 'F';
 					} else {
 						$codes_verifies[$_code]['erreur'] = true;
 					}

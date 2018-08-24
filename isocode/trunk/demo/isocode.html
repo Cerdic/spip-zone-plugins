@@ -24,24 +24,28 @@
 			<table class="spip">
 				<thead>
 					<tr>
+						<th>#</th>
 						<th>Code SPIP</th>
 						<th>Nom SPIP</th>
 						<th>Code 639-1</th>
 						<th>Code 639-3</th>
 						<th>Code 639-5</th>
 						<th>Nom référence EN</th>
+						<th>Scope</th>
 						<th>Hierarchie</th>
 					</tr>
 				</thead>
 				<tbody>
 			<BOUCLE_langues(DATA) {source table, #VAL|isocode_verifier_codes_spip} {par cle}>
 					<tr class="[row_(#COMPTEUR_BOUCLE|alterner{odd,even})]">
+						<td>#COMPTEUR_BOUCLE</td>
 						<td[ (#VALEUR{erreur}|oui)class="erreur"]>#CLE</td>
 						<td>#VALEUR{nom_spip}</td>
 						<td[ (#VALEUR{type_code}|=={639-1}|oui)class="code_ok"]>#VALEUR{code_639_1, ''}</td>
 						<td[ (#VALEUR{type_code}|=={639-3}|oui)class="code_ok"]>#VALEUR{code_639_3, ''}</td>
 						<td[ (#VALEUR{type_code}|=={639-5}|oui)class="code_ok"]>#VALEUR{code_639_5, ''}</td>
 						<td>#VALEUR{ref_name, #VALEUR{label_en, ''}}</td>
+						<td>#VALEUR{scope, ''}</td>
 						<td>#VALEUR{hierarchy, ''}</td>
 					</tr>
 			</BOUCLE_langues>
