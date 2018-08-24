@@ -16,7 +16,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bonjour' => 'Bonjour',
 
 	// C
-	'choix_precis' => 'Choix précis',
 	'complet' => 'Complet',
 	'cron_explication' => 'Pour tout événement ayant activé la clôture automatique. Quand l’événement de la résérvation est passé, la réservation sera automatiquement clôturée par le système. Si "clôturé" est choisis sous "Déclenchement", un email de clôture sera alors envoyé. Videz le cache afin que cela soit bien activé. ',
 	'cron_fieldset' => 'Clôture automatique',
@@ -41,9 +40,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		<div><b>"@statuts@"</b></div> provoquera l’envoi d’une notification !',
 	'explication_envoi_separe_detail' => 'Le changement de statut vers <div><strong>"@statuts@"</strong></div> provoquera l’envoi d’une notification !',
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Connectez-vous</a> si vous êtes déjà enregistré sur ce site',
-	'explication_nombre_evenements' => 'Le nombre nécessaire d’événements réservés  pour que la promotion s’applique.',
-	'explication_nombre_evenements_choix' => 'Si rien ou 0, ce nombre sera égal au nombre d’@objet_promotion@s choisis ci-haut',
-	'explication_objet_promotion' => 'Si définit au niveau article, seront compris tous les évenéments disponible por la réservation de cet article.',
 
 	// F
 	'formulaire_public' => 'Formulaire public',
@@ -53,9 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_reservation' => 'Créer une réservation',
 	'icone_modifier_client' => 'Modifier ce client',
 	'icone_modifier_reservation' => 'Modifier cette réservation',
-	'info_1_client' => 'Un client',
 	'info_1_reservation' => 'Une réservation',
-	'info_1_reservation_liee' => 'Une réservation liée',
 	'info_aucun_client' => 'Aucun client',
 	'info_aucun_reservation' => 'Aucune réservation',
 	'info_nb_clients' => '@nb@ clients',
@@ -74,27 +68,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_date' => 'Date :',
 	'label_date_paiement' => 'Date de paiement :',
 	'label_destinataires_supplementaires' => 'Destinataires supplémentaires :',
-	'label_donnees_auteur' => 'Données Auteur :',
 	'label_duree_vie_poubelle' => 'Durée de vie d’une réservation mise à la poubelle',
-	'label_effacer_poubelles_auto' => 'Effacer automatiquement les réservations mises à la poubelle',
 	'label_email' => 'Email :',
 	'label_email_reutilisable' => 'Permettre de réutiliser une adresse email :',
 	'label_enregistrement_inscrit' => 'Permettre au visiteur de s’enregistrer lors d’une réservation :',
 	'label_enregistrement_inscrit_obligatoire' => 'Rendre l’enregistrement obligatoire :',
 	'label_enregistrer' => 'Je veux m’enregistrer sur ce site :',
-	'label_id_auteur' => 'Id auteur :',
 	'label_inscription' => 'inscription :',
 	'label_lang' => 'Langue :',
-	'label_maj' => 'maj :',
 	'label_modifier_identifiants_personnels' => 'Modifier les identifiants personnels :',
 	'label_mot_passe' => 'Mot de passe :',
 	'label_mot_passe2' => 'Répétez le mot de passe :',
 	'label_nom' => 'Nom :',
-	'label_nombre_evenements' => 'Nombre de coincidences :',
-	'label_obets_choix' => 'Articles ou événements disponibles pour la promotion :',
-	'label_objet_article' => 'Choissisez les articles dont les événements seront disponibles pour la promotion :',
-	'label_objet_evenement' => 'Choissisez les les événements disponibles pour la promotion :',
-	'label_objet_promotion' => 'Définir sur quel niveau on applique la promotion :',
 	'label_objets_configuration' => 'Les panneaux disponibles :',
 	'label_objets_navigation' => 'Les éléments disponibles :',
 	'label_reference' => 'Référence :',
@@ -107,7 +92,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_statut_defaut' => 'Statut par défaut :',
 	'label_statuts_complet' => 'Le(s) Statut(s) complet(s) :',
 	'label_type_paiement' => 'Type de paiemement :',
-	'label_type_selection' => 'Type de sélection :',
 	'legend_donnees_auteur' => 'Les données du client',
 	'legend_donnees_reservation' => 'Les données de la réservation',
 	'legend_infos_generales' => 'Infos générales réservation',
@@ -121,7 +105,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mp_titre_reservation_details' => 'Détails de la réservation',
 
 	// N
-	'nom_reservation_multiples_evenements' => 'Réservation de plusieurs événements',
 	'notifications_activer_explication' => 'Envoyer par mail des notifications de réservation ?',
 	'notifications_activer_label' => 'Activer',
 	'notifications_cfg_titre' => 'Notifications',
@@ -171,13 +154,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reservation_de' => 'Réservation de',
 	'reservation_enregistre' => 'Votre inscription a bien été enregistrée. Vous recevrez un email de confirmation. Si aucun mail ne vous est parvenu, vérifiez dans votre dossier spam.',
 	'reservation_numero' => 'Réservation :',
-	'reservation_reference_numero' => 'Référence n° ',
 	'rubrique_reservation_explication' => 'Permet de restreindre l’application de ce plugin au/x zone/s définie/s',
 	'rubrique_reservation_label' => 'Définir une/des zones pour l’application de ce plugin',
 
 	// S
 	'selection_objets_configuration_explication' => 'si desactivé, tous les panneaux sont intégrés',
-	'simple' => 'Simple',
 	'statuts_complet_explication' => 'Les statuts du détails de résérvation pris en compte pour déterminer si l’événement est complet.',
 	'sujet_une_reservation_accepte' => 'Réservation confirmé sur @nom@',
 	'sujet_une_reservation_accepte_part' => 'Réservation partiellement confirmé sur @nom@',
@@ -187,7 +168,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sujet_votre_reservation_cloture' => '@nom@ : clôture de l’évènement',
 
 	// T
-	'texte_ajouter_reservation' => 'Ajouter une réservation',
 	'texte_changer_statut_reservation' => 'Cette réservation est :',
 	'texte_exporter' => 'exporter',
 	'texte_statut_accepte' => ' accepté',
@@ -198,14 +178,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_encours' => ' en cours',
 	'texte_statut_poubelle' => ' à la poubelle',
 	'texte_statut_refuse' => ' refusé',
-	'texte_voir' => 'voir',
-	'titre_client' => 'Client',
 	'titre_clients' => 'Clients',
 	'titre_envoi_separe' => 'Mode Envoi Séparé activé',
 	'titre_reservation' => 'Réservation',
 	'titre_reservations' => 'Réservations',
 	'total' => 'Total',
-	'type_lien' => 'Lié avec la réservation @reference@',
 
 	// U
 	'une_reservation_de' => 'Une réservation de : ',
