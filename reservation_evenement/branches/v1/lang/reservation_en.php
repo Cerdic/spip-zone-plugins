@@ -11,28 +11,31 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'affichage_par' => ' View by:',
+	'afficher_inscription_agenda_explication' => 'Registrations via the form of the plugin agenda ',
 	'ajouter_lien_reservation' => 'Add a booking',
 
 	// B
 	'bonjour' => 'Hello',
 
 	// C
-	'choix_precis' => 'Specific choices',
 	'complet' => 'full',
+	'cron_fieldset' => 'Automatic closure',
 	'cron_label' => 'Automatical closure of an event',
 
 	// D
 	'designation' => 'Description',
 	'details_reservation' => 'Booking details:',
+	'duree_vie_label' => 'Lifetime:',
 
 	// E
 	'erreur_email_utilise' => 'This email address is already in use, please log in using this email as login or take another email',
-	'erreur_pas_evenement' => 'There is currently no event open for booking', # MODIF
+	'erreur_pas_evenement' => 'There is currently no event open for booking',
 	'evenement_cloture' => 'Closed Event',
 	'evenement_ferme_inscription' => 'Registration closed</br> Click on "registration" to view the current offer.',
+	'explication_destinataires_supplementaires' => 'Alerts regarding this booking. A list of email addresses separated by comma.', # MODIF
 	'explication_enregistrement_inscrit' => 'Register as an author spip',
 	'explication_envoi_separe' => 'The modification of the status of a booking item towards
-    <div><strong>"@statuts@"</strong></div> will trigger the sending of an alert.', # MODIF
+    <div><strong>"@statuts@"</strong></div> will trigger the sending of an alert.',
 	'explication_envoi_separe_detail' => 'The status modification towards <div><strong>"@statuts@"</strong></div> will trigger the sending of a confirmation email!',
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Please log in</a> if you are already registered on this site',
 
@@ -44,9 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_reservation' => 'Create a booking',
 	'icone_modifier_client' => 'Modify this client',
 	'icone_modifier_reservation' => 'Modify this booking',
-	'info_1_client' => 'One client',
 	'info_1_reservation' => 'One booking',
-	'info_1_reservation_liee' => 'A linked reservation',
 	'info_aucun_client' => 'No client',
 	'info_aucun_reservation' => 'No booking',
 	'info_nb_clients' => '@nb@ clients',
@@ -63,13 +64,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_client' => 'Client:',
 	'label_date' => 'Date:',
 	'label_date_paiement' => 'Payment date:',
-	'label_donnees_auteur' => 'Information author:',
+	'label_destinataires_supplementaires' => 'Additional recipients:',
 	'label_email' => 'Email:',
 	'label_enregistrer' => 'I want to register on this site:',
-	'label_id_auteur' => 'Id auteur:',
 	'label_inscription' => 'registration:',
 	'label_lang' => 'Language:',
-	'label_maj' => 'Update:',
 	'label_modifier_identifiants_personnels' => 'Modify your personal identifiers:',
 	'label_mot_passe' => 'Password:',
 	'label_mot_passe2' => 'Repeat the password:',
@@ -80,6 +79,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_statut_defaut' => 'Default Status:',
 	'label_statuts_complet' => 'The "complete" status(es):',
 	'label_type_paiement' => 'Payment type:',
+	'legend_donnees_auteur' => 'Customer data',
+	'legend_donnees_reservation' => 'Booking data',
 	'legend_infos_generales' => 'Booking information',
 
 	// M
@@ -87,6 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_erreur' => 'Your input has errors!',
 	'message_evenement_cloture_vendeur' => 'The event @titre@ just ended. <br />The system has sent a closing message to @client@ - @email@.',
 	'montant' => 'Amount',
+	'mp_titre_reservation_details' => 'Booking item',
 
 	// N
 	'notifications_activer_explication' => 'Send email alerts of bookings?',
@@ -94,6 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_cfg_titre' => 'Alerts',
 	'notifications_client_explication' => 'Send the alerts to the customer?',
 	'notifications_client_label' => 'Client',
+	'notifications_destinataire_label' => 'Recipient',
 	'notifications_envoi_separe' => 'Activate the separate sending of confirmation mails for the status:',
 	'notifications_envoi_separe_explication' => 'Allows to to trigger the sending of confirmation mail for each Booking item separately.',
 	'notifications_expediteur_administrateur_label' => 'Select an administrator:',
@@ -127,15 +130,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'recapitulatif' => 'Booking summary:',
 	'remerciement' => 'Thank you for registering <br/> Regards',
-	'reservation_client' => 'Client',
 	'reservation_date' => 'Date:',
 	'reservation_de' => 'Booking from',
-	'reservation_enregistre' => 'Your Registration has been saved. You will receive a confirmation email. If not, check your spam folder.', # MODIF
+	'reservation_enregistre' => 'Your Registration has been saved. You will receive a confirmation email. If not, check your spam folder.',
 	'reservation_numero' => 'Booking:',
-	'reservation_reference_numero' => 'Reference Nr ',
 
 	// S
-	'simple' => 'Simple',
 	'statuts_complet_explication' => 'The status codes in the reservation details that are taken into consideration an event as complete.',
 	'sujet_une_reservation_accepte' => 'Confirmation of a booking on @nom@',
 	'sujet_une_reservation_accepte_part' => 'Booking partially confirmed on @nom@',
@@ -145,7 +145,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sujet_votre_reservation_cloture' => '@nom@: event closure',
 
 	// T
-	'texte_ajouter_reservation' => 'Add a booking',
 	'texte_changer_statut_reservation' => 'This booking is:',
 	'texte_exporter' => 'export',
 	'texte_statut_accepte' => 'accepted',
@@ -156,8 +155,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_encours' => 'ongoing',
 	'texte_statut_poubelle' => 'in the dustbin',
 	'texte_statut_refuse' => 'refused',
-	'texte_voir' => 'view',
-	'titre_client' => 'Client',
 	'titre_clients' => 'Clients',
 	'titre_envoi_separe' => '"Seperate Sending" modus activated',
 	'titre_reservation' => 'Booking',
