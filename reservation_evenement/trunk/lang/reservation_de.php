@@ -45,12 +45,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_date' => 'Datum:',
 	'label_date_paiement' => 'Bezahlungsdatum:',
-	'label_donnees_auteur' => 'Daten Autor :',
 	'label_email' => 'Email:',
 	'label_enregistrer' => 'Ich möchte mich auf dieser Seite registrieren:',
-	'label_id_auteur' => 'Id auteur',
 	'label_lang' => 'Sprache:',
-	'label_maj' => 'Aktualisierung:',
 	'label_mot_passe' => 'Passwort:',
 	'label_mot_passe2' => 'Wiederholen Sie das Passwort:',
 	'label_nom' => 'Name:',
@@ -104,12 +101,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'recapitulatif' => 'Zusammenfassung der Anmeldung:',
 	'remerciement' => 'Wir bedanken uns für Ihre Anmeldung<br/>Mit freundlichen Grüssen',
-	'reservation_client' => 'Reservant',
 	'reservation_date' => 'Datum:',
 	'reservation_de' => 'Anmeldung von',
 	'reservation_enregistre' => 'Ihre Anmeldung wurde registriert. Sie werden per Mail eine Bestätigung kriegen. Falls Sie keine erhalten, schauen Sie bitten in Ihrem SPAM Folder.', # MODIF
 	'reservation_numero' => 'Anmeldung:',
-	'reservation_reference_numero' => 'Referenznummer:',
 
 	// S
 	'sujet_une_reservation_accepte' => 'Bestätigung einer Anmeldung auf @nom@',
@@ -117,7 +112,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sujet_votre_reservation_accepte' => '@nom@ : Bestätigung Ihrer Anmeldung',
 
 	// T
-	'texte_ajouter_reservation' => 'Eine Anmeldung hinzufügen',
 	'texte_changer_statut_reservation' => 'Diese Anmeldung ist:',
 	'texte_exporter' => 'exportieren',
 	'texte_statut_accepte' => 'akzeptiert',
@@ -127,8 +121,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_encours' => 'laufend',
 	'texte_statut_poubelle' => 'im Abfalleimer',
 	'texte_statut_refuse' => 'abgelehnt',
-	'texte_voir' => 'einsehen',
-	'titre_client' => 'Kunde',
 	'titre_envoi_separe' => 'Modus "Einzeln Verschicken" aktiviert',
 	'titre_reservation' => 'Anmeldung',
 	'titre_reservations' => 'Anmeldungen',

@@ -52,7 +52,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reservation_date' => 'Datum :',
 	'reservation_enregistre' => 'Uw inschrijving werd geregistreerd. U zal binnenkort een email ontvangen ter bevestiging van uw inschrijving. Indien u geen email ontvangt, gelieve uw spam-folder te controleren. ',
 	'reservation_numero' => 'Boeking :',
-	'reservation_reference_numero' => 'Referentie nr.',
 
 	// S
 	'sujet_une_reservation_accepte' => 'Inschrijving bevestigd op @nom@',
