@@ -12,7 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_label_css'	=> 'Insertion des styles',
 	'cfg_explication_css'	=> 'Les styles seront inssérés dans l\'entête de toutes les pages',
 	'cfg_titre_page_configurer_owlcarousel'	=> 'OwlCarousel',
-
+	'cfg_label_header_prive'	=> 'Insertion dans l\'espace privé de spip',
+	'cfg_explication_header_prive'	=> 'Les styles et javascript seront inssérés dans l\'entête de l\'espace privé de spip',
 	'cfg_titre_parametrages' => 'Configurer OwlCarousel',
 
 	// P

@@ -14,18 +14,23 @@ function owlcarousel_insert_head_css($flux){
         $flux.='<link rel="stylesheet" type="text/css" href="'.find_in_path('css/owl.carousel.css').'" media="screen" />'."\n";
         $flux.='<link rel="stylesheet" type="text/css" href="'.find_in_path('css/owl.theme.css').'" media="screen" />'."\n";
     }
-
-    return $flux;    
+    return $flux;
 }
 
 function owlcarousel_insert_head($flux){
-    
      $flux.='<script src="'.find_in_path('javascript/owl.carousel.js').'" type="text/javascript"></script>'."\n";
-     
-     return $flux; 
+     return $flux;
 }
 
-
+function owlcarousel_header_prive($flux){
+  include_spip('inc/config');
+  if(lire_config('owlcarousel/header_prive', 0)){
+    $flux.='<link rel="stylesheet" type="text/css" href="'.find_in_path('css/owl.carousel.css').'" media="screen" />'."\n";
+    $flux.='<link rel="stylesheet" type="text/css" href="'.find_in_path('css/owl.theme.css').'" media="screen" />'."\n";
+    $flux = owlcarousel_insert_head($flux);
+  }
+  return $flux;
+}
 
 /**
  * ieconfig
@@ -37,4 +42,3 @@ function owlcarousel_ieconfig_metas($table){
     $table['owlcarousel']['metas_serialize'] = 'owlcarousel';
     return $table;
 }
-
