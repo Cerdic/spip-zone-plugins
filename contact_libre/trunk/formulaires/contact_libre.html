@@ -29,23 +29,20 @@
 				label=<:entree_adresse_email:>,
 				size=30,
 				obligatoire=oui,
-				info_obligatoire="",
-				placeholder=[(#HTML5|?{<:entree_adresse_email:>,""})]})]
+				info_obligatoire=""})]
 			[(#SAISIE{input,sujet_message,
 				id=sujet_message#ENV{id},
 				label=<:form_prop_sujet:>,
 				size=30,
 				obligatoire=oui,
-				info_obligatoire="",
-				placeholder=[(#HTML5|?{<:form_prop_sujet:>,""})]})]
+				info_obligatoire=""})]
 			[(#SAISIE{textarea,texte_message,
 				id=texte_message#ENV{id},
 				label=<:info_texte_message:>,
 				rows=8,
 				cols=60,
 				obligatoire=oui,
-				info_obligatoire="",
-				placeholder=[(#HTML5|?{<:info_texte_message:>,""})]})]
+				info_obligatoire=""})]
 		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 	</fieldset>
 	[(#REM) Piege a robots spammeurs ]
