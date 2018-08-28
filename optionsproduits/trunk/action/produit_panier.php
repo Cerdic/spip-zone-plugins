@@ -22,7 +22,7 @@ function action_produit_panier_dist() {
 		}
 	}
 	// On concatène pour passer les options à l'action remplir_panier.
-	$options = join('|',$options);
+	$options = join('|',array_filter($options));
 
 	if($id_objet = _request('id_produit')) {
 		$id_objet= intval(_request('id_produit'));

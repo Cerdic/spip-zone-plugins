@@ -1,16 +1,16 @@
 # Gérer des options sur des produits
 
-## v1.3.0 ##
 
-Les options peuvent être associées à tous les objets éditoriaux, pas uniquement les produits.
+## v1.3.2 ##
+
+Les options peuvent être associées à tous les objets éditoriaux, pas uniquement aux produits.
 L'association se fait dans la configuration du plugin (liste des objets à cocher).
 Les plugins produits et prix deviennent donc optionnels.
-
 Pour gérer des options sur un objet patate, on pourra par exemple ajouter un champ prix (et taxe) dans la définition de l'objet patate.
 
-Et si on utilise le plugin Panier, comme on ne sait pas boucler sur une table de façon dynamique on pourra créer un formulaire/panier_patate_options.htm et .php en copiant/adaptant celui des produits (panier_produit_options).
+Un formulaire générique permet d'ajouter un objet et ses options au panier.
+Exemple : #FORMULAIRE_PANIER_OPTIONS{patate, #ID_PATATE} à utiliser dans une <boucle_(PATATES)>
 
-On pourra ensuite utiliser #FORMULAIRE_PANIER_PATATE_OPTIONS{#ID_PATATE} 
  
 ## v1.0.0 ##
 
@@ -27,10 +27,6 @@ Un script JS mets à jour visuellement le prix TTC du produit en fonction des op
 
 Les options sont transmises aux paniers puis aux commandes.  
 La surcharge de formulaires/panier permet d'afficher le nom du produit avec toutes les options choisies.
-
-## Pour tester
-
-Pour afficher le formulaire de choix des options et d'ajout au panier, utiliser #FORMULAIRE_PANIER_PRODUIT_OPTIONS{#ID_PRODUIT} dans le contexte d'un produit.
 
 ## Notes techniques
 

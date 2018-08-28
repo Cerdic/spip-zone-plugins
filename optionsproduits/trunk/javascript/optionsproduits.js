@@ -4,9 +4,9 @@ jQuery(function(){
 	if($('.js-achat-form').length) {
 		function updatePrixOptionObjet() {
 			// calculer le prix du objet + des options
-			var prixObjet = parseFloat($('.js-achat-form input[name=prix_objet]').val());
-			$('.js-achat-form .editer_options_objet input[type=radio]:checked').each(function(){
-				prixObjet += parseFloat($(this).data('prixoption'));
+			var prixObjet = parseFloat($('.js-achat-form input[name=prix_objet]').val())||0;
+            $('.js-achat-form .editer_options_objet input[type=radio]:checked').each(function(){
+				prixObjet += parseFloat($(this).data('prixoption'))||0;
 				console.log(parseFloat($(this).data('prixoption')));
 			});
 			// formater

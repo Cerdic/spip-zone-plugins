@@ -6,7 +6,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /*
- * Permet d'obtenir le prix HT d'un objet SPIP. C'est le résultat de cette fonction qui est utilisée pour calculer le prix TTC.
+ * Permet d'obtenir le prix HT d'un objet SPIP avec une option
+ * C'est le résultat de cette fonction qui est utilisée pour calculer le prix TTC.
  *
  * @param string $type_objet Le type de l'objet
  * @param int $id_objet L'identifiant de l'objet
@@ -60,7 +61,7 @@ function inc_prix_option_ht_dist($type_objet, $id_objet, $id_option, $arrondi = 
 }
 
 /*
- * Permet d'obtenir le prix final TTC d'un objet SPIP quel qu'il soit.
+ * Permet d'obtenir le prix final TTC d'un objet SPIP avec une option
  *
  * @param string $type_objet Le type de l'objet
  * @param int $id_objet L'identifiant de l'objet

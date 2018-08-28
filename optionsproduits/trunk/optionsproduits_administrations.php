@@ -29,16 +29,18 @@ function optionsproduits_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['create'] = array(
 
 		// créer les tables des options
-		array('maj_tables', array('spip_options', 'spip_options_liens', 'spip_optionsgroupes')),
+		array(
+			'maj_tables',
+			array(
+				'spip_options',
+				'spip_options_liens',
+				'spip_optionsgroupes',
+			),
+		),
 
-		// ajouter un champ pour les options dans les lignes du panier et des commandes
-		array('sql_alter', 'TABLE spip_paniers_liens ADD options VARCHAR(100) NOT NULL DEFAULT ""'),
-		array('sql_alter', 'TABLE spip_commandes_details ADD options VARCHAR(100) NOT NULL DEFAULT ""'),
-
-		// recréer la clé du panier avec les options
-		array('sql_alter', 'TABLE `spip_paniers_liens` DROP PRIMARY KEY'),
-		array('sql_alter', 'TABLE `spip_paniers_liens` ADD PRIMARY KEY (`id_panier`, `id_objet`, `objet`, `options`)',),
-
+		// ajouter le champ options dans les tables des plugins Panier et Commande
+		array('optionsproduits_alter_paniers_commandes'),
+		
 		// ajouter les options et groupes à la config des objets géré par Rang
 		array('optionsproduits_configure_rang'),
 	);
@@ -72,8 +74,8 @@ function optionsproduits_vider_tables($nom_meta_base_version) {
 	effacer_meta($nom_meta_base_version);
 
 	// Retirer les options et groupes d'options dans la liste des objets géré par le plugin Rang
-	$tables         = lire_config('rang/rang_objets');
-	$tables         = explode(',', $tables);
+	$tables = lire_config('rang/rang_objets');
+	$tables = explode(',', $tables);
 	unset($tables['spip_options']);
 	unset($tables['spip_optionsgroupes']);
 	ecrire_config('rang/rang_objets', implode(',', $tables));
@@ -85,14 +87,41 @@ function optionsproduits_vider_tables($nom_meta_base_version) {
  * @return void
  **/
 function optionsproduits_configure_rang() {
-	$tables         = lire_config('rang/rang_objets');
-	$tables         = explode(',', $tables);
+	$tables = lire_config('rang/rang_objets');
+	$tables = explode(',', $tables);
 	$tables_options = array(
 		'spip_options',
 		'spip_optionsgroupes',
 	);
-	$tables         = array_unique(array_merge($tables, $tables_options));
+	$tables = array_unique(array_merge($tables, $tables_options));
 	ecrire_config('rang/rang_objets', implode(',', $tables));
 	// créer les champs 'rang' dans les tables
 	rang_creer_champs($tables_options);
+}
+
+/**
+ * Ajouter le champ options dans les tables des plugins Panier et Commande
+ *
+ * @return void
+ **/
+function optionsproduits_alter_paniers_commandes() {
+
+	// TODO : problème si on installe les plugins Panier ou Commande après ce plugin,
+	// les champs ne seront pas créés ni la clé réécrite...
+	// faudrait pouvoir checker ça avec un pipeline post installation de plugin
+	// je sais pas comment faire pour l'instant sans faire le gros bourrin
+	
+	if(test_plugin_actif('paniers')) {
+		// ajouter un champ pour les options dans les lignes du panier
+		sql_alter('TABLE spip_paniers_liens ADD options VARCHAR(100) NOT NULL DEFAULT ""');
+		// recréer la clé du panier avec les options
+		sql_alter('TABLE `spip_paniers_liens` DROP PRIMARY KEY');
+		sql_alter('TABLE `spip_paniers_liens` ADD PRIMARY KEY (`id_panier`, `id_objet`, `objet`, `options`)');		
+   }
+   
+	if(test_plugin_actif('commandes')) {
+		// ajouter un champ pour les options dans les lignes des commandes
+		sql_alter('TABLE spip_commandes_details ADD options VARCHAR(100) NOT NULL DEFAULT ""');
+	}
+
 } 
