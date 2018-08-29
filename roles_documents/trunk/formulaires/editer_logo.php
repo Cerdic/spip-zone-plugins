@@ -84,7 +84,7 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 				break;
 		}
 
-		$options['titre'] = $img . $libelle;
+		$options['titre'] = $libelle;
 	}
 
 	// Chercher les logos
