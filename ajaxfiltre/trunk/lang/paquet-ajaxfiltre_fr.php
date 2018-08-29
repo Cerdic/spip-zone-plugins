@@ -11,10 +11,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		'ajaxfiltre_description' => 'Ce plugin permet de créer des filtres de recherche multiples dans la colonne de gauche (navigation), qui rechargent une liste d\'objets en ajax.
 
 Fonctionne avec n\'importe quelle liste d\'objets.
-Il suffit d\'ajouter le nom {liste-objets} au paramètre ajax dans {prive/squelettes/contenu/pataes.html}, 
+Il suffit d\'ajouter le nom {liste-objets} au paramètre ajax dans {prive/squelettes/contenu/patates.html}, 
 et de créer un squelette {prive/squelettes/navigation/patates.html} dans lequel on peut utiliser des saisies.
 
-Voir {{[la page de démo->?exec=ajaxfiltre_articles]}} et ces trois squelettes documentés :
+Voir {{[la page de démo->?exec=ajaxfiltre_articles]}} et ses trois squelettes documentés :
 -* /ajaxfiltre/prive/objets/liste/ajaxfiltre_articles.html
 -* /ajaxfiltre/prive/squelettes/contenu/ajaxfiltre_articles.html
 -* /ajaxfiltre/prive/squelettes/navigation/ajaxfiltre_articles.html',
