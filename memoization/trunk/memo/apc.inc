@@ -62,12 +62,18 @@ class MCacheBackend_apc extends MCacheBackend {
 	function size() {
 		if (!class_exists('APCIterator'))
 			return false;
-		$a = new APCIterator('user');
+		$a = new APCIterator('user', '/^'.preg_quote(_CACHE_NAMESPACE).'/', APC_ITER_ALL, 256*256);
 		return $a->getTotalSize ();
 	}
 
 	function purge() {
-		return apc_clear_cache('user');
+		if (!class_exists('APCIterator'))
+			return false;
+		$a = new APCIterator('user', '/^'.preg_quote(_CACHE_NAMESPACE).'/', APC_ITER_ALL, 256*256);
+		foreach ($a as $cache) {
+			apc_delete($cache['key']);
+		}
+		return true;
 	}
 
 }
