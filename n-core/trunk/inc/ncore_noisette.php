@@ -474,8 +474,8 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
  *        Tableau descriptif du conteneur ou identifiant du conteneur ou vide si on souhaite adresser tous les
  *        conteneurs.
  * @param string $cle
- *        Champ de la description d'une noisette servant d'index du tableau. En général on utilisera soit `id_noisette`
- *        soit `rang`.
+ *        Champ de la description d'une noisette servant d'index du tableau. On utilisera soit `id_noisette`
+ *        soit `rang_noisette` (défaut).
  * @param array  $filtres
  *        Tableau associatif `[champ] = valeur` de critères de filtres sur les descriptions de types de noisette.
  *        Le seul opérateur possible est l'égalité.
@@ -491,20 +491,20 @@ function noisette_deplacer($plugin, $noisette, $rang_destination, $stockage = ''
 function noisette_repertorier($plugin, $conteneur = array(), $cle = 'rang_noisette', $filtres = array(), $stockage = '') {
 
 	// On indexe le tableau des noisettes par le plugin appelant en cas d'appel sur le même hit
-	// par deux plugins différents.
+	// par deux plugins différents et aussi par la clé d'indexation.
 	static $noisettes = array();
 
-	if (!isset($noisettes[$plugin])) {
+	if (!isset($noisettes[$plugin][$cle])) {
 		// On charge l'API de N-Core.
 		// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
 		include_spip("ncore/ncore");
 
 		// On récupère la description complète de tous les types de noisettes détectés par le plugin appelant
-		$noisettes[$plugin] = ncore_noisette_lister($plugin, $conteneur, '', $cle, $stockage);
+		$noisettes[$plugin][$cle] = ncore_noisette_lister($plugin, $conteneur, '', $cle, $stockage);
 	}
 
 	// Application des filtres éventuellement demandés en argument de la fonction
-	$noisettes_filtrees = $noisettes[$plugin];
+	$noisettes_filtrees = $noisettes[$plugin][$cle];
 	if ($filtres) {
 		foreach ($noisettes_filtrees as $_noisette => $_description) {
 			foreach ($filtres as $_critere => $_valeur) {
