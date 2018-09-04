@@ -139,5 +139,141 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'importer' => 'Importieren',
 	'info_parametres' => 'Der E-Mail des Administrators wird standardmäßig als Moderator bei der Erstellung einer E-Mail-Newsletter verwendet',
 	'infolettres' => 'Info-Briefe',
-	'informations' => 'Information'
+	'informations' => 'Information',
+	'inscription_deja_abonne_autre_mode' => 'Sie sind bereits in einem anderen Modus für den Newsletter « @lst_name@ » angemeldet. Die Änderung wird ausgeführt.',
+	'inscription_deja_abonne_meme_mode' => 'Sie sind bereits im selben Modus für den Newsletter « @lst_name@ » angemeldet. ',
+	'inscription_encours' => 'Ihre Anmeldeanfrage für den Newsletter @nom_lettre@ wird bearbeitet. Danke für Ihre Geduld.',
+	'inscription_mok' => 'Ihre Anmeldeanfrage für den Newsletter « @lst_name@ » ist an den Adminsitrator weitergeleitet worden. Sie werden über die Entscheidung informiert.',
+	'inscription_nok' => 'Die Anmeldung zu diesem Newsletter ist nicht möglich',
+	'inscription_ok' => 'Sie erhalten eine E-Mail zur Bestätigung Ihrer Anmedlung zum Newsletter « @lst_name@ ».',
+	'inscription_ok_multiple' => 'Sie erhalten eine Nachricht zur Bestätigung Ihrer Anmeldung für den Newsletter« @lst_name@ ».',
+	'inscription_validee' => 'Ihre Anmeldung zum Newsletter« @lst_name@ » ist vollzogen. Danke.',
+
+	// L
+	'label_contenu_html' => 'HTML Inhalt',
+	'label_contenu_text' => 'Text Inhalt',
+	'label_inscription_email' => 'Ihre E-Mail-Adresse:',
+	'label_inscription_lettres' => 'Wählen Sie die gewünschten Newlstter aus:',
+	'label_inscription_version' => 'Nachrichtentyp:',
+	'le_format_des_adresses_email_ne_semble_pas_bon' => 'Die E-Mail Adresse scheint ein falsches Format zu haben.',
+	'lettre_meme_nom' => 'Ein anderer Newsletter hat bereits diesen Namen',
+	'lettre_sans_nom' => 'Ein Newsletter muss einen Namen haben',
+	'lettres_information' => 'Newsletter',
+	'lettres_non_classees' => 'Nicht klassifizierte Newsletter',
+	'lire_en_ligne' => 'Die Nachricht auf der Website lesen',
+	'liste_abonnes' => 'Abonnentenliste',
+	'liste_lettres' => 'Liste der Newsletter',
+	'liste_lettres_aucune' => 'Sie haben noch keinen Newsletter angelegt.',
+	'liste_messages' => 'Nachrichten',
+
+	// M
+	'mail_info_desinscription_corps' => 'Nachricht des Plugins CleverMail der Site @nom_site@ ( @url_site@ ) :
+
+Abmeldung von @sub_email@ vom Newsletter « @lst_name@ »',
+	'mail_info_inscription_corps' => 'Nachricht vom Plugin CleverMail der Site @nom_site@ ( @url_site@ ) :
+
+Anmeldung von @sub_email@ für den Newsletter « @lst_name@ »',
+	'mail_info_inscription_sujet' => 'Anmeldung von @sub_email@',
+	'mail_inscription_multiple' => 'Guten Tag,
+
+Um Ihre Anmeldung für die folgenden Newsletter zu bestätigen:
+
+ @@NOM_COMPLET@@
+
+klicken Sie bitte auf folgenden Link:
+
+ @@URL_CONFIRMATION@@
+
+Danke',
+	'maj_inscription' => 'Geänderte Anmeldung',
+	'maj_inscriptions' => 'geänderte Anmeldungen',
+	'mauvais_affichage' => 'Wenn diese Nachricht nicht richtig angezeigt wird auf der Website lesen',
+	'mauvais_identifiant_lettre' => 'Ungültige ID für den Newsletter',
+	'message' => 'Nachricht',
+	'message_queue_attente' => 'Nachrichten in der Warteschleife',
+	'message_queue_envoye' => '@nb@ Nachrichten versendet',
+	'messages' => 'Nachrichten',
+	'messages_attentes' => 'Anstehende Nachrichten',
+	'messages_attentes_text' => 'Nachrichten in der Warteschleife zum Versenden',
+	'messages_cours_envoi' => 'Versendete Nachrichten',
+	'messages_cours_envoi_text' => 'Nachrichten die sich im Versand befinden',
+	'messages_envoyes' => 'Versendete Nachrichten',
+	'messages_envoyes_text' => 'Erfolgreich versendete Nachrichten',
+	'messages_queue_attente' => 'Ausstehende Nachrichten',
+	'messages_queue_envoye' => '@nb@ Nachrichten versendet',
+	'mod_closed' => 'Geschlossen',
+	'mod_email' => 'E-Mail',
+	'mod_explication' => 'Die unterschiedlichen Moderationsarten werden hier beschrieben',
+	'mod_explication_closed' => 'Geschlossen: niemand kann sich anmelden',
+	'mod_explication_email' => 'E-mail : Jeder kann sich anmelden, mit Bestätigungmail',
+	'mod_explication_mod' => 'Moderiert: Ein Moderator muss die Anmeldung bestätigen',
+	'mod_explication_open' => 'Offen: Jeder kann sich ohne Bestätigungsmail anmelden (nicht zu empfehlen)',
+	'mod_mod' => 'Moderiert',
+	'mod_open' => 'Offen',
+	'mode' => 'Modus',
+	'moderation' => 'Moderation der Anmeldungen',
+	'modifie' => 'Bearbeitet',
+	'modifier' => 'Bearbeiten',
+	'modifier_abonne' => 'Abonnent bearbeiten',
+	'modifier_message' => 'Nachricht bearbeiten',
+	'modifier_submit' => 'Bearbeiten',
+
+	// N
+	'n_nouveaux_abonnes' => 'Neue Abonnenten',
+	'nettoyer_abonnement' => 'Anmeldungen die seit mehr als einem Monat unbestätigt sind löschen',
+	'news1' => 'Neuigkeiten Nr. 1',
+	'news_depuis' => 'Neuigkeiten seit ',
+	'nom' => 'Name',
+	'nom_formulaire_clevermail' => 'Anmeldeformular für Mailinglisten',
+	'nombre_messages' => 'Anzahl der Nachrichten je Versand',
+	'nouveau_message' => 'Neue Nachrichten',
+	'nouveaux_abonnes_et' => ' und ',
+	'nouveaux_messages' => 'Neue Nachrichten',
+	'nouveaux_messages_text' => 'Nachrichten die noch nicht versendet wurden',
+
+	// P
+	'parametres' => 'Einstellungen',
+	'plusieurs_messages_en_attente' => '@nb@ wartend',
+	'plusieurs_messages_en_cours_envoi' => '@nb@ im Versand',
+	'plusieurs_messages_envoyes' => '@nb@ versendet',
+	'prefixer_messages' => 'Prefix',
+	'prefixer_messages_explication' => 'Name des Newsletter als Prefix im Betreff der Nachricht',
+	'procedure_termine' => 'Zum Beenden hier klicken',
+	'proprietes' => 'Eigenschaften',
+
+	// R
+	'resultats' => 'Ergebnisse',
+
+	// S
+	'selection_des_listes' => 'Listenauswahl',
+	'send_error' => 'Fehler beim Versenden der Bestätigungsmail, bitte versuchen Sie es noch einmal.',
+	'source_des_abonnes' => 'Abonnenten anzeigen',
+	'statistiques' => 'Statistik',
+	'sujet' => 'Betreff',
+	'sujet_mail_inscription_multiple' => 'Bestätigung Ihrer Anmeldung',
+	'sujet_mail_mod' => 'Moderation des Newsletters @nom_lettre@',
+	'sujet_message' => 'Betreff der Nachricht',
+	'sujet_vide' => 'Der Betreff darf nicht leer sein',
+	'supprimer' => 'Löschen',
+	'supprimer_abonne_base' => 'Abonnenten endgültig aus der Datenbank löschen',
+	'supprimer_abonnes' => 'Ausgewählte Abonnenten löschen',
+	'supprimer_confirmer' => 'Sind Sie sicher dass sie löschen wollen?',
+
+	// T
+	'tags_specifiques' => 'Spezifische Tags',
+
+	// U
+	'un_message_en_attente' => '1 wartend',
+	'un_message_en_cours_envoi' => '1 im Versand',
+	'un_message_envoye' => '1 versendet',
+	'url_templates' => 'URL der Vorlage',
+	'url_templates_explication' => 'Geben Sie die URL einer entfernten Vorlagedatei oder den Name eines lokalen SPIP-Skeletts ohne die Endeung .html an. CleverMail bietet als Standard <code>clevermail_nouveautes_html</code>.',
+
+	// V
+	'version_html' => 'HTML Version ',
+	'version_txt' => 'Textversion',
+	'version_txt_explication' => 'Wenn Sie dieses Feld nicht ausfüllen wird die Textversion automatisch aus der HTML-Version erstellt. CleverMail bietet das Standardskelett <code>clevermail_nouveautes_text</code>.',
+	'veuillez_corriger_votre_saisie' => 'Bitte korrigieren Sie diesen Eintrag',
+	'vous_devez_choisir_au_moins_une_liste' => 'Sie müssen mindestens einen Newsletter auswählen',
+	'vous_devez_choisir_un_fichier' => 'Sie müssen eine Datei auswählen...'
 );
