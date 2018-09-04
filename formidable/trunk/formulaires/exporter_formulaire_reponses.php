@@ -37,13 +37,24 @@ function formulaires_exporter_formulaire_reponses_traiter($id_formulaire = 0) {
 	$verifier(_request('date_debut'), 'date', array('normaliser' => 'datetime'), $date_debut);
 	$verifier(_request('date_fin'), 'date', array('normaliser' => 'datetime'), $date_fin);
 
+	$chemin = false;
+	$content_type = '';
+
 	if (_request('type_export') == 'csv') {
-		$ok = exporter_formulaires_reponses($id_formulaire, ',', $statut_reponses, $date_debut, $date_fin);
+		$chemin = exporter_formulaires_reponses($id_formulaire, ',', $statut_reponses, $date_debut, $date_fin);
+		if (pathinfo($chemin, PATHINFO_EXTENSION) === 'csv') {
+			$content_type = "text/comma-separated-values; charset=" . $GLOBALS['meta']['charset'];
+		}
 	} elseif (_request('type_export') == 'xls') {
-		$ok = exporter_formulaires_reponses($id_formulaire, 'TAB', $statut_reponses, $date_debut, $date_fin);
+		$chemin = exporter_formulaires_reponses($id_formulaire, 'TAB', $statut_reponses, $date_debut, $date_fin);
+		if (pathinfo($chemin, PATHINFO_EXTENSION) === 'xls') {
+			$content_type = "text/comma-separated-values; charset=iso-8859-1";
+		}
 	}
 
-	if (!$ok) {
+	if ($chemin) {
+		formidable_retourner_fichier($chemin, basename($chemin), $content_type);
+	} else {
 		$retours['editable']       = 1;
 		$retours['message_erreur'] = _T('formidable:info_aucune_reponse');
 	}
@@ -51,10 +62,17 @@ function formulaires_exporter_formulaire_reponses_traiter($id_formulaire = 0) {
 	return $retours;
 }
 
-/*
- * Exporter toutes les réponses d'un formulaire (anciennement action/exporter_formulaire_reponses)
+
+/**
+ * Exporter toutes les réponses d'un formulaire dans un fichier
+ *
  * @param integer $id_formulaire
- * @return unknown_type
+ * @param string $delim (Délimiteur ',' ou 'TAB')
+ * @param string $statut_reponses
+ * @param string $date_debut
+ * @param string $date_fin
+ *
+ * @return string|false Chemin du fichier d’export CSV, XLS ou ZIP
  */
 function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_reponses = 'publie', $date_debut = '', $date_fin = '') {
 	$exporter_csv = charger_fonction('exporter_csv', 'inc/', true);
@@ -72,22 +90,16 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 		return false;
 	}
 
+	$fichier_csv = $exporter_csv('reponses-formulaire-' . $formulaire['identifiant'], $reponses_completes, $delim, null, false);
+
 	// si pas de saisie fichiers, on envoie directement le csv
 	if (!count($saisies_fichiers)) {
-		$exporter_csv('reponses-formulaire-' . $formulaire['identifiant'], $reponses_completes, $delim);
-		exit;
-	} else {
-		$fichier_csv = $exporter_csv('reponses-formulaire-' . $formulaire['identifiant'], $reponses_completes, $delim, null, false);
-		$fichier_zip = sous_repertoire(_DIR_CACHE, 'export') . 'reponses-formulaire-' . $formulaire['identifiant'] . '.zip';
-		include_spip('inc/formidable_fichiers');
-		$fichier_zip = formidable_zipper_reponses_formulaire($formulaire['id_formulaire'], $fichier_zip, $fichier_csv, $saisies_fichiers);
-		// si erreur lors du zippage
-		if (!$fichier_zip) {
-			return false;
-		} else {
-			formidable_retourner_fichier($fichier_zip, basename($fichier_zip));
-		}
+		return $fichier_csv;
 	}
+
+	$fichier_zip = sous_repertoire(_DIR_CACHE, 'export') . 'reponses-formulaire-' . $formulaire['identifiant'] . '.zip';
+	include_spip('inc/formidable_fichiers');
+	return formidable_zipper_reponses_formulaire($formulaire['id_formulaire'], $fichier_zip, $fichier_csv, $saisies_fichiers);
 }
 
 

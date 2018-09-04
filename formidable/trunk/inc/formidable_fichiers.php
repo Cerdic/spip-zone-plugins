@@ -259,15 +259,18 @@ function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $mime
 /**
  * Fournit à l'utilisateur·trice un fichier qui se trouve normalement dans un endroit inaccessible,
  * par exemple dans config.
+ *
  * La fonction ne vérifie ni l'existence effective du fichier,
  * ni le droit effectif de l'utilisateur.
  * Ceci doit être fait dans l'action qui appelle cette fonction
+ *
  * @param string $chemin le chemin du fichier
  * @param string $f le nom du fichier qui sera envoyé à l'utilisateur·trice.
+ * @param string $content_type Si Connu, sinon calculé
  *
 **/
-function formidable_retourner_fichier($chemin, $f) {
-	header('Content-Type: '.mime_content_type($chemin));
+function formidable_retourner_fichier($chemin, $f, $content_type = '') {
+	header('Content-Type: ' . ($content_type ?: mime_content_type($chemin)));
 	header("Content-Disposition: attachment; filename=\"$f\";");
 	header('Content-Transfer-Encoding: binary');
 	// fix for IE catching or PHP bug issue (inspiré de plugins-dist/dump/action/telecharger_dump.php
@@ -445,12 +448,14 @@ function formidable_effacer_fichiers_email() {
 	}
 	return $dossiers_effaces;
 }
+
 /**
  * Génerer un zip des réponses d'un formulaire
+ *
  * @param int $id_formulaire  (identifiant numérique)
- * @param str $chemin_du_zip chemin complet du zip
- * @param str $fichier_csv un fichier csv à ajouter, contenant les réponses
- * @return str|int chemin complet du zip ou 0 si erreur lors de la création
+ * @param string $chemin_du_zip chemin complet du zip
+ * @param string $fichier_csv un fichier csv à ajouter, contenant les réponses
+ * @return string|int chemin complet du zip ou 0 si erreur lors de la création
 **/
 function formidable_zipper_reponses_formulaire($id_formulaire, $chemin_du_zip, $fichier_csv, $saisies_fichiers) {
 	include_spip('inc/pclzip');
