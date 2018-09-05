@@ -223,7 +223,7 @@ $tblIPTC_old = iptcparse($this -> h_iptcData);
 
 
 // On prélève le tableau contenant les codes et les valeurs des IPTC de la photo
-foreach ($this -> h_codesIptc as $codeIPTC => $codeLibIPTC) {
+foreach ($this -> h_codesIptc as $codeIPTC => $codeLibIPTC)
 {
 
 // On teste si les données originelles correspondant au code en cours sont présents
