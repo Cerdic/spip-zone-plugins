@@ -12,6 +12,16 @@
 				]
 				<input type="text" name="#GET{name}" value="[(#CONFIG{photoswipe/selecteur}|sinon{'img\[data-photo\], a\[type\]'}|attribut_html)]" class="text" />
 			</li>
+			#SET{name,galerie}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label>En galeries ?</label>
+				<div class="choix choix_[(#GET{name})]">[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]
+					<input type="checkbox" name="#GET{name}" id="#GET{name}"[(#CONFIG{photoswipe/galerie}|=={on}|oui) checked="checked"] class="radio" />
+					<label for="#GET{name}">Oui</label>
+				</div>
+			</li>
 			#SET{name,conteneur}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
 			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label>Classe du conteneur des galeries automomes</label>[

@@ -20,7 +20,6 @@ function photoswipe_insert_head($flux) {
 	else {
 		$selecteur = 'img[data-photo], a[type]';
 	}
-	
 	if ((include_spip('inc/config') or function_exists('lire_config')) and lire_config('photoswipe/conteneur')) {
 		$conteneurconf = addslashes(lire_config('photoswipe/conteneur'));
 		/*On évite les erreurs les plus courantes (plusieurs classes entrées dans les options ou id au lieu de classe).
@@ -33,6 +32,14 @@ function photoswipe_insert_head($flux) {
 	if(!isset($conteneur)){
 		$conteneur = '.photoswipe-cont';
 	}
+	$galerie = 'false';
+	if ((include_spip('inc/config') or function_exists('lire_config')) and lire_config('photoswipe/galerie')) {
+		$galerieon = lire_config('photoswipe/galerie');
+		if ( isset($galerieon) ) {
+			$galerie = 'true';
+		}
+	}
+	
 	
 	$flux = photoswipe_insert_head_css($flux); // au cas ou il n'est pas implemente
 
@@ -46,7 +53,7 @@ photoswipe = {
   path: "' . find_in_path('lib/photoswipe/'). '/",
   selector: "' . $selecteur . '",
   conteneur: "' . $conteneur . '",
-  gallery: true, // galerie
+  gallery: ' . $galerie . ', // galerie
   debug: false, // debug
 };
 </script>
