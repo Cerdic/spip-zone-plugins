@@ -163,8 +163,13 @@ function geshi_spip3_colorier($contenu) {
 	// rendre inertes les echappements de #[](){}<>
 	$i = 0;
 	while(false !== strpos($squelette, $inerte = '-INERTE'.$i)) $i++;
+
 	$squelette = preg_replace_callback(',\\\\([#[()\]{}<>]),',
-		create_function('$a', "return '$inerte-'.ord(\$a[1]).'-';"), $squelette, -1, $esc);
+		function($a) use ($inerte) {
+			return $inerte . '-' . ord($a[1]) . '-';
+		},
+		$squelette, -1, $esc
+	);
 
 
 	$phraser = charger_fonction('phraser_html', 'public');
@@ -177,11 +182,15 @@ function geshi_spip3_colorier($contenu) {
 
 	// restituer les echappements
 	if ($esc) {
-		$contenu = preg_replace_callback(",$inerte-(\d+)-,", create_function('$a', 'return "\\\\" . chr($a[1]);'), $contenu);
+		$contenu = preg_replace_callback(
+			",$inerte-(\d+)-,",
+			function($a) {
+				return "\\" . htmlspecialchars(chr($a[1]));
+			},
+			$contenu
+		);
 	}
 
 	return $contenu;
 }
 }
-
-?>

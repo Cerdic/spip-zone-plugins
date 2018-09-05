@@ -257,7 +257,11 @@ function spip2_geshi_regexp_echappements_echapper_callback($matches, $geshi) {
 	// normalement les < et > sont justement aussi echapes en &gt et &lt
 	// donc on ne cherche pas la capture de \< ou \>
 	$squelette = preg_replace_callback(',\\\\([#[()\]{}]|&gt;|&lt;),',
-		create_function('$a', "return '$inerte-'.ord(html_entity_decode(\$a[1])).'-';"), $squelette, -1, $esc);
+		function($a) use ($inerte) {
+			return $inerte . '-' . ord(html_entity_decode($a[1])) . '-';
+		},
+		$squelette, -1, $esc
+	);
 
 	return $squelette;
 }
@@ -275,13 +279,18 @@ function spip2_geshi_regexp_echappements_remettre_callback($matches, $geshi) {
 	$key = $geshi->_hmr_key;
 	// echappements avec \
 	$contenu = preg_replace_callback(",$inerte-(\d+)-,",
-		#create_function('$a', 'return "\\\\" . chr($a[1]);'), $contenu);
-		create_function('$a', 'return "<|!REG3XP'.$key.'!>\\\\" . htmlspecialchars(chr($a[1])) . "|>";'), $contenu);
+		function($a) use ($inerte, $key) {
+			return '<|!REG3XP' . $key . '!>\\' . htmlspecialchars(chr($a[1])) . '|>';
+		},
+		$contenu
+	);
 
 	// echappements de balise faits par une regexp de ce colorieur (regexp 4 à 7).
 	$contenu = preg_replace_callback(",$inerte=(\d+)=,",
-		#create_function('$a', 'return "\\\\" . chr($a[1]);'), $contenu);
-		create_function('$a', 'return chr($a[1]);'), $contenu);
+		function($a) use ($contenu) {
+			return chr($a[1]);
+		}, $contenu
+	);
 
 	return $contenu;
 }
@@ -643,5 +652,3 @@ $language_data = array (
 		5 => true,
 		)
 );
-
-?>
