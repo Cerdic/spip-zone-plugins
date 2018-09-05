@@ -8,5 +8,5 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
-	'prive_fluide_remix_titre' => 'Espace privé fluide - remix',
+	'prive_fluide_remix_titre' => 'Espace privé plus large',
 );
