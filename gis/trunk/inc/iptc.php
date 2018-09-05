@@ -75,7 +75,7 @@ DESCRIPTION DES PARAMETRES :
 FIN INFOS SUR LA FONCTION */
 
 
-function class_IPTC($cheminImg)
+function __construct($cheminImg)
 {
 
 // Inititalisations
@@ -157,14 +157,15 @@ function fct_lireIPTC()
 {
 	$tblIPTC = iptcparse($this -> h_iptcData);
 
-	while( (is_array($tblIPTC)) && (list($codeIPTC, $valeurIPTC) = each($tblIPTC)) )
-	{
+	if (!is_array($tblIPTC)) { 
+		return false;
+	}
+	foreach ($tblIPTC as $codeIPTC => $valeurIPTC) {
 		$codeIPTC = str_replace("2#", "", $codeIPTC);
 
 		if( ($codeIPTC != "000") && ($codeIPTC != "140")  && $this->h_codesIptc["$codeIPTC"])
 		{
-			while(list($index, ) = each($valeurIPTC))
-			{
+			foreach ($valeurIPTC as $index => $v) {
 				if ($this->h_codesIptc["$codeIPTC"]) $codeIPTC = $this->h_codesIptc["$codeIPTC"];
 				$lesIptc[$codeIPTC] .= $valeurIPTC[$index].$retourLigne;
 				$retourLigne = "\n";
@@ -222,7 +223,7 @@ $tblIPTC_old = iptcparse($this -> h_iptcData);
 
 
 // On prélève le tableau contenant les codes et les valeurs des IPTC de la photo
-while(list($codeIPTC, $codeLibIPTC) = each($this -> h_codesIptc))
+foreach ($this -> h_codesIptc as $codeIPTC => $codeLibIPTC) {
 {
 
 // On teste si les données originelles correspondant au code en cours sont présents
