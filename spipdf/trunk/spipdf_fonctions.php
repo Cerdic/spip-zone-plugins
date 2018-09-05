@@ -340,7 +340,17 @@ function spipdf_html2pdf($html, $file = false){
 		// http://mpdf1.com/manual/index.php?tid=307
 
 		// le chemin relatif vers mPDF
-		define('_MPDF_PATH', $dir_librairie_pdf);
+		if (!defined('_MPDF_PATH')) {
+			define('_MPDF_PATH', $dir_librairie_pdf);
+		}
+		// les fichiers tmp dans le tmp/ de spip
+		if (!defined('_MPDF_TEMP_PATH')) {
+			define("_MPDF_TEMP_PATH", sous_repertoire(_DIR_TMP, 'mpdf'));
+		}
+		if (!defined('_MPDF_TTFONTDATAPATH')) {
+			define('_MPDF_TTFONTDATAPATH', sous_repertoire(_DIR_CACHE, 'ttfontdata'));
+		}
+		
 		include_once _MPDF_PATH . 'mpdf.php';
 
 		// la classe mPDF
