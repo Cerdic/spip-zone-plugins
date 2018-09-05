@@ -440,26 +440,26 @@ function colonne_table($type, $col) {
 						$ret['long'] = $vir[0];
 					}
 					$sta = 1;
-					continue;
+					break;
 				}
 				if (!$sta) {
 					$sta = 1;
-					continue;
+					break;
 				}
 			case 2:
 				switch (strtolower($mot)) {
 					case 'not':
 						$sta = 3;
-						continue;
+						break;
 					case 'default':
 						$sta = 4;
-						continue;
+						break;
 				}
-				continue;
+				break;
 			case 3:
 				$ret['notnull'] = strtolower($mot) == 'null';
 				$sta = 2;
-				continue;
+				break;
 			case 4:
 				$df1 = strpos('"\'', $mot[0]) !== false? $mot[0] : '';
 				$sta = 5;
@@ -467,14 +467,14 @@ function colonne_table($type, $col) {
 				$ret['def'] .= $sep . $mot;
 				if (!$df1) {
 					$sta = 2;
-					continue;
+					break;
 				}
 				if ($df1 == $mot[strlen($mot) - 1]) {
 					$ret['def'] = substr($ret['def'], 1, -1);
 					$sta = 2;
 				}
 				$sep = ' ';
-				continue;
+				break;
 		}
 	}
 	return $ret;
