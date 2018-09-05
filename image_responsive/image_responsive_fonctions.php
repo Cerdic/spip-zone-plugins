@@ -359,7 +359,23 @@ function image_responsive($texte, $taille = -1, $lazy = 0, $vertical = 0, $media
 		if (strlen($texte) < 256 && file_exists($texte)) $texte = "<img src='$texte'>";
 		else return $texte;
 	}
-	return preg_replace_callback(",(<img\ [^>]*>),", create_function('$matches', 'return _image_responsive($matches[0],"' . $taille . '",' . $lazy . ',' . $vertical . ',"' . $medias . '","' . $proportions . '");'), $texte);
+	if (defined('PHP_VERSION_ID') and PHP_VERSION_ID > 50300) {
+		return preg_replace_callback(
+			",(<img\ [^>]*>),",
+			function($matches) use ($taille, $lazy, $vertical, $medias, $proportions) {
+				return _image_responsive($matches[0], $taille, $lazy, $vertical, $medias, $proportions);
+			},
+			$texte
+		);
+	} else {
+		return preg_replace_callback(
+			",(<img\ [^>]*>),",
+			create_function('$matches',
+				'return _image_responsive($matches[0],"' . $taille . '",' . $lazy . ',' . $vertical . ',"' . $medias . '","' . $proportions . '");'
+			),
+			$texte
+		);
+	}
 }
 
 
