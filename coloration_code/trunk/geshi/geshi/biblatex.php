@@ -2,16 +2,16 @@
 /********************************************************************************
  * bibtex.php
  * -----
- * Author: Maïeul Rouquette from 
+ * Author: Maïeul Rouquette from
  * Quinn Taylor (quinntaylor@mac.com)
  * Copyright: (c) 2009 Quinn Taylor (quinntaylor@mac.com), Nigel McNie (http://qbnz.com/highlighter)
- * Release Version: 1.1.0
+ * Release Version: 1.0.9.0
  * Date Started: 2009/04/29
  *
  * BibLaTeX language file for GeSHi.
  *
- * CHANGES 
- * 2015/12/29 (1.1.0) Regexp pour avoir les champs personnalisés de biblatex
+ * CHANGES
+ * 2015/12/29 (1.0.8.13) Biblatex parser
  * CHANGES
  * -------
  * 2009/04/29 (1.0.8.4)
@@ -83,7 +83,6 @@ $language_data = array (
             'contents','copyright','date-added','date-modified','doi','eprint',
             'isbn','issn','keywords','language','lccn','lib-congress',
             'location','price','rating','read','size','source','url',
-			""
             )
         ),
     'URLS' => array(
@@ -124,8 +123,8 @@ $language_data = array (
             1 => 'color: #2020C0;', // {...}
             2 => 'color: #C08020;',  // BibDesk fields
             3 => 'color: #800000;',   // LaTeX commands
-			4 => 'color: #C08020;', // Custom entry field (biblatex)
-			5 => 'color: #C02020;', // Custom entry types (biblatex)
+            4 => 'color: #C08020;', // Custom entry field (biblatex)
+            5 => 'color: #C02020;', // Custom entry types (biblatex)
             ),
         'ESCAPE_CHAR' => array(
             0 =>  'color: #000000; font-weight: bold;'
@@ -177,7 +176,7 @@ $language_data = array (
             GESHI_BEFORE => '',
             GESHI_AFTER => ''
             ),
-	),
+        ),
     'HIGHLIGHT_STRICT_BLOCK' => array(
         ),
     'OBJECT_SPLITTERS' => array(
@@ -198,6 +197,4 @@ $language_data = array (
                 ),
             )
         )
-);
-
-?>
+    );
