@@ -107,8 +107,8 @@ function bouq_declarer_tables_objets_sql($tables) {
 		'statut'=> array(
 			array(
 				'champ'     => 'statut',
-				'publie'    => 'publie',
-				'previsu'   => 'publie,prepa',
+				'publie'    => 'publie,refuse',
+				'previsu'   => 'prepa',
 				'post_date' => 'date',
 				'exception' => array('statut','tout')
 			)
