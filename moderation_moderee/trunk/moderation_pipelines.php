@@ -14,7 +14,6 @@ function moderation_pre_edition($flux) {
 		global $visiteur_session;
 		if ($visiteur_session){
 			if (lire_config("moderation/".$visiteur_session['statut']) == 'on') {
-				var_dump($flux["data"]);
 				$flux['data']['statut']='publie';
 			}
 		} 	
