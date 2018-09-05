@@ -82,7 +82,7 @@ class Aspell{
      *
      * @author   Andreas Gohr <andi@splitbrain.org>
      */
-    function Aspell($language, $jargon=null, $encoding='iso8859-1'){
+    function __construct($language, $jargon=null, $encoding='iso8859-1'){
         $this->language = $language;
         $this->jargon   = $jargon;
         $this->encoding = $encoding;
@@ -289,7 +289,7 @@ class Aspell{
     function suggest($word){
         if($this->runAspell("^$word",$out,$err)){
             //parse output
-            $lines = split("\n",$out);
+            $lines = str_split("\n",$out);
             foreach ($lines as $line){
                 $line = trim($line);
                 if(empty($line))    continue;       // empty line
@@ -298,7 +298,7 @@ class Aspell{
                 if($line[0] == '#') return array(); // mistake but no suggestions
                 if($line[0] == '&'){
                     $line = preg_replace('/&.*?: /','',$line);
-                    return split(', ',$line);
+                    return str_split(', ',$line);
                 }
             }
         }
