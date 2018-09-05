@@ -18,8 +18,10 @@
 				<div class="choix choix_[(#GET{name})]">[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]
-					<input type="checkbox" name="#GET{name}" id="#GET{name}"[(#CONFIG{photoswipe/galerie}|=={on}|oui) checked="checked"] class="radio" />
-					<label for="#GET{name}">Oui</label>
+					<input type="radio" name="#GET{name}" value="true" id="#GET{name}"[(#CONFIG{photoswipe/galerie}|=={false}|non) checked="checked"] class="radio" />
+					<label for="#GET{name}">Oui</label> /
+					<input type="radio" name="#GET{name}" value="false" id="#GET{name}"[(#CONFIG{photoswipe/galerie}|=={false}|oui) checked="checked"] class="radio" />
+					<label for="#GET{name}">Non</label>
 				</div>
 			</li>
 			#SET{name,conteneur}#SET{erreurs,#ENV**{erreurs/#GET{name}}}

@@ -32,14 +32,10 @@ function photoswipe_insert_head($flux) {
 	if(!isset($conteneur)){
 		$conteneur = '.photoswipe-cont';
 	}
-	$galerie = 'false';
+	$galerie = 'true';
 	if ((include_spip('inc/config') or function_exists('lire_config')) and lire_config('photoswipe/galerie')) {
-		$galerieon = lire_config('photoswipe/galerie');
-		if ( isset($galerieon) ) {
-			$galerie = 'true';
-		}
+		$galerie = lire_config('photoswipe/galerie');
 	}
-	
 	
 	$flux = photoswipe_insert_head_css($flux); // au cas ou il n'est pas implemente
 
