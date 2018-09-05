@@ -18,4 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	{{Attention : ce plugin nécessite PHP5 !}}',
 	'htmlpurifier_slogan' => 'Sécuriser l\'affichage de certains textes',
 );
-?>
