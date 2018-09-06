@@ -13,7 +13,12 @@ function formulaires_configurer_menus_saisies_dist() {
 	$entrees = menus_lister_disponibles();
 
 	// Trier les entrées par rang
-	uasort($entrees, create_function('$a, $b', '$a = $a["rang"]; $b = $b["rang"]; return ($a==$b)?0:($a<$b?-1:1);'));
+	uasort($entrees, function($a, $b) {
+		$a = $a["rang"];
+		$b = $b["rang"];
+		#return $a <=> $b; // PHP 7
+		return ($a==$b) ? 0 : ($a < $b ? -1 : 1);
+	});
 
 	// Remplir la liste des cases
 	$data = array();
