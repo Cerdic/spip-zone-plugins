@@ -116,7 +116,7 @@ class Markdownify {
    *             defaults to true (HTML will be kept)
    * @return void
    */
-  function Markdownify($linksAfterEachParagraph = MDFY_LINKS_EACH_PARAGRAPH, $bodyWidth = MDFY_BODYWIDTH, $keepHTML = MDFY_KEEPHTML) {
+  function __construct($linksAfterEachParagraph = MDFY_LINKS_EACH_PARAGRAPH, $bodyWidth = MDFY_BODYWIDTH, $keepHTML = MDFY_KEEPHTML) {
     $this->linksAfterEachParagraph = $linksAfterEachParagraph;
     $this->keepHTML = $keepHTML;
 
@@ -291,7 +291,7 @@ class Markdownify {
           if ($this->skipConversion) {
             $this->isMarkdownable(); # update notConverted
             $this->handleTagToText();
-            continue;
+            break;
           }
           if (!$this->parser->keepWhitespace && $this->parser->isBlockElement && $this->parser->isStartTag) {
             $this->parser->html = ltrim($this->parser->html);
