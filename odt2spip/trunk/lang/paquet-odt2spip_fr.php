@@ -18,4 +18,4 @@ _ La transformation des fichiers ODT impose que l\'extension XSL de PHP soit act
 _ La conversion des formules mathématiques repose sur la librairie XSLT {{MathML 2.0 to LaTeX}} de Vasil Yaroshevich [->http://www.raleigh.ru/MathML/mmltex/index.php?lang=en]',
 	'odt2spip_slogan' => 'générateur d\'articles spip à partir de fichiers .odt',
 );
-?>
+

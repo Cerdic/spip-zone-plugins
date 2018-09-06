@@ -16,4 +16,4 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'odt2spip_description' => 'Spip\'s articles generator from OpenOffice or LibreOffice Writer files (.odt)',
 	'odt2spip_slogan' => 'Spip\'s articles generator from .odt files',
 );
-?>
+
