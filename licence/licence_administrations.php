@@ -54,5 +54,3 @@ function licence_vider_tables($nom_meta_base_version) {
 	effacer_meta('licence');
 	effacer_meta($nom_meta_base_version);
 }
-
-?>
