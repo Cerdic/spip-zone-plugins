@@ -249,12 +249,12 @@ function _detecter_langue($texte){
 //	print_r($result_array);
 
 	$lang = false;
-	if (is_array($result_array) AND count($result_array)){
-		while (!$lang AND $r = each($result_array)){
-			list($lang, $val) = $r;
+	if (is_array($result_array)) {
+		foreach ($result_array as $r) {
+			if ($lang = reset($r)) {
+				break;
+			}
 		}
 	}
 	return $lang;
 }
-
-?>
