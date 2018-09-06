@@ -26,7 +26,7 @@ function action_editer_ticket() {
 	}
 
 	// Enregistre l'envoi dans la BD
-	if ($id_ticket > 0) $err = ticket_modifier($id_ticket,null,$insertion);
+	if ($id_ticket > 0) $err = ticket_modifier($id_ticket,null);
 
 	return array($id_ticket,$err);
 }
