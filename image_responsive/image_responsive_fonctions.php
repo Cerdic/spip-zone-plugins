@@ -360,13 +360,23 @@ function image_responsive($texte, $taille = -1, $lazy = 0, $vertical = 0, $media
 		else return $texte;
 	}
 	if (defined('PHP_VERSION_ID') and PHP_VERSION_ID > 50300) {
+		
+		/* ATTENTION, cette version plante les scripts en PHP 5.2.6. Page blanche. 
 		return preg_replace_callback(
 			",(<img\ [^>]*>),",
 			function($matches) use ($taille, $lazy, $vertical, $medias, $proportions) {
 				return _image_responsive($matches[0], $taille, $lazy, $vertical, $medias, $proportions);
 			},
 			$texte
+		);*/
+		return preg_replace_callback(
+			",(<img\ [^>]*>),",
+			create_function('$matches',
+				'return _image_responsive($matches[0],"' . $taille . '",' . $lazy . ',' . $vertical . ',"' . $medias . '","' . $proportions . '");'
+			),
+			$texte
 		);
+
 	} else {
 		return preg_replace_callback(
 			",(<img\ [^>]*>),",
