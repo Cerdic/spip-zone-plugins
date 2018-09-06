@@ -15,7 +15,6 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 [(#SET{flux_articles,#CONFIG{rssconfig/activer}|!={non}|oui})]
 [(#SET{flux_breves,#PLUGIN{breves}|et{#CONFIG{activer_breves}|=={oui}}|et{#CONFIG{rssconfig_breves/activer}|!={non}}|et{#CONFIG{rssconfig_breves/flux,breves}|!={breves}}|oui})]
 
-[(#GET{flux_articles}|ou{#GET{flux_breves}}|oui)
 <channel[ xml:lang="(#LANG)"]>
 	<title>[(#NOM_SITE_SPIP|textebrut|texte_backend)]</title>
 	<link>#URL_SITE_SPIP/</link>
@@ -23,7 +22,6 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 	<language>#LANG</language>
 	<generator>SPIP - www.spip.net</generator>
 	<atom:link href="[(#SELF|url_absolue)]" rel="self" type="application/rss+xml" />
-
 [	<image>
 		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
 		<url>(#LOGO_SITE_SPIP||image_reduire{144,400}|extraire_attribut{src}|url_absolue|texte_backend)</url>
@@ -32,26 +30,56 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 		[<width>(#LOGO_SITE_SPIP||image_reduire{144,400}|extraire_attribut{width})</width>]
 	</image>
 ]
+[(#REM) tableau qui pour stocker les items ramenes par les boucles 
+        cle = art ou bre + id
+		valeur = date
+]
+#SET{elements,#ARRAY}
 
-[(#GET{flux_articles}|oui)
+[(#REM) collecte des articles ]
+
 [(#REM) Si la saisie des rubriques a ete faites avec le selecteur, on utilise le filtre picker_selected
 			sinon, on explode la chaine saisie ]
 #SET{rubriques_a_inclure,#CONFIG{rssconfig/rubriques_a_inclure}|picker_selected{rubrique}}
 [(#GET{rubriques_a_inclure}|count|=={0}|et{#GET{rubriques_a_inclure}|is_array|non}|oui) #SET{rubriques_a_inclure,#CONFIG{rssconfig/rubriques_a_inclure}|explode{','}}]
-
 #SET{id_rubrique,#ENV{id_rubrique,#GET{rubriques_a_inclure}}}
-<INCLURE{fond=inclure/rss-liste-items}{env}{id_rubrique=#GET{id_rubrique}}>]
 
-[(#GET{flux_breves}|oui)
+<BOUCLE_recents(ARTICLES) {si #GET{flux_articles}|==oui} {lang ?}{branche #GET{id_rubrique,?}} {id_mot ?}{id_auteur ?} {par date}{inverse}{0,#CONFIG{rssconfig/nb_art,10}}{unique}>
+[(#SET{elements,#GET{elements}|array_merge{#ARRAY{art#ID_ARTICLE,#DATE}}})]
+</BOUCLE_recents>
+<BOUCLE_tres_recents(ARTICLES) {si #GET{flux_articles}|=={oui}} {lang ?}{branche #GET{id_rubrique,?}} {id_mot ?}{id_auteur ?} {par date}{inverse}{age<#CONFIG{rssconfig/age_art,3}}{unique}>
+[(#SET{elements,#GET{elements}|array_merge{#ARRAY{art#ID_ARTICLE,#DATE}}})]
+</BOUCLE_tres_recents>
+<BOUCLE_recemment_modifies(ARTICLES) {si #GET{flux_articles}|=={oui}} {lang ?}{branche #GET{id_rubrique,?}} {id_mot ?}{id_auteur ?} {par date}{inverse}{age_modif < #CONFIG{rssconfig/age_modif,0}}{unique}>
+[(#SET{elements,#GET{elements}|array_merge{#ARRAY{art#ID_ARTICLE,#DATE}}})]
+</BOUCLE_recemment_modifies>
+
+[(#REM) collecte des breves ]
+
 [(#REM) Si la saisie des rubriques a ete faites avec le selecteur, on utilise le filtre picker_selected
 			sinon, on explode la chaine saisie ]
 #SET{rubriques_a_inclure_breves,#CONFIG{rssconfig_breves/rubriques_a_inclure}|picker_selected{rubrique}}
 [(#GET{rubriques_a_inclure_breves}|count|=={0}|oui) #SET{rubriques_a_inclure_breves,#CONFIG{rssconfig_breves/rubriques_a_inclure}|explode{','}}]
-
 #SET{id_rubrique,#ENV{id_rubrique,#GET{rubriques_a_inclure_breves}}}
-<INCLURE{fond=inclure/rss-liste-items-breves}{env}{id_rubrique=#GET{id_rubrique}}>]
+
+<BOUCLE_recentsb(BREVES)  {si #GET{flux_breves}|==oui} {lang ?}{branche #GET{id_rubrique,?}} {id_mot ?} {par date}{inverse}{0,#CONFIG{rssconfig_breves/nb_art,20}}{unique}>
+[(#SET{elements,#GET{elements}|array_merge{#ARRAY{bre#ID_BREVE,#DATE}}})]
+</BOUCLE_recentsb>
+<BOUCLE_tres_recentsb(BREVES) {si #GET{flux_breves}|==oui} {lang ?}{branche #GET{id_rubrique,?}} {id_mot ?} {par date}{inverse}{age<#CONFIG{rssconfig_breves/age_art,0}}{unique}>
+[(#SET{elements,#GET{elements}|array_merge{#ARRAY{bre#ID_BREVE,#DATE}}})]
+</BOUCLE_tres_recentsb>
+<BOUCLE_recemment_modifiesb(BREVES) {si #GET{flux_breves}|==oui} {lang ?}{branche #GET{id_rubrique,?}} {id_mot ?} {par date}{inverse}{age_modif < #CONFIG{rssconfig_breves/age_modif,0}}{unique}>
+[(#SET{elements,#GET{elements}|array_merge{#ARRAY{bre#ID_BREVE,#DATE}}})]
+</BOUCLE_recemment_modifiesb>
+
+[(#REM) tri du tableau sur la date (champ valeur) 
+        et pour chaque item ecriture rss selon le type ]
+<BOUCLE_lesflux(DATA) {source table, #GET{elements} } {par valeur} {inverse}>
+#SET{type,(#CLE|couper{3})}
+#SET{id,(#CLE|replace{#GET{type},''})}
+[(#GET{type}|=={art}|oui)<INCLURE{fond=inclure/rss-item}{id_article=#GET{id}}>]
+[(#GET{type}|=={bre}|oui)<INCLURE{fond=inclure/rss-item-breve}{id_breve=#GET{id}}>]
+</BOUCLE_lesflux>
 
 </channel>
-
 </rss>
-]
