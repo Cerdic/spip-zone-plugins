@@ -440,13 +440,17 @@ function parseMemcacheResults($str){
 }
 
 function dumpCacheSlab($server,$slabId,$limit){
-    list($host,$port) = explode(':',$server);
-    $resp = sendMemcacheCommand($host,$port,'stats cachedump '.$slabId.' '.$limit);
-    $g = create_function('$f', 'return strpos($f, "'.$_SERVER['HTTP_HOST'].'") === 0;');
-    foreach($resp['ITEM'] as $key=>$ignore)
-    	if (!$g($key))
-    		unset($resp['ITEM'][$key]);
-   return $resp;
+	list($host, $port) = explode(':', $server);
+	$resp = sendMemcacheCommand($host, $port, 'stats cachedump ' . $slabId . ' ' . $limit);
+	$g = function ($f) {
+		return strpos($f, $_SERVER['HTTP_HOST']) === 0;
+	};
+	foreach ($resp['ITEM'] as $key => $ignore) {
+		if (!$g($key)) {
+			unset($resp['ITEM'][$key]);
+		}
+	}
+	return $resp;
 
 }
 
