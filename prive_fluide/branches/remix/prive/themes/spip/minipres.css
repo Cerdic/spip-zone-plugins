@@ -140,16 +140,18 @@ input[type=radio],input[type=checkbox] {display: inline-block; margin-right: 0.7
 .page_login .formulaire_menu_lang input.submit {display: inline;}
 .page_login fieldset { clear: both; margin: 0; padding: 0; background: none; border: 0;}
 .page_login fieldset legend { display: none; }
-.page_login #spip_logo_auteur { float: right; margin-right: -50px; }
-.page_login #spip_logo_auteur img { margin-top: 1em; }
 .page_login .editer-groupe { width: 100%; }
 .page_login .editer_password .details { margin-top: 0.5em; }
 .page_login .editer_password p { margin-bottom: 0; }
-.page_login .boutons { margin: 1em auto 1em; text-align: center; }
-.page_login .retour { clear: both; margin: 0 0 1em 0; }
+.page_login .boutons { margin: 1.5em auto 1.5em; text-align: center; }
+.page_login .retour { clear: both; margin: 0 0 1.5em 0; }
 .page_login .generator { margin: 0; }
-#pass_securise img { display: none; }
 .editer_password p { margin-top: 1em; }
+/* logo de l'auteur */
+.page_login .editer_login label { display: block; }
+.page_login #spip_logo_auteur { display: inline-block; vertical-align: middle; }
+.page_login #spip_logo_auteur img { border-radius: 6px; }
+.page_login input[name=var_login]:not(:last-child) { display: inline-block; /* fallback */ width: 85%;  width: calc(100% - 45px); }
 
 /* Couleurs des liens
 ---------------------------------------------- */
