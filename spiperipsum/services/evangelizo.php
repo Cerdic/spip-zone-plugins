@@ -150,32 +150,34 @@ function flux2saint($url_base, $charset) {
 			if (isset($attribut[0])) {
 				$tableau['url'] = $attribut[0];
 
-				// -- Traitement des textes
-				$page = recuperer_page($tableau['url']);
-				if ($page
-				and (strpos($page, 'Error : ') === false)) {
-					$contenu = extraire_balise($page, 'body');
-					$contenu = strip_tags($contenu, '<p><em>');
-					$contenu = preg_replace(',<em\b.*>,UimsS', '<em>', $contenu);
-					$balises_p = extraire_balises($contenu, 'p');
-					foreach($balises_p as $_cle => $_balise_p) {
-						// Cela fonctionne car le premier <p> est mal fermé donc englobe le deuxième
-						// qui contient le titre qui devrait être supprimé.
-						// On reconnait ce premier <p> parce qu'il est le seul à posséder l'attribut align
-						if (!extraire_attribut($_balise_p, 'align')) {
-							$contenu_p = trim(strip_tags($_balise_p, '<em>'));
-							// Pas de lettrine pour le saint, on insère le contenu paragraphe dans un <p>
-							$tableau['texte'] .= '<p>' . $contenu_p . '</p>';
-						}
-					}
-
-					if (!$tableau['texte'])
-						$tableau['texte'] = preg_replace(',</?div\b.*>,UimsS', '', extraire_balise($page, 'div'));
-
-					$tableau['texte'] = page2page_propre(importer_charset($tableau['texte'], $charset), $charset, false);
-					$tableau['texte'] = preg_replace('#(<br />)+$#UimS', '', $tableau['texte']);
-					$tableau['texte'] = trim(str_replace('&nbsp;', '', $tableau['texte']));
-				}
+				// -- Traitement des textes: n'est plus disponible, a priori remplacé par un libellé remplit par un
+				//    script js ou autre. On met le code en commentaire en attendant un retour de l'API
+				// TODO : voir avec evangelizo l'inclusion du texte dans l'appel primaire
+//				$page = recuperer_page($tableau['url']);
+//				if ($page
+//				and (strpos($page, 'Error : ') === false)) {
+//					$contenu = extraire_balise($page, 'body');
+//					$contenu = strip_tags($contenu, '<p><em>');
+//					$contenu = preg_replace(',<em\b.*>,UimsS', '<em>', $contenu);
+//					$balises_p = extraire_balises($contenu, 'p');
+//					foreach($balises_p as $_cle => $_balise_p) {
+//						// Cela fonctionne car le premier <p> est mal fermé donc englobe le deuxième
+//						// qui contient le titre qui devrait être supprimé.
+//						// On reconnait ce premier <p> parce qu'il est le seul à posséder l'attribut align
+//						if (!extraire_attribut($_balise_p, 'align')) {
+//							$contenu_p = trim(strip_tags($_balise_p, '<em>'));
+//							// Pas de lettrine pour le saint, on insère le contenu paragraphe dans un <p>
+//							$tableau['texte'] .= '<p>' . $contenu_p . '</p>';
+//						}
+//					}
+//
+//					if (!$tableau['texte'])
+//						$tableau['texte'] = preg_replace(',</?div\b.*>,UimsS', '', extraire_balise($page, 'div'));
+//
+//					$tableau['texte'] = page2page_propre(importer_charset($tableau['texte'], $charset), $charset, false);
+//					$tableau['texte'] = preg_replace('#(<br />)+$#UimS', '', $tableau['texte']);
+//					$tableau['texte'] = trim(str_replace('&nbsp;', '', $tableau['texte']));
+//				}
 			}
 		}
 	}
