@@ -1,0 +1,7 @@
+<BOUCLE_recents(SITES)  {branche ?}{id_mot ?} {par date}{inverse} >
+<INCLURE{fond=inclure/rss-item-site}{id_syndic}>
+</BOUCLE_recents>
+
+<BOUCLE_tres_recents(SITES){branche ?}{id_mot ?} {par date}{inverse}{age<#CONFIG{rssconfig_sites/age_art,0}}{unique}>
+<INCLURE{fond=inclure/rss-item-site}{id_syndic}>
+</BOUCLE_tres_recents>

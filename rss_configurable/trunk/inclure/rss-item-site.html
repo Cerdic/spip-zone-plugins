@@ -1,0 +1,50 @@
+[(#REM)
+	pour fluxs rss.
+
+]<BOUCLE_sites(SITES) {id_syndic}>
+	<item[ xml:lang="(#LANG)"]>
+		<title>[(#NOM_SITE|supprimer_tags|texte_backend)]</title>
+		<link>[(#ID_SYNDIC|generer_url_entite{site}|url_absolue|attribut_html)]</link>
+		[<guid isPermaLink="true">(#ID_SYNDIC|generer_url_entite{site}|url_absolue|attribut_html)</guid>]
+		[<dc:date>(#DATE|date_iso)</dc:date>]
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG)</dc:language>]
+		[(#REM)
+			Le bloc qui suit diffuse diffuse les mots-cles a la mode RSS
+		]<BOUCLE_mots_rss(MOTS){id_syndic}>[
+<dc:subject>(#TITRE|texte_backend)</dc:subject>]</BOUCLE_mots_rss>
+
+		<description>[(#DESCRIPTIF|couper{300}|texte_backend)]
+
+[(#REM)
+	Le bloc qui suit diffuse la rubrique et les mots-cles
+	sous forme de "microformats"
+
+]<BOUCLE_rubrique_mf(RUBRIQUES){id_rubrique}>-
+[&lt;a href="[(#URL_RUBRIQUE|url_absolue)]" rel="directory"&gt;(#TITRE|texte_backend)&lt;/a&gt;]
+</BOUCLE_rubrique_mf><B_mots_mf>
+/ <BOUCLE_mots_mf(MOTS){id_syndice}{", "}>
+[&lt;a href="[(#URL_MOT|url_absolue)]" rel="tag"&gt;(#TITRE|texte_backend)&lt;/a&gt;]</BOUCLE_mots_mf>
+
+		</description>
+
+[(#REM)
+	Le bloc qui suit diffuse aussi le texte integral de la breve,
+	ce qui permet une syndication plus riche (mais plus "lourde").
+	Fonction desactivable depuis les reglages du site.
+][
+(#CONFIG{syndication_integrale}|=={oui}|?{' ',''})<content:encoded>[(#LOGO_SITE{right}|image_reduire{150,150}|texte_backend)
+		][&lt;div class='rss_texte'&gt;(#DESCRIPTIF|
+			image_reduire{500,0}|texte_backend)&lt;/div&gt;
+		]
+		</content:encoded>
+]
+[(#REM)
+	Le bloc qui suit diffuse l'adresse des documents associes aux articles ;
+	ajouter par ex. {extension=mp3} pour limiter a un certain type de document.
+]		<BOUCLE_documents(DOCUMENTS){id_syndic}{mode=document}{doublons}>[
+		<enclosure url="(#URL_DOCUMENT|url_absolue|unique)"[ length="(#TAILLE)"][ type="(#MIME_TYPE)"] />]
+		</BOUCLE_documents>
+
+	</item>
+</BOUCLE_sites>
