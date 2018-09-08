@@ -60,7 +60,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 [(#REM) Si la saisie des rubriques a ete faites avec le selecteur, on utilise le filtre picker_selected
 			sinon, on explode la chaine saisie ]
 #SET{rubriques_a_inclure_breves,#CONFIG{rssconfig_breves/rubriques_a_inclure}|picker_selected{rubrique}}
-[(#GET{rubriques_a_inclure_breves}|count|=={0}|oui) #SET{rubriques_a_inclure_breves,#CONFIG{rssconfig_breves/rubriques_a_inclure}|explode{','}}]
+[(#GET{rubriques_a_inclure_breves}|count|=={0}|et{#GET{rubriques_a_inclure_breves}|is_array|non}|oui) #SET{rubriques_a_inclure_breves,#CONFIG{rssconfig_breves/rubriques_a_inclure}|explode{','}}]
 #SET{id_rubrique,#ENV{id_rubrique,#GET{rubriques_a_inclure_breves}}}
 
 <BOUCLE_recentsb(BREVES)  {si #GET{flux_breves}|==oui} {lang ?}{branche #GET{id_rubrique,?}} {id_mot ?} {par date}{inverse}{0,#CONFIG{rssconfig_breves/nb_art,20}}{unique}>
@@ -79,7 +79,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 [(#REM) Si la saisie des rubriques a ete faites avec le selecteur, on utilise le filtre picker_selected
 			sinon, on explode la chaine saisie ]
 #SET{rubriques_a_inclure_sites,#CONFIG{rssconfig_sites/rubriques_a_inclure}|picker_selected{rubrique}}
-[(#GET{rubriques_a_inclure_sites}|count|=={0}|oui) #SET{rubriques_a_inclure_sites,#CONFIG{rssconfig_sites/rubriques_a_inclure}|explode{','}}]
+[(#GET{rubriques_a_inclure_sites}|count|=={0}|et{#GET{rubriques_a_inclure_sites}|is_array|non}|oui) #SET{rubriques_a_inclure_sites,#CONFIG{rssconfig_sites/rubriques_a_inclure}|explode{','}}]
 #SET{id_rubrique,#ENV{id_rubrique,#GET{rubriques_a_inclure_sites}}}
 
 <BOUCLE_recentss(SITES) {si #GET{flux_sites}|==oui} {branche #GET{id_rubrique,?}} {id_mot ?} {par date}{inverse} >
