@@ -150,8 +150,8 @@ input[type=radio],input[type=checkbox] {display: inline-block; margin-right: 0.7
 /* logo de l'auteur */
 .page_login .editer_login label { display: block; }
 .page_login #spip_logo_auteur { display: inline-block; vertical-align: middle; }
-.page_login #spip_logo_auteur img { border-radius: 6px; }
-.page_login input[name=var_login]:not(:last-child) { display: inline-block; /* fallback */ width: 85%;  width: calc(100% - 45px); }
+.page_login #spip_logo_auteur img { border-radius: 50%; }
+.page_login input[name=var_login]:not(:last-child) { display: inline-block; /* fallback */ width: 82%;  width: calc(100% - 54px); }
 
 /* Couleurs des liens
 ---------------------------------------------- */
