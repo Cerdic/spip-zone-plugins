@@ -65,12 +65,12 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 			// si la decoupe en page est active...
 			$artpage = (function_exists('decoupe_url') && (strlen(_request('artpage')) || $page>1) )
 				?decoupe_url($self, $page, $num_pages):$self;
-			$artpage = "<a $st title=\"$titre\" href=\"{$artpage}#$ancre\">$lien</a>";
+			$artpage = "<a title=\"$titre\" href=\"{$artpage}#$ancre\">$lien</a>";
 			$artpage = "\n<li>" . ( function_exists('sommaire_id_page')
 				?sommaire_id_page($artpage, $page):sommaire_id_page_dist($artpage, $page) );
-			if($niveau==$n) $sommaire .= ($sommaire?'</li>':'').$artpage;
-			elseif($niveau<$n) $sommaire .= "\n<ul>".str_repeat('<li><ul>',$n-$niveau-1).$artpage;
-			else $sommaire .= '</li>'.str_repeat('</ul></li>',$niveau-$n).$artpage;
+			if($niveau==$n) $sommaire .= ($sommaire?'</li>':'') . $artpage;
+			elseif($niveau<$n) $sommaire .= "\n<ul>".str_repeat('<li><ul>',$n-$niveau-1) . $artpage;
+			else $sommaire .= '</li>'.str_repeat('</ul></li>',$niveau-$n) . $artpage;
 			$niveau = $n;
 		}
 	}
