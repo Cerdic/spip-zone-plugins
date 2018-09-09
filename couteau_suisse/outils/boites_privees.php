@@ -36,7 +36,7 @@ function boites_privees_affiche_gauche($flux){
 		$e = function_exists('trouver_objet_exec')
 			?trouver_objet_exec($exec)
 			:array('type'=>$exec, 'id_table_objet'=>$flux['args']['id_'.$exec]?'id_'.$exec:'');
-		if($e && strlen($e['type']) && strlen($e['id_table_objet']))
+		if($e && strlen($e['type']) && strlen($e['id_table_objet']) && isset($flux['args'][$e['id_table_objet']]))
 			$flux['data'] .= cs_urls_propres($e['type'], $flux['args'][$e['id_table_objet']]);
 		else switch($exec) {
 			// SPIP>=3.0 : objets au singulier uniquement (autres 'case' pour compatibilite SPIP<3.0)
