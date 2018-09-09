@@ -9,6 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'options_description' => '',
-	'options_nom'         => 'Options produits',
-	'options_slogan'      => 'Des options sur les produits',
+	'options_nom'         => 'Options avec prix',
+	'options_slogan'      => 'Des options sur des objets vendus, avec un prix par option',
 );

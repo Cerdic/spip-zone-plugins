@@ -16,10 +16,10 @@ $GLOBALS[ $GLOBALS['idx_lang'] ] = array(
 	'cfg_titre_parametrages'        => 'Paramétrages',
 
 	// G
-	'gerer_options'                 => 'Gérer les options de produits',
+	'gerer_options'                 => 'Gérer les options',
 
 	// O
-	'options_titre'                 => 'Options produits',
+	'options_titre'                 => 'Options',
 
 	// Q
 	'quantite'                      => 'Quantité',
