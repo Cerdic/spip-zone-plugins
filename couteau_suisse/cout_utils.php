@@ -432,7 +432,7 @@ function cs_initialise_includes($count_metas_outils) {
 			// ajouter d'office le bouton de menu "developpement" si l'outil est de categorie "devel"
 			if(defined('_SPIP30100') && $outil['categorie']=='devel' && !isset($outil['pipeline:ajouter_menus']) && !isset($outil['pipelinecode:ajouter_menus'])) {
 				$infos_pipelines['ajouter_menus']['inline'][] = "if(autoriser('configurer','$inc')) // cs_ajouter_menus('$inc', '$inc:nom', '');
-	\$flux['menu_developpement']->sousmenu['cs_$inc'] = cs_ajouter_menus($inc, '".attribut_html(cs_nom_outil($outil, false))."');";
+	\$flux['menu_developpement']->sousmenu['cs_$inc'] = cs_ajouter_menus('$inc', '".attribut_html(cs_nom_outil($outil, false))."');";
 			}	
 			// recherche des fichiers .css, .css.html, .js et .js.html eventuellement present dans outils/
 			foreach(array('css', 'js') as $f) {
