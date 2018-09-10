@@ -10,9 +10,8 @@
 	[<textarea name="_code_yaml" id="_code_yaml" style="display:none;">(#ENV{_code_yaml})</textarea>]
 	<p class="boutons">
 		[(#ENV{_code_yaml}|oui)
-		[(#ENV{checkbox}|oui)
 		<input type="submit" class="submit link" name="annuler" value="<:bouton_annuler:>" />
-		<input type="submit" class="submit" name="importer" value="<:ieconfig:titre_import:>" />]]
+		<input type="submit" class="submit" name="importer" value="<:ieconfig:titre_import:>" />]
 		[(#ENV{_code_yaml}|non)
 		<input type="submit" class="submit" name="suivant" value="<:ieconfig:titre_import:>" />]
 	</p>
