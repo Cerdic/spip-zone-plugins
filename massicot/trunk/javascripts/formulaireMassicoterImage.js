@@ -241,6 +241,11 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		delete s.width;
 		delete s.height;
 
+		if (isNaN(s.x1)) { delete s.x1; }
+		if (isNaN(s.x2)) { delete s.x2; }
+		if (isNaN(s.y1)) { delete s.y1; }
+		if (isNaN(s.y2)) { delete s.y2; }
+
 		s = $.extend(form_get(), s);
 
 		if (slider && slider.slider instanceof Function) {
