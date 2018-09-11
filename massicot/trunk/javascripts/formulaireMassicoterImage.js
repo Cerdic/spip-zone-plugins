@@ -273,7 +273,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	function slider_init (selection, init_callback) {
 
 		slider = self.find('#zoom-slider').slider({
-			max: 1,
+			max: 2,
 			min: 0.01,
 			value: selection.zoom,
 			step: 0.01,
@@ -578,8 +578,8 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 			s = zoom_selection(s, last_selection, image);
 		}
 
-		// Une fois qu'on est certain d'avoir la place, on calcule une nouvelle
-		// sélection.
+		// Maintenant qu'on est certain d'avoir la place, on calcule une
+		// nouvelle sélection.
 		var taille_canevas  = {
 				x: round(image.x * s.zoom),
 				y: round(image.y * s.zoom)
