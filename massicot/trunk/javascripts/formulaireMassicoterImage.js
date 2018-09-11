@@ -75,17 +75,36 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	/**
 	 * Mettre à jour les valeurs du formulaire
 	 */
-	function form_set (valeurs) {
+	function form_set (selection) {
 		// console.log('-- form_set');
-		// console.log(valeurs);
+		// console.log(s);
 
-		self.find('input[name=x1]').attr('value', valeurs.x1);
-		self.find('input[name=x2]').attr('value', valeurs.x2);
-		self.find('input[name=y1]').attr('value', valeurs.y1);
-		self.find('input[name=y2]').attr('value', valeurs.y2);
-		self.find('input[name=zoom]').attr('value', valeurs.zoom);
+		// On travaille sur une copie de l'objet passé en paramètre, pour ne pas
+		// faire d'effets de bord
+		var s = Object.assign({}, selection);
 
-		self.find('.dimensions').html((valeurs.x2 - valeurs.x1) + ' x ' + (valeurs.y2 - valeurs.y1));
+		/* En mode "dimensions forcées", on permet des sélections plus
+		   grandes que les dimensions voulues. Il faut alors tout
+		   remettre à la bonne échelle. */
+		if (dimensions_forcees) {
+			var echelle = (s.x2 - s.x1) * min(1, s.zoom) / largeur_forcee;
+
+			s.zoom = s.zoom / echelle;
+
+			s.x1 = round(s.x1 * s.zoom);
+			s.y1 = round(s.y1 * s.zoom),
+
+			s.x2 = s.x1 + largeur_forcee;
+			s.y2 = s.y1 + hauteur_forcee;
+		}
+
+		self.find('input[name=x1]').attr('value', s.x1);
+		self.find('input[name=x2]').attr('value', s.x2);
+		self.find('input[name=y1]').attr('value', s.y1);
+		self.find('input[name=y2]').attr('value', s.y2);
+		self.find('input[name=zoom]').attr('value', s.zoom);
+
+		self.find('.dimensions').html((s.x2 - s.x1) + ' x ' + (s.y2 - s.y1));
 	}
 
 	/**
@@ -125,7 +144,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 					derniere_selection_widget = form_get();
 					img_set(form_get());
 				});
-				// init_selecteur_format();
+				selecteur_format_init();
 				// init_bouton_reinit();
 			},
 			onSelectChange: function (img, selection) {
@@ -179,15 +198,72 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 			},
 			slide: function (event, ui) {
 
-				var selection = form_get();
+				var selection = imgAreaSelector.getSelection();
 
-				selection.zoom = ui.value;
+				/* Le widget nous donne un objet avec des infos inutiles, on
+				 * nettoie un peu… */
+				delete selection.width;
+				delete selection.height;
+
+				selection.zoom = parseFloat(ui.value);
 				selection = zoom_selection(selection);
+				if (dimensions_forcees) {
+					selection = contraindre_selection(selection);
+				}
 
 				form_set(selection);
 				img_set(selection);
 			}
 		});
+	}
+
+	/**
+	 * Initialisation du sélecteur de format
+	 */
+	function selecteur_format_init () {
+
+		selecteur_format.change(function (e) {
+
+			var selection = form_get(),
+				format = e.target.value;
+
+			if (format) {
+				dimensions_forcees = true;
+
+				format = format.split(':');
+				largeur_forcee = parseInt(format[0], 10);
+				hauteur_forcee = parseInt(format[1], 10);
+
+				imgAreaSelector.setOptions({
+					aspectRatio: largeur_forcee + ':' + hauteur_forcee,
+					minWidth: round(largeur_forcee * min(1, selection.zoom)),
+					minHeight: round(hauteur_forcee * min(1, selection.zoom))
+				});
+
+				slider.slider('option', 'min', zoom_min_get());
+				slider.slider('option', 'value', max(zoom_min_get(), selection.zoom));
+
+				selection = contraindre_selection(selection);
+
+				img_set(selection);
+				selector_set(selection);
+				form_set(selection);
+
+			} else {
+				dimensions_forcees = false;
+				largeur_forcee = NaN;
+				hauteur_forcee = NaN;
+
+				slider.slider('option', 'min', 0.01);
+
+				imgAreaSelector.setOptions({
+					aspectRatio: '',
+					minWidth: 1,
+					minHeight: 1
+				});
+			}
+		})
+			.trigger('change');
 	}
 
 	/**
@@ -298,5 +374,63 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		}
 
 		return s;
+	}
+
+	/**
+	 * Retourne la sélection aux dimensions imposées dont le centre est
+	 * identique à la sélection passée en paramètre.
+	 */
+	function contraindre_selection (s) {
+
+		var zoom_min = zoom_min_get();
+
+		// Si c'est nécessaire, on commence par zoomer.
+		if (s.zoom < zoom_min) {
+			s.zoom = zoom_min;
+			s = zoom_selection(s);
+		}
+
+		// Une fois qu'on est certain d'avoir la place, on calcule une nouvelle
+		// sélection.
+		var taille_canevas  = {
+				x: round(largeur_image * s.zoom),
+				y: round(hauteur_image * s.zoom)
+			},
+			centre = {
+				x: (s.x2 + s.x1) / 2,
+				y: (s.y2 + s.y1) / 2
+			},
+			echelle_x = (s.x2 - s.x1) * min(1, s.zoom) / largeur_forcee,
+			echelle_y = (s.y2 - s.y1) * min(1, s.zoom) / hauteur_forcee,
+			echelle = max(1, min(echelle_x, echelle_y)),
+			largeur_selection = largeur_forcee * echelle,
+			hauteur_selection = hauteur_forcee * echelle;
+
+		s = $.extend(s, {
+			x1: round(max(0, centre.x - (largeur_selection / 2))),
+			y1: round(max(0, centre.y - (hauteur_selection / 2))),
+		});
+
+		s.x2 = round(s.x1 + largeur_selection);
+		s.y2 = round(s.y1 + hauteur_selection);
+
+		if (s.x2 > taille_canevas.x) {
+			s.x1 = s.x1 - (s.x2 - taille_canevas.x);
+			s.x2 = taille_canevas.x;
+		}
+		if (s.y2 > taille_canevas.y) {
+			s.y1 = s.y1 - (s.y2 - taille_canevas.y);
+			s.y2 = taille_canevas.y;
+		}
+
+		return s;
+	}
+
+	function zoom_min_get () {
+
+		return Math.max(
+			largeur_forcee / largeur_image,
+			hauteur_forcee / hauteur_image
+		);
 	}
 };
