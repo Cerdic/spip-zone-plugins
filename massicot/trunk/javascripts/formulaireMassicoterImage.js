@@ -29,10 +29,17 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		selecteur_format = self.find('select[name=format]'),
 		round = Math.round,
 		max = Math.max,
-		min = Math.min;
+		min = Math.min,
+		tests = [];
+
+	tests.push(make_test(
+		'Jouer les tests joue les tests',
+		function () { return true; }
+	));
 
 	form_init();
 	GUI_init();
+
 
 	/**
 	 * Initialisation du formulaire
@@ -87,15 +94,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		   grandes que les dimensions voulues. Il faut alors tout
 		   remettre à la bonne échelle. */
 		if (dimensions_forcees) {
-			var echelle = (s.x2 - s.x1) * min(1, s.zoom) / largeur_forcee;
-
-			s.zoom = s.zoom / echelle;
-
-			s.x1 = round(s.x1 * s.zoom);
-			s.y1 = round(s.y1 * s.zoom),
-
-			s.x2 = s.x1 + largeur_forcee;
-			s.y2 = s.y1 + hauteur_forcee;
+			s = etendre_selection(s, { x: largeur_forcee, y: hauteur_forcee });
 		}
 
 		self.find('input[name=x1]').attr('value', s.x1);
@@ -106,6 +105,60 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 
 		self.find('.dimensions').html((s.x2 - s.x1) + ' x ' + (s.y2 - s.y1));
 	}
+
+	function etendre_selection(s, dimensions) {
+
+		var echelle = (s.x2 - s.x1) / dimensions.x;
+
+		return {
+			x1: round(s.x1 / echelle),
+			x2: round(s.x1 / echelle) + dimensions.x,
+			y1: round(s.y1 / echelle),
+			y2: round(s.y1 / echelle) + dimensions.y,
+			zoom: s.zoom / echelle
+		};
+	}
+
+	tests.push(make_test_equals(
+		'etendre la selection ne fait rien quand on est déjà aux bonnes dimensions',
+		{ x1: 100, x2: 200, y1: 0, y2: 50, zoom: 1},
+		function () {
+			return etendre_selection(
+				{ x1: 100, x2: 200, y1: 0, y2: 50, zoom: 1},
+				{ x: 100, y: 50 }
+			);
+		}
+	));
+	tests.push(make_test_equals(
+		'etendre la selection ne fait rien quand on est déjà aux bonnes dimensions',
+		{ x1: 100, x2: 200, y1: 0, y2: 50, zoom: 2},
+		function () {
+			return etendre_selection(
+				{ x1: 100, x2: 200, y1: 0, y2: 50, zoom: 2},
+				{ x: 100, y: 50 }
+			);
+		}
+	));
+	tests.push(make_test_equals(
+		'etendre la selection agrandit quand il le faut',
+		{ x1: 200, x2: 400, y1: 0, y2: 100, zoom: 0.5},
+		function () {
+			return etendre_selection(
+				{ x1: 100, x2: 200, y1: 0, y2: 50, zoom: 0.25},
+				{ x: 200, y: 100 }
+			);
+		}
+	));
+	tests.push(make_test_equals(
+		'etendre la selection agrandit quand il le faut',
+		{ x1: 200, x2: 400, y1: 0, y2: 100, zoom: 1},
+		function () {
+			return etendre_selection(
+				{ x1: 100, x2: 200, y1: 0, y2: 50, zoom: 0.5},
+				{ x: 200, y: 100 }
+			);
+		}
+	));
 
 	/**
 	 * Initialisation du widget de sélection
@@ -433,4 +486,90 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 			hauteur_forcee / hauteur_image
 		);
 	}
+
+	/**
+	 * Fonctions utiles pour les tests.
+	 */
+	self.runTests = function (test_index) {
+
+		if (test_index) {
+			tests[test_index].call(test_index);
+		} else {
+			tests.forEach(function (test_func, index) {
+				test_func.call(index);
+			});
+		}
+	};
+
+	function make_test (msg, test_func) {
+		return function () {
+			if (test_func.call()) {
+				console.log(this + ' OK: ' + msg);
+			} else {
+				console.error(this + ' ' + msg);
+			}
+		};
+	}
+
+	function make_test_equals(msg, left, right) {
+		return function () {
+
+			// On utilise des copies pour éviter les effets de bords
+			var left_val, right_val;
+
+			if (left instanceof Function) {
+				left_val = left.call();
+			} else {
+				left_val = left;
+			}
+			if (right instanceof Function) {
+				right_val = right.call();
+			} else {
+				right_val = right;
+			}
+
+			if ((left_val instanceof Object && right_val instanceof Object && isEquivalent(left_val, right_val))
+				|| (left_val === right_val)) {
+
+				console.log(this + ' OK: ' + msg);
+			} else {
+				console.error(this + ' ' + msg);
+				console.log(left_val);
+				console.log(right_val);
+			}
+		};
+	}
+
+	return self;
 };
+
+/**
+ * Fonctions utilitaires
+ */
+
+/* http://adripofjavascript.com/blog/drips/object-equality-in-javascript.html */
+function isEquivalent(a, b) {
+	// Create arrays of property names
+	var aProps = Object.getOwnPropertyNames(a);
+	var bProps = Object.getOwnPropertyNames(b);
+
+	// If number of properties is different,
+	// objects are not equivalent
+	if (aProps.length != bProps.length) {
+		return false;
+	}
+
+	for (var i = 0; i < aProps.length; i++) {
+		var propName = aProps[i];
+
+		// If values of same property are not equal,
+		// objects are not equivalent
+		if (a[propName] !== b[propName]) {
+			return false;
+		}
+	}
+
+	// If we made it this far, objects
+	// are considered equivalent
+	return true;
+}
