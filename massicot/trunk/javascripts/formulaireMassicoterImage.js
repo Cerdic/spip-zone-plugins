@@ -593,7 +593,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		{ x1: 100, x2: 200, y1: 0, y2: 50, zoom: 1 },
 		function () {
 			return contraindre_selection(
-				{ x1: 100, x2: 200, y1: 0, y2: 50, zoom: 1},
+				{ x1: 100, x2: 200, y1: 0, y2: 50, zoom: 1 },
 				{ x: 100, y: 50 },
 				null,
 				{ x: 500, y: 300 }
@@ -605,7 +605,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		{ x1: 50, x2: 100, y1: 0, y2: 25, zoom: 0.5 },
 		function () {
 			return contraindre_selection(
-				{ x1: 50, x2: 100, y1: 0, y2: 25, zoom: 0.5},
+				{ x1: 50, x2: 100, y1: 0, y2: 25, zoom: 0.5 },
 				{ x: 100, y: 50 },
 				null,
 				{ x: 500, y: 300 }
@@ -617,7 +617,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		{ x1: 50, x2: 150, y1: 0, y2: 50, zoom: 2 },
 		function () {
 			return contraindre_selection(
-				{ x1: 50, x2: 150, y1: 0, y2: 50, zoom: 2},
+				{ x1: 50, x2: 150, y1: 0, y2: 50, zoom: 2 },
 				{ x: 100, y: 50 },
 				null,
 				{ x: 500, y: 300 }
@@ -629,7 +629,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		{ x1: 0, x2: 500, y1: 50, y2: 300, zoom: 1 },
 		function () {
 			return contraindre_selection(
-				{ x1: 0, x2: 500, y1: 0, y2: 400, zoom: 1},
+				{ x1: 0, x2: 500, y1: 0, y2: 400, zoom: 1 },
 				{ x: 100, y: 50 },
 				null,
 				{ x: 500, y: 300 }
@@ -641,7 +641,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		{ x1: 0, x2: 500, y1: 150, y2: 250, zoom: 0.5 },
 		function () {
 			return contraindre_selection(
-				{ x1: 0, x2: 500, y1: 0, y2: 400, zoom: 0.5},
+				{ x1: 0, x2: 500, y1: 0, y2: 400, zoom: 0.5 },
 				{ x: 100, y: 20 },
 				null,
 				{ x: 1000, y: 800 }
@@ -653,8 +653,44 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		{ x1: 0, x2: 1000, y1: 200, y2: 400, zoom: 2 },
 		function () {
 			return contraindre_selection(
-				{ x1: 0, x2: 1000, y1: 0, y2: 600, zoom: 2},
+				{ x1: 0, x2: 1000, y1: 0, y2: 600, zoom: 2 },
 				{ x: 100, y: 20 },
+				null,
+				{ x: 500, y: 300 }
+			);
+		}
+	));
+	tests.push(make_test_equals(
+		'contraindre une sélection trop petite fonctionne (zoom = 1)',
+		{ x1: 200, x2: 300, y1: 125, y2: 175, zoom: 1 },
+		function () {
+			return contraindre_selection(
+				{ x1: 240, x2: 260, y1: 145, y2: 155, zoom: 1 },
+				{ x: 100, y: 50 },
+				null,
+				{ x: 500, y: 300 }
+			);
+		}
+	));
+	tests.push(make_test_equals(
+		'contraindre une sélection trop petite fonctionne (zoom < 1)',
+		{ x1: 150, x2: 250, y1: 145, y2: 155, zoom: 0.5 },
+		function () {
+			return contraindre_selection(
+				{ x1: 190, x2: 210, y1: 145, y2: 155, zoom: 0.5 },
+				{ x: 200, y: 20 },
+				null,
+				{ x: 800, y: 600 }
+			);
+		}
+	));
+	tests.push(make_test_equals(
+		'contraindre une sélection trop petite fonctionne (zoom > 1)',
+		{ x1: 450, x2: 550, y1: 275, y2: 325, zoom: 2 },
+		function () {
+			return contraindre_selection(
+				{ x1: 490, x2: 510, y1: 295, y2: 305, zoom: 2 },
+				{ x: 100, y: 50 },
 				null,
 				{ x: 500, y: 300 }
 			);
