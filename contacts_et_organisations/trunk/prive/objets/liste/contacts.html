@@ -1,11 +1,18 @@
-[(#REM) Tableau complet des contacts, affiché sur la page ?exec=contacts ]
+[(#REM)
+
+	Tableau complet des contacts, affiché sur la page ?exec=contacts
+
+	Paramètres :
+
+		- masquer_onglets_annuaires : "oui" pour ne pas afficher les onglets des annuaires
+]
 [(#SET{defaut_tri,#ARRAY{
 	nom,1,
 	id_contact,1
 }})
 ]
 
-<BOUCLE_test_annuaire(CONDITION){si #CONFIG{contacts_et_organisations/utiliser_annuaires}}>
+<BOUCLE_test_annuaire(CONDITION){si #CONFIG{contacts_et_organisations/utiliser_annuaires}|et{#ENV{masquer_onglets_annuaires}|=={oui}|non}}>
 <div class="onglets_simple clearfix">
 	<ul>
 		<li>

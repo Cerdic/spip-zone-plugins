@@ -1,4 +1,11 @@
-[(#REM) Tableau complet des organisations, affiché sur la page ?exec=organisations ]
+[(#REM)
+	
+	Tableau complet des organisations, affiché sur la page ?exec=organisations
+
+	Paramètres :
+
+		- masquer_onglets_annuaires : "oui" pour ne pas afficher les onglets des annuaires
+]
 [(#SET{defaut_tri,#ARRAY{
 	nom,1,
 	id_organisation,1
@@ -6,7 +13,7 @@
 	id_auteur,1
 }})]
 
-<BOUCLE_test_annuaire(CONDITION){si #CONFIG{contacts_et_organisations/utiliser_annuaires}}>
+<BOUCLE_test_annuaire(CONDITION){si #CONFIG{contacts_et_organisations/utiliser_annuaires}|et{#ENV{masquer_onglets_annuaires}|=={oui}|non}}>
 <div class="onglets_simple clearfix">
 	<ul>
 		<li>
