@@ -541,7 +541,17 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	function contraindre_selection (selection, contrainte, last_selection, image) {
 
 		var s = Object.assign({}, selection),
-			taille_canevas  = {
+			zoom_min = zoom_min_get(contrainte,	image);
+
+		// Si l'image est trop petite, on commence par zoomer.
+		if ((zoom_min > 1) && (s.zoom < zoom_min)) {
+			s.zoom = zoom_min;
+			s = zoom_selection(s, last_selection, image);
+		}
+
+		// Une fois qu'on est certain d'avoir la place, on calcule une nouvelle
+		// sélection.
+		var taille_canevas  = {
 				x: round(image.x * s.zoom),
 				y: round(image.y * s.zoom)
 			},
@@ -700,6 +710,18 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 				{ x1: 490, x2: 510, y1: 295, y2: 305, zoom: 2 },
 				{ x: 100, y: 50 },
 				null,
+				{ x: 500, y: 300 }
+			);
+		}
+	));
+	tests.push(make_test_equals(
+		'contraindre une sélection fonctionne quand l\'image est trop petite',
+		{ x1: 0, x2: 1000, y1: 250, y2: 350, zoom: 2 },
+		function () {
+			return contraindre_selection(
+				{ x1: 0, x2: 500, y1: 0, y2: 300, zoom: 1 },
+				{ x: 1000, y: 100 },
+				{ x1: 0, x2: 500, y1: 0, y2: 300, zoom: 1 },
 				{ x: 500, y: 300 }
 			);
 		}
