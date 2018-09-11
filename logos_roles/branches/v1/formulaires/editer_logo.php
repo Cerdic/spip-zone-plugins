@@ -105,7 +105,7 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 	}
 
 	$res = array(
-		'editable' => ($GLOBALS['meta']['activer_logos'] == 'oui' ? ' ' : '') && (!isset($options['editable']) or $options['editable']),
+		'editable' => (count(lister_roles_logos()) > 0) && (!isset($options['editable']) or $options['editable']),
 		'objet' => $objet,
 		'id_objet' => $id_objet,
 		'_options' => $options,
