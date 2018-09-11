@@ -117,7 +117,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_contacts_organisation' => 'Contacts de l’organisation',
-	'info_nb_contacts' => 'Contacts liés',
+	'info_aucun_contact' => 'Aucun contact',
+	'info_1_contact' => 'Un contact',
+	'info_nb_contacts' => 'Contacts liés', // FIXME : manque @nb@
+	'info_aucune_organisations' => 'Aucune organisation',
+	'info_1_organisation' => 'Une organisation',
+	'info_nb_organisations' => '@nb@ organisations',
 	'info_nb_filiales' => 'Filiales',
 	'info_organisation_appartenance' => 'Organisation d’appartenance',
 	'info_organisations_appartenance' => 'Organisations d’appartenance',
