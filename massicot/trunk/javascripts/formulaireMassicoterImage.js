@@ -31,6 +31,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		imgAreaSelector,
 		slider,
 		selecteur_format = self.find('select[name=format]'),
+		bouton_reset = self.find('.bouton_reset'),
 		// Raccourcis
 		round = Math.round,
 		max = Math.max,
@@ -202,6 +203,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 				});
 
 				selecteur_format_init();
+				bouton_reset_init();
 			},
 			onSelectChange: function (img, s) {
 
@@ -359,6 +361,34 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 			}
 		})
 			.trigger('change');
+	}
+
+	/**
+	 * Initialisation du bouton de réinitialisation
+	 */
+	function bouton_reset_init () {
+
+		bouton_reset.click(function (e) {
+
+			var s = {
+				x1: 0,
+				x2: dimensions_image.x,
+				y1: 0,
+				y2: dimensions_image.y,
+				zoom: 1
+			};
+
+			slider.slider('option', 'value', s.zoom);
+			selecteur_format.val('').trigger('change');
+
+			form_set(s);
+			img_set(s);
+			selector_set(s);
+			derniere_selection_widget = s;
+
+			e.preventDefault();
+			return false;
+		});
 	}
 
 	/**
