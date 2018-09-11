@@ -195,9 +195,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 				slider_init(s_init, function () {
 					/* Après avoir un initialisé le slider, la mise en page ne
 					   bougera plus. On peut alors initialiser la sélection */
-					var s = GUI_get_selection();
-					derniere_selection_widget = s;
-					img_set(s);
+					img_set(GUI_get_selection());
 				});
 
 				selecteur_format_init();
@@ -262,6 +260,8 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 
 		imgAreaSelector.setSelection(s.x1, s.y1, s.x2, s.y2);
 		imgAreaSelector.update();
+
+		derniere_selection_widget = s;
 	}
 
 	/**
@@ -338,7 +338,6 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 				s = contraindre_selection(s, contrainte_selection, derniere_selection_widget, dimensions_image);
 
 				img_set(s);
-				selector_set(s);
 				form_set(s);
 
 			} else {
