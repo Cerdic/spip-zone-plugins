@@ -84,6 +84,8 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		self.find('input[name=y1]').attr('value', valeurs.y1);
 		self.find('input[name=y2]').attr('value', valeurs.y2);
 		self.find('input[name=zoom]').attr('value', valeurs.zoom);
+
+		self.find('.dimensions').html((valeurs.x2 - valeurs.x1) + ' x ' + (valeurs.y2 - valeurs.y1));
 	}
 
 	/**
