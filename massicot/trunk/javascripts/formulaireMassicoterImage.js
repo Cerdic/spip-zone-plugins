@@ -539,19 +539,10 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	 * Retourne la sélection aux dimensions imposées dont le centre est
 	 * identique à la sélection passée en paramètre.
 	 */
-	function contraindre_selection (s, contrainte, last_selection, image) {
+	function contraindre_selection (selection, contrainte, last_selection, image) {
 
-		var zoom_min = zoom_min_get(contrainte,	image);
-
-		// Si c'est nécessaire, on commence par zoomer.
-		if (s.zoom < zoom_min) {
-			s.zoom = zoom_min;
-			s = zoom_selection(s, last_selection, image);
-		}
-
-		// Une fois qu'on est certain d'avoir la place, on calcule une nouvelle
-		// sélection.
-		var taille_canevas  = {
+		var s = Object.assign({}, selection),
+			taille_canevas  = {
 				x: round(image.x * s.zoom),
 				y: round(image.y * s.zoom)
 			},
@@ -560,18 +551,19 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 				y: (s.y2 + s.y1) / 2
 			},
 			zoom_reel = min(1, s.zoom),
+			// echelle max avant que la sélection ne dépasse du canevas
 			echelle_max = min(
-				taille_canevas.x / contrainte.x,
-				taille_canevas.y / contrainte.y
+				taille_canevas.x / zoom_reel / contrainte.x,
+				taille_canevas.y / zoom_reel / contrainte.y
 			),
-			echelle_x = (s.x2 - s.x1) * zoom_reel / contrainte.x,
-			echelle_y = (s.y2 - s.y1) * zoom_reel / contrainte.y,
+			echelle_x = (s.x2 - s.x1) / zoom_reel / contrainte.x,
+			echelle_y = (s.y2 - s.y1) / zoom_reel / contrainte.y,
 			echelle = min(
 				max(zoom_reel, (echelle_x + echelle_y) / 2),
 				echelle_max
 			),
-			largeur_selection = contrainte.x * echelle,
-			hauteur_selection = contrainte.y * echelle;
+			largeur_selection = contrainte.x * zoom_reel * echelle,
+			hauteur_selection = contrainte.y * zoom_reel * echelle;
 
 		s = $.extend(s, {
 			x1: round(max(0, centre.x - (largeur_selection / 2))),
@@ -602,6 +594,18 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 				{ x: 100, y: 50 },
 				null,
 				{ x: 500, y: 300 }
+			);
+		}
+	));
+	tests.push(make_test_equals(
+		'contraindre une sélection ok ne la modifie pas (zoom = 1, zoom_cible petit)',
+		{ x1: 0, x2: 150, y1: 25, y2: 75, zoom: 0.25 },
+		function () {
+			return contraindre_selection(
+				{ x1: 0, x2: 150, y1: 25, y2: 75, zoom: 0.25 },
+				{ x: 300, y: 100 },
+				{ x1: 0, x2: 600, y1: 100, y2: 300, zoom: 1 },
+				{ x: 600, y: 400 }
 			);
 		}
 	));
@@ -679,11 +683,11 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	));
 	tests.push(make_test_equals(
 		'contraindre une sélection trop petite fonctionne (zoom < 1)',
-		{ x1: 150, x2: 250, y1: 145, y2: 155, zoom: 0.5 },
+		{ x1: 175, x2: 225, y1: 145, y2: 155, zoom: 0.5 },
 		function () {
 			return contraindre_selection(
 				{ x1: 190, x2: 210, y1: 145, y2: 155, zoom: 0.5 },
-				{ x: 200, y: 20 },
+				{ x: 200, y: 40 },
 				null,
 				{ x: 800, y: 600 }
 			);
