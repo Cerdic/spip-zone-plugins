@@ -318,8 +318,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		selecteur_format.change(function (e) {
 
 			var s = GUI_get_selection(),
-				format = e.target.value,
-				zoom_min;
+				format = e.target.value;
 
 			if (format) {
 				dimensions_forcees = true;
@@ -333,11 +332,6 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 					minWidth: round(contrainte_selection.x * min(1, s.zoom)),
 					minHeight: round(contrainte_selection.y * min(1, s.zoom))
 				});
-
-				zoom_min = zoom_min_get(contrainte_selection, dimensions_image);
-
-				slider.slider('option', 'min', zoom_min);
-				slider.slider('option', 'value', max(zoom_min, s.zoom));
 
 				s = contraindre_selection(s, contrainte_selection, derniere_selection_widget, dimensions_image);
 
@@ -573,7 +567,10 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	function contraindre_selection (selection, contrainte, last_selection, image) {
 
 		var s = Object.assign({}, selection),
-			zoom_min = zoom_min_get(contrainte,	image);
+			zoom_min = max(
+				contrainte.x / image.x,
+				contrainte.y / image.y
+			);
 
 		// Si l'image est trop petite, on commence par zoomer.
 		if ((zoom_min > 1) && (s.zoom < zoom_min)) {
@@ -758,14 +755,6 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 			);
 		}
 	));
-
-	function zoom_min_get (contrainte, image) {
-
-		return Math.max(
-			contrainte.x / image.x,
-			contrainte.y / image.y
-		);
-	}
 
 	/**
 	 * Fonctions utiles pour les tests.
