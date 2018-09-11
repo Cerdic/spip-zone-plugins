@@ -195,7 +195,10 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 				slider_init(s_init, function () {
 					/* Après avoir un initialisé le slider, la mise en page ne
 					   bougera plus. On peut alors initialiser la sélection */
-					img_set(GUI_get_selection());
+					var s = GUI_get_selection();
+					img_set(s);
+					selector_set(s);
+					derniere_selection_widget = s;
 				});
 
 				selecteur_format_init();
@@ -260,8 +263,6 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 
 		imgAreaSelector.setSelection(s.x1, s.y1, s.x2, s.y2);
 		imgAreaSelector.update();
-
-		derniere_selection_widget = s;
 	}
 
 	/**
@@ -302,6 +303,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 
 				form_set(s);
 				img_set(s);
+				selector_set(s);
 			}
 		});
 	}
@@ -337,8 +339,10 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 
 				s = contraindre_selection(s, contrainte_selection, derniere_selection_widget, dimensions_image);
 
-				img_set(s);
 				form_set(s);
+				img_set(s);
+				selector_set(s);
+				derniere_selection_widget = s;
 
 			} else {
 				dimensions_forcees = false;
@@ -370,8 +374,6 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		img
 			.css('width', min(1, s.zoom) * dimensions_image.x + 'px')
 			.css('padding-top', (max(1, s.zoom) - 1) / 2 * dimensions_image.y);
-
-		selector_set(s);
 	}
 
 	/**
