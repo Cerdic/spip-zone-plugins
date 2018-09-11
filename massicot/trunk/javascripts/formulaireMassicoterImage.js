@@ -794,3 +794,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	return self;
 };
 
+// Local Variables:
+// indent-tabs-mode: t
+// tab-width: 4
+// End:
