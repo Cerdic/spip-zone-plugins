@@ -463,6 +463,73 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		return s;
 	}
 
+	tests.push(make_test_equals(
+		'zoomer la sélection sans zoom ne fait rien',
+		{ x1: 200, x2: 400, y1: 0, y2: 100, zoom: 1},
+		function () {
+			return zoom_selection(
+				{ x1: 200, x2: 400, y1: 0, y2: 100, zoom: 1},
+				{ x1: 200, x2: 400, y1: 0, y2: 100, zoom: 1},
+				{ x: 500, y: 300 }
+			);
+		}
+	));
+	tests.push(make_test_equals(
+		'zoomer la sélection en partant sans zoom fonctionne',
+		{ x1: 100, x2: 200, y1: 0, y2: 50, zoom: 0.5},
+		function () {
+			return zoom_selection(
+				{ x1: 200, x2: 400, y1: 0, y2: 100, zoom: 0.5},
+				{ x1: 200, x2: 400, y1: 0, y2: 100, zoom: 1},
+				{ x: 500, y: 300 }
+			);
+		}
+	));
+	tests.push(make_test_equals(
+		'zoomer la sélection en partant d\'un zoom < 1 fonctionne',
+		{ x1: 100, x2: 200, y1: 0, y2: 50, zoom: 0.25},
+		function () {
+			return zoom_selection(
+				{ x1: 200, x2: 400, y1: 0, y2: 100, zoom: 0.25},
+				{ x1: 200, x2: 400, y1: 0, y2: 100, zoom: 0.5},
+				{ x: 1000, y: 600 }
+			);
+		}
+	));
+	tests.push(make_test_equals(
+		'zoomer la sélection en partant d\'un zoom < 1 fonctionne',
+		{ x1: 650, x2: 1000, y1: 150, y2: 350, zoom: 2},
+		function () {
+			return zoom_selection(
+				{ x1: 200, x2: 400, y1: 0, y2: 100, zoom: 2},
+				{ x1: 200, x2: 400, y1: 0, y2: 100, zoom: 0.5},
+				{ x: 500, y: 300 }
+			);
+		}
+	));
+	tests.push(make_test_equals(
+		'zoomer la sélection en partant d\'un zoom > 1 fonctionne',
+		{ x1: 25, x2: 250, y1: 0, y2: 100, zoom: 0.5},
+		function () {
+			return zoom_selection(
+				{ x1: 300, x2: 1000, y1: 150, y2: 350, zoom: 0.5},
+				{ x1: 300, x2: 1000, y1: 150, y2: 350, zoom: 2},
+				{ x: 500, y: 300 }
+			);
+		}
+	));
+	tests.push(make_test_equals(
+		'zoomer la sélection en partant d\'un zoom > 1 fonctionne',
+		{ x1: 550, x2: 1250, y1: 300, y2: 500, zoom: 3},
+		function () {
+			return zoom_selection(
+				{ x1: 300, x2: 1000, y1: 150, y2: 350, zoom: 3},
+				{ x1: 300, x2: 1000, y1: 150, y2: 350, zoom: 2},
+				{ x: 500, y: 300 }
+			);
+		}
+	));
+
 	/**
 	 * Retourne la sélection aux dimensions imposées dont le centre est
 	 * identique à la sélection passée en paramètre.
