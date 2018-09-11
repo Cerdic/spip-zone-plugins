@@ -51,4 +51,9 @@
         margin: 0;
         padding: 3px; } }
 
+.formulaire_configurer_logos_roles .fieldset .editer-groupe .editer {
+  padding: 10px;
+  display: inline-block;
+  max-width: 225px; }
+
 /*# sourceMappingURL=logos_roles.css.map */
