@@ -19,10 +19,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_slug_invalide' => 'Seules les lettres minuscules et les _ sont autorisés dans ce champ',
 	'explication_saisie_slug_role' => 'Un nom "machine" unique pour définir le nom de la balise qui permet de récupérer le logo. P.ex. « accueil » donnera #LOGO_ACCUEIL.',
 	'explication_saisie_titre_role' => "Le titre du rôle, tel qu'il apparaitra dans l'interface. Pour les sites multilingues, on peut aussi utiliser une <a href='https://www.spip.net/fr_article2124.html'>balise multi</a> ou une chaîne de langue du type \"module:chaine_de_langue\".",
+	'explication_fieldset_dimensions_role' => 'Laisser vide pour ne pas imposer de taille pour le logo.',
 	'explications_formulaire_migrer_logos_roles' => "Vous pouvez convertir les logos enregistrés au format SPIP original en documents (déplacement des logos de la racine de IMG vers des documents).<br>
 Sélectionnez les types d'objets éditoriaux dont vous voulez migrer les logos puis cliquez sur « Convertir les logos ».",
 
 	// L
+	'label_fieldset_dimensions_role' => 'Dimensions du logo',
+	'label_saisie_largeur_role' => 'Largeur [px]',
+	'label_saisie_hauteur_role' => 'Hauteur [px]',
 	'label_saisie_objets_role' => 'Les objets éditoriaux pour lesquels ce type de logos sera proposé :',
 	'label_saisie_slug_role' => 'Identifiant du rôle',
 	'label_saisie_titre_role' => 'Titre du rôle',

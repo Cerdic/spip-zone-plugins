@@ -84,6 +84,12 @@ function lister_roles_logos($objet = null, $role = null, $tous_les_objets = null
 				'label' => extraire_multi($r['titre']) ?: $r['slug'],
 				'objets' => $r['objets'],
 			);
+
+			if (isset($r['dimensions']) and
+					isset($r['dimensions']['largeur']) and ($r['dimensions']['largeur'] > 0) and
+					isset($r['dimensions']['hauteur']) and ($r['dimensions']['hauteur'] > 0)) {
+				$roles_logos['logo_' . $r['slug']]['dimensions'] = $r['dimensions'];
+			}
 		}
 	}
 
