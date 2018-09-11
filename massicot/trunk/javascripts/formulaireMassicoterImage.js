@@ -580,6 +580,30 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		return s;
 	}
 
+	tests.push(make_test_equals(
+		'contraindre une sélection ok ne la modifie pas',
+		{ x1: 100, x2: 200, y1: 0, y2: 50, zoom: 1},
+		function () {
+			return contraindre_selection(
+				{ x1: 100, x2: 200, y1: 0, y2: 50, zoom: 1},
+				{ x: 100, y: 50 },
+				null,
+				{ x: 500, y: 300 }
+			);
+		}
+	));
+	tests.push(make_test_equals(
+		'contraindre une sélection trop grande fonctionne',
+		{ x1: 0, x2: 500, y1: 50, y2: 300, zoom: 1},
+		function () {
+			return contraindre_selection(
+				{ x1: 0, x2: 500, y1: 0, y2: 400, zoom: 1},
+				{ x: 100, y: 50 },
+				null,
+				{ x: 500, y: 300 }
+			);
+		}
+	));
 	function zoom_min_get (contrainte, image) {
 
 		return Math.max(
