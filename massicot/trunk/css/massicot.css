@@ -1,5 +1,12 @@
 .image-massicot {
+  heigth: auto;
   text-align: center;
+}
+
+.image-massicot img {
+  display: block;
+  height: auto;
+  margin: auto;
 }
 
 .massicoter_image .boutons {
