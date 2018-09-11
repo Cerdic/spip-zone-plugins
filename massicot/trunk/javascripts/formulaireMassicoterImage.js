@@ -200,24 +200,31 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 				selecteur_format_init();
 				// init_bouton_reinit();
 			},
-			onSelectChange: function (img, selection) {
+			onSelectChange: function (img, s) {
 
 				/* Le widget nous donne un objet avec des infos inutiles, on
 				 * nettoie un peu… */
-				delete selection.width;
-				delete selection.height;
+				delete s.width;
+				delete s.height;
 
-				if (isNaN(selection.x1)) { delete selection.x1; }
-				if (isNaN(selection.x2)) { delete selection.x2; }
-				if (isNaN(selection.y1)) { delete selection.y1; }
-				if (isNaN(selection.y2)) { delete selection.y2; }
+				if (isNaN(s.x1)) { delete s.x1; }
+				if (isNaN(s.x2)) { delete s.x2; }
+				if (isNaN(s.y1)) { delete s.y1; }
+				if (isNaN(s.y2)) { delete s.y2; }
 
 				/* Quand le wigdet ne donne rien d'utile, on prends les valeurs
 				 * enregistrées dans le formulaire. */
-				selection = $.extend(form_get(), selection);
+				s = $.extend(form_get(), s);
 
-				derniere_selection_widget = selection;
-				form_set(selection);
+				/* S'il est déjà disponible, on utilise plutôt la valeur de zoom
+				 * du slider, qui correspond à ce qu'on voit vraiment à
+				 * l'écran. */
+				if (slider && slider.slider instanceof Function) {
+					s.zoom = slider.slider('option', 'value');
+				}
+
+				derniere_selection_widget = s;
+				form_set(s);
 			}
 		});
 	}
@@ -262,6 +269,12 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 				selection = zoom_selection(selection);
 				if (dimensions_forcees) {
 					selection = contraindre_selection(selection);
+
+					imgAreaSelector.setOptions({
+						aspectRatio: largeur_forcee + ':' + hauteur_forcee,
+						minWidth: round(largeur_forcee * min(1, selection.zoom)),
+						minHeight: round(hauteur_forcee * min(1, selection.zoom))
+					});
 				}
 
 				form_set(selection);
