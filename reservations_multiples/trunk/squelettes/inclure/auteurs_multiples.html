@@ -12,25 +12,29 @@
 				env} />
 		</div>
 		</BOUCLE_auteurs_multiples>
+		#SET{nr,#TOTAL_BOUCLE|=={1}|?{'',#TOTAL_BOUCLE|moins{1}}}
 		<div class="editer action enlever">
 			<div class="choix">
 				<input
+					id="nr_auteurs_#GET{nr}"
 					type="image"
 					name="nr_auteurs"
-					value="[(#TOTAL_BOUCLE|=={1}|?{'',#TOTAL_BOUCLE|moins{1}})]"
+					value="#GET{nr}"
 					src="#CHEMIN_IMAGE{auteur-del-24.png}"
-					[ (#HTML5)formnovalidate] alt="moins" /> <label><:reservations_multiples:label_enlever:></label>
+					[ (#HTML5)formnovalidate] alt="moins" /> <label for="nr_auteurs_#GET{nr}"><:reservations_multiples:label_enlever:></label>
 				</div>
 			</div>
 			[(#GET{limit}|>{#TOTAL_BOUCLE}|oui|ou{#ENV{nombre_limite}|non})
+			#SET{nr,#TOTAL_BOUCLE|plus{1}}
 			<div class="editer action ajouter">
 				<div class="choix">
 					<input
+						id="nr_auteurs_#GET{nr}"
 						type="image"
 						name="nr_auteurs"
-						value="[(#TOTAL_BOUCLE|plus{1})]"
+						value="#GET{nr}"
 						src="#CHEMIN_IMAGE{auteur-new-24.png}"
-						[(#HTML5)formnovalidate] alt="plus" /> <label><:reservations_multiples:label_ajouter:></label>
+						[(#HTML5)formnovalidate] alt="plus" /> <label for="nr_auteurs_#GET{nr}"><:reservations_multiples:label_ajouter:></label>
 				</div>
 			</div>]
 		</div>
@@ -38,11 +42,12 @@
 		<div class="editer action ajouter">
 			<div class="choix">
 				<input
+					id="nr_auteurs"
 					type="image"
 					value="1"
 					name="nr_auteurs"
 					src="#CHEMIN_IMAGE{auteur-new-24.png}"
-					[ (#HTML5)formnovalidate] alt="plus" /> <label><:reservations_multiples:label_ajouter:></label>
+					[ (#HTML5)formnovalidate] alt="plus" /> <label for="nr_auteurs"> <:reservations_multiples:label_ajouter:></label>
 			</div>
 		</div>
 	<//B_auteurs_multiples>
