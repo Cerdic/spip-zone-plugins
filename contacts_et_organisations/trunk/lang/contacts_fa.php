@@ -58,8 +58,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_supprimer_organisation' => 'حذف اين سازمان تمام اطلاعات اضافي را كه در صفحه‌ي نويسنده پر شده حذف خواهد كرد. ', # MODIF
 
 	// I
+	'info_1_organisation' => 'يك سازمان',
 	'info_contacts_organisation' => 'تماس‌هاي سازمان',
 	'info_nb_contacts' => 'تماس‌هاي پيوند شده',
+	'info_nb_organisations' => '@nb@ سازمان',
 	'info_organisation_appartenance' => 'تعلق سازمان',
 	'info_organisations_appartenance' => 'تعلق سازمان‌ها',
 	'info_organisations_filles' => 'پرونده‌هاي سازمان‌ها',

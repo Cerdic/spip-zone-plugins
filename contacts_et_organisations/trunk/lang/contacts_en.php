@@ -121,8 +121,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exporter_organisations' => 'Download those organisations as spreadsheet ',
 
 	// I
+	'info_1_contact' => 'A contact',
+	'info_1_organisation' => 'One organization',
+	'info_aucune_organisations' => 'No organization',
 	'info_contacts_organisation' => 'Organisation’s contacts',
 	'info_nb_contacts' => 'Linked contacts',
+	'info_nb_organisations' => '@nb@ organizations',
 	'info_organisation_appartenance' => 'Belonging Organisation',
 	'info_organisations_appartenance' => 'Membership organizations',
 	'info_organisations_filles' => 'Children organizations',

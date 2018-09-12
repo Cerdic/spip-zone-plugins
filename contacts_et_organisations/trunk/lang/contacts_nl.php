@@ -81,8 +81,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exporter_organisations' => 'Deze organisaties in een tabel downloaden',
 
 	// I
+	'info_1_contact' => 'Een contact ',
+	'info_1_organisation' => 'Een organisatie in deze repertorium oprichten',
+	'info_aucune_organisations' => 'Geen organisatie',
 	'info_contacts_organisation' => 'Contacten van de organisatie',
 	'info_nb_contacts' => 'Verbonden contacten',
+	'info_nb_organisations' => '@nb@ organisaties',
 	'info_organisation_appartenance' => 'Bijbehorende organisatie',
 	'info_organisations_appartenance' => 'Bijbehorende organisaties',
 	'info_organisations_filles' => 'Dochterorganisaties',

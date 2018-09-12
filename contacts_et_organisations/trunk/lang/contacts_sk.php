@@ -110,8 +110,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  <ul>  <li> zobraziť všetky organizácie, </ li> upraviť autorov v organizáciách, </ li> nahrať organizácie, </ li> ...</ li> </ ul> <br / > Ďakujeme vám za podnety na <a href="http://contrib.spip.net/Plugin-Contacts-Organisations#pagination_comments-list"> diskusnom fóre;-) </ a>', # MODIF
 
 	// I
+	'info_1_contact' => 'Jeden kontakt',
+	'info_1_organisation' => 'Jedna organizácia',
+	'info_aucune_organisations' => 'Žiadna organizácia',
 	'info_contacts_organisation' => 'Kontakty organizácie',
 	'info_nb_contacts' => 'Prepojené kontakty',
+	'info_nb_organisations' => '@nb@ organizácií',
 	'info_organisation_appartenance' => 'Členstvo v organizácii',
 	'info_organisations_appartenance' => 'Členstvo v organizáciách',
 	'info_organisations_filles' => 'Podradené organizácie',
