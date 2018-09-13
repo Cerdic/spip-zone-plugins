@@ -12,6 +12,7 @@
 				env} />
 		</div>
 		</BOUCLE_auteurs_multiples>
+		#SET{nr,#TOTAL_BOUCLE|=={1}|?{'',#TOTAL_BOUCLE|moins{1}}}
 		<div class="editer action enlever">
 			<div class="choix">
 				<input
@@ -20,7 +21,7 @@
 					name="nr_auteurs"
 					value="#GET{nr}"
 					src="#CHEMIN_IMAGE{auteur-del-24.png}"
-					[ (#HTML5)formnovalidate] alt="moins" /> <label><:reservations_multiples:label_enlever:></label>
+					[ (#HTML5)formnovalidate] alt="moins" /> <label for="nr_auteurs_#GET{nr}"><:reservations_multiples:label_enlever:></label>
 				</div>
 			</div>
 			[(#GET{limit}|>{#TOTAL_BOUCLE}|oui|ou{#ENV{nombre_limite}|non})
