@@ -22,5 +22,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_format_liste_bloc' => 'Un bloc séparé par des espaces (ou séparateur configuré)',
 	'label_format_liste_liste' => 'Une liste à puces',
 	'label_langues_invisibles' => 'Langues invisibles du menu',
+	'label_langue_courante_invisible' => 'Masquer la langue courant',
 	'label_separateur' => 'Séparateur des langues'
 );

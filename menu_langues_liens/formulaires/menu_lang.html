@@ -21,6 +21,7 @@
 </BOUCLE_TraductionArticleCourant>
 </BOUCLE_article>
 
+
 [(#REM)
 	Y-a-t'il plus d'une langue à afficher (moins les langues "invisibles") ?
 	Si oui, on affiche le menu de langue
@@ -47,6 +48,8 @@
 #SET{format,#CONFIG{menu_lang_liens/format,abrege}}
 #SET{separateur,#CONFIG{menu_lang_liens/separateur,''}}
 [(#GET{liste}|=={liste}|?{#SET{separateur,#CONFIG{menu_lang_liens/separateur,''}},''})]
+
+[(#REM) on supprime la langue courante si jamais c'est configuré pour cela]
 <BOUCLE_PlusieursLanguesUtilisees(POUR){tableau #GET{langues_a_afficher}}{1,1}>
 <[(#GET{liste}|=={liste}|?{ul,div})] id="menu_lang">[(#REM)
 
@@ -68,7 +71,7 @@
 	
 		Si la langue est celle en cours, afficher celle-ci en gras, sans lien
 
-	][[[[[(#GET{separateur})](#GET{liste}|=={liste}|non)](#COMPTEUR_BOUCLE|>{1}|oui)]<strong class="langue_#VALEUR" title="[(#VALEUR|traduire_nom_langue|ucfirst|attribut_html)]">(#GET{nom_langue}|ucfirst)</strong>](#VALEUR|=={#ENV{lang}}|oui)][
+		][[[[[(#GET{separateur})](#GET{liste}|=={liste}|non)](#COMPTEUR_BOUCLE|>{1}|oui)]<strong class="langue_#VALEUR" title="[(#VALEUR|traduire_nom_langue|ucfirst|attribut_html)]">(#GET{nom_langue}|ucfirst)</strong>](#VALEUR|=={#ENV{lang}}|oui|et{#CONFIG{menu_lang_liens/langue_courante_invisible}|non})][
 	(#GET{liste}|=={liste}|oui)</li>
 ]</BOUCLE_ListeLangues>
 </[(#GET{liste}|=={liste}|?{ul,div})]>

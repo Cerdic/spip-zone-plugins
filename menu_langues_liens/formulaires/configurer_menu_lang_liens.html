@@ -17,6 +17,10 @@
 				</BOUCLE_langues>
 			</select>
 		</li>
+		<li class="editer editer_mll_langue_courante_invisible">
+			<label for="langue_courante_invisible"><:mll:label_langue_courante_invisible:></label>
+			<input type="checkbox" name="langue_courante_invisible"[ checked="(#ENV{langue_courant_invisible}|oui)checked"] />
+		</li>
 		<li class="editer editer_mll_langues_supprimer[ (#ENV**{erreurs}|table_valeur{format}|oui)erreur]">
 			<label for="format"><:mll:label_format:></label>
 			<div class="choix">
