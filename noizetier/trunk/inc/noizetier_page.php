@@ -249,6 +249,7 @@ function noizetier_page_lister_blocs($page, $blocs_exclus = array()) {
 	// Si la liste des blocs exclus n'a pas été passé en argument on les cherche dans la configuration
 	// de la page
 	if (!$blocs_exclus) {
+		include_spip('base/abstract_sql');
 		$where = array('page=' . sql_quote($page));
 		$blocs_exclus = sql_getfetsel('blocs_exclus', 'spip_noizetier_pages', $where);
 		$blocs_exclus = unserialize($blocs_exclus);
