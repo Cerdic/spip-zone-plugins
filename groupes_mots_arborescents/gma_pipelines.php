@@ -20,7 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 **/
 function gma_afficher_complement_objet($flux) {
 	// sur la vue d'un groupe de mot
-	if ($flux['args']['type'] == 'groupemots') {
+	if (objet_type($flux['args']['type']) == 'groupe_mots') {
 		$id = $flux['args']['id'];
 		// completer la vue avec les informations des sous groupes
 		$flux['data'] .= recuperer_fond("prive/squelettes/contenu/inc-groupes_mots", array('id_parent' => $id), "ajax");
