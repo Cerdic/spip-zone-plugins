@@ -47,8 +47,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'remove_comments_with_cdata_tags_label_case' => 'Remove comments with CDATA tags,',
 	'remove_comments_with_cdata_tags_explication' => 'Only works if clean_js_comments is true. In XHTML content inside &lt;script&gt; tags are sometimes encapsulated in commented CDATA blocks to make them XML-compatible. By default these commented CDATA tags are preserved for document integrity.',
 
-	'compression_ignore_script_tags_label_case' => 'Don\'t compress content in &lt;script&gt; tags,',
-	'compression_ignore_script_tags_explication' => 'Will not minify content within &lt;script&gt; tags as it might break poorly-written Javascript code.',
+	'compression_ignored_tags_label_case' => 'Compression ignored tags',
+	'compression_ignored_tags_explication' => 'Array containing a list of all the tags (in lowercase) to skip compression for. This is to prevent HTML Minifier from messing with the behaviour of tags like &lt;textarea&gt; and &lt;pre&gt;, where removed whitespace can affect displayed content.',
 
 	'shift_script_tags_to_bottom_label_case' => 'Shift all &lt;script&gt; tags to the end of &lt;body&gt;,',
 	'shift_script_tags_to_bottom_explication' => 'Convenience option for pages that are built dynamically in the backend. Moves all &lt;script&gt; tags to the end of &lt;body&gt;.',
@@ -59,4 +59,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'section_general' => 'Général options',
 	'section_css' => 'CSS Options',
 	'section_javascript' => 'Javascript Options',
+
+	'config_super_safe' => 'super safe',
+	'config_safe' => 'safe',
+	'config_moderate' => 'moderate',
+	'config_fully_optimised' => 'fully optimised',
+	'config_label' => 'Apply compression and optimization options',
 );
