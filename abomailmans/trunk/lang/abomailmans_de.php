@@ -10,6 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'abomailmans' => 'Newsletter und Mailinglisten',
 	'abonne' => 'Ich abonniere',
 	'active' => 'Aktiv',
 	'aucune_langue' => 'Keine ANgabn',
@@ -65,6 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_etat_liste' => 'Status der Liste',
 	'langue_liste' => 'Sprache der Liste',
+	'legende_inscriptions_news' => 'Newsletter Anmeldung',
 	'les_listes_mailmans' => 'Bekannte Mailman-Listen',
 	'lire_article' => 'Artikel lesen',
 	'liste_creee' => 'Die Liste Nummer @id@ (@titre@) wurde angelegt.',

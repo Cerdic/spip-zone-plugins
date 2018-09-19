@@ -1,5 +1,6 @@
 <traduction module="abomailmans" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/abomailmans/trunk/lang/" reference="fr">
-	<langue code="de" url="https://trad.spip.net/tradlang_module/abomailmans?lang_cible=de" total="100" traduits="66" relire="0" modifs="6" nouveaux="28" pourcent="66.00">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/abomailmans?lang_cible=de" total="100" traduits="68" relire="0" modifs="6" nouveaux="26" pourcent="68.00">
+		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
 	<langue code="en" url="https://trad.spip.net/tradlang_module/abomailmans?lang_cible=en" total="100" traduits="100" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
