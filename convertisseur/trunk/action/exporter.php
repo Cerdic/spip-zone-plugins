@@ -1,4 +1,11 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+function action_exporter_dist(){
+	
+}
+
 /*
 	Exporter un article dans un fichier texte
 	$f : ligne d'un tableau résultat d'un sql_fetch sur spip_articles

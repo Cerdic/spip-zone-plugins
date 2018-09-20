@@ -136,7 +136,7 @@ class ConvertisseurExporter extends Command {
 					$progress->setMessage(" Export de `spip_articles` branche $branche en cours dans $dest ... ", 'message');
 					$progress->start();
 					
-					include_spip("inc/exporter");
+					include_spip("action/exporter");
 					while($f = sql_fetch($query)){
 						
 						$progress->setMessage('', 'motscles');
