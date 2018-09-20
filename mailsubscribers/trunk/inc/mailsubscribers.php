@@ -668,13 +668,18 @@ function mailsubscribers_synchronise_liste($liste, $abonnes, $options = array())
 	unset($subs);
 
 	// on enleve de la liste ceux qui ont deja ete abonnes dans le passe mais se sont desinscrit car on ne les reabonnera pas
+	$obfusques = array_keys($abonnes_emails);
+	$obfusques = array_combine(array_map('mailsubscribers_obfusquer_email', $obfusques), $obfusques);
 	$unsubs = sql_allfetsel('S.email',
 		'spip_mailsubscribers as S JOIN spip_mailsubscriptions as L ON S.id_mailsubscriber=L.id_mailsubscriber',
-		'L.id_mailsubscribinglist=' . intval($id_mailsubscribinglist) . ' AND L.id_segment=0 AND L.statut=' . sql_quote('refuse') . ' AND ' . sql_in('S.email', array_keys($abonnes_emails)));
+		'L.id_mailsubscribinglist=' . intval($id_mailsubscribinglist) . ' AND L.id_segment=0 AND L.statut=' . sql_quote('refuse') . ' AND ' . sql_in('S.email', array_merge(array_keys($obfusques), array_values($obfusques))));
 	spip_log("mailsubscribers_synchronise_liste $liste: " . count($unsubs) . " ne veulent pas etre reabonnes a la liste", "mailsubscribers" . _LOG_DEBUG);
 	foreach ($unsubs as $unsub) {
 		if (isset($abonnes_emails[$unsub['email']])) {
 			unset($abonnes_emails[$unsub['email']]);
+		}
+		elseif (isset($abonnes_emails[$obfusques[$unsub['email']]])) {
+			unset($abonnes_emails[$obfusques[$unsub['email']]]);
 		}
 	}
 
