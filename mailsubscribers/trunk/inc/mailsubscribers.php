@@ -641,12 +641,14 @@ function mailsubscribers_synchronise_liste($liste, $abonnes, $options = array())
 	$unsubscribe = charger_fonction('unsubscribe', 'newsletter');
 
 	// d'abord on prend la liste de tous les abonnes en base
-	// et on retire ceux qui ne sont plus dans le tableau $abonnes
+	// -> on retire du tableau $abonnes ceux qui le sont deja
+	// -> on desabonne ceux qui ne sont plus dans le tableau $abonnes
 	$subs = sql_allfetsel('S.email',
 		'spip_mailsubscribers as S JOIN spip_mailsubscriptions as L ON S.id_mailsubscriber=L.id_mailsubscriber',
 		'L.id_mailsubscribinglist=' . intval($id_mailsubscribinglist) . ' AND L.id_segment=0 AND L.statut=' . sql_quote('valide'));
 	spip_log("mailsubscribers_synchronise_liste $liste: " . count($subs) . " abonnes deja dans la liste",
 		"mailsubscribers" . _LOG_DEBUG);
+	$i=0;
 	foreach ($subs as $sub) {
 		// OK il est toujours dans les abonnes
 		if (isset($abonnes_emails[$sub['email']])) {
@@ -655,15 +657,31 @@ function mailsubscribers_synchronise_liste($liste, $abonnes, $options = array())
 		elseif (!$options['addonly']) {
 			//echo "unsubscribe ".$sub['email']."<br />";
 			$unsubscribe($sub['email'], array('listes' => $listes, 'notify' => false, 'remove' => true));
+			$i++;
 		}
 		if (time() >= $max_time) {
+			spip_log("mailsubscribers_synchronise_liste $liste: $i desabonnes de la liste mais temps ecoule", "mailsubscribers" . _LOG_DEBUG);
 			return false;
+		}
+	}
+	spip_log("mailsubscribers_synchronise_liste $liste: $i desabonnes de la liste", "mailsubscribers" . _LOG_DEBUG);
+	unset($subs);
+
+	// on enleve de la liste ceux qui ont deja ete abonnes dans le passe mais se sont desinscrit car on ne les reabonnera pas
+	$unsubs = sql_allfetsel('S.email',
+		'spip_mailsubscribers as S JOIN spip_mailsubscriptions as L ON S.id_mailsubscriber=L.id_mailsubscriber',
+		'L.id_mailsubscribinglist=' . intval($id_mailsubscribinglist) . ' AND L.id_segment=0 AND L.statut=' . sql_quote('refuse') . ' AND ' . sql_in('S.email', array_keys($abonnes_emails)));
+	spip_log("mailsubscribers_synchronise_liste $liste: " . count($unsubs) . " ne veulent pas etre reabonnes a la liste", "mailsubscribers" . _LOG_DEBUG);
+	foreach ($unsubs as $unsub) {
+		if (isset($abonnes_emails[$unsub['email']])) {
+			unset($abonnes_emails[$unsub['email']]);
 		}
 	}
 
 	spip_log("mailsubscribers_synchronise_liste $liste: " . count($abonnes_emails) . " a abonner dans la liste", "mailsubscribers" . _LOG_DEBUG);
 	// si il reste du monde dans $abonnes, c'est ceux qui ne sont pas en base
 	// on les subscribe
+	$i=0;
 	foreach ($abonnes_emails as $email => $abonne) {
 		//echo "subscribe ".$email."<br />";
 		$nom = (isset($abonne['nom']) ? $abonne['nom'] . ' ' : '');
@@ -679,7 +697,9 @@ function mailsubscribers_synchronise_liste($liste, $abonnes, $options = array())
 			$data_subscriber['lang'] = $abonne['lang'];
 		}
 		$subscribe($email, $data_subscriber);
+		$i++;
 		if (time() >= $max_time) {
+			spip_log("mailsubscribers_synchronise_liste $liste: $i/".count($abonnes_emails)." abonnes mais temps ecoule", 'mailsubscribers' . _LOG_DEBUG);
 			return false;
 		}
 	}
