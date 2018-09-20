@@ -2,28 +2,55 @@
 if (!defined('_CACHE_NAMESPACE'))
 	define('_CACHE_NAMESPACE', $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].":");
 
+if (!defined('_CACHE_KEY'))
+	define('_CACHE_KEY', '0123456789ABCDEF');
+
 class MCacheBackend_apc extends MCacheBackend {
 
 	function key_for_lock($str) {
-		return _CACHE_NAMESPACE.md5($str."locked");
+		return _CACHE_NAMESPACE . 'lock:' . md5($str . "locked");
+	}
+
+	function _xor($message) {
+		$key = _CACHE_KEY;
+		$keylen = strlen($key);
+		$messagelen = strlen($message);
+		for ($i = 0; $i < $messagelen; $i++) {
+			$message[$i] = ~($message[$i] ^ $key[$i % $keylen]);
+		}
+		return $message;
+	}
+
+	function store_value($value) {
+		if (is_object($value)
+			or is_array($value)
+			or is_bool($value)
+			or !$value) {
+				return array($this->_xor(serialize($value)));
+		}
+		return $this->_xor($value);
+	}
+
+	function unstore_value($a) {
+		if (is_null($a)) {
+			return $a;
+		}
+		// maybe_unserialize
+		if (is_array($a)){
+			return @unserialize($this->_xor($a[0]));
+		}
+		return $this->_xor($a);
 	}
 
 	function get($key) {
 		$a = apc_fetch(_CACHE_NAMESPACE.$key);
-		// maybe_unserialize
-		if (is_array($a))
-			return @unserialize($a[0]);
-		else
-			return $a;
+		return $this->unstore_value($a);
 	}
 	
 	function set($key, $value, $ttl=null) {
-		// maybe_serialize
-		if (is_object($value) OR is_array($value))
-			$value = array(serialize($value));
 		return is_null($ttl)
-			? apc_store(_CACHE_NAMESPACE.$key, $value)
-			: apc_store(_CACHE_NAMESPACE.$key, $value, $ttl);
+			? apc_store(_CACHE_NAMESPACE.$key, $this->store_value($value))
+			: apc_store(_CACHE_NAMESPACE.$key, $this->store_value($value), $ttl);
 	}
 	
 	function exists($key) {
@@ -67,12 +94,11 @@ class MCacheBackend_apc extends MCacheBackend {
 	}
 
 	function purge() {
+		// le cache en memoire est de toute facon invalide par la globale cache_mark et le ttl est cense nettoyer le reste
 		if (!class_exists('APCIterator'))
 			return false;
 		$a = new APCIterator('user', '/^'.preg_quote(_CACHE_NAMESPACE).'/', APC_ITER_ALL, 256*256);
-		foreach ($a as $cache) {
-			apc_delete($cache['key']);
-		}
+		apc_delete($a);
 		return true;
 	}
 
