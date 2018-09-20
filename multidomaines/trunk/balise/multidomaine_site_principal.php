@@ -1,8 +1,7 @@
 <?php
 
 function balise_MULTIDOMAINE_SITE_PRINCIPAL_dist($p) {
-	$p->code = '$GLOBALS["multidomaine_site_principal"]';
-
+	$p->code = 'lire_config("multidomaines/editer_url")';
 	return $p;
 }
 
