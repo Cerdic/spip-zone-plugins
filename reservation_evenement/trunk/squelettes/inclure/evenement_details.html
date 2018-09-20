@@ -17,7 +17,7 @@
 	<//B_prix_article>
 <//B_prix>
 
-[(#LIEU|ou{#ADRESSE}|ou{#GET{prix}}|ou{#PLACES|>{0}}|oui)
+[(#LIEU|ou{#ADRESSE}|ou{#GET{prix}}|ou{#INSCRIPTION}|oui)
 <aside class="details well">
 	[<div class="location" itemprop="location">
 		<div class="lieu #EDIT{lieu}">
@@ -45,12 +45,21 @@
 					statut=#VAL|statuts_complet}/>
 		]
 	[(#DATE_FIN|>{#DATE}|?{
-		<a class="btn btn-small" title="<:reservation:inscrire:>" href="[(#URL_PAGE{inscription}|parametre_url{id_evenement,#ID_OBJET})]">
-			<i class="icon-hand-right"></i><:reservation:inscrire:>
+	[(#PLUGIN{bootstrap3_sass}|?{
+		#SET{class_a,btn btn-default}
+		#SET{class_i,glyphicon glyphicon-hand-right}
+		,
+		[(#PLUGIN{bootstrap}|oui)
+			#SET{class_a,btn btn-small}
+			#SET{class_1,icon-hand-right}
+		]
+		})]
+		<a[ class="(#GET{class_a})"] title="<:reservation:inscrire:>" href="[(#URL_PAGE{inscription}|parametre_url{id_evenement,#ID_OBJET})]">
+		[<i class="(#GET{class_i})"> </i>] <:reservation:inscrire:>
 		</a>,
 		<p><strong><:reservation:evenement_ferme_inscription:></strong></p>
-		<a class="btn btn-small" title="<:reservation:inscrire:>" href="[(#URL_PAGE{inscription})]">
-			<i class="icon-hand-right"></i><:reservation:inscrire:>
+		<a[ class="(#GET{class_a})"] title="<:reservation:inscrire:>" href="[(#URL_PAGE{inscription})]">
+			[<i class="(#GET{class_i})"> </i>] <:reservation:inscrire:>
 		</a>
 		})]
 </aside>]
