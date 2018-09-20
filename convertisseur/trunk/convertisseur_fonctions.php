@@ -1,9 +1,6 @@
 <?php
 /**
- * Ce fichier contient l'ensemble fonctions implémentant l'API du plugin Taxonomie.
- *
- * @package SPIP\TAXONOMIE\API
- */
+*/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -38,9 +35,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function convertisseur_texte_spip($texte, $format, $options=array()) {
 	include_spip('inc/convertisseur');
 	global $conv_formats;
-
+	
 	$texte_converti = '';
-
+	
 	if (($texte)
 	AND array_key_exists($format, $conv_formats)) {
 		// Si demandé, on convertit le texte d'entrée dans le charset du site (todo: pourquoi pas en utf-8???)
@@ -48,11 +45,11 @@ function convertisseur_texte_spip($texte, $format, $options=array()) {
 			include_spip('inc/charsets');
 			$texte = importer_charset($texte);
 		}
-
+	
 		$texte_converti = conversion_format($texte, $format);
 		$texte_converti = nettoyer_format($texte_converti);
 	}
-
+	
 	return $texte_converti;
 }
 
@@ -61,7 +58,7 @@ function convertisseur_texte_spip($texte, $format, $options=array()) {
  * Pour faire des <BOUCLE_conversion(DATA){source extracteur, fichier}>
  */
 
-// Iterateur pour l'extracteur quark_xml
+// Iterateur pour l'extracteur indesign_xml
 function inc_indesign_xml_to_array_dist($u){
 	return activer_iterateur('indesign_xml', $u) ;
 }
@@ -98,36 +95,36 @@ function inc_pmg_to_array_dist($u){
 }
 
 function activer_iterateur($extracteur, $u){
-
+	
 	$item = array();
-
+	
 	// convertir en tableau
 	include_spip("extract/" . $extracteur);
 	$item = call_user_func('convertir_' . $extracteur, $u);
-
+	
 	include_spip("inc/convertisseur");
 	foreach($item as &$i)
 		$i = nettoyer_format($i);
-
+	
 	$item['insertion'] = extracteur_preparer_insertion($item);
-
+	
 	$m[] = $item ;
 	return $m ;
 }
 
 // Transformer le tableau de valeurs converties par un extracteur en format d'insertion pour spip
 function extracteur_preparer_insertion($item){
-
+	
 	$texte = "" ;
 	$champs_article = array("surtitre", "titre", "chapo");
-
+	
 	# Champs articles
 	# Baliser les champs articles
-
+	
 	foreach($item as $k => $v)
 		if(in_array($k, $champs_article))
 			$texte .= "<ins class='$k'>" . trim($v) . "</ins>\n" ;
-
+	
 		# autres champs
 		# en plus des champs de données converties, un extracteur peut envoyer des champs techniques (xml, logs, alertes), on ne les insert pas.
 		foreach($item as $k => $v)
@@ -136,7 +133,7 @@ function extracteur_preparer_insertion($item){
 					$texte .= "<ins class='$k'>" . trim(join(",", $v)) . "</ins>\n";
 				else
 					$texte .= "<ins class='$k'>" . trim($v) . "</ins>\n" ;
-
+	
 		# texte
 		$texte .=  "\n" . trim($item['texte']) . "\n" ;
 
