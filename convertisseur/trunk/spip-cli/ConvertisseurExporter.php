@@ -91,15 +91,14 @@ class ConvertisseurExporter extends Command {
 		// demande t'on un secteur ou une rubrique ?
 		$parent = sql_getfetsel("id_parent", "spip_rubriques", "id_rubrique=$branche");
 		
+		include_spip("inc/rubriques");
 		if($parent == 0)
 			$critere_export = "where id_secteur=" . intval($branche) ;
 		else{
 			// y'a t'il des sous rubriques ?
-			$sous_rubriques = sql_allfetsel("id_rubrique", "spip_rubriques", "id_parent=$branche");
-			if($sous_rubriques AND sizeof($sous_rubriques) > 0){
-				foreach($sous_rubriques as $k => $v)
-					$ex[] = _q($v['id_rubrique']) ;
-				$critere_export = "where id_rubrique in (" . implode(",", $ex) . ")" ;
+			$sous_rubriques = calcul_branche_in($branche);
+			if($sous_rubriques){
+				$critere_export = "where id_rubrique in ($sous_rubriques)" ;
 			}
 			else
 				$critere_export = "where id_rubrique=" . intval($branche) ;
@@ -125,7 +124,9 @@ class ConvertisseurExporter extends Command {
 			// Si c'est bon on continue
 			else{
 				// chopper les articles en sql.
-				$query = sql_query("select * from spip_articles $critere_export $critere_date_modif $critere_statut order by date_redac asc"); 
+				$req = "select * from spip_articles $critere_export $critere_date_modif $critere_statut order by date_redac asc" ;
+				// var_dump($req);
+				$query = sql_query($req); 
 				
 				if(sql_count($query) > 0){
 					// start and displays the progress bar
@@ -135,142 +136,23 @@ class ConvertisseurExporter extends Command {
 					$progress->setMessage(" Export de `spip_articles` branche $branche en cours dans $dest ... ", 'message');
 					$progress->start();
 					
+					include_spip("inc/exporter");
 					while($f = sql_fetch($query)){
 						
-						$id_article = $f['id_article'] ;
-						$id_rubrique = $f['id_rubrique'] ;
-						
-						// Exporter les champs spip_articles
-						$fichier = "" ;
-						$ins_auteurs = array();
-						$ins_mc = array();
-						$ins_doc = array();
 						$progress->setMessage('', 'motscles');
 						$progress->setMessage('', 'docs');
 						$progress->setMessage('', 'auteurs');
 						
-						// mettre les champs dans un fichier texte balisé avec des <ins class="champ">.
-						foreach($f as $k => $v){
-							if($k == "texte" or $v == "" or $v == "0" or $v == "non" or $v == "0000-00-00 00:00:00")
-								continue ;
-							$fichier .= "<ins class='$k'>" . trim($v) ."</ins>\n" ;
-						}
-						$fichier .= "\n\n" . $f['texte'] . "\n\n" ;
-						
-						// Ajouter des métadonnées (hierarchie, auteurs, mots-clés...)
-						
-						// hierarchie
-						$hierarchie = array();
-						include_spip("inc/rubriques");
-						$ariane = preg_replace("/^0,/","", calcul_hierarchie_in($id_rubrique));
-						
-						$ariane = sql_allfetsel("titre","spip_rubriques","id_rubrique in($ariane)");
-						foreach($ariane as $a)
-							$hierarchie[] = str_replace("/","",$a['titre']) ; // on ne veut pas de / car creer_rubrique_nommee pourrait se tromper à l'import.
-						
-						$hierarchie = implode("@@", $hierarchie);
-						
-						$rubrique = sql_fetsel("texte,descriptif", "spip_rubriques", "id_rubrique=$id_rubrique");
-						
-						if($texte_rubrique = $rubrique['texte'])
-							$texte_rubrique = "<ins class='texte_rubrique'>$texte_rubrique</ins>\n" ;
-						
-						if($descriptif_rubrique = $rubrique['descriptif'])
-							$descriptif_rubrique = "<ins class='descriptif_rubrique'>$descriptif_rubrique</ins>\n" ;
-						
-						// auteurs spip 3
-						if($spip_version_branche > "3")
-							$auteurs = sql_allfetsel("a.nom, a.bio", "spip_auteurs_liens al, spip_auteurs a", "al.id_objet=$id_article and al.objet='article' and al.id_auteur=a.id_auteur");
-						else // spip 2
-							$auteurs = sql_allfetsel("a.nom, a.bio", "spip_auteurs_articles aa, spip_auteurs a", "aa.id_article=$id_article and aa.id_auteur=a.id_auteur");
-						
-						foreach($auteurs as $a)
-							if($a['nom'])
-								$ins_auteurs[] = $a ;
-						
-						$auteurs = "" ;
-						foreach($ins_auteurs as $k => $a){
-							if($k == 0)
-								$sep = "" ;
-							else
-								$sep = "@@" ;
-							$bio = ($a['bio'] != "") ? "::" . $a['bio'] : "" ;
-							$auteurs .= $sep . $a['nom'] . $bio ;
-						}
-						
-						$auteurs_m = substr($auteurs, 0, 100) ;
-						$progress->setMessage($auteurs_m, 'auteurs');
-						
-						// mots-clés
-						if($spip_version_branche > "3")
-							$motscles = sql_allfetsel("*", "spip_mots_liens ml, spip_mots m", "ml.id_objet=$id_article and ml.objet='article' and ml.id_mot=m.id_mot");
-						else // spip 2
-							$motscles = sql_allfetsel("*", "spip_mots_articles ma, spip_mots m", "ma.id_article=$id_article and ma.id_mot=m.id_mot");
-						
-						foreach($motscles as $mc){
-							if($mc['titre'])
-								$ins_mc[] = $mc['type'] . "::" . $mc['titre'] ;
-						}
-						if(is_array($ins_mc)){
-							$motscles = join("@@", $ins_mc) ;
-							$motscles_m = substr($motscles, 0, 100) ;
-							$progress->setMessage($motscles_m, 'motscles');
-						}
-						
-						// documents joints
-						$documents = sql_allfetsel("*", "spip_documents d, spip_documents_liens dl", "dl.id_objet=$id_article and dl.objet='article' and dl.id_document=d.id_document");
-						foreach($documents as $doc)
-								$ins_doc[] = json_encode($doc) ;
-						if(is_array($ins_doc)){
-							$documents = join("@@", $ins_doc) ;
-							$docs_m = substr($documents, 0, 100) ;
-							$progress->setMessage($docs_m, 'docs');
-						}
-						
-						// Ajouter les métadonnées
-						if($auteurs)
-							$fichier = "<ins class='auteurs'>$auteurs</ins>\n" . $fichier ;
-						if($motscles)
-							$fichier = "<ins class='mots_cles'>$motscles</ins>\n" . $fichier ;
-						if($documents)
-							$fichier = "<ins class='documents'>$documents</ins>\n" . $fichier ;
-						if($hierarchie){
-							$fichier = "<ins class='hierarchie'>$hierarchie</ins>\n" .
-							$descriptif_rubrique .
-							$texte_rubrique .
-							$fichier ;
-						}
-						
-						// Créer un fichier txt
-						$date = ($f['date_redac'] != "0000-00-00 00:00:00")? $f['date_redac'] : $f['date'] ;
-						preg_match("/^(\d\d\d\d)-(\d\d)/", $date, $m);
-						$annee = $m[1] ;
-						$mois = $m[2] ;
-						
-						include_spip("inc/charsets");
-						$nom_fichier = translitteration($f['titre']) ;
-						$nom_fichier = preg_replace("/[^a-zA-Z0-9]/i", "-", $nom_fichier);
-						$nom_fichier = preg_replace("/-{2,}/i", "-", $nom_fichier);
-						$nom_fichier = preg_replace("/^-/i", "", $nom_fichier);
-						$nom_fichier = preg_replace("/-$/i", "", $nom_fichier);
-						
-						$nom_fichier = "$dest/$annee/$annee-$mois/$annee-$mois"."_$nom_fichier.txt" ;
-						
-						// Créer les répertoires
-						if(!is_dir("$dest/$annee"))
-							mkdir("$dest/$annee");
-						if(!is_dir("$dest/$annee/$annee-$mois"))
-							mkdir("$dest/$annee/$annee-$mois");	
-						
-						if(ecrire_fichier("$nom_fichier", $fichier)){
+						if($e=exporter_article($f,$dest)){
 							// Si tout s'est bien passé, on avance la barre
-							$nom_fichier_m = substr($nom_fichier, 0, 100) ;
+							$progress->setMessage($e['docs_m'], 'docs');
+							$progress->setMessage($e['motscles_m'], 'motscles');
+							$progress->setMessage($e['auteurs_m'], 'auteurs');
+							$nom_fichier_m = substr($e['nom_fichier'], 0, 100) ;
 							$progress->setMessage($nom_fichier_m, 'filename');
 							$progress->setFormat("<fg=white;bg=blue>%message%</>\n" . '%current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%' . "\n %auteurs% %motscles% \n %filename% \n\n");
 							$progress->advance();
-						
-						}
-						else{
+						}else{
 							$output->writeln("<error>échec de l'export de $nom_fichier</error>");
 							exit ;
 						}
