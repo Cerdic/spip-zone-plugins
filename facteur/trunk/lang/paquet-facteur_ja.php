@@ -10,6 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
-	'facteur_nom' => '配達人',
+	'facteur_description' => '郵便屋さんは、SMTPなどを経由して、HTML、テキスト、または混合フォーマットのＥメールの送信を扱います。',
+	'facteur_nom' => '郵便屋さん',
 	'facteur_slogan' => 'メールを配達してくださる。'
 );
