@@ -184,6 +184,12 @@ function css_imbriques_traiter_spip($regs) {
 			$ret .= "filter:alpha(opacity=$val_ie);";
 			//$ret .= "-ms-filter: \"progid:DXImageTransform.Microsoft.Alpha(opacity=$val_ie)\";zoom:1;";
 			break; 
+		case "text-background":
+			$ret = "-webkit-text-fill-color: transparent;";
+			$ret .= "background:-webkit-linear-gradient(transparent, transparent),$val;";
+			$ret .= " background: -o-linear-gradient(transparent, transparent);";
+			$ret .= "-webkit-background-clip: text;";
+			break;
 		case "text-shadow":
 			$ret .= "text-shadow:$val;";
 			if (preg_match(",(\-?[0-9]+)px\ *(\-?[0-9]+)px\ *([0-9]+)px\ *(#?[0-9a-zA-Z]*),", $val, $val_ie)) {
