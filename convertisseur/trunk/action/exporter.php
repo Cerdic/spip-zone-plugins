@@ -75,7 +75,7 @@ function exporter_article($f,$dest){
 	$auteurs_m = substr($auteurs, 0, 100) ;
 	
 	// mots-clés
-	if($spip_version_branche > "3")
+	if($GLOBALS['spip_version_branche'] > "3")
 		$motscles = sql_allfetsel("*", "spip_mots_liens ml, spip_mots m", "ml.id_objet=$id_article and ml.objet='article' and ml.id_mot=m.id_mot");
 	else // spip 2
 		$motscles = sql_allfetsel("*", "spip_mots_articles ma, spip_mots m", "ma.id_article=$id_article and ma.id_mot=m.id_mot");
