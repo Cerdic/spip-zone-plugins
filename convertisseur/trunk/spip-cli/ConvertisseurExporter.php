@@ -174,7 +174,7 @@ class ConvertisseurExporter extends Command {
 }
 
 // compat spip 2
-if($spip_version_branche < 3){
+if($GLOBALS['spip_version_branche'] < 3){
 	function calcul_hierarchie_in($id, $tout = true) {
 		
 		static $b = array();
