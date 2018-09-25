@@ -14,6 +14,9 @@ class MCacheBackend_apc extends MCacheBackend {
 	function _xor($message) {
 		$key = _CACHE_KEY;
 		$keylen = strlen($key);
+		if (!$keylen)
+			return $message;
+
 		$messagelen = strlen($message);
 		for ($i = 0; $i < $messagelen; $i++) {
 			$message[$i] = ~($message[$i] ^ $key[$i % $keylen]);
