@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_objets_explication' => 'Choisissez les contenus auxquels on peut associer des menus',
 	'confirmer_supprimer_entree' => 'Voulez-vous vraiment supprimer cette entrée ?',
 	'confirmer_supprimer_sous_menu' => 'Voulez-vous vraiment supprimer ce sous-menu ?',
+	'confirmer_supprimer_menu' => 'Voulez-vous vraiment supprimer ce menu ?',
 
 	// D
 	'description_menu_accueil' => 'Lien vers la page d’accueil du site.',

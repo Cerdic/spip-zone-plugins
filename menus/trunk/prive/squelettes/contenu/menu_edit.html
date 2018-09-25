@@ -17,9 +17,3 @@
 	]
 
 </div>
-
-[(#ENV{id_menu,0}|intval|oui)
-[<div class="actions">
-(#URL_ACTION_AUTEUR{supprimer_menu,#ENV{id_menu},#URL_ECRIRE{menus_tous}}|icone_verticale{<:menus:formulaire_supprimer_menu:>,menus-24.png,del})
-</div>]
-]

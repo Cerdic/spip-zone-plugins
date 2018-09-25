@@ -14,6 +14,14 @@
 			[(#URL_ACTION_AUTEUR{exporter_menu,#ENV{id_menu}}
 				|icone_horizontale{<:menus:editer_menus_exporter:>,menu-export-24.png})]
 		]
+
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{menu-del-24}|balise_img) ]<:menus:formulaire_supprimer_menu:>,
+			#URL_ACTION_AUTEUR{supprimer_menu,#ENV{id_menu},#ENV{redirect,#URL_ECRIRE{menus_tous}}},
+			link icone horizontale danger,
+			<:menus:confirmer_supprimer_menu:>
+		})]
+
 	</div>
 #BOITE_FERMER
 ]
