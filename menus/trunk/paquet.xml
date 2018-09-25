@@ -1,12 +1,12 @@
 <paquet
 	prefix="menus"
 	categorie="navigation"
-	version="1.6.14"
+	version="1.7.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/menu-32.png"
 	documentation="https://contrib.spip.net/Menus-3139"
-	schema="0.5.4"
+	schema="0.5.5"
 >
 	<nom>Menus</nom>
 
@@ -16,8 +16,11 @@
 
 	<traduire module="menus" reference="fr" gestionnaire="salvatore" />
 
-	<pipeline nom="declarer_tables_principales" inclure="base/menus_tables.php" />
+	<menu nom="configurer_ndk_squelettes" titre="ndk_squelettes:cfg_titre_menu" parent="menu_squelette" icone="images/config-16.png" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/menus_tables.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/menus_tables.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/menus_tables.php" />
 	<pipeline nom="header_prive" inclure="menus_pipelines.php" />
 	<pipeline nom="pre_boucle" inclure="menus_pipelines.php" />
 	<pipeline nom="menus_lister_disponibles" inclure="menus_pipelines.php" />
@@ -25,6 +28,8 @@
 	<pipeline nom="autoriser" inclure="inc/menus_autoriser.php" />
 	<pipeline nom="ieconfig" inclure="menus_ieconfig.php" />
 	<pipeline nom="ieconfig_metas" inclure="menus_ieconfig.php" />
+	<pipeline nom="affiche_milieu" inclure="menus_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="menus_pipelines.php" />
 	
 	<!-- Déclaration des pipelines du plugin -->
 	<pipeline nom="menus_utiles" action="" />

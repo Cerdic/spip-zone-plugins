@@ -36,6 +36,16 @@ function formulaires_configurer_menus_saisies_dist() {
 				'li_class' => 'pleine_largeur',
 				'defaut' => lire_config('menus/entrees_masquees', array())
 			)
+		),
+		// Objets
+		array(
+			'saisie' => 'choisir_objets',
+			'options' => array(
+				'nom' => 'objets',
+				'label' => _T('menus:configurer_objets_label'),
+				'explication' => _T('menus:configurer_objets_explication'),
+				'defaut' => lire_config('menus/objets', array()),
+			)
 		)
 	);
 

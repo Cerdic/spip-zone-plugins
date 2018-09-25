@@ -7,9 +7,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// A
+	'ajouter_lien_menu' => 'Ajouter ce menu',
+
 	// C
 	'configurer_entrees_masquees_explication' => 'Cochez les entrées que vous souhaitez <strong>masquer</strong> lors de la création d’un menu.',
 	'configurer_titre' => 'Configurer les entrées du plugin Menus',
+	'configurer_objets_label' => 'Contenus liés',
+	'configurer_objets_explication' => 'Choisissez les contenus auxquels on peut associer des menus',
 	'confirmer_supprimer_entree' => 'Voulez-vous vraiment supprimer cette entrée ?',
 	'confirmer_supprimer_sous_menu' => 'Voulez-vous vraiment supprimer ce sous-menu ?',
 
@@ -143,6 +148,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tri_alpha' => '(alphabétique)',
 	'info_tri_articles' => 'Tri des articles :',
 	'info_tri_num' => '(numérique)',
+	'info_1_menu' => 'Un menu',
+	'info_aucun_menu' => 'Aucun menu',
+	'info_nb_menus' => '@nb@ menus',
 
 	// N
 	'noisette_description' => 'Insère un menu défini avec le plugin Menus.',
@@ -165,13 +173,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_secteurlangue' => 'Secteurs de langue',
 	'nom_menu_texte_libre' => 'Texte libre',
 
+	// R
+	'retirer_lien_menu' => 'Retirer ce menu',
+	'retirer_tous_liens_menus' => 'Retirer tous les menus',
+	'retirer_lien_objet' => 'Dissocier',
+
 	// T
 	'tous_les_articles' => '... Tous les articles',
 	'toutes_les_rubriques' => '... Toutes les rubriques',
+	'texte_ajouter_menu' => 'Ajouter un menu',
+	'texte_creer_associer_menu' => 'Créer et associer un menu',
+	'titre_objets_lies_menu' => 'Liés à ce menu',
 
 	// U
 	'utiles_explication' => 'Les squelettes actuels du site peuvent utiliser les menus suivants.',
 	'utiles_generer_menu' => 'Créer le menu <strong>@titre@ (<em>@identifiant@</em>)</strong>',
 	'utiles_generer_menus' => 'Créer <strong>tous</strong> les menus utiles',
-	'utiles_titre' => 'Menus utiles'
+	'utiles_titre' => 'Menus utiles',
 );

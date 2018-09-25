@@ -7,7 +7,57 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 include_spip('inc/editer');
 
-function formulaires_editer_menu_charger($id_menu, $nouveau) {
+/**
+ * Identifier le formulaire en faisant abstraction des paramètres qui ne représentent pas l'objet edité
+ *
+ * @param int|string $id_menu
+ *     Identifiant du menu. 'new' pour un nouveau menu.
+ * @param string $retour
+ *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel `objet|x` indiquant de lier le menu créé à cet objet,
+ *     tel que `article|3`
+ * @param int $lier_trad
+ *     Identifiant éventuel d'un menu source d'une traduction
+ * @param string $config_fonc
+ *     Nom de la fonction ajoutant des configurations particulières au formulaire
+ * @param array $row
+ *     Valeurs de la ligne SQL du menu, si connu
+ * @param string $hidden
+ *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
+ * @return string
+ *     Hash du formulaire
+ */
+function formulaires_editer_menu_identifier_dist($id_menu = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+	return serialize(array(intval($id_menu), $associer_objet));
+}
+
+/**
+ * Chargement du formulaire d'édition de menu
+ *
+ * Déclarer les champs postés et y intégrer les valeurs par défaut
+ *
+ * @uses formulaires_editer_objet_charger()
+ *
+ * @param int|string $id_menu
+ *     Identifiant du menu. 'new' pour un nouveau menu.
+ * @param string $retour
+ *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel `objet|x` indiquant de lier le menu créé à cet objet,
+ *     tel que `article|3`
+ * @param int $lier_trad
+ *     Identifiant éventuel d'un menu source d'une traduction
+ * @param string $config_fonc
+ *     Nom de la fonction ajoutant des configurations particulières au formulaire
+ * @param array $row
+ *     Valeurs de la ligne SQL du menu, si connu
+ * @param string $hidden
+ *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
+ * @return array
+ *     Environnement du formulaire
+ */
+function formulaires_editer_menu_charger($id_menu = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	include_spip('base/abstract_sql');
 	include_spip('inc/autoriser');
 	$contexte = array();
@@ -15,11 +65,11 @@ function formulaires_editer_menu_charger($id_menu, $nouveau) {
 
 	// Seulement si on a le droit de modifier les menus
 	if (autoriser('modifier', 'menu')) {
-		$nouveau = ($nouveau == 'oui') ? true : false;
+		$nouveau = intval($id_menu) ? false : true;
 		$id_menu = intval($id_menu) ? intval($id_menu) : false;
 
 		// Si on demande un id_menu
-		if ($id_menu) {
+		if ($id_menu and !$nouveau) {
 			// On désactive de toute façon le nouveau
 			$nouveau = false;
 
@@ -73,7 +123,32 @@ function formulaires_editer_menu_charger($id_menu, $nouveau) {
 	return $contexte;
 }
 
-function formulaires_editer_menu_verifier($id_menu, $nouveau) {
+/**
+ * Vérifications du formulaire d'édition de menu
+ *
+ * Vérifier les champs postés et signaler d'éventuelles erreurs
+ *
+ * @uses formulaires_editer_objet_verifier()
+ *
+ * @param int|string $id_menu
+ *     Identifiant du menu. 'new' pour un nouveau menu.
+ * @param string $retour
+ *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel `objet|x` indiquant de lier le menu créé à cet objet,
+ *     tel que `article|3`
+ * @param int $lier_trad
+ *     Identifiant éventuel d'un menu source d'une traduction
+ * @param string $config_fonc
+ *     Nom de la fonction ajoutant des configurations particulières au formulaire
+ * @param array $row
+ *     Valeurs de la ligne SQL du menu, si connu
+ * @param string $hidden
+ *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
+ * @return array
+ *     Tableau des erreurs
+ */
+function formulaires_editer_menu_verifier($id_menu = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	include_spip('base/abstract_sql');
 	$erreurs = array();
 
@@ -105,8 +180,33 @@ function formulaires_editer_menu_verifier($id_menu, $nouveau) {
 	return $erreurs;
 }
 
-function formulaires_editer_menu_traiter($id_menu, $nouveau) {
-	$res = formulaires_editer_objet_traiter('menu', $id_menu, 0, 0, '', '', array(), '');
+/**
+ * Traitement du formulaire d'édition de menu
+ *
+ * Traiter les champs postés
+ *
+ * @uses formulaires_editer_objet_traiter()
+ *
+ * @param int|string $id_menu
+ *     Identifiant du menu. 'new' pour un nouveau menu.
+ * @param string $retour
+ *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel `objet|x` indiquant de lier le menu créé à cet objet,
+ *     tel que `article|3`
+ * @param int $lier_trad
+ *     Identifiant éventuel d'un menu source d'une traduction
+ * @param string $config_fonc
+ *     Nom de la fonction ajoutant des configurations particulières au formulaire
+ * @param array $row
+ *     Valeurs de la ligne SQL du menu, si connu
+ * @param string $hidden
+ *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
+ * @return array
+ *     Retours des traitements
+ */
+function formulaires_editer_menu_traiter($id_menu = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+	$res = formulaires_editer_objet_traiter('menu', $id_menu, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 
 	// Si ça va pas on errorise
 	if (!$res['id_menu']) {
@@ -117,6 +217,22 @@ function formulaires_editer_menu_traiter($id_menu, $nouveau) {
 			$res['redirect'] = generer_url_ecrire('menus_editer', 'id_menu='.$res['id_menu']);
 		}
 	}
+
+	// Un lien a prendre en compte ?
+	if ($associer_objet and $id_menu = $res['id_menu']) {
+		list($objet, $id_objet) = explode('|', $associer_objet);
+
+		if ($objet and $id_objet and autoriser('modifier', $objet, $id_objet)) {
+			include_spip('action/editer_liens');
+			
+			objet_associer(array('menu' => $id_menu), array($objet => $id_objet));
+			
+			if (isset($retours['redirect'])) {
+				$retours['redirect'] = parametre_url($retours['redirect'], 'id_lien_ajoute', $id_menu, '&');
+			}
+		}
+	}
+
 	// Dans tous les cas le formulaire est toujours éditable
 	$res['editable'] = true;
 

@@ -40,6 +40,10 @@ function menus_upgrade($nom_meta_version_base, $version_cible) {
 	$maj['0.5.3'] = array(
 		array('menus_fusionne_critere_tri_num_alpha'),
 	);
+	// Ajout table de liens (où est passé le 0.5.4 ?)
+	$maj['0.5.5'] = array(
+		array('maj_tables', array('spip_menus_liens')),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_version_base, $version_cible, $maj);
@@ -148,6 +152,7 @@ function menus_vider_tables($nom_meta_version_base) {
 	// On efface les tables du plugin
 	sql_drop_table('spip_menus');
 	sql_drop_table('spip_menus_entrees');
+	sql_drop_table('spip_menus_liens');
 
 	// On efface la version enregistrée
 	effacer_meta($nom_meta_version_base);
