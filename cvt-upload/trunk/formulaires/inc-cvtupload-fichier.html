@@ -2,7 +2,7 @@
 	<input type="hidden" name="cvtupload_fichiers_precedents[(#ENV{crochets})]" value="#ENV{infos_encodees}" />
 	<div class="cvtup-description">
 		[(#EXTENSION**|in_array{#LISTE{jpg,png,gif}}|?{
-			[<a href="(#ENV{url}|attribut_html)" class="mediabox">][(#ENV*{vignette}|balise_img|_image_reduire_base64{150})],
+			[<a href="(#ENV{url}|attribut_html)" class="mediabox">][(#ENV**{vignette}|balise_img|_image_reduire_base64{150})],
 			[<a href="(#ENV{url}|attribut_html)"[ (#HTML5|oui)download="download"]>][(#ENV{vignette}|balise_img|image_reduire{48})]
 			}
 		)][<tt class="cvtup-filename">(#ENV{name})</tt>][(#ENV{url}|oui)</a>]
