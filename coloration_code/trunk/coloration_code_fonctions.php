@@ -56,7 +56,7 @@ function coloration_code_color($code, $language, $cadre = 'cadre', $englobant = 
 	$code = preg_replace("/(\r\n|\n|\r)*$/", "", $code);
 
 	$params   = explode(' ', $language);
-	$language = array_shift($params);
+	$language = strtolower(array_shift($params));
 
 	if ($language == 'spip') {
 		$language = PLUGIN_COLORATION_CODE_COLORIEUR_SPIP;
