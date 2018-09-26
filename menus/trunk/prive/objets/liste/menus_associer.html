@@ -24,7 +24,7 @@ a mis a jour la valeur avec la page reelle]
 </caption>]
 	<thead>
 		#SET{p,''}
-		<BOUCLE_lettre(MENUS){tout}{!id_menu IN #GET{exclus}}{where?}{recherche?}
+		<BOUCLE_lettre(MENUS){tout}{!id_menu IN #GET{exclus}}{id_menus_entree=0}{where?}{recherche?}
 			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_menu==#GET{afficher_lettres}|?{'.*','A'}}>[
 		(#TITRE**|extraire_multi|initiale|unique|oui)
 		[(#SET{p,#GET{p}|concat{
@@ -45,7 +45,7 @@ a mis a jour la valeur avec la page reelle]
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_menus(MENUS){!id_menu IN #GET{exclus}}{where?}{recherche?}
+	<BOUCLE_liste_menus(MENUS){!id_menu IN #GET{exclus}}{id_menus_entree=0}{where?}{recherche?}
 		{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} mena}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
 			<td class="titre">[(#LOGO_MENU|image_reduire{20,20})]<a href="[(#URL_ECRIRE{menu_edit,id_menu=#ID_MENU})]">#TITRE</a></td>

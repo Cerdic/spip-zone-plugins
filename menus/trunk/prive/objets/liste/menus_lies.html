@@ -17,7 +17,7 @@ a mis a jour la valeur avec la page reelle]
 [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{menus:info_1_menu,menus:info_nb_menus}})</strong></caption>]
 	<thead>
 		#SET{p,''}
-		<BOUCLE_lettre(MENUS){tout}{id_menu IN #GET{selection}}{where?}
+		<BOUCLE_lettre(MENUS){tout}{id_menu IN #GET{selection}}{id_menus_entree?}{where?}
 			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_menu==#GET{afficher_lettres}|?{'.*','A'}}>[
 		(#TITRE**|extraire_multi|initiale|unique|oui)
 		[(#SET{p,#GET{p}|concat{
