@@ -167,7 +167,7 @@ if (!function_exists('spip2_geshi_regexp_critere_callback')) {
  * 		"avant <|!REG3XP31!>contenu|> apres"
 **/
 function spip2_geshi_regexp_critere_callback($matches, $geshi) {
-	$key = $geshi->_hmr_key;
+	$key = $geshi->get_hmr_key();
 	// 0 = tout
 	// 1 = <BOUCLEx(TABLE)
 	// 2 = {critere}{critere}
@@ -214,7 +214,7 @@ function spip2_geshi_regexp_critere_callback($matches, $geshi) {
  * 		"avant <|!REG3XP31!>contenu|> apres"
 **/
 function spip2_geshi_regexp_balise_callback($matches, $geshi) {
-	$key = $geshi->_hmr_key;
+	$key = $geshi->get_hmr_key();
 	// on l'appelle plusieurs fois mais on colorie toujours avec la meme cle.
 	$key = 4; 
 	// 0 = tout
@@ -276,7 +276,7 @@ function spip2_geshi_regexp_echappements_echapper_callback($matches, $geshi) {
 function spip2_geshi_regexp_echappements_remettre_callback($matches, $geshi) {
 	$contenu = $matches[0];
 	$inerte = '-INERTE';
-	$key = $geshi->_hmr_key;
+	$key = $geshi->get_hmr_key();
 	// echappements avec \
 	$contenu = preg_replace_callback(",$inerte-(\d+)-,",
 		function($a) use ($inerte, $key) {

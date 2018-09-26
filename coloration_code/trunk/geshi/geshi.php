@@ -3269,6 +3269,17 @@ class GeSHi {
     }
 
     /**
+    * [Surcharge de Geshi]
+    **/
+	protected function handle_singleline_regexps($stuff_to_parse, $regexp, $key) {
+        $stuff_to_parse = preg_replace(
+                    '/' . $regexp[GESHI_SEARCH] . '/' . $regexp[GESHI_MODIFIERS],
+                $regexp[GESHI_BEFORE] . '<|!REG3XP'. $key .'!>' . $regexp[GESHI_REPLACE] . '|>' . $regexp[GESHI_AFTER],
+                $stuff_to_parse);
+        return $stuff_to_parse;
+    }
+
+     /**
      * handles regular expressions highlighting-definitions with callback functions
      *
      * @note this is a callback, don't use it directly
@@ -3412,10 +3423,12 @@ class GeSHi {
                         $this->_hmr_before = '';
                         $this->_hmr_after = '';
                     } else {
-                        $stuff_to_parse = preg_replace(
+                        // Surcharge de GESHI !
+                        /*$stuff_to_parse = preg_replace(
                             '/' . $regexp[GESHI_SEARCH] . '/' . $regexp[GESHI_MODIFIERS],
                             $regexp[GESHI_BEFORE] . '<|!REG3XP'. $key .'!>' . $regexp[GESHI_REPLACE] . '|>' . $regexp[GESHI_AFTER],
-                            $stuff_to_parse);
+                            $stuff_to_parse);*/
+                        $stuff_to_parse = $this->handle_singleline_regexps($stuff_to_parse, $regexp, $key);
                     }
                 } else {
                     if ($this->line_numbers != GESHI_NO_LINE_NUMBERS) {

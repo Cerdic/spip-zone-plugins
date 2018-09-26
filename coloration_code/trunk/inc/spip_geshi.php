@@ -19,7 +19,11 @@ define('SPIP_GESHI_REGEXP_FUNCTION', 99);
 class SPIP_GeSHi extends GeSHi {
 
 	// fonction de traitement de certaines regexp spip
-	var $_hmr_func = '';
+	protected $_hmr_func = '';
+
+	public function get_hmr_key() {
+		return $this->_hmr_key;
+	}
 
 	/**
 	 * Cette surcharge implemente simplement
@@ -31,7 +35,7 @@ class SPIP_GeSHi extends GeSHi {
 	 * en plus de geshi pour colorier, qui sont des choses comme : 
 	 * <| class="br0">contenu|>
 	 */
-	function parse_non_string_part($stuff_to_parse) {
+	protected function parse_non_string_part($stuff_to_parse) {
 
 		// Fonction de coloration definie
 		// doit s'occuper de retourner des <| et d'echapper les textes (hsc)
@@ -61,7 +65,7 @@ class SPIP_GeSHi extends GeSHi {
 	 * 
 	 * Cette possibilite est utilise dans geshi/spip2.php
 	 */
-	function handle_multiline_regexps($matches) {
+	protected function handle_multiline_regexps($matches) {
 		$key = $this->_hmr_key;
 		if (  is_array($this->language_data['REGEXPS'][$key])
 		  and isset($this->language_data['REGEXPS'][$key][SPIP_GESHI_REGEXP_FUNCTION])
@@ -83,7 +87,7 @@ class SPIP_GeSHi extends GeSHi {
 	 * pour handle_multiline_regexps() du dessus
 	 *
 	**/
-	function handle_singleline_regexps($stuff_to_parse, $regexp, $key) {
+	protected function handle_singleline_regexps($stuff_to_parse, $regexp, $key) {
 
 		if (  is_array($regexp)
 		  and isset($regexp[SPIP_GESHI_REGEXP_FUNCTION])
@@ -112,7 +116,7 @@ class SPIP_GeSHi extends GeSHi {
 	 * Renvoyer sur la fonction du colorieur SPIP demandee 
 	 *
 	**/
-	function handle_singleline_regexps_bis($matches) {
+	protected function handle_singleline_regexps_bis($matches) {
 		$func = $this->_hmr_func;
 		if (!$func or !function_exists($func)) {
 			return '';
