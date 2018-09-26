@@ -12,12 +12,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'configurer_entrees_masquees_explication' => 'Cochez les entrées que vous souhaitez <strong>masquer</strong> lors de la création d’un menu.',
-	'configurer_titre' => 'Configurer les entrées du plugin Menus',
-	'configurer_objets_label' => 'Contenus liés',
 	'configurer_objets_explication' => 'Choisissez les contenus auxquels on peut associer des menus',
+	'configurer_objets_label' => 'Contenus liés',
+	'configurer_titre' => 'Configurer les entrées du plugin Menus',
 	'confirmer_supprimer_entree' => 'Voulez-vous vraiment supprimer cette entrée ?',
-	'confirmer_supprimer_sous_menu' => 'Voulez-vous vraiment supprimer ce sous-menu ?',
 	'confirmer_supprimer_menu' => 'Voulez-vous vraiment supprimer ce menu ?',
+	'confirmer_supprimer_sous_menu' => 'Voulez-vous vraiment supprimer ce sous-menu ?',
 
 	// D
 	'description_menu_accueil' => 'Lien vers la page d’accueil du site.',
@@ -128,13 +128,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_titre' => 'Titre',
 
 	// I
+	'info_1_menu' => 'Un menu',
 	'info_afficher_articles' => 'Les articles seront inclus dans le menu.',
 	'info_articles_max' => 'Seulement si la rubrique contient au plus @max@ articles',
 	'info_articles_max_affiches' => 'Affichage limité à @max@ articles',
+	'info_aucun_menu' => 'Aucun menu',
 	'info_classe_parent' => 'Classe des éléments parents : ',
 	'info_connexion_obligatoire' => 'Connexion obligatoire',
 	'info_deconnexion_obligatoire' => 'Uniquement déconnecté',
 	'info_masquer_articles_uniques' => 'Articles uniques masqués',
+	'info_nb_menus' => '@nb@ menus',
 	'info_numero_menu' => 'MENU NUMÉRO :',
 	'info_page_speciale' => 'Lien vers la page « @page@ »',
 	'info_page_speciale_zajax' => 'Modalbox de la page « @page@ » pour le bloc « @bloc@ &#187',
@@ -149,9 +152,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tri_alpha' => '(alphabétique)',
 	'info_tri_articles' => 'Tri des articles :',
 	'info_tri_num' => '(numérique)',
-	'info_1_menu' => 'Un menu',
-	'info_aucun_menu' => 'Aucun menu',
-	'info_nb_menus' => '@nb@ menus',
 
 	// N
 	'noisette_description' => 'Insère un menu défini avec le plugin Menus.',
@@ -176,19 +176,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'retirer_lien_menu' => 'Retirer ce menu',
-	'retirer_tous_liens_menus' => 'Retirer tous les menus',
 	'retirer_lien_objet' => 'Dissocier',
+	'retirer_tous_liens_menus' => 'Retirer tous les menus',
 
 	// T
-	'tous_les_articles' => '... Tous les articles',
-	'toutes_les_rubriques' => '... Toutes les rubriques',
 	'texte_ajouter_menu' => 'Ajouter un menu',
 	'texte_creer_associer_menu' => 'Créer et associer un menu',
 	'titre_objets_lies_menu' => 'Liés à ce menu',
+	'tous_les_articles' => '... Tous les articles',
+	'toutes_les_rubriques' => '... Toutes les rubriques',
 
 	// U
 	'utiles_explication' => 'Les squelettes actuels du site peuvent utiliser les menus suivants.',
 	'utiles_generer_menu' => 'Créer le menu <strong>@titre@ (<em>@identifiant@</em>)</strong>',
 	'utiles_generer_menus' => 'Créer <strong>tous</strong> les menus utiles',
-	'utiles_titre' => 'Menus utiles',
+	'utiles_titre' => 'Menus utiles'
 );
