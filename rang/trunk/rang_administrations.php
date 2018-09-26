@@ -26,8 +26,24 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function rang_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
+	$maj['1.0.0'] = array(
+		array('rang_maj_1_0_0'),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
+}
+
+/**
+ * Maj 1.0.0 : déplacer l'ancienne config
+ **/
+function rang_maj_1_0_0() {
+	include_spip('inc/config');
+	
+	if ($objets = lire_config('rang_objets')) {
+		ecrire_config('rang/rang_objets', $objets);
+		effacer_config('rang_objets');
+	}
 }
 
 
