@@ -14,6 +14,31 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
+ * Remplir ou ressortir les tables ayant déjà un rang
+ * 
+ * Au premier appel on fournit la liste complète de toutes les tables d'objets, pour faire la recherche.
+ * Ensuite on peut appeler la fonction sans rien, et elle sortira la liste des tables qui ont un rang AVANT le plugin Rang.
+ * 
+ * @param array $tables
+ * 		Le tableau complet de toutes les tables d'objets au premier appel
+ **/
+function rang_lister_tables_deja_rang($tables=null) {
+	static $tables_deja_rang = null;
+	
+	// Si on n'a pas encore fait la recherche et qu'on a fourni la liste des tables d'objets
+	if (is_null($tables_deja_rang) and is_array($tables)) {
+		$tables_deja_rang = array();
+		foreach ($tables as $table => $description) {
+			if (isset($description['field']['rang'])) {
+				$tables_deja_rang[] = $table;
+			}
+		}
+	}
+	
+	return $tables_deja_rang;
+}
+
+/**
  * Construire la liste des objets à exclure de la configuration
  * 
  * @return array
@@ -36,53 +61,6 @@ function rang_objets_a_exclure() {
 }
 
 /**
- * Tester si un mot-clé est lié
- *
- * @param array $tab
- *     tableau des items de la liste suite à une modification du classement
- * @param string $objet
- *     sur quel objet faire le classement
- * @param string $rubrique optionel
- *     dans quelle rubrique faire le classement
- * @return array
- *     note : sans ce return (a priori inutile, la fonction plante (???)
-**/
-function rang_objet_select($id_mot, $id_objet, $objet) {
-	$id_mot = intval($id_mot);
-	$id_objet = intval($id_objet);
-	$res = sql_countsel('spip_mots_liens', array("id_mot=$id_mot", "id_objet=$id_objet", "objet=$objet"));
-	if ($res > 0 ) return true;
-	else return false;
-}
-
-
-/**
- * supprimer un mot, puis réordonner
- *
- * @param string $id
- *     id de la forme mot_xx
- * @return array
- *     note : sans ce return (a priori inutile, la fonction plante (???)
-**/
-// function rang_supprimer_item($id){
-// 	// suppression du mot
-// 	$new_id = intval(substr($id, 4));
-// 	sql_delete('spip_mots', "id_mot=$new_id");
-
-// 	//récupérer le tableau id/rang actuel
-// 	$id_grp = sql_getfetsel('id_groupe', 'spip_groupes_mots', 'titre='.sql_quote('Actualités'));
-// 	$res = sql_select('id_mot', 'spip_mots', "id_groupe=$id_grp", '', 'rang');
-// 	while ($tab = sql_fetch($res)){
-// 		$new_tab[] = 'id_mot_'.$tab['id_mot'];
-// 	}
-
-// 	//  réordonnement !
-// 	$tab_result = rang_trier_items($new_tab);
-
-// 	return $tab_result;
-// }
-
-/**
  * Créer les champs 'rang' sur les tables des objets reçus en paramètre
  * et initialiser la valeur du rang
  * TODO : à compléter !
@@ -92,12 +70,11 @@ function rang_objet_select($id_mot, $id_objet, $objet) {
  **/
 function rang_creer_champs ($objets) {
 	foreach ($objets as $key => $table) {
-
 		if (!empty($table)) {
-			// si le champ 'rang' n'existe pas, le créer et le remplir
 			$champs_table = sql_showtable($table);
-			if (!isset($champs_table['field']['rang'])) {
 
+			// si le champ 'rang' n'existe pas, le créer et le remplir
+			if (!isset($champs_table['field']['rang'])) {
 				// créer le champ 'rang'
 				sql_alter('TABLE '.$table.' ADD rang SMALLINT NOT NULL');
 
@@ -137,7 +114,6 @@ function rang_creer_champs ($objets) {
  * @return array
  *     les chemins sources vers les listes où activer Rang
  **/
-
 function rang_get_sources() {
 	include_spip('inc/config');
 	// mettre en cache le tableau calculé
@@ -147,8 +123,7 @@ function rang_get_sources() {
 	}
 	
 	$sources = array();
-	$objets_selectionnes = lire_config('rang/rang_objets');
-	$objets=explode(',',$objets_selectionnes);
+	$objets = lire_config('rang/objets');
 
 	foreach ($objets as $value) {
 		$objet = table_objet($value);
@@ -185,8 +160,9 @@ function rang_get_contextes() {
 		return $contextes;
 	}
 	include_spip('base/objets_parents');
-	$tables = explode(',', lire_config('rang/rang_objets'));
+	$tables = lire_config('rang/objets');
 	$contextes = array();
+	
 	foreach ($tables as $table) {
 		// le nom de l'objet au pluriel
 		$contextes[] = table_objet($table);

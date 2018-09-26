@@ -30,6 +30,10 @@ function rang_upgrade($nom_meta_base_version, $version_cible) {
 		array('rang_maj_1_0_0'),
 	);
 
+	$maj['1.0.1'] = array(
+		array('rang_maj_1_0_1'),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -46,6 +50,26 @@ function rang_maj_1_0_0() {
 	}
 }
 
+/**
+ * Maj 1.0.1 : transformation de la config en liste tableau normal, pas à virgule
+ **/
+function rang_maj_1_0_1() {
+	include_spip('inc/config');
+	
+	if (
+		$config_actuelle = lire_config('rang/rang_objets')
+		and is_string($config_actuelle)
+	) {
+		// On transforme en tableau liste
+		$config_nouvelle = explode(',', $config_actuelle);
+		$config_nouvelle = array_map('trim', $config_nouvelle);
+		$config_nouvelle = array_filter($config_nouvelle);
+		
+		// On enregistre
+		ecrire_config('rang/objets', $config_nouvelle);
+		effacer_config('rang/rang_objets');
+	}
+}
 
 /**
  * Fonction de désinstallation du plugin Rang.
@@ -55,17 +79,23 @@ function rang_maj_1_0_0() {
  * @return void
 **/
 function rang_vider_tables($nom_meta_base_version) {
-
 	include_spip('inc/rang_api');
+	include_spip('base/objets');
+	
+	// On appelle la fonction pour que ça lance le pipeline de Rang
+	// et donc remplisse les tables ayant déjà un rang AVANT
+	lister_tables_objets_sql();
+	$tables_deja_rang = rang_lister_tables_deja_rang();
 
-	// supprimer les champs 'rang'
+	// Supprimer les champs 'rang' sur les tables qui ne l'avaient pas avant
 	// note : ici que faire si un objet a ete selectionne, puis deselectionne dans la config ?
-	$objets_selectionnes = lire_config('rang/rang_objets');
-	$objets = explode(',', $objets_selectionnes);
-	foreach ($objets as $value) {
-		$champs_table = sql_showtable($value);
-		if (isset($champs_table['field']['rang'])) {
-			sql_alter("TABLE $value DROP rang");
+	$objets = lire_config('rang/objets');
+	foreach ($objets as $table) {
+		$champs_table = sql_showtable($table);
+		
+		// S'il y a bien toujours un champ "rang" mais que la table ne l'avait PAS avant
+		if (isset($champs_table['field']['rang']) and !in_array($table, $tables_deja_rang)) {
+			sql_alter("TABLE $table DROP rang");
 		}
 	}
 

@@ -1,12 +1,12 @@
 <paquet
 	prefix="rang"
 	categorie="navigation"
-	version="1.0.4"
+	version="1.0.5"
 	etat="test"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="prive/themes/spip/images/rang-64.png"
 	documentation="https://contrib.spip.net/4994"
-	schema="1.0.0"
+	schema="1.0.1"
 >
 	<nom>Rang</nom>
 	<!-- Permet de réordonner les tables de SPIP par drag'n'drop -->

@@ -55,7 +55,7 @@ function balise_RANG_LISTE_OBJETS($p) {
  * @return array
  */
 function rang_liste_objets() {
-	$tables = explode(',', lire_config('rang/rang_objets'));
+	$tables = lire_config('rang/objets');
 	$objets = array();
 	foreach ($tables as $table) {
 		$objets[] = table_objet($table);
@@ -77,7 +77,7 @@ function rang_liste_objets() {
  **/
 function rang_objet_dans_config($objet) {
 	$table = table_objet_sql($objet);
-	$liste = explode(',', lire_config('rang/rang_objets'));
+	$liste = lire_config('rang/objets');
 	return in_array($table, $liste);
 }
 
