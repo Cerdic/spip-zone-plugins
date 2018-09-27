@@ -79,7 +79,7 @@ Usage:
     <div class="owl-slide" data-hash="[(#GET{id-carousel})]_#ID_DOCUMENT">
         [(#ENV{caption,oui}|=={oui}|oui)
         <div class="caption[ (#ENV{caption_css})]">[<h3 class="title">(#TITRE)</h3>][<p class="hidden-phone">(#DESCRIPTIF|textebrut)</p>]</div>]
-            <a href="#FICHIER" class="js-colorbox" rel="diaporama">
+            <a href="#FICHIER" class="mediabox" rel="diaporama"[ title="(#TITRE|attribut_html|couper{80})"]>
                 <img [(#ENV{lazyLoad}|=={true}|oui)class="owl-lazy" data-]src="[(#FICHIER|image_reduire{600,400}|extraire_attribut{src})]" alt="[(#TITRE|textebrut)]">
             </a>
     </div>
@@ -143,9 +143,5 @@ jQuery(function($){
         responsive: #ENV*{thumbnails_responsive, false}
     });
 
-    // Gallerie Colorbox
-    $("a.js-colorbox").colorbox({
-        rel:'diaporama',
-    });
 });
 </script>

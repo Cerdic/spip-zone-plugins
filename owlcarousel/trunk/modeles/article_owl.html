@@ -46,7 +46,7 @@ Insertion du modele <articleX|owl>
                 <div class="caption[ (#ENV{caption_css})]">[
                     <h3 class="title">(#TITRE)</h3>][
                     <p class="hidden-phone">(#DESCRIPTIF|textebrut)</p>]</div>]
-                    <a href="#FICHIER" class="js-colorbox"[ rel="diaporama(#ENV{id-carousel,demo})"]>
+                    <a href="#FICHIER" class="mediabox"[ rel="diaporama(#ENV{id-carousel,demo})"][ title="(#TITRE|attribut_html|couper{80})"]>
                         <img [(#ENV{lazyLoad}|=={true}|oui)class="owl-lazy" data-]src="[(#FICHIER|image_reduire{650,450}|extraire_attribut{src})]" alt="[(#TITRE|textebrut)]">
                     </a>
             </div>
@@ -79,11 +79,6 @@ jQuery(function($){
       		   items:(#ENV{items})
       		}]
       	}
-    });
-
-    // Gallerie Colorbox
-    $("a.js-colorbox").colorbox({
-        rel:'diaporama#ENV{id-carousel,demo}',
     });
 });
 </script>
