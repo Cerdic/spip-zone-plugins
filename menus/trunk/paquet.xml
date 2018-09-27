@@ -16,8 +16,6 @@
 
 	<traduire module="menus" reference="fr" gestionnaire="salvatore" />
 
-	<menu nom="configurer_ndk_squelettes" titre="ndk_squelettes:cfg_titre_menu" parent="menu_squelette" icone="images/config-16.png" />
-
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/menus_tables.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/menus_tables.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/menus_tables.php" />
