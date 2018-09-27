@@ -1,7 +1,7 @@
 <paquet
 	prefix="menus"
 	categorie="navigation"
-	version="1.7.8"
+	version="1.7.9"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/menu-32.png"
@@ -32,7 +32,7 @@
 	<!-- Déclaration des pipelines du plugin -->
 	<pipeline nom="menus_utiles" action="" />
 
-	<menu nom="menus_tous" titre="menus:editer_menus_titre" parent="menu_squelette" icone="images/menu-16.png" />
+	<menu nom="menus" titre="menus:editer_menus_titre" parent="menu_squelette" icone="images/menu-16.png" />
 
 	<!-- pour _T_ou_typo -->
 	<necessite nom="saisies" compatibilite="[1.14.0;]" />

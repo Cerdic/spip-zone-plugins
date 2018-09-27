@@ -1,7 +1,7 @@
 
 <div class="cadre-formulaire-editer">
 	<div class="entete-formulaire">
-		[(#ENV{redirect,#URL_ECRIRE{menus_tous}}|icone_verticale{<:retour:>,menus-24,'',left})]
+		[(#ENV{redirect,#URL_ECRIRE{menus}}|icone_verticale{<:retour:>,menus-24,'',left})]
 		<:menus:formulaire_modifier_menu:>
 		<h1>
 			<BOUCLE_menu(MENUS){id_menu=#VAL{id_menu}|_request}>

@@ -271,7 +271,7 @@ function formulaires_editer_menus_entree_traiter($id_menu, $id_menus_entree = 'n
 			$retours['message_erreur'] = _T('menus:erreur_mise_a_jour');
 		}
 		if ($ok and !$sous_menu) {
-			$retours['redirect'] = generer_url_ecrire('menus_tous');
+			$retours['redirect'] = generer_url_ecrire('menus');
 		}
 	}
 

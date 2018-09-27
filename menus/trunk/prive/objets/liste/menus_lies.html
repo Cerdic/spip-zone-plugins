@@ -43,7 +43,7 @@ a mis a jour la valeur avec la page reelle]
 			<td class="titre">[(#LOGO_MENU|image_reduire{20,20})]<a href="[(#URL_ECRIRE{menu_edit,id_menu=#ID_MENU})]">#TITRE</a></td>
 			<td class="action">
 				[(#ENV{editable}|oui)
-					<button type="submit" class="button link delete" name="supprimer_lien\[menu-#ID_MENU-#OBJET-#ID_OBJET\]" value="X"><:menu:retirer_lien_menu:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+					<button type="submit" class="button link delete" name="supprimer_lien\[menu-#ID_MENU-#OBJET-#ID_OBJET\]" value="X"><:menus:retirer_lien_menu:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
 				]
 			</td>
 		</tr>
@@ -51,10 +51,10 @@ a mis a jour la valeur avec la page reelle]
 	</tbody>
 </table>
 [<p class="pagination">(#PAGINATION{prive})</p>]
-[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\[menu-*-#OBJET-#ID_OBJET\]" value="X"><:menu:retirer_tous_liens_menus:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\[menu-*-#OBJET-#ID_OBJET\]" value="X"><:menus:retirer_tous_liens_menus:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
 </div>
 </B_liste_menus>
 <div class="liste-objets liste-objets-lies menus caption-wrap">
-	<strong class="caption">[(#ENV*{titre,<:menu:info_aucun_menu:>})]</strong>
+	<strong class="caption">[(#ENV*{titre,<:menus:info_aucun_menu:>})]</strong>
 </div>
 <//B_liste_menus>

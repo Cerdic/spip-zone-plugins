@@ -185,6 +185,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_objets_lies_menu' => 'Liés à ce menu',
 	'tous_les_articles' => '... Tous les articles',
 	'toutes_les_rubriques' => '... Toutes les rubriques',
+	'titre_menu' => 'Menu',
 
 	// U
 	'utiles_explication' => 'Les squelettes actuels du site peuvent utiliser les menus suivants.',
