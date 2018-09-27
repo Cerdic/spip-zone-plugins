@@ -233,6 +233,16 @@ function formulaires_editer_menu_traiter($id_menu = 'new', $retour = '', $associ
 		}
 	}
 
+	// Si c'est une création et qu'il n'y a pas déjà de redirection,
+	// on renvoie sur la page d'édition du menu pour ajouter les entrées
+	if (
+		!intval($id_menu)
+		and $res['id_menu']
+		and !$retour
+	) {
+		$res['redirect'] = generer_url_ecrire_entite_edit($res['id_menu'], 'menu');
+	}
+
 	// Dans tous les cas le formulaire est toujours éditable
 	$res['editable'] = true;
 
