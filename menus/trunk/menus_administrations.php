@@ -44,6 +44,9 @@ function menus_upgrade($nom_meta_version_base, $version_cible) {
 	$maj['0.5.5'] = array(
 		array('maj_tables', array('spip_menus_liens')),
 	);
+	$maj['0.5.6'] = array(
+		array('maj_tables', array('spip_menus', 'spip_menus_entrees')),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_version_base, $version_cible, $maj);
