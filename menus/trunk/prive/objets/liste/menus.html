@@ -4,12 +4,7 @@
 	identifiant,1,
 	id_menu,1
 }})
-]
-#SET{debut,#ENV{debutmenl,#EVAL{_request("debutmenl");}}}
-<B_liste_menus>
-[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
-a mis a jour la valeur avec la page reelle]
-#SET{debut,#ENV{debutmenl,#EVAL{_request("debutmenl");}}}
+]<B_liste_menus>
 #ANCRE_PAGINATION
 <div class="liste-objets menus">
 <table class="spip liste">
@@ -38,8 +33,6 @@ a mis a jour la valeur avec la page reelle]
 </table>
 [<p class="pagination">(#PAGINATION{prive})</p>]
 </div>
-</B_liste_menus>
-<div class="liste-objets liste-objets-lies menus caption-wrap">
-	<strong class="caption">[(#ENV*{titre,<:menus:info_aucun_menu:>})]</strong>
-</div>
-<//B_liste_menus>
+</B_liste_menus>[
+<div class="liste-objets menus caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_menus>
