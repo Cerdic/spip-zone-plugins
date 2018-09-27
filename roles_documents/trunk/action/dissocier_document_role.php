@@ -93,21 +93,32 @@ function supprimer_lien_document_role($id_document, $objet, $id_objet, $role, $s
 	// [TODO] le mettre en paramètre de la fonction ?
 	$serveur = '';
 
-	// D'abord on ne supprime pas, on dissocie
+	// D'abord on dissocie
 	include_spip('action/editer_liens');
 	include_spip('roles_documents_fonctions');
-	// pas de suppression et rôle : on ne dissocie que ce rôle
+	// 1) Pas de suppression et rôle : on ne dissocie que ce rôle
 	if (!$supprime and $role) {
-		$condition = array('role' => $role);
-	// pas de suppression et pas de rôle : on dissocie tous les rôles non principaux
+		objet_dissocier(array('document' => $id_document), array($objet => $id_objet), array('role' => $role));
+	// 2) Pas de suppression et pas de rôle : on dissocie tous les rôles non principaux (conserver les logos quoi)
+	// l'API editer_liens ne semble pas accespter un tableau de plusieurs rôles dans la condition,
+	// on fait dans une requête à la mano.
 	} elseif(!$supprime and !$role) {
-		$roles = roles_documents_presents_sur_objet($objet, $id_objet, 0, false); // rôles possibles non principaux
-		$condition = array('role' => $roles['possibles']);
-	// suppression : on dissocie tout
+		if ($roles_non_principaux = roles_documents_presents_sur_objet($objet, $id_objet, 0, false)) {
+			include_spip('base/abstract_sql');
+			sql_delete(
+				'spip_documents_liens',
+				array(
+					'id_document=' . intval($id_document),
+					'objet=' . sql_quote($objet),
+					'id_objet=' . intval($id_objet),
+					sql_in('role', $roles_non_principaux['possibles']),
+				)
+			);
+		}
+	// 3) Suppression : on dissocie tout
 	} else {
-		$condition = array('role' => '*');
+		objet_dissocier(array('document' => $id_document), array($objet => $id_objet), array('role' => '*'));
 	}
-	objet_dissocier(array('document' => $id_document), array($objet => $id_objet), $condition);
 
 	// Si c'est une vignette, l'eliminer du document auquel elle appartient
 	// cas tordu peu probable
