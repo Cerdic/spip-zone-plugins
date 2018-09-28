@@ -19,7 +19,7 @@ function prix_prix_objet_ht($id_objet, $les_prix) {
 			$taxes = lire_config('prix_objets/taxes');
 		}
 
-		if ($taxes > '0.00') {
+		if ($taxes > '0') {
 			$prix_ht = $les_prix['prix'] / (1 / 100 * $taxes + 1);
 		}
 		else {
@@ -44,8 +44,8 @@ function prix_prix_objet_dist($id_objet) {
 		else {
 			$taxes = lire_config('prix_objets/taxes');
 		}
-		if ($taxes > '0.00') {
-			$prix = $les_prix['prix_ht'] + ($les_prix['prix_ht'] * $taxes);
+		if ($taxes > '0') {
+			$prix = $les_prix['prix_ht'] + ($les_prix['prix_ht'] * ($taxes / 100));
 		}
 		else {
 			$prix = $les_prix['prix_ht'];
