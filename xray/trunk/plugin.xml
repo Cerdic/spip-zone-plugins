@@ -8,7 +8,7 @@
 	<auteur>Ilia Alshanetsky</auteur>
 	<licence>GPL</licence>
 	<licence>PHP</licence>
-	<version>0.14.4</version>
+	<version>0.14.5</version>
 	<etat>test</etat>
 	<description>
 	Explorer les caches des squelettes SPIP avec memoization APC pour les comprendre et les optimiser
@@ -23,6 +23,7 @@
 	</bouton>
 	<necessite id="SPIP" version="[2.1.0;3.2.99]" />
 	<necessite id="memoization" />
+	<utilise id="cachelab" />
 	<utilise id="macrosession" />
 	<categorie>outil</categorie>
 	<options>xray_options.php</options>

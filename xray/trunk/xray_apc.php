@@ -199,6 +199,9 @@ if (!function_exists('plugin_est_actif')) {
 	}
 }
 
+function antislash ($str) {
+	return str_replace('/', '\/', $str);
+}
 ////////////////////////////////////////////////////////////////////////
 
 // "define if not defined"
@@ -959,7 +962,10 @@ echo <<<EOB
 	<ol class=menu>
 	<li><a href="$MY_SELF&SH={$MYREQUEST['SH']}">Refresh Data</a></li>
 EOB;
-echo menu_entry(OB_HOST_STATS, 'View Host Stats'), menu_entry(OB_USER_CACHE, 'User Cache Entries'), menu_entry(OB_VERSION_CHECK, 'Version Check'), menu_entry(OB_CACHELAB, 'SPIP Cache Lab');
+echo menu_entry(OB_HOST_STATS, 'View Host Stats'), menu_entry(OB_USER_CACHE, 'User Cache Entries'), menu_entry(OB_VERSION_CHECK, 'Version Check');
+
+if (plugin_est_actif('cachelab'))
+	echo menu_entry(OB_CACHELAB, 'CacheLab');
 
 if ($AUTHENTICATED) {
 	echo <<<EOB
@@ -1032,7 +1038,7 @@ switch ($MYREQUEST['OB']) {
 		<tr class=tr-0><td class=td-0>APCu Version</td><td>$apcversion</td></tr>
 		<tr class=tr-1><td class=td-0>PHP Version</td><td>$phpversion</td></tr>
 EOB;
-		
+
 		if (!empty($_SERVER['SERVER_NAME']))
 			echo "<tr class=tr-0><td class=td-0>APCu Host</td><td>{$_SERVER['SERVER_NAME']} $host</td></tr>\n";
 		if (!empty($_SERVER['SERVER_SOFTWARE']))
@@ -1156,8 +1162,7 @@ EOB;
 EOB;
 		
 		break;
-	
-	
+
 	// -----------------------------------------------
 	// User Cache Entries
 	// -----------------------------------------------
@@ -1251,7 +1256,7 @@ EOB;
 			// Don't use preg_quote because we want the user to be able to specify a
 			// regular expression subpattern.
 			// Detection of a potential preg error :
-			if (@preg_match('/' . str_replace('/', '\/', $MYREQUEST['SEARCH']) . '/i', null) === false) {
+			if (@preg_match('/' . antislash($MYREQUEST['SEARCH']) . '/i', null) === false) {
 				echo '<div class="error">Error: search expression is not a valid regexp (it needs escaping parentheses etc)</div>';
 				$MYREQUEST['SEARCH'] = preg_quote($MYREQUEST['SEARCH'],'/');
 				echo "<div class='warning'>
@@ -1464,8 +1469,9 @@ EOB;
 							case 'MACROAUTORISER' :
 								if (!isset ($data['texte']))
 									$extra = '(html non défini)';
-								elseif (preg_match_all("/<\?php\s+if\s+\(autoriser\s*\((.+)\)\s*\)\s*{\s*\?>/", $data['texte'], $matches))
+								elseif (preg_match_all("/if\s+\(autoriser\s*\((.+)\)\s*\)\s*{\s*\?>/", $data['texte'], $matches))
 									$extra = $matches[1];
+									// $extra = $matches; 
 								else
 									$extra = '(aucune balise #_AUTORISER_SI)';
 								break;
@@ -1525,7 +1531,7 @@ EOB;
 							} else
 								echo "fetch failed";
 						} else
-							echo '(doesnt exist)';
+							echo '(doesnt exist in apc)';
 						echo '</td>';
 						echo '</tr>';
 					}
@@ -1617,7 +1623,8 @@ EOB;
 		break;
 
 	case OB_CACHELAB :
-		include_once('cachelab.php');
+		include_spip('inc/cachelab');
+		include('cachelab.php');
 		break;
 
 }
