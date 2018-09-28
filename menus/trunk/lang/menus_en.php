@@ -168,6 +168,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_texte_libre' => 'Free text',
 
 	// T
+	'titre_menu' => 'Menu',
 	'tous_les_articles' => '... All articles',
 	'toutes_les_rubriques' => '... All sections',
 

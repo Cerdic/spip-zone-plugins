@@ -171,6 +171,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_texte_libre' => 'متن آزاد',
 
 	// T
+	'titre_menu' => 'منيو',
 	'tous_les_articles' => '...تمام مقاله‌ها',
 	'toutes_les_rubriques' => '...تمام بخش‌ها'
 );

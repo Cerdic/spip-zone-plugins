@@ -165,6 +165,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_texte_libre' => 'Potvrdený text',
 
 	// T
+	'titre_menu' => 'Menu',
 	'tous_les_articles' => '... Všetky články',
 	'toutes_les_rubriques' => '... Všetky rubriky'
 );

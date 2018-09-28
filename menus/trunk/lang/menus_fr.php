@@ -182,10 +182,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'texte_ajouter_menu' => 'Ajouter un menu',
 	'texte_creer_associer_menu' => 'Créer et associer un menu',
+	'titre_menu' => 'Menu',
 	'titre_objets_lies_menu' => 'Liés à ce menu',
 	'tous_les_articles' => '... Tous les articles',
 	'toutes_les_rubriques' => '... Toutes les rubriques',
-	'titre_menu' => 'Menu',
 
 	// U
 	'utiles_explication' => 'Les squelettes actuels du site peuvent utiliser les menus suivants.',

@@ -96,6 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_texte_libre' => 'نص حرّ',
 
 	// T
+	'titre_menu' => 'القائمة',
 	'tous_les_articles' => 'كل المقالات',
 	'toutes_les_rubriques' => 'كل الأقسام'
 );
