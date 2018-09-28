@@ -320,6 +320,7 @@ function rubriques_enfant($id_parent, $rubriques = array()) {
  *
  * @param string $prix
  * @param string $devise
+ * @param integer $decimals
  * @return string
  */
 function filtres_prix_formater($prix, $devise = '') {
