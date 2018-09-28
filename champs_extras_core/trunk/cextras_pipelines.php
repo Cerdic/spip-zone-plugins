@@ -21,6 +21,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function champs_extras_objet($table) {
 	static $saisies_tables = array();
 	if (!$saisies_tables) {
+		include_spip('public/interfaces');
 		$saisies_tables = pipeline('declarer_champs_extras', array());
 	}
 	return isset($saisies_tables[$table]) ? $saisies_tables[$table] : array();

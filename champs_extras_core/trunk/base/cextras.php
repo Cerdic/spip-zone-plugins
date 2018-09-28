@@ -32,6 +32,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function cextras_declarer_tables_objets_sql($tables){
 
 	include_spip('inc/cextras');
+	include_spip('public/interfaces');
 	
 	// recuperer les champs crees par les plugins
 	// array($table => array(Liste de saisies))
@@ -105,6 +106,7 @@ function cextras_declarer_tables_interfaces($interfaces){
 
 	include_spip('inc/cextras');
 	include_spip('inc/saisies');
+	include_spip('public/interfaces');
 
 	// si saisies a ete supprime par ftp, on sort tranquilou sans tuer SPIP.
 	// champs extras sera ensuite desactive par admin plugins.
