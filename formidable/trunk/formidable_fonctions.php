@@ -40,6 +40,7 @@ function balise_VOIR_REPONSE_dist($p) {
  * @param string $type_retour
  *   'brut' : valeur brute
  *   'valeur_uniquement' : la valeur seulement
+ *   'label' : le label associé à la saisie
  *   defaut : tout le HTML de la saisie
  * @param null|string $sans_reponse
  *   texte affiche si aucune valeur en base pour ce champ
@@ -74,8 +75,13 @@ function calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, $t
 		return $reponses_valeurs[$id_formulaires_reponse][$nom];
 	}
 
+
 	// Si on trouve bien la saisie demandée
 	if ($saisie = saisies_chercher($formulaires_saisies[$id_formulaire], $nom)) {
+		// Si on demande le label, on ne génère rien, on renvoie juste le label
+		if ($type_retour == 'label') {
+			return $saisie['options']['label'];
+		}
 		// On génère la vue de cette saisie avec la valeur trouvée précédemment
 		return recuperer_fond(
 			'saisies-vues/_base',
