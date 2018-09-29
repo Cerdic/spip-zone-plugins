@@ -17,7 +17,7 @@ else
 
 if (isset ($_GET['objet']))
 	$objet = $_GET['objet'];
-elseif (defined ('XRAY_OBJET_SPECIAL'))
+elseif (defined ('XRAY_OBJET_SPECIAL') and XRAY_OBJET_SPECIAL)
 	$objet = XRAY_OBJET_SPECIAL;
 else 
 	$objet = null;
@@ -56,9 +56,14 @@ echo "<b>Choix actuels :</b><br>
 		Action : $action<br>
 		Méthode pour la recherche des chemins : $cachelab_methode_chemin<br>
 		chemin recherché : $chemin<br>
-		objet recherché = $cle_objet $id_objet<br>";
+		objet recherché = $cle_objet $id_objet<br>
+		globale derniere_modif_invalide : {$GLOBALS['derniere_modif_invalide']}";
 
-$stats = cachelab_filtre($action, $cle_objet, $id_objet, $chemin, array('chrono'=>true, 'listes'=>true, 'methode_chemin'=>$cachelab_methode_chemin));
+$stats = cachelab_filtre(
+	$action, 
+	array('chemin'=>$chemin, 'cle_objet'=>$cle_objet, 'id_objet'=>$id_objet),
+	array('chrono'=>true, 'listes'=>true, 'methode_chemin'=>$cachelab_methode_chemin)
+	);
 $listechemin = $stats['squelette'];
 unset($stats['squelette']);
 $listeobjet = $stats['contexte'];

@@ -119,8 +119,7 @@ function get_apc_data($info, &$success) {
 	return null;
 }
 
-function spipsafe_unserialize($str)
-{
+function spipsafe_unserialize($str) {
 	if (strpos($str, "SPIPTextWheelRuleset") !== false) {
 		if (isset($_GET['ZOOM']) and ($_GET['ZOOM'] == 'TEXTECOURT'))
 			return "Début : " . substr(trim($str), 0, 80) . '...';
