@@ -8,6 +8,7 @@
  */
 function prix_reservations_detail_ht($id_objet, $les_prix) {
 	$prix_ht = 0;
+
 	if ($les_prix['prix_ht'] > '0.00') {
 		$prix_ht = $les_prix['prix_ht'];
 	}
@@ -21,6 +22,7 @@ function prix_reservations_detail_ht($id_objet, $les_prix) {
 			$prix_ht = $les_prix['prix'];
 		}
 	}
+
 	return $prix_ht;
 }
 

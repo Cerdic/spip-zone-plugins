@@ -12,8 +12,9 @@
 				}
 			}
 		}
-		[(#SET{total_ht,[(#GET{total_ht}|plus{#PRIX_HT})]})]
-		[(#SET{total,[(#GET{total}|plus{#PRIX})]})]
+
+		[(#SET{total_ht,[(#GET{total_ht}|plus{#PRIX_HT*})]})]
+		[(#SET{total,[(#GET{total}|plus{#PRIX*})]})]
 	</BOUCLE_reservation_details>
 	#SET{reservation,#ARRAY{
 		details, #GET**{details}

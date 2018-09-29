@@ -79,7 +79,6 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 				if (isset($p)) {
 					$prix_ht = $quantite * $fonction_prix_ht('prix_objet', $p['id_prix_objet']);
 					$prix = $quantite * $fonction_prix('prix_objet', $p['id_prix_objet']);
-
 					$set['prix_ht'] = $prix_ht;
 					$set['prix'] = $prix;
 					$set['taxe'] = $p['taxe'];
