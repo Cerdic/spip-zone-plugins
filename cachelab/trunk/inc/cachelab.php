@@ -1,6 +1,13 @@
 <?php
 include_spip ('lib/microtime.inc');
 
+if (!function_exists('plugin_est_actif')) {
+	function plugin_est_actif($prefixe) {
+		$f = chercher_filtre('info_plugin');
+		return $f($prefixe, 'est_actif');
+	}
+}
+
 if (!defined ('CACHELAB_LOG_ECHECS'))
 	define ('CACHELAB_LOG_ECHECS', true);
 
@@ -55,14 +62,20 @@ static $len_prefix;
 
 // $chemin : liste de chaines à tester dans le chemin du squelette, séparées par |
 // 	OU une regexp (hors délimiteurs et modificateurs) si la méthode est 'regexp'
-function cachelab_filtre ($action, $cle_objet, $id_objet, $chemin='', $options) {
+function cachelab_filtre ($action, $conditions, $options=array()) {
+	$chemin = (isset($conditions['chemin']) ? $conditions['chemin'] : null);
+	$cle_objet = (isset($conditions['cle_objet']) ? $conditions['cle_objet'] : null);
+	$id_objet = (isset($conditions['id_objet']) ? $conditions['id_objet'] : null);
+
+	$methode_chemin = (isset ($options['methode_chemin']) ? $options['methode_chemin'] : 'strpos');
 	$avec_listes = (isset ($options['listes']) and $options['listes']);
 	$avec_chrono = (isset ($options['chrono']) and $options['chrono']);
-	$methode_chemin = (isset ($options['methode_chemin']) ? $options['methode_chemin'] : 'strpos');
 	if ($avec_chrono) {
 		include_spip ('lib/microtime.inc');
 		microtime_do ('begin');
 	}
+
+	$len_prefix = strlen(_CACHE_NAMESPACE);
 
 	$matche_chemin = $matche_objet = array();
 	$nb_valides=0;
@@ -104,8 +117,9 @@ function cachelab_filtre ($action, $cle_objet, $id_objet, $chemin='', $options) 
 				die("Pas prévu (todo)");
 			};
 
-			if (!$danslechemin and $cle_objet) {
-				if ($data = get_apc_data($cle, $success)) {
+			if (!$danslechemin and $cle_objet and $id_objet) {
+				global $Memoization;
+				if ($data = $Memoization->get(substr($cle, $len_prefix))) {
 					$nb_accesdata++;
 
 					if (is_array($data)) {
@@ -150,4 +164,18 @@ function cachelab_filtre ($action, $cle_objet, $id_objet, $chemin='', $options) 
 	}
 
 	return $stats;
+}
+
+function cachelab_controle_invalideur($action, $objets_invalidants=array()) {
+static $prev_derniere_modif_invalide;
+	switch($action) {
+	case 'stop' :
+		$prev_derniere_modif_invalide = $GLOBALS['derniere_modif_invalide'];
+		if (is_array($objets_invalidants))
+			$GLOBALS['derniere_modif_invalide'] = $objets_invalidants;
+		break;
+	case 'go' :
+		$GLOBALS['derniere_modif_invalide'] = $prev_derniere_modif_invalide;
+		break;
+	}
 }
