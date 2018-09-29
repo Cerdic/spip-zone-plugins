@@ -1,5 +1,6 @@
 <BOUCLE_comment(FORUMS){id_forum}>
 <div class="comment hreview[ (#ID_PARENT|?{reply})]">
+	[(#ENV{thread}|oui|et{#ID_PARENT}|oui)<a href="#comment#ID_FORUM-#ID_THREAD" id="comment#ID_FORUM-#ID_THREAD"></a>]
 	<a href="#comment#ID_FORUM" id="comment#ID_FORUM"></a>
 	<a href="#forum#ID_FORUM" id="forum#ID_FORUM"></a>
 	[(#INCLURE{fond=modeles/comment-meta,env})]

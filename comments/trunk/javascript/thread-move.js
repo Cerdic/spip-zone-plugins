@@ -38,16 +38,27 @@
 	}
 	jQuery(function(){
 		var ancre = window.location.hash;
-		var id;
-		if ((id=ancre.match(/^#(forum|comment|reply)([0-9]+$)/)) && jQuery("#comment"+id[2]).length==0){
+		var id, id_forum, id_search, nom;
+		// #comment100200 (id_forum)
+		// #comment100200-100198 (id_forum - id_thread) (pour les boucles qui paginent par thread)
+		if (id = ancre.match(/^#(forum|comment|reply)([0-9]+)(-[0-9]+)?$/)) {
+			nom = id[1];
+			id_forum = id_search = id[2];
+			if (typeof id[3] !== 'undefined') {
+				id_forum = id[2];
+				id_search = id[3].substr(1);
+			}
+		}
+		if (id && jQuery("#comment" + id_forum).length==0) {
 			var a = jQuery('.comments-thread a.lien_pagination').last();
 			var href = a.attr('href');
-			href = href.replace(/debut_comments-list=[0-9]+#.*$/,'debut_comments-list=@'+id[2]+ancre);
-			a.after("<a href='"+href+"' style='visibility:hidden' id='comment"+id[2]+"' class='lien_pagination'>Go</a>");
+			href = href.replace(/debut_comments-list=[0-9]+#.*$/,'debut_comments-list=@'+id_search + ancre);
+			a.after("<a href='"+href+"' style='visibility:hidden' id='comment"+id_forum+"' class='lien_pagination'>Go</a>");
 			jQuery(a.parents('div.ajaxbloc').first()).ajaxbloc();
-			if (id[1]=='reply')
+			if (nom == 'reply') {
 				onAjaxLoad(hash_reply);
-			jQuery("#comment"+id[2]).eq(0).click();
+			}
+			jQuery("#comment" + id_forum).eq(0).click();
 		}
 		hash_reply();
 	});
