@@ -14,7 +14,7 @@ function prix_reservations_detail_ht($id_objet, $les_prix) {
 	elseif($les_prix['prix'] > '0.00') {
 		$taxe = isset($les_prix['taxe']) ? $les_prix['taxe'] : 0;
 
-		if ($taxe > 0.00) {
+		if ($taxe > 0) {
 			$prix_ht = $les_prix['prix'] / (1 + $taxe);
 		}
 		else {
@@ -34,7 +34,7 @@ function prix_reservations_detail_dist($id_reservations_detail) {
 	elseif($les_prix['prix_ht'] > '0.00')  {
 		$taxe = isset($les_prix['taxe']) ? $les_prix['taxe'] : 0;
 
-		if ($taxe > 0.00) {
+		if ($taxe > 0) {
 			$prix = $les_prix['prix_ht'] + ($les_prix['prix_ht'] * $taxe);
 		}
 		else {

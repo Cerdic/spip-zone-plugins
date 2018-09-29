@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Définitions pour la personnalisation du message pour le plugin
  * Message personnalisé https://github.com/abelass/message_personnalise.
@@ -22,7 +23,7 @@ function messages_personnalises_fond_reservation_body_dist($args) {
 	$reservations = lister_tables_objets_sql('spip_reservations');
 	$statuts = array();
 	foreach ($reservations['statut_textes_instituer'] as $statut => $chaine) {
-			$statuts[$statut] = _T($chaine);
+		$statuts[$statut] = _T($chaine);
 	}
 
 	// Les champs auteurs
@@ -30,9 +31,10 @@ function messages_personnalises_fond_reservation_body_dist($args) {
 
 	$tables = array(
 		'reservation' => array_keys($reservations['field']),
-		'auteur' => array_keys($auteurs['field']),
+		'auteur' => array_keys($auteurs['field'])
 	);
-	$exclus = array('pass',
+	$exclus = array(
+		'pass',
 		'low_sec',
 		'htpass',
 		'en_ligne',
@@ -43,16 +45,16 @@ function messages_personnalises_fond_reservation_body_dist($args) {
 		'imessage',
 		'messagerie',
 		'source',
-		'maj',
+		'maj'
 	);
 	$champs_disponibles = array();
 	$champs_sql = array();
-	foreach ($tables AS $objet => $liste_champs) {
-		foreach($liste_champs AS $champ) {
-			if (!in_array($champ, $exclus)) {
+	foreach ($tables as $objet => $liste_champs) {
+		foreach ($liste_champs as $champ) {
+			if (! in_array($champ, $exclus)) {
 				$alias = $objet . '_' . $champ;
 				$champs_disponibles[] = $alias;
-				$champs_sql[] = $objet . '.' . $champ . ' AS ' .$alias;
+				$champs_sql[] = $objet . '.' . $champ . ' AS ' . $alias;
 			}
 		}
 	}
@@ -65,7 +67,8 @@ function messages_personnalises_fond_reservation_body_dist($args) {
 		'auteur_email' => 'reservation_email'
 	);
 	if (function_exists('champs_extras_objet')) {
-		$valeurs['champs_extras_auteurs'] = champs_extras_objet(table_objet_sql('auteur'));
+		$valeurs['champs_extras_auteurs'] = champs_extras_objet(
+				table_objet_sql('auteur'));
 
 		foreach ($valeurs['champs_extras_auteurs'] as $value) {
 			$champ = $value['options']['nom'];
@@ -79,31 +82,30 @@ function messages_personnalises_fond_reservation_body_dist($args) {
 		'fond' => 'notifications/contenu_reservation_mail',
 		'declencheurs' => array(
 			'statut' => array(
-				'data' => $statuts,
+				'data' => $statuts
 			),
 			'qui' => array(
-				'data' =>
-					array(
-						'client' => _T('reservation:notifications_client_label'),
-						'vendeur' => _T('reservation:notifications_vendeur_label'),
-					),
-			),
+				'data' => array(
+					'client' => _T('reservation:notifications_client_label'),
+					'vendeur' => _T('reservation:notifications_vendeur_label')
+				)
+			)
 		),
 		'raccoursis' => array(
 			'requete' => array(
 				'champs' => $champs_sql,
-				'from' =>'spip_reservations AS reservation LEFT JOIN spip_auteurs AS auteur USING(id_auteur)'
+				'from' => 'spip_reservations AS reservation LEFT JOIN spip_auteurs AS auteur USING(id_auteur)'
 			),
 			'champs' => array(
 				'disponibles' => $champs_disponibles,
-				'lies' => $champs_lies,
+				'lies' => $champs_lies
 			),
 			'inclures' => array(
 				'reservations' => array(
 					'fond' => 'inclure/reservation',
-					'titre' => _T('reservation:mp_titre_reservation_details'),
-				),
-			),
-		),
+					'titre' => _T('reservation:mp_titre_reservation_details')
+				)
+			)
+		)
 	);
 }
