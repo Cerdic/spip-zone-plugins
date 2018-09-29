@@ -16,12 +16,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'confirmsubscribe_invite_texte_email_1' => '@invite_email_from@は、@email@様を@nom_site_spip@のニュースレターを購読するように誘います。',
-	'confirmsubscribe_invite_texte_email_3' => 'こち側よりエラーが発生したか、このメールを無視してください。要求は自動的に取
-り消されます。',
+	'confirmsubscribe_invite_texte_email_3' => 'こち側よりエラーが発生したか、このメールを無視してください。要求は自動的に取り消されます。',
 	'confirmsubscribe_invite_texte_email_liste_1' => '@invite_email_from@は、メールアドレス@email@を使って、「@nom_site_spip@」サイトの「@titre_liste@」ニュースレターを購読するように招待します。',
 	'confirmsubscribe_sujet_email' => '「@nom_site_spip@」のニュースレターの登録確認',
 	'confirmsubscribe_texte_email_1' => '電子メールアドレス@email@で、@nom_site_spip@のニュースレターを購読するように要求してくださいました。',
-	'confirmsubscribe_texte_email_2' => 'To confirm your subscription, click on the following link:
+	'confirmsubscribe_texte_email_2' => '購読を確認するには、次のリンクをクリックしてください：
 @url_confirmsubscribe@',
 	'confirmsubscribe_texte_email_3' => 'こち側よりエラーが発生したか、ご意見が変わったかの場合には、このメールを無視してください。要求は自動的に取り消されます。',
 	'confirmsubscribe_texte_email_envoye' => '確認していただくためにために、このアドレスにメールが送信されました。',
@@ -38,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_technique_subscribe' => '技術的なエラーが起きて、登録が不可能です。',
 	'explication_listes_diffusion_option_defaut' => 'コンマで区切られた最低1つのリストＩＤ',
 	'explication_listes_diffusion_option_statut' => 'ステータースによってリストをソートする',
-	'explication_to_email' => '次のアドレス (必要に応じてカンマで区切って複数のアドレス) に事前購読の電子メールを送信します。',
+	'explication_to_email' => '次のアドレス（必要に応じてカンマで区切って複数のアドレス）に事前購読の電子メールを送信します。',
 
 	// F
 	'force_synchronisation' => '同期する',
@@ -53,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_email_limite_nombre' => '招待者は5名限定。',
 	'info_email_obligatoire' => 'メールアドレスは必須です。',
 	'info_emails_invalide' => 'メールは1つ無効です。',
-	'info_nb_adresses_a_importer' => '書き込むメールアドレスは@nb@',
+	'info_nb_adresses_a_importer' => '書き込むＥメールアドレスは@nb@',
 	'info_nb_mailsubscribers' => '購読者は@nb@名',
 	'info_statut_poubelle' => 'ゴミ箱',
 	'info_statut_prepa' => '購読されていません。',
@@ -91,22 +90,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mailsubscribers_valide' => '購読済み',
 
 	// S
-	'subscribe_deja_texte' => 'メールアドレス@email@は既にメーリングリストに登録されています。',
+	'subscribe_deja_texte' => 'Ｅメールアドレス@email@は既にメーリングリストに登録されています。',
 	'subscribe_sujet_email' => '「@nom_site_spip@」ニュースレターの申し込み',
-	'subscribe_texte_email_1' => 'ニュースレターを受け取るように、メールアドレス@email@は有効されました。',
+	'subscribe_texte_email_1' => 'ニュースレターを受け取るように、Ｅメールアドレス@email@は有効されました。',
 	'subscribe_texte_email_2' => '@nom_site_spip@にご関心をお持ちいただき、ありがとうございます。',
 	'subscribe_texte_email_3' => 'こち側よりエラーが発生したか、ご意見が変わったかの場合には、次のリンクを使用して@url_unsubscribe@、いつでも購読を取り消すことが出来ます。
 ',
-	'subscribe_texte_email_liste_1' => 'リスト「@titre_liste@」に参加するように、メールアドレス@email@は有効されまし
+	'subscribe_texte_email_liste_1' => 'リスト「@titre_liste@」に参加するように、Ｅメールアドレス@email@は有効されまし
 た。',
 	'subscribe_titre_email' => 'ニュースレター購読',
 	'subscribe_titre_email_liste' => 'リスト「@titre_liste@」購読',
 
 	// T
 	'texte_ajouter_mailsubscriber' => 'ニュースレターに購読者を追加する。',
-	'texte_avertissement_import' => 'A <tt>status column</tt> is supplied, the data will be imported as is, overwriting those that may already exist for some email.', # RELIRE
+	'texte_avertissement_import' => '<b>ステータス</b>列が提供され、データはそのまま書き込まれますが、いくつかのＥメールが既に存在するかもしれないものを上書きします。',
 	'texte_changer_statut_mailsubscriber' => 'ニュースレターのこの購読者は：',
-	'texte_import_export_bonux' => 'To import or export the lists, please install plugin <a href="https://plugins.spip.net/spip_bonux">SPIP-Bonux</a>',
+	'texte_import_export_bonux' => 'リストを書き込み、または書き出すには、プラグイン「<a href="https://plugins.spip.net/spip_bonux">SPIP-Bonux</a>」をインストールしてください。',
 	'texte_statut_en_attente_confirmation' => '確認中',
 	'texte_statut_pas_encore_inscrit' => '購読されていない',
 	'texte_statut_refuse' => '停止中',
