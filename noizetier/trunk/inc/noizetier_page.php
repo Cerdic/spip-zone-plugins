@@ -86,7 +86,7 @@ function noizetier_page_charger($recharger = false) {
 						// On met à jour les blocs exclus avec la sauvegarde effectuée au préalable (si la page
 						// existait déjà en base).
 						if (isset($pages_existantes[$page])) {
-							$configuration['blocs_exclus'] = $pages_existantes[$page];
+							$configuration['blocs_exclus'] = $pages_existantes[$page]['blocs_exclus'];
 						}
 						// On détermine si la page est nouvelle ou modifiée.
 						// En mode rechargement forcé toute page est considérée comme nouvelle.
