@@ -41,6 +41,7 @@ function balise_VOIR_REPONSE_dist($p) {
  *   'brut' : valeur brute
  *   'valeur_uniquement' : la valeur seulement
  *   'label' : le label associé à la saisie
+ *   'edit' : pour les crayons
  *   defaut : tout le HTML de la saisie
  * @param null|string $sans_reponse
  *   texte affiche si aucune valeur en base pour ce champ
@@ -60,22 +61,28 @@ function calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, $t
 	// Si pas déjà présent, on cherche les valeurs de cette réponse
 	if (!isset($reponses_valeurs[$id_formulaires_reponse])) {
 		if ($champs = sql_allfetsel(
-			'nom,valeur',
+			'nom,valeur,id_formulaires_reponses_champ',
 			'spip_formulaires_reponses_champs',
 			'id_formulaires_reponse = '.intval($id_formulaires_reponse)
 		)) {
 			foreach ($champs as $champ) {
-				$reponses_valeurs[$id_formulaires_reponse][$champ['nom']] = $tenter_unserialize($champ['valeur']);
+				$reponses_valeurs[$id_formulaires_reponse][$champ['nom']] = array(
+					'valeur' =>  $tenter_unserialize($champ['valeur']),
+					'id' => $champ['id_formulaires_reponses_champ']
+				);
 			}
 		}
 	}
 
 	// Si on demande la valeur brute, on ne génère rien, on renvoie telle quelle
 	if ($type_retour == 'brut') {
-		return $reponses_valeurs[$id_formulaires_reponse][$nom];
+		return $reponses_valeurs[$id_formulaires_reponse][$nom]['valeur'];
 	}
 
-
+	// Si on demande edit > mode crayon > on génère le crayon correspond
+	if ($type_retour == 'edit') {
+		return 'crayon '.'formulaires_reponses_champ-valeur-'. $reponses_valeurs[$id_formulaires_reponse][$nom]['id'];
+	}
 	// Si on trouve bien la saisie demandée
 	if ($saisie = saisies_chercher($formulaires_saisies[$id_formulaire], $nom)) {
 		// Si on demande le label, on ne génère rien, on renvoie juste le label
@@ -88,7 +95,7 @@ function calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, $t
 			array_merge(
 				array(
 					'type_saisie' => $saisie['saisie'],
-					'valeur' => $reponses_valeurs[$id_formulaires_reponse][$nom],
+					'valeur' => $reponses_valeurs[$id_formulaires_reponse][$nom]['valeur'],
 					'valeur_uniquement' => ($type_retour == 'valeur_uniquement' ? 'oui' : 'non'),
 					'sans_reponse' => $sans_reponse,
 				),
