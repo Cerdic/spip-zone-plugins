@@ -62,15 +62,12 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 					$id_prix = isset($set['id_prix_objet']) ?
 						$set['id_prix_objet'] :
 						$reservations_details['id_prix_objet'];
-
-				//les déclinaisons
-
+					//les déclinaisons
 						$p = sql_fetsel(
-							'titre,id_prix_objet,code_devise',
+							'titre,id_prix_objet,code_devise,taxe',
 							'spip_prix_objets',
 							'id_prix_objet=' . $id_prix);
 						$set['descriptif'] .= ' - ' . $p['titre'];
-
 				}
 				// Sinon on cherche d'abord le prix attaché
 				else {
@@ -82,13 +79,10 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 				if (isset($p)) {
 					$prix_ht = $quantite * $fonction_prix_ht('prix_objet', $p['id_prix_objet']);
 					$prix = $quantite * $fonction_prix('prix_objet', $p['id_prix_objet']);
-					if ($prix_ht) {
-						$taxe = $p['taxe'];
-					}
 
 					$set['prix_ht'] = $prix_ht;
 					$set['prix'] = $prix;
-					$set['taxe'] = $taxe;
+					$set['taxe'] = $p['taxe'];
 					$set['id_prix_objet'] = $p['id_prix_objet'];
 
 					// Si pas de devise fournit par le contexte, on prend celle de prix_objets

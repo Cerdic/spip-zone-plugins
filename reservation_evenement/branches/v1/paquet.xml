@@ -1,7 +1,7 @@
 <paquet
 	prefix="reservation_evenement"
 	categorie="date"
-	version="1.29.2"
+	version="1.29.3"
 	etat="stable"
 	compatibilite="[3.0.16;3.2.*]"
 	logo="prive/themes/spip/images/reservation_evenement-64.png"
@@ -20,7 +20,7 @@
 	<necessite nom="yaml" compatibilite="[1.5.3;]" />
 
 	<utilise nom="declinaisons" compatibilite="[2.0.2;]" />
-	<utilise nom="prix_objets" compatibilite="[2.2.3;]" />
+	<utilise nom="prix_objets" compatibilite="[2.2.4;]" />
 	<utilise nom="notifications_archive" compatibilite="[1.1.3;]" />
 
 

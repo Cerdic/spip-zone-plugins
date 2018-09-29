@@ -7,12 +7,13 @@
 			#ARRAY{
 				descriptif,#QUANTITE|>{1}|?{#QUANTITE&times;}|concat{#DESCRIPTIF*|extraire_multi|supprimer_numero},
 				quantite, #QUANTITE,
-				prix, #PRIX*,
+				prix_ht, #PRIX_HT,
 				statut,#STATUT
 				}
 			}
 		}
-		[(#SET{total,[(#GET{total}|plus{#PRIX*})]})]
+		[(#SET{total_ht,[(#GET{total_ht}|plus{#PRIX_HT})]})]
+		[(#SET{total,[(#GET{total}|plus{#PRIX})]})]
 	</BOUCLE_reservation_details>
 	#SET{reservation,#ARRAY{
 		details, #GET**{details}
@@ -47,7 +48,7 @@
 				<tr class="detail [(#VALEUR|table_valeur{quantite}|>{0}|?{avec_quantite,sans_quantite})]">
 					<td class="description">[(#VALEUR{descriptif})]</td>
 					[(#GET{total}|floatval|>{0.00}|oui)
-					<td class="montant">[(#VALEUR{prix}|appliquer_filtre{prix_formater,[(#VALEUR{prix})]})]</td>
+					<td class="montant">#VALEUR{prix_ht}</td>
 					]
 					<td class="statut">
 						[(#VAL{reservation}|re_statut_titre{#VALEUR{statut}})]
@@ -57,6 +58,18 @@
 			</tbody>
 			[(#GET{total}|floatval|>{0.00}|oui)
 			<tfoot>
+				[(#GET{total}|!={#GET{total_ht}}|oui)
+				<tr class="total_ht">
+					<td class="descriptif">[(#PLUGIN{prix}|?{<:prix:label_total_ht:>,<:reservation:total: <:reservations_detail:label_prix_ht:>})]</td>
+					<td class="montant">[(#GET{total_ht}|appliquer_filtre{prix_formater,#GET{total_ht}})]</td>
+					<td></td>
+				</tr>
+				<tr class="taxes">
+					#SET{taxe, #GET{total}|moins{#GET{total_ht}}}
+					<td class="descriptif"><:reservations_detail:label_taxes:></td>
+					<td class="montant">[(#GET{taxe}|appliquer_filtre{prix_formater,#GET{taxe}})]</td>
+					<td></td>
+				</tr>]
 				<tr class="total_ttc">
 					<td class="descriptif">[(#PLUGIN{prix}|?{<:prix:label_total_ttc:>,<:reservation:total:>})]</td>
 					<td class="montant">[(#GET{total}|appliquer_filtre{prix_formater,#GET{total}})]</td>

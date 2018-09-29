@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_prix_objet' => 'Tipo de preço:',
 	'label_quantite' => 'Quantidade:',
 	'label_reservation' => 'Reserva:',
-	'label_taxe' => 'Taxa:',
+	'label_taxes' => 'Taxas:',
 
 	// T
 	'texte_ajouter_reservations_detail' => 'Incluir um detalhe da reserva',

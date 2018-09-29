@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_prix_objet' => 'Preistyp:',
 	'label_quantite' => 'Menge:',
 	'label_reservation' => 'Anmeldung:',
-	'label_taxe' => 'Steuern:',
+	'label_taxes' => 'Steuern:',
 
 	// T
 	'texte_ajouter_reservations_detail' => 'Ein Anmeldung Item hinzufügen',
