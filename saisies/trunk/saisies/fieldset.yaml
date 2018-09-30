@@ -67,6 +67,15 @@ options:
           nom: 'conteneur_class'
           label: '<:saisies:option_class_label:>'
           size: 50
+      -
+        saisie: 'input'
+        options:
+          nom: 'tagfield'
+          label: '<:saisies:option_tagfield_label:>'
+          explication: '<:saisies:option_tagfield_explication:>'
+          placeholder: '<legend>'
+          size: 50
+
 defaut:
   options:
     label: '<:saisies:saisie_fieldset_titre:>'
