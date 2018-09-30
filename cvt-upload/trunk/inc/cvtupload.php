@@ -108,10 +108,19 @@ function cvtupload_generer_html($infos_fichiers = null) {
 function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer = true) {
 	$vignette_par_defaut = charger_fonction('vignette', 'inc/');
 	$infos = array();
-
 	// On commence par nettoyer le dossier
 	cvtupload_nettoyer_repertoire($repertoire);
-	foreach (is_array($fichier['name'])?$fichier['name']:array($fichier['name']) as $cle => $nom) {
+
+	// Si on est sur un upload de type fichier unique, on reformate le tableau pour faire comme si on était en fichiers multiples
+	if (!is_array($fichier['name'])) {
+		$fichier_nouveau = array();
+		foreach ($fichier as $champ => $valeur) {
+			$fichier_nouveau[$champ] = array($valeur);
+		}
+		$fichier = $fichier_nouveau;
+	}
+
+	foreach ($fichier['name'] as $cle => $nom) {
 		// On commence par transformer le nom du fichier pour éviter les conflits, on supprime notamment les accents
 		$nom = preg_replace(',\.\.+,', '.', $nom); // pas de .. dans le nom du doc
 		$nom = preg_replace("/[^.=\w-]+/", "_",
