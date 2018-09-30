@@ -2,16 +2,16 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	<p id="message_attention" class="message_reinitialiser reponse_formulaire reponse_formulaire_ok">#ENV*{_message_attention}</p>
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	
+
 	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
-		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type="submit" class="submit noscroll invisible" name="enregistrer" value="<:bouton_enregistrer:>" />
 
 		<[(#DIV|sinon{ul})] class="editer-groupe" id="deplacable">
-			
+
 			<[(#DIV|sinon{li})] id="reinitialiser" class="actions_formulaire">
 				<button type="submit" class="submit" name="reinitialiser" value="oui" onclick="return confirm('<:saisies:construire_reinitialiser_confirmer:>')">
 					<img src="#CHEMIN{images/formulaire-reinitialiser-24.png}" alt="" />
@@ -27,7 +27,7 @@
 			</BOUCLE_contenu>
 			<[(#DIV|sinon{li})] class="aucun"><em class="attention"><:saisies:construire_aucun_champs:></em></[(#DIV|sinon{li})]>
 			<//B_contenu>
-			
+
 			<B_saisies_disponibles>
 			<[(#DIV|sinon{li})] class="editer haut saisies_disponibles" id="attrapable">
 				<label><:saisies:construire_ajouter_champ:></label>
@@ -38,7 +38,7 @@
 				</BOUCLE_saisies_disponibles>
 			</[(#DIV|sinon{li})]>
 			</B_saisies_disponibles>
-			
+
 			<B_saisies_groupes_disponibles>
 			<[(#DIV|sinon{li})] class="editer haut saisies_groupes_disponibles" id="attrapable_bis">
 				<label><:saisies:construire_ajouter_groupe:></label>
@@ -49,13 +49,13 @@
 				</BOUCLE_saisies_groupes_disponibles>
 			</[(#DIV|sinon{li})]>
 			</B_saisies_groupes_disponibles>
-			
+
 		</[(#DIV|sinon{ul})]>
 
-		
+
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
-		
+
 		<span class='image_loading'></span>
 	</div></form>
 
