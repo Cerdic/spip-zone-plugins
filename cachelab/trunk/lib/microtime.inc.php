@@ -1,4 +1,4 @@
-<?php 
+<?php
 //
 // Chronométrage des appels php
 
