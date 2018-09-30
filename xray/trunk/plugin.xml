@@ -23,8 +23,8 @@
 	</bouton>
 	<necessite id="SPIP" version="[2.1.0;3.2.99]" />
 	<necessite id="memoization" />
-	<utilise id="cachelab" />
 	<utilise id="macrosession" />
+	<utilise id="cachelab" />
 	<categorie>outil</categorie>
 	<options>xray_options.php</options>
 </plugin>

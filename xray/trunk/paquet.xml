@@ -21,5 +21,5 @@
 	<menu nom="xray" titre="XRay" parent="menu_squelette" icone="images/prive-xray-16.jpg" action="xray" />
 	<necessite nom="memoization"/>
 	<utilise nom="macrosession" />
-	<utilise nom="cachelab" />
+	<utilise nom='cachelab' />
 </paquet>

@@ -25,6 +25,9 @@
 All other licensing and usage conditions are those of the PHP Group.
 
 */
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip ('inc/autoriser');
 
@@ -1623,9 +1626,8 @@ EOB;
 
 	case OB_CACHELAB :
 		include_spip('inc/cachelab');
-		include('cachelab.php');
+		include('cachelab_diag.php');
 		break;
-
 }
 ?>
 

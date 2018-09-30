@@ -64,10 +64,13 @@ $stats = cachelab_filtre(
 	array('chemin'=>$chemin, 'cle_objet'=>$cle_objet, 'id_objet'=>$id_objet),
 	array('chrono'=>true, 'listes'=>true, 'methode_chemin'=>$cachelab_methode_chemin)
 	);
-$listechemin = $stats['squelette'];
-unset($stats['squelette']);
-$listeobjet = $stats['contexte'];
-unset($stats['contexte']);
+
+$liste_matche_chemin = $stats['liste_matche_chemin'];
+unset($stats['liste_matche_chemin']);
+$liste_cible = $stats['liste_cible'];
+unset($stats['liste_cible']);
+$liste_data_not_array = $stats['liste_data_not_array'];
+unset($stats['liste_data_not_array']);
 
 // list ($listeobjet, $listechemin) = filtre_cache('', 1, $chemin);
 
@@ -76,15 +79,23 @@ echo "<h3>Bilan du filtrage</h3><br>
 		Caches trouvés avec <a href='$url_objet'>$objet $id_objet</a> : ".count($listeobjet)."</b><br>
 		<br><b>Stats :</b><pre>    ".trim(str_replace('Array', '', print_r($stats, 1)), "() \n")."</pre>";
 
-echo "<h3>Caches trouvés avec le chemin $chemin : ".count($listechemin)."</h3>
-	<ul>";
-foreach ($listechemin as $d)
-	echo "	<li>{$d['info']}</li>";
+if (count($liste_data_not_array)) {
+	echo "<h3>Erreurs d'accés (pas un tableau)</h3><ul>";
+	foreach ($liste_data_not_array as $cle)
+		echo "<li>$cle</li>";
+	echo "</ul>";
+}
+
 if ($cle_objet) {
 	echo "</ul>
-		<h3>Caches trouvés avec <a href='$url_objet'>$objet $id_objet</a> : ".count($listeobjet)."</h3>
+		<h3>Cible avec chemin $chemin et contexte avec $objet=$id_objet : ".count($liste_cible)."</h3>
 		<ul>";
-	foreach ($listeobjet as $d)
+	foreach ($liste_cible as $d)
 		echo "	<li>{$d['info']}</li>";
 	echo "</ul>";
 };
+
+echo "<h3>Caches trouvés avec le chemin $chemin : ".count($liste_matche_chemin)."</h3>
+	<ul>";
+foreach ($liste_matche_chemin as $d)
+	echo "	<li>{$d['info']}</li>";
