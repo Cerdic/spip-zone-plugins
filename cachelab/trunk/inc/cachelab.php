@@ -170,10 +170,13 @@ function cachelab_filtre ($action, $conditions, $options=array()) {
 	return $stats;
 }
 
-function cachelab_controle_invalideur($action, $objets_invalidants=array()) {
+function controler_invalideur($action, $objets_invalidants=array()) {
 static $prev_derniere_modif_invalide;
 	switch($action) {
 	case 'stop' :
+		$objets_invalidants = array();
+		// nobreak;
+	case 'select' :
 		$prev_derniere_modif_invalide = $GLOBALS['derniere_modif_invalide'];
 		if (is_array($objets_invalidants))
 			$GLOBALS['derniere_modif_invalide'] = $objets_invalidants;
