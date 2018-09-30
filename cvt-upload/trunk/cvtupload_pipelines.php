@@ -49,7 +49,6 @@ function cvtupload_formulaire_verifier($flux) {
 		include_spip('inc/documents');
 		include_spip('inc/getdocument');
 		include_spip('inc/flock');
-
 		//Si le répertoire temporaire n'existe pas encore, il faut le créer.
 		$repertoire_tmp = sous_repertoire(_DIR_TMP.'cvtupload/');
 
