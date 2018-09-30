@@ -203,7 +203,7 @@ function cvtupload_modifier_files($infos_fichiers) {
 				$_FILES[$champ]['size'][$fichier_individuel] = $description_fichier_individuel['taille'];
 			}
 			// Si on vient d'envoyer un ou plusieur $champ[] vide, on les rajoute dans notre nouveau $FILES
-			if (isset($old_FILES_champ['error'])) {
+			if (isset($old_FILES_champ['error']) and is_array($old_FILES_champ['error'])) {
 				foreach ($old_FILES_champ['error'] as $id_fichier_individuel => $error_fichier_individuel){
 					if ($error_fichier_individuel!=0 and !isset($infos_fichiers[$champ][$id_fichier_individuel])){//Uniquement les erreurs
 						$_FILES[$champ]['name'][$id_fichier_individuel] = $old_FILES_champ['name'][$id_fichier_individuel];
