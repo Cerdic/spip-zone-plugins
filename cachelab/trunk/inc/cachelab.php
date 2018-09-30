@@ -78,12 +78,8 @@ function cachelab_filtre ($action, $conditions, $options=array()) {
 	$len_prefix = strlen(_CACHE_NAMESPACE);
 
 	$matche_chemin = $matche_objet = array();
-	$nb_valides=0;
-	$nb_echecaccesdata=0;
-	$nb_absentducontexte=0;
-	$nb_accesdata=0;
-	$nb_datanotarray=0;
-	
+	$nb_chemins=$nb_valides=$nb_chemin=$nb_echecaccesdata=$nb_absentducontexte=$nb_accesdata=$nb_datanotarray=$nb_applique=0;
+
 	$chemins = explode('|', $chemin);
 	$cache = apcu_cache_info();
 	foreach($cache['cache_list'] as $i => $d) {
@@ -93,31 +89,36 @@ function cachelab_filtre ($action, $conditions, $options=array()) {
 			)
 		{
 			$nb_valides++;
-			$danslechemin = false;
-			switch ($methode_chemin) {
-			case 'strpos' :
-				foreach ($chemins as $unchemin) {
-					if ($unchemin and (strpos ($cle, $unchemin) !== false)) {
+			$danslechemin = !$chemin;
+			if ($chemin) {
+				switch ($methode_chemin) {
+				case 'strpos' :
+					foreach ($chemins as $unchemin) {
+						if ($unchemin and (strpos ($cle, $unchemin) !== false)) {
+							if ($avec_listes)
+								$matche_chemin[]=$d;
+							$danslechemin = true;
+							$nb_chemins++;
+							cachelab_applique ($action, $cle, null, $options);
+							break;
+						};
+					}
+					break;
+				case 'regexp' :
+					if ($chemin and ($danslechemin = preg_match(",$chemin,i", $cle))) {
 						if ($avec_listes)
-							$matche_chemin[]=$d;
-						$danslechemin = true;
+							$matche_chemin[] = $d;
 						cachelab_applique ($action, $cle, null, $options);
-						break;
-					};
-				}
-				break;
-			case 'regexp' :
-				if ($chemin and ($danslechemin = preg_match(",$chemin,i", $cle))) {
-					if ($avec_listes)
-						$matche_chemin[] = $d;
-					cachelab_applique ($action, $cle, null, $options);
-				}
-				break;
-			default :
-				die("Pas prévu (todo)");
-			};
+					}
+					break;
+				default :
+					die("Pas prévu (TODO)");
+				};
+			}
+			else
+				$nb_chemins = -1;
 
-			if (!$danslechemin and $cle_objet and $id_objet) {
+			if ($danslechemin and $cle_objet and $id_objet) {
 				global $Memoization;
 				if ($data = $Memoization->get(substr($cle, $len_prefix))) {
 					$nb_accesdata++;
@@ -128,6 +129,7 @@ function cachelab_filtre ($action, $conditions, $options=array()) {
 							and ($data['contexte'][$cle_objet]==$id_objet)) {
 								if ($avec_listes)
 									$matche_objet[] = $d;
+								$nb_applique++;
 								cachelab_applique ($action, $cle, $data, $options);
 							}
 						else
@@ -146,11 +148,13 @@ function cachelab_filtre ($action, $conditions, $options=array()) {
 	}
 
 	$stats = array(
+		'ok_chemin'=>$nb_chemins,
 		'ok_parsed'=>$nb_valides, 
 		'fail_data_access' => $nb_echecaccesdata,
 		'ok_data_access' => $nb_accesdata,
 		'fail_data_not_array' => $nb_datanotarray,
-		'ok_data_dont_match' => $nb_absentducontexte
+		'ok_data_dont_match' => $nb_absentducontexte,
+		'ok_match'=>$nb_applique
 	);
 
 	if ($avec_listes) {
