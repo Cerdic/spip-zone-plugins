@@ -20,9 +20,11 @@
 	</div></form>
 [(#ENV{sync}|oui)
 <script type="text/javascript">// <!\[CDATA\[
-	jQuery('.formulaire_#FORM').ajaxComplete (function(){
+	jQuery(document).ready(function(){
+	//jQuery('.formulaire_#FORM').ajaxComplete(function(){
 		jQuery('.formulaire_#FORM form').delay(3000).submit();
 	});
+
  //\]\]></script>
 ]
 </div>
