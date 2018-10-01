@@ -12,9 +12,6 @@ if (!function_exists('plugin_est_actif')) {
 	}
 }
 
-if (!defined ('CACHELAB_LOG_ECHECS'))
-	define ('CACHELAB_LOG_ECHECS', true);
-
 if ($cle_objet and !$id_objet)
 	die ("$cle_objet est inconnu : passez le en argument d'url ou définissez XRAY_ID_OBJET_SPECIAL en php");
 
@@ -71,6 +68,9 @@ global $Memoization;
 	if (!$Memoization or !in_array($Memoization->methode(), array('apc', 'apcu')))
 		die ("Il faut mémoization avec APC ou APCu");
 
+	$session = (isset($conditions['session']) ? $conditions['session'] : null);
+	if ($session=='courante')
+		$session = spip_session();
 	$chemin = (isset($conditions['chemin']) ? $conditions['chemin'] : null);
 	$cle_objet = (isset($conditions['cle_objet']) ? $conditions['cle_objet'] : null);
 	$id_objet = (isset($conditions['id_objet']) ? $conditions['id_objet'] : null);
@@ -83,85 +83,76 @@ global $Memoization;
 		microtime_do ('begin');
 	}
 
-	$len_prefix = strlen(_CACHE_NAMESPACE);
-
+	$nb_caches=$nb_no_data=$nb_data_not_array=$nb_cible=0;
+	$nb_session=($session ? 0 : '_');
+	$nb_matche_chemin=($chemin ? 0 : '_');
 	$matche_chemin = $no_data = $data_not_array = $cible = array();
-	$nb_caches=$nb_matche_chemin=$nb_no_data=$nb_data_not_array=$nb_cible=0;
 
+	$len_prefix = strlen(_CACHE_NAMESPACE);
 	$chemins = explode('|', $chemin);
 	$cache = apcu_cache_info();
 	foreach($cache['cache_list'] as $i => $d) {
 		$cle = $d['info'];
 		if ($d and strpos ($cle, ':cache:') and  apcu_exists($cle)
-			//and ($meta_derniere_modif <= $d['creation_time'])
-			)
-		{
+			// and ($meta_derniere_modif <= $d['creation_time']) // OUI décommenter
+			) {
 			$nb_caches++;
-			$danslechemin = !$chemin;
+
+			if ($session) {
+				if (substr ($cle, -9) != "_$session")
+					continue;
+				else
+					$nb_session++;
+			}
+
 			if ($chemin) {
 				switch ($methode_chemin) {
 				case 'strpos' :
-					foreach ($chemins as $unchemin) {
-						if ($unchemin and (strpos ($cle, $unchemin) !== false)) {
-							$danslechemin = true;
-							cachelab_applique ($action, $cle, null, $options);
+					foreach ($chemins as $unchemin)
+						if ($unchemin and (strpos ($cle, $unchemin) !== false))
 							break;
-						};
-					}
-					break;
+					continue 2;
 				case 'regexp' :
-					if ($chemin and ($danslechemin = preg_match(",$chemin,i", $cle))) {
-						if ($avec_listes)
-							$matche_chemin[] = $cle;
-						cachelab_applique ($action, $cle, null, $options);
-					}
-					break;
+					if ($chemin and ($danslechemin = preg_match(",$chemin,i", $cle)))
+						break;
+					continue 2;
 				default :
-					die("Pas prévu (TODO)");
+					die("Méthode pas prévue pour chemin (TODO)");
 				};
-				if ($danslechemin) {
-					$nb_matche_chemin++;
-					if ($avec_listes)
-						$matche_chemin[]=$cle;
-				};
+				$nb_matche_chemin++;
+				if ($avec_listes)
+					$matche_chemin[]=$cle;
 			}
-			else
-				$nb_matche_chemin = '_';	// pas de filtrage par le chemin
 
-			if ($danslechemin and $cle_objet and $id_objet) {
+			if ($cle_objet and $id_objet) {
 				global $Memoization;
-				if ($data = $Memoization->get(substr($cle, $len_prefix))) {
-					if (is_array($data)) {
-						if (isset($data['contexte'])
-							and isset ($data['contexte'][$cle_objet])
-							and ($data['contexte'][$cle_objet]==$id_objet)
-							) {
-							$nb_cible++;
-							if ($avec_listes)
-								$cible[] = $cle;
-							cachelab_applique ($action, $cle, $data, $options);
-						}
-					}
-					else {
-						if (CACHELAB_LOG_ECHECS)
-							spip_log ("clé=$cle : data n'est pas un tableau : ".print_r($data,1), 'cachelab');
-						if ($avec_listes)
-							$data_not_array[]=$cle.($data ? ' not array' : ' empty');
-						$nb_data_not_array++;
-					};
-				}
-				else
+				$data = $Memoization->get(substr($cle, $len_prefix));
+				if (!$data) {
 					$nb_no_data++;
+					continue;
+				}
+				if (!is_array($data)) {
+					spip_log ("clé=$cle : data n'est pas un tableau : ".print_r($data,1), 'cachelab');
+					$nb_data_not_array++;
+					if ($avec_listes)
+						$data_not_array[] = $cle;
+					continue;
+				};
+				if (!isset ($data['contexte'][$cle_objet])
+					or ($data['contexte'][$cle_objet]!=$id_objet)) 
+					continue;
 			}
-			elseif($danslechemin) {// condition sur chemin sans condition sur contexte
-				$nb_cible++;
-				cachelab_applique ($action, $cle, $data, $options);
-			}
+			// restent les cibles
+			$nb_cible++;
+			if ($avec_listes)
+				$cible[] = $cle;
+			cachelab_applique ($action, $cle, null, $options);
 		}
 	}
 
 	$stats = array(
 		'caches'=>$nb_caches, 
+		'session'=>$nb_session,
 		'matche_chemin'=>$nb_matche_chemin,
 		'no_data' => $nb_no_data,	// yen a plein (ça correspond à quoi ?)
 		'data_not_array' => $nb_data_not_array, // normalement yen a pas
