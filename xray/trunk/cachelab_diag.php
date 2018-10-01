@@ -1,4 +1,4 @@
-<p><b>Action ciblée sur le cache</b> : Les arguments supplémentaires de l'url spécifient quelle action doit être appliquée sur quels types de caches. On peut cibler les caches destinataires en indiquant un objet précis contenu dans leur contexte OU grâce au chemin du squelette. Pour spécifier un objet précis, on indique le type d'objet, le nom de la clé et sa valeur. Pour spécifier un chemin de squelette, on peut utiliser 2 méthodes : strpos (par défaut) ou regexp.<br>Les arguments d'url possibles sont : </p>
+<p><b>Action ciblée sur le cache</b> : Les arguments supplémentaires de l'url spécifient quelle action doit être appliquée sur quels types de caches. On peut cibler les caches destinataires grâce au chemin du squelette, qui réalise un préfiltrage (qui peut suffire) puis au moyen d'un objet précis contenu dans leur contexte. Pour spécifier un chemin de squelette, on peut utiliser 2 méthodes : strpos (par défaut) ou regexp. Pour spécifier un objet précis, on indique le nom de la clé et sa valeur. <br>Les arguments d'url possibles sont : <br>
 
 <small><ul>
 <li>action : del, mark, pass</li>
@@ -8,6 +8,7 @@
 <li>cle_objet : clé primaire (si différente de 'id_'+objet)</li>
 <li>id_article, id_breve, etc selon objet</li>
 </ul></small>
+</p>
 
 <?php
 if (isset($_GET['methode']) and $_GET['methode'])
@@ -72,17 +73,22 @@ unset($stats['liste_cible']);
 $liste_data_not_array = $stats['liste_data_not_array'];
 unset($stats['liste_data_not_array']);
 
-// list ($listeobjet, $listechemin) = filtre_cache('', 1, $chemin);
-
 echo "<h3>Bilan du filtrage</h3><br>
-		Caches trouvés avec le chemin $chemin : ".count($listechemin)."<br>
-		Caches trouvés avec <a href='$url_objet'>$objet $id_objet</a> : ".count($listeobjet)."</b><br>
+		Caches trouvés avec le chemin $chemin : ".count($liste_matche_chemin)."<br>
+		Caches trouvés avec <a href='$url_objet'>$objet $id_objet</a> : ".count($liste_cible)."</b><br>
 		<br><b>Stats :</b><pre>    ".trim(str_replace('Array', '', print_r($stats, 1)), "() \n")."</pre>";
+
+function xray_lien_cache ($cle='') {
+	$joliecle = substr($cle, strpos($cle,':cache:')+7);
+	return "<a href ='/ecrire/index.php?exec=xray&SCOPE=A&COUNT=20&TYPECACHE=ALL&ZOOM=TEXTECOURT&EXTRA=&WHERE=&OB=2&S_KEY=H&SORT=D&SEARCH=$joliecle&SH=".md5($cle)."'>
+		$joliecle
+	</a>";
+}
 
 if (count($liste_data_not_array)) {
 	echo "<h3>Erreurs d'accés (pas un tableau)</h3><ul>";
 	foreach ($liste_data_not_array as $cle)
-		echo "<li>$cle</li>";
+		echo "<li>".xray_lien_cache($cle)."</li>";
 	echo "</ul>";
 }
 
@@ -90,12 +96,12 @@ if ($cle_objet) {
 	echo "</ul>
 		<h3>Cible avec chemin $chemin et contexte avec $objet=$id_objet : ".count($liste_cible)."</h3>
 		<ul>";
-	foreach ($liste_cible as $d)
-		echo "	<li>{$d['info']}</li>";
+	foreach ($liste_cible as $cle)
+		echo "<li>".xray_lien_cache($cle)."</li>";
 	echo "</ul>";
 };
 
 echo "<h3>Caches trouvés avec le chemin $chemin : ".count($liste_matche_chemin)."</h3>
 	<ul>";
-foreach ($liste_matche_chemin as $d)
-	echo "	<li>{$d['info']}</li>";
+foreach ($liste_matche_chemin as $cle)
+	echo "<li>".xray_lien_cache($cle)."</li>";

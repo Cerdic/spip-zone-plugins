@@ -1266,7 +1266,7 @@ EOB;
 							<xmp>{$MYREQUEST['SEARCH']}</xmp>
 					</div>";
 			}
-			$MYREQUEST['SEARCH'] = '/'.$MYREQUEST['SEARCH'].'/i';
+			$MYREQUEST['SEARCH'] = '~'.$MYREQUEST['SEARCH'].'~i';
 		}
 		echo '<div class="info"><table cellspacing=0><tbody>', '<tr>', '<th>', sortheader('S', $fieldheading), '</th>', '<th>', sortheader('H', 'Hits'), '</th>', '<th>', sortheader('Z', 'Size'), '</th>', '<th>', sortheader('A', 'Last accessed'), '</th>', '<th>', sortheader('C', 'Created at'), '</th>';
 		
