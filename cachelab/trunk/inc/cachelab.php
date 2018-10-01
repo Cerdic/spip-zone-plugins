@@ -67,6 +67,10 @@ static $len_prefix;
 // $chemin : liste de chaines à tester dans le chemin du squelette, séparées par |
 // 	OU une regexp (hors délimiteurs et modificateurs) si la méthode est 'regexp'
 function cachelab_filtre ($action, $conditions, $options=array()) {
+global $Memoization;
+	if (!$Memoization or !in_array($Memoization->methode(), array('apc', 'apcu')))
+		die ("Il faut mémoization avec APC ou APCu");
+
 	$chemin = (isset($conditions['chemin']) ? $conditions['chemin'] : null);
 	$cle_objet = (isset($conditions['cle_objet']) ? $conditions['cle_objet'] : null);
 	$id_objet = (isset($conditions['id_objet']) ? $conditions['id_objet'] : null);
@@ -81,8 +85,8 @@ function cachelab_filtre ($action, $conditions, $options=array()) {
 
 	$len_prefix = strlen(_CACHE_NAMESPACE);
 
-	$matche_chemin = $cible = $no_data = $data_not_array = array();
-	$nb_matche_chemin=$nb_caches=$nb_chemin=$nb_no_data=$nb_data_access=$nb_data_not_array=$nb_cible=0;
+	$matche_chemin = $no_data = $data_not_array = $cible = array();
+	$nb_caches=$nb_matche_chemin=$nb_no_data=$nb_data_not_array=$nb_cible=0;
 
 	$chemins = explode('|', $chemin);
 	$cache = apcu_cache_info();
@@ -108,7 +112,7 @@ function cachelab_filtre ($action, $conditions, $options=array()) {
 				case 'regexp' :
 					if ($chemin and ($danslechemin = preg_match(",$chemin,i", $cle))) {
 						if ($avec_listes)
-							$matche_chemin[] = $d;
+							$matche_chemin[] = $cle;
 						cachelab_applique ($action, $cle, null, $options);
 					}
 					break;
@@ -118,7 +122,7 @@ function cachelab_filtre ($action, $conditions, $options=array()) {
 				if ($danslechemin) {
 					$nb_matche_chemin++;
 					if ($avec_listes)
-						$matche_chemin[]=$d;
+						$matche_chemin[]=$cle;
 				};
 			}
 			else
@@ -127,7 +131,6 @@ function cachelab_filtre ($action, $conditions, $options=array()) {
 			if ($danslechemin and $cle_objet and $id_objet) {
 				global $Memoization;
 				if ($data = $Memoization->get(substr($cle, $len_prefix))) {
-					$nb_data_access++;
 					if (is_array($data)) {
 						if (isset($data['contexte'])
 							and isset ($data['contexte'][$cle_objet])
@@ -135,7 +138,7 @@ function cachelab_filtre ($action, $conditions, $options=array()) {
 							) {
 							$nb_cible++;
 							if ($avec_listes)
-								$cible[] = $d;
+								$cible[] = $cle;
 							cachelab_applique ($action, $cle, $data, $options);
 						}
 					}
@@ -144,7 +147,6 @@ function cachelab_filtre ($action, $conditions, $options=array()) {
 							spip_log ("clé=$cle : data n'est pas un tableau : ".print_r($data,1), 'cachelab');
 						if ($avec_listes)
 							$data_not_array[]=$cle.($data ? ' not array' : ' empty');
-						echo "erreur acces clé $cle ".print_r($data,1)."<br><br>";
 						$nb_data_not_array++;
 					};
 				}
@@ -162,7 +164,6 @@ function cachelab_filtre ($action, $conditions, $options=array()) {
 		'caches'=>$nb_caches, 
 		'matche_chemin'=>$nb_matche_chemin,
 		'no_data' => $nb_no_data,	// yen a plein (ça correspond à quoi ?)
-		'data_access' => $nb_data_access,
 		'data_not_array' => $nb_data_not_array, // normalement yen a pas
 		'cible'=>$nb_cible
 	);
