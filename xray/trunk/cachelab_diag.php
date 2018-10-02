@@ -1,7 +1,7 @@
 <p><b>Action ciblée sur le cache</b> : Les arguments supplémentaires de l'url spécifient quelle action doit être appliquée sur quels types de caches. On peut cibler les caches destinataires grâce au chemin du squelette, qui réalise un préfiltrage (qui peut suffire) puis au moyen d'un objet précis contenu dans leur contexte. Pour spécifier un chemin de squelette, on peut utiliser 2 méthodes : strpos (par défaut) ou regexp. Pour spécifier un objet précis, on indique le nom de la clé et sa valeur. <br>Les arguments d'url possibles sont : <br>
 
 <small><ul>
-<li>action : del, mark, pass</li>
+<li>action : del, mark, pass, <b>list</b></li>
 <li>chemin : liste de morceaux de chemins séparés par | , ou expression régulière si methode=regexp</li>
 <li>methode : fonction de détection du chemin spécifié : <b>strpos</b> ou regexp</li>
 <li>objet : un type d'objet (article, breve, etc) ou XRAY_OBJET_SPECIAL si non spécifié</li>
@@ -11,10 +11,19 @@
 </p>
 
 <?php
+if (isset ($_GET['session']))
+	$session = $_GET['session'];
+else
+	$session = '';
+
 if (isset($_GET['methode']) and $_GET['methode'])
 	$cachelab_methode_chemin = $_GET['methode'];
 else 
 	$cachelab_methode_chemin = 'strpos';
+
+if (isset ($_GET['chemin']))
+	$chemin = $_GET['chemin'];
+
 
 if (isset ($_GET['objet']))
 	$objet = $_GET['objet'];
@@ -45,24 +54,22 @@ else
 if (isset ($_GET['action']))
 	$action = $_GET['action'];
 else
-	$action = 'pass';
+	$action = 'list';
 
 if ($cle_objet and !$id_objet)
 	die ("$cle_objet est inconnu : passez le en argument d'url ou définissez XRAY_ID_OBJET_SPECIAL en php");
-
-if (isset ($_GET['chemin']))
-	$chemin = $_GET['chemin'];
 
 echo "<b>Choix actuels :</b><br>
 		Action : $action<br>
 		Méthode pour la recherche des chemins : $cachelab_methode_chemin<br>
 		chemin recherché : $chemin<br>
 		objet recherché = $cle_objet $id_objet<br>
+		session = $session<br>
 		globale derniere_modif_invalide : {$GLOBALS['derniere_modif_invalide']}";
 
 $stats = cachelab_filtre(
 	$action, 
-	array('chemin'=>$chemin, 'cle_objet'=>$cle_objet, 'id_objet'=>$id_objet),
+	array('session'=>$session, 'chemin'=>$chemin, 'cle_objet'=>$cle_objet, 'id_objet'=>$id_objet),
 	array('chrono'=>true, 'listes'=>true, 'methode_chemin'=>$cachelab_methode_chemin)
 	);
 

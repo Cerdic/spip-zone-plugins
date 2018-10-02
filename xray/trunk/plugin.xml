@@ -8,7 +8,7 @@
 	<auteur>Ilia Alshanetsky</auteur>
 	<licence>GPL</licence>
 	<licence>PHP</licence>
-	<version>0.14.7</version>
+	<version>0.14.8</version>
 	<etat>test</etat>
 	<description>
 	Explorer les caches des squelettes SPIP avec memoization APC pour les comprendre et les optimiser
@@ -19,7 +19,7 @@
 	<bouton id="xray" parent='bando_squelette'>
 		<icone>images/xray-32.png</icone>
 		<titre>Xray</titre>
-		<url>xray</url>
+		<url>xray</url> 
 	</bouton>
 	<necessite id="SPIP" version="[2.1.0;3.2.99]" />
 	<necessite id="memoization" />
