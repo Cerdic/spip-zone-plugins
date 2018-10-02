@@ -52,7 +52,7 @@ function menus_declarer_tables_objets_sql($tables) {
 		// 'date' => '',
 		'champs_editables'  => array('id_menus_entree', 'titre', 'identifiant', 'css'),
 		'champs_versionnes' => array('id_menus_entree', 'titre', 'identifiant', 'css'),
-		'rechercher_champs' => array('titre' => 4),
+		'rechercher_champs' => array(),
 		'tables_jointures'  => array('spip_menus_liens'),
 		// chaînes de langue
 		'texte_modifier'       => 'menus:editer_menus_editer',
