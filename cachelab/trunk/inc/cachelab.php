@@ -12,9 +12,6 @@ if (!function_exists('plugin_est_actif')) {
 	}
 }
 
-if ($cle_objet and !$id_objet)
-	die ("$cle_objet est inconnu : passez le en argument d'url ou définissez XRAY_ID_OBJET_SPECIAL en php");
-
 function cachelab_applique ($action, $cle, $arg=null, $options='') {
 global $Memoization;
 static $len_prefix;
@@ -25,8 +22,8 @@ static $len_prefix;
 	switch ($action) {
 	case 'del' :
 		$del = $Memoization->del($joliecle);
-		if (!$del and CACHELAB_CACHE_ECHECS)
-			spip_log ("Échec del $joliecle", 'cachelab');
+		if (!$del)
+			spip_log ("Échec 'del' $joliecle", 'cachelab');
 		break;
 
 	case 'mark' :
@@ -38,7 +35,7 @@ static $len_prefix;
 			$data['cachelab_mark'] = (isset($options['mark']) ? $options['mark'] : 1);
 			$data = $Memoization->set($joliecle, $data);
 		}
-		elseif (CACHELAB_LOG_ECHECS)
+		else
 			spip_log("clé=$joliecle : pour $action avec arg=".print_r($arg,1)." et opt=".print_r($options,1).", data n'est pas un tableau : ".print_r($data, 1), 'cachelab');
 		break;
 
@@ -53,6 +50,7 @@ static $len_prefix;
 		break;
 
 	case 'pass' :
+	case 'list' :
 		break;
 
 	default :
@@ -68,41 +66,67 @@ global $Memoization;
 	if (!$Memoization or !in_array($Memoization->methode(), array('apc', 'apcu')))
 		die ("Il faut mémoization avec APC ou APCu");
 
+	// filtrage
 	$session = (isset($conditions['session']) ? $conditions['session'] : null);
 	if ($session=='courante')
 		$session = spip_session();
 	$chemin = (isset($conditions['chemin']) ? $conditions['chemin'] : null);
+	$chemins = explode('|', $chemin); // sert seulement pour methode_chemin == strpos
+
 	$cle_objet = (isset($conditions['cle_objet']) ? $conditions['cle_objet'] : null);
 	$id_objet = (isset($conditions['id_objet']) ? $conditions['id_objet'] : null);
+	if ($cle_objet and !$id_objet)
+		die ("$cle_objet est inconnu : passez le en argument d'url ou définissez XRAY_ID_OBJET_SPECIAL en php");
 
+	// options
 	$methode_chemin = (isset ($options['methode_chemin']) ? $options['methode_chemin'] : 'strpos');
-	$avec_listes = (isset ($options['listes']) and $options['listes']);
-	$avec_chrono = (isset ($options['chrono']) and $options['chrono']);
-	if ($avec_chrono) {
+	$do_clean = ($action != 'pass') and (!isset ($options['clean']) or $options['clean']);
+	$do_lists = ($action != 'list') or (isset ($options['listes']) and $options['listes']);
+	$do_chrono = (isset ($options['chrono']) and $options['chrono']);
+	if ($do_chrono) {
 		include_spip ('lib/microtime.inc');
 		microtime_do ('begin');
 	}
-
-	$nb_caches=$nb_no_data=$nb_data_not_array=$nb_cible=0;
+	// retours
+	$nb_alien=$nb_site=$nb_clean=$nb_no_data=$nb_not_array=$nb_cible=0;
 	$nb_session=($session ? 0 : '_');
-	$nb_matche_chemin=($chemin ? 0 : '_');
-	$matche_chemin = $no_data = $data_not_array = $cible = array();
+	$nb_chemin=($chemin ? 0 : '_');
+	$l_session = $l_chemin = $l_no_data = $l_not_array = $l_cible = array();
 
 	$len_prefix = strlen(_CACHE_NAMESPACE);
-	$chemins = explode('|', $chemin);
 	$cache = apcu_cache_info();
+	$meta_derniere_modif = lire_meta('derniere_modif');
+	
 	foreach($cache['cache_list'] as $i => $d) {
 		$cle = $d['info'];
-		if ($d and strpos ($cle, ':cache:') and  apcu_exists($cle)
-			// and ($meta_derniere_modif <= $d['creation_time']) // OUI décommenter
+		// on saute les caches d'autres origines
+		// (et les caches d'un précédent _CACHE_NAMESPACE pour ce même site)
+		if (strpos ($cle, _CACHE_NAMESPACE) !== 0) {
+			$nb_alien++;
+			continue;
+		}
+
+		if ((substr($cle, $len_prefix-1, 7) == ':cache:')
+			and  apcu_exists($cle)
 			) {
-			$nb_caches++;
+			// effacer les caches périmés
+			if ($do_clean and ($meta_derniere_modif > $d['creation_time'])) {
+				$Memoization->del(substr($cle,$len_prefix));
+				$nb_clean++;
+				continue;
+			}
+
+			// caches candidats
+			$nb_site++;
 
 			if ($session) {
 				if (substr ($cle, -9) != "_$session")
 					continue;
-				else
+				else {
 					$nb_session++;
+					if ($do_lists)
+						$l_session[]=$cle;
+				}
 			}
 
 			if ($chemin) {
@@ -117,11 +141,11 @@ global $Memoization;
 						break;
 					continue 2;
 				default :
-					die("Méthode pas prévue pour chemin (TODO)");
+					die("Méthode pas prévue pour le filtrage par le chemin");
 				};
-				$nb_matche_chemin++;
-				if ($avec_listes)
-					$matche_chemin[]=$cle;
+				$nb_chemin++;
+				if ($do_lists)
+					$l_chemin[]=$cle;
 			}
 
 			if ($cle_objet and $id_objet) {
@@ -133,9 +157,9 @@ global $Memoization;
 				}
 				if (!is_array($data)) {
 					spip_log ("clé=$cle : data n'est pas un tableau : ".print_r($data,1), 'cachelab');
-					$nb_data_not_array++;
-					if ($avec_listes)
-						$data_not_array[] = $cle;
+					$nb_not_array++;
+					if ($do_lists)
+						$l_not_array[] = $cle;
 					continue;
 				};
 				if (!isset ($data['contexte'][$cle_objet])
@@ -144,28 +168,30 @@ global $Memoization;
 			}
 			// restent les cibles
 			$nb_cible++;
-			if ($avec_listes)
-				$cible[] = $cle;
+			if ($do_lists)
+				$l_cible[] = $cle;
 			cachelab_applique ($action, $cle, null, $options);
 		}
 	}
 
 	$stats = array(
-		'caches'=>$nb_caches, 
-		'session'=>$nb_session,
-		'matche_chemin'=>$nb_matche_chemin,
-		'no_data' => $nb_no_data,	// yen a plein (ça correspond à quoi ?)
-		'data_not_array' => $nb_data_not_array, // normalement yen a pas
-		'cible'=>$nb_cible
+		'nb_alien'=>$nb_alien,
+		'nb_site'=>$nb_site,
+		'nb_clean'=>$nb_clean,
+		'nb_session'=>$nb_session,
+		'nb_chemin'=>$nb_chemin,
+		'nb_no_data' => $nb_no_data,	// yen a (kesako ?)
+		'nb_not_array' => $nb_not_array, // 0 normalement
+		'nb_cible'=>$nb_cible
 	);
 
-	if ($avec_listes) {
-		$stats['liste_matche_chemin'] = $matche_chemin;
-		$stats['liste_data_not_array'] = $data_not_array;
-		$stats['liste_cible'] = $cible;
+	if ($do_lists) {
+		$stats['liste_matche_chemin'] = $l_chemin;
+		$stats['liste_data_not_array'] = $l_not_array;
+		$stats['liste_cible'] = $l_cible;
 	}
 
-	if ($avec_chrono) {
+	if ($do_chrono) {
 		$stats['chrono'] = microtime_do ('end', 'ms');
 		spip_log ("cachelab_filtre ($action, $cle_objet, $id_objet, $chemin, $options) : {$stats['chrono']} ms", 'cachelab');
 	}
