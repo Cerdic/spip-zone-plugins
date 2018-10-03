@@ -91,8 +91,7 @@ function rb_prestataires_simples_actives() {
 	);
 	$prestataires = array();
 	foreach ($prestas_simple as $presta) {
-		if (isset($prestas_actifs[$presta]) and
-				$prestas_actifs[$presta]['actif']) {
+		if (isset($prestas_actifs[$presta]) and $prestas_actifs[$presta]['actif']) {
 			$prestataires[$presta] = _T('bank:label_presta_' . $presta);
 		}
 	}
@@ -100,7 +99,18 @@ function rb_prestataires_simples_actives() {
 	return $prestataires;
 }
 
-
+/**
+ * Éablit le montant du ht.
+ *
+ * @param number $montant
+ *        	montant ttc, si montant_payé déjà déduit, ne pas mettre de
+ *        	valeur pour $montant_paye.
+ * @param number $taxe
+ *        	taxe applicable en pourcentage.
+ * @param number $montant_paye
+ *        	le montant payé.
+ * @return number
+ */
 function rb_montant_du_ht($montant, $taxe, $montant_paye = 0) {
 	return ($montant - $montant_paye) / (1 / 100 * $taxe + 1);
 }

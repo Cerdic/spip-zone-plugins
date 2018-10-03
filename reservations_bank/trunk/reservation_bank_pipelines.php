@@ -217,15 +217,14 @@ function reservation_bank_formulaire_verifier($flux) {
 function reservation_bank_formulaire_traiter($flux) {
 	$form = $flux['args']['form'];
 
-	// Affiche le formulaire de paiment au retour du formulaire réservation
+	// Affiche le formulaire de paiement au retour du formulaire réservation
 	if ($form == 'reservation') {
 		if (!_request('gratuit')) {
 			include_spip('inc/config');
 			$config = lire_config('reservation_bank', array());
 			$cacher_paiement_public = isset($config['cacher_paiement_public']) ? $config['cacher_paiement_public'] : '';
-			$preceder_formulaire = isset($config['preceder_formulaire']) ? $config['preceder_formulaire'] : '';
 			$id_reservation = session_get('id_reservation');
-			$id_transaction = rb_inserer_transaction($id_reservation);
+			rb_inserer_transaction($id_reservation);
 			if (!$cacher_paiement_public) {
 				$flux['data']['redirect'] = generer_url_public(
 					'paiement_reservation',
@@ -233,6 +232,23 @@ function reservation_bank_formulaire_traiter($flux) {
 
 			}
 		}
+	}
+
+	// Adapte la transaction aorès la modification du montan payé.
+	if ($form == 'editer_reservations_detail') {
+		if ($id_reservation = sql_getfetsel('id_reservation',
+				'spip_reservations_details',
+				'id_reservations_detail=' . _request('id_reservations_detail'))) {
+			$inserer_transaction = charger_fonction ("inserer_transaction", "bank" );
+			$donnees = unserialize (recuperer_fond('inclure/paiement_reservation', array(
+				'id_reservation' => $id_reservation,
+				'cacher_paiement_public' => TRUE
+			)));
+			$donnees['options']['force'] = FALSE;
+			spip_log($donnees,'teste');
+			$inserer_transaction($donnees['montant'], $donnees['options']);
+		}
+
 	}
 
 	return $flux;
@@ -260,7 +276,6 @@ function reservation_bank_pre_edition($flux) {
 			$prix_ht = array_sum(array_column($montants, 'prix_ht'));
 			$prix = array_sum(array_column($montants, 'prix'));
 			if ($prix_ht <= 0 && $prix <= 0) {
-				spip_log($flux, 'teste');
 				$id_transaction = rb_inserer_transaction($id_reservation);
 				$row = sql_fetsel('*','spip_transactions','id_transaction='.intval($id_transaction));
 
@@ -359,41 +374,57 @@ function reservation_bank_recuperer_fond($flux) {
 		$flux['data']['texte'] = str_replace('</div>', '</div>' . $row, $flux['data']['texte']);
 	}
 
-	// Ajoute le message de paiement à la notification de réservation.
+	// Le recapitulatif de la réservation.
 	if ($fond == 'inclure/reservation' and
-			$id_reservation = $flux['data']['contexte']['id_reservation'] and
-			$statut = sql_getfetsel('statut', 'spip_reservations', 'id_reservation=' . $id_reservation) and
-			($statut == 'attente_paiement' or $statut == 'accepte')) {
-		$qui = $flux['data']['contexte']['qui'];
-		$transaction = sql_fetsel('mode, id_transaction, transaction_hash, message, tracking_id', 'spip_transactions', 'id_reservation=' . $id_reservation, '', 'date_transaction DESC');
-		$mode = $transaction['mode'];
-		$id_transaction = $transaction['id_transaction'];
-		if ($qui == 'client') {
-			if ($statut == 'attente_paiement') {
-				$pattern = array(
-					'|<p class="titre h4">|',
-					'|</p>|'
-				);
-				$replace = array(
-					'<h3>',
-					'</h3>'
-				);
-				$texte = preg_replace($pattern, $replace, bank_afficher_attente_reglement($mode, $id_transaction, $transaction['transaction_hash'], ''));
-			}
-			else {
-				$texte = '<p>' . $transaction['message'] . '</p>';
-			}
-		}
-		elseif ($qui == 'vendeur') {
-			$url = generer_url_ecrire('transaction', 'id_transaction=' . $id_transaction);
-			$texte = '<h2>' . _T('reservation_bank:titre_paiement_vendeur') . '</h2>';
-			$texte .= '<p>' . _T('reservation_bank:message_paiement_vendeur', array(
-				'mode' => $mode,
-				'url' => $url
-			)) . '</p>';
-		}
+			$id_reservation = $flux['data']['contexte']['id_reservation']) {
 
-		$flux['data']['texte'] .= $texte;
+		// Ajouite le montant payé
+		$texte_montant_paye = recuperer_fond('inclure/texte_montant_paye', array('id_reservation' => $id_reservation));
+
+		$flux['data']['texte'] = str_replace(
+				'</tr>
+			</tfoot>',
+				"</tr>\n
+				$texte_montant_paye \n
+			</tfoot>\n"	,
+			$flux['data']['texte']);
+
+
+		// Ajoute le message de paiement à la notification de réservation.
+		if ($statut = sql_getfetsel('statut', 'spip_reservations', 'id_reservation=' . $id_reservation) and
+				$statut == 'attente_paiement' or $statut == 'accepte') {
+			$qui = $flux['data']['contexte']['qui'];
+			$transaction = sql_fetsel('mode, id_transaction, transaction_hash, message, tracking_id', 'spip_transactions', 'id_reservation=' . $id_reservation, '', 'date_transaction DESC');
+			$mode = $transaction['mode'];
+			$id_transaction = $transaction['id_transaction'];
+			if ($qui == 'client') {
+				if ($statut == 'attente_paiement') {
+					$pattern = array(
+						'|<p class="titre h4">|',
+						'|</p>|'
+					);
+					$replace = array(
+						'<h3>',
+						'</h3>'
+					);
+					$texte = preg_replace(
+							$pattern,
+							$replace, bank_afficher_attente_reglement($mode, $id_transaction, $transaction['transaction_hash'], ''));
+				}
+				else {
+					$texte = '<p>' . $transaction['message'] . '</p>';
+				}
+			}
+			elseif ($qui == 'vendeur') {
+				$url = generer_url_ecrire('transaction', 'id_transaction=' . $id_transaction);
+				$texte = '<h2>' . _T('reservation_bank:titre_paiement_vendeur') . '</h2>';
+				$texte .= '<p>' . _T('reservation_bank:message_paiement_vendeur', array(
+					'mode' => $mode,
+					'url' => $url
+				)) . '</p>';
+			}
+			$flux['data']['texte'] .= $texte;
+		}
 	}
 
 	// Ajouter le message pour la référence su paiement par virement.
@@ -411,6 +442,16 @@ function reservation_bank_recuperer_fond($flux) {
 			$button = recuperer_fond('inclure/bouton_inserer_prestataire', $contexte);
 			$flux['data']['texte'] = str_replace('<!-- Infos extras -->', $button . ' <!-- Infos extras -->', $flux['data']['texte']);
 		}
+	}
+
+	// Ajoute le champ montant payé au formulaire d'édition.
+	if ($fond == 'formulaires/inc-editer_reservations_details_champs') {
+			$flux['data']['texte'] .= recuperer_fond('formulaires/champ_montant_paye', $contexte);
+	}
+
+	// Ajoute le champ montant `la page du détail de réservation.
+	if ($fond == 'prive/objets/contenu/reservations_detail') {
+			$flux['data']['texte'] .= recuperer_fond('prive/objets/contenu/inc-reservation_detail_montant_paye', $contexte);
 	}
 
 	return $flux;
