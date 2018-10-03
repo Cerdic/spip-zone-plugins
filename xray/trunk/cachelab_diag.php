@@ -1,5 +1,4 @@
-<p><b>Action ciblée sur le cache</b> : Les arguments supplémentaires de l'url spécifient quelle action doit être appliquée sur quels types de caches. On peut cibler les caches destinataires grâce au chemin du squelette, qui réalise un préfiltrage (qui peut suffire) puis au moyen d'un objet précis contenu dans leur contexte. Pour spécifier un chemin de squelette, on peut utiliser 2 méthodes : strpos (par défaut) ou regexp. Pour spécifier un objet précis, on indique le nom de la clé et sa valeur. <br>Les arguments d'url possibles sont : <br>
-
+<p><b>Action ciblée sur le cache</b> : Les arguments supplémentaires de l'url spécifient quelle action doit être appliquée sur quels caches.
 <small><ul>
 <li>action : del, mark, pass, <b>list</b></li>
 <li>chemin : liste de morceaux de chemins séparés par | , ou expression régulière si methode=regexp</li>
@@ -35,16 +34,15 @@ else
 if (isset ($_GET['cle_objet']))
 	$cle_objet = $_GET['cle_objet'];
 elseif ($objet)
-	$cle_objet = 'id_'.$objet;	// TODO spiper
+	$cle_objet = 'id_'.$objet;	// TODO appeler API spip
 else 
 	$cle_objet = '';
 
 if ($cle_objet and isset ($_GET[$cle_objet]))
 	$id_objet = $_GET[$cle_objet];
-elseif (defined ('XRAY_ID_OBJET_SPECIAL'))
-	$id_objet = XRAY_ID_OBJET_SPECIAL;
 else
 	$id_objet = 0;
+
 $id_objet=intval($id_objet);
 if ($id_objet and $objet)
 	$url_objet = "?page=$objet&$cle_objet=$id_objet";
@@ -56,33 +54,38 @@ if (isset ($_GET['action']))
 else
 	$action = 'list';
 
+$contexte_test=array('id_article' => 1 , 'id_rubrique' => 48 );
+$contexte = ((isset ($_GET['contexte'])) ? $contexte_test : '');
+	
 if ($cle_objet and !$id_objet)
-	die ("$cle_objet est inconnu : passez le en argument d'url ou définissez XRAY_ID_OBJET_SPECIAL en php");
+	$cle_objet='';
 
-echo "<b>Choix actuels :</b><br>
-		Action : $action<br>
-		Méthode pour la recherche des chemins : $cachelab_methode_chemin<br>
-		chemin recherché : $chemin<br>
-		objet recherché = $cle_objet $id_objet<br>
-		session = $session<br>
-		globale derniere_modif_invalide : {$GLOBALS['derniere_modif_invalide']}";
+$conditions = array('session'=>$session, 'chemin'=>$chemin, 'cle_objet'=>$cle_objet, 'id_objet'=>$id_objet, 'contexte'=>$contexte);
+$options = array('chrono'=>true, 'list'=>true, 'methode_chemin'=>$cachelab_methode_chemin);
+
+echo "<pre>"
+	.preg_replace(
+		'/^Array/', 'cachelab_fitre',
+		print_r(array(
+			'action'=>$action, 
+			'conditions'=>$conditions, 
+			'options'=>$options), 1))
+	."</pre>";
 
 $stats = cachelab_filtre(
 	$action, 
-	array('session'=>$session, 'chemin'=>$chemin, 'cle_objet'=>$cle_objet, 'id_objet'=>$id_objet),
-	array('chrono'=>true, 'listes'=>true, 'methode_chemin'=>$cachelab_methode_chemin)
-	);
+	$conditions,
+	$options
+);
 
-$liste_matche_chemin = $stats['liste_matche_chemin'];
-unset($stats['liste_matche_chemin']);
-$liste_cible = $stats['liste_cible'];
-unset($stats['liste_cible']);
-$liste_data_not_array = $stats['liste_data_not_array'];
-unset($stats['liste_data_not_array']);
+$l_cible = $stats['l_cible'];
+unset($stats['l_cible']);
+$l_not_array = $stats['l_not_array'];
+unset($stats['l_not_array']);
+$l_no_data = $stats['l_no_data'];
+unset($stats['l_no_data']);
 
-echo "<h3>Bilan du filtrage</h3><br>
-		Caches trouvés avec le chemin $chemin : ".count($liste_matche_chemin)."<br>
-		Caches trouvés avec <a href='$url_objet'>$objet $id_objet</a> : ".count($liste_cible)."</b><br>
+echo   "<h3>Bilan du filtrage</h3><br>
 		<br><b>Stats :</b><pre>    ".trim(str_replace('Array', '', print_r($stats, 1)), "() \n")."</pre>";
 
 function xray_lien_cache ($cle='') {
@@ -92,23 +95,20 @@ function xray_lien_cache ($cle='') {
 	</a>";
 }
 
-if (count($liste_data_not_array)) {
-	echo "<h3>Erreurs d'accés (pas un tableau)</h3><ul>";
-	foreach ($liste_data_not_array as $cle)
+if (count($l_not_array)) {
+	echo "<h3>Erreurs d'accés (pas un tableau)</h3>
+		<ul>";
+	foreach ($l_not_array as $cle)
 		echo "<li>".xray_lien_cache($cle)."</li>";
 	echo "</ul>";
 }
 
-if ($cle_objet) {
-	echo "</ul>
-		<h3>Cible avec chemin $chemin et contexte avec $objet=$id_objet : ".count($liste_cible)."</h3>
+if (count($l_cible)) {
+	echo "<h3>Caches ciblés : ".count($l_cible)."</h3>
 		<ul>";
-	foreach ($liste_cible as $cle)
+	foreach ($l_cible as $cle)
 		echo "<li>".xray_lien_cache($cle)."</li>";
 	echo "</ul>";
-};
-
-echo "<h3>Caches trouvés avec le chemin $chemin : ".count($liste_matche_chemin)."</h3>
-	<ul>";
-foreach ($liste_matche_chemin as $cle)
-	echo "<li>".xray_lien_cache($cle)."</li>";
+}
+else
+	echo "Pas de cache cible<br>";
