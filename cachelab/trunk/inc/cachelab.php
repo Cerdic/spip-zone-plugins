@@ -72,123 +72,121 @@ global $Memoization;
 		$session = spip_session();
 	$chemin = (isset($conditions['chemin']) ? $conditions['chemin'] : null);
 	$chemins = explode('|', $chemin); // sert seulement pour methode_chemin == strpos
-
 	$cle_objet = (isset($conditions['cle_objet']) ? $conditions['cle_objet'] : null);
 	$id_objet = (isset($conditions['id_objet']) ? $conditions['id_objet'] : null);
 	if ($cle_objet and !$id_objet)
 		die ("$cle_objet est inconnu : passez le en argument d'url ou définissez XRAY_ID_OBJET_SPECIAL en php");
+	// pour 'contexte' on simule un 'more' pour donner un exemple d'extension
+	if (isset($conditions['contexte']) and $conditions['contexte'] and !isset($conditions['more']))
+		$conditions['more'] = 'contexte';
+	if ($more = (isset($conditions['more']) ? (string)$conditions['more'] : '')) {
+		$morefunc='cachelab_filtrecache_'.$more;
+		// Signature nécessaire : $morefunc ($action, $conditions, $options, &$stats)
+		if (!function_exists($morefunc))
+			die ("La fonction '$morefunc' n'est pas définie");
+	}
 
 	// options
 	$methode_chemin = (isset ($options['methode_chemin']) ? $options['methode_chemin'] : 'strpos');
-	$do_clean = ($action != 'pass') and (!isset ($options['clean']) or $options['clean']);
-	$do_lists = ($action != 'list') or (isset ($options['listes']) and $options['listes']);
-	$do_chrono = (isset ($options['chrono']) and $options['chrono']);
+	$do_clean = ($action != 'pass') and (!isset ($options['clean']) or $options['clean']);	// clean par défaut
+	$do_lists = ($action == 'list') or (isset ($options['list']) and $options['list']);		// pas de listes par défaut
+	$do_chrono = (isset ($options['chrono']) and $options['chrono']);						// pas de chrono par défaut
 	if ($do_chrono) {
 		include_spip ('lib/microtime.inc');
 		microtime_do ('begin');
 	}
+	
 	// retours
-	$nb_alien=$nb_site=$nb_clean=$nb_no_data=$nb_not_array=$nb_cible=0;
-	$nb_session=($session ? 0 : '_');
-	$nb_chemin=($chemin ? 0 : '_');
-	$l_session = $l_chemin = $l_no_data = $l_not_array = $l_cible = array();
+	$stats=array();
+	$stats['nb_alien']=$stats['nb_site']=$stats['nb_clean']=$stats['nb_no_data']=$stats['nb_not_array']=$stats['nb_cible']=0;
+	$stats['l_no_data'] = $stats['l_not_array'] = $stats['l_cible'] = array();
 
-	$len_prefix = strlen(_CACHE_NAMESPACE);
+	// On y va
 	$cache = apcu_cache_info();
 	$meta_derniere_modif = lire_meta('derniere_modif');
-	
+	$len_prefix = strlen(_CACHE_NAMESPACE);
+
 	foreach($cache['cache_list'] as $i => $d) {
+		// on "continue=passe au suivant" dés qu'on sait que le cache n'est pas cible
+
 		$cle = $d['info'];
+
 		// on saute les caches d'autres origines
 		// (et les caches d'un précédent _CACHE_NAMESPACE pour ce même site)
 		if (strpos ($cle, _CACHE_NAMESPACE) !== 0) {
-			$nb_alien++;
+			$stats['nb_alien']++;
 			continue;
 		}
 
-		if ((substr($cle, $len_prefix-1, 7) == ':cache:')
-			and  apcu_exists($cle)
-			) {
-			// effacer les caches périmés
-			if ($do_clean and ($meta_derniere_modif > $d['creation_time'])) {
+		// on ne veut examiner que les caches de squelettes SPIP
+		if ((substr($cle, $len_prefix-1, 7) != ':cache:')
+			or !apcu_exists($cle))
+			continue;
+
+		// effacer ou au moins sauter les caches périmés
+		if ($meta_derniere_modif > $d['creation_time']) {
+			if ($do_clean) {
 				$Memoization->del(substr($cle,$len_prefix));
-				$nb_clean++;
+				$stats['nb_clean']++;
+			};
+			continue;
+		}
+
+		// caches SPIP véritablement candidats
+		$stats['nb_candidats']++;
+
+		if ($session) {
+			if (substr ($cle, -9) != "_$session")
+				continue;
+		}
+
+		if ($chemin) {
+			switch ($methode_chemin) {
+			case 'strpos' :
+				foreach ($chemins as $unchemin)
+					if ($unchemin and (strpos ($cle, $unchemin) !== false))
+						break;
+				continue 2;
+			case 'regexp' :
+				if ($chemin and ($danslechemin = preg_match(",$chemin,i", $cle)))
+					break;
+				continue 2;
+			default :
+				die("Méthode pas prévue pour le filtrage par le chemin");
+			};
+		}
+
+		// récupérer le contenu du cache
+		if (($cle_objet and $id_objet) or $morefunc) {
+			global $Memoization;
+			$data = $Memoization->get(substr($cle, $len_prefix));
+			if (!$data) {
+				$stats['nb_no_data']++;
 				continue;
 			}
-
-			// caches candidats
-			$nb_site++;
-
-			if ($session) {
-				if (substr ($cle, -9) != "_$session")
-					continue;
-				else {
-					$nb_session++;
-					if ($do_lists)
-						$l_session[]=$cle;
-				}
-			}
-
-			if ($chemin) {
-				switch ($methode_chemin) {
-				case 'strpos' :
-					foreach ($chemins as $unchemin)
-						if ($unchemin and (strpos ($cle, $unchemin) !== false))
-							break;
-					continue 2;
-				case 'regexp' :
-					if ($chemin and ($danslechemin = preg_match(",$chemin,i", $cle)))
-						break;
-					continue 2;
-				default :
-					die("Méthode pas prévue pour le filtrage par le chemin");
-				};
-				$nb_chemin++;
+			if (!is_array($data)) {
+				spip_log ("clé=$cle : data n'est pas un tableau : ".print_r($data,1), 'cachelab');
+				$stats['nb_not_array']++;
 				if ($do_lists)
-					$l_chemin[]=$cle;
-			}
+					$stats['l_not_array'][] = $cle;
+				continue;
+			};
+		};
 
-			if ($cle_objet and $id_objet) {
-				global $Memoization;
-				$data = $Memoization->get(substr($cle, $len_prefix));
-				if (!$data) {
-					$nb_no_data++;
-					continue;
-				}
-				if (!is_array($data)) {
-					spip_log ("clé=$cle : data n'est pas un tableau : ".print_r($data,1), 'cachelab');
-					$nb_not_array++;
-					if ($do_lists)
-						$l_not_array[] = $cle;
-					continue;
-				};
-				if (!isset ($data['contexte'][$cle_objet])
-					or ($data['contexte'][$cle_objet]!=$id_objet)) 
-					continue;
-			}
-			// restent les cibles
-			$nb_cible++;
-			if ($do_lists)
-				$l_cible[] = $cle;
-			cachelab_applique ($action, $cle, null, $options);
-		}
-	}
+		if ($cle_objet
+			and (!isset ($data['contexte'][$cle_objet])
+				or ($data['contexte'][$cle_objet]!=$id_objet)))
+			continue;
 
-	$stats = array(
-		'nb_alien'=>$nb_alien,
-		'nb_site'=>$nb_site,
-		'nb_clean'=>$nb_clean,
-		'nb_session'=>$nb_session,
-		'nb_chemin'=>$nb_chemin,
-		'nb_no_data' => $nb_no_data,	// yen a (kesako ?)
-		'nb_not_array' => $nb_not_array, // 0 normalement
-		'nb_cible'=>$nb_cible
-	);
+		if ($morefunc
+			and !$morefunc ($action, $conditions, $options, $cle, $data, $stats))
+			continue;
 
-	if ($do_lists) {
-		$stats['liste_matche_chemin'] = $l_chemin;
-		$stats['liste_data_not_array'] = $l_not_array;
-		$stats['liste_cible'] = $l_cible;
+		// restent les cibles
+		$stats['nb_cible']++;
+		if ($do_lists) 
+			$stats['l_cible'][] = $cle;
+		cachelab_applique ($action, $cle, null, $options);
 	}
 
 	if ($do_chrono) {
@@ -214,4 +212,13 @@ static $prev_derniere_modif_invalide;
 		$GLOBALS['derniere_modif_invalide'] = $prev_derniere_modif_invalide;
 		break;
 	}
+}
+
+function cachelab_filtrecache_contexte($action, $conditions, $options, $cle, $data, $stats) {
+	if (!isset ($data['contexte'])
+		or !isset($conditions['contexte'])
+		or !is_array($conditions['contexte']))
+		return false;
+	$diff = array_diff_assoc($conditions['contexte'], $data['contexte']);
+	return empty($diff);
 }
