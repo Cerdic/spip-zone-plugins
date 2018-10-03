@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_erreur_montant_credit' => 'Vous avez depassé la limite de votre crédit qui es de @credit@ !',
 	'message_erreur_montant_reservations_detail' => 'Le montant ne doit pas être supérieure à @montant_ouvert@ (montant encore à payer)',
 	'message_paiement_vendeur' => 'Mode de paiement : "@mode@",  voir <a href="@url@">détail</a>',
+	'montant_du' => 'Total à payer :',
 	'montant_paye' => 'Payé :',
 
 	// P

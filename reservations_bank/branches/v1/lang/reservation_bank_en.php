@@ -9,13 +9,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// C
-	'cfg_titre_espace_prive' => 'Private space',
-
 	// L
-	'label_cacher_paiement_public' => 'Do not display the payment form on the public site',
-	'label_choisir_mode_paiement' => 'Choose your payment type :',
-	'label_definir_presta_defaut' => 'Define a unique payment type for the payment selection.',
+	'label_cacher_paiement_public' => 'do not display the paiment form on the public site', # MODIF
 	'label_fieldset_montant_detail' => 'Specify the amount (in @devise@) for each booking item',
 	'label_fieldset_specifier' => 'Specify',
 	'label_preceder_formulaire' => 'Display the payment form before the booking summary.',
@@ -26,7 +21,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'merci_de_votre_reservation_paiement' => 'Your booking <b>@reference@</b> has been validated.',
 	'message_erreur_montant_credit' => 'The amount is higher than your current credit of @credit@ !',
 	'message_erreur_montant_reservations_detail' => 'The amount should not be higher than @montant_ouvert@ (open amount)',
-	'message_paiement_vendeur' => 'Payment mode: "@mode@",  see <a href="@url@">details</a>',
 	'montant_paye' => 'Paid :',
 
 	// P
@@ -35,13 +29,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'reservation_bank_titre' => 'Booking Bank',
-	'reservation_paiement_reference' => 'Payment reference: @reference@',
 
 	// T
 	'texte_statut_attente_part' => ' partially paid- in waiting list',
 	'texte_statut_attente_paye' => ' paid - in waiting list',
 	'titre_page_configurer_reservation_bank' => 'Settings Booking Bank',
 	'titre_paiement_reservation' => 'Paiment of the Booking',
-	'titre_paiement_vendeur' => 'Payment:',
 	'titre_payer_reservation' => 'Pay the booking'
 );

@@ -18,7 +18,7 @@
 	]
 	<//B_details>
 
-	<BOUCLE_transactions(TRANSACTIONS){id_reservation}{statut IN commande,attente}{par date_transaction}{0,1}>
+	<BOUCLE_transactions(TRANSACTIONS){id_reservation}{statut IN commande,attente}{!par date_transaction}{0,1}>
 	[(#AUTORISER{regler,transaction,#ID_TRANSACTION})
 		[(#GET{paiement}|oui|et{#TRANSACTION_HASH|oui})
 			<a class="action_paiement"  href="[(#URL_ECRIRE{payer_reservation,id_transaction=#ID_TRANSACTION}
