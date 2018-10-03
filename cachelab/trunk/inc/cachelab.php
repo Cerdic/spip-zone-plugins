@@ -214,7 +214,7 @@ static $prev_derniere_modif_invalide;
 	}
 }
 
-function cachelab_filtrecache_contexte($action, $conditions, $options, $cle, $data, $stats) {
+function cachelab_filtrecache_contexte($action, $conditions, $options, $cle, &$data, &$stats) {
 	if (!isset ($data['contexte'])
 		or !isset($conditions['contexte'])
 		or !is_array($conditions['contexte']))
