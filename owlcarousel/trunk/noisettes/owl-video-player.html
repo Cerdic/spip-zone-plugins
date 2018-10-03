@@ -18,33 +18,8 @@ VideoPlayer avec Owl Carousel et oembed
 @todo - Corriger : en mode touch/drag le player vidéo n'est pas détruit du coup plusieurs vidéos peuvent jouer en mm temps
 -->]
 #SET{id-carousel, #ENV{id-carousel,owlvideoplayer} }
-<style>
-[#(#GET{id-carousel})] .owl-stage-outer {
-	/*height: 40rem;*/
-}
-
-[#(#GET{id-carousel})] .owl-slide {
-	display: block;
-	width: 100%;
-	margin: 0 auto;
-}
-
-.video_thumbs .owl-slide {
-	display: inline-block;
-	padding:.5em;
-	border: 1px solid black;
-	border-radius: 3px;
-	margin-right: .5em;
-}
-.video_thumbs .owl-slide:hover,
-.video_thumbs .owl-slide.active {
-	border: 1px solid silver;
-}
-.video_thumbs .owl-slide > a {
-	display: block;
-}
-</style>
 [(#REM) <!-- Active item -->]
+<div class="owl-video-player">
 <div id="#GET{id-carousel}" class="owl-carousel owl-theme">
 	<BOUCLE_listDocs(DOCUMENTS spip_documents_liens){objet ?}{id_objet ?}{id_document ?}
 																				{media=video}
@@ -75,7 +50,7 @@ VideoPlayer avec Owl Carousel et oembed
     </div>
 </div>
 </B_docs>
-
+</div>
 <script>
 jQuery(function($){
     var mainCarousel = $("[#(#GET{id-carousel})]");

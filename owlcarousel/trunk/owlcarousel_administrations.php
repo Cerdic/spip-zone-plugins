@@ -9,14 +9,15 @@ function owlcarousel_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 	$config = array(
-		'css' => 'on'
+		'css' => 'on',
+		'header_prive'=> 'on'
 	);
 
 	// Tableau de la configuration par défaut
 	$maj['0.0.1'] = array(
 		array('ecrire_config', 'owlcarousel', $config)
 	);
-
+	
 	// Maj du plugin.
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

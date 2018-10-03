@@ -17,42 +17,20 @@ Insertion du modele <articleX|owl>
 @param animateOut - une animation css3 , `fadeOut` est la seul fournie par owl, sinon ajouter animate.css
 
 -->]
-<style>
-    [#(#ENV{id-carousel,demo})] .owl-slide > .caption{
-        z-index: 100;
-        position: absolute;
-        left:55%;
-        width: 40%;
-        bottom:5%;
-    }
-    [#(#ENV{id-carousel,demo})] .owl-slide > .caption > .title{
-        background: #000;
-        color : #FFF;
-        padding: 5px;
-        width: auto;
-    }
-    [#(#ENV{id-carousel,demo})] .owl-slide > .caption > p {
-        background-color: rgba(88, 88, 88, 0.75) ;
-        /*float: right;*/
-        color: #FFF;
-        padding: 5px;
-    }
-</style>
 [(#REM) <!-- Diaporama -->]
-<div id="#ENV{id-carousel,demo}" class="owl-carousel owl-theme">
-            <BOUCLE_listDocs(DOCUMENTS){id_article?}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{extension==jpg|png|gif}>
-            <div class="owl-slide"[ (#ENV{URLhashListener}|=={true}|oui)data-hash="#ENV{id-carousel,demo}#ID_DOCUMENT"]>
-                [(#ENV{caption,oui}|=={oui}|oui)
-                <div class="caption[ (#ENV{caption_css})]">[
-                    <h3 class="title">(#TITRE)</h3>][
-                    <p class="hidden-phone">(#DESCRIPTIF|textebrut)</p>]</div>]
-                    <a href="#FICHIER" class="mediabox"[ rel="diaporama(#ENV{id-carousel,demo})"][ title="(#TITRE|attribut_html|couper{80})"]>
-                        <img [(#ENV{lazyLoad}|=={true}|oui)class="owl-lazy" data-]src="[(#FICHIER|image_reduire{650,450}|extraire_attribut{src})]" alt="[(#TITRE|textebrut)]">
-                    </a>
-            </div>
-            </BOUCLE_listDocs>
+<div id="#ENV{id-carousel,demo}" class="article_owl owl-carousel owl-theme">
+    <BOUCLE_listDocs(DOCUMENTS){id_article?}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{extension==jpg|png|gif}>
+    <div class="owl-slide"[ (#ENV{URLhashListener}|=={true}|oui)data-hash="#ENV{id-carousel,demo}#ID_DOCUMENT"]>
+        [(#ENV{caption,oui}|=={oui}|oui)
+        <div class="caption[ (#ENV{caption_css})]">[
+            <h3 class="title">(#TITRE)</h3>][
+            <p class="hidden-phone">(#DESCRIPTIF|textebrut)</p>]</div>]
+            <a href="#FICHIER" class="mediabox"[ rel="diaporama(#ENV{id-carousel,demo})"][ title="(#TITRE|attribut_html|couper{80})"]>
+                <img [(#ENV{lazyLoad}|=={true}|oui)class="owl-lazy" data-]src="[(#FICHIER|image_reduire{650,450}|extraire_attribut{src})]" alt="[(#TITRE|textebrut)]">
+            </a>
+    </div>
+    </BOUCLE_listDocs>
 </div>
-
 <script type="text/javascript">
 jQuery(function($){
     $("[#(#ENV{id-carousel,demo})]").owlCarousel({
