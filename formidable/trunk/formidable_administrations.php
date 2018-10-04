@@ -88,6 +88,9 @@ function formidable_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.9.0'] = array(
 		array('formidable_migrer_resume_reponse')
 	);
+	$maj['0.10.0'] = array(
+		array('formidable_migrer_reglage_champ_unique')
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -179,6 +182,34 @@ function formidable_transferer_reponses_champs() {
 			return;
 		}
 	} while ($rows = sql_allfetsel('DISTINCT id_formulaires_reponse', 'spip_formulaires_reponses_champs_bad', '', 'id_formulaires_reponse', '', '0,100'));
+}
+
+/**
+ * Déplace les réglages sur les tests d'unicité depuis des colonnes vers des sous options du traitement "enregistrer"
+ *
+ *
+ * @return void
+ */
+function formidable_migrer_reglage_champ_unique() {
+	include_spip('inc/sql');
+	$res = sql_select('id_formulaire,unicite,message_erreur_unicite,traitements','spip_formulaires');
+
+	while ($row = sql_fetch($res)) {
+		$traitements = unserialize($row['traitements']);
+		if (!isset($traitements['enregistrement'])) {
+			$traitements['enregistrement'] = array();
+		}
+		if ($row['unicite'] != '') {
+			$traitements['enregistrement']['unicite'] = $row['unicite'];
+		}
+		if ($row['message_erreur_unicite'] != '') {
+			$traitements['enregistrement']['message_erreur_unicite'] = $row['message_erreur_unicite'];
+		}
+		$traitements = serialize($traitements);
+		sql_updateq('spip_formulaires',array('traitements'=>$traitements),'id_formulaire='.$row['id_formulaire']);
+
+	}
+	sql_alter("TABLE spip_formulaires DROP message_erreur_unicite, DROP unicite");
 }
 
 /**
