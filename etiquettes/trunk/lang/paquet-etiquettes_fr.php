@@ -19,7 +19,10 @@ Il propose donc une balise avec paramètres qui va générer un champ de texte p
 -* Un nuage des mots les plus fréquents (si vous avez le plugin Nuage)
 -* Une liste déroulante qui s\'actualise en fonction de ce que vous tapez (si vous avez le plugin Sélecteur générique)
 -* Une liste à cliquer (sur les mêmes principes que les cases à cocher)
--* Aucune aide',
+-* Aucune aide
+
+
+',
 	'etiquettes_slogan' => 'Ajouter facilement des mots-clés à tout et n\'importe quoi',
 );
 ?>
