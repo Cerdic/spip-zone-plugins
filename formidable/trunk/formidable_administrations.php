@@ -240,7 +240,7 @@ function formidable_migrer_formulaires_afficher_si_remplissage(){
 
 
 /**
- * Cherche tous les formulaires et migre le champ resume_reponse vers une option du traitement "enregistrer" 
+ * Cherche tous les formulaires et migre le champ resume_reponse vers une option du traitement "enregistrer"
  *
  * Supprime ensuite ce champ de la structure de table
  * @return void

@@ -315,7 +315,7 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 		array(
 			'args' => array(
 				'id_formulaire' => $id_formulaire,
-				'identifiant' => $formulaire['identifiant'] 
+				'identifiant' => $formulaire['identifiant']
 			),
 			'data' => $traitements
 		)

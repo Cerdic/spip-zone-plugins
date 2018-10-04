@@ -4,7 +4,7 @@ description: '<:formidable:traiter_email_description:>'
 options:
   -
     saisie: 'fieldset'
-    options: 
+    options:
       nom: 'sujet'
       label: '<:formidable:traiter_email_sujet_courriel_label:>'
       tagfield: '<legend>'
@@ -15,7 +15,7 @@ options:
           nom: 'champ_sujet'
           label: '<:formidable:traiter_email_option_sujet_label:>'
           explication: '<:formidable:traiter_email_option_sujet_explication:>'
-      - 
+      -
         saisie: 'case'
         options:
           nom: 'champ_sujet_valeurs_brutes'
@@ -23,7 +23,7 @@ options:
           label_case : '<:formidable:traiter_email_option_sujet_valeurs_brutes_label_case:>'
   -
     saisie: 'fieldset'
-    options: 
+    options:
       nom: 'contenu'
       label: '<:formidable:traiter_email_contenu_courriel_label:>'
       tagfield: '<legend>'
@@ -58,7 +58,7 @@ options:
           label_case: '<:formidable:traiter_email_option_activer_ip_label_case:>'
   -
     saisie: 'fieldset'
-    options: 
+    options:
       nom: 'destinataires'
       label: '<:formidable:traiter_email_destinataires_courriel_label:>'
       tagfield: '<legend>'
@@ -99,7 +99,7 @@ options:
           env: true
   -
     saisie: 'fieldset'
-    options: 
+    options:
       nom: 'envoyeur'
       label: '<:formidable:traiter_email_envoyeur_courriel_label:>'
       tagfield: '<legend>'
@@ -125,7 +125,7 @@ options:
           explication: '<:formidable:traiter_email_option_envoyeur_nom_explication:>'
   -
     saisie: 'fieldset'
-    options: 
+    options:
       nom: 'AR'
       label: '<:formidable:traiter_email_AR_label:>'
       tagfield: '<legend>'
