@@ -73,7 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_redirige_url' => 'Adresse de redirection après validation',
 	'editer_redirige_url_explication' => 'Laissez vide si vous souhaitez rester sur la même page',
 	'editer_titre' => 'Titre',
-	'editer_unicite_explication' => 'Enregistrer le formulaire seulement si un champ est unique',
+	'editer_unicite_explication' => 'Enregistrer le formulaire uniquement si la valeur d\'un champ spécifique est unique parmis toutes les réponses enregistrées.',
 	'editer_unicite_label' => 'Vérifier l’unicité d’un champ',
 	'erreur_autorisation' => 'Vous n’avez pas le droit d’éditer les formulaires du site.',
 	'erreur_base' => 'Une erreur technique est survenue durant l’enregistrement.',
@@ -236,7 +236,7 @@ Cette option n’est conservée que pour compatibilité ascendante. Elle n’app
 	'traiter_email_option_destinataires_label' => 'Destinataires',
 	'traiter_email_option_destinataires_plus_explication' => 'Une liste d’adresses séparées par des virgules.',
 	'traiter_email_option_destinataires_plus_label' => 'Destinataires supplémentaires',
-	'traiter_email_option_destinataires_selon_champ_explication' => 'Permet d’indiquer un ou plusieurs destinataires en fonction de la valeur d’un champ. 
+	'traiter_email_option_destinataires_selon_champ_explication' => 'Permet d’indiquer un ou plusieurs destinataires en fonction de la valeur d’un champ.
 	Indiquer le champ, sa valeur, et le ou les courriels concernés (séparés par une virgule) suivant ce format, tel que : "@selection_1@/choix1 : mail@example.tld". Vous pouvez indiquer plusieurs tests, en revenant à la ligne entre chaque test.',
 	'traiter_email_option_destinataires_selon_champ_label' => 'Destinataires en fonction d’un champ',
 	'traiter_email_option_envoyeur_courriel_explication' => 'Choisissez le champ qui contiendra le courriel de l’envoyeur.',
