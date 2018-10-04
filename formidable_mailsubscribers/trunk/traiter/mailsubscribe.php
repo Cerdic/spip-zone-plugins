@@ -51,7 +51,9 @@ function traiter_mailsubscribe_dist($args, $retours){
 			$options_subscribe['listes'] = $listes;
 		}
 		// 2) options : valeurs configurées dans les traitements
-		if (!empty($options['notify'])) {
+		if (isset($options['notify'])
+			and $notify = $options['notify']
+		){
 			$options_subscribe['notify'] = true;
 		}
 

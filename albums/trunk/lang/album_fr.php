@@ -19,8 +19,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_valider_deplacer_documents' => 'Enregistrer les changements',
 	'bouton_vider' => 'Vider',
 	'bouton_vider_explication' => 'Vider l’album de ses documents',
-	'bouton_enlever_albums' => 'Enlever tous les albums',
-	'bouton_ajouter_document' => 'Ajouter un document à l\'album',
 
 	// C
 	'c_albumotheque_filtres' => 'Les filtres latéraux permettent d’activer certains critères

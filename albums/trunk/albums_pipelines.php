@@ -52,16 +52,15 @@ function albums_afficher_complement_objet($flux) {
 		$id_table_objet  = id_table_objet($type);
 		$champs          = sql_fetsel('*', $table_objet_sql, addslashes($id_table_objet).'='.intval($id));
 		$marquer_doublons_album = charger_fonction('marquer_doublons_album', 'inc');
-		$marquer_doublons_album($champs,$id,$type,$id_table_objet,$table_objet,$table_objet_sql);
+		$marquer_doublons_album($champs, $id, $type, $id_table_objet, $table_objet, $table_objet_sql);
 		// puis on récupère le squelette
 		$texte .= recuperer_fond('prive/squelettes/contenu/portfolio_albums', array(
 				'objet' => $type,
 				'id_objet' => $id,
-				'ajouter' => _request('ajouter'),
 			), array('ajax'=>'albums'));
 	}
 
-	// Fiches des albums : documents liés quand le portfolio n'est pas affiché
+	// Fiches des albums : documents liés quand les documents «classiques» ne sont pas affichés
 	if (
 		$e !== false // page d'un objet éditorial
 		and $e['edition'] === false // pas en mode édition
@@ -272,6 +271,26 @@ function albums_post_edition($flux) {
 	}
 
 	return $flux;
+}
+
+
+/**
+ * Plugins Jquery UI nécessaires au plugin
+ *
+ * @pipeline jqueryui_plugins
+ *
+ * @param  array $scripts Liste des js chargés
+ * @return array          Liste complétée des js chargés
+**/
+function albums_jqueryui_plugins($plugins) {
+	if (test_espace_prive()) {
+		include_spip('inc/config');
+		$plugins[] = 'jquery.ui.autocomplete';
+		if (lire_config('albums/deplacer_documents')) {
+			$plugins[] = 'jquery.ui.sortable';
+		}
+	}
+	return $plugins;
 }
 
 
@@ -580,10 +599,15 @@ function albums_compagnon_messages($flux) {
 **/
 function albums_album_boutons_actions($flux) {
 
-	include_spip('inc/filtres');
-	include_spip('inc/actions');
-	include_spip('inc/autoriser');
-	$icone_horizontale = chercher_filtre('icone_horizontale');
+	if (!function_exists('bouton_action')) {
+		include_spip('inc/filtres');
+	}
+	if (!function_exists('generer_action_auteur')) {
+		include_spip('inc/actions');
+	}
+	if (!function_exists('autoriser')) {
+		include_spip('inc/autoriser');
+	}
 
 	$data = (is_array($flux['data']) and count($flux['data'])) ? $flux['data'] : array();
 	$id_album = intval($flux['args']['id_album']);
@@ -650,9 +674,9 @@ function albums_album_boutons_actions($flux) {
 		),*/
 		'remplir' => array(
 			'positions' => array('footer'),
-			'liaison'   => '',
+			'liaison' => '',
 			'autoriser' => autoriser('modifier', 'album', $id_album),
-			'html'      => $icone_horizontale(parametre_url(self(), 'ajouter', 'album'.$id_album), _T('medias:bouton_ajouter_document'), 'ajouter-16.png', '', 'bouton-remplir-album ajax right'),
+			'html' => '<a href="#" class="bouton remplir" role="button" tabindex="0">'._T('medias:bouton_ajouter_document').'</a>'
 		),
 	);
 

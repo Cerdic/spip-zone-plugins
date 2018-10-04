@@ -1,80 +1,37 @@
 [(#REM)
 
-	Gestion des albums liés à un objet.
+	Gestion du portfolio des albums liés à un objet.
+	- liste des albums liés (portfolio d'albums)
+	- formulaire d'ajout d'albums
 
-	Inséré via le pipeline « afficher_complement_objet »
-
+	Appelé par le pipeline «afficher_complement_objet»
 	Utilise :
-		- prive/squelettes/inclure/resume/album.html
-		- prive/squelettes/inclure/ajouter_albums.html
-		- javascript/medias_edit.js (plugin medias)
-		- javascript/jquery.multifile.js (plugin medias)
-
-		Paramètres :
-		**obligatoire
-		*conseillé
-
-			- **objet     (string)  Type d'objet lié
-			- **id_objet  (int)     Identifiant de l'objet lié
-			- statut      (string)  Statut des albums
-			                        valeurs : prepa | publie | poubelle
-			                        défaut: tous
-			- pagination  (int)     Nombre pour la pagination
-			                        défaut: 10
-			- par         (string)  Critère de tri
+		prive/squelettes/inclure/portfolio_albums.html
+		prive/squelettes/inclure/ajouter_albums.html
 
 ]
 <div class='nettoyeur'></div>
-<div id='albums' class='portfolios albums lies'>
+<a name='albums'></a>
+<div id='albums' class='albums-lies'>
 
-	[(#REM) Liste des albums liés ]
-	<B_albums_lies>
-	#ANCRE_PAGINATION
+[(#REM) PORTFOLIO DES ALBUMS LIÉS ]
+<INCLURE{fond=prive/squelettes/inclure/portfolio_albums,
+	objet,
+	id_objet,
+	nb=10,
+	ajax=liste_albums}>
 
-	[(#REM)<h2 class="titrem"><:album:titre_albums:></h2>]
+[(#REM) formulaire pour déplacer les documents par glisser-déposer ]
+[(#AUTORISER{deplacerdocumentsalbums,#ENV{objet},#ENV{id_objet}}|oui)
+<div class='ajax'>#FORMULAIRE_ALBUMS_DEPLACER_DOCUMENTS{#ENV{objet},#ENV{id_objet}}</div>
+]
 
-	<BOUCLE_albums_lies(ALBUMS)
-		{objet}
-		{id_objet}
-		{!par date}
-		{statut == #ENV{statut,.*}}
-		{pagination #ENV{pagination,10} albums}
-	>
-	<INCLURE{fond=prive/squelettes/inclure/resume/album,
-		id_album,
-		objet,
-		id_objet,
-		ajouter}>
-	</BOUCLE_albums_lies>
+[(#REM) AJOUTER : ICONE ET FORMULAIRE ]
+<INCLURE{fond=prive/squelettes/inclure/ajouter_albums,
+	objet,
+	id_objet,
+	ajouter,
+	lier_trad,
+	ajax=ajouter_albums}>
 
-	[<p class='pagination'>(#PAGINATION{prive})</p>]
-
-	[(#REM) Bouton pour enlever tous les albums ]
-	[(#GRAND_TOTAL|>{1}|oui)
-		<div class="actions-liste">
-			[(#BOUTON_ACTION{
-				[(#REM|icone_horizontale{'',album,del}|extraire_balise{img})]<b><:album:bouton_enlever_albums:></b>,
-				#URL_ACTION_AUTEUR{dissocier_album,tous/#ENV{objet}/#ENV{id_objet},#SELF|ancre_url{albums}},
-				'ajax icone s24 right enlever_albums',
-				<:ecrire:lien_tout_supprimer:> ?})]
-		</div>
-	]
-
-	[(#REM) Formulaire d'ajout d'un album ]
-	<INCLURE{fond=prive/squelettes/inclure/ajouter_albums,
-		objet,
-		id_objet,
-		ajouter,
-		lier_trad,
-		ajax=ajouter_albums}>
-
-</div>
-
-[(#REM) Script pour la gestion des documents s'il n'est pas présent (pas de portfolio) ]
-<BOULE_media_edit(CONDITION){si #AUTORISER{joindredocument,#ENV{objet},#ENV{id_objet}}|non}>
-<script type='text/javascript'>/*<![CDATA[*/
-	var multifile='[(#CHEMIN{javascript/jquery.multifile.js}|texte_script)]';
-	[(#INCLURE{javascript/medias_edit.js}|compacte{js})]
-/*]]>*/</script>
-</BOUCLE_media_edit>
-</B_albums_lies>
+</div><!-- #albums -->

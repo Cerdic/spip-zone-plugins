@@ -28,6 +28,7 @@
 	<pipeline nom="insert_head_css" inclure="albums_pipelines.php" />
 	<pipeline nom="objet_compte_enfants" inclure="albums_pipelines.php" />
 	<pipeline nom="boite_infos" inclure="albums_pipelines.php" />
+	<pipeline nom="jqueryui_plugins" inclure="albums_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="albums_pipelines.php" />
 	<pipeline nom="formulaire_fond" inclure="albums_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="albums_pipelines.php" />

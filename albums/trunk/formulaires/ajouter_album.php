@@ -163,9 +163,13 @@ function formulaires_ajouter_album_traiter_dist($objet = '', $id_objet = 0, $ret
 		// traitement des documents si des fichiers ont été choisis
 		include_spip('inc/joindre_document');
 		$id_temporaire = 0-$GLOBALS['visiteur_session']['id_auteur'];
-		$traiter_joindre_document = charger_fonction('traiter', 'formulaires/joindre_document');
-		$res_joindre_document = $traiter_joindre_document('new', $id_temporaire, 'album', 'document');
-		$res = array_merge($res, $res_joindre_document);
+		$verifier_joindre_document = charger_fonction('verifier', 'formulaires/joindre_document');
+		$res_verifier_joindre_document = $verifier_joindre_document('new', $id_temporaire, 'album', 'document');
+		if (count($res_verifier_joindre_document) == 0) {
+			$traiter_joindre_document = charger_fonction('traiter', 'formulaires/joindre_document');
+			$res_joindre_document = $traiter_joindre_document('new', $id_temporaire, 'album', 'document');
+			$res = array_merge($res, $res_joindre_document);
+		}
 		// pas besoin du js ajouté dans le message de retour
 		if (isset($res['message_ok']) and $res['message_ok']) {
 			$res['message_ok'] = preg_replace('/(<script.*<\/script>)/is', '', $res['message_ok']);
@@ -174,7 +178,7 @@ function formulaires_ajouter_album_traiter_dist($objet = '', $id_objet = 0, $ret
 		// traitement de l'album
 		set_request('statut', 'publie');
 		$traiter_editer_album = charger_fonction('traiter', 'formulaires/editer_album');
-		$res_editer_album = $traiter_editer_album('new',$retour,$objet.'|'.$id_objet,$lier_trad);
+		$res_editer_album = $traiter_editer_album('new', $retour, $objet.'|'.$id_objet, $lier_trad);
 		if (is_array($res_editer_album)) {
 			$res = array_merge($res, $res_editer_album);
 		}
@@ -240,7 +244,7 @@ function js_ajouter_albums($ids = array()) {
 	}
 	$divs = implode(',', $divs);
 	$callback = "jQuery('${divs}').animateAppend();";
-	$js = "if (window.jQuery) jQuery(function(){ajaxReload('albums',{callback:function(){ $callback }});});";
+	$js = "if (window.jQuery) jQuery(function(){ajaxReload('liste_albums',{callback:function(){ $callback }});});";
 	$js = "<script type='text/javascript'>${js}</script>";
 	return $js;
 }

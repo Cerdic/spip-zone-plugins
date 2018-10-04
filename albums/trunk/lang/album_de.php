@@ -55,11 +55,15 @@ Wenn die Dokumente verschoben wurden erscheint am Ende ders Liste ein Formular u
 	'icone_creer_album' => 'Ein neues Album erstellen',
 	'icone_modifier_album' => 'Album bearbeiten',
 	'info_1_album' => '1 Album',
-	'info_1_utilisation' => '1 Verwendung', # MODIF
+	'info_1_doclie' => '1 verknüpftes Dokument',
+	'info_1_utilisation' => '1 Verwendung',
 	'info_aucun_album' => 'Kein Album',
+	'info_docslies' => 'Verknüpfte Dokumente',
 	'info_nb_albums' => '@nb@ Alben',
+	'info_nb_docslies' => '@nb@ verknüpfte Dokumente',
 	'info_nb_utilisations' => '@nb@ Verwendungen',
 	'info_nouvel_album' => 'Neues Album',
+	'info_utilisation' => 'Verwendungen',
 
 	// L
 	'label_activer_album_objets' => 'Alben für Inhalte aktivieren:',
