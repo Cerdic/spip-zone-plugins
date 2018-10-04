@@ -238,10 +238,12 @@ function formulaires_formidable_verifier($id, $valeurs = array(), $id_formulaire
 				}
 			}
 		}
-
 		// Si on a pas déjà une erreur sur le champ unicite, on lance une verification
-		if ($formulaire['unicite'] != '') {
-			if (!$erreurs[$formulaire['unicite']]) {
+		$traitements = unserialize($formulaire['traitements']);
+		$unicite = $traitements['enregistrement']['unicite'];
+		$message_erreur_unicite = $traitements['enregistrement']['message_erreur_unicite'];
+		if ($unicite != '') {
+			if (!$erreurs[$unicite]) {
 				$reponses = sql_allfetsel(
 					'R.id_formulaire AS id',
 					'spip_formulaires_reponses AS R
@@ -250,13 +252,13 @@ function formulaires_formidable_verifier($id, $valeurs = array(), $id_formulaire
 						LEFT JOIN spip_formulaires_reponses_champs AS C
 						ON R.id_formulaires_reponse=C.id_formulaires_reponse',
 					'R.id_formulaire = ' . $id_formulaire . '
-						AND C.nom='.sql_quote($formulaire['unicite']).'
-						AND C.valeur='.sql_quote(_request($formulaire['unicite'])).'
+						AND C.nom='.sql_quote($unicite).'
+						AND C.valeur='.sql_quote(_request($unicite)).'
 						AND R.statut = "publie"'
 				);
 				if (is_array($reponses) && count($reponses) > 0) {
-					$erreurs[$formulaire['unicite']] = $formulaire['message_erreur_unicite'] ?
-						_T($formulaire['message_erreur_unicite']) : _T('formidable:erreur_unicite');
+					$erreurs[$unicite] = $message_erreur_unicite ?
+						_T($message_erreur_unicite) : _T('formidable:erreur_unicite');
 				}
 			}
 		}
