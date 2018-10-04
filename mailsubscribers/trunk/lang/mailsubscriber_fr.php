@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_importer' => 'Importer',
 	'bouton_invitation' => 'Inviter à s’inscrire à la newsletter',
 	'bouton_previsu_importer' => 'Prévisualiser',
+	'bouton_actualiser_segments' => 'Actualiser les segments',
 
 	// C
 	'confirmsubscribe_invite_texte_email_1' => '@invite_email_from@ vous invite à vous inscrire à la Newsletter de @nom_site_spip@ avec l’adresse email @email@.',
