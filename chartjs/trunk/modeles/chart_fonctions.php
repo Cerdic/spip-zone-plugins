@@ -1,6 +1,8 @@
 <?php
 
-// conversion de couleur
+/**
+ * Convertir une couleur hexa vers rgb
+ */
 function chartjs_hex2rgb($hex) {
 	   $hex = str_replace("#", "", $hex);
 
@@ -18,19 +20,25 @@ function chartjs_hex2rgb($hex) {
 	   return implode(",", $rgb); // returns the rgb values separated by commas
 }
 
-// Convertir des mots spéparés par des virgules en tableau (pour utiliser dans un array_map)
+/**
+ * Convertir des mots spéparés par des virgules en tableau (pour utiliser dans un array_map)
+ */
 function chartjs_explode_virgule($texte){
 	$tableau = explode(',', $texte);
 	return $tableau;
 }
 
-// Typer les valeurs texte d'un tableau
+/**
+ * Typer les valeurs texte d'un tableau
+ */
 function chartjs_array_typecaster($table){
 	$table = chartjs_array_map_recursive('chartjs_typecaster', $table);
 	return $table;
 }
 
-// Typer une valeur texte en entier ou booléen
+/**
+ * Typer une valeur texte en entier ou booléen
+ */
 function chartjs_typecaster($v){
 	if (is_numeric($v)) {
 		$v = floatval($v);
@@ -42,7 +50,9 @@ function chartjs_typecaster($v){
 	return $v;
 }
 
-// Pas dans php :(
+/**
+ * array_map récursif
+ */
 function chartjs_array_map_recursive($function, $table) {
 	$out = array();
 	if (is_array($table)) {
@@ -53,12 +63,22 @@ function chartjs_array_map_recursive($function, $table) {
 	return $out;
 }
 
-// Pas dans php :(
+/**
+ * array_filter récursif pour un tableau (conserve les 0)
+ */
 function chartjs_array_filter_recursive($input) {
 	foreach ($input as &$value) {
 		if (is_array($value)) {
 			$value = chartjs_array_filter_recursive($value);
 		}
 	}
-	return array_filter($input);
+	return array_filter($input, 'chartjs_filtrer');
+}
+
+/**
+ * Idem array_filter mais conserve les 0
+ */
+function chartjs_filtrer($v){
+	$filtrer = (count($v) and $v !== null and $v !== false and $v !== '');
+	return $filtrer;
 }

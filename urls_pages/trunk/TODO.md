@@ -12,13 +12,8 @@ Pour l'instant on les montre aux utilisateurs dans un onglet à part, il faut aj
 
 Tous les traitements se font actuellement dans le formulaire editer_url_page.
 Il faut les déplacer dans l'API (à créer) :
-
 - action/editer_url_page.php
     - url_page_insert()
     - url_page_edit()
     - url_page_delete()
 - supprimer_url_page.php
-
-## Langues
-
-Réfléchir à la prise en compte des langues.

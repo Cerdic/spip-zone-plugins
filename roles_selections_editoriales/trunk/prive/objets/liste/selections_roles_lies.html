@@ -1,0 +1,50 @@
+[(#SET{defaut_tri,#ARRAY{
+	id_selection,1,
+	points,-1,
+	id_objet,1,
+	objet,1,
+}})]
+#SET{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
+<B_liste_selections>
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies selections">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{selection:info_1_selection,selection:info_nb_selections}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='titre' scope='col'>[(#TRI{titre,<:selection:champ_titre_label:>,ajax})]</th>
+			<th class='nb_contenus' scope='col'><:selection:champ_nombre_contenus:></th>
+			<th class='id' scope='col'>[(#TRI{id_selection,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='role' scope='col'><:roles:role_titre:></th>
+			<th class='action' scope='col'>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_selections(SELECTIONS selections_liens){id_selection IN #GET{selection}}{where?}{tri #ENV{par,num titre},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='titre principale'><a href="[(#ID_SELECTION|generer_url_entite{selection})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SELECTION">[(#RANG). ]#TITRE</a></td>
+			<td class='nb_contenus id'><BOUCLE_contenus(SELECTIONS_CONTENUS){id_selection}> </BOUCLE_contenus>#TOTAL_BOUCLE</B_contenus>0<//B_contenus></td>
+			<td class='id'>[(#AUTORISER{modifier,selection,#ID_SELECTION}|?{
+				<a href="[(#URL_ECRIRE{selection_edit,id_selection=#ID_SELECTION})]">#ID_SELECTION</a>,
+				#ID_SELECTION
+			})]</td>
+			<td class='role'>
+				[(#ENV{editable}|oui)
+					[(#INCLURE{fond=formulaires/inc-editer_liens_actions_roles,env,id=#ID_SELECTION,cle=selection-#ID_SELECTION-#OBJET-#ID_OBJET})]
+				]
+				<BOUCLE_roles(selections_liens){id_selection}{objet}{id_objet}{par role}{", "}>
+					[(#ROLE|role{selections})]</BOUCLE_roles>
+			</td>
+			<td class='action'>
+				[(#ENV{editable}|oui)[(#AUTORISER{dissocierselections,#OBJET,#ID_OBJET}|et{#VU|=={non}}|oui)
+				<button type="submit" class="button link delete" name="supprimer_lien\[selection-#ID_SELECTION-#ENV{objet}-#ENV{id_objet}-*\]" value="X"><:selection:retirer_lien_selection:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>]]
+			</td>
+		</tr>
+	</BOUCLE_liste_selections>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_selections>[
+<div class="liste-objets selections caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_selections>

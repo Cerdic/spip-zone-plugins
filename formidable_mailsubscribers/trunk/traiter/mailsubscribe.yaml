@@ -22,10 +22,10 @@ options:
       label: '<:formidable_mailsubscribers:traiter_mailsubscribe_champ_listes_label:>'
       obligatoire: 'oui'
       env: true
-  -
-    saisie: 'case'
-    options:
-      nom: 'notify'
-      label: '<:formidable_mailsubscribers:traiter_mailsubscribe_champ_notify_label:>'
-      label_case: '<:formidable_mailsubscribers:traiter_mailsubscribe_champ_notify_label_case:>'
-      defaut: 'on'
+#  -
+#    saisie: 'case'
+#    options:
+#      nom: 'notify'
+#      label: '<:formidable_mailsubscribers:traiter_mailsubscribe_champ_notify_label:>'
+#      label_case: '<:formidable_mailsubscribers:traiter_mailsubscribe_champ_notify_label_case:>'
+#      defaut: 'on'

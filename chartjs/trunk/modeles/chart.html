@@ -108,7 +108,7 @@
 #SET{id,           #VAL{spipchart_}|concat{#ENV{id,chart}|replace{' '}}}
 #SET{donnees,      #ENV{data,#ENV{datasets}}}
 
-[(#REM) Dimensions ]
+[(#REM) Dimensions du conteneur ]
 #SET{width,        #ENV{width,#ENV{canvaswidth}}}
 #SET{width_unit,   #GET{width}|concat{#GET{width}|match{\w\{2\}$}|?{px}}}
 #SET{width_int,    #GET{width}|intval|sinon{''}}
@@ -116,7 +116,7 @@
 #SET{height_unit,  #GET{height}|concat{#GET{height}|match{\w\{2\}$}|?{px}}}
 #SET{height_int,   #GET{height}|intval|sinon{''}}
 
-[(#REM) Apparence ]
+[(#REM) Options par défaut des jeux de données ]
 #SET{colors_defaut,#LISTE{#69D2E7,#E0E4CC,#F38630,#96CE7F,#CEBC17,#CE4264,#F7464A,#46BFBD,#FDB45C,#FD7B9B,#8C99FD,#A2DB2F,#DB7368,#6B84DB,#DBBF37,#DB97AB,#2EC087}}
 #SET{colors,       #ENV{colors}|is_null|?{
 	#ARRAY,
@@ -129,7 +129,9 @@
 #SET{lineTension,  #GET{lineTension}|is_null|?{'',#GET{lineTension}|=={true}|?{
 	1,
 	#GET{lineTension}|=={false}|?{0,#GET{lineTension}}
-}|floatval}}
+}|floatval|sinon{''}}}
+#SET{fontSize,     #ENV{fontSize,#ENV{scaleFontSize}}|intval|sinon{''}}
+#SET{fontColor,    #ENV{fontColor,#ENV{scaleFontColor}}}
 
 [(#REM) Axes ]
 #SET{axeX,         #ENV{axeX}}
@@ -139,11 +141,10 @@
 #SET{uniteX,       #ENV{uniteX}}
 #SET{uniteY,       #ENV{uniteY}}
 
-[(#REM) Options ]
+[(#REM) Options générales ]
 #SET{stacked,      #ENV{stacked}|=={true}|?{true}}
 #SET{responsive,   #ENV{responsive}|=={false}|?{false}}
-#SET{fontSize,     #ENV{fontSize,#ENV{scaleFontSize}}|intval|sinon{''}}
-#SET{fontColor,    #ENV{fontColor,#ENV{scaleFontColor}}}
+
 
 
 [(#REM)
@@ -171,11 +172,11 @@
 		)
 	)
 ]
-[(#REM) On convertit le texte en tableau si nécessaire ]
+[(#REM) Si on a du texte, on convertit en tableau ]
 [(#GET{donnees}|is_string|oui)
 #SET{donnees, #VAL{chartjs_explode_virgule}|array_map{#GET{donnees}|explode{next}}}
 ]
-[(#REM) Si on a un tableau linéaire, on le réarrange ]
+[(#REM) Si le tableau est linéaire, on le réarrange ]
 [(#GET{donnees/0}|is_string|oui)
 #SET{donnees,#LISTE{#GET{donnees}}}
 ]
@@ -184,12 +185,11 @@
 	- sinon on construit le tableau complet nous-même
 ]
 #SET{datasets, #ARRAY}
-#SET{datalabels, #ENV{dataLabels}|is_string|?{#ENV{dataLabels}|replace{' '}|explode{','}, #ENV{dataLabels}}}
-#SET{tableau_est_complet, #GET{donnees/0/data}|?{oui}}
+#SET{labels, #ENV{dataLabels}|is_string|?{#ENV{dataLabels}|replace{' '}|explode{','}, #ENV{dataLabels}}}
 <BOUCLE_datasets(DATA){source table, #GET{donnees}}{si #GET{tableau_est_complet}|non}>
 #SET{cle,   #COMPTEUR_BOUCLE|moins{1}}
-#SET{label, #GET{datalabels/#GET{cle}}|sinon{#CLE}}
-#SET{data,  #VALEUR}
+#SET{label, #GET{labels/#GET{cle}}|sinon{#VALEUR{label}}|sinon{#CLE}}
+#SET{data,  #VALEUR{data}|sinon{#VALEUR}}
 <BOUCLE_data_bubble(DATA){source table, #VALEUR|array_chunk{3}}{si #GET{type}|=={bubble}}>
 [(#COMPTEUR_BOUCLE|=={1}|oui)#SET{data,#ARRAY}]
 #SET{data, #GET{data}|push{#ARRAY{x,#VALEUR{0},y,#VALEUR{1},r,#VALEUR{2}}}}
@@ -199,28 +199,27 @@
 #SET{data, #GET{data}|push{#ARRAY{x,#VALEUR{0},y,#VALEUR{1}}}}
 </BOUCLE_data_scatter>
 #SET{multiple_colors,pie|doughnut|polarArea}
-#SET{borderColor, #GET{type}|match{#GET{multiple_colors}}|?{
+#SET{borderColor_set, #VALEUR{borderColor}|sinon{#GET{type}|match{#GET{multiple_colors}}|?{
 	#GET{colors},
 	#GET{colors/#GET{cle}}
-}}
-#SET{backgroundColor, #GET{type}|match{#GET{multiple_colors}}|?{
+}}}
+#SET{backgroundColor_set, #VALEUR{backgroundColor}|sinon{#GET{type}|match{#GET{multiple_colors}}|?{
 	#GET{colors},
 	#GET{colors/#GET{cle}}
-}}
+}}}
+#SET{fill_set, #VALEUR{fill}|sinon{#GET{fill}}}
+#SET{lineTension_set, #VALEUR{lineTension}|!={''}|?{#VALEUR{lineTension},#GET{lineTension}}}
 #SET{dataset, #ARRAY{
 	label,           #GET{label},
 	data,            #GET{data},
-	borderColor,     #GET{borderColor},
-	backgroundColor, #GET{backgroundColor},
-	fill,            #GET{fill,true},
+	borderColor,     #GET{borderColor_set},
+	backgroundColor, #GET{backgroundColor_set},
+	fill,            #GET{fill_set},
+	lineTension,     #GET{lineTension_set}
 }}
-[(#GET{lineTension}|ou{#GET{lineTension}|=={0}}|oui)
-#SET{dataset, #GET{dataset}|array_merge{#ARRAY{lineTension,#GET{lineTension}}}}
-]
 #SET{datasets, #GET{datasets}|push{#GET{dataset}}}
 </BOUCLE_datasets>
-#SET{datasets, #GET{donnees}}
-<//B_datasets>
+#SET{datasets, #GET{datasets}|chartjs_array_filter_recursive}
 
 [(#REM) Labels en abscisse ]
 #SET{labels, #ENV{labels}|is_string|?{#ENV{labels}|replace{' '}|explode{','}, #ENV{labels}}}

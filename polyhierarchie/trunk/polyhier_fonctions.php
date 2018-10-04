@@ -22,6 +22,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function critere_enfants($idb, &$boucles, $crit, $tous=true) {
 	global $exceptions_des_tables;
 	$boucle = &$boucles[$idb];
+	$not = $crit->not;
 
 	if (isset($crit->param[0])) {
 		$arg = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
@@ -53,7 +54,7 @@ function critere_enfants($idb, &$boucles, $crit, $tous=true) {
 		$sous = "sql_get_select('rl.id_objet','spip_rubriques_liens as rl',$cond.' AND rl.objet=\'$type\'')";
 		$where[] = "array('IN', '" . $boucle->id_table . "." . $boucle->primary . "', '(SELECT * FROM('.$sous.') AS subquery)')";
 	}
-	
+
 	if (count($where) == 2) {
 		$where = array("'OR'", $where[0], $where[1]);
 	}
@@ -61,7 +62,7 @@ function critere_enfants($idb, &$boucles, $crit, $tous=true) {
 		$where = reset($where);
 	}
 
-	$boucle->where[]= $where;
+	$boucle->where[] = $where;
 }
 
 function critere_enfants_directs_dist($idb, &$boucles, $crit) {

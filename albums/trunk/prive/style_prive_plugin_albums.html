@@ -6,8 +6,9 @@
 
 
 /*
-    BLOC ALBUM
-    ==========
+    ===========
+    BLOC ALBUMS
+    ===========
 */
 .liste-albums.lies .boite-album         { margin: 10px 0; }
 .boite-album .bd,
@@ -45,37 +46,41 @@
 .documents-album .item .tourner button  { padding: 0; border-width: 0px; background-color: transparent; }
 .documents-album .pagination            { margin: 0;}
 
-/* footer */
-.footer-album .bouton.remplir           { font-weight: bold; }
-.boite-album .formulaire_joindre_document { margin: 0; text-align: #ENV{left}; }
-/* boutons */
-.documents-album .item .actions,
-.documents-album .item .actions button,
-.footer-album .bouton,
-.footer-album button                    { font-size: x-small; }
-.boite-album .bouton:hover ,
-.boite-album button:hover               { cursor: pointer; }
-/* reveal */
-.documents-album .item .actions > *:not(.editbox),
-.documents-album .item .tourner,
-.boite-album .reveal                    { opacity: .1; }
-.documents-album .item:hover .actions > *,
-.documents-album .item:hover .tourner,
-.header-album:hover .reveal,
-.footer-album:hover .reveal,
-.boite-album .reveal:focus              { opacity: 1; }
-/* header + document + footer */
-.boite-album.editable .header-album.hover,
-.boite-album.editable .header-album:hover,
-.boite-album.editable .item.hover       { background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
-.boite-album:not(.editable) .liste_items .item:hover,
-.documents-album:not(.editable) .item:hover { background-color: transparent; }
-
 
 /*
+    ============
     ALBUMOTHEQUE
     ============
 */
+body.albums {
+	background-color: #f8f8f8;
+}
+.portfolios.albumotheque .tri.simple {
+	margin-bottom: 1em;
+}
+.portfolios.albumotheque .titre-album,
+.portfolios.albumotheque .resume-album {
+	border: 1px solid #eee;
+	background-color: white;
+}
+.portfolios.albumotheque .titre-album {
+	font-size: 100%;
+	border-bottom: 0 none;
+	padding: 0.25em;
+}
+.portfolios.albumotheque .resume-album {
+	border-top: 0 none;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+.portfolios.albumotheque .sortable {
+	padding: 0.25em;
+}
+.portfolios.albumotheque .actions-liste {
+	margin-top: 0;
+	padding: 0.25em;
+}
+
 .albums #navigation,
 .albumotheque                           { margin-top: 2.0775em; } /* = marging-top de li.sous_navigation */
 .albumotheque .liste-albums .boite-album:first-child { margin-top: 1em; }
@@ -94,6 +99,7 @@
 
 
 /*
+    =======
     FILTRES
     =======
     les listes ul.liste-items sont plutôt prévues pour des menus,
@@ -125,6 +131,7 @@
 
 
 /*
+    ======================
     BOITE COMPLEMENT OBJET
     ======================
 */
@@ -134,40 +141,7 @@
 
 
 /*
-    GLISSER-DEPOSER
-    ===============
-*/
-#portfolios.cible-album,
-.boite-album.cible-album ,               { position: relative; } /* pour .cible-album */
-.cible-album:after                       {
-                                         position: absolute; top: 1px; right: 1px; bottom: 1px; left: 1px; content: " ";
-                                         outline: 2px dashed #GET{foncee};
-                                         }
-.placeholder-album                       { height: 1em; background-color:#GET{claire}; }
-#portfolios .liste_items.temp            { border: 0 none; }
-.cible-album .liste_items.temp           { height: 1.5em; }
-#albums .item.drag,
-#portfolios .item.drag                   { opacity: .66; }
-#albums .ui-sortable .item:hover,
-#portfolios .ui-sortable .item:hover     { cursor: move; /*grab*/ }
-#albums .ui-sortable .item:active,
-#portfolios .ui-sortable .item:active    { cursor: move; }
-/* documents déplacés */
-#albums .item.deplace .mode,
-#albums .item.deplace .actions,
-#albums .item.deplace .tourner,
-#albums .item.deplace .sanstitre,
-#portfolios .item.deplace .mode,
-#portfolios .item.deplace .actions,
-#portfolios .item.deplace .tourner       { display: none; }
-.formulaire_albums_deplacer_documents .fermer { float: #ENV{right}; }
-.formulaire_albums_deplacer_documents .fermer:hover { cursor: pointer; }
-.formulaire_albums_deplacer_documents .titrounet,
-.formulaire_albums_deplacer_documents .titrounet img { float: #ENV{left}; }
-.formulaire_albums_deplacer_documents .titrounet img { margin-#ENV{right}: 5px; }
-
-
-/*
+    ================
     FICHE D'UN ALBUM
     ================
 */
@@ -179,6 +153,7 @@
 
 
 /*
+    =======
     EDITION
     =======
 */
@@ -210,6 +185,7 @@
 
 
 /*
+    =============
     LISTE CHOISIR
     =============
 */
@@ -223,6 +199,7 @@
 
 
 /*
+    ======
     MODELE
     ======
 */
