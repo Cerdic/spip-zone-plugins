@@ -34,11 +34,15 @@
 		(#SET{ids_pop, #ARRAY})][
 		(#SET{select,  [(#GET{id_table_objet}),visites,popularite][,(#GET{champ_titre})]})][
 		(#SET{from,    #GET{table_objet_sql}})][
-		(#SET{where,   [(#GET{id_table_objet})] IN \([(#GET{c}|join{','})]\)[(#GET{champ_statut}|oui) AND [(#GET{champ_statut})]=[(#GET{statut_publie}|sql_quote)]]})][
+		(#GET{champ_statut}|oui) #SET{req_statut, #GET{champ_statut}=#GET{statut_publie}|sql_quote}][
+		(#REM) Exception pour les auteurs (en attendant https://core.spip.net/issues/4175#note-6 ?)][
+		(#GET{champ_statut}|and{#GET{objet}|=={auteur}}|oui) #SET{req_statut, statut IN ('0minirezo', '1comite', '6forum')}][
+		(#SET{where,   [(#GET{id_table_objet})] IN \([(#GET{c}|join{','})]\)[(#GET{champ_statut}|oui) AND #GET{req_statut}]})][
 		(#SET{groupby, #GET{id_table_objet}})][
 		(#SET{orderby, FIELD\([(#GET{id_table_objet})][,(#GET{c}|join{','})]\)})][
 		(#SET{limit,   '0,30'})][
 		(#SET{req_pop, [SELECT (#GET{select})][ FROM (#GET{from})][ WHERE (#GET{where})][ GROUP BY (#GET{groupby})][ ORDER BY (#GET{orderby})][ LIMIT (#GET{limit})]})]
+
 
 		<h4><:statistiques:info_visites_objets_plus_populaires:></h4>
 		<B_pluspop>
@@ -62,7 +66,7 @@
 		]
 		[(#SET{select, [(#GET{id_table_objet}),visites,popularite][,(#GET{champ_date})][,(#GET{champ_titre})]})][
 		(#SET{from,    #GET{table_objet_sql}})][
-		(#SET{where,   popularite > 0[(#GET{ids_pop}|count|oui) AND [(#GET{id_table_objet})] NOT IN \([(#GET{ids_pop}|join{','})]\)][(#GET{champ_statut}|oui) AND [(#GET{champ_statut})]=[(#GET{statut_publie}|sql_quote)]]})][
+		(#SET{where,   popularite > 0[(#GET{ids_pop}|count|oui) AND [(#GET{id_table_objet})] NOT IN \([(#GET{ids_pop}|join{','})]\)][(#GET{champ_statut}|oui) AND #GET{req_statut}]})][
 		(#SET{groupby, #GET{id_table_objet}})][
 		(#SET{orderby, [(#GET{champ_date}) DESC]})][
 		(#SET{limit,   '0,10'})][
@@ -98,7 +102,7 @@
 		[(#SET{c,      #GET{objet}|classement_populaires})][
 		(#SET{select,  [(#GET{id_table_objet}),visites,popularite][,(#GET{champ_titre})]})][
 		(#SET{from,    #GET{table_objet_sql}})][
-		(#SET{where,   popularite > 0[(#GET{champ_statut}|oui) AND [(#GET{champ_statut})]=[(#GET{statut_publie}|sql_quote)]]})][
+		(#SET{where,   popularite > 0[(#GET{champ_statut}|oui) AND #GET{req_statut} ]})][
 		(#SET{groupby, #GET{id_table_objet}})][
 		(#SET{orderby, 'visites DESC'})][
 		(#SET{limit,   '0,30'})][
