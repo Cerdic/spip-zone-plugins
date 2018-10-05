@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Génère les appels js ou les css selon $type, correspondants à l'extension du fichier édité
+ * Gï¿½nï¿½re les appels js ou les css selon $type, correspondants ï¿½ l'extension du fichier ï¿½ditï¿½
  *
  * @param string $extension
  * @return array
@@ -25,6 +25,8 @@ function skeleditor_inline_inc($extension){
 			// autoMatchParens: true
 			break;
 		case 'css':
+		case 'scss':
+		case 'less':
 			$mode = array("css");
 			break;
 		case 'xml':
@@ -51,18 +53,39 @@ function skeleditor_inline_inc($extension){
 		*/
 		case 'php':
 		case 'html':
+			// $mode = array('htmlmixed','xml');
+			// break;
 		case 'htm':
 		default:
-			$mode = array("xml", "css", "javascript", "clike","php");
+			$mode = array("xml","htmlmixed", "css", "javascript", "clike","php");
 			break;
 	}
-
+	
 	$dir = _DIR_PLUGIN_SKELEDITOR;
 	$css .= "<link rel='stylesheet' href='".$dir."codemirror/lib/codemirror.css' type='text/css' />\n"
-	  . "<link rel='stylesheet' href='".$dir."codemirror/theme/default.css' type='text/css' />\n"
-	  . "<link rel='stylesheet' href='".$dir."css/skeleditor.css' type='text/css' />\n";
+	  // . "<link rel='stylesheet' href='".$dir."codemirror/theme/default.css' type='text/css' />\n"
+		. "<link rel='stylesheet' href='".$dir."codemirror/theme/solarized.css' type='text/css' />\n"
+		. "<link rel='stylesheet' href='".$dir."codemirror/addon/display/fullscreen.css' type='text/css' />\n"
+		. "<link rel='stylesheet' href='".$dir."codemirror/addon/fold/foldgutter.css' type='text/css' />\n"
+		. "<link rel='stylesheet' href='".$dir."css/skeleditor.css' type='text/css' />\n";
 
 	$js .= "<script src='".$dir."codemirror/lib/codemirror.js' type='text/javascript'></script>\n";
+	$js .= "<script src='".$dir."javascript/emmet.js' type='text/javascript'></script>\n";
+	$js .= "<script src='".$dir."codemirror/addon/display/fullscreen.js' type='text/javascript'></script>\n";
+	$js .= "<script src='".$dir."codemirror/addon/edit/matchbrackets.js' type='text/javascript'></script>\n";
+	$js .= "<script src='".$dir."codemirror/addon/edit/closebrackets.js' type='text/javascript'></script>\n";
+
+	$js .= "<script src='".$dir."codemirror/addon/selection/active-line.js' type='text/javascript'></script>\n";
+
+	$js .= "<script src='".$dir."codemirror/addon/fold/foldcode.js' type='text/javascript'></script>\n";
+	$js .= "<script src='".$dir."codemirror/addon/fold/foldgutter.js' type='text/javascript'></script>\n";
+	$js .= "<script src='".$dir."codemirror/addon/fold/brace-fold.js' type='text/javascript'></script>\n";
+	$js .= "<script src='".$dir."codemirror/addon/fold/xml-fold.js' type='text/javascript'></script>\n";
+	$js .= "<script src='".$dir."codemirror/addon/fold/indent-fold.js' type='text/javascript'></script>\n";
+	$js .= "<script src='".$dir."codemirror/addon/fold/comment-fold.js' type='text/javascript'></script>\n";
+
+	$js .= "<script src='".$dir."codemirror/addon/edit/matchtags.js' type='text/javascript'></script>\n";
+	$js .= "<script src='".$dir."codemirror/addon/edit/closetag.js' type='text/javascript'></script>\n";
 
 	foreach($mode as $m) {
 		$test = $dir."codemirror/mode/$m/$m";
@@ -76,7 +99,7 @@ function skeleditor_inline_inc($extension){
 }
 
 /**
- * Détermine le mime_type pour le mode de codemirror à afficher, selon l'extension du nom du fichier edité
+ * Dï¿½termine le mime_type pour le mode de codemirror ï¿½ afficher, selon l'extension du nom du fichier editï¿½
  *
  * @param string $extension
  * @return string
@@ -89,7 +112,8 @@ function skeleditor_codemirror_determine_mode($extension) {
 		'html' => 'text/html',
 		'php' => 'application/x-httpd-php',
 		'css' => 'text/css',
-		'js' => 'javascript', //codemirror2 ne doit pas avoir de mode définit pour les js
+		'scss' => 'text/x-scss',
+		'js' => 'javascript', //codemirror2 ne doit pas avoir de mode dï¿½finit pour les js
 		'json' => 'application/json',
 		'xml' => 'application/xml',
 	);
@@ -100,7 +124,7 @@ function skeleditor_codemirror_determine_mode($extension) {
 }
 
 /**
- * Génére le script d'appel de codemirror
+ * Gï¿½nï¿½re le script d'appel de codemirror
  *
  * @param string $filename
  * @param bool $editable

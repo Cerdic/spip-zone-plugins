@@ -1,25 +1,60 @@
 var cm_options = {
 	lineNumbers: true,
+	autoCloseBrackets: true,
+	autoCloseTags: true,
 	matchBrackets: true,
-	indentUnit: 6,
-	indentWithTabs: true,
-	enterMode: "keep",
-	tabMode: "shift"
+	styleActiveLine: true,
+	matchTags: {
+		bothTags: true
+	},
+	lineWrapping: false,
+	foldGutter: true,
+	gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+	theme: "default solarized dark",
+	extraKeys: {
+		"Ctrl-J": "toMatchingTag",
+		"Ctrl-Q": function(cm){
+			 cm.foldCode(cm.getCursor());
+		},
+		"F11": function(cm) {
+			cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+		},
+		"Esc": function(cm) {
+			if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+		}
+	}
 };
+
 if (cm_mode.length)
 	cm_options.mode = cm_mode;
 
 var editor;
 var lastPos = null, lastQuery = null, marked = [];
 
+
+
 function editor_init(){
+
+
 	editor = CodeMirror.fromTextArea(document.getElementById('code'), cm_options);
+	var snip = emmetCodeMirror(editor).emmet.loadSnippets({
+		'html':{
+			'snippets':{
+				'plouf': 'Super ton snippet'
+			}
+		}
+	});
+	var res = emmetCodeMirror(editor);
+	console.log(snip);
+	// emmetCodeMirror(editor);
 }
 
 function unmark() {
   for (var i = 0; i < marked.length; ++i) marked[i]();
   marked.length = 0;
 }
+
+
 
 function search() {
   unmark();
