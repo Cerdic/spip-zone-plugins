@@ -111,7 +111,7 @@ function skeleditor_codemirror_boot(){
 	}
 
 	// Surcharger si besoin
-	$css 	.= "<link rel='stylesheet' href='".$dir."css/skeleditor.css' type='text/css' />\n";
+	$css 	.= "<link rel='stylesheet' href='".find_in_path('css/skeleditor.css')."' type='text/css' />\n";
 
 	return array($css,$js);
 }
