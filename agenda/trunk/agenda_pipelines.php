@@ -48,60 +48,35 @@ function agenda_formulaire_fond($flux) {
  * @return array
  */
 function agenda_affiche_milieu($flux) {
-	// 
-	if (!defined('_AGENDA_CHOIX_RUBRIQUE_OUVERT'))
-		define('_AGENDA_CHOIX_RUBRIQUE_OUVERT',true);
+
 	$e = trouver_objet_exec($flux['args']['exec']);
 	$out = '';
 	$rubrique_agenda_presente = NULL;
 	if ($e['type']=='rubrique'
-		and autoriser('configurer')
 		and $e['edition']==false
 		and $id_rubrique = intval($flux['args']['id_rubrique'])
-		and autoriser('modifier', 'rubrique', $id_rubrique)
-		and (($rubrique_agenda_presente = sql_countsel('spip_rubriques', 'agenda=1')) or (_AGENDA_CHOIX_RUBRIQUE_OUVERT))) {
-		$activer = true;
-		$res = '';
+		and $rubrique_agenda_presente = sql_countsel('spip_rubriques', 'agenda=1')) {
+
 		$actif = sql_getfetsel('agenda', 'spip_rubriques', 'id_rubrique='.intval($id_rubrique));
 		$statut = '-32';
 		$alt = '';
 		$voir = '';
-		if (!$rubrique_agenda_presente) {
-			$res .= "<span class='small'>" . _T('agenda:aucune_rubrique_mode_agenda') . '</span><br />';
-		} else {
-			include_spip('inc/rubriques');
-			if (sql_countsel('spip_rubriques', sql_in('id_rubrique', calcul_hierarchie_in($id_rubrique)).' AND agenda=1 AND id_rubrique<>'.intval($id_rubrique))) {
-				$alt = _T('agenda:rubrique_dans_une_rubrique_mode_agenda');
-				$activer = false;
-				$statut = '-ok-32';
-				$voir = _T('agenda:voir_evenements_rubrique');
-			} elseif (!$actif) {
-				$alt = _T('agenda:rubrique_sans_gestion_evenement').'<br />';
-				$statut = '-non-32';
-			}
-			if ($actif) {
-				$alt = _T('agenda:rubrique_mode_agenda').'<br />';
-				$statut = '-ok-32';
-				$voir = _T('agenda:voir_evenements_rubrique');
-			}
+		include_spip('inc/rubriques');
+		if ($actif or sql_countsel('spip_rubriques', sql_in('id_rubrique', calcul_hierarchie_in($id_rubrique)).' AND agenda=1 AND id_rubrique<>'.intval($id_rubrique))) {
+			$alt = ($actif ? _T('agenda:rubrique_mode_agenda') : _T('agenda:rubrique_dans_une_rubrique_mode_agenda'));
+			$statut = '-ok-32';
+			$voir = _T('agenda:voir_evenements_rubrique');
 		}
 
-		if (!$actif) {
-			if ($activer) {
-				$res .= bouton_action(_T('agenda:rubrique_activer_agenda'), generer_action_auteur('activer_agenda_rubrique', $id_rubrique, self()), 'ajax');
-			}
-		} else {
-			$res .= bouton_action(_T('agenda:rubrique_desactiver_agenda'), generer_action_auteur('activer_agenda_rubrique', "-$id_rubrique", self()), 'ajax');
-		}
 		if ($voir) {
-			$res .= " | <a href='".generer_url_ecrire('evenements', "id_rubrique=$id_rubrique")."'>$voir</a>";
-		}
-		if ($res) {
-			$out .= boite_ouvrir(_T('agenda:agenda').http_img_pack("agenda$statut.png", $alt, "class='statut'", $alt), 'simple agenda-statut')
-				. $res
+			$res = _T('agenda:agenda')
+				. " <small>| <a href='".generer_url_ecrire('evenements', "id_rubrique=$id_rubrique")."'>$voir</a></small>"
+				. http_img_pack("agenda$statut.png", $alt, "class='statut'", $alt);
+			$out .= boite_ouvrir($res, 'simple agenda-statut')
 				. boite_fermer();
 		}
-	} elseif ($e['type']=='article'
+	}
+	elseif ($e['type']=='article'
 		and $e['edition']==false) {
 		$id_article = $flux['args']['id_article'];
 		$out .= recuperer_fond('prive/objets/contenu/article-evenements', $flux['args']);
