@@ -1,7 +1,7 @@
 <?php
 
 /**
- * G�n�re les appels js ou les css selon $type, correspondants � l'extension du fichier �dit�
+ * Génère les appels js ou les css selon $type, correspondants à l'extension du fichier édité
  *
  * @param string $extension
  * @return array
@@ -10,6 +10,7 @@ function skeleditor_inline_inc($extension){
 	if (!$extension)
 		return array("","");
 
+	$dir = _DIR_PLUGIN_SKELEDITOR;
 	$css = $js = "";
 	switch($extension){
 		case 'sh':
@@ -60,32 +61,6 @@ function skeleditor_inline_inc($extension){
 			$mode = array("xml","htmlmixed", "css", "javascript", "clike","php");
 			break;
 	}
-	
-	$dir = _DIR_PLUGIN_SKELEDITOR;
-	$css .= "<link rel='stylesheet' href='".$dir."codemirror/lib/codemirror.css' type='text/css' />\n"
-	  // . "<link rel='stylesheet' href='".$dir."codemirror/theme/default.css' type='text/css' />\n"
-		. "<link rel='stylesheet' href='".$dir."codemirror/theme/solarized.css' type='text/css' />\n"
-		. "<link rel='stylesheet' href='".$dir."codemirror/addon/display/fullscreen.css' type='text/css' />\n"
-		. "<link rel='stylesheet' href='".$dir."codemirror/addon/fold/foldgutter.css' type='text/css' />\n"
-		. "<link rel='stylesheet' href='".$dir."css/skeleditor.css' type='text/css' />\n";
-
-	$js .= "<script src='".$dir."codemirror/lib/codemirror.js' type='text/javascript'></script>\n";
-	$js .= "<script src='".$dir."javascript/emmet.js' type='text/javascript'></script>\n";
-	$js .= "<script src='".$dir."codemirror/addon/display/fullscreen.js' type='text/javascript'></script>\n";
-	$js .= "<script src='".$dir."codemirror/addon/edit/matchbrackets.js' type='text/javascript'></script>\n";
-	$js .= "<script src='".$dir."codemirror/addon/edit/closebrackets.js' type='text/javascript'></script>\n";
-
-	$js .= "<script src='".$dir."codemirror/addon/selection/active-line.js' type='text/javascript'></script>\n";
-
-	$js .= "<script src='".$dir."codemirror/addon/fold/foldcode.js' type='text/javascript'></script>\n";
-	$js .= "<script src='".$dir."codemirror/addon/fold/foldgutter.js' type='text/javascript'></script>\n";
-	$js .= "<script src='".$dir."codemirror/addon/fold/brace-fold.js' type='text/javascript'></script>\n";
-	$js .= "<script src='".$dir."codemirror/addon/fold/xml-fold.js' type='text/javascript'></script>\n";
-	$js .= "<script src='".$dir."codemirror/addon/fold/indent-fold.js' type='text/javascript'></script>\n";
-	$js .= "<script src='".$dir."codemirror/addon/fold/comment-fold.js' type='text/javascript'></script>\n";
-
-	$js .= "<script src='".$dir."codemirror/addon/edit/matchtags.js' type='text/javascript'></script>\n";
-	$js .= "<script src='".$dir."codemirror/addon/edit/closetag.js' type='text/javascript'></script>\n";
 
 	foreach($mode as $m) {
 		$test = $dir."codemirror/mode/$m/$m";
@@ -99,7 +74,49 @@ function skeleditor_inline_inc($extension){
 }
 
 /**
- * D�termine le mime_type pour le mode de codemirror � afficher, selon l'extension du nom du fichier edit�
+ * Génère les appels js ou les css necessaire au démarrage de codemirror
+ *
+ *
+ * @return array
+ */
+function skeleditor_codemirror_boot(){
+	$css = $js = "";
+	$dir = _DIR_PLUGIN_SKELEDITOR;
+
+	lire_fichier(find_in_path('javascript/codemirror.addons.json'),$json);
+	$assets = json_decode($json, true);
+
+	// Charger la lib
+	$css .= "<link rel='stylesheet' href='".$dir."codemirror/lib/codemirror.css' type='text/css' />\n";
+	$js .= "<script src='".$dir."codemirror/lib/codemirror.js' type='text/javascript'></script>\n";
+
+	// Charger le/les themes
+	foreach($assets['themes'] as $theme) {
+		if(file_exists($f= $dir."codemirror/theme/".$theme.".css"))
+    	$css .= "<link rel='stylesheet' href='".$f."' type='text/css' />\n";
+	}
+
+	// Charger les addons
+	foreach($assets['extensions'] as $ext){
+		if(file_exists($e= find_in_path($ext.".js")))
+			$js .= "<script src='".$e."' type='text/javascript'></script>\n";
+	}
+
+	// Charger les addons
+	foreach($assets['addons'] as $addon){
+		if(file_exists($s= $dir."codemirror/addon/".$addon.".css"))
+			$css .= "<link rel='stylesheet' href='".$s."' type='text/css' />\n";
+		if(file_exists($j= $dir."codemirror/addon/".$addon.".js"))
+			$js .= "<script src='".$j."' type='text/javascript'></script>\n";
+	}
+
+	// Surcharger si besoin
+	$css 	.= "<link rel='stylesheet' href='".$dir."css/skeleditor.css' type='text/css' />\n";
+
+	return array($css,$js);
+}
+/**
+ * Détermine le mime_type pour le mode de codemirror à afficher, selon l'extension du nom du fichier edité
  *
  * @param string $extension
  * @return string
@@ -124,7 +141,7 @@ function skeleditor_codemirror_determine_mode($extension) {
 }
 
 /**
- * G�n�re le script d'appel de codemirror
+ * Génère le script d'appel de codemirror
  *
  * @param string $filename
  * @param bool $editable
@@ -135,14 +152,17 @@ function skeleditor_codemirror($filename,$editable=true){
 		return "";
 
 	$infos = pathinfo($filename);
-	list($css,$js) = skeleditor_inline_inc($infos['extension']);
+	list($corecss,$corejs) = skeleditor_codemirror_boot();
 
-	// readOnly: jQuery("#code").attr("readonly"),
+	list($modecss,$modejs) = skeleditor_inline_inc($infos['extension']);
+
 	$mode = skeleditor_codemirror_determine_mode($infos['extension']);
 	$script =
     '<script type="text/javascript">var cm_mode="'.$mode.'";</script>'
-		. $css
-		. $js
+		. $corecss
+		. $modecss
+		. $corejs
+		. $modejs
 		. "<script src='".find_in_path("javascript/codemirror_init.js")."' type='text/javascript'></script>\n";
 
 	// compresser le tout si possible !

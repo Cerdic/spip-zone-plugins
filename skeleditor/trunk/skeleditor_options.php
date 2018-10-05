@@ -6,33 +6,33 @@
  * Licence GPL-v3
  *
  */
- 
+
 
 
 /**
  * Tester avec _request si on est dans l'edition de skeleditor et si oui, retourne l'extension du nom du fichier
  *
  * @return string
- */ 
+ */
 function test_skeleditor_edition() {
 $exec = _request('exec');
 $filename = _request('f');
 	if ($exec == 'skeleditor'
 	AND $filename
 	AND $infos = pathinfo($filename)
-	AND $extension = $infos['extension']) 
+	AND $extension = $infos['extension'])
 	return $extension;
 	else
 	return false;
-	
-} 
+
+}
 
 /**
- * Produit les css dans le header_prive si nécessaire
+ * Produit les css dans le header_prive si nï¿½cessaire
  *
  * @param string $flux
  * @return string
- */ 
+ */
 function skeleditor_insert_head_css($flux){
 	$extension = test_skeleditor_edition();
 		if($extension) {
@@ -41,18 +41,18 @@ function skeleditor_insert_head_css($flux){
 			$done = true;
 			$type = "css";
 			$css = skeleditor_dir($extension, $type);
-			$flux .= $css; 
+			$flux .= $css;
 		}
 	}
 	return $flux;
 }
- 
+
 /**
- * Produit les js dans le header_prive si nécessaire
+ * Produit les js dans le header_prive si nï¿½cessaire
  *
  * @param string $flux
  * @return string
- */ 
+ */
 function skeleditor_insert_head($flux){
 /*
 	$extension = test_skeleditor_edition();
@@ -140,7 +140,7 @@ function skeleditor_affichage_final($texte){
 			."});</script><style>.spip-admin-boutons {display:block;float:left;margin-right:10px; max-height:300px; overflow:auto;} .spip-admin-boutons a{display:block;opacity:0.7;} .spip-admin-boutons:hover,.spip-admin-boutons a:hover {opacity:1.0;}</style>
 			</body>";
 			$texte = preg_replace(",</body>,",$inserer,$texte);
-			
+
 			$css = skeleditor_extraire_css($texte);
 			$lienplus = array();
 			foreach($css as $src){
