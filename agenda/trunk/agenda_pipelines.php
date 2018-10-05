@@ -48,7 +48,7 @@ function agenda_affiche_milieu($flux) {
 		and $e['edition']==false
 		and $id_rubrique = intval($flux['args']['id_rubrique'])
 		and autoriser('modifier', 'rubrique', $id_rubrique)
-		and ((_AGENDA_CHOIX_RUBRIQUE_OUVERT) or ($rubrique_agenda_presente = sql_countsel('spip_rubriques', 'agenda=1')))) {
+		and (($rubrique_agenda_presente = sql_countsel('spip_rubriques', 'agenda=1')) or (_AGENDA_CHOIX_RUBRIQUE_OUVERT))) {
 		$activer = true;
 		$res = '';
 		$actif = sql_getfetsel('agenda', 'spip_rubriques', 'id_rubrique='.intval($id_rubrique));
