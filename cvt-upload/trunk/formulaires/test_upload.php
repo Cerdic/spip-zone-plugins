@@ -14,7 +14,7 @@ function formulaires_test_upload_charger(){
 		'image' => '',
 		'plusieurs_images' => array(),
 	);
-	
+
 	return $contexte;
 }
 
@@ -24,7 +24,7 @@ function formulaires_test_upload_fichiers(){
 
 function formulaires_test_upload_verifier(){
 	$erreurs = array();
-	
+
 	if (_request('tromperie'))
 		$erreurs['tromperie'] = 'Il ne fallait rien remplir.';
 
@@ -67,11 +67,11 @@ function formulaires_test_upload_verifier(){
 
 function formulaires_test_upload_traiter(){
 	$retours = array('message_ok' => 'Il ne se passe rien.');
-	
+
 	$fichiers = _request('_fichiers');
 	var_dump($_FILES);
 	var_dump($fichiers);
-	
+
 	return $retours;
 }
 
