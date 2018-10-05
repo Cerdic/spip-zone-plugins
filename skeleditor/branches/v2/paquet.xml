@@ -1,0 +1,22 @@
+<paquet
+	prefix="skeleditor"
+	categorie="outil"
+	version="2.7.11"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="images/skeleditor-32.png"
+	documentation="https://contrib.spip.net/SkelEditor-2-0"
+>
+
+	<nom>SkelEditor</nom>
+
+	<auteur lien="http://www.erational.org">erational</auteur>
+	<auteur lien="http://www.yterium.net">C&#233;dric Morin</auteur>
+	<licence>GNU/GPL v3</licence>
+
+
+	<pipeline nom="autoriser" inclure="inc/skeleditor_autoriser.php" />
+	<pipeline nom="affichage_final" inclure="skeleditor_options.php" />
+
+	<menu nom="skeleditor" titre="skeleditor:editer_skel" parent="menu_squelette" icone="images/skeleditor-16.png" />
+</paquet>

@@ -1,0 +1,54 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.formulaire_squelette .actions {padding:2px;overflow:hidden;position: absolute;right: 0;top:0;margin-top: -30px;}
+.formulaire_squelette .actions .add {float:#GET{left};}
+.formulaire_squelette .actions .context {float:#GET{right};}
+.formulaire_squelette .infos {float:#GET{right};}
+.formulaire_squelette .rename {display:block;padding:2px 4px;}
+.formulaire_squelette .rename span {font-weight:bold;}
+.formulaire_squelette .rename a {display:block;float:#GET{right};}
+.formulaire_squelette textarea {padding:5px;}
+.formulaire_squelette textarea.readonly {background:#eee;color:#666;}
+
+.skeleditor #arbo .dir {
+	line-height: 12px;
+	border:1px solid #ededed;
+	padding:4px;
+	margin:4px 0;
+}
+.skeleditor #arbo .dir.closed { display:none;}
+
+.skeleditor #arbo .fichier {display:block;padding:2px 1px;}
+.skeleditor #arbo .on {background-color: #ff6;}
+.skeleditor #arbo .readonly {opacity: .4;}
+
+.skeleditor #navigation a.retour {display:block;padding-bottom:3px;}
+.skeleditor #navigation a.retour span {font-size:.81em;}
+
+.skeleditor #navigation #arbo .titrem {
+	text-align: #GET{left};
+	margin-bottom: 0;
+	padding-top: .2em;
+	padding-bottom: .2em;
+}
+.skeleditor #navigation #arbo .titrem img {float:#GET{left};margin-#GET{right}:4px;}

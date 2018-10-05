@@ -1,0 +1,31 @@
+<div class='formulaire_spip formulaire_editer formulaire_squelette formulaire_#FORM'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<div class="actions">
+		<div class="add">
+		[(#AUTORISER{creerdans,squelette,#ENV{path_base}}|oui)
+			[(#BOUTON_ACTION{#CHEMIN{images/se-file-add-16.png}|balise_img{'new'}|concat{' ',<:skeleditor:action_nouveau:>},#URL_ECRIRE{skeleditor}})]
+		]
+		[(#AUTORISER{upload,squelette,#ENV{path_base}}|oui)
+			[(#BOUTON_ACTION{#CHEMIN{images/se-upload-16.png}|balise_img{'upload'}|concat{' ',<:skeleditor:action_upload:>},#URL_ECRIRE{skeleditor,upload=oui}})]
+		]
+		</div>
+	</div>
+	[ (#ENV{editable}|oui)
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <ul>
+	    <li class="editer_file[ (#ENV**{erreurs}|table_valeur{file}|oui)erreur]">
+				<label for="file"><:skeleditor:label_file:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{file})</span>]
+				<input type="file" name='file' class='file' id='file' value="#ENV{file}" />
+	    </li>
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_ajouter:>' /></p>
+	</div></form>
+	]
+</div>
