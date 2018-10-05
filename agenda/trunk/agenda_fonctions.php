@@ -206,10 +206,45 @@ function affdate_periode($date, $nb_mois, $affichage_debut = 'date_jour') {
 	return ($fixe?_T('agenda:label_periode_saison').' ':'').affdate_mois_annee($date).' - '.affdate_mois_annee(agenda_moisdecal($date, $nb_mois-1));
 }
 
+
 /**
- * Raccourcis [->evenement12] et [->evt12]
+ * Retrouver le id_rubrique parent agenda d'une rubrique
+ * (elle-meme inclue)
+ *
+ * @param $id_rubrique
+ * @return int
  */
-/*
-function generer_url_evenement($id, $args='', $ancre='') {
-	return array('evenement', $id);
-}*/
+function agenda_rubrique_actif_explicite($id_rubrique) {
+
+	if ($id_rubrique > 0) {
+
+		// est-elle de type agenda elle-meme ?
+		if (sql_countsel('spip_rubriques', 'agenda=1 and id_rubrique=' .intval($id_rubrique))) {
+			return $id_rubrique;
+		}
+		// Sinon on remonte la hierarchie
+		if (!function_exists('calcul_hierarchie_in')) {
+			include_spip('inc/rubriques');
+		}
+		$in = calcul_hierarchie_in($id_rubrique);
+		$parents_agenda = sql_allfetsel('id_rubrique','spip_rubriques', sql_in('id_rubrique', $in).' AND agenda=1');
+		if ($parents_agenda) {
+			$parents_agenda = array_map('reset', $parents_agenda);
+
+			$in = explode(',', $in);
+			$parents_agenda = array_intersect($in, $parents_agenda);
+			if ($parents_agenda) {
+				return reset($parents_agenda);
+			}
+		}
+
+	}
+
+	// Rubrique négative utilisee dans le plugin Page unique
+	if ($id_rubrique == -1) {
+		return $id_rubrique;
+	}
+
+	return false;
+
+}

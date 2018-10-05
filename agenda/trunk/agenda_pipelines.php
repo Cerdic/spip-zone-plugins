@@ -30,6 +30,17 @@ function agenda_insert_head_css($flux) {
 	return $flux;
 }
 
+function agenda_formulaire_fond($flux) {
+	if ($flux['args']['form'] == 'editer_rubrique') {
+		$contexte = $flux['args']['contexte'];
+		$form = recuperer_fond('prive/objets/editer/rubrique-agenda', $contexte);
+		if ($p = strpos($flux['data'], '<!--extra-->')) {
+			$flux['data'] = substr_replace($flux['data'], $form, $p, 0);
+		}
+	}
+	return $flux;
+}
+
 /**
  * Inserer les infos d'agenda sur les articles et rubriques
  *

@@ -148,6 +148,8 @@ function agenda_declarer_tables_objets_sql($tables) {
 	$tables['spip_articles']['tables_jointures'][] = 'evenements';
 	$tables['spip_auteurs']['tables_jointures'][] = 'evenements_participants';
 	$tables['spip_rubriques']['field']['agenda'] = 'tinyint(1) DEFAULT 0 NOT NULL';
+	$tables['spip_rubriques']['champs_editables'][] = 'agenda';
+	$tables['spip_rubriques']['champs_versionnes'][] = 'agenda';
 
 	return $tables;
 }
