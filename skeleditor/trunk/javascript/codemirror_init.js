@@ -34,19 +34,8 @@ var lastPos = null, lastQuery = null, marked = [];
 
 
 function editor_init(){
-
-
 	editor = CodeMirror.fromTextArea(document.getElementById('code'), cm_options);
-	var snip = emmetCodeMirror(editor).emmet.loadSnippets({
-		'html':{
-			'snippets':{
-				'plouf': 'Super ton snippet'
-			}
-		}
-	});
 	var res = emmetCodeMirror(editor);
-	console.log(snip);
-	// emmetCodeMirror(editor);
 }
 
 function unmark() {
