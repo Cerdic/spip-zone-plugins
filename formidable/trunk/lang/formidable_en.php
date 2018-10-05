@@ -78,7 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_redirige_url' => 'Forwarding address after validation',
 	'editer_redirige_url_explication' => 'Leave blank if you want to stay on the same page',
 	'editer_titre' => 'Title',
-	'editer_unicite_explication' => 'Save the form only if a field is unique',
+	'editer_unicite_explication' => 'Save the form only if a field is unique', # MODIF
 	'editer_unicite_label' => 'Verify that this field is unique',
 	'erreur_autorisation' => 'You do not have the right to edit the website forms',
 	'erreur_base' => 'An error occurred as the data was being saved.',
@@ -241,7 +241,7 @@ This is a "Recipients" or "Hidden Field" , including the numeric identifier of a
 	'traiter_email_option_destinataires_plus_explication' => 'A list of addresses separated by commas.',
 	'traiter_email_option_destinataires_plus_label' => 'Extra recipients',
 	'traiter_email_option_destinataires_selon_champ_explication' => 'Allows you to specify one or more recipients based on the value of a field.
-Indicate the field, its value, and the concerned email (s) (separated by a comma) according to this format, such as: "@selection_1@/choix1 : mail@example.tld". You can specify multiple tests, returning to line between each test.',
+Indicate the field, its value, and the concerned email (s) (separated by a comma) according to this format, such as: "@selection_1@/choix1 : mail@example.tld". You can specify multiple tests, returning to line between each test.', # MODIF
 	'traiter_email_option_destinataires_selon_champ_label' => 'Recipients according to a field',
 	'traiter_email_option_envoyeur_courriel_explication' => 'Select the field that will contain the email address of the sender.',
 	'traiter_email_option_envoyeur_courriel_label' => 'Sender Email',
