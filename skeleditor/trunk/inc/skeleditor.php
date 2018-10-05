@@ -8,7 +8,7 @@
  */
 
 define('_SE_EXTENSIONS_IMG',"jpg|png|gif|ico|bmp");
-define('_SE_EXTENSIONS',_SE_EXTENSIONS_IMG."|htm|html|xml|yaml|svg|php|php3|php4|py|sh|sql|css|less|rdf|txt|nfo|log|js|as|csv");
+define('_SE_EXTENSIONS',_SE_EXTENSIONS_IMG."|htm|html|xml|yaml|json|svg|php|py|sh|sql|css|scss|less|rdf|txt|nfo|log|js|as|csv");
 
 /**
  * Determiner le dossier de travail
@@ -42,7 +42,7 @@ function skeleditor_path_editable(){
 	}
 
 	// si pas de dossier skel mais qu'on peut creer squelettes/ c'est ok
-	
+
 	// Traiter le cas des sites mutualises
 	$dir_squelettes_site = (defined('_DIR_SITE')) ? _DIR_SITE : _DIR_RACINE;
 
