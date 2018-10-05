@@ -113,11 +113,14 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer = tr
 
 	// Si on est sur un upload de type fichier unique, on reformate le tableau pour faire comme si on était en fichiers multiples
 	if (!is_array($fichier['name'])) {
+		$fichier_unique = true;
 		$fichier_nouveau = array();
 		foreach ($fichier as $champ => $valeur) {
 			$fichier_nouveau[$champ] = array($valeur);
 		}
 		$fichier = $fichier_nouveau;
+	} else {
+		$fichier_unique = false;
 	}
 
 	foreach ($fichier['name'] as $cle => $nom) {
@@ -156,8 +159,9 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer = tr
 			}
 		}
 	}
-	if (!is_array($fichier['name'])) {
-		$infos = reset($infos);
+
+	if ($fichier_unique == true) {
+		$infos = $infos[0];
 	}
 
 	return $infos;
