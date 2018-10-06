@@ -136,19 +136,17 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer = tr
 			and $chemin_aleatoire = tempnam($repertoire, $form.'_')
 		) {
 			$extension = strtolower(pathinfo($fichier['name'][$cle], PATHINFO_EXTENSION));
-			$chemin_aleatoire_brut = $chemin_aleatoire;
 			if (in_array($extension, array('png','jpg','gif'))) {
 				$chemin_aleatoire .= ".$extension";
 			}
 			// Déplacement du fichier vers le dossier de réception temporaire + récupération d'infos
-			if (deplacer_fichier_upload($fichier['tmp_name'][$cle], $chemin_aleatoire_brut, $deplacer)) {
-				$infos[$cle]['tmp_name'] = $chemin_aleatoire_brut;
+			if (deplacer_fichier_upload($fichier['tmp_name'][$cle], $chemin_aleatoire, $deplacer)) {
+				$infos[$cle]['tmp_name'] = $chemin_aleatoire;
 				$infos[$cle]['name'] = $nom;
 				$infos[$cle]['extension'] = $extension;
 				// si image on fait une copie avec l'extension pour pouvoir avoir l'image réduite en vignette
 				if (in_array($extension, array('png','jpg','gif'))) {
 					$infos[$cle]['vignette'] = $chemin_aleatoire;
-					link($chemin_aleatoire_brut,$chemin_aleatoire);
 				} else {
 					$infos[$cle]['vignette'] = $vignette_par_defaut($infos[$cle]['extension'], false, true);
 				}
