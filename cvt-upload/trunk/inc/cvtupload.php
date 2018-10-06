@@ -148,6 +148,7 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer = tr
 				// si image on fait une copie avec l'extension pour pouvoir avoir l'image réduite en vignette
 				if (in_array($extension, array('png','jpg','gif'))) {
 					$infos[$cle]['vignette'] = $chemin_aleatoire;
+					link($chemin_aleatoire_brut,$chemin_aleatoire);
 				} else {
 					$infos[$cle]['vignette'] = $vignette_par_defaut($infos[$cle]['extension'], false, true);
 				}
