@@ -12,7 +12,7 @@ if (!function_exists('plugin_est_actif')) {
 	}
 }
 
-function cachelab_applique ($action, $cle, $arg=null, $options='') {
+function cachelab_applique ($action, $cle, $data=null, $options='') {
 global $Memoization;
 static $len_prefix;
 	if (!$len_prefix)
@@ -22,30 +22,21 @@ static $len_prefix;
 	switch ($action) {
 	case 'del' :
 		$del = $Memoization->del($joliecle);
-		if (!$del)
+		if (!$del) {
 			spip_log ("Échec 'del' $joliecle", 'cachelab');
-		break;
-
-	case 'mark' :
-		if ($arg === null)
-			$data = $Memoization->get($joliecle);
-		else
-			$data = $arg;
-		if (is_array($data)) {
-			$data['cachelab_mark'] = (isset($options['mark']) ? $options['mark'] : 1);
-			$data = $Memoization->set($joliecle, $data);
-		}
-		else
-			spip_log("clé=$joliecle : pour $action avec arg=".print_r($arg,1)." et opt=".print_r($options,1).", data n'est pas un tableau : ".print_r($data, 1), 'cachelab');
+			return false;
+		};
 		break;
 
 	case 'echo_cache' :
-		$data = $Memoization->get($joliecle);
+		if (!$data)
+			$data = $Memoization->get($joliecle);
 		echo "«<xmp>".substr(print_r($data,1), 0,2000)."</xmp>»";
 		break;
 
 	case 'echo_html' :
-		$data = $Memoization->get($joliecle);
+		if (!$data)
+			$data = $Memoization->get($joliecle);
 		echo "<p>«<xmp>".print_r($data,1)."</xmp>»</p>";
 		break;
 
@@ -57,6 +48,7 @@ static $len_prefix;
 		// on pourrait appeler cachelab_applique_$action(...)
 		break;
 	}
+	return true;
 }
 
 // $chemin : liste de chaines à tester dans le chemin du squelette, séparées par |
@@ -87,18 +79,22 @@ global $Memoization;
 	}
 
 	// options
+	// explode+strpos par défaut pour les chemins
 	$methode_chemin = (isset ($options['methode_chemin']) ? $options['methode_chemin'] : 'strpos');
-	$do_clean = ($action != 'pass') and (!isset ($options['clean']) or $options['clean']);	// clean par défaut
-	$do_lists = ($action == 'list') or (isset ($options['list']) and $options['list']);		// pas de listes par défaut
-	$do_chrono = (isset ($options['chrono']) and $options['chrono']);						// pas de chrono par défaut
+	// clean par défaut
+	$do_clean = (isset ($options['clean']) ? $options['clean'] : (!defined('CACHELAB_CLEAN') or CACHELAB_CLEAN)); 
+	// pas de listes par défaut
+	$do_lists = ($action == 'list') or (isset ($options['list']) and $options['list']);
+	// pas de chrono par défaut sauf si CACHELAB_CHRONO
+	$do_chrono = (isset ($options['chrono']) ? $options['chrono'] : (defined('CACHELAB_CHRONO') and CACHELAB_CHRONO)); 
 	if ($do_chrono) {
 		include_spip ('lib/microtime.inc');
 		microtime_do ('begin');
 	}
-	
+
 	// retours
 	$stats=array();
-	$stats['nb_alien']=$stats['nb_site']=$stats['nb_clean']=$stats['nb_no_data']=$stats['nb_not_array']=$stats['nb_cible']=0;
+	$stats['nb_alien']=$stats['nb_candidats']=$stats['nb_clean']=$stats['nb_no_data']=$stats['nb_not_array']=$stats['nb_cible']=0;
 	$stats['l_no_data'] = $stats['l_not_array'] = $stats['l_cible'] = array();
 
 	// On y va
@@ -110,6 +106,7 @@ global $Memoization;
 		// on "continue=passe au suivant" dés qu'on sait que le cache n'est pas cible
 
 		$cle = $d['info'];
+		$data=null;
 
 		// on saute les caches d'autres origines
 		// (et les caches d'un précédent _CACHE_NAMESPACE pour ce même site)
@@ -126,7 +123,9 @@ global $Memoization;
 		// effacer ou au moins sauter les caches périmés
 		if ($meta_derniere_modif > $d['creation_time']) {
 			if ($do_clean) {
-				$Memoization->del(substr($cle,$len_prefix));
+				$del=$Memoization->del(substr($cle,$len_prefix));
+				if (!$del)
+					spip_log ("Echec du clean du cache périmé cle=$cle (création : {$d['creation_time']}, invalidation : $meta_derniere_modif)", "cachelab");
 				$stats['nb_clean']++;
 			};
 			continue;
@@ -152,7 +151,7 @@ global $Memoization;
 					break;
 				continue 2;
 			default :
-				die("Méthode pas prévue pour le filtrage par le chemin");
+				die("Méthode '$methode_chemin' pas prévue pour le filtrage par le chemin");
 			};
 		}
 
@@ -186,12 +185,14 @@ global $Memoization;
 		$stats['nb_cible']++;
 		if ($do_lists) 
 			$stats['l_cible'][] = $cle;
-		cachelab_applique ($action, $cle, null, $options);
+
+		cachelab_applique ($action, $cle, $data, $options);
 	}
+
 
 	if ($do_chrono) {
 		$stats['chrono'] = microtime_do ('end', 'ms');
-		spip_log ("cachelab_filtre ($action, $cle_objet, $id_objet, $chemin, $options) : {$stats['chrono']} ms", 'cachelab');
+		spip_log ("cachelab_filtre ($action) avec session=$session, objet $cle_objet=$id_objet, chemin=$chemin) : {$stats['nb_cible']} caches ciblés en {$stats['chrono']} ms", 'cachelab');
 	}
 
 	return $stats;
