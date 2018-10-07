@@ -140,6 +140,7 @@ global $Memoization;
 		}
 
 		if ($chemin) {
+			// mémo php : « continue resumes execution just before the closing curly bracket ( } ), and break resumes execution just after the closing curly bracket. »
 			switch ($methode_chemin) {
 			case 'strpos' :
 				foreach ($chemins as $unchemin)
