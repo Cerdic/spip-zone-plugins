@@ -144,17 +144,16 @@ global $Memoization;
 			case 'strpos' :
 				foreach ($chemins as $unchemin)
 					if ($unchemin and (strpos ($cle, $unchemin) !== false))
-						break;
-				continue 2;
+						break 2;	// trouvé : sort du foreach et du switch et poursuit le test des autres conditions
+				continue 2;	 // échec : passe à la $cle suivante
 			case 'regexp' :
 				if ($chemin and ($danslechemin = preg_match(",$chemin,i", $cle)))
-					break;
-				continue 2;
+					break;	// trouvé : poursuit le test des autres conditions
+				continue 2;	// échec : passe à la clé suivante
 			default :
 				die("Méthode '$methode_chemin' pas prévue pour le filtrage par le chemin");
 			};
 		}
-
 		// récupérer le contenu du cache
 		if (($cle_objet and $id_objet) or $morefunc) {
 			global $Memoization;
