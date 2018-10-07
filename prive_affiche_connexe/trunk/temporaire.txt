@@ -1,0 +1,23 @@
+libxml_use_internal_errors(true);
+$doc = new DOMDocument;
+$doc->loadHTML(
+  mb_convert_encoding($flux['data'], 'HTML-ENTITIES', 'UTF-8'),
+  LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD
+);
+$xpath = new DomXPath($doc);
+$nodeList = $xpath->query("//div[@class='affiche_connexe']");
+$node = $nodeList->item(0);
+
+$tmpDoc = new DOMDocument();
+$tmpDoc->loadHTML(
+  mb_convert_encoding($affiche_connexe, 'HTML-ENTITIES', 'UTF-8'),
+  LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD
+);
+foreach ($tmpDoc->childNodes as $n) {
+    $n = $doc->importNode($n, true);
+    $node->appendChild($n);
+}
+//$fragment = $doc->createDocumentFragment();
+//$fragment->appendXML($affiche_connexe);
+//$node->appendChild($fragment);
+$flux['data'] = $doc->saveHTML();
