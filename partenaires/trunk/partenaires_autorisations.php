@@ -5,10 +5,12 @@
  * Licence GNU/GPL
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // declaration vide pour ce pipeline.
-function partenaires_autoriser(){}
+function partenaires_autoriser() { }
 
 
 // -----------------
@@ -16,18 +18,18 @@ function partenaires_autoriser(){}
 
 
 // bouton de menu
-function autoriser_partenaires_menu_dist($faire, $type, $id, $qui, $opts){
+function autoriser_partenaires_menu_dist($faire, $type, $id, $qui, $opts) {
 	return true;
-} 
+}
 
 // bouton d'outils rapides
-function autoriser_partenairecreer_menu_dist($faire, $type, $id, $qui, $opts){
+function autoriser_partenairecreer_menu_dist($faire, $type, $id, $qui, $opts) {
 	return autoriser('creer', 'partenaire', '', $qui, $opts);
-} 
+}
 
 // creer
 function autoriser_partenaire_creer_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite')); 
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
 // voir les fiches completes
@@ -51,18 +53,18 @@ function autoriser_partenaire_supprimer_dist($faire, $type, $id, $qui, $opt) {
 
 
 // bouton de menu
-function autoriser_partenairestypes_menu_dist($faire, $type, $id, $qui, $opts){
+function autoriser_partenairestypes_menu_dist($faire, $type, $id, $qui, $opts) {
 	return true;
-} 
+}
 
 // bouton d'outils rapides
-function autoriser_partenairestypecreer_menu_dist($faire, $type, $id, $qui, $opts){
+function autoriser_partenairestypecreer_menu_dist($faire, $type, $id, $qui, $opts) {
 	return autoriser('creer', 'partenaires_type', '', $qui, $opts);
-} 
+}
 
 // creer
 function autoriser_partenairestype_creer_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite')); 
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
 // voir les fiches completes

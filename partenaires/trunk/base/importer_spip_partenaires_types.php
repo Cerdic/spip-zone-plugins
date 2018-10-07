@@ -10,7 +10,7 @@
  * include_spip('base/importer_spip_partenaires_types');
  * $maj['create'][] = array('importer_spip_partenaires_types');
  *
-**/
+ **/
 function importer_spip_partenaires_types() {
 
 	######## VERIFIEZ LE NOM DE LA TABLE D'INSERTION ###########
@@ -36,7 +36,7 @@ function importer_spip_partenaires_types() {
 			foreach ($v as $k => $valeur) {
 				$cle = $cles[$k];
 				if (isset($correspondances[$cle]) and $correspondances[$cle]) {
-					$i[ $correspondances[$cle] ] = $valeur;
+					$i[$correspondances[$cle]] = $valeur;
 				}
 			}
 			$inserts[] = $i;
@@ -62,6 +62,7 @@ function importer_spip_partenaires_types() {
 				echo "<br />- $nb_inseres ont &eacute;t&eacute; ins&eacute;r&eacute;s.";
 				$a_faire = $nb_a_inserer - $nb_inseres;
 				echo "<br />- $a_faire &agrave; faire.";
+
 				return;
 			}
 		}
@@ -71,7 +72,7 @@ function importer_spip_partenaires_types() {
 
 /**
  * Donnees de la table spip_partenaires_types
-**/
+ **/
 function donnees_spip_partenaires_types() {
 
 	$cles = array('id_type', 'titre', 'descriptif');
