@@ -18,9 +18,9 @@
     "fold/comment-fold",
     "edit/matchtags",
     "edit/closetag",
-    "search/search",
+    "dialog/dialog",
     "search/searchcursor",
-    "search/jump-to-line",
-    "dialog/dialog"
+    "search/search",
+    "search/jump-to-line"
   ]
 }

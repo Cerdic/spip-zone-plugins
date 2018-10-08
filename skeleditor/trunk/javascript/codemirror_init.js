@@ -12,6 +12,7 @@ var cm_options = {
 	gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
 	theme: "default solarized dark",
 	extraKeys: {
+		"Alt-F": "findPersistent",
 		"Ctrl-J": "toMatchingTag",
 		"Ctrl-Q": function(cm){
 			 cm.foldCode(cm.getCursor());
