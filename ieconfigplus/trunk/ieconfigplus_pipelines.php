@@ -1,8 +1,8 @@
 <?php
 /**
- * Utilisations de pipelines par Importeur/Exporteur de configuration Addons
+ * Utilisations de pipelines par Importeur/Exporteur de configuration PLUS
  *
- * @plugin     Importeur/Exporteur de configuration Addons
+ * @plugin     Importeur/Exporteur de configuration PLUS
  * @copyright  2018
  * @author     Arnaud B. (Mist. GraphX)
  * @licence    GNU/GPL
@@ -28,11 +28,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 function ieconfigplus_ieconfig_metas($table){
 
-
-	// Surcharge de l'export des metas pour MOTS
-	$table['mots_meta']['titre'] = _T('mots:info_mots_cles');
-	$table['mots_meta']['icone'] = 'mot-16.png';
-	$table['mots_meta']['metas_brutes'] = 'articles_mots,config_precise_groupes,mots_cles_forums';
+	// Plugins
 
 	// SEO
 	if(test_plugin_actif('seo')){
@@ -41,8 +37,8 @@ function ieconfigplus_ieconfig_metas($table){
 		$table['seo']['metas_serialize'] = 'seo';
 	}
 
-    // Export de config des plugins <utilise>
-    // http://zone.spip.org/trac/spip-zone/browser/_plugins_/ieconfig/trunk/ieconfig_pipelines.php
+  // Export de config des plugins <utilise>
+  // http://zone.spip.org/trac/spip-zone/browser/_plugins_/ieconfig/trunk/ieconfig_pipelines.php
 
   // Gis
   if(test_plugin_actif('gis')){
@@ -56,13 +52,6 @@ function ieconfigplus_ieconfig_metas($table){
       $table['fb_modeles']['titre'] = _T('fbmodeles:cfg_descr_titre');
       $table['fb_modeles']['icone'] = 'prive/themes/spip/images/fb-btn-16.png';
       $table['fb_modeles']['metas_serialize'] = 'fb_modeles';
-  }
-
-  // CKeditor pour spip
-  if(test_plugin_actif('ckeditor')){
-      $table['ckeditor']['titre'] = _T('paquet-ckeditor:ckeditor_slogan');
-      $table['ckeditor']['icone'] = 'prive/themes/spip/images/ckspip-logo-16.png';
-      $table['ckeditor']['metas_serialize'] = 'ckeditor';
   }
 
 	// Autorite
@@ -110,14 +99,14 @@ function ieconfigplus_ieconfig($flux){
 
   // Pages
   if(test_plugin_actif('pages')){
-      include_spip('inc/ieconfig_pages_fonctions');
-      $pages = ieconfig_pages($flux,$action);
+    include_spip('inc/ieconfig_pages_fonctions');
+    $pages = ieconfig_pages($flux,$action);
   }
 
   // Selections Editoriales
   if(test_plugin_actif('selections_editoriales')){
-      include_spip('inc/ieconfig_selections_editoriales_fonctions');
-      $selections = ieconfig_selections_editoriales($flux,$action);
+    include_spip('inc/ieconfig_selections_editoriales_fonctions');
+    $selections = ieconfig_selections_editoriales($flux,$action);
   }
 
   // Formidable

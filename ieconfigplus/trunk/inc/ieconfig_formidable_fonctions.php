@@ -36,7 +36,7 @@ function ieconfig_formidable(&$flux, $action){
 		);
 		$flux['data'] = array_merge($flux['data'],$saisies);
 	}
-	
+
 	// Tableau d'export
 	if ($action=='export' && is_array(_request('formidable_a_exporter')) && count(_request('formidable_a_exporter'))>0) {
 		$flux['data']['formidable'] = array();
@@ -50,7 +50,7 @@ function ieconfig_formidable(&$flux, $action){
 			$flux['data']['formidable'][$identifiant] = $formulaire;
 		}
 	}
-	
+
 	// Formulaire d'import
 	if ($action=='form_import' && isset($flux['args']['config']['formidable']) && is_array($flux['args']['config']['formidable']) && count($flux['args']['config']['formidable'])>0) {
 		$saisies = array(
@@ -105,7 +105,7 @@ function ieconfig_formidable(&$flux, $action){
 		}
 		$flux['data'] = array_merge($flux['data'],$saisies);
 	}
-	
+
 	// Import de la configuration
 	if ($action=='import' && isset($flux['args']['config']['formidable']) && is_array($flux['args']['config']['formidable']) && count($flux['args']['config']['formidable'])>0) {
 		foreach ($flux['args']['config']['formidable'] as $identifiant => $formulaire) {
@@ -141,10 +141,10 @@ function ieconfig_formidable(&$flux, $action){
  * tiré de la function echanger/formulaire/yaml
 */
 function exporter_formulaire($id_formulaire){
-    include_spip('base/abstract_sql');
+  include_spip('base/abstract_sql');
 	include_spip('inc/yaml');
 	$id_formulaire = intval($id_formulaire);
-	
+
 	if ($id_formulaire > 0){
 		// On récupère le formulaire
 		$formulaire = sql_fetsel(
@@ -152,18 +152,18 @@ function exporter_formulaire($id_formulaire){
 			'spip_formulaires',
 			'id_formulaire = '.$id_formulaire
 		);
-		
+
 		// On décompresse les trucs sérialisés
 		$formulaire['saisies'] = unserialize($formulaire['saisies']);
 		$formulaire['traitements'] = unserialize($formulaire['traitements']);
-                
-        return $formulaire;
+
+    return $formulaire;
 	}
 }
 
 function formulaire_importer($formulaire){
 
-        
+
 
         // Si le decodage marche on importe alors le contenu
         if (is_array($formulaire)){
@@ -179,7 +179,7 @@ function formulaire_importer($formulaire){
                 if ($deja){
                         $formulaire['identifiant'] .= '_'.date('Ymd_His');
                 }
-                
+
                 // On insère un nouveau formulaire
                 $id_formulaire = ieconfig_formulaire_insserer();
                 // Si ça a marché on transforme les tableaux et on modifie les champs
@@ -190,11 +190,11 @@ function formulaire_importer($formulaire){
                         if (is_array($formulaire['traitements'])){
                                 $formulaire['traitements'] = serialize($formulaire['traitements']);
                         }
-                        
+
                         $erreur = ieconfig_formulaire_modifier($id_formulaire, $formulaire);
                 }
         }
-	
+
 }
 
 
@@ -208,7 +208,7 @@ function ieconfig_formulaire_insserer() {
 		'statut' => 'prop',
 		'date_creation' => date('Y-m-d H:i:s'),
 	);
-	
+
 	$id_formulaire = sql_insertq("spip_formulaires", $champs);
 
 

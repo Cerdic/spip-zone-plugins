@@ -9,6 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'ieconfigplus_description' => 'Ajoute des exports supplémentaires au plugin ieconfig',
-	'ieconfigplus_nom' => 'Importeur/Exporteur de configuration Addons',
+	'ieconfigplus_nom' => 'Importeur/Exporteur de configuration PLUS',
 	'ieconfigplus_slogan' => 'Des exports supplémentaires pour ieconfig',
 );

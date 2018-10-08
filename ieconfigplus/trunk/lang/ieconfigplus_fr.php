@@ -8,5 +8,5 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'ieconfigplus_titre' => 'Importeur/Exporteur de configuration Addons',
+	'ieconfigplus_titre' => 'Importeur/Exporteur de configuration PLUS',
 );
