@@ -16,23 +16,25 @@
 <h3><:reservation_evenement:reservation_evenement_titre:></h3>
 ,'simple personnel infos'})]
 
-<BOUCLE_evenements(EVENEMENTS){id_rubrique ?}{id_article ?}{id_evenement ?}{inscription=1}{tout}>
-	#SET{id_evenement,#GET{id_evenement}|push{#ID_EVENEMENT}}
+<BOUCLE_evenements(EVENEMENTS){id_rubrique ?}{id_article ?}{id_evenement}{tout}>}
 	[(#ENV{id_evenement}|oui)#SET{soustitre,#TITRE}]
 </BOUCLE_evenements>
 	[(#ENV{soustitre}|oui)#SET{soustitre,#ENV{soustitre}}]
 [<h4>(#GET{soustitre}|sinon{<:reservation:titre_reservations:>})</h4>]
 #SET{reservations,#ARRAY}
-#SET{statuts,#LISTE{attente,attente_paiement,accepte}}
-#SET{args,#ARRAY{id_evenement,#ENV{id_evenement},id_article,#ENV{id_article},id_rubrique,#ENV{id_rubrique},statut2,#GET{statuts}|implode{-}}}
+#SET{statuts,#ARRAY}
 
 <ul>
-	<BOUCLE_reservations(RESERVATIONS_DETAILS){id_evenement IN #GET{id_evenement}}{where?}{statut IN #GET{statuts}}>
+	<BOUCLE_reservations(RESERVATIONS_DETAILS reservations){tout}>
 		#SET{reservations,#GET{reservations}|push{#QUANTITE}}
-		</BOUCLE_reservations>
+	[(#STATUT|in_array{#GET{statuts}}|non)
+		#SET{statuts,#GET{statuts}|push{#STATUT}}
+	]
+	</BOUCLE_reservations>
+		#SET{args,#ARRAY{id_evenement,#ENV{id_evenement},id_article,#ENV{id_article},id_rubrique,#ENV{id_rubrique},statut2,#GET{statuts}|implode{-}}}
 		#SET{res_tot,#GET{reservations}|array_sum}
 		<li>
-			[(#ENV*{titre,#GET{res_tot}|singulier_ou_pluriel{reservation:info_1_reservation,reservation:info_nb_reservations}})] : <a href="[(#URL_PAGE{transmettre,[(#VAL{evenements_reservations}|param_low_sec{#GET{args}, '', 'transmettre'})]}|parametre_url{reponse,oui})]"><:reservation:texte_exporter:></a>
+			[(#ENV*{titre,#GET{res_tot}|singulier_ou_pluriel{reservation:info_1_evenement_reserve,reservation:info_nb_evenements_reserves}})] : <a href="[(#URL_PAGE{transmettre,[(#VAL{evenements_reservations}|param_low_sec{#GET{args}, '', 'transmettre'})]}|parametre_url{reponse,oui})]"><:reservation:texte_exporter:></a>
 		</li>
 		<li>
 			<:reservation:affichage_par:>
