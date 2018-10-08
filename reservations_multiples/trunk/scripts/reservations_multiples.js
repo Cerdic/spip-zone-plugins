@@ -4,13 +4,16 @@ $(document).ready(function() {
 	var container = '.choix.quantite';
 
 	$(container).hide();
-
 	$("input.evenement:checked", $(this)).each(function() {
-		$(this).parent('div').next(container).show(container);
+		$(this).parent('div').next(container).show('slow');
 	});
 
 	$('input.evenement').click(function() {
-		$(this).parent('div').next(container).toggle(container);
+		$("input.evenement:not(:checked)").each(function() {
+			$(this).parent('div').next(container).hide('slow');
+		});
+		$("input.evenement:checked").each(function() {
+			$(this).parent('div').next(container).show('slow');
+		});
 	});
-
 });

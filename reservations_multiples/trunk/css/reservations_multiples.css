@@ -10,3 +10,7 @@
 .auteurs_multiples input[type="image"] {
 	vertical-align: middle;
 }
+
+.evenements .choix {
+	clear: both;
+}

@@ -39,7 +39,7 @@ function formulaires_configurer_reservations_multiples_saisies_dist() {
 						'nom' => 'multiple_inscriptions',
 						'label' => _T('reservations_multiples:label_multiple_inscriptions'),
 						'explication' => _T('reservations_multiples:explication_multiple_inscriptions'),
-						'defaut' => $config['multiple_personnes']
+						'defaut' => $config['multiple_inscriptions']
 					)
 				)
 			)
