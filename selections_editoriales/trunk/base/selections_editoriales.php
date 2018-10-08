@@ -97,7 +97,8 @@ function selections_editoriales_declarer_tables_objets_sql($tables) {
 		'champs_editables'  => array('rang', 'objet', 'id_objet', 'titre', 'url', 'descriptif', 'id_selection', 'css'),
 		'champs_versionnes' => array('objet', 'id_objet', 'titre', 'url', 'descriptif', 'css'),
 		'rechercher_champs' => array('titre' => 8, 'descriptif' => 4),
-		'tables_jointures'  => array()
+		'tables_jointures'  => array(),
+		'parent' => array('type' => 'selection', 'champ' => 'id_selection'),
 	);
 
 
