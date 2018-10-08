@@ -89,7 +89,7 @@ function skeleditor_extraire_css($texte){
 			OR (
 				// ou si c'est un fichier
 				// enlever un timestamp eventuel derriere un nom de fichier statique
-				$src2 = preg_replace(",[.]css[?].+$,",'.css',$src)
+				$src2 = skeleditor_trouver_source($src)
 				// verifier qu'il n'y a pas de ../ ni / au debut (securite)
 				AND !preg_match(',(^/|\.\.),', substr($src2,strlen(_DIR_RACINE)))
 				// et si il est lisible
@@ -100,7 +100,8 @@ function skeleditor_extraire_css($texte){
 				$css[$s] = explode('&',
 					str_replace('&amp;', '&', $r[2]), 2);
 			else{
-				$file = preg_replace(",[?]\d+$,","",$src);
+				// var_dump($src2);
+				$file = preg_replace(",[?]\d+$,","",$src2);
 				if (strncmp($file,_DIR_VAR,strlen(_DIR_VAR))==0){
 					lire_fichier($file,$c);
 					if (preg_match(",^\/\*\s*(#@.*)\s*\*\/,Uims",$c,$m)){
@@ -120,6 +121,24 @@ function skeleditor_extraire_css($texte){
 	}
 	return $css;
 }
+
+function skeleditor_trouver_source($src){
+		// enlever un timestamp eventuel derriere un nom de fichier statique
+		$source_file = preg_replace(",[.]css[?].+$,",'.css',$src);
+		// est-ce un fichier scss cssifié
+		if(preg_match("/-cssify-[\w\d]*.css/s",$source_file)){
+			$scss_file = preg_replace(",local/cache-scss/([a-z0-9\-\_]*)-cssify-[\w\d]*.css,s",'${1}.scss', $source_file);
+
+
+			// var_dump(find_in_path('theme.scss','css/'));
+
+			(find_in_path($scss_file,'css/')) ? $source_file = find_in_path($scss_file,'css/') : $source_file = null ;
+
+		}
+		// var_dump($source_file);
+		return $source_file;
+}
+
 
 function skeleditor_affichage_final($texte){
 	if (isset($_COOKIE['spip_admin'])
