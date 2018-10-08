@@ -1,9 +1,10 @@
 [(#REM)
 
-	Surcharge : on ajoute un div .affiche_connexe avec les formulaires dater et liens auteurs
+	Surcharge : on ajoute un div .affiche_connexe avec les formulaires de langue, de date et liens auteurs
 
 ]
 <div class="affiche_connexe">
+	<INCLURE{fond=prive/objets/editer/traductions, affiche_connexe=oui, objet=article, id_objet=#ENV{id_article}, espace_prive=1, env} />
 	<div class="ajax">
 		#FORMULAIRE_DATER{article,#ID_ARTICLE}
 	</div>
