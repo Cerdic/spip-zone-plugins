@@ -1,4 +1,5 @@
 #SET{reservations,#ARRAY}
+#SET{statuts,#ARRAY}
 [(#ENV{multiple}|oui)#SET{totale,#ARRAY}]
 
 #SET{objets,#VAL|lister_tables_objets_sql}
@@ -13,17 +14,20 @@
 
 <BOUCLE_reservations(RESERVATIONS_DETAILS){id_evenement IN #GET{id_evenement}}{statut ?IN #ENV{statut}}>
 [(#ENV{multiple}|non)
-	#SET{reservations,#GET{reservations}|push{#QUANTITE}}   
+	#SET{reservations,#GET{reservations}|push{#QUANTITE}}
 ]
 [(#ENV{multiple}|oui)
 	[(#SET{#STATUT,#GET{#STATUT}|push{#QUANTITE}})]
-	#SET{totale,#GET{totale}|push{#QUANTITE}} 
-	[(#SET{reservations,#GET{reservations}|array_merge{#ARRAY{#STATUT,#GET{#STATUT}|array_sum}}}) ]
+	#SET{totale,#GET{totale}|push{#QUANTITE}}
+	[(#SET{statuts,#GET{statuts}|array_merge{#ARRAY{#STATUT,#GET{#STATUT}|array_sum}}}) ]
 ]
 </BOUCLE_reservations>
 [(#ENV{multiple}|non)
 	[(#GET{reservations}|array_sum)]
 ]
 [(#ENV{multiple}|oui)
-	[(#GET{reservations}|array_merge{#ARRAY{totale,#GET{totale}|array_sum}}|array_reverse|serialize)]
+	[(#ARRAY{
+		totale,[(#GET{totale}|array_sum)],
+		statuts,#GET{statuts}}
+		|array_reverse|serialize)]
 ]

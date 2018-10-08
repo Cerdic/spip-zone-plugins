@@ -6,6 +6,10 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 		include_spip('inc/filtres');
 		$reservations_details = sql_fetsel('*', 'spip_reservations_details',
 				'id_reservations_detail=' . $id_reservations_detail);
+		$plugin_declinaisons = FALSE;
+		if (test_plugin_actif('declinaisons')) {
+			$plugin_declinaisons = TRUE;
+		}
 
 		$id_evenement = isset($set['id_evenement']) ? $set['id_evenement'] : $reservations_details['id_evenement'];
 		// Les données de l'évènenement
@@ -41,12 +45,14 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 			$set['places'] = $evenement['places'];
 
 		$set['quantite'] = _request('quantite') ? _request('quantite') : 1;
-		if (is_array($set['quantite']) and isset($set['quantite'][$id_evenement]))
-			$set['quantite'] = ($set['quantite'][$id_evenement] > 0) ?
-				$set['quantite'][$id_evenement] :
-				1;
-
-		$quantite = $set['quantite'];
+		if (is_array($set['quantite'])) {
+			if (!$plugin_declinaisons) {
+				if (isset($set['quantite'][$id_evenement])) {
+					$set['quantite'] = ($set['quantite'][$id_evenement] > 0) ?
+					$set['quantite'][$id_evenement] : 1;
+				}
+			}
+		}
 
 		// Si le prix n'est pas fournit, on essaye de le trouver
 		if (!isset($set['prix']) and !isset($set['prix_ht'])) {
@@ -58,7 +64,7 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 
 				// si le plugin déclinaison produit (https://plugins.spip.net/declinaisons.html)
 				// est active il peut y avoir plusieurs prix par évenement
-				if (test_plugin_actif('declinaisons')) {
+				if ($plugin_declinaisons) {
 					$id_prix = isset($set['id_prix_objet']) ?
 						$set['id_prix_objet'] :
 						$reservations_details['id_prix_objet'];
@@ -68,6 +74,14 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 							'spip_prix_objets',
 							'id_prix_objet=' . $id_prix);
 						$set['descriptif'] .= ' - ' . $p['titre'];
+
+						// Les quantités
+						if (isset($set['quantite'][$id_prix])) {
+							$set['quantite'] = ($set['quantite'][$id_prix] > 0) ?
+								$set['quantite'][$id_prix] :
+								1;
+						}
+
 				}
 				// Sinon on cherche d'abord le prix attaché
 				else {
@@ -76,7 +90,9 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 							$evenement['id_evenement_source']);
 				}
 
+				$quantite = $set['quantite'];
 				if (isset($p)) {
+
 					$prix_ht = $quantite * $fonction_prix_ht('prix_objet', $p['id_prix_objet']);
 					$prix = $quantite * $fonction_prix('prix_objet', $p['id_prix_objet']);
 					$set['prix_ht'] = $prix_ht;

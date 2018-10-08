@@ -1,50 +1,67 @@
 [(#REM)affiche le détail par statut]
 
 #SET{reservations,#INCLURE{fond=inclure/compteur_reservations,env,multiple=oui}|unserialize}
+#SET{totale,#GET{reservations}|table_valeur{totale}}
 #SET{id_article,#ENV{id_article}}
 [(#ENV{id_evenement}|oui)#SET{id_article,''}]
 
-#SET{args,#ARRAY{id_evenement,#ENV{id_evenement},id_article,#GET{id_article},id_rubrique,#ENV{id_rubrique},statut2,#GET{reservations}|array_flip|implode{-}}}
 <ul>
-	<BOUCLE_res(DATA){source tableau,#GET{reservations}}>
-[(#REM)Si il y a des réservations]
-<li>
-[(#VALEUR|oui)
-	[(#REM)la première ligne]
-	[(#COMPTEUR_BOUCLE|=={1}|oui)
-		[(#ENV*{titre,#VALEUR|singulier_ou_pluriel{reservation:info_1_reservation,reservation:info_nb_reservations}})]
-	]
-	[(#COMPTEUR_BOUCLE|=={1}|non)
-		[(#VALEUR)] [(#VAL{reservation}|re_statut_titre{#CLE})]
-		#SET{args,#ARRAY{
+	<li>[(#GET{totale}|?{
+	#SET{args,
+		#ARRAY{
 			id_evenement,#ENV{id_evenement},
 			id_article,#GET{id_article},
 			id_rubrique,#ENV{id_rubrique},
-			statut,#CLE}}
-	]
+			statut2,#GET{reservations}|table_valeur{statuts}|array_flip|implode{-}}}
+		[(#ENV*{titre,#GET{totale}|singulier_ou_pluriel{reservation:info_1_reservation,reservation:info_nb_reservations}})]
 	<div class="actions">
-		<a href="[(#URL_ECRIRE{reservation_visualiser,[(#VAL{evenements_reservations}|param_low_sec{#GET{args}})]})]" title="<:previsualiser:>" onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{reservation_visualiser,[(#VAL{evenements_reservations}|param_low_sec{#GET{args}})]}|parametre_url{var_zajax,contenu})]');return false;}">
-			[(#CHEMIN_IMAGE{preview-16.png}|image_reduire{13})]
-		</a>
+			[<a
+			href="[(#URL_ECRIRE{reservation_visualiser,[(#VAL{evenements_reservations}|param_low_sec{#GET{args}})]})]"
+			title="<:previsualiser:>"
+			onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{reservation_visualiser,[(#VAL{evenements_reservations}|param_low_sec{#GET{args}})]}|parametre_url{var_zajax,contenu})]');return false;}">
+			(#CHEMIN_IMAGE{preview-16.png}|image_reduire{13})
+		</a>]
 		<a href="[(#URL_PAGE{transmettre,[(#VAL{evenements_reservations}|param_low_sec{#GET{args}, '', 'transmettre'})]}|parametre_url{reponse,oui})]" title="<:agenda:telecharger:>">
 			[(#CHEMIN_IMAGE{telecharger-16.png}|image_reduire{13})]
 		</a>
-		[(#PIPELINE{reservation_compteur_action,
-		[(#ARRAY{
-			args,#GET{args},
-			data,''
-		})]})]
-	</div>
-
-	[(#COMPTEUR_BOUCLE|=={1}|oui)
+		[(#PIPELINE{reservation_compteur_action,#ARRAY{
+				args,#GET{args},
+				data,''
+			}
+		})]
 		<div class="strong">
 			<b><:par_auteur:> <:reservation:label_statut:></b>
 		</div>
-	]
-]
-[(#REM)Si il n'y pas de réservations]
-[(#VALEUR|non)<:reservation:info_aucun_reservation:>]
-</li>
+	</div>
+	,
+	[(#REM)Si il n'y pas de réservations]
+	[(#VALEUR|non)<:reservation:info_aucun_reservation:>]
+})]
+	</li>
+	<BOUCLE_res(DATA){source tableau,#GET{reservations}|table_valeur{statuts}}>
+	[(#REM)Si il y a des réservations]
+	[<li>
+	(#VALEUR|oui)
+			[(#VALEUR)] [(#VAL{reservation}|re_statut_titre{#CLE})]
+			#SET{args,#ARRAY{
+				id_evenement,#ENV{id_evenement},
+				id_article,#GET{id_article},
+				id_rubrique,#ENV{id_rubrique},
+				statut,#CLE}}
 
+		<div class="actions">
+			<a href="[(#URL_ECRIRE{reservation_visualiser,[(#VAL{evenements_reservations}|param_low_sec{#GET{args}})]})]" title="<:previsualiser:>" onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{reservation_visualiser,[(#VAL{evenements_reservations}|param_low_sec{#GET{args}})]}|parametre_url{var_zajax,contenu})]');return false;}">
+				[(#CHEMIN_IMAGE{preview-16.png}|image_reduire{13})]
+			</a>
+			<a href="[(#URL_PAGE{transmettre,[(#VAL{evenements_reservations}|param_low_sec{#GET{args}, '', 'transmettre'})]}|parametre_url{reponse,oui})]" title="<:agenda:telecharger:>">
+				[(#CHEMIN_IMAGE{telecharger-16.png}|image_reduire{13})]
+			</a>
+			[(#PIPELINE{reservation_compteur_action,#ARRAY{
+					args,#GET{args},
+					data,''
+				}
+			})]
+		</div>
+	</li>]
 </BOUCLE_res>
 </ul>

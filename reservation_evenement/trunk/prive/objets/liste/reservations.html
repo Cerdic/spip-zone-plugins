@@ -1,16 +1,4 @@
 #SET{id_evenement,#ARRAY}
 #SET{date_debut,#ENV{date_debut,#ENV{date}}|affdate{Y-m-d 00:00:00}|agenda_dateplus{-1}}
 
-<INCLURE{fond=prive/objets/liste/inc-reservations_reservations,env,titre='',statut=#LISTE{attente,attente_paiement,accepte,encours,refuse,accepte_part},id_reservation_source=#ENV{id_reservation_source}}/>
-
-<BOUCLE_liste_reservations(RESERVATIONS){id_auteur?}{id_mot?}{email?}{where?}{statut=poubelle}{recherche?}{0,1}>
-[(#BOITE_OUVRIR{'','basic highlight'})]
-[(#ENV{afficher}|!={poubelles}|?{
-		<a class="ajax" href="[(#SELF|parametre_url{afficher,poubelles})]"><:reservation:info_voir_reservations_poubelle:></a>
-		,
-		<a class="ajax"  href="[(#SELF|parametre_url{afficher,''})]"><:reservation:icone_cacher:></a>
-			[(#INCLURE{fond=prive/objets/liste/inc-reservations_reservations,env,titre='',statut=#LISTE{poubelle},id_reservation_source=#GET{id_reservation_source}})]
-		}
-		)]
-#BOITE_FERMER
-</BOUCLE_liste_reservations>
+<INCLURE{fond=prive/objets/liste/inc-reservations_reservations,env,titre='',id_reservation_source=#ENV{id_reservation_source}}/>
