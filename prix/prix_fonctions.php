@@ -1,10 +1,12 @@
 <?php
 
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // Un filtre pour obtenir le prix HT d'un objet
-function prix_ht_objet($id_objet, $type_objet){
+function prix_ht_objet($id_objet, $type_objet) {
 	$fonction = charger_fonction('ht', 'inc/prix');
 	return $fonction($type_objet, $id_objet);
 }
@@ -25,7 +27,7 @@ function balise_PRIX_HT_dist($p) {
 }
 
 // Un filtre pour obtenir le prix TTC d'un objet
-function prix_objet($id_objet, $type_objet, $serveur = ''){
+function prix_objet($id_objet, $type_objet, $serveur = '') {
 	$fonction = charger_fonction('prix', 'inc/');
 	return $fonction($type_objet, $id_objet, 2, $serveur);
 }
@@ -52,7 +54,7 @@ function balise_PRIX_dist($p) {
  * @return string Retourne une chaine contenant le prix formaté avec une devise (par défaut l'euro)
  */
  
-function prix_formater($prix){ 
+function prix_formater($prix) { 
 	$fonction_formater = charger_fonction('prix_formater', 'filtres/'); 
 	return $fonction_formater($prix); 
 }
@@ -62,7 +64,7 @@ function prix_formater($prix){
  *  function filtres_prix_formater
  *
  */
-function filtres_prix_formater_dist($prix){
+function filtres_prix_formater_dist($prix) {
 
 	// Pouvoir débrayer la devise de référence
 	if (! defined('PRIX_DEVISE')) {
@@ -89,4 +91,3 @@ function filtres_prix_formater_dist($prix){
 	
 	return $prix;
 }
-
