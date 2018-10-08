@@ -334,8 +334,14 @@ function reservations_multiples_recuperer_fond($flux) {
 	// Insert le champ de nombre d'un nombre multiple.
 	if ($fond == 'formulaires/inc-reservation_evenements_champ' or $fond == 'formulaires/inc-reservation_evenements_declinaisons_prix') {
 		$config = reservations_multiples_config();
+
 		if ($config['multiple_inscriptions'] == 'on') {
-			$flux['data']['texte'] .= recuperer_fond('inclure/nombre_multiples', $contexte);
+			if ($fond == 'formulaires/inc-reservation_evenements_champ') {
+				$flux['data']['texte'] .= recuperer_fond('inclure/nombre_multiples', $contexte);
+			}
+			else {
+				$flux['data']['texte'] .= recuperer_fond('inclure/nombre_multiples_declinaisons', $contexte);
+			}
 		}
 	}
 
