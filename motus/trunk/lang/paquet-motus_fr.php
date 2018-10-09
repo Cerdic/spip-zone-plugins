@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // M
 	'motus_description' => 'Ce plugin permet de restreindre dans l\'interface privée l\'ajout des certains groupes de mots à certaines rubriques (et leurs enfants et objets).
 
-Ce qui peut faciliter la prise en main d\'un site par des rédacteurs en n\'affichant uniquement les groupes de mots utiles sur un espace déterminé.',
+Ce qui peut faciliter la prise en main d\'un site par des rédacteurs en affichant uniquement les groupes de mots utiles sur un espace déterminé.',
 	'motus_slogan' => 'Groupes de mots par rubrique',
 );
 ?>
