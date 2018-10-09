@@ -30,7 +30,7 @@ function balise_IDENTIFIANT_dist($p) {
 		$_id = interprete_argument_balise(2, $p);
 	}
 
-	$p->code = "identifiant_objet($_objet,$_id)";
+	$p->code =  'identifiant_objet("' . $_objet . '",' . $_id . ')';
 	$p->interdire_scripts = false;
 
 	return $p;
