@@ -3,8 +3,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-include_spip ('lib/microtime.inc');
-
 if (!function_exists('plugin_est_actif')) {
 	function plugin_est_actif($prefixe) {
 		$f = chercher_filtre('info_plugin');
