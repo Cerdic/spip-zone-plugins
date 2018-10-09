@@ -59,6 +59,8 @@ function mutualiser_creer($e, $options) {
 
 	header('Cache-Control: no-store, no-cache, must-revalidate');
 	header('Pragma: no-cache');
+	header('HTTP/1.1 503 Service Unavailable');
+	header('Retry-After: 3600');
 
 	mutu_etape_code_activation($e, $options);
 	mutu_etape_creer_repertoires($e, $options);
