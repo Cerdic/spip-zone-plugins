@@ -127,6 +127,7 @@
 #SET{src, #VALEUR{url}|image_recadre{#GET{dimensions/opengraph},-,focus}
 	|image_reduire{#GET{largeur},#GET{hauteur}}
 	|extraire_attribut{src}
+	|sinon{#VALEUR{url}}
 	|supprimer_timestamp}
 [(#VAL{finfo_file}|function_exists|oui)
 #SET{finfo,#EVAL{FILEINFO_MIME_TYPE}|finfo_open}
@@ -175,6 +176,7 @@
 #SET{src, #VALEUR{url}|image_recadre{#GET{dimensions/twitter},-,focus}
 	|image_reduire{#GET{largeur},#GET{hauteur}}
 	|extraire_attribut{src}
+	|sinon{#VALEUR{url}}
 	|supprimer_timestamp}
 [<meta name="twitter:image" content="(#GET{src}|url_absolue)" />]
 [<meta property="twitter:image:alt" content="(#VALEUR{alt}|couper{80}|attribut_html)" />]
