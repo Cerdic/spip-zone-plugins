@@ -27,8 +27,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_email_utilise' => 'Diese Email Adresse wird bereits benützt, melden Sie sich an oder benutzen Sie eine andere Adresse',
 	'erreur_pas_evenement' => 'Momentan keine Veranstaltungen zur Anmeldung verfügbar.',
 	'evenement_ferme_inscription' => 'Keine Anmeldung für diese Veranstaltung möglich. <br/> Klicken sie auf Anmeldung, um das aktuelle Angebot zu sehen.',
-	'explication_envoi_separe' => 'Eine Status Veränderung eines Ameldungs Items zu
-    <div><strong>"@statuts@"</strong></div> lösst das Senden eines Benachrichtigungsmail aus!', # MODIF
+	'explication_envoi_separe' => 'Die Status Veränderung eines Ameldungs Items nach
+    <div><strong>"@statuts@"</strong></div> löst das Senden eines Benachrichtigungsmails aus!',
 	'explication_envoi_separe_detail' => 'Die Statusveränderung zu <div><strong>"@statuts@"</strong></div> lösst das Senden einer Benachrichtigungsmail aus!',
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Melden Sie sich an</a> wenn sie bereits auf dieser Site registriert sind.',
 
@@ -36,17 +36,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_cacher' => 'Ausblenden',
 	'icone_creer_reservation' => 'Eine Anmeldung erstellen',
 	'icone_modifier_reservation' => 'Diese Anmeldung bearbeiten',
+	'info_1_evenement_reserve' => 'Ein reserviertes Event',
 	'info_1_reservation' => 'Eine Anmeldung',
+	'info_aucun_client' => 'Keine Kunden',
 	'info_aucun_reservation' => 'Keine Anmeldung',
+	'info_nb_clients' => '@nb@ Kunden',
+	'info_nb_evenements_reserves' => '@nb@ reservierte Events',
 	'info_nb_reservations' => '@nb@ Anmeldungen',
 	'info_reservations_auteur' => 'Die Anmeldungen dieses Authors',
 	'info_voir_reservations_poubelle' => 'Anmeldungen in Mülleimer einsehen',
+	'inscription' => 'Registrierung',
+	'inscrire' => 'Registrieren',
 
 	// L
+	'label_client' => 'Kunde :',
 	'label_date' => 'Datum:',
 	'label_date_paiement' => 'Bezahlungsdatum:',
+	'label_destinataires_supplementaires' => 'Zusätzliche Empfänger :',
 	'label_email' => 'Email:',
 	'label_enregistrer' => 'Ich möchte mich auf dieser Seite registrieren:',
+	'label_inscription' => 'Registrierung :',
 	'label_lang' => 'Sprache:',
 	'label_mot_passe' => 'Passwort:',
 	'label_mot_passe2' => 'Wiederholen Sie das Passwort:',
@@ -56,6 +65,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_statut' => 'Status:',
 	'label_statut_defaut' => 'Standartstatus:',
 	'label_type_paiement' => 'Bezahlungsart:',
+	'legend_donnees_auteur' => 'Kunden Angaben',
+	'legend_infos_generales' => 'Generell',
 
 	// M
 	'merci_de_votre_reservation' => 'Wir haben Ihre Anmeldung erhalten und bedanken uns für Ihr Vertrauen.',
@@ -68,6 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_cfg_titre' => 'Benachrichtigungen',
 	'notifications_client_explication' => 'Dem Kunden Benachrichtungen schicken?',
 	'notifications_client_label' => 'Kunde',
+	'notifications_destinataire_label' => 'Empfänger',
 	'notifications_envoi_separe' => 'Das einzeln Verschicken für den folgenden Status aktivieren:',
 	'notifications_envoi_separe_explication' => 'Erlaubt es  Benachrichtigungen für jedes einzelne Anmeldung Item zu verschicken.',
 	'notifications_expediteur_administrateur_label' => 'Einen Adminsitrator auswählen:',
@@ -103,7 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'remerciement' => 'Wir bedanken uns für Ihre Anmeldung<br/>Mit freundlichen Grüssen',
 	'reservation_date' => 'Datum:',
 	'reservation_de' => 'Anmeldung von',
-	'reservation_enregistre' => 'Ihre Anmeldung wurde registriert. Sie werden per Mail eine Bestätigung kriegen. Falls Sie keine erhalten, schauen Sie bitten in Ihrem SPAM Folder.', # MODIF
+	'reservation_enregistre' => 'Ihre Anmeldung wurde registriert. Sie werden per Mail eine Bestätigung kriegen. Falls Sie keine erhalten, schauen Sie bitten in Ihrem SPAM Folder.',
 	'reservation_numero' => 'Anmeldung:',
 
 	// S
@@ -121,6 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_encours' => 'laufend',
 	'texte_statut_poubelle' => 'im Abfalleimer',
 	'texte_statut_refuse' => 'abgelehnt',
+	'titre_clients' => 'Kunden',
 	'titre_envoi_separe' => 'Modus "Einzeln Verschicken" aktiviert',
 	'titre_reservation' => 'Anmeldung',
 	'titre_reservations' => 'Anmeldungen',
