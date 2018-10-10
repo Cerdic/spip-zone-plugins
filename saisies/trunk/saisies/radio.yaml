@@ -54,8 +54,8 @@ options:
         options:
           nom: 'disable_choix'
           label: '<:saisies:option_disable_choix_label:>'
-          explication: '<:saisies:option_disable_choix_explication:>'          
-      -      
+          explication: '<:saisies:option_disable_choix_explication:>'
+      -
         saisie: 'oui_non'
         options:
           nom: 'disable_avec_post'

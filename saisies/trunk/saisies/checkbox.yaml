@@ -43,7 +43,7 @@ options:
         options:
           nom: 'choix_alternatif'
           label: '<:saisies:option_choix_alternatif_label:>'
-          defaut: '' 
+          defaut: ''
       -
         saisie: 'input'
         options:
@@ -72,13 +72,13 @@ options:
         options:
           nom: 'disable_choix'
           label: '<:saisies:option_disable_choix_label:>'
-          explication: '<:saisies:option_disable_choix_explication:>'          
+          explication: '<:saisies:option_disable_choix_explication:>'
       -
         saisie: 'input'
         options:
           nom: 'maximum_choix'
           label: '<:saisies:option_maximum_choix_label:>'
-          explication: '<:saisies:option_maximum_choix_explication:>'          
+          explication: '<:saisies:option_maximum_choix_explication:>'
       -
         saisie: 'oui_non'
         options:
@@ -116,6 +116,12 @@ options:
           nom: 'attention'
           label: '<:saisies:option_attention_label:>'
           explication: '<:saisies:option_attention_explication:>'
+          size: 50
+      -
+        saisie: 'input'
+        options:
+          nom: 'class'
+          label: '<:saisies:option_class_label:>'
           size: 50
       -
         saisie: 'input'
