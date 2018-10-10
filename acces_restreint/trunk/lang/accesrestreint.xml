@@ -40,6 +40,9 @@
 	</langue>
 	<langue code="it" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=it" total="66" traduits="26" relire="0" modifs="2" nouveaux="38" pourcent="39.39">
 	</langue>
+	<langue code="ja" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=ja" total="66" traduits="66" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="origenius" lien="https://trad.spip.net/auteur/origenius" />
+	</langue>
 	<langue code="lb" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=lb" total="66" traduits="57" relire="0" modifs="4" nouveaux="5" pourcent="86.36">
 		<traducteur nom="Jim Wanderscheid" lien="https://trad.spip.net/auteur/jwander" />
 	</langue>
