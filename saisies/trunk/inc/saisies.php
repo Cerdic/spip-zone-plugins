@@ -29,11 +29,11 @@ include_spip('inc/saisies_afficher');
  */
 function saisies_chercher_formulaire($form, $args) {
 	$saisies = array();
-	
+
 	if ($fonction_saisies = charger_fonction('saisies', 'formulaires/'.$form, true)) {
 		$saisies = call_user_func_array($fonction_saisies, $args);
 	}
-	
+
 	// Si on a toujours un tableau, on passe les saisies dans un pipeline normé comme pour CVT
 	if (is_array($saisies)) {
 		$saisies = pipeline(
@@ -44,11 +44,11 @@ function saisies_chercher_formulaire($form, $args) {
 			)
 		);
 	}
-	
+
 	if (!is_array($saisies)) {
 		$saisies = false;
 	}
-	
+
 	return $saisies;
 }
 
@@ -82,7 +82,7 @@ function saisies_chercher($saisies, $id_ou_nom_ou_chemin, $retourner_chemin = fa
 		elseif (is_array($id_ou_nom_ou_chemin)) {
 			$chemin = $id_ou_nom_ou_chemin;
 			$saisie = $saisies;
-			
+
 			// On vérifie l'existence quand même
 			foreach ($chemin as $cle) {
 				if (isset($saisie[$cle])) {
@@ -91,7 +91,7 @@ function saisies_chercher($saisies, $id_ou_nom_ou_chemin, $retourner_chemin = fa
 					return null;
 				}
 			}
-			
+
 			// Si c'est une vraie saisie
 			if ($saisie['saisie'] and $saisie['options']['nom']) {
 				return $retourner_chemin ? $chemin : $saisie;
@@ -137,11 +137,11 @@ function saisies_identifier($saisies, $regenerer = false) {
 	if (!is_array($saisies)) {
 		return array();
 	}
-	
+
 	foreach ($saisies as $k => $saisie) {
 		$saisies[$k] = saisie_identifier($saisie, $regenerer);
 	}
-	
+
 	return $saisies;
 }
 
@@ -163,7 +163,7 @@ function saisie_identifier($saisie, $regenerer = false) {
 	if (isset($saisie['saisies']) and is_array($saisie['saisies'])) {
 		$saisie['saisies'] = saisies_identifier($saisie['saisies'], $regenerer);
 	}
-	
+
 	return $saisie;
 }
 
@@ -190,7 +190,7 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 		$champ = $saisie['options']['nom'];
 		$file = (($saisie['saisie'] == 'input' and isset($saisie['options']['type']) and $saisie['options']['type'] == 'file') or $saisie['saisie'] == 'fichiers');
 		$verifier = isset($saisie['verifier']) ? $saisie['verifier'] : false;
-		
+
 		// Cas de la saisie 'fichiers':
 		if ($file) {
 			$infos_fichiers_precedents = _request('cvtupload_fichiers_precedents');
@@ -199,7 +199,7 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 			}
 			elseif (isset($_FILES[$champ]['error'])) {//si jamais on a déja envoyé quelque chose dans le précédent envoi = ok
 				$valeur = null; //On considère que par défaut on a envoyé aucun fichiers
-				
+
 				// Si c'est un champ unique
 				if (!is_array($_FILES[$champ]['error']) and $_FILES[$champ]['error'] != 4) {
 					$valeur = $_FILES[$champ];
@@ -236,12 +236,12 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 				$valeur = _request($champ);
 			}
 		}
-		
+
 		// Pour la saisie "destinataires" il faut filtrer si jamais on a mis un premier choix vide
 		if ($saisie['saisie'] == 'destinataires') {
 			$valeur = array_filter($valeur);
 		}
-		
+
 		// On regarde d'abord si le champ est obligatoire
 		if (
 			$obligatoire
@@ -269,7 +269,7 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 			} else {
 				$normaliser = null;
 			}
-			
+
 			// Si le champ n'est pas valide par rapport au test demandé, on ajoute l'erreur
 			$options = isset($verifier['options']) ? $verifier['options'] : array();
 			if ($erreur_eventuelle = $verif_fonction($valeur, $verifier['type'], $options, $normaliser)) {
@@ -292,7 +292,7 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 					foreach ($index[1] as $cle) {
 						$enfant = &$enfant[$cle];
 					}
-					// Une fois descendu tout en bas, on normalise  
+					// Une fois descendu tout en bas, on normalise
 					$enfant = $normaliser;
 					// Et on reinjecte le tout
 					set_request($nom_champ_principal,$champ_principal);
@@ -303,7 +303,7 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 			}
 		}
 	}
-	
+
 	// Last but not least, on passe nos résultats à un pipeline
 	$erreurs = pipeline(
 		'saisies_verifier',
@@ -315,7 +315,7 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 			'data' => $erreurs
 		)
 	);
-	
+
 	return $erreurs;
 }
 
@@ -326,7 +326,7 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
  */
 function saisies_aplatir_tableau($tab) {
 	$nouveau_tab = array();
-	
+
 	foreach ($tab as $entree => $contenu) {
 		if (is_array($contenu)) {
 			foreach ($contenu as $cle => $valeur) {
@@ -336,7 +336,7 @@ function saisies_aplatir_tableau($tab) {
 			$nouveau_tab[$entree] = $contenu;
 		}
 	}
-	
+
 	return $nouveau_tab;
 }
 
@@ -365,7 +365,7 @@ function saisies_chaine2tableau($chaine, $separateur = "\n") {
 	if ($chaine and is_string($chaine)) {
 		$tableau = array();
 		$soustab = false;
-		
+
 		// On découpe d'abord en lignes
 		$lignes = explode($separateur, $chaine);
 		foreach ($lignes as $i => $ligne) {
@@ -429,7 +429,7 @@ function saisies_tableau2chaine($tableau) {
 	if ($tableau and is_array($tableau)) {
 		$chaine = '';
 		$avant_est_tableau = false;
-		
+
 		foreach ($tableau as $cle => $valeur) {
 			if (is_array($valeur)) {
 				$avant_est_tableau = true;
@@ -504,7 +504,7 @@ function saisies_trouver_choix_alternatif($data, $valeur) {
 	if (!is_array($data)) {
 		$data = saisies_chaine2tableau($data) ;
 	}
-	
+
 	$choix_theorique = array_keys($data);
 	$choix_alternatif = array_values(array_diff($valeur, $choix_theorique));
 	if (isset($choix_alternatif[0])) {
@@ -560,14 +560,14 @@ function saisies_generer_aide() {
  */
 function saisies_afficher_si($saisies) {
 	$saisies = saisies_lister_par_nom($saisies, true);
-	
+
 	// Dès qu'il y a au moins une option afficher_si, on l'active
 	foreach ($saisies as $saisie) {
 		if (isset($saisie['options']['afficher_si'])) {
 			return true;
 		}
 	}
-	
+
 	return false;
 }
 
