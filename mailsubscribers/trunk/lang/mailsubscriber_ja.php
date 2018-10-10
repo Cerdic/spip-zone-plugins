@@ -10,6 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_actualiser_segments' => 'セグメントを最新にする',
 	'bouton_importer' => '読み込む',
 	'bouton_invitation' => 'ニュースレターに購読するように招待する',
 	'bouton_previsu_importer' => 'プレビューを表示する',
