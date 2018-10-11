@@ -39,35 +39,7 @@ function traiter_enregistrement_dist($args, $retours) {
 
 	// On regarde si c'est une modif d'une réponse existante
 	$id_formulaires_reponse = $args['id_formulaires_reponse'];
-
-	// recherche d'éventuelles anciennes réponses
-	$reponses = formidable_verifier_reponse_formulaire(
-		$id_formulaire,
-		$options['identification'],
-		($options['anonymiser'] == 'on')
-			? $options['anonymiser_variable']
-			: false
-	);
-
-	// pas d'id_formulaires_reponse : on cherche une éventuelle réponse en base
-	if ($id_formulaires_reponse == false) {
-		$traitements_formulaire = unserialize($formulaire['traitements']);
-
-		if (isset($traitements_formulaire['enregistrement'])) {
-			$options =  $traitements_formulaire['enregistrement'];
-
-			if (isset($options['multiple']) && $options['multiple'] == ''
-					&& isset($options['modifiable']) && $options['modifiable'] == 'on'
-					&& is_array($reponses) && count($reponses) > 0) {
-				$id_formulaires_reponse = max($reponses);
-			}
-		}
-	} else {
-		// vérifier que l'auteur est bien l'auteur de la réponse, si non, on invalide l'id_formulaires_reponse
-		if (in_array($id_formulaires_reponse, $reponses) == false) {
-			$id_formulaires_reponse = false;
-		}
-	}
+	$id_formulaires_reponse = formidable_trouver_reponse_a_editer($id_formulaire, $id_formulaires_reponse, $options, true);
 
 	// Si la moderation est a posteriori ou que la personne est un boss, on publie direct
 	if ($options['moderation'] == 'posteriori'

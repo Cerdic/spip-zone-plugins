@@ -126,36 +126,17 @@ function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires
 				}
 			}
 
-			// Si on passe un identifiant de reponse, on edite cette reponse si elle existe
-			if ($id_formulaires_reponse = intval($id_formulaires_reponse)) {
-				$contexte = formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, $ok);
-				if ($ok == false) {
-					$contexte['editable'] = false;
-					$contexte['message_erreur'] = _T(
-						'formidable:traiter_enregistrement_erreur_edition_reponse_inexistante'
-					);
-				}
-			} else {
-				// calcul des paramètres d'anonymisation
-				$options = isset($traitements['enregistrement']) ? $traitements['enregistrement'] : null;
+			//trouver la réponse à éditer
+			$options_enregistrement = isset($traitements['enregistrement']) ? $traitements['enregistrement'] : null;
+			$id_formulaires_reponse = formidable_trouver_reponse_a_editer($formulaire['id_formulaire'], $id_formulaires_reponse, $options_enregistrement);
 
-				$anonymisation = (isset($options['anonymiser']) && $options['anonymiser']==true)
-					? isset($options['anonymiser_variable']) ? $options['anonymiser_variable'] : ''
-					: '';
-
-				// Si multiple = non mais que c'est modifiable, alors on va chercher
-				// la dernière réponse si elle existe
-				if ($options
-					and !$options['multiple']
-					and $options['modifiable']
-					and $reponses = formidable_verifier_reponse_formulaire(
-						$formulaire['id_formulaire'],
-						$options['identification'],
-						$anonymisation
-					)) {
-					$id_formulaires_reponse = array_pop($reponses);
-					$contexte = formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, $ok);
-				}
+			// adapter le contexte en conséquence
+			$contexte = formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, $ok);
+			if ($ok == false) {
+				$contexte['editable'] = false;
+				$contexte['message_erreur'] = _T(
+					'formidable:traiter_enregistrement_erreur_edition_reponse_inexistante'
+				);
 			}
 		} else {
 			$contexte['editable'] = false;
@@ -539,6 +520,10 @@ function formulaires_formidable_fichiers($id, $valeurs = array(), $id_formulaire
  **/
 function formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, &$ok) {
 
+	if ($id_formulaires_reponse == false) {
+		$ok = true;
+		return $contexte;
+	}
 	// On prépare des infos si jamais on a des champs fichiers
 	$saisies_fichiers = saisies_lister_avec_type($contexte['_saisies'], 'fichiers');// les saisies de type fichier
 	$fichiers = array();

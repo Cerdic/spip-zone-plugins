@@ -92,6 +92,56 @@ function formidable_generer_nom_cookie($id_formulaire) {
 	return $GLOBALS['cookie_prefix'].'cookie_formidable_'.$id_formulaire;
 }
 
+
+/*
+ * Trouver la réponse à éditer pour un formulaire donné,
+ * dans un contexte donné
+ * en fonction de la configuration du formulaire.
+ * @param int $id_formulaire L'identifiant du formulaire
+ * @param int $id_formulaires_reponse L'identifant de réponse passé au moment de l'appel du formulaire
+ * @param array $options Les options d'enregistrement du formulaire
+ * @param boolean $verifier_est_auteur si égal à true, on vérifie si $id_formulaires_reponse est passé que l'auteur connecté est bien l'auteur de la réponse passée en argument
+ * @return int $id_formulaires_reponse L'identifiant de la réponse à modifier effectivement.
+ *
+ */
+function formidable_trouver_reponse_a_editer($id_formulaire, $id_formulaires_reponse, $options, $verifier_est_auteur = false) {
+	// Si on passe un identifiant de reponse, on edite cette reponse si elle existe
+	if ($id_formulaires_reponse = intval($id_formulaires_reponse) and $verifier_est_auteur == false) {
+		return $id_formulaires_reponse;
+	} else {
+		// calcul des paramètres d'anonymisation
+		$anonymisation = (isset($options['anonymiser']) && $options['anonymiser'] == 'on')
+			? isset($options['anonymiser_variable']) ? $options['anonymiser_variable'] : ''
+			: '';
+
+		$reponses = formidable_verifier_reponse_formulaire(
+			$id_formulaire,
+			$options['identification'],
+			$anonymisation
+		);
+
+		//A-t-on demandé de vérifier que l'auteur soit bien celui de la réponse?
+		if ($id_formulaires_reponse = intval($id_formulaires_reponse)
+			and $verifier_est_auteur == true) {
+			if (in_array($id_formulaires_reponse, $reponses) == false) {
+				$id_formulaires_reponse = false;
+			}
+			return $id_formulaires_reponse;
+		}
+
+		// Si multiple = non mais que c'est modifiable, alors on va chercher
+		// la dernière réponse si elle existe
+		if ($options
+			and !$options['multiple']
+			and $options['modifiable']
+			and is_array($reponses)
+			) {
+				$id_formulaires_reponse = array_pop($reponses);
+		}
+	}
+	return $id_formulaires_reponse;
+}
+
 /*
  * Vérifie si le visiteur a déjà répondu à un formulaire
  *
