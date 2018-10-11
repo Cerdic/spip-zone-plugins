@@ -123,7 +123,7 @@ function formidable_trouver_reponse_a_editer($id_formulaire, $id_formulaires_rep
 		//A-t-on demandé de vérifier que l'auteur soit bien celui de la réponse?
 		if ($id_formulaires_reponse = intval($id_formulaires_reponse)
 			and $verifier_est_auteur == true) {
-			if (in_array($id_formulaires_reponse, $reponses) == false) {
+			if (!is_array($reponses) or in_array($id_formulaires_reponse, $reponses) == false) {
 				$id_formulaires_reponse = false;
 			}
 			return $id_formulaires_reponse;
