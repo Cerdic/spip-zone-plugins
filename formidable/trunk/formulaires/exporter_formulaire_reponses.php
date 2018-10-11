@@ -36,17 +36,17 @@ function formulaires_exporter_formulaire_reponses_traiter($id_formulaire = 0) {
 	$verifier = charger_fonction('verifier', 'inc/');
 	$verifier(_request('date_debut'), 'date', array('normaliser' => 'datetime'), $date_debut);
 	$verifier(_request('date_fin'), 'date', array('normaliser' => 'datetime'), $date_fin);
-
+	$cle_ou_valeur = _request('cle_ou_valeur');
 	$chemin = false;
 	$content_type = '';
 
 	if (_request('type_export') == 'csv') {
-		$chemin = exporter_formulaires_reponses($id_formulaire, ',', $statut_reponses, $date_debut, $date_fin);
+		$chemin = exporter_formulaires_reponses($id_formulaire, ',', $statut_reponses, $date_debut, $date_fin, $cle_ou_valeur);
 		if (pathinfo($chemin, PATHINFO_EXTENSION) === 'csv') {
 			$content_type = "text/comma-separated-values; charset=" . $GLOBALS['meta']['charset'];
 		}
 	} elseif (_request('type_export') == 'xls') {
-		$chemin = exporter_formulaires_reponses($id_formulaire, 'TAB', $statut_reponses, $date_debut, $date_fin);
+		$chemin = exporter_formulaires_reponses($id_formulaire, 'TAB', $statut_reponses, $date_debut, $date_fin, $cle_ou_valeur);
 		if (pathinfo($chemin, PATHINFO_EXTENSION) === 'xls') {
 			$content_type = "text/comma-separated-values; charset=iso-8859-1";
 		}
@@ -71,10 +71,10 @@ function formulaires_exporter_formulaire_reponses_traiter($id_formulaire = 0) {
  * @param string $statut_reponses
  * @param string $date_debut
  * @param string $date_fin
- *
+ * @param string $cle_ou_valeur
  * @return string|false Chemin du fichier d’export CSV, XLS ou ZIP
  */
-function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_reponses = 'publie', $date_debut = '', $date_fin = '') {
+function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_reponses = 'publie', $date_debut = '', $date_fin = '',$cle_ou_valeur='cle') {
 	$exporter_csv = charger_fonction('exporter_csv', 'inc/', true);
 	if (!$exporter_csv) {
 		return false;
@@ -85,7 +85,7 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 		return false;
 	}
 
-	list($reponses_completes, $saisies_fichiers) = preparer_formulaire_reponses($formulaire, $reponses, $statut_reponses);
+	list($reponses_completes, $saisies_fichiers) = preparer_formulaire_reponses($formulaire, $reponses, $statut_reponses, $cle_ou_valeur);
 	if (!$reponses_completes) {
 		return false;
 	}
@@ -121,7 +121,7 @@ function obtenir_formulaire_reponses($id_formulaire, $statut_reponses = 'publie'
 }
 
 
-function preparer_formulaire_reponses($formulaire, $reponses, $statut_reponses) {
+function preparer_formulaire_reponses($formulaire, $reponses, $statut_reponses, $cle_ou_valeur = 'cle') {
 	include_spip('inc/puce_statut');
 	include_spip('inc/saisies');
 	include_spip('facteur_fonctions');
@@ -240,7 +240,7 @@ function preparer_formulaire_reponses($formulaire, $reponses, $statut_reponses) 
 				}
 
 				$valeur = isset($valeurs[$nom]) ? $valeurs[$nom] : '';
-				$reponse_complete[] = formidable_generer_valeur_texte_saisie($valeur, $saisie);
+				$reponse_complete[] = formidable_generer_valeur_texte_saisie($valeur, $saisie, $cle_ou_valeur);
 			}
 		}
 
@@ -273,9 +273,10 @@ function preparer_formulaire_reponses($formulaire, $reponses, $statut_reponses) 
  *
  * @param string $valeur
  * @param array $saisie
+ * @param string $cle_ou_valeur
  * @return string
  */
-function formidable_generer_valeur_texte_saisie($valeur, $saisie) {
+function formidable_generer_valeur_texte_saisie($valeur, $saisie, $cle_ou_valeur = 'cle') {
 	static $resultats = array();
 	static $tenter_unserialize = null;
 	if (is_null($tenter_unserialize)) {
@@ -295,6 +296,7 @@ function formidable_generer_valeur_texte_saisie($valeur, $saisie) {
 						'valeur_uniquement' => 'oui',
 						'type_saisie'       => $saisie['saisie'],
 						'valeur'            => $valeur,
+						'cle_ou_valeur'			=> $cle_ou_valeur
 					),
 					$saisie['options']
 				)
