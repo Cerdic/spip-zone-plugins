@@ -68,7 +68,6 @@ options:
     options:
       nom: 'ip'
       label_case: '<:formidable:traiter_enregistrement_option_ip_label:>'
-      defaut: 'on'
       li_class: 'pleine_largeur'
   -
     saisie: 'radio'
