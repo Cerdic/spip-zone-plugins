@@ -34,6 +34,9 @@ function traiter_email_dist($args, $retours) {
 		}
 	}
 
+	$nom_site_spip = supprimer_tags(typo(lire_meta('nom_site')));
+	$email_webmaster = supprimer_tags(typo(lire_meta('email_webmaster')));
+	
 	// On récupère les destinataires
 	if ($options['champ_destinataires']) {
 		$destinataires = _request($options['champ_destinataires']);
@@ -112,8 +115,6 @@ function traiter_email_dist($args, $retours) {
 	if ($destinataires or ($courriel_envoyeur and $options['activer_accuse'])) {
 		include_spip('inc/filtres');
 		include_spip('inc/texte');
-
-		$nom_site_spip = supprimer_tags(typo(lire_meta('nom_site')));
 		
 		// On récupère le nom de l'envoyeur
 		if ($options['champ_nom']) {
@@ -253,7 +254,7 @@ function traiter_email_dist($args, $retours) {
 			// sinon on utilise le nomde l'envoyeur du courriel principal
 			$nom_envoyeur_accuse = trim($options['nom_envoyeur_accuse']);
 			if (!$nom_envoyeur_accuse) {
-				$nom_envoyeur_accuse = $nom_envoyeur;
+				$nom_envoyeur_accuse = $nom_site_spip;
 			}
 
 			$corps = array(
@@ -266,7 +267,7 @@ function traiter_email_dist($args, $retours) {
 			if ($options['courriel_envoyeur_accuse']) {
 				$courriel_envoyeur_accuse = $options['courriel_envoyeur_accuse'];
 			} else {
-				$courriel_envoyeur_accuse = $courriel_envoyeur;
+				$courriel_envoyeur_accuse = $email_webmaster;
 			}
 
 			//Et on teste si on doit mettre cela en from ou en reply-to
