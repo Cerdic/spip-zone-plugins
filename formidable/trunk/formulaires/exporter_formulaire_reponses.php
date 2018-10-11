@@ -113,7 +113,7 @@ function obtenir_formulaire_reponses($id_formulaire, $statut_reponses = 'publie'
 			'spip_formulaires_reponses',
 			'id_formulaire = ' . intval($id_formulaire) . ($statut_reponses == 'publie' ? ' and statut = "publie"' : '')
 			. (strlen($date_debut) > 0 ? ' and date >= "' . $date_debut . '"' : '')
-			. (strlen($date_fin) > 0 ? ' and date <= "' . $date_fin . '"' : '')
+			. (strlen($date_fin) > 0 ? ' and date <= "' . date('Y-m-d H:i:s', strtotime($date_fin. ' + 1 days')) . '"' : '')
 		)) {
 		if(!lire_config('formidable/analyse/exporter_adresses_ip')){
 			foreach ($reponses as $key => $reponse) {

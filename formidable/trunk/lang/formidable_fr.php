@@ -93,9 +93,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exporter_formulaire_cle_ou_valeur_label' => 'Pour les boutons radios, listes déroulantes, etc., faut-il exporter les valeurs humainement lisibles (labels) ou bien les clés ?',
 	'exporter_formulaire_cle_ou_valeur_cle_label' => 'Clés',
 	'exporter_formulaire_cle_ou_valeur_valeur_label' => 'Valeurs lisibles (labels)',
-	'exporter_formulaire_date_debut_label' => 'À partir de',
+	'exporter_formulaire_date_debut_label' => 'À partir de (inclus)',
 	'exporter_formulaire_date_erreur' => 'La date de début doit être antérieure à la date de fin',
-	'exporter_formulaire_date_fin_label' => 'Jusqu’au',
+	'exporter_formulaire_date_fin_label' => 'Jusqu’au (inclus)',
 	'exporter_formulaire_format_label' => 'Format du fichier',
 	'exporter_formulaire_statut_label' => 'Réponses',
 
