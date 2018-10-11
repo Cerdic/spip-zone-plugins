@@ -1,9 +1,9 @@
 <?php
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
-
+	$espace_prive = test_espace_prive();
 // Spip 3.2 ajoute le logo original à sa traduction, du coup élimine l'original avec cette fonction.
-if (_request('new') != 'oui') {
+	if (!$espace_prive OR ($espace_prive() AND _request('new') != 'oui')) {
 	include_spip('inc/config');
 
 	if (!lire_config('multilingue/desactiver_traduction_logo_objet')) {
