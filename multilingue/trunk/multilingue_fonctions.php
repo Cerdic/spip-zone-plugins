@@ -2,10 +2,8 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('plugins/installer');
-
 // Spip 3.2 ajoute le logo original à sa traduction, du coup élimine l'original avec cette fonction.
-if (spip_version_compare($GLOBALS['spip_version_affichee'], '3.2.0', '<')) {
+if (_request('new') != 'oui') {
 	include_spip('inc/config');
 
 	if (!lire_config('multilingue/desactiver_traduction_logo_objet')) {
