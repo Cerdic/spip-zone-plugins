@@ -20,7 +20,7 @@ include_spip('inc/editer');
 */
 
 
-function formulaires_configurer_vimeo_saisies_dist($qqchose){
+function formulaires_configurer_vimeo_saisies_dist(){
 
 	include_spip('inc/yaml');
 	include_spip('inc/config');
