@@ -1,15 +1,12 @@
 <?php
-
-/***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
- *                                                                         *
- *  Copyright (c) 2001-2018                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
-\***************************************************************************/
-
+/**
+ * URLs arborescentes multidomaines
+ *
+ * Identique aux URLs arbo de base, mais supprime le segment correspondant au secteur des domaines
+ *
+ * Les différences avec urls/arbo.php sont précédées de commentaires [Multidomaines]
+ *
+ */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 } // securiser
@@ -725,7 +722,6 @@ function urls_arbo_multidomaines_dist($i, $entite, $args = '', $ancre = '') {
 		return;
 	} // qu'est-ce qu'il veut ???
 
-
 	include_spip('base/abstract_sql'); // chercher dans la table des URLS
 
 	// Revenir en utf-8 si encodage type %D8%A7 (farsi)
@@ -740,6 +736,39 @@ function urls_arbo_multidomaines_dist($i, $entite, $args = '', $ancre = '') {
 
 	if (strlen($url_propre) and !preg_match(',^[^/]*[.]php,', $url_propre)) {
 		$parents_vus = array();
+
+		// [Multidomaines]
+		// Si on se trouve dans un des domaines configurés, ajouter son URL au début
+		// afin de détecter le bon secteur quand on parse les segments
+		$url_propre_originale = $url_propre;
+		$host = $_SERVER['HTTP_HOST'];
+		include_spip('inc/config');
+		if (is_array($cfg_multi = lire_config('multidomaines', array()))) {
+			foreach($cfg_multi as $id_rubrique_multi => $v) {
+				// Si c'est bien un domaine, retrouver son URL
+				$composants_url_multi = parse_url($v['url']);
+				if (
+					$composants_url_multi['host'] === $host
+					and $url_domaine = sql_getfetsel(
+						'url',
+						'spip_urls',
+						array(
+							'type=' . sql_quote('rubrique'),
+							'id_objet=' . intval($id_rubrique_multi),
+						),
+						'', // groupby
+						'date DESC',
+						'0,1'
+					)
+				) {
+					$url_propre = $url_domaine . '/' . $url_propre;
+					$GLOBALS['profondeur_url'] =+ 1;
+					break;
+				}
+			}
+		} else {
+			$cfg_multi = array(); // éviter des notices après
+		}
 
 		// recuperer tous les objets de larbo xxx/article/yyy/mot/zzzz
 		// on parcourt les segments de gauche a droite
@@ -868,6 +897,15 @@ function urls_arbo_multidomaines_dist($i, $entite, $args = '', $ancre = '') {
 					$url_redirect = url_absolue($url_new);
 				}
 			} else {
+
+				// [Multidomaines]
+				// Retirer le segment du domaine (le 1er)
+				foreach ($url_arbo_new as $k => $o) {
+					if ($url_domaine) {
+						$url_arbo_new[$k]['segment'] = array_splice($url_arbo_new[$k]['segment'], 1);
+					}
+				}
+
 				foreach ($url_arbo_new as $k => $o) {
 					$c = array( 'langue' => $langue );
 					if (isset($parents_vus['rubrique'])) {
@@ -888,17 +926,45 @@ function urls_arbo_multidomaines_dist($i, $entite, $args = '', $ancre = '') {
 						$args = http_build_query($cl);
 					}
 				}
-				if ($url_arbo_new !== $url_propre) {
-					//var_dump($url_arbo_new,$url_propre);
+				if ($url_arbo_new !== $url_propre_originale) {
 					$url_redirect = _debut_urls_arbo
 						. $url_arbo_new
 						. url_arbo_multidomaines_terminaison($entite)
 						. ($args?"?$args":'');
-					// en absolue, car assembler ne gere pas ce cas particulier
-					include_spip('inc/filtres_mini');
-					$url_redirect = url_absolue($url_redirect);
+
+					// [Multidomaines] Pour mettre la redirection en absolu, ne pas utiliser url_absolue().
+					// Il faut tenir compte du domaine dans lequel se trouve l'objet.
+					// (Ne fonctionne que si l'objet a un champ id_secteur. Sinon on pourrait remonter récursivement, mais bon...).
+					$cle_objet_redirect = id_table_objet($entite);
+					if (isset($contexte[$cle_objet_redirect])) {
+						// Retrouver le secteur
+						$table_redirect = table_objet_sql($entite);
+						$id_secteur_redirect = @sql_getfetsel(
+							'id_secteur',
+							$table_redirect,
+							$cle_objet_redirect . '=' . $contexte[$cle_objet_redirect]
+						);
+						// Soit c'est dans un domaine
+						if (in_array($id_secteur_redirect, $cfg_multi)) {
+							$url_redirect = rtrim($cfg_multi[$id_secteur_redirect]['url'], '/') . '/' . $url_redirect;
+						// Soit dans le site de base
+						} else {
+							$url_redirect = rtrim($GLOBALS['meta']['adresse_site'], '/') . '/' . $url_redirect;
+						}
+					} else {
+						// en absolue, car assembler ne gere pas ce cas particulier
+						include_spip('inc/filtres_mini');
+						$url_redirect = url_absolue($url_redirect);
+					}
 				}
 			}
+		}
+
+		// [Multidomaines]
+		// Si on est dans un domaine, une fois la redirection générée,
+		// remettre la profondeur initiale
+		if ($url_domaine) {
+			$GLOBALS['profondeur_url'] =- 1;
 		}
 
 		// gerer le retour depuis des urls propres
@@ -907,7 +973,7 @@ function urls_arbo_multidomaines_dist($i, $entite, $args = '', $ancre = '') {
 		) {
 			$urls_anciennes = charger_fonction('propres', 'urls');
 
-			return $urls_anciennes($url_propre, $entite, $contexte);
+			return $urls_anciennes($url_propre_originale, $entite, $contexte);
 		}
 	}
 	if ($entite == '' or $entite == 'type_urls' /* compat .htaccess 2.0 */) {
@@ -925,6 +991,9 @@ function urls_arbo_multidomaines_dist($i, $entite, $args = '', $ancre = '') {
 	if (!defined('_SET_HTML_BASE')) {
 		define('_SET_HTML_BASE', 1);
 	}
+
+	//var_dump($contexte, $entite, $url_redirect);
+	//die();
 
 	return array($contexte, $entite, $url_redirect, null);
 }
