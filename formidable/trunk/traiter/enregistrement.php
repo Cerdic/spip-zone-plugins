@@ -172,8 +172,8 @@ function traiter_enregistrement_dist($args, $retours) {
 
 	//Invalider le cache le cas échéant
 	if (
-		isset($options['invalider']) 
-		and $options['invalider'] 
+		isset($options['invalider'])
+		and $options['invalider']
 		and $options['moderation']=='posteriori'
 	) {
 		include_spip('inc/invalideur');
