@@ -104,7 +104,7 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 
 
 function obtenir_formulaire_reponses($id_formulaire, $statut_reponses = 'publie', $date_debut = '', $date_fin = '') {
-	// on ne fait des choses seulements si le formulaire existe et qu'il a des enregistrements
+	// on fait des choses seulements si le formulaire existe et qu'il a des enregistrements
 	if (
 		$id_formulaire > 0
 		and $formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . $id_formulaire)
