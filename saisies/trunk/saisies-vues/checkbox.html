@@ -4,7 +4,10 @@
 <B_choix>
 <ul class="spip">
 	<BOUCLE_choix(POUR){tableau #GET{valeur}}>
+	[(#ENV{cle_ou_valeur,valeur}|=={cle}|?{
+		[<li class="choix">(#VALEUR)</li>],
 		[<li class="choix">(#GET{data/#VALEUR})</li>]
+	})]
 	</BOUCLE_choix>
 
 	[<li class="choix"><em>#ENV{choix_alternatif_label}</em> : (#GET{valeur/choix_alternatif})</li>]
