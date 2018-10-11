@@ -24,11 +24,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_descriptif' => 'Descriptif',
+	'label_evenement_anterieurs' => 'Show previous events :',
 	'label_prix' => 'Price:',
 	'label_prix_ht' => 'Price excluding tax',
 	'label_prix_objet' => 'Price type:',
 	'label_quantite' => 'Quantity:',
 	'label_reservation' => 'Booking :',
+	'label_taxes' => 'Taxes:',
 
 	// T
 	'texte_ajouter_reservations_detail' => 'Add a booking item',

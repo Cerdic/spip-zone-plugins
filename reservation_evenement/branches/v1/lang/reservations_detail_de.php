@@ -24,11 +24,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_descriptif' => 'Beschreibung',
+	'label_evenement_anterieurs' => 'Frühere Events anzeigen :',
 	'label_prix' => 'Preis:',
 	'label_prix_ht' => 'Preis ohne MwSt:',
 	'label_prix_objet' => 'Preistyp:',
 	'label_quantite' => 'Menge:',
 	'label_reservation' => 'Anmeldung:',
+	'label_taxes' => 'Steuern:',
 
 	// T
 	'texte_ajouter_reservations_detail' => 'Ein Anmeldung Item hinzufügen',
