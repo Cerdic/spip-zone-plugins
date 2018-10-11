@@ -115,6 +115,11 @@ function obtenir_formulaire_reponses($id_formulaire, $statut_reponses = 'publie'
 			. (strlen($date_debut) > 0 ? ' and date >= "' . $date_debut . '"' : '')
 			. (strlen($date_fin) > 0 ? ' and date <= "' . $date_fin . '"' : '')
 		)) {
+		if(!lire_config('formidable/analyse/exporter_adresses_ip')){
+			foreach ($reponses as $key => $reponse) {
+				unset($reponses[$key]['ip']);
+			}
+		}
 		return array($formulaire, $reponses);
 	}
 	return array(null, null);
