@@ -257,14 +257,25 @@ a.plus_info,
 }
 
 .formulaire_spip input.text,
+.formulaire_spip input.email,
 .formulaire_spip input.password,
 .formulaire_spip textarea,
 .formulaire_spip select,
 .formulaire_spip .choix {
+	width: 100%;
 	background: white;
 	padding: 0.5em;
 	border: 1px solid #ddd;
 	border-radius: 4px;
+	font-size: inherit;
+	font-family: inherit;
+}
+.formulaire_spip .obligatoire input.text,
+.formulaire_spip .obligatoire input.email,
+.formulaire_spip .obligatoire textarea,
+.formulaire_spip .obligatoire select,
+.formulaire_spip .obligatoire .choix {
+	font-weight: bold;
 }
 .formulaire_spip textarea {
 	line-height: 1.6;
