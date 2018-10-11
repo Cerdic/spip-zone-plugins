@@ -225,6 +225,15 @@ function formulaires_formidable_verifier($id, $valeurs = array(), $id_formulaire
 		$message_erreur_unicite = $traitements['enregistrement']['message_erreur_unicite'];
 		if ($unicite != '') {
 			if (!$erreurs[$unicite]) {
+				$options_enregistrement = isset($traitements['enregistrement']) ? $traitements['enregistrement'] : null;
+				if (!$id_formulaires_reponse) { // si pas de réponse explictement passée au formulaire, on cherche la réponse qui serait édité
+					$id_formulaires_reponse = formidable_trouver_reponse_a_editer($formulaire['id_formulaire'], $id_formulaires_reponse, $options_enregistrement);
+				}
+				if ($id_formulaires_reponse != false) {
+					$unicite_exclure_reponse_courante = ' AND R.id_formulaires_reponse != '.$id_formulaires_reponse;
+				} else {
+					$unicite_exclure_reponse_courante = '';
+				}
 				$reponses = sql_allfetsel(
 					'R.id_formulaire AS id',
 					'spip_formulaires_reponses AS R
@@ -232,8 +241,9 @@ function formulaires_formidable_verifier($id, $valeurs = array(), $id_formulaire
 						ON R.id_formulaire=F.id_formulaire
 						LEFT JOIN spip_formulaires_reponses_champs AS C
 						ON R.id_formulaires_reponse=C.id_formulaires_reponse',
-					'R.id_formulaire = ' . $id_formulaire . '
-						AND C.nom='.sql_quote($unicite).'
+					'R.id_formulaire = ' . $id_formulaire .
+						$unicite_exclure_reponse_courante .
+						' AND C.nom='.sql_quote($unicite).'
 						AND C.valeur='.sql_quote(_request($unicite)).'
 						AND R.statut = "publie"'
 				);
