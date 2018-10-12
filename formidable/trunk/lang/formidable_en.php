@@ -93,9 +93,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_importer_yaml' => 'Error while importing the YAML file',
 	'erreur_inexistant' => 'This form doesn’t exist.',
 	'erreur_unicite' => 'This value is already in use',
-	'exporter_formulaire_date_debut_label' => 'From',
+	'exporter_formulaire_date_debut_label' => 'From', # MODIF
 	'exporter_formulaire_date_erreur' => 'The start date must be before the end date',
-	'exporter_formulaire_date_fin_label' => 'Until',
+	'exporter_formulaire_date_fin_label' => 'Until', # MODIF
 	'exporter_formulaire_format_label' => 'File format',
 	'exporter_formulaire_statut_label' => 'Answers',
 
