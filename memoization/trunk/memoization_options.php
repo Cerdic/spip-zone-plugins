@@ -122,7 +122,7 @@ class MCache {
 }
 
 
-if (!isset($GLOBALS['meta']['cache_key'])){
+if (!defined('_CACHE_KEY') and !isset($GLOBALS['meta']['cache_key'])){
 	include_spip("inc/securiser_action");
 	$key = pack("H*", calculer_cle_action('memoization'));
 	ecrire_meta('cache_key', $key, 'non');
