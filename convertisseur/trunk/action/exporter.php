@@ -125,8 +125,9 @@ function exporter_article($f,$dest){
 	$nom_fichier = preg_replace("/-{2,}/i", "-", $nom_fichier);
 	$nom_fichier = preg_replace("/^-/i", "", $nom_fichier);
 	$nom_fichier = preg_replace("/-$/i", "", $nom_fichier);
+	$nom_fichier = substr($nom_fichier, 0, 80) ;
 	
-	$nom_fichier = "$dest/$annee/$annee-$mois/$annee-$mois"."_$nom_fichier.txt" ;
+	$nom_fichier = "$dest/$annee/$annee-$mois/$annee-$mois"."_$nom_fichier"."_$id_article.txt" ;
 	
 	// Créer les répertoires
 	if(!is_dir("$dest/$annee"))
