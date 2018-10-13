@@ -22,8 +22,34 @@ http://www.owlgraphic.com/owlcarousel/#more-demos
 
 ## Utilisation
 
+### Un video player avec oembed
 
-### Afficher le portfolio d'un article
+Dans un squelette :
+
+Exemple d'utilisation avec le plugin sélections éditoriales et oEmbed.
+
+
+```
+<div class="selection selection_video">
+		#SET{id_document,#ARRAY}
+		<BOUCLE_sommaire_selection_4(SELECTIONS){identifiant=sommaire_selection_4}>
+			[<h2 class="selection-title[ (#EDIT{titre})]">(#TITRE)</h2>]
+			<BOUCLE_listContenus_sommaire_selection_4(SELECTIONS_CONTENUS){id_selection}{par rang, num titre, titre}>
+				#SET{id_document,#GET{id_document}|push{#ID_OBJET}}
+			</BOUCLE_listContenus_sommaire_selection_4>
+		</BOUCLE_sommaire_selection_4>
+
+		<INCLURE{fond=noisettes/owl-video-player}
+						{id_document=#GET{id_document}}
+						{dots=non}
+						{afficher_thumbnails=oui}
+						{env} />
+
+</div>
+```
+
+
+### Afficher le portfolio d'un objet
 
 Exemple d'affichage du portfolio d'un article avec passage de breakpoints/mediaqueries
 pour les thumbnails/vignettes :
@@ -41,8 +67,9 @@ elles viendront surcharger les valeurs définies par défaut.
 	960, #ARRAY{items,6}
 }|json_encode})]
 
-<INCLURE{fond=noisettes/owlcarousel-article-portfolio}
-		{id_article=28}
+<INCLURE{fond=noisettes/owlcarousel-objet-portfolio}
+		{objet=article}
+		{id_objet=28}
 		{id-carousel=sommaire_hero}
 		{navigation=false}
 		{autoplay=true}
@@ -84,11 +111,51 @@ Affiche le logo de l'article en fond et le titre ainsi que #INTRODUCTION
 
 ```
 
-## TRAVAUX :
+### Utiliser un carousel uniquement en mode mobile
 
-Sat Oct 14 08:48:25 2017 :
+Pour optimiser l'espace et la navigation en mode mobile, et profiter du mode touch, on propose pour les petits écran un carousel.
 
-*   	maj de la lib owl.carousel
+```javascript
+
+var documentWidth = $(window).width();
+
+var owl = $('.js-carousel'), owlOptions = {
+								loop: true,
+								margin: 10,
+								nav: false,
+								responsive:{
+										0:{
+												items:1,
+												nav: false,
+												lazyLoad:true,
+										}
+								}
+						};
+
+if(documentWidth <= 430){
+		var owlActive = owl.toggleClass('owl-carousel owl-theme').owlCarousel(owlOptions);
+}else{
+		owl.addClass('off');
+};
+
+$(window).resize(function() {
+		var documentWidth = $(window).width();
+		if(documentWidth <= 430){
+				if( owl.hasClass('off') ){
+						var owlActive = owl.owlCarousel(owlOptions);
+						owl.removeClass('off').toggleClass('owl-carousel owl-theme');
+				}
+		}else{
+				if(! owl.hasClass('off')){
+						owl.addClass('off')
+								.toggleClass('owl-carousel owl-theme')
+								.trigger('destroy.owl.carousel');
+				}
+		}
+});
+
+```
+
 
 
 ## TODO :
