@@ -20,36 +20,36 @@ VideoPlayer avec Owl Carousel et oembed
 #SET{id-carousel, #ENV{id-carousel,owlvideoplayer} }
 [(#REM) <!-- Active item -->]
 <div class="owl-video-player">
-<div id="#GET{id-carousel}" class="owl-carousel owl-theme">
-	<BOUCLE_listDocs(DOCUMENTS spip_documents_liens){objet ?}{id_objet ?}{id_document ?}
-																				{media=video}
-																				{mode=document}
-																				{par rang_lien,num titre, date}>
-	<div class="owl-slide" data-hash="#GET{id-carousel}_#ID_DOCUMENT">
-			[(#OEMBED|oembed{})]
-	</div>
-	</BOUCLE_listDocs>
-</div>
-[(#REM)<!-- Video thumbnails  -->]
-<B_docs>
-<div class="video_thumbs">
-    <div id="[(#GET{id-carousel})_video-thumbnails]" class="diapo_thumbnails owl-carousel">
-    <BOUCLE_docs(DOCUMENTS spip_documents_liens){objet ?}{id_objet ?}
-																					{id_document ?}
-																					{si #ENV{afficher_thumbnails}|=={oui} }
-																					{mode=document}{media=video}
+	<div id="#GET{id-carousel}" class="owl-main_player owl-carousel owl-theme">
+		<BOUCLE_listDocs(DOCUMENTS spip_documents_liens){objet ?}{id_objet ?}{id_document ?}
+																					{media=video}
+																					{mode=document}
 																					{par rang_lien,num titre, date}>
-        [<div class="owl-slide">
-            <a class="video_thumbnail[ (#ENV{doc}|=={#GET{id-carousel}_#ID_DOCUMENT}|oui)active]"
-               href="#[(#GET{id-carousel})_#ID_DOCUMENT]"
-               [ title="(#TITRE|couper{80}|texte_backend)"]>
-				(#LOGO_DOCUMENT|image_recadre{16:9,'center','transparent'}|image_reduire{200,0}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})
-            </a>
-        </div>]
-    </BOUCLE_docs>
-    </div>
-</div>
-</B_docs>
+		<div class="owl-slide" data-hash="#GET{id-carousel}_#ID_DOCUMENT">
+				[(#OEMBED|oembed{})]
+		</div>
+		</BOUCLE_listDocs>
+	</div>
+	[(#REM)<!-- Video thumbnails  -->]
+	<B_docs>
+	<div class="owl-video_thumbs">
+	    <div id="[(#GET{id-carousel})_video-thumbnails]" class="diapo_thumbnails owl-carousel">
+	    <BOUCLE_docs(DOCUMENTS spip_documents_liens){objet ?}{id_objet ?}
+																						{id_document ?}
+																						{si #ENV{afficher_thumbnails}|=={oui} }
+																						{mode=document}{media=video}
+																						{par rang_lien,num titre, date}>
+	        [<div class="owl-slide">
+	            <a class="video_thumbnail[ (#ENV{doc}|=={#GET{id-carousel}_#ID_DOCUMENT}|oui)active]"
+	               href="#[(#GET{id-carousel})_#ID_DOCUMENT]"
+	               [ title="(#TITRE|couper{80}|texte_backend)"]>
+					(#LOGO_DOCUMENT|image_recadre{16:9,'center','transparent'}|image_reduire{200,0}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})
+	            </a>
+	        </div>]
+	    </BOUCLE_docs>
+	    </div>
+	</div>
+	</B_docs>
 </div>
 <script>
 jQuery(function($){
