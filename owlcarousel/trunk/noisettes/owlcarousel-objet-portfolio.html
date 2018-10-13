@@ -26,51 +26,6 @@ Usage:
 
 -->]
 #SET{id-carousel, #ENV{id-carousel, owl-objet-portfolio}}
-<style>
-    [#(#GET{id-carousel})] .owl-slide > .caption {
-        z-index: 100;
-        position: absolute;
-        left:55%;
-        width: 40%;
-        bottom:5%;
-    }
-    [#(#GET{id-carousel})] .owl-slide > .caption > .title {
-        background: #000;
-        color : #FFF;
-        padding: 5px;
-        width: auto;
-    }
-    [#(#GET{id-carousel})] .owl-slide > .caption > p {
-        background-color: rgba(88, 88, 88, 0.75) ;
-        /*float: right;*/
-        color: #FFF;
-        padding: 5px;
-    }
-
-    [#(#GET{id-carousel})] .owl-slide img {
-        display: block;
-        width: 100%;
-        height: auto;
-        margin: 0 auto;
-    }
-
-    .diapo_vignettes .owl-slide {
-        padding:.5em;
-        border: 1px solid silver;
-        border-radius: 3px;
-        height: auto;
-        display: inline-block;
-        margin-right: .5em;
-    }
-    .diapo_vignettes .owl-slide:hover,
-    .diapo_vignettes .owl-slide.active {
-        border: 1px solid blue;
-    }
-    .diapo_vignettes .owl-slide > a {
-        display: block;
-    }
-
-</style>
 [(#REM)<!-- Visuel Grand -->]
 <div id="[(#GET{id-carousel})]" class="owl-carousel owl-theme">
     <BOUCLE_listDocs(DOCUMENTS spip_documents_liens){objet ?}{id_objet ?}
