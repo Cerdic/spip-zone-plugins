@@ -1,7 +1,7 @@
 <paquet
 	prefix="roles_selections"
 	categorie="edition"
-	version="1.0.0"
+	version="1.0.1"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/roles_selections-64.png"
@@ -16,8 +16,9 @@
 	<licence>GNU/GPL</licence>
 
 	<necessite nom='roles' compatibilite="[1.0.0;]" />
-	<necessite nom='selections_editoriales' />
+	<necessite nom='selections_editoriales' compatibilite="[1.8.4;]" />
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/roles_selections.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/roles_selections.php" />
+	<pipeline nom="afficher_actions_selection" inclure="roles_selections_pipelines.php" />
 </paquet>
