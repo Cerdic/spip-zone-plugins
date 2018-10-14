@@ -8,7 +8,7 @@
 
   On fait du mobile-first : pas de colonne à la base, puis on en met 2 ou 3 selon la largeur.
   On met du float comme en 40 pour les vieux navigateurs, 
-  et du CSS grid pur les nouveaux.
+  et du CSS grid pour les nouveaux.
 
 */]#CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css;charset=utf-8}
@@ -18,7 +18,7 @@
   ======
   LAYOUT
   ======
-  Agencement et dimensions des blocs principaux en mobile-first
+  Placement et dimensions des blocs principaux
 */
 
 /* Containers en pleine largeur */
@@ -50,17 +50,6 @@ body.large {
   float: none !important;
   margin-left: auto !important;
   margin-right: auto !important;
-}
-
-/* Des blocs à limiter en largeur pour obtenir ~80 caractères max par ligne */
-#wysiwyg,
-/* .cadre-formulaire-editer, */
-.formulaire_spip textarea,
-.formulaire_spip .edition {
-  display: block;
-  max-width: 45em;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 /* Moyen écran : 2 colonnes */ 
@@ -117,12 +106,59 @@ body.large {
 
 
 /*
+  ===========
+  Formulaires
+  ===========
+*/
+
+.formulaire_spip .editer {
+  padding-left: 10px;
+}
+.formulaire_spip .editer > label {
+  display: block;
+  margin-left: 0;
+  margin-bottom: 0.25em;
+  float: none;
+}
+
+.formulaire_spip .edition, /* conteneur markitup */
+.formulaire_spip .choix,
+.formulaire_spip textarea,
+.formulaire_spip input,
+.formulaire_spip select {
+  max-width: 45em;
+  box-sizing: border-box;
+}
+
+/* Moyen écran : 2 colonnes */ 
+@media (min-width: 780px) {
+
+  .formulaire_spip .editer {
+    padding-left: 15vw; /* padding proportionnel à l'écran pour centrer la saisie */
+  }
+  .formulaire_spip .editer > label {
+    display: inline;
+    float: left;
+    max-width: calc(15vw - 20px);
+    margin-left: calc(-15vw + 10px);
+  }
+
+}
+
+/*
   ======
   Divers
   ======
   Des petits ajustements divers
 */
 
+/* Limiter en largeur pour obtenir ~80 caractères max par ligne */
+#wysiwyg {
+  display: block;
+  max-width: 45em;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 /* Polices */
 @font-face {
