@@ -84,7 +84,7 @@ body.large {
     #navigation > :not(.ajaxbloc),
     #extra > .ajaxbloc > *,
     #extra > :not(.ajaxbloc) {
-      width: calc(4em + 18vw);
+      width: 20vw;
     }
   }
 }
@@ -118,13 +118,16 @@ body.large {
   padding-left: 10px;
 }
 .formulaire_spip .editer > * {
-  flex: 0 1 45em;
+  flex: 0 1 40rem;
 }
 .formulaire_spip .editer > label {
   display: block;
   margin-left: 0;
   margin-bottom: 0.25em;
   float: none;
+}
+.formulaire_spip .editer .explication {
+  display: block;
 }
 
 .formulaire_spip .edition, /* conteneur markitup */
@@ -133,22 +136,22 @@ body.large {
 .formulaire_spip input,
 .formulaire_spip select,
 .formulaire_spip .editer > label ~ * {
-  max-width: 45em;
+  max-width: 40rem;
   box-sizing: border-box;
 }
 
-/* Moyen écran : 2 colonnes */ 
+/* Grand écran */
 @media (min-width: 1200px) {
 
   .formulaire_spip .editer {
     display: block;
-    padding-left: 12vw; /* padding proportionnel à l'écran pour centrer la saisie */
+    padding-left: 15vw; /* padding proportionnel à l'écran pour centrer la saisie */
   }
   .formulaire_spip .editer > label {
     display: inline;
     float: left;
-    max-width: calc(12vw - 20px);
-    margin-left: calc(-12vw + 10px);
+    max-width: calc(15vw - 20px);
+    margin-left: calc(-15vw + 10px);
   }
 
 }
