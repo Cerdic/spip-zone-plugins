@@ -1,10 +1,36 @@
-<div class='nettoyeur'></div>
-<div id='selections' class='selections-lies'>
-<INCLURE{fond=prive/squelettes/inclure/selections_objet_liens, id_selection, objet, id_objet, ajax=selections, env}>
-[(#AUTORISER{associerselections, #OBJET, #ID_OBJET}|et{#AUTORISER{creer, selection}})
-	[(#ENV{ajouter}|=={selection}|non)
-		[(#URL_ACTION_AUTEUR{ajouter_selection_objet, #OBJET-#ID_OBJET, #SELF}
-			|icone_verticale{<:selection:texte_ajouter_selection:>,selection,new,ajax, #LANG_RIGHT})]
-		]]
+#SET{self,#SELF|parametre_url{ajouter|id_selection|id_selection_contenu|editer_contenu|editer_contenu_logo,'',&}|ancre_url{selections}}
+<div id='selections' class='selections'>
+
+	[(#REM) Liste des sélections liées, éditables sur place ]
+	<INCLURE{fond=prive/objets/liste/selections_lies_editables,
+		objet,
+		id_objet,
+		self=#GET{self},
+		ajax=selections_liees,
+		env}
+	>
+
+	[(#REM) Formulaire d'ajout ]
+	[(#AUTORISER{associerselections, #OBJET, #ID_OBJET}|et{#AUTORISER{creer, selection}}|oui)
+	<div class="selections_ajouter">
+		[(#ENV{ajouter}|=={selection}|non)
+			[(#GET{self}|parametre_url{ajouter,selection}|ancre_url{selections_ajouter}
+				|icone_verticale{<:selection:texte_ajouter_selection:>,selection,add,ajax right, #LANG_RIGHT})]
+			<div class="nettoyeur"></div>
+		]
+		[(#ENV{ajouter}|=={selection}|oui)
+			<div class="ajax">
+				#FORMULAIRE_AJOUTER_SELECTION{
+					#ENV{objet},
+					#ENV{id_objet},
+					#ARRAY{
+						url_fermer,#GET*{self},
+						ajaxreload,selections_liees,
+					}
+				}
+			</div>
+		]
+	</div>
+	]
+
 </div><!-- #selections -->
-<div class='nettoyeur'></div>

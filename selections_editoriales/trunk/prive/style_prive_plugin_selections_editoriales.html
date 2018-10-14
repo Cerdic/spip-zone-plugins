@@ -9,7 +9,7 @@
     ATTENTION: il faut absolument le charset sinon Firefox croit que
     c'est du text/html !
 */]#CACHE{3600*100,cache-client}
-#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
 #HTTP_HEADER{Vary: Accept-Encoding}
 /*
 Valeurs par defaut :
@@ -60,4 +60,41 @@ body.selections_contenu #wysiwyg .champ.contenu_texte div.span.texte {
     background-color: white;
     border: 1px solid #GET{foncee};
 }
-
+/* Formulaire ajout */
+.formulaire_ajouter_selection .creer {
+    display: flex;
+    justify-content: space-around;
+    margin: 0.5em 0 0;
+}
+.formulaire_ajouter_selection .creer .button {
+    max-width: 12em;
+    display: flex;
+    align-items: center;
+    line-height: 1.2;
+    padding: 0.25em;
+}
+.formulaire_ajouter_selection .reponse_formulaire_ok {
+    display: none; /* contient juste du js */
+}
+/* Liste contenus d'une sélection */
+.liste-items.selections_contenus {
+    border-top: 0;
+}
+.liste-items.selections_contenus .item:last-child {
+    border-bottom: 0;
+}
+.liste-items.selections_contenus .item__body {
+    display: flex;
+}
+.liste-items.selections_contenus .item__content {
+    flex: 1 1 auto;
+}
+.liste-items.selections_contenus .item__actions {
+    flex: 0 1 5em;
+    align-self: center;
+}
+.liste-items.selections_contenus .icone.horizontale.center {
+    display: table; /* pour s'auto centrer */
+    margin-left: auto;
+    margin-right: auto;
+}

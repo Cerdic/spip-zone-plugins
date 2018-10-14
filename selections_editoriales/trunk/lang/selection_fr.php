@@ -12,7 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_enlever_selection' => 'Détacher',
-	'bouton_supprimer_selection' => 'Supprimer cette sélection',
+	'bouton_supprimer_selection' => 'Supprimer',
+	'bouton_modifier_selection' => 'Modifier',
 
 	// C
 	'champ_css_explication' => 'Classes css ajoutées a cette sélection.',
@@ -43,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_ajouter_selection' => 'Ajouter une sélection éditoriale',
+	'texte_ajouter_selection_explication' => 'Créez une nouvelle sélection éditoriale ou choisissez-en une dans la liste ci-dessous.',
 	'texte_changer_statut_selection' => 'Cette sélection éditoriale est :',
 	'texte_creer_associer_selection' => 'Créer et associer une sélection éditoriale',
 	'titre_langue_selection' => 'Langue de cette sélection éditoriale',

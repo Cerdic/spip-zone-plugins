@@ -182,8 +182,10 @@ function selections_editoriales_afficher_complement_objet($flux) {
 					'id_objet' => $id,
 					'editer_contenu' => _request('editer_contenu'),
 					'editer_contenu_logo' => _request('editer_contenu_logo'),
+					'ajouter' => _request('ajouter'),
+					'id_selection_ajoutee' => _request('id_selection_ajoutee'),
 				),
-				array('ajax'=>true)
+				array('ajax'=>'selections')
 			);
 			
 			$flux['data'] .= $selections;
@@ -225,8 +227,10 @@ function selections_editoriales_affiche_enfants($flux) {
 					'id_objet' => $id,
 					'editer_contenu' => _request('editer_contenu'),
 					'editer_contenu_logo' => _request('editer_contenu_logo'),
+					'ajouter' => _request('ajouter'),
+					'id_selection_ajoutee' => _request('id_selection_ajoutee'),
 				),
-				array('ajax'=>true)
+				array('ajax'=>'selections')
 			);
 			
 			$flux['data'] .= $selections;
