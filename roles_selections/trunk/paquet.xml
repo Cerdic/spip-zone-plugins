@@ -1,7 +1,7 @@
 <paquet
 	prefix="roles_selections"
 	categorie="edition"
-	version="1.0.1"
+	version="1.0.2"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/roles_selections-64.png"
