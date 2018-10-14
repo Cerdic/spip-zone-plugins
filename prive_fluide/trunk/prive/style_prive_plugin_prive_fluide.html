@@ -112,7 +112,13 @@ body.large {
 */
 
 .formulaire_spip .editer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
   padding-left: 10px;
+}
+.formulaire_spip .editer > * {
+  flex: 0 1 45em;
 }
 .formulaire_spip .editer > label {
   display: block;
@@ -125,22 +131,24 @@ body.large {
 .formulaire_spip .choix,
 .formulaire_spip textarea,
 .formulaire_spip input,
-.formulaire_spip select {
+.formulaire_spip select,
+.formulaire_spip .editer > label ~ * {
   max-width: 45em;
   box-sizing: border-box;
 }
 
 /* Moyen écran : 2 colonnes */ 
-@media (min-width: 780px) {
+@media (min-width: 1200px) {
 
   .formulaire_spip .editer {
-    padding-left: 15vw; /* padding proportionnel à l'écran pour centrer la saisie */
+    display: block;
+    padding-left: 12vw; /* padding proportionnel à l'écran pour centrer la saisie */
   }
   .formulaire_spip .editer > label {
     display: inline;
     float: left;
-    max-width: calc(15vw - 20px);
-    margin-left: calc(-15vw + 10px);
+    max-width: calc(12vw - 20px);
+    margin-left: calc(-12vw + 10px);
   }
 
 }
