@@ -17,7 +17,7 @@ function selecteurgenerique_jqueryui_plugins($plugins){
 		$plugins[] = 'jquery.ui.autocomplete';
 		$plugins[] = 'autocomplete.html';
 	}
-	
+
 	return $plugins;
 }
 
@@ -255,7 +255,17 @@ function selecteurgenerique_inserer_javascript($flux) {
 	OR _request('exec') == 'rubriques_edit') {
 		$js .= selecteurgenerique_inserer_rubrique();
 	}
-
+	/**
+	 * jquery.ui.autocomplete.html
+	 * Ajoute la prise en compte de code html dans le sélecteur et l'interprète
+	 * Par exemple des images / icones
+	 */
+	if(strpos($flux,'autocomplete.html')===FALSE){
+		$autocompleter_html = find_in_path('javascript/ui/autocomplete.html.js');
+		$js_final .= $autocompleter_html ? "
+<script type='text/javascript' src='$autocompleter_html'></script>
+" : '';
+	}
 	/**
 	 * On insére les fonctions génériques de l'autocomplétion (attribut data-selecteur)
 	 */
@@ -263,7 +273,7 @@ function selecteurgenerique_inserer_javascript($flux) {
 		$functions = find_in_path('javascript/selecteur_generique_functions.js');
 		$js_final .= "\n<script type='text/javascript' src='$functions'></script>\n";
 	};
-	
+
 	/**
 	 * On compléte selon le contexte de l'espace privé
         */
@@ -275,6 +285,6 @@ function selecteurgenerique_inserer_javascript($flux) {
 	    . '// --></script>'
 	    . "\n";
 	}
-	
+
 	return $flux.$js_final;
 }
