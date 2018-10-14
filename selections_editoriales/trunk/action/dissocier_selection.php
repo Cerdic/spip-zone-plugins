@@ -95,7 +95,7 @@ function supprimer_lien_selection($id_selection, $objet, $id_objet, $supprime = 
 				'objet' => $objet,
 				'id' => $id_objet
 			),
-			'data' => null
+			'data' => array()
 		)
 	);
 
