@@ -43,6 +43,8 @@ function lesscss_compile($style, $contexte = array()){
 		if (lire_config('lesscss/activer_sourcemaps', false) == "on") {
 			$parser_options['sourceMap'] = true;
 		}
+		$dir = sous_repertoire (_DIR_VAR, 'cache-less');
+		$parser_options['cache_dir'] = sous_repertoire($dir, 'compile');
 	}
 
 	$url_absolue = (!empty($contexte['file'])?protocole_implicite(url_absolue($contexte['file'])):null);
@@ -154,12 +156,21 @@ function less_css($source){
 		if (@filemtime($f) < @filemtime($source))
 			$changed = true;
 
+		// si pas change ET pas de var_mode, rien a faire
 		if (!$changed
-		  AND (!defined('_VAR_MODE') OR _VAR_MODE != 'recalcul'))
+		  AND !defined('_VAR_MODE'))
 			return $f;
 
 		if (!lire_fichier($source, $contenu))
 			return $source;
+
+		// si pas change ET par de var_mode=recalcul ET pas de @import dedans, rien a faire
+		// aka sur un var_mode=calcul on compute si y un @import mais si pas change
+		if (!$changed
+		  AND (!defined('_VAR_MODE') OR _VAR_MODE != 'recalcul')
+		  and strpos($contenu, '@import') === false)
+			return $f;
+
 
 		# compiler le LESS si besoin (ne pas generer une erreur si source vide
 		if (!$contenu){
