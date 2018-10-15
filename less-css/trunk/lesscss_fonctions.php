@@ -23,8 +23,9 @@ function lesscss_compile($style, $contexte = array()){
 	static $chemin = null;
 
 	spip_timer('lesscss_compile');
-	if (!class_exists('Less_Parser')){
-		require_once 'less.php/Less.php';
+	if (!class_exists('Less_Autoloader')){
+		include_spip('lib/Less/Autoloader');
+		Less_Autoloader::register();
 	}
 	if (!function_exists('lire_config')) {
 		include_spip('inc/config');
