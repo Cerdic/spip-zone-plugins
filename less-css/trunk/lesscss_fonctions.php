@@ -192,7 +192,7 @@ function less_css($source){
 		// si pas change ET par de var_mode=recalcul ET pas de @import dedans, rien a faire
 		// aka sur un var_mode=calcul on compute si y un @import mais si pas change
 		if (!$changed
-		  AND (!defined('_VAR_MODE') OR _VAR_MODE != 'recalcul')
+		  AND (!defined('_VAR_MODE') OR !in_array(_VAR_MODE, array('recalcul','css')))
 		  and strpos($contenu, '@import') === false)
 			return $f;
 
