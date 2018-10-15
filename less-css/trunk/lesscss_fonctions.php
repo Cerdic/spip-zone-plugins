@@ -7,6 +7,24 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function lesscss_compile_cache_get($less_parser, $file_path, $cache_key) {
+	//spip_log("lesscss_compile_cache_get $file_path, $cache_key", 'less');
+	if ($store = cache_get("lesscss:$cache_key")
+	  and isset($store['path'])
+	  and isset($store['value'])
+		and $store['path'] === $file_path) {
+		//spip_log("lesscss_compile_cache_get OK $file_path, $cache_key", 'less');
+		return $store['value'];
+	}
+	//spip_log("lesscss_compile_cache_get FAIL $file_path, $cache_key", 'less');
+	return null;
+}
+
+function lesscss_compile_cache_set($less_parser, $file_path, $cache_key, $value) {
+	//spip_log("lesscss_compile_cache_set $file_path, $cache_key", 'less');
+	cache_set("lesscss:$cache_key", array('path' => $file_path, 'value' => $value));
+}
+
 /**
  * Compiler des styles inline LESS en CSS
  *
@@ -45,6 +63,13 @@ function lesscss_compile($style, $contexte = array()){
 		}
 		$dir = sous_repertoire (_DIR_VAR, 'cache-less');
 		$parser_options['cache_dir'] = sous_repertoire($dir, 'compile');
+		if (defined('_MEMOIZE_CACHE_LESS')
+		  and isset($GLOBALS['Memoization'])
+			and in_array($GLOBALS['Memoization']->methode, array('apc','apcu','xcache'))) {
+			$parser_options['cache_method'] = 'callback';
+			$parser_options['cache_callback_get'] = 'lesscss_compile_cache_get';
+			$parser_options['cache_callback_set'] = 'lesscss_compile_cache_set';
+		}
 	}
 
 	$url_absolue = (!empty($contexte['file'])?protocole_implicite(url_absolue($contexte['file'])):null);
