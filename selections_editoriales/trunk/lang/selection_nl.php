@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_enlever_selection' => 'Ontkoppelen',
-	'bouton_supprimer_selection' => 'Verwijder deze selectie',
+	'bouton_supprimer_selection' => 'Verwijder deze selectie', # MODIF
 
 	// C
 	'champ_css_explication' => 'Aan deze selectie toegevoegde CSS class.',
