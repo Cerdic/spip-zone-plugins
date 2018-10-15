@@ -104,6 +104,8 @@ function lesscss_compile($style, $contexte = array()){
 
 	try {
 		$parser->parse($style,$url_absolue);
+		spip_log('lesscss_compile parse '.(isset($contexte['file'])?$contexte['file']:substr($style,0,100)).' :: '.spip_timer('lesscss_compile'), 'less');
+		spip_timer('lesscss_compile');
 		$out = $parser->getCss();
 
 		if ($files = Less_Parser::AllParsedFiles()
@@ -118,7 +120,7 @@ function lesscss_compile($style, $contexte = array()){
 			$out = "/*\n#@".implode("\n#@",$files)."\n*"."/\n" . $out;
 		}
 
-		spip_log('lesscss_compile '.(isset($contexte['file'])?$contexte['file']:substr($style,0,100)).' :: '.spip_timer('lesscss_compile'), 'less');
+		spip_log('lesscss_compile getCSS '.(isset($contexte['file'])?$contexte['file']:substr($style,0,100)).' :: '.spip_timer('lesscss_compile'), 'less');
 		return $out;
 	}
 	// en cas d'erreur, on retourne du vide...
