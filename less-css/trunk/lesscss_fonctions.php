@@ -63,6 +63,7 @@ function lesscss_compile($style, $contexte = array()){
 		}
 		$dir = sous_repertoire (_DIR_VAR, 'cache-less');
 		$parser_options['cache_dir'] = sous_repertoire($dir, 'compile');
+		//$parser_options['cache_method'] = 'serialize';
 		if (defined('_MEMOIZE_CACHE_LESS')
 		  and isset($GLOBALS['Memoization'])
 			and in_array($GLOBALS['Memoization']->methode, array('apc','apcu','xcache'))) {
@@ -105,6 +106,7 @@ function lesscss_compile($style, $contexte = array()){
 	try {
 		$parser->parse($style,$url_absolue);
 		spip_log('lesscss_compile parse '.(isset($contexte['file'])?$contexte['file']:substr($style,0,100)).' :: '.spip_timer('lesscss_compile'), 'less');
+		//die('ok1');
 		spip_timer('lesscss_compile');
 		$out = $parser->getCss();
 
@@ -121,6 +123,7 @@ function lesscss_compile($style, $contexte = array()){
 		}
 
 		spip_log('lesscss_compile getCSS '.(isset($contexte['file'])?$contexte['file']:substr($style,0,100)).' :: '.spip_timer('lesscss_compile'), 'less');
+		//die('ok2');
 		return $out;
 	}
 	// en cas d'erreur, on retourne du vide...
