@@ -12,11 +12,12 @@ function selecteurgenerique_verifier_js($flux){
 	$prepjs = "";
 	$prepcss = "ui/";
 	include_spip('inc/plugin');
-	if(spip_version_compare($GLOBALS['spip_version_branche'],"3.0.*",'<=')) {
+	$contenu = "";
+
+if(spip_version_compare($GLOBALS['spip_version_branche'],"3.2.0",'<')) {
+
 		$prepjs = "jquery.ui.";
 		$prepcss = "jquery.ui.";
-		}
-	$contenu = "";
 		/**
 		 * On a besoin de '.$prepjs.'autocomplete.js et de ses dépendances
 		 */
@@ -26,110 +27,93 @@ function selecteurgenerique_verifier_js($flux){
 			 */
 			if(strpos($flux,''.$prepjs.'core.js')===FALSE){
 				$ui = find_in_path('prive/javascript/ui/'.$prepjs.'core.js');
-				$contenu .= "
-<script type='text/javascript' src='$ui'></script>
-";
+ 				$contenu .= "<script type='text/javascript' src='$ui'></script>";
 			}
 			/**
 			 * ui.widget.js
 			 */
 			if(strpos($flux,''.$prepjs.'widget.js')===FALSE){
 				$widget = find_in_path('prive/javascript/ui/'.$prepjs.'widget.js');
-				$contenu .= "
-<script type='text/javascript' src='$widget'></script>
-";
+				$contenu .= "<script type='text/javascript' src='$widget'></script>";
 			}
 			/**
 			 * ui.menu.js
 			 */
 			if(strpos($flux,''.$prepjs.'menu.js')===FALSE){
 				$widget = find_in_path('prive/javascript/ui/'.$prepjs.'menu.js');
-				$contenu .= "
-<script type='text/javascript' src='$widget'></script>
-";
+				$contenu .= "<script type='text/javascript' src='$widget'></script>";
 			}
 			/**
 			 * ui.position.js
 			 */
 			if(strpos($flux,''.$prepjs.'position.js')===FALSE){
 				$position = find_in_path('prive/javascript/ui/'.$prepjs.'position.js');
-				$contenu .= "
-<script type='text/javascript' src='$position'></script>
-";
+ 				$contenu .= "<script type='text/javascript' src='$position'></script>";
+			}
 			/**
 			 * Finalement on insère l'autocompleteur
 			 */
 			$autocompleter = find_in_path('prive/javascript/ui/'.$prepjs.'autocomplete.js');
-			
-			$contenu .= "
-<script type='text/javascript' src='$autocompleter'></script>
-";
+			$contenu .= "<script type='text/javascript' src='$autocompleter'></script>";
+		}
+} // Fin < 3.2
 
-			/**
-			 * jquery.ui.autocomplete.html
-			 * Ajoute la prise en compte de code html dans le sélecteur et l'interprète
-			 * Par exemple des images / icones
-			 */
-			if(strpos($flux,'autocomplete.html')===FALSE){
-				$autocompleter_html = find_in_path('javascript/ui/autocomplete.html.js');
-				$contenu .= $autocompleter_html ? "
-<script type='text/javascript' src='$autocompleter_html'></script>
-" : '';
-			}
-		};
+	/**
+	 * jquery.ui.autocomplete.html
+	 * Ajoute la prise en compte de code html dans le sélecteur et l'interprète
+	 * Par exemple des images / icones
+	 */
+	if(strpos($flux,'autocomplete.html')===FALSE){
+		$autocompleter_html = find_in_path('javascript/ui/autocomplete.html.js');
+ 		$contenu .= $autocompleter_html ? "<script type='text/javascript' src='$autocompleter_html'></script>" : '';
 	}
 	/**
 	 * On insère également les fonctions de bases supplémentaires
 	 */
 	if(strpos($flux,'selecteur_generique_functions')===FALSE){
 		$functions = find_in_path('javascript/selecteur_generique_functions.js');
-		$contenu .= "
-<script type='text/javascript' src='$functions'></script>
-";
+ 		$contenu .= "<script type='text/javascript' src='$functions'></script>";
 	};
-		
+
+	// Styles
+	/**
+	 * ui.core.css
+	 */
+	if(strpos($flux,''.$prepcss.'core.css')===FALSE){
+		$ui_css = find_in_path('css/'.$prepcss.'core.css');
+ 		$contenu .= "<link rel='stylesheet' href='$ui_css' type='text/css' media='all' />";
+	}
+// Compat jquery.ui legacy
+if(spip_version_compare($GLOBALS['spip_version_branche'],"3.2.0",'<')) {
 	/**
 	 * On intègre la CSS qui va bien également et ses dépendances
 	 */
 	if(strpos($flux,''.$prepcss.'autocomplete.css')===FALSE){
-		/**
-		 * ui.core.css
-		 */
-		if(strpos($flux,''.$prepcss.'core.css')===FALSE){
-			$ui_css = find_in_path('css/'.$prepcss.'core.css');
-			$contenu .= "
-<link rel='stylesheet' href='$ui_css' type='text/css' media='all' />
-";
-		}
+
 		/**
 		 * ui.menu.css
 		 */
 		if(strpos($flux,''.$prepcss.'menu.css')===FALSE){
 			$autocomplete_css = find_in_path('css/'.$prepcss.'menu.css');
-			$contenu .= "
-<link rel='stylesheet' href='$autocomplete_css' type='text/css' media='all' />
-";
+ 			$contenu .= "<link rel='stylesheet' href='$autocomplete_css' type='text/css' media='all' />";
 		}
 		/**
 		 * ui.autocomplete.css
 		 */
 		if(strpos($flux,''.$prepcss.'autocomplete.css')===FALSE){
 			$autocomplete_css = find_in_path('css/'.$prepcss.'autocomplete.css');
-			$contenu .= "
-<link rel='stylesheet' href='$autocomplete_css' type='text/css' media='all' />
-";
+			$contenu .= "<link rel='stylesheet' href='$autocomplete_css' type='text/css' media='all' />";
 		}
-
+	}
+}// Fin Compat
 		/**
 		 * ui.theme.css
 		 */
 		if(strpos($flux,''.$prepcss.'theme.css')===FALSE){
 			$theme_css = find_in_path('css/'.$prepcss.'theme.css');
-			$contenu .= "
-<link rel='stylesheet' href='$theme_css' type='text/css' media='all' />
-";
+ 			$contenu .= "<link rel='stylesheet' href='$theme_css' type='text/css' media='all' />";
 		}
-	}
+
 	return $contenu;
 }
 
