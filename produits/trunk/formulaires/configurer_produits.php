@@ -62,7 +62,7 @@ function formulaires_configurer_produits_saisies_dist(){
 				'label' => _T('produits:limiter_ident_secteur_label'),
 				'explication' => _T('produits:limiter_ident_secteur_explication'),
 				'multiple' => 'oui',
-				'defaut' => $config['limiter_ident_secteur'],
+				'defaut' => isset($config['limiter_ident_secteur']) ? $config['limiter_ident_secteur'] : '',
 				'afficher_si' => '@limiter_ajout@ == "on"' 
 			)
 		),

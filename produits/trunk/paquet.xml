@@ -1,7 +1,7 @@
 <paquet
 	prefix="produits"
 	categorie="outil"
-	version="1.2.9"
+	version="1.2.10"
 	etat="test"
 	compatibilite="[3.0.13;3.2.*]"
 	logo="prive/themes/spip/images/produits-64.png"
@@ -14,8 +14,8 @@
 	<auteur>Les Développements Durables, http://www.ldd.fr</auteur>
 
 	<licence>GNU/GPL</licence>
-	<necessite nom="saisies"  compatibilite="[1.24.0;]" />
-	<necessite nom="verifier"  compatibilite="[1.0.4;]" />
+	<necessite nom="saisies" compatibilite="[1.24.0;]" />
+	<necessite nom="verifier" compatibilite="[1.0.4;]" />
 
 	<pipeline nom="autoriser" inclure="produits_autorisations.php" />
 
