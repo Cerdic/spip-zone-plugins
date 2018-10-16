@@ -272,7 +272,6 @@ a.plus_info,
 }
 .formulaire_spip .obligatoire input.text,
 .formulaire_spip .obligatoire input.email,
-.formulaire_spip .obligatoire textarea,
 .formulaire_spip .obligatoire select,
 .formulaire_spip .obligatoire .choix {
 	font-weight: bold;
@@ -349,13 +348,16 @@ a.plus_info,
 	margin-bottom: .34625em;
 }
 .formulaire_spip legend {
-	width: calc(100% - 1em);
+	width: 100%;
 	display: block;
 	overflow: hidden;
 }
 .formulaire_spip fieldset {
 	border: none;
 	border-top: none; /* à garder */
+}
+.formulaire_spip .fieldset {
+	margin-bottom: 1.5em;
 }
 
 .lat .formulaire_spip .editer {
