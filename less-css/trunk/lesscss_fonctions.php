@@ -25,6 +25,27 @@ function lesscss_compile_cache_set($less_parser, $file_path, $cache_key, $value)
 	cache_set("lesscss:$cache_key", array('path' => $file_path, 'value' => $value));
 }
 
+function lesscss_import_dirs() {
+	static $import_dirs = null;
+	if (is_null($import_dirs)){
+		$path = _chemin();
+		$import_dirs = array();
+		foreach($path as $p){
+			$import_dirs[$p] = protocole_implicite(url_absolue($p?$p:"./"));
+		}
+	}
+	return $import_dirs;
+}
+
+function lesscss_cache_dir() {
+	static $cache_dir;
+	if (is_null($cache_dir)) {
+		$cache_dir = sous_repertoire (_DIR_VAR, 'cache-less');
+		$cache_dir = sous_repertoire($cache_dir, 'compile');
+	}
+	return $cache_dir;
+}
+
 /**
  * Compiler des styles inline LESS en CSS
  *
@@ -36,7 +57,6 @@ function lesscss_compile_cache_set($less_parser, $file_path, $cache_key, $value)
  * @return string
  */
 function lesscss_compile($style, $contexte = array()){
-	static $import_dirs = null;
 	static $parser_options = null;
 	static $chemin = null;
 
@@ -49,27 +69,23 @@ function lesscss_compile($style, $contexte = array()){
 		include_spip('inc/config');
 	}
 
-	if (is_null($import_dirs)){
-		$path = _chemin();
-		$import_dirs = array();
-		foreach($path as $p){
-			$import_dirs[$p] = protocole_implicite(url_absolue($p?$p:"./"));
-		}
-	}
 	if (is_null($parser_options)) {
 		$parser_options = array();
 		if (lire_config('lesscss/activer_sourcemaps', false) == "on") {
 			$parser_options['sourceMap'] = true;
 		}
-		$dir = sous_repertoire (_DIR_VAR, 'cache-less');
-		$parser_options['cache_dir'] = sous_repertoire($dir, 'compile');
-		//$parser_options['cache_method'] = 'serialize';
+		$parser_options['cache_dir'] = lesscss_cache_dir();
 		if (defined('_MEMOIZE_CACHE_LESS')
 		  and isset($GLOBALS['Memoization'])
 			and in_array($GLOBALS['Memoization']->methode, array('apc','apcu','xcache'))) {
 			$parser_options['cache_method'] = 'callback';
 			$parser_options['cache_callback_get'] = 'lesscss_compile_cache_get';
 			$parser_options['cache_callback_set'] = 'lesscss_compile_cache_set';
+		}
+		$parser_options['import_dirs'] = lesscss_import_dirs();
+
+		if (defined('_VAR_MODE') and in_array(_VAR_MODE, array('css', 'recalcul'))) {
+			$parser_options['use_cache'] = false;
 		}
 	}
 
@@ -100,15 +116,21 @@ function lesscss_compile($style, $contexte = array()){
 	}
 
 	$parser = new Less_Parser($parser_options);
-	$parser->setImportDirs($import_dirs);
 	$parser->relativeUrls = true;
 
 	try {
-		$parser->parse($style,$url_absolue);
-		spip_log('lesscss_compile parse '.(isset($contexte['file'])?$contexte['file']:substr($style,0,100)).' :: '.spip_timer('lesscss_compile'), 'less');
-		//die('ok1');
-		spip_timer('lesscss_compile');
-		$out = $parser->getCss();
+		if (!$style and isset($contexte['file']) and $contexte['file'])  {
+			$internal_cache_file = $parser_options['cache_dir'] . Less_Cache::Get(array( $contexte['file'] => $url_absolue ), $parser_options);
+			$out = file_get_contents($internal_cache_file);
+			spip_log('lesscss_compile Compile CACHED ' . $contexte['file'] . ' :: '.spip_timer('lesscss_compile'), 'less');
+		}
+		else {
+			$parser->parse($style,$url_absolue);
+			spip_log('lesscss_compile parse '.(isset($contexte['file'])?$contexte['file']:substr($style,0,100)).' :: '.spip_timer('lesscss_compile'), 'less');
+			spip_timer('lesscss_compile');
+			$out = $parser->getCss();
+			spip_log('lesscss_compile getCSS '.(isset($contexte['file'])?$contexte['file']:substr($style,0,100)).' :: '.spip_timer('lesscss_compile'), 'less');
+		}
 
 		if ($files = Less_Parser::AllParsedFiles()
 		  AND count($files)){
@@ -122,8 +144,6 @@ function lesscss_compile($style, $contexte = array()){
 			$out = "/*\n#@".implode("\n#@",$files)."\n*"."/\n" . $out;
 		}
 
-		spip_log('lesscss_compile getCSS '.(isset($contexte['file'])?$contexte['file']:substr($style,0,100)).' :: '.spip_timer('lesscss_compile'), 'less');
-		//die('ok2');
 		return $out;
 	}
 	// en cas d'erreur, on retourne du vide...
@@ -181,33 +201,24 @@ function less_css($source){
 		. '.css';
 
 		# si la feuille compilee est plus recente que la feuille source
-		# l'utiliser sans rien faire, sauf si recalcul explicite
+		# l'utiliser sans rien faire, sauf si il y a un var_mode
+		# dans ca cas on passe par la compilation qui utilise un cache et est donc rapide si rien de change
 		$changed = false;
-		if (@filemtime($f) < @filemtime($source))
+		if (@filemtime($f) < @filemtime($source)){
 			$changed = true;
+		}
 
-		// si pas change ET pas de var_mode, rien a faire
+		// si pas change ET pas de var_mode du tout, rien a faire (performance)
 		if (!$changed
-		  AND !defined('_VAR_MODE'))
+			AND !defined('_VAR_MODE'))
 			return $f;
-
-		if (!lire_fichier($source, $contenu))
-			return $source;
-
-		// si pas change ET par de var_mode=recalcul ET pas de @import dedans, rien a faire
-		// aka sur un var_mode=calcul on compute si y un @import mais si pas change
-		if (!$changed
-		  AND (!defined('_VAR_MODE') OR !in_array(_VAR_MODE, array('recalcul','css')))
-		  and strpos($contenu, '@import') === false)
-			return $f;
-
 
 		# compiler le LESS si besoin (ne pas generer une erreur si source vide
-		if (!$contenu){
+		if (!filesize($source)){
 			$contenu = "/* Source $source : vide */\n";
 		}
 		else {
-			$contenu = lesscss_compile($contenu, array('file'=>$source, 'dest'=>$f));
+			$contenu = lesscss_compile('', array('file'=>$source, 'dest'=>$f));
 		}
 		// si erreur de compilation on renvoit un commentaire, et il y a deja eu un log
 		if (!$contenu){
