@@ -22,6 +22,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * 	Le contenu modifié
  */
 function grappes_inserer_javascript($flux) {
+	include_spip('plugins/installer');
 	if (spip_version_compare($GLOBALS['spip_version_branche'], '3.2.0', '<')) {
 		include_spip('selecteurgenerique_fonctions');
 		$flux .= selecteurgenerique_verifier_js($flux);
