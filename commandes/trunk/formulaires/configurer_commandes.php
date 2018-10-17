@@ -241,7 +241,7 @@ function formulaires_configurer_commandes_saisies_dist(){
 					'nom' => 'accueil_encours',
 					'label' => _T('commandes:notifications_activer_label'),
 					'explication' => _T('commandes:explication_accueil_encours'),
-					'defaut' => $config['accueil_encours'],
+					'defaut' => isset($config['accueil_encours']) ? $config['accueil_encours'] : '',
 				)
 			),
 			array(
@@ -250,7 +250,7 @@ function formulaires_configurer_commandes_saisies_dist(){
 					'nom' => 'statuts_actifs',
 					'label' => _T('commandes:label_statuts_actifs'),
 					'datas' => $statuts,
-					'defaut' => $config['statuts_actifs'],
+					'defaut' => isset($config['statuts_actifs']) ? $config['statuts_actifs'] : '',
 					'explication' => _T('commandes:explication_choix_statuts_actifs'),
 					'afficher_si' => '@accueil_encours@ == "on"'
 				)
