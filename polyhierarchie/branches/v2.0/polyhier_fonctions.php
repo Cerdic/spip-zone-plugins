@@ -348,24 +348,33 @@ function balise_URL_POLYHIER_dist($p) {
  * @return string
  */
 function generer_url_polyhier_entite($id_objet, $objet, $id_rubrique=null, $args='', $ancre='') {
-
+	static $branches = array();
 	// si id_rubrique contextuel passe en argument et si c'est bien un parent polyhierarchique
-	$parents_poly = sql_allfetsel('id_parent','spip_rubriques_liens', 'objet='.sql_quote($objet). ' AND id_objet='.intval($id_objet));
-	$parents_poly = array_map('reset',$parents_poly);
+	if ($id_rubrique = intval($id_rubrique)
+	  and $parents_poly = sql_allfetsel('id_parent','spip_rubriques_liens', 'objet='.sql_quote($objet). ' AND id_objet='.intval($id_objet))){
 
-	$maxiter = 100;
-	$branche = $r = array($id_rubrique);
-	while (!($id_parent = array_intersect($parents_poly, $r))
-	  and $maxiter--
-	  and $filles = sql_allfetsel('id_rubrique','spip_rubriques',sql_in('id_parent', $r) . " AND " . sql_in('id_rubrique', $branche, 'NOT'))) {
-		$r = array_map('reset', $filles);
-		$branche = array_merge($branche, $r);
-	}
+		$parents_poly = array_map('reset', $parents_poly);
 
-	if ($id_parent = reset($id_parent)) {
-		// le vrai parent
-		$champ_parent = ($objet == 'rubrique' ? 'id_parent' : 'id_rubrique');
-		$args .= ($args?'&':'')."$champ_parent=$id_parent";
+		$maxiter = 100;
+		$id_rubrique = intval($id_rubrique);
+		if (!isset($branches[$id_rubrique])){
+			$branches[$id_rubrique] = $id_rubrique;
+		}
+		$branche = $branches[$id_rubrique];
+		$r = explode(',', $branche);
+		while (!($id_parent = array_intersect($parents_poly, $r))
+			and $maxiter--
+			and $filles = sql_allfetsel('id_rubrique', 'spip_rubriques', 'id_parent IN (' . implode(',', $r) . ") AND id_rubrique NOT IN ($branche)")){
+			$r = array_map('reset', $filles);
+			$branche .= ',' . implode(',', $r);
+		}
+		$branches[$id_rubrique] = $branche;
+
+		if ($id_parent and $id_parent = reset($id_parent)){
+			// le vrai parent
+			$champ_parent = ($objet=='rubrique' ? 'id_parent' : 'id_rubrique');
+			$args .= ($args ? '&' : '') . "$champ_parent=$id_parent";
+		}
 	}
 	$url = generer_url_entite($id_objet, $objet, $args, $ancre, true);
 	return $url;
