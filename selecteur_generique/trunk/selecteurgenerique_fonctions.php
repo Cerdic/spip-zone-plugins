@@ -8,7 +8,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return string Retourne une liste de <script> et de <link> à insérer dans le <head> de la page
  */
 function selecteurgenerique_verifier_js($flux){
-
+	include_spip('plugins/installer');
+	
 	$prepjs = "";
 	$prepcss = "ui/";
 	include_spip('inc/plugin');
