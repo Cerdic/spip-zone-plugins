@@ -1,7 +1,7 @@
 <paquet
 	prefix="tb"
 	categorie="outil"
-	version="0.3.9"
+	version="0.3.10"
 	etat="test"
 	compatibilite="[2.0.10;3.1.*]"
 	logo="images/tb-32.png"
@@ -14,7 +14,7 @@
 	<auteur lien="http://www.yterium.com">Cedric</auteur>
 
 	<menu nom="tb" titre="tb:testbuilder" parent="menu_developpement" icone="images/tb-16.png" action="testbuilder" />
-	<spip compatibilite="[3.0.0;3.1.*]">
+	<spip compatibilite="[3.0.0;3.0.*]">
 		<menu nom="tb" titre="tb:testbuilder" parent="bando_administration" icone="images/tb-16.png" action="testbuilder" />
 	</spip>
 </paquet>
