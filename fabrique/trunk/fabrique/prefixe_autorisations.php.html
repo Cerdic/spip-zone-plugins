@@ -174,7 +174,7 @@ function autoriser_associer#GET{objet}_dist($faire, $type, $id, $qui, $opt) {
 function [(#PREFIXE)]_auteurs_objet($objet, $id_objet) {
 	$auteurs = sql_allfetsel('id_auteur', 'spip_auteurs_liens', array('objet = ' . sql_quote($objet), 'id_objet = ' . intval($id_objet)));
 	if (is_array($auteurs)) {
-		return array_map('reset', $auteurs);
+		return array_column($auteurs, 'id_auteur');
 	}
 	return array();
 }
