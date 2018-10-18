@@ -25,7 +25,12 @@ function links_insert_head_css($flux) {
 		$js = 'var js_nouvelle_fenetre=\''._T('links:js_nouvelle_fenetre').'\';';
 		//Ouverture dune nouvelel fenetre sur les liens externes
 		if($links['external'] == 'on'){
-			$js .= 'var links_site = \''.$GLOBALS['meta']['adresse_site'].'\';';
+			// quand un site fait du multidomaine on prend en reference le domaine de la page concernee :
+			// sur www.example.org : autre.example.org est external
+			// sur autre.example.org : www.example.org est external
+			// sur un site mono-domaine ca ne change rien :)
+			// ca marche parce que le cache change quand le HTTP_HOST change (donc quand le domaine change)
+			$js .= 'var links_site = \'' . url_de_base() . '\';';
 		}
 		//Ouverture d'une nouvelle fenetre sur les documents (extensions a preciser)
 		if(($links['download'] == 'on')&&($links['doc_list'])){
