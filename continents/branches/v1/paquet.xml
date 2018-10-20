@@ -1,7 +1,7 @@
 <paquet
 	prefix="continents"
 	categorie="outil"
-	version="1.1.0"
+	version="1.1.1"
 	etat="stable"
 	compatibilite="[3.0.10;3.2.*]"
 	logo="prive/themes/spip/images/continents-64.png"
@@ -11,12 +11,11 @@
 
 	<nom>Continents</nom>
 
-	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs -->
 	<auteur lien='http://websimple.be/'>Rainer M&#252;ller</auteur>
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="pays" compatibilite="[3.0.10;]" />
+	<necessite nom="pays" compatibilite="[3.2.0;]" />
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/continents.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/continents.php" />
