@@ -1,11 +1,11 @@
 <?php
 
 # inserer les liens dans la page
-function skiplink_affichage_final(&$page) {
+function skiplink_affichage_final($page) {
 	// ne pas se fatiguer si pas HTML
 	if (!$GLOBALS['html']
 	  OR strpos($page, 'id="raccourcis"') # pas deux fois, au cas ou !
-	  OR strpos($page,"<!-- insert_head -->")===false # pas de insert_head, pas d'insertion auto des liens 
+	  OR strpos($page,"<!-- insert_head -->")===false # pas de insert_head, pas d'insertion auto des liens
 	)
 		return $page;
 
@@ -13,7 +13,7 @@ function skiplink_affichage_final(&$page) {
 	$recherche_existe = (preg_match(',<input.*?name[ ]*=[ ]*"recherche".*?>,i', $page) == 1 ? 'oui' : 'non');
 	$raccourcis = recuperer_fond('raccourcis', array('lang'=>$GLOBALS['spip_lang'], 'recherche'=>$recherche_existe));
 	preg_match(',<body\b.*?>,i', $page, $regs);
-  
+
 	if ($regs)
 		$page = substr_replace($page, $raccourcis, (strpos($page, $regs[0]) + strlen($regs[0])), 0);
 	$remonter = recuperer_fond('remonter', array('lang'=>$GLOBALS['spip_lang']));
