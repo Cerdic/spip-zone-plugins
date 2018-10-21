@@ -17,7 +17,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ffedata_titre' => 'Data FFE',
 	'ffedata_departement'=>'Département',
 	'ffedata_saisir_code_departement'=>'saisir le numéro du département',
-	
+	// S
+	'saisie_nrffe_titre' => 'Numéro de licence FFE',
+	'saisie_nrffe_explication' => 'Le numéro de licence',	
 	// T
 	'titre_page_informations_ffedata' => 'Informations utiles pour utiliser FFE Data',
 	'titre_informations_equipes_clubs' => 'Les informations sur les équipes d’un club',

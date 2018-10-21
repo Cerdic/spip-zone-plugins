@@ -1,0 +1,90 @@
+#CACHE{60*60*4}
+ 
+[(#REM) id_formulaire = 2 par défaut ]
+[(#ENV{id_formulaire,2}|setenv{id_formulaire})]
+[<!-- (#REM) Il faut déclarer le tableau avant la boucle --> ]
+[(#ARRAY{}|set{tab})]
+<BOUCLE_formidable(FORMULAIRES_REPONSES){id_formulaire ?}>
+[(#ARRAY{
+   categorie,[(#VOIR_REPONSE{Cat, valeur_uniquement, ""}|textebrut)],
+   nom,[(#VOIR_REPONSE{Nom, brut}|strtoupper)],
+   prenom,[(#VOIR_REPONSE{Prenom, brut})],
+   elo,[(#VOIR_REPONSE{Elo, valeur_uniquement, ""}|textebrut)],
+   club,[(#VOIR_REPONSE{ClubNom, valeur_uniquement, ""}|textebrut)],
+   codeffe,[(#VOIR_REPONSE{NrFFE, valeur_uniquement, ""}|textebrut)],
+   type,[(#VOIR_REPONSE{AffType, valeur_uniquement, ""}|textebrut)],
+}|set{row})]
+[(#GET{tab}|push{#GET{row}}|set{tab})]
+</BOUCLE_formidable>
+ 
+[(#ENV{sens}|=={0}|?{#SET{sens,1},#SET{sens,0}})]
+ 
+<B_elo>
+<table class="spip">
+    <thead>
+        <tr>
+            <th>
+                <a
+                    class="ajax nohistory [on(#ENV{tri}|=={categorie}|oui) [(#ENV{sens}|=={1}|?{desc,asc})] ]"
+                    href="[(#SELF|parametre_url{tri,categorie}|parametre_url{sens,#GET{sens}})]">
+                    Catégorie
+                </a> 
+            </th>
+            <th>
+                <a
+                class="ajax nohistory [on(#ENV{tri}|=={nom}|oui) [(#ENV{sens}|=={1}|?{desc,asc})] ]"
+                href="[(#SELF|parametre_url{tri,nom}|parametre_url{sens,#GET{sens}})]">Nom</a>
+            </th>
+            <th>Prénom</th>
+            <th>
+                [<!--(#REM) 
+                <a class="ajax nohistory [on(#ENV{tri}|=={elo}|oui) [(#ENV{sens}|=={1}|?{asc,desc})] ]"
+                href="[(#SELF|parametre_url{tri,elo}|parametre_url{sens,#GET{sens}})]">Elo</a>
+                --> ]
+                Elo
+            </th>
+            <th>
+            <a
+                class="ajax nohistory [on(#ENV{tri}|=={club}|oui) [(#ENV{sens}|=={1}|?{desc,asc})] ]"
+                href="[(#SELF|parametre_url{tri,club}|parametre_url{sens,#GET{sens}})]">Club</a>           
+            </th>
+            <th>Code FFE</th>
+			<th>Licence</th>
+        </tr>
+    </thead>
+    <tbody>
+        <BOUCLE_elo(DATA)
+        {source table, #GET{tab} }
+        {par #ENV{tri,categorie}}
+        {inverse #ENV{sens,1}}
+        >
+        <tr [class="row-(#COMPTEUR_BOUCLE|alterner{even,odd})"]>
+            <td>[(#CATEGORIE|supprimer_numero)]</td>
+            <td>#NOM</td>
+            <td>#PRENOM</td>
+            <td>#ELO</td>
+            <td>#CLUB</td>
+            <td>#CODEFFE</td>
+			<td>#TYPE</td>
+        </tr>
+        </BOUCLE_elo>
+    </tbody>
+</table>
+ 
+<style type="text/css">
+    .row-even {
+        background-color: rgba(0,0,0,.1);
+    }
+    a.on.desc:after,
+    a.on.asc:after {
+        content: '⇡';
+        font-size: 16px;
+        margin: 0 2px;
+        text-decoration: none !important;
+    }
+    a.on.desc:after {
+        content: '⇣';
+    }
+</style>
+ 
+</B_elo>
