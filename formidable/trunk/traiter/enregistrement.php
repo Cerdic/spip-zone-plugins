@@ -198,7 +198,7 @@ function traiter_enregistrement_update_dist($id_formulaire, $traitement, $saisie
  * @param array $saisie la description de la saisie
  * @param int $id_formulaire le formulaire
  * @param int $id_formulaires_reponse
- * return array|null un tableau organisé par fichier, contenant 'nom', 'extension','mime','taille'
+ * @return array|null un tableau organisé par fichier, contenant 'nom', 'extension','mime','taille'
 **/
 function traiter_enregistrement_fichiers($saisie, $id_formulaire, $id_formulaires_reponse) {
 	return formidable_deplacer_fichiers_produire_vue_saisie($saisie, array('id_formulaire' => $id_formulaire, 'id_formulaires_reponse' => $id_formulaires_reponse));
