@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_rub_interface_label' => 'Exibição multilíngue',
 	'option_afficher_si_explication' => 'Informe as condições para exibir o campo, em função do valor de outros campos. O identificador dos outros campos deve ser inserido entre <code>@</code>.<br />
 Exemplo: code>@selection_1@=="Toto"</code> condiciona a exibição do campo a que o campo  <code>selection_1</code> tenha o valor <code>Toto</code>.<br />
-Pode-se usar operadores boleanos <code>||</code> (ou) e  <code>&&</code> (e)',
+Pode-se usar operadores boleanos <code>||</code> (ou) e  <code>&&</code> (e)', # MODIF
 	'option_afficher_si_label' => 'Exibição condicional',
 	'option_afficher_si_remplissage_uniquement_explication' => 'Marcando este checkbox, a exibição condicioinal se aplicará unicamente no preenchimento do formulário e não na exibição dos resultados.',
 	'option_afficher_si_remplissage_uniquement_label' => 'Unicamente no preenchimento',
