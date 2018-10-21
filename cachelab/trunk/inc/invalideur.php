@@ -195,8 +195,9 @@ function appliquer_quota_cache() {
 	$dir = sous_repertoire(_DIR_CACHE, $l);
 	list($nombre, $taille) = nombre_de_fichiers_repertoire($dir);
 	$total_cache = $taille * $nombre;
-	spip_log("Taille du CACHE estimee ($l): "
-		. (intval(16 * $total_cache / (1024 * 1024 / 10)) / 10) . " Mo", "invalideur");
+	if ($total_cache)	// Ajout / core car c'est vide avec la memoization
+		spip_log("Taille du CACHE estimee ($l): "
+			. (intval(16 * $total_cache / (1024 * 1024 / 10)) / 10) . " Mo", "invalideur");
 
 	// Nombre max de fichiers a supprimer
 	if ($GLOBALS['quota_cache'] > 0
@@ -231,7 +232,6 @@ function appliquer_quota_cache() {
 	return $encore;
 }
 
-
 //
 // Destruction des fichiers caches invalides
 //
@@ -257,6 +257,9 @@ function retire_cache($cache) {
 ## mais ici elles ne font plus rien
 ##
 
+if  (!defined('LOG_INVALIDATION_CORE'))
+	define ('LOG_INVALIDATION_CORE', true);
+
 // Supprimer les caches marques "x"
 // A priori dans cette version la fonction ne sera pas appelee, car
 // la meta est toujours false ; mais evitons un bug si elle est appellee
@@ -264,7 +267,11 @@ function retire_cache($cache) {
 function retire_caches($chemin = '') {
 	if (isset($GLOBALS['meta']['invalider_caches'])) {
 		effacer_meta('invalider_caches');
+		if  (LOG_INVALIDATION_CORE)
+			spip_log ("retire_caches($chemin = '') ne devrait pas être appelé car ['meta']['invalider_caches'] devrait être false", "invalideur_core_retire_caches_BUG");
 	} # concurrence
+	if  (LOG_INVALIDATION_CORE)
+		spip_log ("retire_caches($chemin = '')", "invalideur_core_retire_caches");
 }
 
 
@@ -282,20 +289,69 @@ function calcul_invalideurs($corps, $primary, &$boucles, $id_boucle) {
 // invoquee quand on vide tout le cache en bloc (action/purger)
 //
 // http://code.spip.net/@supprime_invalideurs
-function supprime_invalideurs() { }
+function supprime_invalideurs() { 
+	if  (LOG_INVALIDATION_CORE)
+		spip_log ("supprime_invalideurs()", "invalideur_core");
+}
 
-
-// Calcul des pages : noter dans la base les liens d'invalidation
+// le core indique : "Calcul des pages : noter dans la base les liens d'invalidation"
+//
+// Appelé à la fin de creer_cache
+// $page est le tableau décrivant le cache qui vient d'être calculé 
+// avec les clés suivantes pour ses métadonnées : 
+// squelette,source,process_ins,invalideurs,entetes,duree,texte,notes,contexte,lastmodified,sig
 // http://code.spip.net/@maj_invalideurs
-function maj_invalideurs($fichier, &$page) { }
+//
+// S'il y a une entete X-Spip-Methode-Duree-Cache, on récupère la méthode
+// et on appelle la fonction cachelab_calcule_duree_cache_lamethode avec le paramètre $page
+// On corrige alors la durée du cache avec la valeur retournée
+//
+function maj_invalideurs($fichier, &$page) {
+	if  (LOG_INVALIDATION_CORE) {
+		// Abondamment appelé. À part pour pas noyer les autres
+		spip_log ("maj_invalideurs($fichier, &page)", "invalideur_core_maj_invalideurs");
+	}
+	if (isset($page['entetes']['X-Spip-Methode-Duree-Cache'])) {
+		global $Memoization;
+		// FIXME : ici, le texte est toujours dézipé (cf function creer_cache dans memoization), 
+		// alors qu'en cache il peut être zipé.
+		// Il faut soit reziper le texte au besoin, soit récupérer la version cachée :
+		// $page = $Memoization->get($fichier);
 
-// les invalideurs sont de la forme "objet/id_objet"
+		$f = 'cachelab_calcule_duree_cache_'.$page['entetes']['X-Spip-Methode-Duree-Cache'];
+		spip_log ("Fonction de calcul trouvée : $f et date_creation={$page['contexte']['date_creation']}", "maj_invalideur_CACHE_dynamique");
+		if (function_exists($f)) {
+			$duree = $f($page);
+			$page['duree'] = $duree;
+			// On garde un souvenir
+			// unset ($page['entetes']['X-Spip-Methode-Duree-Cache']);
+			$page['entetes']['X-Spip-Cache']=$duree;
+
+			// Comme memoization, on ajoute une heure histoire de pouvoir tourner
+			// sur le cache quand la base de donnees est plantée (à tester)
+			$Memoization->set($fichier, $page, 3600+$duree);
+		}
+		else 
+			spip_log ("mais la fonction '$f' n'existe pas\n".print_r($page,1), "maj_invalideur_CACHE_dynamique");
+	}
+}
+
+// les invalideurs sont en général de la forme "objet/id_objet"
 // http://code.spip.net/@insere_invalideur
-function insere_invalideur($inval, $fichier) { }
-
+// JAMAIS appelé par le noyau, 
+// ÉTAIT un hook post maj_invalideurs appelé avec $page['invalideurs'] et $fichier
+function insere_invalideur($inval, $fichier) { 
+	if  (LOG_INVALIDATION_CORE)
+		spip_log ("insere_invalideur($inval, $fichier)", "invalideur_core");
+}
 
 //
 // Marquer les fichiers caches invalides comme etant a supprimer
 //
 // http://code.spip.net/@applique_invalideur
-function applique_invalideur($depart) { }
+// JAMAIS appelé par le noyau
+// ÉTAIT un hook post suivre_invalideur avec la liste calculée des fichiers caches à invalider
+function applique_invalideur($depart) { 
+	if  (LOG_INVALIDATION_CORE)
+		spip_log ("applique_invalideur($depart)", "invalideur_core");
+}
