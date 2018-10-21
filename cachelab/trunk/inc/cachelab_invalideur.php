@@ -35,27 +35,45 @@ function suivre_invalideur($cond, $modif = true) {
 	// determiner l'objet modifie : forum, article, etc
 	if (preg_match(',["\']([a-z_]+)[/"\'],', $cond, $r)) {
 		$objet = objet_type($r[1]);
+		if (!$objet) {
+			// stocker la date_modif_extra_$extra (ne sert a rien)
+			ecrire_meta('derniere_modif_extra_' . $r[1], time());
+			$f="cachelab_suivre_invalideur_{$r[1]}";
+		}
+		else {
+			// stocker la date_modif_$objet (ne sert a rien)
+			ecrire_meta('derniere_modif_' . $objet, time());
+			$f="cachelab_suivre_invalideur_$objet";
+		}
+		if (function_exists($f)) {
+			spip_log ("suivre_invalideur appelle $f($cond,$modif)", "cachelab");
+			$modif = $f($cond, $modif);	 // $f renvoie la nouvelle valeur de $modif
+			// si l'invalidation a été totalement traitée par $f, ya plus rien à faire
+			if (!$modif)
+				return;
+		}
 	}
-
-	// stocker la date_modif_$objet (ne sert a rien pour le moment)
-	if (isset($objet)) {
-		ecrire_meta('derniere_modif_' . $objet, time());
-	}
-	spip_log("coucou", "surcharge_suivre_invalideur");
 
 	// si $derniere_modif_invalide est un array('article', 'rubrique')
-	// n'affecter la meta que si un de ces objets est modifie
+	// n'affecter la meta que si c'est un de ces objets qui est modifié
 	if (is_array($GLOBALS['derniere_modif_invalide'])) {
 		if (in_array($objet, $GLOBALS['derniere_modif_invalide'])) {
-			spip_log ("suivre_invalideur / '$objet' ($cond)", "cachelab");
-			spip_log ("suivre_invalideur $objet ($cond)", "suivre_invalideur");
+			include_spip ('inc/cachelab');
+			cachelab_filtre('del');
+			spip_log ("suivre_invalideur / objet invalidant : '$objet' ($cond)", "cachelab");
+			spip_log ("suivre_invalideur / objet invalidant : '$objet' ($cond)", "suivre_invalideur");
 			ecrire_meta('derniere_modif', time());
 		}
-	} // sinon, cas standard, toujours affecter la meta
+		else
+			spip_log ("NON invalidant : $cond", "suivre_invalideur");
+
+	} // sinon, cas standard du core, toujours affecter la meta et tout effacer
 	else {
 		ecrire_meta('derniere_modif', time());
-		spip_log ("suivre_invalideur ($cond)", "cachelab");
-		spip_log ("suivre_invalideur ($cond)", "suivre_invalideur");
+		include_spip ('inc/cachelab');
+		cachelab_filtre('del');
+		spip_log ("suivre_invalideur standard / objet '$objet' ($cond)", "cachelab");
+		spip_log ("suivre_invalideur standard / objet '$objet' ($cond)", "suivre_invalideur");
+		// et tout effacer
 	}
 }
-
