@@ -15,7 +15,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ffedata_saison' => 'Saison',
 	'ffedata_saison_explication' => 'Saison demandée : pour la saison 2014-2015 saisir 2015',
 	'ffedata_titre' => 'Data FFE',
+	'ffedata_departement'=>'Département',
+	'ffedata_saisir_code_departement'=>'saisir le numéro du département',
+	
 	// T
-	'titre_page_configurer_ffedata' => 'configure Data FFE',
-	'titre_parametrages' => 'Paramétrages',
+	'titre_page_informations_ffedata' => 'Informations utiles pour utiliser FFE Data',
+	'titre_informations_equipes_clubs' => 'Les informations sur les équipes d’un club',
+	'titre_informations_clubs_departement'=>'La liste des clubs d’un département',
 );
