@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ffedata_titre' => 'Data FFE',
 	'ffedata_departement'=>'Département',
 	'ffedata_saisir_code_departement'=>'saisir le numéro du département',
+	'ffedata_donnees_formulaire'=>'les données du webservice dans formidable pour l’inscription',
 	// S
 	'saisie_nrffe_titre' => 'Numéro de licence FFE',
 	'saisie_nrffe_explication' => 'Le numéro de licence',	
