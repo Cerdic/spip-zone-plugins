@@ -48,7 +48,8 @@ function newsletter_subscribe_dist($email, $options = array()) {
 		return false;
 	}
 	// on abonne pas un email invalide ou obfusque !
-	if (!email_valide($email) OR mailsubscribers_test_email_obfusque($email)) {
+	if (!$email = email_valide($email)
+		or mailsubscribers_test_email_obfusque($email)) {
 		spip_log("email invalide pour abonnement : $email", "mailsubscribers." . _LOG_INFO_IMPORTANTE);
 
 		return false;
@@ -68,6 +69,9 @@ function newsletter_subscribe_dist($email, $options = array()) {
 	) {
 		$listes = array_map('mailsubscribers_normaliser_nom_liste', $options['listes']);
 	}
+	if (!is_array($listes)) {
+		$listes = array(mailsubscribers_normaliser_nom_liste());
+	}
 
 	// chercher si un tel email est deja en base
 	$row = sql_fetsel('*', 'spip_mailsubscribers',
@@ -84,9 +88,6 @@ function newsletter_subscribe_dist($email, $options = array()) {
 		$set['email'] = $email;
 		if (!isset($set['lang'])) {
 			$set['lang'] = $GLOBALS['meta']['langue_site'];
-		}
-		if (!is_array($listes)) {
-			$listes = array(mailsubscribers_normaliser_nom_liste());
 		}
 		// date par defaut
 		$set['statut'] = 'prepa';
@@ -109,15 +110,6 @@ function newsletter_subscribe_dist($email, $options = array()) {
 
 			return false;
 		}
-	} else {
-		if (!is_array($listes)) {
-			// voir si l'abonne est abonne a quelque chose
-			if (!sql_countsel('spip_mailsubscriptions', 'id_mailsubscriber=' . intval($row['id_mailsubscriber']))) {
-				// sinon l'abonner a la liste par defaut
-				$listes = array(mailsubscribers_normaliser_nom_liste());
-			}
-		}
-
 	}
 
 	// proceder aux inscriptions

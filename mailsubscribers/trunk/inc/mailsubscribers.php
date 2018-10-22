@@ -90,7 +90,7 @@ function mailsubscribers_normaliser_nom_liste($liste = '', $category = "newslett
 
 	if (!$liste) {
 		return "$category";
-	} // valeur fixe en cas de reantrance
+	} // valeur fixe en cas de re-entrance
 
 	if (strpos($liste, "::") !== false) {
 		$liste = explode("::", $liste);
