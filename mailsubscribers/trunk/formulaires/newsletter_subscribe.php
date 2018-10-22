@@ -77,8 +77,12 @@ function formulaires_newsletter_subscribe_verifier_dist($listes = '', $option = 
  */
 function formulaires_newsletter_subscribe_traiter_dist($listes = '', $option = '') {
 
-	// langue par defaut lors de l'inscription : la langue courante dans la page
-	$options = array('lang' => $GLOBALS['spip_lang']);
+	$options = array(
+		// langue par defaut lors de l'inscription : la langue courante dans la page
+		'lang' => $GLOBALS['spip_lang'],
+		// on est pas graceful ici puisqu'a priori c'est un canal de reinscription, y compris si on s'etait desinscrit auparavant
+		'graceful' => false,
+	);
 	$email = _request('session_email');
 	if ($listes AND is_string($listes)) {
 		$listes = explode(',', $listes);
