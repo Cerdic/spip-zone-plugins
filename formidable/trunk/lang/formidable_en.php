@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'analyse_avec_reponse' => 'Non-empty answers',
 	'analyse_exclure_champs_explication' => 'Insert the name of the fields to exclude, separated by <code>|</code>. Do not insert <code>@</code>.
 
-',
+', # MODIF
 	'analyse_exclure_champs_label' => 'Fields to exclude',
 	'analyse_exporter' => 'Export analysis',
 	'analyse_longueur_moyenne' => 'Average number in words length',

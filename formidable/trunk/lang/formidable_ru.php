@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'analyse_avec_reponse' => 'Ответили',
-	'analyse_exclure_champs_explication' => 'Укажите названия полей, которіе необходимо выводить в статистике ответов. Используйте разделитель <code>|</code>. Не надо использовать символ <code>@</code>.',
+	'analyse_exclure_champs_explication' => 'Укажите названия полей, которіе необходимо выводить в статистике ответов. Используйте разделитель <code>|</code>. Не надо использовать символ <code>@</code>.', # MODIF
 	'analyse_exclure_champs_label' => 'Исключить поля',
 	'analyse_exporter' => 'Экспортировать',
 	'analyse_longueur_moyenne' => 'Средняя длина в словах',
