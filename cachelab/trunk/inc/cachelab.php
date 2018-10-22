@@ -51,7 +51,7 @@ static $len_prefix;
 
 // $chemin : liste de chaines à tester dans le chemin du squelette, séparées par |
 // 	OU une regexp (hors délimiteurs et modificateurs) si la méthode est 'regexp'
-function cachelab_filtre ($action, $conditions, $options=array()) {
+function cachelab_filtre ($action, $conditions=array(), $options=array()) {
 global $Memoization;
 	if (!$Memoization or !in_array($Memoization->methode(), array('apc', 'apcu')))
 		die ("Il faut mémoization avec APC ou APCu");
@@ -114,16 +114,17 @@ global $Memoization;
 		}
 
 		// on ne veut examiner que les caches de squelettes SPIP
-		if ((substr($cle, $len_prefix-1, 7) != ':cache:')
-			or !apcu_exists($cle))
+		if (substr($cle, $len_prefix-1, 7) != ':cache:')
 			continue;
 
-		// effacer ou au moins sauter les caches périmés
-		if ($meta_derniere_modif > $d['creation_time']) {
+		// effacer ou sauter les caches invalidés par une invalidation totale
+		// ou que apcu ne suit plus
+		if ($meta_derniere_modif > $d['creation_time']
+			or !apcu_exists($cle)) {
 			if ($do_clean) {
 				$del=$Memoization->del(substr($cle,$len_prefix));
 				if (!$del)
-					spip_log ("Echec du clean du cache périmé cle=$cle (création : {$d['creation_time']}, invalidation : $meta_derniere_modif)", "cachelab");
+					spip_log ("Echec du clean du cache $cle (création : {$d['creation_time']}, invalidation : $meta_derniere_modif)", "cachelab");
 				$stats['nb_clean']++;
 			};
 			continue;
@@ -132,11 +133,13 @@ global $Memoization;
 		// caches SPIP véritablement candidats
 		$stats['nb_candidats']++;
 
+		// 1er filtrage : par la session
 		if ($session) {
 			if (substr ($cle, -9) != "_$session")
 				continue;
 		}
 
+		// 2eme filtrage : par le chemin
 		if ($chemin) {
 			// mémo php : « continue resumes execution just before the closing curly bracket ( } ), and break resumes execution just after the closing curly bracket. »
 			switch ($methode_chemin) {
@@ -153,7 +156,8 @@ global $Memoization;
 				die("Méthode '$methode_chemin' pas prévue pour le filtrage par le chemin");
 			};
 		}
-		// récupérer le contenu du cache
+
+		// pour les filtres suivants on a besoin du contenu du cache
 		if (($cle_objet and $id_objet) or $morefunc) {
 			global $Memoization;
 			$data = $Memoization->get(substr($cle, $len_prefix));
@@ -170,11 +174,13 @@ global $Memoization;
 			};
 		};
 
+		// 3eme filtre : par une valeur dans l'environnement
 		if ($cle_objet
 			and (!isset ($data['contexte'][$cle_objet])
 				or ($data['contexte'][$cle_objet]!=$id_objet)))
 			continue;
 
+		// 4eme filtre : par une extension
 		if ($morefunc
 			and !$morefunc ($action, $conditions, $options, $cle, $data, $stats))
 			continue;
@@ -190,7 +196,7 @@ global $Memoization;
 
 	if ($do_chrono) {
 		$stats['chrono'] = microtime_do ('end', 'ms');
-		spip_log ("cachelab_filtre ($action) avec session=$session, objet $cle_objet=$id_objet, chemin=$chemin) : {$stats['nb_cible']} caches ciblés en {$stats['chrono']} ms", 'cachelab');
+		spip_log ("cachelab_filtre ($action, session=$session, objet $cle_objet=$id_objet, chemin=$chemin) : {$stats['nb_cible']} caches ciblés (sur {$stats['nb_candidats']}) en {$stats['chrono']} ms", 'cachelab');
 	}
 
 	return $stats;
@@ -213,6 +219,13 @@ static $prev_derniere_modif_invalide;
 	}
 }
 
+//
+// Exemple d'extension utilisable avec 'more'=>'contexte'
+// Filtrer non sur une seule valeur de l'environnement comme avec 'cle_objet'
+// mais sur un ensemble de valeurs spécifié par $conditions['contexte'] 
+// qui est un tableau de (clé, valeur)
+// Toutes les valeurs doivent être vérifiées dans l'environnement.
+// 
 function cachelab_filtrecache_contexte($action, $conditions, $options, $cle, &$data, &$stats) {
 	if (!isset ($data['contexte'])
 		or !isset($conditions['contexte'])
