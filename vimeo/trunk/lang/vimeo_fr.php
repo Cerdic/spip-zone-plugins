@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	, 'champ_titre_label' => 'Titre'
 	, 'champ_url_video_label' => 'Adresse de la vidéo'
 
-	, 'client_data'	=> '<a href="https://developer.vimeo.com/apis/advanced/methods">Créer vos id et secret sur l’api Vimeo</a>'
+	, 'client_data'	=> '<a href="https://developer.vimeo.com/api/start">Créer vos id et secret sur l’api Vimeo</a>'
 	, 'client_id' 	=> 'Client ID vimeo'
 	, 'client_secret' => 'Client Secret vimeo'
 
@@ -77,6 +77,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	, 'titre_vimeo' => 'Vimeo'
 	, 'titre_vimeos' => 'Vimeos'
 	, 'titre_vimeos_rubrique' => 'Vimeos de la rubrique'
+	
+	// U
+	, 'user_vimeo' => 'User Vimeo'	
+	, 'user_vimeo_explication' => 'Identifiant Vimeo de type 99487171'
 
 	// V
 	, 'verifier_checker' 			=> 'Veuillez vérifier les informations ci dessous et valider.'

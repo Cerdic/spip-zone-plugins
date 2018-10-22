@@ -1,7 +1,7 @@
 <paquet
 	prefix="vimeo"
 	categorie="multimedia"
-	version="1.0.3"
+	version="1.0.4"
 	etat="test"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/vimeo-64.png"

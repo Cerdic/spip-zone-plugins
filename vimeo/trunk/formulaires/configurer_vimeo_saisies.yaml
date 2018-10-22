@@ -14,6 +14,7 @@
   options:
     nom: 'user_vimeo'
     label: '<:vimeo:user_vimeo:>'
+    explication: '<:vimeo:user_vimeo_explication:>'
 -
   saisie: 'radio'
   options:
