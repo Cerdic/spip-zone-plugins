@@ -76,6 +76,8 @@ traitements:
     enregistrement:
         resume_reponse: '@NrFFE@ | @Nom@ | @Prenom@ | @Cat@'
         multiple: on
+        unicite: NrFFE
+        message_erreur_unicite: ""
         modifiable: ""
         identification: cookie
         anonymiser: ""
