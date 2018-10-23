@@ -123,10 +123,6 @@ class ConvertisseurImporter extends Command {
 					
 					if(is_file("liens_a_corriger.txt"))
 						unlink("liens_a_corriger.txt");
-					if(is_file("liens_non_corriges.txt"))
-						unlink("liens_non_corriges.txt");
-					if(is_file("liens_corriges.txt"))
-						unlink("liens_corriges.txt");
 					
 					foreach($fichiers as $f){
 						// date d'apres le nom du fichier
@@ -392,32 +388,8 @@ class ConvertisseurImporter extends Command {
 						foreach($corrections_liens as $k => $v){
 							if($v){
 								list($id_article, $id_source) = explode("\t", $v);
-								$texte = sql_getfetsel("texte", "spip_articles", "id_article=$id_article") ;
-								// recaler des liens [->123456] ?
-								include_spip("inc/lien");
-								if(preg_match_all(_RACCOURCI_LIEN, $texte, $liens, PREG_SET_ORDER)){
-									foreach($liens as $l){
-										if(preg_match("/^[0-9]+$/", $l[4])){
-											// trouver l'article dont l'id_source est $l[4] dans le secteur
-											if($id_dest = sql_getfetsel("id_article", "spip_articles", "id_source=" . trim($l[4]) . " and id_secteur=$id_parent")){
-												$lien_actuel = $l[0] ;
-												$lien_corrige = str_replace($l[4], $id_dest, $l[0]) ;
-												
-												$lien = escapeshellarg("$id_article : $lien_actuel => $lien_corrige");
-												passthru("echo $lien >> liens_corriges.txt");
-												// maj le texte
-												$texte_corrige = str_replace($lien_actuel, $lien_corrige, $texte);
-												sql_update("spip_articles", array("texte" => sql_quote($texte_corrige)), "id_article=$id_article");
-												// attention s'il y a plusieurs liens
-												$texte = $texte_corrige ;
-											}else{
-												$commande = escapeshellarg("Dans $id_article (source $id_source)" . $l[0] . " : lien vers " . $l[4] . " non trouvé") ;
-												passthru("echo $commande >> liens_non_corriges.txt");
-											}
-											
-										}
-									}
-								}
+								include_spip("action/corriger_lien_interne");
+								convertisseur_corriger_lien_interne($id_article,$id_parent);
 							}
 						}
 					
