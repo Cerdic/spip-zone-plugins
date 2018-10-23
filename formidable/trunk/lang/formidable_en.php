@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'analyse_avec_reponse' => 'Non-empty answers',
 	'analyse_exclure_champs_explication' => 'Insert the name of the fields to exclude, separated by <code>|</code>. Do not insert <code>@</code>.
 
-', # MODIF
+',
 	'analyse_exclure_champs_label' => 'Fields to exclude',
 	'analyse_exporter' => 'Export analysis',
 	'analyse_longueur_moyenne' => 'Average number in words length',
@@ -72,7 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_message_erreur_unicite_explication' => 'If you leave this field empty, the Formidable default error message will be shown',
 	'editer_message_erreur_unicite_label' => 'Error message when a field is not unique',
 	'editer_message_ok' => 'Return message',
-	'editer_message_ok_explication' => 'You can customize the message that will be displayed to the user after submitting a valid form.', # MODIF
+	'editer_message_ok_explication' => 'You can customize the message that will be displayed to the user after submitting a valid form. It is possible to display the value of some submitted fields using @raccourci@.',
 	'editer_modifier_formulaire' => 'Modify the form',
 	'editer_nouveau' => 'New form',
 	'editer_redirige_url' => 'Forwarding address after validation',
@@ -93,9 +93,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_importer_yaml' => 'Error while importing the YAML file',
 	'erreur_inexistant' => 'This form doesn’t exist.',
 	'erreur_unicite' => 'This value is already in use',
-	'exporter_formulaire_date_debut_label' => 'From', # MODIF
+	'exporter_adresses_ip' => 'Include IP addresses in the export of answers',
+	'exporter_adresses_ip_explication' => 'By default, IP addresses are not included in the export of replies',
+	'exporter_formulaire_cle_ou_valeur_cle_label' => 'Keys',
+	'exporter_formulaire_cle_ou_valeur_label' => 'For radio buttons, drop-down lists, etc., should human-readable values (labels) or keys be exported?',
+	'exporter_formulaire_cle_ou_valeur_valeur_label' => 'Readable values (labels)',
+	'exporter_formulaire_date_debut_label' => 'From (included)',
 	'exporter_formulaire_date_erreur' => 'The start date must be before the end date',
-	'exporter_formulaire_date_fin_label' => 'Until', # MODIF
+	'exporter_formulaire_date_fin_label' => 'Until (included)',
 	'exporter_formulaire_format_label' => 'File format',
 	'exporter_formulaire_statut_label' => 'Answers',
 
@@ -226,8 +231,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_message_ok' => 'Your message has been successfully sent by email.',
 	'traiter_email_option_activer_accuse_label_case' => 'Also send an email to the sender with a confirmation message.',
 	'traiter_email_option_activer_ip_label_case' => 'Send the IP address of the sender to the recipients.',
-	'traiter_email_option_courriel_envoyeur_accuse_explication' => 'Specify the email used to send the acknowledgment of receipt. Otherwise, the recipient will be the sender of the main email.', # MODIF
-	'traiter_email_option_courriel_envoyeur_accuse_label' => 'Email of the acknowledgement of receipt', # MODIF
+	'traiter_email_option_courriel_envoyeur_accuse_explication' => 'Specify the email used to send the acknowledgment. If you do not put anything, it will be the email address of the webmaster.',
+	'traiter_email_option_courriel_envoyeur_accuse_label' => 'Sender’s email of the acknowledgment',
 	'traiter_email_option_destinataires_champ_form_attention' => 'This option is deprecated because it is a call to SPAM.
 <br /> - To send to an author of the site, use the option "Recipient" (above).
 <br /> - To send to the person filling out the form, configure the acknowledgment of receipt (lower).
@@ -241,7 +246,7 @@ This is a "Recipients" or "Hidden Field" , including the numeric identifier of a
 	'traiter_email_option_destinataires_plus_explication' => 'A list of addresses separated by commas.',
 	'traiter_email_option_destinataires_plus_label' => 'Extra recipients',
 	'traiter_email_option_destinataires_selon_champ_explication' => 'Allows you to specify one or more recipients based on the value of a field.
-Indicate the field, its value, and the concerned email (s) (separated by a comma) according to this format, such as: "@selection_1@/choix1 : mail@example.tld". You can specify multiple tests, returning to line between each test.', # MODIF
+Indicate the field, its value, and the concerned email(s) (separated by a comma) according to this format, such as: "@selection_1@/choix1 : mail@example.tld". You can specify multiple tests, returning to the line between each test.',
 	'traiter_email_option_destinataires_selon_champ_label' => 'Recipients according to a field',
 	'traiter_email_option_envoyeur_courriel_explication' => 'Select the field that will contain the email address of the sender.',
 	'traiter_email_option_envoyeur_courriel_label' => 'Sender Email',
@@ -250,7 +255,7 @@ Indicate the field, its value, and the concerned email (s) (separated by a comma
 	'traiter_email_option_exclure_champs_email_explication' => 'If you do not want certain fields to appear in sent emails (for example hidden fields), just define them here, separated by a comma.',
 	'traiter_email_option_exclure_champs_email_label' => 'Fields to exclude from the message content',
 	'traiter_email_option_masquer_liens_label_case' => 'Hide administration links in the email.',
-	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Specify the name of the sender used to send the acknowledgment of receipt. Otherwise, the recipient will be the sender of the main email.', # MODIF
+	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Specify the name of the sender used to send the acknowledgment. If you do not put anything, it will be the name of the site.',
 	'traiter_email_option_nom_envoyeur_accuse_label' => 'Name of the sender of the acknowledgment',
 	'traiter_email_option_pj_explication' => 'If the documents posted weigh less than _FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL Mio (constant modifiable by the webmaster).',
 	'traiter_email_option_pj_label' => 'Join the files in the email',
@@ -284,12 +289,16 @@ Indicate the field, its value, and the concerned email (s) (separated by a comma
 	'traiter_enregistrement_option_effacement_label' => 'Regularly clear  the oldest results',
 	'traiter_enregistrement_option_identification_explication' => 'If the answers can be changed, which method is used first to know the answer to modify ?',
 	'traiter_enregistrement_option_identification_label' => 'Identification',
+	'traiter_enregistrement_option_invalider_explication' => 'If the responses to this form are used publicly, you can refresh the cache when a new answer is sent.',
+	'traiter_enregistrement_option_invalider_label' => 'Refresh the cache',
 	'traiter_enregistrement_option_ip_label' => 'Record IPs (hidden after a period of retention)',
 	'traiter_enregistrement_option_moderation_label' => 'Moderation',
 	'traiter_enregistrement_option_modifiable_explication' => 'Editable: Visitors can change their answers afterwards.',
 	'traiter_enregistrement_option_modifiable_label' => 'Answers can be modified',
 	'traiter_enregistrement_option_multiple_explication' => 'Multiple: A single person may answer several times.',
 	'traiter_enregistrement_option_multiple_label' => 'Multiple answers',
+	'traiter_enregistrement_option_resume_reponse_explication' => 'This string will be used to display a summary of each answer in the lists. Fields such as <tt>@input_1@</tt> will be replaced as indicated by the help sheet opposite.',
+	'traiter_enregistrement_option_resume_reponse_label' => 'Summarized display of the answer',
 	'traiter_enregistrement_titre' => 'Record the results',
 
 	// V
