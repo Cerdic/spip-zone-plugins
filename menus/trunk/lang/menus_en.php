@@ -9,10 +9,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// A
+	'ajouter_lien_menu' => 'Add this menu',
+
 	// C
 	'configurer_entrees_masquees_explication' => 'Indicate the entries that you want to <strong>hide</strong> during the creation of a menu.',
+	'configurer_objets_explication' => 'Choose content that can be associated with menus',
+	'configurer_objets_label' => 'Linked contents',
 	'configurer_titre' => 'Configure the entries of the Menus plugin',
 	'confirmer_supprimer_entree' => 'Do you really want delete this entry?',
+	'confirmer_supprimer_menu' => 'Are you sure you want to delete this menu?',
 	'confirmer_supprimer_sous_menu' => 'Are you sure you want to delete this submenu?',
 
 	// D
@@ -124,13 +130,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_titre' => 'Title',
 
 	// I
+	'info_1_menu' => 'A menu',
 	'info_afficher_articles' => 'The articles will be included in the menu.',
 	'info_articles_max' => 'Only if the section contains more than @max@ articles',
 	'info_articles_max_affiches' => 'Display limited to @max@ articles',
+	'info_aucun_menu' => 'No menu',
 	'info_classe_parent' => 'Class of the parent elements:',
 	'info_connexion_obligatoire' => 'Connection required',
 	'info_deconnexion_obligatoire' => 'Only when disconnected',
 	'info_masquer_articles_uniques' => 'Unique articles hidden',
+	'info_nb_menus' => '@nb@ menus',
 	'info_numero_menu' => 'MENU NUMBER:',
 	'info_page_speciale' => 'Link to the page « @page@ »',
 	'info_page_speciale_zajax' => 'Modalbox for the "@page@" page for the "@bloc@" block',
@@ -167,8 +176,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_secteurlangue' => 'Language sectors',
 	'nom_menu_texte_libre' => 'Free text',
 
+	// R
+	'retirer_lien_menu' => 'Remove this menu',
+	'retirer_lien_objet' => 'Dissociate',
+	'retirer_tous_liens_menus' => 'Remove all menus',
+
 	// T
+	'texte_ajouter_menu' => 'Add a menu',
+	'texte_creer_associer_menu' => 'Create and associate a menu',
 	'titre_menu' => 'Menu',
+	'titre_objets_lies_menu' => 'Related to this menu',
 	'tous_les_articles' => '... All articles',
 	'toutes_les_rubriques' => '... All sections',
 
