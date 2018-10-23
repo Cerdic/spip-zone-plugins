@@ -59,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_rub_interface_explication' => 'Display only the sections in the user’s language',
 	'option_aff_rub_interface_label' => 'Multilingual display',
 	'option_afficher_si_explication' => 'Specify the conditions to display the field based on the value of the other fields. The identifier of the other fields has to be entered between <code>@</code>. <br />Example <code>@selection_1@=="Toto"</code> conditions the display of the field only when field <code>selection_1</code> has a value of <code>Toto</code>.<br />
-It is possible to use Boolean operators <code> || </code> (or) and <code> && </code> (and)', # MODIF
+It is possible to use Boolean operators <code> || </code> (or) and <code> && </code> (and).',
 	'option_afficher_si_label' => 'Conditional display',
 	'option_afficher_si_remplissage_uniquement_explication' => 'By checking this box, the conditional display will only apply when filling in the form, not when displaying the results.',
 	'option_afficher_si_remplissage_uniquement_label' => 'Only when filling the form',
@@ -144,6 +144,8 @@ It is possible to use Boolean operators <code> || </code> (or) and <code> && </c
 	'option_size_explication' => 'Field width in characters. This option is not always applied/used because the CSS styles of your site can cancel it.',
 	'option_size_label' => 'Field size',
 	'option_statut_label' => 'Specific status',
+	'option_tagfield_explication' => 'Tag for the group label. For accessibility reasons it is strongly recommended to leave the default value (legend tag).',
+	'option_tagfield_label' => 'Tag for the group label',
 	'option_type_choix_plusieurs' => 'Allow the user to choose <strong>several</ strong> message recipients.',
 	'option_type_choix_tous' => 'Make <strong>all</ strong> these authors as recipients. The user will not have choice.',
 	'option_type_choix_un' => 'Allow the user to choose <strong>only one</strong> message recipient (as a dropdown list).',
