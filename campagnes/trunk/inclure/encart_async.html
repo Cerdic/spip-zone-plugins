@@ -1,0 +1,20 @@
+[(#REM) On va déjà chercher l'encart demandé ]
+<BOUCLE_encart(ENCARTS){id_encart?}{identifiant?}>
+[(#REM) On appelle la fonction qui va chercher une pub au hasard suivant le contexte ]
+[(#ENV{charger}|oui)
+	#SET{id_campagne, #ID_ENCART|campagnes_chercher_campagne{#ENV{contexte,#LISTE}, #ENV{plusieurs_affichages,non}}}
+]
+<div class="encart encart_#IDENTIFIANT"
+	data-id_encart="#ID_ENCART"
+	data-contexte="[(#ENV{contexte,#LISTE}|json_encode)]"
+	data-largeur_max="#LARGEUR"
+	data-hauteur_max="#HAUTEUR"
+	data-media="#ENV{media}"
+	[(#ENV{charger}|oui)data-id_campagne="#GET{id_campagne}"]
+>
+[(#REM) On sort la publicité choisie par la fonction précédente ]
+[(#ENV{charger}|oui)
+	<INCLURE{fond=inclure/campagne,id_campagne=#GET{id_campagne}, largeur_max=#LARGEUR, hauteur_max=#HAUTEUR, masquelabel} />
+]
+</div>
+</BOUCLE_encart>

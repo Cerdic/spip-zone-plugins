@@ -25,11 +25,11 @@
 	<necessite nom="spip_bonux" compatibilite="[3.0.3;]" /> 
 	
 	<pipeline nom="autoriser" inclure="campagnes_autorisations.php" /> 
-
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/campagnes.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/campagnes.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/campagnes.php" /> 
 	<pipeline nom="taches_generales_cron" inclure="campagnes_pipelines.php" />
+	<pipeline nom="affichage_final" inclure="campagnes_pipelines.php" />
 
 	<menu nom="encarts" titre="encart:titre_encarts_menu" parent="menu_squelette" icone="images/encart-16.png" action="encarts" />
 	<menu nom="annonceurs" titre="annonceur:titre_annonceurs" parent="menu_activite" icone="images/annonceur-16.png" action="annonceurs" /> 
