@@ -34,6 +34,7 @@ function WaterfallOverJQuery(list, iterator, callback) {
 		var encarts = $('[data-id_encart]');
 		WaterfallOverJQuery(encarts, function(encart, report) {
 			var id_encart = encart.data('id_encart');
+			var id_html = encart.attr('id');
 			var id_campagne = encart.data('id_campagne');
 			var contexte = encart.data('contexte');
 			var largeur_max = encart.data('largeur_max');
@@ -50,10 +51,11 @@ function WaterfallOverJQuery(list, iterator, callback) {
 				args: {
 					charger: 'oui',
 					campagnes_ids: campagnes_ids,
+					id: id_html,
 				},
 				callback: function() {
 					// On retourne chercher le <div> vu qu'il vient d'être rechargé dans le DOM
-					encart = $('[data-id_encart='+id_encart+']');
+					encart = $('#'+id_html);
 					// Du coup on récupère quelle pub a été chargée dedans
 					id_campagne = encart.data('id_campagne');
 					console.log(id_campagne);
