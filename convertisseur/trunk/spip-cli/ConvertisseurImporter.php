@@ -354,6 +354,10 @@ class ConvertisseurImporter extends Command {
 										$texte_art = sql_getfetsel("texte", "spip_articles", "id_article=$id_article");
 										$texte_art = preg_replace("/(<(doc|img|emb))". $id_doc . "/i", "\${1}" . $id_document, $texte_art);
 										sql_update("spip_articles", array("texte" => sql_quote($texte_art)), "id_article=$id_article");
+										// le chapo aussi
+										$chapo_art = sql_getfetsel("chapo", "spip_articles", "id_article=$id_article");
+										$chapo_art = preg_replace("/(<(doc|img|emb))". $id_doc . "/i", "\${1}" . $id_document, $chapo_art);
+										sql_update("spip_articles", array("chapo" => sql_quote($chapo_art)), "id_article=$id_article");
 									}
 								}
 							}
