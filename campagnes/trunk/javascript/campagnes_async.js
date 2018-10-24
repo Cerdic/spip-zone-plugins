@@ -47,6 +47,7 @@ function WaterfallOverJQuery(list, iterator, callback) {
 			var hauteur_max = encart.data('hauteur_max');
 			var media = encart.data('media');
 			console.log(id_encart);
+			console.log(id_html);
 			
 			// On ne charge la campagne que si pas de media query ou si elle valide
 			if (!media || ((mq = window.matchMedia(media)) && mq.matches)) {
@@ -73,6 +74,10 @@ function WaterfallOverJQuery(list, iterator, callback) {
 						report();
 					}
 				});
+			}
+			// Si on ne charge pas la pub, on continue quand même de parcourir la liste !
+			else {
+				report();
 			}
 		}, function() {
 			console.log('Finito');
