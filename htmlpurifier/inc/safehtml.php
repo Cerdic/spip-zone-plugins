@@ -27,6 +27,10 @@ function inc_safehtml($t) {
 
 	$config = HTMLPurifier_Config::createDefault();
 
+	$config->set('Attr.EnableID', true);
+	$config->set('HTML.SafeIframe', true);	
+	$config->set('URI.SafeIframeRegexp', "%^http[s]?://[a-z0-9\.]*".$_SERVER['HTTP_HOST']."%" );	
+	
 	$config->set('HTML.TidyLevel', 'none');
 	$config->set('Cache.SerializerPath', preg_replace(',/$,', '', realpath(_DIR_TMP)));
 	$config->set('Attr.AllowedFrameTargets', array('_blank'));
