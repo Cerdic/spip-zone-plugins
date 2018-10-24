@@ -32,6 +32,12 @@ function WaterfallOverJQuery(list, iterator, callback) {
 	 */
 	function campagnes_async() {
 		var encarts = $('[data-id_encart]');
+		
+		// On nettoie les choses déjà affiché
+		encarts.html('');
+		campagnes_ids = [];
+		
+		// On parcourt tous les encarts en les rechargeant en asynchrone
 		WaterfallOverJQuery(encarts, function(encart, report) {
 			var id_encart = encart.data('id_encart');
 			var id_html = encart.attr('id');
@@ -41,9 +47,6 @@ function WaterfallOverJQuery(list, iterator, callback) {
 			var hauteur_max = encart.data('hauteur_max');
 			var media = encart.data('media');
 			console.log(id_encart);
-			
-			// On vide le contenu de l'encart
-			encart.html('');
 			
 			// On recharge le bloc ajax en demandant le chargement d'une pub
 			encart.ajaxReload({
@@ -57,10 +60,11 @@ function WaterfallOverJQuery(list, iterator, callback) {
 					// On retourne chercher le <div> vu qu'il vient d'être rechargé dans le DOM
 					encart = $('#'+id_html);
 					// Du coup on récupère quelle pub a été chargée dedans
-					id_campagne = encart.data('id_campagne');
-					console.log(id_campagne);
-					// Et on l'ajoute au tableau global
-					campagnes_ids.push(id_campagne);
+					if (id_campagne = encart.data('id_campagne')) {
+						console.log(id_campagne);
+						// Et on l'ajoute au tableau global
+						campagnes_ids.push(id_campagne);
+					}
 					console.log(campagnes_ids);
 					
 					// On lance la suite

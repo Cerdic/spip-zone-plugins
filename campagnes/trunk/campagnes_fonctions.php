@@ -10,8 +10,18 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param array $contexte Tableau pouvant contenir des informations sur le contexte de la page
  * @return int Retourne un identifiant de publicité
  */
-function campagnes_chercher_campagne($id_encart, $contexte=array(), $plusieurs_affichages='non', $retourner_affiches=false){
+function campagnes_chercher_campagne($id_encart, $contexte=array(), $plusieurs_affichages='non', $retourner_affiches=false, $ids_deja_affiches=null) {
 	static $deja_affiches = array();
+	
+	// Si on a un tableau de déjà affichés en appel, on le remplit
+	if ($ids_deja_affiches and is_array($ids_deja_affiches)) {
+		if (isset($deja_affiches[$id_encart])) {
+			$deja_affiches[$id_encart] = array_unique(array_merge($deja_affiches[$id_encart], $ids_deja_affiches));
+		}
+		else {
+			$deja_affiches[$id_encart] = $ids_deja_affiches;
+		}
+	}
 	
 	if ($retourner_affiches){
 		if (isset($deja_affiches[$id_encart])){
@@ -67,5 +77,3 @@ function campagnes_chercher_campagne($id_encart, $contexte=array(), $plusieurs_a
 	}
 	else{ return 0; }
 }
-
-?>

@@ -2,9 +2,9 @@
 <BOUCLE_encart(ENCARTS){id_encart?}{identifiant?}>
 [(#REM) On appelle la fonction qui va chercher une pub au hasard suivant le contexte ]
 [(#ENV{charger}|oui)
-	#SET{id_campagne, #ID_ENCART|campagnes_chercher_campagne{#ENV{contexte,#LISTE}, #ENV{plusieurs_affichages,non}}}
+	#SET{id_campagne, #ID_ENCART|campagnes_chercher_campagne{#ENV{contexte,#LISTE}, #ENV{plusieurs_affichages,non}, '', #ENV{campagnes_ids}}}
 ]
-<div class="encart encart_#IDENTIFIANT[ (#ENV{class)]" id="#ENV{id,#REM|uniqid}"
+<div class="encart encart_#IDENTIFIANT[ (#ENV{class})]" id="#ENV{id,#REM|uniqid}"
 	data-id_encart="#ID_ENCART"
 	data-contexte="[(#ENV{contexte,#LISTE}|json_encode)]"
 	data-largeur_max="#LARGEUR"
