@@ -48,66 +48,35 @@ function WaterfallOverJQuery(list, iterator, callback) {
 			var media = encart.data('media');
 			console.log(id_encart);
 			
-			// On recharge le bloc ajax en demandant le chargement d'une pub
-			encart.ajaxReload({
-				history: false,
-				args: {
-					charger: 'oui',
-					campagnes_ids: campagnes_ids,
-					id: id_html,
-				},
-				callback: function() {
-					// On retourne chercher le <div> vu qu'il vient d'être rechargé dans le DOM
-					encart = $('#'+id_html);
-					// Du coup on récupère quelle pub a été chargée dedans
-					if (id_campagne = encart.data('id_campagne')) {
-						console.log(id_campagne);
-						// Et on l'ajoute au tableau global
-						campagnes_ids.push(id_campagne);
+			// On ne charge la campagne que si pas de media query ou si elle valide
+			if (!media || ((mq = window.matchMedia(media)) && mq.matches)) {
+				// On recharge le bloc ajax en demandant le chargement d'une pub
+				encart.ajaxReload({
+					history: false,
+					args: {
+						charger: 'oui',
+						campagnes_ids: campagnes_ids,
+						id: id_html,
+					},
+					callback: function() {
+						// On retourne chercher le <div> vu qu'il vient d'être rechargé dans le DOM
+						encart = $('#'+id_html);
+						// Du coup on récupère quelle pub a été chargée dedans
+						if (id_campagne = encart.data('id_campagne')) {
+							console.log(id_campagne);
+							// Et on l'ajoute au tableau global
+							campagnes_ids.push(id_campagne);
+						}
+						console.log(campagnes_ids);
+						
+						// On lance la suite
+						report();
 					}
-					console.log(campagnes_ids);
-					
-					// On lance la suite
-					report();
-				}
-			});
+				});
+			}
 		}, function() {
 			console.log('Finito');
 		});
-		
-		//~ // On cherche tous les blocs avec le bon data
-		//~ $('[data-id_encart]').each(function() {
-			//~ // On récupère toutes les infos nécessaires
-			//~ var encart = $(this);
-			//~ var id_encart = encart.data('id_encart');
-			//~ var id_campagne = encart.data('id_campagne');
-			//~ var contexte = encart.data('contexte');
-			//~ var largeur_max = encart.data('largeur_max');
-			//~ var hauteur_max = encart.data('hauteur_max');
-			//~ var media = encart.data('media');
-			//~ console.log(id_encart);
-			
-			//~ // On vide le contenu de l'encart
-			//~ encart.html('');
-			
-			//~ // On recharge le bloc ajax en demandant le chargement d'une pub
-			//~ encart.ajaxReload({
-				//~ history: false,
-				//~ args: {
-					//~ charger: 'oui',
-					//~ campagnes_ids: campagnes_ids,
-				//~ },
-				//~ callback: function() {
-					//~ // On retourne chercher le <div> vu qu'il vient d'être rechargé dans le DOM
-					//~ encart = $('[data-id_encart='+id_encart+']');
-					//~ // Du coup on récupère quelle pub a été chargée dedans
-					//~ id_campagne = encart.data('id_campagne');
-					//~ // Et on l'ajoute au tableau global
-					//~ campagnes_ids.push(id_campagne);
-					//~ console.log(campagnes_ids);
-				//~ }
-			//~ });
-		//~ });
 	}
 	
 	// Au chargement du DOM
