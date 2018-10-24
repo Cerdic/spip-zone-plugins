@@ -29,7 +29,7 @@ function inc_safehtml($t) {
 
 	$config->set('Attr.EnableID', true);
 	$config->set('HTML.SafeIframe', true);	
-	$config->set('URI.SafeIframeRegexp', "%^http[s]?://[a-z0-9\.]*".$_SERVER['HTTP_HOST']."%" );	
+	$config->set('URI.SafeIframeRegexp', "%^http[s]?://[a-z0-9\.]*".$_SERVER['HTTP_HOST']."%iS" );	
 	
 	$config->set('HTML.TidyLevel', 'none');
 	$config->set('Cache.SerializerPath', preg_replace(',/$,', '', realpath(_DIR_TMP)));
