@@ -13,6 +13,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+
 function inc_safehtml($t) {
 	static $purifier;
 
@@ -22,16 +23,26 @@ function inc_safehtml($t) {
 		return $a;
 
 	include_spip('lib/HTMLPurifier.standalone');
-	
+	include_spip('HTMLPurifier.extended');
 
 	$config = HTMLPurifier_Config::createDefault();
 
 	$config->set('Cache.SerializerPath', preg_replace(',/$,', '', realpath(_DIR_TMP)));
 	$config->set('Attr.AllowedFrameTargets', array('_blank'));
+ 
+  $config->set('URI.AllowedSchemes', array ('http' => true, 'https' => true, 'mailto' => true, 'ftp' => true, 'nntp' => true, 'news' => true, 'tel' => true, 'tcp'=>true, 'udp'=>true, 'ssh'=>true,));
+  HTMLPurifier_URISchemeRegistry::instance()->register(new HTMLPurifier_URIScheme_tcp, $config);
+  HTMLPurifier_URISchemeRegistry::instance()->register(new HTMLPurifier_URIScheme_udp, $config);
+  HTMLPurifier_URISchemeRegistry::instance()->register(new HTMLPurifier_URIScheme_ssh, $config);
+	
+	$html = $config->getHTMLDefinition(true);
+	$html->manager->addModule('Forms');
+	$html->manager->registeredModules["Forms"]->safe = true;
 	
 	if (!isset($purifier))
 		$purifier = new HTMLPurifier($config);
-	
+		
+    
 	// HTML Purifier prefere l'utf-8
 	if ($GLOBALS['meta']['charset'] == 'utf-8')
 		$t = $purifier->purify($t);
