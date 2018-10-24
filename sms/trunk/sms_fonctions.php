@@ -45,6 +45,30 @@ function smsfactor($message,$destinataire,$arg) {
 
 	$reponse = new SimpleXMLElement($retour);
 	if ( $reponse->message == "OK" ) {
+		if (count($destinataire)) {
+			$cost = $reponse->cost;
+			$sent = $reponse->sent;
+			$nbr_sms = 0;
+			if ($sent != 0) {
+				$nbr_sms = $cost / $sent;
+			}
+
+			$type_sms = '';
+			if (array_key_exists('type_sms', $arg)) {
+				$type_sms = $arg['type_sms'];
+			}
+
+			foreach ($destinataire as $tel) {
+				$set = array(
+					'telephone' => md5($tel),
+					'date'      => date("Y-m-d H:i:s"),
+					'message'   => $message,
+					'nbr_sms'   => $nbr_sms,
+					'type_sms'  => $type_sms
+				);
+				sql_insertq('spip_sms_logs',$set);
+			}
+		}
 		return true;
 	} else {
 		return false;
