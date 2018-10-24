@@ -30,15 +30,19 @@ function continents_declarer_tables_principales($tables_principales) {
 		"code_onu" => "SMALLINT NOT NULL",
 		"code_iso_a2" => "varchar(2) NOT NULL default ''",
 		"code_iso_a3" => "varchar(3) NOT NULL default ''",
-		"latitude" => 'text not null default ""',
-		"longitude" => 'text not null default ""',
+		"lat" => 'DOUBLE NULL NULL',
+		"lon" => 'DOUBLE NULL NULL',
 		"zoom" => 'text not null default ""',
 		"maj" => "TIMESTAMP"
 	);
 
 	$spip_continents_key = array(
 		"PRIMARY KEY" => "id_continent",
-		"KEY code_onu" => "code_onu"
+		"KEY code_onu" => "code_onu",
+		"KEY code_iso_a2" => "code_iso_a2",
+		"KEY code_iso_a3" => "code_iso_a3",
+		"KEY lat" => "lat",
+		"KEY lon" => "lon",
 	);
 
 	$tables_principales['spip_continents'] = array(
