@@ -323,7 +323,9 @@ class ConvertisseurImporter extends Command {
 									unset($d['id_document']);
 									if(strlen($racine_documents) > 0 AND !preg_match(",/$,",$racine_documents))
 										$racine_documents = $racine_documents . "/" ;
-									$d['fichier'] = $racine_documents . $d['fichier'] ;
+									
+									if(!preg_match(",^http://,",$d['fichier']))
+										$d['fichier'] = $racine_documents . $d['fichier'] ;
 									
 									// champs ok dans les documents ?
 									foreach($d as $k => $v)
@@ -352,12 +354,18 @@ class ConvertisseurImporter extends Command {
 									if($id_document){
 										// ressortir le texte propre...
 										$texte_art = sql_getfetsel("texte", "spip_articles", "id_article=$id_article");
-										$texte_art = preg_replace("/(<(doc|img|emb))". $id_doc . "/i", "\${1}" . $id_document, $texte_art);
+										$texte_art = preg_replace("/(<(doc|img|emb))". $id_doc . "/i", "\${1}$id_document", $texte_art);
 										sql_update("spip_articles", array("texte" => sql_quote($texte_art)), "id_article=$id_article");
+										
 										// le chapo aussi
 										$chapo_art = sql_getfetsel("chapo", "spip_articles", "id_article=$id_article");
-										$chapo_art = preg_replace("/(<(doc|img|emb))". $id_doc . "/i", "\${1}" . $id_document, $chapo_art);
+										$chapo_art = preg_replace("/(<(doc|img|emb))". $id_doc . "/i", "\${1}$id_document", $chapo_art);
 										sql_update("spip_articles", array("chapo" => sql_quote($chapo_art)), "id_article=$id_article");
+										
+										// le ps aussi
+										$ps_art = sql_getfetsel("ps", "spip_articles", "id_article=$id_article");
+										$ps_art = preg_replace("/(<(doc|img|emb))". $id_doc . "/i", "\${1}$id_document", $ps_art);
+										sql_update("spip_articles", array("ps" => sql_quote($ps_art)), "id_article=$id_article");
 									}
 								}
 							}
