@@ -117,12 +117,9 @@ class ConvertisseurImporter extends Command {
 					$progress = new ProgressBar($output, sizeof($fichiers));
 					$progress->setBarWidth(100);
 					$progress->setRedrawFrequency(1);
-					$progress->setMessage(" Import de $source/*.txt en cours dans la rubrique $id_parent ... ", 'message'); /**/  
+					$progress->setMessage(" Import de $source/*.txt en cours dans la rubrique $id_parent ... ", 'message'); /**/
 					$progress->setMessage("", 'inforub');
 					$progress->start();
-					
-					if(is_file("liens_a_corriger.txt"))
-						unlink("liens_a_corriger.txt");
 					
 					foreach($fichiers as $f){
 						// date d'apres le nom du fichier
@@ -335,6 +332,7 @@ class ConvertisseurImporter extends Command {
 									
 									// insertion du doc
 									$id_document = sql_getfetsel("id_document", "spip_documents", "fichier=" . sql_quote($d['fichier']));
+									
 									if(!$id_document){
 										$id_document = sql_insertq("spip_documents", $document_a_inserer);
 										$progress->setMessage("Création du document " . $d['titre'] . " (" . $d['fichier'] .")", 'docs');
@@ -353,14 +351,14 @@ class ConvertisseurImporter extends Command {
 									// modifier le texte qui appelle peut etre un <doc123>
 									if($id_document){
 										// ressortir le texte propre...
-										$texte = sql_getfetsel("texte", "spip_articles", "id_article=$id_article");
-										$texte = preg_replace("/(<(doc|img|emb))". $id_doc . "/i", "\${1}" . $id_document, $texte);
-										sql_update("spip_articles", array("texte" => sql_quote($texte)), "id_article=$id_article");
+										$texte_art = sql_getfetsel("texte", "spip_articles", "id_article=$id_article");
+										$texte_art = preg_replace("/(<(doc|img|emb))". $id_doc . "/i", "\${1}" . $id_document, $texte_art);
+										sql_update("spip_articles", array("texte" => sql_quote($texte_art)), "id_article=$id_article");
 									}
 								}
 							}
 							
-							// recaler des liens [->123456] ?
+							// recaler des liens [->123456] dans les textes
 							// si on ne conserve pas le meme id_article
 							include_spip("inc/lien");
 							if(preg_match(_RACCOURCI_LIEN, $texte) and $conserver_id_article == "")
@@ -388,8 +386,9 @@ class ConvertisseurImporter extends Command {
 						foreach($corrections_liens as $k => $v){
 							if($v){
 								list($id_article, $id_source) = explode("\t", $v);
-								include_spip("action/corriger_lien_interne");
-								convertisseur_corriger_lien_interne($id_article,$id_parent);
+								include_spip("action/corriger_liens_internes");
+								convertisseur_corriger_liens_internes($id_article,$id_parent,'texte');
+								convertisseur_corriger_liens_internes($id_article,$id_parent,'chapo');
 							}
 						}
 					
