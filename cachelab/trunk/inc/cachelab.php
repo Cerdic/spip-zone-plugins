@@ -65,9 +65,9 @@ global $Memoization;
 	$cle_objet = (isset($conditions['cle_objet']) ? $conditions['cle_objet'] : null);
 	$id_objet = (isset($conditions['id_objet']) ? $conditions['id_objet'] : null);
 	if ($cle_objet and !$id_objet) {
-		$error = "$cle_objet est inconnu : passez le en argument d'url ou définissez XRAY_ID_OBJET_SPECIAL en php";
+		$error = "cachelab_filtre : $id_objet est inconnu";
 		spip_log($error."\n".print_r(debug_backtrace(),1), "cachelab_erreur");
-		return array('error'=>$error);
+		$cle_objet=null;
 	}
 	// pour 'contexte' on simule un 'more' pour donner un exemple d'extension
 	if (isset($conditions['contexte']) and $conditions['contexte'] and !isset($conditions['more']))
@@ -161,7 +161,7 @@ global $Memoization;
 		}
 
 		// pour les filtres suivants on a besoin du contenu du cache
-		if (($cle_objet and $id_objet) or $morefunc) {
+		if ($cle_objet or $morefunc) {
 			global $Memoization;
 			$data = $Memoization->get(substr($cle, $len_prefix));
 			if (!$data) {
