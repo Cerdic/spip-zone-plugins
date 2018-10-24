@@ -258,7 +258,7 @@ function retire_cache($cache) {
 ##
 
 if  (!defined('LOG_INVALIDATION_CORE'))
-	define ('LOG_INVALIDATION_CORE', true);
+	define ('LOG_INVALIDATION_CORE', false);
 
 // Supprimer les caches marques "x"
 // A priori dans cette version la fonction ne sera pas appelee, car
@@ -292,48 +292,6 @@ function calcul_invalideurs($corps, $primary, &$boucles, $id_boucle) {
 function supprime_invalideurs() { 
 	if  (LOG_INVALIDATION_CORE)
 		spip_log ("supprime_invalideurs()", "invalideur_core");
-}
-
-// le core indique : "Calcul des pages : noter dans la base les liens d'invalidation"
-//
-// Appelé à la fin de creer_cache
-// $page est le tableau décrivant le cache qui vient d'être calculé 
-// avec les clés suivantes pour ses métadonnées : 
-// squelette,source,process_ins,invalideurs,entetes,duree,texte,notes,contexte,lastmodified,sig
-// http://code.spip.net/@maj_invalideurs
-//
-// S'il y a une entete X-Spip-Methode-Duree-Cache, on récupère la méthode
-// et on appelle la fonction cachelab_calcule_duree_cache_lamethode avec le paramètre $page
-// On corrige alors la durée du cache avec la valeur retournée
-//
-function maj_invalideurs($fichier, &$page) {
-	if  (LOG_INVALIDATION_CORE) {
-		// Abondamment appelé. À part pour pas noyer les autres
-		spip_log ("maj_invalideurs($fichier, &page)", "invalideur_core_maj_invalideurs");
-	}
-	if (isset($page['entetes']['X-Spip-Methode-Duree-Cache'])) {
-		global $Memoization;
-		// FIXME : ici, le texte est toujours dézipé (cf function creer_cache dans memoization), 
-		// alors qu'en cache il peut être zipé.
-		// Il faut soit reziper le texte au besoin, soit récupérer la version cachée :
-		// $page = $Memoization->get($fichier);
-
-		$f = 'cachelab_calcule_duree_cache_'.$page['entetes']['X-Spip-Methode-Duree-Cache'];
-		spip_log ("Fonction de calcul trouvée : $f et date_creation={$page['contexte']['date_creation']}", "maj_invalideur_CACHE_dynamique");
-		if (function_exists($f)) {
-			$duree = $f($page);
-			$page['duree'] = $duree;
-			// On garde un souvenir
-			// unset ($page['entetes']['X-Spip-Methode-Duree-Cache']);
-			$page['entetes']['X-Spip-Cache']=$duree;
-
-			// Comme memoization, on ajoute une heure histoire de pouvoir tourner
-			// sur le cache quand la base de donnees est plantée (à tester)
-			$Memoization->set($fichier, $page, 3600+$duree);
-		}
-		else 
-			spip_log ("mais la fonction '$f' n'existe pas\n".print_r($page,1), "maj_invalideur_CACHE_dynamique");
-	}
 }
 
 // les invalideurs sont en général de la forme "objet/id_objet"
