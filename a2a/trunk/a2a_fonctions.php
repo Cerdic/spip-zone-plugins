@@ -14,7 +14,7 @@ function lister_articles_lies($id_article, $ordre,$type_liaison=null){
 		return sql_allfetsel('id_article_lie','spip_articles_lies','id_article=' . sql_quote($id_article) . ' AND type_liaison=' . sql_quote($type_liaison),'',"rang $ordre");
 }
 
-function balise_ARTICLES_LIES($p) { 
+function balise_ARTICLES_LIES($p) {
 	$id_article = champ_sql('id_article', $p);
 	$ordre = "'ASC'";
 	$type_liaison=interprete_argument_balise(2,$p);
@@ -22,7 +22,7 @@ function balise_ARTICLES_LIES($p) {
 		$ordre = "'DESC'";
 	}
 	$type_liaison ? $p->code = "lister_articles_lies($id_article, $ordre,$type_liaison)" : $p->code = "lister_articles_lies($id_article, $ordre)";
-	$p->type = 'php';  
+	$p->type = 'php';
 	return $p;
 }
 
@@ -41,7 +41,7 @@ function balise_ARTICLES_LIANT($p) {
 		$ordre = "'DESC'";
 	}
 	$type_liaison ? $p->code = "lister_articles_liant($id_article,$ordre,$type_liaison)" : $p->code = "lister_articles_liant($id_article,$ordre)";
-	$p->type = 'php';  
+	$p->type = 'php';
 	return $p;
 }
 
@@ -56,7 +56,7 @@ function types_liaisons_existent($array){
 	}
 	return ' ';
 }
-    
+
 function lister_types_liaisons(){
 	// fournit tout les types de liaisons ita est : define + cfg.
 	include_spip('inc/config');

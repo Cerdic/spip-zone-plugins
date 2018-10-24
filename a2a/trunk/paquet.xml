@@ -7,17 +7,17 @@
 	logo="images/a2a-64.png"
 	schema="0.11.0"
 	documentation="https://contrib.spip.net/Le-plugin-a2a-pour-lier-des-articles"
->	
+>
 
 	<nom>A2A</nom>
 	<!-- Pour lier des articles -->
 
 	<auteur>Collectif SPIP</auteur>
 	<licence>GPL v3</licence>
-	
+
 	<traduire module="a2a" reference="fr" gestionnaire="salvatore" />
 	<traduire module="paquet-a2a" reference="fr" gestionnaire="salvatore" />
-	
+
 	<pipeline nom="affiche_milieu" inclure="a2a_pipelines.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/a2a.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/a2a.php" />
