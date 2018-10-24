@@ -18,7 +18,8 @@ function balise_ARTICLES_LIES($p) {
 	$id_article = champ_sql('id_article', $p);
 	$ordre = "'ASC'";
 	$type_liaison=interprete_argument_balise(2,$p);
-	if ($inverse = interprete_argument_balise(1,$p)) {
+	$inverse = interprete_argument_balise(1,$p);
+	if ($inverse and $inverse!="''") {
 		$ordre = "'DESC'";
 	}
 	$type_liaison ? $p->code = "lister_articles_lies($id_article, $ordre,$type_liaison)" : $p->code = "lister_articles_lies($id_article, $ordre)";
@@ -37,7 +38,8 @@ function balise_ARTICLES_LIANT($p) {
 	$id_article = champ_sql('id_article', $p);
 	$ordre = "'ASC'";
 	$type_liaison=interprete_argument_balise(2,$p);
-	if ($inverse = interprete_argument_balise(1,$p)) {
+	$inverse = interprete_argument_balise(1,$p);
+	if ($inverse and $inverse!="''") {
 		$ordre = "'DESC'";
 	}
 	$type_liaison ? $p->code = "lister_articles_liant($id_article,$ordre,$type_liaison)" : $p->code = "lister_articles_liant($id_article,$ordre)";
