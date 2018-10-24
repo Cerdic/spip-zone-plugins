@@ -65,8 +65,7 @@ global $Memoization;
 	$cle_objet = (isset($conditions['cle_objet']) ? $conditions['cle_objet'] : null);
 	$id_objet = (isset($conditions['id_objet']) ? $conditions['id_objet'] : null);
 	if ($cle_objet and !$id_objet) {
-		$error = "cachelab_filtre : $id_objet est inconnu";
-		spip_log($error."\n".print_r(debug_backtrace(),1), "cachelab_erreur");
+		spip_log("cachelab_filtre : $cle_objet inconnu\n".print_r(debug_backtrace(),1), "cachelab_erreur");
 		$cle_objet=null;
 	}
 	// pour 'contexte' on simule un 'more' pour donner un exemple d'extension
