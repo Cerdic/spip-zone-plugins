@@ -64,8 +64,11 @@ global $Memoization;
 	$chemins = explode('|', $chemin); // sert seulement pour methode_chemin == strpos
 	$cle_objet = (isset($conditions['cle_objet']) ? $conditions['cle_objet'] : null);
 	$id_objet = (isset($conditions['id_objet']) ? $conditions['id_objet'] : null);
-	if ($cle_objet and !$id_objet)
-		die ("$cle_objet est inconnu : passez le en argument d'url ou définissez XRAY_ID_OBJET_SPECIAL en php");
+	if ($cle_objet and !$id_objet) {
+		$error = "$cle_objet est inconnu : passez le en argument d'url ou définissez XRAY_ID_OBJET_SPECIAL en php";
+		spip_log($error."\n".print_r(debug_backtrace(),1), "cachelab_erreur");
+		return array('error'=>$error);
+	}
 	// pour 'contexte' on simule un 'more' pour donner un exemple d'extension
 	if (isset($conditions['contexte']) and $conditions['contexte'] and !isset($conditions['more']))
 		$conditions['more'] = 'contexte';
