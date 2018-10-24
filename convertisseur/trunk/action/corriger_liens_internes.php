@@ -11,7 +11,7 @@ function action_corriger_lien_interne_dist(){
 	id_article=456 et id_source=123
 */
 
-function convertisseur_corriger_lien_interne($id_article,$id_secteur){
+function convertisseur_corrigers_liens_internes($id_article,$id_secteur){
 	include_spip("base/abstract_sql");
 	
 	$texte = sql_getfetsel("texte", "spip_articles", "id_article=$id_article") ;
