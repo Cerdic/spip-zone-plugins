@@ -31,6 +31,7 @@ function continents_upgrade($nom_meta_base_version, $version_cible) {
 			'inserer_table_pays'
 		)
 	);
+
 	$maj['1.1.0'] = array(
 		array(
 			'maj_tables',
@@ -41,6 +42,33 @@ function continents_upgrade($nom_meta_base_version, $version_cible) {
 		array(
 			'inserer_codes_iso'
 		)
+	);
+
+	$maj['1.2.0'] = array(
+		array(
+			'sql_alter',
+			'TABLE spip_continents CHANGE COLUMN latitude lat DOUBLE NULL NULL'
+		),
+		array(
+			'sql_alter',
+			'TABLE spip_continents CHANGE COLUMN longitude lon DOUBLE NULL NULL'
+		),
+		array(
+			'sql_alter',
+			'TABLE spip_continents ADD INDEX `code_iso_a2` (`code_iso_a2`)'
+		),
+		array(
+			'sql_alter',
+			'TABLE spip_continents ADD INDEX `code_iso_a3` (`code_iso_a3`)'
+		),
+		array(
+			'sql_alter',
+			'TABLE spip_continents ADD INDEX (lat)'
+		),
+		array(
+			'sql_alter',
+			'TABLE spip_continents ADD INDEX (lon)'
+		),
 	);
 
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
