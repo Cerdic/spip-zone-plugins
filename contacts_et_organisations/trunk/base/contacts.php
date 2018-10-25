@@ -166,7 +166,12 @@ function contacts_declarer_tables_objets_sql($tables) {
 		'champs_versionnes' => array(
 			'id_parent', 'id_auteur', 'id_annuaire',
 			 'nom', 'descriptif', 'identification', 'statut_juridique',
-			 'activite', 'date_creation', 'ouvertures', 'tarifs', 'url_site'),
+			 'activite', 'date_creation', 'ouvertures', 'tarifs', 'url_site'
+		),
+		'parent' => array(
+			array('condition' => 'id_parent=0', 'type' => 'annuaire', 'champ' => 'id_annuaire'),
+			array('condition' => 'id_parent>0', 'type' => 'organisation', 'champ' => 'id_parent'),
+		),
 	);
 
 
@@ -224,7 +229,8 @@ function contacts_declarer_tables_objets_sql($tables) {
 		),*/
 		'champs_versionnes' => array(
 			'id_auteur', 'id_annuaire', 'civilite', 'nom', 'prenom', 'fonction',
-			'date_naissance', 'descriptif'),
+			'date_naissance', 'descriptif'
+		),
 	);
 
 	//-- Jointures ----------------------------------------------------
