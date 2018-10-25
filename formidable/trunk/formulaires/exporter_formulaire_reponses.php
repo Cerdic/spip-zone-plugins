@@ -74,7 +74,7 @@ function formulaires_exporter_formulaire_reponses_traiter($id_formulaire = 0) {
  * @param string $cle_ou_valeur
  * @return string|false Chemin du fichier d’export CSV, XLS ou ZIP
  */
-function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_reponses = 'publie', $date_debut = '', $date_fin = '',$cle_ou_valeur='cle') {
+function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_reponses = 'publie', $date_debut = '', $date_fin = '',$cle_ou_valeur = 'valeur') {
 	$exporter_csv = charger_fonction('exporter_csv', 'inc/', true);
 	if (!$exporter_csv) {
 		return false;
@@ -126,7 +126,7 @@ function obtenir_formulaire_reponses($id_formulaire, $statut_reponses = 'publie'
 }
 
 
-function preparer_formulaire_reponses($formulaire, $reponses, $statut_reponses, $cle_ou_valeur = 'cle') {
+function preparer_formulaire_reponses($formulaire, $reponses, $statut_reponses, $cle_ou_valeur = 'valeur') {
 	include_spip('inc/puce_statut');
 	include_spip('inc/saisies');
 	include_spip('facteur_fonctions');
@@ -281,7 +281,7 @@ function preparer_formulaire_reponses($formulaire, $reponses, $statut_reponses, 
  * @param string $cle_ou_valeur
  * @return string
  */
-function formidable_generer_valeur_texte_saisie($valeur, $saisie, $cle_ou_valeur = 'cle') {
+function formidable_generer_valeur_texte_saisie($valeur, $saisie, $cle_ou_valeur = 'valeur') {
 	static $resultats = array();
 	static $tenter_unserialize = null;
 	if (is_null($tenter_unserialize)) {
