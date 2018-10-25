@@ -9,8 +9,9 @@
  * @package    SPIP\Lim\Autorisations
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction d'appel pour le pipeline

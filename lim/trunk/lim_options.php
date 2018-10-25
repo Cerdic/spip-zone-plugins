@@ -9,9 +9,11 @@
  * @package    SPIP\Lim\Options
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-// Surcharge deu fichier /prive/formulaires/editer_article.php
+// Surcharge du fichier /prive/formulaires/editer_article.php
 // la fonction editer_article_verifier est incomplète
 // voir https://core.spip.net/issues/3686
 
@@ -40,5 +42,3 @@ function formulaires_editer_article_verifier(
 
 	return $erreurs;
 }
-
-?>

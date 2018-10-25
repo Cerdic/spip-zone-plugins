@@ -1,8 +1,10 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
- 
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+ }
+
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
@@ -42,5 +44,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_page_configurer_lim' => 'LIM : Alléger l\'espace privé',
 );
-
-?>

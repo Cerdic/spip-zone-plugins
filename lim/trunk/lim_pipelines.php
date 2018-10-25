@@ -23,7 +23,7 @@ include_spip('inc/config');
  * @return array $flux
  *     le flux data remanié
 **/
-function lim_afficher_config_objet($flux){
+function lim_afficher_config_objet($flux) {
 	$type = $flux['args']['type'];
 	if ($type == 'article' AND !empty($flux['data'])){
 
@@ -58,7 +58,7 @@ function lim_afficher_config_objet($flux){
  * @return array $flux
  *     le flux data complété par un input hidden 'id_parent' avec la bonne valeur
 **/
-function lim_formulaire_charger($flux){
+function lim_formulaire_charger($flux) {
 	$form	= $flux['args']['form'];
 	$valid 	= strpos($form, 'editer');
 	// si ce n'est pas un formulaire d'édition 
@@ -92,7 +92,7 @@ function lim_formulaire_charger($flux){
  * @return array $flux
  *     le flux data complété ou non d'un message d'erreur
 **/
-function lim_formulaire_verifier($flux){
+function lim_formulaire_verifier($flux) {
 	$form	= $flux['args']['form'];
 	$valid	= strpos($form, 'editer');
 
@@ -148,7 +148,7 @@ function lim_formulaire_verifier($flux){
  * @param array $flux
  * @return array
  */
-function lim_recuperer_fond($flux){
+function lim_recuperer_fond($flux) {
 	if ($flux['args']['fond'] == "formulaires/editer_auteur") {
 		$ajout_script = recuperer_fond('prive/squelettes/inclure/lim');
 		$flux['data']['texte'] = str_replace('</form>', '</form>'. $ajout_script, $flux['data']['texte']);
