@@ -18,9 +18,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_afficher_logos' => 'Désactiver les logos par contenu',
 	'cfg_titre_divers' => 'Divers',
 	'cfg_titre_champs_auteur' => 'Formulaire Auteur',
+	'cfg_titre_portfolio' => 'Affichage des documents',
 	'cfg_titre_restriction_par_rubrique' => 'Restreindre les contenus par rubrique',
 	'cfg_select_objets' => 'sélectionner les objets',
-	'cfg_select_objets' => 'sélectionner les objets',
+	
 	
 
 	'info_creer_dans_rubrique_non_autorise' => 'Vous ne pouvez pas créer dans cette rubrique',
@@ -35,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_desactive_auteur_email' => "Désactiver l'affichage du champ <i>Adresse email</i> ?",
 	'label_desactive_auteur_liens_sites' => "Désactiver l'affichage du fieldset <i>Lien Site</i> ?",
 	'label_desactive_auteur_pgp' => "Désactiver l'affichage du champ <i>Clé PGP</i> ?",
+	'label_desactive_portfolio' => "Désactiver la notion de portfolio dans l'affichage des documents ?",
 
 	// O
 	'onglet_lim' => 'Forums Publics et Pétitions',
