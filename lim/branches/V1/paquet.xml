@@ -1,7 +1,7 @@
 <paquet
 	prefix="lim"
 	categorie="maintenance"
-	version="1.4.0"
+	version="1.4.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/lim-64.png"
@@ -18,7 +18,7 @@
 	<licence>GNU/GPL</licence>
 
 	<necessite nom="saisies"  compatibilite="[1.24.0;[" />
-	<necessite nom="medias"  compatibilite="[2.8.72;[" />
+	<necessite nom="medias"  compatibilite="[2.7.27;[" />
 	<necessite nom="php"  compatibilite="[5.5;[" />
 
 	<pipeline nom="autoriser" inclure="lim_autorisations.php" />
