@@ -1,7 +1,7 @@
 <paquet
 	prefix="stocks"
 	categorie="divers"
-	version="0.2.4"
+	version="0.2.5"
 	etat="dev"
 	compatibilite="[3.0.1;3.2.*]"
 	logo="prive/themes/spip/images/stocks-32.png"
@@ -24,6 +24,7 @@
 				décrémenter le stock  -->
 	<pipeline nom="post_edition" inclure="stocks_pipelines.php" />
 	<utilise nom="commandes" compatibilite="[1.15.3;["/>
+	<utilise nom="livraison" compatibilite="[2.6.0;["/>
 
 	<necessite nom="produits" compatibilite="[1.1.25;["/>
 	<necessite nom="saisies" compatibilite="[2.19.1;["/>

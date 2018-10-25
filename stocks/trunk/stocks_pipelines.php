@@ -6,7 +6,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function stocks_formulaire_charger($flux) {
-
 	$form = $flux['args']['form'];
 
 	if ($form == 'editer_produit') {
@@ -80,7 +79,15 @@ function stocks_afficher_fiche_objet($flux) {
 	}
 	return $flux;
 }
-
+/**
+ * Pipeline stocks_affiche_milieu
+ *
+ * Insserer le formulaire de gestion du stock en dessous
+ * des livraisons sur la vue de la fiche produit
+ *
+ * @param $flux
+ * @return return type
+ */
 function stocks_affiche_milieu($flux) {
 	$texte = "";
 	if ($flux['args']['exec'] == 'produit') {
@@ -167,7 +174,7 @@ function stocks_post_edition($flux){
 										// $new_stock = intval($dispo) - intval($quantite);
 										// spip_log("Mise a jour du stock : $new_stock",'stocks');
 										$stock = incrementer_quantite($objet,$id_objet,-$quantite);
-										// Passé le produit en statut épuisé si stock 0
+										// Passer le produit en statut épuisé si stock 0
 										$new_stock = get_quantite($objet,$id_objet);
 										if($new_stock <= 0){
 												// https://www.spip.net/fr_article5528.html

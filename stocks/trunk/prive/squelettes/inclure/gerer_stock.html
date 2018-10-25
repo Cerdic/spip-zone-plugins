@@ -3,4 +3,15 @@
 Gérez votre stock
 </p>
 
-[<div class="ajax">(#FORMULAIRE_GERER_STOCK{produit, #ID_PRODUIT, ajax, env})</div>]
+[<div class="ajax">(#FORMULAIRE_GERER_STOCK{produit, #ID_PRODUIT, ajax=gestion_stock, env})</div>]
+
+<script>
+jQuery(function($){
+  $('form[name="formulaire_gerer_stock"]').on('submit',function(){
+    ajaxReload('gestion_stock', {
+      args:{objet:'produit',id_objet:#ID_PRODUIT}
+    });
+  });
+
+});
+</script>

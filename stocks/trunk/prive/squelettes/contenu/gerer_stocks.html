@@ -61,16 +61,21 @@ td.actions {
 
 <h1 class="grostitre">Gestion du stock</h1>
 
+<B_listProduits>
+#ANCRE_PAGINATION
+[<p class="pagination">(#PAGINATION{prive})</p>]
 <table>
 	<tr>
 		<th>Statut</th>
 		<th>Titre</th>
 		<th>Parent</th>
+		<th>Livrable</th>
 		<th>Ref.</th>
 		<th class="txt-right">Stock</th>
 	</tr>
-<B_listProduits>
-<BOUCLE_listProduits(PRODUITS){!statut IN poubelle}>
+</thead>
+<tbody>
+<BOUCLE_listProduits(PRODUITS){!statut IN poubelle}{par date}{inverse}{pagination 50}>
 	<tr>
 		<td>
 				[(#STATUT|puce_statut{produit,#ID_PRODUIT,#ID_RUBRIQUE})]
@@ -81,6 +86,14 @@ td.actions {
 		<td>
 			<a href="#URL_ECRIRE{'rubrique',id_rubrique=#ID_RUBRIQUE}">#INFO_TITRE{'rubrique',#ID_RUBRIQUE}</a>
 		</td>
+		<td>
+			[(#IMMATERIEL|?{'Immatériel','Livrable'})<br>]
+			<BOUCLE_livraison(CONDITION){si #PLUGIN{livraison}|et{#IMMATERIEL|=={0}}}>
+					<BOUCLE_modLivraison(LIVRAISONMODES spip_livraisonmodes_liens){objet=produit}{id_objet=#ID_PRODUIT}>
+					#TITRE<br>
+				</BOUCLE_modLivraison>livraison classique<//B_modLivraison>
+			</BOUCLE_livraison><//B_livraison>
+		</td>
 		<td>#REFERENCE</td>
 		<td class="txt-right actions">
 			<div class="ajax">
@@ -89,13 +102,18 @@ td.actions {
 		</td>
 	</tr>
 </BOUCLE_listProduits>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
 </B_listProduits>
 <//B_listProduits>
-</table>
+
 
 <script>
 jQuery(function($){
-
+	$('.formulaire_gerer_stock form').on('submit',function(){
+    	$(this).ajaxReload();
+  });
 	$('.js-product-preview').hover(
 		function(){
 			var preview = $('<img class="product-preview" src="'+$(this).data('preview')+'" style="opacity:0" />');
