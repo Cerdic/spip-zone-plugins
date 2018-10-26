@@ -9,11 +9,31 @@ https://zone.spip.org/trac/spip-zone/browser/_plugins_/stocks/trunk
 ## Todo
 
 - [?] mettre en place une config pour gérer ou non le changement de statut du produit
-- [] une noisette/inclure gerer_quantite utilisable dans le panier par exemple
+- [] saisie gerer_quantite utilisable dans le panier par exemple
 
+## Améliorations à prévoir
 
+Actuellement le stock, est débité mis a jour lors du retour de paiement quand
+le statut passe a payé.
+
+il faudrait tester sur la table spip panier lien les produits encours de commande, pour ne pas proposer dans la saisie quantité plus que de stock disponible.
 
 ## Changelogs
+
+v0.2.5
+
+Supprimer un stock
+
+- Ajout d'une action pour supprimer un stock
+- Ajout au formulaire gerer stock (utilisé la page d'édition d'un produit et la page des stocks) d'un bouton action de suppression du stock.
+- Rechargement du bloc conteneur quand on agit sur le formulaire pour mettre a jour les infos et passer de créer à éditer/supprimer
+- ajout d'un pagination sur la liste des stocks, on trie par date inverse.
+
+En test
+- Ajout aux utilise le plugin livraison
+- Ajout d'une colonne dans le listing des stocks "Livraison" qui affiche si le produit est immatériel ou livrable
+- dans le cas d'un produit livrable, et si le plugin livraison est installé, on affiche le/s modes de livraison "forcés" si il en a d'associés au produit, sinon on signal que les rêgles de livraison classique qui s'applique.
+
 
 v0.2.4
 - correction sur le changement de statut du produit : autorisation
