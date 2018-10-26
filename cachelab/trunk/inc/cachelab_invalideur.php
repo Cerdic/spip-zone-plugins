@@ -112,7 +112,7 @@ global $Memoization;
 	// reçoit la *valeur* de l'une des valeurs de l'environnement (par défaut "date_creation")
 	// Exemple #CACHE{1200,duree-progressive date_naissance}
 	if (isset($page['entetes']['X-Spip-Methode-Duree-Cache'])) {
-		$f = 'cachelab_calcule_duree_'.$page['entetes']['X-Spip-Methode-Duree-Cache'];
+		$f = 'cachelab_duree_'.$page['entetes']['X-Spip-Methode-Duree-Cache'];
 		list ($f, $arg) = get_f_arg($f, 'date_creation');
 		if (function_exists($f)) {
 			if (!isset($page['contexte'][$arg])) {
@@ -139,7 +139,7 @@ global $Memoization;
 	
 	// Exemple : #CACHE{1200,filtre-bidouille grave} peut grave bidouiller le cache yc ses métadonnées
 	if (isset($page['entetes']['X-Spip-Filtre-Cache'])) {
-		$f = 'cachelab_filtre_cache_'.$page['entetes']['X-Spip-Filtre-Cache'];
+		$f = 'cachelab_filtre_'.$page['entetes']['X-Spip-Filtre-Cache'];
 		list ($f, $arg) = get_f_arg($f);
 		if (function_exists($f)) {
 			spip_log ("#CACHE appelle le filtre $f ($arg)", "cachelab");
