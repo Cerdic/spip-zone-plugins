@@ -91,32 +91,63 @@ function suivre_invalideur($cond, $modif = true) {
 // On corrige alors la durée du cache avec la valeur retournée
 //
 function maj_invalideurs($fichier, &$page) {
+global $Memoization;
+// Rq : ici, le texte du cache est non zipé (cf function creer_cache dans memoization), 
+// tandis que la version en cache peut être zipée (avec index 'gz').
 	if  (LOG_INVALIDATION_CORE) {
 		// Abondamment appelé. À part pour pas noyer les autres
 		spip_log ("maj_invalideurs($fichier, &page)", "invalideur_core_maj_invalideurs");
 	}
-	if (isset($page['entetes']['X-Spip-Methode-Duree-Cache'])) {
-		global $Memoization;
-		// FIXME : ici, le texte est non zipé (cf function creer_cache dans memoization), 
-		// alors que la version mise en cache a peut être été zipée (index gz).
-		// Il faut soit reziper le texte au besoin, soit récupérer la version cachée :
-		// $page = $Memoization->get($fichier);
-		// Ou changer creer_cache pour qu'il appelle maj_invalideurs *avant* d'avoir écrit le cache
 
-		$f = 'cachelab_calcule_duree_cache_'.$page['entetes']['X-Spip-Methode-Duree-Cache'];
+	function get_f_arg($f, $arg='') {
+		if (strpos($f, ' ')) {
+			$fparts = array_filter(explode(' ',$f));
+			$f = array_shift($fparts);
+			$arg = implode(' ', $fparts);
+		}
+		return array ($f, $arg);
+	}
+
+	// Pour le calcul dynamique d'une durée de cache, la fonction user
+	// reçoit la *valeur* de l'une des valeurs de l'environnement (par défaut "date_creation")
+	// Exemple #CACHE{1200,duree-progressive date_naissance}
+	if (isset($page['entetes']['X-Spip-Methode-Duree-Cache'])) {
+		$f = 'cachelab_calcule_duree_'.$page['entetes']['X-Spip-Methode-Duree-Cache'];
+		list ($f, $arg) = get_f_arg($f, 'date_creation');
 		if (function_exists($f)) {
-			$duree = $f($page);
-			spip_log ("#CACHE $f (date_creation={$page['contexte']['date_creation']}) renvoie : $duree s", "cachelab");
+			if (!isset($page['contexte'][$arg])) {
+				spip_log ("#CACHE avec squelette {$page['source']} et calcul durée avec $f mais pas de '$args' dans le contexte ".print_r($page['contexte'],1), "cachelab_erreur");
+				return;
+			}
+			$duree = $f($page['contexte'][$arg]);
+			spip_log ("#CACHE $f ($arg={$page['contexte'][$arg]}) renvoie : $duree s", "cachelab");
+
 			$page['duree'] = $duree;
-			// On garde un souvenir
-			// unset ($page['entetes']['X-Spip-Methode-Duree-Cache']);
 			$page['entetes']['X-Spip-Cache']=$duree;
 
-			// Comme memoization, on ajoute une heure histoire de pouvoir tourner
-			// sur le cache quand la base de donnees est plantée (à tester)
+			// On garde un souvenir
+			// unset ($page['entetes']['X-Spip-Methode-Duree-Cache']);
+
+			// Comme memoization, on ajoute une heure "histoire de pouvoir tourner
+			// sur le cache quand la base de donnees est plantée (à tester)"
+			// TODO CORE ? changer creer_cache pour qu'il appelle maj_invalideurs *avant* d'avoir écrit le cache
 			$Memoization->set($fichier, $page, 3600+$duree);
 		}
 		else 
-			spip_log ("#CACHE duree cache : a fonction '$f' n'existe pas\n".print_r($page,1), "cachelab_erreur");
+			spip_log ("#CACHE duree cache : la fonction '$f' n'existe pas (arg='$arg')\n".print_r($page,1), "cachelab_erreur");
+	}
+	
+	// Exemple : #CACHE{1200,filtre-bidouille grave} peut grave bidouiller le cache yc ses métadonnées
+	if (isset($page['entetes']['X-Spip-Filtre-Cache'])) {
+		$f = 'cachelab_filtre_cache_'.$page['entetes']['X-Spip-Filtre-Cache'];
+		list ($f, $arg) = get_f_arg($f);
+		if (function_exists($f)) {
+			spip_log ("#CACHE appelle le filtre $f ($arg)", "cachelab");
+			$f($page, $arg);
+			// ici rien de plus, c'est le filtre qui fait ce qu'il veut 
+			// et qui peut enregistrer le résulat
+		}
+		else 
+			spip_log ("#CACHE filtre : la fonction '$f' n'existe pas (arg='$arg')\n".print_r($page,1), "cachelab_erreur");
 	}
 }

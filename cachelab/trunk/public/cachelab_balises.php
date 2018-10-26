@@ -76,12 +76,19 @@ function balise_CACHE ($p) {
 			) {
 				$code .= ".'<'.'" . '?php header("X-Spip-Statique: oui"); ?' . "'.'>'";
 			}
-			
-			if (strpos($pa, 'calcul-')===0) {
-				$methode = substr($pa, 7);
+
+			if (strpos($pa, 'duree-')===0) {
+				$methode = substr($pa, 6);
 				$ajout = ".'<'.'" . '?php header("X-Spip-Methode-Duree-Cache: '.$methode.'"); ?' . "'.'>'";
 				$code .= $ajout;
 				spip_log ("Méthode de calcul de la durée du cache : $methode", 'cachelab');
+			}
+
+			if (strpos($pa, 'filtre-')===0) {
+				$methode = substr($pa, 7);
+				$ajout = ".'<'.'" . '?php header("X-Spip-Filtre-Cache: '.$methode.'"); ?' . "'.'>'";
+				$code .= $ajout;
+				spip_log ("Filtre sur le cache APC : $methode", 'cachelab');
 			}
 		}
 	} else {
