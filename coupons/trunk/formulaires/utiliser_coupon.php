@@ -32,14 +32,16 @@ function formulaires_utiliser_coupon_verifier_dist() {
 		'spip_coupons', 
 		'code = ' . sql_quote($code_coupon)
 	);
+
+	$montant_reduction = coupons_calculer_reduction_commande($id_coupon, $id_commande);
 	
-	// stocker le coupon en session
-	session_set('id_coupon',$id_coupon);
-	
-	// coupon inconnu ou déjà utilisé ?
-	if (!$id_coupon || !coupon_utilisable($id_coupon)) {
+	// coupon sans réduction, inconnu ou déjà utilisé ?
+	if (!$montant_reduction || !$id_coupon || !coupon_utilisable($id_coupon)) {
 		return array('code_coupon' => _T('coupons:code_invalide'));
 	}
+
+	// stocker le coupon en session
+	session_set('id_coupon',$id_coupon);
 
 	return array();
 }
