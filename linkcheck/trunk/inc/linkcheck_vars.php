@@ -21,6 +21,10 @@ function linkcheck_champs_a_traiter($table) {
 			}
 		}
 	}
+	$tab_champs = pipeline('linkcheck_champs_a_traiter',array(
+		'args' => array('table' => $table['table_objet']),
+		'data' => $tab_champs)
+	);
 	return $tab_champs;
 }
 
