@@ -71,14 +71,16 @@ global $Memoization;
 		$cle_objet=null;
 	}
 
-	// pour 'contexte' on simule un 'more' pour donner un exemple d'extension
-	if (isset($conditions['contexte']) and $conditions['contexte'] and !isset($conditions['more']))
-		$conditions['more'] = 'contexte';
-	if ($more = (isset($conditions['more']) ? (string)$conditions['more'] : '')) {
-		$morefunc='cachelab_filtrecache_'.$more;
-		// Signature nécessaire : $morefunc ($action, $conditions, $options, &$stats)
-		if (!function_exists($morefunc)) {
-			spip_log ("La fonction '$morefunc' n'est pas définie", 'cachelab_erreur');
+	if (isset($conditions['more']))			// obsolète (todo : fix vieux codes appelant)
+		$conditions['plus'] = $conditions['more'];
+	// pour 'contexte' on simule un 'plus' pour donner un exemple d'extension
+	if (isset($conditions['contexte']) and $conditions['contexte'] and !isset($conditions['plus']))
+		$conditions['plus'] = 'contexte';
+	if ($plus = (isset($conditions['plus']) ? (string)$conditions['plus'] : '')) {
+		$plusfunc='cachelab_filtrecache_'.$plus;
+		// Signature nécessaire : $plusfunc ($action, $conditions, $options, &$stats)
+		if (!function_exists($plusfunc)) {
+			spip_log ("La fonction '$plusfunc' n'est pas définie", 'cachelab_erreur');
 			return;
 		}
 	}
@@ -185,7 +187,7 @@ global $Memoization;
 		}
 
 		// pour les filtres suivants on a besoin du contenu du cache
-		if ($cle_objet or $morefunc) {
+		if ($cle_objet or $plusfunc) {
 			global $Memoization;
 			$data = $Memoization->get(substr($cle, $len_prefix));
 			if (!$data) {
@@ -208,8 +210,8 @@ global $Memoization;
 			continue;
 
 		// 4eme filtre : par une extension
-		if ($morefunc
-			and !$morefunc ($action, $conditions, $options, $cle, $data, $stats))
+		if ($plusfunc
+			and !$plusfunc ($action, $conditions, $options, $cle, $data, $stats))
 			continue;
 
 		// restent les cibles
@@ -247,7 +249,7 @@ static $prev_derniere_modif_invalide;
 }
 
 //
-// Exemple d'extension utilisable avec 'more'=>'contexte'
+// Exemple d'extension utilisable avec 'plus'=>'contexte'
 // Filtrer non sur une seule valeur de l'environnement comme avec 'cle_objet'
 // mais sur un ensemble de valeurs spécifié par $conditions['contexte'] 
 // qui est un tableau de (clé, valeur)
