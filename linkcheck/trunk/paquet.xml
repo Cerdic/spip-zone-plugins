@@ -20,12 +20,12 @@
 	<licence>GNU/GPL</licence>
 
 	<necessite nom="saisies" compatibilite="[2.2.3;]" />
-	<necessite nom="facteur" compatibilite="[3.5.2;]" /> 
+	<necessite nom="facteur" compatibilite="[3.5.2;]" />
 
-	<pipeline nom="autoriser" inclure="linkcheck_autorisations.php" /> 
+	<pipeline nom="autoriser" inclure="linkcheck_autorisations.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/linkcheck.php" />
-	<pipeline nom="declarer_tables_objets_sql" inclure="base/linkcheck.php" /> 
-	<pipeline nom="declarer_tables_auxiliaires" inclure="base/linkcheck.php" /> 
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/linkcheck.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/linkcheck.php" />
 	<pipeline nom="affiche_gauche" inclure="linkcheck_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="linkcheck_pipelines.php" />
 	<pipeline nom="post_edition" inclure="linkcheck_pipelines.php" />
