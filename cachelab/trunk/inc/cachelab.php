@@ -60,27 +60,33 @@ global $Memoization;
 	$session = (isset($conditions['session']) ? $conditions['session'] : null);
 	if ($session=='courante')
 		$session = spip_session();
+
 	$chemin = (isset($conditions['chemin']) ? $conditions['chemin'] : null);
 	$chemins = explode('|', $chemin); // sert seulement pour methode_chemin == strpos
+
 	$cle_objet = (isset($conditions['cle_objet']) ? $conditions['cle_objet'] : null);
 	$id_objet = (isset($conditions['id_objet']) ? $conditions['id_objet'] : null);
 	if ($cle_objet and !$id_objet) {
 		spip_log("cachelab_filtre : $cle_objet inconnu\n".print_r(debug_backtrace(),1), "cachelab_erreur");
 		$cle_objet=null;
 	}
+
 	// pour 'contexte' on simule un 'more' pour donner un exemple d'extension
 	if (isset($conditions['contexte']) and $conditions['contexte'] and !isset($conditions['more']))
 		$conditions['more'] = 'contexte';
 	if ($more = (isset($conditions['more']) ? (string)$conditions['more'] : '')) {
 		$morefunc='cachelab_filtrecache_'.$more;
 		// Signature nécessaire : $morefunc ($action, $conditions, $options, &$stats)
-		if (!function_exists($morefunc))
-			die ("La fonction '$morefunc' n'est pas définie");
+		if (!function_exists($morefunc)) {
+			spip_log ("La fonction '$morefunc' n'est pas définie", 'cachelab_erreur');
+			return;
+		}
 	}
 
 	// options
 	// explode+strpos par défaut pour les chemins
 	$methode_chemin = (isset ($options['methode_chemin']) ? $options['methode_chemin'] : 'strpos');
+	$partie_chemin = (isset ($options['partie_chemin']) ? $options['partie_chemin'] : 'tout');
 	// clean par défaut
 	$do_clean = (isset ($options['clean']) ? $options['clean'] : (!defined('CACHELAB_CLEAN') or CACHELAB_CLEAN)); 
 	// pas de listes par défaut
@@ -109,7 +115,7 @@ global $Memoization;
 		$data=null;
 
 		// on saute les caches d'autres origines
-		// (et les caches d'un précédent _CACHE_NAMESPACE pour ce même site)
+		// (et les caches d'un autre _CACHE_NAMESPACE pour ce même site)
 		if (strpos ($cle, _CACHE_NAMESPACE) !== 0) {
 			$stats['nb_alien']++;
 			continue;
@@ -126,7 +132,7 @@ global $Memoization;
 			if ($do_clean) {
 				$del=$Memoization->del(substr($cle,$len_prefix));
 				if (!$del)
-					spip_log ("Echec du clean du cache $cle (création : {$d['creation_time']}, invalidation : $meta_derniere_modif)", "cachelab");
+					spip_log ("Echec du clean du cache $cle (création : {$d['creation_time']}, invalidation : $meta_derniere_modif)", "cachelab_erreur");
 				$stats['nb_clean']++;
 			};
 			continue;
@@ -143,19 +149,38 @@ global $Memoization;
 
 		// 2eme filtrage : par le chemin
 		if ($chemin) {
+			switch ($partie_chemin) {
+			case 'tout' :
+			case 'chemin' :
+				$partie_cle = $cle;
+				break;
+			case 'fichier' :
+				$parties = explode('/', $cle);
+				$partie_cle = array_pop($parties);
+				break;
+			case 'dossier' :
+				$parties = explode('/', $cle);
+				$parties = array_pop($parties);
+				$partie_cle = array_pop($parties);
+				break;
+			default :
+				spip_log ("Option partie_chemin incorrecte : '$partie_chemin'", 'cachelab_erreur');
+				return;
+			}
 			// mémo php : « continue resumes execution just before the closing curly bracket ( } ), and break resumes execution just after the closing curly bracket. »
 			switch ($methode_chemin) {
 			case 'strpos' :
 				foreach ($chemins as $unchemin)
-					if ($unchemin and (strpos ($cle, $unchemin) !== false))
+					if ($unchemin and (strpos ($partie_cle, $unchemin) !== false))
 						break 2;	// trouvé : sort du foreach et du switch et poursuit le test des autres conditions
 				continue 2;	 // échec : passe à la $cle suivante
 			case 'regexp' :
-				if ($chemin and ($danslechemin = preg_match(",$chemin,i", $cle)))
+				if ($chemin and ($danslechemin = preg_match(",$chemin,i", $partie_cle)))
 					break;	// trouvé : poursuit le test des autres conditions
 				continue 2;	// échec : passe à la clé suivante
 			default :
-				die("Méthode '$methode_chemin' pas prévue pour le filtrage par le chemin");
+				spip_log ("Méthode '$methode_chemin' pas prévue pour le filtrage par le chemin", 'cachelab_erreur');
+				return;
 			};
 		}
 
