@@ -16,6 +16,16 @@
 #HTTP_HEADER{Content-Type: text/css;charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+span.icone a img{
+	box-sizing: content-box;
+}
+
 @font-face {
 	font-family: 'Lato';
 	src: url('#CHEMIN{webfonts/lato-black-webfont.woff2}') format('woff2'),
@@ -160,7 +170,7 @@ div.en_lignes {
 }
 
 .inner .liste-objets.articles {
-	margin-bottom: 0.5em;
+	margin-bottom: 0;
 }
 
 /* espacer un peu les liens */
@@ -208,6 +218,7 @@ h3.titrem,
 	padding: 1px 4px;
 }
 
+.formulaire_editer_logo > h3.titrem,
 .formulaire_joindre_document > h3.titrem {
 	margin-bottom: 0;
 }
