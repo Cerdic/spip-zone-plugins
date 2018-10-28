@@ -110,8 +110,9 @@ function formidablepaiement_bank_traiter_reglement($flux){
 
 function formidablepaiement_affiche_enfants($flux){
 
-	if ($flux['args']['objet']=='formulaires_reponse'
-	  AND $id_formulaires_reponse = $flux['args']['id_objet']){
+	if (isset($flux['args']['objet'])
+		AND $flux['args']['objet'] == 'formulaires_reponse'
+		AND $id_formulaires_reponse = $flux['args']['id_objet']) {
 
 		$reponse = sql_fetsel('*','spip_formulaires_reponses','id_formulaires_reponse='.intval($id_formulaires_reponse));
 
