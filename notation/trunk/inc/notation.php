@@ -91,7 +91,7 @@ function notation_identifier_visiteur($set_cookie = false) {
 	$qui['hash'] = substr(md5(
 		$qui['ip'] . $_SERVER['HTTP_USER_AGENT']
 		. $_SERVER['HTTP_ACCEPT_LANGUAGE']
-		. $_SERVER['HTTP_ACCEPT_ENCODING']
+		. (isset($_SERVER['HTTP_ACCEPT_ENCODING']) ? $_SERVER['HTTP_ACCEPT_ENCODING'] : '')
 	), 0,10);
 
 	if (isset($_COOKIE['spip_a_vote']) and $_COOKIE['spip_a_vote']) {
