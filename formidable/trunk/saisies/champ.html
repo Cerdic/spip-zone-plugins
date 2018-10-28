@@ -26,7 +26,7 @@
 			#SET{saisie_currente_nom,#GET{saisie}|table_valeur{options}|table_valeur{nom}}
 			#SET{selected,''}
 			[(#ENV{multiple}|oui)
-				[(#GET{saisie_currente_nom}|in_array{#ENV{valeur,#ENV{saisie_a_positionner}}}|oui)
+			[(#GET{saisie_currente_nom}|in_array{#ENV{valeur,#ENV{saisie_a_positionner,#ARRAY{}}}}|oui)
 					#SET{selected,'selected="selected"'}
 				)]
 			]
