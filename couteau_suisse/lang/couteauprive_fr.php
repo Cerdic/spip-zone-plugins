@@ -153,6 +153,8 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 
 @puce@ Le Couteau Suisse utilise par défaut la balise HTML &lt;h4&gt; pour le titre des blocs dépliables. Choisissez ici une autre balise (&lt;hN&gt; ou &lt;div&gt;) :[[%bloc_h4%]]
 
+@puce@ Lorsqu\'aucun double saut de ligne n\'est trouvé dans le texte d\'un bloc, le futur titre cliquable est constitué par défaut des 30 premiers caractères de ce texte. Si besoin, modifiez ici ce réglage :[[%blocs_couper% caractères maxi]]
+
 @puce@ Afin d\'obtenir un effet plus doux au moment du clic, vos blocs dépliables peuvent s\'animer à la manière d\'un "glissement".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]',
 	'blocs:nom' => 'Blocs Dépliables',
 	'boites_privees:description' => 'Toutes les boîtes décrites ci-dessous apparaissent ici ou là dans la partie privée.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
@@ -502,6 +504,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : «{Round Cor
 	'label:balise_decoupe' => 'Activer la balise #CS_DECOUPE :',
 	'label:balise_sommaire' => 'Activer la balise #CS_SOMMAIRE :',
 	'label:bloc_h4' => 'Balise pour les titres :',
+	'label:blocs_couper' => 'Longueur des titres automatiques :',
 	'label:bloc_unique' => 'Un seul bloc ouvert sur la page :',
 	'label:blocs_cookie' => 'Utilisation des cookies :',
 	'label:blocs_slide' => 'Type d\'animation :',

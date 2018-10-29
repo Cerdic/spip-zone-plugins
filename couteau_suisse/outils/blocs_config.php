@@ -6,13 +6,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function outils_blocs_config_dist() {
 
-@define('_BLOC_TITLE_SEP', '||');
+if(!defined('_BLOC_TITLE_SEP')) define('_BLOC_TITLE_SEP', '||');
 // Ajout de l'outil 'blocs'
 add_outil(array(
 	'id' =>'blocs',
 	'categorie'	=> 'typo-racc',
 	'contrib' => 2583,
-	'code:options' => "%%bloc_h4%% @define('_BLOC_TITLE_SEP', '"._BLOC_TITLE_SEP."');",
+	'code:options' => "%%bloc_h4%%
+if(!defined('_BLOC_TITLE_SEP')) define('_BLOC_TITLE_SEP', '"._BLOC_TITLE_SEP."');
+%%blocs_couper%%",
 	// fonction blocs_init() codee dans blocs.js : executee lors du chargement de la page et a chaque hit ajax
 	'code:js' => "var blocs_replier_tout = %%bloc_unique%%;
 var blocs_millisec = %%blocs_millisec%%;
@@ -59,6 +61,11 @@ add_variables(array(
 	'nom' => 'blocs_millisec',
 	'format' => _format_NOMBRE,
 	'defaut' => 100,
+), array(
+	'nom' => 'blocs_couper',
+	'format' => _format_NOMBRE,
+	'defaut' => 30,
+	'code:%s>0' => "define('_BLOC_TITRE_COUPER', %s);",
 ));
 
 }

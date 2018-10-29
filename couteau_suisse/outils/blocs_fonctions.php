@@ -12,7 +12,7 @@ Mon bloc depliable		/ qui est aussi l'emplacement pour l'Ajax si le fragment est
 
 */
 
-@define('_BLOC_TITRE_H', 'h4');
+if(!defined('_BLOC_TITRE_H')) define('_BLOC_TITRE_H', 'h4');
 
 // Pour la balise suivante, l'ordre des arguments importe peu
 // Un bloc replie, titre simple : #BLOC_TITRE

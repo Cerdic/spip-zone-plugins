@@ -7,7 +7,8 @@
    Attention : seules les balises en minuscules sont reconnues.
 */
 
-@define('_BLOC_TITRE_H', 'h4');
+if(!defined('_BLOC_TITRE_H')) define('_BLOC_TITRE_H', 'h4');
+if(!defined('_BLOC_TITRE_COUPER')) define('_BLOC_TITRE_COUPER', 30);
 
 // depliage/repliage - fonction de personnalisation des title a placer dans mes_fonctions.php
 // function blocs_title($titre='', $corps='', $num='') {
@@ -25,7 +26,7 @@ function blocs_callback($matches) {
 	// pas de corps !
 	if(!strlen($corps = trim($corps))) {
 		$corps = $titre;
-		$titre = preg_replace(',[\n\r]+,s', ' ', couper(propre($titre), 30));
+		$titre = preg_replace(',[\n\r]+,s', ' ', couper(propre($titre), _BLOC_TITRE_COUPER));
 	}
 	// pas d'intertitre !
 	$titre = preg_replace(',^{{{(.*)}}}$,', '$1', trim($titre));
