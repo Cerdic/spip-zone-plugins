@@ -42,7 +42,7 @@ function coupon_utilisable($id_coupon, $id_commande = null) {
 		// le coupon est il restreint à un auteur en particulier ?
 		if(!test_espace_prive() && $id_commande) {
 			$id_auteur = sql_getfetsel('id_auteur','spip_commandes','id_commande='.$id_commande);
-			if($id_auteur && $id_auteur != $infos_coupon['id_auteur']){
+			if($id_auteur && $infos_coupon['id_auteur'] && $id_auteur != $infos_coupon['id_auteur']){
 				$utilisable = false;
 			}
 		}
