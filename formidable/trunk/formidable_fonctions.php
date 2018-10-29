@@ -185,8 +185,9 @@ function formidable_nettoyer_saisie_vue($valeur) {
 		$valeur = implode(', ', $valeur);
 	}
 	$valeur = supprimer_tags($valeur);
-	$valeur = str_replace("\n","",$valeur);
-	$valeur = str_replace("\t","",$valeur);
+	$valeur = str_replace("\n"," ",$valeur);
+	$valeur = str_replace("\r"," ",$valeur);
+	$valeur = str_replace("\t"," ",$valeur);
 	return $valeur;
 }
 
