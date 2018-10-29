@@ -52,6 +52,9 @@ function coupons_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['2.1.0']  = array(
 		array('maj_tables', array('spip_coupons')),
 	);
+	$maj['2.2.0']  = array(
+		array('maj_tables', array('spip_coupons')),
+	);
 
 	// Créer les champs extras
 	cextras_api_upgrade(coupons_declarer_champs_extras(), $maj['create']);

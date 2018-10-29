@@ -17,13 +17,20 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Une fonction qui indique si un coupon est utilisable ou pas (i.e. pas encore utilisé)
  *
  * @param $id_coupon
+ * @param $id_commande
  *
  * @return bool
  */
-function coupon_utilisable($id_coupon) {
+function coupon_utilisable($id_coupon, $id_commande = null) {
+	if(!$id_commande) {
+		$id_commande = intval(session_get('id_commande'));
+	}
+	
 	$utilisable = false;
-	if ($id_coupon = sql_getfetsel(
-		'id_coupon',
+	
+	// le coupon est il actif et toujours valide ?
+	if ($infos_coupon = sql_fetsel(
+		'id_coupon, id_auteur',
 		'spip_coupons',
 		array(
 			'id_coupon = ' . intval($id_coupon),
@@ -32,12 +39,20 @@ function coupon_utilisable($id_coupon) {
 		)
 	)) {
 		$utilisable = true;
+		// le coupon est il restreint à un auteur en particulier ?
+		if(!test_espace_prive() && $id_commande) {
+			$id_auteur = sql_getfetsel('id_auteur','spip_commandes','id_commande='.$id_commande);
+			if($id_auteur && $id_auteur != $infos_coupon['id_auteur']){
+				$utilisable = false;
+			}
+		}
 	}
 	
+	// reste t'il un montant utilisable sur le coupon ?
 	if ($id_coupon && !coupon_montant_utilisable($id_coupon)) {
 		$utilisable = false;
 	}
-
+	
 	return $utilisable;
 }
 

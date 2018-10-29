@@ -30,6 +30,11 @@
 	<a href="[(#ID_PRODUIT|generer_url_entite{produit})]">[(#INFO_TITRE{produit,#ID_PRODUIT})]</a>
 </p>]
 
+[<p class="champ">(#ID_AUTEUR|oui)
+	<strong><:coupon:champ_restriction_auteur_titre_label:> : </strong>
+	<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#INFO_TITRE{auteur,#ID_AUTEUR})]</a>
+</p>]
+
 [<p class="champ">(#RESTRICTION_TAXE|>{0}|oui)
 	<strong><:coupon:champ_restriction_taxe_label:> : </strong>
 	[(#RESTRICTION_TAXE|mult{100})%]
