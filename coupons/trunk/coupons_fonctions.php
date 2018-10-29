@@ -81,18 +81,20 @@ function coupon_montant_utilisable($id_coupon) {
 /**
  * Calculer le montant de la réduction d'un coupon sur une commande ou sur un panier en fonction des taxes des objets
  *
+ * @param $id_coupon integer
  * @param $id_commande integer or null
  * @param $id_panier integer
  * 
  * @return string
  */
-function coupons_calculer_reduction_commande($id_coupon, $id_commande, $id_panier=null) {
-	if(!intval($id_commande) && !intval($id_panier)){
+function coupons_calculer_reduction_commande($id_coupon, $id_commande, $id_panier = null) {
+	$id_coupon = intval($id_coupon);
+	if (!intval($id_coupon) || (!intval($id_commande) && !intval($id_panier))) {
 		return false;
 	}
-	
-	$montant_reduction = coupon_montant_utilisable($id_coupon);
-	$infos_coupon  = sql_fetsel('id_produit, restriction_taxe', 'spip_coupons', 'id_coupon = ' . $id_coupon);
+
+	$montant_reduction = coupon_montant_utilisable(intval($id_coupon));
+	$infos_coupon  = sql_fetsel('id_produit, restriction_taxe', 'spip_coupons', 'id_coupon = ' . intval($id_coupon));
 	$restriction_taxe = $infos_coupon['restriction_taxe'];
 	$id_produit = $infos_coupon['id_produit'];
 	
