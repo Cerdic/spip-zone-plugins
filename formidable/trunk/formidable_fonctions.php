@@ -152,15 +152,7 @@ function affiche_resume_reponse($id_formulaires_reponse, $id_formulaire = null, 
 	$valeurs = array();
 	foreach ($modeles_vars[$modele_resume] as $var) {
 		$valeur = calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $var, 'valeur_uniquement', '');
-		// on ne veut pas du \n de PtoBR, mais on ne veut pas non plus faire un trim
-		$valeur = str_ireplace('</p>', '', $valeur);
-		$valeur = PtoBR($valeur);
-		if (strpos($valeur, '</li>')) {
-			$valeur = explode('</li>', $valeur);
-			array_pop($valeur);
-			$valeur = implode(', ', $valeur);
-		}
-		$valeur = supprimer_tags($valeur);
+		$valeur = formidable_nettoyer_saisie_vue($valeur);
 		$valeurs["@$var@"] = $valeur;
 	}
 	return pipeline(
@@ -175,6 +167,27 @@ function affiche_resume_reponse($id_formulaires_reponse, $id_formulaire = null, 
 			'data' => str_replace(array_keys($valeurs), array_values($valeurs), $modele_resume),
 		)
 	);
+}
+
+/**
+ * Supprimer les balise d'une vue de saisies
+ * sans pour autant faire un trim
+ * @param str $valeur
+ * @return str
+**/
+function formidable_nettoyer_saisie_vue($valeur) {
+	// on ne veut pas du \n de PtoBR, mais on ne veut pas non plus faire un trim
+	$valeur = str_ireplace('</p>', '', $valeur);
+	$valeur = PtoBR($valeur);
+	if (strpos($valeur, '</li>')) {
+		$valeur = explode('</li>', $valeur);
+		array_pop($valeur);
+		$valeur = implode(', ', $valeur);
+	}
+	$valeur = supprimer_tags($valeur);
+	$valeur = str_replace("\n","",$valeur);
+	$valeur = str_replace("\t","",$valeur);
+	return $valeur;
 }
 
 /**

@@ -512,40 +512,17 @@ function formidable_tableau_valeurs_saisies($saisies) {
 		} else {
 			// On récupère la valeur postée
 			$valeurs[$champ] = _request($champ);
-
-			// Le champ est un tableau objet ? on le parse
-			if (is_array($valeurs[$champ])) {
-				// si on ne demande pas la valeur brute
-				if (
-					isset($saisies_par_nom[$champ]['options']['datas'])
-					and $labels_data = saisies_aplatir_tableau(saisies_chaine2tableau($saisies_par_nom[$champ]['options']['datas']))
-					and !$options['champ_sujet_valeurs_brutes']
-				) {
-					$valeurs_libellees[$champ] = array();
-					foreach ($valeurs[$champ] as $valeur) {
-						$valeurs_libellees[$champ][] = $labels_data[$valeur];
-					}
-					$valeurs_libellees[$champ] =  implode($valeurs_libellees[$champ], ",");
-				}
-				// Sinon on utilise directement la valeur postée
-				else {
-					$valeurs_libellees[$champ] = implode($valeurs[$champ],",");
-				}
-				// Si la saisie a une valeur unique
-			} else {
-				// Si la saisie est une liste de choix avec des clés et labels humains, on cherche le label humain
-				if (
-					isset($saisies_par_nom[$champ]['options']['datas'])
-					and $labels_data = saisies_aplatir_tableau(saisies_chaine2tableau($saisies_par_nom[$champ]['options']['datas']))
-					and isset($labels_data[$valeurs[$champ]])
-				) {
-					$valeurs_libellees[$champ] = $labels_data[$valeurs[$champ]];
-				}
-				// Sinon on utilise directement la valeur postée
-				else {
-					$valeurs_libellees[$champ] = $valeurs[$champ];
-				}
-			}
+			$valeurs_libellees[$champ] = formidable_nettoyer_saisie_vue(recuperer_fond(
+				'saisies-vues/_base',
+				array_merge(
+					array(
+						'type_saisie' => $saisies_par_nom[$champ]['saisie'],
+						'valeur' => $valeurs[$champ],
+						'valeur_uniquement' => 'oui',
+					),
+					$saisies_par_nom[$champ]['options']
+				)
+			));
 		}
 	}
 	return array($valeurs, $valeurs_libellees);
