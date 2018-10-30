@@ -16,6 +16,7 @@ function lazysizes_addons() {
 		'aspectratio' => 'ls.aspectratio',
 		'attrchange' => 'ls.attrchange',
 		'bgset' => 'ls.bgset',
+		'blur-up' => 'ls.blur-up',
 		'custommedia' => 'ls.custommedia',
 		'fix-io-sizes' => 'fix-ios-sizes',
 		'include' => 'ls.include',
@@ -39,16 +40,15 @@ function lazysizes_addons() {
 
 function lazysizes_insertion_js($flux = ''){
 	include_spip('inc/config');
-	$lazy_options = lire_config('lazysizes/options');
-	$js_init_options = generer_url_public('lazysizes_config.js') ;
+	$lazy_cfg = lire_config('lazysizes');
+	$js_init_options = produire_fond_statique('lazysizes_config.js',$lazy_cfg) ;
 	$flux .= "<script type='text/javascript' src='$js_init_options' ></script>\n";;
 
 	// Addons
-	$active_addons = lire_config('lazysizes/addons');
 	$ls_addons = lazysizes_addons();
 
-	if (is_array($active_addons)) {
-		foreach($active_addons as $addon => $state){
+	if (is_array($lazy_cfg['addons'])) {
+		foreach($lazy_cfg['addons'] as $addon => $state){
 			if(array_key_exists($addon, $ls_addons)){
 				$file = timestamp(find_in_path('javascript/addons/'.$addon.'/'.$ls_addons[$addon].'.js'));
 				$flux .= "<script type='text/javascript' src='$file' ></script>\n";
