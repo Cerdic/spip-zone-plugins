@@ -267,13 +267,27 @@ function profils_formulaire_traiter($flux) {
 								// Si on le trouve bien dans ce qui a été envoyé du formulaire
 								if ($champs_coordonnees[$objet][$coordonnee][$type ? $type : 0]) {
 									// On met en request racine les champs de cette coordonnée
+									$coordonnee_remplie = false;
 									foreach ($champs_coordonnees[$objet][$coordonnee][$type ? $type : 0] as $champ=>$valeur) {
-										set_request($champ, $valeur);
+										// S'il y a au moins un champ rempli, la coordonnée est à remplir
+										if ($valeur) {
+											$coordonnee_remplie = true;
+											set_request($champ, $valeur);
+										}
 									}
-									set_request('type', $type);
-									// Enfin on traite la coordonnée
-									$retours_coordonnee = formulaires_editer_objet_traiter(objet_type($coordonnee), $id_coordonnee, 0, 0, $retour, '');
-									$retours = array_merge($retours_coordonnee, $retours);
+									
+									// Si la coordonnée est à remplir on la traite
+									if ($coordonnee_remplie) {
+										set_request('type', $type);
+										// Enfin on traite la coordonnée
+										$retours_coordonnee = formulaires_editer_objet_traiter(objet_type($coordonnee), $id_coordonnee, 0, 0, $retour, '');
+										$retours = array_merge($retours_coordonnee, $retours);
+									}
+									// Sinon, tous les champs sont vides, on peut la supprimer pour faire du ménage
+									else {
+										sql_delete(table_objet_sql($coordonnee), id_table_objet($coordonnee) . '=' . $id_coordonnee);
+										sql_delete(table_objet_sql($coordonnee) . '_liens', id_table_objet($coordonnee) . '=' . $id_coordonnee);
+									}
 								}
 							}
 						}
