@@ -429,10 +429,14 @@ function profils_recuperer_infos($id_auteur=0, $id_ou_identifiant_profil='') {
 
 function profils_traiter_peupler_request($form, $champs_objet, $config_objet) {
 	if (is_array($champs_objet) and $config_objet) {
-		foreach ($champs_objet as $champ => $valeur) {
-			// Si ce champ faisait vraiment partie des choses à envoyer
-			if ($config_objet[$champ] and in_array($form, $config_objet[$champ])) {
-				set_request($champ, $valeur);
+		foreach ($config_objet as $champ => $config_champ) {
+			// Si c'est configuré pour ce formulaire
+			if (in_array($form, $config_champ)) {
+				set_request('cextra_'.$champ, 1); // pour que champs extras le gère dans pre_edition ensuite
+				
+				if (isset($champs_objet[$champ])) {
+					set_request($champ, $champs_objet[$champ]);
+				}
 			}
 		}
 	}
