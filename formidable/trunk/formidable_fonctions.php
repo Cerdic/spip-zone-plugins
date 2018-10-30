@@ -52,13 +52,13 @@ function calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, $t
 	static $reponses_valeurs = array();
 	$tenter_unserialize = charger_fonction('tenter_unserialize', 'filtre/');
 
-	// si pas déjà présent, on cherche les saisies de ce formulaire
+	// Si pas déjà présent, on cherche les saisies de ce formulaire
 	if (!isset($formulaires_saisies[$id_formulaire])) {
 		$formulaires_saisies[$id_formulaire] = unserialize(
 			sql_getfetsel('saisies', 'spip_formulaires', 'id_formulaire = '.intval($id_formulaire))
 		);
 	}
-	// si pas déjà présent, on cherche les valeurs de cette réponse
+	// Si pas déjà présent, on cherche les valeurs de cette réponse
 	if (!isset($reponses_valeurs[$id_formulaires_reponse])) {
 		if ($champs = sql_allfetsel(
 			'nom,valeur,id_formulaires_reponses_champ',
@@ -74,22 +74,22 @@ function calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, $t
 		}
 	}
 
-	// si on demande la valeur brute, on ne génère rien, on renvoie telle quelle
+	// Si on demande la valeur brute, on ne génère rien, on renvoie telle quelle
 	if ($type_retour == 'brut') {
 		return $reponses_valeurs[$id_formulaires_reponse][$nom]['valeur'];
 	}
 
-	// si on demande edit > mode crayon > on génère le crayon correspond
+	// Si on demande edit > mode crayon > on génère le crayon correspond
 	if ($type_retour == 'edit') {
 		return 'crayon '.'formulaires_reponses_champ-valeur-'. $reponses_valeurs[$id_formulaires_reponse][$nom]['id'];
 	}
-	// si on trouve bien la saisie demandée
+	// Si on trouve bien la saisie demandée
 	if ($saisie = saisies_chercher($formulaires_saisies[$id_formulaire], $nom)) {
-		// si on demande le label, on ne génère rien, on renvoie juste le label
+		// Si on demande le label, on ne génère rien, on renvoie juste le label
 		if ($type_retour == 'label') {
 			return $saisie['options']['label'];
 		}
-		// on génère la vue de cette saisie avec la valeur trouvée précédemment
+		// On génère la vue de cette saisie avec la valeur trouvée précédemment
 		return recuperer_fond(
 			'saisies-vues/_base',
 			array_merge(
@@ -106,7 +106,7 @@ function calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, $t
 }
 
 /**
- * afficher le resume d'une reponse selon un modele qui contient des noms de champ "@input_1@ ..."
+ * Afficher le resume d'une reponse selon un modele qui contient des noms de champ "@input_1@ ..."
  *
  * @param int $id_formulaires_reponse
  * @param int $id_formulaire
@@ -145,7 +145,7 @@ function affiche_resume_reponse($id_formulaires_reponse, $id_formulaire = null, 
 	}
 
 	if (!isset($modeles_vars[$modele_resume])) {
-		preg_match_all(',@(.*)@,uims', $modele_resume, $matches);
+		preg_match_all(',@(.*)@,Uims', $modele_resume, $matches);
 		$modeles_vars[$modele_resume] = $matches[1];
 	}
 
