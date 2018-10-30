@@ -23,6 +23,7 @@ function action_supprimer_email_dist() {
 
 	if ($id_email > 0 and autoriser('supprimer', 'email', $id_email)) {
 		sql_delete('spip_emails', "id_email=" . sql_quote($id_email));
+		sql_delete('spip_emails_liens', 'id_email=' . $id_email);
 		include_spip('inc/invalideur');
 		suivre_invalideur("id='id_email/$id_email'");
 	}

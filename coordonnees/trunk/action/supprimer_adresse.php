@@ -22,7 +22,8 @@ function action_supprimer_adresse_dist() {
 	$id_adresse = intval($arg);
 
 	if ($id_adresse > 0 and autoriser('supprimer', 'adresse', $id_adresse)) {
-		sql_delete('spip_adresses', "id_adresse=" . sql_quote($id_adresse));
+		sql_delete('spip_adresses', 'id_adresse=' . $id_adresse);
+		sql_delete('spip_adresses_liens', 'id_adresse=' . $id_adresse);
 		include_spip('inc/invalideur');
 		suivre_invalideur("id='id_adresse/$id_adresse'");
 	}

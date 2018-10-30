@@ -23,6 +23,7 @@ function action_supprimer_numero_dist() {
 
 	if ($id_numero > 0 and autoriser('supprimer', 'numero', $id_numero)) {
 		sql_delete('spip_numeros', "id_numero=" . sql_quote($id_numero));
+		sql_delete('spip_numeros_liens', 'id_numero=' . $id_numero);
 		include_spip('inc/invalideur');
 		suivre_invalideur("id='id_numero/$id_numero'");
 	}
