@@ -1,8 +1,8 @@
 [(#HTTP_HEADER{Content-Type: text/javascript; charset=#CHARSET})][
-(#REM)<!-- 
+(#REM)<!--
 
 -->][
-(#SET{options, #CONFIG{lazysizes/options}})]
+(#SET{options, #ENV{options}})]
 window.lazySizesConfig = window.lazySizesConfig || {};[
 window.lazySizesConfig.lazyClass = '(#GET{options/lazy_class})';][
 window.lazySizesConfig.preloadClass = '(#GET{options/preload_class})';][
