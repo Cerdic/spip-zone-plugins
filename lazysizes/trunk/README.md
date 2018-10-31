@@ -19,9 +19,9 @@ LazySizes peut calculer automatiquement la taille et le ratio de vos images.
 
 Il peut vous permettre de partager vos media queries entre vos css et les attributs de vos medias,
 aidant ainsi à séparer votre layout (CSS) de votre contenu/structure (HTML),
-rendant ainsi l'intégration des images responsive dans n'importe quel environement ou contexte beaucoup plus simple.
+rendant ainsi l'intégration des images responsive dans n'importe quel environnement ou contexte beaucoup plus simple.
 
-Il inclu aussi un système de plugin, permettant d'étendre ses fonctionnalitées.
+Il inclu aussi un système de plugin, permettant d'étendre ses fonctionnalités.
 
 
 ## Pourquoi LazySize
@@ -173,6 +173,7 @@ It makes responsive images even more easier without any need for another third p
 
 ## Sources et docs
 
+https://css-tricks.com/the-complete-guide-to-lazy-loading-images/
 https://github.com/aFarkas/lazysizes
 
 
@@ -182,7 +183,7 @@ https://github.com/aFarkas/lazysizes
 - [-] Inclure les plugins lazysize depuis un panneau de config ou un define
 puis les charger dans insert_head
 	- [] Inclure les plugins lazysize depuis un define
-	- [] ajouter les scripts dans le privé vu que les modèle sont dipponibles
+	- [] ajouter les scripts dans le privé vu que les modèle sont diponibles
 - [] 	preview des modeles dans l'espace privé
 		par exemple : `<picture5|id_document=5>`
 
