@@ -3,7 +3,7 @@
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 <form method="post" action="#ENV{action}"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
-	
+
 	<fieldset>
 		<legend>LazySize Options</legend>
 		<p class="explication">Options de configuration</p>
@@ -68,9 +68,16 @@
 				</p>
 				<input type="text" class="text" name="srcset_attr" id="srcset_attr" value="#ENV{srcset_attr}" />
 			</div>
+			<div class="editer editer_custom_media">
+				<label for="custom_media">Custom Media rules</label>
+				<p class="explication">
+					<code>(data-srcset !default)</code>
+					Raccourcis et Media queries pour
+				</p>
+				<textarea class="textarea" name="custom_media" id="custom_media">[(#ENV{custom_media}|trim)]</textarea>
+			</div>
 		</div>
 	</fieldset>
-	
 	<input type="hidden" name="_meta_casier" value="lazysizes/options" />
 	<p class="boutons">
 		<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />

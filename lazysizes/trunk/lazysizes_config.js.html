@@ -16,4 +16,6 @@ window.lazySizesConfig.srcsetAttr = '(#GET{options/srcset_attr})';][
 
 //console.log(lazySizesConfig);
  DEFAULT-->]
+#SET{custom_media, #GET{options/custom_media}}
+window.lazySizesConfig.customMedia = [(#GET{custom_media}|lazysizes_string2array|json_encode)];
 window.lazySizesConfig.init = false;

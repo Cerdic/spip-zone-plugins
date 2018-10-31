@@ -64,14 +64,32 @@ function lazysizes_insertion_js($flux = ''){
 
 	return $flux;
 }
-
-
+/*
+ * lazysizes_string2array
+ *
+ *  Pour ne pas necessiter Saisie juste pour saisies_chaine2tableau
+ * ne gère que des cle|valeur 
+ *
+ * @param string $string
+ *   cle|valeur
+ *   cle|valeur
+ */
+function lazysizes_string2array($string){
+	// récupérer les lignes
+	$res = array();
+	$lignes = explode("\n",$string);
+	foreach($lignes as $i => $ligne){
+		list($cle,$valeur) = explode('|', $ligne, 2);
+		$res[$cle] = trim($valeur);
+	}
+ 	return $res;
+}
 
 /**
  * filtre_unlazy_dist
  *
  * supprime les data-src des modèles documents pour rétablir le src du $fichier
- * utilisé dans les gabarrits de newsletter
+ * utilisé dans les gabarits de newsletter
  *
  */
 function filtre_unlazy_dist($flux){
