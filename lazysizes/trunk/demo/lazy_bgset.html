@@ -21,12 +21,6 @@
 }
 
 </style>
-<script>
-window.lazySizesConfig.customMedia = {
-    '--small': '(max-width: 480px)',
-    '--medium': '(max-width: 800px)'
-};
-</script>
 </head>
 <body>
 	<h1>Demo LazySize : bgset</h1>
@@ -38,7 +32,7 @@ https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/bgset
 
 @see  - ne pas se fier aux outils de dev de chrome https://github.com/aFarkas/lazysizes/issues/122
 -->]
-<BOUCLE_listDocs(DOCUMENTS){tout}{0,1}{extension==jpg}{id_document=34}>
+<BOUCLE_listDocs(DOCUMENTS){tout}{0,1}{extension==jpg}{id_document ?}>
 <div class="media">
 	[(#SET{cover_small,#FICHIER|image_reduire{350,0}|extraire_attribut{src}|url_absolue})]
 	[(#SET{cover_medium,#FICHIER|image_reduire{800,0}|extraire_attribut{src}|url_absolue})]
