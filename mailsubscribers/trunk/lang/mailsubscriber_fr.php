@@ -95,7 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'subscribe_texte_email_2' => 'Nous vous remercions de l’intérêt que vous portez à @nom_site_spip@.',
 	'subscribe_texte_email_3' => 'En cas d’erreur de notre part, ou si vous changez d’avis, vous pouvez vous désinscrire à tout moment au moyen du lien suivant :
 @url_unsubscribe@',
-	'subscribe_texte_email_liste_1' => 'Nous avons bien pris en compte votre inscription à liste « @titre_liste@ » avec l’adresse email @email@.',
+	'subscribe_texte_email_liste_1' => 'Nous avons bien pris en compte votre inscription à la liste « @titre_liste@ » avec l’adresse email @email@.',
 	'subscribe_titre_email' => 'Inscription à la Newsletter',
 	'subscribe_titre_email_liste' => 'Inscription à la liste « <b>@titre_liste@</b> »',
 
