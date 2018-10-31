@@ -215,7 +215,11 @@ function newsletter_send_dist($destinataire,$corps,$options=array()){
 
 	if (!$retour) {
 		spip_log("Erreur Envoi mail ($dest_email) via Facteur : ".print_r($mailer->ErrorInfo,true),'mailshot_send'._LOG_ERREUR);
-		return $mailer->ErrorInfo;
+		if ($mailer->ErrorInfo) {
+			return $mailer->ErrorInfo;
+		} else {
+			return _T("mailshot:erreur_envoi_newsletter");
+		}
 	}
 
 	return $erreur;
