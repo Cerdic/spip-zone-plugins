@@ -14,10 +14,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_aucun_service_configure' => 'Aucun service d’envoi configuré. <a href="@url@">Configurer un service</a>',
-	'erreur_envoi_mail_bloque_debug' => 'Envoi du mail bloqué par <tt>_TEST_EMAIL_DEST</tt>',
-	'erreur_envoi_mail_force_debug' => 'Envoi du mail forcé vers @email@ par <tt>_TEST_EMAIL_DEST</tt>',
-	'erreur_generation_newsletter' => 'Une erreur est survenue lors de la génération de la newsletter',
-	'erreur_envoi_newsletter' => 'Une erreur inconnue est survenue lors de l\'envoi de la newsletter',
+	'erreur_envoi_mail_bloque_debug' => 'Envoi du mail bloqué par <tt>_TEST_EMAIL_DEST</tt>.',
+	'erreur_envoi_mail_force_debug' => 'Envoi du mail forcé vers @email@ par <tt>_TEST_EMAIL_DEST</tt>.',
+	'erreur_generation_newsletter' => 'Une erreur est survenue lors de la génération de la newsletter.',
+	'erreur_envoi_newsletter' => 'Une erreur inconnue est survenue lors de l\'envoi de la newsletter.',
 	'explication_boost_send' => 'Dans ce mode, les mails seront envoyés aussi vite que possible. Aucune limite de cadence n’est prise en compte.
 										L’envoi rapide est déconseillé car il augmente le risque de classement en SPAM.',
 	'explication_purger_historique' => 'Pour chaque envoi en nombre, l’ensemble des destinataires est conservé en base, avec les informations concernant le statut de son envoi.
