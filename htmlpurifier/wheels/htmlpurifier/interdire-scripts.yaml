@@ -19,22 +19,12 @@ securite-script-php:
   replace: "&lt;$1"
 
 securite-js:
-  if_str: "<script"
-  match: "{<script.*?($|</script.)}isS"
-  is_wheel: y
-  replace:
-    -
-      type: all
-      replace: htmlspecialchars
-      is_callback: Y
-    -
-      type: all
-      replace: nl2br
-      is_callback: Y
-    -
-      type: all
-      replace: "<code class=\"securite-js\">$0</code>"
-
+  if_str: "<"
+  if_match: "/<[a-z]+/iS"
+  type: all
+  replace: "echappe_js"
+  is_callback: Y 
+  
 securite-base:
   if_str: "<base"
   type: preg
