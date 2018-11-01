@@ -10,6 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_actualiser_segments' => 'De segmenten actualiseren',
 	'bouton_importer' => 'importeren',
 	'bouton_invitation' => 'Uitnodigen om je op de nieuwsbrief in te schrijven',
 	'bouton_previsu_importer' => 'Voorbeeld',
@@ -96,7 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'subscribe_texte_email_2' => 'Hartelijk dank voor de interesse die je toont voor @nom_site_spip@.',
 	'subscribe_texte_email_3' => 'Als er een fout van onze kant werd gemaakt, of als je van gedachten verandert, kun je je op elk moment uitschrijven via de volgende link:
 @url_unsubscribe@',
-	'subscribe_texte_email_liste_1' => 'We hebben je inschrijving in lijst «@titre_liste@» met e-mailadres @email@ ontvangen.',
+	'subscribe_texte_email_liste_1' => 'We hebben je inschrijving in lijst «@titre_liste@» met e-mailadres @email@ ontvangen.', # MODIF
 	'subscribe_titre_email' => 'Abonneren op de nieuwsbrief',
 	'subscribe_titre_email_liste' => 'Inschrijving in lijst «<b>@titre_liste@</b>»',
 

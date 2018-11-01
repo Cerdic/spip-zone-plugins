@@ -98,7 +98,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'subscribe_texte_email_3' => 'こち側よりエラーが発生したか、ご意見が変わったかの場合には、次のリンクを使用して@url_unsubscribe@、いつでも購読を取り消すことが出来ます。
 ',
 	'subscribe_texte_email_liste_1' => 'リスト「@titre_liste@」に参加するように、Ｅメールアドレス@email@は有効されまし
-た。',
+た。', # MODIF
 	'subscribe_titre_email' => 'ニュースレター購読',
 	'subscribe_titre_email_liste' => 'リスト「@titre_liste@」購読',
 

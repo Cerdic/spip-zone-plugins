@@ -93,7 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'subscribe_texte_email_2' => 'Agradecemos seu interesse pelo @nom_site_spip@.',
 	'subscribe_texte_email_3' => 'Caso tenha ocorrido um erro, ou se você mudou sua me, você pode cancelar a inscrição na newsletter na qualquer momento :
 @url_unsubscribe@',
-	'subscribe_texte_email_liste_1' => 'A sua inscrição na lista «@titre_liste@» com o endereço de e-mail @email@ foi realizada.',
+	'subscribe_texte_email_liste_1' => 'A sua inscrição na lista «@titre_liste@» com o endereço de e-mail @email@ foi realizada.', # MODIF
 	'subscribe_titre_email' => 'Inscrição na newsletter',
 	'subscribe_titre_email_liste' => 'Inscrição na lista «<b>@titre_liste@</b>»',
 

@@ -96,7 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'subscribe_texte_email_2' => 'Thank you for the interest you have shown in @nom_site_spip@.',
 	'subscribe_texte_email_3' => 'In case of error, or if you change your mind, you can unsubscribe at any time using the following link :
 @url_unsubscribe@',
-	'subscribe_texte_email_liste_1' => 'We have taken you subscription to list « @titre_liste@ » with email address @email@ into account.',
+	'subscribe_texte_email_liste_1' => 'We have taken you subscription to list « @titre_liste@ » with email address @email@ into account.', # MODIF
 	'subscribe_titre_email' => 'Subscribe to Newsletter',
 	'subscribe_titre_email_liste' => 'Subscription to list « <b>@titre_liste@</b> »',
 
