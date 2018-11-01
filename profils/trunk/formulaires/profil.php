@@ -208,16 +208,45 @@ function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_
 			}
 			// Sinon c'est qu'une personne crée un profil pour une autre, donc édition classique
 			else {
-				// On crée juste l'auteur vide, les champs seront ajoutés après
-				include_spip('action/editer_objet');
-				$id_auteur = objet_inserer('auteur', null, array('statut' => '6forum'));
+				// MAIS AVANT on cherche si cette personne existe déjà, identifiée par son email ou son nom et avec le même profil
+				if (
+					(
+						$email_principal
+						and $auteur = sql_fetsel(
+							'id_auteur',
+							'spip_auteurs',
+							// même email et même profil
+							array('email='.sql_quote($email_principal), 'id_profil='.$profil['id_profil'])
+						)
+					)
+					or (
+						!$email_principal
+						and $nom_principal
+						and $auteur = sql_fetsel(
+							'id_auteur',
+							'spip_auteurs',
+							// même nom exactement et même profil et email VIDE
+							array('nom='.sql_quote($nom_principal), 'email=""', 'id_profil='.$profil['id_profil'])
+						)
+					)
+				) {
+					$id_auteur = $auteur['id_auteur'];
+					
+					// Vu que c'était pas prévu, on va refaire la recherche de tous les objets possibles à partir de cet id_auteur là
+					extract(profils_chercher_ids_profil($id_auteur, $id_ou_identifiant_profil));
+				}
+				// Sinon on crée juste l'auteur vide, les champs seront ajoutés après
+				else {
+					include_spip('action/editer_objet');
+					$id_auteur = objet_inserer('auteur', null, array('statut' => '6forum'));
+				}
 			}
 			
 			// Pour une création, on assigne le profil principal
 			set_request('id_profil', $profil['id_profil']);
 		}
 		
-		// Si on a un utilisateur déjà connecté, on modifie déjà l'auteur existant
+		// Si on a un auteur, on modifie déjà l'auteur existant
 		if ($id_auteur > 0) {
 			// On met en request racine les champs trouvés pour l'auteur
 			profils_traiter_peupler_request('edition', $champs_auteur, $config['auteur']);
