@@ -10,7 +10,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-include_spip('inc/saisies');
+
 /**
  * Supprimer une saisie dont on donne l'identifiant, le nom ou le chemin.
  *
