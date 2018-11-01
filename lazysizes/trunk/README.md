@@ -1,15 +1,39 @@
 # LazySizes pour spip
 
+**Sources et docs**
 
-Intégration pour spip du script lazysize.
+* https://css-tricks.com/the-complete-guide-to-lazy-loading-images/
+* https://github.com/aFarkas/lazysizes
 
-Outil / lib de lazyloading extensible via un système de plugin/addons.
+**@todo**
 
-Permet notamment de déférer le téléchargement de ressources (images, iframes, vidéos, ..) de manière a ce que l'utilisateur
-ne charge que ce qui est visible dans la fenetre de navigation, ou quand on souhaite sur un autre évenement via un sytème de hooks.
+- [ ] Inclure les addons lazysizes,config depuis un squelette/plugin
+- [ ] finir de traduire la doc
+- [ ] Chaines de langue, et docs/aide des addons
 
-Lazysizes est un script de lazyloading rapide et sans dépendance a un framework d'images
-(incluant les images responsives picture/srcset), les iframes, les scripts/widgets, …
+**Changelogs**
+
+[Suivi des révisions](https://zone.spip.net/trac/spip-zone/log/spip-zone/_plugins_/lazysizes/trunk?action=stop_on_copy&mode=stop_on_copy&verbose=on)
+
+## Dépendances & surcharges
+
+Lazysize necessite l'instalation du plugin htmlpurifier, et surcharge la fonction safehtml du noyau de spip, afin de rendre utilisable / prévisualisable dans l'espace privé le balisage html5.
+
+Le plugin surcharge des modèle documents du plugin medias, en y intégrant le markup html5 `figure`, ainsi que les fallback necessaires `noscript`.
+
+## Documentation
+
+
+Intégration pour spip de la librairie javascript lazysizes un script de lazyloading rapide et sans dépendance a un framework.
+
+Permet de déférer le téléchargement de ressources (images, iframes, vidéos, ..) de manière a ce que l'utilisateur
+ne charge que ce qui est visible dans la fenêtre de navigation, ou quand on souhaite sur un autre évenement via un sytème de hooks/evenements.
+
+Nativement et sans configuration Lazysizes prendra en charge :
+
+* les images incluant les images responsives picture/srcset rendant inutile l'utilisation d'un polyfill comme picturefill,
+* les iframes, les scripts/widgets, …
+
 Il agit sur la priorité des pré-chargement en différenciant les éléments
 suivant la distance plus ou moins importante du champ visible, afin d'augmenter l'impression de rapidité.
 
@@ -17,7 +41,7 @@ LazySizes peut aussi devenir votre outil numéro 1 pour intégrer à votre site 
 
 LazySizes peut calculer automatiquement la taille et le ratio de vos images.
 
-Il peut vous permettre de partager vos media queries entre vos css et les attributs de vos medias,
+Il peut vous permettre de partager vos media-queries entre vos css et les attributs de vos medias,
 aidant ainsi à séparer votre layout (CSS) de votre contenu/structure (HTML),
 rendant ainsi l'intégration des images responsive dans n'importe quel environnement ou contexte beaucoup plus simple.
 
@@ -169,26 +193,3 @@ It works with pre-build images (i.e. grunt-responsive-images)
 as also with any third party (ReSrc, Pixtulate, mobify, WURFL's Image Tailor ...)
 or self hosted restful responsive image service (responsive image on demand).
 It makes responsive images even more easier without any need for another third party script.
-
-
-## Sources et docs
-
-https://css-tricks.com/the-complete-guide-to-lazy-loading-images/
-https://github.com/aFarkas/lazysizes
-
-
-## @todo
-
-
-- [-] Inclure les plugins lazysize depuis un panneau de config ou un define
-puis les charger dans insert_head
-	- [] Inclure les plugins lazysize depuis un define
-	- [] ajouter les scripts dans le privé vu que les modèle sont diponibles
-- [] 	preview des modeles dans l'espace privé
-		par exemple : `<picture5|id_document=5>`
-
-- [X] config export ie_config()
-- [] traduire la doc
-- [] Ajouter via define ou config les options de configuration
-- [] surcharger les modèles media, interressants a "lazyloader"
-- [] Chaines de langue, et docs/aide des addons

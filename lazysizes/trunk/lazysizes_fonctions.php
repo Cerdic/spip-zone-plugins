@@ -42,7 +42,7 @@ function lazysizes_insertion_js($flux = ''){
 	include_spip('inc/config');
 	$lazy_cfg = lire_config('lazysizes');
 	$js_init_options = produire_fond_statique('lazysizes_config.js',$lazy_cfg) ;
-	$flux .= "<script type='text/javascript' src='$js_init_options' ></script>\n";;
+	$flux .= "<script type='text/javascript' src='$js_init_options' ></script>\n";
 
 	// Addons
 	$ls_addons = lazysizes_addons();
@@ -59,7 +59,6 @@ function lazysizes_insertion_js($flux = ''){
 	$lazysizes = timestamp(find_in_path('javascript/lazysizes.js'));
 	$flux .= "<script type='text/javascript' src='$lazysizes' ></script>\n";
 
-
 	$flux .= "<script type='text/javascript'>window.lazySizes.init();</script>";
 
 	return $flux;
@@ -68,7 +67,7 @@ function lazysizes_insertion_js($flux = ''){
  * lazysizes_string2array
  *
  *  Pour ne pas necessiter Saisie juste pour saisies_chaine2tableau
- * ne gère que des cle|valeur 
+ * ne gère que des cle|valeur
  *
  * @param string $string
  *   cle|valeur
