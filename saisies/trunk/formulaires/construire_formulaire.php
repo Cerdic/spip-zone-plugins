@@ -387,6 +387,9 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 		if (isset($saisie_modifiee['verifier']['options']) and $saisie_modifiee['verifier']['options']) {
 			$saisie_modifiee['verifier']['options'] = array_filter($saisie_modifiee['verifier']['options'], 'saisie_option_contenu_vide');
 		}
+		if (!$saisie_modifiee['verifier']) {
+			$saisie_modifiee['verifier'] = array();
+		}
 
 		// On désinfecte à la main
 		if (is_array($saisie_modifiee['options'])) {
