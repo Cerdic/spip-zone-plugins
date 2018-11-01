@@ -16,7 +16,7 @@ function echappe_anti_xss($match) {
         return "";
     }
     $texte = &$match[0];
-    if (preg_match("@^<[a-z]{1,5}( class=['\"][a-z _-]+['\"])?>$@iS", $texte)){
+    if (preg_match("@^<[/]?[a-z]{1,5}(\s+class=['\"][a-z _-]+['\"])?\s?[/]?>$@iS", $texte)){
       return $texte;
     }
     if (!isset($safehtml)) {

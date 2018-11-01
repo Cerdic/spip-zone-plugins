@@ -1,7 +1,7 @@
 <paquet
 	prefix="htmlpurifier"
 	categorie="outil"
-	version="4.10.0.9"
+	version="4.10.0.10"
 	etat="stable"
 	compatibilite="[1.9.0;3.2.99]"
 	logo="htmlpurifier.png"
