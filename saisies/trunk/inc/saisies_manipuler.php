@@ -29,7 +29,7 @@ function saisies_supprimer($saisies, $id_ou_nom_ou_chemin) {
 		$options_generales = $saisies['options'];
 		unset($saisies['options']);
 	}
-	
+
 	// Si la saisie n'existe pas, on ne fait rien
 	if ($chemin = saisies_chercher($saisies, $id_ou_nom_ou_chemin, true)) {
 		// La position finale de la saisie
@@ -45,7 +45,7 @@ function saisies_supprimer($saisies, $id_ou_nom_ou_chemin) {
 		unset($parent[$position]);
 		$parent = array_values($parent);
 	}
-	
+
 	// On remet les options générales après avoir manipulé
 	if (isset($options_generales)) {
 		$saisies['options'] = $options_generales;
@@ -72,7 +72,7 @@ function saisies_inserer($saisies, $saisie, $chemin = array()) {
 		$options_generales = $saisies['options'];
 		unset($saisies['options']);
 	}
-	
+
 	// On vérifie quand même que ce qu'on veut insérer est correct
 	if ($saisie['saisie'] and $saisie['options']['nom']) {
 		// ajouter un identifiant
@@ -102,12 +102,12 @@ function saisies_inserer($saisies, $saisie, $chemin = array()) {
 		// Et enfin on insère
 		array_splice($parent, $position, 0, array($saisie));
 	}
-	
+
 	// On remet les options générales après avoir manipulé
 	if (isset($options_generales)) {
 		$saisies['options'] = $options_generales;
 	}
-	
+
 	return $saisies;
 }
 
