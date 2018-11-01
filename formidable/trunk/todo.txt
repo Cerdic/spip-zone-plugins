@@ -5,8 +5,6 @@
 + Afficher une boite listant les formulaires disponibles dans l'édition d'un article
 + Utiliser le plugin CVT multi-pages de Cédric
 + Afficher des pages suivant des conditions (scénarios)
-+ Pouvoir attacher des fichiers (et donc les envoyer par mail et les enregistrer en base comme document)
-+ Déplacer les saisies en drag-n-drop
 + Ajouter une saisie directement au bon endroit en drag-n-drop
 + Améliorer le texte brut généré à partir du HTML
 
