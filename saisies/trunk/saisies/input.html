@@ -41,7 +41,7 @@
 [(#REM) cle secrete > on modifie le place holder]
 #SET{placeholder,''}
 [(#ENV{cle_secrete}|oui)
-	#SET{placeholder,#ENV{valeur_forcee,#ENV{valeur,#ENV{{default}}}|saisie_masquer_cle_secrete}
+	#SET{placeholder,#ENV{valeur_forcee,#ENV{valeur,#ENV{{default}}}|saisies_masquer_cle_secrete}
 ]
 [(#ENV{cle_secrete}|non)
 	#SET{placeholder,#ENV{placeholder}}
