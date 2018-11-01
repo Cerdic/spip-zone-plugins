@@ -166,7 +166,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 	if ($chemin_validation = saisies_chercher($formulaire_config, "saisie_modifiee_${nom}[options][validation]", true)) {
 		include_spip('inc/verifier');
 		$liste_verifications = verifier_lister_disponibles();
-		
+
 		// La vérification fichiers ne sert que pour la saisie fichiers, et réciproquement, cette saisies n'utilise que cette vérification
 		if ($saisie['saisie'] == 'fichiers') {
 			$liste_verifications = array('fichiers'=>$liste_verifications['fichiers']);
@@ -183,7 +183,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 				'saisie' => 'hidden',
 				'options' => array(
 					'nom' => "saisie_modifiee_${nom}[verifier][type]",
-					'defaut' => 'fichiers'	
+					'defaut' => 'fichiers'
 				)
 			);
 		} else {
@@ -218,7 +218,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 		}
 		$verif_options = array_merge(array($saisie_liste_verif), $verif_options);
 	}
-	
+
 	// Permettre d'intégrer des saisies et fieldset au formulaire de configuration.
 	// Si des vérifications sont à faire, elles seront prises en compte
 	// lors des tests de vérifications à l'enregistrement.
@@ -238,7 +238,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 		$saisie_modifiee = _request("saisie_modifiee_${nom}");//contient tous les paramètres de la saisie
 		// On cherche les erreurs de la configuration
 		$vraies_erreurs = saisies_verifier($formulaire_config);
-		
+
 		// Si on autorise à modifier le nom ET qu'il doit être unique : on vérifie
 		if (isset($options['modifier_nom']) and $options['modifier_nom']
 			and isset($options['nom_unique']) and $options['nom_unique']) {
@@ -247,7 +247,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 				$vraies_erreurs["saisie_modifiee_${nom}[options][nom]"] = _T('saisies:erreur_option_nom_unique');
 			}
 		}
-		
+
 		// On regarde s'il a été demandé un type de vérif
 		if (isset($saisie_modifiee['verifier']['type'])
 			and (($type_verif = $saisie_modifiee['verifier']['type']) != '')
@@ -342,7 +342,7 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 			}
 			$saisie = array_replace_recursive($saisie, $defaut);
 		}
-		
+
 		$formulaire_actuel = saisies_inserer($formulaire_actuel, $saisie);
 	}
 
@@ -434,7 +434,7 @@ function construire_formulaire_generer_saisie_configurable($saisie, $env) {
 	$identifiant = isset($saisie['identifiant']) ? $saisie['identifiant'] : '';
 	// On cherche si ya un formulaire de config
 	$formulaire_config = isset($env['erreurs']['configurer_'.$nom]) ? $env['erreurs']['configurer_'.$nom] : '';
-	
+
 	// On ajoute une classe
 	if (!isset($saisie['options']['conteneur_class'])) {
 		$saisie['options']['conteneur_class'] = ''; // initialisation
@@ -567,10 +567,10 @@ function construire_formulaire_generer_saisie_configurable($saisie, $env) {
 			'fin'
 		);
 	}
-	
+
 	// On génère le HTML de la saisie
 	$html = saisies_generer_html($saisie, $env);
-	
+
 	return $html;
 }
 
@@ -617,6 +617,6 @@ function saisies_groupe_inserer($formulaire_actuel, $saisie) {
 
 		$formulaire_actuel = saisies_inserer($formulaire_actuel, $info_saisie);
 	}
-	
+
 	return $formulaire_actuel;
 }
