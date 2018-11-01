@@ -9,10 +9,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// A
+	'ajouter_lien_menu' => 'Dit menu toevoegen',
+
 	// C
 	'configurer_entrees_masquees_explication' => 'Geef aan welke items je wilt <strong>verbergen</strong> bij het aanmaken van een menu.',
+	'configurer_objets_explication' => 'Kies de types inhoud waar menu’s aan kunnen worden gekoppeld',
+	'configurer_objets_label' => 'Gekoppelde inhoud',
 	'configurer_titre' => 'Configureer de items van plugin Menus',
 	'confirmer_supprimer_entree' => 'Wil je deze regel inderdaad verwijderen?',
+	'confirmer_supprimer_menu' => 'Wil je dit menu echt verwijderen?',
 	'confirmer_supprimer_sous_menu' => 'Wil je dit submenu echt verwijderen?',
 
 	// D
@@ -124,13 +130,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_titre' => 'Titel',
 
 	// I
+	'info_1_menu' => 'Een menu',
 	'info_afficher_articles' => 'De artikelen worden in het menu opgenomen.',
 	'info_articles_max' => 'Alleen indien de rubriek maximaal @max@ artikelen heeft',
 	'info_articles_max_affiches' => 'Beperkt tot @max@ artikelen',
+	'info_aucun_menu' => 'Geen menu',
 	'info_classe_parent' => 'Class van bovenliggende elementen: ',
 	'info_connexion_obligatoire' => 'Aangemeld',
 	'info_deconnexion_obligatoire' => 'Niet aangemeld',
 	'info_masquer_articles_uniques' => 'Enkele artikelen verborgen',
+	'info_nb_menus' => '@nb@ menu’s',
 	'info_numero_menu' => 'MENU NUMMER:',
 	'info_page_speciale' => 'Link naar bladzijde « @page@ »',
 	'info_page_speciale_zajax' => 'Modalbox van bladzijde « @page@ » voor blok « @bloc@ &#187',
@@ -167,8 +176,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_secteurlangue' => 'Taalrubrieken',
 	'nom_menu_texte_libre' => 'Vrije tekst',
 
+	// R
+	'retirer_lien_menu' => 'Dit menu intrekken',
+	'retirer_lien_objet' => 'Ontkoppelen',
+	'retirer_tous_liens_menus' => 'Alle menu’s intrekken',
+
 	// T
+	'texte_ajouter_menu' => 'Een menu toevoegen',
+	'texte_creer_associer_menu' => 'Een menu maken en koppelen',
 	'titre_menu' => 'Menu',
+	'titre_objets_lies_menu' => 'Aan dit menu gekoppeld',
 	'tous_les_articles' => '... Alle artikelen',
 	'toutes_les_rubriques' => '... Alle rubrieken',
 
