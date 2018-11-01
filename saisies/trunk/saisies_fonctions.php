@@ -277,3 +277,20 @@ function saisies_label($chaine) {
 
 	return $chaine;
 }
+
+/**
+ * Masque les derniers caractères d'une clé secrete
+ *
+ * @param string $cle
+ * @return string
+**/
+function saisie_masquer_cle_secrete($cle) {
+	if (!defined('_SAISIE_ΤΑUX_MASQUE_CLE_SECRETE')) {
+		define('_SAISIE_ΤΑUX_MASQUE_CLE_SECRETE',0.85);
+	}
+	$taille = strlen($cle);
+	$a_masquer = round($taille * _SAISIE_ΤΑUX_MASQUE_CLE_SECRETE, 0, PHP_ROUND_HALF_UP);
+	$court = substr($cle, 0, $taille-$a_masquer);
+	$cle = $court.str_repeat("*",$a_masquer);
+	return $cle;
+}
