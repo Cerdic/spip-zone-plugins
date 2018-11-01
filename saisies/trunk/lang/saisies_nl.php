@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_langue_label' => 'Toon d etaal',
 	'option_aff_rub_interface_explication' => 'Toon alleen rubrieken in de gebruikerstaal',
 	'option_aff_rub_interface_label' => 'Meertalige display',
-	'option_afficher_si_explication' => 'Geef de voorwaarde op voor het vertonen van het veld in functie van de waarde van andere velden. De identificatie van de andere velden moet tussen <code>@</code> worden geplaatst. <br />Bijvoorbeeld <code>@selection_1@=="Toto"</code> geeft de voorwaarde aan dat het veld moet worden getoond wanneer veld <code>selection_1</code> de waarde <code>Toto</code> heeft.<br/>Je kunt daarbij de booleaanse operators <code>||</code> (of) en <code>&&</code> (en) gebruiken', # MODIF
+	'option_afficher_si_explication' => 'Geef de voorwaarde op voor het vertonen van het veld in functie van de waarde van andere velden. De identificatie van de andere velden moet tussen <code>@</code> worden geplaatst. <br />Bijvoorbeeld <code>@selection_1@=="Toto"</code> geeft de voorwaarde aan dat het veld moet worden getoond wanneer veld <code>selection_1</code> de waarde <code>Toto</code> heeft.<br/>Je kunt daarbij de booleaanse operators <code>||</code> (of) en <code>&&</code> (en) gebruiken.',
 	'option_afficher_si_label' => 'Tonen onder voorwaarde',
 	'option_afficher_si_remplissage_uniquement_explication' => 'Door het aanvinken van dit vakje wordt de voorwaardelijke weergave alleen toegepast bij het invullen van het formulier en niet bij het weergeven van de resultaten.',
 	'option_afficher_si_remplissage_uniquement_label' => 'Alleen bij het invullen van het formulier',
@@ -143,6 +143,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_size_explication' => 'Veldbreedte in tekens. Deze optie kan door CSS worden overschreven.',
 	'option_size_label' => 'Veldbreedte',
 	'option_statut_label' => 'Specifieke status(sen)',
+	'option_tagfield_explication' => 'Baken voor het groepslabel. Voor een betere toegankelijkheid wordt sterk aanbevolen de standaardwaarde (baken legend) aan te houden.',
+	'option_tagfield_label' => 'Baken voor het groepslabel',
 	'option_type_choix_plusieurs' => 'Laat de gebruiker <strong>meerdere</ strong> ontvangers kiezen.',
 	'option_type_choix_tous' => 'Maak <strong>alle</strong> auteurs ontvanger. De gebruiker kan niet kiezen.',
 	'option_type_choix_un' => 'Laat de gebruiker <strong>een enkele</strong> ontvanger kiezen.',
