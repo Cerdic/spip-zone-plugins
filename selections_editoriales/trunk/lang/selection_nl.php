@@ -14,7 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_enlever_selection' => 'Ontkoppelen',
-	'bouton_supprimer_selection' => 'Verwijder deze selectie', # MODIF
+	'bouton_modifier_selection' => 'Aanpassen',
+	'bouton_supprimer_selection' => 'Verwijderen',
 
 	// C
 	'champ_css_explication' => 'Aan deze selectie toegevoegde CSS class.',
@@ -45,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_ajouter_selection' => 'Een redactionele selectie toevoegen',
+	'texte_ajouter_selection_explication' => 'Maak een nieuwe editoriale selectie of kies er een uit onderstaande lijst.',
 	'texte_changer_statut_selection' => 'Deze redactionele selectie is:',
 	'texte_creer_associer_selection' => 'Een redactionele selectie maken en koppelen',
 	'titre_langue_selection' => 'Taal van deze redactionele selectie',
