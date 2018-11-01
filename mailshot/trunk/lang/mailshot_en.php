@@ -16,9 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_aucun_service_configure' => 'No configured delivery service . <a Href="@url@"> Configure a service < / a>',
-	'erreur_envoi_mail_bloque_debug' => 'Sending email blocked by <tt>_TEST_EMAIL_DEST</tt>',
-	'erreur_envoi_mail_force_debug' => 'Sending the mail to @email@ forced by <tt>_TEST_EMAIL_DEST</tt>',
-	'erreur_generation_newsletter' => 'An error has occured in the generation of the newsletter',
+	'erreur_envoi_mail_bloque_debug' => 'Sending email blocked by <tt>_TEST_EMAIL_DEST</tt>', # MODIF
+	'erreur_envoi_mail_force_debug' => 'Sending the mail to @email@ forced by <tt>_TEST_EMAIL_DEST</tt>', # MODIF
+	'erreur_generation_newsletter' => 'An error has occured in the generation of the newsletter', # MODIF
 	'explication_boost_send' => 'In this mode mails are being sent as quickly as possible. Balancing is not taken into account.
 										This mode is not recommended as it increases the risk of being classified as SPAM.',
 	'explication_purger_historique' => 'For each mass distribution the destinations are saved in the database together with the status.

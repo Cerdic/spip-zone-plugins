@@ -16,9 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_aucun_service_configure' => 'どんなメールサービスも設定されていません。 <a href="@url@">Configurer un service</a>',
-	'erreur_envoi_mail_bloque_debug' => '<tt>_TEST_EMAIL_DEST</tt>はメールの送信を停止しました。',
-	'erreur_envoi_mail_force_debug' => '<tt>_TEST_EMAIL_DEST</tt>は強制的に@email@宛にを送信しました。',
-	'erreur_generation_newsletter' => 'ニュースレターの生成中にエラーが発生しました。',
+	'erreur_envoi_mail_bloque_debug' => '<tt>_TEST_EMAIL_DEST</tt>はメールの送信を停止しました。', # MODIF
+	'erreur_envoi_mail_force_debug' => '<tt>_TEST_EMAIL_DEST</tt>は強制的に@email@宛にを送信しました。', # MODIF
+	'erreur_generation_newsletter' => 'ニュースレターの生成中にエラーが発生しました。', # MODIF
 	'explication_boost_send' => 'この送信モードでは、メールはでできるだけ早く送信されます。 レート制限は考慮
 されていません。',
 	'explication_purger_historique' => '多数で各送信の場合、送信に関するステータスと宛先人の情報はデータベースに保管

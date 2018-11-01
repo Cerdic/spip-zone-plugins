@@ -16,9 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_aucun_service_configure' => 'Kein Ausgangsserver eingerichtet. <a href="@url@">Ausgangsserver einrichten</a>',
-	'erreur_envoi_mail_bloque_debug' => 'Mailing blockiert von <tt>_TEST_EMAIL_DEST</tt>',
-	'erreur_envoi_mail_force_debug' => 'Versand an @email@ erzwungen von <tt>_TEST_EMAIL_DEST</tt>',
-	'erreur_generation_newsletter' => 'Beim Erzeugen des Newsletters ist ein Fehler aufgetreten',
+	'erreur_envoi_mail_bloque_debug' => 'Mailing blockiert von <tt>_TEST_EMAIL_DEST</tt>', # MODIF
+	'erreur_envoi_mail_force_debug' => 'Versand an @email@ erzwungen von <tt>_TEST_EMAIL_DEST</tt>', # MODIF
+	'erreur_generation_newsletter' => 'Beim Erzeugen des Newsletters ist ein Fehler aufgetreten', # MODIF
 	'explication_boost_send' => 'In diesem Modus werden die Mails so schnell wie möglich verschickt. Es wird keine Begrenzung berücksichtigt. Der Schnellversand ist nicht empfehlenswert, da er die Wahrscheinlichkeit der Einstufung der Mails als SPAM vergrößert.',
 	'explication_purger_historique' => 'Für jeden Massenversand werden die Empfänger in der Datenbank gespeichert, mit Informationen zum Status des jeweiligen Versand.
 Dies führt bei zahlreichem Versenden zu einer großen Datenmenge, weshalb es ratsam ist diese Versanddetails nach einer gewissen Zeit zu löschen.',

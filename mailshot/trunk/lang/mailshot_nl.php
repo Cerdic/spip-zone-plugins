@@ -16,9 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_aucun_service_configure' => 'Geen geconfigureerd delivery service . <a Href="@url@"> configureren van een dienst </ a>',
-	'erreur_envoi_mail_bloque_debug' => 'Het verzenden van e-mail geblokkeerd door <tt>_TEST_EMAIL_DEST</tt>',
-	'erreur_envoi_mail_force_debug' => 'Het versturen van de e-mail naar @email@ geforceerd door <tt>_TEST_EMAIL_DEST</tt>',
-	'erreur_generation_newsletter' => 'Een fout is opgetreden bij het aanmaken van de nieuwsbrief',
+	'erreur_envoi_mail_bloque_debug' => 'Het verzenden van e-mail geblokkeerd door <tt>_TEST_EMAIL_DEST</tt>', # MODIF
+	'erreur_envoi_mail_force_debug' => 'Het versturen van de e-mail naar @email@ geforceerd door <tt>_TEST_EMAIL_DEST</tt>', # MODIF
+	'erreur_generation_newsletter' => 'Een fout is opgetreden bij het aanmaken van de nieuwsbrief', # MODIF
 	'explication_boost_send' => 'In deze modus worden mails zo snel mogelijk verzonden. Er wordt niet gedoseerd.
 										Deze snelle verzendwijze wordt afgeraden omdat de verzending mogelijk als SPAM wordt beschouwd.',
 	'explication_purger_historique' => 'Voor iedere meervoudige verzending worden alle geadresseerden bewaard met hun verzendstatus.

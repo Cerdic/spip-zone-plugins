@@ -16,9 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_aucun_service_configure' => 'Nenhum serviço de e=mail configurado. <a href="@url@">Configurar um serviço</a>',
-	'erreur_envoi_mail_bloque_debug' => 'Envio da mensagem bloqueada por <tt>_TEST_EMAIL_DEST</tt>',
-	'erreur_envoi_mail_force_debug' => 'Envio de mensagem forçada para @email@ por <tt>_TEST_EMAIL_DEST</tt>',
-	'erreur_generation_newsletter' => 'Ocorreu um erro na geração da newsletter',
+	'erreur_envoi_mail_bloque_debug' => 'Envio da mensagem bloqueada por <tt>_TEST_EMAIL_DEST</tt>', # MODIF
+	'erreur_envoi_mail_force_debug' => 'Envio de mensagem forçada para @email@ por <tt>_TEST_EMAIL_DEST</tt>', # MODIF
+	'erreur_generation_newsletter' => 'Ocorreu um erro na geração da newsletter', # MODIF
 	'explication_boost_send' => 'Neste modo, as mensagens serão enviados tão rapidamente quanto possível. Nenhum limite de cadência é levado em conta.
 
 O envio rápido é desaconselhado por aumentar o risco de ser classificado como SPAM.',

@@ -16,9 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_aucun_service_configure' => 'لا توجد اية خدمة إرسال معدّة. <a href="@url@">إعداد خدمة</a>',
-	'erreur_envoi_mail_bloque_debug' => 'إرسال البريد مصدود من <tt>_TEST_EMAIL_DEST</tt>',
-	'erreur_envoi_mail_force_debug' => 'إرسال بريد مفروض الى @email@ من <tt>_TEST_EMAIL_DEST</tt>',
-	'erreur_generation_newsletter' => 'حصل خطأ لدى انتاج النشرة البريدية',
+	'erreur_envoi_mail_bloque_debug' => 'إرسال البريد مصدود من <tt>_TEST_EMAIL_DEST</tt>', # MODIF
+	'erreur_envoi_mail_force_debug' => 'إرسال بريد مفروض الى @email@ من <tt>_TEST_EMAIL_DEST</tt>', # MODIF
+	'erreur_generation_newsletter' => 'حصل خطأ لدى انتاج النشرة البريدية', # MODIF
 	'explication_boost_send' => 'في هذه الوضعية، يتم إرسال الرسائل في أسرع وقت ممكن. لا توجد أية حدود لوتيرة الإرسال.
 										الإسال السريع غير مستحب لأنه يرفع من احتمال وصم خادم البريد بالخنزرة.',
 	'explication_purger_historique' => 'لكل إرسال بالجملة، يتم حفظ جميع المرسل اليهم في قاعدة البيانات مع معلومات وضعية الإرسال.

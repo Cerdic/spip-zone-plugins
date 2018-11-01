@@ -16,8 +16,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_aucun_service_configure' => 'Серсис рассылки не настроен . <a Href="@url@"> настроить рассылку < / a>',
-	'erreur_envoi_mail_bloque_debug' => 'Отправка емейл заблокирована <tt>_TEST_EMAIL_DEST</tt>',
-	'erreur_envoi_mail_force_debug' => 'Отправка электронной почты @email@ началась <tt>_TEST_EMAIL_DEST</tt>',
+	'erreur_envoi_mail_bloque_debug' => 'Отправка емейл заблокирована <tt>_TEST_EMAIL_DEST</tt>', # MODIF
+	'erreur_envoi_mail_force_debug' => 'Отправка электронной почты @email@ началась <tt>_TEST_EMAIL_DEST</tt>', # MODIF
 	'explication_rate_limit' => 'Укажите максимальное количество писем, посланных в день или оставьте поле пустым если нет каких-либо ограничений',
 
 	// I
