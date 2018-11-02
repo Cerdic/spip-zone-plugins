@@ -1,7 +1,7 @@
 <paquet
 	prefix="twitter"
 	categorie="communication"
-	version="1.6.4"
+	version="1.6.5"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	schema="0.2.0"
@@ -31,6 +31,7 @@
 
 
 	<menu nom="microbloguer" titre="twitter:titre_microblog" parent="menu_publication" icone="images/twitter-16.png" />
-
+	<spip compatibilite="[3.2.0;[">
+		<necessite nom="php:curl" />
+	</spip>
 </paquet>
-        
