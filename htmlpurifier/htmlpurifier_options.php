@@ -9,3 +9,4 @@ $GLOBALS['spip_wheels']['interdire_scripts'] = array(
 $GLOBALS['spip_wheels']['echappe_js'] = array(
 	'htmlpurifier/echappe-js.yaml'
 ); 
+

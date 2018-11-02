@@ -24,3 +24,4 @@
   match: "{<[a-z]+.*?($|>)}UisS"
   is_callback: Y
   replace: echappe_anti_xss
+

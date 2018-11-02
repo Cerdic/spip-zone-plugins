@@ -41,7 +41,7 @@ function inc_safehtml($t) {
 	$html = $config->getHTMLDefinition(true);
 	$html->manager->addModule('Forms');
 	$html->manager->registeredModules["Forms"]->safe = true;
-	
+  
 	if (!isset($purifier))
 		$purifier = new HTMLPurifier($config);
 		
