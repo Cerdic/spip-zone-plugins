@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'saisie_evenements_chronologie_texte' => 'Les critères de date pour les choix des événements sont cumulatifs avec les critères précédents d’association à des objets.',
 	'saisie_evenements_explication' => 'Un choix d’un ou plusieurs événements',
-	'saisie_evenements_id_texte' => 'Les événements proposés peuvent être choisis par leurs identifiants, ou bien par leur association à des articles, des rubriques, des mots.<br /> 
+	'saisie_evenements_id_texte' => 'Les événements proposés peuvent être choisis par leurs identifiants, ou bien par leur association à des articles, des rubriques, des mots.<br />
 	Pour ce faire, il faut indiquer un identifiant, éventuellement plusieurs séparés par des virgules, dans les champs <emph>a hoc</emph>.<br />
 	Si plusieurs critères de sélections sont définis, un ET logique est utilisé. Ainsi, si vous mettez 4 dans le champ article et 2 dans le champ mot, les évènements appartennant à l’article 4 tout en ayant le mot-clé 2 seront proposés.',
 	'saisie_evenements_titre' => 'Sélecteur d’événements'
