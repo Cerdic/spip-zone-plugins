@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_url_protocole_exact' => 'L’indirizzo inserito <em>(@url@)</em> non comincia con un protocollo valido (http:// ad esempio)', # MODIF
 
 	// O
-	'option_decimal_nb_decimales_label' => 'Numero di decimali dopo la virgola',
+	'option_decimal_nb_decimales_label' => 'Numero di decimali dopo la virgola', # MODIF
 	'option_email_disponible_label' => 'Indirizzo disponibile',
 	'option_email_disponible_label_case' => 'Verifica che l’indirizzo non sia già stato utilizzato da un utente',
 	'option_email_mode_5322' => 'Verifica rispetto agli standard disponibili',
