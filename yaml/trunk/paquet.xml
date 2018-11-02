@@ -1,7 +1,7 @@
 <paquet
 	prefix="yaml"
 	categorie="outil"
-	version="2.0.8"
+	version="2.0.9"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="yaml.png"
@@ -20,7 +20,7 @@
 
 	<licence lien="http://opensource.org/licenses/mit-license.php">MIT</licence>
 
-	<spip compatibilite="[3.2.0;[">
+	<spip compatibilite="[3.1.0;[">
 		<necessite nom="php" compatibilite="[5.3.0;[" />
 	</spip>
 </paquet>
