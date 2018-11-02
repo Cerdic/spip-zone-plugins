@@ -34,6 +34,12 @@ options:
             date:  '<:saisie_evenements:option_type_affichage_date:>'
           defaut: 'titre_date'
       -
+        saisie: 'case'
+        options:
+          nom: 'afficher_annee_obligatoire'
+          label_case: '<:saisie_evenements:afficher_annee_obligatoire_label_case:>'
+          li_class: 'pleine_largeur'
+      -
         saisie: 'radio'
         options:
           nom: 'type_choix'
@@ -84,7 +90,7 @@ options:
           label: '<:saisie_evenements:inscription_label:>'
           explication: '<:saisie_evenements:inscription_explication:>'
           defaut: ''
-          data: 
+          data:
             choix0: '<:saisie_evenements:inscription_choix0:>'
             choix1: '<:saisie_evenements:inscription_choix1:>'
       -
