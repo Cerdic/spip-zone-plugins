@@ -125,6 +125,7 @@ function critere_agendafull_dist($idb, &$boucles, $crit) {
  * @param string $date_fin : la date de fin au format mysql
  * @param string $horaire : oui / non, permet d'afficher l'horaire, toute autre valeur n'indique que le jour
  * @param string $forme : forme que prendra la date :
+ * 		- annee (afficher systématiquement l'année pour la date finale, ne pas faire appelle à affdate_jourcourt)
  * 		- abbr (afficher le nom des jours en abbrege)
  * 		- hcal (generer une date au format hcal)
  * 		- h-event (generer une date au format h-event, dans une balise <time> HTML5)
