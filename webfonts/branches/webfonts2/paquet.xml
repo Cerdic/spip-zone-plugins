@@ -1,7 +1,7 @@
 <paquet
 	prefix="webfonts2"
 	categorie="maintenance"
-	version="0.2.5"
+	version="0.2.6"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/webfonts2-64.png"
@@ -21,9 +21,11 @@
 
 	<pipeline nom="fonts_list" inclure="webfonts2_pipelines.php" />
 
-	<necessite nom="php:curl" />
-	<necessite nom="spip_bonux" compatibilite="[3.4.4;["/>
+	<spip compatibilite="[3.2.0;[">
+		<necessite nom="php:curl" />
+	</spip>
 
+	<necessite nom="spip_bonux" compatibilite="[3.4.4;["/>
 	<utilise nom="selecteurgenerique" compatibilite="[1.1.0;]" />
 
 	<menu nom="webfonts" titre="webfonts2:titre" parent="menu_squelette" icone="images/webfonts2-16.png" action="webfonts" />
