@@ -21,6 +21,12 @@ Afficher des stats dans l'admin avec des boucles data :
 
 ]
 
+[(#REM) types de sites affluents) ]
+
+[(#SET{reg_moteurs,^([(#VAL|regexp_moteurs)])$})]
+#SET{reg_reseaux_sociaux,"Facebook|^t$|Mamot|Twitter"}
+#SET{reg_emails,"outlook"}
+
 [(#REM) Régler la date (actuellement, aujourd'hui, hier) ]
 
 [(#REM) Aujourd'hui : date du jour ]
@@ -41,11 +47,11 @@ Afficher des stats dans l'admin avec des boucles data :
 #SET{sites_affluents,#ARRAY}
 #SET{referers_articles,#ARRAY}
 
-#SET{reg_domaine,"^[a-zA-Z_-]+://([a-zA-Z]+\.)?([a-zA-Z]+\.)?((?!com|co)[a-zA-Z0-9-_]+)\.((?:com|co)\.)?([a-zA-Z]{2,3})"}
+#SET{reg_domaine,"^[a-zA-Z_-]+://([a-zA-Z]+\.)?([a-zA-Z]+\.)?([a-zA-Z0-9-_]+)\.((?:com|co)\.)?([a-zA-Z]{2,3})"}
 
 [(#REM) Si la période n'est pas précisée parcourir les fichiers de visites en cours dans tmp/visites et enregistrer les données dans des tableaux (articles lus, sites affluents, et nombre de visites sur les articles) ]
 
-<BOUCLE_visites(DATA){source ls,#EVAL{_DIR_TMP . 'visites'}/*}{si #ENV{jour}|non}> [(#REM)<hr>#FILE<hr>] <BOUCLE_visite(DATA){source file,#FILE}> <BOUCLE_pages_vues(DATA){source table,#VALEUR|unserialize}>[(#REM)#CLE -> [(#VALEUR|print)]<br>]
+<BOUCLE_visites(DATA){source ls,#EVAL{_DIR_TMP . 'visites'}/*}{si #ENV{jour}|non}> [(#REM) <hr>#FILE<hr>] <BOUCLE_visite(DATA){source file,#FILE}> <BOUCLE_pages_vues(DATA){source table,#VALEUR|unserialize}>[(#REM) #CLE -> [(#VALEUR|print)]<br>]
 #SET{type,#CLE|explode{"	"}|table_valeur{0}}
 #SET{id,#CLE|explode{"	"}|table_valeur{1}}
 #SET{referrer,#CLE|explode{"	"}|table_valeur{2}}
@@ -73,7 +79,8 @@ Afficher des stats dans l'admin avec des boucles data :
 	Récupérer les sites affluents ordonnés par leur nombre de visites, et garder les referrers.
 ]
 [(#GET{referrer}|oui)
-	#SET{domaine,#GET{referrer}|match{#GET{reg_domaine},"i",3}}
+
+	#SET{domaine,#GET{referrer}|url2domaine}
 	#SET{valeurs_actuelles,#GET{sites_affluents}|table_valeur{#GET{domaine}}|sinon{#ARRAY}}
 	
 	#SET{nb_visites,#GET{valeurs_actuelles}|table_valeur{visites}|plus{1}}
@@ -148,7 +155,7 @@ Afficher des stats dans l'admin avec des boucles data :
 	[(#REM) Referers qui ont envoyé des visites dans la période ]
 	<BOUCLE_affluents_jour_(DATA){source sql,#GET{req_affluents}}>
 		
-		#SET{domaine,#REFERER|match{#GET{reg_domaine},"i",3}}
+		#SET{domaine,#REFERER|url2domaine}
 		#SET{valeurs_actuelles,#GET{sites_affluents}|table_valeur{#GET{domaine}}|sinon{#ARRAY}}
 		
 		#SET{nb_visites,#GET{valeurs_actuelles}|table_valeur{visites}|plus{#VISITES}}
@@ -245,6 +252,36 @@ ul.valeur{
 .stats_contenu > h3.premier {
 	margin-top:0;
 }
+
+dl.liste_affluents {
+	max-height:15em;
+	overflow:auto;
+	margin: 0.75em 0;
+	padding: 0 1em;
+}
+
+dl.liste_affluents > dt:before { 
+	content: "";
+	border-color: transparent #111;
+	border-style: solid;
+	border-width: 0.35em 0 0.35em 0.45em;
+	display: block;
+	height: 0;
+	width: 0;
+	left: -0.8em;
+	top: 0.8em;
+	position: relative;
+}
+
+dl.liste_affluents > dt {
+	line-height:0.9em;
+	cursor:pointer;
+}
+
+dl.liste_affluents > dd {
+	display:none;
+}
+
 </style>
 
 [(#REM) Menu date ]
@@ -275,17 +312,16 @@ ul.valeur{
 
 [(#REM)
 [<pre><code>(#GET{articles_lus}|print_r{1})</code></pre>]
+[<pre><code>(#GET{reg_moteurs})</code></pre>]
+[<pre><code>(#GET{sites_affluents}|print_r{1})</code></pre>]
 ]
 
-#SET{reg_moteurs,"Google|Duckduckgo|Yahoo|Baidu|Bing|Yandex"}
-#SET{reg_reseaux_sociaux,"Facebook|^t$"}
-#SET{reg_emails,"outlook"}
 #SET{reg_site,#URL_SITE_SPIP|match{#GET{reg_domaine},"i",3}}
 [(#SET{reg_domaines_connus,[(#GET{reg_moteurs})]|[(#GET{reg_reseaux_sociaux})]|[(#GET{reg_site})]})]
 
 <BOUCLE_total_visites_domaine(DATA){source table,#GET{sites_affluents}}>
 	#SET{total,#GET{total}|plus{#VISITES}}
-	[(#CLE|match{#GET{reg_moteurs}}|oui) #SET{total_moteurs,#GET{total_moteurs}|plus{#VISITES}} ]
+	[(#CLE|match{#GET{reg_moteurs},"i"}|oui) #SET{total_moteurs,#GET{total_moteurs}|plus{#VISITES}} ]
 	[(#CLE|match{#GET{reg_reseaux_sociaux}}|oui) #SET{total_reseaux_sociaux,#GET{total_reseaux_sociaux}|plus{#VISITES}} ]
 	[(#CLE|match{#GET{reg_domaines_connus}}|non) #SET{total_autres_affluents,#GET{total_autres_affluents}|plus{#VISITES}} ]
 </BOUCLE_total_visites_domaine>
@@ -323,14 +359,14 @@ ul.valeur{
 				<h3 class="premier">Origine des visites</h3>
 				<ul>
 					<BOUCLE_domaines_connus(DATA){source table,#GET{domaines_connus}}{!par valeur}>
-					<li>#CLE : [(#VALEUR|number_format{0,""," "})] visites <small>([(#VALEUR|div{#GET{visites}}|mult{100}|floor)%])</small></li>
+					<li>#CLE : [(#VALEUR|number_format{0,""," "})] visite[(#VALEUR|>{1}|?{s})] <small>([(#VALEUR|div{#GET{visites}}|mult{100}|floor)%])</small></li>
 					</BOUCLE_domaines_connus>
 				</ul>
 				#SET{reg_recherche,^.*recherche=}
 				<BOUCLE_recherches(DATA){source table,#GET{sites_affluents}}{cle==#GET{reg_site}}>
 					<B_recherche>
 					#ANCRE_PAGINATION
-					<h3>[(#VISITES||number_format{0,""," "})] terme[(#VISITES|>{1}|?{s})] recherché[(#VISITES|>{1}|?{s})]</h3>
+					<h3>[(#VISITES|number_format{0,""," "})] terme[(#VISITES|>{1}|?{s})] recherché[(#VISITES|>{1}|?{s})]</h3>
 					<ul style="margin-bottom:10px;height:30em;overflow:auto;">
 					<BOUCLE_recherche(DATA){source termes_recherches,#REFERERS|array_unique}{pagination 50}>
 						<li>[<a href="#URL_PAGE{recherche,recherche=#CLE}">(#CLE|urldecode)]</a> <small>(#VALEUR)</small></li>
@@ -408,30 +444,51 @@ ul.valeur{
 				
 				<h3 class="premier" title="[(#GET{total_moteurs})] visites">Moteurs de recherche</h3>
 				
-				<ul class="valeur">
+				<dl class="liste_affluents">
 				<BOUCLE_moteurs_recherche(DATA){source table,#GET{sites_affluents}}{cle==#GET{reg_moteurs}}{!par visites}>
-				<li>[(#CLE|ucfirst)] <small>([(#VISITES|number_format{0,""," "}) visite[(#VISITES|>{1}|?{s})]])</small></li>
+				<dt>[(#CLE|ucfirst)] <small>([(#VISITES|number_format{0,""," "}) visite[(#VISITES|>{1}|?{s})]])</small></dt>
+				<dd>
+					<ul>
+						<BOUCLE_pagesm(DATA){source table,#REFERERS|compter_referers}{!par visites}>
+						<li><a href="#URL" title="#CLE">[(#PATH|sinon{#CLE}|couper{25})]</a> <small>(#VISITES)</small></li>
+						</BOUCLE_pagesm>
+					</ul>
+				</dd>
 				</BOUCLE_moteurs_recherche>
-				</ul>
+				</dl>
 				
 				<B_reseaux_sociaux>
 				<h3 title="[(#GET{total_reseaux_sociaux})] visites">Réseaux sociaux</h3>
-				<ul class="valeur">
+				<dl class="liste_affluents">
 				<BOUCLE_reseaux_sociaux(DATA){source table,#GET{sites_affluents}}{cle==#GET{reg_reseaux_sociaux}}{!par visites}>
-				<li>[(#CLE|replace{^t$,twitter}|ucfirst)] <small>([(#VISITES|number_format{0,""," "}) visite[(#VISITES|>{1}|?{s})]])</small></li>
+				<dt>[(#CLE|replace{^t$,twitter}|ucfirst)] <small>([(#VISITES|number_format{0,""," "}) visite[(#VISITES|>{1}|?{s})]])</small></dt>
+				<dd>
+					<ul>
+						<BOUCLE_pagesr(DATA){source table,#REFERERS|compter_referers}{!par visites}>
+						<li><a href="#URL" title="#CLE">[(#PATH|sinon{#CLE}|couper{25})]</a> <small>(#VISITES)</small></li>
+						</BOUCLE_pagesr>
+					</ul>
+				</dd>
 				</BOUCLE_reseaux_sociaux>
-				</ul>
+				</dl>
 				
 				#ANCRE_PAGINATION
 				<h3 title="[(#GET{total_autres_affluents})] visites">
 					Autres affluents
 				</h3>
 				
-				<ul style="max-height:15em;overflow:auto">
+				<dl class="liste_affluents">
 				<BOUCLE_affluents(DATA){source table,#GET{sites_affluents}}{cle!==#GET{reg_domaines_connus}}{!par visites}{pagination 50}>
-				<li>[(#CLE|ucfirst)] <small>([(#VISITES|number_format{0,""," "}) visite[(#VISITES|>{1}|?{s})]])</small></li>
+				<dt>[(#CLE|ucfirst)] <small>([(#VISITES|number_format{0,""," "}) visite[(#VISITES|>{1}|?{s})]])</small></dt>
+				<dd>
+					<ul>
+						<BOUCLE_pages(DATA){source table,#REFERERS|compter_referers}{!par visites}>
+						<li><a href="#URL" title="#CLE">[(#PATH|sinon{#CLE}|couper{25})]</a> <small>(#VISITES)</small></li>
+						</BOUCLE_pages>
+					</ul>
+				</dd>
 				</BOUCLE_affluents>
-				</ul>
+				</dl>
 				<p style="margin:10px">#PAGINATION</p>
 			</div>
 			
@@ -444,3 +501,12 @@ ul.valeur{
 <div class="debug">
 	<small>stats_data version #CONFIG{stats_data_base_version}.</small>
 </div>
+
+<script>
+$(document).ready(function(){
+	$(".liste_affluents > dt").click(function(){
+		console.log("hop");
+		$(this).next("dd").toggle();
+	});
+});
+</script>
