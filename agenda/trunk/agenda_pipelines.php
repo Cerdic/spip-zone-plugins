@@ -274,9 +274,9 @@ function agenda_revisions_chercher_label($flux) {
 
 /**
  * Insertion dans le pipeline accueil_encours (SPIP)
- * 
+ *
  * Afficher les événements en attente de validation sur la page d'acceuil de l'espace privé
- * 
+ *
  * @param array $flux Le contexte d'environnement du pipeline
  * @return array $flux Le contexte d'environnement modifié
  */
@@ -291,7 +291,7 @@ function agenda_accueil_encours($flux){
 	return $flux;
 }
 
-/** Déclarer les évènements 
+/** Déclarer les évènements
  * au plugin corbeille
  * @param array $flux;
  * @return array $flux;
