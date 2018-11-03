@@ -299,8 +299,22 @@ function agenda_accueil_encours($flux){
 function agenda_corbeille_table_infos($flux){
 	$flux['evenements']= array(
 		'statut'=>'poubelle',
-		'table'=>'evenements', 
+		'table'=>'evenements',
 		'tableliee'=>array('spip_evenements_participants')
 	);
+	return $flux;
+}
+
+/**
+ * Si on dit qu'il n'y pas de page spécifique pour un évènement, mais qu'on doit utiliser la page d'article,
+ * alors il n'y a pas lieu de générer une url propre pour un évènement
+ * qui pourrait prendre la place d'une url propre pour un autre objet.
+ * @param array $flux
+ * @return array $lux
+**/
+function agenda_propres_creer_chaine_url($flux) {
+	if ($flux['objet']['type'] == 'evenement' and lire_config('agenda/url_evenement_evenement') == 'article') {
+		$flux['data'] = 'evenement'.$flux['objet']['id_objet'];
+	}
 	return $flux;
 }
