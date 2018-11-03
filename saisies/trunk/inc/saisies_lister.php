@@ -120,12 +120,15 @@ function saisies_lister_avec_sql($saisies, $tri = 'nom') {
  * @example `$saisies_date = saisies_lister_avec_type($saisies, 'date')`
  *
  * @param array  $saisies liste de saisies
- * @param string $type    Type de la saisie
+ * @param string|array $type    Type de la saisie, ou tableau de types
  * @param string $tri     tri par défaut des résultats (s'ils ne sont pas deja triés) ('nom')
  *
  * @return liste de ces saisies triees par nom
  */
 function saisies_lister_avec_type($saisies, $type, $tri = 'nom') {
+	if (!is_array($type)) {
+		$type = array($type);
+	}
 	$saisies_type = array();
 
 	// tri par nom si ce n'est pas le cas
@@ -136,11 +139,10 @@ function saisies_lister_avec_type($saisies, $type, $tri = 'nom') {
 	}
 
 	foreach ($saisies as $nom_ou_id => $saisie) {
-		if ($saisie['saisie'] == $type) {
+		if (in_array($saisie['saisie'], $type)) {
 			$saisies_type[$nom_ou_id] = $saisie;
 		}
 	}
-
 	return $saisies_type;
 }
 
