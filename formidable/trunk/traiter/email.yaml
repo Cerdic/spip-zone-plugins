@@ -149,18 +149,18 @@ options:
           nom: 'sujet_accuse'
           label: '<:formidable:traiter_email_option_sujet_accuse_label:>'
           explication: '<:formidable:traiter_email_option_sujet_explication:>'
-          afficher_si: '@traitements[email][champ_courriel]@!=""'
+          afficher_si: '@traitements[email][activer_accuse]@!=""'
       -
         saisie: 'input'
         options:
           nom: 'courriel_envoyeur_accuse'
           label: '<:formidable:traiter_email_option_courriel_envoyeur_accuse_label:>'
           explication: '<:formidable:traiter_email_option_courriel_envoyeur_accuse_explication:>'
-          afficher_si: '@traitements[email][champ_courriel]@!=""'
+          afficher_si: '@traitements[email][activer_accuse]@!=""'
       -
         saisie: 'input'
         options:
           nom: 'nom_envoyeur_accuse'
           label: '<:formidable:traiter_email_option_nom_envoyeur_accuse_label:>'
           explication: '<:formidable:traiter_email_option_nom_envoyeur_accuse_explication:>'
-          afficher_si: '@traitements[email][champ_courriel]@!=""'
+          afficher_si: '@traitements[email][activer_accuse]@!=""'
