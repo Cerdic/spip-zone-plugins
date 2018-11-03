@@ -2,7 +2,7 @@
 	prefix="htmlpurifier"
 	categorie="outil"
 	version="4.10.99.0"
-	etat="test"
+	etat="dev"
 	compatibilite="[3.2.1;3.2.99]"
 	logo="htmlpurifier.png"
 	documentation="https://contrib.spip.net/HTML-Purifier,3671"
