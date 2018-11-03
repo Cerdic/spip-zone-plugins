@@ -158,7 +158,9 @@ function lim_publierdansrubriques($type) {
 	} 
 
 	$res = sql_allfetsel('id_rubrique', 'spip_rubriques');
-	$tab_rubriques = array_column($res, 'id_rubrique');
+	foreach ($res as $key => $value) {
+		$tab_rubriques[] = $value['id_rubrique'];
+	}
 	$rubriques_choisies = array_diff($tab_rubriques,$tab_rubrique_objet);
 	return $rubriques_choisies;
 }
