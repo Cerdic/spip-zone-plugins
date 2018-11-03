@@ -85,14 +85,14 @@ function saisies_lister_par_nom($contenu, $avec_conteneur = true) {
  */
 function saisies_lister_avec_option($option, $saisies, $tri = 'nom') {
 	$saisies_option = array();
-	
+
 	// tri par nom si ce n'est pas le cas
 	$s = array_keys($saisies);
 	if (is_int(array_shift($s))) {
 		$trier = 'saisies_lister_par_'.$tri;
 		$saisies = $trier($saisies);
 	}
-	
+
 	foreach ($saisies as $nom_ou_id => $saisie) {
 		if (isset($saisie['options'][$option]) and $saisie['options'][$option]) {
 			$saisies_option[$nom_ou_id] = $saisie;
@@ -127,14 +127,14 @@ function saisies_lister_avec_sql($saisies, $tri = 'nom') {
  */
 function saisies_lister_avec_type($saisies, $type, $tri = 'nom') {
 	$saisies_type = array();
-	
+
 	// tri par nom si ce n'est pas le cas
 	$s = array_keys($saisies);
 	if (is_int(array_shift($s))) {
 		$trier = 'saisies_lister_par_'.$tri;
 		$saisies = $trier($saisies);
 	}
-	
+
 	foreach ($saisies as $nom_ou_id => $saisie) {
 		if ($saisie['saisie'] == $type) {
 			$saisies_type[$nom_ou_id] = $saisie;
@@ -193,19 +193,19 @@ function saisies_lister_champs($contenu, $avec_conteneur = true) {
  *
  * @param array $contenu        Le contenu d'un formulaire
  * @param bool  $avec_conteneur Indique si on renvoie aussi les saisies ayant des enfants, comme les fieldset
- * 
+ *
  * @return array Un tableau listant les labels humains des champs
  */
 function saisies_lister_labels($contenu, $avec_conteneur = false) {
 	$saisies = saisies_lister_par_nom($contenu, $avec_conteneur);
-	
+
 	$labels = array();
 	foreach ($saisies as $nom => $saisie) {
 		if (isset($saisie['options']['label'])) {
 			$labels[$nom] = $saisie['options']['label'];
 		}
 	}
-	
+
 	return $labels;
 }
 
@@ -241,7 +241,7 @@ function saisies_charger_champs($contenu) {
 function saisies_lister_valeurs_defaut($contenu) {
 	$contenu = saisies_lister_par_nom($contenu, false);
 	$defauts = array();
-	
+
 	foreach ($contenu as $nom => $saisie) {
 		// Si le nom du champ est un tableau indexé, il faut parser !
 		if (preg_match('/([\w]+)((\[[\w]+\])+)/', $nom, $separe)) {
@@ -375,7 +375,7 @@ function saisies_groupes_lister_disponibles($saisies_repertoire = 'saisies') {
 			foreach ($liste as $fichier => $chemin) {
 				$type_saisie = preg_replace(',[.]yaml$,i', '', $fichier);
 				$dossier = str_replace($fichier, '', $chemin);
-				
+
 				if (is_array($saisie = saisies_charger_infos($type_saisie, $saisies_repertoire))) {
 					$saisies[$type_saisie] = $saisie;
 				}
@@ -394,7 +394,7 @@ function saisies_groupes_lister_disponibles($saisies_repertoire = 'saisies') {
 function saisies_lister_disponibles_sql($saisies_repertoire = 'saisies') {
 	$saisies = array();
 	$saisies_disponibles = saisies_lister_disponibles($saisies_repertoire);
-	
+
 	foreach ($saisies_disponibles as $type => $saisie) {
 		if (isset($saisie['defaut']['options']['sql']) and $saisie['defaut']['options']['sql']) {
 			$saisies[$type] = $saisie;
@@ -416,7 +416,7 @@ function saisies_charger_infos($type_saisie, $saisies_repertoire = 'saisies') {
 		include_spip('inc/yaml');
 		$fichier = find_in_path("$saisies_repertoire/$type_saisie.yaml");
 		$saisie = yaml_decode_file($fichier);
-		
+
 		if (is_array($saisie)) {
 			$saisie['titre'] = (isset($saisie['titre']) and $saisie['titre'])
 				? _T_ou_typo($saisie['titre']) : $type_saisie;
