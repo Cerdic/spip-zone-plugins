@@ -14,9 +14,9 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
-		<ul>
+		<[(#DIV|sinon{ul})] class='editer-groupe'>
 			[(#SAISIE{oui_non_ligne, petitions,label=<:lim:label_petitions:>, li_class=long_label})]
-		</ul>
+		</[(#DIV|sinon{ul})]>
 
 		<input type="hidden" name="_meta_casier" value="lim" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>

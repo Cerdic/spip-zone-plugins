@@ -25,7 +25,7 @@ include_spip('inc/config');
 **/
 function lim_afficher_config_objet($flux) {
 	$type = $flux['args']['type'];
-	if ($type == 'article' AND !empty($flux['data'])){
+	if ($type == 'article' AND !empty($flux['data'])) {
 
 		$tab_data = explode("<div class='ajax'>", $flux['data']);
 		$tab_data[1] = "<div class='ajax'>".$tab_data[1];

@@ -125,10 +125,12 @@ function lim_objets_a_exclure() {
 	}
 	
 	// Exception pour les objets breves et sites : sont-ils activés
-	if (lire_config('activer_breves') == 'non')
+	if (lire_config('activer_breves') == 'non') {
 		array_push($exclus, 'spip_breves');
-	if (lire_config('activer_sites') == 'non')
+	}
+	if (lire_config('activer_sites') == 'non') {
 		array_push($exclus, 'spip_syndic');
+	}
 
 	// Exception pour les documents (si ils ont été activés pour les rubriques)
 	$document_objet = lire_config('documents_objets');

@@ -16,32 +16,32 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 /**
  * Fonction d'appel pour le pipeline
  * @pipeline autoriser */
-function lim_autoriser(){}
+function lim_autoriser() {}
 
 /**************************************************************/
 /************* DESACTIVER DES LOGOS PAR CONTENUS *************/
 
 /* Exceptions historiques */
-function autoriser_auteur_iconifier($faire,$type,$id,$qui,$opt){
+function autoriser_auteur_iconifier($faire,$type,$id,$qui,$opt) {
 	if (in_array(table_objet_sql($type),explode(',',lire_config('lim_logos'))))
 		return false;
 	else return (($id == $qui['id_auteur']) OR
 			(($qui['statut'] == '0minirezo') AND !$qui['restreint']));
 }
 
-function autoriser_mot_iconifier($faire,$type,$id,$qui,$opt){
+function autoriser_mot_iconifier($faire,$type,$id,$qui,$opt) {
 	if (in_array(table_objet_sql($type),explode(',',lire_config('lim_logos'))))
 		return false;
 	return (($qui['statut'] == '0minirezo') AND !$qui['restreint']);
 }
 
-function autoriser_groupemots_iconifier($faire,$type,$id,$qui,$opt){
+function autoriser_groupemots_iconifier($faire,$type,$id,$qui,$opt) {
 	if (in_array(table_objet_sql($type),explode(',',lire_config('lim_logos'))))
 		return false;
 	else return (($qui['statut'] == '0minirezo') AND !$qui['restreint']);
 }
 
-function autoriser_rubrique_iconifier($faire,$type,$id,$qui,$opt){
+function autoriser_rubrique_iconifier($faire,$type,$id,$qui,$opt) {
 	if (in_array(table_objet_sql($type),explode(',',lire_config('lim_logos'))))
 		return false;
 	return autoriser('publierdans', 'rubrique', $id, $qui, $opt);
@@ -86,6 +86,17 @@ if (!function_exists('autoriser_rubrique_creerarticledans')) {
 		return
 			$lim_rub
 			AND autoriser_rubrique_creerarticledans_dist($faire, $type, $id, $qui, $opt);
+	}
+}
+
+if (!function_exists('autoriser_joindredocument')) {
+	function autoriser_joindredocument($faire, $type, $id, $qui, $opt) {
+		$quelles_rubriques = lire_config('lim_rubriques/document');
+		is_null($quelles_rubriques) ? $lim_rub = true : $lim_rub = !in_array($id,$quelles_rubriques);
+		
+		return
+			$lim_rub
+			AND autoriser_joindredocument_dist($faire, $type, $id, $qui, $opt);
 	}
 }
 
@@ -138,5 +149,3 @@ if (!function_exists('autoriser_rubrique_publierdans')) {
 			AND autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt);
 	}
 }
-
-?>
