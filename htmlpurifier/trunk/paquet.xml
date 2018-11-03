@@ -1,8 +1,8 @@
 <paquet
 	prefix="htmlpurifier"
 	categorie="outil"
-	version="4.10.0.11"
-	etat="stable"
+	version="4.10.0.12"
+	etat="test"
 	compatibilite="[1.9.0;3.2.99]"
 	logo="htmlpurifier.png"
 	documentation="https://contrib.spip.net/HTML-Purifier,3671"
@@ -15,3 +15,4 @@
 	<auteur>Mise en plugin SPIP : RealET</auteur>
 	<auteur>Fil</auteur>
 </paquet>
+
