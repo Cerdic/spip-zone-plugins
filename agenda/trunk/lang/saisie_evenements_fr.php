@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'afficher_annee_obligatoire_label_case' => 'Afficher systématiquement l\'année',
+	'afficher_annee_obligatoire_label_case' => 'Afficher systématiquement l’année',
 
 	// B
 	'branche_explication' => 'Proposer les événements des articles dans les branches suivantes. Une branche correspond à une rubrique et ses sous-rubriques.',
