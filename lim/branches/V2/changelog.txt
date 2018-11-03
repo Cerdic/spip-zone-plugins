@@ -1,0 +1,22 @@
+Plugin LIM pour SPIP
+Ce plugin allège l'interface privée
+-----------------------------------
+
+2.0.0 le 1 10 2018
+--------------------
+
+Ajout de la gestion  du portfolio (uniquement pour SPIP >  3.2)
+
+
+1.0.2 le 25 04 2015
+--------------------
+
+* Gestion des contenus par rubrique
+  exception pour la page exec=sites accessible depuis le menu "Edition -> Sites référencés"
+  SPIP renvoi $id=1 pour cette page (???).
+* Gestion du header silencieux
+	éviter une notice PHP si il est déjà déclaré ailleurs
+
+1.0.0 le 20 04 2015
+-------------------
+* Premier jet du plugin
