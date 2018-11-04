@@ -385,13 +385,9 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 						break;
 					case 'checkbox':
 						/**
-						 * Faire fonctionner @checkbox_xx@ == 'valeur'
+						 * Faire fonctionner @checkbox_xx@ == 'valeur' et @checkbox_xx@ != 'valeur'
 						 */
-						preg_match_all('#@(.+)@\s*==\s*(\'[^\']*\'|"[^"]*")#U', $condition, $matches2);
-						foreach ($matches2[2] as $value) {
-							$value_no_quote=trim($value,"'\"'");
-							$condition = preg_replace('#@'.preg_quote($nom).'@\s*==\s*'.$value.'#U', '($(form).find(".checkbox[name=\''.$nom.'[]\'][value=\''.$value_no_quote.'\']").is(":checked") ? $(form).find(".checkbox[name=\''.$nom.'[]\'][value=\''.$value_no_quote.'\']").val() : "")=='.$value, $condition);
-						}
+						$condition = preg_replace('#@(.+)@\s*(==|(!)=)\s*(\'[^\']*\'|"[^"]*")#U', "@$1@ $3IN $4", $condition );
 						/**
 						 * Faire fonctionner @checkbox_xx@ IN 'valeur' ou @checkbox_xx@ !IN 'valeur'
 						 */
