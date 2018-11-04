@@ -475,7 +475,7 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
  * @param array      $saisies
  *                            Tableau de descriptions de saisies
  * @param array|null $env
- *                            Tableau d'environnement transmis dans inclure/voi_saisies.html,
+ *                            Tableau d'environnement transmis dans inclure/voir_saisies.html,
  *                            NULL si on doit rechercher dans _request (pour saisies_verifier()).
  *
  * @return array
