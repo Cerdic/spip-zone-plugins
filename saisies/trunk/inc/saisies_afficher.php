@@ -396,8 +396,6 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 						 * Faire fonctionner @checkbox_xx@ IN 'valeur' ou @checkbox_xx@ !IN 'valeur'
 						 */
 						preg_match_all('#@(.+)@\s*(!IN|IN)\s*[\'"](.*)[\'"]#U', $condition, $matches3);
-						var_dump($condition);
-						var_dump($matches3);
 						foreach ($matches3[3] as $key => $value) {
 							$not = '';
 							if ($matches3[2][$key] == '!IN') {
