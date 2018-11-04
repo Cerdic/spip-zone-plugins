@@ -550,7 +550,7 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 					unset($saisies[$cle]);
 				}
 				if (is_null($env)) {
-					set_request($saisie['options']['nom'], null);
+					saisies_set_request_null_recursivement($saisie);
 				}
 			}
 		}
@@ -561,4 +561,20 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 	}
 
 	return $saisies;
+}
+
+
+/**
+ * Pose un set_request null sur une saisie et toute ses sous-saisies.
+ * Utiliser notamment pour annuler toutes les sous saisies d'un fieldeset
+ * si le fieldset est masquée à cause d'un afficher_si.
+ * @param array $saisie
+**/
+function saisies_set_request_null_recursivement($saisie) {
+	set_request($saisie['options']['nom'], null);
+	if (isset($saisie['saisies'])) {
+		foreach ($saisie['saisies'] as $sous_saisie) {
+			saisies_set_request_null_recursivement($sous_saisie);
+		}
+	}
 }
