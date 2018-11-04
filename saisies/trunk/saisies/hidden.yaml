@@ -28,6 +28,25 @@ options:
           nom: 'defaut'
           label: '<:saisies:option_defaut_label:>'
           size: 50
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'affichage'
+      label: '<:saisies:option_groupe_affichage:>'
+    saisies:
+      -
+        saisie: 'textarea'
+        options:
+          nom: 'afficher_si'
+          label: '<:saisies:option_afficher_si_label:>'
+          explication: '<:saisies:option_afficher_si_explication:>'
+          rows: 5
+      -
+        saisie: 'case'
+        options:
+          nom: 'afficher_si_remplissage_uniquement'
+          label: '<:saisies:option_afficher_si_remplissage_uniquement_label:>'
+          explication: '<:saisies:option_afficher_si_remplissage_uniquement_explication:>'
 defaut:
   options:
     label: '<:saisies:saisie_hidden_titre:>'
