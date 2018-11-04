@@ -33,5 +33,5 @@
 
 	<menu nom="configurer_typoenluminee" titre="enlumtypo:configuration_typoenluminee" parent="menu_squelette" icone="images/typoenluminee-16.png" />
 
-	<necessite nom="porte_plume" compatibilite="[1.2.2;[" />
+	<necessite nom="porte_plume" compatibilite="[1.7.2;[" />
 </paquet>
