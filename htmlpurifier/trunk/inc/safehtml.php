@@ -22,9 +22,15 @@ function inc_safehtml($t) {
 	AND $a = cache_get($cle = 'safehtml:'.md5($t)))
 		return $a;
 
-	include_spip('lib/HTMLPurifier.standalone');
-	include_spip('HTMLPurifier.extended');
-
+  include_spip('inc/utils');
+  if ( html5_permis() ){
+    include_spip('lib/html5/HTMLPurifier.standalone');
+    include_spip('HTMLPurifier.extended');  
+  } else {
+    include_spip('lib/html4/HTMLPurifier.standalone');
+    include_spip('HTMLPurifier.extended');  
+  }
+  
 	$config = HTMLPurifier_Config::createDefault();
 
 	$config->set('Attr.EnableID', true);
