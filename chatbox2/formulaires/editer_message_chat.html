@@ -289,12 +289,12 @@ if (window.jQuery) (function($){
 //	var url = 'spip.php?page=compteur_messages_chat\x26dests=[(#GET{dests}|implode{','})]\x26nb_messages_affiches=[(#GET{nb_messages_affiches})]';
 	// reload : au debut, toutes les 20s, puis 22, 24... 60s
 	// si on participe on revient a 5s, puis 7, 9... 60s
-	var r = 30;
+	var r = 10;
 	var reload = function() {
 	$("#contenu_chatbox2_[(#GET{dests}|implode{''})]")
 		.load(url,function(){setTimeout(reload,1000*(r=Math.min(r+2,60)));});
 	}
-//	setTimeout(reload, r);
+	setTimeout(reload, r);
 
 	$("#formulaire_chatbox_[(#GET{dests}|implode{''})] form")
 	.ajaxForm({
