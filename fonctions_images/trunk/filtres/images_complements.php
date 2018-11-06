@@ -2,6 +2,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/filtres_images_lib_mini');
+
 /* ---------- fonctions de Paris Beyrouth ------------------------- */
 
 /*
@@ -325,11 +327,11 @@ function image_niveaux_gris_auto($im, $limite=1000) {
  */
 function image_podpod($im, $coul='000000', $deb=0, $fin=70)
 {
-	include_spip("inc/filtres_images");
+
 	$image = _image_valeurs_trans($im, "podpod-$coul-$deb-$fin","png");
 	if (!$image) return("");
 
-	$couleurs = couleur_hex_to_dec($coul);
+	$couleurs = _couleur_hex_to_dec($coul);
 	$dr= $couleurs["red"];
 	$dv= $couleurs["green"];
 	$db= $couleurs["blue"];
@@ -508,7 +510,7 @@ function image_float ($img, $align, $margin=10) {
 		for ($j = 0; $j < $y_i; $j++) {
 			$reste = ($precision - $j);
 			$haut_rest = $h - $haut_tot;
-			$hauteur = round(($haut_rest) / $reste);
+			$hauteur = ($reste == 0 ? 0 : round(($haut_rest) / $reste));
 			$haut_tot = $haut_tot + $hauteur;
 			$resultat = min($larg[$j-1],$larg[$j],$larg[$j+1]);
 
@@ -540,8 +542,7 @@ function image_contour_alpha($im, $coul='000000', $trait=1)
 	$image = _image_valeurs_trans($im, "contour-$coul-$trait", "png");
 	if (!$image) return("");
 
-	include_spip("inc/filtres_images");
-	$couleurs = couleur_hex_to_dec($coul);
+	$couleurs = _couleur_hex_to_dec($coul);
 	$dr= $couleurs["red"];
 	$dv= $couleurs["green"];
 	$db= $couleurs["blue"];
@@ -715,7 +716,7 @@ function image_dispersion($im, $masque, $h=5, $v=5, $pos="") {
 		}
 	}
 
-	$image = valeurs_image_trans($im, "disp$nom-$h-$v$pos", "png");
+	$image = _image_valeurs_trans($im, "disp$nom-$h-$v$pos", "png");
 	if (!$image) return("");
 
 	$x_i = $image["largeur"];
@@ -733,7 +734,7 @@ function image_dispersion($im, $masque, $h=5, $v=5, $pos="") {
 		include_spip('inc/logos'); // bicoz presence image_reduire
 
 		$masque = find_in_path($masque);
-		$mask = valeurs_image_trans($masque,"");
+		$mask = _image_valeurs_trans($masque,"");
 		$im_m = $mask["fichier"];
 		$x_m = $mask["largeur"];
 		$y_m = $mask["hauteur"];
@@ -805,7 +806,7 @@ function image_dispersion($im, $masque, $h=5, $v=5, $pos="") {
 			$y_dec = round(($y_d - $y_m) /2);
 		}
 
-		$nouveau = valeurs_image_trans(image_reduire($im, $x_d, $y_d),"");
+		$nouveau = _image_valeurs_trans(image_reduire($im, $x_d, $y_d),"");
 		$im_n = $nouveau["fichier"];
 		$im = $nouveau["fonction_imagecreatefrom"]($im_n);
 		$im_ = imagecreatetruecolor($x_dest, $y_dest);
@@ -937,7 +938,6 @@ function image_hsl2rgb($H,$S,$L) {
 // adapte par Yohann Prigent
 //
 function image_reflechir($im, $hauteur=0.5, $alphastart=80, $alphaend=0, $red=127, $green=127, $blue=127){
-	include_spip("inc/filtres_images");
 	//if(!function_exists('imagelayereffect'))
 	//	return;
 	$image = _image_valeurs_trans($im, "relechir-$hauteur-$alphastart-$alphaend", "png");
