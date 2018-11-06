@@ -19,8 +19,8 @@
 	<pipeline nom="insert_head" action="insert_head_public" inclure="lazysizes_pipelines.php" />
 	<pipeline nom="header_prive" inclure="lazysizes_pipelines.php" />
 	<pipeline nom="ieconfig_metas" inclure="lazysizes_pipelines.php" />
-
-	<necessite nom="htmlpurifier" compatibilite="[4.9.2.0;]" />
+	<!-- Pour le moment on utilise pas la nouvelle version  -->
+	<necessite nom="htmlpurifier" compatibilite="[4.9.2.0;4.10.0.1]" />
 	<utilise nom="medias" compatibilite="[2.10.38;]" />
 
 </paquet>
