@@ -3,7 +3,7 @@
 <B_auteurs>
 
 <div class="pano_auteurs">
-
+#ANCRE_PAGINATION
 <BOUCLE_auteurs(AUTEURS){tout}{statut= 0minirezo}{id_auteur !IN #SESSION{id_auteur}}{pagination 15}>
 	#SET{logo_auteur,""}
 	#SET{nom_auteur,""}
@@ -26,8 +26,8 @@
 	<div id="Chat-header_#ID_AUTEUR" class="chat-header">
 	<div class="auteur_infos" id="auteur_infos_#ID_AUTEUR"><a href="#URL_AUTEUR">[(#GET{logo_auteur})] [(#NOM)]</a></div>
 	<div class="close-chat" id="close-boxAuteur_#ID_AUTEUR"><i class="fa fa-times"></i></div>
-	<div class="creer-groupe" id="creer-groupe_#ID_AUTEUR"><i class="fa fa-users"></i></div>
-	<div class="config-chat" id="config-chat_#ID_AUTEUR"><i class="fa fa-cog"></i></div>
+[(#REM)	<div class="creer-groupe" id="creer-groupe_#ID_AUTEUR"><i class="fa fa-users"></i></div>
+	<div class="config-chat" id="config-chat_#ID_AUTEUR"><i class="fa fa-cog"></i></div>]
 	</div>
 
 	<div class="Chat-corps">
@@ -73,6 +73,8 @@ $('#ChatboxAuteur_#ID_AUTEUR').draggable({ cancel: '.Chat-corps' });
 </script>
 
 </BOUCLE_auteurs>
+
+[<p class='pagination'>(#PAGINATION{prive})</p>]
 
 
 </div>
