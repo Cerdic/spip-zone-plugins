@@ -67,6 +67,19 @@ function action_remplir_panier_dist($arg=null) {
 		);
 		$quantite_deja = $paniers_arrondir_quantite($quantite_deja, $objet, $id_objet);
 		
+		$rang_last = sql_getfetsel(
+			'max(rang)',
+			'spip_paniers_liens',
+			array(
+				'id_panier = '.intval($id_panier)
+			)
+		);
+		
+		$rang = 1;
+		if($rang_last > 0){
+			$rang = $rang_last+1;
+		}
+		
 		// Si on a déjà une quantité, on fait une mise à jour
 		if ($quantite_deja > 0){
 			$cumul_quantite = $paniers_arrondir_quantite($quantite_deja + $quantite, $objet, $id_objet);
@@ -91,7 +104,8 @@ function action_remplir_panier_dist($arg=null) {
 					'id_panier' => $id_panier,
 					'objet' => $objet,
 					'id_objet' => $id_objet,
-					'quantite' => $quantite
+					'quantite' => $quantite,
+					'rang' => $rang,
 				)
 			);
 		}

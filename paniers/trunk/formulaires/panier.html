@@ -16,7 +16,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<BOUCLE_contenu_panier(PANIERS_LIENS){id_panier=#ENV{_id_panier}}>
+					<BOUCLE_contenu_panier(PANIERS_LIENS){id_panier=#ENV{_id_panier}}{par rang}{inverse}>
 					#SET{prix_unitaire,#PRIX*{#OBJET,#ID_OBJET}}
 					[(#SET{taxe_objet,[(#GET{prix_unitaire}|moins{#PRIX_HT*{#OBJET,#ID_OBJET}}|mult{#QUANTITE})]})]
 					[(#SET{cumul_taxes,[(#GET{cumul_taxes}|plus{[(#GET{taxe_objet})]})]})]

@@ -42,6 +42,11 @@ function paniers_upgrade($nom_meta_base_version, $version_cible){
 	$maj['0.3.0'] = array(
 	    array('maj_tables', array('spip_paniers_liens')),
 	);
+	
+	// ajout du champ rang
+	$maj['0.4.0'] = array(
+	    array('maj_tables', array('spip_paniers_liens')),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

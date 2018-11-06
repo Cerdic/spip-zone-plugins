@@ -67,6 +67,7 @@ function paniers_declarer_tables_auxiliaires($tables){
 			"objet"              => "VARCHAR(25) DEFAULT '' NOT NULL",
 			"quantite"           => "int DEFAULT '1' NOT NULL",
 			'reduction'          => 'decimal(4,4) not null default 0',
+			'rang'        		 => "SMALLINT NOT NULL",
 		),
 		'key' => array(
 			"PRIMARY KEY"        => "id_panier,id_objet,objet",
@@ -76,5 +77,3 @@ function paniers_declarer_tables_auxiliaires($tables){
 
 	return $tables;
 }
-
-?>
