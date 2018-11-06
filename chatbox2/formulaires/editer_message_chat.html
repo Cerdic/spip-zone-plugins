@@ -133,10 +133,7 @@ dispaly:block;
 
 
 
-	<form method='post' action='#ENV{action}'>
-
-
-[(#REM)<div style="margin:0;padding:0;">]
+	<form method='post' action='#ENV{action}'><div>
 
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
@@ -202,7 +199,7 @@ dispaly:block;
 	<tr>
 		<td class="tdDraft">
 	<div class="camera"><i class="fa fa-camera" aria-hidden="true"></i>
-	<input type="submit" class="draft" name="draft" value="&nbsp;" />
+[(#REM)	<input type="submit" class="draft" name="draft" value="&nbsp;" />]
 	</div>
 		</td>
 		<td>
@@ -248,14 +245,13 @@ autoheight($('##GET{form_id}'));
 
 [(#REM)			<input type='submit' class='btn fa send' name="send" title="<:organiseur_public:bouton_envoyer_message:>" value="&#xf1d8;" />]
 
-
 	  <div class='boutons'>
 	  <!--extra-->
 		<span class='image_loading'>&nbsp;</span>
 			<input type='submit' class='btn spip brouillon' name="draft" value='<:organiseur_public:bouton_enregistrer_brouillon:>' />
 			<input type='submit' class='btn spip draft' name="draft" value='<:titre_joindre_document:>' />
-		</div>[(#REM)boutons]
-[(#REM)	</div>]
+		</div>
+	</div>
 
 </form>
 

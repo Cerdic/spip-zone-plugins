@@ -4,7 +4,7 @@
 
 <div class="pano_auteurs">
 #ANCRE_PAGINATION
-<BOUCLE_auteurs(AUTEURS){tout}{statut= 0minirezo}{id_auteur !IN #SESSION{id_auteur}}{pagination 15}>
+<BOUCLE_auteurs(AUTEURS){tout}{id_auteur !IN #SESSION{id_auteur}}{pagination 15}>
 	#SET{logo_auteur,""}
 	#SET{nom_auteur,""}
 	#SET{logo_auteur,#MODELE{gravatar}|image_reduire{24}}	
