@@ -35,8 +35,8 @@
 
 
 .texte_message {
-   line-height:1.25em;
-    font-size: 13px;
+line-height:1.25em;
+font-size: 13px;
 padding:0;
 margin:0;
 
@@ -60,7 +60,7 @@ margin:0;
 </B_mess_recus>
 
 
-<BOUCLE_messages(MESSAGES auteurs){type=chat}{id_message IN (#GET{les_messages})}{par date}>
+<BOUCLE_messages(MESSAGES auteurs){type=chat}{id_message IN (#GET{les_messages})}{par date}{0,50}>
 
 <BOUCLE_auteur(auteurs){id_auteur}>
 #SET{logo_auteur,#MODELE{gravatar}|image_reduire{24}|inserer_attribut{style,float:left;}}
