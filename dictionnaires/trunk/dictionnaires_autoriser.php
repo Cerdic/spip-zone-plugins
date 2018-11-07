@@ -7,7 +7,9 @@
 **/
 
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction d'appel pour le pipeline
@@ -183,5 +185,3 @@ function autoriser_definition_modifier_dist($faire, $type, $id, $qui, $opt){
 function autoriser_definition_supprimer_dist($faire, $type, $id, $qui, $opt){
 	return autoriser('modifier', $type, $id, $qui, $opt);
 }
-
-?>

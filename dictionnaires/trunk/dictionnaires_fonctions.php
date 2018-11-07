@@ -7,8 +7,9 @@
 **/
 
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -77,7 +78,7 @@ function filtre_definitions_dist($texte) {
  * @param string $captures Terme trouvé
  * @return string          HTML du terme et de sa définition
 **/
-function dictionnaires_replace_callback($captures){
+function dictionnaires_replace_callback($captures) {
 	include_spip('inc/config');
 	static $deja_remplaces = array();
 	static $id_texte = '';

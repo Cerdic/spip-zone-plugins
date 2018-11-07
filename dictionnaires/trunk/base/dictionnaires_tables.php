@@ -7,7 +7,9 @@
 **/
 
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Déclarer les interfaces des tables dictionnaires et definitions pour le compilateur
@@ -18,7 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return array
  *     Déclarations d'interface pour le compilateur
  */
-function dictionnaires_declarer_tables_interfaces($interfaces){
+function dictionnaires_declarer_tables_interfaces($interfaces) {
 	// 'spip_' dans l'index de $tables_principales
 	$interfaces['table_des_tables']['dictionnaires'] = 'dictionnaires';
 	$interfaces['table_des_tables']['definitions']   = 'definitions';
@@ -40,10 +42,10 @@ function dictionnaires_declarer_tables_objets_sql($tables) {
 	//-- Table dictionnaires
 	$tables['spip_dictionnaires'] = array(
 		'type' => 'dictionnaire',
+		'principale' => 'oui',
 
 		'titre' => "titre, '' AS lang",
 		'date' => '',
-		'principale' => 'oui',
 		
 		'field' => array(
 			'id_dictionnaire' => 'bigint(21) not null',
@@ -98,10 +100,10 @@ function dictionnaires_declarer_tables_objets_sql($tables) {
 	//-- Table definitions
 	$tables['spip_definitions'] = array(
 		'type' => 'definition',
+		'principale' => 'oui',
 
 		'titre' => "titre, lang",
 		'date' => 'date',
-		'principale' => 'oui',
 
 		'field' => array(
 			'id_definition' => 'bigint(21) not null',
@@ -133,10 +135,22 @@ function dictionnaires_declarer_tables_objets_sql($tables) {
 			'type', 'casse', 'url_externe', 'statut',
 			'lang', 'date','id_trad'
 		),
+		'champs_versionnes' => array(
+			'titre', 'texte', 'termes', 'url_externe'
+		),
 		'rechercher_champs' => array(
 			'titre' => 8, 'texte' => 4, 'termes' => 6,
 		),
 		
+		'texte_langue_objet' => 'definition:texte_langue_objet',
+		'texte_definir_comme_traduction_objet' => "definition:texte_definir_comme_traduction_objet",
+
+		'statut_textes_instituer' => array(
+			'prop' => 'texte_statut_propose_evaluation',
+			'publie' => 'texte_statut_publie',
+			'refuse' => 'texte_statut_refuse',
+			'poubelle' => 'texte_statut_poubelle',
+		),
 		'statut' => array(
 			array(
 				'champ'=>'statut',
@@ -146,21 +160,7 @@ function dictionnaires_declarer_tables_objets_sql($tables) {
 			)
 		),
 		'texte_changer_statut' => 'definition:changer_statut',
-		'texte_langue_objet' => 'definition:texte_langue_objet',
-		'texte_definir_comme_traduction_objet' => "definition:texte_definir_comme_traduction_objet",
-		'statut_titres' => array(
-			'prop'=>'info_article_propose',
-			'publie'=>'info_article_publie',
-			'poubelle'=>'info_article_supprime'
-		),
-		'statut_textes_instituer' => array(
-			'prop' => 'texte_statut_propose_evaluation',
-			'publie' => 'texte_statut_publie',
-			'refuse' => 'texte_statut_poubelle',
-		),
-		'champs_versionnes' => array(
-			'titre', 'texte', 'termes', 'url_externe'
-		),
+		
 	);
 
 	return $tables;
@@ -176,7 +176,7 @@ function dictionnaires_declarer_tables_objets_sql($tables) {
  * @return array
  *     Description complétée des tables
  */
-function dictionnaires_declarer_tables_auxiliaires($tables_auxiliaires){
+function dictionnaires_declarer_tables_auxiliaires($tables_auxiliaires) {
 	//-- Table de relations definitions_liens
 	$spip_definitions_liens = array(
 		'id_definition' => 'bigint(21) not null default 0',
@@ -196,5 +196,3 @@ function dictionnaires_declarer_tables_auxiliaires($tables_auxiliaires){
 	
 	return $tables_auxiliaires;
 }
-
-?>

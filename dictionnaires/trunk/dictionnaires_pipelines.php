@@ -7,7 +7,9 @@
 **/
 
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Crée des liaisons entre les objets et les définitions.
@@ -27,7 +29,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param array $flux   Données du pipeline
  * @return array        Données du pipeline
 **/
-function dictionnaires_post_edition($flux){
+function dictionnaires_post_edition($flux) {
 	// TOUT CELA EST A FAIRE
 	return $flux;
 
@@ -88,5 +90,18 @@ function dictionnaires_post_propre($texte) {
 	return $texte;
 }
 
+/**
+ * Optimiser la base de données
+ *
+ * Supprime les objets à la poubelle.
+ *
+ * @pipeline optimiser_base_disparus
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function dictionnaires_optimiser_base_disparus($flux) {
 
-?>
+	sql_delete('spip_definitions', "statut='poubelle' AND maj < " . $flux['args']['date']);
+
+	return $flux;
+}

@@ -7,7 +7,9 @@
 **/
 
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Installation/maj des tables dictionnaires et définitions...
@@ -66,7 +68,7 @@ function definitions_langues(){
  * Migre les acronymes du plugins Forms & Tables (s'il est actif)
  * dans ce plugin.
 **/
-function dictionnaires_migrer_acronymes(){
+function dictionnaires_migrer_acronymes() {
 	// Si F&T contient une table d'acronymes
 	if (count($liste = sql_fetsel('id_form', 'spip_forms', "type_form='acronymes_sigles'"))) {
 		$id_form = intval(reset($liste));
@@ -130,7 +132,7 @@ function dictionnaires_migrer_acronymes(){
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @return void
  */
-function dictionnaires_vider_tables($nom_meta_base_version){
+function dictionnaires_vider_tables($nom_meta_base_version) {
 
 	include_spip('base/abstract_sql');
 
@@ -146,5 +148,3 @@ function dictionnaires_vider_tables($nom_meta_base_version){
 	effacer_meta($nom_meta_base_version);
 
 }
-
-?>
