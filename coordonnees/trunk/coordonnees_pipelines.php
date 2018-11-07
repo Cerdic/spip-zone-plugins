@@ -16,14 +16,14 @@ if (!defined('_ECRIRE_INC_VERSION')) { return;
  * function coordonnees_ieconfig_metas
  *
  * export de configuration avec le plugin ieconfig
- * 
+ *
  * @param $table
  */
 function coordonnees_ieconfig_metas($table) {
 	$table['coordonnees']['titre'] = _T('paquet-coordonnees:coordonnees_nom');
 	$table['coordonnees']['icone'] = 'prive/themes/spip/images/addressbook-16.png';
 	$table['coordonnees']['metas_serialize'] = 'contacts_et_organisations';
-	
+
 	return $table;
 }
 /**
@@ -69,7 +69,8 @@ function coordonnees_afficher_fiche_objet($flux) {
 	if ($texte) {
 		if ($p=strpos($flux['data'], '<!--afficher_fiche_objet-->')) {
 			$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
-		} else { 			$flux['data'] .= $texte;
+		} else {
+			$flux['data'] .= $texte;
 		}
 	}
 
