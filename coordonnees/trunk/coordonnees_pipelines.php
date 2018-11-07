@@ -31,7 +31,7 @@ function coordonnees_ieconfig_metas($table) {
  * sur la page de visualisation des objets associes
  * Surcharge possible avec 'prive/squelettes/contenu/coordonnees_fiche_nom-objet-associe.html'
 **/
-function coordonnees_afficher_fiche_objet($flux) {
+function coordonnees_afficher_complement_objet($flux) {
 	$texte = '';
 	$exec = isset($flux['args']['exec']) ? $flux['args']['exec'] : _request('exec');
 	$e = trouver_objet_exec($exec);

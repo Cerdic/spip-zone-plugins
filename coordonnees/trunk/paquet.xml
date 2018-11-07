@@ -1,7 +1,7 @@
 <paquet
 	prefix="coordonnees"
 	categorie="auteur"
-	version="2.4.2"
+	version="2.5.0"
 	schema="1.8.6"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
@@ -25,7 +25,7 @@
 	<!-- Autorisations -->
 	<pipeline nom="autoriser" inclure="coordonnees_autorisations.php" />
 	<!-- Éléments d'interface -->
-	<pipeline nom="afficher_fiche_objet" inclure="coordonnees_pipelines.php" />
+	<pipeline nom="afficher_complement_objet" inclure="coordonnees_pipelines.php" />
 	<pipeline nom="affiche_gauche" inclure="coordonnees_pipelines.php" />
 	<!-- optimiser liens -->
 	<pipeline nom="optimiser_base_disparus" inclure="coordonnees_pipelines.php" />
