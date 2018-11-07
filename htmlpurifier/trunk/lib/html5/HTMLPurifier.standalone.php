@@ -16618,7 +16618,7 @@ class HTMLPurifier_HTMLModule_CommonAttributes extends HTMLPurifier_HTMLModule
             'id' => 'ID',
             'title' => 'CDATA',
             'accesskey' => 'Character',            
-            'tabindex' => 'Number',     
+//             'tabindex' => 'Number', // BUG : with it textarea disappear.. 
             
             // https://www.w3.org/TR/html5/single-page.html#biblio-wai-aria-11
             'role' => 'Enum#alert,alertdialog,application,article,banner,button,cell,checkbox,columnheader,combobox,complementary,contentinfo,definition,dialog,directory,document,feed,figure,form,grid,gridcell,group,heading,img,link,list,listbox,listitem,log,main,marquee,math,menubar,navigation,none,note,option,presentation,progressbar,radio,radiogroup,region,row,rowgroup,rowheader,scrollbar,search,searchbox,separator,slider,spinbutton,status,switch,tab,table,tablist,tabpanel,term,textbox,timer,toolbar,tooltip,tree,treegrid,treeitem',
@@ -16746,6 +16746,7 @@ class HTMLPurifier_HTMLModule_Forms extends HTMLPurifier_HTMLModule
                 'method' => 'Enum#get,post',
                 // really ContentType, but these two are the only ones used today
                 'enctype' => 'Enum#application/x-www-form-urlencoded,multipart/form-data',
+                'novalidate' => 'Bool#novalidate',
             )
         );
         $form->excludes = array('form' => true);
@@ -16769,13 +16770,20 @@ class HTMLPurifier_HTMLModule_Forms extends HTMLPurifier_HTMLModule
                 'pattern' => 'CDATA',
                 'required' => 'Bool#required',
                 'step' => 'Number',
-
+                'dirname' => 'CDATA',
+                
+                'formaction' => 'URI',
+                'formenctype' => 'Enum#application/x-www-form-urlencoded,multipart/form-data',
+                'formmethod' => 'Enum#get,post',
+                'formnovalidate' => 'Bool#novalidate',
+                'formtarget' => 'Enum#_blank,_self',
                 
                 'accept' => 'ContentTypes',
                 'alt' => 'Text',
                 'checked' => 'Bool#checked',
                 'disabled' => 'Bool#disabled',
                 'maxlength' => 'Number',
+                'minlength' => 'Number',                
                 'name' => 'CDATA',
                 'readonly' => 'Bool#readonly',
                 'size' => 'Number',
@@ -16826,7 +16834,10 @@ class HTMLPurifier_HTMLModule_Forms extends HTMLPurifier_HTMLModule
             'Common',
             array(
                 'autofocus' => 'Bool#autofocus',
-                'required' => 'Bool#required',
+                
+//                 'maxlength' => 'Number', // BUG : with it textarea disappear..
+//                 'minlength' => 'Number', // BUG : with it textarea disappear..
+                'wrap' => 'Enum#hard,soft',
                 
                 'placeholder' => 'Text',
                 'form' => 'ID',
@@ -16836,6 +16847,8 @@ class HTMLPurifier_HTMLModule_Forms extends HTMLPurifier_HTMLModule
                 'name' => 'CDATA',
                 'readonly' => 'Bool#readonly',
                 'rows*' => 'Number',
+                'required' => 'Bool#required',
+                
             )
         );
         $textarea->attr_transform_pre[] = new HTMLPurifier_AttrTransform_Textarea();
@@ -16849,6 +16862,12 @@ class HTMLPurifier_HTMLModule_Forms extends HTMLPurifier_HTMLModule
                 'autofocus' => 'Bool#autofocus',
                 'form' => 'ID',
 
+                'formaction' => 'URI',
+                'formenctype' => 'Enum#application/x-www-form-urlencoded,multipart/form-data',
+                'formmethod' => 'Enum#get,post',
+                'formnovalidate' => 'Bool#novalidate',
+                'formtarget' => 'Enum#_blank,_self',                
+                
                 'disabled' => 'Bool#disabled',
                 'name' => 'CDATA',
                 'type' => 'Enum#button,submit,reset',
@@ -17038,6 +17057,7 @@ class HTMLPurifier_HTMLModule_Iframe extends HTMLPurifier_HTMLModule
                 'longdesc' => 'URI',
                 'marginheight' => 'Pixels',
                 'marginwidth' => 'Pixels',
+                'sandbox' => 'Bool#sandbox',
             )
         );
     }
@@ -17346,7 +17366,15 @@ class HTMLPurifier_HTMLModule_List extends HTMLPurifier_HTMLModule
      */
     public function setup($config)
     {
-        $ol = $this->addElement('ol', 'List', new HTMLPurifier_ChildDef_List(), 'Common');
+        $ol = $this->addElement(
+            'ol',
+            'List',
+             new HTMLPurifier_ChildDef_List(),
+            'Common',
+            array(
+                'reversed', 'Bool#reversed',    
+            )
+        );                
         $ul = $this->addElement('ul', 'List', new HTMLPurifier_ChildDef_List(), 'Common');
         // XXX The wrap attribute is handled by MakeWellFormed.  This is all
         // quite unsatisfactory, because we generated this
@@ -17482,7 +17510,8 @@ class HTMLPurifier_HTMLModule_Object extends HTMLPurifier_HTMLModule
                 'standby' => 'Text',
                 'tabindex' => 'Number',
                 'type' => 'ContentType',
-                'width' => 'Length'
+                'width' => 'Length',
+                'typemustmatch' => 'Bool#typemustmatch',
             )
         );
 
