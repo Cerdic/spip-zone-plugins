@@ -1,6 +1,6 @@
 nom: 'Sélection éditoriale'
 description: 'Afficher une liste de selections'
-icon: 'prive/themes/spip/images/selection-24.png'
+icon: 'selection-24.png'
 parametres:
   -
     saisie: 'selections_editoriales'
