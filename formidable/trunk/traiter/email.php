@@ -36,7 +36,7 @@ function traiter_email_dist($args, $retours) {
 
 	$nom_site_spip = supprimer_tags(typo(lire_meta('nom_site')));
 	$email_webmaster = supprimer_tags(typo(lire_meta('email_webmaster')));
-	
+
 	// On récupère les destinataires
 	if ($options['champ_destinataires']) {
 		$destinataires = _request($options['champ_destinataires']);
@@ -59,6 +59,8 @@ function traiter_email_dist($args, $retours) {
 		}
 	}
 
+	// Conservé pour raison historique, mais mauvaise pratique.
+	// Cf fichier .yam
 	if ($options['champ_courriel_destinataire_form']) {
 		$courriel_champ_form = _request($options['champ_courriel_destinataire_form']);
 		$destinataires[] = $courriel_champ_form;
@@ -115,7 +117,7 @@ function traiter_email_dist($args, $retours) {
 	if ($destinataires or ($courriel_envoyeur and $options['activer_accuse'])) {
 		include_spip('inc/filtres');
 		include_spip('inc/texte');
-		
+
 		// On récupère le nom de l'envoyeur
 		if ($options['champ_nom']) {
 			$nom_envoyeur = formidable_raccourcis_arobases_2_valeurs_champs(
@@ -154,7 +156,7 @@ function traiter_email_dist($args, $retours) {
 		) {
 			$joindre_pj = true;
 			foreach (array_keys($saisies_fichiers) as $nom) {
-				$saisies = saisies_supprimer($saisies,$nom);	
+				$saisies = saisies_supprimer($saisies,$nom);
 			}
 		}
 		// On génère le mail avec le fond
@@ -169,7 +171,7 @@ function traiter_email_dist($args, $retours) {
 				'valeurs' => $valeurs,
 				'masquer_liens' => $options['masquer_liens'],
 				'ip' => $options['activer_ip']?$GLOBALS['ip']:'',
-				'courriel_envoyeur' => $courriel_envoyeur, 
+				'courriel_envoyeur' => $courriel_envoyeur,
 				'nom_envoyeur' => filtrer_entites($nom_envoyeur)
 			)
 		);
@@ -188,7 +190,7 @@ function traiter_email_dist($args, $retours) {
 		if ($joindre_pj) {
 			$corps['pieces_jointes'] = $fichiers_facteur;
 		}
-	
+
 		// Si l'utilisateur n'a pas indiqué autrement, on met le courriel de l'envoyeur dans
 		// Reply-To et on laisse le from par defaut de Facteur car sinon ca bloque sur les
 		// SMTP un peu restrictifs.
@@ -239,7 +241,7 @@ function traiter_email_dist($args, $retours) {
 					'id_formulaires_reponse' => isset($retours['id_formulaires_reponse']) ? $retours['id_formulaires_reponse'] : '',
 					'titre' => _T_ou_typo($formulaire['titre']),
 					'message_retour' => formidable_raccourcis_arobases_2_valeurs_champs(
-						$formulaire['message_retour'], 
+						$formulaire['message_retour'],
 						$saisies),
 					'traitements' => $traitements,
 					'saisies' => $saisies,
@@ -262,7 +264,7 @@ function traiter_email_dist($args, $retours) {
 				'texte' => $texte,
 				'nom_envoyeur' => filtrer_entites($nom_envoyeur_accuse),
 			);
-			
+
 			//A fortiori, si un courriel d'expéditeur est précisé pour l'AR, on l'utilise
 			if ($options['courriel_envoyeur_accuse']) {
 				$courriel_envoyeur_accuse = $options['courriel_envoyeur_accuse'];
@@ -277,7 +279,7 @@ function traiter_email_dist($args, $retours) {
 				$corps['repondre_a'] = $courriel_envoyeur_accuse;
 				$courriel_from_accuse = '';
 			}
-			
+
 			// Joindre les pj si léger et nécessaire
 			if ($joindre_pj and  _FORMIDABLE_LIENS_FICHIERS_ACCUSE_RECEPTION == false) {
 				$corps['pieces_jointes'] = $fichiers_facteur;

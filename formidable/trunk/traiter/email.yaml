@@ -89,6 +89,7 @@ options:
           conteneur_class: 'pleine_largeur'
           rows: 4
       -
+      # conservé pour des raisons historiques, mais ne devrait pas exister (on a l'accusé de réception pour cela).  C'est pourquoi on ne l'affiche que si cela existait déjà avant, mais on peut plus créer de nouveaux formulaires avec cette option.
         saisie: 'champ'
         options:
           nom: 'champ_courriel_destinataire_form'
