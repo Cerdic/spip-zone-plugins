@@ -53,7 +53,7 @@
 			[<p class="explication" id="[explication_(#ENV{nom}|saisie_nom2name)]">(#ENV*{explication})</p>]
 			[<em class='attention'>(#ENV*{attention})</em>]
 			[(#INCLURE{fond=saisies/#ENV{type_saisie},env,nom=[(#ENV{nom}|saisie_nom2name)], disable=#GET{disable},readonly=#GET{readonly},describedby=[(#ENV*{explication}|?{[explication_(#ENV{nom}|saisie_nom2name)]})]})]
-			[(#ENV{disable_avec_post}|et{#ENV{disable_avec_post}|!={non}}|et{#ENV{type_saisie}|!={case}}|oui)<input type='hidden' name='[(#ENV{nom}|saisie_nom2name)]' value="#ENV{valeur,#ENV{defaut}}" />]
+			[(#ENV{disable_avec_post}|et{#ENV{disable_avec_post}|!={non}}|et{#ENV{type_saisie}|in_array{#LISTE{case,checkbox}}|non}|oui)<input type='hidden' name='[(#ENV{nom}|saisie_nom2name)]' value="#ENV{valeur,#ENV{defaut}}" />]
 			#ENV**{inserer_fin}
 		</[(#ENV{saisies_base_conteneur,#DIV|sinon{li}})]>
 	]
