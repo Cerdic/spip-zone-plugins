@@ -29,10 +29,14 @@
 
 
 [(#REM) lorsque qu'on donne un 'disabled' qui est une chaine,
-	il faut la transformer en tableau. Ce tableau est vide si la chaine valait ''
-	sinon une clé 0 serait considérée disabled à tord
+	il faut la transformer en tableau.
+		- Ce tableau est vide si la chaine valait '' sinon une clé 0 serait considérée disabled à tord
+		- Ce tableau correspondau au tablau #DATA si jamais c'était la chaîne valait "disabled" (typiquement avec le constructeur .yaml)
 ]
 #SET{disabled,#ENV{disable}}
+[(#GET{disabled}|=={disabled}|oui)
+	#SET{disabled,#GET{data}|array_keys}
+]
 [(#GET{disabled}|is_string|oui)
 	[(#GET{disabled}|strlen|non) #SET{disabled,#ARRAY} ]
 	[(#GET{disabled}|oui) #SET{disabled,#ARRAY|push{#GET{disabled}}} ]
