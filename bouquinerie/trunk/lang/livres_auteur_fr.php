@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'retirer_tous_liens_livres_auteurs' => 'Retirer tous les auteurs de livres',
 	'role_ecrivain' => 'Écrivain',
 	'role_illustrateur' => 'Illustrateur',
+	'role_photographe' => 'Photographe',
 	'role_postfacier' => 'Postfacier',
 	'role_prefacier' => 'Préfacier',
 	'role_traducteur' => 'Traducteur',

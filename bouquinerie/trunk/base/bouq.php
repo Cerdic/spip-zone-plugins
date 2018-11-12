@@ -173,6 +173,7 @@ function bouq_declarer_tables_objets_sql($tables) {
 			'ecrivain'=>'livres_auteur:role_ecrivain',
 			'traducteur'=>'livres_auteur:role_traducteur',
 			'illustrateur'=>'livres_auteur:role_illustrateur',
+			'photographe'=>'livres_auteur:role_photographe',
 			'prefacier'=>'livres_auteur:role_prefacier',
 			'postfacier'=>'livres_auteur:role_postfacier',
 		),
