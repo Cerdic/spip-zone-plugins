@@ -260,7 +260,7 @@ Cette option n’est conservée que pour compatibilité ascendante. Elle n’app
 	'traiter_email_option_sujet_label' => 'Sujet du courriel',
 	'traiter_email_option_sujet_valeurs_brutes_label' => 'Valeurs brutes',
 	'traiter_email_option_sujet_valeurs_brutes_label_case' => 'Le courriel est destiné à un robot et non pas à un·e humain·e. Dans le sujet du message, mettre les valeurs brutes (compréhensibles par des robots) des champs et non pas les valeurs interprétées (compréhensible par des humain·e·s).',
-	'traiter_email_option_vrai_envoyeur_explication' => 'Certains serveurs SMTP ne permettent pas d’utiliser un courriel arbitraire pour le champ "From". Pour cette raison Formidable insère par défaut le courriel de l’envoyeur dans le champ "Reply-To". Cocher ici pour insèrer le courriel dans le champ "From".',
+	'traiter_email_option_vrai_envoyeur_explication' => 'Certains serveurs SMTP ne permettent pas d’utiliser un courriel arbitraire pour le champ "From". Pour cette raison Formidable insère par défaut le courriel de l’envoyeur dans le champ "Reply-To", et utilise le courriel du webmaster dans le champ "From". Cocher ici pour insèrer le courriel dans le champ "From".',
 	'traiter_email_option_vrai_envoyeur_label' => 'Insérer le courriel de l’envoyeur dans le champ "From"',
 	'traiter_email_page' => '<a href="@url@">Depuis cette page</a>.',
 	'traiter_email_sujet' => '@nom@ vous a écrit.',
