@@ -179,7 +179,7 @@ function bouq_declarer_tables_objets_sql($tables) {
 		),
 		'roles_objets' => array(
 			'livres' => array(
-				'choix' => array('ecrivain', 'traducteur', 'illustrateur', 'prefacier', 'postfacier'),
+				'choix' => array('ecrivain', 'traducteur', 'illustrateur', 'photographe', 'prefacier', 'postfacier'),
 				'defaut' => 'ecrivain'),
 		),
 

@@ -6,6 +6,7 @@ Quelques liens interessants :
 - http://xisbn.worldcat.org/xisbnadmin/doc/api.htm
 - http://agregationchimie.free.fr/book_isbn.php
 
+Pour la réalisation dans SPIP, s'inspirer de ce qui a été fait dans  /plugins-dist/sites/formulaires/editer_site.xxx
 il faut les keys pour utiliser Amazon et Worldcat. C'est gratuit ceci dit
 
 Contraintes
