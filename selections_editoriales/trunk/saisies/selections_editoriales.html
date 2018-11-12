@@ -1,25 +1,24 @@
 [(#REM)
 
-	Saisie permettant de sélectionner une selection éditoriale par son numéro ou son identifiant.
+	Saisie permettant de sélectionner une selection éditoriale par son numéro ou optionnellement par son identifiant.
 
-	Attention, les identifiants sont optionnels, se reposer dessus n'est pas fiable pour une saisie.
-
-	Parametres :
-	- utiliser_identifiant : « oui » pour utiliser l'identifiant au lieu du numéro
-	- voir saisies/selection.html
+	Paramètres :
+	- utiliser_identifiant : « oui » pour utiliser l'identifiant au lieu du numéro (attention pas fiable)
+	- type_choix : type de saisie utilisée, selection | radio
+	- params de saisies/selection.html et saisies/radio.html
 
 	Exemple d'appel :
 	[(#SAISIE{selections_editoriales,nom,
 		label=<:plugin:label:>,
+		type_choix=radio,
 	})]
 ]
-#SET{disabled, #ARRAY}
-[(#ENV{disable_choix}|strlen|oui) #SET{disabled, #ENV{disable_choix}|explode{','}}]
+#SET{data,#ARRAY}
+<BOUCLE_data_saisie_selections(SELECTIONS) {par num titre, titre}>
+#SET{label,#ENV{utiliser_identifiant}|?{#IDENTIFIANT,#ID_SELECTION}}
+#SET{cle,#TITRE|typo|concat{#IDENTIFIANT|?{ (#IDENTIFIANT)}}}
+#SET{data,#GET{data}|array_merge{#ARRAY{#GET{cle},#GET{label}}}}
+</BOUCLE_data_saisie_selections>
+#SET{data,#GET{data}|array_flip}
 
-<select [(#HTML5|oui)[(#ENV{obligatoire}|et{#ENV{obligatoire}|!={non}}|oui) required="required"]] name="#ENV{nom}" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ size="(#ENV{size})"][ (#ENV*{attributs})]>
-[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
-<BOUCLE_selection(SELECTIONS){par titre}>
-	#SET{valeur_option,#ENV{utiliser_identifiant}|=={oui}|?{#IDENTIFIANT,#ID_SELECTION}}
-	<option value="#GET{valeur_option}"[ (#GET{valeur_option}|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"][(#GET{valeur_option}|in_any{#GET{disabled}}|oui) disabled="disabled"]>[(#TITRE|typo)][ \((#IDENTIFIANT)\)]</option>
-</BOUCLE_selection>
-</select>
+<INCLURE{fond=saisies/#ENV{type_choix,selection}, data=#GET{data}, env}>
