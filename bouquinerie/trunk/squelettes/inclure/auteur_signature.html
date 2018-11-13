@@ -1,8 +1,8 @@
 <B_auteur_livre>[
 (#ROLE|=={traducteur}|oui)<div class='m-bottom-8'>#INFO_TRADUCTION*{livre,#ID_LIVRE}][
 (#ROLE|=={illustrateur}|oui)<div class='m-bottom-8'>Illustrateur : 
-][
-(#ROLE|=={prefacier}|oui)<div class='m-bottom-8'>Préface de 
+][(#ROLE|=={photographe}|oui)<div class='m-bottom-8'>Photographe : 
+][(#ROLE|=={prefacier}|oui)<div class='m-bottom-8'>Préface de 
 ][(#ROLE|=={postfacier}|oui)<div class='m-bottom-8'>Postface de 
 ]<BOUCLE_auteur_livre(LIVRES_AUTEURS){id_livre?}{id_livres_auteur?}{role?}{", "}>
 [(#LIEN|oui)<a href="#URL_LIVRES_AUTEUR">][(#PRENOM) ]#NOM[(#LIEN|oui)</a>]</BOUCLE_auteur_livre>
