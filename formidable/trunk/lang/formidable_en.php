@@ -264,7 +264,7 @@ Indicate the field, its value, and the concerned email(s) (separated by a comma)
 	'traiter_email_option_sujet_label' => 'Message subject',
 	'traiter_email_option_sujet_valeurs_brutes_label' => 'Raw values',
 	'traiter_email_option_sujet_valeurs_brutes_label_case' => 'The email is for a robot and not for a human. In the subject of the message, put the raw values (understandable by robots) fields and not the interpreted values (comprehensible by humans).',
-	'traiter_email_option_vrai_envoyeur_explication' => 'Some SMTP servers do not allow to use arbitrary email for the "From" field. For this reason Formidable inserts the default email sender in the "Reply-To". Tick here to insert the email in the "From" field.',
+	'traiter_email_option_vrai_envoyeur_explication' => 'Some SMTP servers do not allow to use arbitrary email for the "From" field. For this reason Formidable inserts the default email sender in the "Reply-To". Tick here to insert the email in the "From" field.', # MODIF
 	'traiter_email_option_vrai_envoyeur_label' => 'Insert email of the sender in the "From" field',
 	'traiter_email_page' => '<a href="@url@">From this page</a>.',
 	'traiter_email_sujet' => '@nom@ has written to you.',

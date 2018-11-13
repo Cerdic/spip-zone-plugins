@@ -240,7 +240,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_sujet_accuse_label' => 'Assunto do aviso de recebimento',
 	'traiter_email_option_sujet_explication' => 'Construa o assunto com ajuda de @raccourcis@. Se for deixando em branco, o assunto será construído automaticamente.',
 	'traiter_email_option_sujet_label' => 'Assunto da mensagem', # MODIF
-	'traiter_email_option_vrai_envoyeur_explication' => 'Alguns servidores SMTP não permitem a utilização de um e-mail arbitrário para o campo "From". Por isso, Formidable insere por padrão o e-mail do remetente no campo "Reply-To". Marce esta opção para inserir o e-mail no campo "From".',
+	'traiter_email_option_vrai_envoyeur_explication' => 'Alguns servidores SMTP não permitem a utilização de um e-mail arbitrário para o campo "From". Por isso, Formidable insere por padrão o e-mail do remetente no campo "Reply-To". Marce esta opção para inserir o e-mail no campo "From".', # MODIF
 	'traiter_email_option_vrai_envoyeur_label' => 'Inserir o e-mail do remetente no campo "From"',
 	'traiter_email_page' => '<a href="@url@">A partir desta página</a>.',
 	'traiter_email_sujet' => '@nom@  enviou uma mensagem',

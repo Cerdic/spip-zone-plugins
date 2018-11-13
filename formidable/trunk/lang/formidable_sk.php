@@ -140,7 +140,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_sujet_accuse_label' => 'Predmet potvrdenia o prijatí',
 	'traiter_email_option_sujet_explication' => 'Vytvorte predmet pomocou @raccourcis@. Ak neurobíte nič, predmet bude vytvorený automaticky.',
 	'traiter_email_option_sujet_label' => 'Predmet správy', # MODIF
-	'traiter_email_option_vrai_envoyeur_explication' => 'Niektoré servery SMTP neumožňujú používať ľubovoľný e-mail pre pole "From" (Od koho). Z tohto dôvodu Formidable podľa predvolených nastavení vkladá e-mail odosielateľa do poľa "Reply-To". Ak chcete, aby bol vložený do poľa "From", zaškrtnite túto možnosť tu.',
+	'traiter_email_option_vrai_envoyeur_explication' => 'Niektoré servery SMTP neumožňujú používať ľubovoľný e-mail pre pole "From" (Od koho). Z tohto dôvodu Formidable podľa predvolených nastavení vkladá e-mail odosielateľa do poľa "Reply-To". Ak chcete, aby bol vložený do poľa "From", zaškrtnite túto možnosť tu.', # MODIF
 	'traiter_email_option_vrai_envoyeur_label' => 'Vložiť e-mail odosielateľa do poľa "From" (= "Od koho")',
 	'traiter_email_page' => '<a href="@url@">Z tejto stránky.</a>',
 	'traiter_email_sujet' => '@nom@ vám napísal(a).',

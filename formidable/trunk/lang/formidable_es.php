@@ -176,7 +176,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_sujet_accuse_label' => 'Asunto del acuse de recibo. ',
 	'traiter_email_option_sujet_explication' => 'Construye este asunto usando los @raccourcis@ (usa la ayuda memoria). Si lo dejas en blanco se usará uno por defecto. ',
 	'traiter_email_option_sujet_label' => 'Asunto del mensaje', # MODIF
-	'traiter_email_option_vrai_envoyeur_explication' => 'Algunos servidores SMTP no permiten el uso de un correo electrónico arbitrario para el campo "From". Por esta razón Formidable inserta  por defecto el correo del remitente en el campo "Reply-to". Marca aquí para insertarlo en el campo "From".',
+	'traiter_email_option_vrai_envoyeur_explication' => 'Algunos servidores SMTP no permiten el uso de un correo electrónico arbitrario para el campo "From". Por esta razón Formidable inserta  por defecto el correo del remitente en el campo "Reply-to". Marca aquí para insertarlo en el campo "From".', # MODIF
 	'traiter_email_option_vrai_envoyeur_label' => 'Inserta el correo del remitente en el campo "From"',
 	'traiter_email_page' => '<a href="@url@">Desde esta página</a>.',
 	'traiter_email_sujet' => '@nom@ ha escrito a usted.',
