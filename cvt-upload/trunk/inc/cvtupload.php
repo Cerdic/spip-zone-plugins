@@ -106,6 +106,9 @@ function cvtupload_generer_html($infos_fichiers = null) {
  * 		Retourne un tableau d'informations sur le fichier ou un tableau de tableaux si plusieurs fichiers. Ce tableau est compatible avec l'action "ajouter_un_fichier" de SPIP.
  **/
 function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer = true) {
+	if(!function_exists('deplacer_fichier_upload')){
+		include_spip('inc/documents');
+	}
 	$vignette_par_defaut = charger_fonction('vignette', 'inc/');
 	$infos = array();
 	// On commence par nettoyer le dossier
