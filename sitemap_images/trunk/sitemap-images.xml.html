@@ -64,6 +64,17 @@
 <BOUCLE_b(BREVES){annee?}{!par date}{0,1000}>[
 <url><loc>(#URL_BREVE|url_absolue)</loc></url>]</BOUCLE_b>
 
+[(#REM) Sites]
+<BOUCLE_s(SITES) {annee?} {par date}{inverse} {0,50} >
+<url>
+	[<loc>(#ID_SYNDIC|generer_url_entite{site}|url_absolue)</loc>]
+	[<image:image>
+		<image:loc>#URL_SITE_SPIP/(#LOGO_SITE|extraire_attribut{src}|supprimer_timestamp)</image:loc>
+		[<image:title>(#NOM_SITE|trim|textebrut)</image:title>]
+	</image:image>]
+</url>
+</BOUCLE_s>
+
 [(#REM) Extensions de sitemap par des plugins ]
 <BOUCLE_objets(DATA){source table,#REM|lister_tables_objets_sql}{si #ENV{annee}|non}>
 	#SET{fond,#VAL{sitemap-}|concat{#VALEUR{table_objet}}}
