@@ -50,17 +50,17 @@ options:
           label: '<:saisies:option_disable_label:>'
           explication: '<:saisies:option_disable_explication:>'
       -
-        saisie: 'input'
-        options:
-          nom: 'disable_choix'
-          label: '<:saisies:option_disable_choix_label:>'
-          explication: '<:saisies:option_disable_choix_explication:>'         
-      -
         saisie: 'oui_non'
         options:
           nom: 'disable_avec_post'
           label: '<:saisies:option_disable_avec_post_label:>'
           explication: '<:saisies:option_disable_avec_post_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'disable_choix'
+          label: '<:saisies:option_disable_choix_label:>'
+          explication: '<:saisies:option_disable_choix_explication:>'
   -
     saisie: 'fieldset'
     options:
