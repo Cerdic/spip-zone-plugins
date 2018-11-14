@@ -3,17 +3,24 @@
 	#SET{page_exec, noizetier_pages}
 	[<li class="item">
 		(#URL_ECRIRE{#GET{page_exec}}
+			|parametre_url{est_page_objet, ''}
+			|lien_ou_expose{
+				<:noizetier:liste_pages_toutes:>,
+				#GET{page_exec}|=={#ENV{exec}}|et{#ENV{est_page_objet}|non}})
+		</li>]
+	[<li class="item">
+		(#URL_ECRIRE{#GET{page_exec}}
 			|parametre_url{est_page_objet, oui}
 			|lien_ou_expose{
 				<:noizetier:liste_pages_objet_oui:>,
-				#GET{page_exec}|=={#ENV{exec}}|et{#ENV{est_page_objet, oui}|=={oui}}})
+				#GET{page_exec}|=={#ENV{exec}}|et{#ENV{est_page_objet}|=={oui}}})
 	</li>]
 	[<li class="item">
 		(#URL_ECRIRE{#GET{page_exec}}
 			|parametre_url{est_page_objet, non}
 			|lien_ou_expose{
 				<:noizetier:liste_pages_objet_non:>,
-				#GET{page_exec}|=={#ENV{exec}}|et{#ENV{est_page_objet, oui}|=={non}}})
+				#GET{page_exec}|=={#ENV{exec}}|et{#ENV{est_page_objet}|=={non}}})
 	</li>]
 	#SET{page_exec, noizetier_objets}
 	[<li class="item">

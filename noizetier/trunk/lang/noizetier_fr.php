@@ -164,6 +164,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_objets' => 'Contenus possédant une configuration de noisettes',
 	'liste_objets_configures' => 'Liste des objets',
 	'liste_pages' => 'Liste des pages',
+	'liste_pages_toutes' => 'Toutes les pages',
 	'liste_pages_objet_non' => 'Pages non liées à un type de contenu',
 	'liste_pages_objet_oui' => 'Pages liées à un type de contenu',
 
