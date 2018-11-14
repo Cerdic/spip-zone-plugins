@@ -27,7 +27,7 @@
 	<ul class="edition">
 		<li>
 			[(#GET{type_noisette_disponible}|oui)
-				<a href="[(#URL_ECRIRE{noisette_edit}|parametre_url{id_noisette, #ID_NOISETTE})]" class="bouton-edition" title="<:noizetier:formulaire_modifier_noisette|attribut_html:>">[(#CHEMIN_IMAGE{edit-24}|balise_img)]</a>
+				<a href="[(#URL_ECRIRE{noisette_edit}|parametre_url{id_noisette, #ID_NOISETTE})]" class="bouton-modifier" title="<:noizetier:formulaire_modifier_noisette|attribut_html:>">[(#CHEMIN_IMAGE{edit-24}|balise_img)]</a>
 			]
 			<a class="bouton-edition"[ href="#bouton-(#ID_NOISETTE)"] title="<:noizetier:label_menu_ouvrir:>">
 				[<img height="24" width="24" src="(#CHEMIN_IMAGE{menu-24.png})" alt="" />]
