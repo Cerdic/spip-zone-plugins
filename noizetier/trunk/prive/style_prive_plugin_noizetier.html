@@ -85,12 +85,17 @@ ul.liste-noisettes-bloc li.noisette .edition {
 	right: 0;
 	top: .6925em;
 	text-align: right;}
+ul.liste-noisettes-bloc li.noisette .edition li {
+	position: relative;
+}
 ul.liste-noisettes-bloc li.noisette .edition a {margin-left: 2px; text-decoration: none;}
 ul.liste-noisettes-bloc li.noisette .edition ul.menu-edition:not(.visible) {display: none;}
 ul.liste-noisettes-bloc li.noisette .edition ul.menu-edition.visible {
-	position: relative;
+	position: absolute;
 	top: -5px;
-	left: 295px;
+	right: 0;
+	transform: translateX(calc(100% + 10px));
+	/* left: 295px; */
 	min-width: 250px;
 	z-index: 5000;
 	float: left;
