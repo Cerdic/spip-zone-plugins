@@ -74,7 +74,7 @@ function mailsubscribers_actualise_mailsubscribinglist_segments($id_mailsubscrib
 			if ($force
 				or in_array($id_segment, $update_needed)
 			  or (isset($segment['auto_update']) and $segment['auto_update'])){
-				mailsubscribers_actualise_segment($id_mailsubscriber, $id_mailsubscribinglist, $id_segment);
+				mailsubscribers_actualise_segment($id_mailsubscriber, $id_mailsubscribinglist, $id_segment, $segments[$id_mailsubscribinglist]);
 			}
 		}
 	}
@@ -86,17 +86,17 @@ function mailsubscribers_actualise_mailsubscribinglist_segments($id_mailsubscrib
  * @param $id_mailsubscriber
  * @param $id_mailsubscribinglist
  * @param $id_segment
+ * @param array $segments
  */
-function mailsubscribers_actualise_segment($id_mailsubscriber, $id_mailsubscribinglist, $id_segment){
-	static $segments = array();
-	if (!isset($segments[$id_mailsubscribinglist])) {
-		if ($segments[$id_mailsubscribinglist] = sql_getfetsel('segments','spip_mailsubscribinglists','id_mailsubscribinglist='.intval($id_mailsubscribinglist))){
-			$segments[$id_mailsubscribinglist] = unserialize($segments[$id_mailsubscribinglist]);
+function mailsubscribers_actualise_segment($id_mailsubscriber, $id_mailsubscribinglist, $id_segment, $segments = null){
+	if (is_null($segments)) {
+		if ($segments = sql_getfetsel('segments','spip_mailsubscribinglists','id_mailsubscribinglist='.intval($id_mailsubscribinglist))){
+			$segments = unserialize($segments);
 		}
 	}
 
-	if (isset($segments[$id_mailsubscribinglist][$id_segment])){
-		$need = mailsubscribers_teste_segment($id_mailsubscriber,$segments[$id_mailsubscribinglist][$id_segment]);
+	if ($segments and isset($segments[$id_segment])){
+		$need = mailsubscribers_teste_segment($id_mailsubscriber,$segments[$id_segment]);
 		$where = 'id_mailsubscriber='.intval($id_mailsubscriber).' AND id_mailsubscribinglist='.intval($id_mailsubscribinglist).' AND id_segment=';
 		$is = sql_countsel('spip_mailsubscriptions', $where . intval($id_segment));
 		if ($is and !$need) {
@@ -118,6 +118,7 @@ function mailsubscribers_actualise_segment($id_mailsubscriber, $id_mailsubscribi
  * @return bool
  */
 function mailsubscribers_teste_segment($id_mailsubscriber, $segment){
+	static $informations_liees = array();
 	static $declaration;
 	if (is_null($declaration)){
 		if (!function_exists('mailsubscriber_declarer_informations_liees')) {
@@ -128,8 +129,11 @@ function mailsubscribers_teste_segment($id_mailsubscriber, $segment){
 	
 	if (!$declaration) return false;
 
-	$email = sql_getfetsel('email','spip_mailsubscribers','id_mailsubscriber='.intval($id_mailsubscriber));
-	$infos = mailsubscriber_recuperer_informations_liees($id_mailsubscriber, $email);
+	if (!isset($informations_liees[$id_mailsubscriber])) {
+		$email = sql_getfetsel('email','spip_mailsubscribers','id_mailsubscriber='.intval($id_mailsubscriber));
+		$informations_liees[$id_mailsubscriber] = mailsubscriber_recuperer_informations_liees($id_mailsubscriber, $email);
+	}
+	$infos = &$informations_liees[$id_mailsubscriber];
 
 	foreach($segment as $k=>$v){
 		if (strncmp($k,'filtre_',7)==0 and strlen($v)){
