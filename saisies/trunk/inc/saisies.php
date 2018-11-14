@@ -320,7 +320,7 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 }
 
 /**
- * Applatie une description tabulaire en supprimant les sous-groupes.
+ * Aplatit une description tabulaire en supprimant les sous-groupes.
  * Ex : les data d'une saisie de type select
  * @param string $tab Le tableau à aplatir
  * @return $nouveau_tab
@@ -342,7 +342,7 @@ function saisies_aplatir_tableau($tab) {
 }
 
 /**
- * Applatie une description chaînée, en supprimant les sous-groupes.
+ * Aplatit une description chaînée, en supprimant les sous-groupes.
  * @param string $chaine La chaîne à aplatir
  * @return $chaine
  */
