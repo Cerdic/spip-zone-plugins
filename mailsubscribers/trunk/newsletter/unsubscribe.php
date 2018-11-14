@@ -61,6 +61,7 @@ function newsletter_unsubscribe_dist($email, $options = array()) {
 			sql_delete('spip_mailsubscriptions', $where);
 		}
 		else {
+			// on unsubscribe bien tous les segments
 			sql_updateq('spip_mailsubscriptions', array('statut' => 'refuse'), $where);
 		}
 		$GLOBALS['mailsubscribers_recompte_inscrits'] = true;

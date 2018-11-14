@@ -22,7 +22,9 @@ function mailsubscribers_start_update_mailsubscribinglist_segment($id_mailsubscr
 	ecrire_meta('mailsubscriptions_update_segments', serialize($update));
 
 	// placer le pointeur sur les subscriptions pour le genie
-	sql_updateq('spip_mailsubscriptions', array('actualise_segments' => 1), 'id_segment=0 AND id_mailsubscribinglist='.intval($id_mailsubscribinglist));
+	// uniquement sur les subscribers qui ont au moins un des segments valide (sinon si tout refuse il n'y aura rien a faire)
+	$in_subscribers_valides = sql_get_select("DISTINCT zz.id_mailsubscriber", "spip_mailsubscriptions as zz", "zz.statut!=".sql_quote('refuse') . ' AND zz.id_mailsubscribinglist='.intval($id_mailsubscribinglist));
+	sql_updateq('spip_mailsubscriptions', array('actualise_segments' => 1), 'id_segment=0 AND id_mailsubscribinglist=' . intval($id_mailsubscribinglist) . " AND id_mailsubscriber IN ($in_subscribers_valides)");
 }
 
 /**
