@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_dupliquer_composition_reference' => 'L’identifiant de la page dupliquée est <i>@composition@</i>.
 	Vous pouvez choisir un nouvel identifiant ou suffixer l’identifiant de référence ainsi : <i>@composition@<strong>_suffixe</strong></i>',
 	'explication_dupliquer_composition_suffixer' => '.',
-	'explication_glisser_deposer' => 'Les types de noisettes pouvant être ajouter aux blocs de la page sont listés ci-dessous.',
+	'explication_glisser_deposer' => 'Les types de noisettes pouvant être ajoutés aux blocs de la page sont listés ci-dessous.',
 	'explication_heritages_composition' => 'La composition en cours d’édition est basée sur le type de contenu « @type@ » qui possède des types de contenu enfants. Vous pouvez définir pour chaque type de contenu enfant une composition à appliquer par défaut.',
 	'explication_noisette' => 'Noisette de type « @noisette@ »',
 	'explication_noisette_css' => 'Vous pouvez ajouter à la balise englobante de la noisette d’éventuelles classes CSS supplémentaires.',
