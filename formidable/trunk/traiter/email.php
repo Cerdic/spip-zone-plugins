@@ -8,6 +8,7 @@ include_spip('inc/utils');
 include_spip('inc/formidable_fichiers');
 
 function traiter_email_dist($args, $retours) {
+	include_spip('inc/texte');
 	if (!isset($retours['fichiers'])) {
 		$retours['fichiers'] = array();
 		$ajouter_fichier = true;
