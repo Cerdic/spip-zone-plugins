@@ -1,7 +1,7 @@
 <paquet
 	prefix="saisies"
 	categorie="outil"
-	version="3.7.2"
+	version="4.0.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/logo_saisie_48.png"
@@ -12,6 +12,7 @@
 	<auteur lien="https://contrib.spip.net/RastaPopoulos">RastaPopoulos</auteur>
 	<auteur lien="https://contrib.spip.net/Joseph">Joseph</auteur>
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<auteur>Maïeul</auteur>
 	<licence>GNU/GPL</licence>
 
 	<traduire module="saisies" reference="fr" gestionnaire="salvatore" />

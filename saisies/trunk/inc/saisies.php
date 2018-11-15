@@ -223,18 +223,7 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 		}
 		// Tout type de saisie, sauf fichiers
 		else {
-			// Si le nom du champ est un tableau indexé, il faut parser !
-			if (preg_match('/([\w]+)((\[[\w]+\])+)/', $champ, $separe)) {
-				$valeur = _request($separe[1]);
-				preg_match_all('/\[([\w]+)\]/', $separe[2], $index);
-				// On va chercher au fond du tableau
-				foreach ($index[1] as $cle) {
-					$valeur = isset($valeur[$cle]) ? $valeur[$cle] : null;
-				}
-			} else {
-				// Sinon la valeur est juste celle du nom
-				$valeur = _request($champ);
-			}
+			$valeur = saisies_request($champ);
 		}
 
 		// Pour la saisie "destinataires" il faut filtrer si jamais on a mis un premier choix vide
@@ -303,6 +292,8 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 			}
 		}
 	}
+	// Vérifier que les valeurs postées sont acceptables, à savoir par exemple que pour un select, ce soit ce qu'on a proposé.
+	$erreurs = saisies_verifier_valeurs_acceptables($saisies, $erreurs);
 
 	// Last but not least, on passe nos résultats à un pipeline
 	$erreurs = pipeline(
@@ -317,6 +308,90 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 	);
 
 	return $erreurs;
+}
+
+/**
+ * Vérifier que les valeurs postées sont acceptables,
+ * c'est-à-dire qu'elles ont été proposées lors de la conception de la saisie.
+ * Typiquement pour une saisie radio, vérifier que les gens n'ont pas postée une autre fleur.
+ * @param $saisies array tableau général des saisies, déjà aplati, classé par nom de champ
+ * @param $erreurs array tableau des erreurs
+ * @return array table des erreurs modifiés
+**/
+function saisies_verifier_valeurs_acceptables($saisies, $erreurs) {
+	foreach ($saisies as $saisie => $description) {
+		$type = $description['saisie'];
+
+		// Pas la peine de vérifier si par ailleurs il y a déjà une erreur
+		if (isset($erreurs[$saisie])) {
+			continue;
+		}
+		//Il n'y a rien à vérifier sur une description / fieldset
+		if (in_array($description['saisie'], array('explication','fieldset'))) {
+			continue;
+		}
+		if (include_spip("saisies/$type")) {
+			$f = $type.'_valeurs_acceptables';
+			if (function_exists($f)) {
+				$valeur = saisies_request($saisie);
+				if (!$f($valeur, $description)) {
+					$erreurs[$saisie] = _T("saisies:erreur_valeur_inacceptable");
+					spip_log("Tentative de poste de valeur innaceptable pour $saisie de type $type. Valeur postée : ".print_r(_request($saisie), true), "saisies"._LOG_AVERTISSEMENT);
+				}
+			} else {
+				spip_log("Pas de fonction de vérification pour la saisie $saisie de type $type", "saisies"._LOG_AVERTISSEMENT);
+			}
+		} else {
+			spip_log("Pas de fonction de vérification pour la saisie $saisie de type $type", "saisies"._LOG_AVERTISSEMENT);
+		}
+	}
+	return $erreurs;
+}
+
+/**
+ * Trouve le résultat d'une saisie (_request())
+ * en tenant compte du fait que la saisie peut être décrit sous forme de sous entrées d'un tableau
+ * @param string $champ nom du champ de la saisie, y compris avec crochets pour sous entrées
+ * return string|array résultat du _request()
+**/
+function saisies_request($champ) {
+	if (preg_match('/([\w]+)((\[[\w]+\])+)/', $champ, $separe)) {
+		$valeur = _request($separe[1]);
+		preg_match_all('/\[([\w]+)\]/', $separe[2], $index);
+		// On va chercher au fond du tableau
+		foreach ($index[1] as $cle) {
+			$valeur = isset($valeur[$cle]) ? $valeur[$cle] : null;
+		}
+	} else {
+		// Sinon la valeur est juste celle du champ
+		$valeur = _request($champ);
+	}
+	return $valeur;
+}
+/**
+ * Trouve le champ datas ou datas (pour raison historique)
+ * parmis les paramètres d'une saisie
+ * et le retourne après avoir l'avoir transformé en tableau si besoin
+ * @param array $description description de la saisie
+ * @bool $disable_choix : si true, supprime les valeurs contenu dans l'option disable_choix des data
+ * @return array data
+**/
+function saisies_trouver_data($description, $disable_choix = false) {
+	$options = $description['options'];
+	if (isset($options['data'])) {
+		$data = $options['data'];
+	} elseif (isset($options['datas'])) {
+		$data = $options['datas'];
+	} else {
+		$data = array();//normalement on peut pas mais bon
+	}
+	$data = saisies_chaine2tableau($data);
+
+	if ($disable_choix == true and isset($options['disable_choix'])) {
+		$disable_choix = array_flip(explode(',',$options['disable_choix']));
+		$data = array_diff_key($data,$disable_choix);
+	}
+	return $data;
 }
 
 /**

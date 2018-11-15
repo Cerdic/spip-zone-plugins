@@ -453,3 +453,30 @@ function saisies_autonomes() {
 
 	return $saisies_autonomes;
 }
+
+/**
+ * Indique si une saisie à sa valeur gelée
+ * - soit par option disabled avec envoi cachée
+ * - soit par option readonly
+ * @param array $description description de la saisie
+ * @return bool true si gélée, false sinon)
+**/
+function saisies_verifier_gel_saisie($description) {
+	$options = $description['options'];
+	//As t-on bloqué d'une manière ou d'une autre la valeur postée?
+	if ((
+		isset($options['readonly'])
+		and $options['readonly']
+	)
+	or (
+		isset($options['disable'])
+		and isset($options['disable_avec_post'])
+		and $options['disable']
+		and $options['disable_avec_post']
+	)
+	) {
+		return true;
+	} else {
+		return false;
+	}
+}
