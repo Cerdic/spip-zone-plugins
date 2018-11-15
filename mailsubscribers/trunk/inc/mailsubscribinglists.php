@@ -30,7 +30,8 @@ function mailsubscribers_start_update_mailsubscribinglist_segment($id_mailsubscr
 /**
  * Mettre a jour tous les segments de toutes les listes d'un subscriber
  * @param $id_mailsubscriber
- * @param bool $force
+ * @param bool|array $force
+ *   true ou liste de $id_mailsubscribinglist sur lesquels on veut forcer la mise a jour
  */
 function mailsubscribers_actualise_segments($id_mailsubscriber, $force = false){
 
@@ -39,7 +40,8 @@ function mailsubscribers_actualise_segments($id_mailsubscriber, $force = false){
 	// supprimer les segments morts sur d'autres id_mailsubscribinglist
 	sql_delete('spip_mailsubscriptions', 'id_mailsubscriber='.intval($id_mailsubscriber).' AND id_segment>0 AND '.sql_in('id_mailsubscribinglist',$ids,'NOT'));
 	foreach ($ids as $id_mailsubscribinglist){
-		mailsubscribers_actualise_mailsubscribinglist_segments($id_mailsubscriber, $id_mailsubscribinglist, $force);
+		$force_this = (is_array($force) ? in_array($id_mailsubscribinglist, $force) : $force);
+		mailsubscribers_actualise_mailsubscribinglist_segments($id_mailsubscriber, $id_mailsubscribinglist, $force_this);
 	}
 	
 }

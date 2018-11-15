@@ -124,7 +124,11 @@ function newsletter_unsubscribe_dist($email, $options = array()) {
 
 			// actualiser les segments en auto_update
 			include_spip('inc/mailsubscribinglists');
-			mailsubscribers_actualise_segments($row['id_mailsubscriber']);
+			$unsubscribed_lists = array();
+			if ($notify) {
+				$unsubscribed_lists = array_column($notify, 'id_mailsubscribinglist');
+			}
+			mailsubscribers_actualise_segments($row['id_mailsubscriber'], $unsubscribed_lists);
 		}
 
 		if ($notify and (!isset($options['notify']) or $options['notify'])){
