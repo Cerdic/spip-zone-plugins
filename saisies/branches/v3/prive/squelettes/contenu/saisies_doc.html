@@ -1,0 +1,34 @@
+<h1 class="grostitre"><:saisies:titre_page_saisies_doc:></h1>
+<div class="nettoyeur"></div>
+
+<B_saisies>
+	<BOUCLE_saisies (DATA) {source table, #VAL{saisies}|saisies_lister_disponibles} {si #VAL{_DIR_PLUGIN_YAML}|defined}>
+		[(#BOITE_OUVRIR)]
+			<h3 id="[saisie_(#CLE)]">[(#ICONE|balise_img) ][(#TITRE)] [((#CLE))]</h3>
+			<p>[(#DESCRIPTION)]</p>
+			<BOUCLE_options (DATA) {source table, #OPTIONS}>
+				<div class="info">
+					<h4>[(#VALEUR{options/label}|saisies_label)]</h4>
+					<B_saisies_options>
+						<ul class="spip">
+							<BOUCLE_saisies_options (DATA) {source table, #SAISIES}>
+								<li><strong>[(#VALEUR{options/label}|sinon{#VALEUR{options/label_case}}|saisies_label)] [((#VALEUR{options/nom}))]</strong>[(#VALEUR{options/label}|oui|et{#VALEUR{options/label_case}|oui})[(#VALEUR{options/label_case}|saisies_label)]]
+									[(#VALEUR{options/explication}|oui)<br/>[(#VALEUR{options/explication}|saisies_label)]]
+									[(#VALEUR{options/defaut}|oui)<br/>[Par défaut : (#VALEUR{options/defaut}|saisies_label)]]
+									<B_saisies_datas>
+										<br/>Choix possibles :
+										<ul class="spip"><BOUCLE_saisies_datas (DATA) {source table, #VALEUR{options/datas}}>
+											<li class="item data_[(#CLE)]">[(#VALEUR|saisies_label)][ ((#CLE))]</li>
+									</BOUCLE_saisies_datas></ul>
+									</B_saisies_datas>
+								</li>
+							</BOUCLE_saisies_options>
+						</ul>
+					</B_saisies_options>
+				</div>
+			</BOUCLE_options>
+		[(#BOITE_FERMER)]
+	</BOUCLE_saisies>
+</B_saisies>
+<:saisies:plugin_yaml_inactif:>
+<//B_saisies>
