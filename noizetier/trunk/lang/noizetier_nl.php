@@ -63,7 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_dupliquer_composition_reference' => 'De identificatie van de gedupliceerde bladzijde is <i>@composition@</i>.
 	Je kunt een nieuwe identificatie kozen, of de bestaande van een suffix voorzien: <i>@composition@<strong>_suffix</strong></i>',
 	'explication_dupliquer_composition_suffixer' => '.',
-	'explication_glisser_deposer' => 'De types nootjes die aan de blokken van deze pagina kunnen worden toegevoegd staan hieronder.',
+	'explication_glisser_deposer' => 'De types nootjes die aan de blokken van deze pagina kunnen worden toegevoegd staan hieronder.', # MODIF
 	'explication_heritages_composition' => 'De momenteel bewerkte compositie is gebaseerd op het inhoudstype « @type@ » dat onderliggende types heeft. Je kunt voor ieder onderliggend type een standaard toe te passen compositie aangeven.',
 	'explication_noisette' => 'Nootje van type « @noisette@ »',
 	'explication_noisette_css' => 'Je kunt een alles omhullend baken opnemen voor aanvullende  CSS classes.',
