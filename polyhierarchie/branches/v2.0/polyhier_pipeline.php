@@ -36,8 +36,7 @@ function polyhier_affiche_hierarchie($flux){
 			}
 			$out[] = implode("&gt;", $c);
 		}
-		if (count($out)){
-			$autre = count($out);
+		if ($autre = count($out)){
 			$out = implode(', ',$out);
 			$out = ($autre > 1) ? _T('polyhier:label_autres_parents')." ".$out : _T('polyhier:label_autre_parent')." ".$out;
 			$out = PtoBR(propre($out));
