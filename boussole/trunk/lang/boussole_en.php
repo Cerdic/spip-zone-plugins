@@ -37,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'colonne_version' => 'Version',
 
 	// D
+	'defaut_titre_actualite' => 'News of the sites',
 	'description_noisette_boussole' => 'Standard compass display. You can choose the displayed model (text links, logos...) and its configuration',
 	'description_noisette_boussole_actualite' => 'Display syndicated website articles of a compass depending on the display model <code>boussole_liste_actualite</code>.',
 	'description_noisette_boussole_contenu_z' => 'Display all informations of a compass as a main Z page content and depending on the compass display <code>boussole_contenu_z</code>.',
@@ -60,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_liste_aucun_hebergement' => 'No compasses are being hosted yet. Use the form below to declare a compass manually or activate a compass plugin on that site.',
 	'info_liste_aucun_serveur' => 'No server has been configured to the customer site.',
 	'info_liste_aucune_boussole' => 'No compass have been loaded from your database. Please, use the following form to add one.',
-	'info_nom_serveur' => 'Specify the name that you want to assign to your compass server. The name «spip» is reserved and cannot be used.', # MODIF
+	'info_nom_serveur' => 'Specify the name that you want to assign to your compass server. The name «spip» is reserved to the URL servor "https://boussole.spip.net" and therefore cannot be used.',
 	'info_rubrique_parent' => 'You should define a parent section for compass sites to be created.',
 	'info_site_boussole' => 'This website belongs to the compass:',
 	'info_site_boussoles' => 'This website belongs to the compasses:',
@@ -104,7 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_taille_logo' => 'Maximum size of the logo (in pixels)',
 	'label_taille_logo_boussole' => 'Maximum size of the compass logo (in pixels)',
 	'label_taille_titre' => 'Maximum size of the compass title',
-	'label_titre_actualite' => 'Display the title of the news block?', # MODIF
+	'label_titre_actualite' => 'Enter the title of the news block',
 	'label_titre_boussole' => 'Display the title of the compass?',
 	'label_titre_groupe' => 'Display the title of each group?',
 	'label_titre_site' => 'Display the title of each website?',
@@ -118,6 +119,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_nok_0_site_importe' => 'No sites have been imported from the compass @boussole@.',
 	'message_nok_alias_boussole_manquant' => 'The alias of the compass has not been delivered to server « @serveur@ ».',
+	'message_nok_aucune_boussole_a_ajouter' => 'No compass is available on the configured servers.',
 	'message_nok_aucune_boussole_hebergee' => 'No compass is hosted yet on the server "@serveur@".',
 	'message_nok_boussole_inconnue' => 'Compass named "@alias@ is unknown"',
 	'message_nok_boussole_non_hebergee' => 'Compass named "@alias@" is not hosted on server "@serveur@".',
@@ -149,6 +151,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_nom_slogan_site' => 'Name and slogan of the website',
 	'option_slogan_site' => 'Website slogan',
 
+	// P
+	'page_titre_boussole' => 'Compass Page',
+
 	// T
 	'titre_boite_autres_boussoles' => 'Other compasses',
 	'titre_boite_infos_boussole' => 'ALIAS COMPASS',
@@ -161,6 +166,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_liste_boussoles' => 'List of compasses available for display',
 	'titre_liste_caches' => 'List of file caches for hosted compasses',
 	'titre_liste_serveurs' => 'List of servers accessible from the site',
+	'titre_noisette_boussole' => 'Standard display of a compass',
+	'titre_noisette_boussole_actualite' => 'Syndicated articles of a compass',
+	'titre_noisette_boussole_contenu_z' => 'Full display of a compass',
+	'titre_noisette_boussole_fil_ariane' => 'Breadcrumb of a compass',
 	'titre_page_boussole' => 'Compass management',
 	'titre_page_configurer' => 'Configuration of the Compass plugin',
 	'titre_page_importer_boussole' => 'Import of a compass'
