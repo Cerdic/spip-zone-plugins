@@ -10,7 +10,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Afficher le chemin, avec liens indirects
- * 
+ *
  * @param array $flux
  * @return array
  */
@@ -37,8 +37,9 @@ function polyhier_affiche_hierarchie($flux){
 			$out[] = implode("&gt;", $c);
 		}
 		if (count($out)){
+			$autre = count($out);
 			$out = implode(', ',$out);
-			$out = (count($out) > 1) ? _T('polyhier:label_autres_parents')." ".$out : _T('polyhier:label_autre_parent')." ".$out;
+			$out = ($autre > 1) ? _T('polyhier:label_autres_parents')." ".$out : _T('polyhier:label_autre_parent')." ".$out;
 			$out = PtoBR(propre($out));
 			$flux['data'] .= "<div id='chemins_transverses'>$out</div>";
 		}
@@ -64,9 +65,9 @@ function polyhier_affiche_enfants($flux) {
 /**
  * Pipeline pour charger les parents transverses dans le formulaire
  * d'edition article et rubrique
- * 
+ *
  * @param array $flux
- * @return array 
+ * @return array
  */
 function polyhier_formulaire_charger($flux){
 	$form = $flux['args']['form'];
@@ -97,9 +98,9 @@ function polyhier_formulaire_charger($flux){
 /**
  * Pipeline pour verifier les parents transverses dans le formulaire
  * d'edition article et rubrique
- * 
+ *
  * @param array $flux
- * @return array 
+ * @return array
  */
 function polyhier_formulaire_verifier($flux){
 	$form = $flux['args']['form'];
@@ -256,8 +257,8 @@ function polyhier_objet_compte_enfants($flux) {
 function polyhier_calculer_rubriques($flux) {
 
 	// d'abord les articles indirects
-	$r = sql_select("rub.id_rubrique AS id, max(fille.date) AS date_h", 
-					"spip_rubriques AS rub 
+	$r = sql_select("rub.id_rubrique AS id, max(fille.date) AS date_h",
+					"spip_rubriques AS rub
 						JOIN spip_rubriques_liens as RL ON rub.id_rubrique = RL.id_parent
 						JOIN spip_articles as fille ON (RL.objet='article' AND RL.id_objet=fille.id_article)",
 					"fille.statut='publie' AND rub.date_tmp <= fille.date",

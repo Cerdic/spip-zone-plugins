@@ -1,13 +1,13 @@
 <paquet
 	prefix="polyhier"
 	categorie="navigation"
-	version="2.3.10"
+	version="2.3.11"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/polyhier-32.png"
 	schema="0.2.0"
 	documentation="https://contrib.spip.net/Polyhierarchie"
->	
+>
 
 	<nom>PolyHi&#233;rarchie</nom>
 	<!-- Rattacher un article ou une rubrique à plusieurs rubriques parentes -->
