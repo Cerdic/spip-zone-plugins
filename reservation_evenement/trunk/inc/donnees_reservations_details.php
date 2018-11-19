@@ -44,12 +44,14 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 		if (intval($evenement['places']))
 			$set['places'] = $evenement['places'];
 
-		$set['quantite'] = _request('quantite') ? _request('quantite') : 1;
-		if (is_array($set['quantite'])) {
-			if (!$plugin_declinaisons) {
-				if (isset($set['quantite'][$id_evenement])) {
-					$set['quantite'] = ($set['quantite'][$id_evenement] > 0) ?
-					$set['quantite'][$id_evenement] : 1;
+		if (!isset($set['quantite'])) {
+			$set['quantite'] = _request('quantite') ? _request('quantite') : 1;
+			if (is_array($set['quantite'])) {
+				if (!$plugin_declinaisons) {
+					if (isset($set['quantite'][$id_evenement])) {
+						$set['quantite'] = ($set['quantite'][$id_evenement] > 0) ?
+						$set['quantite'][$id_evenement] : 1;
+					}
 				}
 			}
 		}
