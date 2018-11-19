@@ -151,6 +151,15 @@ function reservation_evenement_upgrade($nom_meta_base_version, $version_cible) {
 		)
 	);
 
+	$maj['1.29.6']  = array(
+		array (
+			'maj_tables',
+			array (
+				'spip_reservations_details',
+			)
+		)
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
