@@ -5,7 +5,7 @@ parametres:
   -
     saisie: 'selections_editoriales'
     options:
-      nom: 'identifiant'
+      nom: 'id_selection'
       label: 'Identifiant'
       cacher_option_intro: 'oui'
   -
