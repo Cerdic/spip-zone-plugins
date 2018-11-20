@@ -166,7 +166,7 @@ function cachelab_duree_progapprox($date_creation) {
 	if (!$dt_creation)
 		return _DUREE_CACHE_DEFAUT;
 
-	$interval = $dt_creation->diff('NOW',true); // valeur absolue
+	$interval = $dt_creation->diff(new DateTime('NOW'),true); // valeur absolue
 	if (!$interval)
 		return _DUREE_CACHE_DEFAUT;
 	if ($interval->y > 2)
