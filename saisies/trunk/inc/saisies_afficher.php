@@ -529,6 +529,14 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 			preg_match_all('/(_request\([\'"].*?[\'"]\)|\$env\[[\'"].*?[\'"]\]\[[\'"].*?[\'"]\])\s*(!=|==|IN|!IN)\s*[\'"](.*?)[\'"]/', $condition, $matches);
 			foreach ($matches[1] as $key => $val) {
 				eval('$requete = '.$val.';');
+				//Pour eviter une fatale erreur si on évalue une chose qui devrait normalement être un tableau mais qui n'a pas été envoyé (type checkbox), si la chose en question est null, la transformer en tableau vide. Pareil c'est pas terrible.
+				if (is_null($requete)) {
+					$requete = array();
+					$set_tableau = "set$val";
+					$set_tableau = str_replace(")",",array())",$set_tableau);
+					var_dump($set_tableau);
+					eval("$set_tableau;");
+				}
 				if (is_array($requete)) {
 					$not = '>';
 					if (in_array($matches[2][$key], array('!=', '!IN'))) {
