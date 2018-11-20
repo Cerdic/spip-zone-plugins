@@ -534,7 +534,6 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 					$requete = array();
 					$set_tableau = "set$val";
 					$set_tableau = str_replace(")",",array())",$set_tableau);
-					var_dump($set_tableau);
 					eval("$set_tableau;");
 				}
 				if (is_array($requete)) {
