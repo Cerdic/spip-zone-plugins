@@ -10,6 +10,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
-	'skeleditor_description' => 'Edit template files in the backoffice',
+	'skeleditor_description' => 'Edit template files in the back office',
 	'skeleditor_slogan' => 'Template editor'
 );

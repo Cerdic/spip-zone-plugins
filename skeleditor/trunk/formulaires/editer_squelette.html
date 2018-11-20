@@ -18,7 +18,7 @@
 	[(#GET{masque}|oui)
 	<div class="rename">
 	[<span class="filepath">(#ENV{fichier}|substr{#EVAL{_DIR_RACINE}|strlen})</span>]
-	<a href="#" onclick="jQuery(this).hide('fast').parent().siblings('form').find('.renommer').show('fast');return false;">Renommer</a>
+	<a href="#" onclick="jQuery(this).hide('fast').parent().siblings('form').find('.renommer').show('fast');return false;"><:skeleditor:label_renommer_fichier:></a>
 	[<div>(#ENV*{_info_copie})</div>]
 	</div>
 	]

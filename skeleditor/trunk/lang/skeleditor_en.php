@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_upload' => 'Send a file',
 
 	// C
-	'copy_comment' => '  Copy of @date@ par @nom@
+	'copy_comment' => '  Copied @date@ by @nom@
   original file @source@',
 	'creer' => 'Create',
 
@@ -25,23 +25,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_skel_debug' => 'Edit the template (debug mode)',
 	'effacer_confirme' => 'Do you really want to delete this file ?',
 	'erreur_creation_sous_dossier' => 'Impossible to create the sub-directory @dir@',
-	'erreur_droits' => 'error: can not create the file. please check the template direction rights',
-	'erreur_ecrire_dans_sous_dossier' => 'Impossible to write in the sub-directory @dir@',
-	'erreur_ecriture_fichier' => 'error: can write the file',
-	'erreur_edition_ecriture' => 'error: not writable file',
+	'erreur_droits' => 'error: can't create the file. Please check the template directory\'s rights',
+	'erreur_ecrire_dans_sous_dossier' => 'Can't write in @dir@ sub-directory',
+	'erreur_ecriture_fichier' => 'error: can write to the file',
+	'erreur_edition_ecriture' => 'error: file is read-only',
 	'erreur_fichier_inexistant' => 'This file doesn’t exist',
-	'erreur_fichier_modif_coucourante' => 'This file was modified while you changed it. Here is the new version:',
+	'erreur_fichier_modif_coucourante' => 'This file was modified while you were editing it. Here is the new version:',
 	'erreur_fichier_modif_coucourante_votre_version' => 'Merge it with your version and save it:',
 	'erreur_fichier_supprime' => 'This file was deleted while being edited. Please copy the content and create a new file if needed.
 ',
-	'erreur_ouvert_ecrit' => 'error: can not open or edit this file',
-	'erreur_ouverture_fichier' => 'error: can not open the file',
+	'erreur_ouvert_ecrit' => 'error: can't open or edit this file',
+	'erreur_ouverture_fichier' => 'error: can't open the file',
 	'erreur_overwrite' => 'error: this file already exists',
 	'erreur_parsing' => 'Fatal error while parsing the BOUCLES',
 	'erreur_sansgene' => 'Error: unauthorized action',
-	'erreur_type_interdit' => 'It is not allowed to use this king of file.',
-	'explications_creer_dossier_squelettes' => 'In order to use the Skeleton Editor, create a directory <b>squelettes/</b> at the root of your site, if it didn’t exist, then allow this dorectory the the writing rights.',
-	'explications_filename_fichier_chemin' => 'You can write the full path in order to set up the file in a sub-directory (eg: "modeles/document.html")',
+	'erreur_type_interdit' => 'It is not allowed to use such file.',
+	'explications_creer_dossier_squelettes' => 'To use the Skeleton Editor, create a directory <b>squelettes/</b> in the root directory of your website, if it didn’t exist, then grant this dorectory write access.',
+	'explications_filename_fichier_chemin' => 'You can write the full path in order to place the file in a given sub-directory (eg: "modeles/document.html")',
 
 	// F
 	'fichier' => 'file',
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fichier_upload_ok' => 'File uploaded successfully !',
 
 	// I
-	'info_copie' => 'This file will be copied in the directory <em>@dir@</em> when saved',
+	'info_copie' => 'This file will be copied in <em>@dir@</em> directory when saved',
 
 	// L
 	'label_code' => 'Spip code:',
@@ -61,8 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_file' => 'File',
 	'label_filename_squelette' => 'Name',
 	'label_nouveau_fichier' => 'New file',
-	'label_renommer_fichier' => 'Re-name or deplace
-',
+	'label_renommer_fichier' => 'Rename or move',
 
 	// P
 	'parseur_altern' => 'Alternate',
