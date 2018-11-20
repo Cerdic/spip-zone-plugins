@@ -45,7 +45,9 @@ function newsletter_subscriber_dist($email, $options = array()) {
 		if (isset($options['listes'])
 			and is_array($options['listes'])
 			and count($options['listes'])==1
-		  and $id = reset($options['listes'])
+		  and $id_et_segment = reset($options['listes'])
+			and $id_et_segment = explode('+', $id_et_segment)
+			and $id = reset($id_et_segment)
 			and $id = mailsubscribers_normaliser_nom_liste($id)
 		  and isset($infos['subscriptions'][$id]['url_unsubscribe'])){
 			$infos['url_unsubscribe'] = $infos['subscriptions'][$id]['url_unsubscribe'];
