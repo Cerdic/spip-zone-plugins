@@ -24,25 +24,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_skel' => 'Edit the template',
 	'editer_skel_debug' => 'Edit the template (debug mode)',
 	'effacer_confirme' => 'Do you really want to delete this file ?',
-	'erreur_creation_sous_dossier' => 'Can\'t create @dir@
-sub-directory',
-	'erreur_droits' => 'error: can\'t create the file. Please check the template directory\'s rights',
-	'erreur_ecrire_dans_sous_dossier' => 'Can\'t write in @dir@
-sub-directory',
-	'erreur_ecriture_fichier' => 'error: can write to the file',
-	'erreur_edition_ecriture' => 'error: file is read-only',
-	'erreur_fichier_inexistant' => 'This file doesn\’t exist',
-	'erreur_fichier_modif_coucourante' => 'This file was modified while you were editing it. Here is the new version:',
+	'erreur_creation_sous_dossier' => 'Can’t create @dir@ sub-directory',
+	'erreur_droits' => 'error: can’t create the file. Please check the template directory’s rights',
+	'erreur_ecrire_dans_sous_dossier' => 'Can’t write in @dir@ sub-directory',
+	'erreur_ecriture_fichier' => 'error: can write the file',
+	'erreur_edition_ecriture' => 'error: not writable file',
+	'erreur_fichier_inexistant' => 'This file doesn’t exist',
+	'erreur_fichier_modif_coucourante' => 'This file was modified while you changed it. Here is the new version:',
 	'erreur_fichier_modif_coucourante_votre_version' => 'Merge it with your version and save it:',
-	'erreur_fichier_supprime' => 'This file was deleted while being edited. Please copy the content and create a new file if needed.',
-	'erreur_ouvert_ecrit' => 'error: can\'t open or edit this file',
-	'erreur_ouverture_fichier' => 'error: can\'t open the file',
+	'erreur_fichier_supprime' => 'This file was deleted while being edited. Please copy the content and create a new file if needed.
+',
+	'erreur_ouvert_ecrit' => 'error: can’t open or edit this file',
+	'erreur_ouverture_fichier' => 'error: can’t open the file',
 	'erreur_overwrite' => 'error: this file already exists',
 	'erreur_parsing' => 'Fatal error while parsing the BOUCLES',
 	'erreur_sansgene' => 'Error: unauthorized action',
-	'erreur_type_interdit' => 'It is not allowed to use such file.',
-	'explications_creer_dossier_squelettes' => 'To use the Skeleton Editor, create a directory <b>squelettes/</b> in the root directory of your website, if it didn\’t exist, then grant this directory write access.',
-	'explications_filename_fichier_chemin' => 'You can write the full path in order to place the file in a given sub-directory (eg: "modeles/document.html")',
+	'erreur_type_interdit' => 'It is not allowed to use this king of file.',
+	'explications_creer_dossier_squelettes' => 'To use the template editor, create a  <b>squelettes/</b> folder, if there isn’t already one, in your website’s root directory, then grant write access permissions to that folder.',
+	'explications_filename_fichier_chemin' => 'You can fill in a full path to set the file up in a sub-directory (eg: "modeles/document.html")',
 
 	// F
 	'fichier' => 'file',
@@ -54,7 +53,7 @@ sub-directory',
 	'fichier_upload_ok' => 'File uploaded successfully !',
 
 	// I
-	'info_copie' => 'This file will be copied in <em>@dir@</em> directory when saved',
+	'info_copie' => 'This file will be copied in the <em>@dir@</em> directory when saved',
 
 	// L
 	'label_code' => 'Spip code:',
@@ -62,7 +61,8 @@ sub-directory',
 	'label_file' => 'File',
 	'label_filename_squelette' => 'Name',
 	'label_nouveau_fichier' => 'New file',
-	'label_renommer_fichier' => 'Rename or move',
+	'label_renommer_fichier' => 'Rename or move
+',
 
 	// P
 	'parseur_altern' => 'Alternate',
@@ -83,9 +83,9 @@ sub-directory',
 
 	// S
 	'sauver' => 'Save',
-	'skeleditor_description' => 'Allows to edit the files of the current template',
+	'skeleditor_description' => 'Lets you edit current template files',
 	'skeleditor_dossier' => 'template directory: ',
-	'squelettes' => 'Squelettes',
+	'squelettes' => 'Templates&CSS',
 
 	// T
 	'target' => 'target',
