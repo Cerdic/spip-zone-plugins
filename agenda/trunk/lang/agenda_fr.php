@@ -47,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_adresse' => 'Adresse',
 	'evenement_article' => 'Associé à l’article',
 	'evenement_autres_occurences' => 'Autres occurences :',
+	'evenement_complet' => 'Désolé, les inscriptions pour cet événement sont closes.',
 	'evenement_date' => 'Date',
 	'evenement_date_a' => 'à ',
 	'evenement_date_a_immediat' => 'à ',
