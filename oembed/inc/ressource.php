@@ -8,6 +8,17 @@
 
 define('_EXTRAIRE_RESSOURCES', ',' . '<"?(https?://|[\w][\w -]*\.[\w -]+).*>'.',UimsS');
 
+
+/* pipeline pour typo, evitons une erreur dans les logs */
+function tw_post_typo($t) {
+	return $t;
+}
+
+/* pipeline pour propre, evitons une erreur dans les logs */
+function tw_pre_liens($t) {
+	return $t;
+}
+
 function traiter_ressources($r) {
 	if ($ressource = charger_fonction('ressource', 'inc', true)) {
 		$html = $ressource($r[0]);
