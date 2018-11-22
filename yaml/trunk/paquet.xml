@@ -1,7 +1,7 @@
 <paquet
 	prefix="yaml"
 	categorie="outil"
-	version="2.0.9"
+	version="2.0.10"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="yaml.png"

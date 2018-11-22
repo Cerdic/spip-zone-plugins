@@ -135,7 +135,7 @@ class sfYamlInline
     if (
       (1 == count($keys) && '0' == $keys[0])
       ||
-      (count($keys) > 1 && array_reduce($keys, create_function('$v,$w', 'return (integer) $v + (integer) $w;'), 0) == count($keys) * (count($keys) - 1) / 2))
+        (count($keys) > 1 && array_reduce($keys, function($v,$w) { return (integer) $v + (integer) $w;}, 0) == count($keys) * (count($keys) - 1) / 2))
     {
       $output = array();
       foreach ($value as $val)
@@ -226,7 +226,7 @@ class sfYamlInline
       // evaluate the string
       $output = str_replace(array('\\"', '\\n', '\\r'), array('"', "\n", "\r"), $output);
 	  if (strpos($output,'\\x')!==false){
-		$output = preg_replace_callback(',\\\\x([0-9a-f]+),', create_function('$m', 'return chr(hexdec($m[1]));'), $output);
+	      $output = preg_replace_callback(',\\\\x([0-9a-f]+),', function($m) {return chr(hexdec($m[1]));}, $output);
 	  }
     }
     else
