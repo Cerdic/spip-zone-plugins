@@ -87,6 +87,8 @@ function split_f_arg($f, $arg='') {
 	return array ($f, $arg);
 }
 
+//
+// Surcharge de maj_invalideurs
 // le core indique : "Calcul des pages : noter dans la base les liens d'invalidation"
 //
 // Appelé à la fin de creer_cache
@@ -95,10 +97,17 @@ function split_f_arg($f, $arg='') {
 // squelette,source,process_ins,invalideurs,entetes,duree,texte,notes,contexte,lastmodified,sig
 // http://code.spip.net/@maj_invalideurs
 //
-// S'il y a une entete X-Spip-Methode-Duree-Cache, on récupère la méthode
-// et on appelle la fonction cachelab_calcule_duree_cache_lamethode avec le paramètre $page
-// On corrige alors la durée du cache avec la valeur retournée
+// S'il y a une entete X-Spip-Methode-Duree-Cache on récupère la méthode
+// et on appelle la fonction cachelab_calcule_duree_cache_lamethode 
+// avec en argument la valeur de l'argument dans l'envt ou de date_creation par défaut
+// On corrige alors la durée du cache avec la valeur retournée.
 //
+// S'il y a une entete X-Spip-Filtre-Cache on récupère le filtre
+// et on l'appelle avec le cache entier en argument
+// Le filtre peut modifier n'importe quelle partie du cache, métadonnée ou résultat de compilation.
+//
+
+define ('LOG_INVALIDATION_CORE', true);
 function maj_invalideurs($fichier, &$page) {
 global $Memoization;
 // Rq : ici, le texte du cache est non zipé (cf function creer_cache dans memoization), 
@@ -106,6 +115,7 @@ global $Memoization;
 	if  (LOG_INVALIDATION_CORE) {
 		// Abondamment appelé. À part pour pas noyer les autres
 		spip_log ("maj_invalideurs($fichier, &page)", "invalideur_core_maj_invalideurs");
+		spip_log ("maj_invalideurs($fichier, &page)\n".print_r($page,1), "invalideur_core_maj_invalideurs_details");
 	}
 
 	// Pour le calcul dynamique d'une durée de cache, la fonction user
