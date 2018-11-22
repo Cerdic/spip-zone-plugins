@@ -15,11 +15,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'editer_skel' => 'Modificar el esqueleto',
 	'effacer_confirme' => 'Desea eliminar éste archivo ?',
-	'erreur_droits' => 'error: no se puede crear el archivo. Por favor compruebe los derechos en el directorio',
-	'erreur_ecriture_fichier' => 'error: no se puede escribir el archivo',
-	'erreur_edition_ecriture' => 'error: archivo no modificable',
+	'erreur_droits' => 'error: no se puede crear el archivo. Por favor compruebe los derechos en el directorio', # MODIF
+	'erreur_ecriture_fichier' => 'error: no se puede escribir el archivo', # MODIF
+	'erreur_edition_ecriture' => 'error: archivo no modificable', # MODIF
 	'erreur_ouvert_ecrit' => 'error: no se puede abrir o modificar el archivo',
-	'erreur_ouverture_fichier' => 'error: no se puede abrir el archivo',
+	'erreur_ouverture_fichier' => 'error: no se puede abrir el archivo', # MODIF
 	'erreur_overwrite' => 'error: el archivo ya existe',
 	'erreur_sansgene' => 'Error: acci&oacite;n no autorizada',
 
@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'parseur_altern' => 'Alternativo',
-	'parseur_apres' => 'Despues',
+	'parseur_apres' => 'Despues', # MODIF
 	'parseur_avant' => 'Antes',
 	'parseur_contenu' => 'Contenido',
 	'parseur_horsboucle' => 'FUERA DE BUCLE',

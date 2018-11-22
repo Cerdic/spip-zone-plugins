@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_creation_sous_dossier' => 'Can’t create @dir@ sub-directory',
 	'erreur_droits' => 'error: can’t create the file. Please check the template directory’s rights',
 	'erreur_ecrire_dans_sous_dossier' => 'Can’t write in @dir@ sub-directory',
-	'erreur_ecriture_fichier' => 'error: can write the file',
+	'erreur_ecriture_fichier' => 'error: can’t write to file',
 	'erreur_edition_ecriture' => 'error: not writable file',
 	'erreur_fichier_inexistant' => 'This file doesn’t exist',
 	'erreur_fichier_modif_coucourante' => 'This file was modified while you changed it. Here is the new version:',
@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_overwrite' => 'error: this file already exists',
 	'erreur_parsing' => 'Fatal error while parsing the BOUCLES',
 	'erreur_sansgene' => 'Error: unauthorized action',
-	'erreur_type_interdit' => 'It is not allowed to use this king of file.',
+	'erreur_type_interdit' => 'It is not allowed to use this kind of file.',
 	'explications_creer_dossier_squelettes' => 'To use the template editor, create a  <b>squelettes/</b> folder, if there isn’t already one, in your website’s root directory, then grant write access permissions to that folder.',
 	'explications_filename_fichier_chemin' => 'You can fill in a full path to set the file up in a sub-directory (eg: "modeles/document.html")',
 
