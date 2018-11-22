@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Surcharge DE la balise `#CACHE` definissant la durée de validité du cache du squelette
+ * Surcharge de la balise `#CACHE` definissant la durée de validité du cache du squelette
  *
  * Signature : `#CACHE{duree[,type]}`
  *
@@ -199,7 +199,7 @@ function cachelab_filtre_log($cache, $arg) {
 // #CACHE{3600, filtre-assertsession non} s'assure que les emplois sont non-sessionnés
 // #CACHE{filtre-assertsession oui} s'assure que tous les emplois sont sessionnés
 // #CACHE{filtre-assertsession login} s'assure que tous les emplois sont sessionnés avec un internaute identifié
-// #CACHE{filtre-assertsession anonyme} s'assure que tous les emplois se font avec un internaute identifié
+// #CACHE{filtre-assertsession anonyme} s'assure que tous les emplois sans internaute identifié
 // Dans le cas où un assert n'est pas vérifié, un log est créé dans le fichier cachelab_assertsession
 //
 // Une dernière valeur de l'argument n'induit pas une assertion mais un log :
@@ -251,6 +251,4 @@ function cachelab_filtre_assertsession ($cache, $arg) {
 	}
 	if (!$ok)
 		spip_log ("$source : assertsession n'est pas $arg. invalideurs=".print_r($invalideurs,1), "cachelab_assertsession");
-	else
-		spip_log ("$source : assertsession est $arg. invalideurs=".print_r($invalideurs,1), "cachelab_assertsession_ok");
 }
