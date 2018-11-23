@@ -145,7 +145,7 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
 				set_request('envoi_separe_actif', 'non');
 
 				// Actualiser le détail de réservation
-				$detail = $action($id_reservations_detail, 'reservations_detail', $set);
+				$action($id_reservations_detail, 'reservations_detail', $set);
 			}
 		}
 	}
