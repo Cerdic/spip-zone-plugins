@@ -79,7 +79,7 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
 	$evenements = _request('id_evenement');
 
 	// Si les déclinaisons sont actives on récupère les évenements via le prix
-	if (test_plugin_actif('declinaisons')) {
+	if ($plugin_declinaison = test_plugin_actif('declinaisons')) {
 		$evenements = array();
 		$quantite = $_REQUEST['quantite'];
 
@@ -120,33 +120,59 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
 	}
 	//Si on est dans le cas d'une création
 	if (is_array($evenements)) {
+		// Si le plugin déclinaison est activé.
+		if ($plugin_declinaison) {
+			// Pour chaque événement on crée un détail de la réservation
+			foreach ($evenements AS $id_evenement => $evenement_details) {
+				foreach ($evenement_details as $evenement_detail) {
+					$where = 'id_reservation=' . $id_reservation . ' AND id_evenement=' . $id_evenement;
+					if (isset($evenement_detail['id_prix_objet'])) {
+						$where .= ' AND id_prix_objet = '.$evenement_detail['id_prix_objet'];
+					}
+					// Si aucun détail n'est attaché à l'événement, on le crée
+					if (!$reservations_detail = sql_fetsel('*', 'spip_reservations_details', $where)) {
+						$id_reservations_detail = 'new';
+						$set['id_prix_objet'] = $evenement_detail['id_prix_objet'];
+						$set['quantite'] = $evenement_detail['quantite'];
+					}
+					else {
+						$id_reservations_detail = $reservations_detail['id_reservations_detail'];
+						$set['quantite'] = $reservations_detail['quantite'];
+					}
+					// Pour l'enregistrement
+					$set['id_evenement'] = $id_evenement;
 
-		// Pour chaque événement on crée un détail de la réservation
-		foreach ($evenements AS $id_evenement => $evenement_details) {
-			foreach ($evenement_details as $evenement_detail) {
-				$where = 'id_reservation=' . $id_reservation . ' AND id_evenement=' . $id_evenement;
-				if (isset($evenement_detail['id_prix_objet'])) {
-					$where .= ' AND id_prix_objet = '.$evenement_detail['id_prix_objet'];
-				}
-				// Si aucun détail n'est attaché à l'événement, on le crée
-				if (!$reservations_detail = sql_fetsel('*', 'spip_reservations_details', $where)) {
-					$id_reservations_detail = 'new';
-					$set['id_prix_objet'] = $evenement_detail['id_prix_objet'];
-					$set['quantite'] = $evenement_detail['quantite'];
-				}
-				else {
-					$id_reservations_detail = $reservations_detail['id_reservations_detail'];
-					$set['quantite'] = $reservations_detail['quantite'];
-				}
-				// Pour l'enregistrement
-				$set['id_evenement'] = $id_evenement;
+					// Eviter l'envoi d'une notification pour chaque détail
+					set_request('envoi_separe_actif', 'non');
 
-				// Eviter l'envoi d'une notification pour chaque détail
-				set_request('envoi_separe_actif', 'non');
-
-				// Actualiser le détail de réservation
-				$action($id_reservations_detail, 'reservations_detail', $set);
+					// Actualiser le détail de réservation
+					$action($id_reservations_detail, 'reservations_detail', $set);
+				}
 			}
+		}
+	}
+	else {
+		// Pour chaque événement on crée un détail de la réservation
+		foreach ($evenements AS $id_evenement) {
+			// Si aucun détail n'est attaché à l'événement, on le crée
+			if (!$reservations_detail = sql_fetsel('*', 'spip_reservations_details',
+					'id_reservation=' . $id_reservation . ' AND id_evenement=' . $id_evenement)) {
+					$id_reservations_detail = 'new';
+					$set['id_prix_objet'] = $id_prix_objet[$id_evenement];
+			}
+			else {
+				$id_reservations_detail = $reservations_detail['id_reservations_detail'];
+				$set['quantite'] = $reservations_detail['quantite'];
+			}
+
+			// Pour l'enregistrement
+			$set['id_evenement'] = $id_evenement;
+
+			// Eviter l'envoi d'une notification pour chaque détail
+			set_request('envoi_separe_actif', 'non');
+
+			// Actualiser le détail de réservation
+			$action($id_reservations_detail, 'reservations_detail', $set);
 		}
 	}
 
@@ -156,7 +182,7 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
 		$statuts_details_reservation = _request('statuts_details_reservation');
 		$statut_modifie = array();
 
-		foreach ($statuts_details_reservation AS $id_detail_reservation => $data) {
+		foreach ($statuts_details_reservation AS $data) {
 			$statut_modifie[] = $data['statut_modifie'];
 		}
 		//Sinon lui attibuer le statut accepté partiellement.
