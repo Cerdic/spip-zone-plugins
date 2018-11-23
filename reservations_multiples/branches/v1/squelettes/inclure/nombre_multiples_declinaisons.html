@@ -1,12 +1,12 @@
 <div class="choix quantite">
-	<label for="quantite_#ID_PRIX_OBJET_SOURCE">
+	<label for="quantite_[(#ID_EVENEMENT)]_[(#ID_PRIX_OBJET_SOURCE)]">
 		<:reservations_detail:label_quantite:>
 	</label>
 	<input
-		id="quantite_#ID_PRIX_OBJET_SOURCE"
+		id="quantite_[(#ID_EVENEMENT)]_[(#ID_PRIX_OBJET_SOURCE)]"
 		type="text"
 		class="number"
-		name="quantite[#ID_PRIX_OBJET_SOURCE]"
+		name="quantite[#ID_EVENEMENT][#ID_PRIX_OBJET_SOURCE]"
 		value="[(#ENV{quantite}|table_valeur{#ID_PRIX_OBJET_SOURCE}|sinon{1})]"/>
 	<p class="explication"><:reservations_multiples:explication_quantite:></p>
 </div>
