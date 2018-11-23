@@ -146,6 +146,7 @@ function reservation_evenement_declarer_tables_objets_sql ($tables) {
 			"id_reservations_detail" => "bigint(21) NOT NULL",
 			"id_reservation" => "bigint(21) NOT NULL DEFAULT '0'",
 			"id_evenement" => "bigint(21) NOT NULL DEFAULT '0'",
+			"id_prix_objet" => "bigint(21) NOT NULL DEFAULT '0'",
 			"descriptif" => "text NOT NULL",
 			"quantite" => "int(11) NOT NULL DEFAULT '1'",
 			"prix_ht" => "decimal(15,2) NOT NULL DEFAULT '0.00'",

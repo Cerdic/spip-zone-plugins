@@ -3,8 +3,8 @@
 <B_decl>
 <div class="choix">
 	<BOUCLE_decl (PRIX_OBJETS){id_prix_objet_source}{par num titre,titre}{extension=declinaison}>
-	<input type="radio" name="id_objet_prix[#ENV{id_evenement}]"
-		class="radio evenement declinaison"
+	<input type="checkbox" name="id_objet_prix[#ENV{id_evenement}][\[(#ID_PRIX_OBJET_SOURCE)\]]"
+		class="checkbox evenement declinaison"
 		id="id_objet_prix[_(#ENV{id_evenement})][_(#ID_PRIX_OBJET_SOURCE)]"
 		value="#ID_PRIX_OBJET_SOURCE"
 		[(#ID_PRIX_OBJET_SOURCE|in_array{#ENV{id_objet_prix}}|oui) checked="checked" ]/>
@@ -15,8 +15,8 @@
 </div>
 </B_decl>
 <div class="choix">
-	<input type="radio" name="id_objet_prix[#ID_EVENEMENT]"
-		class="radio evenement declinaison"
+	<input type="checkbox" name="id_objet_prix[#ID_EVENEMENT][\[(#ID_PRIX_OBJET_SOURCE)\]]"
+		class="checkbox evenement declinaison"
 		id="id_objet_prix[_(#ID_EVENEMENT)][_(#ID_PRIX_OBJET_SOURCE)]"
 		value="#ID_PRIX_OBJET_SOURCE"
 		[(#ID_PRIX_OBJET_SOURCE|in_array{#ENV{id_objet_prix}}|oui) checked="checked" ]/>
