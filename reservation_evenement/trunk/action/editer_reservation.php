@@ -150,31 +150,32 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
 				}
 			}
 		}
-	}
-	else {
-		// Pour chaque événement on crée un détail de la réservation
-		foreach ($evenements AS $id_evenement) {
-			// Si aucun détail n'est attaché à l'événement, on le crée
-			if (!$reservations_detail = sql_fetsel('*', 'spip_reservations_details',
-					'id_reservation=' . $id_reservation . ' AND id_evenement=' . $id_evenement)) {
-					$id_reservations_detail = 'new';
-					$set['id_prix_objet'] = $id_prix_objet[$id_evenement];
+		else {
+			// Pour chaque événement on crée un détail de la réservation
+			foreach ($evenements AS $id_evenement) {
+				// Si aucun détail n'est attaché à l'événement, on le crée
+				if (!$reservations_detail = sql_fetsel('*', 'spip_reservations_details',
+						'id_reservation=' . $id_reservation . ' AND id_evenement=' . $id_evenement)) {
+						$id_reservations_detail = 'new';
+						$set['id_prix_objet'] = $id_prix_objet[$id_evenement];
+				}
+				else {
+					$id_reservations_detail = $reservations_detail['id_reservations_detail'];
+					$set['quantite'] = $reservations_detail['quantite'];
+				}
+
+				// Pour l'enregistrement
+				$set['id_evenement'] = $id_evenement;
+
+				// Eviter l'envoi d'une notification pour chaque détail
+				set_request('envoi_separe_actif', 'non');
+
+				// Actualiser le détail de réservation
+				$action($id_reservations_detail, 'reservations_detail', $set);
 			}
-			else {
-				$id_reservations_detail = $reservations_detail['id_reservations_detail'];
-				$set['quantite'] = $reservations_detail['quantite'];
-			}
-
-			// Pour l'enregistrement
-			$set['id_evenement'] = $id_evenement;
-
-			// Eviter l'envoi d'une notification pour chaque détail
-			set_request('envoi_separe_actif', 'non');
-
-			// Actualiser le détail de réservation
-			$action($id_reservations_detail, 'reservations_detail', $set);
 		}
 	}
+
 
 	//Etablir si tous les détails d'événement ont le statut de la réservation
 	if ($statut_calculer_auto == 'on' AND $c['statut'] == 'accepte') {

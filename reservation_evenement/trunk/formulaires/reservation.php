@@ -339,6 +339,7 @@ function formulaires_reservation_traiter_dist($id = '', $id_article = '', $retou
 	if ($retour) {
 		refuser_traiter_formulaire_ajax();
 	}
+
 	$enregistrer = charger_fonction('reservation_enregistrer', 'inc');
 	$id_auteur = _request('id_auteur');
 
