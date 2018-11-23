@@ -41,6 +41,9 @@ function balise_CACHE ($p) {
 	if ($p->param) {
 		$i = 0;
 
+		$descr = $p->descr;
+		$sourcefile = $descr['sourcefile'];
+
 		$t = trim($p->param[0][1][0]->texte);
 		if (preg_match(',^[0-9],', $t)) {
 			++$i;
@@ -72,7 +75,7 @@ function balise_CACHE ($p) {
 			if ($pa == 'cache-client'
 				and $duree > 0
 			) {
-				$code = ".'<'.'" . '?php header("Cache-Control: max-age='
+				$code .= ".'<'.'" . '?php header("Cache-Control: max-age='
 					. $duree
 					. '"); ?' . "'.'>'";
 				// il semble logique, si on cache-client, de ne pas invalider
@@ -91,16 +94,14 @@ function balise_CACHE ($p) {
 				$methode = substr($pa, 6);
 				$ajout = "'<'.'" . '?php header("X-Spip-Methode-Duree-Cache: '.$methode.'"); ?' . "'.'>'";
 				$code .= $concat.$ajout;
-				spip_log ("#CACHE avec méthode de calcul de la durée du cache : $methode", 'cachelab');
-				spip_log ("#CACHE avec méthode de calcul de la durée du cache : $methode  donne code=$code", 'cachelab_details');
+				spip_log ("#CACHE $sourcefile avec méthode de calcul de la durée du cache : $methode", 'cachelab');
 			}
 
 			if (strpos($pa, 'filtre-')===0) {
-				$methode = substr($pa, 7);
+				$methode = substr($pa, 7); 
 				$ajout = "'<'.'" . '?php header("X-Spip-Filtre-Cache: '.$methode.'"); ?' . "'.'>'";
-				$code .= $concat.$ajout;
-				spip_log ("#CACHE avec filtre sur le cache APC : $methode", 'cachelab');
-				spip_log ("#CACHE avec filtre sur le cache APC : $methode donne code=$code", 'cachelab_details');
+				$code .= $concat.$ajout; 
+				spip_log ("#CACHE $sourcefile avec filtre sur le cache complet : $methode", 'cachelab');
 			}
 		}
 	} else {

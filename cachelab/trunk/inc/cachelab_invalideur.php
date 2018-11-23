@@ -107,7 +107,7 @@ function split_f_arg($f, $arg='') {
 // Le filtre peut modifier n'importe quelle partie du cache, métadonnée ou résultat de compilation.
 //
 
-define ('LOG_INVALIDATION_CORE', true);
+// define ('LOG_INVALIDATION_CORE', true);
 function maj_invalideurs($fichier, &$page) {
 global $Memoization;
 // Rq : ici, le texte du cache est non zipé (cf function creer_cache dans memoization), 
