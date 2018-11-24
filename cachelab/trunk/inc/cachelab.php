@@ -49,9 +49,14 @@ static $len_prefix;
 	return true;
 }
 
+function cachelab_filtre($action, $conditions=array(), $options=array()) {
+	spip_log ("cachelab_filtre obsolète avec $action, ".print_r($conditions, 1), "OBSOLETE_cachelab");
+	return cachelab_cibler ($action, $conditions, $options);
+}
+
 // $chemin : liste de chaines à tester dans le chemin du squelette, séparées par |
 // 	OU une regexp (hors délimiteurs et modificateurs) si la méthode est 'regexp'
-function cachelab_filtre ($action, $conditions=array(), $options=array()) {
+function cachelab_cibler ($action, $conditions=array(), $options=array()) {
 global $Memoization;
 	if (!$Memoization or !in_array($Memoization->methode(), array('apc', 'apcu')))
 		die ("Il faut mémoization avec APC ou APCu");
@@ -67,7 +72,7 @@ global $Memoization;
 	$cle_objet = (isset($conditions['cle_objet']) ? $conditions['cle_objet'] : null);
 	$id_objet = (isset($conditions['id_objet']) ? $conditions['id_objet'] : null);
 	if ($cle_objet and !$id_objet) {
-		spip_log("cachelab_filtre : $cle_objet inconnu\n".print_r(debug_backtrace(),1), "cachelab_erreur");
+		spip_log("cachelab_cibler : $cle_objet inconnu\n".print_r(debug_backtrace(),1), "cachelab_erreur");
 		$cle_objet=null;
 	}
 
@@ -77,7 +82,7 @@ global $Memoization;
 	if (isset($conditions['contexte']) and $conditions['contexte'] and !isset($conditions['plus']))
 		$conditions['plus'] = 'contexte';
 	if ($plus = (isset($conditions['plus']) ? (string)$conditions['plus'] : '')) {
-		$plusfunc='cachelab_filtrecache_'.$plus;
+		$plusfunc='cachelab_ciblercache_'.$plus;
 		// Signature nécessaire : $plusfunc ($action, $conditions, $options, &$stats)
 		if (!function_exists($plusfunc)) {
 			spip_log ("La fonction '$plusfunc' n'est pas définie", 'cachelab_erreur');
@@ -225,7 +230,7 @@ global $Memoization;
 
 	if ($do_chrono) {
 		$stats['chrono'] = microtime_do ('end', 'ms');
-		spip_log ("cachelab_filtre ($action, session=$session, objet $cle_objet=$id_objet, chemin=$chemin) : {$stats['nb_cible']} caches ciblés (sur {$stats['nb_candidats']}) en {$stats['chrono']} ms", 'cachelab');
+		spip_log ("cachelab_cibler ($action, session=$session, objet $cle_objet=$id_objet, chemin=$chemin) : {$stats['nb_cible']} caches ciblés (sur {$stats['nb_candidats']}) en {$stats['chrono']} ms", 'cachelab');
 	}
 
 	return $stats;
@@ -255,7 +260,7 @@ static $prev_derniere_modif_invalide;
 // qui est un tableau de (clé, valeur)
 // Toutes les valeurs doivent être vérifiées dans l'environnement.
 // 
-function cachelab_filtrecache_contexte($action, $conditions, $options, $cle, &$data, &$stats) {
+function cachelab_ciblercache_contexte($action, $conditions, $options, $cle, &$data, &$stats) {
 	if (!isset ($data['contexte'])
 		or !isset($conditions['contexte'])
 		or !is_array($conditions['contexte']))

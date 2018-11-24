@@ -59,7 +59,7 @@ function suivre_invalideur($cond, $modif = true) {
 	if (is_array($GLOBALS['derniere_modif_invalide'])) {
 		if (in_array($objet, $GLOBALS['derniere_modif_invalide'])) {
 			include_spip ('inc/cachelab');
-			cachelab_filtre('del');
+			cachelab_cibler('del');
 			spip_log ("suivre_invalideur / objet invalidant : '$objet' ($cond)", "cachelab");
 			spip_log ("suivre_invalideur / objet invalidant : '$objet' ($cond)", "suivre_invalideur");
 			ecrire_meta('derniere_modif', time());
@@ -71,7 +71,7 @@ function suivre_invalideur($cond, $modif = true) {
 	else {
 		ecrire_meta('derniere_modif', time());
 		include_spip ('inc/cachelab');
-		cachelab_filtre('del');
+		cachelab_cibler('del');
 		spip_log ("suivre_invalideur standard / objet '$objet' ($cond)", "cachelab");
 		spip_log ("suivre_invalideur standard / objet '$objet' ($cond)", "suivre_invalideur");
 		// et tout effacer
