@@ -1,6 +1,7 @@
 <?php
 // fichier d'options SPIP principal du plugin xray
 // 		xray/xray_options.php
+//
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
@@ -23,3 +24,8 @@ else {
 	exit;
 };
 
+// détecter (?) les vidages de caches yc car saturation de l'espace dispo
+if (!apc_exists(‘apc_key_test_flush’)) {
+  spip_log ('xray says : le cache APC a été vidé', 'APC_cache_flush');
+  apc_store(‘apc_key_test_flush’, ‘apc_test_value_flush’);
+}

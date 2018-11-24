@@ -65,14 +65,14 @@ $options = array('chrono'=>true, 'list'=>true, 'methode_chemin'=>$cachelab_metho
 
 echo "<pre>"
 	.preg_replace(
-		'/^Array/', 'cachelab_fitre',
+		'/^Array/', 'cachelab_cibler',
 		print_r(array(
 			'action'=>$action, 
 			'conditions'=>$conditions, 
 			'options'=>$options), 1))
 	."</pre>";
 
-$stats = cachelab_filtre(
+$stats = cachelab_cibler(
 	$action, 
 	$conditions,
 	$options
@@ -106,8 +106,24 @@ if (count($l_not_array)) {
 if (count($l_cible)) {
 	echo "<h3>Caches ciblés : ".count($l_cible)."</h3>
 		<ul>";
-	foreach ($l_cible as $cle)
-		echo "<li>".xray_lien_cache($cle)."</li>";
+	global $Memoization;
+	echo '_CACHE_NAMESPACE : '._CACHE_NAMESPACE;
+	foreach ($l_cible as $cle)  {
+		echo "<li>".xray_lien_cache($cle);
+		$cle_sans_ = rtrim($cle, '_');
+		if ($cle_sans_ != $cle) {
+			$clememo_ = substr($cle,strlen(_CACHE_NAMESPACE));
+			$clememo = rtrim($clememo_,'_');
+			echo " (sans _ : ".xray_lien_cache($cle_sans_).") ";
+			$v_ = $Memoization->get($clememo_);
+			if (!$v_)
+				echo " (v_ vide) ";
+			$v = $Memoization->get($clememo);
+			if (!$v)
+				echo " (v vide) ";
+		}
+		echo "</li>";
+	}
 	echo "</ul>";
 }
 else
