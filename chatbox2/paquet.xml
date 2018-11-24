@@ -15,9 +15,7 @@
 	<!-- une chatbox pour les auteurs -->
 
 	<auteur>Collectif SPIP</auteur>
-	<auteur lien="https://contrib.spip.net/fil">Fil</auteur>
 	<auteur lien="https://contrib.spip.net/troll">Troll</auteur>
-
 
 	<licence>GNU/GPL</licence>
 	<utilise nom="gravatar" compatibilite="" />

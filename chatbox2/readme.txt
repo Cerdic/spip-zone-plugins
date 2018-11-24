@@ -6,4 +6,4 @@ Ce plugin fonctionne avec les bloces dépliables.
 #BLOC_DEBUT
 #BLOC_FIN
 
-Il utilise la table spip_messages
+Attention : les messages sont enregisté dans la table spip_messages, cela changera peut être si besoin...

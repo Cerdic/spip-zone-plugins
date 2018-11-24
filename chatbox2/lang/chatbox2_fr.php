@@ -16,5 +16,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_parametrages' => 'Paramétrages',
 
 	// T
-	'titre_page_configurer_chatbox2' => 'configurer Whatspip',
+	'titre_page_configurer_chatbox2' => 'configurer Chatbox2',
 );

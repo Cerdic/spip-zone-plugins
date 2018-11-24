@@ -58,12 +58,7 @@ function formulaires_editer_message_chat_charger_dist(
 	if ($id_message_origine && autoriser('voir', 'message', $id_parent)) {
 
 		$v = formulaires_editer_objet_charger('message', $id_message_origine, 0, 0, $retour, '');
-	//	$valeurs['titre'] = _T("organiseur:re") . " : " . $v['titre'];
 		$valeurs['titre'] =  $v['titre'];
-	//	$valeurs['texte'] =  $v['texte'];
-			// $valeurs['texte'] = "\n\n\n Le " . affdate($v['date_heure']) . " "
-			//. sql_getfetsel('nom','spip_auteurs','id_auteur='.intval($v['id_auteur'])) . " a écrit :  ". "\n"
-			//. "<quote>\n" . $v['texte'] . "\n</quote>\n";
 			 $valeurs['texte'] ="\n\n\n\n\n\r" . sql_getfetsel('nom','spip_auteurs','id_auteur='.intval($v['id_auteur'])) . "\n" . affdate($v['date_heure']) . "\n"
 			."<quote>"."\n" . $v['texte'] . "\n"."</quote>"."\n\r";
 	}

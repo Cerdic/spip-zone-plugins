@@ -6,7 +6,7 @@
  * @copyright  2018
  * @author     Ptroll
  * @licence    GNU/GPL
- * @package    SPIP\Whatspip\Pipelines
+ * @package    SPIP\Chatbox2\Pipelines
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 
-/** troll
+/*
  * Insérer la css des chats dans l'espace public 
  *
  * @pipeline header_prive

@@ -5,25 +5,10 @@
          min-height: 150px;
          width:100%;
          overflow:auto;
-        top: -7px;
     }
-    
-    
     .formulaire_editer_message_chat label[for='texte'] {
     display:none
     }
-    .formulaire_editer_message_chat .editer_destinataires,
-    .formulaire_editer_message_chat .editer_titre,
-    .formulaire_editer_message_chat .editer_rv,
-    .formulaire_editer_message_chat .brouillon,
-    .formulaire_editer_message_chat .draft,
-    .formulaire_editer_message_chat .boutons {
-    position:absolute;
-    top:-2000px;
-    padding:0;
-    margin:0;
-    }
-    
     .formulaire_editer_message_chat .cs_blocs {
     padding:0;
     margin:0;
@@ -41,6 +26,12 @@
     color:#333;
     letter-spacing:0;
     }
+    .formulaire_editer_message_chat .editer_destinataires,
+    .formulaire_editer_message_chat .editer_titre,
+    .formulaire_editer_message_chat .editer_antispam {
+    position:absolute;
+    top:-2000px;
+    }
     .formulaire_editer_message_chat textarea {
     padding:0.35em 0 0.15em 0.3em;
     line-height:1.2em;
@@ -48,33 +39,19 @@
     font-size:0.95em;
     border:1px solid #ccc;
     color:#333;
-    /*background-color: rgba(18, 23, 70, 1);*/
     }
-    /*position:absolute;bottom:0;*/
     table.formulaire_chat {width:100%;background:transparent;border-collapse: collapse;border:0;font-weight:normal;margin:0;}
     table.formulaire_chat tr, table.formulaire_chat td {border:0;padding:0;vertical-align:top;line-height:1.2em;}
-    
     table.formulaire_chat td.tdsubmit {
     width:30px;
     font-size:1em;
     padding-right:1px:
     }
-    
-    td.tdDraft {
+    td.tdCamera {
     width:33px;
     }
     .camera {
     position:relative;
-    }
-    input.draft {
-    width:33px;
-    padding: 0.2em 1em;
-    font-size:1em;
-    line-height:1em;
-    height:1.9em;
-    border:0;
-    background-color:rgba(52, 53, 90, 0.8);
-    
     }
     .camera i {
     position:absolute;
@@ -83,32 +60,30 @@
     z-index:-1;
     color:rgba(52, 53, 90, 0.8);
     }
-    
-    .formulaire_editer_message_chat {
+    .formulaire_editer_message_chat,    .formulaire_editer_message_chat form {
     padding:0;margin:0;
     }
-    
     .formulaire_editer_message_chat button.send {
     width:100%;
     border-radius:3px;
-    
     outline:none;
     padding: 0.35em 0.8em;
     height: 1.85em;
     background-color: rgba(52, 53, 90, 0.8);
     }
-    
-    .formulaire_editer_message_chat .send:hover,btn-default:hover{color:#fff;border:#00b0ff}
-    
+    .formulaire_editer_message_chat .send:hover,btn-default:hover{
+    color:#fff;
+    border:#00b0ff
+    }
     .smileys  {
-    dispaly:block;
+    display:block;
     }
 </style>
 
-#SET{dests,#ARRAY}
-<BOUCLE_d(POUR){tableau #ENV{destinataires}}>
-    #SET{dests,#GET{dests}|push{#VALEUR}}
-    </BOUCLE_d>
+	#SET{dests,#ARRAY}
+	<BOUCLE_d(POUR){tableau #ENV{destinataires}}>
+  	  #SET{dests,#GET{dests}|push{#VALEUR}}
+    	</BOUCLE_d>
 
     <div class="ajax formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}" id="#formulaire_chatbox_[(#GET{dests}|implode{''})]">
 
@@ -126,50 +101,30 @@
 
         <form method='post' action='#ENV{action}'>
             <div>
-                [(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ] #ACTION_FORMULAIRE #SET{fl,organiseur_public}
+                [(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
+	 #ACTION_FORMULAIRE
+ 	#SET{fl,chatbox2}
 
-                <input type="hidden" class="text" name="id_message_origine" value="#ENV*{id_message_origine}" />
-
-                <div class="editer-groupe" style="padding:0;margin:0;">
+               <div class="editer-groupe" style="padding:0;margin:0;">
                     [(#ENV{_destiner}|oui) #SET{name,destinataires}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
                     <div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-                        <label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)] <span class="small normal">(autocomplete, type 2 letters min)</span></label>[
-                        <span class='erreur_message'>(#GET{erreurs})</span> ] #INCLURE{fond=formulaires/inc-destinataires-message,name=#GET{name},env}
+                        <label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)] </label>
+		#INCLURE{fond=formulaires/inc-destinataires-message,name=#GET{name},env}
                     </div>
-                    ] #SET{name,titre}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+                    ] 
+		#SET{name,titre}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
                     <div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
                         <label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
                         <span class='erreur_message'>(#GET{erreurs})</span> ] [(#REM)titre]
                         <input type="text" class="text" name="#GET{name}" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required="required" ] />
                     </div>
-                    <div class="editer editer_rv[ (#ENV**{erreurs}|table_valeur{rv}|oui)erreur]">
-                        <div class="choix">
-                            <input type='checkbox' name='rv' id='rv' value='oui' [(#ENV{rv}|=={oui}|oui)checked='checked' ] onclick="if (this.checked==true) { $('.editer_date_debut_fin').show('fast');} else {$('.editer_date_debut_fin').hide('fast');}" />
-                            <label for="rv"><:item_afficher_calendrier:></label>[
-                            <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{rv})</span> ]
-                        </div>
-                    </div>
-                    <div class="editer editer_date_debut editer_date_debut_fin[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur][(#ENV{rv}|=={oui}|non)none]">
-                        <label for="date_debut"><:organiseur:info_message_date_debut:></label>[
-                        <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_debut})</span> ]
-                        <input type='text' class='text date' name='date_debut' id='date_debut' size='10' maxlength='10' value="[(#ENV{date_debut})]" />
-                        <input type='text' class='text heure' name='heure_debut' id='heure_debut' size='4' maxlength='5' value="[(#ENV{heure_debut})]" />
-                    </div>
-                    <div class="editer editer_date_fin editer_date_debut_fin[ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur][(#ENV{rv}|=={oui}|non)none]">
-                        <label for="date_fin" class='date_fin'><:organiseur:info_message_date_fin:></label>[
-                        <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span> ]
-                        <input type='text' class='text date' name='date_fin' id='date_fin' size='10' maxlength='10' value="[(#ENV{date_fin})]" />
-                        <input type='text' class='text heure' name='heure_fin' id='heure_fin' size='4' maxlength='5' value="[(#ENV{heure_fin})]" />
-                    </div>
+		#SET{name,texte}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 
-                    [(#REM)///////////////////////////texte//////////////////////////////////////////// //////////////////////////////////////////////////////////////////////////////////////////////////] #SET{name,texte}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-                    <div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]" style="padding:0;margin:0;">
-                        <label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
-                        <span class='erreur_message'>(#GET{erreurs})</span> ] [(#REM)/////////////////////////// champs ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////] #SET{form_id, textarea_#GET{dests}|implode{"_"}}
+		 #SET{form_id, textarea_#GET{dests}|implode{"_"}}
                         <table class="formulaire_chat">
                             <tr>
-                                <td class="tdDraft">
-                                    <div class="camera"><i class="fa fa-camera" aria-hidden="true"></i> [(#REM) <input type="submit" class="draft" name="draft" value="&nbsp;" />]
+                                <td class="tdCamera">
+                                    <div class="camera"><i class="fa fa-camera" aria-hidden="true"></i>
                                     </div>
                                 </td>
                                 <td>
@@ -184,8 +139,7 @@
                             (function($, window) {
                             $('##GET{form_id}').keyup(function (e) {
                                 autoheight(this);
-                            });
-                            
+                            });                    
                             function autoheight(a) {
                                 if (!$(a).prop('scrollTop')) {
                                     do {
@@ -200,8 +154,7 @@
                             autoheight($('##GET{form_id}'));
                             })(jQuery, window);
                         </script>
-
-                    </div>
+ 
 
                     [(#REM) Piege a robots spammeurs ] #SET{name,antispam}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
                     <div class="editer none editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
@@ -210,13 +163,6 @@
                         <input type="text" class="text" name="#GET{name}" value="#ENV*{#GET{name}}" id="nobotnobot-#ID" />
                     </div>
 
-                </div>
-
-                <div class='boutons'>
-                    <!--extra-->
-                    <span class='image_loading'>&nbsp;</span>
-                    <input type='submit' class='btn spip brouillon' name="draft" value='<:organiseur_public:bouton_enregistrer_brouillon:>' />
-                    <input type='submit' class='btn spip draft' name="draft" value='<:titre_joindre_document:>' />
                 </div>
 
             </div>
@@ -236,7 +182,6 @@
         if (window.jQuery) (function($){
         	// adresse du fragment ajax
         	var url = 'spip.php?page=inc-chatbox\x26dests=[(#GET{dests}|implode{','})]\x26nb_messages_recus=[(#GET{nb_messages_recus})]';
-        //	var url = 'spip.php?page=compteur_messages_chat\x26dests=[(#GET{dests}|implode{','})]\x26nb_messages_affiches=[(#GET{nb_messages_affiches})]';
         	// reload : au debut, toutes les 20s, puis 22, 24... 60s
         	// si on participe on revient a 5s, puis 7, 9... 60s
         	var r = 10;
@@ -251,8 +196,6 @@
         		url: url,
         		target: "#contenu_chatbox2_[(#GET{dests}|implode{''})]",
         		beforeSubmit: function(){
-        //			$("#chatbox_[(#GET{dests}|implode{''})]").val('');
-        //			$("#chatbox_nick_[(#GET{dests}|implode{''})]").blur();
         			$("#contenu_chatbox2_[(#GET{dests}|implode{''})]")
         			.css('opacity', 0.5);
         		},
@@ -260,7 +203,6 @@
         			$("#contenu_chatbox2_[(#GET{dests}|implode{''})]")
         			.css('opacity', 1);
         			r = 5;
-        //			$("input#chatbox_[(#GET{dests}|implode{''})]").focus();
         		}
         	});
         

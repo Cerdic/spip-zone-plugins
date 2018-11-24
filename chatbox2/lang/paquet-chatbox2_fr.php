@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// W
-	'chatbox2_description' => 'chat box',
+	'chatbox2_description' => 'multiples chatbox auteur 2 auteur',
 	'chatbox2_nom' => 'chatbox2',
 	'chatbox2_slogan' => 'un chat pour les auteurs',
 );
