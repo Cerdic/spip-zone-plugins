@@ -13,6 +13,14 @@
 	<div dir='#LANG_DIR' class='repetitions'>(<BOUCLE_repetitions(EVENEMENTS){par date_debut}{id_evenement_source=#ID_EVENEMENT}{', '}{statut==.*}>[<a href="[(#ID_EVENEMENT|generer_url_entite{evenement})]">(#DATE_DEBUT|affdate_court)</a>]</BOUCLE_repetitions>)</div>
 </div>
 </B_repetitions>
+<B_repetition_de>
+<div class="champ contenu_repetition_de">
+	<div class="label"><:agenda:repetition_de:></div>
+	<BOUCLE_repetition_de(EVENEMENTS){id_evenement=#ID_EVENEMENT_SOURCE} {statut==.*}>
+	[<a href="[(#ID_EVENEMENT|generer_url_entite{evenement})]">(#DATE_DEBUT|affdate_court)</a>]
+	</BOUCLE_repetition_de>
+</div>
+</B_repetition_de>
 <div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
 <div class='label'><:info_descriptif:></div>
 <div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>[(#DESCRIPTIF|image_reduire{500,0})]</div>
