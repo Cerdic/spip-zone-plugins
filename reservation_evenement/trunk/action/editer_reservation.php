@@ -81,7 +81,7 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
 	// Si les déclinaisons sont actives on récupère les évenements via le prix
 	if ($plugin_declinaison = test_plugin_actif('declinaisons')) {
 		$evenements = array();
-		$quantite = $_REQUEST['quantite'];
+		$quantite = $_REQUEST['quantite'] ;
 
 		//id_request force le type des variable en id_
 		if ($id_prix_objet = $_REQUEST['id_objet_prix']) {
@@ -92,7 +92,7 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
 					}
 					$evenements[$id_evenement][] = array(
 						'id_prix_objet' => (int)$declinaison,
-						'quantite' => (int)$quantite[$id_evenement][$declinaison]
+						'quantite' => isset($quantite[$id_evenement][$declinaison]) ? (int)$quantite[$id_evenement][$declinaison] : 1
 					);
 				}
 			}
