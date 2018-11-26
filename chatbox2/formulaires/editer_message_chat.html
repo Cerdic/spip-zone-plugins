@@ -1,126 +1,32 @@
-<style>
-    .contenu_chatbox2 {
-         position:relative;
-         max-height: 300px;
-         min-height: 150px;
-         width:100%;
-         overflow:auto;
-    }
-    .formulaire_editer_message_chat label[for='texte'] {
-    display:none
-    }
-    .formulaire_editer_message_chat .cs_blocs {
-    padding:0;
-    margin:0;
-    }
-    .formulaire_editer_message_chat h4.cs_done {
-    padding:0;
-    margin:0;
-    }
-    .formulaire_editer_message_chat form {
-    padding:0;
-    margin:0;
-    }
-    .no_message{ 
-    text-align:center;
-    color:#333;
-    letter-spacing:0;
-    }
-    .formulaire_editer_message_chat .editer_destinataires,
-    .formulaire_editer_message_chat .editer_titre,
-    .formulaire_editer_message_chat .editer_antispam {
-    position:absolute;
-    top:-2000px;
-    }
-    .formulaire_editer_message_chat textarea {
-    padding:0.35em 0 0.15em 0.3em;
-    line-height:1.2em;
-    min-height:1.2em;
-    font-size:0.95em;
-    border:1px solid #ccc;
-    color:#333;
-    }
-    table.formulaire_chat {width:100%;background:transparent;border-collapse: collapse;border:0;font-weight:normal;margin:0;}
-    table.formulaire_chat tr, table.formulaire_chat td {border:0;padding:0;vertical-align:top;line-height:1.2em;}
-    table.formulaire_chat td.tdsubmit {
-    width:30px;
-    font-size:1em;
-    padding-right:1px:
-    }
-    td.tdCamera {
-    width:33px;
-    }
-    .camera {
-    position:relative;
-    }
-    .camera i {
-    position:absolute;
-    left:10px;
-    top:5px;
-    z-index:-1;
-    color:rgba(52, 53, 90, 0.8);
-    }
-    .formulaire_editer_message_chat,    .formulaire_editer_message_chat form {
-    padding:0;margin:0;
-    }
-    .formulaire_editer_message_chat button.send {
-    width:100%;
-    border-radius:3px;
-    outline:none;
-    padding: 0.35em 0.8em;
-    height: 1.85em;
-    background-color: rgba(52, 53, 90, 0.8);
-    }
-    .formulaire_editer_message_chat .send:hover,btn-default:hover{
-    color:#fff;
-    border:#00b0ff
-    }
-    .smileys  {
-    display:block;
-    }
-</style>
 
-	#SET{dests,#ARRAY}
-	<BOUCLE_d(POUR){tableau #ENV{destinataires}}>
-  	  #SET{dests,#GET{dests}|push{#VALEUR}}
+		#SET{dests,#ARRAY}
+		<BOUCLE_d(POUR){tableau #ENV{destinataires}}>
+		#SET{dests,#GET{dests}|push{#VALEUR}}
     	</BOUCLE_d>
 
-    <div class="ajax formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}" id="#formulaire_chatbox_[(#GET{dests}|implode{''})]">
+		<div class="ajax formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}" id="#formulaire_chatbox_[(#GET{dests}|implode{''})]">
 
-        <div class="contenu_chatbox2" id="contenu_chatbox2_[(#GET{dests}|implode{''})]">
+		<div class="contenu_chatbox2" id="contenu_chatbox2_[(#GET{dests}|implode{''})]">
             #INCLURE{fond=inc-chatbox,dests=#GET{dests}|implode{","}}
         </div>
-
-        [(#REM)[(#ENV**{message_ok}|oui)
-        <p class="reponse_formulaire reponse_formulaire_ok">
-            <:organiseur_public:info_1_message_envoye:>
-        </p>
-        ]] [
-
-        <p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
         <form method='post' action='#ENV{action}'>
             <div>
                 [(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
-	 #ACTION_FORMULAIRE
- 	#SET{fl,chatbox2}
-
-               <div class="editer-groupe" style="padding:0;margin:0;">
-                    [(#ENV{_destiner}|oui) #SET{name,destinataires}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	 			#ACTION_FORMULAIRE
+             <div class="editer-groupe" style="padding:0;margin:0;">
+                    [(#ENV{_destiner}|oui)
+					 #SET{name,destinataires}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
                     <div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-                        <label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)] </label>
-		#INCLURE{fond=formulaires/inc-destinataires-message,name=#GET{name},env}
+					#INCLURE{fond=formulaires/inc-destinataires-message,name=#GET{name},env}
                     </div>
                     ] 
-		#SET{name,titre}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-                    <div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-                        <label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
-                        <span class='erreur_message'>(#GET{erreurs})</span> ] [(#REM)titre]
-                        <input type="text" class="text" name="#GET{name}" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required="required" ] />
-                    </div>
-		#SET{name,texte}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					#SET{name,titre}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					<input type="hidden" class="text" name="#GET{name}" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required="required" ] />
+  
+					#SET{name,texte}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 
-		 #SET{form_id, textarea_#GET{dests}|implode{"_"}}
+					#SET{form_id, textarea_#GET{dests}|implode{"_"}}
                         <table class="formulaire_chat">
                             <tr>
                                 <td class="tdCamera">
@@ -128,13 +34,14 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <textarea placeholder="chat..." name="#GET{name}" class="no_barre" style="" id="#GET{form_id}"></textarea>
+                                    <textarea placeholder="chat..." name="#GET{name}" class="no_barre" id="#GET{form_id}"></textarea>
                                 </td>
                                 <td class="tdsubmit">
                                     <button type="submit" name="send" class="btn spip send"><i class="fa fa-send fa-2" aria-hidden="true"></i></button>
                                 </td>
                             </tr>
                         </table>
+
                         <script type="text/javascript">
                             (function($, window) {
                             $('##GET{form_id}').keyup(function (e) {
@@ -155,7 +62,6 @@
                             })(jQuery, window);
                         </script>
  
-
                     [(#REM) Piege a robots spammeurs ] #SET{name,antispam}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
                     <div class="editer none editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
                         <label for="nobotnobot-#ID"><:antispam_champ_vide:></label>[

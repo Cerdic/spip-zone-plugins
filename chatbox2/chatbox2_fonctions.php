@@ -6,7 +6,7 @@
  * @copyright  2018
  * @author     Ptroll
  * @licence    GNU/GPL
- * @package    SPIP\Whatspip\Fonctions
+ * @package    SPIP\Chatbox2\Fonctions
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {

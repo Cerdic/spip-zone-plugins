@@ -20,8 +20,8 @@
 	<div id="Chat-header_#ID_AUTEUR" class="chat-header">
 	<div class="auteur_infos" id="auteur_infos_#ID_AUTEUR"><a href="#URL_AUTEUR">[(#PLUGIN{gravatar}|oui)[(#MODELE{gravatar}|image_reduire{24})]] [(#NOM)]</a></div>
 	<div class="close-chat" id="close-boxAuteur_#ID_AUTEUR"><i class="fa fa-times"></i></div>
-[(#REM)	<div class="creer-groupe" id="creer-groupe_#ID_AUTEUR"><i class="fa fa-users"></i></div>
-	<div class="config-chat" id="config-chat_#ID_AUTEUR"><i class="fa fa-cog"></i></div>]
+	<div class="creer-groupe" id="creer-groupe_#ID_AUTEUR"><i class="fa fa-users"></i></div>
+[(#REM)	<div class="config-chat" id="config-chat_#ID_AUTEUR"><i class="fa fa-cog"></i></div>]
 	</div>
 
 	<div class="Chat-corps">
@@ -35,11 +35,9 @@
 $("#open-boxAuteur_#ID_AUTEUR").click(function () {
 	$('#ChatboxAuteur_#ID_AUTEUR').addClass('Chat-box-on');
 	Cookies.set('ChatboxAuteur_#ID_AUTEUR', 'Chat-box-on'); 
-
-
-
+	$("#contenu_chatbox2_#ID_AUTEUR").animate({ scrollTop: $(document).height() }, "slow");
              });
-$('#close-boxAuteur_#ID_AUTEUR').click(function () {
+	$('#close-boxAuteur_#ID_AUTEUR').click(function () {
 	$('#ChatboxAuteur_#ID_AUTEUR').removeClass('Chat-box-on');
 	Cookies.remove('ChatboxAuteur_#ID_AUTEUR');
 	Cookies.remove('ChatboxPosition-#ChatboxAuteur_#ID_AUTEUR');
@@ -63,9 +61,6 @@ $('#ChatboxAuteur_#ID_AUTEUR').draggable({
 	}
  });
 $('#ChatboxAuteur_#ID_AUTEUR').draggable({ cancel: '.Chat-corps' }); 
-$("#contenu_chatbox2_#ID_AUTEUR").animate({ scrollTop: $(document).height() }, "slow");
-         return false;
-
 })(jQuery, window);
 </script>
 

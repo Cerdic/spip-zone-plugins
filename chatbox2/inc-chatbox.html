@@ -1,41 +1,42 @@
 #CACHE{0}
 
 <style>
-
  div.message_chatbox {
-     display:bock;
-     clear:both;
-     margin: 0;
-     padding: 0;
-     line-height:1.1em;
-     font-weight:400;
-     color:#333; 
-     font-family: Helvetica, Arial, sans-serif;
-     letter-spacing:0;
-    margin-bottom:0.3em
-
+	display: bock;
+	clear: both;
+	width: 98%;
+	margin: 2px auto;
+	line-height: 1.1em;
+	font-weight: 400;
+	color: #333; 
+	font-family: Helvetica, Arial, sans-serif;
+	letter-spacing: 0;
 }
  .message_chatbox .avatar {
-     float: left;
-     margin: 0 1px 1px 1px;
-     border:1px solid #ccc;
+	float: left;
+	position: relative;
+	margin: 0 3px 1px 0;
+	border: 1px solid #ccc;
 }
  .message_chatbox abbr {
-     color: #333;
-     display: block;
-     float: left;
-     margin:0;
-     margin-right:0.4em;
-     margin-top:4px;
-    font-size:11px;    
-    letter-spacing:0;
-   line-height:0.9em;
+	color: #333;
+	display: block;
+	float: left;
+	margin: 0;
+	margin-right: 0.4em;
+	margin-top: 4px;
+    font-size: 11px;    
+    letter-spacing: 0;
+	line-height: 0.9em;
 }
 .texte_message {
-line-height:1.25em;
-font-size: 13px;
-padding:0;
-margin:0;
+	position: relative;
+	top: -3px;
+	line-height: 1.25em;
+	font-size: 13px;
+	padding: 0;
+	margin: 0;
+	overflow-wrap: break-word;
 }
  </style>
 
@@ -62,15 +63,14 @@ margin:0;
 #SET{color,#COULEUR_AUTEUR|sinon{000}}
 
 <div class="message_chatbox">
-[(#GET{logo_auteur}) ]
-
-[ (#GET{aujourdhui}|=={#DATE_HEURE|affdate{d-m-Y}}|?{' '})
+[(#GET{logo_auteur})]
+[ (#GET{aujourdhui}|=={#DATE_HEURE|affdate{d-m-Y}}|?{
 	[<abbr title="[(#DATE_HEURE|date_iso)]">(#DATE_HEURE|affdate{H:i})</abbr>]
-]
-[ (#GET{aujourdhui}|=={#DATE_HEURE|affdate{d-m-Y}}|?{'', ' '})
+,
 	[<abbr title="[(#DATE_HEURE|date_iso)]">(#DATE_HEURE|affdate{d-m H:i})</abbr>]
-]
-<span class="texte_message">[(#REM)*|htmlspecialchars][(#TEXTE*|liens_orphelins_actifs)]</span>
+})]
+
+<span class="texte_message">[(#TEXTE*|htmlspecialchars|liens_orphelins_actifs)]</span>
 </div>
 </BOUCLE_messages>
 <div class="no_message"><:info_aucun_message:></div>
