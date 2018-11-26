@@ -9,7 +9,7 @@
 	#SET{to,#ID_AUTEUR}
 	<button class="openChat" id="open-boxAuteur_#ID_AUTEUR" title="Chat with #INFO_NOM{auteur,#ID_AUTEUR}">
 	[(#PLUGIN{gravatar}|oui)[(#MODELE{gravatar}|image_reduire{24})]][<span class="openChatNom">(#NOM|couper{6}|ucfirst)</span>]
-	[(#EN_LIGNE|affdate_jourcourt|=={#ENV{date}|affdate_jourcourt}|oui)<div class="openChatDate">[(#EN_LIGNE|heures)h][(#EN_LIGNE|minutes) ] <i class="fa fa-plug green" aria-hidden="true"></i></div>]
+	[(#EN_LIGNE|affdate_jourcourt|=={#ENV{date}|affdate_jourcourt}|oui)<div class="openChatDate">[(#EN_LIGNE|heures)h][(#EN_LIGNE|minutes) ] <i class="fas fa-plug green" aria-hidden="true"></i></div>]
 	[(#EN_LIGNE|affdate_jourcourt|=={#ENV{date}|affdate_jourcourt}|non)<div class="openChatDate">[(#EN_LIGNE|affdate_jourcourt)]</div>]
 	</button>
 
@@ -19,9 +19,9 @@
 
 	<div id="Chat-header_#ID_AUTEUR" class="chat-header">
 	<div class="auteur_infos" id="auteur_infos_#ID_AUTEUR"><a href="#URL_AUTEUR">[(#PLUGIN{gravatar}|oui)[(#MODELE{gravatar}|image_reduire{24})]] [(#NOM)]</a></div>
-	<div class="close-chat" id="close-boxAuteur_#ID_AUTEUR"><i class="fa fa-times"></i></div>
-	<div class="creer-groupe" id="creer-groupe_#ID_AUTEUR"><i class="fa fa-users"></i></div>
-[(#REM)	<div class="config-chat" id="config-chat_#ID_AUTEUR"><i class="fa fa-cog"></i></div>]
+	<div class="close-chat" id="close-boxAuteur_#ID_AUTEUR"><i class="fas fa-times"></i></div>
+	<div class="creer-groupe" id="creer-groupe_#ID_AUTEUR"><i class="fas fa-users"></i></div>
+[(#REM)	<div class="config-chat" id="config-chat_#ID_AUTEUR"><i class="fas fa-cog"></i></div>]
 	</div>
 
 	<div class="Chat-corps">

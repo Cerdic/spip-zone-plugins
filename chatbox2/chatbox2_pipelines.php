@@ -23,5 +23,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function chatbox2_insert_head_css($flux){
 			$flux .= '<link rel="stylesheet" href="'.direction_css(find_in_path('css/chatbox2.css')).'" type="text/css" />';
+			$flux .= '<link rel="stylesheet" href="'.direction_css(find_in_path('css/all.min.css')).'" type="text/css" />';
 	return $flux;
 }

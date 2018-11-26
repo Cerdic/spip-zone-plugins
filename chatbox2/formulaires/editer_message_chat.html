@@ -7,7 +7,7 @@
 		<div class="ajax formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}" id="#formulaire_chatbox_[(#GET{dests}|implode{''})]">
 
 		<div class="contenu_chatbox2" id="contenu_chatbox2_[(#GET{dests}|implode{''})]">
-            #INCLURE{fond=inc-chatbox,dests=#GET{dests}|implode{","}}
+            #INCLURE{fond=inc-chatbox2,dests=#GET{dests}|implode{","}}
         </div>
 
         <form method='post' action='#ENV{action}'>
@@ -30,14 +30,14 @@
                         <table class="formulaire_chat">
                             <tr>
                                 <td class="tdCamera">
-                                    <div class="camera"><i class="fa fa-camera" aria-hidden="true"></i>
+                                    <div class="camera"><i class="fas fa-camera" aria-hidden="true"></i>
                                     </div>
                                 </td>
                                 <td>
                                     <textarea placeholder="chat..." name="#GET{name}" class="no_barre" id="#GET{form_id}"></textarea>
                                 </td>
                                 <td class="tdsubmit">
-                                    <button type="submit" name="send" class="btn spip send"><i class="fa fa-send fa-2" aria-hidden="true"></i></button>
+                                    <button type="submit" name="send" class="btn spip send"><i class="fas fa-send fa-2" aria-hidden="true"></i></button>
                                 </td>
                             </tr>
                         </table>
@@ -75,19 +75,19 @@
         </form>
     </div>
 
-    <script>
+[(#REM)    <script>
         (function($, window) {
         $("#contenu_chatbox2_[(#GET{dests}|implode{''})]").animate({ scrollTop: $(document).height() }, "slow");
          return false;
         })(jQuery, window);
-    </script>
+    </script>]
 
     <script type='text/javascript' src='#CHEMIN{js/jquery.labelhide.js}'></script>
     <script type='text/javascript'>
         <!--
         if (window.jQuery) (function($){
         	// adresse du fragment ajax
-        	var url = 'spip.php?page=inc-chatbox\x26dests=[(#GET{dests}|implode{','})]\x26nb_messages_recus=[(#GET{nb_messages_recus})]';
+        	var url = 'spip.php?page=inc-chatbox2\x26dests=[(#GET{dests}|implode{','})]\x26nb_messages_recus=[(#GET{nb_messages_recus})]';
         	// reload : au debut, toutes les 20s, puis 22, 24... 60s
         	// si on participe on revient a 5s, puis 7, 9... 60s
         	var r = 10;
@@ -96,7 +96,6 @@
         		.load(url,function(){setTimeout(reload,1000*(r=Math.min(r+2,60)));});
         	}
         	setTimeout(reload, r);
-        
         	$("#formulaire_chatbox_[(#GET{dests}|implode{''})] form")
         	.ajaxForm({
         		url: url,
