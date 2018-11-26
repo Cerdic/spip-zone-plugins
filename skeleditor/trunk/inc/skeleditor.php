@@ -46,10 +46,11 @@ function skeleditor_path_editable(){
 	// Traiter le cas des sites mutualises
 	$dir_squelettes_site = (defined('_DIR_SITE')) ? _DIR_SITE : _DIR_RACINE;
 
-	if ((!$path OR defined('_DIR_SITE'))
-		AND !is_dir($dir_squelettes_site."squelettes")
-		AND sous_repertoire($dir_squelettes_site, "squelettes", false, true)){
-		$path = $dir_squelettes_site."squelettes/";
+	if (!$path OR defined('_DIR_SITE')) {
+		$path = sous_repertoire($dir_squelettes_site, "squelettes", false, true);
+		// sous_repertoire renvoie '' en cas d'echec
+		if ($path == '')
+			$path = null;
 	}
 
 	return $path;
