@@ -220,7 +220,6 @@ if (!function_exists('cache_est_sessionne')) {
 	function cache_est_talon ($nomcache,&$data='') {
 		if (preg_match(XRAY_PATTERN_SESSION, $nomcache))
 			return false;
-		spip_log (print_r($data,1)."\n\n\n", "DEBUG_cache_est_talon");
 		if (!is_array($data)) // textwheels par exemple
 			return false;
 		return !isset($data['contexte']);
