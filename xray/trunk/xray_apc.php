@@ -28,9 +28,7 @@ All other licensing and usage conditions are those of the PHP Group.
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-
 include_spip ('inc/autoriser');
-
 if (!autoriser('webmestre'))
 	die("Autorisation non accordée : devenez webmestre d'abord.");
 include_spip('inc/filtres');
@@ -67,7 +65,7 @@ defaults('GRAPH_SIZE', 400); // Image size
 
 // _CACHE_NAMESPACE est défini par memoization et préfixe chaque nom de cache SPIP
 // On ne souhaite pas que cette partie du nom s'affiche sur chaque ligne
-define('XRAY_NEPASAFFICHER_DEBUTNOMCACHE', _CACHE_NAMESPACE);
+define('XRAY_NEPASAFFICHER_DEBUTNOMCACHE', _CACHE_NAMESPACE.'cache:');
 
 ////////// END OF DEFAULT CONFIG AREA /////////////////////////////////////////////////////////////
 
@@ -105,10 +103,10 @@ function get_serial_class($serial) {
 	return isset($types[$parts[0]]) ? $types[$parts[0]] : trim($parts[2], '"');
 }
 
-function get_apc_data($info, &$success) {
+function get_apc_data($info, &$data_success) {
 	if (apcu_exists($info)
-		and ($data = apcu_fetch($info, $success)) 
-		and $success 
+		and ($data = apcu_fetch($info, $data_success)) 
+		and $data_success 
 		and is_array($data) and (count($data) == 1) 
 		and is_serialized($data[0])
 		) {
@@ -118,7 +116,7 @@ function get_apc_data($info, &$success) {
 		return $page;
 	};
 
-	$success = false;
+	$data_success = false;
 	return null;
 }
 
@@ -143,8 +141,7 @@ function spipsafe_unserialize($str) {
 	return print_contexte($unser, 1);
 }
 
-function print_contexte($extra, $tostring)
-{
+function print_contexte($extra, $tostring) {
 	$print = print_r($extra, 1);
 	if (stripos($print, 'Array') === 0) {
 		// On enlève 'Array( ' au début et ')' à la fin
@@ -180,8 +177,7 @@ function print_contexte($extra, $tostring)
 	echo $print;
 }
 
-function bouton_objet($objet, $id_objet, $extra)
-{
+function bouton_objet($objet, $id_objet, $extra) {
 	$objet_visible = $objet;
 	if ($objet == 'secteur')
 		$objet = 'rubrique';
@@ -204,11 +200,37 @@ if (!function_exists('plugin_est_actif')) {
 function antislash ($str) {
 	return str_replace('/', '\/', $str);
 }
+
+define ('XRAY_PATTERN_SESSION', '/_([a-f0-9]{8}|)$/i');
+define ('XRAY_PATTERN_SESSION_AUTH', '/_([a-f0-9]{8})$/i');
+define ('XRAY_PATTERN_SESSION_ANON', '/_$/i');
+define ('XRAY_PATTERN_NON_SESSION', '/[^_](?<!_[a-f0-9]{8})$/i');
+define ('XRAY_PATTERN_TALON', '/^(.*)(?<!_[a-f0-9]{8})(?<!_)(_([a-f0-9]{8})?|)$/i');
+
+if (!function_exists('cache_est_sessionne')) {
+	function cache_est_sessionne ($nomcache) {
+		if (preg_match (XRAY_PATTERN_SESSION_AUTH, $nomcache))
+			return 'session_auth';
+		elseif (preg_match (XRAY_PATTERN_SESSION_ANON, $nomcache))
+			return 'session_anon';
+		else 
+			return false;
+	}
+
+	function cache_est_talon ($nomcache,&$data='') {
+		if (preg_match(XRAY_PATTERN_SESSION, $nomcache))
+			return false;
+		spip_log (print_r($data,1)."\n\n\n", "DEBUG_cache_est_talon");
+		if (!is_array($data)) // textwheels par exemple
+			return false;
+		return !isset($data['contexte']);
+	}
+}
+
 ////////////////////////////////////////////////////////////////////////
 
 // "define if not defined"
-function defaults($d, $v)
-{
+function defaults($d, $v) {
 	if (!defined($d))
 		define($d, $v); // or just @define(...)
 }
@@ -251,7 +273,7 @@ $vardom = array(
 	'SORT' => '/^[DA]$/', // second sort key
 	'AGGR' => '/^\d+$/', // aggregation by dir level
 	'SEARCH' => '~.*~',
-	'TYPECACHE' => '/^(|ALL|SESSIONS|SESSIONS_AUTH|SESSIONS_NONAUTH|FORMULAIRES)$/', //
+	'TYPECACHE' => '/^(|ALL|NON_SESSIONS|SESSIONS|SESSIONS_AUTH|SESSIONS_NONAUTH|SESSIONS_TALON|FORMULAIRES)$/', //
 	'ZOOM' => '/^(|TEXTECOURT|TEXTELONG)$/', //
 	'WHERE' => '/^(|ALL|HTML|META)$/', // recherche dans le contenu
 	'EXTRA' => '/^(|CONTEXTE|CONTEXTES_SPECIAUX|INFO_AUTEUR|INFO_OBJET_SPECIAL|INVALIDEURS|INVALIDEURS_SPECIAUX|INCLUSIONS'
@@ -1226,9 +1248,11 @@ EOB;
 		<p><b>Types cache:</b> 
 		<select name=TYPECACHE  onChange="form.submit()">
 			<option value=ALL', $MYREQUEST['TYPECACHE'] == 'ALL' ? ' selected' : '', '>Tous</option>
+			<option value=NON_SESSIONS', $MYREQUEST['TYPECACHE'] == 'NON_SESSIONS' ? ' selected' : '', '>Non sessionnés</option>
 			<option value=SESSIONS', $MYREQUEST['TYPECACHE'] == 'SESSIONS' ? ' selected' : '', '>Sessionnés</option>
 			<option value=SESSIONS_AUTH', $MYREQUEST['TYPECACHE'] == 'SESSIONS_AUTH' ? ' selected' : '', '>Sessionnés identifiés</option>
 			<option value=SESSIONS_NONAUTH', $MYREQUEST['TYPECACHE'] == 'SESSIONS_NONAUTH' ? ' selected' : '', '>Sessionnés non identifiés</option>
+			<option value=SESSIONS_TALON', $MYREQUEST['TYPECACHE'] == 'SESSIONS_TALON' ? ' selected' : '', '>Talons de session</option>
 			<option value=FORMULAIRES', $MYREQUEST['TYPECACHE'] == 'FORMULAIRES' ? ' selected' : '', '>Formulaires</option>
 		</select>
 		<select name=COUNT onChange="form.submit()">
@@ -1328,18 +1352,29 @@ EOB;
 			}
 			
 			$TYPECACHE = (isset($MYREQUEST['TYPECACHE']) ? $MYREQUEST['TYPECACHE'] : 'ALL');
+			$also_required='';
+			$also_required_bool = true;
 			switch ($TYPECACHE) {
 				case 'ALL':
 					$pattern_typecache = '';
 					break;
+				case 'NON_SESSIONS':
+					$pattern_typecache = XRAY_PATTERN_NON_SESSION;
+					$also_required = 'cache_est_talon';
+					$also_required_bool = false;
+					break;
 				case 'SESSIONS':
-					$pattern_typecache = '/_([a-f0-9]{8}|)$/i';
+					$pattern_typecache = XRAY_PATTERN_SESSION;
 					break;
 				case 'SESSIONS_AUTH':
-					$pattern_typecache = '/_[a-f0-9]{8}$/i';
+					$pattern_typecache = XRAY_PATTERN_SESSION_AUTH;
 					break;
 				case 'SESSIONS_NONAUTH':
-					$pattern_typecache = '/_$/i';
+					$pattern_typecache = XRAY_PATTERN_SESSION_ANON;
+					break;
+				case 'SESSIONS_TALON':
+					$pattern_typecache = XRAY_PATTERN_NON_SESSION;
+					$also_required = 'cache_est_talon';
 					break;
 				case 'FORMULAIRES':
 					$pattern_typecache = '~formulaires/~i';
@@ -1350,11 +1385,11 @@ EOB;
 			$i = 0;
 			foreach ($list as $k => $entry) {
 				$data=$searched=null;
-				$success = false;
-				$tried_get_apc_data = false;
+				$data_success = false;
+// plus de restrictions, on cherche toujours data
+				$searched = $data = get_apc_data($entry['info'], $data_success);
+
 				if ($MYREQUEST['SEARCH'] and $MYREQUEST['WHERE']) {
-					$searched = $data = get_apc_data($entry['info'], $success);
-					$tried_get_apc_data = true;
 					switch ($MYREQUEST['WHERE']) {
 					case 'ALL' :
 						break;
@@ -1376,24 +1411,47 @@ EOB;
 						or (!$MYREQUEST['WHERE']
 							and preg_match($MYREQUEST['SEARCH'], $entry[$fieldname]))
 						or ($MYREQUEST['WHERE']
-							and preg_match($MYREQUEST['SEARCH'].'m', print_r($searched,1))))) { 
+							and preg_match($MYREQUEST['SEARCH'].'m', print_r($searched,1))))
+					and (!$also_required 
+						or ($also_required($entry[$fieldname], $data)== $also_required_bool))) {
 					$sh = md5($entry["info"]);
 					
-					$field_value = htmlentities(strip_tags($entry[$fieldname], ''), ENT_QUOTES, 'UTF-8');
+					$displayed_name = htmlentities(strip_tags($entry[$fieldname], ''), ENT_QUOTES, 'UTF-8');
 					if (defined('XRAY_NEPASAFFICHER_DEBUTNOMCACHE'))
-						$field_value = str_replace(XRAY_NEPASAFFICHER_DEBUTNOMCACHE, '...', $field_value);
-					echo '<tr id="key-' . $sh . '" class=tr-', $i % 2, '>', "<td class='td-0' style='position: relative'>
-			<a href='$MY_SELF&SH={$sh}#key-{$sh}'>$field_value</a>";
+						$displayed_name = str_replace(XRAY_NEPASAFFICHER_DEBUTNOMCACHE, '', $displayed_name);
+					echo '<tr id="key-' . $sh . '" class=tr-', $i % 2, '>', 
+							"<td class='td-0' style='position: relative'>
+								<a href='$MY_SELF&SH={$sh}#key-{$sh}'>
+									$displayed_name
+								</a>";
+
+					if ($data and cache_est_talon($entry[$fieldname], $data))
+						echo "<span style='margin-left:2em' title='Talon des caches sessionnés avec ce squelette et le même contexte'>[talon]</span>";
 					
-					if ($p = preg_match('/_([0-9a-f]{8})$/i', $field_value, $match) 
+					$boutons_liens = '';
+					if ($p = preg_match(XRAY_PATTERN_SESSION_AUTH, $displayed_name, $match) 
 						and $MYREQUEST['SEARCH'] != "/{$match[1]}/i") {
 						$url_session = parametre_url($MY_SELF, 'SEARCH', $match[1]);
-						echo "<a href='$url_session' style='float: right'>[session]</a>";
+						$boutons_liens .= "<a href='$url_session' title='Caches sessionnés pour le même internaute'>[session]</a>";
 					}
+					if (is_array($data)
+						and isset($data['invalideurs']['session'])) {
+						$p = preg_match(XRAY_PATTERN_TALON, $displayed_name, $match);
+						$url_mm_talon = '';
+						$bouton_mm_talon='[mm talon]';
+						if ($p and $match[1] and ($MYREQUEST['SEARCH']!=$match[1])) {
+							$url_mm_talon = parametre_url($MY_SELF, 'TYPECACHE', 'ALL');
+							$url_mm_talon = parametre_url($url_mm_talon, 'SEARCH', $match[1]);
+						}
+						else 
+							$bouton_mm_talon='(! Err get talon !)';
+						$boutons_liens .= "<a href='$url_mm_talon' title='Caches du même squelette et avec le même contexte'>$bouton_mm_talon</a>";
+					}
+					echo '<span style="float: right">'.$boutons_liens.'</span>';
+
+					
 					if ($MYREQUEST['EXTRA'] and ($sh != $MYREQUEST["SH"]) // sinon yaura un zoom après et c'est inutile de répéter ici
-						and (($tried_get_apc_data and $success)
-							or (!$tried_get_apc_data 
-								and ($data = get_apc_data($entry['info'], $success))))) {
+						and $data_success) {
 						$extra = null;
 						$liens = '';
 						if (is_array($data)) {
@@ -1522,18 +1580,15 @@ EOB;
 						$url = parametre_url($self, 'SH', '') . "#key-$sh";
 						$menuzoom .= "<a href='$url' class='menuzoom'>Replier</a>";
 						
-						if (apcu_exists($entry['info'])) {
-							$d = apcu_fetch($entry['info'], $success);
-							if ($success) {
-								echo "<p>$menuzoom</p>";
-								if (is_array($d) and (count($d) == 1) and is_serialized($d[0]))
-									echo "<xmp>" . spipsafe_unserialize($d[0]) . "</xmp>";
-								else
-									echo "fetch ok, val non sérialisée :<br><xmp>" . print_r($d, 1) . "</xmp>";
-							} else
-								echo "fetch failed";
-						} else
-							echo '(doesnt exist in apc)';
+						if ($data_success) {
+							echo "<p>$menuzoom</p>";
+							echo '<xmp>' . print_r($data, 1) . '</xmp>';
+						} else {
+							if (!apcu_exists($entry['info']))
+								echo '(! doesnt exist anymore !)';
+							else
+								echo '(! fetch failed !)';
+						}
 						echo '</td>';
 						echo '</tr>';
 					}
