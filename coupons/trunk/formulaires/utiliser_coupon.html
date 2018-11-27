@@ -27,7 +27,6 @@
 			$(document).ready(function(){
 				$('.js-appliquer-code').on('click', function(){
 					var $form = $(this).parents('.formulaire_utiliser_coupon').find('form');
-					console.log($form);
 					$form.find('input[name="code_coupon"]').val($(this).data('code'));
 					$form.submit();
 				});
