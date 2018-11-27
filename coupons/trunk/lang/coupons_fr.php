@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'code_invalide'              => 'Ce code de réduction n\'est pas valide.',
 	'coupons_titre'              => 'Coupons de réduction',
 	'creation_coupon'            => 'Création d\'un coupon',
+	'code_coupon'                => 'Code du coupon',
 
 	// E
 	'explication_emails_notifications' => 'Séparés par une virgule',
