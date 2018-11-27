@@ -7,6 +7,7 @@
 		<table class="spip">
 			<thead>
 			<tr>
+				<th>Nom</th>
 				<th>Montant</th>
 				<th>Date de validité</th>
 				<th>Code à utiliser</th>
@@ -15,6 +16,7 @@
 			<BOUCLE_coupons(COUPONS){id_auteur=#SESSION{id_auteur}}{par date}{inverse}{actif=on}>
 			[(#ID_COUPON|coupon_utilisable|oui)
 			<tr>
+				<td>#TITRE</td>
 				<td>[(#ID_COUPON|coupon_montant_utilisable|prix_formater)]</td>
 				<td>[(#DATE_VALIDITE|affdate)]</td>
 				<td><strong>#CODE</strong></td>
