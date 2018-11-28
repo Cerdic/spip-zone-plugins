@@ -12,9 +12,11 @@
 	<style>
 ]
 #CACHE{3600*100,cache-client}
-#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
 
 /* Styles de la liste des pages liées ou non à un objet et des objets configurés (noizetier_pages, noizetier_objets) */
 ul.noizetier-liste-pages li.page,
@@ -54,43 +56,62 @@ ul.noizetier-liste-pages li.page .composition .icone {left: 30px;}
 	max-height: calc(100vh - 2.0775em); /* prendre en compte l'offset */
 	overflow-y: auto;
 }
-ul.liste-noisettes-disponibles li.noisette {padding-left: 30px; position:relative; min-height: 28px;}
-ul.liste-noisettes-disponibles li.noisette .icone {
-	position: absolute;
-	margin: 0;
-	top: .6925em;
-	left: 0;
-	width: 24px;
-	height: 24px;
-	overflow: hidden;}
-ul.liste-noisettes-disponibles li.noisette label {float: none; margin-left: 0;}
+.liste-noisettes-disponibles .noisette label {
+	float: none; margin-left: 0;
+}
 
 /* -- Liste des noisettes incluses dans un bloc */
-ul.liste-noisettes-bloc {overflow: visible;}
-ul.liste-noisettes-bloc li.noisette {padding-left: 30px; padding-right: 120px; position:relative; min-height: 36px; overflow: visible;}
-ul.liste-noisettes-bloc li.noisette .resume .icone {
-	position: absolute;
+.liste-noisettes-bloc {
+	overflow: visible;
+}
+.liste-noisettes-bloc.aucun,
+.liste-noisettes-bloc.aucun .item {
+	border: 0;
+}
+.liste-noisettes-bloc .noisette {
+	overflow: visible;
+}
+.liste-noisettes-bloc .noisette.ui-draggable {
+	width: auto !important;
+}
+.liste-noisettes-conteneur {
+	padding-left: 32px;
+	margin-top: 0.6925em;
+}
+.liste-noisettes-conteneur.placebo {
 	margin: 0;
-	top: .6925em;
-	left: 0;
-	width: 24px;
-	height: 24px;
-	overflow: hidden;}
-ul.liste-noisettes-bloc li.noisette .conteneur-1 {margin-left: 30px;}
-ul.liste-noisettes-bloc li.noisette .conteneur-1 .icone {left: 30px;}
-ul.liste-noisettes-bloc li.noisette .conteneur-2 {margin-left: 60px;}
-ul.liste-noisettes-bloc li.noisette .conteneur-2 .icone {left: 60px;}
-ul.liste-noisettes-bloc li.noisette .edition {
-	position: absolute;
-	right: 0;
-	top: .6925em;
-	text-align: right;}
-ul.liste-noisettes-bloc li.noisette .edition li {
+}
+.liste-noisettes-conteneur.placebo .noisette {
+	padding: 0;
+	border: none !important;
+	height: 0.5em; /* Important, permet le drag and drop */
+}
+.liste-noisettes-conteneur > .noisette:first-child {
+	border-top: 1px solid #ddd;
+}
+.liste-noisettes-conteneur > .noisette:last-child {
+	border-bottom: 0;
+}
+.liste-noisettes-conteneur .noisette:last-child {
+	padding-bottom: 0;
+}
+.liste-noisettes-bloc .noisette__content {
+	display: flex;
+}
+.liste-noisettes-bloc .noisette .edition {
+	flex: 0 1 auto;
+}
+.liste-noisettes-bloc .noisette .edition li {
 	position: relative;
 }
-ul.liste-noisettes-bloc li.noisette .edition a {margin-left: 2px; text-decoration: none;}
-ul.liste-noisettes-bloc li.noisette .edition ul.menu-edition:not(.visible) {display: none;}
-ul.liste-noisettes-bloc li.noisette .edition ul.menu-edition.visible {
+.liste-noisettes-bloc .noisette .edition a {
+	margin-left: 2px;
+	text-decoration: none;
+}
+.liste-noisettes-bloc .noisette .edition .menu-edition:not(.visible) {
+	display: none;
+}
+.liste-noisettes-bloc .noisette .edition .menu-edition.visible {
 	position: absolute;
 	top: -5px;
 	right: 0;
@@ -107,10 +128,36 @@ ul.liste-noisettes-bloc li.noisette .edition ul.menu-edition.visible {
 	border-radius: 2px; -moz-border-radius: 2px; -webkit-border-radius: 2px;
 	font-size: 0.90em;
 }
-ul.liste-noisettes-bloc li.noisette .edition ul.menu-edition.visible li {padding-top: 2px; padding-bottom: 2px;}
-ul.liste-noisettes-bloc li.noisette .edition ul.menu-edition.visible li:hover {background-color: #eee; text-decoration: underline;}
-ul.liste-noisettes-bloc li.noisette .edition ul.menu-edition.visible li.groupe {border-top: 1px solid #ccc;}
-ul.liste-noisettes-bloc li.noisette .edition ul.menu-edition.visible a {color: #333;}
+.liste-noisettes-bloc .noisette .edition .menu-edition.visible li {
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.liste-noisettes-bloc .noisette .edition .menu-edition.visible li:hover {
+	background-color: #eee;
+	text-decoration: underline;
+}
+.liste-noisettes-bloc .noisette .edition .menu-edition.visible .groupe {
+	border-top: 1px solid #ccc;
+}
+.liste-noisettes-bloc .noisette .edition .menu-edition.visible a {
+	color: #333;
+}
+
+/* résumés */
+.liste-noisettes .noisette .resume {
+	flex: 1 0 auto;
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+}
+.liste-noisettes .noisette .resume__icone {
+	margin-right: 0.5em;
+}
+.liste-noisettes .noisette .resume__content {
+	flex: 1 0 100%;
+	margin-left: calc(24px + 0.5em);
+	margin-top: 0.5em;
+}
 
 /* Styles du formulaire d'édition d'une page (editer_page) */
 /* -- choix et aperçu de l'icone */

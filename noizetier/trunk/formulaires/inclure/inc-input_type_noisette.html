@@ -9,10 +9,13 @@
 	</div>
 ]
 [(#ENV{input_type}|non)
-	<li class="item noisette">
-		[(#ENV{nom})]
-		<div class="icone">
-			[(#CHEMIN_IMAGE{#ENV{icon}}|image_reduire{24}|extraire_attribut{src}|balise_img)]
+	<li
+		class="item noisette"
+		data-type_noisette="[(#ENV{type_noisette}|attribut_html)]"
+	>
+		<div class="resume">
+			[(#CHEMIN_IMAGE{#ENV{icon}}|image_reduire{24}|inserer_attribut{class,resume__icone})]
+			[<span class="resume__nom">(#ENV{nom})</span>]
 		</div>
 		<input type="hidden" name="ordre\[\]" value="#ENV{type_noisette}" />
 	</li>

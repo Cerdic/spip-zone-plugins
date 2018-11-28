@@ -137,6 +137,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_page' => 'PAGE :',
 	'installation_tables' => 'Tables du plugin noiZetier installées.<br />',
 	'item_titre_perso' => 'titre personnalisé',
+	'info_1_noisette_ajoutee' => '1 noisette a été ajoutée',
+	'info_nb_noisettes_ajoutees' => '@nb@ noisettes ont été ajoutées',
 
 	// L
 	'label_afficher_titre_noisette' => 'Afficher un titre de noisettes ?',

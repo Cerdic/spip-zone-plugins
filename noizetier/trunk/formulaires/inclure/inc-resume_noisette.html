@@ -10,12 +10,11 @@
 		#SET{type_noisette_disponible, oui}
 	</BOUCLE_type_noisette>
 	[(#GET{type_noisette_disponible}|oui)
-		[<div class="nom">(#GET{type_noisette_nom})</div>]
-		[(#REM) Logo de la noisette ]
-		<div class="icone">
-			[(#CHEMIN_IMAGE{#GET{type_noisette_icone}}|image_reduire{24}|extraire_attribut{src}|balise_img)]
-		</div>
-		[(#NOISETTE_PREVIEW{#ID_NOISETTE, #GET{type_noisette_actif}, #GET{type_noisette_necessite}})]
+		[(#CHEMIN_IMAGE{#GET{type_noisette_icone}}|image_reduire{24}|inserer_attribut{class,resume__icone})]
+		[<strong class="resume__nom">(#GET{type_noisette_nom})</strong>]
+		[<div class="resume__content">
+			(#NOISETTE_PREVIEW{#ID_NOISETTE, #GET{type_noisette_actif}, #GET{type_noisette_necessite}})
+		</div>]
 	]
 	[(#GET{type_noisette_disponible}|non)
 		#BOITE_OUVRIR{'','error'}

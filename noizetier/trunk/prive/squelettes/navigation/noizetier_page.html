@@ -41,13 +41,142 @@
 	<br class="clear">
 	<script type="text/javascript">/*<!\[CDATA\[*/
 		jQuery('.noisettes_disponibles').show();
-		jQuery('ul.liste-noisettes-disponibles li.noisette').draggable({
-			connectToSortable: 'ul.liste-noisettes-bloc',
-			containment: "ul.liste-noisettes-bloc",
-			helper: 'clone',
-			revert: 'invalid',
+		// Rend les noisettes réordonnables
+		jQuery('.liste-noisettes-bloc')
+		.sortable({
+			items: '.noisette',
+			containment: '.liste-noisettes-bloc',
+			revert: true,
+			opacity: 0.66,
+			placeholder: 'ui-state-highlight',
+			forcePlaceholderSize: 1,
+			// Event : début de l'ordonnancement fini, DOM pas encore changé
+			// Noter le conteneur d'origine
+			start: function( event, ui ) {
+				var liste = $(this);
+				var noisette = ui.item;
+				liste.addClass('receptacle');
+				if (noisette.parents('.noisette[data-conteneur]').length) {
+					id_conteneur = noisette.parents('.noisette[data-conteneur]').data('conteneur');
+				} else {
+					id_conteneur = liste.data('id_conteneur');
+				}
+				noisette.data('id_conteneur_origine', id_conteneur);
+			},
+			// Event : stop
+			stop: function( event, ui ) {
+				var liste = $(this);
+				var noisette = ui.item;
+				liste.removeClass('receptacle');
+			},
+			// Event : ordonnancement fini, DOM modifié
+			// Changer le rang d'une noisette, ou bien en créer une nouvelle
+			update: function( event, ui ) {
+				var liste = $(this);
+				var noisette = ui.item;
+				var id_noisette = noisette.data('id_noisette');
+				var id_conteneur;
+
+				// Conteneur où on a relaché la noisette (noisette ou racine)
+				if (noisette.parents('.noisette[data-conteneur]').length) {
+					id_conteneur_destination = noisette.parents('.noisette[data-conteneur]').data('conteneur');
+				} else {
+					id_conteneur_destination = liste.data('id_conteneur');
+				}
+
+				// Trouver le nouveau rang
+				var rang;
+				if (noisette.prev('.noisette').length){
+					rang = noisette.prev('.noisette').data('rang') + 1;
+				} else if (noisette.next('.noisette').length) {
+					rang = noisette.next('.noisette').data('rang') - 1;
+				} else {
+					rang = 0;
+				}
+
+				// Actions
+				// On ajoute la noisette si c'est un clone issu de .draggable()
+				if (
+					noisette.hasClass('clone')
+					&& typeof(id_conteneur != 'undefined')
+				) {
+					var type_noisette = noisette.data('type_noisette');
+					var params = {
+						_type_noisette: type_noisette,
+						_id_conteneur: id_conteneur_destination,
+						rang: rang,
+					};
+					//console.log(params);
+					var action = '[(#VAL{ajouter_noisette_ajax}|generer_url_action{"",1})]';
+					noisette.animateLoading(); // Animation
+					$.ajax({
+						url: action,
+						data: params,
+						dataType: 'json',
+						cache: false,
+					}).done(function(data) {
+						noisette.endLoading(true).removeClass('clone');
+						if (data.success.length) {
+							var id_noisette = data.success;
+							noisette.ajaxReload({
+								callback: function(){
+									$('.noisette[data-id_noisette="'+id_noisette+'"]').animateAppend();
+								}
+							});
+						}
+						if (data.errors.length) {
+							noisette.animateRemove(function(){$(this).remove()});
+							console.log(data.errors);
+						}
+					});
+
+				// Sinon on la déplace
+				} else {
+					var id_conteneur_origine = noisette.data('id_conteneur_origine');
+					var params = {
+						_id_noisette: id_noisette,
+						rang: rang,
+						_id_conteneur_origine: id_conteneur_origine,
+						_id_conteneur_destination: id_conteneur_destination,
+					};
+					console.log(params);
+					var action = '[(#VAL{deplacer_noisette_ajax}|generer_url_action{"",1})]';
+					$.ajax({
+						url: action,
+						data: params,
+						dataType: 'json',
+						cache: false,
+					}).complete(function(data) {
+						if (data.success.length) {
+							var id_noisette = data.success;
+							noisette.ajaxReload();
+						}
+						if (data.errors.length) {
+							liste.sortable('cancel');
+							console.log(data.errors);
+						}
+					});
+				}
+			}
+		});
+		// Rend les noisettes déplaçables par drag and drop
+		// La traitement se fait dans .sortable()
+		jQuery('.liste-noisettes-disponibles .noisette').draggable({
+			connectToSortable: '.liste-noisettes-bloc',
+			containment: '.liste-noisettes-bloc',
+			helper: 'clone', // Doit correspondre à ce qu'il y a dans .sortable()
 			cursor: 'move',
-			opacity: 0.5
+			opacity: 0.66,
+			start: function( event, ui ) {
+				var liste = $(this);
+				liste.addClass('receptacle');
+			},
+			stop: function( event, ui ) {
+				var liste = $(this);
+				var noisette = ui.helper;
+				noisette.addClass('clone');
+				liste.removeClass('receptacle');
+			}
 		});
 		// Position fixe lors du scroll
 		noisettes_dispos_sticky = function(){
@@ -61,7 +190,7 @@
 					container.removeClass('is-stuck').css({'width': 'auto'});
 			});
 		}
-//		noisettes_dispos_sticky();
+		//noisettes_dispos_sticky();
 	/*\]\]>*/</script>
 </BOUCLE_page_navigation>
 	[(#ENV{exec}|=={noisette_edit}|oui)<INCLURE{fond=prive/squelettes/navigation/noisette_edit,env}>]
