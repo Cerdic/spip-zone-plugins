@@ -12,7 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_montant_perso_label_case' => 'Activer la personnalisation du montant',
 	'champ_renouvellement_auto_label' => 'Renouvellement',
 	'champ_renouvellement_auto_label_case' => 'Activer le renouvellement automatique',
-
+	
+	'explication_renouvellement' => 'Si vous avez déjà un abonnement actif à cette offre, en vous connectant, celui-ci sera prolongé à partir de sa date de fin.',
+	
 	// I
 	'info_paiement_unique' => 'Unique',
 	'info_paiement_renouvelable' => 'Prélèvement SEPA',

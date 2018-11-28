@@ -58,29 +58,38 @@
 }
 </BOUCLE_offre>
 
+[(#REM) Y a-t-il un abonnement actif de cette offre ? Si oui la date de début c'est sa date de fin ]
+<BOUCLE_abonnement(ABONNEMENTS)
+	{id_auteur=#SESSION{id_auteur}}
+	{id_abonnements_offre=#GET{commande/id_abonnements_offre}}
+	{statut=actif}
+	{!par date_fin}
+	{0,1}
+>
+#SET{date_debut, #DATE_FIN}
+</BOUCLE_abonnement>
+#SET{date_debut, #ENV{date}}
+<//B_abonnement>
+
 [(#REM) Calcul de l'affichage du prix avec 2 cas particuliers ]
 [(#SET{periodicite, #GET{offre/duree}|=={0}|?{<:abonnementsoffre:champ_duree_0:>,#VAL{abonnementsoffre:champ_periode_nb_}|concat{#GET{offre/periode}}|_T{#ARRAY{nb,#GET{offre/duree}}}}})]
 [(#GET{offre/duree}|=={1}|et{#GET{offre/periode}|=={mois}})
-#SET{periodicite, mois}
+	#SET{periodicite, mois}
 ]
 [(#GET{offre/duree}|=={12}|et{#GET{offre/periode}|=={mois}})
-#SET{periodicite, an}
+	#SET{periodicite, an}
 ]
 
 [(#REM) Formatage des dates si non renouvelable ]
 [(#GET{offre/renouvellement_auto}|non)
-#SET{periodes, #ARRAY{
-	heures,hour,
-	jours, day,
-	mois, month}
-}
-#SET{periode, #GET{periodes/#GET{offre/periode}}}
-#SET{date_fin, #VAL{Y-m-d H:i:s}|date{#VAL{+}|concat{#GET{offre/duree},#GET{periode}}|strtotime}}
-#SET{dates, #PLUGIN{agenda}|?{
-	#ENV{date}|agenda_affdate_debut_fin{#GET{date_fin},''},
-	#VAL{abonnementsoffre:info_dates_from_to}|_T{#ARRAY{date_debut,#VAL{#ENV{date}|affdate},date_fin,#VAL{#GET{date_fin}|affdate}}}
+	#SET{periodes, #ARRAY{
+		heures,hour,
+		jours, day,
+		mois, month}
 	}
-}
+	#SET{periode, #GET{periodes/#GET{offre/periode}}}
+	#SET{date_fin, #VAL{Y-m-d H:i:s}|date{#GET{date_debut}|concat{" + ", #GET{offre/duree}, #GET{periode}}|strtotime}}
+	#SET{dates, #GET{date_debut}|affdate_debut_fin{#GET{date_fin}, non}}
 ]
 
 [(#REM)
@@ -112,13 +121,12 @@
 			[(#GET{offre/renouvellement_auto}|non)
 			<span class="label"><:abonnementsoffre:info_duree:> :</span>
 				[(#GET{offre/duree}|singulier_ou_pluriel{abonnementsoffre:champ_periode_nb_#GET{offre/periode},abonnementsoffre:champ_periode_nb_#GET{offre/periode}})]
-				[: (#GET{dates})]
 			]
 			[(#GET{offre/renouvellement_auto}|oui)
 				<:abonnementsoffre:info_renouvellement_auto:>
 			]
 		</div>
-
+		
 		<div class="offre__paiement">
 			[(#GET{offre/renouvellement_auto}|non)
 				<span class="label"><:abonnementsoffre:info_paiement:> :</span> <:abonnementsoffre:info_paiement_unique:>
@@ -127,7 +135,10 @@
 			<span class="label"><:abonnementsoffre:info_paiement_auto:> :</span> [(#GET{offre/duree})][ (#GET{offre/periode})]
 			]
 		</div>
-
+		
+		[<div class="offre__detail">
+			(#SESSION{id_auteur}|?{#GET{dates}, <em><:abonnementsoffre:explication_renouvellement:></em>})
+		</div>]
 	</div>
 </div>
 </BOUCLE_affichage>
