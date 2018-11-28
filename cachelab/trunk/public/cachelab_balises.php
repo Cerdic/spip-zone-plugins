@@ -208,7 +208,7 @@ function cachelab_filtre_log($cache, $arg) {
 //
 // Utile pour optimiser avec plugin macrosession et vérifier que ça se passe bien, et durablement, comme prévu
 //
-function cachelab_filtre_assertsession ($cache, $arg) {
+function cachelab_filtre_assertsession (&$cache, $arg) {
 	if (!is_array($cache) or !isset($cache['source']) or !isset($cache['lastmodified']) or !isset($cache['invalideurs'])) {
 		spip_log ("cachelab_filtre_assertsession ne reçoit pas un cache mais".print_r($cache,1), "cachelab_assert");
 		return null;
@@ -235,6 +235,8 @@ function cachelab_filtre_assertsession ($cache, $arg) {
 	case 'non' :
 		$ok = !isset($invalideurs['session']);	// non défini
 		break;
+	case 'debug' :
+	case 'echo' :
 	case 'log' :
 		if (!isset($invalideurs['session']))
 			$log = 'non';
@@ -243,13 +245,23 @@ function cachelab_filtre_assertsession ($cache, $arg) {
 		else
 			$log = 'oui_anonyme';
 		$ok = true;
-		spip_log ("session ? $log", "cachelab_".$source_file);
-		break;
+		switch ($arg) {
+		case 'log' :
+			spip_log ("session ? $log", "cachelab_".$source_file);
+			break;
+		case 'echo' :
+			echo "<div class='debug cachelab'>$source_file sessionné ? $log</div>";
+			break;
+		case 'debug' :
+			$cache['texte'] .= '<'."?php echo '<div class=\"debug cachelab\" style=\"background-color:yellow\">$source_file sessionné ? $log</div>' ?>";
+			$cache['process_ins'] = 'php';
+			break;
+		};
 	default:
 		$ok = false;
 		$arg .= " : valeur incorrecte";
 		break;
 	}
 	if (!$ok)
-		spip_log ("$source : assertsession n'est pas $arg. invalideurs=".print_r($invalideurs,1), "cachelab_assertsession");
+		spip_log ("$source : assertsession n'est pas '$arg'. invalideurs=".print_r($invalideurs,1), "cachelab_assertsession");
 }
