@@ -1,0 +1,119 @@
+
+		#SET{dests,#ARRAY}
+		<BOUCLE_d(POUR){tableau #ENV{destinataires}}>
+		#SET{dests,#GET{dests}|push{#VALEUR}}
+    	</BOUCLE_d>
+
+		<div class="ajax formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}" id="#formulaire_chatbox_[(#GET{dests}|implode{''})]">
+
+		<div class="contenu_chatbox2" id="contenu_chatbox2_[(#GET{dests}|implode{''})]">
+            #INCLURE{fond=inc-chatbox2,dests=#GET{dests}|implode{","}}
+        </div>
+
+        <form method='post' action='#ENV{action}'>
+            <div>
+                [(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
+	 			#ACTION_FORMULAIRE
+             <div class="editer-groupe" style="padding:0;margin:0;">
+                    [(#ENV{_destiner}|oui)
+					 #SET{name,destinataires}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+                    <div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					#INCLURE{fond=formulaires/inc-destinataires-message,name=#GET{name},env}
+                    </div>
+                    ] 
+					#SET{name,titre}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					<input type="hidden" class="text" name="#GET{name}" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required="required" ] />
+  
+					#SET{name,texte}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+
+					#SET{form_id, textarea_#GET{dests}|implode{"_"}}
+                        <table class="formulaire_chat">
+                            <tr>
+                                <td class="tdCamera">
+                                    <div class="camera"><i class="fas fa-camera" aria-hidden="true"></i>
+                                    </div>
+                                </td>
+                                <td>
+                                    <textarea placeholder="chat..." name="#GET{name}" class="no_barre" id="#GET{form_id}"></textarea>
+                                </td>
+                                <td class="tdsubmit">
+                                    <button type="submit" name="send" class="btn spip send"><i class="fab fa-telegram-plane" aria-hidden="true"></i></button>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <script type="text/javascript">
+                            (function($, window) {
+                            $('##GET{form_id}').keyup(function (e) {
+                                autoheight(this);
+                            });                    
+                            function autoheight(a) {
+                                if (!$(a).prop('scrollTop')) {
+                                    do {
+                                        var b = $(a).prop('scrollHeight');
+                                        var h = $(a).height();
+                                        $(a).height(h - 5);
+                                    }
+                                    while (b && (b != $(a).prop('scrollHeight')));
+                                };
+                                $(a).height($(a).prop('scrollHeight') + 20);
+                            }
+                            autoheight($('##GET{form_id}'));
+                            })(jQuery, window);
+                        </script>
+ 
+                    [(#REM) Piege a robots spammeurs ] #SET{name,antispam}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+                    <div class="editer none editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+                        <label for="nobotnobot-#ID"><:antispam_champ_vide:></label>[
+                        <span class='erreur_message'>(#GET{erreurs})</span> ]
+                        <input type="text" class="text" name="#GET{name}" value="#ENV*{#GET{name}}" id="nobotnobot-#ID" />
+                    </div>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+[(#REM)    <script>
+        (function($, window) {
+        $("#contenu_chatbox2_[(#GET{dests}|implode{''})]").animate({ scrollTop: $(document).height() }, "slow");
+         return false;
+        })(jQuery, window);
+    </script>]
+
+    <script type='text/javascript' src='#CHEMIN{js/jquery.labelhide.js}'></script>
+    <script type='text/javascript'>
+        <!--
+        if (window.jQuery) (function($){
+        	// adresse du fragment ajax
+        	var url = 'spip.php?page=inc-chatbox2\x26dests=[(#GET{dests}|implode{','})]\x26nb_messages_recus=[(#GET{nb_messages_recus})]';
+        	// reload : au debut, toutes les 20s, puis 22, 24... 60s
+        	// si on participe on revient a 5s, puis 7, 9... 60s
+        	var r = 10;
+        	var reload = function() {
+        	$("#contenu_chatbox2_[(#GET{dests}|implode{''})]")
+        		.load(url,function(){setTimeout(reload,1000*(r=Math.min(r+2,60)));});
+        	}
+        	setTimeout(reload, r);
+        	$("#formulaire_chatbox_[(#GET{dests}|implode{''})] form")
+        	.ajaxForm({
+        		url: url,
+        		target: "#contenu_chatbox2_[(#GET{dests}|implode{''})]",
+        		beforeSubmit: function(){
+        			$("#contenu_chatbox2_[(#GET{dests}|implode{''})]")
+        			.css('opacity', 0.5);
+        		},
+        		success: function(){
+        			$("#contenu_chatbox2_[(#GET{dests}|implode{''})]")
+        			.css('opacity', 1);
+        			r = 5;
+        		}
+        	});
+        
+        	// Masquer le champ de saisie du nick sous son label
+        	$('label.labelhide').labelhide();
+        
+        })(jQuery);
+        // -->
+    </script>
