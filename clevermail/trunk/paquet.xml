@@ -1,7 +1,7 @@
 <paquet
 	prefix="clevermail"
 	categorie="communication"
-	version="3.0.19"
+	version="3.0.20"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/fatcow/32/email_open.png"
@@ -21,7 +21,6 @@
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/clevermail.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/clevermail.php" />
-	<pipeline nom="autoriser" inclure="clevermail_autoriser.php" />
 	<pipeline nom="header_prive" inclure="clevermail_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="clevermail_pipelines.php" />
   

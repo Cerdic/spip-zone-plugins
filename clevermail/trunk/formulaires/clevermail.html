@@ -1,7 +1,10 @@
+<BOUCLE_lst_id_force(CM_LISTS){si #ENV{lst_id_force}|!={0}}{lst_id=#ENV**{lst_id_force}}{lst_moderation!=closed}>[(#VAL{oui}|setenv{editable}) ]</BOUCLE_lst_id_force>
+<BOUCLE_CountListes(CM_LISTS){lst_moderation!=closed}{pagination 1}>[(#SET{lst_id,#LST_ID})] </BOUCLE_CountListes>[(#GRAND_TOTAL|=={1}|oui)[(#GET{lst_id}|setenv{lst_id_force})][(#VAL{oui}|setenv{editable})]][(#GRAND_TOTAL|>{1}|oui)[(#VAL{oui}|setenv{editable})]] </B_CountListes>[(#VAL{''}|setenv{editable})] <//B_CountListes>
+<//B_lst_id_force>
 <a id="#FORM"></a>
 <div class="formulaire_spip formulaire_editer formulaire_#FORM" id="formulaire_#FORM-#ENV{id,new}">
   [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})[<br /><a href="(#SELF)"><:clevermail:procedure_termine:></a>]</p>]
-  [(#ENV{editable})
+  [(#ENV{editable}|oui)
 	  [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})[<br /><a href="(#SELF)"><:clevermail:procedure_termine:></a>]</p>]
 	  <form action="[(#ENV{action}|ancre_url{#FORM})]" method="post" enctype="multipart/form-data"><div>
 	    #ACTION_FORMULAIRE{#ENV{action}}

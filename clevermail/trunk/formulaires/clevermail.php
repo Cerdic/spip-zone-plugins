@@ -1,7 +1,6 @@
 <?php
-include_spip('base/abstract_sql');
 function formulaires_clevermail_charger_dist($lst_id_force = 0, $lsr_mode_force = false, $cbox='') {
-	$default = array('lsr_mode' => 1, 'sub_email' => '', 'lst_id_force' => 0, 'lst_ids' => array());
+	$default = array('lsr_mode' => 1, 'sub_email' => '', 'lst_id_force' => $lst_id_force, 'lst_ids' => array());
 	if ($cbox == 'box') {
 	  $default['cbox'] = $cbox;
 	}
@@ -11,30 +10,7 @@ function formulaires_clevermail_charger_dist($lst_id_force = 0, $lsr_mode_force 
 	if ($lsr_mode_force) {
 		$default['lsr_mode_force'] = $lsr_mode_force;
 	}	
-	if (intval($lst_id_force) != 0) {
-		if ($lst_id = sql_getfetsel("lst_id", "spip_cm_lists", "lst_id = ".$lst_id_force." AND lst_moderation != 'closed'")) {
-			$valeurs = $default;
-			$valeurs['lst_id_force'] = $lst_id_force;
-			$valeurs['lst_ids'] = array($lst_id);
-  		return $valeurs;
-		} else {
-      return array('editable' => '');
-		}
-	} else {
-	  $nbLists = sql_countsel("spip_cm_lists", "lst_moderation != 'closed'");
-	  if ($nbLists == 0) {
-      return array('editable' => '');
-	  } elseif ($nbLists == 1) {
-	  	$lst_id = sql_getfetsel("lst_id", "spip_cm_lists", "lst_moderation != 'closed'");
-      $valeurs = $default;
-			$valeurs['lst_id_force'] = $lst_id;
-      $valeurs['lst_ids'] = array($lst_id);
-      return $valeurs;
-	  } else {
-	  	// editable, mais le squelette trouvera tout seul la liste de valeurs
-	    return $default;
-	  }
-	}
+	return $default;
 }
 
 function formulaires_clevermail_verifier_dist($lst_id = 0, $lsr_mode_force = false, $cbox='') {
@@ -58,6 +34,8 @@ function formulaires_clevermail_verifier_dist($lst_id = 0, $lsr_mode_force = fal
 function formulaires_clevermail_traiter_dist($lst_id = 0, $lsr_mode_force = false, $cbox='') {
 	$ok = true;
 	$message = '';
+	
+	include_spip('base/abstract_sql');
 	
 	if ($sub_id = sql_getfetsel("sub_id", "spip_cm_subscribers", "sub_email=".sql_quote(_request('sub_email')))) {
 		$sub_id = intval($sub_id);
@@ -251,4 +229,3 @@ function formulaires_clevermail_traiter_dist($lst_id = 0, $lsr_mode_force = fals
 
 	return array('message_ok' => $message);
 }
-?>
