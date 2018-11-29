@@ -49,7 +49,8 @@ function cm_heure($timestamp) {
  * @param null|mixed $continue Si présent, retourne la valeur en sortie
  * @return string|mixed Retourne `$val` si `$continue` présent, sinon ''.
  */
-if (!function_exists('filtre_setenv')) {
+include_spip('inc/plugin'); // pour spip_version_compare
+if (spip_version_compare($GLOBALS['spip_version_branche'], '3.1.0', '<')) {
 	// Fonction qui n'existait pas avant SPIP 3.1
 	function filtre_setenv(&$Pile, $val, $key, $continue = null) {
 		$Pile[0][$key] = $val;
