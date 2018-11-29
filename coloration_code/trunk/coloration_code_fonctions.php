@@ -175,7 +175,7 @@ function cadre_ou_code($regs) {
 	} else {
 		// traiter les <cadre> sans class par precode pour ne pas générer de <textarea>
 		if ($regs[1] == "cadre" && defined('_DIR_PLUGIN_PRECODE') && _DIR_PLUGIN_PRECODE) {
-			return precode_balisage_code('class=""', trim($regs[3]));
+			return precode_balisage_code('class=""', trim(entites_html($regs[3])));
 		}
 	}
 
