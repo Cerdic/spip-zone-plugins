@@ -14,6 +14,8 @@ Mon bloc depliable		/ qui est aussi l'emplacement pour l'Ajax si le fragment est
 
 if(!defined('_BLOC_TITRE_H')) define('_BLOC_TITRE_H', 'h4');
 
+if(!function_exists('balise_BLOC_TITRE')) {
+
 // Pour la balise suivante, l'ordre des arguments importe peu
 // Un bloc replie, titre simple : #BLOC_TITRE
 // Un bloc replie AJAX : #BLOC_TITRE{fragment} (fragment est une URLs)
@@ -187,4 +189,5 @@ function blocs_balises($type, $args = array()) {
 	}
 }
 
+} // if(!function_exists('balise_BLOC_TITRE'))
 ?>

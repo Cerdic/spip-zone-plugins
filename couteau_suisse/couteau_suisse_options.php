@@ -81,6 +81,7 @@ $GLOBALS['cs_params']  = isset($_GET['cs']) ? explode(',', urldecode($_GET['cs']
 define('_DIR_CS_TMP', sous_repertoire(_DIR_TMP, 'couteau-suisse'));
 
 // pour voir les erreurs ?
+global $auteur_session;
 if (in_array('report', $GLOBALS['cs_params'])) {
 	define('_CS_REPORT', 1);
 	error_reporting(E_ALL ^ E_NOTICE);
