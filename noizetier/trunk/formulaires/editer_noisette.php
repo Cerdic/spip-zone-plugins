@@ -119,6 +119,9 @@ function formulaires_editer_noisette_traiter_dist($id_noisette, $redirect = '') 
 			$css = '';
 		}
 
+		// Fermeture de la modale
+		$autoclose = "<script type='text/javascript'>if (window.jQuery) jQuery.modalboxclose();</script>";
+
 		// Mise à jour de la noisette en base de données
 		include_spip('inc/ncore_noisette');
 		$valeurs = array('parametres' => serialize($parametres), 'balise' => $balise, 'css' => $css);
@@ -126,7 +129,7 @@ function formulaires_editer_noisette_traiter_dist($id_noisette, $redirect = '') 
 			// On invalide le cache
 			include_spip('inc/invalideur');
 			suivre_invalideur("id='noisette/$id_noisette'");
-			$retour['message_ok'] = _T('info_modification_enregistree');
+			$retour['message_ok'] = _T('info_modification_enregistree') . $autoclose;
 			if ($redirect) {
 				if (strncmp($redirect, 'javascript:', 11) == 0) {
 					$retour['message_ok'] .= '<script type="text/javascript">/*<![CDATA[*/'.substr($redirect, 11).'/*]]>*/</script>';

@@ -3,10 +3,11 @@
 /**
  * Action déplacer une noisette en ajax
  *
+ * Permet de déplacer une noisette avec n'importe quel rang, dans n'importe quel conteneur
  * Met à jour les rangs des autres noisettes si nécessaire.
  * Retourne du JSON.
  *
- * @Note : cette action diffère deplacer_noisette.php
+ * @Note : cette action diffère de deplacer_noisette.php qui permet de déplacer d'un unique rang, au sein du même conteneur
  *
  * @plugin     Noizetier
  * @copyright  2018
@@ -31,7 +32,7 @@ function action_deplacer_noisette_ajax_dist() {
 	$success                  = $errors = '';
 
 	// Rustine temporaire : l'API de déplacement ne prévoit pas de changement de conteneur
-	// Dans ce cas on modifie le rang en amont afin de forcer le changement
+	// Dans ce cas on modifie le conteneur avec un rang libre en amont afin de forcer le changement
 	$nouveau_conteneur = ($id_conteneur_destination != $id_conteneur_origine);
 	if ($nouveau_conteneur) {
 		include_spip('action/editer_objet');
