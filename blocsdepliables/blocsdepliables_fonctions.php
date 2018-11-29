@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Blocs Dépliables
- * (c) 2013 Collectif
+ * (c) 2013 Collectif, issu du plugin "Le Couteau Suisse"
  * Licence GNU/GPL
  */
 
@@ -32,6 +32,8 @@ function blocdepliable_balise_titre() {
 	}
 	return $h;
 }
+
+if(!function_exists('balise_BLOC_TITRE')) {
 
 // Pour la balise suivante, l'ordre des arguments importe peu
 // Un bloc replie, titre simple : #BLOC_TITRE
@@ -239,3 +241,5 @@ function blocs_balises($type, $args = array()) {
 			}
 	}
 }
+
+} // if(!function_exists('balise_BLOC_TITRE'))

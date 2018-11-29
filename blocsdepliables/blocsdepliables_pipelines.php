@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Blocs Dépliables
- * (c) 2013 Collectif
+ * (c) 2013 Collectif, issu du plugin "Le Couteau Suisse"
  * Licence GNU/GPL
  */
 
