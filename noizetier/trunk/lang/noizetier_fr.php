@@ -132,13 +132,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ieconfig_noizetier_export_option' => 'Inclure dans l’export ?',
 	'ieconfig_non_installe' => '<b>Plugin Importeur/Exporteur de configurations :</b> ce plugin n’est pas installé sur votre site. Il n’est pas nécessaire au fonctionnement du noizetier. Cependant, s’il est activé, vous pourrez exporter et importer des configurations de noisettes dans le noizetier.',
 	'ieconfig_probleme_import_config' => 'Un problème a été rencontré lors de l’importation de la configuration du noiZetier.',
+	'info_1_noisette_ajoutee' => '1 noisette a été ajoutée',
 	'info_composition' => 'COMPOSITION :',
 	'info_etendre_noisette' => 'Copier la noisette @noisette@ dans le bloc @bloc@ d’autres pages',
+	'info_nb_noisettes_ajoutees' => '@nb@ noisettes ont été ajoutées',
 	'info_page' => 'PAGE :',
 	'installation_tables' => 'Tables du plugin noiZetier installées.<br />',
 	'item_titre_perso' => 'titre personnalisé',
-	'info_1_noisette_ajoutee' => '1 noisette a été ajoutée',
-	'info_nb_noisettes_ajoutees' => '@nb@ noisettes ont été ajoutées',
 
 	// L
 	'label_afficher_titre_noisette' => 'Afficher un titre de noisettes ?',
