@@ -128,47 +128,12 @@
 	[(#REM) <!-- ajouter les saisies supplementaires : extra et autre, a cet endroit -->]
 	<!--extra-->
 </form>
+
 <script type="text/javascript">
 /*<!\[CDATA\[*/
-	[(#REM) <!-- Affichage du menu des actions de chaque noisette -->]
-	$(function() {
-		function afficherMenu (bouton) {
-			$(bouton).parents('ul').children('li').children('ul').addClass('visible');
-		}
-
-		function masquerMenu (bouton) {
-			$(bouton).parents('ul').children('li').children('ul').removeClass('visible');
-		}
-
-		function toggleMenu (bouton) {
-			$(bouton).parents('ul').children('li').children('ul').toggleClass('visible');
-		}
-
-		$('a.bouton-edition')
-			// .focusin(
-			// 	function() {
-			// 		afficherMenu(this);
-			// 	}
-			// )
-			// .focusout(
-			// 	function() {
-			// 		masquerMenu(this);
-			// 	}
-			// )
-			// .hover(
-			// 	function() {
-			// 		afficherMenu(this);
-			// 	},
-			// 	function() {
-			// 		masquerMenu(this);
-			// 	}
-			// )
-			.click(
-				function(event) {
-					event.preventDefault();
-					toggleMenu(this);
-				}
-			);
+	// Affichage du menu des actions de chaque noisette
+	$( function() {
+		$( ".noisette .edition__menu" ).menu();
 	});
 /*\]\]>*/
 </script>

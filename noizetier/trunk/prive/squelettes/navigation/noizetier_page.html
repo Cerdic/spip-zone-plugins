@@ -47,7 +47,7 @@
 		/**
 		 * Éditer les noisettes dans des modales
 		 */
-		jQuery('.liste-noisettes a.bouton-modifier').click(function(){
+		jQuery('.noisette .bouton-modifier').click(function(){
 			var noisette = jQuery(this).parents('.noisette').eq(0);
 			jQuery(noisette).animateLoading();
 			jQuery.modalboxload(parametre_url(parametre_url(parametre_url(jQuery(this).attr('href'),'popin','oui'),'var_zajax','contenu'), 'redirect',''),{

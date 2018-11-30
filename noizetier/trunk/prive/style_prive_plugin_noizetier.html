@@ -116,47 +116,33 @@ ul.noizetier-liste-pages li.page .composition .icone {left: 30px;}
 /* menu edition */
 .liste-noisettes-bloc .noisette .edition {
 	flex: 0 1 auto;
+	display: flex;
+	align-items: center;
 }
-.liste-noisettes-bloc .noisette .edition li {
-	position: relative;
+.liste-noisettes-bloc .noisette .edition__main {
+	margin-right: 0.5em;
 }
-.liste-noisettes-bloc .noisette .edition a {
-	margin-left: 2px;
-	text-decoration: none;
+.liste-noisettes-bloc .noisette .edition__menu a {
+	display: block;
+	font-size: 0.9em;
 }
-.liste-noisettes-bloc .noisette .edition .menu-edition:not(.visible) {
+.liste-noisettes-bloc .noisette .edition__menu.ui-menu {
+	border: 0;
+	background: none;
+}
+.liste-noisettes-bloc .noisette .edition__menu.ui-menu > li > ul {
+	width: 20em;
+}
+.liste-noisettes-bloc .noisette .ui-menu .edition__toggle {
+	display: flex;
+	align-items: center;
+	padding: 0;
+}
+.liste-noisettes-bloc .noisette [class*="ui-icon-caret"] {
 	display: none;
 }
-.liste-noisettes-bloc .noisette .edition .menu-edition.visible {
-	position: absolute;
-	top: -5px;
-	right: 0;
-	transform: translateX(calc(100% + 10px));
-	/* left: 295px; */
-	min-width: 250px;
-	z-index: 5000;
-	float: left;
-	text-align: left;
-	padding: 5px;
-	/*border: 1px solid #ccc;*/
-	background-color: white;
-	box-shadow: 3px 3px 3px #ccc; -moz-box-shadow: 3px 3px 3px #ccc; -webkit-box-shadow: 3px 3px 3px #ccc;
-	border-radius: 2px; -moz-border-radius: 2px; -webkit-border-radius: 2px;
-	font-size: 0.90em;
-}
-.liste-noisettes-bloc .noisette .edition .menu-edition.visible li {
-	padding-top: 2px;
-	padding-bottom: 2px;
-}
-.liste-noisettes-bloc .noisette .edition .menu-edition.visible li:hover {
-	background-color: #eee;
-	text-decoration: underline;
-}
-.liste-noisettes-bloc .noisette .edition .menu-edition.visible .groupe {
+.liste-noisettes-bloc .noisette .edition__menu .groupe {
 	border-top: 1px solid #ccc;
-}
-.liste-noisettes-bloc .noisette .edition .menu-edition.visible a {
-	color: #333;
 }
 /* Ajustements et aides visuelles glisser-déposer */
 .liste-noisettes-bloc .noisette.ui-draggable {
