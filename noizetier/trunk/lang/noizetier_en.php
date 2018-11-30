@@ -71,7 +71,7 @@ You can choose a new identifier or suffix the reference identifier as follows:
 	'explication_noisette_css' => 'You can add to the wrapping nut tag any additional CSS classes.',
 	'explication_noizetier_ajax' => 'The default AJAX inclusion mode can be changed individually for each nut (YAML file).',
 	'explication_noizetier_balise' => 'The default mode of inclusion in a wrapping tag can be modified individually for each nut (parameterization).',
-	'explication_noizetier_profondeur_max' => 'You can nest container-type nuts. Choose the number of nesting levels you want.',
+	'explication_noizetier_profondeur_max' => 'You can nest container-type nuts. Choose the number of nesting levels you want.', # MODIF
 	'explication_objet' => 'Type of content "@type@"',
 	'explication_page' => 'Autonomous page not linked to a content type',
 	'explication_page_objet' => 'Page linked to the content type "@type@"',
@@ -208,8 +208,6 @@ nuts on the following pages:',
 	'option_noisette_balise_oui' => 'Always use a wrapping tag',
 	'option_noizetier_balise_non' => 'without tag',
 	'option_noizetier_balise_oui' => 'with tag',
-	'option_profondeur_max_1' => '1 level',
-	'option_profondeur_max_2' => '2 levels',
 	'oui' => 'Yes',
 
 	// P

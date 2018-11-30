@@ -69,7 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_noisette_css' => 'Je kunt een alles omhullend baken opnemen voor aanvullende  CSS classes.',
 	'explication_noizetier_ajax' => 'De standaard AJAX modus kan voor ieder nootje individueel worden aangepast (YAML-bestand).',
 	'explication_noizetier_balise' => 'De standaard modus in een alles omhullend baken kan voor ieder individueel nootje worden aangepast (parameters).',
-	'explication_noizetier_profondeur_max' => 'Je kunt nootjes van het type container invoegen. Kies het gewenste aantal niveaus.',
+	'explication_noizetier_profondeur_max' => 'Je kunt nootjes van het type container invoegen. Kies het gewenste aantal niveaus.', # MODIF
 	'explication_objet' => 'Inhoudstype « @type@ »',
 	'explication_page' => 'Autonome pagina, niet gekoppeld aan een inhoudstype',
 	'explication_page_objet' => 'Pagina gekoppeld aan inhoudstype « @type@ »',
@@ -203,8 +203,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_noisette_balise_oui' => 'Gebruik altijd een omhullend baken',
 	'option_noizetier_balise_non' => 'zonder baken',
 	'option_noizetier_balise_oui' => 'met baken',
-	'option_profondeur_max_1' => '1 niveau',
-	'option_profondeur_max_2' => '2 niveaus',
 	'oui' => 'Ja',
 
 	// P
