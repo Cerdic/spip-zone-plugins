@@ -70,21 +70,27 @@ ul.noizetier-liste-pages li.page .composition .icone {left: 30px;}
 }
 .liste-noisettes-bloc .noisette {
 	overflow: visible;
+	padding: 0;
 }
-.liste-noisettes-bloc .noisette.ui-draggable {
-	width: auto !important;
+.liste-noisettes-bloc .noisette:hover {
+	background: transparent;
 }
+.liste-noisettes-bloc .noisette__content {
+	display: flex;
+	padding: 0.5em 0;
+	transition: background 0.2s;
+}
+.liste-noisettes-bloc .noisette__content:hover {
+	background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];
+}
+/* noisettes enfantes */
 .liste-noisettes-conteneur {
 	padding-left: 32px;
-	margin-top: 0.6925em;
 }
-.liste-noisettes-conteneur.placebo {
-	margin: 0;
-}
-.liste-noisettes-conteneur.placebo .noisette {
+.liste-noisettes-conteneur .noisette.placebo {
 	padding: 0;
 	border: none !important;
-	height: 0.5em; /* Important, permet le drag and drop */
+	height: 0.25em; /* Permet le drag and drop sur les conteneurs vides */
 }
 .liste-noisettes-conteneur > .noisette:first-child {
 	border-top: 1px solid #ddd;
@@ -92,12 +98,22 @@ ul.noizetier-liste-pages li.page .composition .icone {left: 30px;}
 .liste-noisettes-conteneur > .noisette:last-child {
 	border-bottom: 0;
 }
-.liste-noisettes-conteneur .noisette:last-child {
-	padding-bottom: 0;
-}
-.liste-noisettes-bloc .noisette__content {
+/* résumés */
+.liste-noisettes .noisette .resume {
+	flex: 1 0 auto;
 	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
 }
+.liste-noisettes .noisette .resume__icone {
+	margin-right: 0.5em;
+}
+.liste-noisettes .noisette .resume__content {
+	flex: 1 0 100%;
+	margin-left: calc(24px + 0.5em);
+	margin-top: 0.5em;
+}
+/* menu edition */
 .liste-noisettes-bloc .noisette .edition {
 	flex: 0 1 auto;
 }
@@ -142,22 +158,25 @@ ul.noizetier-liste-pages li.page .composition .icone {left: 30px;}
 .liste-noisettes-bloc .noisette .edition .menu-edition.visible a {
 	color: #333;
 }
+/* Ajustements et aides visuelles glisser-déposer */
+.liste-noisettes-bloc .noisette.ui-draggable {
+	width: auto !important;
+}
+.liste-noisettes-bloc.sorting .noisette .noisette__content {
+	background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];
+}
+.liste-noisettes-bloc.sorting .noisette.recevoir_non .noisette__content {
+	opacity: 0.5;
+	background-color: transparent;
+}
 
-/* résumés */
-.liste-noisettes .noisette .resume {
-	flex: 1 0 auto;
-	display: flex;
-	flex-flow: row wrap;
-	align-items: center;
+/*
+.liste-noisettes-bloc.sorting .noisette.profondeur-max .noisette__content {
+	background-color: transparent;
 }
-.liste-noisettes .noisette .resume__icone {
-	margin-right: 0.5em;
-}
-.liste-noisettes .noisette .resume__content {
-	flex: 1 0 100%;
-	margin-left: calc(24px + 0.5em);
-	margin-top: 0.5em;
-}
+.liste-noisettes-bloc.sorting .profondeur-max {
+	opacity: 0.5;
+}*/
 
 /* Styles du formulaire d'édition d'une page (editer_page) */
 /* -- choix et aperçu de l'icone */

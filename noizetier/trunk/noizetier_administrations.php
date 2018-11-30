@@ -30,7 +30,7 @@ function noizetier_upgrade($nom_meta_base_version, $version_cible) {
 		'objets_noisettes' => array(),
 		'balise_noisette' => 'on',
 		'ajax_noisette' => 'on',
-		'profondeur_max' => 1,
+		'profondeur_max' => '',
 	);
 
 	$maj['create'] = array(

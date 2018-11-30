@@ -8,30 +8,34 @@
 
 		<div class="editer-groupe">
 			[(#SAISIE{case, balise_noisette,
+				label=<:noizetier:configurer_balise_noisette_label:>,
 				label_case=<:noizetier:label_noizetier_balise:>,
 				explication=<:noizetier:explication_noizetier_balise:>,
 			})]
 
 			[(#SAISIE{case, ajax_noisette,
+				label=<:noizetier:configurer_ajax_noisette_label:>,
 				label_case=<:noizetier:label_noizetier_ajax:>,
 				explication=<:noizetier:explication_noizetier_ajax:>,
 			})]
-		</div>
 
-		<div class="editer-groupe">
-			[(#SAISIE{radio, profondeur_max,
-				explication=<:noizetier:explication_noizetier_profondeur_max:>,
-				datas=#ARRAY{0, <:noizetier:option_profondeur_max_1:>, 1, <:noizetier:option_profondeur_max_2:>},
+			[(#REM) Imbrication : on prend en priorité la valeur définie par constante ]
+			#SET{constant,#VAL{_NOIZETIER_PROFONDEUR_MAX}|defined|?{#EVAL{_NOIZETIER_PROFONDEUR_MAX}}}
+			[(#SAISIE{input, profondeur_max,
+				label=<:noizetier:configurer_profondeur_max_label:>,
+				explication=<:noizetier:explication_noizetier_profondeur_max:>[(#GET{constant}|oui)<br><:noizetier:explication_noizetier_cfg_constant:>],
+				readonly=#GET{constant}|?{oui},
+				disable=#GET{constant}|?{oui},
+				valeur_forcee=#GET{constant},
+				defaut=#GET{constant},
 			})]
-		</div>
 
-		[(#REM) Il faut exclure les types d'objet qui n'ont pas de page explicitement détectable par le noiZetier pour
+			[(#REM) Il faut exclure les types d'objet qui n'ont pas de page explicitement détectable par le noiZetier pour
 		        ne proposer que les types d'objet potentiellement utilisables ]
-		<div class="editer-groupe">
-		[(#SAISIE{choisir_objets, objets_noisettes,
-			label=<:noizetier:configurer_objets_noisettes_label:>,
-			explication=<:noizetier:configurer_objets_noisettes_explication:>,
-			exclus=#ENV{_objets_exclus}})]
+			[(#SAISIE{choisir_objets, objets_noisettes,
+				label=<:noizetier:configurer_objets_noisettes_label:>,
+				explication=<:noizetier:configurer_objets_noisettes_explication:>,
+				exclus=#ENV{_objets_exclus}})]
 		</div>
 
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>

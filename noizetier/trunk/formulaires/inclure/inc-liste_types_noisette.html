@@ -25,6 +25,7 @@
 		<BOUCLE_types_noisette_composition(TYPES_NOISETTES){plugin=noizetier}{type=#GET{type}}{composition=#GET{composition}}{actif?}{where?}{tri #GET{tri},#GET{defaut_tri}}{par type_noisette}>
 			<INCLURE{fond=formulaires/inclure/inc-input_type_noisette,
 				type_noisette,
+				conteneur,
 				nom=#NOM,
 				icon,
 				input_type} />
@@ -43,6 +44,7 @@
 	<BOUCLE_types_noisette_page(TYPES_NOISETTES){plugin=noizetier}{type=#GET{type}}{composition=''}{actif?}{where?}{tri #GET{tri},#GET{defaut_tri}}{par type_noisette}>
 			<INCLURE{fond=formulaires/inclure/inc-input_type_noisette,
 				type_noisette,
+				conteneur,
 				nom=#NOM,
 				icon,
 				input_type} />
@@ -60,6 +62,7 @@
 	<BOUCLE_types_noisette_communes(TYPES_NOISETTES){plugin=noizetier}{type=''}{composition=''}{actif?}{where?}{tri #GET{tri},#GET{defaut_tri}}{par type_noisette}>
 			<INCLURE{fond=formulaires/inclure/inc-input_type_noisette,
 				type_noisette,
+				conteneur,
 				nom=#NOM,
 				icon,
 				input_type} />

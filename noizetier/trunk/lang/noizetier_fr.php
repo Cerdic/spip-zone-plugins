@@ -27,6 +27,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'compositions_non_installe' => '<b>Plugin compositions :</b> ce plugin n’est pas installé sur votre site. Il n’est pas nécessaire au fonctionnement du noizetier. Cependant, s’il est activé, vous pourrez déclarer des compositions directement dans le noizetier.',
 	'configurer_objets_noisettes_explication' => 'Sur ces types de contenus, il sera permis de personnaliser les noisettes <strong>contenu par contenu</strong>.',
 	'configurer_objets_noisettes_label' => 'Autoriser la personnalisation par contenu sur :',
+	'configurer_profondeur_max_label' => 'Profondeur d\'imbrication',
+	'configurer_ajax_noisette_label' => 'Inclusion AJAX',
+	'configurer_balise_noisette_label' => 'Balise englobante',
 	'configurer_titre' => 'Configuration du noiZetier',
 	'copie_de' => 'Copie de @source@',
 
@@ -67,7 +70,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_noisette_css' => 'Vous pouvez ajouter à la balise englobante de la noisette d’éventuelles classes CSS supplémentaires.',
 	'explication_noizetier_ajax' => 'Le mode par défaut d’inclusion AJAX peut être modifié unitairement pour chaque noisette (fichier YAML).',
 	'explication_noizetier_balise' => 'Le mode par défaut d’inclusion dans une balise englobante peut être modifié unitairement pour chaque noisette (paramètrage).',
-	'explication_noizetier_profondeur_max' => 'Vous pouvez imbriquer des noisettes de type conteneur. Choisissez le nombre de niveaux d’imbrication souhaité.',
+	'explication_noizetier_profondeur_max' => 'Les noisettes peuvent s\'imbriquer au moyen des noisettes de type conteneur. Vous pouvez définir un nombre maximal de niveaux d’imbrication.',
+	'explication_noizetier_cfg_constant' => 'Cette valeur est actuellement définie via une constante, elle ne peut pas être changée ici.',
 	'explication_objet' => 'Contenu de type « @type@ »',
 	'explication_page' => 'Page autonome non liée à un type de contenu',
 	'explication_page_objet' => 'Page liée au type de contenu « @type@ »',
@@ -204,8 +208,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_noisette_balise_oui' => 'Toujours utiliser une balise englobante',
 	'option_noizetier_balise_non' => 'sans balise',
 	'option_noizetier_balise_oui' => 'avec balise',
-	'option_profondeur_max_1' => '1 niveau',
-	'option_profondeur_max_2' => '2 niveaux',
 	'oui' => 'Oui',
 
 	// P
