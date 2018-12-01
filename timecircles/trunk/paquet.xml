@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.1.0;3.3.*]"
 	logo="images/timecircles-32.png"
-	documentation="https://contrib.spip.net/5067"	
+	documentation="https://contrib.spip.net/5069"	
 >
 	<nom>TimeCircles</nom>
 	<!-- Add Wim Barelds' jQuery timers to your website -->
