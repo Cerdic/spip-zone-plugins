@@ -119,11 +119,13 @@ global $Memoization;
 		list ($f, $arg) = split_first_arg($f, 'date_creation');
 		if (function_exists($f)) {
 			if (!isset($page['contexte'][$arg])) {
-				spip_log ("#CACHE avec squelette {$page['source']} et calcul durée avec $f mais pas de '$args' dans le contexte ".print_r($page['contexte'],1), "cachelab_erreur");
+				spip_log ("#CACHE avec squelette {$page['source']} et calcul de durée avec $f mais pas de '$arg' dans le contexte ".print_r($page['contexte'],1), "cachelab_erreur");
 				return;
 			}
 			$duree = $f($page['contexte'][$arg]);
 			spip_log ("#CACHE $f ($arg={$page['contexte'][$arg]}) renvoie : $duree s", "cachelab");
+			if (strpos(_request('var_mode'), 'cache') !== false)
+				echo "<div class='inclure_blocs cachelab_blocs'>Durée dynamique : $duree</div>";
 
 			$page['duree'] = $duree;
 			$page['entetes']['X-Spip-Cache']=$duree;
@@ -146,11 +148,15 @@ global $Memoization;
 		list ($f, $arg) = split_first_arg($f);
 		if (function_exists($f)) {
 			spip_log ("#CACHE appelle le filtre $f ($arg)", "cachelab");
-			$f($page, $arg);
-			// ici rien de plus, c'est le filtre qui fait ce qu'il veut 
-			// et qui peut enregistrer le résulat
+			$toset = $f($page, $arg);
+			// Le filtre renvoie un booléen qui indique s'il faut mémoizer le cache
+			if ($toset)
+				$Memoization->set($fichier, $page, $cache['entete']['X-Spip-Cache']);
 		}
 		else 
 			spip_log ("#CACHE filtre : la fonction '$f' n'existe pas (arg='$arg')\n".print_r($page,1), "cachelab_erreur");
 	}
+	
+	if (strpos(_request('var_mode'), 'cache') !== false)
+		echo '<div class="inclure_blocs cachelab_blocs">Sessionnement : '.cachelab_etat_sessionnement($page['invalideurs'], 'detaillé').'</div>';
 }

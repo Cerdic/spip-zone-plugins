@@ -239,6 +239,8 @@ function cachelab_filtre_log($cache, $arg) {
 //  et pour optimiser le découpage des noisettes et l'emploi de macrosession
 // On indique l'état théorique du sessionnement.
 // Les valeurs possibles sont : oui, oui_login, oui_anonyme, non, anonyme
+// Dans le cas où un assert n'est pas vérifié, un log est créé dans le fichier cachelab_assertsession
+//
 // #CACHE{3600, session assert non} s'assure que les emplois sont non-sessionnés
 // #CACHE{session assert oui} s'assure que tous les emplois sont sessionnés
 // #CACHE{session assert oui_login} s'assure que tous les emplois sont sessionnés avec un internaute identifié
@@ -247,7 +249,7 @@ function cachelab_filtre_log($cache, $arg) {
 // 
 // #CACHE{session log} loge l'état du sessionnement dans un cache dédié à ce squelette
 // #CACHE{session insert} insère à la fin du cache l'affichage de l'état du sessionnement
-// #CACHE{session echo} affiche l'état du sessionnement
+// #CACHE{session echo} affiche l'état du sessionnement (comme var_mode=cache mais en permanence pour ce cache seulement)
 //
 function cachelab_filtre_session (&$cache, $totarg) {
 	if (!is_array($cache) or !isset($cache['source']) or !isset($cache['lastmodified']) or !isset($cache['invalideurs'])) {
@@ -260,12 +262,7 @@ function cachelab_filtre_session (&$cache, $totarg) {
 	
 	$invalideurs = $cache['invalideurs'];
 
-	if (!isset($invalideurs['session']))
-		$sess = 'non';
-	elseif ($invalideurs['session'])
-		$sess = 'oui_login';
-	else
-		$sess = 'oui_anonyme';
+	$sess = cachelab_etat_sessionnement($invalideurs, 'avec_details');
 
 	switch ($func) {
 		case 'assert' :
@@ -306,3 +303,15 @@ function cachelab_filtre_session (&$cache, $totarg) {
 		break;
 	}
 }
+
+function cachelab_etat_sessionnement ($invalideurs, $detail=false) {
+	if (!isset($invalideurs['session']))
+		return 'non';
+	if (!$detail)
+		return 'oui';
+	elseif ($invalideurs['session'])
+		return 'oui_login';
+	return 'oui_anonyme';
+}
+
+	
