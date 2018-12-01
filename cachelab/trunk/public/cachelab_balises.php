@@ -34,7 +34,7 @@ include_spip('inc/cachelab_utils');
  * + Extensions par cachelab :
  *     ```
  *     #CACHE{3600,duree progressif}
- *     #CACHE{session, assert, non}
+ *     #CACHE{session assert non}
  *     #CACHE{24*3600, session}
  *     #CACHE{log contexte}
  *     #CACHE{log contexte/date_cration}
@@ -234,16 +234,20 @@ function cachelab_filtre_log($cache, $arg) {
 // Assertions sur le fait que le cache est sessionné ou non
 // et que l'internaute est identifié ou non
 //
-// Arguments possibles : oui, non, login, anonyme, log
 // usages :
+// 'assert' est utile pour vérifier que le sessionnement se passe bien comme prévu, et durablement,
+//  et pour optimiser le découpage des noisettes et l'emploi de macrosession
+// On indique l'état théorique du sessionnement.
+// Les valeurs possibles sont : oui, oui_login, oui_anonyme, non, anonyme
 // #CACHE{3600, session assert non} s'assure que les emplois sont non-sessionnés
 // #CACHE{session assert oui} s'assure que tous les emplois sont sessionnés
-// #CACHE{session assert login} s'assure que tous les emplois sont sessionnés avec un internaute identifié
+// #CACHE{session assert oui_login} s'assure que tous les emplois sont sessionnés avec un internaute identifié
+// #CACHE{session assert oui_anonyme} s'assure que tous les emplois sont sessionnés avec un internaute identifié (inutile ?)
 // #CACHE{session assert anonyme} s'assure que tous les emplois sans internaute identifié
-// Dans le cas où un assert n'est pas vérifié, un log est créé dans le fichier cachelab_assertsession
-//
-// Utile pour vérifier que le sessionnement se passe bien, et durablement, comme prévu
-// et optimiser avec un bon découpage des noisettes et avec macrosession
+// 
+// #CACHE{session log} loge l'état du sessionnement dans un cache dédié à ce squelette
+// #CACHE{session insert} insère à la fin du cache l'affichage de l'état du sessionnement
+// #CACHE{session echo} affiche l'état du sessionnement
 //
 function cachelab_filtre_session (&$cache, $totarg) {
 	if (!is_array($cache) or !isset($cache['source']) or !isset($cache['lastmodified']) or !isset($cache['invalideurs'])) {
@@ -278,7 +282,7 @@ function cachelab_filtre_session (&$cache, $totarg) {
 					$ok = isset($invalideurs['session']);	// oui_anonyme ou oui_login
 					break;
 				default:
-					spip_log ("Erreur de syntaxe : '$what' incorrect dans #CACHE{session $totarg}, il faut oui, login, non ou anonyme", 'cachelab_erreur');
+					spip_log ("Erreur de syntaxe : '$what' incorrect dans #CACHE{session $totarg}, il faut oui, oui_login, oui_anonyme, non ou anonyme", 'cachelab_erreur');
 					break 2;
 			}
 			if (!$ok)
