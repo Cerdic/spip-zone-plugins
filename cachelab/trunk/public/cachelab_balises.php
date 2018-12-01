@@ -1,4 +1,8 @@
 <?php
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+include_spip('inc/cachelab_utils');
 
 /**
  * Surcharge de la balise `#CACHE` definissant la durée de validité du cache du squelette
@@ -21,15 +25,24 @@
  * @see ecrire/public/cacher.php
  * @see memoization/public/cacher.php
  * @link http://www.spip.net/4330
- * @example
+ * @examples
  *     ```
  *     #CACHE{24*3600}
  *     #CACHE{24*3600, cache-client}
  *     #CACHE{0} pas de cache
- *     #CACHE{3600,calcul-progressif}
+ *     ```
+ * + Extensions par cachelab :
+ *     ```
+ *     #CACHE{3600,duree progressif}
+ *     #CACHE{session, assert, non}
+ *     #CACHE{24*3600, session}
+ *     #CACHE{log contexte}
+ *     #CACHE{log contexte/date_cration}
+ *     #CACHE{log,session anonyme}
  *     ```
  * @note
- *   En absence de cette balise la durée du cache est donnée
+ *   En absence de durée indiquée par cette balise, 
+ *   la durée du cache est donnée
  *   par la constante `_DUREE_CACHE_DEFAUT`
  *
  * @param Champ $p
@@ -43,6 +56,7 @@ function balise_CACHE ($p) {
 
 		$descr = $p->descr;
 		$sourcefile = $descr['sourcefile'];
+		$code = '';
 
 		$t = trim($p->param[0][1][0]->texte);
 		if (preg_match(',^[0-9],', $t)) {
@@ -81,27 +95,51 @@ function balise_CACHE ($p) {
 				// il semble logique, si on cache-client, de ne pas invalider
 				$pa = 'statique';
 			}
-
 			if ($pa == 'statique'
 				and $duree > 0
 			) {
 				$code .= ".'<'.'" . '?php header("X-Spip-Statique: oui"); ?' . "'.'>'";
+				continue;
 			}
 
+			// il peut y avoir déjà eu, ou pas, du code
 			$concat = (trim($code) ? '.' : '');
 
+// ancienne syntaxe obsolète
 			if (strpos($pa, 'duree-')===0) {
 				$methode = substr($pa, 6);
 				$ajout = "'<'.'" . '?php header("X-Spip-Methode-Duree-Cache: '.$methode.'"); ?' . "'.'>'";
 				$code .= $concat.$ajout;
-				spip_log ("#CACHE $sourcefile avec méthode de calcul de la durée du cache : $methode", 'cachelab');
+				spip_log ("#CACHE($pa) sur $sourcefile avec méthode de calcul de la durée du cache : $methode", 'cachelab_OBSOLETE');
 			}
 
 			if (strpos($pa, 'filtre-')===0) {
 				$methode = substr($pa, 7); 
 				$ajout = "'<'.'" . '?php header("X-Spip-Filtre-Cache: '.$methode.'"); ?' . "'.'>'";
 				$code .= $concat.$ajout; 
-				spip_log ("#CACHE $sourcefile avec filtre sur le cache complet : $methode", 'cachelab');
+				spip_log ("#CACHE($pa) sur $sourcefile avec filtre sur le cache complet : $methode", 'cachelab_OBSOLETE');
+			}
+// fin des syntaxes obsolètes
+
+			list ($func, $args) = split_first_arg ($pa);
+			switch ($func) {
+			// TODO : également traiter ici les morceaux du core traités plus haut
+			case 'statique' : 
+			case 'duree' :
+				$ajout = "'<'.'" . "?php header(\"X-Spip-Methode-Duree-Cache: $args\"); ?" . "'.'>'";
+				$code .= $concat.$ajout;
+				spip_log ("#CACHE{$pa} sur $sourcefile avec méthode de calcul de la durée du cache : $args", 'cachelab');
+				break;
+			
+			case 'log' :
+			case 'session' :
+			case 'filtre' :
+				$ajout = "'<'.'" . '?php header("X-Spip-Filtre-Cache: '.$pa.'"); ?' . "'.'>'";
+				$code .= $concat.$ajout; 
+				spip_log ("#CACHE{$pa} sur $sourcefile : filtre  $func($args) sur le cache complet", 'cachelab');
+				break;
+			default :
+				break;
 			}
 		}
 	} else {
@@ -126,7 +164,7 @@ function balise_CACHE ($p) {
 // et permettre à la fois d'afficher "posté il y a 16 secondes", bien précis,
 // et "posté il y a 3 mois" ou "il y a 2 ans", bien suffisant en général.
 //
-// usage : #CACHE{3600, duree-progapprox} ou #CACHE{3600, duree-progapprox date_naissance}
+// usage : #CACHE{3600, duree progapprox} ou #CACHE{3600, duree-progapprox date_naissance}
 //
 function cachelab_duree_progapprox($date_creation) {
 	$dt_creation = new DateTime($date_creation);
@@ -163,10 +201,10 @@ function cachelab_duree_progapprox($date_creation) {
 // (avec les / remplacés par des _)
 //
 // Exemples d'usages : 
-//	#CACHE{3600, filtre-log} : log tout le cache, méta et html
-//	#CACHE{filtre-log lastmodified}  : log l'entrée lastmodified du cache
-// 	#CACHE{filtre-log contexte} : log tout le tableau d'environnement
-//  #CACHE{filtre-log contexte/date_creation} : log l'entrée 'date_creation' de l'environnement
+//	#CACHE{3600,log} : log tout le cache, méta et html
+//	#CACHE{log lastmodified}  : log l'entrée lastmodified du cache
+// 	#CACHE{log contexte} : log tout le tableau d'environnement
+//  #CACHE{log contexte/date_creation} : log l'entrée 'date_creation' de l'environnement
 //
 function cachelab_filtre_log($cache, $arg) {
 	if (!is_array($cache) or !isset($cache['source']) or !isset($cache['lastmodified']) or !isset($cache['invalideurs'])) {
@@ -191,77 +229,76 @@ function cachelab_filtre_log($cache, $arg) {
 	spip_log ("cache[$arg] : ".print_r($c,1), "cachelab_".$source_file);
 }
 
+
 //
 // Assertions sur le fait que le cache est sessionné ou non
 // et que l'internaute est identifié ou non
 //
 // Arguments possibles : oui, non, login, anonyme, log
 // usages :
-// #CACHE{3600, filtre-assertsession non} s'assure que les emplois sont non-sessionnés
-// #CACHE{filtre-assertsession oui} s'assure que tous les emplois sont sessionnés
-// #CACHE{filtre-assertsession login} s'assure que tous les emplois sont sessionnés avec un internaute identifié
-// #CACHE{filtre-assertsession anonyme} s'assure que tous les emplois sans internaute identifié
+// #CACHE{3600, session assert non} s'assure que les emplois sont non-sessionnés
+// #CACHE{session assert oui} s'assure que tous les emplois sont sessionnés
+// #CACHE{session assert login} s'assure que tous les emplois sont sessionnés avec un internaute identifié
+// #CACHE{session assert anonyme} s'assure que tous les emplois sans internaute identifié
 // Dans le cas où un assert n'est pas vérifié, un log est créé dans le fichier cachelab_assertsession
 //
-// Une dernière valeur de l'argument n'induit pas une assertion mais un log :
-// #CACHE{filtre-assertsession log} crée un log avec l'état de la session pour chaque instance du cache
+// Utile pour vérifier que le sessionnement se passe bien, et durablement, comme prévu
+// et optimiser avec un bon découpage des noisettes et avec macrosession
 //
-// Utile pour optimiser avec plugin macrosession et vérifier que ça se passe bien, et durablement, comme prévu
-//
-function cachelab_filtre_assertsession (&$cache, $arg) {
+function cachelab_filtre_session (&$cache, $totarg) {
 	if (!is_array($cache) or !isset($cache['source']) or !isset($cache['lastmodified']) or !isset($cache['invalideurs'])) {
 		spip_log ("cachelab_filtre_assertsession ne reçoit pas un cache mais".print_r($cache,1), "cachelab_assert");
 		return null;
 	}
 	$source = $cache['source']; 
 	$source_file = str_replace(array('/','.'), '_', $source);
-	$arg=trim($arg);
+	list($func, $what) = split_first_arg($totarg);
 	
 	$invalideurs = $cache['invalideurs'];
 
-	// on teste l'invalideur session
-	// On pourrait aussi tester par le nom du cache avec '/_([0-9a-f]{8}|)$/i' ?
+	if (!isset($invalideurs['session']))
+		$sess = 'non';
+	elseif ($invalideurs['session'])
+		$sess = 'oui_login';
+	else
+		$sess = 'oui_anonyme';
 
-	switch ($arg) {
-	case 'login' :
-		$ok = !empty($invalideurs['session']); // def et non vide
+	switch ($func) {
+		case 'assert' :
+			switch($what) {
+				case 'oui_login' :
+				case 'oui_anonyme' :
+				case 'non' :
+					$ok = ($sess==$what);
+					break;
+				case 'anonyme' :
+					$ok = empty($invalideurs['session']);	// oui_anonyme ou non
+					break;
+				case 'oui' :
+					$ok = isset($invalideurs['session']);	// oui_anonyme ou oui_login
+					break;
+				default:
+					spip_log ("Erreur de syntaxe : '$what' incorrect dans #CACHE{session $totarg}, il faut oui, login, non ou anonyme", 'cachelab_erreur');
+					break 2;
+			}
+			if (!$ok)
+				spip_log ("$source : session n'est pas '$what'. invalideurs=".print_r($invalideurs,1), "cachelab_assertsession");
+			break;
+	case 'debug' : // debug est OBSOLETE
+		spip_log ("#CACHE{session debug}", "cachelab_OBSOLETE");
+		// nobreak;
+	case 'insert' :
+		$cache['texte'] .= '<'."?php echo '<div class=\"debug cachelab\">$source_file sessionné : $sess</div>' ?>";
+		$cache['process_ins'] = 'php';
 		break;
-	case 'anonyme' :
-		$ok = empty($invalideurs['session']);	// undef ou vide
-		break;
-	case 'oui' :
-		$ok = isset($invalideurs['session']);	// défini, mais peut être vide
-		break;
-	case 'non' :
-		$ok = !isset($invalideurs['session']);	// non défini
-		break;
-	case 'debug' :
 	case 'echo' :
+		echo "<div class='debug cachelab'>$source_file sessionné : $log</div>";
+		break;
 	case 'log' :
-		if (!isset($invalideurs['session']))
-			$log = 'non';
-		elseif ($invalideurs['session'])
-			$log = 'oui_login';
-		else
-			$log = 'oui_anonyme';
-		$ok = true;
-		switch ($arg) {
-		case 'log' :
-			spip_log ("session ? $log", "cachelab_".$source_file);
-			break;
-		case 'echo' :
-			echo "<div class='debug cachelab'>$source_file sessionné ? $log</div>";
-			break;
-		case 'debug' :
-			$cache['texte'] .= '<'."?php echo '<div class=\"debug cachelab\" style=\"background-color:yellow\">$source_file sessionné ? $log</div>' ?>";
-			$cache['process_ins'] = 'php';
-			break;
-		};
-	default:
-		$ok = false;
-		$arg .= " : valeur incorrecte";
+		spip_log ("session : $sess", "cachelab_".$source_file);
+		break;
+	default : 
+		spip_log ("Syntaxe incorrecte dans $source_file : $func inconnu dans #CACHE{session $totarg}", 'cachelab_erreur');
 		break;
 	}
-	if (!$ok)
-		spip_log ("$source : assertsession n'est pas '$arg'. invalideurs=".print_r($invalideurs,1), "cachelab_assertsession");
 }

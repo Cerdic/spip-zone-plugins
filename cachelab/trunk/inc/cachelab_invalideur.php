@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+include_spip('inc/cachelab_utils');
+
 /**
  * Invalider les caches liés à telle condition
  *
@@ -23,9 +28,6 @@
  *     Inutilisé
  **/
 
-if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
-}
 
 function suivre_invalideur($cond, $modif = true) {
 	if (!$modif) {
@@ -78,15 +80,6 @@ function suivre_invalideur($cond, $modif = true) {
 	}
 }
 
-function split_f_arg($f, $arg='') {
-	if (strpos($f, ' ')) {
-		$fparts = array_filter(explode(' ',$f));
-		$f = array_shift($fparts);
-		$arg = implode(' ', $fparts);
-	}
-	return array ($f, $arg);
-}
-
 //
 // Surcharge de maj_invalideurs
 // le core indique : "Calcul des pages : noter dans la base les liens d'invalidation"
@@ -123,7 +116,7 @@ global $Memoization;
 	// Exemple #CACHE{1200,duree-progressive date_naissance}
 	if (isset($page['entetes']['X-Spip-Methode-Duree-Cache'])) {
 		$f = 'cachelab_duree_'.$page['entetes']['X-Spip-Methode-Duree-Cache'];
-		list ($f, $arg) = split_f_arg($f, 'date_creation');
+		list ($f, $arg) = split_first_arg($f, 'date_creation');
 		if (function_exists($f)) {
 			if (!isset($page['contexte'][$arg])) {
 				spip_log ("#CACHE avec squelette {$page['source']} et calcul durée avec $f mais pas de '$args' dans le contexte ".print_r($page['contexte'],1), "cachelab_erreur");
@@ -150,7 +143,7 @@ global $Memoization;
 	// Exemple : #CACHE{1200,filtre-bidouille grave} peut grave bidouiller le cache yc ses métadonnées
 	if (isset($page['entetes']['X-Spip-Filtre-Cache'])) {
 		$f = 'cachelab_filtre_'.$page['entetes']['X-Spip-Filtre-Cache'];
-		list ($f, $arg) = split_f_arg($f);
+		list ($f, $arg) = split_first_arg($f);
 		if (function_exists($f)) {
 			spip_log ("#CACHE appelle le filtre $f ($arg)", "cachelab");
 			$f($page, $arg);
