@@ -4,7 +4,7 @@
 		#SET{dests,#GET{dests}|push{#VALEUR}}
     	</BOUCLE_d>
 
-		<div class="ajax formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}" id="#formulaire_chatbox_[(#GET{dests}|implode{''})]">
+		<div id="formulaire_chatbox2_[(#GET{dests}|implode{''})]" class="ajax formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
 
 		<div class="contenu_chatbox2" id="contenu_chatbox2_[(#GET{dests}|implode{''})]">
             #INCLURE{fond=inc-chatbox2,dests=#GET{dests}|implode{","}}
@@ -25,8 +25,7 @@
 					<input type="hidden" class="text" name="#GET{name}" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required="required" ] />
   
 					#SET{name,texte}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-
-					#SET{form_id, textarea_#GET{dests}|implode{"_"}}
+					#SET{form_id, chat_textarea_#GET{dests}|implode{"_"}}
                         <table class="formulaire_chat">
                             <tr>
                                 <td class="tdCamera">
@@ -34,7 +33,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <textarea placeholder="chat..." name="#GET{name}" class="no_barre" id="#GET{form_id}"></textarea>
+    					       <textarea name="#GET{name}" class="no_barre" placeholder="Your message..." id="#GET{form_id}"></textarea>
                                 </td>
                                 <td class="tdsubmit">
                                     <button type="submit" name="send" class="btn spip send"><i class="fab fa-telegram-plane" aria-hidden="true"></i></button>
@@ -75,12 +74,7 @@
         </form>
     </div>
 
-[(#REM)    <script>
-        (function($, window) {
-        $("#contenu_chatbox2_[(#GET{dests}|implode{''})]").animate({ scrollTop: $(document).height() }, "slow");
-         return false;
-        })(jQuery, window);
-    </script>]
+
 
     <script type='text/javascript' src='#CHEMIN{js/jquery.labelhide.js}'></script>
     <script type='text/javascript'>
@@ -96,7 +90,7 @@
         		.load(url,function(){setTimeout(reload,1000*(r=Math.min(r+2,60)));});
         	}
         	setTimeout(reload, r);
-        	$("#formulaire_chatbox_[(#GET{dests}|implode{''})] form")
+        	$("#formulaire_chatbox2_[(#GET{dests}|implode{''})] form")
         	.ajaxForm({
         		url: url,
         		target: "#contenu_chatbox2_[(#GET{dests}|implode{''})]",
@@ -108,6 +102,7 @@
         			$("#contenu_chatbox2_[(#GET{dests}|implode{''})]")
         			.css('opacity', 1);
         			r = 5;
+			$("textarea##GET{form_id}").focus();
         		}
         	});
         

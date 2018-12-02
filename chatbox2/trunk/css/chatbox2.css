@@ -150,8 +150,8 @@ button.openChat:hover {
 
 .contenu_chatbox2 {
 	position: relative;
-	max-height: 300px;
-	min-height: 150px;
+	max-height: 250px;
+	min-height: 100px;
 	width: 100%;
 	overflow: auto;
     }
