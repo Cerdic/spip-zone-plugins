@@ -171,7 +171,7 @@ function formulaires_editer_page_verifier_dist($edition, $page, $redirect = '') 
  *
  * @param string $edition
  * 		Type d'édition à savoir :
- * 		- `modifier`: édition de la configuration de base d'une composition virtuelle
+ * 		- `modifier`: édition de la configuration de base d'une composition virtuelle ou des blocs exclus d'une page
  * 		- `créer`: création d'une composition virtuelle à partir d'une page source
  * 		- `dupliquer`: copie d'une composition pour créer une nouvelle composition virtuelle
  * @param string $page

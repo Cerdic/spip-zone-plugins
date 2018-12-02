@@ -15,7 +15,7 @@
 			})]
 
 			[(#REM) L'identifiant de composition n'est éditable que lors d'une création ou d'une duplication de composition ]
-			[(#ENV{composition}|oui)
+			[(#ENV{composition}|ou{#ENV{edition}|=={creer}}|oui)
 				#SET{disable, #ENV{edition}|=={modifier}|?{oui, ''}}
 				[(#SET{explication, #ENV{edition}|!={modifier}|?{<:noizetier:formulaire_composition_explication:>, ''}})]
 				[(#SAISIE{input, composition,
@@ -25,7 +25,7 @@
 					obligatoire=[(#GET{disable}|non)],
 				})]
 			]
-			[(#ENV{composition}|non)<input type="hidden" name="composition" value="#ENV{composition}" />]
+			[(#ENV{composition}|non|et{#ENV{edition}|=={modifier}}|oui)<input type="hidden" name="composition" value="#ENV{composition}" />]
 
 			[(#REM) Le titre de la composition est obligatoire ]
 			<BOUCLE_est_virtuelle(CONDITION){si #ENV{est_virtuelle}|=={oui}}>

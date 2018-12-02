@@ -42,7 +42,7 @@ function noizetier_type_noisette_stocker($plugin, $types_noisettes, $recharger) 
 	// Mise à jour de la table des noisettes 'spip_types_noisettes'.
 	$from = 'spip_types_noisettes';
 
-	// -- Suppression des noisettes obsolètes ou de toute les noisettes d'un coup si on est en mode
+	// -- Suppression des types de noisette obsolètes ou de tous les types de noisette d'un coup si on est en mode
 	//    rechargement forcé.
 	if (sql_preferer_transaction()) {
 		sql_demarrer_transaction();
@@ -54,11 +54,11 @@ function noizetier_type_noisette_stocker($plugin, $types_noisettes, $recharger) 
 		$where[] = sql_in('type_noisette', $types_noisettes['a_effacer']);
 		sql_delete($from, $where);
 	}
-	// -- Update des pages modifiées
+	// -- Update des types de noisettes modifiés
 	if (!empty($types_noisettes['a_changer'])) {
 		sql_replace_multi($from, $types_noisettes['a_changer']);
 	}
-	// -- Insertion des nouvelles pages
+	// -- Insertion des nouveaux types de noisette
 	if (!empty($types_noisettes['a_ajouter'])) {
 		sql_insertq_multi($from, $types_noisettes['a_ajouter']);
 	}
