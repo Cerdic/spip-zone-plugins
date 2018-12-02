@@ -41,17 +41,18 @@
 	<br class="clear">
 
 	<script type="text/javascript">/*<!\[CDATA\[*/
+	$( function() {
 
-		jQuery('.noisettes_disponibles').show();
+		$('.noisettes_disponibles').show();
 
 		/**
 		 * Éditer les noisettes dans des modales
 		 */
-		jQuery('.noisette .bouton-modifier').click(function(){
-			var noisette = jQuery(this).parents('.noisette').eq(0);
-			jQuery(noisette).animateLoading();
-			jQuery.modalboxload(parametre_url(parametre_url(parametre_url(jQuery(this).attr('href'),'popin','oui'),'var_zajax','contenu'), 'redirect',''),{
-				onClose: function (dialog) {jQuery(noisette).ajaxReload()}
+		$('.noisette .bouton-modifier').click(function(){
+			var noisette = $(this).parents('.noisette').eq(0);
+			$(noisette).animateLoading();
+			$.modalboxload(parametre_url(parametre_url(parametre_url($(this).attr('href'),'popin','oui'),'var_zajax','contenu'), 'redirect',''),{
+				onClose: function (dialog) {$(noisette).ajaxReload()}
 			});
 			return false;
 		});
@@ -59,7 +60,7 @@
 		/**
 		 * Réordonner les noisettes par glisser-déposer
 		 */
-		jQuery('.liste-noisettes-bloc').sortable({
+		$('.liste-noisettes-bloc').sortable({
 			items: '.noisette',
 			//containment: '.liste-noisettes-bloc',
 			revert: true,
@@ -215,7 +216,7 @@
 		 * Ajouter des noisettes par glisser-déposer
 		 * La traitement se fait dans .sortable()
 		 */
-		jQuery('.liste-noisettes-disponibles .noisette').draggable({
+		$('.liste-noisettes-disponibles .noisette').draggable({
 			connectToSortable: '.liste-noisettes-bloc',
 			containment: '.liste-noisettes-bloc',
 			helper: 'clone', // Super important
@@ -243,6 +244,8 @@
 			});
 		}
 		//noisettes_dispos_sticky();
+
+	});
 	/*\]\]>*/</script>
 </BOUCLE_page_navigation>
 	[(#ENV{exec}|=={noisette_edit}|oui)<INCLURE{fond=prive/squelettes/navigation/noisette_edit,env}>]
