@@ -124,8 +124,9 @@ global $Memoization;
 			}
 			$duree = $f($page['contexte'][$arg]);
 			spip_log ("#CACHE $f ($arg={$page['contexte'][$arg]}) renvoie : $duree s", "cachelab");
-			if (strpos(_request('var_mode'), 'cache') !== false)
-				echo "<div class='inclure_blocs cachelab_blocs'>Durée dynamique : $duree</div>";
+			if ((strpos(_request('var_mode'), 'cache') !== false)
+				or _request('var_cache'))
+				echo "<div class='inclure_blocs cachelab_blocs'><h6>Durée dynamique : $duree</h6></div>";
 
 			$page['duree'] = $duree;
 			$page['entetes']['X-Spip-Cache']=$duree;
@@ -157,6 +158,7 @@ global $Memoization;
 			spip_log ("#CACHE filtre : la fonction '$f' n'existe pas (arg='$arg')\n".print_r($page,1), "cachelab_erreur");
 	}
 	
-	if (strpos(_request('var_mode'), 'cache') !== false)
-		echo '<div class="inclure_blocs cachelab_blocs">Sessionnement : '.cachelab_etat_sessionnement($page['invalideurs'], 'detaillé').'</div>';
+	if ((strpos(_request('var_mode'), 'cache') !== false)
+		or _request('var_cache'))
+		echo '<div class="inclure_blocs cachelab_blocs"><h6>Sessionnement : '.cachelab_etat_sessionnement($page['invalideurs'], 'précis').'</h6></div>';
 }
