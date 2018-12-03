@@ -34,10 +34,10 @@ function action_ajouter_noisette_ajax_dist() {
 
 	if (intval($id_noisette)) {
 		$done = true;
-		$success = $id_noisette;
+		$success = array('id_noisette' => $id_noisette);
 	} else {
 		$done = false;
-		$errors = _T('noizetier:erreur_ajout_noisette', array('noisettes' => $type_noisette));
+		$errors = array('msg' => _T('noizetier:erreur_ajout_noisette', array('noisettes' => $type_noisette)));
 	}
 
 	return envoyer_json_envoi(array(
