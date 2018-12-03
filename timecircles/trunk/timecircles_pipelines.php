@@ -21,9 +21,6 @@ function timecircles_insert_head_css($flux){
 
 /**
  * load timecircles' js in the admin area
- *
- * may need htmlpurifier or something, to avoid glitchs 
- * with data- elements filtering in the admin area... (mist_gx)
  **/
 function timecircles_header_prive($flux){
 	$flux = timecircles_insert_head_css($flux);
@@ -35,7 +32,7 @@ function timecircles_header_prive($flux){
  * load timecircles' js on the website
  **/
 function timecircles_insert_head($flux){
-	$flux .= '<script src="'._DIR_PLUGIN_TIMECIRCLES.'lib/timecircles.js" type="text/javascript"></script>'
+	$flux .= '<script src="'.generer_url_public('lib/timecircles.js').'" type="text/javascript"></script>'
 	. '<script src="'.find_in_path('js/timecircles.js').'" type="text/javascript"></script>';
 	return $flux;
 }
