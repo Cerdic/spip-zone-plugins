@@ -41,4 +41,3 @@ define('DIFFERE', 2);
 
 define('SIMULATION', 'simu');
 define('REEL', 'real');
-?>

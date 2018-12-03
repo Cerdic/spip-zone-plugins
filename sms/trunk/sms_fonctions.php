@@ -117,6 +117,18 @@ function octopush($sms_text,$sms_recipients,$arg) {
 	$xml = simplexml_load_string($xml);
 	return $xml;
 }
+
+
+/**
+ * Afficher la balance de sms disponible
+ *
+ * <INCLURE{fond=inclure/octopush_balance} /> pour l'affichage
+ * 
+ * @param string $type
+ *		standard ou premium
+ * @return boolean
+ * 		valeur en nombre entier de sms restant
+**/
 function filtre_balance($type) {
 	$username = lire_config('sms/login_octopush');
 	$password = lire_config('sms/cle_api_octopush');

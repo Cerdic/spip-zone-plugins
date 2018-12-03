@@ -48,7 +48,7 @@ class SMS_OCTOSPUSH
 		$this->user_login	= '';
 		$this->api_key		= '';
 
-		$this->sms_text 	= '';
+		$this->sms_text		= '';
 
 		$this->sms_recipients			= array();
 		$this->recipients_first_names	= array();
@@ -80,9 +80,9 @@ class SMS_OCTOSPUSH
 
 	public function send()
 	{
-		$domain	 = DOMAIN;
-		$path	 = PATH_SMS;
-		$port	 = PORT;
+		$domain		= DOMAIN;
+		$path	 	= PATH_SMS;
+		$port	 	= PORT;
 
 		$data = array(
 			'user_login'		=> $this->user_login,
@@ -202,13 +202,13 @@ class SMS_OCTOSPUSH
 		$port	 = PORT;
 
 		$data = array(
-			'user_login'	 => $this->user_login,
-			'api_key'		 => $this->api_key,
-			'first_name'	 => $first_name,
-			'last_name'		 => $last_name,
-			'raison_sociale' => $raison_sociale,
-			'alert_bound'	 => intval($alert_bound),
-			'alert_sms_type' => $alert_sms_type
+			'user_login'	=> $this->user_login,
+			'api_key'		=> $this->api_key,
+			'first_name'	=> $first_name,
+			'last_name'		=> $last_name,
+			'raison_sociale'=> $raison_sociale,
+			'alert_bound'	=> intval($alert_bound),
+			'alert_sms_type'=> $alert_sms_type
 		);
 
 		return trim($this->_httpRequest($domain, $path, $port, $data));
@@ -228,9 +228,9 @@ class SMS_OCTOSPUSH
 		$port	 = PORT;
 
 		$data = array(
-			'user_login'		 => $user_login,
-			'api_key'			 => $api_key,
-			'sub_account_email'	 => $sub_account_email
+			'user_login'		=> $user_login,
+			'api_key'			=> $api_key,
+			'sub_account_email'	=> $sub_account_email
 		);
 
 		$xml_return	 = trim($this->_httpRequest($domain, $path, $port, $data));
@@ -268,12 +268,12 @@ class SMS_OCTOSPUSH
 		}
 
 		$data = array(
-			'user_login'		 => $user_login,
-			'api_key'			 => $api_key,
-			'sub_account_email'	 => $sub_account_email,
-			'sms_number'		 => $sms_amount,
-			'sms_type'			 => $sms_type,
-			'token'				 => $token
+			'user_login'		=> $user_login,
+			'api_key'			=> $api_key,
+			'sub_account_email'	=> $sub_account_email,
+			'sms_number'		=> $sms_amount,
+			'sms_type'			=> $sms_type,
+			'token'				=> $token
 		);
 
 		$xml_return = trim($this->_httpRequest($domain, $path, $port, $data));
@@ -545,5 +545,3 @@ class SMS_OCTOSPUSH
 	}
 
 }
-
-?>

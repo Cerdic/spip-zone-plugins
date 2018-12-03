@@ -61,9 +61,7 @@ $(function(){
 			</li>
 			<li class="fieldset octopush">
 				<h3 class="legend">Octopush</h3>
-				#SET{standard,#VAL{standard}|balance}
-				#SET{premium,#VAL{premium}|balance}
-				<p class="explication"><:sms:explication_octopush{standard=#GET{standard}, premium=#GET{premium}}:></p>
+				<p class="explication"><INCLURE{fond=inclure/octopush_balance} /></p>
 				<ul>
 					<li class="editer">
 						<label for="login_octopush"><:sms:login:></label>
