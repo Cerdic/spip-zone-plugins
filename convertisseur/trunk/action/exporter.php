@@ -98,8 +98,13 @@ function exporter_article($f,$dest){
 		$documents = join("@@", $ins_doc) ;
 		$docs_m = substr($documents, 0, 100);
 	}
+	// url
+	include_spip("inc/utils");
+	$url_article = generer_url_entite($id_article, 'article') ;
 	
 	// Ajouter les métadonnées
+	if($url_article)
+		$fichier = "<ins class='url_article'>$url_article</ins>\n" . $fichier ;
 	if($auteurs)
 		$fichier = "<ins class='auteurs'>$auteurs</ins>\n" . $fichier ;
 	if($motscles)
