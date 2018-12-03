@@ -156,7 +156,7 @@
 					}).done(function(data) {
 						noisette.endLoading(true);
 						if (data.success.length) {
-							var id_noisette = data.success;
+							var id_noisette = data.success[0];
 							noisette.ajaxReload({
 								callback: function(){
 									$('.noisette[data-id_noisette="'+id_noisette+'"]').animateAppend();
@@ -188,7 +188,6 @@
 						cache: false,
 					}).complete(function(data) {
 						if (data.success.length) {
-							var id_noisette = data.success;
 							noisette.ajaxReload();
 						}
 						if (data.errors.length) {

@@ -48,11 +48,11 @@ function action_deplacer_noisette_ajax_dist() {
 
 	if ($deplacer) {
 		$done = true;
-		$success = array('id_noisette' => $id_noisette);
+		$success = array($id_noisette);
 	} else {
 		// TODO : remettre le rang d'origine
 		$done = false;
-		$errors = array('msg' => _T('erreur'));
+		$errors = array(_T('erreur'));
 	}
 
 	return envoyer_json_envoi(array(
