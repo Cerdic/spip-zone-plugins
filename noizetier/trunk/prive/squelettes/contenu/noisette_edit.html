@@ -10,6 +10,7 @@
 ]
 [(#AUTORISER{editernoisette, noizetier, #ENV{id_noisette}}|sinon_interdire_acces)]
 <BOUCLE_noisette(NOISETTES types_noisettes){id_noisette}>
+#SET{redirect, ''}
 [(#ENV{popin}|non)
 	[(#OBJET|et{#ID_OBJET}|?{
 		[(#SET{redirect, [(#URL_ECRIRE{noizetier_page}
