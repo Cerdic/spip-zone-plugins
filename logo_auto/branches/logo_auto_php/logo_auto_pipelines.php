@@ -64,23 +64,41 @@ function logo_auto_quete_logo_objet($flux) {
 			);
 		}
 
-		// Si on a trouvé une image
+		// Si on a trouvé une image et qu'elle existe toujours
 		if (!empty($image['fichier'])) {
 			// Si c'est un URL on retourne le chemin directement
 			if (filter_var($image['fichier'], FILTER_VALIDATE_URL)) {
 				$chemin_complet = $image['fichier'];
 			}
 			// Sinon on va le chercher dans IMG
-			else {
+			elseif (file_exists(_DIR_IMG . $image['fichier'])) {
 				$chemin_complet = _DIR_IMG . $image['fichier'];
 			}
-
+			
+			// Est-ce qu'elle existe toujours ?
+			if ($chemin_complet) {
+				$flux['data'] = array(
+					'chemin'    => $chemin_complet,
+					'timestamp' => @filemtime($chemin_complet),
+				);
+			}
+		}
+		
+		// Sinon on va chercher des fallbacks si quelqu'un en a défini
+		if (
+			empty($flux['data']['chemin'])
+			and (
+				$image = find_in_path("images/logo_auto_{$flux['args']['objet']}.jpg")
+				or $image = find_in_path("images/logo_auto_{$flux['args']['objet']}.png")
+				or $image = find_in_path('images/logo_auto.jpg')
+				or $image = find_in_path('images/logo_auto.png')
+			)
+		) {
 			$flux['data'] = array(
-				'chemin'    => $chemin_complet,
-				'timestamp' => @filemtime($chemin_complet),
+				'chemin'    => $image,
+				'timestamp' => @filemtime($image),
 			);
 		}
-
 	}
 
 	return $flux;
