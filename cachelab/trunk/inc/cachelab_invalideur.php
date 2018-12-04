@@ -33,6 +33,13 @@ function suivre_invalideur($cond, $modif = true) {
 	if (!$modif) {
 		return;
 	}
+	
+global $Memoization;
+static $len_prefix;
+	if (!isset($Memoization) or !$Memoization or !in_array($Memoization->methode(), array('apc', 'apcu'))) {
+		spip_log("cachelab_applique ($action, $cle...) : Memoization n'est pas activé", 'cachelab_erreur');
+		return false;
+	}
 
 	// determiner l'objet modifie : forum, article, etc
 	if (preg_match(',["\']([a-z_]+)[/"\'],', $cond, $r)) {

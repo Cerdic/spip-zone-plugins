@@ -211,22 +211,21 @@ function cachelab_filtre_log($cache, $arg) {
 		spip_log ("cachelab_duree_progapprox ne reçoit pas un cache mais".print_r($cache,1), "cachelab_assert");
 		return null;
 	}
-	$source = $cache['source']; 
-	$source_file = str_replace(array('/','.'), '_', $source);
+	$source_limace = slug_chemin($cache['source']);
 	$arg=trim($arg);
-	if ($arg) {
-		if (strpos($arg, '/')) {
+	if ($arg) { 
+		if (strpos($arg, '/')) {	#CACHE{log i/j}
 			$ij=explode('/',$arg);
 			$c = $cache[$i=trim(array_shift($ij))];
 			$c = $c[trim($j=array_shift($ij))];
 		}
-		else {
+		else {						#CACHE{log i}
 			$c = $cache[$arg];
 		}
 	}
 	else
-		$c = $cache;
-	spip_log ("cache[$arg] : ".print_r($c,1), "cachelab_".$source_file);
+		$c = $cache;				#CACHE{log}
+	spip_log ("cache[$arg] : ".print_r($c,1), "cachelab_".$source_limace);
 }
 
 
@@ -256,8 +255,8 @@ function cachelab_filtre_session (&$cache, $totarg) {
 		spip_log ("cachelab_filtre_assertsession ne reçoit pas un cache mais".print_r($cache,1), "cachelab_assert");
 		return null;
 	}
-	$source = $cache['source']; 
-	$source_file = str_replace(array('/','.'), '_', $source);
+	$source = $cache['source'];
+	$source_limace = slug_chemin($source);
 	list($func, $what) = split_first_arg($totarg);
 	
 	$invalideurs = $cache['invalideurs'];
@@ -285,21 +284,24 @@ function cachelab_filtre_session (&$cache, $totarg) {
 			if (!$ok)
 				spip_log ("$source : session n'est pas '$what'. invalideurs=".print_r($invalideurs,1), "cachelab_assertsession");
 			break;
-	case 'debug' : // debug est OBSOLETE
-		spip_log ("#CACHE{session debug}", "cachelab_OBSOLETE");
-		// nobreak;
 	case 'insert' :
-		$cache['texte'] .= '<'."?php echo '<div class=\"debug cachelab\">$source_file sessionné : $sess</div>' ?>";
+		global $Memoization;
+		if (!isset($Memoization)) {
+			spip_log ("Erreur dans $source : #CACHE{session insert} nécessite que le plugin Memoization soit activé", 'cachelab_erreur');
+			echo "<div class='debug cachelab'><h6>Erreur dans $source : #CACHE{session insert} nécessite que le plugin Memoization soit activé</h6></div>";
+			break;
+		}
+		$cache['texte'] .= '<'."?php echo '<div class=\"debug cachelab\"><h6>$source sessionné : $sess</h6></div>' ?>";
 		$cache['process_ins'] = 'php';
 		break;
 	case 'echo' :
-		echo "<div class='debug cachelab'>$source_file sessionné : $log</div>";
+		echo "<div class='debug cachelab'><h6>$source sessionné : $sess</h6></div>";
 		break;
 	case 'log' :
-		spip_log ("session : $sess", "cachelab_".$source_file);
+		spip_log ('session : '.$sess, 'cachelab_session_'.$source_limace);
 		break;
 	default : 
-		spip_log ("Syntaxe incorrecte dans $source_file : $func inconnu dans #CACHE{session $totarg}", 'cachelab_erreur');
+		spip_log ("Syntaxe incorrecte dans $source : $func inconnu dans #CACHE{session $totarg}", 'cachelab_erreur');
 		break;
 	}
 }

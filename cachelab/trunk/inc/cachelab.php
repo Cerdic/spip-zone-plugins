@@ -10,8 +10,20 @@ if (!function_exists('plugin_est_actif')) {
 	}
 }
 
+//
+// Applique une action sur un cache donné
+//
+// Nécessite Mémoization (OK pour toutes les méthodes).
+//
+// renvoie un booléen indiquant si l'action a pu être appliquée ou non
+//
 function cachelab_applique ($action, $cle, $data=null, $options='') {
 global $Memoization;
+	if (!isset($Memoization) or !$Memoization) {
+		spip_log("cachelab_applique ($action, $cle...) : Memoization n'est pas activé", 'cachelab_erreur');
+		return false;
+	}
+
 static $len_prefix;
 	if (!$len_prefix)
 		$len_prefix = strlen(_CACHE_NAMESPACE);
@@ -54,12 +66,19 @@ function cachelab_filtre($action, $conditions=array(), $options=array()) {
 	return cachelab_cibler ($action, $conditions, $options);
 }
 
-// $chemin : liste de chaines à tester dans le chemin du squelette, séparées par |
-// 	OU une regexp (hors délimiteurs et modificateurs) si la méthode est 'regexp'
+//
+// cachelab_cibler : 
+// 	applique une action donnée à tous les caches vérifiant certaines conditions
+//
+// uses apcu_cache_info() 
+//	et donc nécessite que Memoization soit activé avec APC ou APCu 
+//
 function cachelab_cibler ($action, $conditions=array(), $options=array()) {
 global $Memoization;
-	if (!$Memoization or !in_array($Memoization->methode(), array('apc', 'apcu')))
-		die ("Il faut mémoization avec APC ou APCu");
+	if (!isset($Memoization) or !$Memoization or !in_array($Memoization->methode(), array('apc', 'apcu'))) {
+		spip_log("cachelab_cibler($action...) : le plugin Mémoization doit être activé avec APC ou APCu", 'cachelab_erreur');
+		die ("cachelab_cibler($action...) : le plugin Mémoization doit être activé avec APC ou APCu");
+	}
 
 	// filtrage
 	$session = (isset($conditions['session']) ? $conditions['session'] : null);
@@ -226,7 +245,6 @@ global $Memoization;
 
 		cachelab_applique ($action, $cle, $data, $options);
 	}
-
 
 	if ($do_chrono) {
 		$stats['chrono'] = microtime_do ('end', 'ms');

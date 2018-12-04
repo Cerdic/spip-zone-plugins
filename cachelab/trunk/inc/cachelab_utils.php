@@ -39,11 +39,11 @@ function split_first_arg($l, $cdr='', $string_wanted=true) {
 }
 
 function split_f_arg($f, $arg='') {
-	spip_log("split_f_arg($f, $arg\n".debug_get_stack(), "cachelab_OBSOLETE");
-	if (strpos($f, ' ')) {
-		$fparts = array_filter(explode(' ',$f));
-		$f = array_shift($fparts);
-		$arg = implode(' ', $fparts);
-	}
-	return array ($f, $arg);
+	spip_log("split_f_arg($f, $arg", "cachelab_OBSOLETE");
+	return split_first_arg ($f, $arg);
 }
+
+function slug_chemin($chemin, $sep='_') {
+	return str_replace ('/', $sep, $chemin);
+}
+
