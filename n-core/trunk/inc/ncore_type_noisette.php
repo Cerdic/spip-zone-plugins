@@ -65,7 +65,7 @@ function type_noisette_charger($plugin, $recharger = false, $stockage = '') {
 		// Initialisation des tableaux de types de noisette.
 		$types_noisette_a_ajouter = $types_noisette_a_changer = $types_noisette_a_effacer = array();
 
-		// Récupération la description complète des types de noisette déjà enregistrés de façon :
+		// Récupération de la description complète des types de noisette déjà enregistrés de façon :
 		// - à gérer l'activité des types en fin de chargement
 		// - de comparer les signatures md5 des noisettes déjà enregistrées. Si on force le rechargement il est inutile
 		//   de gérer les signatures et les noisettes modifiées ou obsolètes.
@@ -211,7 +211,7 @@ function type_noisette_charger($plugin, $recharger = false, $stockage = '') {
 		}
 
 		// Mise à jour du stockage des types de noisette si au moins un des 3 tableaux est non vide et que le chargement forcé
-		// n'est pas demandé:
+		// n'est pas demandé ou si le chargement forcé a été demandé:
 		// -- Suppression des types de noisettes obsolètes ou de tous les types de noisettes si on est en mode rechargement forcé.
 		//    Pour permettre une optimisation du traitement en mode rechargement forcé on passe toujours le mode.
 		// -- Update des types de noisette modifiés.
@@ -337,7 +337,7 @@ function type_noisette_lire($plugin, $type_noisette, $information = '', $traiter
  */
 function type_noisette_repertorier($plugin, $filtres = array(), $stockage = '') {
 
-	// On indexe le tableau des des types de noisette par le plugin appelant en cas d'appel sur le même hit
+	// On indexe le tableau des types de noisette par le plugin appelant en cas d'appel sur le même hit
 	// par deux plugins différents.
 	static $types_noisette = array();
 

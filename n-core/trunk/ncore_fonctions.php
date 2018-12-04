@@ -209,7 +209,7 @@ include_spip('public/noisette_repertorier');
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param mixed  $noisette
- *        Tableau des identifiants de la noisette qui peut prendre d'un tableau avec pour index
+ *        Tableau des identifiants de la noisette qui peut prendre la forme d'un tableau avec pour index
  *        id_noisette, id conteneur et rang_noisette, ce qui permet d'utiliser l'un ou l'autre des identifiants.
  * @param string $type_noisette
  * 	      Identifiant du type de noisette.
