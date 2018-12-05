@@ -70,6 +70,9 @@ function definitions_langues(){
 **/
 function dictionnaires_migrer_acronymes() {
 	// Si F&T contient une table d'acronymes
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$desc = $trouver_table('spip_forms');
+	if (!is_array($desc)) return;
 	if (count($liste = sql_fetsel('id_form', 'spip_forms', "type_form='acronymes_sigles'"))) {
 		$id_form = intval(reset($liste));
 		$acronymes = sql_allfetsel('id_donnee, statut, date', 'spip_forms_donnees', 'id_form = '.$id_form);
