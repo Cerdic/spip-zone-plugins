@@ -943,7 +943,7 @@ function inscription3_formulaire_traiter($flux) {
 					}
 					if ($desc) {
 						if (!$envoyer_mail($mail, $sujet, $msg, $from, $head)) {
-							$traiter_plugin['message_ok'] = _T('form_forum_probleme_mail');
+							$flux['data']['message_erreur'] = _T('form_forum_probleme_mail');
 						} else {
 							$traiter_plugin['message_ok'] = _T('form_forum_identifiant_mail');
 						}
