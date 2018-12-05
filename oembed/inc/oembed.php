@@ -71,7 +71,7 @@ function oembed_lister_providers() {
 		'http://*.tumblr.com/post/*'              => 'https://www.tumblr.com/oembed/1.0',
 		'http://*.kickstarter.com/projects/*'     => 'https://www.kickstarter.com/services/oembed',
 		'http://speakerdeck.com/*'                => 'https://speakerdeck.com/oembed.json',
-		'http://issuu.com/*'                      => 'https://issuu.com/oembed',
+		'https://issuu.com/*/docs/*'              => 'https://issuu.com/oembed',
 		'http://www.facebook.com/*/posts/*'       => 'https://www.facebook.com/plugins/post/oembed.json/',
 		'http://www.facebook.com/*/activity/*'    => 'https://www.facebook.com/plugins/post/oembed.json/',
 		'http://www.facebook.com/*/photos/*'      => 'https://www.facebook.com/plugins/post/oembed.json/',
