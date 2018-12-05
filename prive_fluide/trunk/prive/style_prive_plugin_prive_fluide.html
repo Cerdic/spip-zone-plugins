@@ -153,6 +153,21 @@ body.large {
     max-width: calc(15vw - 20px);
     margin-left: calc(-15vw + 10px);
   }
+  /* Pleine largeur */
+  .formulaire_spip .editer.pleine_largeur {
+    padding-left: 10px;
+    flex-direction: column;
+  }
+  .formulaire_spip .editer.pleine_largeur > label {
+    float: none;
+    display: block;
+    margin-left: 0;
+    margin-bottom: 10px;
+    max-width: 100%;
+  }
+  .formulaire_spip .editer.pleine_largeur > label ~ * {
+    max-width: 100%;
+  }
 
 }
 
