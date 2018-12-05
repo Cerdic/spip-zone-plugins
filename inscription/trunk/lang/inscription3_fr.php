@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'a_confirmer' => 'À confirmer',
+	'auteur' => 'auteur',
 	'activation_compte' => 'Activez votre compte',
 	'admin' => 'Admin',
 	'afficher_tous' => 'Afficher tous les utilisateurs',
@@ -279,6 +280,7 @@ Si vous n’avez pas demandé cette inscription ou si vous ne voulez plus faire 
 	'titre_supprimer_compte' => 'Supprimer votre compte',
 
 	// V
+	'visiteur' => 'visiteur',
 	'vos_articles_auteur' => 'Vos articles',
 	'vos_contacts_personnels' => 'Vos contacts personnels',
 	'votre_adresse' => 'Votre adresse personnelle',
