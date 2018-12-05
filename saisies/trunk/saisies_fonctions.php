@@ -270,7 +270,7 @@ function saisies_label($chaine) {
 	$chaine = trim($chaine);
 	if (preg_match("/:>$/", $chaine)) {
 		$chaine = preg_replace("/^&lt;:/", "", $chaine);
-		$chaine = preg_replace("/^<;:/", "", $chaine);
+		$chaine = preg_replace("/^<:/", "", $chaine);
 		$chaine = preg_replace("/:>$/", "", $chaine);
 		return _T($chaine);
 	}
