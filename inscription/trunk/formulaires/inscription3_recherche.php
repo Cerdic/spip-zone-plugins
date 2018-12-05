@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Chargement des valeurs par defaut des champs du formulaire
  */
 function formulaires_inscription3_recherche_charger_dist() {
-	$datas = array();
+	$datas = array('editable' => 'true');
 	$datas['ordre'] = _request('ordre');
 	$datas['desc'] = _request('desc');
 	$datas['case'] = _request('case');
