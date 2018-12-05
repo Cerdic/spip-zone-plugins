@@ -884,7 +884,7 @@ div.info table {
 	}
 div.info table th {
 	background:rgb(204,204,204);
-	color:white;
+	color:black;
 	margin:0;
 	padding:0.1em 1em 0.1em 1em;
 	}
@@ -1197,7 +1197,6 @@ EOB;
 			break;
 		}
 		$fieldname    = 'info';
-		$fieldheading = 'Squelette';
 		$fieldkey     = 'info';
 		
 		$cols = 6;
@@ -1210,7 +1209,7 @@ EOB;
 		<select name=S_KEY  onChange='form.submit()'>
 			<option value=H", $MYREQUEST['S_KEY'] == 'H' ? ' selected' : '', '>Hits</option>
 			<option value=Z', $MYREQUEST['S_KEY'] == 'Z' ? ' selected' : '', '>Size</option>
-			<option value=S', $MYREQUEST['S_KEY'] == 'S' ? ' selected' : '', ">$fieldheading</option>",
+			<option value=S', $MYREQUEST['S_KEY'] == 'S' ? ' selected' : '', '>Squelette</option>',
 			'<option value=A', $MYREQUEST['S_KEY'] == 'A' ? ' selected' : '', '>Last accessed</option>
 			<option value=C', $MYREQUEST['S_KEY'] == 'C' ? ' selected' : '', '>Created at</option>';
 		if ($fieldname == 'info')
@@ -1288,7 +1287,7 @@ EOB;
 			}
 			$MYREQUEST['SEARCH'] = '~'.$MYREQUEST['SEARCH'].'~i';
 		}
-		echo '<div class="info"><table cellspacing=0><tbody>', '<tr>', '<th>', sortheader('S', $fieldheading), '</th>', '<th>', sortheader('H', 'Hits'), '</th>', '<th>', sortheader('Z', 'Size'), '</th>', '<th>', sortheader('A', 'Last accessed'), '</th>', '<th>', sortheader('C', 'Created at'), '</th>';
+		echo '<div class="info"><table cellspacing=0><tbody>', '<tr>', '<th>Caches - ', sortheader('S', 'tri par Squelette'), '</th>', '<th>', sortheader('H', 'Hits'), '</th>', '<th>', sortheader('Z', 'Size'), '</th>', '<th>', sortheader('A', 'Last accessed'), '</th>', '<th>', sortheader('C', 'Created at'), '</th>';
 		
 		if ($fieldname == 'info') {
 			$cols += 2;
@@ -1320,8 +1319,10 @@ EOB;
 				case 'D':
 					$k = sprintf('%015d-', $entry['deletion_time']);
 					break;
-				case 'S':
-					$k = $entry["info"];
+				case 'S': 
+					// tri par squelette : on supprime le préfixe et le md5 au début
+					// et alors on peut trier
+					$k = substr(str_replace(XRAY_NEPASAFFICHER_DEBUTNOMCACHE, '', $entry["info"]), 33);
 					break;
 			}
 			if (!$AUTHENTICATED) {
