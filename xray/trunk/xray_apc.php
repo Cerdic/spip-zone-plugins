@@ -185,9 +185,20 @@ function bouton_objet($objet, $id_objet, $extra) {
 	{
 		$objet_visible = $objet = $extra['objet'];
 	};
-	return "<a href='/ecrire/?exec=$objet&id_$objet=$id_objet' target='blank' 
-			style='position:absolute; right:1em'
-			title=\"" . attribut_html(generer_info_entite($id_objet, $objet, 'titre', 'etoile')) . "\">[voir $objet_visible]</a>";
+global $MY_SELF;
+	return "<a href=\"".parametre_url(
+							parametre_url($MY_SELF,'WHERE', 'CONTEXTE'), 
+							'SEARCH', "\\[id_$objet\\] => $id_objet\n")."\" 
+				style=\"float: right\"
+				title=\"Voir tous les caches ayant $objet $id_objet dans leur contexte\">
+				[mm $objet]
+			</a>
+			<a href='/ecrire/?exec=$objet&id_$objet=$id_objet' target='blank' 
+				style='float: right'
+				title=\"" . attribut_html(generer_info_entite($id_objet, $objet, 'titre', 'etoile')) . "\">
+				[voir $objet_visible]
+			</a>
+			";
 }
 
 if (!function_exists('plugin_est_actif')) {
@@ -267,23 +278,16 @@ $vardom = array(
 	'LO' => '/^1$/', // login requested
 	
 	'COUNT' => '/^\d+$/', // number of line displayed in list
-	'SCOPE' => '/^[AD]$/', // list view scope
 	'S_KEY' => '/^[AHSMCDTZ]$/', // first sort key
 	'SORT' => '/^[DA]$/', // second sort key
 	'AGGR' => '/^\d+$/', // aggregation by dir level
 	'SEARCH' => '~.*~',
 	'TYPECACHE' => '/^(|ALL|NON_SESSIONS|SESSIONS|SESSIONS_AUTH|SESSIONS_NONAUTH|SESSIONS_TALON|FORMULAIRES)$/', //
 	'ZOOM' => '/^(|TEXTECOURT|TEXTELONG)$/', //
-	'WHERE' => '/^(|ALL|HTML|META)$/', // recherche dans le contenu
+	'WHERE' => '/^(|ALL|HTML|META|CONTEXTE)$/', // recherche dans le contenu
 	'EXTRA' => '/^(|CONTEXTE|CONTEXTES_SPECIAUX|INFO_AUTEUR|INFO_OBJET_SPECIAL|INVALIDEURS|INVALIDEURS_SPECIAUX|INCLUSIONS'
 		.(plugin_est_actif('macrosession') ? '|MACROSESSIONS|MACROAUTORISER' : '')
 		.')$/'		// Affichage pour chaque élément de la liste
-);
-
-// cache scope
-$scope_list = array(
-	'A' => 'cache_list',
-	'D' => 'deleted_list'
 );
 
 global $MYREQUEST; // fix apcu
@@ -313,8 +317,6 @@ foreach ($vardom as $var => $dom) {
 }
 
 // check parameter sematics
-if (empty($MYREQUEST['SCOPE']))
-	$MYREQUEST['SCOPE'] = "A";
 if (empty($MYREQUEST['S_KEY']))
 	$MYREQUEST['S_KEY'] = "H";
 if (empty($MYREQUEST['SORT']))
@@ -323,12 +325,10 @@ if (empty($MYREQUEST['OB']))
 	$MYREQUEST['OB'] = OB_HOST_STATS;
 if (!isset($MYREQUEST['COUNT']))
 	$MYREQUEST['COUNT'] = 20;
-if (!isset($scope_list[$MYREQUEST['SCOPE']]))
-	$MYREQUEST['SCOPE'] = 'A';
 
 global $MY_SELF; // fix apcu
 global $MY_SELF_WO_SORT; // fix apcu
-$MY_SELF_WO_SORT = "$PHP_SELF" . "?SCOPE=" . $MYREQUEST['SCOPE'] . "&COUNT=" . $MYREQUEST['COUNT'] . "&SEARCH=" . $MYREQUEST['SEARCH'] . "&TYPECACHE=" . $MYREQUEST['TYPECACHE'] . "&ZOOM=" . $MYREQUEST['ZOOM'] . "&EXTRA=" . $MYREQUEST['EXTRA'] . "&WHERE=" . $MYREQUEST['WHERE'] . "&exec=" . $MYREQUEST['exec'] . "&OB=" . $MYREQUEST['OB'];
+$MY_SELF_WO_SORT = "$PHP_SELF" . "?COUNT=" . $MYREQUEST['COUNT'] . "&SEARCH=" . $MYREQUEST['SEARCH'] . "&TYPECACHE=" . $MYREQUEST['TYPECACHE'] . "&ZOOM=" . $MYREQUEST['ZOOM'] . "&EXTRA=" . $MYREQUEST['EXTRA'] . "&WHERE=" . $MYREQUEST['WHERE'] . "&exec=" . $MYREQUEST['exec'] . "&OB=" . $MYREQUEST['OB'];
 $MY_SELF         = $MY_SELF_WO_SORT . "&S_KEY=" . $MYREQUEST['S_KEY'] . "&SORT=" . $MYREQUEST['SORT'];
 $self            = "http" . (!empty($_SERVER['HTTPS']) ? "s" : "") . "://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 
@@ -770,7 +770,7 @@ body,p,td,th,input,submit { font-size:0.8em;font-family:arial,helvetica,sans-ser
 td { vertical-align:top }
 a { color:black; font-weight:none; text-decoration:none; }
 a:hover { text-decoration:underline; }
-div.content { padding:1em 1em 1em 1em; position:absolute; width:97%; z-index:100; }
+div.content { padding:1em 1em 1em 1em; width:97%; z-index:100; }
 
 
 div.head div.login {
@@ -1197,27 +1197,22 @@ EOB;
 			break;
 		}
 		$fieldname    = 'info';
-		$fieldheading = 'User Entry Label';
+		$fieldheading = 'Squelette';
 		$fieldkey     = 'info';
 		
 		$cols = 6;
-		echo <<<EOB
-		<div class=sorting><form><p>Scope: 
-		<input type=hidden name=OB value={$MYREQUEST['OB']}>
-		<input type=hidden name=exec value={$MYREQUEST['exec']}>
-		<select name=SCOPE  onChange="form.submit()">
-EOB;
-		echo '<option value=A', $MYREQUEST['SCOPE'] == 'A' ? ' selected' : '', '>Active</option>
-			<option value=D', $MYREQUEST['SCOPE'] == 'D' ? ' selected' : '', '>Deleted</option>
-		</select>
-		 Sorting:
-		<select name=S_KEY  onChange="form.submit()">
-			<option value=H', $MYREQUEST['S_KEY'] == 'H' ? ' selected' : '', '>Hits</option>
+		echo '
+		<div class=sorting>
+		<form>'
+			."<input type='hidden' name='OB' value='".$MYREQUEST['OB']."'>
+		    <input type='hidden' name='exec' value='".$MYREQUEST['exec']."'>
+		Sorting:
+		<select name=S_KEY  onChange='form.submit()'>
+			<option value=H", $MYREQUEST['S_KEY'] == 'H' ? ' selected' : '', '>Hits</option>
 			<option value=Z', $MYREQUEST['S_KEY'] == 'Z' ? ' selected' : '', '>Size</option>
-			<option value=S', $MYREQUEST['S_KEY'] == 'S' ? ' selected' : '', '>$fieldheading</option>
-			<option value=A', $MYREQUEST['S_KEY'] == 'A' ? ' selected' : '', '>Last accessed</option>
-			<option value=C', $MYREQUEST['S_KEY'] == 'C' ? ' selected' : '', '>Created at</option>
-			<option value=D', $MYREQUEST['S_KEY'] == 'D' ? ' selected' : '', '>Deleted at</option>';
+			<option value=S', $MYREQUEST['S_KEY'] == 'S' ? ' selected' : '', ">$fieldheading</option>",
+			'<option value=A', $MYREQUEST['S_KEY'] == 'A' ? ' selected' : '', '>Last accessed</option>
+			<option value=C', $MYREQUEST['S_KEY'] == 'C' ? ' selected' : '', '>Created at</option>';
 		if ($fieldname == 'info')
 			echo '<option value=D', $MYREQUEST['S_KEY'] == 'T' ? ' selected' : '', '>Timeout</option>';
 		
@@ -1272,10 +1267,12 @@ EOB;
 			<option value="ALL" ', $MYREQUEST['WHERE'] == 'ALL' ? ' selected' : '', '>Tout le contenu</option>
 			<option value="HTML" ', $MYREQUEST['WHERE'] == 'HTML' ? ' selected' : '', '>HTML</option>
 			<option value="META" ', $MYREQUEST['WHERE'] == 'META' ? ' selected' : '', '>Métadonnées</option>
+			<option value="CONTEXTE" ', $MYREQUEST['WHERE'] == 'CONTEXTE' ? ' selected' : '', '>Contexte</option>
 		</select>
 		&nbsp;&nbsp;&nbsp;
 		<input type=submit value="GO!">
-		</p></form></div>';
+		</p></form></div>
+		';
 		
 		if (isset($MYREQUEST['SEARCH'])) {
 			// Don't use preg_quote because we want the user to be able to specify a
@@ -1297,13 +1294,13 @@ EOB;
 			$cols += 2;
 			echo '<th>', sortheader('T', 'Timeout'), '</th>';
 		}
-		echo '<th>', sortheader('D', 'Deleted at'), '</th></tr>';
+		echo '<th>Del</th></tr>';
 		
 		// builds list with alpha numeric sortable keys
 		//
 		$list = array();
 
-		foreach ($cache[$scope_list[$MYREQUEST['SCOPE']]] as $i => $entry) {
+		foreach ($cache['cache_list'] as $i => $entry) {
 			switch ($MYREQUEST['S_KEY']) {
 				case 'A':
 					$k = sprintf('%015d-', $entry['access_time']);
@@ -1399,6 +1396,11 @@ EOB;
 					case 'META' :
 						if (is_array($searched)) // !textwheel
 							unset($searched['texte']);
+						break;
+					case 'CONTEXTE' :
+						if (is_array($searched) 
+							and isset($searched['contexte'])) // !textwheel
+							$searched = $searched['contexte'];
 						break;
 					default :
 						die("Mauvaise valeur pour where : " . $MYREQUEST['WHERE']);
@@ -1559,7 +1561,7 @@ EOB;
 					} else if ($MYREQUEST['OB'] == OB_USER_CACHE) {
 						
 						echo '<td class="td-last center">';
-						echo '[<a href="', $MY_SELF, '&DU=', urlencode($entry[$fieldkey]), '">Delete Now</a>]';
+						echo '<a href="', $MY_SELF, '&DU=', urlencode($entry[$fieldkey]), '" style="color:red">X</a>';
 						echo '</td>';
 					} else {
 						echo '<td class="td-last center"> &nbsp; </td>';
