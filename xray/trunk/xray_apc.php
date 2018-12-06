@@ -94,7 +94,7 @@ function ajuste_longueur_html($str) {
 		$str = mb_substr($str, 0, MAXLEN_HTMLCOURT) . '...';
 	elseif (!$str)
 		$str = '(vide)';
-	return "ajuste_longueur=".$str;
+	return $str;
 }
 
 function is_serialized($str) {
