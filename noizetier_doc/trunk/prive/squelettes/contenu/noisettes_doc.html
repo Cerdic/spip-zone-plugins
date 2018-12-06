@@ -1,0 +1,19 @@
+<h1 class="grostitre"><:noizetier_doc:titre_page_noisettes_doc:></h1>
+<div class="nettoyeur"></div>
+
+<B_noisettes>
+	<BOUCLE_noisettes (DATA) {source table, #VAL{noisettes}|noisettes_lister_disponibles}>
+		[(#BOITE_OUVRIR{<h3 id="[noisette_(#CLE)]">[(#ICON||sinon{noisette-24.png}|noizetier_chemin_icone|balise_img) ][(#NOM|saisies_label)] [((#CLE))]</h3>, 'simple'})]
+		[<p>(#DESCRIPTION|saisies_label)</p>]
+		<BOUCLE_options (DATA) {source table, #PARAMETRES}>
+			<div class="info #VALEUR{saisie}">
+				<h4>[(#VALEUR{options/label}|saisies_label|sinon{-})]</h4>
+				[(#CHEMIN{saisies-doc/[(#VALEUR{saisie})].html}|non)[(#VAL{saisies-doc/[(#VALEUR{saisie})].html}|spip_log{saisies_doc})]]
+				[(#CHEMIN{saisies-doc/[(#VALEUR{saisie})].html}|oui)[(#INCLURE{fond=saisies-doc/#VALEUR{saisie},options=#VALEUR{options},saisies=#VALEUR{saisies}})]]
+			</div>
+		</BOUCLE_options>
+		[(#BOITE_FERMER)]
+	</BOUCLE_noisettes>
+</B_noisettes>
+<:saisies:plugin_yaml_inactif:>
+<//B_noisettes>

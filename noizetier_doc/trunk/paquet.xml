@@ -1,0 +1,26 @@
+<paquet
+	prefix="noizetier_doc"
+	categorie="outil"
+	version="0.1.0"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="noizetier_doc-64.png"
+>
+
+	<nom>Documentation Noisettes</nom>
+
+	<auteur>Teddy Payet</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<necessite nom="saisies" compatibilite="[2.18.21;]" />
+	<necessite nom="noizetier" compatibilite="[2.7.0;]" />
+
+	<pipeline nom="autoriser" inclure="noizetier_doc_autorisations.php" />
+
+	<menu nom="noisettes_doc" titre="noizetier_doc:bouton_noizetier_doc" parent="menu_developpement" icone="images/noizetier_doc-16.png" action="noisettes_doc" />
+	<spip compatibilite="[3.0.0;3.0.*]">
+		<menu nom="noisettes_doc" titre="noizetier_doc:bouton_noizetier_doc" parent="bando_administration" icone="images/noizetier_doc-16.png" action="noisettes_doc" />
+	</spip>
+
+</paquet>

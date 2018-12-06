@@ -1,0 +1,20 @@
+[(#REM)<style>/*
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+*/]#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+#wysiwyg .noisette_fieldset .champ {font-size: 1em;}
+
+body.noisettes_doc {
+	background-color: #efefef;
+}
+<B_noisettes><BOUCLE_noisettes (DATA) {source table, #VAL{noisettes}|noisettes_lister_disponibles}>
+.navigation_avec_icones .bando2_noisette_[(#CLE)] { [background-image: url((#ICON||sinon{noisette-24.png}|noizetier_chemin_icone|image_reduire{16}|extraire_attribut{src}));] }</BOUCLE_noisettes></B_noisettes>
