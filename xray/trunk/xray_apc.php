@@ -53,6 +53,8 @@ defaults('USE_AUTHENTICATION', 0); // Use (internal) authentication - best choic
 defaults('ADMIN_USERNAME', 'admin'); // Admin Username
 defaults('ADMIN_PASSWORD', 'password'); // Admin Password - CHANGE THIS TO ENABLE!!!
 
+defaults('MAXLEN_HTMLCOURT', 1000);	// Couper les html
+
 // (beckerr) I'm using a clear text password here, because I've no good idea how to let
 //           users generate a md5 or crypt password in a easy way to fill it in above
 
@@ -84,6 +86,16 @@ else
 	die("La fonction gunzip_page ne devrait pas être déjà définie"); // à défaut de disposer de la lib nobug
 
 // Strings utils
+
+function ajuste_longueur_html($str) {
+	$court = (!isset($_GET['ZOOM']) or ($_GET['ZOOM'] != 'TEXTELONG'));
+	$str = trim(preg_replace(array('/ +/', "/(\n\s*)+/"), array(' ',"\n  "), $str));
+	if ($court and (mb_strlen($str) > MAXLEN_HTMLCOURT))
+		$str = mb_substr($str, 0, MAXLEN_HTMLCOURT) . '...';
+	elseif (!$str)
+		$str = '(vide)';
+	return "ajuste_longueur=".$str;
+}
 
 function is_serialized($str) {
 	return ($str == serialize(false) || @unserialize($str) !== false);
@@ -121,28 +133,18 @@ function get_apc_data($info, &$data_success) {
 }
 
 function spipsafe_unserialize($str) {
-	if (strpos($str, "SPIPTextWheelRuleset") !== false) {
-		if (isset($_GET['ZOOM']) and ($_GET['ZOOM'] == 'TEXTECOURT'))
-			return "Début : " . substr(trim($str), 0, 80) . '...';
-		else
-			return "Brut : $str";
-	}
+	if (strpos($str, "SPIPTextWheelRuleset") !== false)
+		return ajuste_longueur_html($str);
 	$unser = unserialize($str);
 	if (is_array($unser) and isset($unser['texte'])) {
 		gunzip_page($unser); // si 'texte' est trop grand il est gzcompress par gzip_page
-		if (isset($_GET['ZOOM']) and ($_GET['ZOOM'] == 'TEXTECOURT')) {
-			$unser['texte'] = trim(preg_replace('/\s+/', ' ', $unser['texte']));
-			if (mb_strlen($unser['texte']) > 80)
-				$unser['texte'] = mb_substr($unser['texte'], 0, 80) . '...';
-			elseif (!$unser['texte'])
-				$unser['texte'] = '(vide)';
-		}
+		$unser['texte'] = ajuste_longueur_html($unser['texte']);
 	}
 	return print_contexte($unser, 1);
 }
 
-function print_contexte($extra, $tostring) {
-	$print = print_r($extra, 1);
+function print_contexte($extra, $tostring=true) {
+	$print=print_r($extra,1);
 	if (stripos($print, 'Array') === 0) {
 		// On enlève 'Array( ' au début et ')' à la fin
 		$print = trim(substr($print, 5), " (\n\r\t");
@@ -152,7 +154,9 @@ function print_contexte($extra, $tostring) {
 				return $match[0] . '</xmp>' . bouton_objet($match[1], $match[2], $extra) . '<xmp>';
 			}, $print);
 		// [squelette] => html_5731a2e40776724746309c16569cac40
-		$print = preg_replace_callback("/\[(squelette|source)\]\s*=>\s*(html_[a-f0-9]+|[a-z0-9_\.\/\-]+\.html)$/im", function($match)
+		// et [source] => plugins/paeco/squelettes/inclure/element/tag-rubrique.html
+		$print = preg_replace_callback("/\[(squelette|source)\]\s*=>\s*(html_[a-f0-9]{32}+|[\w_\.\/\-]+\.html)$/im",
+			function($match)
 			{
 				if (!defined('_SPIP_ECRIRE_SCRIPT'))
 					spip_initialisation_suite();
@@ -168,13 +172,15 @@ function print_contexte($extra, $tostring) {
 				}
 				return "[{$match[1]}] => </xmp><a title='{$title}' 
 							href='".generer_url_ecrire('xray', "SOURCE=$source")."' 
-							target='blank'><xmp>{$match[2]}</xmp></a><xmp>";
-			}, $print);
+							target='blank'><xmp>{$match[2]}</xmp> &#128279;</a><xmp>";
+			}, 
+			$print);
+		$extra = $print;
 	}
-	$print=preg_replace('/^    /m', '', $print);
+	$extra=preg_replace('/^    /m', '', $extra);
 	if ($tostring)
-		return $print;
-	echo $print;
+		return $extra;
+	echo $extra;
 }
 
 function bouton_objet($objet, $id_objet, $extra) {
@@ -285,12 +291,14 @@ $vardom = array(
 	'TYPECACHE' => '/^(|ALL|NON_SESSIONS|SESSIONS|SESSIONS_AUTH|SESSIONS_NONAUTH|SESSIONS_TALON|FORMULAIRES)$/', //
 	'ZOOM' => '/^(|TEXTECOURT|TEXTELONG)$/', //
 	'WHERE' => '/^(|ALL|HTML|META|CONTEXTE)$/', // recherche dans le contenu
-	'EXTRA' => '/^(|CONTEXTE|CONTEXTES_SPECIAUX|INFO_AUTEUR|INFO_OBJET_SPECIAL|INVALIDEURS|INVALIDEURS_SPECIAUX|INCLUSIONS'
+	'EXTRA' => '/^(|CONTEXTE|CONTEXTES_SPECIAUX|HTML_COURT|INFO_AUTEUR|INFO_OBJET_SPECIAL|INVALIDEURS|INVALIDEURS_SPECIAUX|INCLUSIONS'
 		.(plugin_est_actif('macrosession') ? '|MACROSESSIONS|MACROAUTORISER' : '')
 		.')$/'		// Affichage pour chaque élément de la liste
 );
 
 global $MYREQUEST; // fix apcu
+	$MYREQUEST = array();
+
 // handle POST and GET requests
 if (empty($_REQUEST)) {
 	if (!empty($_GET) && !empty($_POST)) {
@@ -316,7 +324,7 @@ foreach ($vardom as $var => $dom) {
 	}
 }
 
-// check parameter sematics
+// check parameter semantics
 if (empty($MYREQUEST['S_KEY']))
 	$MYREQUEST['S_KEY'] = "H";
 if (empty($MYREQUEST['SORT']))
@@ -325,6 +333,10 @@ if (empty($MYREQUEST['OB']))
 	$MYREQUEST['OB'] = OB_HOST_STATS;
 if (!isset($MYREQUEST['COUNT']))
 	$MYREQUEST['COUNT'] = 20;
+if (!isset($MYREQUEST['EXTRA']))
+	$MYREQUEST['EXTRA'] = '';
+if (!isset($MYREQUEST['ZOOM']))
+	$MYREQUEST['ZOOM'] = 'TEXTECOURT';
 
 global $MY_SELF; // fix apcu
 global $MY_SELF_WO_SORT; // fix apcu
@@ -1200,36 +1212,16 @@ EOB;
 		$fieldkey     = 'info';
 		
 		$cols = 6;
-		echo '
-		<div class=sorting>
-		<form>'
-			."<input type='hidden' name='OB' value='".$MYREQUEST['OB']."'>
-		    <input type='hidden' name='exec' value='".$MYREQUEST['exec']."'>
-		Sorting:
-		<select name=S_KEY  onChange='form.submit()'>
-			<option value=H", $MYREQUEST['S_KEY'] == 'H' ? ' selected' : '', '>Hits</option>
-			<option value=Z', $MYREQUEST['S_KEY'] == 'Z' ? ' selected' : '', '>Size</option>
-			<option value=S', $MYREQUEST['S_KEY'] == 'S' ? ' selected' : '', '>Squelette</option>',
-			'<option value=A', $MYREQUEST['S_KEY'] == 'A' ? ' selected' : '', '>Last accessed</option>
-			<option value=C', $MYREQUEST['S_KEY'] == 'C' ? ' selected' : '', '>Created at</option>';
-		if ($fieldname == 'info')
-			echo '<option value=D', $MYREQUEST['S_KEY'] == 'T' ? ' selected' : '', '>Timeout</option>';
 		
-		echo '</select>
-		<select name=SORT  onChange="form.submit()">', 
-			'<option value=D', $MYREQUEST['SORT'] == 'D' ? ' selected' : '', '>DESC</option>', 
-			'<option value=A', $MYREQUEST['SORT'] == 'A' ? ' selected' : '', '>ASC</option>', 
-		'</select>
-		&nbsp;&nbsp;<b>HTML:</b>
-		<select name=ZOOM  onChange="form.submit()">
-			<option value=TEXTECOURT', $MYREQUEST['ZOOM'] == 'TEXTECOURT' ? ' selected' : '', '>Courts</option>
-			<option value=TEXTELONG', $MYREQUEST['ZOOM'] == 'TEXTELONG' ? ' selected' : '', '>Entiers</option> 
-		</select>
-		&nbsp;&nbsp;<b>Affichage extra:</b> 
+		echo '<form>
+			<input type="hidden" name="OB" value="'.$MYREQUEST['OB'].'">
+			<input type="hidden" name="exec" value="'.$MYREQUEST['exec'].'">
+		<b>Affichage extra:</b> 
 		<select name=EXTRA  onChange="form.submit()">
 			<option value="" ', $MYREQUEST['EXTRA'] == '' ? ' selected' : '', '></option> 
 			<option value=CONTEXTE ', $MYREQUEST['EXTRA'] == 'CONTEXTE' ? ' selected' : '', '>Contexte</option>
 			<option value=CONTEXTES_SPECIAUX ', $MYREQUEST['EXTRA'] == 'CONTEXTES_SPECIAUX' ? ' selected' : '', '>Contextes spécifiques</option>
+			<option value=HTML_COURT ', $MYREQUEST['EXTRA'] == 'HTML_COURT' ? ' selected' : '', '>HTML (...)</option>
 			<option value=INFO_AUTEUR ', $MYREQUEST['EXTRA'] == 'INFO_AUTEUR' ? ' selected' : '', '>Infos auteur</option>
 			<option value=INFO_OBJET_SPECIAL ', $MYREQUEST['EXTRA'] == 'INFO_OBJET_SPECIAL' ? ' selected' : '', '>Infos '.XRAY_OBJET_SPECIAL.'</option>
 			<option value=INVALIDEURS ', $MYREQUEST['EXTRA'] == 'INVALIDEURS' ? ' selected' : '', '>Invalideurs</option>
@@ -1254,7 +1246,7 @@ EOB;
 			<option value=50 ', $MYREQUEST['COUNT'] == '50' ? ' selected' : '', '>Top 50</option>
 			<option value=100', $MYREQUEST['COUNT'] == '100' ? ' selected' : '', '>Top 100</option>
 			<option value=150', $MYREQUEST['COUNT'] == '150' ? ' selected' : '', '>Top 150</option>
-			<option value=200', $MYREQUEST['COUNT'] == '200' ? ' selected' : '', '>Top 200</option>
+			<option value=250', $MYREQUEST['COUNT'] == '250' ? ' selected' : '', '>Top 250</option>
 			<option value=500', $MYREQUEST['COUNT'] == '500' ? ' selected' : '', '>Top 500</option>
 			<option value=0  ', $MYREQUEST['COUNT'] == '0' ? ' selected' : '', '>All</option>
 		</select>
@@ -1455,7 +1447,7 @@ EOB;
 					if ($MYREQUEST['EXTRA'] and ($sh != $MYREQUEST["SH"]) // sinon yaura un zoom après et c'est inutile de répéter ici
 						and $data_success) {
 						$extra = null;
-						$liens = '';
+						$print_contexte=true;
 						if (is_array($data)) {
 							switch ($MYREQUEST['EXTRA']) {
 							case 'CONTEXTE':
@@ -1464,6 +1456,7 @@ EOB;
 								else
 									$extra = '(non défini)';
 								break;
+
 							case 'CONTEXTES_SPECIAUX':
 								if (isset($data['contexte'])) {
 									$extra = $data['contexte'];
@@ -1478,6 +1471,12 @@ EOB;
 								} else
 									$extra = '(non défini)';
 								break;
+
+							case 'HTML_COURT' :
+								$print_contexte = false;
+								$extra = ajuste_longueur_html($data['texte']);
+								break;
+
 							case 'INFO_AUTEUR':
 								if (isset($data['contexte'])) {
 									foreach (array(
@@ -1491,6 +1490,7 @@ EOB;
 											$extra[$ki] = $extra[$ki] = $data['contexte'][$ki];
 								};
 								break;
+
 							case 'INFO_OBJET_SPECIAL':
 								if (isset($data['contexte'])) {
 									$ki = 'id_'.XRAY_OBJET_SPECIAL;
@@ -1539,10 +1539,13 @@ EOB;
 								break;
 							}
 						}
-						if ($extra = print_contexte($extra, 1))
+						if ($print_contexte)
+							$extra = print_contexte($extra, 1);
+
+						if ($extra)
 							echo "<br><xmp>$extra</xmp>";
-						if ($liens)	// inutilisé désormais en fait
-							echo "<small style='float:right'>$liens</small>";
+						else
+							echo "<br>(rien)</br>";
 					}
 					echo '</td>
 					<td class="td-n center">', $entry['num_hits'], '</td>
@@ -1572,9 +1575,11 @@ EOB;
 						echo '<tr>';
 						echo '<td colspan="7">';
 						
-						if (isset($_GET['ZOOM']) and ($_GET['ZOOM'] == 'TEXTECOURT')) {
+						if (!isset($_GET['ZOOM']) or ($_GET['ZOOM'] != 'TEXTELONG')) {
 							$url      = parametre_url($self, 'ZOOM', 'TEXTELONG') . "#key-$sh";
 							$menuzoom = "<a href='$url' class='menuzoom'>Voir tout le texte</a> ";
+							if (isset($data['texte']))
+								$data['texte'] = ajuste_longueur_html($data['texte']);
 						} else {
 							$url      = parametre_url($self, 'ZOOM', 'TEXTECOURT') . "#key-$sh";
 							$menuzoom = "<a href='$url' class='menuzoom'>Voir texte abbrégé</a> ";
@@ -1584,7 +1589,8 @@ EOB;
 						
 						if ($data_success) {
 							echo "<p>$menuzoom</p>";
-							echo '<xmp>' . print_r($data, 1) . '</xmp>';
+							// echo '<xmp>' . print_r($data, 1) . '</xmp>';
+							echo '<xmp>'.print_contexte($data,1).'</xmp>';
 						} else {
 							if (!apcu_exists($entry['info']))
 								echo '(! doesnt exist anymore !)';
