@@ -4,7 +4,7 @@
 	version="0.1.0"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
-	logo="noizetier_doc-64.png"
+	logo="prive/themes/spip/images/noizetier_doc-64.png"
 >
 
 	<nom>Documentation Noisettes</nom>
