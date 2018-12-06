@@ -342,7 +342,11 @@ global $MY_SELF; // fix apcu
 global $MY_SELF_WO_SORT; // fix apcu
 $MY_SELF_WO_SORT = "$PHP_SELF" . "?COUNT=" . $MYREQUEST['COUNT'] . "&SEARCH=" . $MYREQUEST['SEARCH'] . "&TYPECACHE=" . $MYREQUEST['TYPECACHE'] . "&ZOOM=" . $MYREQUEST['ZOOM'] . "&EXTRA=" . $MYREQUEST['EXTRA'] . "&WHERE=" . $MYREQUEST['WHERE'] . "&exec=" . $MYREQUEST['exec'] . "&OB=" . $MYREQUEST['OB'];
 $MY_SELF         = $MY_SELF_WO_SORT . "&S_KEY=" . $MYREQUEST['S_KEY'] . "&SORT=" . $MYREQUEST['SORT'];
-$self            = "http" . (!empty($_SERVER['HTTPS']) ? "s" : "") . "://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+$self_pour_lien = 
+	"http" . (!empty($_SERVER['HTTPS']) ? "s" : "") . "://" 
+	. $_SERVER['SERVER_NAME']
+	// parametre_url fait un urlencode bienvenu pour les regexp qui peuvent contenir des ?
+	. parametre_url($_SERVER['REQUEST_URI'], 'SEARCH', $_REQUEST['SEARCH']);
 
 global $IMG_BASE;
 $IMG_BASE = "$PHP_SELF" . "?exec=" . $MYREQUEST['exec'];
@@ -1576,15 +1580,15 @@ EOB;
 						echo '<td colspan="7">';
 						
 						if (!isset($_GET['ZOOM']) or ($_GET['ZOOM'] != 'TEXTELONG')) {
-							$url      = parametre_url($self, 'ZOOM', 'TEXTELONG') . "#key-$sh";
+							$url      = parametre_url($self_pour_lien, 'ZOOM', 'TEXTELONG') . "#key-$sh";
 							$menuzoom = "<a href='$url' class='menuzoom'>Voir tout le texte</a> ";
 							if (isset($data['texte']))
 								$data['texte'] = ajuste_longueur_html($data['texte']);
 						} else {
-							$url      = parametre_url($self, 'ZOOM', 'TEXTECOURT') . "#key-$sh";
+							$url      = parametre_url($self_pour_lien, 'ZOOM', 'TEXTECOURT') . "#key-$sh";
 							$menuzoom = "<a href='$url' class='menuzoom'>Voir texte abbrégé</a> ";
 						}
-						$url = parametre_url($self, 'SH', '') . "#key-$sh";
+						$url = parametre_url($self_pour_lien, 'SH', '') . "#key-$sh";
 						$menuzoom .= "<a href='$url' class='menuzoom'>Replier</a>";
 						
 						if ($data_success) {
