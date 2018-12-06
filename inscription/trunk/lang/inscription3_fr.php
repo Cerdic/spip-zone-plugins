@@ -9,13 +9,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'a_confirmer' => 'À confirmer',
-	'auteur' => 'auteur',
 	'activation_compte' => 'Activez votre compte',
 	'admin' => 'Admin',
 	'afficher_tous' => 'Afficher tous les utilisateurs',
 	'ajouter_adherent' => 'Créer un nouvel utilisateur',
 	'aucun' => 'Aucun',
 	'aucun_resultat_recherche' => 'Il n’y a aucun résultat pour votre recherche.',
+	'auteur' => 'auteur',
 	'autre' => 'Autre',
 
 	// B
