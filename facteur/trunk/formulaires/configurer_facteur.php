@@ -17,7 +17,6 @@ function formulaires_configurer_facteur_charger_dist() {
 		'facteur_adresse_envoi_nom'         => lire_config('facteur_adresse_envoi_nom'),
 		'facteur_adresse_envoi_email'       => lire_config('facteur_adresse_envoi_email'),
 		'facteur_forcer_from'               => lire_config('facteur_forcer_from'),
-		'facteur_garder_fromname'           => lire_config('facteur_garder_fromname'),
 		'facteur_smtp'                      => lire_config('facteur_smtp'),
 		'facteur_smtp_host'                 => lire_config('facteur_smtp_host'),
 		'facteur_smtp_port'                 => lire_config('facteur_smtp_port', 25),
@@ -131,9 +130,6 @@ function formulaires_configurer_facteur_traiter_dist() {
 
 	$facteur_forcer_from = _request('facteur_forcer_from');
 	ecrire_meta('facteur_forcer_from', ($facteur_forcer_from=='oui')?'oui':'non');
-
-	$facteur_garder_fromname = _request('facteur_garder_fromname');
-	ecrire_meta('facteur_garder_fromname', ($facteur_garder_fromname=='oui')?'oui':'non');
 
 	$facteur_smtp = _request('facteur_smtp');
 	ecrire_meta('facteur_smtp', ($facteur_smtp=='oui')?'oui':'non');

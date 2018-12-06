@@ -45,18 +45,6 @@
 								<label for="#GET{name}_#GET{val}"><:facteur:label_facteur_forcer_from:></label>
 							</div>
 						</li>
-						#SET{name,facteur_garder_fromname}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
-							<span class='erreur_message'>(#GET{erreurs})</span>
-							]
-							<div class="choix">
-								#SET{val,non}
-								<input type="hidden" name="#GET{name}" value="#GET{val}" />
-								#SET{val,oui}
-								<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
-								<label for="#GET{name}_#GET{val}"><:facteur:label_facteur_garder_fromname:></label>
-							</div>
-						</li>
 					</ul>
 				</fieldset>
 			</li>

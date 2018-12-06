@@ -54,7 +54,7 @@ class Facteur extends PHPMailer {
 		// On récupère toutes les options par défaut depuis le formulaire de config
 		$defaut = array();
 		foreach (array(
-			'adresse_envoi', 'adresse_envoi_email', 'adresse_envoi_nom', 'forcer_from', 'garder_fromname',
+			'adresse_envoi', 'adresse_envoi_email', 'adresse_envoi_nom', 'forcer_from',
 			'cc', 'bcc',
 			'smtp', 'smtp_host', 'smtp_port', 'smtp_auth',
 			'smtp_username', 'smtp_password', 'smtp_secure', 'smtp_sender', 'smtp_tls_allow_self_signed',
@@ -106,12 +106,9 @@ class Facteur extends PHPMailer {
 		// si forcer_from, on sauvegarde le From et FromName par defaut, qui seront utilises
 		// si From n'est pas dans le meme domaine
 		// (utiliser le facteur avec un service externe qui necessite la validation des domaines d'envoi)
-		// On peut avoir une sous-option garder_fromname pour garder le FromName passé
 		if ($options['forcer_from']=='oui'){
 			$this->ForceFrom = $this->From;
-			if ($options['garder_fromname']!='oui') {
-				$this->ForceFromName = $this->FromName;
-			}
+			$this->ForceFromName = $this->FromName;
 		}
 
 		$this->CharSet = "utf-8";
@@ -440,9 +437,7 @@ class Facteur extends PHPMailer {
 				$this->AddReplyTo($this->From,$this->FromName);
 				// on force le From
 				$this->From = $this->ForceFrom;
-				if ($this->ForceFromName) {//null si jamais garder_fromname était activé
-					$this->FromName = $this->ForceFromName;
-				}
+				$this->FromName = $this->ForceFromName;
 			}
 		}
 		$args = func_get_args();

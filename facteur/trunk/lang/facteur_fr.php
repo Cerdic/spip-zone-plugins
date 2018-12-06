@@ -58,7 +58,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_facteur_forcer_from' => 'Forcer cette adresse d’envoi quand le <tt>From</tt> n’est pas sur le même domaine',
-	'label_facteur_garder_fromname' => 'Garder le nom de l\'expéditeur, même lorsqu\'on force l\'adresse d\'envoi',
 
 	// M
 	'message_identite_email' => 'La configuration du plugin "facteur" surcharge cette adresse email pour l’envoi de courriels.',
