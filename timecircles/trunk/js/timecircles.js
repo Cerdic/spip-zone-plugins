@@ -42,4 +42,11 @@ jQuery(document).ready(function(){
 	$(".fadeOut").click(function() {
 		$(".PageOpenTimer").fadeOut();
 	});
+
+	$(window).on('resize', function(){
+    		$('.DateCountdown').TimeCircles().rebuild();
+		$('.CountDownTimer').TimeCircles().rebuild();
+		$('.PageOpenTimer').TimeCircles().rebuild();
+	});
+
 });
