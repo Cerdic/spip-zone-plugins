@@ -42,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_generique' => 'There are errors in the fields below, please check your inputs',
 	'erreur_option_nom_unique' => 'This name is already used by another field and it must be unique in this form.',
+	'erreur_valeur_inacceptable' => 'Entered value cannot be accepted.',
 
 	// I
 	'info_configurer_saisies' => 'Test page for Entries',
