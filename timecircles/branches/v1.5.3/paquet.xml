@@ -2,7 +2,7 @@
 	prefix="timecircles"
 	categorie="squelette"
 	version="1.5.3.22"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.1.0;3.3.*]"
 	logo="images/timecircles-32.png"
 	documentation="https://contrib.spip.net/5069"	
