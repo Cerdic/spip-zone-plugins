@@ -29,3 +29,9 @@ if (!apc_exists(‘apc_key_test_flush’)) {
   spip_log ('xray says : le cache APC a été vidé', 'APC_cache_flush');
   apc_store(‘apc_key_test_flush’, ‘apc_test_value_flush’);
 }
+
+function xray_marqueur_invisible($t) {
+	spip_log($t, 'xray_log');
+	recuperer_fond('inclure/xray_marqueur_visible', array('what'=>'session','texte'=>$t));
+	return '';
+}

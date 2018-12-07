@@ -32,6 +32,7 @@ include_spip ('inc/autoriser');
 if (!autoriser('webmestre'))
 	die("Autorisation non accordée : devenez webmestre d'abord.");
 include_spip('inc/filtres');
+include_spip('inc/cachelab');
 
 $VERSION = '$Id$';
 
@@ -89,7 +90,7 @@ else
 
 function ajuste_longueur_html($str) {
 	$court = (!isset($_GET['ZOOM']) or ($_GET['ZOOM'] != 'TEXTELONG'));
-	$str = trim(preg_replace(array('/ +/', "/(\n\s*)+/"), array(' ',"\n  "), $str));
+	$str = trim(preg_replace(array('/ +/', "/(\n\s*)+/"), array(' ',"\n"), $str));
 	if ($court and (mb_strlen($str) > MAXLEN_HTMLCOURT))
 		$str = mb_substr($str, 0, MAXLEN_HTMLCOURT) . '...';
 	elseif (!$str)
@@ -181,6 +182,17 @@ function print_contexte($extra, $tostring=true) {
 	if ($tostring)
 		return $extra;
 	echo $extra;
+}
+
+function bouton_session($id_session, $url_session) {
+	if (function_exists('cachelab_cibler')) {
+		$title = cachelab_cibler('get_html', array('chemin'=>'xray_marqueur_visible_'.$id_session))."\n";
+	}
+	else
+		$title = 'Installez CacheLab pour bénéficier d’informations sur cette session.';
+	$title = preg_replace("/\n+/", "\n", $title);
+	$title .= "\nVoir tous les caches sessionnés de cet internaute";
+	return "<a href=\"$url_session\" title=\"$title\">[session]</a>";
 }
 
 function bouton_objet($objet, $id_objet, $extra) {
@@ -1430,7 +1442,7 @@ EOB;
 					if ($p = preg_match(XRAY_PATTERN_SESSION_AUTH, $displayed_name, $match) 
 						and $MYREQUEST['SEARCH'] != "/{$match[1]}/i") {
 						$url_session = parametre_url($MY_SELF, 'SEARCH', $match[1]);
-						$boutons_liens .= "<a href='$url_session' title='Caches sessionnés pour le même internaute'>[session]</a>";
+						$boutons_liens .= bouton_session($match[1], $url_session);
 					}
 					if (is_array($data)
 						and isset($data['invalideurs']['session'])) {
