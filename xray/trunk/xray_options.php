@@ -31,7 +31,6 @@ if (!apc_exists(‘apc_key_test_flush’)) {
 }
 
 function xray_marqueur_invisible($t) {
-	spip_log($t, 'xray_log');
 	recuperer_fond('inclure/xray_marqueur_visible', array('what'=>'session','texte'=>$t));
 	return '';
 }
