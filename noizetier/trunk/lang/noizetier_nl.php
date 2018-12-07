@@ -27,8 +27,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'choisir_noisette' => 'Kies het nootje dat je wilt toevoegen:',
 	'compositions_non_installe' => '<b>Plugin Composities:</b> deze plugin is niet op de site geïnstalleerd. Dat is niet vereist, maar wanneer hij is geactiveerd, kun je direct composities aanwijzen.',
+	'configurer_ajax_noisette_label' => 'AJAX inclusie',
+	'configurer_balise_noisette_label' => 'Omhullend baken',
 	'configurer_objets_noisettes_explication' => 'Bij dit soort inhoud mogen de nootjes <strong>per inhoud</strong> worden aangepast.',
 	'configurer_objets_noisettes_label' => 'Aanpassing op inhoud toestaan voor:',
+	'configurer_profondeur_max_label' => 'Diepte',
 	'configurer_titre' => 'NoiZetier configureren',
 	'copie_de' => 'Kopie van @source@',
 
@@ -63,13 +66,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_dupliquer_composition_reference' => 'De identificatie van de gedupliceerde bladzijde is <i>@composition@</i>.
 	Je kunt een nieuwe identificatie kozen, of de bestaande van een suffix voorzien: <i>@composition@<strong>_suffix</strong></i>',
 	'explication_dupliquer_composition_suffixer' => '.',
-	'explication_glisser_deposer' => 'De types nootjes die aan de blokken van deze pagina kunnen worden toegevoegd staan hieronder.', # MODIF
+	'explication_glisser_deposer' => 'De types nootjes die aan de blokken van deze pagina kunnen worden toegevoegd staan hieronder.',
 	'explication_heritages_composition' => 'De momenteel bewerkte compositie is gebaseerd op het inhoudstype « @type@ » dat onderliggende types heeft. Je kunt voor ieder onderliggend type een standaard toe te passen compositie aangeven.',
 	'explication_noisette' => 'Nootje van type « @noisette@ »',
 	'explication_noisette_css' => 'Je kunt een alles omhullend baken opnemen voor aanvullende  CSS classes.',
 	'explication_noizetier_ajax' => 'De standaard AJAX modus kan voor ieder nootje individueel worden aangepast (YAML-bestand).',
 	'explication_noizetier_balise' => 'De standaard modus in een alles omhullend baken kan voor ieder individueel nootje worden aangepast (parameters).',
-	'explication_noizetier_profondeur_max' => 'Je kunt nootjes van het type container invoegen. Kies het gewenste aantal niveaus.', # MODIF
+	'explication_noizetier_cfg_constant' => 'Deze waarde wordt momenteel door een constante bepaald en kan hier niet worden aangepast.',
+	'explication_noizetier_profondeur_max' => 'Je kunt nootjes van het type container invoegen. Bepaal het gewenste maximum aantal niveaus.',
 	'explication_objet' => 'Inhoudstype « @type@ »',
 	'explication_page' => 'Autonome pagina, niet gekoppeld aan een inhoudstype',
 	'explication_page_objet' => 'Pagina gekoppeld aan inhoudstype « @type@ »',
@@ -134,8 +138,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ieconfig_noizetier_export_option' => 'In deze export opnemen?',
 	'ieconfig_non_installe' => '<b>Plugin Import/Export van configuraties:</b> deze plugin is niet op de site geïnstalleerd. Dat is niet noodzakelijk, maar wanneer deze is geäctiveerd, kun je eenvoudig nootjes in- en uitvoeren.',
 	'ieconfig_probleme_import_config' => 'Er is een probleem opgetreden bij het importeren van de configuratie.',
+	'info_1_noisette_ajoutee' => '1 nootje werd toegevoegd',
 	'info_composition' => 'COMPOSITIE:',
 	'info_etendre_noisette' => 'Kopieer het nootje @noisette@ in blok @bloc@ van de andere pagina’sd’autres pages',
+	'info_nb_noisettes_ajoutees' => '@nb@ nootjes werden toegevoegd',
 	'info_page' => 'BLADZIJDE:',
 	'installation_tables' => 'Tabellen van plugin Notenboom geïnstalleerd.<br />',
 	'item_titre_perso' => 'aangepaste titel',
@@ -168,6 +174,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_pages' => 'Lijst van bladzijdes',
 	'liste_pages_objet_non' => 'Pagina’s niet gekoppeld aan een inhoudstype',
 	'liste_pages_objet_oui' => 'Pagina’s gekoppeld aan een inhoudstype',
+	'liste_pages_toutes' => 'Alle pagina’s',
 
 	// M
 	'masquer' => 'Verbergen',
