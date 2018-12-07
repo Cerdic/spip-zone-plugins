@@ -220,11 +220,11 @@ function retour_image_responsive($img, $taille, $dpr, $xsendfile, $retour="http"
 		if (preg_match("/([0-9]+)v$/", $taille, $regs)) {
 			$taille = $regs[1];
 			$v = true;
-			if ($taille == hauteur($img)) return timestamp($img);
+			// if ($taille == hauteur($img)) return timestamp($img);
 			$taille = min($taille, hauteur($img));
 		} else {
 			$v = false;
-			if ($taille == largeur($img)) return timestamp($img);
+			// if ($taille == largeur($img)) return timestamp($img);
 			$taille = min($taille, largeur($img));
 		}
 
