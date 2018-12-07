@@ -49,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_adresse' => 'Adres',
 	'evenement_article' => 'Gekoppeld aan artikel',
 	'evenement_autres_occurences' => 'Andere tijdstippen:',
+	'evenement_complet' => 'Sorry, de inschrijving voor dit evenement is gesloten.',
 	'evenement_date' => 'Datum',
 	'evenement_date_a' => '<br>tot ',
 	'evenement_date_a_immediat' => 'om ',
