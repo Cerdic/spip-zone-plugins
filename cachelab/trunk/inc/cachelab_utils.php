@@ -47,3 +47,10 @@ function slug_chemin($chemin, $sep='_') {
 	return str_replace ('/', $sep, $chemin);
 }
 
+if (!function_exists('plugin_est_actif')) {
+	function plugin_est_actif($prefixe) {
+		$f = chercher_filtre('info_plugin');
+		return $f($prefixe, 'est_actif');
+	}
+}
+

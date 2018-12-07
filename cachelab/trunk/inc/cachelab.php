@@ -2,22 +2,16 @@
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-
-if (!function_exists('plugin_est_actif')) {
-	function plugin_est_actif($prefixe) {
-		$f = chercher_filtre('info_plugin');
-		return $f($prefixe, 'est_actif');
-	}
-}
+include_spip('public/cachelab_utils');
 
 //
 // Applique une action sur un cache donné
 //
-// Nécessite Mémoization (OK pour toutes les méthodes).
+// Nécessite Mémoization (toutes méthodes OK).
 //
-// renvoie un booléen indiquant si l'action a pu être appliquée ou non
+// Renvoie un booléen indiquant si l'action a pu être appliquée ou non
 //
-function cachelab_applique ($action, $cle, $data=null, $options='') {
+function cachelab_applique ($action, $cle, $data=null, $options='', &$return=null) {
 global $Memoization;
 	if (!isset($Memoization) or !$Memoization) {
 		spip_log("cachelab_applique ($action, $cle...) : Memoization n'est pas activé", 'cachelab_erreur');
@@ -38,25 +32,39 @@ static $len_prefix;
 		};
 		break;
 
-	case 'echo_cache' :
-		if (!$data)
-			$data = $Memoization->get($joliecle);
-		echo "«<xmp>".substr(print_r($data,1), 0,2000)."</xmp>»";
+	// gérés par cachelab_cibler
+	case 'pass' :	// passe
+	case 'list' :	// renvoie les clés
+	case 'clean' :	// nettoie
+		break;
+		
+	case 'list_html' :	// renvoie les contenus indexés par les clés sans préfixes
+						// attention ça peut grossir !
+		if (!is_array($return))
+			$return = array();
+		$return[$joliecle] = $data['texte'];
 		break;
 
-	case 'echo_html' :
+	case 'get' :	// renvoie le 1er cache ciblé
 		if (!$data)
 			$data = $Memoization->get($joliecle);
-		echo "<p>«<xmp>".print_r($data,1)."</xmp>»</p>";
+		$return = $data;
 		break;
 
-	case 'pass' :
-	case 'list' :
+	case 'get_html' :	// renvoie le contenu du 1er cache
+		if (!$data)
+			$data = $Memoization->get($joliecle);
+		$return = $data['texte'];
 		break;
 
 	default :
-		// on pourrait appeler cachelab_applique_$action(...)
-		break;
+		$f = 'cachelab_applique_'.$action;
+		if (function_exists($f))
+			return $f($action, $cle, $data, $options, $return);
+		else {
+			spip_log ("L'action $action n'est pas définie pour cachelab_applique", 'cachelab_erreur');
+			return false;
+		};
 	}
 	return true;
 }
@@ -73,12 +81,17 @@ function cachelab_filtre($action, $conditions=array(), $options=array()) {
 // uses apcu_cache_info() 
 //	et donc nécessite que Memoization soit activé avec APC ou APCu 
 //
+// renvoie : 
+//	le résultat si c'est une action 'get' ou 'get_...'
+// 	la liste des stats sinon, avec éventuellement la liste des résultats s'ils sont demandés (pour 'list_html'...)
+//
 function cachelab_cibler ($action, $conditions=array(), $options=array()) {
 global $Memoization;
 	if (!isset($Memoization) or !$Memoization or !in_array($Memoization->methode(), array('apc', 'apcu'))) {
 		spip_log("cachelab_cibler($action...) : le plugin Mémoization doit être activé avec APC ou APCu", 'cachelab_erreur');
 		die ("cachelab_cibler($action...) : le plugin Mémoization doit être activé avec APC ou APCu");
 	}
+	$return = null;
 
 	// filtrage
 	$session = (isset($conditions['session']) ? $conditions['session'] : null);
@@ -243,7 +256,12 @@ global $Memoization;
 		if ($do_lists) 
 			$stats['l_cible'][] = $cle;
 
-		cachelab_applique ($action, $cle, $data, $options);
+		cachelab_applique ($action, $cle, $data, $options, $return);
+
+		if ($return 
+			and (($action=='get') 
+				or (substr($action,0,4)=='get_')))
+			return $return;
 	}
 
 	if ($do_chrono) {
@@ -251,6 +269,8 @@ global $Memoization;
 		spip_log ("cachelab_cibler ($action, session=$session, objet $cle_objet=$id_objet, chemin=$chemin) : {$stats['nb_cible']} caches ciblés (sur {$stats['nb_candidats']}) en {$stats['chrono']} ms", 'cachelab');
 	}
 
+	if ($return)
+		$stats['retour'] = $return;
 	return $stats;
 }
 

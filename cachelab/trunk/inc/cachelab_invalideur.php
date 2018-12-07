@@ -1,4 +1,8 @@
 <?php
+//
+// Fonctions définies par invalideur.php dans le core,
+// et surchargées par CacheLab
+//
 
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
