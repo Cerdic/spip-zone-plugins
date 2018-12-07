@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/rao-64.png"
-	documentation=""
+	documentation="https://contrib.spip.net/4717"
 >
 
 	<nom>Réassocier auteurs objets</nom>
