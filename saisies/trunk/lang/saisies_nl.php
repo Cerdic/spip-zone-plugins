@@ -42,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_generique' => 'Er zitten fouten in onderstaande velden. Controleer je invoer',
 	'erreur_option_nom_unique' => 'Deze naam wordt al door een ander veld gebruikt. Het moet binnen het formulier een unieke naam hebben.',
+	'erreur_valeur_inacceptable' => 'Ingevoerde waarde is onacceptabel.',
 
 	// I
 	'info_configurer_saisies' => 'Testbladzijde voor invoer',
