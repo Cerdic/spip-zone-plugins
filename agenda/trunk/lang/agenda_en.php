@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_suivante' => 'next year',
 	'aucun_evenement' => 'no event',
 	'aucun_inscrit' => 'No registered',
-	'aucune_rubrique_mode_agenda' => 'By default, all sections can use the events. If you activate the agenda mode on one or more sections, event management will be limited in its subtree.', # MODIF
+	'aucune_rubrique_mode_agenda' => 'By default, all sections can use the events. If you activate the agenda mode on one or more sections, event management will be limited to its subtree.',
 
 	// B
 	'bouton_annuler' => 'Cancel',
@@ -49,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_adresse' => 'Address',
 	'evenement_article' => 'Link to the article',
 	'evenement_autres_occurences' => 'Other occurences :',
+	'evenement_complet' => 'Sorry, subscription for this event is closed.',
 	'evenement_date' => 'Date',
 	'evenement_date_a' => 'to ',
 	'evenement_date_a_immediat' => 'at ',
