@@ -16,10 +16,10 @@ function inscriptionmotdepasse_formulaire_charger($flux){
 		$flux['data']['password_confirmation'] = '';
 	}
 	
-	// gestion du cas : oubli du mot de passe défini avant confirmation du compte
-	if ($flux['args']['form'] == 'mot_de_passe'  ){
+	// gestion du cas : oubli du mot de passe avant confirmation du compte
+	if ($flux['args']['form'] == 'mot_de_passe'){
 		$row = retrouve_auteur(null,  _request('p'));
-		if ($row && ($id_auteur = $row['id_auteur']) ){
+		if ($row && ($id_auteur = $row['id_auteur']) && $row['prefs'] == '6forum'){
 			confirmer_statut_inscription($row);
 		}
 	}	
