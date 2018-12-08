@@ -213,9 +213,23 @@ function bouq_accueil_informations($texte){
 	return $texte;
 }
 
+
 /**
- * 1- Ne pas jamais changer la date de parution du livre
- * 2- Pour les fiches Auteurs de livre, le statut après création est 'Publié'
+ * Pour les fiches Auteurs de livre, le statut après création est automatiquement 'Publié'
+ *
+ * @pipeline pre_insertion
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function bouq_pre_insertion($flux) {
+	if ($flux['args']['table'] == 'spip_livres_auteurs') {
+		$flux['data']['statut'] = 'publie';
+	}
+	return $flux;
+}
+
+/**
+ * Ne pas jamais changer la date de parution du livre
  *
  * @pipeline pre_edition
  * @param  array $flux Données du pipeline
@@ -227,9 +241,6 @@ function bouq_pre_edition($flux) {
 		and isset($flux['data']['statut'])) {
 			$new_date = $flux['args']['date_ancienne'];
 			$flux['data']['date_parution'] = $new_date;
-	}
-	if ($flux['args']['table'] == 'spip_livres_auteurs') {
-		$flux['data']['statut'] = 'publie';
 	}
 	return $flux;
 }
