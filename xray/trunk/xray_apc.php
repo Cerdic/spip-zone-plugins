@@ -90,7 +90,7 @@ else
 
 function ajuste_longueur_html($str) {
 	$court = (!isset($_GET['ZOOM']) or ($_GET['ZOOM'] != 'TEXTELONG'));
-	$str = trim(preg_replace(array('/ +/', "/(\n\s*)+/"), array(' ',"\n"), $str));
+	$str = trim(preg_replace("/^\s*$/m", '', $str)); // enlève lignes vides... mais il en reste qqunes
 	if ($court and (mb_strlen($str) > MAXLEN_HTMLCOURT))
 		$str = mb_substr($str, 0, MAXLEN_HTMLCOURT) . '...';
 	elseif (!$str)
@@ -146,7 +146,7 @@ function spipsafe_unserialize($str) {
 
 function print_contexte($extra, $tostring=true) {
 	$print=print_r($extra,1);
-	if (stripos($print, 'Array') === 0) {
+	if (is_array($extra)) {
 		// On enlève 'Array( ' au début et ')' à la fin
 		$print = trim(substr($print, 5), " (\n\r\t");
 		$print = substr ($print, 0, -1);
@@ -176,12 +176,12 @@ function print_contexte($extra, $tostring=true) {
 							target='blank'><xmp>{$match[2]}</xmp> &#128279;</a><xmp>";
 			}, 
 			$print);
-		$extra = $print;
-	}
-	$extra=preg_replace('/^    /m', '', $extra);
+		$print = preg_replace('/^    /m', '', $print);
+	};
+	$print=ajuste_longueur_html($print);
 	if ($tostring)
-		return $extra;
-	echo $extra;
+		return $print;
+	echo $print;
 }
 
 function bouton_session($id_session, $url_session) {
@@ -696,8 +696,9 @@ if (isset($MYREQUEST['IMG'])) {
 }
 
 if (isset($MYREQUEST['SOURCE']) and $MYREQUEST['SOURCE']) {
-	echo "<pre>".substr($MYREQUEST['SOURCE'], 3)."</pre><hr><br>";
-	echo "<xmp>".file_get_contents ($MYREQUEST['SOURCE'])."</xmp>";
+	echo 'Depuis '.getcwd().' : voir '.$MYREQUEST['SOURCE'].'<br><hr><br>';
+	
+	echo '<xmp>'.file_get_contents ($MYREQUEST['SOURCE']).'</xmp>';
 	exit;
 }
 
@@ -1594,7 +1595,7 @@ EOB;
 						if (!isset($_GET['ZOOM']) or ($_GET['ZOOM'] != 'TEXTELONG')) {
 							$url      = parametre_url($self_pour_lien, 'ZOOM', 'TEXTELONG') . "#key-$sh";
 							$menuzoom = "<a href='$url' class='menuzoom'>Voir tout le texte</a> ";
-							if (isset($data['texte']))
+							if (is_array($data) and isset($data['texte']))
 								$data['texte'] = ajuste_longueur_html($data['texte']);
 						} else {
 							$url      = parametre_url($self_pour_lien, 'ZOOM', 'TEXTECOURT') . "#key-$sh";
