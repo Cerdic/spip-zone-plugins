@@ -1,0 +1,58 @@
+<div class="formulaire_spip formulaire_timecircles">
+	<form action="#ENV{action}" method="post">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		#MODELE{datecountdown,data-date=2020-01-01 00:00:00}
+		<fieldset class="fieldset editer-groupe">
+			<legend class="legend"><:timecircles:default_parameters:></legend>
+			<p class="editer editer_animation">
+				<label for="timecircles_animation"><:timecircles:animation:></label>
+				<input type="text" name="timecircles_animation" id="timecircles_animation" value="#ENV{timecircles_animation}" class="text" />
+				<select id="AnimationDropdown">
+					<option value="smooth">Smooth</option>
+					<option value="ticks">Ticks</option>
+				</select>
+			</p>
+			<p class="editer editer_timecircles_width">
+				<label for="timecircles_width"><:timecircles:circle_width:></label>
+				<input type="text" name="timecircles_width" id="timecircles_width" value="#ENV{timecircles_width}" class="text" />
+			</p>
+			<p class="editer editer_timecircles_bg_width">
+				<label for="timecircles_bg_width"><:timecircles:circle_bg_width:></label>
+				<input type="text" name="timecircles_bg_width" id="timecircles_bg_width" value="#ENV{timecircles_bg_width}" class="text" />
+			</p>
+			<p class="editer editer_timecircles_bg_color">
+				<label for="timecircles_bg_color"><:timecircles:circle_bg_color:></label>
+				<input type="text" name="timecircles_bg_color" id="timecircles_bg_color" value="[(#ENV{timecircles_bg_color}|sinon{'#60686F'})]" class="text palette" />
+			</p>
+		</fieldset>
+		[(#REM) Selective display J/H/M/S ]
+		<fieldset class="fieldset editer-groupe">
+			<legend class="legend"><:timecircles:selective_display_dhms:></legend>
+			<p class="editer editer_timecircles_days_color">
+				<span class="choix"><input type="checkbox" name="timecircles_days_display" id="timecircles_days_display" value="#ENV{timecircles_days_display}" class="checkbox"></span>
+				<label for="timecircles_days_color"><:timecircles:days:></label>
+				<input type="text" name="timecircles_days_text" id="timecircles_days_text" value="[(#ENV{timecircles_days_text}|sinon{<:timecircles:days:>})]" class="text" />
+				<input type="text" name="timecircles_days_color" id="timecircles_days_color" value="[(#ENV{timecircles_days_color}|sinon{'#FFCC66'})]" class="text palette" />
+			</p>
+			<p class="editer editer_timecircles_hours_color">
+				<span class="choix"><input type="checkbox" name="timecircles_hours_display" id="timecircles_hours_display" value="#ENV{timecircles_hours_display}" class="checkbox"></span>
+				<label for="timecircles_hours_color"><:timecircles:hours:></label>
+				<input type="text" name="timecircles_hours_text" id="timecircles_hours_text" value="[(#ENV{timecircles_hours_text}|sinon{<:timecircles:hours:>})]" class="text" />
+				<input type="text" name="timecircles_hours_color" id="timecircles_hours_color" value="[(#ENV{timecircles_hours_color}|sinon{'#99CCFF'})]" class="text palette" />
+			</p>
+			<p class="editer editer_timecircles_minutes_color">
+				<span class="choix"><input type="checkbox" name="timecircles_minutes_display" id="timecircles_minutes_display" value="#ENV{timecircles_minutes_display}" class="checkbox"></span>
+				<label for="timecircles_minutes_color"><:timecircles:minutes:></label>
+				<input type="text" name="timecircles_minutes_text" id="timecircles_minutes_text" value="[(#ENV{timecircles_minutes_text}|sinon{<:timecircles:minutes:>})]" class="text" />
+				<input type="text" name="timecircles_minutes_color" id="timecircles_minutes_color" value="[(#ENV{timecircles_minutes_color}|sinon{'#BBFFBB'})]" class="text palette" />
+			</p>
+			<p class="editer editer_timecircles_seconds_color">
+				<span class="choix"><input type="checkbox" name="timecircles_seconds_display" id="timecircles_seconds_display" value="#ENV{timecircles_seconds_display}" class="checkbox"></span>
+				<label for="timecircles_seconds_color"><:timecircles:seconds:></label>
+				<input type="text" name="timecircles_seconds_text" id="timecircles_seconds_text" value="[(#ENV{timecircles_seconds_text}|sinon{<:timecircles:seconds:>})]" class="text" />
+				<input type="text" name="timecircles_seconds_color" id="timecircles_seconds_color" value="[(#ENV{timecircles_seconds_color}|sinon{'#FF9999'})]" class="text palette" />
+			</p>
+		</fieldset>
+		<p class="boutons"><input type="submit" class="submit" value="<:pass_ok:>" /></p>
+	</form>
+</div>
