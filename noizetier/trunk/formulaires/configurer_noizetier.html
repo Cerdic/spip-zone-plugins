@@ -7,9 +7,10 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 
 		<div class="editer-groupe">
-			[(#SAISIE{case, balise_noisette,
+			[(#SAISIE{radio, balise_noisette,
 				label=<:noizetier:configurer_balise_noisette_label:>,
-				label_case=<:noizetier:label_noizetier_balise:>,
+				datas=#ENV{_balise_options},
+				defaut=#ENV{balise_noisette},
 				explication=<:noizetier:explication_noizetier_balise:>,
 			})]
 

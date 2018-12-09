@@ -51,14 +51,13 @@ function formulaires_editer_noisette_charger_dist($id_noisette, $redirect = '') 
 			$valeurs['balise'] = $noisette['balise'];
 			$valeurs['css'] = $noisette['css'];
 			// Construction de la liste des valeurs possibles pour le choix de la balise
-			include_spip('inc/config');
-			$config_balise = lire_config('noizetier/balise_noisette')
-				? _T('noizetier:option_noizetier_balise_oui')
-				: _T('noizetier:option_noizetier_balise_non');
+			include_spip('ncore/noizetier');
+			$config_balise = _T('noizetier:option_noizetier_balise_' . noizetier_noisette_initialiser_capsule('noizetier'));
 			$valeurs['_balise_options'] = array(
-				'defaut' => _T('noizetier:option_noisette_balise_defaut', array('defaut' => $config_balise)),
-				'on'     => _T('noizetier:option_noisette_balise_oui'),
-				''       => _T('noizetier:option_noisette_balise_non')
+				'defaut' => _T('noizetier:option_noisette_balise_defaut', array('defaut' => lcfirst($config_balise))),
+				'div'    => _T('noizetier:option_noisette_balise_oui'),
+				'auto'   => _T('noizetier:option_noisette_balise_auto'),
+				'aucune' => _T('noizetier:option_noisette_balise_non')
 			);
 			$valeurs['editable'] = true;
 		}

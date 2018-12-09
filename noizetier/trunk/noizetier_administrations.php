@@ -28,7 +28,7 @@ function noizetier_upgrade($nom_meta_base_version, $version_cible) {
 	// Configurations par défaut
 	$config_060 = array(
 		'objets_noisettes' => array(),
-		'balise_noisette' => 'on',
+		'balise_noisette' => 'div',
 		'ajax_noisette' => 'on',
 		'profondeur_max' => '',
 	);
