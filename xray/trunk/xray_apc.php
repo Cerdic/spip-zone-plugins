@@ -141,47 +141,79 @@ function spipsafe_unserialize($str) {
 		gunzip_page($unser); // si 'texte' est trop grand il est gzcompress par gzip_page
 		$unser['texte'] = ajuste_longueur_html($unser['texte']);
 	}
-	return print_contexte($unser, 1);
+	return joli_cache($unser, false);
 }
 
-function print_contexte($extra, $tostring=true) {
-	$print=print_r($extra,1);
-	if (is_array($extra)) {
-		// On enlève 'Array( ' au début et ')' à la fin
-		$print = trim(substr($print, 5), " (\n\r\t");
-		$print = substr ($print, 0, -1);
-		$print = preg_replace_callback("/\[id_([a-z\-_]+)\]\s*=>\s*(\d+)$/im", function($match) use ($extra)
-			{
-				return $match[0] . '</xmp>' . bouton_objet($match[1], $match[2], $extra) . '<xmp>';
-			}, $print);
-		// [squelette] => html_5731a2e40776724746309c16569cac40
-		// et [source] => plugins/paeco/squelettes/inclure/element/tag-rubrique.html
-		$print = preg_replace_callback("/\[(squelette|source)\]\s*=>\s*(html_[a-f0-9]{32}+|[\w_\.\/\-]+\.html)$/im",
-			function($match)
-			{
-				if (!defined('_SPIP_ECRIRE_SCRIPT'))
-					spip_initialisation_suite();
-				switch ($match[1]) {
-				case 'squelette' : // cache squelette intermédiaire, en php
-					$source = trim(_DIR_CACHE, '/').'/skel/'.$match[2].'.php';
-					$title = "Squelette compilé : cache intermédiaire en php";
-					break;
-				case 'source' :
-					$source = '../'.$match[2];
-					$title = "Source du squelette SPIP, avec boucles, balises etc";
-					break;
-				}
-				return "[{$match[1]}] => </xmp><a title='{$title}' 
-							href='".generer_url_ecrire('xray', "SOURCE=$source")."' 
-							target='blank'><xmp>{$match[2]}</xmp> &#128279;</a><xmp>";
-			}, 
-			$print);
-		$print = preg_replace('/^    /m', '', $print);
+function joli_contexte($contexte) {
+	global $MY_SELF;
+	$return = '';
+	if (!$contexte)
+		return '';
+	if (!is_array($contexte))
+		return $contexte;
+	foreach ($contexte as $var => $val) {
+		$print = print_r($val, 1);
+		if (!is_array($val) and (!$val or (strpos("\n", $val) === false))) {
+			$ligne = "[$var] => $val";
+			if (strlen($val) < 100) {
+				$url = parametre_url (parametre_url($MY_SELF,'WHERE', 'CONTEXTE'), 
+									  'SEARCH', "\\[$var\\] => $val$");
+				$title = "Voir tous les caches ayant cette même valeur de contexte";
+				$return .= "<a href='$url' title='$title'><xmp>[$var] => $val</xmp></a>";
+				if (substr($var,0,3)== 'id_')
+					$return .= bouton_objet(substr($var,3), $val, $contexte);
+			}
+			else
+				$return .= "<xmp>$ligne</xmp>";
+			$return .= "<br>";
+		}
+		else
+			$return .= "<xmp>[$var] => (".gettype($val).") $print</xmp>";
 	};
-	$print=ajuste_longueur_html($print);
-	if ($tostring)
-		return $print;
-	echo $print;
+	return $return;
+}
+function joli_cache($extra) {
+	if (isset($extra['texte']))	// Alors c'est un cache entier !
+		$extra['texte'] = ajuste_longueur_html($extra['texte']);
+		// sinon c'est juste une des métadonnées du cache
+		
+	$print=print_r($extra,1);
+	if (!is_array($extra))
+		return "<xmp>$print</xmp>";
+
+	// On enlève 'Array( ' au début et ')' à la fin
+	$print = trim(substr($print, 5), " (\n\r\t");
+	$print = substr ($print, 0, -1);
+
+	// Si ce n'est pas un cache entier avec ses métadonnées
+	if (!isset($extra['squelette']) or !isset($extra['source']))
+		return "<xmp>$print</xmp>";
+
+	// [squelette] => html_5731a2e40776724746309c16569cac40
+	// et [source] => plugins/paeco/squelettes/inclure/element/tag-rubrique.html
+	$print = preg_replace_callback("/\[(squelette|source)\]\s*=>\s*(html_[a-f0-9]{32}+|[\w_\.\/\-]+\.html)$/im",
+		function($match)
+		{
+			if (!defined('_SPIP_ECRIRE_SCRIPT'))
+				spip_initialisation_suite();	// pour define(_DIR_CACHE)
+
+			switch ($match[1]) {
+			case 'squelette' : // cache squelette intermédiaire, en php
+				$source = trim(_DIR_CACHE, '/').'/skel/'.$match[2].'.php';
+				$title = "Squelette compilé : cache intermédiaire en php";
+				break;
+			case 'source' :
+				$source = '../'.$match[2];
+				$title = "Source du squelette SPIP, avec boucles, balises etc";
+				break;
+			}
+			return "[{$match[1]}] => </xmp><a title='{$title}' 
+						href='".generer_url_ecrire('xray', "SOURCE=$source")."' 
+						target='blank'><xmp>{$match[2]}</xmp> &#128279;</a><xmp>";
+		}, 
+		$print);
+	$print = preg_replace('/^    /m', '', $print);
+	return "<xmp>$print</xmp>";;
 }
 
 function bouton_session($id_session, $url_session) {
@@ -195,23 +227,16 @@ function bouton_session($id_session, $url_session) {
 	return "<a href=\"$url_session\" title=\"$title\">[session]</a>";
 }
 
-function bouton_objet($objet, $id_objet, $extra) {
+function bouton_objet($objet, $id_objet, $contexte) {
 	$objet_visible = $objet;
 	if ($objet == 'secteur')
 		$objet = 'rubrique';
-	elseif (($objet == 'objet')	and isset ($extra['objet']))
+	elseif (($objet == 'objet')	and isset ($contexte['objet']))
 	{
-		$objet_visible = $objet = $extra['objet'];
+		$objet_visible = $objet = $contexte['objet'];
 	};
 global $MY_SELF;
-	return "<a href=\"".parametre_url(
-							parametre_url($MY_SELF,'WHERE', 'CONTEXTE'), 
-							'SEARCH', "\\[id_$objet\\] => $id_objet\n")."\" 
-				style=\"float: right\"
-				title=\"Voir tous les caches ayant $objet $id_objet dans leur contexte\">
-				[mm $objet]
-			</a>
-			<a href='/ecrire/?exec=$objet&id_$objet=$id_objet' target='blank' 
+	return "<a href='/ecrire/?exec=$objet&id_$objet=$id_objet' target='blank' 
 				style='float: right'
 				title=\"" . attribut_html(generer_info_entite($id_objet, $objet, 'titre', 'etoile')) . "\">
 				[voir $objet_visible]
@@ -358,7 +383,7 @@ $self_pour_lien =
 	"http" . (!empty($_SERVER['HTTPS']) ? "s" : "") . "://" 
 	. $_SERVER['SERVER_NAME']
 	// parametre_url fait un urlencode bienvenu pour les regexp qui peuvent contenir des ?
-	. parametre_url($_SERVER['REQUEST_URI'], 'SEARCH', $_REQUEST['SEARCH']);
+	. parametre_url($_SERVER['REQUEST_URI'], 'SEARCH', @$_REQUEST['SEARCH']);
 
 global $IMG_BASE;
 $IMG_BASE = "$PHP_SELF" . "?exec=" . $MYREQUEST['exec'];
@@ -1233,6 +1258,7 @@ EOB;
 		echo '<form>
 			<input type="hidden" name="OB" value="'.$MYREQUEST['OB'].'">
 			<input type="hidden" name="exec" value="'.$MYREQUEST['exec'].'">
+			<input type="hidden" name="S_KEY" value="'.$MYREQUEST['S_KEY'].'">
 		<b>Affichage extra:</b> 
 		<select name=EXTRA  onChange="form.submit()">
 			<option value="" ', $MYREQUEST['EXTRA'] == '' ? ' selected' : '', '></option> 
@@ -1464,10 +1490,11 @@ EOB;
 					if ($MYREQUEST['EXTRA'] and ($sh != $MYREQUEST["SH"]) // sinon yaura un zoom après et c'est inutile de répéter ici
 						and $data_success) {
 						$extra = null;
-						$print_contexte=true;
+						$jolif='joli_cache';
 						if (is_array($data)) {
 							switch ($MYREQUEST['EXTRA']) {
 							case 'CONTEXTE':
+								$jolif='joli_contexte';
 								if (isset($data['contexte']))
 									$extra = $data['contexte'];
 								else
@@ -1476,6 +1503,7 @@ EOB;
 
 							case 'CONTEXTES_SPECIAUX':
 								if (isset($data['contexte'])) {
+									$jolif='joli_contexte';
 									$extra = $data['contexte'];
 									foreach (array(
 										'lang',
@@ -1490,11 +1518,11 @@ EOB;
 								break;
 
 							case 'HTML_COURT' :
-								$print_contexte = false;
 								$extra = ajuste_longueur_html($data['texte']);
 								break;
 
 							case 'INFO_AUTEUR':
+								$jolif='joli_contexte';
 								if (isset($data['contexte'])) {
 									foreach (array(
 										'id_auteur',
@@ -1509,6 +1537,7 @@ EOB;
 								break;
 
 							case 'INFO_OBJET_SPECIAL':
+								$jolif='joli_contexte';
 								if (isset($data['contexte'])) {
 									$ki = 'id_'.XRAY_OBJET_SPECIAL;
 									if (isset($data['contexte'][$ki]))
@@ -1556,11 +1585,10 @@ EOB;
 								break;
 							}
 						}
-						if ($print_contexte)
-							$extra = print_contexte($extra, 1);
+						$extra = $jolif($extra); 
 
 						if ($extra)
-							echo "<br><xmp>$extra</xmp>";
+							echo "<br>".$extra."<br>";
 						else
 							echo "<br>(rien)</br>";
 					}
@@ -1606,8 +1634,7 @@ EOB;
 						
 						if ($data_success) {
 							echo "<p>$menuzoom</p>";
-							// echo '<xmp>' . print_r($data, 1) . '</xmp>';
-							echo '<xmp>'.print_contexte($data,1).'</xmp>';
+							echo joli_cache($data);
 						} else {
 							if (!apcu_exists($entry['info']))
 								echo '(! doesnt exist anymore !)';
