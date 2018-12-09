@@ -38,6 +38,8 @@ function balise_NOISETTE_COMPILER_dist($p) {
 	// On extrait les autres informations de la noisette
 	$type_noisette = champ_sql('type_noisette', $p);
 	$parametres = champ_sql('parametres', $p);
+	$balise = champ_sql('balise', $p);
+	$css = champ_sql('css', $p);
 	$plugin = champ_sql('plugin', $p);
 
 	// A-t-on demandé un stockage spécifique en paramètre de la balise ?
@@ -53,10 +55,17 @@ function balise_NOISETTE_COMPILER_dist($p) {
 		\".var_export(array_merge(unserialize($parametres), noisette_contextualiser($plugin, $noisette, $type_noisette, $environnement, $stockage)),true).\",
 		\".var_export(array('ajax'=>(type_noisette_ajaxifier($plugin, $type_noisette, $stockage))),true).\"
 	);?>\"";
-	$inclusion_statique = "recuperer_fond(
-		type_noisette_localiser($plugin, $type_noisette),
-		array_merge(unserialize($parametres), noisette_contextualiser($plugin, $noisette, $type_noisette, $environnement, $stockage)),
-		array('ajax'=>(type_noisette_ajaxifier($plugin, $type_noisette, $stockage)))
+	$inclusion_statique = "noisette_encapsuler(
+		$plugin,
+		recuperer_fond(
+			type_noisette_localiser($plugin, $type_noisette),
+			array_merge(unserialize($parametres), noisette_contextualiser($plugin, $noisette, $type_noisette, $environnement, $stockage)),
+			array('ajax'=>(type_noisette_ajaxifier($plugin, $type_noisette, $stockage)))
+		),
+		$balise,
+		$css,
+		$type_noisette,
+		$stockage
 	)";
 	$code = "((type_noisette_dynamiser($plugin, $type_noisette, $stockage)) ? $inclusion_dynamique : $inclusion_statique)";
 

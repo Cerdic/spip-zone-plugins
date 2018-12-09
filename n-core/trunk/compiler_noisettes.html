@@ -14,8 +14,6 @@
            un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
 	@param array  noisettes
 	       Liste des descriptions de noisette à compiler dans l'ordre de leur rang.
-	@param string defaut_balise
-	       Valeur à utiliser si la noisette est paramétrée avec la valeur `defaut`.
 	@param string stockage
            Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
            ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
@@ -31,15 +29,9 @@
 		{par rang_noisette}>
 		#SET{conteneur, #ARRAY{type_noisette, #VALEUR{type_noisette}, id_noisette, #VALEUR{id_noisette}}}
 		<BOUCLE_noisettes_petits_enfants(BOUCLE_noisettes_enfants)></BOUCLE_noisettes_petits_enfants>
-		#SET{avec_div, #VALEUR{balise}|=={defaut}|?{#ENV{defaut_balise, oui}, #VALEUR{balise}}}
-		[[(#GET{avec_div}|oui)<div class="noisette[ noisette_(#VALEUR{type_noisette})][ (#VALEUR{css})]">]
-			(#NOISETTE_COMPILER{#VALEUR{id_noisette}, #ENV{stockage, ''}})
-		[(#GET{avec_div}|oui)</div>]]
+			[(#NOISETTE_COMPILER{#VALEUR{id_noisette}, #ENV{stockage, ''}})]
 	</BOUCLE_noisettes_enfants>
 		[</(#GET{balise_conteneur})>]
 	</B_noisettes_enfants>
-	#SET{avec_div, #VALEUR{balise}|=={defaut}|?{#ENV{defaut_balise, oui}, #VALEUR{balise}}}
-	[[(#GET{avec_div}|oui)<div class="noisette[ noisette_(#VALEUR{type_noisette})][ (#VALEUR{css})]">]
-		(#NOISETTE_COMPILER{#VALEUR{id_noisette}, #ENV{stockage, ''}})
-	[(#GET{avec_div}|oui)</div>]]
+		[(#NOISETTE_COMPILER{#VALEUR{id_noisette}, #ENV{stockage, ''}})]
 </BOUCLE_noisettes>
