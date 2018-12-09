@@ -21,6 +21,5 @@
 	<//B_enfants>
 	#SET{data,#GET{data}|array_merge{#GET{saisie}}}
 	</BOUCLE_parcours>
-</select>
 
 #INCLURE{fond=saisies/#ENV{type_choix,selection},data=#GET{data},env,cacher_option_intro='oui',defaut=''}
