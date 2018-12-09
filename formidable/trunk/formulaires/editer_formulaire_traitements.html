@@ -9,6 +9,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 
 		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+			[(#REM|setenv{id})]
 			#GENERER_SAISIES{#ENV{_configurer_traitements}}
 		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 
