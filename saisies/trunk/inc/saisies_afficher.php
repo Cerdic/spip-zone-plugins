@@ -532,9 +532,16 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 				//Pour eviter une fatale erreur si on évalue une chose qui devrait normalement être un tableau mais qui n'a pas été envoyé (type checkbox), si la chose en question est null, la transformer en tableau vide. Pareil c'est pas terrible.
 				if (is_null($requete)) {
 					$requete = array();
-					$set_tableau = "set$val";
-					$set_tableau = str_replace(")",",array())",$set_tableau);
-					eval("$set_tableau;");
+					//C'est un request, alors on va faire un set_request
+					if (strpos($val, '_request') === 0) {
+						$set_tableau = "set$val";
+						$set_tableau = str_replace(")",",array())",$set_tableau);
+					} elseif (strpos($val, '$env') === 0) {//C'est un tablau direct
+						$set_tableau = ("$val = array()");
+					}
+					if (isset($set_tableau)) {
+						eval("$set_tableau;");
+					}
 				}
 				if (is_array($requete)) {
 					$not = '>';
