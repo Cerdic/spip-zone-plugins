@@ -465,10 +465,11 @@ function formidable_scramble($login, $id_form, $passwd = '') {
  * @param string $chaine la chaîne à transformer
  * @param array $saisies la liste des saisies du formulaire
  * @param bool|string $brut=false, pour indiquer si on veut utiliser les valeurs brutes;
+ * @param string|bool $sans_reponse chaine à afficher si pas de réponse. Si true, prend la chaîne par défaut
  * @return string la chaîne transformée
  */
-function formidable_raccourcis_arobases_2_valeurs_champs($chaine, $saisies, $brut=false) {
-	list($valeurs,$valeurs_libellees) = formidable_tableau_valeurs_saisies($saisies);
+function formidable_raccourcis_arobases_2_valeurs_champs($chaine, $saisies, $brut=false, $sans_reponse = true) {
+	list($valeurs,$valeurs_libellees) = formidable_tableau_valeurs_saisies($saisies, $sans_reponse);
 	$a_remplacer = array();
 	if (preg_match_all('/@[\w]+@/', $chaine, $a_remplacer)) {
 		$a_remplacer = $a_remplacer[0];
@@ -490,10 +491,14 @@ function formidable_raccourcis_arobases_2_valeurs_champs($chaine, $saisies, $bru
  * Récupère l'ensemble des valeurs postée dans un formulaires
  * Les retourne sous deux formes : brutes et libellés (par ex. pour les @select@
  * @param array $saisies les saisies du formulaires
+ * @param string|bool $sans_reponse chaine à afficher si pas de réponse. Si true, prend la chaîne par défaut
  * @return array (brutes, libellées)
  * On met les résultats en statiques pour gagner un peu de temps
  */
-function formidable_tableau_valeurs_saisies($saisies) {
+function formidable_tableau_valeurs_saisies($saisies, $sans_reponse = true) {
+	if ($sans_reponse === true) {
+		$sans_reponse =  _T('saisies:sans_reponse');
+	}
 	if (isset($valeurs)) {
 		return array($valeurs,$valeurs_libellees);
 	}
@@ -519,6 +524,7 @@ function formidable_tableau_valeurs_saisies($saisies) {
 						'type_saisie' => $saisies_par_nom[$champ]['saisie'],
 						'valeur' => $valeurs[$champ],
 						'valeur_uniquement' => 'oui',
+						'sans_reponse' => $sans_reponse
 					),
 					$saisies_par_nom[$champ]['options']
 				)

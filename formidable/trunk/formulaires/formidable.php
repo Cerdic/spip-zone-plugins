@@ -376,8 +376,11 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 			$retours['message_ok'] = _T_ou_typo(
 				formidable_raccourcis_arobases_2_valeurs_champs(
 					$formulaire['message_retour'],
-					$saisies)
-				);
+					$saisies,
+					false,
+					''
+				)
+			);
 		}
 	} else {
 		$retours['message_erreur'] = _T('formidable:retour_aucun_traitement');
