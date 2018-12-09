@@ -115,7 +115,7 @@ function formulaires_editer_formulaire_traitements_traiter($id_formulaire) {
 	$traitements_choisis = array_flip($traitements_choisis);
 	$traitements = array_intersect_key($traitements, $traitements_choisis);
 
-	// Si besoin, on créeun dossier pour stocker les fichiers
+	// Si besoin, on crée un dossier pour stocker les fichiers
 
 	$erreur_creation_dossier = formidable_creer_dossier_formulaire($id_formulaire);
 	if ($erreur_creation_dossier) {
