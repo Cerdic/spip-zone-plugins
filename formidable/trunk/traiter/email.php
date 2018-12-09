@@ -235,21 +235,29 @@ function traiter_email_dist($args, $retours) {
 			if (_FORMIDABLE_LIENS_FICHIERS_ACCUSE_RECEPTION == false) {
 				$valeurs = vues_saisies_supprimer_action_recuperer_fichier_par_email($saisies, $valeurs);
 			}
+			$parametres_accuse = array(
+				'id_formulaire' => $formulaire['id_formulaire'],
+				'id_formulaires_reponse' => isset($retours['id_formulaires_reponse']) ? $retours['id_formulaires_reponse'] : '',
+				'titre' => _T_ou_typo($formulaire['titre']),
+				'message_retour' => formidable_raccourcis_arobases_2_valeurs_champs(
+					$formulaire['message_retour'],
+					$saisies,
+					false,
+					''),
+				'traitements' => $traitements,
+				'saisies' => $saisies,
+				'valeurs' => $valeurs
+			);
+			$parametres_accuse = pipeline('formidable_parametres_accuse',
+				array(
+					'args' => array('id_formulaire' => $parametres_accuse['id_formulaire'], 'id_formulaires_reponse' => $parametres_accuse['id_formulaires_reponse']),
+					'data' => $parametres_accuse
+				)
+			);
+
 			$html_accuse = recuperer_fond(
 				$accuse,
-				array(
-					'id_formulaire' => $formulaire['id_formulaire'],
-					'id_formulaires_reponse' => isset($retours['id_formulaires_reponse']) ? $retours['id_formulaires_reponse'] : '',
-					'titre' => _T_ou_typo($formulaire['titre']),
-					'message_retour' => formidable_raccourcis_arobases_2_valeurs_champs(
-						$formulaire['message_retour'],
-						$saisies,
-						false,
-						''),
-					'traitements' => $traitements,
-					'saisies' => $saisies,
-					'valeurs' => $valeurs
-				)
+				$parametres_accuse
 			);
 
 			// On génère le texte brut

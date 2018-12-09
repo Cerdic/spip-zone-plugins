@@ -1,7 +1,7 @@
 <paquet
 	prefix="formidable"
 	categorie="communication"
-	version="3.26.1"
+	version="3.27.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/formidable-64.png"
@@ -18,6 +18,7 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<pipeline nom="formidable_affiche_resume_reponse" action="" />
+	<pipeline nom="formidable_parametres_accuse" action="" />
 	<pipeline nom="formidable_exporter_formulaire_reponses_titres" action="" />
 	<pipeline nom="formidable_exporter_formulaire_reponses_reponse" action="" />
 	<pipeline nom="formidable_traitements" inclure="formidable_pipelines.php" />
