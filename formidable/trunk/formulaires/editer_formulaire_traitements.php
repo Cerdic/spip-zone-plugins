@@ -28,7 +28,7 @@ function formulaires_editer_formulaire_traitements_charger($id_formulaire) {
 		$contexte['traitements'] = $traitements;
 		$contexte['traitements_choisis'] = array_keys($traitements);
 		$contexte['formulaire'] = _T_ou_typo($saisies, 'multi');
-		$contexte['id_formulaire'] = $id_formulaire;
+		$contexte['id'] = $id_formulaire;
 
 		$traitements_disponibles = traitements_lister_disponibles();
 		$configurer_traitements = array();
