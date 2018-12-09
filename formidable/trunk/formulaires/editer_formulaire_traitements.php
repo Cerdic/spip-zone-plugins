@@ -81,10 +81,9 @@ function formulaires_editer_formulaire_traitements_verifier($id_formulaire) {
 		foreach ($traitements_choisis as $type_traitement) {
 			$erreurs_traitement_brut = saisies_verifier(
 				saisies_transformer_noms(
-					$traitements_disponibles[$type_traitement]['options'],
-					'/^.*$/',
-					"traitements[$type_traitement][\\0]"),
-				false
+					$traitements_disponibles[$type_traitement]['options'], 
+					'/^.*$/', 
+					"traitements[$type_traitement][\\0]")
 				);
 			if (!empty($erreurs_traitement_brut)) {
 				$erreurs_traitement = array($type_traitement => array());
