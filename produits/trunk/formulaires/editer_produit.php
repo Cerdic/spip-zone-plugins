@@ -182,7 +182,7 @@ function formulaires_editer_produit_identifier_dist($id_produit = 'new', $id_rub
  * @return array
  *     Environnement du formulaire
  */
-function formulaires_editer_produit_charger($id_produit = 'new', $id_rubrique = 0, $retour = '') {
+function formulaires_editer_produit_charger($id_produit = 'new', $id_rubrique = 0, $retour = '', $lier_trad = 0) {
 	$config = lire_config('produits') ;
 
 	// Si pas de rubrique passée et que l'insertion est limitée à une seule rubrique, on peut déjà la passer par defaut
@@ -190,7 +190,7 @@ function formulaires_editer_produit_charger($id_produit = 'new', $id_rubrique = 
 		$id_rubrique = $config['limiter_ident_secteur'][0];
 	}
 
-	$contexte = formulaires_editer_objet_charger('produit', $id_produit, $id_rubrique, $lier_trad = 0, $retour, '');
+	$contexte = formulaires_editer_objet_charger('produit', $id_produit, $id_rubrique, $lier_trad, $retour, '');
 
 	//Si on a déjà le $id_produit il faut afficher sa rubrique!
 	if ($id_produit > 0) {
@@ -233,7 +233,7 @@ function formulaires_editer_produit_charger($id_produit = 'new', $id_rubrique = 
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_editer_produit_verifier($id_produit = 'new', $id_rubrique = 0, $retour = '') {
+function formulaires_editer_produit_verifier($id_produit = 'new', $id_rubrique = 0, $retour = '', $lier_trad = 0) {
 	$erreurs = array();
 	$config = lire_config('produits');
 
@@ -272,7 +272,7 @@ function formulaires_editer_produit_verifier($id_produit = 'new', $id_rubrique =
  * @return array
  *     Retours des traitements
  */
-function formulaires_editer_produit_traiter($id_produit = 'new', $id_rubrique = 0, $retour = '') {
+function formulaires_editer_produit_traiter($id_produit = 'new', $id_rubrique = 0, $retour = '', $lier_trad = 0) {
 	set_request('id_parent', produits_id_parent());
 	if ($taxe = _request('taxe')) {
 		set_request('taxe', $taxe/100);
@@ -283,7 +283,7 @@ function formulaires_editer_produit_traiter($id_produit = 'new', $id_rubrique = 
 		set_request('prix_ht', $prix_ht);
 	}
 
-	$retours = formulaires_editer_objet_traiter('produit', $id_produit, $id_rubrique, $lier_trad = 0, $retour);
+	$retours = formulaires_editer_objet_traiter('produit', $id_produit, $id_rubrique, $lier_trad, $retour);
 
 	// cas d’erreur conserver la valeur de taxe saisie.
 	if (!empty($retours['message_erreur'])) {
