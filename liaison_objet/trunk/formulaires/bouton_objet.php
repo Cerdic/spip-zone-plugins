@@ -16,7 +16,7 @@ function formulaires_bouton_objet_charger_dist($id_objet, $objet, $langue, $lang
 	else
 		$choisies = lire_config('liaison_objet/liaison_' . $objet_dest . '_dest', array());
 
-	$lang = $langue ? explode(',', $langue) : '';
+		$lang = $langue ? (is_array($langue) ? $langue : explode(',', $langue)) : '';
 
 	// On garde l'objet original pour la détection des données de l'objet
 	$objet_dest_original = $objet_dest;
