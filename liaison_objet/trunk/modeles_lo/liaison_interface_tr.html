@@ -19,6 +19,11 @@
 [(#OBJET|=={site}|oui)
 	#SET{id,id_syndic}
 ]
+[(#OBJET|=={site}|oui)
+	#SET{id,id_syndic}
+]
+
+
 	[<a class="select"  href="[(#URL_ECRIRE{#GET{objet}}|parametre_url{#GET{id},#ID_OBJET})]">(#ENV{logo_objet}|image_reduire{25}|sinon{#ENV{logo_objet}|image_reduire{25}|inserer_attribut{class,spip_logos}}) </a>] <a href="[(#URL_ECRIRE{#GET{objet}}|parametre_url{#GET{id},#ID_OBJET})]">[(#TITRE|sinon{#OBJET|info_objet{#ID_OBJET,#ENV{champ_titre}}})]</a> #SET{table,#OBJET|table_objet_sql}
 [
 	<div>
@@ -26,7 +31,12 @@
 	</div>]
 </td>
 <td class="type_lien">[(#TYPE_LIEN|nom_type{#OBJET_DEST})]</td>
-<td class="date">[(#DATE|affdate)]</td>
+<td class="date">#SET{date,#DATE|affdate}
+[(#OBJET|=={evenement}|oui)
+	#SET{date,#DATE_DEBUT| agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE}}
+]
+[(#GET{date})]
+</td>
 <td class="id_objet"><b style="white-space: nowrap;">N°[(#ID_OBJET|>{0}|?{#ID_OBJET,#ID_LIAISON_OBJET})]</b></td>
 <td>
 [(#AUTORISER{modifier,liaison_objet,#ID_LIAISON_OBJET})

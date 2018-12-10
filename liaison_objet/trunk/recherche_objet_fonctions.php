@@ -9,9 +9,13 @@ function tableau_recherche_objet($objet, $exclus, $lang = '') {
 	include_spip('inc/pipelines_ecrire');
 	//Les tables non conforme, faudrait inclure une pipeline
 	$exceptions = charger_fonction('exceptions', 'inc');
-	$exception_objet = $exceptions();
-	if (!$champ_titre = $exception_objet['titre'][$objet])
+	$exception_objet = $exceptions();;
+
+	$champ_date = '';
+	if (!$champ_titre = $exception_objet['titre'][$objet]) {
 		$champ_titre = 'titre';
+	}
+
 
 	$ancien_objet = $objet;
 	$e = trouver_objet_exec($objet);
@@ -33,8 +37,8 @@ function tableau_recherche_objet($objet, $exclus, $lang = '') {
 		$champ_titre = 'titre,fichier';
 	}
 
-	if (isset($tables[$table_dest]['statut'][0]['publie']))
-		$statut = $tables[$table_dest]['statut'][0]['publie'];
+	if (isset($tables[$table]['statut'][0]['publie']))
+		$statut = $tables[$table]['statut'][0]['publie'];
 	$exceptions_statut = array(
 		'rubrique',
 		'document'
@@ -43,22 +47,33 @@ function tableau_recherche_objet($objet, $exclus, $lang = '') {
 		$where[] = 'statut=' . sql_quote($statut);
 	if ($objet == 'auteur')
 		$where[] = 'statut !=' . sql_quote('5poubelle');
-	if (isset($tables[$table_dest]['field']['lang']) AND $lang)
+		if (isset($tables[$table]['field']['lang']) AND $lang)
 		$where[] = 'lang IN ("' . implode('","', $lang) . '")';
-	$d = info_objet($objet, '', $champ_titre . ',' . $id_table_objet, $where);
+
+		if ($objet == 'evenement') {
+			$champ_date = 'date_debut,date_fin,horaire,';
+		}
+		$d = info_objet($objet, '', $champ_date . $champ_titre . ',' . $id_table_objet, $where);
 
 	$data = array();
 	if (is_array($d)) {
 		foreach ($d as $r) {
-			if (!$r['titre'])
+			$date = '';
+			if ($objet == 'evenement') {
+				$date = '(' . agenda_affdate_debut_fin($r['date_debut'], $r['date_fin'], $r['horaire']) . ')';
+			}
+			if (!$r['titre']) {
 				$r['titre'] = titre_objet_sel($objet, $r);
-			if (!isset($exclus[$r[$id_table_objet] . '-' . $objet]))
+			}
+			if (!isset($exclus[$r[$id_table_objet] . '-' . $objet])) {
 				$data[] = array(
-					'label' => $r[titre] . ' (' . $traduction_nom_objet . ')',
+					'label' => $r[titre] . ' (' . $traduction_nom_objet . ')' . $date,
 					'value' => $r[$id_table_objet] . '-' . $objet
 				);
+			}
+
 		}
 	}
 	return $data;
 }
-?>
+
