@@ -17,6 +17,7 @@ function liaison_objet_affiche_gauche($flux) {
 	$objets_liaison = lire_config('liaison_objet/objets_liaison', array());
 
 	if (in_array($exec, $objets_liaison)) {
+		$contexte = [];
 		$e = trouver_objet_exec($exec);
 		$objet = $e['type'];
 		$id_table_objet = $e['id_table_objet'];
@@ -29,7 +30,7 @@ function liaison_objet_affiche_gauche($flux) {
 		$contexte['objet'] = $objet;
 		$objets_cibles = lire_config('liaison_objet/objets_cible', array());
 
-		$contexte['langue'] = array($args['lang']);
+		$contexte['langue'] = array(_LANGUE_PAR_DEFAUT);
 		if ($objet == 'rubrique' OR $objet == 'article') {
 			$contexte['langue'] = sql_getfetsel('lang', $table, $id_table_objet . '=' . $contexte['id_objet']);
 		}
