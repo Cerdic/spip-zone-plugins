@@ -50,11 +50,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_icon' => 'Icon',
 	'formulaire_icon_explication' => 'Sie können den relativen Pfad zu einem Icon angeben (z.B.: <i>images/objekt-liste-inhalte.png</i>). Eine Liste der Icons in Standardverzeichnissen finden sie<a href="../spip.php?page=icones_preview">auf dieser Seite</a>.', # MODIF
 	'formulaire_identifiant_deja_pris' => 'Dieser Bezeichner wird bereits verwndet!',
-	'formulaire_import_compos' => 'Kompositionen des Nussbaums importieren',
 	'formulaire_import_fusion' => 'Mit der aktuellen Konfiguration zusammenführen',
 	'formulaire_import_remplacer' => 'Aktuelle Konfiguration ersetzen',
-	'formulaire_liste_compos_config' => 'Diese Konfigurationsdatei definiert die Kompositionen des folgenden Nussbaums:',
-	'formulaire_liste_pages_config' => 'Diese Konfigurationsdatei definiert Code-Nüsse auf folgenden Seiten:',
+	'formulaire_liste_compos_config' => 'Diese Konfigurationsdatei definiert die Kompositionen des folgenden Nussbaums:', # MODIF
+	'formulaire_liste_pages_config' => 'Diese Konfigurationsdatei definiert Code-Nüsse auf folgenden Seiten:', # MODIF
 	'formulaire_modifier_composition' => 'Diese Komposition ändern:', # MODIF
 	'formulaire_modifier_composition_heritages' => 'Vererbungen dieser Komposition ändern:', # MODIF
 	'formulaire_modifier_noisette' => 'Diese Code-Nuss ändern',
@@ -72,8 +71,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'ieconfig_ne_pas_importer' => 'Nicht importieren',
-	'ieconfig_noizetier_export_explication' => 'Exporiert die Konfiguration der Code-Nüsse und die Kompsitionen des Nussbaums.',
-	'ieconfig_noizetier_export_option' => 'In den Export einbeziehen?',
+	'ieconfig_noizetier_export_explication' => 'Exporiert die Konfiguration der Code-Nüsse und die Kompsitionen des Nussbaums.', # MODIF
+	'ieconfig_noizetier_export_option' => 'In den Export einbeziehen?', # MODIF
 	'ieconfig_non_installe' => 'Das Plugin <b>Import/Export von Konfigurationen</b> ist nicht installiert.  Das Plugin Nussbaum funktioniert auch ohne, jedoch können sie die Konfiguration der Code-Nüsse im Nussbaum im- und exportieren, wenn es aktiviert ist.', # MODIF
 	'ieconfig_probleme_import_config' => 'Beim Import der Konfiguration des Nussbaums ist ein Problem aufgetreten.',
 	'info_composition' => 'KOMPOSITION :',

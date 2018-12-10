@@ -50,11 +50,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_icon_explication' => 'مي‌توانيد مسير نسبي به سوي يك صورتك را وارد كنيد (براي نمونه : <i>images/objet-liste-contenus.png</i>)
 براي ديدن فهرست تصاوير اخيراً نصب شده مي‌توانيد  به اين صفحه مرجعه كنيد: <a href="../spip.php?page=icones_preview">', # MODIF
 	'formulaire_identifiant_deja_pris' => 'از اين شناسه اكنون استفاده مي‌شود!',
-	'formulaire_import_compos' => 'واردسازي تركيب‌هاي فندق‌ها',
 	'formulaire_import_fusion' => 'ادغام با پيكربندي فعلي',
 	'formulaire_import_remplacer' => 'جايگزين سازي پيكربندي فعلي',
-	'formulaire_liste_compos_config' => 'اين پرونده‌ي پيكربندي تركيب‌هاي فندق‌هاي بعدي را تعريف مي‌كند: ',
-	'formulaire_liste_pages_config' => 'اين پرونده‌ي پيكربندي فندق‌هاي روي اين صفحه‌ها را تعريف مي‌كند:‌',
+	'formulaire_liste_compos_config' => 'اين پرونده‌ي پيكربندي تركيب‌هاي فندق‌هاي بعدي را تعريف مي‌كند: ', # MODIF
+	'formulaire_liste_pages_config' => 'اين پرونده‌ي پيكربندي فندق‌هاي روي اين صفحه‌ها را تعريف مي‌كند:‌', # MODIF
 	'formulaire_modifier_composition' => 'اصلاح اين تركيب: ', # MODIF
 	'formulaire_modifier_composition_heritages' => 'اصلاح ميراث اين تركيب: ', # MODIF
 	'formulaire_modifier_noisette' => 'اصلاح اين فندق',
@@ -72,8 +71,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'ieconfig_ne_pas_importer' => 'وارد نكردن',
-	'ieconfig_noizetier_export_explication' => 'صادر سازي پيكربندي فندق‌ها و تركيب‌هاي فندق‌ها.',
-	'ieconfig_noizetier_export_option' => 'گنجاندن در صادرات؟',
+	'ieconfig_noizetier_export_explication' => 'صادر سازي پيكربندي فندق‌ها و تركيب‌هاي فندق‌ها.', # MODIF
+	'ieconfig_noizetier_export_option' => 'گنجاندن در صادرات؟', # MODIF
 	'ieconfig_non_installe' => '<b>پلاگين صادرسازي/واردسازي پيكربندي‌ها: </b> اين پلاگين روي سايت شما نصب نشده. نيازي به پيكربندي فندق‌ها نيست. با اين همه، اگر فعال شود، مي‌توانيد پيكربندي‌هاي فندق‌هاي ذاخل فندق را صادر و وارد كنيد.',
 	'ieconfig_probleme_import_config' => 'هنگام واردسازي پيكربندي فندق‌ها مشكلي رخ داده است.',
 	'info_composition' => 'تركيب:',

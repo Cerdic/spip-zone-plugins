@@ -70,7 +70,7 @@ You can choose a new identifier or suffix the reference identifier as follows:
 	'explication_noisette' => 'Nut type « @noisette@ »',
 	'explication_noisette_css' => 'You can add to the wrapping nut tag any additional CSS classes.',
 	'explication_noizetier_ajax' => 'The default AJAX inclusion mode can be changed individually for each nut (YAML file).',
-	'explication_noizetier_balise' => 'The default mode of inclusion in a wrapping tag can be modified individually for each nut (parameterization).',
+	'explication_noizetier_balise' => 'The default mode of inclusion in a wrapping tag can be modified individually for each nut (parameterization).', # MODIF
 	'explication_noizetier_profondeur_max' => 'You can nest container-type nuts. Choose the number of nesting levels you want.', # MODIF
 	'explication_objet' => 'Type of content "@type@"',
 	'explication_page' => 'Autonomous page not linked to a content type',
@@ -104,12 +104,11 @@ You can choose a new identifier or suffix the reference identifier as follows:
 	'formulaire_icon' => 'Icon',
 	'formulaire_icon_explication' => 'You can enter the relative path to an icon (for example : <i>images/list-item-contenus.png</i>).',
 	'formulaire_identifiant_deja_pris' => 'This identifier already exists!',
-	'formulaire_import_compos' => 'Import the compositions of the Nuts Manager',
 	'formulaire_import_fusion' => 'Merge with the current configuration',
 	'formulaire_import_remplacer' => 'Replace the current configuration',
-	'formulaire_liste_compos_config' => 'This configuration file defines the following Nuts Manager compositions:',
+	'formulaire_liste_compos_config' => 'This configuration file defines the following Nuts Manager compositions:', # MODIF
 	'formulaire_liste_pages_config' => 'This configuration file defines
-nuts on the following pages:',
+nuts on the following pages:', # MODIF
 	'formulaire_modifier_composition' => 'Edit this composition',
 	'formulaire_modifier_composition_heritages' => 'Inherited compositions',
 	'formulaire_modifier_noisette' => 'Edit this nut',
@@ -133,8 +132,8 @@ nuts on the following pages:',
 	// I
 	'icone_introuvable' => 'Icon not found!',
 	'ieconfig_ne_pas_importer' => 'Do not import',
-	'ieconfig_noizetier_export_explication' => 'Will export the configuration of the nuts and compositions of the Nuts Manager.',
-	'ieconfig_noizetier_export_option' => 'Included in the export?',
+	'ieconfig_noizetier_export_explication' => 'Will export the configuration of the nuts and compositions of the Nuts Manager.', # MODIF
+	'ieconfig_noizetier_export_option' => 'Included in the export?', # MODIF
 	'ieconfig_non_installe' => '<b>Configuration Import/Export Plugin:</b> this plugin isn’t installed on your site. It is not necessarry to the correct working of the Nuts Manager. However, when it’s activated, you can  export and import some nuts configurations into the Nuts Manager.',
 	'ieconfig_probleme_import_config' => 'A problem occured while importing the Nuts Manager configuration.',
 	'info_composition' => 'COMPOSITION:',
@@ -204,10 +203,8 @@ nuts on the following pages:',
 	// O
 	'operation_annulee' => 'Operation canceled.',
 	'option_noisette_balise_defaut' => 'Use the default mode configured for the noiZetier <em>(@defaut@)</em>',
-	'option_noisette_balise_non' => 'Never use a wrapping tag',
-	'option_noisette_balise_oui' => 'Always use a wrapping tag',
-	'option_noizetier_balise_non' => 'without tag',
-	'option_noizetier_balise_oui' => 'with tag',
+	'option_noisette_balise_non' => 'Never use a wrapping tag', # MODIF
+	'option_noisette_balise_oui' => 'Always use a wrapping tag', # MODIF
 	'oui' => 'Yes',
 
 	// P
