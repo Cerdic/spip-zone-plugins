@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_glisser_deposer' => 'Les types de noisettes pouvant être ajoutés aux blocs de la page sont listés ci-dessous.',
 	'explication_heritages_composition' => 'La composition en cours d’édition est basée sur le type de contenu « @type@ » qui possède des types de contenu enfants. Vous pouvez définir pour chaque type de contenu enfant une composition à appliquer par défaut.',
 	'explication_noisette' => 'Noisette de type « @noisette@ »',
-	'explication_noisette_css' => 'Vous pouvez ajouter à la balise englobante de la noisette d’éventuelles classes CSS supplémentaires.',
+	'explication_noisette_css' => 'Vous pouvez ajouter à la capsule englobant la noisette d’éventuelles classes CSS supplémentaires.',
 	'explication_noizetier_ajax' => 'Le mode par défaut d’inclusion AJAX peut être modifié unitairement pour chaque noisette (fichier YAML).',
 	'explication_noizetier_balise' => 'Le mode par défaut d’encapsulation peut être modifié unitairement pour chaque noisette (paramètrage).',
 	'explication_noizetier_cfg_constant' => 'Cette valeur est actuellement définie via une constante, elle ne peut pas être changée ici.',
@@ -158,7 +158,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_description_code' => 'Description :',
 	'label_identifiant' => 'identifiant :',
 	'label_niveau_titre' => 'Niveau du titre :',
-	'label_noisette_balise' => 'Balise englobante',
+	'label_noisette_encapsulation' => 'Encapsulation',
 	'label_noisette_css' => 'Classes CSS',
 	'label_noizetier_ajax' => 'Par défaut, inclure chaque noisette en AJAX',
 	'label_noizetier_balise' => 'Par défaut, inclure chaque noisette dans une capsule (markup HTML)',
@@ -208,13 +208,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'operation_annulee' => 'Opération annulée.',
-	'option_noisette_balise_auto' => 'Encapsuler la noisette dans un HTML spécifique au type de noisette',
-	'option_noisette_balise_defaut' => 'Utiliser le mode par défaut configuré pour le noiZetier <em>(@defaut@)</em>',
-	'option_noisette_balise_non' => 'Ne jamais encapsuler la noisette',
-	'option_noisette_balise_oui' => 'Encapsuler la noisette avec une balise div',
-	'option_noizetier_balise_aucune' => 'Sans encapsulation',
-	'option_noizetier_balise_auto' => 'Avec un HTML spécifique',
-	'option_noizetier_balise_div' => 'Avec une balise div',
+	'option_noisette_encapsulation_oui' => 'Inclure la noisette dans une capsule',
+	'option_noisette_encapsulation_defaut' => 'Utiliser le mode par défaut configuré pour le noiZetier <em>(@defaut@)</em>',
+	'option_noisette_encapsulation_non' => 'Ne jamais encapsuler la noisette',
+	'option_noizetier_encapsulation_oui' => 'avec encapsulation',
+	'option_noizetier_encapsulation_non' => 'sans encapsulation',
 	'oui' => 'Oui',
 
 	// P

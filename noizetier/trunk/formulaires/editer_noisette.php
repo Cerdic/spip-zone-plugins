@@ -51,14 +51,14 @@ function formulaires_editer_noisette_charger_dist($id_noisette, $redirect = '') 
 			$valeurs['encapsulation'] = $noisette['encapsulation'];
 			$valeurs['css'] = $noisette['css'];
 			// Construction de la liste des valeurs possibles pour le choix de la encapsulation
-			include_spip('ncore/ncore');
-			$config_encapsulation = ncore_noisette_initialiser_capsule('noizetier')
+			include_spip('ncore/noizetier');
+			$config_encapsulation = noizetier_noisette_initialiser_encapsulation('noizetier')
 				? _T('noizetier:option_noizetier_encapsulation_oui')
 				: _T('noizetier:option_noizetier_encapsulation_non');
 			$valeurs['_encapsulation_options'] = array(
 				'defaut' => _T('noizetier:option_noisette_encapsulation_defaut', array('defaut' => lcfirst($config_encapsulation))),
 				'oui'    => _T('noizetier:option_noisette_encapsulation_oui'),
-				'non' => _T('noizetier:option_noisette_encapsulation_non')
+				'non'    => _T('noizetier:option_noisette_encapsulation_non')
 			);
 			$valeurs['editable'] = true;
 		}
@@ -112,10 +112,10 @@ function formulaires_editer_noisette_traiter_dist($id_noisette, $redirect = '') 
 
 		// Paramètres généraux d'inclusion de la noisette
 		include_spip('inc/config');
-		$balise = _request('balise');
+		$encapsulation = _request('encapsulation');
 		$css = _request('css');
-		if (!$balise or (($balise == 'defaut') and !lire_config('noizetier/balise_noisette'))) {
-			// on remet à zéro les css si la balise englobante n'est pas active
+		if (($encapsulation == 'non') or (($encapsulation == 'defaut') and !lire_config('noizetier/encapsulation_noisette'))) {
+			// on remet à zéro les css si la capsule englobante n'est pas active
 			$css = '';
 		}
 
@@ -124,7 +124,7 @@ function formulaires_editer_noisette_traiter_dist($id_noisette, $redirect = '') 
 
 		// Mise à jour de la noisette en base de données
 		include_spip('inc/ncore_noisette');
-		$valeurs = array('parametres' => serialize($parametres), 'balise' => $balise, 'css' => $css);
+		$valeurs = array('parametres' => serialize($parametres), 'encapsulation' => $encapsulation, 'css' => $css);
 		if (noisette_parametrer('noizetier', intval($id_noisette), $valeurs)) {
 			// On invalide le cache
 			include_spip('inc/invalideur');

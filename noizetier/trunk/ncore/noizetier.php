@@ -515,26 +515,23 @@ function noizetier_noisette_decrire($plugin, $noisette) {
 }
 
 /**
- * Renvoie la configuration par défaut de l'encapsulation d'une noisette en mode non auto.
- * Cette information est utilisée si le mode d'encapsulation est manuel et si le champ `balise` de la noisette
- * vaut `defaut`.
+ * Renvoie la configuration par défaut de l'encapsulation d'une noisette.
+ * Cette information est utilisée si le champ `encapsulation` de la noisette vaut `defaut`.
  *
  * @package SPIP\NOIZETIER\NOISETTE\SERVICE
- *
- * @uses ncore_chercher_service()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  *
  * @return string
- * 		Capsule par defaut qui peut valoir `div` ou `aucune`.
+ * 		Vaut `on` pour une encapsulation ou chaine vide sinon.
  */
-function noizetier_noisette_initialiser_capsule($plugin) {
+function noizetier_noisette_initialiser_encapsulation($plugin) {
 
 	// La capsule par défaut est inscrite dans la configuration du plugin.
 	include_spip('inc/config');
-	$defaut_capsule = lire_config("${plugin}/balise_noisette");
+	$defaut_capsule = lire_config("${plugin}/encapsulation_noisette");
 
 	return $defaut_capsule;
 }
