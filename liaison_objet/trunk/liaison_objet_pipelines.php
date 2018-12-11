@@ -194,4 +194,3 @@ function types_liaisons2array($type) {
 
 	return $tableau;
 }
-?>
