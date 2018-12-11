@@ -337,7 +337,7 @@ function noisette_encapsuler($plugin, $contenu, $encapsulation, $css, $id_noiset
 		// On met donc en variable statique la capsule dist compilée avec uniquement le type de noisette évalué, mais pas les styles
 		// et on applique les styles avec un str_replace étant donné que l'on connait la structure de la capsule dist qui n'est jamais
 		// modifiée ni surchargée.
-		if ($capsule == 'dist') {
+		if ($nom_capsule == 'dist') {
 			if (!isset($capsule_dist[$plugin])) {
 				$capsule = recuperer_fond("capsules/${nom_capsule}", $contexte_capsule);
 				$capsule_dist[$plugin] = $capsule;
@@ -349,7 +349,7 @@ function noisette_encapsuler($plugin, $contenu, $encapsulation, $css, $id_noiset
 		}
 
 		// On insère le contenu de la noisette dans la capsule qui contient toujours une indication d'insertion explicite.
-		$contenu = str_replace('<!--noisettes-->', $contenu, capsule);
+		$contenu = str_replace('<!--noisettes-->', $contenu, $capsule);
 	}
 
 	return $contenu;
