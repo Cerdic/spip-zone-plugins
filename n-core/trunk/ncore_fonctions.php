@@ -8,25 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 
-if (!defined('_NCORE_ENCAPSULATION_AUTO')) {
-	/**
-	 * Mode d'encapsulation des noisettes.
-	 * Le mode auto applique à chaque noisette une capsule propre au type de noisette ou à défaut la capsule de base.
-	 * Dans ce mode, il n'est plus possible de choisir manuellement l'encapsulation de chaque noisette.
-	 */
-	define('_NCORE_ENCAPSULATION_AUTO', 'false');
-}
-
-if (!defined('_NCORE_ENCAPSULATION_DEFAUT')) {
-	/**
-	 * Dans le cas où le mode d'encapsulation auto est inactif, il est possible de choisir noisette par noisette
-	 * le type d'encapsulation. Les noisettes sont initialisés avec la valeur 'defaut' qui fait référence à cette
-	 * constante. N-Core initialise cette valeur à 'div' ce qui provoque l'encapsulation dans une balise div.
-	 */
-	define('_NCORE_ENCAPSULATION_DEFAUT', 'div');
-}
-
-
 // -----------------------------------------------------------------------
 // --------------------- FILTRES TYPES DE NOISETTE -----------------------
 // -----------------------------------------------------------------------
@@ -305,17 +286,19 @@ function noisette_contextualiser($plugin, $noisette, $type_noisette, $environnem
  * @api
  * @filtre
  *
- * @uses ncore_noisette_initialiser_capsule()
+ * @uses ncore_noisette_initialiser_encapsulation()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param string $contenu
  *        Contenu compilé de la noisette en cours avant encapsulation.
- * @param string $balise
- * 	      Indicateur d'encapsulation du contenu par une balise div ou pas.
+ * @param string $encapsulation
+ * 	      Indicateur d'encapsulation du contenu par un capsule ou pas.
  * @param string $css
- * 	      Styles à intégrer au div d'encapsulation si appliqué.
+ * 	      Styles à intégrer à la capsule.
+ * @param mixed  $id_noisette
+ * 	      Identifiant de la noisette.
  * @param string $type_noisette
  * 	      Identifiant du type de noisette.
  * @param string $stockage
@@ -323,64 +306,56 @@ function noisette_contextualiser($plugin, $noisette, $type_noisette, $environnem
  *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
  *        fournissant le service de stockage souhaité.
  *
- * @return array
- * 		Le tableau éventuellement vide des éléments de contexte de la noisette.
+ * @return string
+ * 		Le contenu de la noisette encapsulé dans du HTML ou tel que fourni en entrée si pas d'encapsulation.
  */
-function noisette_encapsuler($plugin, $contenu, $balise, $css, $type_noisette, $stockage = '') {
+function noisette_encapsuler($plugin, $contenu, $encapsulation, $css, $id_noisette, $type_noisette, $stockage = '') {
 
 	// Initialisation du tableau du HTML des capsules indexé par plugin et nom de capsule.
-	static $capsules = array();
-	static $defaut_encapsulation = '';
+	static $defaut_encapsulation = array();
+	static $capsule_dist = array();
 
-
-	// Détermination du défaut d'encapsulation en mode non automatique uniquement (non utilisé en mode auto).
-	if (!_NCORE_ENCAPSULATION_AUTO and !$defaut_encapsulation) {
-		$defaut_encapsulation = ncore_noisette_initialiser_capsule($plugin);
+	// Détermination du défaut d'encapsulation.
+	if (!isset($defaut_encapsulation[$plugin])) {
+		$defaut_encapsulation[$plugin] = ncore_noisette_initialiser_encapsulation($plugin);
 	}
 
-	// Si le mode d'encapsulation est positionné à auto ou si le mode d'encapsulation est manuel et que la noisette
-	// demande explicitement une encapsulation alors encapsule le contenu fourni.
-	// Sinon on renvoie le contenu compilé de la noisette tel que.
-	if (_NCORE_ENCAPSULATION_AUTO
-	or (!_NCORE_ENCAPSULATION_AUTO
-		and (($balise != 'aucune') or (($balise == 'defaut') and ($defaut_encapsulation != 'aucune'))))) {
+	if (($encapsulation != 'non') or (($encapsulation == 'defaut') and ($defaut_encapsulation[$plugin]))) {
 		// Détermination de la capsule à appliquer
-		// -- on cherche d'abord une capsule simple non liée au type de noisette.
-		$fond_capsule = '';
-		if (!_NCORE_ENCAPSULATION_AUTO
-		and (($balise != 'auto') or (($balise == 'defaut') and ($defaut_encapsulation != 'auto')))) {
-			$fond_capsule = ($balise == 'defaut') ? $defaut_encapsulation : $balise;
-			$contexte_capsule = array('type_noisette' => $type_noisette, 'css' => $css);
-		}
-
-		// -- Si la capsule simple n'a pas été trouvée c'est qu'on veut appliquer une capsule liée au type de noisette.
-		if (!$fond_capsule) {
-			// On utilise soit la capsule propre à un type de noisette si elle existe, soit on utilise la capsule
-			// par défaut qui porte le nom 'dist'.
-			if (find_in_path("capsules/${type_noisette}.html")) {
-				$fond_capsule = "capsules/${type_noisette}";
-			} else {
-				$fond_capsule = 'capsules/dist';
-			}
+		// On utilise soit la capsule propre à un type de noisette si elle existe, soit on utilise la capsule
+		// par défaut qui porte le nom 'dist'.
+		if (find_in_path("capsules/${type_noisette}.html")) {
+			$nom_capsule = $type_noisette;
+			$contexte_capsule = array('id_noisette' => $id_noisette, 'type_noisette' => $type_noisette, 'css' => $css);
+		} else {
+			$nom_capsule = 'dist';
 			$contexte_capsule = array('type_noisette' => $type_noisette);
 		}
 
-		// On recherche si la capsule est déjà disponible sinon on la calcule et on la met en cache.
-		if (!isset($capsules[$plugin][$fond_capsule])) {
-			$capsule = recuperer_fond($fond_capsule, $contexte_capsule);
-			$capsules[$plugin][$fond_capsule] = $capsule;
+		// Si on veut insérer la capsule dist (cas le plus fréquent), on accélère le processus en évitant de 
+		// faire systématiquement un appel à recuperer_fond mais seulement une fois dans un même hit.
+		// On met donc en variable statique la capsule dist compilée avec uniquement le type de noisette évalué, mais pas les styles
+		// et on applique les styles avec un str_replace étant donné que l'on connait la structure de la capsule dist qui n'est jamais
+		// modifiée ni surchargée.
+		if ($capsule == 'dist') {
+			if (!isset($capsule_dist[$plugin])) {
+				$capsule = recuperer_fond("capsules/${nom_capsule}", $contexte_capsule);
+				$capsule_dist[$plugin] = $capsule;
+			}
+			$style_dist = $css ? " $css" : '';
+			$capsule = str_replace('[ (#ENV{css})]', $style_dist, $capsule_dist[$plugin]);
+		} else {
+			$capsule = recuperer_fond("capsules/${nom_capsule}", $contexte_capsule);
 		}
 
 		// On insère le contenu de la noisette dans la capsule qui contient toujours une indication d'insertion explicite.
-		if ($capsules[$plugin][$fond_capsule]) {
-			$contenu = str_replace('<!--noisettes-->', $contenu, $capsules[$plugin][$fond_capsule]);
-		}
+		$contenu = str_replace('<!--noisettes-->', $contenu, capsule);
 	}
 
 	return $contenu;
 }
 
-
+ 
 // -----------------------------------------------------------------------
 // ------------------------- BALISES CONTENEURS --------------------------
 // -----------------------------------------------------------------------

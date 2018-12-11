@@ -37,8 +37,9 @@ function balise_NOISETTE_COMPILER_dist($p) {
 
 	// On extrait les autres informations de la noisette
 	$type_noisette = champ_sql('type_noisette', $p);
+	$est_conteneur = champ_sql('est_conteneur', $p);
 	$parametres = champ_sql('parametres', $p);
-	$balise = champ_sql('balise', $p);
+	$encapsulation = champ_sql('encapsulation', $p);
 	$css = champ_sql('css', $p);
 	$plugin = champ_sql('plugin', $p);
 
@@ -62,8 +63,9 @@ function balise_NOISETTE_COMPILER_dist($p) {
 			array_merge(unserialize($parametres), noisette_contextualiser($plugin, $noisette, $type_noisette, $environnement, $stockage)),
 			array('ajax'=>(type_noisette_ajaxifier($plugin, $type_noisette, $stockage)))
 		),
-		$balise,
+		$encapsulation,
 		$css,
+		$id_noisette,
 		$type_noisette,
 		$stockage
 	)";

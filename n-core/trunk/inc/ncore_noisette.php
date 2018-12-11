@@ -76,14 +76,14 @@ function noisette_ajouter($plugin, $type_noisette, $conteneur, $rang = 0, $stock
 			'rang_noisette' => intval($rang),
 			'est_conteneur' => type_noisette_lire($plugin, $type_noisette, 'conteneur', false, $stockage),
 			'parametres'    => serialize($parametres),
-			'balise'        => 'defaut',
+			'encapsulation' => 'defaut',
 			'css'           => ''
 		);
 
 		// Mise à jour de la description pour les noisettes conteneur:
 		// -- pas de div englobante.
 		if ($description['est_conteneur'] == 'oui') {
-			$description['balise'] = 'non';
+			$description['encapsulation'] = 'non';
 		}
 
 		// Complément à la description par défaut, spécifique au plugin utilisateur, si nécessaire.
@@ -171,7 +171,7 @@ function noisette_parametrer($plugin, $noisette, $modifications, $editables_spec
 		$description = ncore_noisette_decrire($plugin, $noisette, $stockage);
 
 		// On contrôle les champs éditables et on met à jour la description de la noisette.
-		$parametres = array_merge(array('parametres', 'balise', 'css'), $editables_specifiques);
+		$parametres = array_merge(array('parametres', 'encapsulation', 'css'), $editables_specifiques);
 		$modifications = array_intersect_key($modifications, array_flip($parametres));
 		$description = array_merge($description, $modifications);
 

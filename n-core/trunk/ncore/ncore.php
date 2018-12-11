@@ -748,11 +748,10 @@ function ncore_noisette_decrire($plugin, $noisette, $stockage = '') {
 }
 
 /**
- * Renvoie la configuration par défaut de l'encapsulation d'une noisette en mode non auto.
- * Cette information est utilisée si le mode d'encapsulation est manuel et si le champ `balise` de la noisette
- * vaut `defaut`.
+ * Renvoie la configuration par défaut de l'encapsulation d'une noisette.
+ * Cette information est utilisée si le champ `balise` de la noisette vaut `defaut`.
  *
- * Le service N-Core positionne cette valeur à `div`.
+ * Le service N-Core positionne cette valeur à `true`.
  *
  * @package SPIP\NCORE\NOISETTE\SERVICE
  *
@@ -762,24 +761,24 @@ function ncore_noisette_decrire($plugin, $noisette, $stockage = '') {
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  *
- * @return string
- * 		VCapsule par defaut qui peut valoir `div` ou `aucune`.
+ * @return bool
+ * 		`true` si par défaut une noisette est encapsulée, `false` sinon.
  */
-function ncore_noisette_initialiser_capsule($plugin) {
+function ncore_noisette_initialiser_encapsulation($plugin) {
 
 	// On cherche le service de stockage à utiliser selon la logique suivante :
 	// - si le service de stockage est non vide on l'utilise en considérant que la fonction existe forcément;
 	// - sinon, on utilise la fonction du plugin appelant si elle existe;
 	// - et sinon, on utilise la fonction de N-Core.
 	include_spip('inc/ncore_utils');
-	if ($configurer = ncore_chercher_service($plugin, 'noisette_initialiser_capsule', '')) {
+	if ($configurer = ncore_chercher_service($plugin, 'noisette_initialiser_encapsulation', '')) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		// On autorise la fonction du plugin à retourner autre chose que true ou false si tant est que l'on puisse
 		// en déduire un booléen (par exemple, 'on' et '' comme le retourne une case à cocher du plugin Saisies).
-		$defaut_capsule = $configurer($plugin);
+		$defaut_capsule = $configurer($plugin) ? true : false;
 	} else {
 		// Le service ne propose pas de fonction propre, on utilise celle de N-Core.
-		$defaut_capsule = 'div';
+		$defaut_capsule = true;
 	}
 
 	return $defaut_capsule;
