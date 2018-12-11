@@ -5,8 +5,6 @@ $(function() { (function($){
 			threshold       : 2*$(window).height(),
 			failure_limit   : 0,
 			appear: function () {
-				console.log('show');
-				console.log(this);
 				$(this).removeClass('lazy');
 				this.loaded = true;
 			}
