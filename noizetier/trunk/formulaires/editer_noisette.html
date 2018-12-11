@@ -17,19 +17,19 @@
 		</fieldset>
 
 		[(#REM) Paramètres de configuration généraux à toute noisette (div englobant, CSS) sauf
-		        si la noisette est un conteneur pour lequel on interdit de l'engloer encore d'un div ]
+		        si la noisette est un conteneur pour lequel on interdit de l'englober encore d'un div ]
 		[(#ENV{est_conteneur}|=={non}|oui)
 		<fieldset>
 			<legend><:noizetier:legende_noisette_inclusion:></legend>
 			<div class="editer-groupe">
-				[(#REM) Choix d'une balise englobante pour la noisette ]
-				[(#SAISIE{radio, balise,
+				[(#REM) Choix d'une capsule englobante pour la noisette ]
+				[(#SAISIE{radio, encapsulation,
 					label=<:noizetier:label_noisette_balise:>,
-					datas=#ENV{_balise_options},
-					defaut=#ENV{balise},
+					datas=#ENV{_encapsulation_options},
+					defaut=#ENV{encapsulation},
 				})]
 
-				[(#REM) CSS spécifiques qui seront insérés dans la balise englobante si utilisée ]
+				[(#REM) CSS spécifiques qui seront insérés dans la capsule englobante si utilisée ]
 				[<div id="css">(#SAISIE{input, css,
 					label=<:noizetier:label_noisette_css:>,
 					explication=<:noizetier:explication_noisette_css:>,
@@ -47,17 +47,17 @@
 <script type="text/javascript">
 //<![CDATA[
 	jQuery(document).ready(function() {
-		[(#ENV{balise}|=={''}|ou{#ENV{balise}|=={defaut}|et{#CONFIG{noizetier/balise_noisette}|!={on}}}|oui)
+		[(#ENV{encapsulation}|=={''}|ou{#ENV{encapsulation}|=={defaut}|et{#CONFIG{noizetier/encapsulation_noisette}|!={on}}}|oui)
 			jQuery('#css').hide();
 		]
-		jQuery("input[name='balise']").change(function() {
-			if (jQuery("input[name='balise']:checked").val() == '') {
+		jQuery("input[name='encapsulation']").change(function() {
+			if (jQuery("input[name='encapsulation']:checked").val() == '') {
 				jQuery("#css").hide();
-			} else if (jQuery("input[name='balise']:checked").val() == 'on') {
+			} else if (jQuery("input[name='encapsulation']:checked").val() == 'on') {
 				jQuery("#css").show();
 			} else {
-				[(#CONFIG{noizetier/balise_noisette}|=={on}|oui)jQuery("#css").show();]
-				[(#CONFIG{noizetier/balise_noisette}|=={on}|non)jQuery("#css").hide();]
+				[(#CONFIG{noizetier/encapsulation_noisette}|=={on}|oui)jQuery("#css").show();]
+				[(#CONFIG{noizetier/encapsulation_noisette}|=={on}|non)jQuery("#css").hide();]
 			}
 			jQuery(this).blur();
 		});

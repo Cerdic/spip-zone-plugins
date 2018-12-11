@@ -19,7 +19,7 @@ function formulaires_editer_noisette_charger_dist($id_noisette, $redirect = '') 
 			't1.type_noisette as type_noisette',
 			't1.est_conteneur as est_conteneur',
 			't1.parametres as parametres',
-			't1.balise as balise',
+			't1.encapsulation as encapsulation',
 			't1.css as css',
 			't2.parametres as champs');
 		$from = array('spip_noisettes as t1', 'spip_types_noisettes as t2');
@@ -48,16 +48,17 @@ function formulaires_editer_noisette_charger_dist($id_noisette, $redirect = '') 
 
 			// Insérer dans le contexte les valeurs des paramètres généraux stockées en BD.
 			// Ces paramètres généraux sont inclus manuellement dans le formulaire.
-			$valeurs['balise'] = $noisette['balise'];
+			$valeurs['encapsulation'] = $noisette['encapsulation'];
 			$valeurs['css'] = $noisette['css'];
-			// Construction de la liste des valeurs possibles pour le choix de la balise
-			include_spip('ncore/noizetier');
-			$config_balise = _T('noizetier:option_noizetier_balise_' . noizetier_noisette_initialiser_capsule('noizetier'));
-			$valeurs['_balise_options'] = array(
-				'defaut' => _T('noizetier:option_noisette_balise_defaut', array('defaut' => lcfirst($config_balise))),
-				'div'    => _T('noizetier:option_noisette_balise_oui'),
-				'auto'   => _T('noizetier:option_noisette_balise_auto'),
-				'aucune' => _T('noizetier:option_noisette_balise_non')
+			// Construction de la liste des valeurs possibles pour le choix de la encapsulation
+			include_spip('ncore/ncore');
+			$config_encapsulation = ncore_noisette_initialiser_capsule('noizetier')
+				? _T('noizetier:option_noizetier_encapsulation_oui')
+				: _T('noizetier:option_noizetier_encapsulation_non');
+			$valeurs['_encapsulation_options'] = array(
+				'defaut' => _T('noizetier:option_noisette_encapsulation_defaut', array('defaut' => lcfirst($config_encapsulation))),
+				'oui'    => _T('noizetier:option_noisette_encapsulation_oui'),
+				'non' => _T('noizetier:option_noisette_encapsulation_non')
 			);
 			$valeurs['editable'] = true;
 		}

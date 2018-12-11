@@ -11,13 +11,6 @@ function formulaires_configurer_noizetier_charger_dist() {
 	include_spip('inc/cvt_configurer');
 	$valeurs = cvtconf_formulaires_configurer_recense('configurer_noizetier');
 
-	// Injecter les options possibles pour le défaut d'encapsulation
-	$valeurs['_balise_options'] = array(
-		'div'    => _T('noizetier:option_noizetier_balise_div'),
-		'auto'   => _T('noizetier:option_noizetier_balise_auto'),
-		'aucune' => _T('noizetier:option_noizetier_balise_aucune')
-	);
-
 	// Injecter les objets exclus
 	include_spip('inc/noizetier_objet');
 	$valeurs['_objets_exclus'] = lister_objets_exclus();

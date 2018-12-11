@@ -142,7 +142,7 @@ function noizetier_declarer_tables_principales($tables_principales) {
 		'type_noisette' => "varchar(255) DEFAULT '' NOT NULL",
 		'est_conteneur' => "varchar(3) DEFAULT 'non' NOT NULL",
 		'parametres'    => "text DEFAULT '' NOT NULL",
-		'balise'        => "varchar(6) DEFAULT 'defaut' NOT NULL",
+		'encapsulation' => "varchar(6) DEFAULT 'defaut' NOT NULL",
 		'css'           => "tinytext DEFAULT '' NOT NULL",
 	);
 
