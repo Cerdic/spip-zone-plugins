@@ -313,7 +313,6 @@ function noisette_encapsuler($plugin, $contenu, $encapsulation, $css, $id_noiset
 
 	// Initialisation du tableau du HTML des capsules indexé par plugin et nom de capsule.
 	static $defaut_encapsulation = array();
-	static $capsule_dist = array();
 
 	// Détermination du défaut d'encapsulation.
 	if (!isset($defaut_encapsulation[$plugin])) {
@@ -329,21 +328,15 @@ function noisette_encapsuler($plugin, $contenu, $encapsulation, $css, $id_noiset
 			$contexte_capsule = array('id_noisette' => $id_noisette, 'type_noisette' => $type_noisette, 'css' => $css);
 		} else {
 			$nom_capsule = 'dist';
-			$contexte_capsule = array('type_noisette' => $type_noisette);
 		}
 
 		// Si on veut insérer la capsule dist (cas le plus fréquent), on accélère le processus en évitant de 
-		// faire systématiquement un appel à recuperer_fond mais seulement une fois dans un même hit.
-		// On met donc en variable statique la capsule dist compilée avec uniquement le type de noisette évalué, mais pas les styles
-		// et on applique les styles avec un str_replace étant donné que l'on connait la structure de la capsule dist qui n'est jamais
-		// modifiée ni surchargée.
+		// faire systématiquement un appel à recuperer_fond(); on calcule la chaine par concaténation.
 		if ($nom_capsule == 'dist') {
-			if (!isset($capsule_dist[$plugin])) {
-				$capsule = recuperer_fond("capsules/${nom_capsule}", $contexte_capsule);
-				$capsule_dist[$plugin] = $capsule;
-			}
-			$style_dist = $css ? " $css" : '';
-			$capsule = str_replace('[ (#ENV{css})]', $style_dist, $capsule_dist[$plugin]);
+			$capsule =
+'<div class="noisette noisette_' . $type_noisette . ($css ? " $css" : '') . '">
+	<!--noisettes-->
+</div>';
 		} else {
 			$capsule = recuperer_fond("capsules/${nom_capsule}", $contexte_capsule);
 		}
