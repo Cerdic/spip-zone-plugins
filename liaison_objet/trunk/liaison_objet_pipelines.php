@@ -135,11 +135,10 @@ function liaison_objet_formulaire_charger($flux) {
 		}
 
 		//également les  type_liens_OBJET
-
 		$objets_cibles = lire_config('liaison_objet/objets_cible', array());
 
 		foreach ($objets_cibles as $objet) {
-			if ($types_lien = lire_config('liaison_objet/type_liens_' . $objet)) {
+			if ($types_lien = lire_config('liaison_objet/type_liens_' . $objet) and is_array($types_lien)) {
 				$flux['data']['type_liens_' . $objet] = '';
 				foreach ($types_lien as $key => $value) {
 					if ($key)
