@@ -215,7 +215,7 @@ function reservation_evenement_recuperer_fond($flux) {
 		$afficher_inscription_agenda = lire_config('reservation_evenement/afficher_inscription_agenda', '');
 
 		if (!$afficher_inscription_agenda) {
-			$flux['data']['texte'] = preg_replace('/(<div\sclass="champ contenu_places)([^<]|<.+>.*<\/.+>)+(<\/div>)/i', '', $flux['data']['texte']);
+			$flux['data']['texte'] = preg_replace('/(\<div\ class="champ contenu_places"\>)(.+)(<\/div>)/si', '', $flux['data']['texte']);
 		}
 	}
 	return $flux;
