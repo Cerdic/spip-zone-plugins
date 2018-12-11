@@ -248,7 +248,8 @@ function cachelab_filtre_log($cache, $arg) {
 // 
 // #CACHE{session log} loge l'état du sessionnement dans un cache dédié à ce squelette
 // #CACHE{session insert} insère à la fin du cache l'affichage de l'état du sessionnement
-// #CACHE{session echo} affiche l'état du sessionnement (comme var_mode=cache mais en permanence pour ce cache seulement)
+// #CACHE{session echo} affiche l'état du sessionnement comme var_cache 
+// mais pour ce cache seulement et seulement pour les caches dynamiques
 //
 function cachelab_filtre_session (&$cache, $totarg) {
 	if (!is_array($cache) or !isset($cache['source']) or !isset($cache['lastmodified']) or !isset($cache['invalideurs'])) {
@@ -288,14 +289,14 @@ function cachelab_filtre_session (&$cache, $totarg) {
 		global $Memoization;
 		if (!isset($Memoization)) {
 			spip_log ("Erreur dans $source : #CACHE{session insert} nécessite que le plugin Memoization soit activé", 'cachelab_erreur');
-			echo "<div class='debug cachelab'><h6>Erreur dans $source : #CACHE{session insert} nécessite que le plugin Memoization soit activé</h6></div>";
+			echo "<div class='cachelab_blocs'><h6>Erreur dans $source : #CACHE{session insert} nécessite que le plugin Memoization soit activé</h6></div>";
 			break;
 		}
-		$cache['texte'] .= '<'."?php echo '<div class=\"debug cachelab\"><h6>$source sessionné : $sess</h6></div>' ?>";
+		$cache['texte'] .= '<'."?php echo '<div class=\"cachelab_blocs\"><h6>$source sessionné : $sess</h6></div>' ?>";
 		$cache['process_ins'] = 'php';
 		break;
 	case 'echo' :
-		echo "<div class='debug cachelab'><h6>$source sessionné : $sess</h6></div>";
+		echo "<div class='cachelab_blocs'><h6>$source sessionné : $sess</h6></div>";
 		break;
 	case 'log' :
 		spip_log ('session : '.$sess, 'cachelab_session_'.$source_limace);

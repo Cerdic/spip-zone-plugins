@@ -121,6 +121,8 @@ global $Memoization;
 			return;
 		}
 	}
+	else
+		$plusfunc = '';
 
 	// options
 	// explode+strpos par défaut pour les chemins
@@ -270,7 +272,7 @@ global $Memoization;
 	}
 
 	if ($return)
-		$stats['retour'] = $return;
+		$stats['val'] = $return;
 	return $stats;
 }
 

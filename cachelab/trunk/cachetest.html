@@ -1,0 +1,83 @@
+<?php
+// mettez ici la date du jour pour faire les test sans être logé comme admin
+define ('DATE_TEST', '2018-12-11');
+
+include_spip('inc/autoriser');
+if (!autoriser('configurer') and (DATE_TEST!=date('Y-m-d')))
+	die ("Nada. Walou. Que'tchi. Peau de balle");
+?>
+<html>
+<head>
+	#INSERT_HEAD_CSS
+	<style>
+		.decale {margin-left: 2em;}
+	</style>
+</head>
+
+<body>
+[(#UNIT|non)
+<p>! Les inclusions de bas niveau (dans include) sont partagées par les différents tests, donc pour simplifier, il vaut mieux vider les caches entre chaque test.</p>
+<p>- On peut tester logé webmestre ou bien non identifié, sur 2 navigateurs c'est plus facile, et comparer les résultats. Pour tester non identifié, il faut mettre un define à la date du jour au début du cachetest.html du plugin</p>
+<p>- Dans le menu de chaque test, «<code>recalcul et var_cache</code>» active la visualisation des infos de cache</p>
+<p>- Avec Memoization activé par APC ou APCu, XRay permet visualiser les contenus des caches et leurs métadonnées. On trouve les caches concernés en cherchant 'tests/'.</p>
+<h3>Tests</h3>
+<ul>
+<li><a href="[(#SELF|parametre_url{unit,emboite_A})]">emboite_A</a>
+	<div class='decale'>
+		Sessionnement des inclure mixtes gigognes</br>
+		A inclue statiquement B qui inclue dynamiquement C qui est sessionné
+		<xmp>emboite_A(#emboite_B(<emboite_C sessionné>))</xmp>
+	</div>
+</li>	
+<li><a href="[(#SELF|parametre_url{unit,suite_statique})]">suite_statique</a>
+	<div class='decale'>
+		Sessionnement d'une suite de 4 inclusions statiques. 
+		La 2eme est sessionnée.
+		La 2eme et la 3eme font 1 inclusion statique et 1 dynamique
+		<xmp>suite_statique( #statique_A, 
+		#statique_B(sessionné, #include/statB, <include/dynB>) 
+		#statique_C(#include/statC, <include/dynC>)
+		#statique_D )</xmp>
+	</div>
+</li>
+
+<li><a href="[(#SELF|parametre_url{unit,suite_dynamique})]">suite_dynamique</a></li>
+	<div class='decale'>
+		Sessionnement d'une suite de 4 inclusions dynamiques. 
+		La 2eme est sessionnée.
+		La 2eme et la 3eme font 1 inclusion statique et 1 dynamique
+		<xmp>suite_dynamique( #dynamique_A
+		#dynamique_B(sessionné, #include/statB, <include/dynC>) 
+		#dynamique_C(#include/statC, <include/dynB>)
+		#dynamique_D )</xmp>
+	</div>
+</li>
+<li><a href="[(#SELF|parametre_url{unit,suite_modele})]">suite_modele</a></li>
+	<div class='decale'>
+		Sessionnement d'une suite de 4 inclusions de modeles dans le squelette. 
+		Le 2eme modèle est sessionné.
+		Le 2eme et le 3eme font 1 inclusion statique et 1 dynamique
+		<xmp>suite_modele( MODELE test_modele_A
+		MODELE test_modele_B(sessionné, #include/statB, <include/dynB>) 
+		MODELE test_modele_C(#include/statC, <include/dynC>)
+		MODELE test_modele_D )</xmp>
+	</div>
+</li>
+</ul>
+]
+
+[(#ENV{unit}|oui)
+	#SET{var_recalcul,#ENV{var_mode}|=={recalcul}}
+	<div>
+		<a href="[(#SELF|parametre_url{unit,''})]">Menu</a> - | -
+		<a href="#SELF">Sans recalcul</a> - 
+		<a href="#SELF&var_mode=recalcul">Avec recalcul</a> - 
+		<a href="#SELF&var_mode=recalcul&var_cache=oui">Avec recalcul et var_cache</a>
+	</div>
+
+	<h1>test : #UNIT</h1>
+	<INCLURE{fond=tests/#UNIT}>
+]
+
+</body>
+</html>

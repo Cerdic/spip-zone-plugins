@@ -123,9 +123,13 @@ global $Memoization;
 	};
 
 static $var_cache;
+	$infos = $hint_squel = '';
 	if (!isset($var_cache))
-		$var_cache = ((strpos(_request('var_mode'), 'cache') !== false) or _request('var_cache'));
-	$hint_squel = ($var_cache ? ' title="'.attribut_html($page['source']).'" ' : '');
+		$var_cache = _request('var_cache');
+	if ($var_cache=='sessionnement') // on veut le sessionnement seul à l'écran
+		$hint_squel = ' title="'.attribut_html($page['source']).'" ';
+	else
+		$infos = $page['source'];		// on prépare les infos supplémentaires
 
 	// Pour le calcul dynamique d'une durée de cache, la fonction user
 	// reçoit la *valeur* de l'une des valeurs de l'environnement (par défaut "date_creation")
@@ -142,7 +146,7 @@ static $var_cache;
 			spip_log ("#CACHE $f ($arg={$page['contexte'][$arg]}) renvoie : $duree s", "cachelab");
 
 			if ($var_cache)
-				echo "<div class='inclure_blocs cachelab_blocs' $hint_squel><h6>Durée dynamique : $duree</h6></div>";
+				echo "<div class='cachelab_blocs' $hint_squel><h6>Durée dynamique : $duree</h6><small>$infos</small></div>";
 
 			$page['duree'] = $duree;
 			$page['entetes']['X-Spip-Cache']=$duree;
@@ -175,7 +179,7 @@ static $var_cache;
 	}
 	
 	if ($var_cache)
-		echo '<div class="inclure_blocs cachelab_blocs" '.$hint_squel.'><h6>Sessionnement : '
+		echo '<div class="cachelab_blocs" '.$hint_squel.'><h6>Sessionnement : '
 				.cachelab_etat_sessionnement($page['invalideurs'], 'précis')
-			 .'</h6></div>';
+			 .'</h6><small>'.$infos.'</small></div>';
 }

@@ -1,7 +1,7 @@
 <paquet
 	prefix="cachelab"
 	categorie="outil"
-	version="0.9.0"
+	version="0.10.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/cachelab-32.png"
@@ -11,4 +11,6 @@
 	<!-- Invalidation ciblée et autres actions sur des caches APC filtrés des squelettes SPIP -->
 	<auteur lien="https://contrib.spip.net/JLuc">JLuc</auteur>
 	<credit lien="https://thenounproject.com/term/lab/1796357/">Icone de Nawicon Studio, Licence Creative Commons</credit>
+
+	<pipeline nom="insert_head_css" inclure="cachelab_pipelines.php" />
 </paquet>
