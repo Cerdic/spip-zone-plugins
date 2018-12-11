@@ -23,8 +23,18 @@ function mailsubscribers_start_update_mailsubscribinglist_segment($id_mailsubscr
 
 	// placer le pointeur sur les subscriptions pour le genie
 	// uniquement sur les subscribers qui ont au moins un des segments valide (sinon si tout refuse il n'y aura rien a faire)
-	$in_subscribers_valides = sql_get_select("DISTINCT zz.id_mailsubscriber", "spip_mailsubscriptions as zz", "zz.statut!=".sql_quote('refuse') . ' AND zz.id_mailsubscribinglist='.intval($id_mailsubscribinglist));
-	sql_updateq('spip_mailsubscriptions', array('actualise_segments' => 1), 'id_segment=0 AND id_mailsubscribinglist=' . intval($id_mailsubscribinglist) . " AND id_mailsubscriber IN ($in_subscribers_valides)");
+	// on est oblige de faire des series de allfetsel/update car on ne peut pas faire un update avec ne sous requete comme celle la
+	$n = 0;
+	while ($in_subscribers_valides = sql_allfetsel(
+		"DISTINCT id_mailsubscriber",
+		"spip_mailsubscriptions",
+		"statut!=" . sql_quote('refuse') . ' AND actualise_segments=0 AND id_segment=0 AND id_mailsubscribinglist=' . intval($id_mailsubscribinglist), '', '', '0,10000')){
+		$in_subscribers_valides = array_column($in_subscribers_valides, 'id_mailsubscriber');
+		sql_updateq('spip_mailsubscriptions', array('actualise_segments' => 1), 'id_segment=0 AND id_mailsubscribinglist=' . intval($id_mailsubscribinglist) . " AND " . sql_in('id_mailsubscriber', $in_subscribers_valides));
+		spip_log("actualise_segments=1 sur liste $id_mailsubscribinglist et " . count($in_subscribers_valides) . ' inscrits', 'mailsubscribers');
+		$n += count($in_subscribers_valides);
+	}
+	spip_log("actualise_segments=1 sur liste $id_mailsubscribinglist et TOTAL $n inscrits", 'mailsubscribers');
 }
 
 /**
