@@ -17,7 +17,7 @@ function SetAllMargins($TopMargin, $LeftMargin, $BottomMargin, $RightMargin)
 	$this->SetMargins($LeftMargin,$TopMargin,$RightMargin);
 
 	// bas
-	$this->SetAutoPageBreak(auto, $BottomMargin*3/2);
+	$this->SetAutoPageBreak('auto', $BottomMargin*3/2);
 }
 
 

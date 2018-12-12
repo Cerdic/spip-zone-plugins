@@ -7,7 +7,7 @@
  */
 
  //  Fichier de dump pour debug
-define (DUMP_FILE_FULL_PATH_NAME,"Dump.txt");
+define ('DUMP_FILE_FULL_PATH_NAME',"Dump.txt");
 
 class PDF extends FPDF
 {
@@ -47,12 +47,9 @@ var $CurrentTag=array();
 
 function Build($OutputFileFullPathName)
 {
-	$this->Open();
-
 	$this->BuildDocument() ;
 
-	$this->Output($OutputFileFullPathName);
-
+	$this->Output('F', $OutputFileFullPathName);
 	$this->Close();
 }
 
@@ -73,7 +70,7 @@ function AddCol($field=-1,$width=-1,$align='L')
 function PDF($orientation='P', $unit='mm', $format='A4')
 {
 	//Appel au constructeur parent
-	$this->FPDF($orientation, $unit, $format);
+	$this->__construct($orientation, $unit, $format);
 	$this->SetCompression(1);
 
 	//$this->InitDumpFile();
@@ -86,7 +83,7 @@ function unhtmlentities($string)
 	$trans_tbl = get_html_translation_table (HTML_ENTITIES);
 	$trans_tbl = array_flip ($trans_tbl);
 	$ret = strtr ($string, $trans_tbl);
-	return preg_replace('/&#(\d+);/me', "chr('\\1')",$ret);
+	return preg_replace_callback('/&#(\d+);/m', chr($matches[1]),$ret);
 }
 
 function WriteHTML($html,$LineFeedHeight)

@@ -19,6 +19,5 @@
 	<pipeline nom="build_pdf" inclure="article_pdf_pipelines.php" />
 
 	<lib nom="h5c1accba-fpdf181" lien="http://www.fpdf.org/fr/download/fpdf181.zip" />
-
 	<necessite nom="PHP" compatibilite="[7;]" />
 </paquet>
