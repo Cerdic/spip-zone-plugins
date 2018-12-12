@@ -1,9 +1,13 @@
 <?php
-// mettez ici la date du jour pour faire les test sans être logé comme admin
-define ('DATE_TEST', '2018-12-11');
+// Définissez la constante avec la date du jour ou avec 'TOUJOURS' 
+// pour faire les tests sans être logé comme admin
+if (!defined('CACHELAB_DATE_TESTS'))
+	define ('CACHELAB_DATE_TESTS', '2018-12-12');
 
 include_spip('inc/autoriser');
-if (!autoriser('configurer') and (DATE_TEST!=date('Y-m-d')))
+if (!autoriser('configurer') 
+	and (CACHELAB_DATE_TESTS != 'TOUJOURS') 
+	and (CACHELAB_DATE_TESTS != date('Y-m-d')))
 	die ("Nada. Walou. Que'tchi. Peau de balle");
 ?>
 <html>
@@ -22,6 +26,12 @@ if (!autoriser('configurer') and (DATE_TEST!=date('Y-m-d')))
 <p>- Avec Memoization activé par APC ou APCu, XRay permet visualiser les contenus des caches et leurs métadonnées. On trouve les caches concernés en cherchant 'tests/'.</p>
 <h3>Tests</h3>
 <ul>
+<li><a href="[(#SELF|parametre_url{unit,test_des_tests})]">test des tests</a>
+	<div class='decale'>
+		Vérifie le bon fonctionnement des assertions
+		<xmp>test_des_tests(erreur_sessionne dyn_B erreur_non_sessionne dyn_C)</xmp>
+	</div>
+</li>	
 <li><a href="[(#SELF|parametre_url{unit,emboite_A})]">emboite_A</a>
 	<div class='decale'>
 		Sessionnement des inclure mixtes gigognes</br>
@@ -35,7 +45,7 @@ if (!autoriser('configurer') and (DATE_TEST!=date('Y-m-d')))
 		La 2eme est sessionnée.
 		La 2eme et la 3eme font 1 inclusion statique et 1 dynamique
 		<xmp>suite_statique( #statique_A, 
-		#statique_B(sessionné, #include/statB, <include/dynB>) 
+		#statique_B SESSIONNÉ( #include/statB, <include/dynB> )
 		#statique_C(#include/statC, <include/dynC>)
 		#statique_D )</xmp>
 	</div>
@@ -47,7 +57,7 @@ if (!autoriser('configurer') and (DATE_TEST!=date('Y-m-d')))
 		La 2eme est sessionnée.
 		La 2eme et la 3eme font 1 inclusion statique et 1 dynamique
 		<xmp>suite_dynamique( #dynamique_A
-		#dynamique_B(sessionné, #include/statB, <include/dynC>) 
+		#dynamique_B SESSIONNÉ( #include/statB, <include/dynC>) 
 		#dynamique_C(#include/statC, <include/dynB>)
 		#dynamique_D )</xmp>
 	</div>
@@ -58,7 +68,7 @@ if (!autoriser('configurer') and (DATE_TEST!=date('Y-m-d')))
 		Le 2eme modèle est sessionné.
 		Le 2eme et le 3eme font 1 inclusion statique et 1 dynamique
 		<xmp>suite_modele( MODELE test_modele_A
-		MODELE test_modele_B(sessionné, #include/statB, <include/dynB>) 
+		MODELE test_modele_B SESSIONNÉ( #include/statB, <include/dynB>) 
 		MODELE test_modele_C(#include/statC, <include/dynC>)
 		MODELE test_modele_D )</xmp>
 	</div>

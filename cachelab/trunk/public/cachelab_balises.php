@@ -263,8 +263,10 @@ function cachelab_filtre_session (&$cache, $totarg) {
 	$invalideurs = $cache['invalideurs'];
 
 	$sess = cachelab_etat_sessionnement($invalideurs, 'avec_details');
-
+	$avec_echo = false;
 	switch ($func) {
+		case 'assert_echo' :
+			$avec_echo = true;
 		case 'assert' :
 			switch($what) {
 				case 'oui_login' :
@@ -282,8 +284,15 @@ function cachelab_filtre_session (&$cache, $totarg) {
 					spip_log ("Erreur de syntaxe : '$what' incorrect dans #CACHE{session $totarg}, il faut oui, oui_login, oui_anonyme, non ou anonyme", 'cachelab_erreur');
 					break 2;
 			}
-			if (!$ok)
+			if (!$ok)  {
 				spip_log ("$source : session n'est pas '$what'. invalideurs=".print_r($invalideurs,1), "cachelab_assertsession");
+				if ($avec_echo) {
+					echo "<div class='cachelab_blocs cachelab_assert'>
+						<h6>Sessionnement $sess devrait être $what</h6>
+						<small>Sessionnement incorrect pour $source</small>
+						</div>";
+				}
+			}
 			break;
 	case 'insert' :
 		global $Memoization;
