@@ -10,8 +10,8 @@
 [(#UNIT|non)
 <p>On peut tester logé administrateur ou bien non identifié. Sur 2 navigateurs c'est plus facile, et comparer les résultats. Pour tester non identifié, il faut mettre un define('CACHELAB_DATE_TESTS','2018-12-12') à la date du jour ou à 'TOUJOURS' dans votre fichier d'options</p>
 <p>Dans le menu de chaque test, «<code>recalcul et assert</code>» active les assertions, et «<code>recalcul et var_cache</code>» active la visualisation des infos de sessionnement des caches</p>
-<p>Avec Memoization activé par APC ou APCu, XRay permet visualiser les contenus des caches et leurs métadonnées. On trouve les caches concernés en cherchant 'tests/'.</p>
-<p>Dans chaque noisette*, il y a une assertion sur le sessionnement qui affiche une erreur si le sessionnement n'est pas comme attendu.  <small>* Sauf les inclusions de plus bas niveau, dans tests/inclure, qui sont partagées par les différents tests.</small></p>
+<p>Avec Memoization activé par APC ou APCu, XRay permet visualiser les contenus des caches et leurs métadonnées. On trouve les caches concernés en cherchant 'cachetests/'.</p>
+<p>Dans chaque noisette*, il y a une assertion sur le sessionnement qui affiche une erreur si le sessionnement n'est pas comme attendu.  <small>* Sauf certaines inclusions de plus bas niveau, dans cachetests/inclure, qui ne génèrent pas de sessionnement et qui sont partagées par les différents tests.</small></p>
 ]
 <?php
 if (!defined('CACHELAB_DATE_TESTS'))
@@ -85,7 +85,7 @@ if (!autoriser('configurer')
 	</div>
 
 	<h1>test : #UNIT</h1>
-	<INCLURE{fond=tests/#UNIT}>
+	<INCLURE{fond=cachetests/#UNIT}>
 ]
 
 </body>
