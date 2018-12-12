@@ -68,7 +68,7 @@ You can choose a new identifier or suffix the reference identifier as follows:
 	'explication_glisser_deposer' => 'The types of nuts that can be added to the blocks of the page are listed below.',
 	'explication_heritages_composition' => 'The composition being edited is based on the "@type@" content type that has child content types. You can define for each type of child content a composition to apply by default.',
 	'explication_noisette' => 'Nut type « @noisette@ »',
-	'explication_noisette_css' => 'You can add to the wrapping nut tag any additional CSS classes.',
+	'explication_noisette_css' => 'You can add to the wrapping nut tag any additional CSS classes.', # MODIF
 	'explication_noizetier_ajax' => 'The default AJAX inclusion mode can be changed individually for each nut (YAML file).',
 	'explication_noizetier_balise' => 'The default mode of inclusion in a wrapping tag can be modified individually for each nut (parameterization).', # MODIF
 	'explication_noizetier_profondeur_max' => 'You can nest container-type nuts. Choose the number of nesting levels you want.', # MODIF
@@ -152,10 +152,9 @@ nuts on the following pages:', # MODIF
 	'label_description_code' => 'Description:',
 	'label_identifiant' => 'identifier:',
 	'label_niveau_titre' => 'Title level:',
-	'label_noisette_balise' => 'Wrapping tag',
 	'label_noisette_css' => 'CSS classes',
 	'label_noizetier_ajax' => 'By default, include each nut in AJAX',
-	'label_noizetier_balise' => 'By default, include each nut in a tag',
+	'label_noizetier_balise' => 'By default, include each nut in a tag', # MODIF
 	'label_texte' => 'Text:',
 	'label_texte_introductif' => 'Introduction text (optional):',
 	'label_titre' => 'Title:',
@@ -202,9 +201,6 @@ nuts on the following pages:', # MODIF
 
 	// O
 	'operation_annulee' => 'Operation canceled.',
-	'option_noisette_balise_defaut' => 'Use the default mode configured for the noiZetier <em>(@defaut@)</em>',
-	'option_noisette_balise_non' => 'Never use a wrapping tag', # MODIF
-	'option_noisette_balise_oui' => 'Always use a wrapping tag', # MODIF
 	'oui' => 'Yes',
 
 	// P

@@ -158,8 +158,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_description_code' => 'Description :',
 	'label_identifiant' => 'identifiant :',
 	'label_niveau_titre' => 'Niveau du titre :',
-	'label_noisette_encapsulation' => 'Encapsulation',
 	'label_noisette_css' => 'Classes CSS',
+	'label_noisette_encapsulation' => 'Encapsulation',
 	'label_noizetier_ajax' => 'Par défaut, inclure chaque noisette en AJAX',
 	'label_noizetier_balise' => 'Par défaut, inclure chaque noisette dans une capsule (markup HTML)',
 	'label_texte' => 'Texte :',
@@ -208,11 +208,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'operation_annulee' => 'Opération annulée.',
-	'option_noisette_encapsulation_oui' => 'Inclure la noisette dans une capsule',
 	'option_noisette_encapsulation_defaut' => 'Utiliser le mode par défaut configuré pour le noiZetier <em>(@defaut@)</em>',
 	'option_noisette_encapsulation_non' => 'Ne jamais encapsuler la noisette',
-	'option_noizetier_encapsulation_oui' => 'avec encapsulation',
+	'option_noisette_encapsulation_oui' => 'Inclure la noisette dans une capsule',
 	'option_noizetier_encapsulation_non' => 'sans encapsulation',
+	'option_noizetier_encapsulation_oui' => 'avec encapsulation',
 	'oui' => 'Oui',
 
 	// P

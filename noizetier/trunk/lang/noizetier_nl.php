@@ -69,7 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_glisser_deposer' => 'De types nootjes die aan de blokken van deze pagina kunnen worden toegevoegd staan hieronder.',
 	'explication_heritages_composition' => 'De momenteel bewerkte compositie is gebaseerd op het inhoudstype « @type@ » dat onderliggende types heeft. Je kunt voor ieder onderliggend type een standaard toe te passen compositie aangeven.',
 	'explication_noisette' => 'Nootje van type « @noisette@ »',
-	'explication_noisette_css' => 'Je kunt een alles omhullend baken opnemen voor aanvullende  CSS classes.',
+	'explication_noisette_css' => 'Je kunt een alles omhullend baken opnemen voor aanvullende  CSS classes.', # MODIF
 	'explication_noizetier_ajax' => 'De standaard AJAX modus kan voor ieder nootje individueel worden aangepast (YAML-bestand).',
 	'explication_noizetier_balise' => 'De standaard modus in een alles omhullend baken kan voor ieder individueel nootje worden aangepast (parameters).', # MODIF
 	'explication_noizetier_cfg_constant' => 'Deze waarde wordt momenteel door een constante bepaald en kan hier niet worden aangepast.',
@@ -154,10 +154,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_description_code' => 'Omschrijving:',
 	'label_identifiant' => 'identificatie:',
 	'label_niveau_titre' => 'Niveau van de titel:',
-	'label_noisette_balise' => 'Alles omhullend baken',
 	'label_noisette_css' => 'CSS classes',
 	'label_noizetier_ajax' => 'Ieder nootje standaard in AJAX opnemen',
-	'label_noizetier_balise' => 'Neem standaard ieder nootje in een baken op',
+	'label_noizetier_balise' => 'Neem standaard ieder nootje in een baken op', # MODIF
 	'label_texte' => 'Tekst:',
 	'label_texte_introductif' => 'Introductietekst (optioneel):',
 	'label_titre' => 'Titel:',
@@ -204,9 +203,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'operation_annulee' => 'Handeling geannuleerd.',
-	'option_noisette_balise_defaut' => 'Gebruik de standaard voor noiZetier ingestelde modus <em>(@defaut@)</em>',
-	'option_noisette_balise_non' => 'Gebruik nooit omhullende bakens', # MODIF
-	'option_noisette_balise_oui' => 'Gebruik altijd een omhullend baken', # MODIF
 	'oui' => 'Ja',
 
 	// P
