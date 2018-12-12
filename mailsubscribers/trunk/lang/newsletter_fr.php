@@ -7,8 +7,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_subscribe' => 'M\'inscrire à la Newsletter',
-	'bouton_unsubscribe' => 'Me désinscrire de la Newsletter',
+	'bouton_subscribe' => 'M\'inscrire à cette Newsletter',
+	'bouton_unsubscribe' => 'Me désinscrire de cette Newsletter',
 	'bouton_unsubscribe_all' => 'Me désinscrire de TOUTES les Newsletters',
 
 	// L
