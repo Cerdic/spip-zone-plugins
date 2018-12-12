@@ -1,15 +1,3 @@
-<?php
-// Définissez la constante avec la date du jour ou avec 'TOUJOURS' 
-// pour faire les tests sans être logé comme admin
-if (!defined('CACHELAB_DATE_TESTS'))
-	define ('CACHELAB_DATE_TESTS', '2018-12-12');
-
-include_spip('inc/autoriser');
-if (!autoriser('configurer') 
-	and (CACHELAB_DATE_TESTS != 'TOUJOURS') 
-	and (CACHELAB_DATE_TESTS != date('Y-m-d')))
-	die ("Nada. Walou. Que'tchi. Peau de balle");
-?>
 <html>
 <head>
 	#INSERT_HEAD_CSS
@@ -20,22 +8,33 @@ if (!autoriser('configurer')
 
 <body>
 [(#UNIT|non)
-<p>! Les inclusions de bas niveau (dans include) sont partagées par les différents tests, donc pour simplifier, il vaut mieux vider les caches entre chaque test.</p>
-<p>- On peut tester logé webmestre ou bien non identifié, sur 2 navigateurs c'est plus facile, et comparer les résultats. Pour tester non identifié, il faut mettre un define à la date du jour au début du cachetest.html du plugin</p>
-<p>- Dans le menu de chaque test, «<code>recalcul et var_cache</code>» active la visualisation des infos de cache</p>
-<p>- Avec Memoization activé par APC ou APCu, XRay permet visualiser les contenus des caches et leurs métadonnées. On trouve les caches concernés en cherchant 'tests/'.</p>
+<p>On peut tester logé administrateur ou bien non identifié. Sur 2 navigateurs c'est plus facile, et comparer les résultats. Pour tester non identifié, il faut mettre un define('CACHELAB_DATE_TESTS','2018-12-12') à la date du jour ou à 'TOUJOURS' dans votre fichier d'options</p>
+<p>Dans le menu de chaque test, «<code>recalcul et assert</code>» active les assertions, et «<code>recalcul et var_cache</code>» active la visualisation des infos de sessionnement des caches</p>
+<p>Avec Memoization activé par APC ou APCu, XRay permet visualiser les contenus des caches et leurs métadonnées. On trouve les caches concernés en cherchant 'tests/'.</p>
+<p>Dans chaque noisette*, il y a une assertion sur le sessionnement qui affiche une erreur si le sessionnement n'est pas comme attendu.  <small>* Sauf les inclusions de plus bas niveau, dans tests/inclure, qui sont partagées par les différents tests.</small></p>
+]
+<?php
+if (!defined('CACHELAB_DATE_TESTS'))
+	define ('CACHELAB_DATE_TESTS', '2018-01-01');
+
+include_spip('inc/autoriser');
+if (!autoriser('configurer') 
+	and (CACHELAB_DATE_TESTS != 'TOUJOURS') 
+	and (CACHELAB_DATE_TESTS != date('Y-m-d')))
+	die ('Nada. Walou. Que’tchi. Peau de balle, c’est pas le moment pour toi.');
+?>
+[(#UNIT|non)
 <h3>Tests</h3>
 <ul>
 <li><a href="[(#SELF|parametre_url{unit,test_des_tests})]">test des tests</a>
 	<div class='decale'>
-		Vérifie le bon fonctionnement des assertions
+		Vérifie le bon fonctionnement des assertions : produit 2 asserts intentionnels.
 		<xmp>test_des_tests(erreur_sessionne dyn_B erreur_non_sessionne dyn_C)</xmp>
 	</div>
 </li>	
 <li><a href="[(#SELF|parametre_url{unit,emboite_A})]">emboite_A</a>
 	<div class='decale'>
-		Sessionnement des inclure mixtes gigognes</br>
-		A inclue statiquement B qui inclue dynamiquement C qui est sessionné
+		Sessionnement des inclure mixtes gigognes : A inclue statiquement B qui inclue dynamiquement C qui est sessionné
 		<xmp>emboite_A(#emboite_B(<emboite_C sessionné>))</xmp>
 	</div>
 </li>	
@@ -80,9 +79,9 @@ if (!autoriser('configurer')
 	#SET{var_recalcul,#ENV{var_mode}|=={recalcul}}
 	<div>
 		<a href="[(#SELF|parametre_url{unit,''})]">Menu</a> - | -
-		<a href="#SELF">Sans recalcul</a> - 
-		<a href="#SELF&var_mode=recalcul">Avec recalcul</a> - 
-		<a href="#SELF&var_mode=recalcul&var_cache=oui">Avec recalcul et var_cache</a>
+		<a href="#SELF">sans recalcul</a> - 
+		<a href="#SELF&var_mode=recalcul">recalcul et assert</a> -
+		<a href="#SELF&var_mode=recalcul&var_cache=oui">recalcul et var_cache</a>
 	</div>
 
 	<h1>test : #UNIT</h1>
