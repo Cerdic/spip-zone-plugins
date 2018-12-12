@@ -1,0 +1,147 @@
+#CACHE{0}
+<?php
+
+	// Mode release => $debug=0
+	// Mode debug => $debug=1
+	
+	<B_principale>
+	<BOUCLE_principale(ARTICLES){id_article}>
+	
+	$conf_url_site = '[(#URL_ARTICLE|url_absolue|texte_script)]' ;
+	$conf_nom_site = '[(#NOM_SITE_SPIP|pdf_first_clean|supprimer_tags|texte_script)]' ;
+	
+	// Recuperation et definition des differents elements
+	
+	$site='[(#NOM_SITE_SPIP|pdf_first_clean|supprimer_tags|texte_script)]';
+	$rubrique='<B_rubrique_mere><BOUCLE_rubrique_mere(RUBRIQUES){id_rubrique}>[(#TITRE|supprimer_numero|pdf_first_clean|supprimer_tags|texte_script)]</BOUCLE_rubrique_mere></B_rubrique_mere>[(#NOM_SITE_SPIP|pdf_first_clean|supprimer_tags|texte_script)]<//B_rubrique_mere>';
+	$DateParution='[(#DATE_REDAC|affdate|pdf_first_clean|texte_script)]';
+	$DateMiseEnLigne='[(#DATE|nom_jour|texte_script)] [(#DATE|affdate|pdf_first_clean|texte_script)]';
+	
+	/*$auteur='<BOUCLE_auteurs(AUTEURS){id_article}{", "}>[(#NOM|pdf_first_clean|texte_script)]</BOUCLE_auteurs>';*/
+	$motsclef='<BOUCLE_keywords(MOTS){id_article}{", "}>[(#TITRE|pdf_first_clean|supprimer_tags|texte_script)]</BOUCLE_keywords>';
+	$yahoo='-<BOUCLE_yahoo(HIERARCHIE){id_article}> [(#TITRE|supprimer_numero|pdf_first_clean|supprimer_tags|texte_script)] - </BOUCLE_yahoo>';
+
+	$logo_site='[(#LOGO_SITE_SPIP|extraire_attribut{src}|texte_script)]';
+	$logo_site = preg_replace(',[?][0-9]+$,','',$logo_site);
+	// attention à l'ordre des filtres SPIP
+	$logo_fichier='[(#LOGO_ARTICLE_RUBRIQUE|texte_script|extraire_attribut{src})]'; //fonctionne correctement
+	$logo_fichier = preg_replace(',[?][0-9]+$,','',$logo_fichier);
+//  [$logo_lien="(#URL_ARTICLE)";]
+		
+	[$surtitre='(#SURTITRE|pdf_first_clean|supprimer_tags|texte_script)';]
+	[$titre='(#TITRE|supprimer_numero|pdf_first_clean|supprimer_tags|texte_script)';]
+	[$soustitre='(#SOUSTITRE|pdf_first_clean|supprimer_tags|texte_script)';]
+	[$chapo='(#CHAPO|pdf_first_clean|texte_script)';]
+	[$descriptif='(#DESCRIPTIF|pdf_first_clean|texte_script)';]
+	[$texte= '(#TEXTE|image_reduire{400,400}|abs_url|pdf_first_clean|texte_script)';]
+	[$ps='(#PS|pdf_first_clean|texte_script)';]
+	[$notes='(#NOTES|pdf_first_clean|texte_script)';]
+	
+	$copyright = '[(#VAL{articlepdf:copyright}|_T|pdf_first_clean|texte_script)][(#NOM_SITE_SPIP|pdf_first_clean|supprimer_tags|texte_script)][(#VAL{articlepdf:tous_droits_reserves}|_T|pdf_first_clean|texte_script)]';
+
+	$id_article = "#ID_ARTICLE";
+	
+	$files_pdf = '[(#TITRE|pdf_nommer_ancien{article, #ID_ARTICLE})]';	
+	$file_out = _DIR_STOCK_PDF . $files_pdf ;
+	
+	$files_pdf_new = '[(#TITRE|pdf_nommer{article, #ID_ARTICLE})]';
+	$file_out_new = _DIR_STOCK_PDF . $files_pdf_new ;
+	
+	//creer un pdf avec un nouveau nom que si un ancien n'existe pas
+	if (!file_exists($file_out)) {
+		$file_out = $file_out_new ;
+		$files_pdf = $files_pdf_new;
+	}
+	
+	if (file_exists($file_out)) 
+	{
+		clearstatcache;
+		$damo = date(YmdHi , strtotime("#DATE_MODIF")) ;
+		$dage = date(YmdHi , filemtime($file_out)) ;
+		if ($damo > $dage)
+		{
+			unlink($file_out);
+		}
+	}
+	
+	</BOUCLE_principale>
+	</B_principale>
+	header("Location: index.php");
+	exit; 
+	<//B_principale>
+	
+	if ($debug == 1 && file_exists($file_out)) 
+	{
+		unlink($file_out);
+	}
+	
+	if (!file_exists($file_out)) 
+	{
+	
+		define('FPDF_FONTPATH',_DIR_FPDF_LIB.'font');
+		include_spip(_DIR_FPDF_LIB.'fpdf');
+		include_spip('pdf/lib_pdf_global');
+		include_spip('pdf/lib_pdf_spip');
+	
+		//--------------------------------
+		// Debut génération du PDF
+		//--------------------------------
+		$pdf->debug=$debug;
+		$pdf=new PDF_SPIP();
+		
+		$pdf->SetCompression(false);
+		$pdf->SetDisplayMode(fullpage, single );	
+		
+		// haut, gauche,  bas, droite
+		$pdf->SetAllMargins(12,15,12,10);
+	
+		$pdf->SetTitle($titre);
+		$pdf->SetCreator($site);
+		$pdf->SetCopyright($copyright);
+		$pdf->SetSubject($rubrique);
+		$pdf->SetKeywords($motsclef);
+	
+		$pdf->Build($file_out);
+		
+		$lier_pdf = pipeline('build_pdf',array(
+			'args'=>array(
+				'objet' 	=> 'article',
+				'id_objet' 	=> $id_article,
+				'file_name' => $files_pdf
+			), 
+			'data'=> $file_out,
+    	));
+		
+	}
+	
+	$id_document = $lier_pdf[data][$file_out];
+	if($id_document > 0){
+		$file_out = '#URL_DOCUMENT{$id_document}';
+	}
+
+		// Vous voulez afficher un pdf
+		header("Content-type: application/pdf");
+	//Si on est en mutualisé avec masquages des vraies urls d'images
+	if (stripos($GLOBALS['spip_pipeline']['affichage_final'],'mutualisation_url_img_courtes')){
+		$file_out = str_replace(_DIR_IMG,_DIR_RACINE . _NOM_PERMANENTS_ACCESSIBLES,$file_out);
+	}
+	if ($debug==1)
+	{
+		// Affiche le PDF directement dans l'onglet de Firefox
+		// Ne fonctionne pas sous IE 6 SP2 : le pdf n'est pas reconnu (pris pour un fichier texte)
+		header("location: ". url_de_base() . $file_out);
+	}
+	else
+	{
+		// Il sera nommé $files_pdf
+		// ATTENTION : pour "filename", mettre un nom de fichier court (<nom>.<extension>)
+		// sinon IE 6 SP2 ne reconnaîtra pas le type de fichier
+		// Semble poser problème sous IE6 SP1
+		// Ah,  Microsoft, je vous jure !
+		header('Content-Disposition: attachment; filename=' . $files_pdf);
+
+		// Le source du PDF original.pdf
+		readfile($file_out);
+	}
+
+	exit; 
