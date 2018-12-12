@@ -27,7 +27,7 @@
 
 	$logo_site='[(#LOGO_SITE_SPIP|extraire_attribut{src}|texte_script)]';
 	// attention à l'ordre des filtres SPIP
-	[$logo_fichier='(#LOGO_RUBRIQUE|extraire_attribut{src}|texte_script|supprimer_param_logo)';] 
+	[$logo_fichier='(#LOGO_RUBRIQUE|extraire_attribut{src}|texte_script|supprimer_param_logo)';]
 
 //  [$logo_lien="(#URL_ARTICLE)";]
 
@@ -120,13 +120,13 @@
 	if (!file_exists($file_out))
 	{
 
-	
-		
+
+
 		define('FPDF_FONTPATH',_DIR_FPDF_LIB.'font');
 		include_spip(_DIR_FPDF_LIB.'fpdf');
 		include_spip('pdf/lib_pdf_global');
 		include_spip('pdf/lib_pdf_spip');
-		
+
 		//--------------------------------
 		// Debut génération du PDF
 		//--------------------------------
