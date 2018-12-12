@@ -1,10 +1,10 @@
 <?php
 
 /**
- * class PDF_SPIP extends PDF : 
+ * class PDF_SPIP extends PDF :
  */
- 
- 
+
+
 class PDF_SPIP extends PDF
 {
 //Private properties
@@ -15,7 +15,7 @@ function SetAllMargins($TopMargin, $LeftMargin, $BottomMargin, $RightMargin)
 {
 	// gauche, haut, droite
 	$this->SetMargins($LeftMargin,$TopMargin,$RightMargin);
-	
+
 	// bas
 	$this->SetAutoPageBreak(auto, $BottomMargin*3/2);
 }
@@ -24,40 +24,40 @@ function SetAllMargins($TopMargin, $LeftMargin, $BottomMargin, $RightMargin)
 function Header()
 {
 	global $titre ;
-	
+
 	$this->SetY($this->tMargin/2);
 	$this->SetLineWidth(0.3);
 	$this->Line($this->lMargin - 3, $this->tMargin, $this->w - $this->rMargin + 3, $this->tMargin);
-	
+
 	//Police helvetica gras 8
 	$this->SetFont('helvetica','B',12);
 	$this->SetTextColor(0,0,0);
 
 	$this->Cell(0,$this->tMargin/2, $titre ,0,0,'C');
-	
+
 	// $this->tMargin = marge du haut, définie dans FPDF
 	$this->Ln(9);
 }
 
 
-/* /// Pied de page du document) 
+/* /// Pied de page du document)
 /* ///////////////////////////// */
 function Footer()
 {
 	global $conf_nom_site , $conf_url_site  ;
-	
-	$this->SetY(-$this->bMargin/2);	
+
+	$this->SetY(-$this->bMargin/2);
 	$this->SetLineWidth(0.3);
 	$this->Line($this->lMargin - 3, $this->GetY(), $this->w - $this->rMargin + 3, $this->GetY());
-	
-	
-	//Police helvetica 8	
+
+
+	//Police helvetica 8
 	$this->SetFont('helvetica','I',8);
 	$this->SetTextColor(0,0,0);
 
 	// Copyright
 	$this->Cell(0,6,texte_script(pdf_first_clean(_T('articlepdf:copyright'))).$conf_nom_site ,0,0,'L',0,$conf_url_site );
-	
+
 	//Numéro de page
 	$this->SetX($this->w-$this->rMargin*2-5);
 	$this ->Cell(0,6,'Page '.$this->PageNo().'/{nb}', 0, 1, 'C');
@@ -70,8 +70,8 @@ function GenerateTitlePage()
 	global $auteur, $descriptif;
 	global $conf_url_site;
 	global $DateParution,$DateMiseEnLigne;
-	
-	
+
+
 	// En-tête
 	if (isset($logo_site) and $logo_site)
 	{
@@ -82,34 +82,34 @@ function GenerateTitlePage()
 		$position_y = 50;
 		$this->Image($logo_site, $position_x, $position_y, $largeur);
 	}
-	
+
 	$this->SetFont('times','',12);
 	$this->SetXY($this->rMargin+25,$this->tMargin+6);
 	//$this->MultiCell(0,5, texte_script(pdf_first_clean(_T('articlepdf:extrait_de'))) . $site);
-	
+
 	$this->SetXY($this->rMargin+25,$this->tMargin+14);
 	$this->PutLink($conf_url_site,$conf_url_site);
-	
-	
+
+
 	//Surtitre (type du document)
 	$this->unhtmlentities($surtitre);
 	$this->SetXY(20,92);
 	$this->SetFont('courier','B',14);
 	$this->MultiCell(170,6,$surtitre,0,'C',0);
-	
-	
+
+
 	//Titre centré
 	$this->SetXY(20,100);
 	$this->SetFont('helvetica','B',32);
 	$this->unhtmlentities($titre);
 	$this->MultiCell(170,20,$titre,0,'C',0);
-	
-	
+
+
 	// Rubriques
 	$this->Ln(2);
 	$this->SetFont('helvetica','',8);
 	$this->MultiCell(0,5,$yahoo,0,'C',0);
-	
+
 	// Logo
 
 	if (isset($logo_fichier) and $logo_fichier) {
@@ -122,27 +122,27 @@ function GenerateTitlePage()
 
 	//Dates
 	$this->SetFont('times','',10);
-	
-	if ($DateMiseEnLigne) 
+
+	if ($DateMiseEnLigne)
 	{
 		$this->SetXY(110,184);
 		$DateMiseEnLigne = $this->unhtmlentities($DateMiseEnLigne);
 		$this->MultiCell(0,6, texte_script(pdf_first_clean(_T('articlepdf:date_de_mise_en_ligne')))."$DateMiseEnLigne",0,'L',0);
 	}
-	
-	if ($DateParution) 
+
+	if ($DateParution)
 	{
 		$this->SetXY(110,190);
 		$DateParution = $this->unhtmlentities($DateParution);
 		$this->MultiCell(0,6,texte_script(pdf_first_clean(_T('articlepdf:date_de_parution')))."$DateParution",0,'L',0);
 	}
-	
 
-	// Descriptif 	
+
+	// Descriptif
 	/*
 	if ($descriptif)
 	{
-		
+
 		$this->SetFont('helvetica','B',10) ;
 		$this->SetXY($this->rMargin+5,220);
 		$this->SetFont('helvetica', 'BU', 10);
@@ -152,7 +152,7 @@ function GenerateTitlePage()
 		$this->WriteHTML($descriptif,5) ;
 	}
 	*/
-	
+
 	if ($this->copyright)
 	{
 		$this->SetXY(45,250);
@@ -164,7 +164,7 @@ function GenerateTitlePage()
 function GenerateText()
 {
  	global $texte, $chapo, $ps, $notes ;
-		
+
 	$this->SetFont('helvetica');
 	if ($chapo)
 	{
@@ -173,12 +173,12 @@ function GenerateText()
 		$this->WriteHTML($chapo,5);
 		$this->Ln(12);
 	}
-	
+
 	//Texte - justifie
 	$this->SetFont('helvetica','',10);
 	$this->WriteHTML($texte,5);
 	$this->Ln(12);
-	if ($ps) 
+	if ($ps)
 	{
 		//ps
 		$this->SetFont('','I',8);
@@ -200,7 +200,7 @@ function BuildDocument()
 	$this->GenerateTitlePage();
 	$this->AddPage();
 	$this->GenerateText();
-	
+
 	// On repasse en police à la bonne taille pour le nombre de pages.
 	$this->SetFont('helvetica','I',8);
 	$this->AliasNbPages();

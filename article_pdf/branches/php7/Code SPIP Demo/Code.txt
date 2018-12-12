@@ -8,7 +8,7 @@ Descriptif rapide :
 Article de test pour la génération de PDF
 
 Chapeau :
-Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, 
+Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau, Test de chapeau,
 
 Texte :
 {{{titre1}}}
@@ -69,19 +69,19 @@ Exemple de note [[note 2]]
 
 Exemple de puces :
 
-- Qu'est-ce que cela peut faire que je lutte pour la mauvaise cause 
+- Qu'est-ce que cela peut faire que je lutte pour la mauvaise cause
 puisque je suis de bonne foi?
-- Et qu'est-ce que ça peut faire que je sois de mauvaise foi 
-puisque c'est pour la bonne cause. (Jacques 
+- Et qu'est-ce que ça peut faire que je sois de mauvaise foi
+puisque c'est pour la bonne cause. (Jacques
 Prévert)
 
 
 Exemple de note [[note 3]]
 
 
-[Exemple de lien vers Rubrique->rub1] 
+[Exemple de lien vers Rubrique->rub1]
 
-[Exemple de lien vers Brève->br1] 
+[Exemple de lien vers Brève->br1]
 
 Auteurs, mots-clés, sites, images, documents :
 
@@ -93,7 +93,7 @@ lien vers [un site syndiqué->site1]
 
 lien vers [un document joint->doc17] ou [le même document->document17]
 
-lien vers [une image->img13] ou [la même image->image13] 
+lien vers [une image->img13] ou [la même image->image13]
 
 
 Exemple de lien vers une ancre [->art5#Ancre]
@@ -116,18 +116,18 @@ Exemple de puces imbriquées :
 -** noir;
 -* mais mon lapin est:
 -** blanc;
--*** angora; 
+-*** angora;
 -*** ou à poil ras.
 
 
-Exemple de liste numérotée : 
+Exemple de liste numérotée :
 
 -# premier
 -# deuxieme
 -# troisieme
 
-Exemple de retour à la ligne_ 
-Exemple de retour à la ligne_ 
+Exemple de retour à la ligne_
+Exemple de retour à la ligne_
 
 Exemple de code informatique :
 
@@ -152,4 +152,4 @@ Aliquam iaculis feugiat quam. Nunc purus diam, ornare ut, porttitor eu, mollis n
 {{{Titre paragraphe 3}}}
 -  Aliquam erat volutpat. Sed venenatis mattis massa. Nulla facilisi. Donec vel sem. Praesent quis tortor. Vivamus ut diam nec leo facilisis venenatis. Suspendisse interdum facilisis pede. Etiam id nunc a metus sodales vulputate. In ultricies interdum velit. In sem. Mauris fringilla quam ut nibh. Mauris tellus augue, porta ac, condimentum eu, vulputate a, arcu. Curabitur a velit. Aenean imperdiet, nisl id dignissim euismod, elit tellus semper massa, ac accumsan ipsum nunc ornare dolor. Sed varius convallis tortor. In interdum consectetuer nisl.
 
--  Phasellus quis nunc et pede elementum tincidunt. Nunc vitae nisl. Vestibulum tristique iaculis enim. Suspendisse sollicitudin, ligula quis commodo faucibus, enim quam semper lacus, vel fermentum tellus ipsum nec elit. Quisque neque orci, viverra sed, venenatis sed, malesuada at, enim. Cras tempor lorem in justo. Pellentesque varius accumsan purus. Aenean vel felis. Duis tincidunt elit in justo. Quisque lacus elit, congue vel, vehicula sed, commodo non, odio. 
+-  Phasellus quis nunc et pede elementum tincidunt. Nunc vitae nisl. Vestibulum tristique iaculis enim. Suspendisse sollicitudin, ligula quis commodo faucibus, enim quam semper lacus, vel fermentum tellus ipsum nec elit. Quisque neque orci, viverra sed, venenatis sed, malesuada at, enim. Cras tempor lorem in justo. Pellentesque varius accumsan purus. Aenean vel felis. Duis tincidunt elit in justo. Quisque lacus elit, congue vel, vehicula sed, commodo non, odio.

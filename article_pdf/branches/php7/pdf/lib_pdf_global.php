@@ -1,10 +1,10 @@
 <?php
 /**
  * class PDF extends FPDF : FPDF/tutoriel/tuto6.htm
- * 
+ *
  * Février-Août 2003 : Jérôme Fenal (jerome.fenal@logicacmg.com)
  * Ajout de la prise en compte des tableaux, tag <code>, et diverses autres choses de SPIP
- */ 
+ */
 
  //  Fichier de dump pour debug
 define (DUMP_FILE_FULL_PATH_NAME,"Dump.txt");
@@ -48,11 +48,11 @@ var $CurrentTag=array();
 function Build($OutputFileFullPathName)
 {
 	$this->Open();
-	
+
 	$this->BuildDocument() ;
 
 	$this->Output($OutputFileFullPathName);
-	
+
 	$this->Close();
 }
 
@@ -64,7 +64,7 @@ function AddCol($field=-1,$width=-1,$align='L')
 	{
 		$field=count($this->columnProp);
 	}
-	
+
 	$this->columnProp[$field]=array('f'=>$field,'w'=>$width,'a'=>$align);
 	#$this->Write(5, "Ajout de colonne : ".$field."/".$width."/".$align); $this->Ln();
 }
@@ -75,9 +75,9 @@ function PDF($orientation='P', $unit='mm', $format='A4')
 	//Appel au constructeur parent
 	$this->FPDF($orientation, $unit, $format);
 	$this->SetCompression(1);
-	
+
 	//$this->InitDumpFile();
-	
+
 	$this->HREF='';
 }
 
@@ -93,23 +93,23 @@ function WriteHTML($html,$LineFeedHeight)
 {
 	$this->texteAddSpace=false;
 	//Parseur HTML, enlevé pour une meilleure récupération des tag.
-	//Il faut détecter les vraies balises "<" HTML et pas les < de texte "&lt;" HTML 
+	//Il faut détecter les vraies balises "<" HTML et pas les < de texte "&lt;" HTML
 	//Parseur remis + loin pour l'édition du texte
 	//$html=$this->unhtmlentities($html);
-	
+
 	$a=preg_split(',(<[/a-zA-Z].*>),Ums', $html, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 	// $a = le tableau de tags
 	// $i = index de l'élément courant
 	// $e = valeur de l'élément courant
-	foreach($a as $i=>$e) 
+	foreach($a as $i=>$e)
   {
-		//Balise 
+		//Balise
 	$Balise= preg_match(',<(?=[/a-zA-Z0-9])(/)?([/a-zA-Z0-9]+)((\s.*|/)?)>,',$e,$match);
 	if ($Balise){
 		$tag=strtoupper($match[2]);
 			$closing = $match[1]=="/";
-			
+
 			if (($this->ProcessingBloc) AND (!in_array($tag,$this->BlocTags[$this->ProcessingBloc-1])))
 				$this->BlocContent[$this->ProcessingBloc-1] .= $e;
 			else {
@@ -138,10 +138,10 @@ function WriteHTML($html,$LineFeedHeight)
 				# ni les tableaux dans les tableaux, d'ailleurs...
 				if (($this->ProcessingBloc))
 					$this->BlocContent[$this->ProcessingBloc-1] .= $e;
-				else 
+				else
 				{
 					// C'est un lien. Il faut faire la distinction entre lien externe, lien interne et note de bas de page (couples ancre + lien interne)
-					if($this->HREF) 
+					if($this->HREF)
 					{
 						$Link=$this->HREF;
 						$Text=$e;
@@ -171,14 +171,14 @@ function WriteHTML($html,$LineFeedHeight)
 							// C'est une note (détail de bas de texte)
 							else if ( strstr($Link,"#nh") )
 							{
-							
+
 								// C'est le lien "#nh1" (le premier) : on met un trait séparateur
 								if ( strlen($Link)==4 && $Link[3]=="1" )
 								{
 									$this->SetLineWidth(0.3);
 									$this->Line($this->lMargin, $this->GetY()-5, $this->w - $this->rMargin, $this->GetY()-5);
 								}
-								
+
 								if ($this->FirstIteration)
 								{
 									$LinkID=$this->AddLink();
@@ -191,7 +191,7 @@ function WriteHTML($html,$LineFeedHeight)
 									$LinkID=$this->TopLinkIDArray[$this->TopLinkIDArrayIt++];
 									$this->PutLink($LinkID,$Text);		// Bon lien  (deuxième itération)
 								}
-								
+
 							}
 							// C'est un lien interne
 							else
@@ -199,11 +199,11 @@ function WriteHTML($html,$LineFeedHeight)
 								$WebSiteURL=entites_html(lire_meta("adresse_site"));
 								// Bug d'interprétation du point d'interrogation remplacé par 3 points. Correctif ici
 								$Link=str_replace("...","?",$Link);
-								
+
 								$this->PutLink($WebSiteURL . "/" . $Link, $Text);
 							}
 						}
-					} else 
+					} else
 					{
 						//Parseur remis ici
 						$e=$this->unhtmlentities($e);
@@ -217,18 +217,18 @@ function WriteHTML($html,$LineFeedHeight)
 
 function OpenTag($tag,$e,$LineFeedHeight)
 {
-	$needclosing = true;	
+	$needclosing = true;
 	//Balise ouvrante
 	if ($tag=='B' || $tag=='U' || $tag=='I')
 	{
 		$this->SetStyle($tag,true);
 	}
-	
+
 	if ($tag=='STRONG')
 	{
 		$this->SetStyle('B',true);
 	}
-	
+
 	if ($tag=='EM')
 	{
 		$this->SetStyle('I',true);
@@ -270,7 +270,7 @@ function OpenTag($tag,$e,$LineFeedHeight)
 		#$this->BlocTags[$this->ProcessingBloc-1]=array("CODE");
 		#$this->BlocContent[$this->ProcessingBloc-1]="";
 	}
-	
+
 	if($tag=='H2')
 	{
 		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
@@ -318,15 +318,15 @@ function OpenTag($tag,$e,$LineFeedHeight)
 		$this->listParm[$this->listDepth]['curr']=0;		# numéro si OL
 	}
 
-	if($tag=='LI'){ 
+	if($tag=='LI'){
 		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
 		$this->Ln();
 		$this->listParm[$this->listDepth]['curr']++;
 		$this->SetX($this->GetX()-7);
 		if ($this->listParm[$this->listDepth]['type']=='OL')
-			$this->Cell(7,5,$this->listParm[$this->listDepth]['curr'].'.',0,0,'C'); 
+			$this->Cell(7,5,$this->listParm[$this->listDepth]['curr'].'.',0,0,'C');
 		else
-			$this->Cell(7,5,chr(149),0,0,'C'); 
+			$this->Cell(7,5,chr(149),0,0,'C');
 	}
 
 	if ($tag=='IMG') {
@@ -345,13 +345,13 @@ function OpenTag($tag,$e,$LineFeedHeight)
 			} else {
 				$this->PutLink($this->HREF,"$alt");
 			}
-			
+
 			spip_log('NO ? '.$e.' !@getimagesize pour'. $this->SRC.' alt ='.$alt,'article_pdf');
 
 		} else {
-			
+
 			$size=getimagesize($this->SRC);		# Attention, utilisation de GD !!! FPDF ne sait pas lire les images à moitié... et je n'ai pas envie de surcharger la méthode Image...
-			
+
 			//Largeur && Hauteur
 			if ($size[0] < 30 && $size[1] < 30) {
 				# pixel / 3 pour avoir des cm. Petite cuisine...
@@ -481,7 +481,7 @@ function OpenTag($tag,$e,$LineFeedHeight)
 		$this->BlocTags[$this->ProcessingBloc-1]=array("TEXTAREA");
 		$this->BlocContent[$this->ProcessingBloc-1]="";
 	}
-	if($tag=='HR') 
+	if($tag=='HR')
 	{
 		# Ligne horizontale
 		$this->SetLineWidth(0.3);
@@ -490,24 +490,24 @@ function OpenTag($tag,$e,$LineFeedHeight)
 		$this->texteAddSpace = false;
 	}
 	if ((substr($e,-2)!="/>") && $needclosing)
-		$this->CurrentTag[]=$tag;	
+		$this->CurrentTag[]=$tag;
 }
 
 function CloseTag($tag,$LineFeedHeight)
 {
 	if($tag=='B' || $tag=='U' || $tag=='I')
 		$this->SetStyle($tag,false);
-	
+
 	if($tag=='STRONG')
 		$this->SetStyle('B',false);
-	
+
 	if($tag=='EM')
 		$this->SetStyle('I',false);
-		
+
 	if($tag=='A'){
 		$this->HREF='';
 	}
-		
+
 	if($tag=='P'){
 		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
 		$this->Ln($LineFeedHeight);
@@ -524,27 +524,27 @@ function CloseTag($tag,$LineFeedHeight)
 		// $this->Write(5,"\n<\code>");
 	}
 
-	if(($tag=='H2') OR ($tag=='H3') OR ($tag=='H4') OR ($tag=='H5') OR ($tag=='H6')){		
+	if(($tag=='H2') OR ($tag=='H3') OR ($tag=='H4') OR ($tag=='H5') OR ($tag=='H6')){
 		$this->SetStyle($tag='B',false,10);
 		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
 		$this->Ln($LineFeedHeight);
 	}
-	
-	if($tag=='UL' or $tag=='OL') { 
-		$this->SetLeftMargin($this->lMargin-7); 
+
+	if($tag=='UL' or $tag=='OL') {
+		$this->SetLeftMargin($this->lMargin-7);
 		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
 		$this->Ln();
 		$this->listParm[$this->listDepth]=array();
 		$this->listDepth--;
-	} 
-	if($tag=='TT') { 
+	}
+	if($tag=='TT') {
 		$this->SetFont('helvetica','',10);
 		$this->SetTextColor(0);
 	}
 	if($tag=='TD' or $tag=='TH') {
 		if (!strlen($this->BlocContent[$this->ProcessingBloc-1]))
 			$this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['content']=" ";
-		else 
+		else
 			$this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['content']=$this->BlocContent[$this->ProcessingBloc-1];
 		if ($tag=='TH')
 			$this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['TH']=1;
@@ -588,7 +588,7 @@ function SetStyle($tag,$enable,$size=0)
 	if (in_array($tag,array('B','I','U'))){
 		if ($enable)
 			$currentStyle = array_merge($currentStyle,array($tag=>true));
-		else 
+		else
 			$currentStyle = array_diff($currentStyle,array($tag=>true));
 		$family = $this->FontFamily?$this->FontFamily:'helvetica';
 		$this->SetFont($family,implode("",array_keys($currentStyle)), $size);
@@ -638,22 +638,22 @@ function CellSize($htmlContent,$fontFamily,$fontSize,$LineFeedHeight,$cellmargin
 	$cell_pdf->Open();
 	$cell_pdf->FirstIteration=TRUE;
 	$cell_pdf->SetFont($fontFamily, '', $fontSize);
-	
+
 	$cell_pdf->maxLineWidth = 0;
 	$cell_pdf->x=$cell_pdf->lMargin;
 	$cell_pdf->y=0;
 	$cell_pdf->CurrentTag = $this->CurrentTag;
-	
+
 	if ($max_width){
 		$cell_pdf->rMargin=$cell_pdf->w-$cell_pdf->x-$max_width-$cellmargin;
 	}
 	$cell_pdf -> WriteHTML($htmlContent,$LineFeedHeight);
 	if($cell_pdf->x>$cell_pdf->lMargin)
 		$cell_pdf->Ln($LineFeedHeight);
-	
+
 	$width = $cell_pdf->maxLineWidth-$cell_pdf->lMargin;
 	$height = $cell_pdf->y;
-	
+
 	$width += $cellmargin;
 	$height += $cellmargin;
 	return array($width,$height);
@@ -666,13 +666,13 @@ function OutputCell($width,$height,$htmlContent,$border=0,$LineFeedHeight=0,$ali
 	$x = $this->x; $y = $this->y;
 	$lmargin = $this->lMargin;
 	$rmargin = $this->rMargin;
-	
+
 	// on se remet en debut de cellule
 	$this->x-=$width;
 	$this->x = $this->x+$cellmargin/2;
 	$this->lMargin = $this->x; // pour que les retour ligne se fassent correctement dans la cellule
-	$this->rMargin = $this->w-$this->x-$width+$cellmargin/2; 
-	
+	$this->rMargin = $this->w-$this->x-$width+$cellmargin/2;
+
 	$this -> WriteHTML($htmlContent,$LineFeedHeight);
 	// on se remet a la fin de la cellule
 	$this->x = $x; $this->y = $y;
@@ -709,21 +709,21 @@ function TableShow($align,$LineFeedHeight)
 	$maxiter = 10;
 	do {
 		$tableFontSize = $tableFontSize *min(1.0,$wrwi/$TableWidth)*0.99; // 0.99 pour converger plus vite
-		
+
 		$fixed_width= ($tableFontSize<$min_font_size) || ($maxiter==1) || ($TableWidth<=$wrwi);
 		if ($fixed_width)
 			$coeff=min(1.0,$wrwi/$TableWidth);
-				
+
 		$tableFontSize = max($min_font_size,$tableFontSize);
 		// on boucle sur la taille de police tant que la largeur du tableau ne rentre pas dans la page
-		
+
 		// remise à zéro des largeurs de colonnes
 		foreach ($this->columnProp as $i=>$cprop)
 			if ($fixed_width)	$this->columnProp[$i]['w']=$this->columnProp[$i]['w']*$coeff;// redimenssioner la largeur de la colonne
 			else	$this->columnProp[$i]['w']=0.0;
 		foreach($this->tableContent as $j=>$row)
 			$this->lineProp[$j]['h']=0.0;
-		
+
 		// on passe toutes les cellules du tableau en revue
 		// de façon à calculer la largeur max de chaque colonne pour la taille de police courante
 		foreach($this->tableContent as $j=>$row) {
@@ -733,7 +733,7 @@ function TableShow($align,$LineFeedHeight)
 					$htmlContent="<B>$htmlContent</B>";
 				}
 				list($width,$height)=$this->CellSize($htmlContent,$tableFontFamily,$tableFontSize,$LineFeedHeight,$cellmargin,$fixed_width?$this->columnProp[$i]['w']:0);
-				
+
 				if (!$fixed_width)
 					$this->columnProp[$i]['w'] = max($this->columnProp[$i]['w'],$width);
 				$this->lineProp[$j]['h'] = max($this->lineProp[$j]['h'],$height)+0.3;
@@ -752,7 +752,7 @@ function TableShow($align,$LineFeedHeight)
 
 	$this->SetFont($tableFontFamily, '', $tableFontSize);
 	//Calcule l'abscisse du tableau
-	if($align=='C') 
+	if($align=='C')
 		$this->TableX=max(($this->w-$TableWidth)/2, 0);
 	elseif($align=='R')
 		$this->TableX=max($this->w-$this->rMargin-$TableWidth, 0);
@@ -768,7 +768,7 @@ function TableShow($align,$LineFeedHeight)
 								$this->RowColors[$ci][1],
 								$this->RowColors[$ci][2]);
 		}
-		
+
 		foreach($this->tableContent[$j] as $i=>$cell) {
 			if ($this->tableContent[$j][$i]['TH'] == true) {
 				$this->SetFont($tableFontFamily, 'B', $tableFontSize);
@@ -783,7 +783,7 @@ function TableShow($align,$LineFeedHeight)
 				$LineFeedHeight,
 				$this->columnProp[$i]['a'],
 				$fill,0);
-			
+
 			if ($this->tableContent[$j][$i]['TH']) {
 				$this->SetFont('', '', $tableFontSize);
 				$this->SetFillColor(255);	// blanc
@@ -797,7 +797,7 @@ function TableShow($align,$LineFeedHeight)
 	$this->SetFont($oldFontFamily, '', $oldFontSizePt);
 	$this->Ln($LineFeedHeight);
 }
-	
+
 // Efface le fichier de dump
 function InitDumpFile()
 {
@@ -805,7 +805,7 @@ function InitDumpFile()
 }
 
 
-// trace une chaîne dans un fichier 
+// trace une chaîne dans un fichier
 function Dump($String)
 {
 	if ($f = @fopen(DUMP_FILE_FULL_PATH_NAME,"a"))
@@ -816,11 +816,11 @@ function Dump($String)
 	}
 }
 
-// trace un tableau dans un fichier 
+// trace un tableau dans un fichier
 function DumpArray($String,$Array)
 {
 	$Result=print_r($Array,true);
-	
+
 	if ($f = @fopen(DUMP_FILE_FULL_PATH_NAME,"a")){
 		@fwrite($f,$String);
 		@fwrite($f,"\n\n");
