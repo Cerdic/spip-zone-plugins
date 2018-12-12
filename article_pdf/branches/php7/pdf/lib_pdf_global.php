@@ -632,7 +632,7 @@ function TableHeader()
 
 function CellSize($htmlContent,$fontFamily,$fontSize,$LineFeedHeight,$cellmargin=3,$max_width=0){
 	$cell_pdf=new PDF_SPIP();
-	$cell_pdf->Open();
+	$cell_pdf->AddPage();
 	$cell_pdf->FirstIteration=TRUE;
 	$cell_pdf->SetFont($fontFamily, '', $fontSize);
 
