@@ -142,7 +142,7 @@ function WriteHTML($html,$LineFeedHeight)
 					{
 						$Link=$this->HREF;
 						$Text=$e;
-						if ( strstr($Link,"http:") || strstr($Link,"mailto:") || strstr($Link,"ftp:") )
+						if ( strstr($Link,"http:") || strstr($Link,"https:") || strstr($Link,"mailto:") || strstr($Link,"ftp:") )
 						{
 							// C'est un lien  externe
 							$this->PutLink($Link, $Text);
