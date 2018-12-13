@@ -58,13 +58,13 @@ function balise_NOISETTE_COMPILER_dist($p) {
 		recuperer_fond(
 			'conteneur_compiler',
 			array(
-				'plugin'=>$plugin,
+				'plugin' => $plugin,
 				'id_conteneur' => conteneur_identifier(
 					$plugin, 
 					array('id_noisette' => $id_noisette, 'type_noisette' => $type_noisette),
 					$stockage
 				),
-				'stockage'=>$stockage
+				'stockage' => $stockage
 			),
 			array()
 		),
@@ -84,10 +84,10 @@ function balise_NOISETTE_COMPILER_dist($p) {
 		recuperer_fond(
 			\".type_noisette_localiser($plugin, $type_noisette).\",
 			\".var_export(array_merge(unserialize($parametres), noisette_contextualiser($plugin, $noisette, $type_noisette, $environnement, $stockage)),true).\",
-			\".var_export(array('ajax'=>(type_noisette_ajaxifier($plugin, $type_noisette, $stockage))),true).\"
+			\".var_export(array('ajax'=>(type_noisette_ajaxifier($plugin, $type_noisette, $stockage))), true).\"
 		),
 		\".$encapsulation.\",
-		\".var_export(array('id_noisette' => $id_noisette, 'type_noisette' => $type_noisette, 'css' => $css)),true).\",
+		\".var_export(array('id_noisette' => $id_noisette, 'type_noisette' => $type_noisette, 'css' => $css)), true).\",
 		\".$stockage.\",
 	);?>\"";
 	$inclusion_statique_noisette = "noisette_encapsuler(
@@ -95,7 +95,7 @@ function balise_NOISETTE_COMPILER_dist($p) {
 		recuperer_fond(
 			type_noisette_localiser($plugin, $type_noisette),
 			array_merge(unserialize($parametres), noisette_contextualiser($plugin, $noisette, $type_noisette, $environnement, $stockage)),
-			array('ajax'=>(type_noisette_ajaxifier($plugin, $type_noisette, $stockage)))
+			array('ajax' => type_noisette_ajaxifier($plugin, $type_noisette, $stockage))
 		),
 		$encapsulation,
 		array('id_noisette' => $id_noisette, 'type_noisette' => $type_noisette, 'css' => $css),
@@ -104,7 +104,7 @@ function balise_NOISETTE_COMPILER_dist($p) {
 
 	// Finaliser le code en choisissant le type d'inclusion. La fonction type_noisette_dynamiser() renvoie toujours
 	// false pour une noisette conteneur.
-	$code = "($est_conteneur == 'oui'
+	$code = "(($est_conteneur == 'oui')
 		? $inclusion_statique_conteneur
 		: (type_noisette_dynamiser($plugin, $type_noisette, $stockage) 
 			? $inclusion_dynamique_noisette 
