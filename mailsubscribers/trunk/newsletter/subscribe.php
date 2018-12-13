@@ -201,15 +201,16 @@ function newsletter_subscribe_dist($email, $options = array()) {
 	// notifier
 	if ($notify and (!isset($options['notify']) or $options['notify'])){
 		$notifications = charger_fonction('notifications','inc');
-		foreach ($notify as $option){
+		foreach ($notify as $k => $option){
 			if (isset($options['invite_email_from']) AND strlen($options['invite_email_from'])) {
-				$option['invite_email_from'] = $options['invite_email_from'];
+				$notify[$k]['invite_email_from'] = $options['invite_email_from'];
 				if (isset($options['invite_email_text'])){
-					$option['invite_email_text'] = $options['invite_email_text'];
+					$notify[$k]['invite_email_text'] = $notify[$k]['invite_email_text'];
 				}
 			}
-			$notifications('instituermailsubscription',$row['id_mailsubscriber'],$option);
 		}
+		$notifications_options = array('subscriptions' => $notify);
+		$notifications('instituermailsubscriptions', $row['id_mailsubscriber'], $notifications_options);
 	}
 	return true;
 }

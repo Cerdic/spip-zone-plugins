@@ -131,11 +131,11 @@ function newsletter_unsubscribe_dist($email, $options = array()) {
 			mailsubscribers_actualise_segments($row['id_mailsubscriber'], $unsubscribed_lists);
 		}
 
+		// notifier
 		if ($notify and (!isset($options['notify']) or $options['notify'])){
 			$notifications = charger_fonction('notifications','inc');
-			foreach ($notify as $option){
-				$notifications('instituermailsubscription',$row['id_mailsubscriber'],$option);
-			}
+			$notifications_options = array('subscriptions' => $notify);
+			$notifications('instituermailsubscriptions', $row['id_mailsubscriber'], $notifications_options);
 		}
 
 	}
