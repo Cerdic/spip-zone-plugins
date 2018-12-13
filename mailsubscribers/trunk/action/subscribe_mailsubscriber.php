@@ -12,10 +12,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * (mise a jour du statut en prop ou valide selon l'option double-optin)
  *
  * @param string $email
- * @param string $identifiant
+ * @param array $id_mailsubscribinglists
  * @param null|bool $double_optin
  */
-function action_subscribe_mailsubscriber_dist($email = null, $identifiant = null, $double_optin = null) {
+function action_subscribe_mailsubscriber_dist($email = null, $id_mailsubscribinglists = null, $double_optin = null) {
 	include_spip('mailsubscribers_fonctions');
 	include_spip('inc/mailsubscribers');
 	include_spip('inc/config');
@@ -23,7 +23,7 @@ function action_subscribe_mailsubscriber_dist($email = null, $identifiant = null
 	if (is_null($email)) {
 		$arg = mailsubscribers_verifier_args_action('subscribe');
 		if ($arg){
-			list($email, $identifiant) = $arg;
+			list($email, $id_mailsubscribinglists) = $arg;
 		}
 	}
 
@@ -33,22 +33,37 @@ function action_subscribe_mailsubscriber_dist($email = null, $identifiant = null
 		echo minipres(_T('info_email_invalide') . '<br />' . entites_html($email));
 		exit;
 	}
-	
+
+	$nb_listes = 0;
 	$titre_liste = '';
-	$status = $infos['status'];
-	if ($identifiant){
-		$status = (isset($infos['subscriptions'][$identifiant]['status'])?$infos['subscriptions'][$identifiant]['status']:'');
-		$liste = sql_fetsel('id_mailsubscribinglist, titre_public', 'spip_mailsubscribinglists', 'identifiant=' . sql_quote($identifiant));
-		if ($liste['titre_public']) {
-			include_spip('inc/texte');
-			$titre_liste = supprimer_numero(typo($liste['titre_public']));
+	$deja = false;
+	$identifiants = null;
+	if ($infos['status'] == 'on') {
+		$deja = true;
+	}
+	if ($id_mailsubscribinglists){
+		$titre_liste = array();
+		$listes = sql_allfetsel('id_mailsubscribinglist, identifiant, titre_public', 'spip_mailsubscribinglists', sql_in('id_mailsubscribinglist', $id_mailsubscribinglists));
+		foreach ($listes as $liste) {
+			$identifiant = $liste['identifiant'];
+			$status = (isset($infos['subscriptions'][$identifiant]['status'])?$infos['subscriptions'][$identifiant]['status']:'');
+			if ($status !== 'on') {
+				$deja = false;
+				$identifiants[] = $identifiant;
+				if ($liste['titre_public']) {
+					include_spip('inc/texte');
+					$titre_liste[] = supprimer_numero(typo($liste['titre_public']));
+				}
+				else {
+					$titre_liste[] = '#' . $liste['id_mailsubscribinglist'];
+				}
+			}
 		}
-		else {
-			$titre_liste = '#' . $liste['id_mailsubscribinglist'];
-		}
+		$nb_listes = count($titre_liste);
+		$titre_liste = implode(', ', $titre_liste);
 	}
 
-	if ($status == 'on') {
+	if ($deja) {
 		$titre = _T('mailsubscriber:subscribe_deja_texte', array('email' => $email));
 	}
 	else {
@@ -60,12 +75,15 @@ function action_subscribe_mailsubscriber_dist($email = null, $identifiant = null
 
 		$env = array(
 			'email' => "<b>$email</b>",
+			'nb_listes' => $nb_listes,
 			'titre_liste' => $titre_liste,
 			'nom_site_spip' => $GLOBALS['meta']['nom_site'],
 			'url_site_spip' => $GLOBALS['meta']['adresse_site']
 		);
 		if ($double_optin) {
-			if ($titre_liste) {
+			if ($nb_listes>1) {
+				$titre = _T('mailsubscriber:confirmsubscribe_texte_email_listes_1', $env);
+			} elseif ($nb_listes == 1) {
 				$titre = _T('mailsubscriber:confirmsubscribe_texte_email_liste_1', $env);
 			} else {
 				$titre = _T('mailsubscriber:confirmsubscribe_texte_email_1', $env);
@@ -74,15 +92,17 @@ function action_subscribe_mailsubscriber_dist($email = null, $identifiant = null
 		}
 		else {
 			$options['force'] = true;
-			if ($titre_liste) {
+			if ($nb_listes>1) {
+				$titre = _T('mailsubscriber:subscribe_texte_email_listes_1', $env);
+			} elseif ($nb_listes == 1) {
 				$titre = _T('mailsubscriber:subscribe_texte_email_liste_1', $env);
 			} else {
 				$titre = _T('mailsubscriber:subscribe_texte_email_1', $env);
 			}
 		}
 
-		if ($identifiant){
-			$options['listes'] = array($identifiant);
+		if ($identifiants){
+			$options['listes'] = $identifiants;
 		}
 		$subscribe($email, $options);
 	}

@@ -23,7 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 @url_confirmsubscribe@',
 	'confirmsubscribe_texte_email_3' => 'S’il s’agit d’une erreur de notre part ou si vous avez changé d’avis, vous pouvez ignorer ce mail : cette demande sera automatiquement annulée.',
 	'confirmsubscribe_texte_email_envoye' => 'Un email a été envoyé à cette adresse pour confirmation.',
-	'confirmsubscribe_texte_email_liste_1' => 'Vous avez demandé à vous inscrire à la newseletter « @titre_liste@ » de @nom_site_spip@ avec l’adresse email @email@.',
+	'confirmsubscribe_texte_email_liste_1' => 'Vous avez demandé à vous inscrire à la newsletter « @titre_liste@ » de @nom_site_spip@ avec l’adresse email @email@.',
+	'confirmsubscribe_texte_email_listes_1' => 'Vous avez demandé à vous inscrire aux newsletters « @titre_liste@ » de @nom_site_spip@ avec l’adresse email @email@.',
 	'confirmsubscribe_titre_email' => 'Confirmation d’inscription à la Newsletter',
 	'confirmsubscribe_titre_email_liste' => 'Confirmation d’inscription à la newsletter « <b>@titre_liste@</b> »',
 
@@ -96,6 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'subscribe_texte_email_3' => 'En cas d’erreur de notre part, ou si vous changez d’avis, vous pouvez vous désinscrire à tout moment au moyen du lien suivant :
 @url_unsubscribe@',
 	'subscribe_texte_email_liste_1' => 'Nous avons bien pris en compte votre inscription à la newsletter « @titre_liste@ » avec l’adresse email @email@.',
+	'subscribe_texte_email_listes_1' => 'Nous avons bien pris en compte votre inscription aux newsletters « @titre_liste@ » avec l’adresse email @email@.',
 	'subscribe_titre_email' => 'Inscription à la Newsletter',
 	'subscribe_titre_email_liste' => 'Inscription à la newsletter « <b>@titre_liste@</b> »',
 
@@ -128,7 +130,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'unsubscribe_texte_email_2' => 'Nous espérons vous revoir bientôt sur @nom_site_spip@.',
 	'unsubscribe_texte_email_3' => 'En cas d’erreur de notre part, ou si vous changez d’avis, vous pouvez vous réinscrire à tout moment au moyen du lien suivant :
 @url_subscribe@',
-	'unsubscribe_texte_email_liste_1' => 'L’adresse email @email@ a bien été retirée de notre liste de diffusion de la newsletter <b>@titre_liste@</b>.',
+	'unsubscribe_texte_email_liste_1' => 'L’adresse email @email@ a bien été retirée de la liste de diffusion de la newsletter <b>@titre_liste@</b>.',
+	'unsubscribe_texte_email_listes_1' => 'L’adresse email @email@ a bien été retirée des listes de diffusion aux newsletters <b>@titre_liste@</b>.',
 	'unsubscribe_titre_email' => 'Désinscription de la Newsletter',
 	'unsubscribe_titre_email_liste' => 'Désinscription de la newsletter <b>@titre_liste@</b>'
 );

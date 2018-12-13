@@ -12,9 +12,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * (appelle lors du double-optin : delegue a subscribe le changement de statut en valide)
  *
  * @param string $email
- * @param string $identifiant
+ * @param array $id_mailsubscribinglists
  */
-function action_confirm_mailsubscriber_dist($email = null, $identifiant = null) {
+function action_confirm_mailsubscriber_dist($email = null, $id_mailsubscribinglists = null) {
 	
 	include_spip('mailsubscribers_fonctions');
 	include_spip('inc/mailsubscribers');
@@ -22,7 +22,7 @@ function action_confirm_mailsubscriber_dist($email = null, $identifiant = null) 
 	if (is_null($email)) {
 		$arg = mailsubscribers_verifier_args_action('confirm');
 		if ($arg){
-			list($email, $identifiant) = $arg;
+			list($email, $id_mailsubscribinglists) = $arg;
 		}
 	}
 
@@ -33,6 +33,6 @@ function action_confirm_mailsubscriber_dist($email = null, $identifiant = null) 
 	}
 
 	$subscribe_mailsubscriber = charger_fonction('subscribe_mailsubscriber', 'action');
-	$subscribe_mailsubscriber($email, $identifiant, false);
+	$subscribe_mailsubscriber($email, $id_mailsubscribinglists, false);
 
 }

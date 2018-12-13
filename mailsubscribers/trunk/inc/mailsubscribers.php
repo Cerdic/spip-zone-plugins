@@ -15,11 +15,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * @param string $action
  * @return array
+ *   email, $id_mailsubscribinglists
  */
 function mailsubscribers_verifier_args_action($action) {
 	$email = _request('email');
 	$arg = _request('arg');
 
+	// reparer le arg ou le retrouver dans la QUERY_STRING si jamais il était coupé
 	if (is_null($arg) OR is_null($email)) {
 		$query = $_SERVER["QUERY_STRING"];
 		// cas du arg coupe
@@ -33,8 +35,19 @@ function mailsubscribers_verifier_args_action($action) {
 		parse_str($query, $args);
 		$arg = strtolower($args['arg']);
 		$email = $args['email'];
-		if (strlen($arg) > 40) {
-			$arg = substr($arg, -40);
+		if ($p = strpos($arg, '-') === false) {
+			if (strlen($arg) > 40) {
+				$arg = substr($arg, -40);
+			}
+		}
+		else {
+			// faisons un preg_match pour retrouver tous les elements malgre le caca qui a ete ajoute
+			if (preg_match(",^(\d+-)+[0-9a-f]{40},", $arg, $m)) {
+				$arg = $m[0];
+			}
+			else {
+				$arg = null;
+			}
 		}
 		if ($arg AND $email) {
 			spip_log("mailsubscriber : $email|$arg reconnus malgre la query_string mal formee (verifiez votre service d'envoi de mails) [" . $_SERVER["QUERY_STRING"] . "]", "mailsubscribers" . _LOG_INFO_IMPORTANTE);
@@ -54,28 +67,40 @@ function mailsubscribers_verifier_args_action($action) {
 		include_spip("inc/lang");
 		changer_langue($row['lang']);
 		
-		$identifiant = "";
-		// verifier la cle telle quelle => generique, applicable pour toutes les listes
-		$cle = mailsubscriber_cle_action($action, $email, $row['jeton']);
-		if ($arg !== $cle) {
+		$identifiants = array();
+		$jeton = $row['jeton'];
+		$id_mailsubscribinglists = explode('-', $arg);
+		array_pop($id_mailsubscribinglists); // le hash
+		if (!$id_mailsubscribinglists) {
+			$id_mailsubscribinglists = null;
+		}
+		// verifier la cle telle quelle
+		// => soit une cle generique, applicable pour toutes les listes
+		// => soit une cle avec des id_mailsubscribinglists
+		$cle = mailsubscriber_cle_action($action, $email, $jeton, $id_mailsubscribinglists);
+		// si elle ne match pas et que arg ne contient aucun $id_mailsubscribinglists cherchons si c'est un hash ancien format
+		// avec juste une liste ajoute sous la forme jeton+id_mailsubscribinglist
+		if ($arg !== $cle and is_null($id_mailsubscribinglists)) {
+			$id_mailsubscribinglists = array();
+			// on ne cherche que dans les subscriptions connues pour cet inscrit, sinon rien a faire
 			$subscriptions = sql_allfetsel('*', 'spip_mailsubscriptions', 'id_mailsubscriber=' . intval($row['id_mailsubscriber']));
 			foreach ($subscriptions as $subscription){
 				// verifier la cle pour cette liste
-				$cle = mailsubscriber_cle_action($action, $email, $row['jeton'] . '+' . $subscription['id_mailsubscribinglist']);
+				$cle = mailsubscriber_cle_action($action, $email, $jeton . '+' . $subscription['id_mailsubscribinglist']);
 				if ($arg == $cle) {
-					$identifiant = sql_getfetsel('identifiant', 'spip_mailsubscribinglists', 'id_mailsubscribinglist=' . intval($subscription['id_mailsubscribinglist']));
+					$id_mailsubscribinglists[] = $subscription['id_mailsubscribinglist'];
 					break;
 				}
 			}
 			// pas de correspondance => cle incorrecte
-			if (!$identifiant){
+			if (!$subscription['id_mailsubscribinglist']){
 				spip_log(_request('action')." : cle $arg incorrecte pour email $email", "mailsubscribers"._LOG_INFO_IMPORTANTE);
 				return false;
 			}
 		}
 	}
 
-	return array($email, $identifiant);
+	return array($email, $id_mailsubscribinglists);
 }
 
 /**

@@ -17,9 +17,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * -> valide la desinscription si ok, affiche un message sinon incitant l'humain a recliquer
  *
  * @param string $email
- * @param string $identifiant
+ * @param array $id_mailsubscribinglists
  */
-function action_confirm_unsubscribe_mailsubscriber_dist($email = null, $identifiant = null) {
+function action_confirm_unsubscribe_mailsubscriber_dist($email = null, $id_mailsubscribinglists = null) {
 	include_spip('mailsubscribers_fonctions');
 	$timestamp = null;
 	if (is_null($email)) {
@@ -28,7 +28,8 @@ function action_confirm_unsubscribe_mailsubscriber_dist($email = null, $identifi
 		$arg = mailsubscriber_base64url_decode($arg);
 		$arg = explode(':', $arg);
 		$timestamp = array_pop($arg);
-		$identifiant = array_pop($arg);
+		$id_mailsubscribinglists = array_pop($arg);
+		$id_mailsubscribinglists = explode('-', $id_mailsubscribinglists);
 		$email = implode(":", $arg);
 	}
 
@@ -46,7 +47,7 @@ function action_confirm_unsubscribe_mailsubscriber_dist($email = null, $identifi
 
 	// il suffit de rejouer unsubscribe en forcant le simple-optin
 	$unsubscribe_mailsubscriber = charger_fonction("unsubscribe_mailsubscriber", "action");
-	$unsubscribe_mailsubscriber ($email, $identifiant, false);
+	$unsubscribe_mailsubscriber ($email, $id_mailsubscribinglists, false);
 }
 
 function mailsubscriber_base64url_decode($data) {
