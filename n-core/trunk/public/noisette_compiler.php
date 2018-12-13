@@ -88,8 +88,9 @@ function balise_NOISETTE_COMPILER_dist($p) {
 		),
 		\".$encapsulation.\",
 		\".var_export(array('id_noisette' => $id_noisette, 'type_noisette' => $type_noisette, 'css' => $css)), true).\",
-		\".$stockage.\",
+		\".$stockage.\"
 	);?>\"";
+	$inclusion_dynamique_noisette = '';
 	$inclusion_statique_noisette = "noisette_encapsuler(
 		$plugin,
 		recuperer_fond(
@@ -102,8 +103,7 @@ function balise_NOISETTE_COMPILER_dist($p) {
 		$stockage
 	)";
 
-	// Finaliser le code en choisissant le type d'inclusion. La fonction type_noisette_dynamiser() renvoie toujours
-	// false pour une noisette conteneur.
+	// Finaliser le code en choisissant le type d'inclusion.
 	$code = "(($est_conteneur == 'oui')
 		? $inclusion_statique_conteneur
 		: (type_noisette_dynamiser($plugin, $type_noisette, $stockage) 
