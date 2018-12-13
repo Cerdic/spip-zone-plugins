@@ -19,7 +19,7 @@
 <p><:mailsubscriber:confirmsubscribe_texte_email_1{email=#GET{email},nom_site_spip=#GET{nom_site_spip}}:></p>
 <//B_titreliste2>
 
-[(#SET{url,[<br><center>(#INCLURE{fond=emails/inc-button,url=[(#EMAIL*|mailsubscriber_url_confirm{#JETON*[+(#ID_MAILSUBSCRIBINGLIST)]}|url_absolue)],label=<:newsletter:bouton_subscribe:>,width=250px})</center><br>]})]
+[(#SET{url,[<br><center>(#INCLURE{fond=emails/inc-button,url=[(#EMAIL*|mailsubscriber_url_confirm{#JETON*,#ID_MAILSUBSCRIBINGLIST}|url_absolue)],label=<:newsletter:bouton_subscribe:>,width=250px})</center><br>]})]
 <p>[(#VAL{mailsubscriber:confirmsubscribe_texte_email_2}|_T{#ARRAY{url_confirmsubscribe,#GET{url}},#ARRAY{sanitize,0}})]</p>
 
 <br />
