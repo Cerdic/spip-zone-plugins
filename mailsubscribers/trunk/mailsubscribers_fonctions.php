@@ -113,7 +113,7 @@ function mailsubscribers_liste_synchronisee($identifiant) {
 function mailsubscriber_cle_action($action, $email, $jeton, $id_mailsubscribinglists = null) {
 	if ($id_mailsubscribinglists) {
 		if (!is_array($id_mailsubscribinglists)) {
-			$id_mailsubscribinglists = array($id_mailsubscribinglists);
+			$id_mailsubscribinglists = explode(',', $id_mailsubscribinglists);
 		}
 		$id_mailsubscribinglists = array_map('intval', $id_mailsubscribinglists);
 		$id_mailsubscribinglists = array_filter($id_mailsubscribinglists);

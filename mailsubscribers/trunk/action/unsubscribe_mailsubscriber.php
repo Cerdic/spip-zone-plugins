@@ -84,7 +84,7 @@ function action_unsubscribe_mailsubscriber_dist($email = null, $id_mailsubscribi
 			if ($nb_listes>=1) {
 				if ($nb_listes>1) {
 					$titre = _T('mailsubscriber:unsubscribe_texte_confirmer_email_listes_1', $env);
-					$label_bouton_this = _T('newsletter:bouton_unsubscribe_several');
+					$label_bouton_this = _T('newsletter:bouton_unsubscribe_multiples');
 				} elseif ($nb_listes == 1) {
 					$titre = _T('mailsubscriber:unsubscribe_texte_confirmer_email_liste_1', $env);
 					$label_bouton_this = _T('newsletter:bouton_unsubscribe');
