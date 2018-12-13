@@ -55,9 +55,9 @@
 
 	if (file_exists($file_out))
 	{
-		clearstatcache;
-		$damo = date(YmdHi , strtotime("#DATE_MODIF")) ;
-		$dage = date(YmdHi , filemtime($file_out)) ;
+		clearstatcache();
+		$damo = date('YmdHi' , strtotime("#DATE_MODIF")) ;
+		$dage = date('YmdHi' , filemtime($file_out)) ;
 		if ($damo > $dage)
 		{
 			unlink($file_out);
@@ -114,7 +114,7 @@
 
 	}
 
-	$id_document = $lier_pdf[data][$file_out];
+	$id_document = $lier_pdf['data'][$file_out];
 	if($id_document > 0){
 		$file_out = '#URL_DOCUMENT{$id_document}';
 	}
