@@ -122,17 +122,6 @@ function get_apc_data($info, &$data_success) {
 	return null;
 }
 
-function spipsafe_unserialize($str) {
-	if (strpos($str, "SPIPTextWheelRuleset") !== false)
-		return ajuste_longueur_html($str);
-	$unser = unserialize($str);
-	if (is_array($unser) and isset($unser['texte'])) {
-		gunzip_page($unser); // si 'texte' est trop grand il est gzcompress par gzip_page
-		$unser['texte'] = ajuste_longueur_html($unser['texte']);
-	}
-	return joli_cache($unser, false);
-}
-
 function joli_contexte($contexte) {
 	global $MY_SELF;
 	$return = '';
@@ -161,21 +150,25 @@ function joli_contexte($contexte) {
 	};
 	return $return;
 }
+
 function joli_cache($extra) {
-	if (isset($extra['texte']))	// Alors c'est un cache entier !
+	if (is_array($extra)
+		and isset($extra['texte']))
 		$extra['texte'] = ajuste_longueur_html($extra['texte']);
-		// sinon c'est juste une des métadonnées du cache
-		
+		// sinon c'est pas un squelette spip, par exemple une textwheel
+		// ou juste un talon ou juste une des métadonnées du cache
+
 	$print=print_r($extra,1);
+
 	if (!is_array($extra))
-		return "<xmp>$print</xmp>";
+		return "<xmp>".ajuste_longueur_html($print)."</xmp>";
 
 	// On enlève 'Array( ' au début et ')' à la fin
 	$print = trim(substr($print, 5), " (\n\r\t");
 	$print = substr ($print, 0, -1);
 
-	// Si ce n'est pas un cache entier avec ses métadonnées
-	if (!isset($extra['squelette']) or !isset($extra['source']))
+	// rien à améliorer s'il n'y a ni la source ni le squelette
+	if (!isset($extra['source']) and !isset($extra['squelette']))
 		return "<xmp>$print</xmp>";
 
 	// [squelette] => html_5731a2e40776724746309c16569cac40
@@ -198,7 +191,7 @@ function joli_cache($extra) {
 			}
 			return "[{$match[1]}] => </xmp><a title='{$title}' 
 						href='".generer_url_ecrire('xray', "SOURCE=$source")."' 
-						target='blank'><xmp>{$match[2]}</xmp> &#128279;</a><xmp>";
+						target='blank'><xmp>{$match[2]}</xmp> <small>&#128279;</small></a><xmp>";
 		}, 
 		$print);
 	$print = preg_replace('/^    /m', '', $print);
@@ -692,8 +685,6 @@ if (isset($MYREQUEST['IMG'])) {
 }
 
 if (isset($MYREQUEST['SOURCE']) and $MYREQUEST['SOURCE']) {
-	echo 'Depuis '.getcwd().' : voir '.$MYREQUEST['SOURCE'].'<br><hr><br>';
-	
 	echo '<xmp>'.file_get_contents ($MYREQUEST['SOURCE']).'</xmp>';
 	exit;
 }
@@ -761,9 +752,7 @@ function block_sort($array1, $array2)
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-<head><title>APCu INFO <?php
-echo $host;
-?></title>
+<head><title>XRay - APCu Infos sur les caches SPIP</title>
 <style><!--
 body { background:white; font-size:100.01%; margin:0; padding:0; }
 body,p,td,th,input,submit { font-size:0.8em;font-family:arial,helvetica,sans-serif; }
@@ -956,6 +945,14 @@ xmp { display: inline }
 		</a>
 	<hr class="apc">
 </div>
+
+<?php
+// Les dossiers de squelettes déclarés dans le paquet.xml comme 'public' ne sont pas accessibles dans le privé
+// Pour bénéficier des liens ici, il faut les ajouter dans la $GLOBALS['dossier_squelettes']
+// echo "<h2>GLOBALS['dossier_squelettes'] : <pre>". print_r($GLOBALS['dossier_squelettes'],1)."</pre></h2>";
+// echo "<h2>_chemin</h2> <pre>".print_r(_chemin(),1)."</p>";
+?>
+
 
 <?php
 // Display main Menu
@@ -1291,7 +1288,6 @@ EOB;
 					$k = cache_get_squelette($entry['info']);
 					break;
 			}
-			echo "</ul>";
 			$list[$k . $entry['info']] = $entry;
 		}
 
@@ -1347,7 +1343,7 @@ EOB;
 			foreach ($list as $k => $entry) {
 				$data=$searched=null;
 				$data_success = false;
-// plus de restrictions, on cherche toujours data
+				// désormais on cherche toujours data
 				$searched = $data = get_apc_data($entry['info'], $data_success);
 
 				if ($MYREQUEST['SEARCH'] and $MYREQUEST['WHERE']) {
@@ -1383,20 +1379,36 @@ EOB;
 					) {
 
 					if ($MYREQUEST['TYPELISTE']=='squelettes') {
-						if ($MYREQUEST['TYPECACHE'] == 'SESSIONS_TALON')	// ya pas de 'source' dans les talons
-							$squelette = cache_get_squelette($entry['info']);
-						elseif (!isset($data['source'])) 	// textwheel, etc
-							continue;
-						else 
-							$squelette = $data['source'];
 
-						if (in_array($squelette, $liste_squelettes))	// déjà listé
+						$joli = array();
+						if (!is_array($data)) {	// textwheel etc
 							continue;
+						}
+						elseif (($MYREQUEST['TYPECACHE'] == 'SESSIONS_TALON')
+								or !isset($data['source'])) { // talons
+							// ya pas de 'source' dans les talons, c'est la clé qui donne le squelette
+							$s = cache_get_squelette($entry['info']);
+							$squelette = find_in_path($s.'.html');
+
+							// Les dossiers de squelettes déclarés comme public dans paquet.xml
+							// ne sont pas utilisés par find_in_path dans le privé
+							if (!$squelette)
+								$squelette = $joli = $s." (échec find_in_path : déclarez le chemin (depuis la racine du site) de vos dossiers publics de squelettes dans GLOBALS['dossier_squelette']) ";
+							else
+								$squelette = $joli['source'] = substr($squelette, 3);	// On enlève ../ 
+						}
+						else {	// cas normal : vrai cache d'un squelette spip
+							$squelette = $joli['source'] = $data['source'];
+						}
+
+						if (in_array($squelette, $liste_squelettes)) {	// déjà listé
+							continue;
+						}
 
 						// squelette pas encore listé
 						$i++;
 						$liste_squelettes[] = $squelette;
-						echo "<tr class='tr-", $i % 2, "'><td colspan='7'>$i) $squelette</td></tr>";
+						echo "<tr class='tr-".($i % 2)."'><td colspan='7'>$i) ".joli_cache($joli)."</td></tr>";
 						if ($i == $MYREQUEST['COUNT'])
 							break;
 						continue;
@@ -1409,6 +1421,7 @@ EOB;
 						$displayed_name = str_replace(XRAY_NEPASAFFICHER_DEBUTNOMCACHE, '', $displayed_name);
 					echo '<tr id="key-' . $sh . '" class=tr-', $i % 2, '>', 
 							"<td class='td-0' style='position: relative'>
+								$i) 
 								<a href='$MY_SELF&SH={$sh}#key-{$sh}'>
 									$displayed_name
 								</a>";
