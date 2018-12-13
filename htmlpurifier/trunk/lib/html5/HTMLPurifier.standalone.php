@@ -16626,7 +16626,7 @@ class HTMLPurifier_HTMLModule_CommonAttributes extends HTMLPurifier_HTMLModule
             
             // https://www.w3.org/TR/microdata/
             'itemid' => 'ID',
-            'itemprop' => 'Text',            
+            'itemprop' => 'CDATA',            
             'itemscope' => 'Bool#itemscope',            
             'itemtype' => 'URI',            
             
@@ -16913,7 +16913,7 @@ class HTMLPurifier_HTMLModule_Forms extends HTMLPurifier_HTMLModule
             'Common',
             array(
                 'form' => 'ID',            
-                // 'for' => 'IDREF', // IDREF not implemented, cannot allow
+                'for' => 'ID', // IDREF not implemented, allow ID
             )
         );
         $label->excludes = array('label' => true);

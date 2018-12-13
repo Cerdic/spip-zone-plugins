@@ -16,8 +16,8 @@ function echappe_anti_xss($match) {
         return "";
     }
     $texte = &$match[0];
-    if (preg_match("@^</?[a-z]{1,5}(\s+class\s*=\s*['\"][a-z _\s-]+['\"])?\s?/?>$@iS", $texte)){
-      return $texte;
+    if ( preg_match("@^(</?(?!script)[a-z]+(\s+class\s*=\s*['\"][a-z _\s-]+['\"])?\s?/?>[\w\s]*)+$@iS", $texte) ){
+      return $texte; // input non filtré, $texte doit être safe !
     }
     if (!isset($safehtml)) {
         $safehtml = charger_fonction('safehtml', 'inc', true);
