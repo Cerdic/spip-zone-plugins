@@ -59,6 +59,8 @@
 				onAjaxLoad(hash_reply);
 			}
 			jQuery("#comment" + id_forum).eq(0).click();
+		} else if (id && nom != 'comment' && jQuery("#comment" + id_forum).length==1) {
+			window.location.hash = "#comment" + id_forum;
 		}
 		hash_reply();
 	});
