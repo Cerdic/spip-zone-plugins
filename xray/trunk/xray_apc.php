@@ -43,17 +43,6 @@ if (file_exists("apc.conf.php"))
 
 ////////// BEGIN OF DEFAULT CONFIG AREA ///////////////////////////////////////////////////////////
 
-defaults('USE_AUTHENTICATION', 0); // Use (internal) authentication - best choice if
-// no other authentication is available
-// If set to 0:
-//  There will be no further authentication. You
-//  will have to handle this by yourself!
-// If set to 1:
-//  You need to change ADMIN_PASSWORD to make
-//  this work!
-defaults('ADMIN_USERNAME', 'admin'); // Admin Username
-defaults('ADMIN_PASSWORD', 'password'); // Admin Password - CHANGE THIS TO ENABLE!!!
-
 defaults('MAXLEN_HTMLCOURT', 1000);	// Couper les html
 
 // (beckerr) I'm using a clear text password here, because I've no good idea how to let
@@ -280,6 +269,12 @@ if (!function_exists('cache_est_sessionne')) {
 	}
 }
 
+function cache_get_squelette($cle) {
+	$squelette = substr(str_replace(XRAY_NEPASAFFICHER_DEBUTNOMCACHE, '', $cle), 33);
+	$squelette = preg_replace(XRAY_PATTERN_SESSION, '', $squelette);
+	return $squelette;
+}
+
 ////////////////////////////////////////////////////////////////////////
 
 // "define if not defined"
@@ -318,8 +313,8 @@ $vardom = array(
 	
 	'IMG' => '/^[123]$/', // image to generate
 	'SOURCE' => '/^[a-z0-9\-_\/\.]+$/', // file source to display
-	'LO' => '/^1$/', // login requested
-	
+//	'LO' => '/^1$/', // login requested
+	'TYPELISTE' => '/^(caches|squelettes)$/',
 	'COUNT' => '/^\d+$/', // number of line displayed in list
 	'S_KEY' => '/^[AHSMCDTZ]$/', // first sort key
 	'SORT' => '/^[DA]$/', // second sort key
@@ -374,11 +369,14 @@ if (!isset($MYREQUEST['EXTRA']))
 	$MYREQUEST['EXTRA'] = '';
 if (!isset($MYREQUEST['ZOOM']))
 	$MYREQUEST['ZOOM'] = 'TEXTECOURT';
+if (!isset($MYREQUEST['TYPELISTE']))
+	$MYREQUEST['TYPELISTE'] = 'caches';
 
 global $MY_SELF; // fix apcu
 global $MY_SELF_WO_SORT; // fix apcu
-$MY_SELF_WO_SORT = "$PHP_SELF" . "?COUNT=" . $MYREQUEST['COUNT'] . "&SEARCH=" . $MYREQUEST['SEARCH'] . "&TYPECACHE=" . $MYREQUEST['TYPECACHE'] . "&ZOOM=" . $MYREQUEST['ZOOM'] . "&EXTRA=" . $MYREQUEST['EXTRA'] . "&WHERE=" . $MYREQUEST['WHERE'] . "&exec=" . $MYREQUEST['exec'] . "&OB=" . $MYREQUEST['OB'];
-$MY_SELF         = $MY_SELF_WO_SORT . "&S_KEY=" . $MYREQUEST['S_KEY'] . "&SORT=" . $MYREQUEST['SORT'];
+$MY_SELF_WO_SORT = "$PHP_SELF" . "?COUNT=" . $MYREQUEST['COUNT'] . "&SEARCH=" . $MYREQUEST['SEARCH'] . "&TYPECACHE=" . $MYREQUEST['TYPECACHE'] . "&ZOOM=" . $MYREQUEST['ZOOM'] . "&EXTRA=" . $MYREQUEST['EXTRA'] . "&WHERE=" . $MYREQUEST['WHERE'] . "&exec=" . $MYREQUEST['exec'] . "&OB=" . $MYREQUEST['OB']. "&TYPELISTE=" . $MYREQUEST['TYPELISTE'];
+$MY_SELF = $MY_SELF_WO_SORT . "&S_KEY=" . $MYREQUEST['S_KEY'] . "&SORT=" . $MYREQUEST['SORT'];
+
 $self_pour_lien = 
 	"http" . (!empty($_SERVER['HTTPS']) ? "s" : "") . "://" 
 	. $_SERVER['SERVER_NAME']
@@ -388,47 +386,20 @@ $self_pour_lien =
 global $IMG_BASE;
 $IMG_BASE = "$PHP_SELF" . "?exec=" . $MYREQUEST['exec'];
 
-// authentication needed?
-//
-if (!USE_AUTHENTICATION) {
-	$AUTHENTICATED = 1;
-} else {
-	$AUTHENTICATED = 0;
-	if (ADMIN_PASSWORD != 'password' && ($MYREQUEST['LO'] == 1 || isset($_SERVER['PHP_AUTH_USER']))) {
-		
-		if (!isset($_SERVER['PHP_AUTH_USER']) || !isset($_SERVER['PHP_AUTH_PW']) || $_SERVER['PHP_AUTH_USER'] != ADMIN_USERNAME || $_SERVER['PHP_AUTH_PW'] != ADMIN_PASSWORD) {
-			Header("WWW-Authenticate: Basic realm=\"APC Login\"");
-			Header("HTTP/1.0 401 Unauthorized");
-			
-			echo <<<EOB
-				<html><body>
-				<h1>Rejected!</h1>
-				<big>Wrong Username or Password!</big><br/>&nbsp;<br/>&nbsp;
-				<big><a href='$PHP_SELF?OB={$MYREQUEST['OB']}'>Continue...</a></big>
-				</body></html>
-EOB;
-			exit;
-			
-		} else {
-			$AUTHENTICATED = 1;
-		}
-	}
-}
-
-// clear cache
-if ($AUTHENTICATED && isset($MYREQUEST['CC']) && $MYREQUEST['CC']) {
+// clear APC cache
+if (isset($MYREQUEST['CC']) && $MYREQUEST['CC']) {
 	apcu_clear_cache();
 }
 
-// clear cache
-if ($AUTHENTICATED && isset($MYREQUEST['PP']) && $MYREQUEST['PP']) {
+// clear APC & SPIP cache
+if (isset($MYREQUEST['PP']) && $MYREQUEST['PP']) {
 	include_spip('inc/invalideur');
 	purger_repertoire(_DIR_SKELS);
 	apcu_clear_cache();
 	ecrire_meta('cache_mark', time());
 }
 
-if ($AUTHENTICATED && !empty($MYREQUEST['DU'])) {
+if (!empty($MYREQUEST['DU'])) {
 	apcu_delete($MYREQUEST['DU']);
 }
 
@@ -748,15 +719,18 @@ function bsize($s)
 function sortheader($key, $name, $extra = '')
 {
 	global $MYREQUEST;
-	global $MY_SELF_WO_SORT; // fix apcu : il faut global ici aussi
 	
 	// fix apcu l'affichage des headers ne doit pas changer $MYREQUEST
-	$SORT = $MYREQUEST['SORT'];
-	if (!$SORT)
-		$SORT = 'D';
+	$sort = $MYREQUEST['SORT'];
+	if (!$sort)
+		$sort = 'D';
 	if ($MYREQUEST['S_KEY'] == $key)
-		$SORT = (($SORT == 'A') ? 'D' : 'A');
-	$url = "$MY_SELF_WO_SORT$extra&S_KEY=$key&SORT=$SORT";
+		$sort = (($sort == 'A') ? 'D' : 'A');
+
+//	global $MY_SELF_WO_SORT; // fix apcu : il faut global ici aussi
+//	$url = "$MY_SELF_WO_SORT$extra&S_KEY=$key&SORT=$SORT";
+global $MY_SELF;
+	$url = parametre_url(parametre_url($MY_SELF.$extra,'S_KEY',$key),'SORT', $sort);
 	return "<a class=sortable href='$url'>$name</a>";
 }
 
@@ -771,28 +745,6 @@ function menu_entry($ob, $title)
 		return "<li><span class=active>$title</span></li>";
 	} else {
 		return "<li><a class=\"child_active\" href='$MY_SELF'>$title</a></li>";
-	}
-}
-
-function put_login_link($s = "Login")
-{
-	global $MY_SELF, $MYREQUEST, $AUTHENTICATED;
-	// needs ADMIN_PASSWORD to be changed!
-	//
-	if (!USE_AUTHENTICATION) {
-		return;
-	} else if (ADMIN_PASSWORD == 'password') {
-		print <<<EOB
-			<a href="#" onClick="javascript:alert('You need to set a password at the top of apc.php before this will work!');return false";>$s</a>
-EOB;
-	} else if ($AUTHENTICATED) {
-		print <<<EOB
-			'{$_SERVER['PHP_AUTH_USER']}'&nbsp;logged&nbsp;in!
-EOB;
-	} else {
-		print <<<EOB
-			<a href="$MY_SELF&LO=1">$s</a>
-EOB;
 	}
 }
 
@@ -825,28 +777,6 @@ td { vertical-align:top }
 a { color:black; font-weight:none; text-decoration:none; }
 a:hover { text-decoration:underline; }
 div.content { padding:1em 1em 1em 1em; width:97%; z-index:100; }
-
-
-div.head div.login {
-	position:absolute;
-	right: 1em;
-	top: 1.2em;
-	color:white;
-	width:6em;
-	}
-div.head div.login a {
-	position:absolute;
-	right: 0em;
-	background:rgb(119,123,180);
-	border:solid rgb(102,102,153) 2px;
-	color:white;
-	font-weight:bold;
-	padding:0.1em 0.5em 0.1em 0.5em;
-	text-decoration:none;
-	}
-div.head div.login a:hover {
-	background:rgb(193,193,244);
-	}
 
 h1.apc { background:rgb(153,153,204); margin:0; padding:0.5em 1em 0.5em 1em; }
 * html h1.apc { margin-bottom:-7px; }
@@ -1024,12 +954,6 @@ xmp { display: inline }
 			</a>
 		</div>
 		</a>
-	</h1>
-	<div class="login">
-	<?php
-put_login_link();
-?>
-	</div>
 	<hr class="apc">
 </div>
 
@@ -1044,18 +968,15 @@ echo menu_entry(OB_HOST_STATS, 'View Host Stats'), menu_entry(OB_USER_CACHE, 'Us
 if (plugin_est_actif('cachelab'))
 	echo menu_entry(OB_CACHELAB, 'CacheLab');
 
-if ($AUTHENTICATED) {
 	echo <<<EOB
 		<li><a class="aright" href="$MY_SELF&CC=1" onClick="javascript:return confirm('Are you sure?');"
-			title="Vider le cache APC user">Vider APC</a></li>
+			title="Vider le cache APC user">Vider APC</a>
+		</li>
 		<li><a class="aright" href="$MY_SELF&PP=1" 
 				onClick="javascript:return confirm('Êtes-vous certain de vouloir vider le cache APC user et le dossier skel/ des squelettes compilés ?');"
 				title="Vider le cache APC user ET effacer les caches de compilation des squelettes ?">
-				Purger SPIP</a></li>
-		
-EOB;
-}
-echo <<<EOB
+				Purger SPIP</a>
+		</li>
 	</ol>
 EOB;
 
@@ -1244,21 +1165,13 @@ EOB;
 	// User Cache Entries
 	// -----------------------------------------------
 	case OB_USER_CACHE:
-		if (!$AUTHENTICATED) {
-			echo '<div class="error">You need to login to see the user values here!<br/>&nbsp;<br/>';
-			put_login_link("Login now!");
-			echo '</div>';
-			break;
-		}
-		$fieldname    = 'info';
-		$fieldkey     = 'info';
-		
-		$cols = 6;
+		$cols = 7;
 		
 		echo '<form>
 			<input type="hidden" name="OB" value="'.$MYREQUEST['OB'].'">
 			<input type="hidden" name="exec" value="'.$MYREQUEST['exec'].'">
 			<input type="hidden" name="S_KEY" value="'.$MYREQUEST['S_KEY'].'">
+			<input type="hidden" name="TYPELISTE" value="'.$MYREQUEST['TYPELISTE'].'">
 		<b>Affichage extra:</b> 
 		<select name=EXTRA  onChange="form.submit()">
 			<option value="" ', $MYREQUEST['EXTRA'] == '' ? ' selected' : '', '></option> 
@@ -1272,8 +1185,19 @@ EOB;
 			<option value=INCLUSIONS ', $MYREQUEST['EXTRA'] == 'INCLUSIONS' ? ' selected' : '', '>&lt;INCLURE&gt;</option>
 			<option value=MACROSESSIONS ', $MYREQUEST['EXTRA'] == 'MACROSESSIONS' ? ' selected' : '', '>#_SESSION</option>
 			<option value=MACROAUTORISER ', $MYREQUEST['EXTRA'] == 'MACROAUTORISER' ? ' selected' : '', '>#_AUTORISER_SI</option>
-		</select>
-		<p><b>Types cache:</b> 
+		</select>';
+	
+		echo "<span style='margin-left: 2em; '></span>";
+		if ($MYREQUEST['TYPELISTE']=='squelettes') {
+			echo '<a href="'.parametre_url($MY_SELF, 'TYPELISTE', 'caches').'">Caches</a> 
+			| <b>Squelettes</b>';
+		}
+		else {
+			echo '<b>Caches</b> 
+			| <a href="'.parametre_url($MY_SELF, 'TYPELISTE', 'squelettes').'">Squelettes</a>';
+		};
+
+		echo '<p><b>Types cache:</b> 
 		<select name=TYPECACHE  onChange="form.submit()">
 			<option value=ALL', $MYREQUEST['TYPECACHE'] == 'ALL' ? ' selected' : '', '>Tous</option>
 			<option value=NON_SESSIONS', $MYREQUEST['TYPECACHE'] == 'NON_SESSIONS' ? ' selected' : '', '>Non sessionnés</option>
@@ -1322,14 +1246,24 @@ EOB;
 			}
 			$MYREQUEST['SEARCH'] = '~'.$MYREQUEST['SEARCH'].'~i';
 		}
-		echo '<div class="info"><table cellspacing=0><tbody>', '<tr>', '<th>Caches - ', sortheader('S', 'tri par Squelette'), '</th>', '<th>', sortheader('H', 'Hits'), '</th>', '<th>', sortheader('Z', 'Size'), '</th>', '<th>', sortheader('A', 'Last accessed'), '</th>', '<th>', sortheader('C', 'Created at'), '</th>';
+		echo '<div class="info">
+				<table cellspacing=0>
+					<tbody><tr>';
+		if ($MYREQUEST['TYPELISTE']=='squelettes')
+			echo '<th align="left">', sortheader('S', 'Squelettes').'</th>';
+		else {
+			echo '<th align="left">Caches - ', sortheader('S', 'tri par Squelette').'</th>',
+				'<th>', sortheader('H', 'Hits'), '</th>', 
+				'<th>', sortheader('Z', 'Size'), '</th>', 
+				'<th>', sortheader('A', 'Last accessed'), '</th>', 
+				'<th>', sortheader('C', 'Created at'), '</th>',
+				'<th>', sortheader('T', 'Timeout'), '</th>',
+				'<th>Del</th>
+				</tr>';
+		};
 		
-		if ($fieldname == 'info') {
-			$cols += 2;
-			echo '<th>', sortheader('T', 'Timeout'), '</th>';
-		}
-		echo '<th>Del</th></tr>';
-		
+		// FIXME : il vaudrait mieux trier aprés avoir filtré
+
 		// builds list with alpha numeric sortable keys
 		//
 		$list = array();
@@ -1351,23 +1285,16 @@ EOB;
 				case 'T':
 					$k = sprintf('%015d-', $entry['ttl']);
 					break;
-				case 'D':
-					$k = sprintf('%015d-', $entry['deletion_time']);
-					break;
 				case 'S': 
 					// tri par squelette : on supprime le préfixe et le md5 au début
 					// et alors on peut trier
-					$k = substr(str_replace(XRAY_NEPASAFFICHER_DEBUTNOMCACHE, '', $entry["info"]), 33);
+					$k = cache_get_squelette($entry['info']);
 					break;
 			}
-			if (!$AUTHENTICATED) {
-				// hide all path entries if not logged in
-				$list[$k . $entry[$fieldname]] = preg_replace('/^.*(\\/|\\\\)/', '*hidden*/', $entry);
-			} else {
-				$list[$k . $entry[$fieldname]] = $entry;
-			}
+			echo "</ul>";
+			$list[$k . $entry['info']] = $entry;
 		}
-		
+
 		if ($list) {
 			// sort list
 			//
@@ -1412,7 +1339,9 @@ EOB;
 					$pattern_typecache = '~formulaires/~i';
 					break;
 			}
-			
+
+			$liste_squelettes = array();
+
 			// output list
 			$i = 0;
 			foreach ($list as $k => $entry) {
@@ -1443,17 +1372,39 @@ EOB;
 					}
 				};
 
-				if ((!$pattern_typecache or preg_match($pattern_typecache, $entry[$fieldname]))
+				if ((!$pattern_typecache or preg_match($pattern_typecache, $entry['info']))
 					and (!$MYREQUEST['SEARCH']
 						or (!$MYREQUEST['WHERE']
-							and preg_match($MYREQUEST['SEARCH'], $entry[$fieldname]))
+							and preg_match($MYREQUEST['SEARCH'], $entry['info']))
 						or ($MYREQUEST['WHERE']
 							and preg_match($MYREQUEST['SEARCH'].'m', print_r($searched,1))))
 					and (!$also_required 
-						or ($also_required($entry[$fieldname], $data)== $also_required_bool))) {
+						or ($also_required($entry['info'], $data)== $also_required_bool))
+					) {
+
+					if ($MYREQUEST['TYPELISTE']=='squelettes') {
+						if ($MYREQUEST['TYPECACHE'] == 'SESSIONS_TALON')	// ya pas de 'source' dans les talons
+							$squelette = cache_get_squelette($entry['info']);
+						elseif (!isset($data['source'])) 	// textwheel, etc
+							continue;
+						else 
+							$squelette = $data['source'];
+
+						if (in_array($squelette, $liste_squelettes))	// déjà listé
+							continue;
+
+						// squelette pas encore listé
+						$i++;
+						$liste_squelettes[] = $squelette;
+						echo "<tr class='tr-", $i % 2, "'><td colspan='7'>$i) $squelette</td></tr>";
+						if ($i == $MYREQUEST['COUNT'])
+							break;
+						continue;
+					}
+					$i++;
 					$sh = md5($entry["info"]);
 					
-					$displayed_name = htmlentities(strip_tags($entry[$fieldname], ''), ENT_QUOTES, 'UTF-8');
+					$displayed_name = htmlentities(strip_tags($entry['info'], ''), ENT_QUOTES, 'UTF-8');
 					if (defined('XRAY_NEPASAFFICHER_DEBUTNOMCACHE'))
 						$displayed_name = str_replace(XRAY_NEPASAFFICHER_DEBUTNOMCACHE, '', $displayed_name);
 					echo '<tr id="key-' . $sh . '" class=tr-', $i % 2, '>', 
@@ -1462,7 +1413,7 @@ EOB;
 									$displayed_name
 								</a>";
 
-					if ($data and cache_est_talon($entry[$fieldname], $data))
+					if ($data and cache_est_talon($entry['info'], $data))
 						echo "<span style='margin-left:2em' title='Talon des caches sessionnés avec ce squelette et le même contexte'>[talon]</span>";
 					
 					$boutons_liens = '';
@@ -1486,7 +1437,6 @@ EOB;
 					}
 					echo '<span style="float: right">'.$boutons_liens.'</span>';
 
-					
 					if ($MYREQUEST['EXTRA'] and ($sh != $MYREQUEST["SH"]) // sinon yaura un zoom après et c'est inutile de répéter ici
 						and $data_success) {
 						$extra = null;
@@ -1591,26 +1541,25 @@ EOB;
 							echo "<br>".$extra."<br>";
 						else
 							echo "<br>(rien)</br>";
-					}
+					} // fin affichage Extra
+
 					echo '</td>
 					<td class="td-n center">', $entry['num_hits'], '</td>
 					<td class="td-n right">', $entry['mem_size'], '</td>
 					<td class="td-n center">', date(DATE_FORMAT, $entry['access_time']), '</td>
 					<td class="td-n center">', date(DATE_FORMAT, $entry['creation_time']), '</td>';
 					
-					if ($fieldname == 'info') {
-						if ($entry['ttl'])
-							echo '<td class="td-n center">' . $entry['ttl'] . ' seconds</td>';
-						else
-							echo '<td class="td-n center">None</td>';
-					}
+					if ($entry['ttl'])
+						echo '<td class="td-n center">' . $entry['ttl'] . ' seconds</td>';
+					else
+						echo '<td class="td-n center">None</td>';
+
 					if ($entry['deletion_time']) {
-						
 						echo '<td class="td-last center">', date(DATE_FORMAT, $entry['deletion_time']), '</td>';
 					} else if ($MYREQUEST['OB'] == OB_USER_CACHE) {
 						
 						echo '<td class="td-last center">';
-						echo '<a href="', $MY_SELF, '&DU=', urlencode($entry[$fieldkey]), '" style="color:red">X</a>';
+						echo '<a href="', $MY_SELF, '&DU=', urlencode($entry['info']), '" style="color:red">X</a>';
 						echo '</td>';
 					} else {
 						echo '<td class="td-last center"> &nbsp; </td>';
@@ -1643,14 +1592,13 @@ EOB;
 						}
 						echo '</td>';
 						echo '</tr>';
-					}
-					$i++;
+					} // fin du zoom SH
 					if ($i == $MYREQUEST['COUNT'])
 						break;
-				}
-			}
+				} // fin du filtrage
+			} // fin du foreach
 			
-		} else {
+		} else { // En l'absence de tout cache
 			echo '<tr class=tr-0><td class="center" colspan=', $cols, '><i>No data</i></td></tr>';
 		}
 		echo <<< EOB
