@@ -126,7 +126,7 @@ function type_noisette_dynamiser($plugin, $type_noisette, $stockage = '') {
 
 			// On répertorie la configuration d'inclusion de toutes le types noisettes disponibles et on
 			// détermine si le type demandé est dynamique ou pas.
-			if ($inclusion_types_noisette = ncore_type_noisette_lister($plugin,'inclusion', $stockage)) {
+			if ($inclusion_types_noisette = ncore_type_noisette_lister($plugin, 'inclusion', $stockage)) {
 				foreach ($inclusion_types_noisette as $_type_noisette => $_inclusion) {
 					$est_dynamique[$plugin][$_type_noisette] = ($_inclusion == 'dynamique') ? true : false;
 				}
@@ -294,22 +294,20 @@ function noisette_contextualiser($plugin, $noisette, $type_noisette, $environnem
  * @param string $contenu
  *        Contenu compilé de la noisette en cours avant encapsulation.
  * @param string $encapsulation
- * 	      Indicateur d'encapsulation du contenu par un capsule ou pas.
- * @param string $css
- * 	      Styles à intégrer à la capsule.
- * @param mixed  $id_noisette
- * 	      Identifiant de la noisette.
- * @param string $type_noisette
- * 	      Identifiant du type de noisette.
+ * 	      Indicateur d'encapsulation du contenu par un capsule ou par une noisette conteneur. Prend les valeurs
+ *        oui, non, defaut pour une capsule et conteneur pour une noisette conteneur.
+ * @param string $parametres
+ * 	      Liste des paramètres de l'encapsulation. Pour une capsule, les index sont limités à type_noisette, id_noisette et
+ *        css. Pour une noisette conteneur cette liste correspond au champ paramètres de la noisette et à son type.
  * @param string $stockage
  *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
  *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
  *        fournissant le service de stockage souhaité.
  *
  * @return string
- * 		Le contenu de la noisette encapsulé dans du HTML ou tel que fourni en entrée si pas d'encapsulation.
+ * 		Le contenu fourni encapsulé dans du HTML ou tel que fourni en entrée si pas d'encapsulation.
  */
-function noisette_encapsuler($plugin, $contenu, $encapsulation, $css, $id_noisette, $type_noisette, $stockage = '') {
+function noisette_encapsuler($plugin, $contenu, $encapsulation, $parametres, $stockage = '') {
 
 	// Initialisation du tableau du HTML des capsules indexé par plugin et nom de capsule.
 	static $defaut_encapsulation = array();
@@ -319,29 +317,44 @@ function noisette_encapsuler($plugin, $contenu, $encapsulation, $css, $id_noiset
 		$defaut_encapsulation[$plugin] = ncore_noisette_initialiser_encapsulation($plugin);
 	}
 
-	if (($encapsulation != 'non') or (($encapsulation == 'defaut') and ($defaut_encapsulation[$plugin]))) {
+	// Une noisette conteneur peut être assimilée à une capsule qui englobe non pas une noisette mais un ensemble
+	// de noisettes. A ce titre, une noisette conteneur n'a jamais de capsule car elle est déjà une capsule.
+	if (($encapsulation == 'oui') 
+	or ($encapsulation == 'conteneur') 
+	or (($encapsulation == 'defaut') and ($defaut_encapsulation[$plugin]))) {
 		// Détermination de la capsule à appliquer
-		// On utilise soit la capsule propre à un type de noisette si elle existe, soit on utilise la capsule
-		// par défaut qui porte le nom 'dist'.
-		if (find_in_path("capsules/${type_noisette}.html")) {
-			$nom_capsule = $type_noisette;
-			$contexte_capsule = array('id_noisette' => $id_noisette, 'type_noisette' => $type_noisette, 'css' => $css);
+		if ($encapsulation == 'conteneur') {
+			// Noisette conteneur:
+			// La capsule est la noisette elle-même.
+			$fond_capsule = type_noisette_localiser($plugin, $parametres['type_noisette']);
 		} else {
-			$nom_capsule = 'dist';
+			// Capsule de noisette:
+			// On utilise soit la capsule propre au type de noisette si elle existe,
+			// soit on utilise la capsule générique pour toute noisette qui porte le nom 'dist',
+			// soit on utilise une pseudo-capsule qui englobe la noisette dans un div.
+			if (find_in_path("capsules/{$parametres['type_noisette']}.html")) {
+				$fond_capsule = "capsules/{$parametres['type_noisette']}";				
+			} elseif (find_in_path('capsules/dist.html')) {
+				$fond_capsule = 'dist';				
+			} else {
+				$fond_capsule = '';
+			}
 		}
 
-		// Si on veut insérer la capsule dist (cas le plus fréquent), on accélère le processus en évitant de 
-		// faire systématiquement un appel à recuperer_fond(); on calcule la chaine par concaténation.
-		if ($nom_capsule == 'dist') {
+		// Si on veut insérer la pseudo-capsule (cas le plus fréquent), on accélère le processus en évitant de 
+		// faire systématiquement un appel à recuperer_fond(): on construit le HTML.
+		// De fait, le fichier HTML de la pseudo-capsule n'existe pas et n'est donc pas surchargeable.
+		if (!$fond_capsule) {
 			$capsule =
-'<div class="noisette noisette_' . $type_noisette . ($css ? " $css" : '') . '">
+'<div class="noisette noisette_' . $parametres['type_noisette'] . ($parametres['css'] ? " {$parametres['css']}" : '') . '">
 	<!--noisettes-->
 </div>';
 		} else {
-			$capsule = recuperer_fond("capsules/${nom_capsule}", $contexte_capsule);
+			$capsule = recuperer_fond($fond_capsule, $parametres);
 		}
 
-		// On insère le contenu de la noisette dans la capsule qui contient toujours une indication d'insertion explicite.
+		// On insère le contenu de la noisette dans la capsule ou la noisette conteneur qui contient toujours
+		// une indication d'insertion explicite.
 		$contenu = str_replace('<!--noisettes-->', $contenu, $capsule);
 	}
 

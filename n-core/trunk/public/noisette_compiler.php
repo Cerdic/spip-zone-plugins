@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Compile la balise `#NOISETTE_COMPILER` qui génère l'affichage de la noisette passée en argument.
- * La signature de la balise est : `#CONTENEUR_IDENTIFIER{id_noisette[, stockage]}`.
+ * La signature de la balise est : `#NOISETTE_COMPILER{id_noisette[, stockage]}`.
  *
  * @balise
  *
@@ -39,24 +39,54 @@ function balise_NOISETTE_COMPILER_dist($p) {
 	$type_noisette = champ_sql('type_noisette', $p);
 	$est_conteneur = champ_sql('est_conteneur', $p);
 	$parametres = champ_sql('parametres', $p);
-	$encapsulation = champ_sql('encapsulation', $p);
-	$css = champ_sql('css', $p);
-	$plugin = champ_sql('plugin', $p);
 
-	// A-t-on demandé un stockage spécifique en paramètre de la balise ?
+	// Plugin et éventuel stockage spécifique
+	$plugin = champ_sql('plugin', $p);
 	$stockage = interprete_argument_balise(2, $p);
 	$stockage = isset($stockage) ? str_replace('\'', '"', $stockage) : '""';
 
-	// On récupère l'environnement
-	$environnement = "\$Pile[0]";
+	// Cas d'une noisette conteneur : 
+	// - on ne compile pas la noisette conteneur mais on appelle la compilation des noisettes incluses (récursif),
+	// - et on applique systématiquement une encapsulation avec comme capsule la noisette conteneur elle-même.
+	// L'appel du fond conteneur_compiler pour le noisettes incluses est non ajaxé et l'environnement n'est pas fourni
+	// (seules les variables nécessaires à la détermination des noisettes incluses, à savoir, l'id du conteneur, 
+	// le plugin et le stockage sont passées).
+	// Seule l'inclusion statique est possible pour l'appel à la compilation des noisettes incluses.
+	// L'encapsulation se fait en compilant la noisette conteneur avec ses paramètres et sans ajax.
+	$inclusion_statique_conteneur = "noisette_encapsuler(
+		$plugin,
+		recuperer_fond(
+			'conteneur_compiler',
+			array(
+				'plugin'=>$plugin,
+				'id_conteneur'=>calculer_identifiant_conteneur($plugin, $id_noisette, $type_noisette, $stockage),
+				'stockage'=>$stockage
+			),
+			array()
+		),
+		'conteneur',
+		array_merge(unserialize($parametres), array('type_noisette' => $type_noisette)),
+		$stockage
+	)";
 
-	// On prépare le code en fonction du type d'inclusion dynamique ou pas
-	$inclusion_dynamique = "\"<?php echo recuperer_fond(
-		\".type_noisette_localiser($plugin, $type_noisette).\",
-		\".var_export(array_merge(unserialize($parametres), noisette_contextualiser($plugin, $noisette, $type_noisette, $environnement, $stockage)),true).\",
-		\".var_export(array('ajax'=>(type_noisette_ajaxifier($plugin, $type_noisette, $stockage))),true).\"
+	// Cas d'une noisette 'non conteneur' : 
+	// - on compile la noisette,
+	// - et on appelle l'encapsulation avec ses paramètres adéquates configurés pour la noisette (encapsulation, css, type)
+	$environnement = "\$Pile[0]";
+	$encapsulation = champ_sql('encapsulation', $p);
+	$css = champ_sql('css', $p);
+	$inclusion_dynamique_noisette = "\"<?php echo noisette_encapsuler(
+		\".$plugin.\",
+		recuperer_fond(
+			\".type_noisette_localiser($plugin, $type_noisette).\",
+			\".var_export(array_merge(unserialize($parametres), noisette_contextualiser($plugin, $noisette, $type_noisette, $environnement, $stockage)),true).\",
+			\".var_export(array('ajax'=>(type_noisette_ajaxifier($plugin, $type_noisette, $stockage))),true).\"
+		),
+		\".$encapsulation.\",
+		\".var_export(array('id_noisette' => $id_noisette, 'type_noisette' => $type_noisette, 'css' => $css)),true).\",
+		\".$stockage.\",
 	);?>\"";
-	$inclusion_statique = "noisette_encapsuler(
+	$inclusion_statique_noisette = "noisette_encapsuler(
 		$plugin,
 		recuperer_fond(
 			type_noisette_localiser($plugin, $type_noisette),
@@ -64,15 +94,32 @@ function balise_NOISETTE_COMPILER_dist($p) {
 			array('ajax'=>(type_noisette_ajaxifier($plugin, $type_noisette, $stockage)))
 		),
 		$encapsulation,
-		$css,
-		$id_noisette,
-		$type_noisette,
+		array('id_noisette' => $id_noisette, 'type_noisette' => $type_noisette, 'css' => $css),
 		$stockage
 	)";
-	$code = "((type_noisette_dynamiser($plugin, $type_noisette, $stockage)) ? $inclusion_dynamique : $inclusion_statique)";
 
+	// Finaliser le code en choisissant le type d'inclusion. La fonction type_noisette_dynamiser() renvoie toujours
+	// false pour une noisette conteneur.
+	$code = "($est_conteneur == 'oui'
+		? $inclusion_statique_conteneur
+		: (type_noisette_dynamiser($plugin, $type_noisette, $stockage) 
+			? $inclusion_dynamique_noisette 
+			: $inclusion_statique_noisette))";
 	$p->code = "((!$id_noisette) ? _T('zbug_champ_hors_motif', array('champ'=>'ID_NOISETTE', 'motif'=>'NOISETTES')) : $code)";
 	$p->interdire_scripts = false;
 
 	return $p;
+}
+
+
+function calculer_identifiant_conteneur($plugin, $id_noisette, $type_noisette, $stockage) {
+
+	include_spip('ncore/ncore');
+	$id_conteneur = ncore_conteneur_identifier(
+		$plugin,
+		array('type_noisette' => $type_noisette, 'id_noisette' => $id_noisette),
+		$stockage
+	);
+
+	return $id_conteneur;
 }

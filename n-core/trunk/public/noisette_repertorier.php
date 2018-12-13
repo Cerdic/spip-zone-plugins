@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Compile la balise `#NOISETTE_REPERTORIER` qui renvoie la liste des noisettes incluses dans un conteneur donné.
- * La signature de la balise est : `#CONTENEUR_IDENTIFIER{plugin, conteneur[, stockage]}`.
+ * La signature de la balise est : `#NOISETTE_REPERTORIER{plugin, conteneur[, stockage]}`.
  *
  * @package SPIP\NCORE\NOISETTE\BALISE
  * @balise

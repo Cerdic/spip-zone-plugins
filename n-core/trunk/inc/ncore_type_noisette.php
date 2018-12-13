@@ -143,10 +143,10 @@ function type_noisette_charger($plugin, $recharger = false, $stockage = '') {
 				$description['signature'] = $md5;
 				// Complétude de la description avec les valeurs par défaut
 				$description = array_merge($description_defaut, $description);
-				// Traitement spécifique d'un type de noisette conteneur : son contexte est toujours env et
-				// l'ajax et l'inclusion dynamique ne sont pas autorisés.
+				// Traitement spécifique d'un type de noisette conteneur : l'ajax et l'inclusion dynamique 
+				// ne sont pas autorisés et le contexte est défini lors de l'encapsulation.
 				if ($description['conteneur'] == 'oui') {
-					$description['contexte'] = array('env');
+					$description['contexte'] = array();
 					$description['ajax'] = 'non';
 					$description['inclusion'] = 'statique';
 				}

@@ -4,6 +4,7 @@ icon: 'conteneur-24.png'
 conteneur: 'oui'
 contexte: 'aucun'
 ajax: 'non'
+inclusion: 'statique'
 parametres:
   -
     saisie: 'selection'

@@ -1,26 +1,22 @@
-[(#REM) <!--  COMPILER_CONTENEUR
+[(#REM) <!--  CONTENEUR_COMPILER
 
 	Compile les noisettes d'un conteneur fourni en paramètre de l'inclusion.
-	Utilise ensuite l'inclusion générique compiler_noisette.html.
+	Cette inclusion est utilisée pour compiler récursivement une noisette conteneur.
+	Elle peut être surchargée pour s'adapter au mieux au stockage du plugin utilisateur.
 
 	@api
 
     @param string plugin
            Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
            un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
-	@param array  conteneur
-	       Tableau associatif représentant le conteneur à compiler.
-	@param string defaut_balise
-	       Valeur à utiliser si la noisette est paramétrée avec la valeur `defaut`.
+	@param array  id_conteneur
+	       Identifiant du conteneur.
 	@param string stockage
            Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
            ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
            fournissant le service de stockage souhaité.
 -->]
-#SET{noisettes, #NOISETTE_REPERTORIER{#ENV{plugin}, #ENV{conteneur}, #ENV{stockage}}}
-<INCLURE{fond=compiler_noisettes,
-	plugin=#ENV{plugin},
-	noisettes=#GET{noisettes},
-	defaut_balise=#ENV{defaut_balise}
-	stockage=#ENV{stockage},
-	env} />
+#SET{noisettes, #NOISETTE_REPERTORIER{#ENV{plugin}, #ENV{id_conteneur}, #ENV{stockage}}}
+<BOUCLE_noisette_conteneur(DATA) {source table, #ENV{noisettes, #ARRAY}}{plugin}{par rang_noisette}>
+	[(#NOISETTE_COMPILER{#VALEUR{id_noisette}, #ENV{stockage, ''}})]
+</BOUCLE_noisette_conteneur>
