@@ -102,65 +102,103 @@ function mailsubscribers_liste_synchronisee($identifiant) {
 /**
  * Cle action pour les URLs subscribe/unsubscribe/confirm
  * pour avoir une cle utilisable sur une liste precise,
- * l'id de liste est fourni en suffixe du jeton
+ * un ou plusieurs ids de liste dans $id_mailsubscribinglists
  * sous la forme "+".$id_mailsubscribinglist
- * @param $action
- * @param $email
- * @param $jeton
+ * @param string $action
+ * @param string $email
+ * @param string $jeton
+ * @param int|array $id_mailsubscribinglists
  * @return string
  */
-function mailsubscriber_cle_action($action, $email, $jeton) {
+function mailsubscriber_cle_action($action, $email, $jeton, $id_mailsubscribinglists = null) {
+	if ($id_mailsubscribinglists) {
+		if (!is_array($id_mailsubscribinglists)) {
+			$id_mailsubscribinglists = array($id_mailsubscribinglists);
+		}
+		$id_mailsubscribinglists = array_map('intval', $id_mailsubscribinglists);
+		$id_mailsubscribinglists = array_filter($id_mailsubscribinglists);
+		asort($id_mailsubscribinglists);
+	}
+
+	if ($id_mailsubscribinglists) {
+		$jeton .= '+' . implode('+', $id_mailsubscribinglists);
+	}
 	$arg = "$action-$email-$jeton";
 	include_spip("inc/securiser_action");
 	$hash = calculer_cle_action($arg);
+
+	if ($id_mailsubscribinglists) {
+		$hash = implode('-', $id_mailsubscribinglists) . '-' . $hash;
+	}
 
 	return $hash;
 }
 
 /**
  * URL unsubscribe
- * pour unsubscribe sur une liste precise, l'id de liste est fourni en suffixe du jeton
- * sous la forme "+".$id_mailsubscribinglist
+ * pour subscribe sur une ou plusieurs listes precises, fournir le ou les ID dans $id_mailsubscribinglist
  * @param string $email
  * @param string $jeton
+ * @param int|array $id_mailsubscribinglists
+ *   une ou plusieurs listes a confirmer
  * @param string $sep
  * @return string
  */
-function mailsubscriber_url_subscribe($email, $jeton, $sep = "&amp;") {
+function mailsubscriber_url_subscribe($email, $jeton, $id_mailsubscribinglists=null, $sep = "&amp;") {
+	// legacy ancien format d'appel : $sep etait le 3eme argument
+	if (is_string($id_mailsubscribinglists) and $id_mailsubscribinglists and !intval($id_mailsubscribinglists)) {
+		$sep = $id_mailsubscribinglists;
+		$id_mailsubscribinglists = null;
+	}
+
 	$url = generer_url_action("subscribe_mailsubscriber", "email=" . urlencode($email), false, true);
-	$url = parametre_url($url, "arg", mailsubscriber_cle_action("subscribe", $email, $jeton), $sep);
+	$url = parametre_url($url, "arg", mailsubscriber_cle_action("subscribe", $email, $jeton, $id_mailsubscribinglists), $sep);
 
 	return $url;
 }
 
 /**
  * URL subscribe
- * pour subscribe sur une liste precise, l'id de liste est fourni en suffixe du jeton
- * sous la forme "+".$id_mailsubscribinglist
+ * pour unsubscribe sur une ou plusieurs listes precises, fournir le ou les ID dans $id_mailsubscribinglist
  * @param string $email
  * @param string $jeton
+ * @param int|array $id_mailsubscribinglists
+ *   une ou plusieurs listes a confirmer
  * @param string $sep
  * @return string
  */
-function mailsubscriber_url_unsubscribe($email, $jeton, $sep = "&amp;") {
+function mailsubscriber_url_unsubscribe($email, $jeton, $id_mailsubscribinglists=null, $sep = "&amp;") {
+	// legacy ancien format d'appel : $sep etait le 3eme argument
+	if (is_string($id_mailsubscribinglists) and $id_mailsubscribinglists and !intval($id_mailsubscribinglists)) {
+		$sep = $id_mailsubscribinglists;
+		$id_mailsubscribinglists = null;
+	}
+
 	$url = generer_url_action("unsubscribe_mailsubscriber", "email=" . urlencode($email), false, true);
-	$url = parametre_url($url, "arg", mailsubscriber_cle_action("unsubscribe", $email, $jeton), $sep);
+	$url = parametre_url($url, "arg", mailsubscriber_cle_action("unsubscribe", $email, $jeton, $id_mailsubscribinglists), $sep);
 
 	return $url;
 }
 
 /**
  * URL confirm
- * pour confirm sur une liste precise, l'id de liste est fourni en suffixe du jeton
- * sous la forme "+".$id_mailsubscribinglist
+ * pour confirm sur une ou plusieurs listes precises, fournir le ou les ID dans $id_mailsubscribinglist
  * @param string $email
  * @param string $jeton
+ * @param int|array $id_mailsubscribinglists
+ *   une ou plusieurs listes a confirmer
  * @param string $sep
  * @return string
  */
-function mailsubscriber_url_confirm($email, $jeton, $sep = "&amp;") {
+function mailsubscriber_url_confirm($email, $jeton, $id_mailsubscribinglists=null, $sep = "&amp;") {
+	// legacy ancien format d'appel : $sep etait le 3eme argument
+	if (is_string($id_mailsubscribinglists) and $id_mailsubscribinglists and !intval($id_mailsubscribinglists)) {
+		$sep = $id_mailsubscribinglists;
+		$id_mailsubscribinglists = null;
+	}
+
 	$url = generer_url_action("confirm_mailsubscriber", "email=" . urlencode($email), false, true);
-	$url = parametre_url($url, "arg", mailsubscriber_cle_action("confirm", $email, $jeton), $sep);
+	$url = parametre_url($url, "arg", mailsubscriber_cle_action("confirm", $email, $jeton, $id_mailsubscribinglists), $sep);
 
 	return $url;
 }
