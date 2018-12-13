@@ -59,7 +59,11 @@ function balise_NOISETTE_COMPILER_dist($p) {
 			'conteneur_compiler',
 			array(
 				'plugin'=>$plugin,
-				'id_conteneur'=>calculer_identifiant_conteneur($plugin, $id_noisette, $type_noisette, $stockage),
+				'id_conteneur' => conteneur_identifier(
+					$plugin, 
+					array('id_noisette' => $id_noisette, 'type_noisette' => $type_noisette),
+					$stockage
+				),
 				'stockage'=>$stockage
 			),
 			array()
@@ -109,17 +113,4 @@ function balise_NOISETTE_COMPILER_dist($p) {
 	$p->interdire_scripts = false;
 
 	return $p;
-}
-
-
-function calculer_identifiant_conteneur($plugin, $id_noisette, $type_noisette, $stockage) {
-
-	include_spip('ncore/ncore');
-	$id_conteneur = ncore_conteneur_identifier(
-		$plugin,
-		array('type_noisette' => $type_noisette, 'id_noisette' => $id_noisette),
-		$stockage
-	);
-
-	return $id_conteneur;
 }

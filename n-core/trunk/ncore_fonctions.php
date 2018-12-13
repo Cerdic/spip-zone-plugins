@@ -363,6 +363,35 @@ function noisette_encapsuler($plugin, $contenu, $encapsulation, $parametres, $st
 
  
 // -----------------------------------------------------------------------
-// ------------------------- BALISES CONTENEURS --------------------------
+// --------------------- FILTRES & BALISES CONTENEURS --------------------
 // -----------------------------------------------------------------------
 include_spip('public/conteneur_identifier');
+
+/**
+ * Calcule l'identifiant unique pour le conteneur sous forme de chaine.
+ * Cette fonction est juste un wrapper pour le service ncore_conteneur_identifier().
+ * Elle est utilisée par les balises #NOISETTE_COMPILER et #CONTENEUR_IDENTIFIER
+ *
+ * @package SPIP\NCORE\CONTENEUR\API
+ *
+ * @api
+ * @filtre
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array  $conteneur
+ *        Tableau associatif descriptif du conteneur.
+ * @param string $stockage
+ *        Identifiant du service de stockage à utiliser si précisé.
+ *
+ * @return string
+ *        Identifiant du conteneur ou chaine vide en cas d'erreur.
+ */
+function conteneur_identifier($plugin, $conteneur, $stockage) {
+
+	include_spip('ncore/ncore');
+	$identifiant = ncore_conteneur_identifier($plugin, $conteneur, $stockage);
+
+	return $identifiant;
+}
