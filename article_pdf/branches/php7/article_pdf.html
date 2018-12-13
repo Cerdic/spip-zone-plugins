@@ -86,8 +86,8 @@
 		//--------------------------------
 		// Debut génération du PDF
 		//--------------------------------
-		$pdf->debug=$debug;
 		$pdf=new PDF_SPIP();
+		$pdf->debug=$debug;
 
 		$pdf->SetCompression(false);
 		$pdf->SetDisplayMode('fullpage', 'single');
