@@ -102,7 +102,7 @@ function WriteHTML($html,$LineFeedHeight)
 	foreach($a as $i=>$e)
   {
 		//Balise
-	$Balise= preg_match(',<(?=[/a-zA-Z0-9])(/)?([/a-zA-Z0-9]+)((\s.*|/)?)>,',$e,$match);
+	$Balise= preg_match(',<(?=[/a-zA-Z0-9])(/)?([/a-zA-Z0-9]+)((\s.*|/)?)>,s',$e,$match);
 	if ($Balise){
 		$tag=strtoupper($match[2]);
 			$closing = $match[1]=="/";
