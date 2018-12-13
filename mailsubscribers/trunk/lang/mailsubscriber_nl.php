@@ -18,16 +18,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'confirmsubscribe_invite_texte_email_1' => '@invite_email_from@ nodigt je uit om je in te schrijven voor de nieuwsbrief van @nom_site_spip@ met e-mailadres @email@.',
 	'confirmsubscribe_invite_texte_email_3' => 'Wanneer het gaat om een fout van ons, kun je deze mail negeren: het verzoek wordt automatisch geannuleerd.',
-	'confirmsubscribe_invite_texte_email_liste_1' => '@invite_email_from@ nodigt je uit je in te schrijven op de lijst « @titre_liste@ » van @nom_site_spip@ met e-mailadres @email@.',
+	'confirmsubscribe_invite_texte_email_liste_1' => '@invite_email_from@ nodigt je uit je in te schrijven op de lijst « @titre_liste@ » van @nom_site_spip@ met e-mailadres @email@.', # MODIF
 	'confirmsubscribe_sujet_email' => '[@nom_site_spip@] bevestiging van de inschrijving op de nieuwsbrief',
 	'confirmsubscribe_texte_email_1' => 'Je vroeg in te schrijven op de nieuwsbrief @nom_site_spip@ met het adres @e-mail@.',
 	'confirmsubscribe_texte_email_2' => 'Klik om jouw registratie te bevestigen op de volgende link:
 @url_confirmsubscribe@',
 	'confirmsubscribe_texte_email_3' => 'Maakten wij een fout of veranderde je van mening, dan kun je deze mail negeren; het verzoek zal automatisch worden geannuleerd.',
 	'confirmsubscribe_texte_email_envoye' => 'Ter bevestiging werd een e-mail verzonden naar dit adres.',
-	'confirmsubscribe_texte_email_liste_1' => 'Je hebt je inschrijving gevraagd voor de lijst «@titre_liste@» van @nom_site_spip@ met e-mailadres @email@.',
+	'confirmsubscribe_texte_email_liste_1' => 'Je hebt je inschrijving gevraagd voor de lijst «@titre_liste@» van @nom_site_spip@ met e-mailadres @email@.', # MODIF
 	'confirmsubscribe_titre_email' => 'Bevestiging van de inschrijving op de nieuwsbrief',
-	'confirmsubscribe_titre_email_liste' => 'Bevestiging van inschrijving in lijst «<b>@titre_liste@</b>»',
+	'confirmsubscribe_titre_email_liste' => 'Bevestiging van inschrijving in lijst «<b>@titre_liste@</b>»', # MODIF
 
 	// D
 	'defaut_message_invite_email_subscribe' => 'Hallo, ik ben geabonneerd op de nieuwsbrief van @nom_site_spip@ en ik stel je voor je ook in te schrijven.',
@@ -91,15 +91,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mailsubscribers_valide' => 'Actief',
 
 	// S
-	'subscribe_deja_texte' => 'Het e-mailadres @email@ staat al in onze mailinglist',
+	'subscribe_deja_texte' => 'Het e-mailadres @email@ staat al in onze mailinglist', # MODIF
 	'subscribe_sujet_email' => '[@nom_site_spip@] Abonnement op onze nieuwsbrief',
 	'subscribe_texte_email_1' => 'We hebben jouw registratie met het e-mailadres @email@ opgenomen voor onze nieuwsbrief.',
 	'subscribe_texte_email_2' => 'Hartelijk dank voor de interesse die je toont voor @nom_site_spip@.',
 	'subscribe_texte_email_3' => 'Als er een fout van onze kant werd gemaakt, of als je van gedachten verandert, kun je je op elk moment uitschrijven via de volgende link:
 @url_unsubscribe@',
-	'subscribe_texte_email_liste_1' => 'We hebben je inschrijving in lijst «@titre_liste@» met e-mailadres @email@ ontvangen.',
+	'subscribe_texte_email_liste_1' => 'We hebben je inschrijving in lijst «@titre_liste@» met e-mailadres @email@ ontvangen.', # MODIF
 	'subscribe_titre_email' => 'Abonneren op de nieuwsbrief',
-	'subscribe_titre_email_liste' => 'Inschrijving in lijst «<b>@titre_liste@</b>»',
+	'subscribe_titre_email_liste' => 'Inschrijving in lijst «<b>@titre_liste@</b>»', # MODIF
 
 	// T
 	'texte_ajouter_mailsubscriber' => 'Een inschrijving aan de nieuwsbrief toevoegen',
@@ -122,15 +122,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_mailsubscribers' => 'Geregistreerd op verzendingen per e-mail',
 
 	// U
-	'unsubscribe_deja_texte' => 'Het e-mailadres @email@ staat niet in onze mailinglijst.',
+	'unsubscribe_deja_texte' => 'Het e-mailadres @email@ staat niet in onze mailinglijst.', # MODIF
 	'unsubscribe_sujet_email' => '[@nom_site_spip@] Afmelden nieuwsbrief',
 	'unsubscribe_texte_confirmer_email_1' => 'Wil je het uitschrijven van het e-mailadres @email@ bevestigen door op de knop te klikken: ',
-	'unsubscribe_texte_confirmer_email_liste_1' => 'Bevestig de verwijdering van e-mailadres @email@ uit lijst «@titre_liste@» door hieronder te klikken: ',
-	'unsubscribe_texte_email_1' => 'Het e-mailadres @email@ is verwijderd uit onze mailinglijst.',
+	'unsubscribe_texte_confirmer_email_liste_1' => 'Bevestig de verwijdering van e-mailadres @email@ uit lijst «@titre_liste@» door hieronder te klikken: ', # MODIF
+	'unsubscribe_texte_email_1' => 'Het e-mailadres @email@ is verwijderd uit onze mailinglijst.', # MODIF
 	'unsubscribe_texte_email_2' => 'We hopen je snel terug te zien op @nom_site_spip@.',
 	'unsubscribe_texte_email_3' => 'In geval van een fout van onze kant, of wanneer je van gedachten verandert, kun je je op elk gewenst moment opnieuw inschrijven via de volgende link:
 @url_subscribe@',
-	'unsubscribe_texte_email_liste_1' => 'Het e-mailadres @email@ is verwijderd uit onze distributielijst «@titre_liste@».',
+	'unsubscribe_texte_email_liste_1' => 'Het e-mailadres @email@ is verwijderd uit onze distributielijst «@titre_liste@».', # MODIF
 	'unsubscribe_titre_email' => 'Afmelding Nieuwsbrief',
-	'unsubscribe_titre_email_liste' => 'Uitschrijving uit lijst «<b>@titre_liste@</b>»'
+	'unsubscribe_titre_email_liste' => 'Uitschrijving uit lijst «<b>@titre_liste@</b>»' # MODIF
 );

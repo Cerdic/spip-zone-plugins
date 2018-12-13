@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mailsubscribers_valide' => 'Зарегистрировано',
 
 	// S
-	'subscribe_deja_texte' => '@email@ уже подписан на эту рассылку',
+	'subscribe_deja_texte' => '@email@ уже подписан на эту рассылку', # MODIF
 	'subscribe_sujet_email' => '[@nom_site_spip@] Подписаться на рассылку',
 	'subscribe_texte_email_1' => 'Ваш емейл @email@ подписан на рассылку.',
 	'subscribe_texte_email_2' => 'Спасибо за проявленный интерес @nom_site_spip@.',
@@ -88,9 +88,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_mailsubscribers' => 'База получателей рассылки',
 
 	// U
-	'unsubscribe_deja_texte' => '@email@ отсутствует в базе подписчиков.',
+	'unsubscribe_deja_texte' => '@email@ отсутствует в базе подписчиков.', # MODIF
 	'unsubscribe_sujet_email' => '[@nom_site_spip@] Отписаться',
-	'unsubscribe_texte_email_1' => '@email@ удален из базы рассылки.',
+	'unsubscribe_texte_email_1' => '@email@ удален из базы рассылки.', # MODIF
 	'unsubscribe_texte_email_2' => 'Ждем вас еще @nom_site_spip@.',
 	'unsubscribe_texte_email_3' => 'Для оформления повторной подписки перейдите по ссылке:
 @url_subscribe@',
