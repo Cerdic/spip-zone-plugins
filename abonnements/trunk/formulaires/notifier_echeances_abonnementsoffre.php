@@ -230,8 +230,8 @@ function formulaires_notifier_echeances_abonnementsoffre_traiter_dist($id_abonne
 	if (_request('btn_notifier')){
 		$where[] = 'id_abonnements_offre = ' . intval($id_abonnements_offre);
 		$where[] = 'email IS NOT NULL';
-		$where[] = 'j.id_job IS NULL';
-		$where[] = 'DATE_FORMAT(j.date, "%Y-%m-%d") = ' . sql_quote(date('Y-m-d'));
+		$where[] = 'j.id_job IS NULL ' .
+			'OR (j.id_job IS NOT NULL AND DATE_FORMAT(j.date, "%Y-%m-%d") != ' . sql_quote(date('Y-m-d')) . ')';
 		$where[] = $statut ? 'abo.statut = ' . sql_quote($statut) : '';
 		$where = array_filter($where);
 		if ($a_notifier = sql_allfetsel(
