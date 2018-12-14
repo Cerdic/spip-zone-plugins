@@ -1,7 +1,7 @@
 <paquet
 	prefix="lister_fonctions"
 	categorie="outil"
-	version="1.1.1"
+	version="1.1.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/lister_fonctions-32.png"
@@ -14,12 +14,16 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-	<menu nom="lister_fonctionscompletes" titre="lister_fonctions:titre_lister_fonctions_completes" parent="menu_configuration" icone="images/lister_fonctions-16.png" />
-	<menu nom="lister_fonctionsuser" titre="lister_fonctions:titre_lister_fonctions_utilisateur" parent="menu_configuration" icone="images/lister_fonctions-16.png" />
+	<menu nom="lister_fonctionscompletes" titre="lister_fonctions:titre_lister_fonctions_completes" parent="menu_developpement" icone="images/lister_fonctions-16.png" />
+	<menu nom="lister_fonctionsuser" titre="lister_fonctions:titre_lister_fonctions_utilisateur" parent="menu_developpement" icone="images/lister_fonctions-16.png" />
 
 	<utilise nom="lister_config" compatibilite="[1.0.0;]" />
 
 	<pipeline nom="autoriser" inclure="lister_fonctions_autorisations.php" />
 	<pipeline nom="listermenu" inclure="lister_fonctions_pipelines.php" />
+	<spip compatibilite="[3.0.0;3.0.*]">
+		<menu nom="lister_fonctionscompletes" titre="lister_fonctions:titre_lister_fonctions_completes" parent="menu_configuration" icone="images/lister_fonctions-16.png" />
+		<menu nom="lister_fonctionsuser" titre="lister_fonctions:titre_lister_fonctions_utilisateur" parent="menu_configuration" icone="images/lister_fonctions-16.png" />
+	</spip>
 
 </paquet>

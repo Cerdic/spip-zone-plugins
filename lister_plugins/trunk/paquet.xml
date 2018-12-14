@@ -1,7 +1,7 @@
 <paquet
 	prefix="lister_plugins"
 	categorie="outil"
-	version="1.2.1"
+	version="1.2.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/lister_plugins-32.png"
@@ -14,11 +14,14 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-	<menu nom="lister_plugins" titre="lister_plugins:titre_lister_plugins" parent="menu_configuration" icone="images/lister_plugins-16.png" />
+	<menu nom="lister_plugins" titre="lister_plugins:titre_lister_plugins" parent="menu_developpement" icone="images/lister_plugins-16.png" />
 
 	<utilise nom="lister_config" compatibilite="[1.0.0;]" />
 
 	<pipeline nom="autoriser" inclure="lister_plugins_autorisations.php" />
 	<pipeline nom="listermenu" inclure="lister_plugins_pipelines.php" />
+	<spip compatibilite="[3.0.0;3.0.*]">
+		<menu nom="lister_plugins" titre="lister_plugins:titre_lister_plugins" parent="menu_configuration" icone="images/lister_plugins-16.png" />
+	</spip>
 
 </paquet>

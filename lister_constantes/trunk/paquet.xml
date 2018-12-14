@@ -1,7 +1,7 @@
 <paquet
 	prefix="lister_constantes"
 	categorie="outil"
-	version="1.1.1"
+	version="1.1.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/lister_constantes-32.png"
@@ -14,11 +14,14 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-	<menu nom="lister_constantes" titre="lister_constantes:titre_lister_constantes" parent="menu_configuration" icone="images/lister_constantes-16.png" />
+	<menu nom="lister_constantes" titre="lister_constantes:titre_lister_constantes" parent="menu_developpement" icone="images/lister_constantes-16.png" />
 
 	<utilise nom="lister_config" compatibilite="[1.0.0;]" />
 
 	<pipeline nom="listermenu" inclure="lister_constantes_pipelines.php" />
 	<pipeline nom="autoriser" inclure="lister_constantes_autorisations.php" />
+	<spip compatibilite="[3.0.0;3.0.*]">
+		<menu nom="lister_constantes" titre="lister_constantes:titre_lister_constantes" parent="menu_configuration" icone="images/lister_constantes-16.png" />
+	</spip>
 
 </paquet>
