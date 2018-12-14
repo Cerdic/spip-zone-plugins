@@ -52,12 +52,12 @@ function stocks_declarer_tables_objets_sql($tables) {
 				)
 			),
       'statut_images' => array(
-                'prepa'    => '../prive/themes/spip/images/puce-preparer-8.png',
-                'prop'     => '../prive/themes/spip/images/puce-proposer-8.png',
-                'publie'   => '../prive/themes/spip/images/puce-publier-8.png',
-                'refuse'   => '../prive/themes/spip/images/puce-refuser-8.png',
-                'poubelle' => '../prive/themes/spip/images/puce-supprimer-8.png',
-                'epuise' => 'puce-epuise-8.png',
+          'prepa'    => '../images/puce-preparer-8.png',
+          'prop'     => '../images/puce-proposer-8.png',
+          'publie'   => '../images/puce-publier-8.png',
+          'refuse'   => '../images/puce-refuser-8.png',
+          'poubelle' => '../images/puce-supprimer-8.png',
+          'epuise' 	 => '../images/puce-epuise-8.png',
         )
 	));
 	return $tables;
