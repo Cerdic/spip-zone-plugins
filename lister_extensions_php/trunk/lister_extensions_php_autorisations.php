@@ -10,16 +10,16 @@
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-    return;
+	return;
 }
 
 
 /**
  * Fonction d'appel pour le pipeline
+ *
  * @pipeline autoriser
  */
-function lister_extensions_php_autoriser()
-{
+function lister_extensions_php_autoriser() {
 
 }
 
@@ -29,14 +29,14 @@ function lister_extensions_php_autoriser()
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_listerextensionsphp_voir_dist($faire, $type, $id, $qui, $opt)
-{
-    return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
+ **/
+function autoriser_listerextensionsphp_voir_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
 }
 
 /**
@@ -44,14 +44,14 @@ function autoriser_listerextensionsphp_voir_dist($faire, $type, $id, $qui, $opt)
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_listerextensionsphp_configurer_dist($faire, $type, $id, $qui, $opt)
-{
-    return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
+ **/
+function autoriser_listerextensionsphp_configurer_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
 }
 
 // ------
@@ -64,14 +64,14 @@ function autoriser_listerextensionsphp_configurer_dist($faire, $type, $id, $qui,
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_configurerlisterextensionsphp_menu_dist($faire, $type, $id, $qui, $opt)
-{
-    return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
+ **/
+function autoriser_configurerlisterextensionsphp_menu_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
 }
 
 /**
@@ -79,17 +79,16 @@ function autoriser_configurerlisterextensionsphp_menu_dist($faire, $type, $id, $
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_listerextensionsphp_menu_dist($faire, $type, $id, $qui, $opt)
-{
-    include_spip('inc/filtres');
+ **/
+function autoriser_listerextensionsphp_menu_dist($faire, $type, $id, $qui, $opt) {
+	include_spip('inc/filtres');
 	$info = chercher_filtre('info_plugin');
 	$i = $info('lister_config', 'est_actif');
-    return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui' and (empty($i) or $i == false or $i === 0);
-}
 
-?>
+	return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui' and (empty($i) or $i == false or $i === 0);
+}

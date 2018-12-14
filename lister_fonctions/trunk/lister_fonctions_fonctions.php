@@ -15,8 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *               Si aucun préfixe, on listera toutes les fonctions.
  *               Si un préfixe est identifié, on listera toutes les fonctions avec ce préfixe.
  */
-function lister_fonctions($prefixe = null)
-{
+function lister_fonctions($prefixe = null) {
 	$fonctions = get_defined_functions();
 
 	$fonctions_user = $fonctions['user'];
@@ -54,8 +53,7 @@ function lister_fonctions($prefixe = null)
  *               Si aucun préfixe, on listera toutes les constantes.
  *               Si un préfixe est identifié, on listera toutes les constantes avec ce préfixe.
  */
-function lister_constantes($prefixe = null)
-{
+function lister_constantes($prefixe = null) {
 	$constantes = get_defined_constants(true);
 
 	$constantes_user = $constantes['user'];
@@ -92,19 +90,18 @@ function lister_constantes($prefixe = null)
  *
  * @return void|string
  */
-function fonction_fichier($fonction = null)
-{
+function fonction_fichier($fonction = null) {
 	if ($fonction == null) {
 		return;
 	}
 	// On prépare le pattern pour ne pas avoir le chemin depuis les méandres du serveur d'hébergement.
-	$pattern_root = '/^'.preg_replace('/\//', '\/', $_SERVER['DOCUMENT_ROOT']).'/';
+	$pattern_root = '/^' . preg_replace('/\//', '\/', $_SERVER['DOCUMENT_ROOT']) . '/';
 
 	// API offerte par PHP 5.
 	$refFonction = new ReflectionFunction($fonction);
 
 	// On enlève le chemin 'root' pour ne garder que le chemin à la "racine" de notre site.
-	$filename = preg_replace($pattern_root, '', $refFonction->getFileName()).':'.$refFonction->getStartLine();
+	$filename = preg_replace($pattern_root, '', $refFonction->getFileName()) . ':' . $refFonction->getStartLine();
 
 	return $filename;
 }
@@ -119,8 +116,7 @@ function fonction_fichier($fonction = null)
  * @return array
  *               Tableau contenant le chemin vers chaque fichier php.
  */
-function lister_fichiers_php($dir = _DIR_RACINE)
-{
+function lister_fichiers_php($dir = _DIR_RACINE) {
 	global $list;
 
 	// Si $dir est vide, on va chercher le répertoire
@@ -129,24 +125,24 @@ function lister_fichiers_php($dir = _DIR_RACINE)
 		# on recherche le script sur lequel on est
 		$script = end(explode('/', $_SERVER['PHP_SELF']));
 		# Et on l'enlève de l'url pour donner une bonne valeur à $dir
-		$dir = preg_replace('/'.$script.'/', '', $_SERVER['SCRIPT_FILENAME']);
+		$dir = preg_replace('/' . $script . '/', '', $_SERVER['SCRIPT_FILENAME']);
 	}
 
 	if (!empty($dir) and is_dir($dir)) {
 		$ffs = scandir($dir);
 		$exclu = preg_match('/(tmp|local)/', $dir);
 		if (substr($dir, -1) !== '/') {
-			$dir = $dir.'/';
+			$dir = $dir . '/';
 		}
 		foreach ($ffs as $ff) {
 			if ($ff[0] != '.' and $exclu == false) {
 				if (strlen($ff) >= 5) {
 					if (substr($ff, -4) == '.php') {
-						$list[] = $dir.$ff;
+						$list[] = $dir . $ff;
 					}
 				}
-				if (is_dir($dir.$ff)) {
-					lister_fichiers_php($dir.$ff);
+				if (is_dir($dir . $ff)) {
+					lister_fichiers_php($dir . $ff);
 				}
 			}
 		}
@@ -163,8 +159,7 @@ function lister_fichiers_php($dir = _DIR_RACINE)
  *
  * @return array
  */
-function lister_noms_fonctions($fichier)
-{
+function lister_noms_fonctions($fichier) {
 	$liste_fonctions = array();
 
 	if (is_file($fichier)) {
@@ -178,8 +173,7 @@ function lister_noms_fonctions($fichier)
 	return $liste_fonctions;
 }
 
-function lister_toutes_fonctions($prefixe = null)
-{
+function lister_toutes_fonctions($prefixe = null) {
 	$fichiers_php = lister_fichiers_php();
 	$fonctions_user = array();
 

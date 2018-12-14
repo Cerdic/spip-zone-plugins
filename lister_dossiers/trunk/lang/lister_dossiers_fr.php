@@ -36,5 +36,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'titre_page' => 'Les dossiers',
     'titre_page_configurer_lister_dossiers' => 'Les dossiers, on en fait quoi ?',
 );
-
-?>

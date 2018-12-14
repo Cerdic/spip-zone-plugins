@@ -9,34 +9,34 @@
  * @package    SPIP\Lister_dossiers\Fonctions
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
-function lister_dossiers($racine = _DIR_RACINE)
-{
-    $repertoires = array();
-    $repertoires_scannes = scandir($racine, 0);
-    foreach ($repertoires_scannes as $key => $value) {
-        if (is_dir($racine . DIRECTORY_SEPARATOR . $value) and !preg_match("/^\./", $value)) {
-            if ($racine === "../") {
-                $repertoires[$racine . $value] = lister_dossiers($racine. $value);
-            } else {
-                $repertoires[$racine . DIRECTORY_SEPARATOR . $value] = lister_dossiers($racine . DIRECTORY_SEPARATOR . $value);
-            }
-        }
-    }
-    return $repertoires;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
 }
 
-function dossiers_taille ($racine = _DIR_RACINE)
-{
-    include_spip('inc/filtres');
-    $spip_version = floatval(spip_version());
-    if ($spip_version == 2.1) {
-        include_spip('exec/admin_vider');
-    } else {
-        include_spip('action/calculer_taille_cache');
-    }
+function lister_dossiers($racine = _DIR_RACINE) {
+	$repertoires = array();
+	$repertoires_scannes = scandir($racine, 0);
+	foreach ($repertoires_scannes as $key => $value) {
+		if (is_dir($racine . DIRECTORY_SEPARATOR . $value) and !preg_match("/^\./", $value)) {
+			if ($racine === "../") {
+				$repertoires[$racine . $value] = lister_dossiers($racine . $value);
+			} else {
+				$repertoires[$racine . DIRECTORY_SEPARATOR . $value] = lister_dossiers($racine . DIRECTORY_SEPARATOR . $value);
+			}
+		}
+	}
 
-    return calculer_taille_dossier($racine);
+	return $repertoires;
 }
-?>
+
+function dossiers_taille($racine = _DIR_RACINE) {
+	include_spip('inc/filtres');
+	$spip_version = floatval(spip_version());
+	if ($spip_version == 2.1) {
+		include_spip('exec/admin_vider');
+	} else {
+		include_spip('action/calculer_taille_cache');
+	}
+
+	return calculer_taille_dossier($racine);
+}

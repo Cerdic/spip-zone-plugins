@@ -9,9 +9,6 @@
  * @package    SPIP\Lister_dossiers\Pipelines
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-	
-
-
-
-?>
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
