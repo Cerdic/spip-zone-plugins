@@ -39,6 +39,7 @@ function mailshot_declarer_tables_objets_sql($tables) {
 			"html" => "longtext NOT NULL DEFAULT ''",
 			"texte" => "longtext NOT NULL DEFAULT ''",
 			"listes" => "text NOT NULL DEFAULT ''",
+			"graceful"   => "tinyint(1) NOT NULL DEFAULT 0",
 			"from_name" => "text NOT NULL DEFAULT ''",
 			"from_email" => "text NOT NULL DEFAULT ''",
 			"total"   => "bigint(21) NOT NULL",

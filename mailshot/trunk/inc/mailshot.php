@@ -173,31 +173,67 @@ function mailshot_envoyer_lot($nb_max=5,$offset=0){
 			foreach($dests as $d){
 				if (time()>_MAILSHOT_MAX_TIME) return $nb_restant;
 				$s = $subscriber($d['email'],array('listes'=>$listes));
-				spip_log("mailshot_envoyer_lot #".$shoot['id_mailshot']."/".$d['email']." send","mailshot");
-				$erreur = $send($s, $corps, $options);
-				$try = $d['try']+1;
-				if ($erreur){
-					if ($try>=_MAILSHOT_MAX_TRY
-						OR preg_match(",@example\.org$,i",$s['email'])
-					  OR defined('_TEST_EMAIL_DEST')){
-						sql_updateq("spip_mailshots_destinataires",array('statut'=>'fail','try'=>$try,'date'=>date('Y-m-d H:i:s')),"id_mailshot=".intval($shoot['id_mailshot'])." AND email=".sql_quote($d['email']));
-						sql_update("spip_mailshots",array("current"=>"current+1","failed"=>"failed+1"),"id_mailshot=".intval($shoot['id_mailshot']));
-						spip_log("mailshot_envoyer_lot #".$shoot['id_mailshot']."/".$d['email']." : Erreur [$erreur] / failed apres $try essais","mailshot"._LOG_ERREUR);
-						// si c'est un fail max_try verifier et desinscrire eventuellement
-						if ($try>1){
-							mailshot_verifier_email_fail($d['email']);
+				$done = false;
+				if (!$done = mailshot_verifier_email_envoi_bloque($d['email'], $s, $shoot)) {
+					spip_log("mailshot_envoyer_lot #".$shoot['id_mailshot']."/".$d['email']." send","mailshot");
+					$erreur = $send($s, $corps, $options);
+					$try = $d['try']+1;
+					if ($erreur){
+						if ($try>=_MAILSHOT_MAX_TRY
+							OR preg_match(",@example\.org$,i",$s['email'])
+						  OR defined('_TEST_EMAIL_DEST')){
+							$done = array(
+								'fail' => true,
+								'statut' => 'fail',
+								'try' => $try,
+								'date'=>date('Y-m-d H:i:s'),
+								'log' => "ERREUR [$erreur] / failed apres $try essais",
+							);
+							// si c'est un fail max_try verifier et desinscrire eventuellement
+							if ($try>1){
+								mailshot_verifier_email_fail($d['email']);
+							}
+						}
+						else {
+							$done = array(
+								'try' => $try,
+								'date'=>date('Y-m-d H:i:s'),
+								'log' => "INFO Probleme [$erreur] (essai $try)",
+							);
 						}
 					}
 					else {
-						sql_updateq("spip_mailshots_destinataires",array('try'=>$try,'date'=>date('Y-m-d H:i:s')),"id_mailshot=".intval($shoot['id_mailshot'])." AND email=".sql_quote($d['email']));
-						spip_log("mailshot_envoyer_lot #".$shoot['id_mailshot']."/".$d['email']." : Probleme [$erreur] (essai $try)","mailshot"._LOG_INFO_IMPORTANTE);
+						$done = array(
+							'done' => true,
+							'statut'=>'sent',
+							'try'=>$try,
+							'date'=>date('Y-m-d H:i:s'),
+							'log' => "OK",
+						);
 					}
 				}
-				else {
-					$nb_restant--;
-					sql_updateq("spip_mailshots_destinataires",array('statut'=>'sent','try'=>$try,'date'=>date('Y-m-d H:i:s')),"id_mailshot=".intval($shoot['id_mailshot'])." AND email=".sql_quote($d['email']));
-					sql_update("spip_mailshots",array("current"=>"current+1"),"id_mailshot=".intval($shoot['id_mailshot']));
-					spip_log("mailshot_envoyer_lot #".$shoot['id_mailshot']."/".$d['email']." OK","mailshot");
+				if ($done) {
+					if (isset($done['done'])) {
+						$nb_restant--;
+						unset($done['done']);
+						sql_update("spip_mailshots",array("current"=>"current+1"),"id_mailshot=".intval($shoot['id_mailshot']));
+					}
+					if (isset($done['fail'])) {
+						unset($done['fail']);
+						sql_update("spip_mailshots",array("current"=>"current+1","failed"=>"failed+1"),"id_mailshot=".intval($shoot['id_mailshot']));
+					}
+					if (isset($done['log'])) {
+						$loglevel = '';
+						if (strncmp($done['log'], 'ERREUR', 6) == 0) {
+							$loglevel = _LOG_ERREUR;
+						}
+						elseif (strncmp($done['log'], 'INFO', 4) == 0) {
+							$loglevel = _LOG_INFO_IMPORTANTE;
+						}
+						spip_log("mailshot_envoyer_lot #".$shoot['id_mailshot']."/".$d['email']." : " . $done['log'], "mailshot" . $loglevel);
+						unset($done['log']);
+					}
+					sql_updateq("spip_mailshots_destinataires", $done,"id_mailshot=".intval($shoot['id_mailshot'])." AND email=".sql_quote($d['email']));
 				}
 				$nb_max--;
 			}
@@ -222,6 +258,61 @@ function mailshot_envoyer_lot($nb_max=5,$offset=0){
 	return 0; // plus rien a envoyer sur ce lot
 }
 
+/**
+ * Verifie avant nouvel envoi un email et bloque un envoi si besoin
+ *
+ * @param string $email
+ * @param array $subscriber
+ * @param array $shoot
+ * @return array|bool
+ */
+function mailshot_verifier_email_envoi_bloque($email, $subscriber, $shoot) {
+	static $envois_idem = array();
+
+	if (preg_match(",@example\.org$,i",$subscriber['email'])) {
+		return array(
+			'fail' => true,
+			'statut' => 'fail',
+			'date' => date('Y-m-d H:i:s'),
+			'log' => "INFO Envoi BLOQUE Email obfusque ".$subscriber['email']."",
+		);
+	}
+	if (_TEST_EMAIL_DEST) {
+		$erreur = _T('mailshot:erreur_envoi_mail_force_debug',array('email'=>_TEST_EMAIL_DEST));
+		return array(
+			'fail' => true,
+			'statut' => 'fail',
+			'date' => date('Y-m-d H:i:s'),
+			'log' => "INFO Envoi BLOQUE $erreur",
+		);
+	}
+
+	if ($shoot['graceful']) {
+		// trouver tous les envois pour le meme id
+		if (!isset($envois_idem[$shoot['id_mailshot']])) {
+			$idem = sql_allfetsel('id_mailshot', 'spip_mailshots', 'id='.sql_quote($shoot['id'],'','text'));
+			$envois_idem[$shoot['id_mailshot']] = array_column($idem, 'id_mailshot');
+		}
+		if ($last = sql_fetsel('*', 'spip_mailshots_destinataires',
+			array(
+				'email=' . sql_quote($email),
+				sql_in('statut', array('todo', 'fail'), 'NOT'),
+				sql_in('id_mailshot', $envois_idem[$shoot['id_mailshot']]),
+			),'', 'date DESC', '0,1')) {
+			// on a trouve un envoi deja fait a la meme newsletter, on passe notre tour pout celui-ci
+			$done = array(
+				'done' => true,
+				'statut' => $last['statut'],
+				'date' => $last['date'],
+				'log' => "INFO Envoi BLOQUE newsletter #".$shoot['id']." deja envoyee a $email par mailshot#" . $last['id_mailshot'] . " / " . $last['date']
+			);
+			return $done;
+		}
+	}
+
+	return false;
+
+}
 
 /**
  * Verifier un email en fail et si plus de N fails consecutifs le desabonner (email foireux)

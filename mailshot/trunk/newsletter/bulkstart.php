@@ -22,13 +22,14 @@ include_spip("inc/config");
  * @param array $options
  *   string statut : statut par defaut
  *   string date_start : date de debut d'envoi (dans le futur)
+ *   bool graceful : ne pas envoyer aux destinataires qui on déjà reçu ce contenu
  * @return int
  *   0 si echec ou id de l'envoi sinon
  */
 function newsletter_bulkstart_dist($corps,$listes = array(),$options=array()){
 	// TODO : recuperer la limite de rate d'apres la config
 	$now = date('Y-m-d H:i:s');
-	$defaut = array('statut'=>'processing','date_start'=>$now);
+	$defaut = array('statut'=>'processing','date_start'=>$now, 'graceful'=>0);
 	if (isset($options['date_start'])){
 		if (strtotime($options['date_start'])>time()) {
 			$defaut['statut'] = 'init';
@@ -75,6 +76,7 @@ function newsletter_bulkstart_dist($corps,$listes = array(),$options=array()){
 		'html' => $corps['html'],
 		'texte' => $corps['texte'],
 		'listes' => implode(',',$listes),
+		'graceful' => $options['graceful'],
 		'from_name' => $from_name,
 		'from_email' => $from_email,
 		'total' => $count,

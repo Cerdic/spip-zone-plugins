@@ -11,9 +11,13 @@
 .formulaire_newsletter_send .editer_liste .select {width: 20em;}
 .formulaire_newsletter_send .editer_liste .submit {float: #ENV{right}}
 
+.formulaire_newsletter_send .editer_resend {padding-top: 0;}
+.formulaire_newsletter_send .editer_resend .choix {padding: 0;background: none;border:0 !important;}
+.formulaire_newsletter_send .editer_resend .choix label {margin-left: 0}
+
 .formulaire_newsletter_send .editer_date_start {padding-top:0;}
 .formulaire_newsletter_send .editer_date_start label {width: auto}
-.formulaire_newsletter_send .editer_date_start label input.checkbox {margin-left:0;}
+.formulaire_newsletter_send .editer_date_start label input.checkbox {}
 
 .formulaire_newsletter_send .liste-objets.mailshots {margin:1em 0;}
 .formulaire_newsletter_send .mailshots .sujet {display: none;}
@@ -21,6 +25,11 @@
 
 .mailshot #wysiwyg {margin-bottom: 2.0775em;padding:0;}
 .mailshot #wysiwyg .label {display: inline;}
+.mailshot #wysiwyg small.graceful {font-weight: normal}
+.mailshot #wysiwyg small.graceful::before {content:'(';display: inline}
+.mailshot #wysiwyg small.graceful::after {content:')';display: inline}
+
+.mailshot #wysiwyg .contenu_listes .label {display: none;}
 .mailshot #wysiwyg .contenu_avancement,
 .mailshot #wysiwyg .contenu_html,
 .mailshot #wysiwyg .contenu_texte {margin-bottom: 3em;}

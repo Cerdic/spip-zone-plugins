@@ -1,12 +1,12 @@
 <paquet
 	prefix="mailshot"
 	categorie="communication"
-	version="1.26.1"
+	version="1.27.0"
 	etat="stable"
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/mailshot-32.png"
 	documentation="https://contrib.spip.net/mailshot"
-	schema="0.3.5"
+	schema="0.3.6"
 >
 
 	<nom>MailShot</nom>

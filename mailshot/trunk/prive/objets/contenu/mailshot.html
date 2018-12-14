@@ -16,10 +16,13 @@
 </div>]
 ]
 
-[<div class="champ contenu_listes[ (#LISTES*|strlen|?{'',vide})]">
+[[(#BOITE_OUVRIR{#VAL{mailshot:label_listes}|_T|concat{' ',#GRACEFUL|?{<small class="graceful"><:mailshot:label_graceful:></small>}}})]
+<div class="champ contenu_listes[ (#LISTES*|strlen|?{'',vide})]">
 	<div class='label'><:mailshot:label_listes:> : </div>
 	<span dir='#LANG_DIR' class='#EDIT{listes} listes'>(#LISTES|mailshot_affiche_nom_liste)</span>
-</div>]
+</div>
+#BOITE_FERMER
+]
 
 <div class="champ contenu_from[ (#FROM_EMAIL*|strlen|?{'',vide})]">
 	<div class='label'><:mailshot:label_from:> : </div>

@@ -17,6 +17,7 @@ function formulaires_newsletter_send_charger_dist($id_newsletter,$mode_test=fals
 		'email_test' => $GLOBALS['visiteur_session']['email'],
 		'liste' => '',
 		'planifie' => '',
+		'resend' => 'non',
 		'date_start_jour' => '',
 		'date_start_heure' => '',
 		'_mode_test' => $mode_test?$mode_test:'',
@@ -121,6 +122,9 @@ function formulaires_newsletter_send_traiter_dist($id_newsletter,$mode_test=fals
 			$d = dater_recuperer_date_saisie(_request('date_start_jour'));
 			$h = dater_recuperer_heure_saisie(_request('date_start_heure'));
 			$options['date_start'] = sql_format_date($d[0], $d[1], $d[2], $h[0], $h[1]);
+		}
+		if (_request('resend')!=='oui'){
+			$options['graceful'] = true;
 		}
 
 		$bulkstart = charger_fonction("bulkstart","newsletter");
