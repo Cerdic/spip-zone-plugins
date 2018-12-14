@@ -21,7 +21,7 @@
 	<pipeline nom="listermenu" inclure="lister_constantes_pipelines.php" />
 	<pipeline nom="autoriser" inclure="lister_constantes_autorisations.php" />
 	<spip compatibilite="[3.0.0;3.0.*]">
-		<menu nom="lister_constantes" titre="lister_constantes:titre_lister_constantes" parent="menu_configuration" icone="images/lister_constantes-16.png" />
+		<menu nom="lister_constantes_conf" action="lister_constantes" titre="lister_constantes:titre_lister_constantes" parent="menu_configuration" icone="images/lister_constantes-16.png" />
 	</spip>
 
 </paquet>

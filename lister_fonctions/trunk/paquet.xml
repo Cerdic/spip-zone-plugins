@@ -22,8 +22,8 @@
 	<pipeline nom="autoriser" inclure="lister_fonctions_autorisations.php" />
 	<pipeline nom="listermenu" inclure="lister_fonctions_pipelines.php" />
 	<spip compatibilite="[3.0.0;3.0.*]">
-		<menu nom="lister_fonctionscompletes" titre="lister_fonctions:titre_lister_fonctions_completes" parent="menu_configuration" icone="images/lister_fonctions-16.png" />
-		<menu nom="lister_fonctionsuser" titre="lister_fonctions:titre_lister_fonctions_utilisateur" parent="menu_configuration" icone="images/lister_fonctions-16.png" />
+		<menu nom="lister_fonctionscompletes_conf" action="lister_fonctionscompletes" titre="lister_fonctions:titre_lister_fonctions_completes" parent="menu_configuration" icone="images/lister_fonctions-16.png" />
+		<menu nom="lister_fonctionsuser_conf" action="lister_fonctionsuser" titre="lister_fonctions:titre_lister_fonctions_utilisateur" parent="menu_configuration" icone="images/lister_fonctions-16.png" />
 	</spip>
 
 </paquet>

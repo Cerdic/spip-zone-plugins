@@ -22,7 +22,7 @@
 	<pipeline nom="autoriser" inclure="lister_extensions_php_autorisations.php" />
 	<pipeline nom="listermenu" inclure="lister_extensions_php_pipelines.php" />
 	<spip compatibilite="[3.0.0;3.0.*]">
-		<menu nom="lister_extensions_php" titre="lister_extensions_php:titre_lister_extensions_php" parent="menu_configuration" icone="images/lister_extensions_php-16.png" />
+		<menu nom="lister_extensions_php_conf" action="lister_extensions_php" titre="lister_extensions_php:titre_lister_extensions_php" parent="menu_configuration" icone="images/lister_extensions_php-16.png" />
 	</spip>
 
 </paquet>

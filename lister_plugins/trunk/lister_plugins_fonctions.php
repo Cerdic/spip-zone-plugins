@@ -2,7 +2,7 @@
 /**
  * Fichier de fonctions pour le plugin lister_plugins
  *
- * @plugin     Lister les plugins nécessaires à votre site 
+ * @plugin     Lister les plugins nécessaires à votre site
  * @copyright  2013-2017
  * @author     Teddy
  * @licence    GNU/GPL

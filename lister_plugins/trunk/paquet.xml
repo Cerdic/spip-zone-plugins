@@ -21,7 +21,7 @@
 	<pipeline nom="autoriser" inclure="lister_plugins_autorisations.php" />
 	<pipeline nom="listermenu" inclure="lister_plugins_pipelines.php" />
 	<spip compatibilite="[3.0.0;3.0.*]">
-		<menu nom="lister_plugins" titre="lister_plugins:titre_lister_plugins" parent="menu_configuration" icone="images/lister_plugins-16.png" />
+		<menu nom="lister_plugins_conf" action="lister_plugins" titre="lister_plugins:titre_lister_plugins" parent="menu_configuration" icone="images/lister_plugins-16.png" />
 	</spip>
 
 </paquet>

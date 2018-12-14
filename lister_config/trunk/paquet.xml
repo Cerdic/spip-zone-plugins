@@ -23,7 +23,7 @@
 	<pipeline nom="listermenu" inclure="lister_config_pipelines.php" />
 
 	<spip compatibilite="[3.0.0;3.0.*]">
-		<menu nom="lister_config" titre="lister_config:titre_lister_config" parent="menu_configuration" icone="images/lister_config-16.png" />
+		<menu nom="lister_config_conf" action="lister_config" titre="lister_config:titre_lister_config" parent="menu_configuration" icone="images/lister_config-16.png" />
 	</spip>
 
 </paquet>

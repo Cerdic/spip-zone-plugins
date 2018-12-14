@@ -22,7 +22,7 @@
 	<pipeline nom="listermenu" inclure="lister_objets_pipelines.php" />
 
 	<spip compatibilite="[3.0.0;3.0.*]">
-		<menu nom="lister_objets" titre="lister_objets:titre_lister_objets" parent="menu_configuration" icone="images/lister_objets-16.png" />
+		<menu nom="lister_objets_conf" action="lister_objets" titre="lister_objets:titre_lister_objets" parent="menu_configuration" icone="images/lister_objets-16.png" />
 	</spip>
 
 </paquet>
