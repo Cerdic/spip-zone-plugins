@@ -6,7 +6,7 @@
 	<B_titreliste>
 		<p><:mailsubscriber:confirmsubscribe_titre_email_listes:></p>
 		<ul>
-			<BOUCLE_titreliste(MAILSUBSCRIBINGLISTS){id_mailsubscribinglists}{statut==.*}>
+			<BOUCLE_titreliste(MAILSUBSCRIBINGLISTS){id_mailsubscribinglist IN #ENV{id_mailsubscribinglists}}{statut==.*}>
 			#SET{titre_liste, #GET{titre_liste}|concat{', ',#TITRE_PUBLIC|sinon{##ID_MAILSUBSCRIBINGLIST}}}
 			<li>[(#TITRE_PUBLIC|sinon{##ID_MAILSUBSCRIBINGLIST})]</li>
 			</BOUCLE_titreliste>
