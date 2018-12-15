@@ -22,9 +22,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param array|string $conteneur
  *        Tableau descriptif du conteneur ou identifiant du conteneur.
  * @param string $stockage
- *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
- *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
- *        fournissant le service de stockage souhaité.
+ *        Identifiant du service de stockage à utiliser si précisé.
  *
  * @return bool
  */

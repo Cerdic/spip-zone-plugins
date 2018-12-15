@@ -1,2 +1,10 @@
+[(#REM) <!--  CONTENEUR-PREVIEW
+
+	Fichier HTML de prévisualisation de la noisette associée : conteneur.html.
+	La prévisualisation affiche uniquement la balise choisie.
+
+	@param string conteneur_balise
+	       Balise englobante. Peut prendre les valeurs div, section, article, aside, nav et p.
+-->]
 #SET{balise, #ENV{conteneur_balise, div}}
 <:ncore:type_noisette_conteneur_preview{balise=#GET{balise}}:>

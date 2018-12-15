@@ -1,10 +1,12 @@
-[(#REM) <!--  PREVIEW_NOTICE
+[(#REM) <!--  AVERTIR_PREVIEW
 
 	Affiche un avertissement sur le fait que la noisette prévisualisée est d'un type qui n'est plus actif
 	car au moins un des plugins qu'elle nécessite n'est pas activé.
 
     @param string type_noisette
-           Identifiant du type de noisette
+           Identifiant du type de noisette.
+    @param string plugins_inactifs
+           Liste des plugins inactifs.
 -->]
 <div class="notice">
 	<:ncore:erreur_type_noisette_inactif{type_noisette=#TYPE_NOISETTE, plugins=#PLUGINS_INACTIFS}:>

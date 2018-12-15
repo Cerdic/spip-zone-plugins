@@ -12,10 +12,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Charge ou recharge les descriptions des types de noisette à partir des fichiers YAML.
- * Les types de noisettes sont recherchés dans un répertoire relatif fourni en argument.
  * La fonction optimise le chargement en effectuant uniquement les traitements nécessaires
- * en fonction des modifications, ajouts et suppressions des types de noisettes identifiés en comparant
- * les md5 des fichiers YAML.
+ * en fonction des modifications, ajouts et suppressions des types de noisette identifiés
+ * en comparant les md5 des fichiers YAML.
  *
  * @api
  * @uses ncore_type_noisette_initialiser_dossier()
@@ -27,12 +26,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param bool   $recharger
- *        Si `true` force le rechargement de toutes les types de noisettes, sinon le chargement se base sur le
+ *        Si `true` force le rechargement de tous les types de noisette, sinon le chargement se base sur le
  *        md5 des fichiers YAML. Par défaut vaut `false`.
  * @param string $stockage
- *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
- *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
- *        fournissant le service de stockage souhaité.
+ *        Identifiant du service de stockage à utiliser si précisé.
  *
  * @return bool
  *        `false` si une erreur s'est produite, `true` sinon.
@@ -241,8 +238,6 @@ function type_noisette_charger($plugin, $recharger = false, $stockage = '') {
  * @param string  $plugin
  *        Le service permet de distinguer l'appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- *        La fonction utilisera la fonction de lecture de la description brute d'un type de noisette, spécifique
- *        au service, ou à défaut, celle fournie par N-Core.
  * @param string  $type_noisette
  *        Identifiant du type de noisette.
  * @param string  $information
@@ -252,9 +247,7 @@ function type_noisette_charger($plugin, $recharger = false, $stockage = '') {
  *        en utilisant la fonction _T_ou_typo. Par défaut l'indicateur vaut `false`.
  *        Les champs sérialisés sont eux toujours désérialisés.
  * @param string  $stockage
- *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
- *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
- *        fournissant le service de stockage souhaité.
+ *        Identifiant du service de stockage à utiliser si précisé.
  *
  * @return array|string
  *        La description complète ou champ précis demandé pour un type de noisette donné. Les champs
@@ -316,7 +309,8 @@ function type_noisette_lire($plugin, $type_noisette, $information = '', $traiter
 }
 
 /**
- * Renvoie une liste de descriptions de types de noisette éventuellement filtrée sur certains champs.
+ * Renvoie une liste de descriptions de types de noisette éventuellement filtrée sur certains champs
+ * fournis en argument.
  *
  * @api
  * @uses ncore_type_noisette_lister()
@@ -328,9 +322,7 @@ function type_noisette_lire($plugin, $type_noisette, $information = '', $traiter
  *        Tableau associatif `[champ] = valeur` de critères de filtres sur les descriptions de types de noisette.
  *        Le seul opérateur possible est l'égalité.
  * @param string $stockage
- *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
- *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
- *        fournissant le service de stockage souhaité.
+ *        Identifiant du service de stockage à utiliser si précisé.
  *
  * @return array
  *        Tableau des descriptions des types de noisette trouvés indexé par le type de noisette.

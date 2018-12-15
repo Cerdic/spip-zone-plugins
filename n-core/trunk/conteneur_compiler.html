@@ -12,9 +12,7 @@
 	@param string  id_conteneur
 	       Identifiant du conteneur.
 	@param string stockage
-           Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
-           ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
-           fournissant le service de stockage souhaité.
+           Identifiant du service de stockage à utiliser si précisé.
 -->]
 #SET{noisettes, #NOISETTE_REPERTORIER{#ENV{plugin}, #ENV{id_conteneur}, #ENV{stockage}}}
 <BOUCLE_noisette_conteneur(DATA) {source table, #ENV{noisettes, #ARRAY}}{plugin}{par rang_noisette}>

@@ -32,9 +32,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string	$type_noisette
  * 	      Identifiant du type de noisette.
  * @param string $stockage
- *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
- *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
- *        fournissant le service de stockage souhaité.
+ *        Identifiant du service de stockage à utiliser si précisé.
  *
  * @return bool
  * 		`true` si la noisette doit être ajaxée, `false` sinon.
@@ -101,9 +99,7 @@ function type_noisette_ajaxifier($plugin, $type_noisette, $stockage = '') {
  * @param string $type_noisette
  * 	      Identifiant du type de noisette.
  * @param string $stockage
- *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
- *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
- *        fournissant le service de stockage souhaité.
+ *        Identifiant du service de stockage à utiliser si précisé.
  *
  * @return bool
  * 		`true` si le type de noisette doit être inclus dynamiquement, `false` sinon.
@@ -150,7 +146,7 @@ function type_noisette_dynamiser($plugin, $type_noisette, $stockage = '') {
  * Renvoie le dossier relatif des types de noisette pour le plugin appelant ou la localisation
  * du type de noisette demandé.
  * Cette fonction gère le cas particulier de la noisette conteneur fournie par N-Core qui est elle
- * toujours dans le dossier par défaut de N-Core.
+ * toujours dans le dossier par défaut de N-Core et n'est donc pas surchargeable.
  *
  * @package SPIP\NCORE\TYPE_NOISETTE\API
  *
@@ -195,7 +191,7 @@ include_spip('public/noisette_repertorier');
 
 /**
  * Renvoie le contexte de la noisette sous la forme d'un tableau éventuellement vide. Cette fonction gère un cache
- * des contextes génériques des types de noisette disponibles.
+ * des contextes non valorisés des types de noisette disponibles.
  *
  * @package SPIP\NCORE\NOISETTE\API
  *
@@ -211,15 +207,14 @@ include_spip('public/noisette_repertorier');
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param mixed  $noisette
  *        Tableau des identifiants de la noisette qui peut prendre la forme d'un tableau avec pour index
- *        id_noisette, id conteneur et rang_noisette, ce qui permet d'utiliser l'un ou l'autre des identifiants.
+ *        id_noisette, id conteneur et rang_noisette, ce qui permet d'utiliser l'un ou l'autre des identifiants
+ *        de la noisette.
  * @param string $type_noisette
  * 	      Identifiant du type de noisette.
  * @param array  $environnement
  * 	      Tableau de l'environnement reçu par la noisette.
  * @param string $stockage
- *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
- *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
- *        fournissant le service de stockage souhaité.
+ *        Identifiant du service de stockage à utiliser si précisé.
  *
  * @return array
  * 		Le tableau éventuellement vide des éléments de contexte de la noisette.
@@ -279,7 +274,9 @@ function noisette_contextualiser($plugin, $noisette, $type_noisette, $environnem
 
 
 /**
- * Encapsule, si demandé, le contenu de la noisette issu de la compilation dans un HTML plus ou moins complexe.
+ * Encapsule, si demandé, le contenu compile d'une ou d'un ensemble de noisettes dans un balisage HTML
+ * plus ou moins complexe appelé une capsule.
+ * Une noisette conteneur est considérée comme une capsule et donc traitée en tant que tel.
  *
  * @package SPIP\NCORE\NOISETTE\API
  *
@@ -287,25 +284,25 @@ function noisette_contextualiser($plugin, $noisette, $type_noisette, $environnem
  * @filtre
  *
  * @uses ncore_noisette_initialiser_encapsulation()
+ * @uses type_noisette_localiser()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param string $contenu
- *        Contenu compilé de la noisette en cours avant encapsulation.
+ *        Contenu compilé à encapsuler.
  * @param string $encapsulation
  * 	      Indicateur d'encapsulation du contenu par un capsule ou par une noisette conteneur. Prend les valeurs
- *        oui, non, defaut pour une capsule et conteneur pour une noisette conteneur.
+ *        `oui`, `non`, `defaut` pour une capsule et `conteneur` pour une noisette conteneur.
  * @param string $parametres
- * 	      Liste des paramètres de l'encapsulation. Pour une capsule, les index sont limités à type_noisette, id_noisette et
- *        css. Pour une noisette conteneur cette liste correspond au champ paramètres de la noisette et à son type.
+ *        Liste des paramètres de l'encapsulation. Pour une capsule, les index sont limités à `type_noisette`,
+ *        `id_noisette` et `css`. Pour une noisette conteneur cette liste correspond au champ `parametres` de la
+ *        noisette et à son type.
  * @param string $stockage
- *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
- *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
- *        fournissant le service de stockage souhaité.
+ *        Identifiant du service de stockage à utiliser si précisé.
  *
  * @return string
- * 		Le contenu fourni encapsulé dans du HTML ou tel que fourni en entrée si pas d'encapsulation.
+ * 		Le contenu fourni encapsulé dans un balisage HTML ou tel que fourni en entrée si pas d'encapsulation.
  */
 function noisette_encapsuler($plugin, $contenu, $encapsulation, $parametres, $stockage = '') {
 
@@ -361,6 +358,69 @@ function noisette_encapsuler($plugin, $contenu, $encapsulation, $parametres, $st
 	return $contenu;
 }
 
+
+/**
+ * Renvoie une liste de descriptions de noisettes appartenant à un conteneur donné ou pas et éventuellement filtrée
+ * sur certains champs.
+ * Le tableau retourné est indexé soit par identifiant de noisette soit par identifiant du conteneur et rang de la
+ * noisette.
+ *
+ * @package SPIP\NCORE\NOISETTE\API
+ *
+ * @api
+ *
+ * @uses ncore_noisette_lister()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array|string $conteneur
+ *        Tableau descriptif du conteneur ou identifiant du conteneur ou vide si on souhaite adresser tous les
+ *        conteneurs.
+ * @param string $cle
+ *        Champ de la description d'une noisette servant d'index du tableau. On utilisera soit `id_noisette`
+ *        soit `rang_noisette` (défaut).
+ * @param array  $filtres
+ *        Tableau associatif `[champ] = valeur` de critères de filtres sur les descriptions de types de noisette.
+ *        Le seul opérateur possible est l'égalité.
+ * @param string $stockage
+ *        Identifiant du service de stockage à utiliser si précisé.
+ *
+ * @return array
+ *        Tableau des descriptions des noisettes du conteneur indexé par le champ fourni en argument (par défaut le
+ *        rang).
+ */
+function noisette_repertorier($plugin, $conteneur = array(), $cle = 'rang_noisette', $filtres = array(), $stockage = '') {
+
+	// On indexe le tableau des noisettes par le plugin appelant en cas d'appel sur le même hit
+	// par deux plugins différents et aussi par la clé d'indexation.
+	static $noisettes = array();
+
+	if (!isset($noisettes[$plugin][$cle])) {
+		// On charge l'API de N-Core.
+		// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
+		include_spip("ncore/ncore");
+
+		// On récupère la description complète de tous les types de noisettes détectés par le plugin appelant
+		$noisettes[$plugin][$cle] = ncore_noisette_lister($plugin, $conteneur, '', $cle, $stockage);
+	}
+
+	// Application des filtres éventuellement demandés en argument de la fonction
+	$noisettes_filtrees = $noisettes[$plugin][$cle];
+	if ($filtres) {
+		foreach ($noisettes_filtrees as $_noisette => $_description) {
+			foreach ($filtres as $_critere => $_valeur) {
+				if (isset($_description[$_critere]) and ($_description[$_critere] != $_valeur)) {
+					unset($noisettes_filtrees[$_noisette]);
+					break;
+				}
+			}
+		}
+	}
+
+	return $noisettes_filtrees;
+}
+
  
 // -----------------------------------------------------------------------
 // --------------------- FILTRES & BALISES CONTENEURS --------------------
@@ -376,6 +436,8 @@ include_spip('public/conteneur_identifier');
  *
  * @api
  * @filtre
+ *
+ * @uses ncore_conteneur_identifier()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou

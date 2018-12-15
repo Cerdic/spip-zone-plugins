@@ -14,6 +14,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @balise
  *
+ * @uses conteneur_identifier()
+ * @uses noisette_encapsuler()
+ * @uses noisette_contextualiser()
+ * @uses type_noisette_localiser()
+ * @uses type_noisette_ajaxifier()
+ * @uses type_noisette_dynamiser()
+ *
  * @param Champ $p
  *        Pile au niveau de la balise.
  *

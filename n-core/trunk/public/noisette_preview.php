@@ -82,7 +82,7 @@ function balise_NOISETTE_PREVIEW_dist($p) {
  *        éventuel sur les plugins inactifs.
  *
  * @return string
- *        Code HTML généré pour la noisette.
+ *        Code HTML de prévisualisation de la noisette.
  */
 function calculer_preview_noisette($plugin, $noisette, $type_noisette_actif, $type_noisette_necessite) {
 

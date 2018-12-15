@@ -15,6 +15,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @balise
  *
+ * @uses conteneur_identifier()
+ *
  * @param Champ $p
  *        Pile au niveau de la balise.
  *
@@ -24,8 +26,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function balise_CONTENEUR_IDENTIFIER_dist($p) {
 
 	// Récupération des arguments.
-	// -- la balise utilise toujours le rangement par rang au sein du conteneur
-	// -- et ne permet de filtrer les noisettes autrement que sur le conteneur.
 	$plugin = interprete_argument_balise(1, $p);
 	$plugin = isset($plugin) ? str_replace('\'', '"', $plugin) : '""';
 	$conteneur = interprete_argument_balise(2, $p);
@@ -33,7 +33,7 @@ function balise_CONTENEUR_IDENTIFIER_dist($p) {
 	$stockage = interprete_argument_balise(3, $p);
 	$stockage = isset($stockage) ? str_replace('\'', '"', $stockage) : '""';
 
-	// On appelle la fonction de calcul de la liste des noisette
+	// On appelle la fonction de calcul de l'identifiant du conteneur.
 	$p->code = "conteneur_identifier($plugin, $conteneur, $stockage)";
 
 	return $p;

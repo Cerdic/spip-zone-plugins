@@ -1,3 +1,13 @@
+[(#REM) <!--  CONTENEUR
+
+	Noisette conteneur standard fourni par N-Core. Cette noisette n'est pas surchargeable.
+	Il est possible de choisir la balise et des styles spécifiques.
+
+	@param string conteneur_balise
+	       Balise englobante. Peut prendre les valeurs div, section, article, aside, nav et p.
+	@param string conteneur_css
+           Classes supplémentaires associées à la balise.
+-->]
 [<(#ENV{conteneur_balise}) class="noisette[ noisette_(#ENV{type_noisette})][ (#ENV{conteneur_css})]">]
 	<!--noisettes-->
 [</(#ENV{conteneur_balise})>]
