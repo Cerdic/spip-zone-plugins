@@ -451,7 +451,7 @@ include_spip('public/conteneur_identifier');
  * @return string
  *        Identifiant du conteneur ou chaine vide en cas d'erreur.
  */
-function conteneur_identifier($plugin, $conteneur, $stockage) {
+function conteneur_identifier($plugin, $conteneur, $stockage = '') {
 
 	include_spip('ncore/ncore');
 	$identifiant = ncore_conteneur_identifier($plugin, $conteneur, $stockage);
