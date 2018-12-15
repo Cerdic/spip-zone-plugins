@@ -483,7 +483,7 @@ function formidable_raccourcis_arobases_2_valeurs_champs($chaine, $saisies, $bru
 		else {
 			$a_remplacer = array_intersect_key($valeurs_libellees, $a_remplacer);
 		}
-		$a_remplacer = array_merge($a_remplacer, array('nom_site_spip' => $nom_site_spip));
+		$a_remplacer = array_merge($a_remplacer, array('nom_site_spip' => lire_config("nom_site")));
 	}
 	return trim(_L($chaine, $a_remplacer));
 }
