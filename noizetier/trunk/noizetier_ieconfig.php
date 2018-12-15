@@ -175,7 +175,7 @@ function noizetier_ieconfig_exporter() {
 	// Exportation de la tables spip_noisettes qui contient les noisettes associées aux pages explicites,
 	// aux compositions virtuelles et à certains objets précis.
 	// -- on supprime l'id_noisette de chaque noisette car il sera recréé lors de l'import.
-	include_spip('inc/ncore_noisette');
+	include_spip('ncore_fonctions');
 	$export['noisettes'] = noisette_repertorier('noizetier', array(), 'id_noisette');
 	foreach($export['noisettes'] as $_id => $_noisette) {
 		unset($export['noisettes'][$_id]['id_noisette']);

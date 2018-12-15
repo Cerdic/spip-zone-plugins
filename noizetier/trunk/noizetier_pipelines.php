@@ -108,7 +108,7 @@ function noizetier_recuperer_fond($flux) {
 						}
 					} elseif ($bloc_avec_noisettes) {
 						// Mode normal d'afichage
-						$fond_compilation_bloc = 'bloc_compiler';
+						$fond_compilation_bloc = 'conteneur_compiler';
 					}
 
 					// Si le fond n'est pas vide c'est qu'il faut bien compiler soit une liste de noisettes
