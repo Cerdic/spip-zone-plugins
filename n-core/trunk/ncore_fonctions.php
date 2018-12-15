@@ -333,9 +333,9 @@ function noisette_encapsuler($plugin, $contenu, $encapsulation, $parametres, $st
 			// soit on utilise la capsule générique pour toute noisette qui porte le nom 'dist',
 			// soit on utilise une pseudo-capsule qui englobe la noisette dans un div.
 			if (find_in_path("capsules/{$parametres['type_noisette']}.html")) {
-				$fond_capsule = "capsules/{$parametres['type_noisette']}";				
+				$fond_capsule = "capsules/{$parametres['type_noisette']}";
 			} elseif (find_in_path('capsules/dist.html')) {
-				$fond_capsule = 'dist';				
+				$fond_capsule = 'capsules/dist';
 			} else {
 				$fond_capsule = '';
 			}
