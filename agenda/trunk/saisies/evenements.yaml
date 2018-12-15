@@ -40,6 +40,12 @@ options:
           label_case: '<:saisie_evenements:afficher_annee_obligatoire_label_case:>'
           li_class: 'pleine_largeur'
       -
+        saisie: 'case'
+        options:
+          nom: 'masquer_heure'
+          label_case: '<:saisie_evenements:masquer_heure_label_case:>'
+          li_class: 'pleine_largeur'
+      -
         saisie: 'radio'
         options:
           nom: 'type_choix'

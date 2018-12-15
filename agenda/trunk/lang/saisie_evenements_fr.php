@@ -38,6 +38,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'inscription_explication' => 'Restreindre aux événements dont le critère inscription est le suivant.',
 	'inscription_label' => 'Inscription',
 
+	'masquer_heure_label_case' => 'Masquer l\'heure',
+
 	// O
 	'option_type_affichage_date' => 'Uniquement la date de l’événement',
 	'option_type_affichage_label' => 'Présentation des événements',
