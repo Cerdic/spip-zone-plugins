@@ -268,6 +268,7 @@ function mailshot_envoyer_lot($nb_max=5,$offset=0){
  */
 function mailshot_verifier_email_envoi_bloque($email, $subscriber, $shoot) {
 	static $envois_idem = array();
+	static $test_email_vu = array();
 
 	if (preg_match(",@example\.org$,i",$subscriber['email'])) {
 		return array(
@@ -277,14 +278,23 @@ function mailshot_verifier_email_envoi_bloque($email, $subscriber, $shoot) {
 			'log' => "INFO Envoi BLOQUE Email obfusque ".$subscriber['email']."",
 		);
 	}
-	if (_TEST_EMAIL_DEST) {
-		$erreur = _T('mailshot:erreur_envoi_mail_force_debug',array('email'=>_TEST_EMAIL_DEST));
-		return array(
-			'fail' => true,
-			'statut' => 'fail',
-			'date' => date('Y-m-d H:i:s'),
-			'log' => "INFO Envoi BLOQUE $erreur",
-		);
+	// si _TEST_EMAIL_DEST
+	if (defined('_TEST_EMAIL_DEST')) {
+		if (!isset($test_email_vu[$shoot['id_mailshot']])) {
+			$test_email_vu[$shoot['id_mailshot']] = 0;
+		}
+
+		// si _TEST_EMAIL_DEST est un email, on en laisse passer 5 envois pour les tests et puis c'est tout
+		if (!_TEST_EMAIL_DEST or $test_email_vu[$shoot['id_mailshot']]++>4) {
+			$erreur = _T('mailshot:erreur_envoi_mail_force_debug', array('email' => _TEST_EMAIL_DEST));
+
+			return array(
+				'fail' => true,
+				'statut' => 'fail',
+				'date' => date('Y-m-d H:i:s'),
+				'log' => "INFO Envoi BLOQUE $erreur",
+			);
+		}
 	}
 
 	if ($shoot['graceful']) {
