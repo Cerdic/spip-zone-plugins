@@ -803,7 +803,7 @@ function ncore_noisette_initialiser_encapsulation($plugin) {
  * @return string
  *        Identifiant du conteneur ou chaine vide en cas d'erreur.
  */
-function ncore_conteneur_identifier($plugin, $conteneur, $stockage) {
+function ncore_conteneur_identifier($plugin, $conteneur, $stockage = '') {
 
 	// Il faut calculer l'identifiant du conteneur pour accéder à la bonne liste de noisettes.
 	// N-Core ne propose pas de fonction par défaut car l'élaboration de l'identifiant est totalement spécifique
