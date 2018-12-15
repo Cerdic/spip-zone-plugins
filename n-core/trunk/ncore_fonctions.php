@@ -368,6 +368,7 @@ function noisette_encapsuler($plugin, $contenu, $encapsulation, $parametres, $st
  * @package SPIP\NCORE\NOISETTE\API
  *
  * @api
+ * @filtre
  *
  * @uses ncore_noisette_lister()
  *
