@@ -25,7 +25,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @note
  *     Lève une erreur de squelette si le nom de champs extras
  *     n'est pas indiqué en premier paramètre de la balise
- * 
+ *
  * @param Champ $p
  *     AST au niveau de la balise
  * @return Champ
@@ -72,13 +72,13 @@ function calculer_balise_CHAMP_EXTRA($objet, $colonne, $demande='') {
 		$objet = $decoupe[0];
 		$colonne = $decoupe[1];
 	}
-	
+
 	// recuperer la liste des champs extras existants
 	include_spip('cextras_pipelines');
 	if (!$saisies = champs_extras_objet( $table = table_objet_sql($objet) )) {
 		return '';
 	}
-	
+
 	include_spip('inc/saisies');
 	if (!$saisie = saisies_chercher($saisies, $colonne)) {
 		return '';
@@ -125,9 +125,9 @@ function balise_LISTER_CHOIX_dist($p) {
 		$p->code = "''";
 		return $p;
 	}
-	
+
 	$objet = $p->boucles[$id_boucle]->id_table;
-	
+
 	// recuperer les parametres : colonne sql (champ)
 	if (!$colonne = interprete_argument_balise(1, $p)) {
 		$msg = array('zbug_balise_sans_argument',	array('balise' => ' LISTER_CHOIX'));
@@ -135,7 +135,7 @@ function balise_LISTER_CHOIX_dist($p) {
 		$p->code = "''";
 		return $p;
 	}
-	
+
 	$separateur = interprete_argument_balise(2, $p);
 	if (!$separateur) $separateur = "', '";
 
@@ -148,7 +148,7 @@ function balise_LISTER_CHOIX_dist($p) {
 	if ($p->etoile != "**") {
 		$p->code = "(is_array(\$a = $p->code) ? join($separateur, \$a) : " . $p->code . ")";
 	}
-	
+
 	return $p;
 }
 
@@ -161,7 +161,7 @@ function balise_LISTER_CHOIX_dist($p) {
  *     un affichage par groupe (optgroup / options) avec une syntaxe
  *     spécifique. Ici nous devons pouvoir applatir
  *     toutes les cle => valeur.
- * 
+ *
  * @param string $objet
  *     Type d'objet
  * @param string $colonne
@@ -175,9 +175,11 @@ function balise_LISTER_CHOIX_dist($p) {
  */
 function calculer_balise_LISTER_CHOIX($objet, $colonne, $applatir = true) {
 	if ($options = calculer_balise_CHAMP_EXTRA($objet, $colonne)) {
-		if (isset($options['datas']) and $options['datas']) {
+		if ((isset($options['datas']) and $options['datas'])
+			or (isset($options['data']) and $options['data'])) {
 			include_spip('inc/saisies');
-			$choix = saisies_chaine2tableau($options['datas']);
+			$choix = $options['datas'] ? $options['datas'] : $options['data'];
+			$choix = saisies_chaine2tableau($choix);
 			// applatir les sous-groupes si présents
 			if ($applatir) {
 				$choix = saisies_aplatir_tableau($choix);
@@ -192,22 +194,22 @@ function calculer_balise_LISTER_CHOIX($objet, $colonne, $applatir = true) {
 
 /**
  * Liste les valeurs des champs de type liste (enum, radio, case)
- * 
+ *
  * Ces champs enregistrent en base la valeur de la clé
  * Il faut donc transcrire clé -> valeur
  *
  * @example
  *     ```
  *     #LISTER_VALEURS{champ}
- *     #LISTER_VALEURS{champ, " > "} 
+ *     #LISTER_VALEURS{champ, " > "}
  *     #LISTER_VALEURS**{champ} // retourne un tableau cle/valeur
  *     ```
- * 
- * @note 
+ *
+ * @note
  *     Pour des raisons d'efficacité des requetes SQL
  *     le paramètre "champ" ne peut être calculé
  *     ``#LISTER_VALEURS{#GET{champ}}`` ne peut pas fonctionner.
- * 
+ *
  *     Si cette restriction est trop limitative, on verra par la suite
  *     pour l'instant, on laisse comme ca...
  *
@@ -228,7 +230,7 @@ function balise_LISTER_VALEURS_dist($p) {
 		$p->code = "''";
 		return $p;
 	}
-	
+
 	$objet = $p->boucles[$id_boucle]->id_table;
 	$_id_objet = $p->boucles[$id_boucle]->primary;
 	$id_objet = champ_sql($_id_objet, $p);
@@ -240,10 +242,10 @@ function balise_LISTER_VALEURS_dist($p) {
 		$p->code = "''";
 		return $p;
 	}
-	
+
 	$separateur = interprete_argument_balise(2, $p);
 	if (!$separateur) $separateur = "', '";
-	
+
 	// demander la colonne dans la requete SQL
 	// $colonne doit etre un texte 'nom_du_champ'
 	if ($p->param[0][1][0]->type != 'texte') {
@@ -252,9 +254,9 @@ function balise_LISTER_VALEURS_dist($p) {
 		$p->code = "''";
 		return $p;
 	}
-	
+
 	$texte_colonne = $p->param[0][1][0]->texte;
-	
+
 	$valeur = champ_sql($texte_colonne, $p);
 
 	// generer le code d'execution
@@ -279,7 +281,7 @@ function balise_LISTER_VALEURS_dist($p) {
  *     Nom de la colonne SQL
  * @param string $cles
  *     Valeurs enregistrées pour ce champ dans la bdd pour l'objet en cours
- * 
+ *
  * @return string|array
  *     - Tableau des couples (clé => valeur) des choix
  *     - Chaîne vide si le champs extra n'est pas trouvé
