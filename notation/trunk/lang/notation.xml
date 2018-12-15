@@ -1,4 +1,7 @@
 <traduction module="notation" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/notation/trunk/lang/" reference="fr">
+	<langue code="ar" url="https://trad.spip.net/tradlang_module/notation?lang_cible=ar" total="84" traduits="72" relire="0" modifs="0" nouveaux="12" pourcent="85.71">
+		<traducteur nom="SuperYMS" lien="https://trad.spip.net/auteur/superyms" />
+	</langue>
 	<langue code="en" url="https://trad.spip.net/tradlang_module/notation?lang_cible=en" total="84" traduits="78" relire="0" modifs="1" nouveaux="5" pourcent="92.86">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
