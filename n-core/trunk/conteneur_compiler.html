@@ -15,6 +15,6 @@
            Identifiant du service de stockage à utiliser si précisé.
 -->]
 #SET{noisettes, #NOISETTE_REPERTORIER{#ENV{plugin}, #ENV{id_conteneur}, #ENV{stockage}}}
-<BOUCLE_noisette_conteneur(DATA) {source table, #ENV{noisettes, #ARRAY}}{plugin}{par rang_noisette}>
+<BOUCLE_noisettes_conteneur(DATA) {source table, #ENV{noisettes, #ARRAY}}{plugin}{par rang_noisette}>
 	[(#NOISETTE_COMPILER{#VALEUR{id_noisette}, #ENV{stockage, ''}})]
-</BOUCLE_noisette_conteneur>
+</BOUCLE_noisettes_conteneur>
