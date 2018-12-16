@@ -13,8 +13,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /* déclaration des différentes variables utilisées pour effectuer l'anonymisation */
 $GLOBALS['formulaires']['variables_anonymisation'] = array(
-	'remote_user' => '$_SERVER["REMOTE_USER"]',
-	'php_auth_user' => '$_SERVER["PHP_AUTH_USER"]',
+	'remote_user' => 'isset($_SERVER["REMOTE_USER"]) ? $_SERVER["REMOTE_USER"] : null',
+	'php_auth_user' => 'isset($_SERVER["PHP_AUTH_USER"]) ? $_SERVER["PHP_AUTH_USER"] : null',
 );
 
 /*
