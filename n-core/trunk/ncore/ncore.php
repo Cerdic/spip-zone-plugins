@@ -371,7 +371,7 @@ function ncore_noisette_stocker($plugin, $description, $stockage = '') {
 	} else {
 		// Le plugin ne propose pas de fonction propre ou le stockage N-Core est explicitement demandé.
 		// -- N-Core stocke les noisettes dans une meta propre au plugin appelant contenant un tableau au format
-		//    [conteneur][rang] = description
+		//    [id_conteneur][rang] = description
 		//    N-Core calcule un identifiant unique pour la noisette qui sera stocké à l'index 'id_noisette' de sa
 		//    description et qui vaudra uniqid() avec comme préfixe le plugin appelant.
 
@@ -417,6 +417,59 @@ function ncore_noisette_stocker($plugin, $description, $stockage = '') {
 	return $id_noisette;
 }
 
+/**
+ * Transfère une noisette d'un conteneur vers un autre à un rang donné.
+ * Le rang destination n'est pas vérifié lors du rangement dans le conteneur destination. Il convient
+ * à l'appelant de vérifier que le rang est libre.
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array  $description
+ *        Description de la noisette. Soit la description ne contient pas l'id de la noisette et c'est un ajout,
+ *        soit la description contient l'id et c'est une mise à jour.
+ * @param string $id_conteneur
+ * @param int    $rang
+ * @param string $stockage
+ *        Identifiant du service de stockage à utiliser si précisé.
+ *
+ * @return array
+ */
+function ncore_noisette_changer_conteneur($plugin, $description, $id_conteneur, $rang, $stockage = '') {
+
+	// On cherche le service de stockage à utiliser selon la logique suivante :
+	// - si le service de stockage est non vide on l'utilise en considérant que la fonction existe forcément;
+	// - sinon, on utilise la fonction du plugin appelant si elle existe;
+	// - et sinon, on utilise la fonction de N-Core.
+	include_spip('inc/ncore_utils');
+	if ($changer = ncore_chercher_service($plugin, 'noisette_changer_conteneur', $stockage)) {
+		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
+		$description = $changer($plugin, $description, $id_conteneur, $rang);
+	} else {
+		// Le plugin ne propose pas de fonction propre ou le stockage N-Core est explicitement demandé.
+		// -- N-Core stocke les noisettes dans une meta propre au plugin appelant contenant un tableau au format
+		//    [id_conteneur][rang] = description
+
+		// On supprime la noisette de son emplacement actuel en utilisant la description.
+		ncore_noisette_destocker('ncore', $description, $stockage);
+
+		// On lit la meta de stockage des noisettes pour le plugin appelant.
+		include_spip('inc/config');
+		$noisettes = lire_config("${plugin}_noisettes", array());
+
+		// On rajoute la description à son emplacement destination en prenant soin de modifier les index id_conteneur,
+		// conteneur et rang_noisette qui doivent représenter le conteneur destination.
+		$description['id_conteneur'] = $id_conteneur;
+		$description['conteneur'] = ncore_conteneur_construire($plugin, $id_conteneur, $stockage);
+		$description['rang_noisette'] = $rang;
+		$noisettes[$id_conteneur][$rang] = $description;
+
+		// On met à jour la meta
+		ecrire_config("${plugin}_noisettes", $noisettes);
+	}
+
+	return $description;
+}
 
 /**
  * Complète la description d'une noisette avec des champs spécifiques au plugin utilisateur si besoin.
@@ -490,7 +543,7 @@ function ncore_noisette_ranger($plugin, $description, $rang_destination, $stocka
 	} else {
 		// Le plugin ne propose pas de fonction propre ou le stockage N-Core est explicitement demandé.
 		// -- N-Core stocke les noisettes dans une meta propre au plugin appelant contenant un tableau au format
-		//    [conteneur][rang] = description
+		//    [id_conteneur][rang] = description
 
 		// Initialisation de la sortie.
 		$retour = false;
@@ -552,7 +605,7 @@ function ncore_noisette_destocker($plugin, $description, $stockage = '') {
 	} else {
 		// Le plugin ne propose pas de fonction propre ou le stockage N-Core est explicitement demandé.
 		// -- N-Core stocke les noisettes dans une meta propre au plugin appelant contenant un tableau au format
-		//    [conteneur][rang] = description
+		//    [id_conteneur][rang] = description
 		// -- $description est soit le tableau descriptif de la noisette, soit le conteneur, et dans ce cas, il faut
 		//    supprimer toutes les noisettes du conteneur.
 
@@ -620,7 +673,7 @@ function ncore_noisette_lister($plugin, $conteneur = array(), $information = '',
 	} else {
 		// Le plugin ne propose pas de fonction propre ou le stockage N-Core est explicitement demandé.
 		// -- N-Core stocke les noisettes dans une meta propre au plugin appelant contenant un tableau au format
-		//    [conteneur][rang] = description
+		//    [id_conteneur][rang] = description
 
 		// Initialisation du tableau de sortie.
 		$noisettes = array();
@@ -693,7 +746,7 @@ function ncore_noisette_decrire($plugin, $noisette, $stockage = '') {
 	} else {
 		// Le plugin ne propose pas de fonction propre ou le stockage N-Core est explicitement demandé.
 		// -- N-Core stocke les noisettes dans une meta propre au plugin appelant contenant un tableau au format
-		//    [conteneur][rang] = description
+		//    [id_conteneur][rang] = description
 
 		// Initialisation de la description à retourner.
 		$description = array();
