@@ -1,4 +1,16 @@
 <?php
+/**
+ * Ce fichier contient l'action `deplacer_noisette_ajax` lancée par un utilisateur pour
+ * déplacer une noisette d'un rang donné dans un conteneur à un autre rang dans le même
+ * conteneur ou dans un conteneur différent.
+ *
+ * @package SPIP\NOIZETIER\NOISETTE\ACTION
+ */
+
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
 
 /**
  * Action déplacer une noisette en ajax
@@ -9,16 +21,8 @@
  *
  * @Note : cette action diffère de deplacer_noisette.php qui permet de déplacer d'un unique rang, au sein du même conteneur
  *
- * @plugin     Noizetier
- * @copyright  2018
- * @licence    GNU/GPL
- * @package    SPIP\Noizetier\Action
+ * @return
  */
-
-if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
-}
-
 function action_deplacer_noisette_ajax_dist() {
 
 	//include_spip('inc/autoriser');
@@ -34,16 +38,16 @@ function action_deplacer_noisette_ajax_dist() {
 
 	// Rustine temporaire : l'API de déplacement ne prévoit pas de changement de conteneur
 	// Dans ce cas on modifie le conteneur avec un rang libre en amont afin de forcer le changement
-	$nouveau_conteneur = ($id_conteneur_destination != $id_conteneur_origine);
-	if ($nouveau_conteneur) {
-		$set = array(
-			'id_conteneur'  => $id_conteneur_destination,
-			'rang_noisette' => 9999,
-		);
-		$update = objet_modifier('noisette', $id_noisette, $set);
-	}
+//	$nouveau_conteneur = ($id_conteneur_destination != $id_conteneur_origine);
+//	if ($nouveau_conteneur) {
+//		$set = array(
+//			'id_conteneur'  => $id_conteneur_destination,
+//			'rang_noisette' => 9999,
+//		);
+//		$update = objet_modifier('noisette', $id_noisette, $set);
+//	}
 
-	$deplacer = noisette_deplacer('noizetier', $id_noisette, $rang);
+	$deplacer = noisette_deplacer('noizetier', $id_noisette, $id_conteneur_destination, $rang);
 	$deplacer = true;
 
 	if ($deplacer) {
@@ -62,6 +66,11 @@ function action_deplacer_noisette_ajax_dist() {
 	));
 }
 
+/**
+ * @param $data
+ *
+ * @return void
+ */
 function envoyer_json_envoi($data) {
 	header('Content-Type: application/json; charset=' . $GLOBALS['meta']['charset']);
 	echo json_encode($data);

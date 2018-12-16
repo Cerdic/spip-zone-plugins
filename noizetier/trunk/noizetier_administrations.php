@@ -128,6 +128,7 @@ function maj_060($config_defaut) {
 	//    dans les versions précédentes du plugin.
 	sql_alter("TABLE spip_noisettes ADD plugin varchar(30) DEFAULT '' NOT NULL AFTER id_noisette");
 	sql_alter("TABLE spip_noisettes ADD id_conteneur varchar(255) DEFAULT '' NOT NULL AFTER plugin");
+	sql_alter("TABLE spip_noisettes ADD conteneur text DEFAULT '' NOT NULL AFTER id_conteneur");
 	sql_alter("TABLE spip_noisettes ADD est_conteneur varchar(3) DEFAULT 'non' NOT NULL AFTER type_noisette");
 	sql_alter("TABLE spip_noisettes ADD encapsulation varchar(6) DEFAULT 'defaut' NOT NULL AFTER parametres");
 	// -- Changement du nom du champ 'rang' en 'rang_noisette'
@@ -153,7 +154,7 @@ function maj_060($config_defaut) {
 	sql_alter("TABLE spip_noisettes ADD INDEX id_conteneur (id_conteneur)");
 	sql_alter("TABLE spip_noisettes ADD INDEX rang_noisette (rang_noisette)");
 	// -- Remplissage de la nouvelle colonne plugin avec la valeur 'noizetier'
-	//    et de la colonne id_conteneur à partir des autres colonnes existantes.
+	//    et des colonnes id_conteneur et conteneur à partir des autres colonnes existantes.
 	$select = array('id_noisette', 'type', 'composition', 'objet', 'id_objet', 'bloc');
 	$from = 'spip_noisettes';
 	$noisettes = sql_allfetsel($select, $from);
@@ -164,6 +165,7 @@ function maj_060($config_defaut) {
 			$noisettes[$_cle]['plugin'] = 'noizetier';
 			// On calcule le conteneur au format tableau et on appelle la fonction de service de construction
 			// de l'id du conteneur
+			// TODO : utiliser la fonction composer_conteneur
 			$conteneur = array();
 			if (!empty($_noisette['objet']) and !empty($_noisette['id_objet']) and intval($_noisette['id_objet'])) {
 				$conteneur['objet'] = $_noisette['objet'];
@@ -174,6 +176,7 @@ function maj_060($config_defaut) {
 				$page = $_noisette['type'] . ($_noisette['composition'] ? "-{$_noisette['composition']}" : '');
 				$conteneur['squelette'] = "{$_noisette['bloc']}/${page}";
 			}
+			$noisettes[$_cle]['conteneur'] = serialize($conteneur);
 			$noisettes[$_cle]['id_conteneur'] = noizetier_conteneur_identifier('noizetier', $conteneur);
 		}
 		sql_replace_multi($from, $noisettes);

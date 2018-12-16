@@ -38,6 +38,9 @@ function noizetier_declarer_tables_interfaces($interface) {
 	$interface['table_des_traitements']['NECESSITE']['types_noisettes'] = 'unserialize(%s)';
 	$interface['table_des_traitements']['NOM']['types_noisettes'] = '_T_ou_typo(%s)';
 	$interface['table_des_traitements']['DESCRIPTION']['types_noisettes'] = '_T_ou_typo(%s)';
+	// - table spip_noisettes : on desérialise les tableaux
+	$interface['table_des_traitements']['PARAMETRES']['noisettes'] = 'unserialize(%s)';
+	$interface['table_des_traitements']['CONTENEUR']['noisettes'] = 'unserialize(%s)';
 
 	return $interface;
 }
@@ -134,6 +137,7 @@ function noizetier_declarer_tables_principales($tables_principales) {
 		'plugin'        => "varchar(30) DEFAULT '' NOT NULL",
 		'id_conteneur'  => "varchar(255) DEFAULT '' NOT NULL",
 		'rang_noisette' => "smallint DEFAULT 1 NOT NULL",
+		'conteneur'     => "text DEFAULT '' NOT NULL",
 		'type'          => "varchar(127) DEFAULT '' NOT NULL",
 		'composition'   => "varchar(127) DEFAULT '' NOT NULL",
 		'objet'         => 'varchar(25) NOT NULL default ""',

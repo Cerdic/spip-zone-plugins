@@ -52,8 +52,8 @@ function noizetier_conteneur_composer($page_ou_objet, $bloc, $noisette=array()) 
 	}
 
 	// Calcul de l'identifiant du conteneur
-	include_spip('ncore/noizetier');
-	$id_conteneur = noizetier_conteneur_identifier('noizetier', $conteneur);
+	include_spip('ncore_fonctions');
+	$id_conteneur = conteneur_identifier('noizetier', $conteneur);
 
 	return $id_conteneur;
 }

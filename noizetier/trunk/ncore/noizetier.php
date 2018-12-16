@@ -257,6 +257,48 @@ function noizetier_noisette_stocker($plugin, $description) {
 }
 
 /**
+ * Transfère une noisette d'un conteneur vers un autre à un rang donné.
+ * Le rang destination n'est pas vérifié lors du rangement dans le conteneur destination. Il convient
+ * à l'appelant de vérifier que le rang est libre.
+ * La description complète de la noisette est renvoyée avec mise à jour des champs de positionnement (id_conteneur,
+ * conteneur et rang_noisette).
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array  $description
+ *        Description de la noisette. Soit la description ne contient pas l'id de la noisette et c'est un ajout,
+ *        soit la description contient l'id et c'est une mise à jour.
+ * @param string $id_conteneur
+ * @param int    $rang
+ *
+ * @return array
+ *         Description de la noisette mise à jour avec les informations sur le nouvel emplacement
+ */
+function noizetier_noisette_changer_conteneur($plugin, $description, $id_conteneur, $rang) {
+
+	// On rajoute la description à son emplacement destination en prenant soin de modifier les index id_conteneur,
+	// conteneur et rang_noisette qui doivent représenter le conteneur destination.
+	$description['id_conteneur'] = $id_conteneur;
+	$description['conteneur'] = ncore_conteneur_construire($plugin, $id_conteneur);
+	$description['rang_noisette'] = $rang;
+
+	// On met à jour l'objet en base
+	// On sauvegarde l'id de la noisette et on le retire de la description pour éviter une erreur à l'update.
+	$id_noisette = intval($description['id_noisette']);
+	unset($description['id_noisette']);
+
+	// Mise à jour de la noisette.
+	$where = array('id_noisette=' . $id_noisette, 'plugin=' . sql_quote($plugin));
+	sql_updateq('spip_noisettes', $description, $where);
+
+	// On remet l'ide de la noisette pour renvoyer la description complète
+	$description['id_noisette'] = $id_noisette;
+
+	return $description;
+}
+
+/**
  * Complète la description fournie avec les champs propres au noiZetier, à savoir, ceux identifiant
  * la page/composition ou l'objet et le bloc.
  * On parse le squelette pour identifier les données manquantes.
@@ -290,6 +332,7 @@ function noizetier_noisette_completer($plugin, $description) {
 		$conteneur = unserialize($description['conteneur']);
 
 		// Détermination du complément en fonction du fait que le conteneur soit une noisette ou pas.
+		// TODO : pourquoi on utilise pas la fonction qui permet de décomposer le conteneur ?
 		if (!empty($conteneur['id_noisette']) and ($id_noisette = intval($conteneur['id_noisette']))) {
 			// -- si le conteneur est une noisette on récupère les informations de son conteneur. Comme les noisettes
 			//    sont insérées par niveau on duplique forcément les informations du bloc supérieur à chaque imbrication.
@@ -325,10 +368,6 @@ function noizetier_noisette_completer($plugin, $description) {
 
 		// Ajout du complément à la description.
 		$description = array_merge($description, $complement);
-
-		// On supprime l'index 'conteneur' qui n'est pas utile pour le noiZetier qui utilise uniquement les
-		// données de page et d'objet venant d'être ajoutées et l'id du conteneur.
-		unset($description['conteneur']);
 	}
 
 	return $description;
@@ -542,9 +581,50 @@ function noizetier_noisette_initialiser_encapsulation($plugin) {
 // -----------------------------------------------------------------------
 
 /**
- * Construit un identifiant unique pour le conteneur de noisettes.
- * Pour le noiZetier, un conteneur est toujours un squelette, soit générique soit d'un objet donné ou
- * une noisette de type conteneur.
+ * Vérifie la conformité des index du tableau représentant le conteneur et supprime les index inutiles, si besoin.
+ * Pour le noiZetier, la vérification concerne uniquement les conteneurs non noisette. Dans ce cas, le conteneur
+ * est toujours un squelette, soit générique soit d'un objet donné.
+ *
+ * @package SPIP\NOIZETIER\CONTENEUR\SERVICE
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array  $conteneur
+ *        Tableau associatif descriptif du conteneur dont les index doivent être vérifiés.
+ *
+ * @return array
+ *         Tableau du conteneur dont tous les index sont conformes (`squelette` et éventuellement `objet`, `id_objet`)
+ *         ou tableau vide si non conforme.
+ */
+function noizetier_conteneur_verifier($plugin, $conteneur) {
+
+	// Liste des index autorisés.
+	static $index_conteneur = array('squelette', 'objet', 'id_objet');
+
+	// On vérifie que les index autorisés sont les seuls retournés.
+	$conteneur_verifie = array();
+	if ($conteneur) {
+		// L'index squelette doit toujours être présent.
+		if ((isset($conteneur['squelette']) and $conteneur['squelette'])) {
+			$conteneur = array_intersect_key($conteneur, array_flip($index_conteneur));
+			if ((count($conteneur) == 1)
+			or ((count($conteneur) == 3)
+				and isset($conteneur['objet'], $conteneur['id_objet'])
+				and $conteneur['objet']
+				and intval($conteneur['id_objet']))) {
+				// Le conteneur coincide avec un squelette de bloc générique ou d'un objet donné.
+				$conteneur_verifie = $conteneur;
+			}
+		}
+	}
+
+	return $conteneur_verifie;
+}
+
+/**
+ * Construit un identifiant unique pour le conteneur de noisettes hors les noisettes conteneur.
+ * Pour le noiZetier, un conteneur est toujours un squelette, soit générique soit d'un objet donné.
  *
  * @package SPIP\NOIZETIER\CONTENEUR\SERVICE
  *
@@ -552,36 +632,74 @@ function noizetier_noisette_initialiser_encapsulation($plugin) {
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param array $conteneur
- *        Tableau associatif descriptif du conteneur accueillant la noisette. Un conteneur peut-être un squelette seul
- *        ou associé à un contexte d'utilisation et dans ce cas il possède un index `squelette` ou un objet quelconque
- *        sans lien avec un squelette. Dans tous les cas, les index, à l'exception de `squelette`, sont spécifiques
- *        à l'utilisation qui en est faite par le plugin.
+ *        Tableau associatif descriptif du conteneur. Pour le noiZetier, les seuls index autorisés sont
+ *        `squelette`, `objet` et `id_objet`.
  *
  * @return string
+ *         L'identifiant calculé à partir du tableau.
  */
 function noizetier_conteneur_identifier($plugin, $conteneur) {
 
 	// On initialise l'identifiant à vide.
-	$identifiant = '';
+	$id_conteneur = '';
 
+	// Les noisettes conteneur ont été identifiées par N-Core, inutile donc de s'en préoccuper.
 	if ($conteneur) {
-		// Cas d'une noisette conteneur.
-		if (!empty($conteneur['type_noisette']) and intval($conteneur['id_noisette'])) {
-			$identifiant = $conteneur['type_noisette'] . '|noisette|' . $conteneur['id_noisette'];
-		} else {
-			// Le nom du squelette en premier si il existe (normalement toujours).
-			if (!empty($conteneur['squelette'])) {
-				$identifiant .= $conteneur['squelette'];
-			}
-
-			// L'objet et son id si on est en présence d'un objet.
-			if (!empty($conteneur['objet'])	and !empty($conteneur['id_objet']) and intval($conteneur['id_objet'])) {
-				$identifiant .= ($identifiant ? '|' : '') . "{$conteneur['objet']}|{$conteneur['id_objet']}";
-			}
+		// Le nom du squelette en premier si il existe (normalement toujours).
+		if (!empty($conteneur['squelette'])) {
+			$id_conteneur .= $conteneur['squelette'];
+		}
+		// L'objet et son id si on est en présence d'un objet.
+		if (!empty($conteneur['objet'])	and !empty($conteneur['id_objet']) and intval($conteneur['id_objet'])) {
+			$id_conteneur .= ($id_conteneur ? '|' : '') . "{$conteneur['objet']}|{$conteneur['id_objet']}";
 		}
 	}
 
-	return $identifiant;
+	return $id_conteneur;
+}
+
+/**
+ * Reconstruit le conteneur sous forme de tableau à partir de son identifiant unique (fonction inverse
+ * de `ncore_conteneur_identifier`).
+ * N-Core ne fournit le conteneur pour les noisettes conteneur.
+ * Pour les autres conteneurs, c'est au plugin utilisateur de calculer le tableau.
+ *
+ * @package SPIP\NOIZETIER\CONTENEUR\SERVICE
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param string $id_conteneur
+ *        Identifiant unique du conteneur. Si l'id correspond à une noisette conteneur le traitement sera fait
+ *        par N-Core, sinon par le plugin utilisateur
+ * @param string $stockage
+ *        Identifiant du service de stockage à utiliser si précisé.
+ *
+ * @return array
+ *        Tableau représentatif du conteneur ou tableau vide en cas d'erreur.
+ */
+function noizetier_conteneur_construire($plugin, $id_conteneur, $stockage = '') {
+
+	// Il faut recomposer le tableau du conteneur à partir de son id.
+	// N-Core s'occupe des noisettes conteneur; le noiZetier n'a donc plus qu'à traiter les autres conteneur,
+	// à savoir ses conteneurs spécifiques.
+	$conteneur = array();
+	if ($id_conteneur) {
+		$elements = explode('|', $id_conteneur);
+		if (count($elements) == 1) {
+			// C'est une page ou une composition : seul l'index squelette est positionné.
+			$conteneur['squelette'] = $id_conteneur;
+		} elseif (count($elements) == 3) {
+			// C'est un objet
+			// -- le type d'objet et son id
+			$conteneur['objet'] = $elements[1];
+			$conteneur['id_objet'] = $elements[2];
+			// -- le squelette
+			$conteneur['squelette'] = $elements[0];
+		}
+	}
+
+	return $conteneur;
 }
 
 
