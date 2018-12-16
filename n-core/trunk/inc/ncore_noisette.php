@@ -66,59 +66,64 @@ function noisette_ajouter($plugin, $type_noisette, $conteneur, $rang = 0, $stock
 		// Ce sont ces fonctions qui aiguillent ou pas vers un service spécifique du plugin.
 		include_spip('ncore/ncore');
 
-		// On initialise la description de la noisette à ajouter et en particulier on stocke l'id du conteneur
-		// pour simplifier les traitements par la suite.
-		$description = array(
-			'plugin'        => $plugin,
-			'type_noisette' => $type_noisette,
-			'conteneur'     => serialize($conteneur),
-			'id_conteneur'  => ncore_conteneur_identifier($plugin, $conteneur, $stockage),
-			'rang_noisette' => intval($rang),
-			'est_conteneur' => type_noisette_lire($plugin, $type_noisette, 'conteneur', false, $stockage),
-			'parametres'    => serialize($parametres),
-			'encapsulation' => 'defaut',
-			'css'           => ''
-		);
+		// On initialise la description de la noisette à ajouter et en particulier on stocke le tableau et l'id du
+		// conteneur pour simplifier les traitements par la suite.
+		// -- Vérification des index du conteneur.
+		$conteneur = ncore_conteneur_verifier($plugin, $conteneur, $stockage);
+		if ($conteneur) {
+			// -- Calculer l'identifiant du conteneur
+			$id_conteneur = ncore_conteneur_identifier($plugin, $conteneur, $stockage);
+			// -- Initialisation par défaut
+			$description = array(
+				'plugin'        => $plugin,
+				'type_noisette' => $type_noisette,
+				'conteneur'     => serialize($conteneur),
+				'id_conteneur'  => $id_conteneur,
+				'rang_noisette' => intval($rang),
+				'est_conteneur' => type_noisette_lire($plugin, $type_noisette, 'conteneur', false, $stockage),
+				'parametres'    => serialize($parametres),
+				'encapsulation' => 'defaut',
+				'css'           => ''
+			);
+			// -- Pour les noisettes conteneur pas de capsule englobante.
+			if ($description['est_conteneur'] == 'oui') {
+				$description['encapsulation'] = 'non';
+			}
 
-		// Mise à jour de la description pour les noisettes conteneur:
-		// -- pas de div englobante.
-		if ($description['est_conteneur'] == 'oui') {
-			$description['encapsulation'] = 'non';
-		}
+			// Complément à la description par défaut, spécifique au plugin utilisateur, si nécessaire.
+			$description = ncore_noisette_completer($plugin, $description, $stockage);
 
-		// Complément à la description par défaut, spécifique au plugin utilisateur, si nécessaire.
-		$description = ncore_noisette_completer($plugin, $description, $stockage);
+			// On récupère les noisettes déjà affectées au conteneur sous la forme d'un tableau indexé
+			// par le rang de chaque noisette.
+			$noisettes = ncore_noisette_lister($plugin, $id_conteneur, '', 'rang_noisette', $stockage);
 
-		// On récupère les noisettes déjà affectées au conteneur sous la forme d'un tableau indexé
-		// par le rang de chaque noisette.
-		$noisettes = ncore_noisette_lister($plugin, $conteneur, '', 'rang_noisette', $stockage);
+			// On calcule le rang max déjà utilisé.
+			$rang_max = $noisettes ? max(array_keys($noisettes)) : 0;
 
-		// On calcule le rang max déjà utilisé.
-		$rang_max = $noisettes ? max(array_keys($noisettes)) : 0;
-
-		if (!$rang or ($rang and ($rang > $rang_max))) {
-			// Si, le rang est nul ou si il est strictement supérieur au rang_max, on positionne la noisette
-			// à ajouter au rang max + 1.
-			// En effet, si le rang est supérieur au rang max c'est que la nouvelle noisette est ajoutée
-			// après les noisettes existantes, donc cela revient à insérer la noisette en fin de liste.
-			// Postionner le rang à max + 1 permet d'éviter d'avoir des trous dans la liste des rangs.
-			$description['rang_noisette'] = $rang_max + 1;
-		} else {
-			// Si le rang est non nul et inférieur ou égal au rang max c'est qu'on insère la noisette dans la liste
-			// existante : il faut décaler d'un rang les noisettes de rang supérieur ou égal si elle existent pour
-			// libérer la position de la nouvelle noisette.
-			if ($rang <= $rang_max) {
-				krsort($noisettes);
-				foreach ($noisettes as $_rang => $_description) {
-					if ($_rang >= $rang) {
-						ncore_noisette_ranger($plugin, $_description, $_rang + 1, $stockage);
+			if (!$rang or ($rang and ($rang > $rang_max))) {
+				// Si, le rang est nul ou si il est strictement supérieur au rang_max, on positionne la noisette
+				// à ajouter au rang max + 1.
+				// En effet, si le rang est supérieur au rang max c'est que la nouvelle noisette est ajoutée
+				// après les noisettes existantes, donc cela revient à insérer la noisette en fin de liste.
+				// Postionner le rang à max + 1 permet d'éviter d'avoir des trous dans la liste des rangs.
+				$description['rang_noisette'] = $rang_max + 1;
+			} else {
+				// Si le rang est non nul et inférieur ou égal au rang max c'est qu'on insère la noisette dans la liste
+				// existante : il faut décaler d'un rang les noisettes de rang supérieur ou égal si elle existent pour
+				// libérer la position de la nouvelle noisette.
+				if ($rang <= $rang_max) {
+					krsort($noisettes);
+					foreach ($noisettes as $_rang => $_description) {
+						if ($_rang >= $rang) {
+							ncore_noisette_ranger($plugin, $_description, $_rang + 1, $stockage);
+						}
 					}
 				}
 			}
-		}
 
-		// La description de la nouvelle noisette est prête à être stockée à sa position.
-		$noisette_ajoutee = ncore_noisette_stocker($plugin, $description, $stockage);
+			// La description de la nouvelle noisette est prête à être stockée à sa position.
+			$noisette_ajoutee = ncore_noisette_stocker($plugin, $description, $stockage);
+		}
 	}
 
 	return $noisette_ajoutee;

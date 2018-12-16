@@ -781,9 +781,9 @@ function ncore_noisette_initialiser_encapsulation($plugin) {
 // -----------------------------------------------------------------------
 
 /**
- * Construit un identifiant unique pour le conteneur sous forme de chaine.
- * Cette fonction est juste un aiguillage vers la fonction éventuelle du plugin utilisateur
- * car N-Core ne fournit pas de calcul par défaut.
+ * Vérifier la conformité des index du tableau représentant le conteneur et les adapte éventuellement.
+ * N-Core vérifie que pour les noisettes conteneur les seuls index sont le type et l'id de la noisette.
+ * Pour les autres conteneurs, c'est au plugin utilisateur de vérifier le conteneur.
  *
  * @package SPIP\NCORE\CONTENEUR\SERVICE
  *
@@ -793,10 +793,59 @@ function ncore_noisette_initialiser_encapsulation($plugin) {
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param array  $conteneur
- *        Tableau associatif descriptif du conteneur accueillant la noisette. Un conteneur peut-être un squelette seul
- *        ou associé à un contexte d'utilisation et dans ce cas il possède un index `squelette` ou un objet quelconque
- *        sans lien avec un squelette. Dans tous les cas, les index, à l'exception de `squelette`, sont spécifiques
- *        à l'utilisation qui en est faite par le plugin.
+ *        Tableau associatif descriptif du conteneur dont les index doivent être vérifiés.
+ * @param string $stockage
+ *        Identifiant du service de stockage à utiliser si précisé.
+ *
+ * @return array
+ *        Tableau du conteneur dont tous les index sont conformes ou tableau vide si non conforme.
+ */
+function ncore_conteneur_verifier($plugin, $conteneur, $stockage = '') {
+
+	static $index_conteneur_noisette = array('type_noisette', 'id_noisette');
+
+	// N-Core ne vérifie pas les conteneurs spécifiques aux plugins utilisateur
+	// sauf pour les noisettes conteneur qui ne sont déterminées que par leur type et leur id.
+	// Il est donc indispensable que le plugin utilisateur propose toujours une fonction de vérification
+	// pour les conteneurs hors noisette conteneur.
+	$conteneur_verifie = array();
+	if ($conteneur) {
+		if (isset($conteneur['type_noisette'], $conteneur['id_noisette'])
+		and $conteneur['type_noisette']
+		and intval($conteneur['id_noisette'])) {
+			// Le conteneur est une noisette, N-Core effectue le filtre des index.
+			$conteneur = array_intersect_key($conteneur, array_flip($index_conteneur_noisette));
+			if (count($conteneur) == 2) {
+				$conteneur_verifie = $conteneur;
+			}
+		} else {
+			// Le conteneur est spécifique au plugin utilisateur, c'est donc au plugin faire la vérification des index.
+			include_spip('inc/ncore_utils');
+			if ($verifier = ncore_chercher_service($plugin, 'conteneur_verifier', $stockage)) {
+				$conteneur_verifie = $verifier($plugin, $conteneur);
+			}
+		}
+	}
+
+	return $conteneur_verifie;
+}
+
+/**
+ * Construit un identifiant unique pour le conteneur sous forme de chaine.
+ * N-Core ne fournit d'identifiant que pour les noisettes conteneur.
+ * Pour les autres conteneurs, c'est au plugin utilisateur de calculer l'identifiant.
+ *
+ * @package SPIP\NCORE\CONTENEUR\SERVICE
+ *
+ * @uses ncore_chercher_service()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array  $conteneur
+ *        Tableau associatif descriptif du conteneur. Les index sont spécifiques à l'utilisation qui en est faite
+ *        par le plugin utilisateur. Néanmoins, pour une noisette conteneur, le tableau est limité aux index
+ *        type de noisette et id de noisette.
  * @param string $stockage
  *        Identifiant du service de stockage à utiliser si précisé.
  *
@@ -806,16 +855,23 @@ function ncore_noisette_initialiser_encapsulation($plugin) {
 function ncore_conteneur_identifier($plugin, $conteneur, $stockage = '') {
 
 	// Il faut calculer l'identifiant du conteneur pour accéder à la bonne liste de noisettes.
-	// N-Core ne propose pas de fonction par défaut car l'élaboration de l'identifiant est totalement spécifique
-	// au plugin utilisateur.
-	// Il est donc indispensable que le plugin utilisateur propose toujours une fonction de calcul de l'identifiant.
-	// TODO : ne faudrait-il pas calculer automatiquement l'id pour une noisette conteneur ?
+	// N-Core ne propose pas de fonction par défaut pour les conteneurs spécifiques aux plugins utilisateur
+	// sauf pour les noisettes conteneur car elles ne sont déterminées que par leur type et leur id.
+	// Il est donc indispensable que le plugin utilisateur propose toujours une fonction de calcul de l'identifiant
+	// pour les conteneurs hors noisette conteneur.
 	$id_conteneur = '';
 	if ($conteneur) {
-		include_spip('inc/ncore_utils');
-		if ($identifier = ncore_chercher_service($plugin, 'conteneur_identifier', $stockage)) {
-			// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
-			$id_conteneur = $identifier($plugin, $conteneur);
+		if (isset($conteneur['type_noisette'], $conteneur['id_noisette'])
+		and $conteneur['type_noisette']
+		and intval($conteneur['id_noisette'])) {
+			// Le conteneur est une noisette, N-Core effectue le calcul de l'id.
+			$id_conteneur = $conteneur['type_noisette'] . '|noisette|' . $conteneur['id_noisette'];
+		} else {
+			// Le conteneur est spécifique au plugin utilisateur, c'est donc au plugin de le calculer.
+			include_spip('inc/ncore_utils');
+			if ($identifier = ncore_chercher_service($plugin, 'conteneur_identifier', $stockage)) {
+				$id_conteneur = $identifier($plugin, $conteneur);
+			}
 		}
 	}
 
