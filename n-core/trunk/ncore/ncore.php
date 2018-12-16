@@ -5,7 +5,7 @@
  * Chaque fonction, soit aiguille, si elle existe, vers une fonction "homonyme" propre au plugin appelant
  * ou à un autre service de stockage, soit déroule sa propre implémentation.
  * Ainsi, les plugins externes peuvent, si elle leur convient, utiliser l'implémentation proposée par N-Core
- * en codant un minimum de fonction, à savoir, `conteneur_identifier`.
+ * en codant un minimum de fonctions, à savoir, `conteneur_identifier` et `conteneur_verifier`.
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
