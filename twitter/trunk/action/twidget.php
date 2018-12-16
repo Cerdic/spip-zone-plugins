@@ -169,8 +169,8 @@ function twidget_get_cached_url($url,$force=false) {
 		include_spip("inc/filtres_mini");
 		$base = protocole_implicite(url_de_base(). (_DIR_RACINE ? _DIR_RESTREINT_ABS : ''));
 
-   	// intercepter, cacher et relocaliser les avatars
-		preg_match_all(',"profile_image_url":"([^"]*)",Uims',$contenu,$regs,PREG_SET_ORDER);
+		// intercepter, cacher et relocaliser les avatars
+		preg_match_all(',"profile_image_url(?:_https)?":"([^"]*)",Uims',$contenu,$regs,PREG_SET_ORDER);
 		foreach($regs as $reg){
 			if (_request('debug')){
 				var_dump($reg);
@@ -202,7 +202,7 @@ function twidget_get_cached_url($url,$force=false) {
 function twidget_get_cached_avatar($img_url){
 
 	$img_url = str_replace('\/','/',$img_url);
-	
+
 	@define('_TWIDGET_CACHE_AVATAR',24*3600);
 	$parts = parse_url($img_url);
 
