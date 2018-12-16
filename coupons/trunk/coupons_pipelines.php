@@ -30,6 +30,17 @@ function coupons_pre_insertion($flux) {
 function coupons_post_edition($flux) {
 
 	if (
+		$flux['args']['table'] == 'spip_coupons'
+	) {
+		// désactiver un coupon s'il n'est plus utilisable
+		$id_coupon = intval($flux['args']['id_objet']);
+		if (!coupon_utilisable($id_coupon)) {
+			include_spip('action/editer_objet');
+			sql_updateq('spip_coupons', array('actif' => ''), 'id_coupon = ' . $id_coupon);
+		}
+	}
+
+	if (
 		$flux['args']['table'] == 'spip_commandes'
 		&& $flux['args']['action'] == 'remplir_commande'
 	) {
