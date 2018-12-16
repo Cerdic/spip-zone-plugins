@@ -879,6 +879,54 @@ function ncore_conteneur_identifier($plugin, $conteneur, $stockage = '') {
 }
 
 /**
+ * Reconstruit le conteneur sous forme de tableau à partir de son identifiant unique (fonction inverse
+ * de `ncore_conteneur_identifier`).
+ * N-Core ne fournit le conteneur pour les noisettes conteneur.
+ * Pour les autres conteneurs, c'est au plugin utilisateur de calculer le tableau.
+ *
+ * @package SPIP\NCORE\CONTENEUR\SERVICE
+ *
+ * @uses ncore_chercher_service()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param string $id_conteneur
+ *        Identifiant unique du conteneur. Si l'id correspond à une noisette conteneur le traitement sera fait
+ *        par N-Core, sinon par le plugin utilisateur
+ * @param string $stockage
+ *        Identifiant du service de stockage à utiliser si précisé.
+ *
+ * @return array
+ *        Tableau représentatif du conteneur ou tableau vide en cas d'erreur.
+ */
+function ncore_conteneur_construire($plugin, $id_conteneur, $stockage = '') {
+
+	// Il faut recomposer le tableau du conteneur à partir de son id.
+	// N-Core ne propose pas de fonction par défaut pour les conteneurs spécifiques aux plugins utilisateur
+	// sauf pour les noisettes conteneur.
+	// Il est donc indispensable que le plugin utilisateur propose toujours une fonction de calcul du tableau
+	// pour les conteneurs hors noisette conteneur.
+	$conteneur = array();
+	if ($id_conteneur) {
+		$elements = explode('|', $id_conteneur);
+		if ((count($elements) == 3) and ($elements[1] == 'noisette')) {
+			// C'est une noisette conteneur : les index sont le type et l'id de noisette.
+			$conteneur['type_noisette'] = $elements[0];
+			$conteneur['id_noisette'] = intval($elements[2]);
+		} else {
+			// Le conteneur est spécifique au plugin utilisateur, c'est donc au plugin de le calculer.
+			include_spip('inc/ncore_utils');
+			if ($construire = ncore_chercher_service($plugin, 'conteneur_construire', $stockage)) {
+				$conteneur = $construire($plugin, $id_conteneur);
+			}
+		}
+	}
+
+	return $conteneur;
+}
+
+/**
  * Retire, de l'espace de stockage, toutes les noisettes d'un conteneur et ce de façon récursive si
  * il existe une imbrication de conteneurs.
  *
