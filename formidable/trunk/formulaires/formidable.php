@@ -163,7 +163,7 @@ function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires
 	}
 	$contexte['_hidden'] .= "\n" . '<input type="hidden" name="formidable_afficher_apres' /*.$formulaire['id_formulaire']*/ . '" value="' . $formulaire['apres'] . '"/>'; // marche pas
 
-	if ($precharger= _request('_formidable_cvtupload_precharger_fichiers')) {
+	if ($precharger = _request('_formidable_cvtupload_precharger_fichiers')) {
 		$contexte['cvtupload_precharger_fichiers'] = $precharger;
 	}
 	$contexte['formidable_afficher_apres'] = $formulaire['apres'];
