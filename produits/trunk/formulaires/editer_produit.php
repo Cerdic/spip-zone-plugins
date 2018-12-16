@@ -69,6 +69,7 @@ function formulaires_editer_produit_saisies_dist($id_produit = 'new', $id_rubriq
 					'produits:produit_champ_taxe_explication',
 					array('taxe' => $taxe_defaut.'&nbsp;&#37;')
 				),
+				'defaut' => $taxe_defaut,
 				'inserer_fin' => '<span class="pourcent">&nbsp;&#37;</span>'
 			),
 			'verifier' => array(
@@ -284,6 +285,13 @@ function formulaires_editer_produit_traiter($id_produit = 'new', $id_rubrique = 
 	}
 
 	$retours = formulaires_editer_objet_traiter('produit', $id_produit, $id_rubrique, $lier_trad, $retour);
+
+	// Dans le cas d'une création on lie l'auteur au produit
+	if(!is_numeric($id_produit)){
+		include_spip('action/editer_liens');
+		$id_auteur = session_get('id_auteur');
+		objet_associer(array("auteur"=>$id_auteur), array("produit"=>$retours['id_produit']));
+	}
 
 	// cas d’erreur conserver la valeur de taxe saisie.
 	if (!empty($retours['message_erreur'])) {

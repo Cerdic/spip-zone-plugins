@@ -1,7 +1,7 @@
 <paquet
 	prefix="produits"
 	categorie="outil"
-	version="1.2.12"
+	version="1.2.13"
 	etat="test"
 	compatibilite="[3.0.13;3.2.*]"
 	logo="prive/themes/spip/images/produits-64.png"
@@ -26,6 +26,8 @@
 	<pipeline nom="ieconfig_metas" inclure="produits_pipelines.php" />
 	<pipeline nom="grappes_objets_lies" inclure="produits_pipelines.php" />
 	<pipeline nom="affiche_enfants" inclure="produits_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="produits_pipelines.php" />
+	<pipeline nom="post_insertion" inclure="produits_pipelines.php" />
 	<pipeline nom="calculer_rubriques" inclure="produits_pipelines.php" />
 	<pipeline nom="boite_infos" inclure="produits_pipelines.php" />
 	<pipeline nom="objet_compte_enfants" inclure="produits_pipelines.php" />

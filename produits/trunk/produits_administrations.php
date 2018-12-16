@@ -65,6 +65,8 @@ function produits_vider_tables($nom_meta_base_version) {
 	# Nettoyer les versionnages et forums
 	sql_delete('spip_versions', sql_in('objet', array('produit')));
 	sql_delete('spip_versions_fragments', sql_in('objet', array('produit')));
+	# Enlever les liens des auteurs
+	sql_delete('spip_auteurs_liens', sql_in('objet', array('produit')));
 
 	effacer_meta($nom_meta_base_version);
 }

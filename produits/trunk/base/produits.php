@@ -31,10 +31,12 @@ function produits_declarer_tables_interfaces($interfaces) {
 
 	// Déclaration du titre
 	$interfaces['table_titre']['produits'] = 'titre, "" as lang';
+	// autoriser l'id_auteur dans les boucles produit
+	$interfaces['jointures']['spip_produits'][] = 'spip_auteurs_liens';
 
 	// pour pouvoir faire une boucle par id_groupe de mot clé
 	$interfaces['exceptions_des_jointures']['spip_produits']['id_groupe'] = array('spip_mots', 'id_groupe');
-	
+
 	return $interfaces;
 }
 
@@ -110,8 +112,7 @@ function produits_declarer_tables_objets_sql($tables) {
 			'id_rubrique' => 'id_rubrique'
 		),
 		'tables_jointures' => array(
-			'profondeur' => 'rubriques',
-			#'id_auteur' => 'auteurs_liens' // declaration generique plus bas
+			'profondeur' => 'rubriques'
 		),
 	);
 

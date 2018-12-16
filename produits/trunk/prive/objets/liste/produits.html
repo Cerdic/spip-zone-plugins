@@ -21,7 +21,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_produits(PRODUITS){id_produit?}{id_secteur?}{id_rubrique?}{id_mot?}{where?}{recherche?}{statut?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_produits(PRODUITS){id_produit?}{id_secteur?}{id_rubrique?}{id_auteur?}{id_mot?}{where?}{recherche?}{statut?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#ID_PRODUIT|puce_changement_statut{#STATUT,#ID_RUBRIQUE,produit})]</td>
 			<td class='reference'>#REFERENCE</td>

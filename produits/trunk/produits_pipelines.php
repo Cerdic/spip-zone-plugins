@@ -5,13 +5,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-// Export de la config 
+// Export de la config
 function produits_ieconfig_metas($table) {
-	
 	$table['produits']['titre'] = _T('produit:titre_produit');
 	$table['produits']['icone'] = 'prive/themes/spip/images/produit-16.png';
 	$table['produits']['metas_serialize'] = 'produits,produits_*';
-	
+
 	return $table;
 }
 
@@ -50,9 +49,11 @@ function produits_accueil_encours($flux) {
 }
 
 
-// Insérer les listes de produits et le bouton de création dans les pages rubriques
+// Insérer les listes de produits et le bouton de création
+// dans les pages rubriques et la liste des produits de l'auteur
 function produits_affiche_enfants($flux) {
-	if (isset($flux['args']['id_rubrique']) and $flux['args']['id_rubrique'] > 0) {
+	if (isset($flux['args']['id_rubrique'])
+		AND $flux['args']['id_rubrique'] > 0) {
 		$flux['data'] .= recuperer_fond(
 			'prive/objets/liste/produits',
 			array('id_rubrique' => $flux['args']['id_rubrique']),
@@ -60,12 +61,21 @@ function produits_affiche_enfants($flux) {
 				'ajax' => true
 			)
 		);
-	
+
 		if (autoriser('creerproduitdans', 'rubrique', $flux['args']['id_rubrique'])) {
 			$flux['data'] .= icone_verticale(_T('produit:icone_creer_produit'), generer_url_ecrire('produit_edit', 'id_rubrique='.$flux['args']['id_rubrique']), find_in_path('prive/themes/spip/images/produits-24.png'), 'new', 'right'). "<br class='nettoyeur' />";
 		}
 	}
-	
+	// Afficher les produits sur la page d'un auteur
+	if ($e = trouver_objet_exec($flux['args']['exec'])
+	  AND $e['type'] == 'auteur'
+	  AND $e['edition'] == false) {
+			$id_auteur = $flux['args']['id_objet'];
+			$lister_objets = charger_fonction('lister_objets','inc');
+			$flux['data'] .= $lister_objets('produits', array('titre'=>_L('Produits de cet auteur') , 'id_auteur'=>$id_auteur, 'par'=>'date'));
+			$flux['data'] .= "<br class='nettoyeur' />";
+	}
+
 	return $flux;
 }
 
@@ -139,6 +149,29 @@ function produits_pre_boucle($boucle) {
 	return $boucle;
 }
 
+
+// Lier les auteurs aux produits
+// inssérer le formulaire de liaison d'auteur sur la vue d'un produit
+function produits_affiche_milieu($flux) {
+	if ($e = trouver_objet_exec($flux['args']['exec'])
+			AND $e['edition'] == false
+		  AND $e['type'] == 'produit'
+			AND $id_table_objet = $e['id_table_objet']) {
+
+			$texte = recuperer_fond('prive/objets/editer/liens', array(
+				'table_source' => 'auteurs',
+				'objet' => $e['type'],
+				'id_objet' => $flux['args'][$id_table_objet],
+				#'editable'=>autoriser('associerauteurs', $e['type'], $e['id_objet']) ? 'oui' : 'non'
+			));
+		if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))
+			$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
+		else
+			$flux['data'] .= $texte;
+	}
+
+	return $flux;
+}
 /**
  * Optimiser la base de données
  * Supprime les liens orphelins de l'objet vers quelqu'un et de quelqu'un vers l'objet.
@@ -173,7 +206,7 @@ function produits_corbeille_table_infos($param){
 
 /**
  * Déclarer l'héritage pour compositions
- * 
+ *
  * @param $heritages
  *
  * @return mixed
