@@ -781,7 +781,7 @@ function ncore_noisette_initialiser_encapsulation($plugin) {
 // -----------------------------------------------------------------------
 
 /**
- * Vérifier la conformité des index du tableau représentant le conteneur et les adapte éventuellement.
+ * Vérifie la conformité des index du tableau représentant le conteneur et supprime les index inutiles, si besoin.
  * N-Core vérifie que pour les noisettes conteneur les seuls index sont le type et l'id de la noisette.
  * Pour les autres conteneurs, c'est au plugin utilisateur de vérifier le conteneur.
  *
