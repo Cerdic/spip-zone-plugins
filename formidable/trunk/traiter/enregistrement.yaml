@@ -55,6 +55,7 @@ options:
           nom: 'message_erreur_unicite'
           label: '<:formidable:editer_message_erreur_unicite_label:>'
           explication: '<:formidable:editer_message_erreur_unicite_explication:>'
+          afficher_si: '@traitements[enregistrement][unicite]@!=""'
       -
         saisie: 'case'
         options:
