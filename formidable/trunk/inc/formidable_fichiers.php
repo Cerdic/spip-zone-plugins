@@ -6,8 +6,18 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 include_spip('inc/flock');
 include_spip('inc/documents');
-if (!defined('_FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL')) {// la taille maximum (en Mio) des fichiers qu'on autorise directement en PJ dans les emails. 
+if (!defined('_FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL')) {// la taille maximum (en Mio) des fichiers qu'on autorise directement en PJ dans les emails.
 	define('_FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL', 10);
+}
+
+
+// Lieux de stockages des fichiers
+if (!defined('_DIR_FICHIERS')) { // En attendant que ce soit natif spip
+	define('_DIR_FICHIERS', _DIR_ETC.'fichiers/');
+}
+
+if (!defined('_DIR_FICHIERS_FORMIDABLE')) {
+	define('_DIR_FICHIERS_FORMIDABLE', _DIR_FICHIERS.'formidable/');
 }
 
 if (!defined('_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL')) {
@@ -529,8 +539,8 @@ function formidable_generer_url_action_recuperer_fichier_email($saisie, $fichier
 }
 
 /** Générer le chemin d'un fichier d'après les paramètres passés en argument
- * @param array $param, paramètres décrivant le fichiers: 
- * formulaire => identifiant numérique du formulaire,  
+ * @param array $param, paramètres décrivant le fichiers:
+ * formulaire => identifiant numérique du formulaire,
  * timestamp => timestamp de la réponse (si la réponse est uniquement envoyée par courriel)
  * reponse => identifiant numérique de la réponse
  * saisie => nom du champ formidable (type fichier_1)
