@@ -18,6 +18,18 @@ include_spip('base/abstract_sql');
 include_spip('inc/autoriser');
 include_spip('plugins/installer');
 
+
+/* Lieux de stockages des fichiers, qu'on définit ici pour pouvoir l'utiliser en squelette
+*/
+if (!defined('_DIR_FICHIERS')) { // En attendant que ce soit natif spip
+	define('_DIR_FICHIERS', _DIR_ETC.'fichiers/');
+}
+
+if (!defined('_DIR_FICHIERS_FORMIDABLE')) {
+	define('_DIR_FICHIERS_FORMIDABLE', _DIR_FICHIERS.'formidable/');
+}
+
+
 function formidable_id_formulaire($id) {
 	// on utilise une static pour etre sur que si l'appel dans verifier() passe, celui dans traiter() passera aussi
 	// meme si entre temps on perds la base
