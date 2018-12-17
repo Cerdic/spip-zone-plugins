@@ -78,7 +78,7 @@ function produit_inserer($id_rubrique, $set = null) {
 	$champs['date'] = date('Y-m-d H:i:s');
 
 	// Le statut en cours de redac
-	$champs['statut'] = 'prop';
+	$champs['statut'] = 'prepa';
 
 	if ($set) {
 		$champs = array_merge($champs, $set);
