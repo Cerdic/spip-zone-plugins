@@ -209,6 +209,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_refusee' => 'refusée',
 	'titre_cadre_raccourcis' => 'Raccourcis',
 	'titre_formulaires_archives' => 'Archives',
+	'titre_formulaires_poubelle' => 'À la poubelle',
 	'titre_reponses' => 'Réponses',
 	'traitements_actives' => 'Traitements activés',
 	'traitements_aide_memoire' => 'Aide mémoire :',
