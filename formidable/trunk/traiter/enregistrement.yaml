@@ -59,8 +59,8 @@ options:
       nom: 'anonymiser_variable'
       label: '<:formidable:traiter_enregistrement_option_anonymiser_variable_explication:>'
       datas:
-        remote_user: "Variable serveur : REMOTE_USER"
-        php_auth_user: "Variable serveur : PHP_AUTH_USER"
+        remote_user: '<:formidable:traiter_enregistrement_option_remote_user_label:>'
+        php_auth_user: '<:formidable:traiter_enregistrement_option_php_auth_user_label:>'
       defaut: ''
       li_class: 'suite pleine_largeur'
   -

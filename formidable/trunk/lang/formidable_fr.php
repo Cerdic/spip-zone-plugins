@@ -296,6 +296,8 @@ Cette option n’est conservée que pour compatibilité ascendante. Elle n’app
 	'traiter_enregistrement_option_resume_reponse_explication' => 'Cette chaîne sera utilisée pour afficher un résumé de chaque réponse dans les listes. Les champs comme <tt>@input_1@</tt> seront remplacés comme indiqué par l’aide mémoire ci-contre.',
 	'traiter_enregistrement_option_resume_reponse_label' => 'Affichage résumé de la réponse',
 	'traiter_enregistrement_titre' => 'Enregistrer les résultats',
+	'traiter_enregistrement_option_remote_user_label' => 'Variable serveur : REMOTE_USER',
+	'traiter_enregistrement_option_php_auth_user_label' => 'Variable serveur : PHP_AUTH_USER',
 
 	// V
 	'voir_exporter' => 'Exporter le formulaire',
