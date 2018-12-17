@@ -19,7 +19,7 @@ include_spip('inc/autoriser');
 include_spip('plugins/installer');
 
 
-/* Lieux de stockages des fichiers, qu'on définit ici pour pouvoir l'utiliser en squelette
+/* Lieux de stockages des fichiers
 */
 if (!defined('_DIR_FICHIERS')) { // En attendant que ce soit natif spip
 	define('_DIR_FICHIERS', _DIR_ETC.'fichiers/');
