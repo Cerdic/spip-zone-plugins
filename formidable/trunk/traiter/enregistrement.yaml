@@ -55,14 +55,13 @@ options:
   -
     saisie: 'selection'
     options:
-      option_intro: '<:formidable:traiter_enregistrement_option_choix_select_label:>'
       nom: 'anonymiser_variable'
-      label: '<:formidable:traiter_enregistrement_option_anonymiser_variable_explication:>'
+      label: '<:formidable:traiter_enregistrement_option_anonymiser_variable_label:>'
+      explication: '<:formidable:traiter_enregistrement_option_anonymiser_variable_explication:>'
       datas:
         remote_user: '<:formidable:traiter_enregistrement_option_remote_user_label:>'
         php_auth_user: '<:formidable:traiter_enregistrement_option_php_auth_user_label:>'
       defaut: ''
-      li_class: 'pleine_largeur'
       afficher_si: '@traitements[enregistrement][anonymiser]@ == "on"',
       obligatoire: 'on'
   -
