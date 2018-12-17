@@ -63,6 +63,7 @@ options:
         php_auth_user: '<:formidable:traiter_enregistrement_option_php_auth_user_label:>'
       defaut: ''
       li_class: 'suite pleine_largeur'
+      afficher_si: '@traitements[enregistrement][anonymiser]@ == "on"',
   -
     saisie: 'case'
     options:
