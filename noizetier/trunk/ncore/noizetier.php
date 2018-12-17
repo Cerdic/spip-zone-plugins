@@ -660,9 +660,9 @@ function noizetier_conteneur_identifier($plugin, $conteneur) {
 
 /**
  * Reconstruit le conteneur sous forme de tableau à partir de son identifiant unique (fonction inverse
- * de `ncore_conteneur_identifier`).
+ * de `noizetier_conteneur_identifier`).
  * N-Core ne fournit le conteneur pour les noisettes conteneur.
- * Pour les autres conteneurs, c'est au plugin utilisateur de calculer le tableau.
+ * Pour les autres conteneurs, c'est au noiZetier de calculer le tableau.
  *
  * @package SPIP\NOIZETIER\CONTENEUR\SERVICE
  *
@@ -670,15 +670,12 @@ function noizetier_conteneur_identifier($plugin, $conteneur) {
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param string $id_conteneur
- *        Identifiant unique du conteneur. Si l'id correspond à une noisette conteneur le traitement sera fait
- *        par N-Core, sinon par le plugin utilisateur
- * @param string $stockage
- *        Identifiant du service de stockage à utiliser si précisé.
+ *        Identifiant unique du conteneur.
  *
  * @return array
  *        Tableau représentatif du conteneur ou tableau vide en cas d'erreur.
  */
-function noizetier_conteneur_construire($plugin, $id_conteneur, $stockage = '') {
+function noizetier_conteneur_construire($plugin, $id_conteneur) {
 
 	// Il faut recomposer le tableau du conteneur à partir de son id.
 	// N-Core s'occupe des noisettes conteneur; le noiZetier n'a donc plus qu'à traiter les autres conteneur,
