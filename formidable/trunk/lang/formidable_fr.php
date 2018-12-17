@@ -303,5 +303,9 @@ Cette option n’est conservée que pour compatibilité ascendante. Elle n’app
 	'voir_exporter' => 'Exporter le formulaire',
 	'voir_numero' => 'Formulaire numéro :',
 	'voir_reponses' => 'Voir les réponses',
-	'voir_traitements' => 'Traitements'
+	'voir_traitements' => 'Traitements',
+
+	'traiter_enregistrement_reglages_generaux' => 'Réglages généraux',
+	'traiter_enregistrement_divers' => 'Divers',
+	'traiter_enregistrement_donnees_personelles' => 'Données personnelles'
 );
