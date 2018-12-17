@@ -27,24 +27,6 @@ if (isset($GLOBALS['formulaires']['passwd']) == false) {
 	);
 }
 
-if (!function_exists('array_fill_keys')) {
-	/**
-	 * Remplit un tableau avec des valeurs, en spécifiant les clés
-	 *
-	 * Fonction dans PHP 5.2+
-	 * @see http://php.net/manual/fr/function.array-fill-keys.php
-	 *
-	 * @param array $keys
-	 *	 Tableau de valeurs qui sera utilisé comme clés.
-	 * @param mixed $value
-	 *	 Valeur à utiliser pour remplir le tableau.
-	 * @return array
-	 *	 Le tableau rempli.
-	**/
-	function array_fill_keys($keys, $value) {
-		array_combine($keys, array_fill(0, count($keys), $value));
-	}
-}
 
 /* Lieux de stockages des fichiers, qu'on définit ici pour pouvoir l'utiliser en squelette
 */
