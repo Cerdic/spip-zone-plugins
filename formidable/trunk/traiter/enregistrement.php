@@ -22,8 +22,7 @@ function traiter_enregistrement_dist($args, $retours) {
 	// traitement de l'anonymisation
 	if ($options['anonymiser'] == 'on') {
 		// mod de l'id_auteur
-		$variables_anonymisation = $GLOBALS['formulaires']['variables_anonymisation'][$options['anonymiser_variable']];
-		$id = eval("return $variables_anonymisation;");
+		$id = formidable_variable_anonymisation($options['anonymiser_variable']);
 		$id_auteur = formidable_scramble($id, $id_formulaire);
 	}
 

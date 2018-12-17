@@ -156,18 +156,13 @@ function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identific
 	$nom_cookie = formidable_generer_nom_cookie($id_formulaire);
 	$cookie = isset($_COOKIE[$nom_cookie]) ? $_COOKIE[$nom_cookie] : false;
 
-	$anonymiser = ($anonymisation == '') ? false : true;
-	if ($anonymiser) {
-		$anonymiser_variable = $anonymisation;
-	}
-
 	// traitement de l'anonymisation
-	if ($anonymiser) {
+	if ($anonymisation != '') {
 		// mod de l'id_auteur
-		$variables_anonymisation = $GLOBALS['formulaires']['variables_anonymisation'][$anonymiser_variable];
-		$id = eval("return $variables_anonymisation;");
+		$id = formidable_variable_anonymisation($anonymisation);
 		$id_auteur = formidable_scramble($id, $id_formulaire);
 	}
+
 	// ni cookie ni id, on ne peut rien faire
 	if (!$cookie and !$id_auteur) {
 		return false;
@@ -531,4 +526,19 @@ function formidable_tableau_valeurs_saisies($saisies, $sans_reponse = true) {
 		}
 	}
 	return array($valeurs, $valeurs_libellees);
+}
+
+/**
+ * Retourne la valeur de la variable PHP servant à anonymiser.
+ * pour les deux variables proposés par formidable, recherche directement dans $_SERVER
+ * sinon utilise un eval() si une autre variable a été défini en global.
+ * Mais peu probable que le cas se présente, car pas d'interface dans le .yaml pour proposer d'autres variables que celle définies par formidable
+ * @param string $nom_variable le nom de la variable
+ */
+function formidable_variable_anonymisation($nom_variable) {
+	if (in_array($nom_variable, array("remote_user", "php_auth_user"))) {
+		$nom_variable = strtoupper($nom_variable);
+		return isset($_SERVER[$nom_variable]) ? $_SERVER[$nom_variable] : null;
+	}
+	return eval("return $nom_variable;");
 }
