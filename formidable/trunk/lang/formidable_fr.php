@@ -276,7 +276,7 @@ Cette option n’est conservée que pour compatibilité ascendante. Elle n’app
 	'traiter_enregistrement_message_ok' => 'Merci. Vos réponses ont bien été enregistrées.',
 	'traiter_enregistrement_option_anonymiser_explication' => 'Ne pas conserver l\'identifiant de la personne connectée.',
 	'traiter_enregistrement_option_anonymiser_label' => 'Anonymiser le formulaire',
-	'traiter_enregistrement_option_anonymiser_variable_explication' => 'Variable système à utiliser pour remplaçer l\'identifiant de l\'auteur',
+	'traiter_enregistrement_option_anonymiser_variable_explication' => 'Variable système à utiliser pour remplaçer l\'identifiant de l\'auteur. Nécessite une identification par PHP / Apache non intégrée nativement dans SPIP.',
 	'traiter_enregistrement_option_anonymiser_variable_label' => 'Variable à partir de laquelle anonymiser le formulaire',
 	'traiter_enregistrement_option_auteur' => 'Utiliser les auteurs pour les formulaires',
 	'traiter_enregistrement_option_auteur_explication' => 'Attribuer un ou plusieurs auteurs à un formulaire. Si cette option est activée, seuls les auteurs d’un formulaire pourront accéder à leurs données.',
