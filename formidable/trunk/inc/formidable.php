@@ -164,8 +164,7 @@ function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identific
 	// traitement de l'anonymisation
 	if ($anonymiser) {
 		// mod de l'id_auteur
-		$variables_anonymisation =
-				$GLOBALS['formulaires']['variables_anonymisation'][$anonymiser_variable];
+		$variables_anonymisation = $GLOBALS['formulaires']['variables_anonymisation'][$anonymiser_variable];
 		$id = eval("return $variables_anonymisation;");
 		$id_auteur = formidable_scramble($id, $id_formulaire);
 	}
