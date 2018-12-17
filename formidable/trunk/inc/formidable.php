@@ -157,7 +157,7 @@ function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identific
 	$cookie = isset($_COOKIE[$nom_cookie]) ? $_COOKIE[$nom_cookie] : false;
 
 	// traitement de l'anonymisation
-	if ($anonymisation != '') {
+	if ($anonymisation != '' and $id_auteur) {
 		// mod de l'id_auteur
 		$id = formidable_variable_anonymisation($anonymisation);
 		$id_auteur = formidable_scramble($id, $id_formulaire);

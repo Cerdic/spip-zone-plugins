@@ -20,7 +20,7 @@ function traiter_enregistrement_dist($args, $retours) {
 		$GLOBALS['visiteur_session']['id_auteur'] : 0) : 0;
 
 	// traitement de l'anonymisation
-	if ($options['anonymiser'] == 'on') {
+	if ($options['anonymiser'] == 'on' and $id_auteur) {
 		// mod de l'id_auteur
 		$id = formidable_variable_anonymisation($options['anonymiser_variable']);
 		$id_auteur = formidable_scramble($id, $id_formulaire);
