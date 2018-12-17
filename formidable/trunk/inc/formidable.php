@@ -444,7 +444,11 @@ function md5_hex_to_dec($hex_str) {
 */
 function formidable_scramble($login, $id_form, $passwd = '') {
 	if ($passwd == '') {
-		$passwd = $GLOBALS['formulaires']['passwd']['interne'];
+		if (isset($GLOBALS['formulaires']['passwd']['interne']) == false) {
+			$passwd = $GLOBALS['formulaires']['passwd']['interne'];
+		} else {
+			$passwd = 'palabresecreta';
+		}
 	}
 	$login_md5 = md5("$login$passwd$id_form");
 	$login_num = md5_hex_to_dec($login_md5);
