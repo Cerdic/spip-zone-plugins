@@ -36,7 +36,7 @@ function linkcheck_tables_a_traiter() {
 	$tables = array();
 	if (is_array($tables_spip)) {
 		foreach ($tables_spip as $key => $table) {
-			if ($table['principale'] == 'oui' && !in_array($key, array('spip_syndic_articles','spip_paquets','spip_linkchecks'))) {
+			if ($table['principale'] == 'oui' && !in_array($key, array('spip_syndic_articles','spip_paquets','spip_linkchecks', 'spip_tickets'))) {
 				$tables[] = array($key => $table);
 			}
 		}
