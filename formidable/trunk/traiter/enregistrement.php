@@ -32,6 +32,8 @@ function traiter_enregistrement_dist($args, $retours) {
 		include_spip('inc/acces');
 		$cookie = creer_uniqid();
 	}
+	// On crée un identifiant depuis l'éventuelle variable php d'identification
+	$variable_php = formidable_variable_php_identification($options['variable_php'], $id_formulaire);
 
 	// On regarde si c'est une modif d'une réponse existante
 	$id_formulaires_reponse = $args['id_formulaires_reponse'];
@@ -59,6 +61,7 @@ function traiter_enregistrement_dist($args, $retours) {
 				'id_formulaire' => $id_formulaire,
 				'id_auteur' => $id_auteur,
 				'cookie' => $cookie,
+				'variable_php' => $variable_php,
 				'ip' => $args['options']['ip'] == 'on' ? $GLOBALS['ip'] : '',
 				'date' => 'NOW()',
 				'statut' => $statut
