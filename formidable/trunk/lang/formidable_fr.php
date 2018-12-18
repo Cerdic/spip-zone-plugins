@@ -120,7 +120,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'id_formulaires_reponse' => 'Identifiant de la réponse',
-	'identification_par_cookie' => 'Par cookie',
+	'identification_par_cookie' => 'Par cookie (identifiant aléatoire, ne stocke aucune information personnelle)',
 	'identification_par_id_auteur' => 'Par l’identifiant (id_auteur) de la personne authentifiée',
 	'importer_formulaire' => 'Importer un formulaire',
 	'importer_formulaire_fichier_label' => 'Fichier à importer',
