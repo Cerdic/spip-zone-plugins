@@ -1,9 +1,9 @@
 <paquet
 	prefix="noizetier"
 	categorie="maintenance"
-	version="3.0.38"
+	version="3.0.39"
 	etat="dev"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/noizetier-32.png"
 	schema="0.6.0"
 	documentation="https://contrib.spip.net/?article4246"
@@ -40,11 +40,11 @@
 	<pipeline nom="insert_head" action="insert_head_css" inclure="noizetier_pipelines.php" />
 
 	<necessite nom="ncore" compatibilite="[0.5.9;[" />
-	<necessite nom="saisies" compatibilite="[2.2.3;[" />
-	<necessite nom="verifier" compatibilite="[1.0.5;[" />
+	<necessite nom="saisies" compatibilite="[2.18.8;[" />
+	<necessite nom="verifier" compatibilite="[1.6.3;[" />
 
-	<utilise nom="compositions" compatibilite="[3.3.0;[" />
-	<utilise nom="ieconfig" compatibilite="[1.3.0;[" />
+	<utilise nom="compositions" compatibilite="[3.5.10;[" />
+	<utilise nom="ieconfig" compatibilite="[1.3.2;[" />
 
 	<menu nom="noizetier" titre="noizetier:editer_noizetier_titre" parent="menu_squelette" icone="images/noizetier-16.png" action="noizetier_pages" />
 </paquet>
