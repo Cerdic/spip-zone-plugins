@@ -33,16 +33,35 @@ options:
           defaut: ''
           li_class: 'pleine_largeur'
       -
+        saisie: 'case'
+        options:
+          nom: 'effacement'
+          label_case: '<:formidable:traiter_enregistrement_option_effacement_label:>'
+          li_class: 'pleine_largeur'
+      -
+        saisie: 'input'
+        options:
+          nom: 'effacement_delai'
+          label: '<:formidable:traiter_enregistrement_option_effacement_delai_label:>'
+          afficher_si: '@traitements[enregistrement][effacement]@=="on"'
+  -
+    saisie: 'fieldset'
+    options:
+      nom : 'identification_reponses'
+      label: '<:formidable:traiter_enregistrement_identification_reponses:>'
+      tagfield: '<legend>'
+    saisies:
+      -
         saisie: 'radio'
         options:
           nom: 'identification'
+          label: '<:formidable:traiter_enregistrement_option_identification_label:>'
           explication: '<:formidable:traiter_enregistrement_option_identification_explication:>'
           datas:
             cookie: '<:formidable:identification_par_cookie:>'
             id_auteur: '<:formidable:identification_par_id_auteur:>'
             variable_php: '<:formidable:identification_par_variable_php:>'
           defaut: 'cookie'
-          li_class: 'pleine_largeur'
       -
         saisie: 'selection'
         options:
@@ -55,6 +74,13 @@ options:
           defaut: ''
           obligatoire: 'on'
           afficher_si : '@traitements[enregistrement][identification]@ == "variable_php"'
+  -
+    saisie: 'fieldset'
+    options:
+      nom : 'unicite_champ'
+      label: '<:formidable:traiter_enregistrement_unicite_champ:>'
+      tagfield: '<legend>'
+    saisies:
       -
         saisie: 'champ'
         options:
@@ -69,18 +95,6 @@ options:
           label: '<:formidable:editer_message_erreur_unicite_label:>'
           explication: '<:formidable:editer_message_erreur_unicite_explication:>'
           afficher_si: '@traitements[enregistrement][unicite]@!=""'
-      -
-        saisie: 'case'
-        options:
-          nom: 'effacement'
-          label_case: '<:formidable:traiter_enregistrement_option_effacement_label:>'
-          li_class: 'pleine_largeur'
-      -
-        saisie: 'input'
-        options:
-          nom: 'effacement_delai'
-          label: '<:formidable:traiter_enregistrement_option_effacement_delai_label:>'
-          afficher_si: '@traitements[enregistrement][effacement]@=="on"'
   -
     saisie: 'fieldset'
     options:
