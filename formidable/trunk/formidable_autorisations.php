@@ -173,7 +173,7 @@ function autoriser_formulaire_repondre_dist($faire, $type, $id, $qui, $opt) {
 			} else {
 				include_spip('inc/formidable');
 				// Si la personne n'a jamais répondu, c'est bon
-				if (!formidable_verifier_reponse_formulaire($id)) {
+				if (!formidable_verifier_reponse_formulaire($id, $traitements['enregistrement']['identification'], $traitements['enregistrement']['variable_php'])) {
 					return true;
 				} else {
 					return false;
