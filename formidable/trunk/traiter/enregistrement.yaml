@@ -79,7 +79,7 @@ options:
         saisie: 'case'
         options:
           nom: 'anonymiser'
-          label_case: '<:formidable:traiter_enregistrement_option_anonymiser_explication:>'
+          label_case: '<:formidable:traiter_enregistrement_option_anonymiser_label:>'
           defaut: ''
           li_class: 'pleine_largeur'
       -
