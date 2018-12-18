@@ -1,7 +1,7 @@
 <paquet
 	prefix="owlcarousel"
 	categorie="multimedia"
-	version="1.0.17"
+	version="1.0.18"
 	schema="0.0.1"
 	etat="test"
 	compatibilite="[3.0.5;3.2.*]"

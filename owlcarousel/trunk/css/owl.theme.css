@@ -1,8 +1,3 @@
-/**
- * Owl Carousel v2.3.4
- * Copyright 2013-2018 David Deutsch
- * Licensed under: SEE LICENSE IN https://github.com/OwlCarousel2/OwlCarousel2/blob/master/LICENSE
- */
 /*
  * 	Default theme - Owl Carousel CSS File
  */
@@ -44,7 +39,11 @@
       background: #D6D6D6;
       display: block;
       -webkit-backface-visibility: visible;
+      backface-visibility: visible;
+      -webkit-transition: opacity 200ms ease;
       transition: opacity 200ms ease;
       border-radius: 30px; }
     .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
       background: #869791; }
+
+/*# sourceMappingURL=owl.theme.default.css.map */
