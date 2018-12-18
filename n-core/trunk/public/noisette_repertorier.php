@@ -34,8 +34,8 @@ function balise_NOISETTE_REPERTORIER_dist($p) {
 	$stockage = interprete_argument_balise(3, $p);
 	$stockage = isset($stockage) ? str_replace('\'', '"', $stockage) : '""';
 
-	// On appelle la fonction de calcul de la liste des noisette
-	$p->code = "noisette_repertorier($plugin, $conteneur, 'rang_noisette', array(), $stockage)";
+	// On appelle la fonction de calcul de la liste des noisettes
+	$p->code = "$conteneur ? noisette_repertorier($plugin, $conteneur, 'rang_noisette', array(), $stockage) : array()";
 
 	return $p;
 }
