@@ -21,9 +21,7 @@ function traiter_enregistrement_dist($args, $retours) {
 
 	// traitement de l'anonymisation
 	if ($options['anonymiser'] == 'on' and $id_auteur) {
-		// mod de l'id_auteur
-		$id = formidable_variable_anonymisation($options['anonymiser_variable']);
-		$id_auteur = formidable_scramble($id, $id_formulaire);
+		$id_auteur = 0;
 	}
 
 	// On cherche le cookie et sinon on le crée
