@@ -551,14 +551,20 @@ function formidable_tableau_valeurs_saisies($saisies, $sans_reponse = true) {
  * @return string
  */
 function formidable_variable_php_identification($nom_variable, $id_formulaire) {
+
+	//Pour compat ascendante
+	if (!isset($GLOBALS['formulaires']['variables_anonymisation'])) {
+		$nom_variable = $GLOBALS['formulaires']['variables_anonymisation'][$nom_variable];
+		$valeur_variable = eval ("return $nom_variable;");
+	}
+
 	if (in_array($nom_variable, array("remote_user", "php_auth_user"))) {
 		$nom_variable = strtoupper($nom_variable);
 		$valeur_variable = isset($_SERVER[$nom_variable]) ? $_SERVER[$nom_variable] : 0;
-	} elseif ($nom_variable) {
-		$valeur_variable = eval ("return $nom_variable;");
-	} else {
+	}  else {
 		$valeur_variable = 0;
 	}
+
 	if ($valeur_variable) {
 		$valeur_variable = formidable_scramble($valeur_variable, $id_formulaire);
 	}
