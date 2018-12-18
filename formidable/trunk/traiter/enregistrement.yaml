@@ -40,8 +40,21 @@ options:
           datas:
             cookie: '<:formidable:identification_par_cookie:>'
             id_auteur: '<:formidable:identification_par_id_auteur:>'
+            variable_php: '<:formidable:identification_par_variable_php:>'
           defaut: 'cookie'
           li_class: 'pleine_largeur'
+      -
+        saisie: 'selection'
+        options:
+          nom: 'variable_php'
+          label: '<:formidable:traiter_enregistrement_option_identification_variable_php_label:>'
+          explication: '<:formidable:traiter_enregistrement_option_identification_variable_php_explication:>'
+          datas:
+            remote_user: '<:formidable:traiter_enregistrement_option_remote_user_label:>'
+            php_auth_user: '<:formidable:traiter_enregistrement_option_php_auth_user_label:>'
+          defaut: ''
+          obligatoire: 'on'
+          afficher_si : '@traitements[enregistrement][identification]@ == "variable_php"'
       -
         saisie: 'champ'
         options:
@@ -82,18 +95,6 @@ options:
           label_case: '<:formidable:traiter_enregistrement_option_anonymiser_label:>'
           defaut: ''
           li_class: 'pleine_largeur'
-      -
-        saisie: 'selection'
-        options:
-          nom: 'anonymiser_variable'
-          label: '<:formidable:traiter_enregistrement_option_anonymiser_variable_label:>'
-          explication: '<:formidable:traiter_enregistrement_option_anonymiser_variable_explication:>'
-          datas:
-            remote_user: '<:formidable:traiter_enregistrement_option_remote_user_label:>'
-            php_auth_user: '<:formidable:traiter_enregistrement_option_php_auth_user_label:>'
-          defaut: ''
-          afficher_si: '@traitements[enregistrement][anonymiser]@ == "on"',
-          obligatoire: 'on'
       -
         saisie: 'case'
         options:
