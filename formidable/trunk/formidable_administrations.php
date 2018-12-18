@@ -185,7 +185,7 @@ function formidable_transferer_reponses_champs() {
 }
 
 /**
- * Déplace les réglages sur les tests d'unicité depuis des colonnes vers des sous options du traitement "enregistrer"
+ * Déplace les réglages sur les tests d'unicité depuis des colonnes vers des sous options du traitement "enregistrement"
  *
  *
  * @return void
