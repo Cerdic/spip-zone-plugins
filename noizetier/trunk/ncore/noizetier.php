@@ -279,8 +279,9 @@ function noizetier_noisette_changer_conteneur($plugin, $description, $id_contene
 
 	// On rajoute la description à son emplacement destination en prenant soin de modifier les index id_conteneur,
 	// conteneur et rang_noisette qui doivent représenter le conteneur destination.
-	$description['id_conteneur'] = $id_conteneur;
+	include_spip('ncore/ncore');
 	$description['conteneur'] = ncore_conteneur_construire($plugin, $id_conteneur);
+	$description['id_conteneur'] = $id_conteneur;
 	$description['rang_noisette'] = $rang;
 
 	// On met à jour l'objet en base
@@ -471,7 +472,8 @@ function noizetier_noisette_lister($plugin, $conteneur = array(), $information =
 	if ($conteneur) {
 		// On sélectionne le contenant par son identifiant qui est stocké dans la table.
 		if (is_array($conteneur)) {
-			$id_conteneur = noizetier_conteneur_identifier($plugin, $conteneur);
+			include_spip('ncore/ncore');
+			$id_conteneur = ncore_conteneur_identifier($plugin, $conteneur);
 		} else {
 			$id_conteneur = $conteneur;
 		}
@@ -722,7 +724,8 @@ function noizetier_conteneur_destocker($plugin, $conteneur) {
 
 	// Calcul de l'id du conteneur en fonction du mode d'appel de la fonction.
 	if (is_array($conteneur)) {
-		$id_conteneur = noizetier_conteneur_identifier($plugin, $conteneur);
+		include_spip('ncore/ncore');
+		$id_conteneur = ncore_conteneur_identifier($plugin, $conteneur);
 	} else {
 		$id_conteneur = $conteneur;
 	}

@@ -11,12 +11,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Détermine l'id du conteneur à partir des données d'une page, d'un objet ou d'une noisette conteneur.
- * Cette fonction est en fait une encapsalution de la fonction noizetier_conteneur_identifier() qui permet
+ * Cette fonction est en fait une encapsalution de la fonction conteneur_identifier() qui permet
  * de reconstituer le conteneur à partir des données du noizetier page, composition, objet et noisette.
  *
  * @api
  *
- * @uses noizetier_conteneur_identifier()
+ * @uses ncore_conteneur_verifier()
+ * @uses ncore_conteneur_identifier()
  *
  * @param array|string $page_ou_objet
  * 		  Page au sens SPIP ou objet spécifiquement identifié.
@@ -35,9 +36,11 @@ function noizetier_conteneur_composer($page_ou_objet, $bloc, $noisette=array()) 
 	$conteneur = array();
 
 	// Construction du tableau associatif du conteneur.
+	include_spip('ncore/ncore');
 	if (!empty($noisette['type_noisette']) and !empty($noisette['id_noisette'])) {
-		// Le conteneur est une noisette.
-		$conteneur = $noisette;
+		// Le conteneur est une noisette. On appelle le service de vérification de N-Core pour vérifier
+		// la conformité du tableau.
+		$conteneur = ncore_conteneur_verifier('noizetier', $noisette);
 	} else {
 		if (is_array($page_ou_objet)) {
 			// Le conteneur est un objet.
@@ -51,9 +54,9 @@ function noizetier_conteneur_composer($page_ou_objet, $bloc, $noisette=array()) 
 		}
 	}
 
-	// Calcul de l'identifiant du conteneur
-	include_spip('ncore_fonctions');
-	$id_conteneur = conteneur_identifier('noizetier', $conteneur);
+	// Calcul de l'identifiant du conteneur. On utilise la fonction de N-Core pour traiter aussi le cas
+	// des noisettes conteneur.
+	$id_conteneur = ncore_conteneur_identifier('noizetier', $conteneur);
 
 	return $id_conteneur;
 }
@@ -80,14 +83,16 @@ function noizetier_conteneur_decomposer($id_conteneur) {
 
 	// Construction du tableau associatif propre au noizetier contenant les éléments
 	// d'un conteneur mais aussi les éléments propres au noiZetier comme la page,
-	// la composition, le type, l'objet ou la noisette conteneur.
-	$elements = explode('|', $id_conteneur);
-	if (count($elements) == 1) {
-		// C'est une page ou une composition
-		// -- le squelette
-		$conteneur['squelette'] = $id_conteneur;
+	// la composition, le type, l'objet ou la noisette conteneur
+
+	// -- On commence d'abord par contruire le conteneur canonique avec le service de N-Core.
+	include_spip('ncore/ncore');
+	$conteneur = ncore_conteneur_construire('noizetier', $id_conteneur);
+
+	if (count($conteneur) == 1) {
+		// C'est une page ou une composition : l'index squelette est le seul initialisé
 		// -- Page et bloc
-		list($bloc, $page) = explode('/', $id_conteneur);
+		list($bloc, $page) = explode('/', $conteneur['squelette']);
 		$conteneur['bloc'] = $bloc;
 		$conteneur['page'] = $page;
 		// -- Type et composition
@@ -95,11 +100,8 @@ function noizetier_conteneur_decomposer($id_conteneur) {
 		$conteneur['type'] = noizetier_page_extraire_type($conteneur['page']);
 		$conteneur['composition'] = noizetier_page_extraire_composition($conteneur['page']);
 	} else {
-		if ($elements[1] == 'noisette') {
-			// C'est une noisette
-			// -- Type de noisette et id_noisette
-			$conteneur['type_noisette'] = $elements[0];
-			$conteneur['id_noisette'] = intval($elements[2]);
+		if (!empty($conteneur['id_noisette'])) {
+			// C'est une noisette conteneur : les index type de noisette et id_noisette sont initialisés.
 			// -- le squelette
 			// TODO : revoir l'intérêt voire la cohérence de ce champ
 			include_spip('ncore_fonctions');
@@ -121,12 +123,7 @@ function noizetier_conteneur_decomposer($id_conteneur) {
 			$conteneur['bloc'] = $noisette['bloc'];
 		}
 		else {
-			// C'est un objet
-			// -- le type d'objet et son id
-			$conteneur['objet'] = $elements[1];
-			$conteneur['id_objet'] = $elements[2];
-			// -- le squelette
-			$conteneur['squelette'] = $elements[0];
+			// C'est un objet : le squelette, le type d'objet et son id sont déjà initialisés
 			// -- le bloc
 			list($bloc, ) = explode('/', $conteneur['squelette']);
 			$conteneur['bloc'] = $bloc;
