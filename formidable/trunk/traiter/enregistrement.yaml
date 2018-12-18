@@ -95,6 +95,7 @@ options:
           label_case: '<:formidable:traiter_enregistrement_option_anonymiser_label:>'
           defaut: ''
           li_class: 'pleine_largeur'
+          afficher_si: '!(@traitements[enregistrement][identification]@ == "id_auteur" && (@traitements[enregistrement][multiple]@!="on" || @traitements[enregistrement][modifiable]@=="on"))'
       -
         saisie: 'case'
         options:

@@ -551,7 +551,6 @@ function formidable_tableau_valeurs_saisies($saisies, $sans_reponse = true) {
  * @return string
  */
 function formidable_variable_php_identification($nom_variable, $id_formulaire) {
-
 	//Pour compat ascendante
 	if (!isset($GLOBALS['formulaires']['variables_anonymisation'])) {
 		$nom_variable = $GLOBALS['formulaires']['variables_anonymisation'][$nom_variable];
