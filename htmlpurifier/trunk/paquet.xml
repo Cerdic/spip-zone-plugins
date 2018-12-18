@@ -3,10 +3,10 @@
 	categorie="outil"
 	version="5.0.0.2"
 	etat="dev"
-	compatibilite="[3.2.1;3.2.99]"
+	compatibilite="[3.2.1;3.2.*]"
 	logo="htmlpurifier.png"
 	documentation="https://contrib.spip.net/HTML-Purifier,3671"
->	
+>
 
 	<nom>HTML Purifier</nom>
 	<!-- Sécuriser l'affichage de certains textes -->
@@ -15,7 +15,6 @@
 	<auteur>Mise en plugin SPIP : RealET</auteur>
 	<auteur>Fil</auteur>
 
-  <utilise nom="tw" compatibilite="[0.3.1;[" />
-  
-  
+	<utilise nom="tw" compatibilite="[0.3.1;[" />
+
 </paquet>
