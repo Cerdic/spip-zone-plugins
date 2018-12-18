@@ -1,4 +1,7 @@
 <traduction module="entravaux" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/en_travaux/trunk/lang/" reference="fr">
+	<langue code="ar" url="https://trad.spip.net/tradlang_module/entravaux-193?lang_cible=ar" total="11" traduits="11" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="SuperYMS" lien="https://trad.spip.net/auteur/superyms" />
+	</langue>
 	<langue code="de" url="https://trad.spip.net/tradlang_module/entravaux-193?lang_cible=de" total="11" traduits="11" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
