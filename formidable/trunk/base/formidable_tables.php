@@ -132,6 +132,7 @@ function formidable_declarer_tables_objets_sql($tables) {
 			'ip' => "varchar(255) NOT NULL default ''",
 			'id_auteur' => 'bigint(21) NOT NULL default 0',
 			'cookie' => "varchar(255) NOT NULL default ''",
+			'variable_php' => 'bigint(21) NOT NULL default 0',
 			'statut' => "varchar(10) NOT NULL default ''",
 			'maj' => 'timestamp'
 		),
@@ -139,7 +140,8 @@ function formidable_declarer_tables_objets_sql($tables) {
 			'PRIMARY KEY' => 'id_formulaires_reponse',
 			'KEY id_formulaire' => 'id_formulaire',
 			'KEY id_auteur' => 'id_auteur',
-			'KEY cookie' => 'cookie'
+			'KEY cookie' => 'cookie',
+			'KEY variable_php' => 'variable_php',
 		),
 		'join' => array(
 			'id_formulaires_reponse' => 'id_formulaires_reponse',

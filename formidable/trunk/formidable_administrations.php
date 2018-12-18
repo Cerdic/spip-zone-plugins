@@ -91,6 +91,9 @@ function formidable_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.10.0'] = array(
 		array('formidable_migrer_reglage_champ_unique')
 	);
+	$maj['0.11.0'] = array(
+		array('formidable_migrer_anonymisation')
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -185,7 +188,7 @@ function formidable_transferer_reponses_champs() {
 }
 
 /**
- * Déplace les réglages sur les tests d'unicité depuis des colonnes vers des sous options du traitement "enregistrement"
+ * Déplace les réglages sur les tests d'unicité depuis des colonnes vers des sous options du traitement "enregistrer"
  *
  *
  * @return void
@@ -235,6 +238,47 @@ function formidable_migrer_formulaires_afficher_si_remplissage(){
 					);
 				}
 			}
+	}
+}
+
+/**
+ * Convertit la config d'anonymisation des réponses des formulaires qui l'avaient activés.
+ * Le but étant de séparer l'anonymisation et l'identification par valeur PHP.
+ * C'est à dire, pour ces formulaires:
+ * 1. Change le nom de la variable de config.
+ * 2. Si jamais la identification était par id_auteur, la transforme en par valeur php.
+ * 3. Conserve l'anonymat des réponses
+ * Et aussi
+ * 1. Avant toute chose, crée une colonne variable_php
+ * 2. Migre, pour les formulaires concernées, id_auteur vers variable_php
+ * @return void
+ **/
+function formidable_migrer_anonymisation() {
+	sql_alter("TABLE spip_formulaires_reponses ADD column `variable_php` bigint(21) NOT NULL default 0 AFTER `cookie`");
+	sql_alter("TABLE spip_formulaires_reponses ADD INDEX (variable_php)");
+	$res = sql_select("id_formulaire, traitements", "spip_formulaires");
+	while ($row = sql_fetch($res)) {
+		$id_formulaire = $row["id_formulaire"];
+		$traitements = unserialize($row["traitements"]);
+		$enregistrement = isset($traitements["enregistrement"]) ? $traitements["enregistrement"] : array();
+		// A-ton l'option d'anonymisation activée? alors on migre, sinon rien à changer
+		if (isset($enregistrement['anonymiser']) and $enregistrement["anonymiser"] == "on") {
+			$enregistrement["variable_php"] = isset($enregistrement["anonymiser_variable"]) ? $enregistrement["anonymiser_variable"] : '';
+			unset($enregistrement["anonymiser_variable"]);
+			if (isset($enregistrement["identification"]) and $enregistrement["identification"] == "id_auteur") {
+				$enregistrement["identification"] = "variable_php";
+			}
+			// Mettre à jour le traitement
+			$traitements["enregistrement"] = $enregistrement;
+			$traitements = serialize($traitements);
+			sql_updateq("spip_formulaires", array("traitements" => $traitements), "id_formulaire=$id_formulaire");
+			// Mettre à jour les réponses
+			$res_reponse = sql_select("id_auteur,id_formulaires_reponse", "spip_formulaires_reponses", "id_formulaire=$id_formulaire");
+			while ($raw_reponse = sql_fetch($res_reponse)) {
+				$id_formulaires_reponse = $raw_reponse["id_formulaires_reponse"];
+				sql_updateq("spip_formulaires_reponses", array("variable_php"=>$raw_reponse["id_auteur"], "id_auteur" => 0), "id_formulaires_reponse=$id_formulaires_reponse");
+			}
+		}
 	}
 }
 

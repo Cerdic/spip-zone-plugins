@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/formidable-64.png"
-	schema="0.10.0"
+	schema="0.11.0"
 	documentation="https://contrib.spip.net/Formidable-le-generateur-de-formulaires"
 >
 	<nom>Formidable</nom>
