@@ -278,7 +278,6 @@ Cette option n’est conservée que pour compatibilité ascendante. Elle n’app
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'La réponse à éditer est introuvable.',
 	'traiter_enregistrement_message_ok' => 'Merci. Vos réponses ont bien été enregistrées.',
 	'traiter_enregistrement_option_anonymiser_explication' => 'Ne pas conserver l’identifiant de la personne connectée.',
-	'traiter_enregistrement_option_anonymiser_label' => 'Anonymiser le formulaire',
 	'traiter_enregistrement_option_anonymiser_variable_explication' => 'Variable système à utiliser pour remplaçer l’identifiant de l’auteur. Nécessite une identification par PHP / Apache non intégrée nativement dans SPIP.',
 	'traiter_enregistrement_option_anonymiser_variable_label' => 'Variable d’anonymisation',
 	'traiter_enregistrement_option_auteur' => 'Utiliser les auteurs pour les formulaires',
