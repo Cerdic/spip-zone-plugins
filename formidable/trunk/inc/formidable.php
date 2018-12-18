@@ -110,14 +110,11 @@ function formidable_trouver_reponse_a_editer($id_formulaire, $id_formulaires_rep
 		return $id_formulaires_reponse;
 	} else {
 		// calcul des paramètres d'anonymisation
-		$anonymisation = (isset($options['anonymiser']) && $options['anonymiser'] == 'on')
-			? isset($options['anonymiser_variable']) ? $options['anonymiser_variable'] : ''
-			: '';
 
 		$reponses = formidable_verifier_reponse_formulaire(
 			$id_formulaire,
 			$options['identification'],
-			$anonymisation
+			$options['variable_php']
 		);
 
 		//A-t-on demandé de vérifier que l'auteur soit bien celui de la réponse?
@@ -147,36 +144,58 @@ function formidable_trouver_reponse_a_editer($id_formulaire, $id_formulaires_rep
  *
  * @param int $id_formulaire L'identifiant du formulaire
  * @param string $choix_identification Comment verifier une reponse. Priorite sur 'cookie' ou sur 'id_auteur'
- * @param string $anonymisation : vaut '' si le formulaire n'est pas anonymisé, sinon c'est la variable d'anonymisation
+ * @param string $variable_php_identification : la variable php servant à identifier une réponse
  * @return unknown_type Retourne un tableau contenant les id des réponses si elles existent, sinon false
  */
-function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identification = 'cookie', $anonymisation = '') {
+function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identification = 'cookie', $variable_php_identification = '') {
 	global $auteur_session;
 	$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
 	$nom_cookie = formidable_generer_nom_cookie($id_formulaire);
 	$cookie = isset($_COOKIE[$nom_cookie]) ? $_COOKIE[$nom_cookie] : false;
+	$variable_php_identification = formidable_variable_php_identification($variable_php_identification, $id_formulaire);
 
-
-	// ni cookie ni id, on ne peut rien faire
-	if (!$cookie and !$id_auteur) {
+	// ni cookie ni id, ni variable_php,  on ne peut rien faire
+	if (!$cookie and !$id_auteur and !$variable_php_identification) {
 		return false;
 	}
 
-	// priorite sur le cookie
+
+	// Determiner les différentes clauses $WHERE possible en fonction de ce qu'on a
+	$where_id_auteur = '';
+	$where_cookie = '';
+	$where_variable_php = '';
+	if ($id_auteur) {
+		$where_id_auteur = 'id_auteur='.$id_auteur;
+	}
+	if ($cookie) {
+		$where_cookie = 'cookie='.sql_quote($cookie);
+	}
+	if ($variable_php_identification) {
+		$where_variable_php = 'variable_php='.$variable_php_identification;
+	}
+
+	// Comment identifie-t-on? Attention, le choix d'identification indique une PRIORITE, donc cela veut dire que les autres méthodes peuvent venir après
 	if ($choix_identification == 'cookie' or !$choix_identification) {
 		if ($cookie) {
-			$where = '(cookie='.sql_quote($cookie).($id_auteur ? ' OR id_auteur='.$id_auteur.')' : ')');
+			$where = array($where_cookie);
 		} else {
-			$where = 'id_auteur='.$id_auteur;
+			$where = array($where_id_auteur, $where_variable_php);
 		}
-	} else {
-		// sinon sur l'id_auteur
+	} elseif ($choix_identification == 'id_auteur') {
 		if ($id_auteur) {
-			$where = 'id_auteur='.$id_auteur;
+			$where = array($where_id_auteur);
 		} else {
-			$where = '(cookie='.sql_quote($cookie).($id_auteur ? ' OR id_auteur='.$id_auteur.')' : ')');
+			$where = array($where_cookie, $where_variable_php);
+		}
+	} elseif ($choix_identification = 'variable_php') {
+		if ($variable_php_identification) {
+			$where = array($where_variable_php);
+		} else {
+			$where = array($where_cookie, $where_id_auteur);
 		}
 	}
+	$where = array_filter($where);//Supprimer les wheres null
+	$where = implode($where, ' OR ');
 
 	$reponses = sql_allfetsel(
 		'id_formulaires_reponse',
@@ -432,17 +451,13 @@ function md5_hex_to_dec($hex_str) {
  * A la fin, on recherche et supprime les éventuels zéros de début
  * @param string $login Login à transformer
  * @param string $id_form ID du formulaire concerné
- * @param string $passwd Chaîne 'secrète' ajoutée au login et id_formulaire pour éviter
- *  les recoupements d'identité entre plusieurs formulaires
  * @return string Un nombre de 19 chiffres
 */
-function formidable_scramble($login, $id_form, $passwd = '') {
-	if ($passwd == '') {
-		if (isset($GLOBALS['formulaires']['passwd']['interne']) == false) {
-			$passwd = $GLOBALS['formulaires']['passwd']['interne'];
-		} else {
-			$passwd = 'palabresecreta';
-		}
+function formidable_scramble($login, $id_form) {
+	if (isset($GLOBALS['formulaires']['passwd']['interne']) == false) {
+		$passwd = $GLOBALS['formulaires']['passwd']['interne'];
+	} else {
+		$passwd = 'palabresecreta';
 	}
 	$login_md5 = md5("$login$passwd$id_form");
 	$login_num = md5_hex_to_dec($login_md5);
@@ -527,16 +542,23 @@ function formidable_tableau_valeurs_saisies($saisies, $sans_reponse = true) {
 }
 
 /**
- * Retourne la valeur de la variable PHP servant à anonymiser.
+ * Retourne la valeur "scrambelisée" de la variable PHP d'identification.
  * pour les deux variables proposés par formidable, recherche directement dans $_SERVER
  * sinon utilise un eval() si une autre variable a été défini en global.
  * Mais peu probable que le cas se présente, car pas d'interface dans le .yaml pour proposer d'autres variables que celle définies par formidable
  * @param string $nom_variable le nom de la variable
+ * @param string $id_formulaire le formulaire concerné
+ * @return string
  */
-function formidable_variable_anonymisation($nom_variable) {
+function formidable_variable_php_identification($nom_variable, $id_formulaire) {
 	if (in_array($nom_variable, array("remote_user", "php_auth_user"))) {
 		$nom_variable = strtoupper($nom_variable);
-		return isset($_SERVER[$nom_variable]) ? $_SERVER[$nom_variable] : null;
+		$valeur_variable = isset($_SERVER[$nom_variable]) ? $_SERVER[$nom_variable] : 0;
+	} else {
+		$valeur_variable = eval ("return $nom_variable;");
 	}
-	return eval("return $nom_variable;");
+	if ($valeur_variable) {
+		$valeur_variable = formidable_scramble($valeur_variable, $id_formulaire);
+	}
+	return $valeur_variable;
 }
