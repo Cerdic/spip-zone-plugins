@@ -102,8 +102,8 @@
 			</li>
 
 		</BOUCLE_noisettes>
-			<input type="hidden" name="nb_noisettes" value="#TOTAL_BOUCLE" />
 		</ul>
+		<input type="hidden" name="nb_noisettes" value="#TOTAL_BOUCLE" />
 		[(#URL_ACTION_AUTEUR{vider_conteneur, [(#ENV{id_conteneur})], #GET{self}}
 			|icone_verticale{<:noizetier:formulaire_supprimer_noisettes_bloc:>, noizetier-24, del, #LANG_LEFT})]
 		</B_noisettes>

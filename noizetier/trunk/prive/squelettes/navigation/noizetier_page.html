@@ -118,14 +118,9 @@
 				var id_conteneur_destination = noisette.parents('[data-conteneur]').data('conteneur');
 
 				// Trouver le nouveau rang
-				var rang;
+				var rang = 1;
 				if (noisette.prev('.noisette').length){
 					rang = noisette.prev('.noisette').data('rang') + 1;
-				} else if (noisette.next('.noisette').length) {
-					rang = noisette.next('.noisette').data('rang') - 1;
-					rang = Math.max(rang, 1);
-				} else {
-					rang = 1;
 				}
 
 				// ACTIONS
