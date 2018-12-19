@@ -100,7 +100,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exporter_formulaire_statut_label' => 'Réponses',
 
 	// F
-	'formulaire_anonyme_explication' => 'Ce formulaire est anonyme, c’est à dire que l’identité de l’utilisateur n’est pas enregistrée.',
 	'formulaires_aucun' => 'Il n’y a pour l’instant aucun formulaire.',
 	'formulaires_aucun_champ' => 'Il n’y a pour l’instant aucun champ de saisie pour ce formulaire.',
 	'formulaires_corbeille_tous' => '@nb@ formulaires dans la corbeille',
