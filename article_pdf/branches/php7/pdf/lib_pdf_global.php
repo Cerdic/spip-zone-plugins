@@ -83,7 +83,11 @@ function unhtmlentities($string)
 	$trans_tbl = get_html_translation_table (HTML_ENTITIES);
 	$trans_tbl = array_flip ($trans_tbl);
 	$ret = strtr ($string, $trans_tbl);
-	return preg_replace_callback('/&#(\d+);/m', chr($matches[1]),$ret);
+	return preg_replace_callback('/&#(\d+);/m',
+		function ($m) {
+			return chr($m[1]);
+		},
+		$ret);
 }
 
 function WriteHTML($html,$LineFeedHeight)
