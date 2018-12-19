@@ -395,7 +395,7 @@ function saisies_verifier_afficher_si($saisies, $env=NULL) {
 	foreach ($saisies as $cle => $saisie) {
 		if (isset($saisie['options']['afficher_si'])) {
 			$condition = $saisie['options']['afficher_si'];
-			// Si tentative de log malicieux, on rejete
+			// Si tentative de code malicieux, on rejete
 			if (!saisies_verifier_securite_afficher_si($condition)) {
 				spip_log("Afficher_si malicieuse : $condition", "saisies"._LOG_CRITIQUE);
 				$condition = '$ok';
