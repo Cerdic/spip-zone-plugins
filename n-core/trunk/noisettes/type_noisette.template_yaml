@@ -1,0 +1,54 @@
+# Template de fichier descriptif d'un type de noisette
+# - fichier : type_noisette.template.yaml
+
+# Titre du type de noisette
+# - obligatoire
+# - texte ou item de langue
+nom: '<:ncore:type_noisette_xxxx_nom:>'
+# Description du rôle du type de noisette
+# - facultatif, vide si absent
+# - texte ou item de langue
+description: '<:ncore:type_noisette_xxxx_description:>'
+# Nom de l'icone représentant le type de noisette sans chemin
+# - facultatif, 'noisette-24.png' si absent
+icon: 'xxxx-24.png'
+# Indique si la noisette est un conteneur ou pas
+# - facultatif, 'non' si absent
+# - 'oui' ou 'non'
+conteneur: 'oui'
+# Liste des variables de contexte à passer à la noisette
+# - facultatif, 'env' si absent
+# - 'aucun', 'env' ou le tableau des noms de variables
+contexte: 'aucun'
+# Indique la méthode ajax à appliquer à ce type de noisette
+# - facultatif, 'defaut' si absent
+# - 'defaut', 'oui' ou 'non'
+ajax: 'non'
+# Indique la méthode d'inclusion de ce type de noisette
+# - facultatif, 'statique' si absent
+# - 'statique' ou 'dynamique'
+inclusion: 'statique'
+# Liste des plugins nécessités pour le fonctionnement de la noisette
+# - facultatif, [] si absent
+# - tableau des préfixes de plugin
+necessite: ['prefixe1', 'prefixe2']
+# Liste des paramètres de la noisette qui seront proposés dans un formulaire
+# - facultatif, [] si absent
+# - tableau des configuration de saisies des paramètres (cf. plugin SAISIES)
+parametres:
+  -
+    saisie: 'selection'
+    options:
+      nom: 'param_1'
+      label: '<:ncore:label_param_1:>'
+      defaut: 'data1'
+      cacher_option_intro: 'oui'
+      datas:
+        d1: 'data1'
+        d2: 'data2'
+        d3: 'data3'
+  -
+    saisie: 'input'
+    options:
+      nom: 'param_2'
+      label: '<:ncore:label_param_2:>'
