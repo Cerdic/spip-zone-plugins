@@ -73,7 +73,6 @@ options:
             remote_user: '<:formidable:traiter_enregistrement_option_remote_user_label:>'
             php_auth_user: '<:formidable:traiter_enregistrement_option_php_auth_user_label:>'
           defaut: ''
-          obligatoire: 'on'
           afficher_si : '@traitements[enregistrement][identification]@ == "variable_php"'
   -
     saisie: 'fieldset'
