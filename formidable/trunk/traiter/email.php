@@ -96,6 +96,10 @@ function traiter_email_dist($args, $retours) {
 
 	// Récuperer les valeurs saisies
 	list($valeurs,$valeurs_libellees) = formidable_tableau_valeurs_saisies($saisies);
+	if (isset($options['masquer_champs_vides']) and $options['masquer_champs_vides'] == 'on') {
+		$valeurs = array_filter($valeurs);
+		$valeurs_libellees = array_filter($valeurs_libellees);
+	}
 
 	// Traitement à part pour les saisies de types fichiers :
 	// 1. Calculer la taille totale des fichiers

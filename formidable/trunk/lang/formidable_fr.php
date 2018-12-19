@@ -251,6 +251,7 @@ Cette option n’est conservée que pour compatibilité ascendante. Elle n’app
 	'traiter_email_option_envoyeur_nom_label' => 'Nom de l’envoyeur',
 	'traiter_email_option_exclure_champs_email_explication' => 'Si vous souhaitez que certains champs ne s’affichent pas dans les emails envoyés (par exemple des champs cachés), il suffit de les définir ici, séparés par une virgule.',
 	'traiter_email_option_exclure_champs_email_label' => 'Champs à exclure du contenu du message',
+	'traiter_email_option_masquer_champs_vide_label_case' => 'Masquer les champs vides',
 	'traiter_email_option_masquer_liens_label_case' => 'Masquer les liens d’administration dans le courriel.',
 	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Précisez le nom de l’expéditeur utilisé pour envoyer l’accusé de réception. Si vous ne mettez rien, ce sera le nom du site..',
 	'traiter_email_option_nom_envoyeur_accuse_label' => 'Nom de l’expéditeur de l’accusé de réception',

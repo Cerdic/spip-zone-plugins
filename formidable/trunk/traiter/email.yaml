@@ -56,6 +56,12 @@ options:
           nom: 'activer_ip'
           li_class: 'pleine_largeur'
           label_case: '<:formidable:traiter_email_option_activer_ip_label_case:>'
+      -
+        saisie: 'case'
+        options:
+          nom: 'masquer_champs_vides'
+          li_class: 'pleine_largeur'
+          label_case: '<:formidable:traiter_email_option_masquer_champs_vide_label_case:>'
   -
     saisie: 'fieldset'
     options:
