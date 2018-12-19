@@ -320,7 +320,6 @@ function rubriques_enfant($id_parent, $rubriques = array()) {
  *
  * @param string $prix
  * @param string $devise
- * @param integer $decimals
  * @return string
  */
 function filtres_prix_formater($prix, $devise = '') {
@@ -346,12 +345,8 @@ function filtres_prix_formater($prix, $devise = '') {
 	spip_setcookie('devise_selectionnee', $devise, time() + 3660 * 24 * 365, '/');
 
 	// On détermine la langue du contexte
-	if (isset($_COOKIE['spip_lang'])) {
-		$lang = $_COOKIE['spip_lang'];
-	}
-	else {
-		$lang = lire_config('langue_site');
-	}
+	$lang = $GLOBALS['spip_lang'];
+
 
 	// Si PECL intl est présent on dermine le format de l'affichage de la devise selon la langue du contexte
 	if (function_exists('numfmt_create') and is_float($prix)) {
