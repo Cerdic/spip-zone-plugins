@@ -111,7 +111,7 @@ function polyhier_formulaire_verifier($flux){
 		$id_table_objet = id_table_objet($objet);
 
 		// on verifie qu'au moins un parent est present si c'est un article
-		if (!count(_request('parents')) AND $objet=='article'){
+		if ((!_request('parents') or !count(_request('parents'))) AND $objet=='article'){
 			$flux['data']['parents'] = _T('polyhier:parent_obligatoire');
 			set_request('parents',array()); // eviter de revenir au choix initial
 		}
