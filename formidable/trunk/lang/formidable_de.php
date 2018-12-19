@@ -48,7 +48,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exporter_formulaire_format_label' => 'Format der Datei',
 
 	// F
-	'formulaire_anonyme_explication' => 'Diese Form ist anonym, dh die Identität des Benutzers nicht registriert ist.', # MODIF
 	'formulaires_aucun' => 'Kein Formular vorhanden.',
 	'formulaires_dupliquer' => 'Formular kopieren',
 	'formulaires_dupliquer_copie' => '(Kopie)',
@@ -114,10 +113,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_description' => 'Einträge in das Formular in der Datenbank speichern', # MODIF
 	'traiter_enregistrement_erreur_base' => 'Beim Speichern in der Datenbank ist ein Fehler aufgetreten',
 	'traiter_enregistrement_erreur_deja_repondu' => 'Sie haben dieses Formular bereits ausgefüllt.',
-	'traiter_enregistrement_option_anonymiser_explication' => 'Stellen die Ergebnisse der anonymen Form (nicht halten Trace-Kennung der Befragten).', # MODIF
-	'traiter_enregistrement_option_anonymiser_label' => 'Anonymisierter Form',
-	'traiter_enregistrement_option_anonymiser_variable_explication' => 'Welches System Variable verwendet, um einen einzelnen Wert für jeden Autor ohne Offenlegung seiner Identität zu berechnen.', # MODIF
-	'traiter_enregistrement_option_anonymiser_variable_label' => 'Variable aus dem anonymisierter Form.', # MODIF
+	'traiter_enregistrement_option_anonymiser_label' => 'Anonymisierter Form', # MODIF
 	'traiter_enregistrement_option_moderation_label' => 'Moderation',
 	'traiter_enregistrement_option_modifiable_explication' => 'Sollen die Besucher ihre Antworten nachträglich &aauml;ndern können?', # MODIF
 	'traiter_enregistrement_option_modifiable_label' => 'Antworten editierbar',

@@ -95,7 +95,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exporter_formulaire_statut_label' => 'Respostas',
 
 	// F
-	'formulaire_anonyme_explication' => 'Este formulário é anônimo, ou seja, a identificação de usuário não será gravada.',
 	'formulaires_aucun' => 'Ainda não há nenhum formulário.',
 	'formulaires_aucun_champ' => 'Ainda não há nenhum campo de entrada para esse formulário.',
 	'formulaires_corbeille_tous' => '@nb@ formulários na lixeira',
@@ -115,7 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'id_formulaires_reponse' => 'Identificador da resposta',
-	'identification_par_cookie' => 'Por cookie',
+	'identification_par_cookie' => 'Por cookie', # MODIF
 	'identification_par_id_auteur' => 'Por identificação (id_auteur) de usuário autenticado',
 	'importer_formulaire' => 'Importar um formulário',
 	'importer_formulaire_fichier_label' => 'Arquivo a importar',
@@ -255,16 +254,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_erreur_deja_repondu' => 'Você já respondeu a este formulário.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'A resposta a ser editada não foi encontrada.',
 	'traiter_enregistrement_message_ok' => 'Obrigado. Suas respostas foram registradas corretamente',
-	'traiter_enregistrement_option_anonymiser_explication' => 'Resultados anônimos (não guardar traços de identificação das pessoas que responderam).', # MODIF
-	'traiter_enregistrement_option_anonymiser_label' => 'Tornar o formulário anônimo',
-	'traiter_enregistrement_option_anonymiser_variable_explication' => 'Que variável do sistema usar para calcular um valor único para cada autor sem revelar sua identidade.', # MODIF
-	'traiter_enregistrement_option_anonymiser_variable_label' => 'Variável a usar para tornar o formulário anônimo', # MODIF
+	'traiter_enregistrement_option_anonymiser_label' => 'Tornar o formulário anônimo', # MODIF
 	'traiter_enregistrement_option_auteur' => 'Utilizar autores para os formulários',
 	'traiter_enregistrement_option_auteur_explication' => 'Atribuir um ou vários autores a um formulário. Se esta opção estiver ativada, somente os autores do formulário podem acessar esses dados.',
 	'traiter_enregistrement_option_effacement_delai_label' => 'Número de dias antes de apagar',
 	'traiter_enregistrement_option_effacement_label' => 'Excluir regularmente os resultados mais antigos',
 	'traiter_enregistrement_option_identification_explication' => 'Se as respostas são alteráveis, que procedimento usar preferencialmente para identificar a resposta a ser alterada?', # MODIF
-	'traiter_enregistrement_option_identification_label' => 'Identificação',
+	'traiter_enregistrement_option_identification_label' => 'Identificação', # MODIF
 	'traiter_enregistrement_option_ip_label' => 'Gravar os IPs (mascarados após um intervalo de segurança)',
 	'traiter_enregistrement_option_moderation_label' => 'Moderação',
 	'traiter_enregistrement_option_modifiable_explication' => 'Alterável: os visitantes podem modificar as suas respostas posteriormente.',

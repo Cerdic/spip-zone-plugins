@@ -85,7 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaires_tous' => 'Все формы',
 
 	// I
-	'identification_par_cookie' => 'Через cookie',
+	'identification_par_cookie' => 'Через cookie', # MODIF
 	'identification_par_id_auteur' => 'Через идентификатор (id_auteur) авторизированного пользователя',
 	'importer_formulaire' => 'Импортировать форму',
 	'importer_formulaire_fichier_label' => 'Файл для импорта',
@@ -191,13 +191,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_erreur_deja_repondu' => 'Вы уже заполнили эту форму',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'Ответ для редактирования не найден.', # RELIRE
 	'traiter_enregistrement_message_ok' => 'Спасибо. Ваш ответ был сохранен', # MODIF
-	'traiter_enregistrement_option_anonymiser_explication' => 'Анонимные ответы (не сохранять идентифицирующую пользователя информацию)', # MODIF
-	'traiter_enregistrement_option_anonymiser_label' => 'Анонимизировать форму',
-	'traiter_enregistrement_option_anonymiser_variable_label' => 'Переменные, при помощи которых анонимизируется ответ', # MODIF
+	'traiter_enregistrement_option_anonymiser_label' => 'Анонимизировать форму', # MODIF
 	'traiter_enregistrement_option_auteur' => 'Использовать авторов в форме',
 	'traiter_enregistrement_option_auteur_explication' => 'Назначить одного или нескольких авторов форме. Если эта настройка включена, то только назначенные автора будут иметь к ней доступ',
 	'traiter_enregistrement_option_identification_explication' => 'Если можно изменять ответы, выберите метод аутентификации пользователя', # MODIF
-	'traiter_enregistrement_option_identification_label' => 'ID',
+	'traiter_enregistrement_option_identification_label' => 'ID', # MODIF
 	'traiter_enregistrement_option_ip_label' => 'Сохранять IP ',
 	'traiter_enregistrement_option_moderation_label' => 'Модерация',
 	'traiter_enregistrement_option_modifiable_explication' => 'Посетители могут изменять свои ответы после заполнения формы',

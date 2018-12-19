@@ -76,7 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaires_tous' => 'كل الاستمارات',
 
 	// I
-	'identification_par_cookie' => 'بواسطة الكعكة',
+	'identification_par_cookie' => 'بواسطة الكعكة', # MODIF
 	'identification_par_id_auteur' => 'بواسطة معرّف (id_auteur) الشخص المعرّف به',
 	'importer_formulaire' => 'استيراد استمارة',
 	'importer_formulaire_format_label' => 'تنسيق الملف',
@@ -149,11 +149,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_sujet_courriel_label' => 'موضوع الرسالة', # MODIF
 	'traiter_email_titre' => 'إرسال بالبريد الإلكتروني',
 	'traiter_enregistrement_description' => 'يسجل نتائج الاستمارة في قاعدة البيانات.', # MODIF
-	'traiter_enregistrement_option_anonymiser_label' => 'جعل الاستمارة مغفّلة',
+	'traiter_enregistrement_option_anonymiser_label' => 'جعل الاستمارة مغفّلة', # MODIF
 	'traiter_enregistrement_option_auteur' => 'استخدام المؤلفين للاستمارات',
 	'traiter_enregistrement_option_auteur_explication' => 'تخصيص مؤلف او اكثر لايتمارة. اذا تم تفعيل هذا الخيار، مؤلفو الاستمارة وحدهم يمكنهم الوصول الى بياناتهم.',
 	'traiter_enregistrement_option_identification_explication' => 'اذا كانت الإجابات قابلة للتعديل، اي اسلوب مفضل استخدامه لمعرفة اي جواب يجب تعديله؟ ', # MODIF
-	'traiter_enregistrement_option_identification_label' => 'تعريف',
+	'traiter_enregistrement_option_identification_label' => 'تعريف', # MODIF
 	'traiter_enregistrement_option_ip_label' => 'تسجيل عناوين IP (تحجب بعد فترة محددة)',
 	'traiter_enregistrement_option_moderation_label' => 'مراقبة',
 	'traiter_enregistrement_option_modifiable_explication' => 'قابل للتعديل: يمكن للزوار تعديل إجاباتهم بعد حين.',

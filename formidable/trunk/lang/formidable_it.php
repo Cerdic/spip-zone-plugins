@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaires_tous' => 'Tutti i moduli',
 
 	// I
-	'identification_par_cookie' => 'Con i cookie',
+	'identification_par_cookie' => 'Con i cookie', # MODIF
 	'identification_par_id_auteur' => 'con l’identificativo (id_auteur) dell’utente autentificato',
 	'importer_formulaire' => 'Importa un modulo',
 	'importer_formulaire_fichier_label' => 'File da importare',
@@ -132,12 +132,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_erreur_base' => 'Si è verificato un errore tecnico durante il salvataggio in database',
 	'traiter_enregistrement_erreur_deja_repondu' => 'Hai già risposto a questo modulo.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'La risposta da modificare non esiste.',
-	'traiter_enregistrement_option_anonymiser_explication' => 'Fare i risultati di forma anonima (non conservare traccia di identificazione degli intervistati).', # MODIF
-	'traiter_enregistrement_option_anonymiser_label' => 'Modo anonimo',
-	'traiter_enregistrement_option_anonymiser_variable_explication' => 'Quale variabile di sistema utilizzato per calcolare un singolo valore per ogni autore, senza rivelare la propria identità.', # MODIF
-	'traiter_enregistrement_option_anonymiser_variable_label' => 'Variabile da cui la forma anonima', # MODIF
+	'traiter_enregistrement_option_anonymiser_label' => 'Modo anonimo', # MODIF
 	'traiter_enregistrement_option_identification_explication' => 'Se le risposte sono modificabili, quale procedura si dovrà utilizzare in priorità per individuare la risposta da modificare?', # MODIF
-	'traiter_enregistrement_option_identification_label' => 'Identificazione',
+	'traiter_enregistrement_option_identification_label' => 'Identificazione', # MODIF
 	'traiter_enregistrement_option_moderation_label' => 'Moderazione',
 	'traiter_enregistrement_option_modifiable_explication' => 'Gli utenti possono modificare le loro risposte dopo aver inviato il modulo?', # MODIF
 	'traiter_enregistrement_option_modifiable_label' => 'Risposte modificabili',

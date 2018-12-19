@@ -75,7 +75,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exporter_formulaire_statut_label' => 'Respuestas',
 
 	// F
-	'formulaire_anonyme_explication' => 'Este formulario es anónimo; significa que que la identidad del usuario no será guardada. ',
 	'formulaires_aucun' => 'Todavía no existe ningún formulario.',
 	'formulaires_aucun_champ' => 'Todavía este formulario no contiene ningún campo.',
 	'formulaires_dupliquer' => 'Duplicar el formulario',
@@ -87,7 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaires_tous' => 'Todos los formularios',
 
 	// I
-	'identification_par_cookie' => 'Por cookie',
+	'identification_par_cookie' => 'Por cookie', # MODIF
 	'identification_par_id_auteur' => 'Por el identificador (id_auteur) de la persona autenticada',
 	'importer_formulaire' => 'Importar un formulario',
 	'importer_formulaire_fichier_label' => 'Archivo a importar',
@@ -190,14 +189,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_erreur_deja_repondu' => 'Usted ya ha respondido a este formulario.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'La respuesta a editar no puso ser encontrada. ',
 	'traiter_enregistrement_message_ok' => 'Gracias. Sus respuestas fueron grabadas.', # MODIF
-	'traiter_enregistrement_option_anonymiser_explication' => 'Resultados anónimos (no mantener ningún tipo de datos de los usuarios que han respondido).', # MODIF
-	'traiter_enregistrement_option_anonymiser_label' => 'Anonimizar el formulario',
-	'traiter_enregistrement_option_anonymiser_variable_explication' => '¿Qué variable de sistema utilizará para calcular un valor único para cada autor sin revelar su identidad ?', # MODIF
-	'traiter_enregistrement_option_anonymiser_variable_label' => 'Variable del formulario que anonimiza', # MODIF
+	'traiter_enregistrement_option_anonymiser_label' => 'Anonimizar el formulario', # MODIF
 	'traiter_enregistrement_option_auteur' => 'Utilizar l@s autor@s para los formularios',
 	'traiter_enregistrement_option_auteur_explication' => 'Atribuir un@ o vari@s autor@s a un formulario. Si esta opción esta activada, solo l@s autor@s de un formulario podrán acceder a sus datos.',
 	'traiter_enregistrement_option_identification_explication' => '¿Si las respuestas se pueden modificar, cuál es el método para usar en primer lugar para conocer la respuesta a modificar?', # MODIF
-	'traiter_enregistrement_option_identification_label' => 'Identificación',
+	'traiter_enregistrement_option_identification_label' => 'Identificación', # MODIF
 	'traiter_enregistrement_option_ip_label' => 'Grabar las IPs (ocultadas después de un tiempo de guardia)',
 	'traiter_enregistrement_option_moderation_label' => 'Moderación',
 	'traiter_enregistrement_option_modifiable_explication' => 'Modificable: Los visitantes pueden cambiar sus respuestas con posterioridad.',

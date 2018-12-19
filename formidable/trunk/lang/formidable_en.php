@@ -105,7 +105,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exporter_formulaire_statut_label' => 'Answers',
 
 	// F
-	'formulaire_anonyme_explication' => 'This form is anonymous; meaning that the user’s identity won’t be recorded.',
 	'formulaires_aucun' => 'There is no form for now',
 	'formulaires_aucun_champ' => 'There is currently no entry field for this form.',
 	'formulaires_corbeille_tous' => '@nb@ forms in the trash',
@@ -125,7 +124,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'id_formulaires_reponse' => 'Answer identifier',
-	'identification_par_cookie' => 'By cookie',
+	'identification_par_cookie' => 'By cookie', # MODIF
 	'identification_par_id_auteur' => 'By login (id_auteur) of the authenticated person',
 	'importer_formulaire' => 'Import a form',
 	'importer_formulaire_fichier_label' => 'File to import',
@@ -279,16 +278,13 @@ Indicate the field, its value, and the concerned email(s) (separated by a comma)
 	'traiter_enregistrement_erreur_deja_repondu' => 'You have already filled in this form.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'The answer to edit can not be found.',
 	'traiter_enregistrement_message_ok' => 'Thanks. Your answers have been correctly saved.',
-	'traiter_enregistrement_option_anonymiser_explication' => 'Results anonymous (don’t keep any tracks of user who have answered).', # MODIF
-	'traiter_enregistrement_option_anonymiser_label' => 'Anonymize form',
-	'traiter_enregistrement_option_anonymiser_variable_explication' => 'What system variable used to calculate a single value for each author without revealing his identity.', # MODIF
-	'traiter_enregistrement_option_anonymiser_variable_label' => 'Variable from witch the form will be anonymized', # MODIF
+	'traiter_enregistrement_option_anonymiser_label' => 'Anonymize form', # MODIF
 	'traiter_enregistrement_option_auteur' => 'Link authors to the forms',
 	'traiter_enregistrement_option_auteur_explication' => 'Bind one or more authors to a form. If activated, this option prevents anyone except the author(s) to access form’s configuration or results.',
 	'traiter_enregistrement_option_effacement_delai_label' => 'Number of days before deletion',
 	'traiter_enregistrement_option_effacement_label' => 'Regularly clear  the oldest results',
 	'traiter_enregistrement_option_identification_explication' => 'If the answers can be changed, which method is used first to know the answer to modify ?', # MODIF
-	'traiter_enregistrement_option_identification_label' => 'Identification',
+	'traiter_enregistrement_option_identification_label' => 'Identification', # MODIF
 	'traiter_enregistrement_option_invalider_explication' => 'If the responses to this form are used publicly, you can refresh the cache when a new answer is sent.',
 	'traiter_enregistrement_option_invalider_label' => 'Refresh the cache',
 	'traiter_enregistrement_option_ip_label' => 'Record IPs (hidden after a period of retention)',
