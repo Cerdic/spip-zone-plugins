@@ -604,22 +604,31 @@ function saisies_set_request_null_recursivement($saisie) {
  * @return bool true si usage légitime, false si tentative d'execution de code PHP
  */
 function saisies_verifier_securite_afficher_si($condition) {
-	// pas de point virgule ni de $, a priori c'est safe (une seule instruction executable, or pour modifier la base, envoyer un mail, etc, il en faut au moins 2)
-	if (!strstr($condition, ";") and !strstr($condition, "$")) {
+	$interdits = array(";","$","sql","spip");
+	$presence = 0;
+	foreach ($interdits as $int) {
+		if (strstr($condition, $int)) {
+			$presence++;
+		}
+	}
+	// pas de chaine interdite, a priori safe
+	if (!$presence) {
 		return true;
 	}
 
-	// point virgule ou dollar sans guillement? ca pue
-	if (strstr($condition, '"') == false and strstr($condition, "'") == false) {
+	// pas de guillemet ou de @, alors ca pue
+	if (strstr($condition, '"') == false and strstr($condition, "'") == false and strstr($condition, "@") == false) {
 		return false;
 	}
 
-	$regexp = "#(?<guillemet>(^\\\)?(\"|'))(.*)(\k<guillemet>)#mU"; // trouver tout ce qu'il y entre guillemet, sauf si les guillemets sont échapés
+	$regexp = "#(?<guillemet>(^\\\)?(\"|'|@))(.*)(\k<guillemet>)#mU"; // trouver tout ce qu'il y entre guillemet, sauf si les guillemets sont échapés
 	$condition = preg_replace($regexp, "", $condition);//Supprimer tout ce qu'il y a entre guillement
 
-	// il reste encore des $ ou des ; alors qu'on a enlevé les guillemets, ca pue vraiment
-	if (strstr($condition, ";") or strstr($condition, "$")) {
-		return false;
+	// il reste encore des caractères interdit alors qu'on a enlevé les guillemets, ca pue vraiment
+	foreach ($interdits as $int) {
+		if (strstr($condition, $int)) {
+			return false;
+		}
 	}
 	//Sinon c'est que c'est bon
 	return true;

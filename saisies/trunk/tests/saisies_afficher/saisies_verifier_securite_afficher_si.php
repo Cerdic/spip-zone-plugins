@@ -72,6 +72,14 @@
 			array (
 				0 => false,
 				1 => '@champ1@ == "1"; @champ2@ =="2"'
+			),
+			array (
+				0 => true,
+				1 => '@sql_insert@ == "1"'
+			),
+			array (
+				0 => false,
+				1 => 'sql_insert() == "1"'
 			)
 		);
 		return $essais;
