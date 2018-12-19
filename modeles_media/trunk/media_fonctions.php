@@ -7,7 +7,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Balise placée dans une boucle DOCUMENTS et appelée dans un modèle <media>
 // Les paramètres legende, titre, descriptif, credits, poids et type sont récupérés dans l'environnement
 // Syntaxe (premier argument précise si en div ou en dl, le second la largeur de la légende) :
-// #MEDIA_LEGENDE{'dl',#GET{width}} ou #MEDIA_LEGENDE{'div',#GET{width}} 
+// #MEDIA_LEGENDE{'dl',#GET{width}} ou #MEDIA_LEGENDE{'div',#GET{width}}
 function balise_MEDIA_LEGENDE_dist($p) {
 	$conteneur = interprete_argument_balise(1,$p);
 	$width = interprete_argument_balise(2,$p);
@@ -33,7 +33,7 @@ function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_t
 	$env_credits = isset($args['credits']) ? $args['credits'] : '0';
 	$env_type = isset($args['args']['type']) ? $args['args']['type'] : '0'; // On regarde dans 'args' pour eviter interference avec variable type herite du contexte de l'article
 	$env_poids = isset($args['poids']) ? $args['poids'] : '0';
-	
+
 	// Doit-on afficher une légende ?
 	if ($env_legende || $env_titre || $env_descriptif || $env_credits || $env_poids || $env_type) {
 		$media_largeur_max_legende = isset($GLOBALS['meta']['media_largeur_max_legende']) ? $GLOBALS['meta']['media_largeur_max_legende'] : 120;
@@ -94,7 +94,7 @@ function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_t
 				$crayons_credits = '';
 			}
 			// Type de document
-			if ($env_type && $env_type!='type') 
+			if ($env_type && $env_type!='type')
 				$type = typo($env_type);
 			elseif ($env_type=='type' || $env_legende=='complete')
 				$type = typo($sql_type);
@@ -107,7 +107,7 @@ function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_t
 				$poids = '';
 			if ($type && $poids)
 				$poids = ' - '.$poids;
-			
+
 			if ($titre)
 				$ret .= "<$dt class='spip_doc_titre$crayons_titre' style='$width'><strong>$titre</strong></$dt>";
 			if ($descriptif)
@@ -133,7 +133,7 @@ function balise_MEDIA_AFFICHER_LEGENDE_dist($p) {
 // Renvoie le fichier d'une image retaillée selon les paramètres passés au modèle
 // Balise placée dans une boucle DOCUMENTS et appelée dans un modèle <media>
 // Les paramètres taille, hauteur, largeur, alt et titre sont récupérés dans l'environnement.
-// Exemple de syntaxe : 
+// Exemple de syntaxe :
 // #MEDIA_IMAGE_RETAILLEE{#LOGO_DOCUMENT} ou #MEDIA_IMAGE_RETAILLEE{#URL_DOCUMENT}
 function balise_MEDIA_IMAGE_RETAILLEE_dist($p) {
 	$image = interprete_argument_balise(1,$p);
@@ -169,28 +169,28 @@ function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$args,$sql_titre,$sql_type
 	}
 
 	$src_relative = $src;
-    
+
 	if(!preg_match('`^https?://`i',$src,$matches)){
 		$src = realpath($src);
 	}
-	
+
 	spip_log("src=$src","modeles_media");
 
 	$src_imgsize = str_replace('https://', 'http://', $src); // No https for getimagesize
 	list($width, $height) = @getimagesize($src_imgsize);
-	
+
 	// hauteur ou largeur en relatif
 	if (substr(trim($hauteur),-1)=='%' || substr(trim($largeur),-1)=='%') {
 		if (substr(trim($hauteur),-1)=='%')
 			$hauteur = trim($hauteur);
 		else
 			$hauteur = "auto";
-		
+
 		if (substr(trim($largeur),-1)=='%')
 			$largeur = trim($largeur);
 		else
 			$largeur = "auto";
-		
+
 		$img = "<img src=\"$src_relative\" height=\"$hauteur\" width=\"$largeur\" />";
 	} else {
 		// hauteur du redimensionnement
@@ -210,7 +210,7 @@ function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$args,$sql_titre,$sql_type
 		elseif (in_array($taille,array('icone','petit','moyen','grand')))
 			$largeur = $GLOBALS['meta']['media_taille_'.$taille.'_largeur'];
 		elseif (is_numeric($taille) && intval($taille)>0)
-			$largeur = intval($taille); 
+			$largeur = intval($taille);
 		elseif ($GLOBALS['meta']['media_taille_defaut_largeur'] && is_null($args['hauteur']))
 			$largeur = $GLOBALS['meta']['media_taille_defaut_largeur'];
 		else
@@ -240,7 +240,7 @@ function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$args,$sql_titre,$sql_type
 // Calcule le lien, si lien demandé, sur le document
 // Balise placée dans une boucle DOCUMENTS et appelée dans un modèle <media>
 // Les paramètres lien, titre_lien et sont récupérés dans l'environnement.
-// Exemple de syntaxe : 
+// Exemple de syntaxe :
 // #MEDIA_LIEN{#LOGO_DOCUMENT} ou #MEDIA_LIEN{#MEDIA_IMAGE_RETAILLEE{#LOGO_DOCUMENT}}
 function balise_MEDIA_LIEN_dist($p) {
 	$objet = interprete_argument_balise(1,$p);
@@ -291,7 +291,7 @@ function calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$url_docume
 // Renvoie la taille du fichier après redimensionnement si besoin
 // Balise placée dans une boucle DOCUMENTS et appelée dans un modèle <media>
 // Les paramètres taille, hauteur et largeur sont récupérés dans l'environnement.
-// Exemple de syntaxe : 
+// Exemple de syntaxe :
 // #MEDIA_TAILLE{largeur} ou #MEDIA_TAILLE{hauteur}
 function balise_MEDIA_TAILLE_dist($p) {
 	$dim = interprete_argument_balise(1,$p);
@@ -305,7 +305,7 @@ function calculer_balise_MEDIA_TAILLE($dim,$args,$sql_largeur,$sql_hauteur){
 	$taille = isset($args['taille']) ? $args['taille'] : '0';
 	$hauteur = isset($args['hauteur']) ? $args['hauteur'] : '0';
 	$largeur = isset($args['largeur']) ? $args['largeur'] : '0';
-	
+
 	$hauteur_defaut = array(
 		'icone' => 52,
 		'petit' => 90,
@@ -335,7 +335,7 @@ function calculer_balise_MEDIA_TAILLE($dim,$args,$sql_largeur,$sql_hauteur){
 		else
 			$sql_largeur = 640;
 	}
-	
+
 	// Hauteur visée (on peut avoir passé une hauteur en %)
 	if (substr(trim($hauteur),-1)=='%')
 		$hauteur = trim($hauteur);
@@ -372,7 +372,7 @@ function calculer_balise_MEDIA_TAILLE($dim,$args,$sql_largeur,$sql_hauteur){
 	elseif ($sql_hauteur > $hauteur || $sql_largeur > $largeur) {
 		$ratio = max ($sql_hauteur/$hauteur,$sql_largeur/$largeur);
 		$t = array('largeur' => round($sql_largeur/$ratio), 'hauteur' => round($sql_hauteur/$ratio));
-	} else 
+	} else
 		$t = array('largeur' => $sql_largeur, 'hauteur' => $sql_hauteur);
 	return $dim ? $t[$dim] : $t;
 }
