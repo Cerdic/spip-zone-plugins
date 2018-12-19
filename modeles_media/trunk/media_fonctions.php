@@ -191,7 +191,7 @@ function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$args,$sql_titre,$sql_type
 		else
 			$largeur = "auto";
 
-		$img = "<img src=\"$src_relative\" height=\"$hauteur\" width=\"$largeur\" />";
+		$img = "<img src=\"$src_relative\" style=\"height:$hauteur; width:$largeur\" width=\"$width\" height=\"$height\" />";
 	} else {
 		// hauteur du redimensionnement
 		if (is_numeric($hauteur) && intval($hauteur)>0)
