@@ -599,36 +599,22 @@ function saisies_set_request_null_recursivement($saisie) {
 
 /**
  * Vérifie qu'on tente pas de faire executer du code PHP en utilisant afficher_si.
- * Interdit les ; et les $ sauf si entre guillemets.
+ * N'importe quoi autorisé entre @@ et "" et ''
+ * Liste de mot clé autorisé en dehors
  * @param string $condition
  * @return bool true si usage légitime, false si tentative d'execution de code PHP
  */
 function saisies_verifier_securite_afficher_si($condition) {
-	$interdits = array(";","$","sql","spip");
-	$presence = 0;
-	foreach ($interdits as $int) {
-		if (strstr($condition, $int)) {
-			$presence++;
-		}
-	}
-	// pas de chaine interdite, a priori safe
-	if (!$presence) {
-		return true;
-	}
+	$autoriser_hors_guillemets = array("!", "IN", "\(", "\)", "=", "\s", "&", "\|");
+	$autoriser_hors_guillemets = "#(".implode($autoriser_hors_guillemets, "|").")#m";
 
-	// pas de guillemet ou de @, alors ca pue
-	if (strstr($condition, '"') == false and strstr($condition, "'") == false and strstr($condition, "@") == false) {
+	var_dump($autoriser_hors_guillemets);
+	$entre_guillemets = "#(?<guillemet>(^\\\)?(\"|'|@))(.*)(\k<guillemet>)#mU"; // trouver tout ce qu'il y entre guillemet, sauf si les guillemets sont échapés
+	$condition = preg_replace($entre_guillemets, "", $condition);//Supprimer tout ce qu'il y a entre guillement
+	$condition = preg_replace($autoriser_hors_guillemets, "", $condition);//Supprimer tout ce qui est autorisé hors guillemets
+	var_dump($condition);
+	if ($condition) {//S'il restre quelque chose, c'est pas normal
 		return false;
-	}
-
-	$regexp = "#(?<guillemet>(^\\\)?(\"|'|@))(.*)(\k<guillemet>)#mU"; // trouver tout ce qu'il y entre guillemet, sauf si les guillemets sont échapés
-	$condition = preg_replace($regexp, "", $condition);//Supprimer tout ce qu'il y a entre guillement
-
-	// il reste encore des caractères interdit alors qu'on a enlevé les guillemets, ca pue vraiment
-	foreach ($interdits as $int) {
-		if (strstr($condition, $int)) {
-			return false;
-		}
 	}
 	//Sinon c'est que c'est bon
 	return true;
