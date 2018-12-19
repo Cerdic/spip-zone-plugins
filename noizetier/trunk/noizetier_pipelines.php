@@ -61,14 +61,20 @@ function noizetier_recuperer_fond($flux) {
 					}
 
 					// On détermine si on est en présence d'un objet ou d'une page (ou composition).
+					// Attention même s'il s'agit d'un objet, il n'y a pas forcément des noisettes propres à celui-ci, dans ce cas on se rabat sur les noisettes de la page.
 					// -- recherche en priorité d'une correspondance d'objet précis
 					// -- ajout de l'id_conteneur dans le contexte
+					// Y a-t-il des noisettes propres à l'objet ?
 					include_spip('inc/noizetier_conteneur');
-					if ((isset($flux['args']['contexte']['type-page'])
+					include_spip('inc/noizetier_objet');
+					if (
+						(isset($flux['args']['contexte']['type-page'])
 						and ($objet = $flux['args']['contexte']['type-page'])
 						and ($cle_objet = id_table_objet($objet))
 						and (isset($flux['args']['contexte'][$cle_objet]))
-						and ($id_objet = intval($flux['args']['contexte'][$cle_objet])))) {
+						and ($id_objet = intval($flux['args']['contexte'][$cle_objet])))
+						and $compteurs_noisette = noizetier_objet_compter_noisettes($objet, $id_objet)
+					) {
 						// C'est un objet.
 						$est_objet = true;
 						// -- identification de l'objet
@@ -78,8 +84,6 @@ function noizetier_recuperer_fond($flux) {
 						$contexte['id_conteneur'] = noizetier_conteneur_composer($contexte, $bloc);
 						// -- identification du bloc et des compteurs de noisettes de chaque bloc de l'objet.
 						$contexte['bloc'] = $bloc;
-						include_spip('inc/noizetier_objet');
-						$compteurs_noisette = noizetier_objet_compter_noisettes($objet, $id_objet);
 					} else {
 						// C'est une page ou une composition.
 						$est_objet = false;
