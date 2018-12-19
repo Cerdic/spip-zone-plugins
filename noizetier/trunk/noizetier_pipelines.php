@@ -64,7 +64,6 @@ function noizetier_recuperer_fond($flux) {
 					// Attention même s'il s'agit d'un objet, il n'y a pas forcément des noisettes propres à celui-ci, dans ce cas on se rabat sur les noisettes de la page.
 					// -- recherche en priorité d'une correspondance d'objet précis
 					// -- ajout de l'id_conteneur dans le contexte
-					// Y a-t-il des noisettes propres à l'objet ?
 					include_spip('inc/noizetier_conteneur');
 					include_spip('inc/noizetier_objet');
 					if (
