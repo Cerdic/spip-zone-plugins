@@ -92,6 +92,10 @@
 			array (
 				0 => true,
 				1 => '(@checkbox_1@ IN "vendredi" && @checkbox_1@ !IN "samedi") || (@checkbox_1@ !IN "vendredi" && @checkbox_1@ IN "samedi")'
+			),
+			array (
+				0 => false,
+				1 => "@champ_1@ == ''\r\n == spip_log()"
 			)
 		);
 		return $essais;
