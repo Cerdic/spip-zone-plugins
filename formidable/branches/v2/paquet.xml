@@ -1,7 +1,7 @@
 <paquet
 	prefix="formidable"
 	categorie="communication"
-	version="2.15.7"
+	version="2.15.8"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/formidable-64.png"
@@ -33,7 +33,7 @@
 	<pipeline nom="optimiser_base_disparus" inclure="formidable_pipelines.php" />
 
 	<necessite nom="spip_bonux" compatibilite="[3.0.0;[" />
-	<necessite nom="saisies" compatibilite="[2.3.0;[" />
+	<necessite nom="saisies" compatibilite="[3.8.11;[" />
 	<necessite nom="verifier" compatibilite="[0.1.11;[" />
 	<necessite nom="yaml" compatibilite="[1.5.2;[" />
 	<necessite nom="facteur" compatibilite="[3.5.2;[" />

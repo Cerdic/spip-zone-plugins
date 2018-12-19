@@ -1,7 +1,7 @@
 <paquet
 	prefix="iextras"
 	categorie="outil"
-	version="3.5.3"
+	version="3.5.4"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/iextras-64.png"
@@ -22,7 +22,7 @@
 	<pipeline nom="saisies_construire_formulaire_config" inclure="inc/iextras.php" />
 
 	<necessite nom="cextras" compatibilite="[3.5.2;]" />
-	<necessite nom="saisies" compatibilite="[2.7.0;]" />
+	<necessite nom="saisies" compatibilite="[3.8.11;]" />
 	<necessite nom="verifier" compatibilite="[1.0.5;]" />
 	<necessite nom="yaml" compatibilite="[1.5.2;]" />
 
