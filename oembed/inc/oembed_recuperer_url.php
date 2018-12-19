@@ -35,6 +35,11 @@ function inc_oembed_recuperer_url($oembed_url, $url, $format) {
 		curl_setopt($c, CURLOPT_USERAGENT, $browser);
 		//curl_setopt($c, CURLOPT_SSLVERSION, 1);
 
+		// indiquer un referer : si jamais la diffusion du contenu est limitee au site, ca permet d'en recuperer les infos
+		// ou en tout cas ca donne plus de chance...
+		$referer = $GLOBALS['meta']['adresse_site'] . '/';
+		curl_setopt($c, CURLOPT_REFERER, $referer);
+
 		if (isset($GLOBALS['meta']['http_proxy']) and $GLOBALS['meta']['http_proxy']){
 			curl_setopt($c, CURLOPT_PROXY, $GLOBALS['meta']['http_proxy']);
 			if (isset($GLOBALS['meta']['http_noproxy'])){
@@ -65,6 +70,7 @@ function inc_oembed_recuperer_url($oembed_url, $url, $format) {
 	else {
 		spip_log('Requete oembed (recuperer_page) pour '.$url.' : '.$oembed_url, 'oembed.'._LOG_DEBUG);
 		include_spip('inc/distant');
+		// recuperer_page utilise par defaut l'adresse du site comme $referer
 		$data = recuperer_page($oembed_url);
 	}
 
