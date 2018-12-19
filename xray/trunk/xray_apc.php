@@ -262,6 +262,13 @@ if (!function_exists('cache_est_sessionne')) {
 	}
 }
 
+//
+// Ça enlève le préfixe non affiché plus le préfixe md5
+// et ça supprime le suffixe de session
+// MAIS ça ne supprime pas les suffixes /12354 ou /spip ou autres
+// qu'il y a pour les squelettes appelés en tant que pages
+// et qui viennent de la forme de l'url visible par l'internaute
+//
 function cache_get_squelette($cle) {
 	$squelette = substr(str_replace(XRAY_NEPASAFFICHER_DEBUTNOMCACHE, '', $cle), 33);
 	$squelette = preg_replace(XRAY_PATTERN_SESSION, '', $squelette);
@@ -1165,26 +1172,24 @@ EOB;
 		$cols = 7;
 		
 		echo '<form>
-			<input type="hidden" name="OB" value="'.$MYREQUEST['OB'].'">
-			<input type="hidden" name="exec" value="'.$MYREQUEST['exec'].'">
-			<input type="hidden" name="S_KEY" value="'.$MYREQUEST['S_KEY'].'">
-			<input type="hidden" name="TYPELISTE" value="'.$MYREQUEST['TYPELISTE'].'">
-		<b>Affichage extra:</b> 
-		<select name=EXTRA  onChange="form.submit()">
-			<option value="" ', $MYREQUEST['EXTRA'] == '' ? ' selected' : '', '></option> 
-			<option value=CONTEXTE ', $MYREQUEST['EXTRA'] == 'CONTEXTE' ? ' selected' : '', '>Contexte</option>
-			<option value=CONTEXTES_SPECIAUX ', $MYREQUEST['EXTRA'] == 'CONTEXTES_SPECIAUX' ? ' selected' : '', '>Contextes spécifiques</option>
-			<option value=HTML_COURT ', $MYREQUEST['EXTRA'] == 'HTML_COURT' ? ' selected' : '', '>HTML (...)</option>
-			<option value=INFO_AUTEUR ', $MYREQUEST['EXTRA'] == 'INFO_AUTEUR' ? ' selected' : '', '>Infos auteur</option>
-			<option value=INFO_OBJET_SPECIAL ', $MYREQUEST['EXTRA'] == 'INFO_OBJET_SPECIAL' ? ' selected' : '', '>Infos '.XRAY_OBJET_SPECIAL.'</option>
-			<option value=INVALIDEURS ', $MYREQUEST['EXTRA'] == 'INVALIDEURS' ? ' selected' : '', '>Invalideurs</option>
-			<option value=INVALIDEURS_SPECIAUX ', $MYREQUEST['EXTRA'] == 'INVALIDEURS_SPECIAUX' ? ' selected' : '', '>Invalideurs spécifiques</option>
-			<option value=INCLUSIONS ', $MYREQUEST['EXTRA'] == 'INCLUSIONS' ? ' selected' : '', '>&lt;INCLURE&gt;</option>
-			<option value=MACROSESSIONS ', $MYREQUEST['EXTRA'] == 'MACROSESSIONS' ? ' selected' : '', '>#_SESSION</option>
-			<option value=MACROAUTORISER ', $MYREQUEST['EXTRA'] == 'MACROAUTORISER' ? ' selected' : '', '>#_AUTORISER_SI</option>
-		</select>';
-	
-		echo "<span style='margin-left: 2em; '></span>";
+		<input type="hidden" name="OB" value="'.$MYREQUEST['OB'].'">
+		<input type="hidden" name="exec" value="'.$MYREQUEST['exec'].'">
+		<input type="hidden" name="S_KEY" value="'.$MYREQUEST['S_KEY'].'">
+		<input type="hidden" name="TYPELISTE" value="'.$MYREQUEST['TYPELISTE'].'">
+		<p style="margin-bottom:10px">
+			<b style="margin-bottom:5px">Lister :</b>
+			<span style="margin-left: 1em; "></span>
+			<select name=COUNT onChange="form.submit()" dir="rtl">
+				<option value=10 ', $MYREQUEST['COUNT'] == '10' ? ' selected' : '', ' style="text-align: right">10</option>
+				<option value=20 ', $MYREQUEST['COUNT'] == '20' ? ' selected' : '', '>20</option>
+				<option value=50 ', $MYREQUEST['COUNT'] == '50' ? ' selected' : '', '> 50</option>
+				<option value=100', $MYREQUEST['COUNT'] == '100' ? ' selected' : '', '>100</option>
+				<option value=150', $MYREQUEST['COUNT'] == '150' ? ' selected' : '', '>150</option>
+				<option value=250', $MYREQUEST['COUNT'] == '250' ? ' selected' : '', '>250</option>
+				<option value=500', $MYREQUEST['COUNT'] == '500' ? ' selected' : '', '>500</option>
+				<option value=0  ', $MYREQUEST['COUNT'] == '0' ? ' selected' : '', '>Tous</option>
+			</select>&nbsp;&nbsp;';
+
 		if ($MYREQUEST['TYPELISTE']=='squelettes') {
 			echo '<a href="'.parametre_url($MY_SELF, 'TYPELISTE', 'caches').'">Caches</a> 
 			| <b>Squelettes</b>';
@@ -1193,8 +1198,27 @@ EOB;
 			echo '<b>Caches</b> 
 			| <a href="'.parametre_url($MY_SELF, 'TYPELISTE', 'squelettes').'">Squelettes</a>';
 		};
-
-		echo '<p><b>Types cache:</b> 
+		echo '
+			<span style="margin-left: 1em; "></span>
+			<b>Afficher :</b> 
+			<select name=EXTRA  onChange="form.submit()">
+				<option value="" ', $MYREQUEST['EXTRA'] == '' ? ' selected' : '', '></option> 
+				<option value=CONTEXTE ', $MYREQUEST['EXTRA'] == 'CONTEXTE' ? ' selected' : '', '>Contexte</option>
+				<option value=CONTEXTES_SPECIAUX ', $MYREQUEST['EXTRA'] == 'CONTEXTES_SPECIAUX' ? ' selected' : '', '>Contextes spécifiques</option>
+				<option value=HTML_COURT ', $MYREQUEST['EXTRA'] == 'HTML_COURT' ? ' selected' : '', '>HTML (...)</option>
+				<option value=INFO_AUTEUR ', $MYREQUEST['EXTRA'] == 'INFO_AUTEUR' ? ' selected' : '', '>Infos auteur</option>
+				<option value=INFO_OBJET_SPECIAL ', $MYREQUEST['EXTRA'] == 'INFO_OBJET_SPECIAL' ? ' selected' : '', '>Infos '.XRAY_OBJET_SPECIAL.'</option>
+				<option value=INVALIDEURS ', $MYREQUEST['EXTRA'] == 'INVALIDEURS' ? ' selected' : '', '>Invalideurs</option>
+				<option value=INVALIDEURS_SPECIAUX ', $MYREQUEST['EXTRA'] == 'INVALIDEURS_SPECIAUX' ? ' selected' : '', '>Invalideurs spécifiques</option>
+				<option value=INCLUSIONS ', $MYREQUEST['EXTRA'] == 'INCLUSIONS' ? ' selected' : '', '>&lt;INCLURE&gt;</option>
+				<option value=MACROSESSIONS ', $MYREQUEST['EXTRA'] == 'MACROSESSIONS' ? ' selected' : '', '>#_SESSION</option>
+				<option value=MACROAUTORISER ', $MYREQUEST['EXTRA'] == 'MACROAUTORISER' ? ' selected' : '', '>#_AUTORISER_SI</option>
+			</select>
+			</p>';
+	
+		echo '<p><b>Filtrer caches : </b> 
+		<span style="margin-left: 1em; "></span>
+		Types
 		<select name=TYPECACHE  onChange="form.submit()">
 			<option value=ALL', $MYREQUEST['TYPECACHE'] == 'ALL' ? ' selected' : '', '>Tous</option>
 			<option value=NON_SESSIONS', $MYREQUEST['TYPECACHE'] == 'NON_SESSIONS' ? ' selected' : '', '>Non sessionnés</option>
@@ -1204,19 +1228,10 @@ EOB;
 			<option value=SESSIONS_TALON', $MYREQUEST['TYPECACHE'] == 'SESSIONS_TALON' ? ' selected' : '', '>Talons de session</option>
 			<option value=FORMULAIRES', $MYREQUEST['TYPECACHE'] == 'FORMULAIRES' ? ' selected' : '', '>Formulaires</option>
 		</select>
-		<select name=COUNT onChange="form.submit()">
-			<option value=10 ', $MYREQUEST['COUNT'] == '10' ? ' selected' : '', '>Top 10</option>
-			<option value=20 ', $MYREQUEST['COUNT'] == '20' ? ' selected' : '', '>Top 20</option>
-			<option value=50 ', $MYREQUEST['COUNT'] == '50' ? ' selected' : '', '>Top 50</option>
-			<option value=100', $MYREQUEST['COUNT'] == '100' ? ' selected' : '', '>Top 100</option>
-			<option value=150', $MYREQUEST['COUNT'] == '150' ? ' selected' : '', '>Top 150</option>
-			<option value=250', $MYREQUEST['COUNT'] == '250' ? ' selected' : '', '>Top 250</option>
-			<option value=500', $MYREQUEST['COUNT'] == '500' ? ' selected' : '', '>Top 500</option>
-			<option value=0  ', $MYREQUEST['COUNT'] == '0' ? ' selected' : '', '>All</option>
-		</select>
+		<span style="margin-left: 1em; "></span>
 		&nbsp;&nbsp;&nbsp;
-		<span title="REGEXP">Chercher:</span> <input name=SEARCH value="', $MYREQUEST['SEARCH'], '" type=text size=25/>
-		<b>Dans:</b>
+		<span title="REGEXP">avec</span> <input name=SEARCH value="', $MYREQUEST['SEARCH'], '" type=text size=25/>
+		<b>dans</b>
 		<select name=WHERE onChange="form.submit()">
 			<option value="" ', $MYREQUEST['WHERE'] == '' ? ' selected' : '', '>Noms des caches</option>
 			<option value="ALL" ', $MYREQUEST['WHERE'] == 'ALL' ? ' selected' : '', '>Tout le contenu</option>
@@ -1225,8 +1240,13 @@ EOB;
 			<option value="CONTEXTE" ', $MYREQUEST['WHERE'] == 'CONTEXTE' ? ' selected' : '', '>Contexte</option>
 		</select>
 		&nbsp;&nbsp;&nbsp;
-		<input type=submit value="GO!">
-		</p></form></div>
+		<input type=submit id="ListSubmit" name="ListSubmit" value="List">';
+
+		if (plugin_est_actif('cachelab'))
+			echo '<input type=submit id="DelSubmit"  name="DelSubmit" value="X" style="color:red">';
+
+		echo '</p>
+		</form>
 		';
 		
 		if (isset($MYREQUEST['SEARCH'])) {
@@ -1247,7 +1267,7 @@ EOB;
 				<table cellspacing=0>
 					<tbody><tr>';
 		if ($MYREQUEST['TYPELISTE']=='squelettes')
-			echo '<th align="left">', sortheader('S', 'Squelettes').'</th>';
+			echo '<th align="left">', sortheader('S', 'Squelettes').'</th><th></th>';
 		else {
 			echo '<th align="left">Caches - ', sortheader('S', 'tri par Squelette').'</th>',
 				'<th>', sortheader('H', 'Hits'), '</th>', 
@@ -1377,42 +1397,47 @@ EOB;
 					and (!$also_required 
 						or ($also_required($entry['info'], $data)== $also_required_bool))
 					) {
-
-					if ($MYREQUEST['TYPELISTE']=='squelettes') {
-
+					$descriptif = "%s caches listés, sur un total de %s";
+					if ($_REQUEST['DelSubmit']=='X') {
+						cachelab_cibler('del', array ('chemin'=>$entry['info']));
+						$i++;
+						$descriptif = "%s caches effacés sur un total de %s caches";
+						continue;
+					}
+					elseif ($MYREQUEST['TYPELISTE']=='squelettes') {
+						$descriptif = "%s squelettes listés, pour un total de %s caches";
 						$joli = array();
 						if (!is_array($data)) {	// textwheel etc
 							continue;
 						}
-						elseif (($MYREQUEST['TYPECACHE'] == 'SESSIONS_TALON')
-								or !isset($data['source'])) { // talons
-							// ya pas de 'source' dans les talons, c'est la clé qui donne le squelette
-							$s = cache_get_squelette($entry['info']);
-							$squelette = find_in_path($s.'.html');
+						$radical = cache_get_squelette($entry['info']);
 
-							// Les dossiers de squelettes déclarés comme public dans paquet.xml
-							// ne sont pas utilisés par find_in_path dans le privé
-							if (!$squelette)
-								$squelette = $joli = $s." (échec find_in_path : déclarez le chemin (depuis la racine du site) de vos dossiers publics de squelettes dans GLOBALS['dossier_squelette']) ";
-							else
-								$squelette = $joli['source'] = substr($squelette, 3);	// On enlève ../ 
-						}
-						else {	// cas normal : vrai cache d'un squelette spip
-							$squelette = $joli['source'] = $data['source'];
-						}
+						if (isset($data['source']))
+							$source = $data['source'];
+						else
+							// talons (sans 'source')
+							// Le radical est relatif aux CHEMINs SPIP
+							// Pour le lien il faut l'adresse systeme
+							$source = find_in_path($radical.'.html');
 
-						if (in_array($squelette, $liste_squelettes)) {	// déjà listé
+						if (array_key_exists($radical, $liste_squelettes)) {	// déjà listé
+							$liste_squelettes[$radical]['nb']++;
+							if (!$liste_squelettes[$radical]['source'])	// au cas où
+								$liste_squelettes[$radical]['source'] = $source;
 							continue;
 						}
 
 						// squelette pas encore listé
-						$i++;
-						$liste_squelettes[] = $squelette;
-						echo "<tr class='tr-".($i % 2)."'><td colspan='7'>$i) ".joli_cache($joli)."</td></tr>";
-						if ($i == $MYREQUEST['COUNT'])
-							break;
+						if ($i < $MYREQUEST['COUNT']) {
+							$i++;
+							$liste_squelettes[$radical] = array('nb'=>1, 'source'=>$source);
+						}
+						// Même aprés avoir le bon compte à afficher, on continue à scanner les caches 
+						// pour avoir à la fin le bon nombre de caches par squelettes
 						continue;
-					}
+					} // Fin du cas "on liste les squelettes"
+					
+					// Maintenant on liste les caches
 					$i++;
 					$sh = md5($entry["info"]);
 					
@@ -1614,17 +1639,34 @@ EOB;
 		} else { // En l'absence de tout cache
 			echo '<tr class=tr-0><td class="center" colspan=', $cols, '><i>No data</i></td></tr>';
 		}
-		echo <<< EOB
-		</tbody></table>
-EOB;
-		
-		if ($list && $i < count($list)) {
-			echo "<a href=\"$MY_SELF", "&COUNT=0\"><i>", count($list) - $i, ' more available...</i></a>';
+		// Si on liste les squelettes, on a récolté et compté mais encore rien affiché
+		if ($MYREQUEST['TYPELISTE']=='squelettes') {
+			$i=1;
+			foreach ($liste_squelettes as $radical => $s) {
+				$squel_caches = parametre_url(
+							parametre_url($self_pour_lien, 'SEARCH', $radical),
+							'TYPELISTE', 'caches');
+				// Les dossiers de squelettes déclarés comme public dans paquet.xml
+				// ne sont pas utilisés par find_in_path dans le privé
+
+				echo "<tr class='tr-".($i % 2)."'>
+					<td>$i) ";
+				if (!$s['source'])
+					echo $radical.' <span title="Parfois la forme du squelette n’est pas prévue par CacheLab, mais avez-vous déclaré le chemin de vos dossiers publics de squelettes dans GLOBALS[\'dossier_squelette\'] ?">(échec find_in_path)</span>';
+				else 
+					echo joli_cache(array('source'=>$s['source']));
+				echo "</td>
+					<td><a href='$squel_caches'>[{$s['nb']} caches]</a></td>
+				</tr>";
+				$i++;
+			}
 		}
-		
-		echo <<< EOB
-		</div>
-EOB;
+		echo "
+		</tbody></table>
+		</div>";
+
+		printf("<p>$descriptif</p>", $i, count($list));
+
 		break;
 	
 	// -----------------------------------------------
