@@ -395,6 +395,11 @@ function saisies_verifier_afficher_si($saisies, $env=NULL) {
 	foreach ($saisies as $cle => $saisie) {
 		if (isset($saisie['options']['afficher_si'])) {
 			$condition = $saisie['options']['afficher_si'];
+			// Si tentative de log malicieux, on rejete
+			if (!saisies_verifier_securite_afficher_si($condition)) {
+				spip_log("Afficher_si malicieuse : $condition", "saisies"._LOG_CRITIQUE);
+				$condition = '$ok';
+			}
 			// On gère le cas @plugin:non_plugin@
 			preg_match_all('#@plugin:(.+)@#U', $condition, $matches);
 			foreach ($matches[1] as $plug) {
@@ -426,4 +431,24 @@ function saisies_verifier_afficher_si($saisies, $env=NULL) {
 	return $saisies;
 }
 
-?>
+
+/**
+ * Vérifie qu'on tente pas de faire executer du code PHP en utilisant afficher_si.
+ * N'importe quoi autorisé entre @@ et "" et ''
+ * Liste de mot clé autorisé en dehors
+ * @param string $condition
+ * @return bool true si usage légitime, false si tentative d'execution de code PHP
+ */
+function saisies_verifier_securite_afficher_si($condition) {
+	$autoriser_hors_guillemets = array("!", "IN", "\(", "\)", "=", "\s", "&&", "\|\|");
+	$autoriser_hors_guillemets = "#(".implode($autoriser_hors_guillemets, "|").")#m";
+
+	$entre_guillemets = "#(?<guillemet>(^\\\)?(\"|'|@))(.*)(\k<guillemet>)#mU"; // trouver tout ce qu'il y entre guillemet, sauf si les guillemets sont échapés
+	$condition = preg_replace($entre_guillemets, "", $condition);//Supprimer tout ce qu'il y a entre guillement
+	$condition = preg_replace($autoriser_hors_guillemets, "", $condition);//Supprimer tout ce qui est autorisé hors guillemets
+	if ($condition) {//S'il restre quelque chose, c'est pas normal
+		return false;
+	}
+	//Sinon c'est que c'est bon
+	return true;
+}
