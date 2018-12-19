@@ -605,7 +605,7 @@ function saisies_set_request_null_recursivement($saisie) {
  * @return bool true si usage légitime, false si tentative d'execution de code PHP
  */
 function saisies_verifier_securite_afficher_si($condition) {
-	$autoriser_hors_guillemets = array("!", "IN", "\(", "\)", "=", "\s", "&", "\|");
+	$autoriser_hors_guillemets = array("!", "IN", "\(", "\)", "=", "\s", "&&", "\|\|");
 	$autoriser_hors_guillemets = "#(".implode($autoriser_hors_guillemets, "|").")#m";
 
 	$entre_guillemets = "#(?<guillemet>(^\\\)?(\"|'|@))(.*)(\k<guillemet>)#mU"; // trouver tout ce qu'il y entre guillemet, sauf si les guillemets sont échapés

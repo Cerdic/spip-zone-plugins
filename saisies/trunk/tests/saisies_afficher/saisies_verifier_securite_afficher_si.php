@@ -80,7 +80,15 @@
 			array (
 				0 => false,
 				1 => 'sql_insert() == "1"'
-			)
+			),
+			array (
+				0 => true,
+				1 => '@champ_1@ == "a" && @champ_2@ == "b"'
+			),
+			array (
+				0 => true,
+				1 => "@champ_1@ == 'a' || @champ_2@ == 'b'"
+			),
 		);
 		return $essais;
 	}
