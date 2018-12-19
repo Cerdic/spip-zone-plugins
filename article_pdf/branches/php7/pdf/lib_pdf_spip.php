@@ -32,7 +32,7 @@ function Header()
 	//Police helvetica gras 8
 	$this->SetFont('helvetica','B',12);
 	$this->SetTextColor(0,0,0);
-
+	$titre = $this->unhtmlentities($titre);
 	$this->Cell(0,$this->tMargin/2, $titre ,0,0,'C');
 
 	// $this->tMargin = marge du haut, définie dans FPDF
@@ -92,7 +92,7 @@ function GenerateTitlePage()
 
 
 	//Surtitre (type du document)
-	$this->unhtmlentities($surtitre);
+	$surtitre = $this->unhtmlentities($surtitre);
 	$this->SetXY(20,92);
 	$this->SetFont('courier','B',14);
 	$this->MultiCell(170,6,$surtitre,0,'C',0);
@@ -101,13 +101,14 @@ function GenerateTitlePage()
 	//Titre centré
 	$this->SetXY(20,100);
 	$this->SetFont('helvetica','B',32);
-	$this->unhtmlentities($titre);
+	$titre = $this->unhtmlentities($titre);
 	$this->MultiCell(170,20,$titre,0,'C',0);
 
 
 	// Rubriques
 	$this->Ln(2);
 	$this->SetFont('helvetica','',8);
+	$yahoo = $this->unhtmlentities($yahoo);
 	$this->MultiCell(0,5,$yahoo,0,'C',0);
 
 	// Logo
@@ -208,7 +209,7 @@ function BuildDocument()
 
 function SetCopyright($copyright)
 {
-	$this->copyright=$copyright;
+	$this->copyright= $this->unhtmlentities($copyright);
 }
 
 

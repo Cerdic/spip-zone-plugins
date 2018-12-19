@@ -600,6 +600,8 @@ function SetStyle($tag,$enable,$size=0)
 function PutLink($Link,$Text)
 {
 	//Place un hyperlien
+	$Text = $this->unhtmlentities($Text);
+	$Link = $this->unhtmlentities($Link);
 	$this->SetTextColor(0,0,255);
 	$this->SetStyle('U',true);
 	$this->Write(5,$Text,$Link);
