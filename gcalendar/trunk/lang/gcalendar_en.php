@@ -19,7 +19,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'gcalendar_titre' => 'Gcalendar',
 
 	// T
-	'titre_page_configurer_gcalendar' => Configuring the Plugin GCalendar
+	'titre_page_configurer_gcalendar' => 'Configuring the Plugin GCalendar'
 );
-
-?>
