@@ -339,10 +339,10 @@ function saisies_verifier_valeurs_acceptables($saisies, $erreurs) {
 					spip_log("Tentative de poste de valeur innaceptable pour $saisie de type $type. Valeur postée : ".print_r(_request($saisie), true), "saisies"._LOG_AVERTISSEMENT);
 				}
 			} else {
-				spip_log("Pas de fonction de vérification pour la saisie $saisie de type $type", "saisies"._LOG_AVERTISSEMENT);
+				spip_log("Pas de fonction de vérification pour la saisie $saisie de type $type", "saisies"._LOG_INFO);
 			}
 		} else {
-			spip_log("Pas de fonction de vérification pour la saisie $saisie de type $type", "saisies"._LOG_AVERTISSEMENT);
+			spip_log("Pas de fonction de vérification pour la saisie $saisie de type $type", "saisies"._LOG_INFO);
 		}
 	}
 	return $erreurs;
