@@ -89,6 +89,10 @@
 				0 => true,
 				1 => "@champ_1@ == 'a' || @champ_2@ == 'b'"
 			),
+			array (
+				0 => true,
+				1 => '(@checkbox_1@ IN "vendredi" && @checkbox_1@ !IN "samedi") || (@checkbox_1@ !IN "vendredi" && @checkbox_1@ IN "samedi")'
+			)
 		);
 		return $essais;
 	}
