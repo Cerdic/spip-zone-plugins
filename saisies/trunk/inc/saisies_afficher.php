@@ -608,11 +608,9 @@ function saisies_verifier_securite_afficher_si($condition) {
 	$autoriser_hors_guillemets = array("!", "IN", "\(", "\)", "=", "\s", "&", "\|");
 	$autoriser_hors_guillemets = "#(".implode($autoriser_hors_guillemets, "|").")#m";
 
-	var_dump($autoriser_hors_guillemets);
 	$entre_guillemets = "#(?<guillemet>(^\\\)?(\"|'|@))(.*)(\k<guillemet>)#mU"; // trouver tout ce qu'il y entre guillemet, sauf si les guillemets sont échapés
 	$condition = preg_replace($entre_guillemets, "", $condition);//Supprimer tout ce qu'il y a entre guillement
 	$condition = preg_replace($autoriser_hors_guillemets, "", $condition);//Supprimer tout ce qui est autorisé hors guillemets
-	var_dump($condition);
 	if ($condition) {//S'il restre quelque chose, c'est pas normal
 		return false;
 	}
