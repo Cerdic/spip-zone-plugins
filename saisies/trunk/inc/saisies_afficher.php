@@ -492,7 +492,7 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 			// Si tentative de log malicieux, on rejete
 			if (!saisies_verifier_securite_afficher_si($condition)) {
 				spip_log("Afficher_si malicieuse : $condition", "saisies"._LOG_CRITIQUE);
-				$condition = '';
+				$condition = '$ok';
 			}
 			// Est-ce uniquement au remplissage?
 			if (isset($saisie['options']['afficher_si_remplissage_uniquement'])
