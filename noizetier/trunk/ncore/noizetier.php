@@ -280,7 +280,7 @@ function noizetier_noisette_changer_conteneur($plugin, $description, $id_contene
 	// On rajoute la description à son emplacement destination en prenant soin de modifier les index id_conteneur,
 	// conteneur et rang_noisette qui doivent représenter le conteneur destination.
 	include_spip('ncore/ncore');
-	$description['conteneur'] = ncore_conteneur_construire($plugin, $id_conteneur);
+	$description['conteneur'] = serialize(ncore_conteneur_construire($plugin, $id_conteneur));
 	$description['id_conteneur'] = $id_conteneur;
 	$description['rang_noisette'] = $rang;
 

@@ -27,7 +27,6 @@ function action_deplacer_noisette_ajax_dist() {
 
 	//include_spip('inc/autoriser');
 	include_spip('inc/ncore_noisette');
-	include_spip('action/editer_objet');
 
 	$id_noisette              = _request('_id_noisette');
 	$rang                     = intval(_request('rang'));
@@ -36,19 +35,8 @@ function action_deplacer_noisette_ajax_dist() {
 	$done                     = false;
 	$success                  = $errors = array();
 
-	// Rustine temporaire : l'API de déplacement ne prévoit pas de changement de conteneur
-	// Dans ce cas on modifie le conteneur avec un rang libre en amont afin de forcer le changement
-//	$nouveau_conteneur = ($id_conteneur_destination != $id_conteneur_origine);
-//	if ($nouveau_conteneur) {
-//		$set = array(
-//			'id_conteneur'  => $id_conteneur_destination,
-//			'rang_noisette' => 9999,
-//		);
-//		$update = objet_modifier('noisette', $id_noisette, $set);
-//	}
-
 	$deplacer = noisette_deplacer('noizetier', $id_noisette, $id_conteneur_destination, $rang);
-	$deplacer = true;
+	$deplacer = true; // la fonction renvoie toujours false
 
 	if ($deplacer) {
 		$done = true;
