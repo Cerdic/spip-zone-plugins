@@ -1,9 +1,9 @@
 <paquet
 	prefix="gcalendar"
 	categorie="date"
-	version="2.0.0"
+	version="2.0.1"
 	etat="dev"
-	compatibilite="[3.0.1;3.0.*]"
+	compatibilite="[3.0.1;3.2.*]"
 	logo="prive/themes/spip/images/gcalendar-64.png"
 	documentation="https://contrib.spip.net/Plugin-Agenda-Google-pour-SPIP"
 	schema="1.0.0" 
