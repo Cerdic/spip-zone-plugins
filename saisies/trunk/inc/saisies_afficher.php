@@ -489,7 +489,12 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 	foreach ($saisies as $cle => $saisie) {
 		if (isset($saisie['options']['afficher_si'])) {
 			$condition = $saisie['options']['afficher_si'];
-
+			// Si tentative de log malicieux, on rejete
+			if (!saisies_verifier_securite_afficher_si($condition)) {
+				spip_log("Afficher_si malicieuse : $condition", "saisies"._LOG_CRITIQUE);
+				$condition = '';
+			}
+			$condition = saisies_verifier_securite_afficher_si($condition);
 			// Est-ce uniquement au remplissage?
 			if (isset($saisie['options']['afficher_si_remplissage_uniquement'])
 				and $saisie['options']['afficher_si_remplissage_uniquement']=='on'){
@@ -591,4 +596,32 @@ function saisies_set_request_null_recursivement($saisie) {
 			saisies_set_request_null_recursivement($sous_saisie);
 		}
 	}
+}
+
+/**
+ * Vérifie qu'on tente pas de faire executer du code PHP en utilisant afficher_si.
+ * Interdit les ; et les $ sauf si entre guillemets.
+ * @param string $condition
+ * @return bool true si usage légitime, false si tentative d'execution de code PHP
+ */
+function saisies_verifier_securite_afficher_si($condition) {
+	// pas de point virgule ni de $, a priori c'est safe (une seule instruction executable, or pour modifier la base, envoyer un mail, etc, il en faut au moins 2)
+	if (!strstr($condition, ";") and !strstr($condition, "$")) {
+		return true;
+	}
+
+	// point virgule ou dollar sans guillement? ca pue
+	if (strstr($condition, '"') == false and strstr($condition, "'") == false) {
+		return false;
+	}
+
+	$regexp = "#(?<guillemet>(^\\\)?(\"|'))(.*)(\k<guillemet>)#mU"; // trouver tout ce qu'il y entre guillemet, sauf si les guillemets sont échapés
+	$condition = preg_replace($regexp, "", $condition);//Supprimer tout ce qu'il y a entre guillement
+
+	// il reste encore des $ ou des ; alors qu'on a enlevé les guillemets, ca pue vraiment
+	if (strstr($condition, ";") or strstr($condition, "$")) {
+		return false;
+	}
+	//Sinon c'est que c'est bon
+	return true;
 }
