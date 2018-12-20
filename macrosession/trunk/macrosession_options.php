@@ -194,7 +194,7 @@ function balise__SESSION_dist($p) {
 */
 function balise__SESSION_SI_dist($p) {
 	// Appelé uniquement au recalcul
-	$p->code = V_OUVRE_PHP . 'if ('.compile_appel_macro_session($p, $champ).') { ' . V_FERME_PHP;
+	$p->code = V_OUVRE_PHP . 'if ('.compile_appel_macro_session($p).') { ' . V_FERME_PHP;
 	$p->interdire_scripts = false;
 	return $p;
 }
