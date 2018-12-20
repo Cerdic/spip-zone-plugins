@@ -23,10 +23,10 @@ class ConvertisseurImagesOptimiser extends Command {
 				'optimg' // abbréviation pas ouf pour ca
 			))
 			->addArgument(
-                'image',
-                InputArgument::OPTIONAL,
-                'Image à optimiser.'
-            )			
+				'image',
+				InputArgument::OPTIONAL,
+				'Image à optimiser.'
+			)
 			->addOption(
 				'source',
 				's',
@@ -55,10 +55,9 @@ class ConvertisseurImagesOptimiser extends Command {
 				'Compresser les images à 80%. Exemple : `spip optimg -c 80 mon_image.jpg`',
 				'0'
 			)
-
 		;
 	}
-
+	
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		global $spip_racine;
 		global $spip_loaded;
@@ -78,11 +77,11 @@ class ConvertisseurImagesOptimiser extends Command {
 				$output->writeln("<error>Votre installation de PHP doit pouvoir exécuter des commandes externes avec la fonction passthru().</error>");
 			}
 			// Si c'est bon on continue
-			else{				
+			else{
 				if(strlen($dest) > 1){
-					 $label_d=" dans $dest" ;
-					 if(!is_dir($dest))
-					 	mkdir($dest);
+					$label_d=" dans $dest" ;
+					if(!is_dir($dest))
+						mkdir($dest);
 				}
 				$param_d=" $dest" ;
 				if($resize > 0){
@@ -99,13 +98,13 @@ class ConvertisseurImagesOptimiser extends Command {
 				if($image){
 					$output->writeln("<info>C'est parti pour une petite optimisation d'image ${label_r}${label_d}/${label_c} !</info>");
 					passthru('plugins/convertisseur/scripts/optimg.sh ' . escapeshellarg($image) . $param_r . $param_d . $param_c);
-				}	
+				}
 				elseif($source){
 					$param_s = " $source" ;
 					$output->writeln("<info>C'est parti pour une petite optimisation des images de $source/ ${label_r}${label_d}/${label_c} !</info>");
-
+					
 					$fichiers_jpg = preg_files($source . "/", "\.(jpg|tif)$"); # ou ...
-	
+					
 					foreach($fichiers_jpg as $image){
 						
 						$path = explode("/", preg_replace(",^/,", "", dirname(str_replace($source, "", $image)))) ;
@@ -122,11 +121,11 @@ class ConvertisseurImagesOptimiser extends Command {
 							}
 						
 						$param_d=" $dpt";
-
+						
 						// Conversion imagemagick
 						passthru('plugins/convertisseur/scripts/optimg.sh ' . escapeshellarg($image) . $param_r . $param_d . $param_c);
 					}
-				}	
+				}
 			}
 		}
 		else{
