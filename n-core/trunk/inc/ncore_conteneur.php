@@ -31,11 +31,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function conteneur_identifier($plugin, $conteneur, $stockage = '') {
 
-	// Wrapper sur la fonction de service homonyme.
+	// Wrapper sur la fonction de service homonyme avec une vérification préalable
+	// pour éviter de le faire danschaque plugin utilisateur.
 	include_spip('ncore/ncore');
-	$identifiant = ncore_conteneur_identifier($plugin, $conteneur, $stockage);
+	$id_conteneur =  ncore_conteneur_verifier($plugin, $conteneur, $stockage)
+		? ncore_conteneur_identifier($plugin, $conteneur, $stockage)
+		: '';
 
-	return $identifiant;
+	return $id_conteneur;
 }
 
 /**
@@ -93,7 +96,7 @@ function conteneur_vider($plugin, $conteneur, $stockage = '') {
 	// Initialisation du retour
 	$retour = false;
 
-	if ($conteneur) {
+	if (ncore_conteneur_verifier($plugin, $conteneur, $stockage)) {
 		// On charge l'API de N-Core.
 		// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
 		include_spip('ncore/ncore');
