@@ -27,10 +27,11 @@ function critere_MAILSUBSCRIBERS_filtre_statut_subscription_dist($idb, &$boucles
 			$_mailsubscription_statut = $cle.".statut";
 		}
 	}
-	$boucle->where[] = "(($_id_mailsubscribinglist or $_statut=='prop')?'$_mailsubscription_statut':'$_mailsubscriber_statut').'!='.sql_quote('poubelle')";
+	$where_not_poubelle = "(($_id_mailsubscribinglist or $_statut=='prop')?'$_mailsubscription_statut':'$_mailsubscriber_statut').'!='.sql_quote('poubelle')";
+	$boucle->where[] = "((!$_statut or !in_array($_statut,array('all','poubelle')))?$where_not_poubelle:'1=1')";
 	$where = "(($_id_mailsubscribinglist or $_statut=='prop')?'$_mailsubscription_statut':'$_mailsubscriber_statut').'='.sql_quote($_statut)";
 	if ($crit->cond){
-		$where = "($_statut?$where:'1=1')";
+		$where = "(($_statut and $_statut!=='all')?$where:'1=1')";
 	}
 	$boucle->where[] = $where;
 	$boucles[$idb]->modificateur['criteres']['statut'] = true;

@@ -40,6 +40,9 @@ function newsletter_subscriber_dist($email, $options = array()) {
 		$id_mailsubscriber = $infos['id_mailsubscriber'];
 		$infos = mailsubscribers_informe_subscriber($infos);
 		$infos['url_admin'] = generer_url_entite($id_mailsubscriber, 'mailsubscriber');
+		if ($infos['email'] !== $email) {
+			$infos['url_admin'] = parametre_url($infos['url_admin'], 'email', $email);
+		}
 
 		// si on est dans le contexte d'une liste unique connue, modifier l'url_unsubscribe
 		if (isset($options['listes'])
