@@ -109,7 +109,7 @@ function get_apc_data($info, &$data_success) {
 	if (apcu_exists($info)
 		and ($data = apcu_fetch($info, $data_success)) 
 		and $data_success 
-		and is_array($data) and (count($data) == 1) 
+		and is_array($data) and (count($data) == 1)
 		and is_serialized($data[0])
 		) {
 		$page = unserialize($data[0]);
@@ -120,6 +120,23 @@ function get_apc_data($info, &$data_success) {
 
 	$data_success = false;
 	return null;
+}
+
+function explique_echec ($info) {
+	if (!apcu_exists($info))
+		return "doesnt exist";
+	$data = apcu_fetch($info, $data_success);
+	if (!$data)
+		return "empty fetch result";
+	if (!$data_success)
+		return "fetch failed";
+	if (!is_array($data))
+		return "fetch result not array : ".substr(print_r($data,1),0,300);
+	if (count($data) != 1)
+		return "fetch result not singleton : ".substr(print_r($data,1),0,300);
+	if (!is_serialized($data[0]))
+		return "fetch first result not serialized : ".substr(print_r($data[0],1),0,300);
+	return "should be ok";
 }
 
 function joli_contexte($contexte) {
@@ -1592,16 +1609,13 @@ EOB;
 					else
 						echo '<td class="td-n center">None</td>';
 
-					if ($entry['deletion_time']) {
-						echo '<td class="td-last center">', date(DATE_FORMAT, $entry['deletion_time']), '</td>';
-					} else if ($MYREQUEST['OB'] == OB_USER_CACHE) {
-						
-						echo '<td class="td-last center">';
+					if ($MYREQUEST['OB'] == OB_USER_CACHE) {
+												echo '<td class="td-last center">';
 						echo '<a href="', $MY_SELF, '&DU=', urlencode($entry['info']), '" style="color:red">X</a>';
 						echo '</td>';
-					} else {
+					} else
 						echo '<td class="td-last center"> &nbsp; </td>';
-					}
+
 					echo '</tr>';
 					if ($sh == $MYREQUEST["SH"]) { // Le ZOOM sur une entrée
 						echo '<tr>';
@@ -1622,12 +1636,8 @@ EOB;
 						if ($data_success) {
 							echo "<p>$menuzoom</p>";
 							echo joli_cache($data);
-						} else {
-							if (!apcu_exists($entry['info']))
-								echo '(! doesnt exist anymore !)';
-							else
-								echo '(! fetch failed !)';
-						}
+						} else
+							echo '! Échec ou pas un cache spip ( '.explique_echec($entry['info']).' )';
 						echo '</td>';
 						echo '</tr>';
 					} // fin du zoom SH
