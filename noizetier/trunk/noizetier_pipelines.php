@@ -26,13 +26,14 @@ function noizetier_recuperer_fond($flux) {
 		// On récupère le squelette en cours de traitement et on identifie si celui-ci est un bloc autorisé d'une
 		// page ou d'un objet.
 		// On exclut le squelette structure.html et les noisettes elles-mêmes.
-		include_spip('ncore/noizetier');
 		include_spip('ncore_fonctions');
 		$squelette = isset($flux['args']['fond']) ? $flux['args']['fond'] : '';
+		$dossier_squelette = dirname($squelette);
 		if ($squelette
 		and ($squelette != 'body')
 		and ($squelette != 'structure')
-		and (dirname($squelette) != trim(type_noisette_localiser('noizetier'), '/'))) {
+		and ($dossier_squelette != trim(type_noisette_localiser('noizetier'), '/'))
+		and ($dossier_squelette != trim(type_noisette_localiser('ncore'), '/'))) {
 			// On détermine la page et le bloc à partir du squelette qui, en Z, est toujours de la forme bloc/page
 			// ou bloc/type_objet.
 			$extension = pathinfo($squelette,  PATHINFO_EXTENSION);
@@ -57,11 +58,12 @@ function noizetier_recuperer_fond($flux) {
 					// Si une composition est définie et si elle n'est pas déjà dans le fond, on l'ajoute au fond
 					// sauf s'il s'agit d'une page de type page (les squelettes page.html assurant la redirection)
 					if ($composition != '' and noizetier_page_extraire_composition($page) == '' and noizetier_page_extraire_type($page) != 'page') {
-						$page .= '-'.$composition;
+						$page .= '-' . $composition;
 					}
 
 					// On détermine si on est en présence d'un objet ou d'une page (ou composition).
-					// Attention même s'il s'agit d'un objet, il n'y a pas forcément des noisettes propres à celui-ci, dans ce cas on se rabat sur les noisettes de la page.
+					// Attention même s'il s'agit d'un objet, il n'y a pas forcément des noisettes propres à celui-ci,
+					// dans ce cas on se rabat sur les noisettes de la page.
 					// -- recherche en priorité d'une correspondance d'objet précis
 					// -- ajout de l'id_conteneur dans le contexte
 					include_spip('inc/noizetier_conteneur');
