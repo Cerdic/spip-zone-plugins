@@ -142,7 +142,7 @@
 						rang: rang,
 					};
 					//console.log(params);
-					var action = '[(#VAL{ajouter_noisette_ajax}|generer_url_action{"",1})]';
+					var action = '[(#VAL{ajouter_noisette}|generer_url_action{"",1})]';
 					noisette.animateLoading(); // Animation
 					$.ajax({
 						url: action,

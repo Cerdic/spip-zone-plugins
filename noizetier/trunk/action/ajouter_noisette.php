@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Action ajouter une noisette en ajax
  *
@@ -16,20 +15,23 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function action_ajouter_noisette_ajax_dist() {
+function action_ajouter_noisette_dist() {
 
-	//include_spip('inc/autoriser');
-	include_spip('inc/noizetier_conteneur');
-	include_spip('inc/ncore_noisette');
+	// Initialisation des variables d'état de la fonction
+	$done = false;
+	$success = $errors = array();
 
+	// Récupération des inputs du formaulaire d'ajout
 	$type_noisette = _request('_type_noisette');
-	$id_conteneur  = _request('_id_conteneur');
-	$rang          = intval(_request('rang'));
-	$done          = false;
-	$success       = $errors = array();
+	$id_conteneur = _request('_id_conteneur');
+	$rang = intval(_request('rang'));
 
 	// Décomposition du conteneur en tableau associatif.
-	$conteneur = noizetier_conteneur_decomposer($id_conteneur);
+	include_spip('ncore/ncore');
+	$conteneur = ncore_conteneur_construire('noizetier', $id_conteneur);
+
+	// Ajout de la noisette au conteneur choisi.
+	include_spip('inc/ncore_noisette');
 	$id_noisette = noisette_ajouter('noizetier', $type_noisette, $conteneur, $rang);
 
 	if (intval($id_noisette)) {
