@@ -38,16 +38,16 @@ function action_decaler_noisette_dist() {
 		// Recherche des informations sur la noisette.
 		if (in_array($sens, array('bas', 'haut')) and ($id_noisette = intval($id_noisette))) {
 			// Récupération du conteneur de la noisette
-			$select = array('id_conteneur', 'rang_noisette');
+			$select = array('rang_noisette');
 			$where = array('plugin=' . sql_quote('noizetier'), 'id_noisette=' . $id_noisette);
 			$noisette = sql_fetsel($select, 'spip_noisettes', $where);
 
 			// Décomposition de l'id du conteneur en éléments du noiZetier
 			include_spip('inc/noizetier_conteneur');
-			$conteneur_etendu = noizetier_conteneur_decomposer($noisette['id_conteneur']);
+			$conteneur = noizetier_conteneur_decomposer($id_conteneur);
 
 			// Test de l'autorisation
-			if (!autoriser('configurerpage', 'noizetier', '', 0, $conteneur_etendu)) {
+			if (!autoriser('configurerpage', 'noizetier', '', 0, $conteneur)) {
 				include_spip('inc/minipres');
 				echo minipres();
 				exit();

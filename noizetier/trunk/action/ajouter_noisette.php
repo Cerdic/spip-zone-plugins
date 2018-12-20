@@ -26,9 +26,16 @@ function action_ajouter_noisette_dist() {
 	$id_conteneur = _request('_id_conteneur');
 	$rang = intval(_request('rang'));
 
-	// Décomposition du conteneur en tableau associatif.
-	include_spip('ncore/ncore');
-	$conteneur = ncore_conteneur_construire('noizetier', $id_conteneur);
+	// Décomposition de l'id du conteneur en éléments du noiZetier
+	include_spip('inc/noizetier_conteneur');
+	$conteneur = noizetier_conteneur_decomposer($id_conteneur);
+
+	// Test de l'autorisation
+	if (!autoriser('configurerpage', 'noizetier', '', 0, $conteneur)) {
+		include_spip('inc/minipres');
+		echo minipres();
+		exit();
+	}
 
 	// Ajout de la noisette au conteneur choisi.
 	include_spip('inc/ncore_noisette');

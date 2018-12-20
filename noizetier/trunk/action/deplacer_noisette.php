@@ -33,6 +33,16 @@ function action_deplacer_noisette_dist() {
 	$id_noisette = _request('_id_noisette');
 	$rang = intval(_request('rang'));
 	$id_conteneur_destination = _request('_id_conteneur_destination');
+	$id_conteneur_origine     = _request('_id_conteneur_origine');
+
+	// Test de l'autorisation
+	include_spip('inc/noizetier_conteneur');
+	if (!autoriser('configurerpage', 'noizetier', '', 0, noizetier_conteneur_decomposer($id_conteneur_origine))
+	or !autoriser('configurerpage', 'noizetier', '', 0, noizetier_conteneur_decomposer($id_conteneur_destination))) {
+		include_spip('inc/minipres');
+		echo minipres();
+		exit();
+	}
 
 	// Déplacement de la noisette dans le conteneur destination au rang choisi.
 	include_spip('inc/ncore_noisette');
@@ -43,7 +53,6 @@ function action_deplacer_noisette_dist() {
 		$success = array($id_noisette);
 	} else {
 		// TODO : remettre le rang d'origine
-		$done = false;
 		$errors = array(_T('erreur'));
 	}
 
