@@ -159,7 +159,7 @@ function maj_060($config_defaut) {
 	$from = 'spip_noisettes';
 	$noisettes = sql_allfetsel($select, $from);
 	if ($noisettes) {
-		include_spip('ncore/ncore');
+		include_spip('inc/ncore_conteneur');
 		foreach ($noisettes as $_cle => $_noisette) {
 			// C'est le plugin noizetier
 			$noisettes[$_cle]['plugin'] = 'noizetier';
@@ -177,7 +177,7 @@ function maj_060($config_defaut) {
 				$conteneur['squelette'] = "{$_noisette['bloc']}/${page}";
 			}
 			$noisettes[$_cle]['conteneur'] = serialize($conteneur);
-			$noisettes[$_cle]['id_conteneur'] = ncore_conteneur_identifier('noizetier', $conteneur);
+			$noisettes[$_cle]['id_conteneur'] = conteneur_identifier('noizetier', $conteneur);
 		}
 		sql_replace_multi($from, $noisettes);
 	}

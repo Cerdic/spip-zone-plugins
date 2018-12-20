@@ -16,8 +16,6 @@ foreach (array('noizetier') as $_plugin) {
 	var_dump("PLUGIN : $_plugin");
 
 	$timestamp_debut = microtime(true);
-	$types_noisettes_existantes = ncore_type_noisette_lister($_plugin, '');
-	var_dump($types_noisettes_existantes);
 
 //	$conteneur = array('squelette' => 'content/article');
 //	$retour = noizetier_noisette_lister($_plugin, $conteneur, '', $cle = 'rang_noisette');
