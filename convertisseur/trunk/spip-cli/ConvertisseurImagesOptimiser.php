@@ -83,7 +83,7 @@ class ConvertisseurImagesOptimiser extends Command {
 					if(!is_dir($dest))
 						mkdir($dest);
 				}
-				$param_d=" $dest" ;
+				$param_d=" " . escapeshellarg($dest) ;
 				if($resize > 0){
 					$label_r=" en redimensionnant la largeur à $resize px " ;
 				}
