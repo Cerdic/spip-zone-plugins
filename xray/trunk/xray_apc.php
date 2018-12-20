@@ -135,7 +135,7 @@ function explique_echec ($info) {
 	if (count($data) != 1)
 		return "fetch result not singleton : ".substr(print_r($data,1),0,300);
 	if (!is_serialized($data[0]))
-		return "fetch first result not serialized : ".substr(print_r($data[0],1),0,300);
+		return "fetch first result isnt serialized : ".substr(print_r($data[0],1),0,300);
 	return "should be ok";
 }
 
