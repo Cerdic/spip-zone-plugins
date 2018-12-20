@@ -1,0 +1,14 @@
+# Template de fichier descriptif d'un bloc Z du noiZetier
+# - fichier : bloc.template.yaml
+
+# Titre du bloc
+# - obligatoire
+# - texte ou item de langue
+nom: '<:noizetier:bloc_xxxx_nom:>'
+# Description du rôle du bloc
+# - facultatif, vide si absent
+# - texte ou item de langue
+description: '<:noizetier:bloc_xxxx_description:>'
+# Nom de l'icone représentant le bloc sans chemin relatif
+# - facultatif, 'bloc-24.png' si absent
+icon: 'xxxx-24.png'
