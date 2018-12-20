@@ -30,7 +30,7 @@
 			<td>#GET{prix}</td>
 			<td>[(#VALEUR|table_valeur{code_devise}|traduire_devise)]</td>
 			<td>#GET{taxes}</td>
-			<td>#VALEUR{titre}</td>
+			<td>[(#VALEUR{titre})]</td>
 			<td>
 				<span class="deplacer-prix" data-rang="#RANG_LIEN">
 					<img src='#CHEMIN_IMAGE{deplacer-16.png}'
