@@ -120,6 +120,11 @@ class MailsubscribinglistClean extends Command {
 			exit(1);
 		}
 
+		if (!count($emails_unsub)) {
+			$this->io->check("La base est propre, tous les inscrits sont vivants");
+			return;
+		}
+
 		if (
 			!$input->getOption('yes')
 			and !$this->io->confirm("Désinscrire les $nb_unsub subscribers".($listes ? " des listes ". implode(',',$listes) : '')." ?", false)
@@ -130,6 +135,10 @@ class MailsubscribinglistClean extends Command {
 
 
 		MailsubscribinglistClean::unsubscribeAll($this->io, $emails_unsub, $options);
+
+		if (!count($emails_unsub)) {
+			$this->io->check("Nettoyage terminé");
+		}
 	}
 
 	public static function logRecord($io, $fichier_log, $texte) {
