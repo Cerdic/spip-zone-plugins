@@ -18,11 +18,11 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_mailsubscribers(MAILSUBSCRIBERS){id_mailsubscriber?}{id_mot?}{id_auteur?}{where?}{id_mailsubscribinglist?}{id_segment?}{filtre_statut_subscription?}{recherche?}{tri #ENV{par,num email},#GET{defaut_tri}}{par email}{pagination #ENV{nb,10}}>
+	<BOUCLE_mailsubscribers(MAILSUBSCRIBERS){id_mailsubscriber?}{id_mot?}{id_auteur?}{where?}{email?}{id_mailsubscribinglist?}{id_segment?}{filtre_statut_subscription?}{recherche?}{tri #ENV{par,num email},#GET{defaut_tri}}{par email}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{mailsubscriber-16.png}|balise_img)]</td>
 			<td class='statut'>[(#ENV{id_mailsubscribinglist}|?{#STATUT_SUBSCRIPTION|puce_statut{mailsubscriber},#STATUT|puce_statut{mailsubscriber,#ID_MAILSUBSCRIBER}})]</td>
-			<td class='email principale'>[(#LOGO_MAILSUBSCRIBER|image_reduire{20,26})]<a href="[(#ID_MAILSUBSCRIBER|generer_url_entite{mailsubscriber})]" title="<:info_numero_abbreviation|attribut_html:> #ID_MAILSUBSCRIBER">[(#RANG). ]#EMAIL</a></td>
+			<td class='email principale'>[(#LOGO_MAILSUBSCRIBER|image_reduire{20,26})]<a href="[(#ID_MAILSUBSCRIBER|generer_url_entite{mailsubscriber}|parametre_url{email,#ENV{email}})]" title="<:info_numero_abbreviation|attribut_html:> #ID_MAILSUBSCRIBER">[(#RANG). ]#EMAIL</a></td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
 			<td class='id'>[(#AUTORISER{modifier,mailsubscriber,#ID_MAILSUBSCRIBER}|?{
 				<a href="[(#URL_ECRIRE{mailsubscriber_edit,id_mailsubscriber=#ID_MAILSUBSCRIBER})]">#ID_MAILSUBSCRIBER</a>,

@@ -60,6 +60,20 @@ function filtre_mailsubscribers_compte_inscrits_dist($liste, $statut = 'valide',
 	return mailsubscribers_compte_inscrits($liste, $statut, $id_segment);
 }
 
+
+function filtre_email_variante_obfusquee_dist($email) {
+	if (!function_exists('mailsubscribers_test_email_obfusque')) {
+		include_spip('inc/mailsubscribers');
+	}
+	if (mailsubscribers_test_email_obfusque($email)) {
+		return $email;
+	}
+
+	// ne pas passer par
+	return mailsubscribers_obfusquer_email($email, true);
+}
+
+
 /**
  * Trouver les statuts auteur qui n'ont pas encore de liste automatique
  *

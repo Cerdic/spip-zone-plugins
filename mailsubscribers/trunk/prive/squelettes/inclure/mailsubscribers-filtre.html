@@ -20,7 +20,20 @@
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 <div class="nettoyeur"></div>
 
-<INCLURE{fond=prive/objets/liste/mailsubscribers, par=num email, statut=#GET{statut}, nb=20, env, ajax, sinon=<:mailsubscriber:info_aucun_mailsubscriber:>}>
+<INCLURE{fond=prive/objets/liste/mailsubscribers,par=num email,statut=#GET{statut},nb=20,env,ajax,sinon=<:mailsubscriber:info_aucun_mailsubscriber:>}>
+
+[(#ENV{recherche}|oui)
+
+	<h3>Email #ENV{recherche}</h3>
+
+	[(#SET{emails,[(#LISTE{[(#ENV{recherche}|trim)],[(#ENV{recherche}|trim|email_variante_obfusquee)]})]})]
+	<INCLURE{fond=prive/objets/liste/mailsubscribers,email=#GET{emails},nb=20,env,sinon=<:mailsubscriber:info_aucun_mailsubscriber:>}>
+
+	<h3>Envois à #ENV{recherche}</h3>
+
+	<INCLURE{fond=prive/objets/liste/mailshots_destinataires,email=#GET{emails},nb=100,par=date,env,sinon=<:mailshot:info_aucun_envoi:>}>
+
+]
 
 [(#AUTORISER{creer,mailsubscriber})
 	[(#PLUGIN{spip_bonux}|oui)

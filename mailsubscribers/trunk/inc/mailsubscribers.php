@@ -131,11 +131,12 @@ function mailsubscribers_normaliser_nom_liste($liste = '', $category = "newslett
 	return $liste;
 }
 
-function mailsubscribers_obfusquer_email($email) {
-    if (defined('_MAILSUBSCRIBERS_GARDER_EMAILENCLAIR') )
-        return $email;
-    else
-	    return md5($email) . "@example.org";
+function mailsubscribers_obfusquer_email($email, $force = false) {
+    if (!$force and defined('_MAILSUBSCRIBERS_GARDER_EMAILENCLAIR') ) {
+	    return $email;
+    }
+
+    return md5($email) . "@example.org";
 }
 
 function mailsubscribers_test_email_obfusque($email) {

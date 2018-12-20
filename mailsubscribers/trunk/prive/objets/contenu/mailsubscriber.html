@@ -55,4 +55,9 @@
 	<span dir='#LANG_DIR' class='#EDIT{optin} optin'><pre>(#OPTIN|nl2br)</pre></span>
 </div>]
 
+
+<h3>Envois</h3>
+
+<INCLURE{fond=prive/objets/liste/mailshots_destinataires,email=#ENV{email}|sinon{#EMAIL},nb=100,par=date,env,sinon=<:mailshot:info_aucun_envoi:>}>
+
 </BOUCLE_mailsubscriber>
