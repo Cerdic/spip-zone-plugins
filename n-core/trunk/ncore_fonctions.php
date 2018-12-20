@@ -1,6 +1,7 @@
 <?php
 /**
- * Ce fichier contient les filtres de compilation des noisettes appelés par la balise #COMPILER_NOISETTE.
+ * Ce fichier contient les filtres de compilation des noisettes appelés par la balise #COMPILER_NOISETTE
+ * ou par le squelette conteneur_compiler.html.
  *
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -409,6 +410,10 @@ function noisette_repertorier($plugin, $conteneur = array(), $cle = 'rang_noiset
 
 		// On récupère la description complète de toutes les noisettes ou des noisettes appartenant au conteneur
 		// spécifié.
+		if ($conteneur) {
+			// On vérifie le conteneur avant de l'utiliser ce qui évite aux plugins utilisateurs de le faire.
+			$conteneur = ncore_conteneur_verifier($plugin, $conteneur, $stockage);
+		}
 		$noisettes[$plugin][$cle] = ncore_noisette_lister($plugin, $conteneur, '', $cle, $stockage);
 	}
 
@@ -432,35 +437,8 @@ function noisette_repertorier($plugin, $conteneur = array(), $cle = 'rang_noiset
 // -----------------------------------------------------------------------
 // --------------------- FILTRES & BALISES CONTENEURS --------------------
 // -----------------------------------------------------------------------
+// Les API du conteneur sont peu nombreuses, on peut donc les charger plutôt que de les répartir entre
+// inc/ncore_conteneur et ncore_fonctions pour le besoin de la balise de compilation.
+// Seul la fonction conteneur_identifier() est nécessaire pour la compilation.
+include_spip('inc/ncore_conteneur');
 include_spip('public/conteneur_identifier');
-
-/**
- * Calcule l'identifiant unique pour le conteneur sous forme de chaine.
- * Cette fonction est juste un wrapper pour le service ncore_conteneur_identifier().
- * Elle est utilisée par les balises #NOISETTE_COMPILER et #CONTENEUR_IDENTIFIER
- *
- * @package SPIP\NCORE\CONTENEUR\API
- *
- * @api
- * @filtre
- *
- * @uses ncore_conteneur_identifier()
- *
- * @param string $plugin
- *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
- *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param array  $conteneur
- *        Tableau associatif descriptif du conteneur.
- * @param string $stockage
- *        Identifiant du service de stockage à utiliser si précisé.
- *
- * @return string
- *        Identifiant du conteneur ou chaine vide en cas d'erreur.
- */
-function conteneur_identifier($plugin, $conteneur, $stockage = '') {
-
-	include_spip('ncore/ncore');
-	$identifiant = ncore_conteneur_identifier($plugin, $conteneur, $stockage);
-
-	return $identifiant;
-}
