@@ -176,7 +176,7 @@
 						_id_conteneur_destination: id_conteneur_destination,
 					};
 					//console.log(params);
-					var action = '[(#VAL{deplacer_noisette_ajax}|generer_url_action{"",1})]';
+					var action = '[(#VAL{deplacer_noisette}|generer_url_action{"",1})]';
 					$.ajax({
 						url: action,
 						data: params,

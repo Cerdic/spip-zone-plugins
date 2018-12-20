@@ -1,8 +1,8 @@
 <?php
 /**
  * Ce fichier contient l'action `deplacer_noisette` lancée par un utilisateur pour
- * déplacer d'un rang vers le haut ou vers le bas de façon sécurisée une noisette donnée
- * dans le même conteneur.
+ * déplacer une noisette d'un rang donné dans un conteneur à un autre rang dans le même
+ * conteneur ou dans un conteneur différent (drag'n drop).
  *
  * @package SPIP\NOIZETIER\NOISETTE\ACTION
  */
@@ -11,71 +11,55 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+
 /**
- * Cette action permet à l'utilisateur de déplacer une noisette d'un rang vers le haut ou
- * vers le bas, de façon sécurisée.
+ * Action déplacer une noisette en ajax
  *
- * Cette action est réservée aux utilisateurs autorisés à modifier la configuration de la page
- * à laquelle est rattachée la noisette. Elle nécessite des arguments dont le sens et l'id de la noisette.
+ * Permet de déplacer une noisette avec n'importe quel rang, dans n'importe quel conteneur
+ * Met à jour les rangs des autres noisettes si nécessaire.
+ * Retourne du JSON.
  *
- * @uses noizetier_conteneur_decomposer()
- * @uses noisette_deplacer()
+ * @Note : cette action diffère de decaler_noisette.php qui permet de déplacer d'un unique rang, au sein du même conteneur
  *
- * @return void
+ * @return
  */
 function action_deplacer_noisette_dist() {
 
-	// Les arguments attendus dépendent du contexte et la chaine peut prendre les formes suivantes:
-	// - bas:id_noisette:id_conteneur:nb_noisettes_du_conteneur, pour déplacer la noisette d'un rang vers le bas.
-	// - haut:id_noisette:id_conteneur:nb_noisettes_du_conteneur, pour déplacer la noisette d'un rang vers le haut.
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arguments = $securiser_action();
+	// Initialisation des variables d'état de la fonction
+	$done = false;
+	$success = $errors = array();
 
-	if ($arguments) {
-		// Identification des arguments
-		list($sens, $id_noisette, $id_conteneur, $nb_noisettes) = explode(':', $arguments);
+	// Récupération des inputs
+	$id_noisette = _request('_id_noisette');
+	$rang = intval(_request('rang'));
+	$id_conteneur_destination = _request('_id_conteneur_destination');
 
-		// Recherche des informations sur la noisette.
-		if (in_array($sens, array('bas', 'haut')) and ($id_noisette = intval($id_noisette))) {
-			// Récupération du conteneur de la noisette
-			$select = array('id_conteneur', 'rang_noisette');
-			$where = array('plugin=' . sql_quote('noizetier'), 'id_noisette=' . $id_noisette);
-			$noisette = sql_fetsel($select, 'spip_noisettes', $where);
+	// Déplacement de la noisette dans le conteneur destination au rang choisi.
+	include_spip('inc/ncore_noisette');
+	$deplacer = noisette_deplacer('noizetier', $id_noisette, $id_conteneur_destination, $rang);
 
-			// Décomposition de l'id du conteneur en éléments du noiZetier
-			include_spip('inc/noizetier_conteneur');
-			$conteneur = noizetier_conteneur_decomposer($noisette['id_conteneur']);
-
-			// Test de l'autorisation
-			if (!autoriser('configurerpage', 'noizetier', '', 0, $conteneur)) {
-				include_spip('inc/minipres');
-				echo minipres();
-				exit();
-			}
-
-			// Détermination du rang de destination de la noisette. Les rangs des noisettes dans un conteneur
-			// sont toujours compris entre 1 et le nombre de noisettes du conteneur.
-			if ($sens == 'bas') {
-				if ($noisette['rang_noisette'] < $nb_noisettes) {
-					// La noisette peut être échangée avec la suivante
-					$rang_destination = $noisette['rang_noisette'] + 1;
-				} else {
-					// La noisette passe en début de liste
-					$rang_destination = 1;
-				}
-			} else {
-				if ($noisette['rang_noisette'] > 1) {
-					// La noisette peut être échangée avec la précédente
-					$rang_destination = $noisette['rang_noisette'] - 1;
-				} else {
-					// La noisette passe en fin de liste
-					$rang_destination = $nb_noisettes;
-				}
-			}
-
-			// Déplacement de la noisette par modification de son rang en base de données.
-			include_spip('inc/ncore_noisette');
-			noisette_deplacer('noizetier', $id_noisette, $id_conteneur, $rang_destination);
-		}
+	if ($deplacer) {
+		$done = true;
+		$success = array($id_noisette);
+	} else {
+		// TODO : remettre le rang d'origine
+		$done = false;
+		$errors = array(_T('erreur'));
 	}
+
+	return envoyer_json_envoi(array(
+		'done'    => $done,
+		'success' => $success,
+		'errors'  => $errors,
+	));
+}
+
+/**
+ * @param $data
+ *
+ * @return void
+ */
+function envoyer_json_envoi($data) {
+	header('Content-Type: application/json; charset=' . $GLOBALS['meta']['charset']);
+	echo json_encode($data);
 }

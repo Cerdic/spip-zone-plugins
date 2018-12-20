@@ -21,7 +21,7 @@ function action_ajouter_noisette_dist() {
 	$done = false;
 	$success = $errors = array();
 
-	// Récupération des inputs du formaulaire d'ajout
+	// Récupération des inputs du formulaire d'ajout
 	$type_noisette = _request('_type_noisette');
 	$id_conteneur = _request('_id_conteneur');
 	$rang = intval(_request('rang'));
