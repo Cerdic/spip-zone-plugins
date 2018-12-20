@@ -316,9 +316,14 @@ function noisette_encapsuler($plugin, $contenu, $encapsulation, $parametres, $st
 
 	// Une noisette conteneur peut être assimilée à une capsule qui englobe non pas une noisette mais un ensemble
 	// de noisettes. A ce titre, une noisette conteneur n'a jamais de capsule car elle est déjà une capsule.
-	if (($encapsulation == 'oui') 
-	or ($encapsulation == 'conteneur') 
-	or (($encapsulation == 'defaut') and ($defaut_encapsulation[$plugin]))) {
+	if (
+		strlen(trim($contenu))
+		and (
+			($encapsulation == 'oui')
+			or ($encapsulation == 'conteneur')
+			or (($encapsulation == 'defaut') and ($defaut_encapsulation[$plugin]))
+		)
+	) {
 		// Détermination de la capsule à appliquer
 		if ($encapsulation == 'conteneur') {
 			// Noisette conteneur:
