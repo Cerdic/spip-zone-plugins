@@ -79,7 +79,7 @@ function formulaires_configurer_htmlminifier_traiter_dist() {
     }
 
     $valeurs = array(
-        'compression_mode' => boolval(_request('compression_mode')),
+        'compression_mode' => _request('compression_mode'),
         'clean_html_comments' => boolval(_request('clean_html_comments')),
         'merge_multiple_head_tags' => boolval(_request('merge_multiple_head_tags')),
         'merge_multiple_body_tags' => boolval(_request('merge_multiple_body_tags')),
