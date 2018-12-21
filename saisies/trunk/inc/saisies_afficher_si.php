@@ -223,50 +223,7 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 				$condition = preg_replace('#@config:'.$plugin.':'.$matches[2][0].'@#U', '"'.$config[$matches[2][0]].'"', $condition);
 			}
 			// On transforme en une condition PHP valide
-			$condition_originale = $condition;
-			if (is_null($env)) {
-				$condition = preg_replace('#@(.+)@#U', '_request(\'$1\')', $condition);
-			} else {
-				$condition = preg_replace('#@(.+)@#U', '$env["valeurs"][\'$1\']', $condition);
-			}
-			/**
-			 * Tester si la condition utilise des champs qui sont des tableaux
-			 * Si _request() ou $env["valeurs"] est un tableau, changer == et != par in_array et !in_array
-			 * TODO: c'est vraiment pas terrible comme fonctionnement
-			 */
-			preg_match_all('/(_request\([\'"].*?[\'"]\)|\$env\[[\'"].*?[\'"]\]\[[\'"].*?[\'"]\])\s*(!=|==|IN|!IN)\s*[\'"](.*?)[\'"]/', $condition, $matches);
-			foreach ($matches[1] as $key => $val) {
-				eval('$requete = '.$val.';');
-				//Pour eviter une fatale erreur si on évalue une chose qui devrait normalement être un tableau mais qui n'a pas été envoyé (type checkbox), si la chose en question est null, la transformer en tableau vide. Pareil c'est pas terrible.
-				if (is_null($requete)) {
-					$requete = array();
-					//C'est un request, alors on va faire un set_request
-					if (strpos($val, '_request') === 0) {
-						$set_tableau = "set$val";
-						$set_tableau = str_replace(")",",array())",$set_tableau);
-					} elseif (strpos($val, '$env') === 0) {//C'est un tablau direct
-						$set_tableau = ("$val = array()");
-					}
-					if (isset($set_tableau)) {
-						eval("$set_tableau;");
-					}
-				}
-				if (is_array($requete)) {
-					$not = '>';
-					if (in_array($matches[2][$key], array('!=', '!IN'))) {
-						$not = '==';
-					}
-					$array = var_export(explode(',', $matches[3][$key]), true);
-					$condition = str_replace($matches[0][$key], "(count(array_intersect($val, $array)) $not 0)", $condition);
-				}
-			}
-			// On vérifie que l'on a pas @toto@="valeur" qui fait planter l'eval(),
-			// on annule cette condition dans ce cas pour éviter une erreur du type :
-			// PHP Fatal error:  Can't use function return value in write context
-			$type_condition = preg_replace('#@(.+)@#U', '', $condition_originale);
-			if (trim($type_condition) != '=') {
-				eval('$ok = '.$condition.';');
-			}
+			$ok = saisies_evaluer_afficher_si($condition, $env);
 			if (!$ok) {
 				if ($remplissage_uniquement == false or is_null($env)) {
 					unset($saisies[$cle]);
@@ -284,6 +241,7 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 
 	return $saisies;
 }
+
 
 
 /**
@@ -320,6 +278,42 @@ function saisies_verifier_securite_afficher_si($condition) {
 	}
 	//Sinon c'est que c'est bon
 	return true;
+}
+
+/**
+ * Prend un test conditionnel,
+ * le sépare en une série de sous-tests de type champ - operateur - valeur
+ * remplace chacun de ces sous-tests par son résultat
+ * renvoie la chaine transformé
+ * @param string $condition
+ * @param array|null $env
+ *   Tableau d'environnement transmis dans inclure/voir_saisies.html,
+ *   NULL si on doit rechercher dans _request (pour saisies_verifier()).
+ * @return string $condition
+**/
+function saisies_transformer_condition_afficher_si($condition, $env = null) {
+	$regexp = "(?:@(?<champ>.+?)@)" // @champ_@
+		. "(?:\s*?)" // espaces éventuels après
+		. "(?<operateur>==|!=|IN|!IN)" // opérateur
+		. "(?:\s*?)" // espaces éventuels après
+		. "(?<guillemet>\"|')(?<valeur>.*?)(\k<guillemet>)"; // valeur
+	$regexp = "#$regexp#";
+	if (preg_match_all($regexp, $condition, $tests, PREG_SET_ORDER)) {
+		foreach ($tests as $test) {
+			$expression = $test[0];
+			$champ = $test['champ'];
+			if (is_null($env)) {
+				$champ = _request($champ);
+			} else {
+				$champ = $env["valeurs"][$champ];
+			}
+			$operateur = $test['operateur'];
+			$valeur = $test['valeur'];
+			$test_modifie = saisies_tester_condition_afficher_si($champ, $operateur, $valeur) ? 'true' : 'false';
+			$condition = str_replace($expression, $test_modifie, $condition);
+		}
+	}
+	return $condition;
 }
 
 /**
@@ -393,4 +387,18 @@ function saisies_tester_condition_afficher_si_array($champ, $operateur, $valeur)
 		return !in_array($valeur, $champ);
 	}
 	return false;
+}
+
+/**
+ * Evalue un afficher_si
+ * @param string $condition (déjà checkée en terme de sécurité)
+ * @param array|null $env
+ *   Tableau d'environnement transmis dans inclure/voir_saisies.html,
+ *   NULL si on doit rechercher dans _request (pour saisies_verifier()).
+ * @return bool le résultat du test
+**/
+function saisies_evaluer_afficher_si($condition, $env = null) {
+	$condition = saisies_transformer_condition_afficher_si($condition, $env);
+	eval('$ok = '.$condition.';');
+	return $ok;
 }
